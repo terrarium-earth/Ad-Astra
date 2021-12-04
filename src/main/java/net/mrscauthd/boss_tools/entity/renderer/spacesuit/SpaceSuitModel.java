@@ -25,6 +25,7 @@ public class SpaceSuitModel {
         public static ModelPart Right_Foot;
 
         public SPACE_SUIT_P1(ModelPart root) {
+            super(root);
             this.Head = root.getChild("Head");
             this.Body = root.getChild("Body");
             this.Right_Arm = root.getChild("Right_Arm");
