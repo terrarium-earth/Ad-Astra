@@ -59,6 +59,8 @@ import net.mrscauthd.boss_tools.machines.tile.NamedComponentRegistry;
 import net.mrscauthd.boss_tools.machines.tile.PowerSystemEnergyCommon;
 import net.mrscauthd.boss_tools.machines.tile.PowerSystemRegistry;
 
+import ResourceLocation;
+
 public class FuelRefineryBlock {
 	public static final int ENERGY_PER_TICK = 1;
 	public static final int TANK_CAPACITY = 3000;

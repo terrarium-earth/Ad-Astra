@@ -7,6 +7,8 @@ import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.mrscauthd.boss_tools.compat.CompatibleMod;
 
+import ResourceLocation;
+
 public class TOPCompat extends CompatibleMod {
 	public static final String MODID = "theoneprobe";
 

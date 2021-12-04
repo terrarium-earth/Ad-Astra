@@ -22,6 +22,9 @@ import net.mrscauthd.boss_tools.events.Methodes;
 
 import java.util.Random;
 
+import Feature;
+import IRuleTestType;
+
 @Mod.EventBusSubscriber(modid = BossToolsMod.ModId, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class OreGeneration {
     //MOON ORES:

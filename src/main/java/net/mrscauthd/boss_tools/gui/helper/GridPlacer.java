@@ -2,6 +2,8 @@ package net.mrscauthd.boss_tools.gui.helper;
 
 import net.minecraft.client.renderer.Rectangle2d;
 
+import Rectangle2d;
+
 public class GridPlacer {
 
 	private int cellWidth;

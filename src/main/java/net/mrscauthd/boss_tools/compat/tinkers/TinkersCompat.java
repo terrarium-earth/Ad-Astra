@@ -5,6 +5,8 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.mrscauthd.boss_tools.compat.CompatibleMod;
 
+import ResourceLocation;
+
 public class TinkersCompat extends CompatibleMod {
 	public static final String MODID = "tconstruct";
 

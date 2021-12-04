@@ -5,6 +5,8 @@ import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ForgeHooks;
 
+import IRecipeType;
+
 public abstract class PowerSystemFuelBurnTimeVanilla extends PowerSystemFuelBurnTime {
 
 	public PowerSystemFuelBurnTimeVanilla(AbstractMachineTileEntity tileEntity, int slot) {

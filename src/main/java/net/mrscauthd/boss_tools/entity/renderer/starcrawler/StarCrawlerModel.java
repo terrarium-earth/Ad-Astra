@@ -10,6 +10,8 @@ import net.minecraft.client.renderer.entity.model.EntityModel;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
+import MobEntity;
+
 @OnlyIn(Dist.CLIENT)
 public class StarCrawlerModel<T extends MobEntity> extends EntityModel<T> {
 	private final ModelRenderer Body;

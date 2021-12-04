@@ -9,6 +9,8 @@ import slimeknights.mantle.registration.ModelFluidAttributes;
 import slimeknights.mantle.registration.object.FluidObject;
 import slimeknights.tconstruct.common.registration.FluidDeferredRegisterExtension;
 
+import FluidDeferredRegisterExtension;
+
 public class TinkersBossToolsFluids
 {
 	protected static final FluidDeferredRegisterExtension FLUIDS = new FluidDeferredRegisterExtension(BossToolsMod.ModId);

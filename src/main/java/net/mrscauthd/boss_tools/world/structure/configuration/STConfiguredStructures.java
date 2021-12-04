@@ -8,6 +8,8 @@ import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 import net.mrscauthd.boss_tools.BossToolsMod;
 
+import StructureFeature;
+
 public class STConfiguredStructures {
     public static StructureFeature<?, ?> ALIEN_VILLAGE = STStructures.ALIEN_VILLAGE.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG);
     public static StructureFeature<?, ?> METEOR = STStructures.METEOR.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG);

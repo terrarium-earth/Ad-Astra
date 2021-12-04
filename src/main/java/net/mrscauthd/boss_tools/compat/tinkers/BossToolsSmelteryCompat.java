@@ -7,6 +7,9 @@ import net.minecraftforge.fluids.ForgeFlowingFluid;
 import slimeknights.mantle.registration.object.FluidObject;
 import slimeknights.tconstruct.smeltery.data.Byproduct;
 
+import Byproduct;
+import FluidObject;
+
 public enum BossToolsSmelteryCompat {
 	DESH(TinkersBossToolsFluids.moltenDesh, true),
 	SILICON(TinkersBossToolsFluids.moltenSilicon, true),

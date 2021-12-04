@@ -20,6 +20,8 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.wrapper.RangedWrapper;
 import net.mrscauthd.boss_tools.crafting.RocketPart;
 
+import ItemStack;
+
 public class RocketPartsItemHandler implements IItemHandlerModifiable {
 
 	private final IItemHandlerModifiable parent;

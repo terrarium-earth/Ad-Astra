@@ -5,10 +5,11 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.1.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
         classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
     }
 }
+/*
 repositories {
   maven {
     name = "Progwml6 maven"
@@ -24,6 +25,7 @@ repositories {
         url = "https://www.cursemaven.com"
     }
 }
+*/
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'org.spongepowered.mixin'
@@ -32,11 +34,11 @@ version = '1.0'
 group = 'com.yourname.modid'
 archivesBaseName = 'modid'
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(8)
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 minecraft {
-    mappings channel: 'snapshot', version: '20201028-1.16.3'
-    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+    mappings channel: 'official', version: '1.18'
+    //accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     runs {
         client {
@@ -70,13 +72,13 @@ minecraft {
 }
 
 dependencies {
-  minecraft 'net.minecraftforge:forge:1.16.5-36.2.0'
+    minecraft 'net.minecraftforge:forge:1.18-38.0.14'
 
   //Mixin
     if (System.getProperty("idea.sync.active") != "true") {
         annotationProcessor 'org.spongepowered:mixin:0.8.2:processor'
     }
-
+/*
   //JEI
   compileOnly fg.deobf("mezz.jei:jei-1.16.5:7.7.1.137:api")
   runtimeOnly fg.deobf("mezz.jei:jei-1.16.5:7.7.1.137")
@@ -96,6 +98,7 @@ dependencies {
   runtimeOnly fg.deobf("mekanism:Mekanism:1.16.5-10.0.20.447:additions")
   runtimeOnly fg.deobf("mekanism:Mekanism:1.16.5-10.0.20.447:generators")
   runtimeOnly fg.deobf("mekanism:Mekanism:1.16.5-10.0.20.447:tools")
+    */
 }
 
 mixin {

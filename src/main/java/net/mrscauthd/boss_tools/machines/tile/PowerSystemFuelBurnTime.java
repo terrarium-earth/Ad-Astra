@@ -6,6 +6,8 @@ import net.minecraft.util.ResourceLocation;
 import net.mrscauthd.boss_tools.gauge.GaugeValueHelper;
 import net.mrscauthd.boss_tools.gauge.IGaugeValue;
 
+import ResourceLocation;
+
 public abstract class PowerSystemFuelBurnTime extends PowerSystemFuel {
 
 	public static final int FUEL_PER_TICK = 1;

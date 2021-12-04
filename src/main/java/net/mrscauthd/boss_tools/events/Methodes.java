@@ -1,43 +1,42 @@
 package net.mrscauthd.boss_tools.events;
 
 import io.netty.buffer.Unpooled;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.network.play.server.SChangeGameStatePacket;
-import net.minecraft.network.play.server.SPlayEntityEffectPacket;
-import net.minecraft.network.play.server.SPlayerAbilitiesPacket;
-import net.minecraft.potion.EffectInstance;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
+import net.minecraft.network.protocol.game.ClientboundPlayerAbilitiesPacket;
+import net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.RegistryKey;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.gen.feature.template.PlacementSettings;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.ModInnet;
@@ -49,24 +48,23 @@ import net.mrscauthd.boss_tools.events.forgeevents.LivingSetVenusRainEvent;
 import net.mrscauthd.boss_tools.gui.screens.planetselection.PlanetSelectionGui;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Methodes {
 
-    public static void worldTeleport(PlayerEntity entity, ResourceLocation Planet, double high) {
-        if (!entity.world.isRemote) {
+    public static void worldTeleport(Player entity, ResourceLocation Planet, double high) {
+        if (!entity.level.isClientSide) {
 
-            RegistryKey<World> destinationType = RegistryKey.getOrCreateKey(Registry.WORLD_KEY, Planet);
-            ServerWorld nextWorld = entity.getServer().getWorld(destinationType);
+            ResourceKey<Level> destinationType = ResourceKey.create(Registry.DIMENSION_REGISTRY, Planet);
+            ServerLevel nextWorld = entity.getServer().getLevel(destinationType);
 
             if (nextWorld != null) {
-                ((ServerPlayerEntity) entity).connection.sendPacket(new SChangeGameStatePacket(SChangeGameStatePacket.field_241768_e_, 0));
-                ((ServerPlayerEntity) entity).teleport(nextWorld, entity.getPosX(), high, entity.getPosZ(), entity.rotationYaw, entity.rotationPitch);
-                ((ServerPlayerEntity) entity).connection.sendPacket(new SPlayerAbilitiesPacket(entity.abilities));
+                ((ServerPlayer) entity).connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.WIN_GAME, 0));
+                ((ServerPlayer) entity).teleportTo(nextWorld, entity.getX(), high, entity.getZ(), entity.yRotO, entity.xRotO);
+                ((ServerPlayer) entity).connection.send(new ClientboundPlayerAbilitiesPacket(entity.getAbilities()));
 
-                for (EffectInstance effectinstance : entity.getActivePotionEffects()) {
-                    ((ServerPlayerEntity) entity).connection.sendPacket(new SPlayEntityEffectPacket(entity.getEntityId(), effectinstance));
+                for (MobEffectInstance effectinstance : entity.getActiveEffects()) {
+                    ((ServerPlayer) entity).connection.send(new ClientboundUpdateMobEffectPacket(entity.getId(), effectinstance));
                 }
             }
         }
@@ -133,13 +131,10 @@ public class Methodes {
     }
 
     public static boolean checkArmor(LivingEntity entity,int number, Item item) {
-        if (entity.getItemStackFromSlot(EquipmentSlotType.fromSlotTypeAndIndex(EquipmentSlotType.Group.ARMOR, number)).getItem() == item) {
-            return true;
-        }
-        return false;
+        return entity.getItemBySlot(EquipmentSlot.byTypeAndIndex(EquipmentSlot.Type.ARMOR, number)).getItem() == item;
     }
 
-    public static boolean isSpaceWorld(World world) {
+    public static boolean isSpaceWorld(Level world) {
         if (Methodes.isWorld(world, new ResourceLocation(BossToolsMod.ModId,"moon"))
                 || Methodes.isWorld(world, new ResourceLocation(BossToolsMod.ModId,"moon_orbit"))
                 || Methodes.isWorld(world, new ResourceLocation(BossToolsMod.ModId,"mars"))
@@ -154,7 +149,7 @@ public class Methodes {
         return false;
     }
 
-    public static boolean isOrbitWorld(World world) {
+    public static boolean isOrbitWorld(Level world) {
         if (Methodes.isWorld(world, new ResourceLocation(BossToolsMod.ModId,"overworld_orbit"))
                 || Methodes.isWorld(world, new ResourceLocation(BossToolsMod.ModId,"moon_orbit"))
                 || Methodes.isWorld(world, new ResourceLocation(BossToolsMod.ModId,"mars_orbit"))
@@ -165,16 +160,12 @@ public class Methodes {
         return false;
     }
 
-    public static boolean isWorld(World world, ResourceLocation loc) {
-        RegistryKey<World> world2 = world.getDimensionKey();
-        if (world2 == RegistryKey.getOrCreateKey(Registry.WORLD_KEY, loc)) {
-            return true;
-        }
-        return false;
+    public static boolean isWorld(Level world, ResourceLocation loc) {
+        return world.dimension() == ResourceKey.create(Registry.DIMENSION_REGISTRY, loc);
     }
 
     public static void OxygenDamage(LivingEntity entity) {
-        entity.attackEntityFrom(ModInnet.DAMAGE_SOURCE_OXYGEN, 1.0F);
+        entity.hurt(ModInnet.DAMAGE_SOURCE_OXYGEN, 1.0F);
     }
 
     public static boolean isRocket(Entity entity) {
@@ -191,13 +182,13 @@ public class Methodes {
         return false;
     }
 
-    public static void RocketSounds(Entity entity, World world) {
-        world.playMovingSound(null, entity, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation(BossToolsMod.ModId,"rocket_fly")), SoundCategory.NEUTRAL,1,1);
+    public static void RocketSounds(Entity entity, Level world) {
+        world.playSound(null, entity, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation(BossToolsMod.ModId,"rocket_fly")), SoundSource.NEUTRAL,1,1);
     }
 
-    public static void DropRocket(PlayerEntity player) {
-        Item item1 = player.getHeldItemMainhand().getItem();
-        Item item2 = player.getHeldItemOffhand().getItem();
+    public static void DropRocket(Player player) {
+        Item item1 = player.getMainHandItem().getItem();
+        Item item2 = player.getOffhandItem().getItem();
 
         List<Item> items = new ArrayList<Item>();
 
@@ -208,9 +199,9 @@ public class Methodes {
 
         if (items.contains(item1) && items.contains(item2)) {
 
-            ItemEntity spawn = new ItemEntity(player.world, player.getPosX(),player.getPosY(),player.getPosZ(), new ItemStack(item2));
-            spawn.setPickupDelay(0);
-            player.world.addEntity(spawn);
+            ItemEntity spawn = new ItemEntity(player.level, player.getX(),player.getY(),player.getZ(), new ItemStack(item2));
+            spawn.setPickUpDelay(0);
+            player.level.addFreshEntity(spawn);
 
             player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(capability -> {
                 capability.extractItem(40, 1, false); //40 is offhand
@@ -222,14 +213,14 @@ public class Methodes {
     /**If a entity should not get Fire add it to the Tag "venus_fire"*/
     public static void VenusFire(LivingEntity entity, ResourceLocation planet1, ResourceLocation planet2) {
 
-        RegistryKey<World> key = entity.world.getDimensionKey();
+        ResourceKey<Level> key = entity.level.dimension();
 
-        if (key == RegistryKey.getOrCreateKey(Registry.WORLD_KEY, planet1) || key == RegistryKey.getOrCreateKey(Registry.WORLD_KEY, planet2)) {
+        if (key == ResourceKey.create(Registry.DIMENSION_REGISTRY, planet1) || key == ResourceKey.create(Registry.DIMENSION_REGISTRY, planet2)) {
             if (!Methodes.nethriteSpaceSuitCheck(entity)) {
                 if (!MinecraftForge.EVENT_BUS.post(new LivingSetFireInHotPlanetEvent(entity))) {
                     if (!tagCheck(entity, BossToolsMod.ModId + ":entities/venus_fire")) {
 
-                        entity.setFire(10);
+                        entity.setRemainingFireTicks(10);
                     }
                 }
             }
@@ -238,12 +229,12 @@ public class Methodes {
 
     /**If a entity should not get Damage add it to the Tag "venus_rain", and if you has a Entity like a car return the damage to false*/
     public static void VenusRain(LivingEntity entity, ResourceLocation planet) {
-        if (entity.world.getDimensionKey() == RegistryKey.getOrCreateKey(Registry.WORLD_KEY, planet)) {
-            if (entity.world.getWorldInfo().isRaining() && entity.world.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, (int) Math.floor(entity.getPosX()), (int) Math.floor(entity.getPosZ())) <= Math.floor(entity.getPosY()) + 1) {
+        if (entity.level.dimension() == ResourceKey.create(Registry.DIMENSION_REGISTRY, planet)) {
+            if (entity.level.getLevelData().isRaining() && entity.level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, (int) Math.floor(entity.getX()), (int) Math.floor(entity.getZ())) <= Math.floor(entity.getY()) + 1) {
                 if (!MinecraftForge.EVENT_BUS.post(new LivingSetVenusRainEvent(entity))) {
                     if (!tagCheck(entity,BossToolsMod.ModId + ":entities/venus_rain")) {
 
-                        entity.attackEntityFrom(ModInnet.DAMAGE_SOURCE_ACID_RAIN, 1);
+                        entity.hurt(ModInnet.DAMAGE_SOURCE_ACID_RAIN, 1);
                     }
                 }
             }
@@ -252,16 +243,16 @@ public class Methodes {
     }
 
     /**IF a entity should get oxygen damage add it in the tag "oxygen" (don't add the Player, he have a own oxygen system)*/
-    public static void EntityOxygen(LivingEntity entity, World world) {
+    public static void EntityOxygen(LivingEntity entity, Level world) {
         if (Config.EntityOxygenSystem && Methodes.isSpaceWorld(world) && tagCheck(entity,"boss_tools:entities/oxygen")) {
 
-            if (!entity.isPotionActive(ModInnet.OXYGEN_EFFECT.get())) {
+            if (!entity.isAffectedByPotions(ModInnet.OXYGEN_EFFECT.get())) {
 
                 entity.getPersistentData().putDouble(BossToolsMod.ModId + ":oxygen_tick", entity.getPersistentData().getDouble(BossToolsMod.ModId + ":oxygen_tick") + 1);
 
                 if (entity.getPersistentData().getDouble(BossToolsMod.ModId + ":oxygen_tick") > 15) {
 
-                    if(!world.isRemote) {
+                    if(!world.isClientSide) {
                         Methodes.OxygenDamage(entity);
                     }
 
@@ -272,36 +263,30 @@ public class Methodes {
     }
 
     public static void vehicleRotation(LivingEntity vehicle, float roation) {
-        vehicle.rotationYaw = vehicle.rotationYaw + roation;
-        vehicle.setRenderYawOffset(vehicle.rotationYaw);
-        vehicle.prevRotationYaw = vehicle.rotationYaw;
-        vehicle.prevRenderYawOffset = vehicle.rotationYaw;
+        vehicle.setYRot(vehicle.getYRot() + roation);
+        vehicle.setYBodyRot(vehicle.getYRot());
+        vehicle.yRotO = vehicle.getYRot();
+        vehicle.yBodyRotO = vehicle.getYRot();
     }
 
-    public static void noFuelMessage(PlayerEntity player) {
-        if (!player.world.isRemote()) {
-            player.sendStatusMessage(new StringTextComponent("\u00A7cNO FUEL! \u00A77Fill the Rocket with \u00A7cFuel\u00A77. (\u00A76Sneak and Right Click\u00A77)"), false);
+    public static void noFuelMessage(Player player) {
+        if (!player.level.isClientSide) {
+            player.displayClientMessage(new TextComponent("\u00A7cNO FUEL! \u00A77Fill the Rocket with \u00A7cFuel\u00A77. (\u00A76Sneak and Right Click\u00A77)"), false);
         }
     }
 
     public static boolean tagCheck(Entity entity, String tag) {
-        if (EntityTypeTags.getCollection().getTagByID(new ResourceLocation((tag).toLowerCase(java.util.Locale.ENGLISH))).contains(entity.getType())) {
-            return true;
-        }
-        return false;
+        return EntityTypeTags.getAllTags().getTagOrEmpty(new ResourceLocation((tag).toLowerCase(java.util.Locale.ENGLISH))).contains(entity.getType());
     }
     
     public static boolean tagCheck(Fluid fluid, ResourceLocation tag) {
-        if (FluidTags.getCollection().getTagByID(tag).contains(fluid)) {
-            return true;
-        }
-        return false;
+        return FluidTags.getAllTags().getTagOrEmpty(tag).contains(fluid);
     }
 
-    public static void landerTeleport(PlayerEntity player, ResourceLocation newPlanet) {
-        LanderEntity lander = (LanderEntity) player.getRidingEntity();
+    public static void landerTeleport(Player player, ResourceLocation newPlanet) {
+        LanderEntity lander = (LanderEntity) player.getVehicle();
 
-        if (player.getPosY() < 1) {
+        if (player.getY() < 1) {
 
             ItemStack slot_0 = lander.getInventory().getStackInSlot(0);
             ItemStack slot_1 = lander.getInventory().getStackInSlot(1);
@@ -309,13 +294,13 @@ public class Methodes {
 
             Methodes.worldTeleport(player, newPlanet, 700);
 
-            World newWorld = player.world;
+            Level newWorld = player.level;
 
-            if (!player.world.isRemote()) {
+            if (!player.level.isClientSide) {
                 LanderEntity entityToSpawn = new LanderEntity((EntityType<LanderEntity>) ModInnet.LANDER.get(), newWorld);
                 entityToSpawn.setLocationAndAngles(player.getPosX(), player.getPosY(), player.getPosZ(), 0, 0);
                 entityToSpawn.onInitialSpawn((ServerWorld) newWorld, newWorld.getDifficultyForLocation(entityToSpawn.getPosition()), SpawnReason.MOB_SUMMONED, null, null);
-                newWorld.addEntity(entityToSpawn);
+                newWorld.addFreshEntity(entityToSpawn);
 
                 entityToSpawn.getInventory().setStackInSlot(0, slot_0);
                 entityToSpawn.getInventory().setStackInSlot(1, slot_1);
@@ -325,22 +310,22 @@ public class Methodes {
         }
     }
 
-    public static void rocketTeleport(PlayerEntity player, ResourceLocation planet, ItemStack rocketItem, Boolean SpaceStation) {
-        RegistryKey<World> dim = player.world.getDimensionKey();
+    public static void rocketTeleport(Player player, ResourceLocation planet, ItemStack rocketItem, Boolean SpaceStation) {
+        ResourceKey<Level> dim = player.level.dimension();
 
-        if (dim != RegistryKey.getOrCreateKey(Registry.WORLD_KEY, planet)) {
+        if (dim != ResourceKey.create(Registry.DIMENSION_REGISTRY, planet)) {
             Methodes.worldTeleport(player, planet, 700);
         } else {
-            player.setPositionAndUpdate(player.getPosX(), 700, player.getPosZ());
+            player.setPos(player.getX(), 700, player.getZ());
 
-            if (player instanceof ServerPlayerEntity) {
-                ((ServerPlayerEntity) player).connection.setPlayerLocation(player.getPosX(), 700, player.getPosZ(), player.rotationYaw, player.rotationPitch);
+            if (player instanceof ServerPlayer) {
+                ((ServerPlayer) player).connection.teleport(player.getX(), 700, player.getY(), player.getYRot(), player.getXRot());
             }
         }
 
-        World world = player.world;
+        Level world = player.level;
 
-        if (!world.isRemote()) {
+        if (!world.isClientSide) {
             LanderEntity landerSpawn = new LanderEntity((EntityType<LanderEntity>) ModInnet.LANDER.get(), world);
             landerSpawn.setLocationAndAngles(player.getPosX(), player.getPosY(), player.getPosZ(), 0, 0);
             landerSpawn.onInitialSpawn((ServerWorld) world, world.getDifficultyForLocation(landerSpawn.getPosition()), SpawnReason.MOB_SUMMONED, null, null);
@@ -352,7 +337,7 @@ public class Methodes {
             landerSpawn.getInventory().setStackInSlot(1, rocketItem);
 
             if (SpaceStation) {
-                createSpaceStation(player, (ServerWorld) world);
+                createSpaceStation(player, (ServerLevel) world);
             }
 
             cleanUpPlayerNBT(player);
@@ -361,41 +346,41 @@ public class Methodes {
         }
     }
 
-    public static void createSpaceStation(PlayerEntity player, ServerWorld serverWorld) {
-        BlockPos pos = new BlockPos(player.getPosX() - 15.5, 100, player.getPosZ() - 15.5);
-        serverWorld.getStructureTemplateManager().getTemplate(new ResourceLocation(BossToolsMod.ModId, "space_station")).func_237144_a_(serverWorld, pos, new PlacementSettings(), serverWorld.rand);
+    public static void createSpaceStation(Player player, ServerLevel serverWorld) {
+        BlockPos pos = new BlockPos(player.getX() - 15.5, 100, player.getZ() - 15.5);
+        serverWorld.getStructureManager().getOrCreate(new ResourceLocation(BossToolsMod.ModId, "space_station")).placeInWorld(serverWorld, pos, pos, new StructurePlaceSettings(), serverWorld.random, 2);
     }
 
-    public static void cleanUpPlayerNBT(PlayerEntity player) {
+    public static void cleanUpPlayerNBT(Player player) {
         player.getPersistentData().putBoolean(BossToolsMod.ModId + ":planet_selection_gui_open", false);
         player.getPersistentData().putString(BossToolsMod.ModId + ":rocket_type", "");
         player.getPersistentData().putString(BossToolsMod.ModId + ":slot0", "");
     }
 
-    public static void openPlanetGui(PlayerEntity player) {
-        if (!(player.openContainer instanceof PlanetSelectionGui.GuiContainer) && player.getPersistentData().getBoolean(BossToolsMod.ModId + ":planet_selection_gui_open")) {
-            if (player instanceof ServerPlayerEntity) {
+    public static void openPlanetGui(Player player) {
+        if (!(player.containerMenu instanceof PlanetSelectionGui.GuiContainer) && player.getPersistentData().getBoolean(BossToolsMod.ModId + ":planet_selection_gui_open")) {
+            if (player instanceof ServerPlayer) {
 
-                NetworkHooks.openGui((ServerPlayerEntity) player, new INamedContainerProvider() {
+                NetworkHooks.openGui((ServerPlayer) player, new MenuProvider() {
                     @Override
-                    public ITextComponent getDisplayName() {
-                        return new StringTextComponent("Planet Selection");
+                    public Component getDisplayName() {
+                        return new TextComponent("Planet Selection");
                     }
 
                     @Override
-                    public Container createMenu(int id, PlayerInventory inventory, PlayerEntity player) {
-                        PacketBuffer packetBuffer = new PacketBuffer(Unpooled.buffer());
-                        packetBuffer.writeString(player.getPersistentData().getString(BossToolsMod.ModId + ":rocket_type"));
+                    public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
+                        FriendlyByteBuf packetBuffer = new FriendlyByteBuf(Unpooled.buffer());
+                        packetBuffer.writeUtf(player.getPersistentData().getString(BossToolsMod.ModId + ":rocket_type"));
                         return new PlanetSelectionGui.GuiContainer(id, inventory, packetBuffer);
                     }
                 }, buf -> {
-                    buf.writeString(player.getPersistentData().getString(BossToolsMod.ModId + ":rocket_type"));
+                    buf.writeUtf(player.getPersistentData().getString(BossToolsMod.ModId + ":rocket_type"));
                 });
             }
         }
     }
 
-    public static void teleportButton (PlayerEntity player, ResourceLocation planet, Boolean SpaceStation) {
+    public static void teleportButton (Player player, ResourceLocation planet, Boolean SpaceStation) {
         ItemStack itemStack = new ItemStack(Items.AIR, 1);
 
         if (player.getPersistentData().getString(BossToolsMod.ModId + ":rocket_type").equals("entity." + BossToolsMod.ModId + ".rocket_t1")) {
@@ -411,7 +396,7 @@ public class Methodes {
         Methodes.rocketTeleport(player, planet, itemStack, SpaceStation);
     }
 
-    public static void landerTeleportOrbit(PlayerEntity player, World world) {
+    public static void landerTeleportOrbit(Player player, Level world) {
         if (Methodes.isWorld(world, new ResourceLocation(BossToolsMod.ModId, "overworld_orbit"))) {
             Methodes.landerTeleport(player, new ResourceLocation("minecraft:overworld"));
         }
@@ -429,45 +414,45 @@ public class Methodes {
         }
     }
 
-    public static void playerFalltoPlanet(World world, PlayerEntity player) {
-        RegistryKey<World> world2 = world.getDimensionKey();
+    public static void playerFalltoPlanet(Level world, Player player) {
+        ResourceKey<Level> world2 = world.dimension();
 
-        if (world2 == RegistryKey.getOrCreateKey(Registry.WORLD_KEY, new ResourceLocation(BossToolsMod.ModId, "overworld_orbit"))) {
+        if (world2 == ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BossToolsMod.ModId, "overworld_orbit"))) {
             ResourceLocation planet = new ResourceLocation("overworld");
             Methodes.worldTeleport(player, planet, 450);
         }
 
-        if (world2 == RegistryKey.getOrCreateKey(Registry.WORLD_KEY, new ResourceLocation(BossToolsMod.ModId, "moon_orbit"))) {
+        if (world2 == ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BossToolsMod.ModId, "moon_orbit"))) {
             ResourceLocation planet = new ResourceLocation(BossToolsMod.ModId, "moon");
             Methodes.worldTeleport(player, planet, 450);
         }
 
-        if (world2 == RegistryKey.getOrCreateKey(Registry.WORLD_KEY, new ResourceLocation(BossToolsMod.ModId, "mars_orbit"))) {
+        if (world2 == ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BossToolsMod.ModId, "mars_orbit"))) {
             ResourceLocation planet = new ResourceLocation(BossToolsMod.ModId, "mars");
             Methodes.worldTeleport(player, planet, 450);
         }
 
-        if (world2 == RegistryKey.getOrCreateKey(Registry.WORLD_KEY, new ResourceLocation(BossToolsMod.ModId, "mercury_orbit"))) {
+        if (world2 == ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BossToolsMod.ModId, "mercury_orbit"))) {
             ResourceLocation planet = new ResourceLocation(BossToolsMod.ModId, "mercury");
             Methodes.worldTeleport(player, planet, 450);
         }
 
-        if (world2 == RegistryKey.getOrCreateKey(Registry.WORLD_KEY, new ResourceLocation(BossToolsMod.ModId, "venus_orbit"))) {
+        if (world2 == ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BossToolsMod.ModId, "venus_orbit"))) {
             ResourceLocation planet = new ResourceLocation(BossToolsMod.ModId, "venus");
             Methodes.worldTeleport(player, planet, 450);
         }
     }
 
-	public static void extractArmorOxygenUsingTimer(ItemStack itemstack, PlayerEntity player) {
-		if (!player.abilities.isCreativeMode && !player.isSpectator() && Methodes.spaceSuitCheckBoth(player) && Config.PlayerOxygenSystem) {
+	public static void extractArmorOxygenUsingTimer(ItemStack itemstack, Player player) {
+		if (!player.getAbilities().instabuild && !player.isSpectator() && Methodes.spaceSuitCheckBoth(player) && Config.PlayerOxygenSystem) {
 			IOxygenStorage oxygenStorage = OxygenUtil.getItemStackOxygenStorage(itemstack);
 
-			CompoundNBT persistentData = player.getPersistentData();
+            CompoundTag persistentData = player.getPersistentData();
 			String key = BossToolsMod.ModId + ":oxygen_timer";
 			int oxygenTimer = persistentData.getInt(key);
 			oxygenTimer++;
 
-			if (oxygenStorage.getOxygenStored() > 0 && oxygenTimer > 3 && !player.isPotionActive(ModInnet.OXYGEN_EFFECT.get())) {
+			if (oxygenStorage.getOxygenStored() > 0 && oxygenTimer > 3 && !player.isAffectedByPotions(ModInnet.OXYGEN_EFFECT.get())) {
 				oxygenStorage.extractOxygen(1, false);
 				oxygenTimer = 0;
 			}

@@ -23,6 +23,8 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
+import MobEntity;
+
 @OnlyIn(Dist.CLIENT)
 public class MoglerModel<T extends MobEntity & IFlinging> extends AgeableModel<T>  {
     private final ModelRenderer body;

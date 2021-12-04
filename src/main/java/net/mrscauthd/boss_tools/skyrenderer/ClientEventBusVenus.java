@@ -53,6 +53,8 @@ import java.util.Random;
 
 import static net.minecraft.client.renderer.WorldRenderer.getPackedLightmapCoords;
 
+import Vector3d;
+
 @Mod.EventBusSubscriber(modid = BossToolsMod.ModId, bus = Bus.MOD, value = Dist.CLIENT)
 public class ClientEventBusVenus {
 	private static final float[] rainSizeX = new float[1024];

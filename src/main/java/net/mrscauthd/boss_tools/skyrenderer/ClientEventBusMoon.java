@@ -33,6 +33,9 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.mrscauthd.boss_tools.BossToolsMod;
 
+import VertexBuffer;
+import VertexFormat;
+
 @Mod.EventBusSubscriber(modid = BossToolsMod.ModId, bus = Bus.MOD, value = Dist.CLIENT)
 public class ClientEventBusMoon {
 	@Nullable

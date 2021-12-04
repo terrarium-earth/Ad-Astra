@@ -5,6 +5,9 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraftforge.eventbus.api.Cancelable;
 import net.minecraftforge.eventbus.api.Event;
 
+import BipedModel;
+import LivingEntity;
+
 public class SetupLivingBipedAnimEvent extends Event
 {
     private LivingEntity livingEntity;

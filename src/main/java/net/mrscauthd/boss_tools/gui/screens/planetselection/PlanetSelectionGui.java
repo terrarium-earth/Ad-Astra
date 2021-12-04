@@ -6,9 +6,11 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.gen.feature.template.PlacementSettings;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.network.IContainerFactory;
@@ -30,7 +32,7 @@ public class PlanetSelectionGui {
 	public static class GuiContainer extends Container {
 		String rocket;
 
-		public GuiContainer(int id, PlayerInventory inv, PacketBuffer extraData) {
+		public GuiContainer(int id, Inventory inv, FriendlyByteBuf extraData) {
 			super(ModInnet.PLANET_SELECTION_GUI.get(), id);
 
 			this.rocket = extraData.readString();

@@ -31,6 +31,8 @@ import net.mrscauthd.boss_tools.gauge.GaugeValueHelper;
 import net.mrscauthd.boss_tools.gauge.IGaugeValue;
 import net.mrscauthd.boss_tools.inventory.StackCacher;
 
+import ResourceLocation;
+
 public abstract class OxygenMakingTileEntity extends AbstractMachineTileEntity {
 	public static final int TANK_CAPACITY = 3000;
 	public static final int TRANSFER_PER_TICK = 256;

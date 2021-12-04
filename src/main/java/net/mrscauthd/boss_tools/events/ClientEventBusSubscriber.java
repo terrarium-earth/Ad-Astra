@@ -50,6 +50,8 @@ import net.mrscauthd.boss_tools.entity.renderer.mogler.MoglerRenderer;
 import net.mrscauthd.boss_tools.entity.renderer.pygro.PygroRenderer;
 import org.lwjgl.glfw.GLFW;
 
+import KeyBinding;
+
 @Mod.EventBusSubscriber(modid = BossToolsMod.ModId, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEventBusSubscriber {
 	public static KeyBinding key1;

@@ -6,6 +6,8 @@ import net.minecraft.util.ResourceLocation;
 import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.gui.helper.GuiHelper;
 
+import ResourceLocation;
+
 public class GaugeValueRenderer extends AbstractGaugeDataRenderer {
 
 	private static final ResourceLocation DEFAULT_TEXTURE = new ResourceLocation(BossToolsMod.ModId, "textures/simplegaugevalue.png");

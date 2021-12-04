@@ -9,6 +9,9 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.ITextComponent.Serializer;
 import net.minecraft.util.text.TranslationTextComponent;
 
+import ITextComponent;
+import ResourceLocation;
+
 public class GaugeValueSimple implements IGaugeValue {
 
 	public static final int FALLBACK_COLOR = 0xA0FFFFFF;

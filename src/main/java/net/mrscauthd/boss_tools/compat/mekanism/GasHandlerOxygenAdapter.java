@@ -7,6 +7,8 @@ import mekanism.api.chemical.gas.IGasHandler;
 import mekanism.common.registries.MekanismGases;
 import net.mrscauthd.boss_tools.capability.IOxygenStorage;
 
+import IGasHandler;
+
 public class GasHandlerOxygenAdapter implements IOxygenStorage {
 
 	private IGasHandler gasHandler;

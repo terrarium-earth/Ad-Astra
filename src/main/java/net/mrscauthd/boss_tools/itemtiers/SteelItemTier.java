@@ -5,6 +5,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.mrscauthd.boss_tools.ModInnet;
 
+import IItemTier;
+
 public class SteelItemTier {
     public static IItemTier ITEM_TIER = new IItemTier() {
         public int getMaxUses() {

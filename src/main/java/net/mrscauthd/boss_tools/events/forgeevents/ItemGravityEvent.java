@@ -1,6 +1,6 @@
 package net.mrscauthd.boss_tools.events.forgeevents;
 
-import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraftforge.event.entity.item.ItemEvent;
 
 public class ItemGravityEvent extends ItemEvent {

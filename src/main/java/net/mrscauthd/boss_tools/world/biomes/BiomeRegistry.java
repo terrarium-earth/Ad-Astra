@@ -14,6 +14,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.ModInnet;
 
+import Biome;
+
 @Mod.EventBusSubscriber(modid = BossToolsMod.ModId, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class BiomeRegistry {
     public static Biome moon;

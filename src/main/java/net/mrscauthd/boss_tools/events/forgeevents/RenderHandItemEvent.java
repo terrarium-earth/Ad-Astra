@@ -9,6 +9,9 @@ import net.minecraft.util.HandSide;
 import net.minecraftforge.eventbus.api.Cancelable;
 import net.minecraftforge.eventbus.api.Event;
 
+import ItemStack;
+import LivingEntity;
+
 public class RenderHandItemEvent extends Event
 {
     private LivingEntity livingEntity;

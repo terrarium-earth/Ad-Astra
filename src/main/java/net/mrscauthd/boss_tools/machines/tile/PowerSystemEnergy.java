@@ -4,6 +4,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.mrscauthd.boss_tools.BossToolsMod;
 
+import ResourceLocation;
+
 public abstract class PowerSystemEnergy extends PowerSystem {
 	private final IEnergyStorage energyStorage;
 

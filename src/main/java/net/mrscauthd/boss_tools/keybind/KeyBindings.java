@@ -32,6 +32,8 @@ import net.minecraft.client.Minecraft;
 
 import java.util.function.Supplier;
 
+import SimpleChannel;
+
 @Mod.EventBusSubscriber(modid = BossToolsMod.ModId)
 public class KeyBindings {
 	public static SimpleChannel INSTANCE;

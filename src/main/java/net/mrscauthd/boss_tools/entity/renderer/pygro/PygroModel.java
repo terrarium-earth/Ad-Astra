@@ -11,6 +11,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.mrscauthd.boss_tools.entity.pygro.PygroEntity;
 
+import MobEntity;
+
 @OnlyIn(Dist.CLIENT)
 public class PygroModel<T extends MobEntity> extends PlayerModel<T> {
     public final ModelRenderer field_239115_a_;

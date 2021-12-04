@@ -29,6 +29,8 @@ import net.minecraft.client.renderer.entity.model.BipedModel;
 
 import java.util.List;
 
+import ArmorItem;
+
 public class SpaceSuit {
 
 	public static ArmorItem OXYGEN_MASK = new ArmorItem(SpaceSuitArmorMaterial.ArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(BossToolsItemGroups.tab_normal)) {

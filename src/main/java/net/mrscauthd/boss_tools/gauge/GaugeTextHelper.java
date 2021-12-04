@@ -11,6 +11,8 @@ import net.minecraft.util.text.TextFormatting;
 import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.capability.IOxygenStorage;
 
+import ResourceLocation;
+
 public class GaugeTextHelper {
 
 	public static final ResourceLocation USING_NAME = new ResourceLocation(BossToolsMod.ModId, "using");

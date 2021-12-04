@@ -1,6 +1,7 @@
 package net.mrscauthd.boss_tools.capability;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.mrscauthd.boss_tools.compat.CompatibleManager;
 import net.mrscauthd.boss_tools.compat.mekanism.MekanismHelper;

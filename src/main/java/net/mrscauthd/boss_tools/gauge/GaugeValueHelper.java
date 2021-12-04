@@ -10,6 +10,8 @@ import net.mrscauthd.boss_tools.capability.IOxygenStorage;
 import net.mrscauthd.boss_tools.machines.tile.AbstractMachineTileEntity;
 import net.mrscauthd.boss_tools.machines.tile.PowerSystemFuelBurnTime;
 
+import ResourceLocation;
+
 public class GaugeValueHelper {
 
 	public static final ResourceLocation ENERGY_NAME = new ResourceLocation(BossToolsMod.ModId, "energy");

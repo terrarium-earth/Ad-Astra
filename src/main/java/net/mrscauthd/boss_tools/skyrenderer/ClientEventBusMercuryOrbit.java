@@ -36,6 +36,9 @@ import net.mrscauthd.boss_tools.BossToolsMod;
 
 import java.util.Random;
 
+import VertexBuffer;
+import VertexFormat;
+
 @Mod.EventBusSubscriber(modid = BossToolsMod.ModId, bus = Bus.MOD, value = Dist.CLIENT)
 public class ClientEventBusMercuryOrbit {
 	@Nullable

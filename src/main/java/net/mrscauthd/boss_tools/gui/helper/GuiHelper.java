@@ -25,6 +25,8 @@ import net.minecraftforge.fluids.IFluidTank;
 import net.mrscauthd.boss_tools.capability.IOxygenStorage;
 import net.mrscauthd.boss_tools.fluid.FluidUtil2;
 
+import ResourceLocation;
+
 public class GuiHelper {
 
 	public static final ResourceLocation FIRE_PATH = new ResourceLocation(BossToolsMod.ModId,"textures/fire_on.png");
