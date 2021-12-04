@@ -1,25 +1,14 @@
 package net.mrscauthd.boss_tools.compat.hwyla;
 
 import java.awt.Dimension;
-import java.util.List;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-
-import mcp.mobius.waila.api.ICommonAccessor;
-import mcp.mobius.waila.api.IComponentProvider;
-import mcp.mobius.waila.api.IDataAccessor;
-import mcp.mobius.waila.api.IPluginConfig;
-import mcp.mobius.waila.api.ITooltipRenderer;
-import mcp.mobius.waila.api.RenderableTextComponent;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.ListNBT;
-import net.minecraft.util.text.ITextComponent;
 import net.mrscauthd.boss_tools.gauge.GaugeValueRenderer;
 import net.mrscauthd.boss_tools.gauge.GaugeValueSerializer;
 import net.mrscauthd.boss_tools.gauge.IGaugeValue;
 
-public class TooltipRenderer implements IComponentProvider, ITooltipRenderer {
+public class TooltipRenderer/* implements IComponentProvider, ITooltipRenderer*/ {
 
+	/*
 	public static final TooltipRenderer INSTANCE = new TooltipRenderer();
 
 	@Override
@@ -54,4 +43,5 @@ public class TooltipRenderer implements IComponentProvider, ITooltipRenderer {
 			y += renderer.getHeight() + 1;
 		}
 	}
+	 */
 }

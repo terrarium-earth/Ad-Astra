@@ -1,16 +1,8 @@
 package net.mrscauthd.boss_tools.compat.mekanism;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import mekanism.api.chemical.gas.IGasHandler;
-import mekanism.common.capabilities.Capabilities;
-import mekanism.common.integration.lookingat.theoneprobe.TOPChemicalElement;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.capabilities.Capability;
-import net.mrscauthd.boss_tools.capability.IOxygenStorage;
 
 public class MekanismHelper {
+	/*
 	public static Capability<IGasHandler> getGasHandlerCapability() {
 		return Capabilities.GAS_HANDLER_CAPABILITY;
 	}
@@ -46,4 +38,6 @@ public class MekanismHelper {
 
 		return list;
 	}
+
+	 */
 }

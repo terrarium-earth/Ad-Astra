@@ -1,12 +1,10 @@
 package net.mrscauthd.boss_tools.compat.hwyla;
 
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.mrscauthd.boss_tools.compat.CompatibleMod;
 
-import ResourceLocation;
-
-public class HwylaCompat extends CompatibleMod {
-	public static final String MODID = "waila";
+public class HwylaCompat/* extends CompatibleMod*/ {
+/*	public static final String MODID = "waila";
 
 	public static ResourceLocation rl(String path) {
 		return new ResourceLocation(MODID, path);
@@ -21,5 +19,5 @@ public class HwylaCompat extends CompatibleMod {
 	protected void onLoad() {
 
 	}
-
+*/
 }

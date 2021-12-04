@@ -1,26 +1,13 @@
 package net.mrscauthd.boss_tools.compat.theoneprobe;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.function.Function;
 
-import mcjty.theoneprobe.api.IElement;
-import mcjty.theoneprobe.api.IProbeHitData;
-import mcjty.theoneprobe.api.IProbeInfo;
-import mcjty.theoneprobe.api.IProbeInfoProvider;
-import mcjty.theoneprobe.api.ITheOneProbe;
-import mcjty.theoneprobe.api.ProbeMode;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 import net.mrscauthd.boss_tools.compat.CompatibleManager;
 import net.mrscauthd.boss_tools.compat.mekanism.MekanismHelper;
 import net.mrscauthd.boss_tools.machines.tile.AbstractMachineTileEntity;
 
-public class ProbeInfoProvider implements IProbeInfoProvider, Function<ITheOneProbe, Void> {
-
+public class ProbeInfoProvider/* implements IProbeInfoProvider, Function<ITheOneProbe, Void>*/ {
+/*
 	public static int ELEMENT_ID;
 
 	public ProbeInfoProvider() {
@@ -62,4 +49,5 @@ public class ProbeInfoProvider implements IProbeInfoProvider, Function<ITheOnePr
 	public String getID() {
 		return new ResourceLocation("boss_tools", "top").toString();
 	}
+	*/
 }

@@ -2,15 +2,8 @@ package net.mrscauthd.boss_tools.compat.tinkers;
 
 import java.util.Locale;
 
-import net.minecraft.item.Item;
-import net.minecraftforge.fluids.ForgeFlowingFluid;
-import slimeknights.mantle.registration.object.FluidObject;
-import slimeknights.tconstruct.smeltery.data.Byproduct;
 
-import Byproduct;
-import FluidObject;
-
-public enum BossToolsSmelteryCompat {
+public enum BossToolsSmelteryCompat {/*
 	DESH(TinkersBossToolsFluids.moltenDesh, true),
 	SILICON(TinkersBossToolsFluids.moltenSilicon, true),
 	// EOL
@@ -52,5 +45,5 @@ public enum BossToolsSmelteryCompat {
 	{
 		return this.byproducts;
 	}
-
+*/
 }

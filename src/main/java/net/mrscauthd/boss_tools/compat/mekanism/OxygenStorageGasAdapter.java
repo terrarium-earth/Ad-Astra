@@ -1,13 +1,9 @@
 package net.mrscauthd.boss_tools.compat.mekanism;
 
-import mekanism.api.Action;
-import mekanism.api.chemical.gas.Gas;
-import mekanism.api.chemical.gas.GasStack;
-import mekanism.api.chemical.gas.IGasHandler;
-import mekanism.common.registries.MekanismGases;
 import net.mrscauthd.boss_tools.capability.IOxygenStorage;
 
-public class OxygenStorageGasAdapter implements IGasHandler {
+public class OxygenStorageGasAdapter /* implements IGasHandler*/ {
+	/*
 
 	private IOxygenStorage oxygenStorage;
 	private boolean canExtract;
@@ -90,5 +86,5 @@ public class OxygenStorageGasAdapter implements IGasHandler {
 	public boolean isCanInsert() {
 		return this.canInsert;
 	}
-
+*/
 }

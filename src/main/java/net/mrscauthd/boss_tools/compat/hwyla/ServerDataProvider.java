@@ -4,14 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import mcp.mobius.waila.api.IServerDataProvider;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.ListNBT;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
-import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.mrscauthd.boss_tools.BossToolsMod;
@@ -20,8 +12,8 @@ import net.mrscauthd.boss_tools.gauge.GaugeValueSerializer;
 import net.mrscauthd.boss_tools.gauge.IGaugeValue;
 import net.mrscauthd.boss_tools.machines.tile.AbstractMachineTileEntity;
 
-public class ServerDataProvider implements IServerDataProvider<TileEntity> {
-
+public class ServerDataProvider /* implements IServerDataProvider<TileEntity>*/ {
+/*
 	public static final ResourceLocation DATA_KEY = new ResourceLocation(BossToolsMod.ModId, "datakey");
 	public static final ServerDataProvider INSTANCE = new ServerDataProvider();
 
@@ -63,4 +55,6 @@ public class ServerDataProvider implements IServerDataProvider<TileEntity> {
 			put(data, write(list));
 		}
 	}
+
+ */
 }
