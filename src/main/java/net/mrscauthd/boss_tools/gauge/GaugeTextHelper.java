@@ -4,14 +4,12 @@ import java.text.NumberFormat;
 
 import com.google.common.collect.Lists;
 
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
+import net.minecraft.resources.ResourceLocation;
 import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.capability.IOxygenStorage;
-
-import ResourceLocation;
 
 public class GaugeTextHelper {
 
@@ -109,15 +107,15 @@ public class GaugeTextHelper {
 		return getTransferText(value).setUnitSuffix(PER_TICK_UNIT_SUFFIX);
 	}
 
-	public static IFormattableTextComponent buildSpacesuitOxygenTooltip(IGaugeValue value) {
+	public static MutableComponent buildSpacesuitOxygenTooltip(IGaugeValue value) {
 		GaugeTextBuilder builder = GaugeTextHelper.getText(value, "%1$s: %2$s \u00A78| %3$s");
-		builder.setTextStyle(Style.EMPTY.setFormatting(TextFormatting.BLUE));
-		builder.setAmountStyle(Style.EMPTY.setFormatting(TextFormatting.GOLD));
-		builder.setCapacityStyle(Style.EMPTY.setFormatting(TextFormatting.RED));
+		builder.setTextStyle(Style.EMPTY.withColor(ChatFormatting.BLUE));
+		builder.setAmountStyle(Style.EMPTY.withColor(ChatFormatting.GOLD));
+		builder.setCapacityStyle(Style.EMPTY.withColor(ChatFormatting.RED));
 		return builder.build();
 	}
 
-	public static IFormattableTextComponent buildSpacesuitOxygenTooltip(IOxygenStorage oxygenStorage) {
+	public static MutableComponent buildSpacesuitOxygenTooltip(IOxygenStorage oxygenStorage) {
 		IGaugeValue oxygen;
 
 		if (oxygenStorage != null) {
@@ -129,15 +127,15 @@ public class GaugeTextHelper {
 		return buildSpacesuitOxygenTooltip(oxygen);
 	}
 
-	public static IFormattableTextComponent buildBlockTooltip(GaugeTextBuilder builder, TextFormatting color) {
-		builder.setTextStyle(Style.EMPTY.setFormatting(TextFormatting.BLUE));
-		builder.setAmountStyle(Style.EMPTY.setFormatting(color));
-		builder.setCapacityStyle(Style.EMPTY.setFormatting(color));
-		builder.setExtraStyle(0, Style.EMPTY.setFormatting(color));
+	public static MutableComponent buildBlockTooltip(GaugeTextBuilder builder, ChatFormatting color) {
+		builder.setTextStyle(Style.EMPTY.withColor(ChatFormatting.BLUE));
+		builder.setAmountStyle(Style.EMPTY.withColor(color));
+		builder.setCapacityStyle(Style.EMPTY.withColor(color));
+		builder.setExtraStyle(0, Style.EMPTY.withColor(color));
 		return builder.build();
 	}
 
-	public static IFormattableTextComponent buildBlockTooltip(GaugeTextBuilder builder) {
-		return buildBlockTooltip(builder, TextFormatting.GRAY);
+	public static MutableComponent buildBlockTooltip(GaugeTextBuilder builder) {
+		return buildBlockTooltip(builder, ChatFormatting.GRAY);
 	}
 }

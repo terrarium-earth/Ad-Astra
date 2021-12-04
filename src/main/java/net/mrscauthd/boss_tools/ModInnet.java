@@ -612,7 +612,6 @@ public class ModInnet {
         event.enqueueWork(() -> {
 
             BossToolsRecipeTypes.init();
-            CapabilityOxygen.register();
 
             ICE_SPIKE = registerFeature("mars_ice_spike", ModInnet.MARS_ICE_SPIKE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242731_b(2));
             //Venus Deltas

@@ -1,14 +1,14 @@
 package net.mrscauthd.boss_tools.capability;
 
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.INBT;
-import net.minecraft.util.Direction;
+import net.minecraft.core.Direction;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.Capability.IStorage;
-import net.minecraftforge.common.capabilities.CapabilityInject;
-import net.minecraftforge.common.capabilities.CapabilityManager;
 
+import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.fml.common.Mod;
+
+@Mod.EventBusSubscriber
 public class CapabilityOxygen {
+
 	@CapabilityInject(IOxygenStorage.class)
 	public static Capability<IOxygenStorage> OXYGEN = null;
 

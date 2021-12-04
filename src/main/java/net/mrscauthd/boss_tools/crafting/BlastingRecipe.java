@@ -2,12 +2,10 @@ package net.mrscauthd.boss_tools.crafting;
 
 import com.google.gson.JsonObject;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.mrscauthd.boss_tools.ModInnet;
 
 public class BlastingRecipe extends ItemStackToItemStackRecipe {
@@ -16,7 +14,7 @@ public class BlastingRecipe extends ItemStackToItemStackRecipe {
 		super(id, json);
 	}
 
-	public BlastingRecipe(ResourceLocation id, PacketBuffer buffer) {
+	public BlastingRecipe(ResourceLocation id, FriendlyByteBuf buffer) {
 		super(id, buffer);
 	}
 

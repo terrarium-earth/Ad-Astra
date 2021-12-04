@@ -1,5 +1,6 @@
 package net.mrscauthd.boss_tools.jei.jeiguihandlers;
 
+/*
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -17,14 +18,14 @@ import net.mrscauthd.boss_tools.gauge.GaugeValueHelper;
 import net.mrscauthd.boss_tools.gauge.GaugeTextHelper;
 import net.mrscauthd.boss_tools.gui.screens.coalgenerator.CoalGeneratorGuiWindow;
 import net.mrscauthd.boss_tools.gui.helper.GuiHelper;
-import net.mrscauthd.boss_tools.jei.JeiPlugin.CoalGeneratorJeiCategory;
+import net.mrscauthd.boss_tools.jei.JeiPlugin.CoalGeneratorJeiCategory;*/
 
-public class CoalGeneratorGuiContainerHandler implements IGuiContainerHandler<CoalGeneratorGuiWindow> {
+public class CoalGeneratorGuiContainerHandler /* implements IGuiContainerHandler<CoalGeneratorGuiWindow>*/ {
 
 	public CoalGeneratorGuiContainerHandler() {
 
 	}
-
+/*
 	@Override
 	public Collection<IGuiClickableArea> getGuiClickableAreas(CoalGeneratorGuiWindow containerScreen, double mouseX, double mouseY) {
 		return Collections.singleton(new IGuiClickableArea() {
@@ -48,5 +49,7 @@ public class CoalGeneratorGuiContainerHandler implements IGuiContainerHandler<Co
 		});
 
 	}
+
+ */
 
 }

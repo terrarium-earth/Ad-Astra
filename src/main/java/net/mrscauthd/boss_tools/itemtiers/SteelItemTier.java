@@ -1,36 +1,40 @@
 package net.mrscauthd.boss_tools.itemtiers;
 
-import net.minecraft.item.IItemTier;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.mrscauthd.boss_tools.ModInnet;
 
-import IItemTier;
-
 public class SteelItemTier {
-    public static IItemTier ITEM_TIER = new IItemTier() {
-        public int getMaxUses() {
+    public static Tier ITEM_TIER = new Tier() {
+        @Override
+        public int getUses() {
             return 1661;
         }
 
-        public float getEfficiency() {
+        @Override
+        public float getSpeed() {
             return 7f;
         }
 
-        public float getAttackDamage() {
+        @Override
+        public float getAttackDamageBonus() {
             return 2f;
         }
 
-        public int getHarvestLevel() {
+        @Override
+        public int getLevel() {
             return 3;
         }
 
-        public int getEnchantability() {
+        @Override
+        public int getEnchantmentValue() {
             return 14;
         }
 
-        public Ingredient getRepairMaterial() {
-            return Ingredient.fromStacks(new ItemStack(ModInnet.STEEL_INGOT.get(),1));
+        @Override
+        public Ingredient getRepairIngredient() {
+            return Ingredient.of(new ItemStack(ModInnet.STEEL_INGOT.get(),1));
         }
     };
 }

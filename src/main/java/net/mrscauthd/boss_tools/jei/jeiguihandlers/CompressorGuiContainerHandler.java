@@ -1,5 +1,6 @@
 package net.mrscauthd.boss_tools.jei.jeiguihandlers;
 
+/*
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -18,11 +19,13 @@ import net.mrscauthd.boss_tools.gauge.GaugeTextHelper;
 import net.mrscauthd.boss_tools.gui.helper.GuiHelper;
 import net.mrscauthd.boss_tools.jei.JeiPlugin.CompressorJeiCategory;
 
-public class CompressorGuiContainerHandler implements IGuiContainerHandler<CompressorGuiWindow> {
+*/
+public class CompressorGuiContainerHandler/* implements IGuiContainerHandler<CompressorGuiWindow>*/ {
 
 	public CompressorGuiContainerHandler() {
 
 	}
+	/*
 
 	@Override
 	public Collection<IGuiClickableArea> getGuiClickableAreas(CompressorGuiWindow containerScreen, double mouseX, double mouseY) {
@@ -47,5 +50,5 @@ public class CompressorGuiContainerHandler implements IGuiContainerHandler<Compr
 		});
 
 	}
-
+*/
 }

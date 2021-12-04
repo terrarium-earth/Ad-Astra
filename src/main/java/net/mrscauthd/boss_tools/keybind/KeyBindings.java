@@ -1,38 +1,35 @@
 package net.mrscauthd.boss_tools.keybind;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.particles.ParticleTypes;
+import com.mojang.blaze3d.platform.InputConstants;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.network.NetworkRegistry;
-import net.minecraftforge.fml.network.simple.SimpleChannel;
+import net.minecraftforge.network.NetworkEvent;
+import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.simple.SimpleChannel;
 import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.entity.*;
 import net.mrscauthd.boss_tools.events.ClientEventBusSubscriber;
 import net.mrscauthd.boss_tools.events.Methodes;
 import org.lwjgl.glfw.GLFW;
 
-import net.minecraftforge.fml.network.NetworkEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.api.distmarker.Dist;
 
-import net.minecraft.world.World;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.client.util.InputMappings;
 import net.minecraft.client.Minecraft;
 
 import java.util.function.Supplier;
-
-import SimpleChannel;
 
 @Mod.EventBusSubscriber(modid = BossToolsMod.ModId)
 public class KeyBindings {
@@ -54,24 +51,24 @@ public class KeyBindings {
 		if (event.phase == TickEvent.Phase.END) {
 
 			//Key Space
-			if (InputMappings.isKeyDown(Minecraft.getInstance().getMainWindow().getHandle(), GLFW.GLFW_KEY_SPACE)) {
-				if (Minecraft.getInstance().currentScreen == null) {
+			if (InputConstants.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), GLFW.GLFW_KEY_SPACE)) {
+				if (Minecraft.getInstance().screen == null) {
 					INSTANCE.sendToServer(new KeyBindingPressedMessage(0, 0));
 					pressAction(Minecraft.getInstance().player, 0, 0);
 				}
 			}
 
 			//Key A
-			if ((InputMappings.isKeyDown(Minecraft.getInstance().getMainWindow().getHandle(), GLFW.GLFW_KEY_A))) {
-				if (Minecraft.getInstance().currentScreen == null) {
+			if ((InputConstants.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), GLFW.GLFW_KEY_A))) {
+				if (Minecraft.getInstance().screen == null) {
 					INSTANCE.sendToServer(new KeyBindingPressedMessage(2, 0));
 					pressAction(Minecraft.getInstance().player, 2, 0);
 				}
 			}
 
 			//Key D
-			if ((InputMappings.isKeyDown(Minecraft.getInstance().getMainWindow().getHandle(), GLFW.GLFW_KEY_D))) {
-				if (Minecraft.getInstance().currentScreen == null) {
+			if ((InputConstants.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), GLFW.GLFW_KEY_D))) {
+				if (Minecraft.getInstance().screen == null) {
 					INSTANCE.sendToServer(new KeyBindingPressedMessage(3, 0));
 					pressAction(Minecraft.getInstance().player, 3, 0);
 				}
@@ -83,8 +80,8 @@ public class KeyBindings {
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public static void onKeyInput2(InputEvent.KeyInputEvent event) {
-		if (Minecraft.getInstance().currentScreen == null) {
-			if (event.getKey() == ClientEventBusSubscriber.key1.getKey().getKeyCode()) {
+		if (Minecraft.getInstance().screen == null) {
+			if (event.getKey() == ClientEventBusSubscriber.key1.key.getKeyCode()) {
 				if (event.getAction() == GLFW.GLFW_PRESS) {
 					INSTANCE.sendToServer(new KeyBindingPressedMessage(1, 0));
 					pressAction(Minecraft.getInstance().player, 1, 0);
@@ -101,12 +98,12 @@ public class KeyBindings {
 			this.pressedms = pressedms;
 		}
 
-		public KeyBindingPressedMessage(PacketBuffer buffer) {
+		public KeyBindingPressedMessage(FriendlyByteBuf buffer) {
 			this.type = buffer.readInt();
 			this.pressedms = buffer.readInt();
 		}
 
-		public static void buffer(KeyBindingPressedMessage message, PacketBuffer buffer) {
+		public static void buffer(KeyBindingPressedMessage message, FriendlyByteBuf buffer) {
 			buffer.writeInt(message.type);
 			buffer.writeInt(message.pressedms);
 		}
@@ -120,53 +117,51 @@ public class KeyBindings {
 		}
 	}
 
-	private static void pressAction(PlayerEntity player, int type, int pressedms) {
-		World world = player.world;
-		double x = player.getPosX();
-		double y = player.getPosY();
-		double z = player.getPosZ();
+	private static void pressAction(ServerPlayer player, int type, int pressedms) {
+		Level world = player.level;
+		double x = player.getX();
+		double y = player.getY();
+		double z = player.getZ();
 
-		if (!world.isBlockLoaded(new BlockPos(x, y, z)))
+		if (!world.hasChunkAt(new BlockPos(x, y, z)))
 			return;
 
 		if (type == 0) {
 
-			Entity ridding = player.getRidingEntity();
+			Entity ridding = player.getVehicle();
 
 			if (ridding instanceof LanderEntity) {
-				if (!ridding.isOnGround() && !ridding.areEyesInFluid(FluidTags.WATER)) {
+				if (!ridding.isOnGround() && !ridding.isEyeInFluid(FluidTags.WATER)) {
 
-					if (ridding.getMotion().getY() < -0.05) {
-						ridding.setMotion(ridding.getMotion().getX(), ridding.getMotion().getY() * 0.85, ridding.getMotion().getZ());
+					if (ridding.getDeltaMovement().y() < -0.05) {
+						ridding.setDeltaMovement(ridding.getDeltaMovement().x(), ridding.getDeltaMovement().y() * 0.85, ridding.getDeltaMovement().z());
 					}
 
-					if (world instanceof ServerWorld) {
-						for (ServerPlayerEntity p : ((ServerWorld) world).getPlayers()) {
-							((ServerWorld) world).spawnParticle(p, ParticleTypes.SPIT, true, ridding.getPosX(), ridding.getPosY() - 0.3, ridding.getPosZ(), 3, 0.1, 0.1, 0.1, 0.001);
-						}
+					if (world instanceof ServerLevel) {
+						((ServerLevel) world).sendParticles(null, ParticleTypes.SPIT, true, ridding.getX(), ridding.getY() - 0.3, ridding.getZ(), 3, 0.1, 0.1, 0.1, 0.001);
 					}
 
 				}
-				ridding.fallDistance = (float) (ridding.getMotion().getY() * (-1) * 4.5);
+				ridding.fallDistance = (float) (ridding.getDeltaMovement().y() * (-1) * 4.5);
 			}
 		}
 
 		if (type == 1) {
-			if (Methodes.isRocket(player.getRidingEntity())) {
-				if (player.getRidingEntity() instanceof RocketTier1Entity && player.getRidingEntity().getDataManager().get(RocketTier1Entity.FUEL) == 300) {
+			if (Methodes.isRocket(player.getVehicle())) {
+				if (player.getVehicle() instanceof RocketTier1Entity && player.getVehicle().getEntityData().get(RocketTier1Entity.FUEL) == 300) {
 
-					player.getRidingEntity().getDataManager().set(RocketTier1Entity.ROCKET_START, true);
-					Methodes.RocketSounds(player.getRidingEntity(), world);
+					player.getVehicle().getEntityData().set(RocketTier1Entity.ROCKET_START, true);
+					Methodes.RocketSounds(player.getVehicle(), world);
 
-				} else if (player.getRidingEntity() instanceof RocketTier2Entity && player.getRidingEntity().getDataManager().get(RocketTier2Entity.FUEL) == 300) {
+				} else if (player.getVehicle() instanceof RocketTier2Entity && player.getVehicle().getEntityData().get(RocketTier2Entity.FUEL) == 300) {
 
-					player.getRidingEntity().getDataManager().set(RocketTier2Entity.ROCKET_START, true);
-					Methodes.RocketSounds(player.getRidingEntity(), world);
+					player.getVehicle().getEntityData().set(RocketTier2Entity.ROCKET_START, true);
+					Methodes.RocketSounds(player.getVehicle(), world);
 
-				} else if (player.getRidingEntity() instanceof RocketTier3Entity && player.getRidingEntity().getDataManager().get(RocketTier3Entity.FUEL) == 300) {
+				} else if (player.getVehicle() instanceof RocketTier3Entity && player.getVehicle().getEntityData().get(RocketTier3Entity.FUEL) == 300) {
 
-					player.getRidingEntity().getDataManager().set(RocketTier3Entity.ROCKET_START, true);
-					Methodes.RocketSounds(player.getRidingEntity(), world);
+					player.getVehicle().getEntityData().set(RocketTier3Entity.ROCKET_START, true);
+					Methodes.RocketSounds(player.getVehicle(), world);
 
 				} else {
 					Methodes.noFuelMessage(player);
@@ -177,20 +172,20 @@ public class KeyBindings {
 
 		if (type == 2) {
 			//Rocket
-			if (Methodes.isRocket(player.getRidingEntity())) {
-				Methodes.vehicleRotation((LivingEntity) player.getRidingEntity(), -1);
+			if (Methodes.isRocket(player.getVehicle())) {
+				Methodes.vehicleRotation((LivingEntity) player.getVehicle(), -1);
 			}
 
 			//Rover
-			if (player.getRidingEntity() instanceof RoverEntity) {
-				float forward = player.moveForward;
+			if (player.getVehicle() instanceof RoverEntity) {
+				float forward = player.zza;
 
-				if (player.getRidingEntity().getDataManager().get(RoverEntity.FUEL) != 0 && !player.getRidingEntity().areEyesInFluid(FluidTags.WATER)) {
+				if (player.getVehicle().getEntityData().get(RoverEntity.FUEL) != 0 && !player.getVehicle().isEyeInFluid(FluidTags.WATER)) {
 					if (forward >= 0.01) {
-						Methodes.vehicleRotation((LivingEntity) player.getRidingEntity(), -1);
+						Methodes.vehicleRotation((LivingEntity) player.getVehicle(), -1);
 					}
 					if (forward <= -0.01) {
-						Methodes.vehicleRotation((LivingEntity) player.getRidingEntity(), 1);
+						Methodes.vehicleRotation((LivingEntity) player.getVehicle(), 1);
 					}
 				}
 			}
@@ -199,20 +194,20 @@ public class KeyBindings {
 
 		if (type == 3) {
 			//Rocket
-			if (Methodes.isRocket(player.getRidingEntity())) {
-				Methodes.vehicleRotation((LivingEntity) player.getRidingEntity(), 1);
+			if (Methodes.isRocket(player.getVehicle())) {
+				Methodes.vehicleRotation((LivingEntity) player.getVehicle(), 1);
 			}
 
 			//Rover
-			if (player.getRidingEntity() instanceof RoverEntity) {
-				float forward = player.moveForward;
+			if (player.getVehicle() instanceof RoverEntity) {
+				float forward = player.zza;
 
-				if (player.getRidingEntity().getDataManager().get(RoverEntity.FUEL) != 0 && !player.getRidingEntity().areEyesInFluid(FluidTags.WATER)) {
+				if (player.getVehicle().getEntityData().get(RoverEntity.FUEL) != 0 && !player.getVehicle().isEyeInFluid(FluidTags.WATER)) {
 					if (forward >= 0.01) {
-						Methodes.vehicleRotation((LivingEntity) player.getRidingEntity(), 1);
+						Methodes.vehicleRotation((LivingEntity) player.getVehicle(), 1);
 					}
 					if (forward <= -0.01) {
-						Methodes.vehicleRotation((LivingEntity) player.getRidingEntity(), -1);
+						Methodes.vehicleRotation((LivingEntity) player.getVehicle(), -1);
 					}
 				}
 			}

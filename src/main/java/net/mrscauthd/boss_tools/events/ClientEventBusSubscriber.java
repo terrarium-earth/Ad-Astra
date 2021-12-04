@@ -52,9 +52,11 @@ import org.lwjgl.glfw.GLFW;
 
 import KeyBinding;
 
+import javax.swing.text.JTextComponent;
+
 @Mod.EventBusSubscriber(modid = BossToolsMod.ModId, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEventBusSubscriber {
-	public static KeyBinding key1;
+	public static JTextComponent.KeyBinding key1;
 	@SubscribeEvent
 	public static void onClientSetup(FMLClientSetupEvent event) {
 		RenderingRegistry.registerEntityRenderingHandler(ModInnet.ALIEN.get(), ((IRenderFactory) AlienRenderer::new));

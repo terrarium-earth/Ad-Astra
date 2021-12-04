@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ModSpawnEggs extends SpawnEggItem {
-    //In 1.17.1 is it Replaced with the ForgeSpawnEgg
+    //Todo In 1.18 is it Replaced with the ForgeSpawnEgg
     protected static final List<ModSpawnEggs> UNADDED_EGGS = new ArrayList<>();
     private final Lazy<? extends EntityType<?>> entityTypeSupplier;
 

@@ -1,5 +1,6 @@
 package net.mrscauthd.boss_tools.jei;
 
+/*
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
@@ -96,9 +97,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+*/
 
-@mezz.jei.api.JeiPlugin
-public class JeiPlugin implements IModPlugin {
+//@mezz.jei.api.JeiPlugin
+public class JeiPlugin/* implements IModPlugin*/ {
+	/*
 	public static IJeiHelpers jeiHelper;
 
 	private Map<Fluid, List<ItemStack>> fluidFullItemStacks;
@@ -1292,4 +1295,6 @@ public class JeiPlugin implements IModPlugin {
 			fluidStacks.set(0, iIngredients.getInputs(VanillaTypes.FLUID).get(0));
 		}
 	}
+
+	 */
 }

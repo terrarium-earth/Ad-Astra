@@ -1,5 +1,6 @@
 package net.mrscauthd.boss_tools.jei.jeiguihandlers;
 
+/*
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -18,13 +19,13 @@ import net.mrscauthd.boss_tools.gui.screens.blastfurnace.BlastFurnaceGuiWindow;
 import net.mrscauthd.boss_tools.gauge.GaugeTextHelper;
 import net.mrscauthd.boss_tools.gui.helper.GuiHelper;
 import net.mrscauthd.boss_tools.jei.JeiPlugin.BlastingFurnaceJeiCategory;
-
-public class BlastFurnaceGuiContainerHandler implements IGuiContainerHandler<BlastFurnaceGuiWindow> {
+*/
+public class BlastFurnaceGuiContainerHandler/* implements IGuiContainerHandler<BlastFurnaceGuiWindow>*/ {
 
 	public BlastFurnaceGuiContainerHandler() {
 
 	}
-
+/*
 	@Override
 	public Collection<IGuiClickableArea> getGuiClickableAreas(BlastFurnaceGuiWindow containerScreen, double mouseX, double mouseY) {
 		return Collections.singleton(new IGuiClickableArea() {
@@ -48,5 +49,7 @@ public class BlastFurnaceGuiContainerHandler implements IGuiContainerHandler<Bla
 		});
 
 	}
+
+ */
 
 }
