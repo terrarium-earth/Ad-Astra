@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "package": "net.mrscauthd.boss_tools.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "MixinItemGravity"
+  ],
+  "client": [
+    "ArmorTranslucent",
+    "SetupLivingBipedAnim",
+    "RenderHandItem"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "boss_tools.mixin-refmap.json"
+}

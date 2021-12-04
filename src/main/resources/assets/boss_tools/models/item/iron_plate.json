@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "boss_tools:items/iron_plate"
+  }
+}

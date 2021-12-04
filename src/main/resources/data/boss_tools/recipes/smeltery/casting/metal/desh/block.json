@@ -1,0 +1,20 @@
+{
+  "type": "tconstruct:casting_basin",
+  "conditions": [
+    {
+      "value": {
+        "tag": "forge:storage_blocks/desh",
+        "type": "forge:tag_empty"
+      },
+      "type": "forge:not"
+    }
+  ],
+  "fluid": {
+    "name": "boss_tools:molten_desh",
+    "amount": 1296
+  },
+  "result": {
+    "tag": "forge:storage_blocks/desh"
+  },
+  "cooling_time": 150
+}

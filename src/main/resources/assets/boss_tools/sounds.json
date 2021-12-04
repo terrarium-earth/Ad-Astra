@@ -1,0 +1,11 @@
+{
+  "rocket_fly": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "boss_tools:rocket_fly",
+        "stream": false
+      }
+    ]
+  }
+}

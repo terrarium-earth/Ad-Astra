@@ -1,0 +1,42 @@
+{
+  "group": "boss_tools",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "012",
+    "345",
+    "678"
+  ],
+  "key": {
+    "0": {
+      "item": "boss_tools:steel_ingot"
+    },
+    "1": {
+      "item": "boss_tools:steel_ingot"
+    },
+    "2": {
+      "item": "boss_tools:steel_ingot"
+    },
+    "3": {
+      "item": "boss_tools:steel_ingot"
+    },
+    "4": {
+      "item": "boss_tools:steel_ingot"
+    },
+    "5": {
+      "item": "boss_tools:steel_ingot"
+    },
+    "6": {
+      "item": "boss_tools:steel_ingot"
+    },
+    "7": {
+      "item": "boss_tools:steel_ingot"
+    },
+    "8": {
+      "item": "boss_tools:steel_ingot"
+    }
+  },
+  "result": {
+    "item": "boss_tools:steel_block",
+    "count": 1
+  }
+}

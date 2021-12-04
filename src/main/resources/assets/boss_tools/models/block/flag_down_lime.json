@@ -1,0 +1,9 @@
+{
+  "parent": "boss_tools:custom/flage_down",
+  "textures": {
+    "all": "boss_tools:blocks/flag_lime",
+    "particle": "boss_tools:blocks/flag_lime",
+    "0": "boss_tools:blocks/flag_lime",
+    "missing": "boss_tools:blocks/flag_lime"
+  }
+}

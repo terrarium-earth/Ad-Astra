@@ -1,0 +1,42 @@
+{
+  "group": "boss_tools",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "012",
+    "345",
+    "678"
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:brick"
+    },
+    "1": {
+      "item": "minecraft:bricks"
+    },
+    "2": {
+      "item": "minecraft:brick"
+    },
+    "3": {
+      "item": "minecraft:bricks"
+    },
+    "4": {
+      "item": "minecraft:furnace"
+    },
+    "5": {
+      "item": "minecraft:bricks"
+    },
+    "6": {
+      "item": "minecraft:brick"
+    },
+    "7": {
+      "item": "minecraft:bricks"
+    },
+    "8": {
+      "item": "minecraft:brick"
+    }
+  },
+  "result": {
+    "item": "boss_tools:blast_furnace",
+    "count": 1
+  }
+}

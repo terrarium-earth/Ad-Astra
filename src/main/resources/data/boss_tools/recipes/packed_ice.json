@@ -1,0 +1,26 @@
+{
+  "group": "boss_tools",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "01",
+    "23"
+  ],
+  "key": {
+    "0": {
+      "item": "boss_tools:ice_shard"
+    },
+    "1": {
+      "item": "boss_tools:ice_shard"
+    },
+    "2": {
+      "item": "boss_tools:ice_shard"
+    },
+    "3": {
+      "item": "boss_tools:ice_shard"
+    }
+  },
+  "result": {
+    "item": "minecraft:packed_ice",
+    "count": 1
+  }
+}

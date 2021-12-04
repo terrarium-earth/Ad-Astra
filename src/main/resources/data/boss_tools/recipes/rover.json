@@ -1,0 +1,39 @@
+{
+  "group": "boss_tools",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "0 2",
+    "345",
+    "678"
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:lapis_lazuli"
+    },
+    "2": {
+      "item": "minecraft:chest"
+    },
+    "3": {
+      "tag": "forge:plates/iron"
+    },
+    "4": {
+      "item": "minecraft:furnace"
+    },
+    "5": {
+      "item": "minecraft:bucket"
+    },
+    "6": {
+      "item": "boss_tools:wheel"
+    },
+    "7": {
+      "tag": "forge:ingots/steel"
+    },
+    "8": {
+      "item": "boss_tools:wheel"
+    }
+  },
+  "result": {
+    "item": "boss_tools:rover",
+    "count": 1
+  }
+}

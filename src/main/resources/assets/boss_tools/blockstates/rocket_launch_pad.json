@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "boss_tools:block/rocket_launch_pad"
+    },
+    "lit=true": {
+      "model": "boss_tools:block/rocket_launch_pad_base"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+   "type":"boss_tools:generating",
+	"conditions": [
+    {
+		"value": {
+			"tag": "forge:coal_coke",
+			"type": "forge:tag_empty"
+		},
+		"type": "forge:not"
+    }
+  ],
+   "input":{
+      "ingredient":{
+         "tag":"forge:coal_coke"
+      }
+   },
+   "burnTime":800
+}

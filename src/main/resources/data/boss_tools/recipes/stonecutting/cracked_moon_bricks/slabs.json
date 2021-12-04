@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "boss_tools:cracked_moon_bricks"
+  },
+  "result": "boss_tools:cracked_moon_brick_slab",
+  "count": 2
+}

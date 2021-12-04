@@ -1,0 +1,9 @@
+{
+  "parent": "boss_tools:custom/flage_up",
+  "textures": {
+    "all": "boss_tools:blocks/flag_purple",
+    "particle": "boss_tools:blocks/flag_purple",
+    "0": "boss_tools:blocks/flag_purple",
+    "missing": "boss_tools:blocks/flag_purple"
+  }
+}

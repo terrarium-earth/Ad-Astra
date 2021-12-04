@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "boss_tools:compresseds/desh"
+  },
+  "result": {
+    "fluid": "boss_tools:molten_desh",
+    "amount": 144
+  },
+  "temperature": 500,
+  "time": 50
+}

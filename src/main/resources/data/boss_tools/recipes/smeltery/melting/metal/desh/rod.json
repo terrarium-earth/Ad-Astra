@@ -1,0 +1,21 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "value": {
+        "tag": "forge:rods/desh",
+        "type": "forge:tag_empty"
+      },
+      "type": "forge:not"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:rods/desh"
+  },
+  "result": {
+    "fluid": "boss_tools:molten_desh",
+    "amount": 72
+  },
+  "temperature": 500,
+  "time": 10
+}

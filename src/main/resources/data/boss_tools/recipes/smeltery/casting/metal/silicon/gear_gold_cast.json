@@ -1,0 +1,23 @@
+{
+  "type": "tconstruct:casting_table",
+  "conditions": [
+    {
+      "value": {
+        "tag": "forge:gears/silicon",
+        "type": "forge:tag_empty"
+      },
+      "type": "forge:not"
+    }
+  ],
+  "cast": {
+    "tag": "tconstruct:casts/multi_use/gear"
+  },
+  "fluid": {
+    "tag": "boss_tools:molten_silicon",
+    "amount": 576
+  },
+  "result": {
+    "tag": "forge:gears/silicon"
+  },
+  "cooling_time": 100
+}

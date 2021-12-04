@@ -1,0 +1,23 @@
+{
+  "type": "tconstruct:casting_table",
+  "conditions": [
+    {
+      "value": {
+        "tag": "forge:coins/silicon",
+        "type": "forge:tag_empty"
+      },
+      "type": "forge:not"
+    }
+  ],
+  "cast": {
+    "tag": "tconstruct:casts/multi_use/coin"
+  },
+  "fluid": {
+    "tag": "boss_tools:molten_silicon",
+    "amount": 48
+  },
+  "result": {
+    "tag": "forge:coins/silicon"
+  },
+  "cooling_time": 29
+}

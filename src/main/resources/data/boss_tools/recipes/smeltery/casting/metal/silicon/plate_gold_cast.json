@@ -1,0 +1,23 @@
+{
+  "type": "tconstruct:casting_table",
+  "conditions": [
+    {
+      "value": {
+        "tag": "forge:plates/silicon",
+        "type": "forge:tag_empty"
+      },
+      "type": "forge:not"
+    }
+  ],
+  "cast": {
+    "tag": "tconstruct:casts/multi_use/plate"
+  },
+  "fluid": {
+    "tag": "boss_tools:molten_silicon",
+    "amount": 144
+  },
+  "result": {
+    "tag": "forge:plates/silicon"
+  },
+  "cooling_time": 50
+}

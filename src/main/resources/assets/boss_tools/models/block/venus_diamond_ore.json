@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "boss_tools:blocks/venus_diamond_ore",
+    "up": "boss_tools:blocks/venus_diamond_ore",
+    "north": "boss_tools:blocks/venus_diamond_ore",
+    "east": "boss_tools:blocks/venus_diamond_ore",
+    "south": "boss_tools:blocks/venus_diamond_ore",
+    "west": "boss_tools:blocks/venus_diamond_ore",
+    "particle": "boss_tools:blocks/venus_diamond_ore"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "group": "boss_tools",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "012",
+    "3 5",
+    "678"
+  ],
+  "key": {
+    "0": {
+      "tag": "forge:ingots/silicon"
+    },
+    "1": {
+      "tag": "forge:ingots/steel"
+    },
+    "2": {
+      "tag": "forge:ingots/silicon"
+    },
+    "3": {
+      "tag": "forge:ingots/steel"
+    },
+    "5": {
+      "tag": "forge:ingots/steel"
+    },
+    "6": {
+      "tag": "forge:ingots/silicon"
+    },
+    "7": {
+      "tag": "forge:ingots/steel"
+    },
+    "8": {
+      "tag": "forge:ingots/silicon"
+    }
+  },
+  "result": {
+    "item": "boss_tools:diamond_tank",
+    "count": 1
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "boss_tools:steel_block",
+    "boss_tools:desh_block",
+    "boss_tools:silicon_block"
+  ]
+}

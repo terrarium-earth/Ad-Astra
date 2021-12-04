@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "boss_tools:block/coal_lantern"
+    },
+    "hanging=true": {
+      "model": "boss_tools:block/coal_lantern_hanging"
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north,half=lower": {
+      "model": "boss_tools:block/flag_down_green"
+    },
+    "facing=east,half=lower": {
+      "model": "boss_tools:block/flag_down_green",
+      "y": 90
+    },
+    "facing=south,half=lower": {
+      "model": "boss_tools:block/flag_down_green",
+      "y": 180
+    },
+    "facing=west,half=lower": {
+      "model": "boss_tools:block/flag_down_green",
+      "y": 270
+    },
+    "facing=north,half=upper": {
+      "model": "boss_tools:block/flag_up_green"
+    },
+    "facing=east,half=upper": {
+      "model": "boss_tools:block/flag_up_green",
+      "y": 90
+    },
+    "facing=south,half=upper": {
+      "model": "boss_tools:block/flag_up_green",
+      "y": 180
+    },
+    "facing=west,half=upper": {
+      "model": "boss_tools:block/flag_up_green",
+      "y": 270
+    }
+  }
+}

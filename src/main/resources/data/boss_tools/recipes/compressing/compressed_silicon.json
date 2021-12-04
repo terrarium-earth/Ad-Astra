@@ -1,0 +1,13 @@
+{
+   "type":"boss_tools:compressing",
+   "input":{
+      "ingredient":{
+         "tag":"forge:ingots/silicon"
+      }
+   },
+   "output":{
+      "item":"boss_tools:compressed_silicon",
+      "count":1
+   },
+   "cookTime":200
+}

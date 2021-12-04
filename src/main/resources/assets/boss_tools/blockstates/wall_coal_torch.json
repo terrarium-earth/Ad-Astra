@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "boss_tools:block/wall_coal_torch"
+    },
+    "facing=north": {
+      "model": "boss_tools:block/wall_coal_torch",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "boss_tools:block/wall_coal_torch",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "boss_tools:block/wall_coal_torch",
+      "y": 180
+    }
+  }
+}

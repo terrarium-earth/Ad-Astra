@@ -1,0 +1,42 @@
+{
+  "group": "boss_tools",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "012",
+    "345",
+    "678"
+  ],
+  "key": {
+    "0": {
+      "tag": "boss_tools:compresseds/steel"
+    },
+    "1": {
+      "item": "minecraft:crafting_table"
+    },
+    "2": {
+      "tag": "boss_tools:compresseds/steel"
+    },
+    "3": {
+      "item": "minecraft:lever"
+    },
+    "4": {
+      "tag": "forge:ingots/steel"
+    },
+    "5": {
+      "item": "minecraft:lever"
+    },
+    "6": {
+      "tag": "boss_tools:compresseds/steel"
+    },
+    "7": {
+      "item": "minecraft:redstone_torch"
+    },
+    "8": {
+      "tag": "boss_tools:compresseds/steel"
+    }
+  },
+  "result": {
+    "item": "boss_tools:nasa_workbench",
+    "count": 1
+  }
+}

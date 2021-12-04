@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:plates/desh",
+    "#forge:plates/iron"
+  ]
+}

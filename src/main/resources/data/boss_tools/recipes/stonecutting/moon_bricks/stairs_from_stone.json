@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "boss_tools:moon_stone"
+  },
+  "result": "boss_tools:moon_brick_stairs",
+  "count": 1
+}

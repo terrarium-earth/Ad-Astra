@@ -1,0 +1,21 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "value": {
+        "tag": "forge:dusts/silicon",
+        "type": "forge:tag_empty"
+      },
+      "type": "forge:not"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:dusts/silicon"
+  },
+  "result": {
+    "fluid": "boss_tools:molten_silicon",
+    "amount": 144
+  },
+  "temperature": 500,
+  "time": 37
+}

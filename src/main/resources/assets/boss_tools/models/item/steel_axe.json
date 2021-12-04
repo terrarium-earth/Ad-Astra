@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "boss_tools:items/steel_axe"
+  }
+}

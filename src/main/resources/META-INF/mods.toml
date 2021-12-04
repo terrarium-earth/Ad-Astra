@@ -1,0 +1,35 @@
+modLoader="javafml"
+loaderVersion="[36,)"
+license="Not specified"
+
+[[mods]]
+modId="boss_tools"
+version="5.5"
+displayName="Space-BossTools"
+displayURL="https://www.curseforge.com/minecraft/mc-mods/space-bosstools"
+logoFile="logo.png"
+authors="MrScautHD"
+description='''
+Fly to Other Planets and Beyond!
+'''
+
+[[dependencies.boss_tools]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.5]"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.boss_tools]]
+    modId="forge"
+    mandatory=true
+    versionRange="[36.2.0,]"
+    ordering="NONE"
+    side="BOTH"
+    
+[[dependencies.boss_tools]]
+    modId="tconstruct"
+    mandatory=false
+    versionRange="[0.5.0,)"
+    ordering="NONE"
+    side="BOTH"

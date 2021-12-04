@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "boss_tools:block/blue_iron_plating_block",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "boss_tools:block/blue_iron_plating_block"
+    },
+    "axis=z": {
+      "model": "boss_tools:block/blue_iron_plating_block",
+      "x": 90
+    }
+  }
+}

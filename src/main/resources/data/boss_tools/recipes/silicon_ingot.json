@@ -1,0 +1,16 @@
+{
+  "group": "boss_tools",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "0"
+  ],
+  "key": {
+    "0": {
+      "item": "boss_tools:silicon_block"
+    }
+  },
+  "result": {
+    "item": "boss_tools:silicon_ingot",
+    "count": 9
+  }
+}

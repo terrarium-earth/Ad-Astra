@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#boss_tools:compresseds/steel",
+    "#boss_tools:compresseds/desh",
+    "#boss_tools:compresseds/silicon"
+  ]
+}

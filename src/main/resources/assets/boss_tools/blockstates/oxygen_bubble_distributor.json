@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north,lit=false": {
+      "model": "boss_tools:block/oxygen_bubble_distributor"
+    },
+    "facing=east,lit=false": {
+      "model": "boss_tools:block/oxygen_bubble_distributor",
+      "y": 90
+    },
+    "facing=south,lit=false": {
+      "model": "boss_tools:block/oxygen_bubble_distributor",
+      "y": 180
+    },
+    "facing=west,lit=false": {
+      "model": "boss_tools:block/oxygen_bubble_distributor",
+      "y": 270
+    },
+    "facing=north,lit=true": {
+      "model": "boss_tools:block/oxygen_bubble_distributor_ac"
+    },
+    "facing=east,lit=true": {
+      "model": "boss_tools:block/oxygen_bubble_distributor_ac",
+      "y": 90
+    },
+    "facing=south,lit=true": {
+      "model": "boss_tools:block/oxygen_bubble_distributor_ac",
+      "y": 180
+    },
+    "facing=west,lit=true": {
+      "model": "boss_tools:block/oxygen_bubble_distributor_ac",
+      "y": 270
+    }
+  }
+}

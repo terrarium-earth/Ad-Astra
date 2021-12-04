@@ -1,0 +1,8 @@
+{
+  "parent": "block/inner_stairs",
+  "textures": {
+    "bottom": "boss_tools:blocks/cracked_moon_bricks",
+    "top": "boss_tools:blocks/cracked_moon_bricks",
+    "side": "boss_tools:blocks/cracked_moon_bricks"
+  }
+}

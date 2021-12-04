@@ -1,0 +1,9 @@
+{
+  "parent": "boss_tools:custom/flage",
+  "textures": {
+    "all": "boss_tools:blocks/flag_light_blue",
+    "particle": "boss_tools:blocks/flag_light_blue",
+    "0": "boss_tools:blocks/flag_light_blue",
+    "missing": "boss_tools:blocks/flag_light_blue"
+  }
+}

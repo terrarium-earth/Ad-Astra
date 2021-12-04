@@ -1,0 +1,7 @@
+newmtl m_0
+Ka 0.0 0.0 0.0
+Kd 0.8 0.8 0.8
+Ks 0.0 0.0 0.0
+map_Kd boss_tools:vehicle_items/rocket_t3
+Ns 0.0
+d 1.0
