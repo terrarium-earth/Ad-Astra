@@ -1,21 +1,21 @@
 package net.mrscauthd.boss_tools.gui.helper;
 
+import net.minecraft.world.Container;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+
 import java.util.List;
 import java.util.function.Function;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
-
 public class ContainerHelper {
-	public static void addInventorySlots(Container container, PlayerInventory inv, int left, int top, Function<Slot, Slot> addSlot) {
+	public static void addInventorySlots(AbstractContainerMenu container, Inventory inv, int left, int top, Function<Slot, Slot> addSlot) {
 		addInventorySlots(container, inv, left, top, top + 58, addSlot);
 	}
 
-	public static void addInventorySlots(Container container, PlayerInventory inv, int left, int top, int hotbarY, Function<Slot, Slot> addSlot) {
+	public static void addInventorySlots(AbstractContainerMenu container, Inventory inv, int left, int top, int hotbarY, Function<Slot, Slot> addSlot) {
 		int rows = 3;
 		int cols = 9;
 		int offsetX = 18;
@@ -32,18 +32,18 @@ public class ContainerHelper {
 		}
 	}
 
-	public static ItemStack transferStackInSlot(Container container, PlayerEntity player, int slotNumber, int containerIndex, IInventory inventory, IMergeItemStack mergeItemStack) {
-		int containerSize = inventory.getSizeInventory();
+	public static ItemStack transferStackInSlot(AbstractContainerMenu container, Player player, int slotNumber, int containerIndex, Container inventory, IMergeItemStack mergeItemStack) {
+		int containerSize = inventory.getContainerSize();
 		return transferStackInSlot(container, player, slotNumber, containerIndex, containerSize, mergeItemStack);
 	}
 
-	public static ItemStack transferStackInSlot(Container container, PlayerEntity player, int slotNumber, int containerIndex, int containerSize, IMergeItemStack mergeItemStack) {
+	public static ItemStack transferStackInSlot(AbstractContainerMenu container, Player player, int slotNumber, int containerIndex, int containerSize, IMergeItemStack mergeItemStack) {
 		ItemStack itemStack = ItemStack.EMPTY;
-		List<Slot> inventorySlots = container.inventorySlots;
+		List<Slot> inventorySlots = container.slots;
 		Slot slot = inventorySlots.get(slotNumber);
 
-		if (slot != null && slot.getHasStack()) {
-			ItemStack slotStack = slot.getStack();
+		if (slot != null && slot.hasItem()) {
+			ItemStack slotStack = slot.getItem();
 			itemStack = slotStack.copy();
 
 			int playerInventoryStartIndex = containerIndex + containerSize;
@@ -61,16 +61,16 @@ public class ContainerHelper {
 			}
 
 			if (slotStack.isEmpty()) {
-				slot.putStack(ItemStack.EMPTY);
+				slot.set(ItemStack.EMPTY);
 			} else {
-				slot.onSlotChanged();
+				slot.setChanged();
 			}
 		}
 
 		return itemStack;
 	}
 
-	public static ItemStack transferStackInSlot(Container container, PlayerEntity player, int slotNumber, IInventory inventory, IMergeItemStack mergeItemStack) {
+	public static ItemStack transferStackInSlot(AbstractContainerMenu container, Player player, int slotNumber, Container inventory, IMergeItemStack mergeItemStack) {
 		return transferStackInSlot(container, player, slotNumber, 0, inventory, mergeItemStack);
 	}
 

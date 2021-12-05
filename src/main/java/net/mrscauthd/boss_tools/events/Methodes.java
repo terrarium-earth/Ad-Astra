@@ -380,7 +380,7 @@ public class Methodes {
         }
     }
 
-    public static void teleportButton (Player player, ResourceLocation planet, Boolean SpaceStation) {
+    public static void teleportButton(Player player, ResourceLocation planet, Boolean SpaceStation) {
         ItemStack itemStack = new ItemStack(Items.AIR, 1);
 
         if (player.getPersistentData().getString(BossToolsMod.ModId + ":rocket_type").equals("entity." + BossToolsMod.ModId + ".rocket_t1")) {

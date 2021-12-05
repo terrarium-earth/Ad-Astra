@@ -18,6 +18,7 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.server.ServerWorld;
 import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.ModInnet;

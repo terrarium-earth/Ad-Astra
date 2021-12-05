@@ -1,21 +1,14 @@
 package net.mrscauthd.boss_tools.gui.screens.planetselection;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.gen.feature.template.PlacementSettings;
-import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.fml.network.IContainerFactory;
-import net.minecraftforge.fml.network.NetworkEvent;
-import net.mrscauthd.boss_tools.BossToolsMod;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.Items;
+import net.minecraftforge.network.IContainerFactory;
+import net.minecraftforge.network.NetworkEvent;
 import net.mrscauthd.boss_tools.ModInnet;
 import net.mrscauthd.boss_tools.events.Methodes;
 
@@ -24,24 +17,23 @@ import java.util.function.Supplier;
 public class PlanetSelectionGui {
 
 	public static class GuiContainerFactory implements IContainerFactory<GuiContainer> {
-		public GuiContainer create(int id, PlayerInventory inv, PacketBuffer extraData) {
+		public GuiContainer create(int id, Inventory inv, FriendlyByteBuf extraData) {
 			return new GuiContainer(id, inv, extraData);
 		}
 	}
 
-	public static class GuiContainer extends Container {
+	public static class GuiContainer extends AbstractContainerMenu {
 		String rocket;
 
 		public GuiContainer(int id, Inventory inv, FriendlyByteBuf extraData) {
 			super(ModInnet.PLANET_SELECTION_GUI.get(), id);
 
-			this.rocket = extraData.readString();
+			this.rocket = extraData.readUtf();
 		}
 
-
 		@Override
-		public boolean canInteractWith(PlayerEntity player) {
-			return !player.removed;
+		public boolean stillValid(Player player) {
+			return !player.isRemoved();
 		}
 	}
 
@@ -56,7 +48,7 @@ public class PlanetSelectionGui {
 			this.setInteger(integer);
 		}
 
-		public NetworkMessage(PacketBuffer buffer) {
+		public NetworkMessage(FriendlyByteBuf buffer) {
 			this.setInteger(buffer.readInt());
 		}
 
@@ -68,11 +60,11 @@ public class PlanetSelectionGui {
 			this.integer = integer;
 		}
 
-		public static NetworkMessage decode(PacketBuffer buffer) {
+		public static NetworkMessage decode(FriendlyByteBuf buffer) {
 			return new NetworkMessage(buffer);
 		}
 
-		public static void encode(NetworkMessage message, PacketBuffer buffer) {
+		public static void encode(NetworkMessage message, FriendlyByteBuf buffer) {
 			buffer.writeInt(message.getInteger());
 		}
 
@@ -154,15 +146,15 @@ public class PlanetSelectionGui {
 		}
 	}
 
-	public static void defaultOptions(PlayerEntity player) {
+	public static void defaultOptions(ServerPlayer player) {
 		player.setNoGravity(false);
-		player.closeScreen();
+		player.closeContainer();
 	}
 
-	public static void deleteItems(PlayerEntity player) {
-		player.inventory.func_234564_a_(p -> Items.DIAMOND == p.getItem(), 6, player.inventory);
-		player.inventory.func_234564_a_(p -> ModInnet.IRON_PLATE.get() == p.getItem(), 12, player.inventory);
-		player.inventory.func_234564_a_(p -> ModInnet.STEEL_INGOT.get() == p.getItem(), 16, player.inventory);
-		player.inventory.func_234564_a_(p -> ModInnet.DESH_PLATE.get() == p.getItem(), 4, player.inventory);
+	public static void deleteItems(Player player) {
+		player.getInventory().clearOrCountMatchingItems(p -> Items.DIAMOND == p.getItem(), 6, player.getInventory());
+		player.getInventory().clearOrCountMatchingItems(p -> ModInnet.IRON_PLATE.get() == p.getItem(), 12, player.getInventory());
+		player.getInventory().clearOrCountMatchingItems(p -> ModInnet.STEEL_INGOT.get() == p.getItem(), 16, player.getInventory());
+		player.getInventory().clearOrCountMatchingItems(p -> ModInnet.DESH_PLATE.get() == p.getItem(), 4, player.getInventory());
 	}
 }

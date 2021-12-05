@@ -22,6 +22,7 @@ import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootContext;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
@@ -54,6 +55,7 @@ import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fml.network.NetworkEvent;
 import net.minecraftforge.fml.network.NetworkEvent.Context;
 import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.network.NetworkEvent;
 import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.ModInnet;
 import net.mrscauthd.boss_tools.capability.IOxygenStorage;
@@ -380,7 +382,7 @@ public class OxygenBubbleDistributorBlock {
 			this.setDirection(direction);
 		}
 
-		public ChangeRangeMessage(PacketBuffer buffer) {
+		public ChangeRangeMessage(FriendlyByteBuf buffer) {
 			this.setBlockPos(buffer.readBlockPos());
 			this.setDirection(buffer.readBoolean());
 		}
@@ -401,18 +403,18 @@ public class OxygenBubbleDistributorBlock {
 			this.direction = direction;
 		}
 
-		public static ChangeRangeMessage decode(PacketBuffer buffer) {
+		public static ChangeRangeMessage decode(FriendlyByteBuf buffer) {
 			return new ChangeRangeMessage(buffer);
 		}
 
-		public static void encode(ChangeRangeMessage message, PacketBuffer buffer) {
+		public static void encode(ChangeRangeMessage message, FriendlyByteBuf buffer) {
 			buffer.writeBlockPos(message.getBlockPos());
 			buffer.writeBoolean(message.getDirection());
 		}
 
 		public static void handle(ChangeRangeMessage message, Supplier<NetworkEvent.Context> contextSupplier) {
-			Context context = contextSupplier.get();
-			CustomTileEntity tileEntity = (CustomTileEntity) context.getSender().getServerWorld().getTileEntity(message.getBlockPos());
+			NetworkEvent.Context context = contextSupplier.get();
+			CustomTileEntity tileEntity = (CustomTileEntity) context.getSender().level.getBlockEntity(message.getBlockPos());
 			int prev = tileEntity.getRange();
 			int next = prev + (message.getDirection() ? +1 : -1);
 			tileEntity.setRange(next);
@@ -433,7 +435,7 @@ public class OxygenBubbleDistributorBlock {
 			this.setVisible(visible);
 		}
 
-		public ChangeWorkingAreaVisibleMessage(PacketBuffer buffer) {
+		public ChangeWorkingAreaVisibleMessage(FriendlyByteBuf buffer) {
 			this.setBlockPos(buffer.readBlockPos());
 			this.setVisible(buffer.readBoolean());
 		}
@@ -454,18 +456,18 @@ public class OxygenBubbleDistributorBlock {
 			this.visible = visible;
 		}
 
-		public static ChangeWorkingAreaVisibleMessage decode(PacketBuffer buffer) {
+		public static ChangeWorkingAreaVisibleMessage decode(FriendlyByteBuf buffer) {
 			return new ChangeWorkingAreaVisibleMessage(buffer);
 		}
 
-		public static void encode(ChangeWorkingAreaVisibleMessage message, PacketBuffer buffer) {
+		public static void encode(ChangeWorkingAreaVisibleMessage message, FriendlyByteBuf buffer) {
 			buffer.writeBlockPos(message.getBlockPos());
 			buffer.writeBoolean(message.isVisible());
 		}
 
 		public static void handle(ChangeWorkingAreaVisibleMessage message, Supplier<NetworkEvent.Context> contextSupplier) {
-			Context context = contextSupplier.get();
-			CustomTileEntity tileEntity = (CustomTileEntity) context.getSender().getServerWorld().getTileEntity(message.getBlockPos());
+			NetworkEvent.Context context = contextSupplier.get();
+			CustomTileEntity tileEntity = (CustomTileEntity) context.getSender().level.getBlockEntity(message.getBlockPos());
 			tileEntity.setWorkingAreaVisible(message.isVisible());
 			context.setPacketHandled(true);
 		}

@@ -11,33 +11,24 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.PathfinderMob;
-import net.minecraft.world.entity.ai.attributes.DefaultAttributes;
 import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.common.ForgeSpawnEggItem;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
-import net.minecraftforge.event.world.BiomeLoadingEvent;
-import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.*;
 import net.mrscauthd.boss_tools.armor.SpaceSuit;
 import net.mrscauthd.boss_tools.block.*;
-import net.mrscauthd.boss_tools.capability.CapabilityOxygen;
 import net.mrscauthd.boss_tools.crafting.BlastingRecipeSerializer;
 import net.mrscauthd.boss_tools.crafting.BossToolsRecipeTypes;
 import net.mrscauthd.boss_tools.crafting.CompressingRecipeSerializer;
@@ -49,7 +40,6 @@ import net.mrscauthd.boss_tools.crafting.WorkbenchingRecipeSerializer;
 import net.mrscauthd.boss_tools.crafting.RocketPart;
 import net.mrscauthd.boss_tools.effects.OxygenEffect;
 import net.mrscauthd.boss_tools.entity.*;
-import net.mrscauthd.boss_tools.feature.DesertSurfaceBuilder;
 import net.mrscauthd.boss_tools.flag.FlagTileEntity;
 import net.mrscauthd.boss_tools.fluid.OilFluid;
 import net.mrscauthd.boss_tools.gui.screens.blastfurnace.BlastFurnaceGui;
@@ -73,25 +63,13 @@ import net.mrscauthd.boss_tools.entity.pygro.PygroEntity;
 import net.mrscauthd.boss_tools.flag.*;
 import net.mrscauthd.boss_tools.fluid.FuelFluid;
 import net.mrscauthd.boss_tools.armor.NetheriteSpaceSuit;
-import net.mrscauthd.boss_tools.world.biomes.BiomeRegistry;
-import net.mrscauthd.boss_tools.events.Config;
-import net.mrscauthd.boss_tools.feature.MarsIceSpikeFeature;
-import net.mrscauthd.boss_tools.feature.VenusDeltas;
 import net.mrscauthd.boss_tools.entity.alien.AlienEntity;
 
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.mrscauthd.boss_tools.itemgroup.BossToolsItemGroups;
 import net.mrscauthd.boss_tools.entity.pygro.PygroMobsSensor;
 
-import net.mrscauthd.boss_tools.world.structure.configuration.STConfiguredStructures;
-import net.mrscauthd.boss_tools.world.structure.configuration.STStructures;
-import net.mrscauthd.boss_tools.world.structure.configuration.STStructures2;
-import org.apache.logging.log4j.core.appender.db.jdbc.ColumnConfig;
-
-import java.lang.reflect.Method;
-import java.util.HashMap;
 import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(modid = BossToolsMod.ModId, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -118,10 +96,10 @@ public class ModInnet {
     public static DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, BossToolsMod.ModId);
 
     //Vehicle Items
-    public static final RegistryObject<Item> TIER_1_ROCKET_ITEM = ITEMS.register("rocket_t1", () -> new Tier1RocketItem(new Item.Properties().tab(BossToolsItemGroups.tab_normal).maxStackSize(1)));
-    public static final RegistryObject<Item> TIER_2_ROCKET_ITEM = ITEMS.register("rocket_t2", () -> new Tier2RocketItem(new Item.Properties().tab(BossToolsItemGroups.tab_normal).maxStackSize(1)));
-    public static final RegistryObject<Item> TIER_3_ROCKET_ITEM = ITEMS.register("rocket_t3", () -> new Tier3RocketItem(new Item.Properties().tab(BossToolsItemGroups.tab_normal).maxStackSize(1)));
-    public static final RegistryObject<Item> ROVER_ITEM = ITEMS.register("rover", () -> new RoverItem(new Item.Properties().tab(BossToolsItemGroups.tab_normal).maxStackSize(1)));
+    public static final RegistryObject<Item> TIER_1_ROCKET_ITEM = ITEMS.register("rocket_t1", () -> new Tier1RocketItem(new Item.Properties().tab(BossToolsItemGroups.tab_normal).stacksTo(1)));
+    public static final RegistryObject<Item> TIER_2_ROCKET_ITEM = ITEMS.register("rocket_t2", () -> new Tier2RocketItem(new Item.Properties().tab(BossToolsItemGroups.tab_normal).stacksTo(1)));
+    public static final RegistryObject<Item> TIER_3_ROCKET_ITEM = ITEMS.register("rocket_t3", () -> new Tier3RocketItem(new Item.Properties().tab(BossToolsItemGroups.tab_normal).stacksTo(1)));
+    public static final RegistryObject<Item> ROVER_ITEM = ITEMS.register("rover", () -> new RoverItem(new Item.Properties().tab(BossToolsItemGroups.tab_normal).stacksTo(1)));
 
     //Entitys
     public static RegistryObject<EntityType<?>> ALIEN = ENTITYS.register("alien", () -> EntityType.Builder.of(AlienEntity::new, MobCategory.CREATURE).sized(0.75f, 2.5f).build(new ResourceLocation("boss_tools", "alien").toString()));
@@ -616,6 +594,7 @@ public class ModInnet {
         event.enqueueWork(() -> {
 
             BossToolsRecipeTypes.init();
+
             /*
             ICE_SPIKE = registerFeature("mars_ice_spike", ModInnet.MARS_ICE_SPIKE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242731_b(2));
             //Venus Deltas

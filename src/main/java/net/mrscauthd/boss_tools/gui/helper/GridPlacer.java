@@ -1,8 +1,6 @@
 package net.mrscauthd.boss_tools.gui.helper;
 
-import net.minecraft.client.renderer.Rectangle2d;
-
-import Rectangle2d;
+import net.minecraft.client.renderer.Rect2i;
 
 public class GridPlacer {
 
@@ -16,22 +14,22 @@ public class GridPlacer {
 		this.setOffset(2);
 	}
 
-	public Rectangle2d placeRight(int index, int left, int top, int rows) {
+	public Rect2i placeRight(int index, int left, int top, int rows) {
 		int xi = index / rows;
 		int yi = index % rows;
 		int cellWidth = this.getCellWidth();
 		int cellHeight = this.getCellHeight();
 		int offset = this.getOffset();
-		return new Rectangle2d(left + xi * (cellWidth + offset), top + yi * (cellHeight + offset), cellWidth, cellHeight);
+		return new Rect2i(left + xi * (cellWidth + offset), top + yi * (cellHeight + offset), cellWidth, cellHeight);
 	}
 
-	public Rectangle2d placeBottom(int index, int left, int top, int columns) {
+	public Rect2i placeBottom(int index, int left, int top, int columns) {
 		int xi = index % columns;
 		int yi = index / columns;
 		int cellWidth = this.getCellWidth();
 		int cellHeight = this.getCellHeight();
 		int offset = this.getOffset();
-		return new Rectangle2d(left + xi * (cellWidth + offset), top + yi * (cellHeight + offset), cellWidth, cellHeight);
+		return new Rect2i(left + xi * (cellWidth + offset), top + yi * (cellHeight + offset), cellWidth, cellHeight);
 	}
 
 	public int getCellWidth() {

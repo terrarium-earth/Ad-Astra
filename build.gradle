@@ -9,7 +9,7 @@ buildscript {
         classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
     }
 }
-/*
+
 repositories {
   maven {
     name = "Progwml6 maven"
@@ -20,12 +20,13 @@ repositories {
     url = "https://modmaven.k-4u.nl/"
   }
 }
+
 repositories {
     maven {
         url = "https://www.cursemaven.com"
     }
 }
-*/
+
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'org.spongepowered.mixin'
@@ -78,18 +79,20 @@ dependencies {
     if (System.getProperty("idea.sync.active") != "true") {
         annotationProcessor 'org.spongepowered:mixin:0.8.2:processor'
     }
+
+    //JEI
+    compileOnly fg.deobf("mezz.jei:jei-1.18:9.0.0.40:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-1.18:9.0.0.40")
+
+    //The One Probe
+    compileOnly fg.deobf("curse.maven:the-one-probe-245211:3550084")
+    runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:3550084")
+
 /*
-  //JEI
-  compileOnly fg.deobf("mezz.jei:jei-1.16.5:7.7.1.137:api")
-  runtimeOnly fg.deobf("mezz.jei:jei-1.16.5:7.7.1.137")
-  
   //TConstruct
   compile fg.deobf("curse.maven:mantle-74924:3439180")
   compile fg.deobf("curse.maven:tinkers-construct-74072:3439200")
-  
-  //The One Probe
-  compile fg.deobf("curse.maven:the-one-probe-245211:3319255")
-  
+
   //Hwyla
   compile fg.deobf("curse.maven:hwyla-253449:3033593")
   
