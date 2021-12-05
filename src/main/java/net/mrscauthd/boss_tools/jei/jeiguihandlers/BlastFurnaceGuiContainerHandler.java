@@ -21,11 +21,11 @@ import net.mrscauthd.boss_tools.gui.helper.GuiHelper;
 import net.mrscauthd.boss_tools.jei.JeiPlugin.BlastingFurnaceJeiCategory;
 */
 public class BlastFurnaceGuiContainerHandler/* implements IGuiContainerHandler<BlastFurnaceGuiWindow>*/ {
-
+/*
 	public BlastFurnaceGuiContainerHandler() {
 
 	}
-/*
+
 	@Override
 	public Collection<IGuiClickableArea> getGuiClickableAreas(BlastFurnaceGuiWindow containerScreen, double mouseX, double mouseY) {
 		return Collections.singleton(new IGuiClickableArea() {

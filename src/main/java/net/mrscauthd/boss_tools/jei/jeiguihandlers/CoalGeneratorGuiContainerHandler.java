@@ -21,11 +21,10 @@ import net.mrscauthd.boss_tools.gui.helper.GuiHelper;
 import net.mrscauthd.boss_tools.jei.JeiPlugin.CoalGeneratorJeiCategory;*/
 
 public class CoalGeneratorGuiContainerHandler /* implements IGuiContainerHandler<CoalGeneratorGuiWindow>*/ {
-
+	/*
 	public CoalGeneratorGuiContainerHandler() {
 
 	}
-/*
 	@Override
 	public Collection<IGuiClickableArea> getGuiClickableAreas(CoalGeneratorGuiWindow containerScreen, double mouseX, double mouseY) {
 		return Collections.singleton(new IGuiClickableArea() {

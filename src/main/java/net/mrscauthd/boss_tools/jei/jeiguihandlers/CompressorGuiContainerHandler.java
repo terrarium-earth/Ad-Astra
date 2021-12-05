@@ -21,11 +21,11 @@ import net.mrscauthd.boss_tools.jei.JeiPlugin.CompressorJeiCategory;
 
 */
 public class CompressorGuiContainerHandler/* implements IGuiContainerHandler<CompressorGuiWindow>*/ {
-
+/*
 	public CompressorGuiContainerHandler() {
 
 	}
-	/*
+
 
 	@Override
 	public Collection<IGuiClickableArea> getGuiClickableAreas(CompressorGuiWindow containerScreen, double mouseX, double mouseY) {
