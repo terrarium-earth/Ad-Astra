@@ -1,12 +1,31 @@
 package net.mrscauthd.boss_tools.entity;
 
-import net.minecraft.entity.*;
-import net.minecraft.util.*;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.EntityEvent;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 import net.minecraftforge.items.IItemHandlerModifiable;
-import net.mrscauthd.boss_tools.events.Events;
+import net.minecraftforge.network.NetworkHooks;
 import net.mrscauthd.boss_tools.gui.screens.lander.LanderGui;
 
 import net.minecraftforge.items.wrapper.EntityHandsInvWrapper;
@@ -14,75 +33,50 @@ import net.minecraftforge.items.wrapper.EntityArmorInvWrapper;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.api.distmarker.Dist;
-
-import net.minecraft.world.World;
-import net.minecraft.world.Explosion;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.network.IPacket;
-import net.minecraft.nbt.INBT;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.item.ItemStack;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.client.settings.PointOfView;
-import net.minecraft.client.Minecraft;
 
 import javax.annotation.Nullable;
 import javax.annotation.Nonnull;
 
 import io.netty.buffer.Unpooled;
 
-import java.awt.*;
+public class LanderEntity extends PathfinderMob {
 
-public class LanderEntity extends CreatureEntity {
-
-	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-		return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 20);
-	}
-
-	public LanderEntity(EntityType<LanderEntity> type, World world) {
+	public LanderEntity(EntityType<LanderEntity> type, Level world) {
 		super(type, world);
 	}
 
+	public static AttributeSupplier.Builder setCustomAttributes() {
+		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 20);
+	}
+
 	@Override
-	public IPacket<?> createSpawnPacket() {
+	public Packet<?> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 
 	@Override
-	public boolean canBeLeashedTo(PlayerEntity player) {
-		return false;
-	}
-
-	public boolean canBePushed() {
+	public boolean canBeLeashed(Player p_21418_) {
 		return false;
 	}
 
 	@Override
-	public boolean func_241845_aY() {
+	public boolean isPushable() {
+		return false;
+	}
+
+	@Override
+	public boolean canBeCollidedWith() {
 		return true;
 	}
 
 	@Override
-	protected void collideWithEntity(Entity p_82167_1_) {
+	protected void doPush(Entity p_20971_) {
 	}
 
 	@Override
-	public void applyEntityCollision(Entity entityIn) {
+	public void push(Entity p_21294_) {
 	}
 
 	@Deprecated
@@ -90,12 +84,8 @@ public class LanderEntity extends CreatureEntity {
 		return true;
 	}
 
-	public boolean canBeHitWithPotion() {
-		return false;
-	}
-
 	@Override
-	protected boolean canTriggerWalking() {
+	public boolean isAffectedByPotions() {
 		return false;
 	}
 
@@ -105,17 +95,17 @@ public class LanderEntity extends CreatureEntity {
 	}
 
 	@Override
-	public CreatureAttribute getCreatureAttribute() {
-		return CreatureAttribute.UNDEFINED;
+	public MobType getMobType() {
+		return MobType.UNDEFINED;
 	}
 
 	@Override
-	public boolean canDespawn(double distanceToClosestPlayer) {
+	public boolean removeWhenFarAway(double p_21542_) {
 		return false;
 	}
 
 	@Override
-	public SoundEvent getHurtSound(DamageSource ds) {
+	protected SoundEvent getHurtSound(DamageSource p_21239_) {
 		return null;
 	}
 
@@ -125,47 +115,47 @@ public class LanderEntity extends CreatureEntity {
 	}
 
 	@Override
-	public double getMountedYOffset() {
-		return super.getMountedYOffset() - 0.25;
+	public double getPassengersRidingOffset() {
+		return super.getPassengersRidingOffset() - 0.25;
 	}
 
 	@Override
-	public void onKillCommand() {
-		dropInventory();
-		this.remove();
+	public void kill() {
+		dropEquipment();
+		this.remove(RemovalReason.DISCARDED);
 	}
 
 	@Override
-	public AxisAlignedBB getRenderBoundingBox() {
-		return new AxisAlignedBB(this.getPosX(),this.getPosY(),this.getPosZ(),this.getPosX(),this.getPosY(), this.getPosZ()).grow(3,3,3);
+	public AABB getBoundingBoxForCulling() {
+		return new AABB(this.getX(),this.getY(),this.getZ(),this.getX(),this.getY(), this.getZ()).inflate(3,3,3);
 	}
 
 	@Override
-	public boolean attackEntityFrom(DamageSource source, float amount) {
-		if (source.getDamageType().equals("fall")) {
-			if (!this.world.isRemote) {
-				this.world.createExplosion(null, this.getPosX(), this.getPosY(), this.getPosZ(), 10, Explosion.Mode.BREAK);
+	public boolean hurt(DamageSource source, float amount) {
+		if (source.getMsgId().equals("fall")) {
+			if (!this.level.isClientSide) {
+				this.level.explode(null, this.getX(), this.getY(), this.getZ(), 10, Explosion.BlockInteraction.BREAK);
 			}
-			dropInventory();
-			this.remove();
+			dropEquipment();
+			this.remove(RemovalReason.DISCARDED);
 			return true;
 		}
 
-		if (!source.isProjectile() && source.getTrueSource() != null && source.getTrueSource().isSneaking() && !this.isBeingRidden()) {
-			dropInventory();
-			this.remove();
+		if (!source.isProjectile() && source.getEntity() != null && source.getEntity().isCrouching() && !this.isVehicle()) {
+			dropEquipment();
+			this.remove(RemovalReason.DISCARDED);
 		}
 
 		return false;
 	}
 
 	@Override
-	protected void dropInventory() {
-		super.dropInventory();
+	protected void dropEquipment() {
+		super.dropEquipment();
 		for (int i = 0; i < inventory.getSlots(); ++i) {
 			ItemStack itemstack = inventory.getStackInSlot(i);
 			if (!itemstack.isEmpty() && !EnchantmentHelper.hasVanishingCurse(itemstack)) {
-				this.entityDropItem(itemstack);
+				this.spawnAtLocation(itemstack);
 			}
 		}
 	}
@@ -192,47 +182,47 @@ public class LanderEntity extends CreatureEntity {
 	}
 
 	@Override
-	public void writeAdditional(CompoundNBT compound) {
-		super.writeAdditional(compound);
+	public void addAdditionalSaveData(CompoundTag compound) {
+		super.addAdditionalSaveData(compound);
 		compound.put("InventoryCustom", inventory.serializeNBT());
 	}
 
 	@Override
-	public void readAdditional(CompoundNBT compound) {
-		super.readAdditional(compound);
-		INBT inventoryCustom = compound.get("InventoryCustom");
-		if (inventoryCustom instanceof CompoundNBT) {
-			inventory.deserializeNBT((CompoundNBT) inventoryCustom);
+	public void readAdditionalSaveData(CompoundTag compound) {
+		super.readAdditionalSaveData(compound);
+		Tag inventoryCustom = compound.get("InventoryCustom");
+		if (inventoryCustom instanceof CompoundTag) {
+			inventory.deserializeNBT((CompoundTag) inventoryCustom);
 		}
 	}
 
 	@Override
-	public ActionResultType func_230254_b_(PlayerEntity sourceentity, Hand hand) {
-		super.func_230254_b_(sourceentity, hand);
-		ActionResultType retval = ActionResultType.func_233537_a_(this.world.isRemote());
+	protected InteractionResult mobInteract(Player player, InteractionHand hand) {
+		return super.mobInteract(player, hand);
+		InteractionResult retval = InteractionResult.sidedSuccess(this.level.isClientSide);
 
-		if (sourceentity instanceof ServerPlayerEntity && sourceentity.isSneaking()) {
+		if (player instanceof ServerPlayer && player.isCrouching()) {
 
-			NetworkHooks.openGui((ServerPlayerEntity) sourceentity, new INamedContainerProvider() {
+			NetworkHooks.openGui((ServerPlayer) player, new MenuProvider() {
 				@Override
-				public ITextComponent getDisplayName() {
-					return new StringTextComponent("Lander");
+				public Component getDisplayName() {
+					return new TextComponent("Lander");
 				}
 
 				@Override
-				public Container createMenu(int id, PlayerInventory inventory, PlayerEntity player) {
-					PacketBuffer packetBuffer = new PacketBuffer(Unpooled.buffer());
-					packetBuffer.writeVarInt(LanderEntity.this.getEntityId());
+				public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
+					FriendlyByteBuf packetBuffer = new FriendlyByteBuf(Unpooled.buffer());
+					packetBuffer.writeVarInt(LanderEntity.this.getId());
 					return new LanderGui.GuiContainer(id, inventory, packetBuffer);
 				}
 			}, buf -> {
-				buf.writeVarInt(this.getEntityId());
+				buf.writeVarInt(this.getId());
 			});
 
 			return retval;
 		}
 
-		sourceentity.startRiding(this);
+		player.startRiding(this);
 		return retval;
 	}
 
