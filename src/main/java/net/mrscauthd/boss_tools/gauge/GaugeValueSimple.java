@@ -3,14 +3,11 @@ package net.mrscauthd.boss_tools.gauge;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.ITextComponent.Serializer;
-import net.minecraft.util.text.TranslationTextComponent;
-
-import ITextComponent;
-import ResourceLocation;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Component.Serializer;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
 
 public class GaugeValueSimple implements IGaugeValue {
 
@@ -19,12 +16,12 @@ public class GaugeValueSimple implements IGaugeValue {
 	private ResourceLocation name;
 	private int amount;
 	private int capacity;
-	private ITextComponent displayeName;
+	private Component displayeName;
 	private String unit;
 	private int color;
 	private boolean reverse;
 
-	private ITextComponent displayNameCache;
+	private Component displayNameCache;
 
 	public GaugeValueSimple() {
 		this(null);
@@ -38,15 +35,15 @@ public class GaugeValueSimple implements IGaugeValue {
 		this(name, amount, capacity, null);
 	}
 
-	public GaugeValueSimple(@Nonnull ResourceLocation name, int amount, int capacity, @Nullable ITextComponent displayeName) {
+	public GaugeValueSimple(@Nonnull ResourceLocation name, int amount, int capacity, @Nullable Component displayeName) {
 		this(name, amount, capacity, displayeName, "");
 	}
 
-	public GaugeValueSimple(@Nonnull ResourceLocation name, int amount, int capacity, @Nullable ITextComponent displayeName, @Nonnull String unit) {
+	public GaugeValueSimple(@Nonnull ResourceLocation name, int amount, int capacity, @Nullable Component displayeName, @Nonnull String unit) {
 		this(name, amount, capacity, displayeName, unit, FALLBACK_COLOR);
 	}
 
-	public GaugeValueSimple(@Nonnull ResourceLocation name, int amount, int capacity, @Nullable ITextComponent displayeName, @Nonnull String unit, int color) {
+	public GaugeValueSimple(@Nonnull ResourceLocation name, int amount, int capacity, @Nullable Component displayeName, @Nonnull String unit, int color) {
 		this.name = name;
 		this.amount = amount;
 		this.capacity = capacity;
@@ -56,8 +53,8 @@ public class GaugeValueSimple implements IGaugeValue {
 	}
 
 	@Override
-	public CompoundNBT serializeNBT() {
-		CompoundNBT compound = new CompoundNBT();
+	public CompoundTag serializeNBT() {
+		CompoundTag compound = new CompoundTag();
 		compound.putString("name", this.getName().toString());
 		compound.putInt("amount", this.getAmount());
 		compound.putInt("capacity", this.getCapacity());
@@ -74,13 +71,13 @@ public class GaugeValueSimple implements IGaugeValue {
 	}
 
 	@Override
-	public void deserializeNBT(CompoundNBT compound) {
+	public void deserializeNBT(CompoundTag compound) {
 		this.name(new ResourceLocation(compound.getString("name")));
 		this.amount(compound.getInt("amount"));
 		this.capacity(compound.getInt("capacity"));
 
 		if (compound.contains("displayName")) {
-			this.displayeName(Serializer.getComponentFromJson(compound.getString("displayName")));
+			this.displayeName(Serializer.fromJson(compound.getString("displayName")));
 		}
 
 		this.unit(compound.getString("unit"));
@@ -99,9 +96,9 @@ public class GaugeValueSimple implements IGaugeValue {
 
 	@Override
 	@Nullable
-	public ITextComponent getDisplayName() {
+	public Component getDisplayName() {
 		if (this.displayeName != null) {
-			return this.displayeName.copyRaw();
+			return this.displayeName;
 		} else if (this.displayNameCache == null) {
 			this.displayNameCache = this.createDefaultTextComponent();
 		}
@@ -109,11 +106,11 @@ public class GaugeValueSimple implements IGaugeValue {
 		return this.displayNameCache;
 	}
 
-	protected TranslationTextComponent createDefaultTextComponent() {
-		return new TranslationTextComponent(GaugeValueHelper.makeTranslationKey(this.getName()));
+	protected Component createDefaultTextComponent() {
+		return new TranslatableComponent(GaugeValueHelper.makeTranslationKey(this.getName()));
 	}
 
-	public GaugeValueSimple displayeName(@Nullable ITextComponent displayeName) {
+	public GaugeValueSimple displayeName(@Nullable Component displayeName) {
 		this.displayeName = displayeName;
 		return this;
 	}
