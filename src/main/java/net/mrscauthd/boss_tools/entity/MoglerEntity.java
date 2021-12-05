@@ -1,55 +1,56 @@
 package net.mrscauthd.boss_tools.entity;
 
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.fml.network.NetworkHooks;
-
-import net.minecraft.world.World;
-import net.minecraft.network.IPacket;
-import net.minecraft.entity.monster.HoglinEntity;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobType;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.hoglin.Hoglin;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.network.NetworkHooks;
 import net.mrscauthd.boss_tools.ModInnet;
 
 import javax.annotation.Nullable;
 
-public class MoglerEntity extends HoglinEntity {
-    public MoglerEntity(EntityType<MoglerEntity> type, World world) {
+public class MoglerEntity extends Hoglin {
+    public MoglerEntity(EntityType<MoglerEntity> type, Level world) {
         super(type, world);
     }
 
-    public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-        return MobEntity.func_233666_p_()
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.3)
-                .createMutableAttribute(Attributes.MAX_HEALTH, 40)
-                .createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 0.6)
-                .createMutableAttribute(Attributes.ATTACK_KNOCKBACK, 0.6)
-                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 6);
+    public static AttributeSupplier.Builder setCustomAttributes() {
+        return Mob.createMobAttributes()
+                .add(Attributes.MOVEMENT_SPEED, 0.3)
+                .add(Attributes.MAX_HEALTH, 40)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.6)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.6)
+                .add(Attributes.ATTACK_DAMAGE, 6);
     }
 
     @Override
-    public IPacket<?> createSpawnPacket() {
+    public Packet<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
     @Override
-    public CreatureAttribute getCreatureAttribute() {
-        return CreatureAttribute.UNDEAD;
+    public MobType getMobType() {
+        return MobType.UNDEAD;
     }
 
     @Override
-    public boolean canDespawn(double distanceToClosestPlayer) {
+    public boolean removeWhenFarAway(double p_21542_) {
         return false;
     }
 
     @Nullable
     @Override
-    public AgeableEntity func_241840_a(ServerWorld p_241840_1_, AgeableEntity p_241840_2_) {
-        MoglerEntity moglerentity = (MoglerEntity) ModInnet.MOGLER.get().create(p_241840_1_);
+    public AgeableMob getBreedOffspring(ServerLevel p_149900_, AgeableMob p_149901_) {
+        MoglerEntity moglerentity = (MoglerEntity) ModInnet.MOGLER.get().create(p_149900_);
         if (moglerentity != null) {
-            moglerentity.enablePersistence();
+            moglerentity.setPersistenceRequired();
         }
-
         return moglerentity;
     }
 }
