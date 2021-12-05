@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.RecipeManager;
-import net.minecraft.world.World;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
 
-public class BossToolsRecipeType<T extends BossToolsRecipe> implements IRecipeType<T> {
+public class BossToolsRecipeType<T extends BossToolsRecipe> implements RecipeType<T> {
 	private final String name;
 	private List<T> cached;
 
@@ -21,19 +21,19 @@ public class BossToolsRecipeType<T extends BossToolsRecipe> implements IRecipeTy
 		return this.name;
 	}
 
-	public Stream<T> filter(World world, Predicate<T> filter) {
-		return this.getRecipes(world).stream().filter(filter);
+	public Stream<T> filter(Level level, Predicate<T> filter) {
+		return this.getRecipes(level).stream().filter(filter);
 	}
 
-	public T findFirst(World world, Predicate<T> filter) {
-		return this.filter(world, filter).findFirst().orElse(null);
+	public T findFirst(Level level, Predicate<T> filter) {
+		return this.filter(level, filter).findFirst().orElse(null);
 	}
 
-	public List<T> getRecipes(World world) {
+	public List<T> getRecipes(Level level) {
 		this.cached = null;
 		if (this.cached == null) {
-			RecipeManager recipeManager = world.getRecipeManager();
-			this.cached = recipeManager.getRecipesForType(this);
+			RecipeManager recipeManager = level.getRecipeManager();
+			this.cached = recipeManager.getAllRecipesFor(this);
 		}
 
 		return this.cached;

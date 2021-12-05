@@ -2,14 +2,14 @@ package net.mrscauthd.boss_tools.crafting;
 
 import com.google.gson.JsonObject;
 
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.level.Level;
 
-public abstract class BossToolsRecipe implements IRecipe<IInventory> {
+public abstract class BossToolsRecipe implements Recipe<Container> {
 
 	private final ResourceLocation id;
 
@@ -17,7 +17,7 @@ public abstract class BossToolsRecipe implements IRecipe<IInventory> {
 		this.id = id;
 	}
 
-	public BossToolsRecipe(ResourceLocation id, PacketBuffer buffer) {
+	public BossToolsRecipe(ResourceLocation id, FriendlyByteBuf buffer) {
 		this.id = id;
 	}
 
@@ -25,7 +25,7 @@ public abstract class BossToolsRecipe implements IRecipe<IInventory> {
 		this.id = id;
 	}
 
-	public void write(PacketBuffer buffer) {
+	public void write(FriendlyByteBuf buffer) {
 
 	}
 
@@ -44,7 +44,7 @@ public abstract class BossToolsRecipe implements IRecipe<IInventory> {
 	 */
 	@Override
 	@Deprecated
-	public ItemStack getCraftingResult(IInventory var1) {
+	public ItemStack assemble(Container var1) {
 		// Don't use this
 		return ItemStack.EMPTY;
 	}
@@ -54,7 +54,7 @@ public abstract class BossToolsRecipe implements IRecipe<IInventory> {
 	 */
 	@Override
 	@Deprecated
-	public ItemStack getRecipeOutput() {
+	public ItemStack getResultItem() {
 		// Don't use this
 		return ItemStack.EMPTY;
 	}
@@ -64,7 +64,7 @@ public abstract class BossToolsRecipe implements IRecipe<IInventory> {
 	 */
 	@Override
 	@Deprecated
-	public boolean matches(IInventory var1, World var2) {
+	public boolean matches(Container p_44002_, Level p_44003_) {
 		// Don't use this
 		return true;
 	}

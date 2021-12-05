@@ -4,16 +4,13 @@ import java.util.function.Predicate;
 
 import com.google.gson.JsonObject;
 
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
+import net.minecraft.core.NonNullList;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.crafting.CraftingHelper;
-import net.mrscauthd.boss_tools.machines.tile.ItemStackToItemStackTileEntity;
 
 public abstract class ItemStackToItemStackRecipe extends BossToolsRecipe implements Predicate<ItemStack> {
 	private final Ingredient ingredient;
@@ -22,16 +19,16 @@ public abstract class ItemStackToItemStackRecipe extends BossToolsRecipe impleme
 
 	public ItemStackToItemStackRecipe(ResourceLocation id, JsonObject json) {
 		super(id, json);
-		JsonObject inputJson = JSONUtils.getJsonObject(json, "input");
-		this.ingredient = Ingredient.deserialize(JSONUtils.getJsonObject(inputJson, "ingredient"));
-		this.output = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "output"), true);
-		this.cookTime = JSONUtils.getInt(json, "cookTime");
+		JsonObject inputJson = GsonHelper.getAsJsonObject(json, "input");
+		this.ingredient = Ingredient.fromJson(GsonHelper.getAsJsonObject(inputJson, "ingredient"));
+		this.output = CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(json, "output"), true);
+		this.cookTime = GsonHelper.getAsInt(json, "cookTime");
 	}
 
-	public ItemStackToItemStackRecipe(ResourceLocation id, PacketBuffer buffer) {
+	public ItemStackToItemStackRecipe(ResourceLocation id, FriendlyByteBuf buffer) {
 		super(id, buffer);
-		this.ingredient = Ingredient.read(buffer);
-		this.output = buffer.readItemStack();
+		this.ingredient = Ingredient.fromNetwork(buffer);
+		this.output = buffer.readItem();
 		this.cookTime = buffer.readInt();
 	}
 
@@ -42,9 +39,9 @@ public abstract class ItemStackToItemStackRecipe extends BossToolsRecipe impleme
 		this.cookTime = cookTime;
 	}
 
-	public void write(PacketBuffer buffer) {
-		this.getIngredient().write(buffer);
-		buffer.writeItemStack(this.getOutput());
+	public void write(FriendlyByteBuf buffer) {
+		this.getIngredient().toNetwork(buffer);
+		buffer.writeItem(this.getOutput());
 		buffer.writeInt(this.getCookTime());
 	}
 
@@ -54,7 +51,7 @@ public abstract class ItemStackToItemStackRecipe extends BossToolsRecipe impleme
 	}
 
 	@Override
-	public boolean canFit(int var1, int var2) {
+	public boolean canCraftInDimensions(int var1, int var2) {
 		return true;
 	}
 	

@@ -4,11 +4,11 @@ import java.util.function.Predicate;
 
 import com.google.gson.JsonObject;
 
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.fluids.FluidStack;
 import net.mrscauthd.boss_tools.ModInnet;
 
@@ -19,11 +19,11 @@ public class FuelRefiningRecipe extends BossToolsRecipe implements Predicate<Flu
 	public FuelRefiningRecipe(ResourceLocation id, JsonObject json) {
 		super(id, json);
 
-		this.input = FluidIngredient.deserialize(JSONUtils.getJsonObject(json, "input"));
-		this.output = FluidIngredient.deserialize(JSONUtils.getJsonObject(json, "output"));
+		this.input = FluidIngredient.deserialize(GsonHelper.getAsJsonObject(json, "input"));
+		this.output = FluidIngredient.deserialize(GsonHelper.getAsJsonObject(json, "output"));
 	}
 
-	public FuelRefiningRecipe(ResourceLocation id, PacketBuffer buffer) {
+	public FuelRefiningRecipe(ResourceLocation id, FriendlyByteBuf buffer) {
 		super(id, buffer);
 
 		this.input = FluidIngredient.read(buffer);
@@ -38,7 +38,7 @@ public class FuelRefiningRecipe extends BossToolsRecipe implements Predicate<Flu
 	}
 	
 	@Override
-	public void write(PacketBuffer buffer) {
+	public void write(FriendlyByteBuf buffer) {
 		super.write(buffer);
 
 		this.input.write(buffer);
@@ -51,7 +51,7 @@ public class FuelRefiningRecipe extends BossToolsRecipe implements Predicate<Flu
 	}
 	
 	@Override
-	public boolean canFit(int var1, int var2) {
+	public boolean canCraftInDimensions(int var1, int var2) {
 		return false;
 	}
 
@@ -64,12 +64,12 @@ public class FuelRefiningRecipe extends BossToolsRecipe implements Predicate<Flu
 	}
 
 	@Override
-	public IRecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<?> getSerializer() {
 		return ModInnet.RECIPE_SERIALIZER_FUELREFINING.get();
 	}
 
 	@Override
-	public IRecipeType<?> getType() {
+	public RecipeType<?> getType() {
 		return BossToolsRecipeTypes.FUELREFINING;
 	}
 
