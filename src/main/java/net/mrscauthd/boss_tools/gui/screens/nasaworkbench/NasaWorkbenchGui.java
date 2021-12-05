@@ -1,14 +1,14 @@
 package net.mrscauthd.boss_tools.gui.screens.nasaworkbench;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.CraftResultInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.network.IContainerFactory;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ResultContainer;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.network.IContainerFactory;
 import net.mrscauthd.boss_tools.ModInnet;
 import net.mrscauthd.boss_tools.crafting.WorkbenchingRecipe;
 import net.mrscauthd.boss_tools.gui.helper.ContainerHelper;
@@ -20,35 +20,35 @@ import net.mrscauthd.boss_tools.machines.NASAWorkbenchBlock.CustomTileEntity;
 public class NasaWorkbenchGui {
 
 	public static class GuiContainerFactory implements IContainerFactory<GuiContainer> {
-		public GuiContainer create(int id, PlayerInventory inv, PacketBuffer extraData) {
+		public GuiContainer create(int id, Inventory inv, FriendlyByteBuf extraData) {
 			BlockPos pos = extraData.readBlockPos();
-			CustomTileEntity tileEntity = (CustomTileEntity) inv.player.world.getTileEntity(pos);
+			CustomTileEntity tileEntity = (CustomTileEntity) inv.player.level.getBlockEntity(pos);
 			return new GuiContainer(id, inv, tileEntity);
 		}
 	}
 
-	public static class GuiContainer extends Container {
+	public static class GuiContainer extends AbstractContainerMenu {
 		private CustomTileEntity tileEntity;
-		private CraftResultInventory resultInventory;
+		private ResultContainer resultInventory;
 		private Slot resultSlot;
 		private int partSlotStart = 0;
 		private int partSlotEnd = 0;
 
-		public GuiContainer(int id, PlayerInventory inv, CustomTileEntity tileEntity) {
+		public GuiContainer(int id, Inventory inv, CustomTileEntity tileEntity) {
 			super(ModInnet.NASA_WORKBENCH_GUI.get(), id);
 			this.tileEntity = tileEntity;
 
-			this.resultInventory = new CraftResultInventory() {
+			this.resultInventory = new ResultContainer() {
 				@Override
-				public ItemStack decrStackSize(int p_70298_1_, int p_70298_2_) {
-					ItemStack stack = super.decrStackSize(p_70298_1_, p_70298_2_);
+				public ItemStack removeItem(int p_40149_, int p_40150_) {
+					ItemStack stack = super.removeItem(p_40149_, p_40150_);
 					GuiContainer.this.onExtractResult(stack);
 					return stack;
 				}
 
 				@Override
-				public ItemStack removeStackFromSlot(int p_70304_1_) {
-					ItemStack stack = super.removeStackFromSlot(p_70304_1_);
+				public ItemStack removeItemNoUpdate(int p_40160_) {
+					ItemStack stack = super.removeItemNoUpdate(p_40160_);
 					GuiContainer.this.onExtractResult(stack);
 					return stack;
 				}
@@ -56,7 +56,7 @@ public class NasaWorkbenchGui {
 
 			this.resultSlot = this.addSlot(new NasaWorkbenchResultSlot(this.resultInventory, 0, 133, 74, tileEntity));
 
-			this.partSlotStart = this.inventorySlots.size();
+			this.partSlotStart = this.slots.size();
 
 			RocketPartsItemHandler partsItemHandler = tileEntity.getPartsItemHandler();
 			GridPlacer placer = new GridPlacer();
@@ -67,7 +67,7 @@ public class NasaWorkbenchGui {
 			RocketPartGridPlacer.placeContainer(67, 90, 1, placer::placeBottom, ModInnet.ROCKET_PART_FIN_RIGHT.get(), partsItemHandler, this::addSlot);
 			RocketPartGridPlacer.placeContainer(40, 108, 1, placer::placeBottom, ModInnet.ROCKET_PART_ENGINE.get(), partsItemHandler, this::addSlot);
 
-			this.partSlotEnd = this.inventorySlots.size();
+			this.partSlotEnd = this.slots.size();
 
 			ContainerHelper.addInventorySlots(this, inv, 8, 142, this::addSlot);
 		}
@@ -81,37 +81,37 @@ public class NasaWorkbenchGui {
 		}
 
 		@Override
-		public void detectAndSendChanges() {
-			super.detectAndSendChanges();
+		public void broadcastChanges() {
+			super.broadcastChanges();
 
 			WorkbenchingRecipe recipe = this.getTileEntity().cacheRecipes();
 
-			this.resultSlot.putStack(recipe != null ? recipe.getOutput() : ItemStack.EMPTY);
+			this.resultSlot.set(recipe != null ? recipe.getOutput() : ItemStack.EMPTY);
 		}
 
 		@Override
-		public boolean canInteractWith(PlayerEntity player) {
+		public boolean stillValid(Player p_38874_) {
 			return !this.getTileEntity().isRemoved();
 		}
 
 		@Override
-		public ItemStack transferStackInSlot(PlayerEntity playerIn, int slotNumber) {
+		public ItemStack quickMoveStack(Player playerIn, int slotNumber) {
 			if (this.partSlotStart <= slotNumber && slotNumber < this.partSlotEnd) {
-				return ContainerHelper.transferStackInSlot(this, playerIn, slotNumber, slotNumber - this.partSlotStart, this.getTileEntity(), this::mergeItemStack);
-			} else if (slotNumber == this.resultSlot.slotNumber) {
+				return ContainerHelper.transferStackInSlot(this, playerIn, slotNumber, slotNumber - this.partSlotStart, this.getTileEntity(), this::moveItemStackTo);
+			} else if (slotNumber == this.resultSlot.index) {
 				Slot slot = this.getSlot(slotNumber);
-				ItemStack prev = slot.getStack().copy();
-				ItemStack itemStack = ContainerHelper.transferStackInSlot(this, playerIn, slotNumber, this.getTileEntity(), this::mergeItemStack);
+				ItemStack prev = slot.getItem().copy();
+				ItemStack itemStack = ContainerHelper.transferStackInSlot(this, playerIn, slotNumber, this.getTileEntity(), this::moveItemStackTo);
 
-				if (slotNumber == this.resultSlot.slotNumber) {
-					ItemStack next = slot.getStack().copy();
+				if (slotNumber == this.resultSlot.index) {
+					ItemStack next = slot.getItem().copy();
 
 					if (!prev.isEmpty()) {
 						int nextSize = next.isEmpty() ? 0 : next.getCount();
 
 						if (nextSize > 0) {
-							playerIn.dropItem(next, false);
-							slot.putStack(ItemStack.EMPTY);
+							playerIn.drop(next, false);
+							slot.set(ItemStack.EMPTY);
 						}
 					}
 					this.onExtractResult(prev);
@@ -119,7 +119,7 @@ public class NasaWorkbenchGui {
 
 				return itemStack;
 			} else {
-				return ContainerHelper.transferStackInSlot(this, playerIn, slotNumber, this.getTileEntity(), this::mergeItemStack);
+				return ContainerHelper.transferStackInSlot(this, playerIn, slotNumber, this.getTileEntity(), this::moveItemStackTo);
 			}
 		}
 
@@ -127,7 +127,7 @@ public class NasaWorkbenchGui {
 			return this.tileEntity;
 		}
 
-		public CraftResultInventory getResultInventory() {
+		public ResultContainer getResultInventory() {
 			return this.resultInventory;
 		}
 

@@ -1,46 +1,45 @@
 package net.mrscauthd.boss_tools.gui.screens.lander;
 
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.*;
-
-import net.minecraftforge.fml.network.IContainerFactory;
-
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.Entity;
+import net.minecraftforge.network.IContainerFactory;
 import net.mrscauthd.boss_tools.ModInnet;
 import net.mrscauthd.boss_tools.entity.LanderEntity;
 import net.mrscauthd.boss_tools.gui.helper.ContainerHelper;
+import org.jetbrains.annotations.NotNull;
 
 public class LanderGui {
 
 	public static class GuiContainerFactory implements IContainerFactory<GuiContainer> {
-		public GuiContainer create(int id, PlayerInventory inv, PacketBuffer extraData) {
+		public GuiContainer create(int id, Inventory inv, FriendlyByteBuf extraData) {
 			return new GuiContainer(id, inv, extraData);
 		}
 	}
 
-	public static class GuiContainer extends Container {
+	public static class GuiContainer extends AbstractContainerMenu {
 		Entity lander;
 
-		public GuiContainer(int id, PlayerInventory inv, PacketBuffer extraData) {
+		public GuiContainer(int id, Inventory inv, FriendlyByteBuf extraData) {
 			super(ModInnet.LANDER_GUI.get(), id);
 
-			this.lander = inv.player.world.getEntityByID(extraData.readVarInt());
+			this.lander = inv.player.level.getEntity(extraData.readVarInt());
 
 			IItemHandlerModifiable itemHandler = ((LanderEntity) lander).getItemHandler();
 			this.addSlot(new SlotItemHandler(itemHandler, 0, 28, 29) {
 				@Override
-				public boolean isItemValid(ItemStack stack) {
+				public boolean mayPlace(@NotNull ItemStack stack) {
 					return false;
 				}
 			});
 
 			this.addSlot(new SlotItemHandler(itemHandler, 1, 78, 29) {
 				@Override
-				public boolean isItemValid(ItemStack stack) {
+				public boolean mayPlace(@NotNull ItemStack stack) {
 					return false;
 				}
 			});
@@ -49,13 +48,13 @@ public class LanderGui {
 		}
 
 		@Override
-		public boolean canInteractWith(PlayerEntity player) {
-			return !lander.removed;
+		public boolean stillValid(Player p_38874_) {
+			return !lander.isRemoved();
 		}
 
 		@Override
-		public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
-			return ContainerHelper.transferStackInSlot(this, playerIn, index, 0, 2, this::mergeItemStack);
+		public ItemStack quickMoveStack(Player playerIn, int index) {
+			return ContainerHelper.transferStackInSlot(this, playerIn, index, 0, 2, this::moveItemStackTo);
 		}
 	}
 }
