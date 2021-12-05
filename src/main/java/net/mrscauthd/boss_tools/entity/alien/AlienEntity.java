@@ -6,164 +6,160 @@ import com.google.common.collect.Sets;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Dynamic;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.brain.Brain;
-import net.minecraft.entity.ai.brain.memory.MemoryModuleStatus;
-import net.minecraft.entity.ai.brain.memory.MemoryModuleType;
-import net.minecraft.entity.ai.brain.schedule.Activity;
-import net.minecraft.entity.ai.brain.schedule.Schedule;
-import net.minecraft.entity.ai.brain.task.*;
-import net.minecraft.entity.ai.goal.AvoidEntityGoal;
-import net.minecraft.entity.effect.LightningBoltEntity;
-import net.minecraft.entity.merchant.IMerchant;
-import net.minecraft.entity.merchant.villager.VillagerData;
-import net.minecraft.entity.merchant.villager.VillagerEntity;
-import net.minecraft.entity.merchant.villager.VillagerProfession;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.villager.VillagerType;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.MerchantOffer;
-import net.minecraft.item.MerchantOffers;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.village.PointOfInterestType;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.IServerWorld;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.Brain;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.behavior.*;
+import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.minecraft.world.entity.ai.memory.MemoryStatus;
+import net.minecraft.world.entity.ai.sensing.Sensor;
+import net.minecraft.world.entity.ai.sensing.SensorType;
+import net.minecraft.world.entity.ai.village.poi.PoiType;
+import net.minecraft.world.entity.npc.*;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.schedule.Activity;
+import net.minecraft.world.entity.schedule.Schedule;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.trading.Merchant;
+import net.minecraft.world.item.trading.MerchantOffer;
+import net.minecraft.world.item.trading.MerchantOffers;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.mrscauthd.boss_tools.ModInnet;
 import net.mrscauthd.boss_tools.entity.AlienZombieEntity;
 import net.mrscauthd.boss_tools.events.Config;
-
-
-import net.minecraft.world.World;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.Random;
 import java.util.Set;
 
-public class AlienEntity extends VillagerEntity implements IMerchant, INPC {
-	public static ImmutableList<Pair<Integer, ? extends Task<? super VillagerEntity>>> core(VillagerProfession profession, float p_220638_1_) {
-		return ImmutableList.of(Pair.of(0, new SwimTask(0.8F)), Pair.of(0, new InteractWithDoorTask()), Pair.of(0, new LookTask(45, 90)), Pair.of(0, new PanicTask()), Pair.of(0, new WakeUpTask()), Pair.of(0, new HideFromRaidOnBellRingTask()), Pair.of(0, new BeginRaidTask()), Pair.of(0, new ExpirePOITask(profession.getPointOfInterest(), MemoryModuleType.JOB_SITE)), Pair.of(0, new ExpirePOITask(profession.getPointOfInterest(), MemoryModuleType.POTENTIAL_JOB_SITE)), Pair.of(1, new WalkToTargetTask()), Pair.of(2, new SwitchVillagerJobTask(profession)), Pair.of(3, new TradeTask(p_220638_1_)), Pair.of(5, new PickupWantedItemTask(p_220638_1_, false, 4)), Pair.of(6, new GatherPOITask(profession.getPointOfInterest(), MemoryModuleType.JOB_SITE, MemoryModuleType.POTENTIAL_JOB_SITE, true, Optional.empty())), Pair.of(7, new FindPotentialJobTask(p_220638_1_)), Pair.of(8, new FindJobTask(p_220638_1_)), Pair.of(10, new GatherPOITask(PointOfInterestType.HOME, MemoryModuleType.HOME, false, Optional.of((byte)14))), Pair.of(10, new GatherPOITask(PointOfInterestType.MEETING, MemoryModuleType.MEETING_POINT, true, Optional.of((byte)14))));
+public class AlienEntity extends Villager implements Merchant, Npc {
+	public static ImmutableList<Pair<Integer, ? extends Behavior>> core(VillagerProfession profession, float p_220638_1_) {
+		return ImmutableList.of(Pair.of(0, new Swim(0.8F)), Pair.of(0, new InteractWithDoor()), Pair.of(0, new LookAtTargetSink(45, 90)), Pair.of(0, new VillagerPanicTrigger()), Pair.of(0, new WakeUp()), Pair.of(0, new ReactToBell()), Pair.of(0, new SetRaidStatus()), Pair.of(0, new ValidateNearbyPoi(profession.getJobPoiType(), MemoryModuleType.JOB_SITE)), Pair.of(0, new ValidateNearbyPoi(profession.getJobPoiType(), MemoryModuleType.POTENTIAL_JOB_SITE)), Pair.of(1, new MoveToTargetSink()), Pair.of(2, new PoiCompetitorScan(profession)), Pair.of(3, new LookAndFollowTradingPlayerSink(p_220638_1_)), Pair.of(5, new GoToWantedItem(p_220638_1_, false, 4)), Pair.of(6, new AcquirePoi(profession.getJobPoiType(), MemoryModuleType.JOB_SITE, MemoryModuleType.POTENTIAL_JOB_SITE, true, Optional.empty())), Pair.of(7, new GoToPotentialJobSite(p_220638_1_)), Pair.of(8, new YieldJobSite(p_220638_1_)), Pair.of(10, new AcquirePoi(PoiType.HOME, MemoryModuleType.HOME, false, Optional.of((byte)14))), Pair.of(10, new AcquirePoi(PoiType.MEETING, MemoryModuleType.MEETING_POINT, true, Optional.of((byte)14))));
 	}
 
-	public static AttributeModifierMap.MutableAttribute setCustomAttributes(){
-		return MobEntity.func_233666_p_()
-				.createMutableAttribute(Attributes.MAX_HEALTH, 20)
-				.createMutableAttribute(Attributes.MOVEMENT_SPEED,0.5D)
-				.createMutableAttribute(Attributes.FOLLOW_RANGE, 48.0D);
+	private static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(MemoryModuleType.HOME, MemoryModuleType.JOB_SITE, MemoryModuleType.POTENTIAL_JOB_SITE, MemoryModuleType.MEETING_POINT, MemoryModuleType.NEAREST_LIVING_ENTITIES, MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryModuleType.VISIBLE_VILLAGER_BABIES, MemoryModuleType.NEAREST_PLAYERS, MemoryModuleType.NEAREST_VISIBLE_PLAYER, MemoryModuleType.NEAREST_VISIBLE_ATTACKABLE_PLAYER, MemoryModuleType.NEAREST_VISIBLE_WANTED_ITEM, MemoryModuleType.WALK_TARGET, MemoryModuleType.LOOK_TARGET, MemoryModuleType.INTERACTION_TARGET, MemoryModuleType.BREED_TARGET, MemoryModuleType.PATH, MemoryModuleType.DOORS_TO_CLOSE, MemoryModuleType.NEAREST_BED, MemoryModuleType.HURT_BY, MemoryModuleType.HURT_BY_ENTITY, MemoryModuleType.NEAREST_HOSTILE, MemoryModuleType.SECONDARY_JOB_SITE, MemoryModuleType.HIDING_PLACE, MemoryModuleType.HEARD_BELL_TIME, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.LAST_SLEPT, MemoryModuleType.LAST_WOKEN, MemoryModuleType.LAST_WORKED_AT_POI, MemoryModuleType.GOLEM_DETECTED_RECENTLY);
+	private static final ImmutableList<SensorType<? extends Sensor<? super Villager>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, SensorType.NEAREST_ITEMS, SensorType.NEAREST_BED, SensorType.HURT_BY, SensorType.VILLAGER_HOSTILES, SensorType.VILLAGER_BABIES, SensorType.SECONDARY_POIS, SensorType.GOLEM_DETECTED);
+
+
+	public static AttributeSupplier.Builder setCustomAttributes() {
+		return Mob.createMobAttributes()
+				.add(Attributes.MAX_HEALTH, 20)
+				.add(Attributes.MOVEMENT_SPEED,0.5D)
+				.add(Attributes.FOLLOW_RANGE, 48.0D);
 	}
 
-	public AlienEntity(EntityType<? extends VillagerEntity> type, World worldIn) {
+	public AlienEntity(EntityType<? extends Villager> type, Level worldIn) {
 		super(type, worldIn);
 	}
 
 	@Override
-	public AlienEntity func_241840_a(ServerWorld p_241840_1_, AgeableEntity p_241840_2_) {
-
-		AlienEntity alienentity = new AlienEntity((EntityType<? extends VillagerEntity>) ModInnet.ALIEN.get(),this.world);
-		alienentity.onInitialSpawn(p_241840_1_, p_241840_1_.getDifficultyForLocation(alienentity.getPosition()), SpawnReason.BREEDING, (ILivingEntityData)null, (CompoundNBT)null);
+	public Villager getBreedOffspring(ServerLevel p_241840_1_, AgeableMob p_241840_2_) {
+		AlienEntity alienentity = new AlienEntity((EntityType<? extends Villager>) ModInnet.ALIEN.get(),this.level);
+		alienentity.finalizeSpawn(p_241840_1_, p_241840_1_.getCurrentDifficultyAt(new BlockPos(p_241840_2_.getX(), p_241840_2_.getY(), p_241840_2_.getZ())), MobSpawnType.BREEDING, (SpawnGroupData)null, (CompoundTag)null);
 		return alienentity;
 	}
 
 	@Override
-	public void func_241841_a(ServerWorld p_241841_1_, LightningBoltEntity p_241841_2_) {
-		this.forceFireTicks(this.getFireTimer() + 1);
-		if (this.getFireTimer() == 0) {
-			this.setFire(8);
+	public void thunderHit(ServerLevel p_35409_, LightningBolt p_35410_) {
+		this.setRemainingFireTicks(this.getRemainingFireTicks() + 1);
+		if (this.getRemainingFireTicks() == 0) {
+			this.setSecondsOnFire(8);
 		}
-
-		this.attackEntityFrom(DamageSource.LIGHTNING_BOLT, p_241841_2_.getDamage());
+		super.thunderHit(p_35409_, p_35410_);
 	}
 
 	@Override
-	public ActionResultType func_230254_b_(PlayerEntity p_230254_1_, Hand p_230254_2_) {
-		ItemStack itemstack = p_230254_1_.getHeldItem(p_230254_2_);
-		if (itemstack.getItem() != ModInnet.ALIEN_SPAWN_EGG.get() && this.isAlive() && !this.hasCustomer() && !this.isSleeping() && !p_230254_1_.isSecondaryUseActive()) {
-			if (this.isChild()) {
+	public InteractionResult mobInteract(Player p_230254_1_, InteractionHand p_230254_2_) {
+		ItemStack itemstack = p_230254_1_.getItemInHand(p_230254_2_);
+		if (itemstack.getItem() != ModInnet.ALIEN_SPAWN_EGG.get() && this.isAlive() && !this.isTrading() && !this.isSleeping() && !p_230254_1_.isSecondaryUseActive()) {
+			if (this.isBaby()) {
 				this.shakeHead();
-				return ActionResultType.func_233537_a_(this.world.isRemote);
+				return InteractionResult.sidedSuccess(this.level.isClientSide);
 			} else {
 				boolean flag = this.getOffers().isEmpty();
-				if (p_230254_2_ == Hand.MAIN_HAND) {
-					if (flag && !this.world.isRemote) {
+				if (p_230254_2_ == InteractionHand.MAIN_HAND) {
+					if (flag && !this.level.isClientSide) {
 						this.shakeHead();
 					}
 
-					p_230254_1_.addStat(Stats.TALKED_TO_VILLAGER);
+					p_230254_1_.awardStat(Stats.TALKED_TO_VILLAGER);
 				}
 
 				if (flag) {
-					return ActionResultType.func_233537_a_(this.world.isRemote);
+					return InteractionResult.sidedSuccess(this.level.isClientSide);
 				} else {
-					if (!this.world.isRemote && !this.offers.isEmpty()) {
+					if (!this.level.isClientSide && !this.offers.isEmpty()) {
 						this.displayMerchantGui(p_230254_1_);
 					}
 
-					return ActionResultType.func_233537_a_(this.world.isRemote);
+					return InteractionResult.sidedSuccess(this.level.isClientSide);
 				}
 			}
 		} else {
-			return ActionResultType.PASS;
+			return InteractionResult.PASS;
 		}
 	}
 
-	private void displayMerchantGui(PlayerEntity player) {
+	private void displayMerchantGui(Player player) {
 		this.recalculateSpecialPricesFor(player);
-		this.setCustomer(player);
-		this.openMerchantContainer(player, this.getDisplayName(), this.getVillagerData().getLevel());
+		this.setTradingPlayer(player);
+		this.openTradingScreen(player, this.getDisplayName(), this.getVillagerData().getLevel());
 	}
 
-	private void recalculateSpecialPricesFor(PlayerEntity playerIn) {
+	private void recalculateSpecialPricesFor(Player playerIn) {
 		int i = this.getPlayerReputation(playerIn);
 		if (i != 0) {
 			for(MerchantOffer merchantoffer : this.getOffers()) {
-				merchantoffer.increaseSpecialPrice(-MathHelper.floor((float)i * merchantoffer.getPriceMultiplier()));
+				merchantoffer.addToSpecialPriceDiff((int) -Math.floor((float)i * merchantoffer.getPriceMultiplier()));
 			}
 		}
 
-		if (playerIn.isPotionActive(Effects.HERO_OF_THE_VILLAGE)) {
-			EffectInstance effectinstance = playerIn.getActivePotionEffect(Effects.HERO_OF_THE_VILLAGE);
+		if (playerIn.hasEffect(MobEffects.HERO_OF_THE_VILLAGE)) {
+			MobEffectInstance effectinstance = playerIn.getEffect(MobEffects.HERO_OF_THE_VILLAGE);
 			int k = effectinstance.getAmplifier();
 
 			for(MerchantOffer merchantoffer1 : this.getOffers()) {
 				double d0 = 0.3D + 0.0625D * (double)k;
-				int j = (int)Math.floor(d0 * (double)merchantoffer1.getBuyingStackFirst().getCount());
-				merchantoffer1.increaseSpecialPrice(-Math.max(j, 1));
+				int j = (int)Math.floor(d0 * (double)merchantoffer1.getBaseCostA().getCount());
+				merchantoffer1.addToSpecialPriceDiff(-Math.max(j, 1));
 			}
 		}
 
 	}
 
 	private void shakeHead() {
-		this.setShakeHeadTicks(40);
-		if (!this.world.isRemote()) {
-			this.playSound(SoundEvents.ENTITY_VILLAGER_NO, this.getSoundVolume(), this.getSoundPitch());
+		this.setUnhappyCounter(40);
+		if (!this.level.isClientSide) {
+			this.playSound(SoundEvents.VILLAGER_NO, this.getSoundVolume(), this.getVoicePitch());
 		}
-
 	}
 
 	@Override
-	protected Brain<?> createBrain(Dynamic<?> dynamicIn) {
-		Brain<VillagerEntity> brain = this.getBrainCodec().deserialize(dynamicIn);
+	protected Brain<?> makeBrain(Dynamic<?> p_35445_) {
+		Brain<Villager> brain = Brain.provider(MEMORY_TYPES, SENSOR_TYPES).makeBrain(p_35445_);
 		this.initBrain(brain);
 		return brain;
 	}
 
 	@Override
-	public void resetBrain(ServerWorld serverWorldIn) {
-		Brain<VillagerEntity> brain = this.getBrain();
-		brain.stopAllTasks(serverWorldIn, this);
-		this.brain = brain.copy();
+	public void refreshBrain(ServerLevel p_35484_) {
+		Brain<Villager> brain = this.getBrain();
+		brain.stopAll(p_35484_, this);
+		this.brain = brain.copyWithoutBehaviors();
 		this.initBrain(this.getBrain());
 	}
 
@@ -173,43 +169,43 @@ public class AlienEntity extends VillagerEntity implements IMerchant, INPC {
 		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, AlienZombieEntity.class, 15.0F, 0.5F, 0.5F));
 	}
 
-	private void initBrain(Brain<VillagerEntity> villagerBrain) {
+	private void initBrain(Brain<Villager> p_35425_) {
 		VillagerProfession villagerprofession = this.getVillagerData().getProfession();
-		if (this.isChild()) {
-			villagerBrain.setSchedule(Schedule.VILLAGER_BABY);
-			villagerBrain.registerActivity(Activity.PLAY, VillagerTasks.play(0.5F));
+		if (this.isBaby()) {
+			p_35425_.setSchedule(Schedule.VILLAGER_BABY);
+			p_35425_.addActivity(Activity.PLAY, VillagerGoalPackages.getPlayPackage(0.5F));
 		} else {
-			villagerBrain.setSchedule(Schedule.VILLAGER_DEFAULT);
-			villagerBrain.registerActivity(Activity.WORK, VillagerTasks.work(villagerprofession, 0.5F), ImmutableSet.of(Pair.of(MemoryModuleType.JOB_SITE, MemoryModuleStatus.VALUE_PRESENT)));
+			p_35425_.setSchedule(Schedule.VILLAGER_DEFAULT);
+			p_35425_.addActivityWithConditions(Activity.WORK, VillagerGoalPackages.getWorkPackage(villagerprofession, 0.5F), ImmutableSet.of(Pair.of(MemoryModuleType.JOB_SITE, MemoryStatus.VALUE_PRESENT)));
 		}
 
-		villagerBrain.registerActivity(Activity.CORE, AlienEntity.core(villagerprofession, 0.5F));
-		villagerBrain.registerActivity(Activity.REST, VillagerTasks.rest(villagerprofession, 0.5F));
-		villagerBrain.registerActivity(Activity.IDLE, VillagerTasks.idle(villagerprofession, 0.5F));
-		villagerBrain.registerActivity(Activity.PANIC, VillagerTasks.panic(villagerprofession, 0.5F));
-		villagerBrain.registerActivity(Activity.PRE_RAID, VillagerTasks.preRaid(villagerprofession, 0.5F));
-		villagerBrain.registerActivity(Activity.RAID, VillagerTasks.raid(villagerprofession, 0.5F));
-		villagerBrain.registerActivity(Activity.HIDE, VillagerTasks.hide(villagerprofession, 0.5F));
-		villagerBrain.setDefaultActivities(ImmutableSet.of(Activity.CORE));
-		villagerBrain.setFallbackActivity(Activity.IDLE);
-		villagerBrain.switchTo(Activity.IDLE);
-		villagerBrain.updateActivity(this.world.getDayTime(), this.world.getGameTime());
+		p_35425_.addActivity(Activity.CORE, VillagerGoalPackages.getCorePackage(villagerprofession, 0.5F));
+		p_35425_.addActivity(Activity.REST, VillagerGoalPackages.getRestPackage(villagerprofession, 0.5F));
+		p_35425_.addActivity(Activity.IDLE, VillagerGoalPackages.getIdlePackage(villagerprofession, 0.5F));
+		p_35425_.addActivity(Activity.PANIC, VillagerGoalPackages.getPanicPackage(villagerprofession, 0.5F));
+		p_35425_.addActivity(Activity.PRE_RAID, VillagerGoalPackages.getPreRaidPackage(villagerprofession, 0.5F));
+		p_35425_.addActivity(Activity.RAID, VillagerGoalPackages.getRaidPackage(villagerprofession, 0.5F));
+		p_35425_.addActivity(Activity.HIDE, VillagerGoalPackages.getHidePackage(villagerprofession, 0.5F));
+		p_35425_.setCoreActivities(ImmutableSet.of(Activity.CORE));
+		p_35425_.setDefaultActivity(Activity.IDLE);
+		p_35425_.setActiveActivityIfPossible(Activity.IDLE);
+		p_35425_.updateActivityFromSchedule(this.level.getDayTime(), this.level.getGameTime());
 	}
 
 	@Nullable
 	@Override
-	public ILivingEntityData onInitialSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @org.jetbrains.annotations.Nullable SpawnGroupData spawnDataIn, @org.jetbrains.annotations.Nullable CompoundTag dataTag) {
 
-		if (reason == SpawnReason.COMMAND || reason == SpawnReason.SPAWN_EGG || reason == SpawnReason.SPAWNER || reason == SpawnReason.DISPENSER) {
-			this.setVillagerData(this.getVillagerData().withType(VillagerType.func_242371_a(worldIn.func_242406_i(this.getPosition()))));
+		if (reason == MobSpawnType.COMMAND || reason == MobSpawnType.SPAWN_EGG || reason == MobSpawnType.SPAWNER || reason == MobSpawnType.DISPENSER) {
+			this.setVillagerData(this.getVillagerData().setType(VillagerType.byBiome(worldIn.getBiomeName(new BlockPos(this.getX(),this.getY(),this.getZ())))));
 		}
 
-		if (reason == SpawnReason.STRUCTURE) {
+		if (reason == MobSpawnType.STRUCTURE) {
 			this.assignProfessionWhenSpawned = true;
 		}
 
 		if (spawnDataIn == null) {
-			spawnDataIn = new AgeableEntity.AgeableData(false);
+			spawnDataIn = new AgeableMob.AgeableMobGroupData(false);
 		}
 
 		int max = 13;
@@ -219,46 +215,47 @@ public class AlienEntity extends VillagerEntity implements IMerchant, INPC {
 
 			AlienJobs j = AlienJobs.values()[i];
 
-			this.setVillagerData(this.getVillagerData().withProfession(j.getAlienJobs()));
+			this.setVillagerData(this.getVillagerData().setProfession(j.getAlienJobs()));
 		}
 
 		return spawnDataIn;
 	}
 
 	@Override
-	public void func_242367_a(ServerWorld p_242367_1_, long p_242367_2_, int p_242367_4_) {
+	public void spawnGolemIfNeeded(ServerLevel p_35398_, long p_35399_, int p_35400_) {
+
 	}
 
 	@Override
-	protected void populateTradeData() {
+	protected void updateTrades() {
 		VillagerData villagerdata = this.getVillagerData();
 		Int2ObjectMap<AlienTrade.ITrade[]> int2objectmap = AlienTrade.VILLAGER_DEFAULT_TRADES.get(villagerdata.getProfession());
 		if (int2objectmap != null && !int2objectmap.isEmpty()) {
 			AlienTrade.ITrade[] avillagertrades$itrade = int2objectmap.get(villagerdata.getLevel());
 			if (avillagertrades$itrade != null) {
 				MerchantOffers merchantoffers = this.getOffers();
-				this.addTrades(merchantoffers, avillagertrades$itrade, 6);
+				this.addOffersFromItemListings(merchantoffers, (VillagerTrades.ItemListing[]) avillagertrades$itrade, 6);
 			}
 		}
 	}
 
-	protected void addTrades(MerchantOffers givenMerchantOffers, AlienTrade.ITrade[] newTrades, int maxNumbers) {
+	protected void addOffersFromItemListings(MerchantOffers p_35278_, VillagerTrades.ItemListing[] p_35279_, int p_35280_) {
 		Set<Integer> set = Sets.newHashSet();
-		if (newTrades.length > maxNumbers) {
-			while(set.size() < maxNumbers) {
-				set.add(this.rand.nextInt(newTrades.length));
+		if (p_35279_.length > p_35280_) {
+			while(set.size() < p_35280_) {
+				set.add(this.random.nextInt(p_35279_.length));
 			}
 		} else {
-			for(int i = 0; i < newTrades.length; ++i) {
+			for(int i = 0; i < p_35279_.length; ++i) {
 				set.add(i);
 			}
 		}
 
 		for(Integer integer : set) {
-			AlienTrade.ITrade villagertrades$itrade = newTrades[integer];
-			MerchantOffer merchantoffer = villagertrades$itrade.getOffer(this, this.rand);
+			VillagerTrades.ItemListing villagertrades$itemlisting = p_35279_[integer];
+			MerchantOffer merchantoffer = villagertrades$itemlisting.getOffer(this, this.random);
 			if (merchantoffer != null) {
-				givenMerchantOffers.add(merchantoffer);
+				p_35278_.add(merchantoffer);
 			}
 		}
 
@@ -269,8 +266,7 @@ public class AlienEntity extends VillagerEntity implements IMerchant, INPC {
 		super.baseTick();
 
 		if (!Config.AlienSpawn) {
-			this.remove();
+			this.remove(RemovalReason.DISCARDED);
 		}
 	}
-
 }

@@ -89,7 +89,7 @@ public class AlienTrade {
             this.xpValue = xpValueIn;
         }
 
-        public MerchantOffer getOffer(Entity trader, Random rand) {
+        public MerchantOffer getOffer(AlienEntity trader, Random rand) {
             ItemStack itemstack = new ItemStack(Items.EMERALD, this.price);
             ItemStack itemstack1 = new ItemStack(this.tradeItem);
             if (this.tradeItem instanceof DyeableArmorItem) {
@@ -129,7 +129,7 @@ public class AlienTrade {
             this.priceMultiplier = 0.05F;
         }
 
-        public MerchantOffer getOffer(Entity trader, Random rand) {
+        public MerchantOffer getOffer(AlienEntity trader, Random rand) {
             ItemStack itemstack = new ItemStack(this.tradeItem, this.count);
             return new MerchantOffer(itemstack, new ItemStack(Items.EMERALD), maxUseIn, this.xpValue, this.priceMultiplier);
         }
@@ -151,7 +151,7 @@ public class AlienTrade {
         }
 
         @Nullable
-        public MerchantOffer getOffer(Entity trader, Random rand) {
+        public MerchantOffer getOffer(AlienEntity trader, Random rand) {
             if (!(trader.world instanceof ServerWorld)) {
                 return null;
             } else {
@@ -189,7 +189,7 @@ public class AlienTrade {
         }
 
         @Nullable
-        public MerchantOffer getOffer(Entity trader, Random rand) {
+        public MerchantOffer getOffer(AlienEntity trader, Random rand) {
             if (trader instanceof IVillagerDataHolder) {
                 ItemStack itemstack = new ItemStack(this.villagerTypeItems.get(((IVillagerDataHolder)trader).getVillagerData().getType()), this.count);
                 return new MerchantOffer(itemstack, new ItemStack(Items.EMERALD), maxUseIn, this.xpValue, 0.05F);
@@ -206,7 +206,7 @@ public class AlienTrade {
             this.xpValue = xpValueIn;
         }
 
-        public MerchantOffer getOffer(Entity trader, Random rand) {
+        public MerchantOffer getOffer(AlienEntity trader, Random rand) {
             List<Enchantment> list = Registry.ENCHANTMENT.stream().filter(Enchantment::canVillagerTrade).collect(Collectors.toList());
             Enchantment enchantment = list.get(rand.nextInt(list.size()));
             int i = MathHelper.nextInt(rand, enchantment.getMinLevel(), enchantment.getMaxLevel());
@@ -243,7 +243,7 @@ public class AlienTrade {
             this.priceMultiplier = priceMultiplier;
         }
 
-        public MerchantOffer getOffer(Entity trader, Random rand) {
+        public MerchantOffer getOffer(AlienEntity trader, Random rand) {
             int i = 5 + rand.nextInt(15);
             ItemStack itemstack = EnchantmentHelper.addRandomEnchantment(rand, new ItemStack(this.sellingStack.getItem()), i, false);
             int j = Math.min(this.emeraldCount + i, 64);
@@ -254,7 +254,7 @@ public class AlienTrade {
 
     public interface ITrade {
         @Nullable
-        MerchantOffer getOffer(Entity trader, Random rand);
+        MerchantOffer getOffer(AlienEntity trader, Random rand);
     }
 
     static class ItemWithPotionForEmeraldsAndItemsTrade implements AlienTrade.ITrade {
@@ -279,7 +279,7 @@ public class AlienTrade {
             this.priceMultiplier = 0.05F;
         }
 
-        public MerchantOffer getOffer(Entity trader, Random rand) {
+        public MerchantOffer getOffer(AlienEntity trader, Random rand) {
             ItemStack itemstack = new ItemStack(Items.EMERALD, this.emeraldCount);
             List<Potion> list = Registry.POTION.stream().filter((potion) -> {
                 return !potion.getEffects().isEmpty() && PotionBrewing.isBrewablePotion(potion);
@@ -316,7 +316,7 @@ public class AlienTrade {
         }
 
         @Nullable
-        public MerchantOffer getOffer(Entity trader, Random rand) {
+        public MerchantOffer getOffer(AlienEntity trader, Random rand) {
             return new MerchantOffer(new ItemStack(Items.EMERALD, this.emeraldCount), new ItemStack(this.buyingItem.getItem(), this.buyingItemCount), new ItemStack(this.sellingItem.getItem(), this.sellingItemCount), maxUseIn, this.xpValue, this.priceMultiplier);
         }
     }
@@ -354,7 +354,7 @@ public class AlienTrade {
             this.priceMultiplier = priceMultiplier;
         }
 
-        public MerchantOffer getOffer(Entity trader, Random rand) {
+        public MerchantOffer getOffer(AlienEntity trader, Random rand) {
             return new MerchantOffer(new ItemStack(Items.EMERALD, this.emeraldCount), new ItemStack(this.sellingItem.getItem(), this.sellingItemCount), maxUseIn, this.xpValue, this.priceMultiplier);
         }
     }
@@ -373,7 +373,7 @@ public class AlienTrade {
         }
 
         @Nullable
-        public MerchantOffer getOffer(Entity trader, Random rand) {
+        public MerchantOffer getOffer(AlienEntity trader, Random rand) {
             ItemStack itemstack = new ItemStack(Items.SUSPICIOUS_STEW, 1);
             SuspiciousStewItem.addEffect(itemstack, this.effect, this.duration);
             return new MerchantOffer(new ItemStack(Items.EMERALD, 1), itemstack, maxUseIn, this.xpValue, this.priceMultiplier);
