@@ -38,7 +38,7 @@ public class TileEntityBoxRenderer extends BlockEntityRenderer<OxygenBubbleDistr
     @Override
     public void render(OxygenBubbleDistributorBlock.CustomTileEntity tileEntityIn, float partialTicks, PoseStack matrix, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
         if (tileEntityIn.isWorkingAreaVisible()) {
-            IVertexConsumer builder = (IVertexConsumer) bufferIn.getBuffer(RenderType.lines());
+            VertexConsumer builder = bufferIn.getBuffer(RenderType.lines());
             AABB workingArea = tileEntityIn.getWorkingArea(BlockPos.ZERO, tileEntityIn.getRange());
 
             Matrix3f normal = matrix.last().normal();
@@ -84,7 +84,7 @@ public class TileEntityBoxRenderer extends BlockEntityRenderer<OxygenBubbleDistr
 
     }
 
-    private void drawShapeOutline(IVertexConsumer builder, Matrix4f matrix, Matrix3f normal, float x1, float y1, float z1, float x2, float y2, float z2, int r, int g, int b) {
+    private void drawShapeOutline(VertexConsumer builder, Matrix4f matrix, Matrix3f normal, float x1, float y1, float z1, float x2, float y2, float z2, int r, int g, int b) {
         float nX = (float)(x2 - x1);
         float nY = (float)(y2 - y1);
         float nZ = (float)(z2 - z1);
@@ -93,8 +93,8 @@ public class TileEntityBoxRenderer extends BlockEntityRenderer<OxygenBubbleDistr
         nY = nY / sqrt;
         nZ = nZ / sqrt;
 
-        builder.pos(matrix, x1, y1, z1).color(r, g, b, 0xFF).normal(normal, nX, nY, nZ).endVertex();
-        builder.pos(matrix, x2, y2, z2).color(r, g, b, 0xFF).normal(normal, nX, nY, nZ).endVertex();
+        builder.vertex(matrix, x1, y1, z1).color(r, g, b, 0xFF).normal(normal, nX, nY, nZ).endVertex();
+        builder.vertex(matrix, x2, y2, z2).color(r, g, b, 0xFF).normal(normal, nX, nY, nZ).endVertex();
     }
 
     private void drawSurfaces(MultiBufferSource buffer, Matrix4f matrix, Matrix3f normal, float startX, float startZ, float endX, float endZ, float botY, float topY, int r, int g, int b) {
