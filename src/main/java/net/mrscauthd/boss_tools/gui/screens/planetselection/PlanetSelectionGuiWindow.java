@@ -1,17 +1,17 @@
 package net.mrscauthd.boss_tools.gui.screens.planetselection;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Quaternion;
+import com.mojang.math.Vector3f;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.client.renderer.Rectangle2d;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.vector.Quaternion;
-import net.minecraft.util.math.vector.Vector3f;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.renderer.Rect2i;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.mrscauthd.boss_tools.BossToolsMod;
@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
-public class PlanetSelectionGuiWindow extends ContainerScreen<PlanetSelectionGui.GuiContainer> {
+public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSelectionGui.GuiContainer> {
 
 	private static ResourceLocation texture = new ResourceLocation(BossToolsMod.ModId,"textures/screens/planet_selection_gui.png");
 
@@ -85,24 +85,24 @@ public class PlanetSelectionGuiWindow extends ContainerScreen<PlanetSelectionGui
 	public ImageButtonPlacer mercurySpaceStationButton;
 	public ImageButtonPlacer venusSpaceStationButton;
 
-	public PlanetSelectionGuiWindow(PlanetSelectionGui.GuiContainer container, PlayerInventory inventory, ITextComponent text) {
+	public PlanetSelectionGuiWindow(PlanetSelectionGui.GuiContainer container, Inventory inventory, Component text) {
 		super(container, inventory, text);
-		this.xSize = 512;
-		this.ySize = 512;
+		this.imageWidth = 512;
+		this.imageHeight = 512;
 	}
 
 	@Override
-	public void render(MatrixStack ms, int mouseX, int mouseY, float partialTicks) {
+	public void render(PoseStack ms, int mouseX, int mouseY, float partialTicks) {
 		this.renderBackground(ms);
 		super.render(ms, mouseX, mouseY, partialTicks);
-		this.renderHoveredTooltip(ms, mouseX, mouseY);
+		this.renderTooltip(ms, mouseX, mouseY);
 
 		rotationMars = (rotationMars + partialTicks * 0.6f) % 360;
 		rotationEarth = (rotationEarth + partialTicks * 1.2f) % 360;
 		rotationVenus = (rotationVenus + partialTicks * 1.1f) % 360;
 		rotationMercury = (rotationMercury + partialTicks * 0.9f) % 360;
 
-		String rocketType = container.rocket;
+		String rocketType = menu.rocket;
 
 		//CATEGORY 0 BUTTON
 		if (Category == 0) {
@@ -226,25 +226,25 @@ public class PlanetSelectionGuiWindow extends ContainerScreen<PlanetSelectionGui
 		}
 
 		//RENDER FONTS
-		this.font.drawString(ms, "CATALOG", 24, (this.height / 2) - 126 / 2, -1);
+		this.font.draw(ms, "CATALOG", 24, (this.height / 2) - 126 / 2, -1);
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(MatrixStack ms, float par1, int par2, int par3) {
-		RenderSystem.color4f(1, 1, 1, 1);
+	protected void renderBg(PoseStack ms, float p_97788_, int p_97789_, int p_97790_) {
+		RenderSystem.setShaderColor(1, 1, 1, 1);
 		RenderSystem.enableBlend();
 		RenderSystem.defaultBlendFunc();
 
 		//BACKGROUND
-		Minecraft.getInstance().getTextureManager().bindTexture(texture);
+		Minecraft.getInstance().getTextureManager().bindForSetup(texture);
 		this.blit(ms, 0, 0, 0, 0, this.width, this.height, this.width, this.height);
 
 		//MILKY WAY
-		Minecraft.getInstance().getTextureManager().bindTexture(new ResourceLocation(BossToolsMod.ModId,"textures/milky_way.png"));
+		Minecraft.getInstance().getTextureManager().bindForSetup(new ResourceLocation(BossToolsMod.ModId,"textures/milky_way.png"));
 		GuiHelper.blit(ms, (this.width - 185) / 2, (this.height - 185) / 2, 0, 0, 185, 185, 185, 185);
 
 		//SUN
-		Minecraft.getInstance().getTextureManager().bindTexture(new ResourceLocation(BossToolsMod.ModId,"textures/sky/gui/sun.png"));
+		Minecraft.getInstance().getTextureManager().bindForSetup(new ResourceLocation(BossToolsMod.ModId,"textures/sky/gui/sun.png"));
 		GuiHelper.blit(ms, (this.width - 15) / 2, (this.height - 15) / 2, 0, 0, 15, 15, 15, 15);
 
 		//PLANETS
@@ -255,27 +255,27 @@ public class PlanetSelectionGuiWindow extends ContainerScreen<PlanetSelectionGui
 
 		//MENU
 		if (Category == 0) {
-			Minecraft.getInstance().getTextureManager().bindTexture(new ResourceLocation(BossToolsMod.ModId, "textures/rocket_menu_list.png"));
+			Minecraft.getInstance().getTextureManager().bindForSetup(new ResourceLocation(BossToolsMod.ModId, "textures/rocket_menu_list.png"));
 			this.blit(ms, 0, (this.height / 2) - 160 / 2, 0, 0, 105, 160, 105, 160);
 		} else {
-			Minecraft.getInstance().getTextureManager().bindTexture(new ResourceLocation(BossToolsMod.ModId, "textures/rocket_menu_list_2.png"));
+			Minecraft.getInstance().getTextureManager().bindForSetup(new ResourceLocation(BossToolsMod.ModId, "textures/rocket_menu_list_2.png"));
 			this.blit(ms, 0, (this.height / 2) - 160 / 2, 0, 0, 215, 160, 215, 160);
 		}
 
 		RenderSystem.disableBlend();
 	}
 
-	public void addPlanet(MatrixStack ms, ResourceLocation planet, float x, float y, int width, int height, float rotation) {
-		ms.push();
+	public void addPlanet(PoseStack ms, ResourceLocation planet, float x, float y, int width, int height, float rotation) {
+		ms.pushPose();
 
 		ms.translate(this.width / 2, this.height / 2, 0);
-		ms.rotate(new Quaternion(Vector3f.ZP, rotation, true));
+		ms.mulPose(new Quaternion(Vector3f.ZP, rotation, true));
 
-		Minecraft.getInstance().getTextureManager().bindTexture(planet);
+		Minecraft.getInstance().getTextureManager().bindForSetup(planet);
 		GuiHelper.blit(ms, x, y, 0, 0, width, height, width, height);
 
 		ms.translate(-this.width / 2, -this.height / 2, 0);
-		ms.pop();
+		ms.popPose();
 	}
 
 	@Override
@@ -283,13 +283,13 @@ public class PlanetSelectionGuiWindow extends ContainerScreen<PlanetSelectionGui
 		super.init();
 
 		/**CATEGORIES*/
-		earthCategoryButton = this.addImageButtonSetCategory(10, (this.height / 2) - 48 / 2, 70, 20, defaultButtonTex, 1, container.rocket, 1, "Earth");
-		marsCategoryButton = this.addImageButtonSetCategory(10, (this.height / 2) - 4 / 2, 70, 20, defaultButtonTex, 2, container.rocket, 2, "Mars");
-		mercuryCategoryButton = this.addImageButtonSetCategory(10, (this.height / 2) + 40 / 2, 70, 20, defaultButtonTex, 3, container.rocket, 3, "Mercury");
-		venusCategoryButton = this.addImageButtonSetCategory(10, (this.height / 2) + 84 / 2, 70, 20, defaultButtonTex, 4, container.rocket, 3, "Venus");
+		earthCategoryButton = this.addImageButtonSetCategory(10, (this.height / 2) - 48 / 2, 70, 20, defaultButtonTex, 1, menu.rocket, 1, "Earth");
+		marsCategoryButton = this.addImageButtonSetCategory(10, (this.height / 2) - 4 / 2, 70, 20, defaultButtonTex, 2, menu.rocket, 2, "Mars");
+		mercuryCategoryButton = this.addImageButtonSetCategory(10, (this.height / 2) + 40 / 2, 70, 20, defaultButtonTex, 3, menu.rocket, 3, "Mercury");
+		venusCategoryButton = this.addImageButtonSetCategory(10, (this.height / 2) + 84 / 2, 70, 20, defaultButtonTex, 4, menu.rocket, 3, "Venus");
 
 		/**BACK BUTTON*/
-		backButton = this.addImageButtonSetCategory(10, (this.height / 2) - 48 / 2, 70, 20, dbbButtonTex, 0, container.rocket, 1, "Back");
+		backButton = this.addImageButtonSetCategory(10, (this.height / 2) - 48 / 2, 70, 20, dbbButtonTex, 0, menu.rocket, 1, "Back");
 		backButton.visible = false;
 
 		 /**TELEPORT BUTTONS*/
@@ -342,10 +342,10 @@ public class PlanetSelectionGuiWindow extends ContainerScreen<PlanetSelectionGui
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(MatrixStack ms, int mouseX, int mouseY) {
+	protected void renderLabels(PoseStack p_97808_, int p_97809_, int p_97810_) {
 	}
 
-	public Rectangle2d getBounds(int left, int top, int width, int height) {
+	public Rect2i getBounds(int left, int top, int width, int height) {
 		return GuiHelper.getBounds(left, top, width, height);
 	}
 
@@ -365,7 +365,7 @@ public class PlanetSelectionGuiWindow extends ContainerScreen<PlanetSelectionGui
 		return tier >= stage;
 	}
 
-	public void buttonManager(String rocketType, ResourceLocation gb2, ResourceLocation rb2, ResourceLocation gb, ResourceLocation rb, int mouseX, int mouseY, int left, int top, int width, int height, MatrixStack ms, ImageButtonPlacer button, String dim, String rocketTier, int stage) {
+	public void buttonManager(String rocketType, ResourceLocation gb2, ResourceLocation rb2, ResourceLocation gb, ResourceLocation rb, int mouseX, int mouseY, int left, int top, int width, int height, PoseStack ms, ImageButtonPlacer button, String dim, String rocketTier, int stage) {
 		String level = "c";
 
 		if (checkTier(rocketType, stage)) {
@@ -378,11 +378,11 @@ public class PlanetSelectionGuiWindow extends ContainerScreen<PlanetSelectionGui
 
 		if (GuiHelper.isHover(this.getBounds(left, top, width, height), mouseX, mouseY)) {
 
-			List<ITextComponent> list = new ArrayList<ITextComponent>();
+			List<Component> list = new ArrayList<Component>();
 
-			list.add(ITextComponent.getTextComponentOrEmpty("\u00A79Category: " + "\u00A7" + level + dim));
-			list.add(ITextComponent.getTextComponentOrEmpty("\u00A79Provided: \u00A7b" + rocketTier));
-			this.func_243308_b(ms, list, mouseX, mouseY);
+			list.add(Component.nullToEmpty("\u00A79Category: " + "\u00A7" + level + dim));
+			list.add(Component.nullToEmpty("\u00A79Provided: \u00A7b" + rocketTier));
+			this.renderComponentTooltip(ms, list, mouseX, mouseY);
 
 
 			if (checkTier(rocketType, stage)) {
@@ -393,16 +393,16 @@ public class PlanetSelectionGuiWindow extends ContainerScreen<PlanetSelectionGui
 		}
 	}
 
-	public void teleportButtonManager(ResourceLocation bb, ResourceLocation bb2, int mouseX, int mouseY, int left, int top, int width, int height, MatrixStack ms, ImageButtonPlacer button, String planetType, String gravity, String oxygen, String temperature) {
+	public void teleportButtonManager(ResourceLocation bb, ResourceLocation bb2, int mouseX, int mouseY, int left, int top, int width, int height, PoseStack ms, ImageButtonPlacer button, String planetType, String gravity, String oxygen, String temperature) {
 		if (GuiHelper.isHover(this.getBounds(left, top, width, height), mouseX, mouseY)) {
 
-			List<ITextComponent> list = new ArrayList<ITextComponent>();
+			List<Component> list = new ArrayList<Component>();
 
-			list.add(ITextComponent.getTextComponentOrEmpty("\u00A79Type: " + "\u00A73" + planetType));
-			list.add(ITextComponent.getTextComponentOrEmpty("\u00A79Gravity: " + "\u00A73" + gravity));
-			list.add(ITextComponent.getTextComponentOrEmpty("\u00A79Oxygen: " + "\u00A7" + oxygen));
-			list.add(ITextComponent.getTextComponentOrEmpty("\u00A79Temperature: \u00A7" + temperature));
-			this.func_243308_b(ms, list, mouseX, mouseY);
+			list.add(Component.nullToEmpty("\u00A79Type: " + "\u00A73" + planetType));
+			list.add(Component.nullToEmpty("\u00A79Gravity: " + "\u00A73" + gravity));
+			list.add(Component.nullToEmpty("\u00A79Oxygen: " + "\u00A7" + oxygen));
+			list.add(Component.nullToEmpty("\u00A79Temperature: \u00A7" + temperature));
+			this.renderComponentTooltip(ms, list, mouseX, mouseY);
 
 			button.setTexture(bb2);
 
@@ -411,7 +411,7 @@ public class PlanetSelectionGuiWindow extends ContainerScreen<PlanetSelectionGui
 		}
 	}
 
-	public void spaceStationCreatorButtonManager(ResourceLocation brb, ResourceLocation brb2, ResourceLocation bbb, ResourceLocation bbb2, int mouseX, int mouseY, int left, int top, int width, int height, MatrixStack ms, ImageButtonPlacer button, String orbitType, String gravity, String oxygen, String temperature) {
+	public void spaceStationCreatorButtonManager(ResourceLocation brb, ResourceLocation brb2, ResourceLocation bbb, ResourceLocation bbb2, int mouseX, int mouseY, int left, int top, int width, int height, PoseStack ms, ImageButtonPlacer button, String orbitType, String gravity, String oxygen, String temperature) {
 
 		if (this.getSpaceStationItemList()) {
 			button.setTexture(bbb);
@@ -420,21 +420,21 @@ public class PlanetSelectionGuiWindow extends ContainerScreen<PlanetSelectionGui
 		}
 
 		if (GuiHelper.isHover(this.getBounds(left, top, width, height), mouseX, mouseY)) {
-			List<ITextComponent> list = new ArrayList<ITextComponent>();
+			List<Component> list = new ArrayList<Component>();
 
-			list.add(ITextComponent.getTextComponentOrEmpty("\u00A79Item Requirement:"));
+			list.add(Component.nullToEmpty("\u00A79Item Requirement:"));
 
-			list.add(ITextComponent.getTextComponentOrEmpty(this.getSpaceStationItemCheck(new ItemStack(Items.DIAMOND), 6) ?  "\u00A7a" + "6 Diamonds" : "\u00A76" + "6 Diamonds"));
-			list.add(ITextComponent.getTextComponentOrEmpty(this.getSpaceStationItemCheck(new ItemStack(ModInnet.STEEL_INGOT.get()), 16) ?  "\u00A7a" + "16 Steel Ingots" : "\u00A76" + "16 Steel Ingots"));
-			list.add(ITextComponent.getTextComponentOrEmpty(this.getSpaceStationItemCheck(new ItemStack(ModInnet.IRON_PLATE.get()), 12) ?  "\u00A7a" + "12 Iron Plates" : "\u00A76" + "12 Iron Plates"));
-			list.add(ITextComponent.getTextComponentOrEmpty(this.getSpaceStationItemCheck(new ItemStack(ModInnet.DESH_PLATE.get()), 4) ?  "\u00A7a" + "4 Desh Plates" : "\u00A76" + "4 Desh Plates"));
+			list.add(Component.nullToEmpty(this.getSpaceStationItemCheck(new ItemStack(Items.DIAMOND), 6) ?  "\u00A7a" + "6 Diamonds" : "\u00A76" + "6 Diamonds"));
+			list.add(Component.nullToEmpty(this.getSpaceStationItemCheck(new ItemStack(ModInnet.STEEL_INGOT.get()), 16) ?  "\u00A7a" + "16 Steel Ingots" : "\u00A76" + "16 Steel Ingots"));
+			list.add(Component.nullToEmpty(this.getSpaceStationItemCheck(new ItemStack(ModInnet.IRON_PLATE.get()), 12) ?  "\u00A7a" + "12 Iron Plates" : "\u00A76" + "12 Iron Plates"));
+			list.add(Component.nullToEmpty(this.getSpaceStationItemCheck(new ItemStack(ModInnet.DESH_PLATE.get()), 4) ?  "\u00A7a" + "4 Desh Plates" : "\u00A76" + "4 Desh Plates"));
 
-			list.add(ITextComponent.getTextComponentOrEmpty("\u00A7c----------------"));
-			list.add(ITextComponent.getTextComponentOrEmpty("\u00A79Type: " + "\u00A73" + orbitType));
-			list.add(ITextComponent.getTextComponentOrEmpty("\u00A79Gravity: " + "\u00A73" + gravity));
-			list.add(ITextComponent.getTextComponentOrEmpty("\u00A79Oxygen: " + "\u00A7" + oxygen));
-			list.add(ITextComponent.getTextComponentOrEmpty("\u00A79Temperature: \u00A7" + temperature));
-			this.func_243308_b(ms, list, mouseX, mouseY);
+			list.add(Component.nullToEmpty("\u00A7c----------------"));
+			list.add(Component.nullToEmpty("\u00A79Type: " + "\u00A73" + orbitType));
+			list.add(Component.nullToEmpty("\u00A79Gravity: " + "\u00A73" + gravity));
+			list.add(Component.nullToEmpty("\u00A79Oxygen: " + "\u00A7" + oxygen));
+			list.add(Component.nullToEmpty("\u00A79Temperature: \u00A7" + temperature));
+			this.renderComponentTooltip(ms, list, mouseX, mouseY);
 
 			if (this.getSpaceStationItemList()) {
 				button.setTexture(bbb2);
@@ -454,17 +454,17 @@ public class PlanetSelectionGuiWindow extends ContainerScreen<PlanetSelectionGui
 	}
 
 	public boolean getSpaceStationItemCheck(ItemStack itemStackIn, int count) {
-		PlayerInventory inventory = playerInventory.player.inventory;
+		Inventory inv = menu.player.getInventory();
 		int itemStackCount = 0;
 
-		for (int i = 0; i < inventory.getSizeInventory(); ++i) {
-			ItemStack itemStack = inventory.getStackInSlot(i);
+		for (int i = 0; i < inv.getContainerSize(); ++i) {
+			ItemStack itemStack = inv.getItem(i);
 
-			if (itemStack.isItemEqual(itemStackIn)) {
+			if (itemStack.sameItem(itemStackIn)) {
 				itemStackCount = itemStackCount + itemStack.getCount();
 			}
 
-			if (!itemStack.isEmpty() && itemStack.isItemEqual(itemStackIn) && itemStackCount >= count) {
+			if (!itemStack.isEmpty() && itemStack.sameItem(itemStackIn) && itemStackCount >= count) {
 				return true;
 			}
 		}
@@ -481,27 +481,27 @@ public class PlanetSelectionGuiWindow extends ContainerScreen<PlanetSelectionGui
 	}
 
 	public ImageButtonPlacer addImageButton(int xIn, int yIn, int width, int height, ResourceLocation texture, int handler, String title) {
-		ImageButtonPlacer button = this.addButton(new ImageButtonPlacer(xIn, yIn, width, height, 0, 0, 0, texture, width, height, (p_2130901) -> {
+		ImageButtonPlacer button = this.addWidget(new ImageButtonPlacer(xIn, yIn, width, height, 0, 0, 0, texture, width, height, (p_2130901) -> {
 			BossToolsMod.PACKET_HANDLER.sendToServer(new PlanetSelectionGui.NetworkMessage(handler));
-		}, ITextComponent.getTextComponentOrEmpty(title)));
+		}, Component.nullToEmpty(title)));
 		return button;
 	}
 
 	public ImageButtonPlacer addSpaceStationImageButton(int xIn, int yIn, int width, int height, ResourceLocation texture, int handler, String title, boolean condition) {
-		ImageButtonPlacer button = this.addButton(new ImageButtonPlacer(xIn, yIn, width, height, 0, 0, 0, texture, width, height, (p_2130901) -> {
+		ImageButtonPlacer button = this.addWidget(new ImageButtonPlacer(xIn, yIn, width, height, 0, 0, 0, texture, width, height, (p_2130901) -> {
 			if (condition) {
 				BossToolsMod.PACKET_HANDLER.sendToServer(new PlanetSelectionGui.NetworkMessage(handler));
 			}
-		}, ITextComponent.getTextComponentOrEmpty(title)));
+		}, Component.nullToEmpty(title)));
 		return button;
 	}
 
 	public ImageButtonPlacer addImageButtonSetCategory(int xIn, int yIn, int width, int height, ResourceLocation texture, int newCategory, String rocket, int stage, String title) {
-		ImageButtonPlacer button = this.addButton(new ImageButtonPlacer(xIn, yIn, width, height, 0, 0, 0, texture, width, height, (p_2130901) -> {
+		ImageButtonPlacer button = this.addWidget(new ImageButtonPlacer(xIn, yIn, width, height, 0, 0, 0, texture, width, height, (p_2130901) -> {
 			if (checkTier(rocket, stage)) {
 				this.Category = newCategory;
 			}
-		}, ITextComponent.getTextComponentOrEmpty(title)));
+		}, Component.nullToEmpty(title)));
 		return button;
 	}
 }

@@ -24,11 +24,13 @@ public class PlanetSelectionGui {
 
 	public static class GuiContainer extends AbstractContainerMenu {
 		String rocket;
+		Player player;
 
 		public GuiContainer(int id, Inventory inv, FriendlyByteBuf extraData) {
 			super(ModInnet.PLANET_SELECTION_GUI.get(), id);
 
 			this.rocket = extraData.readUtf();
+			this.player = inv.player;
 		}
 
 		@Override

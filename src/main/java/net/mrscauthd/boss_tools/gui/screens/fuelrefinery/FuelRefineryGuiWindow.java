@@ -1,16 +1,15 @@
 package net.mrscauthd.boss_tools.gui.screens.fuelrefinery;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.renderer.Rect2i;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Inventory;
 import net.mrscauthd.boss_tools.BossToolsMod;
 import org.lwjgl.opengl.GL11;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-
-import net.minecraft.client.gui.AbstractGui;
-import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.client.renderer.Rectangle2d;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.mrscauthd.boss_tools.gauge.GaugeValueHelper;
@@ -19,7 +18,7 @@ import net.mrscauthd.boss_tools.gui.helper.GuiHelper;
 import net.mrscauthd.boss_tools.machines.FuelRefineryBlock.CustomTileEntity;
 
 @OnlyIn(Dist.CLIENT)
-public class FuelRefineryGuiWindow extends ContainerScreen<FuelRefineryGui.GuiContainer> {
+public class FuelRefineryGuiWindow extends AbstractContainerScreen<FuelRefineryGui.GuiContainer> {
 
 	public static final ResourceLocation texture = new ResourceLocation(BossToolsMod.ModId,"textures/screens/fuel_refinery_gui.png");
 
@@ -32,24 +31,21 @@ public class FuelRefineryGuiWindow extends ContainerScreen<FuelRefineryGui.GuiCo
 	public static final int ENERGY_LEFT = 144;
 	public static final int ENERGY_TOP = 21;
 
-	public static final int ARROW_LEFT = 48;
-	public static final int ARROW_TOP = 36;
-
 	private final CustomTileEntity tileEntity;
 
-	public FuelRefineryGuiWindow(FuelRefineryGui.GuiContainer container, PlayerInventory inventory, ITextComponent text) {
+	public FuelRefineryGuiWindow(FuelRefineryGui.GuiContainer container, Inventory inventory, Component text) {
 		super(container, inventory, text);
 		this.tileEntity = container.getTileEntity();
-		this.xSize = 177;
-		this.ySize = 172;
-		this.playerInventoryTitleY = this.ySize - 92;
+		this.imageWidth = 177;
+		this.imageHeight = 172;
+		this.inventoryLabelY = this.imageHeight - 92;
 	}
 
 	@Override
-	public void render(MatrixStack ms, int mouseX, int mouseY, float partialTicks) {
+	public void render(PoseStack ms, int mouseX, int mouseY, float partialTicks) {
 		this.renderBackground(ms);
 		super.render(ms, mouseX, mouseY, partialTicks);
-		this.renderHoveredTooltip(ms, mouseX, mouseY);
+		this.renderTooltip(ms, mouseX, mouseY);
 
 		CustomTileEntity tileEntity = (CustomTileEntity) this.getTileEntity();
 
@@ -66,32 +62,32 @@ public class FuelRefineryGuiWindow extends ContainerScreen<FuelRefineryGui.GuiCo
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(MatrixStack ms, float par1, int par2, int par3) {
+	protected void renderBg(PoseStack ms, float p_97788_, int p_97789_, int p_97790_) {
 		CustomTileEntity tileEntity = this.getTileEntity();
 
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-		this.minecraft.getTextureManager().bindTexture(texture);
-		AbstractGui.blit(ms, this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize, this.xSize, this.ySize);
+		this.minecraft.getTextureManager().bindForSetup(texture);
+		GuiComponent.blit(ms, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
 
-		GuiHelper.drawEnergy(ms, this.guiLeft + ENERGY_LEFT, this.guiTop + ENERGY_TOP, tileEntity.getPrimaryEnergyStorage());
-		GuiHelper.drawFluidTank(ms, this.guiLeft + INPUT_TANK_LEFT, this.guiTop + INPUT_TANK_TOP, tileEntity.getInputTank());
-		GuiHelper.drawFluidTank(ms, this.guiLeft + OUTPUT_TANK_LEFT, this.guiTop + OUTPUT_TANK_TOP, tileEntity.getOutputTank());
+		GuiHelper.drawEnergy(ms, this.leftPos + ENERGY_LEFT, this.topPos + ENERGY_TOP, tileEntity.getPrimaryEnergyStorage());
+		GuiHelper.drawFluidTank(ms, this.leftPos + INPUT_TANK_LEFT, this.topPos + INPUT_TANK_TOP, tileEntity.getInputTank());
+		GuiHelper.drawFluidTank(ms, this.leftPos + OUTPUT_TANK_LEFT, this.topPos + OUTPUT_TANK_TOP, tileEntity.getOutputTank());
 	}
 
 	public CustomTileEntity getTileEntity() {
 		return this.tileEntity;
 	}
 
-	public Rectangle2d getInputTankBounds() {
-		return GuiHelper.getFluidTankBounds(this.guiLeft + INPUT_TANK_LEFT, this.guiTop + INPUT_TANK_TOP);
+	public Rect2i getInputTankBounds() {
+		return GuiHelper.getFluidTankBounds(this.imageWidth + INPUT_TANK_LEFT, this.imageHeight + INPUT_TANK_TOP);
 	}
 
-	public Rectangle2d getOutputTankBounds() {
-		return GuiHelper.getFluidTankBounds(this.guiLeft + OUTPUT_TANK_LEFT, this.guiTop + OUTPUT_TANK_TOP);
+	public Rect2i getOutputTankBounds() {
+		return GuiHelper.getFluidTankBounds(this.imageWidth + OUTPUT_TANK_LEFT, this.imageHeight + OUTPUT_TANK_TOP);
 	}
 
-	public Rectangle2d getEnergyBounds() {
-		return GuiHelper.getEnergyBounds(this.guiLeft + ENERGY_LEFT, this.guiTop + ENERGY_TOP);
+	public Rect2i getEnergyBounds() {
+		return GuiHelper.getEnergyBounds(this.imageWidth + ENERGY_LEFT, this.imageHeight + ENERGY_TOP);
 	}
 }
