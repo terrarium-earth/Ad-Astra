@@ -1,18 +1,14 @@
 package net.mrscauthd.boss_tools.fluid;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
@@ -35,7 +31,7 @@ public class FluidUtil2 {
 	}
 
 	private static Fluid findBucketFluidInternal(Item item) {
-		return ForgeRegistries.FLUIDS.getValues().stream().filter(f -> f.isSource(f.getDefaultState()) && f.getFilledBucket() == item).findFirst().orElse(null);
+		return ForgeRegistries.FLUIDS.getValues().stream().filter(f -> f.isSource(f.defaultFluidState()) && f.getBucket() == item).findFirst().orElse(null);
 	}
 
 	public static boolean isEquivalentTo(FluidStack left, Fluid right) {
@@ -44,7 +40,7 @@ public class FluidUtil2 {
 		else if (right == Fluids.EMPTY)
 			return false;
 
-		return left.getFluid().isEquivalentTo(right);
+		return left.getFluid().isSame(right);
 	}
 
 	public static boolean isEquivalentTo(FluidStack left, FluidStack right) {
@@ -53,7 +49,7 @@ public class FluidUtil2 {
 		else if (right.isEmpty())
 			return false;
 
-		return left.getFluid().isEquivalentTo(right.getFluid()) && FluidStack.areFluidStackTagsEqual(left, right);
+		return left.getFluid().isSame(right.getFluid()) && FluidStack.areFluidStackTagsEqual(left, right);
 	}
 
 	@Nullable
@@ -78,7 +74,7 @@ public class FluidUtil2 {
 		}
 
 		if (itemStack.getItem() == Items.BUCKET) {
-			return fluid.getFilledBucket() != Items.AIR;
+			return fluid.getBucket() != Items.AIR;
 		}
 
 		IFluidHandlerItem handlerInItemStack = getItemStackFluidHandler(itemStack);
@@ -127,7 +123,7 @@ public class FluidUtil2 {
 			return false;
 		}
 
-		if (itemStack.getItem() == fluid.getFilledBucket()) {
+		if (itemStack.getItem() == fluid.getBucket()) {
 			return true;
 		}
 
@@ -173,7 +169,7 @@ public class FluidUtil2 {
 			return itemStack;
 		}
 
-		if (itemStack.getItem() == fluid.getFilledBucket()) {
+		if (itemStack.getItem() == fluid.getBucket()) {
 			return new ItemStack(Items.BUCKET);
 		}
 
@@ -192,8 +188,8 @@ public class FluidUtil2 {
 			return itemStack;
 		}
 
-		if (itemStack.getItem() == Items.BUCKET && fluid.getFilledBucket() != null) {
-			return new ItemStack(fluid.getFilledBucket());
+		if (itemStack.getItem() == Items.BUCKET && fluid.getBucket() != null) {
+			return new ItemStack(fluid.getBucket());
 		}
 
 		IFluidHandlerItem handlerInItemStack = getItemStackFluidHandler(itemStack);
@@ -259,7 +255,7 @@ public class FluidUtil2 {
 
 			if (fluidStack.getAmount() == size) {
 				source.drain(size, FluidAction.EXECUTE);
-				itemHandler.setStackInSlot(sinkItemSlot, new ItemStack(fluidStack.getFluid().getFilledBucket()));
+				itemHandler.setStackInSlot(sinkItemSlot, new ItemStack(fluidStack.getFluid().getBucket()));
 				return true;
 			}
 		}
