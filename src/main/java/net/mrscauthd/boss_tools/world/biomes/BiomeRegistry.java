@@ -1,24 +1,22 @@
 package net.mrscauthd.boss_tools.world.biomes;
 
-import net.minecraft.block.Blocks;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.world.biome.*;
-import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.feature.Features;
-import net.minecraft.world.gen.surfacebuilders.ConfiguredSurfaceBuilders;
-import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
-import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
+import net.minecraft.data.worldgen.BiomeDefaultFeatures;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeGenerationSettings;
+import net.minecraft.world.level.biome.BiomeSpecialEffects;
+import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.ModInnet;
 
-import Biome;
+//@Mod.EventBusSubscriber(modid = BossToolsMod.ModId, bus = Mod.EventBusSubscriber.Bus.MOD)
 
-@Mod.EventBusSubscriber(modid = BossToolsMod.ModId, bus = Mod.EventBusSubscriber.Bus.MOD)
+//TODO Rework Biomes on Json (Forge dont't allow java Biomes right now!)
+
 public class BiomeRegistry {
-    public static Biome moon;
+/*    public static Biome moon;
 
     public static Biome mars;
     public static Biome mars_ice_spike;
@@ -30,22 +28,22 @@ public class BiomeRegistry {
     public static Biome mercury;
     public static Biome mercury_magma;
 
-    public static Biome orbit;
-
+    public static Biome orbit;*/
+/*
     @SubscribeEvent
     public static void registerBiomes(RegistryEvent.Register<Biome> event) {
-        if (moon == null) {
-            BiomeAmbience effects = new BiomeAmbience.Builder().setFogColor(-16777216).setWaterColor(4159204).setWaterFogColor(329011).withSkyColor(-16777216).withFoliageColor(7842607).withGrassColor(9551193).build();
-            BiomeGenerationSettings.Builder biomeGenerationSettings = new BiomeGenerationSettings.Builder().withSurfaceBuilder(SurfaceBuilder.DEFAULT.func_242929_a(new SurfaceBuilderConfig(ModInnet.MOON_SAND.get().getDefaultState(), ModInnet.MOON_SAND.get().getDefaultState(), ModInnet.MOON_SAND.get().getDefaultState())));
-            DefaultBiomeFeatures.withCavesAndCanyons(biomeGenerationSettings);
-            MobSpawnInfo.Builder mobSpawnInfo = new MobSpawnInfo.Builder().isValidSpawnBiomeForPlayer();
 
-            moon = new Biome.Builder().precipitation(Biome.RainType.NONE).category(Biome.Category.NONE).depth(0.2f).scale(0.02f).temperature(1.6f).downfall(0f).setEffects(effects).withMobSpawnSettings(mobSpawnInfo.copy()).withGenerationSettings(biomeGenerationSettings.build()).build();
+        if (moon == null) {
+            BiomeSpecialEffects effects = new BiomeSpecialEffects.Builder().fogColor(-16777216).waterColor(4159204).waterFogColor(329011).skyColor(-16777216).foliageColorOverride(7842607).grassColorOverride(9551193).build();
+            BiomeGenerationSettings.Builder biomeGenerationSettings = new BiomeGenerationSettings.Builder();
+            BiomeDefaultFeatures.addDefaultCarversAndLakes(biomeGenerationSettings);
+
+            moon = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.NONE).temperature(1.6f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
             event.getRegistry().register(moon.setRegistryName(BossToolsMod.ModId,"moon"));
         }
 
         if (mars == null) {
-            BiomeAmbience effects = new BiomeAmbience.Builder().setFogColor(-3044526).setWaterColor(4159204).setWaterFogColor(329011).withSkyColor(-3044526).withFoliageColor(7842607).withGrassColor(9551193).setParticle(new ParticleEffectAmbience(ParticleTypes.CRIMSON_SPORE, 0.014f)).build();
+            BiomeSpecialEffects effects = new BiomeSpecialEffects.Builder().fogColor(-3044526).setWaterColor(4159204).setWaterFogColor(329011).withSkyColor(-3044526).withFoliageColor(7842607).withGrassColor(9551193).setParticle(new ParticleEffectAmbience(ParticleTypes.CRIMSON_SPORE, 0.014f)).build();
             BiomeGenerationSettings.Builder biomeGenerationSettings = new BiomeGenerationSettings.Builder().withSurfaceBuilder(SurfaceBuilder.DEFAULT.func_242929_a(new SurfaceBuilderConfig(ModInnet.MARS_SAND.get().getDefaultState(), ModInnet.MARS_SAND.get().getDefaultState(), ModInnet.MARS_SAND.get().getDefaultState())));
             DefaultBiomeFeatures.withCavesAndCanyons(biomeGenerationSettings);
             MobSpawnInfo.Builder mobSpawnInfo = new MobSpawnInfo.Builder().isValidSpawnBiomeForPlayer();
@@ -144,4 +142,5 @@ public class BiomeRegistry {
         }
 
     }
+    */
 }

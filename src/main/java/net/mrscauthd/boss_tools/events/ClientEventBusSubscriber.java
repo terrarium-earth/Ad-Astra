@@ -70,7 +70,7 @@ public class ClientEventBusSubscriber {
 		event.registerEntityRenderer(ModInnet.LANDER.get(), LanderRenderer::new);
 		event.registerEntityRenderer(ModInnet.ROVER.get(), RoverRenderer::new);
 
-		event.registerBlockEntityRenderer(null, TileEntityBoxRenderer::new);
+		event.registerBlockEntityRenderer(ModInnet.OXYGEN_BUBBLE_DISTRIBUTOR.get(), TileEntityBoxRenderer::new);
 	}
 
 	@SubscribeEvent

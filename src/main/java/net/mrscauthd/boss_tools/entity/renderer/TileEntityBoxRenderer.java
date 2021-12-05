@@ -18,7 +18,6 @@ import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.model.pipeline.IVertexConsumer;
 import net.mrscauthd.boss_tools.machines.OxygenBubbleDistributorBlock;
 
 @OnlyIn(Dist.CLIENT)
