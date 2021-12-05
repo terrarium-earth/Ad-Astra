@@ -1,5 +1,6 @@
 package net.mrscauthd.boss_tools.entity.renderer.alien;
 
+import net.minecraft.client.model.EntityModel;
 import net.mrscauthd.boss_tools.entity.alien.AlienEntity;
 
 import net.minecraft.util.math.MathHelper;

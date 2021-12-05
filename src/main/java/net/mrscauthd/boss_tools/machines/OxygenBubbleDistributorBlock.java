@@ -11,6 +11,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.PushReaction;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.core.BlockPos;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -44,6 +45,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -334,7 +336,7 @@ public class OxygenBubbleDistributorBlock {
 			return this.getWorkingArea(this.getPos(), range);
 		}
 
-		public AxisAlignedBB getWorkingArea(BlockPos pos, double range) {
+		public AABB getWorkingArea(BlockPos pos, double range) {
 			return new AxisAlignedBB(pos).grow(range).offset(0.0D, range, 0.0D);
 		}
 

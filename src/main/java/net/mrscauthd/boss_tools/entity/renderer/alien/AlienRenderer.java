@@ -1,20 +1,19 @@
 package net.mrscauthd.boss_tools.entity.renderer.alien;
 
-
-import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.entity.merchant.villager.VillagerProfession;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.npc.VillagerProfession;
 import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.entity.alien.AlienEntity;
 
 public class AlienRenderer extends MobRenderer<AlienEntity, AlienModel<AlienEntity>> {
-    public AlienRenderer(EntityRendererManager renderManagerIn) {
+    public AlienRenderer(EntityRendererProvider.Context renderManagerIn) {
         super(renderManagerIn, new AlienModel<>(), 0.5f);
     }
 
     @Override
-    public ResourceLocation getEntityTexture(AlienEntity entity) {
+    public ResourceLocation getTextureLocation(AlienEntity entity) {
         if (entity.getVillagerData().getProfession() == VillagerProfession.FARMER) {
             return new ResourceLocation(BossToolsMod.ModId,"textures/entities/alien/entity_alien1.png");
         }
