@@ -101,11 +101,6 @@ public class LanderEntity extends PathfinderMob {
 	}
 
 	@Override
-	public void move(MoverType p_19973_, Vec3 p_19974_) {
-		super.move(p_19973_, p_19974_);
-	}
-
-	@Override
 	protected MovementEmission getMovementEmission() {
 		return MovementEmission.NONE;
 	}
