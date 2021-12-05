@@ -112,8 +112,6 @@ public class NetheriteSpaceSuit {
 			return BossToolsMod.ModId + ":textures/models/armor/netherite_space_suit.png";
 		}
 
-		private double OXYGEN_TIMER = 0;
-
 		@Override
 		public void onArmorTick(ItemStack stack, Level world, Player player) {
 			Methodes.extractArmorOxygenUsingTimer(stack, player);

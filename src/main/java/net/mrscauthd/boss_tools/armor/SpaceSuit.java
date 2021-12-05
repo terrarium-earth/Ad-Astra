@@ -1,5 +1,20 @@
 package net.mrscauthd.boss_tools.armor;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.client.IItemRenderProperties;
 import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.armormaterial.SpaceSuitArmorMaterial;
 import net.mrscauthd.boss_tools.entity.renderer.spacesuit.SpaceSuitModel;
@@ -13,118 +28,154 @@ import net.mrscauthd.boss_tools.itemgroup.BossToolsItemGroups;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.api.distmarker.Dist;
+import org.jetbrains.annotations.Nullable;
 
-import net.minecraft.world.World;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Item;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.Entity;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.client.renderer.entity.model.BipedModel;
-
+import java.util.Collections;
 import java.util.List;
-
-import ArmorItem;
+import java.util.Map;
+import java.util.function.Consumer;
 
 public class SpaceSuit {
 
-	public static ArmorItem OXYGEN_MASK = new ArmorItem(SpaceSuitArmorMaterial.ArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(BossToolsItemGroups.tab_normal)) {
+	public static ArmorItem OXYGEN_MASK = new ArmorItem(SpaceSuitArmorMaterial.ArmorMaterial, EquipmentSlot.HEAD, new Item.Properties().tab(BossToolsItemGroups.tab_normal)) {
 		@Override
-		@OnlyIn(Dist.CLIENT)
-		public BipedModel getArmorModel(LivingEntity living, ItemStack stack, EquipmentSlotType slot, BipedModel defaultModel) {
-			BipedModel armorModel = new BipedModel(1);
-			armorModel.bipedHead = new SpaceSuitModel.SPACE_SUIT_P1().Head;
-			armorModel.isSneak = living.isSneaking();
-			armorModel.isSitting = defaultModel.isSitting;
-			armorModel.isChild = living.isChild();
-			return armorModel;
+		public void initializeClient(Consumer<IItemRenderProperties> consumer) {
+			consumer.accept(new IItemRenderProperties() {
+
+				@Override
+				@OnlyIn(Dist.CLIENT)
+				public HumanoidModel getArmorModel(LivingEntity living, ItemStack stack, EquipmentSlot slot, HumanoidModel defaultModel) {
+
+					Map map = Map.of("head", new SpaceSuitModel.SPACE_SUIT_P1(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION)).Head);
+					ModelPart modelPart = new ModelPart(Collections.emptyList(), map);
+
+					HumanoidModel armorModel = new HumanoidModel(modelPart);
+
+					armorModel.crouching = living.isCrouching();
+					armorModel.riding = defaultModel.riding;
+					armorModel.young = living.isBaby();
+
+					return armorModel;
+				}
+			});
 		}
 
 		@Override
-		public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {
+		public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
 			return BossToolsMod.ModId + ":textures/models/armor/space_suit_head.png";
 		}
 	};
 
-	public static ArmorItem SPACE_SUIT =  new ArmorItem(SpaceSuitArmorMaterial.ArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(BossToolsItemGroups.tab_normal)) {
+	public static ArmorItem SPACE_SUIT =  new ArmorItem(SpaceSuitArmorMaterial.ArmorMaterial, EquipmentSlot.CHEST, new Item.Properties().tab(BossToolsItemGroups.tab_normal)) {
 		@Override
-		@OnlyIn(Dist.CLIENT)
-		public BipedModel getArmorModel(LivingEntity living, ItemStack stack, EquipmentSlotType slot, BipedModel defaultModel) {
-			BipedModel armorModel = new BipedModel(1);
-			armorModel.bipedBody = new SpaceSuitModel.SPACE_SUIT_P1().Body;
-			armorModel.bipedLeftArm = new SpaceSuitModel.SPACE_SUIT_P1().ArmLeft;
-			armorModel.bipedRightArm = new SpaceSuitModel.SPACE_SUIT_P1().ArmRight;
-			armorModel.isSneak = living.isSneaking();
-			armorModel.isSitting = defaultModel.isSitting;
-			armorModel.isChild = living.isChild();
-			return armorModel;
+		public void initializeClient(Consumer<IItemRenderProperties> consumer) {
+			consumer.accept(new IItemRenderProperties() {
+
+				@Override
+				@OnlyIn(Dist.CLIENT)
+				public HumanoidModel getArmorModel(LivingEntity living, ItemStack stack, EquipmentSlot slot, HumanoidModel defaultModel) {
+
+					Map map = Map.of(
+							"body", new SpaceSuitModel.SPACE_SUIT_P1(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION)).Body,
+							"left_arm", new SpaceSuitModel.SPACE_SUIT_P1(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION)).Left_Arm,
+							"right_arm", new SpaceSuitModel.SPACE_SUIT_P1(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION)).Right_Arm);
+
+					ModelPart modelPart = new ModelPart(Collections.emptyList(), map);
+
+					HumanoidModel armorModel = new HumanoidModel(modelPart);
+
+					armorModel.crouching = living.isCrouching();
+					armorModel.riding = defaultModel.riding;
+					armorModel.young = living.isBaby();
+
+					return armorModel;
+				}
+			});
 		}
 
 		@Override
-		public ICapabilityProvider initCapabilities(ItemStack stack, CompoundNBT nbt) {
+		public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
 			return new SpaceSuitCapabilityProvider(stack, 48000);
 		}
 
 		@Override
-		public void addInformation(ItemStack itemstack, World world, List<ITextComponent> list, ITooltipFlag flag) {
-			super.addInformation(itemstack, world, list, flag);
-			IOxygenStorage oxygenStorage = OxygenUtil.getItemStackOxygenStorage(itemstack);
-			list.add(GaugeTextHelper.buildSpacesuitOxygenTooltip(oxygenStorage));
+		public void appendHoverText(ItemStack p_41421_, @Nullable net.minecraft.world.level.Level p_41422_, List<Component> p_41423_, TooltipFlag p_41424_) {
+			super.appendHoverText(p_41421_, p_41422_, p_41423_, p_41424_);
+			IOxygenStorage oxygenStorage = OxygenUtil.getItemStackOxygenStorage(p_41421_);
+			p_41423_.add(GaugeTextHelper.buildSpacesuitOxygenTooltip(oxygenStorage));
 		}
 
-		@Override
-		public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {
+		@OnlyIn(Dist.CLIENT)
+		public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
 			return BossToolsMod.ModId + ":textures/models/armor/space_suit.png";
 		}
 
-		private double OXYGEN_TIMER = 0;
-
 		@Override
-		public void onArmorTick(ItemStack itemstack, World world, PlayerEntity player) {
-			Methodes.extractArmorOxygenUsingTimer(itemstack, player);
+		public void onArmorTick(ItemStack stack, Level world, Player player) {
+			Methodes.extractArmorOxygenUsingTimer(stack, player);
 		}
-
 	};
 
-	public static ArmorItem SPACE_PANTS = new ArmorItem(SpaceSuitArmorMaterial.ArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(BossToolsItemGroups.tab_normal)) {
+	public static ArmorItem SPACE_PANTS = new ArmorItem(SpaceSuitArmorMaterial.ArmorMaterial, EquipmentSlot.LEGS, new Item.Properties().tab(BossToolsItemGroups.tab_normal)) {
 		@Override
-		@OnlyIn(Dist.CLIENT)
-		public BipedModel getArmorModel(LivingEntity living, ItemStack stack, EquipmentSlotType slot, BipedModel defaultModel) {
-			BipedModel armorModel = new BipedModel(1);
-			armorModel.bipedLeftLeg = new SpaceSuitModel.SPACE_SUIT_P2().LegLeft;
-			armorModel.bipedRightLeg = new SpaceSuitModel.SPACE_SUIT_P2().LegRight;
-			armorModel.isSneak = living.isSneaking();
-			armorModel.isSitting = defaultModel.isSitting;
-			armorModel.isChild = living.isChild();
-			return armorModel;
+		public void initializeClient(Consumer<IItemRenderProperties> consumer) {
+			consumer.accept(new IItemRenderProperties() {
+
+				@Override
+				@OnlyIn(Dist.CLIENT)
+				public HumanoidModel getArmorModel(LivingEntity living, ItemStack stack, EquipmentSlot slot, HumanoidModel defaultModel) {
+
+					Map map = Map.of(
+							"left_leg", new SpaceSuitModel.SPACE_SUIT_P2(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P2.LAYER_LOCATION)).Left_Leg,
+							"right_leg", new SpaceSuitModel.SPACE_SUIT_P2(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P2.LAYER_LOCATION)).Right_Leg);
+
+					ModelPart modelPart = new ModelPart(Collections.emptyList(), map);
+
+					HumanoidModel armorModel = new HumanoidModel(modelPart);
+
+					armorModel.crouching = living.isCrouching();
+					armorModel.riding = defaultModel.riding;
+					armorModel.young = living.isBaby();
+
+					return armorModel;
+				}
+			});
 		}
 
-		@Override
-		public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {
+		@OnlyIn(Dist.CLIENT)
+		public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
 			return BossToolsMod.ModId + ":textures/models/armor/space_suit_legs.png";
 		}
 	};
 
-	public static ArmorItem SPACE_BOOTS = new ArmorItem(SpaceSuitArmorMaterial.ArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(BossToolsItemGroups.tab_normal)) {
+	public static ArmorItem SPACE_BOOTS = new ArmorItem(SpaceSuitArmorMaterial.ArmorMaterial, EquipmentSlot.FEET, new Item.Properties().tab(BossToolsItemGroups.tab_normal)) {
 		@Override
-		@OnlyIn(Dist.CLIENT)
-		public BipedModel getArmorModel(LivingEntity living, ItemStack stack, EquipmentSlotType slot, BipedModel defaultModel) {
-			BipedModel armorModel = new BipedModel(1);
-			armorModel.bipedLeftLeg = new SpaceSuitModel.SPACE_SUIT_P1().FootLeft;
-			armorModel.bipedRightLeg = new SpaceSuitModel.SPACE_SUIT_P1().FootRight;
-			armorModel.isSneak = living.isSneaking();
-			armorModel.isSitting = defaultModel.isSitting;
-			armorModel.isChild = living.isChild();
-			return armorModel;
+		public void initializeClient(Consumer<IItemRenderProperties> consumer) {
+			consumer.accept(new IItemRenderProperties() {
+
+				@Override
+				@OnlyIn(Dist.CLIENT)
+				public HumanoidModel getArmorModel(LivingEntity living, ItemStack stack, EquipmentSlot slot, HumanoidModel defaultModel) {
+
+					Map map = Map.of(
+							"left_leg", new SpaceSuitModel.SPACE_SUIT_P1(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION)).Left_Foot,
+							"right_leg", new SpaceSuitModel.SPACE_SUIT_P1(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION)).Right_Foot);
+
+					ModelPart modelPart = new ModelPart(Collections.emptyList(), map);
+
+					HumanoidModel armorModel = new HumanoidModel(modelPart);
+
+					armorModel.crouching = living.isCrouching();
+					armorModel.riding = defaultModel.riding;
+					armorModel.young = living.isBaby();
+
+					return armorModel;
+				}
+			});
 		}
 
 		@Override
-		public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {
+		public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
 			return BossToolsMod.ModId + ":textures/models/armor/space_suit.png";
 		}
 	};
