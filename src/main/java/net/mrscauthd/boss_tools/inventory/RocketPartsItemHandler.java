@@ -14,13 +14,11 @@ import javax.annotation.Nullable;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.wrapper.RangedWrapper;
 import net.mrscauthd.boss_tools.crafting.RocketPart;
-
-import ItemStack;
 
 public class RocketPartsItemHandler implements IItemHandlerModifiable {
 
