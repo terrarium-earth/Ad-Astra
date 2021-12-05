@@ -24,6 +24,7 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.network.NetworkHooks;
 import net.mrscauthd.boss_tools.gui.screens.lander.LanderGui;
@@ -97,6 +98,16 @@ public class LanderEntity extends PathfinderMob {
 	@Override
 	public MobType getMobType() {
 		return MobType.UNDEFINED;
+	}
+
+	@Override
+	public void move(MoverType p_19973_, Vec3 p_19974_) {
+		super.move(p_19973_, p_19974_);
+	}
+
+	@Override
+	protected MovementEmission getMovementEmission() {
+		return MovementEmission.NONE;
 	}
 
 	@Override
