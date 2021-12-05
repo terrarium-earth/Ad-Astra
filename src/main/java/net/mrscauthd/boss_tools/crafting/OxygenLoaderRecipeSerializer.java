@@ -2,23 +2,23 @@ package net.mrscauthd.boss_tools.crafting;
 
 import com.google.gson.JsonObject;
 
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 
 public class OxygenLoaderRecipeSerializer extends BossToolsRecipeSerializer<OxygenLoaderRecipe> {
 
 	@Override
-	public OxygenLoaderRecipe read(ResourceLocation id, JsonObject json) {
+	public OxygenLoaderRecipe fromJson(ResourceLocation id, JsonObject json) {
 		return new OxygenLoaderRecipe(id, json);
 	}
 
 	@Override
-	public OxygenLoaderRecipe read(ResourceLocation id, PacketBuffer buffer) {
+	public OxygenLoaderRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buffer) {
 		return new OxygenLoaderRecipe(id, buffer);
 	}
 
 	@Override
-	public void write(PacketBuffer buffer, OxygenLoaderRecipe recipe) {
+	public void toNetwork(FriendlyByteBuf buffer, OxygenLoaderRecipe recipe) {
 		recipe.write(buffer);
 	}
 

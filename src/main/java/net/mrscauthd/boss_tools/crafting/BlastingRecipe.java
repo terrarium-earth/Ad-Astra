@@ -6,6 +6,8 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.mrscauthd.boss_tools.ModInnet;
 
 public class BlastingRecipe extends ItemStackToItemStackRecipe {
@@ -23,12 +25,12 @@ public class BlastingRecipe extends ItemStackToItemStackRecipe {
 	}
 
 	@Override
-	public IRecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<?> getSerializer() {
 		return ModInnet.RECIPE_SERIALIZER_BLASTING.get();
 	}
 
 	@Override
-	public IRecipeType<?> getType() {
+	public RecipeType<?> getType() {
 		return BossToolsRecipeTypes.BLASTING;
 	}
 

@@ -10,12 +10,12 @@ import com.google.common.collect.Lists;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import net.minecraft.fluid.Fluid;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.tags.ITag;
-import net.minecraft.tags.TagCollectionManager;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.tags.Tag;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -36,7 +36,7 @@ public abstract class FluidIngredient implements Predicate<FluidStack> {
 	}
 
 	public boolean test(FluidStack stack) {
-		return this.getFluids().stream().anyMatch(f -> f.isEquivalentTo(stack.getFluid())) && stack.getAmount() >= this.amount;
+		return this.getFluids().stream().anyMatch(f -> f.isSame(stack.getFluid())) && stack.getAmount() >= this.amount;
 	}
 
 	public List<Fluid> getFluids() {
@@ -60,7 +60,7 @@ public abstract class FluidIngredient implements Predicate<FluidStack> {
 		return this.amount;
 	}
 
-	public void write(PacketBuffer buffer) {
+	public void write(FriendlyByteBuf buffer) {
 		List<Fluid> fluids = this.getFluids();
 		int size = fluids.size();
 		buffer.writeInt(size);
@@ -73,11 +73,11 @@ public abstract class FluidIngredient implements Predicate<FluidStack> {
 	}
 
 	public static FluidIngredient deserialize(JsonObject json) {
-		int amount = JSONUtils.getInt(json, KEY_AMOUNT);
+		int amount = GsonHelper.getAsInt(json, KEY_AMOUNT);
 
 		if (json.has(KEY_TAG)) {
-			String tagName = JSONUtils.getString(json, KEY_TAG);
-			return of(TagCollectionManager.getManager().getFluidTags().get(new ResourceLocation(tagName)), amount);
+			String tagName = GsonHelper.getAsString(json, KEY_TAG);
+			return of(FluidTags.getAllTags().getTag(new ResourceLocation(tagName)), amount);
 		} else if (json.has(KEY_NAME)) {
 			JsonElement nameJson = json.get(KEY_NAME);
 
@@ -92,7 +92,7 @@ public abstract class FluidIngredient implements Predicate<FluidStack> {
 		return EMPTY;
 	}
 
-	public static FluidIngredient read(PacketBuffer buffer) {
+	public static FluidIngredient read(FriendlyByteBuf buffer) {
 		int size = buffer.readInt();
 		List<Fluid> fluids = new ArrayList<>();
 
@@ -120,11 +120,11 @@ public abstract class FluidIngredient implements Predicate<FluidStack> {
 		return new FluidMatch(fluids, amount);
 	}
 
-	public static FluidIngredient of(ITag<Fluid> tag) {
+	public static FluidIngredient of(Tag<Fluid> tag) {
 		return new TagMatch(tag, MINAMOUNT);
 	}
 
-	public static FluidIngredient of(ITag<Fluid> tag, int amount) {
+	public static FluidIngredient of(Tag<Fluid> tag, int amount) {
 		return new TagMatch(tag, amount);
 	}
 
@@ -155,7 +155,7 @@ public abstract class FluidIngredient implements Predicate<FluidStack> {
 
 		@Override
 		public boolean testFluid(Fluid fluid) {
-			return this.fluids.stream().anyMatch(f -> f.isEquivalentTo(fluid));
+			return this.fluids.stream().anyMatch(f -> f.isSame(fluid));
 		}
 
 		public List<Fluid> getFluids() {
@@ -164,19 +164,19 @@ public abstract class FluidIngredient implements Predicate<FluidStack> {
 	}
 
 	public static class TagMatch extends FluidIngredient {
-		private final ITag<Fluid> tag;
+		private final Tag<Fluid> tag;
 
-		public TagMatch(ITag<Fluid> tag, int amount) {
+		public TagMatch(Tag<Fluid> tag, int amount) {
 			super(amount);
 			this.tag = tag;
 		}
 
 		@Override
 		public boolean testFluid(Fluid fluid) {
-			return this.tag.getAllElements().contains(fluid);
+			return this.tag.getValues().contains(fluid);
 		}
 
-		public ITag<Fluid> getTag() {
+		public Tag<Fluid> getTag() {
 			return this.tag;
 		}
 

@@ -2,12 +2,12 @@ package net.mrscauthd.boss_tools.crafting;
 
 import com.google.gson.JsonObject;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.mrscauthd.boss_tools.ModInnet;
 
 public class CompressingRecipe extends ItemStackToItemStackRecipe {
@@ -16,7 +16,7 @@ public class CompressingRecipe extends ItemStackToItemStackRecipe {
 		super(id, json);
 	}
 
-	public CompressingRecipe(ResourceLocation id, PacketBuffer buffer) {
+	public CompressingRecipe(ResourceLocation id, FriendlyByteBuf buffer) {
 		super(id, buffer);
 	}
 
@@ -25,12 +25,12 @@ public class CompressingRecipe extends ItemStackToItemStackRecipe {
 	}
 
 	@Override
-	public IRecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<?> getSerializer() {
 		return ModInnet.RECIPE_SERIALIZER_COMPRESSING.get();
 	}
 
 	@Override
-	public IRecipeType<?> getType() {
+	public RecipeType<?> getType() {
 		return BossToolsRecipeTypes.COMPRESSING;
 	}
 

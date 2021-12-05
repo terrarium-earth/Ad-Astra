@@ -7,7 +7,7 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.items.ItemHandlerHelper;
 
@@ -75,7 +75,7 @@ public class StackCacher {
 	public boolean test(FluidStack left, FluidStack right) {
 		if (left.isEmpty() && right.isEmpty()) {
 			return true;
-		} else if (!left.getFluid().isEquivalentTo(right.getFluid()) || !FluidStack.areFluidStackTagsEqual(left, right)) {
+		} else if (!left.getFluid().isSame(right.getFluid()) || !FluidStack.areFluidStackTagsEqual(left, right)) {
 			return false;
 		}
 

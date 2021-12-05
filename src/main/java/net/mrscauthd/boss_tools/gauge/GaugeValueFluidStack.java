@@ -1,7 +1,7 @@
 package net.mrscauthd.boss_tools.gauge;
 
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -20,15 +20,15 @@ public class GaugeValueFluidStack implements IGaugeValue {
 	}
 
 	@Override
-	public void deserializeNBT(CompoundNBT compound) {
+	public void deserializeNBT(CompoundTag compound) {
 		this.setStack(FluidStack.loadFluidStackFromNBT(compound.getCompound("stack")));
 		this.setCapacity(compound.getInt("capacity"));
 	}
 
 	@Override
-	public CompoundNBT serializeNBT() {
-		CompoundNBT compound = new CompoundNBT();
-		CompoundNBT stackCompound = new CompoundNBT();
+	public CompoundTag serializeNBT() {
+		CompoundTag compound = new CompoundTag();
+		CompoundTag stackCompound = new CompoundTag();
 		this.getStack().writeToNBT(stackCompound);
 		compound.put("stack", stackCompound);
 		compound.putInt("capacity", this.getCapacity());
@@ -52,7 +52,7 @@ public class GaugeValueFluidStack implements IGaugeValue {
 	}
 
 	@Override
-	public ITextComponent getDisplayName() {
+	public Component getDisplayName() {
 		return this.getStack().getDisplayName();
 	}
 

@@ -2,23 +2,23 @@ package net.mrscauthd.boss_tools.crafting;
 
 import com.google.gson.JsonObject;
 
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 
 public class FuelRefiningRecipeSerializer extends BossToolsRecipeSerializer<FuelRefiningRecipe> {
 
 	@Override
-	public FuelRefiningRecipe read(ResourceLocation id, JsonObject json) {
+	public FuelRefiningRecipe fromJson(ResourceLocation id, JsonObject json) {
 		return new FuelRefiningRecipe(id, json);
 	}
 
 	@Override
-	public FuelRefiningRecipe read(ResourceLocation id, PacketBuffer buffer) {
+	public FuelRefiningRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buffer) {
 		return new FuelRefiningRecipe(id, buffer);
 	}
 
 	@Override
-	public void write(PacketBuffer buffer, FuelRefiningRecipe recipe) {
+	public void toNetwork(FriendlyByteBuf buffer, FuelRefiningRecipe recipe) {
 		recipe.write(buffer);
 	}
 

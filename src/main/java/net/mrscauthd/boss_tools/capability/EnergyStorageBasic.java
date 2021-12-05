@@ -3,10 +3,10 @@ package net.mrscauthd.boss_tools.capability;
 import java.util.Optional;
 
 import net.minecraft.nbt.CompoundTag;
-import net.minecraftforge.common.util.INBTSerializable;
+import net.minecraft.nbt.Tag;
 import net.minecraftforge.energy.EnergyStorage;
 
-public class EnergyStorageBasic extends EnergyStorage implements INBTSerializable<CompoundTag> {
+public class EnergyStorageBasic extends EnergyStorage {
 
 	private final IEnergyStorageHolder holder;
 
@@ -83,16 +83,16 @@ public class EnergyStorageBasic extends EnergyStorage implements INBTSerializabl
 	}
 
 	@Override
-	public CompoundTag serializeNBT() {
+	public Tag serializeNBT() {
 		CompoundTag compound = new CompoundTag();
 		compound.putInt("energy", this.energy);
 		return compound;
 	}
 
-
 	@Override
-	public void deserializeNBT(CompoundTag compound) {
-		this.energy = compound.getInt("energy");
+	public void deserializeNBT(Tag tag) {
+		if (tag instanceof CompoundTag) {
+			this.energy = ((CompoundTag) tag).getInt("energy");
+		}
 	}
-
 }

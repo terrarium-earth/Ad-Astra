@@ -1,12 +1,10 @@
 package net.mrscauthd.boss_tools.gauge;
 
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.gui.helper.GuiHelper;
-
-import ResourceLocation;
 
 public class GaugeValueRenderer extends AbstractGaugeDataRenderer {
 
@@ -16,7 +14,7 @@ public class GaugeValueRenderer extends AbstractGaugeDataRenderer {
 		super(value);
 	}
 
-	public GaugeValueRenderer(PacketBuffer buffer) {
+	public GaugeValueRenderer(FriendlyByteBuf buffer) {
 		super(GaugeValueSerializer.Serializer.read(buffer));
 	}
 
