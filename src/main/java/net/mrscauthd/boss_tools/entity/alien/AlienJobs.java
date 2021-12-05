@@ -1,6 +1,5 @@
 package net.mrscauthd.boss_tools.entity.alien;
 
-import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerProfession;
 
 public enum AlienJobs {

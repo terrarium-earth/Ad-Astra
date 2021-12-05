@@ -229,9 +229,9 @@ public class AlienEntity extends Villager implements Merchant, Npc {
 	@Override
 	protected void updateTrades() {
 		VillagerData villagerdata = this.getVillagerData();
-		Int2ObjectMap<AlienTrade.ITrade[]> int2objectmap = AlienTrade.VILLAGER_DEFAULT_TRADES.get(villagerdata.getProfession());
+		Int2ObjectMap<AlienTrade.ItemListing[]> int2objectmap = AlienTrade.TRADES.get(villagerdata.getProfession());
 		if (int2objectmap != null && !int2objectmap.isEmpty()) {
-			AlienTrade.ITrade[] avillagertrades$itrade = int2objectmap.get(villagerdata.getLevel());
+			AlienTrade.ItemListing[] avillagertrades$itrade = int2objectmap.get(villagerdata.getLevel());
 			if (avillagertrades$itrade != null) {
 				MerchantOffers merchantoffers = this.getOffers();
 				this.addOffersFromItemListings(merchantoffers, (VillagerTrades.ItemListing[]) avillagertrades$itrade, 6);
