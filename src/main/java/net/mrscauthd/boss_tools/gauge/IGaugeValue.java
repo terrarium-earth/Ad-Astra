@@ -1,12 +1,12 @@
 package net.mrscauthd.boss_tools.gauge;
 
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraftforge.common.util.INBTSerializable;
 
-public interface IGaugeValue extends INBTSerializable<CompoundNBT> {
+public interface IGaugeValue extends INBTSerializable<CompoundTag> {
 
-	ITextComponent getDisplayName();
+	Component getDisplayName();
 
 	String getUnit();
 

@@ -5,8 +5,6 @@ import javax.annotation.Nonnull;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
-import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
-
 public class FluidHandlerWrapper implements IFluidHandler {
 	private final IFluidHandler parent;
 	private final boolean canDrain;

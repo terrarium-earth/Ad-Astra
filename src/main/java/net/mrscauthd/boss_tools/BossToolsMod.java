@@ -9,6 +9,7 @@ import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
+import net.mrscauthd.boss_tools.capability.CapabilityOxygen;
 import net.mrscauthd.boss_tools.compat.CompatibleManager;
 import net.mrscauthd.boss_tools.gui.screens.planetselection.PlanetSelectionGui;
 import net.mrscauthd.boss_tools.keybind.KeyBindings;
@@ -88,6 +89,8 @@ public class BossToolsMod {
 		BossToolsMod.addNetworkMessage(OxygenBubbleDistributorBlock.ChangeWorkingAreaVisibleMessage.class, OxygenBubbleDistributorBlock.ChangeWorkingAreaVisibleMessage::encode, OxygenBubbleDistributorBlock.ChangeWorkingAreaVisibleMessage::decode, OxygenBubbleDistributorBlock.ChangeWorkingAreaVisibleMessage::handle);
 		BossToolsMod.addNetworkMessage(PlanetSelectionGui.NetworkMessage.class, PlanetSelectionGui.NetworkMessage::encode, PlanetSelectionGui.NetworkMessage::decode, PlanetSelectionGui.NetworkMessage::handle);
 
+		//Capability
+		bus.addListener(CapabilityOxygen::register);
 
 		CompatibleManager.loadAll();
 	}

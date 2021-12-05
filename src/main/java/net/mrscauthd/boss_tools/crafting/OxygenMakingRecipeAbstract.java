@@ -4,11 +4,11 @@ import java.util.function.Predicate;
 
 import com.google.gson.JsonObject;
 
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.fluids.FluidStack;
 
 public abstract class OxygenMakingRecipeAbstract extends BossToolsRecipe implements Predicate<FluidStack> {
@@ -19,11 +19,11 @@ public abstract class OxygenMakingRecipeAbstract extends BossToolsRecipe impleme
 	public OxygenMakingRecipeAbstract(ResourceLocation id, JsonObject json) {
 		super(id, json);
 
-		this.input = FluidIngredient.deserialize(JSONUtils.getJsonObject(json, "input"));
-		this.oxygen = JSONUtils.getInt(json, "oxygen");
+		this.input = FluidIngredient.deserialize(GsonHelper.getAsJsonObject(json, "input"));
+		this.oxygen = GsonHelper.getAsInt(json, "oxygen");
 	}
 
-	public OxygenMakingRecipeAbstract(ResourceLocation id, PacketBuffer buffer) {
+	public OxygenMakingRecipeAbstract(ResourceLocation id, FriendlyByteBuf buffer) {
 		super(id, buffer);
 
 		this.input = FluidIngredient.read(buffer);
@@ -39,7 +39,7 @@ public abstract class OxygenMakingRecipeAbstract extends BossToolsRecipe impleme
 	}
 
 	@Override
-	public void write(PacketBuffer buffer) {
+	public void write(FriendlyByteBuf buffer) {
 		super.write(buffer);
 
 		this.getInput().write(buffer);
@@ -47,7 +47,7 @@ public abstract class OxygenMakingRecipeAbstract extends BossToolsRecipe impleme
 	}
 
 	@Override
-	public boolean canFit(int var1, int var2) {
+	public boolean canCraftInDimensions(int var1, int var2) {
 		return true;
 	}
 
@@ -65,9 +65,9 @@ public abstract class OxygenMakingRecipeAbstract extends BossToolsRecipe impleme
 	}
 
 	@Override
-	public abstract IRecipeSerializer<?> getSerializer();
+	public abstract RecipeSerializer<?> getSerializer();
 
 	@Override
-	public abstract IRecipeType<?> getType();
+	public abstract RecipeType<?> getType();
 
 }

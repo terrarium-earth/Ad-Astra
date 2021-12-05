@@ -2,10 +2,10 @@ package net.mrscauthd.boss_tools.crafting;
 
 import com.google.gson.JsonObject;
 
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.mrscauthd.boss_tools.ModInnet;
 
 public class OxygenLoaderRecipe extends OxygenMakingRecipeAbstract {
@@ -14,7 +14,7 @@ public class OxygenLoaderRecipe extends OxygenMakingRecipeAbstract {
 		super(id, json);
 	}
 
-	public OxygenLoaderRecipe(ResourceLocation id, PacketBuffer buffer) {
+	public OxygenLoaderRecipe(ResourceLocation id, FriendlyByteBuf buffer) {
 		super(id, buffer);
 	}
 
@@ -23,12 +23,12 @@ public class OxygenLoaderRecipe extends OxygenMakingRecipeAbstract {
 	}
 
 	@Override
-	public IRecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<?> getSerializer() {
 		return ModInnet.RECIPE_SERIALIZER_OXYGENLOADER.get();
 	}
 
 	@Override
-	public IRecipeType<?> getType() {
+	public RecipeType<?> getType() {
 		return BossToolsRecipeTypes.OXYGENLOADER;
 	}
 

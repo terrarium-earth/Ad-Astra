@@ -6,14 +6,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.minecraft.network.chat.Style;
 import org.apache.commons.lang3.StringUtils;
 
-import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 
 public class GaugeTextBuilder {
 	private final IGaugeValue value;
@@ -42,9 +41,9 @@ public class GaugeTextBuilder {
 		this.setUnitSuffix("");
 	}
 
-	public IFormattableTextComponent build() {
+	public MutableComponent build() {
 		IGaugeValue value = this.getValue();
-		ITextComponent displayName = value.getDisplayName();
+		Component displayName = value.getDisplayName();
 		int amount = value.getAmount();
 		int capacity = value.getCapacity();
 		String unit = value.getUnit();
@@ -57,26 +56,26 @@ public class GaugeTextBuilder {
 		for (int i = 0; i < this.getExtraValues().size(); i++) {
 			Object extraValue = this.getExtraValues().get(i);
 			Style extraStyle = this.getExtraStyle(i);
-			list.add(new TranslationTextComponent("%s", extraValue).setStyle(extraStyle));
+			list.add(new TranslatableComponent("%s", extraValue).setStyle(extraStyle));
 		}
 
-		return new TranslationTextComponent(this.getTranslationKey(), list.toArray()).setStyle(this.getTextStyle());
+		return new TranslatableComponent(this.getTranslationKey(), list.toArray()).setStyle(this.getTextStyle());
 	}
 
-	public IFormattableTextComponent format(String valueText, Style valueStyle, String unitText, Style unitStyle) {
+	public MutableComponent format(String valueText, Style valueStyle, String unitText, Style unitStyle) {
 		if (!StringUtils.isEmpty(unitText)) {
-			return this.format(valueText, valueStyle).appendString(" ").append(this.format(unitText + this.getUnitSuffix(), unitStyle));
+			return this.format(valueText, valueStyle).append(" ").append(this.format(unitText + this.getUnitSuffix(), unitStyle));
 		} else {
 			return this.format(valueText, valueStyle);
 		}
 	}
 
-	public IFormattableTextComponent format(String text, Style style) {
-		return new StringTextComponent(text).setStyle(style);
+	public MutableComponent format(String text, Style style) {
+		return new TextComponent(text).setStyle(style);
 	}
 
-	public IFormattableTextComponent format(ITextComponent text, Style style) {
-		return new StringTextComponent("").append(text).setStyle(style);
+	public MutableComponent format(Component text, Style style) {
+		return new TextComponent("").append(text).setStyle(style);
 	}
 
 	public final IGaugeValue getValue() {

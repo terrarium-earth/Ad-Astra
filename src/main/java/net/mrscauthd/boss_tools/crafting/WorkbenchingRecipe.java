@@ -14,14 +14,14 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.core.NonNullList;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.mrscauthd.boss_tools.ModInnet;
@@ -34,23 +34,23 @@ public class WorkbenchingRecipe extends BossToolsRecipe implements BiPredicate<R
 
 	public WorkbenchingRecipe(ResourceLocation id, JsonObject json) {
 		super(id, json);
-		JsonObject inputJson = JSONUtils.getJsonObject(json, "input");
-		JsonObject partsJson = JSONUtils.getJsonObject(inputJson, "parts");
+		JsonObject inputJson = GsonHelper.getAsJsonObject(json, "input");
+		JsonObject partsJson = GsonHelper.getAsJsonObject(inputJson, "parts");
 
 		Map<RocketPart, List<Ingredient>> map = new HashMap<>();
 
 		for (Entry<String, JsonElement> entry : partsJson.entrySet()) {
 			RocketPart part = ModInnet.ROCKET_PARTS_REGISTRY.getValue(new ResourceLocation(entry.getKey()));
 			JsonArray slotsJson = entry.getValue().getAsJsonArray();
-			List<Ingredient> ingredients = Lists.newArrayList(slotsJson).stream().map(js -> Ingredient.deserialize(js)).collect(Collectors.toList());
+			List<Ingredient> ingredients = Lists.newArrayList(slotsJson).stream().map(Ingredient::fromJson).collect(Collectors.toList());
 			map.put(part, Collections.unmodifiableList(ingredients));
 		}
 
 		this.parts = Collections.unmodifiableMap(map);
-		this.output = CraftingHelper.getItemStack(JSONUtils.getJsonObject(json, "output"), true);
+		this.output = CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(json, "output"), true);
 	}
 
-	public WorkbenchingRecipe(ResourceLocation id, PacketBuffer buffer) {
+	public WorkbenchingRecipe(ResourceLocation id, FriendlyByteBuf buffer) {
 		super(id, buffer);
 
 		int partsSize = buffer.readInt();
@@ -59,12 +59,12 @@ public class WorkbenchingRecipe extends BossToolsRecipe implements BiPredicate<R
 		for (int i = 0; i < partsSize; i++) {
 			RocketPart part = buffer.readRegistryId();
 			int ingredientsSize = buffer.readInt();
-			List<Ingredient> ingredients = Arrays.stream(new Ingredient[ingredientsSize]).map(e -> Ingredient.read(buffer)).collect(Collectors.toList());
+			List<Ingredient> ingredients = Arrays.stream(new Ingredient[ingredientsSize]).map(in -> Ingredient.fromNetwork(buffer)).collect(Collectors.toList());
 			map.put(part, Collections.unmodifiableList(ingredients));
 		}
 
 		this.parts = Collections.unmodifiableMap(map);
-		this.output = buffer.readItemStack();
+		this.output = buffer.readItem();
 	}
 
 	public WorkbenchingRecipe(ResourceLocation id, Map<RocketPart, List<Ingredient>> parts, ItemStack output) {
@@ -81,7 +81,7 @@ public class WorkbenchingRecipe extends BossToolsRecipe implements BiPredicate<R
 	}
 
 	@Override
-	public void write(PacketBuffer buffer) {
+	public void write(FriendlyByteBuf buffer) {
 		super.write(buffer);
 
 		buffer.writeInt(this.parts.size());
@@ -91,10 +91,10 @@ public class WorkbenchingRecipe extends BossToolsRecipe implements BiPredicate<R
 
 			List<Ingredient> ingredients = entry.getValue();
 			buffer.writeInt(ingredients.size());
-			ingredients.forEach(i -> i.write(buffer));
+			ingredients.forEach(i -> i.toNetwork(buffer));
 		}
 
-		buffer.writeItemStack(this.output);
+		buffer.writeItem(this.output);
 	}
 
 	@Override
@@ -105,7 +105,7 @@ public class WorkbenchingRecipe extends BossToolsRecipe implements BiPredicate<R
 	}
 
 	@Override
-	public boolean canFit(int var1, int var2) {
+	public boolean canCraftInDimensions(int var1, int var2) {
 		return false;
 	}
 
@@ -118,12 +118,12 @@ public class WorkbenchingRecipe extends BossToolsRecipe implements BiPredicate<R
 	}
 
 	@Override
-	public IRecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<?> getSerializer() {
 		return ModInnet.RECIPE_SERIALIZER_WORKBENCHING.get();
 	}
 
 	@Override
-	public IRecipeType<?> getType() {
+	public RecipeType<?> getType() {
 		return BossToolsRecipeTypes.WORKBENCHING;
 	}
 

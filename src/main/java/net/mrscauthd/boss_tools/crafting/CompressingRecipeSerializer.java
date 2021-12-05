@@ -2,23 +2,23 @@ package net.mrscauthd.boss_tools.crafting;
 
 import com.google.gson.JsonObject;
 
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 
 public class CompressingRecipeSerializer extends BossToolsRecipeSerializer<CompressingRecipe> {
 
 	@Override
-	public CompressingRecipe read(ResourceLocation id, JsonObject json) {
+	public CompressingRecipe fromJson(ResourceLocation id, JsonObject json) {
 		return new CompressingRecipe(id, json);
 	}
 
 	@Override
-	public CompressingRecipe read(ResourceLocation id, PacketBuffer buffer) {
+	public CompressingRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buffer) {
 		return new CompressingRecipe(id, buffer);
 	}
 
 	@Override
-	public void write(PacketBuffer buffer, CompressingRecipe recipe) {
+	public void toNetwork(FriendlyByteBuf buffer, CompressingRecipe recipe) {
 		recipe.write(buffer);
 	}
 

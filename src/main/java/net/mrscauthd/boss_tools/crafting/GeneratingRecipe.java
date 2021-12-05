@@ -4,16 +4,16 @@ import java.util.function.Predicate;
 
 import com.google.gson.JsonObject;
 
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
+import net.minecraft.core.NonNullList;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
 import net.mrscauthd.boss_tools.ModInnet;
 
 public class GeneratingRecipe extends BossToolsRecipe implements Predicate<ItemStack> {
@@ -25,15 +25,15 @@ public class GeneratingRecipe extends BossToolsRecipe implements Predicate<ItemS
 
 	public GeneratingRecipe(ResourceLocation id, JsonObject json) {
 		super(id, json);
-		JsonObject inputJson = JSONUtils.getJsonObject(json, "input");
-		this.ingredient = Ingredient.deserialize(JSONUtils.getJsonObject(inputJson, "ingredient"));
-		this.burnTime = JSONUtils.getInt(json, "burnTime");
+		JsonObject inputJson = GsonHelper.getAsJsonObject(json, "input");
+		this.ingredient = Ingredient.fromJson(GsonHelper.getAsJsonObject(inputJson, "ingredient"));
+		this.burnTime = GsonHelper.getAsInt(json, "burnTime");
 	}
 
-	public GeneratingRecipe(ResourceLocation id, PacketBuffer buffer) {
+	public GeneratingRecipe(ResourceLocation id, FriendlyByteBuf buffer) {
 		super(id, buffer);
 
-		this.ingredient = Ingredient.read(buffer);
+		this.ingredient = Ingredient.fromNetwork(buffer);
 		this.burnTime = buffer.readInt();
 	}
 
@@ -44,29 +44,29 @@ public class GeneratingRecipe extends BossToolsRecipe implements Predicate<ItemS
 	}
 
 	@Override
-	public void write(PacketBuffer buffer) {
+	public void write(FriendlyByteBuf buffer) {
 		super.write(buffer);
 
-		this.getIngredient().write(buffer);
+		this.getIngredient().toNetwork(buffer);
 		buffer.writeInt(this.getBurnTime());
 	}
 
 	@Override
-	public boolean canFit(int var1, int var2) {
+	public boolean canCraftInDimensions(int var1, int var2) {
 		return true;
 	}
 
 	@Override
-	public IRecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<?> getSerializer() {
 		return ModInnet.RECIPE_SERIALIZER_GENERATING.get();
 	}
 
 	@Override
-	public IRecipeType<?> getType() {
+	public RecipeType<?> getType() {
 		return BossToolsRecipeTypes.GENERATING;
 	}
 
-	public int getFuelSlot(IInventory inventory, World world) {
+	public int getFuelSlot(Container container, Level level) {
 		return SLOT_FUEL;
 	}
 
