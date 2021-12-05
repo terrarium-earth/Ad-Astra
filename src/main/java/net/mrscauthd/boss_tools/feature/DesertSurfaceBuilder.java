@@ -1,5 +1,6 @@
 package net.mrscauthd.boss_tools.feature;
 
+/*
 import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -10,9 +11,10 @@ import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 import net.mrscauthd.boss_tools.ModInnet;
 
-import java.util.Random;
+import java.util.Random;*/
 
-public class DesertSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig> {
+public class DesertSurfaceBuilder/* extends SurfaceBuilder<SurfaceBuilderConfig>*/ {
+    /*
     public DesertSurfaceBuilder(Codec<SurfaceBuilderConfig> p_i232124_1_) {
         super(p_i232124_1_);
     }
@@ -76,4 +78,6 @@ public class DesertSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig> {
             }
         }
     }
+
+     */
 }

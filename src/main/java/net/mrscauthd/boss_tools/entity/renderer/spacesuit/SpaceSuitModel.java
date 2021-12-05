@@ -15,6 +15,7 @@ import net.mrscauthd.boss_tools.BossToolsMod;
 
 public class SpaceSuitModel {
     public static class SPACE_SUIT_P1<T extends LivingEntity, M extends HumanoidModel<T>, A extends HumanoidModel<T>> extends HumanoidModel<T> {
+
         public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(BossToolsMod.ModId, "space_suit_p1"), "main");
 
         public static ModelPart Head;

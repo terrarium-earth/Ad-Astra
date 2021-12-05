@@ -1,38 +1,54 @@
 package net.mrscauthd.boss_tools.entity.renderer.flagtileentity;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.model.Model;
-import net.minecraft.client.renderer.model.ModelRenderer;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.SkullModelBase;
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.mrscauthd.boss_tools.BossToolsMod;
 
 @OnlyIn(Dist.CLIENT)
-public class TileEntityHeadModel extends Model {
-    protected final ModelRenderer field_217105_a;
+public class TileEntityHeadModel extends SkullModelBase {
+    private final ModelPart root;
+    protected final ModelPart head;
 
-    public TileEntityHeadModel() {
-        this(0, 35, 64, 64);
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(BossToolsMod.ModId, "flag"), "main");
+
+    public TileEntityHeadModel(ModelPart p_170945_) {
+        this.root = p_170945_;
+        this.head = p_170945_.getChild("head");
     }
 
-    public TileEntityHeadModel(int p_i51060_1_, int p_i51060_2_, int p_i51060_3_, int p_i51060_4_) {
-        super(RenderType::getEntityTranslucent);
-        this.textureWidth = p_i51060_3_;
-        this.textureHeight = p_i51060_4_;
-        this.field_217105_a = new ModelRenderer(this, p_i51060_1_, p_i51060_2_);
-
-        this.field_217105_a.setTextureOffset(8, 8).addBox(-3.0F, -11.0F, 3.980F, 8.0F, 8.0F, 0.020F, 0.0F, false);
-
-        this.field_217105_a.setTextureOffset(0, 8).addBox(-3.0F, -11.0F, 4.002F, 8.0F, 8.0F, 0.010F, 0.0F, false);
+    public static MeshDefinition createHeadModel() {
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot(); //0,0
+        partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(8, 8).addBox(-3.0F, -11.0F, 3.980F, 8.0F, 8.0F, 0.020F).texOffs(0, 8).addBox(-3.0F, -11.0F, 4.002F, 8.0F, 8.0F, 0.010F), PartPose.ZERO);
+        return meshdefinition;//(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F)
     }
 
-    public void func_225603_a_(float p_225603_1_, float p_225603_2_, float p_225603_3_) {
-        this.field_217105_a.rotateAngleY = p_225603_2_ * ((float)Math.PI / 180F);
-        this.field_217105_a.rotateAngleX = p_225603_3_ * ((float)Math.PI / 180F);
+    public static LayerDefinition createHumanoidHeadLayer() {
+        MeshDefinition meshdefinition = createHeadModel();
+        PartDefinition partdefinition = meshdefinition.getRoot();
+        partdefinition.getChild("head").addOrReplaceChild("hat", CubeListBuilder.create().texOffs(32, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.25F)), PartPose.ZERO);
+        return LayerDefinition.create(meshdefinition, 64, 64); //-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F
     }
 
-    public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-        this.field_217105_a.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+    public static LayerDefinition createMobHeadLayer() {
+        MeshDefinition meshdefinition = createHeadModel();
+        return LayerDefinition.create(meshdefinition, 64, 32);
+    }
+
+    public void setupAnim(float p_103811_, float p_103812_, float p_103813_) {
+        this.head.yRot = p_103812_ * ((float)Math.PI / 180F);
+        this.head.xRot = p_103813_ * ((float)Math.PI / 180F);
+    }
+
+    public void renderToBuffer(PoseStack p_103815_, VertexConsumer p_103816_, int p_103817_, int p_103818_, float p_103819_, float p_103820_, float p_103821_, float p_103822_) {
+        this.root.render(p_103815_, p_103816_, p_103817_, p_103818_, p_103819_, p_103820_, p_103821_, p_103822_);
     }
 }

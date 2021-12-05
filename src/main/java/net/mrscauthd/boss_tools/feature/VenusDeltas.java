@@ -1,5 +1,6 @@
 package net.mrscauthd.boss_tools.feature;
 
+/*
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.ColumnConfig;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -19,9 +20,10 @@ import java.util.Random;
 import com.mojang.serialization.Codec;
 
 import com.google.common.collect.ImmutableList;
-import net.mrscauthd.boss_tools.ModInnet;
+import net.mrscauthd.boss_tools.ModInnet;*/
 
-public class VenusDeltas extends Feature<ColumnConfig> implements Supplier {
+public class VenusDeltas/* extends Feature<ColumnConfig> implements Supplier*/ {
+	/*
 	private static final ImmutableList<Block> field_236245_a_ = ImmutableList.of(Blocks.LAVA, Blocks.BEDROCK, Blocks.MAGMA_BLOCK, Blocks.SOUL_SAND, Blocks.NETHER_BRICKS, Blocks.NETHER_BRICK_FENCE, Blocks.NETHER_BRICK_STAIRS, Blocks.NETHER_WART, Blocks.CHEST, Blocks.SPAWNER, Blocks.LIGHT_BLUE_STAINED_GLASS);
 	public VenusDeltas(Codec<ColumnConfig> codec) {
 		super(codec);
@@ -122,4 +124,6 @@ public class VenusDeltas extends Feature<ColumnConfig> implements Supplier {
 	public Object get() {
 		return null;
 	}
+
+	 */
 }

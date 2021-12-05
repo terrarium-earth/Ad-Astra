@@ -3,141 +3,139 @@ package net.mrscauthd.boss_tools.flag;
 import javax.annotation.Nullable;
 
 import com.mojang.authlib.GameProfile;
-import net.minecraft.block.*;
-import net.minecraft.block.material.PushReaction;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.NBTUtil;
-import net.minecraft.pathfinding.PathType;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.DirectionProperty;
-import net.minecraft.state.EnumProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.state.properties.DoubleBlockHalf;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.*;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class FlagBlock extends Block implements IWaterLoggable {
-	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
+public class FlagBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
+	public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 	public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-	public FlagBlock(AbstractBlock.Properties builder) {
+	public FlagBlock(BlockBehaviour.Properties builder) {
 		super(builder);
-		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(HALF, DoubleBlockHalf.LOWER).with(WATERLOGGED, false));
+		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(HALF, DoubleBlockHalf.LOWER).setValue(WATERLOGGED, false));
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context) {
-		Vector3d offset = state.getOffset(world, pos);
-		if (state.get(HALF) == DoubleBlockHalf.LOWER) {
-			switch ((Direction) state.get(FACING)) {
+	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+		Vec3 offset = state.getOffset(world, pos);
+		if (state.getValue(HALF) == DoubleBlockHalf.LOWER) {
+			switch ((Direction) state.getValue(FACING)) {
 				case SOUTH :
 				default :
-					return VoxelShapes.or(makeCuboidShape(14.5, 0, 9, 12.5, 1, 7), makeCuboidShape(14, 1, 8.5, 13, 16, 7.5)).withOffset(offset.x, offset.y, offset.z);
+					return Shapes.or(box(14.5, 0, 9, 12.5, 1, 7), box(14, 1, 8.5, 13, 16, 7.5)).move(offset.x, offset.y, offset.z);
 				case NORTH :
-					return VoxelShapes.or(makeCuboidShape(1.5, 0, 7, 3.5, 1, 9), makeCuboidShape(2, 1, 7.5, 3, 16, 8.5)).withOffset(offset.x, offset.y, offset.z);
+					return Shapes.or(box(1.5, 0, 7, 3.5, 1, 9), box(2, 1, 7.5, 3, 16, 8.5)).move(offset.x, offset.y, offset.z);
 				case EAST :
-					return VoxelShapes.or(makeCuboidShape(9, 0, 1.5, 7, 1, 3.5), makeCuboidShape(8.5, 1, 2, 7.5, 16, 3)).withOffset(offset.x, offset.y, offset.z);
+					return Shapes.or(box(9, 0, 1.5, 7, 1, 3.5), box(8.5, 1, 2, 7.5, 16, 3)).move(offset.x, offset.y, offset.z);
 				case WEST :
-					return VoxelShapes.or(makeCuboidShape(7, 0, 14.5, 9, 1, 12.5), makeCuboidShape(7.5, 1, 14, 8.5, 16, 13)).withOffset(offset.x, offset.y, offset.z);
+					return Shapes.or(box(7, 0, 14.5, 9, 1, 12.5), box(7.5, 1, 14, 8.5, 16, 13)).move(offset.x, offset.y, offset.z);
 			}
 		} else {
-			switch ((Direction) state.get(FACING)) {
+			switch ((Direction) state.getValue(FACING)) {
 				case SOUTH :
 				default :
-					return VoxelShapes.or(makeCuboidShape(14, 0, 8.5, 13, 16, 7.5), makeCuboidShape(14, 7, 8.5, 1, 15, 7.5)).withOffset(offset.x, offset.y, offset.z);
+					return Shapes.or(box(14, 0, 8.5, 13, 16, 7.5), box(14, 7, 8.5, 1, 15, 7.5)).move(offset.x, offset.y, offset.z);
 				case NORTH :
-					return VoxelShapes.or(makeCuboidShape(2, 0, 7.5, 3, 16, 8.5), makeCuboidShape(2, 7, 7.5, 15, 15, 8.5)).withOffset(offset.x, offset.y, offset.z);
+					return Shapes.or(box(2, 0, 7.5, 3, 16, 8.5), box(2, 7, 7.5, 15, 15, 8.5)).move(offset.x, offset.y, offset.z);
 				case EAST :
-					return VoxelShapes.or(makeCuboidShape(8.5, 0, 2, 7.5, 16, 3), makeCuboidShape(8.5, 7, 2, 7.5, 15, 15)).withOffset(offset.x, offset.y, offset.z);
+					return Shapes.or(box(8.5, 0, 2, 7.5, 16, 3), box(8.5, 7, 2, 7.5, 15, 15)).move(offset.x, offset.y, offset.z);
 				case WEST :
-					return VoxelShapes.or(makeCuboidShape(7.5, 0, 14, 8.5, 16, 13), makeCuboidShape(7.5, 7, 14, 8.5, 15, 1)).withOffset(offset.x, offset.y, offset.z);
+					return Shapes.or(box(7.5, 0, 14, 8.5, 16, 13), box(7.5, 7, 14, 8.5, 15, 1)).move(offset.x, offset.y, offset.z);
 			}
 		}
 	}
 
-	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-		DoubleBlockHalf doubleblockhalf = stateIn.get(HALF);
-		if (stateIn.get(WATERLOGGED)) {
-			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+	@Override
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
+		DoubleBlockHalf doubleblockhalf = stateIn.getValue(HALF);
+		if (stateIn.getValue(WATERLOGGED)) {
+			worldIn.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
 		}
 		if (facing.getAxis() == Direction.Axis.Y && doubleblockhalf == DoubleBlockHalf.LOWER == (facing == Direction.UP)) {
-			return facingState.isIn(this) && facingState.get(HALF) != doubleblockhalf ? stateIn.with(FACING, facingState.get(FACING)) : Blocks.AIR.getDefaultState();
+			return facingState.is(this) && facingState.getValue(HALF) != doubleblockhalf ? stateIn.setValue(FACING, facingState.getValue(FACING)) : Blocks.AIR.defaultBlockState();
 		} else {
-			return doubleblockhalf == DoubleBlockHalf.LOWER && facing == Direction.DOWN && !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+			return doubleblockhalf == DoubleBlockHalf.LOWER && facing == Direction.DOWN && !stateIn.canSurvive(worldIn, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 		}
 	}
 
-	public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
-		if (!worldIn.isRemote && player.isCreative()) {
+	@Override
+	public void playerWillDestroy(Level worldIn, BlockPos pos, BlockState state, Player player) {
+		if (!worldIn.isClientSide && player.isCreative()) {
 			this.removeBottomHalf(worldIn, pos, state, player);
 		}
-
-		super.onBlockHarvested(worldIn, pos, state, player);
+		super.playerWillDestroy(worldIn, pos, state, player);
 	}
 
-	protected static void removeBottomHalf(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-		DoubleBlockHalf doubleblockhalf = state.get(HALF);
+	protected static void removeBottomHalf(Level world, BlockPos pos, BlockState state, Player player) {
+		DoubleBlockHalf doubleblockhalf = state.getValue(HALF);
 		if (doubleblockhalf == DoubleBlockHalf.UPPER) {
-			BlockPos blockpos = pos.down();
+			BlockPos blockpos = pos.below();
 			BlockState blockstate = world.getBlockState(blockpos);
-			if (blockstate.getBlock() == state.getBlock() && blockstate.get(HALF) == DoubleBlockHalf.LOWER) {
-				world.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 35);
-				world.playEvent(player, 2001, blockpos, Block.getStateId(blockstate));
+			if (blockstate.getBlock() == state.getBlock() && blockstate.getValue(HALF) == DoubleBlockHalf.LOWER) {
+				world.setBlock(blockpos, Blocks.AIR.defaultBlockState(), 35);
+				world.levelEvent(player, 2001, blockpos, Block.getId(blockstate));
 			}
 		}
-
 	}
 
 	@Nullable
-	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		BlockPos blockpos = context.getPos();
+	@Override
+	public BlockState getStateForPlacement(BlockPlaceContext p_49820_) {
+		BlockPos blockpos = p_49820_.getClickedPos();
+		Level level = p_49820_.getLevel();
 
-		if (blockpos.getY() < 255 && context.getWorld().getBlockState(blockpos.up()).isReplaceable(context)) {
-		boolean flag = context.getWorld().getFluidState(context.getPos()).getFluid() == Fluids.WATER;
-			return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing()).with(HALF, DoubleBlockHalf.LOWER).with(WATERLOGGED, flag);
+		if (blockpos.getY() < level.getMaxBuildHeight() - 1 && p_49820_.getLevel().getBlockState(blockpos.above()).canBeReplaced(p_49820_)) {
+			boolean flag = p_49820_.getLevel().getFluidState(p_49820_.getClickedPos()).is(Fluids.WATER);
+			return this.defaultBlockState().setValue(FACING, p_49820_.getHorizontalDirection()).setValue(HALF, DoubleBlockHalf.LOWER).setValue(WATERLOGGED, flag);
 		} else {
 			return null;
 		}
 	}
 
 	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
-		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
-		worldIn.setBlockState(pos.up(), state.with(HALF, DoubleBlockHalf.UPPER), 3);
+	public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+		super.setPlacedBy(worldIn, pos, state, placer, stack);
+		worldIn.setBlock(pos.above(), state.setValue(HALF, DoubleBlockHalf.UPPER), 3);
 
-		TileEntity tileentity = worldIn.getTileEntity(new BlockPos(pos.getX(),pos.getY() + 1,pos.getZ()));
+		BlockEntity tileentity = worldIn.getBlockEntity(new BlockPos(pos.getX(),pos.getY() + 1,pos.getZ()));
 
 		if (tileentity instanceof FlagTileEntity) {
 			FlagTileEntity flagtileentity = (FlagTileEntity) tileentity;
 
-			CompoundNBT compoundnbt = new CompoundNBT();
-			NBTUtil.writeGameProfile(compoundnbt, new GameProfile(placer.getUniqueID(), placer.getName().getString()));
+			CompoundTag compoundnbt = new CompoundTag();
+			NbtUtils.writeGameProfile(compoundnbt, new GameProfile(placer.getUUID(), placer.getName().getString()));
 			flagtileentity.getTileData().put("FlagOwner", compoundnbt);
 
-			if (placer instanceof PlayerEntity) {
-				PlayerEntity player = (PlayerEntity) placer;
+			if (placer instanceof Player) {
+				Player player = (Player) placer;
 
 				flagtileentity.setPlayerProfile(player.getGameProfile());
 			}
@@ -145,20 +143,19 @@ public class FlagBlock extends Block implements IWaterLoggable {
 	}
 
 	@Override
-	public boolean hasTileEntity(BlockState state) {
-		return true;
+	public BlockEntity newBlockEntity(BlockPos p_153215_, BlockState p_153216_) {
+		return new FlagTileEntity();
 	}
 
 	@Override
-	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		return new FlagTileEntity();
+	public boolean isPathfindable(BlockState p_60475_, BlockGetter p_60476_, BlockPos p_60477_, PathComputationType p_60478_) {
+		return false;
 	}
 
 	@OnlyIn(Dist.CLIENT)
 	public FlagBlock.ISkullType getSkullType() {
 		return FlagBlock.Types.PLAYER;
 	}
-
 
 	public interface ISkullType {
 	}
@@ -168,39 +165,39 @@ public class FlagBlock extends Block implements IWaterLoggable {
 	}
 
 	@Override
-	public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
-		return false;
-	}
-
-	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-		BlockPos blockpos = pos.down();
+	public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
+		BlockPos blockpos = pos.below();
 		BlockState blockstate = worldIn.getBlockState(blockpos);
-		return state.get(HALF) == DoubleBlockHalf.LOWER ? blockstate.isSolidSide(worldIn, blockpos, Direction.UP) : blockstate.isIn(this);
+		return state.getValue(HALF) == DoubleBlockHalf.LOWER ? blockstate.isFaceSturdy(worldIn, blockpos, Direction.UP) : blockstate.is(this);
 	}
 
-	public PushReaction getPushReaction(BlockState state) {
+	@Override
+	public PushReaction getPistonPushReaction(BlockState p_60584_) {
 		return PushReaction.DESTROY;
 	}
 
+	@Override
 	public BlockState rotate(BlockState state, Rotation rot) {
-		return state.with(FACING, rot.rotate(state.get(FACING)));
+		return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
 	}
 
+	@Override
 	public BlockState mirror(BlockState state, Mirror mirrorIn) {
-		return state.rotate(mirrorIn.toRotation(state.get(FACING)));
+		return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
 	}
 
-	@OnlyIn(Dist.CLIENT)
-	public long getPositionRandom(BlockState state, BlockPos pos) {
-		return MathHelper.getCoordinateRandom(pos.getX(), pos.down(state.get(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(), pos.getZ());
+	@Override
+	public long getSeed(BlockState state, BlockPos pos) {
+		return Mth.getSeed(pos.getX(), pos.above(state.getValue(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(), pos.getZ());
 	}
 
 	@Override
 	public FluidState getFluidState(BlockState state) {
-		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
+		return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
 	}
 
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		builder.add(HALF, FACING, WATERLOGGED);
+	@Override
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> p_49915_) {
+		p_49915_.add(HALF, FACING, WATERLOGGED);
 	}
 }

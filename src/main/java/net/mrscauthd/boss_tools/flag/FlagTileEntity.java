@@ -1,27 +1,31 @@
 package net.mrscauthd.boss_tools.flag;
 
+import com.electronwill.nightconfig.core.utils.StringUtils;
 import com.google.common.collect.Iterables;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftSessionService;
 import com.mojang.authlib.properties.Property;
 
 import java.util.UUID;
+import java.util.concurrent.Executor;
 import javax.annotation.Nullable;
-import net.minecraft.block.BlockState;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.NBTUtil;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.server.management.PlayerProfileCache;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.StringUtils;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.players.GameProfileCache;
+import net.minecraft.util.StringUtil;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.mrscauthd.boss_tools.ModInnet;
 
-public class FlagTileEntity extends TileEntity {
+public class FlagTileEntity extends BlockEntity {
     @Nullable
-    private static PlayerProfileCache profileCache;
+    private static GameProfileCache profileCache;
 
     @Nullable
     private static MinecraftSessionService sessionService;
@@ -29,34 +33,34 @@ public class FlagTileEntity extends TileEntity {
     @Nullable
     private GameProfile playerProfile;
 
-    public FlagTileEntity() {
-        super(ModInnet.FLAG.get());
+    @Nullable
+    private static Executor mainThreadExecutor;
+
+    public FlagTileEntity(BlockPos pos, BlockState state) {
+        super(ModInnet.FLAG.get(), pos, state);
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
-        super.write(compound);
+    protected void saveAdditional(CompoundTag compound) {
+        super.saveAdditional(compound);
         if (this.playerProfile != null) {
-            CompoundNBT compoundnbt = new CompoundNBT();
-            NBTUtil.writeGameProfile(compoundnbt, this.playerProfile);
+            CompoundTag compoundnbt = new CompoundTag();
+            NbtUtils.writeGameProfile(compoundnbt, this.playerProfile);
             compound.put("FlagOwner", compoundnbt);
         }
-
-        return compound;
     }
 
     @Override
-    public void read(BlockState state, CompoundNBT nbt) {
-        super.read(state, nbt);
+    public void load(CompoundTag nbt) {
+        super.load(nbt);
         if (nbt.contains("FlagOwner", 10)) {
-            this.setPlayerProfile(NBTUtil.readGameProfile(nbt.getCompound("FlagOwner")));
+            this.setPlayerProfile(NbtUtils.readGameProfile(nbt.getCompound("FlagOwner")));
         } else if (nbt.contains("ExtraType", 8)) {
             String s = nbt.getString("ExtraType");
-            if (!StringUtils.isNullOrEmpty(s)) {
+            if (!StringUtil.isNullOrEmpty(s)) {
                 this.setPlayerProfile(new GameProfile((UUID)null, s));
             }
         }
-
     }
 
     @Nullable
@@ -65,20 +69,19 @@ public class FlagTileEntity extends TileEntity {
         return this.playerProfile;
     }
 
-    @Nullable
     @Override
-    public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(this.pos, 4, this.getUpdateTag());
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
     }
 
     @Override
-    public CompoundNBT getUpdateTag() {
-        return this.write(new CompoundNBT());
+    public CompoundTag getUpdateTag() {
+        return this.saveWithoutMetadata();
     }
 
     @Override
-    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        this.read(this.getBlockState(), pkt.getNbtCompound());
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+        this.load(pkt.getTag());
     }
 
     public void setPlayerProfile(@Nullable GameProfile p_195485_1_) {
@@ -88,16 +91,16 @@ public class FlagTileEntity extends TileEntity {
 
     private void updatePlayerProfile() {
         this.playerProfile = updateGameProfile(this.playerProfile);
-        this.markDirty();
+        this.setChanged();
     }
 
     @Nullable
     public static GameProfile updateGameProfile(@Nullable GameProfile input) {
-        if (input != null && !StringUtils.isNullOrEmpty(input.getName())) {
+        if (input != null && !StringUtil.isNullOrEmpty(input.getName())) {
             if (input.isComplete() && input.getProperties().containsKey("textures")) {
                 return input;
             } else if (profileCache != null && sessionService != null) {
-                GameProfile gameprofile = profileCache.getGameProfileForUsername(input.getName());
+                GameProfile gameprofile = profileCache.get(input.getName()).get();
                 if (gameprofile == null) {
                     return input;
                 } else {

@@ -1,30 +1,33 @@
 package net.mrscauthd.boss_tools.item;
 
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.CreatureEntity;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUseContext;
-import net.minecraft.util.*;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.world.IServerWorld;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.ModInnet;
 import net.mrscauthd.boss_tools.entity.RoverEntity;
 import net.mrscauthd.boss_tools.fluid.FluidUtil2;
 import net.mrscauthd.boss_tools.gauge.GaugeTextHelper;
 import net.mrscauthd.boss_tools.gauge.GaugeValueHelper;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -38,19 +41,19 @@ public class RoverItem extends Item {
     }
 
     @Override
-    public void addInformation(ItemStack itemstack, World world, List<ITextComponent> list, ITooltipFlag flag) {
-        super.addInformation(itemstack, world, list, flag);
-        int fuel = itemstack.getOrCreateTag().getInt(fuelTag);
-        list.add(GaugeTextHelper.buildBlockTooltip(GaugeTextHelper.getStorageText(GaugeValueHelper.getFuel(fuel, RoverEntity.FUEL_BUCKETS * FluidUtil2.BUCKET_SIZE))));
+    public void appendHoverText(ItemStack p_41421_, @Nullable Level p_41422_, List<Component> p_41423_, TooltipFlag p_41424_) {
+        super.appendHoverText(p_41421_, p_41422_, p_41423_, p_41424_);
+        int fuel = p_41421_.getOrCreateTag().getInt(fuelTag);
+        p_41423_.add(GaugeTextHelper.buildBlockTooltip(GaugeTextHelper.getStorageText(GaugeValueHelper.getFuel(fuel, RoverEntity.FUEL_BUCKETS * FluidUtil2.BUCKET_SIZE))));
     }
 
     @Override
-    public ActionResultType onItemUseFirst(ItemStack stack, ItemUseContext context) {
-        PlayerEntity player = context.getPlayer();
-        World world = context.getWorld();
-        BlockPos pos = context.getPos();
-        Hand hand = context.getHand();
-        ItemStack itemStack = context.getItem();
+    public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
+        Player player = context.getPlayer();
+        Level world = context.getLevel();
+        BlockPos pos = context.getClickedPos();
+        InteractionHand hand = context.getHand();
+        ItemStack itemStack = context.getItemInHand();
 
         int x = pos.getX();
         int y = pos.getY();
@@ -66,33 +69,33 @@ public class RoverItem extends Item {
         BlockPos pos8 = new BlockPos(x - 1, y + 1, z + 1);
         BlockPos pos9 = new BlockPos(x - 1, y + 1, z - 1);
 
-        if (!world.getBlockState(pos1).isSolid() && !world.getBlockState(pos2).isSolid() && !world.getBlockState(pos3).isSolid() && !world.getBlockState(pos4).isSolid() && !world.getBlockState(pos5).isSolid() && !world.getBlockState(pos6).isSolid() && !world.getBlockState(pos7).isSolid() && !world.getBlockState(pos8).isSolid() && !world.getBlockState(pos9).isSolid()) {
+        if (!world.getBlockState(pos1).canOcclude() && !world.getBlockState(pos2).canOcclude() && !world.getBlockState(pos3).canOcclude() && !world.getBlockState(pos4).canOcclude() && !world.getBlockState(pos5).canOcclude() && !world.getBlockState(pos6).canOcclude() && !world.getBlockState(pos7).canOcclude() && !world.getBlockState(pos8).canOcclude() && !world.getBlockState(pos9).canOcclude()) {
 
-            AxisAlignedBB scanAbove = new AxisAlignedBB(x - 0, y - 0, z - 0, x + 1, y + 1, z + 1);
-            List<Entity> entities = player.getEntityWorld().getEntitiesWithinAABB(Entity.class, scanAbove);
+            AABB scanAbove = new AABB(x - 0, y - 0, z - 0, x + 1, y + 1, z + 1);
+            List<Entity> entities = player.getCommandSenderWorld().getEntitiesOfClass(Entity.class, scanAbove);
 
             if (entities.isEmpty()) {
-                RoverEntity rocket = new RoverEntity((EntityType<? extends CreatureEntity>) ModInnet.ROVER.get(), world);
+                RoverEntity rocket = new RoverEntity((EntityType<? extends PathfinderMob>) ModInnet.ROVER.get(), world);
 
-                rocket.setPosition((double) pos.getX() + 0.5D,  pos.getY() + 1, (double) pos.getZ() + 0.5D);
-                double d0 = func_208051_a(world, pos, true, rocket.getBoundingBox());
-                float f = player.rotationYaw;
+                rocket.setPos((double) pos.getX() + 0.5D,  pos.getY() + 1, (double) pos.getZ() + 0.5D);
+                double d0 = getYOffset(world, pos, true, rocket.getBoundingBox());
+                float f = player.getYRot();
 
                 rocket.setLocationAndAngles((double)pos.getX() + 0.5D, (double)pos.getY() + d0, (double)pos.getZ() + 0.5D, f, 0.0F);
 
                 rocket.rotationYawHead = rocket.rotationYaw;
                 rocket.renderYawOffset = rocket.rotationYaw;
 
-                if (world instanceof ServerWorld) {
+                if (world instanceof ServerLevel) {
                     rocket.onInitialSpawn((IServerWorld) world, world.getDifficultyForLocation(rocket.getPosition()), SpawnReason.MOB_SUMMONED, null, null);
                 }
 
-                world.addEntity(rocket);
+                world.addFreshEntity(rocket);
 
                 rocket.getDataManager().set(RoverEntity.FUEL, itemStack.getOrCreateTag().getInt(fuelTag));
 
-                if (!player.abilities.isCreativeMode) {
-                    player.setHeldItem(hand, ItemStack.EMPTY);
+                if (!player.getAbilities().instabuild) {
+                    player.setItemInHand(hand, ItemStack.EMPTY);
                 }
 
                 roverPlaceSound(pos, world);
@@ -102,19 +105,18 @@ public class RoverItem extends Item {
         return super.onItemUseFirst(stack, context);
     }
 
-    protected static double func_208051_a(IWorldReader worldReader, BlockPos pos, boolean p_208051_2_, AxisAlignedBB p_208051_3_) {
-        AxisAlignedBB axisalignedbb = new AxisAlignedBB(pos);
-        if (p_208051_2_) {
-            axisalignedbb = axisalignedbb.expand(0.0D, -1.0D, 0.0D);
+
+    protected static double getYOffset(LevelReader p_20626_, BlockPos p_20627_, boolean p_20628_, AABB p_20629_) {
+        AABB aabb = new AABB(p_20627_);
+        if (p_20628_) {
+            aabb = aabb.expandTowards(0.0D, -1.0D, 0.0D);
         }
 
-        Stream<VoxelShape> stream = worldReader.func_234867_d_((Entity)null, axisalignedbb, (entity) -> {
-            return true;
-        });
-        return 1.0D + VoxelShapes.getAllowedOffset(Direction.Axis.Y, p_208051_3_, stream, p_208051_2_ ? -2.0D : -1.0D);
+        Iterable<VoxelShape> iterable = p_20626_.getCollisions((Entity)null, aabb);
+        return 1.0D + Shapes.collide(Direction.Axis.Y, p_20629_, iterable, p_20628_ ? -2.0D : -1.0D);
     }
 
-    public static void roverPlaceSound(BlockPos pos, World world) {
-        world.playSound(null, pos, SoundEvents.BLOCK_STONE_BREAK, SoundCategory.BLOCKS, 1,1);
+    public static void roverPlaceSound(BlockPos pos, Level world) {
+        world.playSound(null, pos, SoundEvents.STONE_BREAK, SoundSource.BLOCKS, 1,1);
     }
 }

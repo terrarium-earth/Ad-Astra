@@ -1,7 +1,7 @@
 package net.mrscauthd.boss_tools.item;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Item;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
 public class HammerItem extends Item {
 	public HammerItem(Properties properties) {
@@ -9,15 +9,15 @@ public class HammerItem extends Item {
 	}
 
 	@Override
-	public boolean hasContainerItem() {
+	public boolean hasCraftingRemainingItem() {
 		return true;
 	}
 
 	@Override
-	public ItemStack getContainerItem(ItemStack itemstack) {
+	public ItemStack getContainerItem(ItemStack itemStack) {
 		ItemStack retval = new ItemStack(this);
-		retval.setDamage(itemstack.getDamage() + 1);
-		if (retval.getDamage() >= retval.getMaxDamage()) {
+		retval.setDamageValue(itemStack.getDamageValue() + 1);
+		if (retval.getDamageValue() >= retval.getMaxDamage()) {
 			return ItemStack.EMPTY;
 		}
 		return retval;

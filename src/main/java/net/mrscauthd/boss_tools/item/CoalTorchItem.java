@@ -1,14 +1,14 @@
 package net.mrscauthd.boss_tools.item;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.Item;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.world.IWorldReader;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.CollisionContext;
 
 import javax.annotation.Nullable;
 import java.util.Map;
@@ -22,30 +22,32 @@ public class CoalTorchItem extends BlockItem {
     }
 
     @Nullable
-    protected BlockState getStateForPlacement(BlockItemUseContext context) {
+    @Override
+    protected BlockState getPlacementState(BlockPlaceContext context) {
         BlockState blockstate = this.wallBlock.getStateForPlacement(context);
         BlockState blockstate1 = null;
-        IWorldReader iworldreader = context.getWorld();
-        BlockPos blockpos = context.getPos();
+        LevelAccessor iworldreader = context.getLevel();
+        BlockPos blockpos = context.getClickedPos();
 
         for(Direction direction : context.getNearestLookingDirections()) {
             if (direction != Direction.UP) {
                 BlockState blockstate2 = direction == Direction.DOWN ? this.getBlock().getStateForPlacement(context) : blockstate;
-                if (blockstate2 != null && blockstate2.isValidPosition(iworldreader, blockpos)) {
+                if (blockstate2 != null && blockstate2.canSurvive(iworldreader, blockpos)) {
                     blockstate1 = blockstate2;
                     break;
                 }
             }
         }
-
-        return blockstate1 != null && iworldreader.placedBlockCollides(blockstate1, blockpos, ISelectionContext.dummy()) ? blockstate1 : null;
+        return blockstate1 != null && iworldreader.isUnobstructed(blockstate1, blockpos, CollisionContext.empty()) ? blockstate1 : null;
     }
 
-    public void addToBlockToItemMap(Map<Block, Item> blockToItemMap, Item itemIn) {
-        super.addToBlockToItemMap(blockToItemMap, itemIn);
-        blockToItemMap.put(this.wallBlock, itemIn);
+    @Override
+    public void registerBlocks(Map<Block, Item> p_40607_, Item p_40608_) {
+        super.registerBlocks(p_40607_, p_40608_);
+        p_40607_.put(this.wallBlock, p_40608_);
     }
 
+    @Override
     public void removeFromBlockToItemMap(Map<Block, Item> blockToItemMap, Item itemIn) {
         super.removeFromBlockToItemMap(blockToItemMap, itemIn);
         blockToItemMap.remove(this.wallBlock);

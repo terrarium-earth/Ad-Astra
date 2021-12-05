@@ -21,7 +21,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.mrscauthd.boss_tools.machines.OxygenBubbleDistributorBlock;
 
 @OnlyIn(Dist.CLIENT)
-public class TileEntityBoxRenderer extends BlockEntityRenderer<OxygenBubbleDistributorBlock.CustomTileEntity> {
+public class TileEntityBoxRenderer implements BlockEntityRenderer<OxygenBubbleDistributorBlock.CustomTileEntity> {
 
     public static TextureAtlasSprite atlass = null;
 

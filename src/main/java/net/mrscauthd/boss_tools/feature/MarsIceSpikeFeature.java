@@ -1,5 +1,6 @@
 package net.mrscauthd.boss_tools.feature;
 
+/*
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -12,9 +13,10 @@ import net.minecraft.block.Block;
 
 import java.util.Random;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.Codec;*/
 
-public class MarsIceSpikeFeature extends Feature<NoFeatureConfig> {
+public class MarsIceSpikeFeature/* extends Feature<NoFeatureConfig>*/ {
+    /*
     public MarsIceSpikeFeature(Codec<NoFeatureConfig> p_i231962_1_) {
         super(p_i231962_1_);
     }
@@ -90,4 +92,6 @@ public class MarsIceSpikeFeature extends Feature<NoFeatureConfig> {
         }
     return false;
     }
+
+     */
 }
