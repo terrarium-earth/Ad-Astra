@@ -9,49 +9,36 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalBlock;
-import net.minecraft.block.IWaterLoggable;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.loot.LootContext;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.DirectionProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Rotation;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.common.ToolType;
-import net.minecraftforge.fml.network.NetworkHooks;
+import com.mojang.math.Vector3d;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition.Builder;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
@@ -87,66 +74,60 @@ public class NASAWorkbenchBlock {
 		return getBasicPartOrders().stream().collect(Collectors.summingInt(p -> p.getSlots()));
 	}
 
-	public static class CustomBlock extends Block implements IWaterLoggable {
-		public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
-		public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+	public static class CustomBlock extends AbstractMachineBlock<CustomTileEntity> implements SimpleWaterloggedBlock {
 
 		public CustomBlock() {
-			super(Block.Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(5f, 1f).setLightLevel(s -> 1).harvestLevel(1).harvestTool(ToolType.PICKAXE).setRequiresTool().notSolid().setOpaque((bs, br, bp) -> false));
-			this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(WATERLOGGED, false));
+			super(Block.Properties.of(Material.METAL).sound(SoundType.METAL).strength(5f, 1f).lightLevel(s -> 1).requiresCorrectToolForDrops().notSolid().setOpaque((bs, br, bp) -> false));
 		}
-
+		
 		@Override
-		public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos) {
+		protected BlockState buildDefaultState() {
+			return super.buildDefaultState().setValue(BlockStateProperties.WATERLOGGED, false);
+		}
+		
+		@Override
+		public boolean skipRendering(BlockState p_60532_, BlockState p_60533_, Direction p_60534_) {
 			return true;
 		}
 
 		@Override
-		public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context) {
-			Vector3d offset = state.getOffset(world, pos);
-			switch ((Direction) state.get(FACING)) {
+		public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+			Vec3 offset = state.getOffset(level, pos);
+			switch ((Direction) state.getValue(FACING)) {
 			case SOUTH:
 			default:
-				return VoxelShapes.or(makeCuboidShape(16, 0, 16, 0, 19.2, 0)).withOffset(offset.x, offset.y, offset.z);
+				return Shapes.or(box(16, 0, 16, 0, 19.2, 0)).move(offset.x, offset.y, offset.z);
 			case NORTH:
-				return VoxelShapes.or(makeCuboidShape(0, 0, 0, 16, 19.2, 16)).withOffset(offset.x, offset.y, offset.z);
+				return Shapes.or(box(0, 0, 0, 16, 19.2, 16)).move(offset.x, offset.y, offset.z);
 			case EAST:
-				return VoxelShapes.or(makeCuboidShape(16, 0, 0, 0, 19.2, 16)).withOffset(offset.x, offset.y, offset.z);
+				return Shapes.or(box(16, 0, 0, 0, 19.2, 16)).move(offset.x, offset.y, offset.z);
 			case WEST:
-				return VoxelShapes.or(makeCuboidShape(0, 0, 16, 16, 19.2, 0)).withOffset(offset.x, offset.y, offset.z);
+				return Shapes.or(box(0, 0, 16, 16, 19.2, 0)).move(offset.x, offset.y, offset.z);
 			}
 		}
 
 		@Override
-		protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-			builder.add(FACING, WATERLOGGED);
+		protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
+			super.createBlockStateDefinition(builder);
+			builder.add(BlockStateProperties.WATERLOGGED);
 		}
-
-		public BlockState rotate(BlockState state, Rotation rot) {
-			return state.with(FACING, rot.rotate(state.get(FACING)));
-		}
-
-		@SuppressWarnings("deprecation")
-		public BlockState mirror(BlockState state, Mirror mirrorIn) {
-			return state.rotate(mirrorIn.toRotation(state.get(FACING)));
-		}
-
+		
 		@Override
-		public BlockState getStateForPlacement(BlockItemUseContext context) {
-			boolean flag = context.getWorld().getFluidState(context.getPos()).getFluid() == Fluids.WATER;
-			return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite()).with(WATERLOGGED, flag);
+		public BlockState getStateForPlacement(BlockPlaceContext context) {
+			boolean flag = context.getLevel().getFluidState(context.getClickedPos()).getType() == Fluids.WATER;
+			return super.getStateForPlacement(context).setValue(BlockStateProperties.WATERLOGGED, flag);
 		}
 
 		@SuppressWarnings("deprecation")
 		@Override
 		public FluidState getFluidState(BlockState state) {
-			return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
+			return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
 		}
-
+		
 		@SuppressWarnings("deprecation")
 		@Override
 		public BlockState updatePostPlacement(BlockState state, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
-			if (state.get(WATERLOGGED)) {
+			if (state.getValue(BlockStateProperties.WATERLOGGED)) {
 				world.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(world));
 			}
 			return super.updatePostPlacement(state, facing, facingState, world, currentPos, facingPos);
@@ -164,58 +145,13 @@ public class NASAWorkbenchBlock {
 		}
 
 		@Override
-		public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity entity, Hand hand, BlockRayTraceResult hit) {
-			if (entity instanceof ServerPlayerEntity) {
-				NetworkHooks.openGui((ServerPlayerEntity) entity, this.getContainer(state, world, pos), pos);
-				return ActionResultType.CONSUME;
-			} else {
-				return ActionResultType.SUCCESS;
-			}
+		public CustomTileEntity newBlockEntity(BlockPos pos, BlockState state) {
+			return new CustomTileEntity(pos, state);
 		}
 
 		@Override
-		public INamedContainerProvider getContainer(BlockState state, World worldIn, BlockPos pos) {
-			TileEntity tileEntity = worldIn.getTileEntity(pos);
-			return tileEntity instanceof INamedContainerProvider ? (INamedContainerProvider) tileEntity : null;
-		}
-
-		@Override
-		public boolean hasTileEntity(BlockState state) {
-			return true;
-		}
-
-		@Override
-		public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-			return new CustomTileEntity();
-		}
-
-		@SuppressWarnings("deprecation")
-		@Override
-		public boolean eventReceived(BlockState state, World world, BlockPos pos, int eventID, int eventParam) {
-			super.eventReceived(state, world, pos, eventID, eventParam);
-			TileEntity tileentity = world.getTileEntity(pos);
-			return tileentity == null ? false : tileentity.receiveClientEvent(eventID, eventParam);
-		}
-
-		@SuppressWarnings("deprecation")
-		@Override
-		public void onReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean isMoving) {
-			if (state.getBlock() != newState.getBlock()) {
-				CustomTileEntity tileentity = (CustomTileEntity) world.getTileEntity(pos);
-				InventoryHelper.dropInventoryItems(world, pos, (CustomTileEntity) tileentity);
-				world.updateComparatorOutputLevel(pos, this);
-				super.onReplaced(state, world, pos, newState, isMoving);
-			}
-		}
-
-		@Override
-		public boolean hasComparatorInputOverride(BlockState state) {
-			return true;
-		}
-
-		@Override
-		public int getComparatorInputOverride(BlockState blockState, World world, BlockPos pos) {
-			CustomTileEntity tileentity = (CustomTileEntity) world.getTileEntity(pos);
+		public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+			CustomTileEntity tileentity = (CustomTileEntity) level.getBlockEntity(pos);
 			return tileentity.cacheRecipes() != null ? 15 : 0;
 		}
 	}
@@ -232,8 +168,8 @@ public class NASAWorkbenchBlock {
 
 		private RocketPartsItemHandler partsItemHandler;
 
-		public CustomTileEntity() {
-			super(ModInnet.NASA_WORKBENCH.get());
+		public CustomTileEntity(BlockPos pos, BlockState state) {
+			super(ModInnet.NASA_WORKBENCH.get(), pos, state);
 
 			this.itemStackCacher = new StackCacher();
 			this.cachedRecipe = null;
@@ -269,14 +205,14 @@ public class NASAWorkbenchBlock {
 		}
 
 		@Override
-		public void setInventorySlotContents(int p_70299_1_, ItemStack p_70299_2_) {
-			super.setInventorySlotContents(p_70299_1_, p_70299_2_);
+		public void setItem(int p_59616_, ItemStack p_59617_) {
+			super.setItem(p_59616_, p_59617_);
 			this.cacheRecipes();
 		}
 
 		@Override
-		public Container createMenu(int id, PlayerInventory player) {
-			return new NasaWorkbenchGui.GuiContainer(id, player, this);
+		public AbstractContainerMenu createMenu(int id, Inventory inventory) {
+			return new NasaWorkbenchGui.GuiContainer(id, inventory, this);
 		}
 
 		@Override
@@ -291,14 +227,14 @@ public class NASAWorkbenchBlock {
 		}
 
 		@Override
-		protected boolean onCanInsertItem(int index, ItemStack stack, Direction direction) {
+		protected boolean onCanPlaceItemThroughFace(int index, ItemStack stack, Direction direction) {
 			int find = this.findAvailableSlot(stack);
 
 			if (find == index) {
 				return true;
 			}
 
-			return super.onCanInsertItem(index, stack, direction);
+			return super.onCanPlaceItemThroughFace(index, stack, direction);
 		}
 
 		public int findAvailableSlot(ItemStack itemStack) {
@@ -351,9 +287,9 @@ public class NASAWorkbenchBlock {
 				this.itemStackCacher.set(stacks);
 
 				BossToolsRecipeType<WorkbenchingRecipe> recipeType = this.getRecipeType();
-				this.cachedRecipe = recipeType.findFirst(this.getWorld(), r -> r.test(partsItemHandler, false));
+				this.cachedRecipe = recipeType.findFirst(this.getLevel(), r -> r.test(partsItemHandler, false));
 				this.possibleRecipes.clear();
-				recipeType.filter(this.getWorld(), r -> r.test(partsItemHandler, true)).forEach(this.possibleRecipes::add);
+				recipeType.filter(this.getLevel(), r -> r.test(partsItemHandler, true)).forEach(this.possibleRecipes::add);
 
 				this.invalidCache.clear();
 			}
@@ -379,7 +315,7 @@ public class NASAWorkbenchBlock {
 
 		protected void updateRedstoneState() {
 			this.prevRedstone = this.currRedstone;
-			this.currRedstone = this.getWorld().getRedstonePowerFromNeighbors(this.getPos());
+			this.currRedstone = this.getLevel().getBestNeighborSignal(this.getBlockPos());
 		}
 
 		protected void outputToBottom() {
@@ -405,10 +341,10 @@ public class NASAWorkbenchBlock {
 		}
 
 		private IItemHandler getBottomTileEntityItemHandler() {
-			TileEntity bottomTileEntity = this.getWorld().getTileEntity(this.getPos().down());
+			BlockEntity bottomBlockEntity = this.getLevel().getBlockEntity(this.getBlockPos().below());
 
-			if (bottomTileEntity != null) {
-				return bottomTileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElse(null);
+			if (bottomBlockEntity != null) {
+				return bottomBlockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElse(null);
 			} else {
 				return null;
 			}
@@ -417,12 +353,12 @@ public class NASAWorkbenchBlock {
 		protected void spawnParticles() {
 			if (this.possibleRecipes.size() > 0 && !ItemHandlerHelper2.isEmpty(this.getPartsItemHandler())) {
 
-				World world = this.getWorld();
+				Level level = this.getLevel();
 
-				if (world instanceof ServerWorld) {
-					ServerWorld serverWorld = (ServerWorld) world;
-					BlockPos pos = this.getPos();
-					serverWorld.spawnParticle(ParticleTypes.CRIT, pos.getX() + 0.5D, pos.getY() + 1.5D, pos.getZ() + 0.5D, 10, 0.1D, 0.1D, 0.1D, 0.1D);
+				if (level instanceof ServerLevel) {
+					ServerLevel serverLevel = (ServerLevel) level;
+					BlockPos pos = this.getBlockPos();
+					serverLevel.sendParticles(ParticleTypes.CRIT, pos.getX() + 0.5D, pos.getY() + 1.5D, pos.getZ() + 0.5D, 10, 0.1D, 0.1D, 0.1D, 0.1D);
 				}
 			}
 		}
@@ -444,14 +380,14 @@ public class NASAWorkbenchBlock {
 				}
 			}
 
-			World world = this.getWorld();
+			Level level = this.getLevel();
 
-			if (world instanceof ServerWorld) {
-				ServerWorld serverWorld = (ServerWorld) world;
-				BlockPos pos = this.getPos();
+			if (level instanceof ServerLevel) {
+				ServerLevel serverLevel = (ServerLevel) level;
+				BlockPos pos = this.getBlockPos();
 
-				serverWorld.playSound(null, pos, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("item.totem.use")), SoundCategory.NEUTRAL, 1.0F, 1.0F);
-				serverWorld.spawnParticle(ParticleTypes.TOTEM_OF_UNDYING, pos.getX() + 0.5D, pos.getY() + 1.5D, pos.getZ() + 0.5D, 100, 0.1D, 0.1D, 0.1D, 0.7D);
+				serverLevel.playSound(null, pos, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("item.totem.use")), SoundSource.NEUTRAL, 1.0F, 1.0F);
+				serverLevel.sendParticles(ParticleTypes.TOTEM_OF_UNDYING, pos.getX() + 0.5D, pos.getY() + 1.5D, pos.getZ() + 0.5D, 100, 0.1D, 0.1D, 0.1D, 0.7D);
 			}
 
 			return true;

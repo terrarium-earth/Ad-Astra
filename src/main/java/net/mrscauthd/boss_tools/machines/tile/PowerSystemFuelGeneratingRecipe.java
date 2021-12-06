@@ -1,7 +1,7 @@
 package net.mrscauthd.boss_tools.machines.tile;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.mrscauthd.boss_tools.crafting.BossToolsRecipeType;
 import net.mrscauthd.boss_tools.crafting.BossToolsRecipeTypes;
 import net.mrscauthd.boss_tools.crafting.GeneratingRecipe;
@@ -22,7 +22,7 @@ public class PowerSystemFuelGeneratingRecipe extends PowerSystemFuelBurnTime {
 			return -1;
 		}
 
-		GeneratingRecipe recipe = this.getRecipeType().findFirst(this.getTileEntity().getWorld(), f -> f.test(fuel));
+		GeneratingRecipe recipe = this.getRecipeType().findFirst(this.getTileEntity().getLevel(), f -> f.test(fuel));
 		return recipe != null ? recipe.getBurnTime() : -1;
 	}
 

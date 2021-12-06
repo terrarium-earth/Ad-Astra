@@ -1,8 +1,6 @@
 package net.mrscauthd.boss_tools.inventory;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 
@@ -18,11 +16,12 @@ public class ItemHandlerHelper2 {
 		return true;
 	}
 
-	public static List<ItemStack> getStacks(IItemHandler handler) {
-		List<ItemStack> list = new ArrayList<>();
+	public static NonNullList<ItemStack> getStacks(IItemHandler handler) {
+		NonNullList<ItemStack> list = NonNullList.withSize(handler.getSlots(), ItemStack.EMPTY);
 
 		for (int i = 0; i < handler.getSlots(); i++) {
-			list.add(handler.getStackInSlot(i));
+			ItemStack stack = handler.getStackInSlot(i);
+			list.set(i, stack);
 		}
 
 		return list;

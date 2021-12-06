@@ -4,9 +4,11 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.Direction;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.mrscauthd.boss_tools.crafting.ItemStackToItemStackRecipe;
 import net.mrscauthd.boss_tools.crafting.ItemStackToItemStackRecipeType;
@@ -25,8 +27,8 @@ public abstract class ItemStackToItemStackTileEntity extends AbstractMachineTile
 	private StackCacher itemStackCacher;
 	private ItemStackToItemStackRecipe cachedRecipe = null;
 
-	public ItemStackToItemStackTileEntity(TileEntityType<?> type) {
-		super(type);
+	public ItemStackToItemStackTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+		super(type, pos, state);
 
 		this.itemStackCacher = new StackCacher();
 		this.cachedRecipe = null;
@@ -52,6 +54,7 @@ public abstract class ItemStackToItemStackTileEntity extends AbstractMachineTile
 		return super.getInitialInventorySize() + 2;
 	}
 
+	@Override
 	protected void getSlotsForFace(Direction direction, List<Integer> slots) {
 		super.getSlotsForFace(direction, slots);
 
@@ -63,23 +66,23 @@ public abstract class ItemStackToItemStackTileEntity extends AbstractMachineTile
 	}
 
 	@Override
-	protected boolean onCanInsertItem(int index, ItemStack stack, @Nullable Direction direction) {
+	protected boolean onCanPlaceItemThroughFace(int index, ItemStack stack, @Nullable Direction direction) {
 		if (index == this.getSlotIngredient() && this.nullOrMatch(direction, Direction.UP)) {
-			return this.getRecipeType().findFirst(this.getWorld(), r -> r.test(stack)) != null;
+			return this.getRecipeType().findFirst(this.getLevel(), r -> r.test(stack)) != null;
 		} else if (index == this.getSlotOutput() && direction == null) {
 			return true;
 		}
 
-		return super.onCanInsertItem(index, stack, direction);
+		return super.onCanPlaceItemThroughFace(index, stack, direction);
 	}
 
 	@Override
-	public boolean canExtractItem(int index, ItemStack stack, Direction direction) {
+	public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
 		if (index == this.getSlotOutput() && direction == Direction.DOWN) {
 			return true;
 		}
 
-		return super.canExtractItem(index, stack, direction);
+		return super.canTakeItemThroughFace(index, stack, direction);
 	}
 
 	@Override
@@ -88,7 +91,7 @@ public abstract class ItemStackToItemStackTileEntity extends AbstractMachineTile
 	}
 
 	protected ItemStackToItemStackRecipe cacheRecipe() {
-		ItemStack itemStack = this.getStackInSlot(this.getSlotIngredient());
+		ItemStack itemStack = this.getItem(this.getSlotIngredient());
 
 		if (itemStack == null || itemStack.isEmpty()) {
 			this.itemStackCacher.set(itemStack);
@@ -96,7 +99,7 @@ public abstract class ItemStackToItemStackTileEntity extends AbstractMachineTile
 			this.setMaxTimer(0);
 		} else if (!this.itemStackCacher.test(itemStack)) {
 			this.itemStackCacher.set(itemStack);
-			this.cachedRecipe = this.getRecipeType().findFirst(this.getWorld(), r -> r.test(itemStack));
+			this.cachedRecipe = this.getRecipeType().findFirst(this.getLevel(), r -> r.test(itemStack));
 
 			if (this.cachedRecipe != null) {
 				this.setMaxTimer(this.cachedRecipe.getCookTime());

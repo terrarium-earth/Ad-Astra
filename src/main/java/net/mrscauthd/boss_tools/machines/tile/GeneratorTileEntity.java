@@ -3,9 +3,11 @@ package net.mrscauthd.boss_tools.machines.tile;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.Direction;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
@@ -20,8 +22,8 @@ public abstract class GeneratorTileEntity extends AbstractMachineTileEntity {
 
 	private int generatingCache;
 
-	protected GeneratorTileEntity(TileEntityType<?> type) {
-		super(type);
+	public GeneratorTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+		super(type, pos, state);
 	}
 
 	@Override
@@ -200,10 +202,10 @@ public abstract class GeneratorTileEntity extends AbstractMachineTileEntity {
 		List<IEnergyStorage> energyStorages = new ArrayList<>();
 
 		for (Direction direction : this.getEjectDirections()) {
-			TileEntity tileEntity = world.getTileEntity(pos.offset(direction));
+			BlockEntity blockEntity = this.getLevel().getBlockEntity(this.getBlockPos().offset(direction.getNormal()));
 
-			if (tileEntity != null) {
-				LazyOptional<IEnergyStorage> capability = tileEntity.getCapability(CapabilityEnergy.ENERGY, direction.getOpposite());
+			if (blockEntity != null) {
+				LazyOptional<IEnergyStorage> capability = blockEntity.getCapability(CapabilityEnergy.ENERGY, direction.getOpposite());
 
 				if (capability != null && capability.isPresent()) {
 					energyStorages.add(capability.resolve().get());

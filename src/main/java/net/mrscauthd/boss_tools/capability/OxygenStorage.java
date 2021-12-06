@@ -2,6 +2,8 @@ package net.mrscauthd.boss_tools.capability;
 
 import java.util.Optional;
 
+import net.minecraft.nbt.CompoundTag;
+
 public class OxygenStorage implements IOxygenStorage {
 	private IOxygenStorageHolder holder;
 	protected int oxygen;
@@ -62,6 +64,18 @@ public class OxygenStorage implements IOxygenStorage {
 
 	public int getMaxOxygenStored() {
 		return this.capacity;
+	}
+
+	@Override
+	public CompoundTag serializeNBT() {
+		CompoundTag compound = new CompoundTag();
+		compound.putInt("oxygen", this.getOxygenStored());
+		return compound;
+	}
+
+	@Override
+	public void deserializeNBT(CompoundTag compound) {
+		this.setOxygenStored(compound.getInt("oxygen"));
 	}
 
 }

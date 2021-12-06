@@ -1,7 +1,15 @@
 package net.mrscauthd.boss_tools.compat;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import net.mrscauthd.boss_tools.compat.hwyla.HwylaCompat;
+import net.mrscauthd.boss_tools.compat.mekanism.MekanismCompat;
+import net.mrscauthd.boss_tools.compat.theoneprobe.TOPCompat;
+import net.mrscauthd.boss_tools.compat.tinkers.TinkersCompat;
+
 public class CompatibleManager {
-	/*
 
 	public static final List<CompatibleMod> MODS;
 	public static final TinkersCompat TINKERS;
@@ -16,14 +24,15 @@ public class CompatibleManager {
 		mods.add(HWYLA = new HwylaCompat());
 		mods.add(MEKANISM = new MekanismCompat());
 
+		for (CompatibleMod mod : mods) {
+			mod.tryLoad();
+		}
+
 		MODS = Collections.unmodifiableList(mods);
 	}
 
-	public static void loadAll() {
-		for (CompatibleMod mod : MODS) {
-			mod.tryLoad();
-		}
+	public static void visit() {
+
 	}
 
-	 */
 }

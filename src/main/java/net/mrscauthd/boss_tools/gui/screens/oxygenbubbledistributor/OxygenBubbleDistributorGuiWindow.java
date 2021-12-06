@@ -116,17 +116,17 @@ public class OxygenBubbleDistributorGuiWindow extends AbstractContainerScreen<Ox
 		super.init();
 
 		button_plus = this.addWidget(new ImageButtonPlacer(this.imageWidth - 20, this.imageHeight + 5, 20, 20, 0, 0, 0, Button1, 20, 20, (p_2130901) -> {
-			BlockPos pos = this.getTileEntity().getPos();
+			BlockPos pos = this.getTileEntity().getBlockPos();
 			BossToolsMod.PACKET_HANDLER.sendToServer(new OxygenBubbleDistributorBlock.ChangeRangeMessage(pos, true));
 		}));
 
 		button_minus = this.addWidget(new ImageButtonPlacer(this.imageWidth - 20, this.imageHeight + 25, 20, 20, 0, 0, 0, Button2, 20, 20, (p_2130901) -> {
-			BlockPos pos = this.getTileEntity().getPos();
+			BlockPos pos = this.getTileEntity().getBlockPos();
 			BossToolsMod.PACKET_HANDLER.sendToServer(new OxygenBubbleDistributorBlock.ChangeRangeMessage(pos, false));
 		}));
 
 		workingAreaVisibleButton = this.addWidget(new ImageButtonPlacer(this.imageWidth - 20, this.imageHeight - 22, 34, 20, 0, 0, 0, HideButton, 34, 20, e -> {
-			BlockPos pos = this.getTileEntity().getPos();
+			BlockPos pos = this.getTileEntity().getBlockPos();
 			BossToolsMod.PACKET_HANDLER.sendToServer(new OxygenBubbleDistributorBlock.ChangeWorkingAreaVisibleMessage(pos, !this.cachedWorkingAreaVisible));
 		}));
 	}

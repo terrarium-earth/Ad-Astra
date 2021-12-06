@@ -1,9 +1,7 @@
 package net.mrscauthd.boss_tools.machines.tile;
 
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.mrscauthd.boss_tools.BossToolsMod;
-
-import ResourceLocation;
 
 public class PowerSystemNone extends PowerSystem {
 	public PowerSystemNone(AbstractMachineTileEntity tileEntity) {

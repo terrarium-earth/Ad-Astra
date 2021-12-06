@@ -1,5 +1,6 @@
 package net.mrscauthd.boss_tools.compat.mekanism;
 
+import net.minecraftforge.common.capabilities.Capability;
 
 public class MekanismHelper {
 	/*

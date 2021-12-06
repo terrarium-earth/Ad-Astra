@@ -19,7 +19,7 @@ public class OxygenBubbleDistributorGui {
 	public static class GuiContainerFactory implements IContainerFactory<GuiContainer> {
 		public GuiContainer create(int id, Inventory inv, FriendlyByteBuf extraData) {
 			BlockPos pos = extraData.readBlockPos();
-			CustomTileEntity tileEntity = (CustomTileEntity) inv.player.level.getTileEntity(pos);
+			CustomTileEntity tileEntity = (CustomTileEntity) inv.player.level.getBlockEntity(pos);
 			return new GuiContainer(id, inv, tileEntity);
 		}
 	}

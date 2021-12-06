@@ -4,10 +4,10 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.inventory.StackCacher;
@@ -78,7 +78,7 @@ public abstract class PowerSystemFuel extends PowerSystem {
 	}
 
 	@Override
-	public void deserializeNBT(CompoundNBT compound) {
+	public void deserializeNBT(CompoundTag compound) {
 		super.deserializeNBT(compound);
 
 		this.fuel = compound.getInt("fuel");
@@ -86,8 +86,8 @@ public abstract class PowerSystemFuel extends PowerSystem {
 	}
 
 	@Override
-	public CompoundNBT serializeNBT() {
-		CompoundNBT compound = super.serializeNBT();
+	public CompoundTag serializeNBT() {
+		CompoundTag compound = super.serializeNBT();
 
 		compound.putInt("fuel", this.fuel);
 		compound.putInt("maxFuel", this.maxFuel);

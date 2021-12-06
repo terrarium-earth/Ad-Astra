@@ -2,11 +2,9 @@ package net.mrscauthd.boss_tools.machines.tile;
 
 import java.util.List;
 
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.mrscauthd.boss_tools.gauge.GaugeValueHelper;
 import net.mrscauthd.boss_tools.gauge.IGaugeValue;
-
-import ResourceLocation;
 
 public abstract class PowerSystemFuelBurnTime extends PowerSystemFuel {
 

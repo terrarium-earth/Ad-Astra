@@ -5,16 +5,16 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
 import net.mrscauthd.boss_tools.gauge.IGaugeValue;
 
-public abstract class PowerSystem implements INBTSerializable<CompoundNBT> {
+public abstract class PowerSystem implements INBTSerializable<CompoundTag> {
 	private final AbstractMachineTileEntity tileEntity;
 
 	public PowerSystem(AbstractMachineTileEntity tileEntity) {
@@ -70,13 +70,13 @@ public abstract class PowerSystem implements INBTSerializable<CompoundNBT> {
 	public abstract int extract(int amount, boolean simulate);
 
 	@Override
-	public void deserializeNBT(CompoundNBT compound) {
+	public void deserializeNBT(CompoundTag compound) {
 
 	}
 
 	@Override
-	public CompoundNBT serializeNBT() {
-		return new CompoundNBT();
+	public CompoundTag serializeNBT() {
+		return new CompoundTag();
 	}
 
 	/**
