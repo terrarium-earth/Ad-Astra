@@ -3,18 +3,19 @@ package net.mrscauthd.boss_tools.events;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.IngameGui;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.client.gui.ForgeIngameGui;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -56,8 +57,7 @@ public class OverlayEvents {
         RenderSystem.disableDepthTest();
         RenderSystem.depthMask(false);
         RenderSystem.disableBlend();
-        RenderSystem.disableAlphaTest();
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
     }
 
     public static void stopOverlaySettings() {
@@ -65,114 +65,112 @@ public class OverlayEvents {
         RenderSystem.depthMask(true);
         RenderSystem.enableBlend();
         RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
-        RenderSystem.enableAlphaTest();
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
     }
 
-    @SuppressWarnings("resource")
-	@SubscribeEvent(priority = EventPriority.HIGH)
-    public static void Overlay(RenderGameOverlayEvent event) {
+    @SubscribeEvent(priority = EventPriority.HIGH)
+    public static void Overlay(RenderGameOverlayEvent.PreLayer event) {
 
         /**Disable Food Overlay*/
-        if (event.getType() == RenderGameOverlayEvent.ElementType.HEALTHMOUNT) {
-            PlayerEntity entity = Minecraft.getInstance().player;
-            if (Methodes.AllVehiclesOr(entity.getRidingEntity())) {
+        if (event.getOverlay() == ForgeIngameGui.MOUNT_HEALTH_ELEMENT) {
+            Player entity = Minecraft.getInstance().player;
+            if (Methodes.AllVehiclesOr(entity.getVehicle())) {
                 event.setCanceled(true);
             }
         }
 
         /**Lander Warning Overlay*/
-        if (!event.isCancelable() && event.getType() == RenderGameOverlayEvent.ElementType.HELMET) {
-            PlayerEntity entity = Minecraft.getInstance().player;
+        if (!event.isCancelable() && event.getOverlay() == ForgeIngameGui.HELMET_ELEMENT) {
+            Player entity = Minecraft.getInstance().player;
 
             startOverlaySettings();
 
-            if (entity.getRidingEntity() instanceof LanderEntity && !entity.getRidingEntity().isOnGround() && !entity.areEyesInFluid(FluidTags.WATER)) {
+            if (entity.getVehicle() instanceof LanderEntity && !entity.getVehicle().isOnGround() && !entity.isEyeInFluid(FluidTags.WATER)) {
 
-                RenderSystem.color4f((float) counter, (float) counter, (float) counter, (float) counter);
+                RenderSystem.setShaderColor((float) counter, (float) counter, (float) counter, (float) counter);
 
-                Minecraft.getInstance().getTextureManager().bindTexture(new ResourceLocation(BossToolsMod.ModId, "textures/overlay/warning.png"));
-                Minecraft.getInstance().ingameGUI.blit(event.getMatrixStack(), 0, 0, 0, 0, event.getWindow().getScaledWidth(), event.getWindow().getScaledHeight(), event.getWindow().getScaledWidth(), event.getWindow().getScaledHeight());
+                Minecraft.getInstance().getTextureManager().bindForSetup(new ResourceLocation(BossToolsMod.ModId, "textures/overlay/warning.png"));
+                Minecraft.getInstance().gui.blit(event.getMatrixStack(), 0, 0, 0, 0, event.getWindow().getGuiScaledWidth(), event.getWindow().getGuiScaledHeight(), event.getWindow().getGuiScaledWidth(), event.getWindow().getGuiScaledHeight());
             }
 
-            RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
-            if (entity.getRidingEntity() instanceof LanderEntity && !entity.getRidingEntity().isOnGround() && !entity.areEyesInFluid(FluidTags.WATER)) {
+            if (entity.getVehicle() instanceof LanderEntity && !entity.getVehicle().isOnGround() && !entity.isEyeInFluid(FluidTags.WATER)) {
 
-                double speed = Math.round(100.0 * (entity.getRidingEntity()).getMotion().getY()) / 100.0;
+                double speed = Math.round(100.0 * (entity.getVehicle()).getDeltaMovement().y()) / 100.0;
                 double speedcheck = speed;
 
-                Minecraft.getInstance().fontRenderer.drawString(event.getMatrixStack(), "" + speedcheck + " Speed", event.getWindow().getScaledWidth() / 2 - 29, event.getWindow().getScaledHeight() / 2 / 2.3f, -3407872);
+                Minecraft.getInstance().font.draw(event.getMatrixStack(), "" + speedcheck + " Speed", event.getWindow().getGuiScaledWidth() / 2 - 29, event.getWindow().getGuiScaledHeight() / 2 / 2.3f, -3407872);
             }
 
             stopOverlaySettings();
         }
 
         /**Rocket Timer*/
-        if (!event.isCancelable() && event.getType() == RenderGameOverlayEvent.ElementType.HELMET) {
-            PlayerEntity entity = Minecraft.getInstance().player;
+        if (!event.isCancelable() && event.getOverlay() == ForgeIngameGui.HELMET_ELEMENT) {
+            Player entity = Minecraft.getInstance().player;
 
             startOverlaySettings();
 
-            if (Methodes.isRocket(entity.getRidingEntity())) {
+            if (Methodes.isRocket(entity.getVehicle())) {
                 int timer = 0;
 
-                if (entity.getRidingEntity() instanceof RocketTier1Entity) {
-                    timer = entity.getRidingEntity().getDataManager().get(RocketTier1Entity.START_TIMER);
+                if (entity.getVehicle() instanceof RocketTier1Entity) {
+                    timer = entity.getVehicle().getEntityData().get(RocketTier1Entity.START_TIMER);
                 }
 
-                if (entity.getRidingEntity() instanceof RocketTier2Entity) {
-                    timer = entity.getRidingEntity().getDataManager().get(RocketTier2Entity.START_TIMER);
+                if (entity.getVehicle() instanceof RocketTier2Entity) {
+                    timer = entity.getVehicle().getEntityData().get(RocketTier2Entity.START_TIMER);
                 }
 
-                if (entity.getRidingEntity() instanceof RocketTier3Entity) {
-                    timer = entity.getRidingEntity().getDataManager().get(RocketTier3Entity.START_TIMER);
+                if (entity.getVehicle() instanceof RocketTier3Entity) {
+                    timer = entity.getVehicle().getEntityData().get(RocketTier3Entity.START_TIMER);
                 }
 
-                int width = event.getWindow().getScaledWidth() / 2 - 31;
-                int high = event.getWindow().getScaledHeight() / 2 / 2;
+                int width = event.getWindow().getGuiScaledWidth() / 2 - 31;
+                int high = event.getWindow().getGuiScaledHeight() / 2 / 2;
 
-                IngameGui mc = Minecraft.getInstance().ingameGUI;
+                Gui mc = Minecraft.getInstance().gui;
                 TextureManager manager = Minecraft.getInstance().textureManager;
 
                 if (timer > -1 && timer < 20) {
-                    manager.bindTexture(new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer10.png"));
+                    manager.bindForSetup(new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer10.png"));
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
                 if (timer > 20 && timer < 40) {
-                    manager.bindTexture(new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer9.png"));
+                    manager.bindForSetup(new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer9.png"));
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
                 if (timer > 40 && timer < 60) {
-                    manager.bindTexture(new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer8.png"));
+                    manager.bindForSetup(new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer8.png"));
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
                 if (timer > 60 && timer < 80) {
-                    manager.bindTexture(new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer7.png"));
+                    manager.bindForSetup(new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer7.png"));
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
                 if (timer > 80 && timer < 100) {
-                    manager.bindTexture(new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer6.png"));
+                    manager.bindForSetup(new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer6.png"));
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
                 if (timer > 100 && timer < 120) {
-                    manager.bindTexture(new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer5.png"));
+                    manager.bindForSetup(new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer5.png"));
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
                 if (timer > 120 && timer < 140) {
-                    manager.bindTexture(new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer4.png"));
+                    manager.bindForSetup(new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer4.png"));
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
                 if (timer > 140 && timer < 160) {
-                    manager.bindTexture(new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer3.png"));
+                    manager.bindForSetup(new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer3.png"));
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
                 if (timer > 160 && timer < 180) {
-                    manager.bindTexture(new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer2.png"));
+                    manager.bindForSetup(new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer2.png"));
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
                 if (timer > 180 && timer < 200) {
-                    manager.bindTexture(new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer1.png"));
+                    manager.bindForSetup(new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer1.png"));
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
 
@@ -181,10 +179,10 @@ public class OverlayEvents {
         }
 
         /**Oxygen Tank Overlay*/
-        if (!event.isCancelable() && event.getType() == RenderGameOverlayEvent.ElementType.HELMET) {
+        if (!event.isCancelable() && event.getOverlay() == ForgeIngameGui.HELMET_ELEMENT) {
 
-            PlayerEntity entity = Minecraft.getInstance().player;
-            ItemStack chest = entity.getItemStackFromSlot(EquipmentSlotType.CHEST);
+            Player entity = Minecraft.getInstance().player;
+            ItemStack chest = entity.getItemBySlot(EquipmentSlot.CHEST);
             Item chestItem = chest.getItem();
 
             startOverlaySettings();
@@ -203,30 +201,30 @@ public class OverlayEvents {
                 
                 GuiHelper.drawVerticalReverse(event.getMatrixStack(), x, y, width, height, empty, oxygenStoredRatio);
                 GuiHelper.drawVertical(event.getMatrixStack(), x, y, width, height, full, oxygenStoredRatio);
-                
-                IFormattableTextComponent text = GaugeTextHelper.getPercentText(GaugeValueHelper.getOxygen(oxygenStorage)).build();
-                int textWidth = Minecraft.getInstance().fontRenderer.getStringPropertyWidth(text);
-                Minecraft.getInstance().fontRenderer.func_243246_a(event.getMatrixStack(), text, (x + (width - textWidth) / 2), y + height + 3, 0xFFFFFF);
+
+                MutableComponent text = GaugeTextHelper.getPercentText(GaugeValueHelper.getOxygen(oxygenStorage)).build();
+                int textWidth = Minecraft.getInstance().font.width(text);
+                Minecraft.getInstance().font.drawShadow(event.getMatrixStack(), text, (x + (width - textWidth) / 2), y + height + 3, 0xFFFFFF);
             }
 
             stopOverlaySettings();
         }
 
         /**ROCKET HIGH OVERLAY*/
-        if (!event.isCancelable() && event.getType() == RenderGameOverlayEvent.ElementType.HELMET) {
+        if (!event.isCancelable() && event.getOverlay() == ForgeIngameGui.HELMET_ELEMENT) {
 
-            PlayerEntity entity = Minecraft.getInstance().player;
-            IngameGui mc = Minecraft.getInstance().ingameGUI;
+            Player entity = Minecraft.getInstance().player;
+            Gui mc = Minecraft.getInstance().gui;
             TextureManager manager = Minecraft.getInstance().textureManager;
-            World world = Minecraft.getInstance().world;
+            Level world = Minecraft.getInstance().level;
 
             startOverlaySettings();
 
-            if (Methodes.isRocket(entity.getRidingEntity()) || entity.getRidingEntity() instanceof LanderEntity) {
-                int width = event.getWindow().getScaledWidth();
-                int high = event.getWindow().getScaledHeight();
+            if (Methodes.isRocket(entity.getVehicle()) || entity.getVehicle() instanceof LanderEntity) {
+                int width = event.getWindow().getGuiScaledWidth();
+                int high = event.getWindow().getGuiScaledHeight();
 
-                float yHeight = (float) entity.getPosY() / 5.3F;
+                float yHeight = (float) entity.getY() / 5.3F;
 
                 if (yHeight < 0) {
                     yHeight = 0;
@@ -257,10 +255,10 @@ public class OverlayEvents {
                     planet = new ResourceLocation(BossToolsMod.ModId, "textures/planet_bar/rocket_y_main_earth.png");
                 }
 
-                manager.bindTexture(planet);
+                manager.bindForSetup(planet);
                 mc.blit(event.getMatrixStack(), 0, (high / 2) - 128 / 2, 0, 0, 16, 128, 16, 128);
 
-                manager.bindTexture(new ResourceLocation(BossToolsMod.ModId, "textures/planet_bar/rocket_y.png"));
+                manager.bindForSetup(new ResourceLocation(BossToolsMod.ModId, "textures/planet_bar/rocket_y.png"));
                 GuiHelper.blit(event.getMatrixStack(), 4, (high / 2) + (103 / 2) - yHeight, 0, 0, 8, 11, 8, 11);
             }
             stopOverlaySettings();

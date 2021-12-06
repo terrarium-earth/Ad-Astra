@@ -1,15 +1,15 @@
 package net.mrscauthd.boss_tools.events;
 
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
 import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.events.forgeevents.LivingGravityEvent;
 
 public class Gravity {
-    public static void Gravity(LivingEntity entity, GravityType type, World world) {
+    public static void Gravity(LivingEntity entity, GravityType type, Level world) {
         double moon = 0.03;
         double mars = 0.04;
         double mercury = 0.03;
@@ -41,8 +41,8 @@ public class Gravity {
         PLAYER,LIVING
     }
 
-    public static boolean playerGravityCheck(PlayerEntity player) {
-        if (!player.abilities.isFlying && !player.isElytraFlying() && !player.isInWater() && !player.isInLava() && !player.hasNoGravity()) {
+    public static boolean playerGravityCheck(Player player) {
+        if (!player.getAbilities().flying && !player.isFallFlying() && !player.isInWater() && !player.isInLava() && !player.isNoGravity()) {
             return true;
         }
 
@@ -50,7 +50,7 @@ public class Gravity {
     }
 
     public static boolean livingGravityCheck(LivingEntity entity) {
-        if (!entity.isElytraFlying() && !entity.isInWater() && !entity.isInLava() && !entity.hasNoGravity() && !(entity instanceof PlayerEntity) && !Methodes.AllVehiclesOr(entity)) {
+        if (!entity.isFallFlying() && !entity.isInWater() && !entity.isInLava() && !entity.isNoGravity() && !(entity instanceof Player) && !Methodes.AllVehiclesOr(entity)) {
             return true;
         }
 
@@ -66,12 +66,12 @@ public class Gravity {
     		return;
     	}
 
-    	entity.setMotion(entity.getMotion().getX(), entity.getMotion().getY() / 0.98 + 0.08 - gravity, entity.getMotion().getZ());
+    	entity.setDeltaMovement(entity.getDeltaMovement().x(), entity.getDeltaMovement().y() / 0.98 + 0.08 - gravity, entity.getDeltaMovement().z());
     	fallDamage(entity, fallDistance);
 	}
 
     public static boolean checkType(GravityType type, LivingEntity entity) {
-    	if (type == GravityType.PLAYER && playerGravityCheck((PlayerEntity) entity)) {
+    	if (type == GravityType.PLAYER && playerGravityCheck((Player) entity)) {
     		return true;
     	} else if (type == GravityType.LIVING && livingGravityCheck(entity)) {
     		return true;
@@ -81,9 +81,8 @@ public class Gravity {
     }
 
     public static void fallDamage (LivingEntity entity, float fallDistance) {
-        if (entity.getMotion().getY() < -0.1) {
-            entity.fallDistance = (float) entity.getMotion().getY() * fallDistance;
+        if (entity.getDeltaMovement().y() < -0.1) {
+            entity.fallDistance = (float) entity.getDeltaMovement().y() * fallDistance;
         }
     }
-
 }

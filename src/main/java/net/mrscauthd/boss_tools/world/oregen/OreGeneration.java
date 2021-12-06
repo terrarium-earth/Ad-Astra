@@ -1,32 +1,8 @@
 package net.mrscauthd.boss_tools.world.oregen;
 
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.WorldGenRegistries;
-import net.minecraft.world.ISeedReader;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.OreFeature;
-import net.minecraft.world.gen.feature.OreFeatureConfig;
-import net.minecraft.world.gen.feature.template.IRuleTestType;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.event.world.BiomeLoadingEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.mrscauthd.boss_tools.BossToolsMod;
-import net.mrscauthd.boss_tools.ModInnet;
-import net.mrscauthd.boss_tools.events.Methodes;
-
-import java.util.Random;
-
-import Feature;
-import IRuleTestType;
-
-@Mod.EventBusSubscriber(modid = BossToolsMod.ModId, bus = Mod.EventBusSubscriber.Bus.MOD)
+//@Mod.EventBusSubscriber(modid = BossToolsMod.ModId, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class OreGeneration {
+    /*
     //MOON ORES:
     public static IRuleTestType<RuleTests.MoonRuleTest> MOON_MATCH = null;
     private static Feature<OreFeatureConfig> MOON_GEN_FEATURE = null;
@@ -144,7 +120,7 @@ public class OreGeneration {
     }
 
     /**DIM CHECK FOR FEATURE*/
-    public static Feature featureDimCheck(Feature feature, ResourceLocation worldcheck) {
+/*    public static Feature featureDimCheck(Feature feature, ResourceLocation worldcheck) {
         feature = new OreFeature(OreFeatureConfig.CODEC) {
             @Override
             public boolean generate(ISeedReader world, ChunkGenerator generator, Random rand, BlockPos pos, OreFeatureConfig config) {
@@ -156,5 +132,5 @@ public class OreGeneration {
         };
         return feature;
     }
-
+*/
 }

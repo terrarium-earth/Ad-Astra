@@ -5,16 +5,13 @@ import net.minecraftforge.fml.common.Mod;
 import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.ModInnet;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.DeferredWorkQueue;
-import net.minecraft.world.gen.carver.WorldCarver;
-import net.minecraft.block.Block;
-import java.util.Set;
 
 import com.google.common.collect.ImmutableSet;
 
-@Mod.EventBusSubscriber(modid = BossToolsMod.ModId, bus = Mod.EventBusSubscriber.Bus.MOD)
+//@Mod.EventBusSubscriber(modid = BossToolsMod.ModId, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class Caver {
+/*
 	@SubscribeEvent
 	public static void init(FMLCommonSetupEvent event) {
 		DeferredWorkQueue.runLater(() -> {
@@ -46,4 +43,5 @@ public class Caver {
 			}
 		});
 	}
+	*/
 }

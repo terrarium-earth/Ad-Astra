@@ -1,28 +1,11 @@
 package net.mrscauthd.boss_tools.world.structure;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.serialization.Codec;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MutableBoundingBox;
-import net.minecraft.util.registry.DynamicRegistries;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.MobSpawnInfo;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.jigsaw.JigsawManager;
-import net.minecraft.world.gen.feature.structure.AbstractVillagePiece;
-import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.feature.structure.StructureStart;
-import net.minecraft.world.gen.feature.structure.VillageConfig;
-import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.mrscauthd.boss_tools.BossToolsMod;
 
-import java.util.List;
 
-public class OilStructure extends Structure<NoFeatureConfig> {
+public class OilStructure /*extends Structure<NoFeatureConfig>*/ {
+    /*
     public OilStructure(Codec<NoFeatureConfig> codec) {
         super(codec);
     }
@@ -85,4 +68,5 @@ public class OilStructure extends Structure<NoFeatureConfig> {
             this.recalculateStructureSize();
         }
     }
+     */
 }

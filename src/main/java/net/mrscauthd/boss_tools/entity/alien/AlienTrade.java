@@ -157,7 +157,7 @@ public class AlienTrade {
             Registry.VILLAGER_TYPE.stream().filter((p_35680_) -> {
                 return !p_35672_.containsKey(p_35680_);
             }).findAny().ifPresent((p_35677_) -> {
-                throw new IllegalStateException("Missing trade for villager type: " + Registry.VILLAGER_TYPE.getKey(p_35677_));
+
             });
             this.trades = p_35672_;
             this.cost = p_35669_;

@@ -1,24 +1,7 @@
 package net.mrscauthd.boss_tools.world.structure.configuration;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import net.minecraft.util.registry.WorldGenRegistries;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.settings.DimensionStructuresSettings;
-import net.minecraft.world.gen.settings.StructureSeparationSettings;
-import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.mrscauthd.boss_tools.BossToolsMod;
-import net.mrscauthd.boss_tools.world.structure.CrimsonStructure;
-import net.mrscauthd.boss_tools.world.structure.VenusBulletStructure;
-import net.mrscauthd.boss_tools.world.structure.VenusTowerStructure;
-
-import java.util.HashMap;
-import java.util.Map;
-
 public class STStructures2 {
+    /*
 
     public static final DeferredRegister<Structure<?>> DEFERRED_REGISTRY_STRUCTURE = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, BossToolsMod.ModId);
 
@@ -64,4 +47,5 @@ public class STStructures2 {
             });
         }
     }
+     */
 }

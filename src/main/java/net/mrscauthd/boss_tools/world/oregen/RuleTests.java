@@ -1,13 +1,7 @@
 package net.mrscauthd.boss_tools.world.oregen;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.world.gen.feature.template.IRuleTestType;
-import net.minecraft.world.gen.feature.template.RuleTest;
-import net.mrscauthd.boss_tools.ModInnet;
-
-import java.util.Random;
-
 public class RuleTests {
+    /*
     public static class MoonRuleTest extends RuleTest {
         static final MoonRuleTest INSTANCE = new MoonRuleTest();
         static final com.mojang.serialization.Codec<MoonRuleTest> codec = com.mojang.serialization.Codec.unit(() -> INSTANCE);
@@ -75,4 +69,5 @@ public class RuleTests {
             return OreGeneration.VENUS_MATCH;
         }
     }
+   */
 }

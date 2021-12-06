@@ -1,33 +1,33 @@
 package net.mrscauthd.boss_tools.events;
 
-import net.minecraft.client.audio.ISound;
-import net.minecraft.client.audio.Sound;
-import net.minecraft.client.audio.SoundEventAccessor;
-import net.minecraft.client.audio.SoundHandler;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.client.resources.sounds.Sound;
+import net.minecraft.client.resources.sounds.SoundInstance;
+import net.minecraft.client.sounds.SoundManager;
+import net.minecraft.client.sounds.WeighedSoundEvents;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundSource;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 
 @OnlyIn(Dist.CLIENT)
-public class SpaceSoundSystem implements ISound {
-    private final ISound delegate;
+public class SpaceSoundSystem implements SoundInstance {
+    private final SoundInstance delegate;
 
-    public SpaceSoundSystem(ISound delegate) {
+    public SpaceSoundSystem(SoundInstance delegate) {
         this.delegate = delegate;
     }
 
     @Override
-    public ResourceLocation getSoundLocation() {
-        return delegate.getSoundLocation();
+    public ResourceLocation getLocation() {
+        return delegate.getLocation();
     }
 
     @Nullable
     @Override
-    public SoundEventAccessor createAccessor(SoundHandler handler) {
-        return delegate.createAccessor(handler);
+    public WeighedSoundEvents resolve(SoundManager p_119841_) {
+        return delegate.resolve(p_119841_);
     }
 
     @Override
@@ -36,23 +36,23 @@ public class SpaceSoundSystem implements ISound {
     }
 
     @Override
-    public SoundCategory getCategory() {
-        return delegate.getCategory();
+    public SoundSource getSource() {
+        return delegate.getSource();
     }
 
     @Override
-    public boolean canRepeat() {
-        return delegate.canRepeat();
+    public boolean isLooping() {
+        return delegate.isLooping();
     }
 
     @Override
-    public boolean isGlobal() {
-        return delegate.isGlobal();
+    public boolean isRelative() {
+        return delegate.isRelative();
     }
 
     @Override
-    public int getRepeatDelay() {
-        return delegate.getRepeatDelay();
+    public int getDelay() {
+        return delegate.getDelay();
     }
 
     @Override
@@ -81,7 +81,7 @@ public class SpaceSoundSystem implements ISound {
     }
 
     @Override
-    public AttenuationType getAttenuationType() {
-        return delegate.getAttenuationType();
+    public Attenuation getAttenuation() {
+        return delegate.getAttenuation();
     }
 }

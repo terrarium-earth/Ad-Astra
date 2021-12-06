@@ -1,16 +1,7 @@
 package net.mrscauthd.boss_tools.world.structure.configuration;
 
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.WorldGenRegistries;
-import net.minecraft.world.gen.FlatGenerationSettings;
-import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.feature.StructureFeature;
-import net.mrscauthd.boss_tools.BossToolsMod;
-
-import StructureFeature;
-
 public class STConfiguredStructures {
+    /*
     public static StructureFeature<?, ?> ALIEN_VILLAGE = STStructures.ALIEN_VILLAGE.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG);
     public static StructureFeature<?, ?> METEOR = STStructures.METEOR.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG);
     public static StructureFeature<?, ?> VENUS_BULLET = STStructures2.VENUS_BULLET.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG);
@@ -34,4 +25,5 @@ public class STConfiguredStructures {
         FlatGenerationSettings.STRUCTURES.put(STStructures2.CRIMSON.get(), CRIMSON);
         FlatGenerationSettings.STRUCTURES.put(STStructures.OIL.get(), OIL);
     }
+     */
 }
