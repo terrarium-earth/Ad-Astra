@@ -6,7 +6,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -17,6 +16,7 @@ import net.mrscauthd.boss_tools.gauge.GaugeTextHelper;
 import net.mrscauthd.boss_tools.gauge.GaugeValueHelper;
 import net.mrscauthd.boss_tools.gui.helper.GuiHelper;
 import net.mrscauthd.boss_tools.machines.BlastingFurnaceBlock.BlastingFurnaceBlockEntity;
+import net.mrscauthd.boss_tools.util.Rectangle2d;
 
 @OnlyIn(Dist.CLIENT)
 public class BlastFurnaceGuiWindow extends AbstractContainerScreen<BlastFurnaceGui.GuiContainer> {
@@ -58,7 +58,7 @@ public class BlastFurnaceGuiWindow extends AbstractContainerScreen<BlastFurnaceG
 		GuiHelper.drawArrow(ms, this.leftPos + ARROW_LEFT, this.topPos + ARROW_TOP, blockEntity.getTimerRatio());
 	}
 
-	public Rect2i getFireBounds() {
+	public Rectangle2d getFireBounds() {
 		return GuiHelper.getFireBounds(this.leftPos + FIRE_LEFT, this.topPos + FIRE_TOP);
 	}
 

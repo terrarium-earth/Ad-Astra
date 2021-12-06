@@ -1,47 +1,51 @@
 package net.mrscauthd.boss_tools.gui.helper;
 
-import com.mojang.blaze3d.vertex.*;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.BufferUploader;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.Tesselator;
+import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.math.Matrix4f;
+
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
-import net.minecraft.client.renderer.Rect2i;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.material.Fluid;
-import net.mrscauthd.boss_tools.BossToolsMod;
-
-import com.mojang.blaze3d.systems.RenderSystem;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
+import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.capability.IOxygenStorage;
 import net.mrscauthd.boss_tools.fluid.FluidUtil2;
+import net.mrscauthd.boss_tools.util.Rectangle2d;
 
 public class GuiHelper {
 
-	public static final ResourceLocation FIRE_PATH = new ResourceLocation(BossToolsMod.ModId,"textures/fire_on.png");
+	public static final ResourceLocation FIRE_PATH = new ResourceLocation(BossToolsMod.ModId, "textures/fire_on.png");
 	public static final int FIRE_WIDTH = 14;
 	public static final int FIRE_HEIGHT = 14;
-	public static final ResourceLocation ARROW_PATH = new ResourceLocation(BossToolsMod.ModId,"textures/animated_arrow_full.png");
+	public static final ResourceLocation ARROW_PATH = new ResourceLocation(BossToolsMod.ModId, "textures/animated_arrow_full.png");
 	public static final int ARROW_WIDTH = 24;
 	public static final int ARROW_HEIGHT = 17;
-	public static final ResourceLocation OXYGEN_CONTENT_PATH = new ResourceLocation(BossToolsMod.ModId,"textures/oxygen.png");
-	public static final ResourceLocation OXYGEN_TANK_PATH = new ResourceLocation(BossToolsMod.ModId,"textures/fluid_tank_fore.png");
+	public static final ResourceLocation OXYGEN_CONTENT_PATH = new ResourceLocation(BossToolsMod.ModId, "textures/oxygen.png");
+	public static final ResourceLocation OXYGEN_TANK_PATH = new ResourceLocation(BossToolsMod.ModId, "textures/fluid_tank_fore.png");
 	public static final int OXYGEN_TANK_WIDTH = 14;
 	public static final int OXYGEN_TANK_HEIGHT = 48;
-	public static final ResourceLocation ENERGY_PATH = new ResourceLocation(BossToolsMod.ModId,"textures/energy_full.png");
+	public static final ResourceLocation ENERGY_PATH = new ResourceLocation(BossToolsMod.ModId, "textures/energy_full.png");
 	public static final int ENERGY_WIDTH = 24;
 	public static final int ENERGY_HEIGHT = 48;
 	public static final int FUEL_WIDTH = 48;
 	public static final int FUEL_HEIGHT = 48;
-	public static final ResourceLocation FLUID_TANK_PATH = new ResourceLocation(BossToolsMod.ModId,"textures/fluid_tank_fore.png");
+	public static final ResourceLocation FLUID_TANK_PATH = new ResourceLocation(BossToolsMod.ModId, "textures/fluid_tank_fore.png");
 	public static final int FLUID_TANK_WIDTH = 14;
 	public static final int FLUID_TANK_HEIGHT = 48;
 
-	public static boolean isHover(Rect2i bounds, double x, double y) {
+	public static boolean isHover(Rectangle2d bounds, double x, double y) {
 		int left = bounds.getX();
 		int right = left + bounds.getWidth();
 		int top = bounds.getY();
@@ -53,16 +57,16 @@ public class GuiHelper {
 		GuiHelper.drawHorizontal(matrixStack, left, top, ARROW_WIDTH, ARROW_HEIGHT, ARROW_PATH, ratio);
 	}
 
-	public static Rect2i getArrowBounds(int left, int top) {
-		return new Rect2i(left, top, ARROW_WIDTH, ARROW_HEIGHT);
+	public static Rectangle2d getArrowBounds(int left, int top) {
+		return new Rectangle2d(left, top, ARROW_WIDTH, ARROW_HEIGHT);
 	}
 
 	public static void drawFire(PoseStack matrixStack, int left, int top, double ratio) {
 		drawVertical(matrixStack, left, top, FIRE_WIDTH, FIRE_HEIGHT, FIRE_PATH, ratio);
 	}
 
-	public static Rect2i getFireBounds(int left, int top) {
-		return new Rect2i(left, top, FIRE_WIDTH, FIRE_HEIGHT);
+	public static Rectangle2d getFireBounds(int left, int top) {
+		return new Rectangle2d(left, top, FIRE_WIDTH, FIRE_HEIGHT);
 	}
 
 	public static void drawOxygenTank(PoseStack matrixStack, int left, int top, IOxygenStorage oxygenStorage) {
@@ -78,8 +82,8 @@ public class GuiHelper {
 		drawFluidTankOverlay(matrixStack, left, top);
 	}
 
-	public static Rect2i getOxygenTankBounds(int left, int top) {
-		return new Rect2i(left, top, OXYGEN_TANK_WIDTH, OXYGEN_TANK_HEIGHT);
+	public static Rectangle2d getOxygenTankBounds(int left, int top) {
+		return new Rectangle2d(left, top, OXYGEN_TANK_WIDTH, OXYGEN_TANK_HEIGHT);
 	}
 
 	public static void drawEnergy(PoseStack matrixStack, int left, int top, IEnergyStorage energyStorage) {
@@ -91,16 +95,16 @@ public class GuiHelper {
 	}
 
 	public static void drawFuel(PoseStack matrixStack, int left, int top, double ratio) {
-		ResourceLocation full = new ResourceLocation(BossToolsMod.ModId,"textures/rocket_fuel_bar_full.png");
+		ResourceLocation full = new ResourceLocation(BossToolsMod.ModId, "textures/rocket_fuel_bar_full.png");
 		drawVertical(matrixStack, left, top, FUEL_WIDTH, FUEL_HEIGHT, full, ratio);
 	}
 
-	public static Rect2i getEnergyBounds(int left, int top) {
-		return new Rect2i(left, top, ENERGY_WIDTH, ENERGY_HEIGHT);
+	public static Rectangle2d getEnergyBounds(int left, int top) {
+		return new Rectangle2d(left, top, ENERGY_WIDTH, ENERGY_HEIGHT);
 	}
 
-	public static Rect2i getBounds(int left, int top, int width, int height) {
-		return new Rect2i(left, top, width, height);
+	public static Rectangle2d getBounds(int left, int top, int width, int height) {
+		return new Rectangle2d(left, top, width, height);
 	}
 
 	public static void drawFluidTank(PoseStack matrixStack, int left, int top, IFluidTank tank) {
@@ -240,12 +244,12 @@ public class GuiHelper {
 		return Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(fluidStill);
 	}
 
-	public static Rect2i getFluidTankBounds(int left, int top) {
-		return new Rect2i(left, top, FLUID_TANK_WIDTH, FLUID_TANK_HEIGHT);
+	public static Rectangle2d getFluidTankBounds(int left, int top) {
+		return new Rectangle2d(left, top, FLUID_TANK_WIDTH, FLUID_TANK_HEIGHT);
 	}
 
-	public static Rect2i getRocketFluidTankBounds(int left, int top) {
-		return new Rect2i(left, top, 48, 48);
+	public static Rectangle2d getRocketFluidTankBounds(int left, int top) {
+		return new Rectangle2d(left, top, 48, 48);
 	}
 
 	public static void drawVertical(PoseStack matrixStack, int left, int top, int width, int height, ResourceLocation resource, double ratio) {

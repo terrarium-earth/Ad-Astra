@@ -2,20 +2,20 @@ package net.mrscauthd.boss_tools.gauge;
 
 import javax.annotation.Nullable;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiComponent;
-import net.minecraft.client.renderer.Rect2i;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.mrscauthd.boss_tools.gui.helper.GuiHelper;
+import net.mrscauthd.boss_tools.util.Rectangle2d;
 
 public abstract class AbstractGaugeDataRenderer {
 
@@ -35,13 +35,13 @@ public abstract class AbstractGaugeDataRenderer {
 		int width = this.getWidth();
 		int height = this.getHeight();
 		int padding = this.getBorderWidth();
-		Rect2i innerBounds = new Rect2i(left + padding, top + padding, width - padding * 2, height - padding * 2);
+		Rectangle2d innerBounds = new Rectangle2d(left + padding, top + padding, width - padding * 2, height - padding * 2);
 		this.drawBackground(matrixStack, innerBounds);
 		this.drawContents(matrixStack, innerBounds);
 		this.drawGaugeText(matrixStack, innerBounds);
 	}
 
-	protected void drawContents(PoseStack matrixStack, Rect2i innerBounds) {
+	protected void drawContents(PoseStack matrixStack, Rectangle2d innerBounds) {
 
 	}
 
@@ -50,23 +50,23 @@ public abstract class AbstractGaugeDataRenderer {
 		return GaugeTextHelper.getValueText(this.getValue()).build();
 	}
 
-	protected void drawGaugeText(PoseStack matrixStack, Rect2i innerBounds) {
+	protected void drawGaugeText(PoseStack matrixStack, Rectangle2d innerBounds) {
 		Component text = this.getGaugeText();
 
 		if (text != null) {
 			int color = this.getTextColor();
 			int textPadding = 2;
-			Rect2i textBounds = new Rect2i(innerBounds.getX() + textPadding, innerBounds.getY(), innerBounds.getWidth() - textPadding, innerBounds.getHeight());
+			Rectangle2d textBounds = new Rectangle2d(innerBounds.getX() + textPadding, innerBounds.getY(), innerBounds.getWidth() - textPadding, innerBounds.getHeight());
 
 			this.drawText(matrixStack, textBounds, text, color);
 		}
 	}
 
-	protected void drawText(PoseStack matrixStack, Rect2i bounds, Component text, int color) {
+	protected void drawText(PoseStack matrixStack, Rectangle2d bounds, Component text, int color) {
 		this.drawText(Minecraft.getInstance(), matrixStack, bounds, text, color);
 	}
 
-	protected void drawText(Minecraft minecraft, PoseStack matrixStack, Rect2i bounds, Component text, int color) {
+	protected void drawText(Minecraft minecraft, PoseStack matrixStack, Rectangle2d bounds, Component text, int color) {
 		Font fontRenderer = minecraft.font;
 		int textWidth = fontRenderer.width(text);
 
@@ -82,7 +82,7 @@ public abstract class AbstractGaugeDataRenderer {
 		matrixStack.popPose();
 	}
 
-	protected void drawBackground(PoseStack matrixStack, Rect2i innerBounds) {
+	protected void drawBackground(PoseStack matrixStack, Rectangle2d innerBounds) {
 		IGaugeValue value = this.getValue();
 		int tileColor = value.getColor();
 		double displayRatio = value.getDisplayRatio();

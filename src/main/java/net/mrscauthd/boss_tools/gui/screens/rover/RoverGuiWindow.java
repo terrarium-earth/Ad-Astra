@@ -15,6 +15,8 @@ import net.mrscauthd.boss_tools.fluid.FluidUtil2;
 import net.mrscauthd.boss_tools.gauge.GaugeTextHelper;
 import net.mrscauthd.boss_tools.gauge.GaugeValueHelper;
 import net.mrscauthd.boss_tools.gui.helper.GuiHelper;
+import net.mrscauthd.boss_tools.util.Rectangle2d;
+
 import org.lwjgl.opengl.GL11;
 
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -72,7 +74,7 @@ public class RoverGuiWindow extends AbstractContainerScreen<RoverGui.GuiContaine
 		this.font.draw(ms, this.playerInventoryTitle, (float) this.inventoryLabelX, (float) this.inventoryLabelX, 4210752);
 	}
 
-	public Rect2i getFluidBounds() {
+	public Rectangle2d getFluidBounds() {
 		return GuiHelper.getFluidTankBounds(this.leftPos + 9, this.topPos + 11);
 	}
 }

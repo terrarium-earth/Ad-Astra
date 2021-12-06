@@ -1,12 +1,16 @@
 package net.mrscauthd.boss_tools.gui.screens.planetselection;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Quaternion;
 import com.mojang.math.Vector3f;
+
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -18,9 +22,7 @@ import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.ModInnet;
 import net.mrscauthd.boss_tools.gui.helper.GuiHelper;
 import net.mrscauthd.boss_tools.gui.helper.ImageButtonPlacer;
-
-import java.util.ArrayList;
-import java.util.List;
+import net.mrscauthd.boss_tools.util.Rectangle2d;
 
 @OnlyIn(Dist.CLIENT)
 public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSelectionGui.GuiContainer> {
@@ -237,7 +239,7 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 
 		//BACKGROUND
 		Minecraft.getInstance().getTextureManager().bindForSetup(texture);
-		this.blit(ms, 0, 0, 0, 0, this.width, this.height, this.width, this.height);
+		GuiComponent.blit(ms, 0, 0, 0, 0, this.width, this.height, this.width, this.height);
 
 		//MILKY WAY
 		Minecraft.getInstance().getTextureManager().bindForSetup(new ResourceLocation(BossToolsMod.ModId,"textures/milky_way.png"));
@@ -256,10 +258,10 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 		//MENU
 		if (Category == 0) {
 			Minecraft.getInstance().getTextureManager().bindForSetup(new ResourceLocation(BossToolsMod.ModId, "textures/rocket_menu_list.png"));
-			this.blit(ms, 0, (this.height / 2) - 160 / 2, 0, 0, 105, 160, 105, 160);
+			GuiComponent.blit(ms, 0, (this.height / 2) - 160 / 2, 0, 0, 105, 160, 105, 160);
 		} else {
 			Minecraft.getInstance().getTextureManager().bindForSetup(new ResourceLocation(BossToolsMod.ModId, "textures/rocket_menu_list_2.png"));
-			this.blit(ms, 0, (this.height / 2) - 160 / 2, 0, 0, 215, 160, 215, 160);
+			GuiComponent.blit(ms, 0, (this.height / 2) - 160 / 2, 0, 0, 215, 160, 215, 160);
 		}
 
 		RenderSystem.disableBlend();
@@ -345,7 +347,7 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 	protected void renderLabels(PoseStack p_97808_, int p_97809_, int p_97810_) {
 	}
 
-	public Rect2i getBounds(int left, int top, int width, int height) {
+	public Rectangle2d getBounds(int left, int top, int width, int height) {
 		return GuiHelper.getBounds(left, top, width, height);
 	}
 

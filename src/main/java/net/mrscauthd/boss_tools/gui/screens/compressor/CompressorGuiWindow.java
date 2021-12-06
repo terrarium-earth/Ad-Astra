@@ -1,26 +1,27 @@
 package net.mrscauthd.boss_tools.gui.screens.compressor;
 
+import org.lwjgl.opengl.GL11;
+
 import com.mojang.blaze3d.vertex.PoseStack;
+
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.mrscauthd.boss_tools.BossToolsMod;
-import org.lwjgl.opengl.GL11;
-
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.mrscauthd.boss_tools.gauge.GaugeValueHelper;
+import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.gauge.GaugeTextHelper;
+import net.mrscauthd.boss_tools.gauge.GaugeValueHelper;
 import net.mrscauthd.boss_tools.gui.helper.GuiHelper;
 import net.mrscauthd.boss_tools.machines.CompressorBlock.CompressorBlockEntity;
+import net.mrscauthd.boss_tools.util.Rectangle2d;
 
 @OnlyIn(Dist.CLIENT)
 public class CompressorGuiWindow extends AbstractContainerScreen<CompressorGui.GuiContainer> {
 
-	public static final ResourceLocation TEXTURE = new ResourceLocation(BossToolsMod.ModId,"textures/screens/compressor_gui.png");
+	public static final ResourceLocation TEXTURE = new ResourceLocation(BossToolsMod.ModId, "textures/screens/compressor_gui.png");
 
 	public static final int ENERGY_LEFT = 144;
 	public static final int ENERGY_TOP = 21;
@@ -58,7 +59,7 @@ public class CompressorGuiWindow extends AbstractContainerScreen<CompressorGui.G
 		GuiHelper.drawArrow(ms, this.leftPos + ARROW_LEFT, this.leftPos + ARROW_TOP, blockEntity.getTimerRatio());
 	}
 
-	public Rect2i getEnergyBounds() {
+	public Rectangle2d getEnergyBounds() {
 		return GuiHelper.getEnergyBounds(this.leftPos + ENERGY_LEFT, this.leftPos + ENERGY_TOP);
 	}
 }
