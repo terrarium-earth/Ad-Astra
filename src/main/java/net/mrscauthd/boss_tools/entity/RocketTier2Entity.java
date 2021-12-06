@@ -65,10 +65,10 @@ public class RocketTier2Entity extends PathfinderMob {
 	public double ay = 0;
 	public double ap = 0;
 
-	public static final EntityDataAccessor<Boolean> ROCKET_START = SynchedEntityData.defineId(RocketTier1Entity.class, EntityDataSerializers.BOOLEAN);
-	public static final EntityDataAccessor<Integer> BUCKETS = SynchedEntityData.defineId(RocketTier1Entity.class, EntityDataSerializers.INT);
-	public static final EntityDataAccessor<Integer> FUEL = SynchedEntityData.defineId(RocketTier1Entity.class, EntityDataSerializers.INT);
-	public static final EntityDataAccessor<Integer> START_TIMER = SynchedEntityData.defineId(RocketTier1Entity.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Boolean> ROCKET_START = SynchedEntityData.defineId(RocketTier2Entity.class, EntityDataSerializers.BOOLEAN);
+	public static final EntityDataAccessor<Integer> BUCKETS = SynchedEntityData.defineId(RocketTier2Entity.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Integer> FUEL = SynchedEntityData.defineId(RocketTier2Entity.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Integer> START_TIMER = SynchedEntityData.defineId(RocketTier2Entity.class, EntityDataSerializers.INT);
 
 	public static final int FUEL_BUCKETS = 3;
 
