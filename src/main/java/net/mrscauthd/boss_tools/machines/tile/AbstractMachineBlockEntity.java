@@ -467,12 +467,8 @@ public abstract class AbstractMachineBlockEntity extends RandomizableContainerBl
 	protected void setActivated(boolean activated) {
 		if (this.isActivated() != activated) {
 			this.getTileData().putBoolean(KEY_ACTIVATED, activated);
-			this.markDirty();
+			this.setChanged();
 		}
-	}
-
-	public void markDirty() {
-		this.setChanged();
 	}
 
 	@Override
@@ -504,7 +500,7 @@ public abstract class AbstractMachineBlockEntity extends RandomizableContainerBl
 
 	@Override
 	public void onEnergyChanged(IEnergyStorage energyStorage, int energyDelta) {
-		this.markDirty();
+		this.setChanged();
 	}
 
 	protected boolean isProcessedInThisTick() {

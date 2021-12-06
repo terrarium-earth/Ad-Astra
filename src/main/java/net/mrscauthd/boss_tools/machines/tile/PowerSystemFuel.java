@@ -45,7 +45,7 @@ public abstract class PowerSystemFuel extends PowerSystem {
 
 		if (!simulate) {
 			this.fuel += received;
-			this.getBlockEntity().markDirty();
+			this.getBlockEntity().setChanged();
 		}
 
 		return received;
@@ -57,7 +57,7 @@ public abstract class PowerSystemFuel extends PowerSystem {
 
 		if (!simulate) {
 			this.fuel -= extracted;
-			this.getBlockEntity().markDirty();
+			this.getBlockEntity().setChanged();
 		}
 
 		return extracted;

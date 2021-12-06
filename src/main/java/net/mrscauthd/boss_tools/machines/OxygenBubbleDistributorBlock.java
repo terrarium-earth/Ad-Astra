@@ -175,7 +175,7 @@ public class OxygenBubbleDistributorBlock {
 
 			if (this.getTimer() != timer) {
 				this.getTileData().putInt(KEY_TIMER, timer);
-				this.markDirty();
+				this.setChanged();
 			}
 		}
 
@@ -192,7 +192,7 @@ public class OxygenBubbleDistributorBlock {
 
 			if (this.getRange() != range) {
 				this.getTileData().putInt(KEY_RANGE, range);
-				this.markDirty();
+				this.setChanged();
 			}
 		}
 
@@ -203,7 +203,7 @@ public class OxygenBubbleDistributorBlock {
 		public void setWorkingAreaVisible(boolean visible) {
 			if (this.isWorkingAreaVisible() != visible) {
 				this.getTileData().putBoolean(KEY_WORKINGAREA_VISIBLE, visible);
-				this.markDirty();
+				this.setChanged();
 			}
 		}
 

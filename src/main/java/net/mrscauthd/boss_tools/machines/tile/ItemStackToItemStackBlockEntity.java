@@ -178,7 +178,7 @@ public abstract class ItemStackToItemStackBlockEntity extends AbstractMachineBlo
 
 		if (this.getTimer() != timer) {
 			this.getTileData().putInt(KEY_TIMER, timer);
-			this.markDirty();
+			this.setChanged();
 		}
 	}
 
@@ -191,7 +191,7 @@ public abstract class ItemStackToItemStackBlockEntity extends AbstractMachineBlo
 
 		if (this.getMaxTimer() != maxTimer) {
 			this.getTileData().putInt(KEY_MAXTIMER, maxTimer);
-			this.markDirty();
+			this.setChanged();
 		}
 	}
 

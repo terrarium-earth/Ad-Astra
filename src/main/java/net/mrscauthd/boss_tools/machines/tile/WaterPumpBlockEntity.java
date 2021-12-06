@@ -175,7 +175,7 @@ public class WaterPumpBlockEntity extends AbstractMachineBlockEntity {
             @Override
             protected void onContentsChanged() {
                 super.onContentsChanged();
-                WaterPumpBlockEntity.this.markDirty();
+                WaterPumpBlockEntity.this.setChanged();
             }
         };
     }

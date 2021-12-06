@@ -108,7 +108,7 @@ public class FuelRefineryBlock {
 				@Override
 				protected void onContentsChanged() {
 					super.onContentsChanged();
-					FuelRefineryBlockEntity.this.markDirty();
+					FuelRefineryBlockEntity.this.setChanged();
 				}
 			};
 		}

@@ -93,7 +93,7 @@ public abstract class OxygenMakingBlockEntity extends AbstractMachineBlockEntity
 			@Override
 			protected void onContentsChanged() {
 				super.onContentsChanged();
-				OxygenMakingBlockEntity.this.markDirty();
+				OxygenMakingBlockEntity.this.setChanged();
 			}
 		};
 	}
@@ -102,7 +102,7 @@ public abstract class OxygenMakingBlockEntity extends AbstractMachineBlockEntity
 		return new OxygenStorage(new IOxygenStorageHolder() {
 			@Override
 			public void onOxygenChanged(IOxygenStorage oxygenStorage, int oxygenDelta) {
-				OxygenMakingBlockEntity.this.markDirty();
+				OxygenMakingBlockEntity.this.setChanged();
 			}
 		}, this.getInitialTankCapacity(name));
 	}

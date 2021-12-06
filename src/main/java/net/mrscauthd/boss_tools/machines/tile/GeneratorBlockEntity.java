@@ -253,7 +253,7 @@ public abstract class GeneratorBlockEntity extends AbstractMachineBlockEntity {
 
 		if (this.getGenerating() != generating) {
 			this.getTileData().putInt(KEY_GENERATING, generating);
-			this.markDirty();
+			this.setChanged();
 		}
 	}
 
