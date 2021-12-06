@@ -5,14 +5,9 @@ import net.mrscauthd.boss_tools.entity.LanderEntity;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.api.distmarker.Dist;
 
-import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.client.renderer.entity.model.EntityModel;
-
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import com.mojang.blaze3d.matrix.MatrixStack;
-
 @OnlyIn(Dist.CLIENT)
-public class LanderModel<T extends LanderEntity> extends EntityModel<T>  {
+public class LanderModel<T extends LanderEntity> /*extends EntityModel<T>*/  {
+	/*
 	private final ModelRenderer leg1;
 	private final ModelRenderer cube_r1;
 	private final ModelRenderer cube_r2;
@@ -305,4 +300,6 @@ public class LanderModel<T extends LanderEntity> extends EntityModel<T>  {
 		modelRenderer.rotateAngleY = y;
 		modelRenderer.rotateAngleZ = z;
 	}
+
+	 */
 }

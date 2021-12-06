@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ItemEntity.class)
 public abstract class MixinItemGravity {
-    @Inject(at = @At(value = "HEAD"), method = "tick")
+    @Inject(at = @At(value = "HEAD"), method = "tick", remap = false)
     private void tick(CallbackInfo info) {
         ItemEntity w = (ItemEntity) ((Object) this);
 

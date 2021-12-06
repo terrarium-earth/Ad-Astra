@@ -1,5 +1,15 @@
 package net.mrscauthd.boss_tools.skyrenderer;
 
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.Tesselator;
+import com.mojang.blaze3d.vertex.VertexBuffer;
+import com.mojang.math.Vector3d;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.renderer.DimensionSpecialEffects;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.material.FogType;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.common.Mod;
@@ -9,31 +19,16 @@ import net.minecraftforge.client.ISkyRenderHandler;
 import net.minecraftforge.client.ICloudRenderHandler;
 import net.minecraftforge.api.distmarker.Dist;
 
-import net.minecraft.util.math.vector.Vector3f;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.math.vector.Matrix4f;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.client.world.DimensionRenderInfo.FogType;
-import net.minecraft.client.world.DimensionRenderInfo;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.client.renderer.vertex.VertexBuffer;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.client.renderer.WorldVertexBufferUploader;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.FogRenderer;
-import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.Minecraft;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.matrix.MatrixStack;
 import net.mrscauthd.boss_tools.BossToolsMod;
 
-import ResourceLocation;
-
-@Mod.EventBusSubscriber(modid = BossToolsMod.ModId, bus = Bus.MOD, value = Dist.CLIENT)
+//@Mod.EventBusSubscriber(modid = BossToolsMod.ModId, bus = Bus.MOD, value = Dist.CLIENT)
 public class ClientEventBusMars {
+	/*
 	private static final ResourceLocation DIM_RENDER_INFO = new ResourceLocation(BossToolsMod.ModId, "mars");
 	private static final ResourceLocation SUN_TEXTURE = new ResourceLocation(BossToolsMod.ModId, "textures/sky/sun.png");
 	private static final ResourceLocation PHOBOS_TEXTURE = new ResourceLocation(BossToolsMod.ModId, "textures/sky/phobos.png");
@@ -41,40 +36,37 @@ public class ClientEventBusMars {
 	private static final ResourceLocation EARTH_TEXTURE = new ResourceLocation(BossToolsMod.ModId, "textures/sky/earth.png");
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public static void clientSetup(FMLClientSetupEvent event) {
-		DimensionRenderInfo.field_239208_a_.put(DIM_RENDER_INFO, new DimensionRenderInfo(128, false, FogType.NORMAL, false, false) {
+		DimensionSpecialEffects.EFFECTS.put(DIM_RENDER_INFO, new DimensionSpecialEffects(128, false, FogType.NONE, false, false) {
 			@Override
-			public Vector3d func_230494_a_(Vector3d color, float sunHeight) {
-				return new Vector3d(0.647058823529, 0.450980392157, 0.254901960784);
+			public Vec3 getBrightnessDependentFogColor(Vec3 p_108878_, float p_108879_) {
+				return new Vec3(0.647058823529, 0.450980392157, 0.254901960784);
 			}
 
 			@Override
-			public boolean func_230493_a_(int posX, int posY) {
+			public boolean isFoggyAt(int p_108874_, int p_108875_) {
 				return true;
 			}
 
 			@Override
-			public ICloudRenderHandler getCloudRenderHandler() {
-				return new ICloudRenderHandler() {
-					@Override
-					public void render(int ticks, float partialTicks, MatrixStack matrixStack, ClientWorld world, Minecraft mc, double viewEntityX, double viewEntityY, double viewEntityZ) {
-
-					}
-				};
+			public void setCloudRenderHandler(ICloudRenderHandler cloudRenderHandler) {
 			}
 
 			@Override
-			public ISkyRenderHandler getSkyRenderHandler() {
+			public void setSkyRenderHandler(ISkyRenderHandler skyRenderHandler) {
+				skyRenderHandler = renderSky();
+			}
+
+			public ISkyRenderHandler renderSky() {
 				return new ISkyRenderHandler() {
-					@SuppressWarnings({"deprecation"})
 					@Override
-					public void render(int ticks, float partialTicks, MatrixStack matrixStack, ClientWorld world, Minecraft mc) {
+					public void render(int ticks, float partialTicks, PoseStack matrixStack, ClientLevel world, Minecraft mc) {
 						RenderSystem.disableTexture();
-						Vector3d vector3d = world.getSkyColor(mc.gameRenderer.getActiveRenderInfo().getBlockPos(), partialTicks);
+						Vector3d vector3d = world.getSkyColor(mc.gameRenderer.getMainCamera().getPosition(), partialTicks);
 						float f = (float) vector3d.x;
 						float f1 = (float) vector3d.y;
 						float f2 = (float) vector3d.z;
-						FogRenderer.applyFog();
-						BufferBuilder bufferbuilder = Tessellator.getInstance().getBuffer();
+						FogRenderer.levelFogColor();
+						BufferBuilder bufferbuilder = Tesselator.getInstance().getBuilder();
 						RenderSystem.depthMask(false);
 						RenderSystem.enableFog();
 						RenderSystem.color3f(0.81960785f, 0.54509807f, 0.32156864f);
@@ -221,4 +213,6 @@ public class ClientEventBusMars {
 			}
 		});
 	}
+
+	 */
 }

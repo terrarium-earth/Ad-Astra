@@ -1,6 +1,8 @@
 package net.mrscauthd.boss_tools.events;
 
+import net.minecraft.client.KeyMapping;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
@@ -15,15 +17,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraft.client.Minecraft;
 import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.ModInnet;
-import net.mrscauthd.boss_tools.entity.renderer.TileEntityBoxRenderer;
-import net.mrscauthd.boss_tools.entity.renderer.flagtileentity.TileEntityHeadRenderer;
-import net.mrscauthd.boss_tools.entity.renderer.alienzombie.AlienZombieRenderer;
-import net.mrscauthd.boss_tools.entity.renderer.lander.LanderRenderer;
-import net.mrscauthd.boss_tools.entity.renderer.rockettier1.RocketTier1Renderer;
-import net.mrscauthd.boss_tools.entity.renderer.rockettier2.RocketTier2Renderer;
-import net.mrscauthd.boss_tools.entity.renderer.rockettier3.RocketTier3Renderer;
-import net.mrscauthd.boss_tools.entity.renderer.rover.RoverRenderer;
-import net.mrscauthd.boss_tools.entity.renderer.starcrawler.StarCrawlerRenderer;
+import net.mrscauthd.boss_tools.entity.renderer.alien.AlienModel;
 import net.mrscauthd.boss_tools.gui.screens.blastfurnace.BlastFurnaceGuiWindow;
 import net.mrscauthd.boss_tools.gui.screens.coalgenerator.CoalGeneratorGuiWindow;
 import net.mrscauthd.boss_tools.gui.screens.compressor.CompressorGuiWindow;
@@ -41,19 +35,18 @@ import net.mrscauthd.boss_tools.particle.LargeFlameParticle;
 import net.mrscauthd.boss_tools.particle.SmokeParticle;
 import net.mrscauthd.boss_tools.particle.VenusRainParticle;
 import net.mrscauthd.boss_tools.entity.renderer.alien.AlienRenderer;
-import net.mrscauthd.boss_tools.entity.renderer.mogler.MoglerRenderer;
-import net.mrscauthd.boss_tools.entity.renderer.pygro.PygroRenderer;
 import org.lwjgl.glfw.GLFW;
 
-import javax.swing.text.JTextComponent;
+import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(modid = BossToolsMod.ModId, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEventBusSubscriber {
-	public static JTextComponent.KeyBinding key1;
+	public static KeyMapping key1;
 
 	@SubscribeEvent
 	public static void registerEntityRenderingHandler(EntityRenderersEvent.RegisterRenderers event) {
 		event.registerEntityRenderer(ModInnet.ALIEN.get(), AlienRenderer::new);
+		/*
 		event.registerEntityRenderer(ModInnet.PYGRO.get(), PygroRenderer::new);
 		event.registerEntityRenderer(ModInnet.MOGLER.get(), MoglerRenderer::new);
 		event.registerEntityRenderer(ModInnet.ALIEN_ZOMBIE.get(), AlienZombieRenderer::new);
@@ -63,13 +56,19 @@ public class ClientEventBusSubscriber {
 		event.registerEntityRenderer(ModInnet.TIER_3_ROCKET.get(), RocketTier3Renderer::new);
 		event.registerEntityRenderer(ModInnet.LANDER.get(), LanderRenderer::new);
 		event.registerEntityRenderer(ModInnet.ROVER.get(), RoverRenderer::new);
+		*/
 
-		event.registerEntityRenderer(ModInnet.ALIEN_SPIT_ENTITY.get(), renderManager -> new ThrownItemRenderer(renderManager, Minecraft.getInstance().getItemRenderer(), true));
+		event.registerEntityRenderer(ModInnet.ALIEN_SPIT_ENTITY.get(), renderManager -> new ThrownItemRenderer(renderManager, 1, true));
 
 
-		event.registerBlockEntityRenderer(ModInnet.OXYGEN_BUBBLE_DISTRIBUTOR.get(), TileEntityBoxRenderer::new);
+		//event.registerBlockEntityRenderer(ModInnet.OXYGEN_BUBBLE_DISTRIBUTOR.get(), TileEntityBoxRenderer::new);
 
-		event.registerBlockEntityRenderer(ModInnet.FLAG.get(), TileEntityHeadRenderer::new);
+		//event.registerBlockEntityRenderer(ModInnet.FLAG.get(), TileEntityHeadRenderer::new);
+	}
+
+	@SubscribeEvent
+	public static void registerEntityRenderingHandler(EntityRenderersEvent.RegisterLayerDefinitions event) {
+		event.registerLayerDefinition(AlienModel.LAYER_LOCATION, (Supplier<LayerDefinition>) AlienModel.createBodyLayer());
 	}
 
 	@SubscribeEvent
@@ -90,7 +89,7 @@ public class ClientEventBusSubscriber {
 		MenuScreens.register(ModInnet.PLANET_SELECTION_GUI.get(), PlanetSelectionGuiWindow::new);
 
 		//Key Binding Registrys
-		key1 = new JTextComponent.KeyBinding("key." + BossToolsMod.ModId + ".rocket_start", GLFW.GLFW_KEY_SPACE, "key.categories." + BossToolsMod.ModId);
+		key1 = new KeyMapping("key." + BossToolsMod.ModId + ".rocket_start", GLFW.GLFW_KEY_SPACE, "key.categories." + BossToolsMod.ModId);
 		ClientRegistry.registerKeyBinding(key1);
 
 		//Fluid Translucent Renderer

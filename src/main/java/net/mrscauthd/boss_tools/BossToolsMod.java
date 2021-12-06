@@ -2,7 +2,6 @@ package net.mrscauthd.boss_tools;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
@@ -14,9 +13,6 @@ import net.mrscauthd.boss_tools.compat.CompatibleManager;
 import net.mrscauthd.boss_tools.gui.screens.planetselection.PlanetSelectionGui;
 import net.mrscauthd.boss_tools.keybind.KeyBindings;
 import net.mrscauthd.boss_tools.machines.OxygenBubbleDistributorBlock;
-import net.mrscauthd.boss_tools.world.oregen.OreGeneration;
-import net.mrscauthd.boss_tools.world.structure.configuration.STStructures;
-import net.mrscauthd.boss_tools.world.structure.configuration.STStructures2;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
@@ -75,11 +71,11 @@ public class BossToolsMod {
 		//forgeBus.addListener(EventPriority.HIGH, ModInnet::biomeModification);
 
 		// Structures
-		STStructures2.DEFERRED_REGISTRY_STRUCTURE.register(bus);
-		STStructures.DEFERRED_REGISTRY_STRUCTURE.register(bus);
+		//STStructures2.DEFERRED_REGISTRY_STRUCTURE.register(bus);
+		//STStructures.DEFERRED_REGISTRY_STRUCTURE.register(bus);
 
 		//forgeBus.addListener(EventPriority.HIGH, ModInnet::biomesLoading);
-		forgeBus.addListener(EventPriority.HIGH, OreGeneration::biomesLoading);
+		//forgeBus.addListener(EventPriority.HIGH, OreGeneration::biomesLoading);
 
 		// KeyBindings
 		KeyBindings.registerMessages();

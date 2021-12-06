@@ -1,32 +1,14 @@
 package net.mrscauthd.boss_tools.entity.renderer.mogler;
 
 import com.google.common.collect.ImmutableList;
-import net.minecraft.client.renderer.entity.model.AgeableModel;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.monster.IFlinging;
-import net.minecraft.util.math.MathHelper;
-import net.mrscauthd.boss_tools.entity.MoglerEntity;
 
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.api.distmarker.Dist;
 
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.entity.Entity;
-import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.entity.MobRenderer;
-
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import com.mojang.blaze3d.matrix.MatrixStack;
-
-import MobEntity;
 
 @OnlyIn(Dist.CLIENT)
-public class MoglerModel<T extends MobEntity & IFlinging> extends AgeableModel<T>  {
+public class MoglerModel/*<T extends MobEntity & IFlinging> extends AgeableModel<T>*/  {
+    /*
     private final ModelRenderer body;
     private final ModelRenderer cube_r1;
     private final ModelRenderer cube_r2;
@@ -176,4 +158,6 @@ public class MoglerModel<T extends MobEntity & IFlinging> extends AgeableModel<T
         this.leg3.rotateAngleX = this.leg1.rotateAngleX;
         this.leg4.rotateAngleX = this.leg2.rotateAngleX;
     }
+
+     */
 }

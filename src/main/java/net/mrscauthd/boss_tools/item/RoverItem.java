@@ -10,6 +10,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -18,6 +19,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -30,7 +32,6 @@ import net.mrscauthd.boss_tools.gauge.GaugeValueHelper;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 public class RoverItem extends Item {
 
@@ -81,18 +82,18 @@ public class RoverItem extends Item {
                 double d0 = getYOffset(world, pos, true, rocket.getBoundingBox());
                 float f = player.getYRot();
 
-                rocket.setLocationAndAngles((double)pos.getX() + 0.5D, (double)pos.getY() + d0, (double)pos.getZ() + 0.5D, f, 0.0F);
+                rocket.moveTo((double)pos.getX() + 0.5D, (double)pos.getY() + d0, (double)pos.getZ() + 0.5D, f, 0.0F);
 
-                rocket.rotationYawHead = rocket.rotationYaw;
-                rocket.renderYawOffset = rocket.rotationYaw;
+                rocket.yHeadRot = rocket.getYRot();
+                rocket.yBodyRot = rocket.getYRot();
 
                 if (world instanceof ServerLevel) {
-                    rocket.onInitialSpawn((IServerWorld) world, world.getDifficultyForLocation(rocket.getPosition()), SpawnReason.MOB_SUMMONED, null, null);
+                    rocket.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(new BlockPos(rocket.getX(), rocket.getY(), rocket.getZ())), MobSpawnType.MOB_SUMMONED, null, null);
                 }
 
                 world.addFreshEntity(rocket);
 
-                rocket.getDataManager().set(RoverEntity.FUEL, itemStack.getOrCreateTag().getInt(fuelTag));
+                rocket.getEntityData().set(RoverEntity.FUEL, itemStack.getOrCreateTag().getInt(fuelTag));
 
                 if (!player.getAbilities().instabuild) {
                     player.setItemInHand(hand, ItemStack.EMPTY);

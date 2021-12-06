@@ -1,21 +1,15 @@
 package net.mrscauthd.boss_tools.entity.renderer.alienzombie;
 
-import net.minecraft.entity.MobEntity;
 
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.world.entity.Mob;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.api.distmarker.Dist;
 
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.client.renderer.entity.model.EntityModel;
-
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import com.mojang.blaze3d.matrix.MatrixStack;
-
-import MobEntity;
 
 @OnlyIn(Dist.CLIENT)
-public class AlienZombieModel<T extends MobEntity> extends EntityModel<T> {
+public class AlienZombieModel/*<T extends Mob> extends EntityModel<T>*/ {
+	/*
 	private final ModelRenderer head;
 	private final ModelRenderer nose_r1;
 	private final ModelRenderer cube_r1;
@@ -198,4 +192,6 @@ public class AlienZombieModel<T extends MobEntity> extends EntityModel<T> {
 		modelRenderer.rotateAngleY = y;
 		modelRenderer.rotateAngleZ = z;
 	}
+
+	 */
 }

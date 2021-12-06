@@ -1,7 +1,7 @@
 {
   "required": true,
   "package": "net.mrscauthd.boss_tools.mixin",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_17",
   "mixins": [
     "MixinItemGravity"
   ],

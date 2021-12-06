@@ -144,7 +144,7 @@ public class FlagBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 
 	@Override
 	public BlockEntity newBlockEntity(BlockPos p_153215_, BlockState p_153216_) {
-		return new FlagTileEntity();
+		return new FlagTileEntity(p_153215_, p_153216_);
 	}
 
 	@Override

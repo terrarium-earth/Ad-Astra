@@ -102,11 +102,11 @@ public class ModInnet {
     public static final RegistryObject<Item> ROVER_ITEM = ITEMS.register("rover", () -> new RoverItem(new Item.Properties().tab(BossToolsItemGroups.tab_normal).stacksTo(1)));
 
     //Entitys
-    public static RegistryObject<EntityType<?>> ALIEN = ENTITYS.register("alien", () -> EntityType.Builder.of(AlienEntity::new, MobCategory.CREATURE).sized(0.75f, 2.5f).build(new ResourceLocation("boss_tools", "alien").toString()));
-    public static RegistryObject<EntityType<?>> ALIEN_ZOMBIE = ENTITYS.register("alien_zombie", () -> EntityType.Builder.of(AlienZombieEntity::new, MobCategory.MONSTER).sized(0.6f, 2.4f).build(new ResourceLocation("boss_tools", "alien_zombie").toString()));
-    public static RegistryObject<EntityType<?>> STAR_CRAWLER = ENTITYS.register("star_crawler", () -> EntityType.Builder.of(StarCrawlerEntity::new, MobCategory.MONSTER).sized(1.3f, 1f).build(new ResourceLocation("boss_tools", "star_crawler").toString()));
-    public static RegistryObject<EntityType<?>> PYGRO = ENTITYS.register("pygro", () -> EntityType.Builder.of(PygroEntity::new, MobCategory.MONSTER).fireImmune().sized(0.6f, 1.8f).build(new ResourceLocation("boss_tools", "pygro").toString()));
-    public static RegistryObject<EntityType<?>> MOGLER = ENTITYS.register("mogler", () -> EntityType.Builder.of(MoglerEntity::new, MobCategory.MONSTER).sized(1.4f, 1.4f).build(new ResourceLocation("boss_tools", "mogler").toString()));
+    public static RegistryObject<EntityType<AlienEntity>> ALIEN = ENTITYS.register("alien", () -> EntityType.Builder.of(AlienEntity::new, MobCategory.CREATURE).sized(0.75f, 2.5f).build(new ResourceLocation("boss_tools", "alien").toString()));
+    public static RegistryObject<EntityType<AlienZombieEntity>> ALIEN_ZOMBIE = ENTITYS.register("alien_zombie", () -> EntityType.Builder.of(AlienZombieEntity::new, MobCategory.MONSTER).sized(0.6f, 2.4f).build(new ResourceLocation("boss_tools", "alien_zombie").toString()));
+    public static RegistryObject<EntityType<StarCrawlerEntity>> STAR_CRAWLER = ENTITYS.register("star_crawler", () -> EntityType.Builder.of(StarCrawlerEntity::new, MobCategory.MONSTER).sized(1.3f, 1f).build(new ResourceLocation("boss_tools", "star_crawler").toString()));
+    public static RegistryObject<EntityType<PygroEntity>> PYGRO = ENTITYS.register("pygro", () -> EntityType.Builder.of(PygroEntity::new, MobCategory.MONSTER).fireImmune().sized(0.6f, 1.8f).build(new ResourceLocation("boss_tools", "pygro").toString()));
+    public static RegistryObject<EntityType<MoglerEntity>> MOGLER = ENTITYS.register("mogler", () -> EntityType.Builder.of(MoglerEntity::new, MobCategory.MONSTER).sized(1.4f, 1.4f).build(new ResourceLocation("boss_tools", "mogler").toString()));
 
     //VEHICLES
     public static RegistryObject<EntityType<?>> TIER_1_ROCKET = ENTITYS.register("rocket_t1", () -> EntityType.Builder.of(RocketTier1Entity::new, MobCategory.MISC).sized(1.1f, 4.4f).fireImmune().build(new ResourceLocation("boss_tools", "rocket_t1").toString()));
@@ -120,7 +120,7 @@ public class ModInnet {
 
 
     //Alien Spit Entity
-    public static RegistryObject<EntityType<? extends AlienSpitEntity>> ALIEN_SPIT_ENTITY = ENTITYS.register("alien_spit_entity", () -> EntityType.Builder.<AlienSpitEntity>of(AlienSpitEntity::new, MobCategory.MISC).size(0.5f, 0.5f).build(new ResourceLocation("boss_tools", "alien_spit_entity").toString()));
+    public static RegistryObject<EntityType<? extends AlienSpitEntity>> ALIEN_SPIT_ENTITY = ENTITYS.register("alien_spit_entity", () -> EntityType.Builder.<AlienSpitEntity>of(AlienSpitEntity::new, MobCategory.MISC).sized(0.5f, 0.5f).build(new ResourceLocation("boss_tools", "alien_spit_entity").toString()));
 
     //pygro
     public static final DeferredRegister<SensorType<?>> SENSOR = DeferredRegister.create(ForgeRegistries.SENSOR_TYPES, BossToolsMod.ModId);
@@ -153,7 +153,7 @@ public class ModInnet {
 
     //Tile Entity RegistryObject
     public static final RegistryObject<BlockEntityType<?>> FUEL_REFINERY = TILE_ENTITYS.register("fuel_refinery", () -> BlockEntityType.Builder.of(FuelRefineryBlock.FuelRefineryBlockEntity::new,ModInnet.FUEL_REFINERY_BLOCK.get()).build(null));
-    public static final RegistryObject<BlockEntityType<?>> BLAST_FURNACE = TILE_ENTITYS.register("blast_furnace", () -> BlockEntityType.Builder.of(BlastingFurnaceBlock.CustomTileEntity::new,ModInnet.BLAST_FURNACE_BLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<?>> BLAST_FURNACE = TILE_ENTITYS.register("blast_furnace", () -> BlockEntityType.Builder.of(BlastingFurnaceBlock.BlastingFurnaceBlockEntity::new,ModInnet.BLAST_FURNACE_BLOCK.get()).build(null));
     public static final RegistryObject<BlockEntityType<?>> COMPRESSOR = TILE_ENTITYS.register("compressor", () -> BlockEntityType.Builder.of(CompressorBlock.CompressorBlockEntity::new,ModInnet.COMPRESSOR_BLOCK.get()).build(null));
     public static final RegistryObject<BlockEntityType<?>> COAL_GENERATOR = TILE_ENTITYS.register("coal_generator", () -> BlockEntityType.Builder.of(CoalGeneratorBlock.CoalGeneratorBlockEntity::new,ModInnet.COAL_GENERATOR_BLOCK.get()).build(null));
     public static final RegistryObject<BlockEntityType<?>> OXYGEN_LOADER = TILE_ENTITYS.register("oxygen_loader", () -> BlockEntityType.Builder.of(OxygenLoaderBlock.OxygenLoaderBlockEntity::new,ModInnet.OXYGEN_LOADER_BLOCK.get()).build(null));

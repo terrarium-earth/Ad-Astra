@@ -5,14 +5,9 @@ import net.mrscauthd.boss_tools.entity.RocketTier2Entity;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.api.distmarker.Dist;
 
-import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.client.renderer.entity.model.EntityModel;
-
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import com.mojang.blaze3d.matrix.MatrixStack;
-
-@OnlyIn(Dist.CLIENT)
-public class RocketTier2Model<T extends RocketTier2Entity> extends EntityModel<T> {
+//@OnlyIn(Dist.CLIENT)
+public class RocketTier2Model/*<T extends RocketTier2Entity> extends EntityModel<T>*/ {
+	/*
 	private final ModelRenderer rocket;
 	private final ModelRenderer cube_r1;
 	private final ModelRenderer cube_r2;
@@ -222,4 +217,6 @@ public class RocketTier2Model<T extends RocketTier2Entity> extends EntityModel<T
 		modelRenderer.rotateAngleY = y;
 		modelRenderer.rotateAngleZ = z;
 	}
+
+	 */
 }

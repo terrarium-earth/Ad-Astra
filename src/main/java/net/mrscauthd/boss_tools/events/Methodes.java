@@ -18,11 +18,9 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -31,6 +29,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.material.Fluid;
@@ -246,7 +245,7 @@ public class Methodes {
     public static void EntityOxygen(LivingEntity entity, Level world) {
         if (Config.EntityOxygenSystem && Methodes.isSpaceWorld(world) && tagCheck(entity,"boss_tools:entities/oxygen")) {
 
-            if (!entity.isAffectedByPotions(ModInnet.OXYGEN_EFFECT.get())) {
+            if (!entity.hasEffect(ModInnet.OXYGEN_EFFECT.get())) {
 
                 entity.getPersistentData().putDouble(BossToolsMod.ModId + ":oxygen_tick", entity.getPersistentData().getDouble(BossToolsMod.ModId + ":oxygen_tick") + 1);
 
@@ -290,7 +289,7 @@ public class Methodes {
 
             ItemStack slot_0 = lander.getInventory().getStackInSlot(0);
             ItemStack slot_1 = lander.getInventory().getStackInSlot(1);
-            lander.remove();
+            lander.remove(Entity.RemovalReason.DISCARDED);
 
             Methodes.worldTeleport(player, newPlanet, 700);
 
@@ -298,8 +297,9 @@ public class Methodes {
 
             if (!player.level.isClientSide) {
                 LanderEntity entityToSpawn = new LanderEntity((EntityType<LanderEntity>) ModInnet.LANDER.get(), newWorld);
-                entityToSpawn.setLocationAndAngles(player.getPosX(), player.getPosY(), player.getPosZ(), 0, 0);
-                entityToSpawn.onInitialSpawn((ServerWorld) newWorld, newWorld.getDifficultyForLocation(entityToSpawn.getPosition()), SpawnReason.MOB_SUMMONED, null, null);
+                entityToSpawn.moveTo(player.getX(), player.getY(), player.getZ(), 0, 0);
+                entityToSpawn.finalizeSpawn((ServerLevelAccessor) newWorld, newWorld.getCurrentDifficultyAt(new BlockPos(entityToSpawn.getX(), entityToSpawn.getY(), entityToSpawn.getZ())), MobSpawnType.MOB_SUMMONED, null, null);
+
                 newWorld.addFreshEntity(entityToSpawn);
 
                 entityToSpawn.getInventory().setStackInSlot(0, slot_0);
@@ -327,9 +327,9 @@ public class Methodes {
 
         if (!world.isClientSide) {
             LanderEntity landerSpawn = new LanderEntity((EntityType<LanderEntity>) ModInnet.LANDER.get(), world);
-            landerSpawn.setLocationAndAngles(player.getPosX(), player.getPosY(), player.getPosZ(), 0, 0);
-            landerSpawn.onInitialSpawn((ServerWorld) world, world.getDifficultyForLocation(landerSpawn.getPosition()), SpawnReason.MOB_SUMMONED, null, null);
-            world.addEntity(landerSpawn);
+            landerSpawn.moveTo(player.getX(), player.getY(), player.getZ(), 0, 0);
+            landerSpawn.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(new BlockPos(landerSpawn.getX(), landerSpawn.getY(), landerSpawn.getZ())), MobSpawnType.MOB_SUMMONED, null, null);
+            world.addFreshEntity(landerSpawn);
 
             String itemId = player.getPersistentData().getString(BossToolsMod.ModId + ":slot0");
 
@@ -452,7 +452,7 @@ public class Methodes {
 			int oxygenTimer = persistentData.getInt(key);
 			oxygenTimer++;
 
-			if (oxygenStorage.getOxygenStored() > 0 && oxygenTimer > 3 && !player.isAffectedByPotions(ModInnet.OXYGEN_EFFECT.get())) {
+			if (oxygenStorage.getOxygenStored() > 0 && oxygenTimer > 3 && !player.hasEffect(ModInnet.OXYGEN_EFFECT.get())) {
 				oxygenStorage.extractOxygen(1, false);
 				oxygenTimer = 0;
 			}

@@ -9,7 +9,7 @@ import net.mrscauthd.boss_tools.entity.alien.AlienEntity;
 
 public class AlienRenderer extends MobRenderer<AlienEntity, AlienModel<AlienEntity>> {
     public AlienRenderer(EntityRendererProvider.Context renderManagerIn) {
-        super(renderManagerIn, new AlienModel<>(), 0.5f);
+        super(renderManagerIn, new AlienModel<>(renderManagerIn.bakeLayer(AlienModel.LAYER_LOCATION)), 0.5f);
     }
 
     @Override

@@ -1,24 +1,5 @@
 package net.mrscauthd.boss_tools.skyrenderer;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.CampfireBlock;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.settings.CloudOption;
-import net.minecraft.client.settings.ParticleStatus;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.particles.IParticleData;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.tags.FluidTags;
-import net.minecraft.util.Direction;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IBlockDisplayReader;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.client.IWeatherParticleRenderHandler;
 import net.minecraftforge.client.IWeatherRenderHandler;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -30,33 +11,19 @@ import net.minecraftforge.client.ISkyRenderHandler;
 import net.minecraftforge.client.ICloudRenderHandler;
 import net.minecraftforge.api.distmarker.Dist;
 
-import net.minecraft.util.math.vector.Vector3f;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.math.vector.Matrix4f;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.client.world.DimensionRenderInfo.FogType;
-import net.minecraft.client.world.DimensionRenderInfo;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.client.renderer.vertex.VertexBuffer;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.Minecraft;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.matrix.MatrixStack;
 import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.ModInnet;
 import net.mrscauthd.boss_tools.particle.VenusRainParticle;
 
 import java.util.Random;
 
-import static net.minecraft.client.renderer.WorldRenderer.getPackedLightmapCoords;
-
-import Vector3d;
-
-@Mod.EventBusSubscriber(modid = BossToolsMod.ModId, bus = Bus.MOD, value = Dist.CLIENT)
+//@Mod.EventBusSubscriber(modid = BossToolsMod.ModId, bus = Bus.MOD, value = Dist.CLIENT)
 public class ClientEventBusVenus {
+	/*
 	private static final float[] rainSizeX = new float[1024];
 	private static final float[] rainSizeZ = new float[1024];
 	private static int rainSoundTime;
@@ -565,4 +532,6 @@ public class ClientEventBusVenus {
 			}
 		});
 	}
+
+	 */
 }

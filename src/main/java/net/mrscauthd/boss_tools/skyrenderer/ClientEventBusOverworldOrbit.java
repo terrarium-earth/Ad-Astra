@@ -1,7 +1,5 @@
 package net.mrscauthd.boss_tools.skyrenderer;
 
-import net.minecraft.client.renderer.vertex.VertexFormat;
-import net.minecraft.client.settings.GraphicsFanciness;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.common.Mod;
@@ -11,36 +9,20 @@ import net.minecraftforge.client.ISkyRenderHandler;
 import net.minecraftforge.client.ICloudRenderHandler;
 import net.minecraftforge.api.distmarker.Dist;
 
-import net.minecraft.util.math.vector.Vector3f;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.math.vector.Matrix4f;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.client.world.DimensionRenderInfo.FogType;
-import net.minecraft.client.world.DimensionRenderInfo;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.client.renderer.vertex.VertexBuffer;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.client.renderer.WorldVertexBufferUploader;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.FogRenderer;
-import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.Minecraft;
 
 import javax.annotation.Nullable;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.matrix.MatrixStack;
 import net.mrscauthd.boss_tools.BossToolsMod;
 
 import java.util.Random;
 
-import VertexBuffer;
-import VertexFormat;
-
-@Mod.EventBusSubscriber(modid = BossToolsMod.ModId, bus = Bus.MOD, value = Dist.CLIENT)
+//@Mod.EventBusSubscriber(modid = BossToolsMod.ModId, bus = Bus.MOD, value = Dist.CLIENT)
 public class ClientEventBusOverworldOrbit {
+	/*
 	@Nullable
 	public static VertexBuffer starVBO;
 	public static final VertexFormat skyVertexFormat = DefaultVertexFormats.POSITION;
@@ -137,7 +119,8 @@ public class ClientEventBusOverworldOrbit {
 
 						RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 						matrixStack.rotate(Vector3f.YP.rotationDegrees(-90.0F));
-						matrixStack.rotate(Vector3f.XP.rotationDegrees(0.0F /* world.func_242415_f(partialTicks) * 360.0F */));
+						matrixStack.rotate(Vector3f.XP.rotationDegrees(0.0F /* world.func_242415_f(partialTicks) * 360.0F ));*/
+	/*
 						matrix4f1 = matrixStack.getLast().getMatrix();
 
 						//EARTH
@@ -288,4 +271,5 @@ public class ClientEventBusOverworldOrbit {
 
 		});
 	}
+	*/
 }

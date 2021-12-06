@@ -23,13 +23,13 @@ public abstract class ArmorTranslucent<T extends LivingEntity, A extends Humanoi
     private static ResourceLocation SpaceSuit = new ResourceLocation(BossToolsMod.ModId, "textures/models/armor/space_suit_head.png");
     private static ResourceLocation NetheriteSpaceSuit = new ResourceLocation(BossToolsMod.ModId, "textures/models/armor/netherite_space_suit_head.png");
 
-    @Inject(at = @At(value = "HEAD"), method = "renderModel", cancellable = true, remap = false)
-    private void renderModel(PoseStack p_241738_1_, MultiBufferSource p_241738_2_, int p_241738_3_, boolean p_241738_5_, A p_241738_6_, float p_241738_8_, float p_241738_9_, float p_241738_10_, ResourceLocation armorResource, CallbackInfo info) {
+    @Inject(at = @At(value = "HEAD"), method = "Lnet/minecraft/client/renderer/entity/layers/HumanoidArmorLayer;renderModel(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;IZLnet/minecraft/client/model/HumanoidModel;FFFLnet/minecraft/resources/ResourceLocation;)V", cancellable = true, remap = false)
+    private void renderModel(PoseStack p_117107_, MultiBufferSource p_117108_, int p_117109_, boolean p_117111_, A p_117112_, float p_117114_, float p_117115_, float p_117116_, ResourceLocation armorResource, CallbackInfo info) {
 
         if (armorResource.equals(SpaceSuit) || armorResource.equals(NetheriteSpaceSuit)) {
             info.cancel();
-            VertexConsumer ivertexbuilder = ItemRenderer.getArmorFoilBuffer(p_241738_2_, RenderType.entityTranslucent(armorResource), false, p_241738_5_);
-            p_241738_6_.renderToBuffer(p_241738_1_, ivertexbuilder, p_241738_3_, OverlayTexture.NO_OVERLAY, p_241738_8_, p_241738_9_, p_241738_10_, 1.0F);
+            VertexConsumer ivertexbuilder = ItemRenderer.getArmorFoilBuffer(p_117108_, RenderType.entityTranslucent(armorResource), false, p_117111_);
+            p_117112_.renderToBuffer(p_117107_, ivertexbuilder, p_117109_, OverlayTexture.NO_OVERLAY, p_117114_, p_117115_, p_117116_, 1.0F);
         }
 
     }

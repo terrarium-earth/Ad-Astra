@@ -3,15 +3,11 @@ package net.mrscauthd.boss_tools.entity.renderer.rockettier3;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.api.distmarker.Dist;
 
-import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.client.renderer.entity.model.EntityModel;
-
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import com.mojang.blaze3d.matrix.MatrixStack;
 import net.mrscauthd.boss_tools.entity.RocketTier3Entity;
 
 @OnlyIn(Dist.CLIENT)
-public class RocketTier3Model<T extends RocketTier3Entity> extends EntityModel<T> {
+public class RocketTier3Model/*<T extends RocketTier3Entity> extends EntityModel<T>*/ {
+	/*
 	private final ModelRenderer rocket;
 	private final ModelRenderer cube_r1;
 	private final ModelRenderer cube_r2;
@@ -240,4 +236,6 @@ public class RocketTier3Model<T extends RocketTier3Entity> extends EntityModel<T
 		modelRenderer.rotateAngleY = y;
 		modelRenderer.rotateAngleZ = z;
 	}
+
+	 */
 }

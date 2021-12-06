@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(HumanoidModel.class)
 public abstract class SetupLivingBipedAnim {
 
-    @Inject(at = @At(value = "HEAD"), method = "setupAnim", cancellable = true)
+    @Inject(at = @At(value = "HEAD"), method = "setupAnim", cancellable = true, remap = false)
     private void setRotationAnglesPre(LivingEntity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo info) {
         HumanoidModel w = (HumanoidModel) ((Object) this);
 
@@ -21,7 +21,7 @@ public abstract class SetupLivingBipedAnim {
         }
     }
 
-    @Inject(at = @At(value = "RETURN"), method = "setupAnim", cancellable = true)
+    @Inject(at = @At(value = "RETURN"), method = "setupAnim", cancellable = true, remap = false)
     private void setRotationAnglesPost(LivingEntity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo info) {
         HumanoidModel w = (HumanoidModel) ((Object) this);
 

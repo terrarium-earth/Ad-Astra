@@ -1,19 +1,11 @@
 package net.mrscauthd.boss_tools.entity.renderer.starcrawler;
 
-import net.minecraft.entity.MobEntity;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.client.renderer.entity.model.EntityModel;
-
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import com.mojang.blaze3d.matrix.MatrixStack;
-
-import MobEntity;
 
 @OnlyIn(Dist.CLIENT)
-public class StarCrawlerModel<T extends MobEntity> extends EntityModel<T> {
+public class StarCrawlerModel/*<T extends MobEntity> extends EntityModel<T>*/ {
+	/*
 	private final ModelRenderer Body;
 	private final ModelRenderer arm1g;
 	private final ModelRenderer Arm1;
@@ -288,4 +280,6 @@ public class StarCrawlerModel<T extends MobEntity> extends EntityModel<T> {
 		modelRenderer.rotateAngleY = y;
 		modelRenderer.rotateAngleZ = z;
 	}
+
+	 */
 }

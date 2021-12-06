@@ -5,14 +5,9 @@ import net.mrscauthd.boss_tools.entity.RoverEntity;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.api.distmarker.Dist;
 
-import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.client.renderer.entity.model.EntityModel;
-
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import com.mojang.blaze3d.matrix.MatrixStack;
-
 @OnlyIn(Dist.CLIENT)
-public class RoverModel<T extends RoverEntity> extends EntityModel<T> {
+public class RoverModel/*<T extends RoverEntity> extends EntityModel<T> */{
+	/*
 	private final ModelRenderer Frame;
 	private final ModelRenderer cube_r1;
 	private final ModelRenderer cube_r2;
@@ -145,4 +140,6 @@ public class RoverModel<T extends RoverEntity> extends EntityModel<T> {
 
 		this.sat.rotateAngleY = f2 / 20f;
 	}
+
+	 */
 }

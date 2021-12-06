@@ -16,7 +16,7 @@ public class CapabilityOxygen {
 
 	@SubscribeEvent
 	public static void register(RegisterCapabilitiesEvent event) {
-		event.register(IOxygenStorage.class);
+		//event.register(IOxygenStorage.class);
 	}
 
 }

@@ -1,20 +1,11 @@
 package net.mrscauthd.boss_tools.entity.renderer.pygro;
 
-import net.minecraft.client.renderer.entity.model.PlayerModel;
-import net.minecraft.client.renderer.model.ModelHelper;
-import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.monster.piglin.PiglinAction;
-import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.mrscauthd.boss_tools.entity.pygro.PygroEntity;
 
-import MobEntity;
-
-@OnlyIn(Dist.CLIENT)
-public class PygroModel<T extends MobEntity> extends PlayerModel<T> {
+//@OnlyIn(Dist.CLIENT)
+public class PygroModel/*<T extends MobEntity> extends PlayerModel<T>*/ {
+    /*
     public final ModelRenderer field_239115_a_;
     public final ModelRenderer field_239116_b_;
     private final ModelRenderer field_241660_y_;
@@ -68,9 +59,6 @@ public class PygroModel<T extends MobEntity> extends PlayerModel<T> {
         
     }
 
-    /**
-     * Sets this entity's model rotation angles
-     */
     public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.bipedBody.copyModelAngles(this.field_241660_y_);
         this.bipedHead.copyModelAngles(this.field_241661_z_);
@@ -152,4 +140,5 @@ public class PygroModel<T extends MobEntity> extends PlayerModel<T> {
         }
 
     }
+    */
 }
