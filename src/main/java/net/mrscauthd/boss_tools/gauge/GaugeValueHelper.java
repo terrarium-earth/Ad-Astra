@@ -7,7 +7,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
 import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.capability.IOxygenStorage;
-import net.mrscauthd.boss_tools.machines.tile.AbstractMachineTileEntity;
+import net.mrscauthd.boss_tools.machines.tile.AbstractMachineBlockEntity;
 import net.mrscauthd.boss_tools.machines.tile.PowerSystemFuelBurnTime;
 
 public class GaugeValueHelper {
@@ -73,8 +73,8 @@ public class GaugeValueHelper {
 		return getEnergy(energyStorage.getEnergyStored(), energyStorage.getMaxEnergyStored());
 	}
 
-	public static IGaugeValue getEnergy(AbstractMachineTileEntity machineTileEntity) {
-		return getEnergy(machineTileEntity.getPrimaryEnergyStorage());
+	public static IGaugeValue getEnergy(AbstractMachineBlockEntity blockEntity) {
+		return getEnergy(blockEntity.getPrimaryEnergyStorage());
 	}
 
 	public static IGaugeValue getOxygen(int amount) {

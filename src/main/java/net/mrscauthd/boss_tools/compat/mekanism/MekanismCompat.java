@@ -1,9 +1,10 @@
 package net.mrscauthd.boss_tools.compat.mekanism;
 
 import net.minecraft.resources.ResourceLocation;
+import net.mrscauthd.boss_tools.compat.CompatibleMod;
 
-public class MekanismCompat/* extends CompatibleMod*/ {
-/*	public static final String MODID = "mekanism";
+public class MekanismCompat extends CompatibleMod {
+	public static final String MODID = "mekanism";
 
 	public static ResourceLocation rl(String path) {
 		return new ResourceLocation(MODID, path);
@@ -18,5 +19,5 @@ public class MekanismCompat/* extends CompatibleMod*/ {
 	protected void onLoad() {
 
 	}
-*/
+
 }

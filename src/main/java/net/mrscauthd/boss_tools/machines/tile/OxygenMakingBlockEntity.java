@@ -4,12 +4,13 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
@@ -17,13 +18,10 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.mrscauthd.boss_tools.BossToolsMod;
-import net.mrscauthd.boss_tools.capability.CapabilityOxygen;
 import net.mrscauthd.boss_tools.capability.IOxygenStorage;
 import net.mrscauthd.boss_tools.capability.IOxygenStorageHolder;
 import net.mrscauthd.boss_tools.capability.OxygenStorage;
 import net.mrscauthd.boss_tools.compat.CompatibleManager;
-import net.mrscauthd.boss_tools.compat.mekanism.MekanismHelper;
-import net.mrscauthd.boss_tools.compat.mekanism.OxygenStorageGasAdapter;
 import net.mrscauthd.boss_tools.crafting.BossToolsRecipeType;
 import net.mrscauthd.boss_tools.crafting.OxygenMakingRecipeAbstract;
 import net.mrscauthd.boss_tools.fluid.FluidUtil2;
@@ -31,9 +29,7 @@ import net.mrscauthd.boss_tools.gauge.GaugeValueHelper;
 import net.mrscauthd.boss_tools.gauge.IGaugeValue;
 import net.mrscauthd.boss_tools.inventory.StackCacher;
 
-import ResourceLocation;
-
-public abstract class OxygenMakingTileEntity extends AbstractMachineTileEntity {
+public abstract class OxygenMakingBlockEntity extends AbstractMachineBlockEntity {
 	public static final int TANK_CAPACITY = 3000;
 	public static final int TRANSFER_PER_TICK = 256;
 	public static final ResourceLocation TANK_INPUT = new ResourceLocation(BossToolsMod.ModId, "input");
@@ -47,25 +43,25 @@ public abstract class OxygenMakingTileEntity extends AbstractMachineTileEntity {
 	private StackCacher recipeCacher;
 	private OxygenMakingRecipeAbstract cachedRecipe;
 
-	public OxygenMakingTileEntity(TileEntityType<?> type) {
-		super(type);
+	public OxygenMakingBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+		super(type, pos, state);
 
 		this.recipeCacher = new StackCacher();
 		this.cachedRecipe = null;
 	}
 
 	@Override
-	public void read(BlockState blockState, CompoundNBT compound) {
-		super.read(blockState, compound);
-
-		CapabilityOxygen.OXYGEN.readNBT(this.getOutputTank(), null, compound.getCompound("outputTank"));
+	public void load(CompoundTag compound) {
+		super.load(compound);
+		
+		this.getOutputTank().deserializeNBT(compound.getCompound("outputTank"));
 	}
-
+	
 	@Override
-	public CompoundNBT write(CompoundNBT compound) {
-		super.write(compound);
+	public CompoundTag save(CompoundTag compound) {
+		super.save(compound);
 
-		compound.put("outputTank", CapabilityOxygen.OXYGEN.writeNBT(this.getOutputTank(), null));
+		compound.put("outputTank", this.getOutputTank().serializeNBT());
 
 		return compound;
 	}
@@ -97,7 +93,7 @@ public abstract class OxygenMakingTileEntity extends AbstractMachineTileEntity {
 			@Override
 			protected void onContentsChanged() {
 				super.onContentsChanged();
-				OxygenMakingTileEntity.this.markDirty();
+				OxygenMakingBlockEntity.this.setChanged();
 			}
 		};
 	}
@@ -106,7 +102,7 @@ public abstract class OxygenMakingTileEntity extends AbstractMachineTileEntity {
 		return new OxygenStorage(new IOxygenStorageHolder() {
 			@Override
 			public void onOxygenChanged(IOxygenStorage oxygenStorage, int oxygenDelta) {
-				OxygenMakingTileEntity.this.markDirty();
+				OxygenMakingBlockEntity.this.setChanged();
 			}
 		}, this.getInitialTankCapacity(name));
 	}
@@ -153,9 +149,9 @@ public abstract class OxygenMakingTileEntity extends AbstractMachineTileEntity {
 	@Override
 	public <T> LazyOptional<T> getCapability(Capability<T> capability, Direction facing) {
 		if (CompatibleManager.MEKANISM.isLoaded()) {
-			if (capability == MekanismHelper.getGasHandlerCapability()) {
-				return LazyOptional.of(() -> new OxygenStorageGasAdapter(this.getOutputTank(), true, true)).cast();
-			}
+//			if (capability == MekanismHelper.getGasHandlerCapability()) {
+//				return LazyOptional.of(() -> new OxygenStorageGasAdapter(this.getOutputTank(), true, true)).cast();
+//			}
 		}
 
 		return super.getCapability(capability, facing);
@@ -168,7 +164,7 @@ public abstract class OxygenMakingTileEntity extends AbstractMachineTileEntity {
 	}
 
 	@Override
-	protected boolean onCanInsertItem(int index, ItemStack stack, Direction direction) {
+	protected boolean onCanPlaceItemThroughFace(int index, ItemStack stack, Direction direction) {
 		if (index == this.getInputSourceSlot()) {
 			return FluidUtil2.canDrain(stack);
 		} else if (index == this.getInputSinkSlot()) {
@@ -176,11 +172,11 @@ public abstract class OxygenMakingTileEntity extends AbstractMachineTileEntity {
 			return FluidUtil2.canFill(stack, tank.getFluid().getFluid());
 		}
 
-		return super.onCanInsertItem(index, stack, direction);
+		return super.onCanPlaceItemThroughFace(index, stack, direction);
 	}
 
 	@Override
-	public boolean canExtractItem(int index, ItemStack stack, Direction direction) {
+	public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
 		if (index == this.getInputSourceSlot()) {
 			return !FluidUtil2.canDrain(stack);
 		} else if (index == this.getInputSinkSlot()) {
@@ -188,7 +184,7 @@ public abstract class OxygenMakingTileEntity extends AbstractMachineTileEntity {
 			return !FluidUtil2.canFill(stack, tank.getFluid().getFluid());
 		}
 
-		return super.canExtractItem(index, stack, direction);
+		return super.canTakeItemThroughFace(index, stack, direction);
 	}
 
 	@Override
@@ -213,7 +209,7 @@ public abstract class OxygenMakingTileEntity extends AbstractMachineTileEntity {
 			this.cachedRecipe = null;
 		} else if (!this.recipeCacher.test(fluidStack)) {
 			this.recipeCacher.set(fluidStack);
-			this.cachedRecipe = this.getRecipeType().findFirst(this.getWorld(), r -> r.test(fluidStack));
+			this.cachedRecipe = this.getRecipeType().findFirst(this.getLevel(), r -> r.test(fluidStack));
 		}
 
 		return this.cachedRecipe;
@@ -227,7 +223,7 @@ public abstract class OxygenMakingTileEntity extends AbstractMachineTileEntity {
 	}
 
 	@Override
-	public int getInventoryStackLimit() {
+	public int getMaxStackSize() {
 		return 1;
 	}
 

@@ -1,15 +1,17 @@
 package net.mrscauthd.boss_tools.machines.tile;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.IBucketPickupHandler;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
+import java.util.function.Predicate;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.level.block.BucketPickup;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.IEnergyStorage;
@@ -25,13 +27,11 @@ import net.mrscauthd.boss_tools.fluid.FluidUtil2;
 import net.mrscauthd.boss_tools.gui.screens.waterpump.WaterPumpGui;
 import net.mrscauthd.boss_tools.machines.WaterPump;
 
-import java.util.function.Predicate;
-
-public class WaterPumpTileEntity extends AbstractMachineTileEntity {
+public class WaterPumpBlockEntity extends AbstractMachineBlockEntity {
 	public static final int TRANSFER_PER_TICK = 10;
 	
-    public WaterPumpTileEntity() {
-        super(ModInnet.WATER_PUMP.get());
+    public WaterPumpBlockEntity(BlockPos pos, BlockState state) {
+        super(ModInnet.WATER_PUMP.get(), pos, state);
     }
 
     public static final ResourceLocation WATER_TANK = new ResourceLocation(BossToolsMod.ModId, "water_tank");
@@ -40,16 +40,17 @@ public class WaterPumpTileEntity extends AbstractMachineTileEntity {
     private FluidTank waterTank;
 
     @Override
-    protected Container createMenu(int id, PlayerInventory player) {
-        return new WaterPumpGui.GuiContainer(id, player, this);
+    protected AbstractContainerMenu createMenu(int id, Inventory inventory) {
+        return new WaterPumpGui.GuiContainer(id, inventory, this);
     }
 
     @Override
     protected void tickProcessing() {
     	
-        BlockPos pos = new BlockPos(this.pos.getX(),this.pos.getY() - 1, this.pos.getZ());
+        BlockPos pos = this.getBlockPos();
+		BlockPos pickupPos = new BlockPos(pos.getX(),pos.getY() - 1, pos.getZ());
 
-        if (this.world.getFluidState(pos) == Fluids.WATER.getStillFluidState(false)) {
+        if (this.level.getFluidState(pickupPos) == Fluids.WATER.getSource(false)) {
 
             if (hasSpaceInWaterTank(this.getWaterTank().getFluid().getAmount())) {
 
@@ -59,7 +60,7 @@ public class WaterPumpTileEntity extends AbstractMachineTileEntity {
 
                     if (WATER_TIMER > 10) {
 
-                        ((IBucketPickupHandler) this.world.getBlockState(pos).getBlock()).pickupFluid(this.world, pos, this.world.getBlockState(pos));
+                        ((BucketPickup) this.level.getBlockState(pickupPos).getBlock()).pickupBlock(this.level, pickupPos, this.level.getBlockState(pickupPos));
 
                         this.getWaterTank().fill(new FluidStack(Fluids.WATER,1000), IFluidHandler.FluidAction.EXECUTE);
 
@@ -69,11 +70,11 @@ public class WaterPumpTileEntity extends AbstractMachineTileEntity {
             }
 
             if (this.getWaterTank().getFluid().getAmount() > 1) {
-                TileEntity tileEntity = world.getTileEntity(new BlockPos(this.pos.getX(),this.pos.getY() + 1, this.pos.getZ()));
+                BlockEntity ejectBlockEntity = level.getBlockEntity(new BlockPos(pos.getX(),pos.getY() + 1, pos.getZ()));
 
-                if (tileEntity != null) {
+                if (ejectBlockEntity != null) {
 
-                	IFluidHandler fluidHandler = tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, Direction.DOWN).orElse(null);
+                	IFluidHandler fluidHandler = ejectBlockEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, Direction.DOWN).orElse(null);
                 	
                 	if (fluidHandler != null) {
                 		int transferPerTick = this.getTransferPerTick();
@@ -114,7 +115,7 @@ public class WaterPumpTileEntity extends AbstractMachineTileEntity {
         BlockState blockState = this.getBlockState();
 
         if (blockState.hasProperty(WaterPump.FACING)) {
-            Direction blockDirection = blockState.get(WaterPump.FACING);
+            Direction blockDirection = blockState.getValue(WaterPump.FACING);
 
             if (facing == null || facing == blockDirection) {
                 return super.getCapabilityEnergy(capability, facing);
@@ -131,7 +132,7 @@ public class WaterPumpTileEntity extends AbstractMachineTileEntity {
         map.put(new PowerSystemEnergyCommon(this) {
             @Override
             public int getBasePowerForOperation() {
-                return WaterPumpTileEntity.this.getBasePowerForOperation();
+                return WaterPumpBlockEntity.this.getBasePowerForOperation();
             }
         });
     }
@@ -158,7 +159,7 @@ public class WaterPumpTileEntity extends AbstractMachineTileEntity {
 
     protected Predicate<FluidStack> getInitialTankValidator(ResourceLocation name) {
         Fluid fluid = this.getTankFluid(name);
-        return fluid != null ? fs -> FluidUtil2.isEquivalentTo(fs, fluid) : null;
+        return fluid != null ? fs -> FluidUtil2.isSame(fs, fluid) : null;
     }
 
     protected Fluid getTankFluid(ResourceLocation name) {
@@ -174,7 +175,7 @@ public class WaterPumpTileEntity extends AbstractMachineTileEntity {
             @Override
             protected void onContentsChanged() {
                 super.onContentsChanged();
-                WaterPumpTileEntity.this.markDirty();
+                WaterPumpBlockEntity.this.setChanged();
             }
         };
     }

@@ -1,7 +1,9 @@
 package net.mrscauthd.boss_tools.compat;
 
+import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.fml.ModList;
+
 public abstract class CompatibleMod {
-	/*
 
 	private boolean isLoaded;
 
@@ -26,5 +28,4 @@ public abstract class CompatibleMod {
 		return new ResourceLocation(this.getModID(), path);
 	}
 
-	 */
 }

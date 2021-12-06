@@ -1,5 +1,7 @@
 package net.mrscauthd.boss_tools.gui.screens.blastfurnace;
 
+import org.jetbrains.annotations.NotNull;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
@@ -12,32 +14,31 @@ import net.minecraftforge.network.IContainerFactory;
 import net.mrscauthd.boss_tools.ModInnet;
 import net.mrscauthd.boss_tools.gui.helper.ContainerHelper;
 import net.mrscauthd.boss_tools.machines.BlastingFurnaceBlock;
-import net.mrscauthd.boss_tools.machines.BlastingFurnaceBlock.CustomTileEntity;
-import net.mrscauthd.boss_tools.machines.tile.ItemStackToItemStackTileEntity;
-import org.jetbrains.annotations.NotNull;
+import net.mrscauthd.boss_tools.machines.BlastingFurnaceBlock.BlastingFurnaceBlockEntity;
+import net.mrscauthd.boss_tools.machines.tile.ItemStackToItemStackBlockEntity;
 
 public class BlastFurnaceGui {
 
 	public static class GuiContainerFactory implements IContainerFactory<GuiContainer> {
 		public GuiContainer create(int id, Inventory inv, FriendlyByteBuf extraData) {
 			BlockPos pos = extraData.readBlockPos();
-			CustomTileEntity tileEntity = (CustomTileEntity) inv.player.level.getBlockEntity(pos);
-			return new GuiContainer(id, inv, tileEntity);
+			BlastingFurnaceBlockEntity blockEntity = (BlastingFurnaceBlockEntity) inv.player.level.getBlockEntity(pos);
+			return new GuiContainer(id, inv, blockEntity);
 		}
 	}
 
 	public static class GuiContainer extends AbstractContainerMenu {
-		private CustomTileEntity tileEntity;
+		private BlastingFurnaceBlockEntity blockEntity;
 
-		public GuiContainer(int id, Inventory inv, CustomTileEntity tileEntity) {
+		public GuiContainer(int id, Inventory inv, BlastingFurnaceBlockEntity blockEntity) {
 			super(ModInnet.BLAST_FURNACE_GUI.get(), id);
-			this.tileEntity = tileEntity;
+			this.blockEntity = blockEntity;
 
-			IItemHandlerModifiable itemHandler = tileEntity.getItemHandler();
-			this.addSlot(new SlotItemHandler(itemHandler, ItemStackToItemStackTileEntity.SLOT_INGREDIENT, 53, 19));
+			IItemHandlerModifiable itemHandler = blockEntity.getItemHandler();
+			this.addSlot(new SlotItemHandler(itemHandler, ItemStackToItemStackBlockEntity.SLOT_INGREDIENT, 53, 19));
 			this.addSlot(new SlotItemHandler(itemHandler, BlastingFurnaceBlock.SLOT_FUEL, 53, 56));
 
-			this.addSlot(new SlotItemHandler(itemHandler, ItemStackToItemStackTileEntity.SLOT_OUTPUT, 104, 38) {
+			this.addSlot(new SlotItemHandler(itemHandler, ItemStackToItemStackBlockEntity.SLOT_OUTPUT, 104, 38) {
 				@Override
 				public boolean mayPlace(@NotNull ItemStack stack) {
 					return false;
@@ -47,18 +48,18 @@ public class BlastFurnaceGui {
 			ContainerHelper.addInventorySlots(this, inv, 8, 87, this::addSlot);
 		}
 
-		public CustomTileEntity getTileEntity() {
-			return this.tileEntity;
+		public BlastingFurnaceBlockEntity getBlockEntity() {
+			return this.blockEntity;
 		}
 
 		@Override
 		public boolean stillValid(Player p_38874_) {
-			return !this.getTileEntity().isRemoved();
+			return !this.getBlockEntity().isRemoved();
 		}
 
 		@Override
 		public ItemStack quickMoveStack(Player playerIn, int index) {
-			return ContainerHelper.transferStackInSlot(this, playerIn, index, this.getTileEntity(), this::moveItemStackTo);
+			return ContainerHelper.transferStackInSlot(this, playerIn, index, this.getBlockEntity(), this::moveItemStackTo);
 		}
 	}
 }

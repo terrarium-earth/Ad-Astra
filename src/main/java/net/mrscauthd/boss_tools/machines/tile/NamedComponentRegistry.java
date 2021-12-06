@@ -2,7 +2,7 @@ package net.mrscauthd.boss_tools.machines.tile;
 
 import java.util.LinkedHashMap;
 
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.mrscauthd.boss_tools.BossToolsMod;
 
 public class NamedComponentRegistry<T> extends LinkedHashMap<ResourceLocation, T> {

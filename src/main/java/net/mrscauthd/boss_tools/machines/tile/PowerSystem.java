@@ -5,20 +5,20 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
 import net.mrscauthd.boss_tools.gauge.IGaugeValue;
 
-public abstract class PowerSystem implements INBTSerializable<CompoundNBT> {
-	private final AbstractMachineTileEntity tileEntity;
+public abstract class PowerSystem implements INBTSerializable<CompoundTag> {
+	private final AbstractMachineBlockEntity blockEntity;
 
-	public PowerSystem(AbstractMachineTileEntity tileEntity) {
-		this.tileEntity = tileEntity;
+	public PowerSystem(AbstractMachineBlockEntity blockEntity) {
+		this.blockEntity = blockEntity;
 	}
 
 	public List<IGaugeValue> getGaugeValues() {
@@ -27,12 +27,12 @@ public abstract class PowerSystem implements INBTSerializable<CompoundNBT> {
 
 	public int getPowerPerTick() {
 		int base = this.getBasePowerPerTick();
-		return this.getTileEntity().getPowerPerTick(this, base);
+		return this.getBlockEntity().getPowerPerTick(this, base);
 	}
 
 	public int getPowerForOperation() {
 		int base = this.getBasePowerForOperation();
-		return this.getTileEntity().getPowerForOperation(this, base);
+		return this.getBlockEntity().getPowerForOperation(this, base);
 	}
 
 	public boolean isPowerEnoughForOperation() {
@@ -70,13 +70,13 @@ public abstract class PowerSystem implements INBTSerializable<CompoundNBT> {
 	public abstract int extract(int amount, boolean simulate);
 
 	@Override
-	public void deserializeNBT(CompoundNBT compound) {
+	public void deserializeNBT(CompoundTag compound) {
 
 	}
 
 	@Override
-	public CompoundNBT serializeNBT() {
-		return new CompoundNBT();
+	public CompoundTag serializeNBT() {
+		return new CompoundTag();
 	}
 
 	/**
@@ -107,8 +107,8 @@ public abstract class PowerSystem implements INBTSerializable<CompoundNBT> {
 		return false;
 	}
 
-	public final AbstractMachineTileEntity getTileEntity() {
-		return this.tileEntity;
+	public final AbstractMachineBlockEntity getBlockEntity() {
+		return this.blockEntity;
 	}
 
 	public void update() {

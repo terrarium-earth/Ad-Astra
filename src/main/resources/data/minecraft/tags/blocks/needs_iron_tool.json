@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "boss_tools:fuel_refinery",
+    "boss_tools:blast_furnace",
+    "boss_tools:compressor",
+    "boss_tools:coal_generator",
+    "boss_tools:oxygen_loader",
+    "boss_tools:solar_panel",
+    "boss_tools:nasa_workbench",
+    "boss_tools:oxygen_bubble_distributor",
+    "boss_tools:water_pump"
+  ]
+}

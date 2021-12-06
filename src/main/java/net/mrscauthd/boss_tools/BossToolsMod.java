@@ -10,6 +10,7 @@ import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 import net.mrscauthd.boss_tools.capability.CapabilityOxygen;
+import net.mrscauthd.boss_tools.compat.CompatibleManager;
 import net.mrscauthd.boss_tools.gui.screens.planetselection.PlanetSelectionGui;
 import net.mrscauthd.boss_tools.keybind.KeyBindings;
 import net.mrscauthd.boss_tools.machines.OxygenBubbleDistributorBlock;
@@ -91,7 +92,7 @@ public class BossToolsMod {
 		//Capability
 		bus.addListener(CapabilityOxygen::register);
 
-		//CompatibleManager.loadAll();
+		CompatibleManager.visit();
 	}
 
 	private void setup(final FMLCommonSetupEvent event) {

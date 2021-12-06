@@ -12,26 +12,26 @@ import net.minecraftforge.network.IContainerFactory;
 import net.mrscauthd.boss_tools.ModInnet;
 import net.mrscauthd.boss_tools.gui.helper.ContainerHelper;
 import net.mrscauthd.boss_tools.machines.CoalGeneratorBlock;
-import net.mrscauthd.boss_tools.machines.CoalGeneratorBlock.CustomTileEntity;
+import net.mrscauthd.boss_tools.machines.CoalGeneratorBlock.CoalGeneratorBlockEntity;
 
 public class CoalGeneratorGui {
 
 	public static class GuiContainerFactory implements IContainerFactory<GuiContainer> {
 		public GuiContainer create(int id, Inventory inv, FriendlyByteBuf extraData) {
 			BlockPos pos = extraData.readBlockPos();
-			CustomTileEntity tileEntity = (CustomTileEntity) inv.player.level.getBlockEntity(pos);
-			return new GuiContainer(id, inv, tileEntity);
+			CoalGeneratorBlockEntity blockEntity = (CoalGeneratorBlockEntity) inv.player.level.getBlockEntity(pos);
+			return new GuiContainer(id, inv, blockEntity);
 		}
 	}
 
 	public static class GuiContainer extends AbstractContainerMenu {
-		private CustomTileEntity tileEntity;
+		private CoalGeneratorBlockEntity blockEntity;
 
-		public GuiContainer(int id, Inventory inv, CustomTileEntity tileEntity) {
+		public GuiContainer(int id, Inventory inv, CoalGeneratorBlockEntity blockEntity) {
 			super(ModInnet.COAL_GENERATOR_GUI.get(), id);
-			this.tileEntity = tileEntity;
+			this.blockEntity = blockEntity;
 
-			IItemHandlerModifiable itemHandler = tileEntity.getItemHandler();
+			IItemHandlerModifiable itemHandler = blockEntity.getItemHandler();
 			this.addSlot(new SlotItemHandler(itemHandler, CoalGeneratorBlock.SLOT_FUEL, 77, 31));
 
 			ContainerHelper.addInventorySlots(this, inv, 8, 84, this::addSlot);
@@ -39,16 +39,16 @@ public class CoalGeneratorGui {
 
 		@Override
 		public boolean stillValid(Player p_38874_) {
-			return !this.getTileEntity().isRemoved();
+			return !this.getBlockEntity().isRemoved();
 		}
 
-		public CustomTileEntity getTileEntity() {
-			return this.tileEntity;
+		public CoalGeneratorBlockEntity getBlockEntity() {
+			return this.blockEntity;
 		}
 
 		@Override
 		public ItemStack quickMoveStack(Player playerIn, int index) {
-			return ContainerHelper.transferStackInSlot(this, playerIn, index, this.getTileEntity(), this::moveItemStackTo);
+			return ContainerHelper.transferStackInSlot(this, playerIn, index, this.getBlockEntity(), this::moveItemStackTo);
 		}
 	}
 }

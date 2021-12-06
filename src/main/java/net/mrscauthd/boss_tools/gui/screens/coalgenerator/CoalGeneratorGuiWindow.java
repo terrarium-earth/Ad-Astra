@@ -15,7 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.mrscauthd.boss_tools.gauge.GaugeValueHelper;
 import net.mrscauthd.boss_tools.gauge.GaugeTextHelper;
 import net.mrscauthd.boss_tools.gui.helper.GuiHelper;
-import net.mrscauthd.boss_tools.machines.CoalGeneratorBlock.CustomTileEntity;
+import net.mrscauthd.boss_tools.machines.CoalGeneratorBlock.CoalGeneratorBlockEntity;
 
 @OnlyIn(Dist.CLIENT)
 public class CoalGeneratorGuiWindow extends AbstractContainerScreen<CoalGeneratorGui.GuiContainer> {
@@ -28,11 +28,8 @@ public class CoalGeneratorGuiWindow extends AbstractContainerScreen<CoalGenerato
 	public static final int ENERGY_LEFT = 144;
 	public static final int ENERGY_TOP = 21;
 
-	private CustomTileEntity tileEntity;
-
 	public CoalGeneratorGuiWindow(CoalGeneratorGui.GuiContainer container, Inventory inventory, Component text) {
 		super(container, inventory, text);
-		this.tileEntity = container.getTileEntity();
 		this.imageWidth = 176;
 		this.imageHeight = 166;
 		this.inventoryLabelY = this.imageHeight - 92;
@@ -45,25 +42,21 @@ public class CoalGeneratorGuiWindow extends AbstractContainerScreen<CoalGenerato
 		this.renderTooltip(ms, mouseX, mouseY);
 
 		if (GuiHelper.isHover(this.getEnergyBounds(), mouseX, mouseY)) {
-			this.renderTooltip(ms, GaugeTextHelper.getStorageText(GaugeValueHelper.getEnergy(this.getTileEntity().getGeneratingEnergyStorage())).build(), mouseX, mouseY);
+			this.renderTooltip(ms, GaugeTextHelper.getStorageText(GaugeValueHelper.getEnergy(this.getMenu().getBlockEntity().getGeneratingEnergyStorage())).build(), mouseX, mouseY);
 		}
 	}
 
 	@Override
 	protected void renderBg(PoseStack ms, float p_97788_, int p_97789_, int p_97790_) {
-		CustomTileEntity tileEntity = this.getTileEntity();
+		CoalGeneratorBlockEntity blockEntity = this.getMenu().getBlockEntity();
 
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
 		this.minecraft.getTextureManager().bindForSetup(TEXTURE);
 		GuiComponent.blit(ms, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
 
-		GuiHelper.drawFire(ms, this.leftPos + FIRE_LEFT, this.topPos + FIRE_TOP, tileEntity.getPowerSystemGenerating().getStoredRatio());
-		GuiHelper.drawEnergy(ms, this.leftPos + ENERGY_LEFT, this.topPos + ENERGY_TOP, tileEntity.getGeneratingEnergyStorage());
-	}
-
-	public CustomTileEntity getTileEntity() {
-		return this.tileEntity;
+		GuiHelper.drawFire(ms, this.leftPos + FIRE_LEFT, this.topPos + FIRE_TOP, blockEntity.getPowerSystemGenerating().getStoredRatio());
+		GuiHelper.drawEnergy(ms, this.leftPos + ENERGY_LEFT, this.topPos + ENERGY_TOP, blockEntity.getGeneratingEnergyStorage());
 	}
 
 	public Rect2i getEnergyBounds() {

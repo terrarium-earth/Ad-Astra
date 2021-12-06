@@ -1,60 +1,32 @@
 package net.mrscauthd.boss_tools.machines;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.function.Supplier;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalBlock;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.material.PushReaction;
-import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.loot.LootContext;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.DirectionProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.ToolType;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.fml.network.NetworkEvent;
-import net.minecraftforge.fml.network.NetworkEvent.Context;
-import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.network.NetworkEvent;
 import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.ModInnet;
@@ -64,7 +36,7 @@ import net.mrscauthd.boss_tools.crafting.BossToolsRecipeTypes;
 import net.mrscauthd.boss_tools.crafting.OxygenMakingRecipeAbstract;
 import net.mrscauthd.boss_tools.gui.screens.oxygenbubbledistributor.OxygenBubbleDistributorGui;
 import net.mrscauthd.boss_tools.machines.tile.NamedComponentRegistry;
-import net.mrscauthd.boss_tools.machines.tile.OxygenMakingTileEntity;
+import net.mrscauthd.boss_tools.machines.tile.OxygenMakingBlockEntity;
 import net.mrscauthd.boss_tools.machines.tile.PowerSystemEnergyCommon;
 import net.mrscauthd.boss_tools.machines.tile.PowerSystemRegistry;
 
@@ -83,131 +55,32 @@ public class OxygenBubbleDistributorBlock {
 	 */
 	public static final int MAX_TIMER = 4;
 
-	public static class CustomBlock extends Block {
-		public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
-		public static final BooleanProperty ACTIAVATED = BlockStateProperties.LIT;
+	public static class CustomBlock extends AbstractMachineBlock<OxygenBubbleDistributorBlockEntity> {
 
 		public CustomBlock() {
-			super(Block.Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(5f, 1f).setLightLevel(s -> 0).harvestLevel(1).harvestTool(ToolType.PICKAXE).setRequiresTool());
-			this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(ACTIAVATED, Boolean.valueOf(false)));
+			super(Block.Properties.of(Material.METAL).sound(SoundType.METAL).strength(5f, 1f).lightLevel(s -> 0).requiresCorrectToolForDrops());
 		}
 
 		@Override
-		@OnlyIn(Dist.CLIENT)
-		public void addInformation(ItemStack itemstack, IBlockReader world, List<ITextComponent> list, ITooltipFlag flag) {
-			super.addInformation(itemstack, world, list, flag);
+		public void appendHoverText(ItemStack itemstack, BlockGetter level, List<Component> list, TooltipFlag flag) {
+			super.appendHoverText(itemstack, level, list, flag);
 			
 			int min = RANGE_MIN * 2 + 1;
 			int max = RANGE_MAX * 2 + 1;
-			list.add(new TranslationTextComponent("tooltip." + BossToolsMod.ModId + ".oxygen_bubble_distributor", min, max).setStyle(Style.EMPTY.setFormatting(TextFormatting.GRAY)));
+			list.add(new TranslatableComponent("tooltip." + BossToolsMod.ModId + ".oxygen_bubble_distributor", min, max).setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
 		}
 
 		@Override
-		protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-			builder.add(FACING, ACTIAVATED);
+		public OxygenBubbleDistributorBlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+			return new OxygenBubbleDistributorBlockEntity(pos, state);
 		}
 
-		public BlockState rotate(BlockState state, Rotation rot) {
-			return state.with(FACING, rot.rotate(state.get(FACING)));
-		}
-
-		@SuppressWarnings("deprecation")
-		public BlockState mirror(BlockState state, Mirror mirrorIn) {
-			return state.rotate(mirrorIn.toRotation(state.get(FACING)));
-		}
-
-		@Override
-		public BlockState getStateForPlacement(BlockItemUseContext context) {
-			return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
-		}
-
-		@Override
-		public PushReaction getPushReaction(BlockState state) {
-			return PushReaction.BLOCK;
-		}
-
-		@Override
-		public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
-			@SuppressWarnings("deprecation")
-			List<ItemStack> dropsOriginal = super.getDrops(state, builder);
-			if (!dropsOriginal.isEmpty()) {
-				return dropsOriginal;
-			} else {
-				return Collections.singletonList(new ItemStack(this, 1));
-			}
-		}
-
-		@Override
-		public int getOpacity(BlockState state, IBlockReader worldIn, BlockPos pos) {
-			return state.get(ACTIAVATED) ? 12 : 0;
-		}
-
-		@Override
-		public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
-			return state.get(ACTIAVATED) ? 12 : 0;
-		}
-
-		@Override
-		public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity entity, Hand hand, BlockRayTraceResult hit) {
-			if (entity instanceof ServerPlayerEntity) {
-				NetworkHooks.openGui((ServerPlayerEntity) entity, this.getContainer(state, world, pos), pos);
-				return ActionResultType.CONSUME;
-			} else {
-				return ActionResultType.SUCCESS;
-			}
-		}
-
-		@Override
-		public INamedContainerProvider getContainer(BlockState state, World worldIn, BlockPos pos) {
-			TileEntity tileEntity = worldIn.getTileEntity(pos);
-			return tileEntity instanceof INamedContainerProvider ? (INamedContainerProvider) tileEntity : null;
-		}
-
-		@Override
-		public boolean hasTileEntity(BlockState state) {
-			return true;
-		}
-
-		@Override
-		public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-			return new CustomTileEntity();
-		}
-
-		@SuppressWarnings("deprecation")
-		@Override
-		public boolean eventReceived(BlockState state, World world, BlockPos pos, int eventID, int eventParam) {
-			super.eventReceived(state, world, pos, eventID, eventParam);
-			TileEntity tileentity = world.getTileEntity(pos);
-			return tileentity == null ? false : tileentity.receiveClientEvent(eventID, eventParam);
-		}
-
-		@SuppressWarnings("deprecation")
-		@Override
-		public void onReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean isMoving) {
-			if (state.getBlock() != newState.getBlock()) {
-				CustomTileEntity tileentity = (CustomTileEntity) world.getTileEntity(pos);
-				InventoryHelper.dropInventoryItems(world, pos, (CustomTileEntity) tileentity);
-				world.updateComparatorOutputLevel(pos, this);
-				super.onReplaced(state, world, pos, newState, isMoving);
-			}
-		}
-
-		@Override
-		public boolean hasComparatorInputOverride(BlockState state) {
-			return true;
-		}
-
-		@Override
-		public int getComparatorInputOverride(BlockState blockState, World world, BlockPos pos) {
-			CustomTileEntity tileentity = (CustomTileEntity) world.getTileEntity(pos);
-			return Container.calcRedstoneFromInventory(tileentity);
-		}
 	}
 
-	public static class CustomTileEntity extends OxygenMakingTileEntity {
+	public static class OxygenBubbleDistributorBlockEntity extends OxygenMakingBlockEntity {
 
-		public CustomTileEntity() {
-			super(ModInnet.OXYGEN_BUBBLE_DISTRIBUTOR.get());
+		public OxygenBubbleDistributorBlockEntity(BlockPos pos, BlockState state) {
+			super(ModInnet.OXYGEN_BUBBLE_DISTRIBUTOR.get(), pos, state);
 			this.setWorkingAreaVisible(false);
 		}
 
@@ -219,21 +92,21 @@ public class OxygenBubbleDistributorBlock {
 
 			return super.canActivated();
 		}
+		
+//		@OnlyIn(Dist.CLIENT)
+//		@Override
+//		public double getMaxRenderDistanceSquared() {
+//			return 256.0D;
+//		}
 
-		@OnlyIn(Dist.CLIENT)
 		@Override
-		public double getMaxRenderDistanceSquared() {
-			return 256.0D;
+		public AABB getRenderBoundingBox() {
+			return new AABB(this.getBlockPos()).inflate(32, 32, 32);
 		}
 
 		@Override
-		public AxisAlignedBB getRenderBoundingBox() {
-			return new AxisAlignedBB(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ(), this.getPos().getX(), this.getPos().getY(), this.getPos().getZ()).grow(32, 32, 32);
-		}
-
-		@Override
-		public Container createMenu(int id, PlayerInventory player) {
-			return new OxygenBubbleDistributorGui.GuiContainer(id, player, this);
+		public AbstractContainerMenu createMenu(int id, Inventory inventory) {
+			return new OxygenBubbleDistributorGui.GuiContainer(id, inventory, this);
 		}
 
 		@Override
@@ -273,17 +146,17 @@ public class OxygenBubbleDistributorBlock {
 		}
 
 		private void spawnOxygenBubble(double range) {
-			World world = this.getWorld();
-			List<LivingEntity> entities = world.getEntitiesWithinAABB(LivingEntity.class, this.getWorkingArea(range), null);
+			Level level = this.getLevel();
+			List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, this.getWorkingArea(range), null);
 
 			for (LivingEntity entity : entities) {
-				entity.addPotionEffect(new EffectInstance(ModInnet.OXYGEN_EFFECT.get(),2 * 24,0, false ,false));
+				entity.addEffect(new MobEffectInstance(ModInnet.OXYGEN_EFFECT.get(),2 * 24,0, false ,false));
 			}
 
-			if (world instanceof ServerWorld) {
-				ServerWorld serverWorld = (ServerWorld) world;
-				Vector3d center = new AxisAlignedBB(this.getPos()).getCenter();
-				serverWorld.spawnParticle(ParticleTypes.CLOUD, center.x, center.y + 0.5D, center.z, 1, 0.1D, 0.1D, 0.1D, 0.001D);
+			if (level instanceof ServerLevel) {
+				ServerLevel serverLevel = (ServerLevel) level;
+				Vec3 center = new AABB(this.getBlockPos()).getCenter();
+				serverLevel.sendParticles(ParticleTypes.CLOUD, center.x, center.y + 0.5D, center.z, 1, 0.1D, 0.1D, 0.1D, 0.001D);
 			}
 
 			this.setProcessedInThisTick();
@@ -302,7 +175,7 @@ public class OxygenBubbleDistributorBlock {
 
 			if (this.getTimer() != timer) {
 				this.getTileData().putInt(KEY_TIMER, timer);
-				this.markDirty();
+				this.setChanged();
 			}
 		}
 
@@ -319,7 +192,7 @@ public class OxygenBubbleDistributorBlock {
 
 			if (this.getRange() != range) {
 				this.getTileData().putInt(KEY_RANGE, range);
-				this.markDirty();
+				this.setChanged();
 			}
 		}
 
@@ -330,21 +203,21 @@ public class OxygenBubbleDistributorBlock {
 		public void setWorkingAreaVisible(boolean visible) {
 			if (this.isWorkingAreaVisible() != visible) {
 				this.getTileData().putBoolean(KEY_WORKINGAREA_VISIBLE, visible);
-				this.markDirty();
+				this.setChanged();
 			}
 		}
 
-		public AxisAlignedBB getWorkingArea(double range) {
-			return this.getWorkingArea(this.getPos(), range);
+		public AABB getWorkingArea(double range) {
+			return this.getWorkingArea(this.getBlockPos(), range);
 		}
 
 		public AABB getWorkingArea(BlockPos pos, double range) {
-			return new AxisAlignedBB(pos).grow(range).offset(0.0D, range, 0.0D);
+			return new AABB(pos).inflate(range).move(0.0D, range, 0.0D);
 		}
 
 		@Override
 		protected BooleanProperty getBlockActivatedProperty() {
-			return CustomBlock.ACTIAVATED;
+			return CustomBlock.LIT;
 		}
 
 		@Override
@@ -354,7 +227,7 @@ public class OxygenBubbleDistributorBlock {
 			map.put(new PowerSystemEnergyCommon(this) {
 				@Override
 				public int getBasePowerForOperation() {
-					return CustomTileEntity.this.getBasePowerForOperation();
+					return OxygenBubbleDistributorBlockEntity.this.getBasePowerForOperation();
 				}
 			});
 		}
@@ -414,10 +287,10 @@ public class OxygenBubbleDistributorBlock {
 
 		public static void handle(ChangeRangeMessage message, Supplier<NetworkEvent.Context> contextSupplier) {
 			NetworkEvent.Context context = contextSupplier.get();
-			CustomTileEntity tileEntity = (CustomTileEntity) context.getSender().level.getBlockEntity(message.getBlockPos());
-			int prev = tileEntity.getRange();
+			OxygenBubbleDistributorBlockEntity blockEntity = (OxygenBubbleDistributorBlockEntity) context.getSender().level.getBlockEntity(message.getBlockPos());
+			int prev = blockEntity.getRange();
 			int next = prev + (message.getDirection() ? +1 : -1);
-			tileEntity.setRange(next);
+			blockEntity.setRange(next);
 			context.setPacketHandled(true);
 		}
 	}
@@ -467,8 +340,8 @@ public class OxygenBubbleDistributorBlock {
 
 		public static void handle(ChangeWorkingAreaVisibleMessage message, Supplier<NetworkEvent.Context> contextSupplier) {
 			NetworkEvent.Context context = contextSupplier.get();
-			CustomTileEntity tileEntity = (CustomTileEntity) context.getSender().level.getBlockEntity(message.getBlockPos());
-			tileEntity.setWorkingAreaVisible(message.isVisible());
+			OxygenBubbleDistributorBlockEntity blockEntity = (OxygenBubbleDistributorBlockEntity) context.getSender().level.getBlockEntity(message.getBlockPos());
+			blockEntity.setWorkingAreaVisible(message.isVisible());
 			context.setPacketHandled(true);
 		}
 	}

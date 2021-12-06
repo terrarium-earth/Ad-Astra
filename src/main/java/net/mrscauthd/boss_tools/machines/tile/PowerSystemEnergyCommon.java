@@ -4,12 +4,12 @@ import net.minecraftforge.energy.IEnergyStorage;
 
 public abstract class PowerSystemEnergyCommon extends PowerSystemEnergy {
 
-	public PowerSystemEnergyCommon(AbstractMachineTileEntity tileEntity) {
-		super(tileEntity);
+	public PowerSystemEnergyCommon(AbstractMachineBlockEntity blockEntity) {
+		super(blockEntity);
 	}
 
-	public PowerSystemEnergyCommon(AbstractMachineTileEntity tileEntity, IEnergyStorage energyStorage) {
-		super(tileEntity, energyStorage);
+	public PowerSystemEnergyCommon(AbstractMachineBlockEntity blockEntity, IEnergyStorage energyStorage) {
+		super(blockEntity, energyStorage);
 	}
 
 	@Override

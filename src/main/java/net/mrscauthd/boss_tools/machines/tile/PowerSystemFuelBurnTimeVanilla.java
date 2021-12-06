@@ -1,19 +1,17 @@
 package net.mrscauthd.boss_tools.machines.tile;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.common.ForgeHooks;
-
-import IRecipeType;
 
 public abstract class PowerSystemFuelBurnTimeVanilla extends PowerSystemFuelBurnTime {
 
-	public PowerSystemFuelBurnTimeVanilla(AbstractMachineTileEntity tileEntity, int slot) {
-		super(tileEntity, slot);
+	public PowerSystemFuelBurnTimeVanilla(AbstractMachineBlockEntity blockEntity, int slot) {
+		super(blockEntity, slot);
 	}
 
-	public abstract IRecipeType<?> getRecipeType();
+	public abstract RecipeType<?> getRecipeType();
 
 	@Override
 	protected int getFuelInternal(ItemStack fuel) {

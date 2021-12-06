@@ -17,27 +17,26 @@ import org.apache.commons.lang3.ArrayUtils;
 import com.google.common.collect.Lists;
 import com.google.common.primitives.Ints;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.INBT;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.LockableLootTileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.WorldlyContainer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
@@ -60,7 +59,7 @@ import net.mrscauthd.boss_tools.crafting.FluidIngredient;
 import net.mrscauthd.boss_tools.gauge.GaugeValueHelper;
 import net.mrscauthd.boss_tools.gauge.IGaugeValue;
 
-public abstract class AbstractMachineTileEntity extends LockableLootTileEntity implements ISidedInventory, ITickableTileEntity, IEnergyStorageHolder {
+public abstract class AbstractMachineBlockEntity extends RandomizableContainerBlockEntity implements WorldlyContainer, IEnergyStorageHolder {
 
 	public static final String KEY_ACTIVATED = "activated";
 
@@ -73,8 +72,8 @@ public abstract class AbstractMachineTileEntity extends LockableLootTileEntity i
 
 	private boolean processedInThisTick = false;
 
-	public AbstractMachineTileEntity(TileEntityType<?> type) {
-		super(type);
+	public AbstractMachineBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+		super(type, pos, state);
 
 		this.selectedPrimaries = new HashMap<>();
 
@@ -95,9 +94,9 @@ public abstract class AbstractMachineTileEntity extends LockableLootTileEntity i
 	}
 
 	@Override
-	public ITextComponent getDefaultName() {
+	public Component getDefaultName() {
 		ResourceLocation registryName = this.getType().getRegistryName();
-		return new TranslationTextComponent("container." + registryName.getNamespace() + "." + registryName.getPath());
+		return new TranslatableComponent("container." + registryName.getNamespace() + "." + registryName.getPath());
 	}
 
 	protected void createItemHandlers() {
@@ -105,7 +104,7 @@ public abstract class AbstractMachineTileEntity extends LockableLootTileEntity i
 	}
 
 	public boolean isPowerEnoughForOperation() {
-		return this.getPowerSystems().values().stream().allMatch(ps -> ps.isPowerEnoughForOperation());
+		return this.getPowerSystems().values().stream().allMatch(PowerSystem::isPowerEnoughForOperation);
 	}
 
 	/**
@@ -116,7 +115,7 @@ public abstract class AbstractMachineTileEntity extends LockableLootTileEntity i
 	@Nullable
 	public Map<PowerSystem, Integer> consumePowerForOperation() {
 		if (this.isPowerEnoughForOperation()) {
-			return this.getPowerSystems().values().stream().collect(Collectors.toMap(ps -> ps, ps -> ps.consumeForOperation()));
+			return this.getPowerSystems().values().stream().collect(Collectors.toMap(ps -> ps, PowerSystem::consumeForOperation));
 		} else {
 			return null;
 		}
@@ -131,49 +130,44 @@ public abstract class AbstractMachineTileEntity extends LockableLootTileEntity i
 	}
 
 	protected int getInitialInventorySize() {
-		return this.getPowerSystems().values().stream().collect(Collectors.summingInt(ps -> ps.getUsingSlots()));
+		return this.getPowerSystems().values().stream().collect(Collectors.summingInt(PowerSystem::getUsingSlots));
 	}
 
 	@Override
-	public void read(BlockState blockState, CompoundNBT compound) {
-		super.read(blockState, compound);
+	public void load(CompoundTag compound) {
+		super.load(compound);
 
-		if (!this.checkLootAndRead(compound)) {
-			this.stacks = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
-		}
-
-		ItemStackHelper.loadAllItems(compound, this.stacks);
+		this.stacks = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
+		ContainerHelper.loadAllItems(compound, this.stacks);
 
 		this.deserializeCompoents(this.getEnergyStorages(), compound.getCompound("energyStorages"));
 		this.deserializeCompoents(this.getFluidHandlers(), compound.getCompound("fluidHandlers"));
 		this.deserializeCompoents(this.getPowerSystems(), compound.getCompound("powerSystems"));
 	}
 
-	public <T> void deserializeCompoents(Map<ResourceLocation, T> registry, CompoundNBT compound) {
+	public <T> void deserializeCompoents(Map<ResourceLocation, T> registry, CompoundTag compound) {
 		for (Entry<ResourceLocation, T> entry : registry.entrySet()) {
 			this.deserializeComponent(entry.getKey(), entry.getValue(), compound.get(entry.getKey().toString()));
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T> void deserializeComponent(ResourceLocation name, T component, INBT nbt) {
+	public <T> void deserializeComponent(ResourceLocation name, T component, Tag tag) {
 		if (component instanceof INBTSerializable<?>) {
-			((INBTSerializable<INBT>) component).deserializeNBT(nbt);
+			((INBTSerializable<Tag>) component).deserializeNBT(tag);
 		} else if (component instanceof EnergyStorage) {
-			CapabilityEnergy.ENERGY.readNBT((EnergyStorage) component, null, nbt);
+			((EnergyStorage) component).deserializeNBT(tag);
 		} else if (component instanceof FluidTank) {
-			CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.readNBT((FluidTank) component, null, nbt);
+			((FluidTank) component).readFromNBT((CompoundTag) tag);
 		}
 
 	}
 
 	@Override
-	public CompoundNBT write(CompoundNBT compound) {
-		super.write(compound);
+	public CompoundTag save(CompoundTag compound) {
+		super.save(compound);
 
-		if (!this.checkLootAndWrite(compound)) {
-			ItemStackHelper.saveAllItems(compound, this.stacks);
-		}
+		ContainerHelper.saveAllItems(compound, this.stacks);
 
 		compound.put("energyStorages", this.serializeComponents(this.getEnergyStorages()));
 		compound.put("fluidHandlers", this.serializeComponents(this.getFluidHandlers()));
@@ -182,8 +176,8 @@ public abstract class AbstractMachineTileEntity extends LockableLootTileEntity i
 		return compound;
 	}
 
-	public <T> CompoundNBT serializeComponents(Map<ResourceLocation, T> registry) {
-		CompoundNBT compound = new CompoundNBT();
+	public <T> CompoundTag serializeComponents(Map<ResourceLocation, T> registry) {
+		CompoundTag compound = new CompoundTag();
 
 		for (Entry<ResourceLocation, T> entry : registry.entrySet()) {
 			compound.put(entry.getKey().toString(), this.serializeComponent(entry.getKey(), entry.getValue()));
@@ -193,20 +187,20 @@ public abstract class AbstractMachineTileEntity extends LockableLootTileEntity i
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T> INBT serializeComponent(ResourceLocation name, T component) {
+	public <T> Tag serializeComponent(ResourceLocation name, T component) {
 		if (component instanceof INBTSerializable<?>) {
-			return ((INBTSerializable<INBT>) component).serializeNBT();
+			return ((INBTSerializable<Tag>) component).serializeNBT();
 		} else if (component instanceof EnergyStorage) {
-			return CapabilityEnergy.ENERGY.writeNBT((EnergyStorage) component, null);
+			return ((EnergyStorage) component).serializeNBT();
 		} else if (component instanceof FluidTank) {
-			return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.writeNBT((FluidTank) component, null);
+			return ((FluidTank) component).writeToNBT(new CompoundTag());
 		}
 
 		return null;
 	}
 
 	@Override
-	public int getSizeInventory() {
+	public int getContainerSize() {
 		return stacks.size();
 	}
 
@@ -232,20 +226,20 @@ public abstract class AbstractMachineTileEntity extends LockableLootTileEntity i
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int index, ItemStack stack) {
-		return this.onCanInsertItem(index, stack, null);
+	public boolean canPlaceItem(int index, ItemStack stack) {
+		return this.onCanPlaceItemThroughFace(index, stack, null);
 	}
 
 	@Override
-	public final boolean canInsertItem(int index, ItemStack stack, @Nullable Direction direction) {
-		boolean result = this.onCanInsertItem(index, stack, direction);
+	public final boolean canPlaceItemThroughFace(int index, ItemStack stack, @Nullable Direction direction) {
+		boolean result = this.onCanPlaceItemThroughFace(index, stack, direction);
 
 		// Check required because Hopper, it can ignore inventory stack limit
 		if (result == true) {
-			ItemStack stackInSlot = this.getStackInSlot(index);
+			ItemStack stackInSlot = this.getItem(index);
 
 			if (!stackInSlot.isEmpty() && ItemHandlerHelper.canItemStacksStack(stackInSlot, stack)) {
-				int limit = Math.min(stack.getMaxStackSize(), this.getInventoryStackLimit());
+				int limit = Math.min(stack.getMaxStackSize(), this.getMaxStackSize());
 				if (stackInSlot.getCount() + stack.getCount() > limit) {
 					return false;
 				}
@@ -255,12 +249,12 @@ public abstract class AbstractMachineTileEntity extends LockableLootTileEntity i
 		return result;
 	}
 
-	protected boolean onCanInsertItem(int index, ItemStack stack, @Nullable Direction direction) {
+	protected boolean onCanPlaceItemThroughFace(int index, ItemStack stack, @Nullable Direction direction) {
 		return this.getPowerSystems().values().stream().anyMatch(ps -> ps.canInsertItem(direction, index, stack));
 	}
 
 	@Override
-	public boolean canExtractItem(int index, ItemStack stack, Direction direction) {
+	public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
 		return this.getPowerSystems().values().stream().anyMatch(ps -> ps.canExtractItem(direction, index, stack));
 	}
 
@@ -295,7 +289,7 @@ public abstract class AbstractMachineTileEntity extends LockableLootTileEntity i
 
 	@Override
 	public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction facing) {
-		if (!this.removed) {
+		if (!this.isRemoved()) {
 			if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
 				LazyOptional<T> optional = this.getCapabilityItemHandler(capability, facing);
 				if (optional != null && optional.isPresent()) {
@@ -325,16 +319,14 @@ public abstract class AbstractMachineTileEntity extends LockableLootTileEntity i
 	}
 
 	@Override
-	public void remove() {
-		super.remove();
+	public void setRemoved() {
+		super.setRemoved();
 		Arrays.stream(this.itemHandlers).forEach(h -> h.invalidate());
 	}
 
-	@Override
 	public void tick() {
-		World world = this.getWorld();
 
-		if (world.isRemote()) {
+		if (this.getLevel().isClientSide()) {
 			return;
 		}
 
@@ -367,13 +359,13 @@ public abstract class AbstractMachineTileEntity extends LockableLootTileEntity i
 			return;
 		}
 
-		World world = this.getWorld();
-		BlockPos pos = this.getPos();
+		Level level = this.getLevel();
+		BlockPos pos = this.getBlockPos();
 		BlockState state = this.getBlockState();
 		boolean activated = this.isActivated();
 
-		if (state.hasProperty(property) && state.get(property).booleanValue() != activated) {
-			world.setBlockState(pos, state.with(property, activated), 3);
+		if (state.hasProperty(property) && state.getValue(property).booleanValue() != activated) {
+			level.setBlock(pos, state.setValue(property, activated), 3);
 		}
 	}
 
@@ -452,7 +444,8 @@ public abstract class AbstractMachineTileEntity extends LockableLootTileEntity i
 	@SuppressWarnings("unchecked")
 	@Nonnull
 	public <T> T getPrimaryComponent(Map<ResourceLocation, T> map) {
-		return (T) this.selectedPrimaries.computeIfAbsent(map, k -> this.selectPrimaryComponent((Map<ResourceLocation, T>) k));
+		return (T) this.selectedPrimaries.computeIfAbsent(map,
+				k -> this.selectPrimaryComponent((Map<ResourceLocation, T>) k));
 	}
 
 	protected <T> T selectPrimaryComponent(Map<ResourceLocation, T> map) {
@@ -474,39 +467,40 @@ public abstract class AbstractMachineTileEntity extends LockableLootTileEntity i
 	protected void setActivated(boolean activated) {
 		if (this.isActivated() != activated) {
 			this.getTileData().putBoolean(KEY_ACTIVATED, activated);
-			this.markDirty();
+			this.setChanged();
 		}
 	}
 
 	@Override
-	public void markDirty() {
-		super.markDirty();
+	public void setChanged() {
+		super.setChanged();
 
-		World world = this.getWorld();
-		if (world instanceof ServerWorld) {
-			ServerWorld serverWorld = (ServerWorld) world;
-			serverWorld.getChunkProvider().markBlockChanged(this.getPos());
+		Level level = this.getLevel();
+		
+		if (level instanceof ServerLevel) {
+			ServerLevel serverLevel = (ServerLevel) level;
+			serverLevel.getChunkSource().blockChanged(this.getBlockPos());
 		}
 	}
 
 	@Override
-	public SUpdateTileEntityPacket getUpdatePacket() {
-		return new SUpdateTileEntityPacket(this.pos, 0, this.getUpdateTag());
+	public ClientboundBlockEntityDataPacket getUpdatePacket() {
+		return ClientboundBlockEntityDataPacket.create(this);
 	}
 
 	@Override
-	public CompoundNBT getUpdateTag() {
-		return this.write(new CompoundNBT());
+	public CompoundTag getUpdateTag() {
+		return this.save(new CompoundTag());
 	}
 
 	@Override
-	public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-		this.read(this.getBlockState(), pkt.getNbtCompound());
+	public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+		this.load(pkt.getTag());
 	}
 
 	@Override
 	public void onEnergyChanged(IEnergyStorage energyStorage, int energyDelta) {
-		this.markDirty();
+		this.setChanged();
 	}
 
 	protected boolean isProcessedInThisTick() {
@@ -527,7 +521,7 @@ public abstract class AbstractMachineTileEntity extends LockableLootTileEntity i
 		if (output.isEmpty()) {
 			return true;
 		} else if (ItemHandlerHelper.canItemStacksStack(output, recipeOutput)) {
-			int limit = Math.min(recipeOutput.getMaxStackSize(), this.getInventoryStackLimit());
+			int limit = Math.min(recipeOutput.getMaxStackSize(), this.getMaxStackSize());
 			return (output.getCount() + recipeOutput.getCount()) <= limit;
 		}
 

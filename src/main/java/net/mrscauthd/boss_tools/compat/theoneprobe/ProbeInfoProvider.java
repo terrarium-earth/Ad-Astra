@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import net.mrscauthd.boss_tools.compat.CompatibleManager;
 import net.mrscauthd.boss_tools.compat.mekanism.MekanismHelper;
-import net.mrscauthd.boss_tools.machines.tile.AbstractMachineTileEntity;
+import net.mrscauthd.boss_tools.machines.tile.AbstractMachineBlockEntity;
 
 public class ProbeInfoProvider/* implements IProbeInfoProvider, Function<ITheOneProbe, Void>*/ {
 /*

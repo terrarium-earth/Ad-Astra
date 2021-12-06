@@ -4,10 +4,10 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.inventory.StackCacher;
@@ -22,8 +22,8 @@ public abstract class PowerSystemFuel extends PowerSystem {
 	private StackCacher itemStackCacher;
 	private int cachedFuel;
 
-	public PowerSystemFuel(AbstractMachineTileEntity tileEntity, int slot) {
-		super(tileEntity);
+	public PowerSystemFuel(AbstractMachineBlockEntity blockEntity, int slot) {
+		super(blockEntity);
 
 		this.slot = slot;
 
@@ -45,7 +45,7 @@ public abstract class PowerSystemFuel extends PowerSystem {
 
 		if (!simulate) {
 			this.fuel += received;
-			this.getTileEntity().markDirty();
+			this.getBlockEntity().setChanged();
 		}
 
 		return received;
@@ -57,7 +57,7 @@ public abstract class PowerSystemFuel extends PowerSystem {
 
 		if (!simulate) {
 			this.fuel -= extracted;
-			this.getTileEntity().markDirty();
+			this.getBlockEntity().setChanged();
 		}
 
 		return extracted;
@@ -74,11 +74,11 @@ public abstract class PowerSystemFuel extends PowerSystem {
 	}
 
 	public boolean canFeed(boolean spareForNextTick, ItemStack fuel) {
-		return this.getTileEntity().hasSpaceInOutput();
+		return this.getBlockEntity().hasSpaceInOutput();
 	}
 
 	@Override
-	public void deserializeNBT(CompoundNBT compound) {
+	public void deserializeNBT(CompoundTag compound) {
 		super.deserializeNBT(compound);
 
 		this.fuel = compound.getInt("fuel");
@@ -86,8 +86,8 @@ public abstract class PowerSystemFuel extends PowerSystem {
 	}
 
 	@Override
-	public CompoundNBT serializeNBT() {
-		CompoundNBT compound = super.serializeNBT();
+	public CompoundTag serializeNBT() {
+		CompoundTag compound = super.serializeNBT();
 
 		compound.putInt("fuel", this.fuel);
 		compound.putInt("maxFuel", this.maxFuel);
@@ -165,7 +165,7 @@ public abstract class PowerSystemFuel extends PowerSystem {
 	}
 
 	public IItemHandlerModifiable getItemHandler() {
-		return this.getTileEntity().getItemHandler();
+		return this.getBlockEntity().getItemHandler();
 	}
 
 	public int getSlot() {
