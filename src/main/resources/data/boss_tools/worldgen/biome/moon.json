@@ -1,0 +1,46 @@
+{
+  "scale": 0.2,
+  "depth": 0.2,
+  "precipitation": "none",
+  "temperature": 1.6,
+  "downfall": 0,
+  "category": "none",
+  "surface_builder": "boss_tools:moon",
+  "spawn_costs": {},
+  "player_spawn_friendly": false,
+  "effects": {
+    "foliage_color": 7842607,
+    "grass_color": 9551193,
+    "sky_color": -16777216,
+    "fog_color": -16777216,
+    "water_color": 4159204,
+    "water_fog_color": 329011
+  },
+  "spawners": {
+    "monster": [],
+    "creature": [],
+    "ambient": [],
+    "water_creature": [],
+    "water_ambient": [],
+    "misc": []
+  },
+  "carvers": {
+    "air": [
+      "minecraft:cave",
+      "minecraft:canyon"
+    ]
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    []
+  ],
+  "starts": []
+}

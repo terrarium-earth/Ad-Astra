@@ -90,7 +90,7 @@ dependencies {
     //Jade
     implementation fg.deobf("curse.maven:jade-324717:3551337")
 
-/*
+  /*
   //TConstruct
   compile fg.deobf("curse.maven:mantle-74924:3439180")
   compile fg.deobf("curse.maven:tinkers-construct-74072:3439200")
@@ -100,7 +100,7 @@ dependencies {
   runtimeOnly fg.deobf("mekanism:Mekanism:1.16.5-10.0.20.447:additions")
   runtimeOnly fg.deobf("mekanism:Mekanism:1.16.5-10.0.20.447:generators")
   runtimeOnly fg.deobf("mekanism:Mekanism:1.16.5-10.0.20.447:tools")
-    */
+  */
 }
 
 mixin {

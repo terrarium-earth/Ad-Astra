@@ -3,14 +3,13 @@ package net.mrscauthd.boss_tools.events;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.client.ClientRegistry;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.api.distmarker.Dist;
 
 import net.minecraft.client.Minecraft;
@@ -41,7 +40,6 @@ import net.mrscauthd.boss_tools.gui.screens.waterpump.WaterPumpGuiWindow;
 import net.mrscauthd.boss_tools.particle.LargeFlameParticle;
 import net.mrscauthd.boss_tools.particle.SmokeParticle;
 import net.mrscauthd.boss_tools.particle.VenusRainParticle;
-import net.mrscauthd.boss_tools.spawneggs.ModSpawnEggs;
 import net.mrscauthd.boss_tools.entity.renderer.alien.AlienRenderer;
 import net.mrscauthd.boss_tools.entity.renderer.mogler.MoglerRenderer;
 import net.mrscauthd.boss_tools.entity.renderer.pygro.PygroRenderer;
@@ -66,18 +64,16 @@ public class ClientEventBusSubscriber {
 		event.registerEntityRenderer(ModInnet.LANDER.get(), LanderRenderer::new);
 		event.registerEntityRenderer(ModInnet.ROVER.get(), RoverRenderer::new);
 
+		event.registerEntityRenderer(ModInnet.ALIEN_SPIT_ENTITY.get(), renderManager -> new ThrownItemRenderer(renderManager, Minecraft.getInstance().getItemRenderer(), true));
+
+
 		event.registerBlockEntityRenderer(ModInnet.OXYGEN_BUBBLE_DISTRIBUTOR.get(), TileEntityBoxRenderer::new);
+
+		event.registerBlockEntityRenderer(ModInnet.FLAG.get(), TileEntityHeadRenderer::new);
 	}
 
 	@SubscribeEvent
 	public static void onClientSetup(FMLClientSetupEvent event) {
-
-		ClientRegistry.bindTileEntityRenderer(ModInnet.OXYGEN_BUBBLE_DISTRIBUTOR.get(), TileEntityBoxRenderer::new);
-
-		ClientRegistry.bindTileEntityRenderer(ModInnet.FLAG.get(), TileEntityHeadRenderer::new);
-
-		RenderingRegistry.registerEntityRenderingHandler(ModInnet.ALIEN_SPIT_ENTITY.get(), renderManager -> new SpriteRenderer(renderManager, Minecraft.getInstance().getItemRenderer()));
-
 		//GUIS
 		MenuScreens.register(ModInnet.ROCKET_GUI.get(), RocketGuiWindow::new);
 		MenuScreens.register(ModInnet.BLAST_FURNACE_GUI.get(), BlastFurnaceGuiWindow::new);
@@ -108,12 +104,6 @@ public class ClientEventBusSubscriber {
 		ItemBlockRenderTypes.setRenderLayer(ModInnet.NASA_WORKBENCH_BLOCK.get(), RenderType.cutout());
 
 		ItemBlockRenderTypes.setRenderLayer(ModInnet.WATER_PUMP_BLOCK.get(), RenderType.cutout());
-	}
-
-
-	@SubscribeEvent
-	public static void onRegistrerEntities(final RegistryEvent.Register<EntityType<?>> event) {
-		ModSpawnEggs.initSpawnEggs();
 	}
 
 	@SubscribeEvent
