@@ -87,7 +87,7 @@ dependencies {
     //The One Probe
     implementation fg.deobf("curse.maven:the-one-probe-245211:3550084")
     
-    //JADE
+    //Jade
     implementation fg.deobf("curse.maven:jade-324717:3551337")
 
 /*
