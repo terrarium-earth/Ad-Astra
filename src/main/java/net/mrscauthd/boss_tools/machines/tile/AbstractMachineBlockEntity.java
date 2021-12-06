@@ -58,8 +58,9 @@ import net.mrscauthd.boss_tools.capability.IEnergyStorageHolder;
 import net.mrscauthd.boss_tools.crafting.FluidIngredient;
 import net.mrscauthd.boss_tools.gauge.GaugeValueHelper;
 import net.mrscauthd.boss_tools.gauge.IGaugeValue;
+import net.mrscauthd.boss_tools.gauge.IGaugeValuesProvider;
 
-public abstract class AbstractMachineBlockEntity extends RandomizableContainerBlockEntity implements WorldlyContainer, IEnergyStorageHolder {
+public abstract class AbstractMachineBlockEntity extends RandomizableContainerBlockEntity implements WorldlyContainer, IEnergyStorageHolder, IGaugeValuesProvider {
 
 	public static final String KEY_ACTIVATED = "activated";
 
@@ -552,6 +553,7 @@ public abstract class AbstractMachineBlockEntity extends RandomizableContainerBl
 		return list;
 	}
 
+	@Override
 	public List<IGaugeValue> getGaugeValues() {
 		List<IGaugeValue> list = new ArrayList<>();
 		this.getPowerSystems().values().stream().map(PowerSystem::getGaugeValues).forEach(list::addAll);

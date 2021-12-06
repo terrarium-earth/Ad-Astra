@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.phys.Vec2;
 import net.mrscauthd.boss_tools.gui.helper.GuiHelper;
 import net.mrscauthd.boss_tools.util.Rectangle2d;
 
@@ -27,6 +28,10 @@ public abstract class AbstractGaugeDataRenderer {
 
 	public void toBytes(FriendlyByteBuf buffer) {
 		GaugeValueSerializer.Serializer.write(this.getValue(), buffer);
+	}
+
+	public void render(PoseStack matrixStack, float x, float y, float maxX, float maxY) {
+		this.render(matrixStack, (int) x, (int) y, 0.0F, 0.0F);
 	}
 
 	public void render(PoseStack matrixStack, int left, int top) {
@@ -161,6 +166,10 @@ public abstract class AbstractGaugeDataRenderer {
 
 	public int getHeight() {
 		return 13;
+	}
+
+	public Vec2 getSize() {
+		return new Vec2(this.getWidth(), this.getHeight());
 	}
 
 	public IGaugeValue getValue() {

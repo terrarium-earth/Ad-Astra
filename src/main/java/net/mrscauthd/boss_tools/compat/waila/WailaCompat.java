@@ -1,9 +1,9 @@
-package net.mrscauthd.boss_tools.compat.hwyla;
+package net.mrscauthd.boss_tools.compat.waila;
 
 import net.minecraft.resources.ResourceLocation;
 import net.mrscauthd.boss_tools.compat.CompatibleMod;
 
-public class HwylaCompat extends CompatibleMod {
+public class WailaCompat extends CompatibleMod {
 	public static final String MODID = "waila";
 
 	public static ResourceLocation rl(String path) {
