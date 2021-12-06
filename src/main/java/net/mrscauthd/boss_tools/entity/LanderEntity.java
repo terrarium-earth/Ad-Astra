@@ -203,7 +203,7 @@ public class LanderEntity extends PathfinderMob {
 
 	@Override
 	protected InteractionResult mobInteract(Player player, InteractionHand hand) {
-		return super.mobInteract(player, hand);
+		super.mobInteract(player, hand);
 		InteractionResult retval = InteractionResult.sidedSuccess(this.level.isClientSide);
 
 		if (player instanceof ServerPlayer && player.isCrouching()) {
