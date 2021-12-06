@@ -45,7 +45,7 @@ public class Rectangle2d {
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public net.minecraft.client.renderer.Rect2i toVanila() {
+	public net.minecraft.client.renderer.Rect2i toRect2i() {
 		return new net.minecraft.client.renderer.Rect2i(this.getX(), this.getY(), this.getWidth(), this.getHeight());
 	}
 }

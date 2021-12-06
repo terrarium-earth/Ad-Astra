@@ -1,6 +1,6 @@
 package net.mrscauthd.boss_tools.jei.jeiguihandlers;
 
-/*
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -11,17 +11,17 @@ import mezz.jei.api.gui.handlers.IGuiClickableArea;
 import mezz.jei.api.gui.handlers.IGuiContainerHandler;
 import mezz.jei.api.recipe.IFocusFactory;
 import mezz.jei.api.runtime.IRecipesGui;
-import net.minecraft.client.renderer.Rectangle2d;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.mrscauthd.boss_tools.gui.screens.compressor.CompressorGuiWindow;
+import net.minecraft.client.renderer.Rect2i;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.mrscauthd.boss_tools.gauge.GaugeTextHelper;
 import net.mrscauthd.boss_tools.gui.helper.GuiHelper;
+import net.mrscauthd.boss_tools.gui.screens.compressor.CompressorGuiWindow;
 import net.mrscauthd.boss_tools.jei.JeiPlugin.CompressorJeiCategory;
 
-*/
-public class CompressorGuiContainerHandler/* implements IGuiContainerHandler<CompressorGuiWindow>*/ {
-/*
+
+public class CompressorGuiContainerHandler implements IGuiContainerHandler<CompressorGuiWindow> {
+
 	public CompressorGuiContainerHandler() {
 
 	}
@@ -31,8 +31,8 @@ public class CompressorGuiContainerHandler/* implements IGuiContainerHandler<Com
 	public Collection<IGuiClickableArea> getGuiClickableAreas(CompressorGuiWindow containerScreen, double mouseX, double mouseY) {
 		return Collections.singleton(new IGuiClickableArea() {
 			@Override
-			public Rectangle2d getArea() {
-				return GuiHelper.getArrowBounds(CompressorGuiWindow.ARROW_LEFT, CompressorGuiWindow.ARROW_TOP);
+			public Rect2i getArea() {
+				return GuiHelper.getArrowBounds(CompressorGuiWindow.ARROW_LEFT, CompressorGuiWindow.ARROW_TOP).toRect2i();
 			}
 
 			@Override
@@ -41,14 +41,14 @@ public class CompressorGuiContainerHandler/* implements IGuiContainerHandler<Com
 			}
 
 			@Override
-			public List<ITextComponent> getTooltipStrings() {
-				List<ITextComponent> list = new ArrayList<>();
-				list.add(GaugeTextHelper.getStorageText(containerScreen.getTileEntity().getCookTimeGaugeValue()).build());
-				list.add(new TranslationTextComponent("jei.tooltip.show.recipes"));
+			public List<Component> getTooltipStrings() {
+				List<Component> list = new ArrayList<>();
+				list.add(GaugeTextHelper.getStorageText(containerScreen.getMenu().getBlockEntity().getCookTimeGaugeValue()).build());
+				list.add(new TranslatableComponent("jei.tooltip.show.recipes"));
 				return list;
 			}
 		});
 
 	}
-*/
+
 }

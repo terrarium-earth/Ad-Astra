@@ -85,17 +85,16 @@ dependencies {
     runtimeOnly fg.deobf("mezz.jei:jei-1.18:9.0.0.40")
 
     //The One Probe
-    compileOnly fg.deobf("curse.maven:the-one-probe-245211:3550084")
-    runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:3550084")
+    implementation fg.deobf("curse.maven:the-one-probe-245211:3550084")
+    
+    //Jade
+    implementation fg.deobf("curse.maven:jade-324717:3551337")
 
 /*
   //TConstruct
   compile fg.deobf("curse.maven:mantle-74924:3439180")
   compile fg.deobf("curse.maven:tinkers-construct-74072:3439200")
 
-  //Hwyla
-  compile fg.deobf("curse.maven:hwyla-253449:3033593")
-  
   //Mekanism
   compile fg.deobf("mekanism:Mekanism:1.16.5-10.0.20.447")
   runtimeOnly fg.deobf("mekanism:Mekanism:1.16.5-10.0.20.447:additions")

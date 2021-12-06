@@ -17,6 +17,8 @@ import net.mrscauthd.boss_tools.entity.RocketTier3Entity;
 import net.mrscauthd.boss_tools.gauge.GaugeTextHelper;
 import net.mrscauthd.boss_tools.gauge.GaugeValueHelper;
 import net.mrscauthd.boss_tools.gui.helper.GuiHelper;
+import net.mrscauthd.boss_tools.util.Rectangle2d;
+
 import org.lwjgl.opengl.GL11;
 
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -100,7 +102,7 @@ public class RocketGuiWindow extends AbstractContainerScreen<RocketGui.GuiContai
 		this.font.draw(ms, this.playerInventoryTitle, (float) this.inventoryLabelX, (float) this.inventoryLabelY, 4210752);
 	}
 
-	public Rect2i getFluidBounds() {
+	public Rectangle2d getFluidBounds() {
 		return GuiHelper.getRocketFluidTankBounds(this.leftPos + 66, this.topPos + 21);
 	}
 }

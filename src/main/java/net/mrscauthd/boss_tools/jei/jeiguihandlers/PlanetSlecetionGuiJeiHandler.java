@@ -1,26 +1,25 @@
 package net.mrscauthd.boss_tools.jei.jeiguihandlers;
 
-/*
-import mezz.jei.api.gui.handlers.IGuiContainerHandler;
-import net.minecraft.client.renderer.Rectangle2d;
-import net.mrscauthd.boss_tools.gui.screens.planetselection.PlanetSelectionGuiWindow;
-*/
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class PlanetSlecetionGuiJeiHandler /*implements IGuiContainerHandler<PlanetSelectionGuiWindow>*/ {
-/*
+import mezz.jei.api.gui.handlers.IGuiContainerHandler;
+import net.minecraft.client.renderer.Rect2i;
+import net.mrscauthd.boss_tools.gui.screens.planetselection.PlanetSelectionGuiWindow;
+
+public class PlanetSlecetionGuiJeiHandler implements IGuiContainerHandler<PlanetSelectionGuiWindow> {
+
 	public PlanetSlecetionGuiJeiHandler() {
 
 	}
 
 	@Override
-	public List<Rectangle2d> getGuiExtraAreas(PlanetSelectionGuiWindow containerScreen) {
-		List<Rectangle2d> list = new ArrayList<>();
+	public List<Rect2i> getGuiExtraAreas(PlanetSelectionGuiWindow containerScreen) {
+		List<Rect2i> list = new ArrayList<>();
 
-		list.add(new Rectangle2d(0,0,containerScreen.width,containerScreen.height));
+		list.add(new Rect2i(0, 0, containerScreen.width, containerScreen.height));
 
 		return list;
 	}
 
- */
 }
