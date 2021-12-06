@@ -18,7 +18,7 @@ import net.mrscauthd.boss_tools.ModInnet;
 import net.mrscauthd.boss_tools.gauge.GaugeTextHelper;
 import net.mrscauthd.boss_tools.gauge.GaugeValueHelper;
 import net.mrscauthd.boss_tools.gui.screens.coalgenerator.CoalGeneratorGui;
-import net.mrscauthd.boss_tools.machines.tile.GeneratorTileEntity;
+import net.mrscauthd.boss_tools.machines.tile.GeneratorBlockEntity;
 import net.mrscauthd.boss_tools.machines.tile.PowerSystemFuelGeneratingRecipe;
 import net.mrscauthd.boss_tools.machines.tile.PowerSystemRegistry;
 
@@ -26,7 +26,7 @@ public class CoalGeneratorBlock {
 	public static final int SLOT_FUEL = 0;
 	public static final int ENERGY_PER_TICK = 2;
 
-	public static class CustomBlock extends AbstractMachineBlock<CustomTileEntity> {
+	public static class CustomBlock extends AbstractMachineBlock<CoalGeneratorBlockEntity> {
 
 		public CustomBlock() {
 			super(Block.Properties.of(Material.METAL).sound(SoundType.METAL).strength(5f, 1f).lightLevel(s -> 0).requiresCorrectToolForDrops());
@@ -49,17 +49,17 @@ public class CoalGeneratorBlock {
 		}
 
 		@Override
-		public CustomTileEntity newBlockEntity(BlockPos pos, BlockState state) {
-			return new CustomTileEntity(pos, state);
+		public CoalGeneratorBlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+			return new CoalGeneratorBlockEntity(pos, state);
 		}
 
 	}
 
-	public static class CustomTileEntity extends GeneratorTileEntity {
+	public static class CoalGeneratorBlockEntity extends GeneratorBlockEntity {
 
 		private PowerSystemFuelGeneratingRecipe powerSystemGenerating;
 
-		public CustomTileEntity(BlockPos pos, BlockState state) {
+		public CoalGeneratorBlockEntity(BlockPos pos, BlockState state) {
 			super(ModInnet.COAL_GENERATOR.get(), pos, state);
 		}
 

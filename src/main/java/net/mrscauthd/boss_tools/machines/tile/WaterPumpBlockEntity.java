@@ -27,10 +27,10 @@ import net.mrscauthd.boss_tools.fluid.FluidUtil2;
 import net.mrscauthd.boss_tools.gui.screens.waterpump.WaterPumpGui;
 import net.mrscauthd.boss_tools.machines.WaterPump;
 
-public class WaterPumpTileEntity extends AbstractMachineTileEntity {
+public class WaterPumpBlockEntity extends AbstractMachineBlockEntity {
 	public static final int TRANSFER_PER_TICK = 10;
 	
-    public WaterPumpTileEntity(BlockPos pos, BlockState state) {
+    public WaterPumpBlockEntity(BlockPos pos, BlockState state) {
         super(ModInnet.WATER_PUMP.get(), pos, state);
     }
 
@@ -70,11 +70,11 @@ public class WaterPumpTileEntity extends AbstractMachineTileEntity {
             }
 
             if (this.getWaterTank().getFluid().getAmount() > 1) {
-                BlockEntity tileEntity = level.getBlockEntity(new BlockPos(pos.getX(),pos.getY() + 1, pos.getZ()));
+                BlockEntity ejectBlockEntity = level.getBlockEntity(new BlockPos(pos.getX(),pos.getY() + 1, pos.getZ()));
 
-                if (tileEntity != null) {
+                if (ejectBlockEntity != null) {
 
-                	IFluidHandler fluidHandler = tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, Direction.DOWN).orElse(null);
+                	IFluidHandler fluidHandler = ejectBlockEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, Direction.DOWN).orElse(null);
                 	
                 	if (fluidHandler != null) {
                 		int transferPerTick = this.getTransferPerTick();
@@ -132,7 +132,7 @@ public class WaterPumpTileEntity extends AbstractMachineTileEntity {
         map.put(new PowerSystemEnergyCommon(this) {
             @Override
             public int getBasePowerForOperation() {
-                return WaterPumpTileEntity.this.getBasePowerForOperation();
+                return WaterPumpBlockEntity.this.getBasePowerForOperation();
             }
         });
     }
@@ -175,7 +175,7 @@ public class WaterPumpTileEntity extends AbstractMachineTileEntity {
             @Override
             protected void onContentsChanged() {
                 super.onContentsChanged();
-                WaterPumpTileEntity.this.markDirty();
+                WaterPumpBlockEntity.this.markDirty();
             }
         };
     }

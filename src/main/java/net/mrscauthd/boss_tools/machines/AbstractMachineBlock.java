@@ -32,9 +32,9 @@ import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
-import net.mrscauthd.boss_tools.machines.tile.AbstractMachineTileEntity;
+import net.mrscauthd.boss_tools.machines.tile.AbstractMachineBlockEntity;
 
-public abstract class AbstractMachineBlock<T extends AbstractMachineTileEntity> extends Block implements EntityBlock {
+public abstract class AbstractMachineBlock<T extends AbstractMachineBlockEntity> extends Block implements EntityBlock {
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
@@ -116,10 +116,10 @@ public abstract class AbstractMachineBlock<T extends AbstractMachineTileEntity> 
 	@SuppressWarnings("deprecation")
 	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.getBlock() != newState.getBlock()) {
-			T tileEntity = this.getTileEntity(level, pos);
+			T blockEntity = this.getBlockEntity(level, pos);
 
-			if (tileEntity != null) {
-				Containers.dropContents(level, pos, tileEntity);
+			if (blockEntity != null) {
+				Containers.dropContents(level, pos, blockEntity);
 			}
 		}
 
@@ -130,10 +130,10 @@ public abstract class AbstractMachineBlock<T extends AbstractMachineTileEntity> 
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player entity, InteractionHand hand,
 			BlockHitResult raytrace) {
 		if (entity instanceof ServerPlayer) {
-			T tileEntity = this.getTileEntity(level, pos);
+			T blockEntity = this.getBlockEntity(level, pos);
 
-			if (tileEntity != null) {
-				NetworkHooks.openGui((ServerPlayer) entity, tileEntity, pos);
+			if (blockEntity != null) {
+				NetworkHooks.openGui((ServerPlayer) entity, blockEntity, pos);
 			}
 
 			return InteractionResult.CONSUME;
@@ -144,10 +144,10 @@ public abstract class AbstractMachineBlock<T extends AbstractMachineTileEntity> 
 	}
 
 	@SuppressWarnings("unchecked")
-	public T getTileEntity(Level level, BlockPos pos) {
+	public T getBlockEntity(Level level, BlockPos pos) {
 		BlockEntity blockEntity = level.getBlockEntity(pos);
 
-		if (blockEntity instanceof AbstractMachineTileEntity) {
+		if (blockEntity instanceof AbstractMachineBlockEntity) {
 			return (T) blockEntity;
 		}
 
@@ -182,15 +182,15 @@ public abstract class AbstractMachineBlock<T extends AbstractMachineTileEntity> 
 	
 	@Override
 	public <T2 extends BlockEntity> BlockEntityTicker<T2> getTicker(Level level, BlockState state, BlockEntityType<T2> type) {
-		return (l, p, s, e) -> { if (e instanceof AbstractMachineTileEntity) { ((AbstractMachineTileEntity) e).tick(); } };
+		return (l, p, s, e) -> { if (e instanceof AbstractMachineBlockEntity) { ((AbstractMachineBlockEntity) e).tick(); } };
 	}
 
 	@Override
 	public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
 		BlockEntity blockEntity = level.getBlockEntity(pos);
 
-		if (blockEntity instanceof AbstractMachineTileEntity) {
-			return AbstractContainerMenu.getRedstoneSignalFromContainer((AbstractMachineTileEntity) blockEntity);
+		if (blockEntity instanceof AbstractMachineBlockEntity) {
+			return AbstractContainerMenu.getRedstoneSignalFromContainer((AbstractMachineBlockEntity) blockEntity);
 		} else {
 			return 0;
 		}

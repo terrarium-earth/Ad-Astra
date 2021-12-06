@@ -7,12 +7,12 @@ import net.mrscauthd.boss_tools.BossToolsMod;
 public abstract class PowerSystemEnergy extends PowerSystem {
 	private final IEnergyStorage energyStorage;
 
-	public PowerSystemEnergy(AbstractMachineTileEntity tileEntity) {
-		this(tileEntity, tileEntity.getPrimaryEnergyStorage());
+	public PowerSystemEnergy(AbstractMachineBlockEntity blockEntity) {
+		this(blockEntity, blockEntity.getPrimaryEnergyStorage());
 	}
 
-	public PowerSystemEnergy(AbstractMachineTileEntity tileEntity, IEnergyStorage energyStorage) {
-		super(tileEntity);
+	public PowerSystemEnergy(AbstractMachineBlockEntity blockEntity, IEnergyStorage energyStorage) {
+		super(blockEntity);
 		this.energyStorage = energyStorage;
 	}
 

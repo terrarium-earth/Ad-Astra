@@ -15,7 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.mrscauthd.boss_tools.gauge.GaugeValueHelper;
 import net.mrscauthd.boss_tools.gauge.GaugeTextHelper;
 import net.mrscauthd.boss_tools.gui.helper.GuiHelper;
-import net.mrscauthd.boss_tools.machines.OxygenLoaderBlock.CustomTileEntity;
+import net.mrscauthd.boss_tools.machines.OxygenLoaderBlock.OxygenLoaderBlockEntity;
 
 @OnlyIn(Dist.CLIENT)
 public class OxygenLoaderGuiWindow extends AbstractContainerScreen<OxygenLoaderGui.GuiContainer> {
@@ -31,11 +31,8 @@ public class OxygenLoaderGuiWindow extends AbstractContainerScreen<OxygenLoaderG
 	public static final int ENERGY_LEFT = 144;
 	public static final int ENERGY_TOP = 21;
 
-	private CustomTileEntity tileEntity;
-
 	public OxygenLoaderGuiWindow(OxygenLoaderGui.GuiContainer container, Inventory inventory, Component text) {
 		super(container, inventory, text);
-		this.tileEntity = container.getTileEntity();
 		this.imageWidth = 177;
 		this.imageHeight = 172;
 		this.inventoryLabelY = this.imageHeight - 92;
@@ -47,36 +44,32 @@ public class OxygenLoaderGuiWindow extends AbstractContainerScreen<OxygenLoaderG
 		super.render(ms, mouseX, mouseY, partialTicks);
 		this.renderTooltip(ms, mouseX, mouseY);
 
-		CustomTileEntity tileEntity = (CustomTileEntity) this.getTileEntity();
+		OxygenLoaderBlockEntity blockEntity = (OxygenLoaderBlockEntity) this.getMenu().getBlockEntity();
 
 		if (GuiHelper.isHover(this.getInputTankBounds(), mouseX, mouseY)) {
 
-			this.renderTooltip(ms, GaugeTextHelper.getStorageText(GaugeValueHelper.getFluid(tileEntity.getInputTank())).build(), mouseX, mouseY);
+			this.renderTooltip(ms, GaugeTextHelper.getStorageText(GaugeValueHelper.getFluid(blockEntity.getInputTank())).build(), mouseX, mouseY);
 		} else if (GuiHelper.isHover(this.getOutputTankBounds(), mouseX, mouseY)) {
 
-			this.renderTooltip(ms, GaugeTextHelper.getStorageText(GaugeValueHelper.getOxygen(tileEntity.getOutputTank())).build(), mouseX, mouseY);
+			this.renderTooltip(ms, GaugeTextHelper.getStorageText(GaugeValueHelper.getOxygen(blockEntity.getOutputTank())).build(), mouseX, mouseY);
 		} else if (GuiHelper.isHover(this.getEnergyBounds(), mouseX, mouseY)) {
 
-			this.renderTooltip(ms, GaugeTextHelper.getStorageText(GaugeValueHelper.getEnergy(tileEntity)).build(), mouseX, mouseY);
+			this.renderTooltip(ms, GaugeTextHelper.getStorageText(GaugeValueHelper.getEnergy(blockEntity)).build(), mouseX, mouseY);
 		}
 	}
 
 	@Override
 	protected void renderBg(PoseStack ms, float p_97788_, int p_97789_, int p_97790_) {
-		CustomTileEntity tileEntity = this.getTileEntity();
+		OxygenLoaderBlockEntity blockEntity = this.getMenu().getBlockEntity();
 
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
 		this.minecraft.getTextureManager().bindForSetup(texture);
 		GuiComponent.blit(ms, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
 
-		GuiHelper.drawEnergy(ms, this.leftPos + ENERGY_LEFT, this.topPos + ENERGY_TOP, tileEntity.getPrimaryEnergyStorage());
-		GuiHelper.drawFluidTank(ms, this.leftPos + INPUT_TANK_LEFT, this.topPos + INPUT_TANK_TOP, tileEntity.getInputTank());
-		GuiHelper.drawOxygenTank(ms, this.leftPos + OUTPUT_TANK_LEFT, this.topPos + OUTPUT_TANK_TOP, tileEntity.getOutputTank());
-	}
-
-	public CustomTileEntity getTileEntity() {
-		return this.tileEntity;
+		GuiHelper.drawEnergy(ms, this.leftPos + ENERGY_LEFT, this.topPos + ENERGY_TOP, blockEntity.getPrimaryEnergyStorage());
+		GuiHelper.drawFluidTank(ms, this.leftPos + INPUT_TANK_LEFT, this.topPos + INPUT_TANK_TOP, blockEntity.getInputTank());
+		GuiHelper.drawOxygenTank(ms, this.leftPos + OUTPUT_TANK_LEFT, this.topPos + OUTPUT_TANK_TOP, blockEntity.getOutputTank());
 	}
 
 	public Rect2i getInputTankBounds() {

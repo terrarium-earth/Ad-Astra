@@ -3,15 +3,15 @@ package net.mrscauthd.boss_tools.gui.screens.nasaworkbench;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.mrscauthd.boss_tools.machines.NASAWorkbenchBlock.CustomTileEntity;
+import net.mrscauthd.boss_tools.machines.NASAWorkbenchBlock.NASAWorkbenchBlockEntity;
 
 public class NasaWorkbenchResultSlot extends Slot {
 
-	private final CustomTileEntity tileEntity;
+	private final NASAWorkbenchBlockEntity blockEntity;
 
-	public NasaWorkbenchResultSlot(Container inventory, int slotIndex, int xPos, int yPos, CustomTileEntity tileEntity) {
+	public NasaWorkbenchResultSlot(Container inventory, int slotIndex, int xPos, int yPos, NASAWorkbenchBlockEntity blockEntity) {
 		super(inventory, slotIndex, xPos, yPos);
-		this.tileEntity = tileEntity;
+		this.blockEntity = blockEntity;
 	}
 
 	@Override
@@ -19,7 +19,7 @@ public class NasaWorkbenchResultSlot extends Slot {
 		return false;
 	}
 
-	public CustomTileEntity getTileEntity() {
-		return this.tileEntity;
+	public NASAWorkbenchBlockEntity getBlockEntity() {
+		return this.blockEntity;
 	}
 }

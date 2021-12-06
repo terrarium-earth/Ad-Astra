@@ -13,7 +13,7 @@ import net.mrscauthd.boss_tools.ModInnet;
 import net.mrscauthd.boss_tools.crafting.BossToolsRecipeTypes;
 import net.mrscauthd.boss_tools.crafting.ItemStackToItemStackRecipeType;
 import net.mrscauthd.boss_tools.gui.screens.compressor.CompressorGui;
-import net.mrscauthd.boss_tools.machines.tile.ItemStackToItemStackTileEntity;
+import net.mrscauthd.boss_tools.machines.tile.ItemStackToItemStackBlockEntity;
 import net.mrscauthd.boss_tools.machines.tile.NamedComponentRegistry;
 import net.mrscauthd.boss_tools.machines.tile.PowerSystemEnergyCommon;
 import net.mrscauthd.boss_tools.machines.tile.PowerSystemRegistry;
@@ -21,7 +21,7 @@ import net.mrscauthd.boss_tools.machines.tile.PowerSystemRegistry;
 public class CompressorBlock {
 	public static final int ENERGY_PER_TICK = 1;
 
-	public static class CustomBlock extends AbstractMachineBlock<CustomTileEntity> {
+	public static class CustomBlock extends AbstractMachineBlock<CompressorBlockEntity> {
 
 		public CustomBlock() {
 			super(Block.Properties.of(Material.METAL).sound(SoundType.METAL).strength(5f, 1f).lightLevel(s -> 0).requiresCorrectToolForDrops());
@@ -38,14 +38,14 @@ public class CompressorBlock {
 		}
 
 		@Override
-		public CustomTileEntity newBlockEntity(BlockPos pos, BlockState state) {
-			return new CustomTileEntity(pos, state);
+		public CompressorBlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+			return new CompressorBlockEntity(pos, state);
 		}
 
 	}
 
-	public static class CustomTileEntity extends ItemStackToItemStackTileEntity {
-		public CustomTileEntity(BlockPos pos, BlockState state) {
+	public static class CompressorBlockEntity extends ItemStackToItemStackBlockEntity {
+		public CompressorBlockEntity(BlockPos pos, BlockState state) {
 			super(ModInnet.COMPRESSOR.get(), pos, state);
 		}
 
@@ -76,7 +76,7 @@ public class CompressorBlock {
 			map.put(new PowerSystemEnergyCommon(this) {
 				@Override
 				public int getBasePowerForOperation() {
-					return CustomTileEntity.this.getBasePowerForOperation();
+					return CompressorBlockEntity.this.getBasePowerForOperation();
 				}
 			});
 		}

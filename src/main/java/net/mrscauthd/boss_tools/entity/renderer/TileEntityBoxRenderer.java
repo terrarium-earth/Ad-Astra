@@ -21,7 +21,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.mrscauthd.boss_tools.machines.OxygenBubbleDistributorBlock;
 
 @OnlyIn(Dist.CLIENT)
-public class TileEntityBoxRenderer implements BlockEntityRenderer<OxygenBubbleDistributorBlock.CustomTileEntity> {
+public class TileEntityBoxRenderer implements BlockEntityRenderer<OxygenBubbleDistributorBlock.OxygenBubbleDistributorBlockEntity> {
 
     public static TextureAtlasSprite atlass = null;
 
@@ -30,12 +30,12 @@ public class TileEntityBoxRenderer implements BlockEntityRenderer<OxygenBubbleDi
     }
 
     @Override
-    public boolean shouldRenderOffScreen(OxygenBubbleDistributorBlock.CustomTileEntity p_112306_) {
+    public boolean shouldRenderOffScreen(OxygenBubbleDistributorBlock.OxygenBubbleDistributorBlockEntity p_112306_) {
         return true;
     }
 
     @Override
-    public void render(OxygenBubbleDistributorBlock.CustomTileEntity tileEntityIn, float partialTicks, PoseStack matrix, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
+    public void render(OxygenBubbleDistributorBlock.OxygenBubbleDistributorBlockEntity tileEntityIn, float partialTicks, PoseStack matrix, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
         if (tileEntityIn.isWorkingAreaVisible()) {
             VertexConsumer builder = bufferIn.getBuffer(RenderType.lines());
             AABB workingArea = tileEntityIn.getWorkingArea(BlockPos.ZERO, tileEntityIn.getRange());

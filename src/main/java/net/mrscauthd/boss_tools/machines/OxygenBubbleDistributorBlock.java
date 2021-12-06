@@ -26,8 +26,6 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.network.NetworkEvent;
 import net.mrscauthd.boss_tools.BossToolsMod;
@@ -38,7 +36,7 @@ import net.mrscauthd.boss_tools.crafting.BossToolsRecipeTypes;
 import net.mrscauthd.boss_tools.crafting.OxygenMakingRecipeAbstract;
 import net.mrscauthd.boss_tools.gui.screens.oxygenbubbledistributor.OxygenBubbleDistributorGui;
 import net.mrscauthd.boss_tools.machines.tile.NamedComponentRegistry;
-import net.mrscauthd.boss_tools.machines.tile.OxygenMakingTileEntity;
+import net.mrscauthd.boss_tools.machines.tile.OxygenMakingBlockEntity;
 import net.mrscauthd.boss_tools.machines.tile.PowerSystemEnergyCommon;
 import net.mrscauthd.boss_tools.machines.tile.PowerSystemRegistry;
 
@@ -57,7 +55,7 @@ public class OxygenBubbleDistributorBlock {
 	 */
 	public static final int MAX_TIMER = 4;
 
-	public static class CustomBlock extends AbstractMachineBlock<CustomTileEntity> {
+	public static class CustomBlock extends AbstractMachineBlock<OxygenBubbleDistributorBlockEntity> {
 
 		public CustomBlock() {
 			super(Block.Properties.of(Material.METAL).sound(SoundType.METAL).strength(5f, 1f).lightLevel(s -> 0).requiresCorrectToolForDrops());
@@ -73,15 +71,15 @@ public class OxygenBubbleDistributorBlock {
 		}
 
 		@Override
-		public CustomTileEntity newBlockEntity(BlockPos pos, BlockState state) {
-			return new CustomTileEntity(pos, state);
+		public OxygenBubbleDistributorBlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+			return new OxygenBubbleDistributorBlockEntity(pos, state);
 		}
 
 	}
 
-	public static class CustomTileEntity extends OxygenMakingTileEntity {
+	public static class OxygenBubbleDistributorBlockEntity extends OxygenMakingBlockEntity {
 
-		public CustomTileEntity(BlockPos pos, BlockState state) {
+		public OxygenBubbleDistributorBlockEntity(BlockPos pos, BlockState state) {
 			super(ModInnet.OXYGEN_BUBBLE_DISTRIBUTOR.get(), pos, state);
 			this.setWorkingAreaVisible(false);
 		}
@@ -94,12 +92,12 @@ public class OxygenBubbleDistributorBlock {
 
 			return super.canActivated();
 		}
-
-		@OnlyIn(Dist.CLIENT)
-		@Override
-		public double getMaxRenderDistanceSquared() {
-			return 256.0D;
-		}
+		
+//		@OnlyIn(Dist.CLIENT)
+//		@Override
+//		public double getMaxRenderDistanceSquared() {
+//			return 256.0D;
+//		}
 
 		@Override
 		public AABB getRenderBoundingBox() {
@@ -229,7 +227,7 @@ public class OxygenBubbleDistributorBlock {
 			map.put(new PowerSystemEnergyCommon(this) {
 				@Override
 				public int getBasePowerForOperation() {
-					return CustomTileEntity.this.getBasePowerForOperation();
+					return OxygenBubbleDistributorBlockEntity.this.getBasePowerForOperation();
 				}
 			});
 		}
@@ -289,10 +287,10 @@ public class OxygenBubbleDistributorBlock {
 
 		public static void handle(ChangeRangeMessage message, Supplier<NetworkEvent.Context> contextSupplier) {
 			NetworkEvent.Context context = contextSupplier.get();
-			CustomTileEntity tileEntity = (CustomTileEntity) context.getSender().level.getBlockEntity(message.getBlockPos());
-			int prev = tileEntity.getRange();
+			OxygenBubbleDistributorBlockEntity blockEntity = (OxygenBubbleDistributorBlockEntity) context.getSender().level.getBlockEntity(message.getBlockPos());
+			int prev = blockEntity.getRange();
 			int next = prev + (message.getDirection() ? +1 : -1);
-			tileEntity.setRange(next);
+			blockEntity.setRange(next);
 			context.setPacketHandled(true);
 		}
 	}
@@ -342,8 +340,8 @@ public class OxygenBubbleDistributorBlock {
 
 		public static void handle(ChangeWorkingAreaVisibleMessage message, Supplier<NetworkEvent.Context> contextSupplier) {
 			NetworkEvent.Context context = contextSupplier.get();
-			CustomTileEntity tileEntity = (CustomTileEntity) context.getSender().level.getBlockEntity(message.getBlockPos());
-			tileEntity.setWorkingAreaVisible(message.isVisible());
+			OxygenBubbleDistributorBlockEntity blockEntity = (OxygenBubbleDistributorBlockEntity) context.getSender().level.getBlockEntity(message.getBlockPos());
+			blockEntity.setWorkingAreaVisible(message.isVisible());
 			context.setPacketHandled(true);
 		}
 	}

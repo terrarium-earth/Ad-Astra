@@ -16,9 +16,9 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.mrscauthd.boss_tools.gauge.GaugeTextHelper;
 import net.mrscauthd.boss_tools.gauge.GaugeValueHelper;
-import net.mrscauthd.boss_tools.machines.tile.WaterPumpTileEntity;
+import net.mrscauthd.boss_tools.machines.tile.WaterPumpBlockEntity;
 
-public class WaterPump extends AbstractMachineBlock<WaterPumpTileEntity> {
+public class WaterPump extends AbstractMachineBlock<WaterPumpBlockEntity> {
 
     public WaterPump(Properties properties) {
         super(properties);
@@ -48,12 +48,12 @@ public class WaterPump extends AbstractMachineBlock<WaterPumpTileEntity> {
     @Override
 	public void appendHoverText(ItemStack itemstack, BlockGetter level, List<Component> list, TooltipFlag flag) {
 		super.appendHoverText(itemstack, level, list, flag);
-		list.add(GaugeTextHelper.buildBlockTooltip(GaugeTextHelper.getTransferPerTickText(GaugeValueHelper.getFluid(WaterPumpTileEntity.TRANSFER_PER_TICK))));
+		list.add(GaugeTextHelper.buildBlockTooltip(GaugeTextHelper.getTransferPerTickText(GaugeValueHelper.getFluid(WaterPumpBlockEntity.TRANSFER_PER_TICK))));
     }
 
     @Override
-    public WaterPumpTileEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new WaterPumpTileEntity(pos, state);
+    public WaterPumpBlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new WaterPumpBlockEntity(pos, state);
     }
     
     @Override

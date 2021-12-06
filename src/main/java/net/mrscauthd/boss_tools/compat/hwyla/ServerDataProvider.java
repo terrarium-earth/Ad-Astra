@@ -10,7 +10,7 @@ import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.gauge.GaugeValueHelper;
 import net.mrscauthd.boss_tools.gauge.GaugeValueSerializer;
 import net.mrscauthd.boss_tools.gauge.IGaugeValue;
-import net.mrscauthd.boss_tools.machines.tile.AbstractMachineTileEntity;
+import net.mrscauthd.boss_tools.machines.tile.AbstractMachineBlockEntity;
 
 public class ServerDataProvider /* implements IServerDataProvider<TileEntity>*/ {
 /*

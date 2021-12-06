@@ -22,12 +22,12 @@ import net.mrscauthd.boss_tools.ModInnet;
 import net.mrscauthd.boss_tools.gauge.GaugeTextHelper;
 import net.mrscauthd.boss_tools.gauge.GaugeValueHelper;
 import net.mrscauthd.boss_tools.gui.screens.solarpanel.SolarPanelGui;
-import net.mrscauthd.boss_tools.machines.tile.GeneratorTileEntity;
+import net.mrscauthd.boss_tools.machines.tile.GeneratorBlockEntity;
 
 public class SolarPanelBlock {
 	public static final int ENERGY_PER_TICK = 5;
 
-	public static class CustomBlock extends AbstractMachineBlock<CustomTileEntity> {
+	public static class CustomBlock extends AbstractMachineBlock<SolarPanelBlockEntity> {
 
 		public CustomBlock() {
 			super(Block.Properties.of(Material.METAL).sound(SoundType.METAL).strength(5f, 1f).lightLevel(s -> 1).requiresCorrectToolForDrops());
@@ -45,15 +45,15 @@ public class SolarPanelBlock {
 		}
 
 		@Override
-		public CustomTileEntity newBlockEntity(BlockPos pos, BlockState state) {
-			return new CustomTileEntity(pos, state);
+		public SolarPanelBlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+			return new SolarPanelBlockEntity(pos, state);
 		}
 
 	}
 
-	public static class CustomTileEntity extends GeneratorTileEntity {
+	public static class SolarPanelBlockEntity extends GeneratorBlockEntity {
 
-		public CustomTileEntity(BlockPos pos, BlockState state) {
+		public SolarPanelBlockEntity(BlockPos pos, BlockState state) {
 			super(ModInnet.SOLAR_PANEL.get(), pos, state);
 		}
 

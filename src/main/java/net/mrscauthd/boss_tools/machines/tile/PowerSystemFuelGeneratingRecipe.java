@@ -8,8 +8,8 @@ import net.mrscauthd.boss_tools.crafting.GeneratingRecipe;
 
 public class PowerSystemFuelGeneratingRecipe extends PowerSystemFuelBurnTime {
 
-	public PowerSystemFuelGeneratingRecipe(AbstractMachineTileEntity tileEntity, int slot) {
-		super(tileEntity, slot);
+	public PowerSystemFuelGeneratingRecipe(AbstractMachineBlockEntity blockEntity, int slot) {
+		super(blockEntity, slot);
 	}
 
 	public BossToolsRecipeType<? extends GeneratingRecipe> getRecipeType() {
@@ -22,7 +22,7 @@ public class PowerSystemFuelGeneratingRecipe extends PowerSystemFuelBurnTime {
 			return -1;
 		}
 
-		GeneratingRecipe recipe = this.getRecipeType().findFirst(this.getTileEntity().getLevel(), f -> f.test(fuel));
+		GeneratingRecipe recipe = this.getRecipeType().findFirst(this.getBlockEntity().getLevel(), f -> f.test(fuel));
 		return recipe != null ? recipe.getBurnTime() : -1;
 	}
 

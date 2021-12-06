@@ -58,7 +58,7 @@ import net.mrscauthd.boss_tools.gui.screens.waterpump.WaterPumpGui;
 import net.mrscauthd.boss_tools.item.*;
 import net.mrscauthd.boss_tools.itemtiers.SteelItemTier;
 import net.mrscauthd.boss_tools.machines.*;
-import net.mrscauthd.boss_tools.machines.tile.WaterPumpTileEntity;
+import net.mrscauthd.boss_tools.machines.tile.WaterPumpBlockEntity;
 import net.mrscauthd.boss_tools.entity.pygro.PygroEntity;
 import net.mrscauthd.boss_tools.flag.*;
 import net.mrscauthd.boss_tools.fluid.FuelFluid;
@@ -152,15 +152,15 @@ public class ModInnet {
     public static RegistryObject<Block> FLAG_YELLOW_BLOCK = BLOCKS.register("flag_yellow",() -> new FlagBlock(BlockBehaviour.Properties.of(Material.STONE).strength(1.0F, 1.0F).sound(SoundType.STONE).noOcclusion().lightLevel(s -> 1).isRedstoneConductor((bs, br, bp) -> false)));
 
     //Tile Entity RegistryObject
-    public static final RegistryObject<BlockEntityType<?>> FUEL_REFINERY = TILE_ENTITYS.register("fuel_refinery", () -> BlockEntityType.Builder.of(FuelRefineryBlock.CustomTileEntity::new,ModInnet.FUEL_REFINERY_BLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<?>> FUEL_REFINERY = TILE_ENTITYS.register("fuel_refinery", () -> BlockEntityType.Builder.of(FuelRefineryBlock.FuelRefineryBlockEntity::new,ModInnet.FUEL_REFINERY_BLOCK.get()).build(null));
     public static final RegistryObject<BlockEntityType<?>> BLAST_FURNACE = TILE_ENTITYS.register("blast_furnace", () -> BlockEntityType.Builder.of(BlastingFurnaceBlock.CustomTileEntity::new,ModInnet.BLAST_FURNACE_BLOCK.get()).build(null));
-    public static final RegistryObject<BlockEntityType<?>> COMPRESSOR = TILE_ENTITYS.register("compressor", () -> BlockEntityType.Builder.of(CompressorBlock.CustomTileEntity::new,ModInnet.COMPRESSOR_BLOCK.get()).build(null));
-    public static final RegistryObject<BlockEntityType<?>> COAL_GENERATOR = TILE_ENTITYS.register("coal_generator", () -> BlockEntityType.Builder.of(CoalGeneratorBlock.CustomTileEntity::new,ModInnet.COAL_GENERATOR_BLOCK.get()).build(null));
-    public static final RegistryObject<BlockEntityType<?>> OXYGEN_LOADER = TILE_ENTITYS.register("oxygen_loader", () -> BlockEntityType.Builder.of(OxygenLoaderBlock.CustomTileEntity::new,ModInnet.OXYGEN_LOADER_BLOCK.get()).build(null));
-    public static final RegistryObject<BlockEntityType<?>> SOLAR_PANEL = TILE_ENTITYS.register("solar_panel", () -> BlockEntityType.Builder.of(SolarPanelBlock.CustomTileEntity::new,ModInnet.SOLAR_PANEL_BLOCK.get()).build(null));
-    public static final RegistryObject<BlockEntityType<?>> NASA_WORKBENCH = TILE_ENTITYS.register("nasa_workbench", () -> BlockEntityType.Builder.of(NASAWorkbenchBlock.CustomTileEntity::new,ModInnet.NASA_WORKBENCH_BLOCK.get()).build(null));
-    public static final RegistryObject<BlockEntityType<OxygenBubbleDistributorBlock.CustomTileEntity>> OXYGEN_BUBBLE_DISTRIBUTOR = TILE_ENTITYS.register("oxygen_bubble_distributor", () -> BlockEntityType.Builder.of(OxygenBubbleDistributorBlock.CustomTileEntity::new,ModInnet.OXYGEN_BUBBLE_DISTRIBUTOR_BLOCK.get()).build(null));
-    public static final RegistryObject<BlockEntityType<?>> WATER_PUMP = TILE_ENTITYS.register("water_pump", () -> BlockEntityType.Builder.of(WaterPumpTileEntity::new,ModInnet.WATER_PUMP_BLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<?>> COMPRESSOR = TILE_ENTITYS.register("compressor", () -> BlockEntityType.Builder.of(CompressorBlock.CompressorBlockEntity::new,ModInnet.COMPRESSOR_BLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<?>> COAL_GENERATOR = TILE_ENTITYS.register("coal_generator", () -> BlockEntityType.Builder.of(CoalGeneratorBlock.CoalGeneratorBlockEntity::new,ModInnet.COAL_GENERATOR_BLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<?>> OXYGEN_LOADER = TILE_ENTITYS.register("oxygen_loader", () -> BlockEntityType.Builder.of(OxygenLoaderBlock.OxygenLoaderBlockEntity::new,ModInnet.OXYGEN_LOADER_BLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<?>> SOLAR_PANEL = TILE_ENTITYS.register("solar_panel", () -> BlockEntityType.Builder.of(SolarPanelBlock.SolarPanelBlockEntity::new,ModInnet.SOLAR_PANEL_BLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<?>> NASA_WORKBENCH = TILE_ENTITYS.register("nasa_workbench", () -> BlockEntityType.Builder.of(NASAWorkbenchBlock.NASAWorkbenchBlockEntity::new,ModInnet.NASA_WORKBENCH_BLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<OxygenBubbleDistributorBlock.OxygenBubbleDistributorBlockEntity>> OXYGEN_BUBBLE_DISTRIBUTOR = TILE_ENTITYS.register("oxygen_bubble_distributor", () -> BlockEntityType.Builder.of(OxygenBubbleDistributorBlock.OxygenBubbleDistributorBlockEntity::new,ModInnet.OXYGEN_BUBBLE_DISTRIBUTOR_BLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<?>> WATER_PUMP = TILE_ENTITYS.register("water_pump", () -> BlockEntityType.Builder.of(WaterPumpBlockEntity::new,ModInnet.WATER_PUMP_BLOCK.get()).build(null));
 
 
     //Tile Entitys Flags

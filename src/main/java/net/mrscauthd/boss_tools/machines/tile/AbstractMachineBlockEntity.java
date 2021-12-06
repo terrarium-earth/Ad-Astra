@@ -59,7 +59,7 @@ import net.mrscauthd.boss_tools.crafting.FluidIngredient;
 import net.mrscauthd.boss_tools.gauge.GaugeValueHelper;
 import net.mrscauthd.boss_tools.gauge.IGaugeValue;
 
-public abstract class AbstractMachineTileEntity extends RandomizableContainerBlockEntity implements WorldlyContainer, IEnergyStorageHolder {
+public abstract class AbstractMachineBlockEntity extends RandomizableContainerBlockEntity implements WorldlyContainer, IEnergyStorageHolder {
 
 	public static final String KEY_ACTIVATED = "activated";
 
@@ -72,7 +72,7 @@ public abstract class AbstractMachineTileEntity extends RandomizableContainerBlo
 
 	private boolean processedInThisTick = false;
 
-	public AbstractMachineTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+	public AbstractMachineBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
 
 		this.selectedPrimaries = new HashMap<>();

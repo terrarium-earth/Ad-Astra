@@ -13,7 +13,7 @@ import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.mrscauthd.boss_tools.capability.EnergyStorageExtractaOnly;
 
-public abstract class GeneratorTileEntity extends AbstractMachineTileEntity {
+public abstract class GeneratorBlockEntity extends AbstractMachineBlockEntity {
 
 	public static final String KEY_GENERATING = "generating";
 
@@ -22,7 +22,7 @@ public abstract class GeneratorTileEntity extends AbstractMachineTileEntity {
 
 	private int generatingCache;
 
-	public GeneratorTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+	public GeneratorBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
 	}
 

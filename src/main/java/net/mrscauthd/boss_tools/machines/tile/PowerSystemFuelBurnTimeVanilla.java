@@ -7,8 +7,8 @@ import net.minecraftforge.common.ForgeHooks;
 
 public abstract class PowerSystemFuelBurnTimeVanilla extends PowerSystemFuelBurnTime {
 
-	public PowerSystemFuelBurnTimeVanilla(AbstractMachineTileEntity tileEntity, int slot) {
-		super(tileEntity, slot);
+	public PowerSystemFuelBurnTimeVanilla(AbstractMachineBlockEntity blockEntity, int slot) {
+		super(blockEntity, slot);
 	}
 
 	public abstract RecipeType<?> getRecipeType();

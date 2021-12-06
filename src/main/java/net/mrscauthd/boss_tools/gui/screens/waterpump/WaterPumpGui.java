@@ -9,40 +9,40 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.IContainerFactory;
 import net.mrscauthd.boss_tools.ModInnet;
 import net.mrscauthd.boss_tools.gui.helper.ContainerHelper;
-import net.mrscauthd.boss_tools.machines.tile.WaterPumpTileEntity;
+import net.mrscauthd.boss_tools.machines.tile.WaterPumpBlockEntity;
 
 public class WaterPumpGui {
 
 	public static class GuiContainerFactory implements IContainerFactory<GuiContainer> {
 		public GuiContainer create(int id, Inventory inv, FriendlyByteBuf extraData) {
 			BlockPos pos = extraData.readBlockPos();
-			WaterPumpTileEntity tileEntity = (WaterPumpTileEntity) inv.player.level.getBlockEntity(pos);
-			return new GuiContainer(id, inv, tileEntity);
+			WaterPumpBlockEntity blockEntity = (WaterPumpBlockEntity) inv.player.level.getBlockEntity(pos);
+			return new GuiContainer(id, inv, blockEntity);
 		}
 	}
 
 	public static class GuiContainer extends AbstractContainerMenu {
-		private final WaterPumpTileEntity tileEntity;
+		private final WaterPumpBlockEntity blockEntity;
 
-		public GuiContainer(int id, Inventory inv, WaterPumpTileEntity tileEntity) {
+		public GuiContainer(int id, Inventory inv, WaterPumpBlockEntity blockEntity) {
 			super(ModInnet.WATER_PUMP_GUI.get(), id);
-			this.tileEntity = tileEntity;
+			this.blockEntity = blockEntity;
 
 			ContainerHelper.addInventorySlots(this, inv, 8, 90, this::addSlot);
 		}
 
-		public WaterPumpTileEntity getTileEntity() {
-			return this.tileEntity;
+		public WaterPumpBlockEntity getBlockEntity() {
+			return this.blockEntity;
 		}
 
 		@Override
 		public boolean stillValid(Player p_38874_) {
-			return !this.getTileEntity().isRemoved();
+			return !this.getBlockEntity().isRemoved();
 		}
 
 		@Override
 		public ItemStack quickMoveStack(Player playerIn, int index) {
-			return ContainerHelper.transferStackInSlot(this, playerIn, index, this.getTileEntity(), this::moveItemStackTo);
+			return ContainerHelper.transferStackInSlot(this, playerIn, index, this.getBlockEntity(), this::moveItemStackTo);
 		}
 	}
 }

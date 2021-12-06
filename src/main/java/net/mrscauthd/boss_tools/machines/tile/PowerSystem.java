@@ -15,10 +15,10 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.mrscauthd.boss_tools.gauge.IGaugeValue;
 
 public abstract class PowerSystem implements INBTSerializable<CompoundTag> {
-	private final AbstractMachineTileEntity tileEntity;
+	private final AbstractMachineBlockEntity blockEntity;
 
-	public PowerSystem(AbstractMachineTileEntity tileEntity) {
-		this.tileEntity = tileEntity;
+	public PowerSystem(AbstractMachineBlockEntity blockEntity) {
+		this.blockEntity = blockEntity;
 	}
 
 	public List<IGaugeValue> getGaugeValues() {
@@ -27,12 +27,12 @@ public abstract class PowerSystem implements INBTSerializable<CompoundTag> {
 
 	public int getPowerPerTick() {
 		int base = this.getBasePowerPerTick();
-		return this.getTileEntity().getPowerPerTick(this, base);
+		return this.getBlockEntity().getPowerPerTick(this, base);
 	}
 
 	public int getPowerForOperation() {
 		int base = this.getBasePowerForOperation();
-		return this.getTileEntity().getPowerForOperation(this, base);
+		return this.getBlockEntity().getPowerForOperation(this, base);
 	}
 
 	public boolean isPowerEnoughForOperation() {
@@ -107,8 +107,8 @@ public abstract class PowerSystem implements INBTSerializable<CompoundTag> {
 		return false;
 	}
 
-	public final AbstractMachineTileEntity getTileEntity() {
-		return this.tileEntity;
+	public final AbstractMachineBlockEntity getBlockEntity() {
+		return this.blockEntity;
 	}
 
 	public void update() {

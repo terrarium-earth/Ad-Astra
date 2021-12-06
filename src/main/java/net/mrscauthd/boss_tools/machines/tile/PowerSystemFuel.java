@@ -22,8 +22,8 @@ public abstract class PowerSystemFuel extends PowerSystem {
 	private StackCacher itemStackCacher;
 	private int cachedFuel;
 
-	public PowerSystemFuel(AbstractMachineTileEntity tileEntity, int slot) {
-		super(tileEntity);
+	public PowerSystemFuel(AbstractMachineBlockEntity blockEntity, int slot) {
+		super(blockEntity);
 
 		this.slot = slot;
 
@@ -45,7 +45,7 @@ public abstract class PowerSystemFuel extends PowerSystem {
 
 		if (!simulate) {
 			this.fuel += received;
-			this.getTileEntity().markDirty();
+			this.getBlockEntity().markDirty();
 		}
 
 		return received;
@@ -57,7 +57,7 @@ public abstract class PowerSystemFuel extends PowerSystem {
 
 		if (!simulate) {
 			this.fuel -= extracted;
-			this.getTileEntity().markDirty();
+			this.getBlockEntity().markDirty();
 		}
 
 		return extracted;
@@ -74,7 +74,7 @@ public abstract class PowerSystemFuel extends PowerSystem {
 	}
 
 	public boolean canFeed(boolean spareForNextTick, ItemStack fuel) {
-		return this.getTileEntity().hasSpaceInOutput();
+		return this.getBlockEntity().hasSpaceInOutput();
 	}
 
 	@Override
@@ -165,7 +165,7 @@ public abstract class PowerSystemFuel extends PowerSystem {
 	}
 
 	public IItemHandlerModifiable getItemHandler() {
-		return this.getTileEntity().getItemHandler();
+		return this.getBlockEntity().getItemHandler();
 	}
 
 	public int getSlot() {

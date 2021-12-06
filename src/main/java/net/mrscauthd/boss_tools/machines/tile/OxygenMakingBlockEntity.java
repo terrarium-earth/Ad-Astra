@@ -29,7 +29,7 @@ import net.mrscauthd.boss_tools.gauge.GaugeValueHelper;
 import net.mrscauthd.boss_tools.gauge.IGaugeValue;
 import net.mrscauthd.boss_tools.inventory.StackCacher;
 
-public abstract class OxygenMakingTileEntity extends AbstractMachineTileEntity {
+public abstract class OxygenMakingBlockEntity extends AbstractMachineBlockEntity {
 	public static final int TANK_CAPACITY = 3000;
 	public static final int TRANSFER_PER_TICK = 256;
 	public static final ResourceLocation TANK_INPUT = new ResourceLocation(BossToolsMod.ModId, "input");
@@ -43,7 +43,7 @@ public abstract class OxygenMakingTileEntity extends AbstractMachineTileEntity {
 	private StackCacher recipeCacher;
 	private OxygenMakingRecipeAbstract cachedRecipe;
 
-	public OxygenMakingTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+	public OxygenMakingBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
 
 		this.recipeCacher = new StackCacher();
@@ -93,7 +93,7 @@ public abstract class OxygenMakingTileEntity extends AbstractMachineTileEntity {
 			@Override
 			protected void onContentsChanged() {
 				super.onContentsChanged();
-				OxygenMakingTileEntity.this.markDirty();
+				OxygenMakingBlockEntity.this.markDirty();
 			}
 		};
 	}
@@ -102,7 +102,7 @@ public abstract class OxygenMakingTileEntity extends AbstractMachineTileEntity {
 		return new OxygenStorage(new IOxygenStorageHolder() {
 			@Override
 			public void onOxygenChanged(IOxygenStorage oxygenStorage, int oxygenDelta) {
-				OxygenMakingTileEntity.this.markDirty();
+				OxygenMakingBlockEntity.this.markDirty();
 			}
 		}, this.getInitialTankCapacity(name));
 	}

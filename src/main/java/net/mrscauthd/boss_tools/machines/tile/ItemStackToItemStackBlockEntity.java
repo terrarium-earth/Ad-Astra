@@ -16,7 +16,7 @@ import net.mrscauthd.boss_tools.gauge.GaugeValueHelper;
 import net.mrscauthd.boss_tools.gauge.IGaugeValue;
 import net.mrscauthd.boss_tools.inventory.StackCacher;
 
-public abstract class ItemStackToItemStackTileEntity extends AbstractMachineTileEntity {
+public abstract class ItemStackToItemStackBlockEntity extends AbstractMachineBlockEntity {
 
 	public static final int SLOT_INGREDIENT = 0;
 	public static final int SLOT_OUTPUT = 1;
@@ -27,7 +27,7 @@ public abstract class ItemStackToItemStackTileEntity extends AbstractMachineTile
 	private StackCacher itemStackCacher;
 	private ItemStackToItemStackRecipe cachedRecipe = null;
 
-	public ItemStackToItemStackTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+	public ItemStackToItemStackBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
 
 		this.itemStackCacher = new StackCacher();

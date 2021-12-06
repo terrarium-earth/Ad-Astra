@@ -4,8 +4,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.mrscauthd.boss_tools.BossToolsMod;
 
 public class PowerSystemNone extends PowerSystem {
-	public PowerSystemNone(AbstractMachineTileEntity tileEntity) {
-		super(tileEntity);
+	public PowerSystemNone(AbstractMachineBlockEntity blockEntity) {
+		super(blockEntity);
 	}
 
 	@Override

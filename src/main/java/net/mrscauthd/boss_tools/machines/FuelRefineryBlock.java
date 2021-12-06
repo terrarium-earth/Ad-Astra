@@ -31,7 +31,7 @@ import net.mrscauthd.boss_tools.crafting.FuelRefiningRecipe;
 import net.mrscauthd.boss_tools.fluid.FluidUtil2;
 import net.mrscauthd.boss_tools.gui.screens.fuelrefinery.FuelRefineryGui;
 import net.mrscauthd.boss_tools.inventory.StackCacher;
-import net.mrscauthd.boss_tools.machines.tile.AbstractMachineTileEntity;
+import net.mrscauthd.boss_tools.machines.tile.AbstractMachineBlockEntity;
 import net.mrscauthd.boss_tools.machines.tile.NamedComponentRegistry;
 import net.mrscauthd.boss_tools.machines.tile.PowerSystemEnergyCommon;
 import net.mrscauthd.boss_tools.machines.tile.PowerSystemRegistry;
@@ -48,7 +48,7 @@ public class FuelRefineryBlock {
 	public static final int SLOT_OUTPUT_SOURCE = 3;
 
 	// Fuel Refinery Block
-	public static class CustomBlock extends AbstractMachineBlock<CustomTileEntity> {
+	public static class CustomBlock extends AbstractMachineBlock<FuelRefineryBlockEntity> {
 
 		public CustomBlock() {
 			super(Block.Properties.of(Material.METAL).sound(SoundType.METAL).strength(5f, 1f).lightLevel(s -> 0).requiresCorrectToolForDrops());
@@ -65,21 +65,21 @@ public class FuelRefineryBlock {
 		}
 
 		@Override
-		public CustomTileEntity newBlockEntity(BlockPos pos, BlockState state) {
-			return new CustomTileEntity(pos, state);
+		public FuelRefineryBlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+			return new FuelRefineryBlockEntity(pos, state);
 		}
 
 	}
 
 	// Fuel Refinery Tile Entity
-	public static class CustomTileEntity extends AbstractMachineTileEntity {
+	public static class FuelRefineryBlockEntity extends AbstractMachineBlockEntity {
 		private FluidTank inputTank;
 		private FluidTank outputTank;
 
 		private StackCacher recipeCacher;
 		private FuelRefiningRecipe cachedRecipe;
 
-		public CustomTileEntity(BlockPos pos, BlockState state) {
+		public FuelRefineryBlockEntity(BlockPos pos, BlockState state) {
 			super(ModInnet.FUEL_REFINERY.get(), pos, state);
 
 			this.recipeCacher = new StackCacher();
@@ -108,7 +108,7 @@ public class FuelRefineryBlock {
 				@Override
 				protected void onContentsChanged() {
 					super.onContentsChanged();
-					CustomTileEntity.this.markDirty();
+					FuelRefineryBlockEntity.this.markDirty();
 				}
 			};
 		}
@@ -119,7 +119,7 @@ public class FuelRefineryBlock {
 			map.put(new PowerSystemEnergyCommon(this) {
 				@Override
 				public int getBasePowerForOperation() {
-					return CustomTileEntity.this.getBasePowerForOperation();
+					return FuelRefineryBlockEntity.this.getBasePowerForOperation();
 				}
 			});
 		}

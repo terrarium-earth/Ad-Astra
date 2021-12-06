@@ -15,28 +15,28 @@ import net.mrscauthd.boss_tools.gui.helper.ContainerHelper;
 import net.mrscauthd.boss_tools.gui.helper.GridPlacer;
 import net.mrscauthd.boss_tools.gui.helper.RocketPartGridPlacer;
 import net.mrscauthd.boss_tools.inventory.RocketPartsItemHandler;
-import net.mrscauthd.boss_tools.machines.NASAWorkbenchBlock.CustomTileEntity;
+import net.mrscauthd.boss_tools.machines.NASAWorkbenchBlock.NASAWorkbenchBlockEntity;
 
 public class NasaWorkbenchGui {
 
 	public static class GuiContainerFactory implements IContainerFactory<GuiContainer> {
 		public GuiContainer create(int id, Inventory inv, FriendlyByteBuf extraData) {
 			BlockPos pos = extraData.readBlockPos();
-			CustomTileEntity tileEntity = (CustomTileEntity) inv.player.level.getBlockEntity(pos);
-			return new GuiContainer(id, inv, tileEntity);
+			NASAWorkbenchBlockEntity blockEntity = (NASAWorkbenchBlockEntity) inv.player.level.getBlockEntity(pos);
+			return new GuiContainer(id, inv, blockEntity);
 		}
 	}
 
 	public static class GuiContainer extends AbstractContainerMenu {
-		private CustomTileEntity tileEntity;
+		private NASAWorkbenchBlockEntity blockEntity;
 		private ResultContainer resultInventory;
 		private Slot resultSlot;
 		private int partSlotStart = 0;
 		private int partSlotEnd = 0;
 
-		public GuiContainer(int id, Inventory inv, CustomTileEntity tileEntity) {
+		public GuiContainer(int id, Inventory inv, NASAWorkbenchBlockEntity blockEntity) {
 			super(ModInnet.NASA_WORKBENCH_GUI.get(), id);
-			this.tileEntity = tileEntity;
+			this.blockEntity = blockEntity;
 
 			this.resultInventory = new ResultContainer() {
 				@Override
@@ -54,11 +54,11 @@ public class NasaWorkbenchGui {
 				}
 			};
 
-			this.resultSlot = this.addSlot(new NasaWorkbenchResultSlot(this.resultInventory, 0, 133, 74, tileEntity));
+			this.resultSlot = this.addSlot(new NasaWorkbenchResultSlot(this.resultInventory, 0, 133, 74, blockEntity));
 
 			this.partSlotStart = this.slots.size();
 
-			RocketPartsItemHandler partsItemHandler = tileEntity.getPartsItemHandler();
+			RocketPartsItemHandler partsItemHandler = blockEntity.getPartsItemHandler();
 			GridPlacer placer = new GridPlacer();
 			RocketPartGridPlacer.placeContainer(40, 18, 1, placer::placeBottom, ModInnet.ROCKET_PART_NOSE.get(), partsItemHandler, this::addSlot);
 			RocketPartGridPlacer.placeContainer(31, 36, 2, placer::placeBottom, ModInnet.ROCKET_PART_BODY.get(), partsItemHandler, this::addSlot);
@@ -73,10 +73,10 @@ public class NasaWorkbenchGui {
 		}
 
 		private void onExtractResult(ItemStack stack) {
-			CustomTileEntity tileEntity = this.getTileEntity();
+			NASAWorkbenchBlockEntity blockEntity = this.getBlockEntity();
 
-			if (!stack.isEmpty() && tileEntity.cacheRecipes() != null) {
-				tileEntity.consumeIngredient();
+			if (!stack.isEmpty() && blockEntity.cacheRecipes() != null) {
+				blockEntity.consumeIngredient();
 			}
 		}
 
@@ -84,24 +84,24 @@ public class NasaWorkbenchGui {
 		public void broadcastChanges() {
 			super.broadcastChanges();
 
-			WorkbenchingRecipe recipe = this.getTileEntity().cacheRecipes();
+			WorkbenchingRecipe recipe = this.getBlockEntity().cacheRecipes();
 
 			this.resultSlot.set(recipe != null ? recipe.getOutput() : ItemStack.EMPTY);
 		}
 
 		@Override
 		public boolean stillValid(Player p_38874_) {
-			return !this.getTileEntity().isRemoved();
+			return !this.getBlockEntity().isRemoved();
 		}
 
 		@Override
 		public ItemStack quickMoveStack(Player playerIn, int slotNumber) {
 			if (this.partSlotStart <= slotNumber && slotNumber < this.partSlotEnd) {
-				return ContainerHelper.transferStackInSlot(this, playerIn, slotNumber, slotNumber - this.partSlotStart, this.getTileEntity(), this::moveItemStackTo);
+				return ContainerHelper.transferStackInSlot(this, playerIn, slotNumber, slotNumber - this.partSlotStart, this.getBlockEntity(), this::moveItemStackTo);
 			} else if (slotNumber == this.resultSlot.index) {
 				Slot slot = this.getSlot(slotNumber);
 				ItemStack prev = slot.getItem().copy();
-				ItemStack itemStack = ContainerHelper.transferStackInSlot(this, playerIn, slotNumber, this.getTileEntity(), this::moveItemStackTo);
+				ItemStack itemStack = ContainerHelper.transferStackInSlot(this, playerIn, slotNumber, this.getBlockEntity(), this::moveItemStackTo);
 
 				if (slotNumber == this.resultSlot.index) {
 					ItemStack next = slot.getItem().copy();
@@ -119,12 +119,12 @@ public class NasaWorkbenchGui {
 
 				return itemStack;
 			} else {
-				return ContainerHelper.transferStackInSlot(this, playerIn, slotNumber, this.getTileEntity(), this::moveItemStackTo);
+				return ContainerHelper.transferStackInSlot(this, playerIn, slotNumber, this.getBlockEntity(), this::moveItemStackTo);
 			}
 		}
 
-		public CustomTileEntity getTileEntity() {
-			return this.tileEntity;
+		public NASAWorkbenchBlockEntity getBlockEntity() {
+			return this.blockEntity;
 		}
 
 		public ResultContainer getResultInventory() {

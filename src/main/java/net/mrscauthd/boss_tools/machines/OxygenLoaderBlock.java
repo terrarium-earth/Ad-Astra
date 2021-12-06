@@ -22,7 +22,7 @@ import net.mrscauthd.boss_tools.crafting.BossToolsRecipeTypes;
 import net.mrscauthd.boss_tools.crafting.OxygenMakingRecipeAbstract;
 import net.mrscauthd.boss_tools.gui.screens.oxygenloader.OxygenLoaderGui;
 import net.mrscauthd.boss_tools.machines.tile.NamedComponentRegistry;
-import net.mrscauthd.boss_tools.machines.tile.OxygenMakingTileEntity;
+import net.mrscauthd.boss_tools.machines.tile.OxygenMakingBlockEntity;
 import net.mrscauthd.boss_tools.machines.tile.PowerSystemEnergyCommon;
 import net.mrscauthd.boss_tools.machines.tile.PowerSystemRegistry;
 
@@ -31,7 +31,7 @@ public class OxygenLoaderBlock {
 	public static final int SLOT_OUTPUT_SINK = 2;
 	public static final int SLOT_OUTPUT_SOURCE = 3;
 
-	public static class CustomBlock extends AbstractMachineBlock<CustomTileEntity> {
+	public static class CustomBlock extends AbstractMachineBlock<OxygenLoaderBlockEntity> {
 
 		public CustomBlock() {
 			super(Block.Properties.of(Material.METAL).sound(SoundType.METAL).strength(5f, 1f).lightLevel(s -> 0).requiresCorrectToolForDrops());
@@ -48,15 +48,15 @@ public class OxygenLoaderBlock {
 		}
 
 		@Override
-		public CustomTileEntity newBlockEntity(BlockPos pos, BlockState state) {
-			return new CustomTileEntity(pos, state);
+		public OxygenLoaderBlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+			return new OxygenLoaderBlockEntity(pos, state);
 		}
 
 	}
 
-	public static class CustomTileEntity extends OxygenMakingTileEntity {
+	public static class OxygenLoaderBlockEntity extends OxygenMakingBlockEntity {
 
-		public CustomTileEntity(BlockPos pos, BlockState state) {
+		public OxygenLoaderBlockEntity(BlockPos pos, BlockState state) {
 			super(ModInnet.OXYGEN_LOADER.get(), pos, state);
 		}
 
@@ -124,7 +124,7 @@ public class OxygenLoaderBlock {
 			map.put(new PowerSystemEnergyCommon(this) {
 				@Override
 				public int getBasePowerForOperation() {
-					return CustomTileEntity.this.getBasePowerForOperation();
+					return OxygenLoaderBlockEntity.this.getBasePowerForOperation();
 				}
 			});
 		}

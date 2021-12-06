@@ -13,7 +13,7 @@ import net.mrscauthd.boss_tools.ModInnet;
 import net.mrscauthd.boss_tools.crafting.BossToolsRecipeTypes;
 import net.mrscauthd.boss_tools.crafting.ItemStackToItemStackRecipeType;
 import net.mrscauthd.boss_tools.gui.screens.blastfurnace.BlastFurnaceGui;
-import net.mrscauthd.boss_tools.machines.tile.ItemStackToItemStackTileEntity;
+import net.mrscauthd.boss_tools.machines.tile.ItemStackToItemStackBlockEntity;
 import net.mrscauthd.boss_tools.machines.tile.PowerSystemFuelBurnTimeVanilla;
 import net.mrscauthd.boss_tools.machines.tile.PowerSystemRegistry;
 
@@ -22,7 +22,7 @@ public class BlastingFurnaceBlock {
 	public static final int SLOT_FUEL = 2;
 
 	// Blast Furnace Block
-	public static class CustomBlock extends AbstractMachineBlock<CustomTileEntity> {
+	public static class CustomBlock extends AbstractMachineBlock<BlastingFurnaceBlockEntity> {
 
 		public CustomBlock() {
 			super(Block.Properties.of(Material.METAL).sound(SoundType.METAL).strength(5f, 1f).lightLevel(s -> 0).requiresCorrectToolForDrops());
@@ -39,16 +39,16 @@ public class BlastingFurnaceBlock {
 		}
 
 		@Override
-		public CustomTileEntity newBlockEntity(BlockPos pos, BlockState state) {
-			return new CustomTileEntity(pos, state);
+		public BlastingFurnaceBlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+			return new BlastingFurnaceBlockEntity(pos, state);
 		}
 		
 	}
 
-	public static class CustomTileEntity extends ItemStackToItemStackTileEntity {
+	public static class BlastingFurnaceBlockEntity extends ItemStackToItemStackBlockEntity {
 		private PowerSystemFuelBurnTimeVanilla powerSystemBurnTime;
 
-		public CustomTileEntity(BlockPos pos, BlockState state) {
+		public BlastingFurnaceBlockEntity(BlockPos pos, BlockState state) {
 			super(ModInnet.BLAST_FURNACE.get(), pos, state);
 		}
 
@@ -74,7 +74,7 @@ public class BlastingFurnaceBlock {
 			map.put(this.powerSystemBurnTime = new PowerSystemFuelBurnTimeVanilla(this, this.getFuelSlot()) {
 				@Override
 				public RecipeType<?> getRecipeType() {
-					return CustomTileEntity.this.getRecipeType();
+					return BlastingFurnaceBlockEntity.this.getRecipeType();
 				}
 			});
 		}

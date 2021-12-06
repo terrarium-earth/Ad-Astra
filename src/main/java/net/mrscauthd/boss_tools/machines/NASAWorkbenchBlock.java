@@ -1,15 +1,12 @@
 package net.mrscauthd.boss_tools.machines;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import com.mojang.math.Vector3d;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -24,6 +21,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -34,7 +32,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -53,7 +50,7 @@ import net.mrscauthd.boss_tools.gui.screens.nasaworkbench.NasaWorkbenchGui;
 import net.mrscauthd.boss_tools.inventory.ItemHandlerHelper2;
 import net.mrscauthd.boss_tools.inventory.RocketPartsItemHandler;
 import net.mrscauthd.boss_tools.inventory.StackCacher;
-import net.mrscauthd.boss_tools.machines.tile.AbstractMachineTileEntity;
+import net.mrscauthd.boss_tools.machines.tile.AbstractMachineBlockEntity;
 
 public class NASAWorkbenchBlock {
 
@@ -74,10 +71,10 @@ public class NASAWorkbenchBlock {
 		return getBasicPartOrders().stream().collect(Collectors.summingInt(p -> p.getSlots()));
 	}
 
-	public static class CustomBlock extends AbstractMachineBlock<CustomTileEntity> implements SimpleWaterloggedBlock {
+	public static class CustomBlock extends AbstractMachineBlock<NASAWorkbenchBlockEntity> implements SimpleWaterloggedBlock {
 
 		public CustomBlock() {
-			super(Block.Properties.of(Material.METAL).sound(SoundType.METAL).strength(5f, 1f).lightLevel(s -> 1).requiresCorrectToolForDrops().notSolid().setOpaque((bs, br, bp) -> false));
+			super(Block.Properties.of(Material.METAL).sound(SoundType.METAL).strength(5f, 1f).lightLevel(s -> 1).requiresCorrectToolForDrops().noOcclusion().isRedstoneConductor((bs, br, bp) -> false));
 		}
 		
 		@Override
@@ -126,37 +123,27 @@ public class NASAWorkbenchBlock {
 		
 		@SuppressWarnings("deprecation")
 		@Override
-		public BlockState updatePostPlacement(BlockState state, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
+		public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
 			if (state.getValue(BlockStateProperties.WATERLOGGED)) {
-				world.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+				level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
 			}
-			return super.updatePostPlacement(state, facing, facingState, world, currentPos, facingPos);
+			
+			return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
 		}
-
+		
 		@Override
-		public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
-			@SuppressWarnings("deprecation")
-			List<ItemStack> dropsOriginal = super.getDrops(state, builder);
-			if (!dropsOriginal.isEmpty()) {
-				return dropsOriginal;
-			} else {
-				return Collections.singletonList(new ItemStack(this));
-			}
-		}
-
-		@Override
-		public CustomTileEntity newBlockEntity(BlockPos pos, BlockState state) {
-			return new CustomTileEntity(pos, state);
+		public NASAWorkbenchBlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+			return new NASAWorkbenchBlockEntity(pos, state);
 		}
 
 		@Override
 		public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
-			CustomTileEntity tileentity = (CustomTileEntity) level.getBlockEntity(pos);
-			return tileentity.cacheRecipes() != null ? 15 : 0;
+			NASAWorkbenchBlockEntity blockEntity = (NASAWorkbenchBlockEntity) level.getBlockEntity(pos);
+			return blockEntity.cacheRecipes() != null ? 15 : 0;
 		}
 	}
 
-	public static class CustomTileEntity extends AbstractMachineTileEntity {
+	public static class NASAWorkbenchBlockEntity extends AbstractMachineBlockEntity {
 
 		private StackCacher itemStackCacher;
 		private WorkbenchingRecipe cachedRecipe;
@@ -168,7 +155,7 @@ public class NASAWorkbenchBlock {
 
 		private RocketPartsItemHandler partsItemHandler;
 
-		public CustomTileEntity(BlockPos pos, BlockState state) {
+		public NASAWorkbenchBlockEntity(BlockPos pos, BlockState state) {
 			super(ModInnet.NASA_WORKBENCH.get(), pos, state);
 
 			this.itemStackCacher = new StackCacher();
@@ -326,7 +313,7 @@ public class NASAWorkbenchBlock {
 				return;
 			}
 
-			IItemHandler bottomItemHandler = this.getBottomTileEntityItemHandler();
+			IItemHandler bottomItemHandler = this.getBottomBlockEntityItemHandler();
 
 			if (bottomItemHandler == null) {
 				return;
@@ -340,7 +327,7 @@ public class NASAWorkbenchBlock {
 			}
 		}
 
-		private IItemHandler getBottomTileEntityItemHandler() {
+		private IItemHandler getBottomBlockEntityItemHandler() {
 			BlockEntity bottomBlockEntity = this.getLevel().getBlockEntity(this.getBlockPos().below());
 
 			if (bottomBlockEntity != null) {

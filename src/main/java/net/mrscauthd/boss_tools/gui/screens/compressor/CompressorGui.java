@@ -11,8 +11,8 @@ import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.network.IContainerFactory;
 import net.mrscauthd.boss_tools.ModInnet;
 import net.mrscauthd.boss_tools.gui.helper.ContainerHelper;
-import net.mrscauthd.boss_tools.machines.CompressorBlock.CustomTileEntity;
-import net.mrscauthd.boss_tools.machines.tile.ItemStackToItemStackTileEntity;
+import net.mrscauthd.boss_tools.machines.CompressorBlock.CompressorBlockEntity;
+import net.mrscauthd.boss_tools.machines.tile.ItemStackToItemStackBlockEntity;
 import org.jetbrains.annotations.NotNull;
 
 public class CompressorGui {
@@ -20,22 +20,22 @@ public class CompressorGui {
 	public static class GuiContainerFactory implements IContainerFactory<GuiContainer> {
 		public GuiContainer create(int id, Inventory inv, FriendlyByteBuf extraData) {
 			BlockPos pos = extraData.readBlockPos();
-			CustomTileEntity tileEntity = (CustomTileEntity) inv.player.level.getBlockEntity(pos);
-			return new GuiContainer(id, inv, tileEntity);
+			CompressorBlockEntity blockEntity = (CompressorBlockEntity) inv.player.level.getBlockEntity(pos);
+			return new GuiContainer(id, inv, blockEntity);
 		}
 	}
 
 	public static class GuiContainer extends AbstractContainerMenu {
-		private CustomTileEntity tileEntity;
+		private CompressorBlockEntity blockEntity;
 
-		public GuiContainer(int id, Inventory inv, CustomTileEntity tileEntity) {
+		public GuiContainer(int id, Inventory inv, CompressorBlockEntity blockEntity) {
 			super(ModInnet.COMPRESSOR_GUI.get(), id);
-			this.tileEntity = tileEntity;
+			this.blockEntity = blockEntity;
 
-			IItemHandlerModifiable itemHandler = tileEntity.getItemHandler();
-			this.addSlot(new SlotItemHandler(itemHandler, CustomTileEntity.SLOT_INGREDIENT, 40, 37));
+			IItemHandlerModifiable itemHandler = blockEntity.getItemHandler();
+			this.addSlot(new SlotItemHandler(itemHandler, CompressorBlockEntity.SLOT_INGREDIENT, 40, 37));
 
-			this.addSlot(new SlotItemHandler(itemHandler, ItemStackToItemStackTileEntity.SLOT_OUTPUT, 92, 36) {
+			this.addSlot(new SlotItemHandler(itemHandler, ItemStackToItemStackBlockEntity.SLOT_OUTPUT, 92, 36) {
 				@Override
 				public boolean mayPlace(@NotNull ItemStack stack) {
 					return false;
@@ -44,18 +44,18 @@ public class CompressorGui {
 
 			ContainerHelper.addInventorySlots(this, inv, 8, 86, this::addSlot);
 		}
-		public CustomTileEntity getTileEntity() {
-			return this.tileEntity;
+		public CompressorBlockEntity getBlockEntity() {
+			return this.blockEntity;
 		}
 
 		@Override
 		public boolean stillValid(Player p_38874_) {
-			return !this.getTileEntity().isRemoved();
+			return !this.getBlockEntity().isRemoved();
 		}
 
 		@Override
 		public ItemStack quickMoveStack(Player playerIn, int index) {
-			return ContainerHelper.transferStackInSlot(this, playerIn, index, this.getTileEntity(), this::moveItemStackTo);
+			return ContainerHelper.transferStackInSlot(this, playerIn, index, this.getBlockEntity(), this::moveItemStackTo);
 		}
 	}
 }
