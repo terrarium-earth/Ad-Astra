@@ -1,48 +1,51 @@
 package net.mrscauthd.boss_tools.entity;
 
-import com.google.common.collect.Sets;
+import com.google.common.collect.Lists;
 import io.netty.buffer.Unpooled;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.INBT;
-import net.minecraft.network.IPacket;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.*;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.vehicle.DismountHelper;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 import net.minecraftforge.items.wrapper.EntityArmorInvWrapper;
 import net.minecraftforge.items.wrapper.EntityHandsInvWrapper;
+import net.minecraftforge.network.NetworkHooks;
 import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.ModInnet;
 import net.mrscauthd.boss_tools.events.Methodes;
@@ -51,46 +54,51 @@ import net.mrscauthd.boss_tools.gui.screens.rover.RoverGui;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Set;
+import java.util.List;
 
-public class RoverEntity extends CreatureEntity {
+public class RoverEntity extends PathfinderMob {
     private double speed = 0;
     private boolean forward = false;
 
-    public static final DataParameter<Integer> FUEL = EntityDataManager.createKey(RocketTier1Entity.class, DataSerializers.VARINT);
+    public static final EntityDataAccessor<Integer> FUEL = SynchedEntityData.defineId(RocketTier1Entity.class, EntityDataSerializers.INT);
 
 	public static final int FUEL_BUCKETS = 3;
 
-    public RoverEntity(EntityType<? extends CreatureEntity> type, World worldIn) {
+    public RoverEntity(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
-        this.dataManager.register(FUEL, 0);
+        this.entityData.define(FUEL, 0);
     }
 
-    public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-        return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 20);
+    public static AttributeSupplier.Builder setCustomAttributes() {
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 20);
     }
 
     @Override
-    public IPacket<?> createSpawnPacket() {
+    public Packet<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
-
     @Override
-    public boolean canBeLeashedTo(PlayerEntity player) {
-        return false;
-    }
-
-    public boolean canBePushed() {
+    public boolean canBeLeashed(Player p_21418_) {
         return false;
     }
 
     @Override
-    protected void collideWithEntity(Entity p_82167_1_) {
+    public boolean isPushable() {
+        return false;
     }
 
     @Override
-    public void applyEntityCollision(Entity entityIn) {
+    public boolean canBeCollidedWith() {
+        return true;
+    }
+
+    @Override
+    protected void doPush(Entity p_20971_) {
+    }
+
+    @Override
+    public void push(Entity p_21294_) {
     }
 
     @Deprecated
@@ -98,12 +106,8 @@ public class RoverEntity extends CreatureEntity {
         return true;
     }
 
-    public boolean canBeHitWithPotion() {
-        return false;
-    }
-
     @Override
-    protected boolean canTriggerWalking() {
+    public boolean isAffectedByPotions() {
         return false;
     }
 
@@ -113,17 +117,22 @@ public class RoverEntity extends CreatureEntity {
     }
 
     @Override
-    public CreatureAttribute getCreatureAttribute() {
-        return CreatureAttribute.UNDEFINED;
+    public MobType getMobType() {
+        return MobType.UNDEFINED;
     }
 
     @Override
-    public boolean canDespawn(double distanceToClosestPlayer) {
+    protected MovementEmission getMovementEmission() {
+        return MovementEmission.NONE;
+    }
+
+    @Override
+    public boolean removeWhenFarAway(double p_21542_) {
         return false;
     }
 
     @Override
-    public SoundEvent getHurtSound(DamageSource ds) {
+    protected SoundEvent getHurtSound(DamageSource p_21239_) {
         return null;
     }
 
@@ -132,122 +141,117 @@ public class RoverEntity extends CreatureEntity {
         return null;
     }
 
-    @OnlyIn(Dist.CLIENT)
-    public void applyOrientationToEntity(Entity entityToUpdate) {
-        this.applyYawToEntity(entityToUpdate);
+    @Override
+    public double getPassengersRidingOffset() {
+        return super.getPassengersRidingOffset() - 0.15;
     }
 
-    //Save Entity Dismount
+    @OnlyIn(Dist.CLIENT)
     @Override
-    public Vector3d func_230268_c_(LivingEntity livingEntity) {
-        Vector3d[] avector3d = new Vector3d[]{func_233559_a_((double)this.getWidth(), (double)livingEntity.getWidth(), livingEntity.rotationYaw), func_233559_a_((double)this.getWidth(), (double)livingEntity.getWidth(), livingEntity.rotationYaw - 22.5F), func_233559_a_((double)this.getWidth(), (double)livingEntity.getWidth(), livingEntity.rotationYaw + 22.5F), func_233559_a_((double)this.getWidth(), (double)livingEntity.getWidth(), livingEntity.rotationYaw - 45.0F), func_233559_a_((double)this.getWidth(), (double)livingEntity.getWidth(), livingEntity.rotationYaw + 45.0F)};
-        Set<BlockPos> set = Sets.newLinkedHashSet();
-        double d0 = this.getBoundingBox().maxY;
-        double d1 = this.getBoundingBox().minY - 0.5D;
-        BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
+    public void onPassengerTurned(Entity p_20320_) {
+        this.applyYawToEntity(p_20320_);
+    }
 
-        for(Vector3d vector3d : avector3d) {
-            blockpos$mutable.setPos(this.getPosX() + vector3d.x, d0, this.getPosZ() + vector3d.z);
-
-            for(double d2 = d0; d2 > d1; --d2) {
-                set.add(blockpos$mutable.toImmutable());
-                blockpos$mutable.move(Direction.DOWN);
+    @Override
+    public Vec3 getDismountLocationForPassenger(LivingEntity p_38357_) {
+        Vec3 vec3 = getCollisionHorizontalEscapeVector((double)(this.getBbWidth() * Mth.SQRT_OF_TWO), (double)p_38357_.getBbWidth(), p_38357_.getYRot());
+        double d0 = this.getX() + vec3.x;
+        double d1 = this.getZ() + vec3.z;
+        BlockPos blockpos = new BlockPos(d0, this.getBoundingBox().maxY, d1);
+        BlockPos blockpos1 = blockpos.below();
+        if (!this.level.isWaterAt(blockpos1)) {
+            List<Vec3> list = Lists.newArrayList();
+            double d2 = this.level.getBlockFloorHeight(blockpos);
+            if (DismountHelper.isBlockFloorValid(d2)) {
+                list.add(new Vec3(d0, (double)blockpos.getY() + d2, d1));
             }
-        }
 
-        for(BlockPos blockpos : set) {
-            if (!this.world.getFluidState(blockpos).isTagged(FluidTags.LAVA)) {
-                double d3 = this.world.func_242403_h(blockpos);
-                if (TransportationHelper.func_234630_a_(d3)) {
-                    Vector3d vector3d1 = Vector3d.copyCenteredWithVerticalOffset(blockpos, d3);
+            double d3 = this.level.getBlockFloorHeight(blockpos1);
+            if (DismountHelper.isBlockFloorValid(d3)) {
+                list.add(new Vec3(d0, (double)blockpos1.getY() + d3, d1));
+            }
 
-                    for(Pose pose : livingEntity.getAvailablePoses()) {
-                        AxisAlignedBB axisalignedbb = livingEntity.getPoseAABB(pose);
-                        if (TransportationHelper.func_234631_a_(this.world, livingEntity, axisalignedbb.offset(vector3d1))) {
-                            livingEntity.setPose(pose);
-                            return vector3d1;
-                        }
+            for(Pose pose : p_38357_.getDismountPoses()) {
+                for(Vec3 vec31 : list) {
+                    if (DismountHelper.canDismountTo(this.level, vec31, p_38357_, pose)) {
+                        p_38357_.setPose(pose);
+                        return vec31;
                     }
                 }
             }
         }
 
-        return new Vector3d(this.getPosX(), this.getBoundingBox().maxY, this.getPosZ());
+        return super.getDismountLocationForPassenger(p_38357_);
     }
 
     protected void applyYawToEntity(Entity entityToUpdate) {
-        entityToUpdate.setRenderYawOffset(this.rotationYaw);
-        float f = MathHelper.wrapDegrees(entityToUpdate.rotationYaw - this.rotationYaw);
-        float f1 = MathHelper.clamp(f, -105.0F, 105.0F);
-        entityToUpdate.prevRotationYaw += f1 - f;
-        entityToUpdate.rotationYaw += f1 - f;
-        entityToUpdate.setRotationYawHead(entityToUpdate.rotationYaw);
+        entityToUpdate.setYBodyRot(this.getYRot());
+        float f = Mth.wrapDegrees(entityToUpdate.getYRot() - this.getYRot());
+        float f1 = Mth.clamp(f, -105.0F, 105.0F);
+        entityToUpdate.yRotO += f1 - f;
+        entityToUpdate.setYRot(entityToUpdate.getYRot() + f1 - f);
+        entityToUpdate.setYHeadRot(entityToUpdate.getYRot());
     }
 
     @Override
     protected void removePassenger(Entity passenger) {
-        if (passenger.isSneaking() && !passenger.world.isRemote) {
-            if (passenger instanceof ServerPlayerEntity) {
-                this.setAIMoveSpeed(0f);
+        if (passenger.isCrouching() && !passenger.level.isClientSide) {
+            if (passenger instanceof ServerPlayer) {
+                this.setSpeed(0f);
             }
         }
         super.removePassenger(passenger);
     }
 
     @Override
-    public ItemStack getPickedResult(RayTraceResult target) {
+    public ItemStack getPickedResult(HitResult target) {
         ItemStack itemStack = new ItemStack(ModInnet.ROVER_ITEM.get(), 1);
-        itemStack.getOrCreateTag().putInt(BossToolsMod.ModId + ":fuel", this.getDataManager().get(FUEL));
+        itemStack.getOrCreateTag().putInt(BossToolsMod.ModId + ":fuel", this.entityData.get(FUEL));
 
         return itemStack;
     }
 
     @Override
-    public double getMountedYOffset() {
-        return super.getMountedYOffset() - 0.15;
-    }
-
-    @Override
-    public void onKillCommand() {
+    public void kill() {
         this.spawnRoverItem();
-        this.dropInventory();
-        this.remove();
+        this.dropEquipment();
+        this.remove(RemovalReason.DISCARDED);
     }
 
     @Override
-    public AxisAlignedBB getRenderBoundingBox() {
-        return new AxisAlignedBB(this.getPosX(),this.getPosY(),this.getPosZ(),this.getPosX(),this.getPosY(), this.getPosZ()).grow(4.5,4.5,4.5);
+    public AABB getBoundingBoxForCulling() {
+        return new AABB(this.getX(),this.getY(),this.getZ(),this.getX(),this.getY(), this.getZ()).inflate(4.5,4.5,4.5);
     }
 
     @Override
-    public boolean attackEntityFrom(DamageSource source, float amount) {
-        if (!source.isProjectile() && source.getTrueSource() != null && source.getTrueSource().isSneaking() && !this.isBeingRidden()) {
+    public boolean hurt(DamageSource source, float p_21017_) {
+        if (!source.isProjectile() && source.getEntity() != null && source.getEntity().isCrouching() && !this.isVehicle()) {
             this.spawnRoverItem();
-            this.dropInventory();
-            this.remove();
+            this.dropEquipment();
+            this.remove(RemovalReason.DISCARDED);
         }
 
         return false;
     }
 
     protected void spawnRoverItem() {
-        if (!world.isRemote()) {
+        if (!level.isClientSide) {
             ItemStack itemStack = new ItemStack(ModInnet.ROVER_ITEM.get(), 1);
-            itemStack.getOrCreateTag().putInt(BossToolsMod.ModId + ":fuel", this.getDataManager().get(FUEL));
+            itemStack.getOrCreateTag().putInt(BossToolsMod.ModId + ":fuel", this.getEntityData().get(FUEL));
 
-            ItemEntity entityToSpawn = new ItemEntity(world, this.getPosX(), this.getPosY(), this.getPosZ(), itemStack);
-            entityToSpawn.setPickupDelay(10);
-            world.addEntity(entityToSpawn);
+            ItemEntity entityToSpawn = new ItemEntity(level, this.getX(), this.getY(), this.getZ(), itemStack);
+            entityToSpawn.setPickUpDelay(10);
+            level.addFreshEntity(entityToSpawn);
         }
     }
 
     @Override
-    protected void dropInventory() {
-        super.dropInventory();
+    protected void dropEquipment() {
+        super.dropEquipment();
         for (int i = 0; i < inventory.getSlots(); ++i) {
             ItemStack itemstack = inventory.getStackInSlot(i);
             if (!itemstack.isEmpty() && !EnchantmentHelper.hasVanishingCurse(itemstack)) {
-                this.entityDropItem(itemstack);
+                this.spawnAtLocation(itemstack);
             }
         }
     }
@@ -274,51 +278,51 @@ public class RoverEntity extends CreatureEntity {
     }
 
     @Override
-    public void writeAdditional(CompoundNBT compound) {
-        super.writeAdditional(compound);
+    public void addAdditionalSaveData(CompoundTag compound) {
+        super.addAdditionalSaveData(compound);
         compound.put("InventoryCustom", inventory.serializeNBT());
 
-        compound.putInt("fuel", this.dataManager.get(FUEL));
+        compound.putInt("fuel", this.getEntityData().get(FUEL));
     }
 
     @Override
-    public void readAdditional(CompoundNBT compound) {
-        super.readAdditional(compound);
-        INBT inventoryCustom = compound.get("InventoryCustom");
-        if (inventoryCustom instanceof CompoundNBT) {
-            inventory.deserializeNBT((CompoundNBT) inventoryCustom);
+    public void readAdditionalSaveData(CompoundTag compound) {
+        super.readAdditionalSaveData(compound);
+        Tag inventoryCustom = compound.get("InventoryCustom");
+        if (inventoryCustom instanceof CompoundTag) {
+            inventory.deserializeNBT((CompoundTag) inventoryCustom);
         }
 
-        this.dataManager.set(FUEL, compound.getInt("fuel"));
+        this.entityData.set(FUEL, compound.getInt("fuel"));
     }
 
     @Override
-    public ActionResultType func_230254_b_(PlayerEntity sourceentity, Hand hand) {
-        super.func_230254_b_(sourceentity, hand);
-        ActionResultType retval = ActionResultType.func_233537_a_(this.world.isRemote());
+    protected InteractionResult mobInteract(Player player, InteractionHand hand) {
+        super.mobInteract(player, hand);
+        InteractionResult retval = InteractionResult.sidedSuccess(this.level.isClientSide);
 
-        if (sourceentity instanceof ServerPlayerEntity && sourceentity.isSneaking()) {
+        if (player instanceof ServerPlayer && player.isCrouching()) {
 
-            NetworkHooks.openGui((ServerPlayerEntity) sourceentity, new INamedContainerProvider() {
+            NetworkHooks.openGui((ServerPlayer) player, new MenuProvider() {
                 @Override
-                public ITextComponent getDisplayName() {
+                public Component getDisplayName() {
                     return RoverEntity.this.getDisplayName();
                 }
 
                 @Override
-                public Container createMenu(int id, PlayerInventory inventory, PlayerEntity player) {
-                    PacketBuffer packetBuffer = new PacketBuffer(Unpooled.buffer());
-                    packetBuffer.writeVarInt(RoverEntity.this.getEntityId());
+                public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
+                    FriendlyByteBuf packetBuffer = new FriendlyByteBuf(Unpooled.buffer());
+                    packetBuffer.writeVarInt(RoverEntity.this.getId());
                     return new RoverGui.GuiContainer(id, inventory, packetBuffer);
                 }
             }, buf -> {
-                buf.writeVarInt(this.getEntityId());
+                buf.writeVarInt(this.getId());
             });
 
             return retval;
         }
 
-        sourceentity.startRiding(this);
+        player.startRiding(this);
         return retval;
     }
 
@@ -333,8 +337,8 @@ public class RoverEntity extends CreatureEntity {
         //Fuel Load up
         if (Methodes.tagCheck(FluidUtil2.findBucketFluid(this.inventory.getStackInSlot(0).getItem()), ModInnet.FLUID_VEHICLE_FUEL_TAG)) {
 
-            if (this.dataManager.get(FUEL) <= 2000) {
-                this.getDataManager().set(FUEL, this.getDataManager().get(FUEL) + 1000);
+            if (this.entityData.get(FUEL) <= 2000) {
+                this.getEntityData().set(FUEL, this.getEntityData().get(FUEL) + 1000);
                 this.inventory.setStackInSlot(0, new ItemStack(Items.BUCKET));
             }
         }
@@ -343,42 +347,42 @@ public class RoverEntity extends CreatureEntity {
             return;
         }
 
-        if (!(this.getPassengers().get(0) instanceof PlayerEntity)) {
+        if (!(this.getPassengers().get(0) instanceof Player)) {
             return;
         }
 
-        if (this.areEyesInFluid(FluidTags.WATER)) {
+        if (this.isEyeInFluid(FluidTags.WATER)) {
             return;
         }
 
-        PlayerEntity passanger = (PlayerEntity) this.getPassengers().get(0);
+        Player passanger = (Player) this.getPassengers().get(0);
 
-        if (passanger.moveForward > 0.01 && this.getDataManager().get(FUEL) != 0) {
+        if (passanger.zza > 0.01 && this.getEntityData().get(FUEL) != 0) {
 
-            this.dataManager.set(FUEL, this.getDataManager().get(FUEL) - 1);
+            this.entityData.set(FUEL, this.getEntityData().get(FUEL) - 1);
             forward = true;
-        } else if (passanger.moveForward < -0.01 && this.getDataManager().get(FUEL) != 0) {
+        } else if (passanger.zza < -0.01 && this.getEntityData().get(FUEL) != 0) {
 
-            this.dataManager.set(FUEL, this.getDataManager().get(FUEL) - 1);
+            this.entityData.set(FUEL, this.getEntityData().get(FUEL) - 1);
             forward = false;
         }
     }
 
     @Override
-    public void travel(Vector3d dir) {
+    public void travel(Vec3 p_21280_) {
 
-        if (!this.getPassengers().isEmpty() && this.getPassengers().get(0) instanceof PlayerEntity) {
+        if (!this.getPassengers().isEmpty() && this.getPassengers().get(0) instanceof Player) {
 
-            PlayerEntity passanger = (PlayerEntity) this.getPassengers().get(0);
+            Player passanger = (Player) this.getPassengers().get(0);
 
-            this.jumpMovementFactor = this.getAIMoveSpeed() * 0.15F;
-            this.stepHeight = 1.0F;
+            this.flyingSpeed = this.getSpeed() * 0.15F;
+            this.maxUpStep = 1.0F;
 
-            double pmovement = passanger.moveForward;
+            double pmovement = passanger.zza;
 
-            if (pmovement == 0 || this.getDataManager().get(FUEL) == 0 || this.areEyesInFluid(FluidTags.WATER)) {
+            if (pmovement == 0 || this.getEntityData().get(FUEL) == 0 || this.isEyeInFluid(FluidTags.WATER)) {
                 pmovement = 0;
-                this.setAIMoveSpeed(0f);
+                this.setSpeed(0f);
 
                 if (speed != 0) {
                     if (speed > 0.02) {
@@ -387,30 +391,30 @@ public class RoverEntity extends CreatureEntity {
                 }
             }
 
-            if (this.forward && this.getDataManager().get(FUEL) != 0) {
-                if (this.getAIMoveSpeed() >= 0.01) {
+            if (this.forward && this.getEntityData().get(FUEL) != 0) {
+                if (this.getSpeed() >= 0.01) {
                     if (speed <= 0.32) {
                         speed = speed + 0.02;
                     }
                 }
 
-                if (this.getAIMoveSpeed() < 0.25) {
-                    this.setAIMoveSpeed(this.getAIMoveSpeed() + 0.02F);
+                if (this.getSpeed() < 0.25) {
+                    this.setSpeed(this.getSpeed() + 0.02F);
                 }
 
             }
 
             if (!this.forward) {
 
-                if (this.getDataManager().get(FUEL) != 0 && !this.areEyesInFluid(FluidTags.WATER)) {
+                if (this.getEntityData().get(FUEL) != 0 && !this.isEyeInFluid(FluidTags.WATER)) {
 
-                    if (this.getAIMoveSpeed() <= 0.04) {
-                        this.setAIMoveSpeed(this.getAIMoveSpeed() + 0.02f);
+                    if (this.getSpeed() <= 0.04) {
+                        this.setSpeed(this.getSpeed() + 0.02f);
                     }
                 }
 
-                if (this.getAIMoveSpeed() >= 0.08) {
-                    this.setAIMoveSpeed(0f);
+                if (this.getSpeed() >= 0.08) {
+                    this.setSpeed(0f);
                 }
             }
 
@@ -420,32 +424,32 @@ public class RoverEntity extends CreatureEntity {
                 this.setWellRotationMinus(8.0f, 0.8f);
             }
 
-            super.travel(new Vector3d(0, 0, pmovement));
+            super.travel(new Vec3(0, 0, pmovement));
             return;
         }
 
-        super.travel(new Vector3d(0, 0, 0));
+        super.travel(new Vec3(0, 0, 0));
     }
 
     public void setWellRotationMinus(float rotation1, float rotation2) {
-        this.prevLimbSwingAmount = this.limbSwingAmount;
-        double d1 = this.getPosX() - this.prevPosX;
-        double d0 = this.getPosZ() - this.prevPosZ;
-        float f1 = -MathHelper.sqrt(d1 * d1 + d0 * d0) * rotation1;
+        this.animationSpeedOld = this.animationSpeed;
+        double d1 = this.getX() - this.xo;
+        double d0 = this.getZ() - this.zo;
+        float f1 = -Mth.sqrt((float) (d1 * d1 + d0 * d0)) * rotation1;
         if (f1 > 1.0F)
             f1 = 1.0F;
-        this.limbSwingAmount += (f1 - this.limbSwingAmount) * rotation2;
-        this.limbSwing += this.limbSwingAmount;
+        this.animationSpeed += (f1 - this.animationSpeed) * rotation2;
+        this.animationPosition += this.animationSpeed;
     }
 
     public void setWellRotationPlus(float rotation1, float rotation2) {
-        this.prevLimbSwingAmount = this.limbSwingAmount;
-        double d1 = this.getPosX() - this.prevPosX;
-        double d0 = this.getPosZ() - this.prevPosZ;
-        float f1 = MathHelper.sqrt(d1 * d1 + d0 * d0) * rotation1;
+        this.animationSpeedOld = this.animationSpeed;
+        double d1 = this.getX() - this.xo;
+        double d0 = this.getZ() - this.zo;
+        float f1 = Mth.sqrt((float) (d1 * d1 + d0 * d0)) * rotation1;
         if (f1 > 1.0F)
             f1 = 1.0F;
-        this.limbSwingAmount += (f1 - this.limbSwingAmount) * rotation2;
-        this.limbSwing += this.limbSwingAmount;
+        this.animationSpeed += (f1 - this.animationSpeed) * rotation2;
+        this.animationPosition += this.animationSpeed;
     }
 }
