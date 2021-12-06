@@ -1,33 +1,36 @@
 package net.mrscauthd.boss_tools.item;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUseContext;
-import net.minecraft.util.*;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.IServerWorld;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.ModInnet;
 import net.mrscauthd.boss_tools.block.RocketLaunchPad;
 import net.mrscauthd.boss_tools.entity.RocketTier3Entity;
 import net.mrscauthd.boss_tools.gauge.GaugeTextHelper;
 import net.mrscauthd.boss_tools.gauge.GaugeValueHelper;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 public class Tier3RocketItem extends Item {
 
@@ -39,26 +42,26 @@ public class Tier3RocketItem extends Item {
     }
 
     @Override
-    public void addInformation(ItemStack itemstack, World world, List<ITextComponent> list, ITooltipFlag flag) {
-        super.addInformation(itemstack, world, list, flag);
+    public void appendHoverText(ItemStack itemstack, @Nullable Level world, List<Component> list, TooltipFlag flag) {
+        super.appendHoverText(itemstack, world, list, flag);
         int fuel = itemstack.getOrCreateTag().getInt(fuelTag) / 3;
         list.add(GaugeTextHelper.buildBlockTooltip(GaugeTextHelper.getPercentText(GaugeValueHelper.getFuel(fuel, 100))));
     }
 
     @Override
-    public ActionResultType onItemUseFirst(ItemStack stack, ItemUseContext context) {
-        PlayerEntity player = context.getPlayer();
-        World world = context.getWorld();
-        BlockPos pos = context.getPos();
+    public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
+        Player player = context.getPlayer();
+        Level world = context.getLevel();
+        BlockPos pos = context.getClickedPos();
         BlockState state = world.getBlockState(pos);
-        Hand hand = context.getHand();
-        ItemStack itemStack = context.getItem();
+        InteractionHand hand = context.getHand();
+        ItemStack itemStack = context.getItemInHand();
 
         int x = pos.getX();
         int y = pos.getY();
         int z = pos.getZ();
 
-        if (state.getBlock() instanceof RocketLaunchPad && state.get(RocketLaunchPad.STAGE)) {
+        if (state.getBlock() instanceof RocketLaunchPad && state.getValue(RocketLaunchPad.STAGE)) {
 
             BlockPos pos1 = new BlockPos(x,y + 1, z);
             BlockPos pos2 = new BlockPos(x,y + 2, z);
@@ -67,29 +70,29 @@ public class Tier3RocketItem extends Item {
 
             if (world.getBlockState(pos1).isAir() && world.getBlockState(pos2).isAir() && world.getBlockState(pos3).isAir() && world.getBlockState(pos4).isAir()) {
 
-                AxisAlignedBB scanAbove = new AxisAlignedBB(x - 0, y - 0, z - 0, x + 1, y + 1, z + 1);
-                List<Entity> entities = player.getEntityWorld().getEntitiesWithinAABB(Entity.class, scanAbove);
+                AABB scanAbove = new AABB(x - 0, y - 0, z - 0, x + 1, y + 1, z + 1);
+                List<Entity> entities = player.getCommandSenderWorld().getEntitiesOfClass(Entity.class, scanAbove);
 
                 if (entities.isEmpty()) {
                     RocketTier3Entity rocket = new RocketTier3Entity(ModInnet.TIER_3_ROCKET.get(), world);
 
-                    rocket.setPosition((double) pos.getX() + 0.5D,  pos.getY() + 1, (double) pos.getZ() + 0.5D);
-                    double d0 = func_208051_a(world, pos, true, rocket.getBoundingBox());
-                    rocket.setLocationAndAngles((double)pos.getX() + 0.5D, (double)pos.getY() + d0, (double)pos.getZ() + 0.5D, 0.0F, 0.0F);
+                    rocket.setPos((double) pos.getX() + 0.5D,  pos.getY() + 1, (double) pos.getZ() + 0.5D);
+                    double d0 = getYOffset(world, pos, true, rocket.getBoundingBox());
+                    rocket.moveTo((double)pos.getX() + 0.5D, (double)pos.getY() + d0, (double)pos.getZ() + 0.5D, 0.0F, 0.0F);
 
-                    rocket.rotationYawHead = rocket.rotationYaw;
-                    rocket.renderYawOffset = rocket.rotationYaw;
+                    rocket.yHeadRot = rocket.getYRot();
+                    rocket.yBodyRot = rocket.getYRot();
 
-                    if (world instanceof ServerWorld) {
-                        rocket.onInitialSpawn((IServerWorld) world, world.getDifficultyForLocation(rocket.getPosition()), SpawnReason.MOB_SUMMONED, null, null);
+                    if (world instanceof ServerLevel) {
+                        rocket.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(new BlockPos(rocket.getX(), rocket.getY(), rocket.getZ())), MobSpawnType.MOB_SUMMONED, null, null);
                     }
-                    world.addEntity(rocket);
+                    world.addFreshEntity(rocket);
 
-                    rocket.getDataManager().set(RocketTier3Entity.FUEL, itemStack.getOrCreateTag().getInt(fuelTag));
-                    rocket.getDataManager().set(RocketTier3Entity.BUCKETS, itemStack.getOrCreateTag().getInt(bucketTag));
+                    rocket.getEntityData().set(RocketTier3Entity.FUEL, itemStack.getOrCreateTag().getInt(fuelTag));
+                    rocket.getEntityData().set(RocketTier3Entity.BUCKETS, itemStack.getOrCreateTag().getInt(bucketTag));
 
-                    if (!player.abilities.isCreativeMode) {
-                        player.setHeldItem(hand, ItemStack.EMPTY);
+                    if (!player.getAbilities().instabuild) {
+                        player.setItemInHand(hand, ItemStack.EMPTY);
                     } else {
                         player.swing(context.getHand(), true);
                     }
@@ -102,19 +105,18 @@ public class Tier3RocketItem extends Item {
         return super.onItemUseFirst(stack, context);
     }
 
-    protected static double func_208051_a(IWorldReader worldReader, BlockPos pos, boolean p_208051_2_, AxisAlignedBB p_208051_3_) {
-        AxisAlignedBB axisalignedbb = new AxisAlignedBB(pos);
-        if (p_208051_2_) {
-            axisalignedbb = axisalignedbb.expand(0.0D, -1.0D, 0.0D);
+
+    protected static double getYOffset(LevelReader p_20626_, BlockPos p_20627_, boolean p_20628_, AABB p_20629_) {
+        AABB aabb = new AABB(p_20627_);
+        if (p_20628_) {
+            aabb = aabb.expandTowards(0.0D, -1.0D, 0.0D);
         }
 
-        Stream<VoxelShape> stream = worldReader.func_234867_d_((Entity)null, axisalignedbb, (entity) -> {
-            return true;
-        });
-        return 1.0D + VoxelShapes.getAllowedOffset(Direction.Axis.Y, p_208051_3_, stream, p_208051_2_ ? -2.0D : -1.0D);
+        Iterable<VoxelShape> iterable = p_20626_.getCollisions((Entity)null, aabb);
+        return 1.0D + Shapes.collide(Direction.Axis.Y, p_20629_, iterable, p_20628_ ? -2.0D : -1.0D);
     }
 
-    public static void rocketPlaceSound(BlockPos pos, World world) {
-        world.playSound(null, pos, SoundEvents.BLOCK_STONE_BREAK, SoundCategory.BLOCKS, 1,1);
+    public static void rocketPlaceSound(BlockPos pos, Level world) {
+        world.playSound(null, pos, SoundEvents.STONE_BREAK, SoundSource.BLOCKS, 1,1);
     }
 }
