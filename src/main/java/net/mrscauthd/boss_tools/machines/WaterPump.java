@@ -9,7 +9,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
@@ -48,6 +50,18 @@ public class WaterPump extends AbstractMachineBlock<WaterPumpBlockEntity> {
     }
 
     @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        BlockState state = this.defaultBlockState();
+
+        if (this.useFacing() == true) {
+            return state.setValue(FACING, context.getHorizontalDirection());
+        } else {
+            return state;
+        }
+
+    }
+
+    @Override
 	public void appendHoverText(ItemStack itemstack, BlockGetter level, List<Component> list, TooltipFlag flag) {
 		super.appendHoverText(itemstack, level, list, flag);
 		list.add(GaugeTextHelper.buildBlockTooltip(GaugeTextHelper.getTransferPerTickText(GaugeValueHelper.getFluid(WaterPumpBlockEntity.TRANSFER_PER_TICK))));
@@ -62,5 +76,4 @@ public class WaterPump extends AbstractMachineBlock<WaterPumpBlockEntity> {
     public BlockPathTypes getAiPathNodeType(BlockState state, BlockGetter world, BlockPos pos, Mob entity) {
     	return BlockPathTypes.BLOCKED;
     }
-
 }

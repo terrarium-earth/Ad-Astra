@@ -1,6 +1,5 @@
 package net.mrscauthd.boss_tools.flag;
 
-import com.electronwill.nightconfig.core.utils.StringUtils;
 import com.google.common.collect.Iterables;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftSessionService;
