@@ -2,12 +2,12 @@ package net.mrscauthd.boss_tools.gui.screens.oxygenbubbledistributor;
 
 import java.text.NumberFormat;
 
-import org.lwjgl.opengl.GL11;
-
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -100,13 +100,13 @@ public class OxygenBubbleDistributorGuiWindow extends AbstractContainerScreen<Ox
 
 	@Override
 	protected void renderBg(PoseStack ms, float p_97788_, int p_97789_, int p_97790_) {
-		OxygenBubbleDistributorBlockEntity blockEntity = this.getMenu().getBlockEntity();
 
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-
-		this.minecraft.getTextureManager().bindForSetup(texture);
+		RenderSystem.setShader(GameRenderer::getPositionTexShader);
+		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+		RenderSystem.setShaderTexture(0, texture);
 		GuiComponent.blit(ms, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
 
+		OxygenBubbleDistributorBlockEntity blockEntity = this.getMenu().getBlockEntity();
 		GuiHelper.drawEnergy(ms, this.leftPos + ENERGY_LEFT, this.topPos + ENERGY_TOP, blockEntity.getPrimaryEnergyStorage());
 		GuiHelper.drawFluidTank(ms, this.leftPos + INPUT_TANK_LEFT, this.topPos + INPUT_TANK_TOP, blockEntity.getInputTank());
 		GuiHelper.drawOxygenTank(ms, this.leftPos + OUTPUT_TANK_LEFT, this.topPos + OUTPUT_TANK_TOP, blockEntity.getOutputTank());
@@ -153,24 +153,24 @@ public class OxygenBubbleDistributorGuiWindow extends AbstractContainerScreen<Ox
 		int textwidth = 12;
 
 		if ((range * 2) + 1 > 9) {
-			this.minecraft.getTextureManager().bindForSetup(new ResourceLocation(BossToolsMod.ModId, "textures/buttons/oxygen_range_layer.png"));
+			RenderSystem.setShaderTexture(0, new ResourceLocation(BossToolsMod.ModId, "textures/buttons/oxygen_range_layer.png"));
 			GuiComponent.blit(ms, workingAreaOffsetX + 1, workingAreaTop, 0, 0, 150, 25, 150, 25);
 			textwidth = 13;
 		} else {
-			this.minecraft.getTextureManager().bindForSetup(new ResourceLocation(BossToolsMod.ModId, "textures/buttons/oxygen_range_small_layer.png"));
+			RenderSystem.setShaderTexture(0, new ResourceLocation(BossToolsMod.ModId, "textures/buttons/oxygen_range_small_layer.png"));
 			GuiComponent.blit(ms, workingAreaOffsetX + 1, workingAreaTop, 0, 0, 140, 25, 140, 25);
 			textwidth = 17;
 		}
 
 		this.font.draw(ms, workingAreaText, workingAreaLeft + sideWidth + sidePadding + textwidth, workingAreaTop + 9, 0x339900);
 
-		GL11.glPushMatrix();
-		double oyxgenScale = 0.8D;
-		GL11.glScaled(oyxgenScale, oyxgenScale, oyxgenScale);
+		ms.pushPose();
+		float oyxgenScale = 0.8F;
+		ms.scale(oyxgenScale, oyxgenScale, oyxgenScale);
 		Component oxygenText = GaugeTextHelper.getUsingText2(GaugeValueHelper.getOxygen(blockEntity.getOxygenUsing(range)), blockEntity.getMaxTimer()).build();
 		int oxygenWidth = this.font.width(oxygenText);
 		this.font.draw(ms, oxygenText, (int) ((this.imageWidth - 5) / oyxgenScale) - oxygenWidth, (int) (this.inventoryLabelY / oyxgenScale), 0x333333);
-		GL11.glPopMatrix();
+		ms.popPose();
 
 		String prefix = "gui." + BossToolsMod.ModId + ".oxygen_bubble_distributor.workingarea.";
 		String method = this.cachedWorkingAreaVisible ? "hide" : "show";
@@ -186,18 +186,18 @@ public class OxygenBubbleDistributorGuiWindow extends AbstractContainerScreen<Ox
 	}
 
 	public Rectangle2d getInputTankBounds() {
-		return GuiHelper.getFluidTankBounds(this.imageWidth + INPUT_TANK_LEFT, this.imageHeight + INPUT_TANK_TOP);
+		return GuiHelper.getFluidTankBounds(this.leftPos + INPUT_TANK_LEFT, this.topPos + INPUT_TANK_TOP);
 	}
 
 	public Rectangle2d getOutputTankBounds() {
-		return GuiHelper.getFluidTankBounds(this.imageWidth + OUTPUT_TANK_LEFT, this.imageHeight + OUTPUT_TANK_TOP);
+		return GuiHelper.getFluidTankBounds(this.leftPos + OUTPUT_TANK_LEFT, this.topPos + OUTPUT_TANK_TOP);
 	}
 
 	public Rectangle2d getEnergyBounds() {
-		return GuiHelper.getEnergyBounds(this.imageWidth + ENERGY_LEFT, this.imageHeight + ENERGY_TOP);
+		return GuiHelper.getEnergyBounds(this.leftPos + ENERGY_LEFT, this.topPos + ENERGY_TOP);
 	}
 
 	public Rectangle2d getButtonBounds(int left, int top, int width, int height) {
-		return GuiHelper.getBounds(this.imageWidth + left, this.imageHeight + top, width, height);
+		return GuiHelper.getBounds(this.leftPos + left, this.topPos + top, width, height);
 	}
 }

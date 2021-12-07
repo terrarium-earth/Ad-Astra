@@ -1,11 +1,11 @@
 package net.mrscauthd.boss_tools.gui.screens.waterpump;
 
-import org.lwjgl.opengl.GL11;
-
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -63,13 +63,13 @@ public class WaterPumpGuiWindow extends AbstractContainerScreen<WaterPumpGui.Gui
 
 	@Override
 	protected void renderBg(PoseStack ms, float p_97788_, int p_97789_, int p_97790_) {
-		WaterPumpBlockEntity blockEntity = this.getMenu().getBlockEntity();
 
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-
-		this.minecraft.getTextureManager().bindForSetup(texture);
+		RenderSystem.setShader(GameRenderer::getPositionTexShader);
+		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+		RenderSystem.setShaderTexture(0, texture);
 		GuiComponent.blit(ms, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
 
+		WaterPumpBlockEntity blockEntity = this.getMenu().getBlockEntity();
 		GuiHelper.drawEnergy(ms, this.leftPos + ENERGY_LEFT, this.topPos + ENERGY_TOP, blockEntity.getPrimaryEnergyStorage());
 		GuiHelper.drawFluidTank(ms, this.leftPos + WATER_TANK_LEFT, this.topPos + WATER_TANK_TOP, blockEntity.getWaterTank());
 	}

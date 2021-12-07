@@ -1,11 +1,11 @@
 package net.mrscauthd.boss_tools.gui.screens.fuelrefinery;
 
-import org.lwjgl.opengl.GL11;
-
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -64,27 +64,27 @@ public class FuelRefineryGuiWindow extends AbstractContainerScreen<FuelRefineryG
 
 	@Override
 	protected void renderBg(PoseStack ms, float p_97788_, int p_97789_, int p_97790_) {
-		FuelRefineryBlockEntity blockEntity = this.getMenu().getBlockEntity();
 
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-
-		this.minecraft.getTextureManager().bindForSetup(texture);
+		RenderSystem.setShader(GameRenderer::getPositionTexShader);
+		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+		RenderSystem.setShaderTexture(0, texture);
 		GuiComponent.blit(ms, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
 
+		FuelRefineryBlockEntity blockEntity = this.getMenu().getBlockEntity();
 		GuiHelper.drawEnergy(ms, this.leftPos + ENERGY_LEFT, this.topPos + ENERGY_TOP, blockEntity.getPrimaryEnergyStorage());
 		GuiHelper.drawFluidTank(ms, this.leftPos + INPUT_TANK_LEFT, this.topPos + INPUT_TANK_TOP, blockEntity.getInputTank());
 		GuiHelper.drawFluidTank(ms, this.leftPos + OUTPUT_TANK_LEFT, this.topPos + OUTPUT_TANK_TOP, blockEntity.getOutputTank());
 	}
 
 	public Rectangle2d getInputTankBounds() {
-		return GuiHelper.getFluidTankBounds(this.imageWidth + INPUT_TANK_LEFT, this.imageHeight + INPUT_TANK_TOP);
+		return GuiHelper.getFluidTankBounds(this.leftPos + INPUT_TANK_LEFT, this.topPos + INPUT_TANK_TOP);
 	}
 
 	public Rectangle2d getOutputTankBounds() {
-		return GuiHelper.getFluidTankBounds(this.imageWidth + OUTPUT_TANK_LEFT, this.imageHeight + OUTPUT_TANK_TOP);
+		return GuiHelper.getFluidTankBounds(this.leftPos + OUTPUT_TANK_LEFT, this.topPos + OUTPUT_TANK_TOP);
 	}
 
 	public Rectangle2d getEnergyBounds() {
-		return GuiHelper.getEnergyBounds(this.imageWidth + ENERGY_LEFT, this.imageHeight + ENERGY_TOP);
+		return GuiHelper.getEnergyBounds(this.leftPos + ENERGY_LEFT, this.topPos + ENERGY_TOP);
 	}
 }

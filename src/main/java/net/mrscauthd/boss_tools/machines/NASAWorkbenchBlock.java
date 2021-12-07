@@ -78,6 +78,11 @@ public class NASAWorkbenchBlock {
 		}
 		
 		@Override
+		protected boolean useFacing() {
+			return true;
+		}
+		
+		@Override
 		protected BlockState buildDefaultState() {
 			return super.buildDefaultState().setValue(BlockStateProperties.WATERLOGGED, false);
 		}

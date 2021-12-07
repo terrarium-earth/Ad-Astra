@@ -21,7 +21,7 @@ public class GaugeValueElement extends Element {
 
 	@Override
 	public void render(PoseStack matrixStack, float x, float y, float maxX, float maxY) {
-		this.getRenderer().render(matrixStack, x, y, maxX, maxY);
+		this.getRenderer().render(matrixStack, (int) x, (int) y, (int) (maxX - x - 2), (int) (maxY - y));
 	}
 
 	public GaugeValueRenderer getRenderer() {

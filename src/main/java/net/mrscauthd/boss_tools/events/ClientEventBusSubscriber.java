@@ -68,7 +68,7 @@ public class ClientEventBusSubscriber {
 
 	@SubscribeEvent
 	public static void registerEntityRenderingHandler(EntityRenderersEvent.RegisterLayerDefinitions event) {
-		event.registerLayerDefinition(AlienModel.LAYER_LOCATION, (Supplier<LayerDefinition>) AlienModel.createBodyLayer());
+		event.registerLayerDefinition(AlienModel.LAYER_LOCATION, AlienModel::createBodyLayer);
 	}
 
 	@SubscribeEvent

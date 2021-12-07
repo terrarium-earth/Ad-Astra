@@ -2,8 +2,6 @@ package net.mrscauthd.boss_tools.gauge;
 
 import javax.annotation.Nullable;
 
-import org.lwjgl.opengl.GL11;
-
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 
@@ -30,20 +28,18 @@ public abstract class AbstractGaugeDataRenderer {
 		GaugeValueSerializer.Serializer.write(this.getValue(), buffer);
 	}
 
-	public void render(PoseStack matrixStack, float x, float y, float maxX, float maxY) {
-		this.render(matrixStack, (int) x, (int) y, 0.0F, 0.0F);
-	}
-
-	public void render(PoseStack matrixStack, int left, int top) {
-		this.drawBorder(matrixStack, left, top);
-
-		int width = this.getWidth();
-		int height = this.getHeight();
+	public void render(PoseStack matrixStack, int left, int top, int width, int height) {
+		this.drawBorder(matrixStack, left, top, width, height);
+		
 		int padding = this.getBorderWidth();
 		Rectangle2d innerBounds = new Rectangle2d(left + padding, top + padding, width - padding * 2, height - padding * 2);
 		this.drawBackground(matrixStack, innerBounds);
 		this.drawContents(matrixStack, innerBounds);
 		this.drawGaugeText(matrixStack, innerBounds);
+	}
+
+	public void render(PoseStack matrixStack, int left, int top) {
+		this.render(matrixStack, left, top, this.getWidth(), this.getHeight());
 	}
 
 	protected void drawContents(PoseStack matrixStack, Rectangle2d innerBounds) {
@@ -93,6 +89,7 @@ public abstract class AbstractGaugeDataRenderer {
 		double displayRatio = value.getDisplayRatio();
 
 		try {
+
 			RenderSystem.enableBlend();
 			GuiHelper.setGLColorFromInt(tileColor);
 
@@ -112,15 +109,13 @@ public abstract class AbstractGaugeDataRenderer {
 			}
 
 		} finally {
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+			RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 			RenderSystem.disableBlend();
 		}
 
 	}
 
-	protected void drawBorder(PoseStack matrixStack, int left, int top) {
-		int width = this.getWidth();
-		int height = this.getHeight();
+	protected void drawBorder(PoseStack matrixStack, int left, int top, int width, int height) {
 		int borderColor = this.getBorderColor();
 		int padding = this.getBorderWidth();
 
@@ -157,7 +152,7 @@ public abstract class AbstractGaugeDataRenderer {
 	}
 
 	public int getBorderColor() {
-		return 0xFF000000;
+		return 0xFF808080;
 	}
 
 	public int getWidth() {
