@@ -85,7 +85,7 @@ public class AlienEntity extends Villager implements Merchant, Npc {
 	@Override
 	public InteractionResult mobInteract(Player p_230254_1_, InteractionHand p_230254_2_) {
 		ItemStack itemstack = p_230254_1_.getItemInHand(p_230254_2_);
-		if (itemstack.getItem() != ModInnet.ALIEN_SPAWN_EGG.get() && this.isAlive() && !this.isTrading() && !this.isSleeping() && !p_230254_1_.isSecondaryUseActive()) {
+		/*if (itemstack.getItem() != ModInnet.ALIEN_SPAWN_EGG.get() && this.isAlive() && !this.isTrading() && !this.isSleeping() && !p_230254_1_.isSecondaryUseActive()) {
 			if (this.isBaby()) {
 				this.shakeHead();
 				return InteractionResult.sidedSuccess(this.level.isClientSide);
@@ -111,7 +111,8 @@ public class AlienEntity extends Villager implements Merchant, Npc {
 			}
 		} else {
 			return InteractionResult.PASS;
-		}
+		}*/
+		return InteractionResult.PASS;
 	}
 
 	private void displayMerchantGui(Player player) {

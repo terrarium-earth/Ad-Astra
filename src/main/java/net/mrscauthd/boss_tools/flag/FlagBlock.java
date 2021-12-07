@@ -46,6 +46,7 @@ public class FlagBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
 		Vec3 offset = state.getOffset(world, pos);
+
 		if (state.getValue(HALF) == DoubleBlockHalf.LOWER) {
 			switch ((Direction) state.getValue(FACING)) {
 				case SOUTH :
@@ -71,6 +72,7 @@ public class FlagBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 					return Shapes.or(box(7.5, 0, 14, 8.5, 16, 13), box(7.5, 7, 14, 8.5, 15, 1)).move(offset.x, offset.y, offset.z);
 			}
 		}
+
 	}
 
 	@Override
