@@ -58,12 +58,10 @@ public abstract class OxygenMakingBlockEntity extends AbstractMachineBlockEntity
 	}
 	
 	@Override
-	public CompoundTag save(CompoundTag compound) {
-		super.save(compound);
+	protected void saveAdditional(CompoundTag compound) {
+		super.saveAdditional(compound);
 
 		compound.put("outputTank", this.getOutputTank().serializeNBT());
-
-		return compound;
 	}
 
 	@Override

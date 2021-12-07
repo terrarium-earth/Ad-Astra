@@ -1,5 +1,7 @@
 package net.mrscauthd.boss_tools.machines;
 
+import static net.mrscauthd.boss_tools.block.helper.VoxelShapeHelper.boxSimple;
+
 import java.util.List;
 
 import net.minecraft.core.BlockPos;
@@ -35,13 +37,13 @@ public class WaterPump extends AbstractMachineBlock<WaterPumpBlockEntity> {
         switch (state.getValue(FACING)) {
             case SOUTH :
             default :
-                return Shapes.or(box(5.5, 0, 10.5, 10.5, 1, 5.5), box(6, 1, 10, 10, 13, 6), box(5.5, 13, 10.5, 10.5, 16, 5.5), box(6, 6, 15, 10, 10, 6), box(5.5, 5.5, 16, 10.5, 10.5, 15)).move(offset.x, offset.y, offset.z);
+                return Shapes.or(boxSimple(5.5, 0, 10.5, 10.5, 1, 5.5), boxSimple(6, 1, 10, 10, 13, 6), boxSimple(5.5, 13, 10.5, 10.5, 16, 5.5), boxSimple(6, 6, 15, 10, 10, 6), boxSimple(5.5, 5.5, 16, 10.5, 10.5, 15)).move(offset.x, offset.y, offset.z);
                 case NORTH :
-                return Shapes.or(box(5.5, 0, 10.5, 10.5, 1, 5.5), box(6, 1, 10, 10, 13, 6), box(5.5, 13, 10.5, 10.5, 16, 5.5), box(6, 6, 1, 10, 10, 6), box(5.5, 5.5, 1, 10.5, 10.5, 0)).move(offset.x, offset.y, offset.z);
+                return Shapes.or(boxSimple(5.5, 0, 10.5, 10.5, 1, 5.5), boxSimple(6, 1, 10, 10, 13, 6), boxSimple(5.5, 13, 10.5, 10.5, 16, 5.5), boxSimple(6, 6, 1, 10, 10, 6), boxSimple(5.5, 5.5, 1, 10.5, 10.5, 0)).move(offset.x, offset.y, offset.z);
             case EAST :
-                return Shapes.or(box(5.5, 0, 10.5, 10.5, 1, 5.5), box(6, 1, 10, 10, 13, 6), box(5.5, 13, 10.5, 10.5, 16, 5.5), box(15, 6, 10, 10, 10, 6), box(16, 5.5, 10.5, 15, 10.5, 5.5)).move(offset.x, offset.y, offset.z);
+                return Shapes.or(boxSimple(5.5, 0, 10.5, 10.5, 1, 5.5), boxSimple(6, 1, 10, 10, 13, 6), boxSimple(5.5, 13, 10.5, 10.5, 16, 5.5), boxSimple(15, 6, 10, 10, 10, 6), boxSimple(16, 5.5, 10.5, 15, 10.5, 5.5)).move(offset.x, offset.y, offset.z);
             case WEST :
-                return Shapes.or(box(5.5, 0, 10.5, 10.5, 1, 5.5), box(6, 1, 10, 10, 13, 6), box(5.5, 13, 10.5, 10.5, 16, 5.5), box(1, 6, 6, 10, 10, 10), box(0, 5.5, 5.5, 1, 10.5, 10.5)).move(offset.x, offset.y, offset.z);
+                return Shapes.or(boxSimple(5.5, 0, 10.5, 10.5, 1, 5.5), boxSimple(6, 1, 10, 10, 13, 6), boxSimple(5.5, 13, 10.5, 10.5, 16, 5.5), boxSimple(1, 6, 6, 10, 10, 10), boxSimple(0, 5.5, 5.5, 1, 10.5, 10.5)).move(offset.x, offset.y, offset.z);
         }
     }
 

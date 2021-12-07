@@ -62,9 +62,19 @@ public class OxygenBubbleDistributorBlock {
 		}
 
 		@Override
+		protected boolean useFacing() {
+			return true;
+		}
+
+		@Override
+		protected boolean useLit() {
+			return true;
+		}
+
+		@Override
 		public void appendHoverText(ItemStack itemstack, BlockGetter level, List<Component> list, TooltipFlag flag) {
 			super.appendHoverText(itemstack, level, list, flag);
-			
+
 			int min = RANGE_MIN * 2 + 1;
 			int max = RANGE_MAX * 2 + 1;
 			list.add(new TranslatableComponent("tooltip." + BossToolsMod.ModId + ".oxygen_bubble_distributor", min, max).setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)));
@@ -92,7 +102,7 @@ public class OxygenBubbleDistributorBlock {
 
 			return super.canActivated();
 		}
-		
+
 //		@OnlyIn(Dist.CLIENT)
 //		@Override
 //		public double getMaxRenderDistanceSquared() {
@@ -147,10 +157,10 @@ public class OxygenBubbleDistributorBlock {
 
 		private void spawnOxygenBubble(double range) {
 			Level level = this.getLevel();
-			List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, this.getWorkingArea(range), null);
+			List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, this.getWorkingArea(range));
 
 			for (LivingEntity entity : entities) {
-				entity.addEffect(new MobEffectInstance(ModInnet.OXYGEN_EFFECT.get(),2 * 24,0, false ,false));
+				entity.addEffect(new MobEffectInstance(ModInnet.OXYGEN_EFFECT.get(), 2 * 24, 0, false, true));
 			}
 
 			if (level instanceof ServerLevel) {

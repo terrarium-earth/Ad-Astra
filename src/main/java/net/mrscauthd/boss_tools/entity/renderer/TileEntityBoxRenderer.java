@@ -4,14 +4,15 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Matrix3f;
 import com.mojang.math.Matrix4f;
+
 import net.minecraft.client.GraphicsStatus;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.InventoryMenu;
@@ -25,8 +26,7 @@ public class TileEntityBoxRenderer implements BlockEntityRenderer<OxygenBubbleDi
 
     public static TextureAtlasSprite atlass = null;
 
-    public TileEntityBoxRenderer(BlockEntityRenderDispatcher rendererDispatcherIn) {
-
+    public TileEntityBoxRenderer(BlockEntityRendererProvider.Context context) {
     }
 
     @Override
@@ -98,7 +98,8 @@ public class TileEntityBoxRenderer implements BlockEntityRenderer<OxygenBubbleDi
 
     private void drawSurfaces(MultiBufferSource buffer, Matrix4f matrix, Matrix3f normal, float startX, float startZ, float endX, float endZ, float botY, float topY, int r, int g, int b) {
         VertexConsumer builder;
-        GraphicsStatus graphicsFanciness = Minecraft.getInstance().options.graphicsMode;
+        Minecraft minecraft = Minecraft.getInstance();
+		GraphicsStatus graphicsFanciness = minecraft.options.graphicsMode;
 
         if (graphicsFanciness == GraphicsStatus.FABULOUS) {
             builder = buffer.getBuffer(RenderType.translucentMovingBlock());
@@ -107,7 +108,7 @@ public class TileEntityBoxRenderer implements BlockEntityRenderer<OxygenBubbleDi
         }
 
         if (atlass == null) {
-            atlass = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(new ResourceLocation("boss_tools", "entities/tile_entity_box_oxygen_generator"));
+            atlass = minecraft.getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(new ResourceLocation("boss_tools", "entities/tile_entity_box_oxygen_generator"));
         }
 
         float maxU = atlass.getU1();

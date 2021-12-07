@@ -11,6 +11,7 @@ import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.renderer.GameRenderer;
 
 @OnlyIn(Dist.CLIENT)
 public class ImageButtonPlacer extends net.minecraft.client.gui.components.Button {
@@ -55,7 +56,9 @@ public class ImageButtonPlacer extends net.minecraft.client.gui.components.Butto
     public void renderButton(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         Minecraft minecraft = Minecraft.getInstance();
 
-        minecraft.getTextureManager().bindForSetup(this.resourceLocation);
+		RenderSystem.setShader(GameRenderer::getPositionTexShader);
+		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.setShaderTexture(0, this.resourceLocation);
         int i = this.yTexStart;
         if (this.isHoveredOrFocused()) {
             i += this.yDiffText;
