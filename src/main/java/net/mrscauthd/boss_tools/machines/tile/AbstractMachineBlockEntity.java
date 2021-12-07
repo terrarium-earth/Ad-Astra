@@ -163,10 +163,17 @@ public abstract class AbstractMachineBlockEntity extends RandomizableContainerBl
 		}
 
 	}
-
+	
 	@Override
-	public CompoundTag save(CompoundTag compound) {
-		super.save(compound);
+	public CompoundTag save(CompoundTag tag) {
+		super.save(tag);
+		this.saveAdditional(tag);
+		return tag;
+	}
+	
+	@Override
+	protected void saveAdditional(CompoundTag compound) {
+		super.saveAdditional(compound);
 
 		ContainerHelper.saveAllItems(compound, this.stacks);
 
@@ -174,7 +181,6 @@ public abstract class AbstractMachineBlockEntity extends RandomizableContainerBl
 		compound.put("fluidHandlers", this.serializeComponents(this.getFluidHandlers()));
 		compound.put("powerSystems", this.serializeComponents(this.getPowerSystems()));
 
-		return compound;
 	}
 
 	public <T> CompoundTag serializeComponents(Map<ResourceLocation, T> registry) {

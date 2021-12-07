@@ -14,6 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.phys.Vec2;
 import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.gauge.GaugeValueRenderer;
 import net.mrscauthd.boss_tools.gauge.GaugeValueSerializer;
@@ -49,7 +50,7 @@ public class WailaPlugin implements IWailaPlugin {
 
 		for (int i = 0; i < list.size(); i++) {
 			IGaugeValue value = GaugeValueSerializer.Serializer.deserialize(list.getCompound(i));
-			tooltip.add(new GaugeValueElement(new GaugeValueRenderer(value)));
+			tooltip.add(new GaugeValueElement(new GaugeValueRenderer(value)).translate(new Vec2(0.0F, 3.0F * i)));
 		}
 	}
 

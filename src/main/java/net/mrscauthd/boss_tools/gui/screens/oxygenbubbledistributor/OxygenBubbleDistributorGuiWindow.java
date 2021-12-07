@@ -116,17 +116,17 @@ public class OxygenBubbleDistributorGuiWindow extends AbstractContainerScreen<Ox
 	protected void init() {
 		super.init();
 
-		button_plus = this.addWidget(new ImageButtonPlacer(this.imageWidth - 20, this.imageHeight + 5, 20, 20, 0, 0, 0, Button1, 20, 20, (p_2130901) -> {
+		button_plus = this.addRenderableWidget(new ImageButtonPlacer(this.leftPos - 20, this.topPos + 5, 20, 20, 0, 0, 0, Button1, 20, 20, (p_2130901) -> {
 			BlockPos pos = this.getMenu().getBlockEntity().getBlockPos();
 			BossToolsMod.PACKET_HANDLER.sendToServer(new OxygenBubbleDistributorBlock.ChangeRangeMessage(pos, true));
 		}));
 
-		button_minus = this.addWidget(new ImageButtonPlacer(this.imageWidth - 20, this.imageHeight + 25, 20, 20, 0, 0, 0, Button2, 20, 20, (p_2130901) -> {
+		button_minus = this.addRenderableWidget(new ImageButtonPlacer(this.leftPos - 20, this.topPos + 25, 20, 20, 0, 0, 0, Button2, 20, 20, (p_2130901) -> {
 			BlockPos pos = this.getMenu().getBlockEntity().getBlockPos();
 			BossToolsMod.PACKET_HANDLER.sendToServer(new OxygenBubbleDistributorBlock.ChangeRangeMessage(pos, false));
 		}));
 
-		workingAreaVisibleButton = this.addWidget(new ImageButtonPlacer(this.imageWidth - 20, this.imageHeight - 22, 34, 20, 0, 0, 0, HideButton, 34, 20, e -> {
+		workingAreaVisibleButton = this.addRenderableWidget(new ImageButtonPlacer(this.leftPos - 20, this.topPos - 22, 34, 20, 0, 0, 0, HideButton, 34, 20, e -> {
 			BlockPos pos = this.getMenu().getBlockEntity().getBlockPos();
 			BossToolsMod.PACKET_HANDLER.sendToServer(new OxygenBubbleDistributorBlock.ChangeWorkingAreaVisibleMessage(pos, !this.cachedWorkingAreaVisible));
 		}));
@@ -146,7 +146,7 @@ public class OxygenBubbleDistributorGuiWindow extends AbstractContainerScreen<Ox
 		int sideWidth = 2;
 		int sidePadding = 2;
 		int workingAreaHeight = 25;
-		int workingAreaLeft = this.workingAreaVisibleButton.x + this.workingAreaVisibleButton.getWidth() - this.imageWidth;
+		int workingAreaLeft = this.workingAreaVisibleButton.x + this.workingAreaVisibleButton.getWidth() - this.leftPos;
 		int workingAreaTop = -workingAreaHeight;
 		int workingAreaOffsetX = workingAreaLeft;
 
