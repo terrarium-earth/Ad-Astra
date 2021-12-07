@@ -50,7 +50,7 @@ public class WailaPlugin implements IWailaPlugin {
 
 		for (int i = 0; i < list.size(); i++) {
 			IGaugeValue value = GaugeValueSerializer.Serializer.deserialize(list.getCompound(i));
-			tooltip.add(new GaugeValueElement(new GaugeValueRenderer(value)).translate(new Vec2(0.0F, 3.0F * i)));
+			tooltip.add(new GaugeValueElement(new GaugeValueRenderer(value)));
 		}
 	}
 
