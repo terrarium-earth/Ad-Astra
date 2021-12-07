@@ -1,5 +1,7 @@
 package net.mrscauthd.boss_tools.machines;
 
+import static net.mrscauthd.boss_tools.block.helper.VoxelShapeHelper.boxSimple;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -98,13 +100,13 @@ public class NASAWorkbenchBlock {
 			switch ((Direction) state.getValue(FACING)) {
 			case SOUTH:
 			default:
-				return Shapes.or(box(16, 0, 16, 0, 19.2, 0)).move(offset.x, offset.y, offset.z);
+				return Shapes.or(boxSimple(16, 0, 16, 0, 19.2, 0)).move(offset.x, offset.y, offset.z);
 			case NORTH:
-				return Shapes.or(box(0, 0, 0, 16, 19.2, 16)).move(offset.x, offset.y, offset.z);
+				return Shapes.or(boxSimple(0, 0, 0, 16, 19.2, 16)).move(offset.x, offset.y, offset.z);
 			case EAST:
-				return Shapes.or(box(16, 0, 0, 0, 19.2, 16)).move(offset.x, offset.y, offset.z);
+				return Shapes.or(boxSimple(16, 0, 0, 0, 19.2, 16)).move(offset.x, offset.y, offset.z);
 			case WEST:
-				return Shapes.or(box(0, 0, 16, 16, 19.2, 0)).move(offset.x, offset.y, offset.z);
+				return Shapes.or(boxSimple(0, 0, 16, 16, 19.2, 0)).move(offset.x, offset.y, offset.z);
 			}
 		}
 

@@ -1,8 +1,11 @@
 package net.mrscauthd.boss_tools.flag;
 
+import static net.mrscauthd.boss_tools.block.helper.VoxelShapeHelper.boxSimple;
+
 import javax.annotation.Nullable;
 
 import com.mojang.authlib.GameProfile;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -16,12 +19,22 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.*;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.PushReaction;
@@ -48,31 +61,32 @@ public class FlagBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 		Vec3 offset = state.getOffset(world, pos);
 		if (state.getValue(HALF) == DoubleBlockHalf.LOWER) {
 			switch ((Direction) state.getValue(FACING)) {
-				case SOUTH :
-				default :
-					return Shapes.or(box(14.5, 0, 9, 12.5, 1, 7), box(14, 1, 8.5, 13, 16, 7.5)).move(offset.x, offset.y, offset.z);
-				case NORTH :
-					return Shapes.or(box(1.5, 0, 7, 3.5, 1, 9), box(2, 1, 7.5, 3, 16, 8.5)).move(offset.x, offset.y, offset.z);
-				case EAST :
-					return Shapes.or(box(9, 0, 1.5, 7, 1, 3.5), box(8.5, 1, 2, 7.5, 16, 3)).move(offset.x, offset.y, offset.z);
-				case WEST :
-					return Shapes.or(box(7, 0, 14.5, 9, 1, 12.5), box(7.5, 1, 14, 8.5, 16, 13)).move(offset.x, offset.y, offset.z);
+			case SOUTH:
+			default:
+				return Shapes.or(boxSimple(14.5, 0, 9, 12.5, 1, 7), boxSimple(14, 1, 8.5, 13, 16, 7.5)).move(offset.x, offset.y, offset.z);
+			case NORTH:
+				return Shapes.or(boxSimple(1.5, 0, 7, 3.5, 1, 9), boxSimple(2, 1, 7.5, 3, 16, 8.5)).move(offset.x, offset.y, offset.z);
+			case EAST:
+				return Shapes.or(boxSimple(9, 0, 1.5, 7, 1, 3.5), boxSimple(8.5, 1, 2, 7.5, 16, 3)).move(offset.x, offset.y, offset.z);
+			case WEST:
+				return Shapes.or(boxSimple(7, 0, 14.5, 9, 1, 12.5), boxSimple(7.5, 1, 14, 8.5, 16, 13)).move(offset.x, offset.y, offset.z);
 			}
 		} else {
 			switch ((Direction) state.getValue(FACING)) {
-				case SOUTH :
-				default :
-					return Shapes.or(box(14, 0, 8.5, 13, 16, 7.5), box(14, 7, 8.5, 1, 15, 7.5)).move(offset.x, offset.y, offset.z);
-				case NORTH :
-					return Shapes.or(box(2, 0, 7.5, 3, 16, 8.5), box(2, 7, 7.5, 15, 15, 8.5)).move(offset.x, offset.y, offset.z);
-				case EAST :
-					return Shapes.or(box(8.5, 0, 2, 7.5, 16, 3), box(8.5, 7, 2, 7.5, 15, 15)).move(offset.x, offset.y, offset.z);
-				case WEST :
-					return Shapes.or(box(7.5, 0, 14, 8.5, 16, 13), box(7.5, 7, 14, 8.5, 15, 1)).move(offset.x, offset.y, offset.z);
+			case SOUTH:
+			default:
+				return Shapes.or(boxSimple(14, 0, 8.5, 13, 16, 7.5), boxSimple(14, 7, 8.5, 1, 15, 7.5)).move(offset.x, offset.y, offset.z);
+			case NORTH:
+				return Shapes.or(boxSimple(2, 0, 7.5, 3, 16, 8.5), boxSimple(2, 7, 7.5, 15, 15, 8.5)).move(offset.x, offset.y, offset.z);
+			case EAST:
+				return Shapes.or(boxSimple(8.5, 0, 2, 7.5, 16, 3), boxSimple(8.5, 7, 2, 7.5, 15, 15)).move(offset.x, offset.y, offset.z);
+			case WEST:
+				return Shapes.or(boxSimple(7.5, 0, 14, 8.5, 16, 13), boxSimple(7.5, 7, 14, 8.5, 15, 1)).move(offset.x, offset.y, offset.z);
 			}
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
 		DoubleBlockHalf doubleblockhalf = stateIn.getValue(HALF);
@@ -89,7 +103,7 @@ public class FlagBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 	@Override
 	public void playerWillDestroy(Level worldIn, BlockPos pos, BlockState state, Player player) {
 		if (!worldIn.isClientSide && player.isCreative()) {
-			this.removeBottomHalf(worldIn, pos, state, player);
+			removeBottomHalf(worldIn, pos, state, player);
 		}
 		super.playerWillDestroy(worldIn, pos, state, player);
 	}
@@ -125,7 +139,7 @@ public class FlagBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 		super.setPlacedBy(worldIn, pos, state, placer, stack);
 		worldIn.setBlock(pos.above(), state.setValue(HALF, DoubleBlockHalf.UPPER), 3);
 
-		BlockEntity tileentity = worldIn.getBlockEntity(new BlockPos(pos.getX(),pos.getY() + 1,pos.getZ()));
+		BlockEntity tileentity = worldIn.getBlockEntity(new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ()));
 
 		if (tileentity instanceof FlagTileEntity) {
 			FlagTileEntity flagtileentity = (FlagTileEntity) tileentity;
@@ -181,6 +195,7 @@ public class FlagBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 		return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public BlockState mirror(BlockState state, Mirror mirrorIn) {
 		return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
@@ -191,6 +206,7 @@ public class FlagBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 		return Mth.getSeed(pos.getX(), pos.above(state.getValue(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(), pos.getZ());
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public FluidState getFluidState(BlockState state) {
 		return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
