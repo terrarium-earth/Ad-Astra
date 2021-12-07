@@ -19,6 +19,8 @@ import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.ModInnet;
 import net.mrscauthd.boss_tools.entity.renderer.TileEntityBoxRenderer;
 import net.mrscauthd.boss_tools.entity.renderer.alien.AlienModel;
+import net.mrscauthd.boss_tools.entity.renderer.flagtileentity.TileEntityHeadModel;
+import net.mrscauthd.boss_tools.entity.renderer.flagtileentity.TileEntityHeadRenderer;
 import net.mrscauthd.boss_tools.gui.screens.blastfurnace.BlastFurnaceGuiWindow;
 import net.mrscauthd.boss_tools.gui.screens.coalgenerator.CoalGeneratorGuiWindow;
 import net.mrscauthd.boss_tools.gui.screens.compressor.CompressorGuiWindow;
@@ -37,8 +39,6 @@ import net.mrscauthd.boss_tools.particle.SmokeParticle;
 import net.mrscauthd.boss_tools.particle.VenusRainParticle;
 import net.mrscauthd.boss_tools.entity.renderer.alien.AlienRenderer;
 import org.lwjgl.glfw.GLFW;
-
-import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(modid = BossToolsMod.ModId, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEventBusSubscriber {
@@ -61,15 +61,15 @@ public class ClientEventBusSubscriber {
 
 		event.registerEntityRenderer(ModInnet.ALIEN_SPIT_ENTITY.get(), renderManager -> new ThrownItemRenderer(renderManager, 1, true));
 
-
 		event.registerBlockEntityRenderer(ModInnet.OXYGEN_BUBBLE_DISTRIBUTOR.get(), TileEntityBoxRenderer::new);
 
-		//event.registerBlockEntityRenderer(ModInnet.FLAG.get(), TileEntityHeadRenderer::new);
+		event.registerBlockEntityRenderer(ModInnet.FLAG.get(), TileEntityHeadRenderer::new);
 	}
 
 	@SubscribeEvent
 	public static void registerEntityRenderingHandler(EntityRenderersEvent.RegisterLayerDefinitions event) {
 		event.registerLayerDefinition(AlienModel.LAYER_LOCATION, AlienModel::createBodyLayer);
+		event.registerLayerDefinition(TileEntityHeadModel.LAYER_LOCATION, TileEntityHeadModel::createMobHeadLayer);
 	}
 
 	@SubscribeEvent

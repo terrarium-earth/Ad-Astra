@@ -19,13 +19,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -86,6 +80,11 @@ public class FlagBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 			}
 		}
 
+	}
+
+	@Override
+	public RenderShape getRenderShape(BlockState p_49232_) {
+		return RenderShape.MODEL;
 	}
 
 	@SuppressWarnings("deprecation")
@@ -153,7 +152,7 @@ public class FlagBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 			if (placer instanceof Player) {
 				Player player = (Player) placer;
 
-				flagtileentity.setPlayerProfile(player.getGameProfile());
+				flagtileentity.setOwner(player.getGameProfile());
 			}
 		}
 	}

@@ -14,6 +14,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.core.Direction;
@@ -33,6 +34,10 @@ import java.util.Map;
 
 @OnlyIn(Dist.CLIENT)
 public class TileEntityHeadRenderer implements BlockEntityRenderer<FlagTileEntity> {
+
+    public TileEntityHeadRenderer(BlockEntityRendererProvider.Context context) {
+
+    }
 
     private static final Map<FlagBlock.ISkullType, TileEntityHeadModel> MODELS = Util.make(Maps.newHashMap(), (p_209262_0_) -> {
 

@@ -47,7 +47,7 @@ import java.util.Random;
 import java.util.Set;
 
 public class AlienEntity extends Villager implements Merchant, Npc {
-	public static ImmutableList<Pair<Integer, ? extends Behavior>> core(VillagerProfession profession, float p_220638_1_) {
+	public static ImmutableList<Pair<Integer, ? extends Behavior<? super Villager>>> core(VillagerProfession profession, float p_220638_1_) {
 		return ImmutableList.of(Pair.of(0, new Swim(0.8F)), Pair.of(0, new InteractWithDoor()), Pair.of(0, new LookAtTargetSink(45, 90)), Pair.of(0, new VillagerPanicTrigger()), Pair.of(0, new WakeUp()), Pair.of(0, new ReactToBell()), Pair.of(0, new SetRaidStatus()), Pair.of(0, new ValidateNearbyPoi(profession.getJobPoiType(), MemoryModuleType.JOB_SITE)), Pair.of(0, new ValidateNearbyPoi(profession.getJobPoiType(), MemoryModuleType.POTENTIAL_JOB_SITE)), Pair.of(1, new MoveToTargetSink()), Pair.of(2, new PoiCompetitorScan(profession)), Pair.of(3, new LookAndFollowTradingPlayerSink(p_220638_1_)), Pair.of(5, new GoToWantedItem(p_220638_1_, false, 4)), Pair.of(6, new AcquirePoi(profession.getJobPoiType(), MemoryModuleType.JOB_SITE, MemoryModuleType.POTENTIAL_JOB_SITE, true, Optional.empty())), Pair.of(7, new GoToPotentialJobSite(p_220638_1_)), Pair.of(8, new YieldJobSite(p_220638_1_)), Pair.of(10, new AcquirePoi(PoiType.HOME, MemoryModuleType.HOME, false, Optional.of((byte)14))), Pair.of(10, new AcquirePoi(PoiType.MEETING, MemoryModuleType.MEETING_POINT, true, Optional.of((byte)14))));
 	}
 
@@ -68,7 +68,7 @@ public class AlienEntity extends Villager implements Merchant, Npc {
 
 	@Override
 	public Villager getBreedOffspring(ServerLevel p_241840_1_, AgeableMob p_241840_2_) {
-		AlienEntity alienentity = new AlienEntity((EntityType<? extends Villager>) ModInnet.ALIEN.get(),this.level);
+		AlienEntity alienentity = new AlienEntity(ModInnet.ALIEN.get(),this.level);
 		alienentity.finalizeSpawn(p_241840_1_, p_241840_1_.getCurrentDifficultyAt(new BlockPos(p_241840_2_.getX(), p_241840_2_.getY(), p_241840_2_.getZ())), MobSpawnType.BREEDING, (SpawnGroupData)null, (CompoundTag)null);
 		return alienentity;
 	}
@@ -85,7 +85,7 @@ public class AlienEntity extends Villager implements Merchant, Npc {
 	@Override
 	public InteractionResult mobInteract(Player p_230254_1_, InteractionHand p_230254_2_) {
 		ItemStack itemstack = p_230254_1_.getItemInHand(p_230254_2_);
-		/*if (itemstack.getItem() != ModInnet.ALIEN_SPAWN_EGG.get() && this.isAlive() && !this.isTrading() && !this.isSleeping() && !p_230254_1_.isSecondaryUseActive()) {
+		if (itemstack.getItem() != ModInnet.ALIEN_SPAWN_EGG.get() && this.isAlive() && !this.isTrading() && !this.isSleeping() && !p_230254_1_.isSecondaryUseActive()) {
 			if (this.isBaby()) {
 				this.shakeHead();
 				return InteractionResult.sidedSuccess(this.level.isClientSide);
@@ -111,8 +111,7 @@ public class AlienEntity extends Villager implements Merchant, Npc {
 			}
 		} else {
 			return InteractionResult.PASS;
-		}*/
-		return InteractionResult.PASS;
+		}
 	}
 
 	private void displayMerchantGui(Player player) {
@@ -180,7 +179,7 @@ public class AlienEntity extends Villager implements Merchant, Npc {
 			p_35425_.addActivityWithConditions(Activity.WORK, VillagerGoalPackages.getWorkPackage(villagerprofession, 0.5F), ImmutableSet.of(Pair.of(MemoryModuleType.JOB_SITE, MemoryStatus.VALUE_PRESENT)));
 		}
 
-		p_35425_.addActivity(Activity.CORE, VillagerGoalPackages.getCorePackage(villagerprofession, 0.5F));
+		p_35425_.addActivity(Activity.CORE, AlienEntity.core(villagerprofession, 0.5F));
 		p_35425_.addActivity(Activity.REST, VillagerGoalPackages.getRestPackage(villagerprofession, 0.5F));
 		p_35425_.addActivity(Activity.IDLE, VillagerGoalPackages.getIdlePackage(villagerprofession, 0.5F));
 		p_35425_.addActivity(Activity.PANIC, VillagerGoalPackages.getPanicPackage(villagerprofession, 0.5F));
@@ -195,7 +194,7 @@ public class AlienEntity extends Villager implements Merchant, Npc {
 
 	@Nullable
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @org.jetbrains.annotations.Nullable SpawnGroupData spawnDataIn, @org.jetbrains.annotations.Nullable CompoundTag dataTag) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
 
 		if (reason == MobSpawnType.COMMAND || reason == MobSpawnType.SPAWN_EGG || reason == MobSpawnType.SPAWNER || reason == MobSpawnType.DISPENSER) {
 			this.setVillagerData(this.getVillagerData().setType(VillagerType.byBiome(worldIn.getBiomeName(new BlockPos(this.getX(),this.getY(),this.getZ())))));
@@ -235,12 +234,12 @@ public class AlienEntity extends Villager implements Merchant, Npc {
 			AlienTrade.ItemListing[] avillagertrades$itrade = int2objectmap.get(villagerdata.getLevel());
 			if (avillagertrades$itrade != null) {
 				MerchantOffers merchantoffers = this.getOffers();
-				this.addOffersFromItemListings(merchantoffers, (VillagerTrades.ItemListing[]) avillagertrades$itrade, 6);
+				this.addOffersFromItemListings(merchantoffers, (AlienTrade.ItemListing[]) avillagertrades$itrade, 6);
 			}
 		}
 	}
 
-	protected void addOffersFromItemListings(MerchantOffers p_35278_, VillagerTrades.ItemListing[] p_35279_, int p_35280_) {
+	protected void addOffersFromItemListings(MerchantOffers p_35278_, AlienTrade.ItemListing[] p_35279_, int p_35280_) {
 		Set<Integer> set = Sets.newHashSet();
 		if (p_35279_.length > p_35280_) {
 			while(set.size() < p_35280_) {
@@ -253,7 +252,7 @@ public class AlienEntity extends Villager implements Merchant, Npc {
 		}
 
 		for(Integer integer : set) {
-			VillagerTrades.ItemListing villagertrades$itemlisting = p_35279_[integer];
+			AlienTrade.ItemListing villagertrades$itemlisting = p_35279_[integer];
 			MerchantOffer merchantoffer = villagertrades$itemlisting.getOffer(this, this.random);
 			if (merchantoffer != null) {
 				p_35278_.add(merchantoffer);
