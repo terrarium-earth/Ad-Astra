@@ -1,11 +1,11 @@
 package net.mrscauthd.boss_tools.gui.screens.compressor;
 
-import org.lwjgl.opengl.GL11;
-
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -48,18 +48,18 @@ public class CompressorGuiWindow extends AbstractContainerScreen<CompressorGui.G
 
 	@Override
 	protected void renderBg(PoseStack ms, float p_97788_, int p_97789_, int p_97790_) {
-		CompressorBlockEntity blockEntity = this.getMenu().getBlockEntity();
 
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-
-		this.minecraft.getTextureManager().bindForSetup(TEXTURE);
+		RenderSystem.setShader(GameRenderer::getPositionTexShader);
+		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+		RenderSystem.setShaderTexture(0, TEXTURE);
 		GuiComponent.blit(ms, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
 
-		GuiHelper.drawEnergy(ms, this.leftPos + ENERGY_LEFT, this.leftPos + ENERGY_TOP, blockEntity.getPrimaryEnergyStorage());
-		GuiHelper.drawArrow(ms, this.leftPos + ARROW_LEFT, this.leftPos + ARROW_TOP, blockEntity.getTimerRatio());
+		CompressorBlockEntity blockEntity = this.getMenu().getBlockEntity();
+		GuiHelper.drawEnergy(ms, this.leftPos + ENERGY_LEFT, this.topPos + ENERGY_TOP, blockEntity.getPrimaryEnergyStorage());
+		GuiHelper.drawArrow(ms, this.leftPos + ARROW_LEFT, this.topPos + ARROW_TOP, blockEntity.getTimerRatio());
 	}
 
 	public Rectangle2d getEnergyBounds() {
-		return GuiHelper.getEnergyBounds(this.leftPos + ENERGY_LEFT, this.leftPos + ENERGY_TOP);
+		return GuiHelper.getEnergyBounds(this.leftPos + ENERGY_LEFT, this.topPos + ENERGY_TOP);
 	}
 }

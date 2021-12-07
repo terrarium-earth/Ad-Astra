@@ -1,5 +1,6 @@
 package net.mrscauthd.boss_tools.machines;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -24,6 +25,7 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.ModInnet;
+import net.mrscauthd.boss_tools.capability.FluidMultiTank;
 import net.mrscauthd.boss_tools.crafting.BossToolsRecipeType;
 import net.mrscauthd.boss_tools.crafting.BossToolsRecipeTypes;
 import net.mrscauthd.boss_tools.crafting.FluidIngredient;
@@ -58,7 +60,7 @@ public class FuelRefineryBlock {
 		protected boolean useLit() {
 			return true;
 		}
-		
+
 		@Override
 		protected boolean useFacing() {
 			return true;
@@ -75,6 +77,7 @@ public class FuelRefineryBlock {
 	public static class FuelRefineryBlockEntity extends AbstractMachineBlockEntity {
 		private FluidTank inputTank;
 		private FluidTank outputTank;
+		private FluidMultiTank tanks;
 
 		private StackCacher recipeCacher;
 		private FuelRefiningRecipe cachedRecipe;
@@ -97,6 +100,7 @@ public class FuelRefineryBlock {
 			super.createFluidHandlers(registry);
 			this.inputTank = (FluidTank) registry.computeIfAbsent(this.getInputTankName(), k -> this.creatTank(k));
 			this.outputTank = (FluidTank) registry.computeIfAbsent(this.getOutputTankName(), k -> this.creatTank(k));
+			this.tanks = new FluidMultiTank(Arrays.asList(this.getInputTank(), this.getOutputTank()));
 		}
 
 		protected int getInitialTankCapacity(ResourceLocation name) {
@@ -180,7 +184,10 @@ public class FuelRefineryBlock {
 
 		@Override
 		public <T> LazyOptional<T> getCapabilityFluidHandler(Capability<T> capability, @Nullable Direction facing) {
-			if (facing == Direction.DOWN || facing == null) {
+			if (facing == null) {
+				return LazyOptional.of(this::getTanks).cast(); 
+			}
+			if (facing == Direction.DOWN) {
 				return LazyOptional.of(this::getOutputTank).cast();
 			} else {
 				return LazyOptional.of(this::getInputTank).cast();
@@ -314,6 +321,10 @@ public class FuelRefineryBlock {
 
 		public int getTransferPerTick() {
 			return TRANSFER_PER_TICK;
+		}
+		
+		public FluidMultiTank getTanks() {
+			return this.tanks;
 		}
 
 	}

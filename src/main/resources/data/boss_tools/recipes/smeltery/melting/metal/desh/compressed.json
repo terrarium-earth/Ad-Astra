@@ -1,5 +1,18 @@
 {
   "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "value": {
+        "tag": "boss_tools:compresseds/desh",
+        "type": "forge:tag_empty"
+      },
+      "type": "forge:not"
+    },
+    {
+      "type":"forge:mod_loaded",
+      "modid":"tconstruct"
+    }
+  ],
   "ingredient": {
     "tag": "boss_tools:compresseds/desh"
   },

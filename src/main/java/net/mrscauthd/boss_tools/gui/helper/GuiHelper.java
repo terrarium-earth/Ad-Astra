@@ -11,6 +11,7 @@ import com.mojang.math.Matrix4f;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.InventoryMenu;
@@ -77,7 +78,8 @@ public class GuiHelper {
 		int maxHeight = FLUID_TANK_HEIGHT;
 		int scaledHeight = (int) Math.ceil(maxHeight * ratio);
 		int offset = maxHeight - scaledHeight;
-		Minecraft.getInstance().getTextureManager().bindForSetup(OXYGEN_CONTENT_PATH);
+
+		RenderSystem.setShaderTexture(0, OXYGEN_CONTENT_PATH);
 		drawTiledSprite(matrixStack, left, top + offset, OXYGEN_TANK_WIDTH, scaledHeight, 16, 16, 0.0F, 1.0F, 0.0F, 1.0F);
 		drawFluidTankOverlay(matrixStack, left, top);
 	}
@@ -140,6 +142,7 @@ public class GuiHelper {
 		setGLColorFromInt(attributes.getColor(stack));
 		drawTiledSprite(matrixStack, left, top, width, height, fluidStillSprite, 16, 16);
 		RenderSystem.disableBlend();
+		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 	}
 
 	public static void drawRocketFluidTank(PoseStack matrixStack, int left, int top, FluidStack stack, int capacity, int amount) {
@@ -181,8 +184,8 @@ public class GuiHelper {
 		float uMax = sprite.getU1();
 		float vMin = sprite.getV0();
 		float vMax = sprite.getV1();
-		Minecraft minecraft = Minecraft.getInstance();
-		minecraft.getTextureManager().bindForSetup(InventoryMenu.BLOCK_ATLAS);
+		RenderSystem.setShader(GameRenderer::getPositionTexShader);
+		RenderSystem.setShaderTexture(0, InventoryMenu.BLOCK_ATLAS);
 		drawTiledSprite(matrixStack, left, top, width, height, tileWidth, tileHeight, uMin, uMax, vMin, vMax);
 	}
 
@@ -255,27 +258,28 @@ public class GuiHelper {
 	public static void drawVertical(PoseStack matrixStack, int left, int top, int width, int height, ResourceLocation resource, double ratio) {
 		int ratioHeight = (int) Math.ceil(height * ratio);
 		int remainHeight = height - ratioHeight;
-		Minecraft.getInstance().getTextureManager().bindForSetup(resource);
+		RenderSystem.setShaderTexture(0, resource);
 		GuiComponent.blit(matrixStack, left, top + remainHeight, 0, remainHeight, width, ratioHeight, width, height);
 	}
 
 	public static void drawVerticalReverse(PoseStack matrixStack, int left, int top, int width, int height, ResourceLocation resource, double ratio) {
 		int ratioHeight = (int) Math.ceil(height * ratio);
 		int remainHeight = height - ratioHeight;
-		Minecraft.getInstance().getTextureManager().bindForSetup(resource);
+		RenderSystem.setShaderTexture(0, resource);
 		GuiComponent.blit(matrixStack, left, top, 0, 0, width, remainHeight, width, height);
 	}
 
 	public static void drawHorizontal(PoseStack matrixStack, int left, int top, int width, int height, ResourceLocation resource, double ratio) {
 		int ratioWidth = (int) Math.ceil(width * ratio);
-		Minecraft.getInstance().getTextureManager().bindForSetup(resource);
+
+		RenderSystem.setShaderTexture(0, resource);
 		GuiComponent.blit(matrixStack, left, top, 0, 0, ratioWidth, height, width, height);
 	}
 
 	public static void drawHorizontalReverse(PoseStack matrixStack, int left, int top, int width, int height, ResourceLocation resource, double ratio) {
 		int ratioWidth = (int) Math.ceil(width * ratio);
 		int remainWidth = width - ratioWidth;
-		Minecraft.getInstance().getTextureManager().bindForSetup(resource);
+		RenderSystem.setShaderTexture(0, resource);
 		GuiComponent.blit(matrixStack, left + ratioWidth, top, ratioWidth, 0, remainWidth, height, width, height);
 	}
 
