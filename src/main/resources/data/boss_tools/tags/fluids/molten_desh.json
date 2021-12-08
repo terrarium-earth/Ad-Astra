@@ -1,7 +1,13 @@
 {
-  "replace": false,
-  "values": [
-    "boss_tools:molten_desh",
-    "boss_tools:flowing_molten_desh"
-  ]
+	"replace": false,
+	"values": [
+		{
+			"id": "boss_tools:molten_desh",
+			"required": false
+		},
+		{
+			"id": "boss_tools:flowing_molten_desh",
+			"required": false
+		}
+	]
 }
