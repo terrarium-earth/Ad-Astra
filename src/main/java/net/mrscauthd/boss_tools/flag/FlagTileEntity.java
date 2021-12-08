@@ -79,7 +79,6 @@ public class FlagTileEntity extends BlockEntity {
 
     @Override
     public CompoundTag getUpdateTag() {
-        //return this.saveWithoutMetadata();
         return this.saveWithFullMetadata();
     }
 

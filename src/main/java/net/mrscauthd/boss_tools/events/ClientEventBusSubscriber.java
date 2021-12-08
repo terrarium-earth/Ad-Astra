@@ -17,10 +17,12 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraft.client.Minecraft;
 import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.ModInnet;
+import net.mrscauthd.boss_tools.armor.SpaceSuit;
 import net.mrscauthd.boss_tools.entity.renderer.TileEntityBoxRenderer;
 import net.mrscauthd.boss_tools.entity.renderer.alien.AlienModel;
 import net.mrscauthd.boss_tools.entity.renderer.flagtileentity.TileEntityHeadModel;
 import net.mrscauthd.boss_tools.entity.renderer.flagtileentity.TileEntityHeadRenderer;
+import net.mrscauthd.boss_tools.entity.renderer.spacesuit.SpaceSuitModel;
 import net.mrscauthd.boss_tools.gui.screens.blastfurnace.BlastFurnaceGuiWindow;
 import net.mrscauthd.boss_tools.gui.screens.coalgenerator.CoalGeneratorGuiWindow;
 import net.mrscauthd.boss_tools.gui.screens.compressor.CompressorGuiWindow;
@@ -70,6 +72,9 @@ public class ClientEventBusSubscriber {
 	public static void registerEntityRenderingHandler(EntityRenderersEvent.RegisterLayerDefinitions event) {
 		event.registerLayerDefinition(AlienModel.LAYER_LOCATION, AlienModel::createBodyLayer);
 		event.registerLayerDefinition(TileEntityHeadModel.LAYER_LOCATION, TileEntityHeadModel::createMobHeadLayer);
+
+		event.registerLayerDefinition(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION, SpaceSuitModel.SPACE_SUIT_P1::createBodyLayer);
+		event.registerLayerDefinition(SpaceSuitModel.SPACE_SUIT_P2.LAYER_LOCATION, SpaceSuitModel.SPACE_SUIT_P2::createBodyLayer);
 	}
 
 	@SubscribeEvent

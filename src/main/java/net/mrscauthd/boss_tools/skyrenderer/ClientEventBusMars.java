@@ -28,7 +28,8 @@ import net.mrscauthd.boss_tools.BossToolsMod;
 
 //@Mod.EventBusSubscriber(modid = BossToolsMod.ModId, bus = Bus.MOD, value = Dist.CLIENT)
 public class ClientEventBusMars {
-	/*
+    /*
+
 	private static final ResourceLocation DIM_RENDER_INFO = new ResourceLocation(BossToolsMod.ModId, "mars");
 	private static final ResourceLocation SUN_TEXTURE = new ResourceLocation(BossToolsMod.ModId, "textures/sky/sun.png");
 	private static final ResourceLocation PHOBOS_TEXTURE = new ResourceLocation(BossToolsMod.ModId, "textures/sky/phobos.png");
@@ -53,7 +54,12 @@ public class ClientEventBusMars {
 
 			@Override
 			public void setSkyRenderHandler(ISkyRenderHandler skyRenderHandler) {
-				skyRenderHandler = renderSky();
+                setSkyRenderHandler(new ISkyRenderHandler() {
+                    @Override
+                    public void render(int ticks, float partialTicks, PoseStack matrixStack, ClientLevel world, Minecraft mc) {
+
+                    }
+                });
 			}
 
 			public ISkyRenderHandler renderSky() {
@@ -214,5 +220,7 @@ public class ClientEventBusMars {
 		});
 	}
 
-	 */
+
+     */
+
 }
