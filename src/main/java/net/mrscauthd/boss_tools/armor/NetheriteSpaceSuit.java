@@ -153,7 +153,7 @@ public class NetheriteSpaceSuit {
 							"left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap())
 
 					);
-					
+
 					ModelPart modelPart = new ModelPart(Collections.emptyList(), map);
 
 					HumanoidModel armorModel = new HumanoidModel(modelPart);
