@@ -9,7 +9,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class SpaceSuitNetheriteArmorMaterial {
+public class NetheriteSpaceSuitMaterial {
     public static ArmorMaterial ARMOR_MATERIAL = new ArmorMaterial() {
 
         @Override
