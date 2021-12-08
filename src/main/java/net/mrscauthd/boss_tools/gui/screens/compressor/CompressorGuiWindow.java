@@ -15,7 +15,7 @@ import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.gauge.GaugeTextHelper;
 import net.mrscauthd.boss_tools.gauge.GaugeValueHelper;
 import net.mrscauthd.boss_tools.gui.helper.GuiHelper;
-import net.mrscauthd.boss_tools.machines.CompressorBlock.CompressorBlockEntity;
+import net.mrscauthd.boss_tools.machines.tile.CompressorBlockEntity;
 import net.mrscauthd.boss_tools.util.Rectangle2d;
 
 @OnlyIn(Dist.CLIENT)

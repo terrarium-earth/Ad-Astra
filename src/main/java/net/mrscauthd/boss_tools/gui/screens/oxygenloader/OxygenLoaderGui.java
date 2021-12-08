@@ -11,8 +11,7 @@ import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.network.IContainerFactory;
 import net.mrscauthd.boss_tools.ModInnet;
 import net.mrscauthd.boss_tools.gui.helper.ContainerHelper;
-import net.mrscauthd.boss_tools.machines.OxygenLoaderBlock;
-import net.mrscauthd.boss_tools.machines.OxygenLoaderBlock.OxygenLoaderBlockEntity;
+import net.mrscauthd.boss_tools.machines.tile.OxygenLoaderBlockEntity;
 import net.mrscauthd.boss_tools.machines.tile.OxygenMakingBlockEntity;
 
 public class OxygenLoaderGui {
@@ -34,9 +33,9 @@ public class OxygenLoaderGui {
 
 			IItemHandlerModifiable internal = blockEntity.getItemHandler();
 			this.addSlot(new SlotItemHandler(internal, OxygenMakingBlockEntity.SLOT_INPUT_SOURCE, 26, 22));
-			this.addSlot(new SlotItemHandler(internal, OxygenLoaderBlock.SLOT_OUTPUT_SINK, 92, 52));
+			this.addSlot(new SlotItemHandler(internal, OxygenLoaderBlockEntity.SLOT_OUTPUT_SINK, 92, 52));
 			this.addSlot(new SlotItemHandler(internal, OxygenMakingBlockEntity.SLOT_INPUT_SINK, 26, 52));
-			this.addSlot(new SlotItemHandler(internal, OxygenLoaderBlock.SLOT_OUTPUT_SOURCE, 92, 22));
+			this.addSlot(new SlotItemHandler(internal, OxygenLoaderBlockEntity.SLOT_OUTPUT_SOURCE, 92, 22));
 
 			ContainerHelper.addInventorySlots(this, inv, 8, 90, this::addSlot);
 		}

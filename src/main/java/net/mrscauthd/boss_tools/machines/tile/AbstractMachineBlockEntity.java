@@ -35,7 +35,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.INBTSerializable;
@@ -59,6 +58,7 @@ import net.mrscauthd.boss_tools.crafting.FluidIngredient;
 import net.mrscauthd.boss_tools.gauge.GaugeValueHelper;
 import net.mrscauthd.boss_tools.gauge.IGaugeValue;
 import net.mrscauthd.boss_tools.gauge.IGaugeValuesProvider;
+import net.mrscauthd.boss_tools.machines.AbstractMachineBlock;
 
 public abstract class AbstractMachineBlockEntity extends RandomizableContainerBlockEntity implements WorldlyContainer, IEnergyStorageHolder, IGaugeValuesProvider {
 
@@ -370,7 +370,7 @@ public abstract class AbstractMachineBlockEntity extends RandomizableContainerBl
 	}
 
 	protected BooleanProperty getBlockActivatedProperty() {
-		return BlockStateProperties.LIT;
+		return AbstractMachineBlock.LIT;
 	}
 
 	protected void refreshBlockActivatedChanged() {

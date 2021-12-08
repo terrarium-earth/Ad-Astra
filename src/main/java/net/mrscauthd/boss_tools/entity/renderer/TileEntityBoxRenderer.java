@@ -19,10 +19,10 @@ import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.mrscauthd.boss_tools.machines.OxygenBubbleDistributorBlock;
+import net.mrscauthd.boss_tools.machines.tile.OxygenBubbleDistributorBlockEntity;
 
 @OnlyIn(Dist.CLIENT)
-public class TileEntityBoxRenderer implements BlockEntityRenderer<OxygenBubbleDistributorBlock.OxygenBubbleDistributorBlockEntity> {
+public class TileEntityBoxRenderer implements BlockEntityRenderer<OxygenBubbleDistributorBlockEntity> {
 
     public static TextureAtlasSprite atlass = null;
 
@@ -30,12 +30,12 @@ public class TileEntityBoxRenderer implements BlockEntityRenderer<OxygenBubbleDi
     }
 
     @Override
-    public boolean shouldRenderOffScreen(OxygenBubbleDistributorBlock.OxygenBubbleDistributorBlockEntity p_112306_) {
+    public boolean shouldRenderOffScreen(OxygenBubbleDistributorBlockEntity p_112306_) {
         return true;
     }
 
     @Override
-    public void render(OxygenBubbleDistributorBlock.OxygenBubbleDistributorBlockEntity tileEntityIn, float partialTicks, PoseStack matrix, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
+    public void render(OxygenBubbleDistributorBlockEntity tileEntityIn, float partialTicks, PoseStack matrix, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
         if (tileEntityIn.isWorkingAreaVisible()) {
             VertexConsumer builder = bufferIn.getBuffer(RenderType.lines());
             AABB workingArea = tileEntityIn.getWorkingArea(BlockPos.ZERO, tileEntityIn.getRange());

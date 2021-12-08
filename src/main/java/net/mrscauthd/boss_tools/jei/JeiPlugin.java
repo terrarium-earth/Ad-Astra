@@ -90,12 +90,12 @@ import net.mrscauthd.boss_tools.jei.jeiguihandlers.BlastFurnaceGuiContainerHandl
 import net.mrscauthd.boss_tools.jei.jeiguihandlers.CoalGeneratorGuiContainerHandler;
 import net.mrscauthd.boss_tools.jei.jeiguihandlers.CompressorGuiContainerHandler;
 import net.mrscauthd.boss_tools.jei.jeiguihandlers.PlanetSlecetionGuiJeiHandler;
-import net.mrscauthd.boss_tools.machines.BlastingFurnaceBlock;
-import net.mrscauthd.boss_tools.machines.CoalGeneratorBlock;
-import net.mrscauthd.boss_tools.machines.CompressorBlock;
-import net.mrscauthd.boss_tools.machines.FuelRefineryBlock;
-import net.mrscauthd.boss_tools.machines.NASAWorkbenchBlock;
+import net.mrscauthd.boss_tools.machines.tile.BlastingFurnaceBlockEntity;
+import net.mrscauthd.boss_tools.machines.tile.CoalGeneratorBlockEntity;
+import net.mrscauthd.boss_tools.machines.tile.CompressorBlockEntity;
+import net.mrscauthd.boss_tools.machines.tile.FuelRefineryBlockEntity;
 import net.mrscauthd.boss_tools.machines.tile.ItemStackToItemStackBlockEntity;
+import net.mrscauthd.boss_tools.machines.tile.NASAWorkbenchBlockEntity;
 import net.mrscauthd.boss_tools.machines.tile.OxygenMakingBlockEntity;
 import net.mrscauthd.boss_tools.util.Rectangle2d;
 
@@ -133,19 +133,19 @@ public class JeiPlugin implements IModPlugin {
 		// OxygenBubbleDistributor
 		registration.addRecipeTransferHandler(OxygenBubbleDistributorGui.GuiContainer.class, OxygenBubbleDistributorJeiCategory.Uid, OxygenMakingBlockEntity.SLOT_INPUT_SOURCE, 1, 0, inventorySlotCount);
 		// Generator
-		registration.addRecipeTransferHandler(CoalGeneratorGui.GuiContainer.class, CoalGeneratorJeiCategory.Uid, CoalGeneratorBlock.SLOT_FUEL, 1, CoalGeneratorBlock.SLOT_FUEL + 1, inventorySlotCount);
+		registration.addRecipeTransferHandler(CoalGeneratorGui.GuiContainer.class, CoalGeneratorJeiCategory.Uid, CoalGeneratorBlockEntity.SLOT_FUEL, 1, CoalGeneratorBlockEntity.SLOT_FUEL + 1, inventorySlotCount);
 		// BlastFurnace
-		int blastInventoryStartIndex = BlastingFurnaceBlock.SLOT_FUEL + 1;
+		int blastInventoryStartIndex = BlastingFurnaceBlockEntity.SLOT_FUEL + 1;
 		registration.addRecipeTransferHandler(BlastFurnaceGui.GuiContainer.class, BlastingFurnaceJeiCategory.Uid, ItemStackToItemStackBlockEntity.SLOT_INGREDIENT, 1, blastInventoryStartIndex, inventorySlotCount);
-		registration.addRecipeTransferHandler(BlastFurnaceGui.GuiContainer.class, VanillaRecipeCategoryUid.FUEL, BlastingFurnaceBlock.SLOT_FUEL, 1, blastInventoryStartIndex, inventorySlotCount);
+		registration.addRecipeTransferHandler(BlastFurnaceGui.GuiContainer.class, VanillaRecipeCategoryUid.FUEL, BlastingFurnaceBlockEntity.SLOT_FUEL, 1, blastInventoryStartIndex, inventorySlotCount);
 		// Compressor
 		registration.addRecipeTransferHandler(CompressorGui.GuiContainer.class, CompressorJeiCategory.Uid, ItemStackToItemStackBlockEntity.SLOT_INGREDIENT, 1, ItemStackToItemStackBlockEntity.SLOT_OUTPUT + 1, inventorySlotCount);
 		// WorkBench
-		int workbenchPartSlotStart = 1 + NASAWorkbenchBlock.SLOT_PARTS;
-		int workbenchPartSlotCount = NASAWorkbenchBlock.getBasicPartSlots();
+		int workbenchPartSlotStart = 1 + NASAWorkbenchBlockEntity.SLOT_PARTS;
+		int workbenchPartSlotCount = NASAWorkbenchBlockEntity.getBasicPartSlots();
 		registration.addRecipeTransferHandler(NasaWorkbenchGui.GuiContainer.class, NASAWorkbenchJeiCategory.Uid, workbenchPartSlotStart, workbenchPartSlotCount, workbenchPartSlotStart + workbenchPartSlotCount, inventorySlotCount);
 		// Fuel Refinery
-		registration.addRecipeTransferHandler(FuelRefineryGui.GuiContainer.class, FuelRefineryJeiCategory.Uid, FuelRefineryBlock.SLOT_INPUT_SOURCE, 1, 0, inventorySlotCount);
+		registration.addRecipeTransferHandler(FuelRefineryGui.GuiContainer.class, FuelRefineryJeiCategory.Uid, FuelRefineryBlockEntity.SLOT_INPUT_SOURCE, 1, 0, inventorySlotCount);
 		// Rocket Fuel
 		registration.addRecipeTransferHandler(RocketGui.GuiContainer.class, Tier1RocketJeiCategory.Uid, 0, 1, 0, inventorySlotCount);
 	}
@@ -362,7 +362,7 @@ public class JeiPlugin implements IModPlugin {
 		@Override
 		public List<Component> getTooltipStrings(OxygenLoaderRecipe recipe, double mouseX, double mouseY) {
 			if (GuiHelper.isHover(this.getEnergyBounds(), mouseX, mouseY)) {
-				return Collections.singletonList(GaugeTextHelper.getUsingPerTickText(GaugeValueHelper.getEnergy(FuelRefineryBlock.ENERGY_PER_TICK)).build());
+				return Collections.singletonList(GaugeTextHelper.getUsingPerTickText(GaugeValueHelper.getEnergy(FuelRefineryBlockEntity.ENERGY_PER_TICK)).build());
 			} else if (GuiHelper.isHover(this.getOutputTankBounds(), mouseX, mouseY)) {
 				return Collections.singletonList(GaugeTextHelper.getValueText(GaugeValueHelper.getOxygen(recipe.getOxygen())).build());
 			}
@@ -414,13 +414,13 @@ public class JeiPlugin implements IModPlugin {
 		@Override
 		public void setRecipe(IRecipeLayout iRecipeLayout, OxygenLoaderRecipe recipe, IIngredients iIngredients) {
 			IGuiItemStackGroup itemStacks = iRecipeLayout.getItemStacks();
-			itemStacks.init(FuelRefineryBlock.SLOT_INPUT_SOURCE, true, 24, 8);
-			itemStacks.init(FuelRefineryBlock.SLOT_OUTPUT_SINK, false, 90, 38);
-			itemStacks.init(FuelRefineryBlock.SLOT_INPUT_SINK, false, 24, 38);
-			itemStacks.init(FuelRefineryBlock.SLOT_OUTPUT_SOURCE, false, 90, 8);
+			itemStacks.init(FuelRefineryBlockEntity.SLOT_INPUT_SOURCE, true, 24, 8);
+			itemStacks.init(FuelRefineryBlockEntity.SLOT_OUTPUT_SINK, false, 90, 38);
+			itemStacks.init(FuelRefineryBlockEntity.SLOT_INPUT_SINK, false, 24, 38);
+			itemStacks.init(FuelRefineryBlockEntity.SLOT_OUTPUT_SOURCE, false, 90, 8);
 
-			itemStacks.set(FuelRefineryBlock.SLOT_INPUT_SOURCE, iIngredients.getInputs(VanillaTypes.ITEM).stream().flatMap(Collection::stream).collect(Collectors.toList()));
-			itemStacks.set(FuelRefineryBlock.SLOT_OUTPUT_SINK, iIngredients.getOutputs(VanillaTypes.ITEM).stream().flatMap(Collection::stream).collect(Collectors.toList()));
+			itemStacks.set(FuelRefineryBlockEntity.SLOT_INPUT_SOURCE, iIngredients.getInputs(VanillaTypes.ITEM).stream().flatMap(Collection::stream).collect(Collectors.toList()));
+			itemStacks.set(FuelRefineryBlockEntity.SLOT_OUTPUT_SINK, iIngredients.getOutputs(VanillaTypes.ITEM).stream().flatMap(Collection::stream).collect(Collectors.toList()));
 
 			IGuiFluidStackGroup fluidStacks = iRecipeLayout.getFluidStacks();
 			int tanks = 0;
@@ -469,7 +469,7 @@ public class JeiPlugin implements IModPlugin {
 		@Override
 		public List<Component> getTooltipStrings(OxygenBubbleDistributorRecipe recipe, double mouseX, double mouseY) {
 			if (GuiHelper.isHover(this.getEnergyBounds(), mouseX, mouseY)) {
-				return Collections.singletonList(GaugeTextHelper.getUsingPerTickText(GaugeValueHelper.getEnergy(FuelRefineryBlock.ENERGY_PER_TICK)).build());
+				return Collections.singletonList(GaugeTextHelper.getUsingPerTickText(GaugeValueHelper.getEnergy(FuelRefineryBlockEntity.ENERGY_PER_TICK)).build());
 			} else if (GuiHelper.isHover(this.getOutputTankBounds(), mouseX, mouseY)) {
 				return Collections.singletonList(GaugeTextHelper.getValueText(GaugeValueHelper.getOxygen(recipe.getOxygen())).build());
 			}
@@ -519,10 +519,10 @@ public class JeiPlugin implements IModPlugin {
 		@Override
 		public void setRecipe(IRecipeLayout iRecipeLayout, OxygenBubbleDistributorRecipe recipe, IIngredients iIngredients) {
 			IGuiItemStackGroup itemStacks = iRecipeLayout.getItemStacks();
-			itemStacks.init(FuelRefineryBlock.SLOT_INPUT_SOURCE, true, 24, 8);
-			itemStacks.init(FuelRefineryBlock.SLOT_INPUT_SINK, false, 24, 38);
+			itemStacks.init(FuelRefineryBlockEntity.SLOT_INPUT_SOURCE, true, 24, 8);
+			itemStacks.init(FuelRefineryBlockEntity.SLOT_INPUT_SINK, false, 24, 38);
 
-			itemStacks.set(FuelRefineryBlock.SLOT_INPUT_SOURCE, iIngredients.getInputs(VanillaTypes.ITEM).stream().flatMap(Collection::stream).collect(Collectors.toList()));
+			itemStacks.set(FuelRefineryBlockEntity.SLOT_INPUT_SOURCE, iIngredients.getInputs(VanillaTypes.ITEM).stream().flatMap(Collection::stream).collect(Collectors.toList()));
 
 			IGuiFluidStackGroup fluidStacks = iRecipeLayout.getFluidStacks();
 			int tanks = 0;
@@ -571,7 +571,7 @@ public class JeiPlugin implements IModPlugin {
 			if (GuiHelper.isHover(this.getFireBounds(), mouseX, mouseY)) {
 				return Collections.singletonList(GaugeTextHelper.getValueText(GaugeValueHelper.getBurnTime(recipe.getBurnTime())).build());
 			} else if (GuiHelper.isHover(this.getEnergyBounds(), mouseX, mouseY)) {
-				return Collections.singletonList(GaugeTextHelper.getGeneratingPerTickText(GaugeValueHelper.getEnergy(CoalGeneratorBlock.ENERGY_PER_TICK)).build());
+				return Collections.singletonList(GaugeTextHelper.getGeneratingPerTickText(GaugeValueHelper.getEnergy(CoalGeneratorBlockEntity.ENERGY_PER_TICK)).build());
 			}
 			return Collections.emptyList();
 		}
@@ -627,10 +627,10 @@ public class JeiPlugin implements IModPlugin {
 		@Override
 		public void setRecipe(IRecipeLayout iRecipeLayout, GeneratingRecipe recipe, IIngredients iIngredients) {
 			IGuiItemStackGroup stacks = iRecipeLayout.getItemStacks();
-			stacks.init(CoalGeneratorBlock.SLOT_FUEL, true, 44, 25);// Numern wie im GUI
+			stacks.init(CoalGeneratorBlockEntity.SLOT_FUEL, true, 44, 25);// Numern wie im GUI
 			// ...
 
-			stacks.set(CoalGeneratorBlock.SLOT_FUEL, iIngredients.getInputs(VanillaTypes.ITEM).get(0));
+			stacks.set(CoalGeneratorBlockEntity.SLOT_FUEL, iIngredients.getInputs(VanillaTypes.ITEM).get(0));
 			// ...
 		}
 	}
@@ -683,7 +683,7 @@ public class JeiPlugin implements IModPlugin {
 			IDrawable background = this.getBackground();
 			iRecipeLayout.moveRecipeTransferButton(background.getWidth() - 20, background.getHeight() - 20);
 
-			int slots = NASAWorkbenchBlock.SLOT_PARTS;
+			int slots = NASAWorkbenchBlockEntity.SLOT_PARTS;
 			GridPlacer placer = new GridPlacer();
 			slots = placeRcketParts(slots, 38, 7, 1, placer::placeBottom, ModInnet.ROCKET_PART_NOSE.get(), iRecipeLayout, recipe);
 			slots = placeRcketParts(slots, 29, 25, 2, placer::placeBottom, ModInnet.ROCKET_PART_BODY.get(), iRecipeLayout, recipe);
@@ -1056,7 +1056,7 @@ public class JeiPlugin implements IModPlugin {
 		@Override
 		public List<Component> getTooltipStrings(CompressingRecipe recipe, double mouseX, double mouseY) {
 			if (GuiHelper.isHover(this.getEnergyBounds(), mouseX, mouseY)) {
-				return Collections.singletonList((GaugeTextHelper.getUsingPerTickText(GaugeValueHelper.getEnergy(CompressorBlock.ENERGY_PER_TICK)).build()));
+				return Collections.singletonList((GaugeTextHelper.getUsingPerTickText(GaugeValueHelper.getEnergy(CompressorBlockEntity.ENERGY_PER_TICK)).build()));
 			} else {
 				return Collections.emptyList();
 			}
@@ -1148,7 +1148,7 @@ public class JeiPlugin implements IModPlugin {
 		@Override
 		public List<Component> getTooltipStrings(FuelRefiningRecipe recipe, double mouseX, double mouseY) {
 			if (GuiHelper.isHover(this.getEnergyBounds(), mouseX, mouseY)) {
-				return Collections.singletonList(GaugeTextHelper.getUsingPerTickText(GaugeValueHelper.getEnergy(FuelRefineryBlock.ENERGY_PER_TICK)).build());
+				return Collections.singletonList(GaugeTextHelper.getUsingPerTickText(GaugeValueHelper.getEnergy(FuelRefineryBlockEntity.ENERGY_PER_TICK)).build());
 			} else {
 				return Collections.emptyList();
 			}
@@ -1199,13 +1199,13 @@ public class JeiPlugin implements IModPlugin {
 		@Override
 		public void setRecipe(IRecipeLayout iRecipeLayout, FuelRefiningRecipe recipe, IIngredients iIngredients) {
 			IGuiItemStackGroup itemStacks = iRecipeLayout.getItemStacks();
-			itemStacks.init(FuelRefineryBlock.SLOT_INPUT_SOURCE, true, 24, 8);
-			itemStacks.init(FuelRefineryBlock.SLOT_OUTPUT_SINK, false, 90, 38);
-			itemStacks.init(FuelRefineryBlock.SLOT_INPUT_SINK, false, 24, 38);
-			itemStacks.init(FuelRefineryBlock.SLOT_OUTPUT_SOURCE, false, 90, 8);
+			itemStacks.init(FuelRefineryBlockEntity.SLOT_INPUT_SOURCE, true, 24, 8);
+			itemStacks.init(FuelRefineryBlockEntity.SLOT_OUTPUT_SINK, false, 90, 38);
+			itemStacks.init(FuelRefineryBlockEntity.SLOT_INPUT_SINK, false, 24, 38);
+			itemStacks.init(FuelRefineryBlockEntity.SLOT_OUTPUT_SOURCE, false, 90, 8);
 
-			itemStacks.set(FuelRefineryBlock.SLOT_INPUT_SOURCE, iIngredients.getInputs(VanillaTypes.ITEM).stream().flatMap(i -> i.stream()).collect(Collectors.toList()));
-			itemStacks.set(FuelRefineryBlock.SLOT_OUTPUT_SINK, iIngredients.getOutputs(VanillaTypes.ITEM).stream().flatMap(i -> i.stream()).collect(Collectors.toList()));
+			itemStacks.set(FuelRefineryBlockEntity.SLOT_INPUT_SOURCE, iIngredients.getInputs(VanillaTypes.ITEM).stream().flatMap(i -> i.stream()).collect(Collectors.toList()));
+			itemStacks.set(FuelRefineryBlockEntity.SLOT_OUTPUT_SINK, iIngredients.getOutputs(VanillaTypes.ITEM).stream().flatMap(i -> i.stream()).collect(Collectors.toList()));
 
 			IGuiFluidStackGroup fluidStacks = iRecipeLayout.getFluidStacks();
 			int tanks = 0;

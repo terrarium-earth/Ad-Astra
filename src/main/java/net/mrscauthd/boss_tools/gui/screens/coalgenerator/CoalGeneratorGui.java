@@ -11,8 +11,7 @@ import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.network.IContainerFactory;
 import net.mrscauthd.boss_tools.ModInnet;
 import net.mrscauthd.boss_tools.gui.helper.ContainerHelper;
-import net.mrscauthd.boss_tools.machines.CoalGeneratorBlock;
-import net.mrscauthd.boss_tools.machines.CoalGeneratorBlock.CoalGeneratorBlockEntity;
+import net.mrscauthd.boss_tools.machines.tile.CoalGeneratorBlockEntity;
 
 public class CoalGeneratorGui {
 
@@ -32,7 +31,7 @@ public class CoalGeneratorGui {
 			this.blockEntity = blockEntity;
 
 			IItemHandlerModifiable itemHandler = blockEntity.getItemHandler();
-			this.addSlot(new SlotItemHandler(itemHandler, CoalGeneratorBlock.SLOT_FUEL, 77, 31));
+			this.addSlot(new SlotItemHandler(itemHandler, CoalGeneratorBlockEntity.SLOT_FUEL, 77, 31));
 
 			ContainerHelper.addInventorySlots(this, inv, 8, 84, this::addSlot);
 		}

@@ -15,7 +15,7 @@ import net.mrscauthd.boss_tools.gui.helper.ContainerHelper;
 import net.mrscauthd.boss_tools.gui.helper.GridPlacer;
 import net.mrscauthd.boss_tools.gui.helper.RocketPartGridPlacer;
 import net.mrscauthd.boss_tools.inventory.RocketPartsItemHandler;
-import net.mrscauthd.boss_tools.machines.NASAWorkbenchBlock.NASAWorkbenchBlockEntity;
+import net.mrscauthd.boss_tools.machines.tile.NASAWorkbenchBlockEntity;
 
 public class NasaWorkbenchGui {
 

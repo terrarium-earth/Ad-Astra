@@ -11,7 +11,7 @@ import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.network.IContainerFactory;
 import net.mrscauthd.boss_tools.ModInnet;
 import net.mrscauthd.boss_tools.gui.helper.ContainerHelper;
-import net.mrscauthd.boss_tools.machines.OxygenBubbleDistributorBlock.OxygenBubbleDistributorBlockEntity;
+import net.mrscauthd.boss_tools.machines.tile.OxygenBubbleDistributorBlockEntity;
 import net.mrscauthd.boss_tools.machines.tile.OxygenMakingBlockEntity;
 
 public class OxygenBubbleDistributorGui {
