@@ -9,7 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.IContainerFactory;
 import net.mrscauthd.boss_tools.ModInnet;
 import net.mrscauthd.boss_tools.gui.helper.ContainerHelper;
-import net.mrscauthd.boss_tools.machines.SolarPanelBlock.SolarPanelBlockEntity;
+import net.mrscauthd.boss_tools.machines.tile.SolarPanelBlockEntity;
 
 public class SolarPanelGui {
 

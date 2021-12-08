@@ -15,13 +15,13 @@ import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.gauge.GaugeTextHelper;
 import net.mrscauthd.boss_tools.gauge.GaugeValueHelper;
 import net.mrscauthd.boss_tools.gui.helper.GuiHelper;
-import net.mrscauthd.boss_tools.machines.BlastingFurnaceBlock.BlastingFurnaceBlockEntity;
+import net.mrscauthd.boss_tools.machines.tile.BlastingFurnaceBlockEntity;
 import net.mrscauthd.boss_tools.util.Rectangle2d;
 
 @OnlyIn(Dist.CLIENT)
 public class BlastFurnaceGuiWindow extends AbstractContainerScreen<BlastFurnaceGui.GuiContainer> {
 
-	public static final ResourceLocation TEXTURE = new ResourceLocation(BossToolsMod.ModId,"textures/screens/blast_furnace_gui.png");
+	public static final ResourceLocation TEXTURE = new ResourceLocation(BossToolsMod.ModId, "textures/screens/blast_furnace_gui.png");
 	public static final int FIRE_LEFT = 53;
 	public static final int FIRE_TOP = 39;
 	public static final int ARROW_LEFT = 74;

@@ -3,7 +3,7 @@ package net.mrscauthd.boss_tools.gui.screens.nasaworkbench;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.mrscauthd.boss_tools.machines.NASAWorkbenchBlock.NASAWorkbenchBlockEntity;
+import net.mrscauthd.boss_tools.machines.tile.NASAWorkbenchBlockEntity;
 
 public class NasaWorkbenchResultSlot extends Slot {
 

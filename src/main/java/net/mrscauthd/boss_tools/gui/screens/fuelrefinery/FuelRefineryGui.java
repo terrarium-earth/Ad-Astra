@@ -11,8 +11,7 @@ import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.network.IContainerFactory;
 import net.mrscauthd.boss_tools.ModInnet;
 import net.mrscauthd.boss_tools.gui.helper.ContainerHelper;
-import net.mrscauthd.boss_tools.machines.FuelRefineryBlock;
-import net.mrscauthd.boss_tools.machines.FuelRefineryBlock.FuelRefineryBlockEntity;
+import net.mrscauthd.boss_tools.machines.tile.FuelRefineryBlockEntity;
 
 public class FuelRefineryGui {
 
@@ -32,10 +31,10 @@ public class FuelRefineryGui {
 			this.blockEntity = blockEntity;
 
 			IItemHandlerModifiable itemHandler = blockEntity.getItemHandler();
-			this.addSlot(new SlotItemHandler(itemHandler, FuelRefineryBlock.SLOT_INPUT_SOURCE, 26, 22));
-			this.addSlot(new SlotItemHandler(itemHandler, FuelRefineryBlock.SLOT_OUTPUT_SINK, 92, 52));
-			this.addSlot(new SlotItemHandler(itemHandler, FuelRefineryBlock.SLOT_INPUT_SINK, 26, 52));
-			this.addSlot(new SlotItemHandler(itemHandler, FuelRefineryBlock.SLOT_OUTPUT_SOURCE, 92, 22));
+			this.addSlot(new SlotItemHandler(itemHandler, FuelRefineryBlockEntity.SLOT_INPUT_SOURCE, 26, 22));
+			this.addSlot(new SlotItemHandler(itemHandler, FuelRefineryBlockEntity.SLOT_OUTPUT_SINK, 92, 52));
+			this.addSlot(new SlotItemHandler(itemHandler, FuelRefineryBlockEntity.SLOT_INPUT_SINK, 26, 52));
+			this.addSlot(new SlotItemHandler(itemHandler, FuelRefineryBlockEntity.SLOT_OUTPUT_SOURCE, 92, 22));
 
 			ContainerHelper.addInventorySlots(this, inv, 8, 90, this::addSlot);
 		}

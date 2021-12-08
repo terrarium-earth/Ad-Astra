@@ -1,5 +1,7 @@
 package net.mrscauthd.boss_tools.gui.screens.compressor;
 
+import org.jetbrains.annotations.NotNull;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
@@ -11,9 +13,8 @@ import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.network.IContainerFactory;
 import net.mrscauthd.boss_tools.ModInnet;
 import net.mrscauthd.boss_tools.gui.helper.ContainerHelper;
-import net.mrscauthd.boss_tools.machines.CompressorBlock.CompressorBlockEntity;
+import net.mrscauthd.boss_tools.machines.tile.CompressorBlockEntity;
 import net.mrscauthd.boss_tools.machines.tile.ItemStackToItemStackBlockEntity;
-import org.jetbrains.annotations.NotNull;
 
 public class CompressorGui {
 

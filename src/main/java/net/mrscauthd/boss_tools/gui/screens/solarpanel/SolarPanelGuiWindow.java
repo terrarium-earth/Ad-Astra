@@ -15,7 +15,7 @@ import net.minecraftforge.energy.IEnergyStorage;
 import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.gauge.GaugeTextHelper;
 import net.mrscauthd.boss_tools.gauge.GaugeValueHelper;
-import net.mrscauthd.boss_tools.machines.SolarPanelBlock.SolarPanelBlockEntity;
+import net.mrscauthd.boss_tools.machines.tile.SolarPanelBlockEntity;
 
 @OnlyIn(Dist.CLIENT)
 public class SolarPanelGuiWindow extends AbstractContainerScreen<SolarPanelGui.GuiContainer> {
