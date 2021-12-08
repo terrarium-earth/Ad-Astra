@@ -12,7 +12,7 @@
       "ore_veins_enabled": true,
       "legacy_random_source": false,
       "default_block": {
-        "Name": "minecraft:stone"
+        "Name": "boss_tools:moon_stone"
       },
       "default_fluid": {
         "Name": "minecraft:air",
@@ -35,7 +35,7 @@
           "offset": 20
         },
         "top_slide": {
-          "target": -0.078125,
+          "target": 0,
           "size": 2,
           "offset": 8
         },
