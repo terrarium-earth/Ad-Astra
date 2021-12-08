@@ -125,13 +125,17 @@ public class NASAWorkbenchBlockEntity extends AbstractMachineBlockEntity {
 
 	@Override
 	protected boolean onCanPlaceItemThroughFace(int index, ItemStack stack, Direction direction) {
-		int find = this.findAvailableSlot(stack);
 
-		if (find == index) {
+		if (super.onCanPlaceItemThroughFace(index, stack, direction) == true) {
 			return true;
 		}
 
-		return super.onCanPlaceItemThroughFace(index, stack, direction);
+		if (direction == null) {
+			return true;
+		}
+
+		int find = this.findAvailableSlot(stack);
+		return find == index;
 	}
 
 	public int findAvailableSlot(ItemStack itemStack) {
