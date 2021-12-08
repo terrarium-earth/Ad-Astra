@@ -146,15 +146,21 @@ public abstract class AbstractMachineBlockEntity extends RandomizableContainerBl
 		this.deserializeCompoents(this.getPowerSystems(), compound.getCompound("powerSystems"));
 	}
 
-	public <T> void deserializeCompoents(Map<ResourceLocation, T> registry, CompoundTag compound) {
+	public <T> void deserializeCompoents(Map<ResourceLocation, T> registry, @Nonnull CompoundTag compound) {
 		for (Entry<ResourceLocation, T> entry : registry.entrySet()) {
-			this.deserializeComponent(entry.getKey(), entry.getValue(), compound.get(entry.getKey().toString()));
+			Tag tag = compound.get(entry.getKey().toString());
+
+			if (tag != null) {
+				this.deserializeComponent(entry.getKey(), entry.getValue(), tag);
+			}
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T> void deserializeComponent(ResourceLocation name, T component, Tag tag) {
-		if (component instanceof INBTSerializable<?>) {
+	public <T> void deserializeComponent(ResourceLocation name, @Nonnull T component, @Nonnull Tag tag) {
+		if (component == null || tag == null) {
+			return;
+		} else if (component instanceof INBTSerializable<?>) {
 			((INBTSerializable<Tag>) component).deserializeNBT(tag);
 		} else if (component instanceof EnergyStorage) {
 			((EnergyStorage) component).deserializeNBT(tag);
@@ -163,14 +169,14 @@ public abstract class AbstractMachineBlockEntity extends RandomizableContainerBl
 		}
 
 	}
-	
+
 	@Override
 	public CompoundTag save(CompoundTag tag) {
 		super.save(tag);
 		this.saveAdditional(tag);
 		return tag;
 	}
-	
+
 	@Override
 	protected void saveAdditional(CompoundTag compound) {
 		super.saveAdditional(compound);
@@ -183,19 +189,27 @@ public abstract class AbstractMachineBlockEntity extends RandomizableContainerBl
 
 	}
 
+	@Nonnull
 	public <T> CompoundTag serializeComponents(Map<ResourceLocation, T> registry) {
 		CompoundTag compound = new CompoundTag();
 
 		for (Entry<ResourceLocation, T> entry : registry.entrySet()) {
-			compound.put(entry.getKey().toString(), this.serializeComponent(entry.getKey(), entry.getValue()));
+			Tag tag = this.serializeComponent(entry.getKey(), entry.getValue());
+
+			if (tag != null) {
+				compound.put(entry.getKey().toString(), tag);
+			}
 		}
 
 		return compound;
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T> Tag serializeComponent(ResourceLocation name, T component) {
-		if (component instanceof INBTSerializable<?>) {
+	@Nullable
+	public <T> Tag serializeComponent(ResourceLocation name, @Nonnull T component) {
+		if (component == null) {
+			return null;
+		} else if (component instanceof INBTSerializable<?>) {
 			return ((INBTSerializable<Tag>) component).serializeNBT();
 		} else if (component instanceof EnergyStorage) {
 			return ((EnergyStorage) component).serializeNBT();
@@ -451,8 +465,7 @@ public abstract class AbstractMachineBlockEntity extends RandomizableContainerBl
 	@SuppressWarnings("unchecked")
 	@Nonnull
 	public <T> T getPrimaryComponent(Map<ResourceLocation, T> map) {
-		return (T) this.selectedPrimaries.computeIfAbsent(map,
-				k -> this.selectPrimaryComponent((Map<ResourceLocation, T>) k));
+		return (T) this.selectedPrimaries.computeIfAbsent(map, k -> this.selectPrimaryComponent((Map<ResourceLocation, T>) k));
 	}
 
 	protected <T> T selectPrimaryComponent(Map<ResourceLocation, T> map) {
@@ -483,7 +496,7 @@ public abstract class AbstractMachineBlockEntity extends RandomizableContainerBl
 		super.setChanged();
 
 		Level level = this.getLevel();
-		
+
 		if (level instanceof ServerLevel) {
 			ServerLevel serverLevel = (ServerLevel) level;
 			serverLevel.getChunkSource().blockChanged(this.getBlockPos());
