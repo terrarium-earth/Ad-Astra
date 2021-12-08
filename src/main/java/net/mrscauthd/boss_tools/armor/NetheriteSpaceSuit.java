@@ -16,7 +16,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.client.IItemRenderProperties;
 import net.mrscauthd.boss_tools.BossToolsMod;
-import net.mrscauthd.boss_tools.armormaterial.SpaceSuitNetheriteArmorMaterial;
+import net.mrscauthd.boss_tools.armormaterial.NetheriteSpaceSuitMaterial;
 import net.mrscauthd.boss_tools.entity.renderer.spacesuit.SpaceSuitModel;
 import net.mrscauthd.boss_tools.events.Methodes;
 import net.mrscauthd.boss_tools.capability.IOxygenStorage;
@@ -37,7 +37,7 @@ import java.util.function.Consumer;
 
 public class NetheriteSpaceSuit {
 
-	public static ArmorItem NETHERITE_OXYGEN_MASK = new ArmorItem(SpaceSuitNetheriteArmorMaterial.ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Properties().tab(BossToolsItemGroups.tab_normal).fireResistant()) {
+	public static ArmorItem NETHERITE_OXYGEN_MASK = new ArmorItem(NetheriteSpaceSuitMaterial.ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Properties().tab(BossToolsItemGroups.tab_normal).fireResistant()) {
 
 		@Override
 		public void initializeClient(Consumer<IItemRenderProperties> consumer) {
@@ -77,7 +77,7 @@ public class NetheriteSpaceSuit {
 
 	};
 
-	public static ArmorItem NETHERITE_SPACE_SUIT = new ArmorItem(SpaceSuitNetheriteArmorMaterial.ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Properties().tab(BossToolsItemGroups.tab_normal).fireResistant()) {
+	public static ArmorItem NETHERITE_SPACE_SUIT = new ArmorItem(NetheriteSpaceSuitMaterial.ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Properties().tab(BossToolsItemGroups.tab_normal).fireResistant()) {
 		@Override
 		public void initializeClient(Consumer<IItemRenderProperties> consumer) {
 			consumer.accept(new IItemRenderProperties() {
@@ -133,7 +133,7 @@ public class NetheriteSpaceSuit {
 		}
 	};
 
-	public static ArmorItem NETHERITE_SPACE_PANTS = new ArmorItem(SpaceSuitNetheriteArmorMaterial.ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Properties().tab(BossToolsItemGroups.tab_normal).fireResistant()) {
+	public static ArmorItem NETHERITE_SPACE_PANTS = new ArmorItem(NetheriteSpaceSuitMaterial.ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Properties().tab(BossToolsItemGroups.tab_normal).fireResistant()) {
 		@Override
 		public void initializeClient(Consumer<IItemRenderProperties> consumer) {
 			consumer.accept(new IItemRenderProperties() {
@@ -153,7 +153,7 @@ public class NetheriteSpaceSuit {
 							"left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap())
 
 					);
-					
+
 					ModelPart modelPart = new ModelPart(Collections.emptyList(), map);
 
 					HumanoidModel armorModel = new HumanoidModel(modelPart);
@@ -173,7 +173,7 @@ public class NetheriteSpaceSuit {
 		}
 	};
 
-	public static ArmorItem NETHERITE_SPACE_BOOTS = new ArmorItem(SpaceSuitNetheriteArmorMaterial.ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Properties().tab(BossToolsItemGroups.tab_normal).fireResistant()) {
+	public static ArmorItem NETHERITE_SPACE_BOOTS = new ArmorItem(NetheriteSpaceSuitMaterial.ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Properties().tab(BossToolsItemGroups.tab_normal).fireResistant()) {
 		@Override
 		public void initializeClient(Consumer<IItemRenderProperties> consumer) {
 			consumer.accept(new IItemRenderProperties() {

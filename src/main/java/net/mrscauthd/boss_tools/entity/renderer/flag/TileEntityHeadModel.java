@@ -1,4 +1,4 @@
-package net.mrscauthd.boss_tools.entity.renderer.flagtileentity;
+package net.mrscauthd.boss_tools.entity.renderer.flag;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -26,21 +26,21 @@ public class TileEntityHeadModel extends SkullModelBase {
 
     public static MeshDefinition createHeadModel() {
         MeshDefinition meshdefinition = new MeshDefinition();
-        PartDefinition partdefinition = meshdefinition.getRoot(); //0,0
+        PartDefinition partdefinition = meshdefinition.getRoot();
         partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(8, 8).addBox(-3.0F, -11.0F, 3.980F, 8.0F, 8.0F, 0.020F).texOffs(0, 8).addBox(-3.0F, -11.0F, 4.002F, 8.0F, 8.0F, 0.010F), PartPose.ZERO);
-        return meshdefinition;//(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F)
+        return meshdefinition;
     }
 
     public static LayerDefinition createHumanoidHeadLayer() {
         MeshDefinition meshdefinition = createHeadModel();
         PartDefinition partdefinition = meshdefinition.getRoot();
         partdefinition.getChild("head").addOrReplaceChild("hat", CubeListBuilder.create().texOffs(32, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.25F)), PartPose.ZERO);
-        return LayerDefinition.create(meshdefinition, 64, 64); //-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F
+        return LayerDefinition.create(meshdefinition, 64, 64);
     }
 
     public static LayerDefinition createMobHeadLayer() {
         MeshDefinition meshdefinition = createHeadModel();
-        return LayerDefinition.create(meshdefinition, 64, 32);
+        return LayerDefinition.create(meshdefinition, 64, 64);
     }
 
     public void setupAnim(float p_103811_, float p_103812_, float p_103813_) {

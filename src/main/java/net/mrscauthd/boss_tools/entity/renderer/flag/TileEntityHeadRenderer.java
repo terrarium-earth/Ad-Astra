@@ -1,4 +1,4 @@
-package net.mrscauthd.boss_tools.entity.renderer.flagtileentity;
+package net.mrscauthd.boss_tools.entity.renderer.flag;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;

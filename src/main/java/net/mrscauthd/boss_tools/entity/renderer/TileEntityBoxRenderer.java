@@ -104,7 +104,7 @@ public class TileEntityBoxRenderer implements BlockEntityRenderer<OxygenBubbleDi
         if (graphicsFanciness == GraphicsStatus.FABULOUS) {
             builder = buffer.getBuffer(RenderType.translucentMovingBlock());
         } else {
-            builder = buffer.getBuffer(RenderType.translucentMovingBlock());
+            builder = buffer.getBuffer(RenderType.translucentNoCrumbling());
         }
 
         if (atlass == null) {
