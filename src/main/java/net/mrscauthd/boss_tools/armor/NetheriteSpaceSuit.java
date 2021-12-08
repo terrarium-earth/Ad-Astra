@@ -47,7 +47,16 @@ public class NetheriteSpaceSuit {
 				@OnlyIn(Dist.CLIENT)
 				public HumanoidModel getArmorModel(LivingEntity living, ItemStack stack, EquipmentSlot slot, HumanoidModel defaultModel) {
 
-					Map map = Map.of("head", new SpaceSuitModel.SPACE_SUIT_P1(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION)).Head);
+					Map<String, ModelPart> map = Map.of("head", new SpaceSuitModel.SPACE_SUIT_P1(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION)).Head,
+
+							"hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+							"body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+							"right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+							"left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+							"right_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+							"left_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap())
+					);
+
 					ModelPart modelPart = new ModelPart(Collections.emptyList(), map);
 
 					HumanoidModel armorModel = new HumanoidModel(modelPart);
@@ -77,10 +86,16 @@ public class NetheriteSpaceSuit {
 				@OnlyIn(Dist.CLIENT)
 				public HumanoidModel getArmorModel(LivingEntity living, ItemStack stack, EquipmentSlot slot, HumanoidModel defaultModel) {
 
-					Map map = Map.of(
+					Map<String, ModelPart> map = Map.of(
 							"body", new SpaceSuitModel.SPACE_SUIT_P1(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION)).Body,
 							"left_arm", new SpaceSuitModel.SPACE_SUIT_P1(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION)).Left_Arm,
-							"right_arm", new SpaceSuitModel.SPACE_SUIT_P1(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION)).Right_Arm);
+							"right_arm", new SpaceSuitModel.SPACE_SUIT_P1(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION)).Right_Arm,
+
+							"head", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+							"hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+							"right_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+							"left_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap())
+					);
 
 					ModelPart modelPart = new ModelPart(Collections.emptyList(), map);
 
@@ -127,10 +142,18 @@ public class NetheriteSpaceSuit {
 				@OnlyIn(Dist.CLIENT)
 				public HumanoidModel getArmorModel(LivingEntity living, ItemStack stack, EquipmentSlot slot, HumanoidModel defaultModel) {
 
-					Map map = Map.of(
+					Map<String, ModelPart> map = Map.of(
+							"right_leg", new SpaceSuitModel.SPACE_SUIT_P2(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P2.LAYER_LOCATION)).Right_Leg,
 							"left_leg", new SpaceSuitModel.SPACE_SUIT_P2(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P2.LAYER_LOCATION)).Left_Leg,
-							"right_leg", new SpaceSuitModel.SPACE_SUIT_P2(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P2.LAYER_LOCATION)).Right_Leg);
 
+							"head", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+							"hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+							"body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+							"right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+							"left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap())
+
+					);
+					
 					ModelPart modelPart = new ModelPart(Collections.emptyList(), map);
 
 					HumanoidModel armorModel = new HumanoidModel(modelPart);
@@ -159,10 +182,17 @@ public class NetheriteSpaceSuit {
 				@OnlyIn(Dist.CLIENT)
 				public HumanoidModel getArmorModel(LivingEntity living, ItemStack stack, EquipmentSlot slot, HumanoidModel defaultModel) {
 
-					Map map = Map.of(
+					Map<String, ModelPart> map = Map.of(
+							"right_leg", new SpaceSuitModel.SPACE_SUIT_P1(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION)).Right_Boots,
 							"left_leg", new SpaceSuitModel.SPACE_SUIT_P1(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION)).Left_Boots,
-							"right_leg", new SpaceSuitModel.SPACE_SUIT_P1(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION)).Right_Boots);
 
+							"head", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+							"hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+							"body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+							"right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+							"left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap())
+
+					);
 					ModelPart modelPart = new ModelPart(Collections.emptyList(), map);
 
 					HumanoidModel armorModel = new HumanoidModel(modelPart);
