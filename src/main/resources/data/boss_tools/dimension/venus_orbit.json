@@ -1,94 +1,65 @@
 {
-  "type": "boss_tools:venus_orbit",
+  "type": "boss_tools:moon",
   "generator": {
     "type": "minecraft:noise",
     "seed": 0,
-    "biome_source": {
-      "type": "minecraft:multi_noise",
-      "seed": 0,
-      "temperature_noise": {
-        "firstOctave": -5.11,
-        "amplitudes": [
-          2,
-          2
-        ]
-      },
-      "humidity_noise": {
-        "firstOctave": -5.11,
-        "amplitudes": [
-          2,
-          2
-        ]
-      },
-      "altitude_noise": {
-        "firstOctave": -5.11,
-        "amplitudes": [
-          2,
-          2
-        ]
-      },
-      "weirdness_noise": {
-        "firstOctave": -5.11,
-        "amplitudes": [
-          2,
-          2
-        ]
-      },
-      "biomes": [
-        {
-          "biome": "boss_tools:orbit",
-          "parameters": {
-            "temperature": 0,
-            "humidity": 0,
-            "altitude": 0,
-            "weirdness": 0,
-            "offset": 0
-          }
-        }
-      ]
-    },
     "settings": {
-      "name": "boss_tools:venus_orbit",
-      "bedrock_roof_position": -10,
-      "bedrock_floor_position": -10,
-      "sea_level": 0,
-      "disable_mob_generation": true,
+      "sea_level": 63,
+      "disable_mob_generation": false,
+      "noise_caves_enabled": true,
+      "noodle_caves_enabled": true,
+      "aquifers_enabled": true,
+      "ore_veins_enabled": true,
+      "legacy_random_source": false,
       "default_block": {
-        "Name": "minecraft:air"
+        "Name": "boss_tools:moon_stone"
       },
       "default_fluid": {
-        "Name": "minecraft:air"
+        "Name": "minecraft:air",
+        "Properties": {}
       },
       "noise": {
-        "density_factor": 0,
-        "density_offset": 0,
-        "simplex_surface_noise": true,
-        "random_density_offset": false,
-        "island_noise_override": true,
-        "amplified": false,
-        "size_horizontal": 2,
-        "size_vertical": 1,
-        "height": 128,
+        "min_y": -64,
+        "height": 384,
+        "size_horizontal": 1,
+        "size_vertical": 2,
+        "island_noise_override": false,
+        "amplified": true,
         "sampling": {
-          "xz_scale": 2,
-          "y_scale": 1,
+          "xz_scale": 0.9999999814507745,
+          "y_scale": 0.9999999814507745,
           "xz_factor": 80,
           "y_factor": 160
         },
         "bottom_slide": {
-          "target": -30,
-          "size": 7,
-          "offset": 1
+          "target": 0.1171875,
+          "size": 3,
+          "offset": 0
         },
         "top_slide": {
-          "target": -3000,
-          "size": 64,
-          "offset": -46
+          "target": -0.078125,
+          "size": 2,
+          "offset": 8
+        },
+        "terrain_shaper": {
+          "offset": 0,
+          "factor": 0,
+          "jaggedness": 0
+        }
+      },
+      "surface_rule": {
+        "type": "minecraft:block",
+        "result_state": {
+          "Name": "boss_tools:moon_stone"
         }
       },
       "structures": {
         "structures": {}
       }
+    },
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "boss_tools:moon"
     }
   }
 }
