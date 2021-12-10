@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[38,)"
+loaderVersion="[39,)"
 license="Not specified"
 
 [[mods]]
@@ -16,13 +16,13 @@ Fly to Other Planets and Beyond!
 [[dependencies.boss_tools]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.18]"
+    versionRange="[1.18.1]"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.boss_tools]]
     modId="forge"
     mandatory=true
-    versionRange="[38.0.14,]"
+    versionRange="[39.0.0,]"
     ordering="NONE"
     side="BOTH"
