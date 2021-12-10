@@ -38,7 +38,7 @@ public class ClientEventBusMars {
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public static void clientSetup(FMLClientSetupEvent event) {
-		DimensionSpecialEffects.EFFECTS.put(DIM_RENDER_INFO, new DimensionSpecialEffects(192, false, DimensionSpecialEffects.SkyType.NORMAL, false, false) {
+		DimensionSpecialEffects.EFFECTS.put(DIM_RENDER_INFO, new DimensionSpecialEffects(192, true, DimensionSpecialEffects.SkyType.NORMAL, false, false) {
 			@Override
 			public Vec3 getBrightnessDependentFogColor(Vec3 p_108878_, float p_108879_) {
 				return new Vec3(0.647058823529, 0.450980392157, 0.254901960784);
