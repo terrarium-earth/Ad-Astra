@@ -1,6 +1,7 @@
 package net.mrscauthd.boss_tools.skyrenderer;
 
 import com.mojang.blaze3d.vertex.*;
+import com.mojang.datafixers.util.Pair;
 import com.mojang.math.Matrix4f;
 import com.mojang.math.Vector3f;
 import net.minecraft.client.GraphicsStatus;
@@ -26,18 +27,19 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.mrscauthd.boss_tools.BossToolsMod;
 
+import java.nio.ByteBuffer;
 import java.util.Random;
 
 @Mod.EventBusSubscriber(modid = BossToolsMod.ModId, bus = Bus.MOD, value = Dist.CLIENT)
 public class ClientEventBusMoon {
 
+    private static final ResourceLocation DIM_RENDER_INFO = new ResourceLocation(BossToolsMod.ModId, "moon");
+
     @Nullable
     public static VertexBuffer starBuffer;
-    private static final ResourceLocation DIM_RENDER_INFO = new ResourceLocation(BossToolsMod.ModId, "moon");
     private static final ResourceLocation SUN_TEXTURES = new ResourceLocation(BossToolsMod.ModId, "textures/sky/no_a_sun.png");
     private static final ResourceLocation EARTH = new ResourceLocation(BossToolsMod.ModId, "textures/sky/earth.png");
     private static final ResourceLocation EARTH_LIGHT_TEXTURES = new ResourceLocation(BossToolsMod.ModId, "textures/sky/earth_light.png");
-
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void clientSetup(FMLClientSetupEvent event) {
@@ -67,7 +69,8 @@ public class ClientEventBusMoon {
                 return new ISkyRenderHandler() {
                     @Override
                     public void render(int ticks, float p_181412_, PoseStack p_181410_, ClientLevel level, Minecraft minecraft) {
-                        var matrix4f = RenderSystem.getProjectionMatrix();
+                        Matrix4f matrix4f = RenderSystem.getProjectionMatrix();
+                        Matrix4f starmatrix4f = RenderSystem.getProjectionMatrix();
                         RenderSystem.disableTexture();
                         Vec3 vec3 = level.getSkyColor(minecraft.gameRenderer.getMainCamera().getPosition(), p_181412_);
                         float f = (float)vec3.x;
@@ -97,7 +100,6 @@ public class ClientEventBusMoon {
                             matrix4f = p_181410_.last().pose();
                             bufferbuilder.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);
                             bufferbuilder.vertex(matrix4f, 0.0F, 100.0F, 0.0F).color(f4, f5, f6, afloat[3]).endVertex();
-                            int i = 16;
 
                             for(int j = 0; j <= 16; ++j) {
                                 float f7 = (float)j * ((float)Math.PI * 2F) / 16.0F;
@@ -171,7 +173,7 @@ public class ClientEventBusMoon {
                         createStars();
                         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
                         FogRenderer.setupNoFog();
-                        starBuffer.drawWithShader(p_181410_.last().pose(), matrix4f, GameRenderer.getPositionShader());
+                        starBuffer.drawWithShader(p_181410_.last().pose(), starmatrix4f, GameRenderer.getPositionShader());
 
                         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
                         RenderSystem.disableBlend();
