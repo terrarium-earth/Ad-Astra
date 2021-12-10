@@ -18,10 +18,26 @@ import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.ModInnet;
 import net.mrscauthd.boss_tools.entity.renderer.TileEntityBoxRenderer;
 import net.mrscauthd.boss_tools.entity.renderer.alien.AlienModel;
+import net.mrscauthd.boss_tools.entity.renderer.alienzombie.AlienZombieModel;
+import net.mrscauthd.boss_tools.entity.renderer.alienzombie.AlienZombieRenderer;
 import net.mrscauthd.boss_tools.entity.renderer.flag.TileEntityHeadRenderer;
+import net.mrscauthd.boss_tools.entity.renderer.lander.LanderModel;
+import net.mrscauthd.boss_tools.entity.renderer.lander.LanderRenderer;
+import net.mrscauthd.boss_tools.entity.renderer.mogler.MoglerModel;
+import net.mrscauthd.boss_tools.entity.renderer.mogler.MoglerRenderer;
+import net.mrscauthd.boss_tools.entity.renderer.pygro.PygroModel;
+import net.mrscauthd.boss_tools.entity.renderer.pygro.PygroRenderer;
 import net.mrscauthd.boss_tools.entity.renderer.rockettier1.RocketTier1Model;
 import net.mrscauthd.boss_tools.entity.renderer.rockettier1.RocketTier1Renderer;
+import net.mrscauthd.boss_tools.entity.renderer.rockettier2.RocketTier2Model;
+import net.mrscauthd.boss_tools.entity.renderer.rockettier2.RocketTier2Renderer;
+import net.mrscauthd.boss_tools.entity.renderer.rockettier3.RocketTier3Model;
+import net.mrscauthd.boss_tools.entity.renderer.rockettier3.RocketTier3Renderer;
+import net.mrscauthd.boss_tools.entity.renderer.rover.RoverModel;
+import net.mrscauthd.boss_tools.entity.renderer.rover.RoverRenderer;
 import net.mrscauthd.boss_tools.entity.renderer.spacesuit.SpaceSuitModel;
+import net.mrscauthd.boss_tools.entity.renderer.starcrawler.StarCrawlerModel;
+import net.mrscauthd.boss_tools.entity.renderer.starcrawler.StarCrawlerRenderer;
 import net.mrscauthd.boss_tools.gui.screens.blastfurnace.BlastFurnaceGuiWindow;
 import net.mrscauthd.boss_tools.gui.screens.coalgenerator.CoalGeneratorGuiWindow;
 import net.mrscauthd.boss_tools.gui.screens.compressor.CompressorGuiWindow;
@@ -48,19 +64,15 @@ public class ClientEventBusSubscriber {
 	@SubscribeEvent
 	public static void registerEntityRenderingHandler(EntityRenderersEvent.RegisterRenderers event) {
 		event.registerEntityRenderer(ModInnet.ALIEN.get(), AlienRenderer::new);
-		event.registerEntityRenderer(ModInnet.TIER_1_ROCKET.get(), RocketTier1Renderer::new);
-
-		/*
-		event.registerEntityRenderer(ModInnet.PYGRO.get(), PygroRenderer::new);
-		event.registerEntityRenderer(ModInnet.MOGLER.get(), MoglerRenderer::new);
-		event.registerEntityRenderer(ModInnet.ALIEN_ZOMBIE.get(), AlienZombieRenderer::new);
-		event.registerEntityRenderer(ModInnet.STAR_CRAWLER.get(), StarCrawlerRenderer::new);
+	//	event.registerEntityRenderer(ModInnet.ALIEN_ZOMBIE.get(), AlienZombieRenderer::new);
+	//	event.registerEntityRenderer(ModInnet.STAR_CRAWLER.get(), StarCrawlerRenderer::new);
+	//	event.registerEntityRenderer(ModInnet.PYGRO.get(), PygroRenderer::new);
+	//	event.registerEntityRenderer(ModInnet.MOGLER.get(), MoglerRenderer::new);
 		event.registerEntityRenderer(ModInnet.TIER_1_ROCKET.get(), RocketTier1Renderer::new);
 		event.registerEntityRenderer(ModInnet.TIER_2_ROCKET.get(), RocketTier2Renderer::new);
 		event.registerEntityRenderer(ModInnet.TIER_3_ROCKET.get(), RocketTier3Renderer::new);
 		event.registerEntityRenderer(ModInnet.LANDER.get(), LanderRenderer::new);
 		event.registerEntityRenderer(ModInnet.ROVER.get(), RoverRenderer::new);
-		*/
 
 		event.registerEntityRenderer(ModInnet.ALIEN_SPIT_ENTITY.get(), renderManager -> new ThrownItemRenderer(renderManager, 1, true));
 
@@ -72,8 +84,16 @@ public class ClientEventBusSubscriber {
 	@SubscribeEvent
 	public static void registerEntityRenderingHandler(EntityRenderersEvent.RegisterLayerDefinitions event) {
 		event.registerLayerDefinition(AlienModel.LAYER_LOCATION, AlienModel::createBodyLayer);
+	//	event.registerLayerDefinition(AlienZombieModel.LAYER_LOCATION, AlienZombieModel::createBodyLayer);
+	//	event.registerLayerDefinition(StarCrawlerModel.LAYER_LOCATION, StarCrawlerModel::createBodyLayer);
+	//	event.registerLayerDefinition(PygroModel.LAYER_LOCATION, PygroModel::createBodyLayer);
+	//	event.registerLayerDefinition(MoglerModel.LAYER_LOCATION, MoglerModel::createBodyLayer);
 
 		event.registerLayerDefinition(RocketTier1Model.LAYER_LOCATION, RocketTier1Model::createBodyLayer);
+		event.registerLayerDefinition(RocketTier2Model.LAYER_LOCATION, RocketTier2Model::createBodyLayer);
+		event.registerLayerDefinition(RocketTier3Model.LAYER_LOCATION, RocketTier3Model::createBodyLayer);
+		event.registerLayerDefinition(LanderModel.LAYER_LOCATION, LanderModel::createBodyLayer);
+		event.registerLayerDefinition(RoverModel.LAYER_LOCATION, RoverModel::createBodyLayer);
 
 		event.registerLayerDefinition(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION, SpaceSuitModel.SPACE_SUIT_P1::createBodyLayer);
 		event.registerLayerDefinition(SpaceSuitModel.SPACE_SUIT_P2.LAYER_LOCATION, SpaceSuitModel.SPACE_SUIT_P2::createBodyLayer);

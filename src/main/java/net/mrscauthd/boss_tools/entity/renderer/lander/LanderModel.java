@@ -1,305 +1,170 @@
 package net.mrscauthd.boss_tools.entity.renderer.lander;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.resources.ResourceLocation;
+import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.entity.LanderEntity;
 
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.api.distmarker.Dist;
 
 @OnlyIn(Dist.CLIENT)
-public class LanderModel<T extends LanderEntity> /*extends EntityModel<T>*/  {
-	/*
-	private final ModelRenderer leg1;
-	private final ModelRenderer cube_r1;
-	private final ModelRenderer cube_r2;
-	private final ModelRenderer cube_r3;
-	private final ModelRenderer cube_r4;
-	private final ModelRenderer leg2;
-	private final ModelRenderer cube_r5;
-	private final ModelRenderer cube_r6;
-	private final ModelRenderer cube_r7;
-	private final ModelRenderer cube_r8;
-	private final ModelRenderer cube_r9;
-	private final ModelRenderer leg3;
-	private final ModelRenderer cube_r10;
-	private final ModelRenderer cube_r11;
-	private final ModelRenderer cube_r12;
-	private final ModelRenderer cube_r13;
-	private final ModelRenderer cube_r14;
-	private final ModelRenderer leg4;
-	private final ModelRenderer cube_r15;
-	private final ModelRenderer cube_r16;
-	private final ModelRenderer cube_r17;
-	private final ModelRenderer cube_r18;
-	private final ModelRenderer cube_r19;
-	private final ModelRenderer bb_main;
-	private final ModelRenderer cube_r20;
-	private final ModelRenderer cube_r21;
-	private final ModelRenderer cube_r22;
-	private final ModelRenderer cube_r23;
-	private final ModelRenderer cube_r24;
-	private final ModelRenderer cube_r25;
-	private final ModelRenderer cube_r26;
-	private final ModelRenderer cube_r27;
-	private final ModelRenderer cube_r28;
-	private final ModelRenderer cube_r29;
-	private final ModelRenderer cube_r30;
-	private final ModelRenderer cube_r31;
-	private final ModelRenderer cube_r32;
-	private final ModelRenderer cube_r33;
-	private final ModelRenderer cube_r34;
-	private final ModelRenderer cube_r35;
-	private final ModelRenderer cube_r36;
-	public LanderModel() {
-		textureWidth = 256;
-		textureHeight = 256;
+public class LanderModel<T extends LanderEntity> extends EntityModel<T> {
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(BossToolsMod.ModId, "lander"), "main");
+    private final ModelPart leg1;
+    private final ModelPart leg2;
+    private final ModelPart leg3;
+    private final ModelPart leg4;
+    private final ModelPart bb_main;
 
-		leg1 = new ModelRenderer(this);
-		leg1.setRotationPoint(-11.0F, 8.1414F, 10.7143F);
-		leg1.setTextureOffset(0, 144).addBox(-10.0F, 14.8586F, 0.2857F, 10.0F, 1.0F, 10.0F, 0.0F, false);
-		cube_r1 = new ModelRenderer(this);
-		cube_r1.setRotationPoint(11.0F, 11.8586F, -10.7143F);
-		leg1.addChild(cube_r1);
-		setRotationAngle(cube_r1, -0.6981F, -0.7854F, 0.0F);
-		cube_r1.setTextureOffset(116, 44).addBox(-1.0F, -12.5F, 16.5F, 2.0F, 1.0F, 3.0F, 0.0F, false);
-		cube_r2 = new ModelRenderer(this);
-		cube_r2.setRotationPoint(11.0F, 11.8586F, -10.7143F);
-		leg1.addChild(cube_r2);
-		setRotationAngle(cube_r2, 0.0F, 0.7854F, 0.0F);
-		cube_r2.setTextureOffset(116, 37).addBox(-21.0F, 0.99F, -2.0F, 4.0F, 2.0F, 4.0F, 0.0F, false);
-		cube_r3 = new ModelRenderer(this);
-		cube_r3.setRotationPoint(11.0F, 11.8586F, -10.7143F);
-		leg1.addChild(cube_r3);
-		setRotationAngle(cube_r3, 0.6109F, -0.7854F, 0.0F);
-		cube_r3.setTextureOffset(64, 26).addBox(-2.0F, -2.0F, 18.0F, 4.0F, 4.0F, 3.0F, 0.0F, false);
-		cube_r3.setTextureOffset(42, 26).addBox(-3.0F, -3.0F, 14.0F, 6.0F, 6.0F, 5.0F, 0.0F, false);
-		cube_r4 = new ModelRenderer(this);
-		cube_r4.setRotationPoint(11.0F, 11.8586F, -10.7143F);
-		leg1.addChild(cube_r4);
-		setRotationAngle(cube_r4, 0.3927F, -0.7854F, 0.0F);
-		cube_r4.setTextureOffset(48, 46).addBox(-1.5F, -2.0F, 15.0F, 3.0F, 12.0F, 3.0F, -0.5F, false);
-		cube_r4.setTextureOffset(104, 37).addBox(-1.5F, -2.0F, 15.0F, 3.0F, 11.0F, 3.0F, 0.0F, false);
-		leg2 = new ModelRenderer(this);
-		leg2.setRotationPoint(-10.0F, 8.1414F, -10.2857F);
-		cube_r5 = new ModelRenderer(this);
-		cube_r5.setRotationPoint(10.0F, 11.8586F, 10.2857F);
-		leg2.addChild(cube_r5);
-		setRotationAngle(cube_r5, 0.6109F, -2.3562F, 0.0F);
-		cube_r5.setTextureOffset(42, 26).addBox(-3.0F, -3.0F, 14.0F, 6.0F, 6.0F, 5.0F, 0.0F, false);
-		cube_r5.setTextureOffset(64, 26).addBox(-2.0F, -2.0F, 18.0F, 4.0F, 4.0F, 3.0F, 0.0F, false);
-		cube_r6 = new ModelRenderer(this);
-		cube_r6.setRotationPoint(10.0F, 11.8586F, 10.2857F);
-		leg2.addChild(cube_r6);
-		setRotationAngle(cube_r6, 0.3927F, -2.3562F, 0.0F);
-		cube_r6.setTextureOffset(48, 46).addBox(-1.5F, -2.0F, 15.0F, 3.0F, 12.0F, 3.0F, -0.5F, false);
-		cube_r6.setTextureOffset(104, 37).addBox(-1.5F, -2.0F, 15.0F, 3.0F, 11.0F, 3.0F, 0.0F, false);
-		cube_r7 = new ModelRenderer(this);
-		cube_r7.setRotationPoint(10.0F, 11.8586F, 10.2857F);
-		leg2.addChild(cube_r7);
-		setRotationAngle(cube_r7, 0.0F, -1.5708F, 0.0F);
-		cube_r7.setTextureOffset(0, 144).addBox(-21.0F, 3.0F, 11.0F, 10.0F, 1.0F, 10.0F, 0.0F, false);
-		cube_r8 = new ModelRenderer(this);
-		cube_r8.setRotationPoint(10.0F, 11.8586F, 10.2857F);
-		leg2.addChild(cube_r8);
-		setRotationAngle(cube_r8, 0.0F, -0.7854F, 0.0F);
-		cube_r8.setTextureOffset(116, 37).addBox(-21.0F, 0.99F, -2.0F, 4.0F, 2.0F, 4.0F, 0.0F, false);
-		cube_r9 = new ModelRenderer(this);
-		cube_r9.setRotationPoint(10.0F, 11.8586F, 10.2857F);
-		leg2.addChild(cube_r9);
-		setRotationAngle(cube_r9, -0.6981F, -2.3562F, 0.0F);
-		cube_r9.setTextureOffset(116, 44).addBox(-1.0F, -12.5F, 16.5F, 2.0F, 1.0F, 3.0F, 0.0F, false);
-		leg3 = new ModelRenderer(this);
-		leg3.setRotationPoint(10.0F, 8.1414F, -10.2857F);
-		cube_r10 = new ModelRenderer(this);
-		cube_r10.setRotationPoint(-10.0F, 11.8586F, 10.2857F);
-		leg3.addChild(cube_r10);
-		setRotationAngle(cube_r10, 0.6109F, 2.3562F, 0.0F);
-		cube_r10.setTextureOffset(64, 26).addBox(-2.0F, -2.0F, 18.0F, 4.0F, 4.0F, 3.0F, 0.0F, false);
-		cube_r10.setTextureOffset(42, 26).addBox(-3.0F, -3.0F, 14.0F, 6.0F, 6.0F, 5.0F, 0.0F, false);
-		cube_r11 = new ModelRenderer(this);
-		cube_r11.setRotationPoint(-10.0F, 11.8586F, 10.2857F);
-		leg3.addChild(cube_r11);
-		setRotationAngle(cube_r11, 0.3927F, 2.3562F, 0.0F);
-		cube_r11.setTextureOffset(48, 46).addBox(-1.5F, -2.0F, 15.0F, 3.0F, 12.0F, 3.0F, -0.5F, false);
-		cube_r11.setTextureOffset(104, 37).addBox(-1.5F, -2.0F, 15.0F, 3.0F, 11.0F, 3.0F, 0.0F, false);
-		cube_r12 = new ModelRenderer(this);
-		cube_r12.setRotationPoint(-10.0F, 11.8586F, 10.2857F);
-		leg3.addChild(cube_r12);
-		setRotationAngle(cube_r12, 0.0F, 3.1416F, 0.0F);
-		cube_r12.setTextureOffset(0, 144).addBox(-21.0F, 3.0F, 11.0F, 10.0F, 1.0F, 10.0F, 0.0F, false);
-		cube_r13 = new ModelRenderer(this);
-		cube_r13.setRotationPoint(-10.0F, 11.8586F, 10.2857F);
-		leg3.addChild(cube_r13);
-		setRotationAngle(cube_r13, 0.0F, -2.3562F, 0.0F);
-		cube_r13.setTextureOffset(116, 37).addBox(-21.0F, 0.99F, -2.0F, 4.0F, 2.0F, 4.0F, 0.0F, false);
-		cube_r14 = new ModelRenderer(this);
-		cube_r14.setRotationPoint(-10.0F, 11.8586F, 10.2857F);
-		leg3.addChild(cube_r14);
-		setRotationAngle(cube_r14, -0.6981F, 2.3562F, 0.0F);
-		cube_r14.setTextureOffset(116, 44).addBox(-1.0F, -12.5F, 16.5F, 2.0F, 1.0F, 3.0F, 0.0F, false);
-		leg4 = new ModelRenderer(this);
-		leg4.setRotationPoint(10.0F, 8.1414F, 10.7143F);
-		cube_r15 = new ModelRenderer(this);
-		cube_r15.setRotationPoint(-10.0F, 11.8586F, -10.7143F);
-		leg4.addChild(cube_r15);
-		setRotationAngle(cube_r15, 0.6109F, 0.7854F, 0.0F);
-		cube_r15.setTextureOffset(64, 26).addBox(-2.0F, -2.0F, 18.0F, 4.0F, 4.0F, 3.0F, 0.0F, false);
-		cube_r15.setTextureOffset(42, 26).addBox(-3.0F, -3.0F, 14.0F, 6.0F, 6.0F, 5.0F, 0.0F, false);
-		cube_r16 = new ModelRenderer(this);
-		cube_r16.setRotationPoint(-10.0F, 11.8586F, -10.7143F);
-		leg4.addChild(cube_r16);
-		setRotationAngle(cube_r16, 0.3927F, 0.7854F, 0.0F);
-		cube_r16.setTextureOffset(48, 46).addBox(-1.5F, -2.0F, 15.0F, 3.0F, 12.0F, 3.0F, -0.5F, false);
-		cube_r16.setTextureOffset(104, 37).addBox(-1.5F, -2.0F, 15.0F, 3.0F, 11.0F, 3.0F, 0.0F, false);
-		cube_r17 = new ModelRenderer(this);
-		cube_r17.setRotationPoint(-10.0F, 11.8586F, -10.7143F);
-		leg4.addChild(cube_r17);
-		setRotationAngle(cube_r17, 0.0F, 1.5708F, 0.0F);
-		cube_r17.setTextureOffset(0, 144).addBox(-21.0F, 3.0F, 11.0F, 10.0F, 1.0F, 10.0F, 0.0F, false);
-		cube_r18 = new ModelRenderer(this);
-		cube_r18.setRotationPoint(-10.0F, 11.8586F, -10.7143F);
-		leg4.addChild(cube_r18);
-		setRotationAngle(cube_r18, 0.0F, 2.3562F, 0.0F);
-		cube_r18.setTextureOffset(116, 37).addBox(-21.0F, 0.99F, -2.0F, 4.0F, 2.0F, 4.0F, 0.0F, false);
-		cube_r19 = new ModelRenderer(this);
-		cube_r19.setRotationPoint(-10.0F, 11.8586F, -10.7143F);
-		leg4.addChild(cube_r19);
-		setRotationAngle(cube_r19, -0.6981F, 0.7854F, 0.0F);
-		cube_r19.setTextureOffset(116, 44).addBox(-1.0F, -12.5F, 16.5F, 2.0F, 1.0F, 3.0F, 0.0F, false);
-		bb_main = new ModelRenderer(this);
-		bb_main.setRotationPoint(0.0F, 24.0F, 0.0F);
-		bb_main.setTextureOffset(155, 59).addBox(-6.0F, -11.9F, -6.0F, 12.0F, 1.0F, 12.0F, 0.0F, false);
-		bb_main.setTextureOffset(0, 0).addBox(-12.0F, -16.0F, -12.0F, 24.0F, 2.0F, 24.0F, 0.0F, false);
-		bb_main.setTextureOffset(0, 111).addBox(-5.0F, -19.0F, -8.0F, 10.0F, 3.0F, 10.0F, 0.0F, false);
-		bb_main.setTextureOffset(0, 46).addBox(-8.0F, -35.0F, -13.0F, 16.0F, 16.0F, 16.0F, 0.0F, false);
-		bb_main.setTextureOffset(0, 124).addBox(8.0F, -30.0F, -8.0F, 2.0F, 10.0F, 10.0F, 0.0F, false);
-		bb_main.setTextureOffset(104, 12).addBox(-8.995F, -36.0F, -12.0F, 18.0F, 18.0F, 2.0F, 0.0F, false);
-		bb_main.setTextureOffset(155, 24).addBox(3.5F, -46.0F, -15.5F, 1.0F, 13.0F, 1.0F, 0.0F, false);
-		bb_main.setTextureOffset(155, 24).addBox(-4.5F, -46.0F, -15.5F, 1.0F, 13.0F, 1.0F, 0.0F, false);
-		bb_main.setTextureOffset(159, 24).addBox(1.5F, -41.0F, -15.5F, 1.0F, 13.0F, 1.0F, 0.0F, false);
-		bb_main.setTextureOffset(163, 24).addBox(-2.5F, -43.0F, -15.5F, 1.0F, 13.0F, 1.0F, 0.0F, false);
-		bb_main.setTextureOffset(167, 24).addBox(-0.5F, -44.0F, -15.5F, 1.0F, 13.0F, 1.0F, 0.0F, false);
-		bb_main.setTextureOffset(104, 0).addBox(1.0F, -33.0F, 14.0F, 3.0F, 9.0F, 3.0F, 0.0F, false);
-		bb_main.setTextureOffset(104, 0).addBox(-4.0F, -33.0F, 14.0F, 3.0F, 9.0F, 3.0F, 0.0F, false);
-		bb_main.setTextureOffset(155, 39).addBox(-4.0F, -13.9F, -4.0F, 8.0F, 1.0F, 8.0F, 0.0F, false);
-		bb_main.setTextureOffset(155, 48).addBox(-5.0F, -12.9F, -5.0F, 10.0F, 1.0F, 10.0F, 0.0F, false);
-		bb_main.setTextureOffset(104, 51).addBox(-6.0F, -25.0F, -14.0F, 12.0F, 3.0F, 3.0F, 0.0F, false);
-		bb_main.setTextureOffset(104, 51).addBox(-6.0F, -33.0F, -16.0F, 12.0F, 3.0F, 3.0F, 0.0F, false);
-		bb_main.setTextureOffset(104, 51).addBox(-6.0F, -16.505F, 9.005F, 12.0F, 3.0F, 3.0F, 0.0F, false);
-		bb_main.setTextureOffset(24, 134).addBox(10.0F, -28.0F, -5.0F, 1.0F, 6.0F, 4.0F, 0.0F, false);
-		bb_main.setTextureOffset(34, 134).addBox(10.0F, -27.0F, -6.0F, 1.0F, 4.0F, 6.0F, 0.0F, false);
-		cube_r20 = new ModelRenderer(this);
-		cube_r20.setRotationPoint(-0.5F, -17.5F, 0.5F);
-		bb_main.addChild(cube_r20);
-		setRotationAngle(cube_r20, 0.0F, 3.1416F, 0.0F);
-		cube_r20.setTextureOffset(24, 134).addBox(9.5F, -10.5F, 1.5F, 1.0F, 6.0F, 4.0F, 0.0F, false);
-		cube_r20.setTextureOffset(34, 134).addBox(9.5F, -9.5F, 0.5F, 1.0F, 4.0F, 6.0F, 0.0F, false);
-		cube_r21 = new ModelRenderer(this);
-		cube_r21.setRotationPoint(0.0F, 0.0F, 0.0F);
-		bb_main.addChild(cube_r21);
-		setRotationAngle(cube_r21, 0.0F, 3.1416F, 0.0F);
-		cube_r21.setTextureOffset(104, 51).addBox(-6.0F, -16.505F, 9.005F, 12.0F, 3.0F, 3.0F, 0.0F, false);
-		cube_r22 = new ModelRenderer(this);
-		cube_r22.setRotationPoint(0.0F, 0.0F, 0.0F);
-		bb_main.addChild(cube_r22);
-		setRotationAngle(cube_r22, 0.0F, 1.5708F, 0.0F);
-		cube_r22.setTextureOffset(104, 51).addBox(-6.0F, -16.505F, 9.005F, 12.0F, 3.0F, 3.0F, 0.0F, false);
-		cube_r23 = new ModelRenderer(this);
-		cube_r23.setRotationPoint(0.0F, 0.0F, 0.0F);
-		bb_main.addChild(cube_r23);
-		setRotationAngle(cube_r23, 0.0F, -1.5708F, 0.0F);
-		cube_r23.setTextureOffset(104, 51).addBox(-6.0F, -16.505F, 9.005F, 12.0F, 3.0F, 3.0F, 0.0F, false);
-		cube_r24 = new ModelRenderer(this);
-		cube_r24.setRotationPoint(0.0F, 0.0F, 0.0F);
-		bb_main.addChild(cube_r24);
-		setRotationAngle(cube_r24, 0.2182F, 0.0F, 0.0F);
-		cube_r24.setTextureOffset(104, 51).addBox(-6.0F, -38.0F, 5.0F, 12.0F, 3.0F, 3.0F, 0.0F, false);
-		cube_r24.setTextureOffset(104, 51).addBox(-6.0F, -38.0F, 0.0F, 12.0F, 3.0F, 3.0F, 0.0F, false);
-		cube_r25 = new ModelRenderer(this);
-		cube_r25.setRotationPoint(0.0F, 0.0F, 0.0F);
-		bb_main.addChild(cube_r25);
-		setRotationAngle(cube_r25, 0.7854F, 0.0F, 0.0F);
-		cube_r25.setTextureOffset(104, 51).addBox(-6.0F, -8.0F, 15.0F, 12.0F, 3.0F, 3.0F, 0.0F, false);
-		cube_r25.setTextureOffset(104, 51).addBox(-6.0F, -11.0F, 12.0F, 12.0F, 3.0F, 3.0F, 0.0F, false);
-		cube_r26 = new ModelRenderer(this);
-		cube_r26.setRotationPoint(-0.5F, -15.5F, 19.5F);
-		bb_main.addChild(cube_r26);
-		setRotationAngle(cube_r26, 0.2182F, 0.0F, 0.0F);
-		cube_r26.setTextureOffset(14, 126).addBox(-12.5F, -25.5F, -7.5F, 4.0F, 4.0F, 4.0F, 0.0F, false);
-		cube_r26.setTextureOffset(14, 126).addBox(-12.5F, -10.5F, -7.5F, 4.0F, 4.0F, 4.0F, 0.0F, false);
-		cube_r26.setTextureOffset(14, 126).addBox(9.5F, -10.5F, -7.5F, 4.0F, 4.0F, 4.0F, 0.0F, false);
-		cube_r26.setTextureOffset(14, 126).addBox(9.5F, -25.5F, -7.5F, 4.0F, 4.0F, 4.0F, 0.0F, false);
-		cube_r26.setTextureOffset(0, 92).addBox(-11.5F, -24.5F, -6.5F, 24.0F, 17.0F, 2.0F, 0.0F, false);
-		cube_r27 = new ModelRenderer(this);
-		cube_r27.setRotationPoint(0.0F, 0.0F, 0.0F);
-		bb_main.addChild(cube_r27);
-		setRotationAngle(cube_r27, 0.0F, 2.3562F, 0.0F);
-		cube_r27.setTextureOffset(104, 32).addBox(-6.0F, -16.5F, 11.0F, 12.0F, 3.0F, 2.0F, 0.0F, false);
-		cube_r28 = new ModelRenderer(this);
-		cube_r28.setRotationPoint(0.0F, 0.0F, 0.0F);
-		bb_main.addChild(cube_r28);
-		setRotationAngle(cube_r28, 0.0F, -2.3562F, 0.0F);
-		cube_r28.setTextureOffset(104, 32).addBox(-6.0F, -16.5F, 11.0F, 12.0F, 3.0F, 2.0F, 0.0F, false);
-		cube_r29 = new ModelRenderer(this);
-		cube_r29.setRotationPoint(0.0F, 0.0F, 0.0F);
-		bb_main.addChild(cube_r29);
-		setRotationAngle(cube_r29, 0.0F, -0.7854F, 0.0F);
-		cube_r29.setTextureOffset(104, 32).addBox(-6.0F, -16.5F, 11.0F, 12.0F, 3.0F, 2.0F, 0.0F, false);
-		cube_r30 = new ModelRenderer(this);
-		cube_r30.setRotationPoint(0.0F, 0.0F, 0.0F);
-		bb_main.addChild(cube_r30);
-		setRotationAngle(cube_r30, 0.0F, 0.7854F, 0.0F);
-		cube_r30.setTextureOffset(104, 32).addBox(-6.0F, -16.5F, 11.0F, 12.0F, 3.0F, 2.0F, 0.0F, false);
-		cube_r31 = new ModelRenderer(this);
-		cube_r31.setRotationPoint(-0.5F, -17.5F, 15.5F);
-		bb_main.addChild(cube_r31);
-		setRotationAngle(cube_r31, 0.2182F, 0.0F, 0.0F);
-		cube_r31.setTextureOffset(155, 0).addBox(-4.5F, -15.5F, -12.5F, 10.0F, 10.0F, 14.0F, 0.0F, false);
-		cube_r32 = new ModelRenderer(this);
-		cube_r32.setRotationPoint(-0.5F, -15.5F, 23.5F);
-		bb_main.addChild(cube_r32);
-		setRotationAngle(cube_r32, 0.2182F, 0.0F, 0.0F);
-		cube_r32.setTextureOffset(0, 78).addBox(-9.5F, -21.5F, -6.5F, 20.0F, 13.0F, 1.0F, 0.0F, false);
-		cube_r33 = new ModelRenderer(this);
-		cube_r33.setRotationPoint(-0.5F, -17.5F, -3.5F);
-		bb_main.addChild(cube_r33);
-		setRotationAngle(cube_r33, 0.3927F, 0.0F, 0.0F);
-		cube_r33.setTextureOffset(116, 0).addBox(-5.0F, -16.5F, -6.5F, 11.0F, 9.0F, 2.0F, 0.0F, false);
-		cube_r34 = new ModelRenderer(this);
-		cube_r34.setRotationPoint(-0.5F, -17.5F, 1.5F);
-		bb_main.addChild(cube_r34);
-		setRotationAngle(cube_r34, 1.5708F, 0.0F, 0.0F);
-		cube_r34.setTextureOffset(104, 12).addBox(-8.5F, -15.5F, 14.5F, 18.0F, 18.0F, 2.0F, 0.0F, false);
-		cube_r35 = new ModelRenderer(this);
-		cube_r35.setRotationPoint(-0.5F, -17.5F, 0.5F);
-		bb_main.addChild(cube_r35);
-		setRotationAngle(cube_r35, 0.2182F, 0.0F, 0.0F);
-		cube_r35.setTextureOffset(0, 26).addBox(-6.5F, -19.5F, -8.5F, 14.0F, 6.0F, 14.0F, 0.0F, false);
-		cube_r36 = new ModelRenderer(this);
-		cube_r36.setRotationPoint(-9.5F, -21.5F, -3.5F);
-		bb_main.addChild(cube_r36);
-		setRotationAngle(cube_r36, 0.0F, 3.1416F, 0.0F);
-		cube_r36.setTextureOffset(0, 124).addBox(-1.5F, -8.5F, -5.5F, 2.0F, 10.0F, 10.0F, 0.0F, false);
-	}
+    public LanderModel(ModelPart root) {
+        this.leg1 = root.getChild("leg1");
+        this.leg2 = root.getChild("leg2");
+        this.leg3 = root.getChild("leg3");
+        this.leg4 = root.getChild("leg4");
+        this.bb_main = root.getChild("bb_main");
+    }
 
-	@Override
-	public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public static LayerDefinition createBodyLayer() {
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
 
-	}
+        PartDefinition leg1 = partdefinition.addOrReplaceChild("leg1", CubeListBuilder.create().texOffs(0, 144).addBox(-21.0F, 3.0F, 11.0F, 10.0F, 1.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 20.0F, 0.0F));
 
-	@Override
-	public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		leg1.render(matrixStack, buffer, packedLight, packedOverlay);
-		leg2.render(matrixStack, buffer, packedLight, packedOverlay);
-		leg3.render(matrixStack, buffer, packedLight, packedOverlay);
-		leg4.render(matrixStack, buffer, packedLight, packedOverlay);
-		bb_main.render(matrixStack, buffer, packedLight, packedOverlay);
-	}
+        PartDefinition cube_r1 = leg1.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(116, 44).addBox(-1.0F, -12.5F, 16.5F, 2.0F, 1.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -0.6981F, -0.7854F, 0.0F));
 
-	public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-		modelRenderer.rotateAngleX = x;
-		modelRenderer.rotateAngleY = y;
-		modelRenderer.rotateAngleZ = z;
-	}
+        PartDefinition cube_r2 = leg1.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(116, 37).addBox(-21.0F, 0.99F, -2.0F, 4.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.7854F, 0.0F));
 
-	 */
+        PartDefinition cube_r3 = leg1.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(64, 26).addBox(-2.0F, -2.0F, 18.0F, 4.0F, 4.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(42, 26).addBox(-3.0F, -3.0F, 14.0F, 6.0F, 6.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.6109F, -0.7854F, 0.0F));
+
+        PartDefinition cube_r4 = leg1.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(48, 46).addBox(-1.5F, -2.0F, 15.0F, 3.0F, 12.0F, 3.0F, new CubeDeformation(-0.5F))
+                .texOffs(104, 37).addBox(-1.5F, -2.0F, 15.0F, 3.0F, 11.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.3927F, -0.7854F, 0.0F));
+
+        PartDefinition leg2 = partdefinition.addOrReplaceChild("leg2", CubeListBuilder.create(), PartPose.offset(0.0F, 20.0F, 0.0F));
+
+        PartDefinition cube_r5 = leg2.addOrReplaceChild("cube_r5", CubeListBuilder.create().texOffs(42, 26).addBox(-3.0F, -3.0F, 14.0F, 6.0F, 6.0F, 5.0F, new CubeDeformation(0.0F))
+                .texOffs(64, 26).addBox(-2.0F, -2.0F, 18.0F, 4.0F, 4.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.6109F, -2.3562F, 0.0F));
+
+        PartDefinition cube_r6 = leg2.addOrReplaceChild("cube_r6", CubeListBuilder.create().texOffs(48, 46).addBox(-1.5F, -2.0F, 15.0F, 3.0F, 12.0F, 3.0F, new CubeDeformation(-0.5F))
+                .texOffs(104, 37).addBox(-1.5F, -2.0F, 15.0F, 3.0F, 11.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.3927F, -2.3562F, 0.0F));
+
+        PartDefinition cube_r7 = leg2.addOrReplaceChild("cube_r7", CubeListBuilder.create().texOffs(0, 144).addBox(-21.0F, 3.0F, 11.0F, 10.0F, 1.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, -1.5708F, 0.0F));
+
+        PartDefinition cube_r8 = leg2.addOrReplaceChild("cube_r8", CubeListBuilder.create().texOffs(116, 37).addBox(-21.0F, 0.99F, -2.0F, 4.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, -0.7854F, 0.0F));
+
+        PartDefinition cube_r9 = leg2.addOrReplaceChild("cube_r9", CubeListBuilder.create().texOffs(116, 44).addBox(-1.0F, -12.5F, 16.5F, 2.0F, 1.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -0.6981F, -2.3562F, 0.0F));
+
+        PartDefinition leg3 = partdefinition.addOrReplaceChild("leg3", CubeListBuilder.create(), PartPose.offset(0.0F, 20.0F, 0.0F));
+
+        PartDefinition cube_r10 = leg3.addOrReplaceChild("cube_r10", CubeListBuilder.create().texOffs(64, 26).addBox(-2.0F, -2.0F, 18.0F, 4.0F, 4.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(42, 26).addBox(-3.0F, -3.0F, 14.0F, 6.0F, 6.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.6109F, 2.3562F, 0.0F));
+
+        PartDefinition cube_r11 = leg3.addOrReplaceChild("cube_r11", CubeListBuilder.create().texOffs(48, 46).addBox(-1.5F, -2.0F, 15.0F, 3.0F, 12.0F, 3.0F, new CubeDeformation(-0.5F))
+                .texOffs(104, 37).addBox(-1.5F, -2.0F, 15.0F, 3.0F, 11.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.3927F, 2.3562F, 0.0F));
+
+        PartDefinition cube_r12 = leg3.addOrReplaceChild("cube_r12", CubeListBuilder.create().texOffs(0, 144).addBox(-21.0F, 3.0F, 11.0F, 10.0F, 1.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 3.1416F, 0.0F));
+
+        PartDefinition cube_r13 = leg3.addOrReplaceChild("cube_r13", CubeListBuilder.create().texOffs(116, 37).addBox(-21.0F, 0.99F, -2.0F, 4.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, -2.3562F, 0.0F));
+
+        PartDefinition cube_r14 = leg3.addOrReplaceChild("cube_r14", CubeListBuilder.create().texOffs(116, 44).addBox(-1.0F, -12.5F, 16.5F, 2.0F, 1.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -0.6981F, 2.3562F, 0.0F));
+
+        PartDefinition leg4 = partdefinition.addOrReplaceChild("leg4", CubeListBuilder.create(), PartPose.offset(0.0F, 20.0F, 0.0F));
+
+        PartDefinition cube_r15 = leg4.addOrReplaceChild("cube_r15", CubeListBuilder.create().texOffs(64, 26).addBox(-2.0F, -2.0F, 18.0F, 4.0F, 4.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(42, 26).addBox(-3.0F, -3.0F, 14.0F, 6.0F, 6.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.6109F, 0.7854F, 0.0F));
+
+        PartDefinition cube_r16 = leg4.addOrReplaceChild("cube_r16", CubeListBuilder.create().texOffs(48, 46).addBox(-1.5F, -2.0F, 15.0F, 3.0F, 12.0F, 3.0F, new CubeDeformation(-0.5F))
+                .texOffs(104, 37).addBox(-1.5F, -2.0F, 15.0F, 3.0F, 11.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.3927F, 0.7854F, 0.0F));
+
+        PartDefinition cube_r17 = leg4.addOrReplaceChild("cube_r17", CubeListBuilder.create().texOffs(0, 144).addBox(-21.0F, 3.0F, 11.0F, 10.0F, 1.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 1.5708F, 0.0F));
+
+        PartDefinition cube_r18 = leg4.addOrReplaceChild("cube_r18", CubeListBuilder.create().texOffs(116, 37).addBox(-21.0F, 0.99F, -2.0F, 4.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 2.3562F, 0.0F));
+
+        PartDefinition cube_r19 = leg4.addOrReplaceChild("cube_r19", CubeListBuilder.create().texOffs(116, 44).addBox(-1.0F, -12.5F, 16.5F, 2.0F, 1.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -0.6981F, 0.7854F, 0.0F));
+
+        PartDefinition bb_main = partdefinition.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(155, 59).addBox(-6.0F, -11.9F, -6.0F, 12.0F, 1.0F, 12.0F, new CubeDeformation(0.0F))
+                .texOffs(0, 0).addBox(-12.0F, -16.0F, -12.0F, 24.0F, 2.0F, 24.0F, new CubeDeformation(0.0F))
+                .texOffs(0, 111).addBox(-5.0F, -19.0F, -8.0F, 10.0F, 3.0F, 10.0F, new CubeDeformation(0.0F))
+                .texOffs(0, 46).addBox(-8.0F, -35.0F, -13.0F, 16.0F, 16.0F, 16.0F, new CubeDeformation(0.0F))
+                .texOffs(0, 124).addBox(8.0F, -30.0F, -8.0F, 2.0F, 10.0F, 10.0F, new CubeDeformation(0.0F))
+                .texOffs(104, 12).addBox(-8.995F, -36.0F, -12.0F, 18.0F, 18.0F, 2.0F, new CubeDeformation(0.0F))
+                .texOffs(155, 24).addBox(3.5F, -46.0F, -15.5F, 1.0F, 13.0F, 1.0F, new CubeDeformation(0.0F))
+                .texOffs(155, 24).addBox(-4.5F, -46.0F, -15.5F, 1.0F, 13.0F, 1.0F, new CubeDeformation(0.0F))
+                .texOffs(159, 24).addBox(1.5F, -41.0F, -15.5F, 1.0F, 13.0F, 1.0F, new CubeDeformation(0.0F))
+                .texOffs(163, 24).addBox(-2.5F, -43.0F, -15.5F, 1.0F, 13.0F, 1.0F, new CubeDeformation(0.0F))
+                .texOffs(167, 24).addBox(-0.5F, -44.0F, -15.5F, 1.0F, 13.0F, 1.0F, new CubeDeformation(0.0F))
+                .texOffs(104, 0).addBox(1.0F, -33.0F, 14.0F, 3.0F, 9.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(104, 0).addBox(-4.0F, -33.0F, 14.0F, 3.0F, 9.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(155, 39).addBox(-4.0F, -13.9F, -4.0F, 8.0F, 1.0F, 8.0F, new CubeDeformation(0.0F))
+                .texOffs(155, 48).addBox(-5.0F, -12.9F, -5.0F, 10.0F, 1.0F, 10.0F, new CubeDeformation(0.0F))
+                .texOffs(104, 51).addBox(-6.0F, -25.0F, -14.0F, 12.0F, 3.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(104, 51).addBox(-6.0F, -33.0F, -16.0F, 12.0F, 3.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(104, 51).addBox(-6.0F, -16.505F, 9.005F, 12.0F, 3.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(24, 134).addBox(10.0F, -28.0F, -5.0F, 1.0F, 6.0F, 4.0F, new CubeDeformation(0.0F))
+                .texOffs(34, 134).addBox(10.0F, -27.0F, -6.0F, 1.0F, 4.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+
+        PartDefinition cube_r20 = bb_main.addOrReplaceChild("cube_r20", CubeListBuilder.create().texOffs(24, 134).addBox(9.5F, -10.5F, 1.5F, 1.0F, 6.0F, 4.0F, new CubeDeformation(0.0F))
+                .texOffs(34, 134).addBox(9.5F, -9.5F, 0.5F, 1.0F, 4.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.5F, -17.5F, 0.5F, 0.0F, 3.1416F, 0.0F));
+
+        PartDefinition cube_r21 = bb_main.addOrReplaceChild("cube_r21", CubeListBuilder.create().texOffs(104, 51).addBox(-6.0F, -16.505F, 9.005F, 12.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 3.1416F, 0.0F));
+
+        PartDefinition cube_r22 = bb_main.addOrReplaceChild("cube_r22", CubeListBuilder.create().texOffs(104, 51).addBox(-6.0F, -16.505F, 9.005F, 12.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 1.5708F, 0.0F));
+
+        PartDefinition cube_r23 = bb_main.addOrReplaceChild("cube_r23", CubeListBuilder.create().texOffs(104, 51).addBox(-6.0F, -16.505F, 9.005F, 12.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, -1.5708F, 0.0F));
+
+        PartDefinition cube_r24 = bb_main.addOrReplaceChild("cube_r24", CubeListBuilder.create().texOffs(104, 51).addBox(-6.0F, -38.0F, 5.0F, 12.0F, 3.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(104, 51).addBox(-6.0F, -38.0F, 0.0F, 12.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.2182F, 0.0F, 0.0F));
+
+        PartDefinition cube_r25 = bb_main.addOrReplaceChild("cube_r25", CubeListBuilder.create().texOffs(104, 51).addBox(-6.0F, -8.0F, 15.0F, 12.0F, 3.0F, 3.0F, new CubeDeformation(0.0F))
+                .texOffs(104, 51).addBox(-6.0F, -11.0F, 12.0F, 12.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.7854F, 0.0F, 0.0F));
+
+        PartDefinition cube_r26 = bb_main.addOrReplaceChild("cube_r26", CubeListBuilder.create().texOffs(14, 126).addBox(-12.5F, -25.5F, -7.5F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F))
+                .texOffs(14, 126).addBox(-12.5F, -10.5F, -7.5F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F))
+                .texOffs(14, 126).addBox(9.5F, -10.5F, -7.5F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F))
+                .texOffs(14, 126).addBox(9.5F, -25.5F, -7.5F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F))
+                .texOffs(0, 92).addBox(-11.5F, -24.5F, -6.5F, 24.0F, 17.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.5F, -15.5F, 19.5F, 0.2182F, 0.0F, 0.0F));
+
+        PartDefinition cube_r27 = bb_main.addOrReplaceChild("cube_r27", CubeListBuilder.create().texOffs(104, 32).addBox(-6.0F, -16.5F, 11.0F, 12.0F, 3.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 2.3562F, 0.0F));
+
+        PartDefinition cube_r28 = bb_main.addOrReplaceChild("cube_r28", CubeListBuilder.create().texOffs(104, 32).addBox(-6.0F, -16.5F, 11.0F, 12.0F, 3.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, -2.3562F, 0.0F));
+
+        PartDefinition cube_r29 = bb_main.addOrReplaceChild("cube_r29", CubeListBuilder.create().texOffs(104, 32).addBox(-6.0F, -16.5F, 11.0F, 12.0F, 3.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, -0.7854F, 0.0F));
+
+        PartDefinition cube_r30 = bb_main.addOrReplaceChild("cube_r30", CubeListBuilder.create().texOffs(104, 32).addBox(-6.0F, -16.5F, 11.0F, 12.0F, 3.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.7854F, 0.0F));
+
+        PartDefinition cube_r31 = bb_main.addOrReplaceChild("cube_r31", CubeListBuilder.create().texOffs(155, 0).addBox(-4.5F, -15.5F, -12.5F, 10.0F, 10.0F, 14.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.5F, -17.5F, 15.5F, 0.2182F, 0.0F, 0.0F));
+
+        PartDefinition cube_r32 = bb_main.addOrReplaceChild("cube_r32", CubeListBuilder.create().texOffs(0, 78).addBox(-9.5F, -21.5F, -6.5F, 20.0F, 13.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.5F, -15.5F, 23.5F, 0.2182F, 0.0F, 0.0F));
+
+        PartDefinition cube_r33 = bb_main.addOrReplaceChild("cube_r33", CubeListBuilder.create().texOffs(116, 0).addBox(-5.0F, -16.5F, -6.5F, 11.0F, 9.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.5F, -17.5F, -3.5F, 0.3927F, 0.0F, 0.0F));
+
+        PartDefinition cube_r34 = bb_main.addOrReplaceChild("cube_r34", CubeListBuilder.create().texOffs(104, 12).addBox(-8.5F, -15.5F, 14.5F, 18.0F, 18.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.5F, -17.5F, 1.5F, 1.5708F, 0.0F, 0.0F));
+
+        PartDefinition cube_r35 = bb_main.addOrReplaceChild("cube_r35", CubeListBuilder.create().texOffs(0, 26).addBox(-6.5F, -19.5F, -8.5F, 14.0F, 6.0F, 14.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.5F, -17.5F, 0.5F, 0.2182F, 0.0F, 0.0F));
+
+        PartDefinition cube_r36 = bb_main.addOrReplaceChild("cube_r36", CubeListBuilder.create().texOffs(0, 124).addBox(-1.5F, -8.5F, -5.5F, 2.0F, 10.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-9.5F, -21.5F, -3.5F, 0.0F, 3.1416F, 0.0F));
+
+        return LayerDefinition.create(meshdefinition, 256, 256);
+    }
+
+    @Override
+    public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+
+    }
+
+    @Override
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        leg1.render(poseStack, buffer, packedLight, packedOverlay);
+        leg2.render(poseStack, buffer, packedLight, packedOverlay);
+        leg3.render(poseStack, buffer, packedLight, packedOverlay);
+        leg4.render(poseStack, buffer, packedLight, packedOverlay);
+        bb_main.render(poseStack, buffer, packedLight, packedOverlay);
+    }
 }

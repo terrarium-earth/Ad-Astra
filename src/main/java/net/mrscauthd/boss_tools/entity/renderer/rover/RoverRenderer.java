@@ -1,21 +1,23 @@
 package net.mrscauthd.boss_tools.entity.renderer.rover;
 
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.mrscauthd.boss_tools.BossToolsMod;
+import net.mrscauthd.boss_tools.entity.RocketTier3Entity;
 import net.mrscauthd.boss_tools.entity.RoverEntity;
+import net.mrscauthd.boss_tools.entity.renderer.rockettier3.RocketTier3Model;
 
 @OnlyIn(Dist.CLIENT)
-public class RoverRenderer/* extends MobRenderer<RoverEntity, RoverModel<RoverEntity>>*/ {
-    /*
-    public RoverRenderer(EntityRendererManager entityRendererManager) {
-        super(entityRendererManager, new RoverModel(), 0f);
+public class RoverRenderer extends MobRenderer<RoverEntity, RoverModel<RoverEntity>> {
+    public RoverRenderer(EntityRendererProvider.Context renderManagerIn) {
+        super(renderManagerIn, new RoverModel<>(renderManagerIn.bakeLayer(RoverModel.LAYER_LOCATION)), 0.5f);
     }
 
     @Override
-    public ResourceLocation getEntityTexture(RoverEntity entity) {
+    public ResourceLocation getTextureLocation(RoverEntity p_114482_) {
         return new ResourceLocation(BossToolsMod.ModId, "textures/vehicles/rover.png");
     }
-
-     */
 }
