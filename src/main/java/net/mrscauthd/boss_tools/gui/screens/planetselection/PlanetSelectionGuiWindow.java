@@ -8,9 +8,9 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Quaternion;
 import com.mojang.math.Vector3f;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -233,20 +233,21 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 
 	@Override
 	protected void renderBg(PoseStack ms, float p_97788_, int p_97789_, int p_97790_) {
-		RenderSystem.setShaderColor(1, 1, 1, 1);
+		RenderSystem.setShader(GameRenderer::getPositionTexShader);
+		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 		RenderSystem.enableBlend();
 		RenderSystem.defaultBlendFunc();
 
 		//BACKGROUND
-		Minecraft.getInstance().getTextureManager().bindForSetup(texture);
+		RenderSystem.setShaderTexture(0, texture);
 		GuiComponent.blit(ms, 0, 0, 0, 0, this.width, this.height, this.width, this.height);
 
 		//MILKY WAY
-		Minecraft.getInstance().getTextureManager().bindForSetup(new ResourceLocation(BossToolsMod.ModId,"textures/milky_way.png"));
+		RenderSystem.setShaderTexture(0, new ResourceLocation(BossToolsMod.ModId,"textures/milky_way.png"));
 		GuiHelper.blit(ms, (this.width - 185) / 2, (this.height - 185) / 2, 0, 0, 185, 185, 185, 185);
 
 		//SUN
-		Minecraft.getInstance().getTextureManager().bindForSetup(new ResourceLocation(BossToolsMod.ModId,"textures/sky/gui/sun.png"));
+		RenderSystem.setShaderTexture(0, new ResourceLocation(BossToolsMod.ModId,"textures/sky/gui/sun.png"));
 		GuiHelper.blit(ms, (this.width - 15) / 2, (this.height - 15) / 2, 0, 0, 15, 15, 15, 15);
 
 		//PLANETS
@@ -257,10 +258,10 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 
 		//MENU
 		if (Category == 0) {
-			Minecraft.getInstance().getTextureManager().bindForSetup(new ResourceLocation(BossToolsMod.ModId, "textures/rocket_menu_list.png"));
+			RenderSystem.setShaderTexture(0, new ResourceLocation(BossToolsMod.ModId,"textures/rocket_menu_list.png"));
 			GuiComponent.blit(ms, 0, (this.height / 2) - 160 / 2, 0, 0, 105, 160, 105, 160);
 		} else {
-			Minecraft.getInstance().getTextureManager().bindForSetup(new ResourceLocation(BossToolsMod.ModId, "textures/rocket_menu_list_2.png"));
+			RenderSystem.setShaderTexture(0, new ResourceLocation(BossToolsMod.ModId,"textures/rocket_menu_list_2.png"));
 			GuiComponent.blit(ms, 0, (this.height / 2) - 160 / 2, 0, 0, 215, 160, 215, 160);
 		}
 
@@ -273,7 +274,7 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 		ms.translate(this.width / 2, this.height / 2, 0);
 		ms.mulPose(new Quaternion(Vector3f.ZP, rotation, true));
 
-		Minecraft.getInstance().getTextureManager().bindForSetup(planet);
+		RenderSystem.setShaderTexture(0, planet);
 		GuiHelper.blit(ms, x, y, 0, 0, width, height, width, height);
 
 		ms.translate(-this.width / 2, -this.height / 2, 0);
@@ -483,14 +484,14 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 	}
 
 	public ImageButtonPlacer addImageButton(int xIn, int yIn, int width, int height, ResourceLocation texture, int handler, String title) {
-		ImageButtonPlacer button = this.addWidget(new ImageButtonPlacer(xIn, yIn, width, height, 0, 0, 0, texture, width, height, (p_2130901) -> {
+		ImageButtonPlacer button = this.addRenderableWidget(new ImageButtonPlacer(xIn, yIn, width, height, 0, 0, 0, texture, width, height, (p_2130901) -> {
 			BossToolsMod.PACKET_HANDLER.sendToServer(new PlanetSelectionGui.NetworkMessage(handler));
 		}, Component.nullToEmpty(title)));
 		return button;
 	}
 
 	public ImageButtonPlacer addSpaceStationImageButton(int xIn, int yIn, int width, int height, ResourceLocation texture, int handler, String title, boolean condition) {
-		ImageButtonPlacer button = this.addWidget(new ImageButtonPlacer(xIn, yIn, width, height, 0, 0, 0, texture, width, height, (p_2130901) -> {
+		ImageButtonPlacer button = this.addRenderableWidget(new ImageButtonPlacer(xIn, yIn, width, height, 0, 0, 0, texture, width, height, (p_2130901) -> {
 			if (condition) {
 				BossToolsMod.PACKET_HANDLER.sendToServer(new PlanetSelectionGui.NetworkMessage(handler));
 			}
@@ -499,7 +500,7 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 	}
 
 	public ImageButtonPlacer addImageButtonSetCategory(int xIn, int yIn, int width, int height, ResourceLocation texture, int newCategory, String rocket, int stage, String title) {
-		ImageButtonPlacer button = this.addWidget(new ImageButtonPlacer(xIn, yIn, width, height, 0, 0, 0, texture, width, height, (p_2130901) -> {
+		ImageButtonPlacer button = this.addRenderableWidget(new ImageButtonPlacer(xIn, yIn, width, height, 0, 0, 0, texture, width, height, (p_2130901) -> {
 			if (checkTier(rocket, stage)) {
 				this.Category = newCategory;
 			}

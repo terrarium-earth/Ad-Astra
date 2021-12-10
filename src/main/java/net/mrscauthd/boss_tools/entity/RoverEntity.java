@@ -1,6 +1,7 @@
 package net.mrscauthd.boss_tools.entity;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import io.netty.buffer.Unpooled;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -55,6 +56,7 @@ import net.mrscauthd.boss_tools.gui.screens.rover.RoverGui;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Set;
 
 public class RoverEntity extends PathfinderMob {
     private double speed = 0;
@@ -90,7 +92,7 @@ public class RoverEntity extends PathfinderMob {
 
     @Override
     public boolean canBeCollidedWith() {
-        return true;
+        return false;
     }
 
     @Override
@@ -153,35 +155,40 @@ public class RoverEntity extends PathfinderMob {
     }
 
     @Override
-    public Vec3 getDismountLocationForPassenger(LivingEntity p_38357_) {
-        Vec3 vec3 = getCollisionHorizontalEscapeVector((double)(this.getBbWidth() * Mth.SQRT_OF_TWO), (double)p_38357_.getBbWidth(), p_38357_.getYRot());
-        double d0 = this.getX() + vec3.x;
-        double d1 = this.getZ() + vec3.z;
-        BlockPos blockpos = new BlockPos(d0, this.getBoundingBox().maxY, d1);
-        BlockPos blockpos1 = blockpos.below();
-        if (!this.level.isWaterAt(blockpos1)) {
-            List<Vec3> list = Lists.newArrayList();
-            double d2 = this.level.getBlockFloorHeight(blockpos);
-            if (DismountHelper.isBlockFloorValid(d2)) {
-                list.add(new Vec3(d0, (double)blockpos.getY() + d2, d1));
-            }
+    public Vec3 getDismountLocationForPassenger(LivingEntity livingEntity) {
+        Vec3[] avector3d = new Vec3[]{getCollisionHorizontalEscapeVector((double)this.getBbWidth(), (double)livingEntity.getBbWidth(), livingEntity.getYRot()), getCollisionHorizontalEscapeVector((double)this.getBbWidth(), (double)livingEntity.getBbWidth(), livingEntity.getYRot() - 22.5F), getCollisionHorizontalEscapeVector((double)this.getBbWidth(), (double)livingEntity.getBbWidth(), livingEntity.getYRot() + 22.5F), getCollisionHorizontalEscapeVector((double)this.getBbWidth(), (double)livingEntity.getBbWidth(), livingEntity.getYRot() - 45.0F), getCollisionHorizontalEscapeVector((double)this.getBbWidth(), (double)livingEntity.getBbWidth(), livingEntity.getYRot() + 45.0F)};
+        Set<BlockPos> set = Sets.newLinkedHashSet();
+        double d0 = this.getBoundingBox().maxY;
+        double d1 = this.getBoundingBox().minY - 0.5D;
+        BlockPos.MutableBlockPos blockpos$mutable = new BlockPos.MutableBlockPos();
 
-            double d3 = this.level.getBlockFloorHeight(blockpos1);
-            if (DismountHelper.isBlockFloorValid(d3)) {
-                list.add(new Vec3(d0, (double)blockpos1.getY() + d3, d1));
-            }
+        for(Vec3 vector3d : avector3d) {
+            blockpos$mutable.set(this.getX() + vector3d.x, d0, this.getZ() + vector3d.z);
 
-            for(Pose pose : p_38357_.getDismountPoses()) {
-                for(Vec3 vec31 : list) {
-                    if (DismountHelper.canDismountTo(this.level, vec31, p_38357_, pose)) {
-                        p_38357_.setPose(pose);
-                        return vec31;
+            for(double d2 = d0; d2 > d1; --d2) {
+                set.add(blockpos$mutable.immutable());
+                blockpos$mutable.move(Direction.DOWN);
+            }
+        }
+
+        for(BlockPos blockpos : set) {
+            if (!this.level.getFluidState(blockpos).is(FluidTags.LAVA)) {
+                double d3 = this.level.getBlockFloorHeight(blockpos);
+                if (DismountHelper.isBlockFloorValid(d3)) {
+                    Vec3 vector3d1 = Vec3.upFromBottomCenterOf(blockpos, d3);
+
+                    for(Pose pose : livingEntity.getDismountPoses()) {
+                        AABB axisalignedbb = livingEntity.getLocalBoundsForPose(pose);
+                        if (DismountHelper.isBlockFloorValid(this.level.getBlockFloorHeight(blockpos))) {
+                            livingEntity.setPose(pose);
+                            return vector3d1;
+                        }
                     }
                 }
             }
         }
 
-        return super.getDismountLocationForPassenger(p_38357_);
+        return new Vec3(this.getX(), this.getBoundingBox().maxY, this.getZ());
     }
 
     protected void applyYawToEntity(Entity entityToUpdate) {

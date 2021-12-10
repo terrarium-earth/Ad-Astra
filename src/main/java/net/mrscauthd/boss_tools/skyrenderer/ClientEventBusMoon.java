@@ -41,7 +41,7 @@ public class ClientEventBusMoon {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void clientSetup(FMLClientSetupEvent event) {
-        DimensionSpecialEffects.EFFECTS.put(DIM_RENDER_INFO, new DimensionSpecialEffects(128, false, DimensionSpecialEffects.SkyType.NORMAL, false, false) {
+        DimensionSpecialEffects.EFFECTS.put(DIM_RENDER_INFO, new DimensionSpecialEffects(192, false, DimensionSpecialEffects.SkyType.NORMAL, false, false) {
             @Override
             public Vec3 getBrightnessDependentFogColor(Vec3 p_108878_, float p_108879_) {
                 return p_108878_;
@@ -67,7 +67,7 @@ public class ClientEventBusMoon {
                 return new ISkyRenderHandler() {
                     @Override
                     public void render(int ticks, float p_181412_, PoseStack p_181410_, ClientLevel level, Minecraft minecraft) {
-                        Matrix4f matrix4f = p_181410_.last().pose();
+                        var matrix4f = RenderSystem.getProjectionMatrix();
                         RenderSystem.disableTexture();
                         Vec3 vec3 = level.getSkyColor(minecraft.gameRenderer.getMainCamera().getPosition(), p_181412_);
                         float f = (float)vec3.x;
@@ -171,7 +171,7 @@ public class ClientEventBusMoon {
                         createStars();
                         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
                         FogRenderer.setupNoFog();
-                        minecraft.levelRenderer.starBuffer.drawWithShader(p_181410_.last().pose(), p_181410_.last().pose(), GameRenderer.getPositionShader());
+                        starBuffer.drawWithShader(p_181410_.last().pose(), matrix4f, GameRenderer.getPositionShader());
 
                         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
                         RenderSystem.disableBlend();
@@ -224,7 +224,7 @@ public class ClientEventBusMoon {
                     stars = 6000;
                 }
 
-                for(int i = 0; i < 1500; ++i) {
+                for(int i = 0; i < stars; ++i) {
                     double d0 = (double)(random.nextFloat() * 2.0F - 1.0F);
                     double d1 = (double)(random.nextFloat() * 2.0F - 1.0F);
                     double d2 = (double)(random.nextFloat() * 2.0F - 1.0F);

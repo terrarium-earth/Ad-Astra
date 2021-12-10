@@ -1,8 +1,10 @@
 package net.mrscauthd.boss_tools.gui.screens.rocket;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -38,7 +40,7 @@ public class RocketGuiWindow extends AbstractContainerScreen<RocketGui.GuiContai
 		super(container, inventory, text);
 		this.imageWidth = 176;
 		this.imageHeight = 167;
-		this.inventoryLabelY = this.inventoryLabelY - 93;
+		this.inventoryLabelY = this.imageHeight - 93;
 	}
 
 	@Override
@@ -73,9 +75,10 @@ public class RocketGuiWindow extends AbstractContainerScreen<RocketGui.GuiContai
 	protected void renderBg(PoseStack ms, float p_98414_, int p_98415_, int p_98416_) {
 		int fuel = 0;
 
-		GL11.glColor4f(1, 1, 1, 1);
+		RenderSystem.setShader(GameRenderer::getPositionTexShader);
+		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
-		Minecraft.getInstance().getTextureManager().bindForSetup(texture);
+		RenderSystem.setShaderTexture(0, texture);
 		this.blit(ms, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
 
 
@@ -97,7 +100,7 @@ public class RocketGuiWindow extends AbstractContainerScreen<RocketGui.GuiContai
 	protected void renderLabels(PoseStack ms, int p_97809_, int p_97810_) {
 		TranslatableComponent title = new TranslatableComponent("container." + menu.rocket.getType());
 
-		this.font.draw(ms, title.getString(), (float) (this.imageWidth / 2) - 33, (float) this.imageHeight, 4210752);
+		this.font.draw(ms, title.getString(), (float) (this.imageWidth / 2) - 33, (float) this.titleLabelY, 4210752);
 
 		this.font.draw(ms, this.playerInventoryTitle, (float) this.inventoryLabelX, (float) this.inventoryLabelY, 4210752);
 	}

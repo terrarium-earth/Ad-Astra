@@ -19,6 +19,8 @@ import net.mrscauthd.boss_tools.ModInnet;
 import net.mrscauthd.boss_tools.entity.renderer.TileEntityBoxRenderer;
 import net.mrscauthd.boss_tools.entity.renderer.alien.AlienModel;
 import net.mrscauthd.boss_tools.entity.renderer.flag.TileEntityHeadRenderer;
+import net.mrscauthd.boss_tools.entity.renderer.rockettier1.RocketTier1Model;
+import net.mrscauthd.boss_tools.entity.renderer.rockettier1.RocketTier1Renderer;
 import net.mrscauthd.boss_tools.entity.renderer.spacesuit.SpaceSuitModel;
 import net.mrscauthd.boss_tools.gui.screens.blastfurnace.BlastFurnaceGuiWindow;
 import net.mrscauthd.boss_tools.gui.screens.coalgenerator.CoalGeneratorGuiWindow;
@@ -46,6 +48,8 @@ public class ClientEventBusSubscriber {
 	@SubscribeEvent
 	public static void registerEntityRenderingHandler(EntityRenderersEvent.RegisterRenderers event) {
 		event.registerEntityRenderer(ModInnet.ALIEN.get(), AlienRenderer::new);
+		event.registerEntityRenderer(ModInnet.TIER_1_ROCKET.get(), RocketTier1Renderer::new);
+
 		/*
 		event.registerEntityRenderer(ModInnet.PYGRO.get(), PygroRenderer::new);
 		event.registerEntityRenderer(ModInnet.MOGLER.get(), MoglerRenderer::new);
@@ -68,6 +72,8 @@ public class ClientEventBusSubscriber {
 	@SubscribeEvent
 	public static void registerEntityRenderingHandler(EntityRenderersEvent.RegisterLayerDefinitions event) {
 		event.registerLayerDefinition(AlienModel.LAYER_LOCATION, AlienModel::createBodyLayer);
+
+		event.registerLayerDefinition(RocketTier1Model.LAYER_LOCATION, RocketTier1Model::createBodyLayer);
 
 		event.registerLayerDefinition(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION, SpaceSuitModel.SPACE_SUIT_P1::createBodyLayer);
 		event.registerLayerDefinition(SpaceSuitModel.SPACE_SUIT_P2.LAYER_LOCATION, SpaceSuitModel.SPACE_SUIT_P2::createBodyLayer);
