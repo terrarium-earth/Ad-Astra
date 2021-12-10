@@ -1,8 +1,10 @@
 package net.mrscauthd.boss_tools.gui.screens.rover;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -59,9 +61,10 @@ public class RoverGuiWindow extends AbstractContainerScreen<RoverGui.GuiContaine
 	protected void renderBg(PoseStack ms, float p_97788_, int p_97789_, int p_97790_) {
 		int fuel = menu.rover.getEntityData().get(RoverEntity.FUEL);
 
-		GL11.glColor4f(1, 1, 1, 1);
+		RenderSystem.setShader(GameRenderer::getPositionTexShader);
+		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
-		Minecraft.getInstance().getTextureManager().bindForSetup(texture);
+		RenderSystem.setShaderTexture(0, texture);
 		this.blit(ms, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
 
 		FluidStack fluidStack = new FluidStack(ModInnet.FUEL_BLOCK.get().getFluid(), fuel);
@@ -71,7 +74,7 @@ public class RoverGuiWindow extends AbstractContainerScreen<RoverGui.GuiContaine
 	@Override
 	protected void renderLabels(PoseStack ms, int p_97809_, int p_97810_) {
 		this.font.draw(ms, title.getString(), (float) (this.imageWidth / 2) - 14, (float) this.titleLabelY, 4210752);
-		this.font.draw(ms, this.playerInventoryTitle, (float) this.inventoryLabelX, (float) this.inventoryLabelX, 4210752);
+		this.font.draw(ms, this.playerInventoryTitle, (float)this.inventoryLabelX, (float)this.inventoryLabelY, 4210752);
 	}
 
 	public Rectangle2d getFluidBounds() {

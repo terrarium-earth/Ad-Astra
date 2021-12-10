@@ -138,7 +138,9 @@ public class KeyBindings {
 					}
 
 					if (world instanceof ServerLevel) {
-						((ServerLevel) world).sendParticles(null, ParticleTypes.SPIT, true, ridding.getX(), ridding.getY() - 0.3, ridding.getZ(), 3, 0.1, 0.1, 0.1, 0.001);
+						for (ServerPlayer p : ((ServerLevel) player.level).getServer().getPlayerList().getPlayers()) {
+							((ServerLevel) world).sendParticles(p, ParticleTypes.SPIT, true, ridding.getX(), ridding.getY() - 0.3, ridding.getZ(), 3, 0.1, 0.1, 0.1, 0.001);
+						}
 					}
 
 				}

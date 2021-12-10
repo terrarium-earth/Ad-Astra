@@ -19,19 +19,9 @@ public class RoverModel<T extends RoverEntity> extends EntityModel<T> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(BossToolsMod.ModId, "rover"), "main");
 
     private final ModelPart Frame;
-    private final ModelPart Wheel1;
-    private final ModelPart Wheel2;
-    private final ModelPart Wheel3;
-    private final ModelPart Wheel4;
-    private final ModelPart sat;
 
     public RoverModel(ModelPart root) {
         this.Frame = root.getChild("Frame");
-        this.Wheel1 = root.getChild("Wheel1");
-        this.Wheel2 = root.getChild("Wheel2");
-        this.Wheel3 = root.getChild("Wheel3");
-        this.Wheel4 = root.getChild("Wheel4");
-        this.sat = root.getChild("sat");
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -91,24 +81,24 @@ public class RoverModel<T extends RoverEntity> extends EntityModel<T> {
     public void setupAnim(T entity, float f, float f1, float f2, float f3, float f4) {
         this.Frame.yRot = f3 / (180F / (float) Math.PI);
 
-        this.Wheel1.xRot = f2 / (180F / (float) Math.PI);
-        this.Wheel2.xRot = f2 / (180F / (float) Math.PI);
-        this.Wheel3.xRot = f2 / (180F / (float) Math.PI);
-        this.Wheel4.xRot = f2 / (180F / (float) Math.PI);
+        this.Frame.getChild("Wheel1").xRot = f2 / (180F / (float) Math.PI);
+        this.Frame.getChild("Wheel2").xRot = f2 / (180F / (float) Math.PI);
+        this.Frame.getChild("Wheel3").xRot = f2 / (180F / (float) Math.PI);
+        this.Frame.getChild("Wheel4").xRot = f2 / (180F / (float) Math.PI);
         if (entity.getforward()) {
-            this.Wheel1.xRot = (float) (f / 4);
-            this.Wheel2.xRot = (float) (f / 4);
-            this.Wheel3.xRot = (float) (f / 4);
-            this.Wheel4.xRot = (float) (f / 4);
+            this.Frame.getChild("Wheel1").xRot = (float) (f / 4);
+            this.Frame.getChild("Wheel2").xRot = (float) (f / 4);
+            this.Frame.getChild("Wheel3").xRot = (float) (f / 4);
+            this.Frame.getChild("Wheel4").xRot = (float) (f / 4);
         }
         if (!entity.getforward()) {
-            this.Wheel1.xRot = (float) (f / 4);
-            this.Wheel2.xRot = (float) (f / 4);
-            this.Wheel3.xRot = (float) (f / 4);
-            this.Wheel4.xRot = (float) (f / 4);
+            this.Frame.getChild("Wheel1").xRot = (float) (f / 4);
+            this.Frame.getChild("Wheel2").xRot = (float) (f / 4);
+            this.Frame.getChild("Wheel3").xRot = (float) (f / 4);
+            this.Frame.getChild("Wheel4").xRot = (float) (f / 4);
         }
 
-        this.sat.yRot = f2 / 20f;
+        this.Frame.getChild("sat").yRot = f2 / 20f;
     }
 
     @Override
