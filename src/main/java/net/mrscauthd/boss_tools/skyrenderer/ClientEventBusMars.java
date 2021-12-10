@@ -65,6 +65,7 @@ public class ClientEventBusMars {
                     @Override
                     public void render(int ticks, float p_181412_, PoseStack p_181410_, ClientLevel level, Minecraft minecraft) {
                         Matrix4f matrix4f = RenderSystem.getProjectionMatrix();
+                        Matrix4f starmatrix4f = RenderSystem.getProjectionMatrix();
                         RenderSystem.disableTexture();
                         Vec3 vec3 = level.getSkyColor(minecraft.gameRenderer.getMainCamera().getPosition(), p_181412_);
                         float f = (float) vec3.x;
@@ -114,9 +115,7 @@ public class ClientEventBusMars {
                         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
                         //ROT
-                        p_181410_.mulPose(Vector3f.YP.rotationDegrees(-90.0F));
-                        p_181410_.mulPose(Vector3f.XP.rotationDegrees(180.0F));
-                        p_181410_.mulPose(Vector3f.ZP.rotationDegrees(30.0F));
+                        p_181410_.mulPose(Vector3f.XP.rotationDegrees(level.getTimeOfDay(p_181412_) * 360.0F));
                         Matrix4f matrix4f1 = p_181410_.last().pose();
 
                         RenderSystem.setShader(GameRenderer::getPositionTexShader);
@@ -134,8 +133,8 @@ public class ClientEventBusMars {
                         BufferUploader.end(bufferbuilder);
 
                         //PHOBOS
-                    //    p_181410_.mulPose(Vector3f.YP.rotationDegrees(-130.0F));
-                    //    p_181410_.mulPose(Vector3f.ZP.rotationDegrees(100.0F));
+                        p_181410_.mulPose(Vector3f.YP.rotationDegrees(-130.0F));
+                        p_181410_.mulPose(Vector3f.ZP.rotationDegrees(100.0F));
 
                         RenderSystem.setShaderTexture(0, PHOBOS_TEXTURE);
                         bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
@@ -146,8 +145,8 @@ public class ClientEventBusMars {
                         bufferbuilder.end();
                         BufferUploader.end(bufferbuilder);
 
-                    //    p_181410_.mulPose(Vector3f.YP.rotationDegrees(-130.0F));
-                    //    p_181410_.mulPose(Vector3f.ZP.rotationDegrees(210.0F));
+                        p_181410_.mulPose(Vector3f.YP.rotationDegrees(-130.0F));
+                        p_181410_.mulPose(Vector3f.ZP.rotationDegrees(210.0F));
 
                         //EARTH
                         RenderSystem.setShaderTexture(0, EARTH_TEXTURE);
@@ -159,8 +158,8 @@ public class ClientEventBusMars {
                         bufferbuilder.end();
                         BufferUploader.end(bufferbuilder);
 
-                    //    p_181410_.mulPose(Vector3f.YP.rotationDegrees(-110.0F));
-                    //    p_181410_.mulPose(Vector3f.ZP.rotationDegrees(90.0F));
+                        p_181410_.mulPose(Vector3f.YP.rotationDegrees(-110.0F));
+                        p_181410_.mulPose(Vector3f.ZP.rotationDegrees(90.0F));
 
                         //DEIMOS
                         RenderSystem.setShaderTexture(0, DEIMOS_TEXTURE);
@@ -177,16 +176,7 @@ public class ClientEventBusMars {
                         //STAR GEN
                         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
                         FogRenderer.setupNoFog();
-                        minecraft.levelRenderer.starBuffer.drawWithShader(p_181410_.last().pose(), matrix4f, GameRenderer.getPositionShader());
-
-                        //Fog Renderer
-                        /*
-                        Vec3 vec3p = minecraft.gameRenderer.getMainCamera().getPosition();
-                        double d0p = vec3p.x();
-                        double d1p = vec3p.y();
-                        boolean flag2 = Minecraft.getInstance().level.effects().isFoggyAt(Mth.floor(d0p), Mth.floor(d1p)) || Minecraft.getInstance().gui.getBossOverlay().shouldCreateWorldFog();
-                        float renderDistance = minecraft.gameRenderer.getRenderDistance();
-                        FogRenderer.setupFog(minecraft.gameRenderer.getMainCamera(), FogRenderer.FogMode.FOG_SKY, renderDistance, flag2);*/
+                        minecraft.levelRenderer.starBuffer.drawWithShader(p_181410_.last().pose(), starmatrix4f, GameRenderer.getPositionShader());
 
                         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
                         RenderSystem.disableBlend();

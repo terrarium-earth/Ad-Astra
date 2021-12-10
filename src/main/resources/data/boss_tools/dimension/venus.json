@@ -59,7 +59,7 @@
     },
     "biome_source": {
       "type": "minecraft:fixed",
-      "biome": "boss_tools:moon"
+      "biome": "boss_tools:venus"
     }
   }
 }
