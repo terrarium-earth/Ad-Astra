@@ -13,7 +13,7 @@ import net.mrscauthd.boss_tools.entity.renderer.rockettier3.RocketTier3Model;
 @OnlyIn(Dist.CLIENT)
 public class RoverRenderer extends MobRenderer<RoverEntity, RoverModel<RoverEntity>> {
     public RoverRenderer(EntityRendererProvider.Context renderManagerIn) {
-        super(renderManagerIn, new RoverModel<>(renderManagerIn.bakeLayer(RoverModel.LAYER_LOCATION)), 0.5f);
+        super(renderManagerIn, new RoverModel<>(renderManagerIn.bakeLayer(RoverModel.LAYER_LOCATION)), 0f);
     }
 
     @Override

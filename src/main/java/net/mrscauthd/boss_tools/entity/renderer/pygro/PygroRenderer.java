@@ -1,33 +1,37 @@
 package net.mrscauthd.boss_tools.entity.renderer.pygro;
 
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.EntityModelSet;
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
+import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.monster.piglin.AbstractPiglin;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.mrscauthd.boss_tools.BossToolsMod;
-import net.mrscauthd.boss_tools.entity.pygro.PygroEntity;
 
 @OnlyIn(Dist.CLIENT)
-public class PygroRenderer/* extends BipedRenderer<MobEntity, PygroModel<MobEntity>>*/ {
-/*
-    public PygroRenderer(EntityRendererManager entityRendererManager) {
-        super(entityRendererManager, func_239395_a_(false), (float) 0.5, 1.0019531F, 1.0F, 1.0019531F);
-        this.addLayer(new BipedArmorLayer<>(this, new BipedModel(0.5F), new BipedModel(1.02F)));
+public class PygroRenderer extends HumanoidMobRenderer<Mob, PygroModel<Mob>> {
+
+    public PygroRenderer(EntityRendererProvider.Context p_174344_, ModelLayerLocation p_174345_, ModelLayerLocation p_174346_, ModelLayerLocation p_174347_) {
+        super(p_174344_, createModel(p_174344_.getModelSet(), p_174345_), 0.5F, 1.0019531F, 1.0F, 1.0019531F);
+        this.addLayer(new HumanoidArmorLayer<>(this, new HumanoidModel(p_174344_.bakeLayer(p_174346_)), new HumanoidModel(p_174344_.bakeLayer(p_174347_))));
     }
 
-    private static PygroModel<MobEntity> func_239395_a_(boolean p_239395_0_) {
-        PygroModel<MobEntity> piglinmodel = new PygroModel<>(0.0F, 64, 64);
-        if (p_239395_0_) {
-            piglinmodel.field_239116_b_.showModel = false;
-        }
-        return piglinmodel;
+    private static PygroModel<Mob> createModel(EntityModelSet p_174350_, ModelLayerLocation p_174351_) {
+        PygroModel<Mob> pygroModel = new PygroModel<>(p_174350_.bakeLayer(p_174351_));
+
+        return pygroModel;
     }
 
-    public ResourceLocation getEntityTexture(MobEntity entity) {
+    public ResourceLocation getTextureLocation(Mob p_115708_) {
         return new ResourceLocation(BossToolsMod.ModId, "textures/entities/pygro.png");
     }
 
-    protected boolean func_230495_a_(MobEntity p_230495_1_) {
-        return p_230495_1_ instanceof PygroEntity && ((PygroEntity)p_230495_1_).func_242336_eL();
+    protected boolean isShaking(Mob p_115712_) {
+        return super.isShaking(p_115712_) || p_115712_ instanceof AbstractPiglin && ((AbstractPiglin)p_115712_).isConverting();
     }
-
- */
 }

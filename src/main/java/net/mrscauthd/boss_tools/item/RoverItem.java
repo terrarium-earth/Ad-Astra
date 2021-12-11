@@ -97,6 +97,8 @@ public class RoverItem extends Item {
 
                 if (!player.getAbilities().instabuild) {
                     player.setItemInHand(hand, ItemStack.EMPTY);
+                } else {
+                    player.swing(context.getHand(), true);
                 }
 
                 roverPlaceSound(pos, world);

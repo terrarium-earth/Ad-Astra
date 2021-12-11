@@ -1,197 +1,139 @@
 package net.mrscauthd.boss_tools.entity.renderer.alienzombie;
 
-
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Mob;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.api.distmarker.Dist;
-
+import net.mrscauthd.boss_tools.BossToolsMod;
 
 @OnlyIn(Dist.CLIENT)
-public class AlienZombieModel/*<T extends Mob> extends EntityModel<T>*/ {
-	/*
-	private final ModelRenderer head;
-	private final ModelRenderer nose_r1;
-	private final ModelRenderer cube_r1;
-	private final ModelRenderer cube_r2;
-	private final ModelRenderer cube_r3;
-	private final ModelRenderer head_r1;
-	private final ModelRenderer head_r2;
-	private final ModelRenderer body;
-	private final ModelRenderer leg0;
-	private final ModelRenderer leg1;
-	private final ModelRenderer arm2;
-	private final ModelRenderer arms;
-	private final ModelRenderer monsterarm1;
-	private final ModelRenderer cube_r4;
-	private final ModelRenderer monsterarm2;
-	private final ModelRenderer cube_r5;
-	private final ModelRenderer monsterarm3;
-	private final ModelRenderer cube_r6;
-	private final ModelRenderer monsterarm4;
-	private final ModelRenderer cube_r7;
-	public AlienZombieModel() {
-		textureWidth = 96;
-		textureHeight = 64;
+public class AlienZombieModel<T extends Mob> extends EntityModel<T> {
 
-		head = new ModelRenderer(this);
-		head.setRotationPoint(-0.0084F, 0.023F, -2.9621F);
-		setRotationAngle(head, -0.2182F, 0.0F, 0.0F);
-		head.setTextureOffset(0, 0).addBox(-3.9916F, -7.4559F, -5.0853F, 8.0F, 9.0F, 8.0F, 0.0F, true);
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(BossToolsMod.ModId, "alien_zombie"), "main");
 
-		nose_r1 = new ModelRenderer(this);
-		nose_r1.setRotationPoint(0.0084F, -0.8556F, -6.2184F);
-		head.addChild(nose_r1);
-		setRotationAngle(nose_r1, -1.0036F, 0.0F, 0.0F);
-		nose_r1.setTextureOffset(24, 0).addBox(-1.0F, -2.0F, -1.0F, 2.0F, 4.0F, 2.0F, 0.0F, true);
+    private final ModelPart head;
+    private final ModelPart body;
+    private final ModelPart leg0;
+    private final ModelPart leg1;
+    private final ModelPart arm1;
+    private final ModelPart arm2;
+    private final ModelPart monsterarm1;
+    private final ModelPart monsterarm2;
+    private final ModelPart monsterarm3;
+    private final ModelPart monsterarm4;
 
-		cube_r1 = new ModelRenderer(this);
-		cube_r1.setRotationPoint(1.897F, 5.0235F, -7.2107F);
-		head.addChild(cube_r1);
-		setRotationAngle(cube_r1, 1.0036F, 0.48F, -0.8727F);
-		cube_r1.setTextureOffset(88, 59).addBox(-1.0F, -1.5F, -1.0F, 2.0F, 3.0F, 2.0F, 0.0F, true);
+    public AlienZombieModel(ModelPart root) {
+        this.head = root.getChild("head");
+        this.body = root.getChild("body");
+        this.leg0 = root.getChild("leg0");
+        this.leg1 = root.getChild("leg1");
+        this.arm1 = root.getChild("arm1");
+        this.arm2 = root.getChild("arm2");
+        this.monsterarm1 = root.getChild("monsterarm1");
+        this.monsterarm2 = root.getChild("monsterarm2");
+        this.monsterarm3 = root.getChild("monsterarm3");
+        this.monsterarm4 = root.getChild("monsterarm4");
+    }
 
-		cube_r2 = new ModelRenderer(this);
-		cube_r2.setRotationPoint(-1.939F, 5.0505F, -7.2254F);
-		head.addChild(cube_r2);
-		setRotationAngle(cube_r2, 1.0036F, -0.48F, 0.8727F);
-		cube_r2.setTextureOffset(88, 59).addBox(-1.0F, -1.5F, -1.0F, 2.0F, 3.0F, 2.0F, 0.0F, false);
+    public static LayerDefinition createBodyLayer() {
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
 
-		cube_r3 = new ModelRenderer(this);
-		cube_r3.setRotationPoint(0.0084F, 3.0701F, -8.6546F);
-		head.addChild(cube_r3);
-		setRotationAngle(cube_r3, -0.3927F, 0.0F, 0.0F);
-		cube_r3.setTextureOffset(88, 54).addBox(-1.5F, -1.5F, -0.5F, 3.0F, 3.0F, 1.0F, 0.0F, false);
+        PartDefinition head = partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).mirror().addBox(-4.0F, -9.0F, -4.0F, 8.0F, 9.0F, 8.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 2.0F, -6.0F, -0.2182F, 0.0F, 0.0F));
 
-		head_r1 = new ModelRenderer(this);
-		head_r1.setRotationPoint(0.0084F, -11.4255F, -0.113F);
-		head.addChild(head_r1);
-		setRotationAngle(head_r1, -0.1745F, 0.0F, 0.0F);
-		head_r1.setTextureOffset(33, 0).addBox(-4.5F, -5.0F, -4.5F, 9.0F, 10.0F, 9.0F, 0.0F, true);
+        PartDefinition cube_r1 = head.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(88, 59).mirror().addBox(-0.5095F, -2.211F, -0.6496F, 2.0F, 3.0F, 2.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(2.25F, 4.1027F, -5.534F, 1.0036F, 0.48F, -0.8727F));
 
-		head_r2 = new ModelRenderer(this);
-		head_r2.setRotationPoint(0.0084F, 2.093F, -4.4925F);
-		head.addChild(head_r2);
-		setRotationAngle(head_r2, -1.0036F, 0.0F, 0.0F);
-		head_r2.setTextureOffset(40, 53).addBox(-3.5F, -3.0F, -2.5F, 7.0F, 6.0F, 5.0F, 0.0F, true);
+        PartDefinition cube_r2 = head.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(88, 59).addBox(-1.7975F, -1.8508F, -0.9483F, 2.0F, 3.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.75F, 4.1027F, -5.534F, 1.0036F, -0.48F, 0.8727F));
 
-		body = new ModelRenderer(this);
-		body.setRotationPoint(0.0F, 0.0F, -3.0F);
-		setRotationAngle(body, 0.2182F, 0.0F, 0.0F);
-		body.setTextureOffset(16, 20).addBox(-4.0F, 0.0F, -3.0F, 8.0F, 12.0F, 6.0F, 0.0F, true);
-		body.setTextureOffset(0, 38).addBox(-4.0F, 0.0F, -3.0F, 8.0F, 20.0F, 6.0F, 0.5F, true);
+        PartDefinition cube_r3 = head.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(88, 54).addBox(-1.5F, -1.75F, -0.75F, 3.0F, 3.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 1.8527F, -7.434F, -0.3927F, 0.0F, 0.0F));
 
-		leg0 = new ModelRenderer(this);
-		leg0.setRotationPoint(2.0F, 12.0F, 0.0F);
-		leg0.setTextureOffset(0, 22).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, 0.0F, true);
+        PartDefinition head_r1 = head.addOrReplaceChild("head_r1", CubeListBuilder.create().texOffs(33, 0).mirror().addBox(-4.5F, -3.9804F, -4.3483F, 9.0F, 10.0F, 9.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, -14.0F, 1.0F, -0.1745F, 0.0F, 0.0F));
 
-		leg1 = new ModelRenderer(this);
-		leg1.setRotationPoint(-2.0F, 12.0F, 0.0F);
-		leg1.setTextureOffset(0, 22).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, 0.0F, true);
+        PartDefinition head_r2 = head.addOrReplaceChild("head_r2", CubeListBuilder.create().texOffs(40, 53).mirror().addBox(-3.0F, 2.8551F, 0.3492F, 7.0F, 6.0F, 5.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(-0.5F, -5.0F, 0.0F, -1.0036F, 0.0F, 0.0F));
 
-		arm2 = new ModelRenderer(this);
-		arm2.setRotationPoint(4.0F, 2.0F, -1.5F);
-		arm2.setTextureOffset(44, 22).addBox(0.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, 0.0F, true);
+        PartDefinition nose = head.addOrReplaceChild("nose", CubeListBuilder.create(), PartPose.offset(0.0F, -3.1927F, 0.7599F));
 
-		arms = new ModelRenderer(this);
-		arms.setRotationPoint(-4.0F, 2.0F, -1.5F);
-		setRotationAngle(arms, 0.0436F, 0.0F, 0.0F);
-		arms.setTextureOffset(44, 22).addBox(-4.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, 0.0F, true);
+        PartDefinition nose_r1 = nose.addOrReplaceChild("nose_r1", CubeListBuilder.create().texOffs(24, 0).mirror().addBox(-1.0F, -0.5896F, 1.4131F, 2.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, -2.0F, -6.0F, -1.0036F, 0.0F, 0.0F));
 
-		monsterarm1 = new ModelRenderer(this);
-		monsterarm1.setRotationPoint(-4.0F, 0.0F, -2.0F);
-		setRotationAngle(monsterarm1, 0.0F, 0.0F, 0.9599F);
-		monsterarm1.setTextureOffset(30, 46).addBox(-17.0F, -1.0F, -1.0F, 17.0F, 2.0F, 2.0F, 0.0F, false);
+        PartDefinition body = partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(16, 20).mirror().addBox(-4.0F, 0.0F, -3.0F, 8.0F, 12.0F, 6.0F, new CubeDeformation(0.0F)).mirror(false)
+                .texOffs(0, 38).mirror().addBox(-4.0F, 0.0F, -3.0F, 8.0F, 20.0F, 6.0F, new CubeDeformation(0.5F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, -3.0F, 0.2182F, 0.0F, 0.0F));
 
-		cube_r4 = new ModelRenderer(this);
-		cube_r4.setRotationPoint(-16.25F, 0.0F, 0.75F);
-		monsterarm1.addChild(cube_r4);
-		setRotationAngle(cube_r4, 0.0F, -1.1345F, 0.0F);
-		cube_r4.setTextureOffset(34, 46).addBox(-15.0F, -1.0F, -1.0F, 15.0F, 2.0F, 2.0F, -0.1F, false);
+        PartDefinition leg0 = partdefinition.addOrReplaceChild("leg0", CubeListBuilder.create().texOffs(0, 22).mirror().addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(2.0F, 12.0F, 0.0F));
 
-		monsterarm2 = new ModelRenderer(this);
-		monsterarm2.setRotationPoint(-3.0F, -0.25F, -3.0F);
-		setRotationAngle(monsterarm2, 0.0F, 0.0F, -0.3927F);
-		monsterarm2.setTextureOffset(30, 46).addBox(-17.0F, -1.0F, -1.0F, 17.0F, 2.0F, 2.0F, 0.0F, false);
+        PartDefinition leg1 = partdefinition.addOrReplaceChild("leg1", CubeListBuilder.create().texOffs(0, 22).mirror().addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(-2.0F, 12.0F, 0.0F));
 
-		cube_r5 = new ModelRenderer(this);
-		cube_r5.setRotationPoint(-16.25F, 0.0F, 0.75F);
-		monsterarm2.addChild(cube_r5);
-		setRotationAngle(cube_r5, 0.0F, -1.1345F, 0.0F);
-		cube_r5.setTextureOffset(34, 46).addBox(-15.0F, -1.0F, -1.0F, 15.0F, 2.0F, 2.0F, -0.1F, false);
+        PartDefinition arm1 = partdefinition.addOrReplaceChild("arm1", CubeListBuilder.create().texOffs(44, 22).mirror().addBox(-8.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 4.0F, -1.5F, 0.0436F, 0.0F, 0.0F));
 
-		monsterarm3 = new ModelRenderer(this);
-		monsterarm3.setRotationPoint(4.0F, 0.0F, -2.0F);
-		setRotationAngle(monsterarm3, 0.0F, 0.0F, 2.1817F);
-		monsterarm3.setTextureOffset(30, 46).addBox(-17.0F, -1.0F, -1.0F, 17.0F, 2.0F, 2.0F, 0.0F, false);
+        PartDefinition arm2 = partdefinition.addOrReplaceChild("arm2", CubeListBuilder.create().texOffs(44, 22).mirror().addBox(4.0F, -2.0F, -5.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(0.0F, 7.0F, -1.5F));
 
-		cube_r6 = new ModelRenderer(this);
-		cube_r6.setRotationPoint(-16.25F, 0.0F, 0.75F);
-		monsterarm3.addChild(cube_r6);
-		setRotationAngle(cube_r6, 0.0F, -1.1345F, 0.0F);
-		cube_r6.setTextureOffset(34, 46).addBox(-15.0F, -1.0F, -1.0F, 15.0F, 2.0F, 2.0F, -0.1F, false);
+        PartDefinition monsterarm1 = partdefinition.addOrReplaceChild("monsterarm1", CubeListBuilder.create().texOffs(30, 46).addBox(-17.0F, -1.0F, -1.0F, 17.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-4.0F, 0.0F, -2.0F, 0.0F, 0.0F, 0.9599F));
 
-		monsterarm4 = new ModelRenderer(this);
-		monsterarm4.setRotationPoint(3.0F, -0.25F, -3.0F);
-		setRotationAngle(monsterarm4, 0.0F, 0.0F, -2.7489F);
-		monsterarm4.setTextureOffset(30, 46).addBox(-17.0F, -1.0F, -1.0F, 17.0F, 2.0F, 2.0F, 0.0F, false);
+        PartDefinition cube_r4 = monsterarm1.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(34, 46).addBox(-15.0F, -1.0F, -1.0F, 15.0F, 2.0F, 2.0F, new CubeDeformation(-0.1F)), PartPose.offsetAndRotation(-16.25F, 0.0F, 0.75F, 0.0F, -1.1345F, 0.0F));
 
-		cube_r7 = new ModelRenderer(this);
-		cube_r7.setRotationPoint(-16.25F, 0.0F, 0.75F);
-		monsterarm4.addChild(cube_r7);
-		setRotationAngle(cube_r7, 0.0F, -1.1345F, 0.0F);
-		cube_r7.setTextureOffset(30, 46).addBox(-15.0F, -1.0F, -1.0F, 15.0F, 2.0F, 2.0F, -0.1F, false);
-	}
+        PartDefinition monsterarm2 = partdefinition.addOrReplaceChild("monsterarm2", CubeListBuilder.create().texOffs(30, 46).addBox(-17.0F, -1.0F, -1.0F, 17.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.0F, -0.25F, -3.0F, 0.0F, 0.0F, -0.3927F));
 
-	@Override
-	public void setRotationAngles(T entityIn, float f, float f1, float f2, float f3, float f4) {
-		//base
-		this.arm2.rotateAngleY = 0.0F;
-		this.arms.rotateAngleY = 0.0F;
-		this.arm2.rotateAngleZ = 0.0F;
-		this.arms.rotateAngleZ = 0.0F;
-		this.arm2.rotateAngleX = 0.0F;
-		this.arms.rotateAngleX = 0.0F;
+        PartDefinition cube_r5 = monsterarm2.addOrReplaceChild("cube_r5", CubeListBuilder.create().texOffs(34, 46).addBox(-15.0F, -1.0F, -1.0F, 15.0F, 2.0F, 2.0F, new CubeDeformation(-0.1F)), PartPose.offsetAndRotation(-16.25F, 0.0F, 0.75F, 0.0F, -1.1345F, 0.0F));
 
-		this.arm2.rotateAngleZ -= MathHelper.cos(f2 * 0.04F) * 0.04F + 0.04F;
-		this.arms.rotateAngleZ += MathHelper.cos(f2 * 0.04F) * 0.04F + 0.04F;
+        PartDefinition monsterarm3 = partdefinition.addOrReplaceChild("monsterarm3", CubeListBuilder.create().texOffs(30, 46).addBox(-17.0F, -1.0F, -1.0F, 17.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(4.0F, 0.0F, -2.0F, 0.0F, 0.0F, 2.1817F));
 
-		//base end
+        PartDefinition cube_r6 = monsterarm3.addOrReplaceChild("cube_r6", CubeListBuilder.create().texOffs(34, 46).addBox(-15.0F, -1.0F, -1.0F, 15.0F, 2.0F, 2.0F, new CubeDeformation(-0.1F)), PartPose.offsetAndRotation(-16.25F, 0.0F, 0.75F, 0.0F, -1.1345F, 0.0F));
 
-		this.head.rotateAngleY = f3 / (180F / (float) Math.PI);
-		this.head.rotateAngleX = f4 / (180F / (float) Math.PI);
-		this.leg0.rotateAngleX = MathHelper.cos(f * 1.0F) * -1.0F * f1;
-		this.leg1.rotateAngleX = MathHelper.cos(f * 1.0F) * 1.0F * f1;
-		this.monsterarm1.rotateAngleY = MathHelper.cos(f * 0.3662F + (float) Math.PI) * f1 / 2;
-		this.monsterarm4.rotateAngleY = MathHelper.cos(f * 0.3662F + (float) Math.PI) * f1 / 2;
-		this.monsterarm3.rotateAngleY = MathHelper.cos(f * 0.3662F + (float) Math.PI) * f1 / 2;
-		this.monsterarm2.rotateAngleY = MathHelper.cos(f * 0.3662F + (float) Math.PI) * f1 / 2;
-		this.arms.rotateAngleX = 30f;
-		this.arm2.rotateAngleX = 30f;
+        PartDefinition monsterarm4 = partdefinition.addOrReplaceChild("monsterarm4", CubeListBuilder.create().texOffs(30, 46).addBox(-17.0F, -1.0F, -1.0F, 17.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(3.0F, -0.25F, -3.0F, 0.0F, 0.0F, -2.7489F));
 
-		this.arm2.rotateAngleX -= MathHelper.cos(f2 * 0.04F) * 0.04F + 0.04F;
-		this.arms.rotateAngleX += MathHelper.cos(f2 * 0.04F) * 0.04F + 0.04F;
-	}
+        PartDefinition cube_r7 = monsterarm4.addOrReplaceChild("cube_r7", CubeListBuilder.create().texOffs(30, 46).addBox(-15.0F, -1.0F, -1.0F, 15.0F, 2.0F, 2.0F, new CubeDeformation(-0.1F)), PartPose.offsetAndRotation(-16.25F, 0.0F, 0.75F, 0.0F, -1.1345F, 0.0F));
 
-	@Override
-	public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		head.render(matrixStack, buffer, packedLight, packedOverlay);
-		body.render(matrixStack, buffer, packedLight, packedOverlay);
-		leg0.render(matrixStack, buffer, packedLight, packedOverlay);
-		leg1.render(matrixStack, buffer, packedLight, packedOverlay);
-		arm2.render(matrixStack, buffer, packedLight, packedOverlay);
-		arms.render(matrixStack, buffer, packedLight, packedOverlay);
-		monsterarm1.render(matrixStack, buffer, packedLight, packedOverlay);
-		monsterarm2.render(matrixStack, buffer, packedLight, packedOverlay);
-		monsterarm3.render(matrixStack, buffer, packedLight, packedOverlay);
-		monsterarm4.render(matrixStack, buffer, packedLight, packedOverlay);
-	}
+        return LayerDefinition.create(meshdefinition, 96, 64);
+    }
 
-	public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-		modelRenderer.rotateAngleX = x;
-		modelRenderer.rotateAngleY = y;
-		modelRenderer.rotateAngleZ = z;
-	}
+    @Override
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        head.render(poseStack, buffer, packedLight, packedOverlay);
+        body.render(poseStack, buffer, packedLight, packedOverlay);
+        leg0.render(poseStack, buffer, packedLight, packedOverlay);
+        leg1.render(poseStack, buffer, packedLight, packedOverlay);
+        arm1.render(poseStack, buffer, packedLight, packedOverlay);
+        arm2.render(poseStack, buffer, packedLight, packedOverlay);
+        monsterarm1.render(poseStack, buffer, packedLight, packedOverlay);
+        monsterarm2.render(poseStack, buffer, packedLight, packedOverlay);
+        monsterarm3.render(poseStack, buffer, packedLight, packedOverlay);
+        monsterarm4.render(poseStack, buffer, packedLight, packedOverlay);
+    }
 
-	 */
+    @Override
+    public void setupAnim(T entity, float f, float f1, float f2, float f3, float f4) {
+        //base
+        this.arm2.yRot = 0.0F;
+        this.arm1.yRot = 0.0F;
+        this.arm2.zRot = 0.0F;
+        this.arm1.zRot = 0.0F;
+        this.arm2.xRot = 0.0F;
+        this.arm1.xRot = 0.0F;
+
+        this.arm2.zRot -= Mth.cos(f2 * 0.04F) * 0.04F + 0.04F;
+        this.arm1.zRot += Mth.cos(f2 * 0.04F) * 0.04F + 0.04F;
+
+        //base end
+
+        this.head.yRot = f3 / (180F / (float) Math.PI);
+        this.head.xRot = f4 / (180F / (float) Math.PI);
+        this.leg0.xRot = Mth.cos(f * 1.0F) * -1.0F * f1;
+        this.leg1.xRot = Mth.cos(f * 1.0F) * 1.0F * f1;
+        this.monsterarm1.yRot = Mth.cos(f * 0.3662F + (float) Math.PI) * f1 / 2;
+        this.monsterarm4.yRot = Mth.cos(f * 0.3662F + (float) Math.PI) * f1 / 2;
+        this.monsterarm3.yRot = Mth.cos(f * 0.3662F + (float) Math.PI) * f1 / 2;
+        this.monsterarm2.yRot = Mth.cos(f * 0.3662F + (float) Math.PI) * f1 / 2;
+        this.arm1.xRot = 30f;
+        this.arm2.xRot = 30f;
+
+        this.arm2.xRot -= Mth.cos(f2 * 0.04F) * 0.04F + 0.04F;
+        this.arm1.xRot += Mth.cos(f2 * 0.04F) * 0.04F + 0.04F;
+    }
 }
