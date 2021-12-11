@@ -107,7 +107,7 @@ mixin {
     add sourceSets.main, "boss_tools.mixin-refmap.json"
 }
 
-build.dependsOn("reobfJar")
+jar.finalizedBy('reobfJar')
 
 jar {
     manifest {
