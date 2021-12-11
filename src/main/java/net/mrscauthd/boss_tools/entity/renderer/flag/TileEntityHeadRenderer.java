@@ -31,6 +31,11 @@ public class TileEntityHeadRenderer implements BlockEntityRenderer<FlagTileEntit
 		this.skullModels = SkullBlockRenderer.createSkullRenderers(context.getModelSet());
 	}
 
+	@Override
+	public boolean shouldRenderOffScreen(FlagTileEntity p_112306_) {
+		return true;
+	}
+
 	public void render(FlagTileEntity flag, float partialTicks, PoseStack stack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
 		BlockState blockState = flag.getBlockState();
 

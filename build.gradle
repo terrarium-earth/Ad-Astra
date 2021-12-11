@@ -77,7 +77,7 @@ dependencies {
 
   //Mixin
     if (System.getProperty("idea.sync.active") != "true") {
-        annotationProcessor 'org.spongepowered:mixin:0.8.2:processor'
+        annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     }
 
     //JEI
@@ -106,6 +106,8 @@ dependencies {
 mixin {
     add sourceSets.main, "boss_tools.mixin-refmap.json"
 }
+
+build.dependsOn("reobfJar")
 
 jar {
     manifest {
