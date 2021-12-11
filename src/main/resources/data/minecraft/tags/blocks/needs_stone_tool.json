@@ -1,21 +1,6 @@
 {
   "replace": false,
   "values": [
-    "boss_tools:flag",
-    "boss_tools:flag_blue",
-    "boss_tools:flag_brown",
-    "boss_tools:flag_cyan",
-    "boss_tools:flag_gray",
-    "boss_tools:flag_green",
-    "boss_tools:flag_light_blue",
-    "boss_tools:flag_lime",
-    "boss_tools:flag_magenta",
-    "boss_tools:flag_orange",
-    "boss_tools:flag_pink",
-    "boss_tools:flag_purple",
-    "boss_tools:flag_red",
-    "boss_tools:flag_yellow",
-
     "boss_tools:venus_coal_ore",
     "boss_tools:mercury_iron_ore",
     "boss_tools:moon_iron_ore",
