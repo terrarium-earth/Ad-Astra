@@ -358,7 +358,7 @@ public class RocketTier2Entity extends PathfinderMob {
 				if (this.getDeltaMovement().y() < 0.5) {
 					this.setDeltaMovement(this.getDeltaMovement().x, this.getDeltaMovement().y + 0.1, this.getDeltaMovement().z);
 				} else {
-					this.setDeltaMovement(this.getDeltaMovement().x, 0.63, this.getDeltaMovement().y);
+					this.setDeltaMovement(this.getDeltaMovement().x, 0.63, this.getDeltaMovement().z);
 				}
 			}
 
