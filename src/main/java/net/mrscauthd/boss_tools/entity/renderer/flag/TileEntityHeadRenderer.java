@@ -1,20 +1,32 @@
 package net.mrscauthd.boss_tools.entity.renderer.flag;
 
+import java.util.Collections;
 import java.util.Map;
 
-import com.mojang.authlib.GameProfile;
-import com.mojang.blaze3d.vertex.PoseStack;
+import javax.annotation.Nullable;
 
-import net.minecraft.client.model.SkullModelBase;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.minecraft.MinecraftProfileTexture;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+
+import net.minecraft.Util;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.geom.EntityModelSet;
+import net.minecraft.client.model.geom.ModelLayers;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.blockentity.SkullBlockRenderer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Vec3i;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.SkullBlock;
-import net.minecraft.world.level.block.SkullBlock.Types;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraftforge.api.distmarker.Dist;
@@ -25,68 +37,74 @@ import net.mrscauthd.boss_tools.flag.FlagTileEntity;
 @OnlyIn(Dist.CLIENT)
 public class TileEntityHeadRenderer implements BlockEntityRenderer<FlagTileEntity> {
 
-	private Map<SkullBlock.Type, SkullModelBase> skullModels;
-
 	public TileEntityHeadRenderer(BlockEntityRendererProvider.Context context) {
-		this.skullModels = SkullBlockRenderer.createSkullRenderers(context.getModelSet());
+
 	}
 
-	@Override
+	private static final Map<FlagBlock.ISkullType, TileEntityHeadModel> MODELS = Util.make(Maps.newHashMap(), (p_209262_0_) -> {
+
+		Minecraft minecraft = Minecraft.getInstance();
+		Map<String, ModelPart> map = Map.of("head", new TileEntityHeadModel(minecraft.getEntityModels().bakeLayer(TileEntityHeadModel.LAYER_LOCATION)).head);
+		ModelPart modelPart = new ModelPart(Collections.emptyList(), map);
+
+		TileEntityHeadModel genericheadmodel = new TileEntityHeadModel(modelPart);
+
+		p_209262_0_.put(FlagBlock.Types.PLAYER, genericheadmodel);
+	});
+
+	private static final Map<FlagBlock.ISkullType, ResourceLocation> SKINS = Util.make(Maps.newHashMap(), (p_209263_0_) -> {
+		p_209263_0_.put(FlagBlock.Types.PLAYER, DefaultPlayerSkin.getDefaultSkin());
+	});
+
+	public static Map<SkullBlock.Type, TileEntityHeadModel> createSkullRenderers(EntityModelSet p_173662_) {
+		ImmutableMap.Builder<SkullBlock.Type, TileEntityHeadModel> builder = ImmutableMap.builder();
+		builder.put(SkullBlock.Types.PLAYER, new TileEntityHeadModel(p_173662_.bakeLayer(ModelLayers.PLAYER_HEAD)));
+		return builder.build();
+	}
+
 	public boolean shouldRenderOffScreen(FlagTileEntity p_112306_) {
 		return true;
 	}
 
-	public void render(FlagTileEntity flag, float partialTicks, PoseStack stack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
-		BlockState blockState = flag.getBlockState();
+	@Override
+	public void render(FlagTileEntity tileEntityIn, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
+		if (tileEntityIn.getBlockState().getValue(FlagBlock.HALF) == DoubleBlockHalf.UPPER) {
 
-		if (blockState.getValue(FlagBlock.HALF) == DoubleBlockHalf.UPPER) {
-			float renderScale = 1.0F;
-			float renderOffsetX = 0.050F;
-			float renderOffsetY = 0.18F;
-			float skullLength = 0.01F;
-
-			Direction direction = blockState.getValue(FlagBlock.FACING);
-			Vec3i normal = direction.getNormal();
-			float angle = direction.get2DDataValue() * 90.0F;
-			int x = normal.getX();
-			int z = normal.getZ();
-			boolean isXDirection = x != 0;
-			boolean isZDirection = z != 0;
-			float skullModelOffset = 0.25F;
-			float skullDirectionalX = isXDirection ? skullModelOffset : 0.00F;
-			float skullDirectionalZ = isZDirection ? skullModelOffset : 0.00F;
-			float skullScaleX = isXDirection ? skullLength : renderScale;
-			float skullScaleY = renderScale;
-			float skullScaleZ = isZDirection ? skullLength : renderScale;
-			float skullOffsetX = (0.50F - (skullScaleX / 2.0F)) - (renderOffsetX * z);
-			float skullOffsetY = (0.75F - (skullScaleY / 2.0F)) + renderOffsetY;
-			float skullOffsetZ = (0.50F - (skullScaleZ / 2.0F)) + (renderOffsetX * x);
-
-			Types type = SkullBlock.Types.PLAYER;
-			GameProfile playerProfile = flag.getPlayerProfile();
-
-			RenderType rendertype = SkullBlockRenderer.getRenderType(type, playerProfile);
-			SkullModelBase skullModelBase = this.skullModels.get(type);
-
-			stack.pushPose();
-			stack.translate(skullOffsetX, skullOffsetY, skullOffsetZ);
-			stack.scale(skullScaleX, skullScaleY, skullScaleZ);
-
-			// Front
-			stack.pushPose();
-			stack.translate(-skullDirectionalX * x, 0, -skullDirectionalZ * z);
-			SkullBlockRenderer.renderSkull(null, angle - 000.0F, 0, stack, buffer, combinedLight, skullModelBase, rendertype);
-			stack.popPose();
-
-			// Back
-			stack.pushPose();
-			stack.translate(+skullDirectionalX * x, 0, +skullDirectionalZ * z);
-			SkullBlockRenderer.renderSkull(null, angle - 180.0F, 0, stack, buffer, combinedLight, skullModelBase, rendertype);
-			stack.popPose();
-
-			stack.popPose();
+			BlockState blockstate = tileEntityIn.getBlockState();
+			boolean flag = blockstate.getBlock() instanceof FlagBlock;
+			Direction direction = flag ? blockstate.getValue(FlagBlock.FACING) : null;
+			render(direction, blockstate.getValue(FlagBlock.FACING).toYRot(), ((FlagBlock) blockstate.getBlock()).getSkullType(), tileEntityIn.getPlayerProfile(), 0, matrixStackIn, bufferIn, combinedLightIn);
 		}
-
 	}
 
+	public static void render(@Nullable Direction directionIn, float p_228879_1_, FlagBlock.ISkullType skullType, @Nullable GameProfile gameProfileIn, float animationProgress, PoseStack matrixStackIn, MultiBufferSource buffer, int combinedLight) {
+		TileEntityHeadModel genericheadmodel = MODELS.get(skullType);
+		matrixStackIn.pushPose();
+		if (directionIn == null) {
+			matrixStackIn.translate(0.5D, 0.0D, 0.5D);
+		} else {
+			matrixStackIn.translate((double) (0.5F - (float) directionIn.getStepX() * 0.25F), 0.25D, (double) (0.5F - (float) directionIn.getStepZ() * 0.25F));
+		}
+
+		Map<String, ModelPart> map = Map.of("head", new TileEntityHeadModel(TileEntityHeadModel.createHumanoidHeadLayer().bakeRoot()).head);
+		ModelPart modelPart = new ModelPart(Collections.emptyList(), map);
+		genericheadmodel = new TileEntityHeadModel(modelPart);
+
+		matrixStackIn.scale(-1.0F, -1.0F, 1.0F);
+		VertexConsumer ivertexbuilder = buffer.getBuffer(getRenderType(skullType, gameProfileIn));
+		genericheadmodel.setupAnim(animationProgress, p_228879_1_, 0.0F);
+		genericheadmodel.renderToBuffer(matrixStackIn, ivertexbuilder, combinedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+		matrixStackIn.popPose();
+	}
+
+	private static RenderType getRenderType(FlagBlock.ISkullType skullType, @Nullable GameProfile gameProfileIn) {
+		ResourceLocation resourcelocation = SKINS.get(skullType);
+		if (skullType == FlagBlock.Types.PLAYER && gameProfileIn != null) {
+			Minecraft minecraft = Minecraft.getInstance();
+			Map<MinecraftProfileTexture.Type, MinecraftProfileTexture> map = minecraft.getSkinManager().getInsecureSkinInformation(gameProfileIn);
+			return map.containsKey(MinecraftProfileTexture.Type.SKIN) ? RenderType.entityTranslucent(minecraft.getSkinManager().registerTexture(map.get(MinecraftProfileTexture.Type.SKIN), MinecraftProfileTexture.Type.SKIN)) : RenderType.entityCutoutNoCull(DefaultPlayerSkin.getDefaultSkin(Player.createPlayerUUID(gameProfileIn)));
+		} else {
+			return RenderType.entityCutoutNoCullZOffset(resourcelocation);
+		}
+	}
 }
