@@ -9,6 +9,14 @@
     "boss_tools:solar_panel",
     "boss_tools:nasa_workbench",
     "boss_tools:oxygen_bubble_distributor",
-    "boss_tools:water_pump"
+    "boss_tools:water_pump",
+
+    "boss_tools:rocket_launch_pad",
+
+    "boss_tools:moon_desh_ore",
+    "boss_tools:mars_diamond_ore",
+    "boss_tools:mars_silicon_ore",
+    "boss_tools:venus_diamond_ore",
+    "boss_tools:venus_gold_ore"
   ]
 }

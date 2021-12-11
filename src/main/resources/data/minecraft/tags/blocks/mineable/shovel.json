@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "boss_tools:moon_sand",
+    "boss_tools:mars_sand",
+    "boss_tools:venus_sand"
+  ]
+}
