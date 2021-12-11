@@ -375,18 +375,20 @@ public class RocketTier2Entity extends PathfinderMob {
 				this.remove(RemovalReason.DISCARDED);
 			}
 
+			Vec3 vec = this.getDeltaMovement();
+
 			//Particle Spawn
 			if (this.entityData.get(START_TIMER) == 200) {
 				if (level instanceof ServerLevel) {
 					for (ServerPlayer p : ((ServerLevel) level).getServer().getPlayerList().getPlayers()) {
-						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInnet.LARGE_FLAME_PARTICLE.get(), true, this.getX(), this.getY() - 2.2, this.getZ(), 20, 0.1, 0.1, 0.1, 0.001);
-						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInnet.SMOKE_PARTICLE.get(), true, this.getX(), this.getY() - 3.2, this.getZ(), 10, 0.1, 0.1, 0.1, 0.04);
+						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInnet.LARGE_FLAME_PARTICLE.get(), true, this.getX() - vec.x, this.getY() - vec.y - 1.6, this.getZ() - vec.z, 20, 0.1, 0.1, 0.1, 0.001);
+						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInnet.SMOKE_PARTICLE.get(), true, this.getX() - vec.x, this.getY() - vec.y - 2.6, this.getZ() - vec.z, 10, 0.1, 0.1, 0.1, 0.04);
 					}
 				}
 			} else {
 				if (level instanceof ServerLevel) {
 					for (ServerPlayer p : ((ServerLevel) level).getServer().getPlayerList().getPlayers()) {
-						((ServerLevel) level).sendParticles(p, ParticleTypes.CAMPFIRE_COSY_SMOKE, true, this.getX(), this.getY() - 0.1, this.getZ(), 6, 0.1, 0.1, 0.1, 0.023);
+						((ServerLevel) level).sendParticles(p, ParticleTypes.CAMPFIRE_COSY_SMOKE, true, this.getX() - vec.x, this.getY() - vec.y - 0.1, this.getZ() - vec.z, 6, 0.1, 0.1, 0.1, 0.023);
 					}
 				}
 			}
