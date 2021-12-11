@@ -220,8 +220,7 @@ public class Methodes {
             if (!Methodes.nethriteSpaceSuitCheck(entity) && !entity.hasEffect(MobEffects.FIRE_RESISTANCE) && !entity.fireImmune()) {
                 if (!MinecraftForge.EVENT_BUS.post(new LivingSetFireInHotPlanetEvent(entity))) {
                     if (!tagCheck(entity, BossToolsMod.ModId + ":entities/venus_fire")) {
-
-                        entity.setRemainingFireTicks(10);
+                        entity.setSecondsOnFire(10);
                     }
                 }
             }

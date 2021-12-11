@@ -70,7 +70,7 @@ public class ClientEventBusSubscriber {
 	public static void registerEntityRenderingHandler(EntityRenderersEvent.RegisterRenderers event) {
 		event.registerEntityRenderer(ModInnet.ALIEN.get(), AlienRenderer::new);
 		event.registerEntityRenderer(ModInnet.ALIEN_ZOMBIE.get(), AlienZombieRenderer::new);
-		//event.registerEntityRenderer(ModInnet.STAR_CRAWLER.get(), StarCrawlerRenderer::new);
+		event.registerEntityRenderer(ModInnet.STAR_CRAWLER.get(), StarCrawlerRenderer::new);
 		event.registerEntityRenderer(ModInnet.PYGRO.get(), (p_174068_) -> {
 			return new PygroRenderer(p_174068_, PygroModel.LAYER_LOCATION, ModelLayers.PIGLIN_INNER_ARMOR, ModelLayers.PIGLIN_OUTER_ARMOR);
 		});
@@ -92,7 +92,7 @@ public class ClientEventBusSubscriber {
 	public static void registerEntityRenderingHandler(EntityRenderersEvent.RegisterLayerDefinitions event) {
 		event.registerLayerDefinition(AlienModel.LAYER_LOCATION, AlienModel::createBodyLayer);
 		event.registerLayerDefinition(AlienZombieModel.LAYER_LOCATION, AlienZombieModel::createBodyLayer);
-	//	event.registerLayerDefinition(StarCrawlerModel.LAYER_LOCATION, StarCrawlerModel::createBodyLayer);
+		event.registerLayerDefinition(StarCrawlerModel.LAYER_LOCATION, StarCrawlerModel::createBodyLayer);
 		event.registerLayerDefinition(PygroModel.LAYER_LOCATION, PygroModel::createBodyLayer);
 		event.registerLayerDefinition(MoglerModel.LAYER_LOCATION, MoglerModel::createBodyLayer);
 
