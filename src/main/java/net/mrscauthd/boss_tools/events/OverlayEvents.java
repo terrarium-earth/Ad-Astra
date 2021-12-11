@@ -4,6 +4,7 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -61,6 +62,7 @@ public class OverlayEvents {
     }
 
     public static void stopOverlaySettings() {
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.enableDepthTest();
         RenderSystem.depthMask(true);
         RenderSystem.enableBlend();
@@ -68,9 +70,8 @@ public class OverlayEvents {
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
     }
 
-    @SubscribeEvent(priority = EventPriority.HIGH)
-    public static void Overlay(RenderGameOverlayEvent.PreLayer event) {
-
+    @SubscribeEvent
+    public static void overlayRegistry(RenderGameOverlayEvent.PreLayer event) {
         /**Disable Food Overlay*/
         if (event.getOverlay() == ForgeIngameGui.MOUNT_HEALTH_ELEMENT) {
             Player entity = Minecraft.getInstance().player;
@@ -78,7 +79,10 @@ public class OverlayEvents {
                 event.setCanceled(true);
             }
         }
+    }
 
+    @SubscribeEvent(priority = EventPriority.HIGH)
+    public static void Overlay(RenderGameOverlayEvent.PostLayer event) {
         /**Lander Warning Overlay*/
         if (!event.isCancelable() && event.getOverlay() == ForgeIngameGui.HELMET_ELEMENT) {
             Player entity = Minecraft.getInstance().player;
@@ -86,10 +90,11 @@ public class OverlayEvents {
             startOverlaySettings();
 
             if (entity.getVehicle() instanceof LanderEntity && !entity.getVehicle().isOnGround() && !entity.isEyeInFluid(FluidTags.WATER)) {
+                RenderSystem.setShader(GameRenderer::getPositionTexShader);
 
                 RenderSystem.setShaderColor((float) counter, (float) counter, (float) counter, (float) counter);
 
-                Minecraft.getInstance().getTextureManager().bindForSetup(new ResourceLocation(BossToolsMod.ModId, "textures/overlay/warning.png"));
+                RenderSystem.setShaderTexture(0, new ResourceLocation(BossToolsMod.ModId, "textures/overlay/warning.png"));
                 Minecraft.getInstance().gui.blit(event.getMatrixStack(), 0, 0, 0, 0, event.getWindow().getGuiScaledWidth(), event.getWindow().getGuiScaledHeight(), event.getWindow().getGuiScaledWidth(), event.getWindow().getGuiScaledHeight());
             }
 
@@ -131,46 +136,45 @@ public class OverlayEvents {
                 int high = event.getWindow().getGuiScaledHeight() / 2 / 2;
 
                 Gui mc = Minecraft.getInstance().gui;
-                TextureManager manager = Minecraft.getInstance().textureManager;
 
                 if (timer > -1 && timer < 20) {
-                    manager.bindForSetup(new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer10.png"));
+                    RenderSystem.setShaderTexture(0, new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer10.png"));
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
                 if (timer > 20 && timer < 40) {
-                    manager.bindForSetup(new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer9.png"));
+                    RenderSystem.setShaderTexture(0, new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer9.png"));
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
                 if (timer > 40 && timer < 60) {
-                    manager.bindForSetup(new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer8.png"));
+                    RenderSystem.setShaderTexture(0, new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer8.png"));
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
                 if (timer > 60 && timer < 80) {
-                    manager.bindForSetup(new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer7.png"));
+                    RenderSystem.setShaderTexture(0, new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer7.png"));
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
                 if (timer > 80 && timer < 100) {
-                    manager.bindForSetup(new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer6.png"));
+                    RenderSystem.setShaderTexture(0, new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer6.png"));
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
                 if (timer > 100 && timer < 120) {
-                    manager.bindForSetup(new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer5.png"));
+                    RenderSystem.setShaderTexture(0, new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer5.png"));
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
                 if (timer > 120 && timer < 140) {
-                    manager.bindForSetup(new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer4.png"));
+                    RenderSystem.setShaderTexture(0, new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer4.png"));
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
                 if (timer > 140 && timer < 160) {
-                    manager.bindForSetup(new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer3.png"));
+                    RenderSystem.setShaderTexture(0, new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer3.png"));
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
                 if (timer > 160 && timer < 180) {
-                    manager.bindForSetup(new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer2.png"));
+                    RenderSystem.setShaderTexture(0, new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer2.png"));
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
                 if (timer > 180 && timer < 200) {
-                    manager.bindForSetup(new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer1.png"));
+                    RenderSystem.setShaderTexture(0, new ResourceLocation(BossToolsMod.ModId, "textures/timer/timer1.png"));
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
 
@@ -255,10 +259,10 @@ public class OverlayEvents {
                     planet = new ResourceLocation(BossToolsMod.ModId, "textures/planet_bar/rocket_y_main_earth.png");
                 }
 
-                manager.bindForSetup(planet);
+                RenderSystem.setShaderTexture(0, planet);
                 mc.blit(event.getMatrixStack(), 0, (high / 2) - 128 / 2, 0, 0, 16, 128, 16, 128);
 
-                manager.bindForSetup(new ResourceLocation(BossToolsMod.ModId, "textures/planet_bar/rocket_y.png"));
+                RenderSystem.setShaderTexture(0, new ResourceLocation(BossToolsMod.ModId, "textures/planet_bar/rocket_y.png"));
                 GuiHelper.blit(event.getMatrixStack(), 4, (high / 2) + (103 / 2) - yHeight, 0, 0, 8, 11, 8, 11);
             }
             stopOverlaySettings();
