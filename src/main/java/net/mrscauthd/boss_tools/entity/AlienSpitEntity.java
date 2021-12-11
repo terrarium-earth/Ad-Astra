@@ -12,6 +12,7 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.ItemSupplier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -61,13 +62,13 @@ public class AlienSpitEntity extends AbstractArrow implements ItemSupplier {
     @Override
     public void tick() {
         super.tick();
-        double x = this.getY();
+        double x = this.getX();
         double y = this.getY();
         double z = this.getZ();
-        Level world = this.level;
-        Entity entity = this.getOwner();
-        world.addParticle(ParticleTypes.SPIT, x, y, z, 0, 0.001, 0);
-        world.addParticle(ParticleTypes.ITEM_SNOWBALL, x, y, z, 0, 0.001, 0);
+        Vec3 vec = this.getDeltaMovement();
+
+        this.level.addParticle(ParticleTypes.SPIT, x - vec.x, y - vec.y, z - vec.z, 0, 0.001, 0);
+        this.level.addParticle(ParticleTypes.ITEM_SNOWBALL, x - vec.x, y - vec.y, z - vec.z, 0, 0.001, 0);
         if (this.inGround) {
             this.remove(RemovalReason.DISCARDED);
         }
