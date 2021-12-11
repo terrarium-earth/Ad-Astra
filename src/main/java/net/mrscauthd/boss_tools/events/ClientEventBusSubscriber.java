@@ -25,6 +25,7 @@ import net.mrscauthd.boss_tools.entity.renderer.TileEntityBoxRenderer;
 import net.mrscauthd.boss_tools.entity.renderer.alien.AlienModel;
 import net.mrscauthd.boss_tools.entity.renderer.alienzombie.AlienZombieModel;
 import net.mrscauthd.boss_tools.entity.renderer.alienzombie.AlienZombieRenderer;
+import net.mrscauthd.boss_tools.entity.renderer.flag.TileEntityHeadModel;
 import net.mrscauthd.boss_tools.entity.renderer.flag.TileEntityHeadRenderer;
 import net.mrscauthd.boss_tools.entity.renderer.lander.LanderModel;
 import net.mrscauthd.boss_tools.entity.renderer.lander.LanderRenderer;
@@ -96,6 +97,8 @@ public class ClientEventBusSubscriber {
 		event.registerLayerDefinition(PygroModel.LAYER_LOCATION, PygroModel::createBodyLayer);
 		event.registerLayerDefinition(MoglerModel.LAYER_LOCATION, MoglerModel::createBodyLayer);
 
+		event.registerLayerDefinition(TileEntityHeadModel.LAYER_LOCATION, TileEntityHeadModel::createHumanoidHeadLayer);
+		
 		event.registerLayerDefinition(RocketTier1Model.LAYER_LOCATION, RocketTier1Model::createBodyLayer);
 		event.registerLayerDefinition(RocketTier2Model.LAYER_LOCATION, RocketTier2Model::createBodyLayer);
 		event.registerLayerDefinition(RocketTier3Model.LAYER_LOCATION, RocketTier3Model::createBodyLayer);
