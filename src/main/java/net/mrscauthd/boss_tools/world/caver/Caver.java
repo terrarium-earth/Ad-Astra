@@ -1,6 +1,5 @@
 package net.mrscauthd.boss_tools.world.caver;
 
-import net.minecraft.data.worldgen.Carvers;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.carver.WorldCarver;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -33,17 +32,6 @@ public class Caver {
 						//Venus
 						.add(ModInnet.VENUS_STONE.get().defaultBlockState().getBlock()).build(), "replaceableBlocks");
 				//WorldCarver.CANYON
-				ObfuscationReflectionHelper.setPrivateValue(WorldCarver.class, WorldCarver.CANYON, new ImmutableSet.Builder<Block>()
-						.addAll((Set<Block>) ObfuscationReflectionHelper.getPrivateValue(WorldCarver.class, WorldCarver.CANYON, "replaceableBlocks"))
-						//Moon
-						.add(ModInnet.MOON_STONE.get().defaultBlockState().getBlock())
-						//Mars
-						.add(ModInnet.MARS_STONE.get().defaultBlockState().getBlock())
-						//Mercury
-						.add(ModInnet.MERCURY_STONE.get().defaultBlockState().getBlock())
-						//venus
-						.add(ModInnet.VENUS_STONE.get().defaultBlockState().getBlock()).build(), "replaceableBlocks");
-
 				ObfuscationReflectionHelper.setPrivateValue(WorldCarver.class, WorldCarver.CANYON, new ImmutableSet.Builder<Block>()
 						.addAll((Set<Block>) ObfuscationReflectionHelper.getPrivateValue(WorldCarver.class, WorldCarver.CANYON, "replaceableBlocks"))
 						//Moon

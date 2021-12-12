@@ -1,15 +1,12 @@
 package net.mrscauthd.boss_tools.world.biomes;
 
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.Carvers;
-import net.minecraft.data.worldgen.placement.CavePlacements;
 import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
 import net.minecraft.data.worldgen.placement.NetherPlacements;
 import net.minecraft.data.worldgen.placement.OrePlacements;
 import net.minecraft.world.level.biome.*;
 import net.minecraft.world.level.levelgen.GenerationStep;
-import net.minecraft.world.level.levelgen.flat.FlatLevelGeneratorSettings;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -37,7 +34,7 @@ public class BiomeRegistry {
         if (moon == null) {
             BiomeSpecialEffects effects = new BiomeSpecialEffects.Builder().fogColor(-16777216).waterColor(4159204).waterFogColor(329011).skyColor(-16777216).foliageColorOverride(7842607).grassColorOverride(9551193).build();
             BiomeGenerationSettings.Builder biomeGenerationSettings = new BiomeGenerationSettings.Builder();
-            //addDefaultCarversAndLakes(biomeGenerationSettings);
+            addDefaultCarversAndLakes(biomeGenerationSettings);
             MobSpawnSettings mobSpawnInfo = MobSpawnSettings.EMPTY;
 
             moon = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(1.6f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
@@ -47,6 +44,7 @@ public class BiomeRegistry {
         if (mars == null) {
             BiomeSpecialEffects effects = new BiomeSpecialEffects.Builder().fogColor(-3044526).waterColor(4159204).waterFogColor(329011).skyColor(-3044526).foliageColorOverride(7842607).grassColorOverride(9551193).ambientParticle(new AmbientParticleSettings(ParticleTypes.CRIMSON_SPORE, 0.014f)).build();
             BiomeGenerationSettings.Builder biomeGenerationSettings = new BiomeGenerationSettings.Builder();
+            addDefaultCarversAndLakes(biomeGenerationSettings);
             MobSpawnSettings mobSpawnInfo = MobSpawnSettings.EMPTY;
 
             mars = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(1.6f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
@@ -56,6 +54,7 @@ public class BiomeRegistry {
         if (mars_ice_spike == null) {
             BiomeSpecialEffects effects = new BiomeSpecialEffects.Builder().fogColor(-3044526).waterColor(4159204).waterFogColor(329011).skyColor(-3044526).foliageColorOverride(7842607).grassColorOverride(9551193).ambientParticle(new AmbientParticleSettings(ParticleTypes.CRIMSON_SPORE, 0.014f)).build();
             BiomeGenerationSettings.Builder biomeGenerationSettings = new BiomeGenerationSettings.Builder();
+            addDefaultCarversAndLakes(biomeGenerationSettings);
             MobSpawnSettings mobSpawnInfo = MobSpawnSettings.EMPTY;
 
             mars_ice_spike = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.ICY).mobSpawnSettings(mobSpawnInfo).temperature(1.6f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
@@ -65,6 +64,7 @@ public class BiomeRegistry {
         if (venus == null) {
             BiomeSpecialEffects effects = new BiomeSpecialEffects.Builder().fogColor(-3044526).waterColor(4159204).waterFogColor(329011).skyColor(-3044526).foliageColorOverride(7842607).grassColorOverride(9551193).ambientParticle(new AmbientParticleSettings(ParticleTypes.CRIMSON_SPORE, 0.02f)).build();
             BiomeGenerationSettings.Builder biomeGenerationSettings = new BiomeGenerationSettings.Builder();
+            addDefaultCarversAndLakesLava(biomeGenerationSettings);
             MobSpawnSettings mobSpawnInfo = MobSpawnSettings.EMPTY;
 
             venus = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.RAIN).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(1.5f).downfall(1f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
@@ -75,6 +75,7 @@ public class BiomeRegistry {
             BiomeSpecialEffects effects = new BiomeSpecialEffects.Builder().fogColor(-3044526).waterColor(4159204).waterFogColor(329011).skyColor(-3044526).foliageColorOverride(7842607).grassColorOverride(9551193).ambientParticle(new AmbientParticleSettings(ParticleTypes.CRIMSON_SPORE, 0.02f)).build();
             BiomeGenerationSettings.Builder biomeGenerationSettings = new BiomeGenerationSettings.Builder();
             //biomeGenerationSettings.surfaceBuilder(ConfiguredSurfaceBuilders.field_244170_b);  //Todo need to add the Layer in the world
+            addDefaultCarversAndLakesLava(biomeGenerationSettings);
             biomeGenerationSettings.addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, NetherPlacements.DELTA);
             biomeGenerationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, NetherPlacements.SMALL_BASALT_COLUMNS);
             biomeGenerationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherPlacements.BASALT_BLOBS);
@@ -93,6 +94,7 @@ public class BiomeRegistry {
         if (venus_hills == null) {
             BiomeSpecialEffects effects = new BiomeSpecialEffects.Builder().fogColor(-3044526).waterColor(4159204).waterFogColor(329011).skyColor(-3044526).foliageColorOverride(7842607).grassColorOverride(9551193).ambientParticle(new AmbientParticleSettings(ParticleTypes.CRIMSON_SPORE, 0.02f)).build();
             BiomeGenerationSettings.Builder biomeGenerationSettings = new BiomeGenerationSettings.Builder();
+            addDefaultCarversAndLakesLava(biomeGenerationSettings);
             MobSpawnSettings mobSpawnInfo = MobSpawnSettings.EMPTY;
 
             venus_hills = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.RAIN).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(1.5f).downfall(1f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
@@ -102,6 +104,7 @@ public class BiomeRegistry {
         if (mercury == null) {
             BiomeSpecialEffects effects = new BiomeSpecialEffects.Builder().fogColor(-16777216).waterColor(4159204).waterFogColor(329011).skyColor(-16777216).foliageColorOverride(7842607).grassColorOverride(9551193).build();
             BiomeGenerationSettings.Builder biomeGenerationSettings = new BiomeGenerationSettings.Builder();
+            addDefaultCarversAndLakesLava(biomeGenerationSettings);
             MobSpawnSettings mobSpawnInfo = MobSpawnSettings.EMPTY;
 
             mercury = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(1.6f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
@@ -112,6 +115,7 @@ public class BiomeRegistry {
             BiomeSpecialEffects effects = new BiomeSpecialEffects.Builder().fogColor(-16777216).waterColor(4159204).waterFogColor(329011).skyColor(-16777216).foliageColorOverride(7842607).grassColorOverride(9551193).build();
             BiomeGenerationSettings.Builder biomeGenerationSettings = new BiomeGenerationSettings.Builder();
             //biomeGenerationSettings.surfaceBuilder(ConfiguredSurfaceBuilders.field_244170_b);  //Todo need to add the Layer in the world
+            addDefaultCarversAndLakesLava(biomeGenerationSettings);
             biomeGenerationSettings.addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, NetherPlacements.DELTA);
             biomeGenerationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, NetherPlacements.SMALL_BASALT_COLUMNS);
             biomeGenerationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherPlacements.BASALT_BLOBS);

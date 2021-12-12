@@ -199,7 +199,7 @@ public class PlanetChunkGenerator extends NoiseBasedChunkGenerator {
 
         for (x = 0; x < 16; x++) {
             for (z = 0; z < 16; z++) {
-                p_188638_.setBlockState(pos.set(x, 0, z), bedrock, false);
+                p_188638_.setBlockState(pos.set(x, getMinY(), z), bedrock, false);
             }
         }
 
