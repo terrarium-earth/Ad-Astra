@@ -2,6 +2,7 @@ package net.mrscauthd.boss_tools;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
@@ -75,7 +76,7 @@ public class BossToolsMod {
 		//STStructures2.DEFERRED_REGISTRY_STRUCTURE.register(bus);
 		//STStructures.DEFERRED_REGISTRY_STRUCTURE.register(bus);
 
-		//forgeBus.addListener(EventPriority.HIGH, ModInnet::biomesLoading);
+		forgeBus.addListener(EventPriority.HIGH, ModInnet::biomesLoading);
 		//forgeBus.addListener(EventPriority.HIGH, OreGeneration::biomesLoading);
 
 		// KeyBindings

@@ -1,7 +1,10 @@
 package net.mrscauthd.boss_tools;
 
+import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.data.BuiltinRegistries;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
@@ -9,7 +12,6 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.inventory.MenuType;
@@ -18,12 +20,22 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
+import net.minecraft.world.level.levelgen.placement.BiomeFilter;
+import net.minecraft.world.level.levelgen.placement.CountPlacement;
+import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.common.ForgeSpawnEggItem;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.*;
 import net.mrscauthd.boss_tools.armor.SpaceSuit;
@@ -39,6 +51,7 @@ import net.mrscauthd.boss_tools.crafting.WorkbenchingRecipeSerializer;
 import net.mrscauthd.boss_tools.crafting.RocketPart;
 import net.mrscauthd.boss_tools.effects.OxygenEffect;
 import net.mrscauthd.boss_tools.entity.*;
+import net.mrscauthd.boss_tools.feature.MarsIceSpikeFeature;
 import net.mrscauthd.boss_tools.flag.FlagTileEntity;
 import net.mrscauthd.boss_tools.fluid.OilFluid;
 import net.mrscauthd.boss_tools.gui.screens.blastfurnace.BlastFurnaceGui;
@@ -76,6 +89,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.mrscauthd.boss_tools.itemgroup.BossToolsItemGroups;
 import net.mrscauthd.boss_tools.entity.pygro.PygroMobsSensor;
+import net.mrscauthd.boss_tools.world.biomes.BiomeRegistry;
+import net.mrscauthd.boss_tools.world.chunk.PlanetChunkGenerator;
 
 @Mod.EventBusSubscriber(modid = BossToolsMod.ModId, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModInnet {
@@ -442,11 +457,11 @@ public class ModInnet {
     public static final DamageSource DAMAGE_SOURCE_ACID_RAIN = new DamageSource("venus.acid").bypassArmor();
 
     //Todo rework with Biomes
-    /*
+
     //ICE SPIKE
     public static ConfiguredFeature<?, ?> ICE_SPIKE;
     public static MarsIceSpikeFeature MARS_ICE_SPIKE;
-
+/*
     //VENUS DELTAS
     public static ConfiguredFeature<?, ?> DELTAS;
     public static ConfiguredFeature<?, ?> DELTAS2;
@@ -454,19 +469,20 @@ public class ModInnet {
 
     //Desert Builder
     public static SurfaceBuilder<SurfaceBuilderConfig> DESERT_SURFACE_BUILDER;
-    
+    */
     @SubscribeEvent
     public static void RegistryFeature(RegistryEvent.Register<Feature<?>> feature) {
         MARS_ICE_SPIKE = new MarsIceSpikeFeature(NoneFeatureConfiguration.CODEC);
         MARS_ICE_SPIKE.setRegistryName(BossToolsMod.ModId, "mars_ice_spike");
         feature.getRegistry().register(MARS_ICE_SPIKE);
 
+        /*
         //VENUS DELTAS
         VENUS_DELTAS = new VenusDeltas(ColumnConfig.CODEC);
         VENUS_DELTAS.setRegistryName(BossToolsMod.ModId, "venus_deltas");
         feature.getRegistry().register(VENUS_DELTAS);
+        */
     }
-    */
 
     /*
     @SubscribeEvent
@@ -476,12 +492,12 @@ public class ModInnet {
         DESERT_SURFACE_BUILDER.setRegistryName(BossToolsMod.ModId, "desert_surface_builder");
         event.getRegistry().register(DESERT_SURFACE_BUILDER);
     }
-
-    public static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> registerFeature(String key, ConfiguredFeature<FC, ?> configuredFeature) {
-        return Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, key, configuredFeature);
+*/
+    public static <FC extends FeatureConfiguration> ConfiguredFeature<FC, ?> registerFeature(String key, ConfiguredFeature<FC, ?> configuredFeature) {
+        return Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, key, configuredFeature);
     }
 
-     */
+
 /*
     @SubscribeEvent
     public static void setup(final FMLCommonSetupEvent event) {
@@ -600,20 +616,25 @@ public class ModInnet {
 
             BossToolsRecipeTypes.init();
 
-            /*
-            ICE_SPIKE = registerFeature("mars_ice_spike", ModInnet.MARS_ICE_SPIKE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242731_b(2));
+            Registry.register(Registry.CHUNK_GENERATOR, new ResourceLocation(BossToolsMod.ModId, "planet_noise"), PlanetChunkGenerator.CODEC);
+
+            //Ice Spike
+            ICE_SPIKE = registerFeature("mars_ice_spike", ModInnet.MARS_ICE_SPIKE.configured(FeatureConfiguration.NONE));
             //Venus Deltas
+            /*
             DELTAS = registerFeature("venus_deltas_1", ModInnet.VENUS_DELTAS.withConfiguration(new ColumnConfig(FeatureSpread.func_242252_a(1), FeatureSpread.func_242253_a(1, 8))).withPlacement(Placement.COUNT_MULTILAYER.configure(new FeatureSpreadConfig(4))));
             //Venus Deltas2
             DELTAS2 = registerFeature("venus_deltas_2", ModInnet.VENUS_DELTAS.withConfiguration(new ColumnConfig(FeatureSpread.func_242253_a(2, 1), FeatureSpread.func_242253_a(5, 6))).withPlacement(Placement.COUNT_MULTILAYER.configure(new FeatureSpreadConfig(1))));
         */
         });
     }
-/*
+
     public static void biomesLoading(final BiomeLoadingEvent event) {
-        if (event.getName().getPath().equals(BiomeRegistry.mars_ice_spike.getRegistryName().getPath())){
-            event.getGeneration().withFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, ICE_SPIKE);
+        if (event.getName().getPath().equals(BiomeRegistry.mars_ice_spike.getRegistryName().getPath())) {
+            event.getGeneration().addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, ICE_SPIKE.placed(CountPlacement.of(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
         }
+
+        /*
         //Venus Deltas
         if (event.getName().getPath().equals(BiomeRegistry.infernal_venus_barrens.getRegistryName().getPath())){
             event.getGeneration().withFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, DELTAS);
@@ -623,6 +644,7 @@ public class ModInnet {
         if (event.getName().getPath().equals(BiomeRegistry.venus.getRegistryName().getPath())){
             event.getGeneration().withSurfaceBuilder(ModInnet.DESERT_SURFACE_BUILDER.func_242929_a(new SurfaceBuilderConfig(ModInnet.VENUS_SAND.get().getDefaultState(), ModInnet.VENUS_SAND.get().getDefaultState(), ModInnet.VENUS_SANDSTONE.get().getDefaultState())));
         }
+        */
     }
-    */
+
 }

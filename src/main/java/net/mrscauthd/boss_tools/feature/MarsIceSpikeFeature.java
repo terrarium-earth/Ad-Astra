@@ -1,97 +1,99 @@
 package net.mrscauthd.boss_tools.feature;
 
-/*
-import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.ISeedReader;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Block;
+import com.mojang.serialization.Codec;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
 import java.util.Random;
 
-import com.mojang.serialization.Codec;*/
+public class MarsIceSpikeFeature extends Feature<NoneFeatureConfiguration> {
 
-public class MarsIceSpikeFeature/* extends Feature<NoFeatureConfig>*/ {
-    /*
-    public MarsIceSpikeFeature(Codec<NoFeatureConfig> p_i231962_1_) {
-        super(p_i231962_1_);
+    public MarsIceSpikeFeature(Codec<NoneFeatureConfiguration> p_66003_) {
+        super(p_66003_);
     }
 
-    public boolean generate(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
-        while (reader.isAirBlock(pos) && pos.getY() > 2) {
-            pos = pos.down();
+    public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> p_159882_) {
+        BlockPos blockpos = p_159882_.origin();
+        Random random = p_159882_.random();
+
+        WorldGenLevel worldgenlevel;
+        for(worldgenlevel = p_159882_.level(); worldgenlevel.isEmptyBlock(blockpos) && blockpos.getY() > worldgenlevel.getMinBuildHeight() + 2; blockpos = blockpos.below()) {
         }
-        if (true) {
-            pos = pos.up(rand.nextInt(4));
-            int i = rand.nextInt(4) + 7;
-            int j = i / 4 + rand.nextInt(2);
-            if (j > 1 && rand.nextInt(60) == 0) {
-                pos = pos.up(10 + rand.nextInt(30));
-            }
-            for (int k = 0; k < i; ++k) {
-                float f = (1.0F - (float) k / (float) i) * (float) j;
-                int l = MathHelper.ceil(f);
-                for (int i1 = -l; i1 <= l; ++i1) {
-                    float f1 = (float) MathHelper.abs(i1) - 0.25F;
-                    for (int j1 = -l; j1 <= l; ++j1) {
-                        float f2 = (float) MathHelper.abs(j1) - 0.25F;
-                        if ((i1 == 0 && j1 == 0 || !(f1 * f1 + f2 * f2 > f * f))
-                                && (i1 != -l && i1 != l && j1 != -l && j1 != l || !(rand.nextFloat() > 0.75F))) {
-                            BlockState blockstate = reader.getBlockState(pos.add(i1, k, j1));
-                            Block block = blockstate.getBlock();
-                            if (blockstate.isAir(reader, pos.add(i1, k, j1)) || isDirt(block) || block == Blocks.SNOW_BLOCK || block == Blocks.ICE) {
-                                this.setBlockState(reader, pos.add(i1, k, j1), Blocks.PACKED_ICE.getDefaultState());
-                            }
-                            if (k != 0 && l > 1) {
-                                blockstate = reader.getBlockState(pos.add(i1, -k, j1));
-                                block = blockstate.getBlock();
-                                if (blockstate.isAir(reader, pos.add(i1, -k, j1)) || isDirt(block) || block == Blocks.SNOW_BLOCK
-                                        || block == Blocks.ICE) {
-                                    this.setBlockState(reader, pos.add(i1, -k, j1), Blocks.PACKED_ICE.getDefaultState());
-                                }
+
+
+        blockpos = blockpos.above(random.nextInt(4));
+        int i = random.nextInt(4) + 7;
+        int j = i / 4 + random.nextInt(2);
+        if (j > 1 && random.nextInt(60) == 0) {
+            blockpos = blockpos.above(10 + random.nextInt(30));
+        }
+
+        for(int k = 0; k < i; ++k) {
+            float f = (1.0F - (float)k / (float)i) * (float)j;
+            int l = Mth.ceil(f);
+
+            for(int i1 = -l; i1 <= l; ++i1) {
+                float f1 = (float)Mth.abs(i1) - 0.25F;
+
+                for(int j1 = -l; j1 <= l; ++j1) {
+                    float f2 = (float)Mth.abs(j1) - 0.25F;
+                    if ((i1 == 0 && j1 == 0 || !(f1 * f1 + f2 * f2 > f * f)) && (i1 != -l && i1 != l && j1 != -l && j1 != l || !(random.nextFloat() > 0.75F))) {
+                        BlockState blockstate = worldgenlevel.getBlockState(blockpos.offset(i1, k, j1));
+                        if (blockstate.isAir() || isDirt(blockstate) || blockstate.is(Blocks.SNOW_BLOCK) || blockstate.is(Blocks.ICE)) {
+                            this.setBlock(worldgenlevel, blockpos.offset(i1, k, j1), Blocks.PACKED_ICE.defaultBlockState());
+                        }
+
+                        if (k != 0 && l > 1) {
+                            blockstate = worldgenlevel.getBlockState(blockpos.offset(i1, -k, j1));
+                            if (blockstate.isAir() || isDirt(blockstate) || blockstate.is(Blocks.SNOW_BLOCK) || blockstate.is(Blocks.ICE)) {
+                                this.setBlock(worldgenlevel, blockpos.offset(i1, -k, j1), Blocks.PACKED_ICE.defaultBlockState());
                             }
                         }
                     }
                 }
             }
-            int k1 = j - 1;
-            if (k1 < 0) {
-                k1 = 0;
-            } else if (k1 > 1) {
-                k1 = 1;
-            }
-            for (int l1 = -k1; l1 <= k1; ++l1) {
-                for (int i2 = -k1; i2 <= k1; ++i2) {
-                    BlockPos blockpos = pos.add(l1, -1, i2);
-                    int j2 = 50;
-                    if (Math.abs(l1) == 1 && Math.abs(i2) == 1) {
-                        j2 = rand.nextInt(5);
+        }
+
+        int k1 = j - 1;
+        if (k1 < 0) {
+            k1 = 0;
+        } else if (k1 > 1) {
+            k1 = 1;
+        }
+
+        for(int l1 = -k1; l1 <= k1; ++l1) {
+            for(int i2 = -k1; i2 <= k1; ++i2) {
+                BlockPos blockpos1 = blockpos.offset(l1, -1, i2);
+                int j2 = 50;
+                if (Math.abs(l1) == 1 && Math.abs(i2) == 1) {
+                    j2 = random.nextInt(5);
+                }
+
+                while(blockpos1.getY() > 50) {
+                    BlockState blockstate1 = worldgenlevel.getBlockState(blockpos1);
+                    if (!blockstate1.isAir() && !isDirt(blockstate1) && !blockstate1.is(Blocks.SNOW_BLOCK) && !blockstate1.is(Blocks.ICE) && !blockstate1.is(Blocks.PACKED_ICE)) {
+                        break;
                     }
-                    while (blockpos.getY() > 50) {
-                        BlockState blockstate1 = reader.getBlockState(blockpos);
-                        Block block1 = blockstate1.getBlock();
-                        if (!blockstate1.isAir(reader, blockpos) && !isDirt(block1) && block1 != Blocks.SNOW_BLOCK && block1 != Blocks.ICE
-                                && block1 != Blocks.PACKED_ICE) {
-                            break;
-                        }
-                        this.setBlockState(reader, blockpos, Blocks.PACKED_ICE.getDefaultState());
-                        blockpos = blockpos.down();
-                        --j2;
-                        if (j2 <= 0) {
-                            blockpos = blockpos.down(rand.nextInt(5) + 1);
-                            j2 = rand.nextInt(5);
-                        }
+
+                    this.setBlock(worldgenlevel, blockpos1, Blocks.PACKED_ICE.defaultBlockState());
+                    blockpos1 = blockpos1.below();
+                    --j2;
+                    if (j2 <= 0) {
+                        blockpos1 = blockpos1.below(random.nextInt(5) + 1);
+                        j2 = random.nextInt(5);
                     }
                 }
             }
-            return true;
         }
-    return false;
-    }
 
-     */
+        return true;
+    }
 }
+
+
