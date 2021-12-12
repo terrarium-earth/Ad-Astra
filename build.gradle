@@ -81,8 +81,8 @@ dependencies {
     }
 
     //JEI
-    compileOnly fg.deobf("mezz.jei:jei-1.18:9.0.0.40:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-1.18:9.0.0.40")
+    compileOnly fg.deobf("mezz.jei:jei-1.18.1:9.1.0.41:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-1.18.1:9.1.0.41")
 
     //The One Probe
     implementation fg.deobf("curse.maven:the-one-probe-245211:3550084")
