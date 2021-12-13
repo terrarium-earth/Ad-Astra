@@ -3,6 +3,7 @@ package net.mrscauthd.boss_tools.world.oregen;
 import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -29,7 +30,7 @@ public class OreGeneration {
     private static Feature<OreConfiguration> MOON_GEN_FEATURE = null;
 
     private static PlacedFeature moonChesseOre = null;
-    private static PlacedFeature moonGlowstoneOre = null;
+    private static PlacedFeature soulSoil = null;
     private static PlacedFeature moonIronOre = null;
     private static PlacedFeature moonDeshOre = null;
 
@@ -70,8 +71,8 @@ public class OreGeneration {
         moonChesseOre = MOON_GEN_FEATURE.configured(new OreConfiguration(RuleTests.MoonRuleTest.INSTANCE, ModInnet.MOON_CHESSE_ORE.get().defaultBlockState(), 10)).placed(commonOrePlacement(4, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-75), VerticalAnchor.aboveBottom(75))));
         Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BossToolsMod.ModId,"moon_cheese_ore"), moonChesseOre);
 
-        moonGlowstoneOre = MOON_GEN_FEATURE.configured(new OreConfiguration(RuleTests.MoonRuleTest.INSTANCE, ModInnet.MOON_GLOWSTONE_ORE.get().defaultBlockState(), 11)).placed(commonOrePlacement(10, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-50), VerticalAnchor.aboveBottom(50))));
-        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BossToolsMod.ModId,"moon_glowstone_ore"), moonGlowstoneOre);
+        soulSoil = MOON_GEN_FEATURE.configured(new OreConfiguration(RuleTests.MoonRuleTest.INSTANCE, Blocks.SOUL_SOIL.defaultBlockState(), 20)).placed(commonOrePlacement(20, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-50), VerticalAnchor.aboveBottom(50))));
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BossToolsMod.ModId,"soul_soil"), soulSoil);
 
         moonIronOre = MOON_GEN_FEATURE.configured(new OreConfiguration(RuleTests.MoonRuleTest.INSTANCE, ModInnet.MOON_IRON_ORE.get().defaultBlockState(), 11)).placed(commonOrePlacement(5, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-64), VerticalAnchor.aboveBottom(64))));
         Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BossToolsMod.ModId,"moon_iron_ore"), moonIronOre);
@@ -127,7 +128,7 @@ public class OreGeneration {
         event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(() -> moonIronOre);
         event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(() -> moonDeshOre);
         event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(() -> moonChesseOre);
-        event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(() -> moonGlowstoneOre);
+        event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(() -> soulSoil);
 
         event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(() -> marsIceShardOre);
         event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(() -> marsIronOre);
