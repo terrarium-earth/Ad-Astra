@@ -11,7 +11,7 @@
   "ambient_light": 0,
   "logical_height": 256,
   "infiniburn": "minecraft:infiniburn_overworld",
-  "min_y": 0,
+  "min_y": -64,
   "height": 256,
   "effects": "boss_tools:mars"
 }

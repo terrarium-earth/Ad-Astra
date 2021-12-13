@@ -203,6 +203,36 @@ public class PlanetChunkGenerator extends NoiseBasedChunkGenerator {
             }
         }
 
+        /**Gen Lava on the Bedrock Layer*/
+        for (x = 0; x < 16; x++) {
+            for (z = 0; z < 16; z++) {
+                if (p_188638_.getBlockState(new BlockPos(x, getMinY() + 1, z)).isAir()) {
+                    p_188638_.setBlockState(pos.set(x, getMinY() + 1, z), Blocks.LAVA.defaultBlockState(), false);
+                }
+                if (p_188638_.getBlockState(new BlockPos(x, getMinY() + 2, z)).isAir()) {
+                    p_188638_.setBlockState(pos.set(x, getMinY() + 2, z), Blocks.LAVA.defaultBlockState(), false);
+                }
+                if (p_188638_.getBlockState(new BlockPos(x, getMinY() + 3, z)).isAir()) {
+                    p_188638_.setBlockState(pos.set(x, getMinY() + 3, z), Blocks.LAVA.defaultBlockState(), false);
+                }
+                if (p_188638_.getBlockState(new BlockPos(x, getMinY() + 4, z)).isAir()) {
+                    p_188638_.setBlockState(pos.set(x, getMinY() + 4, z), Blocks.LAVA.defaultBlockState(), false);
+                }
+                if (p_188638_.getBlockState(new BlockPos(x, getMinY() + 5, z)).isAir()) {
+                    p_188638_.setBlockState(pos.set(x, getMinY() + 5, z), Blocks.LAVA.defaultBlockState(), false);
+                }
+                if (p_188638_.getBlockState(new BlockPos(x, getMinY() + 6, z)).isAir()) {
+                    p_188638_.setBlockState(pos.set(x, getMinY() + 6, z), Blocks.LAVA.defaultBlockState(), false);
+                }
+                if (p_188638_.getBlockState(new BlockPos(x, getMinY() + 7, z)).isAir()) {
+                    p_188638_.setBlockState(pos.set(x, getMinY() + 7, z), Blocks.LAVA.defaultBlockState(), false);
+                }
+                if (p_188638_.getBlockState(new BlockPos(x, getMinY() + 8, z)).isAir()) {
+                    p_188638_.setBlockState(pos.set(x, getMinY() + 8, z), Blocks.LAVA.defaultBlockState(), false);
+                }
+            }
+        }
+
         if (!SharedConstants.debugVoidTerrain(p_188638_.getPos())) {
             WorldGenerationContext worldgenerationcontext = new WorldGenerationContext(this, p_188636_);
             NoiseGeneratorSettings noisegeneratorsettings = this.settings.get();

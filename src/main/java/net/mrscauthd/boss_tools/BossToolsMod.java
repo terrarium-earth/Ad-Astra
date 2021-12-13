@@ -69,17 +69,8 @@ public class BossToolsMod {
 		ModInnet.EFFECTS.register(bus);
 		ModInnet.GUIS.register(bus);
 		ModInnet.PARTICLES.register(bus);
-        
-		//bus.addListener(ModInnet::setup);
-		//forgeBus.addListener(EventPriority.NORMAL, ModInnet::addDimensionalSpacing);
-		//forgeBus.addListener(EventPriority.HIGH, ModInnet::biomeModification);
-
-		// Structures
-		//STStructures2.DEFERRED_REGISTRY_STRUCTURE.register(bus);
-		//STStructures.DEFERRED_REGISTRY_STRUCTURE.register(bus);
 
 		forgeBus.addListener(EventPriority.HIGH, ModInnet::biomesLoading);
-		//forgeBus.addListener(EventPriority.HIGH, OreGeneration::biomesLoading);
 
 		// KeyBindings
 		KeyBindings.registerMessages();

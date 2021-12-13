@@ -17,7 +17,7 @@ public class BiomeRegistry {
     public static Biome moon;
 
     public static Biome mars;
-    public static Biome mars_ice_spike;
+    public static Biome mars_ice_spikes;
 
     public static Biome venus;
     public static Biome venus_hills;
@@ -51,14 +51,14 @@ public class BiomeRegistry {
             event.getRegistry().register(mars.setRegistryName(BossToolsMod.ModId,"mars"));
         }
 
-        if (mars_ice_spike == null) {
+        if (mars_ice_spikes == null) {
             BiomeSpecialEffects effects = new BiomeSpecialEffects.Builder().fogColor(-3044526).waterColor(4159204).waterFogColor(329011).skyColor(-3044526).foliageColorOverride(7842607).grassColorOverride(9551193).ambientParticle(new AmbientParticleSettings(ParticleTypes.CRIMSON_SPORE, 0.014f)).build();
             BiomeGenerationSettings.Builder biomeGenerationSettings = new BiomeGenerationSettings.Builder();
             addDefaultCarversAndLakes(biomeGenerationSettings);
             MobSpawnSettings mobSpawnInfo = MobSpawnSettings.EMPTY;
 
-            mars_ice_spike = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.ICY).mobSpawnSettings(mobSpawnInfo).temperature(1.6f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
-            event.getRegistry().register(mars_ice_spike.setRegistryName(BossToolsMod.ModId,"mars_ice_spike"));
+            mars_ice_spikes = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.ICY).mobSpawnSettings(mobSpawnInfo).temperature(1.6f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
+            event.getRegistry().register(mars_ice_spikes.setRegistryName(BossToolsMod.ModId,"mars_ice_spikes"));
         }
 
         if (venus == null) {

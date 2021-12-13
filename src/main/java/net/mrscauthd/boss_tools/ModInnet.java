@@ -26,7 +26,6 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -112,7 +111,6 @@ import net.mrscauthd.boss_tools.world.biomes.BiomeRegistry;
 import net.mrscauthd.boss_tools.world.chunk.PlanetChunkGenerator;
 import net.mrscauthd.boss_tools.world.structure.configuration.STConfiguredStructures;
 import net.mrscauthd.boss_tools.world.structure.configuration.STStructures;
-import net.mrscauthd.boss_tools.world.structure.configuration.STStructures2;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -606,7 +604,9 @@ public class ModInnet {
                     .build();
 
                 /**Moon Structures*/
-                moonStructures.forEach(biomeKey -> associateBiomeToConfiguredStructure(STStructureToMultiMap, STConfiguredStructures.ALIEN_VILLAGE, biomeKey));
+                if (Config.AlienVillageStructure) {
+                    moonStructures.forEach(biomeKey -> associateBiomeToConfiguredStructure(STStructureToMultiMap, STConfiguredStructures.ALIEN_VILLAGE, biomeKey));
+                }
             }
 
             ImmutableMap.Builder<StructureFeature<?>, ImmutableMultimap<ConfiguredStructureFeature<?, ?>, ResourceKey<Biome>>> tempStructureToMultiMap = ImmutableMap.builder();
@@ -681,7 +681,7 @@ public class ModInnet {
     }
 
     public static void biomesLoading(final BiomeLoadingEvent event) {
-        if (event.getName().getPath().equals(BiomeRegistry.mars_ice_spike.getRegistryName().getPath())) {
+        if (event.getName().getPath().equals(BiomeRegistry.mars_ice_spikes.getRegistryName().getPath())) {
             event.getGeneration().addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, ICE_SPIKE.placed(CountPlacement.of(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
         }
 
