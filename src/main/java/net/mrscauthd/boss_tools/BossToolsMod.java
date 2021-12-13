@@ -15,6 +15,8 @@ import net.mrscauthd.boss_tools.gui.screens.planetselection.PlanetSelectionGui;
 import net.mrscauthd.boss_tools.keybind.KeyBindings;
 import net.mrscauthd.boss_tools.machines.tile.OxygenBubbleDistributorBlockEntity;
 
+import net.mrscauthd.boss_tools.world.structure.AlienVillageStructure;
+import net.mrscauthd.boss_tools.world.structure.configuration.STStructures;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
@@ -91,6 +93,16 @@ public class BossToolsMod {
 		bus.addListener(CapabilityOxygen::register);
 
 		CompatibleManager.visit();
+
+		//Structure Registry
+		IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+		STStructures.DEFERRED_REGISTRY_STRUCTURE.register(modEventBus);
+		modEventBus.addListener(this::setup);
+
+		forgeBus.addListener(EventPriority.NORMAL, ModInnet::addDimensionalSpacing);
+
+		// For events that happen after initialization. This is probably going to be use a lot.
+		forgeBus.addListener(EventPriority.NORMAL, AlienVillageStructure::setupStructureSpawns);
 	}
 
 	private void setup(final FMLCommonSetupEvent event) {
