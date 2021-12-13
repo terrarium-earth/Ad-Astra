@@ -86,10 +86,6 @@ public class TileEntityHeadRenderer implements BlockEntityRenderer<FlagTileEntit
 			matrixStackIn.translate((double) (0.5F - (float) directionIn.getStepX() * 0.25F), 0.25D, (double) (0.5F - (float) directionIn.getStepZ() * 0.25F));
 		}
 
-		Map<String, ModelPart> map = Map.of("head", new TileEntityHeadModel(TileEntityHeadModel.createHumanoidHeadLayer().bakeRoot()).head);
-		ModelPart modelPart = new ModelPart(Collections.emptyList(), map);
-		genericheadmodel = new TileEntityHeadModel(modelPart);
-
 		matrixStackIn.scale(-1.0F, -1.0F, 1.0F);
 		VertexConsumer ivertexbuilder = buffer.getBuffer(getRenderType(skullType, gameProfileIn));
 		genericheadmodel.setupAnim(animationProgress, p_228879_1_, 0.0F);
