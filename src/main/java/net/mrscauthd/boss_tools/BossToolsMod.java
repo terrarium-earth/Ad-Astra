@@ -15,6 +15,7 @@ import net.mrscauthd.boss_tools.gui.screens.planetselection.PlanetSelectionGui;
 import net.mrscauthd.boss_tools.keybind.KeyBindings;
 import net.mrscauthd.boss_tools.machines.tile.OxygenBubbleDistributorBlockEntity;
 
+import net.mrscauthd.boss_tools.world.oregen.OreGeneration;
 import net.mrscauthd.boss_tools.world.structure.AlienVillageStructure;
 import net.mrscauthd.boss_tools.world.structure.configuration.STStructures;
 import org.apache.logging.log4j.Logger;
@@ -71,6 +72,7 @@ public class BossToolsMod {
 		ModInnet.PARTICLES.register(bus);
 
 		forgeBus.addListener(EventPriority.HIGH, ModInnet::biomesLoading);
+		forgeBus.addListener(EventPriority.HIGH, OreGeneration::biomesLoading);
 
 		// KeyBindings
 		KeyBindings.registerMessages();
