@@ -105,6 +105,43 @@
                 }
               }
             }
+          },
+
+          {
+            "type": "minecraft:condition",
+            "if_true": {
+              "type": "minecraft:biome",
+              "biome_is": [
+                "boss_tools:mars_ice_spikes"
+              ]
+            },
+            "then_run": {
+              "type": "minecraft:condition",
+              "if_true": {
+                "type": "minecraft:y_above",
+                "anchor": {
+                  "absolute": 87
+                },
+                "surface_depth_multiplier": 2,
+                "add_stone_depth": false
+              },
+              "then_run": {
+                "type": "minecraft:condition",
+                "if_true": {
+                  "type": "minecraft:stone_depth",
+                  "offset": 4,
+                  "surface_type": "floor",
+                  "add_surface_depth": false,
+                  "add_surface_secondary_depth": false
+                },
+                "then_run": {
+                  "type": "minecraft:block",
+                  "result_state": {
+                    "Name": "minecraft:snow_block"
+                  }
+                }
+              }
+            }
           }
         ]
       },
@@ -130,12 +167,12 @@
         {
           "biome": "boss_tools:mars_ice_spikes",
           "parameters": {
-            "temperature": 1,
-            "humidity": -1,
+            "temperature": -1,
+            "humidity": 0,
             "continentalness": 0,
             "erosion": 0,
             "weirdness": -1.5,
-            "depth": 0,
+            "depth": 0.1,
             "offset": 1
           }
         }

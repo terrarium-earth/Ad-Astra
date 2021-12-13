@@ -1,10 +1,12 @@
 package net.mrscauthd.boss_tools.world.biomes;
 
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.Carvers;
 import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
 import net.minecraft.data.worldgen.placement.NetherPlacements;
 import net.minecraft.data.worldgen.placement.OrePlacements;
+import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.world.level.biome.*;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraftforge.event.RegistryEvent;
@@ -45,6 +47,7 @@ public class BiomeRegistry {
             BiomeSpecialEffects effects = new BiomeSpecialEffects.Builder().fogColor(-3044526).waterColor(4159204).waterFogColor(329011).skyColor(-3044526).foliageColorOverride(7842607).grassColorOverride(9551193).ambientParticle(new AmbientParticleSettings(ParticleTypes.CRIMSON_SPORE, 0.014f)).build();
             BiomeGenerationSettings.Builder biomeGenerationSettings = new BiomeGenerationSettings.Builder();
             addDefaultCarversAndLakes(biomeGenerationSettings);
+            BiomeDefaultFeatures.addLushCavesVegetationFeatures(biomeGenerationSettings);
             MobSpawnSettings mobSpawnInfo = MobSpawnSettings.EMPTY;
 
             mars = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(1.6f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
