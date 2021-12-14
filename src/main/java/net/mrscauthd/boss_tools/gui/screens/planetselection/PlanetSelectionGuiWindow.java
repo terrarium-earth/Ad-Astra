@@ -194,7 +194,7 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 			mercurySpaceStationButton.visible = true;
 
 			//Planets
-			this.teleportButtonManager(bbButtonTex, bb2ButtonTex, mouseX, mouseY, 10, (this.height / 2) - 4 / 2, 70, 20, ms, mercuryButton, "Planet", "3.721 m/s", "a" + "true" , "a" + "-63");
+			this.teleportButtonManager(bbButtonTex, bb2ButtonTex, mouseX, mouseY, 10, (this.height / 2) - 4 / 2, 70, 20, ms, mercuryButton, "Planet", "3.7 m/s", "a" + "true" , "a" + "430");
 
 			//Orbits
 			this.teleportButtonManager(sbbButtonTex, sbb2ButtonTex, mouseX, mouseY, 84, (this.height / 2) - 4 / 2, 37, 20, ms, mercuryOrbitButton, "Orbit", "No Gravity", "c" + "false" , "c" + "-270");
@@ -214,7 +214,7 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 			venusSpaceStationButton.visible = true;
 
 			//Planets
-			this.teleportButtonManager(bbButtonTex, bb2ButtonTex, mouseX, mouseY, 10, (this.height / 2) - 4 / 2, 70, 20, ms, venusButton, "Planet", "3.721 m/s", "a" + "true" , "a" + "-63");
+			this.teleportButtonManager(bbButtonTex, bb2ButtonTex, mouseX, mouseY, 10, (this.height / 2) - 4 / 2, 70, 20, ms, venusButton, "Planet", "8.87 m/s", "a" + "true" , "a" + "482");
 
 			//Orbits
 			this.teleportButtonManager(sbbButtonTex, sbb2ButtonTex, mouseX, mouseY, 84, (this.height / 2) - 4 / 2, 37, 20, ms, venusOrbitButton, "Orbit", "No Gravity", "c" + "false" , "c" + "-270");
