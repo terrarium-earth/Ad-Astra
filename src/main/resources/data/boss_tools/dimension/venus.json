@@ -91,17 +91,37 @@
               "then_run": {
                 "type": "minecraft:condition",
                 "if_true": {
-                  "type": "minecraft:stone_depth",
-                  "offset": 4,
-                  "surface_type": "floor",
-                  "add_surface_depth": false,
-                  "add_surface_secondary_depth": false
+                  "type": "minecraft:water",
+                  "offset": -3,
+                  "surface_depth_multiplier": 0,
+                  "add_stone_depth": false
                 },
                 "then_run": {
-                  "type": "minecraft:block",
-                  "result_state": {
-                    "Name": "boss_tools:venus_sand"
-                  }
+                  "type": "minecraft:sequence",
+                  "sequence": [
+                    {
+                      "type": "minecraft:condition",
+                      "if_true": {
+                        "type": "minecraft:stone_depth",
+                        "offset": 2,
+                        "surface_type": "floor",
+                        "add_surface_depth": false,
+                        "add_surface_secondary_depth": false
+                      },
+                      "then_run": {
+                        "type": "minecraft:block",
+                        "result_state": {
+                          "Name": "boss_tools:venus_sand"
+                        }
+                      }
+                    },
+                    {
+                      "type": "minecraft:block",
+                      "result_state": {
+                        "Name": "boss_tools:venus_sandstone"
+                      }
+                    }
+                  ]
                 }
               }
             }
