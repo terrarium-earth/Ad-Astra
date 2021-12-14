@@ -11,26 +11,29 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.mrscauthd.boss_tools.BossToolsMod;
-import net.mrscauthd.boss_tools.world.structure.AlienVillageStructure;
+import net.mrscauthd.boss_tools.world.structure.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class STStructures {
-
-
     public static final DeferredRegister<StructureFeature<?>> DEFERRED_REGISTRY_STRUCTURE = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, BossToolsMod.ModId);
 
     public static final RegistryObject<StructureFeature<JigsawConfiguration>> ALIEN_VILLAGE = DEFERRED_REGISTRY_STRUCTURE.register("alien_village", () -> (new AlienVillageStructure(JigsawConfiguration.CODEC)));
-   // public static final RegistryObject<StructureFeature<JigsawConfiguration>> METEOR = DEFERRED_REGISTRY_STRUCTURE.register("meteor", () -> (new MeteorStructure(NoFeatureConfig.field_236558_a_)));
-   // public static final RegistryObject<StructureFeature<JigsawConfiguration>> OIL = DEFERRED_REGISTRY_STRUCTURE.register("oil_well", () -> (new OilStructure(NoFeatureConfig.field_236558_a_)));
+    public static final RegistryObject<StructureFeature<JigsawConfiguration>> METEOR = DEFERRED_REGISTRY_STRUCTURE.register("meteor", () -> (new MeteorStructure(JigsawConfiguration.CODEC)));
+    public static final RegistryObject<StructureFeature<JigsawConfiguration>> OIL = DEFERRED_REGISTRY_STRUCTURE.register("oil_well", () -> (new OilStructure(JigsawConfiguration.CODEC)));
+    public static final RegistryObject<StructureFeature<JigsawConfiguration>> VENUS_BULLET = DEFERRED_REGISTRY_STRUCTURE.register("venus_bullet", () -> (new VenusBulletStructure(JigsawConfiguration.CODEC)));
+    public static final RegistryObject<StructureFeature<JigsawConfiguration>> VENUS_TOWER = DEFERRED_REGISTRY_STRUCTURE.register("venus_tower", () -> (new VenusTowerStructure(JigsawConfiguration.CODEC)));
+    public static final RegistryObject<StructureFeature<JigsawConfiguration>> CRIMSON = DEFERRED_REGISTRY_STRUCTURE.register("crimson_village", () -> (new CrimsonStructure(JigsawConfiguration.CODEC)));
 
     public static void setupStructures() {
         setupMapSpacingAndLand(ALIEN_VILLAGE.get(), new StructureFeatureConfiguration(24, 9, 1234567890), false);
+        setupMapSpacingAndLand(METEOR.get(), new StructureFeatureConfiguration(22, 5, 1234567890), false);
+        setupMapSpacingAndLand(OIL.get(), new StructureFeatureConfiguration(13, 7, 1234567890), false);
 
-        //setupMapSpacingAndLand(METEOR.get(), new StructureSeparationSettings(22, 5, 1234567890), true);
-
-        //setupMapSpacingAndLand(OIL.get(), new StructureSeparationSettings(13, 7, 1234567890), true);
+        setupMapSpacingAndLand(VENUS_BULLET.get(), new StructureFeatureConfiguration(29, 19, 1234567890), true);
+        setupMapSpacingAndLand(VENUS_TOWER.get(), new StructureFeatureConfiguration(24, 17, 1234567890), true);
+        setupMapSpacingAndLand(CRIMSON.get(), new StructureFeatureConfiguration(27, 14, 1234567890), true);
     }
 
     public static <F extends StructureFeature<?>> void setupMapSpacingAndLand(F structure, StructureFeatureConfiguration structureFeatureConfiguration, boolean transformSurroundingLand) {

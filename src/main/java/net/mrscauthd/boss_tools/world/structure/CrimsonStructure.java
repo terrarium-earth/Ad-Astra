@@ -1,72 +1,75 @@
 package net.mrscauthd.boss_tools.world.structure;
 
-import com.google.common.collect.ImmutableList;
+import com.mojang.serialization.Codec;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.NoiseColumn;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.feature.StructureFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfiguration;
+import net.minecraft.world.level.levelgen.feature.structures.JigsawPlacement;
+import net.minecraft.world.level.levelgen.structure.PoolElementStructurePiece;
+import net.minecraft.world.level.levelgen.structure.PostPlacementProcessor;
+import net.minecraft.world.level.levelgen.structure.pieces.PieceGenerator;
+import net.minecraft.world.level.levelgen.structure.pieces.PieceGeneratorSupplier;
 import net.mrscauthd.boss_tools.BossToolsMod;
 
-public class CrimsonStructure /*extends Structure<NoFeatureConfig>*/ {
-    /*
-    public CrimsonStructure(Codec<NoFeatureConfig> codec) {
-        super(codec);
+import java.util.Optional;
+
+public class CrimsonStructure extends StructureFeature<JigsawConfiguration> {
+
+    public CrimsonStructure(Codec<JigsawConfiguration> codec) {
+        super(codec, (context) -> {
+            if (!CrimsonStructure.isFeatureChunk(context)) {
+                return Optional.empty();
+            } else {
+                return CrimsonStructure.createPiecesGenerator(context);
+            }
+        }, PostPlacementProcessor.NONE);
     }
 
     @Override
-    public  IStartFactory<NoFeatureConfig> getStartFactory() {
-        return CrimsonStructure.Start::new;
+    public GenerationStep.Decoration step() {
+        return GenerationStep.Decoration.SURFACE_STRUCTURES;
     }
 
-    @Override
-    public GenerationStage.Decoration getDecorationStage() {
-        return GenerationStage.Decoration.SURFACE_STRUCTURES;
+    private static boolean isFeatureChunk(PieceGeneratorSupplier.Context<JigsawConfiguration> context) {
+        BlockPos blockPos = context.chunkPos().getWorldPosition();
+
+        int landHeight = context.chunkGenerator().getFirstOccupiedHeight(blockPos.getX(), blockPos.getZ(), Heightmap.Types.WORLD_SURFACE_WG, context.heightAccessor());
+
+        NoiseColumn columnOfBlocks = context.chunkGenerator().getBaseColumn(blockPos.getX(), blockPos.getZ(), context.heightAccessor());
+
+        BlockState topBlock = columnOfBlocks.getBlock(landHeight);
+
+        return topBlock.getFluidState().isEmpty();
     }
 
-    private static final List<MobSpawnInfo.Spawners> STRUCTURE_MONSTERS = ImmutableList.of(
+    public static Optional<PieceGenerator<JigsawConfiguration>> createPiecesGenerator(PieceGeneratorSupplier.Context<JigsawConfiguration> context) {
+        BlockPos chunkpos = context.chunkPos().getMiddleBlockPosition(0);
 
-    );
+        BlockPos blockpos = new BlockPos(chunkpos.getX(), chunkpos.getY(), chunkpos.getZ());
 
-    @Override
-    public List<MobSpawnInfo.Spawners> getDefaultSpawnList() {
-        return STRUCTURE_MONSTERS;
+        JigsawConfiguration newConfig = new JigsawConfiguration(() -> context.registryAccess().ownedRegistryOrThrow(Registry.TEMPLATE_POOL_REGISTRY)
+                .get(new ResourceLocation(BossToolsMod.ModId, "crimson_village/crimson_start")), 25);
+
+        PieceGeneratorSupplier.Context<JigsawConfiguration> newContext = new PieceGeneratorSupplier.Context<>(
+                context.chunkGenerator(),
+                context.biomeSource(),
+                context.seed(),
+                context.chunkPos(),
+                newConfig,
+                context.heightAccessor(),
+                context.validBiome(),
+                context.structureManager(),
+                context.registryAccess()
+        );
+
+        Optional<PieceGenerator<JigsawConfiguration>> structurePiecesGenerator = JigsawPlacement.addPieces(newContext, PoolElementStructurePiece::new, blockpos, false, true);
+
+        return structurePiecesGenerator;
     }
-
-    private static final List<MobSpawnInfo.Spawners> STRUCTURE_CREATURES = ImmutableList.of(
-
-    );
-
-    @Override
-    public List<MobSpawnInfo.Spawners> getDefaultCreatureSpawnList() {
-        return STRUCTURE_CREATURES;
-    }
-
-    public static class Start extends StructureStart<NoFeatureConfig>  {
-        public Start(Structure<NoFeatureConfig> structureIn, int chunkX, int chunkZ, MutableBoundingBox mutableBoundingBox, int referenceIn, long seedIn) {
-            super(structureIn, chunkX, chunkZ, mutableBoundingBox, referenceIn, seedIn);
-        }
-
-        @Override
-        public void func_230364_a_(DynamicRegistries dynamicRegistryManager, ChunkGenerator chunkGenerator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn, NoFeatureConfig config) {
-
-            int x = (chunkX << 4) + 7;
-            int z = (chunkZ << 4) + 7;
-
-            BlockPos blockpos = new BlockPos(x, 0, z);
-
-            JigsawManager.func_242837_a(dynamicRegistryManager, new VillageConfig(() -> dynamicRegistryManager.getRegistry(Registry.JIGSAW_POOL_KEY)
-                            .getOrDefault(new ResourceLocation(BossToolsMod.ModId, "crimson_village/crimson_start")),
-                            25),
-                    AbstractVillagePiece::new,
-                    chunkGenerator,
-                    templateManagerIn,
-                    blockpos,
-                    this.components,
-                    this.rand,
-                    true,
-                    true);
-
-            this.components.forEach(piece -> piece.offset(0, 1, 0));
-            this.components.forEach(piece -> piece.getBoundingBox().minY -= 1);
-
-            this.recalculateStructureSize();
-        }
-    }
-     */
 }

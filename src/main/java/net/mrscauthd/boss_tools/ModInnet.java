@@ -14,6 +14,8 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -34,12 +36,11 @@ import net.minecraft.world.level.levelgen.FlatLevelSource;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.StructureSettings;
 import net.minecraft.world.level.levelgen.feature.*;
+import net.minecraft.world.level.levelgen.feature.configurations.ColumnFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.StructureFeatureConfiguration;
-import net.minecraft.world.level.levelgen.placement.BiomeFilter;
-import net.minecraft.world.level.levelgen.placement.CountPlacement;
-import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
+import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Material;
@@ -67,6 +68,7 @@ import net.mrscauthd.boss_tools.effects.OxygenEffect;
 import net.mrscauthd.boss_tools.entity.*;
 import net.mrscauthd.boss_tools.events.Config;
 import net.mrscauthd.boss_tools.feature.MarsIceSpikeFeature;
+import net.mrscauthd.boss_tools.feature.VenusDeltas;
 import net.mrscauthd.boss_tools.flag.FlagTileEntity;
 import net.mrscauthd.boss_tools.fluid.OilFluid;
 import net.mrscauthd.boss_tools.gui.screens.blastfurnace.BlastFurnaceGui;
@@ -475,101 +477,39 @@ public class ModInnet {
     public static final DamageSource DAMAGE_SOURCE_OXYGEN = new DamageSource("oxygen").bypassArmor();
     public static final DamageSource DAMAGE_SOURCE_ACID_RAIN = new DamageSource("venus.acid").bypassArmor();
 
-    //Todo rework with Biomes
-
     //ICE SPIKE
     public static ConfiguredFeature<?, ?> ICE_SPIKE;
     public static MarsIceSpikeFeature MARS_ICE_SPIKE;
-/*
+
     //VENUS DELTAS
-    public static ConfiguredFeature<?, ?> DELTAS;
-    public static ConfiguredFeature<?, ?> DELTAS2;
+    public static PlacedFeature VENUS_DELTAS_SMALL;
+    public static PlacedFeature VENUS_DELTAS_BIG;
     public static VenusDeltas VENUS_DELTAS;
 
-    //Desert Builder
-    public static SurfaceBuilder<SurfaceBuilderConfig> DESERT_SURFACE_BUILDER;
-    */
     @SubscribeEvent
     public static void RegistryFeature(RegistryEvent.Register<Feature<?>> feature) {
         MARS_ICE_SPIKE = new MarsIceSpikeFeature(NoneFeatureConfiguration.CODEC);
         MARS_ICE_SPIKE.setRegistryName(BossToolsMod.ModId, "mars_ice_spike");
         feature.getRegistry().register(MARS_ICE_SPIKE);
 
-        /*
+
         //VENUS DELTAS
-        VENUS_DELTAS = new VenusDeltas(ColumnConfig.CODEC);
+        VENUS_DELTAS = new VenusDeltas(ColumnFeatureConfiguration.CODEC);
         VENUS_DELTAS.setRegistryName(BossToolsMod.ModId, "venus_deltas");
         feature.getRegistry().register(VENUS_DELTAS);
-        */
     }
 
-    /*
-    @SubscribeEvent
-    public static void RegistrySurfaceBuilder(RegistryEvent.Register<SurfaceBuilder<?>> event) {
-        //Desert Builder
-        DESERT_SURFACE_BUILDER = new DesertSurfaceBuilder(SurfaceBuilderConfig.field_237203_a_);
-        DESERT_SURFACE_BUILDER.setRegistryName(BossToolsMod.ModId, "desert_surface_builder");
-        event.getRegistry().register(DESERT_SURFACE_BUILDER);
-    }
-*/
     public static <FC extends FeatureConfiguration> ConfiguredFeature<FC, ?> registerFeature(String key, ConfiguredFeature<FC, ?> configuredFeature) {
         return Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, key, configuredFeature);
     }
-
-
 
     @SubscribeEvent
     public static void setup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
             STStructures.setupStructures();
-           // STStructures2.setupStructures();
             STConfiguredStructures.registerConfiguredStructures();
         });
     }
-
-
-    /*
-    public static void biomeModification(final BiomeLoadingEvent event) {
-        RegistryKey.getOrCreateKey(Registry.BIOME_KEY, event.getName());
-        if (event.getName().equals(new ResourceLocation(BossToolsMod.ModId ,"moon")) && Config.AlienVillageStructure) {
-            event.getGeneration().getStructures().add(() -> STConfiguredStructures.ALIEN_VILLAGE);
-        }
-        if (event.getName().equals(new ResourceLocation("plains")) && Config.MeteorStructure) {
-            event.getGeneration().getStructures().add(() -> STConfiguredStructures.METEOR);
-        }
-        if (event.getName().equals(new ResourceLocation("snowy_tundra")) && Config.MeteorStructure) {
-            event.getGeneration().getStructures().add(() -> STConfiguredStructures.METEOR);
-        }
-        if (event.getName().equals(new ResourceLocation("forest")) && Config.MeteorStructure) {
-            event.getGeneration().getStructures().add(() -> STConfiguredStructures.METEOR);
-        }
-        if (event.getName().equals(new ResourceLocation("desert")) && Config.MeteorStructure) {
-            event.getGeneration().getStructures().add(() -> STConfiguredStructures.METEOR);
-        }
-        if (event.getName().equals(new ResourceLocation(BossToolsMod.ModId ,"venus")) && Config.VenusBulletStructure) {
-            event.getGeneration().getStructures().add(() -> STConfiguredStructures.VENUS_BULLET);
-        }
-        if (event.getName().equals(new ResourceLocation(BossToolsMod.ModId ,"venus")) && Config.VenusTowerStructure) {
-            event.getGeneration().getStructures().add(() -> STConfiguredStructures.VENUS_TOWER);
-        }
-        if (event.getName().equals(new ResourceLocation(BossToolsMod.ModId ,"venus")) && Config.CrimsonVillageStructure) {
-            event.getGeneration().getStructures().add(() -> STConfiguredStructures.CRIMSON);
-        }
-        if (event.getName().equals(new ResourceLocation("ocean")) && Config.OILWellStructure) {
-            event.getGeneration().getStructures().add(() -> STConfiguredStructures.OIL);
-        }
-        if (event.getName().equals(new ResourceLocation("deep_cold_ocean")) && Config.OILWellStructure) {
-            event.getGeneration().getStructures().add(() -> STConfiguredStructures.OIL);
-        }
-        if (event.getName().equals(new ResourceLocation("deep_ocean")) && Config.OILWellStructure) {
-            event.getGeneration().getStructures().add(() -> STConfiguredStructures.OIL);
-        }
-        if (event.getName().equals(new ResourceLocation("lukewarm_ocean")) && Config.OILWellStructure) {
-            event.getGeneration().getStructures().add(() -> STConfiguredStructures.OIL);
-        }
-    }
-
-     */
 
     private static Method GETCODEC_METHOD;
     public static void addDimensionalSpacing(final WorldEvent.Load event) {
@@ -588,19 +528,36 @@ public class ModInnet {
 
                 Biome.BiomeCategory biomeCategory = biomeEntry.getValue().getBiomeCategory();
 
+                /*______________________________________OVERWORLD_BIOMES___________________________________*/
+
                 /**Add Overworld Structure in a Biome*/
-                /*if (biomeCategory == Biome.BiomeCategory.OCEAN) {
-                    associateBiomeToConfiguredStructure(STStructureToMultiMap, STConfiguredStructures.ALIEN_VILLAGE, biomeEntry.getKey());
-                }*/
+                if (biomeCategory == Biome.BiomeCategory.OCEAN) {
+                    associateBiomeToConfiguredStructure(STStructureToMultiMap, STConfiguredStructures.OIL, biomeEntry.getKey());
+                }
+
+                /**Add Overworld Structure in a Biome*/
+                if (biomeCategory == Biome.BiomeCategory.PLAINS || biomeCategory == Biome.BiomeCategory.DESERT || biomeCategory == Biome.BiomeCategory.FOREST) {
+                    associateBiomeToConfiguredStructure(STStructureToMultiMap, STConfiguredStructures.METEOR, biomeEntry.getKey());
+                }
+                
+                /*______________________________________CUSTOM_BIOMES___________________________________*/
 
                 /**Moon Biome*/
-                ImmutableSet<ResourceKey<Biome>> moonStructures = ImmutableSet.<ResourceKey<Biome>>builder()
-                    .add(ResourceKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(BossToolsMod.ModId, "moon")))
-                    .build();
+                ImmutableSet<ResourceKey<Biome>> moonStructures = ImmutableSet.<ResourceKey<Biome>>builder().add(ResourceKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(BossToolsMod.ModId, "moon"))).build();
+
+                /**Venus Biome*/
+                ImmutableSet<ResourceKey<Biome>> venusStructures = ImmutableSet.<ResourceKey<Biome>>builder().add(ResourceKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(BossToolsMod.ModId, "venus"))).build();
 
                 /**Moon Structures*/
                 if (Config.AlienVillageStructure) {
                     moonStructures.forEach(biomeKey -> associateBiomeToConfiguredStructure(STStructureToMultiMap, STConfiguredStructures.ALIEN_VILLAGE, biomeKey));
+                }
+
+                /**Venus Structures*/
+                if (Config.CrimsonVillageStructure) {
+                    venusStructures.forEach(biomeKey -> associateBiomeToConfiguredStructure(STStructureToMultiMap, STConfiguredStructures.CRIMSON, biomeKey));
+                    venusStructures.forEach(biomeKey -> associateBiomeToConfiguredStructure(STStructureToMultiMap, STConfiguredStructures.VENUS_TOWER, biomeKey));
+                    venusStructures.forEach(biomeKey -> associateBiomeToConfiguredStructure(STStructureToMultiMap, STConfiguredStructures.VENUS_BULLET, biomeKey));
                 }
             }
 
@@ -666,12 +623,10 @@ public class ModInnet {
 
             //Ice Spike
             ICE_SPIKE = registerFeature("mars_ice_spike", ModInnet.MARS_ICE_SPIKE.configured(FeatureConfiguration.NONE));
+
             //Venus Deltas
-            /*
-            DELTAS = registerFeature("venus_deltas_1", ModInnet.VENUS_DELTAS.withConfiguration(new ColumnConfig(FeatureSpread.func_242252_a(1), FeatureSpread.func_242253_a(1, 8))).withPlacement(Placement.COUNT_MULTILAYER.configure(new FeatureSpreadConfig(4))));
-            //Venus Deltas2
-            DELTAS2 = registerFeature("venus_deltas_2", ModInnet.VENUS_DELTAS.withConfiguration(new ColumnConfig(FeatureSpread.func_242253_a(2, 1), FeatureSpread.func_242253_a(5, 6))).withPlacement(Placement.COUNT_MULTILAYER.configure(new FeatureSpreadConfig(1))));
-        */
+            VENUS_DELTAS_SMALL = PlacementUtils.register("venus_deltas_small", ModInnet.VENUS_DELTAS.configured(new ColumnFeatureConfiguration(ConstantInt.of(1), UniformInt.of(1, 4))).placed(CountOnEveryLayerPlacement.of(4), BiomeFilter.biome()));
+            VENUS_DELTAS_BIG = PlacementUtils.register("venus_deltas_big", ModInnet.VENUS_DELTAS.configured(new ColumnFeatureConfiguration(UniformInt.of(2, 3), UniformInt.of(5, 10))).placed(CountOnEveryLayerPlacement.of(2), BiomeFilter.biome()));
         });
     }
 
@@ -680,17 +635,10 @@ public class ModInnet {
             event.getGeneration().addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, ICE_SPIKE.placed(CountPlacement.of(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
         }
 
-        /*
         //Venus Deltas
         if (event.getName().getPath().equals(BiomeRegistry.infernal_venus_barrens.getRegistryName().getPath())){
-            event.getGeneration().withFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, DELTAS);
-            event.getGeneration().withFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, DELTAS2);
+            event.getGeneration().addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, VENUS_DELTAS_SMALL);
+            event.getGeneration().addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, VENUS_DELTAS_BIG);
         }
-        //Desert Structure Builder
-        if (event.getName().getPath().equals(BiomeRegistry.venus.getRegistryName().getPath())){
-            event.getGeneration().withSurfaceBuilder(ModInnet.DESERT_SURFACE_BUILDER.func_242929_a(new SurfaceBuilderConfig(ModInnet.VENUS_SAND.get().getDefaultState(), ModInnet.VENUS_SAND.get().getDefaultState(), ModInnet.VENUS_SANDSTONE.get().getDefaultState())));
-        }
-        */
     }
-
 }

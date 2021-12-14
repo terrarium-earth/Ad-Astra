@@ -22,7 +22,6 @@ public class BiomeRegistry {
     public static Biome mars_ice_spikes;
 
     public static Biome venus;
-    public static Biome venus_hills;
     public static Biome infernal_venus_barrens;
 
     public static Biome mercury;
@@ -35,6 +34,7 @@ public class BiomeRegistry {
         if (moon == null) {
             BiomeSpecialEffects effects = new BiomeSpecialEffects.Builder().fogColor(-16777216).waterColor(4159204).waterFogColor(329011).skyColor(-16777216).foliageColorOverride(7842607).grassColorOverride(9551193).build();
             BiomeGenerationSettings.Builder biomeGenerationSettings = new BiomeGenerationSettings.Builder();
+            BiomeDefaultFeatures.addDripstone(biomeGenerationSettings);
             addDefaultCarversAndLakes(biomeGenerationSettings);
             MobSpawnSettings mobSpawnInfo = MobSpawnSettings.EMPTY;
 
@@ -76,10 +76,8 @@ public class BiomeRegistry {
         if (infernal_venus_barrens == null) {
             BiomeSpecialEffects effects = new BiomeSpecialEffects.Builder().fogColor(-3044526).waterColor(4159204).waterFogColor(329011).skyColor(-3044526).foliageColorOverride(7842607).grassColorOverride(9551193).ambientParticle(new AmbientParticleSettings(ParticleTypes.CRIMSON_SPORE, 0.02f)).build();
             BiomeGenerationSettings.Builder biomeGenerationSettings = new BiomeGenerationSettings.Builder();
-            //biomeGenerationSettings.surfaceBuilder(ConfiguredSurfaceBuilders.field_244170_b);  //Todo need to add the Layer in the world
             addDefaultCarversAndLakes(biomeGenerationSettings);
             biomeGenerationSettings.addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, NetherPlacements.DELTA);
-            biomeGenerationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, NetherPlacements.SMALL_BASALT_COLUMNS);
             biomeGenerationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherPlacements.BASALT_BLOBS);
             biomeGenerationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherPlacements.BLACKSTONE_BLOBS);
             biomeGenerationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherPlacements.SPRING_DELTA);
@@ -91,16 +89,6 @@ public class BiomeRegistry {
 
             infernal_venus_barrens = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.RAIN).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(1.5f).downfall(1f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
             event.getRegistry().register(infernal_venus_barrens.setRegistryName(BossToolsMod.ModId,"infernal_venus_barrens"));
-        }
-
-        if (venus_hills == null) {
-            BiomeSpecialEffects effects = new BiomeSpecialEffects.Builder().fogColor(-3044526).waterColor(4159204).waterFogColor(329011).skyColor(-3044526).foliageColorOverride(7842607).grassColorOverride(9551193).ambientParticle(new AmbientParticleSettings(ParticleTypes.CRIMSON_SPORE, 0.02f)).build();
-            BiomeGenerationSettings.Builder biomeGenerationSettings = new BiomeGenerationSettings.Builder();
-            addDefaultCarversAndLakes(biomeGenerationSettings);
-            MobSpawnSettings mobSpawnInfo = MobSpawnSettings.EMPTY;
-
-            venus_hills = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.RAIN).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(1.5f).downfall(1f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
-            event.getRegistry().register(venus_hills.setRegistryName(BossToolsMod.ModId,"venus_hills"));
         }
 
         if (mercury == null) {

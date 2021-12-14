@@ -27,7 +27,6 @@ import net.mrscauthd.boss_tools.world.structure.configuration.STStructures;
 import java.util.List;
 import java.util.Optional;
 
-
 public class AlienVillageStructure extends StructureFeature<JigsawConfiguration> {
 
     public AlienVillageStructure(Codec<JigsawConfiguration> codec) {
@@ -88,10 +87,6 @@ public class AlienVillageStructure extends StructureFeature<JigsawConfiguration>
         );
 
         Optional<PieceGenerator<JigsawConfiguration>> structurePiecesGenerator = JigsawPlacement.addPieces(newContext, PoolElementStructurePiece::new, blockpos, false, true);
-
-        if(structurePiecesGenerator.isPresent()) {
-            //Is Structure Placed
-        }
 
         return structurePiecesGenerator;
     }
