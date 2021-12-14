@@ -25,7 +25,7 @@
                   }
                 }
               ],
-              "name": "minecraft:mars_silicon_ore"
+              "name": "boss_tools:mars_silicon_ore"
             },
             {
               "type": "minecraft:item",
@@ -39,7 +39,7 @@
                   "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "minecraft:raw_silicon"
+              "name": "boss_tools:raw_silicon"
             }
           ]
         }
