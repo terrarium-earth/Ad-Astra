@@ -26,7 +26,7 @@ public class BossToolsItemGroups {
 		@OnlyIn(Dist.CLIENT)
 		@Override
 		public ItemStack makeIcon() {
-			return new ItemStack(ModInnet.GOLDEN_ENGINE.get(), 1);
+			return new ItemStack(ModInnet.GOLD_ENGINE.get(), 1);
 		}
 	};
 	public static CreativeModeTab tab_materials = new CreativeModeTab("tab_materials") {

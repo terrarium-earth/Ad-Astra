@@ -14,7 +14,7 @@
   "item.boss_tools.engine_frame": "Engine Frame",
   "item.boss_tools.diamond_tank": "Diamond Tank",
   "item.boss_tools.steel_shovel": "Steel Shovel",
-  "item.boss_tools.golden_engine": "Golden Engine",
+  "item.boss_tools.gold_engine": "Gold Engine",
   "item.boss_tools.hammer": "Hammer",
   "item.boss_tools.netherite_space_boots": "Netherite Space Boots",
   "item.boss_tools.steel_pickaxe": "Steel Pickaxe",
@@ -25,7 +25,7 @@
   "item.boss_tools.alien_zombie_spawn_egg": "Alien Zombie Spawn Egg",
   "item.boss_tools.netherite_space_suit": "Netherite Space Suit",
   "item.boss_tools.silicon_ingot": "Silicon Ingot",
-  "item.boss_tools.golden_tank": "Golden Tank",
+  "item.boss_tools.gold_tank": "Gold Tank",
   "item.boss_tools.rocket_nose_cone": "Rocket Nose Cone",
   "item.boss_tools.compressed_steel": "Compressed Steel",
   "item.boss_tools.steel_ingot": "Steel Ingot",
@@ -53,6 +53,8 @@
   "item.boss_tools.silicon_nugget": "Silicon Nugget",
   "item.boss_tools.steel_nugget": "Steel Nugget",
   "item.boss_tools.water_pump": "Water Pump",
+  "item.boss_tools.raw_desh": "Raw Desh",
+  "item.boss_tools.raw_silicon": "Raw Silicon",
 
 
   "itemGroup.tab_normal": "Space-BossTools",

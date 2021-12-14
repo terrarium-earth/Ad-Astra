@@ -277,7 +277,7 @@ public class ModInnet {
     public static final RegistryObject<ForgeSpawnEggItem> MOGLER_SPAWN_EGG = ITEMS.register("mogler_spawn_egg",() -> new ForgeSpawnEggItem(MOGLER::get, -13312, -3407872, new Item.Properties().tab(BossToolsItemGroups.tab_spawn_eggs)));
 
     //Generel Items
-    public static final RegistryObject<Item> CHESE = ITEMS.register("cheese", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_normal).food((new FoodProperties.Builder()).nutrition(4).saturationMod(3f).build())));
+    public static final RegistryObject<Item> CHEESE = ITEMS.register("cheese", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_normal).food((new FoodProperties.Builder()).nutrition(4).saturationMod(3f).build())));
     public static final RegistryObject<Item> HAMMER = ITEMS.register("hammer", () -> new HammerItem(new Item.Properties().tab(BossToolsItemGroups.tab_basics).durability(9).setNoRepair()));
     public static final RegistryObject<Item> IRON_STICK = ITEMS.register("iron_stick", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_basics)));
     public static final RegistryObject<Item> OXYGEN_GEAR = ITEMS.register("oxygen_gear", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_basics)));
@@ -286,11 +286,11 @@ public class ModInnet {
     public static final RegistryObject<Item> ENGINE_FRAME = ITEMS.register("engine_frame", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_basics)));
     public static final RegistryObject<Item> ENGINE_FAN = ITEMS.register("engine_fan", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_basics)));
     public static final RegistryObject<Item> ROCKET_NOSE_CONE = ITEMS.register("rocket_nose_cone", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_basics)));
-    public static final RegistryObject<Item> DIAMOND_ENGINE = ITEMS.register("diamond_engine", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_basics)));
     public static final RegistryObject<Item> IRON_ENGINE = ITEMS.register("iron_engine", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_basics)));
-    public static final RegistryObject<Item> GOLDEN_ENGINE = ITEMS.register("golden_engine", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_basics)));
+    public static final RegistryObject<Item> GOLD_ENGINE = ITEMS.register("gold_engine", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_basics)));
+    public static final RegistryObject<Item> DIAMOND_ENGINE = ITEMS.register("diamond_engine", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_basics)));
     public static final RegistryObject<Item> IRON_TANK = ITEMS.register("iron_tank", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_basics)));
-    public static final RegistryObject<Item> GOLDEN_TANK = ITEMS.register("golden_tank", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_basics)));
+    public static final RegistryObject<Item> GOLD_TANK = ITEMS.register("gold_tank", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_basics)));
     public static final RegistryObject<Item> DIAMOND_TANK = ITEMS.register("diamond_tank", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_basics)));
     public static final RegistryObject<Item> ROCKET_FIN = ITEMS.register("rocket_fin", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_basics)));
 
@@ -310,6 +310,9 @@ public class ModInnet {
     public static final RegistryObject<Item> STEEL_NUGGET = ITEMS.register("steel_nugget", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_materials)));
     public static final RegistryObject<Item> DESH_NUGGET = ITEMS.register("desh_nugget", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_materials)));
     public static final RegistryObject<Item> SILICON_NUGGET = ITEMS.register("silicon_nugget", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_materials)));
+
+    public static final RegistryObject<Item> RAW_DESH = ITEMS.register("raw_desh", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_materials)));
+    public static final RegistryObject<Item> RAW_SILICON = ITEMS.register("raw_silicon", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_materials)));
 
     //Generel Blocks
     public static final RegistryObject<Block> STEEL_BLOCK = BLOCKS.register("steel_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.METAL).strength(5f, 2.5f).requiresCorrectToolForDrops()));

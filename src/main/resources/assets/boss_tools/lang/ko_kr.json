@@ -14,7 +14,7 @@
   "item.boss_tools.engine_frame": "엔진 프레임",
   "item.boss_tools.diamond_tank": "다이아몬드 탱크",
   "item.boss_tools.steel_shovel": "강철 삽",
-  "item.boss_tools.golden_engine": "금 엔진",
+  "item.boss_tools.gold_engine": "금 엔진",
   "item.boss_tools.hammer": "망치",
   "item.boss_tools.netherite_space_boots": "네더라이트 우주복 부츠",
   "item.boss_tools.steel_pickaxe": "강철 곡괭이",
@@ -25,7 +25,7 @@
   "item.boss_tools.alien_zombie_spawn_egg": "외계인 좀비 생성 알",
   "item.boss_tools.netherite_space_suit": "네더라이트 우주복 상의",
   "item.boss_tools.silicon_ingot": "실리콘 주괴",
-  "item.boss_tools.golden_tank": "금 탱크",
+  "item.boss_tools.gold_tank": "금 탱크",
   "item.boss_tools.rocket_nose_cone": "원뿔 탄두",
   "item.boss_tools.compressed_steel": "압축 강철",
   "item.boss_tools.steel_ingot": "강철 주괴",
@@ -53,6 +53,8 @@
   "item.boss_tools.silicon_nugget": "실리콘 조각",
   "item.boss_tools.steel_nugget": "강철 조각",
   "item.boss_tools.water_pump": "물 펌프",
+  "item.boss_tools.raw_desh": "Raw Desh",
+  "item.boss_tools.raw_silicon": "Raw Silicon",
 
 
   "itemGroup.tab_normal": "Space-BossTools",

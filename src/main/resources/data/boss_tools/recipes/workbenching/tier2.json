@@ -29,10 +29,10 @@
          ],
          "boss_tools:tank":[
             {
-               "item":"boss_tools:golden_tank"
+               "item":"boss_tools:gold_tank"
             },
             {
-               "item":"boss_tools:golden_tank"
+               "item":"boss_tools:gold_tank"
             }
          ],
          "boss_tools:fin_left":[
@@ -53,7 +53,7 @@
          ],
          "boss_tools:engine":[
             {
-               "item":"boss_tools:golden_engine"
+               "item":"boss_tools:gold_engine"
             }
          ]
       }
