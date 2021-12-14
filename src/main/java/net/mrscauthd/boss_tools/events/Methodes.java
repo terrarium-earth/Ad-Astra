@@ -1,6 +1,14 @@
 package net.mrscauthd.boss_tools.events;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import io.netty.buffer.Unpooled;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.PlayerModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
@@ -17,6 +25,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -26,10 +35,9 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.piglin.Piglin;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.PlayerModelPart;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -461,4 +469,79 @@ public class Methodes {
 			persistentData.putInt(key, oxygenTimer);
 		}
 	}
+
+	public static void renderArm(PoseStack poseStack, MultiBufferSource bufferSource, int light, ResourceLocation texture, AbstractClientPlayer player, PlayerModel<AbstractClientPlayer> playermodel, ModelPart arm) {
+        Methodes.setModelProperties(player, playermodel);
+        playermodel.attackTime = 0.0F;
+        playermodel.crouching = false;
+        playermodel.swimAmount = 0.0F;
+        playermodel.setupAnim(player, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F);
+        arm.xRot = 0.0F;
+        arm.render(poseStack, bufferSource.getBuffer(RenderType.entitySolid(texture)), light, OverlayTexture.NO_OVERLAY);
+    }
+
+    public static void setModelProperties(AbstractClientPlayer p_117819_, PlayerModel<AbstractClientPlayer> modelPart) {
+        PlayerModel<AbstractClientPlayer> playermodel = modelPart;
+        if (p_117819_.isSpectator()) {
+            playermodel.setAllVisible(false);
+            playermodel.head.visible = true;
+            playermodel.hat.visible = true;
+        } else {
+            playermodel.setAllVisible(true);
+            playermodel.hat.visible = p_117819_.isModelPartShown(PlayerModelPart.HAT);
+            playermodel.jacket.visible = p_117819_.isModelPartShown(PlayerModelPart.JACKET);
+            playermodel.leftPants.visible = p_117819_.isModelPartShown(PlayerModelPart.LEFT_PANTS_LEG);
+            playermodel.rightPants.visible = p_117819_.isModelPartShown(PlayerModelPart.RIGHT_PANTS_LEG);
+            playermodel.leftSleeve.visible = p_117819_.isModelPartShown(PlayerModelPart.LEFT_SLEEVE);
+            playermodel.rightSleeve.visible = p_117819_.isModelPartShown(PlayerModelPart.RIGHT_SLEEVE);
+            playermodel.crouching = p_117819_.isCrouching();
+            HumanoidModel.ArmPose humanoidmodel$armpose = getArmPose(p_117819_, InteractionHand.MAIN_HAND);
+            HumanoidModel.ArmPose humanoidmodel$armpose1 = getArmPose(p_117819_, InteractionHand.OFF_HAND);
+            if (humanoidmodel$armpose.isTwoHanded()) {
+                humanoidmodel$armpose1 = p_117819_.getOffhandItem().isEmpty() ? HumanoidModel.ArmPose.EMPTY : HumanoidModel.ArmPose.ITEM;
+            }
+
+            if (p_117819_.getMainArm() == HumanoidArm.RIGHT) {
+                playermodel.rightArmPose = humanoidmodel$armpose;
+                playermodel.leftArmPose = humanoidmodel$armpose1;
+            } else {
+                playermodel.rightArmPose = humanoidmodel$armpose1;
+                playermodel.leftArmPose = humanoidmodel$armpose;
+            }
+        }
+    }
+
+    public static HumanoidModel.ArmPose getArmPose(AbstractClientPlayer p_117795_, InteractionHand p_117796_) {
+        ItemStack itemstack = p_117795_.getItemInHand(p_117796_);
+        if (itemstack.isEmpty()) {
+            return HumanoidModel.ArmPose.EMPTY;
+        } else {
+            if (p_117795_.getUsedItemHand() == p_117796_ && p_117795_.getUseItemRemainingTicks() > 0) {
+                UseAnim useanim = itemstack.getUseAnimation();
+                if (useanim == UseAnim.BLOCK) {
+                    return HumanoidModel.ArmPose.BLOCK;
+                }
+
+                if (useanim == UseAnim.BOW) {
+                    return HumanoidModel.ArmPose.BOW_AND_ARROW;
+                }
+
+                if (useanim == UseAnim.SPEAR) {
+                    return HumanoidModel.ArmPose.THROW_SPEAR;
+                }
+
+                if (useanim == UseAnim.CROSSBOW && p_117796_ == p_117795_.getUsedItemHand()) {
+                    return HumanoidModel.ArmPose.CROSSBOW_CHARGE;
+                }
+
+                if (useanim == UseAnim.SPYGLASS) {
+                    return HumanoidModel.ArmPose.SPYGLASS;
+                }
+            } else if (!p_117795_.swinging && itemstack.is(Items.CROSSBOW) && CrossbowItem.isCharged(itemstack)) {
+                return HumanoidModel.ArmPose.CROSSBOW_HOLD;
+            }
+
+            return HumanoidModel.ArmPose.ITEM;
+        }
+    }
 }

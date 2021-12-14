@@ -3,6 +3,11 @@ package net.mrscauthd.boss_tools.events;
 import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.PlayerModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -10,6 +15,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.PlayerModelPart;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
@@ -17,6 +23,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
+import net.minecraftforge.client.event.RenderArmEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.event.TickEvent;
@@ -29,7 +36,9 @@ import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.ModInnet;
 import net.mrscauthd.boss_tools.entity.*;
 import net.mrscauthd.boss_tools.events.forgeevents.RenderHandItemEvent;
+import net.mrscauthd.boss_tools.events.forgeevents.RenderPlayerArmEvent;
 import net.mrscauthd.boss_tools.events.forgeevents.SetupLivingBipedAnimEvent;
+import net.mrscauthd.boss_tools.mixin.RenderPlayerArm;
 
 @Mod.EventBusSubscriber(modid = BossToolsMod.ModId)
 public class Events {
@@ -92,6 +101,33 @@ public class Events {
             if (pointOfView.equals(CameraType.THIRD_PERSON_FRONT) || pointOfView.equals(CameraType.THIRD_PERSON_BACK)) {
                 event.getCamera().move(-event.getCamera().getMaxZoom(9d), 0d, 0);
             }
+        }
+    }
+
+
+    @OnlyIn(Dist.CLIENT)
+    @SubscribeEvent
+    public static void renderPlayerRightArm(RenderPlayerArmEvent.RightArm event) {
+        if (Methodes.checkArmor(event.getPlayer(), 2, ModInnet.SPACE_SUIT.get())) {
+            Methodes.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), new ResourceLocation(BossToolsMod.ModId, "textures/models/armor/arm/space_suit.png"), event.getPlayer(), event.getPlayerModel(), event.getRightArm());
+            event.setCanceled(true);
+        }
+        if (Methodes.checkArmor(event.getPlayer(), 2, ModInnet.NETHERITE_SPACE_SUIT.get())) {
+            Methodes.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), new ResourceLocation(BossToolsMod.ModId, "textures/models/armor/arm/netherite_space_suit.png"), event.getPlayer(), event.getPlayerModel(), event.getRightArm());
+            event.setCanceled(true);
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @SubscribeEvent
+    public static void renderPlayerLeftArm(RenderPlayerArmEvent.LeftArm event) {
+        if (Methodes.checkArmor(event.getPlayer(), 2, ModInnet.SPACE_SUIT.get())) {
+            Methodes.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), new ResourceLocation(BossToolsMod.ModId, "textures/models/armor/arm/space_suit.png"), event.getPlayer(), event.getPlayerModel(), event.getLeftArm());
+            event.setCanceled(true);
+        }
+        if (Methodes.checkArmor(event.getPlayer(), 2, ModInnet.NETHERITE_SPACE_SUIT.get())) {
+            Methodes.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), new ResourceLocation(BossToolsMod.ModId, "textures/models/armor/arm/netherite_space_suit.png"), event.getPlayer(), event.getPlayerModel(), event.getLeftArm());
+            event.setCanceled(true);
         }
     }
 
