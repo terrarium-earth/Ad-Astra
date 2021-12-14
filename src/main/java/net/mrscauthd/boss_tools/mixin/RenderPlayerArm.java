@@ -22,10 +22,8 @@ public abstract class RenderPlayerArm {
         PlayerRenderer w = (PlayerRenderer) ((Object) this);
 
         PlayerModel<AbstractClientPlayer> playerModel = w.getModel();
-        ModelPart rightArm = w.getModel().rightArm;
-        ModelPart leftArm = w.getModel().leftArm;
 
-        if (MinecraftForge.EVENT_BUS.post(new RenderPlayerArmEvent.RightArm(p_117771_, p_117772_, p_117773_, p_117774_, HumanoidArm.RIGHT, playerModel, rightArm, leftArm))) {
+        if (MinecraftForge.EVENT_BUS.post(new RenderPlayerArmEvent.RightArm(p_117771_, p_117772_, p_117773_, p_117774_, HumanoidArm.RIGHT, playerModel))) {
             info.cancel();
         }
     }
@@ -35,10 +33,8 @@ public abstract class RenderPlayerArm {
         PlayerRenderer w = (PlayerRenderer) ((Object) this);
 
         PlayerModel<AbstractClientPlayer> playerModel = w.getModel();
-        ModelPart rightArm = w.getModel().rightArm;
-        ModelPart leftArm = w.getModel().leftArm;
 
-        if (MinecraftForge.EVENT_BUS.post(new RenderPlayerArmEvent.LeftArm(p_117814_, p_117815_, p_117816_, p_117817_, HumanoidArm.LEFT, playerModel, rightArm, leftArm))) {
+        if (MinecraftForge.EVENT_BUS.post(new RenderPlayerArmEvent.LeftArm(p_117814_, p_117815_, p_117816_, p_117817_, HumanoidArm.LEFT, playerModel))) {
             info.cancel();
         }
     }

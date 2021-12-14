@@ -96,16 +96,15 @@ public class Events {
         }
     }
 
-
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void renderPlayerRightArm(RenderPlayerArmEvent.RightArm event) {
         if (Methodes.checkArmor(event.getPlayer(), 2, ModInnet.SPACE_SUIT.get())) {
-            Methodes.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), new ResourceLocation(BossToolsMod.ModId, "textures/models/armor/arm/space_suit.png"), event.getPlayer(), event.getPlayerModel(), event.getRightArmModel());
+            Methodes.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), new ResourceLocation(BossToolsMod.ModId, "textures/models/armor/arm/space_suit.png"), event.getPlayer(), event.getPlayerModel(), event.getPlayerModel().rightArm);
             event.setCanceled(true);
         }
         if (Methodes.checkArmor(event.getPlayer(), 2, ModInnet.NETHERITE_SPACE_SUIT.get())) {
-            Methodes.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), new ResourceLocation(BossToolsMod.ModId, "textures/models/armor/arm/netherite_space_suit.png"), event.getPlayer(), event.getPlayerModel(), event.getRightArmModel());
+            Methodes.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), new ResourceLocation(BossToolsMod.ModId, "textures/models/armor/arm/netherite_space_suit.png"), event.getPlayer(), event.getPlayerModel(), event.getPlayerModel().rightArm);
             event.setCanceled(true);
         }
     }
@@ -114,11 +113,11 @@ public class Events {
     @SubscribeEvent
     public static void renderPlayerLeftArm(RenderPlayerArmEvent.LeftArm event) {
         if (Methodes.checkArmor(event.getPlayer(), 2, ModInnet.SPACE_SUIT.get())) {
-            Methodes.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), new ResourceLocation(BossToolsMod.ModId, "textures/models/armor/arm/space_suit.png"), event.getPlayer(), event.getPlayerModel(), event.getLeftArmModel());
+            Methodes.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), new ResourceLocation(BossToolsMod.ModId, "textures/models/armor/arm/space_suit.png"), event.getPlayer(), event.getPlayerModel(), event.getPlayerModel().leftArm);
             event.setCanceled(true);
         }
         if (Methodes.checkArmor(event.getPlayer(), 2, ModInnet.NETHERITE_SPACE_SUIT.get())) {
-            Methodes.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), new ResourceLocation(BossToolsMod.ModId, "textures/models/armor/arm/netherite_space_suit.png"), event.getPlayer(), event.getPlayerModel(), event.getLeftArmModel());
+            Methodes.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), new ResourceLocation(BossToolsMod.ModId, "textures/models/armor/arm/netherite_space_suit.png"), event.getPlayer(), event.getPlayerModel(), event.getPlayerModel().leftArm);
             event.setCanceled(true);
         }
     }
