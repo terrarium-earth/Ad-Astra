@@ -51,7 +51,7 @@ public class OilStructure extends StructureFeature<JigsawConfiguration> {
     public static Optional<PieceGenerator<JigsawConfiguration>> createPiecesGenerator(PieceGeneratorSupplier.Context<JigsawConfiguration> context) {
         BlockPos chunkpos = context.chunkPos().getMiddleBlockPosition(0);
 
-        BlockPos blockpos = new BlockPos(chunkpos.getX(), chunkpos.getY() - 11, chunkpos.getZ());
+        BlockPos blockpos = new BlockPos(chunkpos.getX(), chunkpos.getY() - 10, chunkpos.getZ());
 
         JigsawConfiguration newConfig = new JigsawConfiguration(() -> context.registryAccess().ownedRegistryOrThrow(Registry.TEMPLATE_POOL_REGISTRY)
                 .get(new ResourceLocation(BossToolsMod.ModId, "run_oil/side_oil_start")), 25);
