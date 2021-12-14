@@ -16,8 +16,8 @@ public class RenderPlayerArmEvent extends Event
     private final int packedLight;
     private final AbstractClientPlayer player;
     private final HumanoidArm arm;
-    private final ModelPart rightArm;
-    private final ModelPart leftArm;
+    private final ModelPart rightArmModel;
+    private final ModelPart leftArmModel;
     private final PlayerModel<AbstractClientPlayer> playerModel;
 
     public RenderPlayerArmEvent(PoseStack poseStack, MultiBufferSource multiBufferSource, int packedLight, AbstractClientPlayer player, HumanoidArm arm, PlayerModel<AbstractClientPlayer> playerModel, ModelPart rightArm, ModelPart leftArm)
@@ -27,8 +27,8 @@ public class RenderPlayerArmEvent extends Event
         this.packedLight = packedLight;
         this.player = player;
         this.arm = arm;
-        this.rightArm = rightArm;
-        this.leftArm = leftArm;
+        this.rightArmModel = rightArm;
+        this.leftArmModel = leftArm;
         this.playerModel = playerModel;
     }
 
@@ -62,14 +62,14 @@ public class RenderPlayerArmEvent extends Event
         return playerModel;
     }
 
-    public ModelPart getRightArm()
+    public ModelPart getRightArmModel()
     {
-        return rightArm;
+        return rightArmModel;
     }
 
-    public ModelPart getLeftArm()
+    public ModelPart getLeftArmModel()
     {
-        return leftArm;
+        return leftArmModel;
     }
 
     @Cancelable
