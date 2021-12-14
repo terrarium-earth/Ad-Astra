@@ -27,13 +27,13 @@ public class STStructures {
     public static final RegistryObject<StructureFeature<JigsawConfiguration>> CRIMSON = DEFERRED_REGISTRY_STRUCTURE.register("crimson_village", () -> (new CrimsonStructure(JigsawConfiguration.CODEC)));
 
     public static void setupStructures() {
-        setupMapSpacingAndLand(ALIEN_VILLAGE.get(), new StructureFeatureConfiguration(20, 9, 1234567890), false);
+        setupMapSpacingAndLand(ALIEN_VILLAGE.get(), new StructureFeatureConfiguration(29, 9, 1234567890), false);
         setupMapSpacingAndLand(METEOR.get(), new StructureFeatureConfiguration(22, 5, 1234567890), false);
         setupMapSpacingAndLand(OIL.get(), new StructureFeatureConfiguration(9, 7, 1234567890), false);
 
-        setupMapSpacingAndLand(VENUS_BULLET.get(), new StructureFeatureConfiguration(22, 19, 1234567890), true);
-        setupMapSpacingAndLand(VENUS_TOWER.get(), new StructureFeatureConfiguration(21, 17, 1234567890), true);
-        setupMapSpacingAndLand(CRIMSON.get(), new StructureFeatureConfiguration(17, 14, 1234567890), true);
+        setupMapSpacingAndLand(VENUS_BULLET.get(), new StructureFeatureConfiguration(29, 19, 1234567890), true);
+        setupMapSpacingAndLand(VENUS_TOWER.get(), new StructureFeatureConfiguration(24, 17, 1234567890), true);
+        setupMapSpacingAndLand(CRIMSON.get(), new StructureFeatureConfiguration(27, 14, 1234567890), true);
     }
 
     public static <F extends StructureFeature<?>> void setupMapSpacingAndLand(F structure, StructureFeatureConfiguration structureFeatureConfiguration, boolean transformSurroundingLand) {
