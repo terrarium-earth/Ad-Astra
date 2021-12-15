@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "astrocraft:desh_nugget",
+  "result": {
+    "item": "astrocraft:desh_nugget",
+    "count": 9
+  },
+  "ingredients": [
+    {
+      "item": "astrocraft:desh_ingot"
+    }
+  ]
+}

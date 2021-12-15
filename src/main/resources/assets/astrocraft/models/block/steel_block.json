@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "astrocraft:blocks/steel_block",
+    "up": "astrocraft:blocks/steel_block",
+    "north": "astrocraft:blocks/steel_block",
+    "east": "astrocraft:blocks/steel_block",
+    "south": "astrocraft:blocks/steel_block",
+    "west": "astrocraft:blocks/steel_block",
+    "particle": "astrocraft:blocks/steel_block"
+  }
+}

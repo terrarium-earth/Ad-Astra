@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "astrocraft:block/rocket_launch_pad"
+    },
+    "lit=true": {
+      "model": "astrocraft:block/rocket_launch_pad_base"
+    }
+  }
+}

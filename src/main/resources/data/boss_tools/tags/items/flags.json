@@ -1,7 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "boss_tools:flag",
-    "#boss_tools:flags/colors"
-  ]
-}

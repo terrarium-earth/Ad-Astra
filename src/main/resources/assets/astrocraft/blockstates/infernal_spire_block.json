@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "astrocraft:block/infernal_spire_block"
+    }
+  }
+}

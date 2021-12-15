@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "astrocraft:block/blue_iron_plating_block",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "astrocraft:block/blue_iron_plating_block"
+    },
+    "axis=z": {
+      "model": "astrocraft:block/blue_iron_plating_block",
+      "x": 90
+    }
+  }
+}

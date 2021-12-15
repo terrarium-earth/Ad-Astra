@@ -1,0 +1,8 @@
+
+{
+  "variants": {
+    "": {
+      "model": "astrocraft:block/fluid/metal/addon_ore/silicon"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "astrocraft:blocks/mars_sand",
+    "up": "astrocraft:blocks/mars_sand",
+    "north": "astrocraft:blocks/mars_sand",
+    "east": "astrocraft:blocks/mars_sand",
+    "south": "astrocraft:blocks/mars_sand",
+    "west": "astrocraft:blocks/mars_sand",
+    "particle": "astrocraft:blocks/mars_sand"
+  }
+}

@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
-    "boss_tools:fuel",
-    "boss_tools:flowing_fuel",
-    "boss_tools:oil",
-    "boss_tools:flowing_oil"
+    "astrocraft:fuel",
+    "astrocraft:flowing_fuel",
+    "astrocraft:oil",
+    "astrocraft:flowing_oil"
   ]
 }

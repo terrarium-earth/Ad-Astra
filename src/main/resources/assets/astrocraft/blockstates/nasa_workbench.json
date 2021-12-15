@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "astrocraft:block/nasa_workbench"
+    },
+    "facing=east": {
+      "model": "astrocraft:block/nasa_workbench",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "astrocraft:block/nasa_workbench",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "astrocraft:block/nasa_workbench",
+      "y": 270
+    }
+  }
+}

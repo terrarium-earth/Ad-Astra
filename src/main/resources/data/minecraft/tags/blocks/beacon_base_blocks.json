@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "boss_tools:steel_block",
-    "boss_tools:desh_block",
-    "boss_tools:silicon_block"
+    "astrocraft:steel_block",
+    "astrocraft:desh_block",
+    "astrocraft:silicon_block"
   ]
 }

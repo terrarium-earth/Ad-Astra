@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "item": "astrocraft:moon_stone"
+    },
+    "title": {
+      "translate": "advancements.moon_advancement.title"
+    },
+    "description": {
+      "translate": "advancements.moon_advancement.descr"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "moon_advancement": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "astrocraft:moon"
+      }
+    }
+  },
+  "rewards": {
+    "experience": 7
+  },
+  "parent": "astrocraft:rocket_advancement"
+}

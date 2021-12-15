@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "astrocraft:blocks/moon_ore_iron",
+    "up": "astrocraft:blocks/moon_ore_iron",
+    "north": "astrocraft:blocks/moon_ore_iron",
+    "east": "astrocraft:blocks/moon_ore_iron",
+    "south": "astrocraft:blocks/moon_ore_iron",
+    "west": "astrocraft:blocks/moon_ore_iron",
+    "particle": "astrocraft:blocks/moon_ore_iron"
+  }
+}

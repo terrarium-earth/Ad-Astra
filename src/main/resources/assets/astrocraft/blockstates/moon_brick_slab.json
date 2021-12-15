@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "astrocraft:block/moon_brick_slab"
+    },
+    "type=top": {
+      "model": "astrocraft:block/moon_brick_slab_top"
+    },
+    "type=double": {
+      "model": "astrocraft:block/moon_brick_slab_full"
+    }
+  }
+}

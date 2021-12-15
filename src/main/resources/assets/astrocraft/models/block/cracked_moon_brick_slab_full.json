@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "bottom": "astrocraft:blocks/cracked_moon_bricks",
+    "top": "astrocraft:blocks/cracked_moon_bricks",
+    "side": "astrocraft:blocks/cracked_moon_bricks"
+  }
+}

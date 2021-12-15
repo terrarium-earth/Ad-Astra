@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north,half=lower": {
+      "model": "astrocraft:block/flag_down_red"
+    },
+    "facing=east,half=lower": {
+      "model": "astrocraft:block/flag_down_red",
+      "y": 90
+    },
+    "facing=south,half=lower": {
+      "model": "astrocraft:block/flag_down_red",
+      "y": 180
+    },
+    "facing=west,half=lower": {
+      "model": "astrocraft:block/flag_down_red",
+      "y": 270
+    },
+    "facing=north,half=upper": {
+      "model": "astrocraft:block/flag_up_red"
+    },
+    "facing=east,half=upper": {
+      "model": "astrocraft:block/flag_up_red",
+      "y": 90
+    },
+    "facing=south,half=upper": {
+      "model": "astrocraft:block/flag_up_red",
+      "y": 180
+    },
+    "facing=west,half=upper": {
+      "model": "astrocraft:block/flag_up_red",
+      "y": 270
+    }
+  }
+}

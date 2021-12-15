@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "astrocraft:blocks/rusted_iron_pillar_block_top",
+    "up": "astrocraft:blocks/rusted_iron_pillar_block_top",
+    "north": "astrocraft:blocks/rusted_iron_pillar_block",
+    "east": "astrocraft:blocks/rusted_iron_pillar_block",
+    "south": "astrocraft:blocks/rusted_iron_pillar_block",
+    "west": "astrocraft:blocks/rusted_iron_pillar_block",
+    "particle": "astrocraft:blocks/rusted_iron_pillar_block_top"
+  }
+}

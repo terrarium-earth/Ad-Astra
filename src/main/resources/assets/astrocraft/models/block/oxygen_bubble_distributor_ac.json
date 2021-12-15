@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "astrocraft:blocks/machineback",
+    "up": "astrocraft:blocks/vent_back",
+    "north": "astrocraft:blocks/oxygengeneratorfront_1_aktivated",
+    "east": "astrocraft:blocks/machineside",
+    "south": "astrocraft:blocks/machineside",
+    "west": "astrocraft:blocks/machineside",
+    "particle": "astrocraft:blocks/machineback"
+  }
+}

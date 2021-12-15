@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#astrocraft:compresseds/steel",
+    "#astrocraft:compresseds/desh",
+    "#astrocraft:compresseds/silicon"
+  ]
+}

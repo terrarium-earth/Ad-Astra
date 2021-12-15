@@ -1,17 +1,17 @@
 {
   "replace": false,
   "values": [
-    "boss_tools:moon_desh_ore",
-    "boss_tools:mars_diamond_ore",
-    "boss_tools:mars_iron_ore",
-    "boss_tools:moon_cheese_ore",
-    "boss_tools:mercury_iron_ore",
-    "boss_tools:mars_silicon_ore",
-    "boss_tools:mars_ice_shard_ore",
-    "boss_tools:moon_iron_ore",
-    "boss_tools:moon_glowstone_ore",
-    "boss_tools:venus_coal_ore",
-    "boss_tools:venus_diamond_ore",
-    "boss_tools:venus_gold_ore"
+    "astrocraft:moon_desh_ore",
+    "astrocraft:mars_diamond_ore",
+    "astrocraft:mars_iron_ore",
+    "astrocraft:moon_cheese_ore",
+    "astrocraft:mercury_iron_ore",
+    "astrocraft:mars_silicon_ore",
+    "astrocraft:mars_ice_shard_ore",
+    "astrocraft:moon_iron_ore",
+    "astrocraft:moon_glowstone_ore",
+    "astrocraft:venus_coal_ore",
+    "astrocraft:venus_diamond_ore",
+    "astrocraft:venus_gold_ore"
   ]
 }

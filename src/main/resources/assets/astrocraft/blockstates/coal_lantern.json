@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "astrocraft:block/coal_lantern"
+    },
+    "hanging=true": {
+      "model": "astrocraft:block/coal_lantern_hanging"
+    }
+  }
+}

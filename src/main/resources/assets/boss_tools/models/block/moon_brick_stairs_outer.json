@@ -1,8 +1,0 @@
-{
-  "parent": "block/outer_stairs",
-  "textures": {
-    "bottom": "boss_tools:blocks/moon_bricks",
-    "top": "boss_tools:blocks/moon_bricks",
-    "side": "boss_tools:blocks/moon_bricks"
-  }
-}

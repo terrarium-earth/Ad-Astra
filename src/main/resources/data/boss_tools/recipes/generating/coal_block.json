@@ -1,9 +1,0 @@
-{
-   "type":"boss_tools:generating",
-   "input":{
-      "ingredient":{
-         "tag":"forge:storage_blocks/coal"
-      }
-   },
-   "burnTime":4000
-}

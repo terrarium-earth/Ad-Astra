@@ -1,8 +1,0 @@
-{
-  "parent": "block/cube_bottom_top",
-  "textures": {
-    "bottom": "boss_tools:blocks/cracked_moon_bricks",
-    "top": "boss_tools:blocks/cracked_moon_bricks",
-    "side": "boss_tools:blocks/cracked_moon_bricks"
-  }
-}

@@ -1,0 +1,19 @@
+{
+  "group": "astrocraft",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "01"
+  ],
+  "key": {
+    "0": {
+      "tag": "forge:dyes/lime"
+    },
+    "1": {
+      "tag": "astrocraft:flags"
+    }
+  },
+  "result": {
+    "item": "astrocraft:flag_lime",
+    "count": 1
+  }
+}

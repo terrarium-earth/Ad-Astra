@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "astrocraft:block/iron_plating_block"
+    }
+  }
+}

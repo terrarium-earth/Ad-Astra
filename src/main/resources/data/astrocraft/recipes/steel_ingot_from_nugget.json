@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "astrocraft:steel_ingot",
+  "result": {
+    "item": "astrocraft:steel_ingot"
+  },
+  "pattern": [
+    "###",
+    "#*#",
+    "###"
+  ],
+  "key": {
+    "*": {
+      "item": "astrocraft:steel_nugget"
+    },
+    "#": {
+      "tag": "forge:nuggets/steel"
+    }
+  }
+}

@@ -1,9 +1,0 @@
-{
-  "parent": "boss_tools:custom/flage_down",
-  "textures": {
-    "all": "boss_tools:blocks/flag_red",
-    "particle": "boss_tools:blocks/flag_red",
-    "0": "boss_tools:blocks/flag_red",
-    "missing": "boss_tools:blocks/flag_red"
-  }
-}

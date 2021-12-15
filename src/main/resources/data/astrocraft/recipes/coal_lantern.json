@@ -1,0 +1,21 @@
+{
+  "group": "astrocraft",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "nnn",
+    "ntn",
+    "nnn"
+  ],
+  "key": {
+    "n": {
+      "tag": "forge:nuggets/iron"
+    },
+    "t": {
+      "item": "astrocraft:coal_torch"
+    }
+  },
+  "result": {
+    "item": "astrocraft:coal_lantern",
+    "count": 1
+  }
+}

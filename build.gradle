@@ -47,7 +47,7 @@ minecraft {
 
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            arg "-mixin.config=boss_tools.mixin.json"
+            arg "-mixin.config=astrocraft.mixin.json"
 
             mods {
                 examplemod {
@@ -61,7 +61,7 @@ minecraft {
 
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            arg "-mixin.config=boss_tools.mixin.json"
+            arg "-mixin.config=astrocraft.mixin.json"
 
             mods {
                 examplemod {
@@ -104,7 +104,7 @@ dependencies {
 }
 
 mixin {
-    add sourceSets.main, "boss_tools.mixin-refmap.json"
+    add sourceSets.main, "astrocraft.mixin-refmap.json"
 }
 
 jar.finalizedBy('reobfJar')
@@ -112,14 +112,14 @@ jar.finalizedBy('reobfJar')
 jar {
     manifest {
         attributes([
-                "Specification-Title": "boss_tools",
+                "Specification-Title": "astrocraft",
                 "Specification-Vendor": "MrScautHD",
                 "Specification-Version": "1", // We are version 1 of ourselves
                 "Implementation-Title": project.name,
                 "Implementation-Version": "${version}",
                 "Implementation-Vendor" :"MrScautHD",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "MixinConfigs" : "boss_tools.mixin.json"
+                "MixinConfigs" : "astrocraft.mixin.json"
         ])
     }
 }

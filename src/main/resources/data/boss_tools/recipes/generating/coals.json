@@ -1,9 +1,0 @@
-{
-   "type":"boss_tools:generating",
-   "input":{
-      "ingredient":{
-         "tag":"minecraft:coals"
-      }
-   },
-   "burnTime":400
-}

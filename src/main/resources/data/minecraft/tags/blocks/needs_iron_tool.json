@@ -1,22 +1,22 @@
 {
   "replace": false,
   "values": [
-    "boss_tools:fuel_refinery",
-    "boss_tools:blast_furnace",
-    "boss_tools:compressor",
-    "boss_tools:coal_generator",
-    "boss_tools:oxygen_loader",
-    "boss_tools:solar_panel",
-    "boss_tools:nasa_workbench",
-    "boss_tools:oxygen_bubble_distributor",
-    "boss_tools:water_pump",
+    "astrocraft:fuel_refinery",
+    "astrocraft:blast_furnace",
+    "astrocraft:compressor",
+    "astrocraft:coal_generator",
+    "astrocraft:oxygen_loader",
+    "astrocraft:solar_panel",
+    "astrocraft:nasa_workbench",
+    "astrocraft:oxygen_bubble_distributor",
+    "astrocraft:water_pump",
 
-    "boss_tools:rocket_launch_pad",
+    "astrocraft:rocket_launch_pad",
 
-    "boss_tools:moon_desh_ore",
-    "boss_tools:mars_diamond_ore",
-    "boss_tools:mars_silicon_ore",
-    "boss_tools:venus_diamond_ore",
-    "boss_tools:venus_gold_ore"
+    "astrocraft:moon_desh_ore",
+    "astrocraft:mars_diamond_ore",
+    "astrocraft:mars_silicon_ore",
+    "astrocraft:venus_diamond_ore",
+    "astrocraft:venus_gold_ore"
   ]
 }

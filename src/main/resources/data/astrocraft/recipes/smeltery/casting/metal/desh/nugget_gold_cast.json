@@ -1,0 +1,27 @@
+{
+  "type": "tconstruct:casting_table",
+  "conditions": [
+    {
+      "value": {
+        "tag": "forge:nuggets/desh",
+        "type": "forge:tag_empty"
+      },
+      "type": "forge:not"
+    },
+    {
+      "type":"forge:mod_loaded",
+      "modid":"tconstruct"
+    }
+  ],
+  "cast": {
+    "tag": "tconstruct:casts/multi_use/nugget"
+  },
+  "fluid": {
+    "tag": "astrocraft:molten_desh",
+    "amount": 16
+  },
+  "result": {
+    "tag": "forge:nuggets/desh"
+  },
+  "cooling_time": 17
+}

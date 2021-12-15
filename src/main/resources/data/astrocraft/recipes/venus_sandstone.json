@@ -1,0 +1,15 @@
+{
+   "type":"minecraft:crafting_shaped",
+   "result":{
+      "item":"astrocraft:venus_sandstone"
+   },
+   "pattern":[
+      "SS",
+      "SS"
+   ],
+   "key":{
+      "S":{
+         "item":"astrocraft:venus_sand"
+      }
+   }
+}

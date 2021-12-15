@@ -1,0 +1,16 @@
+{
+  "group": "astrocraft",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "0"
+  ],
+  "key": {
+    "0": {
+      "item": "astrocraft:steel_block"
+    }
+  },
+  "result": {
+    "item": "astrocraft:steel_ingot",
+    "count": 9
+  }
+}

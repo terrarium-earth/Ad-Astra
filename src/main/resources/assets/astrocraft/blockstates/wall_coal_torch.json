@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "astrocraft:block/wall_coal_torch"
+    },
+    "facing=north": {
+      "model": "astrocraft:block/wall_coal_torch",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "astrocraft:block/wall_coal_torch",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "astrocraft:block/wall_coal_torch",
+      "y": 180
+    }
+  }
+}

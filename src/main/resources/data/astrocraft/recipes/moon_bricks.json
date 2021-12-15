@@ -1,0 +1,26 @@
+{
+  "group": "astrocraft",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "01",
+    "23"
+  ],
+  "key": {
+    "0": {
+      "item": "astrocraft:moon_stone"
+    },
+    "1": {
+      "item": "astrocraft:moon_stone"
+    },
+    "2": {
+      "item": "astrocraft:moon_stone"
+    },
+    "3": {
+      "item": "astrocraft:moon_stone"
+    }
+  },
+  "result": {
+    "item": "astrocraft:moon_bricks",
+    "count": 4
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "parent": "astrocraft:custom/flage",
+  "textures": {
+    "all": "astrocraft:blocks/flag_gray",
+    "particle": "astrocraft:blocks/flag_gray",
+    "0": "astrocraft:blocks/flag_gray",
+    "missing": "astrocraft:blocks/flag_gray"
+  }
+}

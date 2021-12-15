@@ -1,0 +1,7 @@
+{
+  "parent": "astrocraft:custom/water_pump",
+  "textures": {
+    "0": "astrocraft:blocks/water_pump",
+    "particle": "astrocraft:blocks/water_pump"
+  }
+}

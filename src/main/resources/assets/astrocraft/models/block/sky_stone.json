@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "astrocraft:blocks/sky_stone",
+    "up": "astrocraft:blocks/sky_stone",
+    "north": "astrocraft:blocks/sky_stone",
+    "east": "astrocraft:blocks/sky_stone",
+    "south": "astrocraft:blocks/sky_stone",
+    "west": "astrocraft:blocks/sky_stone",
+    "particle": "astrocraft:blocks/sky_stone"
+  }
+}

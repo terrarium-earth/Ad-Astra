@@ -1,0 +1,11 @@
+{
+  "rocket_fly": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "astrocraft:rocket_fly",
+        "stream": false
+      }
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "astrocraft:moon_stone"
+  },
+  "result": "astrocraft:moon_bricks",
+  "count": 1
+}

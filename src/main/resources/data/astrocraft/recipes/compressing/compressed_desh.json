@@ -1,0 +1,13 @@
+{
+   "type":"astrocraft:compressing",
+   "input":{
+      "ingredient":{
+         "tag":"forge:ingots/desh"
+      }
+   },
+   "output":{
+      "item":"astrocraft:compressed_desh",
+      "count":1
+   },
+   "cookTime":200
+}

@@ -1,0 +1,26 @@
+{
+  "group": "astrocraft",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "01",
+    "23"
+  ],
+  "key": {
+    "0": {
+      "item": "astrocraft:ice_shard"
+    },
+    "1": {
+      "item": "astrocraft:ice_shard"
+    },
+    "2": {
+      "item": "astrocraft:ice_shard"
+    },
+    "3": {
+      "item": "astrocraft:ice_shard"
+    }
+  },
+  "result": {
+    "item": "minecraft:packed_ice",
+    "count": 1
+  }
+}

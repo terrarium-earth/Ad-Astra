@@ -1,0 +1,9 @@
+{
+  "parent": "astrocraft:custom/template_torch",
+  "textures": {
+    "all": "astrocraft:blocks/coal_torch",
+    "particle": "astrocraft:blocks/coal_torch",
+    "2": "astrocraft:blocks/coal_torch",
+    "missing": "astrocraft:blocks/coal_torch"
+  }
+}
