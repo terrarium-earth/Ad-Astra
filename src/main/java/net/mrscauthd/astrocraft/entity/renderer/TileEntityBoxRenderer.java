@@ -19,6 +19,7 @@ import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.mrscauthd.astrocraft.AstroCraftMod;
 import net.mrscauthd.astrocraft.machines.tile.OxygenBubbleDistributorBlockEntity;
 
 @OnlyIn(Dist.CLIENT)
@@ -108,7 +109,7 @@ public class TileEntityBoxRenderer implements BlockEntityRenderer<OxygenBubbleDi
         }
 
         if (atlass == null) {
-            atlass = minecraft.getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(new ResourceLocation("boss_tools", "entities/tile_entity_box_oxygen_generator"));
+            atlass = minecraft.getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(new ResourceLocation(AstroCraftMod.MODID, "entities/tile_entity_box_oxygen_generator"));
         }
 
         float maxU = atlass.getU1();

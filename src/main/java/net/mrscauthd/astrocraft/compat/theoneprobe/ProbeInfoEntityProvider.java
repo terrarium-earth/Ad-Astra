@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.mrscauthd.astrocraft.AstroCraftMod;
 import net.mrscauthd.astrocraft.gauge.IGaugeValuesProvider;
 
 public class ProbeInfoEntityProvider implements IProbeInfoEntityProvider {
@@ -29,7 +30,7 @@ public class ProbeInfoEntityProvider implements IProbeInfoEntityProvider {
 
 	@Override
 	public String getID() {
-		return new ResourceLocation("boss_tools", "top_entity").toString();
+		return new ResourceLocation(AstroCraftMod.MODID, "top_entity").toString();
 	}
 
 }

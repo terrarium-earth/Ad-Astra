@@ -250,7 +250,7 @@ public class Methodes {
 
     /**IF a entity should get oxygen damage add it in the tag "oxygen" (don't add the Player, he have a own oxygen system)*/
     public static void EntityOxygen(LivingEntity entity, Level world) {
-        if (Config.EntityOxygenSystem && Methodes.isSpaceWorld(world) && tagCheck(entity,"boss_tools:entities/oxygen")) {
+        if (Config.EntityOxygenSystem && Methodes.isSpaceWorld(world) && tagCheck(entity,AstroCraftMod.MODID + ":entities/oxygen")) {
 
             if (!entity.hasEffect(ModInnet.OXYGEN_EFFECT.get())) {
 

@@ -11,6 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.mrscauthd.astrocraft.AstroCraftMod;
 import net.mrscauthd.astrocraft.compat.CompatibleManager;
 import net.mrscauthd.astrocraft.gauge.IGaugeValuesProvider;
 import net.mrscauthd.astrocraft.machines.tile.AbstractMachineBlockEntity;
@@ -48,7 +49,7 @@ public class ProbeInfoBlockProvider implements IProbeInfoProvider {
 
 	@Override
 	public ResourceLocation getID() {
-		return new ResourceLocation("boss_tools", "top_block");
+		return new ResourceLocation(AstroCraftMod.MODID, "top_block");
 	}
 
 }
