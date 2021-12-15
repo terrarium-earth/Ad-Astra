@@ -152,18 +152,24 @@ public class KeyBindings {
 			if (Methodes.isRocket(player.getVehicle())) {
 				if (player.getVehicle() instanceof RocketTier1Entity && player.getVehicle().getEntityData().get(RocketTier1Entity.FUEL) == 300) {
 
-					player.getVehicle().getEntityData().set(RocketTier1Entity.ROCKET_START, true);
-					Methodes.RocketSounds(player.getVehicle(), world);
+					if (!player.getVehicle().getEntityData().get(RocketTier1Entity.ROCKET_START)) {
+						player.getVehicle().getEntityData().set(RocketTier1Entity.ROCKET_START, true);
+						Methodes.RocketSounds(player.getVehicle(), world);
+					}
 
 				} else if (player.getVehicle() instanceof RocketTier2Entity && player.getVehicle().getEntityData().get(RocketTier2Entity.FUEL) == 300) {
 
-					player.getVehicle().getEntityData().set(RocketTier2Entity.ROCKET_START, true);
-					Methodes.RocketSounds(player.getVehicle(), world);
+					if (!player.getVehicle().getEntityData().get(RocketTier2Entity.ROCKET_START)) {
+						player.getVehicle().getEntityData().set(RocketTier2Entity.ROCKET_START, true);
+						Methodes.RocketSounds(player.getVehicle(), world);
+					}
 
 				} else if (player.getVehicle() instanceof RocketTier3Entity && player.getVehicle().getEntityData().get(RocketTier3Entity.FUEL) == 300) {
 
-					player.getVehicle().getEntityData().set(RocketTier3Entity.ROCKET_START, true);
-					Methodes.RocketSounds(player.getVehicle(), world);
+					if (!player.getVehicle().getEntityData().get(RocketTier3Entity.ROCKET_START)) {
+						player.getVehicle().getEntityData().set(RocketTier3Entity.ROCKET_START, true);
+						Methodes.RocketSounds(player.getVehicle(), world);
+					}
 
 				} else {
 					Methodes.noFuelMessage(player);
