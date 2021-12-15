@@ -108,7 +108,7 @@ public class Events {
         Item item = player.getOffhandItem().getItem();
         Item item2 = player.getMainHandItem().getItem();
 
-        /**Cancel Event if it Hold a Rocket in off hand*/
+        /**Cancel Event if it Hold a Vehicle in off hand*/
         if (item == ModInnet.TIER_1_ROCKET_ITEM.get() || item == ModInnet.TIER_2_ROCKET_ITEM.get() || item == ModInnet.TIER_3_ROCKET_ITEM.get() || item == ModInnet.ROVER_ITEM.get()
             || item2 == ModInnet.TIER_1_ROCKET_ITEM.get() || item2 == ModInnet.TIER_2_ROCKET_ITEM.get() || item2 == ModInnet.TIER_3_ROCKET_ITEM.get() || item2 == ModInnet.ROVER_ITEM.get()) {
             event.setCanceled(true);
@@ -117,9 +117,11 @@ public class Events {
 
         if (event.getArm() == HumanoidArm.RIGHT) {
             if (Methodes.checkArmor(event.getPlayer(), 2, ModInnet.SPACE_SUIT.get())) {
+
                 Methodes.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), new ResourceLocation(BossToolsMod.ModId, "textures/models/armor/arm/space_suit.png"), event.getPlayer(), playerModel, playerModel.rightArm);
                 event.setCanceled(true);
             } else if (Methodes.checkArmor(event.getPlayer(), 2, ModInnet.NETHERITE_SPACE_SUIT.get())) {
+
                 Methodes.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), new ResourceLocation(BossToolsMod.ModId, "textures/models/armor/arm/netherite_space_suit.png"), event.getPlayer(), playerModel, playerModel.rightArm);
                 event.setCanceled(true);
             }
@@ -127,9 +129,11 @@ public class Events {
 
         if (event.getArm() == HumanoidArm.LEFT) {
             if (Methodes.checkArmor(event.getPlayer(), 2, ModInnet.SPACE_SUIT.get())) {
+
                 Methodes.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), new ResourceLocation(BossToolsMod.ModId, "textures/models/armor/arm/space_suit.png"), event.getPlayer(), playerModel, playerModel.leftArm);
                 event.setCanceled(true);
             } else if (Methodes.checkArmor(event.getPlayer(), 2, ModInnet.NETHERITE_SPACE_SUIT.get())) {
+
                 Methodes.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), new ResourceLocation(BossToolsMod.ModId, "textures/models/armor/arm/netherite_space_suit.png"), event.getPlayer(), playerModel, playerModel.leftArm);
                 event.setCanceled(true);
             }
