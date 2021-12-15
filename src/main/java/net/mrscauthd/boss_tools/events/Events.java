@@ -33,7 +33,6 @@ import net.mrscauthd.boss_tools.BossToolsMod;
 import net.mrscauthd.boss_tools.ModInnet;
 import net.mrscauthd.boss_tools.entity.*;
 import net.mrscauthd.boss_tools.events.forgeevents.RenderHandItemEvent;
-import net.mrscauthd.boss_tools.events.forgeevents.SetupFirstPersonAnimEvent;
 import net.mrscauthd.boss_tools.events.forgeevents.SetupLivingBipedAnimEvent;
 
 @Mod.EventBusSubscriber(modid = BossToolsMod.ModId)
@@ -104,6 +103,17 @@ public class Events {
     @SubscribeEvent
     public static void renderPlayerArm(RenderArmEvent event) {
         PlayerModel<AbstractClientPlayer> playerModel = ((PlayerRenderer) Minecraft.getInstance().getEntityRenderDispatcher().getRenderer(event.getPlayer())).getModel();
+        Player player = event.getPlayer();
+
+        Item item = player.getOffhandItem().getItem();
+        Item item2 = player.getMainHandItem().getItem();
+
+        /**Cancel Event if it Hold a Rocket in off hand*/
+        if (item == ModInnet.TIER_1_ROCKET_ITEM.get() || item == ModInnet.TIER_2_ROCKET_ITEM.get() || item == ModInnet.TIER_3_ROCKET_ITEM.get() || item == ModInnet.ROVER_ITEM.get()
+            || item2 == ModInnet.TIER_1_ROCKET_ITEM.get() || item2 == ModInnet.TIER_2_ROCKET_ITEM.get() || item2 == ModInnet.TIER_3_ROCKET_ITEM.get() || item2 == ModInnet.ROVER_ITEM.get()) {
+            event.setCanceled(true);
+            return;
+        }
 
         if (event.getArm() == HumanoidArm.RIGHT) {
             if (Methodes.checkArmor(event.getPlayer(), 2, ModInnet.SPACE_SUIT.get())) {
@@ -123,27 +133,6 @@ public class Events {
                 Methodes.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), new ResourceLocation(BossToolsMod.ModId, "textures/models/armor/arm/netherite_space_suit.png"), event.getPlayer(), playerModel, playerModel.leftArm);
                 event.setCanceled(true);
             }
-        }
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    @SubscribeEvent
-    public static void setupFirstPersonArm(SetupFirstPersonAnimEvent event) {
-        PlayerModel<AbstractClientPlayer> playerModel = ((PlayerRenderer) Minecraft.getInstance().getEntityRenderDispatcher().getRenderer(Minecraft.getInstance().player)).getModel();
-
-        if (event.getModel() == playerModel.rightArm) {
-            event.getModel().y = event.getModel().y + 4.4f;
-            event.getModel().z = event.getModel().z - 5.2f;
-            event.getModel().x = event.getModel().x - 5.2f;
-            //event.getPoseStack().scale(1, 1, 1);
-
-            event.getModel().zRot = event.getModel().zRot + 0.6f;
-            event.getModel().xRot = event.getModel().xRot - 0.5f;
-        }
-        if (event.getModel() == playerModel.leftArm) {
-            event.getModel().y = event.getModel().y - 4.4f;
-            event.getModel().z = event.getModel().z + 5.2f;
-            event.getModel().x = event.getModel().x + 5.2f;
         }
     }
 
