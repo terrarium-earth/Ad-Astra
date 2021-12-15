@@ -23,7 +23,7 @@ import net.mrscauthd.boss_tools.capability.IOxygenStorage;
 import net.mrscauthd.boss_tools.capability.OxygenUtil;
 import net.mrscauthd.boss_tools.capability.SpaceSuitCapabilityProvider;
 import net.mrscauthd.boss_tools.gauge.GaugeTextHelper;
-import net.mrscauthd.boss_tools.itemgroup.BossToolsItemGroups;
+import net.mrscauthd.boss_tools.itemgroup.ItemGroups;
 
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -37,7 +37,7 @@ import java.util.function.Consumer;
 
 public class SpaceSuit {
 
-	public static ArmorItem OXYGEN_MASK = new ArmorItem(SpaceSuitMaterial.ArmorMaterial, EquipmentSlot.HEAD, new Item.Properties().tab(BossToolsItemGroups.tab_normal)) {
+	public static ArmorItem OXYGEN_MASK = new ArmorItem(SpaceSuitMaterial.ArmorMaterial, EquipmentSlot.HEAD, new Item.Properties().tab(ItemGroups.tab_normal)) {
 		@Override
 		public void initializeClient(Consumer<IItemRenderProperties> consumer) {
 			consumer.accept(new IItemRenderProperties() {
@@ -77,7 +77,7 @@ public class SpaceSuit {
 		}
 	};
 
-	public static ArmorItem SPACE_SUIT =  new ArmorItem(SpaceSuitMaterial.ArmorMaterial, EquipmentSlot.CHEST, new Item.Properties().tab(BossToolsItemGroups.tab_normal)) {
+	public static ArmorItem SPACE_SUIT =  new ArmorItem(SpaceSuitMaterial.ArmorMaterial, EquipmentSlot.CHEST, new Item.Properties().tab(ItemGroups.tab_normal)) {
 		@Override
 		public void initializeClient(Consumer<IItemRenderProperties> consumer) {
 			consumer.accept(new IItemRenderProperties() {
@@ -133,7 +133,7 @@ public class SpaceSuit {
 		}
 	};
 
-	public static ArmorItem SPACE_PANTS = new ArmorItem(SpaceSuitMaterial.ArmorMaterial, EquipmentSlot.LEGS, new Item.Properties().tab(BossToolsItemGroups.tab_normal)) {
+	public static ArmorItem SPACE_PANTS = new ArmorItem(SpaceSuitMaterial.ArmorMaterial, EquipmentSlot.LEGS, new Item.Properties().tab(ItemGroups.tab_normal)) {
 		@Override
 		public void initializeClient(Consumer<IItemRenderProperties> consumer) {
 			consumer.accept(new IItemRenderProperties() {
@@ -173,7 +173,7 @@ public class SpaceSuit {
 		}
 	};
 
-	public static ArmorItem SPACE_BOOTS = new ArmorItem(SpaceSuitMaterial.ArmorMaterial, EquipmentSlot.FEET, new Item.Properties().tab(BossToolsItemGroups.tab_normal)) {
+	public static ArmorItem SPACE_BOOTS = new ArmorItem(SpaceSuitMaterial.ArmorMaterial, EquipmentSlot.FEET, new Item.Properties().tab(ItemGroups.tab_normal)) {
 		@Override
 		public void initializeClient(Consumer<IItemRenderProperties> consumer) {
 			consumer.accept(new IItemRenderProperties() {

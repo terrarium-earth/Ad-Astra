@@ -104,7 +104,7 @@ import net.mrscauthd.boss_tools.entity.alien.AlienEntity;
 
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.mrscauthd.boss_tools.itemgroup.BossToolsItemGroups;
+import net.mrscauthd.boss_tools.itemgroup.ItemGroups;
 import net.mrscauthd.boss_tools.entity.pygro.PygroMobsSensor;
 import net.mrscauthd.boss_tools.world.biomes.BiomeRegistry;
 import net.mrscauthd.boss_tools.world.chunk.PlanetChunkGenerator;
@@ -139,10 +139,10 @@ public class ModInnet {
     public static DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, BossToolsMod.ModId);
 
     //Vehicle Items
-    public static final RegistryObject<Item> TIER_1_ROCKET_ITEM = ITEMS.register("rocket_t1", () -> new Tier1RocketItem(new Item.Properties().tab(BossToolsItemGroups.tab_normal).stacksTo(1)));
-    public static final RegistryObject<Item> TIER_2_ROCKET_ITEM = ITEMS.register("rocket_t2", () -> new Tier2RocketItem(new Item.Properties().tab(BossToolsItemGroups.tab_normal).stacksTo(1)));
-    public static final RegistryObject<Item> TIER_3_ROCKET_ITEM = ITEMS.register("rocket_t3", () -> new Tier3RocketItem(new Item.Properties().tab(BossToolsItemGroups.tab_normal).stacksTo(1)));
-    public static final RegistryObject<Item> ROVER_ITEM = ITEMS.register("rover", () -> new RoverItem(new Item.Properties().tab(BossToolsItemGroups.tab_normal).stacksTo(1)));
+    public static final RegistryObject<Item> TIER_1_ROCKET_ITEM = ITEMS.register("rocket_t1", () -> new Tier1RocketItem(new Item.Properties().tab(ItemGroups.tab_normal).stacksTo(1)));
+    public static final RegistryObject<Item> TIER_2_ROCKET_ITEM = ITEMS.register("rocket_t2", () -> new Tier2RocketItem(new Item.Properties().tab(ItemGroups.tab_normal).stacksTo(1)));
+    public static final RegistryObject<Item> TIER_3_ROCKET_ITEM = ITEMS.register("rocket_t3", () -> new Tier3RocketItem(new Item.Properties().tab(ItemGroups.tab_normal).stacksTo(1)));
+    public static final RegistryObject<Item> ROVER_ITEM = ITEMS.register("rover", () -> new RoverItem(new Item.Properties().tab(ItemGroups.tab_normal).stacksTo(1)));
 
     //Entitys
     public static RegistryObject<EntityType<AlienEntity>> ALIEN = ENTITYS.register("alien", () -> EntityType.Builder.of(AlienEntity::new, MobCategory.CREATURE).sized(0.75f, 2.5f).build(new ResourceLocation("boss_tools", "alien").toString()));
@@ -222,37 +222,37 @@ public class ModInnet {
 
 
     //Block Item
-    public static final RegistryObject<BlockItem> NASA_WORKBENCH_ITEM = ITEMS.register("nasa_workbench", () -> new BlockItem(ModInnet.NASA_WORKBENCH_BLOCK.get(), new Item.Properties().tab(BossToolsItemGroups.tab_machines)));
-    public static final RegistryObject<BlockItem> SOLAR_PANEL_ITEM = ITEMS.register("solar_panel", () -> new BlockItem(ModInnet.SOLAR_PANEL_BLOCK.get(), new Item.Properties().tab(BossToolsItemGroups.tab_machines)));
-    public static final RegistryObject<BlockItem> COAL_GENERATOR_ITEM = ITEMS.register("coal_generator", () -> new BlockItem(ModInnet.COAL_GENERATOR_BLOCK.get(), new Item.Properties().tab(BossToolsItemGroups.tab_machines)));
-    public static final RegistryObject<BlockItem> BLAST_FURNACE_ITEM = ITEMS.register("blast_furnace", () -> new BlockItem(ModInnet.BLAST_FURNACE_BLOCK.get(), new Item.Properties().tab(BossToolsItemGroups.tab_machines)));
-    public static final RegistryObject<BlockItem> COMPRESSOR_ITEM = ITEMS.register("compressor", () -> new BlockItem(ModInnet.COMPRESSOR_BLOCK.get(), new Item.Properties().tab(BossToolsItemGroups.tab_machines)));
-    public static final RegistryObject<BlockItem> FUEL_REFINERY_ITEM = ITEMS.register("fuel_refinery", () -> new BlockItem(ModInnet.FUEL_REFINERY_BLOCK.get(), new Item.Properties().tab(BossToolsItemGroups.tab_machines)));
-    public static final RegistryObject<BlockItem> OXYGEN_LOADER_ITEM = ITEMS.register("oxygen_loader", () -> new BlockItem(ModInnet.OXYGEN_LOADER_BLOCK.get(), new Item.Properties().tab(BossToolsItemGroups.tab_machines)));
-    public static final RegistryObject<BlockItem> OXYGEN_BUBBLE_DISTRIBUTOR_ITEM = ITEMS.register("oxygen_bubble_distributor", () -> new BlockItem(ModInnet.OXYGEN_BUBBLE_DISTRIBUTOR_BLOCK.get(), new Item.Properties().tab(BossToolsItemGroups.tab_machines)));
-    public static final RegistryObject<BlockItem> WATER_PUMP_ITEM = ITEMS.register("water_pump", () -> new BlockItem(ModInnet.WATER_PUMP_BLOCK.get(), new Item.Properties().tab(BossToolsItemGroups.tab_machines)));
+    public static final RegistryObject<BlockItem> NASA_WORKBENCH_ITEM = ITEMS.register("nasa_workbench", () -> new BlockItem(ModInnet.NASA_WORKBENCH_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_machines)));
+    public static final RegistryObject<BlockItem> SOLAR_PANEL_ITEM = ITEMS.register("solar_panel", () -> new BlockItem(ModInnet.SOLAR_PANEL_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_machines)));
+    public static final RegistryObject<BlockItem> COAL_GENERATOR_ITEM = ITEMS.register("coal_generator", () -> new BlockItem(ModInnet.COAL_GENERATOR_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_machines)));
+    public static final RegistryObject<BlockItem> BLAST_FURNACE_ITEM = ITEMS.register("blast_furnace", () -> new BlockItem(ModInnet.BLAST_FURNACE_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_machines)));
+    public static final RegistryObject<BlockItem> COMPRESSOR_ITEM = ITEMS.register("compressor", () -> new BlockItem(ModInnet.COMPRESSOR_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_machines)));
+    public static final RegistryObject<BlockItem> FUEL_REFINERY_ITEM = ITEMS.register("fuel_refinery", () -> new BlockItem(ModInnet.FUEL_REFINERY_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_machines)));
+    public static final RegistryObject<BlockItem> OXYGEN_LOADER_ITEM = ITEMS.register("oxygen_loader", () -> new BlockItem(ModInnet.OXYGEN_LOADER_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_machines)));
+    public static final RegistryObject<BlockItem> OXYGEN_BUBBLE_DISTRIBUTOR_ITEM = ITEMS.register("oxygen_bubble_distributor", () -> new BlockItem(ModInnet.OXYGEN_BUBBLE_DISTRIBUTOR_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_machines)));
+    public static final RegistryObject<BlockItem> WATER_PUMP_ITEM = ITEMS.register("water_pump", () -> new BlockItem(ModInnet.WATER_PUMP_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_machines)));
 
     //Tools
     public static final RegistryObject<Item> STEEL_SWORD = ITEMS.register("steel_sword",
-            () -> new SwordItem(SteelItemTier.ITEM_TIER,3,-2.4f,new Item.Properties().tab(BossToolsItemGroups.tab_basics).fireResistant()));
+            () -> new SwordItem(SteelItemTier.ITEM_TIER,3,-2.4f,new Item.Properties().tab(ItemGroups.tab_basics).fireResistant()));
 
     public static final RegistryObject<Item> STEEL_SHOVEL = ITEMS.register("steel_shovel",
-            () -> new ShovelItem(SteelItemTier.ITEM_TIER,1.5f,-3f,new Item.Properties().tab(BossToolsItemGroups.tab_basics).fireResistant()));
+            () -> new ShovelItem(SteelItemTier.ITEM_TIER,1.5f,-3f,new Item.Properties().tab(ItemGroups.tab_basics).fireResistant()));
 
     public static final RegistryObject<Item> STEEL_PICKAXE = ITEMS.register("steel_pickaxe",
-            () -> new PickaxeItem(SteelItemTier.ITEM_TIER,1,-2.8f,new Item.Properties().tab(BossToolsItemGroups.tab_basics).fireResistant()));
+            () -> new PickaxeItem(SteelItemTier.ITEM_TIER,1,-2.8f,new Item.Properties().tab(ItemGroups.tab_basics).fireResistant()));
 
     public static final RegistryObject<Item> STEEL_AXE = ITEMS.register("steel_axe",
-            () -> new AxeItem(SteelItemTier.ITEM_TIER,6,-3f,new Item.Properties().tab(BossToolsItemGroups.tab_basics).fireResistant()));
+            () -> new AxeItem(SteelItemTier.ITEM_TIER,6,-3f,new Item.Properties().tab(ItemGroups.tab_basics).fireResistant()));
 
     public static final RegistryObject<Item> STEEL_HOE = ITEMS.register("steel_hoe",
-            () -> new HoeItem(SteelItemTier.ITEM_TIER,-2,0f,new Item.Properties().tab(BossToolsItemGroups.tab_basics).fireResistant()));
+            () -> new HoeItem(SteelItemTier.ITEM_TIER,-2,0f,new Item.Properties().tab(ItemGroups.tab_basics).fireResistant()));
 
     //Fuel Fluid
     public static final RegistryObject<FlowingFluid> FLOWING_FUEL = FLUIDS.register("flowing_fuel", ()-> new FuelFluid.Flowing());
     public static final RegistryObject<FlowingFluid> FUEL_STILL = FLUIDS.register("fuel", ()-> new FuelFluid.Source());
     public static RegistryObject<LiquidBlock> FUEL_BLOCK = BLOCKS.register("fuel",() -> new LiquidBlock(ModInnet.FUEL_STILL, Block.Properties.of(Material.WATER).noCollission().strength(100f).noDrops()));
-    public static final RegistryObject<Item> FUEL_BUCKET = ITEMS.register("fuel_bucket", () -> new BucketItem(ModInnet.FUEL_STILL, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1).tab(BossToolsItemGroups.tab_normal)));
+    public static final RegistryObject<Item> FUEL_BUCKET = ITEMS.register("fuel_bucket", () -> new BucketItem(ModInnet.FUEL_STILL, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1).tab(ItemGroups.tab_normal)));
 
     public static final ResourceLocation FLUID_VEHICLE_FUEL_TAG = new ResourceLocation("boss_tools", "vehicle_fuel");
 
@@ -260,59 +260,59 @@ public class ModInnet {
     public static final RegistryObject<FlowingFluid> FLOWING_OIL = FLUIDS.register("flowing_oil", ()-> new OilFluid.Flowing());
     public static final RegistryObject<FlowingFluid> OIL_STILL = FLUIDS.register("oil", ()-> new OilFluid.Source());
     public static RegistryObject<LiquidBlock> OIL_BLOCK = BLOCKS.register("oil",() -> new LiquidBlock(ModInnet.OIL_STILL, Block.Properties.of(Material.WATER).noCollission().strength(100f).noDrops()));
-    public static final RegistryObject<Item> OIL_BUCKET = ITEMS.register("oil_bucket", () -> new BucketItem(ModInnet.OIL_STILL, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1).tab(BossToolsItemGroups.tab_normal)));
+    public static final RegistryObject<Item> OIL_BUCKET = ITEMS.register("oil_bucket", () -> new BucketItem(ModInnet.OIL_STILL, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1).tab(ItemGroups.tab_normal)));
 
     public static final ResourceLocation OIL_FLUID_TAG = new ResourceLocation("boss_tools", "oil");
 
     //Item
-    public static final RegistryObject<Item> COAL_TORCH_ITEM = ITEMS.register("coal_torch", () -> new CoalTorchItem(COAL_TORCH_BLOCK.get(), WALL_COAL_TORCH_BLOCK.get(),new Item.Properties().tab(BossToolsItemGroups.tab_basics)));
+    public static final RegistryObject<Item> COAL_TORCH_ITEM = ITEMS.register("coal_torch", () -> new CoalTorchItem(COAL_TORCH_BLOCK.get(), WALL_COAL_TORCH_BLOCK.get(),new Item.Properties().tab(ItemGroups.tab_basics)));
     //Lanterns
-    public static final RegistryObject<BlockItem> COAL_LANTERN_ITEM = ITEMS.register("coal_lantern", () -> new BlockItem(ModInnet.COAL_LANTERN_BLOCK.get(), new Item.Properties().tab(BossToolsItemGroups.tab_basics)));
+    public static final RegistryObject<BlockItem> COAL_LANTERN_ITEM = ITEMS.register("coal_lantern", () -> new BlockItem(ModInnet.COAL_LANTERN_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_basics)));
 
     //Spawn Eggs
-    public static final RegistryObject<ForgeSpawnEggItem> ALIEN_SPAWN_EGG = ITEMS.register("alien_spawn_egg", () -> new ForgeSpawnEggItem(ALIEN::get, -13382401, -11650781, new Item.Properties().tab(BossToolsItemGroups.tab_spawn_eggs)));
-    public static final RegistryObject<ForgeSpawnEggItem> ALIEN_ZOMBIE_SPAWN_EGG = ITEMS.register("alien_zombie_spawn_egg",() -> new ForgeSpawnEggItem(ALIEN_ZOMBIE::get, -14804199, -16740159, new Item.Properties().tab(BossToolsItemGroups.tab_spawn_eggs)));
-    public static final RegistryObject<ForgeSpawnEggItem> STAR_CRAWLER_SPAWN_EGG = ITEMS.register("star_crawler_spawn_egg",() -> new ForgeSpawnEggItem(STAR_CRAWLER::get, -13421773, -16724788, new Item.Properties().tab(BossToolsItemGroups.tab_spawn_eggs)));
-    public static final RegistryObject<ForgeSpawnEggItem> PYGRO_SPAWN_EGG = ITEMS.register("pygro_spawn_egg",() -> new ForgeSpawnEggItem(PYGRO::get, -3381760, -6750208, new Item.Properties().tab(BossToolsItemGroups.tab_spawn_eggs)));
-    public static final RegistryObject<ForgeSpawnEggItem> MOGLER_SPAWN_EGG = ITEMS.register("mogler_spawn_egg",() -> new ForgeSpawnEggItem(MOGLER::get, -13312, -3407872, new Item.Properties().tab(BossToolsItemGroups.tab_spawn_eggs)));
+    public static final RegistryObject<ForgeSpawnEggItem> ALIEN_SPAWN_EGG = ITEMS.register("alien_spawn_egg", () -> new ForgeSpawnEggItem(ALIEN::get, -13382401, -11650781, new Item.Properties().tab(ItemGroups.tab_spawn_eggs)));
+    public static final RegistryObject<ForgeSpawnEggItem> ALIEN_ZOMBIE_SPAWN_EGG = ITEMS.register("alien_zombie_spawn_egg",() -> new ForgeSpawnEggItem(ALIEN_ZOMBIE::get, -14804199, -16740159, new Item.Properties().tab(ItemGroups.tab_spawn_eggs)));
+    public static final RegistryObject<ForgeSpawnEggItem> STAR_CRAWLER_SPAWN_EGG = ITEMS.register("star_crawler_spawn_egg",() -> new ForgeSpawnEggItem(STAR_CRAWLER::get, -13421773, -16724788, new Item.Properties().tab(ItemGroups.tab_spawn_eggs)));
+    public static final RegistryObject<ForgeSpawnEggItem> PYGRO_SPAWN_EGG = ITEMS.register("pygro_spawn_egg",() -> new ForgeSpawnEggItem(PYGRO::get, -3381760, -6750208, new Item.Properties().tab(ItemGroups.tab_spawn_eggs)));
+    public static final RegistryObject<ForgeSpawnEggItem> MOGLER_SPAWN_EGG = ITEMS.register("mogler_spawn_egg",() -> new ForgeSpawnEggItem(MOGLER::get, -13312, -3407872, new Item.Properties().tab(ItemGroups.tab_spawn_eggs)));
 
     //Generel Items
-    public static final RegistryObject<Item> CHEESE = ITEMS.register("cheese", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_normal).food((new FoodProperties.Builder()).nutrition(4).saturationMod(3f).build())));
-    public static final RegistryObject<Item> HAMMER = ITEMS.register("hammer", () -> new HammerItem(new Item.Properties().tab(BossToolsItemGroups.tab_basics).durability(9).setNoRepair()));
-    public static final RegistryObject<Item> IRON_STICK = ITEMS.register("iron_stick", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_basics)));
-    public static final RegistryObject<Item> OXYGEN_GEAR = ITEMS.register("oxygen_gear", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_basics)));
-    public static final RegistryObject<Item> OXYGEN_TANK = ITEMS.register("oxygen_tank", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_basics)));
-    public static final RegistryObject<Item> WHEEL = ITEMS.register("wheel", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_basics)));
-    public static final RegistryObject<Item> ENGINE_FRAME = ITEMS.register("engine_frame", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_basics)));
-    public static final RegistryObject<Item> ENGINE_FAN = ITEMS.register("engine_fan", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_basics)));
-    public static final RegistryObject<Item> ROCKET_NOSE_CONE = ITEMS.register("rocket_nose_cone", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_basics)));
-    public static final RegistryObject<Item> IRON_ENGINE = ITEMS.register("iron_engine", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_basics)));
-    public static final RegistryObject<Item> GOLD_ENGINE = ITEMS.register("gold_engine", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_basics)));
-    public static final RegistryObject<Item> DIAMOND_ENGINE = ITEMS.register("diamond_engine", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_basics)));
-    public static final RegistryObject<Item> IRON_TANK = ITEMS.register("iron_tank", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_basics)));
-    public static final RegistryObject<Item> GOLD_TANK = ITEMS.register("gold_tank", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_basics)));
-    public static final RegistryObject<Item> DIAMOND_TANK = ITEMS.register("diamond_tank", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_basics)));
-    public static final RegistryObject<Item> ROCKET_FIN = ITEMS.register("rocket_fin", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_basics)));
+    public static final RegistryObject<Item> CHEESE = ITEMS.register("cheese", () -> new Item(new Item.Properties().tab(ItemGroups.tab_normal).food((new FoodProperties.Builder()).nutrition(4).saturationMod(3f).build())));
+    public static final RegistryObject<Item> HAMMER = ITEMS.register("hammer", () -> new HammerItem(new Item.Properties().tab(ItemGroups.tab_basics).durability(9).setNoRepair()));
+    public static final RegistryObject<Item> IRON_STICK = ITEMS.register("iron_stick", () -> new Item(new Item.Properties().tab(ItemGroups.tab_basics)));
+    public static final RegistryObject<Item> OXYGEN_GEAR = ITEMS.register("oxygen_gear", () -> new Item(new Item.Properties().tab(ItemGroups.tab_basics)));
+    public static final RegistryObject<Item> OXYGEN_TANK = ITEMS.register("oxygen_tank", () -> new Item(new Item.Properties().tab(ItemGroups.tab_basics)));
+    public static final RegistryObject<Item> WHEEL = ITEMS.register("wheel", () -> new Item(new Item.Properties().tab(ItemGroups.tab_basics)));
+    public static final RegistryObject<Item> ENGINE_FRAME = ITEMS.register("engine_frame", () -> new Item(new Item.Properties().tab(ItemGroups.tab_basics)));
+    public static final RegistryObject<Item> ENGINE_FAN = ITEMS.register("engine_fan", () -> new Item(new Item.Properties().tab(ItemGroups.tab_basics)));
+    public static final RegistryObject<Item> ROCKET_NOSE_CONE = ITEMS.register("rocket_nose_cone", () -> new Item(new Item.Properties().tab(ItemGroups.tab_basics)));
+    public static final RegistryObject<Item> IRON_ENGINE = ITEMS.register("iron_engine", () -> new Item(new Item.Properties().tab(ItemGroups.tab_basics)));
+    public static final RegistryObject<Item> GOLD_ENGINE = ITEMS.register("gold_engine", () -> new Item(new Item.Properties().tab(ItemGroups.tab_basics)));
+    public static final RegistryObject<Item> DIAMOND_ENGINE = ITEMS.register("diamond_engine", () -> new Item(new Item.Properties().tab(ItemGroups.tab_basics)));
+    public static final RegistryObject<Item> IRON_TANK = ITEMS.register("iron_tank", () -> new Item(new Item.Properties().tab(ItemGroups.tab_basics)));
+    public static final RegistryObject<Item> GOLD_TANK = ITEMS.register("gold_tank", () -> new Item(new Item.Properties().tab(ItemGroups.tab_basics)));
+    public static final RegistryObject<Item> DIAMOND_TANK = ITEMS.register("diamond_tank", () -> new Item(new Item.Properties().tab(ItemGroups.tab_basics)));
+    public static final RegistryObject<Item> ROCKET_FIN = ITEMS.register("rocket_fin", () -> new Item(new Item.Properties().tab(ItemGroups.tab_basics)));
 
-    public static final RegistryObject<Item> STEEL_INGOT = ITEMS.register("steel_ingot", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_materials)));
-    public static final RegistryObject<Item> DESH_INGOT = ITEMS.register("desh_ingot", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_materials)));
-    public static final RegistryObject<Item> SILICON_INGOT = ITEMS.register("silicon_ingot", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_materials)));
+    public static final RegistryObject<Item> STEEL_INGOT = ITEMS.register("steel_ingot", () -> new Item(new Item.Properties().tab(ItemGroups.tab_materials)));
+    public static final RegistryObject<Item> DESH_INGOT = ITEMS.register("desh_ingot", () -> new Item(new Item.Properties().tab(ItemGroups.tab_materials)));
+    public static final RegistryObject<Item> SILICON_INGOT = ITEMS.register("silicon_ingot", () -> new Item(new Item.Properties().tab(ItemGroups.tab_materials)));
 
-    public static final RegistryObject<Item> IRON_PLATE = ITEMS.register("iron_plate", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_materials)));
-    public static final RegistryObject<Item> DESH_PLATE = ITEMS.register("desh_plate", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_materials)));
+    public static final RegistryObject<Item> IRON_PLATE = ITEMS.register("iron_plate", () -> new Item(new Item.Properties().tab(ItemGroups.tab_materials)));
+    public static final RegistryObject<Item> DESH_PLATE = ITEMS.register("desh_plate", () -> new Item(new Item.Properties().tab(ItemGroups.tab_materials)));
 
-    public static final RegistryObject<Item> COMPRESSED_STEEL = ITEMS.register("compressed_steel", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_materials)));
-    public static final RegistryObject<Item> COMPRESSED_DESH = ITEMS.register("compressed_desh", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_materials)));
-    public static final RegistryObject<Item> COMPRESSED_SILICON = ITEMS.register("compressed_silicon", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_materials)));
+    public static final RegistryObject<Item> COMPRESSED_STEEL = ITEMS.register("compressed_steel", () -> new Item(new Item.Properties().tab(ItemGroups.tab_materials)));
+    public static final RegistryObject<Item> COMPRESSED_DESH = ITEMS.register("compressed_desh", () -> new Item(new Item.Properties().tab(ItemGroups.tab_materials)));
+    public static final RegistryObject<Item> COMPRESSED_SILICON = ITEMS.register("compressed_silicon", () -> new Item(new Item.Properties().tab(ItemGroups.tab_materials)));
 
-    public static final RegistryObject<Item> ICE_SHARD = ITEMS.register("ice_shard", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_materials)));
+    public static final RegistryObject<Item> ICE_SHARD = ITEMS.register("ice_shard", () -> new Item(new Item.Properties().tab(ItemGroups.tab_materials)));
 
-    public static final RegistryObject<Item> STEEL_NUGGET = ITEMS.register("steel_nugget", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_materials)));
-    public static final RegistryObject<Item> DESH_NUGGET = ITEMS.register("desh_nugget", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_materials)));
-    public static final RegistryObject<Item> SILICON_NUGGET = ITEMS.register("silicon_nugget", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_materials)));
+    public static final RegistryObject<Item> STEEL_NUGGET = ITEMS.register("steel_nugget", () -> new Item(new Item.Properties().tab(ItemGroups.tab_materials)));
+    public static final RegistryObject<Item> DESH_NUGGET = ITEMS.register("desh_nugget", () -> new Item(new Item.Properties().tab(ItemGroups.tab_materials)));
+    public static final RegistryObject<Item> SILICON_NUGGET = ITEMS.register("silicon_nugget", () -> new Item(new Item.Properties().tab(ItemGroups.tab_materials)));
 
-    public static final RegistryObject<Item> RAW_DESH = ITEMS.register("raw_desh", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_materials)));
-    public static final RegistryObject<Item> RAW_SILICON = ITEMS.register("raw_silicon", () -> new Item(new Item.Properties().tab(BossToolsItemGroups.tab_materials)));
+    public static final RegistryObject<Item> RAW_DESH = ITEMS.register("raw_desh", () -> new Item(new Item.Properties().tab(ItemGroups.tab_materials)));
+    public static final RegistryObject<Item> RAW_SILICON = ITEMS.register("raw_silicon", () -> new Item(new Item.Properties().tab(ItemGroups.tab_materials)));
 
     //Generel Blocks
     public static final RegistryObject<Block> STEEL_BLOCK = BLOCKS.register("steel_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.METAL).strength(5f, 2.5f).requiresCorrectToolForDrops()));
@@ -359,46 +359,46 @@ public class ModInnet {
     public static final RegistryObject<Block> VENUS_GOLD_ORE = BLOCKS.register("venus_gold_ore", () -> new Block(BlockBehaviour.Properties.of(Material.STONE).sound(SoundType.STONE).strength(3.0F, 3.0F).requiresCorrectToolForDrops()));
 
     //Generel Block Items
-    public static final RegistryObject<BlockItem> STEEL_BLOCK_ITEM = ITEMS.register("steel_block", () -> new BlockItem(ModInnet.STEEL_BLOCK.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> DESH_BLOCK_ITEM = ITEMS.register("desh_block", () -> new BlockItem(ModInnet.DESH_BLOCK.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> SILICON_BLOCK_ITEM = ITEMS.register("silicon_block", () -> new BlockItem(ModInnet.SILICON_BLOCK.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> IRON_PLATING_BLOCK_ITEM = ITEMS.register("iron_plating_block", () -> new BlockItem(ModInnet.IRON_PLATING_BLOCK.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> RUSTED_IRON_PILLAR_BLOCK_ITEM = ITEMS.register("rusted_iron_pillar_block", () -> new BlockItem(ModInnet.RUSTED_IRON_PILLAR_BLOCK.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> RUSTED_IRON_PLATING_BLOCK_ITEM = ITEMS.register("rusted_iron_plating_block", () -> new BlockItem(ModInnet.RUSTED_IRON_PLATING_BLOCK.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> BLUE_IRON_PLATING_BLOCK_ITEM = ITEMS.register("blue_iron_plating_block", () -> new BlockItem(ModInnet.BLUE_IRON_PLATING_BLOCK.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> INFERNAL_SPIRE_BLOCK_ITEM = ITEMS.register("infernal_spire_block", () -> new BlockItem(ModInnet.INFERNAL_SPIRE_BLOCK.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> IRON_MARK_BLOCK_ITEM = ITEMS.register("iron_mark_block", () -> new BlockItem(ModInnet.IRON_MARK_BLOCK.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> MARS_STONE_ITEM = ITEMS.register("mars_stone", () -> new BlockItem(ModInnet.MARS_STONE.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> MERCURY_STONE_ITEM = ITEMS.register("mercury_stone", () -> new BlockItem(ModInnet.MERCURY_STONE.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> SKY_STONE_ITEM = ITEMS.register("sky_stone", () -> new BlockItem(ModInnet.SKY_STONE.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> MOON_BRICKS_ITEM = ITEMS.register("moon_bricks", () -> new BlockItem(ModInnet.MOON_BRICKS.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> MOON_BRICK_SLAB_ITEM = ITEMS.register("moon_brick_slab", () -> new BlockItem(ModInnet.MOON_BRICK_SLAB.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> MOON_BRICK_STAIRS_ITEM = ITEMS.register("moon_brick_stairs", () -> new BlockItem(ModInnet.MOON_BRICK_STAIRS.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> CRACKED_MOON_BRICKS_ITEM = ITEMS.register("cracked_moon_bricks", () -> new BlockItem(ModInnet.CRACKED_MOON_BRICKS.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> CRACKED_MOON_BRICK_SLAB_ITEM = ITEMS.register("cracked_moon_brick_slab", () -> new BlockItem(ModInnet.CRACKED_MOON_BRICK_SALB.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> CRACKED_MOON_BRICK_STAIRS_ITEM = ITEMS.register("cracked_moon_brick_stairs", () -> new BlockItem(ModInnet.CRACKED_MOON_BRICK_STAIRS.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> MOON_STONE_ITEM = ITEMS.register("moon_stone", () -> new BlockItem(ModInnet.MOON_STONE.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> MERCURY_COBBLESTONE_ITEM = ITEMS.register("mercury_cobblestone", () -> new BlockItem(ModInnet.MERCURY_COBBLESTONE.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> VENUS_SANDSTONE_ITEM = ITEMS.register("venus_sandstone", () -> new BlockItem(ModInnet.VENUS_SANDSTONE.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> VENUS_STONE_ITEM = ITEMS.register("venus_stone", () -> new BlockItem(ModInnet.VENUS_STONE.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> STEEL_BLOCK_ITEM = ITEMS.register("steel_block", () -> new BlockItem(ModInnet.STEEL_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> DESH_BLOCK_ITEM = ITEMS.register("desh_block", () -> new BlockItem(ModInnet.DESH_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> SILICON_BLOCK_ITEM = ITEMS.register("silicon_block", () -> new BlockItem(ModInnet.SILICON_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> IRON_PLATING_BLOCK_ITEM = ITEMS.register("iron_plating_block", () -> new BlockItem(ModInnet.IRON_PLATING_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> RUSTED_IRON_PILLAR_BLOCK_ITEM = ITEMS.register("rusted_iron_pillar_block", () -> new BlockItem(ModInnet.RUSTED_IRON_PILLAR_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> RUSTED_IRON_PLATING_BLOCK_ITEM = ITEMS.register("rusted_iron_plating_block", () -> new BlockItem(ModInnet.RUSTED_IRON_PLATING_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> BLUE_IRON_PLATING_BLOCK_ITEM = ITEMS.register("blue_iron_plating_block", () -> new BlockItem(ModInnet.BLUE_IRON_PLATING_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> INFERNAL_SPIRE_BLOCK_ITEM = ITEMS.register("infernal_spire_block", () -> new BlockItem(ModInnet.INFERNAL_SPIRE_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> IRON_MARK_BLOCK_ITEM = ITEMS.register("iron_mark_block", () -> new BlockItem(ModInnet.IRON_MARK_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> MARS_STONE_ITEM = ITEMS.register("mars_stone", () -> new BlockItem(ModInnet.MARS_STONE.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> MERCURY_STONE_ITEM = ITEMS.register("mercury_stone", () -> new BlockItem(ModInnet.MERCURY_STONE.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> SKY_STONE_ITEM = ITEMS.register("sky_stone", () -> new BlockItem(ModInnet.SKY_STONE.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> MOON_BRICKS_ITEM = ITEMS.register("moon_bricks", () -> new BlockItem(ModInnet.MOON_BRICKS.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> MOON_BRICK_SLAB_ITEM = ITEMS.register("moon_brick_slab", () -> new BlockItem(ModInnet.MOON_BRICK_SLAB.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> MOON_BRICK_STAIRS_ITEM = ITEMS.register("moon_brick_stairs", () -> new BlockItem(ModInnet.MOON_BRICK_STAIRS.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> CRACKED_MOON_BRICKS_ITEM = ITEMS.register("cracked_moon_bricks", () -> new BlockItem(ModInnet.CRACKED_MOON_BRICKS.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> CRACKED_MOON_BRICK_SLAB_ITEM = ITEMS.register("cracked_moon_brick_slab", () -> new BlockItem(ModInnet.CRACKED_MOON_BRICK_SALB.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> CRACKED_MOON_BRICK_STAIRS_ITEM = ITEMS.register("cracked_moon_brick_stairs", () -> new BlockItem(ModInnet.CRACKED_MOON_BRICK_STAIRS.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> MOON_STONE_ITEM = ITEMS.register("moon_stone", () -> new BlockItem(ModInnet.MOON_STONE.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> MERCURY_COBBLESTONE_ITEM = ITEMS.register("mercury_cobblestone", () -> new BlockItem(ModInnet.MERCURY_COBBLESTONE.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> VENUS_SANDSTONE_ITEM = ITEMS.register("venus_sandstone", () -> new BlockItem(ModInnet.VENUS_SANDSTONE.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> VENUS_STONE_ITEM = ITEMS.register("venus_stone", () -> new BlockItem(ModInnet.VENUS_STONE.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
 
-    public static final RegistryObject<BlockItem> ROCKET_LAUNCH_PAD_ITEM = ITEMS.register("rocket_launch_pad", () -> new BlockItem(ModInnet.ROCKET_LAUNCH_PAD.get(), new Item.Properties().tab(BossToolsItemGroups.tab_normal)));
+    public static final RegistryObject<BlockItem> ROCKET_LAUNCH_PAD_ITEM = ITEMS.register("rocket_launch_pad", () -> new BlockItem(ModInnet.ROCKET_LAUNCH_PAD.get(), new Item.Properties().tab(ItemGroups.tab_normal)));
 
-    public static final RegistryObject<BlockItem> MOON_SAND_ITEM = ITEMS.register("moon_sand", () -> new BlockItem(ModInnet.MOON_SAND.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> MARS_SAND_ITEM = ITEMS.register("mars_sand", () -> new BlockItem(ModInnet.MARS_SAND.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> VENUS_SAND_ITEM = ITEMS.register("venus_sand", () -> new BlockItem(ModInnet.VENUS_SAND.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> MOON_SAND_ITEM = ITEMS.register("moon_sand", () -> new BlockItem(ModInnet.MOON_SAND.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> MARS_SAND_ITEM = ITEMS.register("mars_sand", () -> new BlockItem(ModInnet.MARS_SAND.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> VENUS_SAND_ITEM = ITEMS.register("venus_sand", () -> new BlockItem(ModInnet.VENUS_SAND.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
 
-    public static final RegistryObject<BlockItem> MOON_CHESSE_ORE_ITEM = ITEMS.register("moon_cheese_ore", () -> new BlockItem(ModInnet.MOON_CHESSE_ORE.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> MOON_DESH_ORE_ITEM = ITEMS.register("moon_desh_ore", () -> new BlockItem(ModInnet.MOON_DESH_ORE.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> MOON_IRON_ORE_ITEM = ITEMS.register("moon_iron_ore", () -> new BlockItem(ModInnet.MOON_IRON_ORE.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> MARS_ICE_SHARD_ORE_ITEM = ITEMS.register("mars_ice_shard_ore", () -> new BlockItem(ModInnet.MARS_ICE_SHARD_ORE.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> MARS_IRON_ORE_ITEM = ITEMS.register("mars_iron_ore", () -> new BlockItem(ModInnet.MARS_IRON_ORE.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> MARS_DIAMOND_ORE_ITEM = ITEMS.register("mars_diamond_ore", () -> new BlockItem(ModInnet.MARS_DIAMOND_ORE.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> MARS_SILICON_ORE_ITEM = ITEMS.register("mars_silicon_ore", () -> new BlockItem(ModInnet.MARS_SILICON_ORE.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> MERCURY_IRON_ORE_ITEM = ITEMS.register("mercury_iron_ore", () -> new BlockItem(ModInnet.MERCURY_IRON_ORE.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> VENUS_COAL_ORE_ITEM = ITEMS.register("venus_coal_ore", () -> new BlockItem(ModInnet.VENUS_COAL_ORE.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> VENUS_DIAMOND_ORE_ITEM = ITEMS.register("venus_diamond_ore", () -> new BlockItem(ModInnet.VENUS_DIAMOND_ORE.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> VENUS_GOLD_ORE_ITEM = ITEMS.register("venus_gold_ore", () -> new BlockItem(ModInnet.VENUS_GOLD_ORE.get(), new Item.Properties().tab(BossToolsItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> MOON_CHESSE_ORE_ITEM = ITEMS.register("moon_cheese_ore", () -> new BlockItem(ModInnet.MOON_CHESSE_ORE.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> MOON_DESH_ORE_ITEM = ITEMS.register("moon_desh_ore", () -> new BlockItem(ModInnet.MOON_DESH_ORE.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> MOON_IRON_ORE_ITEM = ITEMS.register("moon_iron_ore", () -> new BlockItem(ModInnet.MOON_IRON_ORE.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> MARS_ICE_SHARD_ORE_ITEM = ITEMS.register("mars_ice_shard_ore", () -> new BlockItem(ModInnet.MARS_ICE_SHARD_ORE.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> MARS_IRON_ORE_ITEM = ITEMS.register("mars_iron_ore", () -> new BlockItem(ModInnet.MARS_IRON_ORE.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> MARS_DIAMOND_ORE_ITEM = ITEMS.register("mars_diamond_ore", () -> new BlockItem(ModInnet.MARS_DIAMOND_ORE.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> MARS_SILICON_ORE_ITEM = ITEMS.register("mars_silicon_ore", () -> new BlockItem(ModInnet.MARS_SILICON_ORE.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> MERCURY_IRON_ORE_ITEM = ITEMS.register("mercury_iron_ore", () -> new BlockItem(ModInnet.MERCURY_IRON_ORE.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> VENUS_COAL_ORE_ITEM = ITEMS.register("venus_coal_ore", () -> new BlockItem(ModInnet.VENUS_COAL_ORE.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> VENUS_DIAMOND_ORE_ITEM = ITEMS.register("venus_diamond_ore", () -> new BlockItem(ModInnet.VENUS_DIAMOND_ORE.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> VENUS_GOLD_ORE_ITEM = ITEMS.register("venus_gold_ore", () -> new BlockItem(ModInnet.VENUS_GOLD_ORE.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
 
     //Effects
     public static final RegistryObject<MobEffect> OXYGEN_EFFECT = EFFECTS.register("oxygen_bubble_effect", () -> new OxygenEffect(MobEffectCategory.BENEFICIAL,3035801));
@@ -417,20 +417,20 @@ public class ModInnet {
     public static final RegistryObject<Item> NETHERITE_SPACE_BOOTS = ITEMS.register("netherite_space_boots", () -> NetheriteSpaceSuit.NETHERITE_SPACE_BOOTS);
 
     //Flag Items
-    public static final RegistryObject<Item> FLAG_ITEM = ITEMS.register("flag", () -> new DoubleHighBlockItem(FLAG_BLOCK.get(), new Item.Properties().tab(BossToolsItemGroups.tab_flags)));
-    public static final RegistryObject<Item> FLAG_BLUE_ITEM = ITEMS.register("flag_blue", () -> new DoubleHighBlockItem(FLAG_BLUE_BLOCK.get(), new Item.Properties().tab(BossToolsItemGroups.tab_flags)));
-    public static final RegistryObject<Item> FLAG_BROWN_ITEM = ITEMS.register("flag_brown", () -> new DoubleHighBlockItem(FLAG_BROWN_BLOCK.get(), new Item.Properties().tab(BossToolsItemGroups.tab_flags)));
-    public static final RegistryObject<Item> FLAG_CYAN_ITEM = ITEMS.register("flag_cyan", () -> new DoubleHighBlockItem(FLAG_CYAN_BLOCK.get(), new Item.Properties().tab(BossToolsItemGroups.tab_flags)));
-    public static final RegistryObject<Item> FLAG_GRAY_ITEM = ITEMS.register("flag_gray", () -> new DoubleHighBlockItem(FLAG_GRAY_BLOCK.get(), new Item.Properties().tab(BossToolsItemGroups.tab_flags)));
-    public static final RegistryObject<Item> FLAG_GREEN_ITEM = ITEMS.register("flag_green", () -> new DoubleHighBlockItem(FLAG_GREEN_BLOCK.get(), new Item.Properties().tab(BossToolsItemGroups.tab_flags)));
-    public static final RegistryObject<Item> FLAG_LIGHT_BLUE_ITEM = ITEMS.register("flag_light_blue", () -> new DoubleHighBlockItem(FLAG_LIGHT_BLUE_BLOCK.get(), new Item.Properties().tab(BossToolsItemGroups.tab_flags)));
-    public static final RegistryObject<Item> FLAG_LIME_ITEM = ITEMS.register("flag_lime", () -> new DoubleHighBlockItem(FLAG_LIME_BLOCK.get(), new Item.Properties().tab(BossToolsItemGroups.tab_flags)));
-    public static final RegistryObject<Item> FLAG_MAGENTA_ITEM = ITEMS.register("flag_magenta", () -> new DoubleHighBlockItem(FLAG_MAGENTA_BLOCk.get(), new Item.Properties().tab(BossToolsItemGroups.tab_flags)));
-    public static final RegistryObject<Item> FLAG_ORANGE_ITEM = ITEMS.register("flag_orange", () -> new DoubleHighBlockItem(FLAG_ORANGE_BLOCK.get(), new Item.Properties().tab(BossToolsItemGroups.tab_flags)));
-    public static final RegistryObject<Item> FLAG_PINK_ITEM = ITEMS.register("flag_pink", () -> new DoubleHighBlockItem(FLAG_PINK_BLOCK.get(), new Item.Properties().tab(BossToolsItemGroups.tab_flags)));
-    public static final RegistryObject<Item> FLAG_PURPLE_ITEM = ITEMS.register("flag_purple", () -> new DoubleHighBlockItem(FLAG_PURPLE_BLOCK.get(), new Item.Properties().tab(BossToolsItemGroups.tab_flags)));
-    public static final RegistryObject<Item> FLAG_RED_ITEM = ITEMS.register("flag_red", () -> new DoubleHighBlockItem(FLAG_RED_BLOCK.get(), new Item.Properties().tab(BossToolsItemGroups.tab_flags)));
-    public static final RegistryObject<Item> FLAG_YELLOW_ITEM = ITEMS.register("flag_yellow", () -> new DoubleHighBlockItem(FLAG_YELLOW_BLOCK.get(), new Item.Properties().tab(BossToolsItemGroups.tab_flags)));
+    public static final RegistryObject<Item> FLAG_ITEM = ITEMS.register("flag", () -> new DoubleHighBlockItem(FLAG_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_flags)));
+    public static final RegistryObject<Item> FLAG_BLUE_ITEM = ITEMS.register("flag_blue", () -> new DoubleHighBlockItem(FLAG_BLUE_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_flags)));
+    public static final RegistryObject<Item> FLAG_BROWN_ITEM = ITEMS.register("flag_brown", () -> new DoubleHighBlockItem(FLAG_BROWN_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_flags)));
+    public static final RegistryObject<Item> FLAG_CYAN_ITEM = ITEMS.register("flag_cyan", () -> new DoubleHighBlockItem(FLAG_CYAN_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_flags)));
+    public static final RegistryObject<Item> FLAG_GRAY_ITEM = ITEMS.register("flag_gray", () -> new DoubleHighBlockItem(FLAG_GRAY_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_flags)));
+    public static final RegistryObject<Item> FLAG_GREEN_ITEM = ITEMS.register("flag_green", () -> new DoubleHighBlockItem(FLAG_GREEN_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_flags)));
+    public static final RegistryObject<Item> FLAG_LIGHT_BLUE_ITEM = ITEMS.register("flag_light_blue", () -> new DoubleHighBlockItem(FLAG_LIGHT_BLUE_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_flags)));
+    public static final RegistryObject<Item> FLAG_LIME_ITEM = ITEMS.register("flag_lime", () -> new DoubleHighBlockItem(FLAG_LIME_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_flags)));
+    public static final RegistryObject<Item> FLAG_MAGENTA_ITEM = ITEMS.register("flag_magenta", () -> new DoubleHighBlockItem(FLAG_MAGENTA_BLOCk.get(), new Item.Properties().tab(ItemGroups.tab_flags)));
+    public static final RegistryObject<Item> FLAG_ORANGE_ITEM = ITEMS.register("flag_orange", () -> new DoubleHighBlockItem(FLAG_ORANGE_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_flags)));
+    public static final RegistryObject<Item> FLAG_PINK_ITEM = ITEMS.register("flag_pink", () -> new DoubleHighBlockItem(FLAG_PINK_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_flags)));
+    public static final RegistryObject<Item> FLAG_PURPLE_ITEM = ITEMS.register("flag_purple", () -> new DoubleHighBlockItem(FLAG_PURPLE_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_flags)));
+    public static final RegistryObject<Item> FLAG_RED_ITEM = ITEMS.register("flag_red", () -> new DoubleHighBlockItem(FLAG_RED_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_flags)));
+    public static final RegistryObject<Item> FLAG_YELLOW_ITEM = ITEMS.register("flag_yellow", () -> new DoubleHighBlockItem(FLAG_YELLOW_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_flags)));
 
     //GUIS
     public static final RegistryObject<MenuType<RocketGui.GuiContainer>> ROCKET_GUI = GUIS.register("rocket_gui", () -> new MenuType(new RocketGui.GuiContainerFactory()));

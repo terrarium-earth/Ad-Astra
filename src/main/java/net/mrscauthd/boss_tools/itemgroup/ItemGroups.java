@@ -7,7 +7,7 @@ import net.mrscauthd.boss_tools.ModInnet;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.api.distmarker.Dist;
 
-public class BossToolsItemGroups {
+public class ItemGroups {
 	public static CreativeModeTab tab_normal = new CreativeModeTab("tab_normal") {
 		@OnlyIn(Dist.CLIENT)
 		@Override
