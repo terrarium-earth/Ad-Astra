@@ -6,69 +6,12 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "astrocraft:mercury_stone",
-          "weight": 1,
-          "conditions": [
-            {
-              "condition": "minecraft:match_tool",
-              "predicate": {
-                "enchantments": [
-                  {
-                    "enchantment": "minecraft:silk_touch",
-                    "levels": {
-                      "min": 1
-                    }
-                  }
-                ]
-              }
-            }
-          ],
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 1
-              }
-            }
-          ]
+          "name": "astrocraft:mercury_stone"
         }
-      ]
-    },
-    {
-      "rolls": 1,
-      "entries": [
+      ],
+      "conditions": [
         {
-          "type": "minecraft:item",
-          "name": "astrocraft:mercury_cobblestone",
-          "weight": 1,
-          "conditions": [
-            {
-              "condition": "minecraft:inverted",
-              "term": {
-                "condition": "minecraft:match_tool",
-                "predicate": {
-                  "enchantments": [
-                    {
-                      "enchantment": "minecraft:silk_touch",
-                      "levels": {
-                        "min": 1
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          ],
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 1
-              }
-            }
-          ]
+          "condition": "minecraft:survives_explosion"
         }
       ]
     }

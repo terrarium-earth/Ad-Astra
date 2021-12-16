@@ -333,7 +333,6 @@ public class ModInnet {
     public static final RegistryObject<Block> MARS_STONE = BLOCKS.register("mars_stone", () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_ORANGE).sound(SoundType.STONE).strength(1.5f, 1f).requiresCorrectToolForDrops()));
     public static final RegistryObject<Block> MERCURY_STONE = BLOCKS.register("mercury_stone", () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_PURPLE).sound(SoundType.STONE).strength(1.5f, 1f).requiresCorrectToolForDrops()));
     public static final RegistryObject<Block> MOON_STONE = BLOCKS.register("moon_stone", () -> new Block(BlockBehaviour.Properties.of(Material.STONE).sound(SoundType.STONE).strength(1.5f, 1f).requiresCorrectToolForDrops()));
-    public static final RegistryObject<Block> MERCURY_COBBLESTONE = BLOCKS.register("mercury_cobblestone", () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_PURPLE).sound(SoundType.STONE).strength(1.5f, 1f).requiresCorrectToolForDrops()));
     public static final RegistryObject<Block> VENUS_SANDSTONE = BLOCKS.register("venus_sandstone", () -> new Block(BlockBehaviour.Properties.of(Material.STONE).sound(SoundType.STONE).strength(1.5f, 1f).requiresCorrectToolForDrops()));
     public static final RegistryObject<Block> VENUS_STONE = BLOCKS.register("venus_stone", () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_ORANGE).sound(SoundType.STONE).strength(1.5f, 1f).requiresCorrectToolForDrops()));
     public static final RegistryObject<Block> INFERNAL_SPIRE_BLOCK = BLOCKS.register("infernal_spire_block", () -> new Block(BlockBehaviour.Properties.of(Material.STONE).sound(SoundType.STONE).strength(1.5f, 1f).requiresCorrectToolForDrops()));
@@ -380,7 +379,6 @@ public class ModInnet {
     public static final RegistryObject<BlockItem> CRACKED_MOON_BRICK_SLAB_ITEM = ITEMS.register("cracked_moon_brick_slab", () -> new BlockItem(ModInnet.CRACKED_MOON_BRICK_SALB.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
     public static final RegistryObject<BlockItem> CRACKED_MOON_BRICK_STAIRS_ITEM = ITEMS.register("cracked_moon_brick_stairs", () -> new BlockItem(ModInnet.CRACKED_MOON_BRICK_STAIRS.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
     public static final RegistryObject<BlockItem> MOON_STONE_ITEM = ITEMS.register("moon_stone", () -> new BlockItem(ModInnet.MOON_STONE.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> MERCURY_COBBLESTONE_ITEM = ITEMS.register("mercury_cobblestone", () -> new BlockItem(ModInnet.MERCURY_COBBLESTONE.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
     public static final RegistryObject<BlockItem> VENUS_SANDSTONE_ITEM = ITEMS.register("venus_sandstone", () -> new BlockItem(ModInnet.VENUS_SANDSTONE.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
     public static final RegistryObject<BlockItem> VENUS_STONE_ITEM = ITEMS.register("venus_stone", () -> new BlockItem(ModInnet.VENUS_STONE.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
 
