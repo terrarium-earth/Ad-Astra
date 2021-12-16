@@ -53,8 +53,8 @@
   "item.astrocraft.silicon_nugget": "실리콘 조각",
   "item.astrocraft.steel_nugget": "강철 조각",
   "item.astrocraft.water_pump": "물 펌프",
-  "item.astrocraft.raw_desh": "Raw Desh",
-  "item.astrocraft.raw_silicon": "Raw Silicon",
+  "item.astrocraft.raw_desh": "데쉬 원석",
+  "item.astrocraft.raw_silicon": "실리콘 원석",
 
 
   "itemGroup.tab_normal": "AstroCraft",
