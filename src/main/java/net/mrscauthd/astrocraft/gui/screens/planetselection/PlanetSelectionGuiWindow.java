@@ -472,7 +472,7 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 			}
 		}
 
-		return false;
+		return menu.player.getAbilities().instabuild;
 	}
 
 	public void backButtonManager(ResourceLocation bb, ResourceLocation bb2, int mouseX, int mouseY, int left, int top, int width, int height, ImageButtonPlacer button) {
