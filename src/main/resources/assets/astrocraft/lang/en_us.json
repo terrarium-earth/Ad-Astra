@@ -55,6 +55,8 @@
   "item.astrocraft.water_pump": "Water Pump",
   "item.astrocraft.raw_desh": "Raw Desh",
   "item.astrocraft.raw_silicon": "Raw Silicon",
+  "item.astrocraft.raw_desh_block": "Raw Desh Block",
+  "item.astrocraft.raw_silicon_block": "Raw Silicon Block",
 
 
   "itemGroup.tab_normal": "AstroCraft",
@@ -131,6 +133,8 @@
   "block.astrocraft.moon_cheese_ore": "Moon Cheese Ore",
   "block.astrocraft.moon_desh_ore": "Moon Desh Ore",
   "block.astrocraft.water_pump": "Water Pump",
+  "block.astrocraft.raw_desh_block": "Raw Desh Block",
+  "block.astrocraft.raw_silicon_block": "Raw Silicon Block",
 
 
   "fluid.astrocraft.fuel": "Fuel",

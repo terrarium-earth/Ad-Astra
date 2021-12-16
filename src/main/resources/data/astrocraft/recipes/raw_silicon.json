@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "###",
+        "###"
+    ],
+    "key": {
+        "#": {
+            "item": "astrocraft:raw_silicon"
+        }
+    },
+    "result": {
+        "item": "astrocraft:raw_silicon_block",
+        "count": 9
+    }
+}
