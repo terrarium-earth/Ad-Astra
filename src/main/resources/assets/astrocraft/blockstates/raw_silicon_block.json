@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "astrocraft:block/raw_silicon_block"
+    }
+  }
+}

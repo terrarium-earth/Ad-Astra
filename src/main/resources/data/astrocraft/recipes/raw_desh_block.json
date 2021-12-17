@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "###",
+        "###"
+    ],
+    "key": {
+        "#": {
+            "item": "astrocraft:raw_desh"
+        }
+    },
+    "result": {
+        "item": "astrocraft:raw_desh_block",
+        "count": 1
+    }
+}

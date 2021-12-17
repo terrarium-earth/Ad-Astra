@@ -326,7 +326,7 @@ public class Methodes {
             player.setPos(player.getX(), 700, player.getZ());
 
             if (player instanceof ServerPlayer) {
-                ((ServerPlayer) player).connection.teleport(player.getX(), 700, player.getY(), player.getYRot(), player.getXRot());
+                ((ServerPlayer) player).connection.teleport(player.getX(), 700, player.getZ(), player.getYRot(), player.getXRot());
             }
         }
 

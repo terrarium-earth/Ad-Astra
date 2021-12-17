@@ -44,7 +44,7 @@
   "item.astrocraft.rocket_fin": "로켓 분사구",
   "item.astrocraft.rover": "로버",
   "item.astrocraft.alien_spawn_egg": "외계인 생성 알",
-  "item.astrocraft.chesse": "치즈",
+  "item.astrocraft.cheese": "치즈",
   "item.astrocraft.steel_axe": "강철 도끼",
   "item.astrocraft.mogler_spawn_egg": "모글러 생성 알",
   "item.astrocraft.desh_ingot": "데쉬 주괴",
@@ -55,6 +55,8 @@
   "item.astrocraft.water_pump": "물 펌프",
   "item.astrocraft.raw_desh": "데쉬 원석",
   "item.astrocraft.raw_silicon": "실리콘 원석",
+  "item.astrocraft.raw_desh_block": "데쉬 원석 블록",
+  "item.astrocraft.raw_silicon_block": "실리콘 원석 블록",
 
 
   "itemGroup.tab_normal": "AstroCraft",
@@ -107,7 +109,6 @@
   "block.astrocraft.moon_stone": "달 돌",
   "block.astrocraft.moon_sand": "달 모래",
   "block.astrocraft.mars_ice_shard_ore": "화성 얼음 광석",
-  "block.astrocraft.mercury_cobblestone": "수성 조약돌",
   "block.astrocraft.sky_stone": "운석",
   "block.astrocraft.flag_gray": "회색 깃발",
   "block.astrocraft.wall_coal_torch": "석탄 횃불",
@@ -131,6 +132,8 @@
   "block.astrocraft.moon_cheese_ore": "달 치즈 광석",
   "block.astrocraft.moon_desh_ore": "달 데쉬 광석",
   "block.astrocraft.water_pump": "물 펌프",
+  "block.astrocraft.raw_desh_block": "데쉬 원석 블록",
+  "block.astrocraft.raw_silicon_block": "실리콘 원석 블록",
 
 
   "fluid.astrocraft.fuel": "연료",

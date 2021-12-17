@@ -55,6 +55,8 @@
   "item.astrocraft.water_pump": "Water Pump",
   "item.astrocraft.raw_desh": "Raw Desh",
   "item.astrocraft.raw_silicon": "Raw Silicon",
+  "item.astrocraft.raw_desh_block": "Raw Desh Block",
+  "item.astrocraft.raw_silicon_block": "Raw Silicon Block",
 
 
   "itemGroup.tab_normal": "AstroCraft",
@@ -107,7 +109,6 @@
   "block.astrocraft.moon_stone": "Moon Stone",
   "block.astrocraft.moon_sand": "Moon Sand",
   "block.astrocraft.mars_ice_shard_ore": "Mars Ice Shard Ore",
-  "block.astrocraft.mercury_cobblestone": "Mercury Cobblestone",
   "block.astrocraft.sky_stone": "Sky Stone",
   "block.astrocraft.flag_gray": "Gray Flag",
   "block.astrocraft.wall_coal_torch": "Coal Torch",
@@ -131,6 +132,8 @@
   "block.astrocraft.moon_cheese_ore": "Moon Cheese Ore",
   "block.astrocraft.moon_desh_ore": "Moon Desh Ore",
   "block.astrocraft.water_pump": "Water Pump",
+  "block.astrocraft.raw_desh_block": "Raw Desh Block",
+  "block.astrocraft.raw_silicon_block": "Raw Silicon Block",
 
 
   "fluid.astrocraft.fuel": "Fuel",

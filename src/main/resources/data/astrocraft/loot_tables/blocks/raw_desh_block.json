@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "astrocraft:mercury_cobblestone"
+          "name": "astrocraft:raw_desh_block"
         }
       ],
       "conditions": [

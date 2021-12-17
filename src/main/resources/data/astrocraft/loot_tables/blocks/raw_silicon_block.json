@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "astrocraft:mercury_stone"
+          "name": "astrocraft:raw_silicon_block"
         }
       ],
       "conditions": [
