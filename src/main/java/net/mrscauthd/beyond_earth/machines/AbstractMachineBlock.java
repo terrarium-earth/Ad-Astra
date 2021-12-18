@@ -2,6 +2,7 @@ package net.mrscauthd.beyond_earth.machines;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.function.ToIntFunction;
 
 import javax.annotation.Nullable;
 
@@ -15,7 +16,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -39,7 +39,18 @@ public abstract class AbstractMachineBlock<T extends AbstractMachineBlockEntity>
 	public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
 	public AbstractMachineBlock(Properties properties) {
-		super(properties);
+		super(properties.lightLevel(new ToIntFunction<BlockState>() {
+			@Override
+			public int applyAsInt(BlockState state) {
+				Block block = state.getBlock();
+
+				if (block instanceof AbstractMachineBlock<?>) {
+					return ((AbstractMachineBlock<?>) block).getLightLevel(state);
+				}
+
+				return 0;
+			}
+		}));
 
 		this.registerDefaultState(this.buildDefaultState());
 	}
@@ -94,13 +105,11 @@ public abstract class AbstractMachineBlock<T extends AbstractMachineBlockEntity>
 
 	}
 
-	@SuppressWarnings("deprecation")
-	@Override
-	public int getLightBlock(BlockState state, BlockGetter level, BlockPos pos) {
+	protected int getLightLevel(BlockState state) {
 		if (this.useLit() == true) {
 			return state.getValue(LIT) ? 12 : 0;
 		} else {
-			return super.getLightBlock(state, level, pos);
+			return 0;
 		}
 
 	}
@@ -127,8 +136,7 @@ public abstract class AbstractMachineBlock<T extends AbstractMachineBlockEntity>
 	}
 
 	@Override
-	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player entity, InteractionHand hand,
-			BlockHitResult raytrace) {
+	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player entity, InteractionHand hand, BlockHitResult raytrace) {
 		if (entity instanceof ServerPlayer) {
 			T blockEntity = this.getBlockEntity(level, pos);
 
@@ -179,10 +187,14 @@ public abstract class AbstractMachineBlock<T extends AbstractMachineBlockEntity>
 	public boolean hasAnalogOutputSignal(BlockState state) {
 		return true;
 	}
-	
+
 	@Override
 	public <T2 extends BlockEntity> BlockEntityTicker<T2> getTicker(Level level, BlockState state, BlockEntityType<T2> type) {
-		return (l, p, s, e) -> { if (e instanceof AbstractMachineBlockEntity) { ((AbstractMachineBlockEntity) e).tick(); } };
+		return (l, p, s, e) -> {
+			if (e instanceof AbstractMachineBlockEntity) {
+				((AbstractMachineBlockEntity) e).tick();
+			}
+		};
 	}
 
 	@Override
