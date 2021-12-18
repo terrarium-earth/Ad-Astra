@@ -1,8 +1,0 @@
-{
-  "parent": "block/outer_stairs",
-  "textures": {
-    "bottom": "astrocraft:blocks/moon_bricks",
-    "top": "astrocraft:blocks/moon_bricks",
-    "side": "astrocraft:blocks/moon_bricks"
-  }
-}

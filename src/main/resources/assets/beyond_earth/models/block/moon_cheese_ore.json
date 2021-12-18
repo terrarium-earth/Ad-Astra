@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "beyond_earth:blocks/moon_ore_cheese",
+    "up": "beyond_earth:blocks/moon_ore_cheese",
+    "north": "beyond_earth:blocks/moon_ore_cheese",
+    "east": "beyond_earth:blocks/moon_ore_cheese",
+    "south": "beyond_earth:blocks/moon_ore_cheese",
+    "west": "beyond_earth:blocks/moon_ore_cheese",
+    "particle": "beyond_earth:blocks/moon_ore_cheese"
+  }
+}

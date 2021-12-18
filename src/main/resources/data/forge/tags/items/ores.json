@@ -1,17 +1,16 @@
 {
   "replace": false,
   "values": [
-    "astrocraft:moon_desh_ore",
-    "astrocraft:mars_diamond_ore",
-    "astrocraft:mars_iron_ore",
-    "astrocraft:moon_cheese_ore",
-    "astrocraft:mercury_iron_ore",
-    "astrocraft:mars_silicon_ore",
-    "astrocraft:mars_ice_shard_ore",
-    "astrocraft:moon_iron_ore",
-    "astrocraft:moon_glowstone_ore",
-    "astrocraft:venus_coal_ore",
-    "astrocraft:venus_diamond_ore",
-    "astrocraft:venus_gold_ore"
+    "beyond_earth:moon_desh_ore",
+    "beyond_earth:mars_diamond_ore",
+    "beyond_earth:mars_iron_ore",
+    "beyond_earth:moon_cheese_ore",
+    "beyond_earth:mercury_iron_ore",
+    "beyond_earth:mars_silicon_ore",
+    "beyond_earth:mars_ice_shard_ore",
+    "beyond_earth:moon_iron_ore",
+    "beyond_earth:venus_coal_ore",
+    "beyond_earth:venus_diamond_ore",
+    "beyond_earth:venus_gold_ore"
   ]
 }

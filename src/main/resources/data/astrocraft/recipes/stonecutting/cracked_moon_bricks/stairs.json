@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "astrocraft:cracked_moon_bricks"
-  },
-  "result": "astrocraft:cracked_moon_brick_stairs",
-  "count": 1
-}

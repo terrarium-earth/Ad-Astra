@@ -1,8 +1,0 @@
-{
-	"type": "astrocraft:oxygenbubbledistributor",
-	"input": {
-		"name": "minecraft:water",
-		"amount": 1
-	},
-	"oxygen": 4
-}

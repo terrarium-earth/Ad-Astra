@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "astrocraft:moon_sand",
-    "astrocraft:mars_sand",
-    "astrocraft:venus_sand"
+    "beyond_earth:moon_sand",
+    "beyond_earth:mars_sand",
+    "beyond_earth:venus_sand"
   ]
 }

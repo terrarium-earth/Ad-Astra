@@ -1,0 +1,15 @@
+{
+   "type":"minecraft:crafting_shaped",
+   "result":{
+      "item":"beyond_earth:venus_sandstone"
+   },
+   "pattern":[
+      "SS",
+      "SS"
+   ],
+   "key":{
+      "S":{
+         "item":"beyond_earth:venus_sand"
+      }
+   }
+}

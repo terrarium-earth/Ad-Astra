@@ -1,0 +1,182 @@
+{
+  "type": "beyond_earth:mars",
+  "generator": {
+    "type": "beyond_earth:planet_noise",
+    "seed": 0,
+    "settings": {
+      "sea_level": 63,
+      "disable_mob_generation": true,
+      "noise_caves_enabled": true,
+      "noodle_caves_enabled": true,
+      "aquifers_enabled": false,
+      "ore_veins_enabled": false,
+      "legacy_random_source": false,
+      "default_block": {
+        "Name": "beyond_earth:mars_stone"
+      },
+      "default_fluid": {
+        "Name": "minecraft:air"
+      },
+      "noise": {
+        "min_y": -64,
+        "height": 256,
+        "size_horizontal": 1,
+        "size_vertical": 2,
+        "island_noise_override": false,
+        "amplified": false,
+        "large_biomes": false,
+        "sampling": {
+          "xz_scale": 1,
+          "y_scale": 1,
+          "xz_factor": 80,
+          "y_factor": 90
+        },
+        "bottom_slide": {
+          "target": -30,
+          "size": 0,
+          "offset": 0
+        },
+        "top_slide": {
+          "target": -10,
+          "size": 3,
+          "offset": 0
+        },
+        "terrain_shaper": {
+          "offset": 0.3,
+          "factor": 4,
+          "jaggedness": 0
+        }
+      },
+      "surface_rule": {
+        "type": "minecraft:sequence",
+        "sequence": [
+          {
+            "type": "minecraft:condition",
+            "if_true": {
+              "type": "minecraft:vertical_gradient",
+              "random_name": "minecraft:bedrock_floor",
+              "true_at_and_below": {
+                "above_bottom": 0
+              },
+              "false_at_and_above": {
+                "above_bottom": 5
+              }
+            },
+            "then_run": {
+              "type": "minecraft:block",
+              "result_state": {
+                "Name": "minecraft:bedrock"
+              }
+            }
+          },
+
+          {
+            "type": "minecraft:condition",
+            "if_true": {
+              "type": "minecraft:biome",
+              "biome_is": [
+                "beyond_earth:mars"
+              ]
+            },
+            "then_run": {
+              "type": "minecraft:condition",
+              "if_true": {
+                "type": "minecraft:y_above",
+                "anchor": {
+                  "absolute": 87
+                },
+                "surface_depth_multiplier": 2,
+                "add_stone_depth": false
+              },
+              "then_run": {
+                "type": "minecraft:condition",
+                "if_true": {
+                  "type": "minecraft:stone_depth",
+                  "offset": 4,
+                  "surface_type": "floor",
+                  "add_surface_depth": false,
+                  "add_surface_secondary_depth": false
+                },
+                "then_run": {
+                  "type": "minecraft:block",
+                  "result_state": {
+                    "Name": "beyond_earth:mars_sand"
+                  }
+                }
+              }
+            }
+          },
+
+          {
+            "type": "minecraft:condition",
+            "if_true": {
+              "type": "minecraft:biome",
+              "biome_is": [
+                "beyond_earth:mars_ice_spikes"
+              ]
+            },
+            "then_run": {
+              "type": "minecraft:condition",
+              "if_true": {
+                "type": "minecraft:y_above",
+                "anchor": {
+                  "absolute": 87
+                },
+                "surface_depth_multiplier": 2,
+                "add_stone_depth": false
+              },
+              "then_run": {
+                "type": "minecraft:condition",
+                "if_true": {
+                  "type": "minecraft:stone_depth",
+                  "offset": 4,
+                  "surface_type": "floor",
+                  "add_surface_depth": false,
+                  "add_surface_secondary_depth": false
+                },
+                "then_run": {
+                  "type": "minecraft:block",
+                  "result_state": {
+                    "Name": "minecraft:snow_block"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "structures": {
+        "structures": {}
+      }
+    },
+    "biome_source": {
+      "type": "minecraft:multi_noise",
+      "biomes": [
+        {
+          "biome": "beyond_earth:mars",
+          "parameters": {
+            "temperature": -0.5,
+            "humidity": 0,
+            "continentalness": 0,
+            "erosion": 0,
+            "weirdness": 0,
+            "depth": 0,
+            "offset": 0.175
+          }
+        },
+        {
+          "biome": "beyond_earth:mars_ice_spikes",
+          "parameters": {
+            "temperature": -1,
+            "humidity": 0,
+            "continentalness": 0,
+            "erosion": 0,
+            "weirdness": -1.5,
+            "depth": 0.1,
+            "offset": 1
+          }
+        }
+      ]
+    }
+  }
+}

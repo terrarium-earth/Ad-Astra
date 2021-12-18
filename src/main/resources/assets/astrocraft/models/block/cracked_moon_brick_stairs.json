@@ -1,8 +1,0 @@
-{
-  "parent": "block/stairs",
-  "textures": {
-    "bottom": "astrocraft:blocks/cracked_moon_bricks",
-    "top": "astrocraft:blocks/cracked_moon_bricks",
-    "side": "astrocraft:blocks/cracked_moon_bricks"
-  }
-}

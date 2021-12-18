@@ -143,7 +143,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "astrocraft:steel_ingot",
+          "name": "beyond_earth:steel_ingot",
           "weight": 20,
           "functions": [
             {
@@ -157,7 +157,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "astrocraft:moon_sand",
+          "name": "beyond_earth:moon_sand",
           "weight": 20,
           "functions": [
             {
@@ -221,7 +221,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "astrocraft:steel_ingot",
+          "name": "beyond_earth:steel_ingot",
           "weight": 20,
           "functions": [
             {

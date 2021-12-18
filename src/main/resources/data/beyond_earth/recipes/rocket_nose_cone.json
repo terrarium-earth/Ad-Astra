@@ -1,0 +1,30 @@
+{
+  "group": "beyond_earth",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " 1 ",
+    " 4 ",
+    "678"
+  ],
+  "key": {
+    "1": {
+      "item": "minecraft:redstone_torch"
+    },
+    "4": {
+      "tag": "forge:ingots/steel"
+    },
+    "6": {
+      "tag": "forge:ingots/steel"
+    },
+    "7": {
+      "tag": "beyond_earth:compresseds/steel"
+    },
+    "8": {
+      "tag": "forge:ingots/steel"
+    }
+  },
+  "result": {
+    "item": "beyond_earth:rocket_nose_cone",
+    "count": 1
+  }
+}
