@@ -1,0 +1,27 @@
+{
+  "group": "beyond_earth",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "01",
+    " 3",
+    " 5"
+  ],
+  "key": {
+    "0": {
+      "tag": "forge:ingots/steel"
+    },
+    "1": {
+      "tag": "forge:ingots/steel"
+    },
+    "3": {
+      "item": "minecraft:stick"
+    },
+    "5": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "beyond_earth:steel_hoe",
+    "count": 1
+  }
+}

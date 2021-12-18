@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "beyond_earth:blocks/iron_mark_bottom",
+    "up": "beyond_earth:blocks/iron_mark_bottom",
+    "north": "beyond_earth:blocks/iron_mark_side",
+    "east": "beyond_earth:blocks/iron_mark_side",
+    "south": "beyond_earth:blocks/iron_mark_side",
+    "west": "beyond_earth:blocks/iron_mark_side",
+    "particle": "beyond_earth:blocks/iron_mark_bottom"
+  }
+}

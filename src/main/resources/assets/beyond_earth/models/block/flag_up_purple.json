@@ -1,0 +1,9 @@
+{
+  "parent": "beyond_earth:custom/flage_up",
+  "textures": {
+    "all": "beyond_earth:blocks/flag_purple",
+    "particle": "beyond_earth:blocks/flag_purple",
+    "0": "beyond_earth:blocks/flag_purple",
+    "missing": "beyond_earth:blocks/flag_purple"
+  }
+}

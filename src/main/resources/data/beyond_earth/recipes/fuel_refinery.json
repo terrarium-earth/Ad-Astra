@@ -1,0 +1,42 @@
+{
+  "group": "beyond_earth",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "012",
+    "345",
+    "678"
+  ],
+  "key": {
+    "0": {
+      "tag": "forge:ingots/steel"
+    },
+    "1": {
+      "item": "minecraft:iron_ingot"
+    },
+    "2": {
+      "tag": "forge:ingots/steel"
+    },
+    "3": {
+      "item": "minecraft:bucket"
+    },
+    "4": {
+      "item": "minecraft:furnace"
+    },
+    "5": {
+      "item": "minecraft:bucket"
+    },
+    "6": {
+      "tag": "forge:ingots/steel"
+    },
+    "7": {
+      "item": "minecraft:redstone"
+    },
+    "8": {
+      "tag": "forge:ingots/steel"
+    }
+  },
+  "result": {
+    "item": "beyond_earth:fuel_refinery",
+    "count": 1
+  }
+}

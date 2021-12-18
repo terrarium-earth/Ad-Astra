@@ -1,0 +1,21 @@
+{
+  "group": "beyond_earth",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "nnn",
+    "ntn",
+    "nnn"
+  ],
+  "key": {
+    "n": {
+      "tag": "forge:nuggets/iron"
+    },
+    "t": {
+      "item": "beyond_earth:coal_torch"
+    }
+  },
+  "result": {
+    "item": "beyond_earth:coal_lantern",
+    "count": 1
+  }
+}

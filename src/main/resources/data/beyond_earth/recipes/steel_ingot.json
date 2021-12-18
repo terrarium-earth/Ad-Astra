@@ -1,0 +1,16 @@
+{
+  "group": "beyond_earth",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "0"
+  ],
+  "key": {
+    "0": {
+      "item": "beyond_earth:steel_block"
+    }
+  },
+  "result": {
+    "item": "beyond_earth:steel_ingot",
+    "count": 9
+  }
+}

@@ -1,9 +1,0 @@
-{
-   "type":"astrocraft:generating",
-   "input":{
-      "ingredient":{
-         "tag":"minecraft:coals"
-      }
-   },
-   "burnTime":400
-}

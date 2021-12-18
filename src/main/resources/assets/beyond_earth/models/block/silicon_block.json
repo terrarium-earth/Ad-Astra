@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "beyond_earth:blocks/silicon_block",
+    "up": "beyond_earth:blocks/silicon_block",
+    "north": "beyond_earth:blocks/silicon_block",
+    "east": "beyond_earth:blocks/silicon_block",
+    "south": "beyond_earth:blocks/silicon_block",
+    "west": "beyond_earth:blocks/silicon_block",
+    "particle": "beyond_earth:blocks/silicon_block"
+  }
+}

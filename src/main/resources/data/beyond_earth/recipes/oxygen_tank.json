@@ -1,0 +1,39 @@
+{
+  "group": "beyond_earth",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "012",
+    "3 5",
+    "678"
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:red_wool"
+    },
+    "1": {
+      "item": "minecraft:red_wool"
+    },
+    "2": {
+      "item": "minecraft:red_wool"
+    },
+    "3": {
+      "tag": "forge:plates/iron"
+    },
+    "5": {
+      "tag": "forge:plates/iron"
+    },
+    "6": {
+      "tag": "forge:plates/iron"
+    },
+    "7": {
+      "item": "minecraft:iron_ingot"
+    },
+    "8": {
+      "tag": "forge:plates/iron"
+    }
+  },
+  "result": {
+    "item": "beyond_earth:oxygen_tank",
+    "count": 1
+  }
+}

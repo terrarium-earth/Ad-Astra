@@ -1,0 +1,13 @@
+{
+   "type":"beyond_earth:compressing",
+   "input":{
+      "ingredient":{
+         "tag":"forge:ingots/silicon"
+      }
+   },
+   "output":{
+      "item":"beyond_earth:compressed_silicon",
+      "count":1
+   },
+   "cookTime":200
+}

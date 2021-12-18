@@ -1,9 +1,0 @@
-{
-  "parent": "astrocraft:custom/flage_down",
-  "textures": {
-    "all": "astrocraft:blocks/flag_white",
-    "particle": "astrocraft:blocks/flag_white",
-    "0": "astrocraft:blocks/flag_white",
-    "missing": "astrocraft:blocks/flag_white"
-  }
-}

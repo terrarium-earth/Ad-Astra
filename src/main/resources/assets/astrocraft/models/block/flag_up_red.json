@@ -1,9 +1,0 @@
-{
-  "parent": "astrocraft:custom/flage_up",
-  "textures": {
-    "all": "astrocraft:blocks/flag_red",
-    "particle": "astrocraft:blocks/flag_red",
-    "0": "astrocraft:blocks/flag_red",
-    "missing": "astrocraft:blocks/flag_red"
-  }
-}

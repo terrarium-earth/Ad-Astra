@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "beyond_earth:block/rusted_iron_pillar_block",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "beyond_earth:block/rusted_iron_pillar_block"
+    },
+    "axis=z": {
+      "model": "beyond_earth:block/rusted_iron_pillar_block",
+      "x": 90
+    }
+  }
+}

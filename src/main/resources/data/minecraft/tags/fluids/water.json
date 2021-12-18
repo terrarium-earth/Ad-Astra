@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
-    "astrocraft:fuel",
-    "astrocraft:flowing_fuel",
-    "astrocraft:oil",
-    "astrocraft:flowing_oil"
+    "beyond_earth:fuel",
+    "beyond_earth:flowing_fuel",
+    "beyond_earth:oil",
+    "beyond_earth:flowing_oil"
   ]
 }

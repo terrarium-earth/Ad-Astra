@@ -3,24 +3,24 @@ loaderVersion="[39,)"
 license="Not specified"
 
 [[mods]]
-modId="astrocraft"
+modId="beyond_earth"
 version="5.7"
-displayName="AstroCraft"
-displayURL="https://www.curseforge.com/minecraft/mc-mods/astrocraft"
+displayName="Beyond Earth"
+displayURL="https://www.curseforge.com/minecraft/mc-mods/beyond-earth"
 logoFile="logo.png"
 authors="MrScautHD"
 description='''
 Fly to Other Planets and Beyond!
 '''
 
-[[dependencies.astrocraft]]
+[[dependencies.beyond_earth]]
     modId="minecraft"
     mandatory=true
     versionRange="[1.18.1]"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.astrocraft]]
+[[dependencies.beyond_earth]]
     modId="forge"
     mandatory=true
     versionRange="[39.0.0,]"

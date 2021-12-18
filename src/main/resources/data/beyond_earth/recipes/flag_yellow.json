@@ -1,0 +1,19 @@
+{
+  "group": "beyond_earth",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "01"
+  ],
+  "key": {
+    "0": {
+      "tag": "forge:dyes/yellow"
+    },
+    "1": {
+      "tag": "beyond_earth:flags"
+    }
+  },
+  "result": {
+    "item": "beyond_earth:flag_yellow",
+    "count": 1
+  }
+}

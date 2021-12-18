@@ -1,8 +1,0 @@
-{
-  "parent": "astrocraft:custom/launch_pad",
-  "textures": {
-    "all": "astrocraft:blocks/launch_pad",
-    "particle": "astrocraft:blocks/launch_pad",
-    "1": "astrocraft:blocks/launch_pad"
-  }
-}
