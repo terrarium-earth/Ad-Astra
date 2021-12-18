@@ -22,7 +22,7 @@ public class PlanetCaver {
 			try {
 				//WorldCarver.CAVE
 				ObfuscationReflectionHelper.setPrivateValue(WorldCarver.class, WorldCarver.CAVE, new ImmutableSet.Builder<Block>()
-						.addAll((Set<Block>) ObfuscationReflectionHelper.getPrivateValue(WorldCarver.class, WorldCarver.CAVE, "replaceableBlocks"))
+						.addAll((Set<Block>) ObfuscationReflectionHelper.getPrivateValue(WorldCarver.class, WorldCarver.CAVE, "f_64983_"))
 						//Moon
 						.add(ModInnet.MOON_STONE.get().defaultBlockState().getBlock())
 						//Mars
@@ -30,10 +30,10 @@ public class PlanetCaver {
 						//Mercury
 						.add(ModInnet.MERCURY_STONE.get().defaultBlockState().getBlock())
 						//Venus
-						.add(ModInnet.VENUS_STONE.get().defaultBlockState().getBlock()).build(), "replaceableBlocks");
+						.add(ModInnet.VENUS_STONE.get().defaultBlockState().getBlock()).build(), "f_64983_");
 				//WorldCarver.CANYON
 				ObfuscationReflectionHelper.setPrivateValue(WorldCarver.class, WorldCarver.CANYON, new ImmutableSet.Builder<Block>()
-						.addAll((Set<Block>) ObfuscationReflectionHelper.getPrivateValue(WorldCarver.class, WorldCarver.CANYON, "replaceableBlocks"))
+						.addAll((Set<Block>) ObfuscationReflectionHelper.getPrivateValue(WorldCarver.class, WorldCarver.CANYON, "f_64983_"))
 						//Moon
 						.add(ModInnet.MOON_STONE.get().defaultBlockState().getBlock())
 						//Mars
@@ -41,7 +41,7 @@ public class PlanetCaver {
 						//Mercury
 						.add(ModInnet.MERCURY_STONE.get().defaultBlockState().getBlock())
 						//venus
-						.add(ModInnet.VENUS_STONE.get().defaultBlockState().getBlock()).build(), "replaceableBlocks");
+						.add(ModInnet.VENUS_STONE.get().defaultBlockState().getBlock()).build(), "f_64983_");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
