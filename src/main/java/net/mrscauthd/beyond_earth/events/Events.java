@@ -94,7 +94,7 @@ public class Events {
             CameraType pointOfView = Minecraft.getInstance().options.getCameraType();
 
             if (pointOfView.equals(CameraType.THIRD_PERSON_FRONT) || pointOfView.equals(CameraType.THIRD_PERSON_BACK)) {
-                event.getCamera().move(-event.getCamera().getMaxZoom(9d), 0d, 0);
+                event.getCamera().move(-event.getCamera().getMaxZoom(12d), 0d, 0);
             }
         }
     }
