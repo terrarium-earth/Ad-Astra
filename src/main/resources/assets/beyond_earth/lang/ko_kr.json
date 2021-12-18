@@ -44,7 +44,7 @@
   "item.beyond_earth.rocket_fin": "로켓 분사구",
   "item.beyond_earth.rover": "로버",
   "item.beyond_earth.alien_spawn_egg": "외계인 생성 알",
-  "item.beyond_earth.chesse": "치즈",
+  "item.beyond_earth.cheese": "치즈",
   "item.beyond_earth.steel_axe": "강철 도끼",
   "item.beyond_earth.mogler_spawn_egg": "모글러 생성 알",
   "item.beyond_earth.desh_ingot": "데쉬 주괴",
@@ -53,10 +53,10 @@
   "item.beyond_earth.silicon_nugget": "실리콘 조각",
   "item.beyond_earth.steel_nugget": "강철 조각",
   "item.beyond_earth.water_pump": "물 펌프",
-  "item.beyond_earth.raw_desh": "Raw Desh",
-  "item.beyond_earth.raw_silicon": "Raw Silicon",
-  "item.beyond_earth.raw_desh_block": "Raw Desh Block",
-  "item.beyond_earth.raw_silicon_block": "Raw Silicon Block",
+  "item.beyond_earth.raw_desh": "데쉬 원석",
+  "item.beyond_earth.raw_silicon": "실리콘 원석",
+  "item.beyond_earth.raw_desh_block": "데쉬 원석 블록",
+  "item.beyond_earth.raw_silicon_block": "실리콘 원석 블록",
 
 
   "itemGroup.tab_normal": "Beyond Earth",
@@ -132,8 +132,8 @@
   "block.beyond_earth.moon_cheese_ore": "달 치즈 광석",
   "block.beyond_earth.moon_desh_ore": "달 데쉬 광석",
   "block.beyond_earth.water_pump": "물 펌프",
-  "block.beyond_earth.raw_desh_block": "Raw Desh Block",
-  "block.beyond_earth.raw_silicon_block": "Raw Silicon Block",
+  "block.beyond_earth.raw_desh_block": "데쉬 원석 블록",
+  "block.beyond_earth.raw_silicon_block": "실리콘 원석 블록",
 
 
   "fluid.beyond_earth.fuel": "연료",
