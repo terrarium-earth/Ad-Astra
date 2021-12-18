@@ -41,6 +41,8 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.network.NetworkHooks;
@@ -468,6 +470,7 @@ public class Methodes {
 		}
 	}
 
+	@OnlyIn(Dist.CLIENT)
 	public static void renderArm(PoseStack poseStack, MultiBufferSource bufferSource, int light, ResourceLocation texture, AbstractClientPlayer player, PlayerModel<AbstractClientPlayer> playermodel, ModelPart arm) {
         Methodes.setModelProperties(player, playermodel);
         playermodel.attackTime = 0.0F;
@@ -478,6 +481,7 @@ public class Methodes {
         arm.render(poseStack, bufferSource.getBuffer(RenderType.entitySolid(texture)), light, OverlayTexture.NO_OVERLAY);
     }
 
+    @OnlyIn(Dist.CLIENT)
     public static void setModelProperties(AbstractClientPlayer p_117819_, PlayerModel<AbstractClientPlayer> modelPart) {
         PlayerModel<AbstractClientPlayer> playermodel = modelPart;
         if (p_117819_.isSpectator()) {
@@ -509,6 +513,7 @@ public class Methodes {
         }
     }
 
+    @OnlyIn(Dist.CLIENT)
     public static HumanoidModel.ArmPose getArmPose(AbstractClientPlayer p_117795_, InteractionHand p_117796_) {
         ItemStack itemstack = p_117795_.getItemInHand(p_117796_);
         if (itemstack.isEmpty()) {

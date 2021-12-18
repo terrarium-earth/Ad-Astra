@@ -73,7 +73,7 @@ public class Events {
         LivingEntity entity = event.getEntityLiving();
         Level world = entity.level;
 
-        //TODO: Methodes.EntityOxygen(entity,world);
+        Methodes.EntityOxygen(entity,world);
 
         //Gravity Methode Call
         Gravity.Gravity(entity, Gravity.GravityType.LIVING, world);
