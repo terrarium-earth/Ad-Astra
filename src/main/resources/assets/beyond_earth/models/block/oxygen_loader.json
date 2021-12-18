@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "beyond_earth:blocks/machineback",
+    "up": "beyond_earth:blocks/machineback",
+    "north": "beyond_earth:blocks/oxygengeneratorfront_inactive",
+    "east": "beyond_earth:blocks/machineside",
+    "south": "beyond_earth:blocks/machineside",
+    "west": "beyond_earth:blocks/machineside",
+    "particle": "beyond_earth:blocks/machineback"
+  }
+}

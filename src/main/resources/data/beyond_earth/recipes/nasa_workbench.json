@@ -1,0 +1,42 @@
+{
+  "group": "beyond_earth",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "012",
+    "345",
+    "678"
+  ],
+  "key": {
+    "0": {
+      "tag": "beyond_earth:compresseds/steel"
+    },
+    "1": {
+      "item": "minecraft:crafting_table"
+    },
+    "2": {
+      "tag": "beyond_earth:compresseds/steel"
+    },
+    "3": {
+      "item": "minecraft:lever"
+    },
+    "4": {
+      "tag": "forge:ingots/steel"
+    },
+    "5": {
+      "item": "minecraft:lever"
+    },
+    "6": {
+      "tag": "beyond_earth:compresseds/steel"
+    },
+    "7": {
+      "item": "minecraft:redstone_torch"
+    },
+    "8": {
+      "tag": "beyond_earth:compresseds/steel"
+    }
+  },
+  "result": {
+    "item": "beyond_earth:nasa_workbench",
+    "count": 1
+  }
+}

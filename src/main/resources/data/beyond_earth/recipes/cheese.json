@@ -1,0 +1,12 @@
+{
+  "group": "beyond_earth",
+  "type": "minecraft:smelting",
+  "experience": 1,
+  "cookingtime": 150,
+  "ingredient": {
+    "item": "beyond_earth:moon_cheese_ore"
+  },
+  "result": {
+    "item": "beyond_earth:cheese"
+  }
+}

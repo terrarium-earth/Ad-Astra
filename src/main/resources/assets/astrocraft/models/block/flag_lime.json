@@ -1,9 +1,0 @@
-{
-  "parent": "astrocraft:custom/flage",
-  "textures": {
-    "all": "astrocraft:blocks/flag_lime",
-    "particle": "astrocraft:blocks/flag_lime",
-    "0": "astrocraft:blocks/flag_lime",
-    "missing": "astrocraft:blocks/flag_lime"
-  }
-}

@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "beyond_earth:blocks/infernal_spire_top",
+    "up": "beyond_earth:blocks/infernal_spire_top",
+    "north": "beyond_earth:blocks/infernal_spire_side",
+    "east": "beyond_earth:blocks/infernal_spire_side",
+    "south": "beyond_earth:blocks/infernal_spire_side",
+    "west": "beyond_earth:blocks/infernal_spire_side",
+    "particle": "beyond_earth:blocks/infernal_spire_side"
+  }
+}

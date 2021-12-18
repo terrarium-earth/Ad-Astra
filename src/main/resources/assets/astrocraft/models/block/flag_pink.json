@@ -1,9 +1,0 @@
-{
-  "parent": "astrocraft:custom/flage",
-  "textures": {
-    "all": "astrocraft:blocks/flag_pink",
-    "particle": "astrocraft:blocks/flag_pink",
-    "0": "astrocraft:blocks/flag_pink",
-    "missing": "astrocraft:blocks/flag_pink"
-  }
-}

@@ -1,0 +1,11 @@
+{
+  "rocket_fly": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "beyond_earth:rocket_fly",
+        "stream": false
+      }
+    ]
+  }
+}

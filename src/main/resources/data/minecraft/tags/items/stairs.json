@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "astrocraft:moon_brick_stairs",
-    "astrocraft:cracked_moon_brick_stairs"
+    "beyond_earth:moon_brick_stairs",
+    "beyond_earth:cracked_moon_brick_stairs"
   ]
 }

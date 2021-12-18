@@ -1,0 +1,35 @@
+{
+  "display": {
+    "icon": {
+      "item": "beyond_earth:rocket_t2"
+    },
+    "title": {
+      "translate": "advancements.rocket_tier_2_advancement.title"
+    },
+    "description": {
+      "translate": "advancements.rocket_tier_2_advancement.descr"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "rocket_tier_2_advancement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "beyond_earth:rocket_t2"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 7
+  },
+  "parent": "beyond_earth:rocket_advancement"
+}

@@ -1,9 +1,0 @@
-{
-  "parent": "astrocraft:custom/flage",
-  "textures": {
-    "all": "astrocraft:blocks/flag_magenta",
-    "particle": "astrocraft:blocks/flag_magenta",
-    "0": "astrocraft:blocks/flag_magenta",
-    "missing": "astrocraft:blocks/flag_magenta"
-  }
-}

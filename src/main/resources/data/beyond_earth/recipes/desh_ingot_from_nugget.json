@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "beyond_earth:desh_ingot",
+  "result": {
+    "item": "beyond_earth:desh_ingot"
+  },
+  "pattern": [
+    "###",
+    "#*#",
+    "###"
+  ],
+  "key": {
+    "*": {
+      "item": "beyond_earth:desh_nugget"
+    },
+    "#": {
+      "tag": "forge:nuggets/desh"
+    }
+  }
+}

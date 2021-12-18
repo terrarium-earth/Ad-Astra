@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "beyond_earth:flag",
+    "#beyond_earth:flags/colors"
+  ]
+}

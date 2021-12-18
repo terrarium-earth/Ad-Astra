@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "beyond_earth:blocks/mars_ore_silicon",
+    "up": "beyond_earth:blocks/mars_ore_silicon",
+    "north": "beyond_earth:blocks/mars_ore_silicon",
+    "east": "beyond_earth:blocks/mars_ore_silicon",
+    "south": "beyond_earth:blocks/mars_ore_silicon",
+    "west": "beyond_earth:blocks/mars_ore_silicon",
+    "particle": "beyond_earth:blocks/mars_ore_silicon"
+  }
+}

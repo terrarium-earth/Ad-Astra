@@ -1,0 +1,36 @@
+{
+  "group": "beyond_earth",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "012",
+    "345",
+    "6  "
+  ],
+  "key": {
+    "0": {
+      "tag": "forge:rods/iron"
+    },
+    "1": {
+      "item": "minecraft:white_wool"
+    },
+    "2": {
+      "item": "minecraft:white_wool"
+    },
+    "3": {
+      "tag": "forge:rods/iron"
+    },
+    "4": {
+      "item": "minecraft:white_wool"
+    },
+    "5": {
+      "item": "minecraft:white_wool"
+    },
+    "6": {
+      "tag": "forge:rods/iron"
+    }
+  },
+  "result": {
+    "item": "beyond_earth:flag",
+    "count": 1
+  }
+}

@@ -1,0 +1,13 @@
+{
+   "type":"beyond_earth:blasting",
+   "input":{
+      "ingredient":{
+         "tag":"forge:ingots/iron"
+      }
+   },
+   "output":{
+      "item":"beyond_earth:steel_ingot",
+      "count":1
+   },
+   "cookTime":200
+}

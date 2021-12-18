@@ -1,0 +1,25 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "value": {
+        "tag": "forge:plates/silicon",
+        "type": "forge:tag_empty"
+      },
+      "type": "forge:not"
+    },
+    {
+      "type":"forge:mod_loaded",
+      "modid":"tconstruct"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:plates/silicon"
+  },
+  "result": {
+    "fluid": "beyond_earth:molten_silicon",
+    "amount": 144
+  },
+  "temperature": 500,
+  "time": 50
+}

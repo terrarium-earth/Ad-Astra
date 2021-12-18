@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "beyond_earth:block/coal_lantern"
+    },
+    "hanging=true": {
+      "model": "beyond_earth:block/coal_lantern_hanging"
+    }
+  }
+}

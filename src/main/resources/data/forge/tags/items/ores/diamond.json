@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "astrocraft:mars_diamond_ore",
-    "astrocraft:venus_diamond_ore"
+    "beyond_earth:mars_diamond_ore",
+    "beyond_earth:venus_diamond_ore"
   ]
 }

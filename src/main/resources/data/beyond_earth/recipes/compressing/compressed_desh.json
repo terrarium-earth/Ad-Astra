@@ -1,0 +1,13 @@
+{
+   "type":"beyond_earth:compressing",
+   "input":{
+      "ingredient":{
+         "tag":"forge:ingots/desh"
+      }
+   },
+   "output":{
+      "item":"beyond_earth:compressed_desh",
+      "count":1
+   },
+   "cookTime":200
+}

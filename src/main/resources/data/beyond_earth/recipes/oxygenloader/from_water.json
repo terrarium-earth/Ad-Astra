@@ -1,0 +1,8 @@
+{
+	"type": "beyond_earth:oxygenloader",
+	"input": {
+		"name": "minecraft:water",
+		"amount": 5
+	},
+	"oxygen": 5
+}

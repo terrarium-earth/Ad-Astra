@@ -1,0 +1,28 @@
+{
+  "type": "tconstruct:casting_table",
+  "conditions": [
+    {
+      "value": {
+        "tag": "forge:gears/desh",
+        "type": "forge:tag_empty"
+      },
+      "type": "forge:not"
+    },
+    {
+      "type":"forge:mod_loaded",
+      "modid":"tconstruct"
+    }
+  ],
+  "cast": {
+    "tag": "tconstruct:casts/single_use/gear"
+  },
+  "cast_consumed": true,
+  "fluid": {
+    "tag": "beyond_earth:molten_desh",
+    "amount": 576
+  },
+  "result": {
+    "tag": "forge:gears/desh"
+  },
+  "cooling_time": 100
+}

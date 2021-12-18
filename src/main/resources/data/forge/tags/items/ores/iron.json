@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "astrocraft:mars_iron_ore",
-    "astrocraft:mercury_iron_ore",
-    "astrocraft:moon_iron_ore"
+    "beyond_earth:mars_iron_ore",
+    "beyond_earth:mercury_iron_ore",
+    "beyond_earth:moon_iron_ore"
   ]
 }

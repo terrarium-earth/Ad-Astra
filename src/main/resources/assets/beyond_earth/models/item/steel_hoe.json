@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "beyond_earth:items/steel_hoe"
+  }
+}
