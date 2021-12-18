@@ -40,7 +40,6 @@ import net.mrscauthd.beyond_earth.entity.renderer.rover.RoverRenderer;
 import net.mrscauthd.beyond_earth.entity.renderer.spacesuit.SpaceSuitModel;
 import net.mrscauthd.beyond_earth.entity.renderer.starcrawler.StarCrawlerModel;
 import net.mrscauthd.beyond_earth.entity.renderer.starcrawler.StarCrawlerRenderer;
-import net.mrscauthd.beyond_earth.gui.screens.blastfurnace.BlastFurnaceGuiWindow;
 import net.mrscauthd.beyond_earth.gui.screens.coalgenerator.CoalGeneratorGuiWindow;
 import net.mrscauthd.beyond_earth.gui.screens.compressor.CompressorGuiWindow;
 import net.mrscauthd.beyond_earth.gui.screens.fuelrefinery.FuelRefineryGuiWindow;
@@ -109,7 +108,6 @@ public class ClientEventBusSubscriber {
 	public static void onClientSetup(FMLClientSetupEvent event) {
 		//GUIS
 		MenuScreens.register(ModInnet.ROCKET_GUI.get(), RocketGuiWindow::new);
-		MenuScreens.register(ModInnet.BLAST_FURNACE_GUI.get(), BlastFurnaceGuiWindow::new);
 		MenuScreens.register(ModInnet.COMPRESSOR_GUI.get(), CompressorGuiWindow::new);
 		MenuScreens.register(ModInnet.FUEL_REFINERY_GUI.get(), FuelRefineryGuiWindow::new);
 		MenuScreens.register(ModInnet.COAL_GENERATOR_GUI.get(), CoalGeneratorGuiWindow::new);

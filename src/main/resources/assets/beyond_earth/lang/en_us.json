@@ -126,7 +126,6 @@
   "block.beyond_earth.steel_block": "Block of Steel",
   "block.beyond_earth.silicon_block": "Block of Silicon",
   "block.beyond_earth.venus_coal_ore": "Venus Coal Ore",
-  "block.beyond_earth.blast_furnace": "Blast Furnace",
   "block.beyond_earth.flag_lime": "Lime Flag",
   "block.beyond_earth.moon_cheese_ore": "Moon Cheese Ore",
   "block.beyond_earth.moon_desh_ore": "Moon Desh Ore",
@@ -203,7 +202,6 @@
   "fluid.beyond_earth.flowing_molten_silicon": "Flowing Molten Silicon",
   "item.beyond_earth.molten_silicon_bucket": "Molten Silicon Bucket",
   
-  "container.beyond_earth.blast_furnace": "Blast Furnace",
   "container.beyond_earth.coal_generator": "Coal Generator",
   "container.beyond_earth.compressor": "Compressor",
   "container.beyond_earth.fuel_refinery": "Fuel Refinery",

@@ -16,7 +16,6 @@ import com.google.common.collect.Lists;
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import mezz.jei.api.IModPlugin;
-import mezz.jei.api.constants.VanillaRecipeCategoryUid;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -49,7 +48,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.ModInnet;
 import net.mrscauthd.beyond_earth.capability.OxygenUtil;
-import net.mrscauthd.beyond_earth.crafting.BlastingRecipe;
 import net.mrscauthd.beyond_earth.crafting.BeyondEarthRecipeTypes;
 import net.mrscauthd.beyond_earth.crafting.CompressingRecipe;
 import net.mrscauthd.beyond_earth.crafting.FuelRefiningRecipe;
@@ -70,8 +68,6 @@ import net.mrscauthd.beyond_earth.gui.helper.GridPlacer;
 import net.mrscauthd.beyond_earth.gui.helper.GuiHelper;
 import net.mrscauthd.beyond_earth.gui.helper.IPlacer;
 import net.mrscauthd.beyond_earth.gui.helper.RocketPartGridPlacer;
-import net.mrscauthd.beyond_earth.gui.screens.blastfurnace.BlastFurnaceGui;
-import net.mrscauthd.beyond_earth.gui.screens.blastfurnace.BlastFurnaceGuiWindow;
 import net.mrscauthd.beyond_earth.gui.screens.coalgenerator.CoalGeneratorGui;
 import net.mrscauthd.beyond_earth.gui.screens.coalgenerator.CoalGeneratorGuiWindow;
 import net.mrscauthd.beyond_earth.gui.screens.compressor.CompressorGui;
@@ -86,11 +82,9 @@ import net.mrscauthd.beyond_earth.gui.screens.oxygenloader.OxygenLoaderGui;
 import net.mrscauthd.beyond_earth.gui.screens.oxygenloader.OxygenLoaderGuiWindow;
 import net.mrscauthd.beyond_earth.gui.screens.planetselection.PlanetSelectionGuiWindow;
 import net.mrscauthd.beyond_earth.gui.screens.rocket.RocketGui;
-import net.mrscauthd.beyond_earth.jei.jeiguihandlers.BlastFurnaceGuiContainerHandler;
 import net.mrscauthd.beyond_earth.jei.jeiguihandlers.CoalGeneratorGuiContainerHandler;
 import net.mrscauthd.beyond_earth.jei.jeiguihandlers.CompressorGuiContainerHandler;
 import net.mrscauthd.beyond_earth.jei.jeiguihandlers.PlanetSlecetionGuiJeiHandler;
-import net.mrscauthd.beyond_earth.machines.tile.BlastingFurnaceBlockEntity;
 import net.mrscauthd.beyond_earth.machines.tile.CoalGeneratorBlockEntity;
 import net.mrscauthd.beyond_earth.machines.tile.CompressorBlockEntity;
 import net.mrscauthd.beyond_earth.machines.tile.FuelRefineryBlockEntity;
@@ -134,10 +128,6 @@ public class JeiPlugin implements IModPlugin {
 		registration.addRecipeTransferHandler(OxygenBubbleDistributorGui.GuiContainer.class, OxygenBubbleDistributorJeiCategory.Uid, OxygenMakingBlockEntity.SLOT_INPUT_SOURCE, 1, 0, inventorySlotCount);
 		// Generator
 		registration.addRecipeTransferHandler(CoalGeneratorGui.GuiContainer.class, CoalGeneratorJeiCategory.Uid, CoalGeneratorBlockEntity.SLOT_FUEL, 1, CoalGeneratorBlockEntity.SLOT_FUEL + 1, inventorySlotCount);
-		// BlastFurnace
-		int blastInventoryStartIndex = BlastingFurnaceBlockEntity.SLOT_FUEL + 1;
-		registration.addRecipeTransferHandler(BlastFurnaceGui.GuiContainer.class, BlastingFurnaceJeiCategory.Uid, ItemStackToItemStackBlockEntity.SLOT_INGREDIENT, 1, blastInventoryStartIndex, inventorySlotCount);
-		registration.addRecipeTransferHandler(BlastFurnaceGui.GuiContainer.class, VanillaRecipeCategoryUid.FUEL, BlastingFurnaceBlockEntity.SLOT_FUEL, 1, blastInventoryStartIndex, inventorySlotCount);
 		// Compressor
 		registration.addRecipeTransferHandler(CompressorGui.GuiContainer.class, CompressorJeiCategory.Uid, ItemStackToItemStackBlockEntity.SLOT_INGREDIENT, 1, ItemStackToItemStackBlockEntity.SLOT_OUTPUT + 1, inventorySlotCount);
 		// WorkBench
@@ -155,7 +145,6 @@ public class JeiPlugin implements IModPlugin {
 		registration.addRecipeClickArea(NasaWorkbenchGuiWindow.class, 108, 49, 14, 14, NASAWorkbenchJeiCategory.Uid);
 		registration.addGuiContainerHandler(CoalGeneratorGuiWindow.class, new CoalGeneratorGuiContainerHandler());
 		registration.addRecipeClickArea(FuelRefineryGuiWindow.class, FuelRefineryGuiWindow.ARROW_LEFT, FuelRefineryGuiWindow.ARROW_TOP, GuiHelper.ARROW_WIDTH, GuiHelper.ARROW_HEIGHT, FuelRefineryJeiCategory.Uid);
-		registration.addGuiContainerHandler(BlastFurnaceGuiWindow.class, new BlastFurnaceGuiContainerHandler());
 		registration.addGuiContainerHandler(CompressorGuiWindow.class, new CompressorGuiContainerHandler());
 		registration.addRecipeClickArea(OxygenLoaderGuiWindow.class, OxygenLoaderGuiWindow.ARROW_LEFT, OxygenLoaderGuiWindow.ARROW_TOP, GuiHelper.ARROW_WIDTH, GuiHelper.ARROW_HEIGHT, OxygenLoaderJeiCategory.Uid);
 		registration.addRecipeClickArea(OxygenBubbleDistributorGuiWindow.class, OxygenBubbleDistributorGuiWindow.ARROW_LEFT, OxygenBubbleDistributorGuiWindow.ARROW_TOP, GuiHelper.ARROW_WIDTH, GuiHelper.ARROW_HEIGHT, OxygenBubbleDistributorJeiCategory.Uid);
@@ -172,8 +161,6 @@ public class JeiPlugin implements IModPlugin {
 		registration.addRecipeCategories(new CoalGeneratorJeiCategory(jeiHelper.getGuiHelper()));
 		// workbench
 		registration.addRecipeCategories(new NASAWorkbenchJeiCategory(jeiHelper.getGuiHelper()));
-		// BlastFurnace
-		registration.addRecipeCategories(new BlastingFurnaceJeiCategory(jeiHelper.getGuiHelper()));
 		// RocketTier1Gui
 		registration.addRecipeCategories(new Tier1RocketJeiCategory(jeiHelper.getGuiHelper()));
 		// RocketTier2Gui
@@ -204,8 +191,6 @@ public class JeiPlugin implements IModPlugin {
 		registration.addRecipes(generateGeneratorRecipes(), CoalGeneratorJeiCategory.Uid);
 		// workbench
 		registration.addRecipes(generateWorkbenchRecipes(), NASAWorkbenchJeiCategory.Uid);
-		// BlastFurnace
-		registration.addRecipes(generateBlastingFurnaceRecipes(), BlastingFurnaceJeiCategory.Uid);
 		// RocketTier1Gui
 		registration.addRecipes(fuelLoadingRecipes, Tier1RocketJeiCategory.Uid);
 		// RocketTier2Gui
@@ -248,11 +233,6 @@ public class JeiPlugin implements IModPlugin {
 	// Workbench
 	private List<WorkbenchingRecipe> generateWorkbenchRecipes() {
 		return BeyondEarthRecipeTypes.WORKBENCHING.getRecipes(this.getLevel());
-	}
-
-	// BlastFurnace
-	private List<BlastingRecipe> generateBlastingFurnaceRecipes() {
-		return BeyondEarthRecipeTypes.BLASTING.getRecipes(this.getLevel());
 	}
 
 	// Compressor
@@ -320,8 +300,6 @@ public class JeiPlugin implements IModPlugin {
 		registration.addRecipeCatalyst(new ItemStack(ModInnet.COAL_GENERATOR_BLOCK.get()), CoalGeneratorJeiCategory.Uid);
 		// workbench
 		registration.addRecipeCatalyst(new ItemStack(ModInnet.NASA_WORKBENCH_ITEM.get()), NASAWorkbenchJeiCategory.Uid);
-		// BlastingFurnace
-		registration.addRecipeCatalyst(new ItemStack(ModInnet.BLAST_FURNACE_BLOCK.get()), BlastingFurnaceJeiCategory.Uid, VanillaRecipeCategoryUid.FUEL);
 		// RocketTier1Gui
 		registration.addRecipeCatalyst(new ItemStack(ModInnet.TIER_1_ROCKET_ITEM.get()), Tier1RocketJeiCategory.Uid);
 		// RocketTier2Gui
@@ -779,80 +757,6 @@ public class JeiPlugin implements IModPlugin {
 		String text = numberInstance.format(ticks / 20.0F) + "s";
 
 		drawText(stack, background, text);
-	}
-
-	// BlastingFurnace
-	public static class BlastingFurnaceJeiCategory implements IRecipeCategory<BlastingRecipe> {
-		public static final ResourceLocation Uid = new ResourceLocation(BeyondEarthMod.MODID, "blastingfurnacecategory");
-		public static final int FIRE_LEFT = 37;
-		public static final int FIRE_TOP = 37;
-		public static final int ARROW_LEFT = 55;
-		public static final int ARROW_TOP = 35;
-
-		private final Component title;
-		private final IDrawable background;
-		private final LoadingCache<Integer, IDrawableAnimated> fire;
-		private final LoadingCache<Integer, IDrawableAnimated> cachedArrows;
-
-		public BlastingFurnaceJeiCategory(IGuiHelper guiHelper) {
-			this.title = new TranslatableComponent("container." + BeyondEarthMod.MODID + ".blast_furnace");
-			this.background = guiHelper.createDrawable(new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/blast_furnace_gui_jei.png"), 0, 0, 144, 84);
-			this.fire = createFires(guiHelper);
-			this.cachedArrows = createArrows(guiHelper);
-		}
-
-		@Override
-		public ResourceLocation getUid() {
-			return Uid;
-		}
-
-		@Override
-		public Class<? extends BlastingRecipe> getRecipeClass() {
-			return BlastingRecipe.class;
-		}
-
-		@Override
-		public Component getTitle() {
-			return this.title;
-		}
-
-		@Override
-		public IDrawable getBackground() {
-			return this.background;
-		}
-
-		@Override
-		public void draw(BlastingRecipe recipe, PoseStack stack, double mouseX, double mouseY) {
-			IRecipeCategory.super.draw(recipe, stack, mouseX, mouseY);
-
-			int cookTime = recipe.getCookTime();
-			this.fire.getUnchecked(cookTime).draw(stack, FIRE_LEFT, FIRE_TOP);
-			this.cachedArrows.getUnchecked(cookTime).draw(stack, ARROW_LEFT, ARROW_TOP);
-			drawTextTime(stack, this.getBackground(), cookTime);
-		}
-
-		@Override
-		public IDrawable getIcon() {
-			return null;
-		}
-
-		@Override
-		public void setIngredients(BlastingRecipe recipe, IIngredients iIngredients) {
-			iIngredients.setInputIngredients(recipe.getIngredients());
-			iIngredients.setOutput(VanillaTypes.ITEM, recipe.getOutput());
-		}
-
-		@Override
-		public void setRecipe(IRecipeLayout iRecipeLayout, BlastingRecipe recipe, IIngredients iIngredients) {
-			IGuiItemStackGroup stacks = iRecipeLayout.getItemStacks();
-			stacks.init(ItemStackToItemStackBlockEntity.SLOT_INGREDIENT, true, 36, 16);// Iron
-			stacks.init(ItemStackToItemStackBlockEntity.SLOT_OUTPUT, false, 86, 35);// steel
-			// ...
-
-			stacks.set(ItemStackToItemStackBlockEntity.SLOT_INGREDIENT, iIngredients.getInputs(VanillaTypes.ITEM).get(0));
-			stacks.set(ItemStackToItemStackBlockEntity.SLOT_OUTPUT, iIngredients.getOutputs(VanillaTypes.ITEM).get(0));
-			// ...
-		}
 	}
 
 	// RocketTier1Gui

@@ -126,7 +126,6 @@
   "block.beyond_earth.steel_block": "강철 블록",
   "block.beyond_earth.silicon_block": "실리콘 블록",
   "block.beyond_earth.venus_coal_ore": "금성 석탄 광석",
-  "block.beyond_earth.blast_furnace": "용광로",
   "block.beyond_earth.flag_lime": "연두색 깃발",
   "block.beyond_earth.moon_cheese_ore": "달 치즈 광석",
   "block.beyond_earth.moon_desh_ore": "달 데쉬 광석",
@@ -203,7 +202,6 @@
   "fluid.beyond_earth.flowing_molten_silicon": "흐르는 녹은 실리콘",
   "item.beyond_earth.molten_silicon_bucket": "녹은 실리콘 양동이",
   
-  "container.beyond_earth.blast_furnace": "용광로",
   "container.beyond_earth.coal_generator": "석탄 발전기",
   "container.beyond_earth.compressor": "압축기",
   "container.beyond_earth.fuel_refinery": "연료 정제기",

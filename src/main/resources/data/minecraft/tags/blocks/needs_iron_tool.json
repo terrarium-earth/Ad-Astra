@@ -2,7 +2,6 @@
   "replace": false,
   "values": [
     "beyond_earth:fuel_refinery",
-    "beyond_earth:blast_furnace",
     "beyond_earth:compressor",
     "beyond_earth:coal_generator",
     "beyond_earth:oxygen_loader",
