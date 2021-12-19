@@ -278,12 +278,12 @@ public class ModInnet {
     public static final RegistryObject<Item> ENGINE_FRAME = ITEMS.register("engine_frame", () -> new Item(new Item.Properties().tab(ItemGroups.tab_basics)));
     public static final RegistryObject<Item> ENGINE_FAN = ITEMS.register("engine_fan", () -> new Item(new Item.Properties().tab(ItemGroups.tab_basics)));
     public static final RegistryObject<Item> ROCKET_NOSE_CONE = ITEMS.register("rocket_nose_cone", () -> new Item(new Item.Properties().tab(ItemGroups.tab_basics)));
-    public static final RegistryObject<Item> IRON_ENGINE = ITEMS.register("iron_engine", () -> new Item(new Item.Properties().tab(ItemGroups.tab_basics)));
-    public static final RegistryObject<Item> GOLD_ENGINE = ITEMS.register("gold_engine", () -> new Item(new Item.Properties().tab(ItemGroups.tab_basics)));
-    public static final RegistryObject<Item> DIAMOND_ENGINE = ITEMS.register("diamond_engine", () -> new Item(new Item.Properties().tab(ItemGroups.tab_basics)));
-    public static final RegistryObject<Item> IRON_TANK = ITEMS.register("iron_tank", () -> new Item(new Item.Properties().tab(ItemGroups.tab_basics)));
-    public static final RegistryObject<Item> GOLD_TANK = ITEMS.register("gold_tank", () -> new Item(new Item.Properties().tab(ItemGroups.tab_basics)));
-    public static final RegistryObject<Item> DIAMOND_TANK = ITEMS.register("diamond_tank", () -> new Item(new Item.Properties().tab(ItemGroups.tab_basics)));
+    public static final RegistryObject<Item> STEEL_ENGINE = ITEMS.register("steel_engine", () -> new Item(new Item.Properties().tab(ItemGroups.tab_basics)));
+    public static final RegistryObject<Item> DESH_ENGINE = ITEMS.register("desh_engine", () -> new Item(new Item.Properties().tab(ItemGroups.tab_basics)));
+    public static final RegistryObject<Item> SILICON_ENGINE = ITEMS.register("silicon_engine", () -> new Item(new Item.Properties().tab(ItemGroups.tab_basics)));
+    public static final RegistryObject<Item> STEEL_TANK = ITEMS.register("steel_tank", () -> new Item(new Item.Properties().tab(ItemGroups.tab_basics)));
+    public static final RegistryObject<Item> DESH_TANK = ITEMS.register("desh_tank", () -> new Item(new Item.Properties().tab(ItemGroups.tab_basics)));
+    public static final RegistryObject<Item> SILICON_TANK = ITEMS.register("silicon_tank", () -> new Item(new Item.Properties().tab(ItemGroups.tab_basics)));
     public static final RegistryObject<Item> ROCKET_FIN = ITEMS.register("rocket_fin", () -> new Item(new Item.Properties().tab(ItemGroups.tab_basics)));
 
     public static final RegistryObject<Item> STEEL_INGOT = ITEMS.register("steel_ingot", () -> new Item(new Item.Properties().tab(ItemGroups.tab_materials)));

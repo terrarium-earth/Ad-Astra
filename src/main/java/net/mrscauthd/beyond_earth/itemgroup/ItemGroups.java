@@ -26,7 +26,7 @@ public class ItemGroups {
 		@OnlyIn(Dist.CLIENT)
 		@Override
 		public ItemStack makeIcon() {
-			return new ItemStack(ModInnet.GOLD_ENGINE.get(), 1);
+			return new ItemStack(ModInnet.DESH_ENGINE.get(), 1);
 		}
 	};
 	public static CreativeModeTab tab_materials = new CreativeModeTab("tab_materials") {

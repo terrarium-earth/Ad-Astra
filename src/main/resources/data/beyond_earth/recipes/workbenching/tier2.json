@@ -29,10 +29,10 @@
          ],
          "beyond_earth:tank":[
             {
-               "item":"beyond_earth:gold_tank"
+               "item":"beyond_earth:desh_tank"
             },
             {
-               "item":"beyond_earth:gold_tank"
+               "item":"beyond_earth:desh_tank"
             }
          ],
          "beyond_earth:fin_left":[
@@ -53,7 +53,7 @@
          ],
          "beyond_earth:engine":[
             {
-               "item":"beyond_earth:gold_engine"
+               "item":"beyond_earth:desh_engine"
             }
          ]
       }
