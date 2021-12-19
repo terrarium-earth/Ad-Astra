@@ -5,8 +5,8 @@ import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.Carvers;
 import net.minecraft.data.worldgen.placement.NetherPlacements;
 import net.minecraft.data.worldgen.placement.OrePlacements;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.level.NaturalSpawner;
 import net.minecraft.world.level.biome.*;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraftforge.event.RegistryEvent;
@@ -37,7 +37,7 @@ public class BiomeRegistry {
             BiomeGenerationSettings.Builder biomeGenerationSettings = new BiomeGenerationSettings.Builder();
             BiomeDefaultFeatures.addDripstone(biomeGenerationSettings);
             addDefaultCarversAndLakes(biomeGenerationSettings);
-            MobSpawnSettings mobSpawnInfo = MobSpawnSettings.EMPTY;
+            MobSpawnSettings mobSpawnInfo = (new MobSpawnSettings.Builder()).addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModInnet.ALIEN_ZOMBIE.get(), 20, 5, 5)).addMobCharge(ModInnet.ALIEN_ZOMBIE.get(), 0.7D, 0.15D).addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModInnet.STAR_CRAWLER.get(), 20, 5, 5)).addMobCharge(ModInnet.STAR_CRAWLER.get(), 0.7D, 0.15D).build();
 
             moon = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(1.6f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
             event.getRegistry().register(moon.setRegistryName(BeyondEarthMod.MODID,"moon"));
