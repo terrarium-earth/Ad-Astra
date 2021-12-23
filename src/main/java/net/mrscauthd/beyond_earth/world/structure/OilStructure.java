@@ -45,13 +45,14 @@ public class OilStructure extends StructureFeature<JigsawConfiguration> {
 
         BlockState topBlock = columnOfBlocks.getBlock(landHeight);
 
-        return topBlock.getFluidState().isEmpty();
+        /** Check if it on Land or on water*/
+        return !topBlock.getFluidState().isEmpty();
     }
 
     public static Optional<PieceGenerator<JigsawConfiguration>> createPiecesGenerator(PieceGeneratorSupplier.Context<JigsawConfiguration> context) {
         BlockPos chunkpos = context.chunkPos().getMiddleBlockPosition(0);
 
-        BlockPos blockpos = new BlockPos(chunkpos.getX(), chunkpos.getY() - 10, chunkpos.getZ());
+        BlockPos blockpos = new BlockPos(chunkpos.getX(),-10, chunkpos.getZ());
 
         JigsawConfiguration newConfig = new JigsawConfiguration(() -> context.registryAccess().ownedRegistryOrThrow(Registry.TEMPLATE_POOL_REGISTRY)
                 .get(new ResourceLocation(BeyondEarthMod.MODID, "run_oil/side_oil_start")), 25);
