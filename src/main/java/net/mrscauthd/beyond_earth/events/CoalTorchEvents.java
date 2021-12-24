@@ -21,7 +21,7 @@ import net.mrscauthd.beyond_earth.block.CoalLanternBlock;
 public class CoalTorchEvents {
 
     @SubscribeEvent
-    public static void onBlockPlace(BlockEvent.EntityPlaceEvent event) {
+    public static void onBlockPlace(BlockEvent event) {
         Level world = (Level) event.getWorld();
 
         double x = event.getPos().getX();
@@ -35,8 +35,6 @@ public class CoalTorchEvents {
             //Remove Fire
             if (world.getBlockState(pos).getBlock() == Blocks.FIRE.defaultBlockState().getBlock()) {
                 world.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
-
-                play_fire_sounds_delete(pos, world);
             }
 
             if (world.getBlockState(pos).getBlock() == Blocks.WALL_TORCH) {

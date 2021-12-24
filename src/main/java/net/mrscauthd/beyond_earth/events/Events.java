@@ -1,9 +1,11 @@
 package net.mrscauthd.beyond_earth.events;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.PlayerModel;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.resources.sounds.ElytraOnPlayerSoundInstance;
@@ -104,6 +106,7 @@ public class Events {
     @SubscribeEvent
     public static void renderPlayerArm(RenderArmEvent event) {
         PlayerModel<AbstractClientPlayer> playerModel = ((PlayerRenderer) Minecraft.getInstance().getEntityRenderDispatcher().getRenderer(event.getPlayer())).getModel();
+
         Player player = event.getPlayer();
 
         Item item = player.getOffhandItem().getItem();
@@ -280,7 +283,7 @@ public class Events {
     public static void SpaceSounds(PlaySoundEvent event) {
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.level != null && Minecraft.getInstance().screen == null && Methodes.isSpaceWorld(Minecraft.getInstance().player.level)) {
             if (!(event.getSound() instanceof ElytraOnPlayerSoundInstance)) {
-                event.setSound(new SpaceSoundSystem(event.getSound()));
+               // event.setSound(new SpaceSoundSystem(event.getSound()));
             } else {
                 event.setSound(new ElytraSpaceOnPlayerSoundInstance(Minecraft.getInstance().player));
             }

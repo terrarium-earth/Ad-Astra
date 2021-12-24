@@ -23,6 +23,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.mrscauthd.beyond_earth.ModInnet;
+import net.mrscauthd.beyond_earth.events.Methodes;
 
 public class CoalTorchBlock extends Block {
     protected static final VoxelShape SHAPE = Block.box(6.0D, 0.0D, 6.0D, 10.0D, 10.0D, 10.0D);
@@ -35,7 +36,7 @@ public class CoalTorchBlock extends Block {
     public InteractionResult use(BlockState p_51274_, Level p_51275_, BlockPos p_51276_, Player p_51277_, InteractionHand p_51278_, BlockHitResult p_51279_) {
         ItemStack itemstack = p_51277_.getItemInHand(p_51278_);
 
-        if (p_51275_.getBlockState(p_51276_).getBlock() == ModInnet.WALL_COAL_TORCH_BLOCK.get() && (itemstack.getItem() == Items.FLINT_AND_STEEL || itemstack.getItem() == Items.FIRE_CHARGE)) {
+        if (p_51275_.getBlockState(p_51276_).getBlock() == ModInnet.WALL_COAL_TORCH_BLOCK.get() && !Methodes.isSpaceWorld(p_51275_) && (itemstack.getItem() == Items.FLINT_AND_STEEL || itemstack.getItem() == Items.FIRE_CHARGE)) {
             if (!p_51275_.isClientSide) {
 
                 BlockState bs = p_51275_.getBlockState(p_51276_);
@@ -48,14 +49,19 @@ public class CoalTorchBlock extends Block {
             }
         }
 
-        if (p_51275_.getBlockState(p_51276_).getBlock() == ModInnet.COAL_TORCH_BLOCK.get() && (itemstack.getItem() == Items.FLINT_AND_STEEL || itemstack.getItem() == Items.FIRE_CHARGE)) {
+        if (p_51275_.getBlockState(p_51276_).getBlock() == ModInnet.COAL_TORCH_BLOCK.get() && !Methodes.isSpaceWorld(p_51275_) && (itemstack.getItem() == Items.FLINT_AND_STEEL || itemstack.getItem() == Items.FIRE_CHARGE)) {
             if (!p_51275_.isClientSide) {
                 p_51275_.setBlock(p_51276_, Blocks.TORCH.defaultBlockState(), 3);
                 flintManager(itemstack, p_51277_, p_51278_, p_51276_, p_51275_);
                 return InteractionResult.SUCCESS;
             }
         }
-        return InteractionResult.SUCCESS;
+
+        if (itemstack.getItem() == Items.FLINT_AND_STEEL || itemstack.getItem() == Items.FIRE_CHARGE) {
+            return InteractionResult.SUCCESS;
+        }
+
+        return InteractionResult.PASS;
     }
 
     @Override
