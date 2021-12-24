@@ -95,7 +95,7 @@ public class BeyondEarthMod {
 		forgeBus.addListener(EventPriority.NORMAL, ModInnet::addDimensionalSpacing);
 
 		// For events that happen after initialization. This is probably going to be use a lot.
-		forgeBus.addListener(EventPriority.NORMAL, AlienVillageStructure::setupStructureSpawns);
+		//forgeBus.addListener(EventPriority.NORMAL, AlienVillageStructure::setupStructureSpawns);
 	}
 
 	private void setup(final FMLCommonSetupEvent event) {

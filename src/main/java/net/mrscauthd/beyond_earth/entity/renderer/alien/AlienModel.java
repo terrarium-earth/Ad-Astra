@@ -37,7 +37,7 @@ public class AlienModel<T extends AlienEntity> extends EntityModel<T> {
 		PartDefinition head = partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).mirror().addBox(-4.0F, -9.0F, -4.0F, 8.0F, 9.0F, 8.0F, new CubeDeformation(0.0F)).mirror(false)
 				.texOffs(32, 0).mirror().addBox(-4.5F, -19.0F, -4.5F, 9.0F, 10.0F, 9.0F, new CubeDeformation(0.0F)).mirror(false)
 				.texOffs(16, 64).mirror().addBox(-8.0F, -15.0F, -8.0F, 16.0F, 0.0F, 16.0F, new CubeDeformation(0.0F)).mirror(false)
-				.texOffs(80, 2).mirror().addBox(-6.0F, -16.0F, -6.0F, 12.0F, 0.0F, 12.0F, new CubeDeformation(0.0F)).mirror(false)
+				.texOffs(70, 2).mirror().addBox(-6.0F, -16.0F, -6.0F, 12.0F, 0.0F, 12.0F, new CubeDeformation(0.0F)).mirror(false)
 				.texOffs(24, 0).mirror().addBox(-1.0F, -3.0F, -6.0F, 2.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(0.0F, 0.0F, 0.0F));
 
 		PartDefinition body = partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(16, 20).mirror().addBox(-4.0F, 0.0F, -3.0F, 8.0F, 12.0F, 6.0F, new CubeDeformation(0.0F)).mirror(false)
