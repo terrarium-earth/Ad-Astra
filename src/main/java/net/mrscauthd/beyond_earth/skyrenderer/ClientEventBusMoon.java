@@ -136,9 +136,10 @@ public class ClientEventBusMoon {
                         bufferbuilder.end();
                         BufferUploader.end(bufferbuilder);
 
+
                         //EARTH
-                        RenderSystem.enableDepthTest();
                         RenderSystem.depthMask(true);
+                        RenderSystem.enableDepthTest();
 
                         RenderSystem.setShaderTexture(0, EARTH);
                         bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
@@ -196,6 +197,7 @@ public class ClientEventBusMoon {
 
                         RenderSystem.enableTexture();
                         RenderSystem.depthMask(true);
+                        RenderSystem.disableDepthTest();
                     }
                 };
             }

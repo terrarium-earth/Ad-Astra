@@ -125,7 +125,7 @@ public class FuelFluid extends FlowingFluid {
 		return net.minecraftforge.fluids.FluidAttributes.builder(
 			new ResourceLocation(BeyondEarthMod.MODID,"blocks/fluid_fuel_still"),
 			new ResourceLocation(BeyondEarthMod.MODID,"blocks/fluid_fuel_flow"))
-				.overlay(new ResourceLocation(BeyondEarthMod.MODID,"blocks/fluid_fuel_still"))
+				.overlay(new ResourceLocation(BeyondEarthMod.MODID,"blocks/fuel_overlay"))
 				.translationKey("block." + BeyondEarthMod.MODID + ".fuel")
 				.sound(SoundEvents.BUCKET_FILL, SoundEvents.BUCKET_EMPTY)
 				.build(this);

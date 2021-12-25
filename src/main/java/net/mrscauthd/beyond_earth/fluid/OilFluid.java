@@ -124,7 +124,7 @@ public class OilFluid extends FlowingFluid {
         return net.minecraftforge.fluids.FluidAttributes.builder(
                  new ResourceLocation(BeyondEarthMod.MODID,"blocks/fluid_oil_still"),
                  new ResourceLocation(BeyondEarthMod.MODID,"blocks/fluid_oil_flow"))
-                .overlay(new ResourceLocation(BeyondEarthMod.MODID,"blocks/fluid_oil_still"))
+                .overlay(new ResourceLocation(BeyondEarthMod.MODID,"blocks/oil_overlay"))
                 .translationKey("block." + BeyondEarthMod.MODID + ".oil")
                 .sound(SoundEvents.BUCKET_FILL, SoundEvents.BUCKET_EMPTY)
                 .build(this);

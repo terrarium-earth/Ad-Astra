@@ -126,8 +126,8 @@ public class ClientEventBusMoonOrbit {
                         RenderSystem.setShader(GameRenderer::getPositionTexShader);
 
                         //MOON
-                        RenderSystem.enableDepthTest();
                         RenderSystem.depthMask(true);
+                        RenderSystem.enableDepthTest();
 
                         float var20 = -3000.0F + (float) Minecraft.getInstance().player.getY() * 6F;
 
@@ -182,6 +182,7 @@ public class ClientEventBusMoonOrbit {
 
                         RenderSystem.enableTexture();
                         RenderSystem.depthMask(true);
+                        RenderSystem.disableDepthTest();
                     }
                 };
             }
