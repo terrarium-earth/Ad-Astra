@@ -128,6 +128,9 @@ public class ClientEventBusSubscriber {
 		ItemBlockRenderTypes.setRenderLayer(ModInnet.FLOWING_FUEL.get(), RenderType.translucent());
 		ItemBlockRenderTypes.setRenderLayer(ModInnet.FUEL_STILL.get(), RenderType.translucent());
 
+		ItemBlockRenderTypes.setRenderLayer(ModInnet.FLOWING_OIL.get(), RenderType.translucent());
+		ItemBlockRenderTypes.setRenderLayer(ModInnet.OIL_STILL.get(), RenderType.translucent());
+
 		//Block Translucent Renderer
 		ItemBlockRenderTypes.setRenderLayer(ModInnet.COAL_LANTERN_BLOCK.get(), RenderType.translucent());
 
