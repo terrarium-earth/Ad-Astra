@@ -54,7 +54,6 @@ public class KeyBindings {
 			if (InputConstants.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), GLFW.GLFW_KEY_SPACE)) {
 				if (Minecraft.getInstance().screen == null) {
 					INSTANCE.sendToServer(new KeyBindingPressedMessage(0, 0));
-					//pressAction(Minecraft.getInstance().player, 0, 0);
 				}
 			}
 
@@ -62,7 +61,6 @@ public class KeyBindings {
 			if ((InputConstants.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), GLFW.GLFW_KEY_A))) {
 				if (Minecraft.getInstance().screen == null) {
 					INSTANCE.sendToServer(new KeyBindingPressedMessage(2, 0));
-					//(Minecraft.getInstance().player, 2, 0);
 				}
 			}
 
@@ -70,7 +68,6 @@ public class KeyBindings {
 			if ((InputConstants.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), GLFW.GLFW_KEY_D))) {
 				if (Minecraft.getInstance().screen == null) {
 					INSTANCE.sendToServer(new KeyBindingPressedMessage(3, 0));
-					//pressAction(Minecraft.getInstance().player, 3, 0);
 				}
 			}
 
@@ -84,7 +81,6 @@ public class KeyBindings {
 			if (event.getKey() == ClientEventBusSubscriber.key1.getKey().getValue()) {
 				if (event.getAction() == GLFW.GLFW_PRESS) {
 					INSTANCE.sendToServer(new KeyBindingPressedMessage(1, 0));
-					//pressAction(Minecraft.getInstance().player, 1, 0);
 				}
 			}
 		}

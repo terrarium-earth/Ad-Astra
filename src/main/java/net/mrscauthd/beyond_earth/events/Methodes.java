@@ -283,6 +283,12 @@ public class Methodes {
         }
     }
 
+    public static void holdSpaceMessage(Player player) {
+        if (!player.level.isClientSide) {
+            player.displayClientMessage(new TextComponent("\u00A77Hold \u00A7cSpace!"), false);
+        }
+    }
+
     public static boolean tagCheck(Entity entity, String tag) {
         return EntityTypeTags.getAllTags().getTagOrEmpty(new ResourceLocation(tag)).contains(entity.getType());
     }
