@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "experience": 1,
+  "cookingtime": 100,
+  "ingredient": {
+    "item": "beyond_earth:moon_iron_ore"
+  },
+  "result": {
+    "item": "minecraft:iron_ingot"
+  }
+}
