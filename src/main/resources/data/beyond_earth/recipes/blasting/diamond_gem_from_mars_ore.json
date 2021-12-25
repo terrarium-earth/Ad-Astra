@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "experience": 1,
+  "cookingtime": 100,
+  "ingredient": {
+    "item": "beyond_earth:mars_diamond_ore"
+  },
+  "result": {
+    "item": "minecraft:diamond"
+  }
+}

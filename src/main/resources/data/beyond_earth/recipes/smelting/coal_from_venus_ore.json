@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "experience": 0.1,
+  "cookingtime": 200,
+  "ingredient": {
+    "item": "beyond_earth:venus_coal_ore"
+  },
+  "result": {
+    "item": "minecraft:coal"
+  }
+}

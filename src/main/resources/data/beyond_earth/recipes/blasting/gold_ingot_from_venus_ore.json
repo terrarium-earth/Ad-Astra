@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "experience": 1,
+  "cookingtime": 100,
+  "ingredient": {
+    "item": "beyond_earth:venus_gold_ore"
+  },
+  "result": {
+    "item": "minecraft:gold_ingot"
+  }
+}
