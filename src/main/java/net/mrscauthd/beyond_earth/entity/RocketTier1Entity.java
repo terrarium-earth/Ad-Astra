@@ -22,6 +22,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -121,6 +122,15 @@ public class RocketTier1Entity extends PathfinderMob {
 
 	@Override
 	public boolean isAffectedByPotions() {
+		return false;
+	}
+
+	@Override
+	protected void onEffectAdded(MobEffectInstance p_147190_, @Nullable Entity p_147191_) {
+	}
+
+	@Override
+	public boolean addEffect(MobEffectInstance p_147208_, @Nullable Entity p_147209_) {
 		return false;
 	}
 

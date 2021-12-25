@@ -2,6 +2,7 @@ package net.mrscauthd.beyond_earth;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
@@ -42,7 +43,6 @@ public class BeyondEarthMod {
 	private static int messageID;
 
 	public BeyondEarthMod() {
-
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 
