@@ -9,9 +9,11 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.resources.sounds.ElytraOnPlayerSoundInstance;
+import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
@@ -281,9 +283,9 @@ public class Events {
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void SpaceSounds(PlaySoundEvent event) {
-        if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.level != null && Minecraft.getInstance().screen == null && Methodes.isSpaceWorld(Minecraft.getInstance().player.level)) {
+        if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.level != null && Methodes.checkSound(event.getSound().getSource()) && Methodes.isSpaceWorld(Minecraft.getInstance().player.level)) {
             if (!(event.getSound() instanceof ElytraOnPlayerSoundInstance)) {
-               // event.setSound(new SpaceSoundSystem(event.getSound()));
+                event.setSound(new SpaceSoundSystem(event.getSound()));
             } else {
                 event.setSound(new ElytraSpaceOnPlayerSoundInstance(Minecraft.getInstance().player));
             }

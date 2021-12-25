@@ -225,7 +225,7 @@ public class Methodes {
         ResourceKey<Level> key = entity.level.dimension();
 
         if (key == ResourceKey.create(Registry.DIMENSION_REGISTRY, planet1) || key == ResourceKey.create(Registry.DIMENSION_REGISTRY, planet2)) {
-            if (!Methodes.nethriteSpaceSuitCheck(entity) && !entity.hasEffect(MobEffects.FIRE_RESISTANCE) && !entity.fireImmune()) {
+            if (!Methodes.nethriteSpaceSuitCheck(entity) && !entity.hasEffect(MobEffects.FIRE_RESISTANCE) && !entity.fireImmune() && (entity instanceof Mob)) {
                 if (!MinecraftForge.EVENT_BUS.post(new LivingSetFireInHotPlanetEvent(entity))) {
                     if (!tagCheck(entity, BeyondEarthMod.MODID + ":entities/venus_fire")) {
                         entity.setSecondsOnFire(10);
@@ -546,5 +546,10 @@ public class Methodes {
 
             return HumanoidModel.ArmPose.ITEM;
         }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static boolean checkSound(SoundSource sound) {
+        return sound == SoundSource.BLOCKS || sound == SoundSource.NEUTRAL || sound == SoundSource.RECORDS || sound == SoundSource.WEATHER || sound == SoundSource.HOSTILE || sound == SoundSource.PLAYERS || sound == SoundSource.AMBIENT;
     }
 }
