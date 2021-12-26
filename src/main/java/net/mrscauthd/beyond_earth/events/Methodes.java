@@ -48,7 +48,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
-import net.mrscauthd.beyond_earth.ModInnet;
+import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.capability.IOxygenStorage;
 import net.mrscauthd.beyond_earth.capability.OxygenUtil;
 import net.mrscauthd.beyond_earth.entity.*;
@@ -80,10 +80,10 @@ public class Methodes {
     }
 
     public static boolean nethriteSpaceSuitCheck(LivingEntity entity) {
-        Boolean item3 = checkArmor(entity, 3, ModInnet.NETHERITE_OXYGEN_MASK.get());
-        Boolean item2 = checkArmor(entity, 2, ModInnet.NETHERITE_SPACE_SUIT.get());
-        Boolean item1 = checkArmor(entity, 1, ModInnet.NETHERITE_SPACE_PANTS.get());
-        Boolean item0 = checkArmor(entity, 0, ModInnet.NETHERITE_SPACE_BOOTS.get());
+        Boolean item3 = checkArmor(entity, 3, ModInit.NETHERITE_OXYGEN_MASK.get());
+        Boolean item2 = checkArmor(entity, 2, ModInit.NETHERITE_SPACE_SUIT.get());
+        Boolean item1 = checkArmor(entity, 1, ModInit.NETHERITE_SPACE_PANTS.get());
+        Boolean item0 = checkArmor(entity, 0, ModInit.NETHERITE_SPACE_BOOTS.get());
 
         if (item0 && item1 && item2 && item3) {
             return true;
@@ -92,10 +92,10 @@ public class Methodes {
     }
 
     public static boolean spaceSuitCheck(LivingEntity entity) {
-        Boolean item3 = checkArmor(entity, 3, ModInnet.OXYGEN_MASK.get());
-        Boolean item2 = checkArmor(entity, 2, ModInnet.SPACE_SUIT.get());
-        Boolean item1 = checkArmor(entity, 1, ModInnet.SPACE_PANTS.get());
-        Boolean item0 = checkArmor(entity, 0, ModInnet.SPACE_BOOTS.get());
+        Boolean item3 = checkArmor(entity, 3, ModInit.OXYGEN_MASK.get());
+        Boolean item2 = checkArmor(entity, 2, ModInit.SPACE_SUIT.get());
+        Boolean item1 = checkArmor(entity, 1, ModInit.SPACE_PANTS.get());
+        Boolean item0 = checkArmor(entity, 0, ModInit.SPACE_BOOTS.get());
 
         if (item0 && item1 && item2 && item3) {
             return true;
@@ -104,15 +104,15 @@ public class Methodes {
     }
 
     public static boolean spaceSuitCheckBoth(LivingEntity entity) {
-        Boolean item3 = checkArmor(entity, 3, ModInnet.OXYGEN_MASK.get());
-        Boolean item2 = checkArmor(entity, 2, ModInnet.SPACE_SUIT.get());
-        Boolean item1 = checkArmor(entity, 1, ModInnet.SPACE_PANTS.get());
-        Boolean item0 = checkArmor(entity, 0, ModInnet.SPACE_BOOTS.get());
+        Boolean item3 = checkArmor(entity, 3, ModInit.OXYGEN_MASK.get());
+        Boolean item2 = checkArmor(entity, 2, ModInit.SPACE_SUIT.get());
+        Boolean item1 = checkArmor(entity, 1, ModInit.SPACE_PANTS.get());
+        Boolean item0 = checkArmor(entity, 0, ModInit.SPACE_BOOTS.get());
 
-        Boolean item3_2 = checkArmor(entity, 3, ModInnet.NETHERITE_OXYGEN_MASK.get());
-        Boolean item2_2 = checkArmor(entity, 2, ModInnet.NETHERITE_SPACE_SUIT.get());
-        Boolean item1_2 = checkArmor(entity, 1, ModInnet.NETHERITE_SPACE_PANTS.get());
-        Boolean item0_2 = checkArmor(entity, 0, ModInnet.NETHERITE_SPACE_BOOTS.get());
+        Boolean item3_2 = checkArmor(entity, 3, ModInit.NETHERITE_OXYGEN_MASK.get());
+        Boolean item2_2 = checkArmor(entity, 2, ModInit.NETHERITE_SPACE_SUIT.get());
+        Boolean item1_2 = checkArmor(entity, 1, ModInit.NETHERITE_SPACE_PANTS.get());
+        Boolean item0_2 = checkArmor(entity, 0, ModInit.NETHERITE_SPACE_BOOTS.get());
 
         Boolean check3 = false;
         Boolean check2 = false;
@@ -174,7 +174,7 @@ public class Methodes {
     }
 
     public static void OxygenDamage(LivingEntity entity) {
-        entity.hurt(ModInnet.DAMAGE_SOURCE_OXYGEN, 1.0F);
+        entity.hurt(ModInit.DAMAGE_SOURCE_OXYGEN, 1.0F);
     }
 
     public static boolean isRocket(Entity entity) {
@@ -201,10 +201,10 @@ public class Methodes {
 
         List<Item> items = new ArrayList<Item>();
 
-        items.add(ModInnet.TIER_1_ROCKET_ITEM.get());
-        items.add(ModInnet.TIER_2_ROCKET_ITEM.get());
-        items.add(ModInnet.TIER_3_ROCKET_ITEM.get());
-        items.add(ModInnet.ROVER_ITEM.get());
+        items.add(ModInit.TIER_1_ROCKET_ITEM.get());
+        items.add(ModInit.TIER_2_ROCKET_ITEM.get());
+        items.add(ModInit.TIER_3_ROCKET_ITEM.get());
+        items.add(ModInit.ROVER_ITEM.get());
 
         if (items.contains(item1) && items.contains(item2)) {
 
@@ -242,7 +242,7 @@ public class Methodes {
                 if (!MinecraftForge.EVENT_BUS.post(new LivingSetVenusRainEvent(entity))) {
                     if (!tagCheck(entity, BeyondEarthMod.MODID + ":entities/venus_rain")) {
 
-                        entity.hurt(ModInnet.DAMAGE_SOURCE_ACID_RAIN, 1);
+                        entity.hurt(ModInit.DAMAGE_SOURCE_ACID_RAIN, 1);
                     }
                 }
             }
@@ -254,7 +254,7 @@ public class Methodes {
     public static void EntityOxygen(LivingEntity entity, Level world) {
         if (Config.EntityOxygenSystem && Methodes.isSpaceWorld(world) && tagCheck(entity, BeyondEarthMod.MODID + ":entities/oxygen")) {
 
-            if (!entity.hasEffect(ModInnet.OXYGEN_EFFECT.get())) {
+            if (!entity.hasEffect(ModInit.OXYGEN_EFFECT.get())) {
 
                 entity.getPersistentData().putDouble(BeyondEarthMod.MODID + ":oxygen_tick", entity.getPersistentData().getDouble(BeyondEarthMod.MODID + ":oxygen_tick") + 1);
 
@@ -311,7 +311,7 @@ public class Methodes {
             Level newWorld = player.level;
 
             if (!player.level.isClientSide) {
-                LanderEntity entityToSpawn = new LanderEntity((EntityType<LanderEntity>) ModInnet.LANDER.get(), newWorld);
+                LanderEntity entityToSpawn = new LanderEntity((EntityType<LanderEntity>) ModInit.LANDER.get(), newWorld);
                 entityToSpawn.moveTo(player.getX(), player.getY(), player.getZ(), 0, 0);
                 entityToSpawn.finalizeSpawn((ServerLevelAccessor) newWorld, newWorld.getCurrentDifficultyAt(new BlockPos(entityToSpawn.getX(), entityToSpawn.getY(), entityToSpawn.getZ())), MobSpawnType.MOB_SUMMONED, null, null);
 
@@ -341,7 +341,7 @@ public class Methodes {
         Level world = player.level;
 
         if (!world.isClientSide) {
-            LanderEntity landerSpawn = new LanderEntity(ModInnet.LANDER.get(), world);
+            LanderEntity landerSpawn = new LanderEntity(ModInit.LANDER.get(), world);
             landerSpawn.moveTo(player.getX(), player.getY(), player.getZ(), 0, 0);
             landerSpawn.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(new BlockPos(landerSpawn.getX(), landerSpawn.getY(), landerSpawn.getZ())), MobSpawnType.MOB_SUMMONED, null, null);
             world.addFreshEntity(landerSpawn);
@@ -399,13 +399,13 @@ public class Methodes {
         ItemStack itemStack = new ItemStack(Items.AIR, 1);
 
         if (player.getPersistentData().getString(BeyondEarthMod.MODID + ":rocket_type").equals("entity." + BeyondEarthMod.MODID + ".rocket_t1")) {
-            itemStack = new ItemStack(ModInnet.TIER_1_ROCKET_ITEM.get(),1);
+            itemStack = new ItemStack(ModInit.TIER_1_ROCKET_ITEM.get(),1);
         }
         if (player.getPersistentData().getString(BeyondEarthMod.MODID + ":rocket_type").equals("entity." + BeyondEarthMod.MODID + ".rocket_t2")) {
-            itemStack = new ItemStack(ModInnet.TIER_2_ROCKET_ITEM.get(),1);
+            itemStack = new ItemStack(ModInit.TIER_2_ROCKET_ITEM.get(),1);
         }
         if (player.getPersistentData().getString(BeyondEarthMod.MODID + ":rocket_type").equals("entity." + BeyondEarthMod.MODID + ".rocket_t3")) {
-            itemStack = new ItemStack(ModInnet.TIER_3_ROCKET_ITEM.get(),1);
+            itemStack = new ItemStack(ModInit.TIER_3_ROCKET_ITEM.get(),1);
         }
 
         Methodes.rocketTeleport(player, planet, itemStack, SpaceStation);
@@ -467,7 +467,7 @@ public class Methodes {
 			int oxygenTimer = persistentData.getInt(key);
 			oxygenTimer++;
 
-			if (oxygenStorage.getOxygenStored() > 0 && oxygenTimer > 3 && !player.hasEffect(ModInnet.OXYGEN_EFFECT.get())) {
+			if (oxygenStorage.getOxygenStored() > 0 && oxygenTimer > 3 && !player.hasEffect(ModInit.OXYGEN_EFFECT.get())) {
 				oxygenStorage.extractOxygen(1, false);
 				oxygenTimer = 0;
 			}

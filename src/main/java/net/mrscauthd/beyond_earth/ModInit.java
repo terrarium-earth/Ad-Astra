@@ -339,7 +339,7 @@ public class ModInit {
 
 
     //ORES
-    public static final RegistryObject<Block> MOON_CHESSE_ORE = BLOCKS.register("moon_cheese_ore", () -> new Block(BlockBehaviour.Properties.of(Material.STONE).sound(SoundType.STONE).strength(3.0F, 3.0F).requiresCorrectToolForDrops()));
+    public static final RegistryObject<Block> MOON_CHEESE_ORE = BLOCKS.register("moon_cheese_ore", () -> new Block(BlockBehaviour.Properties.of(Material.STONE).sound(SoundType.STONE).strength(3.0F, 3.0F).requiresCorrectToolForDrops()));
     public static final RegistryObject<Block> MOON_DESH_ORE = BLOCKS.register("moon_desh_ore", () -> new Block(BlockBehaviour.Properties.of(Material.STONE).sound(SoundType.STONE).strength(3.0F, 3.0F).requiresCorrectToolForDrops()));
     public static final RegistryObject<Block> MOON_IRON_ORE = BLOCKS.register("moon_iron_ore", () -> new Block(BlockBehaviour.Properties.of(Material.STONE).sound(SoundType.STONE).strength(3.0F, 3.0F).requiresCorrectToolForDrops()));
     public static final RegistryObject<Block> MARS_ICE_SHARD_ORE = BLOCKS.register("mars_ice_shard_ore", () -> new Block(BlockBehaviour.Properties.of(Material.STONE).sound(SoundType.STONE).strength(3.0F, 3.0F).requiresCorrectToolForDrops()));
@@ -382,7 +382,7 @@ public class ModInit {
     public static final RegistryObject<BlockItem> MARS_SAND_ITEM = ITEMS.register("mars_sand", () -> new BlockItem(ModInit.MARS_SAND.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
     public static final RegistryObject<BlockItem> VENUS_SAND_ITEM = ITEMS.register("venus_sand", () -> new BlockItem(ModInit.VENUS_SAND.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
 
-    public static final RegistryObject<BlockItem> MOON_CHESSE_ORE_ITEM = ITEMS.register("moon_cheese_ore", () -> new BlockItem(ModInit.MOON_CHESSE_ORE.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
+    public static final RegistryObject<BlockItem> MOON_CHEESE_ORE_ITEM = ITEMS.register("moon_cheese_ore", () -> new BlockItem(ModInit.MOON_CHEESE_ORE.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
     public static final RegistryObject<BlockItem> MOON_DESH_ORE_ITEM = ITEMS.register("moon_desh_ore", () -> new BlockItem(ModInit.MOON_DESH_ORE.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
     public static final RegistryObject<BlockItem> MOON_IRON_ORE_ITEM = ITEMS.register("moon_iron_ore", () -> new BlockItem(ModInit.MOON_IRON_ORE.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
     public static final RegistryObject<BlockItem> MARS_ICE_SHARD_ORE_ITEM = ITEMS.register("mars_ice_shard_ore", () -> new BlockItem(ModInit.MARS_ICE_SHARD_ORE.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));

@@ -7,7 +7,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.state.BlockState;
-import net.mrscauthd.beyond_earth.ModInnet;
+import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.gui.screens.coalgenerator.CoalGeneratorGui;
 
 public class CoalGeneratorBlockEntity extends GeneratorBlockEntity {
@@ -18,7 +18,7 @@ public class CoalGeneratorBlockEntity extends GeneratorBlockEntity {
 	private PowerSystemFuelGeneratingRecipe powerSystemGenerating;
 
 	public CoalGeneratorBlockEntity(BlockPos pos, BlockState state) {
-		super(ModInnet.COAL_GENERATOR.get(), pos, state);
+		super(ModInit.COAL_GENERATOR.get(), pos, state);
 	}
 
 	@Override

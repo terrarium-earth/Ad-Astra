@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.ColumnFeatureConfiguration;
-import net.mrscauthd.beyond_earth.ModInnet;
+import net.mrscauthd.beyond_earth.ModInit;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -65,11 +65,11 @@ public class VenusDeltas extends Feature<ColumnFeatureConfiguration> {
 
                 for(BlockPos.MutableBlockPos blockpos$mutableblockpos = blockpos1.mutable(); j >= 0; --j) {
                     if (isAirOrLavaOcean(p_65168_, p_65169_, blockpos$mutableblockpos)) {
-                        this.setBlock(p_65168_, blockpos$mutableblockpos, ModInnet.INFERNAL_SPIRE_BLOCK.get().defaultBlockState());
+                        this.setBlock(p_65168_, blockpos$mutableblockpos, ModInit.INFERNAL_SPIRE_BLOCK.get().defaultBlockState());
                         blockpos$mutableblockpos.move(Direction.UP);
                         flag = true;
                     } else {
-                        if (!p_65168_.getBlockState(blockpos$mutableblockpos).is(ModInnet.INFERNAL_SPIRE_BLOCK.get())) {
+                        if (!p_65168_.getBlockState(blockpos$mutableblockpos).is(ModInit.INFERNAL_SPIRE_BLOCK.get())) {
                             break;
                         }
 

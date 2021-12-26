@@ -14,7 +14,7 @@ import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
-import net.mrscauthd.beyond_earth.ModInnet;
+import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.block.CoalLanternBlock;
 
 @Mod.EventBusSubscriber(modid = BeyondEarthMod.MODID)
@@ -43,25 +43,25 @@ public class CoalTorchEvents {
                 DirectionProperty property = (DirectionProperty) bs.getBlock().getStateDefinition().getProperty("facing");
 
                 //Place Coal Torch Block with Dr
-                world.setBlock(pos, ModInnet.WALL_COAL_TORCH_BLOCK.get().defaultBlockState().setValue(property,bs.getValue(property)), 3);
+                world.setBlock(pos, ModInit.WALL_COAL_TORCH_BLOCK.get().defaultBlockState().setValue(property,bs.getValue(property)), 3);
 
                 play_fire_sounds_delete(pos, world);
             }
 
             if (world.getBlockState(pos).getBlock() == Blocks.TORCH) {
-                world.setBlock(pos, ModInnet.COAL_TORCH_BLOCK.get().defaultBlockState(), 3);
+                world.setBlock(pos, ModInit.COAL_TORCH_BLOCK.get().defaultBlockState(), 3);
 
                 play_fire_sounds_delete(pos, world);
             }
 
             if (world.getBlockState(pos).getBlock() == Blocks.LANTERN && !world.getBlockState(pos).getValue(LanternBlock.HANGING)) {
-                world.setBlock(pos, ModInnet.COAL_LANTERN_BLOCK.get().defaultBlockState(), 3);
+                world.setBlock(pos, ModInit.COAL_LANTERN_BLOCK.get().defaultBlockState(), 3);
 
                 play_fire_sounds_delete(pos, world);
             }
 
             if (world.getBlockState(pos).getBlock() == Blocks.LANTERN && world.getBlockState(pos).getValue(LanternBlock.HANGING)) {
-                world.setBlock(pos, ModInnet.COAL_LANTERN_BLOCK.get().defaultBlockState().setValue(CoalLanternBlock.HANGING, true), 3);
+                world.setBlock(pos, ModInit.COAL_LANTERN_BLOCK.get().defaultBlockState().setValue(CoalLanternBlock.HANGING, true), 3);
 
                 play_fire_sounds_delete(pos, world);
             }

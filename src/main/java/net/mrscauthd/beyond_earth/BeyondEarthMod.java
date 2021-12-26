@@ -2,7 +2,6 @@ package net.mrscauthd.beyond_earth;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
@@ -17,7 +16,6 @@ import net.mrscauthd.beyond_earth.keybind.KeyBindings;
 import net.mrscauthd.beyond_earth.machines.tile.OxygenBubbleDistributorBlockEntity;
 
 import net.mrscauthd.beyond_earth.world.oregen.OreGeneration;
-import net.mrscauthd.beyond_earth.world.structure.AlienVillageStructure;
 import net.mrscauthd.beyond_earth.world.structure.configuration.STStructures;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
@@ -58,20 +56,20 @@ public class BeyondEarthMod {
 		bus.register(this);
 
 		//MobInnet
-		ModInnet.ENTITYS.register(bus);
-		ModInnet.ITEMS.register(bus);
-		ModInnet.BLOCKS.register(bus);
-		ModInnet.TILE_ENTITYS.register(bus);
-		ModInnet.SOUNDS.register(bus);
-		ModInnet.SENSOR.register(bus);
-		ModInnet.FLUIDS.register(bus);
-		ModInnet.RECIPE_SERIALIZERS.register(bus);
-		ModInnet.ROCKET_PARTS.register(bus);
-		ModInnet.EFFECTS.register(bus);
-		ModInnet.GUIS.register(bus);
-		ModInnet.PARTICLES.register(bus);
+		ModInit.ENTITYS.register(bus);
+		ModInit.ITEMS.register(bus);
+		ModInit.BLOCKS.register(bus);
+		ModInit.TILE_ENTITYS.register(bus);
+		ModInit.SOUNDS.register(bus);
+		ModInit.SENSOR.register(bus);
+		ModInit.FLUIDS.register(bus);
+		ModInit.RECIPE_SERIALIZERS.register(bus);
+		ModInit.ROCKET_PARTS.register(bus);
+		ModInit.EFFECTS.register(bus);
+		ModInit.GUIS.register(bus);
+		ModInit.PARTICLES.register(bus);
 
-		forgeBus.addListener(EventPriority.HIGH, ModInnet::biomesLoading);
+		forgeBus.addListener(EventPriority.HIGH, ModInit::biomesLoading);
 		forgeBus.addListener(EventPriority.HIGH, OreGeneration::biomesLoading);
 
 		// KeyBindings
@@ -92,7 +90,7 @@ public class BeyondEarthMod {
 		STStructures.DEFERRED_REGISTRY_STRUCTURE.register(modEventBus);
 		modEventBus.addListener(this::setup);
 
-		forgeBus.addListener(EventPriority.NORMAL, ModInnet::addDimensionalSpacing);
+		forgeBus.addListener(EventPriority.NORMAL, ModInit::addDimensionalSpacing);
 
 		// For events that happen after initialization. This is probably going to be use a lot.
 		//forgeBus.addListener(EventPriority.NORMAL, AlienVillageStructure::setupStructureSpawns);

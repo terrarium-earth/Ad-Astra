@@ -19,7 +19,7 @@ import net.minecraft.world.item.Items;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
-import net.mrscauthd.beyond_earth.ModInnet;
+import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.gui.helper.GuiHelper;
 import net.mrscauthd.beyond_earth.gui.helper.ImageButtonPlacer;
 import net.mrscauthd.beyond_earth.util.Rectangle2d;
@@ -428,9 +428,9 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 			list.add(Component.nullToEmpty("\u00A79Item Requirement:"));
 
 			list.add(Component.nullToEmpty(this.getSpaceStationItemCheck(new ItemStack(Items.DIAMOND), 6) ?  "\u00A7a" + "6 Diamonds" : "\u00A76" + "6 Diamonds"));
-			list.add(Component.nullToEmpty(this.getSpaceStationItemCheck(new ItemStack(ModInnet.STEEL_INGOT.get()), 16) ?  "\u00A7a" + "16 Steel Ingots" : "\u00A76" + "16 Steel Ingots"));
-			list.add(Component.nullToEmpty(this.getSpaceStationItemCheck(new ItemStack(ModInnet.IRON_PLATE.get()), 12) ?  "\u00A7a" + "12 Iron Plates" : "\u00A76" + "12 Iron Plates"));
-			list.add(Component.nullToEmpty(this.getSpaceStationItemCheck(new ItemStack(ModInnet.DESH_PLATE.get()), 4) ?  "\u00A7a" + "4 Desh Plates" : "\u00A76" + "4 Desh Plates"));
+			list.add(Component.nullToEmpty(this.getSpaceStationItemCheck(new ItemStack(ModInit.STEEL_INGOT.get()), 16) ?  "\u00A7a" + "16 Steel Ingots" : "\u00A76" + "16 Steel Ingots"));
+			list.add(Component.nullToEmpty(this.getSpaceStationItemCheck(new ItemStack(ModInit.IRON_PLATE.get()), 12) ?  "\u00A7a" + "12 Iron Plates" : "\u00A76" + "12 Iron Plates"));
+			list.add(Component.nullToEmpty(this.getSpaceStationItemCheck(new ItemStack(ModInit.DESH_PLATE.get()), 4) ?  "\u00A7a" + "4 Desh Plates" : "\u00A76" + "4 Desh Plates"));
 
 			list.add(Component.nullToEmpty("\u00A7c----------------"));
 			list.add(Component.nullToEmpty("\u00A79Type: " + "\u00A73" + orbitType));
@@ -449,9 +449,9 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 
 	public boolean getSpaceStationItemList() {
 		Boolean boolean1 = this.getSpaceStationItemCheck(new ItemStack(Items.DIAMOND), 6);
-		Boolean boolean2 = this.getSpaceStationItemCheck(new ItemStack(ModInnet.STEEL_INGOT.get()), 16);
-		Boolean boolean3 = this.getSpaceStationItemCheck(new ItemStack(ModInnet.IRON_PLATE.get()), 12);
-		Boolean boolean4 = this.getSpaceStationItemCheck(new ItemStack(ModInnet.DESH_PLATE.get()), 4);
+		Boolean boolean2 = this.getSpaceStationItemCheck(new ItemStack(ModInit.STEEL_INGOT.get()), 16);
+		Boolean boolean3 = this.getSpaceStationItemCheck(new ItemStack(ModInit.IRON_PLATE.get()), 12);
+		Boolean boolean4 = this.getSpaceStationItemCheck(new ItemStack(ModInit.DESH_PLATE.get()), 4);
 
 		return boolean1 && boolean2 && boolean3 && boolean4;
 	}

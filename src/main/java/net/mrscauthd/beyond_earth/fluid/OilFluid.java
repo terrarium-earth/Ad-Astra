@@ -25,7 +25,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
-import net.mrscauthd.beyond_earth.ModInnet;
+import net.mrscauthd.beyond_earth.ModInit;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -33,17 +33,17 @@ import java.util.Random;
 public class OilFluid extends FlowingFluid {
     @Override
     public Fluid getFlowing() {
-        return ModInnet.FLOWING_OIL.get();
+        return ModInit.FLOWING_OIL.get();
     }
 
     @Override
     public Fluid getSource() {
-        return ModInnet.OIL_STILL.get();
+        return ModInit.OIL_STILL.get();
     }
 
     @Override
     public Item getBucket() {
-        return ModInnet.OIL_BUCKET.get();
+        return ModInit.OIL_BUCKET.get();
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -82,7 +82,7 @@ public class OilFluid extends FlowingFluid {
 
     @Override
     protected BlockState createLegacyBlock(FluidState p_76136_) {
-        return ModInnet.OIL_BLOCK.get().defaultBlockState().setValue(LiquidBlock.LEVEL, Integer.valueOf(getLegacyLevel(p_76136_)));
+        return ModInit.OIL_BLOCK.get().defaultBlockState().setValue(LiquidBlock.LEVEL, Integer.valueOf(getLegacyLevel(p_76136_)));
     }
 
     @Override
@@ -97,7 +97,7 @@ public class OilFluid extends FlowingFluid {
 
     @Override
     public boolean isSame(Fluid fluidIn) {
-        return fluidIn == ModInnet.OIL_STILL.get() || fluidIn == ModInnet.FLOWING_OIL.get();
+        return fluidIn == ModInit.OIL_STILL.get() || fluidIn == ModInit.FLOWING_OIL.get();
     }
 
     @Override

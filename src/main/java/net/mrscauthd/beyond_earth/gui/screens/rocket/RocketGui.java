@@ -8,7 +8,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.*;
 import net.minecraftforge.network.IContainerFactory;
-import net.mrscauthd.beyond_earth.ModInnet;
+import net.mrscauthd.beyond_earth.ModInit;
 
 import net.mrscauthd.beyond_earth.entity.RocketTier1Entity;
 import net.mrscauthd.beyond_earth.entity.RocketTier2Entity;
@@ -31,7 +31,7 @@ public class RocketGui {
 		Entity rocket;
 
 		public GuiContainer(int id, Inventory inv, FriendlyByteBuf extraData) {
-			super(ModInnet.ROCKET_GUI.get(), id);
+			super(ModInit.ROCKET_GUI.get(), id);
 
 			this.rocket = inv.player.level.getEntity(extraData.readVarInt());
 
@@ -48,7 +48,7 @@ public class RocketGui {
 			this.addSlot(new SlotItemHandler(itemHandler, 0, 46, 22) {
 				@Override
 				public boolean mayPlace(@NotNull ItemStack stack) {
-					return Methodes.tagCheck(FluidUtil2.findBucketFluid(stack.getItem()), ModInnet.FLUID_VEHICLE_FUEL_TAG);
+					return Methodes.tagCheck(FluidUtil2.findBucketFluid(stack.getItem()), ModInit.FLUID_VEHICLE_FUEL_TAG);
 				}
 			});
 

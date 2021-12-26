@@ -33,7 +33,7 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
-import net.mrscauthd.beyond_earth.ModInnet;
+import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.entity.*;
 import net.mrscauthd.beyond_earth.events.forgeevents.RenderHandItemEvent;
 import net.mrscauthd.beyond_earth.events.forgeevents.SetupLivingBipedAnimEvent;
@@ -113,18 +113,18 @@ public class Events {
         Item item2 = player.getMainHandItem().getItem();
 
         /**Cancel Event if it Hold a Vehicle in off hand*/
-        if (item == ModInnet.TIER_1_ROCKET_ITEM.get() || item == ModInnet.TIER_2_ROCKET_ITEM.get() || item == ModInnet.TIER_3_ROCKET_ITEM.get() || item == ModInnet.ROVER_ITEM.get()
-            || item2 == ModInnet.TIER_1_ROCKET_ITEM.get() || item2 == ModInnet.TIER_2_ROCKET_ITEM.get() || item2 == ModInnet.TIER_3_ROCKET_ITEM.get() || item2 == ModInnet.ROVER_ITEM.get()) {
+        if (item == ModInit.TIER_1_ROCKET_ITEM.get() || item == ModInit.TIER_2_ROCKET_ITEM.get() || item == ModInit.TIER_3_ROCKET_ITEM.get() || item == ModInit.ROVER_ITEM.get()
+            || item2 == ModInit.TIER_1_ROCKET_ITEM.get() || item2 == ModInit.TIER_2_ROCKET_ITEM.get() || item2 == ModInit.TIER_3_ROCKET_ITEM.get() || item2 == ModInit.ROVER_ITEM.get()) {
             event.setCanceled(true);
             return;
         }
 
         if (event.getArm() == HumanoidArm.RIGHT) {
-            if (Methodes.checkArmor(event.getPlayer(), 2, ModInnet.SPACE_SUIT.get())) {
+            if (Methodes.checkArmor(event.getPlayer(), 2, ModInit.SPACE_SUIT.get())) {
 
                 Methodes.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), new ResourceLocation(BeyondEarthMod.MODID, "textures/models/armor/arm/space_suit.png"), event.getPlayer(), playerModel, playerModel.rightArm);
                 event.setCanceled(true);
-            } else if (Methodes.checkArmor(event.getPlayer(), 2, ModInnet.NETHERITE_SPACE_SUIT.get())) {
+            } else if (Methodes.checkArmor(event.getPlayer(), 2, ModInit.NETHERITE_SPACE_SUIT.get())) {
 
                 Methodes.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), new ResourceLocation(BeyondEarthMod.MODID, "textures/models/armor/arm/netherite_space_suit.png"), event.getPlayer(), playerModel, playerModel.rightArm);
                 event.setCanceled(true);
@@ -132,11 +132,11 @@ public class Events {
         }
 
         if (event.getArm() == HumanoidArm.LEFT) {
-            if (Methodes.checkArmor(event.getPlayer(), 2, ModInnet.SPACE_SUIT.get())) {
+            if (Methodes.checkArmor(event.getPlayer(), 2, ModInit.SPACE_SUIT.get())) {
 
                 Methodes.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), new ResourceLocation(BeyondEarthMod.MODID, "textures/models/armor/arm/space_suit.png"), event.getPlayer(), playerModel, playerModel.leftArm);
                 event.setCanceled(true);
-            } else if (Methodes.checkArmor(event.getPlayer(), 2, ModInnet.NETHERITE_SPACE_SUIT.get())) {
+            } else if (Methodes.checkArmor(event.getPlayer(), 2, ModInit.NETHERITE_SPACE_SUIT.get())) {
 
                 Methodes.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), new ResourceLocation(BeyondEarthMod.MODID, "textures/models/armor/arm/netherite_space_suit.png"), event.getPlayer(), playerModel, playerModel.leftArm);
                 event.setCanceled(true);
@@ -174,15 +174,15 @@ public class Events {
             if (!Methodes.isRocket(player.getVehicle())) {
                 Item item1 = player.getMainHandItem().getItem();
                 Item item2 = player.getOffhandItem().getItem();
-                if (item1 == ModInnet.TIER_1_ROCKET_ITEM.get()
-                        || item1 == ModInnet.TIER_2_ROCKET_ITEM.get()
-                        || item1 == ModInnet.TIER_3_ROCKET_ITEM.get()
-                        || item1 == ModInnet.ROVER_ITEM.get()
+                if (item1 == ModInit.TIER_1_ROCKET_ITEM.get()
+                        || item1 == ModInit.TIER_2_ROCKET_ITEM.get()
+                        || item1 == ModInit.TIER_3_ROCKET_ITEM.get()
+                        || item1 == ModInit.ROVER_ITEM.get()
                         //Off Hand
-                        || item2 == ModInnet.TIER_1_ROCKET_ITEM.get()
-                        || item2 == ModInnet.TIER_2_ROCKET_ITEM.get()
-                        || item2 == ModInnet.TIER_3_ROCKET_ITEM.get()
-                        || item2 == ModInnet.ROVER_ITEM.get()) {
+                        || item2 == ModInit.TIER_1_ROCKET_ITEM.get()
+                        || item2 == ModInit.TIER_2_ROCKET_ITEM.get()
+                        || item2 == ModInit.TIER_3_ROCKET_ITEM.get()
+                        || item2 == ModInit.ROVER_ITEM.get()) {
                     model.rightArm.xRot = 10;
                     model.leftArm.xRot = 10;
                     model.rightArm.zRot = 0;
@@ -207,10 +207,10 @@ public class Events {
             Item item1 = player.getMainHandItem().getItem();
             Item item2 = player.getOffhandItem().getItem();
 
-            if (item1 == ModInnet.TIER_1_ROCKET_ITEM.get()
-                    || item1 == ModInnet.TIER_2_ROCKET_ITEM.get()
-                    || item1 == ModInnet.TIER_3_ROCKET_ITEM.get()
-                    || item1 == ModInnet.ROVER_ITEM.get()) {
+            if (item1 == ModInit.TIER_1_ROCKET_ITEM.get()
+                    || item1 == ModInit.TIER_2_ROCKET_ITEM.get()
+                    || item1 == ModInit.TIER_3_ROCKET_ITEM.get()
+                    || item1 == ModInit.ROVER_ITEM.get()) {
 
                 if (event.getHandSide() == HumanoidArm.LEFT) {
                     event.setCanceled(true);
@@ -218,10 +218,10 @@ public class Events {
 
             }
 
-            if (item2 == ModInnet.TIER_1_ROCKET_ITEM.get()
-                    || item2 == ModInnet.TIER_2_ROCKET_ITEM.get()
-                    || item2 == ModInnet.TIER_3_ROCKET_ITEM.get()
-                    || item2 == ModInnet.ROVER_ITEM.get()) {
+            if (item2 == ModInit.TIER_1_ROCKET_ITEM.get()
+                    || item2 == ModInit.TIER_2_ROCKET_ITEM.get()
+                    || item2 == ModInit.TIER_3_ROCKET_ITEM.get()
+                    || item2 == ModInit.ROVER_ITEM.get()) {
 
                 if (event.getHandSide() == HumanoidArm.RIGHT) {
                     event.setCanceled(true);

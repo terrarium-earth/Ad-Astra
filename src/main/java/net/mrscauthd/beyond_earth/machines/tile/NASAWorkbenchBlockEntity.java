@@ -26,7 +26,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.mrscauthd.beyond_earth.ModInnet;
+import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.crafting.BeyondEarthRecipeType;
 import net.mrscauthd.beyond_earth.crafting.BeyondEarthRecipeTypes;
 import net.mrscauthd.beyond_earth.crafting.RocketPart;
@@ -42,12 +42,12 @@ public class NASAWorkbenchBlockEntity extends AbstractMachineBlockEntity {
 
 	public static List<RocketPart> getBasicPartOrders() {
 		List<RocketPart> parts = new ArrayList<>();
-		parts.add(ModInnet.ROCKET_PART_NOSE.get());
-		parts.add(ModInnet.ROCKET_PART_BODY.get());
-		parts.add(ModInnet.ROCKET_PART_TANK.get());
-		parts.add(ModInnet.ROCKET_PART_FIN_LEFT.get());
-		parts.add(ModInnet.ROCKET_PART_FIN_RIGHT.get());
-		parts.add(ModInnet.ROCKET_PART_ENGINE.get());
+		parts.add(ModInit.ROCKET_PART_NOSE.get());
+		parts.add(ModInit.ROCKET_PART_BODY.get());
+		parts.add(ModInit.ROCKET_PART_TANK.get());
+		parts.add(ModInit.ROCKET_PART_FIN_LEFT.get());
+		parts.add(ModInit.ROCKET_PART_FIN_RIGHT.get());
+		parts.add(ModInit.ROCKET_PART_ENGINE.get());
 		return parts;
 	}
 
@@ -66,7 +66,7 @@ public class NASAWorkbenchBlockEntity extends AbstractMachineBlockEntity {
 	private RocketPartsItemHandler partsItemHandler;
 
 	public NASAWorkbenchBlockEntity(BlockPos pos, BlockState state) {
-		super(ModInnet.NASA_WORKBENCH.get(), pos, state);
+		super(ModInit.NASA_WORKBENCH.get(), pos, state);
 
 		this.itemStackCacher = new StackCacher();
 		this.cachedRecipe = null;

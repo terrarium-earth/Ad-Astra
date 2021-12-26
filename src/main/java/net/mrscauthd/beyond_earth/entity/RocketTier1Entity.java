@@ -42,7 +42,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.network.NetworkHooks;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
-import net.mrscauthd.beyond_earth.ModInnet;
+import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.block.RocketLaunchPad;
 import net.mrscauthd.beyond_earth.events.Methodes;
 import net.mrscauthd.beyond_earth.fluid.FluidUtil2;
@@ -171,7 +171,7 @@ public class RocketTier1Entity extends PathfinderMob {
 
 	@Override
 	public ItemStack getPickedResult(HitResult target) {
-		ItemStack itemStack = new ItemStack(ModInnet.TIER_1_ROCKET_ITEM.get(), 1);
+		ItemStack itemStack = new ItemStack(ModInit.TIER_1_ROCKET_ITEM.get(), 1);
 		itemStack.getOrCreateTag().putInt(BeyondEarthMod.MODID + ":fuel", this.getEntityData().get(FUEL));
 		itemStack.getOrCreateTag().putBoolean(BeyondEarthMod.MODID + ":bucket", this.getEntityData().get(BUCKET));
 
@@ -238,7 +238,7 @@ public class RocketTier1Entity extends PathfinderMob {
 
 	protected void spawnRocketItem() {
 		if (!level.isClientSide) {
-			ItemStack itemStack = new ItemStack(ModInnet.TIER_1_ROCKET_ITEM.get(), 1);
+			ItemStack itemStack = new ItemStack(ModInit.TIER_1_ROCKET_ITEM.get(), 1);
 			itemStack.getOrCreateTag().putInt(BeyondEarthMod.MODID + ":fuel", this.getEntityData().get(FUEL));
 			itemStack.getOrCreateTag().putBoolean(BeyondEarthMod.MODID + ":bucket", this.getEntityData().get(BUCKET));
 
@@ -391,8 +391,8 @@ public class RocketTier1Entity extends PathfinderMob {
 			if (this.entityData.get(START_TIMER) == 200) {
 				if (level instanceof ServerLevel) {
 					for (ServerPlayer p : ((ServerLevel) level).getServer().getPlayerList().getPlayers()) {
-						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInnet.LARGE_FLAME_PARTICLE.get(), true, this.getX() - vec.x, this.getY() - vec.y - 1.6, this.getZ() - vec.z, 20, 0.1, 0.1, 0.1, 0.001);
-						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInnet.SMOKE_PARTICLE.get(), true, this.getX() - vec.x, this.getY() - vec.y - 2.6, this.getZ() - vec.z, 10, 0.1, 0.1, 0.1, 0.04);
+						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInit.LARGE_FLAME_PARTICLE.get(), true, this.getX() - vec.x, this.getY() - vec.y - 1.6, this.getZ() - vec.z, 20, 0.1, 0.1, 0.1, 0.001);
+						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInit.SMOKE_PARTICLE.get(), true, this.getX() - vec.x, this.getY() - vec.y - 2.6, this.getZ() - vec.z, 10, 0.1, 0.1, 0.1, 0.04);
 					}
 				}
 			} else {
@@ -405,7 +405,7 @@ public class RocketTier1Entity extends PathfinderMob {
 
 		}
 
-		if (Methodes.tagCheck(FluidUtil2.findBucketFluid(this.inventory.getStackInSlot(0).getItem()), ModInnet.FLUID_VEHICLE_FUEL_TAG) && !this.entityData.get(BUCKET)) {
+		if (Methodes.tagCheck(FluidUtil2.findBucketFluid(this.inventory.getStackInSlot(0).getItem()), ModInit.FLUID_VEHICLE_FUEL_TAG) && !this.entityData.get(BUCKET)) {
 			this.inventory.setStackInSlot(0, new ItemStack(Items.BUCKET));
 			this.getEntityData().set(BUCKET, true);
 		}
@@ -419,7 +419,7 @@ public class RocketTier1Entity extends PathfinderMob {
 			BlockState state = level.getBlockState(new BlockPos(Math.floor(x), y - 0.1, Math.floor(z)));
 
 			if (!level.isEmptyBlock(new BlockPos(Math.floor(x), y - 0.01, Math.floor(z))) && state.getBlock() instanceof RocketLaunchPad && !state.getValue(RocketLaunchPad.STAGE)
-					|| level.getBlockState(new BlockPos(Math.floor(x), Math.floor(y), Math.floor(z))).getBlock() != ModInnet.ROCKET_LAUNCH_PAD.get().defaultBlockState().getBlock()) {
+					|| level.getBlockState(new BlockPos(Math.floor(x), Math.floor(y), Math.floor(z))).getBlock() != ModInit.ROCKET_LAUNCH_PAD.get().defaultBlockState().getBlock()) {
 
 				this.dropEquipment();
 				this.spawnRocketItem();

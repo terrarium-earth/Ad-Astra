@@ -11,7 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.network.IContainerFactory;
-import net.mrscauthd.beyond_earth.ModInnet;
+import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.gui.helper.ContainerHelper;
 import net.mrscauthd.beyond_earth.machines.tile.CompressorBlockEntity;
 import net.mrscauthd.beyond_earth.machines.tile.ItemStackToItemStackBlockEntity;
@@ -30,7 +30,7 @@ public class CompressorGui {
 		private CompressorBlockEntity blockEntity;
 
 		public GuiContainer(int id, Inventory inv, CompressorBlockEntity blockEntity) {
-			super(ModInnet.COMPRESSOR_GUI.get(), id);
+			super(ModInit.COMPRESSOR_GUI.get(), id);
 			this.blockEntity = blockEntity;
 
 			IItemHandlerModifiable itemHandler = blockEntity.getItemHandler();

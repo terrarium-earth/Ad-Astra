@@ -8,7 +8,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.*;
 import net.minecraftforge.network.IContainerFactory;
-import net.mrscauthd.beyond_earth.ModInnet;
+import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.entity.LanderEntity;
 import net.mrscauthd.beyond_earth.gui.helper.ContainerHelper;
 import org.jetbrains.annotations.NotNull;
@@ -25,7 +25,7 @@ public class LanderGui {
 		Entity lander;
 
 		public GuiContainer(int id, Inventory inv, FriendlyByteBuf extraData) {
-			super(ModInnet.LANDER_GUI.get(), id);
+			super(ModInit.LANDER_GUI.get(), id);
 
 			this.lander = inv.player.level.getEntity(extraData.readVarInt());
 

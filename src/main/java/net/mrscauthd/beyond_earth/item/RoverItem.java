@@ -24,7 +24,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
-import net.mrscauthd.beyond_earth.ModInnet;
+import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.entity.RoverEntity;
 import net.mrscauthd.beyond_earth.fluid.FluidUtil2;
 import net.mrscauthd.beyond_earth.gauge.GaugeTextHelper;
@@ -76,7 +76,7 @@ public class RoverItem extends Item {
             List<Entity> entities = player.getCommandSenderWorld().getEntitiesOfClass(Entity.class, scanAbove);
 
             if (entities.isEmpty()) {
-                RoverEntity rocket = new RoverEntity((EntityType<? extends PathfinderMob>) ModInnet.ROVER.get(), world);
+                RoverEntity rocket = new RoverEntity((EntityType<? extends PathfinderMob>) ModInit.ROVER.get(), world);
 
                 rocket.setPos((double) pos.getX() + 0.5D,  pos.getY() + 1, (double) pos.getZ() + 0.5D);
                 double d0 = getYOffset(world, pos, true, rocket.getBoundingBox());

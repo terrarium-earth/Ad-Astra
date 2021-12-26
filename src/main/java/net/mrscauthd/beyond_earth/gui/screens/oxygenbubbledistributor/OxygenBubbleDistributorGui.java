@@ -9,7 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.network.IContainerFactory;
-import net.mrscauthd.beyond_earth.ModInnet;
+import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.gui.helper.ContainerHelper;
 import net.mrscauthd.beyond_earth.machines.tile.OxygenBubbleDistributorBlockEntity;
 import net.mrscauthd.beyond_earth.machines.tile.OxygenMakingBlockEntity;
@@ -28,7 +28,7 @@ public class OxygenBubbleDistributorGui {
 		private OxygenBubbleDistributorBlockEntity blockEntity;
 
 		public GuiContainer(int id, Inventory inv, OxygenBubbleDistributorBlockEntity blockEntity) {
-			super(ModInnet.OXYGEN_BUBBLE_DISTRIBUTOR_GUI.get(), id);
+			super(ModInit.OXYGEN_BUBBLE_DISTRIBUTOR_GUI.get(), id);
 			this.blockEntity = blockEntity;
 
 			IItemHandlerModifiable internal = blockEntity.getItemHandler();

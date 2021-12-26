@@ -3,7 +3,7 @@ package net.mrscauthd.beyond_earth.itemtiers;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.mrscauthd.beyond_earth.ModInnet;
+import net.mrscauthd.beyond_earth.ModInit;
 
 public class SteelItemTier {
     public static Tier ITEM_TIER = new Tier() {
@@ -34,7 +34,7 @@ public class SteelItemTier {
 
         @Override
         public Ingredient getRepairIngredient() {
-            return Ingredient.of(new ItemStack(ModInnet.STEEL_INGOT.get(),1));
+            return Ingredient.of(new ItemStack(ModInit.STEEL_INGOT.get(),1));
         }
     };
 }

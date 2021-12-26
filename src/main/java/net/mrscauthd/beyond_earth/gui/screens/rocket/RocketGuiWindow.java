@@ -11,7 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraftforge.fluids.FluidStack;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
-import net.mrscauthd.beyond_earth.ModInnet;
+import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.entity.RocketTier1Entity;
 import net.mrscauthd.beyond_earth.entity.RocketTier2Entity;
 import net.mrscauthd.beyond_earth.entity.RocketTier3Entity;
@@ -87,7 +87,7 @@ public class RocketGuiWindow extends AbstractContainerScreen<RocketGui.GuiContai
 			fuel = menu.rocket.getEntityData().get(RocketTier3Entity.FUEL);
 		}
 
-		FluidStack fluidStack = new FluidStack(ModInnet.FUEL_BLOCK.get().getFluid(), 1);
+		FluidStack fluidStack = new FluidStack(ModInit.FUEL_BLOCK.get().getFluid(), 1);
 		GuiHelper.drawRocketFluidTank(ms, this.leftPos + 67, this.topPos + 22, fluidStack, 300, fuel);
 	}
 

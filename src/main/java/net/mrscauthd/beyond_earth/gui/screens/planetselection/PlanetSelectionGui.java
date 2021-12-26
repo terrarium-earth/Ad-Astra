@@ -10,7 +10,7 @@ import net.minecraft.world.item.Items;
 import net.minecraftforge.network.IContainerFactory;
 import net.minecraftforge.network.NetworkEvent;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
-import net.mrscauthd.beyond_earth.ModInnet;
+import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.events.Methodes;
 
 import java.util.function.Supplier;
@@ -28,7 +28,7 @@ public class PlanetSelectionGui {
 		Player player;
 
 		public GuiContainer(int id, Inventory inv, FriendlyByteBuf extraData) {
-			super(ModInnet.PLANET_SELECTION_GUI.get(), id);
+			super(ModInit.PLANET_SELECTION_GUI.get(), id);
 
 			this.rocket = extraData.readUtf();
 			this.player = inv.player;
@@ -157,8 +157,8 @@ public class PlanetSelectionGui {
 
 	public static void deleteItems(Player player) {
 		player.getInventory().clearOrCountMatchingItems(p -> Items.DIAMOND == p.getItem(), 6, player.getInventory());
-		player.getInventory().clearOrCountMatchingItems(p -> ModInnet.IRON_PLATE.get() == p.getItem(), 12, player.getInventory());
-		player.getInventory().clearOrCountMatchingItems(p -> ModInnet.STEEL_INGOT.get() == p.getItem(), 16, player.getInventory());
-		player.getInventory().clearOrCountMatchingItems(p -> ModInnet.DESH_PLATE.get() == p.getItem(), 4, player.getInventory());
+		player.getInventory().clearOrCountMatchingItems(p -> ModInit.IRON_PLATE.get() == p.getItem(), 12, player.getInventory());
+		player.getInventory().clearOrCountMatchingItems(p -> ModInit.STEEL_INGOT.get() == p.getItem(), 16, player.getInventory());
+		player.getInventory().clearOrCountMatchingItems(p -> ModInit.DESH_PLATE.get() == p.getItem(), 4, player.getInventory());
 	}
 }

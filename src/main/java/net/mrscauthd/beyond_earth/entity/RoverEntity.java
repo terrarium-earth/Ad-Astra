@@ -20,7 +20,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -49,7 +48,7 @@ import net.minecraftforge.items.wrapper.EntityArmorInvWrapper;
 import net.minecraftforge.items.wrapper.EntityHandsInvWrapper;
 import net.minecraftforge.network.NetworkHooks;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
-import net.mrscauthd.beyond_earth.ModInnet;
+import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.events.Methodes;
 import net.mrscauthd.beyond_earth.fluid.FluidUtil2;
 import net.mrscauthd.beyond_earth.gui.screens.rover.RoverGui;
@@ -221,7 +220,7 @@ public class RoverEntity extends PathfinderMob {
 
     @Override
     public ItemStack getPickedResult(HitResult target) {
-        ItemStack itemStack = new ItemStack(ModInnet.ROVER_ITEM.get(), 1);
+        ItemStack itemStack = new ItemStack(ModInit.ROVER_ITEM.get(), 1);
         itemStack.getOrCreateTag().putInt(BeyondEarthMod.MODID + ":fuel", this.entityData.get(FUEL));
 
         return itemStack;
@@ -252,7 +251,7 @@ public class RoverEntity extends PathfinderMob {
 
     protected void spawnRoverItem() {
         if (!level.isClientSide) {
-            ItemStack itemStack = new ItemStack(ModInnet.ROVER_ITEM.get(), 1);
+            ItemStack itemStack = new ItemStack(ModInit.ROVER_ITEM.get(), 1);
             itemStack.getOrCreateTag().putInt(BeyondEarthMod.MODID + ":fuel", this.getEntityData().get(FUEL));
 
             ItemEntity entityToSpawn = new ItemEntity(level, this.getX(), this.getY(), this.getZ(), itemStack);
@@ -351,7 +350,7 @@ public class RoverEntity extends PathfinderMob {
         super.baseTick();
 
         //Fuel Load up
-        if (Methodes.tagCheck(FluidUtil2.findBucketFluid(this.inventory.getStackInSlot(0).getItem()), ModInnet.FLUID_VEHICLE_FUEL_TAG)) {
+        if (Methodes.tagCheck(FluidUtil2.findBucketFluid(this.inventory.getStackInSlot(0).getItem()), ModInit.FLUID_VEHICLE_FUEL_TAG)) {
 
             if (this.entityData.get(FUEL) <= 2000) {
                 this.getEntityData().set(FUEL, this.getEntityData().get(FUEL) + 1000);

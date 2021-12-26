@@ -17,7 +17,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.api.distmarker.Dist;
 
-import net.mrscauthd.beyond_earth.ModInnet;
+import net.mrscauthd.beyond_earth.ModInit;
 
 import java.util.Random;
 
@@ -39,7 +39,7 @@ public class AlienSpitEntity extends AbstractArrow implements ItemSupplier {
     @Override
     @OnlyIn(Dist.CLIENT)
     public ItemStack getItem() {
-        return new ItemStack(ModInnet.ICE_SHARD.get(), 1);
+        return new ItemStack(ModInit.ICE_SHARD.get(), 1);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class AlienSpitEntity extends AbstractArrow implements ItemSupplier {
     }
 
     public static AlienSpitEntity shoot(LivingEntity entity, LivingEntity target, int damage) {
-        AlienSpitEntity entityarrow = new AlienSpitEntity(ModInnet.ALIEN_SPIT_ENTITY.get(), entity, entity.level);
+        AlienSpitEntity entityarrow = new AlienSpitEntity(ModInit.ALIEN_SPIT_ENTITY.get(), entity, entity.level);
         double d0 = target.getY() + (double) target.getEyeHeight() - 1.1;
         double d1 = target.getX() - entity.getX();
         double d3 = target.getZ() - entity.getZ();

@@ -37,7 +37,7 @@ import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.item.trading.MerchantOffers;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.mrscauthd.beyond_earth.ModInnet;
+import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.entity.AlienZombieEntity;
 import net.mrscauthd.beyond_earth.events.Config;
 
@@ -68,7 +68,7 @@ public class AlienEntity extends Villager implements Merchant, Npc {
 
 	@Override
 	public Villager getBreedOffspring(ServerLevel p_241840_1_, AgeableMob p_241840_2_) {
-		AlienEntity alienentity = new AlienEntity(ModInnet.ALIEN.get(),this.level);
+		AlienEntity alienentity = new AlienEntity(ModInit.ALIEN.get(),this.level);
 		alienentity.finalizeSpawn(p_241840_1_, p_241840_1_.getCurrentDifficultyAt(new BlockPos(p_241840_2_.getX(), p_241840_2_.getY(), p_241840_2_.getZ())), MobSpawnType.BREEDING, (SpawnGroupData)null, (CompoundTag)null);
 		return alienentity;
 	}
@@ -85,7 +85,7 @@ public class AlienEntity extends Villager implements Merchant, Npc {
 	@Override
 	public InteractionResult mobInteract(Player p_230254_1_, InteractionHand p_230254_2_) {
 		ItemStack itemstack = p_230254_1_.getItemInHand(p_230254_2_);
-		if (itemstack.getItem() != ModInnet.ALIEN_SPAWN_EGG.get() && this.isAlive() && !this.isTrading() && !this.isSleeping() && !p_230254_1_.isSecondaryUseActive()) {
+		if (itemstack.getItem() != ModInit.ALIEN_SPAWN_EGG.get() && this.isAlive() && !this.isTrading() && !this.isSleeping() && !p_230254_1_.isSecondaryUseActive()) {
 			if (this.isBaby()) {
 				this.shakeHead();
 				return InteractionResult.sidedSuccess(this.level.isClientSide);

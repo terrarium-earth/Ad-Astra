@@ -25,7 +25,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
-import net.mrscauthd.beyond_earth.ModInnet;
+import net.mrscauthd.beyond_earth.ModInit;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -33,17 +33,17 @@ import java.util.Random;
 public class FuelFluid extends FlowingFluid {
 	@Override
 	public Fluid getFlowing() {
-		return ModInnet.FLOWING_FUEL.get();
+		return ModInit.FLOWING_FUEL.get();
 	}
 
 	@Override
 	public Fluid getSource() {
-		return ModInnet.FUEL_STILL.get();
+		return ModInit.FUEL_STILL.get();
 	}
 
 	@Override
 	public Item getBucket() {
-		return ModInnet.FUEL_BUCKET.get();
+		return ModInit.FUEL_BUCKET.get();
 	}
 
 	@OnlyIn(Dist.CLIENT)
@@ -82,7 +82,7 @@ public class FuelFluid extends FlowingFluid {
 
 	@Override
 	protected BlockState createLegacyBlock(FluidState p_76136_) {
-		return ModInnet.FUEL_BLOCK.get().defaultBlockState().setValue(LiquidBlock.LEVEL, Integer.valueOf(getLegacyLevel(p_76136_)));
+		return ModInit.FUEL_BLOCK.get().defaultBlockState().setValue(LiquidBlock.LEVEL, Integer.valueOf(getLegacyLevel(p_76136_)));
 	}
 
 	@Override
@@ -97,7 +97,7 @@ public class FuelFluid extends FlowingFluid {
 
 	@Override
 	public boolean isSame(Fluid fluidIn) {
-		return fluidIn == ModInnet.FUEL_STILL.get() || fluidIn == ModInnet.FLOWING_FUEL.get();
+		return fluidIn == ModInit.FUEL_STILL.get() || fluidIn == ModInit.FLOWING_FUEL.get();
 	}
 
 	@Override

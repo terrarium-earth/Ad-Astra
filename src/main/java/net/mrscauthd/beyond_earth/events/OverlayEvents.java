@@ -22,7 +22,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
-import net.mrscauthd.beyond_earth.ModInnet;
+import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.capability.CapabilityOxygen;
 import net.mrscauthd.beyond_earth.capability.IOxygenStorage;
 import net.mrscauthd.beyond_earth.entity.*;
@@ -191,7 +191,7 @@ public class OverlayEvents {
 
             startOverlaySettings();
 
-            if (chestItem == ModInnet.SPACE_SUIT.get() || chestItem == ModInnet.NETHERITE_SPACE_SUIT.get()) {
+            if (chestItem == ModInit.SPACE_SUIT.get() || chestItem == ModInit.NETHERITE_SPACE_SUIT.get()) {
 
                 IOxygenStorage oxygenStorage = chest.getCapability(CapabilityOxygen.OXYGEN).orElse(null);
                 double oxygenStoredRatio = oxygenStorage != null ? oxygenStorage.getOxygenStoredRatio() : 0.0D;
