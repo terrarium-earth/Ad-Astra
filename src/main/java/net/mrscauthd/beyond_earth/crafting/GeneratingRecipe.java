@@ -14,7 +14,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import net.mrscauthd.beyond_earth.ModInnet;
+import net.mrscauthd.beyond_earth.ModInit;
 
 public class GeneratingRecipe extends BeyondEarthRecipe implements Predicate<ItemStack> {
 
@@ -58,7 +58,7 @@ public class GeneratingRecipe extends BeyondEarthRecipe implements Predicate<Ite
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return ModInnet.RECIPE_SERIALIZER_GENERATING.get();
+		return ModInit.RECIPE_SERIALIZER_GENERATING.get();
 	}
 
 	@Override

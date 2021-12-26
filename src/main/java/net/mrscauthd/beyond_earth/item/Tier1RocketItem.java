@@ -23,7 +23,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
-import net.mrscauthd.beyond_earth.ModInnet;
+import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.block.RocketLaunchPad;
 import net.mrscauthd.beyond_earth.entity.RocketTier1Entity;
 import net.mrscauthd.beyond_earth.gauge.GaugeTextHelper;
@@ -74,7 +74,7 @@ public class Tier1RocketItem extends Item {
                 List<Entity> entities = player.getCommandSenderWorld().getEntitiesOfClass(Entity.class, scanAbove);
 
                 if (entities.isEmpty()) {
-                    RocketTier1Entity rocket = new RocketTier1Entity(ModInnet.TIER_1_ROCKET.get(), world);
+                    RocketTier1Entity rocket = new RocketTier1Entity(ModInit.TIER_1_ROCKET.get(), world);
 
                     rocket.setPos((double) pos.getX() + 0.5D,  pos.getY() + 1, (double) pos.getZ() + 0.5D);
                     double d0 = getYOffset(world, pos, true, rocket.getBoundingBox());

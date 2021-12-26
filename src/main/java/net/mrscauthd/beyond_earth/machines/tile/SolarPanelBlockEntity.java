@@ -11,7 +11,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.mrscauthd.beyond_earth.ModInnet;
+import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.gui.screens.solarpanel.SolarPanelGui;
 
 public class SolarPanelBlockEntity extends GeneratorBlockEntity {
@@ -19,7 +19,7 @@ public class SolarPanelBlockEntity extends GeneratorBlockEntity {
 	public static final int ENERGY_PER_TICK = 5;
 
 	public SolarPanelBlockEntity(BlockPos pos, BlockState state) {
-		super(ModInnet.SOLAR_PANEL.get(), pos, state);
+		super(ModInit.SOLAR_PANEL.get(), pos, state);
 	}
 
 	@Override

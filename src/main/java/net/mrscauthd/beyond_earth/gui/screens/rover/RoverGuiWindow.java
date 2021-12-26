@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraftforge.fluids.FluidStack;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
-import net.mrscauthd.beyond_earth.ModInnet;
+import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.entity.RoverEntity;
 import net.mrscauthd.beyond_earth.fluid.FluidUtil2;
 import net.mrscauthd.beyond_earth.gauge.GaugeTextHelper;
@@ -62,7 +62,7 @@ public class RoverGuiWindow extends AbstractContainerScreen<RoverGui.GuiContaine
 		RenderSystem.setShaderTexture(0, texture);
 		this.blit(ms, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
 
-		FluidStack fluidStack = new FluidStack(ModInnet.FUEL_BLOCK.get().getFluid(), fuel);
+		FluidStack fluidStack = new FluidStack(ModInit.FUEL_BLOCK.get().getFluid(), fuel);
 		GuiHelper.drawFluidTank(ms, this.leftPos + 9, this.topPos + 11, fluidStack, 3000);
 	}
 

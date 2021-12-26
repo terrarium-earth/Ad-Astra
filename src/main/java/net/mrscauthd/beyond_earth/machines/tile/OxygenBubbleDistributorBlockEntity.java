@@ -17,7 +17,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.network.NetworkEvent;
-import net.mrscauthd.beyond_earth.ModInnet;
+import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.capability.IOxygenStorage;
 import net.mrscauthd.beyond_earth.crafting.BeyondEarthRecipeType;
 import net.mrscauthd.beyond_earth.crafting.BeyondEarthRecipeTypes;
@@ -40,7 +40,7 @@ public class OxygenBubbleDistributorBlockEntity extends OxygenMakingBlockEntity 
 	public static final int MAX_TIMER = 4;
 
 	public OxygenBubbleDistributorBlockEntity(BlockPos pos, BlockState state) {
-		super(ModInnet.OXYGEN_BUBBLE_DISTRIBUTOR.get(), pos, state);
+		super(ModInit.OXYGEN_BUBBLE_DISTRIBUTOR.get(), pos, state);
 		this.setWorkingAreaVisible(false);
 	}
 
@@ -110,7 +110,7 @@ public class OxygenBubbleDistributorBlockEntity extends OxygenMakingBlockEntity 
 		List<Mob> entities = level.getEntitiesOfClass(Mob.class, this.getWorkingArea(range));
 
 		for (Mob entity : entities) {
-			entity.addEffect(new MobEffectInstance(ModInnet.OXYGEN_EFFECT.get(), 2 * 24, 0, false, false));
+			entity.addEffect(new MobEffectInstance(ModInit.OXYGEN_EFFECT.get(), 2 * 24, 0, false, false));
 		}
 
 		if (level instanceof ServerLevel) {

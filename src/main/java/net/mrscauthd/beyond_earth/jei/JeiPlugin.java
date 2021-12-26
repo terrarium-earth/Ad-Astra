@@ -46,7 +46,7 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
-import net.mrscauthd.beyond_earth.ModInnet;
+import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.capability.OxygenUtil;
 import net.mrscauthd.beyond_earth.crafting.BeyondEarthRecipeTypes;
 import net.mrscauthd.beyond_earth.crafting.CompressingRecipe;
@@ -205,8 +205,8 @@ public class JeiPlugin implements IModPlugin {
 		registration.addRecipes(generateFuelMakerRecipes(), FuelRefineryJeiCategory.Uid);
 		// Oil
 		Component oilDescriptionKey = new TranslatableComponent("jei.tooltip." + BeyondEarthMod.MODID + ".oil");
-		registration.addIngredientInfo(new ItemStack(ModInnet.OIL_BUCKET.get(), 1), VanillaTypes.ITEM, oilDescriptionKey);
-		registration.addIngredientInfo(new FluidStack(ModInnet.OIL_STILL.get(), 1000), VanillaTypes.FLUID, oilDescriptionKey);
+		registration.addIngredientInfo(new ItemStack(ModInit.OIL_BUCKET.get(), 1), VanillaTypes.ITEM, oilDescriptionKey);
+		registration.addIngredientInfo(new FluidStack(ModInit.OIL_STILL.get(), 1000), VanillaTypes.FLUID, oilDescriptionKey);
 		// ...
 	}
 
@@ -251,7 +251,7 @@ public class JeiPlugin implements IModPlugin {
 
 	// Fuel Loading
 	private List<Fluid> generateFuelTagFluids() {
-		return ForgeRegistries.FLUIDS.getValues().stream().filter(f -> f.isSource(f.defaultFluidState()) && Methodes.tagCheck(f, ModInnet.FLUID_VEHICLE_FUEL_TAG)).collect(Collectors.toList());
+		return ForgeRegistries.FLUIDS.getValues().stream().filter(f -> f.isSource(f.defaultFluidState()) && Methodes.tagCheck(f, ModInit.FLUID_VEHICLE_FUEL_TAG)).collect(Collectors.toList());
 	}
 
 	private List<FuelLoadingRecipe> generateFuelLoadingRecipes() {
@@ -293,25 +293,25 @@ public class JeiPlugin implements IModPlugin {
 
 	@Override
 	public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-		registration.addRecipeCatalyst(new ItemStack(ModInnet.OXYGEN_LOADER_BLOCK.get()), OxygenLoaderJeiCategory.Uid);
+		registration.addRecipeCatalyst(new ItemStack(ModInit.OXYGEN_LOADER_BLOCK.get()), OxygenLoaderJeiCategory.Uid);
 		// Neue maschine
-		registration.addRecipeCatalyst(new ItemStack(ModInnet.OXYGEN_BUBBLE_DISTRIBUTOR_BLOCK.get()), OxygenBubbleDistributorJeiCategory.Uid);
+		registration.addRecipeCatalyst(new ItemStack(ModInit.OXYGEN_BUBBLE_DISTRIBUTOR_BLOCK.get()), OxygenBubbleDistributorJeiCategory.Uid);
 		// Genrator
-		registration.addRecipeCatalyst(new ItemStack(ModInnet.COAL_GENERATOR_BLOCK.get()), CoalGeneratorJeiCategory.Uid);
+		registration.addRecipeCatalyst(new ItemStack(ModInit.COAL_GENERATOR_BLOCK.get()), CoalGeneratorJeiCategory.Uid);
 		// workbench
-		registration.addRecipeCatalyst(new ItemStack(ModInnet.NASA_WORKBENCH_ITEM.get()), NASAWorkbenchJeiCategory.Uid);
+		registration.addRecipeCatalyst(new ItemStack(ModInit.NASA_WORKBENCH_ITEM.get()), NASAWorkbenchJeiCategory.Uid);
 		// RocketTier1Gui
-		registration.addRecipeCatalyst(new ItemStack(ModInnet.TIER_1_ROCKET_ITEM.get()), Tier1RocketJeiCategory.Uid);
+		registration.addRecipeCatalyst(new ItemStack(ModInit.TIER_1_ROCKET_ITEM.get()), Tier1RocketJeiCategory.Uid);
 		// RocketTier2Gui
-		registration.addRecipeCatalyst(new ItemStack(ModInnet.TIER_2_ROCKET_ITEM.get()), Tier2RocketJeiCategory.Uid);
+		registration.addRecipeCatalyst(new ItemStack(ModInit.TIER_2_ROCKET_ITEM.get()), Tier2RocketJeiCategory.Uid);
 		// RocketTier3Gui
-		registration.addRecipeCatalyst(new ItemStack(ModInnet.TIER_3_ROCKET_ITEM.get()), Tier3RocketJeiCategory.Uid);
+		registration.addRecipeCatalyst(new ItemStack(ModInit.TIER_3_ROCKET_ITEM.get()), Tier3RocketJeiCategory.Uid);
 		// Compressor
-		registration.addRecipeCatalyst(new ItemStack(ModInnet.COMPRESSOR_BLOCK.get()), CompressorJeiCategory.Uid);
+		registration.addRecipeCatalyst(new ItemStack(ModInit.COMPRESSOR_BLOCK.get()), CompressorJeiCategory.Uid);
 		// FuelMaker
-		registration.addRecipeCatalyst(new ItemStack(ModInnet.FUEL_REFINERY_BLOCK.get()), FuelRefineryJeiCategory.Uid);
+		registration.addRecipeCatalyst(new ItemStack(ModInit.FUEL_REFINERY_BLOCK.get()), FuelRefineryJeiCategory.Uid);
 		// Rover
-		registration.addRecipeCatalyst(new ItemStack(ModInnet.ROVER_ITEM.get()), RoverJeiCategory.Uid);
+		registration.addRecipeCatalyst(new ItemStack(ModInit.ROVER_ITEM.get()), RoverJeiCategory.Uid);
 	}
 
 	public static class OxygenLoaderJeiCategory implements IRecipeCategory<OxygenLoaderRecipe> {
@@ -663,12 +663,12 @@ public class JeiPlugin implements IModPlugin {
 
 			int slots = NASAWorkbenchBlockEntity.SLOT_PARTS;
 			GridPlacer placer = new GridPlacer();
-			slots = placeRcketParts(slots, 38, 7, 1, placer::placeBottom, ModInnet.ROCKET_PART_NOSE.get(), iRecipeLayout, recipe);
-			slots = placeRcketParts(slots, 29, 25, 2, placer::placeBottom, ModInnet.ROCKET_PART_BODY.get(), iRecipeLayout, recipe);
-			slots = placeRcketParts(slots, 29, 79, 1, placer::placeRight, ModInnet.ROCKET_PART_TANK.get(), iRecipeLayout, recipe);
-			slots = placeRcketParts(slots, 11, 79, 1, placer::placeBottom, ModInnet.ROCKET_PART_FIN_LEFT.get(), iRecipeLayout, recipe);
-			slots = placeRcketParts(slots, 65, 79, 1, placer::placeBottom, ModInnet.ROCKET_PART_FIN_RIGHT.get(), iRecipeLayout, recipe);
-			slots = placeRcketParts(slots, 38, 97, 1, placer::placeBottom, ModInnet.ROCKET_PART_ENGINE.get(), iRecipeLayout, recipe);
+			slots = placeRcketParts(slots, 38, 7, 1, placer::placeBottom, ModInit.ROCKET_PART_NOSE.get(), iRecipeLayout, recipe);
+			slots = placeRcketParts(slots, 29, 25, 2, placer::placeBottom, ModInit.ROCKET_PART_BODY.get(), iRecipeLayout, recipe);
+			slots = placeRcketParts(slots, 29, 79, 1, placer::placeRight, ModInit.ROCKET_PART_TANK.get(), iRecipeLayout, recipe);
+			slots = placeRcketParts(slots, 11, 79, 1, placer::placeBottom, ModInit.ROCKET_PART_FIN_LEFT.get(), iRecipeLayout, recipe);
+			slots = placeRcketParts(slots, 65, 79, 1, placer::placeBottom, ModInit.ROCKET_PART_FIN_RIGHT.get(), iRecipeLayout, recipe);
+			slots = placeRcketParts(slots, 38, 97, 1, placer::placeBottom, ModInit.ROCKET_PART_ENGINE.get(), iRecipeLayout, recipe);
 
 			IGuiItemStackGroup stacks = iRecipeLayout.getItemStacks();
 			stacks.init(slots, false, 126, 72);

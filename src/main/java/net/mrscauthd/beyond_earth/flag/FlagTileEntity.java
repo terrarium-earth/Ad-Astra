@@ -22,7 +22,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.mrscauthd.beyond_earth.ModInnet;
+import net.mrscauthd.beyond_earth.ModInit;
 
 public class FlagTileEntity extends BlockEntity {
     @Nullable
@@ -38,7 +38,7 @@ public class FlagTileEntity extends BlockEntity {
     private static Executor mainThreadExecutor;
 
     public FlagTileEntity(BlockPos pos, BlockState state) {
-        super(ModInnet.FLAG.get(), pos, state);
+        super(ModInit.FLAG.get(), pos, state);
     }
 
     @Override

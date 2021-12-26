@@ -16,7 +16,7 @@ import net.minecraftforge.api.distmarker.Dist;
 
 import net.minecraft.client.Minecraft;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
-import net.mrscauthd.beyond_earth.ModInnet;
+import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.entity.renderer.TileEntityBoxRenderer;
 import net.mrscauthd.beyond_earth.entity.renderer.alien.AlienModel;
 import net.mrscauthd.beyond_earth.entity.renderer.alienzombie.AlienZombieModel;
@@ -64,24 +64,24 @@ public class ClientEventBusSubscriber {
 
 	@SubscribeEvent
 	public static void registerEntityRenderingHandler(EntityRenderersEvent.RegisterRenderers event) {
-		event.registerEntityRenderer(ModInnet.ALIEN.get(), AlienRenderer::new);
-		event.registerEntityRenderer(ModInnet.ALIEN_ZOMBIE.get(), AlienZombieRenderer::new);
-		event.registerEntityRenderer(ModInnet.STAR_CRAWLER.get(), StarCrawlerRenderer::new);
-		event.registerEntityRenderer(ModInnet.PYGRO.get(), (p_174068_) -> {
+		event.registerEntityRenderer(ModInit.ALIEN.get(), AlienRenderer::new);
+		event.registerEntityRenderer(ModInit.ALIEN_ZOMBIE.get(), AlienZombieRenderer::new);
+		event.registerEntityRenderer(ModInit.STAR_CRAWLER.get(), StarCrawlerRenderer::new);
+		event.registerEntityRenderer(ModInit.PYGRO.get(), (p_174068_) -> {
 			return new PygroRenderer(p_174068_, PygroModel.LAYER_LOCATION, ModelLayers.PIGLIN_INNER_ARMOR, ModelLayers.PIGLIN_OUTER_ARMOR);
 		});
-		event.registerEntityRenderer(ModInnet.MOGLER.get(), MoglerRenderer::new);
-		event.registerEntityRenderer(ModInnet.TIER_1_ROCKET.get(), RocketTier1Renderer::new);
-		event.registerEntityRenderer(ModInnet.TIER_2_ROCKET.get(), RocketTier2Renderer::new);
-		event.registerEntityRenderer(ModInnet.TIER_3_ROCKET.get(), RocketTier3Renderer::new);
-		event.registerEntityRenderer(ModInnet.LANDER.get(), LanderRenderer::new);
-		event.registerEntityRenderer(ModInnet.ROVER.get(), RoverRenderer::new);
+		event.registerEntityRenderer(ModInit.MOGLER.get(), MoglerRenderer::new);
+		event.registerEntityRenderer(ModInit.TIER_1_ROCKET.get(), RocketTier1Renderer::new);
+		event.registerEntityRenderer(ModInit.TIER_2_ROCKET.get(), RocketTier2Renderer::new);
+		event.registerEntityRenderer(ModInit.TIER_3_ROCKET.get(), RocketTier3Renderer::new);
+		event.registerEntityRenderer(ModInit.LANDER.get(), LanderRenderer::new);
+		event.registerEntityRenderer(ModInit.ROVER.get(), RoverRenderer::new);
 
-		event.registerEntityRenderer(ModInnet.ALIEN_SPIT_ENTITY.get(), renderManager -> new ThrownItemRenderer(renderManager, 1, true));
+		event.registerEntityRenderer(ModInit.ALIEN_SPIT_ENTITY.get(), renderManager -> new ThrownItemRenderer(renderManager, 1, true));
 
-		event.registerBlockEntityRenderer(ModInnet.OXYGEN_BUBBLE_DISTRIBUTOR.get(), TileEntityBoxRenderer::new);
+		event.registerBlockEntityRenderer(ModInit.OXYGEN_BUBBLE_DISTRIBUTOR.get(), TileEntityBoxRenderer::new);
 
-		event.registerBlockEntityRenderer(ModInnet.FLAG.get(), TileEntityHeadRenderer::new);
+		event.registerBlockEntityRenderer(ModInit.FLAG.get(), TileEntityHeadRenderer::new);
 	}
 
 	@SubscribeEvent
@@ -107,43 +107,43 @@ public class ClientEventBusSubscriber {
 	@SubscribeEvent
 	public static void onClientSetup(FMLClientSetupEvent event) {
 		//GUIS
-		MenuScreens.register(ModInnet.ROCKET_GUI.get(), RocketGuiWindow::new);
-		MenuScreens.register(ModInnet.COMPRESSOR_GUI.get(), CompressorGuiWindow::new);
-		MenuScreens.register(ModInnet.FUEL_REFINERY_GUI.get(), FuelRefineryGuiWindow::new);
-		MenuScreens.register(ModInnet.COAL_GENERATOR_GUI.get(), CoalGeneratorGuiWindow::new);
-		MenuScreens.register(ModInnet.NASA_WORKBENCH_GUI.get(), NasaWorkbenchGuiWindow::new);
-		MenuScreens.register(ModInnet.OXYGEN_LOADER_GUI.get(), OxygenLoaderGuiWindow::new);
-		MenuScreens.register(ModInnet.SOLAR_PANEL_GUI.get(), SolarPanelGuiWindow::new);
-		MenuScreens.register(ModInnet.WATER_PUMP_GUI.get(), WaterPumpGuiWindow::new);
-		MenuScreens.register(ModInnet.OXYGEN_BUBBLE_DISTRIBUTOR_GUI.get(), OxygenBubbleDistributorGuiWindow::new);
-		MenuScreens.register(ModInnet.LANDER_GUI.get(), LanderGuiWindow::new);
-		MenuScreens.register(ModInnet.ROVER_GUI.get(), RoverGuiWindow::new);
-		MenuScreens.register(ModInnet.PLANET_SELECTION_GUI.get(), PlanetSelectionGuiWindow::new);
+		MenuScreens.register(ModInit.ROCKET_GUI.get(), RocketGuiWindow::new);
+		MenuScreens.register(ModInit.COMPRESSOR_GUI.get(), CompressorGuiWindow::new);
+		MenuScreens.register(ModInit.FUEL_REFINERY_GUI.get(), FuelRefineryGuiWindow::new);
+		MenuScreens.register(ModInit.COAL_GENERATOR_GUI.get(), CoalGeneratorGuiWindow::new);
+		MenuScreens.register(ModInit.NASA_WORKBENCH_GUI.get(), NasaWorkbenchGuiWindow::new);
+		MenuScreens.register(ModInit.OXYGEN_LOADER_GUI.get(), OxygenLoaderGuiWindow::new);
+		MenuScreens.register(ModInit.SOLAR_PANEL_GUI.get(), SolarPanelGuiWindow::new);
+		MenuScreens.register(ModInit.WATER_PUMP_GUI.get(), WaterPumpGuiWindow::new);
+		MenuScreens.register(ModInit.OXYGEN_BUBBLE_DISTRIBUTOR_GUI.get(), OxygenBubbleDistributorGuiWindow::new);
+		MenuScreens.register(ModInit.LANDER_GUI.get(), LanderGuiWindow::new);
+		MenuScreens.register(ModInit.ROVER_GUI.get(), RoverGuiWindow::new);
+		MenuScreens.register(ModInit.PLANET_SELECTION_GUI.get(), PlanetSelectionGuiWindow::new);
 
 		//Key Binding Registrys
 		key1 = new KeyMapping("key." + BeyondEarthMod.MODID + ".rocket_start", GLFW.GLFW_KEY_SPACE, "key.categories." + BeyondEarthMod.MODID);
 		ClientRegistry.registerKeyBinding(key1);
 
 		//Fluid Translucent Renderer
-		ItemBlockRenderTypes.setRenderLayer(ModInnet.FLOWING_FUEL.get(), RenderType.translucent());
-		ItemBlockRenderTypes.setRenderLayer(ModInnet.FUEL_STILL.get(), RenderType.translucent());
+		ItemBlockRenderTypes.setRenderLayer(ModInit.FLOWING_FUEL.get(), RenderType.translucent());
+		ItemBlockRenderTypes.setRenderLayer(ModInit.FUEL_STILL.get(), RenderType.translucent());
 
-		ItemBlockRenderTypes.setRenderLayer(ModInnet.FLOWING_OIL.get(), RenderType.translucent());
-		ItemBlockRenderTypes.setRenderLayer(ModInnet.OIL_STILL.get(), RenderType.translucent());
+		ItemBlockRenderTypes.setRenderLayer(ModInit.FLOWING_OIL.get(), RenderType.translucent());
+		ItemBlockRenderTypes.setRenderLayer(ModInit.OIL_STILL.get(), RenderType.translucent());
 
 		//Block Translucent Renderer
-		ItemBlockRenderTypes.setRenderLayer(ModInnet.COAL_LANTERN_BLOCK.get(), RenderType.translucent());
+		ItemBlockRenderTypes.setRenderLayer(ModInit.COAL_LANTERN_BLOCK.get(), RenderType.translucent());
 
 		//Cutout
-		ItemBlockRenderTypes.setRenderLayer(ModInnet.NASA_WORKBENCH_BLOCK.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(ModInit.NASA_WORKBENCH_BLOCK.get(), RenderType.cutout());
 
-		ItemBlockRenderTypes.setRenderLayer(ModInnet.WATER_PUMP_BLOCK.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(ModInit.WATER_PUMP_BLOCK.get(), RenderType.cutout());
 	}
 
 	@SubscribeEvent
 	public static void registerParticlesFactory(ParticleFactoryRegisterEvent event) {
-		Minecraft.getInstance().particleEngine.register(ModInnet.VENUS_RAIN_PARTICLE.get(), VenusRainParticle.ParticleFactory::new);
-		Minecraft.getInstance().particleEngine.register(ModInnet.LARGE_FLAME_PARTICLE.get(), LargeFlameParticle.ParticleFactory::new);
-		Minecraft.getInstance().particleEngine.register(ModInnet.SMOKE_PARTICLE.get(), SmokeParticle.ParticleFactory::new);
+		Minecraft.getInstance().particleEngine.register(ModInit.VENUS_RAIN_PARTICLE.get(), VenusRainParticle.ParticleFactory::new);
+		Minecraft.getInstance().particleEngine.register(ModInit.LARGE_FLAME_PARTICLE.get(), LargeFlameParticle.ParticleFactory::new);
+		Minecraft.getInstance().particleEngine.register(ModInit.SMOKE_PARTICLE.get(), SmokeParticle.ParticleFactory::new);
 	}
 }

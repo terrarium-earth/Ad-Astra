@@ -21,7 +21,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
-import net.mrscauthd.beyond_earth.ModInnet;
+import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.capability.FluidMultiTank;
 import net.mrscauthd.beyond_earth.crafting.BeyondEarthRecipeType;
 import net.mrscauthd.beyond_earth.crafting.BeyondEarthRecipeTypes;
@@ -51,7 +51,7 @@ public class FuelRefineryBlockEntity extends AbstractMachineBlockEntity {
 	private FuelRefiningRecipe cachedRecipe;
 
 	public FuelRefineryBlockEntity(BlockPos pos, BlockState state) {
-		super(ModInnet.FUEL_REFINERY.get(), pos, state);
+		super(ModInit.FUEL_REFINERY.get(), pos, state);
 
 		this.recipeCacher = new StackCacher();
 		this.cachedRecipe = null;
