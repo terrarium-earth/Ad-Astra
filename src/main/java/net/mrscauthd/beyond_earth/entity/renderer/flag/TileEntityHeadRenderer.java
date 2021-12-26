@@ -41,6 +41,10 @@ public class TileEntityHeadRenderer implements BlockEntityRenderer<FlagTileEntit
 
 	}
 
+	public boolean shouldRenderOffScreen(FlagTileEntity p_112306_) {
+		return true;
+	}
+
 	private static final Map<FlagBlock.ISkullType, TileEntityHeadModel> MODELS = Util.make(Maps.newHashMap(), (p_209262_0_) -> {
 
 		Minecraft minecraft = Minecraft.getInstance();
@@ -60,10 +64,6 @@ public class TileEntityHeadRenderer implements BlockEntityRenderer<FlagTileEntit
 		ImmutableMap.Builder<SkullBlock.Type, TileEntityHeadModel> builder = ImmutableMap.builder();
 		builder.put(SkullBlock.Types.PLAYER, new TileEntityHeadModel(p_173662_.bakeLayer(ModelLayers.PLAYER_HEAD)));
 		return builder.build();
-	}
-
-	public boolean shouldRenderOffScreen(FlagTileEntity p_112306_) {
-		return true;
 	}
 
 	@Override
