@@ -28,7 +28,7 @@ public class OxygenSystem {
                     entity.setAirSupply(-4);
                 }
 
-                if (oxygenStorage.getOxygenStored() > 0 || entity.hasEffect(ModInnet.OXYGEN_EFFECT.get()) || entity.getPersistentData().getBoolean(BeyondEarthMod.MODID + ":planet_selection_gui_open")) {
+                if (oxygenStorage.getOxygenStored() > 0) {
                     entity.setAirSupply(300);
                 }
 
@@ -37,7 +37,10 @@ public class OxygenSystem {
             if (!Methodes.spaceSuitCheckBoth(entity)) {
                 entity.setAirSupply(-4);
             }
-        }
 
+            if (entity.hasEffect(ModInnet.OXYGEN_EFFECT.get()) || entity.getPersistentData().getBoolean(BeyondEarthMod.MODID + ":planet_selection_gui_open")) {
+                entity.setAirSupply(300);
+            }
+        }
     }
 }

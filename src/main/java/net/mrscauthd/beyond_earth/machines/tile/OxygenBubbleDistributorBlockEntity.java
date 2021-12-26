@@ -8,7 +8,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.Level;
@@ -107,10 +107,10 @@ public class OxygenBubbleDistributorBlockEntity extends OxygenMakingBlockEntity 
 
 	private void spawnOxygenBubble(double range) {
 		Level level = this.getLevel();
-		List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, this.getWorkingArea(range));
+		List<Mob> entities = level.getEntitiesOfClass(Mob.class, this.getWorkingArea(range));
 
-		for (LivingEntity entity : entities) {
-			entity.addEffect(new MobEffectInstance(ModInnet.OXYGEN_EFFECT.get(), 2 * 24, 0, false, true));
+		for (Mob entity : entities) {
+			entity.addEffect(new MobEffectInstance(ModInnet.OXYGEN_EFFECT.get(), 2 * 24, 0, false, false));
 		}
 
 		if (level instanceof ServerLevel) {

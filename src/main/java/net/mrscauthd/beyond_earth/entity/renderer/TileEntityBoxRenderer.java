@@ -16,7 +16,9 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.world.level.block.entity.BeaconBlockEntity;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
@@ -33,6 +35,15 @@ public class TileEntityBoxRenderer implements BlockEntityRenderer<OxygenBubbleDi
     @Override
     public boolean shouldRenderOffScreen(OxygenBubbleDistributorBlockEntity p_112306_) {
         return true;
+    }
+
+    public int getViewDistance() {
+        return 256;
+    }
+
+    @Override
+    public boolean shouldRender(OxygenBubbleDistributorBlockEntity p_173568_, Vec3 p_173569_) {
+        return Vec3.atCenterOf(p_173568_.getBlockPos()).multiply(1.0D, 0.0D, 1.0D).closerThan(p_173569_.multiply(1.0D, 0.0D, 1.0D), (double)this.getViewDistance());
     }
 
     @Override

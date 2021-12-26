@@ -29,10 +29,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.SkullBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.mrscauthd.beyond_earth.flag.FlagBlock;
 import net.mrscauthd.beyond_earth.flag.FlagTileEntity;
+import net.mrscauthd.beyond_earth.machines.tile.OxygenBubbleDistributorBlockEntity;
 
 @OnlyIn(Dist.CLIENT)
 public class TileEntityHeadRenderer implements BlockEntityRenderer<FlagTileEntity> {
@@ -43,6 +45,15 @@ public class TileEntityHeadRenderer implements BlockEntityRenderer<FlagTileEntit
 
 	public boolean shouldRenderOffScreen(FlagTileEntity p_112306_) {
 		return true;
+	}
+
+	public int getViewDistance() {
+		return 256;
+	}
+
+	@Override
+	public boolean shouldRender(FlagTileEntity p_173568_, Vec3 p_173569_) {
+		return Vec3.atCenterOf(p_173568_.getBlockPos()).multiply(1.0D, 0.0D, 1.0D).closerThan(p_173569_.multiply(1.0D, 0.0D, 1.0D), (double)this.getViewDistance());
 	}
 
 	private static final Map<FlagBlock.ISkullType, TileEntityHeadModel> MODELS = Util.make(Maps.newHashMap(), (p_209262_0_) -> {
