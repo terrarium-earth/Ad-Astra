@@ -30,6 +30,9 @@ public class Config {
 	public static boolean VenusTowerStructure = true;
 	public static boolean OILWellStructure = true;
 	public static boolean CrimsonVillageStructure = true;
+	public static boolean PygroSpawn = true;
+	public static boolean MoglerSpawn = true;
+	public static boolean MartianRaptorSpawn = true;
 
 	@SubscribeEvent
 	public static void init(FMLCommonSetupEvent event) {
@@ -42,6 +45,9 @@ public class Config {
 				Config.addProperty("Alien Spawn", true);
 				Config.addProperty("Star Crawler Spawn", true);
 				Config.addProperty("Alien Zombie Spawn", true);
+				Config.addProperty("Pygro Spawn", true);
+				Config.addProperty("Mogler Spawn", true);
+				Config.addProperty("Martian Raptor Spawn", true);
 				Config.addProperty("Alien Village Structure", true);
 				Config.addProperty("Meteor Structure", true);
 				Config.addProperty("Venus Bullet Structure", true);
@@ -76,6 +82,9 @@ public class Config {
 					Config.addProperty("Alien Spawn", true);
 					Config.addProperty("Star Crawler Spawn", true);
 					Config.addProperty("Alien Zombie Spawn", true);
+					Config.addProperty("Pygro Spawn", true);
+					Config.addProperty("Mogler Spawn", true);
+					Config.addProperty("Martian Raptor Spawn", true);
 					Config.addProperty("Alien Village Structure", true);
 					Config.addProperty("Meteor Structure", true);
 					Config.addProperty("Venus Bullet Structure", true);
@@ -93,12 +102,15 @@ public class Config {
 					}
 				}
 
-				if (Config.get("Alien Spawn") == null || Config.get("Star Crawler Spawn") == null || Config.get("Alien Zombie Spawn") == null || Config.get("Alien Village Structure") == null || Config.get("Meteor Structure") == null || Config.get("Player Oxygen System") == null || Config.get("Entity Oxygen System") == null || Config.get("Venus Bullet Structure") == null || Config.get("Venus Tower Structure") == null || Config.get("Oil Well Structure") == null || Config.get("Crimson Village Structure") == null) {
+				if (Config.get("Alien Spawn") == null || Config.get("Star Crawler Spawn") == null || Config.get("Alien Zombie Spawn") == null || Config.get("Alien Village Structure") == null || Config.get("Meteor Structure") == null || Config.get("Player Oxygen System") == null || Config.get("Entity Oxygen System") == null || Config.get("Venus Bullet Structure") == null || Config.get("Venus Tower Structure") == null || Config.get("Oil Well Structure") == null || Config.get("Crimson Village Structure") == null || Config.get("Pygro Spawn") == null || Config.get("Mogler Spawn") == null || Config.get("Martian Raptor Spawn") == null) {
 					Gson gson = new GsonBuilder().setPrettyPrinting().create();
 					Config = new JsonObject();
 					Config.addProperty("Alien Spawn", true);
 					Config.addProperty("Star Crawler Spawn", true);
 					Config.addProperty("Alien Zombie Spawn", true);
+					Config.addProperty("Pygro Spawn", true);
+					Config.addProperty("Mogler Spawn", true);
+					Config.addProperty("Martian Raptor Spawn", true);
 					Config.addProperty("Alien Village Structure", true);
 					Config.addProperty("Meteor Structure", true);
 					Config.addProperty("Venus Bullet Structure", true);
@@ -119,6 +131,9 @@ public class Config {
 				AlienSpawn = Config.get("Alien Spawn").getAsBoolean();
 				StarCrawlerSpawn = Config.get("Star Crawler Spawn").getAsBoolean();
 				AlienZombieSpawn = Config.get("Alien Zombie Spawn").getAsBoolean();
+				PygroSpawn = Config.get("Pygro Spawn").getAsBoolean();
+				MoglerSpawn = Config.get("Mogler Spawn").getAsBoolean();
+				MartianRaptorSpawn = Config.get("Martian Raptor Spawn").getAsBoolean();
 				AlienVillageStructure = Config.get("Alien Village Structure").getAsBoolean();
 				MeteorStructure = Config.get("Meteor Structure").getAsBoolean();
 				VenusBulletStructure = Config.get("Venus Bullet Structure").getAsBoolean();

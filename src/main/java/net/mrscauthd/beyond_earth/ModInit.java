@@ -145,6 +145,8 @@ public class ModInit {
     public static RegistryObject<EntityType<StarCrawlerEntity>> STAR_CRAWLER = ENTITYS.register("star_crawler", () -> EntityType.Builder.of(StarCrawlerEntity::new, MobCategory.MONSTER).sized(1.3f, 1f).build(new ResourceLocation(BeyondEarthMod.MODID, "star_crawler").toString()));
     public static RegistryObject<EntityType<PygroEntity>> PYGRO = ENTITYS.register("pygro", () -> EntityType.Builder.of(PygroEntity::new, MobCategory.MONSTER).fireImmune().sized(0.6f, 1.8f).build(new ResourceLocation(BeyondEarthMod.MODID, "pygro").toString()));
     public static RegistryObject<EntityType<MoglerEntity>> MOGLER = ENTITYS.register("mogler", () -> EntityType.Builder.of(MoglerEntity::new, MobCategory.MONSTER).sized(1.4f, 1.4f).build(new ResourceLocation(BeyondEarthMod.MODID, "mogler").toString()));
+    public static RegistryObject<EntityType<MartianRaptor>> MARTIAN_RAPTOR = ENTITYS.register("martian_raptor", () -> EntityType.Builder.of(MartianRaptor::new, MobCategory.MONSTER).sized(0.75f, 2.0f).build(new ResourceLocation(BeyondEarthMod.MODID, "martian_raptor").toString()));
+
 
     //VEHICLES
     public static RegistryObject<EntityType<RocketTier1Entity>> TIER_1_ROCKET = ENTITYS.register("rocket_t1", () -> EntityType.Builder.of(RocketTier1Entity::new, MobCategory.MISC).sized(1.1f, 4.4f).fireImmune().build(new ResourceLocation(BeyondEarthMod.MODID, "rocket_t1").toString()));
@@ -267,6 +269,8 @@ public class ModInit {
     public static final RegistryObject<ForgeSpawnEggItem> STAR_CRAWLER_SPAWN_EGG = ITEMS.register("star_crawler_spawn_egg",() -> new ForgeSpawnEggItem(STAR_CRAWLER::get, -13421773, -16724788, new Item.Properties().tab(ItemGroups.tab_spawn_eggs)));
     public static final RegistryObject<ForgeSpawnEggItem> PYGRO_SPAWN_EGG = ITEMS.register("pygro_spawn_egg",() -> new ForgeSpawnEggItem(PYGRO::get, -3381760, -6750208, new Item.Properties().tab(ItemGroups.tab_spawn_eggs)));
     public static final RegistryObject<ForgeSpawnEggItem> MOGLER_SPAWN_EGG = ITEMS.register("mogler_spawn_egg",() -> new ForgeSpawnEggItem(MOGLER::get, -13312, -3407872, new Item.Properties().tab(ItemGroups.tab_spawn_eggs)));
+    public static final RegistryObject<ForgeSpawnEggItem> MARTIAN_RAPTOR_SPAWN_EGG = ITEMS.register("martian_raptor_spawn_egg",() -> new ForgeSpawnEggItem(MARTIAN_RAPTOR::get, 5349438, -13312, new Item.Properties().tab(ItemGroups.tab_spawn_eggs)));
+
 
     //Generel Items
     public static final RegistryObject<Item> CHEESE = ITEMS.register("cheese", () -> new Item(new Item.Properties().tab(ItemGroups.tab_normal).food((new FoodProperties.Builder()).nutrition(4).saturationMod(3f).build())));
@@ -615,6 +619,7 @@ public class ModInit {
         event.put(ALIEN.get(), AlienEntity.setCustomAttributes().build());
         event.put(PYGRO.get(), PygroEntity.setCustomAttributes().build());
         event.put(MOGLER.get(), MoglerEntity.setCustomAttributes().build());
+        event.put(MARTIAN_RAPTOR.get(), MartianRaptor.setCustomAttributes().build());
         event.put(ALIEN_ZOMBIE.get(), AlienZombieEntity.setCustomAttributes().build());
         event.put(STAR_CRAWLER.get(), StarCrawlerEntity.setCustomAttributes().build());
         event.put(TIER_1_ROCKET.get(), RocketTier1Entity.setCustomAttributes().build());

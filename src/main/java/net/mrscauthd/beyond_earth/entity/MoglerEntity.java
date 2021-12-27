@@ -12,6 +12,7 @@ import net.minecraft.world.entity.monster.hoglin.Hoglin;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkHooks;
 import net.mrscauthd.beyond_earth.ModInit;
+import net.mrscauthd.beyond_earth.events.Config;
 
 import javax.annotation.Nullable;
 
@@ -52,5 +53,15 @@ public class MoglerEntity extends Hoglin {
             moglerentity.setPersistenceRequired();
         }
         return moglerentity;
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (!Config.MoglerSpawn) {
+            if (!this.level.isClientSide) {
+                this.remove(RemovalReason.DISCARDED);
+            }
+        }
     }
 }

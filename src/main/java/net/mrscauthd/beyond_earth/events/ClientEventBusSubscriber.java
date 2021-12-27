@@ -25,6 +25,8 @@ import net.mrscauthd.beyond_earth.entity.renderer.flag.TileEntityHeadModel;
 import net.mrscauthd.beyond_earth.entity.renderer.flag.TileEntityHeadRenderer;
 import net.mrscauthd.beyond_earth.entity.renderer.lander.LanderModel;
 import net.mrscauthd.beyond_earth.entity.renderer.lander.LanderRenderer;
+import net.mrscauthd.beyond_earth.entity.renderer.martianraptor.MartianRaptorModel;
+import net.mrscauthd.beyond_earth.entity.renderer.martianraptor.MartianRaptorRenderer;
 import net.mrscauthd.beyond_earth.entity.renderer.mogler.MoglerModel;
 import net.mrscauthd.beyond_earth.entity.renderer.mogler.MoglerRenderer;
 import net.mrscauthd.beyond_earth.entity.renderer.pygro.PygroModel;
@@ -71,6 +73,7 @@ public class ClientEventBusSubscriber {
 			return new PygroRenderer(p_174068_, PygroModel.LAYER_LOCATION, ModelLayers.PIGLIN_INNER_ARMOR, ModelLayers.PIGLIN_OUTER_ARMOR);
 		});
 		event.registerEntityRenderer(ModInit.MOGLER.get(), MoglerRenderer::new);
+		event.registerEntityRenderer(ModInit.MARTIAN_RAPTOR.get(), MartianRaptorRenderer::new);
 		event.registerEntityRenderer(ModInit.TIER_1_ROCKET.get(), RocketTier1Renderer::new);
 		event.registerEntityRenderer(ModInit.TIER_2_ROCKET.get(), RocketTier2Renderer::new);
 		event.registerEntityRenderer(ModInit.TIER_3_ROCKET.get(), RocketTier3Renderer::new);
@@ -91,6 +94,7 @@ public class ClientEventBusSubscriber {
 		event.registerLayerDefinition(StarCrawlerModel.LAYER_LOCATION, StarCrawlerModel::createBodyLayer);
 		event.registerLayerDefinition(PygroModel.LAYER_LOCATION, PygroModel::createBodyLayer);
 		event.registerLayerDefinition(MoglerModel.LAYER_LOCATION, MoglerModel::createBodyLayer);
+		event.registerLayerDefinition(MartianRaptorModel.LAYER_LOCATION, MartianRaptorModel::createBodyLayer);
 
 		event.registerLayerDefinition(TileEntityHeadModel.LAYER_LOCATION, TileEntityHeadModel::createHumanoidHeadLayer);
 		

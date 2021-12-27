@@ -47,6 +47,7 @@
   "item.beyond_earth.cheese": "Cheese",
   "item.beyond_earth.steel_axe": "Steel Axe",
   "item.beyond_earth.mogler_spawn_egg": "Mogler Spawn Egg",
+  "item.beyond_earth.martian_raptor_spawn_egg": "Martian Raptor Spawn Egg",
   "item.beyond_earth.desh_ingot": "Desh Ingot",
   "item.beyond_earth.compressed_desh": "Compressed Desh",
   "item.beyond_earth.desh_nugget": "Desh Nugget",
@@ -144,6 +145,7 @@
   "entity.beyond_earth.alien": "Alien",
   "entity.beyond_earth.alien_zombie": "Alien Zombie",
   "entity.beyond_earth.star_crawler": "Star Crawler",
+  "entity.beyond_earth.martian_raptor": "Martian Raptor",
   "entity.beyond_earth.rocket_t1": "Tier 1 Rocket",
   "entity.beyond_earth.rocket_t2": "Tier 2 Rocket",
   "entity.beyond_earth.rocket_t3": "Tier 3 Rocket",
@@ -192,7 +194,7 @@
   "entity.beyond_earth.alien.butcher": "Butcher",
   "entity.beyond_earth.alien.leatherworker": "Leatherworker",
   "entity.beyond_earth.alien.mason": "Mason",
-  
+
   "block.beyond_earth.molten_desh_fluid": "Molten Desh",
   "fluid.beyond_earth.molten_desh": "Molten Desh",
   "fluid.beyond_earth.flowing_molten_desh": "Flowing Molten Desh",
