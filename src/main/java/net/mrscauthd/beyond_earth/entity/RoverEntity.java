@@ -59,15 +59,17 @@ import java.util.Set;
 
 public class RoverEntity extends PathfinderMob {
     private double speed = 0;
-    private boolean forward = false;
 
     public static final EntityDataAccessor<Integer> FUEL = SynchedEntityData.defineId(RoverEntity.class, EntityDataSerializers.INT);
+
+    public static final EntityDataAccessor<Boolean> FORWARD = SynchedEntityData.defineId(RoverEntity.class, EntityDataSerializers.BOOLEAN);
 
 	public static final int FUEL_BUCKETS = 3;
 
     public RoverEntity(EntityType<? extends PathfinderMob> type, Level worldIn) {
         super(type, worldIn);
         this.entityData.define(FUEL, 0);
+        this.entityData.define(FORWARD, false);
     }
 
     public static AttributeSupplier.Builder setCustomAttributes() {
@@ -298,6 +300,7 @@ public class RoverEntity extends PathfinderMob {
         compound.put("InventoryCustom", inventory.serializeNBT());
 
         compound.putInt("fuel", this.getEntityData().get(FUEL));
+        compound.putBoolean("forward", this.getEntityData().get(FORWARD));
     }
 
     @Override
@@ -309,6 +312,7 @@ public class RoverEntity extends PathfinderMob {
         }
 
         this.entityData.set(FUEL, compound.getInt("fuel"));
+        this.entityData.set(FORWARD, compound.getBoolean("forward"));
     }
 
     @Override
@@ -342,7 +346,7 @@ public class RoverEntity extends PathfinderMob {
     }
 
     public boolean getforward() {
-        return forward;
+        return this.entityData.get(FORWARD);
     }
 
     @Override
@@ -375,11 +379,11 @@ public class RoverEntity extends PathfinderMob {
         if (passanger.zza > 0.01 && this.getEntityData().get(FUEL) != 0) {
 
             this.entityData.set(FUEL, this.getEntityData().get(FUEL) - 1);
-            forward = true;
+            this.entityData.set(FORWARD, true);
         } else if (passanger.zza < -0.01 && this.getEntityData().get(FUEL) != 0) {
 
             this.entityData.set(FUEL, this.getEntityData().get(FUEL) - 1);
-            forward = false;
+            this.entityData.set(FORWARD, false);
         }
     }
 
@@ -406,7 +410,7 @@ public class RoverEntity extends PathfinderMob {
                 }
             }
 
-            if (this.forward && this.getEntityData().get(FUEL) != 0) {
+            if (this.entityData.get(FORWARD) && this.getEntityData().get(FUEL) != 0) {
                 if (this.getSpeed() >= 0.01) {
                     if (speed <= 0.32) {
                         speed = speed + 0.02;
@@ -419,7 +423,7 @@ public class RoverEntity extends PathfinderMob {
 
             }
 
-            if (!this.forward) {
+            if (!this.entityData.get(FORWARD)) {
 
                 if (this.getEntityData().get(FUEL) != 0 && !this.isEyeInFluid(FluidTags.WATER)) {
 
@@ -433,7 +437,7 @@ public class RoverEntity extends PathfinderMob {
                 }
             }
 
-            if (this.forward) {
+            if (this.entityData.get(FORWARD)) {
                 this.setWellRotationPlus(4.0f, 0.4f);
             } else {
                 this.setWellRotationMinus(8.0f, 0.8f);
