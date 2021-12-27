@@ -139,8 +139,8 @@ public class StarCrawlerModel<T extends StarCrawlerEntity> extends EntityModel<T
         // arm1
         this.arm1g.getChild("Hand1").yRot = Mth.cos(f * 0.6662F) * f1;
         this.arm2g.getChild("Hand2").yRot = Mth.cos(f * 0.6662F) * f1;
-        this.arm3g.getChild("Hand3").yRot = 80 + Mth.cos(f * 0.6662F) * f1;
-        this.arm4g.getChild("Hand4").yRot = -80 + Mth.cos(f * 0.6662F) * f1;
+        this.arm3g.getChild("Hand3").yRot = 80.115f + Mth.cos(f * 0.6662F) * f1;
+        this.arm4g.getChild("Hand4").yRot = -80.115f + Mth.cos(f * 0.6662F) * f1;
         // arm
         this.arm1g.yRot = Mth.cos(f * 0.6662F) * f1;
         this.arm2g.yRot = Mth.cos(f * 0.6662F) * f1;

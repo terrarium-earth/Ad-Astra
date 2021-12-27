@@ -47,7 +47,7 @@ public class BiomeRegistry {
             BiomeGenerationSettings.Builder biomeGenerationSettings = new BiomeGenerationSettings.Builder();
             addDefaultCarversAndLakes(biomeGenerationSettings);
             BiomeDefaultFeatures.addLushCavesVegetationFeatures(biomeGenerationSettings);
-            MobSpawnSettings mobSpawnInfo = MobSpawnSettings.EMPTY;
+            MobSpawnSettings mobSpawnInfo = (new MobSpawnSettings.Builder()).addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModInit.MARTIAN_RAPTOR.get(), 20, 5, 5)).addMobCharge(ModInit.MARTIAN_RAPTOR.get(), 0.7D, 0.15D).build();
 
             mars = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(1.6f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
             event.getRegistry().register(mars.setRegistryName(BeyondEarthMod.MODID,"mars"));
