@@ -1,5 +1,6 @@
 package net.mrscauthd.beyond_earth.events;
 
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -19,7 +20,7 @@ public class OxygenSystem {
                 Methodes.OxygenDamage(entity);
             }
 
-            if (Methodes.spaceSuitCheckBoth(entity)) {
+            if (Methodes.spaceSuitCheckBoth(entity) && !entity.hasEffect(ModInit.OXYGEN_EFFECT.get())) {
 
                 ItemStack itemstack = entity.getItemBySlot(EquipmentSlot.byTypeAndIndex(EquipmentSlot.Type.ARMOR, 2));
                 IOxygenStorage oxygenStorage = OxygenUtil.getItemStackOxygenStorage(itemstack);
@@ -34,13 +35,27 @@ public class OxygenSystem {
 
             }
 
-            if (!Methodes.spaceSuitCheckBoth(entity)) {
+            if (!Methodes.spaceSuitCheckBoth(entity) && !entity.hasEffect(ModInit.OXYGEN_EFFECT.get())) {
                 entity.setAirSupply(-4);
             }
 
             if (entity.hasEffect(ModInit.OXYGEN_EFFECT.get()) || entity.getPersistentData().getBoolean(BeyondEarthMod.MODID + ":planet_selection_gui_open")) {
                 entity.setAirSupply(300);
             }
+        }
+
+        //Out of Space
+        if (Methodes.spaceSuitCheckBoth(entity) && entity.isEyeInFluid(FluidTags.WATER) && !entity.hasEffect(ModInit.OXYGEN_EFFECT.get())) {
+
+            ItemStack itemstack = entity.getItemBySlot(EquipmentSlot.byTypeAndIndex(EquipmentSlot.Type.ARMOR, 2));
+            IOxygenStorage oxygenStorage = OxygenUtil.getItemStackOxygenStorage(itemstack);
+            if (oxygenStorage.getOxygenStored() > 0) {
+                entity.setAirSupply(300);
+            }
+        }
+
+        if (entity.hasEffect(ModInit.OXYGEN_EFFECT.get())) {
+            entity.setAirSupply(300);
         }
     }
 }

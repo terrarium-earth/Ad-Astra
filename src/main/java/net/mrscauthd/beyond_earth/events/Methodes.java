@@ -268,6 +268,10 @@ public class Methodes {
                 }
             }
         }
+        //out of space
+        if (Config.EntityOxygenSystem && tagCheck(entity, BeyondEarthMod.MODID + ":entities/oxygen") && entity.hasEffect(ModInit.OXYGEN_EFFECT.get())) {
+            entity.setAirSupply(300);
+        }
     }
 
     public static void vehicleRotation(LivingEntity vehicle, float roation) {

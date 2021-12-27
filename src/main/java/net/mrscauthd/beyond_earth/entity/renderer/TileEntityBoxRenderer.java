@@ -1,5 +1,6 @@
 package net.mrscauthd.beyond_earth.entity.renderer;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Matrix3f;
@@ -23,6 +24,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.machines.tile.OxygenBubbleDistributorBlockEntity;
+
+import java.awt.*;
 
 @OnlyIn(Dist.CLIENT)
 public class TileEntityBoxRenderer implements BlockEntityRenderer<OxygenBubbleDistributorBlockEntity> {
