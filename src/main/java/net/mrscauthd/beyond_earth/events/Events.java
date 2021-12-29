@@ -1,5 +1,6 @@
 package net.mrscauthd.beyond_earth.events;
 
+import com.google.common.eventbus.DeadEvent;
 import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
@@ -29,6 +30,7 @@ import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -287,6 +289,15 @@ public class Events {
             } else if (event.getSound() instanceof ElytraOnPlayerSoundInstance) {
                 event.setSound(new ElytraSpaceOnPlayerSoundInstance(Minecraft.getInstance().player));
             }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onKill(LivingDeathEvent event) {
+        if (event.getEntity() instanceof Player && event.getEntity().getPersistentData().getBoolean(BeyondEarthMod.MODID + ":planet_selection_gui_open")) {
+            ((Player) event.getEntity()).closeContainer();
+            Methodes.cleanUpPlayerNBT((Player) event.getEntity());
+            event.getEntity().setNoGravity(false);
         }
     }
 }
