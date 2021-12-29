@@ -428,44 +428,44 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 		venusButton.visible = false;
 
 		//CATEGORY 5
-		glacioButton = this.addImageButton(10, (this.height / 2) - 24 / 2, 70, 20, bbButtonTex, 15, "Glacio");
+		glacioButton = this.addImageButton(10, (this.height / 2) - 24 / 2, 70, 20, bbButtonTex, 5, "Glacio");
 		glacioButton.visible = false;
 
 		/**ORBIT BUTTONS*/
 		//CATEGORY 0
-		earthOrbitButton = this.addImageButton(84, (this.height / 2) - 24 / 2, 37, 20, sbbButtonTex, 5, "Orbit");
+		earthOrbitButton = this.addImageButton(84, (this.height / 2) - 24 / 2, 37, 20, sbbButtonTex, 6, "Orbit");
 		earthOrbitButton.visible = false;
 
-		moonOrbitButton = this.addImageButton(84, (this.height / 2) + 21 / 2, 37, 20, sbbButtonTex, 6, "Orbit");
+		moonOrbitButton = this.addImageButton(84, (this.height / 2) + 21 / 2, 37, 20, sbbButtonTex, 7, "Orbit");
 		moonOrbitButton.visible = false;
 
-		marsOrbitButton = this.addImageButton(84, (this.height / 2) - 24 / 2, 37, 20, sbbButtonTex, 7, "Orbit");
+		marsOrbitButton = this.addImageButton(84, (this.height / 2) - 24 / 2, 37, 20, sbbButtonTex, 8, "Orbit");
 		marsOrbitButton.visible = false;
 
-		mercuryOrbitButton = this.addImageButton(84, (this.height / 2) - 24 / 2, 37, 20, sbbButtonTex, 8, "Orbit");
+		mercuryOrbitButton = this.addImageButton(84, (this.height / 2) - 24 / 2, 37, 20, sbbButtonTex, 9, "Orbit");
 		mercuryOrbitButton.visible = false;
 
-		venusOrbitButton = this.addImageButton(84, (this.height / 2) - 24 / 2, 37, 20, sbbButtonTex, 9, "Orbit");
+		venusOrbitButton = this.addImageButton(84, (this.height / 2) - 24 / 2, 37, 20, sbbButtonTex, 10, "Orbit");
 		venusOrbitButton.visible = false;
 		//CATEGORY 5
-		glacioOrbitButton = this.addImageButton(84, (this.height / 2) - 24 / 2, 37, 20, sbbButtonTex, 16, "Orbit");
+		glacioOrbitButton = this.addImageButton(84, (this.height / 2) - 24 / 2, 37, 20, sbbButtonTex, 11, "Orbit");
 		glacioOrbitButton.visible = false;
 
 		 /**SPACE STATION BUTTONS*/
 		//CATEGORY 0
-		earthSpaceStationButton = this.addSpaceStationImageButton(125, (this.height / 2) - 24 / 2, 75, 20, brbButtonTex, 10, "Space Station", this.getSpaceStationItemList());
+		earthSpaceStationButton = this.addSpaceStationImageButton(125, (this.height / 2) - 24 / 2, 75, 20, brbButtonTex, 12, "Space Station", this.getSpaceStationItemList());
 		earthSpaceStationButton.visible = false;
 
-		moonSpaceStationButton = this.addSpaceStationImageButton(125, (this.height / 2) + 21 / 2, 75, 20, brbButtonTex, 11, "Space Station", this.getSpaceStationItemList());
+		moonSpaceStationButton = this.addSpaceStationImageButton(125, (this.height / 2) + 21 / 2, 75, 20, brbButtonTex, 13, "Space Station", this.getSpaceStationItemList());
 		moonSpaceStationButton.visible = false;
 
-		marsSpaceStationButton = this.addSpaceStationImageButton(125, (this.height / 2) - 24 / 2, 75, 20, brbButtonTex, 12, "Space Station", this.getSpaceStationItemList());
+		marsSpaceStationButton = this.addSpaceStationImageButton(125, (this.height / 2) - 24 / 2, 75, 20, brbButtonTex, 14, "Space Station", this.getSpaceStationItemList());
 		marsSpaceStationButton.visible = false;
 
-		mercurySpaceStationButton = this.addSpaceStationImageButton(125, (this.height / 2) - 24 / 2, 75, 20, brbButtonTex, 13, "Space Station", this.getSpaceStationItemList());
+		mercurySpaceStationButton = this.addSpaceStationImageButton(125, (this.height / 2) - 24 / 2, 75, 20, brbButtonTex, 15, "Space Station", this.getSpaceStationItemList());
 		mercurySpaceStationButton.visible = false;
 
-		venusSpaceStationButton = this.addSpaceStationImageButton(125, (this.height / 2) - 24 / 2, 75, 20, brbButtonTex, 14, "Space Station", this.getSpaceStationItemList());
+		venusSpaceStationButton = this.addSpaceStationImageButton(125, (this.height / 2) - 24 / 2, 75, 20, brbButtonTex, 16, "Space Station", this.getSpaceStationItemList());
 		venusSpaceStationButton.visible = false;
 		//CATEGORY 5
 		glacioSpaceStationButton = this.addSpaceStationImageButton(125, (this.height / 2) - 24 / 2, 75, 20, brbButtonTex, 17, "Space Station", this.getSpaceStationItemList());

@@ -73,6 +73,7 @@ public class PlanetSelectionGui {
 
 		public static void handle(NetworkMessage message, Supplier<NetworkEvent.Context> contextSupplier) {
 			NetworkEvent.Context context = contextSupplier.get();
+			//TODO IF THE PLANET DONE CHANGE VENUS TO GLACIO (ID)
 
 			//Teleport Planet Buttons
 			if (message.getInteger() == 0) {
@@ -96,62 +97,60 @@ public class PlanetSelectionGui {
 				Methodes.teleportButton(context.getSender(), new ResourceLocation(BeyondEarthMod.MODID, "venus"), false);
 			}
 			/**Proxima Centauri:*/
-			if (message.getInteger() == 15) {
+			if (message.getInteger() == 5) {
 				defaultOptions(context.getSender());
 				Methodes.teleportButton(context.getSender(), new ResourceLocation(BeyondEarthMod.MODID, "venus"), false);
 			}
-			//TODO IF THE PLANET DONE CHANGE VENUS TO GLACIO (ID)
-			//TODO Reset the Planet Sorting (THAT it not in middle in the sorting is 15... yk)
 
 			//Teleport Orbit Buttons
-			if (message.getInteger() == 5) {
+			if (message.getInteger() == 6) {
 				defaultOptions(context.getSender());
 				Methodes.teleportButton(context.getSender(), new ResourceLocation(BeyondEarthMod.MODID, "overworld_orbit"), false);
 			}
-			if (message.getInteger() == 6) {
+			if (message.getInteger() == 7) {
 				defaultOptions(context.getSender());
 				Methodes.teleportButton(context.getSender(), new ResourceLocation(BeyondEarthMod.MODID, "moon_orbit"), false);
 			}
-			if (message.getInteger() == 7) {
+			if (message.getInteger() == 8) {
 				defaultOptions(context.getSender());
 				Methodes.teleportButton(context.getSender(), new ResourceLocation(BeyondEarthMod.MODID, "mars_orbit"), false);
 			}
-			if (message.getInteger() == 8) {
+			if (message.getInteger() == 9) {
 				defaultOptions(context.getSender());
 				Methodes.teleportButton(context.getSender(), new ResourceLocation(BeyondEarthMod.MODID, "mercury_orbit"), false);
 			}
-			if (message.getInteger() == 9) {
+			if (message.getInteger() == 10) {
 				defaultOptions(context.getSender());
 				Methodes.teleportButton(context.getSender(), new ResourceLocation(BeyondEarthMod.MODID, "venus_orbit"), false);
 			}
 			/**Proxima Centauri:*/
-			if (message.getInteger() == 16) {
+			if (message.getInteger() == 11) {
 				defaultOptions(context.getSender());
 				Methodes.teleportButton(context.getSender(), new ResourceLocation(BeyondEarthMod.MODID, "venus_orbit"), false);
 			}
 
 			//Create Space Station Buttons
-			if (message.getInteger() == 10) {
+			if (message.getInteger() == 12) {
 				deleteItems(context.getSender());
 				defaultOptions(context.getSender());
 				Methodes.teleportButton(context.getSender(), new ResourceLocation(BeyondEarthMod.MODID, "overworld_orbit"), true);
 			}
-			if (message.getInteger() == 11) {
+			if (message.getInteger() == 13) {
 				deleteItems(context.getSender());
 				defaultOptions(context.getSender());
 				Methodes.teleportButton(context.getSender(), new ResourceLocation(BeyondEarthMod.MODID, "moon_orbit"), true);
 			}
-			if (message.getInteger() == 12) {
+			if (message.getInteger() == 14) {
 				deleteItems(context.getSender());
 				defaultOptions(context.getSender());
 				Methodes.teleportButton(context.getSender(), new ResourceLocation(BeyondEarthMod.MODID, "mars_orbit"), true);
 			}
-			if (message.getInteger() == 13) {
+			if (message.getInteger() == 15) {
 				deleteItems(context.getSender());
 				defaultOptions(context.getSender());
 				Methodes.teleportButton(context.getSender(), new ResourceLocation(BeyondEarthMod.MODID, "mercury_orbit"), true);
 			}
-			if (message.getInteger() == 14) {
+			if (message.getInteger() == 16) {
 				deleteItems(context.getSender());
 				defaultOptions(context.getSender());
 				Methodes.teleportButton(context.getSender(), new ResourceLocation(BeyondEarthMod.MODID, "venus_orbit"), true);
