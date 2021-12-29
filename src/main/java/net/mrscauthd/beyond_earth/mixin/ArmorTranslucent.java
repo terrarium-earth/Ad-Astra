@@ -31,7 +31,5 @@ public abstract class ArmorTranslucent<T extends LivingEntity, A extends Humanoi
             VertexConsumer ivertexbuilder = ItemRenderer.getArmorFoilBuffer(p_117108_, RenderType.entityTranslucent(armorResource), false, p_117111_);
             p_117112_.renderToBuffer(p_117107_, ivertexbuilder, p_117109_, OverlayTexture.NO_OVERLAY, p_117114_, p_117115_, p_117116_, 1.0F);
         }
-
     }
-
 }

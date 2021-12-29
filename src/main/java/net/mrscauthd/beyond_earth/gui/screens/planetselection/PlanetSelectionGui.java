@@ -95,6 +95,13 @@ public class PlanetSelectionGui {
 				defaultOptions(context.getSender());
 				Methodes.teleportButton(context.getSender(), new ResourceLocation(BeyondEarthMod.MODID, "venus"), false);
 			}
+			/**Proxima Centauri:*/
+			if (message.getInteger() == 15) {
+				defaultOptions(context.getSender());
+				Methodes.teleportButton(context.getSender(), new ResourceLocation(BeyondEarthMod.MODID, "venus"), false);
+			}
+			//TODO IF THE PLANET DONE CHANGE VENUS TO GLACIO (ID)
+			//TODO Reset the Planet Sorting (THAT it not in middle in the sorting is 15... yk)
 
 			//Teleport Orbit Buttons
 			if (message.getInteger() == 5) {
@@ -114,6 +121,11 @@ public class PlanetSelectionGui {
 				Methodes.teleportButton(context.getSender(), new ResourceLocation(BeyondEarthMod.MODID, "mercury_orbit"), false);
 			}
 			if (message.getInteger() == 9) {
+				defaultOptions(context.getSender());
+				Methodes.teleportButton(context.getSender(), new ResourceLocation(BeyondEarthMod.MODID, "venus_orbit"), false);
+			}
+			/**Proxima Centauri:*/
+			if (message.getInteger() == 16) {
 				defaultOptions(context.getSender());
 				Methodes.teleportButton(context.getSender(), new ResourceLocation(BeyondEarthMod.MODID, "venus_orbit"), false);
 			}
@@ -140,6 +152,12 @@ public class PlanetSelectionGui {
 				Methodes.teleportButton(context.getSender(), new ResourceLocation(BeyondEarthMod.MODID, "mercury_orbit"), true);
 			}
 			if (message.getInteger() == 14) {
+				deleteItems(context.getSender());
+				defaultOptions(context.getSender());
+				Methodes.teleportButton(context.getSender(), new ResourceLocation(BeyondEarthMod.MODID, "venus_orbit"), true);
+			}
+			/**Proxima Centauri:*/
+			if (message.getInteger() == 17) {
 				deleteItems(context.getSender());
 				defaultOptions(context.getSender());
 				Methodes.teleportButton(context.getSender(), new ResourceLocation(BeyondEarthMod.MODID, "venus_orbit"), true);

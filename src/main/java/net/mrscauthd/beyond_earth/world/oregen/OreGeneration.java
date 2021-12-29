@@ -37,7 +37,6 @@ public class OreGeneration {
     public static RuleTestType<RuleTests.MarsRuleTest> MARS_MATCH = null;
     private static Feature<OreConfiguration> MARS_GEN_FEATURE = null;
 
-    private static PlacedFeature marsIceShardOre = null;
     private static PlacedFeature marsIronOre = null;
     private static PlacedFeature marsDiamondOre = null;
     private static PlacedFeature marsSiliconOre = null;
@@ -85,9 +84,6 @@ public class OreGeneration {
         MARS_GEN_FEATURE = new OreFeature(OreConfiguration.CODEC);
         event.getRegistry().register(MARS_GEN_FEATURE.setRegistryName("mars_ore"));
 
-        marsIceShardOre = MARS_GEN_FEATURE.configured(new OreConfiguration(RuleTests.MarsRuleTest.INSTANCE, ModInit.MARS_ICE_SHARD_ORE.get().defaultBlockState(), 11)).placed(commonOrePlacement(7, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-64), VerticalAnchor.aboveBottom(64))));
-        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"mars_ice_shard_ore"), marsIceShardOre);
-
         marsIronOre = MARS_GEN_FEATURE.configured(new OreConfiguration(RuleTests.MarsRuleTest.INSTANCE, ModInit.MARS_IRON_ORE.get().defaultBlockState(), 11)).placed(commonOrePlacement(5, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-64), VerticalAnchor.aboveBottom(64))));
         Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"mars_iron_ore"), marsIronOre);
 
@@ -132,7 +128,6 @@ public class OreGeneration {
         }
 
         if (event.getName().getPath().equals(BiomeRegistry.mars.getRegistryName().getPath())) {
-            event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(() -> marsIceShardOre);
             event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(() -> marsIronOre);
             event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(() -> marsDiamondOre);
             event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(() -> marsSiliconOre);

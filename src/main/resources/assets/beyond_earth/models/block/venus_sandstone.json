@@ -1,12 +1,12 @@
 {
   "parent": "block/cube",
   "textures": {
-    "down": "beyond_earth:blocks/venus_stone",
-    "up": "beyond_earth:blocks/venus_stone",
-    "north": "beyond_earth:blocks/venus_stone",
-    "east": "beyond_earth:blocks/venus_stone",
-    "south": "beyond_earth:blocks/venus_stone",
-    "west": "beyond_earth:blocks/venus_stone",
-    "particle": "beyond_earth:blocks/venus_stone"
+    "down": "beyond_earth:blocks/venus_sandstone",
+    "up": "beyond_earth:blocks/venus_sandstone",
+    "north": "beyond_earth:blocks/venus_sandstone",
+    "east": "beyond_earth:blocks/venus_sandstone",
+    "south": "beyond_earth:blocks/venus_sandstone",
+    "west": "beyond_earth:blocks/venus_sandstone",
+    "particle": "beyond_earth:blocks/venus_sandstone"
   }
 }

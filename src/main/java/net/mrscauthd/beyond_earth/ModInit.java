@@ -83,7 +83,6 @@ import net.mrscauthd.beyond_earth.gui.screens.rover.RoverGui;
 import net.mrscauthd.beyond_earth.gui.screens.solarpanel.SolarPanelGui;
 import net.mrscauthd.beyond_earth.gui.screens.waterpump.WaterPumpGui;
 import net.mrscauthd.beyond_earth.item.*;
-import net.mrscauthd.beyond_earth.itemtiers.SteelItemTier;
 import net.mrscauthd.beyond_earth.machines.*;
 import net.mrscauthd.beyond_earth.machines.tile.CoalGeneratorBlockEntity;
 import net.mrscauthd.beyond_earth.machines.tile.CompressorBlockEntity;
@@ -226,22 +225,6 @@ public class ModInit {
     public static final RegistryObject<BlockItem> OXYGEN_BUBBLE_DISTRIBUTOR_ITEM = ITEMS.register("oxygen_bubble_distributor", () -> new BlockItem(ModInit.OXYGEN_BUBBLE_DISTRIBUTOR_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_machines)));
     public static final RegistryObject<BlockItem> WATER_PUMP_ITEM = ITEMS.register("water_pump", () -> new BlockItem(ModInit.WATER_PUMP_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_machines)));
 
-    //Tools
-    public static final RegistryObject<Item> STEEL_SWORD = ITEMS.register("steel_sword",
-            () -> new SwordItem(SteelItemTier.ITEM_TIER,3,-2.4f,new Item.Properties().tab(ItemGroups.tab_basics).fireResistant()));
-
-    public static final RegistryObject<Item> STEEL_SHOVEL = ITEMS.register("steel_shovel",
-            () -> new ShovelItem(SteelItemTier.ITEM_TIER,1.5f,-3f,new Item.Properties().tab(ItemGroups.tab_basics).fireResistant()));
-
-    public static final RegistryObject<Item> STEEL_PICKAXE = ITEMS.register("steel_pickaxe",
-            () -> new PickaxeItem(SteelItemTier.ITEM_TIER,1,-2.8f,new Item.Properties().tab(ItemGroups.tab_basics).fireResistant()));
-
-    public static final RegistryObject<Item> STEEL_AXE = ITEMS.register("steel_axe",
-            () -> new AxeItem(SteelItemTier.ITEM_TIER,6,-3f,new Item.Properties().tab(ItemGroups.tab_basics).fireResistant()));
-
-    public static final RegistryObject<Item> STEEL_HOE = ITEMS.register("steel_hoe",
-            () -> new HoeItem(SteelItemTier.ITEM_TIER,-2,0f,new Item.Properties().tab(ItemGroups.tab_basics).fireResistant()));
-
     //Fuel Fluid
     public static final RegistryObject<FlowingFluid> FLOWING_FUEL = FLUIDS.register("flowing_fuel", ()-> new FuelFluid.Flowing());
     public static final RegistryObject<FlowingFluid> FUEL_STILL = FLUIDS.register("fuel", ()-> new FuelFluid.Source());
@@ -301,8 +284,6 @@ public class ModInit {
     public static final RegistryObject<Item> COMPRESSED_DESH = ITEMS.register("compressed_desh", () -> new Item(new Item.Properties().tab(ItemGroups.tab_materials)));
     public static final RegistryObject<Item> COMPRESSED_SILICON = ITEMS.register("compressed_silicon", () -> new Item(new Item.Properties().tab(ItemGroups.tab_materials)));
 
-    public static final RegistryObject<Item> ICE_SHARD = ITEMS.register("ice_shard", () -> new Item(new Item.Properties().tab(ItemGroups.tab_materials)));
-
     public static final RegistryObject<Item> STEEL_NUGGET = ITEMS.register("steel_nugget", () -> new Item(new Item.Properties().tab(ItemGroups.tab_materials)));
     public static final RegistryObject<Item> DESH_NUGGET = ITEMS.register("desh_nugget", () -> new Item(new Item.Properties().tab(ItemGroups.tab_materials)));
     public static final RegistryObject<Item> SILICON_NUGGET = ITEMS.register("silicon_nugget", () -> new Item(new Item.Properties().tab(ItemGroups.tab_materials)));
@@ -346,7 +327,6 @@ public class ModInit {
     public static final RegistryObject<Block> MOON_CHEESE_ORE = BLOCKS.register("moon_cheese_ore", () -> new Block(BlockBehaviour.Properties.of(Material.STONE).sound(SoundType.STONE).strength(3.0F, 3.0F).requiresCorrectToolForDrops()));
     public static final RegistryObject<Block> MOON_DESH_ORE = BLOCKS.register("moon_desh_ore", () -> new Block(BlockBehaviour.Properties.of(Material.STONE).sound(SoundType.STONE).strength(3.0F, 3.0F).requiresCorrectToolForDrops()));
     public static final RegistryObject<Block> MOON_IRON_ORE = BLOCKS.register("moon_iron_ore", () -> new Block(BlockBehaviour.Properties.of(Material.STONE).sound(SoundType.STONE).strength(3.0F, 3.0F).requiresCorrectToolForDrops()));
-    public static final RegistryObject<Block> MARS_ICE_SHARD_ORE = BLOCKS.register("mars_ice_shard_ore", () -> new Block(BlockBehaviour.Properties.of(Material.STONE).sound(SoundType.STONE).strength(3.0F, 3.0F).requiresCorrectToolForDrops()));
     public static final RegistryObject<Block> MARS_IRON_ORE = BLOCKS.register("mars_iron_ore", () -> new Block(BlockBehaviour.Properties.of(Material.STONE).sound(SoundType.STONE).strength(3.0F, 3.0F).requiresCorrectToolForDrops()));
     public static final RegistryObject<Block> MARS_DIAMOND_ORE = BLOCKS.register("mars_diamond_ore", () -> new Block(BlockBehaviour.Properties.of(Material.STONE).sound(SoundType.STONE).strength(3.0F, 3.0F).requiresCorrectToolForDrops()));
     public static final RegistryObject<Block> MARS_SILICON_ORE = BLOCKS.register("mars_silicon_ore", () -> new Block(BlockBehaviour.Properties.of(Material.STONE).sound(SoundType.STONE).strength(3.0F, 3.0F).requiresCorrectToolForDrops()));
@@ -389,7 +369,6 @@ public class ModInit {
     public static final RegistryObject<BlockItem> MOON_CHEESE_ORE_ITEM = ITEMS.register("moon_cheese_ore", () -> new BlockItem(ModInit.MOON_CHEESE_ORE.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
     public static final RegistryObject<BlockItem> MOON_DESH_ORE_ITEM = ITEMS.register("moon_desh_ore", () -> new BlockItem(ModInit.MOON_DESH_ORE.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
     public static final RegistryObject<BlockItem> MOON_IRON_ORE_ITEM = ITEMS.register("moon_iron_ore", () -> new BlockItem(ModInit.MOON_IRON_ORE.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
-    public static final RegistryObject<BlockItem> MARS_ICE_SHARD_ORE_ITEM = ITEMS.register("mars_ice_shard_ore", () -> new BlockItem(ModInit.MARS_ICE_SHARD_ORE.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
     public static final RegistryObject<BlockItem> MARS_IRON_ORE_ITEM = ITEMS.register("mars_iron_ore", () -> new BlockItem(ModInit.MARS_IRON_ORE.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
     public static final RegistryObject<BlockItem> MARS_DIAMOND_ORE_ITEM = ITEMS.register("mars_diamond_ore", () -> new BlockItem(ModInit.MARS_DIAMOND_ORE.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
     public static final RegistryObject<BlockItem> MARS_SILICON_ORE_ITEM = ITEMS.register("mars_silicon_ore", () -> new BlockItem(ModInit.MARS_SILICON_ORE.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
@@ -531,13 +510,17 @@ public class ModInit {
                 /*______________________________________OVERWORLD_BIOMES___________________________________*/
 
                 /**Add Overworld Structure in a Biome*/
-                if (Config.OILWellStructure && biomeCategory == Biome.BiomeCategory.OCEAN) {
-                    associateBiomeToConfiguredStructure(STStructureToMultiMap, STConfiguredStructures.OIL, biomeEntry.getKey());
+                if (Config.OILWellStructure) {
+                    if (biomeCategory == Biome.BiomeCategory.OCEAN) {
+                        associateBiomeToConfiguredStructure(STStructureToMultiMap, STConfiguredStructures.OIL, biomeEntry.getKey());
+                    }
                 }
 
                 /**Add Overworld Structure in a Biome*/
-                if (Config.MeteorStructure && biomeCategory == Biome.BiomeCategory.PLAINS || biomeCategory == Biome.BiomeCategory.DESERT || biomeCategory == Biome.BiomeCategory.FOREST) {
-                    associateBiomeToConfiguredStructure(STStructureToMultiMap, STConfiguredStructures.METEOR, biomeEntry.getKey());
+                if (Config.MeteorStructure) {
+                    if (biomeCategory == Biome.BiomeCategory.PLAINS || biomeCategory == Biome.BiomeCategory.DESERT || biomeCategory == Biome.BiomeCategory.FOREST) {
+                        associateBiomeToConfiguredStructure(STStructureToMultiMap, STConfiguredStructures.METEOR, biomeEntry.getKey());
+                    }
                 }
 
                 /*______________________________________CUSTOM_BIOMES___________________________________*/
@@ -584,23 +567,31 @@ public class ModInit {
                 return;
             }
 
-            /**______________________________________JUST_FOR_CUSTOM_BIOMES___________________________________*/
+            /**______________________________________MAP___________________________________*/
 
             Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap = new HashMap<>(worldStructureConfig.structureConfig());
-            tempMap.putIfAbsent(STStructures.ALIEN_VILLAGE.get(), StructureSettings.DEFAULTS.get(STStructures.ALIEN_VILLAGE.get()));
+            tempMap.putIfAbsent(STStructures.OIL.get(), StructureSettings.DEFAULTS.get(STStructures.OIL.get()));
             worldStructureConfig.structureConfig = tempMap;
 
             Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap2 = new HashMap<>(worldStructureConfig.structureConfig());
-            tempMap2.putIfAbsent(STStructures.CRIMSON.get(), StructureSettings.DEFAULTS.get(STStructures.CRIMSON.get()));
+            tempMap2.putIfAbsent(STStructures.METEOR.get(), StructureSettings.DEFAULTS.get(STStructures.METEOR.get()));
             worldStructureConfig.structureConfig = tempMap2;
 
-            Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap3 = new HashMap<>(worldStructureConfig.structureConfig());
-            tempMap3.putIfAbsent(STStructures.VENUS_TOWER.get(), StructureSettings.DEFAULTS.get(STStructures.VENUS_TOWER.get()));
-            worldStructureConfig.structureConfig = tempMap3;
+            Map<StructureFeature<?>, StructureFeatureConfiguration> tempMa3 = new HashMap<>(worldStructureConfig.structureConfig());
+            tempMa3.putIfAbsent(STStructures.ALIEN_VILLAGE.get(), StructureSettings.DEFAULTS.get(STStructures.ALIEN_VILLAGE.get()));
+            worldStructureConfig.structureConfig = tempMa3;
 
             Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap4 = new HashMap<>(worldStructureConfig.structureConfig());
-            tempMap4.putIfAbsent(STStructures.VENUS_BULLET.get(), StructureSettings.DEFAULTS.get(STStructures.VENUS_BULLET.get()));
+            tempMap4.putIfAbsent(STStructures.CRIMSON.get(), StructureSettings.DEFAULTS.get(STStructures.CRIMSON.get()));
             worldStructureConfig.structureConfig = tempMap4;
+
+            Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap5 = new HashMap<>(worldStructureConfig.structureConfig());
+            tempMap5.putIfAbsent(STStructures.VENUS_TOWER.get(), StructureSettings.DEFAULTS.get(STStructures.VENUS_TOWER.get()));
+            worldStructureConfig.structureConfig = tempMap5;
+
+            Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap6 = new HashMap<>(worldStructureConfig.structureConfig());
+            tempMap4.putIfAbsent(STStructures.VENUS_BULLET.get(), StructureSettings.DEFAULTS.get(STStructures.VENUS_BULLET.get()));
+            worldStructureConfig.structureConfig = tempMap6;
         }
     }
 

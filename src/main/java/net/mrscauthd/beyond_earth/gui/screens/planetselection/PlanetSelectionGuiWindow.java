@@ -12,6 +12,7 @@ import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
@@ -50,12 +51,20 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 	private static ResourceLocation brbButtonTex = new ResourceLocation(BeyondEarthMod.MODID, "textures/buttons/big_red_button.png");
 	private static ResourceLocation brb2ButtonTex = new ResourceLocation(BeyondEarthMod.MODID, "textures/buttons/big_red_button_2.png");
 
-	public int Category = 0;
+	public int Category = -1;
 
+	public float milkyWay = 0;
 	public float rotationMars = 0;
 	public float rotationEarth = 90;
 	public float rotationVenus = 180;
 	public float rotationMercury = 270;
+
+	public float rotationGlacio = 180;
+	public float rotationVicinus = 270;
+
+	//CATEGORY BUTTONS (-1)
+	public ImageButtonPlacer solarSystemButton;
+	public ImageButtonPlacer proximaCentauriButton;
 
 	//CATEGORY BUTTONS (0)
 	public ImageButtonPlacer earthCategoryButton;
@@ -63,12 +72,17 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 	public ImageButtonPlacer mercuryCategoryButton;
 	public ImageButtonPlacer venusCategoryButton;
 
+	//CATEGORY BUTTONS (5)
+	public ImageButtonPlacer glacioCategoryButton;
+
 	//TELEPORT BUTTONS
 	public ImageButtonPlacer earthButton;
 	public ImageButtonPlacer moonButton;
 	public ImageButtonPlacer marsButton;
 	public ImageButtonPlacer mercuryButton;
 	public ImageButtonPlacer venusButton;
+	//Category 5 Teleport Buttons
+	public ImageButtonPlacer glacioButton;
 
 	//BACK BUTTON
 	public ImageButtonPlacer backButton;
@@ -79,6 +93,8 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 	public ImageButtonPlacer marsOrbitButton;
 	public ImageButtonPlacer mercuryOrbitButton;
 	public ImageButtonPlacer venusOrbitButton;
+	//Category 5 Teleport Buttons
+	public ImageButtonPlacer glacioOrbitButton;
 
 	//SPACE STATION BUTTONS
 	public ImageButtonPlacer earthSpaceStationButton;
@@ -86,6 +102,8 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 	public ImageButtonPlacer marsSpaceStationButton;
 	public ImageButtonPlacer mercurySpaceStationButton;
 	public ImageButtonPlacer venusSpaceStationButton;
+	//Category 5 Teleport Buttons
+	public ImageButtonPlacer glacioSpaceStationButton;
 
 	public PlanetSelectionGuiWindow(PlanetSelectionGui.GuiContainer container, Inventory inventory, Component text) {
 		super(container, inventory, text);
@@ -99,12 +117,30 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 		super.render(ms, mouseX, mouseY, partialTicks);
 		this.renderTooltip(ms, mouseX, mouseY);
 
-		rotationMars = (rotationMars + partialTicks * 0.6f) % 360;
-		rotationEarth = (rotationEarth + partialTicks * 1.2f) % 360;
-		rotationVenus = (rotationVenus + partialTicks * 1.1f) % 360;
-		rotationMercury = (rotationMercury + partialTicks * 0.9f) % 360;
+		milkyWay = (milkyWay + partialTicks * 0.4f) % 360;
+
+		rotationMars = (rotationMars + partialTicks * 0.4f) % 360;
+		rotationEarth = (rotationEarth + partialTicks * 0.8f) % 360;
+		rotationVenus = (rotationVenus + partialTicks * 0.7f) % 360;
+		rotationMercury = (rotationMercury + partialTicks * 0.7f) % 360;
+
+		rotationGlacio = (rotationGlacio + partialTicks * 0.7f) % 360;
+		rotationVicinus = (rotationVicinus + partialTicks * 0.7f) % 360;
 
 		String rocketType = menu.rocket;
+
+		//CATEGORY -1 BUTTON
+		if (Category == -1) {
+			solarSystemButton.visible = true;
+			proximaCentauriButton.visible = true;
+
+			this.categoryButtonManager(bbButtonTex, bb2ButtonTex, mouseX, mouseY, 10, (this.height / 2) - 68 / 2, 70, 20, ms, solarSystemButton, "Sun", "Solar System");
+
+			this.categoryButtonManager(bbButtonTex, bb2ButtonTex, mouseX, mouseY, 10, (this.height / 2) - 24 / 2, 70, 20, ms, proximaCentauriButton, "Proxima Centauri", "Solar System");
+		} else {
+			solarSystemButton.visible = false;
+			proximaCentauriButton.visible = false;
+		}
 
 		//CATEGORY 0 BUTTON
 		if (Category == 0) {
@@ -113,13 +149,13 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 			mercuryCategoryButton.visible = true;
 			venusCategoryButton.visible = true;
 
-			this.buttonManager(rocketType, gb2ButtonTex, rb2ButtonTex, gbButtonTex, rbButtonTex, mouseX, mouseY, 10, (this.height / 2) - 48 / 2, 70, 20, ms, earthCategoryButton, "Earth", "Tier 1 Rocket", 1);
+			this.buttonManager(rocketType, gb2ButtonTex, rb2ButtonTex, gbButtonTex, rbButtonTex, mouseX, mouseY, 10, (this.height / 2) - 24 / 2, 70, 20, ms, earthCategoryButton, "Earth", "Tier 1 Rocket", 1);
 
-			this.buttonManager(rocketType, gb2ButtonTex, rb2ButtonTex, gbButtonTex, rbButtonTex, mouseX, mouseY, 10, (this.height / 2) - 4 / 2, 70, 20, ms, marsCategoryButton, "Mars", "Tier 2 Rocket", 2);
+			this.buttonManager(rocketType, gb2ButtonTex, rb2ButtonTex, gbButtonTex, rbButtonTex, mouseX, mouseY, 10, (this.height / 2) + 21 / 2, 70, 20, ms, marsCategoryButton, "Mars", "Tier 2 Rocket", 2);
 
-			this.buttonManager(rocketType, gb2ButtonTex, rb2ButtonTex, gbButtonTex, rbButtonTex, mouseX, mouseY, 10, (this.height / 2) + 40 / 2, 70, 20, ms, mercuryCategoryButton, "Mercury", "Tier 3 Rocket", 3);
+			this.buttonManager(rocketType, gb2ButtonTex, rb2ButtonTex, gbButtonTex, rbButtonTex, mouseX, mouseY, 10, (this.height / 2) + 65 / 2, 70, 20, ms, mercuryCategoryButton, "Mercury", "Tier 3 Rocket", 3);
 
-			this.buttonManager(rocketType, gb2ButtonTex, rb2ButtonTex, gbButtonTex, rbButtonTex, mouseX, mouseY, 10, (this.height / 2) + 84 / 2, 70, 20, ms, venusCategoryButton, "Venus", "Tier 3 Rocket", 3);
+			this.buttonManager(rocketType, gb2ButtonTex, rb2ButtonTex, gbButtonTex, rbButtonTex, mouseX, mouseY, 10, (this.height / 2) + 109 / 2, 70, 20, ms, venusCategoryButton, "Venus", "Tier 3 Rocket", 3);
 		} else {
 			earthCategoryButton.visible = false;
 			marsCategoryButton.visible = false;
@@ -128,11 +164,11 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 		}
 
 		//BACK BUTTON
-		if (Category >= 1) {
+		if (Category >= 0) {
 			backButton.visible = true;
 
 			//back
-			this.backButtonManager(dbbButtonTex, dbb2ButtonTex, mouseX, mouseY, 10, (this.height / 2) - 48 / 2, 70, 20, backButton);
+			this.backButtonManager(dbbButtonTex, dbb2ButtonTex, mouseX, mouseY, 10, (this.height / 2) - 68 / 2, 70, 20, backButton);
 		} else {
 			backButton.visible = false;
 		}
@@ -147,16 +183,16 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 			moonSpaceStationButton.visible = true;
 
 			//Planets
-			this.teleportButtonManager(bbButtonTex, bb2ButtonTex, mouseX, mouseY, 10, (this.height / 2) - 4 / 2, 70, 20, ms, earthButton, "Planet", "9.807 m/s", "a" + "true" , "a" + "14");
-			this.teleportButtonManager(bbButtonTex, bb2ButtonTex, mouseX, mouseY, 10, (this.height / 2) + 40 / 2, 70, 20, ms, moonButton, "Moon", "1.62 m/s", "c" + "false" , "c" + "-160");
+			this.teleportButtonManager(bbButtonTex, bb2ButtonTex, mouseX, mouseY, 10, (this.height / 2) - 24 / 2, 70, 20, ms, earthButton, "Planet", "9.807 m/s", "a" + "true" , "a" + "14");
+			this.teleportButtonManager(bbButtonTex, bb2ButtonTex, mouseX, mouseY, 10, (this.height / 2) + 21 / 2, 70, 20, ms, moonButton, "Moon", "1.62 m/s", "c" + "false" , "c" + "-160");
 
 			//Orbits
-			this.teleportButtonManager(sbbButtonTex, sbb2ButtonTex, mouseX, mouseY, 84, (this.height / 2) - 4 / 2, 37, 20, ms, earthOrbitButton, "Orbit", "No Gravity", "c" + "false" , "c" + "-270");
-			this.teleportButtonManager(sbbButtonTex, sbb2ButtonTex, mouseX, mouseY, 84, (this.height / 2) + 40 / 2, 37, 20, ms, moonOrbitButton, "Orbit", "No Gravity", "c" + "false" , "c" + "-270");
+			this.teleportButtonManager(sbbButtonTex, sbb2ButtonTex, mouseX, mouseY, 84, (this.height / 2) - 24 / 2, 37, 20, ms, earthOrbitButton, "Orbit", "No Gravity", "c" + "false" , "c" + "-270");
+			this.teleportButtonManager(sbbButtonTex, sbb2ButtonTex, mouseX, mouseY, 84, (this.height / 2) + 21 / 2, 37, 20, ms, moonOrbitButton, "Orbit", "No Gravity", "c" + "false" , "c" + "-270");
 
 			//Space Station
-			this.spaceStationCreatorButtonManager(brbButtonTex, brb2ButtonTex , bgbButtonTex, bgb2ButtonTex, mouseX, mouseY, 125, (this.height / 2) - 4 / 2, 75, 20, ms, earthSpaceStationButton, "Orbit", "No Gravity", "c" + "false" , "c" + "-270");
-			this.spaceStationCreatorButtonManager(brbButtonTex, brb2ButtonTex , bgbButtonTex, bgb2ButtonTex, mouseX, mouseY, 125, (this.height / 2) + 40 / 2, 75, 20, ms, moonSpaceStationButton, "Orbit", "No Gravity", "c" + "false" , "c" + "-270");
+			this.spaceStationCreatorButtonManager(brbButtonTex, brb2ButtonTex , bgbButtonTex, bgb2ButtonTex, mouseX, mouseY, 125, (this.height / 2) - 24 / 2, 75, 20, ms, earthSpaceStationButton, "Orbit", "No Gravity", "c" + "false" , "c" + "-270");
+			this.spaceStationCreatorButtonManager(brbButtonTex, brb2ButtonTex , bgbButtonTex, bgb2ButtonTex, mouseX, mouseY, 125, (this.height / 2) + 21 / 2, 75, 20, ms, moonSpaceStationButton, "Orbit", "No Gravity", "c" + "false" , "c" + "-270");
 
 		} else {
 			earthButton.visible = false;
@@ -174,13 +210,13 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 			marsSpaceStationButton.visible = true;
 
 			//Planets
-			this.teleportButtonManager(bbButtonTex, bb2ButtonTex, mouseX, mouseY, 10, (this.height / 2) - 4 / 2, 70, 20, ms, marsButton, "Planet", "3.721 m/s", "c" + "false" , "a" + "-63");
+			this.teleportButtonManager(bbButtonTex, bb2ButtonTex, mouseX, mouseY, 10, (this.height / 2) - 24 / 2, 70, 20, ms, marsButton, "Planet", "3.721 m/s", "c" + "false" , "a" + "-63");
 
 			//Orbits
-			this.teleportButtonManager(sbbButtonTex, sbb2ButtonTex, mouseX, mouseY, 84, (this.height / 2) - 4 / 2, 37, 20, ms, marsOrbitButton, "Orbit", "No Gravity", "c" + "false" , "c" + "-270");
+			this.teleportButtonManager(sbbButtonTex, sbb2ButtonTex, mouseX, mouseY, 84, (this.height / 2) - 24 / 2, 37, 20, ms, marsOrbitButton, "Orbit", "No Gravity", "c" + "false" , "c" + "-270");
 
 			//Space Station
-			this.spaceStationCreatorButtonManager(brbButtonTex, brb2ButtonTex , bgbButtonTex, bgb2ButtonTex, mouseX, mouseY, 125, (this.height / 2) - 4 / 2, 75, 20, ms, marsSpaceStationButton, "Orbit", "No Gravity", "c" + "false" , "c" + "-270");
+			this.spaceStationCreatorButtonManager(brbButtonTex, brb2ButtonTex , bgbButtonTex, bgb2ButtonTex, mouseX, mouseY, 125, (this.height / 2) - 24 / 2, 75, 20, ms, marsSpaceStationButton, "Orbit", "No Gravity", "c" + "false" , "c" + "-270");
 		} else {
 			marsButton.visible = false;
 			marsOrbitButton.visible = false;
@@ -194,13 +230,13 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 			mercurySpaceStationButton.visible = true;
 
 			//Planets
-			this.teleportButtonManager(bbButtonTex, bb2ButtonTex, mouseX, mouseY, 10, (this.height / 2) - 4 / 2, 70, 20, ms, mercuryButton, "Planet", "3.7 m/s", "c" + "false" , "a" + "430");
+			this.teleportButtonManager(bbButtonTex, bb2ButtonTex, mouseX, mouseY, 10, (this.height / 2) - 24 / 2, 70, 20, ms, mercuryButton, "Planet", "3.7 m/s", "c" + "false" , "a" + "430");
 
 			//Orbits
-			this.teleportButtonManager(sbbButtonTex, sbb2ButtonTex, mouseX, mouseY, 84, (this.height / 2) - 4 / 2, 37, 20, ms, mercuryOrbitButton, "Orbit", "No Gravity", "c" + "false" , "c" + "-270");
+			this.teleportButtonManager(sbbButtonTex, sbb2ButtonTex, mouseX, mouseY, 84, (this.height / 2) - 24 / 2, 37, 20, ms, mercuryOrbitButton, "Orbit", "No Gravity", "c" + "false" , "c" + "-270");
 
 			//Space Station
-			this.spaceStationCreatorButtonManager(brbButtonTex, brb2ButtonTex , bgbButtonTex, bgb2ButtonTex, mouseX, mouseY, 125, (this.height / 2) - 4 / 2, 75, 20, ms, mercurySpaceStationButton, "Orbit", "No Gravity", "c" + "false" , "c" + "-270");
+			this.spaceStationCreatorButtonManager(brbButtonTex, brb2ButtonTex , bgbButtonTex, bgb2ButtonTex, mouseX, mouseY, 125, (this.height / 2) - 24 / 2, 75, 20, ms, mercurySpaceStationButton, "Orbit", "No Gravity", "c" + "false" , "c" + "-270");
 		} else {
 			mercuryButton.visible = false;
 			mercuryOrbitButton.visible = false;
@@ -214,21 +250,49 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 			venusSpaceStationButton.visible = true;
 
 			//Planets
-			this.teleportButtonManager(bbButtonTex, bb2ButtonTex, mouseX, mouseY, 10, (this.height / 2) - 4 / 2, 70, 20, ms, venusButton, "Planet", "8.87 m/s", "c" + "false" , "a" + "482");
+			this.teleportButtonManager(bbButtonTex, bb2ButtonTex, mouseX, mouseY, 10, (this.height / 2) - 24 / 2, 70, 20, ms, venusButton, "Planet", "8.87 m/s", "c" + "false" , "a" + "482");
 
 			//Orbits
-			this.teleportButtonManager(sbbButtonTex, sbb2ButtonTex, mouseX, mouseY, 84, (this.height / 2) - 4 / 2, 37, 20, ms, venusOrbitButton, "Orbit", "No Gravity", "c" + "false" , "c" + "-270");
+			this.teleportButtonManager(sbbButtonTex, sbb2ButtonTex, mouseX, mouseY, 84, (this.height / 2) - 24 / 2, 37, 20, ms, venusOrbitButton, "Orbit", "No Gravity", "c" + "false" , "c" + "-270");
 
 			//Space Station
-			this.spaceStationCreatorButtonManager(brbButtonTex, brb2ButtonTex , bgbButtonTex, bgb2ButtonTex, mouseX, mouseY, 125, (this.height / 2) - 4 / 2, 75, 20, ms, venusSpaceStationButton, "Orbit", "No Gravity", "c" + "false" , "c" + "-270");
+			this.spaceStationCreatorButtonManager(brbButtonTex, brb2ButtonTex , bgbButtonTex, bgb2ButtonTex, mouseX, mouseY, 125, (this.height / 2) - 24 / 2, 75, 20, ms, venusSpaceStationButton, "Orbit", "No Gravity", "c" + "false" , "c" + "-270");
 		} else {
 			venusButton.visible = false;
 			venusOrbitButton.visible = false;
 			venusSpaceStationButton.visible = false;
 		}
 
+		/**CATEGORY 5 BUTTON*/ //Proxima Centauri MAIN
+		if (Category == 5) {
+			glacioCategoryButton.visible = true;
+
+			this.buttonManager(rocketType, gb2ButtonTex, rb2ButtonTex, gbButtonTex, rbButtonTex, mouseX, mouseY, 10, (this.height / 2) - 22 / 2, 70, 20, ms, glacioCategoryButton, "Glacio", "Tier 3 Rocket", 3);
+		} else {
+			glacioCategoryButton.visible = false;
+		}
+
+		if (Category == 6) {
+			glacioButton.visible = true;
+			glacioOrbitButton.visible = true;
+			glacioSpaceStationButton.visible = true;
+
+			//Planets
+			this.teleportButtonManager(bbButtonTex, bb2ButtonTex, mouseX, mouseY, 10, (this.height / 2) - 24 / 2, 70, 20, ms, glacioButton, "Planet", "9.807 m/s", "a" + "true" , "a" + "-20");
+
+			//Orbits
+			this.teleportButtonManager(sbbButtonTex, sbb2ButtonTex, mouseX, mouseY, 84, (this.height / 2) - 24 / 2, 37, 20, ms, glacioOrbitButton, "Orbit", "No Gravity", "c" + "false" , "c" + "-270");
+
+			//Space Station
+			this.spaceStationCreatorButtonManager(brbButtonTex, brb2ButtonTex , bgbButtonTex, bgb2ButtonTex, mouseX, mouseY, 125, (this.height / 2) - 24 / 2, 75, 20, ms, glacioSpaceStationButton, "Orbit", "No Gravity", "c" + "false" , "c" + "-270");
+		} else {
+			glacioButton.visible = false;
+			glacioOrbitButton.visible = false;
+			glacioSpaceStationButton.visible = false;
+		}
+
 		//RENDER FONTS
-		this.font.draw(ms, "CATALOG", 24, (this.height / 2) - 126 / 2, -1);
+		this.font.draw(ms, "CATALOG", 24, (this.height / 2) - 143 / 2, -1);
 	}
 
 	@Override
@@ -242,27 +306,50 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 		RenderSystem.setShaderTexture(0, texture);
 		GuiComponent.blit(ms, 0, 0, 0, 0, this.width, this.height, this.width, this.height);
 
-		//MILKY WAY
-		RenderSystem.setShaderTexture(0, new ResourceLocation(BeyondEarthMod.MODID,"textures/milky_way.png"));
-		GuiHelper.blit(ms, (this.width - 185) / 2, (this.height - 185) / 2, 0, 0, 185, 185, 185, 185);
+		//Solar System
+		if (Category >= 0 && Category <= 4) {
+			RenderSystem.setShaderTexture(0, new ResourceLocation(BeyondEarthMod.MODID, "textures/solar_system.png"));
+			GuiHelper.blit(ms, (this.width - 185) / 2, (this.height - 185) / 2, 0, 0, 185, 185, 185, 185);
+		}
+
+		//Proxima Centauri
+		if (Category >= 5 && Category <= 6) {
+			RenderSystem.setShaderTexture(0, new ResourceLocation(BeyondEarthMod.MODID, "textures/proxima_centauri.png"));
+			GuiHelper.blit(ms, (this.width - 185) / 2, (this.height - 185) / 2, 0, 0, 185, 185, 185, 185);
+		}
 
 		//SUN
-		RenderSystem.setShaderTexture(0, new ResourceLocation(BeyondEarthMod.MODID,"textures/sky/gui/sun.png"));
-		GuiHelper.blit(ms, (this.width - 15) / 2, (this.height - 15) / 2, 0, 0, 15, 15, 15, 15);
+		if (Category >= 0 && Category <= 4) {
+			RenderSystem.setShaderTexture(0, new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/gui/sun.png"));
+			GuiHelper.blit(ms, (this.width - 15) / 2, (this.height - 15) / 2, 0, 0, 15, 15, 15, 15);
+		} else if (Category >= 5 && Category <= 6) {
+			RenderSystem.setShaderTexture(0, new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/gui/blue_sun.png"));
+			GuiHelper.blit(ms, (this.width - 15) / 2, (this.height - 15) / 2, 0, 0, 15, 15, 15, 15);
+		}
+
+		//MILKY WAY
+		if (Category == -1) {
+			this.addGalaxy(ms, new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/gui/milky_way.png"), -125, -125, 250, 250, milkyWay);
+		}
 
 		//PLANETS
-		this.addPlanet(ms, new ResourceLocation(BeyondEarthMod.MODID,"textures/sky/gui/mars.png"), -70, -70, 10, 10, rotationMars);
-		this.addPlanet(ms, new ResourceLocation(BeyondEarthMod.MODID,"textures/sky/gui/earth.png"), -54, -54, 10, 10, rotationEarth);
-		this.addPlanet(ms, new ResourceLocation(BeyondEarthMod.MODID,"textures/sky/gui/venus.png"), -37, -37, 10, 10, rotationVenus);
-		this.addPlanet(ms, new ResourceLocation(BeyondEarthMod.MODID,"textures/sky/gui/mercury.png"), -20.5F, -20.5F, 10, 10, rotationMercury);
+		if (Category >= 0 && Category <= 4) {
+			this.addPlanet(ms, new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/gui/mars.png"), -70, -70, 10, 10, rotationMars);
+			this.addPlanet(ms, new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/gui/earth.png"), -54, -54, 10, 10, rotationEarth);
+			this.addPlanet(ms, new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/gui/venus.png"), -37, -37, 10, 10, rotationVenus);
+			this.addPlanet(ms, new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/gui/mercury.png"), -20.5F, -20.5F, 10, 10, rotationMercury);
+		} else if (Category >= 5 && Category <= 6) {
+			this.addPlanet(ms, new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/gui/glacio.png"), -20.5F, -20.5F, 10, 10, rotationMercury);
+			this.addPlanet(ms, new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/gui/vicinus.png"), -37, -37, 10, 10, rotationVenus);
+		}
 
 		//MENU
-		if (Category == 0) {
+		if ((Category < 1) || (Category == 5)) {
 			RenderSystem.setShaderTexture(0, new ResourceLocation(BeyondEarthMod.MODID,"textures/rocket_menu_list.png"));
-			GuiComponent.blit(ms, 0, (this.height / 2) - 160 / 2, 0, 0, 105, 160, 105, 160);
-		} else {
+			GuiComponent.blit(ms, 0, (this.height / 2) - 177 / 2, 0, 0, 105, 177, 105, 177);
+		} else if ((Category >= 1 && Category <= 4) || (Category >= 5 && Category <= 6)) {
 			RenderSystem.setShaderTexture(0, new ResourceLocation(BeyondEarthMod.MODID,"textures/rocket_menu_list_2.png"));
-			GuiComponent.blit(ms, 0, (this.height / 2) - 160 / 2, 0, 0, 215, 160, 215, 160);
+			GuiComponent.blit(ms, 0, (this.height / 2) - 177 / 2, 0, 0, 215, 177, 215, 177);
 		}
 
 		RenderSystem.disableBlend();
@@ -281,67 +368,108 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 		ms.popPose();
 	}
 
+	public void addGalaxy(PoseStack ms, ResourceLocation planet, float x, float y, int width, int height, float rotation) {
+		ms.pushPose();
+
+		ms.translate(this.width / 2, this.height / 2, 0);
+		ms.mulPose(new Quaternion(Vector3f.ZP, rotation, true));
+
+		RenderSystem.setShaderTexture(0, planet);
+		GuiHelper.blit(ms, x, y, 0, 0, width, height, width, height);
+
+		ms.translate(-this.width / 2, -this.height / 2, 0);
+		ms.popPose();
+	}
+
 	@Override
 	protected void init() {
 		super.init();
 
-		/**CATEGORIES*/
-		earthCategoryButton = this.addImageButtonSetCategory(10, (this.height / 2) - 48 / 2, 70, 20, defaultButtonTex, 1, menu.rocket, 1, "Earth");
-		marsCategoryButton = this.addImageButtonSetCategory(10, (this.height / 2) - 4 / 2, 70, 20, defaultButtonTex, 2, menu.rocket, 2, "Mars");
-		mercuryCategoryButton = this.addImageButtonSetCategory(10, (this.height / 2) + 40 / 2, 70, 20, defaultButtonTex, 3, menu.rocket, 3, "Mercury");
-		venusCategoryButton = this.addImageButtonSetCategory(10, (this.height / 2) + 84 / 2, 70, 20, defaultButtonTex, 4, menu.rocket, 3, "Venus");
+		/**CATEGORY -1*/
+		solarSystemButton = this.addImageButtonSetSolarSystem(10, (this.height / 2) - 68 / 2, 70, 20, bbButtonTex, 0, "Sun");
+		proximaCentauriButton = this.addImageButtonSetSolarSystem(10, (this.height / 2) - 24 / 2, 70, 20, bbButtonTex, 5, "Proxima Cent.");
+
+		/**CATEGORY 0*/
+		earthCategoryButton = this.addImageButtonSetCategory(10, (this.height / 2) - 24 / 2, 70, 20, defaultButtonTex, 1, menu.rocket, 1, "Earth");
+		earthCategoryButton.visible = false;
+
+		marsCategoryButton = this.addImageButtonSetCategory(10, (this.height / 2) + 21 / 2, 70, 20, defaultButtonTex, 2, menu.rocket, 2, "Mars");
+		marsCategoryButton.visible = false;
+
+		mercuryCategoryButton = this.addImageButtonSetCategory(10, (this.height / 2) + 65 / 2, 70, 20, defaultButtonTex, 3, menu.rocket, 3, "Mercury");
+		mercuryCategoryButton.visible = false;
+
+		venusCategoryButton = this.addImageButtonSetCategory(10, (this.height / 2) + 109 / 2, 70, 20, defaultButtonTex, 4, menu.rocket, 3, "Venus");
+		venusCategoryButton.visible = false;
+
+		/**CATEGORY 5*/
+		glacioCategoryButton = this.addImageButtonSetCategory(10, (this.height / 2) - 24 / 2, 70, 20, defaultButtonTex, 6, menu.rocket, 3, "Glacio");
+		glacioCategoryButton.visible = false;
 
 		/**BACK BUTTON*/
-		backButton = this.addImageButtonSetCategory(10, (this.height / 2) - 48 / 2, 70, 20, dbbButtonTex, 0, menu.rocket, 1, "Back");
+		backButton = this.addImageButtonBack(10, (this.height / 2) - 68 / 2, 70, 20, dbbButtonTex, "Back");
 		backButton.visible = false;
 
 		 /**TELEPORT BUTTONS*/
-		earthButton = this.addImageButton(10, (this.height / 2) - 4 / 2, 70, 20, bbButtonTex, 0, "Earth");
+		 //CATEGORY 0
+		earthButton = this.addImageButton(10, (this.height / 2) - 24 / 2, 70, 20, bbButtonTex, 0, "Earth");
 		earthButton.visible = false;
 
-		moonButton = this.addImageButton(10, (this.height / 2) + 40 / 2, 70, 20, bbButtonTex, 1, "Moon");
+		moonButton = this.addImageButton(10, (this.height / 2) + 21 / 2, 70, 20, bbButtonTex, 1, "Moon");
 		moonButton.visible = false;
 
-		marsButton = this.addImageButton(10, (this.height / 2) - 4 / 2, 70, 20, bbButtonTex, 2, "Mars");
+		marsButton = this.addImageButton(10, (this.height / 2) - 24 / 2, 70, 20, bbButtonTex, 2, "Mars");
 		marsButton.visible = false;
 
-		mercuryButton = this.addImageButton(10, (this.height / 2) - 4 / 2, 70, 20, bbButtonTex, 3, "Mercury");
+		mercuryButton = this.addImageButton(10, (this.height / 2) - 24 / 2, 70, 20, bbButtonTex, 3, "Mercury");
 		mercuryButton.visible = false;
 
-		venusButton = this.addImageButton(10, (this.height / 2) - 4 / 2, 70, 20, bbButtonTex, 4, "Venus");
+		venusButton = this.addImageButton(10, (this.height / 2) - 24 / 2, 70, 20, bbButtonTex, 4, "Venus");
 		venusButton.visible = false;
 
-		 /**ORBIT BUTTONS*/
-		earthOrbitButton = this.addImageButton(84, (this.height / 2) - 4 / 2, 37, 20, sbbButtonTex, 5, "Orbit");
+		//CATEGORY 5
+		glacioButton = this.addImageButton(10, (this.height / 2) - 24 / 2, 70, 20, bbButtonTex, 15, "Glacio");
+		glacioButton.visible = false;
+
+		/**ORBIT BUTTONS*/
+		//CATEGORY 0
+		earthOrbitButton = this.addImageButton(84, (this.height / 2) - 24 / 2, 37, 20, sbbButtonTex, 5, "Orbit");
 		earthOrbitButton.visible = false;
 
-		moonOrbitButton = this.addImageButton(84, (this.height / 2) + 40 / 2, 37, 20, sbbButtonTex, 6, "Orbit");
+		moonOrbitButton = this.addImageButton(84, (this.height / 2) + 21 / 2, 37, 20, sbbButtonTex, 6, "Orbit");
 		moonOrbitButton.visible = false;
 
-		marsOrbitButton = this.addImageButton(84, (this.height / 2) - 4 / 2, 37, 20, sbbButtonTex, 7, "Orbit");
+		marsOrbitButton = this.addImageButton(84, (this.height / 2) - 24 / 2, 37, 20, sbbButtonTex, 7, "Orbit");
 		marsOrbitButton.visible = false;
 
-		mercuryOrbitButton = this.addImageButton(84, (this.height / 2) - 4 / 2, 37, 20, sbbButtonTex, 8, "Orbit");
+		mercuryOrbitButton = this.addImageButton(84, (this.height / 2) - 24 / 2, 37, 20, sbbButtonTex, 8, "Orbit");
 		mercuryOrbitButton.visible = false;
 
-		venusOrbitButton = this.addImageButton(84, (this.height / 2) - 4 / 2, 37, 20, sbbButtonTex, 9, "Orbit");
+		venusOrbitButton = this.addImageButton(84, (this.height / 2) - 24 / 2, 37, 20, sbbButtonTex, 9, "Orbit");
 		venusOrbitButton.visible = false;
+		//CATEGORY 5
+		glacioOrbitButton = this.addImageButton(84, (this.height / 2) - 24 / 2, 37, 20, sbbButtonTex, 16, "Orbit");
+		glacioOrbitButton.visible = false;
 
 		 /**SPACE STATION BUTTONS*/
-		earthSpaceStationButton = this.addSpaceStationImageButton(125, (this.height / 2) - 4 / 2, 75, 20, brbButtonTex, 10, "Space Station", this.getSpaceStationItemList());
+		//CATEGORY 0
+		earthSpaceStationButton = this.addSpaceStationImageButton(125, (this.height / 2) - 24 / 2, 75, 20, brbButtonTex, 10, "Space Station", this.getSpaceStationItemList());
 		earthSpaceStationButton.visible = false;
 
-		moonSpaceStationButton = this.addSpaceStationImageButton(125, (this.height / 2) + 40 / 2, 75, 20, brbButtonTex, 11, "Space Station", this.getSpaceStationItemList());
+		moonSpaceStationButton = this.addSpaceStationImageButton(125, (this.height / 2) + 21 / 2, 75, 20, brbButtonTex, 11, "Space Station", this.getSpaceStationItemList());
 		moonSpaceStationButton.visible = false;
 
-		marsSpaceStationButton = this.addSpaceStationImageButton(125, (this.height / 2) - 4 / 2, 75, 20, brbButtonTex, 12, "Space Station", this.getSpaceStationItemList());
+		marsSpaceStationButton = this.addSpaceStationImageButton(125, (this.height / 2) - 24 / 2, 75, 20, brbButtonTex, 12, "Space Station", this.getSpaceStationItemList());
 		marsSpaceStationButton.visible = false;
 
-		mercurySpaceStationButton = this.addSpaceStationImageButton(125, (this.height / 2) - 4 / 2, 75, 20, brbButtonTex, 13, "Space Station", this.getSpaceStationItemList());
+		mercurySpaceStationButton = this.addSpaceStationImageButton(125, (this.height / 2) - 24 / 2, 75, 20, brbButtonTex, 13, "Space Station", this.getSpaceStationItemList());
 		mercurySpaceStationButton.visible = false;
 
-		venusSpaceStationButton = this.addSpaceStationImageButton(125, (this.height / 2) - 4 / 2, 75, 20, brbButtonTex, 14, "Space Station", this.getSpaceStationItemList());
+		venusSpaceStationButton = this.addSpaceStationImageButton(125, (this.height / 2) - 24 / 2, 75, 20, brbButtonTex, 14, "Space Station", this.getSpaceStationItemList());
 		venusSpaceStationButton.visible = false;
+		//CATEGORY 5
+		glacioSpaceStationButton = this.addSpaceStationImageButton(125, (this.height / 2) - 24 / 2, 75, 20, brbButtonTex, 17, "Space Station", this.getSpaceStationItemList());
+		glacioSpaceStationButton.visible = false;
 	}
 
 	@Override
@@ -393,6 +521,21 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 			} else {
 				button.setTexture(rb2);
 			}
+		}
+	}
+
+	public void categoryButtonManager(ResourceLocation bb, ResourceLocation bb2, int mouseX, int mouseY, int left, int top, int width, int height, PoseStack ms, ImageButtonPlacer button, String solarSystem, String type) {
+		button.setTexture(bb);
+
+		if (GuiHelper.isHover(this.getBounds(left, top, width, height), mouseX, mouseY)) {
+
+			List<Component> list = new ArrayList<Component>();
+
+			list.add(Component.nullToEmpty("\u00A79Category: " + "\u00A7b" + solarSystem));
+			list.add(Component.nullToEmpty("\u00A79Type: " + "\u00A73" + type));
+			this.renderComponentTooltip(ms, list, mouseX, mouseY);
+
+			button.setTexture(bb2);
 		}
 	}
 
@@ -504,6 +647,28 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 			if (checkTier(rocket, stage)) {
 				this.Category = newCategory;
 			}
+		}, Component.nullToEmpty(title)));
+		return button;
+	}
+
+	public ImageButtonPlacer addImageButtonBack(int xIn, int yIn, int width, int height, ResourceLocation texture, String title) {
+		ImageButtonPlacer button = this.addRenderableWidget(new ImageButtonPlacer(xIn, yIn, width, height, 0, 0, 0, texture, width, height, (p_2130901) -> {
+			if (this.Category >= 1 && this.Category <= 4) {
+				this.Category = 0;
+			} else if (this.Category == 5) {
+				this.Category = -1;
+			} else if (this.Category >= 6 && this.Category <= 6) {
+				this.Category = 5 ;
+			} else {
+				this.Category = this.Category - 1;
+			}
+		}, Component.nullToEmpty(title)));
+		return button;
+	}
+
+	public ImageButtonPlacer addImageButtonSetSolarSystem(int xIn, int yIn, int width, int height, ResourceLocation texture, int newCategory, String title) {
+		ImageButtonPlacer button = this.addRenderableWidget(new ImageButtonPlacer(xIn, yIn, width, height, 0, 0, 0, texture, width, height, (p_2130901) -> {
+			this.Category = newCategory;
 		}, Component.nullToEmpty(title)));
 		return button;
 	}

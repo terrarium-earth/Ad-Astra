@@ -192,7 +192,7 @@
   "entity.beyond_earth.alien.butcher": "도살업자",
   "entity.beyond_earth.alien.leatherworker": "가죽 세공인",
   "entity.beyond_earth.alien.mason": "석공",
-  
+
   "block.beyond_earth.molten_desh_fluid": "녹은 데쉬",
   "fluid.beyond_earth.molten_desh": "녹은 데쉬",
   "fluid.beyond_earth.flowing_molten_desh": "흐르는 녹은 데쉬",
@@ -201,7 +201,7 @@
   "fluid.beyond_earth.molten_silicon": "녹은 실리콘",
   "fluid.beyond_earth.flowing_molten_silicon": "흐르는 녹은 실리콘",
   "item.beyond_earth.molten_silicon_bucket": "녹은 실리콘 양동이",
-  
+
   "container.beyond_earth.coal_generator": "석탄 발전기",
   "container.beyond_earth.compressor": "압축기",
   "container.beyond_earth.fuel_refinery": "연료 정제기",
@@ -215,14 +215,14 @@
   "container.entity.beyond_earth.rocket_t3": "3 티어 로켓",
 
   "tooltip.beyond_earth.oxygen_bubble_distributor": "%1$s ~ %2$s 블록 범위 내 산소 기포 생성",
-  
-  
+
+
   "gui.beyond_earth.oxygen_bubble_distributor.workingarea.text": "작업 영역: %1$sx%2$sx%3$s",
   "gui.beyond_earth.oxygen_bubble_distributor.workingarea.show": "표시",
   "gui.beyond_earth.oxygen_bubble_distributor.workingarea.hide": "숨김",
-  
+
   "jei.tooltip.beyond_earth.oil": "  바다에서 찾을 수 있습니다",
-  
+
   "gauge_text.beyond_earth.using": "%1$s 소모: %2$s",
   "gauge_text.beyond_earth.using2": "%1$s 소모: %2$s/%4$s t",
   "gauge_text.beyond_earth.generating": "%1$s 발전: %2$s",
@@ -231,7 +231,7 @@
   "gauge_text.beyond_earth.stored": "%1$s 저장: %2$s",
   "gauge_text.beyond_earth.capacity": "%1$s 용량: %2$s",
   "gauge_text.beyond_earth.transfer": "%1$s 전송: %2$s",
-  
+
   "gauge.beyond_earth.energy": "에너지",
   "gauge.beyond_earth.fluid": "유체",
   "gauge.beyond_earth.fuel": "연료",
@@ -239,6 +239,6 @@
   "gauge.beyond_earth.burntime": "연료",
   "gauge.beyond_earth.cooktime": "가공 시간",
   "gauge.beyond_earth.oxygenloading": "층전",
-  
+
   "_eof": "eof"
 }

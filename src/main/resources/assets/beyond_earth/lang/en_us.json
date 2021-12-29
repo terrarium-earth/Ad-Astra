@@ -4,20 +4,16 @@
   "item.beyond_earth.star_crawler_spawn_egg": "Star Crawler Spawn Egg",
   "item.beyond_earth.steel_engine": "Steel Engine",
   "item.beyond_earth.oxygen_tank": "Oxygen Tank",
-  "item.beyond_earth.steel_hoe": "Steel Hoe",
   "item.beyond_earth.iron_plate": "Iron Plate",
   "item.beyond_earth.desh_plate": "Desh Plate",
   "item.beyond_earth.space_station": "Space Station",
   "item.beyond_earth.compressed_silicon": "Compressed Silicon",
-  "item.beyond_earth.ice_shard": "Ice Shard",
   "item.beyond_earth.netherite_space_pants": "Netherite Space Pants",
   "item.beyond_earth.engine_frame": "Engine Frame",
   "item.beyond_earth.silicon_tank": "Silicon Tank",
-  "item.beyond_earth.steel_shovel": "Steel Shovel",
   "item.beyond_earth.desh_engine": "Desh Engine",
   "item.beyond_earth.hammer": "Hammer",
   "item.beyond_earth.netherite_space_boots": "Netherite Space Boots",
-  "item.beyond_earth.steel_pickaxe": "Steel Pickaxe",
   "item.beyond_earth.space_pants": "Space Pants",
   "item.beyond_earth.rocket_t1": "Tier 1 Rocket",
   "item.beyond_earth.silicon_engine": "Silicon Engine",
@@ -35,7 +31,6 @@
   "item.beyond_earth.iron_stick": "Iron Stick",
   "item.beyond_earth.oxygen_gear": "Oxygen Gear",
   "item.beyond_earth.oxygen_mask": "Oxygen Mask",
-  "item.beyond_earth.steel_sword": "Steel Sword",
   "item.beyond_earth.rocket_t2": "Tier 2 Rocket",
   "item.beyond_earth.engine_fan": "Engine Fan",
   "item.beyond_earth.rocket_t3": "Tier 3 Rocket",
@@ -45,7 +40,6 @@
   "item.beyond_earth.rover": "Rover",
   "item.beyond_earth.alien_spawn_egg": "Alien Spawn Egg",
   "item.beyond_earth.cheese": "Cheese",
-  "item.beyond_earth.steel_axe": "Steel Axe",
   "item.beyond_earth.mogler_spawn_egg": "Mogler Spawn Egg",
   "item.beyond_earth.martian_raptor_spawn_egg": "Martian Raptor Spawn Egg",
   "item.beyond_earth.desh_ingot": "Desh Ingot",
@@ -108,7 +102,6 @@
   "block.beyond_earth.venus_diamond_ore": "Venus Diamond Ore",
   "block.beyond_earth.moon_stone": "Moon Stone",
   "block.beyond_earth.moon_sand": "Moon Sand",
-  "block.beyond_earth.mars_ice_shard_ore": "Mars Ice Shard Ore",
   "block.beyond_earth.sky_stone": "Sky Stone",
   "block.beyond_earth.flag_gray": "Gray Flag",
   "block.beyond_earth.wall_coal_torch": "Coal Torch",
@@ -201,7 +194,7 @@
   "fluid.beyond_earth.molten_silicon": "Molten Silicon",
   "fluid.beyond_earth.flowing_molten_silicon": "Flowing Molten Silicon",
   "item.beyond_earth.molten_silicon_bucket": "Molten Silicon Bucket",
-  
+
   "container.beyond_earth.coal_generator": "Coal Generator",
   "container.beyond_earth.compressor": "Compressor",
   "container.beyond_earth.fuel_refinery": "Fuel Refinery",
@@ -220,9 +213,9 @@
   "gui.beyond_earth.oxygen_bubble_distributor.workingarea.text": "Working Area: %1$sx%2$sx%3$s",
   "gui.beyond_earth.oxygen_bubble_distributor.workingarea.show": "Show",
   "gui.beyond_earth.oxygen_bubble_distributor.workingarea.hide": "Hide",
-  
+
   "jei.tooltip.beyond_earth.oil": "  You can find Oil in the Ocean",
-  
+
   "gauge_text.beyond_earth.using": "%1$s Using: %2$s",
   "gauge_text.beyond_earth.using2": "%1$s Using: %2$s/%4$s t",
   "gauge_text.beyond_earth.generating": "%1$s Generating: %2$s",
@@ -231,7 +224,7 @@
   "gauge_text.beyond_earth.stored": "Stored %1$s: %2$s",
   "gauge_text.beyond_earth.capacity": "%1$s Capacity: %2$s",
   "gauge_text.beyond_earth.transfer": "%1$s Transfer: %2$s",
-  
+
   "gauge.beyond_earth.energy": "Energy",
   "gauge.beyond_earth.fluid": "Fluid",
   "gauge.beyond_earth.fuel": "Fuel",
@@ -239,6 +232,6 @@
   "gauge.beyond_earth.burntime": "Burn Time",
   "gauge.beyond_earth.cooktime": "Cook Time",
   "gauge.beyond_earth.oxygenloading": "Loading",
-  
+
   "_eof": "eof"
 }
