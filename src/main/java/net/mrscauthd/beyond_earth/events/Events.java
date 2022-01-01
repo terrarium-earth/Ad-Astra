@@ -70,16 +70,6 @@ public class Events {
             if (player.getY() < 1 && !(player.getVehicle() instanceof LanderEntity)) {
                 Methodes.playerFalltoPlanet(world, player);
             }
-
-            if (Methodes.isWorld(world, Methodes.moon_orbit)) {
-                System.out.println("isWorld");
-            }
-            if (Methodes.isOrbitWorld(world)) {
-                System.out.println("isOrbit");
-            }
-            if (Methodes.isSpaceWorld(world)) {
-                System.out.println("isSpaceWorld");
-            }
         }
     }
 
@@ -248,21 +238,20 @@ public class Events {
     public static void onWorldTick(TickEvent.WorldTickEvent event) {
         if (event.phase == TickEvent.Phase.END) {
             Level world = event.world;
-            ResourceKey<Level> key = event.world.dimension();
 
-            if (key.getRegistryName().equals(Methodes.moon)
-             || key.getRegistryName().equals(Methodes.moon_orbit)
-             || key.getRegistryName().equals(Methodes.mars)
-             || key.getRegistryName().equals(Methodes.mars_orbit)
-             || key.getRegistryName().equals(Methodes.mercury)
-             || key.getRegistryName().equals(Methodes.mercury_orbit)
-             || key.getRegistryName().equals(Methodes.venus_orbit)
-             || key.getRegistryName().equals(Methodes.overworld_orbit)) {
+            if (Methodes.isWorld(world, Methodes.moon)
+             || Methodes.isWorld(world, Methodes.moon_orbit)
+             || Methodes.isWorld(world, Methodes.mars)
+             || Methodes.isWorld(world, Methodes.mars_orbit)
+             || Methodes.isWorld(world, Methodes.mercury)
+             || Methodes.isWorld(world, Methodes.mercury_orbit)
+             || Methodes.isWorld(world, Methodes.venus_orbit)
+             || Methodes.isWorld(world, Methodes.overworld_orbit)) {
                 world.thunderLevel = 0;
                 world.rainLevel = 0;
             }
 
-            if (key.getRegistryName().equals(Methodes.venus)) {
+            if (Methodes.isWorld(world, Methodes.venus)) {
                 world.thunderLevel = 0;
             }
         }

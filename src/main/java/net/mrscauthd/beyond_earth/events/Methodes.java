@@ -231,10 +231,9 @@ public class Methodes {
 
     /**If a entity should not get Fire add it to the Tag "venus_fire"*/
     public static void VenusFire(LivingEntity entity, ResourceKey<Level> planet1, ResourceKey<Level> planet2) {
+        Level level = entity.level;
 
-        ResourceKey<Level> key = entity.level.dimension();
-
-        if (key.getRegistryName().equals(planet1) || key.getRegistryName().equals(planet2)) {
+        if (Methodes.isWorld(level, planet1) || Methodes.isWorld(level, planet2)) {
             if (!Methodes.nethriteSpaceSuitCheck(entity) && !entity.hasEffect(MobEffects.FIRE_RESISTANCE) && !entity.fireImmune() && (entity instanceof Mob)) {
                 if (!MinecraftForge.EVENT_BUS.post(new LivingSetFireInHotPlanetEvent(entity))) {
                     if (!tagCheck(entity, BeyondEarthMod.MODID + ":entities/venus_fire")) {
@@ -247,7 +246,7 @@ public class Methodes {
 
     /**If a entity should not get Damage add it to the Tag "venus_rain", and if you has a Entity like a car return the damage to false*/
     public static void VenusRain(LivingEntity entity, ResourceKey<Level> planet) {
-        if (entity.level.dimension().getRegistryName().equals(planet)) {
+        if (Methodes.isWorld(entity.level, planet)) {
             if (entity.level.getLevelData().isRaining() && entity.level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, (int) Math.floor(entity.getX()), (int) Math.floor(entity.getZ())) <= Math.floor(entity.getY()) + 1) {
                 if (!MinecraftForge.EVENT_BUS.post(new LivingSetVenusRainEvent(entity))) {
                     if (!tagCheck(entity, BeyondEarthMod.MODID + ":entities/venus_rain")) {
@@ -340,7 +339,7 @@ public class Methodes {
     }
 
     public static void rocketTeleport(Player player, ResourceKey<Level> planet, ItemStack rocketItem, Boolean SpaceStation) {
-        if (player.level.dimension() != planet) {
+        if (!Methodes.isWorld(player.level, planet)) {
             Methodes.worldTeleport(player, planet, 700);
         } else {
             player.setPos(player.getX(), 700, player.getZ());
