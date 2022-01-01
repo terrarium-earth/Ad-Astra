@@ -72,6 +72,8 @@ public class RocketTier4Entity extends PathfinderMob {
 
 	public static final int FUEL_BUCKETS = 3;
 
+	private static final double ROCKET_SPEED = 0.9;
+
 	public RocketTier4Entity(EntityType type, Level world) {
 		super(type, world);
 		this.entityData.define(ROCKET_START, false);
@@ -360,10 +362,10 @@ public class RocketTier4Entity extends PathfinderMob {
 			}
 
 			if (this.entityData.get(START_TIMER) == 200) {
-				if (this.getDeltaMovement().y() < 0.5) {
+				if (this.getDeltaMovement().y() < ROCKET_SPEED - 0.1) {
 					this.setDeltaMovement(this.getDeltaMovement().x, this.getDeltaMovement().y + 0.1, this.getDeltaMovement().z);
 				} else {
-					this.setDeltaMovement(this.getDeltaMovement().x, 0.63, this.getDeltaMovement().z);
+					this.setDeltaMovement(this.getDeltaMovement().x, ROCKET_SPEED, this.getDeltaMovement().z);
 				}
 			}
 
@@ -386,17 +388,17 @@ public class RocketTier4Entity extends PathfinderMob {
 			if (this.entityData.get(START_TIMER) == 200) {
 				if (level instanceof ServerLevel) {
 					for (ServerPlayer p : ((ServerLevel) level).getServer().getPlayerList().getPlayers()) {
-						float f2 = Mth.cos(this.getYRot() * ((float)Math.PI / 180F)) * (0.5F + 0.21F * (float)1);
-						float f3 = Mth.sin(this.getYRot() * ((float)Math.PI / 180F)) * (0.5F + 0.21F * (float)1);
+						float f2 = Mth.cos(this.getYRot() * ((float)Math.PI / 180F)) * (0.6F + 0.21F * (float)1);
+						float f3 = Mth.sin(this.getYRot() * ((float)Math.PI / 180F)) * (0.6F + 0.21F * (float)1);
 
-						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInit.LARGE_FLAME_PARTICLE.get(), true, this.getX() - vec.x, this.getY() - vec.y - 1.6, this.getZ() - vec.z, 20, 0.1, 0.1, 0.1, 0.001);
-						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInit.LARGE_SMOKE_PARTICLE.get(), true, this.getX() - vec.x, this.getY() - vec.y - 2.6, this.getZ() - vec.z, 10, 0.1, 0.1, 0.1, 0.04);
+						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInit.LARGE_FLAME_PARTICLE.get(), true, this.getX() - vec.x, this.getY() - vec.y - 1.9, this.getZ() - vec.z, 20, 0.1, 0.1, 0.1, 0.001);
+						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInit.LARGE_SMOKE_PARTICLE.get(), true, this.getX() - vec.x, this.getY() - vec.y - 2.9, this.getZ() - vec.z, 10, 0.1, 0.1, 0.1, 0.04);
 
-						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInit.SMALL_FLAME_PARTICLE.get(), true, this.getX() + f2, this.getY() - vec.y - 1.0, this.getZ() + f3, 20, 0.1, 0.1, 0.1, 0.001);
-						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInit.SMALL_SMOKE_PARTICLE.get(), true, this.getX() + f2, this.getY() - vec.y - 2.0, this.getZ() + f3, 10, 0.1, 0.1, 0.1, 0.04);
+						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInit.SMALL_FLAME_PARTICLE.get(), true, this.getX() + f2, this.getY() - vec.y - 1.3, this.getZ() + f3, 20, 0.1, 0.1, 0.1, 0.001);
+						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInit.SMALL_SMOKE_PARTICLE.get(), true, this.getX() + f2, this.getY() - vec.y - 2.3, this.getZ() + f3, 10, 0.1, 0.1, 0.1, 0.04);
 
-						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInit.SMALL_FLAME_PARTICLE.get(), true, this.getX() - f2, this.getY() - vec.y - 1.0, this.getZ() - f3, 20, 0.1, 0.1, 0.1, 0.001);
-						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInit.SMALL_SMOKE_PARTICLE.get(), true, this.getX() - f2, this.getY() - vec.y - 2.0, this.getZ() - f3, 10, 0.1, 0.1, 0.1, 0.04);
+						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInit.SMALL_FLAME_PARTICLE.get(), true, this.getX() - f2, this.getY() - vec.y - 1.3, this.getZ() - f3, 20, 0.1, 0.1, 0.1, 0.001);
+						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInit.SMALL_SMOKE_PARTICLE.get(), true, this.getX() - f2, this.getY() - vec.y - 2.3, this.getZ() - f3, 10, 0.1, 0.1, 0.1, 0.04);
 					}
 				}
 			} else {

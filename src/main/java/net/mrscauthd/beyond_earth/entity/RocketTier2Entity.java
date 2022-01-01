@@ -74,6 +74,8 @@ public class RocketTier2Entity extends PathfinderMob {
 
 	public static final int FUEL_BUCKETS = 3;
 
+	private static final double ROCKET_SPEED = 0.7;
+
 	public RocketTier2Entity(EntityType type, Level world) {
 		super(type, world);
 		this.entityData.define(ROCKET_START, false);
@@ -362,10 +364,10 @@ public class RocketTier2Entity extends PathfinderMob {
 			}
 
 			if (this.entityData.get(START_TIMER) == 200) {
-				if (this.getDeltaMovement().y() < 0.5) {
+				if (this.getDeltaMovement().y() < ROCKET_SPEED - 0.1) {
 					this.setDeltaMovement(this.getDeltaMovement().x, this.getDeltaMovement().y + 0.1, this.getDeltaMovement().z);
 				} else {
-					this.setDeltaMovement(this.getDeltaMovement().x, 0.63, this.getDeltaMovement().z);
+					this.setDeltaMovement(this.getDeltaMovement().x, ROCKET_SPEED, this.getDeltaMovement().z);
 				}
 			}
 
