@@ -60,7 +60,6 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 	public float rotationMercury = 270;
 
 	public float rotationGlacio = 180;
-	public float rotationVicinus = 270;
 
 	//CATEGORY BUTTONS (-1)
 	public ImageButtonPlacer solarSystemButton;
@@ -125,7 +124,6 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 		rotationMercury = (rotationMercury + partialTicks * 0.7f) % 360;
 
 		rotationGlacio = (rotationGlacio + partialTicks * 0.7f) % 360;
-		rotationVicinus = (rotationVicinus + partialTicks * 0.7f) % 360;
 
 		String rocketType = menu.rocket;
 
@@ -267,7 +265,7 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 		if (Category == 5) {
 			glacioCategoryButton.visible = true;
 
-			this.buttonManager(rocketType, gb2ButtonTex, rb2ButtonTex, gbButtonTex, rbButtonTex, mouseX, mouseY, 10, (this.height / 2) - 22 / 2, 70, 20, ms, glacioCategoryButton, "Glacio", "Tier 3 Rocket", 3);
+			this.buttonManager(rocketType, gb2ButtonTex, rb2ButtonTex, gbButtonTex, rbButtonTex, mouseX, mouseY, 10, (this.height / 2) - 22 / 2, 70, 20, ms, glacioCategoryButton, "Glacio", "Tier 4 Rocket", 4);
 		} else {
 			glacioCategoryButton.visible = false;
 		}
@@ -339,8 +337,7 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 			this.addPlanet(ms, new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/gui/venus.png"), -37, -37, 10, 10, rotationVenus);
 			this.addPlanet(ms, new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/gui/mercury.png"), -20.5F, -20.5F, 10, 10, rotationMercury);
 		} else if (Category >= 5 && Category <= 6) {
-			this.addPlanet(ms, new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/gui/glacio.png"), -20.5F, -20.5F, 10, 10, rotationMercury);
-			this.addPlanet(ms, new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/gui/vicinus.png"), -37, -37, 10, 10, rotationVenus);
+			this.addPlanet(ms, new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/gui/glacio.png"), -20.5F, -20.5F, 10, 10, rotationGlacio);
 		}
 
 		//MENU
@@ -403,7 +400,7 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 		venusCategoryButton.visible = false;
 
 		/**CATEGORY 5*/
-		glacioCategoryButton = this.addImageButtonSetCategory(10, (this.height / 2) - 24 / 2, 70, 20, defaultButtonTex, 6, menu.rocket, 3, "Glacio");
+		glacioCategoryButton = this.addImageButtonSetCategory(10, (this.height / 2) - 24 / 2, 70, 20, defaultButtonTex, 6, menu.rocket, 4, "Glacio");
 		glacioCategoryButton.visible = false;
 
 		/**BACK BUTTON*/
@@ -491,6 +488,9 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 		}
 		if (rocketType.equals("entity." + BeyondEarthMod.MODID + ".rocket_t3")) {
 			tier = 3;
+		}
+		if (rocketType.equals("entity." + BeyondEarthMod.MODID + ".rocket_t4")) {
+			tier = 4;
 		}
 
 		return tier >= stage;

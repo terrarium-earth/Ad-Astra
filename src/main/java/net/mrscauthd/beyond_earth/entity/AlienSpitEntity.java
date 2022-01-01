@@ -37,6 +37,7 @@ public class AlienSpitEntity extends AbstractArrow implements ItemSupplier {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
+    //TODO ADD ICE SHARD BACK (AS MODEL)
     @Override
     @OnlyIn(Dist.CLIENT)
     public ItemStack getItem() {

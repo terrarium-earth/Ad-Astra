@@ -1,13 +1,10 @@
 package net.mrscauthd.beyond_earth.events;
 
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
-import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.events.forgeevents.LivingGravityEvent;
 
 public class Gravity {
@@ -18,19 +15,19 @@ public class Gravity {
         double venus = 0.04;
         double orbit = 0.02;
 
-        if (Methodes.isWorld(world, new ResourceLocation(BeyondEarthMod.MODID,"moon"))) {
+        if (Methodes.isWorld(world, Methodes.moon)) {
             gravityMath(type, entity, moon, -2.5f);
         }
 
-        if (Methodes.isWorld(world, new ResourceLocation(BeyondEarthMod.MODID,"mars"))) {
+        if (Methodes.isWorld(world, Methodes.mars)) {
             gravityMath(type, entity, mars, -2.0f);
         }
 
-        if (Methodes.isWorld(world, new ResourceLocation(BeyondEarthMod.MODID,"mercury"))) {
+        if (Methodes.isWorld(world, Methodes.mercury)) {
             gravityMath(type, entity, mercury, -2.5f);
         }
 
-        if (Methodes.isWorld(world, new ResourceLocation(BeyondEarthMod.MODID,"venus"))) {
+        if (Methodes.isWorld(world, Methodes.venus)) {
             gravityMath(type, entity, venus, -2.0f);
         }
 

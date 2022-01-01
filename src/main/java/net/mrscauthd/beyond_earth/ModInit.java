@@ -151,6 +151,7 @@ public class ModInit {
     public static RegistryObject<EntityType<RocketTier1Entity>> TIER_1_ROCKET = ENTITYS.register("rocket_t1", () -> EntityType.Builder.of(RocketTier1Entity::new, MobCategory.MISC).sized(1.1f, 4.4f).fireImmune().build(new ResourceLocation(BeyondEarthMod.MODID, "rocket_t1").toString()));
     public static RegistryObject<EntityType<RocketTier2Entity>> TIER_2_ROCKET = ENTITYS.register("rocket_t2", () -> EntityType.Builder.of(RocketTier2Entity::new, MobCategory.MISC).sized(1.1f, 4.6f).fireImmune().build(new ResourceLocation(BeyondEarthMod.MODID, "rocket_t2").toString()));
     public static RegistryObject<EntityType<RocketTier3Entity>> TIER_3_ROCKET = ENTITYS.register("rocket_t3", () -> EntityType.Builder.of(RocketTier3Entity::new, MobCategory.MISC).sized(1.1f, 4.8f).fireImmune().build(new ResourceLocation(BeyondEarthMod.MODID, "rocket_t3").toString()));
+    public static RegistryObject<EntityType<RocketTier4Entity>> TIER_4_ROCKET = ENTITYS.register("rocket_t4", () -> EntityType.Builder.of(RocketTier4Entity::new, MobCategory.MISC).sized(1.1f, 4.8f).fireImmune().build(new ResourceLocation(BeyondEarthMod.MODID, "rocket_t4").toString()));
     public static RegistryObject<EntityType<LanderEntity>> LANDER = ENTITYS.register("lander", () -> EntityType.Builder.of(LanderEntity::new, MobCategory.MISC).sized(0.6f, 2.0f).fireImmune().build(new ResourceLocation(BeyondEarthMod.MODID, "lander").toString()));
     public static RegistryObject<EntityType<RoverEntity>> ROVER = ENTITYS.register("rover", () -> EntityType.Builder.of(RoverEntity::new, MobCategory.MISC).sized(2.5f, 1.0f).fireImmune().build(new ResourceLocation(BeyondEarthMod.MODID, "rover").toString()));
 
@@ -427,7 +428,9 @@ public class ModInit {
     //Particle
     public static final RegistryObject<ParticleType<SimpleParticleType>> VENUS_RAIN_PARTICLE = PARTICLES.register("venus_rain", () -> new SimpleParticleType(true));
     public static final RegistryObject<ParticleType<SimpleParticleType>> LARGE_FLAME_PARTICLE = PARTICLES.register("large_flame", () -> new SimpleParticleType(true));
-    public static final RegistryObject<ParticleType<SimpleParticleType>> SMOKE_PARTICLE = PARTICLES.register("smoke", () -> new SimpleParticleType(true));
+    public static final RegistryObject<ParticleType<SimpleParticleType>> LARGE_SMOKE_PARTICLE = PARTICLES.register("large_smoke", () -> new SimpleParticleType(true));
+    public static final RegistryObject<ParticleType<SimpleParticleType>> SMALL_FLAME_PARTICLE = PARTICLES.register("small_flame", () -> new SimpleParticleType(true));
+    public static final RegistryObject<ParticleType<SimpleParticleType>> SMALL_SMOKE_PARTICLE = PARTICLES.register("small_smoke", () -> new SimpleParticleType(true));
 
 
     //Recpies
@@ -518,7 +521,7 @@ public class ModInit {
 
                 /**Add Overworld Structure in a Biome*/
                 if (Config.MeteorStructure) {
-                    if (biomeCategory == Biome.BiomeCategory.PLAINS || biomeCategory == Biome.BiomeCategory.DESERT || biomeCategory == Biome.BiomeCategory.FOREST) {
+                    if (biomeEntry.getValue().getRegistryName().equals(new ResourceLocation("plains")) || biomeEntry.getValue().getRegistryName().equals(new ResourceLocation("snowy_tundra")) || biomeEntry.getValue().getRegistryName().equals(new ResourceLocation("forest")) || biomeEntry.getValue().getRegistryName().equals(new ResourceLocation("desert"))) {
                         associateBiomeToConfiguredStructure(STStructureToMultiMap, STConfiguredStructures.METEOR, biomeEntry.getKey());
                     }
                 }
@@ -616,6 +619,7 @@ public class ModInit {
         event.put(TIER_1_ROCKET.get(), RocketTier1Entity.setCustomAttributes().build());
         event.put(TIER_2_ROCKET.get(), RocketTier2Entity.setCustomAttributes().build());
         event.put(TIER_3_ROCKET.get(), RocketTier3Entity.setCustomAttributes().build());
+        event.put(TIER_4_ROCKET.get(), RocketTier4Entity.setCustomAttributes().build());
         event.put(LANDER.get(), LanderEntity.setCustomAttributes().build());
         event.put(ROVER.get(), RoverEntity.setCustomAttributes().build());
     }

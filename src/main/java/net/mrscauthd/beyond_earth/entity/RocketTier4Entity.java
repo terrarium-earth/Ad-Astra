@@ -1,6 +1,7 @@
 package net.mrscauthd.beyond_earth.entity;
 
 import com.google.common.collect.Sets;
+import io.netty.buffer.Unpooled;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
@@ -18,6 +19,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
@@ -37,9 +39,15 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
+import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.wrapper.CombinedInvWrapper;
+import net.minecraftforge.items.wrapper.EntityArmorInvWrapper;
+import net.minecraftforge.items.wrapper.EntityHandsInvWrapper;
 import net.minecraftforge.network.NetworkHooks;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.ModInit;
@@ -48,37 +56,26 @@ import net.mrscauthd.beyond_earth.events.Methodes;
 import net.mrscauthd.beyond_earth.fluid.FluidUtil2;
 import net.mrscauthd.beyond_earth.gui.screens.rocket.RocketGui;
 
-import net.minecraftforge.items.wrapper.EntityHandsInvWrapper;
-import net.minecraftforge.items.wrapper.EntityArmorInvWrapper;
-import net.minecraftforge.items.wrapper.CombinedInvWrapper;
-import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.common.capabilities.Capability;
-
-import javax.annotation.Nullable;
 import javax.annotation.Nonnull;
-
-import io.netty.buffer.Unpooled;
-
+import javax.annotation.Nullable;
 import java.util.Set;
 
-public class RocketTier1Entity extends PathfinderMob {
+public class RocketTier4Entity extends PathfinderMob {
 	public double ar = 0;
 	public double ay = 0;
 	public double ap = 0;
 
-	public static final EntityDataAccessor<Boolean> ROCKET_START = SynchedEntityData.defineId(RocketTier1Entity.class, EntityDataSerializers.BOOLEAN);
-	public static final EntityDataAccessor<Boolean> BUCKET = SynchedEntityData.defineId(RocketTier1Entity.class, EntityDataSerializers.BOOLEAN);
-	public static final EntityDataAccessor<Integer> FUEL = SynchedEntityData.defineId(RocketTier1Entity.class, EntityDataSerializers.INT);
-	public static final EntityDataAccessor<Integer> START_TIMER = SynchedEntityData.defineId(RocketTier1Entity.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Boolean> ROCKET_START = SynchedEntityData.defineId(RocketTier4Entity.class, EntityDataSerializers.BOOLEAN);
+	public static final EntityDataAccessor<Integer> BUCKETS = SynchedEntityData.defineId(RocketTier4Entity.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Integer> FUEL = SynchedEntityData.defineId(RocketTier4Entity.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Integer> START_TIMER = SynchedEntityData.defineId(RocketTier4Entity.class, EntityDataSerializers.INT);
 
-	public static final int FUEL_BUCKETS = 1;
+	public static final int FUEL_BUCKETS = 3;
 
-	public RocketTier1Entity(EntityType type, Level world) {
+	public RocketTier4Entity(EntityType type, Level world) {
 		super(type, world);
 		this.entityData.define(ROCKET_START, false);
-		this.entityData.define(BUCKET, false);
+		this.entityData.define(BUCKETS, 0);
 		this.entityData.define(FUEL, 0);
 		this.entityData.define(START_TIMER, 0);
 	}
@@ -166,14 +163,15 @@ public class RocketTier1Entity extends PathfinderMob {
 
 	@Override
 	public double getPassengersRidingOffset() {
-		return super.getPassengersRidingOffset() - 2.35;
+		return super.getPassengersRidingOffset() - 1.90;
 	}
 
+	@Nullable
 	@Override
-	public ItemStack getPickedResult(HitResult target) {
-		ItemStack itemStack = new ItemStack(ModInit.TIER_1_ROCKET_ITEM.get(), 1);
+	public ItemStack getPickResult() {
+		ItemStack itemStack = new ItemStack(ModInit.TIER_3_ROCKET_ITEM.get(), 1);
 		itemStack.getOrCreateTag().putInt(BeyondEarthMod.MODID + ":fuel", this.getEntityData().get(FUEL));
-		itemStack.getOrCreateTag().putBoolean(BeyondEarthMod.MODID + ":bucket", this.getEntityData().get(BUCKET));
+		itemStack.getOrCreateTag().putInt(BeyondEarthMod.MODID + ":buckets", this.getEntityData().get(BUCKETS));
 
 		return itemStack;
 	}
@@ -228,8 +226,8 @@ public class RocketTier1Entity extends PathfinderMob {
 
 		if (!source.isProjectile() && sourceentity != null && sourceentity.isCrouching() && !this.isVehicle()) {
 
-			this.spawnRocketItem();
 			this.dropEquipment();
+			this.spawnRocketItem();
 			this.remove(RemovalReason.DISCARDED);
 
 		}
@@ -238,9 +236,9 @@ public class RocketTier1Entity extends PathfinderMob {
 
 	protected void spawnRocketItem() {
 		if (!level.isClientSide) {
-			ItemStack itemStack = new ItemStack(ModInit.TIER_1_ROCKET_ITEM.get(), 1);
+			ItemStack itemStack = new ItemStack(ModInit.TIER_3_ROCKET_ITEM.get(), 1);
 			itemStack.getOrCreateTag().putInt(BeyondEarthMod.MODID + ":fuel", this.getEntityData().get(FUEL));
-			itemStack.getOrCreateTag().putBoolean(BeyondEarthMod.MODID + ":bucket", this.getEntityData().get(BUCKET));
+			itemStack.getOrCreateTag().putInt(BeyondEarthMod.MODID + ":buckets", this.getEntityData().get(BUCKETS));
 
 			ItemEntity entityToSpawn = new ItemEntity(level, this.getX(), this.getY(), this.getZ(), itemStack);
 			entityToSpawn.setPickUpDelay(10);
@@ -266,10 +264,6 @@ public class RocketTier1Entity extends PathfinderMob {
 		}
 	};
 
-	public ItemStackHandler getInventory() {
-		return inventory;
-	}
-
 	private final CombinedInvWrapper combined = new CombinedInvWrapper(inventory, new EntityHandsInvWrapper(this), new EntityArmorInvWrapper(this));
 
 	@Override
@@ -289,10 +283,10 @@ public class RocketTier1Entity extends PathfinderMob {
 		super.addAdditionalSaveData(compound);
 		compound.put("InventoryCustom", inventory.serializeNBT());
 
-		compound.putBoolean("rocket_start", this.getEntityData().get(ROCKET_START));
-		compound.putBoolean("bucket", this.getEntityData().get(BUCKET));
-		compound.putInt("fuel", this.getEntityData().get(FUEL));
-		compound.putInt("start_timer", this.getEntityData().get(START_TIMER));
+		compound.putBoolean("rocket_start", this.entityData.get(ROCKET_START));
+		compound.putInt("buckets", this.entityData.get(BUCKETS));
+		compound.putInt("fuel", this.entityData.get(FUEL));
+		compound.putInt("start_timer", this.entityData.get(START_TIMER));
 	}
 
 	@Override
@@ -303,11 +297,12 @@ public class RocketTier1Entity extends PathfinderMob {
 			inventory.deserializeNBT((CompoundTag) inventoryCustom);
 		}
 
-		this.getEntityData().set(ROCKET_START, compound.getBoolean("rocket_start"));
-		this.getEntityData().set(BUCKET, compound.getBoolean("bucket"));
-		this.getEntityData().set(FUEL, compound.getInt("fuel"));
-		this.getEntityData().set(START_TIMER, compound.getInt("start_timer"));
+		this.entityData.set(ROCKET_START, compound.getBoolean("rocket_start"));
+		this.entityData.set(BUCKETS, compound.getInt("buckets"));
+		this.entityData.set(FUEL, compound.getInt("fuel"));
+		this.entityData.set(START_TIMER, compound.getInt("start_timer"));
 	}
+
 
 	@Override
 	protected InteractionResult mobInteract(Player player, InteractionHand hand) {
@@ -319,18 +314,18 @@ public class RocketTier1Entity extends PathfinderMob {
 			NetworkHooks.openGui((ServerPlayer) player, new MenuProvider() {
 				@Override
 				public Component getDisplayName() {
-					return new TextComponent("Tier 1 Rocket");
+					return new TextComponent("Tier 4 Rocket");
 				}
 
-			@Override
-			public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
-				FriendlyByteBuf packetBuffer = new FriendlyByteBuf(Unpooled.buffer());
-				packetBuffer.writeVarInt(RocketTier1Entity.this.getId());
-				return new RocketGui.GuiContainer(id, inventory, packetBuffer);
-			}
-		}, buf -> {
-			buf.writeVarInt(this.getId());
-		});
+				@Override
+				public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
+					FriendlyByteBuf packetBuffer = new FriendlyByteBuf(Unpooled.buffer());
+					packetBuffer.writeVarInt(RocketTier4Entity.this.getId());
+					return new RocketGui.GuiContainer(id, inventory, packetBuffer);
+				}
+			}, buf -> {
+				buf.writeVarInt(this.getId());
+			});
 
 			return retval;
 		}
@@ -365,7 +360,7 @@ public class RocketTier1Entity extends PathfinderMob {
 			}
 
 			if (this.entityData.get(START_TIMER) == 200) {
-				if (this.getDeltaMovement().y < 0.5) {
+				if (this.getDeltaMovement().y() < 0.5) {
 					this.setDeltaMovement(this.getDeltaMovement().x, this.getDeltaMovement().y + 0.1, this.getDeltaMovement().z);
 				} else {
 					this.setDeltaMovement(this.getDeltaMovement().x, 0.63, this.getDeltaMovement().z);
@@ -391,8 +386,17 @@ public class RocketTier1Entity extends PathfinderMob {
 			if (this.entityData.get(START_TIMER) == 200) {
 				if (level instanceof ServerLevel) {
 					for (ServerPlayer p : ((ServerLevel) level).getServer().getPlayerList().getPlayers()) {
+						float f2 = Mth.cos(this.getYRot() * ((float)Math.PI / 180F)) * (0.5F + 0.21F * (float)1);
+						float f3 = Mth.sin(this.getYRot() * ((float)Math.PI / 180F)) * (0.5F + 0.21F * (float)1);
+
 						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInit.LARGE_FLAME_PARTICLE.get(), true, this.getX() - vec.x, this.getY() - vec.y - 1.6, this.getZ() - vec.z, 20, 0.1, 0.1, 0.1, 0.001);
 						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInit.LARGE_SMOKE_PARTICLE.get(), true, this.getX() - vec.x, this.getY() - vec.y - 2.6, this.getZ() - vec.z, 10, 0.1, 0.1, 0.1, 0.04);
+
+						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInit.SMALL_FLAME_PARTICLE.get(), true, this.getX() + f2, this.getY() - vec.y - 1.0, this.getZ() + f3, 20, 0.1, 0.1, 0.1, 0.001);
+						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInit.SMALL_SMOKE_PARTICLE.get(), true, this.getX() + f2, this.getY() - vec.y - 2.0, this.getZ() + f3, 10, 0.1, 0.1, 0.1, 0.04);
+
+						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInit.SMALL_FLAME_PARTICLE.get(), true, this.getX() - f2, this.getY() - vec.y - 1.0, this.getZ() - f3, 20, 0.1, 0.1, 0.1, 0.001);
+						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInit.SMALL_SMOKE_PARTICLE.get(), true, this.getX() - f2, this.getY() - vec.y - 2.0, this.getZ() - f3, 10, 0.1, 0.1, 0.1, 0.04);
 					}
 				}
 			} else {
@@ -405,12 +409,31 @@ public class RocketTier1Entity extends PathfinderMob {
 
 		}
 
-		if (Methodes.tagCheck(FluidUtil2.findBucketFluid(this.inventory.getStackInSlot(0).getItem()), ModInit.FLUID_VEHICLE_FUEL_TAG) && !this.entityData.get(BUCKET)) {
-			this.inventory.setStackInSlot(0, new ItemStack(Items.BUCKET));
-			this.getEntityData().set(BUCKET, true);
+		//Fuel Load up
+		if (Methodes.tagCheck(FluidUtil2.findBucketFluid(this.inventory.getStackInSlot(0).getItem()), ModInit.FLUID_VEHICLE_FUEL_TAG) && this.entityData.get(BUCKETS) < 3) {
+
+			if (this.entityData.get(FUEL) == 0 && this.entityData.get(BUCKETS) == 0) {
+
+				this.inventory.setStackInSlot(0, new ItemStack(Items.BUCKET));
+				this.getEntityData().set(BUCKETS, this.getEntityData().get(BUCKETS) + 1);
+			} else if (this.getEntityData().get(FUEL) == 100 && this.getEntityData().get(BUCKETS) == 1) {
+
+				this.inventory.setStackInSlot(0, new ItemStack(Items.BUCKET));
+				this.getEntityData().set(BUCKETS, this.getEntityData().get(BUCKETS) + 1);
+			} else if (this.getEntityData().get(FUEL) == 200 && this.getEntityData().get(BUCKETS) == 2) {
+
+				this.inventory.setStackInSlot(0, new ItemStack(Items.BUCKET));
+				this.getEntityData().set(BUCKETS, this.getEntityData().get(BUCKETS) + 1);
+			}
 		}
 
-		if (this.getEntityData().get(BUCKET) && this.getEntityData().get(FUEL) < 300) {
+		if (this.getEntityData().get(BUCKETS) == 1 && this.getEntityData().get(FUEL) < 100) {
+			this.getEntityData().set(FUEL, this.getEntityData().get(FUEL) + 1);
+
+		} else if (this.getEntityData().get(BUCKETS) == 2 && this.getEntityData().get(FUEL) < 200) {
+			this.getEntityData().set(FUEL, this.getEntityData().get(FUEL) + 1);
+
+		} else if (this.getEntityData().get(BUCKETS) == 3 && this.getEntityData().get(FUEL) < 300) {
 			this.getEntityData().set(FUEL, this.getEntityData().get(FUEL) + 1);
 		}
 
@@ -427,4 +450,5 @@ public class RocketTier1Entity extends PathfinderMob {
 			}
 		}
 	}
+
 }

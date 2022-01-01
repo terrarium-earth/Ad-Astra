@@ -13,6 +13,7 @@ import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.entity.RocketTier1Entity;
 import net.mrscauthd.beyond_earth.entity.RocketTier2Entity;
 import net.mrscauthd.beyond_earth.entity.RocketTier3Entity;
+import net.mrscauthd.beyond_earth.entity.RocketTier4Entity;
 import net.mrscauthd.beyond_earth.events.Methodes;
 import net.mrscauthd.beyond_earth.fluid.FluidUtil2;
 import net.mrscauthd.beyond_earth.gui.helper.ContainerHelper;
@@ -43,6 +44,8 @@ public class RocketGui {
 				itemHandler = ((RocketTier2Entity) rocket).getItemHandler();
 			} else if (rocket instanceof RocketTier3Entity) {
 				itemHandler = ((RocketTier3Entity) rocket).getItemHandler();
+			} else if (rocket instanceof RocketTier4Entity) {
+				itemHandler = ((RocketTier4Entity) rocket).getItemHandler();
 			}
 
 			this.addSlot(new SlotItemHandler(itemHandler, 0, 46, 22) {

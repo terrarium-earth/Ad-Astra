@@ -33,7 +33,7 @@ public class STStructures {
 
         setupMapSpacingAndLand(VENUS_BULLET.get(), new StructureFeatureConfiguration(29, 19, 1234567890), true);
         setupMapSpacingAndLand(VENUS_TOWER.get(), new StructureFeatureConfiguration(24, 17, 1234567890), true);
-        setupMapSpacingAndLand(CRIMSON.get(), new StructureFeatureConfiguration(27, 14, 1234567890), true);
+        setupMapSpacingAndLand(CRIMSON.get(), new StructureFeatureConfiguration(27, 14, 1234567890), false);
     }
 
     public static <F extends StructureFeature<?>> void setupMapSpacingAndLand(F structure, StructureFeatureConfiguration structureFeatureConfiguration, boolean transformSurroundingLand) {

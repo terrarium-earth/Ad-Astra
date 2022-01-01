@@ -56,10 +56,7 @@ import net.mrscauthd.beyond_earth.crafting.OxygenBubbleDistributorRecipe;
 import net.mrscauthd.beyond_earth.crafting.OxygenLoaderRecipe;
 import net.mrscauthd.beyond_earth.crafting.RocketPart;
 import net.mrscauthd.beyond_earth.crafting.WorkbenchingRecipe;
-import net.mrscauthd.beyond_earth.entity.RocketTier1Entity;
-import net.mrscauthd.beyond_earth.entity.RocketTier2Entity;
-import net.mrscauthd.beyond_earth.entity.RocketTier3Entity;
-import net.mrscauthd.beyond_earth.entity.RoverEntity;
+import net.mrscauthd.beyond_earth.entity.*;
 import net.mrscauthd.beyond_earth.events.Methodes;
 import net.mrscauthd.beyond_earth.fluid.FluidUtil2;
 import net.mrscauthd.beyond_earth.gauge.GaugeTextHelper;
@@ -167,6 +164,8 @@ public class JeiPlugin implements IModPlugin {
 		registration.addRecipeCategories(new Tier2RocketJeiCategory(jeiHelper.getGuiHelper()));
 		// RocketItem3Gui
 		registration.addRecipeCategories(new Tier3RocketJeiCategory(jeiHelper.getGuiHelper()));
+		//RocketItem4Gui
+		registration.addRecipeCategories(new Tier4RocketJeiCategory(jeiHelper.getGuiHelper()));
 		// Compressor
 		registration.addRecipeCategories(new CompressorJeiCategory(jeiHelper.getGuiHelper()));
 		// Fuel Maker
@@ -197,6 +196,8 @@ public class JeiPlugin implements IModPlugin {
 		registration.addRecipes(fuelLoadingRecipes, Tier2RocketJeiCategory.Uid);
 		// RocketTier3Gui
 		registration.addRecipes(fuelLoadingRecipes, Tier3RocketJeiCategory.Uid);
+		//RocketTier4GUI
+		registration.addRecipes(fuelLoadingRecipes, Tier4RocketJeiCategory.Uid);
 		// Rover
 		registration.addRecipes(fuelLoadingRecipes, RoverJeiCategory.Uid);
 		// Compressor
@@ -306,6 +307,8 @@ public class JeiPlugin implements IModPlugin {
 		registration.addRecipeCatalyst(new ItemStack(ModInit.TIER_2_ROCKET_ITEM.get()), Tier2RocketJeiCategory.Uid);
 		// RocketTier3Gui
 		registration.addRecipeCatalyst(new ItemStack(ModInit.TIER_3_ROCKET_ITEM.get()), Tier3RocketJeiCategory.Uid);
+		//
+		//TODO registration.addRecipeCatalyst(new ItemStack(ModInit.TIER_4_ROCKET_ITEM.get()), Tier3RocketJeiCategory.Uid);
 		// Compressor
 		registration.addRecipeCatalyst(new ItemStack(ModInit.COMPRESSOR_BLOCK.get()), CompressorJeiCategory.Uid);
 		// FuelMaker
@@ -916,6 +919,65 @@ public class JeiPlugin implements IModPlugin {
 
 		public int getCapacity() {
 			return FluidUtil2.BUCKET_SIZE * RocketTier3Entity.FUEL_BUCKETS;
+		}
+
+		@Override
+		public void setIngredients(FuelLoadingRecipe recipe, IIngredients iIngredients) {
+			iIngredients.setInputLists(VanillaTypes.ITEM, Collections.singletonList(recipe.getItemStacks()));
+			iIngredients.setInputLists(VanillaTypes.FLUID, Collections.singletonList(recipe.getFluidStacks(this.getCapacity())));
+		}
+
+		@Override
+		public void setRecipe(IRecipeLayout iRecipeLayout, FuelLoadingRecipe recipe, IIngredients iIngredients) {
+			IGuiItemStackGroup itemStacks = iRecipeLayout.getItemStacks();
+			itemStacks.init(0, true, 13, 18);
+			itemStacks.set(0, iIngredients.getInputs(VanillaTypes.ITEM).get(0));
+
+			IGuiFluidStackGroup fluidStacks = iRecipeLayout.getFluidStacks();
+			fluidStacks.init(0, true, 66, 12, 46, 46, this.getCapacity(), false, null);
+			fluidStacks.set(0, iIngredients.getInputs(VanillaTypes.FLUID).get(0));
+		}
+	}
+
+	// RocketTier4Gui
+	public static class Tier4RocketJeiCategory implements IRecipeCategory<FuelLoadingRecipe> {
+		public static final ResourceLocation Uid = new ResourceLocation(BeyondEarthMod.MODID, "rocket_t_4_category");
+
+		private final Component title;
+		private final IDrawable background;
+
+		public Tier4RocketJeiCategory(IGuiHelper guiHelper) {
+			this.title = new TextComponent("Tier 4 Rocket");
+			this.background = guiHelper.createDrawable(new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/rocket_gui_jei.png"), 0, 0, 128, 71);
+		}
+
+		@Override
+		public ResourceLocation getUid() {
+			return Uid;
+		}
+
+		@Override
+		public Class<? extends FuelLoadingRecipe> getRecipeClass() {
+			return FuelLoadingRecipe.class;
+		}
+
+		@Override
+		public Component getTitle() {
+			return title;
+		}
+
+		@Override
+		public IDrawable getBackground() {
+			return background;
+		}
+
+		@Override
+		public IDrawable getIcon() {
+			return null;
+		}
+
+		public int getCapacity() {
+			return FluidUtil2.BUCKET_SIZE * RocketTier4Entity.FUEL_BUCKETS;
 		}
 
 		@Override

@@ -15,6 +15,7 @@ import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.entity.RocketTier1Entity;
 import net.mrscauthd.beyond_earth.entity.RocketTier2Entity;
 import net.mrscauthd.beyond_earth.entity.RocketTier3Entity;
+import net.mrscauthd.beyond_earth.entity.RocketTier4Entity;
 import net.mrscauthd.beyond_earth.gauge.GaugeTextHelper;
 import net.mrscauthd.beyond_earth.gauge.GaugeValueHelper;
 import net.mrscauthd.beyond_earth.gui.helper.GuiHelper;
@@ -55,6 +56,9 @@ public class RocketGuiWindow extends AbstractContainerScreen<RocketGui.GuiContai
 		if (menu.rocket instanceof RocketTier3Entity) {
 			fuel = menu.rocket.getEntityData().get(RocketTier3Entity.FUEL);
 		}
+		if (menu.rocket instanceof RocketTier4Entity) {
+			fuel = menu.rocket.getEntityData().get(RocketTier4Entity.FUEL);
+		}
 
 		fuel = fuel / 3;
 
@@ -85,6 +89,9 @@ public class RocketGuiWindow extends AbstractContainerScreen<RocketGui.GuiContai
 		}
 		if (menu.rocket instanceof RocketTier3Entity) {
 			fuel = menu.rocket.getEntityData().get(RocketTier3Entity.FUEL);
+		}
+		if (menu.rocket instanceof RocketTier4Entity) {
+			fuel = menu.rocket.getEntityData().get(RocketTier4Entity.FUEL);
 		}
 
 		FluidStack fluidStack = new FluidStack(ModInit.FUEL_BLOCK.get().getFluid(), 1);

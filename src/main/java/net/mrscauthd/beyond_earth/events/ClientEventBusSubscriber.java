@@ -37,6 +37,8 @@ import net.mrscauthd.beyond_earth.entity.renderer.rockettier2.RocketTier2Model;
 import net.mrscauthd.beyond_earth.entity.renderer.rockettier2.RocketTier2Renderer;
 import net.mrscauthd.beyond_earth.entity.renderer.rockettier3.RocketTier3Model;
 import net.mrscauthd.beyond_earth.entity.renderer.rockettier3.RocketTier3Renderer;
+import net.mrscauthd.beyond_earth.entity.renderer.rockettier4.RocketTier4Model;
+import net.mrscauthd.beyond_earth.entity.renderer.rockettier4.RocketTier4Renderer;
 import net.mrscauthd.beyond_earth.entity.renderer.rover.RoverModel;
 import net.mrscauthd.beyond_earth.entity.renderer.rover.RoverRenderer;
 import net.mrscauthd.beyond_earth.entity.renderer.spacesuit.SpaceSuitModel;
@@ -54,9 +56,7 @@ import net.mrscauthd.beyond_earth.gui.screens.rocket.RocketGuiWindow;
 import net.mrscauthd.beyond_earth.gui.screens.rover.RoverGuiWindow;
 import net.mrscauthd.beyond_earth.gui.screens.solarpanel.SolarPanelGuiWindow;
 import net.mrscauthd.beyond_earth.gui.screens.waterpump.WaterPumpGuiWindow;
-import net.mrscauthd.beyond_earth.particle.LargeFlameParticle;
-import net.mrscauthd.beyond_earth.particle.SmokeParticle;
-import net.mrscauthd.beyond_earth.particle.VenusRainParticle;
+import net.mrscauthd.beyond_earth.particle.*;
 import net.mrscauthd.beyond_earth.entity.renderer.alien.AlienRenderer;
 import org.lwjgl.glfw.GLFW;
 
@@ -77,6 +77,7 @@ public class ClientEventBusSubscriber {
 		event.registerEntityRenderer(ModInit.TIER_1_ROCKET.get(), RocketTier1Renderer::new);
 		event.registerEntityRenderer(ModInit.TIER_2_ROCKET.get(), RocketTier2Renderer::new);
 		event.registerEntityRenderer(ModInit.TIER_3_ROCKET.get(), RocketTier3Renderer::new);
+		event.registerEntityRenderer(ModInit.TIER_4_ROCKET.get(), RocketTier4Renderer::new);
 		event.registerEntityRenderer(ModInit.LANDER.get(), LanderRenderer::new);
 		event.registerEntityRenderer(ModInit.ROVER.get(), RoverRenderer::new);
 
@@ -101,6 +102,7 @@ public class ClientEventBusSubscriber {
 		event.registerLayerDefinition(RocketTier1Model.LAYER_LOCATION, RocketTier1Model::createBodyLayer);
 		event.registerLayerDefinition(RocketTier2Model.LAYER_LOCATION, RocketTier2Model::createBodyLayer);
 		event.registerLayerDefinition(RocketTier3Model.LAYER_LOCATION, RocketTier3Model::createBodyLayer);
+		event.registerLayerDefinition(RocketTier4Model.LAYER_LOCATION, RocketTier4Model::createBodyLayer);
 		event.registerLayerDefinition(LanderModel.LAYER_LOCATION, LanderModel::createBodyLayer);
 		event.registerLayerDefinition(RoverModel.LAYER_LOCATION, RoverModel::createBodyLayer);
 
@@ -148,6 +150,8 @@ public class ClientEventBusSubscriber {
 	public static void registerParticlesFactory(ParticleFactoryRegisterEvent event) {
 		Minecraft.getInstance().particleEngine.register(ModInit.VENUS_RAIN_PARTICLE.get(), VenusRainParticle.ParticleFactory::new);
 		Minecraft.getInstance().particleEngine.register(ModInit.LARGE_FLAME_PARTICLE.get(), LargeFlameParticle.ParticleFactory::new);
-		Minecraft.getInstance().particleEngine.register(ModInit.SMOKE_PARTICLE.get(), SmokeParticle.ParticleFactory::new);
+		Minecraft.getInstance().particleEngine.register(ModInit.LARGE_SMOKE_PARTICLE.get(), LargeSmokeParticle.ParticleFactory::new);
+		Minecraft.getInstance().particleEngine.register(ModInit.SMALL_FLAME_PARTICLE.get(), SmallFlameParticle.ParticleFactory::new);
+		Minecraft.getInstance().particleEngine.register(ModInit.SMALL_SMOKE_PARTICLE.get(), SmallSmokeParticle.ParticleFactory::new);
 	}
 }

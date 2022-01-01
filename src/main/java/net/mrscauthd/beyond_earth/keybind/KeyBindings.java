@@ -167,6 +167,13 @@ public class KeyBindings {
 						Methodes.RocketSounds(player.getVehicle(), world);
 					}
 
+				} else if (player.getVehicle() instanceof RocketTier4Entity && player.getVehicle().getEntityData().get(RocketTier4Entity.FUEL) == 300) {
+
+					if (!player.getVehicle().getEntityData().get(RocketTier4Entity.ROCKET_START)) {
+						player.getVehicle().getEntityData().set(RocketTier4Entity.ROCKET_START, true);
+						Methodes.RocketSounds(player.getVehicle(), world);
+					}
+
 				} else {
 					Methodes.noFuelMessage(player);
 				}

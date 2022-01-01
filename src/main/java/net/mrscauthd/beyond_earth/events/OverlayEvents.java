@@ -132,6 +132,10 @@ public class OverlayEvents {
                     timer = entity.getVehicle().getEntityData().get(RocketTier3Entity.START_TIMER);
                 }
 
+                if (entity.getVehicle() instanceof RocketTier4Entity) {
+                    timer = entity.getVehicle().getEntityData().get(RocketTier4Entity.START_TIMER);
+                }
+
                 int width = event.getWindow().getGuiScaledWidth() / 2 - 31;
                 int high = event.getWindow().getGuiScaledHeight() / 2 / 2;
 
@@ -240,16 +244,16 @@ public class OverlayEvents {
 
                 ResourceLocation planet;
 
-                if (Methodes.isWorld(world, new ResourceLocation(BeyondEarthMod.MODID, "moon"))) {
+                if (Methodes.isWorld(world, Methodes.moon)) {
                     planet = new ResourceLocation(BeyondEarthMod.MODID, "textures/planet_bar/rocket_y_main_moon.png");
 
-                } else if (Methodes.isWorld(world, new ResourceLocation(BeyondEarthMod.MODID, "mars"))) {
+                } else if (Methodes.isWorld(world, Methodes.mars)) {
                     planet = new ResourceLocation(BeyondEarthMod.MODID, "textures/planet_bar/rocket_y_main_mars.png");
 
-                } else if (Methodes.isWorld(world, new ResourceLocation(BeyondEarthMod.MODID, "mercury"))) {
+                } else if (Methodes.isWorld(world, Methodes.mercury)) {
                     planet = new ResourceLocation(BeyondEarthMod.MODID, "textures/planet_bar/rocket_y_main_mercury.png");
 
-                } else if (Methodes.isWorld(world, new ResourceLocation(BeyondEarthMod.MODID, "venus"))) {
+                } else if (Methodes.isWorld(world, Methodes.venus)) {
                     planet = new ResourceLocation(BeyondEarthMod.MODID, "textures/planet_bar/rocket_y_main_venus.png");
 
                 } else if (Methodes.isOrbitWorld(world)) {

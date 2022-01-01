@@ -70,6 +70,16 @@ public class Events {
             if (player.getY() < 1 && !(player.getVehicle() instanceof LanderEntity)) {
                 Methodes.playerFalltoPlanet(world, player);
             }
+
+            if (Methodes.isWorld(world, Methodes.moon_orbit)) {
+                System.out.println("isWorld");
+            }
+            if (Methodes.isOrbitWorld(world)) {
+                System.out.println("isOrbit");
+            }
+            if (Methodes.isSpaceWorld(world)) {
+                System.out.println("isSpaceWorld");
+            }
         }
     }
 
@@ -84,10 +94,10 @@ public class Events {
         Gravity.Gravity(entity, Gravity.GravityType.LIVING, world);
 
         //Venus Rain
-        Methodes.VenusRain(entity, new ResourceLocation(BeyondEarthMod.MODID, "venus"));
+        Methodes.VenusRain(entity, Methodes.venus);
 
         //Venus Fire
-        Methodes.VenusFire(entity, new ResourceLocation(BeyondEarthMod.MODID, "venus"), new ResourceLocation(BeyondEarthMod.MODID, "mercury"));
+        Methodes.VenusFire(entity, Methodes.venus, Methodes.mercury);
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -238,19 +248,21 @@ public class Events {
     public static void onWorldTick(TickEvent.WorldTickEvent event) {
         if (event.phase == TickEvent.Phase.END) {
             Level world = event.world;
-            ResourceKey<Level> world2 = world.dimension();
-            if (world2 == ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID,"moon"))
-             || world2 == ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID,"moon_orbit"))
-             || world2 == ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID,"mars"))
-             || world2 == ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID,"mars_orbit"))
-             || world2 == ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID,"mercury"))
-             || world2 == ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID,"mercury_orbit"))
-             || world2 == ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID,"venus_orbit"))
-             || world2 == ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID,"overworld_orbit"))) {
+            ResourceKey<Level> key = event.world.dimension();
+
+            if (key.getRegistryName().equals(Methodes.moon)
+             || key.getRegistryName().equals(Methodes.moon_orbit)
+             || key.getRegistryName().equals(Methodes.mars)
+             || key.getRegistryName().equals(Methodes.mars_orbit)
+             || key.getRegistryName().equals(Methodes.mercury)
+             || key.getRegistryName().equals(Methodes.mercury_orbit)
+             || key.getRegistryName().equals(Methodes.venus_orbit)
+             || key.getRegistryName().equals(Methodes.overworld_orbit)) {
                 world.thunderLevel = 0;
                 world.rainLevel = 0;
             }
-            if (world2 == ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID,"venus"))) {
+
+            if (key.getRegistryName().equals(Methodes.venus)) {
                 world.thunderLevel = 0;
             }
         }

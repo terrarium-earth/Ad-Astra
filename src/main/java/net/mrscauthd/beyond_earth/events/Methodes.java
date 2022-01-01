@@ -61,11 +61,21 @@ import java.util.List;
 
 public class Methodes {
 
-    public static void worldTeleport(Player entity, ResourceLocation Planet, double high) {
+    public static final ResourceKey<Level> moon = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "moon"));
+    public static final ResourceKey<Level> moon_orbit = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "moon_orbit"));
+    public static final ResourceKey<Level> mars = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "mars"));
+    public static final ResourceKey<Level> mars_orbit = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "mars_orbit"));
+    public static final ResourceKey<Level> mercury = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "mercury"));
+    public static final ResourceKey<Level> mercury_orbit = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "mercury_orbit"));
+    public static final ResourceKey<Level> venus = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "venus"));
+    public static final ResourceKey<Level> venus_orbit = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "venus_orbit"));
+    public static final ResourceKey<Level> overworld = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation("overworld"));
+    public static final ResourceKey<Level> overworld_orbit = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation("overworld_orbit"));
+
+    public static void worldTeleport(Player entity, ResourceKey<Level> planet, double high) {
         if (!entity.level.isClientSide) {
 
-            ResourceKey<Level> destinationType = ResourceKey.create(Registry.DIMENSION_REGISTRY, Planet);
-            ServerLevel nextWorld = entity.getServer().getLevel(destinationType);
+            ServerLevel nextWorld = entity.getServer().getLevel(planet);
 
             if (nextWorld != null) {
                 ((ServerPlayer) entity).connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.WIN_GAME, 0));
@@ -144,33 +154,33 @@ public class Methodes {
     }
 
     public static boolean isSpaceWorld(Level world) {
-        if (Methodes.isWorld(world, new ResourceLocation(BeyondEarthMod.MODID,"moon"))
-                || Methodes.isWorld(world, new ResourceLocation(BeyondEarthMod.MODID,"moon_orbit"))
-                || Methodes.isWorld(world, new ResourceLocation(BeyondEarthMod.MODID,"mars"))
-                || Methodes.isWorld(world, new ResourceLocation(BeyondEarthMod.MODID,"mars_orbit"))
-                || Methodes.isWorld(world, new ResourceLocation(BeyondEarthMod.MODID,"mercury"))
-                || Methodes.isWorld(world, new ResourceLocation(BeyondEarthMod.MODID,"mercury_orbit"))
-                || Methodes.isWorld(world, new ResourceLocation(BeyondEarthMod.MODID,"venus"))
-                || Methodes.isWorld(world, new ResourceLocation(BeyondEarthMod.MODID,"venus_orbit"))
-                || Methodes.isWorld(world, new ResourceLocation(BeyondEarthMod.MODID,"overworld_orbit"))) {
+        if (Methodes.isWorld(world, moon)
+                || Methodes.isWorld(world, moon_orbit)
+                || Methodes.isWorld(world, mars)
+                || Methodes.isWorld(world, mars_orbit)
+                || Methodes.isWorld(world, mercury)
+                || Methodes.isWorld(world, mercury_orbit)
+                || Methodes.isWorld(world, venus)
+                || Methodes.isWorld(world, venus_orbit)
+                || Methodes.isWorld(world, overworld_orbit)) {
             return true;
         }
         return false;
     }
 
     public static boolean isOrbitWorld(Level world) {
-        if (Methodes.isWorld(world, new ResourceLocation(BeyondEarthMod.MODID,"overworld_orbit"))
-                || Methodes.isWorld(world, new ResourceLocation(BeyondEarthMod.MODID,"moon_orbit"))
-                || Methodes.isWorld(world, new ResourceLocation(BeyondEarthMod.MODID,"mars_orbit"))
-                || Methodes.isWorld(world, new ResourceLocation(BeyondEarthMod.MODID,"mercury_orbit"))
-                || Methodes.isWorld(world, new ResourceLocation(BeyondEarthMod.MODID,"venus_orbit"))) {
+        if (Methodes.isWorld(world, overworld_orbit)
+                || Methodes.isWorld(world, moon_orbit)
+                || Methodes.isWorld(world, mars_orbit)
+                || Methodes.isWorld(world, mercury_orbit)
+                || Methodes.isWorld(world, venus_orbit)) {
             return true;
         }
         return false;
     }
 
-    public static boolean isWorld(Level world, ResourceLocation loc) {
-        return world.dimension() == ResourceKey.create(Registry.DIMENSION_REGISTRY, loc);
+    public static boolean isWorld(Level world, ResourceKey<Level> loc) {
+        return world.dimension() == loc;
     }
 
     public static void OxygenDamage(LivingEntity entity) {
@@ -178,14 +188,14 @@ public class Methodes {
     }
 
     public static boolean isRocket(Entity entity) {
-        if (entity instanceof RocketTier1Entity || entity instanceof RocketTier2Entity || entity instanceof RocketTier3Entity) {
+        if (entity instanceof RocketTier1Entity || entity instanceof RocketTier2Entity || entity instanceof RocketTier3Entity || entity instanceof RocketTier4Entity) {
             return true;
         }
         return false;
     }
 
     public static boolean AllVehiclesOr(Entity entity) {
-        if (entity instanceof RocketTier1Entity || entity instanceof RocketTier2Entity || entity instanceof RocketTier3Entity || entity instanceof LanderEntity || entity instanceof RoverEntity) {
+        if (entity instanceof RocketTier1Entity || entity instanceof RocketTier2Entity || entity instanceof RocketTier3Entity || entity instanceof RocketTier4Entity || entity instanceof LanderEntity || entity instanceof RoverEntity) {
             return true;
         }
         return false;
@@ -220,11 +230,11 @@ public class Methodes {
     }
 
     /**If a entity should not get Fire add it to the Tag "venus_fire"*/
-    public static void VenusFire(LivingEntity entity, ResourceLocation planet1, ResourceLocation planet2) {
+    public static void VenusFire(LivingEntity entity, ResourceKey<Level> planet1, ResourceKey<Level> planet2) {
 
         ResourceKey<Level> key = entity.level.dimension();
 
-        if (key == ResourceKey.create(Registry.DIMENSION_REGISTRY, planet1) || key == ResourceKey.create(Registry.DIMENSION_REGISTRY, planet2)) {
+        if (key.getRegistryName().equals(planet1) || key.getRegistryName().equals(planet2)) {
             if (!Methodes.nethriteSpaceSuitCheck(entity) && !entity.hasEffect(MobEffects.FIRE_RESISTANCE) && !entity.fireImmune() && (entity instanceof Mob)) {
                 if (!MinecraftForge.EVENT_BUS.post(new LivingSetFireInHotPlanetEvent(entity))) {
                     if (!tagCheck(entity, BeyondEarthMod.MODID + ":entities/venus_fire")) {
@@ -236,8 +246,8 @@ public class Methodes {
     }
 
     /**If a entity should not get Damage add it to the Tag "venus_rain", and if you has a Entity like a car return the damage to false*/
-    public static void VenusRain(LivingEntity entity, ResourceLocation planet) {
-        if (entity.level.dimension() == ResourceKey.create(Registry.DIMENSION_REGISTRY, planet)) {
+    public static void VenusRain(LivingEntity entity, ResourceKey<Level> planet) {
+        if (entity.level.dimension().getRegistryName().equals(planet)) {
             if (entity.level.getLevelData().isRaining() && entity.level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, (int) Math.floor(entity.getX()), (int) Math.floor(entity.getZ())) <= Math.floor(entity.getY()) + 1) {
                 if (!MinecraftForge.EVENT_BUS.post(new LivingSetVenusRainEvent(entity))) {
                     if (!tagCheck(entity, BeyondEarthMod.MODID + ":entities/venus_rain")) {
@@ -301,7 +311,7 @@ public class Methodes {
         return FluidTags.getAllTags().getTagOrEmpty(tag).contains(fluid);
     }
 
-    public static void landerTeleport(Player player, ResourceLocation newPlanet) {
+    public static void landerTeleport(Player player, ResourceKey<Level> newPlanet) {
         LanderEntity lander = (LanderEntity) player.getVehicle();
 
         if (player.getY() < 1) {
@@ -329,10 +339,8 @@ public class Methodes {
         }
     }
 
-    public static void rocketTeleport(Player player, ResourceLocation planet, ItemStack rocketItem, Boolean SpaceStation) {
-        ResourceKey<Level> dim = player.level.dimension();
-
-        if (dim != ResourceKey.create(Registry.DIMENSION_REGISTRY, planet)) {
+    public static void rocketTeleport(Player player, ResourceKey<Level> planet, ItemStack rocketItem, Boolean SpaceStation) {
+        if (player.level.dimension() != planet) {
             Methodes.worldTeleport(player, planet, 700);
         } else {
             player.setPos(player.getX(), 700, player.getZ());
@@ -399,7 +407,7 @@ public class Methodes {
         }
     }
 
-    public static void teleportButton(Player player, ResourceLocation planet, Boolean SpaceStation) {
+    public static void teleportButton(Player player, ResourceKey<Level> planet, Boolean SpaceStation) {
         ItemStack itemStack = new ItemStack(Items.AIR, 1);
 
         if (player.getPersistentData().getString(BeyondEarthMod.MODID + ":rocket_type").equals("entity." + BeyondEarthMod.MODID + ".rocket_t1")) {
@@ -416,49 +424,44 @@ public class Methodes {
     }
 
     public static void landerTeleportOrbit(Player player, Level world) {
-        if (Methodes.isWorld(world, new ResourceLocation(BeyondEarthMod.MODID, "overworld_orbit"))) {
-            Methodes.landerTeleport(player, new ResourceLocation("minecraft:overworld"));
+        if (Methodes.isWorld(world, Methodes.overworld_orbit)) {
+            Methodes.landerTeleport(player, Methodes.overworld);
         }
-        if (Methodes.isWorld(world, new ResourceLocation(BeyondEarthMod.MODID, "moon_orbit"))) {
-            Methodes.landerTeleport(player, new ResourceLocation(BeyondEarthMod.MODID, "moon"));
+        if (Methodes.isWorld(world, Methodes.moon_orbit)) {
+            Methodes.landerTeleport(player, Methodes.moon);
         }
-        if (Methodes.isWorld(world, new ResourceLocation(BeyondEarthMod.MODID, "mars_orbit"))) {
-            Methodes.landerTeleport(player, new ResourceLocation(BeyondEarthMod.MODID, "mars"));
+        if (Methodes.isWorld(world, Methodes.mars_orbit)) {
+            Methodes.landerTeleport(player, Methodes.mars);
         }
-        if (Methodes.isWorld(world, new ResourceLocation(BeyondEarthMod.MODID, "mercury_orbit"))) {
-            Methodes.landerTeleport(player, new ResourceLocation(BeyondEarthMod.MODID, "mercury"));
+        if (Methodes.isWorld(world, Methodes.mercury_orbit)) {
+            Methodes.landerTeleport(player, Methodes.mercury);
         }
-        if (Methodes.isWorld(world, new ResourceLocation(BeyondEarthMod.MODID, "venus_orbit"))) {
-            Methodes.landerTeleport(player, new ResourceLocation(BeyondEarthMod.MODID, "venus"));
+        if (Methodes.isWorld(world, Methodes.venus_orbit)) {
+            Methodes.landerTeleport(player, Methodes.venus);
         }
     }
 
     public static void playerFalltoPlanet(Level world, Player player) {
         ResourceKey<Level> world2 = world.dimension();
 
-        if (world2 == ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "overworld_orbit"))) {
-            ResourceLocation planet = new ResourceLocation("overworld");
-            Methodes.worldTeleport(player, planet, 450);
+        if (world2 == Methodes.overworld_orbit) {
+            Methodes.worldTeleport(player, Methodes.overworld, 450);
         }
 
-        if (world2 == ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "moon_orbit"))) {
-            ResourceLocation planet = new ResourceLocation(BeyondEarthMod.MODID, "moon");
-            Methodes.worldTeleport(player, planet, 450);
+        if (world2 == Methodes.moon_orbit) {
+            Methodes.worldTeleport(player, Methodes.moon, 450);
         }
 
-        if (world2 == ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "mars_orbit"))) {
-            ResourceLocation planet = new ResourceLocation(BeyondEarthMod.MODID, "mars");
-            Methodes.worldTeleport(player, planet, 450);
+        if (world2 == Methodes.mars_orbit) {
+            Methodes.worldTeleport(player, Methodes.mars, 450);
         }
 
-        if (world2 == ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "mercury_orbit"))) {
-            ResourceLocation planet = new ResourceLocation(BeyondEarthMod.MODID, "mercury");
-            Methodes.worldTeleport(player, planet, 450);
+        if (world2 == Methodes.mercury_orbit) {
+            Methodes.worldTeleport(player, Methodes.mercury, 450);
         }
 
-        if (world2 == ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "venus_orbit"))) {
-            ResourceLocation planet = new ResourceLocation(BeyondEarthMod.MODID, "venus");
-            Methodes.worldTeleport(player, planet, 450);
+        if (world2 == Methodes.venus_orbit) {
+            Methodes.worldTeleport(player, Methodes.venus, 450);
         }
     }
 
