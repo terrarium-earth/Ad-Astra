@@ -9,9 +9,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -19,7 +17,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -49,9 +46,14 @@ public class RoverItem extends Item {
     }
 
     @Override
-    public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
+    public InteractionResult useOn(UseOnContext context) {
         Player player = context.getPlayer();
         Level world = context.getLevel();
+        
+        if (world.isClientSide()) {
+        	return InteractionResult.PASS;
+        }
+        
         BlockPos pos = context.getClickedPos();
         InteractionHand hand = context.getHand();
         ItemStack itemStack = context.getItemInHand();
@@ -76,24 +78,12 @@ public class RoverItem extends Item {
             List<Entity> entities = player.getCommandSenderWorld().getEntitiesOfClass(Entity.class, scanAbove);
 
             if (entities.isEmpty()) {
-                RoverEntity rocket = new RoverEntity((EntityType<? extends PathfinderMob>) ModInit.ROVER.get(), world);
-
-                rocket.setPos((double) pos.getX() + 0.5D,  pos.getY() + 1, (double) pos.getZ() + 0.5D);
-                double d0 = getYOffset(world, pos, true, rocket.getBoundingBox());
-                float f = player.getYRot();
-
-                rocket.moveTo((double)pos.getX() + 0.5D, (double)pos.getY() + d0, (double)pos.getZ() + 0.5D, f, 0.0F);
-
-                rocket.yHeadRot = rocket.getYRot();
-                rocket.yBodyRot = rocket.getYRot();
-
-                if (world instanceof ServerLevel) {
-                    rocket.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(new BlockPos(rocket.getX(), rocket.getY(), rocket.getZ())), MobSpawnType.MOB_SUMMONED, null, null);
-                }
-
-                world.addFreshEntity(rocket);
-
-                rocket.getEntityData().set(RoverEntity.FUEL, itemStack.getOrCreateTag().getInt(fuelTag));
+				Component component = itemStack.hasCustomHoverName() ? itemStack.getHoverName() : null;
+            	RoverEntity rover = ModInit.ROVER.get().create((ServerLevel) world, null, component, player, pos, MobSpawnType.MOB_SUMMONED, true, true);
+				rover.yHeadRot = player.getYRot();
+				rover.yBodyRot = player.getYRot();
+				rover.getEntityData().set(RoverEntity.FUEL, itemStack.getOrCreateTag().getInt(fuelTag));
+				world.addFreshEntity(rover);
 
                 if (!player.getAbilities().instabuild) {
                     player.setItemInHand(hand, ItemStack.EMPTY);
@@ -105,7 +95,7 @@ public class RoverItem extends Item {
             }
         }
 
-        return super.onItemUseFirst(stack, context);
+        return super.useOn(context);
     }
 
 
