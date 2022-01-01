@@ -49,13 +49,17 @@ public class Tier2RocketItem extends Item {
     }
 
     @Override
-    public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
+    public InteractionResult useOn(UseOnContext context) {
         Player player = context.getPlayer();
         Level world = context.getLevel();
         BlockPos pos = context.getClickedPos();
         BlockState state = world.getBlockState(pos);
         InteractionHand hand = context.getHand();
         ItemStack itemStack = context.getItemInHand();
+
+        if (world.isClientSide()) {
+            return InteractionResult.PASS;
+        }
 
         int x = pos.getX();
         int y = pos.getY();
@@ -102,7 +106,7 @@ public class Tier2RocketItem extends Item {
             }
         }
 
-        return super.onItemUseFirst(stack, context);
+        return super.useOn(context);
     }
 
     protected static double getYOffset(LevelReader p_20626_, BlockPos p_20627_, boolean p_20628_, AABB p_20629_) {

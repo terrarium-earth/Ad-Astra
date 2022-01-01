@@ -224,7 +224,6 @@ public class RoverEntity extends PathfinderMob {
     public ItemStack getPickedResult(HitResult target) {
         ItemStack itemStack = new ItemStack(ModInit.ROVER_ITEM.get(), 1);
         itemStack.getOrCreateTag().putInt(BeyondEarthMod.MODID + ":fuel", this.entityData.get(FUEL));
-        itemStack.setHoverName(this.getCustomName());
 
         return itemStack;
     }
@@ -243,14 +242,8 @@ public class RoverEntity extends PathfinderMob {
 
     @Override
     public boolean hurt(DamageSource source, float p_21017_) {
-        Entity entity = source.getEntity();
-        
-        if (!source.isProjectile() && entity != null && entity.isCrouching() && !this.isVehicle()) {
-        	
-        	if (!(entity instanceof Player) || !((Player) entity).isCreative()) {
-        		this.spawnRoverItem();
-        	}
-        	
+        if (!source.isProjectile() && source.getEntity() != null && source.getEntity().isCrouching() && !this.isVehicle()) {
+            this.spawnRoverItem();
             this.dropEquipment();
             this.remove(RemovalReason.DISCARDED);
         }
@@ -260,7 +253,8 @@ public class RoverEntity extends PathfinderMob {
 
     protected void spawnRoverItem() {
         if (!level.isClientSide) {
-            ItemStack itemStack = this.getPickedResult(null);
+            ItemStack itemStack = new ItemStack(ModInit.ROVER_ITEM.get(), 1);
+            itemStack.getOrCreateTag().putInt(BeyondEarthMod.MODID + ":fuel", this.getEntityData().get(FUEL));
 
             ItemEntity entityToSpawn = new ItemEntity(level, this.getX(), this.getY(), this.getZ(), itemStack);
             entityToSpawn.setPickUpDelay(10);

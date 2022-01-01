@@ -135,6 +135,17 @@ public class RocketTier1Entity extends PathfinderMob {
 	}
 
 	@Override
+	public boolean hasCustomName() {
+		return false;
+	}
+
+	@Nullable
+	@Override
+	public Component getCustomName() {
+		return null;
+	}
+
+	@Override
 	protected void registerGoals() {
 		super.registerGoals();
 	}
@@ -142,11 +153,6 @@ public class RocketTier1Entity extends PathfinderMob {
 	@Override
 	public MobType getMobType() {
 		return MobType.UNDEFINED;
-	}
-
-	@Override
-	protected MovementEmission getMovementEmission() {
-		return MovementEmission.NONE;
 	}
 
 	@Override
