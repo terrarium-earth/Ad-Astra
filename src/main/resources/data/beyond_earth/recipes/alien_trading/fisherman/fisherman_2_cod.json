@@ -1,0 +1,13 @@
+{
+	"type": "beyond_earth:alien_trading_itemstack",
+	"job": "minecraft:fisherman",
+	"level": 2,
+	"xp": 10,
+	"costA": {
+		"item": "minecraft:cod",
+		"count": 15
+	},
+	"result": {
+		"item": "minecraft:emerald"
+	}
+}

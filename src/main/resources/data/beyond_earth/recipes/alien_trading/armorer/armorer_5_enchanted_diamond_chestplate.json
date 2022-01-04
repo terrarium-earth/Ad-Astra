@@ -1,0 +1,14 @@
+{
+	"type": "beyond_earth:alien_trading_enchanteditem",
+	"job": "minecraft:armorer",
+	"level": 5,
+	"xp": 30,
+	"priceMultiplier": 0.2,
+	"costA": {
+		"item": "minecraft:emerald"
+	},
+	"costBase": 16,
+	"result": {
+		"item": "minecraft:diamond_chestplate"
+	}
+}

@@ -1,0 +1,13 @@
+{
+	"type": "beyond_earth:alien_trading_itemstack",
+	"job": "minecraft:mason",
+	"level": 2,
+	"xp": 5,
+	"costA": {
+		"item": "minecraft:emerald"
+	},
+	"result": {
+		"item": "minecraft:chiseled_stone_bricks",
+		"count": 4
+	}
+}

@@ -1,0 +1,12 @@
+{
+	"type": "beyond_earth:alien_trading_itemstack",
+	"job": "minecraft:cartographer",
+	"level": 3,
+	"xp": 20,
+	"costA": {
+		"item": "minecraft:compass"
+	},
+	"result": {
+		"item": "minecraft:emerald"
+	}
+}

@@ -1,0 +1,14 @@
+{
+	"type": "beyond_earth:alien_trading_enchanteditem",
+	"job": "minecraft:toolsmith",
+	"level": 3,
+	"xp": 10,
+	"priceMultiplier": 0.2,
+	"costA": {
+		"item": "minecraft:emerald"
+	},
+	"costBase": 1,
+	"result": {
+		"item": "minecraft:iron_axe"
+	}
+}
