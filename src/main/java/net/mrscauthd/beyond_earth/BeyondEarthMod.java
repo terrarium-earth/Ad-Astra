@@ -11,6 +11,7 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 import net.mrscauthd.beyond_earth.capability.CapabilityOxygen;
 import net.mrscauthd.beyond_earth.compat.CompatibleManager;
+import net.mrscauthd.beyond_earth.entity.alien.AlienTrade;
 import net.mrscauthd.beyond_earth.gui.screens.planetselection.PlanetSelectionGui;
 import net.mrscauthd.beyond_earth.keybind.KeyBindings;
 import net.mrscauthd.beyond_earth.machines.tile.OxygenBubbleDistributorBlockEntity;
@@ -71,6 +72,7 @@ public class BeyondEarthMod {
 
 		forgeBus.addListener(EventPriority.HIGH, ModInit::biomesLoading);
 		forgeBus.addListener(EventPriority.HIGH, OreGeneration::biomesLoading);
+		forgeBus.addListener(EventPriority.LOWEST, AlienTrade::onAddReloadListener);
 
 		// KeyBindings
 		KeyBindings.registerMessages();

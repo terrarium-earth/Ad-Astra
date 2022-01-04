@@ -5,6 +5,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.Codec;
+
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -55,6 +56,12 @@ import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.*;
 import net.mrscauthd.beyond_earth.armor.SpaceSuit;
 import net.mrscauthd.beyond_earth.block.*;
+import net.mrscauthd.beyond_earth.crafting.AlienTradingRecipeDyedItem;
+import net.mrscauthd.beyond_earth.crafting.AlienTradingRecipeEnchantedBook;
+import net.mrscauthd.beyond_earth.crafting.AlienTradingRecipeEnchantedItem;
+import net.mrscauthd.beyond_earth.crafting.AlienTradingRecipeItemStack;
+import net.mrscauthd.beyond_earth.crafting.AlienTradingRecipeMap;
+import net.mrscauthd.beyond_earth.crafting.AlienTradingRecipePotionedItem;
 import net.mrscauthd.beyond_earth.crafting.BeyondEarthRecipeTypes;
 import net.mrscauthd.beyond_earth.crafting.CompressingRecipeSerializer;
 import net.mrscauthd.beyond_earth.crafting.FuelRefiningRecipeSerializer;
@@ -438,7 +445,13 @@ public class ModInit {
     public static final RegistryObject<RecipeSerializer<?>> RECIPE_SERIALIZER_OXYGENBUBBLEDISTRIBUTOR = RECIPE_SERIALIZERS.register("oxygenbubbledistributor", () -> new OxygenBubbleDistributorRecipeSerializer());
     public static final RegistryObject<RecipeSerializer<?>> RECIPE_SERIALIZER_WORKBENCHING = RECIPE_SERIALIZERS.register("workbenching", () -> new WorkbenchingRecipeSerializer());
     public static final RegistryObject<RecipeSerializer<?>> RECIPE_SERIALIZER_FUELREFINING = RECIPE_SERIALIZERS.register("fuelrefining", () -> new FuelRefiningRecipeSerializer());
-    
+	public static final RegistryObject<RecipeSerializer<?>> RECIPE_SERIALIZER_ALIEN_TRADING_ITEMSTACK = RECIPE_SERIALIZERS.register("alien_trading_itemstack", () -> new AlienTradingRecipeItemStack.Serializer());
+	public static final RegistryObject<RecipeSerializer<?>> RECIPE_SERIALIZER_ALIEN_TRADING_ENCHANTEDBOOK = RECIPE_SERIALIZERS.register("alien_trading_enchantedbook", () -> new AlienTradingRecipeEnchantedBook.Serializer());
+	public static final RegistryObject<RecipeSerializer<?>> RECIPE_SERIALIZER_ALIEN_TRADING_ENCHANTEDITEM = RECIPE_SERIALIZERS.register("alien_trading_enchanteditem", () -> new AlienTradingRecipeEnchantedItem.Serializer());
+	public static final RegistryObject<RecipeSerializer<?>> RECIPE_SERIALIZER_ALIEN_TRADING_MAP = RECIPE_SERIALIZERS.register("alien_trading_map", () -> new AlienTradingRecipeMap.Serializer());
+	public static final RegistryObject<RecipeSerializer<?>> RECIPE_SERIALIZER_ALIEN_TRADING_POTIONEDITEM = RECIPE_SERIALIZERS.register("alien_trading_potioneditem", () -> new AlienTradingRecipePotionedItem.Serializer());
+	public static final RegistryObject<RecipeSerializer<?>> RECIPE_SERIALIZER_ALIEN_TRADING_DYEDITEM = RECIPE_SERIALIZERS.register("alien_trading_dyeditem", () -> new AlienTradingRecipeDyedItem.Serializer());
+	
     //RocketParts
     public static final IForgeRegistry<RocketPart> ROCKET_PARTS_REGISTRY = new RegistryBuilder<RocketPart>().setType(RocketPart.class).setName(new ResourceLocation(BeyondEarthMod.MODID, "rocket_part")).create();
     public static final DeferredRegister<RocketPart> ROCKET_PARTS = DeferredRegister.create(ROCKET_PARTS_REGISTRY, BeyondEarthMod.MODID);

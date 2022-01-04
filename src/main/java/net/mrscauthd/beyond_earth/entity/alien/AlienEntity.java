@@ -28,6 +28,7 @@ import net.minecraft.world.entity.ai.sensing.Sensor;
 import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.entity.npc.*;
+import net.minecraft.world.entity.npc.VillagerTrades.ItemListing;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.entity.schedule.Schedule;
@@ -229,17 +230,17 @@ public class AlienEntity extends Villager implements Merchant, Npc {
 	@Override
 	protected void updateTrades() {
 		VillagerData villagerdata = this.getVillagerData();
-		Int2ObjectMap<AlienTrade.ItemListing[]> int2objectmap = AlienTrade.TRADES.get(villagerdata.getProfession());
+		Int2ObjectMap<ItemListing[]> int2objectmap = AlienTrade.TRADES.get(villagerdata.getProfession());
 		if (int2objectmap != null && !int2objectmap.isEmpty()) {
-			AlienTrade.ItemListing[] avillagertrades$itrade = int2objectmap.get(villagerdata.getLevel());
+			ItemListing[] avillagertrades$itrade = int2objectmap.get(villagerdata.getLevel());
 			if (avillagertrades$itrade != null) {
 				MerchantOffers merchantoffers = this.getOffers();
-				this.addOffersFromItemListings(merchantoffers, (AlienTrade.ItemListing[]) avillagertrades$itrade, 6);
+				this.addOffersFromItemListings(merchantoffers, (ItemListing[]) avillagertrades$itrade, 6);
 			}
 		}
 	}
 
-	protected void addOffersFromItemListings(MerchantOffers p_35278_, AlienTrade.ItemListing[] p_35279_, int p_35280_) {
+	protected void addOffersFromItemListings(MerchantOffers p_35278_, ItemListing[] p_35279_, int p_35280_) {
 		Set<Integer> set = Sets.newHashSet();
 		if (p_35279_.length > p_35280_) {
 			while(set.size() < p_35280_) {
@@ -252,7 +253,7 @@ public class AlienEntity extends Villager implements Merchant, Npc {
 		}
 
 		for(Integer integer : set) {
-			AlienTrade.ItemListing villagertrades$itemlisting = p_35279_[integer];
+			ItemListing villagertrades$itemlisting = p_35279_[integer];
 			MerchantOffer merchantoffer = villagertrades$itemlisting.getOffer(this, this.random);
 			if (merchantoffer != null) {
 				p_35278_.add(merchantoffer);
