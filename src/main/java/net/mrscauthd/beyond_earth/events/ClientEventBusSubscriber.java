@@ -5,7 +5,6 @@ import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.client.ClientRegistry;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
@@ -23,6 +22,8 @@ import net.mrscauthd.beyond_earth.entity.renderer.alienzombie.AlienZombieModel;
 import net.mrscauthd.beyond_earth.entity.renderer.alienzombie.AlienZombieRenderer;
 import net.mrscauthd.beyond_earth.entity.renderer.flag.TileEntityHeadModel;
 import net.mrscauthd.beyond_earth.entity.renderer.flag.TileEntityHeadRenderer;
+import net.mrscauthd.beyond_earth.entity.renderer.iceshard.IceShardModel;
+import net.mrscauthd.beyond_earth.entity.renderer.iceshard.IceShardRenderer;
 import net.mrscauthd.beyond_earth.entity.renderer.lander.LanderModel;
 import net.mrscauthd.beyond_earth.entity.renderer.lander.LanderRenderer;
 import net.mrscauthd.beyond_earth.entity.renderer.martianraptor.MartianRaptorModel;
@@ -81,7 +82,7 @@ public class ClientEventBusSubscriber {
 		event.registerEntityRenderer(ModInit.LANDER.get(), LanderRenderer::new);
 		event.registerEntityRenderer(ModInit.ROVER.get(), RoverRenderer::new);
 
-		event.registerEntityRenderer(ModInit.ALIEN_SPIT_ENTITY.get(), renderManager -> new ThrownItemRenderer(renderManager, 1, true));
+		event.registerEntityRenderer(ModInit.ICE_SPIT_ENTITY.get(), IceShardRenderer::new);
 
 		event.registerBlockEntityRenderer(ModInit.OXYGEN_BUBBLE_DISTRIBUTOR.get(), TileEntityBoxRenderer::new);
 
@@ -98,6 +99,8 @@ public class ClientEventBusSubscriber {
 		event.registerLayerDefinition(MartianRaptorModel.LAYER_LOCATION, MartianRaptorModel::createBodyLayer);
 
 		event.registerLayerDefinition(TileEntityHeadModel.LAYER_LOCATION, TileEntityHeadModel::createHumanoidHeadLayer);
+
+		event.registerLayerDefinition(IceShardModel.LAYER_LOCATION, IceShardModel::createBodyLayer);
 		
 		event.registerLayerDefinition(RocketTier1Model.LAYER_LOCATION, RocketTier1Model::createBodyLayer);
 		event.registerLayerDefinition(RocketTier2Model.LAYER_LOCATION, RocketTier2Model::createBodyLayer);

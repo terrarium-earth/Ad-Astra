@@ -99,7 +99,7 @@ public class PlanetSelectionGui {
 			/**Proxima Centauri:*/
 			if (message.getInteger() == 5) {
 				defaultOptions(context.getSender());
-				Methodes.teleportButton(context.getSender(), Methodes.venus, false);
+				Methodes.teleportButton(context.getSender(), Methodes.glacio, false);
 			}
 
 			//Teleport Orbit Buttons
@@ -126,7 +126,7 @@ public class PlanetSelectionGui {
 			/**Proxima Centauri:*/
 			if (message.getInteger() == 11) {
 				defaultOptions(context.getSender());
-				Methodes.teleportButton(context.getSender(), Methodes.venus_orbit, false);
+				Methodes.teleportButton(context.getSender(), Methodes.glacio_orbit, false);
 			}
 
 			//Create Space Station Buttons
@@ -159,7 +159,7 @@ public class PlanetSelectionGui {
 			if (message.getInteger() == 17) {
 				deleteItems(context.getSender());
 				defaultOptions(context.getSender());
-				Methodes.teleportButton(context.getSender(), Methodes.venus_orbit, true);
+				Methodes.teleportButton(context.getSender(), Methodes.glacio_orbit, true);
 			}
 
 			context.setPacketHandled(true);

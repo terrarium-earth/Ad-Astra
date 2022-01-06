@@ -256,6 +256,9 @@ public class OverlayEvents {
                 } else if (Methodes.isWorld(world, Methodes.venus)) {
                     planet = new ResourceLocation(BeyondEarthMod.MODID, "textures/planet_bar/rocket_y_main_venus.png");
 
+                } else if (Methodes.isWorld(world, Methodes.glacio)) {
+                    planet = new ResourceLocation(BeyondEarthMod.MODID, "textures/planet_bar/rocket_y_main_glacio.png");
+
                 } else if (Methodes.isOrbitWorld(world)) {
                     planet = new ResourceLocation(BeyondEarthMod.MODID, "textures/planet_bar/rocket_y_main_orbit.png");
 

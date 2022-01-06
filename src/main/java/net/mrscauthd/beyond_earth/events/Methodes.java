@@ -69,6 +69,8 @@ public class Methodes {
     public static final ResourceKey<Level> mercury_orbit = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "mercury_orbit"));
     public static final ResourceKey<Level> venus = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "venus"));
     public static final ResourceKey<Level> venus_orbit = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "venus_orbit"));
+    public static final ResourceKey<Level> glacio = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "glacio"));
+    public static final ResourceKey<Level> glacio_orbit = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "glacio_orbit"));
     public static final ResourceKey<Level> overworld = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation("overworld"));
     public static final ResourceKey<Level> overworld_orbit = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation("overworld_orbit"));
 
@@ -77,7 +79,7 @@ public class Methodes {
 
             ServerLevel nextWorld = entity.getServer().getLevel(planet);
 
-            if (nextWorld != null) {
+            if (nextWorld != null && entity instanceof ServerPlayer) {
                 ((ServerPlayer) entity).connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.WIN_GAME, 0));
                 ((ServerPlayer) entity).teleportTo(nextWorld, entity.getX(), high, entity.getZ(), entity.yRotO, entity.xRotO);
                 ((ServerPlayer) entity).connection.send(new ClientboundPlayerAbilitiesPacket(entity.getAbilities()));
@@ -162,6 +164,24 @@ public class Methodes {
                 || Methodes.isWorld(world, mercury_orbit)
                 || Methodes.isWorld(world, venus)
                 || Methodes.isWorld(world, venus_orbit)
+                || Methodes.isWorld(world, glacio)
+                || Methodes.isWorld(world, glacio_orbit)
+                || Methodes.isWorld(world, overworld_orbit)) {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean isSpaceWorldWithoutOxygen(Level world) {
+        if (Methodes.isWorld(world, moon)
+                || Methodes.isWorld(world, moon_orbit)
+                || Methodes.isWorld(world, mars)
+                || Methodes.isWorld(world, mars_orbit)
+                || Methodes.isWorld(world, mercury)
+                || Methodes.isWorld(world, mercury_orbit)
+                || Methodes.isWorld(world, venus)
+                || Methodes.isWorld(world, venus_orbit)
+                || Methodes.isWorld(world, glacio_orbit)
                 || Methodes.isWorld(world, overworld_orbit)) {
             return true;
         }
@@ -214,6 +234,7 @@ public class Methodes {
         items.add(ModInit.TIER_1_ROCKET_ITEM.get());
         items.add(ModInit.TIER_2_ROCKET_ITEM.get());
         items.add(ModInit.TIER_3_ROCKET_ITEM.get());
+        items.add(ModInit.TIER_4_ROCKET_ITEM.get());
         items.add(ModInit.ROVER_ITEM.get());
 
         if (items.contains(item1) && items.contains(item2)) {
@@ -230,13 +251,13 @@ public class Methodes {
     }
 
     /**If a entity should not get Fire add it to the Tag "venus_fire"*/
-    public static void VenusFire(LivingEntity entity, ResourceKey<Level> planet1, ResourceKey<Level> planet2) {
+    public static void PlanetFire(LivingEntity entity, ResourceKey<Level> planet1, ResourceKey<Level> planet2) {
         Level level = entity.level;
 
         if (Methodes.isWorld(level, planet1) || Methodes.isWorld(level, planet2)) {
             if (!Methodes.nethriteSpaceSuitCheck(entity) && !entity.hasEffect(MobEffects.FIRE_RESISTANCE) && !entity.fireImmune() && (entity instanceof Mob)) {
                 if (!MinecraftForge.EVENT_BUS.post(new LivingSetFireInHotPlanetEvent(entity))) {
-                    if (!tagCheck(entity, BeyondEarthMod.MODID + ":entities/venus_fire")) {
+                    if (!tagCheck(entity, BeyondEarthMod.MODID + ":entities/planet_fire")) {
                         entity.setSecondsOnFire(10);
                     }
                 }
@@ -418,6 +439,9 @@ public class Methodes {
         if (player.getPersistentData().getString(BeyondEarthMod.MODID + ":rocket_type").equals("entity." + BeyondEarthMod.MODID + ".rocket_t3")) {
             itemStack = new ItemStack(ModInit.TIER_3_ROCKET_ITEM.get(),1);
         }
+        if (player.getPersistentData().getString(BeyondEarthMod.MODID + ":rocket_type").equals("entity." + BeyondEarthMod.MODID + ".rocket_t4")) {
+            itemStack = new ItemStack(ModInit.TIER_4_ROCKET_ITEM.get(),1);
+        }
 
         Methodes.rocketTeleport(player, planet, itemStack, SpaceStation);
     }
@@ -431,6 +455,9 @@ public class Methodes {
         }
         if (Methodes.isWorld(world, Methodes.mars_orbit)) {
             Methodes.landerTeleport(player, Methodes.mars);
+        }
+        if (Methodes.isWorld(world, Methodes.glacio_orbit)) {
+            Methodes.landerTeleport(player, Methodes.glacio);
         }
         if (Methodes.isWorld(world, Methodes.mercury_orbit)) {
             Methodes.landerTeleport(player, Methodes.mercury);
@@ -461,6 +488,10 @@ public class Methodes {
 
         if (world2 == Methodes.venus_orbit) {
             Methodes.worldTeleport(player, Methodes.venus, 450);
+        }
+
+        if (world2 == Methodes.glacio_orbit) {
+            Methodes.worldTeleport(player, Methodes.glacio, 450);
         }
     }
 

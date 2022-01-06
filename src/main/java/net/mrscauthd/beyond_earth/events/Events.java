@@ -1,6 +1,5 @@
 package net.mrscauthd.beyond_earth.events;
 
-import com.google.common.eventbus.DeadEvent;
 import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
@@ -10,8 +9,6 @@ import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.resources.sounds.ElytraOnPlayerSoundInstance;
 import net.minecraft.client.resources.sounds.MinecartSoundInstance;
 import net.minecraft.client.resources.sounds.RidingMinecartSoundInstance;
-import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.HumanoidArm;
@@ -89,7 +86,7 @@ public class Events {
         Methodes.VenusRain(entity, Methodes.venus);
 
         //Venus Fire
-        Methodes.VenusFire(entity, Methodes.venus, Methodes.mercury);
+        Methodes.PlanetFire(entity, Methodes.venus, Methodes.mercury);
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -117,8 +114,8 @@ public class Events {
         Item item2 = player.getMainHandItem().getItem();
 
         /**Cancel Event if it Hold a Vehicle in off hand*/
-        if (item == ModInit.TIER_1_ROCKET_ITEM.get() || item == ModInit.TIER_2_ROCKET_ITEM.get() || item == ModInit.TIER_3_ROCKET_ITEM.get() || item == ModInit.ROVER_ITEM.get()
-            || item2 == ModInit.TIER_1_ROCKET_ITEM.get() || item2 == ModInit.TIER_2_ROCKET_ITEM.get() || item2 == ModInit.TIER_3_ROCKET_ITEM.get() || item2 == ModInit.ROVER_ITEM.get()) {
+        if (item == ModInit.TIER_1_ROCKET_ITEM.get() || item == ModInit.TIER_2_ROCKET_ITEM.get() || item == ModInit.TIER_3_ROCKET_ITEM.get() || item == ModInit.TIER_4_ROCKET_ITEM.get() || item == ModInit.ROVER_ITEM.get()
+            || item2 == ModInit.TIER_1_ROCKET_ITEM.get() || item2 == ModInit.TIER_2_ROCKET_ITEM.get() || item2 == ModInit.TIER_3_ROCKET_ITEM.get() || item2 == ModInit.TIER_4_ROCKET_ITEM.get() || item2 == ModInit.ROVER_ITEM.get()) {
             event.setCanceled(true);
             return;
         }
@@ -181,11 +178,13 @@ public class Events {
                 if (item1 == ModInit.TIER_1_ROCKET_ITEM.get()
                         || item1 == ModInit.TIER_2_ROCKET_ITEM.get()
                         || item1 == ModInit.TIER_3_ROCKET_ITEM.get()
+                        || item1 == ModInit.TIER_4_ROCKET_ITEM.get()
                         || item1 == ModInit.ROVER_ITEM.get()
                         //Off Hand
                         || item2 == ModInit.TIER_1_ROCKET_ITEM.get()
                         || item2 == ModInit.TIER_2_ROCKET_ITEM.get()
                         || item2 == ModInit.TIER_3_ROCKET_ITEM.get()
+                        || item2 == ModInit.TIER_4_ROCKET_ITEM.get()
                         || item2 == ModInit.ROVER_ITEM.get()) {
                     model.rightArm.xRot = 10;
                     model.leftArm.xRot = 10;
@@ -214,6 +213,7 @@ public class Events {
             if (item1 == ModInit.TIER_1_ROCKET_ITEM.get()
                     || item1 == ModInit.TIER_2_ROCKET_ITEM.get()
                     || item1 == ModInit.TIER_3_ROCKET_ITEM.get()
+                    || item1 == ModInit.TIER_4_ROCKET_ITEM.get()
                     || item1 == ModInit.ROVER_ITEM.get()) {
 
                 if (event.getHandSide() == HumanoidArm.LEFT) {
@@ -225,6 +225,7 @@ public class Events {
             if (item2 == ModInit.TIER_1_ROCKET_ITEM.get()
                     || item2 == ModInit.TIER_2_ROCKET_ITEM.get()
                     || item2 == ModInit.TIER_3_ROCKET_ITEM.get()
+                    || item2 == ModInit.TIER_4_ROCKET_ITEM.get()
                     || item2 == ModInit.ROVER_ITEM.get()) {
 
                 if (event.getHandSide() == HumanoidArm.RIGHT) {
@@ -248,6 +249,8 @@ public class Events {
              || Methodes.isWorld(world, Methodes.mercury)
              || Methodes.isWorld(world, Methodes.mercury_orbit)
              || Methodes.isWorld(world, Methodes.venus_orbit)
+             || Methodes.isWorld(world, Methodes.glacio)
+             || Methodes.isWorld(world, Methodes.glacio_orbit)
              || Methodes.isWorld(world, Methodes.overworld_orbit)) {
                 world.thunderLevel = 0;
                 world.rainLevel = 0;
@@ -283,6 +286,7 @@ public class Events {
         }
     }
 
+    //TODO Remove if you change it to Entity
     @SubscribeEvent
     public static void interact(PlayerInteractEvent.EntityInteract event) {
         if (event.getItemStack().getItem() == Items.NAME_TAG) {
@@ -295,10 +299,10 @@ public class Events {
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void SpaceSounds(PlaySoundEvent event) {
-        if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.level != null && Methodes.checkSound(event.getSound().getSource()) && Methodes.isSpaceWorld(Minecraft.getInstance().player.level)) {
-            if (!(event.getSound() instanceof ElytraOnPlayerSoundInstance) && !(event.getSound() instanceof MinecartSoundInstance) && !(event.getSound() instanceof RidingMinecartSoundInstance)) {
+        if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.level != null && Methodes.checkSound(event.getSound().getSource()) && Methodes.isSpaceWorldWithoutOxygen(Minecraft.getInstance().player.level)) {
+            if (!(event.getSound() instanceof ElytraOnPlayerSoundInstance) && !(event.getSound() instanceof MinecartSoundInstance) && !(event.getSound() instanceof RidingMinecartSoundInstance) && event.getSound().getSound() != null) {
                 event.setSound(new SpaceSoundSystem(event.getSound()));
-            } else if (event.getSound() instanceof ElytraOnPlayerSoundInstance) {
+            } else if (event.getSound() instanceof ElytraOnPlayerSoundInstance && event.getSound().getSound() != null) {
                 event.setSound(new ElytraSpaceOnPlayerSoundInstance(Minecraft.getInstance().player));
             }
         }

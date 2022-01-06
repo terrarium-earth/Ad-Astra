@@ -9,9 +9,9 @@
   "has_ceiling": false,
   "coordinate_scale": 1,
   "ambient_light": 0,
-  "logical_height": 256,
+  "logical_height": 384,
   "infiniburn": "minecraft:infiniburn_overworld",
   "min_y": -64,
-  "height": 256,
+  "height": 384,
   "effects": "beyond_earth:mars"
 }

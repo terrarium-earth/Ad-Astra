@@ -23,6 +23,10 @@ public class Gravity {
             gravityMath(type, entity, mars, -2.0f);
         }
 
+        if (Methodes.isWorld(world, Methodes.glacio)) {
+            gravityMath(type, entity, mars, -2.0f);
+        }
+
         if (Methodes.isWorld(world, Methodes.mercury)) {
             gravityMath(type, entity, mercury, -2.5f);
         }

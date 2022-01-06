@@ -308,7 +308,7 @@ public class JeiPlugin implements IModPlugin {
 		// RocketTier3Gui
 		registration.addRecipeCatalyst(new ItemStack(ModInit.TIER_3_ROCKET_ITEM.get()), Tier3RocketJeiCategory.Uid);
 		//
-		//TODO registration.addRecipeCatalyst(new ItemStack(ModInit.TIER_4_ROCKET_ITEM.get()), Tier3RocketJeiCategory.Uid);
+		registration.addRecipeCatalyst(new ItemStack(ModInit.TIER_4_ROCKET_ITEM.get()), Tier4RocketJeiCategory.Uid);
 		// Compressor
 		registration.addRecipeCatalyst(new ItemStack(ModInit.COMPRESSOR_BLOCK.get()), CompressorJeiCategory.Uid);
 		// FuelMaker

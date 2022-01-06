@@ -8,9 +8,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.ItemSupplier;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
@@ -22,26 +20,19 @@ import net.mrscauthd.beyond_earth.ModInit;
 
 import java.util.Random;
 
-@OnlyIn(value = Dist.CLIENT, _interface = ItemSupplier.class)
-public class AlienSpitEntity extends AbstractArrow implements ItemSupplier {
-    public AlienSpitEntity(EntityType<? extends AlienSpitEntity> type, Level world) {
+@OnlyIn(value = Dist.CLIENT)
+public class IceSpitEntity extends AbstractArrow {
+    public IceSpitEntity(EntityType<? extends IceSpitEntity> type, Level world) {
         super(type, world);
     }
 
-    public AlienSpitEntity(EntityType<? extends AlienSpitEntity> type, LivingEntity entity, Level world) {
+    public IceSpitEntity(EntityType<? extends IceSpitEntity> type, LivingEntity entity, Level world) {
         super(type, entity, world);
     }
 
     @Override
     public Packet<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
-    }
-
-    //TODO ADD ICE SHARD BACK (AS MODEL)
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    public ItemStack getItem() {
-        return new ItemStack(Items.PRISMARINE_SHARD, 1);
     }
 
     @Override
@@ -75,8 +66,8 @@ public class AlienSpitEntity extends AbstractArrow implements ItemSupplier {
         }
     }
 
-    public static AlienSpitEntity shoot(LivingEntity entity, LivingEntity target, int damage) {
-        AlienSpitEntity entityarrow = new AlienSpitEntity(ModInit.ALIEN_SPIT_ENTITY.get(), entity, entity.level);
+    public static IceSpitEntity shoot(LivingEntity entity, LivingEntity target, int damage) {
+        IceSpitEntity entityarrow = new IceSpitEntity(ModInit.ICE_SPIT_ENTITY.get(), entity, entity.level);
         double d0 = target.getY() + (double) target.getEyeHeight() - 1.1;
         double d1 = target.getX() - entity.getX();
         double d3 = target.getZ() - entity.getZ();

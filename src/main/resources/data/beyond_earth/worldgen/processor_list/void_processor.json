@@ -1,0 +1,7 @@
+{
+  "processors": [
+    {
+      "processor_type": "beyond_earth:structure_void_processor"
+    }
+  ]
+}

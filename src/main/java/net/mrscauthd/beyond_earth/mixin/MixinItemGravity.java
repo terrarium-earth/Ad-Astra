@@ -34,6 +34,10 @@ public abstract class MixinItemGravity {
                 itemGravityMath(w,0.06);
             }
 
+            if (Methodes.isWorld(w.level, Methodes.glacio)) {
+                itemGravityMath(w,0.06);
+            }
+
             if (Methodes.isOrbitWorld(w.level)) {
                 itemGravityMath(w,0.05);
             }

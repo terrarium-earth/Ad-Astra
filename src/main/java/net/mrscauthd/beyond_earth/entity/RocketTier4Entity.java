@@ -171,7 +171,7 @@ public class RocketTier4Entity extends PathfinderMob {
 	@Nullable
 	@Override
 	public ItemStack getPickResult() {
-		ItemStack itemStack = new ItemStack(ModInit.TIER_3_ROCKET_ITEM.get(), 1);
+		ItemStack itemStack = new ItemStack(ModInit.TIER_4_ROCKET_ITEM.get(), 1);
 		itemStack.getOrCreateTag().putInt(BeyondEarthMod.MODID + ":fuel", this.getEntityData().get(FUEL));
 		itemStack.getOrCreateTag().putInt(BeyondEarthMod.MODID + ":buckets", this.getEntityData().get(BUCKETS));
 
@@ -238,7 +238,7 @@ public class RocketTier4Entity extends PathfinderMob {
 
 	protected void spawnRocketItem() {
 		if (!level.isClientSide) {
-			ItemStack itemStack = new ItemStack(ModInit.TIER_3_ROCKET_ITEM.get(), 1);
+			ItemStack itemStack = new ItemStack(ModInit.TIER_4_ROCKET_ITEM.get(), 1);
 			itemStack.getOrCreateTag().putInt(BeyondEarthMod.MODID + ":fuel", this.getEntityData().get(FUEL));
 			itemStack.getOrCreateTag().putInt(BeyondEarthMod.MODID + ":buckets", this.getEntityData().get(BUCKETS));
 
@@ -388,8 +388,8 @@ public class RocketTier4Entity extends PathfinderMob {
 			if (this.entityData.get(START_TIMER) == 200) {
 				if (level instanceof ServerLevel) {
 					for (ServerPlayer p : ((ServerLevel) level).getServer().getPlayerList().getPlayers()) {
-						float f2 = Mth.cos(this.getYRot() * ((float)Math.PI / 180F)) * (0.6F + 0.21F * (float)1);
-						float f3 = Mth.sin(this.getYRot() * ((float)Math.PI / 180F)) * (0.6F + 0.21F * (float)1);
+						float f2 = Mth.cos(this.getYRot() * ((float)Math.PI / 180F)) * (0.7F + 0.21F * (float)1);
+						float f3 = Mth.sin(this.getYRot() * ((float)Math.PI / 180F)) * (0.7F + 0.21F * (float)1);
 
 						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInit.LARGE_FLAME_PARTICLE.get(), true, this.getX() - vec.x, this.getY() - vec.y - 1.9, this.getZ() - vec.z, 20, 0.1, 0.1, 0.1, 0.001);
 						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInit.LARGE_SMOKE_PARTICLE.get(), true, this.getX() - vec.x, this.getY() - vec.y - 2.9, this.getZ() - vec.z, 10, 0.1, 0.1, 0.1, 0.04);
