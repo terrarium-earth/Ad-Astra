@@ -300,9 +300,9 @@ public class Events {
     @SubscribeEvent
     public static void SpaceSounds(PlaySoundEvent event) {
         if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.level != null && Methodes.checkSound(event.getSound().getSource()) && Methodes.isSpaceWorldWithoutOxygen(Minecraft.getInstance().player.level)) {
-            if (!(event.getSound() instanceof ElytraOnPlayerSoundInstance) && !(event.getSound() instanceof MinecartSoundInstance) && !(event.getSound() instanceof RidingMinecartSoundInstance) && event.getSound().getSound() != null) {
+            if (event.getSound().getSound() != null && !(event.getSound() instanceof ElytraOnPlayerSoundInstance) && !(event.getSound() instanceof MinecartSoundInstance) && !(event.getSound() instanceof RidingMinecartSoundInstance)) {
                 event.setSound(new SpaceSoundSystem(event.getSound()));
-            } else if (event.getSound() instanceof ElytraOnPlayerSoundInstance && event.getSound().getSound() != null) {
+            } else if (event.getSound().getSound() != null && event.getSound() instanceof ElytraOnPlayerSoundInstance) {
                 event.setSound(new ElytraSpaceOnPlayerSoundInstance(Minecraft.getInstance().player));
             }
         }

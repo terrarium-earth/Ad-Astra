@@ -67,13 +67,14 @@ public class Tier4RocketItem extends Item {
 
         if (state.getBlock() instanceof RocketLaunchPad && state.getValue(RocketLaunchPad.STAGE)) {
 
-            //TODO MAKE IT HEIGHER
             BlockPos pos1 = new BlockPos(x,y + 1, z);
             BlockPos pos2 = new BlockPos(x,y + 2, z);
             BlockPos pos3 = new BlockPos(x,y + 3, z);
             BlockPos pos4 = new BlockPos(x,y + 4, z);
+            BlockPos pos5 = new BlockPos(x,y + 5, z);
+            BlockPos pos6 = new BlockPos(x,y + 6, z);
 
-            if (world.getBlockState(pos1).isAir() && world.getBlockState(pos2).isAir() && world.getBlockState(pos3).isAir() && world.getBlockState(pos4).isAir()) {
+            if (world.getBlockState(pos1).isAir() && world.getBlockState(pos2).isAir() && world.getBlockState(pos3).isAir() && world.getBlockState(pos4).isAir() && world.getBlockState(pos5).isAir() && world.getBlockState(pos6).isAir()) {
 
                 AABB scanAbove = new AABB(x - 0, y - 0, z - 0, x + 1, y + 1, z + 1);
                 List<Entity> entities = player.getCommandSenderWorld().getEntitiesOfClass(Entity.class, scanAbove);

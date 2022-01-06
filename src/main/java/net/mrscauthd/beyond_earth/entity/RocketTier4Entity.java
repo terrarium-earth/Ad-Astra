@@ -165,7 +165,7 @@ public class RocketTier4Entity extends PathfinderMob {
 
 	@Override
 	public double getPassengersRidingOffset() {
-		return super.getPassengersRidingOffset() - 1.90;
+		return super.getPassengersRidingOffset() - 2.85;
 	}
 
 	@Nullable
