@@ -251,7 +251,6 @@ public class Events {
              || Methods.isWorld(world, Methods.mercury)
              || Methods.isWorld(world, Methods.mercury_orbit)
              || Methods.isWorld(world, Methods.venus_orbit)
-             || Methods.isWorld(world, Methods.glacio)
              || Methods.isWorld(world, Methods.glacio_orbit)
              || Methods.isWorld(world, Methods.overworld_orbit)) {
                 world.thunderLevel = 0;
