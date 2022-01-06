@@ -75,7 +75,7 @@ public class OverlayEvents {
         /**Disable Food Overlay*/
         if (event.getOverlay() == ForgeIngameGui.MOUNT_HEALTH_ELEMENT) {
             Player entity = Minecraft.getInstance().player;
-            if (Methodes.AllVehiclesOr(entity.getVehicle())) {
+            if (Methods.AllVehiclesOr(entity.getVehicle())) {
                 event.setCanceled(true);
             }
         }
@@ -117,7 +117,7 @@ public class OverlayEvents {
 
             startOverlaySettings();
 
-            if (Methodes.isRocket(entity.getVehicle())) {
+            if (Methods.isRocket(entity.getVehicle())) {
                 int timer = 0;
 
                 if (entity.getVehicle() instanceof RocketTier1Entity) {
@@ -228,7 +228,7 @@ public class OverlayEvents {
 
             startOverlaySettings();
 
-            if (Methodes.isRocket(entity.getVehicle()) || entity.getVehicle() instanceof LanderEntity) {
+            if (Methods.isRocket(entity.getVehicle()) || entity.getVehicle() instanceof LanderEntity) {
                 int width = event.getWindow().getGuiScaledWidth();
                 int high = event.getWindow().getGuiScaledHeight();
 
@@ -244,22 +244,22 @@ public class OverlayEvents {
 
                 ResourceLocation planet;
 
-                if (Methodes.isWorld(world, Methodes.moon)) {
+                if (Methods.isWorld(world, Methods.moon)) {
                     planet = new ResourceLocation(BeyondEarthMod.MODID, "textures/planet_bar/rocket_y_main_moon.png");
 
-                } else if (Methodes.isWorld(world, Methodes.mars)) {
+                } else if (Methods.isWorld(world, Methods.mars)) {
                     planet = new ResourceLocation(BeyondEarthMod.MODID, "textures/planet_bar/rocket_y_main_mars.png");
 
-                } else if (Methodes.isWorld(world, Methodes.mercury)) {
+                } else if (Methods.isWorld(world, Methods.mercury)) {
                     planet = new ResourceLocation(BeyondEarthMod.MODID, "textures/planet_bar/rocket_y_main_mercury.png");
 
-                } else if (Methodes.isWorld(world, Methodes.venus)) {
+                } else if (Methods.isWorld(world, Methods.venus)) {
                     planet = new ResourceLocation(BeyondEarthMod.MODID, "textures/planet_bar/rocket_y_main_venus.png");
 
-                } else if (Methodes.isWorld(world, Methodes.glacio)) {
+                } else if (Methods.isWorld(world, Methods.glacio)) {
                     planet = new ResourceLocation(BeyondEarthMod.MODID, "textures/planet_bar/rocket_y_main_glacio.png");
 
-                } else if (Methodes.isOrbitWorld(world)) {
+                } else if (Methods.isOrbitWorld(world)) {
                     planet = new ResourceLocation(BeyondEarthMod.MODID, "textures/planet_bar/rocket_y_main_orbit.png");
 
                 } else {

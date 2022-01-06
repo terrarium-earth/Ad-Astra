@@ -57,7 +57,7 @@ import net.mrscauthd.beyond_earth.crafting.OxygenLoaderRecipe;
 import net.mrscauthd.beyond_earth.crafting.RocketPart;
 import net.mrscauthd.beyond_earth.crafting.WorkbenchingRecipe;
 import net.mrscauthd.beyond_earth.entity.*;
-import net.mrscauthd.beyond_earth.events.Methodes;
+import net.mrscauthd.beyond_earth.events.Methods;
 import net.mrscauthd.beyond_earth.fluid.FluidUtil2;
 import net.mrscauthd.beyond_earth.gauge.GaugeTextHelper;
 import net.mrscauthd.beyond_earth.gauge.GaugeValueHelper;
@@ -252,7 +252,7 @@ public class JeiPlugin implements IModPlugin {
 
 	// Fuel Loading
 	private List<Fluid> generateFuelTagFluids() {
-		return ForgeRegistries.FLUIDS.getValues().stream().filter(f -> f.isSource(f.defaultFluidState()) && Methodes.tagCheck(f, ModInit.FLUID_VEHICLE_FUEL_TAG)).collect(Collectors.toList());
+		return ForgeRegistries.FLUIDS.getValues().stream().filter(f -> f.isSource(f.defaultFluidState()) && Methods.tagCheck(f, ModInit.FLUID_VEHICLE_FUEL_TAG)).collect(Collectors.toList());
 	}
 
 	private List<FuelLoadingRecipe> generateFuelLoadingRecipes() {

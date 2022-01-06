@@ -15,27 +15,27 @@ public class Gravity {
         double venus = 0.04;
         double orbit = 0.02;
 
-        if (Methodes.isWorld(world, Methodes.moon)) {
+        if (Methods.isWorld(world, Methods.moon)) {
             gravityMath(type, entity, moon, -2.5f);
         }
 
-        if (Methodes.isWorld(world, Methodes.mars)) {
+        if (Methods.isWorld(world, Methods.mars)) {
             gravityMath(type, entity, mars, -2.0f);
         }
 
-        if (Methodes.isWorld(world, Methodes.glacio)) {
+        if (Methods.isWorld(world, Methods.glacio)) {
             gravityMath(type, entity, mars, -2.0f);
         }
 
-        if (Methodes.isWorld(world, Methodes.mercury)) {
+        if (Methods.isWorld(world, Methods.mercury)) {
             gravityMath(type, entity, mercury, -2.5f);
         }
 
-        if (Methodes.isWorld(world, Methodes.venus)) {
+        if (Methods.isWorld(world, Methods.venus)) {
             gravityMath(type, entity, venus, -2.0f);
         }
 
-        if (Methodes.isOrbitWorld(world)) {
+        if (Methods.isOrbitWorld(world)) {
             gravityMath(type, entity, orbit, -2.5f);
         }
     }
@@ -53,7 +53,7 @@ public class Gravity {
     }
 
     public static boolean livingGravityCheck(LivingEntity entity) {
-        if (!entity.isFallFlying() && !entity.isInWater() && !entity.isInLava() && !entity.isNoGravity() && !(entity instanceof Player) && !Methodes.AllVehiclesOr(entity) && !entity.hasEffect(MobEffects.SLOW_FALLING) && !entity.hasEffect(MobEffects.LEVITATION)) {
+        if (!entity.isFallFlying() && !entity.isInWater() && !entity.isInLava() && !entity.isNoGravity() && !(entity instanceof Player) && !Methods.AllVehiclesOr(entity) && !entity.hasEffect(MobEffects.SLOW_FALLING) && !entity.hasEffect(MobEffects.LEVITATION)) {
             return true;
         }
 

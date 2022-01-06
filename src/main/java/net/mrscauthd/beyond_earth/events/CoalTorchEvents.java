@@ -30,7 +30,7 @@ public class CoalTorchEvents {
 
         BlockPos pos = new BlockPos(x,y,z);
 
-        if (Methodes.isSpaceWorld(world)) {
+        if (Methods.isSpaceWorld(world)) {
 
             //Remove Fire
             if (world.getBlockState(pos).getBlock() == Blocks.FIRE.defaultBlockState().getBlock()) {

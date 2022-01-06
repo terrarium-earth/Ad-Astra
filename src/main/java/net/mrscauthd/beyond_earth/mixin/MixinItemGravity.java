@@ -1,10 +1,8 @@
 package net.mrscauthd.beyond_earth.mixin;
 
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraftforge.common.MinecraftForge;
-import net.mrscauthd.beyond_earth.BeyondEarthMod;
-import net.mrscauthd.beyond_earth.events.Methodes;
+import net.mrscauthd.beyond_earth.events.Methods;
 import net.mrscauthd.beyond_earth.events.forgeevents.ItemGravityEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -18,27 +16,27 @@ public abstract class MixinItemGravity {
         ItemEntity w = (ItemEntity) ((Object) this);
 
         if (GravityCheckItem(w)) {
-            if (Methodes.isWorld(w.level, Methodes.moon)) {
+            if (Methods.isWorld(w.level, Methods.moon)) {
                 itemGravityMath(w,0.05);
             }
 
-            if (Methodes.isWorld(w.level, Methodes.mars)) {
+            if (Methods.isWorld(w.level, Methods.mars)) {
                 itemGravityMath(w,0.06);
             }
 
-            if (Methodes.isWorld(w.level, Methodes.mercury)) {
+            if (Methods.isWorld(w.level, Methods.mercury)) {
                 itemGravityMath(w,0.05);
             }
 
-            if (Methodes.isWorld(w.level, Methodes.venus)) {
+            if (Methods.isWorld(w.level, Methods.venus)) {
                 itemGravityMath(w,0.06);
             }
 
-            if (Methodes.isWorld(w.level, Methodes.glacio)) {
+            if (Methods.isWorld(w.level, Methods.glacio)) {
                 itemGravityMath(w,0.06);
             }
 
-            if (Methodes.isOrbitWorld(w.level)) {
+            if (Methods.isOrbitWorld(w.level)) {
                 itemGravityMath(w,0.05);
             }
         }
