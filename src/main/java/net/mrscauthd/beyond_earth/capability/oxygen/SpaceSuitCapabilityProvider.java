@@ -1,4 +1,4 @@
-package net.mrscauthd.beyond_earth.capability;
+package net.mrscauthd.beyond_earth.capability.oxygen;
 
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -6,6 +6,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
+import net.mrscauthd.beyond_earth.capability.oxygen.CapabilityOxygen;
+import net.mrscauthd.beyond_earth.capability.oxygen.IOxygenStorage;
+import net.mrscauthd.beyond_earth.capability.oxygen.IOxygenStorageHolder;
+import net.mrscauthd.beyond_earth.capability.oxygen.OxygenStorage;
 
 public class SpaceSuitCapabilityProvider implements ICapabilityProvider, IOxygenStorageHolder {
 

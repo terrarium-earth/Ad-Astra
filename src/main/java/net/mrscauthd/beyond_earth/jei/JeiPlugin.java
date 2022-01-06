@@ -47,7 +47,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.ModInit;
-import net.mrscauthd.beyond_earth.capability.OxygenUtil;
+import net.mrscauthd.beyond_earth.capability.oxygen.OxygenUtil;
 import net.mrscauthd.beyond_earth.crafting.BeyondEarthRecipeTypes;
 import net.mrscauthd.beyond_earth.crafting.CompressingRecipe;
 import net.mrscauthd.beyond_earth.crafting.FuelRefiningRecipe;

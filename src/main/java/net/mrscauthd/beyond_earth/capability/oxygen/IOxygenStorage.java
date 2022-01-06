@@ -1,4 +1,4 @@
-package net.mrscauthd.beyond_earth.capability;
+package net.mrscauthd.beyond_earth.capability.oxygen;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.util.INBTSerializable;

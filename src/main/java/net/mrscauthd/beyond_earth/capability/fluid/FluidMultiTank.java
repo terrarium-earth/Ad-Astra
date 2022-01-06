@@ -1,4 +1,4 @@
-package net.mrscauthd.beyond_earth.capability;
+package net.mrscauthd.beyond_earth.capability.fluid;
 
 import java.util.Collections;
 import java.util.List;

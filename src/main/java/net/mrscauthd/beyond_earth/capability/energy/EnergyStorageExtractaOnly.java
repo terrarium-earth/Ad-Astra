@@ -1,4 +1,4 @@
-package net.mrscauthd.beyond_earth.capability;
+package net.mrscauthd.beyond_earth.capability.energy;
 
 import net.minecraftforge.energy.IEnergyStorage;
 

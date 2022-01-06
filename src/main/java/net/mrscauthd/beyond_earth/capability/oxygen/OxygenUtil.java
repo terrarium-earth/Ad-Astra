@@ -1,4 +1,4 @@
-package net.mrscauthd.beyond_earth.capability;
+package net.mrscauthd.beyond_earth.capability.oxygen;
 
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandlerModifiable;

@@ -11,6 +11,7 @@ import net.minecraft.client.resources.sounds.MinecartSoundInstance;
 import net.minecraft.client.resources.sounds.RidingMinecartSoundInstance;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -25,6 +26,7 @@ import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.client.event.RenderArmEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
@@ -35,6 +37,14 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.ModInit;
+import net.mrscauthd.beyond_earth.capability.air.AirUtil;
+import net.mrscauthd.beyond_earth.capability.air.CapabilityAir;
+import net.mrscauthd.beyond_earth.capability.air.IAirStorage;
+import net.mrscauthd.beyond_earth.capability.air.PlayerAirCapabilityProvider;
+import net.mrscauthd.beyond_earth.capability.oxygen.CapabilityOxygen;
+import net.mrscauthd.beyond_earth.capability.oxygen.IOxygenStorage;
+import net.mrscauthd.beyond_earth.capability.oxygen.OxygenUtil;
+import net.mrscauthd.beyond_earth.capability.oxygen.SpaceSuitCapabilityProvider;
 import net.mrscauthd.beyond_earth.entity.*;
 import net.mrscauthd.beyond_earth.events.forgeevents.RenderHandItemEvent;
 import net.mrscauthd.beyond_earth.events.forgeevents.SetupLivingBipedAnimEvent;
@@ -64,6 +74,13 @@ public class Events {
 
             //Drop Off Hand Item
             Methods.DropRocket(player);
+
+            IAirStorage airStorage2 = AirUtil.getEntityAirStorage(event.player);
+            //airStorage2.setAirStored(300);
+
+            IOxygenStorage airStorage = OxygenUtil.getItemStackOxygenStorage(player.getItemBySlot(EquipmentSlot.CHEST));
+
+            System.out.println(airStorage.getOxygenStored() + " " + airStorage2.getAirStored());
 
             //Player orbit Fall Teleport
             if (player.getY() < 1 && !(player.getVehicle() instanceof LanderEntity)) {
@@ -314,6 +331,13 @@ public class Events {
             ((Player) event.getEntity()).closeContainer();
             Methods.cleanUpPlayerNBT((Player) event.getEntity());
             event.getEntity().setNoGravity(false);
+        }
+    }
+
+    @SubscribeEvent
+    public static void attachCapabilitiesEntity(AttachCapabilitiesEvent<Entity> event) {
+        if (event.getObject() instanceof Player) {
+            event.addCapability(new ResourceLocation(PlayerAirCapabilityProvider.KEY_AIR), new PlayerAirCapabilityProvider((Player) event.getObject(), 300));
         }
     }
 }

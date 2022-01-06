@@ -9,7 +9,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
-import net.mrscauthd.beyond_earth.capability.IOxygenStorage;
+import net.mrscauthd.beyond_earth.capability.oxygen.IOxygenStorage;
 
 public class GaugeTextHelper {
 

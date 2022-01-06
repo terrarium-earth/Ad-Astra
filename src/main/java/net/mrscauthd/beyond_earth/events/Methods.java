@@ -49,8 +49,8 @@ import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.ModInit;
-import net.mrscauthd.beyond_earth.capability.IOxygenStorage;
-import net.mrscauthd.beyond_earth.capability.OxygenUtil;
+import net.mrscauthd.beyond_earth.capability.oxygen.IOxygenStorage;
+import net.mrscauthd.beyond_earth.capability.oxygen.OxygenUtil;
 import net.mrscauthd.beyond_earth.entity.*;
 import net.mrscauthd.beyond_earth.events.forgeevents.LivingSetFireInHotPlanetEvent;
 import net.mrscauthd.beyond_earth.events.forgeevents.LivingSetVenusRainEvent;
@@ -496,7 +496,7 @@ public class Methods {
     }
 
 	public static void extractArmorOxygenUsingTimer(ItemStack itemstack, Player player) {
-		if (!player.getAbilities().instabuild && !player.isSpectator() && Methods.spaceSuitCheckBoth(player) && Config.PlayerOxygenSystem) {
+		if (!player.getAbilities().instabuild && !player.isSpectator() && Methods.spaceSuitCheckBoth(player) && !player.hasEffect(ModInit.OXYGEN_EFFECT.get()) && Config.PlayerOxygenSystem && (Methods.isSpaceWorldWithoutOxygen(player.level) || player.isEyeInFluid(FluidTags.WATER))) {
 			IOxygenStorage oxygenStorage = OxygenUtil.getItemStackOxygenStorage(itemstack);
 
             CompoundTag persistentData = player.getPersistentData();
@@ -504,7 +504,7 @@ public class Methods {
 			int oxygenTimer = persistentData.getInt(key);
 			oxygenTimer++;
 
-			if (oxygenStorage.getOxygenStored() > 0 && oxygenTimer > 3 && !player.hasEffect(ModInit.OXYGEN_EFFECT.get())) {
+			if (oxygenStorage.getOxygenStored() > 0 && oxygenTimer > 3) {
 				oxygenStorage.extractOxygen(1, false);
 				oxygenTimer = 0;
 			}
