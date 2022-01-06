@@ -2,11 +2,13 @@ package net.mrscauthd.beyond_earth.entity.renderer.iceshard;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Vector3f;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
@@ -27,6 +29,14 @@ public class IceShardRenderer extends EntityRenderer<IceSpitEntity> {
         p_114531_.pushPose();
         p_114531_.scale(0.5f,0.5f,0.5f);
         p_114531_.translate(0, -0.5f, 0);
+        p_114531_.mulPose(Vector3f.YP.rotationDegrees(Mth.lerp(p_114530_, p_114528_.yRotO, p_114528_.getYRot()) - 90.0F));
+        p_114531_.mulPose(Vector3f.ZP.rotationDegrees(Mth.lerp(p_114530_, p_114528_.xRotO, p_114528_.getXRot())));
+        float f9 = (float)p_114528_.shakeTime - p_114530_;
+        if (f9 > 0.0F) {
+            float f10 = -Mth.sin(f9 * 3.0F) * f9;
+            p_114531_.mulPose(Vector3f.ZP.rotationDegrees(f10));
+        }
+
         VertexConsumer vertexconsumer = p_114532_.getBuffer(this.model.renderType(TEXTURE_LOCATION));
         this.model.renderToBuffer(p_114531_, vertexconsumer, p_114533_, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
         p_114531_.popPose();

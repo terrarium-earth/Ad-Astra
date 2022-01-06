@@ -14,7 +14,7 @@ public class OxygenSystem {
 
     public static void OxygenSystem(Player entity) {
         Level world = entity.getLevel();
-        if (Config.PlayerOxygenSystem && Methodes.isSpaceWorld(world) && !entity.isSpectator() && !entity.getAbilities().instabuild) {
+        if (Config.PlayerOxygenSystem && Methodes.isSpaceWorldWithoutOxygen(world) && !entity.isSpectator() && !entity.getAbilities().instabuild) {
 
             if (entity.getAirSupply() < 1) {
                 Methodes.OxygenDamage(entity);
