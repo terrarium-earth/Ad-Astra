@@ -115,6 +115,7 @@ public class ClientEventBusMercury {
                         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
                         //ROT
+                        p_181410_.mulPose(Vector3f.YP.rotationDegrees(-90.0F));
                         p_181410_.mulPose(Vector3f.XP.rotationDegrees(level.getTimeOfDay(p_181412_) * 360.0F));
                         Matrix4f matrix4f1 = p_181410_.last().pose();
 
