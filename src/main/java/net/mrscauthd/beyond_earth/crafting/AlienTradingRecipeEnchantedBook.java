@@ -24,9 +24,9 @@ import net.mrscauthd.beyond_earth.ModInit;
 
 public class AlienTradingRecipeEnchantedBook extends AlienTradingRecipeItemStackBase {
 
-	private int costBaseLevelMultiplier = 10;
+	private int costBaseLevelMultiplier = 3;
 	private int costRangeBase = 5;
-	private int costRangeLevelMultiplier = 3;
+	private int costRangeLevelMultiplier = 10;
 	private int costTreasureOnlyMultiplier = 2;
 
 	public AlienTradingRecipeEnchantedBook(ResourceLocation id, JsonObject json) {
@@ -65,8 +65,8 @@ public class AlienTradingRecipeEnchantedBook extends AlienTradingRecipeItemStack
 
 		ItemStack costA = this.getCostA();
 		ItemStack costB = this.getCostB();
-		int cost = costA.getCount() + (level * this.getCostRangeLevelMultiplier());
-		int bound = this.getCostRangeBase() + (level * this.getCostBaseLevelMultiplier());
+		int cost = costA.getCount() + (level * this.getCostBaseLevelMultiplier());
+		int bound = this.getCostRangeBase() + (level * this.getCostRangeLevelMultiplier());
 
 		if (bound > 0) {
 			cost += rand.nextInt(bound);
