@@ -5,9 +5,9 @@
 	"xp": 10,
 	"priceMultiplier": 0.2,
 	"costA": {
-		"item": "minecraft:emerald"
+		"item": "minecraft:emerald",
+		"count": 2
 	},
-	"costBase": 2,
 	"result": {
 		"item": "minecraft:iron_shovel"
 	}

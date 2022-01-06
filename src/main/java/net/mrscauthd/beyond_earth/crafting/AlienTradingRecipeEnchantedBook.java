@@ -15,66 +15,46 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
-import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.mrscauthd.beyond_earth.ModInit;
 
-public class AlienTradingRecipeEnchantedBook extends AlienTradingRecipe {
-	
-	private int costBase = 2;
+public class AlienTradingRecipeEnchantedBook extends AlienTradingRecipeItemStackBase {
+
 	private int costBaseLevelMultiplier = 10;
 	private int costRangeBase = 5;
 	private int costRangeLevelMultiplier = 3;
 	private int costTreasureOnlyMultiplier = 2;
 
-	private ItemStack costA;
-	private ItemStack costB;
-
 	public AlienTradingRecipeEnchantedBook(ResourceLocation id, JsonObject json) {
 		super(id, json);
 
-		this.costBase = GsonHelper.getAsInt(json, "costBase", this.costBase);
 		this.costBaseLevelMultiplier = GsonHelper.getAsInt(json, "costBaseLevelMultiplier", this.costBaseLevelMultiplier);
 		this.costRangeBase = GsonHelper.getAsInt(json, "costRangeBase", this.costRangeBase);
 		this.costRangeLevelMultiplier = GsonHelper.getAsInt(json, "costRangeLevelMultiplier", this.costRangeLevelMultiplier);
 		this.costTreasureOnlyMultiplier = GsonHelper.getAsInt(json, "costTreasureOnlyMultiplier", this.costTreasureOnlyMultiplier);
-
-		this.costA = new ItemStack(Items.EMERALD);
-		this.costB = new ItemStack(Items.BOOK);
-		this.costA = json.has("costA") ? CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(json, "costA"), true) : this.costA;
-		this.costB = json.has("costB") ? CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(json, "costB"), true) : this.costB;
 	}
 
 	public AlienTradingRecipeEnchantedBook(ResourceLocation id, FriendlyByteBuf buffer) {
 		super(id, buffer);
 
-		this.costBase = buffer.readInt();
 		this.costBaseLevelMultiplier = buffer.readInt();
 		this.costRangeBase = buffer.readInt();
 		this.costRangeLevelMultiplier = buffer.readInt();
 		this.costTreasureOnlyMultiplier = buffer.readInt();
-
-		this.costA = buffer.readItem();
-		this.costB = buffer.readItem();
 	}
 
 	@Override
 	public void write(FriendlyByteBuf buffer) {
 		super.write(buffer);
 
-		buffer.writeInt(this.costBase);
 		buffer.writeInt(this.costBaseLevelMultiplier);
 		buffer.writeInt(this.costRangeBase);
 		buffer.writeInt(this.costRangeLevelMultiplier);
 		buffer.writeInt(this.costTreasureOnlyMultiplier);
-
-		buffer.writeItem(this.costA);
-		buffer.writeItem(this.costB);
 	}
 
 	@Override
@@ -83,7 +63,9 @@ public class AlienTradingRecipeEnchantedBook extends AlienTradingRecipe {
 		Enchantment enchantment = list.get(rand.nextInt(list.size()));
 		int level = Mth.nextInt(rand, enchantment.getMinLevel(), enchantment.getMaxLevel());
 
-		int cost = this.getCostBase() + (level * this.getCostRangeLevelMultiplier());
+		ItemStack costA = this.getCostA();
+		ItemStack costB = this.getCostB();
+		int cost = costA.getCount() + (level * this.getCostRangeLevelMultiplier());
 		int bound = this.getCostRangeBase() + (level * this.getCostBaseLevelMultiplier());
 
 		if (bound > 0) {
@@ -94,14 +76,9 @@ public class AlienTradingRecipeEnchantedBook extends AlienTradingRecipe {
 			cost *= this.getCostTreasureOnlyMultiplier();
 		}
 
-		ItemStack costA = this.getCostA().copy();
 		costA.setCount(Math.min(cost, costA.getMaxStackSize()));
 		ItemStack itemstack = EnchantedBookItem.createForEnchantment(new EnchantmentInstance(enchantment, level));
-		return Triple.of(costA, this.getCostB(), itemstack);
-	}
-
-	public int getCostBase() {
-		return this.costBase;
+		return Triple.of(costA, costB, itemstack);
 	}
 
 	public int getCostBaseLevelMultiplier() {
@@ -118,14 +95,6 @@ public class AlienTradingRecipeEnchantedBook extends AlienTradingRecipe {
 
 	public int getCostTreasureOnlyMultiplier() {
 		return this.costTreasureOnlyMultiplier;
-	}
-
-	public ItemStack getCostA() {
-		return this.costA.copy();
-	}
-
-	public ItemStack getCostB() {
-		return this.costB.copy();
 	}
 
 	@Override

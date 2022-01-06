@@ -4,7 +4,8 @@
 	"level": 4,
 	"xp": 15,
 	"costA": {
-		"item": "minecraft:emerald"
+		"item": "minecraft:emerald",
+		"count": 2
 	},
 	"costB": {
 		"item": "minecraft:book"

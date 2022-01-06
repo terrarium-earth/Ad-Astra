@@ -4,9 +4,9 @@
 	"level": 1,
 	"xp": 1,
 	"costA": {
-		"item": "minecraft:emerald"
+		"item": "minecraft:emerald",
+		"count": 2
 	},
-	"costBase": 2,
 	"result": {
 		"item": "minecraft:iron_sword"
 	}

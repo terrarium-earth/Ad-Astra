@@ -19,6 +19,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.mrscauthd.beyond_earth.ModInit;
 
 public class AlienTradingRecipePotionedItem extends AlienTradingRecipeItemStack {
+
 	public AlienTradingRecipePotionedItem(ResourceLocation id, JsonObject json) {
 		super(id, json);
 	}

@@ -5,9 +5,9 @@
 	"xp": 15,
 	"priceMultiplier": 0.2,
 	"costA": {
-		"item": "minecraft:emerald"
+		"item": "minecraft:emerald",
+		"count": 14
 	},
-	"costBase": 14,
 	"result": {
 		"item": "minecraft:diamond_leggings"
 	}

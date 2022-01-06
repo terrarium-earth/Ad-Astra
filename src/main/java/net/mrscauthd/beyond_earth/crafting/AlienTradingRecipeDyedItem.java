@@ -20,6 +20,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.mrscauthd.beyond_earth.ModInit;
 
 public class AlienTradingRecipeDyedItem extends AlienTradingRecipeItemStack {
+
 	private float chance1 = 0.7F;
 	private float chance2 = 0.8F;
 
@@ -47,7 +48,7 @@ public class AlienTradingRecipeDyedItem extends AlienTradingRecipeItemStack {
 
 	@Override
 	public ItemStack getResult(Entity trader, Random rand) {
-		
+
 		ItemStack result = super.getResult(trader, rand);
 
 		if (result.getItem() instanceof DyeableArmorItem) {

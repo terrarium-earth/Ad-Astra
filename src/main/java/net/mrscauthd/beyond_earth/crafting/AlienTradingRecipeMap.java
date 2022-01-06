@@ -3,6 +3,8 @@ package net.mrscauthd.beyond_earth.crafting;
 import java.util.Locale;
 import java.util.Random;
 
+import org.apache.commons.lang3.tuple.Triple;
+
 import com.google.gson.JsonObject;
 
 import net.minecraft.core.BlockPos;
@@ -52,9 +54,9 @@ public class AlienTradingRecipeMap extends AlienTradingRecipeItemStackBase {
 		buffer.writeResourceLocation(this.structureName);
 		buffer.writeEnum(this.mapDecorationType);
 	}
-
+	
 	@Override
-	public ItemStack getResult(Entity trader, Random rand) {
+	public Triple<ItemStack, ItemStack, ItemStack> getTrade(Entity trader, Random rand) {
 		Level level = trader.level;
 		StructureFeature<?> structure = ForgeRegistries.STRUCTURE_FEATURES.getValue(this.getStructureName());
 		ItemStack itemstack = new ItemStack(Items.FILLED_MAP);
@@ -72,7 +74,7 @@ public class AlienTradingRecipeMap extends AlienTradingRecipeItemStackBase {
 		}
 
 		itemstack.setHoverName(new TranslatableComponent("filled_map." + structure.getFeatureName().toLowerCase(Locale.ROOT)));
-		return itemstack;
+		return Triple.of(this.getCostA(), this.getCostB(), itemstack);
 	}
 
 	public ResourceLocation getStructureName() {

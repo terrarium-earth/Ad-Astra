@@ -1,15 +1,10 @@
 package net.mrscauthd.beyond_earth.crafting;
 
-import java.util.Random;
-
-import org.apache.commons.lang3.tuple.Triple;
-
 import com.google.gson.JsonObject;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.crafting.CraftingHelper;
 
@@ -39,13 +34,6 @@ public abstract class AlienTradingRecipeItemStackBase extends AlienTradingRecipe
 		buffer.writeItem(this.costA);
 		buffer.writeItem(this.costB);
 	}
-
-	@Override
-	public Triple<ItemStack, ItemStack, ItemStack> getTrade(Entity trader, Random rand) {
-		return Triple.of(this.getCostA(), this.getCostB(), this.getResult(trader, rand));
-	}
-
-	public abstract ItemStack getResult(Entity trader, Random rand);
 
 	public ItemStack getCostA() {
 		return this.costA.copy();

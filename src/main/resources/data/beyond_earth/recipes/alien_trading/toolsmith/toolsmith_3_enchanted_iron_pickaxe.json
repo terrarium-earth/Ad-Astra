@@ -5,9 +5,9 @@
 	"xp": 10,
 	"priceMultiplier": 0.2,
 	"costA": {
-		"item": "minecraft:emerald"
+		"item": "minecraft:emerald",
+		"count": 3
 	},
-	"costBase": 3,
 	"result": {
 		"item": "minecraft:iron_pickaxe"
 	}

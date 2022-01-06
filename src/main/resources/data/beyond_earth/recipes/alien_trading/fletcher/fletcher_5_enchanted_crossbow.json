@@ -4,9 +4,9 @@
 	"level": 5,
 	"xp": 15,
 	"costA": {
-		"item": "minecraft:emerald"
+		"item": "minecraft:emerald",
+		"count": 3
 	},
-	"costBase": 3,
 	"result": {
 		"item": "minecraft:crossbow"
 	}
