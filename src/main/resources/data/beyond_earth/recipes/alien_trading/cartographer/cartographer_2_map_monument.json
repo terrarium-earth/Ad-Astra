@@ -7,6 +7,9 @@
 		"item": "minecraft:emerald",
 		"count": 12
 	},
+	"costB": {
+		"item": "minecraft:compass"
+	},
 	"result": {
 		"structureName": "monument",
 		"mapDecorationType": "monument"
