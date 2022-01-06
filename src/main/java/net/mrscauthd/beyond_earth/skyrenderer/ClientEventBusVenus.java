@@ -78,7 +78,7 @@ public class ClientEventBusVenus {
         DimensionSpecialEffects.EFFECTS.put(DIM_RENDER_INFO, new DimensionSpecialEffects(192, true, DimensionSpecialEffects.SkyType.NORMAL, false, false) {
             @Override
             public Vec3 getBrightnessDependentFogColor(Vec3 p_108878_, float p_108879_) {
-                return new Vec3(0.647058823529, 0.450980392157, 0.254901960784);
+                return p_108878_.multiply(p_108879_ * 0.967058823529 + 0.06, p_108879_ * 0.770980392157 + 0.06, p_108879_ * 0.594901960784 + 0.09);
             }
 
             @Override
@@ -174,9 +174,12 @@ public class ClientEventBusVenus {
                         RenderSystem.disableTexture();
 
                         //STAR GEN
-                        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-                        FogRenderer.setupNoFog();
-                        minecraft.levelRenderer.starBuffer.drawWithShader(p_181410_.last().pose(), starmatrix4f, GameRenderer.getPositionShader());
+                        float f10 = level.getStarBrightness(p_181412_) * 1.0F - level.getRainLevel(p_181412_);
+                        if (f10 > 0.0F) {
+                            RenderSystem.setShaderColor(f10, f10, f10, f10);
+                            FogRenderer.setupNoFog();
+                            Minecraft.getInstance().levelRenderer.starBuffer.drawWithShader(p_181410_.last().pose(), starmatrix4f, GameRenderer.getPositionShader());
+                        }
 
                         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
                         RenderSystem.disableBlend();

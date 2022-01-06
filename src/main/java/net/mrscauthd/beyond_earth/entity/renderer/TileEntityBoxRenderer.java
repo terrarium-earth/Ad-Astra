@@ -1,6 +1,5 @@
 package net.mrscauthd.beyond_earth.entity.renderer;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Matrix3f;
@@ -17,15 +16,12 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.InventoryMenu;
-import net.minecraft.world.level.block.entity.BeaconBlockEntity;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.machines.tile.OxygenBubbleDistributorBlockEntity;
-
-import java.awt.*;
 
 @OnlyIn(Dist.CLIENT)
 public class TileEntityBoxRenderer implements BlockEntityRenderer<OxygenBubbleDistributorBlockEntity> {

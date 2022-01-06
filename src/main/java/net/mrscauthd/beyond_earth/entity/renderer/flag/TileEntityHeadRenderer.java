@@ -34,7 +34,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.mrscauthd.beyond_earth.flag.FlagBlock;
 import net.mrscauthd.beyond_earth.flag.FlagTileEntity;
-import net.mrscauthd.beyond_earth.machines.tile.OxygenBubbleDistributorBlockEntity;
 
 @OnlyIn(Dist.CLIENT)
 public class TileEntityHeadRenderer implements BlockEntityRenderer<FlagTileEntity> {
