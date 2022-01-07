@@ -86,6 +86,11 @@ public class LanderEntity extends PathfinderMob {
 	}
 
 	@Override
+	public boolean rideableUnderWater() {
+		return true;
+	}
+
+	@Override
 	public boolean isAffectedByPotions() {
 		return false;
 	}
