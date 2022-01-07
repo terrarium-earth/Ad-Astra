@@ -91,7 +91,7 @@ public class MartianRaptorModel<T extends MartianRaptor> extends EntityModel<T> 
 
         int i = entity.getAttackAnimationTick();
         if (i > 0) {
-            System.out.println(entity.getAttackAnimationTick());
+            System.out.println(i);
             this.body.getChild("head").getChild("bone2").getChild("mouth1").xRot = -2.0F + 1.5F * Mth.triangleWave((float)i - limbSwing, 10.0F);
             this.body.getChild("head").getChild("bone2").getChild("mouth2").xRot = -2.0F + 1.5F * Mth.triangleWave((float)i - limbSwing, 10.0F);
         }

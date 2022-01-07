@@ -79,7 +79,6 @@ public class BeyondEarthMod {
 		BeyondEarthMod.addNetworkMessage(OxygenBubbleDistributorBlockEntity.ChangeWorkingAreaVisibleMessage.class, OxygenBubbleDistributorBlockEntity.ChangeWorkingAreaVisibleMessage::encode, OxygenBubbleDistributorBlockEntity.ChangeWorkingAreaVisibleMessage::decode, OxygenBubbleDistributorBlockEntity.ChangeWorkingAreaVisibleMessage::handle);
 		BeyondEarthMod.addNetworkMessage(PlanetSelectionGui.NetworkMessage.class, PlanetSelectionGui.NetworkMessage::encode, PlanetSelectionGui.NetworkMessage::decode, PlanetSelectionGui.NetworkMessage::handle);
 
-
 		CompatibleManager.visit();
 
 		//Structure Registry

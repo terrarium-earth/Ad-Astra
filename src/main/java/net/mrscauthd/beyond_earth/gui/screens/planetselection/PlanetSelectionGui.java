@@ -5,15 +5,24 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.network.IContainerFactory;
 import net.minecraftforge.network.NetworkEvent;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.events.Methods;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 public class PlanetSelectionGui {
+
+	public static List<Item> SPACE_STATION_ITEMS = ForgeRegistries.ITEMS.getValues().stream().filter(f -> f instanceof Item && Methods.tagCheck(f, ModInit.SPACE_STATION_ITEMS_TAG)).collect(Collectors.toList());
 
 	public static class GuiContainerFactory implements IContainerFactory<GuiContainer> {
 		public GuiContainer create(int id, Inventory inv, FriendlyByteBuf extraData) {
@@ -71,7 +80,6 @@ public class PlanetSelectionGui {
 
 		public static void handle(NetworkMessage message, Supplier<NetworkEvent.Context> contextSupplier) {
 			NetworkEvent.Context context = contextSupplier.get();
-			//TODO IF THE PLANET DONE CHANGE VENUS TO GLACIO (ID)
 
 			//Teleport Planet Buttons
 			if (message.getInteger() == 0) {
@@ -171,9 +179,10 @@ public class PlanetSelectionGui {
 	}
 
 	public static void deleteItems(Player player) {
-		player.getInventory().clearOrCountMatchingItems(p -> Items.DIAMOND == p.getItem(), 6, player.getInventory());
-		player.getInventory().clearOrCountMatchingItems(p -> ModInit.IRON_PLATE.get() == p.getItem(), 12, player.getInventory());
-		player.getInventory().clearOrCountMatchingItems(p -> ModInit.STEEL_INGOT.get() == p.getItem(), 16, player.getInventory());
-		player.getInventory().clearOrCountMatchingItems(p -> ModInit.DESH_PLATE.get() == p.getItem(), 4, player.getInventory());
+		if (!player.getAbilities().instabuild) {
+			for (Item item : SPACE_STATION_ITEMS) {
+				player.getInventory().clearOrCountMatchingItems(p -> item == p.getItem(), 12, player.getInventory());
+			}
+		}
 	}
 }

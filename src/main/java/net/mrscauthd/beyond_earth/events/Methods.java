@@ -25,6 +25,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -72,7 +73,7 @@ public class Methods {
     public static final ResourceKey<Level> glacio = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "glacio"));
     public static final ResourceKey<Level> glacio_orbit = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "glacio_orbit"));
     public static final ResourceKey<Level> overworld = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation("overworld"));
-    public static final ResourceKey<Level> overworld_orbit = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation("overworld_orbit"));
+    public static final ResourceKey<Level> overworld_orbit = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID,"overworld_orbit"));
 
     public static void worldTeleport(Player entity, ResourceKey<Level> planet, double high) {
         if (!entity.level.isClientSide) {
@@ -329,6 +330,10 @@ public class Methods {
     
     public static boolean tagCheck(Fluid fluid, ResourceLocation tag) {
         return FluidTags.getAllTags().getTagOrEmpty(tag).contains(fluid);
+    }
+
+    public static boolean tagCheck(Item item, ResourceLocation tag) {
+        return ItemTags.getAllTags().getTagOrEmpty(tag).contains(item);
     }
 
     public static void landerTeleport(Player player, ResourceKey<Level> newPlanet) {

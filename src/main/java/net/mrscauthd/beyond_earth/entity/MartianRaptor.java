@@ -22,7 +22,7 @@ import net.minecraftforge.network.NetworkHooks;
 import net.mrscauthd.beyond_earth.events.Config;
 
 public class MartianRaptor extends Monster {
-    private int attackAnimationTick;
+    private int attackAnimationTick = 0;
 
     public MartianRaptor(EntityType type, Level world) {
         super(type, world);
@@ -78,6 +78,7 @@ public class MartianRaptor extends Monster {
     @Override
     public boolean doHurtTarget(Entity p_28837_) {
         this.attackAnimationTick = 10;
+        System.out.println(attackAnimationTick);
         return super.doHurtTarget(p_28837_);
     }
 

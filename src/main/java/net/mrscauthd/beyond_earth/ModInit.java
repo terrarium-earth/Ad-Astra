@@ -74,6 +74,7 @@ import net.mrscauthd.beyond_earth.crafting.RocketPart;
 import net.mrscauthd.beyond_earth.effects.OxygenEffect;
 import net.mrscauthd.beyond_earth.entity.*;
 import net.mrscauthd.beyond_earth.events.Config;
+import net.mrscauthd.beyond_earth.events.Methods;
 import net.mrscauthd.beyond_earth.feature.MarsIceSpikeFeature;
 import net.mrscauthd.beyond_earth.feature.VenusDeltas;
 import net.mrscauthd.beyond_earth.flag.FlagTileEntity;
@@ -117,10 +118,8 @@ import net.mrscauthd.beyond_earth.world.structure.configuration.STStructures;
 import net.mrscauthd.beyond_earth.world.structure.configuration.StructureVoidProcessor;
 
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Mod.EventBusSubscriber(modid = BeyondEarthMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModInit {
@@ -267,6 +266,7 @@ public class ModInit {
     public static final RegistryObject<ForgeSpawnEggItem> MOGLER_SPAWN_EGG = ITEMS.register("mogler_spawn_egg",() -> new ForgeSpawnEggItem(MOGLER::get, -13312, -3407872, new Item.Properties().tab(ItemGroups.tab_spawn_eggs)));
     public static final RegistryObject<ForgeSpawnEggItem> MARTIAN_RAPTOR_SPAWN_EGG = ITEMS.register("martian_raptor_spawn_egg",() -> new ForgeSpawnEggItem(MARTIAN_RAPTOR::get, 5349438, -13312, new Item.Properties().tab(ItemGroups.tab_spawn_eggs)));
 
+    public static final ResourceLocation SPACE_STATION_ITEMS_TAG = new ResourceLocation(BeyondEarthMod.MODID, "space_station/create/item_list");
 
     //Generel Items
     public static final RegistryObject<Item> CHEESE = ITEMS.register("cheese", () -> new Item(new Item.Properties().tab(ItemGroups.tab_normal).food((new FoodProperties.Builder()).nutrition(4).saturationMod(3f).build())));

@@ -55,12 +55,19 @@ public class OreGeneration {
     private static PlacedFeature venusGoldOre;
     private static PlacedFeature venusDiamondOre;
 
+    /**GLACIO ORES:*/
+    public static RuleTestType<RuleTests.GlacioRuleTest> GLACIO_MATCH;
+    private static Feature<OreConfiguration> GLACIO_GEN_FEATURE;
+
+    private static PlacedFeature powderSnow;
+
     @SubscribeEvent
     public static void registerFeature(RegistryEvent.Register<Feature<?>> event) {
         MOON_MATCH = Registry.register(Registry.RULE_TEST, new ResourceLocation(BeyondEarthMod.MODID,"moon_ore_match"), () -> RuleTests.MoonRuleTest.codec);
         MARS_MATCH = Registry.register(Registry.RULE_TEST, new ResourceLocation(BeyondEarthMod.MODID,"mars_ore_match"), () -> RuleTests.MarsRuleTest.codec);
         MERCURY_MATCH = Registry.register(Registry.RULE_TEST, new ResourceLocation(BeyondEarthMod.MODID,"mercury_ore_match"), () -> RuleTests.MercuryRuleTest.codec);
         VENUS_MATCH = Registry.register(Registry.RULE_TEST, new ResourceLocation(BeyondEarthMod.MODID,"venus_ore_match"), () -> RuleTests.VenusRuleTest.codec);
+        GLACIO_MATCH = Registry.register(Registry.RULE_TEST, new ResourceLocation(BeyondEarthMod.MODID,"glacio_ore_match"), () -> RuleTests.GlacioRuleTest.codec);
 
         /**MOON*/
         MOON_GEN_FEATURE = new OreFeature(OreConfiguration.CODEC);
@@ -116,6 +123,14 @@ public class OreGeneration {
 
         venusDiamondOre = VENUS_GEN_FEATURE.configured(new OreConfiguration(RuleTests.VenusRuleTest.INSTANCE, ModInit.VENUS_DIAMOND_ORE.get().defaultBlockState(), 7)).placed(commonOrePlacement(3, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-16), VerticalAnchor.aboveBottom(16))));
         Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"venus_diamond_ore"), venusDiamondOre);
+
+
+        /**Glacio*/
+        GLACIO_GEN_FEATURE = new OreFeature(OreConfiguration.CODEC);
+        event.getRegistry().register(GLACIO_GEN_FEATURE.setRegistryName("glacio_ore"));
+
+        powderSnow = GLACIO_GEN_FEATURE.configured(new OreConfiguration(RuleTests.GlacioRuleTest.INSTANCE, Blocks.SOUL_SOIL.defaultBlockState(), 60)).placed(commonOrePlacement(7, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(80), VerticalAnchor.aboveBottom(120))));
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"powder_snow"), powderSnow);
     }
 
     /** Ores gen in Biome (check also in with Biome it should gen)*/
@@ -141,6 +156,10 @@ public class OreGeneration {
             event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(() -> venusCoalOre);
             event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(() -> venusGoldOre);
             event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(() -> venusDiamondOre);
+        }
+
+        if (event.getName().getPath().equals(BiomeRegistry.glacio.getRegistryName().getPath())) {
+            event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(() -> powderSnow);
         }
     }
 

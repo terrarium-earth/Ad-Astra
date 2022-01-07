@@ -2,6 +2,7 @@ package net.mrscauthd.beyond_earth.gui.screens.planetselection;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -12,18 +13,21 @@ import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.ModInit;
+import net.mrscauthd.beyond_earth.events.Methods;
 import net.mrscauthd.beyond_earth.gui.helper.GuiHelper;
 import net.mrscauthd.beyond_earth.gui.helper.ImageButtonPlacer;
 import net.mrscauthd.beyond_earth.util.Rectangle2d;
+import org.apache.logging.log4j.core.appender.rolling.action.IfAll;
 
 @OnlyIn(Dist.CLIENT)
 public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSelectionGui.GuiContainer> {
@@ -104,10 +108,17 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 	//Category 5 Teleport Buttons
 	public ImageButtonPlacer glacioSpaceStationButton;
 
+	public List<Item> SPACE_STATION_ITEMS;
+
 	public PlanetSelectionGuiWindow(PlanetSelectionGui.GuiContainer container, Inventory inventory, Component text) {
 		super(container, inventory, text);
 		this.imageWidth = 512;
 		this.imageHeight = 512;
+		SPACE_STATION_ITEMS = getSpaceStationItems();
+	}
+
+	private List<Item> getSpaceStationItems() {
+		return ForgeRegistries.ITEMS.getValues().stream().filter(f -> f instanceof Item && Methods.tagCheck(f, ModInit.SPACE_STATION_ITEMS_TAG)).collect(Collectors.toList());
 	}
 
 	@Override
@@ -567,13 +578,13 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 
 		if (GuiHelper.isHover(this.getBounds(left, top, width, height), mouseX, mouseY)) {
 			List<Component> list = new ArrayList<Component>();
+			int Price = 12;
 
 			list.add(Component.nullToEmpty("\u00A79Item Requirement:"));
 
-			list.add(Component.nullToEmpty(this.getSpaceStationItemCheck(new ItemStack(Items.DIAMOND), 6) ?  "\u00A7a" + "6 Diamonds" : "\u00A76" + "6 Diamonds"));
-			list.add(Component.nullToEmpty(this.getSpaceStationItemCheck(new ItemStack(ModInit.STEEL_INGOT.get()), 16) ?  "\u00A7a" + "16 Steel Ingots" : "\u00A76" + "16 Steel Ingots"));
-			list.add(Component.nullToEmpty(this.getSpaceStationItemCheck(new ItemStack(ModInit.IRON_PLATE.get()), 12) ?  "\u00A7a" + "12 Iron Plates" : "\u00A76" + "12 Iron Plates"));
-			list.add(Component.nullToEmpty(this.getSpaceStationItemCheck(new ItemStack(ModInit.DESH_PLATE.get()), 4) ?  "\u00A7a" + "4 Desh Plates" : "\u00A76" + "4 Desh Plates"));
+			for (Item item : SPACE_STATION_ITEMS) {
+				list.add(Component.nullToEmpty(this.getSpaceStationItemCheck(new ItemStack(item), Price) ? "\u00A76" + Price + "\u00A7a " + item.getRegistryName() : "\u00A76" + Price + "\u00A7c " + item.getRegistryName()));
+			}
 
 			list.add(Component.nullToEmpty("\u00A7c----------------"));
 			list.add(Component.nullToEmpty("\u00A79Type: " + "\u00A73" + orbitType));
@@ -591,12 +602,13 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 	}
 
 	public boolean getSpaceStationItemList() {
-		Boolean boolean1 = this.getSpaceStationItemCheck(new ItemStack(Items.DIAMOND), 6);
-		Boolean boolean2 = this.getSpaceStationItemCheck(new ItemStack(ModInit.STEEL_INGOT.get()), 16);
-		Boolean boolean3 = this.getSpaceStationItemCheck(new ItemStack(ModInit.IRON_PLATE.get()), 12);
-		Boolean boolean4 = this.getSpaceStationItemCheck(new ItemStack(ModInit.DESH_PLATE.get()), 4);
+		List<Boolean> boolean1 = new ArrayList<>();
 
-		return boolean1 && boolean2 && boolean3 && boolean4;
+		for (Item item : SPACE_STATION_ITEMS) {
+			boolean1.add(this.getSpaceStationItemCheck(new ItemStack(item), 12));
+		}
+
+		return !boolean1.contains(false);
 	}
 
 	public boolean getSpaceStationItemCheck(ItemStack itemStackIn, int count) {

@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:iron_ingot",
+    "beyond_earth:steel_ingot",
+	"beyond_earth:iron_plate",
+	"beyond_earth:desh_plate"
+  ]
+}
