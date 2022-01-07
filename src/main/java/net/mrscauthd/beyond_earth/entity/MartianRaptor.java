@@ -78,6 +78,7 @@ public class MartianRaptor extends Monster {
     @Override
     public boolean doHurtTarget(Entity p_28837_) {
         this.attackAnimationTick = 10;
+        System.out.println(attackAnimationTick);
         return super.doHurtTarget(p_28837_);
     }
 
