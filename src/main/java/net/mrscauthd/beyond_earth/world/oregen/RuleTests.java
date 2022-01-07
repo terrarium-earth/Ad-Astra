@@ -85,7 +85,7 @@ public class RuleTests {
         static final Codec<GlacioRuleTest> codec = Codec.unit(() -> INSTANCE);
 
         public boolean test(BlockState blockAt, Random random) {
-            if (blockAt.getBlock() == Blocks.SNOW_BLOCK.defaultBlockState().getBlock()) {
+            if (blockAt.getBlock() == Blocks.STONE.defaultBlockState().getBlock()) {
                 return true;
             }
 

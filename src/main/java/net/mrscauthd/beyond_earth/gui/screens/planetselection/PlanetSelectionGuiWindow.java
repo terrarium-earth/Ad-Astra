@@ -576,7 +576,7 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 			list.add(Component.nullToEmpty("\u00A79Item Requirement:"));
 
 			for (Item item : PlanetSelectionGui.SPACE_STATION_ITEMS) {
-				list.add(Component.nullToEmpty(this.getSpaceStationItemCheck(new ItemStack(item), Price) ? "\u00A76" + Price + "\u00A7a " + item.getRegistryName() : "\u00A76" + Price + "\u00A7c " + item.getRegistryName()));
+				list.add(Component.nullToEmpty(this.getSpaceStationItemCheck(new ItemStack(item), Price) ? "\u00A78" + "[" + "\u00A76" + Price + "\u00A78" + "]" + "\u00A7a " + item.getRegistryName() + "'s" : "\u00A78" + "[" + "\u00A76" + Price + "\u00A78" + "]" + "\u00A7c " + item.getRegistryName() + "'s"));
 			}
 
 			list.add(Component.nullToEmpty("\u00A7c----------------"));
