@@ -1,0 +1,13 @@
+{
+	"type": "beyond_earth:alien_trading_itemstack",
+	"job": "minecraft:mason",
+	"level": 3,
+	"xp": 20,
+	"costA": {
+		"item": "minecraft:diorite",
+		"count": 16
+	},
+	"result": {
+		"item": "minecraft:emerald"
+	}
+}

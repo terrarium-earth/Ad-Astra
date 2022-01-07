@@ -1,0 +1,12 @@
+{
+	"type": "beyond_earth:alien_trading_itemstack",
+	"job": "minecraft:toolsmith",
+	"level": 4,
+	"xp": 10,
+	"costA": {
+		"item": "minecraft:diamond"
+	},
+	"result": {
+		"item": "minecraft:emerald"
+	}
+}

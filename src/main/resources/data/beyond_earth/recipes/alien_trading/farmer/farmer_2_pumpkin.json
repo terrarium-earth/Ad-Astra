@@ -1,0 +1,13 @@
+{
+	"type": "beyond_earth:alien_trading_itemstack",
+	"job": "minecraft:farmer",
+	"level": 2,
+	"xp": 10,
+	"costA": {
+		"item": "minecraft:pumpkin",
+		"count": 6
+	},
+	"result": {
+		"item": "minecraft:emerald"
+	}
+}

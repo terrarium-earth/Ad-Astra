@@ -1,0 +1,13 @@
+{
+	"type": "beyond_earth:alien_trading_itemstack",
+	"job": "minecraft:toolsmith",
+	"level": 3,
+	"xp": 20,
+	"costA": {
+		"item": "minecraft:flint",
+		"count": 30
+	},
+	"result": {
+		"item": "minecraft:emerald"
+	}
+}

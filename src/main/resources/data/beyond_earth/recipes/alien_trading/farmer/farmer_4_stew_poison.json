@@ -1,0 +1,20 @@
+{
+	"type": "beyond_earth:alien_trading_itemstack",
+	"job": "minecraft:farmer",
+	"level": 4,
+	"xp": 15,
+	"costA": {
+		"item": "minecraft:emerald"
+	},
+	"result": {
+		"item": "minecraft:suspicious_stew",
+		"nbt": {
+			"Effects": [
+				{
+					"EffectId": 19,
+					"EffectDuration": 280
+				}
+			]
+		}
+	}
+}

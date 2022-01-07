@@ -1,0 +1,17 @@
+{
+	"type": "beyond_earth:alien_trading_map",
+	"job": "minecraft:cartographer",
+	"level": 3,
+	"xp": 10,
+	"costA": {
+		"item": "minecraft:emerald",
+		"count": 12
+	},
+	"costB": {
+		"item": "minecraft:compass"
+	},
+	"result": {
+		"structureName": "mansion",
+		"mapDecorationType": "mansion"
+	}
+}

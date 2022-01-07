@@ -1,0 +1,13 @@
+{
+	"type": "beyond_earth:alien_trading_itemstack",
+	"job": "minecraft:cleric",
+	"level": 4,
+	"xp": 30,
+	"costA": {
+		"item": "minecraft:glass_bottle",
+		"count": 9
+	},
+	"result": {
+		"item": "minecraft:emerald"
+	}
+}

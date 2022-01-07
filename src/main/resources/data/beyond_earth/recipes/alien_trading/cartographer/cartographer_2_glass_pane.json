@@ -1,0 +1,13 @@
+{
+	"type": "beyond_earth:alien_trading_itemstack",
+	"job": "minecraft:cartographer",
+	"level": 2,
+	"xp": 10,
+	"costA": {
+		"item": "minecraft:glass_pane",
+		"count": 11
+	},
+	"result": {
+		"item": "minecraft:emerald"
+	}
+}

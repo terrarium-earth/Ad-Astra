@@ -1,0 +1,14 @@
+{
+	"type": "beyond_earth:alien_trading_itemstack",
+	"job": "minecraft:farmer",
+	"level": 5,
+	"xp": 30,
+	"costA": {
+		"item": "minecraft:emerald",
+		"count": 4
+	},
+	"result": {
+		"item": "minecraft:glistering_melon_slice",
+		"count": 3
+	}
+}

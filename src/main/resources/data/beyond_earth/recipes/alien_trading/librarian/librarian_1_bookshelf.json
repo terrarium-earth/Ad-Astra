@@ -1,0 +1,13 @@
+{
+	"type": "beyond_earth:alien_trading_itemstack",
+	"job": "minecraft:librarian",
+	"level": 1,
+	"xp": 2,
+	"costA": {
+		"item": "minecraft:emerald",
+		"count": 9
+	},
+	"result": {
+		"item": "minecraft:bookshelf"
+	}
+}

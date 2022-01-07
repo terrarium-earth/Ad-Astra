@@ -1,0 +1,13 @@
+{
+	"type": "beyond_earth:alien_trading_itemstack",
+	"job": "minecraft:shepherd",
+	"level": 3,
+	"xp": 10,
+	"costA": {
+		"item": "minecraft:emerald",
+		"count": 3
+	},
+	"result": {
+		"item": "minecraft:magenta_bed"
+	}
+}

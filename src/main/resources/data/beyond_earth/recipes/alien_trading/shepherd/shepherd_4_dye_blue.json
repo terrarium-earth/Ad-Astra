@@ -1,0 +1,13 @@
+{
+	"type": "beyond_earth:alien_trading_itemstack",
+	"job": "minecraft:shepherd",
+	"level": 4,
+	"xp": 30,
+	"costA": {
+		"item": "minecraft:blue_dye",
+		"count": 12
+	},
+	"result": {
+		"item": "minecraft:emerald"
+	}
+}
