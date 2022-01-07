@@ -22,7 +22,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.ModInit;
-import net.mrscauthd.beyond_earth.capability.FluidHandlerWrapper;
+import net.mrscauthd.beyond_earth.capability.fluid.FluidHandlerWrapper;
 import net.mrscauthd.beyond_earth.fluid.FluidUtil2;
 import net.mrscauthd.beyond_earth.gui.screens.waterpump.WaterPumpGui;
 import net.mrscauthd.beyond_earth.machines.WaterPump;

@@ -1,13 +1,10 @@
 package net.mrscauthd.beyond_earth.events;
 
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
-import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.events.forgeevents.LivingGravityEvent;
 
 public class Gravity {
@@ -18,23 +15,27 @@ public class Gravity {
         double venus = 0.04;
         double orbit = 0.02;
 
-        if (Methodes.isWorld(world, new ResourceLocation(BeyondEarthMod.MODID,"moon"))) {
+        if (Methods.isWorld(world, Methods.moon)) {
             gravityMath(type, entity, moon, -2.5f);
         }
 
-        if (Methodes.isWorld(world, new ResourceLocation(BeyondEarthMod.MODID,"mars"))) {
+        if (Methods.isWorld(world, Methods.mars)) {
             gravityMath(type, entity, mars, -2.0f);
         }
 
-        if (Methodes.isWorld(world, new ResourceLocation(BeyondEarthMod.MODID,"mercury"))) {
+        if (Methods.isWorld(world, Methods.glacio)) {
+            gravityMath(type, entity, mars, -2.0f);
+        }
+
+        if (Methods.isWorld(world, Methods.mercury)) {
             gravityMath(type, entity, mercury, -2.5f);
         }
 
-        if (Methodes.isWorld(world, new ResourceLocation(BeyondEarthMod.MODID,"venus"))) {
+        if (Methods.isWorld(world, Methods.venus)) {
             gravityMath(type, entity, venus, -2.0f);
         }
 
-        if (Methodes.isOrbitWorld(world)) {
+        if (Methods.isOrbitWorld(world)) {
             gravityMath(type, entity, orbit, -2.5f);
         }
     }
@@ -52,7 +53,7 @@ public class Gravity {
     }
 
     public static boolean livingGravityCheck(LivingEntity entity) {
-        if (!entity.isFallFlying() && !entity.isInWater() && !entity.isInLava() && !entity.isNoGravity() && !(entity instanceof Player) && !Methodes.AllVehiclesOr(entity) && !entity.hasEffect(MobEffects.SLOW_FALLING) && !entity.hasEffect(MobEffects.LEVITATION)) {
+        if (!entity.isFallFlying() && !entity.isInWater() && !entity.isInLava() && !entity.isNoGravity() && !(entity instanceof Player) && !Methods.AllVehiclesOr(entity) && !entity.hasEffect(MobEffects.SLOW_FALLING) && !entity.hasEffect(MobEffects.LEVITATION)) {
             return true;
         }
 

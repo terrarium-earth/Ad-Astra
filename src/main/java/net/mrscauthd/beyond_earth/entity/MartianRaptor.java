@@ -4,6 +4,7 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -21,6 +22,8 @@ import net.minecraftforge.network.NetworkHooks;
 import net.mrscauthd.beyond_earth.events.Config;
 
 public class MartianRaptor extends Monster {
+    private int attackAnimationTick;
+
     public MartianRaptor(EntityType type, Level world) {
         super(type, world);
         this.xpReward = 5;
@@ -62,6 +65,33 @@ public class MartianRaptor extends Monster {
     @Override
     public SoundEvent getDeathSound() {
         return SoundEvents.STRIDER_DEATH;
+    }
+
+    @Override
+    public void aiStep() {
+        super.aiStep();
+        if (this.attackAnimationTick > 0) {
+            --this.attackAnimationTick;
+        }
+    }
+
+    @Override
+    public boolean doHurtTarget(Entity p_28837_) {
+        this.attackAnimationTick = 10;
+        return super.doHurtTarget(p_28837_);
+    }
+
+    @Override
+    public void handleEntityEvent(byte p_21375_) {
+        if (p_21375_ == 4) {
+            this.attackAnimationTick = 10;
+        } else {
+            super.handleEntityEvent(p_21375_);
+        }
+    }
+
+    public int getAttackAnimationTick() {
+        return this.attackAnimationTick;
     }
 
     @Override

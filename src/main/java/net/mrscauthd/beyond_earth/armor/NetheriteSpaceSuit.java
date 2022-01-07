@@ -18,10 +18,10 @@ import net.minecraftforge.client.IItemRenderProperties;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.armormaterial.NetheriteSpaceSuitMaterial;
 import net.mrscauthd.beyond_earth.entity.renderer.spacesuit.SpaceSuitModel;
-import net.mrscauthd.beyond_earth.events.Methodes;
-import net.mrscauthd.beyond_earth.capability.IOxygenStorage;
-import net.mrscauthd.beyond_earth.capability.OxygenUtil;
-import net.mrscauthd.beyond_earth.capability.SpaceSuitCapabilityProvider;
+import net.mrscauthd.beyond_earth.events.Methods;
+import net.mrscauthd.beyond_earth.capability.oxygen.IOxygenStorage;
+import net.mrscauthd.beyond_earth.capability.oxygen.OxygenUtil;
+import net.mrscauthd.beyond_earth.capability.oxygen.SpaceSuitCapabilityProvider;
 import net.mrscauthd.beyond_earth.gauge.GaugeTextHelper;
 import net.mrscauthd.beyond_earth.itemgroup.ItemGroups;
 
@@ -129,7 +129,7 @@ public class NetheriteSpaceSuit {
 
 		@Override
 		public void onArmorTick(ItemStack stack, Level world, Player player) {
-			Methodes.extractArmorOxygenUsingTimer(stack, player);
+			Methods.extractArmorOxygenUsingTimer(stack, player);
 		}
 	};
 

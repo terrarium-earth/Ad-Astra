@@ -78,7 +78,7 @@ public class AlienZombieEntity extends Monster implements RangedAttackMob {
 
 	@Override
 	public void performRangedAttack(LivingEntity p_33317_, float p_33318_) {
-		AlienSpitEntity.shoot(this, p_33317_, 2);
+		IceSpitEntity.shoot(this, p_33317_, 2);
 	}
 
 	@Override

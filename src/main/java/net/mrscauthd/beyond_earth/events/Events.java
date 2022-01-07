@@ -1,6 +1,5 @@
 package net.mrscauthd.beyond_earth.events;
 
-import com.google.common.eventbus.DeadEvent;
 import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
@@ -10,14 +9,14 @@ import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.resources.sounds.ElytraOnPlayerSoundInstance;
 import net.minecraft.client.resources.sounds.MinecartSoundInstance;
 import net.minecraft.client.resources.sounds.RidingMinecartSoundInstance;
-import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceKey;
+import net.minecraft.client.resources.sounds.TickableSoundInstance;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -27,11 +26,13 @@ import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.client.event.RenderArmEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
@@ -51,11 +52,11 @@ public class Events {
 
             //Lander Teleport System
             if (player.getVehicle() instanceof LanderEntity) {
-                Methodes.landerTeleportOrbit(player, world);
+                Methods.landerTeleportOrbit(player, world);
             }
 
             //Planet Gui Open
-            Methodes.openPlanetGui(player);
+            Methods.openPlanetGui(player);
 
             //Oxygen System
             OxygenSystem.OxygenSystem(player);
@@ -64,11 +65,11 @@ public class Events {
             Gravity.Gravity(player, Gravity.GravityType.PLAYER, world);
 
             //Drop Off Hand Item
-            Methodes.DropRocket(player);
+            Methods.DropRocket(player);
 
             //Player orbit Fall Teleport
             if (player.getY() < 1 && !(player.getVehicle() instanceof LanderEntity)) {
-                Methodes.playerFalltoPlanet(world, player);
+                Methods.playerFalltoPlanet(world, player);
             }
         }
     }
@@ -78,16 +79,16 @@ public class Events {
         LivingEntity entity = event.getEntityLiving();
         Level world = entity.level;
 
-        Methodes.EntityOxygen(entity,world);
+        Methods.EntityOxygen(entity,world);
 
         //Gravity Methode Call
         Gravity.Gravity(entity, Gravity.GravityType.LIVING, world);
 
         //Venus Rain
-        Methodes.VenusRain(entity, new ResourceLocation(BeyondEarthMod.MODID, "venus"));
+        Methods.VenusRain(entity, Methods.venus);
 
         //Venus Fire
-        Methodes.VenusFire(entity, new ResourceLocation(BeyondEarthMod.MODID, "venus"), new ResourceLocation(BeyondEarthMod.MODID, "mercury"));
+        Methods.PlanetFire(entity, Methods.venus, Methods.mercury);
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -95,7 +96,7 @@ public class Events {
     public static void CameraPos(EntityViewRenderEvent.CameraSetup event) {
         Entity ridding = event.getCamera().getEntity().getVehicle();
 
-        if (Methodes.isRocket(ridding) || ridding instanceof LanderEntity) {
+        if (Methods.isRocket(ridding) || ridding instanceof LanderEntity) {
             CameraType pointOfView = Minecraft.getInstance().options.getCameraType();
 
             if (pointOfView.equals(CameraType.THIRD_PERSON_FRONT) || pointOfView.equals(CameraType.THIRD_PERSON_BACK)) {
@@ -115,32 +116,32 @@ public class Events {
         Item item2 = player.getMainHandItem().getItem();
 
         /**Cancel Event if it Hold a Vehicle in off hand*/
-        if (item == ModInit.TIER_1_ROCKET_ITEM.get() || item == ModInit.TIER_2_ROCKET_ITEM.get() || item == ModInit.TIER_3_ROCKET_ITEM.get() || item == ModInit.ROVER_ITEM.get()
-            || item2 == ModInit.TIER_1_ROCKET_ITEM.get() || item2 == ModInit.TIER_2_ROCKET_ITEM.get() || item2 == ModInit.TIER_3_ROCKET_ITEM.get() || item2 == ModInit.ROVER_ITEM.get()) {
+        if (item == ModInit.TIER_1_ROCKET_ITEM.get() || item == ModInit.TIER_2_ROCKET_ITEM.get() || item == ModInit.TIER_3_ROCKET_ITEM.get() || item == ModInit.TIER_4_ROCKET_ITEM.get() || item == ModInit.ROVER_ITEM.get()
+            || item2 == ModInit.TIER_1_ROCKET_ITEM.get() || item2 == ModInit.TIER_2_ROCKET_ITEM.get() || item2 == ModInit.TIER_3_ROCKET_ITEM.get() || item2 == ModInit.TIER_4_ROCKET_ITEM.get() || item2 == ModInit.ROVER_ITEM.get()) {
             event.setCanceled(true);
             return;
         }
 
         if (event.getArm() == HumanoidArm.RIGHT) {
-            if (Methodes.checkArmor(event.getPlayer(), 2, ModInit.SPACE_SUIT.get())) {
+            if (Methods.checkArmor(event.getPlayer(), 2, ModInit.SPACE_SUIT.get())) {
 
-                Methodes.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), new ResourceLocation(BeyondEarthMod.MODID, "textures/models/armor/arm/space_suit.png"), event.getPlayer(), playerModel, playerModel.rightArm);
+                Methods.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), new ResourceLocation(BeyondEarthMod.MODID, "textures/models/armor/arm/space_suit.png"), event.getPlayer(), playerModel, playerModel.rightArm);
                 event.setCanceled(true);
-            } else if (Methodes.checkArmor(event.getPlayer(), 2, ModInit.NETHERITE_SPACE_SUIT.get())) {
+            } else if (Methods.checkArmor(event.getPlayer(), 2, ModInit.NETHERITE_SPACE_SUIT.get())) {
 
-                Methodes.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), new ResourceLocation(BeyondEarthMod.MODID, "textures/models/armor/arm/netherite_space_suit.png"), event.getPlayer(), playerModel, playerModel.rightArm);
+                Methods.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), new ResourceLocation(BeyondEarthMod.MODID, "textures/models/armor/arm/netherite_space_suit.png"), event.getPlayer(), playerModel, playerModel.rightArm);
                 event.setCanceled(true);
             }
         }
 
         if (event.getArm() == HumanoidArm.LEFT) {
-            if (Methodes.checkArmor(event.getPlayer(), 2, ModInit.SPACE_SUIT.get())) {
+            if (Methods.checkArmor(event.getPlayer(), 2, ModInit.SPACE_SUIT.get())) {
 
-                Methodes.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), new ResourceLocation(BeyondEarthMod.MODID, "textures/models/armor/arm/space_suit.png"), event.getPlayer(), playerModel, playerModel.leftArm);
+                Methods.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), new ResourceLocation(BeyondEarthMod.MODID, "textures/models/armor/arm/space_suit.png"), event.getPlayer(), playerModel, playerModel.leftArm);
                 event.setCanceled(true);
-            } else if (Methodes.checkArmor(event.getPlayer(), 2, ModInit.NETHERITE_SPACE_SUIT.get())) {
+            } else if (Methods.checkArmor(event.getPlayer(), 2, ModInit.NETHERITE_SPACE_SUIT.get())) {
 
-                Methodes.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), new ResourceLocation(BeyondEarthMod.MODID, "textures/models/armor/arm/netherite_space_suit.png"), event.getPlayer(), playerModel, playerModel.leftArm);
+                Methods.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), new ResourceLocation(BeyondEarthMod.MODID, "textures/models/armor/arm/netherite_space_suit.png"), event.getPlayer(), playerModel, playerModel.leftArm);
                 event.setCanceled(true);
             }
         }
@@ -162,7 +163,7 @@ public class Events {
             HumanoidModel model = event.getModel();
 
             //Player Rocket Sit Rotations
-            if (Methodes.isRocket(player.getVehicle())) {
+            if (Methods.isRocket(player.getVehicle())) {
                 model.rightLeg.xRot = (float) Math.toRadians(0F);
                 model.leftLeg.xRot = (float) Math.toRadians(0F);
                 model.leftLeg.yRot = (float) Math.toRadians(3F);
@@ -173,17 +174,19 @@ public class Events {
             }
 
             //Player Hold Vehicles Rotation
-            if (!Methodes.isRocket(player.getVehicle())) {
+            if (!Methods.isRocket(player.getVehicle())) {
                 Item item1 = player.getMainHandItem().getItem();
                 Item item2 = player.getOffhandItem().getItem();
                 if (item1 == ModInit.TIER_1_ROCKET_ITEM.get()
                         || item1 == ModInit.TIER_2_ROCKET_ITEM.get()
                         || item1 == ModInit.TIER_3_ROCKET_ITEM.get()
+                        || item1 == ModInit.TIER_4_ROCKET_ITEM.get()
                         || item1 == ModInit.ROVER_ITEM.get()
                         //Off Hand
                         || item2 == ModInit.TIER_1_ROCKET_ITEM.get()
                         || item2 == ModInit.TIER_2_ROCKET_ITEM.get()
                         || item2 == ModInit.TIER_3_ROCKET_ITEM.get()
+                        || item2 == ModInit.TIER_4_ROCKET_ITEM.get()
                         || item2 == ModInit.ROVER_ITEM.get()) {
                     model.rightArm.xRot = 10;
                     model.leftArm.xRot = 10;
@@ -202,7 +205,7 @@ public class Events {
         if (event.getLivingEntity() instanceof Player) {
             Player player = (Player) event.getLivingEntity();
 
-            if (Methodes.isRocket(player.getVehicle())) {
+            if (Methods.isRocket(player.getVehicle())) {
                 event.setCanceled(true);
             }
 
@@ -212,6 +215,7 @@ public class Events {
             if (item1 == ModInit.TIER_1_ROCKET_ITEM.get()
                     || item1 == ModInit.TIER_2_ROCKET_ITEM.get()
                     || item1 == ModInit.TIER_3_ROCKET_ITEM.get()
+                    || item1 == ModInit.TIER_4_ROCKET_ITEM.get()
                     || item1 == ModInit.ROVER_ITEM.get()) {
 
                 if (event.getHandSide() == HumanoidArm.LEFT) {
@@ -223,6 +227,7 @@ public class Events {
             if (item2 == ModInit.TIER_1_ROCKET_ITEM.get()
                     || item2 == ModInit.TIER_2_ROCKET_ITEM.get()
                     || item2 == ModInit.TIER_3_ROCKET_ITEM.get()
+                    || item2 == ModInit.TIER_4_ROCKET_ITEM.get()
                     || item2 == ModInit.ROVER_ITEM.get()) {
 
                 if (event.getHandSide() == HumanoidArm.RIGHT) {
@@ -238,19 +243,21 @@ public class Events {
     public static void onWorldTick(TickEvent.WorldTickEvent event) {
         if (event.phase == TickEvent.Phase.END) {
             Level world = event.world;
-            ResourceKey<Level> world2 = world.dimension();
-            if (world2 == ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID,"moon"))
-             || world2 == ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID,"moon_orbit"))
-             || world2 == ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID,"mars"))
-             || world2 == ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID,"mars_orbit"))
-             || world2 == ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID,"mercury"))
-             || world2 == ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID,"mercury_orbit"))
-             || world2 == ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID,"venus_orbit"))
-             || world2 == ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID,"overworld_orbit"))) {
+
+            if (Methods.isWorld(world, Methods.moon)
+             || Methods.isWorld(world, Methods.moon_orbit)
+             || Methods.isWorld(world, Methods.mars)
+             || Methods.isWorld(world, Methods.mars_orbit)
+             || Methods.isWorld(world, Methods.mercury)
+             || Methods.isWorld(world, Methods.mercury_orbit)
+             || Methods.isWorld(world, Methods.venus_orbit)
+             || Methods.isWorld(world, Methods.glacio_orbit)
+             || Methods.isWorld(world, Methods.overworld_orbit)) {
                 world.thunderLevel = 0;
                 world.rainLevel = 0;
             }
-            if (world2 == ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID,"venus"))) {
+
+            if (Methods.isWorld(world, Methods.venus)) {
                 world.thunderLevel = 0;
             }
         }
@@ -261,7 +268,7 @@ public class Events {
         if (event != null && event.getEntity() instanceof Player) {
             Player entity = (Player) event.getEntity();
 
-            if (Methodes.nethriteSpaceSuitCheck(entity)) {
+            if (Methods.nethriteSpaceSuitCheck(entity)) {
                 if (event.getSource().isFire()) {
                     entity.setRemainingFireTicks(0);
                     event.setCanceled(true);
@@ -274,7 +281,17 @@ public class Events {
     public static void FishingBobberTick(ProjectileImpactEvent event) {
         if (event.getRayTraceResult().getType() == HitResult.Type.ENTITY) {
             Entity entity = ((EntityHitResult) event.getRayTraceResult()).getEntity();
-            if (Methodes.AllVehiclesOr(entity)) {
+            if (Methods.AllVehiclesOr(entity)) {
+                event.setCanceled(true);
+            }
+        }
+    }
+
+    //TODO Remove if you change it to Entity
+    @SubscribeEvent
+    public static void interact(PlayerInteractEvent.EntityInteract event) {
+        if (event.getItemStack().getItem() == Items.NAME_TAG) {
+            if (Methods.AllVehiclesOr(event.getTarget())) {
                 event.setCanceled(true);
             }
         }
@@ -283,11 +300,15 @@ public class Events {
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void SpaceSounds(PlaySoundEvent event) {
-        if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.level != null && Methodes.checkSound(event.getSound().getSource()) && Methodes.isSpaceWorld(Minecraft.getInstance().player.level)) {
-            if (!(event.getSound() instanceof ElytraOnPlayerSoundInstance) && !(event.getSound() instanceof MinecartSoundInstance) && !(event.getSound() instanceof RidingMinecartSoundInstance)) {
-                event.setSound(new SpaceSoundSystem(event.getSound()));
-            } else if (event.getSound() instanceof ElytraOnPlayerSoundInstance) {
-                event.setSound(new ElytraSpaceOnPlayerSoundInstance(Minecraft.getInstance().player));
+        if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.level != null && Methods.checkSound(event.getSound().getSource()) && Methods.isSpaceWorldWithoutOxygen(Minecraft.getInstance().player.level)) {
+
+            if (event.getSound() != null) {
+                if (!(event.getSound() instanceof TickableSoundInstance)) {
+                    event.setSound(new SpaceSoundSystem(event.getSound()));
+
+                } else if (event.getSound() instanceof TickableSoundInstance) {
+                    event.setSound(new TickableSpaceSoundSystem((TickableSoundInstance) event.getSound()));
+                }
             }
         }
     }
@@ -296,7 +317,7 @@ public class Events {
     public static void onKill(LivingDeathEvent event) {
         if (event.getEntity() instanceof Player && event.getEntity().getPersistentData().getBoolean(BeyondEarthMod.MODID + ":planet_selection_gui_open")) {
             ((Player) event.getEntity()).closeContainer();
-            Methodes.cleanUpPlayerNBT((Player) event.getEntity());
+            Methods.cleanUpPlayerNBT((Player) event.getEntity());
             event.getEntity().setNoGravity(false);
         }
     }

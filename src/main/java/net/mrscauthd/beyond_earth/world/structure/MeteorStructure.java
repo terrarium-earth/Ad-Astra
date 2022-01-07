@@ -51,7 +51,10 @@ public class MeteorStructure extends StructureFeature<JigsawConfiguration> {
     public static Optional<PieceGenerator<JigsawConfiguration>> createPiecesGenerator(PieceGeneratorSupplier.Context<JigsawConfiguration> context) {
         BlockPos chunkpos = context.chunkPos().getMiddleBlockPosition(0);
 
-        BlockPos blockpos = new BlockPos(chunkpos.getX(), chunkpos.getY() - 18, chunkpos.getZ());
+        BlockPos blockpos = new BlockPos(chunkpos.getX(), context.heightAccessor().getHeight() - 18, chunkpos.getZ());
+        int landHeight = context.chunkGenerator().getFirstOccupiedHeight(blockpos.getX(), blockpos.getZ(), Heightmap.Types.WORLD_SURFACE_WG, context.heightAccessor());
+
+        BlockPos blockposnew = new BlockPos(chunkpos.getX(), landHeight - 20, chunkpos.getZ());
 
         JigsawConfiguration newConfig = new JigsawConfiguration(() -> context.registryAccess().ownedRegistryOrThrow(Registry.TEMPLATE_POOL_REGISTRY)
                 .get(new ResourceLocation(BeyondEarthMod.MODID, "run_meteor/side_meteor_start")), 25);
@@ -68,7 +71,7 @@ public class MeteorStructure extends StructureFeature<JigsawConfiguration> {
                 context.registryAccess()
         );
 
-        Optional<PieceGenerator<JigsawConfiguration>> structurePiecesGenerator = JigsawPlacement.addPieces(newContext, PoolElementStructurePiece::new, blockpos, false, true);
+        Optional<PieceGenerator<JigsawConfiguration>> structurePiecesGenerator = JigsawPlacement.addPieces(newContext, PoolElementStructurePiece::new, blockposnew, false, false);
 
         return structurePiecesGenerator;
     }

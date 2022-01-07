@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.LanternBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.mrscauthd.beyond_earth.events.Methodes;
+import net.mrscauthd.beyond_earth.events.Methods;
 
 public class CoalLanternBlock extends LanternBlock {
     public CoalLanternBlock(BlockBehaviour.Properties properties) {
@@ -26,7 +26,7 @@ public class CoalLanternBlock extends LanternBlock {
     public InteractionResult use(BlockState p_51274_, Level p_51275_, BlockPos p_51276_, Player p_51277_, InteractionHand p_51278_, BlockHitResult p_51279_) {
         ItemStack itemstack = p_51277_.getItemInHand(p_51278_);
 
-        if (!p_51275_.getBlockState(p_51276_).getValue(CoalLanternBlock.HANGING) && !Methodes.isSpaceWorld(p_51275_) && (itemstack.getItem() == Items.FLINT_AND_STEEL || itemstack.getItem() == Items.FIRE_CHARGE)) {
+        if (!p_51275_.getBlockState(p_51276_).getValue(CoalLanternBlock.HANGING) && !Methods.isSpaceWorldWithoutOxygen(p_51275_) && (itemstack.getItem() == Items.FLINT_AND_STEEL || itemstack.getItem() == Items.FIRE_CHARGE)) {
             if (!p_51275_.isClientSide) {
                 p_51275_.setBlock(p_51276_, Blocks.LANTERN.defaultBlockState(), 3);
                 fireManager(itemstack, p_51277_, p_51278_, p_51276_, p_51275_);
@@ -34,7 +34,7 @@ public class CoalLanternBlock extends LanternBlock {
             }
         }
 
-        if (p_51275_.getBlockState(p_51276_).getValue(CoalLanternBlock.HANGING) && !Methodes.isSpaceWorld(p_51275_) && (itemstack.getItem() == Items.FLINT_AND_STEEL || itemstack.getItem() == Items.FIRE_CHARGE)) {
+        if (p_51275_.getBlockState(p_51276_).getValue(CoalLanternBlock.HANGING) && !Methods.isSpaceWorldWithoutOxygen(p_51275_) && (itemstack.getItem() == Items.FLINT_AND_STEEL || itemstack.getItem() == Items.FIRE_CHARGE)) {
             if (!p_51275_.isClientSide) {
                 p_51275_.setBlock(p_51276_, Blocks.LANTERN.defaultBlockState().setValue(LanternBlock.HANGING, true), 3);
                 fireManager(itemstack, p_51277_, p_51278_, p_51276_, p_51275_);

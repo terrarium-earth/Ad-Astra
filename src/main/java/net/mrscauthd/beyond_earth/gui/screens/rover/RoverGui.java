@@ -11,7 +11,7 @@ import net.minecraftforge.items.*;
 import net.minecraftforge.network.IContainerFactory;
 import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.entity.RoverEntity;
-import net.mrscauthd.beyond_earth.events.Methodes;
+import net.mrscauthd.beyond_earth.events.Methods;
 import net.mrscauthd.beyond_earth.fluid.FluidUtil2;
 import net.mrscauthd.beyond_earth.gui.helper.ContainerHelper;
 import org.jetbrains.annotations.NotNull;
@@ -36,7 +36,7 @@ public class RoverGui {
 			this.addSlot(new SlotItemHandler(itemHandler, 0, 8, 63) {
 				@Override
 				public boolean mayPlace(@NotNull ItemStack stack) {
-					return Methodes.tagCheck(FluidUtil2.findBucketFluid(stack.getItem()), ModInit.FLUID_VEHICLE_FUEL_TAG);
+					return Methods.tagCheck(FluidUtil2.findBucketFluid(stack.getItem()), ModInit.FLUID_VEHICLE_FUEL_TAG);
 				}
 			});
 

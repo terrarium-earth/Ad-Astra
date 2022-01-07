@@ -19,7 +19,7 @@ import net.minecraftforge.network.simple.SimpleChannel;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.entity.*;
 import net.mrscauthd.beyond_earth.events.ClientEventBusSubscriber;
-import net.mrscauthd.beyond_earth.events.Methodes;
+import net.mrscauthd.beyond_earth.events.Methods;
 import org.lwjgl.glfw.GLFW;
 
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -145,30 +145,37 @@ public class KeyBindings {
 		}
 
 		if (type == 1) {
-			if (Methodes.isRocket(player.getVehicle())) {
+			if (Methods.isRocket(player.getVehicle())) {
 				if (player.getVehicle() instanceof RocketTier1Entity && player.getVehicle().getEntityData().get(RocketTier1Entity.FUEL) == 300) {
 
 					if (!player.getVehicle().getEntityData().get(RocketTier1Entity.ROCKET_START)) {
 						player.getVehicle().getEntityData().set(RocketTier1Entity.ROCKET_START, true);
-						Methodes.RocketSounds(player.getVehicle(), world);
+						Methods.RocketSounds(player.getVehicle(), world);
 					}
 
 				} else if (player.getVehicle() instanceof RocketTier2Entity && player.getVehicle().getEntityData().get(RocketTier2Entity.FUEL) == 300) {
 
 					if (!player.getVehicle().getEntityData().get(RocketTier2Entity.ROCKET_START)) {
 						player.getVehicle().getEntityData().set(RocketTier2Entity.ROCKET_START, true);
-						Methodes.RocketSounds(player.getVehicle(), world);
+						Methods.RocketSounds(player.getVehicle(), world);
 					}
 
 				} else if (player.getVehicle() instanceof RocketTier3Entity && player.getVehicle().getEntityData().get(RocketTier3Entity.FUEL) == 300) {
 
 					if (!player.getVehicle().getEntityData().get(RocketTier3Entity.ROCKET_START)) {
 						player.getVehicle().getEntityData().set(RocketTier3Entity.ROCKET_START, true);
-						Methodes.RocketSounds(player.getVehicle(), world);
+						Methods.RocketSounds(player.getVehicle(), world);
+					}
+
+				} else if (player.getVehicle() instanceof RocketTier4Entity && player.getVehicle().getEntityData().get(RocketTier4Entity.FUEL) == 300) {
+
+					if (!player.getVehicle().getEntityData().get(RocketTier4Entity.ROCKET_START)) {
+						player.getVehicle().getEntityData().set(RocketTier4Entity.ROCKET_START, true);
+						Methods.RocketSounds(player.getVehicle(), world);
 					}
 
 				} else {
-					Methodes.noFuelMessage(player);
+					Methods.noFuelMessage(player);
 				}
 			}
 
@@ -176,8 +183,8 @@ public class KeyBindings {
 
 		if (type == 2) {
 			//Rocket
-			if (Methodes.isRocket(player.getVehicle())) {
-				Methodes.vehicleRotation((LivingEntity) player.getVehicle(), -1);
+			if (Methods.isRocket(player.getVehicle())) {
+				Methods.vehicleRotation((LivingEntity) player.getVehicle(), -1);
 			}
 
 			//Rover
@@ -186,10 +193,10 @@ public class KeyBindings {
 
 				if (player.getVehicle().getEntityData().get(RoverEntity.FUEL) != 0 && !player.getVehicle().isEyeInFluid(FluidTags.WATER)) {
 					if (forward >= 0.01) {
-						Methodes.vehicleRotation((LivingEntity) player.getVehicle(), -1);
+						Methods.vehicleRotation((LivingEntity) player.getVehicle(), -1);
 					}
 					if (forward <= -0.01) {
-						Methodes.vehicleRotation((LivingEntity) player.getVehicle(), 1);
+						Methods.vehicleRotation((LivingEntity) player.getVehicle(), 1);
 					}
 				}
 			}
@@ -198,8 +205,8 @@ public class KeyBindings {
 
 		if (type == 3) {
 			//Rocket
-			if (Methodes.isRocket(player.getVehicle())) {
-				Methodes.vehicleRotation((LivingEntity) player.getVehicle(), 1);
+			if (Methods.isRocket(player.getVehicle())) {
+				Methods.vehicleRotation((LivingEntity) player.getVehicle(), 1);
 			}
 
 			//Rover
@@ -208,10 +215,10 @@ public class KeyBindings {
 
 				if (player.getVehicle().getEntityData().get(RoverEntity.FUEL) != 0 && !player.getVehicle().isEyeInFluid(FluidTags.WATER)) {
 					if (forward >= 0.01) {
-						Methodes.vehicleRotation((LivingEntity) player.getVehicle(), 1);
+						Methods.vehicleRotation((LivingEntity) player.getVehicle(), 1);
 					}
 					if (forward <= -0.01) {
-						Methodes.vehicleRotation((LivingEntity) player.getVehicle(), -1);
+						Methods.vehicleRotation((LivingEntity) player.getVehicle(), -1);
 					}
 				}
 			}

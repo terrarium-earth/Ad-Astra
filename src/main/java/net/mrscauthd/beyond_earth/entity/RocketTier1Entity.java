@@ -44,7 +44,7 @@ import net.minecraftforge.network.NetworkHooks;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.block.RocketLaunchPad;
-import net.mrscauthd.beyond_earth.events.Methodes;
+import net.mrscauthd.beyond_earth.events.Methods;
 import net.mrscauthd.beyond_earth.fluid.FluidUtil2;
 import net.mrscauthd.beyond_earth.gui.screens.rocket.RocketGui;
 
@@ -74,6 +74,8 @@ public class RocketTier1Entity extends PathfinderMob {
 	public static final EntityDataAccessor<Integer> START_TIMER = SynchedEntityData.defineId(RocketTier1Entity.class, EntityDataSerializers.INT);
 
 	public static final int FUEL_BUCKETS = 1;
+
+	private static final double ROCKET_SPEED = 0.63;
 
 	public RocketTier1Entity(EntityType type, Level world) {
 		super(type, world);
@@ -142,11 +144,6 @@ public class RocketTier1Entity extends PathfinderMob {
 	@Override
 	public MobType getMobType() {
 		return MobType.UNDEFINED;
-	}
-
-	@Override
-	protected MovementEmission getMovementEmission() {
-		return MovementEmission.NONE;
 	}
 
 	@Override
@@ -365,10 +362,10 @@ public class RocketTier1Entity extends PathfinderMob {
 			}
 
 			if (this.entityData.get(START_TIMER) == 200) {
-				if (this.getDeltaMovement().y < 0.5) {
+				if (this.getDeltaMovement().y < ROCKET_SPEED - 0.1) {
 					this.setDeltaMovement(this.getDeltaMovement().x, this.getDeltaMovement().y + 0.1, this.getDeltaMovement().z);
 				} else {
-					this.setDeltaMovement(this.getDeltaMovement().x, 0.63, this.getDeltaMovement().z);
+					this.setDeltaMovement(this.getDeltaMovement().x, ROCKET_SPEED, this.getDeltaMovement().z);
 				}
 			}
 
@@ -391,8 +388,8 @@ public class RocketTier1Entity extends PathfinderMob {
 			if (this.entityData.get(START_TIMER) == 200) {
 				if (level instanceof ServerLevel) {
 					for (ServerPlayer p : ((ServerLevel) level).getServer().getPlayerList().getPlayers()) {
-						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInit.LARGE_FLAME_PARTICLE.get(), true, this.getX() - vec.x, this.getY() - vec.y - 1.6, this.getZ() - vec.z, 20, 0.1, 0.1, 0.1, 0.001);
-						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInit.SMOKE_PARTICLE.get(), true, this.getX() - vec.x, this.getY() - vec.y - 2.6, this.getZ() - vec.z, 10, 0.1, 0.1, 0.1, 0.04);
+						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInit.LARGE_FLAME_PARTICLE.get(), true, this.getX() - vec.x, this.getY() - vec.y - 1.5, this.getZ() - vec.z, 20, 0.1, 0.1, 0.1, 0.001);
+						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInit.LARGE_SMOKE_PARTICLE.get(), true, this.getX() - vec.x, this.getY() - vec.y - 2.5, this.getZ() - vec.z, 10, 0.1, 0.1, 0.1, 0.04);
 					}
 				}
 			} else {
@@ -405,7 +402,7 @@ public class RocketTier1Entity extends PathfinderMob {
 
 		}
 
-		if (Methodes.tagCheck(FluidUtil2.findBucketFluid(this.inventory.getStackInSlot(0).getItem()), ModInit.FLUID_VEHICLE_FUEL_TAG) && !this.entityData.get(BUCKET)) {
+		if (Methods.tagCheck(FluidUtil2.findBucketFluid(this.inventory.getStackInSlot(0).getItem()), ModInit.FLUID_VEHICLE_FUEL_TAG) && !this.entityData.get(BUCKET)) {
 			this.inventory.setStackInSlot(0, new ItemStack(Items.BUCKET));
 			this.getEntityData().set(BUCKET, true);
 		}

@@ -13,7 +13,8 @@ import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.entity.RocketTier1Entity;
 import net.mrscauthd.beyond_earth.entity.RocketTier2Entity;
 import net.mrscauthd.beyond_earth.entity.RocketTier3Entity;
-import net.mrscauthd.beyond_earth.events.Methodes;
+import net.mrscauthd.beyond_earth.entity.RocketTier4Entity;
+import net.mrscauthd.beyond_earth.events.Methods;
 import net.mrscauthd.beyond_earth.fluid.FluidUtil2;
 import net.mrscauthd.beyond_earth.gui.helper.ContainerHelper;
 import org.jetbrains.annotations.NotNull;
@@ -43,12 +44,14 @@ public class RocketGui {
 				itemHandler = ((RocketTier2Entity) rocket).getItemHandler();
 			} else if (rocket instanceof RocketTier3Entity) {
 				itemHandler = ((RocketTier3Entity) rocket).getItemHandler();
+			} else if (rocket instanceof RocketTier4Entity) {
+				itemHandler = ((RocketTier4Entity) rocket).getItemHandler();
 			}
 
 			this.addSlot(new SlotItemHandler(itemHandler, 0, 46, 22) {
 				@Override
 				public boolean mayPlace(@NotNull ItemStack stack) {
-					return Methodes.tagCheck(FluidUtil2.findBucketFluid(stack.getItem()), ModInit.FLUID_VEHICLE_FUEL_TAG);
+					return Methods.tagCheck(FluidUtil2.findBucketFluid(stack.getItem()), ModInit.FLUID_VEHICLE_FUEL_TAG);
 				}
 			});
 

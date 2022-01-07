@@ -25,35 +25,35 @@ import java.util.List;
 public class OreGeneration {
 
     /**MOON ORES:*/
-    public static RuleTestType<RuleTests.MoonRuleTest> MOON_MATCH = null;
-    private static Feature<OreConfiguration> MOON_GEN_FEATURE = null;
+    public static RuleTestType<RuleTests.MoonRuleTest> MOON_MATCH;
+    private static Feature<OreConfiguration> MOON_GEN_FEATURE;
 
-    private static PlacedFeature moonChesseOre = null;
-    private static PlacedFeature soulSoil = null;
-    private static PlacedFeature moonIronOre = null;
-    private static PlacedFeature moonDeshOre = null;
+    private static PlacedFeature moonChesseOre;
+    private static PlacedFeature soulSoil;
+    private static PlacedFeature moonIronOre;
+    private static PlacedFeature moonDeshOre;
 
     /**MARS ORES:*/
-    public static RuleTestType<RuleTests.MarsRuleTest> MARS_MATCH = null;
-    private static Feature<OreConfiguration> MARS_GEN_FEATURE = null;
+    public static RuleTestType<RuleTests.MarsRuleTest> MARS_MATCH;
+    private static Feature<OreConfiguration> MARS_GEN_FEATURE;
 
-    private static PlacedFeature marsIronOre = null;
-    private static PlacedFeature marsDiamondOre = null;
-    private static PlacedFeature marsSiliconOre = null;
+    private static PlacedFeature marsIronOre;
+    private static PlacedFeature marsDiamondOre;
+    private static PlacedFeature marsSiliconOre;
 
     /**MERCURY ORES:*/
-    public static RuleTestType<RuleTests.MercuryRuleTest> MERCURY_MATCH = null;
-    private static Feature<OreConfiguration> MERCURY_GEN_FEATURE = null;
+    public static RuleTestType<RuleTests.MercuryRuleTest> MERCURY_MATCH;
+    private static Feature<OreConfiguration> MERCURY_GEN_FEATURE;
 
-    private static PlacedFeature mercuryIronOre = null;
+    private static PlacedFeature mercuryIronOre;
 
     /**VENUS ORES:*/
-    public static RuleTestType<RuleTests.VenusRuleTest> VENUS_MATCH = null;
-    private static Feature<OreConfiguration> VENUS_GEN_FEATURE = null;
+    public static RuleTestType<RuleTests.VenusRuleTest> VENUS_MATCH;
+    private static Feature<OreConfiguration> VENUS_GEN_FEATURE;
 
-    private static PlacedFeature venusCoalOre = null;
-    private static PlacedFeature venusGoldOre = null;
-    private static PlacedFeature venusDiamondOre = null;
+    private static PlacedFeature venusCoalOre;
+    private static PlacedFeature venusGoldOre;
+    private static PlacedFeature venusDiamondOre;
 
     @SubscribeEvent
     public static void registerFeature(RegistryEvent.Register<Feature<?>> event) {

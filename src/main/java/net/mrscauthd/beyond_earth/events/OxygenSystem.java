@@ -7,20 +7,20 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.ModInit;
-import net.mrscauthd.beyond_earth.capability.IOxygenStorage;
-import net.mrscauthd.beyond_earth.capability.OxygenUtil;
+import net.mrscauthd.beyond_earth.capability.oxygen.IOxygenStorage;
+import net.mrscauthd.beyond_earth.capability.oxygen.OxygenUtil;
 
 public class OxygenSystem {
 
     public static void OxygenSystem(Player entity) {
         Level world = entity.getLevel();
-        if (Config.PlayerOxygenSystem && Methodes.isSpaceWorld(world) && !entity.isSpectator() && !entity.getAbilities().instabuild) {
+        if (Config.PlayerOxygenSystem && Methods.isSpaceWorldWithoutOxygen(world) && !entity.isSpectator() && !entity.getAbilities().instabuild) {
 
             if (entity.getAirSupply() < 1) {
-                Methodes.OxygenDamage(entity);
+                Methods.OxygenDamage(entity);
             }
 
-            if (Methodes.spaceSuitCheckBoth(entity) && !entity.hasEffect(ModInit.OXYGEN_EFFECT.get())) {
+            if (Methods.spaceSuitCheckBoth(entity) && !entity.hasEffect(ModInit.OXYGEN_EFFECT.get())) {
 
                 ItemStack itemstack = entity.getItemBySlot(EquipmentSlot.byTypeAndIndex(EquipmentSlot.Type.ARMOR, 2));
                 IOxygenStorage oxygenStorage = OxygenUtil.getItemStackOxygenStorage(itemstack);
@@ -35,7 +35,7 @@ public class OxygenSystem {
 
             }
 
-            if (!Methodes.spaceSuitCheckBoth(entity) && !entity.hasEffect(ModInit.OXYGEN_EFFECT.get())) {
+            if (!Methods.spaceSuitCheckBoth(entity) && !entity.hasEffect(ModInit.OXYGEN_EFFECT.get())) {
                 entity.setAirSupply(-4);
             }
 
@@ -45,7 +45,7 @@ public class OxygenSystem {
         }
 
         //Out of Space
-        if (Methodes.spaceSuitCheckBoth(entity) && entity.isEyeInFluid(FluidTags.WATER) && !entity.hasEffect(ModInit.OXYGEN_EFFECT.get())) {
+        if (Methods.spaceSuitCheckBoth(entity) && entity.isEyeInFluid(FluidTags.WATER) && !entity.hasEffect(ModInit.OXYGEN_EFFECT.get())) {
 
             ItemStack itemstack = entity.getItemBySlot(EquipmentSlot.byTypeAndIndex(EquipmentSlot.Type.ARMOR, 2));
             IOxygenStorage oxygenStorage = OxygenUtil.getItemStackOxygenStorage(itemstack);

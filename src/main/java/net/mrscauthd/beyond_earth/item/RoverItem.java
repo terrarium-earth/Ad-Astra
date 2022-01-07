@@ -9,9 +9,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -49,9 +47,14 @@ public class RoverItem extends Item {
     }
 
     @Override
-    public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
+    public InteractionResult useOn(UseOnContext context) {
         Player player = context.getPlayer();
         Level world = context.getLevel();
+        
+        if (world.isClientSide()) {
+        	return InteractionResult.PASS;
+        }
+        
         BlockPos pos = context.getClickedPos();
         InteractionHand hand = context.getHand();
         ItemStack itemStack = context.getItemInHand();
@@ -76,7 +79,7 @@ public class RoverItem extends Item {
             List<Entity> entities = player.getCommandSenderWorld().getEntitiesOfClass(Entity.class, scanAbove);
 
             if (entities.isEmpty()) {
-                RoverEntity rocket = new RoverEntity((EntityType<? extends PathfinderMob>) ModInit.ROVER.get(), world);
+                RoverEntity rocket = new RoverEntity(ModInit.ROVER.get(), world);
 
                 rocket.setPos((double) pos.getX() + 0.5D,  pos.getY() + 1, (double) pos.getZ() + 0.5D);
                 double d0 = getYOffset(world, pos, true, rocket.getBoundingBox());
@@ -105,7 +108,7 @@ public class RoverItem extends Item {
             }
         }
 
-        return super.onItemUseFirst(stack, context);
+        return super.useOn(context);
     }
 
 

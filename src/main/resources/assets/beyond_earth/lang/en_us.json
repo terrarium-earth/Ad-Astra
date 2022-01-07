@@ -52,6 +52,7 @@
   "item.beyond_earth.raw_silicon": "Raw Silicon",
   "item.beyond_earth.raw_desh_block": "Raw Desh Block",
   "item.beyond_earth.raw_silicon_block": "Raw Silicon Block",
+  "item.beyond_earth.rocket_t4": "Tier 4 Rocket",
 
 
   "itemGroup.tab_normal": "Beyond Earth",
@@ -142,6 +143,7 @@
   "entity.beyond_earth.rocket_t1": "Tier 1 Rocket",
   "entity.beyond_earth.rocket_t2": "Tier 2 Rocket",
   "entity.beyond_earth.rocket_t3": "Tier 3 Rocket",
+  "entity.beyond_earth.rocket_t4": "Tier 4 Rocket",
   "entity.beyond_earth.lander": "Lander",
   "entity.beyond_earth.rover": "Rover",
 
@@ -206,6 +208,8 @@
   "container.entity.beyond_earth.rocket_t1": "Tier 1 Rocket",
   "container.entity.beyond_earth.rocket_t2": "Tier 2 Rocket",
   "container.entity.beyond_earth.rocket_t3": "Tier 3 Rocket",
+  "container.entity.beyond_earth.rocket_t4": "Tier 4 Rocket",
+
 
   "tooltip.beyond_earth.oxygen_bubble_distributor": "Make a Oxygen Bullet %1$s ~ %2$s Blocks",
 

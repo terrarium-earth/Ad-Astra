@@ -4,15 +4,20 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableSet;
+import com.mojang.realmsclient.util.LevelType;
 import com.mojang.serialization.Codec;
-
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.worldselection.WorldPreset;
 import net.minecraft.core.Registry;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.dedicated.DedicatedServer;
+import net.minecraft.server.dedicated.DedicatedServerProperties;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.valueproviders.ConstantInt;
@@ -33,19 +38,21 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.chunk.ChunkGenerator;
-import net.minecraft.world.level.levelgen.FlatLevelSource;
-import net.minecraft.world.level.levelgen.GenerationStep;
-import net.minecraft.world.level.levelgen.StructureSettings;
+import net.minecraft.world.level.dimension.LevelStem;
+import net.minecraft.world.level.levelgen.*;
 import net.minecraft.world.level.levelgen.feature.*;
 import net.minecraft.world.level.levelgen.feature.configurations.ColumnFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.StructureFeatureConfiguration;
 import net.minecraft.world.level.levelgen.placement.*;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.storage.WorldData;
+import net.minecraftforge.common.ForgeConfig;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -113,10 +120,13 @@ import net.mrscauthd.beyond_earth.world.biomes.BiomeRegistry;
 import net.mrscauthd.beyond_earth.world.chunk.PlanetChunkGenerator;
 import net.mrscauthd.beyond_earth.world.structure.configuration.STConfiguredStructures;
 import net.mrscauthd.beyond_earth.world.structure.configuration.STStructures;
+import net.mrscauthd.beyond_earth.world.structure.configuration.StructureVoidProcessor;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 
 @Mod.EventBusSubscriber(modid = BeyondEarthMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModInit {
@@ -143,6 +153,7 @@ public class ModInit {
     public static final RegistryObject<Item> TIER_1_ROCKET_ITEM = ITEMS.register("rocket_t1", () -> new Tier1RocketItem(new Item.Properties().tab(ItemGroups.tab_normal).stacksTo(1)));
     public static final RegistryObject<Item> TIER_2_ROCKET_ITEM = ITEMS.register("rocket_t2", () -> new Tier2RocketItem(new Item.Properties().tab(ItemGroups.tab_normal).stacksTo(1)));
     public static final RegistryObject<Item> TIER_3_ROCKET_ITEM = ITEMS.register("rocket_t3", () -> new Tier3RocketItem(new Item.Properties().tab(ItemGroups.tab_normal).stacksTo(1)));
+    public static final RegistryObject<Item> TIER_4_ROCKET_ITEM = ITEMS.register("rocket_t4", () -> new Tier4RocketItem(new Item.Properties().tab(ItemGroups.tab_normal).stacksTo(1)));
     public static final RegistryObject<Item> ROVER_ITEM = ITEMS.register("rover", () -> new RoverItem(new Item.Properties().tab(ItemGroups.tab_normal).stacksTo(1)));
 
     //Entitys
@@ -158,6 +169,7 @@ public class ModInit {
     public static RegistryObject<EntityType<RocketTier1Entity>> TIER_1_ROCKET = ENTITYS.register("rocket_t1", () -> EntityType.Builder.of(RocketTier1Entity::new, MobCategory.MISC).sized(1.1f, 4.4f).fireImmune().build(new ResourceLocation(BeyondEarthMod.MODID, "rocket_t1").toString()));
     public static RegistryObject<EntityType<RocketTier2Entity>> TIER_2_ROCKET = ENTITYS.register("rocket_t2", () -> EntityType.Builder.of(RocketTier2Entity::new, MobCategory.MISC).sized(1.1f, 4.6f).fireImmune().build(new ResourceLocation(BeyondEarthMod.MODID, "rocket_t2").toString()));
     public static RegistryObject<EntityType<RocketTier3Entity>> TIER_3_ROCKET = ENTITYS.register("rocket_t3", () -> EntityType.Builder.of(RocketTier3Entity::new, MobCategory.MISC).sized(1.1f, 4.8f).fireImmune().build(new ResourceLocation(BeyondEarthMod.MODID, "rocket_t3").toString()));
+    public static RegistryObject<EntityType<RocketTier4Entity>> TIER_4_ROCKET = ENTITYS.register("rocket_t4", () -> EntityType.Builder.of(RocketTier4Entity::new, MobCategory.MISC).sized(1.1f, 6.1f).fireImmune().build(new ResourceLocation(BeyondEarthMod.MODID, "rocket_t4").toString()));
     public static RegistryObject<EntityType<LanderEntity>> LANDER = ENTITYS.register("lander", () -> EntityType.Builder.of(LanderEntity::new, MobCategory.MISC).sized(0.6f, 2.0f).fireImmune().build(new ResourceLocation(BeyondEarthMod.MODID, "lander").toString()));
     public static RegistryObject<EntityType<RoverEntity>> ROVER = ENTITYS.register("rover", () -> EntityType.Builder.of(RoverEntity::new, MobCategory.MISC).sized(2.5f, 1.0f).fireImmune().build(new ResourceLocation(BeyondEarthMod.MODID, "rover").toString()));
 
@@ -166,7 +178,7 @@ public class ModInit {
 
 
     //Alien Spit Entity
-    public static RegistryObject<EntityType<? extends AlienSpitEntity>> ALIEN_SPIT_ENTITY = ENTITYS.register("alien_spit_entity", () -> EntityType.Builder.<AlienSpitEntity>of(AlienSpitEntity::new, MobCategory.MISC).sized(0.5f, 0.5f).build(new ResourceLocation(BeyondEarthMod.MODID, "alien_spit_entity").toString()));
+    public static RegistryObject<EntityType<? extends IceSpitEntity>> ICE_SPIT_ENTITY = ENTITYS.register("ice_spit_entity", () -> EntityType.Builder.<IceSpitEntity>of(IceSpitEntity::new, MobCategory.MISC).sized(0.5f, 0.5f).build(new ResourceLocation(BeyondEarthMod.MODID, "alien_spit_entity").toString()));
 
     //pygro
     public static final DeferredRegister<SensorType<?>> SENSOR = DeferredRegister.create(ForgeRegistries.SENSOR_TYPES, BeyondEarthMod.MODID);
@@ -434,7 +446,9 @@ public class ModInit {
     //Particle
     public static final RegistryObject<ParticleType<SimpleParticleType>> VENUS_RAIN_PARTICLE = PARTICLES.register("venus_rain", () -> new SimpleParticleType(true));
     public static final RegistryObject<ParticleType<SimpleParticleType>> LARGE_FLAME_PARTICLE = PARTICLES.register("large_flame", () -> new SimpleParticleType(true));
-    public static final RegistryObject<ParticleType<SimpleParticleType>> SMOKE_PARTICLE = PARTICLES.register("smoke", () -> new SimpleParticleType(true));
+    public static final RegistryObject<ParticleType<SimpleParticleType>> LARGE_SMOKE_PARTICLE = PARTICLES.register("large_smoke", () -> new SimpleParticleType(true));
+    public static final RegistryObject<ParticleType<SimpleParticleType>> SMALL_FLAME_PARTICLE = PARTICLES.register("small_flame", () -> new SimpleParticleType(true));
+    public static final RegistryObject<ParticleType<SimpleParticleType>> SMALL_SMOKE_PARTICLE = PARTICLES.register("small_smoke", () -> new SimpleParticleType(true));
 
 
     //Recpies
@@ -463,6 +477,13 @@ public class ModInit {
 	public static final RegistryObject<RocketPart> ROCKET_PART_FIN_LEFT = ROCKET_PARTS.register("fin_left", () -> new RocketPart(2));
 	public static final RegistryObject<RocketPart> ROCKET_PART_FIN_RIGHT = ROCKET_PARTS.register("fin_right", () -> new RocketPart(2));
 	public static final RegistryObject<RocketPart> ROCKET_PART_ENGINE = ROCKET_PARTS.register("engine", () -> new RocketPart(1));
+
+	//Register Processor
+    public static StructureProcessorType<StructureVoidProcessor> STRUCTURE_VOID_PROCESSOR = () -> StructureVoidProcessor.CODEC;
+
+    public static void registerProcessors() {
+        Registry.register(Registry.STRUCTURE_PROCESSOR, new ResourceLocation(BeyondEarthMod.MODID, "structure_void_processor"), STRUCTURE_VOID_PROCESSOR);
+    }
 
     //DamgeSources
     public static final DamageSource DAMAGE_SOURCE_OXYGEN = new DamageSource("oxygen").bypassArmor();
@@ -497,6 +518,7 @@ public class ModInit {
     @SubscribeEvent
     public static void setup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
+            ModInit.registerProcessors();
             STStructures.setupStructures();
             STConfiguredStructures.registerConfiguredStructures();
         });
@@ -529,9 +551,22 @@ public class ModInit {
                     }
                 }
 
-                /**Add Overworld Structure in a Biome*/
-                if (Config.MeteorStructure) {
-                    if (biomeCategory == Biome.BiomeCategory.PLAINS || biomeCategory == Biome.BiomeCategory.DESERT || biomeCategory == Biome.BiomeCategory.FOREST) {
+                /**Add Overworld Structure in a Biome without amplified gen*/
+                Boolean amplified = false;
+                RegistryAccess registryAccess = serverLevel.getServer().registryAccess();
+                NoiseGeneratorSettings amplifiedSettings = registryAccess.registryOrThrow(Registry.NOISE_GENERATOR_SETTINGS_REGISTRY).getOrThrow(NoiseGeneratorSettings.AMPLIFIED);
+
+                if (chunkGenerator instanceof NoiseBasedChunkGenerator) {
+                    NoiseBasedChunkGenerator noiseBasedChunkGenerator = (NoiseBasedChunkGenerator) chunkGenerator;
+
+                    if (noiseBasedChunkGenerator.settings.get() == amplifiedSettings) {
+                        amplified = true;
+                    }
+
+                }
+
+                if (Config.MeteorStructure && !amplified) {
+                    if (biomeEntry.getValue().getRegistryName().equals(new ResourceLocation("plains")) || biomeEntry.getValue().getRegistryName().equals(new ResourceLocation("snowy_tundra")) || biomeEntry.getValue().getRegistryName().equals(new ResourceLocation("forest")) || biomeEntry.getValue().getRegistryName().equals(new ResourceLocation("desert"))) {
                         associateBiomeToConfiguredStructure(STStructureToMultiMap, STConfiguredStructures.METEOR, biomeEntry.getKey());
                     }
                 }
@@ -629,6 +664,7 @@ public class ModInit {
         event.put(TIER_1_ROCKET.get(), RocketTier1Entity.setCustomAttributes().build());
         event.put(TIER_2_ROCKET.get(), RocketTier2Entity.setCustomAttributes().build());
         event.put(TIER_3_ROCKET.get(), RocketTier3Entity.setCustomAttributes().build());
+        event.put(TIER_4_ROCKET.get(), RocketTier4Entity.setCustomAttributes().build());
         event.put(LANDER.get(), LanderEntity.setCustomAttributes().build());
         event.put(ROVER.get(), RoverEntity.setCustomAttributes().build());
     }

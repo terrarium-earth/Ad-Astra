@@ -9,7 +9,6 @@ import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
-import net.mrscauthd.beyond_earth.capability.CapabilityOxygen;
 import net.mrscauthd.beyond_earth.compat.CompatibleManager;
 import net.mrscauthd.beyond_earth.entity.alien.AlienTrade;
 import net.mrscauthd.beyond_earth.gui.screens.planetselection.PlanetSelectionGui;
@@ -82,8 +81,6 @@ public class BeyondEarthMod {
 		BeyondEarthMod.addNetworkMessage(OxygenBubbleDistributorBlockEntity.ChangeWorkingAreaVisibleMessage.class, OxygenBubbleDistributorBlockEntity.ChangeWorkingAreaVisibleMessage::encode, OxygenBubbleDistributorBlockEntity.ChangeWorkingAreaVisibleMessage::decode, OxygenBubbleDistributorBlockEntity.ChangeWorkingAreaVisibleMessage::handle);
 		BeyondEarthMod.addNetworkMessage(PlanetSelectionGui.NetworkMessage.class, PlanetSelectionGui.NetworkMessage::encode, PlanetSelectionGui.NetworkMessage::decode, PlanetSelectionGui.NetworkMessage::handle);
 
-		//Capability
-		bus.addListener(CapabilityOxygen::register);
 
 		CompatibleManager.visit();
 

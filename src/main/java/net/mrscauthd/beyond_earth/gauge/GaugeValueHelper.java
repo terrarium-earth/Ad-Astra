@@ -6,7 +6,7 @@ import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
-import net.mrscauthd.beyond_earth.capability.IOxygenStorage;
+import net.mrscauthd.beyond_earth.capability.oxygen.IOxygenStorage;
 import net.mrscauthd.beyond_earth.machines.tile.AbstractMachineBlockEntity;
 import net.mrscauthd.beyond_earth.machines.tile.PowerSystemFuelBurnTime;
 
