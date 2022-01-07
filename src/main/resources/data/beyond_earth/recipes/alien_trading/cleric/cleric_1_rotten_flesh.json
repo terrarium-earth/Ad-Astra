@@ -1,0 +1,13 @@
+{
+	"type": "beyond_earth:alien_trading_itemstack",
+	"job": "minecraft:cleric",
+	"level": 1,
+	"xp": 2,
+	"costA": {
+		"item": "minecraft:rotten_flesh",
+		"count": 32
+	},
+	"result": {
+		"item": "minecraft:emerald"
+	}
+}

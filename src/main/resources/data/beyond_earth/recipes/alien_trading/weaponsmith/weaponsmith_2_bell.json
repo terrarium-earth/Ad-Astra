@@ -1,0 +1,14 @@
+{
+	"type": "beyond_earth:alien_trading_itemstack",
+	"job": "minecraft:weaponsmith",
+	"level": 2,
+	"xp": 5,
+	"priceMultiplier": 0.2,
+	"costA": {
+		"item": "minecraft:emerald",
+		"count": 36
+	},
+	"result": {
+		"item": "minecraft:bell"
+	}
+}

@@ -1,0 +1,14 @@
+{
+	"type": "beyond_earth:alien_trading_itemstack",
+	"job": "minecraft:armorer",
+	"level": 1,
+	"xp": 1,
+	"priceMultiplier": 0.2,
+	"costA": {
+		"item": "minecraft:emerald",
+		"count": 4
+	},
+	"result": {
+		"item": "minecraft:iron_boots"
+	}
+}

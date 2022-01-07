@@ -1,0 +1,13 @@
+{
+	"type": "beyond_earth:alien_trading_itemstack",
+	"job": "minecraft:shepherd",
+	"level": 1,
+	"xp": 2,
+	"costA": {
+		"item": "minecraft:black_wool",
+		"count": 18
+	},
+	"result": {
+		"item": "minecraft:emerald"
+	}
+}

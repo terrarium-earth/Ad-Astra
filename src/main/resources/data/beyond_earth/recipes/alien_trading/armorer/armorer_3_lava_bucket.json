@@ -1,0 +1,12 @@
+{
+	"type": "beyond_earth:alien_trading_itemstack",
+	"job": "minecraft:armorer",
+	"level": 3,
+	"xp": 20,
+	"costA": {
+		"item": "minecraft:lava_bucket"
+	},
+	"result": {
+		"item": "minecraft:emerald"
+	}
+}

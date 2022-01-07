@@ -1,0 +1,13 @@
+{
+	"type": "beyond_earth:alien_trading_itemstack",
+	"job": "minecraft:fletcher",
+	"level": 5,
+	"xp": 30,
+	"costA": {
+		"item": "minecraft:tripwire_hook",
+		"count": 8
+	},
+	"result": {
+		"item": "minecraft:emerald"
+	}
+}
