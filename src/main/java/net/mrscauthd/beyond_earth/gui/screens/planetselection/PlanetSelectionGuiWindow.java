@@ -108,17 +108,10 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 	//Category 5 Teleport Buttons
 	public ImageButtonPlacer glacioSpaceStationButton;
 
-	public List<Item> SPACE_STATION_ITEMS;
-
 	public PlanetSelectionGuiWindow(PlanetSelectionGui.GuiContainer container, Inventory inventory, Component text) {
 		super(container, inventory, text);
 		this.imageWidth = 512;
 		this.imageHeight = 512;
-		SPACE_STATION_ITEMS = getSpaceStationItems();
-	}
-
-	private List<Item> getSpaceStationItems() {
-		return ForgeRegistries.ITEMS.getValues().stream().filter(f -> f instanceof Item && Methods.tagCheck(f, ModInit.SPACE_STATION_ITEMS_TAG)).collect(Collectors.toList());
 	}
 
 	@Override
@@ -582,7 +575,7 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 
 			list.add(Component.nullToEmpty("\u00A79Item Requirement:"));
 
-			for (Item item : SPACE_STATION_ITEMS) {
+			for (Item item : PlanetSelectionGui.SPACE_STATION_ITEMS) {
 				list.add(Component.nullToEmpty(this.getSpaceStationItemCheck(new ItemStack(item), Price) ? "\u00A76" + Price + "\u00A7a " + item.getRegistryName() : "\u00A76" + Price + "\u00A7c " + item.getRegistryName()));
 			}
 
@@ -604,7 +597,7 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 	public boolean getSpaceStationItemList() {
 		List<Boolean> boolean1 = new ArrayList<>();
 
-		for (Item item : SPACE_STATION_ITEMS) {
+		for (Item item : PlanetSelectionGui.SPACE_STATION_ITEMS) {
 			boolean1.add(this.getSpaceStationItemCheck(new ItemStack(item), 12));
 		}
 
