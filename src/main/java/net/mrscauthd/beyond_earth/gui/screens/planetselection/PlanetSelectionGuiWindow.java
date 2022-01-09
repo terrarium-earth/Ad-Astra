@@ -571,13 +571,14 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 
 		if (GuiHelper.isHover(this.getBounds(left, top, width, height), mouseX, mouseY)) {
 			List<Component> list = new ArrayList<Component>();
-			int Price = 12;
 
 			list.add(Component.nullToEmpty("\u00A79Item Requirement:"));
 
-			for (Item item : PlanetSelectionGui.SPACE_STATION_ITEMS) {
-				list.add(Component.nullToEmpty(this.getSpaceStationItemCheck(new ItemStack(item), Price) ? "\u00A78" + "[" + "\u00A76" + Price + "\u00A78" + "]" + "\u00A7a " + item.getRegistryName() + "'s" : "\u00A78" + "[" + "\u00A76" + Price + "\u00A78" + "]" + "\u00A7c " + item.getRegistryName() + "'s"));
-			}
+			list.add(Component.nullToEmpty(this.getSpaceStationItemCheck(ModInit.DESH_INGOT_TAG, 6) ?  "\u00A78" + "[" + "\u00A76" + 6 + "\u00A78" + "]" + "\u00A7a " + "Desh Ingots" : "\u00A78" + "[" + "\u00A76" + 6 + "\u00A78" + "]" + "\u00A7c " + "Desh Ingots"));
+			list.add(Component.nullToEmpty(this.getSpaceStationItemCheck(ModInit.STEEL_INGOT_TAG, 16) ?  "\u00A78" + "[" + "\u00A76" + 16 + "\u00A78" + "]" + "\u00A7a " + "Steel Ingots" : "\u00A78" + "[" + "\u00A76" + 16 + "\u00A78" + "]" + "\u00A7c " + "Steel Ingots"));
+			list.add(Component.nullToEmpty(this.getSpaceStationItemCheck(ModInit.IRON_PLATES_TAG, 12) ?  "\u00A78" + "[" + "\u00A76" + 12 + "\u00A78" + "]" + "\u00A7a " + "Iron Plates" : "\u00A78" + "[" + "\u00A76" + 12 + "\u00A78" + "]" + "\u00A7c " + "Iron Plates"));
+			list.add(Component.nullToEmpty(this.getSpaceStationItemCheck(ModInit.DESH_PLATES_TAG, 4) ?  "\u00A78" + "[" + "\u00A76" + 4 + "\u00A78" + "]" + "\u00A7a " + "Desh Plates" : "\u00A78" + "[" + "\u00A76" + 4 + "\u00A78" + "]" + "\u00A7c " + "Desh Plates"));
+
 
 			list.add(Component.nullToEmpty("\u00A7c----------------"));
 			list.add(Component.nullToEmpty("\u00A79Type: " + "\u00A73" + orbitType));
@@ -597,25 +598,26 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 	public boolean getSpaceStationItemList() {
 		List<Boolean> boolean1 = new ArrayList<>();
 
-		for (Item item : PlanetSelectionGui.SPACE_STATION_ITEMS) {
-			boolean1.add(this.getSpaceStationItemCheck(new ItemStack(item), 12));
-		}
+		boolean1.add(this.getSpaceStationItemCheck(ModInit.DESH_INGOT_TAG, 6));
+		boolean1.add(this.getSpaceStationItemCheck(ModInit.STEEL_INGOT_TAG, 16));
+		boolean1.add(this.getSpaceStationItemCheck(ModInit.IRON_PLATES_TAG, 12));
+		boolean1.add(this.getSpaceStationItemCheck(ModInit.DESH_PLATES_TAG, 4));
 
 		return !boolean1.contains(false);
 	}
 
-	public boolean getSpaceStationItemCheck(ItemStack itemStackIn, int count) {
+	public boolean getSpaceStationItemCheck(ResourceLocation tag, int count) {
 		Inventory inv = menu.player.getInventory();
 		int itemStackCount = 0;
 
 		for (int i = 0; i < inv.getContainerSize(); ++i) {
 			ItemStack itemStack = inv.getItem(i);
 
-			if (itemStack.sameItem(itemStackIn)) {
+			if (Methods.tagCheck(itemStack.getItem(), tag)) {
 				itemStackCount = itemStackCount + itemStack.getCount();
 			}
 
-			if (!itemStack.isEmpty() && itemStack.sameItem(itemStackIn) && itemStackCount >= count) {
+			if (!itemStack.isEmpty() && Methods.tagCheck(itemStack.getItem(), tag) && itemStackCount >= count) {
 				return true;
 			}
 		}

@@ -1,6 +1,7 @@
 package net.mrscauthd.beyond_earth.gui.screens.planetselection;
 
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -21,8 +22,6 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class PlanetSelectionGui {
-
-	public static List<Item> SPACE_STATION_ITEMS = ForgeRegistries.ITEMS.getValues().stream().filter(f -> f instanceof Item && Methods.tagCheck(f, ModInit.SPACE_STATION_ITEMS_TAG)).collect(Collectors.toList());
 
 	public static class GuiContainerFactory implements IContainerFactory<GuiContainer> {
 		public GuiContainer create(int id, Inventory inv, FriendlyByteBuf extraData) {
@@ -180,8 +179,26 @@ public class PlanetSelectionGui {
 
 	public static void deleteItems(Player player) {
 		if (!player.getAbilities().instabuild) {
-			for (Item item : SPACE_STATION_ITEMS) {
-				player.getInventory().clearOrCountMatchingItems(p -> item == p.getItem(), 12, player.getInventory());
+			getSpaceStationItems(player, ModInit.DESH_INGOT_TAG, 6);
+			getSpaceStationItems(player, ModInit.STEEL_INGOT_TAG, 16);
+			getSpaceStationItems(player, ModInit.IRON_PLATES_TAG, 12);
+			getSpaceStationItems(player, ModInit.DESH_PLATES_TAG, 4);
+		}
+	}
+
+	private static void getSpaceStationItems(Player player, ResourceLocation tag, int count) {
+		Inventory inv = player.getInventory();
+		int itemStackCount = 0;
+
+		for (int i = 0; i < inv.getContainerSize(); ++i) {
+			ItemStack itemStack = inv.getItem(i);
+
+			if (Methods.tagCheck(itemStack.getItem(), tag)) {
+				itemStackCount = itemStackCount + itemStack.getCount();
+			}
+
+			if (!itemStack.isEmpty() && Methods.tagCheck(itemStack.getItem(), tag) && itemStackCount >= count) {
+				player.getInventory().clearOrCountMatchingItems(p -> itemStack.getItem() == p.getItem(), count, player.getInventory());
 			}
 		}
 	}

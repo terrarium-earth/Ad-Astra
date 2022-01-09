@@ -272,8 +272,6 @@ public class ModInit {
     public static final RegistryObject<ForgeSpawnEggItem> MOGLER_SPAWN_EGG = ITEMS.register("mogler_spawn_egg",() -> new ForgeSpawnEggItem(MOGLER::get, -13312, -3407872, new Item.Properties().tab(ItemGroups.tab_spawn_eggs)));
     public static final RegistryObject<ForgeSpawnEggItem> MARTIAN_RAPTOR_SPAWN_EGG = ITEMS.register("martian_raptor_spawn_egg",() -> new ForgeSpawnEggItem(MARTIAN_RAPTOR::get, 5349438, -13312, new Item.Properties().tab(ItemGroups.tab_spawn_eggs)));
 
-    public static final ResourceLocation SPACE_STATION_ITEMS_TAG = new ResourceLocation(BeyondEarthMod.MODID, "space_station/create/item_list");
-
     //Generel Items
     public static final RegistryObject<Item> CHEESE = ITEMS.register("cheese", () -> new Item(new Item.Properties().tab(ItemGroups.tab_normal).food((new FoodProperties.Builder()).nutrition(4).saturationMod(3f).build())));
     public static final RegistryObject<Item> HAMMER = ITEMS.register("hammer", () -> new HammerItem(new Item.Properties().tab(ItemGroups.tab_basics).durability(9).setNoRepair()));
@@ -484,6 +482,12 @@ public class ModInit {
     public static void registerProcessors() {
         Registry.register(Registry.STRUCTURE_PROCESSOR, new ResourceLocation(BeyondEarthMod.MODID, "structure_void_processor"), STRUCTURE_VOID_PROCESSOR);
     }
+
+    //TAGS
+    public static final ResourceLocation DESH_INGOT_TAG = new ResourceLocation("forge", "ingots/desh");
+    public static final ResourceLocation STEEL_INGOT_TAG = new ResourceLocation("forge", "ingots/steel");
+    public static final ResourceLocation IRON_PLATES_TAG = new ResourceLocation("forge", "plates/iron");
+    public static final ResourceLocation DESH_PLATES_TAG = new ResourceLocation("forge", "plates/desh");
 
     //DamgeSources
     public static final DamageSource DAMAGE_SOURCE_OXYGEN = new DamageSource("oxygen").bypassArmor();
