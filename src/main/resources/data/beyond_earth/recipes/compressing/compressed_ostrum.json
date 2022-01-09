@@ -1,0 +1,13 @@
+{
+   "type":"beyond_earth:compressing",
+   "input":{
+      "ingredient":{
+         "tag":"forge:ingots/ostrum"
+      }
+   },
+   "output":{
+      "item":"beyond_earth:compressed_ostrum",
+      "count":1
+   },
+   "cookTime":200
+}

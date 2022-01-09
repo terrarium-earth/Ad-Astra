@@ -8,13 +8,13 @@
   ],
   "key": {
     "0": {
-      "tag": "forge:ingots/silicon"
+      "tag": "forge:ingots/ostrum"
     },
     "1": {
       "tag": "forge:ingots/steel"
     },
     "2": {
-      "tag": "forge:ingots/silicon"
+      "tag": "forge:ingots/ostrum"
     },
     "3": {
       "tag": "forge:ingots/steel"
@@ -23,17 +23,17 @@
       "tag": "forge:ingots/steel"
     },
     "6": {
-      "tag": "forge:ingots/silicon"
+      "tag": "forge:ingots/ostrum"
     },
     "7": {
       "tag": "forge:ingots/steel"
     },
     "8": {
-      "tag": "forge:ingots/silicon"
+      "tag": "forge:ingots/ostrum"
     }
   },
   "result": {
-    "item": "beyond_earth:silicon_tank",
+    "item": "beyond_earth:ostrum_tank",
     "count": 1
   }
 }

@@ -1,0 +1,24 @@
+{
+  "type": "tconstruct:casting_basin",
+  "conditions": [
+    {
+      "value": {
+        "tag": "forge:storage_blocks/ostrum",
+        "type": "forge:tag_empty"
+      },
+      "type": "forge:not"
+    },
+    {
+      "type":"forge:mod_loaded",
+      "modid":"tconstruct"
+    }
+  ],
+  "fluid": {
+    "name": "beyond_earth:molten_ostrum",
+    "amount": 1296
+  },
+  "result": {
+    "tag": "forge:storage_blocks/ostrum"
+  },
+  "cooling_time": 150
+}

@@ -2,7 +2,7 @@
   "replace": false,
   "values": [
     "#forge:ingots/desh",
-    "#forge:ingots/silicon",
+    "#forge:ingots/ostrum",
     "#forge:ingots/steel"
   ]
 }
