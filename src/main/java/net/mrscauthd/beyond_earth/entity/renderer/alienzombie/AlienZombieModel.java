@@ -13,9 +13,10 @@ import net.minecraft.world.entity.Mob;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.api.distmarker.Dist;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
+import net.mrscauthd.beyond_earth.entity.AlienZombieEntity;
 
 @OnlyIn(Dist.CLIENT)
-public class AlienZombieModel<T extends Mob> extends EntityModel<T> {
+public class AlienZombieModel<T extends AlienZombieEntity> extends EntityModel<T> {
 
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(BeyondEarthMod.MODID, "alien_zombie"), "main");
 

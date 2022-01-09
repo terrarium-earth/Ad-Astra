@@ -11,21 +11,22 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.api.distmarker.Dist;
+import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.entity.StarCrawlerEntity;
 
 @OnlyIn(Dist.CLIENT)
 public class StarCrawlerModel<T extends StarCrawlerEntity> extends EntityModel<T> {
 
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("modid", "starcrawler"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(BeyondEarthMod.MODID, "star_crawler"), "main");
 
-    private final ModelPart Body;
+    private final ModelPart body;
     private final ModelPart arm1g;
     private final ModelPart arm2g;
     private final ModelPart arm3g;
     private final ModelPart arm4g;
 
     public StarCrawlerModel(ModelPart root) {
-        this.Body = root.getChild("Body");
+        this.body = root.getChild("body");
         this.arm1g = root.getChild("arm1g");
         this.arm2g = root.getChild("arm2g");
         this.arm3g = root.getChild("arm3g");
@@ -36,7 +37,7 @@ public class StarCrawlerModel<T extends StarCrawlerEntity> extends EntityModel<T
         MeshDefinition meshdefinition = new MeshDefinition();
         PartDefinition partdefinition = meshdefinition.getRoot();
 
-        PartDefinition Body = partdefinition.addOrReplaceChild("Body", CubeListBuilder.create().texOffs(0, 0).addBox(-8.0F, -13.0F, -8.0F, 16.0F, 10.0F, 16.0F, new CubeDeformation(0.0F))
+        PartDefinition Body = partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 0).addBox(-8.0F, -13.0F, -8.0F, 16.0F, 10.0F, 16.0F, new CubeDeformation(0.0F))
                 .texOffs(0, 26).addBox(-7.0F, -9.0F, -7.0F, 14.0F, 9.0F, 14.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
 
         PartDefinition arm1g = partdefinition.addOrReplaceChild("arm1g", CubeListBuilder.create(), PartPose.offset(0.0F, 18.3F, 6.75F));
@@ -150,7 +151,7 @@ public class StarCrawlerModel<T extends StarCrawlerEntity> extends EntityModel<T
 
     @Override
     public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        Body.render(poseStack, buffer, packedLight, packedOverlay);
+        body.render(poseStack, buffer, packedLight, packedOverlay);
         arm1g.render(poseStack, buffer, packedLight, packedOverlay);
         arm2g.render(poseStack, buffer, packedLight, packedOverlay);
         arm3g.render(poseStack, buffer, packedLight, packedOverlay);

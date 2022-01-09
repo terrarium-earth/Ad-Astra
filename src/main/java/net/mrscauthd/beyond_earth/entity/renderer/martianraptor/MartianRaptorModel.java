@@ -9,9 +9,12 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.entity.MartianRaptor;
 
+@OnlyIn(Dist.CLIENT)
 public class MartianRaptorModel<T extends MartianRaptor> extends EntityModel<T> {
 
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(BeyondEarthMod.MODID, "martian_raptor"), "main");
@@ -19,6 +22,10 @@ public class MartianRaptorModel<T extends MartianRaptor> extends EntityModel<T> 
     private final ModelPart body;
     private final ModelPart leg1;
     private final ModelPart leg2;
+
+    private boolean Eat = false;
+    private float Anim = 0;
+    private boolean AttackCheck = false;
 
     public MartianRaptorModel(ModelPart root) {
         this.body = root.getChild("body");
@@ -83,18 +90,18 @@ public class MartianRaptorModel<T extends MartianRaptor> extends EntityModel<T> 
 
     @Override
     public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+
+        float i = entity.getAttackAnim();
+        float f = 1.0F - (float) Mth.abs(10 - 2 * i) / 10.0F;
+
+        this.body.getChild("head").getChild("bone2").getChild("mouth1").zRot = Mth.lerp(f, 0.0F, -1.14906584F);
+        this.body.getChild("head").getChild("bone2").getChild("mouth2").zRot = -Mth.lerp(f, 0.0F, -1.14906584F);
+
         this.leg1.xRot = Mth.cos(limbSwing * 1.0F) * -1.0F * limbSwingAmount;
         this.leg2.xRot = Mth.cos(limbSwing * 1.0F) * 1.0F * limbSwingAmount;
 
         this.body.getChild("head").yRot = netHeadYaw / (180F / (float) Math.PI);
         this.body.getChild("head").xRot = headPitch / (180F / (float) Math.PI);
-
-        int i = entity.getAttackAnimationTick();
-        if (i > 0) {
-            System.out.println(i);
-            this.body.getChild("head").getChild("bone2").getChild("mouth1").xRot = -2.0F + 1.5F * Mth.triangleWave((float)i - limbSwing, 10.0F);
-            this.body.getChild("head").getChild("bone2").getChild("mouth2").xRot = -2.0F + 1.5F * Mth.triangleWave((float)i - limbSwing, 10.0F);
-        }
     }
 
     @Override

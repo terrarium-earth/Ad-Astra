@@ -7,6 +7,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
@@ -22,7 +23,8 @@ import net.minecraftforge.network.NetworkHooks;
 import net.mrscauthd.beyond_earth.events.Config;
 
 public class MartianRaptor extends Monster {
-    private int attackAnimationTick = 0;
+
+    private float AttackAnim = 0;
 
     public MartianRaptor(EntityType type, Level world) {
         super(type, world);
@@ -34,6 +36,11 @@ public class MartianRaptor extends Monster {
                 .add(Attributes.MOVEMENT_SPEED, 0.3)
                 .add(Attributes.MAX_HEALTH, 20)
                 .add(Attributes.ATTACK_DAMAGE, 3);
+    }
+
+    @Override
+    public MobType getMobType() {
+        return MobType.UNDEAD;
     }
 
     @Override
@@ -53,11 +60,6 @@ public class MartianRaptor extends Monster {
     }
 
     @Override
-    protected boolean shouldDespawnInPeaceful() {
-        return false;
-    }
-
-    @Override
     protected SoundEvent getHurtSound(DamageSource p_33034_) {
         return SoundEvents.STRIDER_HURT;
     }
@@ -68,31 +70,27 @@ public class MartianRaptor extends Monster {
     }
 
     @Override
+    public boolean doHurtTarget(Entity p_21372_) {
+        this.AttackAnim = 10;
+        this.level.broadcastEntityEvent(this, (byte)4);
+        return super.doHurtTarget(p_21372_);
+    }
+
+    @Override
+    public void handleEntityEvent(byte p_28844_) {
+        if (p_28844_ == 4) {
+            this.AttackAnim = 10;
+        } else {
+            super.handleEntityEvent(p_28844_);
+        }
+    }
+
+    @Override
     public void aiStep() {
         super.aiStep();
-        if (this.attackAnimationTick > 0) {
-            --this.attackAnimationTick;
+        if (this.AttackAnim > 0) {
+            --this.AttackAnim;
         }
-    }
-
-    @Override
-    public boolean doHurtTarget(Entity p_28837_) {
-        this.attackAnimationTick = 10;
-        System.out.println(attackAnimationTick);
-        return super.doHurtTarget(p_28837_);
-    }
-
-    @Override
-    public void handleEntityEvent(byte p_21375_) {
-        if (p_21375_ == 4) {
-            this.attackAnimationTick = 10;
-        } else {
-            super.handleEntityEvent(p_21375_);
-        }
-    }
-
-    public int getAttackAnimationTick() {
-        return this.attackAnimationTick;
     }
 
     @Override
@@ -103,5 +101,9 @@ public class MartianRaptor extends Monster {
                 this.remove(RemovalReason.DISCARDED);
             }
         }
+    }
+
+    public float getAttackAnim() {
+        return AttackAnim;
     }
 }
