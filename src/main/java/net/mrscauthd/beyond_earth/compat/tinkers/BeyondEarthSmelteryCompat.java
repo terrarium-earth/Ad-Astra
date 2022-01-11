@@ -9,8 +9,8 @@ import slimeknights.tconstruct.smeltery.data.Byproduct;
 
 public enum BeyondEarthSmelteryCompat
 {
-	DESH(TinkersBeyondEarthFluids.MOLTEN_DESH, true),
-	OSTRUM(TinkersBeyondEarthFluids.MOLTEN_OSTRUM, true),
+	DESH(TinkersBeyondEarthFluids.MOLTEN_DESH, Byproduct.COPPER),
+	OSTRUM(TinkersBeyondEarthFluids.MOLTEN_OSTRUM, Byproduct.IRON),
 	// EOL
 	;
 
@@ -24,6 +24,14 @@ public enum BeyondEarthSmelteryCompat
 	{
 		this.fluid = fluid;
 		this.isOre = false;
+		this.byproducts = new Byproduct[0];
+		this.hasDust = hasDust;
+	}
+
+	BeyondEarthSmelteryCompat(FluidObject<? extends ForgeFlowingFluid> fluid, boolean hasDust, boolean isOre)
+	{
+		this.fluid = fluid;
+		this.isOre = isOre;
 		this.byproducts = new Byproduct[0];
 		this.hasDust = hasDust;
 	}
