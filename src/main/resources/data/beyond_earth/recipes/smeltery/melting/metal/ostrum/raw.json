@@ -3,7 +3,7 @@
   "conditions": [
     {
       "value": {
-        "tag": "forge:ores/desh",
+        "tag": "forge:raw_materials/ostrum",
         "type": "forge:tag_empty"
       },
       "type": "forge:not"
@@ -14,18 +14,18 @@
     }
   ],
   "ingredient": {
-    "tag": "forge:ores/desh"
+    "tag": "forge:raw_materials/ostrum"
   },
   "result": {
-    "fluid": "beyond_earth:molten_desh",
-    "amount": 180
+    "fluid": "beyond_earth:molten_ostrum",
+    "amount": 90
   },
   "temperature": 500,
-  "time": 150,
+  "time": 75,
   "byproducts": [
     {
-      "fluid": "tconstruct:molten_copper",
-      "amount": 180
+      "fluid": "tconstruct:molten_iron",
+      "amount": 90
     }
   ]
 }

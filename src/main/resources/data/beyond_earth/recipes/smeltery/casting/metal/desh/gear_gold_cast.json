@@ -9,16 +9,16 @@
       "type": "forge:not"
     },
     {
-      "type":"forge:mod_loaded",
-      "modid":"tconstruct"
+      "modid": "tconstruct",
+      "type": "forge:mod_loaded"
     }
   ],
   "cast": {
     "tag": "tconstruct:casts/multi_use/gear"
   },
   "fluid": {
-    "tag": "beyond_earth:molten_desh",
-    "amount": 576
+    "tag": "forge:molten_desh",
+    "amount": 360
   },
   "result": {
     "tag": "forge:gears/desh"

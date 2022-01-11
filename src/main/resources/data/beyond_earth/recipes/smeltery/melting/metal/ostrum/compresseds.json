@@ -3,7 +3,7 @@
   "conditions": [
     {
       "value": {
-        "tag": "forge:sheetmetals/ostrum",
+        "tag": "beyond_earth:compresseds/ostrum",
         "type": "forge:tag_empty"
       },
       "type": "forge:not"
@@ -14,7 +14,7 @@
     }
   ],
   "ingredient": {
-    "tag": "forge:sheetmetals/ostrum"
+    "tag": "beyond_earth:compresseds/ostrum"
   },
   "result": {
     "fluid": "beyond_earth:molten_ostrum",

@@ -9,16 +9,16 @@
       "type": "forge:not"
     },
     {
-      "type":"forge:mod_loaded",
-      "modid":"tconstruct"
+      "modid": "tconstruct",
+      "type": "forge:mod_loaded"
     }
   ],
   "cast": {
     "tag": "tconstruct:casts/multi_use/rod"
   },
   "fluid": {
-    "tag": "beyond_earth:molten_ostrum",
-    "amount": 72
+    "tag": "forge:molten_ostrum",
+    "amount": 45
   },
   "result": {
     "tag": "forge:rods/ostrum"
