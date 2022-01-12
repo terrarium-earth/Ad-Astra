@@ -300,9 +300,9 @@ public class Events {
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void SpaceSounds(PlaySoundEvent event) {
-        if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.level != null && Methods.checkSound(event.getSound().getSource()) && Methods.isSpaceWorldWithoutOxygen(Minecraft.getInstance().player.level)) {
+        if (event.getSound() != null) {
+            if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.level != null && Methods.checkSound(event.getSound().getSource()) && Methods.isSpaceWorldWithoutOxygen(Minecraft.getInstance().player.level)) {
 
-            if (event.getSound() != null) {
                 if (!(event.getSound() instanceof TickableSoundInstance)) {
                     event.setSound(new SpaceSoundSystem(event.getSound()));
 
