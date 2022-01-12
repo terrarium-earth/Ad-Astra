@@ -158,6 +158,7 @@ public class JeiPlugin implements IModPlugin {
 		registration.addRecipeCategories(new CoalGeneratorJeiCategory(jeiHelper.getGuiHelper()));
 		// workbench
 		registration.addRecipeCategories(new NASAWorkbenchJeiCategory(jeiHelper.getGuiHelper()));
+		// Rockets
 		registration.addRecipeCategories(new RocketJeiCategory(jeiHelper.getGuiHelper()));
 		// Compressor
 		registration.addRecipeCategories(new CompressorJeiCategory(jeiHelper.getGuiHelper()));
