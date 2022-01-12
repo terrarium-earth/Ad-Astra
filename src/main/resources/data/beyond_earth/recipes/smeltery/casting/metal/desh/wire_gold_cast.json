@@ -1,9 +1,9 @@
 {
-  "type": "tconstruct:casting_basin",
+  "type": "tconstruct:casting_table",
   "conditions": [
     {
       "value": {
-        "tag": "forge:storage_blocks/desh",
+        "tag": "forge:wires/desh",
         "type": "forge:tag_empty"
       },
       "type": "forge:not"
@@ -13,12 +13,15 @@
       "type": "forge:mod_loaded"
     }
   ],
+  "cast": {
+    "tag": "tconstruct:casts/multi_use/wire"
+  },
   "fluid": {
     "tag": "forge:molten_desh",
-    "amount": 810
+    "amount": 45
   },
   "result": {
-    "tag": "forge:storage_blocks/desh"
+    "tag": "forge:wires/desh"
   },
-  "cooling_time": 150
+  "cooling_time": 35
 }

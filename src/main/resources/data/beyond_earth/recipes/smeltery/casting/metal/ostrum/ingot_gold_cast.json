@@ -9,16 +9,16 @@
       "type": "forge:not"
     },
     {
-      "type":"forge:mod_loaded",
-      "modid":"tconstruct"
+      "modid": "tconstruct",
+      "type": "forge:mod_loaded"
     }
   ],
   "cast": {
     "tag": "tconstruct:casts/multi_use/ingot"
   },
   "fluid": {
-    "tag": "beyond_earth:molten_ostrum",
-    "amount": 144
+    "tag": "forge:molten_ostrum",
+    "amount": 90
   },
   "result": {
     "tag": "forge:ingots/ostrum"

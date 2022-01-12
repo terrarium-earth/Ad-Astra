@@ -9,8 +9,8 @@
       "type": "forge:not"
     },
     {
-      "type":"forge:mod_loaded",
-      "modid":"tconstruct"
+      "modid": "tconstruct",
+      "type": "forge:mod_loaded"
     }
   ],
   "cast": {
@@ -18,8 +18,8 @@
   },
   "cast_consumed": true,
   "fluid": {
-    "tag": "beyond_earth:molten_ostrum",
-    "amount": 16
+    "tag": "forge:molten_ostrum",
+    "amount": 10
   },
   "result": {
     "tag": "forge:nuggets/ostrum"

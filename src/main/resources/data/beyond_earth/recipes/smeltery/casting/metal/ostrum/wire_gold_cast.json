@@ -3,7 +3,7 @@
   "conditions": [
     {
       "value": {
-        "tag": "forge:plates/ostrum",
+        "tag": "forge:wires/ostrum",
         "type": "forge:tag_empty"
       },
       "type": "forge:not"
@@ -14,15 +14,14 @@
     }
   ],
   "cast": {
-    "tag": "tconstruct:casts/single_use/plate"
+    "tag": "tconstruct:casts/multi_use/wire"
   },
-  "cast_consumed": true,
   "fluid": {
     "tag": "forge:molten_ostrum",
-    "amount": 90
+    "amount": 45
   },
   "result": {
-    "tag": "forge:plates/ostrum"
+    "tag": "forge:wires/ostrum"
   },
-  "cooling_time": 50
+  "cooling_time": 35
 }

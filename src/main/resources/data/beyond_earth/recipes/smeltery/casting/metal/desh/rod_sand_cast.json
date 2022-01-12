@@ -9,8 +9,8 @@
       "type": "forge:not"
     },
     {
-      "type":"forge:mod_loaded",
-      "modid":"tconstruct"
+      "modid": "tconstruct",
+      "type": "forge:mod_loaded"
     }
   ],
   "cast": {
@@ -18,8 +18,8 @@
   },
   "cast_consumed": true,
   "fluid": {
-    "tag": "beyond_earth:molten_desh",
-    "amount": 72
+    "tag": "forge:molten_desh",
+    "amount": 45
   },
   "result": {
     "tag": "forge:rods/desh"
