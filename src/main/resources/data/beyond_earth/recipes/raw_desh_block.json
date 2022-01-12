@@ -1,17 +1,20 @@
 {
-    "type": "minecraft:crafting_shaped",
-    "pattern": [
-        "###",
-        "###",
-        "###"
-    ],
-    "key": {
-        "#": {
-            "item": "beyond_earth:raw_desh"
-        }
-    },
-    "result": {
-        "item": "beyond_earth:raw_desh_block",
-        "count": 1
-    }
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"###",
+		"#*#",
+		"###"
+	],
+	"key": {
+		"*": {
+			"item": "beyond_earth:raw_desh"
+		},
+		"#": {
+			"tag": "forge:raw_materials/desh"
+		}
+	},
+	"result": {
+		"item": "beyond_earth:raw_desh_block",
+		"count": 1
+	}
 }

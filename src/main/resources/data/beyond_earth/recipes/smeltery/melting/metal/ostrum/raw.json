@@ -1,0 +1,31 @@
+{
+  "type": "tconstruct:ore_melting",
+  "conditions": [
+    {
+      "value": {
+        "tag": "forge:raw_materials/ostrum",
+        "type": "forge:tag_empty"
+      },
+      "type": "forge:not"
+    },
+    {
+      "modid": "tconstruct",
+      "type": "forge:mod_loaded"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:raw_materials/ostrum"
+  },
+  "result": {
+    "fluid": "beyond_earth:molten_ostrum",
+    "amount": 90
+  },
+  "temperature": 500,
+  "time": 75,
+  "byproducts": [
+    {
+      "fluid": "tconstruct:molten_iron",
+      "amount": 90
+    }
+  ]
+}

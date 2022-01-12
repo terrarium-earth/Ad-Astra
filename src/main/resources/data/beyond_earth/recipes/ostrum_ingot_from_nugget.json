@@ -4,11 +4,6 @@
   "result": {
     "item": "beyond_earth:ostrum_ingot"
   },
-  "pattern": [
-    "###",
-    "#*#",
-    "###"
-  ],
   "key": {
     "*": {
       "item": "beyond_earth:ostrum_nugget"
@@ -16,5 +11,10 @@
     "#": {
       "tag": "forge:nuggets/ostrum"
     }
-  }
+  },
+  "pattern": [
+    "###",
+    "#*#",
+    "###"
+  ]
 }

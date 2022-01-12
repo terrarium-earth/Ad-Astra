@@ -1,0 +1,31 @@
+{
+  "type": "tconstruct:ore_melting",
+  "conditions": [
+    {
+      "value": {
+        "tag": "forge:storage_blocks/raw_desh",
+        "type": "forge:tag_empty"
+      },
+      "type": "forge:not"
+    },
+    {
+      "modid": "tconstruct",
+      "type": "forge:mod_loaded"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:storage_blocks/raw_desh"
+  },
+  "result": {
+    "fluid": "beyond_earth:molten_desh",
+    "amount": 810
+  },
+  "temperature": 500,
+  "time": 300,
+  "byproducts": [
+    {
+      "fluid": "tconstruct:molten_copper",
+      "amount": 810
+    }
+  ]
+}

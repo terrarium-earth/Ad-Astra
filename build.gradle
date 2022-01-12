@@ -81,8 +81,8 @@ dependencies {
     }
 
     //JEI
-    compileOnly fg.deobf("mezz.jei:jei-1.18.1:9.1.0.41:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-1.18.1:9.1.0.41")
+    compileOnly fg.deobf("mezz.jei:jei-1.18.1:9.1.2.68:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-1.18.1:9.1.2.68")
 
     //The One Probe
     implementation fg.deobf("curse.maven:the-one-probe-245211:3550084")
@@ -90,11 +90,11 @@ dependencies {
     //Jade
     implementation fg.deobf("curse.maven:jade-324717:3551337")
 
-  /*
-  //TConstruct
-  compile fg.deobf("curse.maven:mantle-74924:3439180")
-  compile fg.deobf("curse.maven:tinkers-construct-74072:3439200")
+    //TConstruct
+    implementation fg.deobf("slimeknights.mantle:Mantle:1.18.1-1.7.26")
+    implementation fg.deobf("slimeknights.tconstruct:TConstruct:1.18.1-3.3.2.12")
 
+  /*
   //Mekanism
   compile fg.deobf("mekanism:Mekanism:1.16.5-10.0.20.447")
   runtimeOnly fg.deobf("mekanism:Mekanism:1.16.5-10.0.20.447:additions")
