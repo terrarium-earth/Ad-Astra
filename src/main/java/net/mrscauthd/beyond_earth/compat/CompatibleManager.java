@@ -8,10 +8,12 @@ import net.mrscauthd.beyond_earth.compat.mekanism.MekanismCompat;
 import net.mrscauthd.beyond_earth.compat.theoneprobe.TOPCompat;
 import net.mrscauthd.beyond_earth.compat.tinkers.TinkersCompat;
 import net.mrscauthd.beyond_earth.compat.waila.WailaCompat;
+import net.mrscauthd.beyond_earth.jei.JeiCompat;
 
 public class CompatibleManager {
 
 	public static final List<CompatibleMod> MODS;
+	public static final JeiCompat JEI;
 	public static final TinkersCompat TINKERS;
 	public static final TOPCompat TOP;
 	public static final WailaCompat WAILA;
@@ -19,6 +21,7 @@ public class CompatibleManager {
 
 	static {
 		List<CompatibleMod> mods = new ArrayList<>();
+		mods.add(JEI = new JeiCompat());
 		mods.add(TINKERS = new TinkersCompat());
 		mods.add(TOP = new TOPCompat());
 		mods.add(WAILA = new WailaCompat());
