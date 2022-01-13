@@ -1,0 +1,26 @@
+{
+  "group": "beyond_earth",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "01",
+    "23"
+  ],
+  "key": {
+    "0": {
+      "item": "beyond_earth:moon_stone"
+    },
+    "1": {
+      "item": "beyond_earth:moon_stone"
+    },
+    "2": {
+      "item": "beyond_earth:moon_stone"
+    },
+    "3": {
+      "item": "beyond_earth:moon_stone"
+    }
+  },
+  "result": {
+    "item": "beyond_earth:moon_stone_bricks",
+    "count": 4
+  }
+}

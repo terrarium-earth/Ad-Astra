@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "beyond_earth:moon_stone"
+  },
+  "result": "beyond_earth:moon_stone_bricks",
+  "count": 1
+}

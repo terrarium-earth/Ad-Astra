@@ -1,0 +1,33 @@
+{
+  "group": "beyond_earth",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "0  ",
+    "34 ",
+    "678"
+  ],
+  "key": {
+    "0": {
+      "item": "beyond_earth:venus_sandstone_bricks"
+    },
+    "3": {
+      "item": "beyond_earth:venus_sandstone_bricks"
+    },
+    "4": {
+      "item": "beyond_earth:venus_sandstone_bricks"
+    },
+    "6": {
+      "item": "beyond_earth:venus_sandstone_bricks"
+    },
+    "7": {
+      "item": "beyond_earth:venus_sandstone_bricks"
+    },
+    "8": {
+      "item": "beyond_earth:venus_sandstone_bricks"
+    }
+  },
+  "result": {
+    "item": "beyond_earth:venus_sandstone_brick_stairs",
+    "count": 4
+  }
+}
