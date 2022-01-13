@@ -56,7 +56,6 @@ import net.mrscauthd.beyond_earth.crafting.OxygenBubbleDistributorRecipe;
 import net.mrscauthd.beyond_earth.crafting.OxygenLoaderRecipe;
 import net.mrscauthd.beyond_earth.crafting.RocketPart;
 import net.mrscauthd.beyond_earth.crafting.WorkbenchingRecipe;
-import net.mrscauthd.beyond_earth.entity.*;
 import net.mrscauthd.beyond_earth.events.Methods;
 import net.mrscauthd.beyond_earth.fluid.FluidUtil2;
 import net.mrscauthd.beyond_earth.gauge.GaugeTextHelper;
@@ -79,9 +78,13 @@ import net.mrscauthd.beyond_earth.gui.screens.oxygenloader.OxygenLoaderGui;
 import net.mrscauthd.beyond_earth.gui.screens.oxygenloader.OxygenLoaderGuiWindow;
 import net.mrscauthd.beyond_earth.gui.screens.planetselection.PlanetSelectionGuiWindow;
 import net.mrscauthd.beyond_earth.gui.screens.rocket.RocketGui;
+import net.mrscauthd.beyond_earth.gui.screens.rocket.RocketGuiWindow;
+import net.mrscauthd.beyond_earth.gui.screens.rover.RoverGuiWindow;
 import net.mrscauthd.beyond_earth.jei.jeiguihandlers.CoalGeneratorGuiContainerHandler;
 import net.mrscauthd.beyond_earth.jei.jeiguihandlers.CompressorGuiContainerHandler;
 import net.mrscauthd.beyond_earth.jei.jeiguihandlers.PlanetSlecetionGuiJeiHandler;
+import net.mrscauthd.beyond_earth.jei.jeiguihandlers.RocketGuiContainerHandler;
+import net.mrscauthd.beyond_earth.jei.jeiguihandlers.RoverGuiContainerHandler;
 import net.mrscauthd.beyond_earth.machines.tile.CoalGeneratorBlockEntity;
 import net.mrscauthd.beyond_earth.machines.tile.CompressorBlockEntity;
 import net.mrscauthd.beyond_earth.machines.tile.FuelRefineryBlockEntity;
@@ -146,6 +149,8 @@ public class JeiPlugin implements IModPlugin {
 		registration.addRecipeClickArea(OxygenLoaderGuiWindow.class, OxygenLoaderGuiWindow.ARROW_LEFT, OxygenLoaderGuiWindow.ARROW_TOP, GuiHelper.ARROW_WIDTH, GuiHelper.ARROW_HEIGHT, OxygenLoaderJeiCategory.Uid);
 		registration.addRecipeClickArea(OxygenBubbleDistributorGuiWindow.class, OxygenBubbleDistributorGuiWindow.ARROW_LEFT, OxygenBubbleDistributorGuiWindow.ARROW_TOP, GuiHelper.ARROW_WIDTH, GuiHelper.ARROW_HEIGHT, OxygenBubbleDistributorJeiCategory.Uid);
 
+		registration.addGuiContainerHandler(RocketGuiWindow.class, new RocketGuiContainerHandler());
+		registration.addGuiContainerHandler(RoverGuiWindow.class, new RoverGuiContainerHandler());
 		registration.addGuiContainerHandler(PlanetSelectionGuiWindow.class, new PlanetSlecetionGuiJeiHandler());
 	}
 
@@ -182,16 +187,10 @@ public class JeiPlugin implements IModPlugin {
 		registration.addRecipes(generateGeneratorRecipes(), CoalGeneratorJeiCategory.Uid);
 		// workbench
 		registration.addRecipes(generateWorkbenchRecipes(), NASAWorkbenchJeiCategory.Uid);
-		// RocketTier1Gui
-		registration.addRecipes(this.generateFuelLoadingRecipes(new ItemStack(ModInit.TIER_1_ROCKET_ITEM.get()), FluidUtil2.BUCKET_SIZE * RocketTier1Entity.FUEL_BUCKETS), RocketJeiCategory.Uid);
-		// RocketTier2Gui
-		registration.addRecipes(this.generateFuelLoadingRecipes(new ItemStack(ModInit.TIER_2_ROCKET_ITEM.get()), FluidUtil2.BUCKET_SIZE * RocketTier2Entity.FUEL_BUCKETS), RocketJeiCategory.Uid);
-		// RocketTier3Gui
-		registration.addRecipes(this.generateFuelLoadingRecipes(new ItemStack(ModInit.TIER_3_ROCKET_ITEM.get()), FluidUtil2.BUCKET_SIZE * RocketTier3Entity.FUEL_BUCKETS), RocketJeiCategory.Uid);
-		// RocketTier4GUI
-		registration.addRecipes(this.generateFuelLoadingRecipes(new ItemStack(ModInit.TIER_4_ROCKET_ITEM.get()), FluidUtil2.BUCKET_SIZE * RocketTier4Entity.FUEL_BUCKETS), RocketJeiCategory.Uid);
+		// Rockets
+		registration.addRecipes(this.generateFuelLoadingRecipes(), RocketJeiCategory.Uid);
 		// Rover
-		registration.addRecipes(this.generateFuelLoadingRecipes(new ItemStack(ModInit.ROVER_ITEM.get()), FluidUtil2.BUCKET_SIZE * RoverEntity.FUEL_BUCKETS), RoverJeiCategory.Uid);
+		registration.addRecipes(this.generateFuelLoadingRecipes(), RoverJeiCategory.Uid);
 		// Compressor
 		registration.addRecipes(generateCompressingRecipes(), CompressorJeiCategory.Uid);
 		// Fuel Maker
@@ -247,14 +246,14 @@ public class JeiPlugin implements IModPlugin {
 		return ForgeRegistries.FLUIDS.getValues().stream().filter(f -> f.isSource(f.defaultFluidState()) && Methods.tagCheck(f, ModInit.FLUID_VEHICLE_FUEL_TAG)).collect(Collectors.toList());
 	}
 
-	private List<FuelLoadingRecipe> generateFuelLoadingRecipes(ItemStack itemStack, int fualCapacity) {
+	private List<FuelLoadingRecipe> generateFuelLoadingRecipes() {
 		List<ItemStack> fuelTagBuckets = new ArrayList<>();
 
 		for (Fluid fluid : this.fuelTagFluids) {
 			fuelTagBuckets.add(new ItemStack(fluid.getBucket()));
 		}
 
-		FuelLoadingRecipe recipe = new FuelLoadingRecipe(fuelTagBuckets, this.fuelTagFluids, itemStack, fualCapacity);
+		FuelLoadingRecipe recipe = new FuelLoadingRecipe(fuelTagBuckets, this.fuelTagFluids);
 
 		List<FuelLoadingRecipe> recipes = new ArrayList<>();
 		recipes.add(recipe);
@@ -264,14 +263,10 @@ public class JeiPlugin implements IModPlugin {
 	public static class FuelLoadingRecipe {
 		private final List<ItemStack> fuelTagBuckets;
 		private final List<Fluid> fluids;
-		private final ItemStack itemStack;
-		private final int fuelCapacity;
 
-		public FuelLoadingRecipe(List<ItemStack> fuelTagBuckets, List<Fluid> fluids, ItemStack itemStack, int fuelCapacity) {
+		public FuelLoadingRecipe(List<ItemStack> fuelTagBuckets, List<Fluid> fluids) {
 			this.fuelTagBuckets = Collections.unmodifiableList(fuelTagBuckets);
 			this.fluids = Collections.unmodifiableList(fluids);
-			this.itemStack = itemStack;
-			this.fuelCapacity = fuelCapacity;
 		}
 
 		public List<ItemStack> getFuelTagBuckets() {
@@ -284,14 +279,6 @@ public class JeiPlugin implements IModPlugin {
 
 		public List<Fluid> getFluid() {
 			return this.fluids;
-		}
-
-		public ItemStack getItemStack() {
-			return this.itemStack;
-		}
-
-		public int getFuelCapacity() {
-			return this.fuelCapacity;
 		}
 
 	}
@@ -309,6 +296,11 @@ public class JeiPlugin implements IModPlugin {
 		registration.addRecipeCatalyst(new ItemStack(ModInit.COMPRESSOR_BLOCK.get()), CompressorJeiCategory.Uid);
 		// FuelMaker
 		registration.addRecipeCatalyst(new ItemStack(ModInit.FUEL_REFINERY_BLOCK.get()), FuelRefineryJeiCategory.Uid);
+		// Rockets
+		registration.addRecipeCatalyst(new ItemStack(ModInit.TIER_1_ROCKET_ITEM.get()), RocketJeiCategory.Uid);
+		registration.addRecipeCatalyst(new ItemStack(ModInit.TIER_2_ROCKET_ITEM.get()), RocketJeiCategory.Uid);
+		registration.addRecipeCatalyst(new ItemStack(ModInit.TIER_3_ROCKET_ITEM.get()), RocketJeiCategory.Uid);
+		registration.addRecipeCatalyst(new ItemStack(ModInit.TIER_4_ROCKET_ITEM.get()), RocketJeiCategory.Uid);
 		// Rover
 		registration.addRecipeCatalyst(new ItemStack(ModInit.ROVER_ITEM.get()), RoverJeiCategory.Uid);
 	}
@@ -799,8 +791,8 @@ public class JeiPlugin implements IModPlugin {
 
 		@Override
 		public void setIngredients(FuelLoadingRecipe recipe, IIngredients iIngredients) {
-			iIngredients.setInputLists(VanillaTypes.ITEM, Lists.newArrayList(recipe.getFuelTagBuckets(), Collections.singletonList(recipe.getItemStack())));
-			iIngredients.setInputLists(VanillaTypes.FLUID, Collections.singletonList(recipe.getFluidStacks(recipe.getFuelCapacity())));
+			iIngredients.setInputLists(VanillaTypes.ITEM, Collections.singletonList(recipe.getFuelTagBuckets()));
+			iIngredients.setInputLists(VanillaTypes.FLUID, Collections.singletonList(recipe.getFluidStacks(FluidUtil2.BUCKET_SIZE)));
 		}
 
 		@Override
@@ -808,12 +800,9 @@ public class JeiPlugin implements IModPlugin {
 			IGuiItemStackGroup itemStacks = iRecipeLayout.getItemStacks();
 			itemStacks.init(0, true, 13, 18);
 			itemStacks.set(0, iIngredients.getInputs(VanillaTypes.ITEM).get(0));
-			
-			itemStacks.init(1, true, 43, 41);
-			itemStacks.set(1, iIngredients.getInputs(VanillaTypes.ITEM).get(1));
 
 			IGuiFluidStackGroup fluidStacks = iRecipeLayout.getFluidStacks();
-			fluidStacks.init(0, true, 66, 12, 46, 46, recipe.getFuelCapacity(), false, null);
+			fluidStacks.init(0, true, 66, 12, 46, 46, FluidUtil2.BUCKET_SIZE, false, null);
 			fluidStacks.set(0, iIngredients.getInputs(VanillaTypes.FLUID).get(0));
 		}
 	}
@@ -1060,7 +1049,7 @@ public class JeiPlugin implements IModPlugin {
 		@Override
 		public void setIngredients(FuelLoadingRecipe recipe, IIngredients iIngredients) {
 			iIngredients.setInputLists(VanillaTypes.ITEM, Collections.singletonList(recipe.getFuelTagBuckets()));
-			iIngredients.setInputLists(VanillaTypes.FLUID, Collections.singletonList(recipe.getFluidStacks(recipe.getFuelCapacity())));
+			iIngredients.setInputLists(VanillaTypes.FLUID, Collections.singletonList(recipe.getFluidStacks(FluidUtil2.BUCKET_SIZE)));
 		}
 
 		@Override
@@ -1070,7 +1059,7 @@ public class JeiPlugin implements IModPlugin {
 			itemStacks.set(0, iIngredients.getInputs(VanillaTypes.ITEM).get(0));
 
 			IGuiFluidStackGroup fluidStacks = iRecipeLayout.getFluidStacks();
-			fluidStacks.init(0, true, 9, 8, GuiHelper.FLUID_TANK_WIDTH, GuiHelper.FLUID_TANK_HEIGHT, recipe.getFuelCapacity(), false, this.fluidOverlay);
+			fluidStacks.init(0, true, 9, 8, GuiHelper.FLUID_TANK_WIDTH, GuiHelper.FLUID_TANK_HEIGHT, FluidUtil2.BUCKET_SIZE, false, this.fluidOverlay);
 			fluidStacks.set(0, iIngredients.getInputs(VanillaTypes.FLUID).get(0));
 		}
 	}

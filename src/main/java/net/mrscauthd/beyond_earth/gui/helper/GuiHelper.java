@@ -145,10 +145,10 @@ public class GuiHelper {
 		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 	}
 
-	public static void drawRocketFluidTank(PoseStack matrixStack, int left, int top, FluidStack stack, int capacity, int amount) {
+	public static void drawRocketFluidTank(PoseStack matrixStack, int left, int top, FluidStack stack, int capacity) {
 		if (stack != null && !stack.isEmpty() && capacity > 0) {
 			int maxHeight = 46;
-			int scaledHeight = (int) Math.ceil(maxHeight * ((double) amount / (double) capacity));
+			int scaledHeight = (int) Math.ceil(maxHeight * ((double) stack.getAmount() / (double) capacity));
 			int offset = maxHeight - scaledHeight;
 			GuiHelper.drawFluid(matrixStack, left, top + offset, 46, scaledHeight, stack);
 		}
