@@ -1,0 +1,8 @@
+{
+  "parent": "block/inner_stairs",
+  "textures": {
+    "bottom": "beyond_earth:blocks/venus_stone_bricks",
+    "top": "beyond_earth:blocks/venus_stone_bricks",
+    "side": "beyond_earth:blocks/venus_stone_bricks"
+  }
+}

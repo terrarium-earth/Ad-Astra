@@ -280,7 +280,7 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 			glacioSpaceStationButton.visible = true;
 
 			//Planets
-			this.teleportButtonManager(bbButtonTex, bb2ButtonTex, mouseX, mouseY, 10, (this.height / 2) - 24 / 2, 70, 20, ms, glacioButton, "Planet", "9.807 m/s", "a" + "true" , "a" + "-20");
+			this.teleportButtonManager(bbButtonTex, bb2ButtonTex, mouseX, mouseY, 10, (this.height / 2) - 24 / 2, 70, 20, ms, glacioButton, "Planet", "3.721 m/s", "a" + "true" , "a" + "-20");
 
 			//Orbits
 			this.teleportButtonManager(sbbButtonTex, sbb2ButtonTex, mouseX, mouseY, 84, (this.height / 2) - 24 / 2, 37, 20, ms, glacioOrbitButton, "Orbit", "No Gravity", "c" + "false" , "c" + "-270");

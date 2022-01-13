@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "beyond_earth:moon_brick_slab",
-    "beyond_earth:cracked_moon_brick_slab"
+    "beyond_earth:moon_stone_brick_slab"
   ]
 }

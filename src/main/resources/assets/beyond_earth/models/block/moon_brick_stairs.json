@@ -1,8 +1,0 @@
-{
-  "parent": "block/stairs",
-  "textures": {
-    "bottom": "beyond_earth:blocks/moon_bricks",
-    "top": "beyond_earth:blocks/moon_bricks",
-    "side": "beyond_earth:blocks/moon_bricks"
-  }
-}

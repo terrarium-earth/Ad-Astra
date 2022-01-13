@@ -37,7 +37,7 @@
          ],
          "beyond_earth:fin_left":[
             {
-               "item":"beyond_earth:oxygen_tank"
+               "item":"minecraft:bucket"
             },
             {
                "item":"beyond_earth:rocket_fin"
@@ -45,7 +45,7 @@
          ],
          "beyond_earth:fin_right":[
             {
-               "item":"beyond_earth:oxygen_tank"
+               "item":"minecraft:bucket"
             },
             {
                "item":"beyond_earth:rocket_fin"
