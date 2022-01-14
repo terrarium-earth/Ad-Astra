@@ -227,16 +227,24 @@
   "container.entity.beyond_earth.rocket_t2": "Tier 2 Rocket",
   "container.entity.beyond_earth.rocket_t3": "Tier 3 Rocket",
   "container.entity.beyond_earth.rocket_t4": "Tier 4 Rocket",
+  "container.entity.beyond_earth.lander": "Lander",
+  "container.entity.beyond_earth.rover": "Rover",
 
 
   "tooltip.beyond_earth.oxygen_bubble_distributor": "Make a Oxygen Bullet %1$s ~ %2$s Blocks",
 
+
+  "message.beyond_earth.no_fuel": "§cNO FUEL! §7Fill the Rocket with §cFuel§7. (§6Sneak and Right Click§7)",
+  "message.beyond_earth.hold_space": "§7Hold §cSpace!",
+  
 
   "gui.beyond_earth.oxygen_bubble_distributor.workingarea.text": "Working Area: %1$sx%2$sx%3$s",
   "gui.beyond_earth.oxygen_bubble_distributor.workingarea.show": "Show",
   "gui.beyond_earth.oxygen_bubble_distributor.workingarea.hide": "Hide",
 
   "jei.tooltip.beyond_earth.oil": "  You can find Oil in the Ocean",
+  "jei.category.beyond_earth.rover": "Rover",
+  "jei.category.beyond_earth.rockets": "Rockets",
 
   "gauge_text.beyond_earth.using": "%1$s Using: %2$s",
   "gauge_text.beyond_earth.using2": "%1$s Using: %2$s/%4$s t",

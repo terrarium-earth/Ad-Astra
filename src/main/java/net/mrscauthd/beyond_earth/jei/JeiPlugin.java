@@ -759,7 +759,7 @@ public class JeiPlugin implements IModPlugin {
 		private final IDrawable icon;
 
 		public RocketJeiCategory(IGuiHelper guiHelper) {
-			this.title = new TextComponent("Rockets");
+			this.title = new TranslatableComponent("jei.category." + BeyondEarthMod.MODID + ".rockets");
 			this.background = guiHelper.createDrawable(new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/rocket_gui_jei.png"), 0, 0, 128, 71);
 			this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM, new ItemStack(ModInit.TIER_1_ROCKET_ITEM.get()));
 		}
@@ -1016,7 +1016,7 @@ public class JeiPlugin implements IModPlugin {
 		private final IDrawable fluidOverlay;
 
 		public RoverJeiCategory(IGuiHelper guiHelper) {
-			this.title = new TextComponent("Rover");
+			this.title = new TranslatableComponent("jei.category." + BeyondEarthMod.MODID + ".rover");
 			this.background = guiHelper.createDrawable(new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/rover_jei.png"), 0, 0, 144, 84);
 			this.fluidOverlay = guiHelper.drawableBuilder(GuiHelper.FLUID_TANK_PATH, 0, 0, GuiHelper.FLUID_TANK_WIDTH, GuiHelper.FLUID_TANK_HEIGHT).setTextureSize(GuiHelper.FLUID_TANK_WIDTH, GuiHelper.FLUID_TANK_HEIGHT).build();
 		}

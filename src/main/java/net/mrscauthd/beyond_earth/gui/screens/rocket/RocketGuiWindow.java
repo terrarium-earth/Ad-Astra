@@ -11,7 +11,6 @@ import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraftforge.api.distmarker.Dist;
@@ -72,9 +71,7 @@ public class RocketGuiWindow extends AbstractContainerScreen<RocketGui.GuiContai
 
 	@Override
 	protected void renderLabels(PoseStack ms, int p_97809_, int p_97810_) {
-		TranslatableComponent title = new TranslatableComponent("container." + menu.rocket.getType());
-
-		this.font.draw(ms, title.getString(), (float) (this.imageWidth / 2) - 33, (float) this.titleLabelY, 4210752);
+		this.font.draw(ms, this.title.getString(), (float) (this.imageWidth / 2) - 33, (float) this.titleLabelY, 4210752);
 
 		this.font.draw(ms, this.playerInventoryTitle, (float) this.inventoryLabelX, (float) this.inventoryLabelY, 4210752);
 	}

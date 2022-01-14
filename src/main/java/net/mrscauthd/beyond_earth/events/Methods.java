@@ -15,6 +15,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
 import net.minecraft.network.protocol.game.ClientboundPlayerAbilitiesPacket;
 import net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket;
@@ -314,13 +315,13 @@ public class Methods {
 
     public static void noFuelMessage(Player player) {
         if (!player.level.isClientSide) {
-            player.displayClientMessage(new TextComponent("\u00A7cNO FUEL! \u00A77Fill the Rocket with \u00A7cFuel\u00A77. (\u00A76Sneak and Right Click\u00A77)"), false);
+            player.displayClientMessage(new TranslatableComponent("message." + BeyondEarthMod.MODID + ".no_fuel"), false);
         }
     }
 
     public static void holdSpaceMessage(Player player) {
         if (!player.level.isClientSide) {
-            player.displayClientMessage(new TextComponent("\u00A77Hold \u00A7cSpace!"), false);
+            player.displayClientMessage(new TranslatableComponent("message." + BeyondEarthMod.MODID + ".hold_space"), false);
         }
     }
 
