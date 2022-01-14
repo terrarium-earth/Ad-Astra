@@ -127,6 +127,9 @@
   "block.beyond_earth.water_pump": "물 펌프",
   "block.beyond_earth.raw_desh_block": "데쉬 원석 블록",
   "block.beyond_earth.raw_ostrum_block": "오스트룸 원석 블록",
+  "block.beyond_earth.moon_ice_shard_ore": "달 얼음 조각 광석",
+  "block.beyond_earth.mars_ice_shard_ore": "화성 얼음 조각 광석",
+  "block.beyond_earth.glacio_ice_shard_ore": "Glacio 얼음 조각 광석",
 
   "block.beyond_earth.moon_stone_brick_slab": "Moon Stone Brick Slab",
   "block.beyond_earth.moon_stone_bricks": "Moon Stone Bricks",
