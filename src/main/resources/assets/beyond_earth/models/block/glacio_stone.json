@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "beyond_earth:blocks/glacio_stone",
+    "up": "beyond_earth:blocks/glacio_stone",
+    "north": "beyond_earth:blocks/glacio_stone",
+    "east": "beyond_earth:blocks/glacio_stone",
+    "south": "beyond_earth:blocks/glacio_stone",
+    "west": "beyond_earth:blocks/glacio_stone",
+    "particle": "beyond_earth:blocks/glacio_stone"
+  }
+}
