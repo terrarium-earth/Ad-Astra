@@ -153,6 +153,10 @@
   "block.beyond_earth.cracked_venus_sandstone_bricks": "Cracked Venus Sandstone Bricks",
   "block.beyond_earth.venus_sandstone_brick_stairs": "Venus Sandstone Brick Stairs",
 
+  "block.beyond_earth.venus_calorite_ore": "Venus Calorite Ore",
+  "block.beyond_earth.calorite_block": "Block of Calorite",
+  "block.beyond_earth.raw_calorite_block": "Raw Calorite Block",
+  
   "fluid.beyond_earth.fuel": "Fuel",
   "fluid.fuel": "Fuel",
   "fluid.beyond_earth.oil": "Oil",
@@ -220,6 +224,10 @@
   "fluid.beyond_earth.molten_ostrum": "Molten Ostrum",
   "fluid.beyond_earth.flowing_molten_ostrum": "Flowing Molten Ostrum",
   "item.beyond_earth.molten_ostrum_bucket": "Molten Ostrum Bucket",
+  "block.beyond_earth.molten_calorite_fluid": "Molten Calorite",
+  "fluid.beyond_earth.molten_calorite": "Molten Calorite",
+  "fluid.beyond_earth.flowing_molten_calorite": "Flowing Molten Calorite",
+  "item.beyond_earth.molten_calorite_bucket": "Molten Calorite Bucket",
 
   "container.beyond_earth.coal_generator": "Coal Generator",
   "container.beyond_earth.compressor": "Compressor",

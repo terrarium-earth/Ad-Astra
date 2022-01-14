@@ -11,12 +11,14 @@
     "beyond_earth:water_pump",
 	"beyond_earth:raw_desh_block",
 	"beyond_earth:raw_ostrum_block",
+	"beyond_earth:raw_calorite_block",
 
     "beyond_earth:rocket_launch_pad",
 
     "beyond_earth:steel_block",
     "beyond_earth:desh_block",
     "beyond_earth:ostrum_block",
+    "beyond_earth:calorite_block",
     "beyond_earth:iron_plating_block",
     "beyond_earth:rusted_iron_pillar_block",
     "beyond_earth:rusted_iron_plating_block",
@@ -65,6 +67,7 @@
     "beyond_earth:venus_coal_ore",
     "beyond_earth:venus_diamond_ore",
     "beyond_earth:venus_gold_ore",
+    "beyond_earth:venus_calorite_ore",
 
     "beyond_earth:flag",
     "beyond_earth:flag_blue",

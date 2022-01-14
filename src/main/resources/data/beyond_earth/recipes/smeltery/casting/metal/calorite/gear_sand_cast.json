@@ -1,0 +1,28 @@
+{
+  "type": "tconstruct:casting_table",
+  "conditions": [
+    {
+      "value": {
+        "tag": "forge:gears/calorite",
+        "type": "forge:tag_empty"
+      },
+      "type": "forge:not"
+    },
+    {
+      "modid": "tconstruct",
+      "type": "forge:mod_loaded"
+    }
+  ],
+  "cast": {
+    "tag": "tconstruct:casts/single_use/gear"
+  },
+  "cast_consumed": true,
+  "fluid": {
+    "tag": "forge:molten_calorite",
+    "amount": 360
+  },
+  "result": {
+    "tag": "forge:gears/calorite"
+  },
+  "cooling_time": 100
+}

@@ -1,0 +1,25 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "value": {
+        "tag": "forge:dusts/calorite",
+        "type": "forge:tag_empty"
+      },
+      "type": "forge:not"
+    },
+    {
+      "modid": "tconstruct",
+      "type": "forge:mod_loaded"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:dusts/calorite"
+  },
+  "result": {
+    "fluid": "beyond_earth:molten_calorite",
+    "amount": 90
+  },
+  "temperature": 500,
+  "time": 37
+}
