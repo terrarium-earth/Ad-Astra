@@ -190,7 +190,7 @@
   "key.categories.beyond_earth": "Beyond Earth",
   "key.beyond_earth.rocket_start": "로켓 발사",
 
-  "death.attack.oxygen": "%1$s은(는) 더 이상 숨 쉴 수 없습니다",
+  "death.attack.oxygen.player": "%1$s은(는) 더 이상 숨 쉴 수 없습니다",
   "death.attack.venus.acid": "%1$s은(는) 대량의 산성에 희생되었습니다",
 
   "entity.beyond_earth.alien.farmer": "농부",

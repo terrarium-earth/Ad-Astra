@@ -41,7 +41,7 @@ public class ClientEventBusMars {
 		DimensionSpecialEffects.EFFECTS.put(DIM_RENDER_INFO, new DimensionSpecialEffects(192, true, DimensionSpecialEffects.SkyType.NORMAL, false, false) {
 			@Override
 			public Vec3 getBrightnessDependentFogColor(Vec3 p_108878_, float p_108879_) {
-                return p_108878_.multiply(p_108879_ * 0.967058823529 + 0.06, p_108879_ * 0.770980392157 + 0.06, p_108879_ * 0.594901960784 + 0.09);
+                return p_108878_.multiply(p_108879_ * 0.967058823529 + 0.03, p_108879_ * 0.770980392157 + 0.03, p_108879_ * 0.594901960784 + 0.06);
 			}
 
             @Override

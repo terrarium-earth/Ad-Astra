@@ -119,12 +119,10 @@ public class ClientEventBusGlacio {
                         RenderSystem.disableTexture();
 
                         //STAR GEN
-                        float f10 = level.getStarBrightness(p_181412_) * f11;
-                        if (f10 > 0.0F) {
-                            RenderSystem.setShaderColor(f10, f10, f10, f10);
-                            FogRenderer.setupNoFog();
-                            Minecraft.getInstance().levelRenderer.starBuffer.drawWithShader(p_181410_.last().pose(), starmatrix4f, GameRenderer.getPositionShader());
-                        }
+                        float f10 = 1;
+                        RenderSystem.setShaderColor(f10, f10, f10, f10);
+                        FogRenderer.setupNoFog();
+                        Minecraft.getInstance().levelRenderer.starBuffer.drawWithShader(p_181410_.last().pose(), starmatrix4f, GameRenderer.getPositionShader());
 
                         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
                         RenderSystem.disableBlend();

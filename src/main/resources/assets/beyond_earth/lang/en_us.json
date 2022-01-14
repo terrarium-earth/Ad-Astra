@@ -189,8 +189,8 @@
   "key.categories.beyond_earth": "Beyond Earth",
   "key.beyond_earth.rocket_start": "Rocket Start",
 
-  "death.attack.oxygen": "%1$s couldn\u0027t breathe anymore",
-  "death.attack.venus.acid": "%1$s plenty of acid to sacrifice",
+  "death.attack.oxygen.player": "%1$s couldn\u0027t breathe anymore",
+  "death.attack.venus.acid": "%1$s was a sacrifice to the acid",
 
   "entity.beyond_earth.alien.farmer": "Farmer",
   "entity.beyond_earth.alien.fisherman": "Fisherman",
