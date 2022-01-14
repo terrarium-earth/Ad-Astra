@@ -160,6 +160,17 @@
   "block.beyond_earth.calorite_block": "Block of Calorite",
   "block.beyond_earth.raw_calorite_block": "Raw Calorite Block",
   
+  "block.beyond_earth.permafrost": "Permafrost",
+  "block.beyond_earth.glacio_stone": "Glacio Stone",
+  "block.beyond_earth.glacio_stone_bricks": "Glacio Stone Bricks",
+  "block.beyond_earth.cracked_glacio_stone_bricks": "Cracked Glacio Stone Bricks",
+  "block.beyond_earth.glacio_stone_brick_slab": "Glacio Stone Brick Slab",
+  "block.beyond_earth.glacio_stone_brick_stairs": "Glacio Stone Brick Stairs",
+  "block.beyond_earth.glacio_coal_ore": "Glacio Coal Ore",
+  "block.beyond_earth.glacio_copper_ore": "Glacio Copper Ore",
+  "block.beyond_earth.glacio_iron_ore": "Glacio Iron Ore",
+  "block.beyond_earth.glacio_lapis_ore": "Glacio Lapis Lazuli Ore",
+  
   "fluid.beyond_earth.fuel": "Fuel",
   "fluid.fuel": "Fuel",
   "fluid.beyond_earth.oil": "Oil",

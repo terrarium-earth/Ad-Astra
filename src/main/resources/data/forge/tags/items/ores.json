@@ -11,6 +11,10 @@
     "beyond_earth:venus_coal_ore",
     "beyond_earth:venus_diamond_ore",
     "beyond_earth:venus_gold_ore",
-    "beyond_earth:venus_calorite_ore"
+    "beyond_earth:venus_calorite_ore",
+    "beyond_earth:glacio_coal_ore",
+    "beyond_earth:glacio_copper_ore",
+    "beyond_earth:glacio_iron_ore",
+    "beyond_earth:glacio_lapis_ore"
   ]
 }

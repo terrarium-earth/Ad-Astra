@@ -86,6 +86,17 @@
     
 	"beyond_earth:moon_ice_shard_ore",
 	"beyond_earth:mars_ice_shard_ore",
-	"beyond_earth:glacio_ice_shard_ore"
+	"beyond_earth:glacio_ice_shard_ore",
+	
+    "beyond_earth:glacio_coal_ore",
+    "beyond_earth:glacio_copper_ore",
+    "beyond_earth:glacio_iron_ore",
+    "beyond_earth:glacio_lapis_ore",
+    "beyond_earth:glacio_stone_bricks",
+    "beyond_earth:cracked_glacio_stone_bricks",
+    "beyond_earth:glacio_stone_brick_slab",
+    "beyond_earth:glacio_stone_brick_stairs",
+    "beyond_earth:glacio_stone",
+    "beyond_earth:permafrost"
   ]
 }
