@@ -12,10 +12,6 @@ public class SeedFixer {
         return SEED;
     }
 
-    /**
-     * DO NOT USE THIS METHOD
-     * For internal Forge use only
-     */
     public static long setSeedInternal(long seed) {
         SEED = seed;
         return seed;
