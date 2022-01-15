@@ -8,6 +8,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.ItemSupplier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -20,8 +21,8 @@ import net.mrscauthd.beyond_earth.ModInit;
 
 import java.util.Random;
 
-@OnlyIn(value = Dist.CLIENT)
-public class IceSpitEntity extends AbstractArrow {
+@OnlyIn(value = Dist.CLIENT, _interface = ItemSupplier.class)
+public class IceSpitEntity extends AbstractArrow implements ItemSupplier {
     public IceSpitEntity(EntityType<? extends IceSpitEntity> type, Level world) {
         super(type, world);
     }
@@ -38,6 +39,12 @@ public class IceSpitEntity extends AbstractArrow {
     @Override
     protected ItemStack getPickupItem() {
         return null;
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public ItemStack getItem() {
+        return new ItemStack(ModInit.ICE_SHARD.get(), 1);
     }
 
     @Override

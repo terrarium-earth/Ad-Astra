@@ -1,0 +1,25 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "value": {
+        "tag": "forge:wires/calorite",
+        "type": "forge:tag_empty"
+      },
+      "type": "forge:not"
+    },
+    {
+      "modid": "tconstruct",
+      "type": "forge:mod_loaded"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:wires/calorite"
+  },
+  "result": {
+    "fluid": "beyond_earth:molten_calorite",
+    "amount": 45
+  },
+  "temperature": 500,
+  "time": 10
+}

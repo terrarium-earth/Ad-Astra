@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "beyond_earth:blocks/mars_ice_shard_ore",
+    "up": "beyond_earth:blocks/mars_ice_shard_ore",
+    "north": "beyond_earth:blocks/mars_ice_shard_ore",
+    "east": "beyond_earth:blocks/mars_ice_shard_ore",
+    "south": "beyond_earth:blocks/mars_ice_shard_ore",
+    "west": "beyond_earth:blocks/mars_ice_shard_ore",
+    "particle": "beyond_earth:blocks/mars_ice_shard_ore"
+  }
+}

@@ -53,6 +53,14 @@
   "item.beyond_earth.raw_desh_block": "Raw Desh Block",
   "item.beyond_earth.raw_ostrum_block": "Raw Ostrum Block",
   "item.beyond_earth.rocket_t4": "Tier 4 Rocket",
+  "item.beyond_earth.ice_shard": "Ice Shard",
+
+  "item.beyond_earth.calorite_ingot": "Calorite Ingot",
+  "item.beyond_earth.compressed_calorite": "Compressed Calorite",
+  "item.beyond_earth.calorite_nugget": "Calorite Nugget",
+  "item.beyond_earth.raw_calorite": "Raw Calorite",
+  "item.beyond_earth.calorite_engine": "Calorite Engine",
+  "item.beyond_earth.calorite_tank": "Calorite Tank",
 
 
   "itemGroup.tab_normal": "Beyond Earth",
@@ -121,6 +129,9 @@
   "block.beyond_earth.water_pump": "Water Pump",
   "block.beyond_earth.raw_desh_block": "Raw Desh Block",
   "block.beyond_earth.raw_ostrum_block": "Raw Ostrum Block",
+  "block.beyond_earth.moon_ice_shard_ore": "Moon Ice Shard Ore",
+  "block.beyond_earth.mars_ice_shard_ore": "Mars Ice Shard Ore",
+  "block.beyond_earth.glacio_ice_shard_ore": "Glacio Ice Shard Ore",
 
   "block.beyond_earth.moon_stone_brick_slab": "Moon Stone Brick Slab",
   "block.beyond_earth.moon_stone_bricks": "Moon Stone Bricks",
@@ -147,6 +158,21 @@
   "block.beyond_earth.cracked_venus_sandstone_bricks": "Cracked Venus Sandstone Bricks",
   "block.beyond_earth.venus_sandstone_brick_stairs": "Venus Sandstone Brick Stairs",
 
+  "block.beyond_earth.venus_calorite_ore": "Venus Calorite Ore",
+  "block.beyond_earth.calorite_block": "Block of Calorite",
+  "block.beyond_earth.raw_calorite_block": "Raw Calorite Block",
+  
+  "block.beyond_earth.permafrost": "Permafrost",
+  "block.beyond_earth.glacio_stone": "Glacio Stone",
+  "block.beyond_earth.glacio_stone_bricks": "Glacio Stone Bricks",
+  "block.beyond_earth.cracked_glacio_stone_bricks": "Cracked Glacio Stone Bricks",
+  "block.beyond_earth.glacio_stone_brick_slab": "Glacio Stone Brick Slab",
+  "block.beyond_earth.glacio_stone_brick_stairs": "Glacio Stone Brick Stairs",
+  "block.beyond_earth.glacio_coal_ore": "Glacio Coal Ore",
+  "block.beyond_earth.glacio_copper_ore": "Glacio Copper Ore",
+  "block.beyond_earth.glacio_iron_ore": "Glacio Iron Ore",
+  "block.beyond_earth.glacio_lapis_ore": "Glacio Lapis Lazuli Ore",
+  
   "fluid.beyond_earth.fuel": "Fuel",
   "fluid.fuel": "Fuel",
   "fluid.beyond_earth.oil": "Oil",
@@ -214,6 +240,10 @@
   "fluid.beyond_earth.molten_ostrum": "Molten Ostrum",
   "fluid.beyond_earth.flowing_molten_ostrum": "Flowing Molten Ostrum",
   "item.beyond_earth.molten_ostrum_bucket": "Molten Ostrum Bucket",
+  "block.beyond_earth.molten_calorite_fluid": "Molten Calorite",
+  "fluid.beyond_earth.molten_calorite": "Molten Calorite",
+  "fluid.beyond_earth.flowing_molten_calorite": "Flowing Molten Calorite",
+  "item.beyond_earth.molten_calorite_bucket": "Molten Calorite Bucket",
 
   "container.beyond_earth.coal_generator": "Coal Generator",
   "container.beyond_earth.compressor": "Compressor",

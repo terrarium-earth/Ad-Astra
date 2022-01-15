@@ -12,7 +12,7 @@
       "ore_veins_enabled": false,
       "legacy_random_source": false,
       "default_block": {
-        "Name": "minecraft:stone"
+        "Name": "beyond_earth:glacio_stone"
       },
       "default_fluid": {
         "Name": "minecraft:air"
@@ -193,7 +193,7 @@
                     {
                       "type": "minecraft:block",
                       "result_state": {
-                        "Name": "minecraft:packed_ice"
+                        "Name": "beyond_earth:permafrost"
                       }
                     }
                   ]

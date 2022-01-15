@@ -11,12 +11,14 @@
     "beyond_earth:water_pump",
 	"beyond_earth:raw_desh_block",
 	"beyond_earth:raw_ostrum_block",
+	"beyond_earth:raw_calorite_block",
 
     "beyond_earth:rocket_launch_pad",
 
     "beyond_earth:steel_block",
     "beyond_earth:desh_block",
     "beyond_earth:ostrum_block",
+    "beyond_earth:calorite_block",
     "beyond_earth:iron_plating_block",
     "beyond_earth:rusted_iron_pillar_block",
     "beyond_earth:rusted_iron_plating_block",
@@ -65,6 +67,7 @@
     "beyond_earth:venus_coal_ore",
     "beyond_earth:venus_diamond_ore",
     "beyond_earth:venus_gold_ore",
+    "beyond_earth:venus_calorite_ore",
 
     "beyond_earth:flag",
     "beyond_earth:flag_blue",
@@ -79,6 +82,21 @@
     "beyond_earth:flag_pink",
     "beyond_earth:flag_purple",
     "beyond_earth:flag_red",
-    "beyond_earth:flag_yellow"
+    "beyond_earth:flag_yellow",
+    
+	"beyond_earth:moon_ice_shard_ore",
+	"beyond_earth:mars_ice_shard_ore",
+	"beyond_earth:glacio_ice_shard_ore",
+	
+    "beyond_earth:glacio_coal_ore",
+    "beyond_earth:glacio_copper_ore",
+    "beyond_earth:glacio_iron_ore",
+    "beyond_earth:glacio_lapis_ore",
+    "beyond_earth:glacio_stone_bricks",
+    "beyond_earth:cracked_glacio_stone_bricks",
+    "beyond_earth:glacio_stone_brick_slab",
+    "beyond_earth:glacio_stone_brick_stairs",
+    "beyond_earth:glacio_stone",
+    "beyond_earth:permafrost"
   ]
 }

@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#beyond_earth:engines/steel",
+    "#beyond_earth:engines/desh",
+    "#beyond_earth:engines/ostrum",
+    "#beyond_earth:engines/calorite"
+  ]
+}

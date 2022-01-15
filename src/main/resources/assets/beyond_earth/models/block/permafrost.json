@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "beyond_earth:blocks/permafrost",
+    "up": "beyond_earth:blocks/permafrost",
+    "north": "beyond_earth:blocks/permafrost",
+    "east": "beyond_earth:blocks/permafrost",
+    "south": "beyond_earth:blocks/permafrost",
+    "west": "beyond_earth:blocks/permafrost",
+    "particle": "beyond_earth:blocks/permafrost"
+  }
+}

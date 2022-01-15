@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "experience": 0.2,
+  "cookingtime": 100,
+  "ingredient": {
+    "item": "beyond_earth:glacio_lapis_ore"
+  },
+  "result": {
+    "item": "minecraft:lapis_lazuli"
+  }
+}

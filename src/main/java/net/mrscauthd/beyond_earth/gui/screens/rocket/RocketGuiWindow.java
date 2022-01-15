@@ -12,6 +12,7 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -101,5 +102,9 @@ public class RocketGuiWindow extends AbstractContainerScreen<RocketGui.GuiContai
 
 	public Rectangle2d getFluidBounds() {
 		return GuiHelper.getRocketFluidTankBounds(66, 21);
+	}
+
+	public Entity getRocket() {
+		return menu.rocket;
 	}
 }

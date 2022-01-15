@@ -30,6 +30,7 @@ public class OreGeneration {
 
     private static PlacedFeature moonChesseOre;
     private static PlacedFeature soulSoil;
+    private static PlacedFeature moonIceShardOre;
     private static PlacedFeature moonIronOre;
     private static PlacedFeature moonDeshOre;
 
@@ -37,6 +38,7 @@ public class OreGeneration {
     public static RuleTestType<RuleTests.MarsRuleTest> MARS_MATCH;
     private static Feature<OreConfiguration> MARS_GEN_FEATURE;
 
+    private static PlacedFeature marsIceShardOre;
     private static PlacedFeature marsIronOre;
     private static PlacedFeature marsDiamondOre;
     private static PlacedFeature marsOstrumOre;
@@ -59,6 +61,12 @@ public class OreGeneration {
     public static RuleTestType<RuleTests.GlacioRuleTest> GLACIO_MATCH;
     private static Feature<OreConfiguration> GLACIO_GEN_FEATURE;
 
+    private static PlacedFeature glacioIceShardOre;
+    private static PlacedFeature glacioCoalOre;
+    private static PlacedFeature glacioCopperOre;
+    private static PlacedFeature glacioIronOre;
+    private static PlacedFeature glacioLapisOre;
+
     @SubscribeEvent
     public static void registerFeature(RegistryEvent.Register<Feature<?>> event) {
         MOON_MATCH = Registry.register(Registry.RULE_TEST, new ResourceLocation(BeyondEarthMod.MODID,"moon_ore_match"), () -> RuleTests.MoonRuleTest.codec);
@@ -77,6 +85,9 @@ public class OreGeneration {
         soulSoil = MOON_GEN_FEATURE.configured(new OreConfiguration(RuleTests.MoonRuleTest.INSTANCE, Blocks.SOUL_SOIL.defaultBlockState(), 60)).placed(commonOrePlacement(7, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-50), VerticalAnchor.aboveBottom(50))));
         Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"soul_soil"), soulSoil);
 
+        moonIceShardOre = MOON_GEN_FEATURE.configured(new OreConfiguration(RuleTests.MoonRuleTest.INSTANCE, ModInit.MOON_ICE_SHARD_ORE.get().defaultBlockState(), 10)).placed(commonOrePlacement(5, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"moon_ice_shard_ore"), moonIceShardOre);
+
         moonIronOre = MOON_GEN_FEATURE.configured(new OreConfiguration(RuleTests.MoonRuleTest.INSTANCE, ModInit.MOON_IRON_ORE.get().defaultBlockState(), 11)).placed(commonOrePlacement(5, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-64), VerticalAnchor.aboveBottom(64))));
         Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"moon_iron_ore"), moonIronOre);
 
@@ -88,6 +99,9 @@ public class OreGeneration {
         /**MARS*/
         MARS_GEN_FEATURE = new OreFeature(OreConfiguration.CODEC);
         event.getRegistry().register(MARS_GEN_FEATURE.setRegistryName("mars_ore"));
+
+        marsIceShardOre = MOON_GEN_FEATURE.configured(new OreConfiguration(RuleTests.MoonRuleTest.INSTANCE, ModInit.MARS_ICE_SHARD_ORE.get().defaultBlockState(), 10)).placed(commonOrePlacement(5, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"mars_ice_shard_ore"), marsIceShardOre);
 
         marsIronOre = MARS_GEN_FEATURE.configured(new OreConfiguration(RuleTests.MarsRuleTest.INSTANCE, ModInit.MARS_IRON_ORE.get().defaultBlockState(), 11)).placed(commonOrePlacement(5, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-64), VerticalAnchor.aboveBottom(64))));
         Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"mars_iron_ore"), marsIronOre);
@@ -126,11 +140,27 @@ public class OreGeneration {
         /**Glacio*/
         GLACIO_GEN_FEATURE = new OreFeature(OreConfiguration.CODEC);
         event.getRegistry().register(GLACIO_GEN_FEATURE.setRegistryName("glacio_ore"));
+
+        glacioIceShardOre = MOON_GEN_FEATURE.configured(new OreConfiguration(RuleTests.MoonRuleTest.INSTANCE, ModInit.GLACIO_ICE_SHARD_ORE.get().defaultBlockState(), 10)).placed(commonOrePlacement(5, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"glacio_ice_shard_ore"), glacioIceShardOre);
+
+        glacioCoalOre = MOON_GEN_FEATURE.configured(new OreConfiguration(RuleTests.MoonRuleTest.INSTANCE, ModInit.GLACIO_COAL_ORE.get().defaultBlockState(), 17)).placed(commonOrePlacement(20, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-125), VerticalAnchor.aboveBottom(125))));
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"glacio_coal_ore"), glacioCoalOre);
+
+        glacioCopperOre = MOON_GEN_FEATURE.configured(new OreConfiguration(RuleTests.MoonRuleTest.INSTANCE, ModInit.GLACIO_COPPER_ORE.get().defaultBlockState(), 17)).placed(commonOrePlacement(19, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"glacio_copper_ore"), glacioCopperOre);
+
+        glacioIronOre = MOON_GEN_FEATURE.configured(new OreConfiguration(RuleTests.MoonRuleTest.INSTANCE, ModInit.GLACIO_IRON_ORE.get().defaultBlockState(), 12)).placed(commonOrePlacement(5, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-64), VerticalAnchor.aboveBottom(64))));
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"glacio_iron_ore"), glacioIronOre);
+
+        glacioLapisOre = MOON_GEN_FEATURE.configured(new OreConfiguration(RuleTests.MoonRuleTest.INSTANCE, ModInit.GLACIO_LAPIS_ORE.get().defaultBlockState(), 9)).placed(commonOrePlacement(2, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-52), VerticalAnchor.aboveBottom(52))));
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"glacio_lapis_ore"), glacioLapisOre);
     }
 
     /** Ores gen in Biome (check also in with Biome it should gen)*/
     public static void biomesLoading(BiomeLoadingEvent event) {
         if (event.getName().getPath().equals(BiomeRegistry.moon.getRegistryName().getPath())) {
+            event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(() -> moonIceShardOre);
             event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(() -> moonIronOre);
             event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(() -> moonDeshOre);
             event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(() -> moonChesseOre);
@@ -138,6 +168,7 @@ public class OreGeneration {
         }
 
         if (event.getName().getPath().equals(BiomeRegistry.mars.getRegistryName().getPath())) {
+            event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(() -> marsIceShardOre);
             event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(() -> marsIronOre);
             event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(() -> marsDiamondOre);
             event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(() -> marsOstrumOre);
@@ -147,10 +178,20 @@ public class OreGeneration {
             event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(() -> mercuryIronOre);
         }
 
-        if (event.getName().getPath().equals(BiomeRegistry.venus.getRegistryName().getPath())) {
+        if (event.getName().getPath().equals(BiomeRegistry.venus.getRegistryName().getPath()) || event.getName().getPath().equals(BiomeRegistry.infernal_venus_barrens.getRegistryName().getPath())) {
             event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(() -> venusCoalOre);
             event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(() -> venusGoldOre);
             event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(() -> venusDiamondOre);
+            //TODO ADD CALORITE
+        }
+
+        if (event.getName().getPath().equals(BiomeRegistry.glacio.getRegistryName().getPath()) || event.getName().getPath().equals(BiomeRegistry.glacio_ice_spikes.getRegistryName().getPath())) {
+            event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(() -> glacioIceShardOre);
+            event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(() -> glacioCoalOre);
+            event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(() -> glacioIronOre);
+            event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(() -> glacioCopperOre);
+            event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(() -> glacioLapisOre);
+            //TODO ADD DEEPSLATE VERSION
         }
     }
 
