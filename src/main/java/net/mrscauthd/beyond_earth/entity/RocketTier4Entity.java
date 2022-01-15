@@ -11,6 +11,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -316,7 +317,7 @@ public class RocketTier4Entity extends PathfinderMob {
 			NetworkHooks.openGui((ServerPlayer) player, new MenuProvider() {
 				@Override
 				public Component getDisplayName() {
-					return new TextComponent("Tier 4 Rocket");
+					return new TranslatableComponent("container.entity." + BeyondEarthMod.MODID +".rocket_t4");
 				}
 
 				@Override

@@ -6,6 +6,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -27,6 +28,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.network.NetworkHooks;
+import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.gui.screens.lander.LanderGui;
 
 import net.minecraftforge.items.wrapper.EntityHandsInvWrapper;
@@ -226,7 +228,7 @@ public class LanderEntity extends PathfinderMob {
 			NetworkHooks.openGui((ServerPlayer) player, new MenuProvider() {
 				@Override
 				public Component getDisplayName() {
-					return new TextComponent("Lander");
+					return new TranslatableComponent("container.entity." + BeyondEarthMod.MODID +".lander");
 				}
 
 				@Override

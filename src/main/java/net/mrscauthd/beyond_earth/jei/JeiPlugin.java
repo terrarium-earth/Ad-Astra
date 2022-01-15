@@ -1204,7 +1204,7 @@ public class JeiPlugin implements IModPlugin {
 		private final IDrawable fluidOverlay;
 
 		public RoverJeiCategory(IGuiHelper guiHelper) {
-			this.title = new TextComponent("Rover");
+			this.title = new TranslatableComponent("jei.category." + BeyondEarthMod.MODID + ".rover");
 			this.background = guiHelper.createDrawable(new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/rover_jei.png"), 0, 0, 144, 84);
 			this.fluidOverlay = guiHelper.drawableBuilder(GuiHelper.FLUID_TANK_PATH, 0, 0, GuiHelper.FLUID_TANK_WIDTH, GuiHelper.FLUID_TANK_HEIGHT).setTextureSize(GuiHelper.FLUID_TANK_WIDTH, GuiHelper.FLUID_TANK_HEIGHT).build();
 		}

@@ -133,30 +133,30 @@
   "block.beyond_earth.mars_ice_shard_ore": "화성 얼음 조각 광석",
   "block.beyond_earth.glacio_ice_shard_ore": "Glacio 얼음 조각 광석",
 
-  "block.beyond_earth.moon_stone_brick_slab": "Moon Stone Brick Slab",
-  "block.beyond_earth.moon_stone_bricks": "Moon Stone Bricks",
-  "block.beyond_earth.cracked_moon_stone_bricks": "Cracked Moon Stone Bricks",
-  "block.beyond_earth.moon_stone_brick_stairs": "Moon Stone Brick Stairs",
+  "block.beyond_earth.moon_stone_brick_slab": "달 석재 벽돌 반 블록",
+  "block.beyond_earth.moon_stone_bricks": "달 석재 벽돌",
+  "block.beyond_earth.cracked_moon_stone_bricks": "금 간 달 석재 벽돌",
+  "block.beyond_earth.moon_stone_brick_stairs": "달 석재 벽돌 계단",
 
-  "block.beyond_earth.mars_stone_brick_slab": "Mars Stone Brick Slab",
-  "block.beyond_earth.mars_stone_bricks": "Mars Stone Bricks",
-  "block.beyond_earth.cracked_mars_stone_bricks": "Cracked Mars Stone Bricks",
-  "block.beyond_earth.mars_stone_brick_stairs": "Mars Stone Brick Stairs",
+  "block.beyond_earth.mars_stone_brick_slab": "화성 석재 벽돌 반 블록",
+  "block.beyond_earth.mars_stone_bricks": "화성 석재 벽돌",
+  "block.beyond_earth.cracked_mars_stone_bricks": "금 간 화성 석재 벽돌",
+  "block.beyond_earth.mars_stone_brick_stairs": "화성 석재 벽돌 계단",
 
-  "block.beyond_earth.mercury_stone_brick_slab": "Mercury Stone Brick Slab",
-  "block.beyond_earth.mercury_stone_bricks": "Mercury Stone Bricks",
-  "block.beyond_earth.cracked_mercury_stone_bricks": "Cracked Mercury Stone Bricks",
-  "block.beyond_earth.mercury_stone_brick_stairs": "Mercury Stone Brick Stairs",
+  "block.beyond_earth.mercury_stone_brick_slab": "수성 석재 벽돌 반 블록",
+  "block.beyond_earth.mercury_stone_bricks": "수성 석재 벽돌",
+  "block.beyond_earth.cracked_mercury_stone_bricks": "금 간 수성 석재 벽돌",
+  "block.beyond_earth.mercury_stone_brick_stairs": "수성 석재 벽돌 계단",
 
-  "block.beyond_earth.venus_stone_brick_slab": "Venus Stone Brick Slab",
-  "block.beyond_earth.venus_stone_bricks": "Venus Stone Bricks",
-  "block.beyond_earth.cracked_venus_stone_bricks": "Cracked Venus Stone Bricks",
-  "block.beyond_earth.venus_stone_brick_stairs": "Venus Stone Brick Stairs",
+  "block.beyond_earth.venus_stone_brick_slab": "금성 석재 벽돌 반 블록",
+  "block.beyond_earth.venus_stone_bricks": "금성 석재 벽돌",
+  "block.beyond_earth.cracked_venus_stone_bricks": "금 간 금성 석재 벽돌",
+  "block.beyond_earth.venus_stone_brick_stairs": "금성 석재 벽돌 계단",
 
-  "block.beyond_earth.venus_sandstone_brick_slab": "Venus Sandstone Brick Slab",
-  "block.beyond_earth.venus_sandstone_bricks": "Venus Sandstone Bricks",
-  "block.beyond_earth.cracked_venus_sandstone_bricks": "Cracked Venus Sandstone Bricks",
-  "block.beyond_earth.venus_sandstone_brick_stairs": "Venus Sandstone Brick Stairs",
+  "block.beyond_earth.venus_sandstone_brick_slab": "금성 사암 벽돌 반 블록",
+  "block.beyond_earth.venus_sandstone_bricks": "금성 사암 벽돌",
+  "block.beyond_earth.cracked_venus_sandstone_bricks": "금 간 금성 사암 벽돌",
+  "block.beyond_earth.venus_sandstone_brick_stairs": "금성 사암 벽돌 계단",
 
   "block.beyond_earth.permafrost": "영구동토",
   "block.beyond_earth.glacio_stone": "Glacio 돌",
@@ -257,9 +257,15 @@
   "container.entity.beyond_earth.rocket_t2": "2 티어 로켓",
   "container.entity.beyond_earth.rocket_t3": "3 티어 로켓",
   "container.entity.beyond_earth.rocket_t4": "4 티어 로켓",
+  "container.entity.beyond_earth.lander": "착륙선",
+  "container.entity.beyond_earth.rover": "로버",
 
 
   "tooltip.beyond_earth.oxygen_bubble_distributor": "%1$s ~ %2$s 블록 범위 내 산소 기포 생성",
+
+
+  "message.beyond_earth.no_fuel": "§c연료 부족! §7로켓에 §c연료§7를 채우세요. (§6웅크리기 + 로켓에 오른쪽 버튼§7)",
+  "message.beyond_earth.hold_space": "§c스페이스§7를 꾹 누르세요!",
 
 
   "gui.beyond_earth.oxygen_bubble_distributor.workingarea.text": "작업 영역: %1$sx%2$sx%3$s",
@@ -267,6 +273,8 @@
   "gui.beyond_earth.oxygen_bubble_distributor.workingarea.hide": "숨김",
 
   "jei.tooltip.beyond_earth.oil": "  바다에서 찾을 수 있습니다",
+  "jei.category.beyond_earth.rover": "로버",
+  "jei.category.beyond_earth.rockets": "로켓",
 
   "gauge_text.beyond_earth.using": "%1$s 소모: %2$s",
   "gauge_text.beyond_earth.using2": "%1$s 소모: %2$s/%4$s t",
