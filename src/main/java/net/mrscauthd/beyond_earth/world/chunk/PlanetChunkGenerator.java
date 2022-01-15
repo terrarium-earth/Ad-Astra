@@ -19,10 +19,7 @@ import net.minecraft.world.level.*;
 import net.minecraft.world.level.biome.*;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.chunk.CarvingMask;
-import net.minecraft.world.level.chunk.ChunkAccess;
-import net.minecraft.world.level.chunk.LevelChunkSection;
-import net.minecraft.world.level.chunk.ProtoChunk;
+import net.minecraft.world.level.chunk.*;
 import net.minecraft.world.level.levelgen.*;
 import net.minecraft.world.level.levelgen.blending.Blender;
 import net.minecraft.world.level.levelgen.carver.CarvingContext;
@@ -31,6 +28,7 @@ import net.minecraft.world.level.levelgen.feature.*;
 import net.minecraft.world.level.levelgen.material.MaterialRuleList;
 import net.minecraft.world.level.levelgen.material.WorldGenMaterialRule;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
+import net.mrscauthd.beyond_earth.world.chunk.seedfixer.SeedFixer;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -52,6 +50,7 @@ public class PlanetChunkGenerator extends NoiseBasedChunkGenerator {
             return p_188652_.settings;
         })).apply(p_188643_, p_188643_.stable(PlanetChunkGenerator::new));
     });
+
     private static final BlockState AIR = Blocks.AIR.defaultBlockState();
     private static final BlockState[] EMPTY_COLUMN = new BlockState[0];
     protected final BlockState defaultBlock;
@@ -68,14 +67,14 @@ public class PlanetChunkGenerator extends NoiseBasedChunkGenerator {
     }
 
     private PlanetChunkGenerator(Registry<NormalNoise.NoiseParameters> p_188614_, BiomeSource p_188615_, BiomeSource p_188616_, long p_188617_, Supplier<NoiseGeneratorSettings> p_188618_) {
-        super(p_188614_, p_188615_, p_188617_, p_188618_);
+        super(p_188614_, p_188615_, p_188617_ == 0 ? SeedFixer.getSeed() : p_188617_, p_188618_);
         this.noises = p_188614_;
-        this.seed = p_188617_;
+        this.seed = genSeed(p_188617_);
         this.settings = p_188618_;
         NoiseGeneratorSettings noisegeneratorsettings = this.settings.get();
         this.defaultBlock = noisegeneratorsettings.getDefaultBlock();
         NoiseSettings noisesettings = noisegeneratorsettings.noiseSettings();
-        this.sampler = new NoiseSampler(noisesettings, noisegeneratorsettings.isNoiseCavesEnabled(), p_188617_, p_188614_, noisegeneratorsettings.getRandomSource());
+        this.sampler = new NoiseSampler(noisesettings, noisegeneratorsettings.isNoiseCavesEnabled(), genSeed(p_188617_), p_188614_, noisegeneratorsettings.getRandomSource());
         ImmutableList.Builder<WorldGenMaterialRule> builder = ImmutableList.builder();
         builder.add(NoiseChunk::updateNoiseAndGenerateBaseState);
         builder.add(NoiseChunk::oreVeinify);
@@ -87,7 +86,15 @@ public class PlanetChunkGenerator extends NoiseBasedChunkGenerator {
         this.globalFluidPicker = (p_198228_, p_198229_, p_198230_) -> {
             return p_198229_ < Math.min(-54, i) ? aquifer$fluidstatus : aquifer$fluidstatus1;
         };
-        this.surfaceSystem = new SurfaceSystem(p_188614_, this.defaultBlock, i, p_188617_, noisegeneratorsettings.getRandomSource());
+        this.surfaceSystem = new SurfaceSystem(p_188614_, this.defaultBlock, i, genSeed(p_188617_), noisegeneratorsettings.getRandomSource());
+    }
+
+    public long genSeed(long seed) {
+        if (seed == 0) {
+            return SeedFixer.getSeed();
+        } else {
+            return seed;
+        }
     }
 
     public CompletableFuture<ChunkAccess> createBiomes(Registry<Biome> p_197005_, Executor p_197006_, Blender p_197007_, StructureFeatureManager p_197008_, ChunkAccess p_197009_) {
