@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "beyond_earth:permafrost_block"
+          "name": "beyond_earth:permafrost"
         }
       ],
       "conditions": [

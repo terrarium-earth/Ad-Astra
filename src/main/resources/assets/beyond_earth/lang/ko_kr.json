@@ -54,6 +54,12 @@
   "item.beyond_earth.raw_ostrum_block": "오스트룸 원석 블록",
   "item.beyond_earth.rocket_t4": "4 티어 로켓",
 
+  "item.beyond_earth.calorite_ingot": "칼로라이트 주괴",
+  "item.beyond_earth.compressed_calorite": "압축 칼로라이트",
+  "item.beyond_earth.calorite_nugget": "칼로라이트 조각",
+  "item.beyond_earth.raw_calorite": "칼로라이트 원석",
+  "item.beyond_earth.calorite_engine": "칼로라이트 엔진",
+  "item.beyond_earth.calorite_tank": "칼로라이트 탱크",
 
   "itemGroup.tab_normal": "Beyond Earth",
   "itemGroup.tab_flags": "Beyond Earth: 깃발",
@@ -121,6 +127,9 @@
   "block.beyond_earth.water_pump": "물 펌프",
   "block.beyond_earth.raw_desh_block": "데쉬 원석 블록",
   "block.beyond_earth.raw_ostrum_block": "오스트룸 원석 블록",
+  "block.beyond_earth.moon_ice_shard_ore": "달 얼음 조각 광석",
+  "block.beyond_earth.mars_ice_shard_ore": "화성 얼음 조각 광석",
+  "block.beyond_earth.glacio_ice_shard_ore": "Glacio 얼음 조각 광석",
 
   "block.beyond_earth.moon_stone_brick_slab": "Moon Stone Brick Slab",
   "block.beyond_earth.moon_stone_bricks": "Moon Stone Bricks",
@@ -147,6 +156,20 @@
   "block.beyond_earth.cracked_venus_sandstone_bricks": "Cracked Venus Sandstone Bricks",
   "block.beyond_earth.venus_sandstone_brick_stairs": "Venus Sandstone Brick Stairs",
 
+  "block.beyond_earth.permafrost": "영구동토",
+  "block.beyond_earth.glacio_stone": "Glacio 돌",
+  "block.beyond_earth.glacio_stone_bricks": "Glacio 석재 벽돌",
+  "block.beyond_earth.cracked_glacio_stone_bricks": "금 간 Glacio 석재 벽돌",
+  "block.beyond_earth.glacio_stone_brick_slab": "Glacio 석재 벽돌 반 블록",
+  "block.beyond_earth.glacio_stone_brick_stairs": "Glacio 석재 벽돌 계단",
+  "block.beyond_earth.glacio_coal_ore": "Glacio 석탄 광석",
+  "block.beyond_earth.glacio_copper_ore": "Glacio 구리 광석",
+  "block.beyond_earth.glacio_iron_ore": "Glacio 철 광석",
+  "block.beyond_earth.glacio_lapis_ore": "Glacio 청금석 원석",
+
+  "block.beyond_earth.venus_calorite_ore": "금성 칼로라이트 광석",
+  "block.beyond_earth.calorite_block": "칼로라이트 블록",
+  "block.beyond_earth.raw_calorite_block": "칼로라이트 원석 블록",
 
   "fluid.beyond_earth.fuel": "연료",
   "fluid.fuel": "연료",
@@ -215,6 +238,10 @@
   "fluid.beyond_earth.molten_ostrum": "녹은 오스트룸",
   "fluid.beyond_earth.flowing_molten_ostrum": "흐르는 녹은 오스트룸",
   "item.beyond_earth.molten_ostrum_bucket": "녹은 오스트룸 양동이",
+  "block.beyond_earth.molten_calorite_fluid": "녹은 칼로라이트",
+  "fluid.beyond_earth.molten_calorite": "녹은 칼로라이트",
+  "fluid.beyond_earth.flowing_molten_calorite": "흐르는 녹은 칼로라이트",
+  "item.beyond_earth.molten_calorite_bucket": "녹은 칼로라이트 양동이",
 
   "container.beyond_earth.coal_generator": "석탄 발전기",
   "container.beyond_earth.compressor": "압축기",

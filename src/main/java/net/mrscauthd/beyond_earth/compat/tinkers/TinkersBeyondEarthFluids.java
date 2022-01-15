@@ -14,6 +14,7 @@ public class TinkersBeyondEarthFluids {
 	protected static final FluidDeferredRegister FLUIDS = new FluidDeferredRegister(BeyondEarthMod.MODID);
 	public static final FluidObject<ForgeFlowingFluid> MOLTEN_DESH = FLUIDS.register("molten_desh", hotBuilder().temperature(800), Material.LAVA, 12);
 	public static final FluidObject<ForgeFlowingFluid> MOLTEN_OSTRUM = FLUIDS.register("molten_ostrum", hotBuilder().temperature(800), Material.LAVA, 12);
+	public static final FluidObject<ForgeFlowingFluid> MOLTEN_CALORITE = FLUIDS.register("molten_calorite", hotBuilder().temperature(800), Material.LAVA, 12);
 
 //	/** Creates a builder for a hot fluid 
 	

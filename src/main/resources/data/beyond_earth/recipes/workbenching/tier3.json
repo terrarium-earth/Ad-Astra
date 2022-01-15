@@ -29,10 +29,10 @@
          ],
          "beyond_earth:tank":[
             {
-               "item":"beyond_earth:ostrum_tank"
+               "tag":"beyond_earth:tanks/ostrum"
             },
             {
-               "item":"beyond_earth:ostrum_tank"
+               "tag":"beyond_earth:tanks/ostrum"
             }
          ],
          "beyond_earth:fin_left":[
@@ -53,7 +53,7 @@
          ],
          "beyond_earth:engine":[
             {
-               "item":"beyond_earth:ostrum_engine"
+               "tag":"beyond_earth:engines/ostrum"
             }
          ]
       }
