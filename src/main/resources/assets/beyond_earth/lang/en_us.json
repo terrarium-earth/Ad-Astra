@@ -53,6 +53,7 @@
   "item.beyond_earth.raw_desh_block": "Raw Desh Block",
   "item.beyond_earth.raw_ostrum_block": "Raw Ostrum Block",
   "item.beyond_earth.rocket_t4": "Tier 4 Rocket",
+  "item.beyond_earth.ice_shard": "Ice Shard",
 
   "item.beyond_earth.calorite_ingot": "Calorite Ingot",
   "item.beyond_earth.compressed_calorite": "Compressed Calorite",
@@ -60,6 +61,7 @@
   "item.beyond_earth.raw_calorite": "Raw Calorite",
   "item.beyond_earth.calorite_engine": "Calorite Engine",
   "item.beyond_earth.calorite_tank": "Calorite Tank",
+
 
   "itemGroup.tab_normal": "Beyond Earth",
   "itemGroup.tab_flags": "Beyond Earth: Flags",
