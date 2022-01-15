@@ -29,10 +29,10 @@
          ],
          "beyond_earth:tank":[
             {
-               "item":"beyond_earth:steel_tank"
+               "tag":"beyond_earth:tanks/steel"
             },
             {
-               "item":"beyond_earth:steel_tank"
+               "tag":"beyond_earth:tanks/steel"
             }
          ],
          "beyond_earth:fin_left":[
@@ -53,7 +53,7 @@
          ],
          "beyond_earth:engine":[
             {
-               "item":"beyond_earth:steel_engine"
+               "tag":"beyond_earth:engines/steel"
             }
          ]
       }

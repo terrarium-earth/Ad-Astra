@@ -1,19 +1,20 @@
 {
   "replace": false,
   "values": [
-    "beyond_earth:moon_desh_ore",
-    "beyond_earth:mars_diamond_ore",
-    "beyond_earth:mars_iron_ore",
-    "beyond_earth:moon_cheese_ore",
-    "beyond_earth:mercury_iron_ore",
-    "beyond_earth:mars_ostrum_ore",
     "beyond_earth:moon_iron_ore",
+    "beyond_earth:moon_desh_ore",
+    "beyond_earth:moon_cheese_ore",
+    "beyond_earth:moon_ice_shard_ore",
+    "beyond_earth:mars_iron_ore",
+    "beyond_earth:mars_ostrum_ore",
+    "beyond_earth:mars_diamond_ore",
+    "beyond_earth:mars_ice_shard_ore",
+    "beyond_earth:mercury_iron_ore",
+    "beyond_earth:venus_gold_ore",
     "beyond_earth:venus_coal_ore",
     "beyond_earth:venus_diamond_ore",
-    "beyond_earth:venus_gold_ore",
     "beyond_earth:venus_calorite_ore",
-    "beyond_earth:moon_ice_shard_ore",
-    "beyond_earth:mars_ice_shard_ore",
+    "beyond_earth:glacio_lapis_ore",
     "beyond_earth:glacio_ice_shard_ore"
   ]
 }
