@@ -1,6 +1,7 @@
 package net.mrscauthd.beyond_earth.world.oregen;
 
 import com.mojang.serialization.Codec;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
@@ -94,6 +95,23 @@ public class RuleTests {
 
         protected RuleTestType<?> getType() {
             return OreGeneration.GLACIO_MATCH;
+        }
+    }
+
+    public static class GlacioDeepslateRuleTest extends RuleTest {
+        static final GlacioDeepslateRuleTest INSTANCE = new GlacioDeepslateRuleTest();
+        static final Codec<GlacioDeepslateRuleTest> codec = Codec.unit(() -> INSTANCE);
+
+        public boolean test(BlockState blockAt, Random random) {
+            if (blockAt.getBlock() == Blocks.DEEPSLATE.defaultBlockState().getBlock()) {
+                return true;
+            }
+
+            return false;
+        }
+
+        protected RuleTestType<?> getType() {
+            return OreGeneration.GLACIO_DEEPSLATE_MATCH;
         }
     }
 }

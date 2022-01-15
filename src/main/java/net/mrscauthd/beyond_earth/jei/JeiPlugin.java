@@ -1237,7 +1237,7 @@ public class JeiPlugin implements IModPlugin {
 		@Override
 		public void setIngredients(FuelLoadingRecipe recipe, IIngredients iIngredients) {
 			iIngredients.setInputLists(VanillaTypes.ITEM, Collections.singletonList(recipe.getFuelTagBuckets()));
-			iIngredients.setInputLists(VanillaTypes.FLUID, Collections.singletonList(recipe.getFluidStacks(FluidUtil2.BUCKET_SIZE)));
+			iIngredients.setInputLists(VanillaTypes.FLUID, Collections.singletonList(recipe.getFluidStacks(FluidUtil2.BUCKET_SIZE * 3)));
 		}
 
 		@Override
@@ -1247,7 +1247,7 @@ public class JeiPlugin implements IModPlugin {
 			itemStacks.set(0, iIngredients.getInputs(VanillaTypes.ITEM).get(0));
 
 			IGuiFluidStackGroup fluidStacks = iRecipeLayout.getFluidStacks();
-			fluidStacks.init(0, true, 9, 8, GuiHelper.FLUID_TANK_WIDTH, GuiHelper.FLUID_TANK_HEIGHT, FluidUtil2.BUCKET_SIZE, false, this.fluidOverlay);
+			fluidStacks.init(0, true, 9, 8, GuiHelper.FLUID_TANK_WIDTH, GuiHelper.FLUID_TANK_HEIGHT, FluidUtil2.BUCKET_SIZE * 3, false, this.fluidOverlay);
 			fluidStacks.set(0, iIngredients.getInputs(VanillaTypes.FLUID).get(0));
 		}
 	}
