@@ -195,7 +195,8 @@ public class Methods {
                 || Methods.isWorld(world, moon_orbit)
                 || Methods.isWorld(world, mars_orbit)
                 || Methods.isWorld(world, mercury_orbit)
-                || Methods.isWorld(world, venus_orbit)) {
+                || Methods.isWorld(world, venus_orbit)
+                || Methods.isWorld(world, glacio_orbit)) {
             return true;
         }
         return false;
