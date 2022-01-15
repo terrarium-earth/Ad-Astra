@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "experience": 0.7,
+  "cookingtime": 200,
+  "ingredient": {
+    "item": "beyond_earth:glacio_copper_ore"
+  },
+  "result": {
+    "item": "minecraft:copper_ingot"
+  }
+}

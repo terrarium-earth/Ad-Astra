@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "beyond_earth:moon_ice_shard_ore",
+    "beyond_earth:mars_ice_shard_ore",
+    "beyond_earth:glacio_ice_shard_ore"
+  ]
+}
