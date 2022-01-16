@@ -520,8 +520,8 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 
 			List<Component> list = new ArrayList<Component>();
 
-			list.add(new TextComponent("¡×9" + tl("category").getString() + ": ¡×" + level + dim.getString()));
-			list.add(new TextComponent("¡×9" + tl("provided").getString() + ": ¡×b" + this.getRocket(stage).getString()));
+			list.add(new TextComponent("Â§9" + tl("category").getString() + ": Â§" + level + dim.getString()));
+			list.add(new TextComponent("Â§9" + tl("provided").getString() + ": Â§b" + this.getRocket(stage).getString()));
 			this.renderComponentTooltip(ms, list, mouseX, mouseY);
 
 			if (checkTier(rocketType, stage)) {
@@ -539,8 +539,8 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 
 			List<Component> list = new ArrayList<Component>();
 
-			list.add(new TextComponent("¡×9" + tl("category").getString() + ": ¡×b" + solarSystem.getString()));
-			list.add(new TextComponent("¡×9" + tl("type").getString() + ": ¡×3" + type.getString()));
+			list.add(new TextComponent("Â§9" + tl("category").getString() + ": Â§b" + solarSystem.getString()));
+			list.add(new TextComponent("Â§9" + tl("type").getString() + ": Â§3" + type.getString()));
 			this.renderComponentTooltip(ms, list, mouseX, mouseY);
 
 			button.setTexture(bb2);
@@ -556,10 +556,10 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 
 			List<Component> list = new ArrayList<Component>();
 
-			list.add(new TextComponent("¡×9" + tl("type").getString() + ": ¡×3" + planetType.getString()));
-			list.add(new TextComponent("¡×9" + tl("gravity").getString() + ": ¡×3" + gravity.getString()));
-			list.add(new TextComponent("¡×9" + tl("oxygen").getString() + ": ¡×" + (oxygen ? "a" : "c") + tl("oxygen." + oxygen).getString()));
-			list.add(new TextComponent("¡×9" + tl("temperature").getString() + ": ¡×" + temperatureColor + temperature));
+			list.add(new TextComponent("Â§9" + tl("type").getString() + ": Â§3" + planetType.getString()));
+			list.add(new TextComponent("Â§9" + tl("gravity").getString() + ": Â§3" + gravity.getString()));
+			list.add(new TextComponent("Â§9" + tl("oxygen").getString() + ": Â§" + (oxygen ? "a" : "c") + tl("oxygen." + oxygen).getString()));
+			list.add(new TextComponent("Â§9" + tl("temperature").getString() + ": Â§" + temperatureColor + temperature));
 			this.renderComponentTooltip(ms, list, mouseX, mouseY);
 
 			button.setTexture(bb2);
@@ -580,18 +580,18 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 		if (GuiHelper.isHover(this.getBounds(left, top, width, height), mouseX, mouseY)) {
 			List<Component> list = new ArrayList<Component>();
 
-			list.add(new TextComponent("¡×9" + tl("item_requirement").getString()));
+			list.add(new TextComponent("Â§9" + tl("item_requirement").getString()));
 
-			list.add(new TextComponent(this.getSpaceStationItemCheck(ModInit.DESH_INGOT_TAG, 6) ? "¡×8" + "[" + "¡×6" + 6 + "¡×8" + "]" + "¡×a " + "Desh Ingots" : "¡×8" + "[" + "¡×6" + 6 + "¡×8" + "]" + "¡×c " + "Desh Ingots"));
-			list.add(new TextComponent(this.getSpaceStationItemCheck(ModInit.STEEL_INGOT_TAG, 16) ? "¡×8" + "[" + "¡×6" + 16 + "¡×8" + "]" + "¡×a " + "Steel Ingots" : "¡×8" + "[" + "¡×6" + 16 + "¡×8" + "]" + "¡×c " + "Steel Ingots"));
-			list.add(new TextComponent(this.getSpaceStationItemCheck(ModInit.IRON_PLATES_TAG, 12) ? "¡×8" + "[" + "¡×6" + 12 + "¡×8" + "]" + "¡×a " + "Iron Plates" : "¡×8" + "[" + "¡×6" + 12 + "¡×8" + "]" + "¡×c " + "Iron Plates"));
-			list.add(new TextComponent(this.getSpaceStationItemCheck(ModInit.DESH_PLATES_TAG, 4) ? "¡×8" + "[" + "¡×6" + 4 + "¡×8" + "]" + "¡×a " + "Desh Plates" : "¡×8" + "[" + "¡×6" + 4 + "¡×8" + "]" + "¡×c " + "Desh Plates"));
+			list.add(new TextComponent(this.getSpaceStationItemCheck(ModInit.DESH_INGOT_TAG, 6) ? "Â§8" + "[" + "Â§6" + 6 + "Â§8" + "]" + "Â§a " + "Desh Ingots" : "Â§8" + "[" + "Â§6" + 6 + "Â§8" + "]" + "Â§c " + "Desh Ingots"));
+			list.add(new TextComponent(this.getSpaceStationItemCheck(ModInit.STEEL_INGOT_TAG, 16) ? "Â§8" + "[" + "Â§6" + 16 + "Â§8" + "]" + "Â§a " + "Steel Ingots" : "Â§8" + "[" + "Â§6" + 16 + "Â§8" + "]" + "Â§c " + "Steel Ingots"));
+			list.add(new TextComponent(this.getSpaceStationItemCheck(ModInit.IRON_PLATES_TAG, 12) ? "Â§8" + "[" + "Â§6" + 12 + "Â§8" + "]" + "Â§a " + "Iron Plates" : "Â§8" + "[" + "Â§6" + 12 + "Â§8" + "]" + "Â§c " + "Iron Plates"));
+			list.add(new TextComponent(this.getSpaceStationItemCheck(ModInit.DESH_PLATES_TAG, 4) ? "Â§8" + "[" + "Â§6" + 4 + "Â§8" + "]" + "Â§a " + "Desh Plates" : "Â§8" + "[" + "Â§6" + 4 + "Â§8" + "]" + "Â§c " + "Desh Plates"));
 
-			list.add(new TextComponent("¡×c----------------"));
-			list.add(new TextComponent("¡×9" + tl("type").getString() + ": ¡×3" + orbitType.getString()));
-			list.add(new TextComponent("¡×9" + tl("gravity").getString() + ": ¡×3" + gravity.getString()));
-			list.add(new TextComponent("¡×9" + tl("oxygen").getString() + ": ¡×" + (oxygen ? "a" : "c") + tl("oxygen." + oxygen).getString()));
-			list.add(new TextComponent("¡×9" + tl("temperature").getString() + ": ¡×" + temperatureColor + temperature));
+			list.add(new TextComponent("Â§c----------------"));
+			list.add(new TextComponent("Â§9" + tl("type").getString() + ": Â§3" + orbitType.getString()));
+			list.add(new TextComponent("Â§9" + tl("gravity").getString() + ": Â§3" + gravity.getString()));
+			list.add(new TextComponent("Â§9" + tl("oxygen").getString() + ": Â§" + (oxygen ? "a" : "c") + tl("oxygen." + oxygen).getString()));
+			list.add(new TextComponent("Â§9" + tl("temperature").getString() + ": Â§" + temperatureColor + temperature));
 			this.renderComponentTooltip(ms, list, mouseX, mouseY);
 
 			if (this.getSpaceStationItemList()) {
