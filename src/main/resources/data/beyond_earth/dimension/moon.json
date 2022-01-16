@@ -26,8 +26,8 @@
         "amplified": false,
         "large_biomes": false,
         "sampling": {
-          "xz_scale": 1,
-          "y_scale": 1,
+          "xz_scale": 1.3,
+          "y_scale": 1.3,
           "xz_factor": 80,
           "y_factor": 90
         },

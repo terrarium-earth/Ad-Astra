@@ -3,6 +3,7 @@ package net.mrscauthd.beyond_earth.world.biomes;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.Carvers;
+import net.minecraft.data.worldgen.placement.CavePlacements;
 import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
 import net.minecraft.data.worldgen.placement.NetherPlacements;
 import net.minecraft.data.worldgen.placement.OrePlacements;
@@ -51,7 +52,8 @@ public class BiomeRegistry {
             BiomeSpecialEffects effects = new BiomeSpecialEffects.Builder().fogColor(-3044526).waterColor(4159204).waterFogColor(329011).skyColor(-3044526).foliageColorOverride(7842607).grassColorOverride(9551193).ambientParticle(new AmbientParticleSettings(ParticleTypes.CRIMSON_SPORE, 0.014f)).build();
             BiomeGenerationSettings.Builder biomeGenerationSettings = new BiomeGenerationSettings.Builder();
             addDefaultCarvers(biomeGenerationSettings);
-            BiomeDefaultFeatures.addLushCavesVegetationFeatures(biomeGenerationSettings);
+            addLushCavesVegetationFeatures(biomeGenerationSettings);
+            BiomeDefaultFeatures.addFossilDecoration(biomeGenerationSettings);
             MobSpawnSettings mobSpawnInfo = (new MobSpawnSettings.Builder()).addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModInit.MARTIAN_RAPTOR.get(), 20, 5, 5)).addMobCharge(ModInit.MARTIAN_RAPTOR.get(), 0.7D, 0.15D).build();
 
             mars = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(1.6f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
@@ -62,7 +64,8 @@ public class BiomeRegistry {
             BiomeSpecialEffects effects = new BiomeSpecialEffects.Builder().fogColor(-3044526).waterColor(4159204).waterFogColor(329011).skyColor(-3044526).foliageColorOverride(7842607).grassColorOverride(9551193).ambientParticle(new AmbientParticleSettings(ParticleTypes.CRIMSON_SPORE, 0.014f)).build();
             BiomeGenerationSettings.Builder biomeGenerationSettings = new BiomeGenerationSettings.Builder();
             addDefaultCarvers(biomeGenerationSettings);
-            BiomeDefaultFeatures.addLushCavesVegetationFeatures(biomeGenerationSettings);
+            addLushCavesVegetationFeatures(biomeGenerationSettings);
+            BiomeDefaultFeatures.addFossilDecoration(biomeGenerationSettings);
             MobSpawnSettings mobSpawnInfo = MobSpawnSettings.EMPTY;
 
             mars_ice_spikes = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.ICY).mobSpawnSettings(mobSpawnInfo).temperature(1.6f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
@@ -162,5 +165,14 @@ public class BiomeRegistry {
         float $$1 = p_194844_ / 3.0F;
         $$1 = Mth.clamp($$1, -1.0F, 1.0F);
         return Mth.hsvToRgb(0.62222224F - $$1 * 0.05F, 0.5F + $$1 * 0.1F, 1.0F);
+    }
+
+    public static void addLushCavesVegetationFeatures(BiomeGenerationSettings.Builder p_176851_) {
+        p_176851_.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CavePlacements.LUSH_CAVES_CEILING_VEGETATION);
+        p_176851_.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CavePlacements.CAVE_VINES);
+        p_176851_.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CavePlacements.LUSH_CAVES_CLAY);
+        p_176851_.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CavePlacements.LUSH_CAVES_VEGETATION);
+        p_176851_.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CavePlacements.SPORE_BLOSSOM);
+        p_176851_.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CavePlacements.CLASSIC_VINES);
     }
 }
