@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "beyond_earth:moon_stone",
+    "beyond_earth:mars_stone",
+    "beyond_earth:venus_stone",
+    "beyond_earth:mercury_stone",
+    "beyond_earth:glacio_stone"
+  ]
+}
