@@ -40,6 +40,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.material.Fluid;
@@ -1255,10 +1256,13 @@ public class JeiPlugin implements IModPlugin {
 		public static final ResourceLocation Uid = new ResourceLocation(BeyondEarthMod.MODID, "space_station");
 
 		private final Component title;
+		private final Component tooltip;
 		private final IDrawable background;
 
 		public SpaceStationJeiCategory(IGuiHelper guiHelper) {
-			this.title = new TranslatableComponent("jei.category." + BeyondEarthMod.MODID + ".space_station");
+			String path = BeyondEarthMod.MODID + ".space_station";
+			this.title = new TranslatableComponent("jei.category." + path);
+			this.tooltip = new TranslatableComponent("jei.tooltip." + path);
 			this.background = guiHelper.createDrawable(new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/space_station_jei.png"), 0, 0, 146, 70);
 		}
 
@@ -1275,6 +1279,10 @@ public class JeiPlugin implements IModPlugin {
 		@Override
 		public Component getTitle() {
 			return title;
+		}
+		
+		public Component getTooltip() {
+			return this.tooltip;
 		}
 
 		@Override
@@ -1296,7 +1304,7 @@ public class JeiPlugin implements IModPlugin {
 		public void setRecipe(IRecipeLayout iRecipeLayout, SpaceStationRecipe recipe, IIngredients iIngredients) {
 			IGuiItemStackGroup itemStacks = iRecipeLayout.getItemStacks();
 			NonNullList<IngredientStack> ingredientStacks = recipe.getIngredientStacks();
-			int columns = 3;
+			int columns = 7;
 
 			for (int i = 0; i < ingredientStacks.size(); i++) {
 				int xi = i % columns;
@@ -1306,7 +1314,20 @@ public class JeiPlugin implements IModPlugin {
 				itemStacks.init(i, true, 9 + (xi * 18), 8 + (yi * 18));
 				itemStacks.set(i, NonNullList.of(ItemStack.EMPTY, ingredientStack.getItems()));
 			}
-
+		}
+		
+		@Override
+		public void draw(SpaceStationRecipe recipe, PoseStack stack, double mouseX, double mouseY) {
+			IRecipeCategory.super.draw(recipe, stack, mouseX, mouseY);
+			
+			Minecraft minecraft = Minecraft.getInstance();
+			Font font = minecraft.font;
+			List<FormattedCharSequence> lines = font.split(this.tooltip, 126);
+			
+			for (int i = 0; i < lines.size(); i++) {
+				FormattedCharSequence line = lines.get(i);
+				font.draw(stack, line, 9, 31 + font.lineHeight * i, 0xFF404040);
+			}
 		}
 	}
 }

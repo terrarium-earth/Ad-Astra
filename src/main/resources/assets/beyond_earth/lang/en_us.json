@@ -303,6 +303,7 @@
 
   "jei.tooltip.beyond_earth.oil": "  You can find Oil in the Ocean",
   "jei.category.beyond_earth.space_station": "Space Station",
+  "jei.tooltip.beyond_earth.space_station": "Ingredients for create a Space Station",
 
   "gauge_text.beyond_earth.using": "%1$s Using: %2$s",
   "gauge_text.beyond_earth.using2": "%1$s Using: %2$s/%4$s t",
