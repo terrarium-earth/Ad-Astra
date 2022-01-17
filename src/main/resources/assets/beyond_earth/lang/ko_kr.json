@@ -302,6 +302,7 @@
 
 
   "jei.tooltip.beyond_earth.oil": "  바다에서 찾을 수 있습니다",
+  "jei.category.beyond_earth.space_station": "우주 정거장",
 
   "gauge_text.beyond_earth.using": "%1$s 소모: %2$s",
   "gauge_text.beyond_earth.using2": "%1$s 소모: %2$s/%4$s t",

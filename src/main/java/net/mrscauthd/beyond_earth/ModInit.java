@@ -69,6 +69,7 @@ import net.mrscauthd.beyond_earth.crafting.OxygenBubbleDistributorRecipeSerializ
 import net.mrscauthd.beyond_earth.crafting.OxygenLoaderRecipeSerializer;
 import net.mrscauthd.beyond_earth.crafting.WorkbenchingRecipeSerializer;
 import net.mrscauthd.beyond_earth.crafting.RocketPart;
+import net.mrscauthd.beyond_earth.crafting.SpaceStationRecipeSerializer;
 import net.mrscauthd.beyond_earth.effects.OxygenEffect;
 import net.mrscauthd.beyond_earth.entity.*;
 import net.mrscauthd.beyond_earth.events.Config;
@@ -537,6 +538,7 @@ public class ModInit {
 	public static final RegistryObject<RecipeSerializer<?>> RECIPE_SERIALIZER_ALIEN_TRADING_MAP = RECIPE_SERIALIZERS.register("alien_trading_map", () -> new AlienTradingRecipeMap.Serializer());
 	public static final RegistryObject<RecipeSerializer<?>> RECIPE_SERIALIZER_ALIEN_TRADING_POTIONEDITEM = RECIPE_SERIALIZERS.register("alien_trading_potioneditem", () -> new AlienTradingRecipePotionedItem.Serializer());
 	public static final RegistryObject<RecipeSerializer<?>> RECIPE_SERIALIZER_ALIEN_TRADING_DYEDITEM = RECIPE_SERIALIZERS.register("alien_trading_dyeditem", () -> new AlienTradingRecipeDyedItem.Serializer());
+	public static final RegistryObject<RecipeSerializer<?>> RECIPE_SERIALIZER_SPACE_STATION = RECIPE_SERIALIZERS.register("space_station", () -> new SpaceStationRecipeSerializer());
 	
     //RocketParts
     public static final IForgeRegistry<RocketPart> ROCKET_PARTS_REGISTRY = new RegistryBuilder<RocketPart>().setType(RocketPart.class).setName(new ResourceLocation(BeyondEarthMod.MODID, "rocket_part")).create();
@@ -556,12 +558,6 @@ public class ModInit {
     public static void registerProcessors() {
         Registry.register(Registry.STRUCTURE_PROCESSOR, new ResourceLocation(BeyondEarthMod.MODID, "structure_void_processor"), STRUCTURE_VOID_PROCESSOR);
     }
-
-    //TAGS
-    public static final ResourceLocation DESH_INGOT_TAG = new ResourceLocation("forge", "ingots/desh");
-    public static final ResourceLocation STEEL_INGOT_TAG = new ResourceLocation("forge", "ingots/steel");
-    public static final ResourceLocation IRON_PLATES_TAG = new ResourceLocation("forge", "plates/iron");
-    public static final ResourceLocation DESH_PLATES_TAG = new ResourceLocation("forge", "plates/desh");
 
     //DamgeSources
     public static final DamageSource DAMAGE_SOURCE_OXYGEN = new DamageSource("oxygen").bypassArmor();

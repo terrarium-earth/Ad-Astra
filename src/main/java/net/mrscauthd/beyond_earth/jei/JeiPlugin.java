@@ -36,6 +36,7 @@ import mezz.jei.api.registration.IRecipeTransferRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -51,9 +52,11 @@ import net.mrscauthd.beyond_earth.crafting.BeyondEarthRecipeTypes;
 import net.mrscauthd.beyond_earth.crafting.CompressingRecipe;
 import net.mrscauthd.beyond_earth.crafting.FuelRefiningRecipe;
 import net.mrscauthd.beyond_earth.crafting.GeneratingRecipe;
+import net.mrscauthd.beyond_earth.crafting.IngredientStack;
 import net.mrscauthd.beyond_earth.crafting.OxygenBubbleDistributorRecipe;
 import net.mrscauthd.beyond_earth.crafting.OxygenLoaderRecipe;
 import net.mrscauthd.beyond_earth.crafting.RocketPart;
+import net.mrscauthd.beyond_earth.crafting.SpaceStationRecipe;
 import net.mrscauthd.beyond_earth.crafting.WorkbenchingRecipe;
 import net.mrscauthd.beyond_earth.events.Methods;
 import net.mrscauthd.beyond_earth.fluid.FluidUtil2;
@@ -178,6 +181,8 @@ public class JeiPlugin implements IModPlugin {
 		registration.addRecipeCategories(new FuelRefineryJeiCategory(this, jeiHelper.getGuiHelper()));
 		// Rover
 		registration.addRecipeCategories(new RoverJeiCategory(jeiHelper.getGuiHelper()));
+		// Space Station
+		registration.addRecipeCategories(new SpaceStationJeiCategory(jeiHelper.getGuiHelper()));
 	}
 
 	@Override
@@ -208,6 +213,8 @@ public class JeiPlugin implements IModPlugin {
 		registration.addRecipes(generateCompressingRecipes(), CompressorJeiCategory.Uid);
 		// Fuel Maker
 		registration.addRecipes(generateFuelMakerRecipes(), FuelRefineryJeiCategory.Uid);
+		// Space Station
+		registration.addRecipes(generateSpaceStationRecipes(), SpaceStationJeiCategory.Uid);
 		// Oil
 		Component oilDescriptionKey = new TranslatableComponent("jei.tooltip." + BeyondEarthMod.MODID + ".oil");
 		registration.addIngredientInfo(new ItemStack(ModInit.OIL_BUCKET.get(), 1), VanillaTypes.ITEM, oilDescriptionKey);
@@ -272,6 +279,14 @@ public class JeiPlugin implements IModPlugin {
 		return recipes;
 	}
 
+	// Space Station
+	private List<SpaceStationRecipe> generateSpaceStationRecipes() {
+		List<SpaceStationRecipe> recipes = new ArrayList<>();
+		this.getLevel().getRecipeManager().byKey(SpaceStationRecipe.KEY).ifPresent(r -> recipes.add((SpaceStationRecipe) r));
+
+		return recipes;
+	}
+
 	public static class FuelLoadingRecipe {
 		private final List<ItemStack> fuelTagBuckets;
 		private final List<Fluid> fluids;
@@ -310,13 +325,13 @@ public class JeiPlugin implements IModPlugin {
 		// FuelMaker
 		registration.addRecipeCatalyst(new ItemStack(ModInit.FUEL_REFINERY_BLOCK.get()), FuelRefineryJeiCategory.Uid);
 		// Rocket Tier 1
-		registration.addRecipeCatalyst(new ItemStack(ModInit.TIER_1_ROCKET_ITEM.get()), RocketTier1JeiCategory.Uid);
+		registration.addRecipeCatalyst(new ItemStack(ModInit.TIER_1_ROCKET_ITEM.get()), RocketTier1JeiCategory.Uid, SpaceStationJeiCategory.Uid);
 		// Rocket Tier 2
-		registration.addRecipeCatalyst(new ItemStack(ModInit.TIER_2_ROCKET_ITEM.get()), RocketTier2JeiCategory.Uid);
+		registration.addRecipeCatalyst(new ItemStack(ModInit.TIER_2_ROCKET_ITEM.get()), RocketTier2JeiCategory.Uid, SpaceStationJeiCategory.Uid);
 		// Rocket Tier 3
-		registration.addRecipeCatalyst(new ItemStack(ModInit.TIER_3_ROCKET_ITEM.get()), RocketTier3JeiCategory.Uid);
+		registration.addRecipeCatalyst(new ItemStack(ModInit.TIER_3_ROCKET_ITEM.get()), RocketTier3JeiCategory.Uid, SpaceStationJeiCategory.Uid);
 		// Rocket Tier 4
-		registration.addRecipeCatalyst(new ItemStack(ModInit.TIER_4_ROCKET_ITEM.get()), RocketTier4JeiCategory.Uid);
+		registration.addRecipeCatalyst(new ItemStack(ModInit.TIER_4_ROCKET_ITEM.get()), RocketTier4JeiCategory.Uid, SpaceStationJeiCategory.Uid);
 		// Rover
 		registration.addRecipeCatalyst(new ItemStack(ModInit.ROVER_ITEM.get()), RoverJeiCategory.Uid);
 	}
@@ -1233,6 +1248,65 @@ public class JeiPlugin implements IModPlugin {
 			IGuiFluidStackGroup fluidStacks = iRecipeLayout.getFluidStacks();
 			fluidStacks.init(0, true, 9, 8, GuiHelper.FLUID_TANK_WIDTH, GuiHelper.FLUID_TANK_HEIGHT, FluidUtil2.BUCKET_SIZE * 3, false, this.fluidOverlay);
 			fluidStacks.set(0, iIngredients.getInputs(VanillaTypes.FLUID).get(0));
+		}
+	}
+
+	public static class SpaceStationJeiCategory implements IRecipeCategory<SpaceStationRecipe> {
+		public static final ResourceLocation Uid = new ResourceLocation(BeyondEarthMod.MODID, "space_station");
+
+		private final Component title;
+		private final IDrawable background;
+
+		public SpaceStationJeiCategory(IGuiHelper guiHelper) {
+			this.title = new TranslatableComponent("jei.category." + BeyondEarthMod.MODID + ".space_station");
+			this.background = guiHelper.createDrawable(new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/space_station_jei.png"), 0, 0, 146, 70);
+		}
+
+		@Override
+		public ResourceLocation getUid() {
+			return Uid;
+		}
+
+		@Override
+		public Class<? extends SpaceStationRecipe> getRecipeClass() {
+			return SpaceStationRecipe.class;
+		}
+
+		@Override
+		public Component getTitle() {
+			return title;
+		}
+
+		@Override
+		public IDrawable getBackground() {
+			return background;
+		}
+
+		@Override
+		public IDrawable getIcon() {
+			return null;
+		}
+
+		@Override
+		public void setIngredients(SpaceStationRecipe recipe, IIngredients iIngredients) {
+			iIngredients.setInputIngredients(recipe.getIngredients());
+		}
+
+		@Override
+		public void setRecipe(IRecipeLayout iRecipeLayout, SpaceStationRecipe recipe, IIngredients iIngredients) {
+			IGuiItemStackGroup itemStacks = iRecipeLayout.getItemStacks();
+			NonNullList<IngredientStack> ingredientStacks = recipe.getIngredientStacks();
+			int columns = 3;
+
+			for (int i = 0; i < ingredientStacks.size(); i++) {
+				int xi = i % columns;
+				int yi = i / columns;
+
+				IngredientStack ingredientStack = ingredientStacks.get(i);
+				itemStacks.init(i, true, 9 + (xi * 18), 8 + (yi * 18));
+				itemStacks.set(i, NonNullList.of(ItemStack.EMPTY, ingredientStack.getItems()));
+			}
+
 		}
 	}
 }

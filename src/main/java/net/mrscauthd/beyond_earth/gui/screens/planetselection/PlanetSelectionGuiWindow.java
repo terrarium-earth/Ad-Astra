@@ -1,6 +1,7 @@
 package net.mrscauthd.beyond_earth.gui.screens.planetselection;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -20,8 +21,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
-import net.mrscauthd.beyond_earth.ModInit;
-import net.mrscauthd.beyond_earth.events.Methods;
+import net.mrscauthd.beyond_earth.crafting.IngredientStack;
+import net.mrscauthd.beyond_earth.crafting.SpaceStationRecipe;
 import net.mrscauthd.beyond_earth.gui.helper.GuiHelper;
 import net.mrscauthd.beyond_earth.gui.helper.ImageButtonPlacer;
 import net.mrscauthd.beyond_earth.util.Rectangle2d;
@@ -104,6 +105,9 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 	public ImageButtonPlacer venusSpaceStationButton;
 	// Category 5 Teleport Buttons
 	public ImageButtonPlacer glacioSpaceStationButton;
+
+	private SpaceStationRecipe recipe;
+	private boolean spaceStationItemList;
 
 	public PlanetSelectionGuiWindow(PlanetSelectionGui.GuiContainer container, Inventory inventory, Component text) {
 		super(container, inventory, text);
@@ -391,6 +395,9 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 	protected void init() {
 		super.init();
 
+		this.recipe = (SpaceStationRecipe) this.minecraft.level.getRecipeManager().byKey(SpaceStationRecipe.KEY).orElse(null);
+		this.spaceStationItemList = this.recipe.getIngredientStacks().stream().allMatch(this::getSpaceStationItemCheck);
+
 		/** CATEGORY -1 */
 		solarSystemButton = this.addImageButtonSetSolarSystem(10, (this.height / 2) - 68 / 2, 70, 20, bbButtonTex, 0, tl("sun"));
 		proximaCentauriButton = this.addImageButtonSetSolarSystem(10, (this.height / 2) - 24 / 2, 70, 20, bbButtonTex, 5, tl("proxima_cent"));
@@ -459,22 +466,22 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 
 		/** SPACE STATION BUTTONS */
 		// CATEGORY 0
-		earthSpaceStationButton = this.addSpaceStationImageButton(125, (this.height / 2) - 24 / 2, 75, 20, brbButtonTex, 12, tl("space_station"), this.getSpaceStationItemList());
+		earthSpaceStationButton = this.addSpaceStationImageButton(125, (this.height / 2) - 24 / 2, 75, 20, brbButtonTex, 12, tl("space_station"), this.spaceStationItemList);
 		earthSpaceStationButton.visible = false;
 
-		moonSpaceStationButton = this.addSpaceStationImageButton(125, (this.height / 2) + 21 / 2, 75, 20, brbButtonTex, 13, tl("space_station"), this.getSpaceStationItemList());
+		moonSpaceStationButton = this.addSpaceStationImageButton(125, (this.height / 2) + 21 / 2, 75, 20, brbButtonTex, 13, tl("space_station"), this.spaceStationItemList);
 		moonSpaceStationButton.visible = false;
 
-		marsSpaceStationButton = this.addSpaceStationImageButton(125, (this.height / 2) - 24 / 2, 75, 20, brbButtonTex, 14, tl("space_station"), this.getSpaceStationItemList());
+		marsSpaceStationButton = this.addSpaceStationImageButton(125, (this.height / 2) - 24 / 2, 75, 20, brbButtonTex, 14, tl("space_station"), this.spaceStationItemList);
 		marsSpaceStationButton.visible = false;
 
-		mercurySpaceStationButton = this.addSpaceStationImageButton(125, (this.height / 2) - 24 / 2, 75, 20, brbButtonTex, 15, tl("space_station"), this.getSpaceStationItemList());
+		mercurySpaceStationButton = this.addSpaceStationImageButton(125, (this.height / 2) - 24 / 2, 75, 20, brbButtonTex, 15, tl("space_station"), this.spaceStationItemList);
 		mercurySpaceStationButton.visible = false;
 
-		venusSpaceStationButton = this.addSpaceStationImageButton(125, (this.height / 2) - 24 / 2, 75, 20, brbButtonTex, 16, tl("space_station"), this.getSpaceStationItemList());
+		venusSpaceStationButton = this.addSpaceStationImageButton(125, (this.height / 2) - 24 / 2, 75, 20, brbButtonTex, 16, tl("space_station"), this.spaceStationItemList);
 		venusSpaceStationButton.visible = false;
 		// CATEGORY 5
-		glacioSpaceStationButton = this.addSpaceStationImageButton(125, (this.height / 2) - 24 / 2, 75, 20, brbButtonTex, 17, tl("space_station"), this.getSpaceStationItemList());
+		glacioSpaceStationButton = this.addSpaceStationImageButton(125, (this.height / 2) - 24 / 2, 75, 20, brbButtonTex, 17, tl("space_station"), this.spaceStationItemList);
 		glacioSpaceStationButton.visible = false;
 	}
 
@@ -571,7 +578,7 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 
 	public void spaceStationCreatorButtonManager(ResourceLocation brb, ResourceLocation brb2, ResourceLocation bbb, ResourceLocation bbb2, int mouseX, int mouseY, int left, int top, int width, int height, PoseStack ms, ImageButtonPlacer button, Component orbitType, Component gravity, boolean oxygen, String temperatureColor, int temperature) {
 
-		if (this.getSpaceStationItemList()) {
+		if (spaceStationItemList) {
 			button.setTexture(bbb);
 		} else {
 			button.setTexture(brb);
@@ -582,10 +589,11 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 
 			list.add(new TextComponent("\u00A79" + tl("item_requirement").getString()));
 
-			list.add(new TextComponent(this.getSpaceStationItemCheck(ModInit.DESH_INGOT_TAG, 6) ? "\u00A78" + "[" + "\u00A76" + 6 + "\u00A78" + "]" + "\u00A7a " + "Desh Ingots" : "\u00A78" + "[" + "\u00A76" + 6 + "\u00A78" + "]" + "\u00A7c " + "Desh Ingots"));
-			list.add(new TextComponent(this.getSpaceStationItemCheck(ModInit.STEEL_INGOT_TAG, 16) ? "\u00A78" + "[" + "\u00A76" + 16 + "\u00A78" + "]" + "\u00A7a " + "Steel Ingots" : "\u00A78" + "[" + "\u00A76" + 16 + "\u00A78" + "]" + "\u00A7c " + "Steel Ingots"));
-			list.add(new TextComponent(this.getSpaceStationItemCheck(ModInit.IRON_PLATES_TAG, 12) ? "\u00A78" + "[" + "\u00A76" + 12 + "\u00A78" + "]" + "\u00A7a " + "Iron Plates" : "\u00A78" + "[" + "\u00A76" + 12 + "\u00A78" + "]" + "\u00A7c " + "Iron Plates"));
-			list.add(new TextComponent(this.getSpaceStationItemCheck(ModInit.DESH_PLATES_TAG, 4) ? "\u00A78" + "[" + "\u00A76" + 4 + "\u00A78" + "]" + "\u00A7a " + "Desh Plates" : "\u00A78" + "[" + "\u00A76" + 4 + "\u00A78" + "]" + "\u00A7c " + "Desh Plates"));
+			for (IngredientStack ingredientStack : recipe.getIngredientStacks()) {
+				boolean check = this.getSpaceStationItemCheck(ingredientStack);
+				Component component = Arrays.stream(ingredientStack.getIngredient().getItems()).findFirst().map(ItemStack::getHoverName).orElse(TextComponent.EMPTY);
+				list.add(new TextComponent("\u00A78[\u00A76" + ingredientStack.getCount() + "\u00A78]" + (check ? "\u00A7a" : "\u00A7c") + " " + component.getString()));
+			}
 
 			list.add(new TextComponent("\u00A7c----------------"));
 			list.add(new TextComponent("\u00A79" + tl("type").getString() + ": \u00A73" + orbitType.getString()));
@@ -594,7 +602,7 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 			list.add(new TextComponent("\u00A79" + tl("temperature").getString() + ": \u00A7" + temperatureColor + temperature));
 			this.renderComponentTooltip(ms, list, mouseX, mouseY);
 
-			if (this.getSpaceStationItemList()) {
+			if (spaceStationItemList) {
 				button.setTexture(bbb2);
 			} else {
 				button.setTexture(brb2);
@@ -602,34 +610,25 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 		}
 	}
 
-	public boolean getSpaceStationItemList() {
-		List<Boolean> boolean1 = new ArrayList<>();
+	public boolean getSpaceStationItemCheck(IngredientStack ingredientStack) {
 
-		boolean1.add(this.getSpaceStationItemCheck(ModInit.DESH_INGOT_TAG, 6));
-		boolean1.add(this.getSpaceStationItemCheck(ModInit.STEEL_INGOT_TAG, 16));
-		boolean1.add(this.getSpaceStationItemCheck(ModInit.IRON_PLATES_TAG, 12));
-		boolean1.add(this.getSpaceStationItemCheck(ModInit.DESH_PLATES_TAG, 4));
+		if (menu.player.getAbilities().instabuild) {
+			return true;
+		}
 
-		return !boolean1.contains(false);
-	}
-
-	public boolean getSpaceStationItemCheck(ResourceLocation tag, int count) {
 		Inventory inv = menu.player.getInventory();
 		int itemStackCount = 0;
 
 		for (int i = 0; i < inv.getContainerSize(); ++i) {
 			ItemStack itemStack = inv.getItem(i);
 
-			if (Methods.tagCheck(itemStack.getItem(), tag)) {
-				itemStackCount = itemStackCount + itemStack.getCount();
+			if (ingredientStack.testWithoutCount(itemStack)) {
+				itemStackCount += itemStack.getCount();
 			}
 
-			if (!itemStack.isEmpty() && Methods.tagCheck(itemStack.getItem(), tag) && itemStackCount >= count) {
-				return true;
-			}
 		}
 
-		return menu.player.getAbilities().instabuild;
+		return itemStackCount >= ingredientStack.getCount();
 	}
 
 	public void backButtonManager(ResourceLocation bb, ResourceLocation bb2, int mouseX, int mouseY, int left, int top, int width, int height, ImageButtonPlacer button) {
