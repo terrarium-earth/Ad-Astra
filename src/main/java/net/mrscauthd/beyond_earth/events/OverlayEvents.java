@@ -7,6 +7,7 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -104,8 +105,9 @@ public class OverlayEvents {
 
                 double speed = Math.round(100.0 * (entity.getVehicle()).getDeltaMovement().y()) / 100.0;
                 double speedcheck = speed;
-
-                Minecraft.getInstance().font.draw(event.getMatrixStack(), "" + speedcheck + " Speed", event.getWindow().getGuiScaledWidth() / 2 - 29, event.getWindow().getGuiScaledHeight() / 2 / 2.3f, -3407872);
+                
+                Component message = new TranslatableComponent("message." + BeyondEarthMod.MODID + ".speed", speedcheck);
+                Minecraft.getInstance().font.draw(event.getMatrixStack(), message, event.getWindow().getGuiScaledWidth() / 2 - 29, event.getWindow().getGuiScaledHeight() / 2 / 2.3f, -3407872);
             }
 
             stopOverlaySettings();
