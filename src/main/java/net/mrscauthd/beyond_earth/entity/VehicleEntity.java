@@ -3,7 +3,6 @@ package net.mrscauthd.beyond_earth.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -21,7 +20,7 @@ public class VehicleEntity extends Entity {
     private double lerpX;
     private double lerpY;
     private double lerpZ;
-    public double lerpYRot;
+    private double lerpYRot;
     private double lerpXRot;
 
     private float speed;
