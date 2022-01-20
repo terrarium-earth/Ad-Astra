@@ -184,7 +184,7 @@ public class KeyBindings {
 		if (type == 2) {
 			//Rocket
 			if (Methods.isRocket(player.getVehicle())) {
-				Methods.vehicleRotation((LivingEntity) player.getVehicle(), -1);
+				Methods.vehicleRotation(player.getVehicle(), -1);
 			}
 
 			//Rover
@@ -193,10 +193,10 @@ public class KeyBindings {
 
 				if (player.getVehicle().getEntityData().get(RoverEntity.FUEL) != 0 && !player.getVehicle().isEyeInFluid(FluidTags.WATER)) {
 					if (forward >= 0.01) {
-						Methods.vehicleRotation((LivingEntity) player.getVehicle(), -1);
+						Methods.vehicleRotation(player.getVehicle(), -1);
 					}
 					if (forward <= -0.01) {
-						Methods.vehicleRotation((LivingEntity) player.getVehicle(), 1);
+						Methods.vehicleRotation(player.getVehicle(), 1);
 					}
 				}
 			}
@@ -206,7 +206,7 @@ public class KeyBindings {
 		if (type == 3) {
 			//Rocket
 			if (Methods.isRocket(player.getVehicle())) {
-				Methods.vehicleRotation((LivingEntity) player.getVehicle(), 1);
+				Methods.vehicleRotation(player.getVehicle(), 1);
 			}
 
 			//Rover
@@ -215,10 +215,10 @@ public class KeyBindings {
 
 				if (player.getVehicle().getEntityData().get(RoverEntity.FUEL) != 0 && !player.getVehicle().isEyeInFluid(FluidTags.WATER)) {
 					if (forward >= 0.01) {
-						Methods.vehicleRotation((LivingEntity) player.getVehicle(), 1);
+						Methods.vehicleRotation(player.getVehicle(), 1);
 					}
 					if (forward <= -0.01) {
-						Methods.vehicleRotation((LivingEntity) player.getVehicle(), -1);
+						Methods.vehicleRotation(player.getVehicle(), -1);
 					}
 				}
 			}

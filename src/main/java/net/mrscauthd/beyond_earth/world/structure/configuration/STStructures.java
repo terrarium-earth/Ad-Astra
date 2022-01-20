@@ -29,7 +29,7 @@ public class STStructures {
     public static void setupStructures() {
         setupMapSpacingAndLand(ALIEN_VILLAGE.get(), new StructureFeatureConfiguration(29, 9, 1234567890), false);
         setupMapSpacingAndLand(METEOR.get(), new StructureFeatureConfiguration(22, 5, 1234567890), false);
-        setupMapSpacingAndLand(OIL.get(), new StructureFeatureConfiguration(13, 7, 1234567890), false);
+        setupMapSpacingAndLand(OIL.get(), new StructureFeatureConfiguration(13, 8, 1234567890), false);
 
         setupMapSpacingAndLand(VENUS_BULLET.get(), new StructureFeatureConfiguration(29, 19, 1234567890), true);
         setupMapSpacingAndLand(VENUS_TOWER.get(), new StructureFeatureConfiguration(24, 17, 1234567890), true);

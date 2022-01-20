@@ -124,6 +124,7 @@ public class BiomeRegistry {
             BiomeGenerationSettings.Builder biomeGenerationSettings = new BiomeGenerationSettings.Builder();
             addDefaultCarvers(biomeGenerationSettings);
             BiomeDefaultFeatures.addSurfaceFreezing(biomeGenerationSettings);
+            BiomeDefaultFeatures.addDefaultCrystalFormations(biomeGenerationSettings);
             MobSpawnSettings mobSpawnInfo = MobSpawnSettings.EMPTY;
 
             glacio = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.SNOW).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(-0.7f).downfall(1f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
@@ -135,6 +136,7 @@ public class BiomeRegistry {
             BiomeGenerationSettings.Builder biomeGenerationSettings = new BiomeGenerationSettings.Builder();
             addDefaultCarvers(biomeGenerationSettings);
             BiomeDefaultFeatures.addSurfaceFreezing(biomeGenerationSettings);
+            BiomeDefaultFeatures.addDefaultCrystalFormations(biomeGenerationSettings);
 
             biomeGenerationSettings.addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, MiscOverworldPlacements.ICE_SPIKE);
             biomeGenerationSettings.addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, MiscOverworldPlacements.ICE_PATCH);

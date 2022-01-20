@@ -73,8 +73,6 @@ public class RocketTier2Entity extends PathfinderMob {
 	public static final EntityDataAccessor<Integer> FUEL = SynchedEntityData.defineId(RocketTier2Entity.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> START_TIMER = SynchedEntityData.defineId(RocketTier2Entity.class, EntityDataSerializers.INT);
 
-	public static final int FUEL_BUCKETS = 3;
-
 	private static final double ROCKET_SPEED = 0.7;
 
 	public RocketTier2Entity(EntityType type, Level world) {

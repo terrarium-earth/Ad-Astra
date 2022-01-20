@@ -272,10 +272,12 @@ public class Methods {
     public static void VenusRain(LivingEntity entity, ResourceKey<Level> planet) {
         if (Methods.isWorld(entity.level, planet)) {
             if (entity.level.getLevelData().isRaining() && entity.level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, (int) Math.floor(entity.getX()), (int) Math.floor(entity.getZ())) <= Math.floor(entity.getY()) + 1) {
-                if (!MinecraftForge.EVENT_BUS.post(new LivingSetVenusRainEvent(entity))) {
-                    if (!tagCheck(entity, BeyondEarthMod.MODID + ":entities/venus_rain")) {
+                if (entity.isPassenger() && (Methods.isRocket(entity.getVehicle()) || entity.getVehicle() instanceof LanderEntity)) {
+                    if (!MinecraftForge.EVENT_BUS.post(new LivingSetVenusRainEvent(entity))) {
+                        if (!tagCheck(entity, BeyondEarthMod.MODID + ":entities/venus_rain")) {
 
-                        entity.hurt(ModInit.DAMAGE_SOURCE_ACID_RAIN, 1);
+                            entity.hurt(ModInit.DAMAGE_SOURCE_ACID_RAIN, 1);
+                        }
                     }
                 }
             }
@@ -307,11 +309,10 @@ public class Methods {
         }
     }
 
-    public static void vehicleRotation(LivingEntity vehicle, float roation) {
+    public static void vehicleRotation(Entity vehicle, float roation) {
         vehicle.setYRot(vehicle.getYRot() + roation);
         vehicle.setYBodyRot(vehicle.getYRot());
         vehicle.yRotO = vehicle.getYRot();
-        vehicle.yBodyRotO = vehicle.getYRot();
     }
 
     public static void noFuelMessage(Player player) {

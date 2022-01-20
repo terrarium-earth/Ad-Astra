@@ -739,7 +739,7 @@ public class ModInit {
         event.put(MARTIAN_RAPTOR.get(), MartianRaptor.setCustomAttributes().build());
         event.put(ALIEN_ZOMBIE.get(), AlienZombieEntity.setCustomAttributes().build());
         event.put(STAR_CRAWLER.get(), StarCrawlerEntity.setCustomAttributes().build());
-        event.put(TIER_1_ROCKET.get(), RocketTier1Entity.setCustomAttributes().build());
+        //event.put(TIER_1_ROCKET.get(), RocketTier1Entity.setCustomAttributes().build());
         event.put(TIER_2_ROCKET.get(), RocketTier2Entity.setCustomAttributes().build());
         event.put(TIER_3_ROCKET.get(), RocketTier3Entity.setCustomAttributes().build());
         event.put(TIER_4_ROCKET.get(), RocketTier4Entity.setCustomAttributes().build());
