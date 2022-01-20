@@ -9,7 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
 
-public abstract class BeyondEarthRecipe implements Recipe<Container> {
+public abstract class BeyondEarthRecipe implements Recipe<Container>, IBeyondEarthRecipe {
 
 	private final ResourceLocation id;
 
@@ -33,7 +33,7 @@ public abstract class BeyondEarthRecipe implements Recipe<Container> {
 	public final ResourceLocation getId() {
 		return this.id;
 	}
-	
+
 	@Override
 	public String getGroup() {
 		return this.getSerializer().getRegistryType().toString();
@@ -58,7 +58,7 @@ public abstract class BeyondEarthRecipe implements Recipe<Container> {
 		// Don't use this
 		return ItemStack.EMPTY;
 	}
-	
+
 	/**
 	 * Don't use this
 	 */
