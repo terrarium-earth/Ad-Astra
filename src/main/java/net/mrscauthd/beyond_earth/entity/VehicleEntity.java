@@ -248,10 +248,4 @@ public class VehicleEntity extends Entity {
     public void setDiscardFriction(boolean p_147245_) {
         this.discardFriction = p_147245_;
     }
-
-    @Override
-    public void recreateFromPacket(ClientboundAddEntityPacket p_146866_) {
-        super.recreateFromPacket(p_146866_);
-        //this.setDeltaMovement((double)((float)p_146866_.getXa()), (double)((float)p_146866_.getXa()), (double)((float)p_146866_.getZa()));
-    }
 }

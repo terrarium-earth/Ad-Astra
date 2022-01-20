@@ -152,6 +152,7 @@ public class RocketTier1Entity extends VehicleEntity {
 		this.remove(RemovalReason.DISCARDED);
 	}
 
+	@Override
 	public boolean hurt(DamageSource source, float p_21017_) {
 		Entity sourceentity = source.getEntity();
 
