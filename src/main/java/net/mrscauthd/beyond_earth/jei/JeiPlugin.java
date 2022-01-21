@@ -1277,7 +1277,7 @@ public class JeiPlugin implements IModPlugin {
 			this.title = new TranslatableComponent("jei.category." + path);
 			this.tooltips = Arrays.stream(new TranslatableComponent("jei.tooltip." + path).getString().split("\n")).map(TextComponent::new).toArray(Component[]::new);
 			this.background = guiHelper.createDrawable(BACKGROUND, 0, 0, 144, 51);
-			this.icon = guiHelper.createDrawable(ICON, 0, 0, 16, 16);
+			this.icon = guiHelper.drawableBuilder(ICON, 0, 0, 16, 16).setTextureSize(16, 16).build();
 			this.slot = guiHelper.getSlotDrawable();
 		}
 
