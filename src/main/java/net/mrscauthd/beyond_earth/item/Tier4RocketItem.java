@@ -86,12 +86,8 @@ public class Tier4RocketItem extends Item {
                     double d0 = getYOffset(world, pos, true, rocket.getBoundingBox());
                     rocket.moveTo((double)pos.getX() + 0.5D, (double)pos.getY() + d0, (double)pos.getZ() + 0.5D, 0.0F, 0.0F);
 
-                    rocket.yHeadRot = rocket.getYRot();
-                    rocket.yBodyRot = rocket.getYRot();
+                    rocket.yRotO = rocket.getYRot();
 
-                    if (world instanceof ServerLevel) {
-                        rocket.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(new BlockPos(rocket.getX(), rocket.getY(), rocket.getZ())), MobSpawnType.MOB_SUMMONED, null, null);
-                    }
                     world.addFreshEntity(rocket);
 
                     rocket.getEntityData().set(RocketTier4Entity.FUEL, itemStack.getOrCreateTag().getInt(fuelTag));

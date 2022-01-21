@@ -63,7 +63,7 @@ import net.mrscauthd.beyond_earth.gui.screens.rocket.RocketGui;
 
 import java.util.Set;
 
-public class RocketTier3Entity extends PathfinderMob {
+public class RocketTier3Entity extends VehicleEntity {
 	public double ar = 0;
 	public double ay = 0;
 	public double ap = 0;
@@ -83,20 +83,6 @@ public class RocketTier3Entity extends PathfinderMob {
 		this.entityData.define(START_TIMER, 0);
 	}
 
-	public static AttributeSupplier.Builder setCustomAttributes() {
-		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 20);
-	}
-
-	@Override
-	public Packet<?> getAddEntityPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
-	}
-
-	@Override
-	public boolean canBeLeashed(Player p_21418_) {
-		return false;
-	}
-
 	@Override
 	public boolean isPushable() {
 		return false;
@@ -108,60 +94,12 @@ public class RocketTier3Entity extends PathfinderMob {
 	}
 
 	@Override
-	protected void doPush(Entity p_20971_) {
-	}
-
-	@Override
 	public void push(Entity p_21294_) {
 	}
 
 	@Deprecated
 	public boolean canBeRiddenInWater() {
 		return true;
-	}
-
-	@Override
-	public boolean isAffectedByPotions() {
-		return false;
-	}
-
-	@Override
-	protected void onEffectAdded(MobEffectInstance p_147190_, @Nullable Entity p_147191_) {
-	}
-
-	@Override
-	public boolean addEffect(MobEffectInstance p_147208_, @Nullable Entity p_147209_) {
-		return false;
-	}
-
-	@Override
-	protected void registerGoals() {
-		super.registerGoals();
-	}
-
-	@Override
-	public MobType getMobType() {
-		return MobType.UNDEFINED;
-	}
-
-	@Override
-	protected MovementEmission getMovementEmission() {
-		return MovementEmission.NONE;
-	}
-
-	@Override
-	public boolean removeWhenFarAway(double p_21542_) {
-		return false;
-	}
-
-	@Override
-	protected SoundEvent getHurtSound(DamageSource p_21239_) {
-		return null;
-	}
-
-	@Override
-	public SoundEvent getDeathSound() {
-		return null;
 	}
 
 	@Override
@@ -249,9 +187,7 @@ public class RocketTier3Entity extends PathfinderMob {
 		}
 	}
 
-	@Override
 	protected void dropEquipment() {
-		super.dropEquipment();
 		for (int i = 0; i < inventory.getSlots(); ++i) {
 			ItemStack itemstack = inventory.getStackInSlot(i);
 			if (!itemstack.isEmpty() && !EnchantmentHelper.hasVanishingCurse(itemstack)) {
@@ -267,7 +203,7 @@ public class RocketTier3Entity extends PathfinderMob {
 		}
 	};
 
-	private final CombinedInvWrapper combined = new CombinedInvWrapper(inventory, new EntityHandsInvWrapper(this), new EntityArmorInvWrapper(this));
+	private final CombinedInvWrapper combined = new CombinedInvWrapper(inventory);
 
 	@Override
 	public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> capability, @Nullable Direction side) {
@@ -283,7 +219,6 @@ public class RocketTier3Entity extends PathfinderMob {
 
 	@Override
 	public void addAdditionalSaveData(CompoundTag compound) {
-		super.addAdditionalSaveData(compound);
 		compound.put("InventoryCustom", inventory.serializeNBT());
 
 		compound.putBoolean("rocket_start", this.entityData.get(ROCKET_START));
@@ -294,7 +229,6 @@ public class RocketTier3Entity extends PathfinderMob {
 
 	@Override
 	public void readAdditionalSaveData(CompoundTag compound) {
-		super.readAdditionalSaveData(compound);
 		Tag inventoryCustom = compound.get("InventoryCustom");
 		if (inventoryCustom instanceof CompoundTag) {
 			inventory.deserializeNBT((CompoundTag) inventoryCustom);
@@ -306,10 +240,9 @@ public class RocketTier3Entity extends PathfinderMob {
 		this.entityData.set(START_TIMER, compound.getInt("start_timer"));
 	}
 
-
 	@Override
-	protected InteractionResult mobInteract(Player player, InteractionHand hand) {
-		super.mobInteract(player, hand);
+	public InteractionResult interact(Player player, InteractionHand hand) {
+		super.interact(player, hand);
 		InteractionResult retval = InteractionResult.sidedSuccess(this.level.isClientSide);
 
 		if (player instanceof ServerPlayer && player.isCrouching()) {
@@ -338,8 +271,8 @@ public class RocketTier3Entity extends PathfinderMob {
 	}
 
 	@Override
-	public void baseTick() {
-		super.baseTick();
+	public void tick() {
+		super.tick();
 		double x = this.getX();
 		double y = this.getY();
 		double z = this.getZ();
@@ -389,8 +322,8 @@ public class RocketTier3Entity extends PathfinderMob {
 			if (this.entityData.get(START_TIMER) == 200) {
 				if (level instanceof ServerLevel) {
 					for (ServerPlayer p : ((ServerLevel) level).getServer().getPlayerList().getPlayers()) {
-						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInit.LARGE_FLAME_PARTICLE.get(), true, this.getX() - vec.x, this.getY() - vec.y - 1.75, this.getZ() - vec.z, 20, 0.1, 0.1, 0.1, 0.001);
-						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInit.LARGE_SMOKE_PARTICLE.get(), true, this.getX() - vec.x, this.getY() - vec.y - 2.75, this.getZ() - vec.z, 10, 0.1, 0.1, 0.1, 0.04);
+						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInit.LARGE_FLAME_PARTICLE.get(), true, this.getX() - vec.x, this.getY() - vec.y - 2.6, this.getZ() - vec.z, 20, 0.1, 0.1, 0.1, 0.001);
+						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInit.LARGE_SMOKE_PARTICLE.get(), true, this.getX() - vec.x, this.getY() - vec.y - 3.6, this.getZ() - vec.z, 10, 0.1, 0.1, 0.1, 0.04);
 					}
 				}
 			} else {
@@ -444,5 +377,4 @@ public class RocketTier3Entity extends PathfinderMob {
 			}
 		}
 	}
-
 }

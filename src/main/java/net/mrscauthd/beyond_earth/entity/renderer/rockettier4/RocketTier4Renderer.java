@@ -5,8 +5,9 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.entity.RocketTier4Entity;
+import net.mrscauthd.beyond_earth.entity.renderer.VehicleRenderer;
 
-public class RocketTier4Renderer extends MobRenderer<RocketTier4Entity, RocketTier4Model<RocketTier4Entity>> {
+public class RocketTier4Renderer extends VehicleRenderer<RocketTier4Entity, RocketTier4Model<RocketTier4Entity>> {
     public RocketTier4Renderer(EntityRendererProvider.Context renderManagerIn) {
         super(renderManagerIn, new RocketTier4Model<>(renderManagerIn.bakeLayer(RocketTier4Model.LAYER_LOCATION)), 0.5f);
     }

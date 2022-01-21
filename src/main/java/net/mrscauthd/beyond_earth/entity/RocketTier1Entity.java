@@ -265,8 +265,8 @@ public class RocketTier1Entity extends VehicleEntity {
 	}
 
 	@Override
-	public void baseTick() {
-		super.baseTick();
+	public void tick() {
+		super.tick();
 		double x = this.getX();
 		double y = this.getY();
 		double z = this.getZ();
@@ -316,8 +316,8 @@ public class RocketTier1Entity extends VehicleEntity {
 			if (this.entityData.get(START_TIMER) == 200) {
 				if (level instanceof ServerLevel) {
 					for (ServerPlayer p : ((ServerLevel) level).getServer().getPlayerList().getPlayers()) {
-						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInit.LARGE_FLAME_PARTICLE.get(), true, this.getX() - vec.x, this.getY() - vec.y - 1.5, this.getZ() - vec.z, 20, 0.1, 0.1, 0.1, 0.001);
-						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInit.LARGE_SMOKE_PARTICLE.get(), true, this.getX() - vec.x, this.getY() - vec.y - 2.5, this.getZ() - vec.z, 10, 0.1, 0.1, 0.1, 0.04);
+						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInit.LARGE_FLAME_PARTICLE.get(), true, this.getX() - vec.x, this.getY() - vec.y - 2.2, this.getZ() - vec.z, 20, 0.1, 0.1, 0.1, 0.001);
+						((ServerLevel) level).sendParticles(p, (ParticleOptions) ModInit.LARGE_SMOKE_PARTICLE.get(), true, this.getX() - vec.x, this.getY() - vec.y - 3.2, this.getZ() - vec.z, 10, 0.1, 0.1, 0.1, 0.04);
 					}
 				}
 			} else {

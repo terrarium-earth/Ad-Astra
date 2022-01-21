@@ -24,7 +24,7 @@ public class SpaceSuitMaterial {
 
         @Override
         public int getEnchantmentValue() {
-            return 0;
+            return 10;
         }
 
         @Override

@@ -24,7 +24,7 @@ public class NetheriteSpaceSuitMaterial {
 
         @Override
         public int getEnchantmentValue() {
-            return 0;
+            return 15;
         }
 
         @Override
