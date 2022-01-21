@@ -2,6 +2,7 @@ package net.mrscauthd.beyond_earth.jei;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -38,9 +39,9 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.material.Fluid;
@@ -83,7 +84,11 @@ import net.mrscauthd.beyond_earth.gui.screens.planetselection.PlanetSelectionGui
 import net.mrscauthd.beyond_earth.gui.screens.rocket.RocketGui;
 import net.mrscauthd.beyond_earth.gui.screens.rocket.RocketGuiWindow;
 import net.mrscauthd.beyond_earth.gui.screens.rover.RoverGuiWindow;
-import net.mrscauthd.beyond_earth.jei.jeiguihandlers.*;
+import net.mrscauthd.beyond_earth.jei.jeiguihandlers.CoalGeneratorGuiContainerHandler;
+import net.mrscauthd.beyond_earth.jei.jeiguihandlers.CompressorGuiContainerHandler;
+import net.mrscauthd.beyond_earth.jei.jeiguihandlers.PlanetSlecetionGuiJeiHandler;
+import net.mrscauthd.beyond_earth.jei.jeiguihandlers.RocketGuiContainerHandler;
+import net.mrscauthd.beyond_earth.jei.jeiguihandlers.RoverGuiContainerHandler;
 import net.mrscauthd.beyond_earth.machines.tile.CoalGeneratorBlockEntity;
 import net.mrscauthd.beyond_earth.machines.tile.CompressorBlockEntity;
 import net.mrscauthd.beyond_earth.machines.tile.FuelRefineryBlockEntity;
@@ -1254,16 +1259,22 @@ public class JeiPlugin implements IModPlugin {
 
 	public static class SpaceStationJeiCategory implements IRecipeCategory<SpaceStationRecipe> {
 		public static final ResourceLocation Uid = new ResourceLocation(BeyondEarthMod.MODID, "space_station");
+		public static final int SLOTS_X_CENTER = 72;
+		public static final int SLOTS_Y_TOP = 6;
+		public static final int SLOTS_X_OFFSET = 18;
+		public static final int SLOTS_Y_OFFSET = 18;
 
 		private final Component title;
-		private final Component tooltip;
+		private final Component[] tooltips;
 		private final IDrawable background;
+		private final IDrawable slot;
 
 		public SpaceStationJeiCategory(IGuiHelper guiHelper) {
 			String path = BeyondEarthMod.MODID + ".space_station";
 			this.title = new TranslatableComponent("jei.category." + path);
-			this.tooltip = new TranslatableComponent("jei.tooltip." + path);
-			this.background = guiHelper.createDrawable(new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/space_station_jei.png"), 0, 0, 146, 70);
+			this.tooltips = Arrays.stream(new TranslatableComponent("jei.tooltip." + path).getString().split("\n")).map(TextComponent::new).toArray(Component[]::new);
+			this.background = guiHelper.createDrawable(new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/space_station_jei.png"), 0, 0, 146, 51);
+			this.slot = guiHelper.getSlotDrawable();
 		}
 
 		@Override
@@ -1280,14 +1291,14 @@ public class JeiPlugin implements IModPlugin {
 		public Component getTitle() {
 			return title;
 		}
-		
-		public Component getTooltip() {
-			return this.tooltip;
+
+		public Component[] getTooltip() {
+			return this.tooltips;
 		}
 
 		@Override
 		public IDrawable getBackground() {
-			return background;
+			return this.background;
 		}
 
 		@Override
@@ -1300,33 +1311,50 @@ public class JeiPlugin implements IModPlugin {
 			iIngredients.setInputIngredients(recipe.getIngredients());
 		}
 
+		public int[] getSpaceStationItemPosition(int index, int count) {
+			int xIndex = index % count;
+			int yIndex = index / count;
+			int slots_width = count * SLOTS_X_OFFSET;
+			int xPosition = SLOTS_X_CENTER + (xIndex * SLOTS_X_OFFSET) - (slots_width / 2);
+			int yPosition = SLOTS_Y_TOP + (yIndex * SLOTS_Y_OFFSET);
+			return new int[] { xPosition, yPosition };
+		}
+
 		@Override
 		public void setRecipe(IRecipeLayout iRecipeLayout, SpaceStationRecipe recipe, IIngredients iIngredients) {
 			IGuiItemStackGroup itemStacks = iRecipeLayout.getItemStacks();
 			NonNullList<IngredientStack> ingredientStacks = recipe.getIngredientStacks();
-			int columns = 7;
+			int count = ingredientStacks.size();
 
-			for (int i = 0; i < ingredientStacks.size(); i++) {
-				int xi = i % columns;
-				int yi = i / columns;
+			for (int i = 0; i < count; i++) {
+				int[] pos = this.getSpaceStationItemPosition(i, count);
 
 				IngredientStack ingredientStack = ingredientStacks.get(i);
-				itemStacks.init(i, true, 9 + (xi * 18), 8 + (yi * 18));
+				itemStacks.init(i, true, pos[0], pos[1]);
 				itemStacks.set(i, NonNullList.of(ItemStack.EMPTY, ingredientStack.getItems()));
 			}
 		}
-		
+
 		@Override
 		public void draw(SpaceStationRecipe recipe, PoseStack stack, double mouseX, double mouseY) {
 			IRecipeCategory.super.draw(recipe, stack, mouseX, mouseY);
-			
+			NonNullList<IngredientStack> ingredientStacks = recipe.getIngredientStacks();
+			int count = ingredientStacks.size();
+
+			for (int i = 0; i < count; i++) {
+				int[] pos = this.getSpaceStationItemPosition(i, count);
+				this.slot.draw(stack, pos[0], pos[1]);
+			}
+
 			Minecraft minecraft = Minecraft.getInstance();
 			Font font = minecraft.font;
-			List<FormattedCharSequence> lines = font.split(this.tooltip, 126);
-			
-			for (int i = 0; i < lines.size(); i++) {
-				FormattedCharSequence line = lines.get(i);
-				font.draw(stack, line, 9, 31 + font.lineHeight * i, 0xFF404040);
+			int tooltipYOffset = this.getSpaceStationItemPosition(ingredientStacks.size() - 1, count)[1] + SLOTS_Y_OFFSET + 4;
+			Component[] tooltips = this.getTooltip();
+
+			for (int i = 0; i < tooltips.length; i++) {
+				Component tooltip = tooltips[i];
+				int tooltipWidth = font.width(tooltip);
+				font.draw(stack, tooltip, SLOTS_X_CENTER - (tooltipWidth / 2), tooltipYOffset + font.lineHeight * i, 0xFF404040);
 			}
 		}
 	}
