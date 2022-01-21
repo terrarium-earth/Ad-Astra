@@ -1259,6 +1259,7 @@ public class JeiPlugin implements IModPlugin {
 
 	public static class SpaceStationJeiCategory implements IRecipeCategory<SpaceStationRecipe> {
 		public static final ResourceLocation Uid = new ResourceLocation(BeyondEarthMod.MODID, "space_station");
+		public static final ResourceLocation texture = new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/space_station_jei.png");
 		public static final int SLOTS_X_CENTER = 72;
 		public static final int SLOTS_Y_TOP = 6;
 		public static final int SLOTS_X_OFFSET = 18;
@@ -1267,13 +1268,15 @@ public class JeiPlugin implements IModPlugin {
 		private final Component title;
 		private final Component[] tooltips;
 		private final IDrawable background;
+		private final IDrawable icon;
 		private final IDrawable slot;
 
 		public SpaceStationJeiCategory(IGuiHelper guiHelper) {
 			String path = BeyondEarthMod.MODID + ".space_station";
 			this.title = new TranslatableComponent("jei.category." + path);
 			this.tooltips = Arrays.stream(new TranslatableComponent("jei.tooltip." + path).getString().split("\n")).map(TextComponent::new).toArray(Component[]::new);
-			this.background = guiHelper.createDrawable(new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/space_station_jei.png"), 0, 0, 146, 51);
+			this.background = guiHelper.createDrawable(texture, 0, 0, 144, 51);
+			this.icon = guiHelper.createDrawable(texture, 144, 0, 16, 16);
 			this.slot = guiHelper.getSlotDrawable();
 		}
 
@@ -1303,7 +1306,7 @@ public class JeiPlugin implements IModPlugin {
 
 		@Override
 		public IDrawable getIcon() {
-			return null;
+			return this.icon;
 		}
 
 		@Override
