@@ -202,15 +202,18 @@
   "biome.beyond_earth.glacio_ice_spikes": "글라시오 역고드름",
 
   "advancements.workbench_advancement.title": "NASA 작업대",
-  "advancements.rocket_tier_2_advancement.title": "2 티어 로켓",
-  "advancements.rocket_advancement.descr": "§b1 티어 로켓을 제작하세요",
+  "advancements.workbench_advancement.descr": "§bNASA 작업대를 제작하세요",
   "advancements.rocket_advancement.title": "1 티어 로켓",
-  "advancements.moon_advancement.title": "달",
+  "advancements.rocket_advancement.descr": "§b1 티어 로켓을 제작하세요",
+  "advancements.rocket_tier_2_advancement.title": "2 티어 로켓",
+  "advancements.rocket_tier_2_advancement.descr": "§b2 티어 로켓을 제작하세요",
   "advancements.rocket_tier_3_advancement.title": "3 티어 로켓",
   "advancements.rocket_tier_3_advancement.descr": "§b3 티어 로켓을 제작하세요",
+  "advancements.rocket_tier_4_advancement.title": "4 티어 로켓",
+  "advancements.rocket_tier_4_advancement.descr": "§b4 티어 로켓을 제작하세요",
+  "advancements.moon_advancement.title": "달",
+
   "advancements.moon_advancement.descr": "§b달에 진입하세요",
-  "advancements.workbench_advancement.descr": "§bNASA 작업대를 제작하세요",
-  "advancements.rocket_tier_2_advancement.descr": "§b2 티어 로켓을 제작하세요",
 
   "effect.beyond_earth.oxygen_bubble_effect": "산소 기포",
 

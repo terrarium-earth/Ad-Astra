@@ -23,6 +23,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.mrscauthd.beyond_earth.entity.RoverEntity;
 import net.mrscauthd.beyond_earth.entity.VehicleEntity;
 
 @OnlyIn(Dist.CLIENT)
@@ -82,6 +83,14 @@ public abstract class VehicleRenderer<T extends VehicleEntity, M extends EntityM
         p_115311_.translate(0.0D, (double)-1.501F, 0.0D);
         float f8 = 0.0F;
         float f5 = 0.0F;
+        if (p_115308_ instanceof RoverEntity) {
+            f8 = Mth.lerp(p_115310_, ((RoverEntity) p_115308_).animationSpeedOld, ((RoverEntity) p_115308_).animationSpeed);
+            f5 = ((RoverEntity) p_115308_).animationPosition - ((RoverEntity) p_115308_).animationSpeed * (1.0F - p_115310_);
+
+            if (f8 > 1.0F) {
+                f8 = 1.0F;
+            }
+        }
 
         this.model.prepareMobModel(p_115308_, f5, f8, p_115310_);
         this.model.setupAnim(p_115308_, f5, f8, f7, f2, f6);

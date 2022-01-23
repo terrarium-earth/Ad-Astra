@@ -5,19 +5,13 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.network.protocol.Packet;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -31,8 +25,6 @@ import net.minecraftforge.network.NetworkHooks;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.gui.screens.lander.LanderGui;
 
-import net.minecraftforge.items.wrapper.EntityHandsInvWrapper;
-import net.minecraftforge.items.wrapper.EntityArmorInvWrapper;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -44,24 +36,10 @@ import javax.annotation.Nonnull;
 
 import io.netty.buffer.Unpooled;
 
-public class LanderEntity extends PathfinderMob {
+public class LanderEntity extends VehicleEntity {
 
-	public LanderEntity(EntityType<LanderEntity> type, Level world) {
+	public LanderEntity(EntityType type, Level world) {
 		super(type, world);
-	}
-
-	public static AttributeSupplier.Builder setCustomAttributes() {
-		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 20);
-	}
-
-	@Override
-	public Packet<?> getAddEntityPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
-	}
-
-	@Override
-	public boolean canBeLeashed(Player p_21418_) {
-		return false;
 	}
 
 	@Override
@@ -72,10 +50,6 @@ public class LanderEntity extends PathfinderMob {
 	@Override
 	public boolean canBeCollidedWith() {
 		return true;
-	}
-
-	@Override
-	protected void doPush(Entity p_20971_) {
 	}
 
 	@Override
@@ -90,50 +64,6 @@ public class LanderEntity extends PathfinderMob {
 	@Override
 	public boolean rideableUnderWater() {
 		return true;
-	}
-
-	@Override
-	public boolean isAffectedByPotions() {
-		return false;
-	}
-
-	@Override
-	protected void onEffectAdded(MobEffectInstance p_147190_, @Nullable Entity p_147191_) {
-	}
-
-	@Override
-	public boolean addEffect(MobEffectInstance p_147208_, @Nullable Entity p_147209_) {
-		return false;
-	}
-
-	@Override
-	protected void registerGoals() {
-		super.registerGoals();
-	}
-
-	@Override
-	public MobType getMobType() {
-		return MobType.UNDEFINED;
-	}
-
-	@Override
-	protected MovementEmission getMovementEmission() {
-		return MovementEmission.NONE;
-	}
-
-	@Override
-	public boolean removeWhenFarAway(double p_21542_) {
-		return false;
-	}
-
-	@Override
-	protected SoundEvent getHurtSound(DamageSource p_21239_) {
-		return null;
-	}
-
-	@Override
-	public SoundEvent getDeathSound() {
-		return null;
 	}
 
 	@Override
@@ -154,15 +84,6 @@ public class LanderEntity extends PathfinderMob {
 
 	@Override
 	public boolean hurt(DamageSource source, float amount) {
-		if (source.getMsgId().equals("fall")) {
-			if (!this.level.isClientSide) {
-				this.level.explode(null, this.getX(), this.getY(), this.getZ(), 10, Explosion.BlockInteraction.BREAK);
-			}
-			dropEquipment();
-			this.remove(RemovalReason.DISCARDED);
-			return true;
-		}
-
 		if (!source.isProjectile() && source.getEntity() != null && source.getEntity().isCrouching() && !this.isVehicle()) {
 			dropEquipment();
 			this.remove(RemovalReason.DISCARDED);
@@ -172,8 +93,20 @@ public class LanderEntity extends PathfinderMob {
 	}
 
 	@Override
+	public boolean causeFallDamage(float p_150347_, float p_150348_, DamageSource p_150349_) {
+		if (p_150347_ >= 3.0F) {
+			if (!this.level.isClientSide) {
+				this.level.explode(null, this.getX(), this.getY(), this.getZ(), 10, Explosion.BlockInteraction.BREAK);
+			}
+
+			dropEquipment();
+			this.remove(RemovalReason.DISCARDED);
+		}
+
+		return super.causeFallDamage(p_150347_, p_150348_, p_150349_);
+	}
+
 	protected void dropEquipment() {
-		super.dropEquipment();
 		for (int i = 0; i < inventory.getSlots(); ++i) {
 			ItemStack itemstack = inventory.getStackInSlot(i);
 			if (!itemstack.isEmpty() && !EnchantmentHelper.hasVanishingCurse(itemstack)) {
@@ -189,7 +122,7 @@ public class LanderEntity extends PathfinderMob {
 		}
 	};
 
-	private final CombinedInvWrapper combined = new CombinedInvWrapper(inventory, new EntityHandsInvWrapper(this), new EntityArmorInvWrapper(this));
+	private final CombinedInvWrapper combined = new CombinedInvWrapper(inventory);
 
 	@Override
 	public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> capability, @Nullable Direction side) {
@@ -205,13 +138,11 @@ public class LanderEntity extends PathfinderMob {
 
 	@Override
 	public void addAdditionalSaveData(CompoundTag compound) {
-		super.addAdditionalSaveData(compound);
 		compound.put("InventoryCustom", inventory.serializeNBT());
 	}
 
 	@Override
 	public void readAdditionalSaveData(CompoundTag compound) {
-		super.readAdditionalSaveData(compound);
 		Tag inventoryCustom = compound.get("InventoryCustom");
 		if (inventoryCustom instanceof CompoundTag) {
 			inventory.deserializeNBT((CompoundTag) inventoryCustom);
@@ -219,8 +150,8 @@ public class LanderEntity extends PathfinderMob {
 	}
 
 	@Override
-	protected InteractionResult mobInteract(Player player, InteractionHand hand) {
-		super.mobInteract(player, hand);
+	public InteractionResult interact(Player player, InteractionHand hand) {
+		super.interact(player, hand);
 		InteractionResult retval = InteractionResult.sidedSuccess(this.level.isClientSide);
 
 		if (player instanceof ServerPlayer && player.isCrouching()) {

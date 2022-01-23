@@ -1,15 +1,15 @@
 package net.mrscauthd.beyond_earth.entity.renderer.rover;
 
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.entity.RoverEntity;
+import net.mrscauthd.beyond_earth.entity.renderer.VehicleRenderer;
 
 @OnlyIn(Dist.CLIENT)
-public class RoverRenderer extends MobRenderer<RoverEntity, RoverModel<RoverEntity>> {
+public class RoverRenderer extends VehicleRenderer<RoverEntity, RoverModel<RoverEntity>> {
     public RoverRenderer(EntityRendererProvider.Context renderManagerIn) {
         super(renderManagerIn, new RoverModel<>(renderManagerIn.bakeLayer(RoverModel.LAYER_LOCATION)), 0f);
     }

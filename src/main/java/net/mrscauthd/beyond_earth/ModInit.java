@@ -616,6 +616,20 @@ public class ModInit {
 
             HashMap<StructureFeature<?>, HashMultimap<ConfiguredStructureFeature<?, ?>, ResourceKey<Biome>>> STStructureToMultiMap = new HashMap<>();
 
+            /**Add Overworld Structure in a Biome without amplified gen*/
+            Boolean amplified = false;
+            RegistryAccess registryAccess = serverLevel.getServer().registryAccess();
+            NoiseGeneratorSettings amplifiedSettings = registryAccess.registryOrThrow(Registry.NOISE_GENERATOR_SETTINGS_REGISTRY).getOrThrow(NoiseGeneratorSettings.AMPLIFIED);
+
+            if (chunkGenerator instanceof NoiseBasedChunkGenerator) {
+                NoiseBasedChunkGenerator noiseBasedChunkGenerator = (NoiseBasedChunkGenerator) chunkGenerator;
+
+                if (noiseBasedChunkGenerator.settings.get() == amplifiedSettings) {
+                    amplified = true;
+                }
+
+            }
+
             for(Map.Entry<ResourceKey<Biome>, Biome> biomeEntry : serverLevel.registryAccess().ownedRegistryOrThrow(Registry.BIOME_REGISTRY).entrySet()) {
 
                 Biome.BiomeCategory biomeCategory = biomeEntry.getValue().getBiomeCategory();
@@ -627,20 +641,6 @@ public class ModInit {
                     if (biomeCategory == Biome.BiomeCategory.OCEAN) {
                         associateBiomeToConfiguredStructure(STStructureToMultiMap, STConfiguredStructures.OIL, biomeEntry.getKey());
                     }
-                }
-
-                /**Add Overworld Structure in a Biome without amplified gen*/
-                Boolean amplified = false;
-                RegistryAccess registryAccess = serverLevel.getServer().registryAccess();
-                NoiseGeneratorSettings amplifiedSettings = registryAccess.registryOrThrow(Registry.NOISE_GENERATOR_SETTINGS_REGISTRY).getOrThrow(NoiseGeneratorSettings.AMPLIFIED);
-
-                if (chunkGenerator instanceof NoiseBasedChunkGenerator) {
-                    NoiseBasedChunkGenerator noiseBasedChunkGenerator = (NoiseBasedChunkGenerator) chunkGenerator;
-
-                    if (noiseBasedChunkGenerator.settings.get() == amplifiedSettings) {
-                        amplified = true;
-                    }
-
                 }
 
                 if (Config.MeteorStructure && !amplified) {
@@ -695,38 +695,50 @@ public class ModInit {
 
             /**______________________________________MAP___________________________________*/
 
-            Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap = new HashMap<>(worldStructureConfig.structureConfig());
-            tempMap.putIfAbsent(STStructures.OIL.get(), StructureSettings.DEFAULTS.get(STStructures.OIL.get()));
-            worldStructureConfig.structureConfig = tempMap;
+            if (Config.OILWellStructure) {
+                Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap = new HashMap<>(worldStructureConfig.structureConfig());
+                tempMap.putIfAbsent(STStructures.OIL.get(), StructureSettings.DEFAULTS.get(STStructures.OIL.get()));
+                worldStructureConfig.structureConfig = tempMap;
+            }
 
-            Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap2 = new HashMap<>(worldStructureConfig.structureConfig());
-            tempMap2.putIfAbsent(STStructures.METEOR.get(), StructureSettings.DEFAULTS.get(STStructures.METEOR.get()));
-            worldStructureConfig.structureConfig = tempMap2;
+            if (Config.MeteorStructure && !amplified) {
+                Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap2 = new HashMap<>(worldStructureConfig.structureConfig());
+                tempMap2.putIfAbsent(STStructures.METEOR.get(), StructureSettings.DEFAULTS.get(STStructures.METEOR.get()));
+                worldStructureConfig.structureConfig = tempMap2;
+            }
 
-            Map<StructureFeature<?>, StructureFeatureConfiguration> tempMa3 = new HashMap<>(worldStructureConfig.structureConfig());
-            tempMa3.putIfAbsent(STStructures.ALIEN_VILLAGE.get(), StructureSettings.DEFAULTS.get(STStructures.ALIEN_VILLAGE.get()));
-            worldStructureConfig.structureConfig = tempMa3;
+            if (Config.AlienVillageStructure) {
+                Map<StructureFeature<?>, StructureFeatureConfiguration> tempMa3 = new HashMap<>(worldStructureConfig.structureConfig());
+                tempMa3.putIfAbsent(STStructures.ALIEN_VILLAGE.get(), StructureSettings.DEFAULTS.get(STStructures.ALIEN_VILLAGE.get()));
+                worldStructureConfig.structureConfig = tempMa3;
+            }
 
-            Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap4 = new HashMap<>(worldStructureConfig.structureConfig());
-            tempMap4.putIfAbsent(STStructures.CRIMSON.get(), StructureSettings.DEFAULTS.get(STStructures.CRIMSON.get()));
-            worldStructureConfig.structureConfig = tempMap4;
+            if (Config.CrimsonVillageStructure) {
+                Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap4 = new HashMap<>(worldStructureConfig.structureConfig());
+                tempMap4.putIfAbsent(STStructures.CRIMSON.get(), StructureSettings.DEFAULTS.get(STStructures.CRIMSON.get()));
+                worldStructureConfig.structureConfig = tempMap4;
+            }
 
-            Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap5 = new HashMap<>(worldStructureConfig.structureConfig());
-            tempMap5.putIfAbsent(STStructures.VENUS_TOWER.get(), StructureSettings.DEFAULTS.get(STStructures.VENUS_TOWER.get()));
-            worldStructureConfig.structureConfig = tempMap5;
+            if (Config.VenusTowerStructure) {
+                Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap5 = new HashMap<>(worldStructureConfig.structureConfig());
+                tempMap5.putIfAbsent(STStructures.VENUS_TOWER.get(), StructureSettings.DEFAULTS.get(STStructures.VENUS_TOWER.get()));
+                worldStructureConfig.structureConfig = tempMap5;
+            }
 
-            Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap6 = new HashMap<>(worldStructureConfig.structureConfig());
-            tempMap4.putIfAbsent(STStructures.VENUS_BULLET.get(), StructureSettings.DEFAULTS.get(STStructures.VENUS_BULLET.get()));
-            worldStructureConfig.structureConfig = tempMap6;
+            if (Config.VenusBulletStructure) {
+                Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap6 = new HashMap<>(worldStructureConfig.structureConfig());
+                tempMap6.putIfAbsent(STStructures.VENUS_BULLET.get(), StructureSettings.DEFAULTS.get(STStructures.VENUS_BULLET.get()));
+                worldStructureConfig.structureConfig = tempMap6;
+            }
         }
     }
 
     private static void associateBiomeToConfiguredStructure(Map<StructureFeature<?>, HashMultimap<ConfiguredStructureFeature<?, ?>, ResourceKey<Biome>>> STStructureToMultiMap, ConfiguredStructureFeature<?, ?> configuredStructureFeature, ResourceKey<Biome> biomeRegistryKey) {
         STStructureToMultiMap.putIfAbsent(configuredStructureFeature.feature, HashMultimap.create());
         HashMultimap<ConfiguredStructureFeature<?, ?>, ResourceKey<Biome>> configuredStructureToBiomeMultiMap = STStructureToMultiMap.get(configuredStructureFeature.feature);
-        if(configuredStructureToBiomeMultiMap.containsValue(biomeRegistryKey)) {
+        if (configuredStructureToBiomeMultiMap.containsValue(biomeRegistryKey)) {
         }
-        else{
+        else {
             configuredStructureToBiomeMultiMap.put(configuredStructureFeature, biomeRegistryKey);
         }
     }
@@ -739,8 +751,6 @@ public class ModInit {
         event.put(MARTIAN_RAPTOR.get(), MartianRaptor.setCustomAttributes().build());
         event.put(ALIEN_ZOMBIE.get(), AlienZombieEntity.setCustomAttributes().build());
         event.put(STAR_CRAWLER.get(), StarCrawlerEntity.setCustomAttributes().build());
-        event.put(LANDER.get(), LanderEntity.setCustomAttributes().build());
-        event.put(ROVER.get(), RoverEntity.setCustomAttributes().build());
     }
 
     @SubscribeEvent
@@ -766,7 +776,7 @@ public class ModInit {
         }
 
         //Venus Deltas
-        if (event.getName().getPath().equals(BiomeRegistry.infernal_venus_barrens.getRegistryName().getPath())){
+        if (event.getName().getPath().equals(BiomeRegistry.infernal_venus_barrens.getRegistryName().getPath())) {
             event.getGeneration().addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, VENUS_DELTAS_SMALL);
             event.getGeneration().addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, VENUS_DELTAS_BIG);
         }

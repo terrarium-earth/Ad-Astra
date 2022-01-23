@@ -287,7 +287,7 @@ public class Methods {
 
     /**IF a entity should get oxygen damage add it in the tag "oxygen" (don't add the Player, he have a own oxygen system)*/
     public static void EntityOxygen(LivingEntity entity, Level world) {
-        if (Config.EntityOxygenSystem && Methods.isSpaceWorld(world) && tagCheck(entity, BeyondEarthMod.MODID + ":entities/oxygen")) {
+        if (Config.EntityOxygenSystem && Methods.isSpaceWorldWithoutOxygen(world) && tagCheck(entity, BeyondEarthMod.MODID + ":entities/oxygen")) {
 
             if (!entity.hasEffect(ModInit.OXYGEN_EFFECT.get())) {
 
@@ -353,10 +353,8 @@ public class Methods {
             Level newWorld = player.level;
 
             if (!player.level.isClientSide) {
-                LanderEntity entityToSpawn = new LanderEntity((EntityType<LanderEntity>) ModInit.LANDER.get(), newWorld);
+                LanderEntity entityToSpawn = new LanderEntity(ModInit.LANDER.get(), newWorld);
                 entityToSpawn.moveTo(player.getX(), player.getY(), player.getZ(), 0, 0);
-                entityToSpawn.finalizeSpawn((ServerLevelAccessor) newWorld, newWorld.getCurrentDifficultyAt(new BlockPos(entityToSpawn.getX(), entityToSpawn.getY(), entityToSpawn.getZ())), MobSpawnType.MOB_SUMMONED, null, null);
-
                 newWorld.addFreshEntity(entityToSpawn);
 
                 entityToSpawn.getInventory().setStackInSlot(0, slot_0);
@@ -383,7 +381,6 @@ public class Methods {
         if (!world.isClientSide) {
             LanderEntity landerSpawn = new LanderEntity(ModInit.LANDER.get(), world);
             landerSpawn.moveTo(player.getX(), player.getY(), player.getZ(), 0, 0);
-            landerSpawn.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(new BlockPos(landerSpawn.getX(), landerSpawn.getY(), landerSpawn.getZ())), MobSpawnType.MOB_SUMMONED, null, null);
             world.addFreshEntity(landerSpawn);
 
             String itemId = player.getPersistentData().getString(BeyondEarthMod.MODID + ":slot0");

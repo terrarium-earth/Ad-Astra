@@ -24,6 +24,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -57,8 +58,13 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Set;
 
-public class RoverEntity extends PathfinderMob {
+public class RoverEntity extends VehicleEntity {
     private double speed = 0;
+
+    public float flyingSpeed = 0.02F;
+    public float animationSpeedOld;
+    public float animationSpeed;
+    public float animationPosition;
 
     public static final EntityDataAccessor<Integer> FUEL = SynchedEntityData.defineId(RoverEntity.class, EntityDataSerializers.INT);
 
@@ -66,24 +72,10 @@ public class RoverEntity extends PathfinderMob {
 
 	public static final int FUEL_BUCKETS = 3;
 
-    public RoverEntity(EntityType<? extends PathfinderMob> type, Level worldIn) {
+    public RoverEntity(EntityType type, Level worldIn) {
         super(type, worldIn);
         this.entityData.define(FUEL, 0);
         this.entityData.define(FORWARD, false);
-    }
-
-    public static AttributeSupplier.Builder setCustomAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 20);
-    }
-
-    @Override
-    public Packet<?> getAddEntityPacket() {
-        return NetworkHooks.getEntitySpawningPacket(this);
-    }
-
-    @Override
-    public boolean canBeLeashed(Player p_21418_) {
-        return false;
     }
 
     @Override
@@ -94,10 +86,6 @@ public class RoverEntity extends PathfinderMob {
     @Override
     public boolean canBeCollidedWith() {
         return false;
-    }
-
-    @Override
-    protected void doPush(Entity p_20971_) {
     }
 
     @Override
@@ -112,51 +100,6 @@ public class RoverEntity extends PathfinderMob {
     @Override
     public boolean rideableUnderWater() {
         return true;
-    }
-
-
-    @Override
-    public boolean isAffectedByPotions() {
-        return false;
-    }
-
-    @Override
-    protected void onEffectAdded(MobEffectInstance p_147190_, @Nullable Entity p_147191_) {
-    }
-
-    @Override
-    public boolean addEffect(MobEffectInstance p_147208_, @Nullable Entity p_147209_) {
-        return false;
-    }
-
-    @Override
-    protected void registerGoals() {
-        super.registerGoals();
-    }
-
-    @Override
-    public MobType getMobType() {
-        return MobType.UNDEFINED;
-    }
-
-    @Override
-    protected MovementEmission getMovementEmission() {
-        return MovementEmission.NONE;
-    }
-
-    @Override
-    public boolean removeWhenFarAway(double p_21542_) {
-        return false;
-    }
-
-    @Override
-    protected SoundEvent getHurtSound(DamageSource p_21239_) {
-        return null;
-    }
-
-    @Override
-    public SoundEvent getDeathSound() {
-        return null;
     }
 
     @Override
@@ -268,9 +211,7 @@ public class RoverEntity extends PathfinderMob {
         }
     }
 
-    @Override
     protected void dropEquipment() {
-        super.dropEquipment();
         for (int i = 0; i < inventory.getSlots(); ++i) {
             ItemStack itemstack = inventory.getStackInSlot(i);
             if (!itemstack.isEmpty() && !EnchantmentHelper.hasVanishingCurse(itemstack)) {
@@ -286,7 +227,7 @@ public class RoverEntity extends PathfinderMob {
         }
     };
 
-    private final CombinedInvWrapper combined = new CombinedInvWrapper(inventory, new EntityHandsInvWrapper(this), new EntityArmorInvWrapper(this));
+    private final CombinedInvWrapper combined = new CombinedInvWrapper(inventory);
 
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> capability, @Nullable Direction side) {
@@ -302,7 +243,6 @@ public class RoverEntity extends PathfinderMob {
 
     @Override
     public void addAdditionalSaveData(CompoundTag compound) {
-        super.addAdditionalSaveData(compound);
         compound.put("InventoryCustom", inventory.serializeNBT());
 
         compound.putInt("fuel", this.getEntityData().get(FUEL));
@@ -311,7 +251,6 @@ public class RoverEntity extends PathfinderMob {
 
     @Override
     public void readAdditionalSaveData(CompoundTag compound) {
-        super.readAdditionalSaveData(compound);
         Tag inventoryCustom = compound.get("InventoryCustom");
         if (inventoryCustom instanceof CompoundTag) {
             inventory.deserializeNBT((CompoundTag) inventoryCustom);
@@ -322,8 +261,8 @@ public class RoverEntity extends PathfinderMob {
     }
 
     @Override
-    protected InteractionResult mobInteract(Player player, InteractionHand hand) {
-        super.mobInteract(player, hand);
+    public InteractionResult interact(Player player, InteractionHand hand) {
+        super.interact(player, hand);
         InteractionResult retval = InteractionResult.sidedSuccess(this.level.isClientSide);
 
         if (player instanceof ServerPlayer && player.isCrouching()) {
@@ -394,7 +333,13 @@ public class RoverEntity extends PathfinderMob {
     }
 
     @Override
+    public float getFrictionInfluencedSpeed(float p_21331_) {
+        return this.onGround ? this.getSpeed() * (0.21600002F / (p_21331_ * p_21331_ * p_21331_)) : this.flyingSpeed;
+    }
+
+    @Override
     public void travel(Vec3 p_21280_) {
+        this.calculateEntityAnimation(this, this instanceof FlyingAnimal);
 
         if (!this.getPassengers().isEmpty() && this.getPassengers().get(0) instanceof Player) {
 
@@ -476,5 +421,19 @@ public class RoverEntity extends PathfinderMob {
             f1 = 1.0F;
         this.animationSpeed += (f1 - this.animationSpeed) * rotation2;
         this.animationPosition += this.animationSpeed;
+    }
+
+    public void calculateEntityAnimation(RoverEntity p_21044_, boolean p_21045_) {
+        p_21044_.animationSpeedOld = p_21044_.animationSpeed;
+        double d0 = p_21044_.getX() - p_21044_.xo;
+        double d1 = p_21045_ ? p_21044_.getY() - p_21044_.yo : 0.0D;
+        double d2 = p_21044_.getZ() - p_21044_.zo;
+        float f = (float)Math.sqrt(d0 * d0 + d1 * d1 + d2 * d2) * 4.0F;
+        if (f > 1.0F) {
+            f = 1.0F;
+        }
+
+        p_21044_.animationSpeed += (f - p_21044_.animationSpeed) * 0.4F;
+        p_21044_.animationPosition += p_21044_.animationSpeed;
     }
 }

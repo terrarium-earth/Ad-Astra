@@ -130,10 +130,6 @@ public class VehicleEntity extends Entity {
             double d0 = 0.08D;
 
             boolean flag = this.getDeltaMovement().y <= 0.0D;
-            if (flag) {
-                this.resetFallDistance();
-            }
-
 
             if (this.isInWater()) {
                 double d8 = this.getY();
@@ -225,7 +221,7 @@ public class VehicleEntity extends Entity {
         }
     }
 
-    private float getFrictionInfluencedSpeed(float p_21331_) {
+    public float getFrictionInfluencedSpeed(float p_21331_) {
         return this.getSpeed() * (0.21600002F / (p_21331_ * p_21331_ * p_21331_));
     }
 

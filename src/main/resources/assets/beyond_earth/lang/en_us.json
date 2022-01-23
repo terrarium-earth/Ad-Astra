@@ -202,15 +202,17 @@
   "biome.beyond_earth.glacio_ice_spikes": "Glacio Ice Spikes",
 
   "advancements.workbench_advancement.title": "NASA Workbench",
-  "advancements.rocket_tier_2_advancement.title": "Tier 2 Rocket",
-  "advancements.rocket_advancement.descr": "§bHas crafted a Tier 1 Rocket",
+  "advancements.workbench_advancement.descr": "§bHas crafted a NASA Workbench",
   "advancements.rocket_advancement.title": "Tier 1 Rocket",
-  "advancements.moon_advancement.title": "Moon",
+  "advancements.rocket_advancement.descr": "§bHas crafted a Tier 1 Rocket",
+  "advancements.rocket_tier_2_advancement.title": "Tier 2 Rocket",
+  "advancements.rocket_tier_2_advancement.descr": "§bHas crafted a Tier 2 Rocket",
   "advancements.rocket_tier_3_advancement.title": "Tier 3 Rocket",
   "advancements.rocket_tier_3_advancement.descr": "§bHas crafted a Tier 3 Rocket",
+  "advancements.rocket_tier_4_advancement.title": "Tier 4 Rocket",
+  "advancements.rocket_tier_4_advancement.descr": "§bHas crafted a Tier 4 Rocket",
+  "advancements.moon_advancement.title": "Moon",
   "advancements.moon_advancement.descr": "§bHas entered the Moon",
-  "advancements.workbench_advancement.descr": "§bHas crafted a NASA Workbench",
-  "advancements.rocket_tier_2_advancement.descr": "§bHas crafted a Tier 2 Rocket",
 
   "effect.beyond_earth.oxygen_bubble_effect": "Oxygen Bubble",
 
