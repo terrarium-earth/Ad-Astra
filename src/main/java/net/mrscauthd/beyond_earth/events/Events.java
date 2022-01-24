@@ -34,6 +34,7 @@ import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.entity.*;
 import net.mrscauthd.beyond_earth.events.forgeevents.RenderHandItemEvent;
 import net.mrscauthd.beyond_earth.events.forgeevents.SetupLivingBipedAnimEvent;
+import net.mrscauthd.beyond_earth.item.VehicleItem;
 
 @Mod.EventBusSubscriber(modid = BeyondEarthMod.MODID)
 public class Events {
@@ -110,8 +111,7 @@ public class Events {
         Item item2 = player.getMainHandItem().getItem();
 
         /**Cancel Event if it Hold a Vehicle in off hand*/
-        if (item == ModInit.TIER_1_ROCKET_ITEM.get() || item == ModInit.TIER_2_ROCKET_ITEM.get() || item == ModInit.TIER_3_ROCKET_ITEM.get() || item == ModInit.TIER_4_ROCKET_ITEM.get() || item == ModInit.ROVER_ITEM.get()
-            || item2 == ModInit.TIER_1_ROCKET_ITEM.get() || item2 == ModInit.TIER_2_ROCKET_ITEM.get() || item2 == ModInit.TIER_3_ROCKET_ITEM.get() || item2 == ModInit.TIER_4_ROCKET_ITEM.get() || item2 == ModInit.ROVER_ITEM.get()) {
+        if (item instanceof VehicleItem || item2 instanceof VehicleItem) {
             event.setCanceled(true);
             return;
         }
@@ -171,17 +171,8 @@ public class Events {
             if (!Methods.isRocket(player.getVehicle())) {
                 Item item1 = player.getMainHandItem().getItem();
                 Item item2 = player.getOffhandItem().getItem();
-                if (item1 == ModInit.TIER_1_ROCKET_ITEM.get()
-                        || item1 == ModInit.TIER_2_ROCKET_ITEM.get()
-                        || item1 == ModInit.TIER_3_ROCKET_ITEM.get()
-                        || item1 == ModInit.TIER_4_ROCKET_ITEM.get()
-                        || item1 == ModInit.ROVER_ITEM.get()
-                        //Off Hand
-                        || item2 == ModInit.TIER_1_ROCKET_ITEM.get()
-                        || item2 == ModInit.TIER_2_ROCKET_ITEM.get()
-                        || item2 == ModInit.TIER_3_ROCKET_ITEM.get()
-                        || item2 == ModInit.TIER_4_ROCKET_ITEM.get()
-                        || item2 == ModInit.ROVER_ITEM.get()) {
+
+                if (item1 instanceof VehicleItem || item2 instanceof VehicleItem) {
                     model.rightArm.xRot = 10;
                     model.leftArm.xRot = 10;
                     model.rightArm.zRot = 0;
@@ -206,28 +197,16 @@ public class Events {
             Item item1 = player.getMainHandItem().getItem();
             Item item2 = player.getOffhandItem().getItem();
 
-            if (item1 == ModInit.TIER_1_ROCKET_ITEM.get()
-                    || item1 == ModInit.TIER_2_ROCKET_ITEM.get()
-                    || item1 == ModInit.TIER_3_ROCKET_ITEM.get()
-                    || item1 == ModInit.TIER_4_ROCKET_ITEM.get()
-                    || item1 == ModInit.ROVER_ITEM.get()) {
-
+            if (item1 instanceof VehicleItem) {
                 if (event.getHandSide() == HumanoidArm.LEFT) {
                     event.setCanceled(true);
                 }
-
             }
 
-            if (item2 == ModInit.TIER_1_ROCKET_ITEM.get()
-                    || item2 == ModInit.TIER_2_ROCKET_ITEM.get()
-                    || item2 == ModInit.TIER_3_ROCKET_ITEM.get()
-                    || item2 == ModInit.TIER_4_ROCKET_ITEM.get()
-                    || item2 == ModInit.ROVER_ITEM.get()) {
-
+            if (item2 instanceof VehicleItem) {
                 if (event.getHandSide() == HumanoidArm.RIGHT) {
                     event.setCanceled(true);
                 }
-
             }
 
         }

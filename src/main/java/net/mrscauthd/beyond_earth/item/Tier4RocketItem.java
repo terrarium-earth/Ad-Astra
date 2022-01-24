@@ -32,7 +32,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class Tier4RocketItem extends Item {
+public class Tier4RocketItem extends VehicleItem {
 
     public static String fuelTag = BeyondEarthMod.MODID + ":fuel";
     public static String bucketTag = BeyondEarthMod.MODID + ":buckets";
@@ -83,7 +83,7 @@ public class Tier4RocketItem extends Item {
                     RocketTier4Entity rocket = new RocketTier4Entity(ModInit.TIER_4_ROCKET.get(), world);
 
                     rocket.setPos((double) pos.getX() + 0.5D,  pos.getY() + 1, (double) pos.getZ() + 0.5D);
-                    double d0 = getYOffset(world, pos, true, rocket.getBoundingBox());
+                    double d0 = this.getYOffset(world, pos, true, rocket.getBoundingBox());
                     rocket.moveTo((double)pos.getX() + 0.5D, (double)pos.getY() + d0, (double)pos.getZ() + 0.5D, 0.0F, 0.0F);
 
                     rocket.yRotO = rocket.getYRot();
@@ -105,17 +105,6 @@ public class Tier4RocketItem extends Item {
         }
 
         return super.useOn(context);
-    }
-
-
-    protected static double getYOffset(LevelReader p_20626_, BlockPos p_20627_, boolean p_20628_, AABB p_20629_) {
-        AABB aabb = new AABB(p_20627_);
-        if (p_20628_) {
-            aabb = aabb.expandTowards(0.0D, -1.0D, 0.0D);
-        }
-
-        Iterable<VoxelShape> iterable = p_20626_.getCollisions((Entity)null, aabb);
-        return 1.0D + Shapes.collide(Direction.Axis.Y, p_20629_, iterable, p_20628_ ? -2.0D : -1.0D);
     }
 
     public static void rocketPlaceSound(BlockPos pos, Level world) {

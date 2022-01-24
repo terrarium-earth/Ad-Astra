@@ -57,6 +57,7 @@ import net.mrscauthd.beyond_earth.entity.*;
 import net.mrscauthd.beyond_earth.events.forgeevents.LivingSetFireInHotPlanetEvent;
 import net.mrscauthd.beyond_earth.events.forgeevents.LivingSetVenusRainEvent;
 import net.mrscauthd.beyond_earth.gui.screens.planetselection.PlanetSelectionGui;
+import net.mrscauthd.beyond_earth.item.VehicleItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -218,10 +219,7 @@ public class Methods {
     }
 
     public static boolean AllVehiclesOr(Entity entity) {
-        if (entity instanceof RocketTier1Entity || entity instanceof RocketTier2Entity || entity instanceof RocketTier3Entity || entity instanceof RocketTier4Entity || entity instanceof LanderEntity || entity instanceof RoverEntity) {
-            return true;
-        }
-        return false;
+        return entity instanceof VehicleEntity;
     }
 
     public static void RocketSounds(Entity entity, Level world) {
@@ -232,15 +230,7 @@ public class Methods {
         Item item1 = player.getMainHandItem().getItem();
         Item item2 = player.getOffhandItem().getItem();
 
-        List<Item> items = new ArrayList<Item>();
-
-        items.add(ModInit.TIER_1_ROCKET_ITEM.get());
-        items.add(ModInit.TIER_2_ROCKET_ITEM.get());
-        items.add(ModInit.TIER_3_ROCKET_ITEM.get());
-        items.add(ModInit.TIER_4_ROCKET_ITEM.get());
-        items.add(ModInit.ROVER_ITEM.get());
-
-        if (items.contains(item1) && items.contains(item2)) {
+        if (item1 instanceof VehicleItem && item2 instanceof VehicleItem) {
 
             ItemEntity spawn = new ItemEntity(player.level, player.getX(),player.getY(),player.getZ(), new ItemStack(item2));
             spawn.setPickUpDelay(0);
