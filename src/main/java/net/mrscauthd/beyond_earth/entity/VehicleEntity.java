@@ -70,6 +70,7 @@ public class VehicleEntity extends Entity {
 
         /**ROT Anim*/
         this.tickLerp();
+        this.rotAnim();
 
         /**Movement Physic*/
         Vec3 vec3 = this.getDeltaMovement();
@@ -93,6 +94,16 @@ public class VehicleEntity extends Entity {
         this.xxa *= 0.98F;
         this.zza *= 0.98F;
         this.travel(new Vec3((double)this.xxa, (double)this.yya, (double)this.zza));
+    }
+
+    public void rotAnim() {
+        while(this.getYRot() - this.yRotO < -180.0F) {
+            this.yRotO -= 360.0F;
+        }
+
+        while(this.getYRot() - this.yRotO >= 180.0F) {
+            this.yRotO += 360.0F;
+        }
     }
 
     @Override

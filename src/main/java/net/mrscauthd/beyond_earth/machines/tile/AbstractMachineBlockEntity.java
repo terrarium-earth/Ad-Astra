@@ -171,13 +171,6 @@ public abstract class AbstractMachineBlockEntity extends RandomizableContainerBl
 	}
 
 	@Override
-	public CompoundTag save(CompoundTag tag) {
-		super.save(tag);
-		this.saveAdditional(tag);
-		return tag;
-	}
-
-	@Override
 	protected void saveAdditional(CompoundTag compound) {
 		super.saveAdditional(compound);
 
@@ -510,7 +503,7 @@ public abstract class AbstractMachineBlockEntity extends RandomizableContainerBl
 
 	@Override
 	public CompoundTag getUpdateTag() {
-		return this.save(new CompoundTag());
+		return this.saveWithFullMetadata();
 	}
 
 	@Override

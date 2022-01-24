@@ -136,34 +136,34 @@ public class PlanetSelectionGui {
 
 			//Create Space Station Buttons
 			if (message.getInteger() == 12) {
-				deleteItems(context.getSender());
 				defaultOptions(context.getSender());
+				deleteItems(context.getSender());
 				Methods.teleportButton(context.getSender(), Methods.overworld_orbit, true);
 			}
 			if (message.getInteger() == 13) {
-				deleteItems(context.getSender());
 				defaultOptions(context.getSender());
+				deleteItems(context.getSender());
 				Methods.teleportButton(context.getSender(), Methods.moon_orbit, true);
 			}
 			if (message.getInteger() == 14) {
-				deleteItems(context.getSender());
 				defaultOptions(context.getSender());
+				deleteItems(context.getSender());
 				Methods.teleportButton(context.getSender(), Methods.mars_orbit, true);
 			}
 			if (message.getInteger() == 15) {
-				deleteItems(context.getSender());
 				defaultOptions(context.getSender());
+				deleteItems(context.getSender());
 				Methods.teleportButton(context.getSender(), Methods.mercury_orbit, true);
 			}
 			if (message.getInteger() == 16) {
-				deleteItems(context.getSender());
 				defaultOptions(context.getSender());
+				deleteItems(context.getSender());
 				Methods.teleportButton(context.getSender(), Methods.venus_orbit, true);
 			}
 			/**Proxima Centauri:*/
 			if (message.getInteger() == 17) {
-				deleteItems(context.getSender());
 				defaultOptions(context.getSender());
+				deleteItems(context.getSender());
 				Methods.teleportButton(context.getSender(), Methods.glacio_orbit, true);
 			}
 

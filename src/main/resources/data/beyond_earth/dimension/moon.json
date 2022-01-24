@@ -1,8 +1,9 @@
 {
   "type": "beyond_earth:moon",
+  "forge:use_server_seed": true,
   "generator": {
     "type": "beyond_earth:planet_noise",
-    "seed": 0,
+    "seed": 12345,
     "settings": {
       "sea_level": 63,
       "disable_mob_generation": true,
