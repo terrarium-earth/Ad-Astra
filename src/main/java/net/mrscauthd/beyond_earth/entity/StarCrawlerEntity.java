@@ -77,7 +77,7 @@ public class StarCrawlerEntity extends Monster {
 	@Override
 	public void baseTick() {
 		super.baseTick();
-		if (!Config.StarCrawlerSpawn) {
+		if (!Config.STAR_CRAWLER_SPAWN.get()) {
 			if (!this.level.isClientSide) {
 				this.remove(RemovalReason.DISCARDED);
 			}

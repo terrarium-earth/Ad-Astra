@@ -4,6 +4,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -14,12 +16,12 @@ public class NetheriteSpaceSuitMaterial {
 
         @Override
         public int getDurabilityForSlot(EquipmentSlot slot) {
-            return new int[]{48, 55, 60, 40}[slot.getIndex()] * 10;
+            return new int[]{481, 555, 592, 407}[slot.getIndex()];
         }
 
         @Override
         public int getDefenseForSlot(EquipmentSlot slot) {
-            return new int[]{3, 6, 8, 3}[slot.getIndex()];
+            return new int[]{3, 8, 6, 3}[slot.getIndex()];
         }
 
         @Override
@@ -34,7 +36,7 @@ public class NetheriteSpaceSuitMaterial {
 
         @Override
         public Ingredient getRepairIngredient() {
-            return Ingredient.EMPTY;
+            return Ingredient.of(new ItemStack(Items.NETHERITE_INGOT));
         }
 
         @OnlyIn(Dist.CLIENT)
@@ -45,12 +47,12 @@ public class NetheriteSpaceSuitMaterial {
 
         @Override
         public float getToughness() {
-            return 0f;
+            return 3.0f;
         }
 
         @Override
         public float getKnockbackResistance() {
-            return 0f;
+            return 0.1f;
         }
     };
 }

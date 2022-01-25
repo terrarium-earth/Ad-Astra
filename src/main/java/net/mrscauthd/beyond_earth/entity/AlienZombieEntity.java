@@ -84,7 +84,7 @@ public class AlienZombieEntity extends Monster implements RangedAttackMob {
 	@Override
 	public void tick() {
 		super.tick();
-		if (!Config.AlienZombieSpawn) {
+		if (!Config.ALIEN_ZOMBIE_SPAWN.get()) {
 			if (!this.level.isClientSide) {
 				this.remove(RemovalReason.DISCARDED);
 			}

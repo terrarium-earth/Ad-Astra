@@ -637,13 +637,13 @@ public class ModInit {
                 /*______________________________________OVERWORLD_BIOMES___________________________________*/
 
                 /**Add Overworld Structure in a Biome*/
-                if (Config.OILWellStructure) {
+                if (Config.OIL_WELL_STRUCTURE.get()) {
                     if (biomeCategory == Biome.BiomeCategory.OCEAN) {
                         associateBiomeToConfiguredStructure(STStructureToMultiMap, STConfiguredStructures.OIL, biomeEntry.getKey());
                     }
                 }
 
-                if (Config.MeteorStructure && !amplified) {
+                if (Config.METEOR_STRUCTURE.get() && !amplified) {
                     if (biomeEntry.getValue().getRegistryName().equals(new ResourceLocation("plains")) || biomeEntry.getValue().getRegistryName().equals(new ResourceLocation("snowy_tundra")) || biomeEntry.getValue().getRegistryName().equals(new ResourceLocation("forest")) || biomeEntry.getValue().getRegistryName().equals(new ResourceLocation("desert"))) {
                         associateBiomeToConfiguredStructure(STStructureToMultiMap, STConfiguredStructures.METEOR, biomeEntry.getKey());
                     }
@@ -658,17 +658,17 @@ public class ModInit {
                 ImmutableSet<ResourceKey<Biome>> venusStructures = ImmutableSet.<ResourceKey<Biome>>builder().add(ResourceKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "venus"))).build();
 
                 /**Moon Structures*/
-                if (Config.AlienVillageStructure)
+                if (Config.ALIEN_VILLAGE_STRUCTURE.get())
                 moonStructures.forEach(biomeKey -> associateBiomeToConfiguredStructure(STStructureToMultiMap, STConfiguredStructures.ALIEN_VILLAGE, biomeKey));
 
                 /**Venus Structures*/
-                if (Config.CrimsonVillageStructure)
+                if (Config.CRIMSON_VILLAGE_STRUCTURE.get())
                 venusStructures.forEach(biomeKey -> associateBiomeToConfiguredStructure(STStructureToMultiMap, STConfiguredStructures.CRIMSON, biomeKey));
 
-                if (Config.VenusTowerStructure)
+                if (Config.VENUS_TOWER_STRUCTURE.get())
                 venusStructures.forEach(biomeKey -> associateBiomeToConfiguredStructure(STStructureToMultiMap, STConfiguredStructures.VENUS_TOWER, biomeKey));
 
-                if (Config.VenusBulletStructure)
+                if (Config.VENUS_BULLET_STRUCTURE.get())
                 venusStructures.forEach(biomeKey -> associateBiomeToConfiguredStructure(STStructureToMultiMap, STConfiguredStructures.VENUS_BULLET, biomeKey));
             }
 
@@ -695,37 +695,37 @@ public class ModInit {
 
             /**______________________________________MAP___________________________________*/
 
-            if (Config.OILWellStructure) {
+            if (Config.OIL_WELL_STRUCTURE.get()) {
                 Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap = new HashMap<>(worldStructureConfig.structureConfig());
                 tempMap.putIfAbsent(STStructures.OIL.get(), StructureSettings.DEFAULTS.get(STStructures.OIL.get()));
                 worldStructureConfig.structureConfig = tempMap;
             }
 
-            if (Config.MeteorStructure && !amplified) {
+            if (Config.METEOR_STRUCTURE.get() && !amplified) {
                 Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap2 = new HashMap<>(worldStructureConfig.structureConfig());
                 tempMap2.putIfAbsent(STStructures.METEOR.get(), StructureSettings.DEFAULTS.get(STStructures.METEOR.get()));
                 worldStructureConfig.structureConfig = tempMap2;
             }
 
-            if (Config.AlienVillageStructure) {
+            if (Config.ALIEN_VILLAGE_STRUCTURE.get()) {
                 Map<StructureFeature<?>, StructureFeatureConfiguration> tempMa3 = new HashMap<>(worldStructureConfig.structureConfig());
                 tempMa3.putIfAbsent(STStructures.ALIEN_VILLAGE.get(), StructureSettings.DEFAULTS.get(STStructures.ALIEN_VILLAGE.get()));
                 worldStructureConfig.structureConfig = tempMa3;
             }
 
-            if (Config.CrimsonVillageStructure) {
+            if (Config.CRIMSON_VILLAGE_STRUCTURE.get()) {
                 Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap4 = new HashMap<>(worldStructureConfig.structureConfig());
                 tempMap4.putIfAbsent(STStructures.CRIMSON.get(), StructureSettings.DEFAULTS.get(STStructures.CRIMSON.get()));
                 worldStructureConfig.structureConfig = tempMap4;
             }
 
-            if (Config.VenusTowerStructure) {
+            if (Config.VENUS_TOWER_STRUCTURE.get()) {
                 Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap5 = new HashMap<>(worldStructureConfig.structureConfig());
                 tempMap5.putIfAbsent(STStructures.VENUS_TOWER.get(), StructureSettings.DEFAULTS.get(STStructures.VENUS_TOWER.get()));
                 worldStructureConfig.structureConfig = tempMap5;
             }
 
-            if (Config.VenusBulletStructure) {
+            if (Config.VENUS_BULLET_STRUCTURE.get()) {
                 Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap6 = new HashMap<>(worldStructureConfig.structureConfig());
                 tempMap6.putIfAbsent(STStructures.VENUS_BULLET.get(), StructureSettings.DEFAULTS.get(STStructures.VENUS_BULLET.get()));
                 worldStructureConfig.structureConfig = tempMap6;

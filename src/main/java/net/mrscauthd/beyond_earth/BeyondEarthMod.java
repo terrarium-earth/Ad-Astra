@@ -4,6 +4,8 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.network.NetworkEvent;
@@ -11,6 +13,7 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 import net.mrscauthd.beyond_earth.compat.CompatibleManager;
 import net.mrscauthd.beyond_earth.entity.alien.AlienTrade;
+import net.mrscauthd.beyond_earth.events.Config;
 import net.mrscauthd.beyond_earth.gui.screens.planetselection.PlanetSelectionGui;
 import net.mrscauthd.beyond_earth.keybind.KeyBindings;
 import net.mrscauthd.beyond_earth.machines.tile.OxygenBubbleDistributorBlockEntity;
@@ -54,6 +57,9 @@ public class BeyondEarthMod {
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
 
 		bus.register(this);
+
+		/**Config*/
+		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC, "beyond_earth-common.toml");
 
 		//MobInnet
 		ModInit.ENTITYS.register(bus);

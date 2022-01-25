@@ -39,7 +39,6 @@ import net.minecraft.world.entity.player.PlayerModelPart;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.material.Fluid;
@@ -58,9 +57,6 @@ import net.mrscauthd.beyond_earth.events.forgeevents.LivingSetFireInHotPlanetEve
 import net.mrscauthd.beyond_earth.events.forgeevents.LivingSetVenusRainEvent;
 import net.mrscauthd.beyond_earth.gui.screens.planetselection.PlanetSelectionGui;
 import net.mrscauthd.beyond_earth.item.VehicleItem;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Methods {
 
@@ -277,7 +273,7 @@ public class Methods {
 
     /**IF a entity should get oxygen damage add it in the tag "oxygen" (don't add the Player, he have a own oxygen system)*/
     public static void EntityOxygen(LivingEntity entity, Level world) {
-        if (Config.EntityOxygenSystem && Methods.isSpaceWorldWithoutOxygen(world) && tagCheck(entity, BeyondEarthMod.MODID + ":entities/oxygen")) {
+        if (Config.ENTITY_OXYGEN_SYSTEM.get() && Methods.isSpaceWorldWithoutOxygen(world) && tagCheck(entity, BeyondEarthMod.MODID + ":entities/oxygen")) {
 
             if (!entity.hasEffect(ModInit.OXYGEN_EFFECT.get())) {
 
@@ -294,7 +290,7 @@ public class Methods {
             }
         }
         //out of Space
-        if (Config.EntityOxygenSystem && entity.hasEffect(ModInit.OXYGEN_EFFECT.get())) {
+        if (Config.ENTITY_OXYGEN_SYSTEM.get() && entity.hasEffect(ModInit.OXYGEN_EFFECT.get())) {
             entity.setAirSupply(300);
         }
     }
@@ -491,7 +487,7 @@ public class Methods {
     }
 
 	public static void extractArmorOxygenUsingTimer(ItemStack itemstack, Player player) {
-		if (!player.getAbilities().instabuild && !player.isSpectator() && Methods.spaceSuitCheckBoth(player) && !player.hasEffect(ModInit.OXYGEN_EFFECT.get()) && Config.PlayerOxygenSystem && (Methods.isSpaceWorldWithoutOxygen(player.level) || player.isEyeInFluid(FluidTags.WATER))) {
+		if (!player.getAbilities().instabuild && !player.isSpectator() && Methods.spaceSuitCheckBoth(player) && !player.hasEffect(ModInit.OXYGEN_EFFECT.get()) && Config.PLAYER_OXYGEN_SYSTEM.get() && (Methods.isSpaceWorldWithoutOxygen(player.level) || player.isEyeInFluid(FluidTags.WATER))) {
 			IOxygenStorage oxygenStorage = OxygenUtil.getItemStackOxygenStorage(itemstack);
 
             CompoundTag persistentData = player.getPersistentData();

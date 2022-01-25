@@ -96,7 +96,7 @@ public class MartianRaptor extends Monster {
     @Override
     public void baseTick() {
         super.baseTick();
-        if (!Config.MartianRaptorSpawn) {
+        if (!Config.MARTIAN_RAPTOR_SPAWN.get()) {
             if (!this.level.isClientSide) {
                 this.remove(RemovalReason.DISCARDED);
             }

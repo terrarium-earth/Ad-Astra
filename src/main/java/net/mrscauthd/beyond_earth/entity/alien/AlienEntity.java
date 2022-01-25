@@ -266,7 +266,7 @@ public class AlienEntity extends Villager implements Merchant, Npc {
 	public void baseTick() {
 		super.baseTick();
 
-		if (!Config.AlienSpawn) {
+		if (!Config.ALIEN_SPAWN.get()) {
 			this.remove(RemovalReason.DISCARDED);
 		}
 	}

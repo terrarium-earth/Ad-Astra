@@ -54,7 +54,7 @@ public class PygroEntity extends Piglin {
     @Override
     public void tick() {
         super.tick();
-        if (!Config.PygroSpawn) {
+        if (!Config.PYGRO_SPAWN.get()) {
             if (!this.level.isClientSide) {
                 this.remove(RemovalReason.DISCARDED);
             }

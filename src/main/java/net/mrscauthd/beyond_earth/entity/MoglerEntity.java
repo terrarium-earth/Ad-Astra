@@ -58,7 +58,7 @@ public class MoglerEntity extends Hoglin {
     @Override
     public void tick() {
         super.tick();
-        if (!Config.MoglerSpawn) {
+        if (!Config.MOGLER_SPAWN.get()) {
             if (!this.level.isClientSide) {
                 this.remove(RemovalReason.DISCARDED);
             }
