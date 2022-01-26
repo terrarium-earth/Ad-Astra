@@ -241,7 +241,7 @@ public class Events {
         if (event != null && event.getEntity() instanceof Player) {
             Player entity = (Player) event.getEntity();
 
-            if (Methods.nethriteSpaceSuitCheck(entity)) {
+            if (Methods.netheriteSpaceSuitCheck(entity)) {
                 if (event.getSource().isFire()) {
                     entity.setRemainingFireTicks(0);
                     event.setCanceled(true);

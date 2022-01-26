@@ -7,6 +7,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BucketPickup;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -54,7 +55,7 @@ public class WaterPumpBlockEntity extends AbstractMachineBlockEntity {
 
             if (hasSpaceInWaterTank(this.getWaterTank().getFluid().getAmount())) {
 
-                if (this.consumePowerForOperation() != null) {
+                if (this.consumePowerForOperation() != null && level.getBlockState(pickupPos) instanceof BucketPickup) {
 
                     WATER_TIMER = WATER_TIMER + 1;
 

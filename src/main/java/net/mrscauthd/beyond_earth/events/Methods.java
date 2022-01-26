@@ -16,9 +16,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
-import net.minecraft.network.protocol.game.ClientboundPlayerAbilitiesPacket;
-import net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket;
+import net.minecraft.network.protocol.game.*;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -74,23 +72,22 @@ public class Methods {
     public static final ResourceKey<Level> overworld_orbit = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID,"overworld_orbit"));
 
     public static void worldTeleport(Player entity, ResourceKey<Level> planet, double high) {
-        if (!entity.level.isClientSide) {
+        ServerLevel nextLevel = entity.getServer().getLevel(planet);
 
-            ServerLevel nextWorld = entity.getServer().getLevel(planet);
+        if (nextLevel != null && entity instanceof ServerPlayer) {
+            ((ServerPlayer) entity).connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.WIN_GAME, 0));
+            ((ServerPlayer) entity).teleportTo(nextLevel, entity.getX(), high, entity.getZ(), entity.getYRot(), entity.getXRot());
+            ((ServerPlayer) entity).connection.send(new ClientboundPlayerAbilitiesPacket(entity.getAbilities()));
 
-            if (nextWorld != null && entity instanceof ServerPlayer) {
-                ((ServerPlayer) entity).connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.WIN_GAME, 0));
-                ((ServerPlayer) entity).teleportTo(nextWorld, entity.getX(), high, entity.getZ(), entity.yRotO, entity.xRotO);
-                ((ServerPlayer) entity).connection.send(new ClientboundPlayerAbilitiesPacket(entity.getAbilities()));
-
-                for (MobEffectInstance effectinstance : entity.getActiveEffects()) {
-                    ((ServerPlayer) entity).connection.send(new ClientboundUpdateMobEffectPacket(entity.getId(), effectinstance));
-                }
+            for (MobEffectInstance effectinstance : entity.getActiveEffects()) {
+                ((ServerPlayer) entity).connection.send(new ClientboundUpdateMobEffectPacket(entity.getId(), effectinstance));
             }
+            ((ServerPlayer) entity).connection.send(new ClientboundLevelEventPacket(1032, BlockPos.ZERO, 0, false));
+            ((ServerPlayer) entity).connection.send(new ClientboundSetExperiencePacket(entity.experienceProgress, entity.totalExperience, entity.experienceLevel));
         }
     }
 
-    public static boolean nethriteSpaceSuitCheck(LivingEntity entity) {
+    public static boolean netheriteSpaceSuitCheck(LivingEntity entity) {
         Boolean item3 = checkArmor(entity, 3, ModInit.NETHERITE_OXYGEN_MASK.get());
         Boolean item2 = checkArmor(entity, 2, ModInit.NETHERITE_SPACE_SUIT.get());
         Boolean item1 = checkArmor(entity, 1, ModInit.NETHERITE_SPACE_PANTS.get());
@@ -244,7 +241,7 @@ public class Methods {
         Level level = entity.level;
 
         if (Methods.isWorld(level, planet1) || Methods.isWorld(level, planet2)) {
-            if (!Methods.nethriteSpaceSuitCheck(entity) && !entity.hasEffect(MobEffects.FIRE_RESISTANCE) && !entity.fireImmune() && (entity instanceof Mob)) {
+            if (!Methods.netheriteSpaceSuitCheck(entity) && !entity.hasEffect(MobEffects.FIRE_RESISTANCE) && !entity.fireImmune() && (entity instanceof Mob)) {
                 if (!MinecraftForge.EVENT_BUS.post(new LivingSetFireInHotPlanetEvent(entity))) {
                     if (!tagCheck(entity, BeyondEarthMod.MODID + ":entities/planet_fire")) {
                         entity.setSecondsOnFire(10);

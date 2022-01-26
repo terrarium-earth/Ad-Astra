@@ -95,11 +95,12 @@ public class LanderEntity extends VehicleEntity {
 	@Override
 	public boolean causeFallDamage(float p_150347_, float p_150348_, DamageSource p_150349_) {
 		if (p_150347_ >= 3.0F) {
+			dropEquipment();
+
 			if (!this.level.isClientSide) {
 				this.level.explode(null, this.getX(), this.getY(), this.getZ(), 10, Explosion.BlockInteraction.BREAK);
 			}
 
-			dropEquipment();
 			this.remove(RemovalReason.DISCARDED);
 		}
 

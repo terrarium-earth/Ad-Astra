@@ -295,14 +295,14 @@ public class RoverEntity extends VehicleEntity {
     }
 
     @Override
-    public void baseTick() {
-        super.baseTick();
+    public void tick() {
+        super.tick();
 
         //Fuel Load up
         if (Methods.tagCheck(FluidUtil2.findBucketFluid(this.inventory.getStackInSlot(0).getItem()), ModInit.FLUID_VEHICLE_FUEL_TAG)) {
 
-            if (this.entityData.get(FUEL) <= 2000) {
-                this.getEntityData().set(FUEL, this.getEntityData().get(FUEL) + 1000);
+            if (this.entityData.get(FUEL) <= 2000 * 2) {
+                this.getEntityData().set(FUEL, (this.getEntityData().get(FUEL) + 1000) * 2);
                 this.inventory.setStackInSlot(0, new ItemStack(Items.BUCKET));
             }
         }
