@@ -82,7 +82,6 @@ public class Methods {
             for (MobEffectInstance effectinstance : entity.getActiveEffects()) {
                 ((ServerPlayer) entity).connection.send(new ClientboundUpdateMobEffectPacket(entity.getId(), effectinstance));
             }
-            ((ServerPlayer) entity).connection.send(new ClientboundLevelEventPacket(1032, BlockPos.ZERO, 0, false));
             ((ServerPlayer) entity).connection.send(new ClientboundSetExperiencePacket(entity.experienceProgress, entity.totalExperience, entity.experienceLevel));
         }
     }

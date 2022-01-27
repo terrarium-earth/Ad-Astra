@@ -44,7 +44,7 @@ public class BiomeRegistry {
             addDefaultCarvers(biomeGenerationSettings);
             MobSpawnSettings mobSpawnInfo = (new MobSpawnSettings.Builder()).addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModInit.ALIEN_ZOMBIE.get(), 20, 5, 5)).addMobCharge(ModInit.ALIEN_ZOMBIE.get(), 0.7D, 0.15D).addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModInit.STAR_CRAWLER.get(), 20, 5, 5)).addMobCharge(ModInit.STAR_CRAWLER.get(), 0.7D, 0.15D).build();
 
-            moon = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(1.6f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
+            moon = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(-0.7f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
             event.getRegistry().register(moon.setRegistryName(BeyondEarthMod.MODID,"moon"));
         }
 
@@ -56,7 +56,7 @@ public class BiomeRegistry {
             BiomeDefaultFeatures.addFossilDecoration(biomeGenerationSettings);
             MobSpawnSettings mobSpawnInfo = (new MobSpawnSettings.Builder()).addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModInit.MARTIAN_RAPTOR.get(), 20, 5, 5)).addMobCharge(ModInit.MARTIAN_RAPTOR.get(), 0.7D, 0.15D).build();
 
-            mars = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(1.6f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
+            mars = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(-0.7f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
             event.getRegistry().register(mars.setRegistryName(BeyondEarthMod.MODID,"mars"));
         }
 
@@ -68,7 +68,7 @@ public class BiomeRegistry {
             BiomeDefaultFeatures.addFossilDecoration(biomeGenerationSettings);
             MobSpawnSettings mobSpawnInfo = MobSpawnSettings.EMPTY;
 
-            mars_ice_spikes = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.ICY).mobSpawnSettings(mobSpawnInfo).temperature(1.6f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
+            mars_ice_spikes = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.ICY).mobSpawnSettings(mobSpawnInfo).temperature(-0.7f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
             event.getRegistry().register(mars_ice_spikes.setRegistryName(BeyondEarthMod.MODID,"mars_ice_spikes"));
         }
 

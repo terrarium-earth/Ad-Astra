@@ -51,19 +51,19 @@ public class WaterPumpBlockEntity extends AbstractMachineBlockEntity {
         BlockPos pos = this.getBlockPos();
 		BlockPos pickupPos = new BlockPos(pos.getX(),pos.getY() - 1, pos.getZ());
 
-        if (this.level.getFluidState(pickupPos) == Fluids.WATER.getSource(false)) {
+        if (this.level.getFluidState(pickupPos) == Fluids.WATER.getSource(false) && this.level.getBlockState(pickupPos).is(Blocks.WATER)) {
 
             if (hasSpaceInWaterTank(this.getWaterTank().getFluid().getAmount())) {
 
-                if (this.consumePowerForOperation() != null && level.getBlockState(pickupPos) instanceof BucketPickup) {
+                if (this.consumePowerForOperation() != null) {
 
                     WATER_TIMER = WATER_TIMER + 1;
 
                     if (WATER_TIMER > 10) {
 
-                        ((BucketPickup) this.level.getBlockState(pickupPos).getBlock()).pickupBlock(this.level, pickupPos, this.level.getBlockState(pickupPos));
+                        this.level.setBlock(pickupPos, Blocks.AIR.defaultBlockState(), 3);
 
-                        this.getWaterTank().fill(new FluidStack(Fluids.WATER,1000), IFluidHandler.FluidAction.EXECUTE);
+                        this.getWaterTank().fill(new FluidStack(Fluids.WATER, 1000), IFluidHandler.FluidAction.EXECUTE);
 
                         WATER_TIMER = 0;
                     }
