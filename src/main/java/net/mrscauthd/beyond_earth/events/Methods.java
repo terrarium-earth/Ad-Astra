@@ -30,6 +30,7 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -240,7 +241,7 @@ public class Methods {
         Level level = entity.level;
 
         if (Methods.isWorld(level, planet1) || Methods.isWorld(level, planet2)) {
-            if (!Methods.netheriteSpaceSuitCheck(entity) && !entity.hasEffect(MobEffects.FIRE_RESISTANCE) && !entity.fireImmune() && (entity instanceof Mob)) {
+            if (!Methods.netheriteSpaceSuitCheck(entity) && !entity.hasEffect(MobEffects.FIRE_RESISTANCE) && !entity.fireImmune() && (entity instanceof Mob || entity instanceof Player)) {
                 if (!MinecraftForge.EVENT_BUS.post(new LivingSetFireInHotPlanetEvent(entity))) {
                     if (!tagCheck(entity, BeyondEarthMod.MODID + ":entities/planet_fire")) {
                         entity.setSecondsOnFire(10);

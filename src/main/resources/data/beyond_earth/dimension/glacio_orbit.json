@@ -1,11 +1,10 @@
 {
   "type": "beyond_earth:mars_orbit",
-  "forge:use_server_seed": true,
   "generator": {
-    "type": "minecraft:noise",
-    "seed": 12345,
+    "type": "beyond_earth:planet_noise",
+    "seed": 0,
     "settings": {
-      "sea_level": 63,
+      "sea_level": 0,
       "disable_mob_generation": false,
       "noise_caves_enabled": false,
       "noodle_caves_enabled": false,
@@ -22,25 +21,25 @@
       "noise": {
         "min_y": 0,
         "height": 256,
-        "size_horizontal": 1,
-        "size_vertical": 2,
+        "size_horizontal": 0,
+        "size_vertical": 0,
         "island_noise_override": false,
-        "amplified": true,
+        "amplified": false,
         "sampling": {
-          "xz_scale": 0.9999999814507745,
-          "y_scale": 0.9999999814507745,
-          "xz_factor": 80,
-          "y_factor": 160
+          "xz_scale": 0,
+          "y_scale": 0,
+          "xz_factor": 0,
+          "y_factor": 0
         },
         "bottom_slide": {
-          "target": 0.1171875,
-          "size": 3,
+          "target": 0,
+          "size": 0,
           "offset": 0
         },
         "top_slide": {
-          "target": -0.078125,
-          "size": 2,
-          "offset": 8
+          "target": 0,
+          "size": 0,
+          "offset": 0
         },
         "terrain_shaper": {
           "offset": 0,
