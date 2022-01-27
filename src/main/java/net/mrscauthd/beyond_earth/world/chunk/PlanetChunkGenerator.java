@@ -48,7 +48,7 @@ public class PlanetChunkGenerator extends NoiseBasedChunkGenerator {
         int z;
 
         /**Gen Bedrock Layer*/
-        if (defaultBlock != Blocks.AIR.defaultBlockState()) {
+        if (!defaultBlock.isAir()) {
             for (x = 0; x < 16; x++) {
                 for (z = 0; z < 16; z++) {
                     p_188638_.setBlockState(pos.set(x, getMinY(), z), bedrock, false);
@@ -57,7 +57,7 @@ public class PlanetChunkGenerator extends NoiseBasedChunkGenerator {
         }
 
         /**Gen Lava on the Bedrock Layer*/
-        if (defaultBlock != Blocks.AIR.defaultBlockState()) {
+        if (!defaultBlock.isAir()) {
             for (x = 0; x < 16; x++) {
                 for (z = 0; z < 16; z++) {
                     for (y = 1; y < 9; y++) {
