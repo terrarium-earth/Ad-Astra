@@ -17,6 +17,7 @@ public class BeyondEarthRecipeTypes {
 	public static final AlienTradingRecipeType<AlienTradingRecipeMap> ALIEN_TRADING_MAP = create(new AlienTradingRecipeType<>("alien_trading_map"));
 	public static final AlienTradingRecipeType<AlienTradingRecipePotionedItem> ALIEN_TRADING_POTIONEDITEM = create(new AlienTradingRecipeType<>("alien_trading_potioneditem"));
 	public static final AlienTradingRecipeType<AlienTradingRecipeDyedItem> ALIEN_TRADING_DYEDITEM = create(new AlienTradingRecipeType<>("alien_trading_dyeditem"));
+	public static final BeyondEarthRecipeType<SpaceStationRecipe> SPACE_STATION = create(new BeyondEarthRecipeType<>("space_station"));
 
 	/**
 	 * for initialize static final fields

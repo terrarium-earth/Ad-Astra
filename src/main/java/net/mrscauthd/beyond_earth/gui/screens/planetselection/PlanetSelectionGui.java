@@ -1,25 +1,18 @@
 package net.mrscauthd.beyond_earth.gui.screens.planetselection;
 
+import java.util.function.Supplier;
+
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraftforge.network.IContainerFactory;
 import net.minecraftforge.network.NetworkEvent;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.ModInit;
+import net.mrscauthd.beyond_earth.crafting.IngredientStack;
+import net.mrscauthd.beyond_earth.crafting.SpaceStationRecipe;
 import net.mrscauthd.beyond_earth.events.Methods;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 public class PlanetSelectionGui {
 
@@ -80,7 +73,7 @@ public class PlanetSelectionGui {
 		public static void handle(NetworkMessage message, Supplier<NetworkEvent.Context> contextSupplier) {
 			NetworkEvent.Context context = contextSupplier.get();
 
-			//Teleport Planet Buttons
+			// Teleport Planet Buttons
 			if (message.getInteger() == 0) {
 				defaultOptions(context.getSender());
 				Methods.teleportButton(context.getSender(), Methods.overworld, false);
@@ -101,13 +94,13 @@ public class PlanetSelectionGui {
 				defaultOptions(context.getSender());
 				Methods.teleportButton(context.getSender(), Methods.venus, false);
 			}
-			/**Proxima Centauri:*/
+			/** Proxima Centauri: */
 			if (message.getInteger() == 5) {
 				defaultOptions(context.getSender());
 				Methods.teleportButton(context.getSender(), Methods.glacio, false);
 			}
 
-			//Teleport Orbit Buttons
+			// Teleport Orbit Buttons
 			if (message.getInteger() == 6) {
 				defaultOptions(context.getSender());
 				Methods.teleportButton(context.getSender(), Methods.overworld_orbit, false);
@@ -128,13 +121,13 @@ public class PlanetSelectionGui {
 				defaultOptions(context.getSender());
 				Methods.teleportButton(context.getSender(), Methods.venus_orbit, false);
 			}
-			/**Proxima Centauri:*/
+			/** Proxima Centauri: */
 			if (message.getInteger() == 11) {
 				defaultOptions(context.getSender());
 				Methods.teleportButton(context.getSender(), Methods.glacio_orbit, false);
 			}
 
-			//Create Space Station Buttons
+			// Create Space Station Buttons
 			if (message.getInteger() == 12) {
 				defaultOptions(context.getSender());
 				deleteItems(context.getSender());
@@ -160,7 +153,7 @@ public class PlanetSelectionGui {
 				deleteItems(context.getSender());
 				Methods.teleportButton(context.getSender(), Methods.venus_orbit, true);
 			}
-			/**Proxima Centauri:*/
+			/** Proxima Centauri: */
 			if (message.getInteger() == 17) {
 				defaultOptions(context.getSender());
 				deleteItems(context.getSender());
@@ -178,28 +171,16 @@ public class PlanetSelectionGui {
 	}
 
 	public static void deleteItems(Player player) {
-		if (!player.getAbilities().instabuild) {
-			getSpaceStationItems(player, ModInit.DESH_INGOT_TAG, 6);
-			getSpaceStationItems(player, ModInit.STEEL_INGOT_TAG, 16);
-			getSpaceStationItems(player, ModInit.IRON_PLATES_TAG, 12);
-			getSpaceStationItems(player, ModInit.DESH_PLATES_TAG, 4);
+		if (player.getAbilities().instabuild) {
+			return;
 		}
-	}
 
-	private static void getSpaceStationItems(Player player, ResourceLocation tag, int count) {
 		Inventory inv = player.getInventory();
-		int itemStackCount = 0;
-
-		for (int i = 0; i < inv.getContainerSize(); ++i) {
-			ItemStack itemStack = inv.getItem(i);
-
-			if (Methods.tagCheck(itemStack.getItem(), tag)) {
-				itemStackCount = itemStackCount + itemStack.getCount();
-			}
-
-			if (!itemStack.isEmpty() && Methods.tagCheck(itemStack.getItem(), tag) && itemStackCount >= count) {
-				player.getInventory().clearOrCountMatchingItems(p -> itemStack.getItem() == p.getItem(), count, player.getInventory());
-			}
+		SpaceStationRecipe recipe = (SpaceStationRecipe) player.level.getRecipeManager().byKey(SpaceStationRecipe.KEY).orElse(null);
+		
+		for (IngredientStack ingredientStack : recipe.getIngredientStacks()) {
+			inv.clearOrCountMatchingItems(ingredientStack::testWithoutCount, ingredientStack.getCount(), inv);
 		}
+		
 	}
 }

@@ -2,6 +2,7 @@ package net.mrscauthd.beyond_earth.jei;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -36,7 +37,9 @@ import mezz.jei.api.registration.IRecipeTransferRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -51,9 +54,11 @@ import net.mrscauthd.beyond_earth.crafting.BeyondEarthRecipeTypes;
 import net.mrscauthd.beyond_earth.crafting.CompressingRecipe;
 import net.mrscauthd.beyond_earth.crafting.FuelRefiningRecipe;
 import net.mrscauthd.beyond_earth.crafting.GeneratingRecipe;
+import net.mrscauthd.beyond_earth.crafting.IngredientStack;
 import net.mrscauthd.beyond_earth.crafting.OxygenBubbleDistributorRecipe;
 import net.mrscauthd.beyond_earth.crafting.OxygenLoaderRecipe;
 import net.mrscauthd.beyond_earth.crafting.RocketPart;
+import net.mrscauthd.beyond_earth.crafting.SpaceStationRecipe;
 import net.mrscauthd.beyond_earth.crafting.WorkbenchingRecipe;
 import net.mrscauthd.beyond_earth.events.Methods;
 import net.mrscauthd.beyond_earth.fluid.FluidUtil2;
@@ -79,7 +84,11 @@ import net.mrscauthd.beyond_earth.gui.screens.planetselection.PlanetSelectionGui
 import net.mrscauthd.beyond_earth.gui.screens.rocket.RocketGui;
 import net.mrscauthd.beyond_earth.gui.screens.rocket.RocketGuiWindow;
 import net.mrscauthd.beyond_earth.gui.screens.rover.RoverGuiWindow;
-import net.mrscauthd.beyond_earth.jei.jeiguihandlers.*;
+import net.mrscauthd.beyond_earth.jei.jeiguihandlers.CoalGeneratorGuiContainerHandler;
+import net.mrscauthd.beyond_earth.jei.jeiguihandlers.CompressorGuiContainerHandler;
+import net.mrscauthd.beyond_earth.jei.jeiguihandlers.PlanetSlecetionGuiJeiHandler;
+import net.mrscauthd.beyond_earth.jei.jeiguihandlers.RocketGuiContainerHandler;
+import net.mrscauthd.beyond_earth.jei.jeiguihandlers.RoverGuiContainerHandler;
 import net.mrscauthd.beyond_earth.machines.tile.CoalGeneratorBlockEntity;
 import net.mrscauthd.beyond_earth.machines.tile.CompressorBlockEntity;
 import net.mrscauthd.beyond_earth.machines.tile.FuelRefineryBlockEntity;
@@ -178,6 +187,8 @@ public class JeiPlugin implements IModPlugin {
 		registration.addRecipeCategories(new FuelRefineryJeiCategory(this, jeiHelper.getGuiHelper()));
 		// Rover
 		registration.addRecipeCategories(new RoverJeiCategory(jeiHelper.getGuiHelper()));
+		// Space Station
+		registration.addRecipeCategories(new SpaceStationJeiCategory(jeiHelper.getGuiHelper()));
 	}
 
 	@Override
@@ -208,6 +219,8 @@ public class JeiPlugin implements IModPlugin {
 		registration.addRecipes(generateCompressingRecipes(), CompressorJeiCategory.Uid);
 		// Fuel Maker
 		registration.addRecipes(generateFuelMakerRecipes(), FuelRefineryJeiCategory.Uid);
+		// Space Station
+		registration.addRecipes(generateSpaceStationRecipes(), SpaceStationJeiCategory.Uid);
 		// Oil
 		Component oilDescriptionKey = new TranslatableComponent("jei.tooltip." + BeyondEarthMod.MODID + ".oil");
 		registration.addIngredientInfo(new ItemStack(ModInit.OIL_BUCKET.get(), 1), VanillaTypes.ITEM, oilDescriptionKey);
@@ -272,6 +285,14 @@ public class JeiPlugin implements IModPlugin {
 		return recipes;
 	}
 
+	// Space Station
+	private List<SpaceStationRecipe> generateSpaceStationRecipes() {
+		List<SpaceStationRecipe> recipes = new ArrayList<>();
+		this.getLevel().getRecipeManager().byKey(SpaceStationRecipe.KEY).ifPresent(r -> recipes.add((SpaceStationRecipe) r));
+
+		return recipes;
+	}
+
 	public static class FuelLoadingRecipe {
 		private final List<ItemStack> fuelTagBuckets;
 		private final List<Fluid> fluids;
@@ -310,13 +331,13 @@ public class JeiPlugin implements IModPlugin {
 		// FuelMaker
 		registration.addRecipeCatalyst(new ItemStack(ModInit.FUEL_REFINERY_BLOCK.get()), FuelRefineryJeiCategory.Uid);
 		// Rocket Tier 1
-		registration.addRecipeCatalyst(new ItemStack(ModInit.TIER_1_ROCKET_ITEM.get()), RocketTier1JeiCategory.Uid);
+		registration.addRecipeCatalyst(new ItemStack(ModInit.TIER_1_ROCKET_ITEM.get()), RocketTier1JeiCategory.Uid, SpaceStationJeiCategory.Uid);
 		// Rocket Tier 2
-		registration.addRecipeCatalyst(new ItemStack(ModInit.TIER_2_ROCKET_ITEM.get()), RocketTier2JeiCategory.Uid);
+		registration.addRecipeCatalyst(new ItemStack(ModInit.TIER_2_ROCKET_ITEM.get()), RocketTier2JeiCategory.Uid, SpaceStationJeiCategory.Uid);
 		// Rocket Tier 3
-		registration.addRecipeCatalyst(new ItemStack(ModInit.TIER_3_ROCKET_ITEM.get()), RocketTier3JeiCategory.Uid);
+		registration.addRecipeCatalyst(new ItemStack(ModInit.TIER_3_ROCKET_ITEM.get()), RocketTier3JeiCategory.Uid, SpaceStationJeiCategory.Uid);
 		// Rocket Tier 4
-		registration.addRecipeCatalyst(new ItemStack(ModInit.TIER_4_ROCKET_ITEM.get()), RocketTier4JeiCategory.Uid);
+		registration.addRecipeCatalyst(new ItemStack(ModInit.TIER_4_ROCKET_ITEM.get()), RocketTier4JeiCategory.Uid, SpaceStationJeiCategory.Uid);
 		// Rover
 		registration.addRecipeCatalyst(new ItemStack(ModInit.ROVER_ITEM.get()), RoverJeiCategory.Uid);
 	}
@@ -1233,6 +1254,112 @@ public class JeiPlugin implements IModPlugin {
 			IGuiFluidStackGroup fluidStacks = iRecipeLayout.getFluidStacks();
 			fluidStacks.init(0, true, 9, 8, GuiHelper.FLUID_TANK_WIDTH, GuiHelper.FLUID_TANK_HEIGHT, FluidUtil2.BUCKET_SIZE * 3, false, this.fluidOverlay);
 			fluidStacks.set(0, iIngredients.getInputs(VanillaTypes.FLUID).get(0));
+		}
+	}
+
+	public static class SpaceStationJeiCategory implements IRecipeCategory<SpaceStationRecipe> {
+		public static final ResourceLocation Uid = new ResourceLocation(BeyondEarthMod.MODID, "space_station");
+		public static final ResourceLocation BACKGROUND = new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/space_station_background.png");
+		public static final ResourceLocation ICON = new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/space_station_icon.png");
+		public static final int SLOTS_X_CENTER = 72;
+		public static final int SLOTS_Y_TOP = 6;
+		public static final int SLOTS_X_OFFSET = 18;
+		public static final int SLOTS_Y_OFFSET = 18;
+
+		private final Component title;
+		private final Component[] tooltips;
+		private final IDrawable background;
+		private final IDrawable icon;
+		private final IDrawable slot;
+
+		public SpaceStationJeiCategory(IGuiHelper guiHelper) {
+			String path = BeyondEarthMod.MODID + ".space_station";
+			this.title = new TranslatableComponent("jei.category." + path);
+			this.tooltips = Arrays.stream(new TranslatableComponent("jei.tooltip." + path).getString().split("\n")).map(TextComponent::new).toArray(Component[]::new);
+			this.background = guiHelper.createDrawable(BACKGROUND, 0, 0, 144, 51);
+			this.icon = guiHelper.drawableBuilder(ICON, 0, 0, 16, 16).setTextureSize(16, 16).build();
+			this.slot = guiHelper.getSlotDrawable();
+		}
+
+		@Override
+		public ResourceLocation getUid() {
+			return Uid;
+		}
+
+		@Override
+		public Class<? extends SpaceStationRecipe> getRecipeClass() {
+			return SpaceStationRecipe.class;
+		}
+
+		@Override
+		public Component getTitle() {
+			return title;
+		}
+
+		public Component[] getTooltip() {
+			return this.tooltips;
+		}
+
+		@Override
+		public IDrawable getBackground() {
+			return this.background;
+		}
+
+		@Override
+		public IDrawable getIcon() {
+			return this.icon;
+		}
+
+		@Override
+		public void setIngredients(SpaceStationRecipe recipe, IIngredients iIngredients) {
+			iIngredients.setInputIngredients(recipe.getIngredients());
+		}
+
+		public int[] getSpaceStationItemPosition(int index, int count) {
+			int xIndex = index % count;
+			int yIndex = index / count;
+			int slots_width = count * SLOTS_X_OFFSET;
+			int xPosition = SLOTS_X_CENTER + (xIndex * SLOTS_X_OFFSET) - (slots_width / 2);
+			int yPosition = SLOTS_Y_TOP + (yIndex * SLOTS_Y_OFFSET);
+			return new int[] { xPosition, yPosition };
+		}
+
+		@Override
+		public void setRecipe(IRecipeLayout iRecipeLayout, SpaceStationRecipe recipe, IIngredients iIngredients) {
+			IGuiItemStackGroup itemStacks = iRecipeLayout.getItemStacks();
+			NonNullList<IngredientStack> ingredientStacks = recipe.getIngredientStacks();
+			int count = ingredientStacks.size();
+
+			for (int i = 0; i < count; i++) {
+				int[] pos = this.getSpaceStationItemPosition(i, count);
+
+				IngredientStack ingredientStack = ingredientStacks.get(i);
+				itemStacks.init(i, true, pos[0], pos[1]);
+				itemStacks.set(i, NonNullList.of(ItemStack.EMPTY, ingredientStack.getItems()));
+			}
+		}
+
+		@Override
+		public void draw(SpaceStationRecipe recipe, PoseStack stack, double mouseX, double mouseY) {
+			IRecipeCategory.super.draw(recipe, stack, mouseX, mouseY);
+			NonNullList<IngredientStack> ingredientStacks = recipe.getIngredientStacks();
+			int count = ingredientStacks.size();
+
+			for (int i = 0; i < count; i++) {
+				int[] pos = this.getSpaceStationItemPosition(i, count);
+				this.slot.draw(stack, pos[0], pos[1]);
+			}
+
+			Minecraft minecraft = Minecraft.getInstance();
+			Font font = minecraft.font;
+			int tooltipYOffset = this.getSpaceStationItemPosition(ingredientStacks.size() - 1, count)[1] + SLOTS_Y_OFFSET + 4;
+			Component[] tooltips = this.getTooltip();
+
+			for (int i = 0; i < tooltips.length; i++) {
+				Component tooltip = tooltips[i];
+				int tooltipWidth = font.width(tooltip);
+				font.draw(stack, tooltip, SLOTS_X_CENTER - (tooltipWidth / 2), tooltipYOffset + font.lineHeight * i, 0xFF404040);
+			}
 		}
 	}
 }
