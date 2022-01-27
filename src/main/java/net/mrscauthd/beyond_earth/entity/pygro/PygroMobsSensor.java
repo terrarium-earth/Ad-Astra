@@ -117,8 +117,6 @@ public class PygroMobsSensor extends Sensor<LivingEntity> {
     }
 
     private static boolean isRepellent(ServerLevel world, BlockPos pos) {
-        BlockState blockstate = world.getBlockState(pos);
-        boolean flag = blockstate.is(BlockTags.PIGLIN_REPELLENTS);
-        return flag && blockstate.is(Blocks.SOUL_CAMPFIRE) ? CampfireBlock.isLitCampfire(blockstate) : flag;
+        return false;
     }
 }

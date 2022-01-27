@@ -69,22 +69,22 @@ public class WaterPumpBlockEntity extends AbstractMachineBlockEntity {
                     }
                 }
             }
+        }
 
-            if (this.getWaterTank().getFluid().getAmount() > 1) {
-                BlockEntity ejectBlockEntity = level.getBlockEntity(new BlockPos(pos.getX(),pos.getY() + 1, pos.getZ()));
+        if (this.getWaterTank().getFluid().getAmount() > 1) {
+            BlockEntity ejectBlockEntity = level.getBlockEntity(new BlockPos(pos.getX(),pos.getY() + 1, pos.getZ()));
 
-                if (ejectBlockEntity != null) {
+            if (ejectBlockEntity != null) {
 
-                	IFluidHandler fluidHandler = ejectBlockEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, Direction.DOWN).orElse(null);
-                	
-                	if (fluidHandler != null) {
-                		int transferPerTick = this.getTransferPerTick();
-                		
-                		if (FluidUtil.tryFluidTransfer(fluidHandler, this.waterTank, transferPerTick, false).getAmount() == transferPerTick)
-                		{
-                			FluidUtil.tryFluidTransfer(fluidHandler, this.waterTank, transferPerTick, true);
-                		}
-                	}
+                IFluidHandler fluidHandler = ejectBlockEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, Direction.DOWN).orElse(null);
+
+                if (fluidHandler != null) {
+                    int transferPerTick = this.getTransferPerTick();
+
+                    if (FluidUtil.tryFluidTransfer(fluidHandler, this.waterTank, transferPerTick, false).getAmount() == transferPerTick)
+                    {
+                        FluidUtil.tryFluidTransfer(fluidHandler, this.waterTank, transferPerTick, true);
+                    }
                 }
             }
         }
