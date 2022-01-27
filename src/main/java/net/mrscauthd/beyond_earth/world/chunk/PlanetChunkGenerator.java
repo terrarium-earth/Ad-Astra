@@ -28,7 +28,6 @@ import net.minecraft.world.level.levelgen.feature.*;
 import net.minecraft.world.level.levelgen.material.MaterialRuleList;
 import net.minecraft.world.level.levelgen.material.WorldGenMaterialRule;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
-import net.mrscauthd.beyond_earth.world.chunk.seedfixer.SeedFixer;
 
 import javax.annotation.Nullable;
 import java.util.*;
