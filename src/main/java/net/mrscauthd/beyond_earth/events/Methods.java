@@ -285,7 +285,8 @@ public class Methods {
                 }
             }
         }
-        //out of Space
+
+        //Out of Space
         if (Config.ENTITY_OXYGEN_SYSTEM.get() && entity.hasEffect(ModInit.OXYGEN_EFFECT.get())) {
             entity.setAirSupply(300);
         }
