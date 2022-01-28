@@ -55,13 +55,13 @@
   "item.beyond_earth.rocket_t4": "4 티어 로켓",
   "item.beyond_earth.ice_shard": "얼음 조각",
 
-
   "item.beyond_earth.calorite_ingot": "칼로라이트 주괴",
   "item.beyond_earth.compressed_calorite": "압축 칼로라이트",
   "item.beyond_earth.calorite_nugget": "칼로라이트 조각",
   "item.beyond_earth.raw_calorite": "칼로라이트 원석",
   "item.beyond_earth.calorite_engine": "칼로라이트 엔진",
   "item.beyond_earth.calorite_tank": "칼로라이트 탱크",
+
 
   "itemGroup.tab_normal": "Beyond Earth",
   "itemGroup.tab_flags": "Beyond Earth: 깃발",
@@ -158,6 +158,10 @@
   "block.beyond_earth.cracked_venus_sandstone_bricks": "금 간 금성 사암 벽돌",
   "block.beyond_earth.venus_sandstone_brick_stairs": "금성 사암 벽돌 계단",
 
+  "block.beyond_earth.venus_calorite_ore": "금성 칼로라이트 광석",
+  "block.beyond_earth.calorite_block": "칼로라이트 블록",
+  "block.beyond_earth.raw_calorite_block": "칼로라이트 원석 블록",
+
   "block.beyond_earth.permafrost": "영구동토",
   "block.beyond_earth.glacio_stone": "글라시오 돌",
   "block.beyond_earth.glacio_stone_bricks": "글라시오 석재 벽돌",
@@ -168,10 +172,6 @@
   "block.beyond_earth.glacio_copper_ore": "글라시오 구리 광석",
   "block.beyond_earth.glacio_iron_ore": "글라시오 철 광석",
   "block.beyond_earth.glacio_lapis_ore": "글라시오 청금석 광석",
-
-  "block.beyond_earth.venus_calorite_ore": "금성 칼로라이트 광석",
-  "block.beyond_earth.calorite_block": "칼로라이트 블록",
-  "block.beyond_earth.raw_calorite_block": "칼로라이트 원석 블록",
 
   "fluid.beyond_earth.fuel": "연료",
   "fluid.fuel": "연료",
@@ -212,7 +212,6 @@
   "advancements.rocket_tier_4_advancement.title": "4 티어 로켓",
   "advancements.rocket_tier_4_advancement.descr": "§b4 티어 로켓을 제작하세요",
   "advancements.moon_advancement.title": "달",
-
   "advancements.moon_advancement.descr": "§b달에 진입하세요",
 
   "effect.beyond_earth.oxygen_bubble_effect": "산소 기포",
@@ -220,7 +219,7 @@
   "key.categories.beyond_earth": "Beyond Earth",
   "key.beyond_earth.rocket_start": "로켓 발사",
 
-  "death.attack.oxygen.player": "%1$s은(는) 더 이상 숨 쉴 수 없습니다",
+  "death.attack.oxygen": "%1$s은(는) 더 이상 숨 쉴 수 없습니다",
   "death.attack.venus.acid": "%1$s은(는) 대량의 산성에 희생되었습니다",
 
   "entity.beyond_earth.alien.farmer": "농부",
