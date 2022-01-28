@@ -161,7 +161,7 @@
   "block.beyond_earth.venus_calorite_ore": "금성 칼로라이트 광석",
   "block.beyond_earth.calorite_block": "칼로라이트 블록",
   "block.beyond_earth.raw_calorite_block": "칼로라이트 원석 블록",
-
+  
   "block.beyond_earth.permafrost": "영구동토",
   "block.beyond_earth.glacio_stone": "글라시오 돌",
   "block.beyond_earth.glacio_stone_bricks": "글라시오 석재 벽돌",
@@ -172,7 +172,7 @@
   "block.beyond_earth.glacio_copper_ore": "글라시오 구리 광석",
   "block.beyond_earth.glacio_iron_ore": "글라시오 철 광석",
   "block.beyond_earth.glacio_lapis_ore": "글라시오 청금석 광석",
-
+  
   "fluid.beyond_earth.fuel": "연료",
   "fluid.fuel": "연료",
   "fluid.beyond_earth.oil": "기름",
@@ -271,7 +271,7 @@
   "message.beyond_earth.no_fuel": "§c연료 부족! §7로켓에 §c연료§7를 채우세요. (§6웅크리기 + 로켓에 오른쪽 버튼§7)",
   "message.beyond_earth.hold_space": "§c스페이스§7를 꾹 누르세요!",
   "message.beyond_earth.speed": "속도 : %s",
-
+  
 
   "gui.beyond_earth.oxygen_bubble_distributor.workingarea.text": "작업 영역: %1$sx%2$sx%3$s",
   "gui.beyond_earth.oxygen_bubble_distributor.workingarea.show": "표시",
