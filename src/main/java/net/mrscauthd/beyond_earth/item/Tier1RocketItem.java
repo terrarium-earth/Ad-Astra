@@ -1,7 +1,7 @@
 package net.mrscauthd.beyond_earth.item;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -9,27 +9,25 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.block.RocketLaunchPad;
 import net.mrscauthd.beyond_earth.entity.RocketTier1Entity;
 import net.mrscauthd.beyond_earth.gauge.GaugeTextHelper;
 import net.mrscauthd.beyond_earth.gauge.GaugeValueHelper;
+import net.mrscauthd.beyond_earth.itemgroup.ItemGroups;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class Tier1RocketItem extends VehicleItem {
+public class Tier1RocketItem extends VehicleItem implements FilledAltVehicleItem {
 
     public static String fuelTag = BeyondEarthMod.MODID + ":fuel";
     public static String bucketTag = BeyondEarthMod.MODID + ":bucket";
@@ -100,6 +98,29 @@ public class Tier1RocketItem extends VehicleItem {
         }
 
         return super.useOn(context);
+    }
+
+    @Override
+    public void fillItemCategoryAlt(CreativeModeTab p_41391_, NonNullList<ItemStack> p_41392_) {
+        if (this.allowdedIn(p_41391_)) {
+            ItemStack itemStack = new ItemStack(this);
+            itemStack.getOrCreateTag().putInt(fuelTag, 300);
+            p_41392_.add(itemStack);
+        }
+    }
+
+    @Override
+    public void fillItemCategory(CreativeModeTab p_41391_, NonNullList<ItemStack> p_41392_) {
+        if (p_41391_ != ItemGroups.tab_normal) {
+            super.fillItemCategory(p_41391_, p_41392_);
+        }
+    }
+
+    @Override
+    public void itemCategoryAlt(CreativeModeTab p_41391_, NonNullList<ItemStack> p_41392_) {
+        if (this.allowdedIn(p_41391_)) {
+            p_41392_.add(new ItemStack(this));
+        }
     }
 
     public static void rocketPlaceSound(BlockPos pos, Level world) {

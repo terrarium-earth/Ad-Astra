@@ -140,11 +140,11 @@ public class ModInit {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, BeyondEarthMod.MODID);
 
     //Vehicle Items
-    public static final RegistryObject<Item> TIER_1_ROCKET_ITEM = ITEMS.register("rocket_t1", () -> new Tier1RocketItem(new Item.Properties().tab(ItemGroups.tab_normal).stacksTo(1)));
-    public static final RegistryObject<Item> TIER_2_ROCKET_ITEM = ITEMS.register("rocket_t2", () -> new Tier2RocketItem(new Item.Properties().tab(ItemGroups.tab_normal).stacksTo(1)));
-    public static final RegistryObject<Item> TIER_3_ROCKET_ITEM = ITEMS.register("rocket_t3", () -> new Tier3RocketItem(new Item.Properties().tab(ItemGroups.tab_normal).stacksTo(1)));
-    public static final RegistryObject<Item> TIER_4_ROCKET_ITEM = ITEMS.register("rocket_t4", () -> new Tier4RocketItem(new Item.Properties().tab(ItemGroups.tab_normal).stacksTo(1)));
-    public static final RegistryObject<Item> ROVER_ITEM = ITEMS.register("rover", () -> new RoverItem(new Item.Properties().tab(ItemGroups.tab_normal).stacksTo(1)));
+    public static final RegistryObject<Tier1RocketItem> TIER_1_ROCKET_ITEM = ITEMS.register("rocket_t1", () -> new Tier1RocketItem(new Item.Properties().tab(ItemGroups.tab_normal).stacksTo(1)));
+    public static final RegistryObject<Tier2RocketItem> TIER_2_ROCKET_ITEM = ITEMS.register("rocket_t2", () -> new Tier2RocketItem(new Item.Properties().tab(ItemGroups.tab_normal).stacksTo(1)));
+    public static final RegistryObject<Tier3RocketItem> TIER_3_ROCKET_ITEM = ITEMS.register("rocket_t3", () -> new Tier3RocketItem(new Item.Properties().tab(ItemGroups.tab_normal).stacksTo(1)));
+    public static final RegistryObject<Tier4RocketItem> TIER_4_ROCKET_ITEM = ITEMS.register("rocket_t4", () -> new Tier4RocketItem(new Item.Properties().tab(ItemGroups.tab_normal).stacksTo(1)));
+    public static final RegistryObject<RoverItem> ROVER_ITEM = ITEMS.register("rover", () -> new RoverItem(new Item.Properties().tab(ItemGroups.tab_normal).stacksTo(1)));
 
     //Entitys
     public static RegistryObject<EntityType<AlienEntity>> ALIEN = ENTITYS.register("alien", () -> EntityType.Builder.of(AlienEntity::new, MobCategory.CREATURE).sized(0.75f, 2.5f).build(new ResourceLocation(BeyondEarthMod.MODID, "alien").toString()));

@@ -171,7 +171,7 @@ public class PlanetSelectionGui {
 	}
 
 	public static void deleteItems(Player player) {
-		if (player.getAbilities().instabuild) {
+		if (player.getAbilities().instabuild || player.isSpectator()) {
 			return;
 		}
 

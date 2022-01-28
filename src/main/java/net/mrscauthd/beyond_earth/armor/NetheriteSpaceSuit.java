@@ -3,26 +3,26 @@ package net.mrscauthd.beyond_earth.armor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.client.IItemRenderProperties;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.armormaterial.NetheriteSpaceSuitMaterial;
+import net.mrscauthd.beyond_earth.capability.oxygen.CapabilityOxygen;
 import net.mrscauthd.beyond_earth.entity.renderer.spacesuit.SpaceSuitModel;
 import net.mrscauthd.beyond_earth.events.Methods;
 import net.mrscauthd.beyond_earth.capability.oxygen.IOxygenStorage;
 import net.mrscauthd.beyond_earth.capability.oxygen.OxygenUtil;
 import net.mrscauthd.beyond_earth.capability.oxygen.SpaceSuitCapabilityProvider;
 import net.mrscauthd.beyond_earth.gauge.GaugeTextHelper;
+import net.mrscauthd.beyond_earth.item.FilledAltArmorItem;
 import net.mrscauthd.beyond_earth.itemgroup.ItemGroups;
 
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -37,7 +37,7 @@ import java.util.function.Consumer;
 
 public class NetheriteSpaceSuit {
 
-	public static ArmorItem NETHERITE_OXYGEN_MASK = new ArmorItem(NetheriteSpaceSuitMaterial.ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Properties().tab(ItemGroups.tab_normal).fireResistant()) {
+	public static ArmorItem NETHERITE_OXYGEN_MASK = new FilledAltArmorItem(NetheriteSpaceSuitMaterial.ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Properties().tab(ItemGroups.tab_normal).fireResistant()) {
 
 		@Override
 		public void initializeClient(Consumer<IItemRenderProperties> consumer) {
@@ -71,13 +71,27 @@ public class NetheriteSpaceSuit {
 		}
 
 		@Override
+		public void itemCategoryAlt(CreativeModeTab tab, NonNullList<ItemStack> list) {
+			if (this.allowdedIn(tab)) {
+				list.add(new ItemStack(this));
+			}
+		}
+
+		@Override
+		public void fillItemCategory(CreativeModeTab p_41391_, NonNullList<ItemStack> p_41392_) {
+			if (p_41391_ != ItemGroups.tab_normal) {
+				super.fillItemCategory(p_41391_, p_41392_);
+			}
+		}
+
+		@Override
 		public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
 			return BeyondEarthMod.MODID + ":textures/models/armor/netherite_space_suit_head.png";
 		}
 
 	};
 
-	public static ArmorItem NETHERITE_SPACE_SUIT = new ArmorItem(NetheriteSpaceSuitMaterial.ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Properties().tab(ItemGroups.tab_normal).fireResistant()) {
+	public static ArmorItem NETHERITE_SPACE_SUIT = new FilledAltArmorItem(NetheriteSpaceSuitMaterial.ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Properties().tab(ItemGroups.tab_normal).fireResistant()) {
 		@Override
 		public void initializeClient(Consumer<IItemRenderProperties> consumer) {
 			consumer.accept(new IItemRenderProperties() {
@@ -111,6 +125,38 @@ public class NetheriteSpaceSuit {
 		}
 
 		@Override
+		public boolean isMainItem() {
+			return true;
+		}
+
+		@Override
+		public void fillItemCategoryAlt(CreativeModeTab p_41391_, NonNullList<ItemStack> p_41392_) {
+			if (this.allowdedIn(p_41391_)) {
+				ItemStack full = new ItemStack(this);
+				IOxygenStorage oxygenStorage = full.getCapability(CapabilityOxygen.OXYGEN).orElse(null);
+
+				if (oxygenStorage != null) {
+					oxygenStorage.setOxygenStored(oxygenStorage.getMaxOxygenStored());
+					p_41392_.add(full);
+				}
+			}
+		}
+
+		@Override
+		public void fillItemCategory(CreativeModeTab p_41391_, NonNullList<ItemStack> p_41392_) {
+			if (p_41391_ != ItemGroups.tab_normal) {
+				super.fillItemCategory(p_41391_, p_41392_);
+			}
+		}
+
+		@Override
+		public void itemCategoryAlt(CreativeModeTab tab, NonNullList<ItemStack> list) {
+			if (this.allowdedIn(tab)) {
+				list.add(new ItemStack(this));
+			}
+		}
+
+		@Override
 		public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
 			return new SpaceSuitCapabilityProvider(stack, 48000);
 		}
@@ -133,7 +179,7 @@ public class NetheriteSpaceSuit {
 		}
 	};
 
-	public static ArmorItem NETHERITE_SPACE_PANTS = new ArmorItem(NetheriteSpaceSuitMaterial.ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Properties().tab(ItemGroups.tab_normal).fireResistant()) {
+	public static ArmorItem NETHERITE_SPACE_PANTS = new FilledAltArmorItem(NetheriteSpaceSuitMaterial.ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Properties().tab(ItemGroups.tab_normal).fireResistant()) {
 		@Override
 		public void initializeClient(Consumer<IItemRenderProperties> consumer) {
 			consumer.accept(new IItemRenderProperties() {
@@ -167,13 +213,27 @@ public class NetheriteSpaceSuit {
 			});
 		}
 
+		@Override
+		public void itemCategoryAlt(CreativeModeTab tab, NonNullList<ItemStack> list) {
+			if (this.allowdedIn(tab)) {
+				list.add(new ItemStack(this));
+			}
+		}
+
+		@Override
+		public void fillItemCategory(CreativeModeTab p_41391_, NonNullList<ItemStack> p_41392_) {
+			if (p_41391_ != ItemGroups.tab_normal) {
+				super.fillItemCategory(p_41391_, p_41392_);
+			}
+		}
+
 		@OnlyIn(Dist.CLIENT)
 		public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
 			return BeyondEarthMod.MODID + ":textures/models/armor/netherite_space_suit_legs.png";
 		}
 	};
 
-	public static ArmorItem NETHERITE_SPACE_BOOTS = new ArmorItem(NetheriteSpaceSuitMaterial.ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Properties().tab(ItemGroups.tab_normal).fireResistant()) {
+	public static ArmorItem NETHERITE_SPACE_BOOTS = new FilledAltArmorItem(NetheriteSpaceSuitMaterial.ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Properties().tab(ItemGroups.tab_normal).fireResistant()) {
 		@Override
 		public void initializeClient(Consumer<IItemRenderProperties> consumer) {
 			consumer.accept(new IItemRenderProperties() {
@@ -204,6 +264,20 @@ public class NetheriteSpaceSuit {
 					return armorModel;
 				}
 			});
+		}
+
+		@Override
+		public void itemCategoryAlt(CreativeModeTab tab, NonNullList<ItemStack> list) {
+			if (this.allowdedIn(tab)) {
+				list.add(new ItemStack(this));
+			}
+		}
+
+		@Override
+		public void fillItemCategory(CreativeModeTab p_41391_, NonNullList<ItemStack> p_41392_) {
+			if (p_41391_ != ItemGroups.tab_normal) {
+				super.fillItemCategory(p_41391_, p_41392_);
+			}
 		}
 
 		@Override

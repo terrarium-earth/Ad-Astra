@@ -395,6 +395,7 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 	protected void init() {
 		super.init();
 
+		/** SPACE STATION RECIPE SYSTEM */
 		this.recipe = (SpaceStationRecipe) this.minecraft.level.getRecipeManager().byKey(SpaceStationRecipe.KEY).orElse(null);
 		this.spaceStationItemList = this.recipe.getIngredientStacks().stream().allMatch(this::getSpaceStationItemCheck);
 
@@ -592,7 +593,7 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 			for (IngredientStack ingredientStack : recipe.getIngredientStacks()) {
 				boolean check = this.getSpaceStationItemCheck(ingredientStack);
 				Component component = Arrays.stream(ingredientStack.getIngredient().getItems()).findFirst().map(ItemStack::getHoverName).orElse(TextComponent.EMPTY);
-				list.add(new TextComponent("\u00A78[\u00A76" + ingredientStack.getCount() + "\u00A78]" + (check ? "\u00A7a" : "\u00A7c") + " " + component.getString()));
+				list.add(new TextComponent("\u00A78[\u00A76" + ingredientStack.getCount() + "\u00A78]" + (check ? "\u00A7a" : "\u00A7c") + " " + component.getString() + (ingredientStack.getCount() > 1 ? "'s" : "")));
 			}
 
 			list.add(new TextComponent("\u00A7c----------------"));
@@ -612,7 +613,7 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 
 	public boolean getSpaceStationItemCheck(IngredientStack ingredientStack) {
 
-		if (menu.player.getAbilities().instabuild) {
+		if (menu.player.getAbilities().instabuild || menu.player.isSpectator()) {
 			return true;
 		}
 
