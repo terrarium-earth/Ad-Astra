@@ -250,7 +250,7 @@ public class Methods {
         }
     }
 
-    /**If a entity should not get Damage add it to the Tag "venus_rain", and if you has a Entity like a car return the damage to false*/
+    /**If a entity should not get Damage add it to the Tag "venus_rain"*/
     public static void VenusRain(LivingEntity entity, ResourceKey<Level> planet) {
         if (!Methods.isWorld(entity.level, planet)) {
             return;
@@ -273,7 +273,7 @@ public class Methods {
         }
     }
 
-    /**IF a entity should get oxygen damage add it in the tag "oxygen" (don't add the Player, he have a own oxygen system)*/
+    /**If a entity should get oxygen damage add it to the tag "oxygen" (don't add the Player, he has a own oxygen system)*/
     public static void EntityOxygen(LivingEntity entity, Level world) {
         if (Config.ENTITY_OXYGEN_SYSTEM.get() && Methods.isSpaceWorldWithoutOxygen(world) && tagCheck(entity, BeyondEarthMod.MODID + ":entities/oxygen")) {
 
