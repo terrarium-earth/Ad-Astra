@@ -1,6 +1,7 @@
 package net.mrscauthd.beyond_earth.events;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import io.netty.buffer.Unpooled;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.PlayerModel;
@@ -8,6 +9,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
@@ -55,6 +57,7 @@ import net.mrscauthd.beyond_earth.events.forgeevents.LivingSetFireInHotPlanetEve
 import net.mrscauthd.beyond_earth.events.forgeevents.LivingSetVenusRainEvent;
 import net.mrscauthd.beyond_earth.gui.screens.planetselection.PlanetSelectionGui;
 import net.mrscauthd.beyond_earth.item.VehicleItem;
+import net.mrscauthd.beyond_earth.rendertype.TranslucentArmorRenderType;
 
 public class Methods {
 
@@ -515,7 +518,11 @@ public class Methods {
         playermodel.swimAmount = 0.0F;
         playermodel.setupAnim(player, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F);
         arm.xRot = 0.0F;
-        arm.render(poseStack, bufferSource.getBuffer(RenderType.entitySolid(texture)), light, OverlayTexture.NO_OVERLAY);
+
+        ItemStack item = player.getItemBySlot(EquipmentSlot.byTypeAndIndex(EquipmentSlot.Type.ARMOR, 2));
+
+        VertexConsumer vertex = ItemRenderer.getArmorFoilBuffer(bufferSource, TranslucentArmorRenderType.armorCutoutNoCull(texture), false, item.isEnchanted());
+        arm.render(poseStack, vertex, light, OverlayTexture.NO_OVERLAY);
     }
 
     @OnlyIn(Dist.CLIENT)

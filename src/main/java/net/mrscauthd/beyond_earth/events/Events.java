@@ -110,7 +110,6 @@ public class Events {
         Item item = player.getOffhandItem().getItem();
         Item item2 = player.getMainHandItem().getItem();
 
-        /**Cancel Event if it Hold a Vehicle in off hand*/
         if (item instanceof VehicleItem || item2 instanceof VehicleItem) {
             event.setCanceled(true);
             return;
