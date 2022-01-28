@@ -125,11 +125,6 @@ public class NetheriteSpaceSuit {
 		}
 
 		@Override
-		public boolean isMainItem() {
-			return true;
-		}
-
-		@Override
 		public void fillItemCategoryAlt(CreativeModeTab p_41391_, NonNullList<ItemStack> p_41392_) {
 			if (this.allowdedIn(p_41391_)) {
 				ItemStack full = new ItemStack(this);

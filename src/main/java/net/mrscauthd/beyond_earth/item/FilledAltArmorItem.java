@@ -19,8 +19,4 @@ public class FilledAltArmorItem extends ArmorItem {
     public void itemCategoryAlt(CreativeModeTab tab, NonNullList<ItemStack> list) {
 
     }
-
-    public boolean isMainItem() {
-        return false;
-    }
 }
