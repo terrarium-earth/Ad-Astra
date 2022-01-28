@@ -94,7 +94,7 @@ public class ItemGroups {
 
 			FilledAltArmorItem netheriteSpaceSuit = (FilledAltArmorItem) ModInit.NETHERITE_SPACE_SUIT.get();
 
-			for (FilledAltArmorItem item : spaceSuitList) {
+			for (FilledAltArmorItem item : netheriteSpaceSuitList) {
 				if (!item.isMainItem()) {
 					item.itemCategoryAlt(this, list);
 				} else {
@@ -109,7 +109,7 @@ public class ItemGroups {
 			for (int i = 0; i < netheriteSpaceSuitEmptyCount; i++) {
 				list.add(ItemStack.EMPTY);
 			}
-			
+
 			/**Default Items*/
 			super.fillItemList(list);
 		}
