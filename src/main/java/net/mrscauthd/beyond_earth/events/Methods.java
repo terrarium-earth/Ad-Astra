@@ -252,19 +252,25 @@ public class Methods {
 
     /**If a entity should not get Damage add it to the Tag "venus_rain", and if you has a Entity like a car return the damage to false*/
     public static void VenusRain(LivingEntity entity, ResourceKey<Level> planet) {
-        if (Methods.isWorld(entity.level, planet)) {
-            if (entity.level.getLevelData().isRaining() && entity.level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, (int) Math.floor(entity.getX()), (int) Math.floor(entity.getZ())) <= Math.floor(entity.getY()) + 1) {
-                if (entity.isPassenger() && (Methods.isRocket(entity.getVehicle()) || entity.getVehicle() instanceof LanderEntity)) {
-                    if (!MinecraftForge.EVENT_BUS.post(new LivingSetVenusRainEvent(entity))) {
-                        if (!tagCheck(entity, BeyondEarthMod.MODID + ":entities/venus_rain")) {
-
-                            entity.hurt(ModInit.DAMAGE_SOURCE_ACID_RAIN, 1);
-                        }
-                    }
-                }
-            }
+        if (!Methods.isWorld(entity.level, planet)) {
+            return;
         }
 
+        if (entity.isPassenger() && (Methods.isRocket(entity.getVehicle()) || entity.getVehicle() instanceof LanderEntity)) {
+            return;
+        }
+
+        if (MinecraftForge.EVENT_BUS.post(new LivingSetVenusRainEvent(entity))) {
+            return;
+        }
+
+        if (tagCheck(entity, BeyondEarthMod.MODID + ":entities/venus_rain")) {
+            return;
+        }
+
+        if (entity.level.getLevelData().isRaining() && entity.level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, (int) Math.floor(entity.getX()), (int) Math.floor(entity.getZ())) <= Math.floor(entity.getY()) + 1) {
+            entity.hurt(ModInit.DAMAGE_SOURCE_ACID_RAIN, 1);
+        }
     }
 
     /**IF a entity should get oxygen damage add it in the tag "oxygen" (don't add the Player, he have a own oxygen system)*/
