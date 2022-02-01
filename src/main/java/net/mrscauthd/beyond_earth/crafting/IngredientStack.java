@@ -21,7 +21,7 @@ public final class IngredientStack {
 	public IngredientStack(JsonElement json) {
 		if (json instanceof JsonObject) {
 			JsonObject jsonObject = (JsonObject) json;
-			this.ingredient = Ingredient.fromJson(jsonObject);
+			this.ingredient = Ingredient.fromJson(GsonHelper.getAsJsonObject(jsonObject, "ingredient"));
 			this.count = GsonHelper.getAsInt(jsonObject, "count", this.count);
 		} else if (json instanceof JsonArray) {
 			this.ingredient = Ingredient.fromJson(json);

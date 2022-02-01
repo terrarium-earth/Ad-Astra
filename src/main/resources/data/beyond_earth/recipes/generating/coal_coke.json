@@ -1,18 +1,16 @@
 {
-   "type":"beyond_earth:generating",
+	"type": "beyond_earth:generating",
 	"conditions": [
-    {
-		"value": {
-			"tag": "forge:coal_coke",
-			"type": "forge:tag_empty"
-		},
-		"type": "forge:not"
-    }
-  ],
-   "input":{
-      "ingredient":{
-         "tag":"forge:coal_coke"
-      }
-   },
-   "burnTime":800
+		{
+			"value": {
+				"tag": "forge:coal_coke",
+				"type": "forge:tag_empty"
+			},
+			"type": "forge:not"
+		}
+	],
+	"input": {
+		"tag": "forge:coal_coke"
+	},
+	"burnTime": 800
 }

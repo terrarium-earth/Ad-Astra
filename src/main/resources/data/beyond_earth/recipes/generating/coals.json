@@ -1,9 +1,7 @@
 {
-   "type":"beyond_earth:generating",
-   "input":{
-      "ingredient":{
-         "tag":"minecraft:coals"
-      }
-   },
-   "burnTime":400
+	"type": "beyond_earth:generating",
+	"input": {
+		"tag": "minecraft:coals"
+	},
+	"burnTime": 400
 }

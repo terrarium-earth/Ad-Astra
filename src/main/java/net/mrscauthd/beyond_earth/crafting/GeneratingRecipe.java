@@ -20,26 +20,25 @@ public class GeneratingRecipe extends BeyondEarthRecipe implements Predicate<Ite
 
 	public static final int SLOT_FUEL = 0;
 
-	private final Ingredient ingredient;
+	private final Ingredient input;
 	private final int burnTime;
 
 	public GeneratingRecipe(ResourceLocation id, JsonObject json) {
 		super(id, json);
-		JsonObject inputJson = GsonHelper.getAsJsonObject(json, "input");
-		this.ingredient = Ingredient.fromJson(GsonHelper.getAsJsonObject(inputJson, "ingredient"));
+		this.input = Ingredient.fromJson(GsonHelper.getAsJsonObject(json, "input"));
 		this.burnTime = GsonHelper.getAsInt(json, "burnTime");
 	}
 
 	public GeneratingRecipe(ResourceLocation id, FriendlyByteBuf buffer) {
 		super(id, buffer);
 
-		this.ingredient = Ingredient.fromNetwork(buffer);
+		this.input = Ingredient.fromNetwork(buffer);
 		this.burnTime = buffer.readInt();
 	}
 
 	public GeneratingRecipe(ResourceLocation id, Ingredient ingredient, int burnTime) {
 		super(id);
-		this.ingredient = ingredient;
+		this.input = ingredient;
 		this.burnTime = burnTime;
 	}
 
@@ -47,7 +46,7 @@ public class GeneratingRecipe extends BeyondEarthRecipe implements Predicate<Ite
 	public void write(FriendlyByteBuf buffer) {
 		super.write(buffer);
 
-		this.getIngredient().toNetwork(buffer);
+		this.getInput().toNetwork(buffer);
 		buffer.writeInt(this.getBurnTime());
 	}
 
@@ -72,17 +71,17 @@ public class GeneratingRecipe extends BeyondEarthRecipe implements Predicate<Ite
 
 	@Override
 	public boolean test(ItemStack ingredient) {
-		return this.ingredient.test(ingredient);
+		return this.input.test(ingredient);
 	}
 
-	public Ingredient getIngredient() {
-		return this.ingredient;
+	public Ingredient getInput() {
+		return this.input;
 	}
 
 	@Override
 	public NonNullList<Ingredient> getIngredients() {
 		NonNullList<Ingredient> list = super.getIngredients();
-		list.add(this.getIngredient());
+		list.add(this.getInput());
 		return list;
 	}
 

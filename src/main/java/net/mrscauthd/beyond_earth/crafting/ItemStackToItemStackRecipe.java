@@ -13,41 +13,40 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.crafting.CraftingHelper;
 
 public abstract class ItemStackToItemStackRecipe extends BeyondEarthRecipe implements Predicate<ItemStack> {
-	private final Ingredient ingredient;
+	private final Ingredient input;
 	private final ItemStack output;
 	private final int cookTime;
 
 	public ItemStackToItemStackRecipe(ResourceLocation id, JsonObject json) {
 		super(id, json);
-		JsonObject inputJson = GsonHelper.getAsJsonObject(json, "input");
-		this.ingredient = Ingredient.fromJson(GsonHelper.getAsJsonObject(inputJson, "ingredient"));
+		this.input = Ingredient.fromJson(GsonHelper.getAsJsonObject(json, "input"));
 		this.output = CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(json, "output"), true);
 		this.cookTime = GsonHelper.getAsInt(json, "cookTime");
 	}
 
 	public ItemStackToItemStackRecipe(ResourceLocation id, FriendlyByteBuf buffer) {
 		super(id, buffer);
-		this.ingredient = Ingredient.fromNetwork(buffer);
+		this.input = Ingredient.fromNetwork(buffer);
 		this.output = buffer.readItem();
 		this.cookTime = buffer.readInt();
 	}
 
 	public ItemStackToItemStackRecipe(ResourceLocation id, Ingredient ingredient, ItemStack output, int cookTime) {
 		super(id);
-		this.ingredient = ingredient;
+		this.input = ingredient;
 		this.output = output.copy();
 		this.cookTime = cookTime;
 	}
 
 	public void write(FriendlyByteBuf buffer) {
-		this.getIngredient().toNetwork(buffer);
+		this.getInput().toNetwork(buffer);
 		buffer.writeItem(this.getOutput());
 		buffer.writeInt(this.getCookTime());
 	}
 
 	@Override
 	public boolean test(ItemStack stack) {
-		return this.ingredient.test(stack);
+		return this.input.test(stack);
 	}
 
 	@Override
@@ -62,12 +61,12 @@ public abstract class ItemStackToItemStackRecipe extends BeyondEarthRecipe imple
 	@Override
 	public NonNullList<Ingredient> getIngredients() {
 		NonNullList<Ingredient> list = super.getIngredients();
-		list.add(this.getIngredient());
+		list.add(this.getInput());
 		return list;
 	}
 
-	public Ingredient getIngredient() {
-		return this.ingredient;
+	public Ingredient getInput() {
+		return this.input;
 	}
 
 	public int getCookTime() {
