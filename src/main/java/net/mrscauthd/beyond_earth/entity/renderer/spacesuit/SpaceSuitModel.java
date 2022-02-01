@@ -18,11 +18,14 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.rendertype.TranslucentArmorRenderType;
 
 public class SpaceSuitModel {
+    @OnlyIn(Dist.CLIENT)
     public static class SPACE_SUIT_P1<T extends LivingEntity> extends HumanoidModel<T> {
 
         private static ResourceLocation spaceSuit = new ResourceLocation(BeyondEarthMod.MODID, "textures/models/armor/space_suit_head.png");
@@ -118,6 +121,7 @@ public class SpaceSuitModel {
         }
     }
 
+    @OnlyIn(Dist.CLIENT)
     public static class SPACE_SUIT_P2<T extends LivingEntity> extends HumanoidModel<T> {
 
         public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(BeyondEarthMod.MODID, "space_suit_p2"), "main");
