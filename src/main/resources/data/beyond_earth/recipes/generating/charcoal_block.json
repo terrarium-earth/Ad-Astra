@@ -1,18 +1,16 @@
 {
-   "type":"beyond_earth:generating",
+	"type": "beyond_earth:generating",
 	"conditions": [
-    {
-		"value": {
-			"tag": "forge:storage_blocks/charcoal",
-			"type": "forge:tag_empty"
-		},
-		"type": "forge:not"
-    }
-  ],
-   "input":{
-      "ingredient":{
-         "tag":"forge:storage_blocks/charcoal"
-      }
-   },
-   "burnTime":4000
+		{
+			"value": {
+				"tag": "forge:storage_blocks/charcoal",
+				"type": "forge:tag_empty"
+			},
+			"type": "forge:not"
+		}
+	],
+	"input": {
+		"tag": "forge:storage_blocks/charcoal"
+	},
+	"burnTime": 4000
 }
