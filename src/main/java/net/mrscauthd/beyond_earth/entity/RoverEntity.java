@@ -66,6 +66,9 @@ public class RoverEntity extends VehicleEntity {
     public float animationSpeed;
     public float animationPosition;
 
+    private float FUEL_USE_TICK = 8;
+    private float FUEL_TIMER = 0;
+
     public static final EntityDataAccessor<Integer> FUEL = SynchedEntityData.defineId(RoverEntity.class, EntityDataSerializers.INT);
 
     public static final EntityDataAccessor<Boolean> FORWARD = SynchedEntityData.defineId(RoverEntity.class, EntityDataSerializers.BOOLEAN);
@@ -301,8 +304,8 @@ public class RoverEntity extends VehicleEntity {
         //Fuel Load up
         if (Methods.tagCheck(FluidUtil2.findBucketFluid(this.inventory.getStackInSlot(0).getItem()), ModInit.FLUID_VEHICLE_FUEL_TAG)) {
 
-            if (this.entityData.get(FUEL) <= 2000 * 2) {
-                this.getEntityData().set(FUEL, (this.getEntityData().get(FUEL) + 1000) * 2);
+            if (this.entityData.get(FUEL) <= 2000) {
+                this.getEntityData().set(FUEL, (this.getEntityData().get(FUEL) + 1000));
                 this.inventory.setStackInSlot(0, new ItemStack(Items.BUCKET));
             }
         }
@@ -319,15 +322,23 @@ public class RoverEntity extends VehicleEntity {
             return;
         }
 
+        FUEL_TIMER++;
+
         Player passanger = (Player) this.getPassengers().get(0);
 
         if (passanger.zza > 0.01 && this.getEntityData().get(FUEL) != 0) {
 
-            this.entityData.set(FUEL, this.getEntityData().get(FUEL) - 1);
+            if (FUEL_TIMER > FUEL_USE_TICK) {
+                this.entityData.set(FUEL, this.getEntityData().get(FUEL) - 1);
+                FUEL_TIMER = 0;
+            }
             this.entityData.set(FORWARD, true);
         } else if (passanger.zza < -0.01 && this.getEntityData().get(FUEL) != 0) {
 
-            this.entityData.set(FUEL, this.getEntityData().get(FUEL) - 1);
+            if (FUEL_TIMER > FUEL_USE_TICK) {
+                this.entityData.set(FUEL, this.getEntityData().get(FUEL) - 1);
+                FUEL_TIMER = 0;
+            }
             this.entityData.set(FORWARD, false);
         }
     }

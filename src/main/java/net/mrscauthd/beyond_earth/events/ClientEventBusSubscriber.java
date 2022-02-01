@@ -5,6 +5,7 @@ import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.PiglinRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.client.ClientRegistry;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -31,6 +32,7 @@ import net.mrscauthd.beyond_earth.entity.renderer.mogler.MoglerModel;
 import net.mrscauthd.beyond_earth.entity.renderer.mogler.MoglerRenderer;
 import net.mrscauthd.beyond_earth.entity.renderer.pygro.PygroModel;
 import net.mrscauthd.beyond_earth.entity.renderer.pygro.PygroRenderer;
+import net.mrscauthd.beyond_earth.entity.renderer.pygrobrute.PygroBruteRenderer;
 import net.mrscauthd.beyond_earth.entity.renderer.rockettier1.RocketTier1Model;
 import net.mrscauthd.beyond_earth.entity.renderer.rockettier1.RocketTier1Renderer;
 import net.mrscauthd.beyond_earth.entity.renderer.rockettier2.RocketTier2Model;
@@ -72,6 +74,9 @@ public class ClientEventBusSubscriber {
 		event.registerEntityRenderer(ModInit.PYGRO.get(), (p_174068_) -> {
 			return new PygroRenderer(p_174068_, PygroModel.LAYER_LOCATION, ModelLayers.PIGLIN_INNER_ARMOR, ModelLayers.PIGLIN_OUTER_ARMOR);
 		});
+		event.registerEntityRenderer(ModInit.PYGRO_BRUTE.get(), (p_174068_) -> {
+			return new PygroBruteRenderer(p_174068_, PygroModel.LAYER_LOCATION, ModelLayers.PIGLIN_BRUTE_INNER_ARMOR, ModelLayers.PIGLIN_BRUTE_OUTER_ARMOR);
+		});
 		event.registerEntityRenderer(ModInit.MOGLER.get(), MoglerRenderer::new);
 		event.registerEntityRenderer(ModInit.MARTIAN_RAPTOR.get(), MartianRaptorRenderer::new);
 		event.registerEntityRenderer(ModInit.TIER_1_ROCKET.get(), RocketTier1Renderer::new);
@@ -96,7 +101,6 @@ public class ClientEventBusSubscriber {
 		event.registerLayerDefinition(PygroModel.LAYER_LOCATION, PygroModel::createBodyLayer);
 		event.registerLayerDefinition(MoglerModel.LAYER_LOCATION, MoglerModel::createBodyLayer);
 		event.registerLayerDefinition(MartianRaptorModel.LAYER_LOCATION, MartianRaptorModel::createBodyLayer);
-
 		event.registerLayerDefinition(TileEntityHeadModel.LAYER_LOCATION, TileEntityHeadModel::createHumanoidHeadLayer);
 		
 		event.registerLayerDefinition(RocketTier1Model.LAYER_LOCATION, RocketTier1Model::createBodyLayer);

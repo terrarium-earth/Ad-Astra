@@ -8,7 +8,6 @@
     "SeedFixerMixin"
   ],
   "client": [
-    "ArmorTranslucent",
     "SetupLivingBipedAnim",
     "RenderHandItem"
   ],

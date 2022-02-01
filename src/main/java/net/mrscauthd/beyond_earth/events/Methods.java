@@ -521,7 +521,7 @@ public class Methods {
 
         ItemStack item = player.getItemBySlot(EquipmentSlot.byTypeAndIndex(EquipmentSlot.Type.ARMOR, 2));
 
-        VertexConsumer vertex = ItemRenderer.getArmorFoilBuffer(bufferSource, TranslucentArmorRenderType.armorCutoutNoCull(texture), false, item.isEnchanted());
+        VertexConsumer vertex = ItemRenderer.getArmorFoilBuffer(bufferSource, RenderType.armorCutoutNoCull(texture), false, item.isEnchanted());
         arm.render(poseStack, vertex, light, OverlayTexture.NO_OVERLAY);
     }
 

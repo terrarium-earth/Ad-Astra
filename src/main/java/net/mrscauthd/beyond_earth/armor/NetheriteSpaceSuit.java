@@ -45,11 +45,10 @@ public class NetheriteSpaceSuit {
 
 				@Override
 				@OnlyIn(Dist.CLIENT)
-				public HumanoidModel getArmorModel(LivingEntity living, ItemStack stack, EquipmentSlot slot, HumanoidModel defaultModel) {
+				public HumanoidModel getBaseArmorModel(LivingEntity living, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> defaultModel) {
 
-					Map<String, ModelPart> map = Map.of("head", new SpaceSuitModel.SPACE_SUIT_P1(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION)).Head,
+					Map<String, ModelPart> map = Map.of("head", new SpaceSuitModel.SPACE_SUIT_P1(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION)).head,
 
-							"hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
 							"body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
 							"right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
 							"left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
@@ -58,12 +57,9 @@ public class NetheriteSpaceSuit {
 					);
 
 					ModelPart modelPart = new ModelPart(Collections.emptyList(), map);
+					SpaceSuitModel.SPACE_SUIT_P1 armorModel = new SpaceSuitModel.SPACE_SUIT_P1(modelPart);
 
-					HumanoidModel armorModel = new HumanoidModel(modelPart);
-
-					armorModel.crouching = living.isCrouching();
-					armorModel.riding = defaultModel.riding;
-					armorModel.young = living.isBaby();
+					armorModel.entity = living;
 
 					return armorModel;
 				}
@@ -98,26 +94,22 @@ public class NetheriteSpaceSuit {
 
 				@Override
 				@OnlyIn(Dist.CLIENT)
-				public HumanoidModel getArmorModel(LivingEntity living, ItemStack stack, EquipmentSlot slot, HumanoidModel defaultModel) {
+				public HumanoidModel getBaseArmorModel(LivingEntity living, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> defaultModel) {
 
 					Map<String, ModelPart> map = Map.of(
-							"body", new SpaceSuitModel.SPACE_SUIT_P1(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION)).Body,
-							"left_arm", new SpaceSuitModel.SPACE_SUIT_P1(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION)).Left_Arm,
-							"right_arm", new SpaceSuitModel.SPACE_SUIT_P1(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION)).Right_Arm,
+							"body", new SpaceSuitModel.SPACE_SUIT_P1(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION)).body,
+							"right_arm", new SpaceSuitModel.SPACE_SUIT_P1(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION)).rightArm,
+							"left_arm", new SpaceSuitModel.SPACE_SUIT_P1(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION)).leftArm,
 
 							"head", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-							"hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
 							"right_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
 							"left_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap())
 					);
 
 					ModelPart modelPart = new ModelPart(Collections.emptyList(), map);
+					SpaceSuitModel.SPACE_SUIT_P1 armorModel = new SpaceSuitModel.SPACE_SUIT_P1(modelPart);
 
-					HumanoidModel armorModel = new HumanoidModel(modelPart);
-
-					armorModel.crouching = living.isCrouching();
-					armorModel.riding = defaultModel.riding;
-					armorModel.young = living.isBaby();
+					armorModel.entity = living;
 
 					return armorModel;
 				}
@@ -181,14 +173,13 @@ public class NetheriteSpaceSuit {
 
 				@Override
 				@OnlyIn(Dist.CLIENT)
-				public HumanoidModel getArmorModel(LivingEntity living, ItemStack stack, EquipmentSlot slot, HumanoidModel defaultModel) {
+				public HumanoidModel getBaseArmorModel(LivingEntity living, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> defaultModel) {
 
 					Map<String, ModelPart> map = Map.of(
-							"right_leg", new SpaceSuitModel.SPACE_SUIT_P2(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P2.LAYER_LOCATION)).Right_Leg,
-							"left_leg", new SpaceSuitModel.SPACE_SUIT_P2(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P2.LAYER_LOCATION)).Left_Leg,
+							"right_leg", new SpaceSuitModel.SPACE_SUIT_P2(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P2.LAYER_LOCATION)).rightLeg,
+							"left_leg", new SpaceSuitModel.SPACE_SUIT_P2(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P2.LAYER_LOCATION)).leftLeg,
 
 							"head", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-							"hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
 							"body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
 							"right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
 							"left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap())
@@ -196,13 +187,9 @@ public class NetheriteSpaceSuit {
 					);
 
 					ModelPart modelPart = new ModelPart(Collections.emptyList(), map);
+					SpaceSuitModel.SPACE_SUIT_P2 armorModel = new SpaceSuitModel.SPACE_SUIT_P2(modelPart);
 
-					HumanoidModel armorModel = new HumanoidModel(modelPart);
-
-					armorModel.crouching = living.isCrouching();
-					armorModel.riding = defaultModel.riding;
-					armorModel.young = living.isBaby();
-
+					armorModel.entity = living;
 					return armorModel;
 				}
 			});
@@ -235,26 +222,23 @@ public class NetheriteSpaceSuit {
 
 				@Override
 				@OnlyIn(Dist.CLIENT)
-				public HumanoidModel getArmorModel(LivingEntity living, ItemStack stack, EquipmentSlot slot, HumanoidModel defaultModel) {
+				public HumanoidModel getBaseArmorModel(LivingEntity living, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> defaultModel) {
 
 					Map<String, ModelPart> map = Map.of(
-							"right_leg", new SpaceSuitModel.SPACE_SUIT_P1(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION)).Right_Boots,
-							"left_leg", new SpaceSuitModel.SPACE_SUIT_P1(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION)).Left_Boots,
+							"right_leg", new SpaceSuitModel.SPACE_SUIT_P1(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION)).rightLeg,
+							"left_leg", new SpaceSuitModel.SPACE_SUIT_P1(Minecraft.getInstance().getEntityModels().bakeLayer(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION)).leftLeg,
 
 							"head", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-							"hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
 							"body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
 							"right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
 							"left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap())
 
 					);
+
 					ModelPart modelPart = new ModelPart(Collections.emptyList(), map);
+					SpaceSuitModel.SPACE_SUIT_P1 armorModel = new SpaceSuitModel.SPACE_SUIT_P1(modelPart);
 
-					HumanoidModel armorModel = new HumanoidModel(modelPart);
-
-					armorModel.crouching = living.isCrouching();
-					armorModel.riding = defaultModel.riding;
-					armorModel.young = living.isBaby();
+					armorModel.entity = living;
 
 					return armorModel;
 				}

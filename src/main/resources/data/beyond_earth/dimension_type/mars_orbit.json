@@ -13,5 +13,5 @@
   "infiniburn": "minecraft:infiniburn_overworld",
   "min_y": 0,
   "height": 256,
-  "effects": "beyond_earth:glacio_orbit"
+  "effects": "beyond_earth:mars_orbit"
 }

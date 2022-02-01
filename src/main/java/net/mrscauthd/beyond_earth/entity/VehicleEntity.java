@@ -1,5 +1,6 @@
 package net.mrscauthd.beyond_earth.entity;
 
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;

@@ -28,6 +28,7 @@
   "item.beyond_earth.wheel": "Wheel",
   "item.beyond_earth.steel_tank": "Steel Tank",
   "item.beyond_earth.pygro_spawn_egg": "Pygro Spawn Egg",
+  "item.beyond_earth.pygro_brute_spawn_egg": "Pygro Brute Spawn Egg",
   "item.beyond_earth.iron_stick": "Iron Stick",
   "item.beyond_earth.oxygen_gear": "Oxygen Gear",
   "item.beyond_earth.oxygen_mask": "Oxygen Mask",
@@ -180,6 +181,7 @@
 
   "entity.beyond_earth.mogler": "Mogler",
   "entity.beyond_earth.pygro": "Pygro",
+  "entity.beyond_earth.pygro_brute": "Pygro Brute",
   "entity.beyond_earth.alien": "Alien",
   "entity.beyond_earth.alien_zombie": "Alien Zombie",
   "entity.beyond_earth.star_crawler": "Star Crawler",

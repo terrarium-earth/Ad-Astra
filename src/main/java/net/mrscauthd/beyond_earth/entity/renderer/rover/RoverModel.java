@@ -60,13 +60,13 @@ public class RoverModel<T extends RoverEntity> extends EntityModel<T> {
 
         PartDefinition cube_r3 = Frame.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(0, 61).addBox(-7.5F, 0.0F, -5.0F, 15.0F, 0.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -12.4979F, -57.4987F, 0.5672F, 0.0F, 0.0F));
 
-        PartDefinition Wheel1 = Frame.addOrReplaceChild("Wheel1", CubeListBuilder.create().texOffs(115, 127).addBox(0.0F, -6.75F, -6.25F, 5.0F, 13.0F, 13.0F, new CubeDeformation(0.0F)), PartPose.offset(17.5F, -6.25F, -46.25F));
+        PartDefinition Wheel1 = Frame.addOrReplaceChild("Wheel1", CubeListBuilder.create().texOffs(115, 127).addBox(-2.5F, -6.5F, -6.5F, 5.0F, 13.0F, 13.0F, new CubeDeformation(0.0F)), PartPose.offset(20.0F, -6.5F, -46.0F));
 
-        PartDefinition Wheel2 = Frame.addOrReplaceChild("Wheel2", CubeListBuilder.create().texOffs(119, 101).addBox(-2.5F, -6.75F, -6.25F, 5.0F, 13.0F, 13.0F, new CubeDeformation(0.0F)), PartPose.offset(20.0F, -6.25F, 13.75F));
+        PartDefinition Wheel2 = Frame.addOrReplaceChild("Wheel2", CubeListBuilder.create().texOffs(119, 101).addBox(-2.5F, -6.5F, -6.5F, 5.0F, 13.0F, 13.0F, new CubeDeformation(0.0F)), PartPose.offset(20.0F, -6.5F, 14.0F));
 
-        PartDefinition Wheel3 = Frame.addOrReplaceChild("Wheel3", CubeListBuilder.create().texOffs(56, 114).addBox(-2.5F, -6.75F, -6.25F, 5.0F, 13.0F, 13.0F, new CubeDeformation(0.0F)), PartPose.offset(-20.0F, -6.25F, -46.25F));
+        PartDefinition Wheel3 = Frame.addOrReplaceChild("Wheel3", CubeListBuilder.create().texOffs(56, 114).addBox(-2.5F, -6.5F, -6.5F, 5.0F, 13.0F, 13.0F, new CubeDeformation(0.0F)), PartPose.offset(-20.0F, -6.5F, -46.0F));
 
-        PartDefinition Wheel4 = Frame.addOrReplaceChild("Wheel4", CubeListBuilder.create().texOffs(92, 114).addBox(-2.5F, -6.75F, -6.25F, 5.0F, 13.0F, 13.0F, new CubeDeformation(0.0F)), PartPose.offset(-20.0F, -6.25F, 13.75F));
+        PartDefinition Wheel4 = Frame.addOrReplaceChild("Wheel4", CubeListBuilder.create().texOffs(92, 114).addBox(-2.5F, -6.5F, -6.5F, 5.0F, 13.0F, 13.0F, new CubeDeformation(0.0F)), PartPose.offset(-20.0F, -6.5F, 14.0F));
 
         PartDefinition sat = Frame.addOrReplaceChild("sat", CubeListBuilder.create(), PartPose.offset(8.645F, -49.3111F, -53.75F));
 
