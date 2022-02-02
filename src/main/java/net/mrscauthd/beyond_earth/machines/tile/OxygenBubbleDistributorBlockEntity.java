@@ -54,12 +54,6 @@ public class OxygenBubbleDistributorBlockEntity extends OxygenMakingBlockEntity 
 		return super.canActivated();
 	}
 
-//	@OnlyIn(Dist.CLIENT)
-//	@Override
-//	public double getMaxRenderDistanceSquared() {
-//		return 256.0D;
-//	}
-
 	@Override
 	public AABB getRenderBoundingBox() {
 		return new AABB(this.getBlockPos()).inflate(32, 32, 32);
@@ -118,8 +112,6 @@ public class OxygenBubbleDistributorBlockEntity extends OxygenMakingBlockEntity 
 		for (Player entity : players) {
 			entity.addEffect(new MobEffectInstance(ModInit.OXYGEN_EFFECT.get(), 2 * 24, 0, false, false));
 		}
-
-		System.out.println("test");
 
 		if (level instanceof ServerLevel) {
 			ServerLevel serverLevel = (ServerLevel) level;
