@@ -62,10 +62,10 @@ public class BeyondEarthMod {
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC, "beyond_earth-common.toml");
 
 		//MobInnet
-		ModInit.ENTITYS.register(bus);
+		ModInit.ENTITIES.register(bus);
 		ModInit.ITEMS.register(bus);
 		ModInit.BLOCKS.register(bus);
-		ModInit.TILE_ENTITYS.register(bus);
+		ModInit.TILE_ENTITIES.register(bus);
 		ModInit.SOUNDS.register(bus);
 		ModInit.SENSOR.register(bus);
 		ModInit.FLUIDS.register(bus);
