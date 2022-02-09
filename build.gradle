@@ -94,13 +94,14 @@ dependencies {
     implementation fg.deobf("slimeknights.mantle:Mantle:1.18.1-1.7.29")
     implementation fg.deobf("slimeknights.tconstruct:TConstruct:1.18.1-3.3.2.28")
 
-  /*
+
   //Mekanism
-  compile fg.deobf("mekanism:Mekanism:1.16.5-10.0.20.447")
-  runtimeOnly fg.deobf("mekanism:Mekanism:1.16.5-10.0.20.447:additions")
-  runtimeOnly fg.deobf("mekanism:Mekanism:1.16.5-10.0.20.447:generators")
-  runtimeOnly fg.deobf("mekanism:Mekanism:1.16.5-10.0.20.447:tools")
-  */
+  //compileOnly fg.deobf("mekanism:Mekanism:1.18.1-10.1.1")
+  //runtimeOnly fg.deobf("mekanism:Mekanism:1.18.1-10.1.1")
+  //runtimeOnly fg.deobf("mekanism:Mekanism:1.18.1-10.1.1:additions")
+  //runtimeOnly fg.deobf("mekanism:Mekanism:1.18.1-10.1.1:generators")
+  //runtimeOnly fg.deobf("mekanism:Mekanism:1.18.1-10.1.1:tools")
+
 }
 
 mixin {
