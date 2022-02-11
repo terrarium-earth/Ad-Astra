@@ -178,10 +178,10 @@ public class Events {
                 if (item1 instanceof VehicleItem || item2 instanceof VehicleItem) {
                     model.rightArm.xRot = 10;
                     model.leftArm.xRot = 10;
-                    model.rightArm.zRot = 0;
-                    model.leftArm.zRot = 0;
                     model.rightArm.yRot = 0;
                     model.leftArm.yRot = 0;
+                    model.rightArm.zRot = 0;
+                    model.leftArm.zRot = 0;
                 }
             }
         }
