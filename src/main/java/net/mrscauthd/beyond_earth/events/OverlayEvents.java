@@ -5,7 +5,6 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -226,13 +225,11 @@ public class OverlayEvents {
 
             Player entity = Minecraft.getInstance().player;
             Gui mc = Minecraft.getInstance().gui;
-            TextureManager manager = Minecraft.getInstance().textureManager;
             Level world = Minecraft.getInstance().level;
 
             startOverlaySettings();
 
             if (Methods.isRocket(entity.getVehicle()) || entity.getVehicle() instanceof LanderEntity) {
-                int width = event.getWindow().getGuiScaledWidth();
                 int high = event.getWindow().getGuiScaledHeight();
 
                 float yHeight = (float) entity.getY() / 5.3F;

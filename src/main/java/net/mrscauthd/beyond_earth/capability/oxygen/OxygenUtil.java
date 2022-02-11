@@ -73,11 +73,7 @@ public class OxygenUtil {
 	public static boolean fillSink(IItemHandlerModifiable itemHandler, int sinkItemSlot, IOxygenStorage source, int transfer) {
 		ItemStack sinkItemStack = itemHandler.getStackInSlot(sinkItemSlot);
 
-		if (fillSinkCapability(source, sinkItemStack, transfer) > 0) {
-			return true;
-		} else {
-			return false;
-		}
+		return fillSinkCapability(source, sinkItemStack, transfer) > 0;
 	}
 
 	public static int fillSinkCapability(IOxygenStorage source, ItemStack sinkItemStack, int transfer) {
@@ -88,11 +84,7 @@ public class OxygenUtil {
 	public static boolean drainSource(IItemHandlerModifiable itemHandler, int sourceItemSlot, IOxygenStorage sink, int transfer) {
 		ItemStack sourceItemStack = itemHandler.getStackInSlot(sourceItemSlot);
 
-		if (drainSourceCapability(sink, sourceItemStack, transfer) > 0) {
-			return true;
-		} else {
-			return false;
-		}
+		return drainSourceCapability(sink, sourceItemStack, transfer) > 0;
 	}
 
 	public static int drainSourceCapability(IOxygenStorage sink, ItemStack sourceItemStack, int transfer) {

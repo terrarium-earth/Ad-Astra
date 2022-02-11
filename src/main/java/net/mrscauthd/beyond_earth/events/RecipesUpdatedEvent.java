@@ -13,5 +13,4 @@ public class RecipesUpdatedEvent {
 	public static void onRecipesUpdated(net.minecraftforge.client.event.RecipesUpdatedEvent event) {
 		AlienTrade.registerTrades(event.getRecipeManager());
 	}
-
 }

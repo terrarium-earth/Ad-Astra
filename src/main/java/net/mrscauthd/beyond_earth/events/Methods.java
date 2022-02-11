@@ -52,12 +52,12 @@ import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.capability.oxygen.IOxygenStorage;
 import net.mrscauthd.beyond_earth.capability.oxygen.OxygenUtil;
+import net.mrscauthd.beyond_earth.config.Config;
 import net.mrscauthd.beyond_earth.entity.*;
 import net.mrscauthd.beyond_earth.events.forgeevents.LivingSetFireInHotPlanetEvent;
 import net.mrscauthd.beyond_earth.events.forgeevents.LivingSetVenusRainEvent;
 import net.mrscauthd.beyond_earth.gui.screens.planetselection.PlanetSelectionGui;
 import net.mrscauthd.beyond_earth.item.VehicleItem;
-import net.mrscauthd.beyond_earth.rendertype.TranslucentArmorRenderType;
 
 public class Methods {
 
@@ -90,44 +90,38 @@ public class Methods {
     }
 
     public static boolean netheriteSpaceSuitCheck(LivingEntity entity) {
-        Boolean item3 = checkArmor(entity, 3, ModInit.NETHERITE_OXYGEN_MASK.get());
-        Boolean item2 = checkArmor(entity, 2, ModInit.NETHERITE_SPACE_SUIT.get());
-        Boolean item1 = checkArmor(entity, 1, ModInit.NETHERITE_SPACE_PANTS.get());
-        Boolean item0 = checkArmor(entity, 0, ModInit.NETHERITE_SPACE_BOOTS.get());
+        if (!checkArmor(entity, 3, ModInit.NETHERITE_OXYGEN_MASK.get())) return false;
+        if (!checkArmor(entity, 2, ModInit.NETHERITE_SPACE_SUIT.get())) return false;
+        if (!checkArmor(entity, 1, ModInit.NETHERITE_SPACE_PANTS.get())) return false;
+        if (!checkArmor(entity, 0, ModInit.NETHERITE_SPACE_BOOTS.get())) return false;
 
-        if (item0 && item1 && item2 && item3) {
-            return true;
-        }
-        return false;
+        return true;
     }
 
     public static boolean spaceSuitCheck(LivingEntity entity) {
-        Boolean item3 = checkArmor(entity, 3, ModInit.OXYGEN_MASK.get());
-        Boolean item2 = checkArmor(entity, 2, ModInit.SPACE_SUIT.get());
-        Boolean item1 = checkArmor(entity, 1, ModInit.SPACE_PANTS.get());
-        Boolean item0 = checkArmor(entity, 0, ModInit.SPACE_BOOTS.get());
+        if (!checkArmor(entity, 3, ModInit.OXYGEN_MASK.get())) return false;
+        if (!checkArmor(entity, 2, ModInit.SPACE_SUIT.get())) return false;
+        if (!checkArmor(entity, 1, ModInit.SPACE_PANTS.get())) return false;
+        if (!checkArmor(entity, 0, ModInit.SPACE_BOOTS.get())) return false;
 
-        if (item0 && item1 && item2 && item3) {
-            return true;
-        }
-        return false;
+        return true;
     }
 
     public static boolean spaceSuitCheckBoth(LivingEntity entity) {
-        Boolean item3 = checkArmor(entity, 3, ModInit.OXYGEN_MASK.get());
-        Boolean item2 = checkArmor(entity, 2, ModInit.SPACE_SUIT.get());
-        Boolean item1 = checkArmor(entity, 1, ModInit.SPACE_PANTS.get());
-        Boolean item0 = checkArmor(entity, 0, ModInit.SPACE_BOOTS.get());
+        boolean item3 = checkArmor(entity, 3, ModInit.OXYGEN_MASK.get());
+        boolean item2 = checkArmor(entity, 2, ModInit.SPACE_SUIT.get());
+        boolean item1 = checkArmor(entity, 1, ModInit.SPACE_PANTS.get());
+        boolean item0 = checkArmor(entity, 0, ModInit.SPACE_BOOTS.get());
 
-        Boolean item3_2 = checkArmor(entity, 3, ModInit.NETHERITE_OXYGEN_MASK.get());
-        Boolean item2_2 = checkArmor(entity, 2, ModInit.NETHERITE_SPACE_SUIT.get());
-        Boolean item1_2 = checkArmor(entity, 1, ModInit.NETHERITE_SPACE_PANTS.get());
-        Boolean item0_2 = checkArmor(entity, 0, ModInit.NETHERITE_SPACE_BOOTS.get());
+        boolean item3_2 = checkArmor(entity, 3, ModInit.NETHERITE_OXYGEN_MASK.get());
+        boolean item2_2 = checkArmor(entity, 2, ModInit.NETHERITE_SPACE_SUIT.get());
+        boolean item1_2 = checkArmor(entity, 1, ModInit.NETHERITE_SPACE_PANTS.get());
+        boolean item0_2 = checkArmor(entity, 0, ModInit.NETHERITE_SPACE_BOOTS.get());
 
-        Boolean check3 = false;
-        Boolean check2 = false;
-        Boolean check1 = false;
-        Boolean check0 = false;
+        boolean check3 = false;
+        boolean check2 = false;
+        boolean check1 = false;
+        boolean check0 = false;
 
         if (item3 || item3_2) {
             check3 = true;
@@ -142,11 +136,7 @@ public class Methods {
             check0 = true;
         }
 
-        if (check0 && check1 && check2 && check3) {
-            return true;
-        }
-
-        return false;
+        return (check0 && check1 && check2 && check3);
     }
 
     public static boolean checkArmor(LivingEntity entity,int number, Item item) {
@@ -154,7 +144,7 @@ public class Methods {
     }
 
     public static boolean isSpaceWorld(Level world) {
-        if (Methods.isWorld(world, moon)
+        return Methods.isWorld(world, moon)
                 || Methods.isWorld(world, moon_orbit)
                 || Methods.isWorld(world, mars)
                 || Methods.isWorld(world, mars_orbit)
@@ -164,14 +154,11 @@ public class Methods {
                 || Methods.isWorld(world, venus_orbit)
                 || Methods.isWorld(world, glacio)
                 || Methods.isWorld(world, glacio_orbit)
-                || Methods.isWorld(world, overworld_orbit)) {
-            return true;
-        }
-        return false;
+                || Methods.isWorld(world, overworld_orbit);
     }
 
     public static boolean isSpaceWorldWithoutOxygen(Level world) {
-        if (Methods.isWorld(world, moon)
+        return Methods.isWorld(world, moon)
                 || Methods.isWorld(world, moon_orbit)
                 || Methods.isWorld(world, mars)
                 || Methods.isWorld(world, mars_orbit)
@@ -180,22 +167,16 @@ public class Methods {
                 || Methods.isWorld(world, venus)
                 || Methods.isWorld(world, venus_orbit)
                 || Methods.isWorld(world, glacio_orbit)
-                || Methods.isWorld(world, overworld_orbit)) {
-            return true;
-        }
-        return false;
+                || Methods.isWorld(world, overworld_orbit);
     }
 
     public static boolean isOrbitWorld(Level world) {
-        if (Methods.isWorld(world, overworld_orbit)
+        return Methods.isWorld(world, overworld_orbit)
                 || Methods.isWorld(world, moon_orbit)
                 || Methods.isWorld(world, mars_orbit)
                 || Methods.isWorld(world, mercury_orbit)
                 || Methods.isWorld(world, venus_orbit)
-                || Methods.isWorld(world, glacio_orbit)) {
-            return true;
-        }
-        return false;
+                || Methods.isWorld(world, glacio_orbit);
     }
 
     public static boolean isWorld(Level world, ResourceKey<Level> loc) {
@@ -207,10 +188,7 @@ public class Methods {
     }
 
     public static boolean isRocket(Entity entity) {
-        if (entity instanceof RocketTier1Entity || entity instanceof RocketTier2Entity || entity instanceof RocketTier3Entity || entity instanceof RocketTier4Entity) {
-            return true;
-        }
-        return false;
+        return entity instanceof RocketTier1Entity || entity instanceof RocketTier2Entity || entity instanceof RocketTier3Entity || entity instanceof RocketTier4Entity;
     }
 
     public static boolean AllVehiclesOr(Entity entity) {
@@ -424,7 +402,7 @@ public class Methods {
         }
     }
 
-    public static void teleportButton(Player player, ResourceKey<Level> planet, Boolean SpaceStation) {
+    public static void teleportButton(Player player, ResourceKey<Level> planet, boolean SpaceStation) {
         ItemStack itemStack = new ItemStack(Items.AIR, 1);
 
         if (player.getPersistentData().getString(BeyondEarthMod.MODID + ":rocket_type").equals("entity." + BeyondEarthMod.MODID + ".rocket_t1")) {

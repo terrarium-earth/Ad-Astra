@@ -6,7 +6,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.piglin.PiglinBrute;
 import net.minecraft.world.level.Level;
-import net.mrscauthd.beyond_earth.events.Config;
+import net.mrscauthd.beyond_earth.config.Config;
 
 public class PygroBruteEntity extends PiglinBrute {
     public PygroBruteEntity(EntityType<? extends PiglinBrute> p_35048_, Level p_35049_) {

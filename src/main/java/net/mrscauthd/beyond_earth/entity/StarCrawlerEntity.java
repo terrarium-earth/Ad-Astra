@@ -17,7 +17,7 @@ import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.projectile.SpectralArrow;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkHooks;
-import net.mrscauthd.beyond_earth.events.Config;
+import net.mrscauthd.beyond_earth.config.Config;
 
 import net.minecraftforge.registries.ForgeRegistries;
 

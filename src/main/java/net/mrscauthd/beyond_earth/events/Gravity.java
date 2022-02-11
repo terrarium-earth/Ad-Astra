@@ -45,19 +45,11 @@ public class Gravity {
     }
 
     public static boolean playerGravityCheck(Player player) {
-        if (!player.getAbilities().flying && !player.isFallFlying() && !player.isInWater() && !player.isInLava() && !player.isNoGravity() && !player.hasEffect(MobEffects.SLOW_FALLING) && !player.hasEffect(MobEffects.LEVITATION)) {
-            return true;
-        }
-
-        return false;
+        return !player.getAbilities().flying && !player.isFallFlying() && !player.isInWater() && !player.isInLava() && !player.isNoGravity() && !player.hasEffect(MobEffects.SLOW_FALLING) && !player.hasEffect(MobEffects.LEVITATION);
     }
 
     public static boolean livingGravityCheck(LivingEntity entity) {
-        if (!entity.isFallFlying() && !entity.isInWater() && !entity.isInLava() && !entity.isNoGravity() && !(entity instanceof Player) && !Methods.AllVehiclesOr(entity) && !entity.hasEffect(MobEffects.SLOW_FALLING) && !entity.hasEffect(MobEffects.LEVITATION)) {
-            return true;
-        }
-
-        return false;
+        return !entity.isFallFlying() && !entity.isInWater() && !entity.isInLava() && !entity.isNoGravity() && !(entity instanceof Player) && !Methods.AllVehiclesOr(entity) && !entity.hasEffect(MobEffects.SLOW_FALLING) && !entity.hasEffect(MobEffects.LEVITATION);
     }
 
     public static void gravityMath(GravityType type, LivingEntity entity, double gravity, float fallDistance) {
@@ -74,13 +66,7 @@ public class Gravity {
 	}
 
     public static boolean checkType(GravityType type, LivingEntity entity) {
-    	if (type == GravityType.PLAYER && playerGravityCheck((Player) entity)) {
-    		return true;
-    	} else if (type == GravityType.LIVING && livingGravityCheck(entity)) {
-    		return true;
-    	}
-
-    	return false;
+    	return (type == GravityType.PLAYER && playerGravityCheck((Player) entity)) || (type == GravityType.LIVING && livingGravityCheck(entity));
     }
 
     public static void fallDamage (LivingEntity entity, float fallDistance) {

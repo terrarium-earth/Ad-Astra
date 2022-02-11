@@ -52,7 +52,7 @@ public class WaterPump extends AbstractMachineBlock<WaterPumpBlockEntity> {
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         BlockState state = this.defaultBlockState();
 
-        if (this.useFacing() == true) {
+        if (this.useFacing()) {
             return state.setValue(FACING, context.getHorizontalDirection());
         } else {
             return state;

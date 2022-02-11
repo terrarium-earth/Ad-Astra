@@ -1,4 +1,4 @@
-package net.mrscauthd.beyond_earth.events;
+package net.mrscauthd.beyond_earth.config;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 

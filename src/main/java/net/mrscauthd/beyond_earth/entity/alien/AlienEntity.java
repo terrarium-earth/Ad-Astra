@@ -40,7 +40,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.entity.AlienZombieEntity;
-import net.mrscauthd.beyond_earth.events.Config;
+import net.mrscauthd.beyond_earth.config.Config;
 
 import javax.annotation.Nullable;
 import java.util.Optional;

@@ -19,36 +19,26 @@ public abstract class MixinItemGravity {
             if (Methods.isWorld(w.level, Methods.moon)) {
                 itemGravityMath(w,0.05);
             }
-
-            if (Methods.isWorld(w.level, Methods.mars)) {
+            else if (Methods.isWorld(w.level, Methods.mars)) {
                 itemGravityMath(w,0.06);
             }
-
-            if (Methods.isWorld(w.level, Methods.mercury)) {
+            else if (Methods.isWorld(w.level, Methods.mercury)) {
                 itemGravityMath(w,0.05);
             }
-
-            if (Methods.isWorld(w.level, Methods.venus)) {
+            else if (Methods.isWorld(w.level, Methods.venus)) {
                 itemGravityMath(w,0.06);
             }
-
-            if (Methods.isWorld(w.level, Methods.glacio)) {
+            else if (Methods.isWorld(w.level, Methods.glacio)) {
                 itemGravityMath(w,0.06);
             }
-
-            if (Methods.isOrbitWorld(w.level)) {
+            else if (Methods.isOrbitWorld(w.level)) {
                 itemGravityMath(w,0.05);
             }
         }
-
     }
 
     private static boolean GravityCheckItem(ItemEntity entity) {
-        if (!entity.isInWater() && !entity.isInLava() && !entity.isNoGravity()) {
-            return true;
-        }
-
-        return false;
+        return !entity.isInWater() && !entity.isInLava() && !entity.isNoGravity();
     }
 
     private static void itemGravityMath(ItemEntity entity, double gravity) {
@@ -58,5 +48,4 @@ public abstract class MixinItemGravity {
 
         entity.setDeltaMovement(entity.getDeltaMovement().x, entity.getDeltaMovement().y / 0.98 + 0.08 - gravity, entity.getDeltaMovement().z);
     }
-
 }

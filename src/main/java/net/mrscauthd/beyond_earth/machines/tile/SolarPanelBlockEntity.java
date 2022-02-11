@@ -52,7 +52,7 @@ public class SolarPanelBlockEntity extends GeneratorBlockEntity {
 	@Override
 	protected List<Direction> getEjectDirections() {
 		List<Direction> list = super.getEjectDirections();
-		list.addAll(Arrays.stream(Direction.values()).filter(d -> d != Direction.UP).collect(Collectors.toList()));
+		list.addAll(Arrays.stream(Direction.values()).filter(d -> d != Direction.UP).toList());
 		return list;
 	}
 }

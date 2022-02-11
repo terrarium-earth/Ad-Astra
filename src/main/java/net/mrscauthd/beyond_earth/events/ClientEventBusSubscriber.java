@@ -5,7 +5,6 @@ import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.PiglinRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.client.ClientRegistry;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -152,10 +151,11 @@ public class ClientEventBusSubscriber {
 
 	@SubscribeEvent
 	public static void registerParticlesFactory(ParticleFactoryRegisterEvent event) {
-		Minecraft.getInstance().particleEngine.register(ModInit.VENUS_RAIN_PARTICLE.get(), VenusRainParticle.ParticleFactory::new);
-		Minecraft.getInstance().particleEngine.register(ModInit.LARGE_FLAME_PARTICLE.get(), LargeFlameParticle.ParticleFactory::new);
-		Minecraft.getInstance().particleEngine.register(ModInit.LARGE_SMOKE_PARTICLE.get(), LargeSmokeParticle.ParticleFactory::new);
-		Minecraft.getInstance().particleEngine.register(ModInit.SMALL_FLAME_PARTICLE.get(), SmallFlameParticle.ParticleFactory::new);
-		Minecraft.getInstance().particleEngine.register(ModInit.SMALL_SMOKE_PARTICLE.get(), SmallSmokeParticle.ParticleFactory::new);
+		Minecraft mc = Minecraft.getInstance();
+		mc.particleEngine.register(ModInit.VENUS_RAIN_PARTICLE.get(), VenusRainParticle.ParticleFactory::new);
+		mc.particleEngine.register(ModInit.LARGE_FLAME_PARTICLE.get(), LargeFlameParticle.ParticleFactory::new);
+		mc.particleEngine.register(ModInit.LARGE_SMOKE_PARTICLE.get(), LargeSmokeParticle.ParticleFactory::new);
+		mc.particleEngine.register(ModInit.SMALL_FLAME_PARTICLE.get(), SmallFlameParticle.ParticleFactory::new);
+		mc.particleEngine.register(ModInit.SMALL_SMOKE_PARTICLE.get(), SmallSmokeParticle.ParticleFactory::new);
 	}
 }

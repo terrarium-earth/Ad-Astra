@@ -9,6 +9,7 @@ import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.capability.oxygen.IOxygenStorage;
 import net.mrscauthd.beyond_earth.capability.oxygen.OxygenUtil;
+import net.mrscauthd.beyond_earth.config.Config;
 
 public class OxygenSystem {
 

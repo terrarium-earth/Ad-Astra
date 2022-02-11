@@ -20,7 +20,7 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkHooks;
-import net.mrscauthd.beyond_earth.events.Config;
+import net.mrscauthd.beyond_earth.config.Config;
 
 public class MartianRaptor extends Monster {
 

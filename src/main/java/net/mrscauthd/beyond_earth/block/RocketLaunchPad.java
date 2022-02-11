@@ -1,5 +1,6 @@
 package net.mrscauthd.beyond_earth.block;
 
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -31,6 +32,36 @@ public class RocketLaunchPad extends Block implements SimpleWaterloggedBlock {
 
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final BooleanProperty STAGE = BlockStateProperties.LIT;
+
+    /** 3x3 */
+    private static final List<Pair<Integer, Integer>> x = new ArrayList<>(List.of(
+            Pair.of(0, 1),
+            Pair.of(1, 1),
+            Pair.of(1, 0),
+            Pair.of(-1, 0),
+            Pair.of(-1, -1),
+            Pair.of(0, -1),
+            Pair.of(1, -1),
+            Pair.of(-1, 1)
+    ));
+
+    /** 4x4 */
+    private static final List<Pair<Integer, Integer>> z = new ArrayList<>(List.of(
+            Pair.of(0,2),
+            Pair.of(0,-2),
+            Pair.of(2,0),
+            Pair.of(-2,0),
+            Pair.of(-2,1),
+            Pair.of(-2,-1),
+            Pair.of(2,1),
+            Pair.of(1,-2),
+            Pair.of(2,-2),
+            Pair.of(-2,-2),
+            Pair.of(-1,-1),
+            Pair.of(3,1),
+            Pair.of(1,2),
+            Pair.of(2,2)
+    ));
 
     public RocketLaunchPad(Properties properties) {
         super(properties);
@@ -86,56 +117,32 @@ public class RocketLaunchPad extends Block implements SimpleWaterloggedBlock {
 
     @Override
     public void tick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
-        List<Integer[]> x = new ArrayList<Integer[]>();
-        x.add(new Integer[]{0,1});
-        x.add(new Integer[]{1,1});
-        x.add(new Integer[]{1,0});
-        x.add(new Integer[]{-1,0});
-        x.add(new Integer[]{-1,-1});
-        x.add(new Integer[]{0,-1});
-        x.add(new Integer[]{1,-1});
-        x.add(new Integer[]{-1,1});
-
-        List<Integer[]> y = new ArrayList<Integer[]>();
-        y.add(new Integer[]{0,2});
-        y.add(new Integer[]{0,-2});
-        y.add(new Integer[]{2,0});
-        y.add(new Integer[]{-2,0});
-        y.add(new Integer[]{-2,1});
-        y.add(new Integer[]{-2,-1});
-        y.add(new Integer[]{2,1});
-        y.add(new Integer[]{1,-2});
-        y.add(new Integer[]{2,-2});
-        y.add(new Integer[]{-2,-2});
-        y.add(new Integer[]{-1,-1});
-        y.add(new Integer[]{3,1});
-        y.add(new Integer[]{1,2});
-        y.add(new Integer[]{2,2});
-
         boolean canEdit = true;
 
-        for (Integer[] value : x) {
-            BlockPos bp = new BlockPos(pos.getX()+value[0],pos.getY(),pos.getZ()+value[1]);
+        for (Pair<Integer, Integer> value : x) {
+            BlockPos bp = new BlockPos(pos.getX() + value.getFirst(), pos.getY(), pos.getZ() + value.getSecond());
 
             if (!(world.getBlockState(bp).getBlock() instanceof RocketLaunchPad && !world.getBlockState(bp).getValue(STAGE))) {
                 canEdit = false;
             }
         }
 
-        for (Integer[] val : y) {
-            BlockPos bp = new BlockPos(pos.getX()+val[0],pos.getY(),pos.getZ()+val[1]);
+        for (Pair<Integer, Integer> val : z) {
+            BlockPos bp = new BlockPos(pos.getX() + val.getFirst(), pos.getY(), pos.getZ() + val.getSecond());
 
-        if (!(!(world.getBlockState(bp).getBlock() instanceof RocketLaunchPad) || world.getBlockState(bp).getBlock() instanceof RocketLaunchPad && !world.getBlockState(bp).getValue(STAGE))) {
+            if (!(!(world.getBlockState(bp).getBlock() instanceof RocketLaunchPad) || world.getBlockState(bp).getBlock() instanceof RocketLaunchPad && !world.getBlockState(bp).getValue(STAGE))) {
                 canEdit = false;
             }
         }
 
         if (canEdit) {
-            world.setBlock(pos, state.setValue(STAGE, true), 2);
-            world.updateNeighbourForOutputSignal(pos, this);
-        } else if (state.getValue(STAGE)){
-            world.setBlock(pos, state.setValue(STAGE, false), 2);
-            world.updateNeighbourForOutputSignal(pos, this);
+            if (!state.getValue(STAGE)) {
+                world.setBlock(pos, state.setValue(STAGE, true), 2);
+            }
+        } else if (state.getValue(STAGE)) {
+            if (state.getValue(STAGE)) {
+                world.setBlock(pos, state.setValue(STAGE, false), 2);
+            }
         }
 
         world.scheduleTick(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), this, 1);

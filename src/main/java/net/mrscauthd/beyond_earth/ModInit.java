@@ -72,7 +72,7 @@ import net.mrscauthd.beyond_earth.crafting.RocketPart;
 import net.mrscauthd.beyond_earth.crafting.SpaceStationRecipeSerializer;
 import net.mrscauthd.beyond_earth.effects.OxygenEffect;
 import net.mrscauthd.beyond_earth.entity.*;
-import net.mrscauthd.beyond_earth.events.Config;
+import net.mrscauthd.beyond_earth.config.Config;
 import net.mrscauthd.beyond_earth.feature.MarsIceSpikeFeature;
 import net.mrscauthd.beyond_earth.feature.VenusDeltas;
 import net.mrscauthd.beyond_earth.flag.FlagTileEntity;
@@ -734,9 +734,8 @@ public class ModInit {
     private static void associateBiomeToConfiguredStructure(Map<StructureFeature<?>, HashMultimap<ConfiguredStructureFeature<?, ?>, ResourceKey<Biome>>> STStructureToMultiMap, ConfiguredStructureFeature<?, ?> configuredStructureFeature, ResourceKey<Biome> biomeRegistryKey) {
         STStructureToMultiMap.putIfAbsent(configuredStructureFeature.feature, HashMultimap.create());
         HashMultimap<ConfiguredStructureFeature<?, ?>, ResourceKey<Biome>> configuredStructureToBiomeMultiMap = STStructureToMultiMap.get(configuredStructureFeature.feature);
-        if (configuredStructureToBiomeMultiMap.containsValue(biomeRegistryKey)) {
-        }
-        else {
+
+        if (!configuredStructureToBiomeMultiMap.containsValue(biomeRegistryKey)) {
             configuredStructureToBiomeMultiMap.put(configuredStructureFeature, biomeRegistryKey);
         }
     }

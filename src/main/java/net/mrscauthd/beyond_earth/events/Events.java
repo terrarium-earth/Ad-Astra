@@ -160,11 +160,11 @@ public class Events {
             if (Methods.isRocket(player.getVehicle())) {
                 model.rightLeg.xRot = (float) Math.toRadians(0F);
                 model.leftLeg.xRot = (float) Math.toRadians(0F);
-                model.leftLeg.yRot = (float) Math.toRadians(3F);
+                model.rightLeg.yRot = (float) Math.toRadians(3F);
                 model.leftLeg.yRot = (float) Math.toRadians(3F);
                 // Arms
-                model.leftArm.xRot = -0.07f;
                 model.rightArm.xRot = -0.07f;
+                model.leftArm.xRot = -0.07f;
             }
 
             //Player Hold Vehicles Rotation

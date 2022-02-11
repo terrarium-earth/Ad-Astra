@@ -365,10 +365,8 @@ public class RoverEntity extends VehicleEntity {
                 pmovement = 0;
                 this.setSpeed(0f);
 
-                if (speed != 0) {
-                    if (speed > 0.02) {
-                        speed = speed - 0.02;
-                    }
+                if (speed != 0 && speed > 0.02) {
+                    speed = speed - 0.02;
                 }
             }
 

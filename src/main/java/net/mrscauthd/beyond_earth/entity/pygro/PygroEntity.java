@@ -15,7 +15,7 @@ import net.minecraft.world.entity.monster.piglin.Piglin;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkHooks;
 import net.mrscauthd.beyond_earth.ModInit;
-import net.mrscauthd.beyond_earth.events.Config;
+import net.mrscauthd.beyond_earth.config.Config;
 
 public class PygroEntity extends Piglin {
     protected static final ImmutableList<SensorType<? extends Sensor<? super Piglin>>> field_234405_b_ = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, SensorType.NEAREST_ITEMS, SensorType.HURT_BY, ModInit.PYGRO_SENSOR.get());
