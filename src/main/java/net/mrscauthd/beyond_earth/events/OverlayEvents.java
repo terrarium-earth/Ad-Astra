@@ -133,8 +133,8 @@ public class OverlayEvents {
                     timer = entity.getVehicle().getEntityData().get(RocketTier4Entity.START_TIMER);
                 }
 
-                final int width = event.getWindow().getGuiScaledWidth() / 2 - 31;
-                final int high = event.getWindow().getGuiScaledHeight() / 2 / 2;
+                int width = event.getWindow().getGuiScaledWidth() / 2 - 31;
+                int high = event.getWindow().getGuiScaledHeight() / 2 / 2;
 
                 Gui mc = Minecraft.getInstance().gui;
 
@@ -186,8 +186,8 @@ public class OverlayEvents {
         /**Oxygen Tank Overlay*/
         if (!event.isCancelable() && event.getOverlay() == ForgeIngameGui.HELMET_ELEMENT) {
 
-            final Player entity = Minecraft.getInstance().player;
-            final ItemStack chest = entity.getItemBySlot(EquipmentSlot.CHEST);
+            Player entity = Minecraft.getInstance().player;
+            ItemStack chest = entity.getItemBySlot(EquipmentSlot.CHEST);
             Item chestItem = chest.getItem();
 
             startOverlaySettings();
@@ -195,20 +195,20 @@ public class OverlayEvents {
             if (chestItem == ModInit.SPACE_SUIT.get() || chestItem == ModInit.NETHERITE_SPACE_SUIT.get()) {
 
                 IOxygenStorage oxygenStorage = chest.getCapability(CapabilityOxygen.OXYGEN).orElse(null);
-                final double oxygenStoredRatio = oxygenStorage != null ? oxygenStorage.getOxygenStoredRatio() : 0.0D;
+                double oxygenStoredRatio = oxygenStorage != null ? oxygenStorage.getOxygenStoredRatio() : 0.0D;
                 ResourceLocation empty = new ResourceLocation(BeyondEarthMod.MODID, "textures/overlay/oxygentankcheck_empty.png");
                 ResourceLocation full = new ResourceLocation(BeyondEarthMod.MODID, "textures/overlay/oxygentankcheck_full.png");
 
-                final int x = 5;
-                final int y = 5;
-                final int width = 62;
-                final int height = 52;
+                int x = 5;
+                int y = 5;
+                int width = 62;
+                int height = 52;
                 
                 GuiHelper.drawVerticalReverse(event.getMatrixStack(), x, y, width, height, empty, oxygenStoredRatio);
                 GuiHelper.drawVertical(event.getMatrixStack(), x, y, width, height, full, oxygenStoredRatio);
 
                 MutableComponent text = GaugeTextHelper.getPercentText(GaugeValueHelper.getOxygen(oxygenStorage)).build();
-                final int textWidth = Minecraft.getInstance().font.width(text);
+                int textWidth = Minecraft.getInstance().font.width(text);
                 Minecraft.getInstance().font.drawShadow(event.getMatrixStack(), text, (x + (width - textWidth) / 2), y + height + 3, 0xFFFFFF);
             }
 
@@ -225,7 +225,7 @@ public class OverlayEvents {
             startOverlaySettings();
 
             if (Methods.isRocket(entity.getVehicle()) || entity.getVehicle() instanceof LanderEntity) {
-                final int high = event.getWindow().getGuiScaledHeight();
+                int high = event.getWindow().getGuiScaledHeight();
 
                 float yHeight = (float) entity.getY() / 5.3F;
 
