@@ -3,7 +3,6 @@ package net.mrscauthd.beyond_earth.gui.screens.planetselection;
 import java.util.function.Supplier;
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -77,66 +76,54 @@ public class PlanetSelectionGui {
 			if (message.getInteger() == 0) {
 				defaultOptions(context.getSender());
 				Methods.teleportButton(context.getSender(), Methods.overworld, false);
-				context.getSender().setNoGravity(false);
 			}
 			if (message.getInteger() == 1) {
 				defaultOptions(context.getSender());
 				Methods.teleportButton(context.getSender(), Methods.moon, false);
-				context.getSender().setNoGravity(false);
 			}
 			if (message.getInteger() == 2) {
 				defaultOptions(context.getSender());
 				Methods.teleportButton(context.getSender(), Methods.mars, false);
-				context.getSender().setNoGravity(false);
 			}
 			if (message.getInteger() == 3) {
 				defaultOptions(context.getSender());
 				Methods.teleportButton(context.getSender(), Methods.mercury, false);
-				context.getSender().setNoGravity(false);
 			}
 			if (message.getInteger() == 4) {
 				defaultOptions(context.getSender());
 				Methods.teleportButton(context.getSender(), Methods.venus, false);
-				context.getSender().setNoGravity(false);
 			}
 			/** Proxima Centauri: */
 			if (message.getInteger() == 5) {
 				defaultOptions(context.getSender());
 				Methods.teleportButton(context.getSender(), Methods.glacio, false);
-				context.getSender().setNoGravity(false);
 			}
 
 			// Teleport Orbit Buttons
 			if (message.getInteger() == 6) {
 				defaultOptions(context.getSender());
 				Methods.teleportButton(context.getSender(), Methods.overworld_orbit, false);
-				context.getSender().setNoGravity(false);
 			}
 			if (message.getInteger() == 7) {
 				defaultOptions(context.getSender());
 				Methods.teleportButton(context.getSender(), Methods.moon_orbit, false);
-				context.getSender().setNoGravity(false);
 			}
 			if (message.getInteger() == 8) {
 				defaultOptions(context.getSender());
 				Methods.teleportButton(context.getSender(), Methods.mars_orbit, false);
-				context.getSender().setNoGravity(false);
 			}
 			if (message.getInteger() == 9) {
 				defaultOptions(context.getSender());
 				Methods.teleportButton(context.getSender(), Methods.mercury_orbit, false);
-				context.getSender().setNoGravity(false);
 			}
 			if (message.getInteger() == 10) {
 				defaultOptions(context.getSender());
 				Methods.teleportButton(context.getSender(), Methods.venus_orbit, false);
-				context.getSender().setNoGravity(false);
 			}
 			/** Proxima Centauri: */
 			if (message.getInteger() == 11) {
 				defaultOptions(context.getSender());
 				Methods.teleportButton(context.getSender(), Methods.glacio_orbit, false);
-				context.getSender().setNoGravity(false);
 			}
 
 			// Create Space Station Buttons
@@ -144,45 +131,40 @@ public class PlanetSelectionGui {
 				defaultOptions(context.getSender());
 				deleteItems(context.getSender());
 				Methods.teleportButton(context.getSender(), Methods.overworld_orbit, true);
-				context.getSender().setNoGravity(false);
 			}
 			if (message.getInteger() == 13) {
 				defaultOptions(context.getSender());
 				deleteItems(context.getSender());
 				Methods.teleportButton(context.getSender(), Methods.moon_orbit, true);
-				context.getSender().setNoGravity(false);
 			}
 			if (message.getInteger() == 14) {
 				defaultOptions(context.getSender());
 				deleteItems(context.getSender());
 				Methods.teleportButton(context.getSender(), Methods.mars_orbit, true);
-				context.getSender().setNoGravity(false);
 			}
 			if (message.getInteger() == 15) {
 				defaultOptions(context.getSender());
 				deleteItems(context.getSender());
 				Methods.teleportButton(context.getSender(), Methods.mercury_orbit, true);
-				context.getSender().setNoGravity(false);
 			}
 			if (message.getInteger() == 16) {
 				defaultOptions(context.getSender());
 				deleteItems(context.getSender());
 				Methods.teleportButton(context.getSender(), Methods.venus_orbit, true);
-				context.getSender().setNoGravity(false);
 			}
 			/** Proxima Centauri: */
 			if (message.getInteger() == 17) {
 				defaultOptions(context.getSender());
 				deleteItems(context.getSender());
 				Methods.teleportButton(context.getSender(), Methods.glacio_orbit, true);
-				context.getSender().setNoGravity(false);
 			}
 
 			context.setPacketHandled(true);
 		}
 	}
 
-	public static void defaultOptions(ServerPlayer player) {
+	public static void defaultOptions(Player player) {
+		player.setNoGravity(false);
 		Methods.holdSpaceMessage(player);
 		player.closeContainer();
 	}
