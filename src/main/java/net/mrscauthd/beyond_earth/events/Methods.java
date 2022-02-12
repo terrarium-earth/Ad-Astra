@@ -59,6 +59,8 @@ import net.mrscauthd.beyond_earth.events.forgeevents.LivingSetVenusRainEvent;
 import net.mrscauthd.beyond_earth.gui.screens.planetselection.PlanetSelectionGui;
 import net.mrscauthd.beyond_earth.item.VehicleItem;
 
+import java.util.Set;
+
 public class Methods {
 
     public static final ResourceKey<Level> moon = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "moon"));
@@ -73,6 +75,40 @@ public class Methods {
     public static final ResourceKey<Level> glacio_orbit = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "glacio_orbit"));
     public static final ResourceKey<Level> overworld = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation("overworld"));
     public static final ResourceKey<Level> overworld_orbit = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID,"overworld_orbit"));
+
+    public static final Set<ResourceKey<Level>> worldsWithoutRain = Set.of(
+            moon,
+            moon_orbit,
+            mars,
+            mars_orbit,
+            mercury,
+            mercury_orbit,
+            venus_orbit,
+            glacio_orbit,
+            overworld_orbit
+    );
+
+    private static final Set<ResourceKey<Level>> spaceWorldsWithoutOxygen = Set.of(
+            moon,
+            moon_orbit,
+            mars,
+            mars_orbit,
+            mercury,
+            mercury_orbit,
+            venus,
+            venus_orbit,
+            glacio_orbit,
+            overworld_orbit
+    );
+
+    private static final Set<ResourceKey<Level>> orbitWorlds = Set.of(
+            overworld_orbit,
+            moon_orbit,
+            mars_orbit,
+            mercury_orbit,
+            venus_orbit,
+            glacio_orbit
+    );
 
     public static void worldTeleport(Player entity, ResourceKey<Level> planet, double high) {
         ServerLevel nextLevel = entity.getServer().getLevel(planet);
@@ -140,39 +176,15 @@ public class Methods {
     }
 
     public static boolean isSpaceWorld(Level world) {
-        return Methods.isWorld(world, moon)
-                || Methods.isWorld(world, moon_orbit)
-                || Methods.isWorld(world, mars)
-                || Methods.isWorld(world, mars_orbit)
-                || Methods.isWorld(world, mercury)
-                || Methods.isWorld(world, mercury_orbit)
-                || Methods.isWorld(world, venus)
-                || Methods.isWorld(world, venus_orbit)
-                || Methods.isWorld(world, glacio)
-                || Methods.isWorld(world, glacio_orbit)
-                || Methods.isWorld(world, overworld_orbit);
+        return spaceWorldsWithoutOxygen.contains(world.dimension()) || Methods.isWorld(world, glacio);
     }
 
     public static boolean isSpaceWorldWithoutOxygen(Level world) {
-        return Methods.isWorld(world, moon)
-                || Methods.isWorld(world, moon_orbit)
-                || Methods.isWorld(world, mars)
-                || Methods.isWorld(world, mars_orbit)
-                || Methods.isWorld(world, mercury)
-                || Methods.isWorld(world, mercury_orbit)
-                || Methods.isWorld(world, venus)
-                || Methods.isWorld(world, venus_orbit)
-                || Methods.isWorld(world, glacio_orbit)
-                || Methods.isWorld(world, overworld_orbit);
+        return spaceWorldsWithoutOxygen.contains(world.dimension());
     }
 
     public static boolean isOrbitWorld(Level world) {
-        return Methods.isWorld(world, overworld_orbit)
-                || Methods.isWorld(world, moon_orbit)
-                || Methods.isWorld(world, mars_orbit)
-                || Methods.isWorld(world, mercury_orbit)
-                || Methods.isWorld(world, venus_orbit)
-                || Methods.isWorld(world, glacio_orbit);
+        return orbitWorlds.contains(world.dimension());
     }
 
     public static boolean isWorld(Level world, ResourceKey<Level> loc) {
@@ -404,13 +416,13 @@ public class Methods {
         if (player.getPersistentData().getString(BeyondEarthMod.MODID + ":rocket_type").equals("entity." + BeyondEarthMod.MODID + ".rocket_t1")) {
             itemStack = new ItemStack(ModInit.TIER_1_ROCKET_ITEM.get(),1);
         }
-        if (player.getPersistentData().getString(BeyondEarthMod.MODID + ":rocket_type").equals("entity." + BeyondEarthMod.MODID + ".rocket_t2")) {
+        else if (player.getPersistentData().getString(BeyondEarthMod.MODID + ":rocket_type").equals("entity." + BeyondEarthMod.MODID + ".rocket_t2")) {
             itemStack = new ItemStack(ModInit.TIER_2_ROCKET_ITEM.get(),1);
         }
-        if (player.getPersistentData().getString(BeyondEarthMod.MODID + ":rocket_type").equals("entity." + BeyondEarthMod.MODID + ".rocket_t3")) {
+        else if (player.getPersistentData().getString(BeyondEarthMod.MODID + ":rocket_type").equals("entity." + BeyondEarthMod.MODID + ".rocket_t3")) {
             itemStack = new ItemStack(ModInit.TIER_3_ROCKET_ITEM.get(),1);
         }
-        if (player.getPersistentData().getString(BeyondEarthMod.MODID + ":rocket_type").equals("entity." + BeyondEarthMod.MODID + ".rocket_t4")) {
+        else if (player.getPersistentData().getString(BeyondEarthMod.MODID + ":rocket_type").equals("entity." + BeyondEarthMod.MODID + ".rocket_t4")) {
             itemStack = new ItemStack(ModInit.TIER_4_ROCKET_ITEM.get(),1);
         }
 
@@ -421,19 +433,19 @@ public class Methods {
         if (Methods.isWorld(world, Methods.overworld_orbit)) {
             Methods.landerTeleport(player, Methods.overworld);
         }
-        if (Methods.isWorld(world, Methods.moon_orbit)) {
+        else if (Methods.isWorld(world, Methods.moon_orbit)) {
             Methods.landerTeleport(player, Methods.moon);
         }
-        if (Methods.isWorld(world, Methods.mars_orbit)) {
+        else if (Methods.isWorld(world, Methods.mars_orbit)) {
             Methods.landerTeleport(player, Methods.mars);
         }
-        if (Methods.isWorld(world, Methods.glacio_orbit)) {
+        else if (Methods.isWorld(world, Methods.glacio_orbit)) {
             Methods.landerTeleport(player, Methods.glacio);
         }
-        if (Methods.isWorld(world, Methods.mercury_orbit)) {
+        else if (Methods.isWorld(world, Methods.mercury_orbit)) {
             Methods.landerTeleport(player, Methods.mercury);
         }
-        if (Methods.isWorld(world, Methods.venus_orbit)) {
+        else if (Methods.isWorld(world, Methods.venus_orbit)) {
             Methods.landerTeleport(player, Methods.venus);
         }
     }
@@ -444,24 +456,19 @@ public class Methods {
         if (world2 == Methods.overworld_orbit) {
             Methods.worldTeleport(player, Methods.overworld, 450);
         }
-
-        if (world2 == Methods.moon_orbit) {
+        else if (world2 == Methods.moon_orbit) {
             Methods.worldTeleport(player, Methods.moon, 450);
         }
-
-        if (world2 == Methods.mars_orbit) {
+        else if (world2 == Methods.mars_orbit) {
             Methods.worldTeleport(player, Methods.mars, 450);
         }
-
-        if (world2 == Methods.mercury_orbit) {
+        else if (world2 == Methods.mercury_orbit) {
             Methods.worldTeleport(player, Methods.mercury, 450);
         }
-
-        if (world2 == Methods.venus_orbit) {
+        else if (world2 == Methods.venus_orbit) {
             Methods.worldTeleport(player, Methods.venus, 450);
         }
-
-        if (world2 == Methods.glacio_orbit) {
+        else if (world2 == Methods.glacio_orbit) {
             Methods.worldTeleport(player, Methods.glacio, 450);
         }
     }
@@ -542,20 +549,16 @@ public class Methods {
                 if (useanim == UseAnim.BLOCK) {
                     return HumanoidModel.ArmPose.BLOCK;
                 }
-
-                if (useanim == UseAnim.BOW) {
+                else if (useanim == UseAnim.BOW) {
                     return HumanoidModel.ArmPose.BOW_AND_ARROW;
                 }
-
-                if (useanim == UseAnim.SPEAR) {
+                else if (useanim == UseAnim.SPEAR) {
                     return HumanoidModel.ArmPose.THROW_SPEAR;
                 }
-
-                if (useanim == UseAnim.CROSSBOW && p_117796_ == p_117795_.getUsedItemHand()) {
+                else if (useanim == UseAnim.CROSSBOW && p_117796_ == p_117795_.getUsedItemHand()) {
                     return HumanoidModel.ArmPose.CROSSBOW_CHARGE;
                 }
-
-                if (useanim == UseAnim.SPYGLASS) {
+                else if (useanim == UseAnim.SPYGLASS) {
                     return HumanoidModel.ArmPose.SPYGLASS;
                 }
             } else if (!p_117795_.swinging && itemstack.is(Items.CROSSBOW) && CrossbowItem.isCharged(itemstack)) {
