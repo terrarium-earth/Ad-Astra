@@ -158,12 +158,12 @@ public class Events {
 
             //Player Rocket Sit Rotations
             if (Methods.isRocket(player.getVehicle())) {
-                model.rightLeg.xRot = (float) Math.toRadians(0F);
-                model.leftLeg.xRot = (float) Math.toRadians(0F);
-                model.rightLeg.yRot = (float) Math.toRadians(0F);
-                model.leftLeg.yRot = (float) Math.toRadians(0F);
-                model.rightLeg.zRot = (float) Math.toRadians(0F);
-                model.leftLeg.zRot = (float) Math.toRadians(0F);
+                model.rightLeg.xRot = 0F;
+                model.leftLeg.xRot = 0F;
+                model.rightLeg.yRot = 0F;
+                model.leftLeg.yRot = 0F;
+                model.rightLeg.zRot = 0F;
+                model.leftLeg.zRot = 0F;
 
                 // Arms
                 model.rightArm.xRot = -0.07f;

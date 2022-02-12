@@ -18,30 +18,25 @@ public class Gravity {
         if (Methods.isWorld(world, Methods.moon)) {
             gravityMath(type, entity, moon, -2.5f);
         }
-
-        if (Methods.isWorld(world, Methods.mars)) {
+        else if (Methods.isWorld(world, Methods.mars)) {
             gravityMath(type, entity, mars, -2.0f);
         }
-
-        if (Methods.isWorld(world, Methods.glacio)) {
+        else if (Methods.isWorld(world, Methods.glacio)) {
             gravityMath(type, entity, mars, -2.0f);
         }
-
-        if (Methods.isWorld(world, Methods.mercury)) {
+        else if (Methods.isWorld(world, Methods.mercury)) {
             gravityMath(type, entity, mercury, -2.5f);
         }
-
-        if (Methods.isWorld(world, Methods.venus)) {
+        else if (Methods.isWorld(world, Methods.venus)) {
             gravityMath(type, entity, venus, -2.0f);
         }
-
-        if (Methods.isOrbitWorld(world)) {
+        else if (Methods.isOrbitWorld(world)) {
             gravityMath(type, entity, orbit, -2.5f);
         }
     }
 
     public enum GravityType {
-        PLAYER,LIVING
+        PLAYER, LIVING
     }
 
     public static boolean playerGravityCheck(Player player) {
@@ -49,7 +44,7 @@ public class Gravity {
     }
 
     public static boolean livingGravityCheck(LivingEntity entity) {
-        return !entity.isFallFlying() && !entity.isInWater() && !entity.isInLava() && !entity.isNoGravity() && !(entity instanceof Player) && !Methods.AllVehiclesOr(entity) && !entity.hasEffect(MobEffects.SLOW_FALLING) && !entity.hasEffect(MobEffects.LEVITATION);
+        return !(entity instanceof Player) && !entity.isFallFlying() && !entity.isInWater() && !entity.isInLava() && !entity.isNoGravity() && !Methods.AllVehiclesOr(entity) && !entity.hasEffect(MobEffects.SLOW_FALLING) && !entity.hasEffect(MobEffects.LEVITATION);
     }
 
     public static void gravityMath(GravityType type, LivingEntity entity, double gravity, float fallDistance) {

@@ -109,37 +109,33 @@ public class Methods {
 
     public static boolean spaceSuitCheckBoth(LivingEntity entity) {
         boolean item3 = checkArmor(entity, 3, ModInit.OXYGEN_MASK.get());
+        boolean item3b = checkArmor(entity, 3, ModInit.NETHERITE_OXYGEN_MASK.get());
+        if (!item3 && !item3b) {
+            return false;
+        }
+
         boolean item2 = checkArmor(entity, 2, ModInit.SPACE_SUIT.get());
+        boolean item2b = checkArmor(entity, 2, ModInit.NETHERITE_SPACE_SUIT.get());
+        if (!item2 && !item2b) {
+            return false;
+        }
+
         boolean item1 = checkArmor(entity, 1, ModInit.SPACE_PANTS.get());
+        boolean item1b = checkArmor(entity, 1, ModInit.NETHERITE_SPACE_PANTS.get());
+        if (!item1 && !item1b) {
+            return false;
+        }
+
         boolean item0 = checkArmor(entity, 0, ModInit.SPACE_BOOTS.get());
-
-        boolean item3_2 = checkArmor(entity, 3, ModInit.NETHERITE_OXYGEN_MASK.get());
-        boolean item2_2 = checkArmor(entity, 2, ModInit.NETHERITE_SPACE_SUIT.get());
-        boolean item1_2 = checkArmor(entity, 1, ModInit.NETHERITE_SPACE_PANTS.get());
-        boolean item0_2 = checkArmor(entity, 0, ModInit.NETHERITE_SPACE_BOOTS.get());
-
-        boolean check3 = false;
-        boolean check2 = false;
-        boolean check1 = false;
-        boolean check0 = false;
-
-        if (item3 || item3_2) {
-            check3 = true;
-        }
-        if (item2 || item2_2) {
-            check2 = true;
-        }
-        if (item1 || item1_2) {
-            check1 = true;
-        }
-        if (item0 || item0_2) {
-            check0 = true;
+        boolean item0b = checkArmor(entity, 0, ModInit.NETHERITE_SPACE_BOOTS.get());
+        if (!item0 && !item0b) {
+            return false;
         }
 
-        return (check0 && check1 && check2 && check3);
+        return true;
     }
 
-    public static boolean checkArmor(LivingEntity entity,int number, Item item) {
+    public static boolean checkArmor(LivingEntity entity, int number, Item item) {
         return entity.getItemBySlot(EquipmentSlot.byTypeAndIndex(EquipmentSlot.Type.ARMOR, number)).getItem() == item;
     }
 
