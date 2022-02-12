@@ -35,21 +35,20 @@ import net.mrscauthd.beyond_earth.gui.helper.GuiHelper;
 public class OverlayEvents {
 
     public static boolean check = false;
-    public static double counter = 0;
+    public static float counter = 0;
 
     @SubscribeEvent
     public static void clientTick(TickEvent.ClientTickEvent event) {
         if (event.phase == TickEvent.Phase.END) {
-            if (!check) {
-                counter = counter - 0.10;
-                if (counter < 0.2) {
-                    check = true;
-                }
-            }
             if (check) {
-                counter = counter + 0.10;
+                counter = counter + 0.10F;
                 if (counter > 1) {
                     check = false;
+                }
+            } else {
+                counter = counter - 0.10F;
+                if (counter < 0.2) {
+                    check = true;
                 }
             }
         }
@@ -93,7 +92,7 @@ public class OverlayEvents {
             if (entity.getVehicle() instanceof LanderEntity && !entity.getVehicle().isOnGround() && !entity.isEyeInFluid(FluidTags.WATER)) {
                 RenderSystem.setShader(GameRenderer::getPositionTexShader);
 
-                RenderSystem.setShaderColor((float) counter, (float) counter, (float) counter, (float) counter);
+                RenderSystem.setShaderColor(counter, counter, counter, counter);
 
                 RenderSystem.setShaderTexture(0, new ResourceLocation(BeyondEarthMod.MODID, "textures/overlay/warning.png"));
                 Minecraft.getInstance().gui.blit(event.getMatrixStack(), 0, 0, 0, 0, event.getWindow().getGuiScaledWidth(), event.getWindow().getGuiScaledHeight(), event.getWindow().getGuiScaledWidth(), event.getWindow().getGuiScaledHeight());
@@ -104,9 +103,8 @@ public class OverlayEvents {
             if (entity.getVehicle() instanceof LanderEntity && !entity.getVehicle().isOnGround() && !entity.isEyeInFluid(FluidTags.WATER)) {
 
                 double speed = Math.round(100.0 * (entity.getVehicle()).getDeltaMovement().y()) / 100.0;
-                double speedcheck = speed;
                 
-                Component message = new TranslatableComponent("message." + BeyondEarthMod.MODID + ".speed", speedcheck);
+                Component message = new TranslatableComponent("message." + BeyondEarthMod.MODID + ".speed", speed);
                 Minecraft.getInstance().font.draw(event.getMatrixStack(), message, event.getWindow().getGuiScaledWidth() / 2 - 29, event.getWindow().getGuiScaledHeight() / 2 / 2.3f, -3407872);
             }
 
@@ -125,16 +123,13 @@ public class OverlayEvents {
                 if (entity.getVehicle() instanceof RocketTier1Entity) {
                     timer = entity.getVehicle().getEntityData().get(RocketTier1Entity.START_TIMER);
                 }
-
-                if (entity.getVehicle() instanceof RocketTier2Entity) {
+                else if (entity.getVehicle() instanceof RocketTier2Entity) {
                     timer = entity.getVehicle().getEntityData().get(RocketTier2Entity.START_TIMER);
                 }
-
-                if (entity.getVehicle() instanceof RocketTier3Entity) {
+                else if (entity.getVehicle() instanceof RocketTier3Entity) {
                     timer = entity.getVehicle().getEntityData().get(RocketTier3Entity.START_TIMER);
                 }
-
-                if (entity.getVehicle() instanceof RocketTier4Entity) {
+                else if (entity.getVehicle() instanceof RocketTier4Entity) {
                     timer = entity.getVehicle().getEntityData().get(RocketTier4Entity.START_TIMER);
                 }
 
@@ -147,39 +142,39 @@ public class OverlayEvents {
                     RenderSystem.setShaderTexture(0, new ResourceLocation(BeyondEarthMod.MODID, "textures/timer/timer10.png"));
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
-                if (timer > 20 && timer < 40) {
+                else if (timer > 20 && timer < 40) {
                     RenderSystem.setShaderTexture(0, new ResourceLocation(BeyondEarthMod.MODID, "textures/timer/timer9.png"));
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
-                if (timer > 40 && timer < 60) {
+                else if (timer > 40 && timer < 60) {
                     RenderSystem.setShaderTexture(0, new ResourceLocation(BeyondEarthMod.MODID, "textures/timer/timer8.png"));
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
-                if (timer > 60 && timer < 80) {
+                else if (timer > 60 && timer < 80) {
                     RenderSystem.setShaderTexture(0, new ResourceLocation(BeyondEarthMod.MODID, "textures/timer/timer7.png"));
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
-                if (timer > 80 && timer < 100) {
+                else if (timer > 80 && timer < 100) {
                     RenderSystem.setShaderTexture(0, new ResourceLocation(BeyondEarthMod.MODID, "textures/timer/timer6.png"));
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
-                if (timer > 100 && timer < 120) {
+                else if (timer > 100 && timer < 120) {
                     RenderSystem.setShaderTexture(0, new ResourceLocation(BeyondEarthMod.MODID, "textures/timer/timer5.png"));
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
-                if (timer > 120 && timer < 140) {
+                else if (timer > 120 && timer < 140) {
                     RenderSystem.setShaderTexture(0, new ResourceLocation(BeyondEarthMod.MODID, "textures/timer/timer4.png"));
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
-                if (timer > 140 && timer < 160) {
+                else if (timer > 140 && timer < 160) {
                     RenderSystem.setShaderTexture(0, new ResourceLocation(BeyondEarthMod.MODID, "textures/timer/timer3.png"));
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
-                if (timer > 160 && timer < 180) {
+                else if (timer > 160 && timer < 180) {
                     RenderSystem.setShaderTexture(0, new ResourceLocation(BeyondEarthMod.MODID, "textures/timer/timer2.png"));
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
-                if (timer > 180 && timer < 200) {
+                else if (timer > 180 && timer < 200) {
                     RenderSystem.setShaderTexture(0, new ResourceLocation(BeyondEarthMod.MODID, "textures/timer/timer1.png"));
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
@@ -237,8 +232,7 @@ public class OverlayEvents {
                 if (yHeight < 0) {
                     yHeight = 0;
                 }
-
-                if (yHeight > 113) {
+                else if (yHeight > 113) {
                     yHeight = 113;
                 }
 
