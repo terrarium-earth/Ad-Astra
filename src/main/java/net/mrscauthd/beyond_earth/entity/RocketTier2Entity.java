@@ -307,6 +307,9 @@ public class RocketTier2Entity extends VehicleEntity {
 			if (y > 600 && !this.getPassengers().isEmpty()) {
 				Entity pass = this.getPassengers().get(0);
 
+				if (pass instanceof Player && ((Player) pass).containerMenu != null) {
+					((Player) pass).closeContainer();
+				}
 				pass.getPersistentData().putBoolean(BeyondEarthMod.MODID + ":planet_selection_gui_open", true);
 				pass.getPersistentData().putString(BeyondEarthMod.MODID + ":rocket_type", this.getType().toString());
 				pass.getPersistentData().putString(BeyondEarthMod.MODID + ":slot0", this.inventory.getStackInSlot(0).getItem().getRegistryName().toString());
