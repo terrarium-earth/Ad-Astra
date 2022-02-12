@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.LanternBlock;
@@ -24,49 +25,45 @@ public class CoalTorchEvents {
     public static void onBlockPlace(BlockEvent event) {
         Level world = (Level) event.getWorld();
 
-        double x = event.getPos().getX();
-        double y = event.getPos().getY();
-        double z = event.getPos().getZ();
+        final double x = event.getPos().getX();
+        final double y = event.getPos().getY();
+        final double z = event.getPos().getZ();
 
-        BlockPos pos = new BlockPos(x,y,z);
+        final BlockPos pos = new BlockPos(x, y, z);
 
         if (Methods.isSpaceWorldWithoutOxygen(world)) {
 
+            final BlockState blockState = world.getBlockState(pos);
+            final Block block = blockState.getBlock();
+
             //Remove Fire
-            if (world.getBlockState(pos).getBlock() == Blocks.FIRE.defaultBlockState().getBlock()) {
+            if (block == Blocks.FIRE.defaultBlockState().getBlock()) {
                 world.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
             }
-
-            if (world.getBlockState(pos).getBlock() == Blocks.WALL_TORCH) {
+            else if (block == Blocks.WALL_TORCH) {
                 //Facing
-                BlockState bs = world.getBlockState(pos);
-                DirectionProperty property = (DirectionProperty) bs.getBlock().getStateDefinition().getProperty("facing");
+                DirectionProperty property = (DirectionProperty) blockState.getBlock().getStateDefinition().getProperty("facing");
 
                 //Place Coal Torch Block with Dr
-                world.setBlock(pos, ModInit.WALL_COAL_TORCH_BLOCK.get().defaultBlockState().setValue(property,bs.getValue(property)), 3);
+                world.setBlock(pos, ModInit.WALL_COAL_TORCH_BLOCK.get().defaultBlockState().setValue(property,blockState.getValue(property)), 3);
 
                 play_fire_sounds_delete(pos, world);
             }
-
-            if (world.getBlockState(pos).getBlock() == Blocks.TORCH) {
+            else if (block == Blocks.TORCH) {
                 world.setBlock(pos, ModInit.COAL_TORCH_BLOCK.get().defaultBlockState(), 3);
 
                 play_fire_sounds_delete(pos, world);
             }
-
-            if (world.getBlockState(pos).getBlock() == Blocks.LANTERN && !world.getBlockState(pos).getValue(LanternBlock.HANGING)) {
-                world.setBlock(pos, ModInit.COAL_LANTERN_BLOCK.get().defaultBlockState(), 3);
-
+            else if (block == Blocks.LANTERN) {
+                final boolean isHanging = blockState.getValue(LanternBlock.HANGING);
+                if (isHanging) {
+                    world.setBlock(pos, ModInit.COAL_LANTERN_BLOCK.get().defaultBlockState().setValue(CoalLanternBlock.HANGING, true), 3);
+                } else {
+                    world.setBlock(pos, ModInit.COAL_LANTERN_BLOCK.get().defaultBlockState(), 3);
+                }
                 play_fire_sounds_delete(pos, world);
             }
-
-            if (world.getBlockState(pos).getBlock() == Blocks.LANTERN && world.getBlockState(pos).getValue(LanternBlock.HANGING)) {
-                world.setBlock(pos, ModInit.COAL_LANTERN_BLOCK.get().defaultBlockState().setValue(CoalLanternBlock.HANGING, true), 3);
-
-                play_fire_sounds_delete(pos, world);
-            }
-
-            if (world.getBlockState(pos).getBlock() == Blocks.CAMPFIRE && world.getBlockState(pos).getValue(CampfireBlock.LIT)) {
+            else if (block == Blocks.CAMPFIRE && blockState.getValue(CampfireBlock.LIT)) {
                 //Get Block State
                 BooleanProperty property = (BooleanProperty) world.getBlockState(pos).getBlock().getStateDefinition().getProperty("lit");
 
