@@ -220,20 +220,10 @@ public class Events {
         if (event.phase == TickEvent.Phase.END) {
             Level world = event.world;
 
-            if (Methods.isWorld(world, Methods.moon)
-             || Methods.isWorld(world, Methods.moon_orbit)
-             || Methods.isWorld(world, Methods.mars)
-             || Methods.isWorld(world, Methods.mars_orbit)
-             || Methods.isWorld(world, Methods.mercury)
-             || Methods.isWorld(world, Methods.mercury_orbit)
-             || Methods.isWorld(world, Methods.venus_orbit)
-             || Methods.isWorld(world, Methods.glacio_orbit)
-             || Methods.isWorld(world, Methods.overworld_orbit)) {
+            if (Methods.worldsWithoutRain.contains(world.dimension())) {
                 world.thunderLevel = 0;
                 world.rainLevel = 0;
-            }
-
-            if (Methods.isWorld(world, Methods.venus)) {
+            } else if (Methods.isWorld(world, Methods.venus)) {
                 world.thunderLevel = 0;
             }
         }
