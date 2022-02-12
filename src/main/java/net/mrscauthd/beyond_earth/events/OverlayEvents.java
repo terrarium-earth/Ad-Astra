@@ -34,8 +34,27 @@ import net.mrscauthd.beyond_earth.gui.helper.GuiHelper;
 @Mod.EventBusSubscriber(modid = BeyondEarthMod.MODID, value = Dist.CLIENT)
 public class OverlayEvents {
 
-    public static boolean check = false;
-    public static float counter = 0;
+    private static boolean check = false;
+    private static float counter = 0;
+
+    private static final ResourceLocation moon = new ResourceLocation(BeyondEarthMod.MODID, "textures/planet_bar/rocket_y_main_moon.png");
+    private static final ResourceLocation mars = new ResourceLocation(BeyondEarthMod.MODID, "textures/planet_bar/rocket_y_main_mars.png");
+    private static final ResourceLocation mercury = new ResourceLocation(BeyondEarthMod.MODID, "textures/planet_bar/rocket_y_main_mercury.png");
+    private static final ResourceLocation venus = new ResourceLocation(BeyondEarthMod.MODID, "textures/planet_bar/rocket_y_main_venus.png");
+    private static final ResourceLocation glacio = new ResourceLocation(BeyondEarthMod.MODID, "textures/planet_bar/rocket_y_main_glacio.png");
+    private static final ResourceLocation earth = new ResourceLocation(BeyondEarthMod.MODID, "textures/planet_bar/rocket_y_main_earth.png");
+    private static final ResourceLocation orbit = new ResourceLocation(BeyondEarthMod.MODID, "textures/planet_bar/rocket_y_main_orbit.png");
+
+    private static final ResourceLocation timerN1 = new ResourceLocation(BeyondEarthMod.MODID, "textures/timer/timer1.png");
+    private static final ResourceLocation timerN2 = new ResourceLocation(BeyondEarthMod.MODID, "textures/timer/timer2.png");
+    private static final ResourceLocation timerN3 = new ResourceLocation(BeyondEarthMod.MODID, "textures/timer/timer3.png");
+    private static final ResourceLocation timerN4 = new ResourceLocation(BeyondEarthMod.MODID, "textures/timer/timer4.png");
+    private static final ResourceLocation timerN5 = new ResourceLocation(BeyondEarthMod.MODID, "textures/timer/timer5.png");
+    private static final ResourceLocation timerN6 = new ResourceLocation(BeyondEarthMod.MODID, "textures/timer/timer6.png");
+    private static final ResourceLocation timerN7 = new ResourceLocation(BeyondEarthMod.MODID, "textures/timer/timer7.png");
+    private static final ResourceLocation timerN8 = new ResourceLocation(BeyondEarthMod.MODID, "textures/timer/timer8.png");
+    private static final ResourceLocation timerN9 = new ResourceLocation(BeyondEarthMod.MODID, "textures/timer/timer9.png");
+    private static final ResourceLocation timerN10 = new ResourceLocation(BeyondEarthMod.MODID, "textures/timer/timer10.png");
 
     @SubscribeEvent
     public static void clientTick(TickEvent.ClientTickEvent event) {
@@ -74,8 +93,9 @@ public class OverlayEvents {
     public static void overlayRegistry(RenderGameOverlayEvent.PreLayer event) {
         /**Disable Food Overlay*/
         if (event.getOverlay() == ForgeIngameGui.MOUNT_HEALTH_ELEMENT) {
-            Player entity = Minecraft.getInstance().player;
-            if (Methods.isVehicle(entity.getVehicle())) {
+            Player player = Minecraft.getInstance().player;
+
+            if (Methods.isVehicle(player.getVehicle())) {
                 event.setCanceled(true);
             }
         }
@@ -83,13 +103,14 @@ public class OverlayEvents {
 
     @SubscribeEvent(priority = EventPriority.HIGH)
     public static void Overlay(RenderGameOverlayEvent.PostLayer event) {
+
         /**Lander Warning Overlay*/
         if (!event.isCancelable() && event.getOverlay() == ForgeIngameGui.HELMET_ELEMENT) {
-            Player entity = Minecraft.getInstance().player;
+            Player player = Minecraft.getInstance().player;
 
             startOverlaySettings();
 
-            if (entity.getVehicle() instanceof LanderEntity && !entity.getVehicle().isOnGround() && !entity.isEyeInFluid(FluidTags.WATER)) {
+            if (player.getVehicle() instanceof LanderEntity && !player.getVehicle().isOnGround() && !player.isEyeInFluid(FluidTags.WATER)) {
                 RenderSystem.setShader(GameRenderer::getPositionTexShader);
 
                 RenderSystem.setShaderColor(counter, counter, counter, counter);
@@ -100,9 +121,9 @@ public class OverlayEvents {
 
             RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
-            if (entity.getVehicle() instanceof LanderEntity && !entity.getVehicle().isOnGround() && !entity.isEyeInFluid(FluidTags.WATER)) {
+            if (player.getVehicle() instanceof LanderEntity && !player.getVehicle().isOnGround() && !player.isEyeInFluid(FluidTags.WATER)) {
 
-                double speed = Math.round(100.0 * (entity.getVehicle()).getDeltaMovement().y()) / 100.0;
+                double speed = Math.round(100.0 * (player.getVehicle()).getDeltaMovement().y()) / 100.0;
                 
                 Component message = new TranslatableComponent("message." + BeyondEarthMod.MODID + ".speed", speed);
                 Minecraft.getInstance().font.draw(event.getMatrixStack(), message, event.getWindow().getGuiScaledWidth() / 2 - 29, event.getWindow().getGuiScaledHeight() / 2 / 2.3f, -3407872);
@@ -113,24 +134,24 @@ public class OverlayEvents {
 
         /**Rocket Timer*/
         if (!event.isCancelable() && event.getOverlay() == ForgeIngameGui.HELMET_ELEMENT) {
-            Player entity = Minecraft.getInstance().player;
+            Player player = Minecraft.getInstance().player;
 
             startOverlaySettings();
 
-            if (Methods.isRocket(entity.getVehicle())) {
+            if (Methods.isRocket(player.getVehicle())) {
                 int timer = 0;
 
-                if (entity.getVehicle() instanceof RocketTier1Entity) {
-                    timer = entity.getVehicle().getEntityData().get(RocketTier1Entity.START_TIMER);
+                if (player.getVehicle() instanceof RocketTier1Entity) {
+                    timer = player.getVehicle().getEntityData().get(RocketTier1Entity.START_TIMER);
                 }
-                else if (entity.getVehicle() instanceof RocketTier2Entity) {
-                    timer = entity.getVehicle().getEntityData().get(RocketTier2Entity.START_TIMER);
+                else if (player.getVehicle() instanceof RocketTier2Entity) {
+                    timer = player.getVehicle().getEntityData().get(RocketTier2Entity.START_TIMER);
                 }
-                else if (entity.getVehicle() instanceof RocketTier3Entity) {
-                    timer = entity.getVehicle().getEntityData().get(RocketTier3Entity.START_TIMER);
+                else if (player.getVehicle() instanceof RocketTier3Entity) {
+                    timer = player.getVehicle().getEntityData().get(RocketTier3Entity.START_TIMER);
                 }
-                else if (entity.getVehicle() instanceof RocketTier4Entity) {
-                    timer = entity.getVehicle().getEntityData().get(RocketTier4Entity.START_TIMER);
+                else if (player.getVehicle() instanceof RocketTier4Entity) {
+                    timer = player.getVehicle().getEntityData().get(RocketTier4Entity.START_TIMER);
                 }
 
                 int width = event.getWindow().getGuiScaledWidth() / 2 - 31;
@@ -139,46 +160,45 @@ public class OverlayEvents {
                 Gui mc = Minecraft.getInstance().gui;
 
                 if (timer > -1 && timer < 20) {
-                    RenderSystem.setShaderTexture(0, new ResourceLocation(BeyondEarthMod.MODID, "textures/timer/timer10.png"));
+                    RenderSystem.setShaderTexture(0, timerN10);
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
                 else if (timer > 20 && timer < 40) {
-                    RenderSystem.setShaderTexture(0, new ResourceLocation(BeyondEarthMod.MODID, "textures/timer/timer9.png"));
+                    RenderSystem.setShaderTexture(0, timerN9);
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
                 else if (timer > 40 && timer < 60) {
-                    RenderSystem.setShaderTexture(0, new ResourceLocation(BeyondEarthMod.MODID, "textures/timer/timer8.png"));
+                    RenderSystem.setShaderTexture(0, timerN8);
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
                 else if (timer > 60 && timer < 80) {
-                    RenderSystem.setShaderTexture(0, new ResourceLocation(BeyondEarthMod.MODID, "textures/timer/timer7.png"));
+                    RenderSystem.setShaderTexture(0, timerN7);
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
                 else if (timer > 80 && timer < 100) {
-                    RenderSystem.setShaderTexture(0, new ResourceLocation(BeyondEarthMod.MODID, "textures/timer/timer6.png"));
+                    RenderSystem.setShaderTexture(0, timerN6);
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
                 else if (timer > 100 && timer < 120) {
-                    RenderSystem.setShaderTexture(0, new ResourceLocation(BeyondEarthMod.MODID, "textures/timer/timer5.png"));
+                    RenderSystem.setShaderTexture(0, timerN5);
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
                 else if (timer > 120 && timer < 140) {
-                    RenderSystem.setShaderTexture(0, new ResourceLocation(BeyondEarthMod.MODID, "textures/timer/timer4.png"));
+                    RenderSystem.setShaderTexture(0, timerN4);
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
                 else if (timer > 140 && timer < 160) {
-                    RenderSystem.setShaderTexture(0, new ResourceLocation(BeyondEarthMod.MODID, "textures/timer/timer3.png"));
+                    RenderSystem.setShaderTexture(0, timerN3);
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
                 else if (timer > 160 && timer < 180) {
-                    RenderSystem.setShaderTexture(0, new ResourceLocation(BeyondEarthMod.MODID, "textures/timer/timer2.png"));
+                    RenderSystem.setShaderTexture(0, timerN2);
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
                 else if (timer > 180 && timer < 200) {
-                    RenderSystem.setShaderTexture(0, new ResourceLocation(BeyondEarthMod.MODID, "textures/timer/timer1.png"));
+                    RenderSystem.setShaderTexture(0, timerN1);
                     mc.blit(event.getMatrixStack(), width, high, 0, 0, 60, 38, 60, 38);
                 }
-
             }
             stopOverlaySettings();
         }
@@ -186,8 +206,8 @@ public class OverlayEvents {
         /**Oxygen Tank Overlay*/
         if (!event.isCancelable() && event.getOverlay() == ForgeIngameGui.HELMET_ELEMENT) {
 
-            Player entity = Minecraft.getInstance().player;
-            ItemStack chest = entity.getItemBySlot(EquipmentSlot.CHEST);
+            Player player = Minecraft.getInstance().player;
+            ItemStack chest = player.getItemBySlot(EquipmentSlot.CHEST);
             Item chestItem = chest.getItem();
 
             startOverlaySettings();
@@ -218,16 +238,16 @@ public class OverlayEvents {
         /**ROCKET HIGH OVERLAY*/
         if (!event.isCancelable() && event.getOverlay() == ForgeIngameGui.HELMET_ELEMENT) {
 
-            Player entity = Minecraft.getInstance().player;
+            Player player = Minecraft.getInstance().player;
             Gui mc = Minecraft.getInstance().gui;
             Level world = Minecraft.getInstance().level;
 
             startOverlaySettings();
 
-            if (Methods.isRocket(entity.getVehicle()) || entity.getVehicle() instanceof LanderEntity) {
+            if (Methods.isRocket(player.getVehicle()) || player.getVehicle() instanceof LanderEntity) {
                 int high = event.getWindow().getGuiScaledHeight();
 
-                float yHeight = (float) entity.getY() / 5.3F;
+                float yHeight = (float) player.getY() / 5.3F;
 
                 if (yHeight < 0) {
                     yHeight = 0;
@@ -239,25 +259,25 @@ public class OverlayEvents {
                 ResourceLocation planet;
 
                 if (Methods.isWorld(world, Methods.moon)) {
-                    planet = new ResourceLocation(BeyondEarthMod.MODID, "textures/planet_bar/rocket_y_main_moon.png");
+                    planet = moon;
 
                 } else if (Methods.isWorld(world, Methods.mars)) {
-                    planet = new ResourceLocation(BeyondEarthMod.MODID, "textures/planet_bar/rocket_y_main_mars.png");
+                    planet = mars;
 
                 } else if (Methods.isWorld(world, Methods.mercury)) {
-                    planet = new ResourceLocation(BeyondEarthMod.MODID, "textures/planet_bar/rocket_y_main_mercury.png");
+                    planet = mercury;
 
                 } else if (Methods.isWorld(world, Methods.venus)) {
-                    planet = new ResourceLocation(BeyondEarthMod.MODID, "textures/planet_bar/rocket_y_main_venus.png");
+                    planet = venus;
 
                 } else if (Methods.isWorld(world, Methods.glacio)) {
-                    planet = new ResourceLocation(BeyondEarthMod.MODID, "textures/planet_bar/rocket_y_main_glacio.png");
+                    planet = glacio;
 
                 } else if (Methods.isOrbitWorld(world)) {
-                    planet = new ResourceLocation(BeyondEarthMod.MODID, "textures/planet_bar/rocket_y_main_orbit.png");
+                    planet = orbit;
 
                 } else {
-                    planet = new ResourceLocation(BeyondEarthMod.MODID, "textures/planet_bar/rocket_y_main_earth.png");
+                    planet = earth;
                 }
 
                 RenderSystem.setShaderTexture(0, planet);

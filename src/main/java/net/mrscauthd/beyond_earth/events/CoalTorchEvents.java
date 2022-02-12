@@ -36,47 +36,52 @@ public class CoalTorchEvents {
             BlockState blockState = world.getBlockState(pos);
             Block block = blockState.getBlock();
 
-            //Remove Fire
+            /** FIRE */
             if (block == Blocks.FIRE.defaultBlockState().getBlock()) {
                 world.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
             }
-            else if (block == Blocks.WALL_TORCH) {
-                //Facing
+
+            /** WALL TORCH */
+            if (block == Blocks.WALL_TORCH) {
                 DirectionProperty property = (DirectionProperty) blockState.getBlock().getStateDefinition().getProperty("facing");
 
-                //Place Coal Torch Block with Dr
-                world.setBlock(pos, ModInit.WALL_COAL_TORCH_BLOCK.get().defaultBlockState().setValue(property,blockState.getValue(property)), 3);
+                world.setBlock(pos, ModInit.WALL_COAL_TORCH_BLOCK.get().defaultBlockState().setValue(property, blockState.getValue(property)), 3);
 
-                play_fire_sounds_delete(pos, world);
+                playFireExtinguish(pos, world);
             }
-            else if (block == Blocks.TORCH) {
+
+            /** TORCH */
+            if (block == Blocks.TORCH) {
                 world.setBlock(pos, ModInit.COAL_TORCH_BLOCK.get().defaultBlockState(), 3);
 
-                play_fire_sounds_delete(pos, world);
+                playFireExtinguish(pos, world);
             }
-            else if (block == Blocks.LANTERN) {
+
+            /** LANTERN */
+            if (block == Blocks.LANTERN) {
                 boolean isHanging = blockState.getValue(LanternBlock.HANGING);
+
                 if (isHanging) {
                     world.setBlock(pos, ModInit.COAL_LANTERN_BLOCK.get().defaultBlockState().setValue(CoalLanternBlock.HANGING, true), 3);
                 } else {
                     world.setBlock(pos, ModInit.COAL_LANTERN_BLOCK.get().defaultBlockState(), 3);
                 }
-                play_fire_sounds_delete(pos, world);
+
+                playFireExtinguish(pos, world);
             }
-            else if (block == Blocks.CAMPFIRE && blockState.getValue(CampfireBlock.LIT)) {
-                //Get Block State
+
+            /** CAMPFIRE */
+            if (block == Blocks.CAMPFIRE && blockState.getValue(CampfireBlock.LIT)) {
                 BooleanProperty property = (BooleanProperty) world.getBlockState(pos).getBlock().getStateDefinition().getProperty("lit");
 
-                //Set Block State
                 world.setBlock(pos, world.getBlockState(pos).setValue(property, false), 3);
 
-                play_fire_sounds_delete(pos, world);
+                playFireExtinguish(pos, world);
             }
-
         }
     }
 
-    public static void play_fire_sounds_delete(BlockPos pos, Level world) {
+    public static void playFireExtinguish(BlockPos pos, Level world) {
         world.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 1, 1);
     }
 }
