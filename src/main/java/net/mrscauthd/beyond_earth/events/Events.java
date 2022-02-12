@@ -89,7 +89,7 @@ public class Events {
 
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
-    public static void CameraPos(EntityViewRenderEvent.CameraSetup event) {
+    public static void cameraPos(EntityViewRenderEvent.CameraSetup event) {
         Entity ridding = event.getCamera().getEntity().getVehicle();
 
         if (Methods.isRocket(ridding) || ridding instanceof LanderEntity) {
@@ -189,7 +189,7 @@ public class Events {
 
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
-    public static void ItemRender(RenderHandItemEvent.Pre event) {
+    public static void itemRender(RenderHandItemEvent.Pre event) {
         if (event.getLivingEntity() instanceof Player) {
             Player player = (Player) event.getLivingEntity();
 
@@ -244,7 +244,7 @@ public class Events {
     }
 
     @SubscribeEvent
-    public static void FishingBobberTick(ProjectileImpactEvent event) {
+    public static void fishingProjectile(ProjectileImpactEvent event) {
         if (event.getRayTraceResult().getType() == HitResult.Type.ENTITY) {
             Entity entity = ((EntityHitResult) event.getRayTraceResult()).getEntity();
             if (Methods.isVehicle(entity)) {
@@ -255,7 +255,7 @@ public class Events {
 
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
-    public static void SpaceSounds(PlaySoundEvent event) {
+    public static void spaceSounds(PlaySoundEvent event) {
         if (event.getSound() != null) {
             if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.level != null && Methods.checkSound(event.getSound().getSource()) && Methods.isSpaceWorldWithoutOxygen(Minecraft.getInstance().player.level)) {
 
