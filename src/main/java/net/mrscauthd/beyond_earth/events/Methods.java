@@ -179,7 +179,7 @@ public class Methods {
         return world.dimension() == loc;
     }
 
-    public static void OxygenDamage(LivingEntity entity) {
+    public static void oxygenDamage(LivingEntity entity) {
         entity.hurt(ModInit.DAMAGE_SOURCE_OXYGEN, 1.0F);
     }
 
@@ -187,15 +187,15 @@ public class Methods {
         return entity instanceof RocketTier1Entity || entity instanceof RocketTier2Entity || entity instanceof RocketTier3Entity || entity instanceof RocketTier4Entity;
     }
 
-    public static boolean AllVehiclesOr(Entity entity) {
+    public static boolean isVehicle(Entity entity) {
         return entity instanceof VehicleEntity;
     }
 
-    public static void RocketSounds(Entity entity, Level world) {
+    public static void rocketSounds(Entity entity, Level world) {
         world.playSound(null, entity, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation(BeyondEarthMod.MODID,"rocket_fly")), SoundSource.NEUTRAL,1,1);
     }
 
-    public static void DropRocket(Player player) {
+    public static void dropRocket(Player player) {
         Item item1 = player.getMainHandItem().getItem();
         Item item2 = player.getOffhandItem().getItem();
 
@@ -213,7 +213,7 @@ public class Methods {
     }
 
     /**If a entity should not get Fire add it to the Tag "venus_fire"*/
-    public static void PlanetFire(LivingEntity entity, ResourceKey<Level> planet1, ResourceKey<Level> planet2) {
+    public static void planetFire(LivingEntity entity, ResourceKey<Level> planet1, ResourceKey<Level> planet2) {
         Level level = entity.level;
 
         if (Methods.isWorld(level, planet1) || Methods.isWorld(level, planet2)) {
@@ -228,7 +228,7 @@ public class Methods {
     }
 
     /**If a entity should not get Damage add it to the Tag "venus_rain"*/
-    public static void VenusRain(LivingEntity entity, ResourceKey<Level> planet) {
+    public static void venusRain(LivingEntity entity, ResourceKey<Level> planet) {
         if (!Methods.isWorld(entity.level, planet)) {
             return;
         }
@@ -251,7 +251,7 @@ public class Methods {
     }
 
     /**If a entity should get oxygen damage add it to the tag "oxygen" (don't add the Player, he has a own oxygen system)*/
-    public static void EntityOxygen(LivingEntity entity, Level world) {
+    public static void entityOxygen(LivingEntity entity, Level world) {
         if (Config.ENTITY_OXYGEN_SYSTEM.get() && Methods.isSpaceWorldWithoutOxygen(world) && tagCheck(entity, BeyondEarthMod.MODID + ":entities/oxygen")) {
 
             if (!entity.hasEffect(ModInit.OXYGEN_EFFECT.get())) {
@@ -261,7 +261,7 @@ public class Methods {
                 if (entity.getPersistentData().getDouble(BeyondEarthMod.MODID + ":oxygen_tick") > 15) {
 
                     if(!world.isClientSide) {
-                        Methods.OxygenDamage(entity);
+                        Methods.oxygenDamage(entity);
                     }
 
                     entity.getPersistentData().putDouble(BeyondEarthMod.MODID + ":oxygen_tick", 0);

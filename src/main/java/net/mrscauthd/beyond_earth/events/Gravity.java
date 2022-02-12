@@ -44,7 +44,7 @@ public class Gravity {
     }
 
     public static boolean livingGravityCheck(LivingEntity entity) {
-        return !(entity instanceof Player) && !entity.isFallFlying() && !entity.isInWater() && !entity.isInLava() && !entity.isNoGravity() && !Methods.AllVehiclesOr(entity) && !entity.hasEffect(MobEffects.SLOW_FALLING) && !entity.hasEffect(MobEffects.LEVITATION);
+        return !(entity instanceof Player) && !entity.isFallFlying() && !entity.isInWater() && !entity.isInLava() && !entity.isNoGravity() && !Methods.isVehicle(entity) && !entity.hasEffect(MobEffects.SLOW_FALLING) && !entity.hasEffect(MobEffects.LEVITATION);
     }
 
     public static void gravityMath(GravityType type, LivingEntity entity, double gravity, float fallDistance) {

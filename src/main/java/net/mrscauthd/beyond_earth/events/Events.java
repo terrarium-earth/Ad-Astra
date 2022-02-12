@@ -60,7 +60,7 @@ public class Events {
             Gravity.Gravity(player, Gravity.GravityType.PLAYER, world);
 
             //Drop Off Hand Item
-            Methods.DropRocket(player);
+            Methods.dropRocket(player);
 
             //Player orbit Fall Teleport
             if (player.getY() < 1 && !(player.getVehicle() instanceof LanderEntity)) {
@@ -75,16 +75,16 @@ public class Events {
         Level world = entity.level;
 
         //Entity Oxygen System
-        Methods.EntityOxygen(entity,world);
+        Methods.entityOxygen(entity,world);
 
         //Gravity Methode Call
         Gravity.Gravity(entity, Gravity.GravityType.LIVING, world);
 
         //Venus Rain
-        Methods.VenusRain(entity, Methods.venus);
+        Methods.venusRain(entity, Methods.venus);
 
         //Venus Fire
-        Methods.PlanetFire(entity, Methods.venus, Methods.mercury);
+        Methods.planetFire(entity, Methods.venus, Methods.mercury);
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -257,7 +257,7 @@ public class Events {
     public static void FishingBobberTick(ProjectileImpactEvent event) {
         if (event.getRayTraceResult().getType() == HitResult.Type.ENTITY) {
             Entity entity = ((EntityHitResult) event.getRayTraceResult()).getEntity();
-            if (Methods.AllVehiclesOr(entity)) {
+            if (Methods.isVehicle(entity)) {
                 event.setCanceled(true);
             }
         }

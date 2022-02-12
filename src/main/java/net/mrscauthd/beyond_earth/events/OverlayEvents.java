@@ -76,7 +76,7 @@ public class OverlayEvents {
         /**Disable Food Overlay*/
         if (event.getOverlay() == ForgeIngameGui.MOUNT_HEALTH_ELEMENT) {
             Player entity = Minecraft.getInstance().player;
-            if (Methods.AllVehiclesOr(entity.getVehicle())) {
+            if (Methods.isVehicle(entity.getVehicle())) {
                 event.setCanceled(true);
             }
         }

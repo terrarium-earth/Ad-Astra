@@ -18,7 +18,7 @@ public class OxygenSystem {
         if (Config.PLAYER_OXYGEN_SYSTEM.get() && Methods.isSpaceWorldWithoutOxygen(world) && !entity.isSpectator() && !entity.getAbilities().instabuild) {
 
             if (entity.getAirSupply() < 1) {
-                Methods.OxygenDamage(entity);
+                Methods.oxygenDamage(entity);
             }
 
             if (Methods.spaceSuitCheckBoth(entity) && !entity.hasEffect(ModInit.OXYGEN_EFFECT.get())) {
