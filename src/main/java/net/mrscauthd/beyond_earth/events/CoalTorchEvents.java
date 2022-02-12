@@ -25,16 +25,16 @@ public class CoalTorchEvents {
     public static void onBlockPlace(BlockEvent event) {
         Level world = (Level) event.getWorld();
 
-        final double x = event.getPos().getX();
-        final double y = event.getPos().getY();
-        final double z = event.getPos().getZ();
+        double x = event.getPos().getX();
+        double y = event.getPos().getY();
+        double z = event.getPos().getZ();
 
-        final BlockPos pos = new BlockPos(x, y, z);
+        BlockPos pos = new BlockPos(x, y, z);
 
         if (Methods.isSpaceWorldWithoutOxygen(world)) {
 
-            final BlockState blockState = world.getBlockState(pos);
-            final Block block = blockState.getBlock();
+            BlockState blockState = world.getBlockState(pos);
+            Block block = blockState.getBlock();
 
             //Remove Fire
             if (block == Blocks.FIRE.defaultBlockState().getBlock()) {
@@ -55,7 +55,7 @@ public class CoalTorchEvents {
                 play_fire_sounds_delete(pos, world);
             }
             else if (block == Blocks.LANTERN) {
-                final boolean isHanging = blockState.getValue(LanternBlock.HANGING);
+                boolean isHanging = blockState.getValue(LanternBlock.HANGING);
                 if (isHanging) {
                     world.setBlock(pos, ModInit.COAL_LANTERN_BLOCK.get().defaultBlockState().setValue(CoalLanternBlock.HANGING, true), 3);
                 } else {
