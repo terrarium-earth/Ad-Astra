@@ -104,6 +104,20 @@ public class Methods {
             overworld_orbit
     );
 
+    private static final Set<ResourceKey<Level>> spaceWorlds = Set.of(
+            moon,
+            moon_orbit,
+            mars,
+            mars_orbit,
+            mercury,
+            mercury_orbit,
+            venus,
+            venus_orbit,
+            glacio,
+            glacio_orbit,
+            overworld_orbit
+    );
+
     private static final Set<ResourceKey<Level>> orbitWorlds = Set.of(
             overworld_orbit,
             moon_orbit,
@@ -179,7 +193,7 @@ public class Methods {
     }
 
     public static boolean isSpaceWorld(Level world) {
-        return spaceWorldsWithoutOxygen.contains(world.dimension()) || Methods.isWorld(world, glacio);
+        return spaceWorlds.contains(world.dimension());
     }
 
     public static boolean isSpaceWorldWithoutOxygen(Level world) {

@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.client.ClientRegistry;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
+import net.minecraftforge.client.gui.OverlayRegistry;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -57,6 +58,7 @@ import net.mrscauthd.beyond_earth.gui.screens.rocket.RocketGuiWindow;
 import net.mrscauthd.beyond_earth.gui.screens.rover.RoverGuiWindow;
 import net.mrscauthd.beyond_earth.gui.screens.solarpanel.SolarPanelGuiWindow;
 import net.mrscauthd.beyond_earth.gui.screens.waterpump.WaterPumpGuiWindow;
+import net.mrscauthd.beyond_earth.overlay.Overlays;
 import net.mrscauthd.beyond_earth.particle.*;
 import net.mrscauthd.beyond_earth.entity.renderer.alien.AlienRenderer;
 import org.lwjgl.glfw.GLFW;
@@ -147,6 +149,12 @@ public class ClientEventBusSubscriber {
 		ItemBlockRenderTypes.setRenderLayer(ModInit.NASA_WORKBENCH_BLOCK.get(), RenderType.cutout());
 
 		ItemBlockRenderTypes.setRenderLayer(ModInit.WATER_PUMP_BLOCK.get(), RenderType.cutout());
+
+		//OVERLAY
+		OverlayRegistry.registerOverlayTop("warning", Overlays.WARNING);
+		OverlayRegistry.registerOverlayTop("rocket_timer", Overlays.ROCKET_TIMER);
+		OverlayRegistry.registerOverlayTop("oxygen_tank", Overlays.OXYGEN_TANK);
+		OverlayRegistry.registerOverlayTop("rocket_height", Overlays.ROCKET_HEIGHT);
 	}
 
 	@SubscribeEvent
