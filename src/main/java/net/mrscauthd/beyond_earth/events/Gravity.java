@@ -52,7 +52,7 @@ public class Gravity {
     		return;
     	}
 
-    	if (MinecraftForge.EVENT_BUS.post(new LivingGravityEvent(entity))) {
+    	if (MinecraftForge.EVENT_BUS.post(new LivingGravityEvent(entity, gravity, fallDistance, type))) {
     		return;
     	}
 

@@ -85,7 +85,8 @@ public class Events {
         Methods.venusRain(entity, Methods.venus);
 
         //Venus Fire
-        Methods.planetFire(entity, Methods.venus, Methods.mercury);
+        Methods.planetFire(entity, Methods.venus);
+        Methods.planetFire(entity, Methods.mercury);
     }
 
     @OnlyIn(Dist.CLIENT)

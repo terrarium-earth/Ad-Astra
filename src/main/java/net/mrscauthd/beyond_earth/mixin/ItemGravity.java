@@ -43,7 +43,7 @@ public abstract class ItemGravity {
     }
 
     private static void itemGravityMath(ItemEntity entity, double gravity) {
-        if (MinecraftForge.EVENT_BUS.post(new ItemGravityEvent(entity))) {
+        if (MinecraftForge.EVENT_BUS.post(new ItemGravityEvent(entity, gravity))) {
             return;
         }
 

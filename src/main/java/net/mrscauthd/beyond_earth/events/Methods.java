@@ -228,12 +228,12 @@ public class Methods {
     }
 
     /**If a entity should not get Fire add it to the Tag "venus_fire"*/
-    public static void planetFire(LivingEntity entity, ResourceKey<Level> planet1, ResourceKey<Level> planet2) {
+    public static void planetFire(LivingEntity entity, ResourceKey<Level> planet) {
         Level level = entity.level;
 
-        if (Methods.isWorld(level, planet1) || Methods.isWorld(level, planet2)) {
+        if (Methods.isWorld(level, planet)) {
             if (!Methods.netheriteSpaceSuitCheck(entity) && !entity.hasEffect(MobEffects.FIRE_RESISTANCE) && !entity.fireImmune() && (entity instanceof Mob || entity instanceof Player)) {
-                if (!MinecraftForge.EVENT_BUS.post(new LivingSetFireInHotPlanetEvent(entity))) {
+                if (!MinecraftForge.EVENT_BUS.post(new LivingSetFireInHotPlanetEvent(entity, planet))) {
                     if (!tagCheck(entity, BeyondEarthMod.MODID + ":entities/planet_fire")) {
                         entity.setSecondsOnFire(10);
                     }
@@ -252,7 +252,7 @@ public class Methods {
             return;
         }
 
-        if (MinecraftForge.EVENT_BUS.post(new LivingSetVenusRainEvent(entity))) {
+        if (MinecraftForge.EVENT_BUS.post(new LivingSetVenusRainEvent(entity, planet))) {
             return;
         }
 
