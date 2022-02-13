@@ -10,7 +10,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ItemEntity.class)
-public abstract class MixinItemGravity {
+public abstract class ItemGravity {
+
     @Inject(at = @At(value = "HEAD"), method = "tick")
     private void tick(CallbackInfo info) {
         ItemEntity w = (ItemEntity) ((Object) this);

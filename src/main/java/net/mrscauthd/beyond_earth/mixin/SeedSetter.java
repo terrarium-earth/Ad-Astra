@@ -12,7 +12,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.Optional;
 
 @Mixin(WorldGenSettings.class)
-public abstract class SeedFixerMixin {
+public abstract class SeedSetter {
+
     @Inject(at = @At(value = "TAIL"), method = "Lnet/minecraft/world/level/levelgen/WorldGenSettings;<init>(JZZLnet/minecraft/core/MappedRegistry;Ljava/util/Optional;)V", remap = false)
     private void WorldGenSettings(long p_64614_, boolean p_64615_, boolean p_64616_, MappedRegistry<LevelStem> p_64617_, Optional<String> p_64618_, CallbackInfo info) {
         SeedFixer.setSeedInternal(p_64614_);

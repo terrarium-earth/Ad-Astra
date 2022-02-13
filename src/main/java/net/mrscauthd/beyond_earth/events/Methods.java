@@ -2,7 +2,9 @@ package net.mrscauthd.beyond_earth.events;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Vector3f;
 import io.netty.buffer.Unpooled;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelPart;
@@ -27,6 +29,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -572,5 +575,20 @@ public class Methods {
     @OnlyIn(Dist.CLIENT)
     public static boolean checkSound(SoundSource sound) {
         return sound == SoundSource.BLOCKS || sound == SoundSource.NEUTRAL || sound == SoundSource.RECORDS || sound == SoundSource.WEATHER || sound == SoundSource.HOSTILE || sound == SoundSource.PLAYERS || sound == SoundSource.AMBIENT;
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static void bobView(PoseStack poseStack, float tick) {
+        Minecraft mc = Minecraft.getInstance();
+
+        if (mc.getCameraEntity() instanceof Player) {
+            Player player = (Player) mc.getCameraEntity();
+            float f = player.walkDist - player.walkDistO;
+            float f1 = -(player.walkDist + f * tick);
+            float f2 = Mth.lerp(tick, 0.075F, -0.075F);
+            poseStack.translate((double) (Mth.sin(f1 * (float) Math.PI) * f2 * 0.5F), (double) (-Math.abs(Mth.cos(f1 * (float) Math.PI) * f2)), 0.0D);
+            poseStack.mulPose(Vector3f.ZP.rotationDegrees(Mth.sin(f1 * (float) Math.PI) * f2 * 3.0F));
+            poseStack.mulPose(Vector3f.XP.rotationDegrees(Math.abs(Mth.cos(f1 * (float) Math.PI - 0.2F) * f2) * 5.0F));
+        }
     }
 }

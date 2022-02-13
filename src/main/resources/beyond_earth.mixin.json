@@ -4,12 +4,13 @@
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.7",
   "mixins": [
-    "MixinItemGravity",
-    "SeedFixerMixin"
+    "ItemGravity",
+    "SeedSetter"
   ],
   "client": [
     "SetupLivingBipedAnim",
-    "RenderHandItem"
+    "RenderHandItem",
+    "BobViewer"
   ],
   "injectors": {
     "defaultRequire": 1

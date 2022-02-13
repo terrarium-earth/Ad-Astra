@@ -33,6 +33,7 @@ import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.entity.*;
 import net.mrscauthd.beyond_earth.events.forgeevents.RenderHandItemEvent;
+import net.mrscauthd.beyond_earth.events.forgeevents.RenderViewEvent;
 import net.mrscauthd.beyond_earth.events.forgeevents.SetupLivingBipedAnimEvent;
 import net.mrscauthd.beyond_earth.item.VehicleItem;
 
@@ -93,10 +94,37 @@ public class Events {
         Entity ridding = event.getCamera().getEntity().getVehicle();
 
         if (Methods.isRocket(ridding) || ridding instanceof LanderEntity) {
-            CameraType pointOfView = Minecraft.getInstance().options.getCameraType();
+            CameraType cameraType = Minecraft.getInstance().options.getCameraType();
 
-            if (pointOfView.equals(CameraType.THIRD_PERSON_FRONT) || pointOfView.equals(CameraType.THIRD_PERSON_BACK)) {
+            if (cameraType.equals(CameraType.THIRD_PERSON_FRONT) || cameraType.equals(CameraType.THIRD_PERSON_BACK)) {
                 event.getCamera().move(-event.getCamera().getMaxZoom(12d), 0d, 0);
+            }
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @SubscribeEvent
+    public static void bobViewer(RenderViewEvent event) {
+        Entity ridding = Minecraft.getInstance().player.getVehicle();
+        Minecraft mc = Minecraft.getInstance();
+        CameraType cameraType = mc.options.getCameraType();
+
+        if (Methods.isRocket(ridding)) {
+            if (cameraType.equals(CameraType.THIRD_PERSON_FRONT) || cameraType.equals(CameraType.THIRD_PERSON_BACK)) {
+                event.setCanceled(true);
+
+                if (ridding instanceof RocketTier1Entity && ridding.getEntityData().get(RocketTier1Entity.ROCKET_START)) {
+                    Methods.bobView(event.getPoseStack(), event.getTick());
+                }
+                else if (ridding instanceof RocketTier2Entity && ridding.getEntityData().get(RocketTier2Entity.ROCKET_START)) {
+                    Methods.bobView(event.getPoseStack(), event.getTick());
+                }
+                else if (ridding instanceof RocketTier3Entity && ridding.getEntityData().get(RocketTier3Entity.ROCKET_START)) {
+                    Methods.bobView(event.getPoseStack(), event.getTick());
+                }
+                else if (ridding instanceof RocketTier4Entity && ridding.getEntityData().get(RocketTier4Entity.ROCKET_START)) {
+                    Methods.bobView(event.getPoseStack(), event.getTick());
+                }
             }
         }
     }
