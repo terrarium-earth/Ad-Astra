@@ -153,8 +153,8 @@ public class ClientEventBusSubscriber {
 		//OVERLAY
 		OverlayRegistry.registerOverlayTop("warning", Overlays.WARNING);
 		OverlayRegistry.registerOverlayTop("rocket_timer", Overlays.ROCKET_TIMER);
-		OverlayRegistry.registerOverlayTop("oxygen_tank", Overlays.OXYGEN_TANK);
-		OverlayRegistry.registerOverlayTop("rocket_height", Overlays.ROCKET_HEIGHT);
+		OverlayRegistry.registerOverlayBottom("oxygen_tank", Overlays.OXYGEN_TANK);
+		OverlayRegistry.registerOverlayBottom("rocket_height", Overlays.ROCKET_HEIGHT);
 	}
 
 	@SubscribeEvent

@@ -73,7 +73,7 @@ public class Overlays {
 
         /** WARNING OVERLAY */
         if (player.getVehicle() instanceof LanderEntity && !player.getVehicle().isOnGround() && !player.isEyeInFluid(FluidTags.WATER)) {
-            OverlayRegistry.enableOverlay(Overlays.WARNING, true);
+                OverlayRegistry.enableOverlay(Overlays.WARNING, true);
         } else {
             OverlayRegistry.enableOverlay(Overlays.WARNING, false);
         }
@@ -162,46 +162,49 @@ public class Overlays {
                 timer = vehicle.getEntityData().get(RocketTier4Entity.START_TIMER);
             }
 
+            int timerWidth = width / 2 - 31;
+            int timerHeight = height / 2 / 2;
+
             /** TIMER */
             if (timer > -1 && timer < 20) {
                 RenderSystem.setShaderTexture(0, timerN10);
-                gui.blit(mStack, width, height, 0, 0, 60, 38, 60, 38);
+                gui.blit(mStack, timerWidth, timerHeight, 0, 0, 60, 38, 60, 38);
             }
             else if (timer > 20 && timer < 40) {
                 RenderSystem.setShaderTexture(0, timerN9);
-                gui.blit(mStack, width, height, 0, 0, 60, 38, 60, 38);
+                gui.blit(mStack, timerWidth, timerHeight, 0, 0, 60, 38, 60, 38);
             }
             else if (timer > 40 && timer < 60) {
                 RenderSystem.setShaderTexture(0, timerN8);
-                gui.blit(mStack, width, height, 0, 0, 60, 38, 60, 38);
+                gui.blit(mStack, timerWidth, timerHeight, 0, 0, 60, 38, 60, 38);
             }
             else if (timer > 60 && timer < 80) {
                 RenderSystem.setShaderTexture(0, timerN7);
-                gui.blit(mStack, width, height, 0, 0, 60, 38, 60, 38);
+                gui.blit(mStack, timerWidth, timerHeight, 0, 0, 60, 38, 60, 38);
             }
             else if (timer > 80 && timer < 100) {
                 RenderSystem.setShaderTexture(0, timerN6);
-                gui.blit(mStack, width, height, 0, 0, 60, 38, 60, 38);
+                gui.blit(mStack, timerWidth, timerHeight, 0, 0, 60, 38, 60, 38);
             }
             else if (timer > 100 && timer < 120) {
                 RenderSystem.setShaderTexture(0, timerN5);
-                gui.blit(mStack, width, height, 0, 0, 60, 38, 60, 38);
+                gui.blit(mStack, timerWidth, timerHeight, 0, 0, 60, 38, 60, 38);
             }
             else if (timer > 120 && timer < 140) {
                 RenderSystem.setShaderTexture(0, timerN4);
-                gui.blit(mStack, width, height, 0, 0, 60, 38, 60, 38);
+                gui.blit(mStack, timerWidth, timerHeight, 0, 0, 60, 38, 60, 38);
             }
             else if (timer > 140 && timer < 160) {
                 RenderSystem.setShaderTexture(0, timerN3);
-                gui.blit(mStack, width, height, 0, 0, 60, 38, 60, 38);
+                gui.blit(mStack, timerWidth, timerHeight, 0, 0, 60, 38, 60, 38);
             }
             else if (timer > 160 && timer < 180) {
                 RenderSystem.setShaderTexture(0, timerN2);
-                gui.blit(mStack, width, height, 0, 0, 60, 38, 60, 38);
+                gui.blit(mStack, timerWidth, timerHeight, 0, 0, 60, 38, 60, 38);
             }
             else if (timer > 180 && timer < 200) {
                 RenderSystem.setShaderTexture(0, timerN1);
-                gui.blit(mStack, width, height, 0, 0, 60, 38, 60, 38);
+                gui.blit(mStack, timerWidth, timerHeight, 0, 0, 60, 38, 60, 38);
             }
         }
     };
@@ -220,13 +223,16 @@ public class Overlays {
             int x = 5;
             int y = 5;
 
-            GuiHelper.drawVerticalReverse(mStack, x, y, width, height, oxygen_tank_empty, oxygenStoredRatio);
-            GuiHelper.drawVertical(mStack, x, y, width, height, oxygen_tank_full, oxygenStoredRatio);
+            int textureWidth = 62;
+            int textureHeight = 52;
+
+            GuiHelper.drawVerticalReverse(mStack, x, y, textureWidth, textureHeight, oxygen_tank_empty, oxygenStoredRatio);
+            GuiHelper.drawVertical(mStack, x, y, textureWidth, textureHeight, oxygen_tank_full, oxygenStoredRatio);
 
             /** OXYGEN AMOUNT TEXT */
             MutableComponent text = GaugeTextHelper.getPercentText(GaugeValueHelper.getOxygen(oxygenStorage)).build();
             int textWidth = Minecraft.getInstance().font.width(text);
-            Minecraft.getInstance().font.drawShadow(mStack, text, (x + (width - textWidth) / 2), y + height + 3, 0xFFFFFF);
+            Minecraft.getInstance().font.drawShadow(mStack, text, (x + (textureWidth - textWidth) / 2), y + textureHeight + 3, 0xFFFFFF);
         }
     };
 
