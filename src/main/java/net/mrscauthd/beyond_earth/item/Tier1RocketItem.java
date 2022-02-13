@@ -84,7 +84,7 @@ public class Tier1RocketItem extends VehicleItem implements FilledAltVehicleItem
                     world.addFreshEntity(rocket);
 
                     rocket.getEntityData().set(RocketTier1Entity.FUEL, itemStack.getOrCreateTag().getInt(fuelTag));
-                    rocket.getEntityData().set(RocketTier1Entity.BUCKET, itemStack.getOrCreateTag().getBoolean(bucketTag));
+                    rocket.getEntityData().set(RocketTier1Entity.BUCKET, itemStack.getOrCreateTag().getInt(bucketTag));
 
                     if (!player.getAbilities().instabuild) {
                         player.setItemInHand(hand, ItemStack.EMPTY);

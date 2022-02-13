@@ -45,6 +45,7 @@ public class VehicleEntity extends Entity {
 
     @Override
     protected void readAdditionalSaveData(CompoundTag p_20052_) {
+
     }
 
     @Override
