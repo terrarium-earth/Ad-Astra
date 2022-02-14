@@ -52,7 +52,7 @@ public class RocketTier1Entity extends IRocketEntity {
 	public ItemStack getPickedResult(HitResult target) {
 		ItemStack itemStack = new ItemStack(ModInit.TIER_1_ROCKET_ITEM.get(), 1);
 		itemStack.getOrCreateTag().putInt(BeyondEarthMod.MODID + ":fuel", this.getEntityData().get(FUEL));
-		itemStack.getOrCreateTag().putInt(BeyondEarthMod.MODID + ":bucket", this.getEntityData().get(BUCKET));
+		itemStack.getOrCreateTag().putInt(BeyondEarthMod.MODID + ":buckets", this.getEntityData().get(BUCKETS));
 
 		return itemStack;
 	}
@@ -62,7 +62,7 @@ public class RocketTier1Entity extends IRocketEntity {
 		if (!level.isClientSide) {
 			ItemStack itemStack = new ItemStack(ModInit.TIER_1_ROCKET_ITEM.get(), 1);
 			itemStack.getOrCreateTag().putInt(BeyondEarthMod.MODID + ":fuel", this.getEntityData().get(FUEL));
-			itemStack.getOrCreateTag().putInt(BeyondEarthMod.MODID + ":bucket", this.getEntityData().get(BUCKET));
+			itemStack.getOrCreateTag().putInt(BeyondEarthMod.MODID + ":buckets", this.getEntityData().get(BUCKETS));
 
 			ItemEntity entityToSpawn = new ItemEntity(level, this.getX(), this.getY(), this.getZ(), itemStack);
 			entityToSpawn.setPickUpDelay(10);
@@ -168,12 +168,12 @@ public class RocketTier1Entity extends IRocketEntity {
 
 		}
 
-		if (Methods.tagCheck(FluidUtil2.findBucketFluid(this.getInventory().getStackInSlot(0).getItem()), ModInit.FLUID_VEHICLE_FUEL_TAG) && this.entityData.get(BUCKET) != 1) {
+		if (Methods.tagCheck(FluidUtil2.findBucketFluid(this.getInventory().getStackInSlot(0).getItem()), ModInit.FLUID_VEHICLE_FUEL_TAG) && this.entityData.get(BUCKETS) != 1) {
 			this.getInventory().setStackInSlot(0, new ItemStack(Items.BUCKET));
-			this.getEntityData().set(BUCKET, 1);
+			this.getEntityData().set(BUCKETS, 1);
 		}
 
-		if (this.getEntityData().get(BUCKET) == 1 && this.getEntityData().get(FUEL) < 300) {
+		if (this.getEntityData().get(BUCKETS) == 1 && this.getEntityData().get(FUEL) < 300) {
 			this.getEntityData().set(FUEL, this.getEntityData().get(FUEL) + 1);
 		}
 

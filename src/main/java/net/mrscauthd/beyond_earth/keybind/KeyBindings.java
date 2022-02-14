@@ -145,31 +145,10 @@ public class KeyBindings {
 
 		if (type == 1) {
 			if (Methods.isRocket(player.getVehicle())) {
-				if (player.getVehicle() instanceof RocketTier1Entity && player.getVehicle().getEntityData().get(RocketTier1Entity.FUEL) == 300) {
+				if (player.getVehicle() instanceof IRocketEntity && player.getVehicle().getEntityData().get(IRocketEntity.FUEL) == 300) {
 
-					if (!player.getVehicle().getEntityData().get(RocketTier1Entity.ROCKET_START)) {
-						player.getVehicle().getEntityData().set(RocketTier1Entity.ROCKET_START, true);
-						Methods.rocketSounds(player.getVehicle(), world);
-					}
-
-				} else if (player.getVehicle() instanceof RocketTier2Entity && player.getVehicle().getEntityData().get(RocketTier2Entity.FUEL) == 300) {
-
-					if (!player.getVehicle().getEntityData().get(RocketTier2Entity.ROCKET_START)) {
-						player.getVehicle().getEntityData().set(RocketTier2Entity.ROCKET_START, true);
-						Methods.rocketSounds(player.getVehicle(), world);
-					}
-
-				} else if (player.getVehicle() instanceof RocketTier3Entity && player.getVehicle().getEntityData().get(RocketTier3Entity.FUEL) == 300) {
-
-					if (!player.getVehicle().getEntityData().get(RocketTier3Entity.ROCKET_START)) {
-						player.getVehicle().getEntityData().set(RocketTier3Entity.ROCKET_START, true);
-						Methods.rocketSounds(player.getVehicle(), world);
-					}
-
-				} else if (player.getVehicle() instanceof RocketTier4Entity && player.getVehicle().getEntityData().get(RocketTier4Entity.FUEL) == 300) {
-
-					if (!player.getVehicle().getEntityData().get(RocketTier4Entity.ROCKET_START)) {
-						player.getVehicle().getEntityData().set(RocketTier4Entity.ROCKET_START, true);
+					if (!player.getVehicle().getEntityData().get(IRocketEntity.ROCKET_START)) {
+						player.getVehicle().getEntityData().set(IRocketEntity.ROCKET_START, true);
 						Methods.rocketSounds(player.getVehicle(), world);
 					}
 
@@ -177,7 +156,6 @@ public class KeyBindings {
 					Methods.noFuelMessage(player);
 				}
 			}
-
 		}
 
 		if (type == 2) {

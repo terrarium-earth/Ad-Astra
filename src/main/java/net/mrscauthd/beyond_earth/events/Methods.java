@@ -79,6 +79,8 @@ public class Methods {
     public static final ResourceKey<Level> overworld = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation("overworld"));
     public static final ResourceKey<Level> overworld_orbit = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID,"overworld_orbit"));
 
+    public static final ResourceLocation space_station = new ResourceLocation(BeyondEarthMod.MODID, "space_station");
+
     public static final Set<ResourceKey<Level>> worldsWithoutRain = Set.of(
             moon,
             moon_orbit,
@@ -213,7 +215,7 @@ public class Methods {
     }
 
     public static boolean isRocket(Entity entity) {
-        return entity instanceof RocketTier1Entity || entity instanceof RocketTier2Entity || entity instanceof RocketTier3Entity || entity instanceof RocketTier4Entity;
+        return entity instanceof IRocketEntity;
     }
 
     public static boolean isVehicle(Entity entity) {
@@ -395,7 +397,7 @@ public class Methods {
 
     public static void createSpaceStation(Player player, ServerLevel serverWorld) {
         BlockPos pos = new BlockPos(player.getX() - 15.5, 100, player.getZ() - 15.5);
-        serverWorld.getStructureManager().getOrCreate(new ResourceLocation(BeyondEarthMod.MODID, "space_station")).placeInWorld(serverWorld, pos, pos, new StructurePlaceSettings(), serverWorld.random, 2);
+        serverWorld.getStructureManager().getOrCreate(space_station).placeInWorld(serverWorld, pos, pos, new StructurePlaceSettings(), serverWorld.random, 2);
     }
 
     public static void cleanUpPlayerNBT(Player player) {

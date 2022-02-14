@@ -34,14 +34,14 @@ import java.util.Set;
 public class IRocketEntity extends VehicleEntity {
 
     public static final EntityDataAccessor<Boolean> ROCKET_START = SynchedEntityData.defineId(RocketTier1Entity.class, EntityDataSerializers.BOOLEAN);
-    public static final EntityDataAccessor<Integer> BUCKET = SynchedEntityData.defineId(RocketTier1Entity.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> BUCKETS = SynchedEntityData.defineId(RocketTier1Entity.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> FUEL = SynchedEntityData.defineId(RocketTier1Entity.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> START_TIMER = SynchedEntityData.defineId(RocketTier1Entity.class, EntityDataSerializers.INT);
 
     public IRocketEntity(EntityType<?> p_19870_, Level p_19871_) {
         super(p_19870_, p_19871_);
         this.entityData.define(ROCKET_START, false);
-        this.entityData.define(BUCKET, 0);
+        this.entityData.define(BUCKETS, 0);
         this.entityData.define(FUEL, 0);
         this.entityData.define(START_TIMER, 0);
     }
@@ -86,7 +86,7 @@ public class IRocketEntity extends VehicleEntity {
 
     }
 
-    public void dropEquipment() {
+    protected void dropEquipment() {
         for (int i = 0; i < inventory.getSlots(); ++i) {
             ItemStack itemstack = inventory.getStackInSlot(i);
             if (!itemstack.isEmpty() && !EnchantmentHelper.hasVanishingCurse(itemstack)) {
@@ -126,7 +126,7 @@ public class IRocketEntity extends VehicleEntity {
         compound.put("InventoryCustom", inventory.serializeNBT());
 
         compound.putBoolean("rocket_start", this.getEntityData().get(ROCKET_START));
-        compound.putInt("bucket", this.getEntityData().get(BUCKET));
+        compound.putInt("buckets", this.getEntityData().get(BUCKETS));
         compound.putInt("fuel", this.getEntityData().get(FUEL));
         compound.putInt("start_timer", this.getEntityData().get(START_TIMER));
     }
@@ -141,7 +141,7 @@ public class IRocketEntity extends VehicleEntity {
         }
 
         this.getEntityData().set(ROCKET_START, compound.getBoolean("rocket_start"));
-        this.getEntityData().set(BUCKET, compound.getInt("bucket"));
+        this.getEntityData().set(BUCKETS, compound.getInt("buckets"));
         this.getEntityData().set(FUEL, compound.getInt("fuel"));
         this.getEntityData().set(START_TIMER, compound.getInt("start_timer"));
     }

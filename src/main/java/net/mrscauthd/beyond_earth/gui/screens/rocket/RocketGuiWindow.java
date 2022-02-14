@@ -20,10 +20,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.compat.CompatibleManager;
-import net.mrscauthd.beyond_earth.entity.RocketTier1Entity;
-import net.mrscauthd.beyond_earth.entity.RocketTier2Entity;
-import net.mrscauthd.beyond_earth.entity.RocketTier3Entity;
-import net.mrscauthd.beyond_earth.entity.RocketTier4Entity;
+import net.mrscauthd.beyond_earth.entity.*;
 import net.mrscauthd.beyond_earth.gauge.GaugeTextHelper;
 import net.mrscauthd.beyond_earth.gauge.GaugeValueHelper;
 import net.mrscauthd.beyond_earth.gauge.IGaugeValue;
@@ -84,17 +81,8 @@ public class RocketGuiWindow extends AbstractContainerScreen<RocketGui.GuiContai
 	public IGaugeValue getFuelGaugeValue() {
 		int fuel = 0;
 
-		if (menu.rocket instanceof RocketTier1Entity) {
-			fuel = menu.rocket.getEntityData().get(RocketTier1Entity.FUEL);
-		}
-		if (menu.rocket instanceof RocketTier2Entity) {
-			fuel = menu.rocket.getEntityData().get(RocketTier2Entity.FUEL);
-		}
-		if (menu.rocket instanceof RocketTier3Entity) {
-			fuel = menu.rocket.getEntityData().get(RocketTier3Entity.FUEL);
-		}
-		if (menu.rocket instanceof RocketTier4Entity) {
-			fuel = menu.rocket.getEntityData().get(RocketTier4Entity.FUEL);
+		if (menu.rocket instanceof IRocketEntity) {
+			fuel = menu.rocket.getEntityData().get(IRocketEntity.FUEL);
 		}
 
 		return GaugeValueHelper.getFuel(fuel / 3, 100);

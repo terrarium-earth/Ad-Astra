@@ -30,7 +30,7 @@ import java.util.List;
 public class Tier1RocketItem extends VehicleItem implements FilledAltVehicleItem {
 
     public static String fuelTag = BeyondEarthMod.MODID + ":fuel";
-    public static String bucketTag = BeyondEarthMod.MODID + ":bucket";
+    public static String bucketTag = BeyondEarthMod.MODID + ":buckets";
 
     public Tier1RocketItem(Properties properties) {
         super(properties);
@@ -84,7 +84,7 @@ public class Tier1RocketItem extends VehicleItem implements FilledAltVehicleItem
                     world.addFreshEntity(rocket);
 
                     rocket.getEntityData().set(RocketTier1Entity.FUEL, itemStack.getOrCreateTag().getInt(fuelTag));
-                    rocket.getEntityData().set(RocketTier1Entity.BUCKET, itemStack.getOrCreateTag().getInt(bucketTag));
+                    rocket.getEntityData().set(RocketTier1Entity.BUCKETS, itemStack.getOrCreateTag().getInt(bucketTag));
 
                     if (!player.getAbilities().instabuild) {
                         player.setItemInHand(hand, ItemStack.EMPTY);

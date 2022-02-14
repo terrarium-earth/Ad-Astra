@@ -114,16 +114,7 @@ public class Events {
             if (cameraType.equals(CameraType.THIRD_PERSON_FRONT) || cameraType.equals(CameraType.THIRD_PERSON_BACK)) {
                 event.setCanceled(true);
 
-                if (ridding instanceof RocketTier1Entity && ridding.getEntityData().get(RocketTier1Entity.ROCKET_START)) {
-                    Methods.bobView(event.getPoseStack(), event.getTick());
-                }
-                else if (ridding instanceof RocketTier2Entity && ridding.getEntityData().get(RocketTier2Entity.ROCKET_START)) {
-                    Methods.bobView(event.getPoseStack(), event.getTick());
-                }
-                else if (ridding instanceof RocketTier3Entity && ridding.getEntityData().get(RocketTier3Entity.ROCKET_START)) {
-                    Methods.bobView(event.getPoseStack(), event.getTick());
-                }
-                else if (ridding instanceof RocketTier4Entity && ridding.getEntityData().get(RocketTier4Entity.ROCKET_START)) {
+                if (ridding instanceof IRocketEntity && ridding.getEntityData().get(IRocketEntity.ROCKET_START)) {
                     Methods.bobView(event.getPoseStack(), event.getTick());
                 }
             }

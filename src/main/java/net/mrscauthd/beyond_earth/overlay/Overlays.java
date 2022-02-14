@@ -149,17 +149,8 @@ public class Overlays {
             int timer = 0;
 
             /** GET TIMER */
-            if (vehicle instanceof RocketTier1Entity) {
-                timer = vehicle.getEntityData().get(RocketTier1Entity.START_TIMER);
-            }
-            else if (vehicle instanceof RocketTier2Entity) {
-                timer = vehicle.getEntityData().get(RocketTier2Entity.START_TIMER);
-            }
-            else if (vehicle instanceof RocketTier3Entity) {
-                timer = vehicle.getEntityData().get(RocketTier3Entity.START_TIMER);
-            }
-            else if (vehicle instanceof RocketTier4Entity) {
-                timer = vehicle.getEntityData().get(RocketTier4Entity.START_TIMER);
+            if (vehicle instanceof IRocketEntity) {
+                timer = vehicle.getEntityData().get(IRocketEntity.START_TIMER);
             }
 
             int timerWidth = width / 2 - 31;
