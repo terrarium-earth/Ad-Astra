@@ -270,7 +270,7 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 		if (Category == 5) {
 			glacioCategoryButton.visible = true;
 
-			this.buttonManager(rocketType, gb2ButtonTex, rb2ButtonTex, gbButtonTex, rbButtonTex, mouseX, mouseY, 10, (this.height / 2) - 22 / 2, 70, 20, ms, glacioCategoryButton, tl("glacio"), 4);
+			this.buttonManager(rocketType, gb2ButtonTex, rb2ButtonTex, gbButtonTex, rbButtonTex, mouseX, mouseY, 10, (this.height / 2) - 24 / 2, 70, 20, ms, glacioCategoryButton, tl("glacio"), 4);
 		} else {
 			glacioCategoryButton.visible = false;
 		}
