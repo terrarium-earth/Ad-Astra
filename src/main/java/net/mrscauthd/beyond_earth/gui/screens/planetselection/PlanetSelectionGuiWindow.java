@@ -137,7 +137,7 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 			solarSystemButton.visible = true;
 			proximaCentauriButton.visible = true;
 
-			this.categoryButtonManager(bbButtonTex, bb2ButtonTex, mouseX, mouseY, 10, (this.height / 2) - 68 / 2, 70, 20, ms, solarSystemButton, tl("solar_system"), tl("solar_system"));
+			this.categoryButtonManager(bbButtonTex, bb2ButtonTex, mouseX, mouseY, 10, (this.height / 2) - 68 / 2, 70, 20, ms, solarSystemButton, tl("sun"), tl("solar_system"));
 
 			this.categoryButtonManager(bbButtonTex, bb2ButtonTex, mouseX, mouseY, 10, (this.height / 2) - 24 / 2, 70, 20, ms, proximaCentauriButton, tl("proxima_centauri"), tl("solar_system"));
 		} else {
@@ -400,8 +400,8 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 		this.spaceStationItemList = this.recipe.getIngredientStacks().stream().allMatch(this::getSpaceStationItemCheck);
 
 		/** CATEGORY -1 */
-		solarSystemButton = this.addImageButtonSetSolarSystem(10, (this.height / 2) - 68 / 2, 70, 20, bbButtonTex, 0, tl("sun"));
-		proximaCentauriButton = this.addImageButtonSetSolarSystem(10, (this.height / 2) - 24 / 2, 70, 20, bbButtonTex, 5, tl("proxima_cent"));
+		solarSystemButton = this.addImageButtonSetSolarSystem(10, (this.height / 2) - 68 / 2, 70, 20, bbButtonTex, 0, tl("solar_system_sun"));
+		proximaCentauriButton = this.addImageButtonSetSolarSystem(10, (this.height / 2) - 24 / 2, 70, 20, bbButtonTex, 5, tl("solar_system_proxima_centauri"));
 
 		/** CATEGORY 0 */
 		earthCategoryButton = this.addImageButtonSetCategory(10, (this.height / 2) - 24 / 2, 70, 20, defaultButtonTex, 1, menu.rocket, 1, tl("earth"));
