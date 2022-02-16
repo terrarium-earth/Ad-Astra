@@ -170,7 +170,7 @@ public class ClientEventBusMoon {
 
                         //STAR GEN
                         createStars();
-                        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+                        RenderSystem.setShaderColor(0.8F, 0.8F, 0.8F, 0.8F);
                         FogRenderer.setupNoFog();
                         starBuffer.drawWithShader(p_181410_.last().pose(), starmatrix4f, GameRenderer.getPositionShader());
 
