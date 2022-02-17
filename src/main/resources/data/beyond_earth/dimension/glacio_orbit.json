@@ -1,5 +1,5 @@
 {
-  "type": "beyond_earth:mars_orbit",
+  "type": "beyond_earth:glacio_orbit",
   "generator": {
     "type": "beyond_earth:planet_noise",
     "seed": 0,

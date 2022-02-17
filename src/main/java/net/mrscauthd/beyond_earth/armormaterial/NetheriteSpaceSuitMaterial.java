@@ -21,7 +21,7 @@ public class NetheriteSpaceSuitMaterial {
 
         @Override
         public int getDefenseForSlot(EquipmentSlot slot) {
-            return new int[]{3, 8, 6, 3}[slot.getIndex()];
+            return new int[]{3, 6, 8, 3}[slot.getIndex()];
         }
 
         @Override
