@@ -90,7 +90,7 @@ public class OreGeneration {
         moonChesseOre = MOON_GEN_FEATURE.configured(new OreConfiguration(RuleTests.MoonRuleTest.INSTANCE, ModInit.MOON_CHEESE_ORE.get().defaultBlockState(), 10)).placed(commonOrePlacement(20, HeightRangePlacement.triangle(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(192))));
         Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"moon_cheese_ore"), moonChesseOre);
 
-        soulSoil = MOON_GEN_FEATURE.configured(new OreConfiguration(RuleTests.MoonRuleTest.INSTANCE, Blocks.SOUL_SOIL.defaultBlockState(), 60)).placed(commonOrePlacement(22, HeightRangePlacement.triangle(VerticalAnchor.absolute(0), VerticalAnchor.absolute(192))));
+        soulSoil = MOON_GEN_FEATURE.configured(new OreConfiguration(RuleTests.MoonRuleTest.INSTANCE, Blocks.SOUL_SOIL.defaultBlockState(), 60)).placed(commonOrePlacement(22, HeightRangePlacement.triangle(VerticalAnchor.absolute(0), VerticalAnchor.absolute(100))));
         Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"soul_soil"), soulSoil);
 
         moonIceShardOre = MOON_GEN_FEATURE.configured(new OreConfiguration(RuleTests.MoonRuleTest.INSTANCE, ModInit.MOON_ICE_SHARD_ORE.get().defaultBlockState(), 10)).placed(commonOrePlacement(8, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-32), VerticalAnchor.aboveBottom(32))));
