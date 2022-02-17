@@ -46,7 +46,6 @@ public abstract class ItemGravity {
         if (MinecraftForge.EVENT_BUS.post(new ItemGravityEvent(entity, gravity))) {
             return;
         }
-
         entity.setDeltaMovement(entity.getDeltaMovement().x, entity.getDeltaMovement().y / 0.98 + 0.08 - gravity, entity.getDeltaMovement().z);
     }
 }
