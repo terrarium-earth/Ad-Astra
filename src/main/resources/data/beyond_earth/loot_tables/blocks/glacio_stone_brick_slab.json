@@ -13,7 +13,7 @@
               "conditions": [
                 {
                   "condition": "minecraft:block_state_property",
-                  "block": "minecraft:stone_slab",
+                  "block": "beyond_earth:glacio_stone_brick_slab",
                   "properties": {
                     "type": "double"
                   }
