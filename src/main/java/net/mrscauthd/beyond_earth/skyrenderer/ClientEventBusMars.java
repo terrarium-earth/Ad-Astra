@@ -31,7 +31,7 @@ public class ClientEventBusMars {
 
 	private static final ResourceLocation DIM_RENDER_INFO = new ResourceLocation(BeyondEarthMod.MODID, "mars");
 
-	private static final ResourceLocation SUN_TEXTURE = new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/sun.png");
+	private static final ResourceLocation SUN_TEXTURE = new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/blue_sun.png");
 	private static final ResourceLocation PHOBOS_TEXTURE = new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/phobos.png");
 	private static final ResourceLocation DEIMOS_TEXTURE = new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/deimos.png");
 	private static final ResourceLocation EARTH_TEXTURE = new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/earth.png");
