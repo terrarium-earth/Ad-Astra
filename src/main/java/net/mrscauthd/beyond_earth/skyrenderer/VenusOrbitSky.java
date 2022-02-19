@@ -1,41 +1,43 @@
 package net.mrscauthd.beyond_earth.skyrenderer;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Matrix4f;
 import com.mojang.math.Vector3f;
 import net.minecraft.client.GraphicsStatus;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.DimensionSpecialEffects;
-import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.ICloudRenderHandler;
-import net.minecraftforge.client.ISkyRenderHandler;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.mrscauthd.beyond_earth.BeyondEarthMod;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.client.ISkyRenderHandler;
+import net.minecraftforge.client.ICloudRenderHandler;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+
+import net.minecraft.client.renderer.FogRenderer;
+import net.minecraft.client.Minecraft;
 
 import javax.annotation.Nullable;
+
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.platform.GlStateManager;
+import net.mrscauthd.beyond_earth.BeyondEarthMod;
+
 import java.util.Random;
 
 @Mod.EventBusSubscriber(modid = BeyondEarthMod.MODID, bus = Bus.MOD, value = Dist.CLIENT)
-public class ClientEventBusGlacioOrbit {
+public class VenusOrbitSky {
 
-    private static final ResourceLocation DIM_RENDER_INFO = new ResourceLocation(BeyondEarthMod.MODID, "glacio_orbit");
+    private static final ResourceLocation DIM_RENDER_INFO = new ResourceLocation(BeyondEarthMod.MODID, "venus_orbit");
 
     @Nullable
     public static VertexBuffer starBuffer;
-    private static final ResourceLocation GLACIO_TEXTURE = new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/glacio.png");
+    private static final ResourceLocation VENUS_TEXTURE = new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/venus.png");
     private static final ResourceLocation SUN_TEXTURE = new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/no_a_sun.png");
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
@@ -98,7 +100,7 @@ public class ClientEventBusGlacioOrbit {
 
                         RenderSystem.setShader(GameRenderer::getPositionTexShader);
 
-                        //GLACIO
+                        //VENUS
                         RenderSystem.depthMask(true);
                         RenderSystem.enableDepthTest();
 
@@ -107,7 +109,7 @@ public class ClientEventBusGlacioOrbit {
                         float scale = 100 * (0.3F - var20 / 10000.0F);
                         scale = Math.max(scale, 4.0F);
 
-                        RenderSystem.setShaderTexture(0, GLACIO_TEXTURE);
+                        RenderSystem.setShaderTexture(0, VENUS_TEXTURE);
                         bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
                         bufferbuilder.vertex(matrix4f1, -scale, -180.0F, scale).uv(0.0F, 0.0F).endVertex();
                         bufferbuilder.vertex(matrix4f1, scale, -180.0F, scale).uv(1.0F, 0.0F).endVertex();

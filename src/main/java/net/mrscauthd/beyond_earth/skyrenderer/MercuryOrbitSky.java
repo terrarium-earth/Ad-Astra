@@ -9,7 +9,6 @@ import net.minecraft.client.renderer.DimensionSpecialEffects;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.common.Mod;
@@ -32,13 +31,13 @@ import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import java.util.Random;
 
 @Mod.EventBusSubscriber(modid = BeyondEarthMod.MODID, bus = Bus.MOD, value = Dist.CLIENT)
-public class ClientEventBusVenusOrbit {
+public class MercuryOrbitSky {
 
-    private static final ResourceLocation DIM_RENDER_INFO = new ResourceLocation(BeyondEarthMod.MODID, "venus_orbit");
+    private static final ResourceLocation DIM_RENDER_INFO = new ResourceLocation(BeyondEarthMod.MODID, "mercury_orbit");
 
     @Nullable
     public static VertexBuffer starBuffer;
-    private static final ResourceLocation VENUS_TEXTURE = new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/venus.png");
+    private static final ResourceLocation MERCURY_TEXTURE = new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/mercury.png");
     private static final ResourceLocation SUN_TEXTURE = new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/no_a_sun.png");
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
@@ -101,7 +100,7 @@ public class ClientEventBusVenusOrbit {
 
                         RenderSystem.setShader(GameRenderer::getPositionTexShader);
 
-                        //VENUS
+                        //MARS
                         RenderSystem.depthMask(true);
                         RenderSystem.enableDepthTest();
 
@@ -110,7 +109,7 @@ public class ClientEventBusVenusOrbit {
                         float scale = 100 * (0.3F - var20 / 10000.0F);
                         scale = Math.max(scale, 4.0F);
 
-                        RenderSystem.setShaderTexture(0, VENUS_TEXTURE);
+                        RenderSystem.setShaderTexture(0, MERCURY_TEXTURE);
                         bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
                         bufferbuilder.vertex(matrix4f1, -scale, -180.0F, scale).uv(0.0F, 0.0F).endVertex();
                         bufferbuilder.vertex(matrix4f1, scale, -180.0F, scale).uv(1.0F, 0.0F).endVertex();
@@ -126,7 +125,7 @@ public class ClientEventBusVenusOrbit {
 
                         float f12 = 35.0F * 2;
 
-                        //SUN
+                        //MERCURY
                         RenderSystem.setShaderTexture(0, SUN_TEXTURE);
                         bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
                         bufferbuilder.vertex(matrix4f1, -f12, 200.0F, -f12).uv(0.0F, 0.0F).endVertex();

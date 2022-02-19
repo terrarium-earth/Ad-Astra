@@ -49,7 +49,7 @@ import javax.annotation.Nullable;
 import java.util.Random;
 
 @Mod.EventBusSubscriber(modid = BeyondEarthMod.MODID, bus = Bus.MOD, value = Dist.CLIENT)
-public class ClientEventBusVenus {
+public class VenusSky {
 
     private static final float[] rainSizeX = new float[1024];
     private static final float[] rainSizeZ = new float[1024];

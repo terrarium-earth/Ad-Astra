@@ -3,9 +3,10 @@ package net.mrscauthd.beyond_earth.skyrenderer;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Matrix4f;
 import com.mojang.math.Vector3f;
-import net.minecraft.client.GraphicsStatus;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.DimensionSpecialEffects;
+import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
@@ -18,37 +19,35 @@ import net.minecraftforge.client.ISkyRenderHandler;
 import net.minecraftforge.client.ICloudRenderHandler;
 import net.minecraftforge.api.distmarker.Dist;
 
+import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.client.Minecraft;
-
-import javax.annotation.Nullable;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
 
-import java.util.Random;
-
 @Mod.EventBusSubscriber(modid = BeyondEarthMod.MODID, bus = Bus.MOD, value = Dist.CLIENT)
-public class ClientEventBusMercury {
+public class MarsSky {
 
-    private static final ResourceLocation DIM_RENDER_INFO = new ResourceLocation(BeyondEarthMod.MODID, "mercury");
+	private static final ResourceLocation DIM_RENDER_INFO = new ResourceLocation(BeyondEarthMod.MODID, "mars");
 
-    @Nullable
-    public static VertexBuffer starBuffer;
-    private static final ResourceLocation SUN_TEXTURES = new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/no_a_sun.png");
+	private static final ResourceLocation SUN_TEXTURE = new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/blue_sun.png");
+	private static final ResourceLocation PHOBOS_TEXTURE = new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/phobos.png");
+	private static final ResourceLocation DEIMOS_TEXTURE = new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/deimos.png");
+	private static final ResourceLocation EARTH_TEXTURE = new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/earth.png");
 
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public static void clientSetup(FMLClientSetupEvent event) {
-        DimensionSpecialEffects.EFFECTS.put(DIM_RENDER_INFO, new DimensionSpecialEffects(192, true, DimensionSpecialEffects.SkyType.NORMAL, false, false) {
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
+	public static void clientSetup(FMLClientSetupEvent event) {
+		DimensionSpecialEffects.EFFECTS.put(DIM_RENDER_INFO, new DimensionSpecialEffects(192, true, DimensionSpecialEffects.SkyType.NORMAL, false, false) {
+			@Override
+			public Vec3 getBrightnessDependentFogColor(Vec3 p_108878_, float p_108879_) {
+                return p_108878_.multiply(p_108879_ * 0.967058823529 + 0.03, p_108879_ * 0.770980392157 + 0.03, p_108879_ * 0.594901960784 + 0.06);
+			}
+
             @Override
-            public Vec3 getBrightnessDependentFogColor(Vec3 p_108878_, float p_108879_) {
-                return new Vec3(0.572549019608, 0.082352941176, 0.082352941176);
-            }
-
-            @Override
-            public boolean isFoggyAt(int p_108874_, int p_108875_) {
-                return false;
-            }
+			public boolean isFoggyAt(int p_108874_, int p_108875_) {
+				return true;
+			}
 
             @Override
             public ICloudRenderHandler getCloudRenderHandler() {
@@ -69,9 +68,9 @@ public class ClientEventBusMercury {
                         Matrix4f starmatrix4f = RenderSystem.getProjectionMatrix();
                         RenderSystem.disableTexture();
                         Vec3 vec3 = level.getSkyColor(minecraft.gameRenderer.getMainCamera().getPosition(), p_181412_);
-                        float f = (float)vec3.x;
-                        float f1 = (float)vec3.y;
-                        float f2 = (float)vec3.z;
+                        float f = (float) vec3.x;
+                        float f1 = (float) vec3.y;
+                        float f2 = (float) vec3.z;
                         FogRenderer.levelFogColor();
                         BufferBuilder bufferbuilder = Tesselator.getInstance().getBuilder();
                         RenderSystem.depthMask(false);
@@ -96,9 +95,10 @@ public class ClientEventBusMercury {
                             matrix4f = p_181410_.last().pose();
                             bufferbuilder.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);
                             bufferbuilder.vertex(matrix4f, 0.0F, 100.0F, 0.0F).color(f4, f5, f6, afloat[3]).endVertex();
+                            int i = 16;
 
-                            for(int j = 0; j <= 16; ++j) {
-                                float f7 = (float)j * ((float)Math.PI * 2F) / 16.0F;
+                            for (int j = 0; j <= 16; ++j) {
+                                float f7 = (float) j * ((float) Math.PI * 2F) / 16.0F;
                                 float f8 = Mth.sin(f7);
                                 float f9 = Mth.cos(f7);
                                 bufferbuilder.vertex(matrix4f, f8 * 120.0F, f9 * 120.0F, -f9 * 40.0F * afloat[3]).color(afloat[0], afloat[1], afloat[2], 0.0F).endVertex();
@@ -121,10 +121,10 @@ public class ClientEventBusMercury {
 
                         RenderSystem.setShader(GameRenderer::getPositionTexShader);
 
-                        float f12 = 60.0F;
+                        float f12 = 20.0F;
 
                         //SUN
-                        RenderSystem.setShaderTexture(0, SUN_TEXTURES);
+                        RenderSystem.setShaderTexture(0, SUN_TEXTURE);
                         bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
                         bufferbuilder.vertex(matrix4f1, -f12, 100.0F, -f12).uv(0.0F, 0.0F).endVertex();
                         bufferbuilder.vertex(matrix4f1, f12, 100.0F, -f12).uv(1.0F, 0.0F).endVertex();
@@ -133,13 +133,54 @@ public class ClientEventBusMercury {
                         bufferbuilder.end();
                         BufferUploader.end(bufferbuilder);
 
+                        //PHOBOS
+                        p_181410_.mulPose(Vector3f.YP.rotationDegrees(-130.0F));
+                        p_181410_.mulPose(Vector3f.ZP.rotationDegrees(100.0F));
+
+                        RenderSystem.setShaderTexture(0, PHOBOS_TEXTURE);
+                        bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+                        bufferbuilder.vertex(matrix4f1, -3, -100.0F, 3).uv(0.0F, 0.0F).endVertex();
+                        bufferbuilder.vertex(matrix4f1, 3, -100.0F, 3).uv(1.0F, 0.0F).endVertex();
+                        bufferbuilder.vertex(matrix4f1, 3, -100.0F, -3).uv(1.0F, 1.0F).endVertex();
+                        bufferbuilder.vertex(matrix4f1, -3, -100.0F, -3).uv(0.0F, 1.0F).endVertex();
+                        bufferbuilder.end();
+                        BufferUploader.end(bufferbuilder);
+
+                        p_181410_.mulPose(Vector3f.YP.rotationDegrees(-130.0F));
+                        p_181410_.mulPose(Vector3f.ZP.rotationDegrees(210.0F));
+
+                        //EARTH
+                        RenderSystem.setShaderTexture(0, EARTH_TEXTURE);
+                        bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+                        bufferbuilder.vertex(matrix4f1, -1, -100.0F, 1).uv(0.0F, 0.0F).endVertex();
+                        bufferbuilder.vertex(matrix4f1, 1, -100.0F, 1).uv(1.0F, 0.0F).endVertex();
+                        bufferbuilder.vertex(matrix4f1, 1, -100.0F, -1).uv(1.0F, 1.0F).endVertex();
+                        bufferbuilder.vertex(matrix4f1, -1, -100.0F, -1).uv(0.0F, 1.0F).endVertex();
+                        bufferbuilder.end();
+                        BufferUploader.end(bufferbuilder);
+
+                        p_181410_.mulPose(Vector3f.YP.rotationDegrees(-110.0F));
+                        p_181410_.mulPose(Vector3f.ZP.rotationDegrees(90.0F));
+
+                        //DEIMOS
+                        RenderSystem.setShaderTexture(0, DEIMOS_TEXTURE);
+                        bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+                        bufferbuilder.vertex(matrix4f1, -4, -100.0F, 4).uv(0.0F, 0.0F).endVertex();
+                        bufferbuilder.vertex(matrix4f1, 4, -100.0F, 4).uv(1.0F, 0.0F).endVertex();
+                        bufferbuilder.vertex(matrix4f1, 4, -100.0F, -4).uv(1.0F, 1.0F).endVertex();
+                        bufferbuilder.vertex(matrix4f1, -4, -100.0F, -4).uv(0.0F, 1.0F).endVertex();
+                        bufferbuilder.end();
+                        BufferUploader.end(bufferbuilder);
+
                         RenderSystem.disableTexture();
 
                         //STAR GEN
-                        createStars();
-                        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-                        FogRenderer.setupNoFog();
-                        starBuffer.drawWithShader(p_181410_.last().pose(), starmatrix4f, GameRenderer.getPositionShader());
+                        float f10 = level.getStarBrightness(p_181412_) * 1;
+                        if (f10 > 0.0F) {
+                            RenderSystem.setShaderColor(f10, f10, f10, f10);
+                            FogRenderer.setupNoFog();
+                            Minecraft.getInstance().levelRenderer.starBuffer.drawWithShader(p_181410_.last().pose(), starmatrix4f, GameRenderer.getPositionShader());
+                        }
 
                         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
                         RenderSystem.disableBlend();
@@ -167,71 +208,6 @@ public class ClientEventBusMercury {
                     }
                 };
             }
-
-            private void createStars() {
-                Tesselator tesselator = Tesselator.getInstance();
-                BufferBuilder bufferbuilder = tesselator.getBuilder();
-                RenderSystem.setShader(GameRenderer::getPositionShader);
-                if (starBuffer != null) {
-                    starBuffer.close();
-                }
-
-                starBuffer = new VertexBuffer();
-                this.drawStars(bufferbuilder);
-                bufferbuilder.end();
-                starBuffer.upload(bufferbuilder);
-            }
-
-            private void drawStars(BufferBuilder p_109555_) {
-                Random random = new Random(10842L);
-                p_109555_.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION);
-                int stars = 0;
-                if (Minecraft.getInstance().options.graphicsMode == GraphicsStatus.FANCY || Minecraft.getInstance().options.graphicsMode == GraphicsStatus.FABULOUS) {
-                    stars = 13000;
-                } else {
-                    stars = 6000;
-                }
-
-                for(int i = 0; i < stars; ++i) {
-                    double d0 = (double)(random.nextFloat() * 2.0F - 1.0F);
-                    double d1 = (double)(random.nextFloat() * 2.0F - 1.0F);
-                    double d2 = (double)(random.nextFloat() * 2.0F - 1.0F);
-                    double d3 = (double)(0.15F + random.nextFloat() * 0.1F);
-                    double d4 = d0 * d0 + d1 * d1 + d2 * d2;
-                    if (d4 < 1.0D && d4 > 0.01D) {
-                        d4 = 1.0D / Math.sqrt(d4);
-                        d0 *= d4;
-                        d1 *= d4;
-                        d2 *= d4;
-                        double d5 = d0 * 150.0D;
-                        double d6 = d1 * 150.0D;
-                        double d7 = d2 * 150.0D;
-                        double d8 = Math.atan2(d0, d2);
-                        double d9 = Math.sin(d8);
-                        double d10 = Math.cos(d8);
-                        double d11 = Math.atan2(Math.sqrt(d0 * d0 + d2 * d2), d1);
-                        double d12 = Math.sin(d11);
-                        double d13 = Math.cos(d11);
-                        double d14 = random.nextDouble() * Math.PI * 2.0D;
-                        double d15 = Math.sin(d14);
-                        double d16 = Math.cos(d14);
-
-                        for(int j = 0; j < 4; ++j) {
-                            double d17 = 0.0D;
-                            double d18 = (double)((j & 2) - 1) * d3;
-                            double d19 = (double)((j + 1 & 2) - 1) * d3;
-                            double d20 = 0.0D;
-                            double d21 = d18 * d16 - d19 * d15;
-                            double d22 = d19 * d16 + d18 * d15;
-                            double d23 = d21 * d12 + 0.0D * d13;
-                            double d24 = 0.0D * d12 - d21 * d13;
-                            double d25 = d24 * d9 - d22 * d10;
-                            double d26 = d22 * d9 + d24 * d10;
-                            p_109555_.vertex(d5 + d25, d6 + d23, d7 + d26).endVertex();
-                        }
-                    }
-                }
-            }
-        });
-    }
+		});
+	}
 }

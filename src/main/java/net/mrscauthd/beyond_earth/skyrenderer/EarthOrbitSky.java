@@ -9,7 +9,6 @@ import net.minecraft.client.renderer.DimensionSpecialEffects;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.common.Mod;
@@ -32,13 +31,13 @@ import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import java.util.Random;
 
 @Mod.EventBusSubscriber(modid = BeyondEarthMod.MODID, bus = Bus.MOD, value = Dist.CLIENT)
-public class ClientEventBusMercuryOrbit {
+public class EarthOrbitSky {
 
-    private static final ResourceLocation DIM_RENDER_INFO = new ResourceLocation(BeyondEarthMod.MODID, "mercury_orbit");
+    private static final ResourceLocation DIM_RENDER_INFO = new ResourceLocation(BeyondEarthMod.MODID, "earth_orbit");
 
     @Nullable
     public static VertexBuffer starBuffer;
-    private static final ResourceLocation MERCURY_TEXTURE = new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/mercury.png");
+    private static final ResourceLocation EARTH_TEXTURE = new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/earth.png");
     private static final ResourceLocation SUN_TEXTURE = new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/no_a_sun.png");
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
@@ -101,7 +100,7 @@ public class ClientEventBusMercuryOrbit {
 
                         RenderSystem.setShader(GameRenderer::getPositionTexShader);
 
-                        //MARS
+                        //EARTH
                         RenderSystem.depthMask(true);
                         RenderSystem.enableDepthTest();
 
@@ -110,7 +109,7 @@ public class ClientEventBusMercuryOrbit {
                         float scale = 100 * (0.3F - var20 / 10000.0F);
                         scale = Math.max(scale, 4.0F);
 
-                        RenderSystem.setShaderTexture(0, MERCURY_TEXTURE);
+                        RenderSystem.setShaderTexture(0, EARTH_TEXTURE);
                         bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
                         bufferbuilder.vertex(matrix4f1, -scale, -180.0F, scale).uv(0.0F, 0.0F).endVertex();
                         bufferbuilder.vertex(matrix4f1, scale, -180.0F, scale).uv(1.0F, 0.0F).endVertex();
@@ -126,7 +125,7 @@ public class ClientEventBusMercuryOrbit {
 
                         float f12 = 35.0F * 2;
 
-                        //MERCURY
+                        //SUN
                         RenderSystem.setShaderTexture(0, SUN_TEXTURE);
                         bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
                         bufferbuilder.vertex(matrix4f1, -f12, 200.0F, -f12).uv(0.0F, 0.0F).endVertex();
@@ -162,7 +161,6 @@ public class ClientEventBusMercuryOrbit {
                     }
                 };
             }
-
 
             private void createStars() {
                 Tesselator tesselator = Tesselator.getInstance();

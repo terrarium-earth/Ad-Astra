@@ -29,7 +29,7 @@ import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import java.util.Random;
 
 @Mod.EventBusSubscriber(modid = BeyondEarthMod.MODID, bus = Bus.MOD, value = Dist.CLIENT)
-public class ClientEventBusMoon {
+public class MoonSky {
 
     private static final ResourceLocation DIM_RENDER_INFO = new ResourceLocation(BeyondEarthMod.MODID, "moon");
 
