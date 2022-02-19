@@ -1,5 +1,5 @@
 {
-  "type": "beyond_earth:overworld_orbit",
+  "type": "beyond_earth:earth_orbit",
   "generator": {
     "type": "beyond_earth:planet_noise",
     "seed": 0,

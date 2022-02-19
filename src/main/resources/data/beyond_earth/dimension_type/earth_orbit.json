@@ -13,5 +13,5 @@
   "infiniburn": "minecraft:infiniburn_overworld",
   "min_y": 0,
   "height": 256,
-  "effects": "beyond_earth:overworld_orbit"
+  "effects": "beyond_earth:earth_orbit"
 }

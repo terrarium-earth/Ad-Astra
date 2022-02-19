@@ -65,6 +65,11 @@ public class ClientEventBusMoonOrbit {
             }
 
             @Override
+            public float[] getSunriseColor(float p_108872_, float p_108873_) {
+                return null;
+            }
+
+            @Override
             public ISkyRenderHandler getSkyRenderHandler() {
                 return new ISkyRenderHandler() {
                     @Override
@@ -84,35 +89,6 @@ public class ClientEventBusMoonOrbit {
                         minecraft.levelRenderer.skyBuffer.drawWithShader(p_181410_.last().pose(), matrix4f, shaderinstance);
                         RenderSystem.enableBlend();
                         RenderSystem.defaultBlendFunc();
-                        float[] afloat = level.effects().getSunriseColor(level.getTimeOfDay(p_181412_), p_181412_);
-                        if (afloat != null) {
-                            RenderSystem.setShader(GameRenderer::getPositionColorShader);
-                            RenderSystem.disableTexture();
-                            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-                            p_181410_.pushPose();
-                            p_181410_.mulPose(Vector3f.XP.rotationDegrees(90.0F));
-                            float f3 = Mth.sin(level.getSunAngle(p_181412_)) < 0.0F ? 180.0F : 0.0F;
-                            p_181410_.mulPose(Vector3f.ZP.rotationDegrees(f3));
-                            p_181410_.mulPose(Vector3f.ZP.rotationDegrees(90.0F));
-                            float f4 = afloat[0];
-                            float f5 = afloat[1];
-                            float f6 = afloat[2];
-                            matrix4f = p_181410_.last().pose();
-                            bufferbuilder.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);
-                            bufferbuilder.vertex(matrix4f, 0.0F, 100.0F, 0.0F).color(f4, f5, f6, afloat[3]).endVertex();
-
-                            for(int j = 0; j <= 16; ++j) {
-                                float f7 = (float)j * ((float)Math.PI * 2F) / 16.0F;
-                                float f8 = Mth.sin(f7);
-                                float f9 = Mth.cos(f7);
-                                bufferbuilder.vertex(matrix4f, f8 * 120.0F, f9 * 120.0F, -f9 * 40.0F * afloat[3]).color(afloat[0], afloat[1], afloat[2], 0.0F).endVertex();
-                            }
-
-                            bufferbuilder.end();
-                            BufferUploader.end(bufferbuilder);
-                            p_181410_.popPose();
-                        }
-
                         RenderSystem.enableTexture();
                         RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
                         p_181410_.pushPose();
