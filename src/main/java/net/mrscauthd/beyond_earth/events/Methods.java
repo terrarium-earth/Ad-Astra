@@ -77,7 +77,7 @@ public class Methods {
     public static final ResourceKey<Level> glacio = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "glacio"));
     public static final ResourceKey<Level> glacio_orbit = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "glacio_orbit"));
     public static final ResourceKey<Level> overworld = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation("overworld"));
-    public static final ResourceKey<Level> overworld_orbit = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID,"overworld_orbit"));
+    public static final ResourceKey<Level> earth_orbit = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID,"earth_orbit"));
 
     public static final ResourceLocation space_station = new ResourceLocation(BeyondEarthMod.MODID, "space_station");
 
@@ -90,7 +90,7 @@ public class Methods {
             mercury_orbit,
             venus_orbit,
             glacio_orbit,
-            overworld_orbit
+            earth_orbit
     );
 
     private static final Set<ResourceKey<Level>> spaceWorldsWithoutOxygen = Set.of(
@@ -103,7 +103,7 @@ public class Methods {
             venus,
             venus_orbit,
             glacio_orbit,
-            overworld_orbit
+            earth_orbit
     );
 
     private static final Set<ResourceKey<Level>> spaceWorlds = Set.of(
@@ -117,11 +117,11 @@ public class Methods {
             venus_orbit,
             glacio,
             glacio_orbit,
-            overworld_orbit
+            earth_orbit
     );
 
     private static final Set<ResourceKey<Level>> orbitWorlds = Set.of(
-            overworld_orbit,
+            earth_orbit,
             moon_orbit,
             mars_orbit,
             mercury_orbit,
@@ -449,7 +449,7 @@ public class Methods {
     }
 
     public static void landerTeleportOrbit(Player player, Level world) {
-        if (Methods.isWorld(world, Methods.overworld_orbit)) {
+        if (Methods.isWorld(world, Methods.earth_orbit)) {
             Methods.landerTeleport(player, Methods.overworld);
         }
         else if (Methods.isWorld(world, Methods.moon_orbit)) {
@@ -472,7 +472,7 @@ public class Methods {
     public static void playerFalltoPlanet(Level world, Player player) {
         ResourceKey<Level> world2 = world.dimension();
 
-        if (world2 == Methods.overworld_orbit) {
+        if (world2 == Methods.earth_orbit) {
             Methods.worldTeleport(player, Methods.overworld, 450);
         }
         else if (world2 == Methods.moon_orbit) {

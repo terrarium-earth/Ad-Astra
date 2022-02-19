@@ -102,7 +102,7 @@ public class PlanetSelectionGui {
 			// Teleport Orbit Buttons
 			if (message.getInteger() == 6) {
 				defaultOptions(context.getSender());
-				Methods.teleportButton(context.getSender(), Methods.overworld_orbit, false);
+				Methods.teleportButton(context.getSender(), Methods.earth_orbit, false);
 			}
 			if (message.getInteger() == 7) {
 				defaultOptions(context.getSender());
@@ -130,7 +130,7 @@ public class PlanetSelectionGui {
 			if (message.getInteger() == 12) {
 				defaultOptions(context.getSender());
 				deleteItems(context.getSender());
-				Methods.teleportButton(context.getSender(), Methods.overworld_orbit, true);
+				Methods.teleportButton(context.getSender(), Methods.earth_orbit, true);
 			}
 			if (message.getInteger() == 13) {
 				defaultOptions(context.getSender());
