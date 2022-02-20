@@ -326,6 +326,8 @@ public class RoverEntity extends VehicleEntity {
 
         Player passanger = (Player) this.getPassengers().get(0);
 
+        passanger.resetFallDistance();
+
         if (passanger.zza > 0.01 && this.getEntityData().get(FUEL) != 0) {
 
             if (FUEL_TIMER > FUEL_USE_TICK) {

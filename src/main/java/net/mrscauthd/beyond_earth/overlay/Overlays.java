@@ -221,9 +221,11 @@ public class Overlays {
             GuiHelper.drawVertical(mStack, x, y, textureWidth, textureHeight, oxygen_tank_full, oxygenStoredRatio);
 
             /** OXYGEN AMOUNT TEXT */
-            MutableComponent text = GaugeTextHelper.getPercentText(GaugeValueHelper.getOxygen(oxygenStorage)).build();
-            int textWidth = Minecraft.getInstance().font.width(text);
-            Minecraft.getInstance().font.drawShadow(mStack, text, (x + (textureWidth - textWidth) / 2), y + textureHeight + 3, 0xFFFFFF);
+            if (oxygenStorage != null) {
+                MutableComponent text = GaugeTextHelper.getPercentText(GaugeValueHelper.getOxygen(oxygenStorage)).build();
+                int textWidth = Minecraft.getInstance().font.width(text);
+                Minecraft.getInstance().font.drawShadow(mStack, text, (x + (textureWidth - textWidth) / 2), y + textureHeight + 3, 0xFFFFFF);
+            }
         }
     };
 
