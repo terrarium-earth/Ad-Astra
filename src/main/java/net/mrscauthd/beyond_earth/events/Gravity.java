@@ -9,11 +9,11 @@ import net.mrscauthd.beyond_earth.events.forgeevents.LivingGravityEvent;
 
 public class Gravity {
     public static void Gravity(LivingEntity entity, GravityType type, Level world) {
-        double moon = 0.03;
-        double mars = 0.04;
-        double mercury = 0.03;
-        double venus = 0.04;
-        double orbit = 0.02;
+        float moon = 0.03F;
+        float mars = 0.04F;
+        float mercury = 0.03F;
+        float venus = 0.04F;
+        float orbit = 0.02F;
 
         if (Methods.isWorld(world, Methods.moon)) {
             gravityMath(type, entity, moon, -2.5f);
@@ -47,7 +47,7 @@ public class Gravity {
         return !(entity instanceof Player) && !entity.isFallFlying() && !entity.isInWater() && !entity.isInLava() && !entity.isNoGravity() && !Methods.isVehicle(entity) && !entity.hasEffect(MobEffects.SLOW_FALLING) && !entity.hasEffect(MobEffects.LEVITATION);
     }
 
-    public static void gravityMath(GravityType type, LivingEntity entity, double gravity, float fallDistance) {
+    public static void gravityMath(GravityType type, LivingEntity entity, float gravity, float fallDistance) {
     	if (!checkType(type, entity)) {
     		return;
     	}
