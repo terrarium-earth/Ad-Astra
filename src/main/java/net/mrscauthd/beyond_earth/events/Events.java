@@ -40,6 +40,9 @@ import net.mrscauthd.beyond_earth.item.VehicleItem;
 @Mod.EventBusSubscriber(modid = BeyondEarthMod.MODID)
 public class Events {
 
+    public static final ResourceLocation ArmSpaceSuit = new ResourceLocation(BeyondEarthMod.MODID, "textures/models/armor/arm/space_suit.png");
+    public static final ResourceLocation ArmNetheriteSpaceSuit = new ResourceLocation(BeyondEarthMod.MODID, "textures/models/armor/arm/netherite_space_suit.png");
+
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         if (event.phase == TickEvent.Phase.END) {
@@ -124,8 +127,8 @@ public class Events {
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void renderPlayerArm(RenderArmEvent event) {
-        PlayerModel<AbstractClientPlayer> playerModel = ((PlayerRenderer) Minecraft.getInstance().getEntityRenderDispatcher().getRenderer(event.getPlayer())).getModel();
-
+        PlayerRenderer renderer = (PlayerRenderer) Minecraft.getInstance().getEntityRenderDispatcher().getRenderer(event.getPlayer());
+        PlayerModel<AbstractClientPlayer> playerModel = renderer.getModel();
         Player player = event.getPlayer();
 
         Item item = player.getOffhandItem().getItem();
@@ -137,25 +140,25 @@ public class Events {
         }
 
         if (event.getArm() == HumanoidArm.RIGHT) {
-            if (Methods.checkArmor(event.getPlayer(), 2, ModInit.SPACE_SUIT.get())) {
+            if (Methods.checkArmor(player, 2, ModInit.SPACE_SUIT.get())) {
 
-                Methods.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), new ResourceLocation(BeyondEarthMod.MODID, "textures/models/armor/arm/space_suit.png"), event.getPlayer(), playerModel, playerModel.rightArm);
+                Methods.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), ArmSpaceSuit, event.getPlayer(), playerModel, renderer, playerModel.rightArm);
                 event.setCanceled(true);
-            } else if (Methods.checkArmor(event.getPlayer(), 2, ModInit.NETHERITE_SPACE_SUIT.get())) {
+            } else if (Methods.checkArmor(player, 2, ModInit.NETHERITE_SPACE_SUIT.get())) {
 
-                Methods.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), new ResourceLocation(BeyondEarthMod.MODID, "textures/models/armor/arm/netherite_space_suit.png"), event.getPlayer(), playerModel, playerModel.rightArm);
+                Methods.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), ArmNetheriteSpaceSuit, event.getPlayer(), playerModel, renderer, playerModel.rightArm);
                 event.setCanceled(true);
             }
         }
 
         if (event.getArm() == HumanoidArm.LEFT) {
-            if (Methods.checkArmor(event.getPlayer(), 2, ModInit.SPACE_SUIT.get())) {
+            if (Methods.checkArmor(player, 2, ModInit.SPACE_SUIT.get())) {
 
-                Methods.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), new ResourceLocation(BeyondEarthMod.MODID, "textures/models/armor/arm/space_suit.png"), event.getPlayer(), playerModel, playerModel.leftArm);
+                Methods.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), ArmSpaceSuit, event.getPlayer(), playerModel, renderer, playerModel.leftArm);
                 event.setCanceled(true);
-            } else if (Methods.checkArmor(event.getPlayer(), 2, ModInit.NETHERITE_SPACE_SUIT.get())) {
+            } else if (Methods.checkArmor(player, 2, ModInit.NETHERITE_SPACE_SUIT.get())) {
 
-                Methods.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), new ResourceLocation(BeyondEarthMod.MODID, "textures/models/armor/arm/netherite_space_suit.png"), event.getPlayer(), playerModel, playerModel.leftArm);
+                Methods.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), ArmNetheriteSpaceSuit, event.getPlayer(), playerModel, renderer, playerModel.leftArm);
                 event.setCanceled(true);
             }
         }

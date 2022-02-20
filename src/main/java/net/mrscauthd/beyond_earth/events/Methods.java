@@ -12,6 +12,7 @@ import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
@@ -511,8 +512,9 @@ public class Methods {
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public static void renderArm(PoseStack poseStack, MultiBufferSource bufferSource, int light, ResourceLocation texture, AbstractClientPlayer player, PlayerModel<AbstractClientPlayer> playermodel, ModelPart arm) {
-        Methods.setModelProperties(player, playermodel);
+	public static void renderArm(PoseStack poseStack, MultiBufferSource bufferSource, int light, ResourceLocation texture, AbstractClientPlayer player, PlayerModel<AbstractClientPlayer> playermodel, PlayerRenderer renderer, ModelPart arm) {
+        renderer.setModelProperties(player);
+
         playermodel.attackTime = 0.0F;
         playermodel.crouching = false;
         playermodel.swimAmount = 0.0F;
@@ -523,69 +525,6 @@ public class Methods {
 
         VertexConsumer vertex = ItemRenderer.getArmorFoilBuffer(bufferSource, RenderType.armorCutoutNoCull(texture), false, item.isEnchanted());
         arm.render(poseStack, vertex, light, OverlayTexture.NO_OVERLAY);
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public static void setModelProperties(AbstractClientPlayer p_117819_, PlayerModel<AbstractClientPlayer> modelPart) {
-        PlayerModel<AbstractClientPlayer> playermodel = modelPart;
-        if (p_117819_.isSpectator()) {
-            playermodel.setAllVisible(false);
-            playermodel.head.visible = true;
-            playermodel.hat.visible = true;
-        } else {
-            playermodel.setAllVisible(true);
-            playermodel.hat.visible = p_117819_.isModelPartShown(PlayerModelPart.HAT);
-            playermodel.jacket.visible = p_117819_.isModelPartShown(PlayerModelPart.JACKET);
-            playermodel.leftPants.visible = p_117819_.isModelPartShown(PlayerModelPart.LEFT_PANTS_LEG);
-            playermodel.rightPants.visible = p_117819_.isModelPartShown(PlayerModelPart.RIGHT_PANTS_LEG);
-            playermodel.leftSleeve.visible = p_117819_.isModelPartShown(PlayerModelPart.LEFT_SLEEVE);
-            playermodel.rightSleeve.visible = p_117819_.isModelPartShown(PlayerModelPart.RIGHT_SLEEVE);
-            playermodel.crouching = p_117819_.isCrouching();
-            HumanoidModel.ArmPose humanoidmodel$armpose = getArmPose(p_117819_, InteractionHand.MAIN_HAND);
-            HumanoidModel.ArmPose humanoidmodel$armpose1 = getArmPose(p_117819_, InteractionHand.OFF_HAND);
-            if (humanoidmodel$armpose.isTwoHanded()) {
-                humanoidmodel$armpose1 = p_117819_.getOffhandItem().isEmpty() ? HumanoidModel.ArmPose.EMPTY : HumanoidModel.ArmPose.ITEM;
-            }
-
-            if (p_117819_.getMainArm() == HumanoidArm.RIGHT) {
-                playermodel.rightArmPose = humanoidmodel$armpose;
-                playermodel.leftArmPose = humanoidmodel$armpose1;
-            } else {
-                playermodel.rightArmPose = humanoidmodel$armpose1;
-                playermodel.leftArmPose = humanoidmodel$armpose;
-            }
-        }
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public static HumanoidModel.ArmPose getArmPose(AbstractClientPlayer p_117795_, InteractionHand p_117796_) {
-        ItemStack itemstack = p_117795_.getItemInHand(p_117796_);
-        if (itemstack.isEmpty()) {
-            return HumanoidModel.ArmPose.EMPTY;
-        } else {
-            if (p_117795_.getUsedItemHand() == p_117796_ && p_117795_.getUseItemRemainingTicks() > 0) {
-                UseAnim useanim = itemstack.getUseAnimation();
-                if (useanim == UseAnim.BLOCK) {
-                    return HumanoidModel.ArmPose.BLOCK;
-                }
-                else if (useanim == UseAnim.BOW) {
-                    return HumanoidModel.ArmPose.BOW_AND_ARROW;
-                }
-                else if (useanim == UseAnim.SPEAR) {
-                    return HumanoidModel.ArmPose.THROW_SPEAR;
-                }
-                else if (useanim == UseAnim.CROSSBOW && p_117796_ == p_117795_.getUsedItemHand()) {
-                    return HumanoidModel.ArmPose.CROSSBOW_CHARGE;
-                }
-                else if (useanim == UseAnim.SPYGLASS) {
-                    return HumanoidModel.ArmPose.SPYGLASS;
-                }
-            } else if (!p_117795_.swinging && itemstack.is(Items.CROSSBOW) && CrossbowItem.isCharged(itemstack)) {
-                return HumanoidModel.ArmPose.CROSSBOW_HOLD;
-            }
-
-            return HumanoidModel.ArmPose.ITEM;
-        }
     }
 
     @OnlyIn(Dist.CLIENT)
