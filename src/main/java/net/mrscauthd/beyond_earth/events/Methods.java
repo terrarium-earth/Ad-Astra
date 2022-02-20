@@ -132,7 +132,7 @@ public class Methods {
     public static void worldTeleport(Player entity, ResourceKey<Level> planet, double high) {
         ServerLevel nextLevel = entity.getServer().getLevel(planet);
 
-        if (nextLevel != null && entity instanceof ServerPlayer) {
+        if (nextLevel != null && entity instanceof ServerPlayer && entity.canChangeDimensions()) {
             ((ServerPlayer) entity).connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.WIN_GAME, 0));
             ((ServerPlayer) entity).teleportTo(nextLevel, entity.getX(), high, entity.getZ(), entity.getYRot(), entity.getXRot());
             ((ServerPlayer) entity).connection.send(new ClientboundPlayerAbilitiesPacket(entity.getAbilities()));
