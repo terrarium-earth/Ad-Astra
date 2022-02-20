@@ -25,13 +25,8 @@ public class CoalTorchEvents {
     public static void onBlockPlace(BlockEvent event) {
         Level world = (Level) event.getWorld();
 
-        double x = event.getPos().getX();
-        double y = event.getPos().getY();
-        double z = event.getPos().getZ();
-
-        BlockPos pos = new BlockPos(x, y, z);
-
         if (Methods.isSpaceWorldWithoutOxygen(world)) {
+            BlockPos pos = event.getPos();
 
             BlockState blockState = world.getBlockState(pos);
             Block block = blockState.getBlock();
