@@ -248,15 +248,23 @@ public class Methods {
     public static void planetFire(LivingEntity entity, ResourceKey<Level> planet) {
         Level level = entity.level;
 
-        if (Methods.isWorld(level, planet)) {
-            if (!Methods.netheriteSpaceSuitCheck(entity) && !entity.hasEffect(MobEffects.FIRE_RESISTANCE) && !entity.fireImmune() && (entity instanceof Mob || entity instanceof Player)) {
-                if (!MinecraftForge.EVENT_BUS.post(new LivingSetFireInHotPlanetEvent(entity, planet))) {
-                    if (!tagCheck(entity, BeyondEarthMod.MODID + ":entities/planet_fire")) {
-                        entity.setSecondsOnFire(10);
-                    }
-                }
-            }
+        if (!Methods.isWorld(level, planet)) {
+            return;
         }
+
+        if ((entity instanceof Mob || entity instanceof Player) && (Methods.netheriteSpaceSuitCheck(entity) || entity.hasEffect(MobEffects.FIRE_RESISTANCE) || entity.fireImmune())) {
+            return;
+        }
+
+        if (MinecraftForge.EVENT_BUS.post(new LivingSetFireInHotPlanetEvent(entity, planet))) {
+            return;
+        }
+
+        if (tagCheck(entity, BeyondEarthMod.MODID + ":entities/planet_fire")) {
+            return;
+        }
+
+        entity.setSecondsOnFire(10);
     }
 
     /**If a entity should not get Damage add it to the Tag "venus_rain"*/
@@ -282,8 +290,12 @@ public class Methods {
         }
     }
 
-    /**If a entity should get oxygen damage add it to the tag "oxygen" (don't add the Player, he has a own oxygen system)*/
+    /**If a entity should get oxygen damage add it to the tag "oxygen"*/
     public static void entityOxygen(LivingEntity entity, Level world) {
+        if (entity instanceof Player) {
+            return;
+        }
+
         if (Config.ENTITY_OXYGEN_SYSTEM.get() && Methods.isSpaceWorldWithoutOxygen(world) && tagCheck(entity, BeyondEarthMod.MODID + ":entities/oxygen")) {
 
             if (!entity.hasEffect(ModInit.OXYGEN_EFFECT.get())) {
