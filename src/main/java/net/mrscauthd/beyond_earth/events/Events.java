@@ -109,15 +109,15 @@ public class Events {
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void bobViewer(RenderViewEvent event) {
-        Entity ridding = Minecraft.getInstance().player.getVehicle();
         Minecraft mc = Minecraft.getInstance();
-        CameraType cameraType = mc.options.getCameraType();
+        Entity ridding = mc.player.getVehicle();
 
         if (Methods.isRocket(ridding)) {
+            CameraType cameraType = mc.options.getCameraType();
             if (cameraType.equals(CameraType.THIRD_PERSON_FRONT) || cameraType.equals(CameraType.THIRD_PERSON_BACK)) {
                 event.setCanceled(true);
 
-                if (ridding instanceof IRocketEntity && ridding.getEntityData().get(IRocketEntity.ROCKET_START)) {
+                if (ridding.getEntityData().get(IRocketEntity.ROCKET_START)) {
                     Methods.bobView(event.getPoseStack(), event.getTick());
                 }
             }
@@ -149,9 +149,8 @@ public class Events {
                 Methods.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), ArmNetheriteSpaceSuit, event.getPlayer(), playerModel, renderer, playerModel.rightArm);
                 event.setCanceled(true);
             }
-        }
-
-        if (event.getArm() == HumanoidArm.LEFT) {
+        } else {
+            // HumanoidArm.LEFT
             if (Methods.checkArmor(player, 2, ModInit.SPACE_SUIT.get())) {
 
                 Methods.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), ArmSpaceSuit, event.getPlayer(), playerModel, renderer, playerModel.leftArm);
@@ -179,8 +178,8 @@ public class Events {
             Player player = (Player) event.getLivingEntity();
             HumanoidModel model = event.getModel();
 
-            //Player Rocket Sit Rotations
             if (Methods.isRocket(player.getVehicle())) {
+                //Player Rocket Sit Rotations
                 model.rightLeg.xRot = 0F;
                 model.leftLeg.xRot = 0F;
                 model.rightLeg.yRot = 0F;
@@ -191,20 +190,18 @@ public class Events {
                 // Arms
                 model.rightArm.xRot = -0.07f;
                 model.leftArm.xRot = -0.07f;
-            }
-
-            //Player Hold Vehicles Rotation
-            if (!Methods.isRocket(player.getVehicle())) {
+            } else {
+                //Player Hold Vehicles Rotation
                 Item item1 = player.getMainHandItem().getItem();
                 Item item2 = player.getOffhandItem().getItem();
 
                 if (item1 instanceof VehicleItem || item2 instanceof VehicleItem) {
-                    model.rightArm.xRot = 10;
-                    model.leftArm.xRot = 10;
-                    model.rightArm.yRot = 0;
-                    model.leftArm.yRot = 0;
-                    model.rightArm.zRot = 0;
-                    model.leftArm.zRot = 0;
+                    model.rightArm.xRot = 10F;
+                    model.leftArm.xRot = 10F;
+                    model.rightArm.yRot = 0F;
+                    model.leftArm.yRot = 0F;
+                    model.rightArm.zRot = 0F;
+                    model.leftArm.zRot = 0F;
                 }
             }
         }
@@ -220,17 +217,15 @@ public class Events {
                 event.setCanceled(true);
             }
 
-            Item item1 = player.getMainHandItem().getItem();
-            Item item2 = player.getOffhandItem().getItem();
-
-            if (item1 instanceof VehicleItem) {
-                if (event.getHandSide() == HumanoidArm.LEFT) {
+            if (event.getHandSide() == HumanoidArm.LEFT) {
+                Item mainHandItem = player.getMainHandItem().getItem();
+                if (mainHandItem instanceof VehicleItem) {
                     event.setCanceled(true);
                 }
-            }
-
-            if (item2 instanceof VehicleItem) {
-                if (event.getHandSide() == HumanoidArm.RIGHT) {
+            } else {
+                // HumanoidArm.RIGHT
+                Item offHandItem = player.getOffhandItem().getItem();
+                if (offHandItem instanceof VehicleItem) {
                     event.setCanceled(true);
                 }
             }

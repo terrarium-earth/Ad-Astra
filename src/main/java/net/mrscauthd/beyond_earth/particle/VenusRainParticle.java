@@ -16,13 +16,13 @@ public class VenusRainParticle extends TextureSheetParticle {
     public VenusRainParticle(ClientLevel world, double x, double y, double z, double vx, double vy, double vz, SpriteSet spriteSet) {
         super(world, x, y, z);
         this.spriteSet = spriteSet;
-        this.quadSize *= (float) 1;
+        this.quadSize *= 1F;
         this.hasPhysics = true;
-        this.angularVelocity = (float) 0.1;
-        this.angularAcceleration = (float) 0.01;
-        this.xd *= (double)0.3F;
-        this.yd = Math.random() * (double)0.2F + (double)0.1F;
-        this.zd *= (double)0.3F;
+        this.angularVelocity = 0.1F;
+        this.angularAcceleration = 0.01F;
+        this.xd *= 0.3D;
+        this.yd = Math.random() * 0.2D + 0.1D;
+        this.zd *= 0.3D;
         this.setSize(0.01F, 0.01F);
         this.gravity = 0.06F;
         this.age = (int)(8.0D / (Math.random() * 0.8D + 0.2D));
@@ -45,16 +45,16 @@ public class VenusRainParticle extends TextureSheetParticle {
         } else {
             this.yd -= (double)this.gravity;
             this.move(this.xd, this.yd, this.zd);
-            this.xd *= (double)0.98F;
-            this.yd *= (double)0.98F;
-            this.zd *= (double)0.98F;
+            this.xd *= 0.98D;
+            this.yd *= 0.98D;
+            this.zd *= 0.98D;
             if (this.onGround) {
                 if (Math.random() < 0.5D) {
                     this.remove();
                 }
 
-                this.xd *= (double)0.7F;
-                this.zd *= (double)0.7F;
+                this.xd *= 0.7D;
+                this.zd *= 0.7D;
             }
 
             BlockPos blockpos = new BlockPos(this.x, this.y, this.z);
