@@ -5,7 +5,6 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector3f;
 import io.netty.buffer.Unpooled;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.player.AbstractClientPlayer;
@@ -31,7 +30,6 @@ import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -39,7 +37,6 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.player.PlayerModelPart;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
@@ -81,6 +78,9 @@ public class Methods {
     public static final ResourceKey<Level> earth_orbit = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID,"earth_orbit"));
 
     public static final ResourceLocation space_station = new ResourceLocation(BeyondEarthMod.MODID, "space_station");
+
+    public static final ResourceLocation armSpaceSuit = new ResourceLocation(BeyondEarthMod.MODID, "textures/models/armor/arm/space_suit.png");
+    public static final ResourceLocation armNetheriteSpaceSuit = new ResourceLocation(BeyondEarthMod.MODID, "textures/models/armor/arm/netherite_space_suit.png");
 
     public static final Set<ResourceKey<Level>> worldsWithoutRain = Set.of(
             moon,
@@ -134,14 +134,17 @@ public class Methods {
         ServerLevel nextLevel = entity.getServer().getLevel(planet);
 
         if (nextLevel != null && entity instanceof ServerPlayer && entity.canChangeDimensions()) {
-            ((ServerPlayer) entity).connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.WIN_GAME, 0));
-            ((ServerPlayer) entity).teleportTo(nextLevel, entity.getX(), high, entity.getZ(), entity.getYRot(), entity.getXRot());
-            ((ServerPlayer) entity).connection.send(new ClientboundPlayerAbilitiesPacket(entity.getAbilities()));
+            ServerPlayer serverPlayer = (ServerPlayer) entity;
+
+            serverPlayer.connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.WIN_GAME, 0));
+            serverPlayer.teleportTo(nextLevel, entity.getX(), high, entity.getZ(), entity.getYRot(), entity.getXRot());
+            serverPlayer.connection.send(new ClientboundPlayerAbilitiesPacket(entity.getAbilities()));
 
             for (MobEffectInstance effectinstance : entity.getActiveEffects()) {
-                ((ServerPlayer) entity).connection.send(new ClientboundUpdateMobEffectPacket(entity.getId(), effectinstance));
+                serverPlayer.connection.send(new ClientboundUpdateMobEffectPacket(entity.getId(), effectinstance));
             }
-            ((ServerPlayer) entity).connection.send(new ClientboundSetExperiencePacket(entity.experienceProgress, entity.totalExperience, entity.experienceLevel));
+
+            serverPlayer.connection.send(new ClientboundSetExperiencePacket(entity.experienceProgress, entity.totalExperience, entity.experienceLevel));
         }
     }
 
@@ -557,5 +560,20 @@ public class Methods {
             poseStack.mulPose(Vector3f.ZP.rotationDegrees(Mth.sin(f1 * (float) Math.PI) * f2 * 3.0F));
             poseStack.mulPose(Vector3f.XP.rotationDegrees(Math.abs(Mth.cos(f1 * (float) Math.PI - 0.2F) * f2) * 5.0F));
         }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static boolean armRenderer(AbstractClientPlayer player, PoseStack poseStack, MultiBufferSource multiBufferSource, int light, PlayerModel<AbstractClientPlayer> playerModel, PlayerRenderer renderer) {
+        if (Methods.checkArmor(player, 2, ModInit.SPACE_SUIT.get())) {
+
+            Methods.renderArm(poseStack, multiBufferSource, light, armSpaceSuit, player, playerModel, renderer, playerModel.rightArm);
+            return true;
+        } else if (Methods.checkArmor(player, 2, ModInit.NETHERITE_SPACE_SUIT.get())) {
+
+            Methods.renderArm(poseStack, multiBufferSource, light, armNetheriteSpaceSuit, player, playerModel, renderer, playerModel.rightArm);
+            return true;
+        }
+
+        return false;
     }
 }

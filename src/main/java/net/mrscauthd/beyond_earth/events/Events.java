@@ -7,7 +7,6 @@ import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.resources.sounds.TickableSoundInstance;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
@@ -30,7 +29,6 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
-import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.entity.*;
 import net.mrscauthd.beyond_earth.events.forgeevents.RenderHandItemEvent;
 import net.mrscauthd.beyond_earth.events.forgeevents.RenderViewEvent;
@@ -39,9 +37,6 @@ import net.mrscauthd.beyond_earth.item.VehicleItem;
 
 @Mod.EventBusSubscriber(modid = BeyondEarthMod.MODID)
 public class Events {
-
-    public static final ResourceLocation ArmSpaceSuit = new ResourceLocation(BeyondEarthMod.MODID, "textures/models/armor/arm/space_suit.png");
-    public static final ResourceLocation ArmNetheriteSpaceSuit = new ResourceLocation(BeyondEarthMod.MODID, "textures/models/armor/arm/netherite_space_suit.png");
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
@@ -114,6 +109,7 @@ public class Events {
 
         if (Methods.isRocket(ridding)) {
             CameraType cameraType = mc.options.getCameraType();
+
             if (cameraType.equals(CameraType.THIRD_PERSON_FRONT) || cameraType.equals(CameraType.THIRD_PERSON_BACK)) {
                 event.setCanceled(true);
 
@@ -127,9 +123,9 @@ public class Events {
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void renderPlayerArm(RenderArmEvent event) {
-        PlayerRenderer renderer = (PlayerRenderer) Minecraft.getInstance().getEntityRenderDispatcher().getRenderer(event.getPlayer());
+        AbstractClientPlayer player = event.getPlayer();
+        PlayerRenderer renderer = (PlayerRenderer) Minecraft.getInstance().getEntityRenderDispatcher().getRenderer(player);
         PlayerModel<AbstractClientPlayer> playerModel = renderer.getModel();
-        Player player = event.getPlayer();
 
         Item item = player.getOffhandItem().getItem();
         Item item2 = player.getMainHandItem().getItem();
@@ -140,26 +136,9 @@ public class Events {
         }
 
         if (event.getArm() == HumanoidArm.RIGHT) {
-            if (Methods.checkArmor(player, 2, ModInit.SPACE_SUIT.get())) {
-
-                Methods.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), ArmSpaceSuit, event.getPlayer(), playerModel, renderer, playerModel.rightArm);
-                event.setCanceled(true);
-            } else if (Methods.checkArmor(player, 2, ModInit.NETHERITE_SPACE_SUIT.get())) {
-
-                Methods.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), ArmNetheriteSpaceSuit, event.getPlayer(), playerModel, renderer, playerModel.rightArm);
-                event.setCanceled(true);
-            }
+            event.setCanceled(Methods.armRenderer(player, event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), playerModel, renderer));
         } else {
-            // HumanoidArm.LEFT
-            if (Methods.checkArmor(player, 2, ModInit.SPACE_SUIT.get())) {
-
-                Methods.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), ArmSpaceSuit, event.getPlayer(), playerModel, renderer, playerModel.leftArm);
-                event.setCanceled(true);
-            } else if (Methods.checkArmor(player, 2, ModInit.NETHERITE_SPACE_SUIT.get())) {
-
-                Methods.renderArm(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), ArmNetheriteSpaceSuit, event.getPlayer(), playerModel, renderer, playerModel.leftArm);
-                event.setCanceled(true);
-            }
+            event.setCanceled(Methods.armRenderer(player, event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), playerModel, renderer));
         }
     }
 
@@ -174,35 +153,39 @@ public class Events {
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void setupPlayerAngles(SetupLivingBipedAnimEvent.Post event) {
-        if (event.getLivingEntity() instanceof Player) {
-            Player player = (Player) event.getLivingEntity();
-            HumanoidModel model = event.getModel();
+        if (!(event.getLivingEntity() instanceof Player)) {
+            return;
+        }
 
-            if (Methods.isRocket(player.getVehicle())) {
-                //Player Rocket Sit Rotations
-                model.rightLeg.xRot = 0F;
-                model.leftLeg.xRot = 0F;
-                model.rightLeg.yRot = 0F;
-                model.leftLeg.yRot = 0F;
-                model.rightLeg.zRot = 0F;
-                model.leftLeg.zRot = 0F;
+        Player player = (Player) event.getLivingEntity();
+        HumanoidModel model = event.getModel();
 
-                // Arms
-                model.rightArm.xRot = -0.07f;
-                model.leftArm.xRot = -0.07f;
-            } else {
-                //Player Hold Vehicles Rotation
-                Item item1 = player.getMainHandItem().getItem();
-                Item item2 = player.getOffhandItem().getItem();
+        //Player Rocket Sit Rotations
+        if (Methods.isRocket(player.getVehicle())) {
+            model.rightLeg.xRot = 0F;
+            model.leftLeg.xRot = 0F;
+            model.rightLeg.yRot = 0F;
+            model.leftLeg.yRot = 0F;
+            model.rightLeg.zRot = 0F;
+            model.leftLeg.zRot = 0F;
 
-                if (item1 instanceof VehicleItem || item2 instanceof VehicleItem) {
-                    model.rightArm.xRot = 10F;
-                    model.leftArm.xRot = 10F;
-                    model.rightArm.yRot = 0F;
-                    model.leftArm.yRot = 0F;
-                    model.rightArm.zRot = 0F;
-                    model.leftArm.zRot = 0F;
-                }
+            // Arms
+            model.rightArm.xRot = -0.07f;
+            model.leftArm.xRot = -0.07f;
+        }
+
+        //Player Hold Vehicles Rotation
+        if (!Methods.isRocket(player.getVehicle())) {
+            Item item1 = player.getMainHandItem().getItem();
+            Item item2 = player.getOffhandItem().getItem();
+
+            if (item1 instanceof VehicleItem || item2 instanceof VehicleItem) {
+                model.rightArm.xRot = 10F;
+                model.leftArm.xRot = 10F;
+                model.rightArm.yRot = 0F;
+                model.leftArm.yRot = 0F;
+                model.rightArm.zRot = 0F;
+                model.leftArm.zRot = 0F;
             }
         }
     }
@@ -210,26 +193,30 @@ public class Events {
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void itemRender(RenderHandItemEvent.Pre event) {
-        if (event.getLivingEntity() instanceof Player) {
-            Player player = (Player) event.getLivingEntity();
+        if (!(event.getLivingEntity() instanceof Player)) {
+            return;
+        }
 
-            if (Methods.isRocket(player.getVehicle())) {
+        Player player = (Player) event.getLivingEntity();
+
+        /** Rocket */
+        if (Methods.isRocket(player.getVehicle())) {
+            event.setCanceled(true);
+        }
+
+        /** Arm not Rendering if you have a VehicleItem in your Hand */
+        if (event.getHandSide() == HumanoidArm.LEFT) {
+            Item item = player.getMainHandItem().getItem();
+
+            if (item instanceof VehicleItem) {
                 event.setCanceled(true);
             }
+        } else {
+            Item item = player.getOffhandItem().getItem();
 
-            if (event.getHandSide() == HumanoidArm.LEFT) {
-                Item mainHandItem = player.getMainHandItem().getItem();
-                if (mainHandItem instanceof VehicleItem) {
-                    event.setCanceled(true);
-                }
-            } else {
-                // HumanoidArm.RIGHT
-                Item offHandItem = player.getOffhandItem().getItem();
-                if (offHandItem instanceof VehicleItem) {
-                    event.setCanceled(true);
-                }
+            if (item instanceof VehicleItem) {
+                event.setCanceled(true);
             }
-
         }
     }
 
@@ -249,40 +236,51 @@ public class Events {
 
     @SubscribeEvent
     public static void onEntityAttacked(LivingAttackEvent event) {
-        if (event != null && event.getEntity() instanceof Player) {
-            Player entity = (Player) event.getEntity();
-
-            if (Methods.netheriteSpaceSuitCheck(entity)) {
-                if (event.getSource().isFire()) {
-                    entity.setRemainingFireTicks(0);
-                    event.setCanceled(true);
-                }
-            }
+        if (!(event.getEntity() instanceof Player)) {
+            return;
         }
+
+        Player entity = (Player) event.getEntity();
+
+        if (!event.getSource().isFire()) {
+            return;
+        }
+
+        if (!Methods.netheriteSpaceSuitCheck(entity)) {
+            return;
+        }
+
+        entity.setRemainingFireTicks(0);
+        event.setCanceled(true);
     }
 
     @SubscribeEvent
     public static void fishingProjectile(ProjectileImpactEvent event) {
-        if (event.getRayTraceResult().getType() == HitResult.Type.ENTITY) {
-            Entity entity = ((EntityHitResult) event.getRayTraceResult()).getEntity();
-            if (Methods.isVehicle(entity)) {
-                event.setCanceled(true);
-            }
+        if (event.getRayTraceResult().getType() != HitResult.Type.ENTITY) {
+            return;
+        }
+
+        Entity entity = ((EntityHitResult) event.getRayTraceResult()).getEntity();
+
+        if (Methods.isVehicle(entity)) {
+            event.setCanceled(true);
         }
     }
 
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void spaceSounds(PlaySoundEvent event) {
-        if (event.getSound() != null) {
-            if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.level != null && Methods.checkSound(event.getSound().getSource()) && Methods.isSpaceWorldWithoutOxygen(Minecraft.getInstance().player.level)) {
+        if (event.getSound() == null) {
+            return;
+        }
 
-                if (!(event.getSound() instanceof TickableSoundInstance)) {
-                    event.setSound(new SpaceSoundSystem(event.getSound()));
+        if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.level != null && Methods.checkSound(event.getSound().getSource()) && Methods.isSpaceWorldWithoutOxygen(Minecraft.getInstance().player.level)) {
 
-                } else if (event.getSound() instanceof TickableSoundInstance) {
-                    event.setSound(new TickableSpaceSoundSystem((TickableSoundInstance) event.getSound()));
-                }
+            if (!(event.getSound() instanceof TickableSoundInstance)) {
+                event.setSound(new SpaceSoundSystem(event.getSound()));
+
+            } else if (event.getSound() instanceof TickableSoundInstance) {
+                event.setSound(new TickableSpaceSoundSystem((TickableSoundInstance) event.getSound()));
             }
         }
     }
@@ -290,6 +288,7 @@ public class Events {
     @SubscribeEvent
     public static void onKill(LivingDeathEvent event) {
         if (event.getEntity() instanceof Player && event.getEntity().getPersistentData().getBoolean(BeyondEarthMod.MODID + ":planet_selection_gui_open")) {
+
             ((Player) event.getEntity()).closeContainer();
             Methods.cleanUpPlayerNBT((Player) event.getEntity());
             event.getEntity().setNoGravity(false);
