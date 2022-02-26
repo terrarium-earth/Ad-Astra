@@ -14,10 +14,12 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.DismountHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.capabilities.Capability;
@@ -26,12 +28,21 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
+import net.mrscauthd.beyond_earth.BeyondEarthMod;
+import net.mrscauthd.beyond_earth.ModInit;
+import net.mrscauthd.beyond_earth.block.RocketLaunchPad;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Set;
 
-public class IRocketEntity extends VehicleEntity {
+public abstract class IRocketEntity extends VehicleEntity {
+
+    public double ROCKET_SPEED;
+
+    public double ar = 0;
+    public double ay = 0;
+    public double ap = 0;
 
     public static final EntityDataAccessor<Boolean> ROCKET_START = SynchedEntityData.defineId(RocketTier1Entity.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Integer> BUCKETS = SynchedEntityData.defineId(RocketTier1Entity.class, EntityDataSerializers.INT);
@@ -44,6 +55,10 @@ public class IRocketEntity extends VehicleEntity {
         this.entityData.define(BUCKETS, 0);
         this.entityData.define(FUEL, 0);
         this.entityData.define(START_TIMER, 0);
+    }
+
+    protected void setRocketSpeed(double speed) {
+        this.ROCKET_SPEED = speed;
     }
 
     @Override
@@ -144,6 +159,90 @@ public class IRocketEntity extends VehicleEntity {
         this.getEntityData().set(BUCKETS, compound.getInt("buckets"));
         this.getEntityData().set(FUEL, compound.getInt("fuel"));
         this.getEntityData().set(START_TIMER, compound.getInt("start_timer"));
+    }
+
+    public void particleSpawn() {
+
+    }
+
+    public void doesDrop() {
+        if (this.isOnGround() || this.isInWater()) {
+
+            BlockPos blockPos = new BlockPos(Math.floor(this.getX()), this.getY() - 0.01, Math.floor(this.getZ()));
+            BlockState state = level.getBlockState(blockPos);
+
+            if (!level.isEmptyBlock(this.getOnPos()) && ((state.getBlock() instanceof RocketLaunchPad && !state.getValue(RocketLaunchPad.STAGE)) || !(state.getBlock() instanceof RocketLaunchPad))) {
+
+                this.dropEquipment();
+                this.spawnRocketItem();
+                this.remove(RemovalReason.DISCARDED);
+            }
+        }
+    }
+
+    public void fillUpRocket() {
+
+    }
+
+    public void rocketAnimation() {
+        ar = ar + 1;
+        if (ar == 1) {
+            ay = ay + 0.006;
+            ap = ap + 0.006;
+        }
+        if (ar == 2) {
+            ar = 0;
+            ay = 0;
+            ap = 0;
+        }
+    }
+
+    public void startTimerAndFlyMovement() {
+        if (this.entityData.get(START_TIMER) < 200) {
+            this.entityData.set(START_TIMER, this.entityData.get(START_TIMER) + 1);
+        }
+
+        if (this.entityData.get(START_TIMER) == 200) {
+            if (this.getDeltaMovement().y < ROCKET_SPEED - 0.1) {
+                this.setDeltaMovement(this.getDeltaMovement().x, this.getDeltaMovement().y + 0.1, this.getDeltaMovement().z);
+            } else {
+                this.setDeltaMovement(this.getDeltaMovement().x, ROCKET_SPEED, this.getDeltaMovement().z);
+            }
+        }
+    }
+
+    public void openPlanetSelectionGui() {
+        if (this.getY() > 600 && !this.getPassengers().isEmpty()) {
+            Entity pass = this.getPassengers().get(0);
+
+            if (pass instanceof Player && ((Player) pass).containerMenu != null) {
+                ((Player) pass).closeContainer();
+            }
+
+            pass.getPersistentData().putBoolean(BeyondEarthMod.MODID + ":planet_selection_gui_open", true);
+            pass.getPersistentData().putString(BeyondEarthMod.MODID + ":rocket_type", this.getType().toString());
+            pass.getPersistentData().putString(BeyondEarthMod.MODID + ":slot0", this.getInventory().getStackInSlot(0).getItem().getRegistryName().toString());
+            pass.setNoGravity(true);
+
+            this.remove(RemovalReason.DISCARDED);
+        } else if (this.getY() > 600 && this.getPassengers().isEmpty())  {
+            this.remove(RemovalReason.DISCARDED);
+        }
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+
+        this.doesDrop();
+        this.fillUpRocket();
+
+        if (this.entityData.get(ROCKET_START)) {
+            this.particleSpawn();
+            this.rocketAnimation();
+            this.startTimerAndFlyMovement();
+            this.openPlanetSelectionGui();
+        }
     }
 
     @Override
