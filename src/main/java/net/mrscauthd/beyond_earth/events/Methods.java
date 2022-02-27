@@ -263,7 +263,7 @@ public class Methods {
             return;
         }
 
-        if (tagCheck(entity, BeyondEarthMod.MODID + ":entities/planet_fire")) {
+        if (tagCheck(entity, ModInit.PLANET_FIRE_TAG)) {
             return;
         }
 
@@ -284,7 +284,7 @@ public class Methods {
             return;
         }
 
-        if (tagCheck(entity, BeyondEarthMod.MODID + ":entities/venus_rain")) {
+        if (tagCheck(entity, ModInit.VENUS_RAIN_TAG)) {
             return;
         }
 
@@ -299,7 +299,7 @@ public class Methods {
             return;
         }
 
-        if (Config.ENTITY_OXYGEN_SYSTEM.get() && Methods.isSpaceWorldWithoutOxygen(world) && tagCheck(entity, BeyondEarthMod.MODID + ":entities/oxygen")) {
+        if (Config.ENTITY_OXYGEN_SYSTEM.get() && Methods.isSpaceWorldWithoutOxygen(world) && tagCheck(entity, ModInit.OXYGEN_TAG)) {
 
             if (!entity.hasEffect(ModInit.OXYGEN_EFFECT.get())) {
 
@@ -340,8 +340,8 @@ public class Methods {
         }
     }
 
-    public static boolean tagCheck(Entity entity, String tag) {
-        return EntityTypeTags.getAllTags().getTagOrEmpty(new ResourceLocation(tag)).contains(entity.getType());
+    public static boolean tagCheck(Entity entity, ResourceLocation tag) {
+        return EntityTypeTags.getAllTags().getTagOrEmpty(tag).contains(entity.getType());
     }
     
     public static boolean tagCheck(Fluid fluid, ResourceLocation tag) {

@@ -553,6 +553,11 @@ public class ModInit {
 	public static final RegistryObject<RocketPart> ROCKET_PART_FIN_RIGHT = ROCKET_PARTS.register("fin_right", () -> new RocketPart(2));
 	public static final RegistryObject<RocketPart> ROCKET_PART_ENGINE = ROCKET_PARTS.register("engine", () -> new RocketPart(1));
 
+    //Tags
+    public static final ResourceLocation OXYGEN_TAG = new ResourceLocation(BeyondEarthMod.MODID, "entities/oxygen");
+    public static final ResourceLocation PLANET_FIRE_TAG = new ResourceLocation(BeyondEarthMod.MODID, "entities/planet_fire");
+    public static final ResourceLocation VENUS_RAIN_TAG = new ResourceLocation(BeyondEarthMod.MODID, "entities/venus_rain");
+
 	//Register Processor
     public static final StructureProcessorType<StructureVoidProcessor> STRUCTURE_VOID_PROCESSOR = () -> StructureVoidProcessor.CODEC;
 
