@@ -88,11 +88,11 @@ public class Events {
             return;
         }
 
-        Player entity = (Player) event.getEntity();
-
         if (!event.getSource().isFire()) {
             return;
         }
+
+        Player entity = (Player) event.getEntity();
 
         if (!Methods.netheriteSpaceSuitCheck(entity)) {
             return;
