@@ -37,9 +37,6 @@ public class Events {
             //Oxygen System
             OxygenSystem.OxygenSystem(player);
 
-            //Gravity Methode Call
-            Gravity.Gravity(player, Gravity.GravityType.PLAYER, world);
-
             //Drop Off Hand Item
             Methods.dropRocket(player);
 
@@ -59,7 +56,11 @@ public class Events {
         Methods.entityOxygen(entity,world);
 
         //Gravity Methode Call
-        Gravity.Gravity(entity, Gravity.GravityType.LIVING, world);
+        if (entity instanceof Player) {
+            Gravity.Gravity(entity, Gravity.GravityType.PLAYER, world);
+        } else {
+            Gravity.Gravity(entity, Gravity.GravityType.LIVING, world);
+        }
 
         //Venus Rain
         Methods.venusRain(entity, Methods.venus);
