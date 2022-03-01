@@ -9,22 +9,16 @@ import net.mrscauthd.beyond_earth.events.Gravity;
 public class LivingGravityEvent extends LivingEvent {
 
     private double gravity;
-    private float fallDistance;
     private Gravity.GravityType type;
 
-    public LivingGravityEvent(LivingEntity entity, double gravity, float fallDistance, Gravity.GravityType type) {
+    public LivingGravityEvent(LivingEntity entity, double gravity, Gravity.GravityType type) {
         super(entity);
         this.gravity = gravity;
-        this.fallDistance = fallDistance;
         this.type = type;
     }
 
     public double getGravity() {
         return gravity;
-    }
-
-    public float getFallDistance() {
-        return fallDistance;
     }
 
     public Gravity.GravityType getType() {

@@ -11,6 +11,7 @@ import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
@@ -122,6 +123,31 @@ public class Events {
             ((Player) event.getEntity()).closeContainer();
             Methods.cleanUpPlayerNBT((Player) event.getEntity());
             event.getEntity().setNoGravity(false);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onFallDamge(LivingFallEvent event) {
+        LivingEntity entity = event.getEntityLiving();
+        Level level = entity.level;
+
+        if (Methods.isWorld(level, Methods.moon)) {
+            event.setDistance(event.getDistance() - 5.5F);
+        }
+        else if (Methods.isWorld(level, Methods.mars)) {
+            event.setDistance(event.getDistance() - 5.0F);
+        }
+        else if (Methods.isWorld(level, Methods.glacio)) {
+            event.setDistance(event.getDistance() - 5.0F);
+        }
+        else if (Methods.isWorld(level, Methods.mercury)) {
+            event.setDistance(event.getDistance() - 5.5F);
+        }
+        else if (Methods.isWorld(level, Methods.venus)) {
+            event.setDistance(event.getDistance() - 5.0F);
+        }
+        else if (Methods.isOrbitWorld(level)) {
+            event.setDistance(event.getDistance() - 8.5F);
         }
     }
 }
