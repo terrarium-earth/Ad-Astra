@@ -127,7 +127,7 @@ public class Events {
     }
 
     @SubscribeEvent
-    public static void onFallDamge(LivingFallEvent event) {
+    public static void onFallDamage(LivingFallEvent event) {
         LivingEntity entity = event.getEntityLiving();
         Level level = entity.level;
 
