@@ -43,8 +43,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.network.NetworkHooks;
@@ -169,24 +167,28 @@ public class Methods {
     public static boolean spaceSuitCheckBoth(LivingEntity entity) {
         boolean item3 = checkArmor(entity, 3, ModInit.OXYGEN_MASK.get());
         boolean item3b = checkArmor(entity, 3, ModInit.NETHERITE_OXYGEN_MASK.get());
+
         if (!item3 && !item3b) {
             return false;
         }
 
         boolean item2 = checkArmor(entity, 2, ModInit.SPACE_SUIT.get());
         boolean item2b = checkArmor(entity, 2, ModInit.NETHERITE_SPACE_SUIT.get());
+
         if (!item2 && !item2b) {
             return false;
         }
 
         boolean item1 = checkArmor(entity, 1, ModInit.SPACE_PANTS.get());
         boolean item1b = checkArmor(entity, 1, ModInit.NETHERITE_SPACE_PANTS.get());
+
         if (!item1 && !item1b) {
             return false;
         }
 
         boolean item0 = checkArmor(entity, 0, ModInit.SPACE_BOOTS.get());
         boolean item0b = checkArmor(entity, 0, ModInit.NETHERITE_SPACE_BOOTS.get());
+
         if (!item0 && !item0b) {
             return false;
         }
@@ -227,7 +229,7 @@ public class Methods {
     }
 
     public static void rocketSounds(Entity entity, Level world) {
-        world.playSound(null, entity, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation(BeyondEarthMod.MODID,"rocket_fly")), SoundSource.NEUTRAL,1,1);
+        world.playSound(null, entity, ModInit.ROCKET_SOUND.get(), SoundSource.NEUTRAL,1,1);
     }
 
     public static void dropRocket(Player player) {
@@ -322,8 +324,8 @@ public class Methods {
         }
     }
 
-    public static void vehicleRotation(Entity vehicle, float roation) {
-        vehicle.setYRot(vehicle.getYRot() + roation);
+    public static void vehicleRotation(Entity vehicle, float rotation) {
+        vehicle.setYRot(vehicle.getYRot() + rotation);
         vehicle.setYBodyRot(vehicle.getYRot());
         vehicle.yRotO = vehicle.getYRot();
     }
@@ -526,7 +528,6 @@ public class Methods {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static void renderArm(PoseStack poseStack, MultiBufferSource bufferSource, int light, ResourceLocation texture, AbstractClientPlayer player, PlayerModel<AbstractClientPlayer> playermodel, PlayerRenderer renderer, ModelPart arm) {
         renderer.setModelProperties(player);
 
@@ -542,12 +543,10 @@ public class Methods {
         arm.render(poseStack, vertex, light, OverlayTexture.NO_OVERLAY);
     }
 
-    @OnlyIn(Dist.CLIENT)
     public static boolean checkSound(SoundSource sound) {
         return sound == SoundSource.BLOCKS || sound == SoundSource.NEUTRAL || sound == SoundSource.RECORDS || sound == SoundSource.WEATHER || sound == SoundSource.HOSTILE || sound == SoundSource.PLAYERS || sound == SoundSource.AMBIENT;
     }
 
-    @OnlyIn(Dist.CLIENT)
     public static void bobView(PoseStack poseStack, float tick) {
         Minecraft mc = Minecraft.getInstance();
 
@@ -562,13 +561,14 @@ public class Methods {
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
     public static boolean armRenderer(AbstractClientPlayer player, PoseStack poseStack, MultiBufferSource multiBufferSource, int light, PlayerModel<AbstractClientPlayer> playerModel, PlayerRenderer renderer) {
         if (Methods.checkArmor(player, 2, ModInit.SPACE_SUIT.get())) {
 
             Methods.renderArm(poseStack, multiBufferSource, light, armSpaceSuit, player, playerModel, renderer, playerModel.rightArm);
             return true;
-        } else if (Methods.checkArmor(player, 2, ModInit.NETHERITE_SPACE_SUIT.get())) {
+        }
+
+        if (Methods.checkArmor(player, 2, ModInit.NETHERITE_SPACE_SUIT.get())) {
 
             Methods.renderArm(poseStack, multiBufferSource, light, armNetheriteSpaceSuit, player, playerModel, renderer, playerModel.rightArm);
             return true;

@@ -29,7 +29,6 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
-import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.block.RocketLaunchPad;
 
 import javax.annotation.Nonnull;
@@ -189,8 +188,7 @@ public abstract class IRocketEntity extends VehicleEntity {
         if (ar == 1) {
             ay = ay + 0.006;
             ap = ap + 0.006;
-        }
-        if (ar == 2) {
+        } else if (ar == 2) {
             ar = 0;
             ay = 0;
             ap = 0;
