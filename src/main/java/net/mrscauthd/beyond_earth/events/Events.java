@@ -55,7 +55,7 @@ public class Events {
         //Entity Oxygen System
         Methods.entityOxygen(entity,world);
 
-        //Gravity Methode Call
+        //Gravity Method Call
         if (entity instanceof Player) {
             Gravity.Gravity(entity, Gravity.GravityType.PLAYER, world);
         } else {

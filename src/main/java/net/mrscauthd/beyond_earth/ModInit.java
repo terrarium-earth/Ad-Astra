@@ -759,8 +759,10 @@ public class ModInit {
     public static void init(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
 
+            //Recipe Types
             BeyondEarthRecipeTypes.init();
 
+            //Planet Noise
             Registry.register(Registry.CHUNK_GENERATOR, new ResourceLocation(BeyondEarthMod.MODID, "planet_noise"), PlanetChunkGenerator.CODEC);
 
             //Ice Spike
