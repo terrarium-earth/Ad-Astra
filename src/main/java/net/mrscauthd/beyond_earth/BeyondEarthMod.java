@@ -19,7 +19,6 @@ import net.mrscauthd.beyond_earth.keybind.KeyBindings;
 import net.mrscauthd.beyond_earth.machines.tile.OxygenBubbleDistributorBlockEntity;
 
 import net.mrscauthd.beyond_earth.world.oregen.OreGeneration;
-import net.mrscauthd.beyond_earth.world.structure.configuration.STStructures;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
@@ -88,16 +87,6 @@ public class BeyondEarthMod {
 		BeyondEarthMod.addNetworkMessage(PlanetSelectionGui.NetworkMessage.class, PlanetSelectionGui.NetworkMessage::encode, PlanetSelectionGui.NetworkMessage::decode, PlanetSelectionGui.NetworkMessage::handle);
 
 		CompatibleManager.visit();
-
-		//Structure Registry
-		IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-		STStructures.DEFERRED_REGISTRY_STRUCTURE.register(modEventBus);
-		modEventBus.addListener(this::setup);
-
-		forgeBus.addListener(EventPriority.NORMAL, ModInit::addDimensionalSpacing);
-
-		// For events that happen after initialization. This is probably going to be use a lot.
-		//forgeBus.addListener(EventPriority.NORMAL, AlienVillageStructure::setupStructureSpawns);
 	}
 
 	private void setup(final FMLCommonSetupEvent event) {

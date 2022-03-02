@@ -1,4 +1,4 @@
-package net.mrscauthd.beyond_earth.world.structure.configuration;
+package net.mrscauthd.beyond_earth.world.processor;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
@@ -13,7 +13,10 @@ import net.mrscauthd.beyond_earth.ModInit;
 public class StructureVoidProcessor extends StructureProcessor {
 
     public static final Codec<StructureVoidProcessor> CODEC = Codec.unit(StructureVoidProcessor::new);
-    private StructureVoidProcessor() { }
+
+    private StructureVoidProcessor() {
+
+    }
 
     @Override
     public StructureTemplate.StructureBlockInfo processBlock(LevelReader worldView, BlockPos pos, BlockPos blockPos, StructureTemplate.StructureBlockInfo structureBlockInfoLocal, StructureTemplate.StructureBlockInfo structureBlockInfoWorld, StructurePlaceSettings structurePlacementData) {

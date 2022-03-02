@@ -1,22 +1,15 @@
 package net.mrscauthd.beyond_earth;
 
 import com.google.common.collect.HashMultimap;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.ImmutableSet;
-import com.mojang.serialization.Codec;
+import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
-import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
-import net.minecraft.data.BuiltinRegistries;
+import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.util.valueproviders.ConstantInt;
-import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -27,18 +20,14 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.*;
 import net.minecraft.world.level.levelgen.feature.*;
 import net.minecraft.world.level.levelgen.feature.configurations.ColumnFeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.StructureFeatureConfiguration;
 import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.material.FlowingFluid;
@@ -49,9 +38,7 @@ import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
-import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.*;
 import net.mrscauthd.beyond_earth.armor.SpaceSuit;
 import net.mrscauthd.beyond_earth.block.*;
@@ -72,7 +59,6 @@ import net.mrscauthd.beyond_earth.crafting.RocketPart;
 import net.mrscauthd.beyond_earth.crafting.SpaceStationRecipeSerializer;
 import net.mrscauthd.beyond_earth.effects.OxygenEffect;
 import net.mrscauthd.beyond_earth.entity.*;
-import net.mrscauthd.beyond_earth.config.Config;
 import net.mrscauthd.beyond_earth.feature.MarsIceSpikeFeature;
 import net.mrscauthd.beyond_earth.feature.VenusDeltas;
 import net.mrscauthd.beyond_earth.flag.FlagTileEntity;
@@ -111,9 +97,7 @@ import net.mrscauthd.beyond_earth.itemgroup.ItemGroups;
 import net.mrscauthd.beyond_earth.entity.pygro.PygroMobsSensor;
 import net.mrscauthd.beyond_earth.world.biomes.BiomeRegistry;
 import net.mrscauthd.beyond_earth.world.chunk.PlanetChunkGenerator;
-import net.mrscauthd.beyond_earth.world.structure.configuration.STConfiguredStructures;
-import net.mrscauthd.beyond_earth.world.structure.configuration.STStructures;
-import net.mrscauthd.beyond_earth.world.structure.configuration.StructureVoidProcessor;
+import net.mrscauthd.beyond_earth.world.processor.StructureVoidProcessor;
 
 import java.lang.reflect.Method;
 import java.util.*;
@@ -570,178 +554,24 @@ public class ModInit {
     public static final DamageSource DAMAGE_SOURCE_ACID_RAIN = new DamageSource("venus.acid").bypassArmor();
 
     //ICE SPIKE
-    public static ConfiguredFeature<?, ?> ICE_SPIKE;
     public static MarsIceSpikeFeature MARS_ICE_SPIKE;
 
     //VENUS DELTAS
-    public static PlacedFeature VENUS_DELTAS_SMALL;
-    public static PlacedFeature VENUS_DELTAS_BIG;
+    public static Holder<PlacedFeature> VENUS_DELTAS_SMALL;
+    public static Holder<PlacedFeature> VENUS_DELTAS_BIG;
     public static VenusDeltas VENUS_DELTAS;
 
     @SubscribeEvent
     public static void RegistryFeature(RegistryEvent.Register<Feature<?>> feature) {
+        //MARS ICE SPIKE
         MARS_ICE_SPIKE = new MarsIceSpikeFeature(NoneFeatureConfiguration.CODEC);
         MARS_ICE_SPIKE.setRegistryName(BeyondEarthMod.MODID, "mars_ice_spike");
         feature.getRegistry().register(MARS_ICE_SPIKE);
-
 
         //VENUS DELTAS
         VENUS_DELTAS = new VenusDeltas(ColumnFeatureConfiguration.CODEC);
         VENUS_DELTAS.setRegistryName(BeyondEarthMod.MODID, "venus_deltas");
         feature.getRegistry().register(VENUS_DELTAS);
-    }
-
-    public static <FC extends FeatureConfiguration> ConfiguredFeature<FC, ?> registerFeature(String key, ConfiguredFeature<FC, ?> configuredFeature) {
-        return Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, key, configuredFeature);
-    }
-
-    @SubscribeEvent
-    public static void setup(FMLCommonSetupEvent event) {
-        event.enqueueWork(() -> {
-            ModInit.registerProcessors();
-            STStructures.setupStructures();
-            STConfiguredStructures.registerConfiguredStructures();
-        });
-    }
-
-    private static Method GETCODEC_METHOD;
-
-    public static void addDimensionalSpacing(WorldEvent.Load event) {
-        if(event.getWorld() instanceof ServerLevel serverLevel){
-            ChunkGenerator chunkGenerator = serverLevel.getChunkSource().getGenerator();
-
-            if (chunkGenerator instanceof FlatLevelSource && serverLevel.dimension().equals(Level.OVERWORLD)) {
-                return;
-            }
-
-            StructureSettings worldStructureConfig = chunkGenerator.getSettings();
-
-            HashMap<StructureFeature<?>, HashMultimap<ConfiguredStructureFeature<?, ?>, ResourceKey<Biome>>> STStructureToMultiMap = new HashMap<>();
-
-            /**Add Overworld Structure in a Biome without amplified gen*/
-            Boolean amplified = false;
-            RegistryAccess registryAccess = serverLevel.getServer().registryAccess();
-            NoiseGeneratorSettings amplifiedSettings = registryAccess.registryOrThrow(Registry.NOISE_GENERATOR_SETTINGS_REGISTRY).getOrThrow(NoiseGeneratorSettings.AMPLIFIED);
-
-            if (chunkGenerator instanceof NoiseBasedChunkGenerator) {
-                NoiseBasedChunkGenerator noiseBasedChunkGenerator = (NoiseBasedChunkGenerator) chunkGenerator;
-
-                if (noiseBasedChunkGenerator.settings.get() == amplifiedSettings) {
-                    amplified = true;
-                }
-
-            }
-
-            for(Map.Entry<ResourceKey<Biome>, Biome> biomeEntry : serverLevel.registryAccess().ownedRegistryOrThrow(Registry.BIOME_REGISTRY).entrySet()) {
-
-                Biome.BiomeCategory biomeCategory = biomeEntry.getValue().getBiomeCategory();
-
-                /*______________________________________OVERWORLD_BIOMES___________________________________*/
-
-                /**Add Overworld Structure in a Biome*/
-                if (Config.OIL_WELL_STRUCTURE.get()) {
-                    if (biomeCategory == Biome.BiomeCategory.OCEAN) {
-                        associateBiomeToConfiguredStructure(STStructureToMultiMap, STConfiguredStructures.OIL, biomeEntry.getKey());
-                    }
-                }
-
-                if (Config.METEOR_STRUCTURE.get() && !amplified) {
-                    if (biomeEntry.getValue().getRegistryName().equals(new ResourceLocation("plains")) || biomeEntry.getValue().getRegistryName().equals(new ResourceLocation("snowy_tundra")) || biomeEntry.getValue().getRegistryName().equals(new ResourceLocation("forest")) || biomeEntry.getValue().getRegistryName().equals(new ResourceLocation("desert"))) {
-                        associateBiomeToConfiguredStructure(STStructureToMultiMap, STConfiguredStructures.METEOR, biomeEntry.getKey());
-                    }
-                }
-
-                /*______________________________________CUSTOM_BIOMES___________________________________*/
-
-                /**Moon Biome*/
-                ImmutableSet<ResourceKey<Biome>> moonStructures = ImmutableSet.<ResourceKey<Biome>>builder().add(ResourceKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "moon"))).build();
-
-                /**Venus Biome*/
-                ImmutableSet<ResourceKey<Biome>> venusStructures = ImmutableSet.<ResourceKey<Biome>>builder().add(ResourceKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "venus"))).build();
-
-                /**Moon Structures*/
-                if (Config.ALIEN_VILLAGE_STRUCTURE.get())
-                moonStructures.forEach(biomeKey -> associateBiomeToConfiguredStructure(STStructureToMultiMap, STConfiguredStructures.ALIEN_VILLAGE, biomeKey));
-
-                /**Venus Structures*/
-                if (Config.CRIMSON_VILLAGE_STRUCTURE.get())
-                venusStructures.forEach(biomeKey -> associateBiomeToConfiguredStructure(STStructureToMultiMap, STConfiguredStructures.CRIMSON, biomeKey));
-
-                if (Config.VENUS_TOWER_STRUCTURE.get())
-                venusStructures.forEach(biomeKey -> associateBiomeToConfiguredStructure(STStructureToMultiMap, STConfiguredStructures.VENUS_TOWER, biomeKey));
-
-                if (Config.VENUS_BULLET_STRUCTURE.get())
-                venusStructures.forEach(biomeKey -> associateBiomeToConfiguredStructure(STStructureToMultiMap, STConfiguredStructures.VENUS_BULLET, biomeKey));
-            }
-
-            ImmutableMap.Builder<StructureFeature<?>, ImmutableMultimap<ConfiguredStructureFeature<?, ?>, ResourceKey<Biome>>> tempStructureToMultiMap = ImmutableMap.builder();
-            worldStructureConfig.configuredStructures.entrySet().stream().filter(entry -> !STStructureToMultiMap.containsKey(entry.getKey())).forEach(tempStructureToMultiMap::put);
-
-            STStructureToMultiMap.forEach((key, value) -> tempStructureToMultiMap.put(key, ImmutableMultimap.copyOf(value)));
-
-            worldStructureConfig.configuredStructures = tempStructureToMultiMap.build();
-
-
-            try {
-                if(GETCODEC_METHOD == null) GETCODEC_METHOD = ObfuscationReflectionHelper.findMethod(ChunkGenerator.class, "codec");
-                ResourceLocation cgRL = Registry.CHUNK_GENERATOR.getKey((Codec<? extends ChunkGenerator>) GETCODEC_METHOD.invoke(chunkGenerator));
-                if(cgRL != null && cgRL.getNamespace().equals("terraforged")) return;
-            }
-            catch(Exception e){
-
-            }
-
-            if(chunkGenerator instanceof FlatLevelSource && serverLevel.dimension().equals(Level.OVERWORLD)){
-                return;
-            }
-
-            /**______________________________________MAP___________________________________*/
-
-            if (Config.OIL_WELL_STRUCTURE.get()) {
-                Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap = new HashMap<>(worldStructureConfig.structureConfig());
-                tempMap.putIfAbsent(STStructures.OIL.get(), StructureSettings.DEFAULTS.get(STStructures.OIL.get()));
-                worldStructureConfig.structureConfig = tempMap;
-            }
-
-            if (Config.METEOR_STRUCTURE.get() && !amplified) {
-                Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap2 = new HashMap<>(worldStructureConfig.structureConfig());
-                tempMap2.putIfAbsent(STStructures.METEOR.get(), StructureSettings.DEFAULTS.get(STStructures.METEOR.get()));
-                worldStructureConfig.structureConfig = tempMap2;
-            }
-
-            if (Config.ALIEN_VILLAGE_STRUCTURE.get()) {
-                Map<StructureFeature<?>, StructureFeatureConfiguration> tempMa3 = new HashMap<>(worldStructureConfig.structureConfig());
-                tempMa3.putIfAbsent(STStructures.ALIEN_VILLAGE.get(), StructureSettings.DEFAULTS.get(STStructures.ALIEN_VILLAGE.get()));
-                worldStructureConfig.structureConfig = tempMa3;
-            }
-
-            if (Config.CRIMSON_VILLAGE_STRUCTURE.get()) {
-                Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap4 = new HashMap<>(worldStructureConfig.structureConfig());
-                tempMap4.putIfAbsent(STStructures.CRIMSON.get(), StructureSettings.DEFAULTS.get(STStructures.CRIMSON.get()));
-                worldStructureConfig.structureConfig = tempMap4;
-            }
-
-            if (Config.VENUS_TOWER_STRUCTURE.get()) {
-                Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap5 = new HashMap<>(worldStructureConfig.structureConfig());
-                tempMap5.putIfAbsent(STStructures.VENUS_TOWER.get(), StructureSettings.DEFAULTS.get(STStructures.VENUS_TOWER.get()));
-                worldStructureConfig.structureConfig = tempMap5;
-            }
-
-            if (Config.VENUS_BULLET_STRUCTURE.get()) {
-                Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap6 = new HashMap<>(worldStructureConfig.structureConfig());
-                tempMap6.putIfAbsent(STStructures.VENUS_BULLET.get(), StructureSettings.DEFAULTS.get(STStructures.VENUS_BULLET.get()));
-                worldStructureConfig.structureConfig = tempMap6;
-            }
-        }
-    }
-
-    private static void associateBiomeToConfiguredStructure(Map<StructureFeature<?>, HashMultimap<ConfiguredStructureFeature<?, ?>, ResourceKey<Biome>>> STStructureToMultiMap, ConfiguredStructureFeature<?, ?> configuredStructureFeature, ResourceKey<Biome> biomeRegistryKey) {
-        STStructureToMultiMap.putIfAbsent(configuredStructureFeature.feature, HashMultimap.create());
-        HashMultimap<ConfiguredStructureFeature<?, ?>, ResourceKey<Biome>> configuredStructureToBiomeMultiMap = STStructureToMultiMap.get(configuredStructureFeature.feature);
-
-        if (!configuredStructureToBiomeMultiMap.containsValue(biomeRegistryKey)) {
-            configuredStructureToBiomeMultiMap.put(configuredStructureFeature, biomeRegistryKey);
-        }
     }
 
     @SubscribeEvent
@@ -758,6 +588,7 @@ public class ModInit {
     @SubscribeEvent
     public static void init(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
+            ModInit.registerProcessors();
 
             //Recipe Types
             BeyondEarthRecipeTypes.init();
@@ -765,18 +596,15 @@ public class ModInit {
             //Planet Noise
             Registry.register(Registry.CHUNK_GENERATOR, new ResourceLocation(BeyondEarthMod.MODID, "planet_noise"), PlanetChunkGenerator.CODEC);
 
-            //Ice Spike
-            ICE_SPIKE = registerFeature("mars_ice_spike", ModInit.MARS_ICE_SPIKE.configured(FeatureConfiguration.NONE));
-
             //Venus Deltas
-            VENUS_DELTAS_SMALL = PlacementUtils.register("venus_deltas_small", ModInit.VENUS_DELTAS.configured(new ColumnFeatureConfiguration(ConstantInt.of(1), UniformInt.of(1, 4))).placed(CountOnEveryLayerPlacement.of(4), BiomeFilter.biome()));
-            VENUS_DELTAS_BIG = PlacementUtils.register("venus_deltas_big", ModInit.VENUS_DELTAS.configured(new ColumnFeatureConfiguration(UniformInt.of(2, 3), UniformInt.of(5, 10))).placed(CountOnEveryLayerPlacement.of(2), BiomeFilter.biome()));
+            //VENUS_DELTAS_SMALL = PlacementUtils.register("venus_deltas_small", ModInit.VENUS_DELTAS.configured(new ColumnFeatureConfiguration(ConstantInt.of(1), UniformInt.of(1, 4))).placed(CountOnEveryLayerPlacement.of(4), BiomeFilter.biome()));
+            //VENUS_DELTAS_BIG = PlacementUtils.register("venus_deltas_big", ModInit.VENUS_DELTAS.configured(new ColumnFeatureConfiguration(UniformInt.of(2, 3), UniformInt.of(5, 10))).placed(CountOnEveryLayerPlacement.of(2), BiomeFilter.biome()));
         });
     }
 
     public static void biomesLoading(BiomeLoadingEvent event) {
         if (event.getName().getPath().equals(BiomeRegistry.mars_ice_spikes.getRegistryName().getPath())) {
-            event.getGeneration().addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, ICE_SPIKE.placed(CountPlacement.of(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+            event.getGeneration().addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, PlacementUtils.register("mars_ice_spike", FeatureUtils.register("mars_ice_spike", MARS_ICE_SPIKE), CountPlacement.of(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
         }
 
         //Venus Deltas
