@@ -11,6 +11,8 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -599,8 +601,8 @@ public class ModInit {
             Registry.register(Registry.CHUNK_GENERATOR, new ResourceLocation(BeyondEarthMod.MODID, "planet_noise"), PlanetChunkGenerator.CODEC);
 
             //Venus Deltas
-            //VENUS_DELTAS_SMALL = PlacementUtils.register("venus_deltas_small", ModInit.VENUS_DELTAS.configured(new ColumnFeatureConfiguration(ConstantInt.of(1), UniformInt.of(1, 4))).placed(CountOnEveryLayerPlacement.of(4), BiomeFilter.biome()));
-            //VENUS_DELTAS_BIG = PlacementUtils.register("venus_deltas_big", ModInit.VENUS_DELTAS.configured(new ColumnFeatureConfiguration(UniformInt.of(2, 3), UniformInt.of(5, 10))).placed(CountOnEveryLayerPlacement.of(2), BiomeFilter.biome()));
+            VENUS_DELTAS_SMALL = PlacementUtils.register("venus_deltas_small", FeatureUtils.register("venus_deltas_small", ModInit.VENUS_DELTAS, new ColumnFeatureConfiguration(ConstantInt.of(1), UniformInt.of(1, 4))));
+            VENUS_DELTAS_BIG = PlacementUtils.register("venus_deltas_big", FeatureUtils.register("venus_deltas_big", ModInit.VENUS_DELTAS, new ColumnFeatureConfiguration(UniformInt.of(2, 3), UniformInt.of(5, 10))));
         });
     }
 
