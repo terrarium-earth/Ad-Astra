@@ -430,7 +430,7 @@ public class VenusSky {
                                     double d0 = (double)rainSizeX[l1] * 0.5D;
                                     double d1 = (double)rainSizeZ[l1] * 0.5D;
                                     blockpos$mutableblockpos.set((double)k1, p_109707_, (double)j1);
-                                    Biome biome = level.getBiome(blockpos$mutableblockpos);
+                                    Biome biome = level.getBiome(blockpos$mutableblockpos).value();
                                     if (biome.getPrecipitation() != Biome.Precipitation.NONE) {
                                         int i2 = level.getHeight(Heightmap.Types.MOTION_BLOCKING, k1, j1);
                                         int j2 = j - l;
@@ -509,7 +509,7 @@ public class VenusSky {
                                 int k = random.nextInt(21) - 10;
                                 int l = random.nextInt(21) - 10;
                                 BlockPos blockpos2 = levelreader.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, blockpos.offset(k, 0, l));
-                                Biome biome = levelreader.getBiome(blockpos2);
+                                Biome biome = levelreader.getBiome(blockpos2).value();
                                 if (blockpos2.getY() > levelreader.getMinBuildHeight() && blockpos2.getY() <= blockpos.getY() + 10 && blockpos2.getY() >= blockpos.getY() - 10 && biome.getPrecipitation() == Biome.Precipitation.RAIN && biome.warmEnoughToRain(blockpos2)) {
                                     blockpos1 = blockpos2.below();
                                     if (minecraft.options.particles == ParticleStatus.MINIMAL) {

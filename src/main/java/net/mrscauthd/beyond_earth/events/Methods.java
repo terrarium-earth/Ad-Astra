@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector3f;
 import io.netty.buffer.Unpooled;
+import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelPart;
@@ -29,6 +30,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -342,16 +344,16 @@ public class Methods {
         }
     }
 
-    public static boolean tagCheck(Entity entity, ResourceLocation tag) {
-        return EntityTypeTags.getAllTags().getTagOrEmpty(tag).contains(entity.getType());
+    public static boolean tagCheck(Entity entity, TagKey<EntityType<?>> tag) {
+        return entity.getType().is(tag);
     }
     
-    public static boolean tagCheck(Fluid fluid, ResourceLocation tag) {
-        return FluidTags.getAllTags().getTagOrEmpty(tag).contains(fluid);
+    public static boolean tagCheck(Fluid fluid, TagKey<Fluid> tag) {
+        return fluid.is(tag);
     }
 
-    public static boolean tagCheck(Item item, ResourceLocation tag) {
-        return ItemTags.getAllTags().getTagOrEmpty(tag).contains(item);
+    public static boolean tagCheck(ItemStack item, TagKey<Item> tag) {
+        return item.is(tag);
     }
 
     public static void landerTeleport(Player player, ResourceKey<Level> newPlanet) {

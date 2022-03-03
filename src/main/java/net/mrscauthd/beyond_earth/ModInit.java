@@ -10,9 +10,11 @@ import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.ai.sensing.SensorType;
@@ -224,7 +226,7 @@ public class ModInit {
     public static final RegistryObject<LiquidBlock> FUEL_BLOCK = BLOCKS.register("fuel",() -> new LiquidBlock(ModInit.FUEL_STILL, Block.Properties.of(Material.WATER).noCollission().strength(100f).noDrops()));
     public static final RegistryObject<Item> FUEL_BUCKET = ITEMS.register("fuel_bucket", () -> new BucketItem(ModInit.FUEL_STILL, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1).tab(ItemGroups.tab_normal)));
 
-    public static final ResourceLocation FLUID_VEHICLE_FUEL_TAG = new ResourceLocation(BeyondEarthMod.MODID, "vehicle_fuel");
+    public static final TagKey<Fluid> FLUID_VEHICLE_FUEL_TAG = TagKey.create(Registry.FLUID_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "vehicle_fuel"));
 
     //Oil Fluid
     public static final RegistryObject<FlowingFluid> FLOWING_OIL = FLUIDS.register("flowing_oil", ()-> new OilFluid.Flowing());
@@ -232,7 +234,7 @@ public class ModInit {
     public static final RegistryObject<LiquidBlock> OIL_BLOCK = BLOCKS.register("oil",() -> new LiquidBlock(ModInit.OIL_STILL, Block.Properties.of(Material.WATER).noCollission().strength(100f).noDrops()));
     public static final RegistryObject<Item> OIL_BUCKET = ITEMS.register("oil_bucket", () -> new BucketItem(ModInit.OIL_STILL, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1).tab(ItemGroups.tab_normal)));
 
-    public static final ResourceLocation OIL_FLUID_TAG = new ResourceLocation(BeyondEarthMod.MODID, "oil");
+    public static final TagKey<Fluid> OIL_FLUID_TAG = TagKey.create(Registry.FLUID_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "oil"));
 
     //Item
     public static final RegistryObject<Item> COAL_TORCH_ITEM = ITEMS.register("coal_torch", () -> new CoalTorchItem(COAL_TORCH_BLOCK.get(), WALL_COAL_TORCH_BLOCK.get(),new Item.Properties().tab(ItemGroups.tab_basics)));
@@ -538,9 +540,9 @@ public class ModInit {
 	public static final RegistryObject<RocketPart> ROCKET_PART_ENGINE = ROCKET_PARTS.register("engine", () -> new RocketPart(1));
 
     //Tags
-    public static final ResourceLocation OXYGEN_TAG = new ResourceLocation(BeyondEarthMod.MODID, "entities/oxygen");
-    public static final ResourceLocation PLANET_FIRE_TAG = new ResourceLocation(BeyondEarthMod.MODID, "entities/planet_fire");
-    public static final ResourceLocation VENUS_RAIN_TAG = new ResourceLocation(BeyondEarthMod.MODID, "entities/venus_rain");
+    public static final TagKey<EntityType<?>> OXYGEN_TAG = TagKey.create(Registry.ENTITY_TYPE_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "entities/oxygen"));
+    public static final TagKey<EntityType<?>> PLANET_FIRE_TAG = TagKey.create(Registry.ENTITY_TYPE_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "entities/planet_fire"));
+    public static final TagKey<EntityType<?>> VENUS_RAIN_TAG = TagKey.create(Registry.ENTITY_TYPE_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "entities/venus_rain"));
 
 	//Register Processor
     public static final StructureProcessorType<StructureVoidProcessor> STRUCTURE_VOID_PROCESSOR = () -> StructureVoidProcessor.CODEC;

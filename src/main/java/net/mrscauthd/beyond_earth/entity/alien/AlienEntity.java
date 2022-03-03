@@ -198,7 +198,7 @@ public class AlienEntity extends Villager implements Merchant, Npc {
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
 
 		if (reason == MobSpawnType.COMMAND || reason == MobSpawnType.SPAWN_EGG || reason == MobSpawnType.SPAWNER || reason == MobSpawnType.DISPENSER) {
-			this.setVillagerData(this.getVillagerData().setType(VillagerType.byBiome(worldIn.getBiomeName(new BlockPos(this.getX(),this.getY(),this.getZ())))));
+			this.setVillagerData(this.getVillagerData().setType(VillagerType.byBiome(worldIn.getBiome(this.blockPosition()))));
 		}
 
 		if (reason == MobSpawnType.STRUCTURE) {
