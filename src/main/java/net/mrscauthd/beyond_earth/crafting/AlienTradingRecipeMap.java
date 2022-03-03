@@ -3,6 +3,10 @@ package net.mrscauthd.beyond_earth.crafting;
 import java.util.Locale;
 import java.util.Random;
 
+import net.minecraft.core.Registry;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.EntityType;
+import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import org.apache.commons.lang3.tuple.Triple;
 
 import com.google.gson.JsonObject;
@@ -54,6 +58,8 @@ public class AlienTradingRecipeMap extends AlienTradingRecipeItemStackBase {
 		buffer.writeResourceLocation(this.structureName);
 		buffer.writeEnum(this.mapDecorationType);
 	}
+
+	public static final TagKey<EntityType<?>> OXYGEN_TAG = TagKey.create(Registry.ENTITY_TYPE_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "entities/oxygen"));
 	
 	@Override
 	public Triple<ItemStack, ItemStack, ItemStack> getTrade(Entity trader, Random rand) {
@@ -63,7 +69,8 @@ public class AlienTradingRecipeMap extends AlienTradingRecipeItemStackBase {
 
 		if (level instanceof ServerLevel) {
 			ServerLevel serverWorld = (ServerLevel) level;
-			BlockPos blockpos = serverWorld.findNearestMapFeature(structure, trader.blockPosition(), 100, true);
+			//TODO TagKey check before just "structure" check too if it ok that this is not final
+			BlockPos blockpos = serverWorld.findNearestMapFeature(TagKey.create(Registry.CONFIGURED_STRUCTURE_FEATURE_REGISTRY, structure.getRegistryName()), trader.blockPosition(), 100, true);
 
 			if (blockpos != null) {
 				itemstack = MapItem.create(level, blockpos.getX(), blockpos.getZ(), (byte) 2, true, true);
@@ -73,7 +80,8 @@ public class AlienTradingRecipeMap extends AlienTradingRecipeItemStackBase {
 			MapItem.renderBiomePreviewMap(serverWorld, itemstack);
 		}
 
-		itemstack.setHoverName(new TranslatableComponent("filled_map." + structure.getFeatureName().toLowerCase(Locale.ROOT)));
+		//TODO getFeatureName() / getRegistryName().toString() check if it right work
+		itemstack.setHoverName(new TranslatableComponent("filled_map." + structure.getRegistryName().toString().toLowerCase(Locale.ROOT)));
 		return Triple.of(this.getCostA(), this.getCostB(), itemstack);
 	}
 

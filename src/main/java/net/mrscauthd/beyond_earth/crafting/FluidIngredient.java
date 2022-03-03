@@ -13,7 +13,7 @@ import com.google.gson.JsonObject;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -77,7 +77,8 @@ public abstract class FluidIngredient implements Predicate<FluidStack> {
 
 		if (json.has(KEY_TAG)) {
 			String tagName = GsonHelper.getAsString(json, KEY_TAG);
-			return of(FluidTags.bind(tagName), amount);
+			//Todo Change to new ResourceLocation(tagName) before just the string tagName (check if you get still the right thing
+			return of(FluidTags.create(new ResourceLocation(tagName)), amount);
 		} else if (json.has(KEY_NAME)) {
 			JsonElement nameJson = json.get(KEY_NAME);
 
@@ -120,11 +121,11 @@ public abstract class FluidIngredient implements Predicate<FluidStack> {
 		return new FluidMatch(fluids, amount);
 	}
 
-	public static FluidIngredient of(Tag<Fluid> tag) {
+	public static FluidIngredient of(TagKey<Fluid> tag) {
 		return new TagMatch(tag, MINAMOUNT);
 	}
 
-	public static FluidIngredient of(Tag<Fluid> tag, int amount) {
+	public static FluidIngredient of(TagKey<Fluid> tag, int amount) {
 		return new TagMatch(tag, amount);
 	}
 
@@ -164,19 +165,19 @@ public abstract class FluidIngredient implements Predicate<FluidStack> {
 	}
 
 	public static class TagMatch extends FluidIngredient {
-		private final Tag<Fluid> tag;
+		private final TagKey<Fluid> tag;
 
-		public TagMatch(Tag<Fluid> tag, int amount) {
+		public TagMatch(TagKey<Fluid> tag, int amount) {
 			super(amount);
 			this.tag = tag;
 		}
 
 		@Override
 		public boolean testFluid(Fluid fluid) {
-			return this.tag.getValues().contains(fluid);
+			return fluid.is(this.tag);
 		}
 
-		public Tag<Fluid> getTag() {
+		public TagKey<Fluid> getTag() {
 			return this.tag;
 		}
 

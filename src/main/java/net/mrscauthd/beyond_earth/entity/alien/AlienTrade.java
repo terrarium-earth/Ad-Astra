@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
+import net.minecraftforge.server.ServerLifecycleHooks;
 import org.apache.commons.lang3.tuple.Triple;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
@@ -67,7 +68,7 @@ public class AlienTrade implements ItemListing {
 	}
 
 	public static void addReloadListener(AddReloadListenerEvent event) {
-		RecipeManager recipeManager = event.getDataPackRegistries().getRecipeManager();
+		RecipeManager recipeManager = ServerLifecycleHooks.getCurrentServer().getRecipeManager();
 
 		event.addListener(new ResourceManagerReloadListener() {
 			@Override
@@ -95,5 +96,4 @@ public class AlienTrade implements ItemListing {
 	public AlienTradingRecipe getRecipe() {
 		return this.recipe;
 	}
-
 }
