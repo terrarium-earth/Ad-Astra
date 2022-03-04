@@ -551,24 +551,25 @@ public class ModInit {
     public static final DamageSource DAMAGE_SOURCE_ACID_RAIN = new DamageSource("venus.acid").bypassArmor();
 
     //ICE SPIKE
-    public static MarsIceSpikeFeature MARS_ICE_SPIKE;
+    public static Holder<PlacedFeature> MARS_ICE_SPIKE;
+    public static MarsIceSpikeFeature MARS_ICE_SPIKE_FEATURE;
 
     //VENUS DELTAS
     public static Holder<PlacedFeature> VENUS_DELTAS_SMALL;
     public static Holder<PlacedFeature> VENUS_DELTAS_BIG;
-    public static VenusDeltas VENUS_DELTAS;
+    public static VenusDeltas VENUS_DELTAS_FEATURE;
 
     @SubscribeEvent
     public static void RegistryFeature(RegistryEvent.Register<Feature<?>> feature) {
         //MARS ICE SPIKE
-        MARS_ICE_SPIKE = new MarsIceSpikeFeature(NoneFeatureConfiguration.CODEC);
-        MARS_ICE_SPIKE.setRegistryName(BeyondEarthMod.MODID, "mars_ice_spike");
-        feature.getRegistry().register(MARS_ICE_SPIKE);
+        MARS_ICE_SPIKE_FEATURE = new MarsIceSpikeFeature(NoneFeatureConfiguration.CODEC);
+        MARS_ICE_SPIKE_FEATURE.setRegistryName(BeyondEarthMod.MODID, "mars_ice_spike");
+        feature.getRegistry().register(MARS_ICE_SPIKE_FEATURE);
 
         //VENUS DELTAS
-        VENUS_DELTAS = new VenusDeltas(ColumnFeatureConfiguration.CODEC);
-        VENUS_DELTAS.setRegistryName(BeyondEarthMod.MODID, "venus_deltas");
-        feature.getRegistry().register(VENUS_DELTAS);
+        VENUS_DELTAS_FEATURE = new VenusDeltas(ColumnFeatureConfiguration.CODEC);
+        VENUS_DELTAS_FEATURE.setRegistryName(BeyondEarthMod.MODID, "venus_deltas");
+        feature.getRegistry().register(VENUS_DELTAS_FEATURE);
     }
 
     @SubscribeEvent
@@ -593,15 +594,18 @@ public class ModInit {
             //Planet Noise
             Registry.register(Registry.CHUNK_GENERATOR, new ResourceLocation(BeyondEarthMod.MODID, "planet_noise"), PlanetChunkGenerator.CODEC);
 
+            //Mars Ice Spikes
+            MARS_ICE_SPIKE = PlacementUtils.register("mars_ice_spike", FeatureUtils.register("mars_ice_spike", MARS_ICE_SPIKE_FEATURE), CountPlacement.of(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
+
             //Venus Deltas
-            VENUS_DELTAS_SMALL = PlacementUtils.register("venus_deltas_small", FeatureUtils.register("venus_deltas_small", ModInit.VENUS_DELTAS, new ColumnFeatureConfiguration(ConstantInt.of(1), UniformInt.of(1, 4))));
-            VENUS_DELTAS_BIG = PlacementUtils.register("venus_deltas_big", FeatureUtils.register("venus_deltas_big", ModInit.VENUS_DELTAS, new ColumnFeatureConfiguration(UniformInt.of(2, 3), UniformInt.of(5, 10))));
+            VENUS_DELTAS_SMALL = PlacementUtils.register("venus_deltas_small", FeatureUtils.register("venus_deltas_small", VENUS_DELTAS_FEATURE, new ColumnFeatureConfiguration(ConstantInt.of(1), UniformInt.of(1, 4))));
+            VENUS_DELTAS_BIG = PlacementUtils.register("venus_deltas_big", FeatureUtils.register("venus_deltas_big", VENUS_DELTAS_FEATURE, new ColumnFeatureConfiguration(UniformInt.of(2, 3), UniformInt.of(5, 10))));
         });
     }
 
     public static void biomesLoading(BiomeLoadingEvent event) {
         if (event.getName().getPath().equals(BiomeRegistry.mars_ice_spikes.getRegistryName().getPath())) {
-            event.getGeneration().addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, PlacementUtils.register("mars_ice_spike", FeatureUtils.register("mars_ice_spike", MARS_ICE_SPIKE), CountPlacement.of(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome()));
+            event.getGeneration().addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, MARS_ICE_SPIKE);
         }
 
         //Venus Deltas
