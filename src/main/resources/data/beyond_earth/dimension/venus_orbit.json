@@ -6,8 +6,6 @@
     "settings": {
       "sea_level": 63,
       "disable_mob_generation": false,
-      "noise_caves_enabled": false,
-      "noodle_caves_enabled": false,
       "aquifers_enabled": false,
       "ore_veins_enabled": false,
       "legacy_random_source": false,
@@ -23,8 +21,6 @@
         "height": 256,
         "size_horizontal": 1,
         "size_vertical": 1,
-        "island_noise_override": false,
-        "amplified": false,
         "sampling": {
           "xz_scale": 1,
           "y_scale": 1,
@@ -91,6 +87,7 @@
           "shift_z": "minecraft:shift_z"
         },
         "continents": "minecraft:overworld/continents",
+        "ridges": "minecraft:overworld/ridges",
         "erosion": "minecraft:overworld/erosion",
         "depth": "minecraft:overworld/depth",
         "initial_density_without_jaggedness": {
@@ -287,9 +284,6 @@
         "result_state": {
           "Name": "minecraft:air"
         }
-      },
-      "structures": {
-        "structures": {}
       }
     },
     "biome_source": {

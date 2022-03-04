@@ -6,8 +6,6 @@
     "settings": {
       "sea_level": 63,
       "disable_mob_generation": true,
-      "noise_caves_enabled": true,
-      "noodle_caves_enabled": true,
       "aquifers_enabled": false,
       "ore_veins_enabled": false,
       "legacy_random_source": false,
@@ -22,9 +20,6 @@
         "height": 384,
         "size_horizontal": 1,
         "size_vertical": 2,
-        "island_noise_override": false,
-        "amplified": false,
-        "large_biomes": false,
         "sampling": {
           "xz_scale": 1,
           "y_scale": 1,
@@ -91,6 +86,7 @@
           "shift_z": "minecraft:shift_z"
         },
         "continents": "minecraft:overworld/continents",
+        "ridges": "minecraft:overworld/ridges",
         "erosion": "minecraft:overworld/erosion",
         "depth": "minecraft:overworld/depth",
         "initial_density_without_jaggedness": {
@@ -475,9 +471,6 @@
             }
           }
         ]
-      },
-      "structures": {
-        "structures": {}
       }
     },
     "biome_source": {

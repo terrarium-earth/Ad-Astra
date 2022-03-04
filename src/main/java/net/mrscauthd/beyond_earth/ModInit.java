@@ -1,13 +1,11 @@
 package net.mrscauthd.beyond_earth;
 
-import com.google.common.collect.HashMultimap;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
@@ -16,7 +14,6 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.ai.sensing.SensorType;
@@ -24,7 +21,6 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -102,9 +98,6 @@ import net.mrscauthd.beyond_earth.entity.pygro.PygroMobsSensor;
 import net.mrscauthd.beyond_earth.world.biomes.BiomeRegistry;
 import net.mrscauthd.beyond_earth.world.chunk.PlanetChunkGenerator;
 import net.mrscauthd.beyond_earth.world.processor.StructureVoidProcessor;
-
-import java.lang.reflect.Method;
-import java.util.*;
 
 @Mod.EventBusSubscriber(modid = BeyondEarthMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModInit {

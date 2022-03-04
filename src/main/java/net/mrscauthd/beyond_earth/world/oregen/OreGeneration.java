@@ -19,6 +19,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.world.biomes.BiomeRegistry;
@@ -30,6 +31,7 @@ public class OreGeneration {
 
     /** MOON ORES: */
     private static RuleTest MOON_MATCH = new BlockMatchTest(Blocks.NETHERRACK);
+
     private static Feature<OreConfiguration> MOON_GEN_FEATURE;
 
     private static Holder<PlacedFeature> moonCheeseOre;
@@ -172,6 +174,14 @@ public class OreGeneration {
         Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"deepslate_lapis_ore"), deepslateLapisOre);
         */
     }
+
+    /** RULE TEST */
+    /*@SubscribeEvent
+    public static void init(FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> {
+            MOON_MATCH = new BlockMatchTest(ModInit.MOON_STONE.get());
+        });
+    }*/
 
     /** BIOME ORE GEN */
     public static void biomesLoading(BiomeLoadingEvent event) {
