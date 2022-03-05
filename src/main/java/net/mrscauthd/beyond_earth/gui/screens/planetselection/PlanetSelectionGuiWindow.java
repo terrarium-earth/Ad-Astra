@@ -113,6 +113,8 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 		super(container, inventory, text);
 		this.imageWidth = 512;
 		this.imageHeight = 512;
+		this.topPos = 0;
+		this.leftPos = 0;
 	}
 
 	@Override

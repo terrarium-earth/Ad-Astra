@@ -1,0 +1,12 @@
+{
+  "type": "beyond_earth:alien_village",
+  "config": {
+    "start_pool": "beyond_earth:run_alien_village/side_alien_start",
+    "size": 25
+  },
+  "biomes": "#beyond_earth:has_structure/alien_village_biomes",
+  "adapt_noise": false,
+  "spawn_overrides": {
+
+  }
+}

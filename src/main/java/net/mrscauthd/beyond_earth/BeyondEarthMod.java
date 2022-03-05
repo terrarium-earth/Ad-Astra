@@ -6,8 +6,6 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
@@ -23,7 +21,6 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -34,8 +31,7 @@ import java.util.function.Supplier;
 @Mod(BeyondEarthMod.MODID)
 public class BeyondEarthMod {
 
-	public static final Logger LOGGER = LogManager.getLogger(BeyondEarthMod.class);
-
+	public static final Logger LOGGER = LogManager.getLogger();
 	public static final String MODID = "beyond_earth";
 
 	private static final String PROTOCOL_VERSION = "1";
@@ -45,15 +41,6 @@ public class BeyondEarthMod {
 	public BeyondEarthMod() {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 		IEventBus forgeBus = MinecraftForge.EVENT_BUS;
-
-		// Register the setup method for modloading
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-
-		// Register the enqueueIMC method for modloading
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
-
-		// Register the processIMC method for modloading
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
 
 		bus.register(this);
 
@@ -73,6 +60,7 @@ public class BeyondEarthMod {
 		ModInit.EFFECTS.register(bus);
 		ModInit.GUIS.register(bus);
 		ModInit.PARTICLES.register(bus);
+		ModInit.STRUCTURES.register(bus);
 
 		forgeBus.addListener(EventPriority.HIGH, ModInit::biomesLoading);
 		forgeBus.addListener(EventPriority.HIGH, OreGeneration::biomesLoading);
@@ -87,15 +75,6 @@ public class BeyondEarthMod {
 		BeyondEarthMod.addNetworkMessage(PlanetSelectionGui.NetworkMessage.class, PlanetSelectionGui.NetworkMessage::encode, PlanetSelectionGui.NetworkMessage::decode, PlanetSelectionGui.NetworkMessage::handle);
 
 		CompatibleManager.visit();
-	}
-
-	private void setup(final FMLCommonSetupEvent event) {
-	}
-
-	private void enqueueIMC(final InterModEnqueueEvent event) {
-	}
-
-	private void processIMC(final InterModProcessEvent event) {
 	}
 
 	public static <T> void addNetworkMessage(Class<T> messageType, BiConsumer<T, FriendlyByteBuf> encoder, Function<FriendlyByteBuf, T> decoder, BiConsumer<T, Supplier<NetworkEvent.Context>> messageConsumer) {
