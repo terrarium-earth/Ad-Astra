@@ -13,22 +13,21 @@ import java.util.stream.Collectors;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
-import com.google.common.collect.Lists;
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.constants.VanillaTypes;
-import mezz.jei.api.gui.IRecipeLayout;
+import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableAnimated;
 import mezz.jei.api.gui.drawable.IDrawableBuilder;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
-import mezz.jei.api.gui.ingredient.IGuiFluidStackGroup;
-import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.helpers.IJeiHelpers;
-import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.recipe.IFocusGroup;
+import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
@@ -410,30 +409,18 @@ public class JeiPlugin implements IModPlugin {
 		}
 
 		@Override
-		public void setIngredients(OxygenLoaderRecipe recipe, IIngredients iIngredients) {
-			iIngredients.setInputs(VanillaTypes.ITEM, this.plugin.getFluidFullItemStacks(recipe.getInput().getFluids()));
-			iIngredients.setOutputs(VanillaTypes.ITEM, this.plugin.oxygenFullItemStacks);
+		public void setRecipe(IRecipeLayoutBuilder builder, OxygenLoaderRecipe recipe, IFocusGroup focuses) {
+			IRecipeCategory.super.setRecipe(builder, recipe, focuses);
 
-			iIngredients.setInputLists(VanillaTypes.FLUID, Collections.singletonList(recipe.getInput().toStacks()));
-		}
+			IRecipeSlotBuilder input = builder.addSlot(RecipeIngredientRole.INPUT, 25, 9);
+			input.addItemStacks(this.plugin.getFluidFullItemStacks(recipe.getInput().getFluids()));
 
-		@Override
-		public void setRecipe(IRecipeLayout iRecipeLayout, OxygenLoaderRecipe recipe, IIngredients iIngredients) {
-			IGuiItemStackGroup itemStacks = iRecipeLayout.getItemStacks();
-			itemStacks.init(FuelRefineryBlockEntity.SLOT_INPUT_SOURCE, true, 24, 8);
-			itemStacks.init(FuelRefineryBlockEntity.SLOT_OUTPUT_SINK, false, 90, 38);
-			itemStacks.init(FuelRefineryBlockEntity.SLOT_INPUT_SINK, false, 24, 38);
-			itemStacks.init(FuelRefineryBlockEntity.SLOT_OUTPUT_SOURCE, false, 90, 8);
+			IRecipeSlotBuilder output = builder.addSlot(RecipeIngredientRole.OUTPUT, 91, 39);
+			output.addItemStacks(this.plugin.oxygenFullItemStacks);
 
-			itemStacks.set(FuelRefineryBlockEntity.SLOT_INPUT_SOURCE, iIngredients.getInputs(VanillaTypes.ITEM).stream().flatMap(Collection::stream).collect(Collectors.toList()));
-			itemStacks.set(FuelRefineryBlockEntity.SLOT_OUTPUT_SINK, iIngredients.getOutputs(VanillaTypes.ITEM).stream().flatMap(Collection::stream).collect(Collectors.toList()));
-
-			IGuiFluidStackGroup fluidStacks = iRecipeLayout.getFluidStacks();
-			int tanks = 0;
-
-			fluidStacks.init(tanks, true, INPUT_TANK_LEFT, INPUT_TANK_TOP, GuiHelper.FLUID_TANK_WIDTH, GuiHelper.FLUID_TANK_HEIGHT, 1, false, this.fluidOverlay);
-			fluidStacks.set(tanks, iIngredients.getInputs(VanillaTypes.FLUID).stream().flatMap(Collection::stream).collect(Collectors.toList()));
-			tanks++;
+			IRecipeSlotBuilder tank = builder.addSlot(RecipeIngredientRole.INPUT, INPUT_TANK_LEFT, INPUT_TANK_TOP);
+			tank.setFluidRenderer(1, false, GuiHelper.FLUID_TANK_WIDTH, GuiHelper.FLUID_TANK_HEIGHT).setOverlay(fluidOverlay, 0, 0);
+			tank.addIngredients(VanillaTypes.FLUID, recipe.getInput().toStacks());
 		}
 
 		public Rectangle2d getInputTankBounds() {
@@ -517,25 +504,15 @@ public class JeiPlugin implements IModPlugin {
 		}
 
 		@Override
-		public void setIngredients(OxygenBubbleDistributorRecipe recipe, IIngredients iIngredients) {
-			iIngredients.setInputs(VanillaTypes.ITEM, this.plugin.getFluidFullItemStacks(recipe.getInput().getFluids()));
-			iIngredients.setInputLists(VanillaTypes.FLUID, Collections.singletonList(recipe.getInput().toStacks()));
-		}
+		public void setRecipe(IRecipeLayoutBuilder builder, OxygenBubbleDistributorRecipe recipe, IFocusGroup focuses) {
+			IRecipeCategory.super.setRecipe(builder, recipe, focuses);
 
-		@Override
-		public void setRecipe(IRecipeLayout iRecipeLayout, OxygenBubbleDistributorRecipe recipe, IIngredients iIngredients) {
-			IGuiItemStackGroup itemStacks = iRecipeLayout.getItemStacks();
-			itemStacks.init(FuelRefineryBlockEntity.SLOT_INPUT_SOURCE, true, 24, 8);
-			itemStacks.init(FuelRefineryBlockEntity.SLOT_INPUT_SINK, false, 24, 38);
+			IRecipeSlotBuilder input = builder.addSlot(RecipeIngredientRole.INPUT, 25, 9);
+			input.addItemStacks(this.plugin.getFluidFullItemStacks(recipe.getInput().getFluids()));
 
-			itemStacks.set(FuelRefineryBlockEntity.SLOT_INPUT_SOURCE, iIngredients.getInputs(VanillaTypes.ITEM).stream().flatMap(Collection::stream).collect(Collectors.toList()));
-
-			IGuiFluidStackGroup fluidStacks = iRecipeLayout.getFluidStacks();
-			int tanks = 0;
-
-			fluidStacks.init(tanks, true, INPUT_TANK_LEFT, INPUT_TANK_TOP, GuiHelper.OXYGEN_TANK_WIDTH, GuiHelper.OXYGEN_TANK_HEIGHT, 1, false, this.fluidOverlay);
-			fluidStacks.set(tanks, iIngredients.getInputs(VanillaTypes.FLUID).stream().flatMap(Collection::stream).collect(Collectors.toList()));
-			tanks++;
+			IRecipeSlotBuilder tank = builder.addSlot(RecipeIngredientRole.INPUT, INPUT_TANK_LEFT, INPUT_TANK_TOP);
+			tank.setFluidRenderer(1, false, GuiHelper.FLUID_TANK_WIDTH, GuiHelper.FLUID_TANK_HEIGHT).setOverlay(fluidOverlay, 0, 0);
+			tank.addIngredients(VanillaTypes.FLUID, recipe.getInput().toStacks());
 		}
 
 		public Rectangle2d getInputTankBounds() {
@@ -614,6 +591,14 @@ public class JeiPlugin implements IModPlugin {
 		}
 
 		@Override
+		public void setRecipe(IRecipeLayoutBuilder builder, GeneratingRecipe recipe, IFocusGroup focuses) {
+			IRecipeCategory.super.setRecipe(builder, recipe, focuses);
+
+			IRecipeSlotBuilder input = builder.addSlot(RecipeIngredientRole.INPUT, 45, 26);
+			input.addIngredients(recipe.getInput());
+		}
+
+		@Override
 		public IDrawable getBackground() {
 			return this.background;
 		}
@@ -623,18 +608,6 @@ public class JeiPlugin implements IModPlugin {
 			return null;
 		}
 
-		@Override
-		public void setIngredients(GeneratingRecipe recipe, IIngredients iIngredients) {
-			iIngredients.setInputIngredients(recipe.getIngredients());
-		}
-
-		@Override
-		public void setRecipe(IRecipeLayout iRecipeLayout, GeneratingRecipe recipe, IIngredients iIngredients) {
-			IGuiItemStackGroup stacks = iRecipeLayout.getItemStacks();
-			stacks.init(CoalGeneratorBlockEntity.SLOT_FUEL, true, 44, 25);// Numern wie im GUI
-
-			stacks.set(CoalGeneratorBlockEntity.SLOT_FUEL, iIngredients.getInputs(VanillaTypes.ITEM).get(0));
-		}
 	}
 
 	public static class NASAWorkbenchJeiCategory implements IRecipeCategory<WorkbenchingRecipe> {
@@ -673,40 +646,31 @@ public class JeiPlugin implements IModPlugin {
 		}
 
 		@Override
-		public void setIngredients(WorkbenchingRecipe recipe, IIngredients iIngredients) {
-			iIngredients.setInputIngredients(recipe.getIngredients());
-			iIngredients.setOutput(VanillaTypes.ITEM, recipe.getOutput());
-		}
+		public void setRecipe(IRecipeLayoutBuilder builder, WorkbenchingRecipe recipe, IFocusGroup focuses) {
+			IRecipeCategory.super.setRecipe(builder, recipe, focuses);
 
-		@Override
-		public void setRecipe(IRecipeLayout iRecipeLayout, WorkbenchingRecipe recipe, IIngredients iIngredients) {
-			IDrawable background = this.getBackground();
-			iRecipeLayout.moveRecipeTransferButton(background.getWidth() - 20, background.getHeight() - 20);
+			builder.moveRecipeTransferButton(background.getWidth() - 20, background.getHeight() - 20);
 
-			int slots = NASAWorkbenchBlockEntity.SLOT_PARTS;
 			GridPlacer placer = new GridPlacer();
-			slots = placeRocketParts(slots, 38, 7, 1, placer::placeBottom, ModInit.ROCKET_PART_NOSE.get(), iRecipeLayout, recipe);
-			slots = placeRocketParts(slots, 29, 25, 2, placer::placeBottom, ModInit.ROCKET_PART_BODY.get(), iRecipeLayout, recipe);
-			slots = placeRocketParts(slots, 29, 79, 1, placer::placeRight, ModInit.ROCKET_PART_TANK.get(), iRecipeLayout, recipe);
-			slots = placeRocketParts(slots, 11, 79, 1, placer::placeBottom, ModInit.ROCKET_PART_FIN_LEFT.get(), iRecipeLayout, recipe);
-			slots = placeRocketParts(slots, 65, 79, 1, placer::placeBottom, ModInit.ROCKET_PART_FIN_RIGHT.get(), iRecipeLayout, recipe);
-			slots = placeRocketParts(slots, 38, 97, 1, placer::placeBottom, ModInit.ROCKET_PART_ENGINE.get(), iRecipeLayout, recipe);
+			placeRocketParts(39, 8, 1, placer::placeBottom, ModInit.ROCKET_PART_NOSE.get(), builder, recipe);
+			placeRocketParts(30, 26, 2, placer::placeBottom, ModInit.ROCKET_PART_BODY.get(), builder, recipe);
+			placeRocketParts(30, 80, 1, placer::placeRight, ModInit.ROCKET_PART_TANK.get(), builder, recipe);
+			placeRocketParts(12, 80, 1, placer::placeBottom, ModInit.ROCKET_PART_FIN_LEFT.get(), builder, recipe);
+			placeRocketParts(66, 80, 1, placer::placeBottom, ModInit.ROCKET_PART_FIN_RIGHT.get(), builder, recipe);
+			placeRocketParts(39, 98, 1, placer::placeBottom, ModInit.ROCKET_PART_ENGINE.get(), builder, recipe);
 
-			IGuiItemStackGroup stacks = iRecipeLayout.getItemStacks();
-			stacks.init(slots, false, 126, 72);
-			stacks.set(slots, iIngredients.getOutputs(VanillaTypes.ITEM).get(0));
-			slots++;
+			IRecipeSlotBuilder output = builder.addSlot(RecipeIngredientRole.OUTPUT, 127, 73);
+			output.addItemStack(recipe.getOutput());
 		}
 	}
 
-	public static int placeRocketParts(int slot, int left, int top, int mod, IPlacer placer, RocketPart part, IRecipeLayout iRecipeLayout, WorkbenchingRecipe recipe) {
-		IGuiItemStackGroup stacks = iRecipeLayout.getItemStacks();
+	public static void placeRocketParts(int left, int top, int mod, IPlacer placer, RocketPart part, IRecipeLayoutBuilder builder, WorkbenchingRecipe recipe) {
 		List<Ingredient> ingredients = recipe.getParts().get(part);
 
-		return RocketPartGridPlacer.place(slot, left, top, mod, placer, part, (i, s, bounds) -> {
+		RocketPartGridPlacer.place(left, top, mod, placer, part, (i, bounds) -> {
 			Ingredient ingredient = (ingredients != null && i < ingredients.size()) ? ingredients.get(i) : Ingredient.EMPTY;
-			stacks.init(s, true, bounds.getX(), bounds.getY());
-			stacks.set(s, Lists.newArrayList(ingredient.getItems()));
+			IRecipeSlotBuilder slot = builder.addSlot(RecipeIngredientRole.INPUT, bounds.getX(), bounds.getY());
+			slot.addIngredients(ingredient);
 		});
 	}
 
@@ -820,20 +784,16 @@ public class JeiPlugin implements IModPlugin {
 		}
 
 		@Override
-		public void setIngredients(FuelLoadingRecipe recipe, IIngredients iIngredients) {
-			iIngredients.setInputLists(VanillaTypes.ITEM, Collections.singletonList(recipe.getFuelTagBuckets()));
-			iIngredients.setInputLists(VanillaTypes.FLUID, Collections.singletonList(recipe.getFluidStacks(FluidUtil2.BUCKET_SIZE)));
-		}
+		public void setRecipe(IRecipeLayoutBuilder builder, FuelLoadingRecipe recipe, IFocusGroup focuses) {
+			IRecipeCategory.super.setRecipe(builder, recipe, focuses);
 
-		@Override
-		public void setRecipe(IRecipeLayout iRecipeLayout, FuelLoadingRecipe recipe, IIngredients iIngredients) {
-			IGuiItemStackGroup itemStacks = iRecipeLayout.getItemStacks();
-			itemStacks.init(0, true, 13, 18);
-			itemStacks.set(0, iIngredients.getInputs(VanillaTypes.ITEM).get(0));
+			IRecipeSlotBuilder input = builder.addSlot(RecipeIngredientRole.INPUT, 14, 19);
+			input.addItemStacks(recipe.getFuelTagBuckets());
 
-			IGuiFluidStackGroup fluidStacks = iRecipeLayout.getFluidStacks();
-			fluidStacks.init(0, true, 66, 12, 46, 46, FluidUtil2.BUCKET_SIZE, false, null);
-			fluidStacks.set(0, iIngredients.getInputs(VanillaTypes.FLUID).get(0));
+			int capacity = FluidUtil2.BUCKET_SIZE;
+			IRecipeSlotBuilder tank = builder.addSlot(RecipeIngredientRole.INPUT, 66, 12);
+			tank.setFluidRenderer(capacity, true, 46, 46);
+			tank.addIngredients(VanillaTypes.FLUID, recipe.getFluidStacks(capacity));
 		}
 	}
 
@@ -876,20 +836,16 @@ public class JeiPlugin implements IModPlugin {
 		}
 
 		@Override
-		public void setIngredients(FuelLoadingRecipe recipe, IIngredients iIngredients) {
-			iIngredients.setInputLists(VanillaTypes.ITEM, Collections.singletonList(recipe.getFuelTagBuckets()));
-			iIngredients.setInputLists(VanillaTypes.FLUID, Collections.singletonList(recipe.getFluidStacks(FluidUtil2.BUCKET_SIZE * 3)));
-		}
+		public void setRecipe(IRecipeLayoutBuilder builder, FuelLoadingRecipe recipe, IFocusGroup focuses) {
+			IRecipeCategory.super.setRecipe(builder, recipe, focuses);
 
-		@Override
-		public void setRecipe(IRecipeLayout iRecipeLayout, FuelLoadingRecipe recipe, IIngredients iIngredients) {
-			IGuiItemStackGroup itemStacks = iRecipeLayout.getItemStacks();
-			itemStacks.init(0, true, 13, 18);
-			itemStacks.set(0, iIngredients.getInputs(VanillaTypes.ITEM).get(0));
+			IRecipeSlotBuilder input = builder.addSlot(RecipeIngredientRole.INPUT, 14, 19);
+			input.addItemStacks(recipe.getFuelTagBuckets());
 
-			IGuiFluidStackGroup fluidStacks = iRecipeLayout.getFluidStacks();
-			fluidStacks.init(0, true, 66, 12, 46, 46, FluidUtil2.BUCKET_SIZE * 3, false, null);
-			fluidStacks.set(0, iIngredients.getInputs(VanillaTypes.FLUID).get(0));
+			int capacity = FluidUtil2.BUCKET_SIZE * 3;
+			IRecipeSlotBuilder tank = builder.addSlot(RecipeIngredientRole.INPUT, 66, 12);
+			tank.setFluidRenderer(capacity, true, 46, 46);
+			tank.addIngredients(VanillaTypes.FLUID, recipe.getFluidStacks(capacity));
 		}
 	}
 
@@ -932,20 +888,16 @@ public class JeiPlugin implements IModPlugin {
 		}
 
 		@Override
-		public void setIngredients(FuelLoadingRecipe recipe, IIngredients iIngredients) {
-			iIngredients.setInputLists(VanillaTypes.ITEM, Collections.singletonList(recipe.getFuelTagBuckets()));
-			iIngredients.setInputLists(VanillaTypes.FLUID, Collections.singletonList(recipe.getFluidStacks(FluidUtil2.BUCKET_SIZE * 3)));
-		}
+		public void setRecipe(IRecipeLayoutBuilder builder, FuelLoadingRecipe recipe, IFocusGroup focuses) {
+			IRecipeCategory.super.setRecipe(builder, recipe, focuses);
 
-		@Override
-		public void setRecipe(IRecipeLayout iRecipeLayout, FuelLoadingRecipe recipe, IIngredients iIngredients) {
-			IGuiItemStackGroup itemStacks = iRecipeLayout.getItemStacks();
-			itemStacks.init(0, true, 13, 18);
-			itemStacks.set(0, iIngredients.getInputs(VanillaTypes.ITEM).get(0));
+			IRecipeSlotBuilder input = builder.addSlot(RecipeIngredientRole.INPUT, 14, 19);
+			input.addItemStacks(recipe.getFuelTagBuckets());
 
-			IGuiFluidStackGroup fluidStacks = iRecipeLayout.getFluidStacks();
-			fluidStacks.init(0, true, 66, 12, 46, 46, FluidUtil2.BUCKET_SIZE * 3, false, null);
-			fluidStacks.set(0, iIngredients.getInputs(VanillaTypes.FLUID).get(0));
+			int capacity = FluidUtil2.BUCKET_SIZE * 3;
+			IRecipeSlotBuilder tank = builder.addSlot(RecipeIngredientRole.INPUT, 66, 12);
+			tank.setFluidRenderer(capacity, true, 46, 46);
+			tank.addIngredients(VanillaTypes.FLUID, recipe.getFluidStacks(capacity));
 		}
 	}
 
@@ -988,20 +940,16 @@ public class JeiPlugin implements IModPlugin {
 		}
 
 		@Override
-		public void setIngredients(FuelLoadingRecipe recipe, IIngredients iIngredients) {
-			iIngredients.setInputLists(VanillaTypes.ITEM, Collections.singletonList(recipe.getFuelTagBuckets()));
-			iIngredients.setInputLists(VanillaTypes.FLUID, Collections.singletonList(recipe.getFluidStacks(FluidUtil2.BUCKET_SIZE * 3)));
-		}
+		public void setRecipe(IRecipeLayoutBuilder builder, FuelLoadingRecipe recipe, IFocusGroup focuses) {
+			IRecipeCategory.super.setRecipe(builder, recipe, focuses);
 
-		@Override
-		public void setRecipe(IRecipeLayout iRecipeLayout, FuelLoadingRecipe recipe, IIngredients iIngredients) {
-			IGuiItemStackGroup itemStacks = iRecipeLayout.getItemStacks();
-			itemStacks.init(0, true, 13, 18);
-			itemStacks.set(0, iIngredients.getInputs(VanillaTypes.ITEM).get(0));
+			IRecipeSlotBuilder input = builder.addSlot(RecipeIngredientRole.INPUT, 14, 19);
+			input.addItemStacks(recipe.getFuelTagBuckets());
 
-			IGuiFluidStackGroup fluidStacks = iRecipeLayout.getFluidStacks();
-			fluidStacks.init(0, true, 66, 12, 46, 46, FluidUtil2.BUCKET_SIZE * 3, false, null);
-			fluidStacks.set(0, iIngredients.getInputs(VanillaTypes.FLUID).get(0));
+			int capacity = FluidUtil2.BUCKET_SIZE * 3;
+			IRecipeSlotBuilder tank = builder.addSlot(RecipeIngredientRole.INPUT, 66, 12);
+			tank.setFluidRenderer(capacity, true, 46, 46);
+			tank.addIngredients(VanillaTypes.FLUID, recipe.getFluidStacks(capacity));
 		}
 	}
 
@@ -1069,24 +1017,19 @@ public class JeiPlugin implements IModPlugin {
 		}
 
 		@Override
+		public void setRecipe(IRecipeLayoutBuilder builder, CompressingRecipe recipe, IFocusGroup focuses) {
+			IRecipeCategory.super.setRecipe(builder, recipe, focuses);
+
+			IRecipeSlotBuilder input = builder.addSlot(RecipeIngredientRole.INPUT, 15, 30);
+			input.addIngredients(recipe.getInput());
+
+			IRecipeSlotBuilder output = builder.addSlot(RecipeIngredientRole.INPUT, 70, 29);
+			output.addItemStack(recipe.getOutput());
+		}
+
+		@Override
 		public IDrawable getIcon() {
 			return null;
-		}
-
-		@Override
-		public void setIngredients(CompressingRecipe recipe, IIngredients iIngredients) {
-			iIngredients.setInputIngredients(recipe.getIngredients());
-			iIngredients.setOutput(VanillaTypes.ITEM, recipe.getOutput());
-		}
-
-		@Override
-		public void setRecipe(IRecipeLayout iRecipeLayout, CompressingRecipe recipe, IIngredients iIngredients) {
-			IGuiItemStackGroup stacks = iRecipeLayout.getItemStacks();
-			stacks.init(ItemStackToItemStackBlockEntity.SLOT_INGREDIENT, true, 14, 29);
-			stacks.init(ItemStackToItemStackBlockEntity.SLOT_OUTPUT, false, 69, 28);
-
-			stacks.set(ItemStackToItemStackBlockEntity.SLOT_INGREDIENT, iIngredients.getInputs(VanillaTypes.ITEM).get(0));
-			stacks.set(ItemStackToItemStackBlockEntity.SLOT_OUTPUT, iIngredients.getOutputs(VanillaTypes.ITEM).get(0));
 		}
 	}
 
@@ -1155,35 +1098,22 @@ public class JeiPlugin implements IModPlugin {
 		}
 
 		@Override
-		public void setIngredients(FuelRefiningRecipe recipe, IIngredients iIngredients) {
-			iIngredients.setInputs(VanillaTypes.ITEM, this.plugin.getFluidFullItemStacks(recipe.getInput().getFluids()));
-			iIngredients.setOutputs(VanillaTypes.ITEM, this.plugin.getFluidFullItemStacks(recipe.getOutput().getFluids()));
+		public void setRecipe(IRecipeLayoutBuilder builder, FuelRefiningRecipe recipe, IFocusGroup focuses) {
+			IRecipeCategory.super.setRecipe(builder, recipe, focuses);
 
-			iIngredients.setInputLists(VanillaTypes.FLUID, Collections.singletonList(recipe.getInput().toStacks()));
-			iIngredients.setOutputLists(VanillaTypes.FLUID, Collections.singletonList(recipe.getOutput().toStacks()));
-		}
+			IRecipeSlotBuilder inputItem = builder.addSlot(RecipeIngredientRole.INPUT, 25, 9);
+			inputItem.addItemStacks(this.plugin.getFluidFullItemStacks(recipe.getInput().getFluids()));
 
-		@Override
-		public void setRecipe(IRecipeLayout iRecipeLayout, FuelRefiningRecipe recipe, IIngredients iIngredients) {
-			IGuiItemStackGroup itemStacks = iRecipeLayout.getItemStacks();
-			itemStacks.init(FuelRefineryBlockEntity.SLOT_INPUT_SOURCE, true, 24, 8);
-			itemStacks.init(FuelRefineryBlockEntity.SLOT_OUTPUT_SINK, false, 90, 38);
-			itemStacks.init(FuelRefineryBlockEntity.SLOT_INPUT_SINK, false, 24, 38);
-			itemStacks.init(FuelRefineryBlockEntity.SLOT_OUTPUT_SOURCE, false, 90, 8);
+			IRecipeSlotBuilder outputItem = builder.addSlot(RecipeIngredientRole.OUTPUT, 91, 39);
+			outputItem.addItemStacks(this.plugin.getFluidFullItemStacks(recipe.getOutput().getFluids()));
 
-			itemStacks.set(FuelRefineryBlockEntity.SLOT_INPUT_SOURCE, iIngredients.getInputs(VanillaTypes.ITEM).stream().flatMap(i -> i.stream()).collect(Collectors.toList()));
-			itemStacks.set(FuelRefineryBlockEntity.SLOT_OUTPUT_SINK, iIngredients.getOutputs(VanillaTypes.ITEM).stream().flatMap(i -> i.stream()).collect(Collectors.toList()));
+			IRecipeSlotBuilder inputTank = builder.addSlot(RecipeIngredientRole.INPUT, INPUT_TANK_LEFT, INPUT_TANK_TOP);
+			inputTank.setFluidRenderer(1, false, GuiHelper.FLUID_TANK_WIDTH, GuiHelper.FLUID_TANK_HEIGHT).setOverlay(fluidOverlay, 0, 0);
+			inputTank.addIngredients(VanillaTypes.FLUID, recipe.getInput().toStacks());
 
-			IGuiFluidStackGroup fluidStacks = iRecipeLayout.getFluidStacks();
-			int tanks = 0;
-
-			fluidStacks.init(tanks, true, INPUT_TANK_LEFT, INPUT_TANK_TOP, GuiHelper.FLUID_TANK_WIDTH, GuiHelper.FLUID_TANK_HEIGHT, 1, false, this.fluidOverlay);
-			fluidStacks.set(tanks, iIngredients.getInputs(VanillaTypes.FLUID).get(0));
-			tanks++;
-
-			fluidStacks.init(tanks, false, OUTPUT_TANK_LEFT, OUTPUT_TANK_TOP, GuiHelper.FLUID_TANK_WIDTH, GuiHelper.FLUID_TANK_HEIGHT, 1, false, this.fluidOverlay);
-			fluidStacks.set(tanks, iIngredients.getOutputs(VanillaTypes.FLUID).get(0));
-			tanks++;
+			IRecipeSlotBuilder outputTank = builder.addSlot(RecipeIngredientRole.OUTPUT, OUTPUT_TANK_LEFT, OUTPUT_TANK_TOP);
+			outputTank.setFluidRenderer(1, false, GuiHelper.FLUID_TANK_WIDTH, GuiHelper.FLUID_TANK_HEIGHT).setOverlay(fluidOverlay, 0, 0);
+			outputTank.addIngredients(VanillaTypes.FLUID, recipe.getOutput().toStacks());
 		}
 
 		public Rectangle2d getInputTankBounds() {
@@ -1238,20 +1168,16 @@ public class JeiPlugin implements IModPlugin {
 		}
 
 		@Override
-		public void setIngredients(FuelLoadingRecipe recipe, IIngredients iIngredients) {
-			iIngredients.setInputLists(VanillaTypes.ITEM, Collections.singletonList(recipe.getFuelTagBuckets()));
-			iIngredients.setInputLists(VanillaTypes.FLUID, Collections.singletonList(recipe.getFluidStacks(FluidUtil2.BUCKET_SIZE * 3)));
-		}
+		public void setRecipe(IRecipeLayoutBuilder builder, FuelLoadingRecipe recipe, IFocusGroup focuses) {
+			IRecipeCategory.super.setRecipe(builder, recipe, focuses);
 
-		@Override
-		public void setRecipe(IRecipeLayout iRecipeLayout, FuelLoadingRecipe recipe, IIngredients iIngredients) {
-			IGuiItemStackGroup itemStacks = iRecipeLayout.getItemStacks();
-			itemStacks.init(0, true, 7, 59);
-			itemStacks.set(0, iIngredients.getInputs(VanillaTypes.ITEM).get(0));
+			IRecipeSlotBuilder input = builder.addSlot(RecipeIngredientRole.INPUT, 8, 60);
+			input.addItemStacks(recipe.getFuelTagBuckets());
 
-			IGuiFluidStackGroup fluidStacks = iRecipeLayout.getFluidStacks();
-			fluidStacks.init(0, true, 9, 8, GuiHelper.FLUID_TANK_WIDTH, GuiHelper.FLUID_TANK_HEIGHT, FluidUtil2.BUCKET_SIZE * 3, false, this.fluidOverlay);
-			fluidStacks.set(0, iIngredients.getInputs(VanillaTypes.FLUID).get(0));
+			int capacity = FluidUtil2.BUCKET_SIZE * 3;
+			IRecipeSlotBuilder tank = builder.addSlot(RecipeIngredientRole.INPUT, 9, 8);
+			tank.setFluidRenderer(capacity, true, GuiHelper.FLUID_TANK_WIDTH, GuiHelper.FLUID_TANK_HEIGHT).setOverlay(fluidOverlay, 0, 0);
+			tank.addIngredients(VanillaTypes.FLUID, recipe.getFluidStacks(capacity));
 		}
 	}
 
@@ -1309,8 +1235,19 @@ public class JeiPlugin implements IModPlugin {
 		}
 
 		@Override
-		public void setIngredients(SpaceStationRecipe recipe, IIngredients iIngredients) {
-			iIngredients.setInputIngredients(recipe.getIngredients());
+		public void setRecipe(IRecipeLayoutBuilder builder, SpaceStationRecipe recipe, IFocusGroup focuses) {
+			IRecipeCategory.super.setRecipe(builder, recipe, focuses);
+
+			NonNullList<IngredientStack> ingredientStacks = recipe.getIngredientStacks();
+			int count = ingredientStacks.size();
+
+			for (int i = 0; i < count; i++) {
+				int[] pos = this.getSpaceStationItemPosition(i, count);
+
+				IngredientStack ingredientStack = ingredientStacks.get(i);
+				IRecipeSlotBuilder slot = builder.addSlot(RecipeIngredientRole.INPUT, pos[0] + 1, pos[1] + 1);
+				slot.addItemStacks(Arrays.asList(ingredientStack.getItems()));
+			}
 		}
 
 		public int[] getSpaceStationItemPosition(int index, int count) {
@@ -1320,21 +1257,6 @@ public class JeiPlugin implements IModPlugin {
 			int xPosition = SLOTS_X_CENTER + (xIndex * SLOTS_X_OFFSET) - (slots_width / 2);
 			int yPosition = SLOTS_Y_TOP + (yIndex * SLOTS_Y_OFFSET);
 			return new int[] { xPosition, yPosition };
-		}
-
-		@Override
-		public void setRecipe(IRecipeLayout iRecipeLayout, SpaceStationRecipe recipe, IIngredients iIngredients) {
-			IGuiItemStackGroup itemStacks = iRecipeLayout.getItemStacks();
-			NonNullList<IngredientStack> ingredientStacks = recipe.getIngredientStacks();
-			int count = ingredientStacks.size();
-
-			for (int i = 0; i < count; i++) {
-				int[] pos = this.getSpaceStationItemPosition(i, count);
-
-				IngredientStack ingredientStack = ingredientStacks.get(i);
-				itemStacks.init(i, true, pos[0], pos[1]);
-				itemStacks.set(i, NonNullList.of(ItemStack.EMPTY, ingredientStack.getItems()));
-			}
 		}
 
 		@Override
