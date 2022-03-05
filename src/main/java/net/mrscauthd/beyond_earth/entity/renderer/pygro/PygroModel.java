@@ -39,12 +39,13 @@ public class PygroModel<T extends Mob> extends PlayerModel<T> {
         PartDefinition partdefinition = meshdefinition.getRoot();
         partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(16, 16).addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, p_170812_), PartPose.ZERO);
         PartDefinition partdefinition1 = partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-5.0F, -8.0F, -4.0F, 10.0F, 8.0F, 8.0F, p_170812_).texOffs(31, 1).addBox(-2.0F, -4.0F, -5.0F, 4.0F, 4.0F, 1.0F, p_170812_).texOffs(2, 4).addBox(2.0F, -2.0F, -5.0F, 1.0F, 2.0F, 1.0F, p_170812_).texOffs(2, 0).addBox(-3.0F, -2.0F, -5.0F, 1.0F, 2.0F, 1.0F, p_170812_), PartPose.ZERO);
-        partdefinition1.addOrReplaceChild("left_ear", CubeListBuilder.create().texOffs(51, 6).addBox(0.0F, 0.0F, -2.0F, 1.0F, 5.0F, 4.0F, p_170812_), PartPose.offsetAndRotation(4.5F, -6.0F, 0.0F, 0.0F, 0.0F, (-(float)Math.PI / 6F)));
+        partdefinition1.addOrReplaceChild("left_ear", CubeListBuilder.create().texOffs(39, 6).addBox(0.0F, 0.0F, -2.0F, 1.0F, 5.0F, 4.0F, p_170812_), PartPose.offsetAndRotation(4.5F, -6.0F, 0.0F, 0.0F, 0.0F, (-(float)Math.PI / 6F)));
         partdefinition1.addOrReplaceChild("right_ear", CubeListBuilder.create().texOffs(39, 6).addBox(-1.0F, 0.0F, -2.0F, 1.0F, 5.0F, 4.0F, p_170812_), PartPose.offsetAndRotation(-4.5F, -6.0F, 0.0F, 0.0F, 0.0F, ((float)Math.PI / 6F)));
         partdefinition.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
+
         //EYES
         PartDefinition eyes = partdefinition1.addOrReplaceChild("eyesg", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
-        eyes.addOrReplaceChild("eyes", CubeListBuilder.create().texOffs(46, 36).addBox(-4.5F, -4.5F, -0.75F, 9.0F, 7.0F, 0.0F, CubeDeformation.NONE), PartPose.offsetAndRotation(0.0F, -7.5F, -4.0F, 0.3054F, 0.0F, 0.0F));
+        eyes.addOrReplaceChild("eyes", CubeListBuilder.create().texOffs(46, 0).addBox(-4.5F, -4.5F, -0.75F, 9.0F, 7.0F, 0.0F, CubeDeformation.NONE), PartPose.offsetAndRotation(0.0F, -7.5F, -4.0F, 0.3054F, 0.0F, 0.0F));
 
         //NOSE 1
         PartDefinition fang = partdefinition1.addOrReplaceChild("noseg1", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
@@ -128,6 +129,5 @@ public class PygroModel<T extends Mob> extends PlayerModel<T> {
         } else {
             this.rightArm.xRot = -1.8F;
         }
-
     }
 }

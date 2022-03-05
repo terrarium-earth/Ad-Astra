@@ -6,20 +6,20 @@ import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.OreFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.placement.*;
-import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
+import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.world.biomes.BiomeRegistry;
@@ -30,63 +30,58 @@ import java.util.List;
 public class OreGeneration {
 
     /** MOON ORES: */
-    private static RuleTest MOON_MATCH = new BlockMatchTest(Blocks.NETHERRACK);
+    public static final TagKey<Block> MOON_ORE_REPLACEABLES = TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "moon_ore_replaceables"));
+    public static final RuleTest MOON_MATCH = new TagMatchTest(MOON_ORE_REPLACEABLES);
 
-    private static Feature<OreConfiguration> MOON_GEN_FEATURE;
-
-    private static Holder<PlacedFeature> moonCheeseOre;
-    private static Holder<PlacedFeature> soulSoil;
-    private static Holder<PlacedFeature> moonIceShardOre;
-    private static Holder<PlacedFeature> moonIronOre;
-    private static Holder<PlacedFeature> moonDeshOre;
+    public static Holder<PlacedFeature> moonCheeseOre;
+    public static Holder<PlacedFeature> soulSoil;
+    public static Holder<PlacedFeature> moonIceShardOre;
+    public static Holder<PlacedFeature> moonIronOre;
+    public static Holder<PlacedFeature> moonDeshOre;
 
     /** MARS ORES: */
-   // public static RuleTestType<RuleTests.MarsRuleTest> MARS_MATCH;
-    private static Feature<OreConfiguration> MARS_GEN_FEATURE;
+    public static final TagKey<Block> MARS_ORE_REPLACEABLES = TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "mars_ore_replaceables"));
+    public static final RuleTest MARS_MATCH = new TagMatchTest(MARS_ORE_REPLACEABLES);
 
-    private static Holder<PlacedFeature> marsIceShardOre;
-    private static Holder<PlacedFeature> marsIronOre;
-    private static Holder<PlacedFeature> marsDiamondOre;
-    private static Holder<PlacedFeature> marsOstrumOre;
+    public static Holder<PlacedFeature> marsIceShardOre;
+    public static Holder<PlacedFeature> marsIronOre;
+    public static Holder<PlacedFeature> marsDiamondOre;
+    public static Holder<PlacedFeature> marsOstrumOre;
 
     /** MERCURY ORES: */
-   // public static RuleTestType<RuleTests.MercuryRuleTest> MERCURY_MATCH;
-    private static Feature<OreConfiguration> MERCURY_GEN_FEATURE;
+    public static final TagKey<Block> MERCURY_ORE_REPLACEABLES = TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "mercury_ore_replaceables"));
+    public static final RuleTest MERCURY_MATCH = new TagMatchTest(MERCURY_ORE_REPLACEABLES);
 
-    private static Holder<PlacedFeature> mercuryIronOre;
+    public static Holder<PlacedFeature> mercuryIronOre;
 
     /** VENUS ORES: */
-    //public static RuleTestType<RuleTests.VenusRuleTest> VENUS_MATCH;
-    private static Feature<OreConfiguration> VENUS_GEN_FEATURE;
+    public static final TagKey<Block> VENUS_ORE_REPLACEABLES = TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "venus_ore_replaceables"));
+    public static final RuleTest VENUS_MATCH = new TagMatchTest(VENUS_ORE_REPLACEABLES);
 
-    private static Holder<PlacedFeature> venusCoalOre;
-    private static Holder<PlacedFeature> venusGoldOre;
-    private static Holder<PlacedFeature> venusDiamondOre;
-    private static Holder<PlacedFeature> venusCaloriteOre;
+    public static Holder<PlacedFeature> venusCoalOre;
+    public static Holder<PlacedFeature> venusGoldOre;
+    public static Holder<PlacedFeature> venusDiamondOre;
+    public static Holder<PlacedFeature> venusCaloriteOre;
 
     /** GLACIO ORES: */
-    //public static RuleTestType<RuleTests.GlacioRuleTest> GLACIO_MATCH;
-    //public static RuleTestType<RuleTests.GlacioDeepslateRuleTest> GLACIO_DEEPSLATE_MATCH;
-    private static Feature<OreConfiguration> GLACIO_GEN_FEATURE;
+    public static final TagKey<Block> GLACIO_ORE_REPLACEABLES = TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID, "glacio_ore_replaceables"));
+    public static final RuleTest GLACIO_MATCH = new TagMatchTest(GLACIO_ORE_REPLACEABLES);
 
-    private static Holder<PlacedFeature> glacioIceShardOre;
-    private static Holder<PlacedFeature> glacioCoalOre;
-    private static Holder<PlacedFeature> glacioCopperOre;
-    private static Holder<PlacedFeature> glacioIronOre;
-    private static Holder<PlacedFeature> glacioLapisOre;
+    public static Holder<PlacedFeature> glacioIceShardOre;
+    public static Holder<PlacedFeature> glacioCoalOre;
+    public static Holder<PlacedFeature> glacioCopperOre;
+    public static Holder<PlacedFeature> glacioIronOre;
+    public static Holder<PlacedFeature> glacioLapisOre;
 
-    private static Holder<PlacedFeature> deepslateCoalOre;
-    private static Holder<PlacedFeature> deepslateCopperOre;
-    private static Holder<PlacedFeature> deepslateIronOre;
-    private static Holder<PlacedFeature> deepslateLapisOre;
+    public static Holder<PlacedFeature> deepslateCoalOre;
+    public static Holder<PlacedFeature> deepslateCopperOre;
+    public static Holder<PlacedFeature> deepslateIronOre;
+    public static Holder<PlacedFeature> deepslateLapisOre;
 
     @SubscribeEvent
     public static void registerFeature(RegistryEvent.Register<Feature<?>> event) {
 
         /** MOON */
-        MOON_GEN_FEATURE = new OreFeature(OreConfiguration.CODEC);
-        event.getRegistry().register(MOON_GEN_FEATURE.setRegistryName("moon_ore"));
-
         moonCheeseOre = PlacementUtils.register("moon_cheese_ore", FeatureUtils.register("moon_cheese_ore", Feature.ORE, new OreConfiguration(MOON_MATCH, ModInit.MOON_CHEESE_ORE.get().defaultBlockState(), 10)), commonOrePlacement(20, HeightRangePlacement.triangle(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(192))));
         Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID, "moon_cheese_ore"), moonCheeseOre.value());
 
@@ -103,8 +98,7 @@ public class OreGeneration {
         Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID, "moon_desh_ore"), moonDeshOre.value());
 
         /** MARS */
-    /*    MARS_GEN_FEATURE = new OreFeature(OreConfiguration.CODEC);
-        event.getRegistry().register(MARS_GEN_FEATURE.setRegistryName("mars_ore"));
+        /*
 
         marsIceShardOre = MARS_GEN_FEATURE.configured(new OreConfiguration(RuleTests.MarsRuleTest.INSTANCE, ModInit.MARS_ICE_SHARD_ORE.get().defaultBlockState(), 10)).placed(commonOrePlacement(8, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-32), VerticalAnchor.aboveBottom(32))));
         Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"mars_ice_shard_ore"), marsIceShardOre);
@@ -119,15 +113,13 @@ public class OreGeneration {
         Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"mars_ostrum_ore"), marsOstrumOre);
 
         /** MERCURY */
-    /*    MERCURY_GEN_FEATURE = new OreFeature(OreConfiguration.CODEC);
-        event.getRegistry().register(MERCURY_GEN_FEATURE.setRegistryName("mercury_ore"));
+        /*
 
         mercuryIronOre = MERCURY_GEN_FEATURE.configured(new OreConfiguration(RuleTests.MercuryRuleTest.INSTANCE, ModInit.MERCURY_IRON_ORE.get().defaultBlockState(), 12)).placed(commonOrePlacement(20, HeightRangePlacement.triangle(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(192))));
         Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"mercury_iron_ore"), mercuryIronOre);
 
         /** Venus */
-    /*    VENUS_GEN_FEATURE = new OreFeature(OreConfiguration.CODEC);
-        event.getRegistry().register(VENUS_GEN_FEATURE.setRegistryName("venus_ore"));
+        /*
 
         venusCoalOre = VENUS_GEN_FEATURE.configured(new OreConfiguration(RuleTests.VenusRuleTest.INSTANCE, ModInit.VENUS_COAL_ORE.get().defaultBlockState(), 17)).placed(commonOrePlacement(20, HeightRangePlacement.triangle(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(192))));
         Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"venus_coal_ore"), venusCoalOre);
@@ -142,8 +134,7 @@ public class OreGeneration {
         Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"venus_calorite_ore"), venusCaloriteOre);
 
         /** Glacio */
-    /*    GLACIO_GEN_FEATURE = new OreFeature(OreConfiguration.CODEC);
-        event.getRegistry().register(GLACIO_GEN_FEATURE.setRegistryName("glacio_ore"));
+        /*
 
         glacioIceShardOre = GLACIO_GEN_FEATURE.configured(new OreConfiguration(RuleTests.GlacioRuleTest.INSTANCE, ModInit.GLACIO_ICE_SHARD_ORE.get().defaultBlockState(), 10)).placed(commonOrePlacement(8, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-32), VerticalAnchor.aboveBottom(32))));
         Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"glacio_ice_shard_ore"), glacioIceShardOre);
@@ -172,16 +163,8 @@ public class OreGeneration {
 
         deepslateLapisOre = GLACIO_GEN_FEATURE.configured(new OreConfiguration(RuleTests.GlacioDeepslateRuleTest.INSTANCE, Blocks.DEEPSLATE_LAPIS_ORE.defaultBlockState(), 9)).placed(commonOrePlacement(2, HeightRangePlacement.triangle(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(10))));
         Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"deepslate_lapis_ore"), deepslateLapisOre);
-        */
+         */
     }
-
-    /** RULE TEST */
-    /*@SubscribeEvent
-    public static void init(FMLCommonSetupEvent event) {
-        event.enqueueWork(() -> {
-            MOON_MATCH = new BlockMatchTest(ModInit.MOON_STONE.get());
-        });
-    }*/
 
     /** BIOME ORE GEN */
     public static void biomesLoading(BiomeLoadingEvent event) {
