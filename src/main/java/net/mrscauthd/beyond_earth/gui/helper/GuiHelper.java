@@ -16,6 +16,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
@@ -131,7 +132,7 @@ public class GuiHelper {
 	public static void drawFluid(PoseStack matrixStack, int left, int top, int width, int height, FluidStack stack) {
 		Fluid fluid = FluidUtil2.getFluid(stack);
 
-		if (fluid == null) {
+		if (fluid == Fluids.EMPTY) {
 			return;
 		}
 
@@ -158,7 +159,7 @@ public class GuiHelper {
 	public static void drawFluidHorizontal(PoseStack matrixStack, int left, int top, int width, int height, FluidStack stack, int capacity) {
 		Fluid fluid = FluidUtil2.getFluid(stack);
 
-		if (fluid == null) {
+		if (fluid == Fluids.EMPTY) {
 			return;
 		}
 
@@ -169,7 +170,7 @@ public class GuiHelper {
 	public static void drawFluidVertical(PoseStack matrixStack, int left, int top, int width, int height, FluidStack stack, int capacity) {
 		Fluid fluid = FluidUtil2.getFluid(stack);
 
-		if (fluid == null) {
+		if (fluid == Fluids.EMPTY) {
 			return;
 		}
 
