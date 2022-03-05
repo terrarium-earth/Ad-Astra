@@ -611,7 +611,7 @@ public class JeiPlugin implements IModPlugin {
 	}
 
 	public static class NASAWorkbenchJeiCategory implements IRecipeCategory<WorkbenchingRecipe> {
-		public static final ResourceLocation Uid = new ResourceLocation(BeyondEarthMod.MODID, "nasa_workbench"); // muss klein sein !
+		public static final ResourceLocation Uid = new ResourceLocation(BeyondEarthMod.MODID, "nasa_workbench");
 		private final Component title;
 		private final IDrawable background;
 
