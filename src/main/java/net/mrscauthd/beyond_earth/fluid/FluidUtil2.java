@@ -99,7 +99,7 @@ public class FluidUtil2 {
 			return false;
 		}
 
-		if (findBucketFluid(itemStack.getItem()) != null) {
+		if (findBucketFluid(itemStack.getItem()) != Fluids.EMPTY) {
 			return true;
 		}
 
@@ -223,7 +223,7 @@ public class FluidUtil2 {
 				}
 			} else {
 				Fluid fluid = findBucketFluid(item);
-				if (fluid != null) {
+				if (fluid != Fluids.EMPTY) {
 					fluidStacks.add(new FluidStack(fluid, BUCKET_SIZE));
 				}
 			}
@@ -280,7 +280,7 @@ public class FluidUtil2 {
 		Item sourceItem = sourceItemStack.getItem();
 		Fluid sourceFluid = FluidUtil2.findBucketFluid(sourceItem);
 
-		if (sourceFluid != null) {
+		if (sourceFluid != Fluids.EMPTY) {
 			FluidStack fluidStack = new FluidStack(sourceFluid, FluidUtil2.BUCKET_SIZE);
 
 			if (sink.fill(fluidStack, FluidAction.SIMULATE) == fluidStack.getAmount()) {
