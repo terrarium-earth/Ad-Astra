@@ -69,7 +69,6 @@ public class AlienTradingRecipeMap extends AlienTradingRecipeItemStackBase {
 
 		if (level instanceof ServerLevel) {
 			ServerLevel serverWorld = (ServerLevel) level;
-			//TODO TagKey check before just "structure" check too if it ok that this is not final
 			BlockPos blockpos = serverWorld.findNearestMapFeature(TagKey.create(Registry.CONFIGURED_STRUCTURE_FEATURE_REGISTRY, structure.getRegistryName()), trader.blockPosition(), 100, true);
 
 			if (blockpos != null) {
@@ -80,7 +79,6 @@ public class AlienTradingRecipeMap extends AlienTradingRecipeItemStackBase {
 			MapItem.renderBiomePreviewMap(serverWorld, itemstack);
 		}
 
-		//TODO getFeatureName() / getRegistryName().toString() check if it right work
 		itemstack.setHoverName(new TranslatableComponent("filled_map." + structure.getRegistryName().toString().toLowerCase(Locale.ROOT)));
 		return Triple.of(this.getCostA(), this.getCostB(), itemstack);
 	}

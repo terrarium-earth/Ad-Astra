@@ -81,11 +81,11 @@ dependencies {
     }
 
     //JEI
-    compileOnly fg.deobf("mezz.jei:jei-1.18.2:9.4.1.116:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-1.18.2:9.4.1.116")
+    compileOnly fg.deobf("mezz.jei:jei-1.18.2:9.4.3.122:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-1.18.2:9.4.3.122")
 
     //The One Probe
-    implementation fg.deobf("curse.maven:the-one-probe-245211:3550084")
+    implementation fg.deobf("curse.maven:the-one-probe-245211:3671753")
     
     //Jade
     implementation fg.deobf("curse.maven:jade-324717:3671210")
@@ -115,7 +115,7 @@ jar {
         attributes([
                 "Specification-Title": "beyond_earth",
                 "Specification-Vendor": "MrScautHD",
-                "Specification-Version": "1", // We are version 1 of ourselves
+                "Specification-Version": "1",
                 "Implementation-Title": project.name,
                 "Implementation-Version": "${version}",
                 "Implementation-Vendor" :"MrScautHD",

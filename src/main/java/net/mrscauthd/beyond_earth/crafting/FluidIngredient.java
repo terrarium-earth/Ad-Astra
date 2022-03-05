@@ -77,7 +77,6 @@ public abstract class FluidIngredient implements Predicate<FluidStack> {
 
 		if (json.has(KEY_TAG)) {
 			String tagName = GsonHelper.getAsString(json, KEY_TAG);
-			//Todo Change to new ResourceLocation(tagName) before just the string tagName (check if you get still the right thing
 			return of(FluidTags.create(new ResourceLocation(tagName)), amount);
 		} else if (json.has(KEY_NAME)) {
 			JsonElement nameJson = json.get(KEY_NAME);
