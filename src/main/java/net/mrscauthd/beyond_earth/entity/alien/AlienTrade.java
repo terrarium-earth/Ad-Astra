@@ -68,16 +68,17 @@ public class AlienTrade implements ItemListing {
 	}
 
 	public static void addReloadListener(AddReloadListenerEvent event) {
-		RecipeManager recipeManager = ServerLifecycleHooks.getCurrentServer().getRecipeManager();
+		if (ServerLifecycleHooks.getCurrentServer() != null) {
+			RecipeManager recipeManager = ServerLifecycleHooks.getCurrentServer().getRecipeManager();
 
-		event.addListener(new ResourceManagerReloadListener() {
-			@Override
-			public void onResourceManagerReload(ResourceManager resourceManager) {
-				AlienTrade.registerTrades(recipeManager);
-			}
+			event.addListener(new ResourceManagerReloadListener() {
+				@Override
+				public void onResourceManagerReload(ResourceManager resourceManager) {
+					AlienTrade.registerTrades(recipeManager);
+				}
 
-		});
-
+			});
+		}
 	}
 
 	private AlienTradingRecipe recipe;
