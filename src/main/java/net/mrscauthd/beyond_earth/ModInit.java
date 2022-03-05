@@ -610,13 +610,13 @@ public class ModInit {
     }
 
     public static void biomesLoading(BiomeLoadingEvent event) {
+        //Mars ice Spikes
         if (event.getName().getPath().equals(BiomeRegistry.mars_ice_spikes.getRegistryName().getPath())) {
             event.getGeneration().addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, MARS_ICE_SPIKE);
         }
 
         //Venus Deltas
         if (event.getName().getPath().equals(BiomeRegistry.infernal_venus_barrens.getRegistryName().getPath())) {
-            System.out.println("test");
             event.getGeneration().addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, VENUS_DELTAS_SMALL);
             event.getGeneration().addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, VENUS_DELTAS_BIG);
         }
