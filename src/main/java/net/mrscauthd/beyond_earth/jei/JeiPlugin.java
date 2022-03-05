@@ -25,6 +25,7 @@ import mezz.jei.api.gui.drawable.IDrawableBuilder;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.gui.ingredient.IGuiFluidStackGroup;
 import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.helpers.IJeiHelpers;
 import mezz.jei.api.ingredients.IIngredients;
@@ -313,7 +314,6 @@ public class JeiPlugin implements IModPlugin {
 		public List<Fluid> getFluid() {
 			return this.fluids;
 		}
-
 	}
 
 	@Override
@@ -366,7 +366,7 @@ public class JeiPlugin implements IModPlugin {
 		}
 
 		@Override
-		public List<Component> getTooltipStrings(OxygenLoaderRecipe recipe, double mouseX, double mouseY) {
+		public List<Component> getTooltipStrings(OxygenLoaderRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
 			if (GuiHelper.isHover(this.getEnergyBounds(), mouseX, mouseY)) {
 				return Collections.singletonList(GaugeTextHelper.getUsingPerTickText(GaugeValueHelper.getEnergy(FuelRefineryBlockEntity.ENERGY_PER_TICK)).build());
 			} else if (GuiHelper.isHover(this.getOutputTankBounds(), mouseX, mouseY)) {
@@ -402,8 +402,8 @@ public class JeiPlugin implements IModPlugin {
 		}
 
 		@Override
-		public void draw(OxygenLoaderRecipe recipe, PoseStack stack, double mouseX, double mouseY) {
-			IRecipeCategory.super.draw(recipe, stack, mouseX, mouseY);
+		public void draw(OxygenLoaderRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX, double mouseY) {
+			IRecipeCategory.super.draw(recipe, recipeSlotsView, stack, mouseX, mouseY);
 
 			this.cachedEnergies.getUnchecked(200).draw(stack, ENERGY_LEFT, ENERGY_TOP);
 			GuiHelper.drawOxygenTank(stack, OUTPUT_TANK_LEFT, OUTPUT_TANK_TOP, 1.0D);
@@ -473,7 +473,7 @@ public class JeiPlugin implements IModPlugin {
 		}
 
 		@Override
-		public List<Component> getTooltipStrings(OxygenBubbleDistributorRecipe recipe, double mouseX, double mouseY) {
+		public List<Component> getTooltipStrings(OxygenBubbleDistributorRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
 			if (GuiHelper.isHover(this.getEnergyBounds(), mouseX, mouseY)) {
 				return Collections.singletonList(GaugeTextHelper.getUsingPerTickText(GaugeValueHelper.getEnergy(FuelRefineryBlockEntity.ENERGY_PER_TICK)).build());
 			} else if (GuiHelper.isHover(this.getOutputTankBounds(), mouseX, mouseY)) {
@@ -509,8 +509,8 @@ public class JeiPlugin implements IModPlugin {
 		}
 
 		@Override
-		public void draw(OxygenBubbleDistributorRecipe recipe, PoseStack stack, double mouseX, double mouseY) {
-			IRecipeCategory.super.draw(recipe, stack, mouseX, mouseY);
+		public void draw(OxygenBubbleDistributorRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX, double mouseY) {
+			IRecipeCategory.super.draw(recipe, recipeSlotsView, stack, mouseX, mouseY);
 
 			this.cachedEnergies.getUnchecked(200).draw(stack, ENERGY_LEFT, ENERGY_TOP);
 			GuiHelper.drawOxygenTank(stack, OUTPUT_TANK_LEFT, OUTPUT_TANK_TOP, 1.0D);
@@ -571,7 +571,7 @@ public class JeiPlugin implements IModPlugin {
 		}
 
 		@Override
-		public List<Component> getTooltipStrings(GeneratingRecipe recipe, double mouseX, double mouseY) {
+		public List<Component> getTooltipStrings(GeneratingRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
 			if (GuiHelper.isHover(this.getFireBounds(), mouseX, mouseY)) {
 				return Collections.singletonList(GaugeTextHelper.getValueText(GaugeValueHelper.getBurnTime(recipe.getBurnTime())).build());
 			} else if (GuiHelper.isHover(this.getEnergyBounds(), mouseX, mouseY)) {
@@ -604,8 +604,8 @@ public class JeiPlugin implements IModPlugin {
 		}
 
 		@Override
-		public void draw(GeneratingRecipe recipe, PoseStack stack, double mouseX, double mouseY) {
-			IRecipeCategory.super.draw(recipe, stack, mouseX, mouseY);
+		public void draw(GeneratingRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX, double mouseY) {
+			IRecipeCategory.super.draw(recipe, recipeSlotsView, stack, mouseX, mouseY);
 
 			int burnTime = recipe.getBurnTime();
 			this.fires.getUnchecked(burnTime).draw(stack, FIRE_LEFT, FIRE_TOP);
@@ -685,12 +685,12 @@ public class JeiPlugin implements IModPlugin {
 
 			int slots = NASAWorkbenchBlockEntity.SLOT_PARTS;
 			GridPlacer placer = new GridPlacer();
-			slots = placeRcketParts(slots, 38, 7, 1, placer::placeBottom, ModInit.ROCKET_PART_NOSE.get(), iRecipeLayout, recipe);
-			slots = placeRcketParts(slots, 29, 25, 2, placer::placeBottom, ModInit.ROCKET_PART_BODY.get(), iRecipeLayout, recipe);
-			slots = placeRcketParts(slots, 29, 79, 1, placer::placeRight, ModInit.ROCKET_PART_TANK.get(), iRecipeLayout, recipe);
-			slots = placeRcketParts(slots, 11, 79, 1, placer::placeBottom, ModInit.ROCKET_PART_FIN_LEFT.get(), iRecipeLayout, recipe);
-			slots = placeRcketParts(slots, 65, 79, 1, placer::placeBottom, ModInit.ROCKET_PART_FIN_RIGHT.get(), iRecipeLayout, recipe);
-			slots = placeRcketParts(slots, 38, 97, 1, placer::placeBottom, ModInit.ROCKET_PART_ENGINE.get(), iRecipeLayout, recipe);
+			slots = placeRocketParts(slots, 38, 7, 1, placer::placeBottom, ModInit.ROCKET_PART_NOSE.get(), iRecipeLayout, recipe);
+			slots = placeRocketParts(slots, 29, 25, 2, placer::placeBottom, ModInit.ROCKET_PART_BODY.get(), iRecipeLayout, recipe);
+			slots = placeRocketParts(slots, 29, 79, 1, placer::placeRight, ModInit.ROCKET_PART_TANK.get(), iRecipeLayout, recipe);
+			slots = placeRocketParts(slots, 11, 79, 1, placer::placeBottom, ModInit.ROCKET_PART_FIN_LEFT.get(), iRecipeLayout, recipe);
+			slots = placeRocketParts(slots, 65, 79, 1, placer::placeBottom, ModInit.ROCKET_PART_FIN_RIGHT.get(), iRecipeLayout, recipe);
+			slots = placeRocketParts(slots, 38, 97, 1, placer::placeBottom, ModInit.ROCKET_PART_ENGINE.get(), iRecipeLayout, recipe);
 
 			IGuiItemStackGroup stacks = iRecipeLayout.getItemStacks();
 			stacks.init(slots, false, 126, 72);
@@ -699,7 +699,7 @@ public class JeiPlugin implements IModPlugin {
 		}
 	}
 
-	public static int placeRcketParts(int slot, int left, int top, int mod, IPlacer placer, RocketPart part, IRecipeLayout iRecipeLayout, WorkbenchingRecipe recipe) {
+	public static int placeRocketParts(int slot, int left, int top, int mod, IPlacer placer, RocketPart part, IRecipeLayout iRecipeLayout, WorkbenchingRecipe recipe) {
 		IGuiItemStackGroup stacks = iRecipeLayout.getItemStacks();
 		List<Ingredient> ingredients = recipe.getParts().get(part);
 
@@ -1026,13 +1026,12 @@ public class JeiPlugin implements IModPlugin {
 		}
 
 		@Override
-		public List<Component> getTooltipStrings(CompressingRecipe recipe, double mouseX, double mouseY) {
+		public List<Component> getTooltipStrings(CompressingRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
 			if (GuiHelper.isHover(this.getEnergyBounds(), mouseX, mouseY)) {
 				return Collections.singletonList((GaugeTextHelper.getUsingPerTickText(GaugeValueHelper.getEnergy(CompressorBlockEntity.ENERGY_PER_TICK)).build()));
 			} else {
 				return Collections.emptyList();
 			}
-
 		}
 
 		private Rectangle2d getEnergyBounds() {
@@ -1060,8 +1059,8 @@ public class JeiPlugin implements IModPlugin {
 		}
 
 		@Override
-		public void draw(CompressingRecipe recipe, PoseStack stack, double mouseX, double mouseY) {
-			IRecipeCategory.super.draw(recipe, stack, mouseX, mouseY);
+		public void draw(CompressingRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX, double mouseY) {
+			IRecipeCategory.super.draw(recipe, recipeSlotsView, stack, mouseX, mouseY);
 
 			int cookTime = recipe.getCookTime();
 			this.cachedArrows.getUnchecked(cookTime).draw(stack, ARROW_LEFT, ARROW_TOP);
@@ -1115,13 +1114,12 @@ public class JeiPlugin implements IModPlugin {
 		}
 
 		@Override
-		public List<Component> getTooltipStrings(FuelRefiningRecipe recipe, double mouseX, double mouseY) {
+		public List<Component> getTooltipStrings(FuelRefiningRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
 			if (GuiHelper.isHover(this.getEnergyBounds(), mouseX, mouseY)) {
 				return Collections.singletonList(GaugeTextHelper.getUsingPerTickText(GaugeValueHelper.getEnergy(FuelRefineryBlockEntity.ENERGY_PER_TICK)).build());
 			} else {
 				return Collections.emptyList();
 			}
-
 		}
 
 		@Override
@@ -1150,8 +1148,8 @@ public class JeiPlugin implements IModPlugin {
 		}
 
 		@Override
-		public void draw(FuelRefiningRecipe recipe, PoseStack stack, double mouseX, double mouseY) {
-			IRecipeCategory.super.draw(recipe, stack, mouseX, mouseY);
+		public void draw(FuelRefiningRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX, double mouseY) {
+			IRecipeCategory.super.draw(recipe, recipeSlotsView, stack, mouseX, mouseY);
 
 			this.cachedEnergies.getUnchecked(200).draw(stack, ENERGY_LEFT, ENERGY_TOP);
 		}
@@ -1340,8 +1338,8 @@ public class JeiPlugin implements IModPlugin {
 		}
 
 		@Override
-		public void draw(SpaceStationRecipe recipe, PoseStack stack, double mouseX, double mouseY) {
-			IRecipeCategory.super.draw(recipe, stack, mouseX, mouseY);
+		public void draw(SpaceStationRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX, double mouseY) {
+			IRecipeCategory.super.draw(recipe, recipeSlotsView, stack, mouseX, mouseY);
 			NonNullList<IngredientStack> ingredientStacks = recipe.getIngredientStacks();
 			int count = ingredientStacks.size();
 
