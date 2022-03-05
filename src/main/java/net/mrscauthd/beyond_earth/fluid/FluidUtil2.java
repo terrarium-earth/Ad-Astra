@@ -1,8 +1,10 @@
 package net.mrscauthd.beyond_earth.fluid;
 
-import java.util.*;
-
-import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -25,13 +27,13 @@ public class FluidUtil2 {
 
 	public static Fluid findBucketFluid(Item item) {
 		if (item == Items.AIR) {
-			return null;
+			return Fluids.EMPTY;
 		}
 		return fluidCacheds.computeIfAbsent(item, FluidUtil2::findBucketFluidInternal);
 	}
 
 	private static Fluid findBucketFluidInternal(Item item) {
-		return ForgeRegistries.FLUIDS.getValues().stream().filter(f -> f.isSource(f.defaultFluidState()) && f.getBucket() == item).findFirst().orElse(null);
+		return ForgeRegistries.FLUIDS.getValues().stream().filter(f -> f.isSource(f.defaultFluidState()) && f.getBucket() == item).findFirst().orElse(Fluids.EMPTY);
 	}
 
 	public static boolean isSame(FluidStack left, Fluid right) {
@@ -52,9 +54,8 @@ public class FluidUtil2 {
 		return left.getFluid().isSame(right.getFluid()) && FluidStack.areFluidStackTagsEqual(left, right);
 	}
 
-	@Nullable
 	public static Fluid getFluid(FluidStack stack) {
-		return Optional.ofNullable(stack).map(fs -> fs.getFluid()).orElse(null);
+		return Optional.ofNullable(stack).map(fs -> fs.getFluid()).orElse(Fluids.EMPTY);
 	}
 
 	public static IFluidHandlerItem getItemStackFluidHandler(ItemStack itemStack) {
