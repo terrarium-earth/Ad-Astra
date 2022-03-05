@@ -21,5 +21,4 @@ public class PlanetSlecetionGuiJeiHandler implements IGuiContainerHandler<Planet
 
 		return list;
 	}
-
 }

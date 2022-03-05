@@ -20,5 +20,4 @@ public class JeiCompat extends CompatibleMod {
 	protected void onLoad() {
 
 	}
-
 }

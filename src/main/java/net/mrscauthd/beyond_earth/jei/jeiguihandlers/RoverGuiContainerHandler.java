@@ -43,7 +43,5 @@ public class RoverGuiContainerHandler implements IGuiContainerHandler<RoverGuiWi
 				return list;
 			}
 		});
-
 	}
-
 }

@@ -1,6 +1,5 @@
 package net.mrscauthd.beyond_earth.jei.jeiguihandlers;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -25,6 +24,7 @@ public class CoalGeneratorGuiContainerHandler  implements IGuiContainerHandler<C
 	public CoalGeneratorGuiContainerHandler() {
 
 	}
+
 	@Override
 	public Collection<IGuiClickableArea> getGuiClickableAreas(CoalGeneratorGuiWindow containerScreen, double mouseX, double mouseY) {
 		return Collections.singleton(new IGuiClickableArea() {
@@ -46,9 +46,5 @@ public class CoalGeneratorGuiContainerHandler  implements IGuiContainerHandler<C
 				return list;
 			}
 		});
-
 	}
-
- 
-
 }

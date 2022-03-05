@@ -1,6 +1,5 @@
 package net.mrscauthd.beyond_earth.jei.jeiguihandlers;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -19,13 +18,11 @@ import net.mrscauthd.beyond_earth.gui.helper.GuiHelper;
 import net.mrscauthd.beyond_earth.gui.screens.compressor.CompressorGuiWindow;
 import net.mrscauthd.beyond_earth.jei.JeiPlugin.CompressorJeiCategory;
 
-
 public class CompressorGuiContainerHandler implements IGuiContainerHandler<CompressorGuiWindow> {
 
 	public CompressorGuiContainerHandler() {
 
 	}
-
 
 	@Override
 	public Collection<IGuiClickableArea> getGuiClickableAreas(CompressorGuiWindow containerScreen, double mouseX, double mouseY) {
@@ -48,7 +45,5 @@ public class CompressorGuiContainerHandler implements IGuiContainerHandler<Compr
 				return list;
 			}
 		});
-
 	}
-
 }
