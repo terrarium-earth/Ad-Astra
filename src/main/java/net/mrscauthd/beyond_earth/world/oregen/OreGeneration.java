@@ -4,6 +4,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.data.worldgen.features.FeatureUtils;
+import net.minecraft.data.worldgen.features.OreFeatures;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -88,82 +89,73 @@ public class OreGeneration {
         soulSoil = PlacementUtils.register("soul_soil", FeatureUtils.register("soul_soil", Feature.ORE, new OreConfiguration(MOON_MATCH, Blocks.SOUL_SOIL.defaultBlockState(), 60)), commonOrePlacement(22, HeightRangePlacement.triangle(VerticalAnchor.absolute(0), VerticalAnchor.absolute(100))));
         Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID, "soul_soil"), soulSoil.value());
 
-        moonIceShardOre  = PlacementUtils.register("moon_ice_shard_ore", FeatureUtils.register("moon_ice_shard_ore", Feature.ORE, new OreConfiguration(MOON_MATCH, ModInit.MOON_ICE_SHARD_ORE.get().defaultBlockState(), 10)), commonOrePlacement(8, HeightRangePlacement.triangle(VerticalAnchor.absolute(-32), VerticalAnchor.absolute(32))));
+        moonIceShardOre = PlacementUtils.register("moon_ice_shard_ore", FeatureUtils.register("moon_ice_shard_ore", Feature.ORE, new OreConfiguration(MOON_MATCH, ModInit.MOON_ICE_SHARD_ORE.get().defaultBlockState(), 10)), commonOrePlacement(8, HeightRangePlacement.triangle(VerticalAnchor.absolute(-32), VerticalAnchor.absolute(32))));
         Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID, "moon_ice_shard_ore"), moonIceShardOre.value());
 
-        moonIronOre  = PlacementUtils.register("moon_iron_ore", FeatureUtils.register("moon_iron_ore", Feature.ORE, new OreConfiguration(MOON_MATCH, ModInit.MOON_IRON_ORE.get().defaultBlockState(), 11)), commonOrePlacement(10, HeightRangePlacement.triangle(VerticalAnchor.absolute(-24), VerticalAnchor.absolute(56))));
+        moonIronOre = PlacementUtils.register("moon_iron_ore", FeatureUtils.register("moon_iron_ore", Feature.ORE, new OreConfiguration(MOON_MATCH, ModInit.MOON_IRON_ORE.get().defaultBlockState(), 11)), commonOrePlacement(10, HeightRangePlacement.triangle(VerticalAnchor.absolute(-24), VerticalAnchor.absolute(56))));
         Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID, "moon_iron_ore"), moonIronOre.value());
 
-        moonDeshOre  = PlacementUtils.register("moon_desh_ore", FeatureUtils.register("moon_desh_ore", Feature.ORE, new OreConfiguration(MOON_MATCH, ModInit.MOON_DESH_ORE.get().defaultBlockState(), 9)), commonOrePlacement(7, HeightRangePlacement.triangle(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(80))));
+        moonDeshOre = PlacementUtils.register("moon_desh_ore", FeatureUtils.register("moon_desh_ore", Feature.ORE, new OreConfiguration(MOON_MATCH, ModInit.MOON_DESH_ORE.get().defaultBlockState(), 9)), commonOrePlacement(7, HeightRangePlacement.triangle(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(80))));
         Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID, "moon_desh_ore"), moonDeshOre.value());
 
         /** MARS */
-        /*
+        marsIceShardOre = PlacementUtils.register("mars_ice_shard_ore", FeatureUtils.register("mars_ice_shard_ore", Feature.ORE, new OreConfiguration(MARS_MATCH, ModInit.MARS_ICE_SHARD_ORE.get().defaultBlockState(), 10)), commonOrePlacement(8, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-32), VerticalAnchor.aboveBottom(32))));
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID, "mars_ice_shard_ore"), marsIceShardOre.value());
 
-        marsIceShardOre = MARS_GEN_FEATURE.configured(new OreConfiguration(RuleTests.MarsRuleTest.INSTANCE, ModInit.MARS_ICE_SHARD_ORE.get().defaultBlockState(), 10)).placed(commonOrePlacement(8, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-32), VerticalAnchor.aboveBottom(32))));
-        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"mars_ice_shard_ore"), marsIceShardOre);
+        marsIronOre = PlacementUtils.register("mars_iron_ore", FeatureUtils.register("mars_iron_ore", Feature.ORE, new OreConfiguration(MARS_MATCH, ModInit.MARS_IRON_ORE.get().defaultBlockState(), 11)), commonOrePlacement(10, HeightRangePlacement.triangle(VerticalAnchor.absolute(-24), VerticalAnchor.absolute(56))));
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID, "mars_iron_ore"), marsIronOre.value());
 
-        marsIronOre = MARS_GEN_FEATURE.configured(new OreConfiguration(RuleTests.MarsRuleTest.INSTANCE, ModInit.MARS_IRON_ORE.get().defaultBlockState(), 11)).placed(commonOrePlacement(10, HeightRangePlacement.triangle(VerticalAnchor.absolute(-24), VerticalAnchor.absolute(56))));
-        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"mars_iron_ore"), marsIronOre);
+        marsDiamondOre = PlacementUtils.register("mars_diamond_ore", FeatureUtils.register("mars_diamond_ore", Feature.ORE, new OreConfiguration(MARS_MATCH, ModInit.MARS_DIAMOND_ORE.get().defaultBlockState(), 7)), commonOrePlacement(7, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID, "mars_diamond_ore"), marsDiamondOre.value());
 
-        marsDiamondOre = MARS_GEN_FEATURE.configured(new OreConfiguration(RuleTests.MarsRuleTest.INSTANCE, ModInit.MARS_DIAMOND_ORE.get().defaultBlockState(), 7)).placed(commonOrePlacement(7, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
-        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"mars_diamond_ore"), marsDiamondOre);
-
-        marsOstrumOre = MARS_GEN_FEATURE.configured(new OreConfiguration(RuleTests.MarsRuleTest.INSTANCE, ModInit.MARS_OSTRUM_ORE.get().defaultBlockState(), 8)).placed(commonOrePlacement(6, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
-        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"mars_ostrum_ore"), marsOstrumOre);
+        marsOstrumOre = PlacementUtils.register("mars_ostrum_ore", FeatureUtils.register("mars_ostrum_ore", Feature.ORE, new OreConfiguration(MARS_MATCH, ModInit.MARS_OSTRUM_ORE.get().defaultBlockState(), 8)), commonOrePlacement(6, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID, "mars_ostrum_ore"), marsOstrumOre.value());
 
         /** MERCURY */
-        /*
-
-        mercuryIronOre = MERCURY_GEN_FEATURE.configured(new OreConfiguration(RuleTests.MercuryRuleTest.INSTANCE, ModInit.MERCURY_IRON_ORE.get().defaultBlockState(), 12)).placed(commonOrePlacement(20, HeightRangePlacement.triangle(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(192))));
-        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"mercury_iron_ore"), mercuryIronOre);
+        mercuryIronOre = PlacementUtils.register("mercury_iron_ore", FeatureUtils.register("mercury_iron_ore", Feature.ORE, new OreConfiguration(MERCURY_MATCH, ModInit.MERCURY_IRON_ORE.get().defaultBlockState(), 8)), commonOrePlacement(20, HeightRangePlacement.triangle(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(192))));
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID, "mercury_iron_ore"), mercuryIronOre.value());
 
         /** Venus */
-        /*
+        venusCoalOre = PlacementUtils.register("venus_coal_ore", FeatureUtils.register("venus_coal_ore", Feature.ORE, new OreConfiguration(VENUS_MATCH, ModInit.VENUS_COAL_ORE.get().defaultBlockState(), 17)), commonOrePlacement(20, HeightRangePlacement.triangle(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(192))));
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID, "venus_coal_ore"), venusCoalOre.value());
 
-        venusCoalOre = VENUS_GEN_FEATURE.configured(new OreConfiguration(RuleTests.VenusRuleTest.INSTANCE, ModInit.VENUS_COAL_ORE.get().defaultBlockState(), 17)).placed(commonOrePlacement(20, HeightRangePlacement.triangle(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(192))));
-        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"venus_coal_ore"), venusCoalOre);
+        venusGoldOre = PlacementUtils.register("venus_gold_ore", FeatureUtils.register("venus_gold_ore", Feature.ORE, new OreConfiguration(VENUS_MATCH, ModInit.VENUS_GOLD_ORE.get().defaultBlockState(), 10)), commonOrePlacement(4, HeightRangePlacement.triangle(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(32))));
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID, "venus_gold_ore"), venusGoldOre.value());
 
-        venusGoldOre = VENUS_GEN_FEATURE.configured(new OreConfiguration(RuleTests.VenusRuleTest.INSTANCE, ModInit.VENUS_GOLD_ORE.get().defaultBlockState(), 10)).placed(commonOrePlacement(4, HeightRangePlacement.triangle(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(32))));
-        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"venus_gold_ore"), venusGoldOre);
+        venusDiamondOre = PlacementUtils.register("venus_diamond_ore", FeatureUtils.register("venus_diamond_ore", Feature.ORE, new OreConfiguration(VENUS_MATCH, ModInit.VENUS_DIAMOND_ORE.get().defaultBlockState(), 9)), commonOrePlacement(7, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID, "venus_diamond_ore"), venusDiamondOre.value());
 
-        venusDiamondOre = VENUS_GEN_FEATURE.configured(new OreConfiguration(RuleTests.VenusRuleTest.INSTANCE, ModInit.VENUS_DIAMOND_ORE.get().defaultBlockState(), 9)).placed(commonOrePlacement(7, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
-        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"venus_diamond_ore"), venusDiamondOre);
-
-        venusCaloriteOre = VENUS_GEN_FEATURE.configured(new OreConfiguration(RuleTests.VenusRuleTest.INSTANCE, ModInit.VENUS_CALORITE_ORE.get().defaultBlockState(), 8)).placed(commonOrePlacement(6, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
-        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"venus_calorite_ore"), venusCaloriteOre);
+        venusCaloriteOre = PlacementUtils.register("venus_calorite_ore", FeatureUtils.register("venus_calorite_ore", Feature.ORE, new OreConfiguration(VENUS_MATCH, ModInit.VENUS_CALORITE_ORE.get().defaultBlockState(), 8)), commonOrePlacement(6, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80))));
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID, "venus_calorite_ore"), venusCaloriteOre.value());
 
         /** Glacio */
-        /*
+        glacioIceShardOre = PlacementUtils.register("glacio_ice_shard_ore", FeatureUtils.register("glacio_ice_shard_ore", Feature.ORE, new OreConfiguration(GLACIO_MATCH, ModInit.GLACIO_ICE_SHARD_ORE.get().defaultBlockState(), 10)), commonOrePlacement(8, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-32), VerticalAnchor.aboveBottom(32))));
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID, "glacio_ice_shard_ore"), glacioIceShardOre.value());
 
-        glacioIceShardOre = GLACIO_GEN_FEATURE.configured(new OreConfiguration(RuleTests.GlacioRuleTest.INSTANCE, ModInit.GLACIO_ICE_SHARD_ORE.get().defaultBlockState(), 10)).placed(commonOrePlacement(8, HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-32), VerticalAnchor.aboveBottom(32))));
-        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"glacio_ice_shard_ore"), glacioIceShardOre);
+        glacioCoalOre = PlacementUtils.register("glacio_coal_ore", FeatureUtils.register("glacio_coal_ore", Feature.ORE, new OreConfiguration(GLACIO_MATCH, ModInit.GLACIO_COAL_ORE.get().defaultBlockState(), 17)), commonOrePlacement(20, HeightRangePlacement.triangle(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(192))));
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID, "glacio_coal_ore"), glacioCoalOre.value());
 
-        glacioCoalOre = GLACIO_GEN_FEATURE.configured(new OreConfiguration(RuleTests.GlacioRuleTest.INSTANCE, ModInit.GLACIO_COAL_ORE.get().defaultBlockState(), 17)).placed(commonOrePlacement(20, HeightRangePlacement.triangle(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(192))));
-        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"glacio_coal_ore"), glacioCoalOre);
+        glacioCopperOre = PlacementUtils.register("glacio_copper_ore", FeatureUtils.register("glacio_copper_ore", Feature.ORE, new OreConfiguration(GLACIO_MATCH, ModInit.GLACIO_COPPER_ORE.get().defaultBlockState(), 17)), commonOrePlacement(16, HeightRangePlacement.triangle(VerticalAnchor.absolute(-16), VerticalAnchor.absolute(112))));
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID, "glacio_copper_ore"), glacioCopperOre.value());
 
-        glacioCopperOre = GLACIO_GEN_FEATURE.configured(new OreConfiguration(RuleTests.GlacioRuleTest.INSTANCE, ModInit.GLACIO_COPPER_ORE.get().defaultBlockState(), 17)).placed(commonOrePlacement(16, HeightRangePlacement.triangle(VerticalAnchor.absolute(-16), VerticalAnchor.absolute(112))));
-        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"glacio_copper_ore"), glacioCopperOre);
+        glacioIronOre = PlacementUtils.register("glacio_iron_ore", FeatureUtils.register("glacio_iron_ore", Feature.ORE, new OreConfiguration(GLACIO_MATCH, ModInit.GLACIO_IRON_ORE.get().defaultBlockState(), 12)), commonOrePlacement(10, HeightRangePlacement.triangle(VerticalAnchor.absolute(-24), VerticalAnchor.absolute(56))));
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID, "glacio_iron_ore"), glacioIronOre.value());
 
-        glacioIronOre = GLACIO_GEN_FEATURE.configured(new OreConfiguration(RuleTests.GlacioRuleTest.INSTANCE, ModInit.GLACIO_IRON_ORE.get().defaultBlockState(), 12)).placed(commonOrePlacement(10, HeightRangePlacement.triangle(VerticalAnchor.absolute(-24), VerticalAnchor.absolute(56))));
-        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"glacio_iron_ore"), glacioIronOre);
+        glacioLapisOre  = PlacementUtils.register("glacio_lapis_ore", FeatureUtils.register("glacio_lapis_ore", Feature.ORE, new OreConfiguration(GLACIO_MATCH, ModInit.GLACIO_LAPIS_ORE.get().defaultBlockState(), 9)), commonOrePlacement(2, HeightRangePlacement.triangle(VerticalAnchor.absolute(-32), VerticalAnchor.absolute(32))));
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID, "glacio_lapis_ore"), glacioLapisOre.value());
 
-        glacioLapisOre = GLACIO_GEN_FEATURE.configured(new OreConfiguration(RuleTests.GlacioRuleTest.INSTANCE, ModInit.GLACIO_LAPIS_ORE.get().defaultBlockState(), 9)).placed(commonOrePlacement(2, HeightRangePlacement.triangle(VerticalAnchor.absolute(-32), VerticalAnchor.absolute(32))));
-        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"glacio_lapis_ore"), glacioLapisOre);
+        /** Glacio Deepslate */
+        deepslateCoalOre = PlacementUtils.register("deepslate_coal_ore", FeatureUtils.register("deepslate_coal_ore", Feature.ORE, new OreConfiguration(OreFeatures.DEEPSLATE_ORE_REPLACEABLES, Blocks.DEEPSLATE_COAL_ORE.defaultBlockState(), 17)), commonOrePlacement(20, HeightRangePlacement.triangle(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(192))));
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID, "deepslate_coal_ore"), deepslateCoalOre.value());
 
-        //DEEPSLATE
-        deepslateCoalOre = GLACIO_GEN_FEATURE.configured(new OreConfiguration(RuleTests.GlacioDeepslateRuleTest.INSTANCE, Blocks.DEEPSLATE_COAL_ORE.defaultBlockState(), 17)).placed(commonOrePlacement(20, HeightRangePlacement.triangle(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(192))));
-        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"deepslate_coal_ore"), deepslateCoalOre);
+        deepslateCopperOre = PlacementUtils.register("deepslate_copper_ore", FeatureUtils.register("deepslate_copper_ore", Feature.ORE, new OreConfiguration(OreFeatures.DEEPSLATE_ORE_REPLACEABLES, Blocks.DEEPSLATE_COPPER_ORE.defaultBlockState(), 17)), commonOrePlacement(16, HeightRangePlacement.triangle(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(112))));
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID, "deepslate_copper_ore"), deepslateCopperOre.value());
 
-        deepslateCopperOre = GLACIO_GEN_FEATURE.configured(new OreConfiguration(RuleTests.GlacioDeepslateRuleTest.INSTANCE, Blocks.DEEPSLATE_COPPER_ORE.defaultBlockState(), 17)).placed(commonOrePlacement(16, HeightRangePlacement.triangle(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(112))));
-        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"deepslate_copper_ore"), deepslateCopperOre);
+        deepslateIronOre = PlacementUtils.register("deepslate_iron_ore", FeatureUtils.register("deepslate_iron_ore", Feature.ORE, new OreConfiguration(OreFeatures.DEEPSLATE_ORE_REPLACEABLES, Blocks.DEEPSLATE_IRON_ORE.defaultBlockState(), 12)), commonOrePlacement(10, HeightRangePlacement.triangle(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(20))));
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID, "deepslate_iron_ore"), deepslateIronOre.value());
 
-        deepslateIronOre = GLACIO_GEN_FEATURE.configured(new OreConfiguration(RuleTests.GlacioDeepslateRuleTest.INSTANCE, Blocks.DEEPSLATE_IRON_ORE.defaultBlockState(), 12)).placed(commonOrePlacement(10, HeightRangePlacement.triangle(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(20))));
-        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"deepslate_iron_ore"), deepslateIronOre);
-
-        deepslateLapisOre = GLACIO_GEN_FEATURE.configured(new OreConfiguration(RuleTests.GlacioDeepslateRuleTest.INSTANCE, Blocks.DEEPSLATE_LAPIS_ORE.defaultBlockState(), 9)).placed(commonOrePlacement(2, HeightRangePlacement.triangle(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(10))));
-        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID,"deepslate_lapis_ore"), deepslateLapisOre);
-         */
+        deepslateLapisOre = PlacementUtils.register("deepslate_lapis_ore", FeatureUtils.register("deepslate_lapis_ore", Feature.ORE, new OreConfiguration(OreFeatures.DEEPSLATE_ORE_REPLACEABLES, Blocks.DEEPSLATE_LAPIS_ORE.defaultBlockState(), 9)), commonOrePlacement(2, HeightRangePlacement.triangle(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(10))));
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(BeyondEarthMod.MODID, "deepslate_lapis_ore"), deepslateLapisOre.value());
     }
 
     /** BIOME ORE GEN */
@@ -175,7 +167,7 @@ public class OreGeneration {
             event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(moonCheeseOre);
             event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(soulSoil);
         }
-/*
+
         if (event.getName().getPath().equals(BiomeRegistry.mars.getRegistryName().getPath()) || event.getName().getPath().equals(BiomeRegistry.mars_ice_spikes.getRegistryName().getPath())) {
             event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(marsIceShardOre);
             event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(marsIronOre);
@@ -205,7 +197,7 @@ public class OreGeneration {
             event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(deepslateIronOre);
             event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(deepslateCopperOre);
             event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES).add(deepslateLapisOre);
-        }*/
+        }
     }
 
     /** ORE PLACEMENT */
