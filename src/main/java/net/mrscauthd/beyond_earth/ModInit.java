@@ -604,8 +604,8 @@ public class ModInit {
             MARS_ICE_SPIKE = PlacementUtils.register("mars_ice_spike", FeatureUtils.register("mars_ice_spike", MARS_ICE_SPIKE_FEATURE), CountPlacement.of(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 
             //Venus Deltas
-            VENUS_DELTAS_SMALL = PlacementUtils.register("venus_deltas_small", FeatureUtils.register("venus_deltas_small", VENUS_DELTAS_FEATURE, new ColumnFeatureConfiguration(ConstantInt.of(1), UniformInt.of(1, 4))));
-            VENUS_DELTAS_BIG = PlacementUtils.register("venus_deltas_big", FeatureUtils.register("venus_deltas_big", VENUS_DELTAS_FEATURE, new ColumnFeatureConfiguration(UniformInt.of(2, 3), UniformInt.of(5, 10))));
+            VENUS_DELTAS_SMALL = PlacementUtils.register("venus_deltas_small", FeatureUtils.register("venus_deltas_small", VENUS_DELTAS_FEATURE, new ColumnFeatureConfiguration(ConstantInt.of(1), UniformInt.of(1, 4))), CountOnEveryLayerPlacement.of(4), BiomeFilter.biome());
+            VENUS_DELTAS_BIG = PlacementUtils.register("venus_deltas_big", FeatureUtils.register("venus_deltas_big", VENUS_DELTAS_FEATURE, new ColumnFeatureConfiguration(UniformInt.of(2, 3), UniformInt.of(5, 10))), CountOnEveryLayerPlacement.of(2), BiomeFilter.biome());
         });
     }
 
@@ -616,6 +616,7 @@ public class ModInit {
 
         //Venus Deltas
         if (event.getName().getPath().equals(BiomeRegistry.infernal_venus_barrens.getRegistryName().getPath())) {
+            System.out.println("test");
             event.getGeneration().addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, VENUS_DELTAS_SMALL);
             event.getGeneration().addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, VENUS_DELTAS_BIG);
         }
