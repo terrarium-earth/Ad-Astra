@@ -94,7 +94,8 @@ import net.mrscauthd.beyond_earth.machines.tile.CompressorBlockEntity;
 import net.mrscauthd.beyond_earth.machines.tile.FuelRefineryBlockEntity;
 import net.mrscauthd.beyond_earth.machines.tile.ItemStackToItemStackBlockEntity;
 import net.mrscauthd.beyond_earth.machines.tile.NASAWorkbenchBlockEntity;
-import net.mrscauthd.beyond_earth.machines.tile.OxygenMakingBlockEntity;
+import net.mrscauthd.beyond_earth.machines.tile.OxygenBubbleDistributorBlockEntity;
+import net.mrscauthd.beyond_earth.machines.tile.OxygenLoaderBlockEntity;
 import net.mrscauthd.beyond_earth.util.Rectangle2d;
 
 @mezz.jei.api.JeiPlugin
@@ -127,9 +128,9 @@ public class JeiPlugin implements IModPlugin {
 	public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
 		int inventorySlotCount = 36;
 		// Oxygen Loader
-		registration.addRecipeTransferHandler(OxygenLoaderGui.GuiContainer.class, OxygenLoaderJeiCategory.Uid, OxygenMakingBlockEntity.SLOT_INPUT_SOURCE, 1, 0, inventorySlotCount);
+		registration.addRecipeTransferHandler(OxygenLoaderGui.GuiContainer.class, OxygenLoaderJeiCategory.Uid, OxygenLoaderBlockEntity.SLOT_INPUT_SOURCE, 1, OxygenLoaderBlockEntity.SLOT_OUTPUT_SOURCE + 1, inventorySlotCount);
 		// Oxygen Bubble Distributor
-		registration.addRecipeTransferHandler(OxygenBubbleDistributorGui.GuiContainer.class, OxygenBubbleDistributorJeiCategory.Uid, OxygenMakingBlockEntity.SLOT_INPUT_SOURCE, 1, 0, inventorySlotCount);
+		registration.addRecipeTransferHandler(OxygenBubbleDistributorGui.GuiContainer.class, OxygenBubbleDistributorJeiCategory.Uid, OxygenBubbleDistributorBlockEntity.SLOT_INPUT_SOURCE, 1, OxygenBubbleDistributorBlockEntity.SLOT_INPUT_SINK + 1, inventorySlotCount);
 		// Coal Generator
 		registration.addRecipeTransferHandler(CoalGeneratorGui.GuiContainer.class, CoalGeneratorJeiCategory.Uid, CoalGeneratorBlockEntity.SLOT_FUEL, 1, CoalGeneratorBlockEntity.SLOT_FUEL + 1, inventorySlotCount);
 		// Compressor
@@ -139,15 +140,15 @@ public class JeiPlugin implements IModPlugin {
 		int workbenchPartSlotCount = NASAWorkbenchBlockEntity.getBasicPartSlots();
 		registration.addRecipeTransferHandler(NasaWorkbenchGui.GuiContainer.class, NASAWorkbenchJeiCategory.Uid, workbenchPartSlotStart, workbenchPartSlotCount, workbenchPartSlotStart + workbenchPartSlotCount, inventorySlotCount);
 		// Fuel Refinery
-		registration.addRecipeTransferHandler(FuelRefineryGui.GuiContainer.class, FuelRefineryJeiCategory.Uid, FuelRefineryBlockEntity.SLOT_INPUT_SOURCE, 1, 0, inventorySlotCount);
+		registration.addRecipeTransferHandler(FuelRefineryGui.GuiContainer.class, FuelRefineryJeiCategory.Uid, FuelRefineryBlockEntity.SLOT_INPUT_SOURCE, 1, FuelRefineryBlockEntity.SLOT_OUTPUT_SOURCE + 1, inventorySlotCount);
 		// Rocket tier 1
-		registration.addRecipeTransferHandler(RocketGui.GuiContainer.class, RocketTier1JeiCategory.Uid, 0, 1, 0, inventorySlotCount);
+		registration.addRecipeTransferHandler(RocketGui.GuiContainer.class, RocketTier1JeiCategory.Uid, 0, 1, 1, inventorySlotCount);
 		// Rocket tier 2
-		registration.addRecipeTransferHandler(RocketGui.GuiContainer.class, RocketTier2JeiCategory.Uid, 0, 1, 0, inventorySlotCount);
+		registration.addRecipeTransferHandler(RocketGui.GuiContainer.class, RocketTier2JeiCategory.Uid, 0, 1, 1, inventorySlotCount);
 		// Rocket tier 3
-		registration.addRecipeTransferHandler(RocketGui.GuiContainer.class, RocketTier3JeiCategory.Uid, 0, 1, 0, inventorySlotCount);
+		registration.addRecipeTransferHandler(RocketGui.GuiContainer.class, RocketTier3JeiCategory.Uid, 0, 1, 1, inventorySlotCount);
 		// Rocket tier 4
-		registration.addRecipeTransferHandler(RocketGui.GuiContainer.class, RocketTier4JeiCategory.Uid, 0, 1, 0, inventorySlotCount);
+		registration.addRecipeTransferHandler(RocketGui.GuiContainer.class, RocketTier4JeiCategory.Uid, 0, 1, 1, inventorySlotCount);
 	}
 
 	@Override
@@ -374,7 +375,7 @@ public class JeiPlugin implements IModPlugin {
 			IRecipeSlotBuilder output = builder.addSlot(RecipeIngredientRole.OUTPUT, 91, 39);
 			output.addItemStacks(this.plugin.oxygenFullItemStacks);
 
-			IRecipeSlotBuilder tank = builder.addSlot(RecipeIngredientRole.INPUT, INPUT_TANK_LEFT, INPUT_TANK_TOP);
+			IRecipeSlotBuilder tank = builder.addSlot(RecipeIngredientRole.CATALYST, INPUT_TANK_LEFT, INPUT_TANK_TOP);
 			tank.setFluidRenderer(1, false, GuiHelper.FLUID_TANK_WIDTH, GuiHelper.FLUID_TANK_HEIGHT).setOverlay(fluidOverlay, 0, 0);
 			tank.addIngredients(VanillaTypes.FLUID, recipe.getInput().toStacks());
 		}
@@ -466,7 +467,7 @@ public class JeiPlugin implements IModPlugin {
 			IRecipeSlotBuilder input = builder.addSlot(RecipeIngredientRole.INPUT, 25, 9);
 			input.addItemStacks(this.plugin.getFluidFullItemStacks(recipe.getInput().getFluids()));
 
-			IRecipeSlotBuilder tank = builder.addSlot(RecipeIngredientRole.INPUT, INPUT_TANK_LEFT, INPUT_TANK_TOP);
+			IRecipeSlotBuilder tank = builder.addSlot(RecipeIngredientRole.CATALYST, INPUT_TANK_LEFT, INPUT_TANK_TOP);
 			tank.setFluidRenderer(1, false, GuiHelper.FLUID_TANK_WIDTH, GuiHelper.FLUID_TANK_HEIGHT).setOverlay(fluidOverlay, 0, 0);
 			tank.addIngredients(VanillaTypes.FLUID, recipe.getInput().toStacks());
 		}
@@ -765,7 +766,7 @@ public class JeiPlugin implements IModPlugin {
 			input.addItemStacks(recipe.getFuelTagBuckets());
 
 			int capacity = FluidUtil2.BUCKET_SIZE;
-			IRecipeSlotBuilder tank = builder.addSlot(RecipeIngredientRole.INPUT, 66, 12);
+			IRecipeSlotBuilder tank = builder.addSlot(RecipeIngredientRole.CATALYST, 66, 12);
 			tank.setFluidRenderer(capacity, true, 46, 46);
 			tank.addIngredients(VanillaTypes.FLUID, recipe.getFluidStacks(capacity));
 		}
@@ -817,7 +818,7 @@ public class JeiPlugin implements IModPlugin {
 			input.addItemStacks(recipe.getFuelTagBuckets());
 
 			int capacity = FluidUtil2.BUCKET_SIZE * 3;
-			IRecipeSlotBuilder tank = builder.addSlot(RecipeIngredientRole.INPUT, 66, 12);
+			IRecipeSlotBuilder tank = builder.addSlot(RecipeIngredientRole.CATALYST, 66, 12);
 			tank.setFluidRenderer(capacity, true, 46, 46);
 			tank.addIngredients(VanillaTypes.FLUID, recipe.getFluidStacks(capacity));
 		}
@@ -869,7 +870,7 @@ public class JeiPlugin implements IModPlugin {
 			input.addItemStacks(recipe.getFuelTagBuckets());
 
 			int capacity = FluidUtil2.BUCKET_SIZE * 3;
-			IRecipeSlotBuilder tank = builder.addSlot(RecipeIngredientRole.INPUT, 66, 12);
+			IRecipeSlotBuilder tank = builder.addSlot(RecipeIngredientRole.CATALYST, 66, 12);
 			tank.setFluidRenderer(capacity, true, 46, 46);
 			tank.addIngredients(VanillaTypes.FLUID, recipe.getFluidStacks(capacity));
 		}
@@ -921,7 +922,7 @@ public class JeiPlugin implements IModPlugin {
 			input.addItemStacks(recipe.getFuelTagBuckets());
 
 			int capacity = FluidUtil2.BUCKET_SIZE * 3;
-			IRecipeSlotBuilder tank = builder.addSlot(RecipeIngredientRole.INPUT, 66, 12);
+			IRecipeSlotBuilder tank = builder.addSlot(RecipeIngredientRole.CATALYST, 66, 12);
 			tank.setFluidRenderer(capacity, true, 46, 46);
 			tank.addIngredients(VanillaTypes.FLUID, recipe.getFluidStacks(capacity));
 		}
@@ -979,7 +980,7 @@ public class JeiPlugin implements IModPlugin {
 			IRecipeSlotBuilder input = builder.addSlot(RecipeIngredientRole.INPUT, 15, 30);
 			input.addIngredients(recipe.getInput());
 
-			IRecipeSlotBuilder output = builder.addSlot(RecipeIngredientRole.INPUT, 70, 29);
+			IRecipeSlotBuilder output = builder.addSlot(RecipeIngredientRole.OUTPUT, 70, 29);
 			output.addItemStack(recipe.getOutput());
 		}
 
@@ -1065,7 +1066,7 @@ public class JeiPlugin implements IModPlugin {
 			IRecipeSlotBuilder outputItem = builder.addSlot(RecipeIngredientRole.OUTPUT, 91, 39);
 			outputItem.addItemStacks(this.plugin.getFluidFullItemStacks(recipe.getOutput().getFluids()));
 
-			IRecipeSlotBuilder inputTank = builder.addSlot(RecipeIngredientRole.INPUT, INPUT_TANK_LEFT, INPUT_TANK_TOP);
+			IRecipeSlotBuilder inputTank = builder.addSlot(RecipeIngredientRole.CATALYST, INPUT_TANK_LEFT, INPUT_TANK_TOP);
 			inputTank.setFluidRenderer(1, false, GuiHelper.FLUID_TANK_WIDTH, GuiHelper.FLUID_TANK_HEIGHT).setOverlay(fluidOverlay, 0, 0);
 			inputTank.addIngredients(VanillaTypes.FLUID, recipe.getInput().toStacks());
 
