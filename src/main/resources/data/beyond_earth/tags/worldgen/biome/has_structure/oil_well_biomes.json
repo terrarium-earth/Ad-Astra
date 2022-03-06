@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:is_mountain",
+    "#minecraft:is_ocean",
+    "#minecraft:is_deep_ocean",
+    "minecraft:swamp"
+  ]
+}

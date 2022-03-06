@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "beyond_earth:venus_bullet",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 1224466880,
+    "spacing": 27,
+    "separation": 14,
+    "type": "minecraft:random_spread"
+  }
+}

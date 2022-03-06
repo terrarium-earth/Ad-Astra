@@ -98,7 +98,7 @@ import net.mrscauthd.beyond_earth.entity.pygro.PygroMobsSensor;
 import net.mrscauthd.beyond_earth.world.biomes.BiomeRegistry;
 import net.mrscauthd.beyond_earth.world.chunk.PlanetChunkGenerator;
 import net.mrscauthd.beyond_earth.world.processor.StructureVoidProcessor;
-import net.mrscauthd.beyond_earth.world.structures.AlienVillage;
+import net.mrscauthd.beyond_earth.world.structures.*;
 
 @Mod.EventBusSubscriber(modid = BeyondEarthMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModInit {
@@ -544,15 +544,16 @@ public class ModInit {
 
     //Structures
     public static final RegistryObject<StructureFeature<?>> ALIEN_VILLAGE = STRUCTURES.register("alien_village", AlienVillage::new);
+    public static final RegistryObject<StructureFeature<?>> METEOR = STRUCTURES.register("meteor", Meteor::new);
+    public static final RegistryObject<StructureFeature<?>> OIL_WELL = STRUCTURES.register("oil_well", OilWell::new);
+    public static final RegistryObject<StructureFeature<?>> PYGRO_TOWER = STRUCTURES.register("pygro_tower", PygroTower::new);
+    public static final RegistryObject<StructureFeature<?>> PYGRO_VILLAGE = STRUCTURES.register("pygro_village", PygroVillage::new);
+    public static final RegistryObject<StructureFeature<?>> VENUS_BULLET = STRUCTURES.register("venus_bullet", VenusBullet::new);
 
 	//Register Processor
     public static final StructureProcessorType<StructureVoidProcessor> STRUCTURE_VOID_PROCESSOR = () -> StructureVoidProcessor.CODEC;
 
-    public static void registerProcessors() {
-        Registry.register(Registry.STRUCTURE_PROCESSOR, new ResourceLocation(BeyondEarthMod.MODID, "structure_void_processor"), STRUCTURE_VOID_PROCESSOR);
-    }
-
-    //DamgeSources
+    //Damage Source
     public static final DamageSource DAMAGE_SOURCE_OXYGEN = new DamageSource("oxygen").bypassArmor();
     public static final DamageSource DAMAGE_SOURCE_ACID_RAIN = new DamageSource("venus.acid").bypassArmor();
 
@@ -592,7 +593,8 @@ public class ModInit {
     @SubscribeEvent
     public static void init(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            ModInit.registerProcessors();
+            //Structure Void Processor
+            Registry.register(Registry.STRUCTURE_PROCESSOR, new ResourceLocation(BeyondEarthMod.MODID, "structure_void_processor"), STRUCTURE_VOID_PROCESSOR);
 
             //Recipe Types
             BeyondEarthRecipeTypes.init();
@@ -611,12 +613,12 @@ public class ModInit {
 
     public static void biomesLoading(BiomeLoadingEvent event) {
         //Mars ice Spikes
-        if (event.getName().getPath().equals(BiomeRegistry.mars_ice_spikes.getRegistryName().getPath())) {
+        if (event.getName().getPath().equals(BiomeRegistry.MARS_ICE_SPIKES.getRegistryName().getPath())) {
             event.getGeneration().addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, MARS_ICE_SPIKE);
         }
 
         //Venus Deltas
-        if (event.getName().getPath().equals(BiomeRegistry.infernal_venus_barrens.getRegistryName().getPath())) {
+        if (event.getName().getPath().equals(BiomeRegistry.INFERNAL_VENUS_BARRENS.getRegistryName().getPath())) {
             event.getGeneration().addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, VENUS_DELTAS_SMALL);
             event.getGeneration().addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, VENUS_DELTAS_BIG);
         }

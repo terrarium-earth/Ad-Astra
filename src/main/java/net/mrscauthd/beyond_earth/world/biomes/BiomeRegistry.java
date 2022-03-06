@@ -19,36 +19,37 @@ import net.mrscauthd.beyond_earth.ModInit;
 
 @Mod.EventBusSubscriber(modid = BeyondEarthMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class BiomeRegistry {
-    public static Biome moon;
 
-    public static Biome mars;
-    public static Biome mars_ice_spikes;
+    public static Biome MOON;
 
-    public static Biome venus;
-    public static Biome infernal_venus_barrens;
+    public static Biome MARS;
+    public static Biome MARS_ICE_SPIKES;
 
-    public static Biome mercury;
+    public static Biome VENUS;
+    public static Biome INFERNAL_VENUS_BARRENS;
 
-    public static Biome glacio;
-    public static Biome glacio_ice_spikes;
+    public static Biome MERCURY;
 
-    public static Biome orbit;
+    public static Biome GLACIO;
+    public static Biome GLACIO_ICE_SPIKES;
+
+    public static Biome ORBIT;
 
     @SubscribeEvent
     public static void registerBiomes(RegistryEvent.Register<Biome> event) {
 
-        if (moon == null) {
+        if (MOON == null) {
             BiomeSpecialEffects effects = new BiomeSpecialEffects.Builder().fogColor(-16777216).waterColor(4159204).waterFogColor(329011).skyColor(-16777216).foliageColorOverride(7842607).grassColorOverride(9551193).build();
             BiomeGenerationSettings.Builder biomeGenerationSettings = new BiomeGenerationSettings.Builder();
             BiomeDefaultFeatures.addDripstone(biomeGenerationSettings);
             addDefaultCarvers(biomeGenerationSettings);
             MobSpawnSettings mobSpawnInfo = (new MobSpawnSettings.Builder()).addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModInit.ALIEN_ZOMBIE.get(), 20, 5, 5)).addMobCharge(ModInit.ALIEN_ZOMBIE.get(), 0.7D, 0.15D).addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModInit.STAR_CRAWLER.get(), 20, 5, 5)).addMobCharge(ModInit.STAR_CRAWLER.get(), 0.7D, 0.15D).build();
 
-            moon = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(-0.7f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
-            event.getRegistry().register(moon.setRegistryName(BeyondEarthMod.MODID,"moon"));
+            MOON = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(-0.7f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
+            event.getRegistry().register(MOON.setRegistryName(BeyondEarthMod.MODID,"moon"));
         }
 
-        if (mars == null) {
+        if (MARS == null) {
             BiomeSpecialEffects effects = new BiomeSpecialEffects.Builder().fogColor(-3044526).waterColor(4159204).waterFogColor(329011).skyColor(-3044526).foliageColorOverride(7842607).grassColorOverride(9551193).ambientParticle(new AmbientParticleSettings(ParticleTypes.CRIMSON_SPORE, 0.014f)).build();
             BiomeGenerationSettings.Builder biomeGenerationSettings = new BiomeGenerationSettings.Builder();
             addDefaultCarvers(biomeGenerationSettings);
@@ -56,11 +57,11 @@ public class BiomeRegistry {
             BiomeDefaultFeatures.addFossilDecoration(biomeGenerationSettings);
             MobSpawnSettings mobSpawnInfo = (new MobSpawnSettings.Builder()).addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModInit.MARTIAN_RAPTOR.get(), 20, 5, 5)).addMobCharge(ModInit.MARTIAN_RAPTOR.get(), 0.7D, 0.15D).build();
 
-            mars = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(-0.7f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
-            event.getRegistry().register(mars.setRegistryName(BeyondEarthMod.MODID,"mars"));
+            MARS = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(-0.7f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
+            event.getRegistry().register(MARS.setRegistryName(BeyondEarthMod.MODID,"mars"));
         }
 
-        if (mars_ice_spikes == null) {
+        if (MARS_ICE_SPIKES == null) {
             BiomeSpecialEffects effects = new BiomeSpecialEffects.Builder().fogColor(-3044526).waterColor(4159204).waterFogColor(329011).skyColor(-3044526).foliageColorOverride(7842607).grassColorOverride(9551193).ambientParticle(new AmbientParticleSettings(ParticleTypes.CRIMSON_SPORE, 0.014f)).build();
             BiomeGenerationSettings.Builder biomeGenerationSettings = new BiomeGenerationSettings.Builder();
             addDefaultCarvers(biomeGenerationSettings);
@@ -68,21 +69,21 @@ public class BiomeRegistry {
             BiomeDefaultFeatures.addFossilDecoration(biomeGenerationSettings);
             MobSpawnSettings mobSpawnInfo = MobSpawnSettings.EMPTY;
 
-            mars_ice_spikes = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.ICY).mobSpawnSettings(mobSpawnInfo).temperature(-0.7f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
-            event.getRegistry().register(mars_ice_spikes.setRegistryName(BeyondEarthMod.MODID,"mars_ice_spikes"));
+            MARS_ICE_SPIKES = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.ICY).mobSpawnSettings(mobSpawnInfo).temperature(-0.7f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
+            event.getRegistry().register(MARS_ICE_SPIKES.setRegistryName(BeyondEarthMod.MODID,"mars_ice_spikes"));
         }
 
-        if (venus == null) {
+        if (VENUS == null) {
             BiomeSpecialEffects effects = new BiomeSpecialEffects.Builder().fogColor(-3044526).waterColor(4159204).waterFogColor(329011).skyColor(-3044526).foliageColorOverride(7842607).grassColorOverride(9551193).ambientParticle(new AmbientParticleSettings(ParticleTypes.CRIMSON_SPORE, 0.02f)).build();
             BiomeGenerationSettings.Builder biomeGenerationSettings = new BiomeGenerationSettings.Builder();
             addDefaultCarvers(biomeGenerationSettings);
             MobSpawnSettings mobSpawnInfo = MobSpawnSettings.EMPTY;
 
-            venus = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.RAIN).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(1.5f).downfall(1f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
-            event.getRegistry().register(venus.setRegistryName(BeyondEarthMod.MODID,"venus"));
+            VENUS = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.RAIN).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(1.5f).downfall(1f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
+            event.getRegistry().register(VENUS.setRegistryName(BeyondEarthMod.MODID,"venus"));
         }
 
-        if (infernal_venus_barrens == null) {
+        if (INFERNAL_VENUS_BARRENS == null) {
             BiomeSpecialEffects effects = new BiomeSpecialEffects.Builder().fogColor(-3044526).waterColor(4159204).waterFogColor(329011).skyColor(-3044526).foliageColorOverride(7842607).grassColorOverride(9551193).ambientParticle(new AmbientParticleSettings(ParticleTypes.CRIMSON_SPORE, 0.02f)).build();
             BiomeGenerationSettings.Builder biomeGenerationSettings = new BiomeGenerationSettings.Builder();
             addDefaultCarvers(biomeGenerationSettings);
@@ -96,11 +97,11 @@ public class BiomeRegistry {
             biomeGenerationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherPlacements.SPRING_CLOSED_DOUBLE);
             MobSpawnSettings mobSpawnInfo = MobSpawnSettings.EMPTY;
 
-            infernal_venus_barrens = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.RAIN).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(1.5f).downfall(1f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
-            event.getRegistry().register(infernal_venus_barrens.setRegistryName(BeyondEarthMod.MODID,"infernal_venus_barrens"));
+            INFERNAL_VENUS_BARRENS = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.RAIN).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(1.5f).downfall(1f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
+            event.getRegistry().register(INFERNAL_VENUS_BARRENS.setRegistryName(BeyondEarthMod.MODID,"infernal_venus_barrens"));
         }
 
-        if (mercury == null) {
+        if (MERCURY == null) {
             BiomeSpecialEffects effects = new BiomeSpecialEffects.Builder().fogColor(-16777216).waterColor(4159204).waterFogColor(329011).skyColor(-16777216).foliageColorOverride(7842607).grassColorOverride(9551193).build();
             BiomeGenerationSettings.Builder biomeGenerationSettings = new BiomeGenerationSettings.Builder();
             addDefaultCarvers(biomeGenerationSettings);
@@ -115,11 +116,11 @@ public class BiomeRegistry {
             biomeGenerationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, NetherPlacements.SPRING_CLOSED_DOUBLE);
             MobSpawnSettings mobSpawnInfo = MobSpawnSettings.EMPTY;
 
-            mercury = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(1.6f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
-            event.getRegistry().register(mercury.setRegistryName(BeyondEarthMod.MODID,"mercury"));
+            MERCURY = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(1.6f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
+            event.getRegistry().register(MERCURY.setRegistryName(BeyondEarthMod.MODID,"mercury"));
         }
 
-        if (glacio == null) {
+        if (GLACIO == null) {
             BiomeSpecialEffects effects = new BiomeSpecialEffects.Builder().fogColor(12638463).waterColor(4159204).waterFogColor(329011).skyColor(calculateSkyColor(-0.7f)).foliageColorOverride(0xFFFFFF).build();
             BiomeGenerationSettings.Builder biomeGenerationSettings = new BiomeGenerationSettings.Builder();
             addDefaultCarvers(biomeGenerationSettings);
@@ -128,11 +129,11 @@ public class BiomeRegistry {
             biomeGenerationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, CavePlacements.GLOW_LICHEN);
             MobSpawnSettings mobSpawnInfo = MobSpawnSettings.EMPTY;
 
-            glacio = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.SNOW).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(-0.7f).downfall(1f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
-            event.getRegistry().register(glacio.setRegistryName(BeyondEarthMod.MODID,"glacio"));
+            GLACIO = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.SNOW).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(-0.7f).downfall(1f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
+            event.getRegistry().register(GLACIO.setRegistryName(BeyondEarthMod.MODID,"glacio"));
         }
 
-        if (glacio_ice_spikes == null) {
+        if (GLACIO_ICE_SPIKES == null) {
             BiomeSpecialEffects effects = new BiomeSpecialEffects.Builder().fogColor(12638463).waterColor(4159204).waterFogColor(329011).skyColor(calculateSkyColor(-0.7f)).foliageColorOverride(0xFFFFFF).build();
             BiomeGenerationSettings.Builder biomeGenerationSettings = new BiomeGenerationSettings.Builder();
             addDefaultCarvers(biomeGenerationSettings);
@@ -145,17 +146,17 @@ public class BiomeRegistry {
 
             MobSpawnSettings mobSpawnInfo = MobSpawnSettings.EMPTY;
 
-            glacio_ice_spikes = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.SNOW).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(-0.7f).downfall(1f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
-            event.getRegistry().register(glacio_ice_spikes.setRegistryName(BeyondEarthMod.MODID,"glacio_ice_spikes"));
+            GLACIO_ICE_SPIKES = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.SNOW).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(-0.7f).downfall(1f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
+            event.getRegistry().register(GLACIO_ICE_SPIKES.setRegistryName(BeyondEarthMod.MODID,"glacio_ice_spikes"));
         }
 
-        if (orbit == null) {
+        if (ORBIT == null) {
             BiomeSpecialEffects effects = new BiomeSpecialEffects.Builder().fogColor(-16777216).waterColor(4159204).waterFogColor(329011).skyColor(-16777216).foliageColorOverride(7842607).grassColorOverride(9551193).build();
             BiomeGenerationSettings.Builder biomeGenerationSettings = new BiomeGenerationSettings.Builder();
             MobSpawnSettings mobSpawnInfo = MobSpawnSettings.EMPTY;
 
-            orbit = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(1.6f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
-            event.getRegistry().register(orbit.setRegistryName(BeyondEarthMod.MODID,"orbit"));
+            ORBIT = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(1.6f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
+            event.getRegistry().register(ORBIT.setRegistryName(BeyondEarthMod.MODID,"orbit"));
         }
     }
 
