@@ -7,13 +7,11 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.protocol.game.*;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.MenuProvider;
@@ -211,10 +209,6 @@ public class Methods {
         return entity instanceof VehicleEntity;
     }
 
-    public static void rocketSounds(Entity entity, Level world) {
-        world.playSound(null, entity, ModInit.ROCKET_SOUND.get(), SoundSource.NEUTRAL,1,1);
-    }
-
     public static void dropRocket(Player player) {
         Item item1 = player.getMainHandItem().getItem();
         Item item2 = player.getOffhandItem().getItem();
@@ -311,18 +305,6 @@ public class Methods {
         vehicle.setYRot(vehicle.getYRot() + rotation);
         vehicle.setYBodyRot(vehicle.getYRot());
         vehicle.yRotO = vehicle.getYRot();
-    }
-
-    public static void noFuelMessage(Player player) {
-        if (!player.level.isClientSide) {
-            player.displayClientMessage(new TranslatableComponent("message." + BeyondEarthMod.MODID + ".no_fuel"), false);
-        }
-    }
-
-    public static void holdSpaceMessage(Player player) {
-        if (!player.level.isClientSide) {
-            player.displayClientMessage(new TranslatableComponent("message." + BeyondEarthMod.MODID + ".hold_space"), false);
-        }
     }
 
     public static boolean tagCheck(Entity entity, TagKey<EntityType<?>> tag) {

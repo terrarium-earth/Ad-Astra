@@ -12,12 +12,15 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.ModInit;
 
@@ -25,6 +28,26 @@ public class ClientMethods {
 
     public static final ResourceLocation ARM_SPACE_SUIT = new ResourceLocation(BeyondEarthMod.MODID, "textures/models/armor/arm/space_suit.png");
     public static final ResourceLocation ARM_NETHERITE_SPACE_SUIT = new ResourceLocation(BeyondEarthMod.MODID, "textures/models/armor/arm/netherite_space_suit.png");
+
+    public static void rocketSounds(Entity entity, Level world) {
+        world.playSound(null, entity, ModInit.ROCKET_SOUND.get(), SoundSource.NEUTRAL,1,1);
+    }
+
+    public static void noFuelMessage(Player player) {
+        if (!player.level.isClientSide) {
+            player.displayClientMessage(new TranslatableComponent("message." + BeyondEarthMod.MODID + ".no_fuel"), false);
+        }
+    }
+
+    public static void holdSpaceMessage(Player player) {
+        if (!player.level.isClientSide) {
+            player.displayClientMessage(new TranslatableComponent("message." + BeyondEarthMod.MODID + ".hold_space"), false);
+        }
+    }
+
+    public static boolean checkSound(SoundSource sound) {
+        return sound == SoundSource.BLOCKS || sound == SoundSource.NEUTRAL || sound == SoundSource.RECORDS || sound == SoundSource.WEATHER || sound == SoundSource.HOSTILE || sound == SoundSource.PLAYERS || sound == SoundSource.AMBIENT;
+    }
 
     public static void renderArm(PoseStack poseStack, MultiBufferSource bufferSource, int light, ResourceLocation texture, AbstractClientPlayer player, PlayerModel<AbstractClientPlayer> playermodel, PlayerRenderer renderer, ModelPart arm) {
         renderer.setModelProperties(player);
@@ -39,10 +62,6 @@ public class ClientMethods {
 
         VertexConsumer vertex = ItemRenderer.getArmorFoilBuffer(bufferSource, RenderType.armorCutoutNoCull(texture), false, item.isEnchanted());
         arm.render(poseStack, vertex, light, OverlayTexture.NO_OVERLAY);
-    }
-
-    public static boolean checkSound(SoundSource sound) {
-        return sound == SoundSource.BLOCKS || sound == SoundSource.NEUTRAL || sound == SoundSource.RECORDS || sound == SoundSource.WEATHER || sound == SoundSource.HOSTILE || sound == SoundSource.PLAYERS || sound == SoundSource.AMBIENT;
     }
 
     public static void bobView(PoseStack poseStack, float tick) {

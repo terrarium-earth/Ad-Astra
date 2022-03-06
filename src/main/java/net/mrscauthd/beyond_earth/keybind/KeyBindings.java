@@ -18,6 +18,7 @@ import net.minecraftforge.network.simple.SimpleChannel;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.entity.*;
 import net.mrscauthd.beyond_earth.events.ClientEventBusSubscriber;
+import net.mrscauthd.beyond_earth.events.ClientMethods;
 import net.mrscauthd.beyond_earth.events.Methods;
 import org.lwjgl.glfw.GLFW;
 
@@ -149,11 +150,11 @@ public class KeyBindings {
 
 					if (!player.getVehicle().getEntityData().get(IRocketEntity.ROCKET_START)) {
 						player.getVehicle().getEntityData().set(IRocketEntity.ROCKET_START, true);
-						Methods.rocketSounds(player.getVehicle(), world);
+						ClientMethods.rocketSounds(player.getVehicle(), world);
 					}
 
 				} else {
-					Methods.noFuelMessage(player);
+					ClientMethods.noFuelMessage(player);
 				}
 			}
 		}

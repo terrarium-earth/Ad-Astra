@@ -12,6 +12,7 @@ import net.minecraftforge.network.NetworkEvent;
 import net.mrscauthd.beyond_earth.ModInit;
 import net.mrscauthd.beyond_earth.crafting.IngredientStack;
 import net.mrscauthd.beyond_earth.crafting.SpaceStationRecipe;
+import net.mrscauthd.beyond_earth.events.ClientMethods;
 import net.mrscauthd.beyond_earth.events.Methods;
 
 public class PlanetSelectionGui {
@@ -163,7 +164,7 @@ public class PlanetSelectionGui {
 
 	public static void defaultOptions(Player player) {
 		player.setNoGravity(false);
-		Methods.holdSpaceMessage(player);
+		ClientMethods.holdSpaceMessage(player);
 		player.closeContainer();
 	}
 
