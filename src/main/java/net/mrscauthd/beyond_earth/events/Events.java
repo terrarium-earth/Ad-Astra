@@ -42,7 +42,7 @@ public class Events {
 
             //Player orbit Fall Teleport
             if (player.getY() < 1 && !(player.getVehicle() instanceof LanderEntity)) {
-                Methods.playerFalltoPlanet(world, player);
+                Methods.playerFallToPlanet(world, player);
             }
         }
     }

@@ -35,7 +35,7 @@ public class ClientEvents {
             return;
         }
 
-        if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.level != null && Methods.checkSound(event.getSound().getSource()) && Methods.isSpaceWorldWithoutOxygen(Minecraft.getInstance().player.level)) {
+        if (Minecraft.getInstance().player != null && Minecraft.getInstance().player.level != null && ClientMethods.checkSound(event.getSound().getSource()) && Methods.isSpaceWorldWithoutOxygen(Minecraft.getInstance().player.level)) {
 
             if (!(event.getSound() instanceof TickableSoundInstance)) {
                 event.setSound(new SpaceSoundSystem(event.getSound()));
@@ -100,7 +100,7 @@ public class ClientEvents {
                 event.setCanceled(true);
 
                 if (ridding.getEntityData().get(IRocketEntity.ROCKET_START)) {
-                    Methods.bobView(event.getPoseStack(), event.getTick());
+                    ClientMethods.bobView(event.getPoseStack(), event.getTick());
                 }
             }
         }
@@ -121,9 +121,9 @@ public class ClientEvents {
         }
 
         if (event.getArm() == HumanoidArm.RIGHT) {
-            event.setCanceled(Methods.armRenderer(player, event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), playerModel, renderer));
+            event.setCanceled(ClientMethods.armRenderer(player, event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), playerModel, renderer));
         } else {
-            event.setCanceled(Methods.armRenderer(player, event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), playerModel, renderer));
+            event.setCanceled(ClientMethods.armRenderer(player, event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), playerModel, renderer));
         }
     }
 

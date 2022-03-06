@@ -1,19 +1,6 @@
 package net.mrscauthd.beyond_earth.events;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
 import io.netty.buffer.Unpooled;
-import net.minecraft.advancements.critereon.EntityPredicate;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.PlayerModel;
-import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.player.AbstractClientPlayer;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.ItemRenderer;
-import net.minecraft.client.renderer.entity.player.PlayerRenderer;
-import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
@@ -27,11 +14,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.util.Mth;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -78,9 +62,6 @@ public class Methods {
     public static final ResourceKey<Level> earth_orbit = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(BeyondEarthMod.MODID,"earth_orbit"));
 
     public static final ResourceLocation space_station = new ResourceLocation(BeyondEarthMod.MODID, "space_station");
-
-    public static final ResourceLocation armSpaceSuit = new ResourceLocation(BeyondEarthMod.MODID, "textures/models/armor/arm/space_suit.png");
-    public static final ResourceLocation armNetheriteSpaceSuit = new ResourceLocation(BeyondEarthMod.MODID, "textures/models/armor/arm/netherite_space_suit.png");
 
     public static final Set<ResourceKey<Level>> worldsWithoutRain = Set.of(
             moon,
@@ -489,7 +470,7 @@ public class Methods {
         }
     }
 
-    public static void playerFalltoPlanet(Level world, Player player) {
+    public static void playerFallToPlanet(Level world, Player player) {
         ResourceKey<Level> world2 = world.dimension();
 
         if (world2 == Methods.earth_orbit) {
@@ -529,53 +510,4 @@ public class Methods {
 			persistentData.putInt(key, oxygenTimer);
 		}
 	}
-
-	public static void renderArm(PoseStack poseStack, MultiBufferSource bufferSource, int light, ResourceLocation texture, AbstractClientPlayer player, PlayerModel<AbstractClientPlayer> playermodel, PlayerRenderer renderer, ModelPart arm) {
-        renderer.setModelProperties(player);
-
-        playermodel.attackTime = 0.0F;
-        playermodel.crouching = false;
-        playermodel.swimAmount = 0.0F;
-        playermodel.setupAnim(player, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F);
-        arm.xRot = 0.0F;
-
-        ItemStack item = player.getItemBySlot(EquipmentSlot.byTypeAndIndex(EquipmentSlot.Type.ARMOR, 2));
-
-        VertexConsumer vertex = ItemRenderer.getArmorFoilBuffer(bufferSource, RenderType.armorCutoutNoCull(texture), false, item.isEnchanted());
-        arm.render(poseStack, vertex, light, OverlayTexture.NO_OVERLAY);
-    }
-
-    public static boolean checkSound(SoundSource sound) {
-        return sound == SoundSource.BLOCKS || sound == SoundSource.NEUTRAL || sound == SoundSource.RECORDS || sound == SoundSource.WEATHER || sound == SoundSource.HOSTILE || sound == SoundSource.PLAYERS || sound == SoundSource.AMBIENT;
-    }
-
-    public static void bobView(PoseStack poseStack, float tick) {
-        Minecraft mc = Minecraft.getInstance();
-
-        if (mc.getCameraEntity() instanceof Player) {
-            Player player = (Player) mc.getCameraEntity();
-            float f = player.walkDist - player.walkDistO;
-            float f1 = -(player.walkDist + f * tick);
-            float f2 = Mth.lerp(tick, 0.075F, -0.075F);
-            poseStack.translate((double) (Mth.sin(f1 * (float) Math.PI) * f2 * 0.5F), (double) (-Math.abs(Mth.cos(f1 * (float) Math.PI) * f2)), 0.0D);
-            poseStack.mulPose(Vector3f.ZP.rotationDegrees(Mth.sin(f1 * (float) Math.PI) * f2 * 3.0F));
-            poseStack.mulPose(Vector3f.XP.rotationDegrees(Math.abs(Mth.cos(f1 * (float) Math.PI - 0.2F) * f2) * 5.0F));
-        }
-    }
-
-    public static boolean armRenderer(AbstractClientPlayer player, PoseStack poseStack, MultiBufferSource multiBufferSource, int light, PlayerModel<AbstractClientPlayer> playerModel, PlayerRenderer renderer) {
-        if (Methods.checkArmor(player, 2, ModInit.SPACE_SUIT.get())) {
-
-            Methods.renderArm(poseStack, multiBufferSource, light, armSpaceSuit, player, playerModel, renderer, playerModel.rightArm);
-            return true;
-        }
-
-        if (Methods.checkArmor(player, 2, ModInit.NETHERITE_SPACE_SUIT.get())) {
-
-            Methods.renderArm(poseStack, multiBufferSource, light, armNetheriteSpaceSuit, player, playerModel, renderer, playerModel.rightArm);
-            return true;
-        }
-
-        return false;
-    }
 }
