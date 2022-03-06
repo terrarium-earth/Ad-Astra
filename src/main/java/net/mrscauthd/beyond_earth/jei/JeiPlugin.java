@@ -84,11 +84,7 @@ import net.mrscauthd.beyond_earth.gui.screens.planetselection.PlanetSelectionGui
 import net.mrscauthd.beyond_earth.gui.screens.rocket.RocketGui;
 import net.mrscauthd.beyond_earth.gui.screens.rocket.RocketGuiWindow;
 import net.mrscauthd.beyond_earth.gui.screens.rover.RoverGuiWindow;
-import net.mrscauthd.beyond_earth.jei.jeiguihandlers.CoalGeneratorGuiContainerHandler;
-import net.mrscauthd.beyond_earth.jei.jeiguihandlers.CompressorGuiContainerHandler;
-import net.mrscauthd.beyond_earth.jei.jeiguihandlers.PlanetSlecetionGuiJeiHandler;
-import net.mrscauthd.beyond_earth.jei.jeiguihandlers.RocketGuiContainerHandler;
-import net.mrscauthd.beyond_earth.jei.jeiguihandlers.RoverGuiContainerHandler;
+import net.mrscauthd.beyond_earth.jei.jeiguihandlers.*;
 import net.mrscauthd.beyond_earth.machines.tile.CoalGeneratorBlockEntity;
 import net.mrscauthd.beyond_earth.machines.tile.CompressorBlockEntity;
 import net.mrscauthd.beyond_earth.machines.tile.FuelRefineryBlockEntity;
@@ -162,7 +158,7 @@ public class JeiPlugin implements IModPlugin {
 
 		registration.addGuiContainerHandler(RocketGuiWindow.class, new RocketGuiContainerHandler());
 		registration.addGuiContainerHandler(RoverGuiWindow.class, new RoverGuiContainerHandler());
-		registration.addGuiContainerHandler(PlanetSelectionGuiWindow.class, new PlanetSlecetionGuiJeiHandler());
+		registration.addGuiScreenHandler(PlanetSelectionGuiWindow.class, new PlanetSelectionGuiJeiHandler());
 	}
 
 	@Override
