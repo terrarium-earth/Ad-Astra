@@ -642,7 +642,7 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 
 	public ImageButtonPlacer addImageButton(int xIn, int yIn, int width, int height, ResourceLocation texture, int handler, Component title) {
 		ImageButtonPlacer button = this.addRenderableWidget(new ImageButtonPlacer(xIn, yIn, width, height, 0, 0, 0, texture, width, height, (p_2130901) -> {
-			BeyondEarthMod.PACKET_HANDLER.sendToServer(new PlanetSelectionGui.NetworkMessage(handler));
+			BeyondEarthMod.PACKET_HANDLER.sendToServer(new PlanetSelectionGui.NetworkHandler(handler));
 		}, title));
 		return button;
 	}
@@ -650,7 +650,7 @@ public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSele
 	public ImageButtonPlacer addSpaceStationImageButton(int xIn, int yIn, int width, int height, ResourceLocation texture, int handler, Component title, boolean condition) {
 		ImageButtonPlacer button = this.addRenderableWidget(new ImageButtonPlacer(xIn, yIn, width, height, 0, 0, 0, texture, width, height, (p_2130901) -> {
 			if (condition) {
-				BeyondEarthMod.PACKET_HANDLER.sendToServer(new PlanetSelectionGui.NetworkMessage(handler));
+				BeyondEarthMod.PACKET_HANDLER.sendToServer(new PlanetSelectionGui.NetworkHandler(handler));
 			}
 		}, title));
 		return button;
