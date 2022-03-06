@@ -68,8 +68,8 @@ public class AlienTrade implements ItemListing {
 	}
 
 	public static void addReloadListener(AddReloadListenerEvent event) {
-		if (ServerLifecycleHooks.getCurrentServer() != null) {
-			RecipeManager recipeManager = ServerLifecycleHooks.getCurrentServer().getRecipeManager();
+		if (event.getServerResources() != null) {
+			RecipeManager recipeManager = event.getServerResources().getRecipeManager();
 
 			event.addListener(new ResourceManagerReloadListener() {
 				@Override

@@ -34,7 +34,7 @@ public class PlanetSelectionGui {
 
 		@Override
 		public boolean stillValid(Player player) {
-			return !player.isRemoved();
+			return !player.isDeadOrDying();
 		}
 	}
 
