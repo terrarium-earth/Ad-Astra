@@ -69,6 +69,9 @@ public class VehicleEntity extends Entity {
     public void tick() {
         super.tick();
 
+        /** Reset Fall Damage for Passengers too */
+        this.resetFallDistance();
+
         /**ROT Anim*/
         this.tickLerp();
         this.rotAnim();
