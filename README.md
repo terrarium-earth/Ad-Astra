@@ -13,7 +13,7 @@ Beyond Earth has a [discord server](https://discord.gg/Xb2nPmN) where you can ch
 ```groovy
 repositories {
     maven { url 'https://jitpack.io' }
-    }
+}
 
 
 dependencies {
