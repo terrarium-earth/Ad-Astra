@@ -30,28 +30,28 @@ import net.mrscauthd.beyond_earth.util.Rectangle2d;
 @OnlyIn(Dist.CLIENT)
 public class PlanetSelectionGuiWindow extends AbstractContainerScreen<PlanetSelectionGui.GuiContainer> {
 
-	private static ResourceLocation texture = new ResourceLocation(BeyondEarthMod.MODID, "textures/screens/planet_selection_gui.png");
+	public static ResourceLocation texture = new ResourceLocation(BeyondEarthMod.MODID, "textures/screens/planet_selection_gui.png");
 
-	private static ResourceLocation defaultButtonTex = new ResourceLocation(BeyondEarthMod.MODID, "textures/buttons/red_button.png");
-	private static ResourceLocation gbButtonTex = new ResourceLocation(BeyondEarthMod.MODID, "textures/buttons/green_button.png");
-	private static ResourceLocation gb2ButtonTex = new ResourceLocation(BeyondEarthMod.MODID, "textures/buttons/green_button_2.png");
-	private static ResourceLocation rbButtonTex = new ResourceLocation(BeyondEarthMod.MODID, "textures/buttons/red_button.png");
-	private static ResourceLocation rb2ButtonTex = new ResourceLocation(BeyondEarthMod.MODID, "textures/buttons/red_button_2.png");
+	public static ResourceLocation defaultButtonTex = new ResourceLocation(BeyondEarthMod.MODID, "textures/buttons/red_button.png");
+	public static ResourceLocation gbButtonTex = new ResourceLocation(BeyondEarthMod.MODID, "textures/buttons/green_button.png");
+	public static ResourceLocation gb2ButtonTex = new ResourceLocation(BeyondEarthMod.MODID, "textures/buttons/green_button_2.png");
+	public static ResourceLocation rbButtonTex = new ResourceLocation(BeyondEarthMod.MODID, "textures/buttons/red_button.png");
+	public static ResourceLocation rb2ButtonTex = new ResourceLocation(BeyondEarthMod.MODID, "textures/buttons/red_button_2.png");
 
-	private static ResourceLocation dbbButtonTex = new ResourceLocation(BeyondEarthMod.MODID, "textures/buttons/dark_blue_button.png");
-	private static ResourceLocation dbb2ButtonTex = new ResourceLocation(BeyondEarthMod.MODID, "textures/buttons/dark_blue_button_2.png");
+	public static ResourceLocation dbbButtonTex = new ResourceLocation(BeyondEarthMod.MODID, "textures/buttons/dark_blue_button.png");
+	public static ResourceLocation dbb2ButtonTex = new ResourceLocation(BeyondEarthMod.MODID, "textures/buttons/dark_blue_button_2.png");
 
-	private static ResourceLocation bbButtonTex = new ResourceLocation(BeyondEarthMod.MODID, "textures/buttons/blue_button.png");
-	private static ResourceLocation bb2ButtonTex = new ResourceLocation(BeyondEarthMod.MODID, "textures/buttons/blue_button_2.png");
+	public static ResourceLocation bbButtonTex = new ResourceLocation(BeyondEarthMod.MODID, "textures/buttons/blue_button.png");
+	public static ResourceLocation bb2ButtonTex = new ResourceLocation(BeyondEarthMod.MODID, "textures/buttons/blue_button_2.png");
 
-	private static ResourceLocation sbbButtonTex = new ResourceLocation(BeyondEarthMod.MODID, "textures/buttons/small_blue_button.png");
-	private static ResourceLocation sbb2ButtonTex = new ResourceLocation(BeyondEarthMod.MODID, "textures/buttons/small_blue_button_2.png");
+	public static ResourceLocation sbbButtonTex = new ResourceLocation(BeyondEarthMod.MODID, "textures/buttons/small_blue_button.png");
+	public static ResourceLocation sbb2ButtonTex = new ResourceLocation(BeyondEarthMod.MODID, "textures/buttons/small_blue_button_2.png");
 
-	private static ResourceLocation bgbButtonTex = new ResourceLocation(BeyondEarthMod.MODID, "textures/buttons/big_green_button.png");
-	private static ResourceLocation bgb2ButtonTex = new ResourceLocation(BeyondEarthMod.MODID, "textures/buttons/big_green_button_2.png");
+	public static ResourceLocation bgbButtonTex = new ResourceLocation(BeyondEarthMod.MODID, "textures/buttons/big_green_button.png");
+	public static ResourceLocation bgb2ButtonTex = new ResourceLocation(BeyondEarthMod.MODID, "textures/buttons/big_green_button_2.png");
 
-	private static ResourceLocation brbButtonTex = new ResourceLocation(BeyondEarthMod.MODID, "textures/buttons/big_red_button.png");
-	private static ResourceLocation brb2ButtonTex = new ResourceLocation(BeyondEarthMod.MODID, "textures/buttons/big_red_button_2.png");
+	public static ResourceLocation brbButtonTex = new ResourceLocation(BeyondEarthMod.MODID, "textures/buttons/big_red_button.png");
+	public static ResourceLocation brb2ButtonTex = new ResourceLocation(BeyondEarthMod.MODID, "textures/buttons/big_red_button_2.png");
 
 	public int Category = -1;
 

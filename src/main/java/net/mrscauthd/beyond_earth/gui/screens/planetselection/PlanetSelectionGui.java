@@ -38,6 +38,14 @@ public class PlanetSelectionGui {
 		public boolean stillValid(Player player) {
 			return !player.isDeadOrDying();
 		}
+
+		public String getRocket() {
+			return rocket;
+		}
+
+		public Player getPlayer() {
+			return player;
+		}
 	}
 
 	public static class NetworkHandler {
