@@ -15,6 +15,6 @@ repositories {
 
 
 dependencies {
-implementation 'com.github.MrScautHD:Beyond-Earth:6.0-Dev'
+    implementation 'com.github.MrScautHD:Beyond-Earth:VERSION'
 }
 ```
