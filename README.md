@@ -1,6 +1,6 @@
 ![Beyond Earth Logo](src/main/resources/logo.png)
 
-# Beyond Earth for Minecraft 1.18 #
+# Beyond Earth for Minecraft 1.18 (Forge) #
 
 ![grafik](https://user-images.githubusercontent.com/65916181/157454393-9aadd2a5-7039-4099-af5a-1438e8bd71d7.png)
 
