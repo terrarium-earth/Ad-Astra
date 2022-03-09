@@ -8,7 +8,7 @@ Beyond Earth has a [discord server](https://discord.gg/Xb2nPmN) where you can ch
 
 # Beyond Earth API #
 
-```json
+```groovy
 repositories {
     maven { url 'https://jitpack.io' }
     }
