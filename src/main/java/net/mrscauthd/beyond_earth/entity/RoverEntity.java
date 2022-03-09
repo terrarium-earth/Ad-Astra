@@ -301,6 +301,9 @@ public class RoverEntity extends VehicleEntity {
     public void tick() {
         super.tick();
 
+        /** Reset Fall Damage for Passengers too */
+        this.resetFallDistance();
+
         //Fuel Load up
         if (Methods.tagCheck(FluidUtil2.findBucketFluid(this.inventory.getStackInSlot(0).getItem()), ModInit.FLUID_VEHICLE_FUEL_TAG)) {
 
