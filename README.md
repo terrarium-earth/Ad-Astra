@@ -2,6 +2,8 @@
 
 # Beyond Earth for Minecraft 1.18 #
 
+![grafik](https://user-images.githubusercontent.com/65916181/157454393-9aadd2a5-7039-4099-af5a-1438e8bd71d7.png)
+
 # Discord #
 
 Beyond Earth has a [discord server](https://discord.gg/Xb2nPmN) where you can chat with other Beyond Earth users and us!
