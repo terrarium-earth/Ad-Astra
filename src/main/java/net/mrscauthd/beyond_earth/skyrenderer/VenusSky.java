@@ -70,7 +70,7 @@ public class VenusSky {
 
     private static final ResourceLocation CLOUD_TEXTURE = new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/clouds.png");
     private static final ResourceLocation RAIN_TEXTURE = new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/rain.png");
-    private static final ResourceLocation SUN_TEXTURE = new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/sun.png");
+    private static final ResourceLocation SUN_TEXTURE = new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/red_sun.png");
     private static final ResourceLocation EARTH_TEXTURE = new ResourceLocation(BeyondEarthMod.MODID, "textures/sky/earth.png");
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
@@ -78,7 +78,7 @@ public class VenusSky {
         DimensionSpecialEffects.EFFECTS.put(DIM_RENDER_INFO, new DimensionSpecialEffects(192, true, DimensionSpecialEffects.SkyType.NORMAL, false, false) {
             @Override
             public Vec3 getBrightnessDependentFogColor(Vec3 p_108878_, float p_108879_) {
-                return p_108878_.multiply(p_108879_ * 0.967058823529 + 0.03, p_108879_ * 0.770980392157 + 0.03, p_108879_ * 0.594901960784 + 0.06);
+                return p_108878_.multiply(p_108879_ * 0.867058823529 + 0.03, p_108879_ * 0.770980392157 + 0.03, p_108879_ * 0.494901960784 + 0.06);
             }
 
             @Override
