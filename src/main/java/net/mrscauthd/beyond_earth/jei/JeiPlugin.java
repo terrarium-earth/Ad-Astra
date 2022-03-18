@@ -134,7 +134,7 @@ public class JeiPlugin implements IModPlugin {
 		// NASA WorkBench
 		int workbenchPartSlotStart = 1 + NASAWorkbenchBlockEntity.SLOT_PARTS;
 		int workbenchPartSlotCount = NASAWorkbenchBlockEntity.getBasicPartSlots();
-		registration.addRecipeTransferHandler(NasaWorkbenchGui.GuiContainer.class, NASAWorkbenchJeiCategory.Uid, workbenchPartSlotStart, workbenchPartSlotCount, workbenchPartSlotStart + workbenchPartSlotCount, inventorySlotCount);
+		registration.addRecipeTransferHandler(NasaWorkbenchGui.GuiContainer.class, NasaWorkbenchJeiCategory.Uid, workbenchPartSlotStart, workbenchPartSlotCount, workbenchPartSlotStart + workbenchPartSlotCount, inventorySlotCount);
 		// Fuel Refinery
 		registration.addRecipeTransferHandler(FuelRefineryGui.GuiContainer.class, FuelRefineryJeiCategory.Uid, FuelRefineryBlockEntity.SLOT_INPUT_SOURCE, 1, FuelRefineryBlockEntity.SLOT_OUTPUT_SOURCE + 1, inventorySlotCount);
 		// Rocket tier 1
@@ -149,7 +149,7 @@ public class JeiPlugin implements IModPlugin {
 
 	@Override
 	public void registerGuiHandlers(IGuiHandlerRegistration registration) {
-		registration.addRecipeClickArea(NasaWorkbenchGuiWindow.class, 108, 49, 14, 14, NASAWorkbenchJeiCategory.Uid);
+		registration.addRecipeClickArea(NasaWorkbenchGuiWindow.class, 108, 49, 14, 14, NasaWorkbenchJeiCategory.Uid);
 		registration.addGuiContainerHandler(CoalGeneratorGuiWindow.class, new CoalGeneratorGuiContainerHandler());
 		registration.addRecipeClickArea(FuelRefineryGuiWindow.class, FuelRefineryGuiWindow.ARROW_LEFT, FuelRefineryGuiWindow.ARROW_TOP, GuiHelper.ARROW_WIDTH, GuiHelper.ARROW_HEIGHT, FuelRefineryJeiCategory.Uid);
 		registration.addGuiContainerHandler(CompressorGuiWindow.class, new CompressorGuiContainerHandler());
@@ -169,7 +169,7 @@ public class JeiPlugin implements IModPlugin {
 		// Coal Generator
 		registration.addRecipeCategories(new CoalGeneratorJeiCategory(jeiHelper.getGuiHelper()));
 		// NASA Workbench
-		registration.addRecipeCategories(new NASAWorkbenchJeiCategory(jeiHelper.getGuiHelper()));
+		registration.addRecipeCategories(new NasaWorkbenchJeiCategory(jeiHelper.getGuiHelper()));
 		// Rocket Tier 1
 		registration.addRecipeCategories(new RocketTier1JeiCategory(jeiHelper.getGuiHelper()));
 		// Rocket Tier 2
@@ -201,7 +201,7 @@ public class JeiPlugin implements IModPlugin {
 		// Coal Generator
 		registration.addRecipes(generateGeneratorRecipes(), CoalGeneratorJeiCategory.Uid);
 		// NASA Workbench
-		registration.addRecipes(generateWorkbenchRecipes(), NASAWorkbenchJeiCategory.Uid);
+		registration.addRecipes(generateWorkbenchRecipes(), NasaWorkbenchJeiCategory.Uid);
 		// Rocket Tier 1
 		registration.addRecipes(this.generateFuelLoadingRecipes(), RocketTier1JeiCategory.Uid);
 		// Rocket Tier 2
@@ -321,7 +321,7 @@ public class JeiPlugin implements IModPlugin {
 		// Coal Generator
 		registration.addRecipeCatalyst(new ItemStack(ModInit.COAL_GENERATOR_BLOCK.get()), CoalGeneratorJeiCategory.Uid);
 		// workbench
-		registration.addRecipeCatalyst(new ItemStack(ModInit.NASA_WORKBENCH_ITEM.get()), NASAWorkbenchJeiCategory.Uid);
+		registration.addRecipeCatalyst(new ItemStack(ModInit.NASA_WORKBENCH_ITEM.get()), NasaWorkbenchJeiCategory.Uid);
 		// Compressor
 		registration.addRecipeCatalyst(new ItemStack(ModInit.COMPRESSOR_BLOCK.get()), CompressorJeiCategory.Uid);
 		// FuelMaker
@@ -349,14 +349,14 @@ public class JeiPlugin implements IModPlugin {
 
 		private final JeiPlugin plugin;
 		private final Component title;
-		private final IDrawable background;
+		private final IDrawableStatic background;
 		private final IDrawable fluidOverlay;
 		private final LoadingCache<Integer, IDrawableAnimated> cachedEnergies;
 
 		public OxygenLoaderJeiCategory(JeiPlugin plugin, IGuiHelper guiHelper) {
 			this.plugin = plugin;
 			this.title = new TranslatableComponent("container." + BeyondEarthMod.MODID + ".oxygen_loader");
-			this.background = guiHelper.createDrawable(new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/oxygen_loader_jei.png"), 0, 0, 148, 64);
+			this.background = guiHelper.drawableBuilder(new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/oxygen_loader.png"), 0, 0, 147, 64).setTextureSize(147, 64).build();
 			this.fluidOverlay = guiHelper.drawableBuilder(GuiHelper.FLUID_TANK_PATH, 0, 0, GuiHelper.FLUID_TANK_WIDTH, GuiHelper.FLUID_TANK_HEIGHT).setTextureSize(GuiHelper.FLUID_TANK_WIDTH, GuiHelper.FLUID_TANK_HEIGHT).build();
 			this.cachedEnergies = createUsingEnergies(guiHelper);
 		}
@@ -444,14 +444,14 @@ public class JeiPlugin implements IModPlugin {
 
 		private final JeiPlugin plugin;
 		private final Component title;
-		private final IDrawable background;
+		private final IDrawableStatic background;
 		private final IDrawable fluidOverlay;
 		private final LoadingCache<Integer, IDrawableAnimated> cachedEnergies;
 
 		public OxygenBubbleDistributorJeiCategory(JeiPlugin plugin, IGuiHelper guiHelper) {
 			this.plugin = plugin;
 			this.title = new TranslatableComponent("container." + BeyondEarthMod.MODID + ".oxygen_bubble_distributor");
-			this.background = guiHelper.createDrawable(new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/oxygen_bubble_distributor_jei.png"), 0, 0, 148, 64);
+			this.background = guiHelper.drawableBuilder(new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/oxygen_bubble_distributor.png"), 0, 0, 147, 64).setTextureSize(147, 64).build();
 			this.fluidOverlay = guiHelper.drawableBuilder(GuiHelper.FLUID_TANK_PATH, 0, 0, GuiHelper.FLUID_TANK_WIDTH, GuiHelper.FLUID_TANK_HEIGHT).setTextureSize(GuiHelper.FLUID_TANK_WIDTH, GuiHelper.FLUID_TANK_HEIGHT).build();
 			this.cachedEnergies = createUsingEnergies(guiHelper);
 		}
@@ -533,13 +533,13 @@ public class JeiPlugin implements IModPlugin {
 		public static final int ENERGY_TOP = 15;
 
 		private final Component title;
-		private final IDrawable background;
+		private final IDrawableStatic background;
 		private final LoadingCache<Integer, IDrawableAnimated> fires;
 		private final LoadingCache<Integer, IDrawableAnimated> energies;
 
 		public CoalGeneratorJeiCategory(IGuiHelper guiHelper) {
 			this.title = new TranslatableComponent("container." + BeyondEarthMod.MODID + ".coal_generator");
-			this.background = guiHelper.createDrawable(new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/generator_gui_jei.png"), 0, 0, 144, 84);
+			this.background = guiHelper.drawableBuilder(new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/coal_generator.png"), 0, 0, 144, 84).setTextureSize(144, 84).build();
 			this.fires = createFires(guiHelper);
 			this.energies = createGeneratingEnergies(guiHelper);
 		}
@@ -606,14 +606,14 @@ public class JeiPlugin implements IModPlugin {
 		}
 	}
 
-	public static class NASAWorkbenchJeiCategory implements IRecipeCategory<WorkbenchingRecipe> {
+	public static class NasaWorkbenchJeiCategory implements IRecipeCategory<WorkbenchingRecipe> {
 		public static final ResourceLocation Uid = new ResourceLocation(BeyondEarthMod.MODID, "nasa_workbench");
 		private final Component title;
-		private final IDrawable background;
+		private final IDrawableStatic background;
 
-		public NASAWorkbenchJeiCategory(IGuiHelper guiHelper) {
+		public NasaWorkbenchJeiCategory(IGuiHelper guiHelper) {
 			this.title = new TranslatableComponent("container." + BeyondEarthMod.MODID + ".nasa_workbench");
-			this.background = guiHelper.createDrawable(new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/nasaworkbenchjei.png"), 0, 0, 176, 122);
+			this.background = guiHelper.drawableBuilder(new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/nasa_workbench.png"), 0, 0, 176, 122).setTextureSize(176, 122).build();
 		}
 
 		@Override
@@ -745,12 +745,12 @@ public class JeiPlugin implements IModPlugin {
 		public static final ResourceLocation Uid = new ResourceLocation(BeyondEarthMod.MODID, "rocket_t1");
 
 		private final Component title;
-		private final IDrawable background;
+		private final IDrawableStatic background;
 		private final IDrawable icon;
 
 		public RocketTier1JeiCategory(IGuiHelper guiHelper) {
 			this.title = ModInit.TIER_1_ROCKET.get().getDescription();
-			this.background = guiHelper.createDrawable(new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/rocket_gui_jei.png"), 0, 0, 128, 71);
+			this.background = guiHelper.drawableBuilder(new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/rocket_gui.png"), 0, 0, 128, 71).setTextureSize(128, 71).build();
 			this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM, new ItemStack(ModInit.TIER_1_ROCKET_ITEM.get()));
 		}
 
@@ -797,12 +797,12 @@ public class JeiPlugin implements IModPlugin {
 		public static final ResourceLocation Uid = new ResourceLocation(BeyondEarthMod.MODID, "rocket_t2");
 
 		private final Component title;
-		private final IDrawable background;
+		private final IDrawableStatic background;
 		private final IDrawable icon;
 
 		public RocketTier2JeiCategory(IGuiHelper guiHelper) {
 			this.title = ModInit.TIER_2_ROCKET.get().getDescription();
-			this.background = guiHelper.createDrawable(new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/rocket_gui_jei.png"), 0, 0, 128, 71);
+			this.background = guiHelper.drawableBuilder(new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/rocket_gui.png"), 0, 0, 128, 71).setTextureSize(128, 71).build();
 			this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM, new ItemStack(ModInit.TIER_2_ROCKET_ITEM.get()));
 		}
 
@@ -849,12 +849,12 @@ public class JeiPlugin implements IModPlugin {
 		public static final ResourceLocation Uid = new ResourceLocation(BeyondEarthMod.MODID, "rocket_t3");
 
 		private final Component title;
-		private final IDrawable background;
+		private final IDrawableStatic background;
 		private final IDrawable icon;
 
 		public RocketTier3JeiCategory(IGuiHelper guiHelper) {
 			this.title = ModInit.TIER_3_ROCKET.get().getDescription();
-			this.background = guiHelper.createDrawable(new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/rocket_gui_jei.png"), 0, 0, 128, 71);
+			this.background = guiHelper.drawableBuilder(new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/rocket_gui.png"), 0, 0, 128, 71).setTextureSize(128, 71).build();
 			this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM, new ItemStack(ModInit.TIER_3_ROCKET_ITEM.get()));
 		}
 
@@ -901,12 +901,12 @@ public class JeiPlugin implements IModPlugin {
 		public static final ResourceLocation Uid = new ResourceLocation(BeyondEarthMod.MODID, "rocket_t4");
 
 		private final Component title;
-		private final IDrawable background;
+		private final IDrawableStatic background;
 		private final IDrawable icon;
 
 		public RocketTier4JeiCategory(IGuiHelper guiHelper) {
 			this.title = ModInit.TIER_4_ROCKET.get().getDescription();
-			this.background = guiHelper.createDrawable(new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/rocket_gui_jei.png"), 0, 0, 128, 71);
+			this.background = guiHelper.drawableBuilder(new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/rocket_gui.png"), 0, 0, 128, 71).setTextureSize(128, 71).build();
 			this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM, new ItemStack(ModInit.TIER_4_ROCKET_ITEM.get()));
 		}
 
@@ -958,13 +958,13 @@ public class JeiPlugin implements IModPlugin {
 		public static final int ENERGY_TOP = 15;
 
 		private final Component title;
-		private final IDrawable background;
+		private final IDrawableStatic background;
 		private final LoadingCache<Integer, IDrawableAnimated> cachedArrows;
 		private final LoadingCache<Integer, IDrawableAnimated> cachedEnergies;
 
 		public CompressorJeiCategory(IGuiHelper guiHelper) {
 			this.title = new TranslatableComponent("container." + BeyondEarthMod.MODID + ".compressor");
-			this.background = guiHelper.createDrawable(new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/compressor_gui_jei.png"), 0, 0, 144, 84);
+			this.background = guiHelper.drawableBuilder(new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/compressor.png"), 0, 0, 144, 84).setTextureSize(144, 84).build();
 			this.cachedArrows = createArrows(guiHelper);
 			this.cachedEnergies = createUsingEnergies(guiHelper);
 		}
@@ -1040,14 +1040,14 @@ public class JeiPlugin implements IModPlugin {
 
 		private final JeiPlugin plugin;
 		private final Component title;
-		private final IDrawable background;
+		private final IDrawableStatic background;
 		private final IDrawable fluidOverlay;
 		private final LoadingCache<Integer, IDrawableAnimated> cachedEnergies;
 
 		public FuelRefineryJeiCategory(JeiPlugin plugin, IGuiHelper guiHelper) {
 			this.plugin = plugin;
 			this.title = new TranslatableComponent("container." + BeyondEarthMod.MODID + ".fuel_refinery");
-			this.background = guiHelper.createDrawable(new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/fuel_refinery_jei.png"), 0, 0, 148, 64);
+			this.background = guiHelper.drawableBuilder(new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/fuel_refinery.png"), 0, 0, 147, 64).setTextureSize(147, 64).build();
 			this.fluidOverlay = guiHelper.drawableBuilder(GuiHelper.FLUID_TANK_PATH, 0, 0, GuiHelper.FLUID_TANK_WIDTH, GuiHelper.FLUID_TANK_HEIGHT).setTextureSize(GuiHelper.FLUID_TANK_WIDTH, GuiHelper.FLUID_TANK_HEIGHT).build();
 			this.cachedEnergies = createUsingEnergies(guiHelper);
 		}
@@ -1129,12 +1129,12 @@ public class JeiPlugin implements IModPlugin {
 		public static final ResourceLocation Uid = new ResourceLocation(BeyondEarthMod.MODID, "rover");
 
 		private final Component title;
-		private final IDrawable background;
+		private final IDrawableStatic background;
 		private final IDrawable fluidOverlay;
 
 		public RoverJeiCategory(IGuiHelper guiHelper) {
 			this.title = ModInit.ROVER.get().getDescription();
-			this.background = guiHelper.createDrawable(new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/rover_jei.png"), 0, 0, 144, 84);
+			this.background = guiHelper.drawableBuilder(new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/rover.png"), 0, 0, 144, 84).setTextureSize(144,84).build();
 			this.fluidOverlay = guiHelper.drawableBuilder(GuiHelper.FLUID_TANK_PATH, 0, 0, GuiHelper.FLUID_TANK_WIDTH, GuiHelper.FLUID_TANK_HEIGHT).setTextureSize(GuiHelper.FLUID_TANK_WIDTH, GuiHelper.FLUID_TANK_HEIGHT).build();
 		}
 
@@ -1179,7 +1179,7 @@ public class JeiPlugin implements IModPlugin {
 
 	public static class SpaceStationJeiCategory implements IRecipeCategory<SpaceStationRecipe> {
 		public static final ResourceLocation Uid = new ResourceLocation(BeyondEarthMod.MODID, "space_station");
-		public static final ResourceLocation BACKGROUND = new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/space_station_background.png");
+		public static final ResourceLocation BACKGROUND = new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/space_station.png");
 		public static final ResourceLocation ICON = new ResourceLocation(BeyondEarthMod.MODID, "textures/jei/space_station_icon.png");
 		public static final int SLOTS_X_CENTER = 72;
 		public static final int SLOTS_Y_TOP = 6;
@@ -1188,7 +1188,7 @@ public class JeiPlugin implements IModPlugin {
 
 		private final Component title;
 		private final Component[] tooltips;
-		private final IDrawable background;
+		private final IDrawableStatic background;
 		private final IDrawable icon;
 		private final IDrawable slot;
 
@@ -1196,7 +1196,7 @@ public class JeiPlugin implements IModPlugin {
 			String path = BeyondEarthMod.MODID + ".space_station";
 			this.title = new TranslatableComponent("jei.category." + path);
 			this.tooltips = Arrays.stream(new TranslatableComponent("jei.tooltip." + path).getString().split("\n")).map(TextComponent::new).toArray(Component[]::new);
-			this.background = guiHelper.createDrawable(BACKGROUND, 0, 0, 144, 51);
+			this.background = guiHelper.drawableBuilder(BACKGROUND, 0, 0, 144, 51).setTextureSize(144, 51).build();
 			this.icon = guiHelper.drawableBuilder(ICON, 0, 0, 16, 16).setTextureSize(16, 16).build();
 			this.slot = guiHelper.getSlotDrawable();
 		}

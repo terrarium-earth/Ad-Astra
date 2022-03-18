@@ -1,7 +1,5 @@
 package net.mrscauthd.beyond_earth.flag;
 
-import static net.mrscauthd.beyond_earth.block.helper.VoxelShapeHelper.boxSimple;
-
 import javax.annotation.Nullable;
 
 import com.mojang.authlib.GameProfile;
@@ -33,7 +31,7 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.pathfinder.PathComputationType;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -41,9 +39,20 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class FlagBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
-	public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 	public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+
+	public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+
+	public static VoxelShape SOUTH_SHAPE = Shapes.empty();
+	public static VoxelShape NORTH_SHAPE = Shapes.empty();
+	public static VoxelShape EAST_SHAPE = Shapes.empty();
+	public static VoxelShape WEST_SHAPE = Shapes.empty();
+
+	public static VoxelShape LOWER_SOUTH_SHAPE = Shapes.empty();
+	public static VoxelShape LOWER_NORTH_SHAPE = Shapes.empty();
+	public static VoxelShape LOWER_EAST_SHAPE = Shapes.empty();
+	public static VoxelShape LOWER_WEST_SHAPE = Shapes.empty();
 
 	public FlagBlock(BlockBehaviour.Properties builder) {
 		super(builder);
@@ -52,34 +61,58 @@ public class FlagBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-		Vec3 offset = state.getOffset(world, pos);
-
 		if (state.getValue(HALF) == DoubleBlockHalf.LOWER) {
-			switch ((Direction) state.getValue(FACING)) {
-			case SOUTH:
-			default:
-				return Shapes.or(boxSimple(14.5, 0, 9, 12.5, 1, 7), boxSimple(14, 1, 8.5, 13, 16, 7.5)).move(offset.x, offset.y, offset.z);
-			case NORTH:
-				return Shapes.or(boxSimple(1.5, 0, 7, 3.5, 1, 9), boxSimple(2, 1, 7.5, 3, 16, 8.5)).move(offset.x, offset.y, offset.z);
-			case EAST:
-				return Shapes.or(boxSimple(9, 0, 1.5, 7, 1, 3.5), boxSimple(8.5, 1, 2, 7.5, 16, 3)).move(offset.x, offset.y, offset.z);
-			case WEST:
-				return Shapes.or(boxSimple(7, 0, 14.5, 9, 1, 12.5), boxSimple(7.5, 1, 14, 8.5, 16, 13)).move(offset.x, offset.y, offset.z);
+			switch (state.getValue(FACING)) {
+				case SOUTH:
+				default :
+					return LOWER_SOUTH_SHAPE;
+				case NORTH :
+					return LOWER_NORTH_SHAPE;
+				case EAST :
+					return LOWER_EAST_SHAPE;
+				case WEST :
+					return LOWER_WEST_SHAPE;
 			}
 		} else {
-			switch ((Direction) state.getValue(FACING)) {
-			case SOUTH:
-			default:
-				return Shapes.or(boxSimple(14, 0, 8.5, 13, 16, 7.5), boxSimple(14, 7, 8.5, 1, 15, 7.5)).move(offset.x, offset.y, offset.z);
-			case NORTH:
-				return Shapes.or(boxSimple(2, 0, 7.5, 3, 16, 8.5), boxSimple(2, 7, 7.5, 15, 15, 8.5)).move(offset.x, offset.y, offset.z);
-			case EAST:
-				return Shapes.or(boxSimple(8.5, 0, 2, 7.5, 16, 3), boxSimple(8.5, 7, 2, 7.5, 15, 15)).move(offset.x, offset.y, offset.z);
-			case WEST:
-				return Shapes.or(boxSimple(7.5, 0, 14, 8.5, 16, 13), boxSimple(7.5, 7, 14, 8.5, 15, 1)).move(offset.x, offset.y, offset.z);
+			switch (state.getValue(FACING)) {
+				case SOUTH:
+				default :
+					return SOUTH_SHAPE;
+				case NORTH :
+					return NORTH_SHAPE;
+				case EAST :
+					return EAST_SHAPE;
+				case WEST :
+					return WEST_SHAPE;
 			}
 		}
+	}
 
+	static {
+		SOUTH_SHAPE = Shapes.join(SOUTH_SHAPE, Shapes.box(0.125, 0.0625, 0.46875, 0.1875, 1, 0.53125), BooleanOp.OR);
+		SOUTH_SHAPE = Shapes.join(SOUTH_SHAPE, Shapes.box(0.09375, 0, 0.4375, 0.21875, 0.0625, 0.5625), BooleanOp.OR);
+
+		NORTH_SHAPE = Shapes.join(NORTH_SHAPE, Shapes.box(0.125, 0, 0.46875, 0.1875, 1, 0.53125), BooleanOp.OR);
+		NORTH_SHAPE = Shapes.join(NORTH_SHAPE, Shapes.box(0.1875, 0.4375, 0.49968749999999995, 0.9375, 0.9375, 0.5003124999999999), BooleanOp.OR);
+
+		EAST_SHAPE = Shapes.join(EAST_SHAPE, Shapes.box(0.46875, 0.0625, 0.125, 0.53125, 1, 0.1875), BooleanOp.OR);
+		EAST_SHAPE = Shapes.join(EAST_SHAPE, Shapes.box(0.4375, 0, 0.09375, 0.5625, 0.0625, 0.21875), BooleanOp.OR);
+
+		WEST_SHAPE = Shapes.join(WEST_SHAPE, Shapes.box(0.46875, 0.0625, 0.8125, 0.53125, 1, 0.875), BooleanOp.OR);
+		WEST_SHAPE = Shapes.join(WEST_SHAPE, Shapes.box(0.4375, 0, 0.78125, 0.5625, 0.0625, 0.90625), BooleanOp.OR);
+
+		//DONE
+		LOWER_SOUTH_SHAPE = Shapes.join(LOWER_SOUTH_SHAPE, Shapes.box(0.8125, 0.0625, 0.46875, 0.875, 1, 0.53125), BooleanOp.OR);
+		LOWER_SOUTH_SHAPE = Shapes.join(LOWER_SOUTH_SHAPE, Shapes.box(0.78125, 0, 0.4375, 0.90625, 0.0625, 0.5625), BooleanOp.OR);
+
+		LOWER_NORTH_SHAPE = Shapes.join(LOWER_NORTH_SHAPE, Shapes.box(0.125, 0.0625, 0.46875, 0.1875, 1, 0.53125), BooleanOp.OR);
+		LOWER_NORTH_SHAPE = Shapes.join(LOWER_NORTH_SHAPE, Shapes.box(0.09375, 0, 0.4375, 0.21875, 0.0625, 0.5625), BooleanOp.OR);
+
+		LOWER_EAST_SHAPE = Shapes.join(LOWER_EAST_SHAPE, Shapes.box(0.46875, 0.0625, 0.125, 0.53125, 1, 0.1875), BooleanOp.OR);
+		LOWER_EAST_SHAPE = Shapes.join(LOWER_EAST_SHAPE, Shapes.box(0.4375, 0, 0.09375, 0.5625, 0.0625, 0.21875), BooleanOp.OR);
+
+		LOWER_WEST_SHAPE = Shapes.join(LOWER_WEST_SHAPE, Shapes.box(0.46875, 0.0625, 0.8125, 0.53125, 1, 0.875), BooleanOp.OR);
+		LOWER_WEST_SHAPE = Shapes.join(LOWER_WEST_SHAPE, Shapes.box(0.4375, 0, 0.78125, 0.5625, 0.0625, 0.90625), BooleanOp.OR);
 	}
 
 	@Override

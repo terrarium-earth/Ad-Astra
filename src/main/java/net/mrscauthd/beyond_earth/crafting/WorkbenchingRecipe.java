@@ -40,7 +40,7 @@ public class WorkbenchingRecipe extends BeyondEarthRecipe implements BiPredicate
 		Map<RocketPart, List<Ingredient>> map = new HashMap<>();
 
 		for (Entry<String, JsonElement> entry : partsJson.entrySet()) {
-			RocketPart part = ModInit.ROCKET_PARTS_REGISTRY.getValue(new ResourceLocation(entry.getKey()));
+			RocketPart part = ModInit.ROCKET_PARTS_REGISTRY.get().getValue(new ResourceLocation(entry.getKey()));
 			JsonArray slotsJson = entry.getValue().getAsJsonArray();
 			List<Ingredient> ingredients = Lists.newArrayList(slotsJson).stream().map(Ingredient::fromJson).collect(Collectors.toList());
 			map.put(part, Collections.unmodifiableList(ingredients));

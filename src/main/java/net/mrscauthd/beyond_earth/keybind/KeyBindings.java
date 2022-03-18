@@ -150,11 +150,11 @@ public class KeyBindings {
 
 					if (!player.getVehicle().getEntityData().get(IRocketEntity.ROCKET_START)) {
 						player.getVehicle().getEntityData().set(IRocketEntity.ROCKET_START, true);
-						ClientMethods.rocketSounds(player.getVehicle(), world);
+						Methods.rocketSounds(player.getVehicle(), world);
 					}
 
 				} else {
-					ClientMethods.noFuelMessage(player);
+					Methods.noFuelMessage(player);
 				}
 			}
 		}

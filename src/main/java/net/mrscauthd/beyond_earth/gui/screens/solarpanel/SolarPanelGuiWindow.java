@@ -20,7 +20,7 @@ import net.mrscauthd.beyond_earth.machines.tile.SolarPanelBlockEntity;
 @OnlyIn(Dist.CLIENT)
 public class SolarPanelGuiWindow extends AbstractContainerScreen<SolarPanelGui.GuiContainer> {
 
-	public static final ResourceLocation texture = new ResourceLocation(BeyondEarthMod.MODID, "textures/screens/solar_panel_gui.png");
+	public static final ResourceLocation texture = new ResourceLocation(BeyondEarthMod.MODID, "textures/screens/solar_panel.png");
 
 	public SolarPanelGuiWindow(SolarPanelGui.GuiContainer container, Inventory inventory, Component text) {
 		super(container, inventory, text);

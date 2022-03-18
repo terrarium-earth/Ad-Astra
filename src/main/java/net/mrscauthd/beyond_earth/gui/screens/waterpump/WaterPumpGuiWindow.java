@@ -21,7 +21,7 @@ import net.mrscauthd.beyond_earth.util.Rectangle2d;
 @OnlyIn(Dist.CLIENT)
 public class WaterPumpGuiWindow extends AbstractContainerScreen<WaterPumpGui.GuiContainer> {
 
-	public static final ResourceLocation texture = new ResourceLocation(BeyondEarthMod.MODID, "textures/screens/water_pump_gui.png");
+	public static final ResourceLocation texture = new ResourceLocation(BeyondEarthMod.MODID, "textures/screens/water_pump.png");
 
 	public static final int WATER_TANK_LEFT = 75;
 	public static final int WATER_TANK_TOP = 21;

@@ -30,14 +30,15 @@ public class LanderGui {
 			this.lander = inv.player.level.getEntity(extraData.readVarInt());
 
 			IItemHandlerModifiable itemHandler = ((LanderEntity) lander).getItemHandler();
-			this.addSlot(new SlotItemHandler(itemHandler, 0, 28, 29) {
+
+			this.addSlot(new SlotItemHandler(itemHandler, 0, 31, 35) {
 				@Override
 				public boolean mayPlace(@NotNull ItemStack stack) {
 					return false;
 				}
 			});
 
-			this.addSlot(new SlotItemHandler(itemHandler, 1, 78, 29) {
+			this.addSlot(new SlotItemHandler(itemHandler, 1, 80, 35) {
 				@Override
 				public boolean mayPlace(@NotNull ItemStack stack) {
 					return false;

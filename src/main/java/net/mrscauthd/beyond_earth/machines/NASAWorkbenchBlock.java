@@ -1,7 +1,5 @@
 package net.mrscauthd.beyond_earth.machines;
 
-import static net.mrscauthd.beyond_earth.block.helper.VoxelShapeHelper.boxSimple;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -46,17 +44,7 @@ public class NASAWorkbenchBlock extends AbstractMachineBlock<NASAWorkbenchBlockE
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		Vec3 offset = state.getOffset(level, pos);
-		switch ((Direction) state.getValue(FACING)) {
-		case SOUTH:
-		default:
-			return Shapes.or(boxSimple(16, 0, 16, 0, 19.2, 0)).move(offset.x, offset.y, offset.z);
-		case NORTH:
-			return Shapes.or(boxSimple(0, 0, 0, 16, 19.2, 16)).move(offset.x, offset.y, offset.z);
-		case EAST:
-			return Shapes.or(boxSimple(16, 0, 0, 0, 19.2, 16)).move(offset.x, offset.y, offset.z);
-		case WEST:
-			return Shapes.or(boxSimple(0, 0, 16, 16, 19.2, 0)).move(offset.x, offset.y, offset.z);
-		}
+		return Shapes.or(box(0, 0, 0, 16, 19.2, 16)).move(offset.x, offset.y, offset.z);
 	}
 
 	@Override

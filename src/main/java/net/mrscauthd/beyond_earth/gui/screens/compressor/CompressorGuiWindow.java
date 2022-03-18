@@ -21,7 +21,7 @@ import net.mrscauthd.beyond_earth.util.Rectangle2d;
 @OnlyIn(Dist.CLIENT)
 public class CompressorGuiWindow extends AbstractContainerScreen<CompressorGui.GuiContainer> {
 
-	public static final ResourceLocation TEXTURE = new ResourceLocation(BeyondEarthMod.MODID, "textures/screens/compressor_gui.png");
+	public static final ResourceLocation TEXTURE = new ResourceLocation(BeyondEarthMod.MODID, "textures/screens/compressor.png");
 
 	public static final int ENERGY_LEFT = 144;
 	public static final int ENERGY_TOP = 21;

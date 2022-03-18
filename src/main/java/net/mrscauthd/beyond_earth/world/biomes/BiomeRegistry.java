@@ -46,7 +46,7 @@ public class BiomeRegistry {
             MobSpawnSettings mobSpawnInfo = (new MobSpawnSettings.Builder()).addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModInit.ALIEN_ZOMBIE.get(), 20, 5, 5)).addMobCharge(ModInit.ALIEN_ZOMBIE.get(), 0.7D, 0.15D).addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModInit.STAR_CRAWLER.get(), 20, 5, 5)).addMobCharge(ModInit.STAR_CRAWLER.get(), 0.7D, 0.15D).build();
 
             MOON = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(-0.7f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
-            event.getRegistry().register(MOON.setRegistryName(BeyondEarthMod.MODID,"moon"));
+            event.getRegistry().register(MOON.setRegistryName(BeyondEarthMod.MODID, "moon"));
         }
 
         if (MARS == null) {
@@ -58,7 +58,7 @@ public class BiomeRegistry {
             MobSpawnSettings mobSpawnInfo = (new MobSpawnSettings.Builder()).addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModInit.MARTIAN_RAPTOR.get(), 20, 5, 5)).addMobCharge(ModInit.MARTIAN_RAPTOR.get(), 0.7D, 0.15D).build();
 
             MARS = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(-0.7f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
-            event.getRegistry().register(MARS.setRegistryName(BeyondEarthMod.MODID,"mars"));
+            event.getRegistry().register(MARS.setRegistryName(BeyondEarthMod.MODID, "mars"));
         }
 
         if (MARS_ICE_SPIKES == null) {
@@ -70,7 +70,7 @@ public class BiomeRegistry {
             MobSpawnSettings mobSpawnInfo = MobSpawnSettings.EMPTY;
 
             MARS_ICE_SPIKES = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.ICY).mobSpawnSettings(mobSpawnInfo).temperature(-0.7f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
-            event.getRegistry().register(MARS_ICE_SPIKES.setRegistryName(BeyondEarthMod.MODID,"mars_ice_spikes"));
+            event.getRegistry().register(MARS_ICE_SPIKES.setRegistryName(BeyondEarthMod.MODID, "mars_ice_spikes"));
         }
 
         if (VENUS == null) {
@@ -80,7 +80,7 @@ public class BiomeRegistry {
             MobSpawnSettings mobSpawnInfo = MobSpawnSettings.EMPTY;
 
             VENUS = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.RAIN).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(1.5f).downfall(1f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
-            event.getRegistry().register(VENUS.setRegistryName(BeyondEarthMod.MODID,"venus"));
+            event.getRegistry().register(VENUS.setRegistryName(BeyondEarthMod.MODID, "venus"));
         }
 
         if (INFERNAL_VENUS_BARRENS == null) {
@@ -98,7 +98,7 @@ public class BiomeRegistry {
             MobSpawnSettings mobSpawnInfo = MobSpawnSettings.EMPTY;
 
             INFERNAL_VENUS_BARRENS = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.RAIN).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(1.5f).downfall(1f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
-            event.getRegistry().register(INFERNAL_VENUS_BARRENS.setRegistryName(BeyondEarthMod.MODID,"infernal_venus_barrens"));
+            event.getRegistry().register(INFERNAL_VENUS_BARRENS.setRegistryName(BeyondEarthMod.MODID, "infernal_venus_barrens"));
         }
 
         if (MERCURY == null) {
@@ -117,7 +117,7 @@ public class BiomeRegistry {
             MobSpawnSettings mobSpawnInfo = MobSpawnSettings.EMPTY;
 
             MERCURY = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(1.6f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
-            event.getRegistry().register(MERCURY.setRegistryName(BeyondEarthMod.MODID,"mercury"));
+            event.getRegistry().register(MERCURY.setRegistryName(BeyondEarthMod.MODID, "mercury"));
         }
 
         if (GLACIO == null) {
@@ -130,7 +130,7 @@ public class BiomeRegistry {
             MobSpawnSettings mobSpawnInfo = MobSpawnSettings.EMPTY;
 
             GLACIO = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.SNOW).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(-0.7f).downfall(1f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
-            event.getRegistry().register(GLACIO.setRegistryName(BeyondEarthMod.MODID,"glacio"));
+            event.getRegistry().register(GLACIO.setRegistryName(BeyondEarthMod.MODID, "glacio"));
         }
 
         if (GLACIO_ICE_SPIKES == null) {
@@ -147,7 +147,7 @@ public class BiomeRegistry {
             MobSpawnSettings mobSpawnInfo = MobSpawnSettings.EMPTY;
 
             GLACIO_ICE_SPIKES = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.SNOW).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(-0.7f).downfall(1f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
-            event.getRegistry().register(GLACIO_ICE_SPIKES.setRegistryName(BeyondEarthMod.MODID,"glacio_ice_spikes"));
+            event.getRegistry().register(GLACIO_ICE_SPIKES.setRegistryName(BeyondEarthMod.MODID, "glacio_ice_spikes"));
         }
 
         if (ORBIT == null) {
@@ -156,7 +156,7 @@ public class BiomeRegistry {
             MobSpawnSettings mobSpawnInfo = MobSpawnSettings.EMPTY;
 
             ORBIT = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(1.6f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
-            event.getRegistry().register(ORBIT.setRegistryName(BeyondEarthMod.MODID,"orbit"));
+            event.getRegistry().register(ORBIT.setRegistryName(BeyondEarthMod.MODID, "orbit"));
         }
     }
 

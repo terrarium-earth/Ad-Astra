@@ -16,7 +16,7 @@ import net.minecraftforge.api.distmarker.Dist;
 @OnlyIn(Dist.CLIENT)
 public class LanderGuiWindow extends AbstractContainerScreen<LanderGui.GuiContainer> {
 
-	private static final ResourceLocation texture = new ResourceLocation(BeyondEarthMod.MODID,"textures/screens/lander_gui.png");
+	private static final ResourceLocation texture = new ResourceLocation(BeyondEarthMod.MODID,"textures/screens/lander.png");
 
 	public LanderGuiWindow(LanderGui.GuiContainer container, Inventory inventory, Component text) {
 		super(container, inventory, text);

@@ -1,7 +1,5 @@
 package net.mrscauthd.beyond_earth.machines;
 
-import static net.mrscauthd.beyond_earth.block.helper.VoxelShapeHelper.boxSimple;
-
 import java.util.List;
 
 import net.minecraft.core.BlockPos;
@@ -13,7 +11,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -34,17 +32,26 @@ public class WaterPump extends AbstractMachineBlock<WaterPumpBlockEntity> {
 
     @Override
 	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        Vec3 offset = state.getOffset(level, pos);
+        VoxelShape shape = Shapes.empty();
+
         switch (state.getValue(FACING)) {
             case SOUTH :
             default :
-                return Shapes.or(boxSimple(5.5, 0, 10.5, 10.5, 1, 5.5), boxSimple(6, 1, 10, 10, 13, 6), boxSimple(5.5, 13, 10.5, 10.5, 16, 5.5), boxSimple(6, 6, 15, 10, 10, 6), boxSimple(5.5, 5.5, 16, 10.5, 10.5, 15)).move(offset.x, offset.y, offset.z);
-                case NORTH :
-                return Shapes.or(boxSimple(5.5, 0, 10.5, 10.5, 1, 5.5), boxSimple(6, 1, 10, 10, 13, 6), boxSimple(5.5, 13, 10.5, 10.5, 16, 5.5), boxSimple(6, 6, 1, 10, 10, 6), boxSimple(5.5, 5.5, 1, 10.5, 10.5, 0)).move(offset.x, offset.y, offset.z);
+                shape = Shapes.join(shape, Shapes.box(0.46875, 0.0625, 0.8125, 0.53125, 1, 0.875), BooleanOp.OR);//done
+                shape = Shapes.join(shape, Shapes.box(0.4375, 0, 0.78125, 0.5625, 0.0625, 0.90625), BooleanOp.OR);
+                return shape;
+            case NORTH :
+                shape = Shapes.join(shape, Shapes.box(0.125, 0.0625, 0.46875, 0.1875, 1, 0.53125), BooleanOp.OR);
+                shape = Shapes.join(shape, Shapes.box(0.09375, 0, 0.4375, 0.21875, 0.0625, 0.5625), BooleanOp.OR);//done
+                return shape;
             case EAST :
-                return Shapes.or(boxSimple(5.5, 0, 10.5, 10.5, 1, 5.5), boxSimple(6, 1, 10, 10, 13, 6), boxSimple(5.5, 13, 10.5, 10.5, 16, 5.5), boxSimple(15, 6, 10, 10, 10, 6), boxSimple(16, 5.5, 10.5, 15, 10.5, 5.5)).move(offset.x, offset.y, offset.z);
+                shape = Shapes.join(shape, Shapes.box(0.8125, 0.0625, 0.46875, 0.875, 1, 0.53125), BooleanOp.OR);//done
+                shape = Shapes.join(shape, Shapes.box(0.78125, 0, 0.4375, 0.90625, 0.0625, 0.5625), BooleanOp.OR);
+                return shape;
             case WEST :
-                return Shapes.or(boxSimple(5.5, 0, 10.5, 10.5, 1, 5.5), boxSimple(6, 1, 10, 10, 13, 6), boxSimple(5.5, 13, 10.5, 10.5, 16, 5.5), boxSimple(1, 6, 6, 10, 10, 10), boxSimple(0, 5.5, 5.5, 1, 10.5, 10.5)).move(offset.x, offset.y, offset.z);
+                shape = Shapes.join(shape, Shapes.box(0.46875, 0.0625, 0.125, 0.53125, 1, 0.1875), BooleanOp.OR);
+                shape = Shapes.join(shape, Shapes.box(0.4375, 0, 0.09375, 0.5625, 0.0625, 0.21875), BooleanOp.OR);
+                return shape;
         }
     }
 
@@ -57,7 +64,6 @@ public class WaterPump extends AbstractMachineBlock<WaterPumpBlockEntity> {
         } else {
             return state;
         }
-
     }
 
     @Override

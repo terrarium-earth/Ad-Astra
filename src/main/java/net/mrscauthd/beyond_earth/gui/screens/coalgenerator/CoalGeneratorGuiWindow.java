@@ -21,7 +21,7 @@ import net.mrscauthd.beyond_earth.util.Rectangle2d;
 @OnlyIn(Dist.CLIENT)
 public class CoalGeneratorGuiWindow extends AbstractContainerScreen<CoalGeneratorGui.GuiContainer> {
 
-	public static final ResourceLocation TEXTURE = new ResourceLocation(BeyondEarthMod.MODID, "textures/screens/coal_generator_gui.png");
+	public static final ResourceLocation TEXTURE = new ResourceLocation(BeyondEarthMod.MODID, "textures/screens/coal_generator.png");
 
 	public static final int FIRE_LEFT = 77;
 	public static final int FIRE_TOP = 49;

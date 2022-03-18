@@ -55,8 +55,8 @@ public class BeyondEarthMod {
 		ModInit.SOUNDS.register(bus);
 		ModInit.SENSOR.register(bus);
 		ModInit.FLUIDS.register(bus);
-		ModInit.RECIPE_SERIALIZERS.register(bus);
 		ModInit.ROCKET_PARTS.register(bus);
+		ModInit.RECIPE_SERIALIZERS.register(bus);
 		ModInit.EFFECTS.register(bus);
 		ModInit.GUIS.register(bus);
 		ModInit.PARTICLES.register(bus);

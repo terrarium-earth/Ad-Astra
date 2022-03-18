@@ -30,7 +30,7 @@ import net.mrscauthd.beyond_earth.util.Rectangle2d;
 @OnlyIn(Dist.CLIENT)
 public class RocketGuiWindow extends AbstractContainerScreen<RocketGui.GuiContainer> {
 
-	private static final ResourceLocation texture = new ResourceLocation(BeyondEarthMod.MODID, "textures/screens/rocket_gui.png");
+	private static final ResourceLocation texture = new ResourceLocation(BeyondEarthMod.MODID, "textures/screens/rocket.png");
 
 	public RocketGuiWindow(RocketGui.GuiContainer container, Inventory inventory, Component text) {
 		super(container, inventory, text);

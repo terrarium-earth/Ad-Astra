@@ -30,7 +30,7 @@ import net.mrscauthd.beyond_earth.util.Rectangle2d;
 @OnlyIn(Dist.CLIENT)
 public class RoverGuiWindow extends AbstractContainerScreen<RoverGui.GuiContainer> {
 
-	private static final ResourceLocation texture = new ResourceLocation(BeyondEarthMod.MODID, "textures/screens/rover_gui.png");
+	private static final ResourceLocation texture = new ResourceLocation(BeyondEarthMod.MODID, "textures/screens/rover.png");
 
 	public RoverGuiWindow(RoverGui.GuiContainer container, Inventory inventory, Component text) {
 		super(container, inventory, text);

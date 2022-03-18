@@ -73,7 +73,7 @@ minecraft {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.18.2-40.0.12'
+    minecraft 'net.minecraftforge:forge:1.18.2-40.0.18'
 
     //Mixin
     if (System.getProperty("idea.sync.active") != "true") {

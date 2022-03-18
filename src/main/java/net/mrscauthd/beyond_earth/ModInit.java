@@ -100,6 +100,8 @@ import net.mrscauthd.beyond_earth.world.chunk.PlanetChunkGenerator;
 import net.mrscauthd.beyond_earth.world.processor.StructureVoidProcessor;
 import net.mrscauthd.beyond_earth.world.structures.*;
 
+import java.util.function.Supplier;
+
 @Mod.EventBusSubscriber(modid = BeyondEarthMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModInit {
 
@@ -156,7 +158,7 @@ public class ModInit {
 
     //pygro
     public static final DeferredRegister<SensorType<?>> SENSOR = DeferredRegister.create(ForgeRegistries.SENSOR_TYPES, BeyondEarthMod.MODID);
-    public static final RegistryObject<SensorType<PygroMobsSensor>> PYGRO_SENSOR = SENSOR.register("pygro_sensor", ()->new SensorType<>(PygroMobsSensor::new));
+    public static final RegistryObject<SensorType<PygroMobsSensor>> PYGRO_SENSOR = SENSOR.register("pygro_sensor", ()-> new SensorType<>(PygroMobsSensor::new));
 
     //Sounds
     public static final RegistryObject<SoundEvent> ROCKET_SOUND = SOUNDS.register("rocket_fly",() -> new SoundEvent(new ResourceLocation(BeyondEarthMod.MODID, "rocket_fly")));
@@ -524,10 +526,11 @@ public class ModInit {
 	public static final RegistryObject<RecipeSerializer<?>> RECIPE_SERIALIZER_ALIEN_TRADING_POTIONEDITEM = RECIPE_SERIALIZERS.register("alien_trading_potioneditem", () -> new AlienTradingRecipePotionedItem.Serializer());
 	public static final RegistryObject<RecipeSerializer<?>> RECIPE_SERIALIZER_ALIEN_TRADING_DYEDITEM = RECIPE_SERIALIZERS.register("alien_trading_dyeditem", () -> new AlienTradingRecipeDyedItem.Serializer());
 	public static final RegistryObject<RecipeSerializer<?>> RECIPE_SERIALIZER_SPACE_STATION = RECIPE_SERIALIZERS.register("space_station", () -> new SpaceStationRecipeSerializer());
-	
+
+
     //RocketParts
-    public static final IForgeRegistry<RocketPart> ROCKET_PARTS_REGISTRY = new RegistryBuilder<RocketPart>().setType(RocketPart.class).setName(new ResourceLocation(BeyondEarthMod.MODID, "rocket_part")).create();
-    public static final DeferredRegister<RocketPart> ROCKET_PARTS = DeferredRegister.create(ROCKET_PARTS_REGISTRY, BeyondEarthMod.MODID);
+    public static final DeferredRegister<RocketPart> ROCKET_PARTS = DeferredRegister.create(new ResourceLocation(BeyondEarthMod.MODID, "rocket_part"), BeyondEarthMod.MODID);
+    public static final Supplier<IForgeRegistry<RocketPart>> ROCKET_PARTS_REGISTRY = ROCKET_PARTS.makeRegistry(RocketPart.class, RegistryBuilder::new);
 
     public static final RegistryObject<RocketPart> ROCKET_PART_EMPTY = ROCKET_PARTS.register("emtpy", () -> RocketPart.EMPTY);
     public static final RegistryObject<RocketPart> ROCKET_PART_NOSE = ROCKET_PARTS.register("nose", () -> new RocketPart(1));

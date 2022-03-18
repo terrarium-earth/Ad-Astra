@@ -21,7 +21,7 @@ import net.mrscauthd.beyond_earth.util.Rectangle2d;
 @OnlyIn(Dist.CLIENT)
 public class OxygenLoaderGuiWindow extends AbstractContainerScreen<OxygenLoaderGui.GuiContainer> {
 
-	public static final ResourceLocation texture = new ResourceLocation(BeyondEarthMod.MODID, "textures/screens/oxygen_loader_gui.png");
+	public static final ResourceLocation texture = new ResourceLocation(BeyondEarthMod.MODID, "textures/screens/oxygen_loader.png");
 
 	public static final int INPUT_TANK_LEFT = 9;
 	public static final int INPUT_TANK_TOP = 21;

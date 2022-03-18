@@ -21,7 +21,7 @@ import net.mrscauthd.beyond_earth.util.Rectangle2d;
 @OnlyIn(Dist.CLIENT)
 public class FuelRefineryGuiWindow extends AbstractContainerScreen<FuelRefineryGui.GuiContainer> {
 
-	public static final ResourceLocation texture = new ResourceLocation(BeyondEarthMod.MODID, "textures/screens/fuel_refinery_gui.png");
+	public static final ResourceLocation texture = new ResourceLocation(BeyondEarthMod.MODID, "textures/screens/fuel_refinery.png");
 
 	public static final int INPUT_TANK_LEFT = 9;
 	public static final int INPUT_TANK_TOP = 21;

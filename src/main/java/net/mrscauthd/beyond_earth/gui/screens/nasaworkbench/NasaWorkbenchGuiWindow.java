@@ -16,7 +16,7 @@ import net.mrscauthd.beyond_earth.BeyondEarthMod;
 @OnlyIn(Dist.CLIENT)
 public class NasaWorkbenchGuiWindow extends AbstractContainerScreen<NasaWorkbenchGui.GuiContainer> {
 
-	public static final ResourceLocation texture = new ResourceLocation(BeyondEarthMod.MODID, "textures/screens/nasa_workbench_gui.png");
+	public static final ResourceLocation texture = new ResourceLocation(BeyondEarthMod.MODID, "textures/screens/nasa_workbench.png");
 
 	public NasaWorkbenchGuiWindow(NasaWorkbenchGui.GuiContainer container, Inventory inventory, Component text) {
 		super(container, inventory, text);
