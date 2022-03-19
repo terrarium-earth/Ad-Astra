@@ -89,11 +89,11 @@ public class FlagBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 	}
 
 	static {
-		SOUTH_SHAPE = Shapes.join(SOUTH_SHAPE, Shapes.box(0.8125, 0, 0.46875, 0.875, 1, 0.53125), BooleanOp.OR);
-		SOUTH_SHAPE = Shapes.join(SOUTH_SHAPE, Shapes.box(0.0625, 0.4375, 0.4996875, 0.8125, 0.9375, 0.5), BooleanOp.OR);
-
 		NORTH_SHAPE = Shapes.join(NORTH_SHAPE, Shapes.box(0.125, 0, 0.46875, 0.1875, 1, 0.53125), BooleanOp.OR);
 		NORTH_SHAPE = Shapes.join(NORTH_SHAPE, Shapes.box(0.1875, 0.4375, 0.4996875, 0.9375, 0.9375, 0.5), BooleanOp.OR);
+
+		SOUTH_SHAPE = Shapes.join(SOUTH_SHAPE, Shapes.box(0.8125, 0, 0.46875, 0.875, 1, 0.53125), BooleanOp.OR);
+		SOUTH_SHAPE = Shapes.join(SOUTH_SHAPE, Shapes.box(0.0625, 0.4375, 0.4996875, 0.8125, 0.9375, 0.5), BooleanOp.OR);
 
 		EAST_SHAPE = Shapes.join(EAST_SHAPE, Shapes.box(0.46875, 0, 0.125, 0.53125, 1, 0.1875), BooleanOp.OR);
 		EAST_SHAPE = Shapes.join(EAST_SHAPE, Shapes.box(0.49975, 0.4375, 0.1875, 0.5000625, 0.9375, 0.9375), BooleanOp.OR);
@@ -101,11 +101,11 @@ public class FlagBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 		WEST_SHAPE = Shapes.join(WEST_SHAPE, Shapes.box(0.46875, 0, 0.8125, 0.53125, 1, 0.875), BooleanOp.OR);
 		WEST_SHAPE = Shapes.join(WEST_SHAPE, Shapes.box(0.49975, 0.4375, 0.0625, 0.5000625, 0.9375, 0.8125), BooleanOp.OR);
 
-		LOWER_SOUTH_SHAPE = Shapes.join(LOWER_SOUTH_SHAPE, Shapes.box(0.8125, 0.0625, 0.46875, 0.875, 1, 0.53125), BooleanOp.OR);
-		LOWER_SOUTH_SHAPE = Shapes.join(LOWER_SOUTH_SHAPE, Shapes.box(0.78125, 0, 0.4375, 0.90625, 0.0625, 0.5625), BooleanOp.OR);
-
 		LOWER_NORTH_SHAPE = Shapes.join(LOWER_NORTH_SHAPE, Shapes.box(0.125, 0.0625, 0.46875, 0.1875, 1, 0.53125), BooleanOp.OR);
 		LOWER_NORTH_SHAPE = Shapes.join(LOWER_NORTH_SHAPE, Shapes.box(0.09375, 0, 0.4375, 0.21875, 0.0625, 0.5625), BooleanOp.OR);
+
+		LOWER_SOUTH_SHAPE = Shapes.join(LOWER_SOUTH_SHAPE, Shapes.box(0.8125, 0.0625, 0.46875, 0.875, 1, 0.53125), BooleanOp.OR);
+		LOWER_SOUTH_SHAPE = Shapes.join(LOWER_SOUTH_SHAPE, Shapes.box(0.78125, 0, 0.4375, 0.90625, 0.0625, 0.5625), BooleanOp.OR);
 
 		LOWER_EAST_SHAPE = Shapes.join(LOWER_EAST_SHAPE, Shapes.box(0.46875, 0.0625, 0.125, 0.53125, 1, 0.1875), BooleanOp.OR);
 		LOWER_EAST_SHAPE = Shapes.join(LOWER_EAST_SHAPE, Shapes.box(0.4375, 0, 0.09375, 0.5625, 0.0625, 0.21875), BooleanOp.OR);

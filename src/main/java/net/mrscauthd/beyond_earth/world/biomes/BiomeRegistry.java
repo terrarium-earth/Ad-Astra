@@ -23,6 +23,7 @@ public class BiomeRegistry {
     public static Biome MOON;
 
     public static Biome MARS;
+    public static Biome MARS_ROCKY_PLAINS;
     public static Biome MARS_ICE_SPIKES;
 
     public static Biome VENUS;
@@ -59,6 +60,18 @@ public class BiomeRegistry {
 
             MARS = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(-0.7f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
             event.getRegistry().register(MARS.setRegistryName(BeyondEarthMod.MODID, "mars"));
+        }
+
+        if (MARS_ROCKY_PLAINS == null) {
+            BiomeSpecialEffects effects = new BiomeSpecialEffects.Builder().fogColor(-3044526).waterColor(4159204).waterFogColor(329011).skyColor(-3044526).foliageColorOverride(7842607).grassColorOverride(9551193).ambientParticle(new AmbientParticleSettings(ParticleTypes.CRIMSON_SPORE, 0.014f)).build();
+            BiomeGenerationSettings.Builder biomeGenerationSettings = new BiomeGenerationSettings.Builder();
+            addDefaultCarvers(biomeGenerationSettings);
+            addLushCavesVegetationFeatures(biomeGenerationSettings);
+            BiomeDefaultFeatures.addFossilDecoration(biomeGenerationSettings);
+            MobSpawnSettings mobSpawnInfo = (new MobSpawnSettings.Builder()).addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModInit.MARTIAN_RAPTOR.get(), 20, 5, 5)).addMobCharge(ModInit.MARTIAN_RAPTOR.get(), 0.7D, 0.15D).build();
+
+            MARS_ROCKY_PLAINS = new Biome.BiomeBuilder().precipitation(Biome.Precipitation.NONE).biomeCategory(Biome.BiomeCategory.NONE).mobSpawnSettings(mobSpawnInfo).temperature(-0.7f).downfall(0f).specialEffects(effects).generationSettings(biomeGenerationSettings.build()).build();
+            event.getRegistry().register(MARS_ROCKY_PLAINS.setRegistryName(BeyondEarthMod.MODID, "mars_rocky_plains"));
         }
 
         if (MARS_ICE_SPIKES == null) {

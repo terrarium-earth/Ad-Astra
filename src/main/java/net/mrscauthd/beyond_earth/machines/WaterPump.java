@@ -21,6 +21,11 @@ import net.mrscauthd.beyond_earth.machines.tile.WaterPumpBlockEntity;
 
 public class WaterPump extends AbstractMachineBlock<WaterPumpBlockEntity> {
 
+    public static VoxelShape SOUTH_SHAPE = Shapes.empty();
+    public static VoxelShape NORTH_SHAPE = Shapes.empty();
+    public static VoxelShape EAST_SHAPE = Shapes.empty();
+    public static VoxelShape WEST_SHAPE = Shapes.empty();
+
     public WaterPump(Properties properties) {
         super(properties);
     }
@@ -32,27 +37,44 @@ public class WaterPump extends AbstractMachineBlock<WaterPumpBlockEntity> {
 
     @Override
 	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        VoxelShape shape = Shapes.empty();
-
         switch (state.getValue(FACING)) {
-            case SOUTH :
-            default :
-                shape = Shapes.join(shape, Shapes.box(0.46875, 0.0625, 0.8125, 0.53125, 1, 0.875), BooleanOp.OR);//done
-                shape = Shapes.join(shape, Shapes.box(0.4375, 0, 0.78125, 0.5625, 0.0625, 0.90625), BooleanOp.OR);
-                return shape;
-            case NORTH :
-                shape = Shapes.join(shape, Shapes.box(0.125, 0.0625, 0.46875, 0.1875, 1, 0.53125), BooleanOp.OR);
-                shape = Shapes.join(shape, Shapes.box(0.09375, 0, 0.4375, 0.21875, 0.0625, 0.5625), BooleanOp.OR);//done
-                return shape;
-            case EAST :
-                shape = Shapes.join(shape, Shapes.box(0.8125, 0.0625, 0.46875, 0.875, 1, 0.53125), BooleanOp.OR);//done
-                shape = Shapes.join(shape, Shapes.box(0.78125, 0, 0.4375, 0.90625, 0.0625, 0.5625), BooleanOp.OR);
-                return shape;
-            case WEST :
-                shape = Shapes.join(shape, Shapes.box(0.46875, 0.0625, 0.125, 0.53125, 1, 0.1875), BooleanOp.OR);
-                shape = Shapes.join(shape, Shapes.box(0.4375, 0, 0.09375, 0.5625, 0.0625, 0.21875), BooleanOp.OR);
-                return shape;
+            case NORTH:
+            default:
+                return NORTH_SHAPE;
+            case SOUTH:
+                return SOUTH_SHAPE;
+            case EAST:
+                return EAST_SHAPE;
+            case WEST:
+                return WEST_SHAPE;
         }
+    }
+
+    static {
+        NORTH_SHAPE = Shapes.join(NORTH_SHAPE, Shapes.box(0.34375, 0, 0.34375, 0.65625, 0.0625, 0.65625), BooleanOp.OR);
+        NORTH_SHAPE = Shapes.join(NORTH_SHAPE, Shapes.box(0.343749, 0.34375, 0, 0.65625, 0.65625, 0.0625), BooleanOp.OR);
+        NORTH_SHAPE = Shapes.join(NORTH_SHAPE, Shapes.box(0.375, 0.375, 0.0625, 0.625, 0.625, 0.375), BooleanOp.OR);
+        NORTH_SHAPE = Shapes.join(NORTH_SHAPE, Shapes.box(0.34375, 0.8125, 0.34375, 0.65625, 1, 0.65625), BooleanOp.OR);
+        NORTH_SHAPE = Shapes.join(NORTH_SHAPE, Shapes.box(0.375, 0.0625, 0.375, 0.625, 0.8125, 0.625), BooleanOp.OR);
+
+        SOUTH_SHAPE = Shapes.join(SOUTH_SHAPE, Shapes.box(0.34375, 0, 0.34375, 0.65625, 0.0625, 0.65625), BooleanOp.OR);
+        SOUTH_SHAPE = Shapes.join(SOUTH_SHAPE, Shapes.box(0.343749, 0.34375, 0.9375, 0.65625, 0.65625, 1), BooleanOp.OR);
+        SOUTH_SHAPE = Shapes.join(SOUTH_SHAPE, Shapes.box(0.375, 0.375, 0.625, 0.625, 0.625, 0.9375), BooleanOp.OR);
+        SOUTH_SHAPE = Shapes.join(SOUTH_SHAPE, Shapes.box(0.34375, 0.8125, 0.34375, 0.65625, 1, 0.65625), BooleanOp.OR);
+        SOUTH_SHAPE = Shapes.join(SOUTH_SHAPE, Shapes.box(0.375, 0.0625, 0.375, 0.625, 0.8125, 0.625), BooleanOp.OR);
+
+        EAST_SHAPE = Shapes.join(EAST_SHAPE, Shapes.box(0.34375, 0, 0.34375, 0.65625, 0.0625, 0.65625), BooleanOp.OR);
+        EAST_SHAPE = Shapes.join(EAST_SHAPE, Shapes.box(0.9375, 0.34375, 0.343749, 1, 0.65625, 0.65625), BooleanOp.OR);
+        EAST_SHAPE = Shapes.join(EAST_SHAPE, Shapes.box(0.625, 0.375, 0.375, 0.9375, 0.625, 0.625), BooleanOp.OR);
+        EAST_SHAPE = Shapes.join(EAST_SHAPE, Shapes.box(0.34375, 0.8125, 0.34375, 0.65625, 1, 0.65625), BooleanOp.OR);
+        EAST_SHAPE = Shapes.join(EAST_SHAPE, Shapes.box(0.375, 0.0625, 0.375, 0.625, 0.8125, 0.625), BooleanOp.OR);
+
+        WEST_SHAPE = Shapes.join(WEST_SHAPE, Shapes.box(0.34375, 0, 0.34375, 0.65625, 0.0625, 0.65625), BooleanOp.OR);
+        WEST_SHAPE = Shapes.join(WEST_SHAPE, Shapes.box(0, 0.34375, 0.343749, 0.0625, 0.65625, 0.65625), BooleanOp.OR);
+        WEST_SHAPE = Shapes.join(WEST_SHAPE, Shapes.box(0.0625, 0.375, 0.375, 0.375, 0.625, 0.625), BooleanOp.OR);
+        WEST_SHAPE = Shapes.join(WEST_SHAPE, Shapes.box(0.34375, 0.8125, 0.34375, 0.65625, 1, 0.65625), BooleanOp.OR);
+        WEST_SHAPE = Shapes.join(WEST_SHAPE, Shapes.box(0.375, 0.0625, 0.375, 0.625, 0.8125, 0.625), BooleanOp.OR);
+
     }
 
     @Override

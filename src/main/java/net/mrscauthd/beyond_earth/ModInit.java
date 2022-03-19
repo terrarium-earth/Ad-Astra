@@ -26,6 +26,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.levelgen.*;
 import net.minecraft.world.level.levelgen.feature.*;
+import net.minecraft.world.level.levelgen.feature.configurations.BlockStateConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.ColumnFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.placement.*;
@@ -59,6 +60,7 @@ import net.mrscauthd.beyond_earth.crafting.RocketPart;
 import net.mrscauthd.beyond_earth.crafting.SpaceStationRecipeSerializer;
 import net.mrscauthd.beyond_earth.effects.OxygenEffect;
 import net.mrscauthd.beyond_earth.entity.*;
+import net.mrscauthd.beyond_earth.feature.MarsBlockBlobFeature;
 import net.mrscauthd.beyond_earth.feature.MarsIceSpikeFeature;
 import net.mrscauthd.beyond_earth.feature.VenusDeltas;
 import net.mrscauthd.beyond_earth.flag.FlagTileEntity;
@@ -569,12 +571,22 @@ public class ModInit {
     public static Holder<PlacedFeature> VENUS_DELTAS_BIG;
     public static VenusDeltas VENUS_DELTAS_FEATURE;
 
+    //MARS ROCK
+    public static Holder<PlacedFeature> MARS_ROCK;
+    public static MarsBlockBlobFeature MARS_BLOCK_BLOB_FEATURE;
+
+
     @SubscribeEvent
     public static void RegistryFeature(RegistryEvent.Register<Feature<?>> feature) {
         //MARS ICE SPIKE
         MARS_ICE_SPIKE_FEATURE = new MarsIceSpikeFeature(NoneFeatureConfiguration.CODEC);
         MARS_ICE_SPIKE_FEATURE.setRegistryName(BeyondEarthMod.MODID, "mars_ice_spike");
         feature.getRegistry().register(MARS_ICE_SPIKE_FEATURE);
+
+        //MARS BLOCK BLOB
+        MARS_BLOCK_BLOB_FEATURE = new MarsBlockBlobFeature(BlockStateConfiguration.CODEC);
+        MARS_BLOCK_BLOB_FEATURE.setRegistryName(BeyondEarthMod.MODID, "mars_block_blob");
+        feature.getRegistry().register(MARS_BLOCK_BLOB_FEATURE);
 
         //VENUS DELTAS
         VENUS_DELTAS_FEATURE = new VenusDeltas(ColumnFeatureConfiguration.CODEC);
@@ -608,6 +620,9 @@ public class ModInit {
             //Mars Ice Spikes
             MARS_ICE_SPIKE = PlacementUtils.register("mars_ice_spike", FeatureUtils.register("mars_ice_spike", MARS_ICE_SPIKE_FEATURE), CountPlacement.of(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 
+            //Mars Rock //TODO REPLACE it laiter with the new block
+            MARS_ROCK = PlacementUtils.register("mars_rock", FeatureUtils.register("mars_rock", MARS_BLOCK_BLOB_FEATURE, new BlockStateConfiguration(Blocks.POLISHED_GRANITE.defaultBlockState())), CountPlacement.of(2), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
+
             //Venus Deltas
             VENUS_DELTAS_SMALL = PlacementUtils.register("venus_deltas_small", FeatureUtils.register("venus_deltas_small", VENUS_DELTAS_FEATURE, new ColumnFeatureConfiguration(ConstantInt.of(1), UniformInt.of(1, 4))), CountOnEveryLayerPlacement.of(4), BiomeFilter.biome());
             VENUS_DELTAS_BIG = PlacementUtils.register("venus_deltas_big", FeatureUtils.register("venus_deltas_big", VENUS_DELTAS_FEATURE, new ColumnFeatureConfiguration(UniformInt.of(2, 3), UniformInt.of(5, 10))), CountOnEveryLayerPlacement.of(2), BiomeFilter.biome());
@@ -618,6 +633,11 @@ public class ModInit {
         //Mars ice Spikes
         if (event.getName().getPath().equals(BiomeRegistry.MARS_ICE_SPIKES.getRegistryName().getPath())) {
             event.getGeneration().addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, MARS_ICE_SPIKE);
+        }
+
+        //Rocky Mars
+        if (event.getName().getPath().equals(BiomeRegistry.MARS_ROCKY_PLAINS.getRegistryName().getPath())) {
+            event.getGeneration().addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, MARS_ROCK);
         }
 
         //Venus Deltas
