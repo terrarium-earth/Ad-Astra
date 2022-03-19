@@ -9,7 +9,7 @@ import net.mrscauthd.beyond_earth.events.forgeevents.LivingGravityEvent;
 
 public class Gravity {
 
-    public static void Gravity(LivingEntity entity, GravityType type, Level world) {
+    public static void gravity(LivingEntity entity, GravityType type, Level world) {
         float moon = 0.03F;
         float mars = 0.04F;
         float mercury = 0.03F;

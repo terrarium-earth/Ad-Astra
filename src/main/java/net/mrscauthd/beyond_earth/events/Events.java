@@ -16,6 +16,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.mrscauthd.beyond_earth.BeyondEarthMod;
 import net.mrscauthd.beyond_earth.entity.*;
+import net.mrscauthd.beyond_earth.events.forgeevents.ItemTickEvent;
 
 @Mod.EventBusSubscriber(modid = BeyondEarthMod.MODID)
 public class Events {
@@ -57,9 +58,9 @@ public class Events {
 
         //Gravity Method Call
         if (entity instanceof Player) {
-            Gravity.Gravity(entity, Gravity.GravityType.PLAYER, world);
+            Gravity.gravity(entity, Gravity.GravityType.PLAYER, world);
         } else {
-            Gravity.Gravity(entity, Gravity.GravityType.LIVING, world);
+            Gravity.gravity(entity, Gravity.GravityType.LIVING, world);
         }
 
         //Venus Rain
@@ -68,6 +69,11 @@ public class Events {
         //Venus Fire
         Methods.planetFire(entity, Methods.venus);
         Methods.planetFire(entity, Methods.mercury);
+    }
+
+    @SubscribeEvent
+    public static void onItemEntityTick(ItemTickEvent event) {
+        ItemGravity.itemGravity(event.getEntityItem());
     }
 
     @SubscribeEvent
