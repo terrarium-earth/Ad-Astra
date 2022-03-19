@@ -63,45 +63,44 @@ public class FlagBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
 		if (state.getValue(HALF) == DoubleBlockHalf.LOWER) {
 			switch (state.getValue(FACING)) {
-				case SOUTH:
-				default :
-					return LOWER_SOUTH_SHAPE;
-				case NORTH :
+				case NORTH:
+				default:
 					return LOWER_NORTH_SHAPE;
-				case EAST :
+				case SOUTH:
+					return LOWER_SOUTH_SHAPE;
+				case EAST:
 					return LOWER_EAST_SHAPE;
-				case WEST :
+				case WEST:
 					return LOWER_WEST_SHAPE;
 			}
 		} else {
 			switch (state.getValue(FACING)) {
-				case SOUTH:
-				default :
-					return SOUTH_SHAPE;
-				case NORTH :
+				case NORTH:
+				default:
 					return NORTH_SHAPE;
-				case EAST :
+				case SOUTH:
+					return SOUTH_SHAPE;
+				case EAST:
 					return EAST_SHAPE;
-				case WEST :
+				case WEST:
 					return WEST_SHAPE;
 			}
 		}
 	}
 
 	static {
-		SOUTH_SHAPE = Shapes.join(SOUTH_SHAPE, Shapes.box(0.125, 0.0625, 0.46875, 0.1875, 1, 0.53125), BooleanOp.OR);
-		SOUTH_SHAPE = Shapes.join(SOUTH_SHAPE, Shapes.box(0.09375, 0, 0.4375, 0.21875, 0.0625, 0.5625), BooleanOp.OR);
+		SOUTH_SHAPE = Shapes.join(SOUTH_SHAPE, Shapes.box(0.8125, 0, 0.46875, 0.875, 1, 0.53125), BooleanOp.OR);
+		SOUTH_SHAPE = Shapes.join(SOUTH_SHAPE, Shapes.box(0.0625, 0.4375, 0.4996875, 0.8125, 0.9375, 0.5), BooleanOp.OR);
 
 		NORTH_SHAPE = Shapes.join(NORTH_SHAPE, Shapes.box(0.125, 0, 0.46875, 0.1875, 1, 0.53125), BooleanOp.OR);
-		NORTH_SHAPE = Shapes.join(NORTH_SHAPE, Shapes.box(0.1875, 0.4375, 0.49968749999999995, 0.9375, 0.9375, 0.5003124999999999), BooleanOp.OR);
+		NORTH_SHAPE = Shapes.join(NORTH_SHAPE, Shapes.box(0.1875, 0.4375, 0.4996875, 0.9375, 0.9375, 0.5), BooleanOp.OR);
 
-		EAST_SHAPE = Shapes.join(EAST_SHAPE, Shapes.box(0.46875, 0.0625, 0.125, 0.53125, 1, 0.1875), BooleanOp.OR);
-		EAST_SHAPE = Shapes.join(EAST_SHAPE, Shapes.box(0.4375, 0, 0.09375, 0.5625, 0.0625, 0.21875), BooleanOp.OR);
+		EAST_SHAPE = Shapes.join(EAST_SHAPE, Shapes.box(0.46875, 0, 0.125, 0.53125, 1, 0.1875), BooleanOp.OR);
+		EAST_SHAPE = Shapes.join(EAST_SHAPE, Shapes.box(0.49975, 0.4375, 0.1875, 0.5000625, 0.9375, 0.9375), BooleanOp.OR);
 
-		WEST_SHAPE = Shapes.join(WEST_SHAPE, Shapes.box(0.46875, 0.0625, 0.8125, 0.53125, 1, 0.875), BooleanOp.OR);
-		WEST_SHAPE = Shapes.join(WEST_SHAPE, Shapes.box(0.4375, 0, 0.78125, 0.5625, 0.0625, 0.90625), BooleanOp.OR);
+		WEST_SHAPE = Shapes.join(WEST_SHAPE, Shapes.box(0.46875, 0, 0.8125, 0.53125, 1, 0.875), BooleanOp.OR);
+		WEST_SHAPE = Shapes.join(WEST_SHAPE, Shapes.box(0.49975, 0.4375, 0.0625, 0.5000625, 0.9375, 0.8125), BooleanOp.OR);
 
-		//DONE
 		LOWER_SOUTH_SHAPE = Shapes.join(LOWER_SOUTH_SHAPE, Shapes.box(0.8125, 0.0625, 0.46875, 0.875, 1, 0.53125), BooleanOp.OR);
 		LOWER_SOUTH_SHAPE = Shapes.join(LOWER_SOUTH_SHAPE, Shapes.box(0.78125, 0, 0.4375, 0.90625, 0.0625, 0.5625), BooleanOp.OR);
 
