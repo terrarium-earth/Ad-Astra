@@ -48,7 +48,6 @@ import net.mrscauthd.beyond_earth.entity.renderer.starcrawler.StarCrawlerModel;
 import net.mrscauthd.beyond_earth.entity.renderer.starcrawler.StarCrawlerRenderer;
 import net.mrscauthd.beyond_earth.gui.screens.coalgenerator.CoalGeneratorGuiWindow;
 import net.mrscauthd.beyond_earth.gui.screens.compressor.CompressorGuiWindow;
-import net.mrscauthd.beyond_earth.gui.screens.energyrouter.EnergyRouterGuiWindow;
 import net.mrscauthd.beyond_earth.gui.screens.fuelrefinery.FuelRefineryGuiWindow;
 import net.mrscauthd.beyond_earth.gui.screens.lander.LanderGuiWindow;
 import net.mrscauthd.beyond_earth.gui.screens.nasaworkbench.NasaWorkbenchGuiWindow;
@@ -127,7 +126,6 @@ public class ClientEventBusSubscriber {
 		MenuScreens.register(ModInit.OXYGEN_LOADER_GUI.get(), OxygenLoaderGuiWindow::new);
 		MenuScreens.register(ModInit.SOLAR_PANEL_GUI.get(), SolarPanelGuiWindow::new);
 		MenuScreens.register(ModInit.WATER_PUMP_GUI.get(), WaterPumpGuiWindow::new);
-		MenuScreens.register(ModInit.ENERGY_ROUTER_GUI.get(), EnergyRouterGuiWindow::new);
 		MenuScreens.register(ModInit.OXYGEN_BUBBLE_DISTRIBUTOR_GUI.get(), OxygenBubbleDistributorGuiWindow::new);
 		MenuScreens.register(ModInit.LANDER_GUI.get(), LanderGuiWindow::new);
 		MenuScreens.register(ModInit.ROVER_GUI.get(), RoverGuiWindow::new);
