@@ -193,5 +193,4 @@ public class WaterPumpBlockEntity extends AbstractMachineBlockEntity {
     public boolean hasSpaceInOutput() {
         return false;
     }
-
 }

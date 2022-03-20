@@ -73,5 +73,4 @@ public class WaterPumpGuiWindow extends AbstractContainerScreen<WaterPumpGui.Gui
 		GuiHelper.drawEnergy(ms, this.leftPos + ENERGY_LEFT, this.topPos + ENERGY_TOP, blockEntity.getPrimaryEnergyStorage());
 		GuiHelper.drawFluidTank(ms, this.leftPos + WATER_TANK_LEFT, this.topPos + WATER_TANK_TOP, blockEntity.getWaterTank());
 	}
-
 }

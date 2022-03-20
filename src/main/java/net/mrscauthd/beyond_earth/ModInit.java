@@ -69,6 +69,7 @@ import net.mrscauthd.beyond_earth.flag.FlagTileEntity;
 import net.mrscauthd.beyond_earth.fluid.OilFluid;
 import net.mrscauthd.beyond_earth.gui.screens.coalgenerator.CoalGeneratorGui;
 import net.mrscauthd.beyond_earth.gui.screens.compressor.CompressorGui;
+import net.mrscauthd.beyond_earth.gui.screens.energyrouter.EnergyRouterGui;
 import net.mrscauthd.beyond_earth.gui.screens.fuelrefinery.FuelRefineryGui;
 import net.mrscauthd.beyond_earth.gui.screens.lander.LanderGui;
 import net.mrscauthd.beyond_earth.gui.screens.nasaworkbench.NasaWorkbenchGui;
@@ -507,6 +508,7 @@ public class ModInit {
     public static final RegistryObject<MenuType<OxygenLoaderGui.GuiContainer>> OXYGEN_LOADER_GUI = GUIS.register("oxygen_loader_gui", () -> new MenuType(new OxygenLoaderGui.GuiContainerFactory()));
     public static final RegistryObject<MenuType<SolarPanelGui.GuiContainer>> SOLAR_PANEL_GUI = GUIS.register("solar_panel_gui", () -> new MenuType(new SolarPanelGui.GuiContainerFactory()));
     public static final RegistryObject<MenuType<WaterPumpGui.GuiContainer>> WATER_PUMP_GUI = GUIS.register("water_pump_gui", () -> new MenuType(new WaterPumpGui.GuiContainerFactory()));
+    public static final RegistryObject<MenuType<EnergyRouterGui.GuiContainer>> ENERGY_ROUTER_GUI = GUIS.register("energy_router_gui", () -> new MenuType(new EnergyRouterGui.GuiContainerFactory()));
     public static final RegistryObject<MenuType<OxygenBubbleDistributorGui.GuiContainer>> OXYGEN_BUBBLE_DISTRIBUTOR_GUI = GUIS.register("oxygen_bubble_distributor_gui", () -> new MenuType(new OxygenBubbleDistributorGui.GuiContainerFactory()));
     public static final RegistryObject<MenuType<LanderGui.GuiContainer>> LANDER_GUI = GUIS.register("lander_gui", () -> new MenuType(new LanderGui.GuiContainerFactory()));
     public static final RegistryObject<MenuType<RoverGui.GuiContainer>> ROVER_GUI = GUIS.register("rover_gui", () -> new MenuType(new RoverGui.GuiContainerFactory()));
