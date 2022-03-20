@@ -11,7 +11,11 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.EnergyStorage;
+import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.mrscauthd.beyond_earth.ModInit;
+import net.mrscauthd.beyond_earth.machines.tile.PowerSystem;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -157,13 +161,27 @@ public class EnergyCableTileEntity extends BlockEntity implements BlockEntityTic
                 .orElse(0);
     }
 
-    @Nonnull
     @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-
-        if(cap == CapabilityEnergy.ENERGY) {
-            return LazyOptional.of(() -> this.ENERGY).cast();
+    public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction facing) {
+        if (!this.isRemoved()) {
+             if (capability == CapabilityEnergy.ENERGY) {
+                LazyOptional<T> optional = this.getCapabilityEnergy(capability, facing);
+                if (optional != null && optional.isPresent()) {
+                    return optional;
+                }
+            }
         }
-        return null;
+
+        return super.getCapability(capability, facing);
+    }
+
+    public <T> LazyOptional<T> getCapabilityEnergy(Capability<T> capability, @Nullable Direction facing) {
+        IEnergyStorage energyStorage = ENERGY;
+
+        if (energyStorage != null) {
+            return LazyOptional.of(() -> energyStorage).cast();
+        }
+
+        return LazyOptional.empty();
     }
 }

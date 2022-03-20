@@ -4,7 +4,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -65,7 +64,7 @@ public class EnergyCable extends BaseEntityBlock implements SimpleWaterloggedBlo
                         if (!(x.getValue().contains(p))) {
                             ALREADY_EXIST = false;
                             System.out.println("exist");
-                            worldIn.setBlock(p, Blocks.DIAMOND_BLOCK.defaultBlockState(), 2);
+                            //worldIn.setBlock(p, Blocks.DIAMOND_BLOCK.defaultBlockState(), 2);
                         } else {
                             System.out.println("don't exist");
                         }
