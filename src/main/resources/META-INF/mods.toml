@@ -4,7 +4,7 @@ license="All Rights Reserved unless otherwise explicitly stated"
 
 [[mods]]
 modId="beyond_earth"
-version="6.0j"
+version="6.0k"
 displayName="Beyond Earth"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/beyond-earth"
 logoFile="logo.png"
@@ -23,6 +23,6 @@ Fly to Other Planets and Beyond!
 [[dependencies.beyond_earth]]
     modId="forge"
     mandatory=true
-    versionRange="[40.0.12,]"
+    versionRange="[40.0.18,]"
     ordering="NONE"
     side="BOTH"

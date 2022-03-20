@@ -249,7 +249,7 @@ public abstract class AbstractMachineBlockEntity extends RandomizableContainerBl
 		boolean result = this.onCanPlaceItemThroughFace(index, stack, direction);
 
 		// Check required because Hopper, it can ignore inventory stack limit
-		if (result == true) {
+		if (result) {
 			ItemStack stackInSlot = this.getItem(index);
 
 			if (!stackInSlot.isEmpty() && ItemHandlerHelper.canItemStacksStack(stackInSlot, stack)) {

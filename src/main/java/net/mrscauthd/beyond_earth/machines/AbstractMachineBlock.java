@@ -58,11 +58,11 @@ public abstract class AbstractMachineBlock<T extends AbstractMachineBlockEntity>
 	protected BlockState buildDefaultState() {
 		BlockState any = this.stateDefinition.any();
 
-		if (this.useFacing() == true) {
+		if (this.useFacing()) {
 			any = any.setValue(FACING, Direction.NORTH);
 		}
 
-		if (this.useLit() == true) {
+		if (this.useLit()) {
 			any = any.setValue(LIT, false);
 		}
 
@@ -73,11 +73,11 @@ public abstract class AbstractMachineBlock<T extends AbstractMachineBlockEntity>
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		super.createBlockStateDefinition(builder);
 
-		if (this.useFacing() == true) {
+		if (this.useFacing()) {
 			builder.add(FACING);
 		}
 
-		if (this.useLit() == true) {
+		if (this.useLit()) {
 			builder.add(LIT);
 		}
 
@@ -85,7 +85,7 @@ public abstract class AbstractMachineBlock<T extends AbstractMachineBlockEntity>
 
 	@Override
 	public BlockState rotate(BlockState state, Rotation rotation) {
-		if (this.useFacing() == true) {
+		if (this.useFacing()) {
 			return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
 		} else {
 			return state;
@@ -97,7 +97,7 @@ public abstract class AbstractMachineBlock<T extends AbstractMachineBlockEntity>
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		BlockState state = this.defaultBlockState();
 
-		if (this.useFacing() == true) {
+		if (this.useFacing()) {
 			return state.setValue(FACING, context.getHorizontalDirection().getOpposite());
 		} else {
 			return state;

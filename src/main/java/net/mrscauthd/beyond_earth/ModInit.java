@@ -43,6 +43,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.*;
 import net.mrscauthd.beyond_earth.armor.SpaceSuit;
 import net.mrscauthd.beyond_earth.block.*;
+import net.mrscauthd.beyond_earth.cable.EnergyCable;
+import net.mrscauthd.beyond_earth.cable.EnergyCableTileEntity;
 import net.mrscauthd.beyond_earth.crafting.AlienTradingRecipeDyedItem;
 import net.mrscauthd.beyond_earth.crafting.AlienTradingRecipeEnchantedBook;
 import net.mrscauthd.beyond_earth.crafting.AlienTradingRecipeEnchantedItem;
@@ -198,7 +200,7 @@ public class ModInit {
     public static final RegistryObject<BlockEntityType<?>> WATER_PUMP = TILE_ENTITIES.register("water_pump", () -> BlockEntityType.Builder.of(WaterPumpBlockEntity::new, ModInit.WATER_PUMP_BLOCK.get()).build(null));
 
 
-    //Tile Entitys Flags
+    //Tile Entities Flags
     public static final RegistryObject<BlockEntityType<FlagTileEntity>> FLAG = TILE_ENTITIES.register("flag", () -> BlockEntityType.Builder.of(FlagTileEntity::new, ModInit.FLAG_BLOCK.get(), ModInit.FLAG_BLUE_BLOCK.get(), ModInit.FLAG_BROWN_BLOCK.get(), ModInit.FLAG_CYAN_BLOCK.get(), ModInit.FLAG_GRAY_BLOCK.get(), ModInit.FLAG_GRAY_BLOCK.get(), ModInit.FLAG_GREEN_BLOCK.get(), ModInit.FLAG_LIGHT_BLUE_BLOCK.get(), ModInit.FLAG_LIME_BLOCK.get(), ModInit.FLAG_MAGENTA_BLOCk.get(), ModInit.FLAG_ORANGE_BLOCK.get(), ModInit.FLAG_PINK_BLOCK.get(), ModInit.FLAG_PURPLE_BLOCK.get(), ModInit.FLAG_RED_BLOCK.get(), ModInit.FLAG_YELLOW_BLOCK.get()).build(null));
 
     //Machines
@@ -210,6 +212,12 @@ public class ModInit {
     public static final RegistryObject<Block> NASA_WORKBENCH_BLOCK = BLOCKS.register("nasa_workbench",() -> new NASAWorkbenchBlock(Block.Properties.of(Material.METAL).sound(SoundType.METAL).strength(5f, 1f).requiresCorrectToolForDrops().noOcclusion().isRedstoneConductor((bs, br, bp) -> false)));
     public static final RegistryObject<Block> OXYGEN_BUBBLE_DISTRIBUTOR_BLOCK = BLOCKS.register("oxygen_bubble_distributor",() -> new OxygenBubbleDistributorBlock(Block.Properties.of(Material.METAL).sound(SoundType.METAL).strength(5f, 1f).requiresCorrectToolForDrops()));
     public static final RegistryObject<Block> WATER_PUMP_BLOCK = BLOCKS.register("water_pump",() -> new WaterPump(BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.METAL).noOcclusion().strength(5f, 1f).requiresCorrectToolForDrops()));
+
+    //Cable
+    public static final RegistryObject<Block> ENERGY_CABLE_BLOCK = BLOCKS.register("energy_cable",() -> new EnergyCable(BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.METAL).noOcclusion().strength(5f, 1f).requiresCorrectToolForDrops()));
+    public static final RegistryObject<BlockEntityType<EnergyCableTileEntity>> ENERGY_CABLE = TILE_ENTITIES.register("energy_cable", () -> BlockEntityType.Builder.of(EnergyCableTileEntity::new, ModInit.ENERGY_CABLE_BLOCK.get()).build(null));
+
+    public static final RegistryObject<BlockItem> ENERGY_CABLE_ITEM = ITEMS.register("energy_cable", () -> new BlockItem(ModInit.ENERGY_CABLE_BLOCK.get(), new Item.Properties().tab(ItemGroups.tab_blocks)));
 
 
     //Block Item
