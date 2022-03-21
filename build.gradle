@@ -1,126 +1,63 @@
-buildscript {
-    repositories {
-        maven { url = 'https://maven.minecraftforge.net' }
-        maven { url = 'https://repo.spongepowered.org/maven' }
-        mavenCentral()
-    }
-    dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
-    }
+plugins {
+	id 'fabric-loom' version '0.11-SNAPSHOT'
+	id 'maven-publish'
 }
+
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
+
+archivesBaseName = project.archives_base_name
+version = project.mod_version
+group = project.maven_group
 
 repositories {
-  maven {
-    name = "Progwml6 maven"
-    url = "https://dvs1.progwml6.com/files/maven/"
-  }
-  maven {
-    name = "ModMaven"
-    url = "https://modmaven.k-4u.nl/"
-  }
-}
-
-repositories {
-    maven {
-        url = "https://www.cursemaven.com"
-    }
-}
-
-apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'eclipse'
-apply plugin: 'org.spongepowered.mixin'
-
-version = '1.0'
-group = 'com.yourname.modid'
-archivesBaseName = 'modid'
-
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
-
-minecraft {
-    mappings channel: 'official', version: '1.18.2'
-    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
-
-    runs {
-        client {
-            workingDirectory project.file('run')
-
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            arg "-mixin.config=beyond_earth.mixin.json"
-
-            mods {
-                examplemod {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        server {
-            workingDirectory project.file('run')
-
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            arg "-mixin.config=beyond_earth.mixin.json"
-
-            mods {
-                examplemod {
-                    source sourceSets.main
-                }
-            }
-        }
-    }
+	maven { url "https://maven.shedaniel.me/" }
+	maven { url "https://maven.terraformersmc.com" }
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.18.2-40.0.18'
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    //Mixin
-    if (System.getProperty("idea.sync.active") != "true") {
-        annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
-    }
+	modApi("com.terraformersmc:modmenu:${project.modmenu_version}")
 
-    //JEI
-    compileOnly fg.deobf("mezz.jei:jei-1.18.2:9.4.3.122:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-1.18.2:9.4.3.122")
+	modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
 
-    //The One Probe
-    implementation fg.deobf("curse.maven:the-one-probe-245211:3671753")
-    
-    //Jade
-    implementation fg.deobf("curse.maven:jade-324717:3671210")
-
-    //TConstruct
-    //implementation fg.deobf("slimeknights.mantle:Mantle:1.18.1-1.7.29")
-    //implementation fg.deobf("slimeknights.tconstruct:TConstruct:1.18.1-3.3.2.28")
-
-
-  //Mekanism
-  //compileOnly fg.deobf("mekanism:Mekanism:1.18.1-10.1.1")
-  //runtimeOnly fg.deobf("mekanism:Mekanism:1.18.1-10.1.1")
-  //runtimeOnly fg.deobf("mekanism:Mekanism:1.18.1-10.1.1:additions")
-  //runtimeOnly fg.deobf("mekanism:Mekanism:1.18.1-10.1.1:generators")
-  //runtimeOnly fg.deobf("mekanism:Mekanism:1.18.1-10.1.1:tools")
-
+	modCompileOnly "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
+	modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
 }
 
-mixin {
-    add sourceSets.main, "beyond_earth.mixin-refmap.json"
+processResources {
+	inputs.property "version", project.version
+
+	filesMatching("fabric.mod.json") {
+		expand "version": project.version
+	}
 }
 
-jar.finalizedBy('reobfJar')
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 17
+}
+
+java {
+	withSourcesJar()
+}
 
 jar {
-    manifest {
-        attributes([
-                "Specification-Title": "beyond_earth",
-                "Specification-Vendor": "MrScautHD",
-                "Specification-Version": "1",
-                "Implementation-Title": project.name,
-                "Implementation-Version": "${version}",
-                "Implementation-Vendor" :"MrScautHD",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "MixinConfigs" : "beyond_earth.mixin.json"
-        ])
-    }
+	from("LICENSE") {
+		rename { "${it}_${project.archivesBaseName}"}
+	}
+}
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			from components.java
+		}
+	}
+	repositories {
+	}
 }

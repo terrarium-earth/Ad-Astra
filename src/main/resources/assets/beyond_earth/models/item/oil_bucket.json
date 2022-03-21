@@ -1,5 +1,6 @@
 {
-  "parent": "forge:item/bucket_drip",
-  "loader": "forge:bucket",
-  "fluid": "beyond_earth:oil"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "beyond_earth:items/oil_bucket"
+  }
 }

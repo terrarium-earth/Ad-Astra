@@ -1,9 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "#forge:storage_blocks/desh",
-    "#forge:storage_blocks/ostrum",
-    "#forge:storage_blocks/calorite",
-    "#forge:storage_blocks/steel"
-  ]
-}

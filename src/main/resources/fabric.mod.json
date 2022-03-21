@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "beyond_earth",
+  "version": "${version}",
+
+  "name": "Beyond Earth",
+  "description": "Fly to Other Planets and Beyond!",
+  "authors": [
+    "TODO"
+  ],
+  "contact": {
+    "homepage": "",
+    "sources": "https://github.com/MrScautHD/Beyond-Earth"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/beyond_earth/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.mrscauthd.beyond_earth.BeyondEarth"
+    ],
+    "client": [
+      "net.mrscauthd.beyond_earth.client.BeyondEarthClient"
+    ]
+  },
+  "mixins": [
+    "beyond_earth.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.13.3",
+    "fabric": "*",
+    "minecraft": "1.18.x",
+    "java": ">=17"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}

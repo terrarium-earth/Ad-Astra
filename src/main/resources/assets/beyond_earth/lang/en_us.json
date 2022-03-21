@@ -64,13 +64,13 @@
   "item.beyond_earth.calorite_tank": "Calorite Tank",
 
 
-  "itemGroup.tab_normal": "Beyond Earth",
-  "itemGroup.tab_flags": "Beyond Earth: Flags",
-  "itemGroup.tab_blocks": "Beyond Earth: Blocks",
-  "itemGroup.tab_basics": "Beyond Earth: Basics",
-  "itemGroup.tab_machines": "Beyond Earth: Machines",
-  "itemGroup.tab_spawn_eggs": "Beyond Earth: Spawn Eggs",
-  "itemGroup.tab_materials": "Beyond Earth: Materials",
+  "itemGroup.beyond_earth.tab_normal": "Beyond Earth",
+  "itemGroup.beyond_earth.tab_flags": "Beyond Earth: Flags",
+  "itemGroup.beyond_earth.tab_blocks": "Beyond Earth: Blocks",
+  "itemGroup.beyond_earth.tab_basics": "Beyond Earth: Basics",
+  "itemGroup.beyond_earth.tab_machines": "Beyond Earth: Machines",
+  "itemGroup.beyond_earth.tab_spawn_eggs": "Beyond Earth: Spawn Eggs",
+  "itemGroup.beyond_earth.tab_materials": "Beyond Earth: Materials",
 
   "block.beyond_earth.coal_lantern": "Coal Lantern",
   "block.beyond_earth.oxygen_bubble_distributor": "Oxygen Bubble Distributor",
