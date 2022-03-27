@@ -1,0 +1,36 @@
+{
+  "group": "beyond_earth",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "012",
+    "3 5",
+    "6 8"
+  ],
+  "key": {
+    "0": {
+      "tag": "c:iron_plates"
+    },
+    "1": {
+      "item": "minecraft:white_wool"
+    },
+    "2": {
+      "tag": "c:iron_plates"
+    },
+    "3": {
+      "item": "minecraft:white_wool"
+    },
+    "5": {
+      "item": "minecraft:white_wool"
+    },
+    "6": {
+      "tag": "c:iron_plates"
+    },
+    "8": {
+      "tag": "c:iron_plates"
+    }
+  },
+  "result": {
+    "item": "beyond_earth:space_pants",
+    "count": 1
+  }
+}

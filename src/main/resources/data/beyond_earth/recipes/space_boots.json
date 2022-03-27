@@ -1,0 +1,26 @@
+{
+  "group": "beyond_earth",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "0 2",
+    "3 5"
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:white_wool"
+    },
+    "2": {
+      "item": "minecraft:white_wool"
+    },
+    "3": {
+      "tag": "c:iron_plates"
+    },
+    "5": {
+      "tag": "c:iron_plates"
+    }
+  },
+  "result": {
+    "item": "beyond_earth:space_boots",
+    "count": 1
+  }
+}

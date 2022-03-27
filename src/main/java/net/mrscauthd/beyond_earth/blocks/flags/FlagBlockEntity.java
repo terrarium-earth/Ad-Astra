@@ -11,7 +11,7 @@ import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.util.StringHelper;
 import net.minecraft.util.math.BlockPos;
-import net.mrscauthd.beyond_earth.registry.ModBlocks;
+import net.mrscauthd.beyond_earth.registry.ModBlockEntities;
 import org.jetbrains.annotations.Nullable;
 
 public class FlagBlockEntity extends BlockEntity {
@@ -21,7 +21,7 @@ public class FlagBlockEntity extends BlockEntity {
     private GameProfile owner;
 
     public FlagBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlocks.FLAG_BLOCK_ENTITY, pos, state);
+        super(ModBlockEntities.FLAG_BLOCK_ENTITY, pos, state);
     }
 
     @Override

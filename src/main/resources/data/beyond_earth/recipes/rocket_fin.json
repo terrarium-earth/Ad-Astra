@@ -1,0 +1,36 @@
+{
+  "group": "beyond_earth",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " 1 ",
+    "345",
+    "678"
+  ],
+  "key": {
+    "1": {
+      "tag": "c:steel_ingots"
+    },
+    "3": {
+      "tag": "c:iron_plates"
+    },
+    "4": {
+      "tag": "c:steel_ingots"
+    },
+    "5": {
+      "tag": "c:iron_plates"
+    },
+    "6": {
+      "tag": "beyond_earth:compresseds/steel"
+    },
+    "7": {
+      "tag": "c:steel_ingots"
+    },
+    "8": {
+      "tag": "beyond_earth:compresseds/steel"
+    }
+  },
+  "result": {
+    "item": "beyond_earth:rocket_fin",
+    "count": 2
+  }
+}

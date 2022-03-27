@@ -1,19 +1,32 @@
 {
   "schemaVersion": 1,
   "id": "beyond_earth",
-  "version": "${version}",
+  "version": "1.0.0",
 
   "name": "Beyond Earth",
   "description": "Fly to Other Planets and Beyond!",
   "authors": [
-    "TODO"
+    "MrScautHD (Developer)",
+    "ExistingEevee (Developer)",
+    "Alex Nijjar (Developer / Fabric Porter)",
+    "Mvbz (Sound Artist)",
+    "FritzHackenstein (Texturer)",
+    "Fizz (Texturer)",
+    "jopken (Texturer)",
+    "Scarecrow (Modeler)",
+    "ShrekRightT*****le1 (Modeler)",
+    "Barracuda (Builder)",
+    "Solar (Builder)",
+    "SpaceStar (Builder)",
+    "Checheño (Builder)",
+    "Retr0 (Builder)"
   ],
   "contact": {
-    "homepage": "",
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/beyond-earth-fabric",
     "sources": "https://github.com/MrScautHD/Beyond-Earth"
   },
 
-  "license": "CC0-1.0",
+  "license": "LGPL-3",
   "icon": "assets/beyond_earth/icon.png",
 
   "environment": "*",
