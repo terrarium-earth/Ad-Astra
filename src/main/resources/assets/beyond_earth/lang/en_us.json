@@ -267,7 +267,7 @@
   "container.entity.beyond_earth.rover": "Rover",
 
 
-  "tooltip.beyond_earth.oxygen_bubble_distributor": "Make a Oxygen Bullet %1$s ~ %2$s Blocks",
+  "tooltip.beyond_earth.oxygen_bubble_distributor": "Make an Oxygen Bullet %1$s ~ %2$s Blocks",
 
 
   "message.beyond_earth.no_fuel": "§cNO FUEL! §7Fill the Rocket with §cFuel§7. (§6Sneak and Right Click§7)",
@@ -311,20 +311,21 @@
   "jei.category.beyond_earth.space_station": "Space Station",
   "jei.tooltip.beyond_earth.space_station": "Ingredients for create\na Space Station",
 
-  "gauge_text.beyond_earth.using": "%1$s Using: %2$s",
-  "gauge_text.beyond_earth.using2": "%1$s Using: %2$s/%4$s t",
-  "gauge_text.beyond_earth.generating": "%1$s Generating: %2$s",
-  "gauge_text.beyond_earth.maxgeneration": "Max. %1$s Generation: %2$s",
-  "gauge_text.beyond_earth.total": "Total %1S: %2$s",
-  "gauge_text.beyond_earth.stored": "Stored %1$s: %2$s",
-  "gauge_text.beyond_earth.capacity": "%1$s Capacity: %2$s",
-  "gauge_text.beyond_earth.transfer": "%1$s Transfer: %2$s",
+
+  "gauge.beyond_earth.burn_time": "Burn Time: %s / %d",
+  "gauge_text.beyond_earth.storage": "Energy: %s E / %d E",
+
+  "gauge_text.beyond_earth.stored": "Stored Energy: %s E",
+  "gauge_text.beyond_earth.capacity": "Energy Capacity: %s E",
+  "gauge_text.beyond_earth.max_generation": "Max. Energy Generation: %s E/t",
+
+  item.beyond_earth.generator.tooltip: "Generates %s E/t",
+  item.beyond_earth.water_pump.tooltip: "Fluid Transfer: %s mb/t",
 
   "gauge.beyond_earth.energy": "Energy",
   "gauge.beyond_earth.fluid": "Fluid",
   "gauge.beyond_earth.fuel": "Fuel",
   "gauge.beyond_earth.oxygen": "Oxygen",
-  "gauge.beyond_earth.burntime": "Burn Time",
   "gauge.beyond_earth.cooktime": "Cook Time",
   "gauge.beyond_earth.oxygenloading": "Loading",
 

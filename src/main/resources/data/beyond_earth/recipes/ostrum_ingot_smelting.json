@@ -6,7 +6,5 @@
   "ingredient": {
     "item": "beyond_earth:raw_ostrum"
   },
-  "result": {
-    "item": "beyond_earth:ostrum_ingot"
-  }
+  "result": "beyond_earth:ostrum_ingot"
 }

@@ -7,22 +7,22 @@
   ],
   "key": {
     "0": {
-      "tag": "forge:plates/iron"
+      "tag": "c:iron_plates"
     },
     "1": {
       "item": "minecraft:iron_helmet"
     },
     "2": {
-      "tag": "forge:plates/iron"
+      "tag": "c:iron_plates"
     },
     "3": {
-      "tag": "forge:plates/iron"
+      "tag": "c:iron_plates"
     },
     "4": {
       "item": "minecraft:glass"
     },
     "5": {
-      "tag": "forge:plates/iron"
+      "tag": "c:iron_plates"
     }
   },
   "result": {

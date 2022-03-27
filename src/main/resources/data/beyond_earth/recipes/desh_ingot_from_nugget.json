@@ -14,7 +14,7 @@
       "item": "beyond_earth:desh_nugget"
     },
     "#": {
-      "tag": "forge:nuggets/desh"
+      "tag": "c:desh_nuggets"
     }
   }
 }

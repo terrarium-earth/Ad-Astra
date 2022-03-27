@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
-    "#forge:ingots/desh",
-    "#forge:ingots/ostrum",
-    "#forge:ingots/calorite",
-    "#forge:ingots/steel"
+    "#c:desh_ingots",
+    "#c:ostrum_ingots",
+    "#c:calorite_ingots",
+    "#c:steel_ingots"
   ]
 }

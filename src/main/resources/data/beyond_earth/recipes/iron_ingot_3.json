@@ -6,7 +6,5 @@
   "ingredient": {
     "item": "beyond_earth:moon_iron_ore"
   },
-  "result": {
-    "item": "minecraft:iron_ingot"
-  }
+  "result": "minecraft:iron_ingot"
 }

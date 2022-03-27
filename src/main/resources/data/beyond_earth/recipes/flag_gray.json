@@ -6,7 +6,7 @@
   ],
   "key": {
     "0": {
-      "tag": "forge:dyes/gray"
+      "item": "minecraft:gray_dye"
     },
     "1": {
       "tag": "beyond_earth:flags"

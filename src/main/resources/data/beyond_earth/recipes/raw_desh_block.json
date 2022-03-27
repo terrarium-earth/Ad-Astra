@@ -10,7 +10,7 @@
 			"item": "beyond_earth:raw_desh"
 		},
 		"#": {
-			"tag": "forge:raw_materials/desh"
+			"tag": "c:raw_desh_ores"
 		}
 	},
 	"result": {

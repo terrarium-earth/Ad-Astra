@@ -5,7 +5,5 @@
   "ingredient": {
     "item": "beyond_earth:raw_calorite"
   },
-  "result": {
-    "item": "beyond_earth:calorite_ingot"
-  }
+  "result": "beyond_earth:calorite_ingot"
 }

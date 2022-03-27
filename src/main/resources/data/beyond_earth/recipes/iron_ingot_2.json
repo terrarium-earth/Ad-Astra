@@ -6,7 +6,5 @@
   "ingredient": {
     "item": "beyond_earth:mercury_iron_ore"
   },
-  "result": {
-    "item": "minecraft:iron_ingot"
-  }
+  "result": "minecraft:iron_ingot"
 }

@@ -8,7 +8,7 @@
   ],
   "key": {
     "0": {
-      "tag": "forge:rods/iron"
+      "tag": "c:iron_rods"
     },
     "1": {
       "item": "minecraft:white_wool"
@@ -17,7 +17,7 @@
       "item": "minecraft:white_wool"
     },
     "3": {
-      "tag": "forge:rods/iron"
+      "tag": "c:iron_rods"
     },
     "4": {
       "item": "minecraft:white_wool"
@@ -26,7 +26,7 @@
       "item": "minecraft:white_wool"
     },
     "6": {
-      "tag": "forge:rods/iron"
+      "tag": "c:iron_rods"
     }
   },
   "result": {

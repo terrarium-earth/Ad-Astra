@@ -8,31 +8,31 @@
   ],
   "key": {
     "0": {
-      "tag": "forge:ingots/steel"
+      "tag": "c:steel_ingots"
     },
     "1": {
-      "tag": "forge:plates/iron"
+      "tag": "c:iron_plates"
     },
     "2": {
-      "tag": "forge:ingots/steel"
+      "tag": "c:steel_ingots"
     },
     "3": {
-      "tag": "forge:plates/iron"
+      "tag": "c:iron_plates"
     },
     "4": {
       "item": "minecraft:iron_ingot"
     },
     "5": {
-      "tag": "forge:plates/iron"
+      "tag": "c:iron_plates"
     },
     "6": {
-      "tag": "forge:ingots/steel"
+      "tag": "c:steel_ingots"
     },
     "7": {
-      "tag": "forge:plates/iron"
+      "tag": "c:iron_plates"
     },
     "8": {
-      "tag": "forge:ingots/steel"
+      "tag": "c:steel_ingots"
     }
   },
   "result": {

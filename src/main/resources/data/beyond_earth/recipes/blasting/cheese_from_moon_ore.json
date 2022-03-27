@@ -5,7 +5,5 @@
   "ingredient": {
     "item": "beyond_earth:moon_cheese_ore"
   },
-  "result": {
-    "item": "beyond_earth:cheese"
-  }
+  "result": "beyond_earth:cheese"
 }

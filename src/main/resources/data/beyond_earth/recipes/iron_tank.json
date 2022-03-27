@@ -11,22 +11,22 @@
       "item": "minecraft:iron_ingot"
     },
     "1": {
-      "tag": "forge:ingots/steel"
+      "tag": "c:steel_ingots"
     },
     "2": {
       "item": "minecraft:iron_ingot"
     },
     "3": {
-      "tag": "forge:ingots/steel"
+      "tag": "c:steel_ingots"
     },
     "5": {
-      "tag": "forge:ingots/steel"
+      "tag": "c:steel_ingots"
     },
     "6": {
       "item": "minecraft:iron_ingot"
     },
     "7": {
-      "tag": "forge:ingots/steel"
+      "tag": "c:steel_ingots"
     },
     "8": {
       "item": "minecraft:iron_ingot"

@@ -9,7 +9,7 @@
       "item": "beyond_earth:ostrum_nugget"
     },
     "#": {
-      "tag": "forge:nuggets/ostrum"
+      "tag": "c:ostrum_nuggets"
     }
   },
   "pattern": [

@@ -11,7 +11,7 @@
       "item": "beyond_earth:desh_ingot"
     },
     "#": {
-      "tag": "forge:ingots/desh"
+      "tag": "c:desh_ingots"
     }
   },
   "result": {

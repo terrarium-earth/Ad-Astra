@@ -6,7 +6,7 @@
   ],
   "key": {
     "0": {
-      "tag": "forge:dyes/pink"
+      "item": "minecraft:pink_dye"
     },
     "1": {
       "tag": "beyond_earth:flags"

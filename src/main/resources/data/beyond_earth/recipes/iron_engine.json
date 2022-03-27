@@ -8,16 +8,16 @@
   ],
   "key": {
     "0": {
-      "tag": "forge:ingots/steel"
+      "tag": "c:steel_ingots"
     },
     "1": {
       "item": "minecraft:redstone"
     },
     "2": {
-      "tag": "forge:ingots/steel"
+      "tag": "c:steel_ingots"
     },
     "3": {
-      "tag": "forge:plates/iron"
+      "tag": "c:iron_plates"
     },
     "4": {
       "item": "beyond_earth:engine_fan"
@@ -26,13 +26,13 @@
       "item": "beyond_earth:engine_frame"
     },
     "6": {
-      "tag": "forge:ingots/steel"
+      "tag": "c:steel_ingots"
     },
     "7": {
       "item": "minecraft:redstone"
     },
     "8": {
-      "tag": "forge:plates/iron"
+      "tag": "c:iron_plates"
     }
   },
   "result": {

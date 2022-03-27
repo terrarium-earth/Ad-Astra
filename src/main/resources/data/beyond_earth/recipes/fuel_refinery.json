@@ -8,13 +8,13 @@
   ],
   "key": {
     "0": {
-      "tag": "forge:ingots/steel"
+      "tag": "c:steel_ingots"
     },
     "1": {
       "item": "minecraft:iron_ingot"
     },
     "2": {
-      "tag": "forge:ingots/steel"
+      "tag": "c:steel_ingots"
     },
     "3": {
       "item": "minecraft:bucket"
@@ -26,13 +26,13 @@
       "item": "minecraft:bucket"
     },
     "6": {
-      "tag": "forge:ingots/steel"
+      "tag": "c:steel_ingots"
     },
     "7": {
       "item": "minecraft:redstone"
     },
     "8": {
-      "tag": "forge:ingots/steel"
+      "tag": "c:steel_ingots"
     }
   },
   "result": {

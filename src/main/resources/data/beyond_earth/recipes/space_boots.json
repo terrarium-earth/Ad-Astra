@@ -13,10 +13,10 @@
       "item": "minecraft:white_wool"
     },
     "3": {
-      "tag": "forge:plates/iron"
+      "tag": "c:iron_plates"
     },
     "5": {
-      "tag": "forge:plates/iron"
+      "tag": "c:iron_plates"
     }
   },
   "result": {

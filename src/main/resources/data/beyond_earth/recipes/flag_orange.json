@@ -6,7 +6,7 @@
   ],
   "key": {
     "0": {
-      "tag": "forge:dyes/orange"
+      "item": "minecraft:orange_dye"
     },
     "1": {
       "tag": "beyond_earth:flags"

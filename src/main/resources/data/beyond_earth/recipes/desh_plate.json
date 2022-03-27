@@ -1,12 +1,12 @@
 {
   "group": "beyond_earth",
-  "type": "beyond_earth:hammer_recipe_serializer",
+  "type": "beyond_earth:hammer_recipe",
   "ingredients": [
     {
       "item": "beyond_earth:hammer"
     },
     {
-      "item": "beyond_earth:desh_ingot"
+      "tag": "c:desh_ingots"
     }
   ],
   "result": {

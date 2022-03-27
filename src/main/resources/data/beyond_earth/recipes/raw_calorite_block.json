@@ -10,7 +10,7 @@
 			"item": "beyond_earth:raw_calorite"
 		},
 		"#": {
-			"tag": "forge:raw_materials/calorite"
+			"tag": "c:raw_calorite_ores"
 		}
 	},
 	"result": {

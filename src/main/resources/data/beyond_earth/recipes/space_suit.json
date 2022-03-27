@@ -23,13 +23,13 @@
       "item": "beyond_earth:oxygen_tank"
     },
     "6": {
-      "tag": "forge:plates/iron"
+      "tag": "c:iron_plates"
     },
     "7": {
-      "tag": "forge:ingots/steel"
+      "tag": "c:steel_ingots"
     },
     "8": {
-      "tag": "forge:plates/iron"
+      "tag": "c:iron_plates"
     }
   },
   "result": {

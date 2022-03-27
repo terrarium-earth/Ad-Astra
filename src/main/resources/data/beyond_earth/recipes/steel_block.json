@@ -11,7 +11,7 @@
       "item": "beyond_earth:steel_ingot"
     },
     "#": {
-      "tag": "forge:ingots/steel"
+      "tag": "c:steel_ingots"
     }
   },
   "result": {

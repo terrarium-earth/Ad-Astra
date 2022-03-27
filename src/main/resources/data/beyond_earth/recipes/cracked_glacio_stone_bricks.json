@@ -6,7 +6,5 @@
   "ingredient": {
     "item": "beyond_earth:glacio_stone_bricks"
   },
-  "result": {
-    "item": "beyond_earth:cracked_glacio_stone_bricks"
-  }
+  "result": "beyond_earth:cracked_glacio_stone_bricks"
 }

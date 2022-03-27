@@ -7,10 +7,10 @@
     ],
     "key": {
         "b": {
-            "tag": "forge:ingots/steel"
+            "tag": "c:steel_ingots"
         },
         "B": {
-            "tag": "forge:plates/iron"
+            "tag": "c:iron_plates"
         },
         "#": {
             "item": "minecraft:bucket"

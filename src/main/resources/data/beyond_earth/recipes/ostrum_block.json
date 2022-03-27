@@ -11,7 +11,7 @@
       "item": "beyond_earth:ostrum_ingot"
     },
     "#": {
-      "tag": "forge:ingots/ostrum"
+      "tag": "c:ostrum_ingots"
     }
   },
   "result": {

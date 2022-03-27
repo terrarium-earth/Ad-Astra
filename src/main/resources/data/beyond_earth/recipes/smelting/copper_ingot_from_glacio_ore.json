@@ -5,7 +5,5 @@
   "ingredient": {
     "item": "beyond_earth:glacio_copper_ore"
   },
-  "result": {
-    "item": "minecraft:copper_ingot"
-  }
+  "result": "minecraft:copper_ingot"
 }

@@ -14,7 +14,7 @@
       "item": "minecraft:chest"
     },
     "3": {
-      "tag": "forge:plates/iron"
+      "tag": "c:iron_plates"
     },
     "4": {
       "item": "minecraft:furnace"
@@ -26,7 +26,7 @@
       "item": "beyond_earth:wheel"
     },
     "7": {
-      "tag": "forge:ingots/steel"
+      "tag": "c:steel_ingots"
     },
     "8": {
       "item": "beyond_earth:wheel"

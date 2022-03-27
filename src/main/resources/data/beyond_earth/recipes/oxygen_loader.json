@@ -11,19 +11,19 @@
       "item": "minecraft:iron_ingot"
     },
     "1": {
-      "tag": "forge:plates/iron"
+      "tag": "c:iron_plates"
     },
     "2": {
       "item": "minecraft:iron_ingot"
     },
     "3": {
-      "tag": "forge:plates/iron"
+      "tag": "c:iron_plates"
     },
     "4": {
       "item": "minecraft:furnace"
     },
     "5": {
-      "tag": "forge:plates/iron"
+      "tag": "c:iron_plates"
     },
     "6": {
       "item": "minecraft:iron_ingot"

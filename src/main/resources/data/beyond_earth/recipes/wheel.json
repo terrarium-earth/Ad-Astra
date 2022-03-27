@@ -11,25 +11,25 @@
       "item": "minecraft:black_dye"
     },
     "1": {
-      "tag": "forge:slimeballs"
+      "tag": "c:slime_balls"
     },
     "2": {
       "item": "minecraft:black_dye"
     },
     "3": {
-      "tag": "forge:slimeballs"
+      "tag": "c:slime_balls"
     },
     "4": {
-      "tag": "forge:ingots/steel"
+      "tag": "c:steel_ingots"
     },
     "5": {
-      "tag": "forge:slimeballs"
+      "tag": "c:slime_balls"
     },
     "6": {
       "item": "minecraft:black_dye"
     },
     "7": {
-      "tag": "forge:slimeballs"
+      "tag": "c:slime_balls"
     },
     "8": {
       "item": "minecraft:black_dye"

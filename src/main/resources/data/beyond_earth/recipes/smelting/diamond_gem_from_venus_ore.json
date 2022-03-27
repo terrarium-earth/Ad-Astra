@@ -5,7 +5,5 @@
   "ingredient": {
     "item": "beyond_earth:venus_diamond_ore"
   },
-  "result": {
-    "item": "minecraft:diamond"
-  }
+  "result": "minecraft:diamond"
 }

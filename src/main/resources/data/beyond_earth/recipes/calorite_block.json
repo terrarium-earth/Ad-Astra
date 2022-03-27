@@ -11,7 +11,7 @@
       "item": "beyond_earth:calorite_ingot"
     },
     "#": {
-      "tag": "forge:ingots/calorite"
+      "tag": "c:calorite_ingots"
     }
   },
   "result": {

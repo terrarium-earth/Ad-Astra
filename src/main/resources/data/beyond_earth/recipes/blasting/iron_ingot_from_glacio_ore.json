@@ -5,7 +5,5 @@
   "ingredient": {
     "item": "beyond_earth:glacio_iron_ore"
   },
-  "result": {
-    "item": "minecraft:iron_ingot"
-  }
+  "result": "minecraft:iron_ingot"
 }

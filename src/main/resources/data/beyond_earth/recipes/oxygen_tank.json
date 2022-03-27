@@ -17,19 +17,19 @@
       "item": "minecraft:red_wool"
     },
     "3": {
-      "tag": "forge:plates/iron"
+      "tag": "c:iron_plates"
     },
     "5": {
-      "tag": "forge:plates/iron"
+      "tag": "c:iron_plates"
     },
     "6": {
-      "tag": "forge:plates/iron"
+      "tag": "c:iron_plates"
     },
     "7": {
       "item": "minecraft:iron_ingot"
     },
     "8": {
-      "tag": "forge:plates/iron"
+      "tag": "c:iron_plates"
     }
   },
   "result": {

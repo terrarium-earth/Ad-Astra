@@ -14,7 +14,7 @@
       "item": "beyond_earth:calorite_nugget"
     },
     "#": {
-      "tag": "forge:nuggets/calorite"
+      "tag": "c:calorite_nuggets"
     }
   }
 }

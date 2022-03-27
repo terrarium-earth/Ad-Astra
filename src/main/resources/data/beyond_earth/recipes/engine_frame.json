@@ -8,13 +8,13 @@
   ],
   "key": {
     "0": {
-      "tag": "forge:ingots/steel"
+      "tag": "c:steel_ingots"
     },
     "1": {
       "item": "minecraft:iron_nugget"
     },
     "2": {
-      "tag": "forge:ingots/steel"
+      "tag": "c:steel_ingots"
     },
     "3": {
       "item": "minecraft:iron_nugget"
@@ -23,13 +23,13 @@
       "item": "minecraft:iron_nugget"
     },
     "6": {
-      "tag": "forge:ingots/steel"
+      "tag": "c:steel_ingots"
     },
     "7": {
       "item": "minecraft:iron_nugget"
     },
     "8": {
-      "tag": "forge:ingots/steel"
+      "tag": "c:steel_ingots"
     }
   },
   "result": {

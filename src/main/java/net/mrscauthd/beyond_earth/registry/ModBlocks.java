@@ -1,57 +1,67 @@
 package net.mrscauthd.beyond_earth.registry;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.*;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.Registry;
-import net.mrscauthd.beyond_earth.util.ModIdentifier;
-import net.mrscauthd.beyond_earth.blocks.CoalLanternBlock;
-import net.mrscauthd.beyond_earth.blocks.CoalTorchBlock;
-import net.mrscauthd.beyond_earth.blocks.WallCoalTorchBlock;
+import net.mrscauthd.beyond_earth.blocks.coal_torches.CoalLanternBlock;
+import net.mrscauthd.beyond_earth.blocks.coal_torches.CoalTorchBlock;
+import net.mrscauthd.beyond_earth.blocks.launch_pad.RocketLaunchPad;
+import net.mrscauthd.beyond_earth.blocks.coal_torches.WallCoalTorchBlock;
 import net.mrscauthd.beyond_earth.blocks.flags.FlagBlock;
-import net.mrscauthd.beyond_earth.blocks.flags.FlagBlockEntity;
+import net.mrscauthd.beyond_earth.blocks.machines.*;
+import net.mrscauthd.beyond_earth.util.ModIdentifier;
 
 public class ModBlocks {
 
+    // Rocket Launch Pad.
+    public static final Block ROCKET_LAUNCH_PAD = new RocketLaunchPad(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(5.0f, 2.5f).requiresTool()); // Temp
+
     // Flag Blocks.
-    public static final Block FLAG_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).requiresTool().luminance(1));
-    public static final Block FLAG_BLUE_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).requiresTool().luminance(1));
-    public static final Block FLAG_BROWN_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).requiresTool().luminance(1));
-    public static final Block FLAG_CYAN_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).requiresTool().luminance(1));
-    public static final Block FLAG_GRAY_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).requiresTool().luminance(1));
-    public static final Block FLAG_GREEN_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).requiresTool().luminance(1));
-    public static final Block FLAG_LIGHT_BLUE_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).requiresTool().luminance(1));
-    public static final Block FLAG_LIME_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).requiresTool().luminance(1));
-    public static final Block FLAG_MAGENTA_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).requiresTool().luminance(1));
-    public static final Block FLAG_ORANGE_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).requiresTool().luminance(1));
-    public static final Block FLAG_PINK_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).requiresTool().luminance(1));
-    public static final Block FLAG_PURPLE_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).requiresTool().luminance(1));
-    public static final Block FLAG_RED_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).requiresTool().luminance(1));
-    public static final Block FLAG_YELLOW_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).requiresTool().luminance(1));
+    public static final Block FLAG_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
+    public static final Block FLAG_BLUE_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
+    public static final Block FLAG_BROWN_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
+    public static final Block FLAG_CYAN_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
+    public static final Block FLAG_GRAY_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
+    public static final Block FLAG_GREEN_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
+    public static final Block FLAG_LIGHT_BLUE_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
+    public static final Block FLAG_LIME_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
+    public static final Block FLAG_MAGENTA_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
+    public static final Block FLAG_ORANGE_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
+    public static final Block FLAG_PINK_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
+    public static final Block FLAG_PURPLE_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
+    public static final Block FLAG_RED_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
+    public static final Block FLAG_YELLOW_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
 
-    // Flag Block Entity.
-    public static BlockEntityType<FlagBlockEntity> FLAG_BLOCK_ENTITY;
+    // Torch blocks.
+    public static final Block COAL_TORCH = new CoalTorchBlock(FabricBlockSettings.of(Material.DECORATION).noCollision().breakInstantly().sounds(BlockSoundGroup.WOOD));
+    public static final Block WALL_COAL_TORCH = new WallCoalTorchBlock(FabricBlockSettings.of(Material.DECORATION).noCollision().breakInstantly().sounds(BlockSoundGroup.WOOD));
+    public static final Block COAL_LANTERN = new CoalLanternBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.LANTERN).strength(3.5f).nonOpaque());
 
-    public static final Block COAL_TORCH_BLOCK = new CoalTorchBlock(FabricBlockSettings.of(Material.DECORATION).noCollision().breakInstantly().sounds(BlockSoundGroup.WOOD));
-    public static final Block WALL_COAL_TORCH_BLOCK = new WallCoalTorchBlock(FabricBlockSettings.of(Material.DECORATION).noCollision().breakInstantly().sounds(BlockSoundGroup.WOOD));
-    public static final Block COAL_LANTERN_BLOCK = new CoalLanternBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.LANTERN).strength(3.5f).nonOpaque());
+    // Machines.
+    public static final Block FUEL_REFINERY = new FuelRefineryBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(5.0f, 1.0f).requiresTool());
+    public static final Block COMPRESSOR = new CompressorBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(5.0f, 1.0f).requiresTool());
+    public static final Block COAL_GENERATOR = new CoalGeneratorBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(5.0f, 1.0f).requiresTool());
+    public static final Block OXYGEN_LOADER = new OxygenLoaderBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(5.0f, 1.0f).requiresTool());
+    public static final Block SOLAR_PANEL = new SolarPanelBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(5.0f, 1.0f).requiresTool());
+    public static final Block NASA_WORKBENCH = new NasaWorkbenchBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(5.0f, 1.0f).requiresTool());
+    public static final Block OXYGEN_BUBBLE_DISTRIBUTOR = new OxygenBubbleDistributorBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(5.0f, 1.0f).requiresTool());
+    public static final Block WATER_PUMP = new WaterPump(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(5.0f, 1.0f).nonOpaque().requiresTool());
 
     // Blocks.
-    public static final Block STEEL_BLOCK = new Block(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(5f, 2.5f).requiresTool());
-    public static final Block DESH_BLOCK = new Block(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(5f, 2.5f).requiresTool());
-    public static final Block OSTRUM_BLOCK = new Block(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(5f, 2.5f).requiresTool());
-    public static final Block CALORITE_BLOCK = new Block(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(5f, 2.5f).requiresTool());
+    public static final Block STEEL_BLOCK = new Block(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(5.0f, 2.5f).requiresTool());
+    public static final Block DESH_BLOCK = new Block(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(5.0f, 2.5f).requiresTool());
+    public static final Block OSTRUM_BLOCK = new Block(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(5.0f, 2.5f).requiresTool());
+    public static final Block CALORITE_BLOCK = new Block(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(5.0f, 2.5f).requiresTool());
     public static final Block RAW_DESH_BLOCK = new Block(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.5f, 1.0f).requiresTool());
     public static final Block RAW_OSTRUM_BLOCK = new Block(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.5f, 1.0f).requiresTool());
     public static final Block RAW_CALORITE_BLOCK = new Block(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(1.5f, 1.0f).requiresTool());
-    public static final Block IRON_PLATING_BLOCK = new Block(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(5f, 2.5f).requiresTool());
-    public static final Block RUSTED_IRON_PILLAR_BLOCK = new PillarBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(5f, 2.5f).requiresTool());
-    public static final Block RUSTED_IRON_PLATING_BLOCK = new Block(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(5f, 2.5f).requiresTool());
-    public static final Block BLUE_IRON_PLATING_BLOCK = new PillarBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(5f, 2.5f).requiresTool());
-    public static final Block IRON_MARK_BLOCK = new PillarBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(5f, 2.5f).requiresTool());
+    public static final Block IRON_PLATING_BLOCK = new Block(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(5.0f, 2.5f).requiresTool());
+    public static final Block RUSTED_IRON_PILLAR_BLOCK = new PillarBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(5.0f, 2.5f).requiresTool());
+    public static final Block RUSTED_IRON_PLATING_BLOCK = new Block(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(5.0f, 2.5f).requiresTool());
+    public static final Block BLUE_IRON_PLATING_BLOCK = new PillarBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(5.0f, 2.5f).requiresTool());
+    public static final Block IRON_MARK_BLOCK = new PillarBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(5.0f, 2.5f).requiresTool());
 
     public static final Block MOON_STONE = new Block(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.5f, 1.0f).requiresTool());
     public static final Block CRACKED_MOON_STONE_BRICKS = new Block(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.5f, 1.0f).requiresTool());
@@ -95,9 +105,9 @@ public class ModBlocks {
     public static final Block INFERNAL_SPIRE_BLOCK = new Block(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.5f, 1.0f).requiresTool());
 
     // Falling Block.
-    public static final Block MOON_SAND = new FallingBlock(FabricBlockSettings.of(Material.AGGREGATE, MapColor.GRAY).sounds(BlockSoundGroup.SAND).strength(0.5f, 0.5f).requiresTool());
-    public static final Block MARS_SAND = new FallingBlock(FabricBlockSettings.of(Material.AGGREGATE, MapColor.TERRACOTTA_ORANGE).sounds(BlockSoundGroup.SAND).strength(0.5f, 0.5f).requiresTool());
-    public static final Block VENUS_SAND = new FallingBlock(FabricBlockSettings.of(Material.AGGREGATE, MapColor.TERRACOTTA_ORANGE).sounds(BlockSoundGroup.SAND).strength(0.5f, 0.5f).requiresTool());
+    public static final Block MOON_SAND = new FallingBlock(FabricBlockSettings.of(Material.AGGREGATE, MapColor.GRAY).sounds(BlockSoundGroup.SAND).strength(0.5f, 0.5f));
+    public static final Block MARS_SAND = new FallingBlock(FabricBlockSettings.of(Material.AGGREGATE, MapColor.TERRACOTTA_ORANGE).sounds(BlockSoundGroup.SAND).strength(0.5f, 0.5f));
+    public static final Block VENUS_SAND = new FallingBlock(FabricBlockSettings.of(Material.AGGREGATE, MapColor.TERRACOTTA_ORANGE).sounds(BlockSoundGroup.SAND).strength(0.5f, 0.5f));
 
     // Ores.
     public static final Block MOON_CHEESE_ORE = new OreBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(3.0f, 3.0f).requiresTool());
@@ -121,6 +131,9 @@ public class ModBlocks {
 
     public static void register() {
 
+        // Rocket Launch Pad.
+        register("rocket_launch_pad", ROCKET_LAUNCH_PAD);
+
         // Flag Blocks.
         register("flag", FLAG_BLOCK);
         register("flag_blue", FLAG_BLUE_BLOCK);
@@ -137,32 +150,22 @@ public class ModBlocks {
         register("flag_red", FLAG_RED_BLOCK);
         register("flag_yellow", FLAG_YELLOW_BLOCK);
 
-        // Flag Block Entity.
-        FLAG_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, new ModIdentifier("flag"),
-                FabricBlockEntityTypeBuilder.create(
-                        FlagBlockEntity::new,
-                        FLAG_BLOCK,
-                        FLAG_BLUE_BLOCK,
-                        FLAG_BROWN_BLOCK,
-                        FLAG_CYAN_BLOCK,
-                        FLAG_GRAY_BLOCK,
-                        FLAG_GREEN_BLOCK,
-                        FLAG_LIGHT_BLUE_BLOCK,
-                        FLAG_LIME_BLOCK,
-                        FLAG_MAGENTA_BLOCK,
-                        FLAG_ORANGE_BLOCK,
-                        FLAG_PINK_BLOCK,
-                        FLAG_PURPLE_BLOCK,
-                        FLAG_RED_BLOCK,
-                        FLAG_YELLOW_BLOCK
-                ).build(null)
-        );
+        // Torch blocks.
+        register("coal_torch", COAL_TORCH);
+        register("wall_coal_torch", WALL_COAL_TORCH);
+        register("coal_lantern", COAL_LANTERN);
+
+        // Machines.
+        register("fuel_refinery", FUEL_REFINERY);
+        register("compressor", COMPRESSOR);
+        register("coal_generator", COAL_GENERATOR);
+        register("oxygen_loader", OXYGEN_LOADER);
+        register("solar_panel", SOLAR_PANEL);
+        register("nasa_workbench", NASA_WORKBENCH);
+        register("oxygen_bubble_distributor", OXYGEN_BUBBLE_DISTRIBUTOR);
+        register("water_pump", WATER_PUMP);
 
         // Blocks.
-        register("coal_torch", COAL_TORCH_BLOCK);
-        register("wall_coal_torch", WALL_COAL_TORCH_BLOCK);
-        register("coal_lantern", COAL_LANTERN_BLOCK);
-
         register("steel_block", STEEL_BLOCK);
         register("desh_block", DESH_BLOCK);
         register("ostrum_block", OSTRUM_BLOCK);

@@ -8,28 +8,28 @@
   ],
   "key": {
     "0": {
-      "tag": "forge:ingots/calorite"
+      "tag": "c:calorite_ingots"
     },
     "1": {
-      "tag": "forge:ingots/steel"
+      "tag": "c:steel_ingots"
     },
     "2": {
-      "tag": "forge:ingots/calorite"
+      "tag": "c:calorite_ingots"
     },
     "3": {
-      "tag": "forge:ingots/steel"
+      "tag": "c:steel_ingots"
     },
     "5": {
-      "tag": "forge:ingots/steel"
+      "tag": "c:steel_ingots"
     },
     "6": {
-      "tag": "forge:ingots/calorite"
+      "tag": "c:calorite_ingots"
     },
     "7": {
-      "tag": "forge:ingots/steel"
+      "tag": "c:steel_ingots"
     },
     "8": {
-      "tag": "forge:ingots/calorite"
+      "tag": "c:calorite_ingots"
     }
   },
   "result": {

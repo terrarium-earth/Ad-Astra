@@ -10,7 +10,7 @@
 			"item": "beyond_earth:raw_ostrum"
 		},
 		"#": {
-			"tag": "forge:raw_materials/ostrum"
+			"tag": "c:raw_ostrum_ores"
 		}
 	},
 	"result": {

@@ -8,13 +8,13 @@
   ],
   "key": {
     "0": {
-      "tag": "forge:plates/iron"
+      "tag": "c:iron_plates"
     },
     "1": {
       "item": "minecraft:lapis_lazuli"
     },
     "2": {
-      "tag": "forge:plates/iron"
+      "tag": "c:iron_plates"
     },
     "3": {
       "item": "minecraft:lapis_lazuli"
@@ -26,13 +26,13 @@
       "item": "minecraft:lapis_lazuli"
     },
     "6": {
-      "tag": "forge:plates/iron"
+      "tag": "c:iron_plates"
     },
     "7": {
       "item": "minecraft:lapis_lazuli"
     },
     "8": {
-      "tag": "forge:plates/iron"
+      "tag": "c:iron_plates"
     }
   },
   "result": {

@@ -5,7 +5,5 @@
   "ingredient": {
     "item": "beyond_earth:mars_ostrum_ore"
   },
-  "result": {
-    "item": "beyond_earth:ostrum_ingot"
-  }
+  "result": "beyond_earth:ostrum_ingot"
 }

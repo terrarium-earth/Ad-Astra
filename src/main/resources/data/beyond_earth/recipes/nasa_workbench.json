@@ -20,7 +20,7 @@
       "item": "minecraft:lever"
     },
     "4": {
-      "tag": "forge:ingots/steel"
+      "tag": "c:steel_ingots"
     },
     "5": {
       "item": "minecraft:lever"

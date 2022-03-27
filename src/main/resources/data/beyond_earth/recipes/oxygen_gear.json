@@ -8,22 +8,22 @@
   ],
   "key": {
     "1": {
-      "tag": "forge:ingots/steel"
+      "tag": "c:steel_ingots"
     },
     "3": {
       "item": "minecraft:iron_nugget"
     },
     "4": {
-      "tag": "forge:rods/iron"
+      "tag": "c:iron_rods"
     },
     "5": {
       "item": "minecraft:iron_nugget"
     },
     "6": {
-      "tag": "forge:plates/iron"
+      "tag": "c:iron_plates"
     },
     "8": {
-      "tag": "forge:plates/iron"
+      "tag": "c:iron_plates"
     }
   },
   "result": {

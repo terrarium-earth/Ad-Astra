@@ -8,7 +8,7 @@
   ],
   "key": {
     "n": {
-      "tag": "forge:nuggets/iron"
+      "tag": "c:iron_nuggets"
     },
     "t": {
       "item": "beyond_earth:coal_torch"
