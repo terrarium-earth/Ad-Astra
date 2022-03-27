@@ -2,19 +2,32 @@ package net.mrscauthd.beyond_earth.registry;
 
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.minecraft.block.Blocks;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.*;
+import net.minecraft.text.Style;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Formatting;
+import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
-import net.mrscauthd.beyond_earth.util.ModIdentifier;
+import net.minecraft.world.World;
+import net.mrscauthd.beyond_earth.blocks.machines.entity.CoalGeneratorBlockEntity;
+import net.mrscauthd.beyond_earth.blocks.machines.entity.SolarPanelBlockEntity;
+import net.mrscauthd.beyond_earth.blocks.machines.entity.WaterPumpBlockEntity;
 import net.mrscauthd.beyond_earth.items.HammerItem;
+import net.mrscauthd.beyond_earth.util.ModIdentifier;
+
+import java.util.List;
 
 public class ModItems {
 
-    public static final ItemGroup ITEM_GROUP_NORMAL = FabricItemGroupBuilder.build(new ModIdentifier("tab_normal"), () -> new ItemStack(ModItems.CHEESE));
-    public static final ItemGroup ITEM_GROUP_BASICS = FabricItemGroupBuilder.build(new ModIdentifier("tab_basics"), () -> new ItemStack(ModItems.HAMMER)); // Temp icon.
-    public static final ItemGroup ITEM_GROUP_BLOCKS = FabricItemGroupBuilder.build(new ModIdentifier("tab_blocks"), () -> new ItemStack(Blocks.IRON_ORE)); // Temp icon.
+    public static final ItemGroup ITEM_GROUP_NORMAL = FabricItemGroupBuilder.build(new ModIdentifier("tab_normal"), () -> new ItemStack(ModItems.CHEESE)); // Temp icon.
+    public static final ItemGroup ITEM_GROUP_MACHINES = FabricItemGroupBuilder.build(new ModIdentifier("tab_machines"), () -> new ItemStack(ModItems.NASA_WORKBENCH));
+    public static final ItemGroup ITEM_GROUP_BASICS = FabricItemGroupBuilder.build(new ModIdentifier("tab_basics"), () -> new ItemStack(ModItems.DESH_ENGINE));
     public static final ItemGroup ITEM_GROUP_MATERIALS = FabricItemGroupBuilder.build(new ModIdentifier("tab_materials"), () -> new ItemStack(ModItems.IRON_PLATE));
     public static final ItemGroup ITEM_GROUP_FLAGS = FabricItemGroupBuilder.build(new ModIdentifier("tab_flags"), () -> new ItemStack(ModItems.FLAG_PURPLE));
+    public static final ItemGroup ITEM_GROUP_BLOCKS = FabricItemGroupBuilder.build(new ModIdentifier("tab_blocks"), () -> new ItemStack(ModBlocks.MOON_IRON_ORE));
+    public static final ItemGroup ITEM_GROUP_SPAWN_EGGS = FabricItemGroupBuilder.build(new ModIdentifier("tab_spawn_eggs"), () -> new ItemStack(Items.ZOMBIE_SPAWN_EGG)); // Temp icon.
 
     // Flag Items
     public static final BlockItem FLAG = new TallBlockItem(ModBlocks.FLAG_BLOCK, new Item.Settings().group(ITEM_GROUP_FLAGS));
@@ -76,10 +89,36 @@ public class ModItems {
     public static final Item RAW_OSTRUM = new Item(new FabricItemSettings().group(ITEM_GROUP_MATERIALS));
     public static final Item RAW_CALORITE = new Item(new FabricItemSettings().group(ITEM_GROUP_MATERIALS));
 
-    // Block Items.
-    public static final Item COAL_TORCH = new WallStandingBlockItem(ModBlocks.COAL_TORCH_BLOCK, ModBlocks.WALL_COAL_TORCH_BLOCK, new FabricItemSettings().group(ITEM_GROUP_BASICS));
-    public static final Item COAL_LANTERN = new BlockItem(ModBlocks.COAL_LANTERN_BLOCK, new Item.Settings().group(ITEM_GROUP_BASICS));
+    // Torch items.
+    public static final Item COAL_TORCH = new WallStandingBlockItem(ModBlocks.COAL_TORCH, ModBlocks.WALL_COAL_TORCH, new FabricItemSettings().group(ITEM_GROUP_BASICS));
+    public static final Item COAL_LANTERN = new BlockItem(ModBlocks.COAL_LANTERN, new Item.Settings().group(ITEM_GROUP_BASICS));
 
+    // Machines.
+    public static final BlockItem NASA_WORKBENCH = new BlockItem(ModBlocks.NASA_WORKBENCH, new Item.Settings().group(ITEM_GROUP_MACHINES).rarity(Rarity.EPIC));
+    public static final BlockItem SOLAR_PANEL = new BlockItem(ModBlocks.SOLAR_PANEL, new Item.Settings().group(ITEM_GROUP_MACHINES)) {
+        @Override
+        public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
+            tooltip.add((new TranslatableText("item.beyond_earth.generator.tooltip", SolarPanelBlockEntity.ENERGY_PER_TICK).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
+        }
+    };
+    public static final BlockItem COAL_GENERATOR = new BlockItem(ModBlocks.COAL_GENERATOR, new Item.Settings().group(ITEM_GROUP_MACHINES)) {
+        @Override
+        public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
+            tooltip.add((new TranslatableText("item.beyond_earth.generator.tooltip", CoalGeneratorBlockEntity.ENERGY_PER_TICK).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
+        }
+    };
+    public static final BlockItem COMPRESSOR = new BlockItem(ModBlocks.COMPRESSOR, new Item.Settings().group(ITEM_GROUP_MACHINES));
+    public static final BlockItem FUEL_REFINERY = new BlockItem(ModBlocks.FUEL_REFINERY, new Item.Settings().group(ITEM_GROUP_MACHINES));
+    public static final BlockItem OXYGEN_LOADER = new BlockItem(ModBlocks.OXYGEN_LOADER, new Item.Settings().group(ITEM_GROUP_MACHINES));
+    public static final BlockItem OXYGEN_BUBBLE_DISTRIBUTOR = new BlockItem(ModBlocks.OXYGEN_BUBBLE_DISTRIBUTOR, new Item.Settings().group(ITEM_GROUP_MACHINES));
+    public static final BlockItem WATER_PUMP = new BlockItem(ModBlocks.WATER_PUMP, new Item.Settings().group(ITEM_GROUP_MACHINES)) {
+        @Override
+        public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
+            tooltip.add((new TranslatableText("item.beyond_earth.water_pump.tooltip", WaterPumpBlockEntity.TRANSFER_PER_TICK).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
+        }
+    };
+
+    // Block Items.
     public static final BlockItem STEEL_BLOCK = new BlockItem(ModBlocks.STEEL_BLOCK, new Item.Settings().group(ITEM_GROUP_BLOCKS));
     public static final BlockItem DESH_BLOCK = new BlockItem(ModBlocks.DESH_BLOCK, new Item.Settings().group(ITEM_GROUP_BLOCKS));
     public static final BlockItem OSTRUM_BLOCK = new BlockItem(ModBlocks.OSTRUM_BLOCK, new Item.Settings().group(ITEM_GROUP_BLOCKS));
@@ -132,7 +171,7 @@ public class ModItems {
     public static final BlockItem GLACIO_STONE_BRICK_SLAB = new BlockItem(ModBlocks.GLACIO_STONE_BRICK_SLAB, new Item.Settings().group(ITEM_GROUP_BLOCKS));
     public static final BlockItem GLACIO_STONE_BRICK_STAIRS = new BlockItem(ModBlocks.GLACIO_STONE_BRICK_STAIRS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
 
-//    public static final BlockItem ROCKET_LAUNCH_PAD = new BlockItem(ModBlocks.ROCKET_LAUNCH_PAD, new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem ROCKET_LAUNCH_PAD = new BlockItem(ModBlocks.ROCKET_LAUNCH_PAD, new Item.Settings().group(ITEM_GROUP_NORMAL));
 
     public static final BlockItem MOON_SAND = new BlockItem(ModBlocks.MOON_SAND, new Item.Settings().group(ITEM_GROUP_BLOCKS));
     public static final BlockItem MARS_SAND = new BlockItem(ModBlocks.MARS_SAND, new Item.Settings().group(ITEM_GROUP_BLOCKS));
@@ -220,10 +259,24 @@ public class ModItems {
         register("raw_ostrum", RAW_OSTRUM);
         register("raw_calorite", RAW_CALORITE);
 
-        // Block Items.
+        // Rocket Launch Pad.
+        register("rocket_launch_pad", ROCKET_LAUNCH_PAD);
+
+        // Torch items.
         register("coal_torch", COAL_TORCH);
         register("coal_lantern", COAL_LANTERN);
 
+        // Machines.
+        register("nasa_workbench", NASA_WORKBENCH);
+        register("solar_panel", SOLAR_PANEL);
+        register("coal_generator", COAL_GENERATOR);
+        register("compressor", COMPRESSOR);
+        register("fuel_refinery", FUEL_REFINERY);
+        register("oxygen_loader", OXYGEN_LOADER);
+        register("oxygen_bubble_distributor", OXYGEN_BUBBLE_DISTRIBUTOR);
+        register("water_pump", WATER_PUMP);
+
+        // Block Items.
         register("steel_block", STEEL_BLOCK);
         register("desh_block", DESH_BLOCK);
         register("ostrum_block", OSTRUM_BLOCK);
@@ -275,8 +328,6 @@ public class ModItems {
         register("cracked_glacio_stone_bricks", CRACKED_GLACIO_STONE_BRICKS);
         register("glacio_stone_brick_slab", GLACIO_STONE_BRICK_SLAB);
         register("glacio_stone_brick_stairs", GLACIO_STONE_BRICK_STAIRS);
-
-//        register("rocket_launch_pad", ROCKET_LAUNCH_PAD);
 
         register("moon_sand", MOON_SAND);
         register("mars_sand", MARS_SAND);

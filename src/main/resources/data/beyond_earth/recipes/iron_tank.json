@@ -1,0 +1,39 @@
+{
+  "group": "beyond_earth",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "012",
+    "3 5",
+    "678"
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:iron_ingot"
+    },
+    "1": {
+      "tag": "c:steel_ingots"
+    },
+    "2": {
+      "item": "minecraft:iron_ingot"
+    },
+    "3": {
+      "tag": "c:steel_ingots"
+    },
+    "5": {
+      "tag": "c:steel_ingots"
+    },
+    "6": {
+      "item": "minecraft:iron_ingot"
+    },
+    "7": {
+      "tag": "c:steel_ingots"
+    },
+    "8": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "beyond_earth:steel_tank",
+    "count": 1
+  }
+}

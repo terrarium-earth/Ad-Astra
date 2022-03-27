@@ -1,0 +1,39 @@
+{
+  "group": "beyond_earth",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "012",
+    "3 5",
+    "678"
+  ],
+  "key": {
+    "0": {
+      "tag": "c:ostrum_ingots"
+    },
+    "1": {
+      "tag": "c:steel_ingots"
+    },
+    "2": {
+      "tag": "c:ostrum_ingots"
+    },
+    "3": {
+      "tag": "c:steel_ingots"
+    },
+    "5": {
+      "tag": "c:steel_ingots"
+    },
+    "6": {
+      "tag": "c:ostrum_ingots"
+    },
+    "7": {
+      "tag": "c:steel_ingots"
+    },
+    "8": {
+      "tag": "c:ostrum_ingots"
+    }
+  },
+  "result": {
+    "item": "beyond_earth:ostrum_tank",
+    "count": 1
+  }
+}

@@ -11,10 +11,11 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.screen.PlayerScreenHandler;
+import net.mrscauthd.beyond_earth.client.registry.ModScreens;
 import net.mrscauthd.beyond_earth.client.renderer.FlagBlockEntityRenderer;
-import net.mrscauthd.beyond_earth.client.renderer.SpacesuitRenderer;
+import net.mrscauthd.beyond_earth.client.renderer.spacesuit.SpacesuitRenderer;
 import net.mrscauthd.beyond_earth.client.renderer.spacesuit.SpaceSuitModel;
-import net.mrscauthd.beyond_earth.registry.ModBlocks;
+import net.mrscauthd.beyond_earth.registry.ModBlockEntities;
 import net.mrscauthd.beyond_earth.registry.ModFluids;
 import net.mrscauthd.beyond_earth.util.ModIdentifier;
 
@@ -24,8 +25,11 @@ public class BeyondEarthClient implements ClientModInitializer {
     @Environment(EnvType.CLIENT)
     public void onInitializeClient() {
 
+        // GUI.
+        ModScreens.register();
+
         // Flag entity rendering.
-        BlockEntityRendererRegistry.register(ModBlocks.FLAG_BLOCK_ENTITY, ctx -> new FlagBlockEntityRenderer());
+        BlockEntityRendererRegistry.register(ModBlockEntities.FLAG_BLOCK_ENTITY, ctx -> new FlagBlockEntityRenderer());
 
         // Custom space suit rendering.
         EntityModelLayerRegistry.registerModelLayer(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION, SpaceSuitModel.SPACE_SUIT_P1::createBodyLayer);

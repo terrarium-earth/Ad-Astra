@@ -1,6 +1,6 @@
 {
   "group": "beyond_earth",
-  "type": "beyond_earth:hammer_recipe_serializer",
+  "type": "beyond_earth:hammer_recipe",
   "ingredients": [
     {
       "item": "beyond_earth:hammer"

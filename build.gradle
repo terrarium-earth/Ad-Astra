@@ -29,6 +29,10 @@ dependencies {
 
 	modCompileOnly "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
 	modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
+
+	include modApi("teamreborn:energy:${project.techreborn_energy_version}") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
 }
 
 processResources {

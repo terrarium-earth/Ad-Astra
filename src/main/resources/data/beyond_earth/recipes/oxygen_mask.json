@@ -1,0 +1,32 @@
+{
+  "group": "beyond_earth",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "012",
+    "345"
+  ],
+  "key": {
+    "0": {
+      "tag": "c:iron_plates"
+    },
+    "1": {
+      "item": "minecraft:iron_helmet"
+    },
+    "2": {
+      "tag": "c:iron_plates"
+    },
+    "3": {
+      "tag": "c:iron_plates"
+    },
+    "4": {
+      "item": "minecraft:glass"
+    },
+    "5": {
+      "tag": "c:iron_plates"
+    }
+  },
+  "result": {
+    "item": "beyond_earth:oxygen_mask",
+    "count": 1
+  }
+}

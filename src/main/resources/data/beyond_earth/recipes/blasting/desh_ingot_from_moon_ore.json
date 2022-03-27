@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "experience": 1,
+  "cookingtime": 100,
+  "ingredient": {
+    "item": "beyond_earth:moon_desh_ore"
+  },
+  "result": "beyond_earth:desh_ingot"
+}

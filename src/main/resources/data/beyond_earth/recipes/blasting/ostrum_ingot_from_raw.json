@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "experience": 1,
+  "cookingtime": 100,
+  "ingredient": {
+    "item": "beyond_earth:raw_ostrum"
+  },
+  "result": "beyond_earth:ostrum_ingot"
+}

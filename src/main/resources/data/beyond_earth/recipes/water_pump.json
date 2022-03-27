@@ -1,0 +1,26 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "bbb",
+        "B#B",
+        " H "
+    ],
+    "key": {
+        "b": {
+            "tag": "c:steel_ingots"
+        },
+        "B": {
+            "tag": "c:iron_plates"
+        },
+        "#": {
+            "item": "minecraft:bucket"
+        },
+        "H": {
+            "item": "minecraft:hopper"
+        }
+    },
+    "result": {
+        "item": "beyond_earth:water_pump",
+        "count": 1
+    }
+}
