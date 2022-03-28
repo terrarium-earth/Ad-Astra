@@ -22,28 +22,13 @@ import java.util.List;
 public class ModItems {
 
     public static final ItemGroup ITEM_GROUP_NORMAL = FabricItemGroupBuilder.build(new ModIdentifier("tab_normal"), () -> new ItemStack(ModItems.CHEESE)); // Temp icon.
-    public static final ItemGroup ITEM_GROUP_MACHINES = FabricItemGroupBuilder.build(new ModIdentifier("tab_machines"), () -> new ItemStack(ModItems.NASA_WORKBENCH));
+    public static final ItemGroup ITEM_GROUP_MACHINES = FabricItemGroupBuilder.build(new ModIdentifier("tab_machines"), () -> new ItemStack(ModBlocks.NASA_WORKBENCH));
     public static final ItemGroup ITEM_GROUP_BASICS = FabricItemGroupBuilder.build(new ModIdentifier("tab_basics"), () -> new ItemStack(ModItems.DESH_ENGINE));
     public static final ItemGroup ITEM_GROUP_MATERIALS = FabricItemGroupBuilder.build(new ModIdentifier("tab_materials"), () -> new ItemStack(ModItems.IRON_PLATE));
-    public static final ItemGroup ITEM_GROUP_FLAGS = FabricItemGroupBuilder.build(new ModIdentifier("tab_flags"), () -> new ItemStack(ModItems.FLAG_PURPLE));
+    public static final ItemGroup ITEM_GROUP_FLAGS = FabricItemGroupBuilder.build(new ModIdentifier("tab_flags"), () -> new ItemStack(ModBlocks.FLAG_PURPLE));
+    public static final ItemGroup ITEM_GROUP_GLOBES = FabricItemGroupBuilder.build(new ModIdentifier("tab_globes"), () -> new ItemStack(ModItems.EARTH_GLOBE));
     public static final ItemGroup ITEM_GROUP_BLOCKS = FabricItemGroupBuilder.build(new ModIdentifier("tab_blocks"), () -> new ItemStack(ModBlocks.MOON_IRON_ORE));
     public static final ItemGroup ITEM_GROUP_SPAWN_EGGS = FabricItemGroupBuilder.build(new ModIdentifier("tab_spawn_eggs"), () -> new ItemStack(Items.ZOMBIE_SPAWN_EGG)); // Temp icon.
-
-    // Flag Items
-    public static final BlockItem FLAG = new TallBlockItem(ModBlocks.FLAG_BLOCK, new Item.Settings().group(ITEM_GROUP_FLAGS));
-    public static final BlockItem FLAG_BLUE = new TallBlockItem(ModBlocks.FLAG_BLUE_BLOCK, new Item.Settings().group(ITEM_GROUP_FLAGS));
-    public static final BlockItem FLAG_BROWN = new TallBlockItem(ModBlocks.FLAG_BROWN_BLOCK, new Item.Settings().group(ITEM_GROUP_FLAGS));
-    public static final BlockItem FLAG_CYAN = new TallBlockItem(ModBlocks.FLAG_CYAN_BLOCK, new Item.Settings().group(ITEM_GROUP_FLAGS));
-    public static final BlockItem FLAG_GRAY = new TallBlockItem(ModBlocks.FLAG_GRAY_BLOCK, new Item.Settings().group(ITEM_GROUP_FLAGS));
-    public static final BlockItem FLAG_GREEN = new TallBlockItem(ModBlocks.FLAG_GREEN_BLOCK, new Item.Settings().group(ITEM_GROUP_FLAGS));
-    public static final BlockItem FLAG_LIGHT_BLUE = new TallBlockItem(ModBlocks.FLAG_LIGHT_BLUE_BLOCK, new Item.Settings().group(ITEM_GROUP_FLAGS));
-    public static final BlockItem FLAG_LIME = new TallBlockItem(ModBlocks.FLAG_LIME_BLOCK, new Item.Settings().group(ITEM_GROUP_FLAGS));
-    public static final BlockItem FLAG_MAGENTA = new TallBlockItem(ModBlocks.FLAG_MAGENTA_BLOCK, new Item.Settings().group(ITEM_GROUP_FLAGS));
-    public static final BlockItem FLAG_ORANGE = new TallBlockItem(ModBlocks.FLAG_ORANGE_BLOCK, new Item.Settings().group(ITEM_GROUP_FLAGS));
-    public static final BlockItem FLAG_PINK = new TallBlockItem(ModBlocks.FLAG_PINK_BLOCK, new Item.Settings().group(ITEM_GROUP_FLAGS));
-    public static final BlockItem FLAG_PURPLE = new TallBlockItem(ModBlocks.FLAG_PURPLE_BLOCK, new Item.Settings().group(ITEM_GROUP_FLAGS));
-    public static final BlockItem FLAG_RED = new TallBlockItem(ModBlocks.FLAG_RED_BLOCK, new Item.Settings().group(ITEM_GROUP_FLAGS));
-    public static final BlockItem FLAG_YELLOW = new TallBlockItem(ModBlocks.FLAG_YELLOW_BLOCK, new Item.Settings().group(ITEM_GROUP_FLAGS));
 
     // Items.
     public static final Item CHEESE = new Item(new FabricItemSettings().group(ITEM_GROUP_NORMAL).food(new FoodComponent.Builder().hunger(4).saturationModifier(3.0f).build()));
@@ -88,6 +73,30 @@ public class ModItems {
     public static final Item RAW_DESH = new Item(new FabricItemSettings().group(ITEM_GROUP_MATERIALS));
     public static final Item RAW_OSTRUM = new Item(new FabricItemSettings().group(ITEM_GROUP_MATERIALS));
     public static final Item RAW_CALORITE = new Item(new FabricItemSettings().group(ITEM_GROUP_MATERIALS));
+
+    // Flag Items
+    public static final BlockItem FLAG = new TallBlockItem(ModBlocks.FLAG, new Item.Settings().group(ITEM_GROUP_FLAGS));
+    public static final BlockItem FLAG_BLUE = new TallBlockItem(ModBlocks.FLAG_BLUE, new Item.Settings().group(ITEM_GROUP_FLAGS));
+    public static final BlockItem FLAG_BROWN = new TallBlockItem(ModBlocks.FLAG_BROWN, new Item.Settings().group(ITEM_GROUP_FLAGS));
+    public static final BlockItem FLAG_CYAN = new TallBlockItem(ModBlocks.FLAG_CYAN, new Item.Settings().group(ITEM_GROUP_FLAGS));
+    public static final BlockItem FLAG_GRAY = new TallBlockItem(ModBlocks.FLAG_GRAY, new Item.Settings().group(ITEM_GROUP_FLAGS));
+    public static final BlockItem FLAG_GREEN = new TallBlockItem(ModBlocks.FLAG_GREEN, new Item.Settings().group(ITEM_GROUP_FLAGS));
+    public static final BlockItem FLAG_LIGHT_BLUE = new TallBlockItem(ModBlocks.FLAG_LIGHT_BLUE, new Item.Settings().group(ITEM_GROUP_FLAGS));
+    public static final BlockItem FLAG_LIME = new TallBlockItem(ModBlocks.FLAG_LIME, new Item.Settings().group(ITEM_GROUP_FLAGS));
+    public static final BlockItem FLAG_MAGENTA = new TallBlockItem(ModBlocks.FLAG_MAGENTA, new Item.Settings().group(ITEM_GROUP_FLAGS));
+    public static final BlockItem FLAG_ORANGE = new TallBlockItem(ModBlocks.FLAG_ORANGE, new Item.Settings().group(ITEM_GROUP_FLAGS));
+    public static final BlockItem FLAG_PINK = new TallBlockItem(ModBlocks.FLAG_PINK, new Item.Settings().group(ITEM_GROUP_FLAGS));
+    public static final BlockItem FLAG_PURPLE = new TallBlockItem(ModBlocks.FLAG_PURPLE, new Item.Settings().group(ITEM_GROUP_FLAGS));
+    public static final BlockItem FLAG_RED = new TallBlockItem(ModBlocks.FLAG_RED, new Item.Settings().group(ITEM_GROUP_FLAGS));
+    public static final BlockItem FLAG_YELLOW = new TallBlockItem(ModBlocks.FLAG_YELLOW, new Item.Settings().group(ITEM_GROUP_FLAGS));
+
+    // Globes.
+    public static final BlockItem EARTH_GLOBE = new BlockItem(ModBlocks.EARTH_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES));
+    public static final BlockItem MOON_GLOBE = new BlockItem(ModBlocks.MOON_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES));
+    public static final BlockItem MARS_GLOBE = new BlockItem(ModBlocks.MARS_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES));
+    public static final BlockItem MERCURY_GLOBE = new BlockItem(ModBlocks.MERCURY_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES));
+    public static final BlockItem VENUS_GLOBE = new BlockItem(ModBlocks.VENUS_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES));
+    public static final BlockItem GLACIO_GLOBE = new BlockItem(ModBlocks.GLACIO_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES));
 
     // Torch items.
     public static final Item COAL_TORCH = new WallStandingBlockItem(ModBlocks.COAL_TORCH, ModBlocks.WALL_COAL_TORCH, new FabricItemSettings().group(ITEM_GROUP_BASICS));
@@ -199,22 +208,6 @@ public class ModItems {
 
     public static void register() {
 
-        // Flag Items.
-        register("flag", FLAG);
-        register("flag_blue", FLAG_BLUE);
-        register("flag_brown", FLAG_BROWN);
-        register("flag_cyan", FLAG_CYAN);
-        register("flag_gray", FLAG_GRAY);
-        register("flag_green", FLAG_GREEN);
-        register("flag_light_blue", FLAG_LIGHT_BLUE);
-        register("flag_lime", FLAG_LIME);
-        register("flag_magenta", FLAG_MAGENTA);
-        register("flag_orange", FLAG_ORANGE);
-        register("flag_pink", FLAG_PINK);
-        register("flag_purple", FLAG_PURPLE);
-        register("flag_red", FLAG_RED);
-        register("flag_yellow", FLAG_YELLOW);
-
         // Items.
         register("cheese", CHEESE);
         register("hammer", HAMMER);
@@ -258,6 +251,30 @@ public class ModItems {
         register("raw_desh", RAW_DESH);
         register("raw_ostrum", RAW_OSTRUM);
         register("raw_calorite", RAW_CALORITE);
+
+        // Flag Items.
+        register("flag", FLAG);
+        register("flag_blue", FLAG_BLUE);
+        register("flag_brown", FLAG_BROWN);
+        register("flag_cyan", FLAG_CYAN);
+        register("flag_gray", FLAG_GRAY);
+        register("flag_green", FLAG_GREEN);
+        register("flag_light_blue", FLAG_LIGHT_BLUE);
+        register("flag_lime", FLAG_LIME);
+        register("flag_magenta", FLAG_MAGENTA);
+        register("flag_orange", FLAG_ORANGE);
+        register("flag_pink", FLAG_PINK);
+        register("flag_purple", FLAG_PURPLE);
+        register("flag_red", FLAG_RED);
+        register("flag_yellow", FLAG_YELLOW);
+
+        // Globes.
+        register("earth_globe", EARTH_GLOBE);
+        register("moon_globe", MOON_GLOBE);
+        register("mars_globe", MARS_GLOBE);
+        register("mercury_globe", MERCURY_GLOBE);
+        register("venus_globe", VENUS_GLOBE);
+        register("glacio_globe", GLACIO_GLOBE);
 
         // Rocket Launch Pad.
         register("rocket_launch_pad", ROCKET_LAUNCH_PAD);

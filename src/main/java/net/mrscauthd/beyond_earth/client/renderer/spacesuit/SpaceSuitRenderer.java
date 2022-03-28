@@ -9,7 +9,6 @@ import net.minecraft.client.render.entity.model.EntityModelLoader;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
-import net.mrscauthd.beyond_earth.client.renderer.spacesuit.SpaceSuitModel;
 import net.mrscauthd.beyond_earth.items.armour.NetheriteSpaceSuit;
 import net.mrscauthd.beyond_earth.registry.ModArmour;
 import net.mrscauthd.beyond_earth.util.ModIdentifier;
@@ -19,7 +18,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SpacesuitRenderer {
+public class SpaceSuitRenderer {
 
     @Environment(EnvType.CLIENT)
     public static void register() {
