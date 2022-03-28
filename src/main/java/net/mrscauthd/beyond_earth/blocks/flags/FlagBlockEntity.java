@@ -46,19 +46,8 @@ public class FlagBlockEntity extends BlockEntity {
     }
 
     @Nullable
-    @Override
-    public Packet<ClientPlayPacketListener> toUpdatePacket() {
-        return BlockEntityUpdateS2CPacket.create(this);
-    }
-
-    @Nullable
     public GameProfile getOwner() {
         return this.owner;
-    }
-
-    @Override
-    public NbtCompound toInitialChunkDataNbt() {
-        return this.createNbt();
     }
 
     public void setOwner(GameProfile profile) {
@@ -73,5 +62,16 @@ public class FlagBlockEntity extends BlockEntity {
             this.owner = owner;
             this.markDirty();
         });
+    }
+
+    @Nullable
+    @Override
+    public Packet<ClientPlayPacketListener> toUpdatePacket() {
+        return BlockEntityUpdateS2CPacket.create(this);
+    }
+
+    @Override
+    public NbtCompound toInitialChunkDataNbt() {
+        return this.createNbt();
     }
 }

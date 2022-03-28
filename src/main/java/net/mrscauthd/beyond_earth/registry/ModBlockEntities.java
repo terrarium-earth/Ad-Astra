@@ -5,6 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.util.registry.Registry;
+import net.mrscauthd.beyond_earth.blocks.globes.GlobeBlockEntity;
 import net.mrscauthd.beyond_earth.blocks.launch_pad.RocketLaunchPadEntity;
 import net.mrscauthd.beyond_earth.blocks.flags.FlagBlockEntity;
 import net.mrscauthd.beyond_earth.blocks.machines.entity.*;
@@ -15,6 +16,9 @@ public class ModBlockEntities {
 
     // Flag Block Entity.
     public static BlockEntityType<FlagBlockEntity> FLAG_BLOCK_ENTITY;
+
+    // Globe Block Entity
+    public static BlockEntityType<GlobeBlockEntity> GLOBE_BLOCK_ENTITY;
 
     public static BlockEntityType<RocketLaunchPadEntity> ROCKET_LAUNCH_PAD_ENTITY;
 
@@ -32,20 +36,29 @@ public class ModBlockEntities {
     public static void register() {
         // Flag Block Entity.
         FLAG_BLOCK_ENTITY = register("flag_entity", FlagBlockEntity::new,
-                ModBlocks.FLAG_BLOCK,
-                ModBlocks.FLAG_BLUE_BLOCK,
-                ModBlocks.FLAG_BROWN_BLOCK,
-                ModBlocks.FLAG_CYAN_BLOCK,
-                ModBlocks.FLAG_GRAY_BLOCK,
-                ModBlocks.FLAG_GREEN_BLOCK,
-                ModBlocks.FLAG_LIGHT_BLUE_BLOCK,
-                ModBlocks.FLAG_LIME_BLOCK,
-                ModBlocks.FLAG_MAGENTA_BLOCK,
-                ModBlocks.FLAG_ORANGE_BLOCK,
-                ModBlocks.FLAG_PINK_BLOCK,
-                ModBlocks.FLAG_PURPLE_BLOCK,
-                ModBlocks.FLAG_RED_BLOCK,
-                ModBlocks.FLAG_YELLOW_BLOCK
+                ModBlocks.FLAG,
+                ModBlocks.FLAG_BLUE,
+                ModBlocks.FLAG_BROWN,
+                ModBlocks.FLAG_CYAN,
+                ModBlocks.FLAG_GRAY,
+                ModBlocks.FLAG_GREEN,
+                ModBlocks.FLAG_LIGHT_BLUE,
+                ModBlocks.FLAG_LIME,
+                ModBlocks.FLAG_MAGENTA,
+                ModBlocks.FLAG_ORANGE,
+                ModBlocks.FLAG_PINK,
+                ModBlocks.FLAG_PURPLE,
+                ModBlocks.FLAG_RED,
+                ModBlocks.FLAG_YELLOW
+        );
+
+        GLOBE_BLOCK_ENTITY = register("globe_entity", GlobeBlockEntity::new,
+                ModBlocks.EARTH_GLOBE,
+                ModBlocks.MOON_GLOBE,
+                ModBlocks.MARS_GLOBE,
+                ModBlocks.MERCURY_GLOBE,
+                ModBlocks.VENUS_GLOBE,
+                ModBlocks.GLACIO_GLOBE
         );
 
         // Rocket Launch Pad.

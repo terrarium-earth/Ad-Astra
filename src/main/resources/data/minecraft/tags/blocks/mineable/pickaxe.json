@@ -16,6 +16,13 @@
     "beyond_earth:rocket_launch_pad",
     "beyond_earth:coal_lantern",
 
+    "beyond_earth:earth_globe",
+    "beyond_earth:moon_globe",
+    "beyond_earth:mars_globe",
+    "beyond_earth:mercury_globe",
+    "beyond_earth:venus_globe",
+    "beyond_earth:glacio_globe",
+
     "beyond_earth:steel_block",
     "beyond_earth:desh_block",
     "beyond_earth:ostrum_block",
