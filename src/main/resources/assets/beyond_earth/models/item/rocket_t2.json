@@ -1,5 +1,8 @@
 {
-  "parent": "item/generated",
+  "forge_marker": 1,
+  "parent": "forge:item/default",
+  "loader": "forge:obj",
+  "flip-v": true,
   "model": "beyond_earth:models/item/rocket_t2.obj",
   "display": {
     "thirdperson_righthand": {

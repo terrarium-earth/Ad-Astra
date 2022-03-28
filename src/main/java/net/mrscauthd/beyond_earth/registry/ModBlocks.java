@@ -7,6 +7,7 @@ import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.Registry;
 import net.mrscauthd.beyond_earth.blocks.coal_torches.CoalLanternBlock;
 import net.mrscauthd.beyond_earth.blocks.coal_torches.CoalTorchBlock;
+import net.mrscauthd.beyond_earth.blocks.globes.GlobeBlock;
 import net.mrscauthd.beyond_earth.blocks.launch_pad.RocketLaunchPad;
 import net.mrscauthd.beyond_earth.blocks.coal_torches.WallCoalTorchBlock;
 import net.mrscauthd.beyond_earth.blocks.flags.FlagBlock;
@@ -19,20 +20,28 @@ public class ModBlocks {
     public static final Block ROCKET_LAUNCH_PAD = new RocketLaunchPad(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(5.0f, 2.5f).requiresTool()); // Temp
 
     // Flag Blocks.
-    public static final Block FLAG_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
-    public static final Block FLAG_BLUE_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
-    public static final Block FLAG_BROWN_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
-    public static final Block FLAG_CYAN_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
-    public static final Block FLAG_GRAY_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
-    public static final Block FLAG_GREEN_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
-    public static final Block FLAG_LIGHT_BLUE_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
-    public static final Block FLAG_LIME_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
-    public static final Block FLAG_MAGENTA_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
-    public static final Block FLAG_ORANGE_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
-    public static final Block FLAG_PINK_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
-    public static final Block FLAG_PURPLE_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
-    public static final Block FLAG_RED_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
-    public static final Block FLAG_YELLOW_BLOCK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
+    public static final Block FLAG = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
+    public static final Block FLAG_BLUE = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
+    public static final Block FLAG_BROWN = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
+    public static final Block FLAG_CYAN = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
+    public static final Block FLAG_GRAY = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
+    public static final Block FLAG_GREEN = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
+    public static final Block FLAG_LIGHT_BLUE = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
+    public static final Block FLAG_LIME = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
+    public static final Block FLAG_MAGENTA = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
+    public static final Block FLAG_ORANGE = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
+    public static final Block FLAG_PINK = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
+    public static final Block FLAG_PURPLE = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
+    public static final Block FLAG_RED = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
+    public static final Block FLAG_YELLOW = new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1));
+
+    // Globes.
+    public static final Block EARTH_GLOBE = new GlobeBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(3.5f).nonOpaque().requiresTool());
+    public static final Block MOON_GLOBE = new GlobeBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(3.5f).nonOpaque().requiresTool());
+    public static final Block MARS_GLOBE = new GlobeBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(3.5f).nonOpaque().requiresTool());
+    public static final Block MERCURY_GLOBE = new GlobeBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(3.5f).nonOpaque().requiresTool());
+    public static final Block VENUS_GLOBE = new GlobeBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(3.5f).nonOpaque().requiresTool());
+    public static final Block GLACIO_GLOBE = new GlobeBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(3.5f).nonOpaque().requiresTool());
 
     // Torch blocks.
     public static final Block COAL_TORCH = new CoalTorchBlock(FabricBlockSettings.of(Material.DECORATION).noCollision().breakInstantly().sounds(BlockSoundGroup.WOOD));
@@ -135,20 +144,28 @@ public class ModBlocks {
         register("rocket_launch_pad", ROCKET_LAUNCH_PAD);
 
         // Flag Blocks.
-        register("flag", FLAG_BLOCK);
-        register("flag_blue", FLAG_BLUE_BLOCK);
-        register("flag_brown", FLAG_BROWN_BLOCK);
-        register("flag_cyan", FLAG_CYAN_BLOCK);
-        register("flag_gray", FLAG_GRAY_BLOCK);
-        register("flag_green", FLAG_GREEN_BLOCK);
-        register("flag_light_blue", FLAG_LIGHT_BLUE_BLOCK);
-        register("flag_lime", FLAG_LIME_BLOCK);
-        register("flag_magenta", FLAG_MAGENTA_BLOCK);
-        register("flag_orange", FLAG_ORANGE_BLOCK);
-        register("flag_pink", FLAG_PINK_BLOCK);
-        register("flag_purple", FLAG_PURPLE_BLOCK);
-        register("flag_red", FLAG_RED_BLOCK);
-        register("flag_yellow", FLAG_YELLOW_BLOCK);
+        register("flag", FLAG);
+        register("flag_blue", FLAG_BLUE);
+        register("flag_brown", FLAG_BROWN);
+        register("flag_cyan", FLAG_CYAN);
+        register("flag_gray", FLAG_GRAY);
+        register("flag_green", FLAG_GREEN);
+        register("flag_light_blue", FLAG_LIGHT_BLUE);
+        register("flag_lime", FLAG_LIME);
+        register("flag_magenta", FLAG_MAGENTA);
+        register("flag_orange", FLAG_ORANGE);
+        register("flag_pink", FLAG_PINK);
+        register("flag_purple", FLAG_PURPLE);
+        register("flag_red", FLAG_RED);
+        register("flag_yellow", FLAG_YELLOW);
+
+        // Globes.
+        register("earth_globe", EARTH_GLOBE);
+        register("moon_globe", MOON_GLOBE);
+        register("mars_globe", MARS_GLOBE);
+        register("mercury_globe", MERCURY_GLOBE);
+        register("venus_globe", VENUS_GLOBE);
+        register("glacio_globe", GLACIO_GLOBE);
 
         // Torch blocks.
         register("coal_torch", COAL_TORCH);

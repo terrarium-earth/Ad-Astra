@@ -126,9 +126,8 @@ public class FlagBlock extends BlockWithEntity implements Waterloggable, BlockEn
         if (placer instanceof PlayerEntity player) {
             if (blockEntity instanceof FlagBlockEntity flagEntity) {
                 GameProfile profile = player.getGameProfile();
-                NbtCompound compound = new NbtCompound();
                 flagEntity.setOwner(profile);
-                flagEntity.writeNbt(compound);
+                flagEntity.createNbt();
             }
         }
     }

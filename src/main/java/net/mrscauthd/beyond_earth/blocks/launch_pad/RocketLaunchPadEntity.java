@@ -7,31 +7,43 @@ import net.minecraft.world.World;
 import net.mrscauthd.beyond_earth.registry.ModBlockEntities;
 
 public class RocketLaunchPadEntity extends BlockEntity {
+
     public RocketLaunchPadEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.ROCKET_LAUNCH_PAD_ENTITY, pos, state);
     }
 
+    @SuppressWarnings("unused")
     public static void tick(World world, BlockPos pos, BlockState state, RocketLaunchPadEntity blockEntity) {
 
-        int x = pos.getX();
-        int y = pos.getY();
-        int z = pos.getZ();
+        boolean raise = checkInRadius(true, pos, world) && checkInRadius(false, pos, world);
+        world.setBlockState(pos, state.with(RocketLaunchPad.STAGE, raise));
+    }
 
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                BlockPos padPos = new BlockPos(x + i - 1, y, z + j - 1);
+    private static boolean checkInRadius(boolean lookForPlatforms, BlockPos pos, World world) {
+        for (int i = 0; i < (lookForPlatforms ? 3 : 5); i++) {
+            for (int j = 0; j < (lookForPlatforms ? 3 : 5); j++) {
+                BlockPos padPos = new BlockPos(pos.getX() + i - (lookForPlatforms ? 1 : 2), pos.getY(), pos.getZ() + j - (lookForPlatforms ? 1 : 2));
+                BlockState state = world.getBlockState(padPos);
+                boolean isRocket = state.getBlock() instanceof RocketLaunchPad;
 
-                if (!(world.getBlockState(padPos).getBlock() instanceof RocketLaunchPad)) {
-                    if (state.get(RocketLaunchPad.STAGE).equals(true)) {
-                        world.setBlockState(pos, state.with(RocketLaunchPad.STAGE, false));
+                // Skip for self.
+                if (padPos.equals(pos)) {
+                    continue;
+                }
+
+                if (lookForPlatforms) {
+                    // Checks if every block in a 3x3 radius is a rocket launch pad.
+                    if (!isRocket) {
+                        return false;
                     }
-                    return;
+                } else {
+                    // Checks if every block in a 5x5 radius is not a raised rocket launch pad.
+                    if (isRocket && state.get(RocketLaunchPad.STAGE).equals(true)) {
+                        return false;
+                    }
                 }
             }
         }
-
-        if (state.get(RocketLaunchPad.STAGE).equals(false)) {
-            world.setBlockState(pos, state.with(RocketLaunchPad.STAGE, true));
-        }
+        return true;
     }
 }

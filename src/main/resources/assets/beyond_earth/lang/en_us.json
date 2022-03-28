@@ -66,6 +66,7 @@
 
   "itemGroup.beyond_earth.tab_normal": "Beyond Earth",
   "itemGroup.beyond_earth.tab_flags": "Beyond Earth: Flags",
+  "itemGroup.beyond_earth.tab_globes": "Beyond Earth: Globes",
   "itemGroup.beyond_earth.tab_blocks": "Beyond Earth: Blocks",
   "itemGroup.beyond_earth.tab_basics": "Beyond Earth: Basics",
   "itemGroup.beyond_earth.tab_machines": "Beyond Earth: Machines",
@@ -173,7 +174,14 @@
   "block.beyond_earth.glacio_copper_ore": "Glacio Copper Ore",
   "block.beyond_earth.glacio_iron_ore": "Glacio Iron Ore",
   "block.beyond_earth.glacio_lapis_ore": "Glacio Lapis Lazuli Ore",
-  
+
+  "block.beyond_earth.earth_globe": "Earth Globe",
+  "block.beyond_earth.moon_globe": "Moon Globe",
+  "block.beyond_earth.mars_globe": "Mars Globe",
+  "block.beyond_earth.mercury_globe": "Mercury Globe",
+  "block.beyond_earth.venus_globe": "Venus Globe",
+  "block.beyond_earth.glacio_globe": "Glacio Globe",
+
   "fluid.beyond_earth.fuel": "Fuel",
   "fluid.fuel": "Fuel",
   "fluid.beyond_earth.oil": "Oil",
@@ -319,8 +327,8 @@
   "gauge_text.beyond_earth.capacity": "Energy Capacity: %s E",
   "gauge_text.beyond_earth.max_generation": "Max. Energy Generation: %s E/t",
 
-  item.beyond_earth.generator.tooltip: "Generates %s E/t",
-  item.beyond_earth.water_pump.tooltip: "Fluid Transfer: %s mb/t",
+  "item.beyond_earth.generator.tooltip": "Generates %s E/t",
+  "item.beyond_earth.water_pump.tooltip": "Fluid Transfer: %s mb/t",
 
   "gauge.beyond_earth.energy": "Energy",
   "gauge.beyond_earth.fluid": "Fluid",
