@@ -37,6 +37,10 @@ public class GuiUtil {
         return left <= x && x < right && top <= y && y < bottom;
     }
 
+    public static Rectangle getArrowBounds(int left, int top) {
+        return new Rectangle(left, top, ARROW_WIDTH, ARROW_HEIGHT);
+    }
+
     public static Rectangle getEnergyBounds(int left, int top) {
         return new Rectangle(left, top, ENERGY_WIDTH, ENERGY_HEIGHT);
     }
@@ -55,11 +59,23 @@ public class GuiUtil {
         drawVertical(matrixStack, left, top, FIRE_WIDTH, FIRE_HEIGHT, FIRE_PATH, ratio);
     }
 
+    public static void drawArrow(MatrixStack matrixStack, int left, int top, short burnTime, short totalBurnTime) {
+        double ratio = totalBurnTime > 0 ? createRatio(burnTime, totalBurnTime) : 0;
+        drawHorizontal(matrixStack, left, top, ARROW_WIDTH, ARROW_HEIGHT, ARROW_PATH, ratio);
+    }
+
     public static void drawVertical(MatrixStack matrixStack, int left, int top, int width, int height, Identifier resource, double ratio) {
         int ratioHeight = (int) Math.ceil(height * ratio);
         int remainHeight = height - ratioHeight;
         RenderSystem.setShaderTexture(0, resource);
         DrawableHelper.drawTexture(matrixStack, left, top + remainHeight, 0, remainHeight, width, ratioHeight, width, height);
+    }
+
+    public static void drawHorizontal(MatrixStack matrixStack, int left, int top, int width, int height, Identifier resource, double ratio) {
+        int ratioWidth = (int) Math.ceil(width * ratio);
+
+        RenderSystem.setShaderTexture(0, resource);
+        DrawableHelper.drawTexture(matrixStack, left, top, 0, 0, ratioWidth, height, width, height);
     }
 
     private static double createRatio(long a, long b) {

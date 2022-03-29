@@ -321,6 +321,7 @@
 
 
   "gauge.beyond_earth.burn_time": "Burn Time: %s / %d",
+  "gauge.beyond_earth.cook_time": "Cook Time: %s / %d",
   "gauge_text.beyond_earth.storage": "Energy: %s E / %d E",
 
   "gauge_text.beyond_earth.stored": "Stored Energy: %s E",

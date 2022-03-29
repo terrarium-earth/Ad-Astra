@@ -3,25 +3,20 @@ package net.mrscauthd.beyond_earth.blocks.machines.entity;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.mrscauthd.beyond_earth.gui.screen_handlers.CoalGeneratorScreenHandler;
-import net.mrscauthd.beyond_earth.recipes.GeneratingRecipe;
+import net.mrscauthd.beyond_earth.recipes.ModRecipe;
 import net.mrscauthd.beyond_earth.registry.ModBlockEntities;
 import net.mrscauthd.beyond_earth.registry.ModRecipeTypes;
 import org.jetbrains.annotations.Nullable;
 
-public class CoalGeneratorBlockEntity extends AbstractMachineBlockEntity {
+public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity {
 
     public static final long MAX_ENERGY = 9000L;
-    public static final long ENERGY_PER_TICK = 2;
-
-    private short burnTime;
-    private short burnTimeTotal;
+    public static final long ENERGY_PER_TICK = 2L;
 
     public CoalGeneratorBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.COAL_GENERATOR_ENTITY, blockPos, blockState);
@@ -31,11 +26,6 @@ public class CoalGeneratorBlockEntity extends AbstractMachineBlockEntity {
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
         return new CoalGeneratorScreenHandler(syncId, inv, this);
-    }
-
-    @Override
-    public boolean useEnergy() {
-        return true;
     }
 
     @Override
@@ -53,64 +43,38 @@ public class CoalGeneratorBlockEntity extends AbstractMachineBlockEntity {
         return ENERGY_PER_TICK * 2;
     }
 
-    @Override
-    public boolean hasInventory() {
-        return true;
-    }
-
+    // Only input.
     @Override
     public int getInventorySize() {
         return 1;
     }
 
-    @Override
-    public void readNbt(NbtCompound nbt) {
-        super.readNbt(nbt);
-        this.burnTime = nbt.getShort("BurnTime");
-        this.burnTimeTotal = nbt.getShort("BurnTimeTotal");
-    }
-
-    @Override
-    public void writeNbt(NbtCompound nbt) {
-        super.writeNbt(nbt);
-        nbt.putShort("BurnTime", this.burnTime);
-        nbt.putShort("BurnTimeTotal", this.burnTimeTotal);
-    }
-
-    public short getBurnTime() {
-        return burnTime;
-    }
-
-    public short getBurnTimeTotal() {
-        return burnTimeTotal;
-    }
 
     @SuppressWarnings("unused")
     public static void tick(World world, BlockPos pos, BlockState state, AbstractMachineBlockEntity blockEntity) {
         if (blockEntity.useEnergy()) {
-            CoalGeneratorBlockEntity coalGeneratorBlockEntity = (CoalGeneratorBlockEntity) blockEntity;
+            CoalGeneratorBlockEntity entity = (CoalGeneratorBlockEntity) blockEntity;
 
-            if (blockEntity.getEnergy() < blockEntity.getMaxGeneration()) {
-                if (coalGeneratorBlockEntity.burnTime > 0) {
-                    coalGeneratorBlockEntity.burnTime--;
-                    blockEntity.cumulateEnergy();
+            ItemStack input = entity.getItems().get(0);
 
-                } else if (!blockEntity.getItems().get(0).isEmpty()) {
+            if (entity.getEnergy() < entity.getMaxGeneration()) {
 
-                    ItemStack input = blockEntity.getItems().get(0);
-                    GeneratingRecipe recipe = world.getRecipeManager().getFirstMatch(ModRecipeTypes.GENERATING_RECIPE, blockEntity, world).orElse(null);
-
+                // Consume the fuel.
+                if (entity.cookTime > 0) {
+                    entity.cookTime--;
+                    entity.cumulateEnergy();
+                    // Check if the input is a valid fuel.
+                } else if (!input.isEmpty()) {
+                    ModRecipe recipe = entity.createRecipe(ModRecipeTypes.GENERATING_RECIPE, input, false);
                     if (recipe != null) {
-                        Item item = recipe.getInput();
-                        if (input.getItem().equals(item)) {
-                            input.decrement(1);
-                            coalGeneratorBlockEntity.burnTime = recipe.getBurnTime();
-                            coalGeneratorBlockEntity.burnTimeTotal = recipe.getBurnTime();
-                        }
+                        input.decrement(1);
+                        entity.cookTimeTotal = recipe.getCookTime();
+                        entity.cookTime = recipe.getCookTime();
                     }
                 }
             }
-            blockEntity.energyOut();
+            // Send energy to surrounding blocks.
+            entity.energyOut();
         }
     }
 }

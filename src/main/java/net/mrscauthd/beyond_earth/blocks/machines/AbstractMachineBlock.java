@@ -79,7 +79,7 @@ public abstract class AbstractMachineBlock extends BlockWithEntity implements Bl
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof AbstractMachineBlockEntity machineBlock) {
-                if (machineBlock.hasInventory()) {
+                if (machineBlock.getInventorySize() > 0) {
                     ItemScatterer.spawn(world, pos, machineBlock);
                     world.updateComparators(pos, this);
                 }
