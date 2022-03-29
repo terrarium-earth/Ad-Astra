@@ -1,5 +1,7 @@
 {
-	"type": "beyond_earth:generating",
-	"input": "minecraft:coal",
-	"burnTime": 400
+  "type": "beyond_earth:generating",
+  "input": {
+    "item": "minecraft:coal"
+  },
+  "burnTime": 400
 }

@@ -3,6 +3,7 @@ package net.mrscauthd.beyond_earth.client.renderer.globe;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
@@ -37,5 +38,10 @@ public class GlobeModel extends Model {
     @Override
     public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
         globe.render(matrices, vertices, light, overlay);
+    }
+
+    // Get model from client.
+    public static GlobeModel getModel() {
+        return new GlobeModel(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(GlobeModel.LAYER_LOCATION));
     }
 }

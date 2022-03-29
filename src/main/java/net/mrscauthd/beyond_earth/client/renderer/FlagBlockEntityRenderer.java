@@ -23,6 +23,7 @@ import java.util.Map;
 @Environment(EnvType.CLIENT)
 public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEntity> {
 
+    @SuppressWarnings("unused")
     public FlagBlockEntityRenderer(BlockEntityRendererFactory.Context ctx) {
     }
 

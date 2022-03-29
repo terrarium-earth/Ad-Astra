@@ -76,7 +76,8 @@ public class ModBlockEntities {
 
         EnergyStorage.SIDED.registerForBlockEntities((blockEntity, direction) -> ((AbstractMachineBlockEntity) blockEntity).getSideEnergyStorage(direction),
                 SOLAR_PANEL_ENTITY,
-                COAL_GENERATOR_ENTITY
+                COAL_GENERATOR_ENTITY,
+                COMPRESSOR_ENTITY
         );
     }
 

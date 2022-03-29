@@ -1,5 +1,7 @@
 package net.mrscauthd.beyond_earth.blocks.globes;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -14,47 +16,50 @@ import org.jetbrains.annotations.Nullable;
 
 public class GlobeBlockEntity extends BlockEntity {
 
-    private float rotationalInertia = 0.0f;
-    private float yaw = 0.0f;
+    // How fast the globe slows down.
+    public static final double INERTIA = 0.1;
+    public static final double DECELERATION = 0.2;
+
+    private float angularVelocity = 0.0f;
+
+    @Environment(EnvType.CLIENT)
+    public float oldYaw = 0.0f;
 
     public GlobeBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.GLOBE_BLOCK_ENTITY, pos, state);
     }
 
+    @SuppressWarnings("unused")
+    public static void tick(World world, BlockPos pos, BlockState state, GlobeBlockEntity blockEntity) {
+        // Simulate an inertia effect.
+        if (blockEntity.angularVelocity > 0) {
+            blockEntity.angularVelocity -= INERTIA;
+            blockEntity.markDirty();
+            // Reset the angular velocity if it goes below zero.
+        } else if (blockEntity.angularVelocity < 0) {
+            blockEntity.angularVelocity = 0;
+            blockEntity.markDirty();
+        }
+    }
+
     @Override
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
-        this.rotationalInertia = nbt.getFloat("inertia");
-        this.yaw = nbt.getFloat("yaw");
+        this.angularVelocity = nbt.getFloat("AngularVelocity");
     }
 
     @Override
     public void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
-        nbt.putFloat("inertia", this.rotationalInertia);
-        nbt.putFloat("yaw", this.yaw);
+        nbt.putFloat("AngularVelocity", this.angularVelocity);
     }
 
-    @SuppressWarnings("unused")
-    public static void tick(World world, BlockPos pos, BlockState state, GlobeBlockEntity blockEntity) {
-        // Decrease inertia.
-        if (blockEntity.rotationalInertia > 0) {
-            blockEntity.rotationalInertia -= 0.0075f;
-            blockEntity.markDirty();
-            blockEntity.yaw -= blockEntity.rotationalInertia;
-        }
+    public float getAngularVelocity() {
+        return this.angularVelocity;
     }
 
-    public float getRotationalInertia() {
-        return this.rotationalInertia;
-    }
-
-    public void setRotationalInertia(float value) {
-        this.rotationalInertia = value;
-    }
-
-    public float getYaw() {
-        return this.yaw;
+    public void setAngularVelocity(float value) {
+        this.angularVelocity = value;
     }
 
     @Override
