@@ -46,8 +46,8 @@ public class GlobeBlock extends BlockWithEntity implements Waterloggable, BlockE
 
             // Turn globe.
             if (blockEntity != null) {
-                float value = (float) (Math.PI / (Math.pow(0.00001, blockEntity.getRotationalInertia()) + 1) / 10);
-                blockEntity.setRotationalInertia(value);
+                float torque = (float) (Math.PI / (Math.pow(GlobeBlockEntity.DECELERATION, blockEntity.getAngularVelocity()) + 1));
+                blockEntity.setAngularVelocity(torque);
                 blockEntity.createNbt();
             }
         }

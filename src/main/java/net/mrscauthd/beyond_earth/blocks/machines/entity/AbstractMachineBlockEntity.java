@@ -7,6 +7,7 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
+import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.Packet;
@@ -28,7 +29,7 @@ import team.reborn.energy.api.EnergyStorageUtil;
 import team.reborn.energy.api.base.SimpleSidedEnergyContainer;
 
 @SuppressWarnings("UnstableApiUsage")
-public abstract class AbstractMachineBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, SimpleInventory {
+public abstract class AbstractMachineBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, SimpleInventory, SidedInventory {
 
     private final DefaultedList<ItemStack> inventory;
 
@@ -85,10 +86,6 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
         return 0;
     }
 
-    public boolean hasInventory() {
-        return false;
-    }
-
     public int getInventorySize() {
         return 0;
     }
@@ -98,6 +95,15 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
             this.energyStorage.amount += this.getEnergyPerTick();
         } else if (this.energyStorage.amount > this.getMaxGeneration()) {
             this.energyStorage.amount = this.getMaxGeneration();
+        }
+        this.markDirty();
+    }
+
+    public void drainEnergy() {
+        if (this.energyStorage.amount > 0) {
+            this.energyStorage.amount -= this.getEnergyPerTick();
+        } else {
+            this.energyStorage.amount = 0;
         }
         this.markDirty();
     }
@@ -137,7 +143,7 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
     @Override
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
-        if (hasInventory()) {
+        if (getInventorySize() > 0) {
             Inventories.readNbt(nbt, this.inventory);
         }
         if (useEnergy()) {
@@ -148,7 +154,7 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
     @Override
     public void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
-        if (hasInventory()) {
+        if (getInventorySize() > 0) {
             Inventories.writeNbt(nbt, this.inventory);
         }
         if (useEnergy()) {
@@ -164,6 +170,25 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
         if (this.world instanceof ServerWorld world) {
             world.getChunkManager().markForUpdate(this.pos);
         }
+    }
+
+    @Override
+    public int[] getAvailableSlots(Direction side) {
+        int[] result = new int[getItems().size()];
+        for (int i = 0; i < result.length; i++) {
+            result[i] = i;
+        }
+        return result;
+    }
+
+    @Override
+    public boolean canInsert(int slot, ItemStack stack, Direction dir) {
+        return true;
+    }
+
+    @Override
+    public boolean canExtract(int slot, ItemStack stack, Direction dir) {
+        return true;
     }
 
     @Override

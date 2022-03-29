@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 public class SolarPanelBlockEntity extends AbstractMachineBlockEntity {
 
     public static final long MAX_ENERGY = 9000L;
-    public static final long ENERGY_PER_TICK = 5;
+    public static final long ENERGY_PER_TICK = 5L;
 
     public SolarPanelBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.SOLAR_PANEL_ENTITY, blockPos, blockState);

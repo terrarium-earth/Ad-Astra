@@ -12,7 +12,6 @@ import org.jetbrains.annotations.Nullable;
 
 public class CoalGeneratorBlock extends AbstractMachineBlock {
 
-
     public CoalGeneratorBlock(Settings settings) {
         super(settings);
     }
