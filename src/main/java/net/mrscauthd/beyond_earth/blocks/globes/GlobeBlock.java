@@ -27,6 +27,7 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
 import net.mrscauthd.beyond_earth.registry.ModBlockEntities;
 import org.jetbrains.annotations.Nullable;
 
@@ -42,11 +43,9 @@ public class GlobeBlock extends BlockWithEntity implements Waterloggable, BlockE
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
-            GlobeBlockEntity blockEntity = (GlobeBlockEntity) world.getBlockEntity(pos);
-
-            // Turn globe.
-            if (blockEntity != null) {
-                float torque = (float) (Math.PI / (Math.pow(GlobeBlockEntity.DECELERATION, blockEntity.getAngularVelocity()) + 1));
+            if (world.getBlockEntity(pos) instanceof GlobeBlockEntity blockEntity) {
+                // Turn the globe.
+                float torque = (float) (Math.PI / (Math.pow(GlobeBlockEntity.DECELERATION, blockEntity.getAngularVelocity()) + 1) / 4);
                 blockEntity.setAngularVelocity(torque);
                 blockEntity.createNbt();
             }
@@ -66,7 +65,8 @@ public class GlobeBlock extends BlockWithEntity implements Waterloggable, BlockE
     }
 
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+    public <T extends
+            BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
         return world.isClient ? null : checkType(type, ModBlockEntities.GLOBE_BLOCK_ENTITY, GlobeBlockEntity::tick);
     }
 
@@ -76,7 +76,8 @@ public class GlobeBlock extends BlockWithEntity implements Waterloggable, BlockE
     }
 
     @Override
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState
+            neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (state.get(WATERLOGGED)) {
             world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
@@ -111,6 +112,10 @@ public class GlobeBlock extends BlockWithEntity implements Waterloggable, BlockE
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(FACING, WATERLOGGED);
+    }
+
+    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+        return Block.hasTopRim(world, pos.down());
     }
 
     @Override

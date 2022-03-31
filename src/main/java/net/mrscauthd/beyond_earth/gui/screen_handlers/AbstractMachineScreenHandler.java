@@ -81,7 +81,7 @@ public abstract class AbstractMachineScreenHandler extends ScreenHandler {
         return newStack;
     }
 
-    // TODO: probably a temporary fix for some weird client-server sync issues.
+    // Fixes a client sync issue.
     @Override
     public void onSlotClick(int slotIndex, int button, SlotActionType actionType, PlayerEntity player) {
         super.onSlotClick(slotIndex, button, actionType, player);

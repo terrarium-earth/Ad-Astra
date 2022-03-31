@@ -71,11 +71,11 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
     }
 
     public long getMaxGeneration() {
-        return 1000;
+        return 0;
     }
 
     public long getEnergyPerTick() {
-        return 1;
+        return 0;
     }
 
     public long getMaxEnergyInsert() {

@@ -9,7 +9,7 @@ import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.mrscauthd.beyond_earth.registry.ModRecipeTypes;
+import net.mrscauthd.beyond_earth.registry.ModRecipes;
 import net.mrscauthd.beyond_earth.util.ModIdentifier;
 
 public class CompressingRecipe extends ModRecipe {
@@ -27,7 +27,7 @@ public class CompressingRecipe extends ModRecipe {
 
     @Override
     public RecipeType<?> getType() {
-        return ModRecipeTypes.COMPRESSING_RECIPE;
+        return ModRecipes.COMPRESSING_RECIPE;
     }
 
 

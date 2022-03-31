@@ -13,7 +13,7 @@ import net.mrscauthd.beyond_earth.util.ModIdentifier;
 @Environment(EnvType.CLIENT)
 public class SolarPanelScreen extends AbstractMachineScreen<SolarPanelScreenHandler> {
 
-    private static final Identifier TEXTURE = new ModIdentifier("textures/screens/solar_panel_gui.png");
+    private static final Identifier TEXTURE = new ModIdentifier("textures/screens/solar_panel.png");
 
     public SolarPanelScreen(SolarPanelScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title, TEXTURE);

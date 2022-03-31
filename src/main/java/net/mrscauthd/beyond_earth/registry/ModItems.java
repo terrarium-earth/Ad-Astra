@@ -15,13 +15,15 @@ import net.mrscauthd.beyond_earth.blocks.machines.entity.CoalGeneratorBlockEntit
 import net.mrscauthd.beyond_earth.blocks.machines.entity.SolarPanelBlockEntity;
 import net.mrscauthd.beyond_earth.blocks.machines.entity.WaterPumpBlockEntity;
 import net.mrscauthd.beyond_earth.items.HammerItem;
+import net.mrscauthd.beyond_earth.items.vehicles.RocketItem;
+import net.mrscauthd.beyond_earth.items.vehicles.RoverItem;
 import net.mrscauthd.beyond_earth.util.ModIdentifier;
 
 import java.util.List;
 
 public class ModItems {
 
-    public static final ItemGroup ITEM_GROUP_NORMAL = FabricItemGroupBuilder.build(new ModIdentifier("tab_normal"), () -> new ItemStack(ModItems.CHEESE)); // Temp icon.
+    public static final ItemGroup ITEM_GROUP_NORMAL = FabricItemGroupBuilder.build(new ModIdentifier("tab_normal"), () -> new ItemStack(ModItems.TIER_1_ROCKET));
     public static final ItemGroup ITEM_GROUP_MACHINES = FabricItemGroupBuilder.build(new ModIdentifier("tab_machines"), () -> new ItemStack(ModBlocks.NASA_WORKBENCH));
     public static final ItemGroup ITEM_GROUP_BASICS = FabricItemGroupBuilder.build(new ModIdentifier("tab_basics"), () -> new ItemStack(ModItems.DESH_ENGINE));
     public static final ItemGroup ITEM_GROUP_MATERIALS = FabricItemGroupBuilder.build(new ModIdentifier("tab_materials"), () -> new ItemStack(ModItems.IRON_PLATE));
@@ -29,6 +31,13 @@ public class ModItems {
     public static final ItemGroup ITEM_GROUP_GLOBES = FabricItemGroupBuilder.build(new ModIdentifier("tab_globes"), () -> new ItemStack(ModItems.EARTH_GLOBE));
     public static final ItemGroup ITEM_GROUP_BLOCKS = FabricItemGroupBuilder.build(new ModIdentifier("tab_blocks"), () -> new ItemStack(ModBlocks.MOON_IRON_ORE));
     public static final ItemGroup ITEM_GROUP_SPAWN_EGGS = FabricItemGroupBuilder.build(new ModIdentifier("tab_spawn_eggs"), () -> new ItemStack(Items.ZOMBIE_SPAWN_EGG)); // Temp icon.
+
+    // Vehicles Items.
+    public static final Item TIER_1_ROCKET = new RocketItem(new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
+    public static final Item TIER_2_ROCKET = new RocketItem(new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
+    public static final Item TIER_3_ROCKET = new RocketItem(new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
+    public static final Item TIER_4_ROCKET = new RocketItem(new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
+    public static final Item ROVER = new RoverItem(new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
 
     // Items.
     public static final Item CHEESE = new Item(new FabricItemSettings().group(ITEM_GROUP_NORMAL).food(new FoodComponent.Builder().hunger(4).saturationModifier(3.0f).build()));
@@ -91,12 +100,12 @@ public class ModItems {
     public static final BlockItem FLAG_YELLOW = new TallBlockItem(ModBlocks.FLAG_YELLOW, new Item.Settings().group(ITEM_GROUP_FLAGS));
 
     // Globes.
-    public static final BlockItem EARTH_GLOBE = new BlockItem(ModBlocks.EARTH_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES));
-    public static final BlockItem MOON_GLOBE = new BlockItem(ModBlocks.MOON_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES));
-    public static final BlockItem MARS_GLOBE = new BlockItem(ModBlocks.MARS_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES));
-    public static final BlockItem MERCURY_GLOBE = new BlockItem(ModBlocks.MERCURY_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES));
-    public static final BlockItem VENUS_GLOBE = new BlockItem(ModBlocks.VENUS_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES));
-    public static final BlockItem GLACIO_GLOBE = new BlockItem(ModBlocks.GLACIO_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES));
+    public static final BlockItem EARTH_GLOBE = new BlockItem(ModBlocks.EARTH_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.EPIC));
+    public static final BlockItem MOON_GLOBE = new BlockItem(ModBlocks.MOON_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.EPIC));
+    public static final BlockItem MARS_GLOBE = new BlockItem(ModBlocks.MARS_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.EPIC));
+    public static final BlockItem MERCURY_GLOBE = new BlockItem(ModBlocks.MERCURY_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.EPIC));
+    public static final BlockItem VENUS_GLOBE = new BlockItem(ModBlocks.VENUS_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.EPIC));
+    public static final BlockItem GLACIO_GLOBE = new BlockItem(ModBlocks.GLACIO_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.EPIC));
 
     // Torch items.
     public static final Item COAL_TORCH = new WallStandingBlockItem(ModBlocks.COAL_TORCH, ModBlocks.WALL_COAL_TORCH, new FabricItemSettings().group(ITEM_GROUP_BASICS));
@@ -207,6 +216,13 @@ public class ModItems {
 
 
     public static void register() {
+
+        // Vehicles Items.
+        register("rocket_t1", TIER_1_ROCKET);
+        register("rocket_t2", TIER_2_ROCKET);
+        register("rocket_t3", TIER_3_ROCKET);
+        register("rocket_t4", TIER_4_ROCKET);
+        register("rover", ROVER);
 
         // Items.
         register("cheese", CHEESE);
