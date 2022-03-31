@@ -17,7 +17,7 @@ import java.awt.*;
 @Environment(EnvType.CLIENT)
 public class CompressorScreen extends AbstractMachineScreen<CompressorScreenHandler> {
 
-    private static final Identifier TEXTURE = new ModIdentifier("textures/screens/compressor_gui.png");
+    private static final Identifier TEXTURE = new ModIdentifier("textures/screens/compressor.png");
 
     public static final int ENERGY_LEFT = 144;
     public static final int ENERGY_TOP = 21;
@@ -27,6 +27,8 @@ public class CompressorScreen extends AbstractMachineScreen<CompressorScreenHand
 
     public CompressorScreen(CompressorScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title, TEXTURE);
+        this.backgroundWidth = 177;
+        this.backgroundHeight = 168;
     }
 
     @Override

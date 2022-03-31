@@ -7,7 +7,7 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.util.Identifier;
-import net.mrscauthd.beyond_earth.registry.ModRecipeTypes;
+import net.mrscauthd.beyond_earth.registry.ModRecipes;
 import net.mrscauthd.beyond_earth.util.ModIdentifier;
 
 public class GeneratingRecipe extends ModRecipe {
@@ -24,7 +24,7 @@ public class GeneratingRecipe extends ModRecipe {
 
     @Override
     public RecipeType<?> getType() {
-        return ModRecipeTypes.GENERATING_RECIPE;
+        return ModRecipes.GENERATING_RECIPE;
     }
 
 

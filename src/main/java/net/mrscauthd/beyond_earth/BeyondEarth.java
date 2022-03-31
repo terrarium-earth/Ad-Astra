@@ -1,12 +1,7 @@
 package net.mrscauthd.beyond_earth;
 
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.util.registry.Registry;
-import net.mrscauthd.beyond_earth.recipes.CompressingRecipe;
-import net.mrscauthd.beyond_earth.recipes.GeneratingRecipe;
-import net.mrscauthd.beyond_earth.recipes.HammerShapelessRecipe;
 import net.mrscauthd.beyond_earth.registry.*;
-import net.mrscauthd.beyond_earth.util.ModIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,12 +20,7 @@ public class BeyondEarth implements ModInitializer {
         ModFluids.register();
         ModArmour.register();
         ModScreenHandlers.register();
-        ModRecipeTypes.register();
-
-        // Recipe serializers.
-        Registry.register(Registry.RECIPE_SERIALIZER, new ModIdentifier("hammer_recipe"), new HammerShapelessRecipe.Serializer());
-        Registry.register(Registry.RECIPE_SERIALIZER,  GeneratingRecipe.RECIPE_ID, new GeneratingRecipe.Serializer());
-        Registry.register(Registry.RECIPE_SERIALIZER,  CompressingRecipe.RECIPE_ID, new CompressingRecipe.Serializer());
+        ModRecipes.register();
 
         BeyondEarth.LOGGER.info("Beyond Earth Initialized!");
     }

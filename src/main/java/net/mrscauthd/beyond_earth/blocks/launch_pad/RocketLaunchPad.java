@@ -17,6 +17,7 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
 import net.mrscauthd.beyond_earth.registry.ModBlockEntities;
 import org.jetbrains.annotations.Nullable;
 
@@ -62,6 +63,10 @@ public class RocketLaunchPad extends BlockWithEntity implements Waterloggable, B
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(WATERLOGGED, STAGE);
+    }
+
+    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+        return Block.hasTopRim(world, pos.down());
     }
 
     @Override
