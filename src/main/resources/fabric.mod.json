@@ -6,9 +6,9 @@
   "name": "Beyond Earth",
   "description": "Fly to Other Planets and Beyond!",
   "authors": [
-    "MrScautHD (Developer)",
-    "ExistingEevee (Developer)",
-    "Alex Nijjar (Developer / Fabric Porter)",
+    "MrScautHD (Forge Developer)",
+    "ExistingEevee (Forge Developer)",
+    "Alex Nijjar (Fabric Developer)",
     "Mvbz (Sound Artist)",
     "FritzHackenstein (Texturer)",
     "Fizz (Texturer)",
@@ -38,6 +38,7 @@
       "net.mrscauthd.beyond_earth.client.BeyondEarthClient"
     ]
   },
+  "accessWidener": "beyond_earth.accesswidener",
   "mixins": [
     "beyond_earth.mixins.json"
   ],

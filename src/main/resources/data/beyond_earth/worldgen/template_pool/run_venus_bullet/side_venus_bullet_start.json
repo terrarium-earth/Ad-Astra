@@ -1,0 +1,15 @@
+{
+  "name": "beyond_earth:run_venus_bullet/side_venus_bullet_start",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 100,
+      "element": {
+        "location": "beyond_earth:venus_bullet",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

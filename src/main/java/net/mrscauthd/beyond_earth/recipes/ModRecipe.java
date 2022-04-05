@@ -49,7 +49,7 @@ public abstract class ModRecipe implements Recipe<Inventory>, Predicate<ItemStac
 
     @Override
     public Identifier getId() {
-        return id;
+        return this.id;
     }
 
     @Override
@@ -58,10 +58,10 @@ public abstract class ModRecipe implements Recipe<Inventory>, Predicate<ItemStac
     }
 
     public Ingredient getInputIngredient() {
-        return input;
+        return this.input;
     }
 
     public short getCookTime() {
-        return cookTime;
+        return this.cookTime;
     }
 }

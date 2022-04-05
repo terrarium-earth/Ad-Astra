@@ -13,7 +13,7 @@ public class RocketLaunchPadEntity extends BlockEntity {
     }
 
     @SuppressWarnings("unused")
-    public static void tick(World world, BlockPos pos, BlockState state, RocketLaunchPadEntity blockEntity) {
+    public static void serverTick(World world, BlockPos pos, BlockState state, RocketLaunchPadEntity blockEntity) {
 
         boolean raise = checkInRadius(true, pos, world) && checkInRadius(false, pos, world);
         world.setBlockState(pos, state.with(RocketLaunchPad.STAGE, raise));

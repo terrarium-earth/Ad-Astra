@@ -8,11 +8,8 @@ import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.util.Identifier;
 import net.mrscauthd.beyond_earth.registry.ModRecipes;
-import net.mrscauthd.beyond_earth.util.ModIdentifier;
 
 public class GeneratingRecipe extends ModRecipe {
-
-    public static final Identifier RECIPE_ID = new ModIdentifier("generating");
 
     public GeneratingRecipe(Identifier id, Ingredient input, ItemStack output, short cookTime) {
         super(id, input, output, cookTime);
@@ -46,6 +43,7 @@ public class GeneratingRecipe extends ModRecipe {
 
         @Override
         public void write(PacketByteBuf buf, GeneratingRecipe recipe) {
+            buf.writeIdentifier(recipe.getId());
             recipe.getInputIngredient().write(buf);
             buf.writeShort(recipe.cookTime);
         }

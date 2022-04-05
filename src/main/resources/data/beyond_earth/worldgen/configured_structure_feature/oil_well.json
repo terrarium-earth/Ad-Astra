@@ -1,0 +1,12 @@
+{
+  "type": "beyond_earth:oil_well",
+  "config": {
+    "start_pool": "beyond_earth:run_oil/side_oil_start",
+    "size": 1
+  },
+  "biomes": "#beyond_earth:has_structure/oil_well_biomes",
+  "adapt_noise": false,
+  "spawn_overrides": {
+
+  }
+}
