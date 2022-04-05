@@ -9,13 +9,14 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.math.MathHelper;
 import net.mrscauthd.beyond_earth.util.ModIdentifier;
 
 @Environment(EnvType.CLIENT)
 public class GlobeModel extends Model {
 
     public static final EntityModelLayer LAYER_LOCATION = new EntityModelLayer(new ModIdentifier("globe"), "main");
-    public final ModelPart globe;
+    private final ModelPart globe;
 
     public GlobeModel(ModelPart root) {
         super(RenderLayer::getEntityCutout);
@@ -38,6 +39,10 @@ public class GlobeModel extends Model {
     @Override
     public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
         globe.render(matrices, vertices, light, overlay);
+    }
+
+    public void setYaw(float yaw) {
+        this.globe.getChild("planet").yaw = yaw;
     }
 
     // Get model from client.

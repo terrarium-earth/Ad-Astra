@@ -24,6 +24,6 @@ public class SolarPanelBlock extends AbstractMachineBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return world.isClient ? null : checkType(type, ModBlockEntities.SOLAR_PANEL_ENTITY, SolarPanelBlockEntity::tick);
+        return world.isClient ? null : checkType(type, ModBlockEntities.SOLAR_PANEL_ENTITY, SolarPanelBlockEntity::serverTick);
     }
 }

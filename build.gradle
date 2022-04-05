@@ -35,6 +35,10 @@ dependencies {
 	}
 }
 
+loom {
+	accessWidenerPath = file("src/main/resources/beyond_earth.accesswidener")
+}
+
 processResources {
 	inputs.property "version", project.version
 

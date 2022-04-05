@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "beyond_earth:meteor",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 1224466880,
+    "spacing": 22,
+    "separation": 5,
+    "type": "minecraft:random_spread"
+  }
+}

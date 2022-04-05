@@ -13,6 +13,7 @@ import net.minecraft.util.JsonHelper;
 import net.minecraft.util.collection.DefaultedList;
 import net.mrscauthd.beyond_earth.items.HammerItem;
 import net.mrscauthd.beyond_earth.registry.ModItems;
+import net.mrscauthd.beyond_earth.util.ModIdentifier;
 
 public class HammerShapelessRecipe extends ShapelessRecipe {
 

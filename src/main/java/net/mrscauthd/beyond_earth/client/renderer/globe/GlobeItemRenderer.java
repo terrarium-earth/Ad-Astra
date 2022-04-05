@@ -24,7 +24,7 @@ public class GlobeItemRenderer implements BuiltinItemRendererRegistry.DynamicIte
         MinecraftClient client = MinecraftClient.getInstance();
         ClientWorld world = client.world;
         if (world != null) {
-            model.globe.getChild("planet").yaw = (world.getTime() + (client.isPaused() ? 0 : client.getTickDelta())) / -20;
+            model.setYaw((world.getTime() + (client.isPaused() ? 0 : client.getTickDelta())) / -20);
         }
 
         GlobeRenderer.render(Registry.ITEM.getId(stack.getItem()), model, Direction.NORTH, matrices, vertexConsumers, light, overlay);

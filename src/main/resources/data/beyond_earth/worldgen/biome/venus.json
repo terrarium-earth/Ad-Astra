@@ -1,0 +1,30 @@
+{
+  "temperature": 1.5,
+  "downfall": 1,
+  "precipitation": "none",
+  "category": "icy",
+  "effects": {
+    "sky_color": 0,
+    "fog_color": 0,
+    "water_color": 4159204,
+    "water_fog_color": 329011,
+    "grass_color": 9551193,
+    "foliage_color": 7842607,
+    "particle": {
+      "options": {
+        "type": "minecraft:crimson_spore"
+      },
+      "probability": 0.02
+    }
+  },
+  "spawners": {},
+  "spawn_costs": {},
+  "carvers": {
+    "air": [
+      "minecraft:cave",
+      "minecraft:cave_extra_underground",
+      "minecraft:canyon"
+    ]
+  },
+  "features": []
+}

@@ -10,11 +10,9 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.mrscauthd.beyond_earth.registry.ModBlockEntities;
-import org.jetbrains.annotations.Nullable;
 
 public class GlobeBlockEntity extends BlockEntity {
 
-    // How fast the globe slows down.
     public static final float INERTIA = 0.0075f;
     public static final float DECELERATION = 0.00003f;
 
@@ -26,18 +24,29 @@ public class GlobeBlockEntity extends BlockEntity {
         super(ModBlockEntities.GLOBE_BLOCK_ENTITY, pos, state);
     }
 
+
     @SuppressWarnings("unused")
     public static void tick(World world, BlockPos pos, BlockState state, GlobeBlockEntity blockEntity) {
-
-        // Simulate an inertia effect.
         if (blockEntity.getAngularVelocity() > 0) {
+            // Simulate an inertia effect.
             blockEntity.setAngularVelocity(blockEntity.getAngularVelocity() - INERTIA);
+
             blockEntity.setCachedYaw(blockEntity.getYaw());
             blockEntity.setYaw(blockEntity.getYaw() - blockEntity.getAngularVelocity());
-            blockEntity.markDirty();
+
         } else if (blockEntity.getAngularVelocity() < 0) {
             blockEntity.setAngularVelocity(0);
             blockEntity.markDirty();
+        }
+    }
+
+    @Override
+    public void markDirty() {
+        super.markDirty();
+
+        // Update renderer.
+        if (this.world instanceof ServerWorld serverWorld) {
+            serverWorld.getChunkManager().markForUpdate(this.pos);
         }
     }
 
@@ -55,6 +64,16 @@ public class GlobeBlockEntity extends BlockEntity {
         nbt.putFloat("AngularVelocity", this.angularVelocity);
         nbt.putFloat("Yaw", this.yaw);
         nbt.putFloat("CachedYaw", this.cachedYaw);
+    }
+
+    @Override
+    public Packet<ClientPlayPacketListener> toUpdatePacket() {
+        return BlockEntityUpdateS2CPacket.create(this);
+    }
+
+    @Override
+    public NbtCompound toInitialChunkDataNbt() {
+        return this.createNbt();
     }
 
     public float getAngularVelocity() {
@@ -79,26 +98,5 @@ public class GlobeBlockEntity extends BlockEntity {
 
     public void setCachedYaw(float yaw) {
         this.cachedYaw = yaw;
-    }
-
-    @Override
-    public void markDirty() {
-        super.markDirty();
-
-        // Update renderer.
-        if (this.world instanceof ServerWorld world) {
-            world.getChunkManager().markForUpdate(this.pos);
-        }
-    }
-
-    @Nullable
-    @Override
-    public Packet<ClientPlayPacketListener> toUpdatePacket() {
-        return BlockEntityUpdateS2CPacket.create(this);
-    }
-
-    @Override
-    public NbtCompound toInitialChunkDataNbt() {
-        return this.createNbt();
     }
 }

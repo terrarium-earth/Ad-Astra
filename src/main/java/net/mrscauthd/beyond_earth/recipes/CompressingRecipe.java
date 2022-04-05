@@ -10,11 +10,8 @@ import net.minecraft.recipe.RecipeType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.mrscauthd.beyond_earth.registry.ModRecipes;
-import net.mrscauthd.beyond_earth.util.ModIdentifier;
 
 public class CompressingRecipe extends ModRecipe {
-
-    public static final Identifier RECIPE_ID = new ModIdentifier("compressing");
 
     public CompressingRecipe(Identifier id, Ingredient input, ItemStack output, short cookTime) {
         super(id, input, output, cookTime);
@@ -54,6 +51,7 @@ public class CompressingRecipe extends ModRecipe {
 
         @Override
         public void write(PacketByteBuf buf, CompressingRecipe recipe) {
+            buf.writeIdentifier(recipe.getId());
             recipe.getInputIngredient().write(buf);
             buf.writeItemStack(recipe.getOutput());
             buf.writeShort(recipe.cookTime);

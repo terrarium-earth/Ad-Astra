@@ -1,0 +1,32 @@
+{
+  "temperature": -0.7,
+  "downfall": 0,
+  "precipitation": "snow",
+  "category": "icy",
+  "effects": {
+    "sky_color": 8756735,
+    "fog_color": 12638463,
+    "water_color": 4159204,
+    "water_fog_color": 329011,
+    "grass_color": 9551193,
+    "foliage_color": 16777215
+  },
+  "spawners": {},
+  "spawn_costs": {},
+  "carvers": {
+    "air": [
+      "minecraft:cave",
+      "minecraft:cave_extra_underground",
+      "minecraft:canyon"
+    ]
+  },
+  "features": [
+    [
+      "minecraft:freeze_top_layer",
+      "minecraft:amethyst_geode",
+      "minecraft:glow_lichen",
+      "minecraft:ice_spike",
+      "minecraft:ice_patch"
+    ]
+  ]
+}
