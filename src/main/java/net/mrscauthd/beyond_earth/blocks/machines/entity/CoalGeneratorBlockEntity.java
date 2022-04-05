@@ -51,7 +51,7 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity {
 
 
     @SuppressWarnings("unused")
-    public static void tick(World world, BlockPos pos, BlockState state, AbstractMachineBlockEntity blockEntity) {
+    public static void serverTick(World world, BlockPos pos, BlockState state, AbstractMachineBlockEntity blockEntity) {
         if (blockEntity.useEnergy()) {
             CoalGeneratorBlockEntity entity = (CoalGeneratorBlockEntity) blockEntity;
 

@@ -28,7 +28,7 @@ public class NasaWorkbenchBlockEntity extends AbstractMachineBlockEntity {
     }
 
     @SuppressWarnings("unused")
-    public static void tick(World world, BlockPos pos, BlockState state, AbstractMachineBlockEntity blockEntity) {
+    public static void serverTick(World world, BlockPos pos, BlockState state, AbstractMachineBlockEntity blockEntity) {
         if (blockEntity.useEnergy()) {
 
         }

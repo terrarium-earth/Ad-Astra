@@ -13,17 +13,17 @@ public class ModRecipes {
     public static void register() {
 
         // Recipe Types.
-        GENERATING_RECIPE = register(new ModRecipeType<>(GeneratingRecipe.RECIPE_ID.toString()));
-        COMPRESSING_RECIPE = register(new ModRecipeType<>(CompressingRecipe.RECIPE_ID.toString()));
+        GENERATING_RECIPE = register(new ModRecipeType<>(new ModIdentifier("generating")));
+        COMPRESSING_RECIPE = register(new ModRecipeType<>(new ModIdentifier("compressing")));
 
         // Recipe Serializers.
-        Registry.register(Registry.RECIPE_SERIALIZER, new ModIdentifier("hammer_recipe"), new HammerShapelessRecipe.Serializer());
-        Registry.register(Registry.RECIPE_SERIALIZER,  GeneratingRecipe.RECIPE_ID, new GeneratingRecipe.Serializer());
-        Registry.register(Registry.RECIPE_SERIALIZER,  CompressingRecipe.RECIPE_ID, new CompressingRecipe.Serializer());
+        Registry.register(Registry.RECIPE_SERIALIZER, new ModIdentifier("hammering"), new HammerShapelessRecipe.Serializer());
+        Registry.register(Registry.RECIPE_SERIALIZER, new ModIdentifier("generating"), new GeneratingRecipe.Serializer());
+        Registry.register(Registry.RECIPE_SERIALIZER, new ModIdentifier("compressing"), new CompressingRecipe.Serializer());
     }
 
-    private static <T extends ModRecipeType<?>> T register(T value) {
-        Registry.register(Registry.RECIPE_TYPE, new Identifier(value.getName()), value);
-        return value;
+    private static <T extends ModRecipeType<?>> T register(T recipe) {
+        Registry.register(Registry.RECIPE_TYPE, recipe.getId(), recipe);
+        return recipe;
     }
 }

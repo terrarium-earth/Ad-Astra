@@ -44,10 +44,10 @@ public class GlobeBlock extends BlockWithEntity implements Waterloggable, BlockE
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
             if (world.getBlockEntity(pos) instanceof GlobeBlockEntity blockEntity) {
-                // Turn the globe.
+
                 float torque = (float) (Math.PI / (Math.pow(GlobeBlockEntity.DECELERATION, blockEntity.getAngularVelocity()) + 1) / 4);
                 blockEntity.setAngularVelocity(torque);
-                blockEntity.createNbt();
+                blockEntity.markDirty();
             }
         }
         return ActionResult.SUCCESS;
@@ -65,9 +65,9 @@ public class GlobeBlock extends BlockWithEntity implements Waterloggable, BlockE
     }
 
     @Override
-    public <T extends
-            BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return world.isClient ? null : checkType(type, ModBlockEntities.GLOBE_BLOCK_ENTITY, GlobeBlockEntity::tick);
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        // Client and sever tick.
+        return checkType(type, ModBlockEntities.GLOBE_BLOCK_ENTITY, GlobeBlockEntity::tick);
     }
 
     @Override
