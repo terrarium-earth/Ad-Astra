@@ -6,7 +6,8 @@
   "mixins": [
     "GeneratorOptionsMixin",
     "ChunkGeneratorAccessor",
-    "NoiseChunkGeneratorAccessor"
+    "NoiseChunkGeneratorAccessor",
+    "WorldRendererAccessor"
   ],
   "client": [
   ],
