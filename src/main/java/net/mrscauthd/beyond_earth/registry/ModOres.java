@@ -109,7 +109,7 @@ public class ModOres {
                 HeightRangePlacementModifier.trapezoid(YOffset.fixed(min), YOffset.fixed(max))
         );
 
-        return new PlacedFeature(getEntry(BuiltinRegistries.CONFIGURED_FEATURE, configured), placementModifiers);
+        return new PlacedFeature(RegistryUtil.getEntry(BuiltinRegistries.CONFIGURED_FEATURE, configured), placementModifiers);
     }
 
     public static RuleTest createTest(String id) {
@@ -119,9 +119,5 @@ public class ModOres {
 
     public static TagKey<Biome> createTag(String id) {
         return TagKey.of(Registry.BIOME_KEY, new ModIdentifier("biomes/" + id));
-    }
-
-    public static <T> RegistryEntry<T> getEntry(Registry<T> registry, T value) {
-        return registry.getEntry(registry.getKey(value).orElseThrow()).orElseThrow();
     }
 }

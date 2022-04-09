@@ -1,5 +1,6 @@
 package net.mrscauthd.beyond_earth.registry;
 
+import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry;
 import net.minecraft.structure.processor.StructureProcessorType;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.StructureFeature;
