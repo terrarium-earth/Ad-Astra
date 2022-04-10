@@ -4,19 +4,20 @@
   "precipitation": "none",
   "category": "none",
   "effects": {
-    "sky_color": 0,
-    "fog_color": 0,
+    "sky_color": -3044526,
+    "fog_color": -3044526,
     "water_color": 4159204,
     "water_fog_color": 329011,
     "grass_color": 9551193,
     "foliage_color": 7842607,
-    "particle": {
+	"particle": {
       "options": {
         "type": "minecraft:crimson_spore"
       },
       "probability": 0.014
     }
   },
+  "creature_spawn_probability": 0.2,
   "spawners": {},
   "spawn_costs": {},
   "carvers": {
@@ -31,11 +32,10 @@
       "minecraft:fossil_upper",
       "minecraft:fossil_lower",
       "minecraft:lush_caves_ceiling_vegetation",
-      "minecraft:cave_vines",
+	  "minecraft:cave_vines",
       "minecraft:lush_caves_clay",
-      "minecraft:lush_caves_vegetation",
-      "minecraft:spore_blossom",
-      "minecraft:classic_vines_cave_feature"
+	  "minecraft:lush_caves_vegetation",
+	  "minecraft:classic_vines_cave_feature"
     ]
   ]
 }

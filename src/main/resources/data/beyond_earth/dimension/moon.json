@@ -2,7 +2,7 @@
   "type": "beyond_earth:moon",
   "generator": {
     "type": "beyond_earth:planet_noise",
-    "seed": 0,
+    "seed": 12345,
     "settings": {
       "sea_level": 63,
       "disable_mob_generation": true,
@@ -306,7 +306,7 @@
             "if_true": {
               "type": "minecraft:biome",
               "biome_is": [
-                "beyond_earth:moon"
+                "beyond_earth:moon_desert"
               ]
             },
             "then_run": {
@@ -341,22 +341,8 @@
       }
     },
     "biome_source": {
-      "type": "minecraft:multi_noise",
-      "seed": 0,
-      "biomes": [
-        {
-          "biome": "beyond_earth:moon",
-          "parameters": {
-            "temperature": 0,
-            "humidity": 0,
-            "continentalness": 0,
-            "erosion": 0,
-            "weirdness": 0,
-            "depth": 0,
-            "offset": 0
-          }
-        }
-      ]
+      "type": "minecraft:fixed",
+      "biome": "beyond_earth:moon_desert"
     }
   }
 }

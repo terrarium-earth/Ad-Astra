@@ -1,5 +1,5 @@
 {
-  "temperature": 1.6,
+  "temperature": -0.7,
   "downfall": 0,
   "precipitation": "none",
   "category": "none",
@@ -14,11 +14,5 @@
   "spawners": {},
   "spawn_costs": {},
   "carvers": {},
-  "features": [
-    [
-      "minecraft:large_dripstone",
-      "minecraft:dripstone_cluster",
-      "minecraft:pointed_dripstone"
-    ]
-  ]
+  "features": []
 }
