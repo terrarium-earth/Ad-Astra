@@ -2,7 +2,7 @@
   "type": "beyond_earth:mars",
   "generator": {
     "type": "beyond_earth:planet_noise",
-    "seed": 0,
+    "seed": 12345,
     "settings": {
       "sea_level": 63,
       "disable_mob_generation": true,
@@ -306,7 +306,7 @@
             "if_true": {
               "type": "minecraft:biome",
               "biome_is": [
-                "beyond_earth:mars",
+                "beyond_earth:mars_desert",
                 "beyond_earth:mars_rocky_plains"
               ]
             },
@@ -382,7 +382,7 @@
       "type": "minecraft:multi_noise",
       "biomes": [
         {
-          "biome": "beyond_earth:mars",
+          "biome": "beyond_earth:mars_desert",
           "parameters": {
             "temperature": -0.5,
             "humidity": 0,

@@ -1,0 +1,13 @@
+{
+	"replace": false,
+	"values": [
+		{
+			"id": "beyond_earth:molten_desh",
+			"required": false
+		},
+		{
+			"id": "beyond_earth:flowing_molten_desh",
+			"required": false
+		}
+	]
+}

@@ -13,4 +13,7 @@ public interface WorldRendererAccessor {
 
     @Accessor("lightSkyBuffer")
     VertexBuffer getLightSkyBuffer();
+
+    @Accessor("darkSkyBuffer")
+    VertexBuffer getDarkSkyBuffer();
 }

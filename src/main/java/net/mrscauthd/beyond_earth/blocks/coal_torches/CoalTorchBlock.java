@@ -22,6 +22,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import net.mrscauthd.beyond_earth.registry.ModBlocks;
+import net.mrscauthd.beyond_earth.util.ModUtils;
 
 public class CoalTorchBlock extends Block {
 
@@ -34,30 +35,31 @@ public class CoalTorchBlock extends Block {
         if (!world.isClient) {
             ItemStack itemstack = player.getStackInHand(hand);
 
-//            if (Methods.isSpaceWorldWithoutOxygen(world))
-            if (itemstack.getItem() instanceof FlintAndSteelItem || itemstack.getItem() instanceof FireChargeItem) {
+            if (ModUtils.dimensionHasOxygen(world)) {
+                if (itemstack.getItem() instanceof FlintAndSteelItem || itemstack.getItem() instanceof FireChargeItem) {
 
-                if (world.getBlockState(pos).getBlock().equals(ModBlocks.COAL_TORCH)) {
-                    world.setBlockState(pos, Blocks.TORCH.getDefaultState(), 3);
-                } else {
-                    world.setBlockState(pos, Blocks.WALL_TORCH.getStateWithProperties(state), 3);
-                }
-
-                itemstack.getItem().use(world, player, hand);
-
-                boolean hasFlint = itemstack.getItem() instanceof FlintAndSteelItem;
-
-                if (hasFlint) {
-                    world.playSound(null, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1, 1);
-                } else {
-                    world.playSound(null, pos, SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.BLOCKS, 1, 1);
-                }
-
-                if (!player.isCreative()) {
-                    if (hasFlint) {
-                        itemstack.damage(1, world.random, (ServerPlayerEntity) player);
+                    if (world.getBlockState(pos).getBlock().equals(ModBlocks.COAL_TORCH)) {
+                        world.setBlockState(pos, Blocks.TORCH.getDefaultState(), 3);
                     } else {
-                        itemstack.decrement(1);
+                        world.setBlockState(pos, Blocks.WALL_TORCH.getStateWithProperties(state), 3);
+                    }
+
+                    itemstack.getItem().use(world, player, hand);
+
+                    boolean hasFlint = itemstack.getItem() instanceof FlintAndSteelItem;
+
+                    if (hasFlint) {
+                        world.playSound(null, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1, 1);
+                    } else {
+                        world.playSound(null, pos, SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.BLOCKS, 1, 1);
+                    }
+
+                    if (!player.isCreative()) {
+                        if (hasFlint) {
+                            itemstack.damage(1, world.random, (ServerPlayerEntity) player);
+                        } else {
+                            itemstack.decrement(1);
+                        }
                     }
                 }
             }
@@ -72,7 +74,7 @@ public class CoalTorchBlock extends Block {
 
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-        return direction == Direction.DOWN && !this.canPlaceAt(state, world, pos) ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+        return direction.equals(Direction.DOWN) && !this.canPlaceAt(state, world, pos) ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
     @Override

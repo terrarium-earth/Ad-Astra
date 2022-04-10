@@ -2,7 +2,7 @@
   "type": "beyond_earth:venus",
   "generator": {
     "type": "beyond_earth:planet_noise",
-    "seed": 0,
+    "seed": 12345,
     "settings": {
       "sea_level": 63,
       "disable_mob_generation": true,
@@ -306,7 +306,7 @@
             "if_true": {
               "type": "minecraft:biome",
               "biome_is": [
-                "beyond_earth:venus"
+                "beyond_earth:venus_desert"
               ]
             },
             "then_run": {
@@ -477,7 +477,7 @@
       "type": "minecraft:multi_noise",
       "biomes": [
         {
-          "biome": "beyond_earth:venus",
+          "biome": "beyond_earth:venus_desert",
           "parameters": {
             "temperature": 1,
             "humidity": -1,
