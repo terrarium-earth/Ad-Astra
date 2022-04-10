@@ -1,8 +1,8 @@
 {
   "temperature": -0.7,
-  "downfall": 0,
-  "precipitation": "snow",
-  "category": "icy",
+  "downfall": 1,
+  "precipitation": "none",
+  "category": "none",
   "effects": {
     "sky_color": 8756735,
     "fog_color": 12638463,
@@ -22,11 +22,11 @@
   },
   "features": [
     [
+      "minecraft:ice_spike",
+      "minecraft:ice_patch",
       "minecraft:freeze_top_layer",
       "minecraft:amethyst_geode",
-      "minecraft:glow_lichen",
-      "minecraft:ice_spike",
-      "minecraft:ice_patch"
+      "minecraft:glow_lichen"
     ]
   ]
 }

@@ -1,11 +1,11 @@
 {
-  "temperature": 1.5,
-  "downfall": 1,
+  "temperature": 1.6,
+  "downfall": 0,
   "precipitation": "none",
-  "category": "icy",
+  "category": "none",
   "effects": {
-    "sky_color": 0,
-    "fog_color": 0,
+    "sky_color": -3044526,
+    "fog_color": -3044526,
     "water_color": 4159204,
     "water_fog_color": 329011,
     "grass_color": 9551193,
@@ -14,7 +14,7 @@
       "options": {
         "type": "minecraft:crimson_spore"
       },
-      "probability": 0.02
+      "probability": 0.014
     }
   },
   "spawners": {},
@@ -29,11 +29,12 @@
   "features": [
     [
       "minecraft:delta",
+      "minecraft:basalt_pillar",
       "minecraft:basalt_blobs",
-      "minecraft:blackstone_blobs",
+	  "minecraft:blackstone_blobs",
       "minecraft:spring_delta",
-      "minecraft:patch_fire",
-      "minecraft:patch_soul_fire",
+	  "minecraft:patch_fire",
+	  "minecraft:patch_soul_fire",
       "minecraft:ore_magma",
       "minecraft:spring_closed_double"
     ]
