@@ -14,7 +14,7 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.item.Item;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.mrscauthd.beyond_earth.client.registry.ModScreens;
-import net.mrscauthd.beyond_earth.client.registry.ModSkyRegistry;
+import net.mrscauthd.beyond_earth.client.registry.ModSkies;
 import net.mrscauthd.beyond_earth.client.renderer.FlagBlockEntityRenderer;
 import net.mrscauthd.beyond_earth.client.renderer.globe.GlobeBlockEntityRenderer;
 import net.mrscauthd.beyond_earth.client.renderer.globe.GlobeItemRenderer;
@@ -36,7 +36,7 @@ public class BeyondEarthClient implements ClientModInitializer {
         ModScreens.register();
 
         // Dimension sky
-        ModSkyRegistry.register();
+        ModSkies.register();
 
         // Flag entity rendering.
         BlockEntityRendererRegistry.register(ModBlockEntities.FLAG_BLOCK_ENTITY, FlagBlockEntityRenderer::new);
