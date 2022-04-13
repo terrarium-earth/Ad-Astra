@@ -4,7 +4,11 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.VertexBuffer;
+import net.minecraft.client.option.GraphicsMode;
+import net.minecraft.client.render.BufferBuilder;
+import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.Identifier;
@@ -27,29 +31,38 @@ public class ModSky implements DimensionRenderingRegistry.SkyRenderer {
     protected ClientWorld world;
     protected float tickDelta;
     protected float skyAngle;
-
+    List<Renderable> renderingQueue = new ArrayList<>();
     private int fancyStars;
     private int fastStars;
-
-    List<Renderable> renderingQueue = new ArrayList<>();
 
     @Override
     public void render(WorldRenderContext context) {
         this.updateRenderer(context);
+        BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
+
+        if (!SkyUtil.preRender(context, bufferBuilder, getColourType(), matrices, world, tickDelta)) {
+            // Cancel rendering if the player is in fog, i.e. in lava or powdered snow.
+            return;
+        }
+
         // Always render stars first.
         if (fastStars > 0) {
-            starsBuffer = SkyUtil.renderStars(starsBuffer, fancyStars, fastStars, matrices, skyAngle, context.advancedTranslucency());
+            int stars = (this.context.advancedTranslucency() || MinecraftClient.getInstance().options.graphicsMode.equals(GraphicsMode.FANCY) ? this.fancyStars : this.fastStars);
+            starsBuffer = SkyUtil.renderStars(context, bufferBuilder, starsBuffer, stars, isFixedStarColour());
         }
-        // Render everything in the queue in an orderly fashion.
+        // Render everything in the queue orderly.
         for (Renderable renderable : renderingQueue) {
             Vec3f euler = renderable.euler;
             float scale = renderable.scale;
             switch (renderable.type) {
-                case DYNAMIC -> euler = new Vec3f(skyAngle * 360, renderable.euler.getY(), renderable.euler.getZ());
+                case DYNAMIC -> euler = new Vec3f(skyAngle * 360.0f + euler.getX(), euler.getY(), euler.getZ());
                 case SCALING -> scale = SkyUtil.getScale();
+                case DEBUG -> {
+                    // Test things without restarting Minecraft.
+                }
             }
 
-            SkyUtil.render(renderable.texture, renderable.disableBlending, scale, euler, matrices, world, tickDelta, context);
+            SkyUtil.render(context, bufferBuilder, renderable.texture, euler, scale, renderable.disableBlending);
         }
     }
 
@@ -59,6 +72,14 @@ public class ModSky implements DimensionRenderingRegistry.SkyRenderer {
         this.tickDelta = context.tickDelta();
         this.world = context.world();
         this.skyAngle = this.world.getSkyAngle(tickDelta);
+    }
+
+    public ColourType getColourType() {
+        return ColourType.VANILLA;
+    }
+
+    public boolean isFixedStarColour() {
+        return true;
     }
 
     // Objects are rendered in the order that they are added.
@@ -99,16 +120,23 @@ public class ModSky implements DimensionRenderingRegistry.SkyRenderer {
         return this;
     }
 
-    /* Stores information that is needed to render things in the sky. */
-    protected record Renderable(Identifier texture, boolean disableBlending, float scale, Vec3f euler,
-                                RenderType type) {
-    }
-
     /* Post-rendering after the Renderable object has been created. */
     protected enum RenderType {
         STATIC, /* Never moves. */
         DYNAMIC, /* Moves based on the time of day. */
-        SCALING /* Scales based on the position away from the player. */
+        SCALING, /* Scales based on the position away from the player. */
+        DEBUG /* Only for testing while in a debug environment. */
+    }
+
+    /* Changes the colour of the sunset and sunrise */
+    protected enum ColourType {
+        VANILLA, /* Vanilla. */
+        MARS /* Custom pink-ish red hue. */
+    }
+
+    /* Stores information that is needed to render things in the sky. */
+    protected record Renderable(Identifier texture, boolean disableBlending, float scale, Vec3f euler,
+                                RenderType type) {
     }
 }
 

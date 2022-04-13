@@ -24,7 +24,6 @@ public class BlockItemMixin {
         // Extinguish fire items in dimensions with no oxygen.
         World world = context.getWorld();
         BlockPos pos = context.getBlockPos();
-        BeyondEarth.LOGGER.info(String.valueOf(world.getBlockState(context.getBlockPos())));
         if (!ModUtils.dimensionHasOxygen(world)) {
             BlockState blockstate = world.getBlockState(context.getBlockPos());
             Block block = blockstate.getBlock();

@@ -4,7 +4,7 @@
   "package": "net.mrscauthd.beyond_earth.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "ServerPlayerEntityMixin",
+    "EntityMixin",
     "GeneratorOptionsMixin",
     "coal_torches/BlockItemMixin",
     "coal_torches/FireBlockMixin",

@@ -7,6 +7,8 @@ import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.mrscauthd.beyond_earth.client.renderer.sky.MarsSky;
 import net.mrscauthd.beyond_earth.client.renderer.sky.ModSky;
 import net.mrscauthd.beyond_earth.client.renderer.sky.OrbitSky;
+import net.mrscauthd.beyond_earth.client.renderer.sky.dimension_effects.FoggyDimensionEffects;
+import net.mrscauthd.beyond_earth.client.renderer.sky.dimension_effects.ModDimensionEffects;
 import net.mrscauthd.beyond_earth.util.ModUtils;
 
 @Environment(EnvType.CLIENT)
@@ -18,8 +20,7 @@ public class ModSkies {
         // Moon.
         DimensionRenderingRegistry.registerSkyRenderer(ModUtils.MOON_KEY, new ModSky().withStars().withSun().withEarth(9.0f));
         // Mars.
-        DimensionRenderingRegistry.registerSkyRenderer(ModUtils.MARS_KEY, new MarsSky().withVanillaStars().withSun());
-//        DimensionRenderingRegistry.registerSkyRenderer(ModUtils.MARS_KEY, new MarsSky().withVanillaStars().withSun().withEarth(1.0f).withPhobos().withDeimos());
+        DimensionRenderingRegistry.registerSkyRenderer(ModUtils.MARS_KEY, new MarsSky().withVanillaStars().withSun().withEarth(1.0f).withPhobos().withDeimos());
 
         // Earth Orbit.
         DimensionRenderingRegistry.registerSkyRenderer(ModUtils.EARTH_ORBIT_KEY, new OrbitSky().withStars().withSun().withEarthOrbit());
@@ -33,6 +34,19 @@ public class ModSkies {
         DimensionRenderingRegistry.registerSkyRenderer(ModUtils.MERCURY_ORBIT_KEY, new OrbitSky().withStars().withSun().withMercuryOrbit());
         // Glacio Orbit.
         DimensionRenderingRegistry.registerSkyRenderer(ModUtils.GLACIO_ORBIT_KEY, new OrbitSky().withStars().withSun().withGlacioOrbit());
+
+        // Dimension effects.
+        DimensionRenderingRegistry.registerDimensionEffects(ModUtils.MOON_KEY.getValue(), new ModDimensionEffects());
+        DimensionRenderingRegistry.registerDimensionEffects(ModUtils.MARS_KEY.getValue(), new FoggyDimensionEffects());
+        DimensionRenderingRegistry.registerDimensionEffects(ModUtils.VENUS_KEY.getValue(), new FoggyDimensionEffects());
+        DimensionRenderingRegistry.registerDimensionEffects(ModUtils.MERCURY_KEY.getValue(), new ModDimensionEffects());
+        DimensionRenderingRegistry.registerDimensionEffects(ModUtils.GLACIO_KEY.getValue(), new ModDimensionEffects());
+        DimensionRenderingRegistry.registerDimensionEffects(ModUtils.EARTH_ORBIT_KEY.getValue(), new ModDimensionEffects());
+        DimensionRenderingRegistry.registerDimensionEffects(ModUtils.MOON_ORBIT_KEY.getValue(), new ModDimensionEffects());
+        DimensionRenderingRegistry.registerDimensionEffects(ModUtils.MARS_ORBIT_KEY.getValue(), new ModDimensionEffects());
+        DimensionRenderingRegistry.registerDimensionEffects(ModUtils.VENUS_ORBIT_KEY.getValue(), new ModDimensionEffects());
+        DimensionRenderingRegistry.registerDimensionEffects(ModUtils.MERCURY_ORBIT_KEY.getValue(), new ModDimensionEffects());
+        DimensionRenderingRegistry.registerDimensionEffects(ModUtils.GLACIO_ORBIT_KEY.getValue(), new ModDimensionEffects());
 
         // Remove clouds from all dimensions except Glacio.
         class CloudlessSky implements DimensionRenderingRegistry.CloudRenderer {
