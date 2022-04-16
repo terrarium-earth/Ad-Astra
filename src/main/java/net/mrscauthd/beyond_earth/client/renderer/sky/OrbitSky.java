@@ -12,11 +12,11 @@ import net.mrscauthd.beyond_earth.util.ModIdentifier;
 @Environment(EnvType.CLIENT)
 public class OrbitSky extends ModSky {
 
-    private static final Identifier MOON_TEXTURE = new ModIdentifier("textures/sky/moon.png");
-    private static final Identifier MARS_TEXTURE = new ModIdentifier("textures/sky/mars.png");
-    private static final Identifier VENUS_TEXTURE = new ModIdentifier("textures/sky/venus.png");
-    private static final Identifier MERCURY_TEXTURE = new ModIdentifier("textures/sky/mercury.png");
-    private static final Identifier GLACIO_TEXTURE = new ModIdentifier("textures/sky/glacio.png");
+    public static final Identifier MOON_TEXTURE = new ModIdentifier("textures/sky/moon.png");
+    public static final Identifier MARS_TEXTURE = new ModIdentifier("textures/sky/mars.png");
+    public static final Identifier VENUS_TEXTURE = new ModIdentifier("textures/sky/venus.png");
+    public static final Identifier MERCURY_TEXTURE = new ModIdentifier("textures/sky/mercury.png");
+    public static final Identifier GLACIO_TEXTURE = new ModIdentifier("textures/sky/glacio.png");
 
     @Override
     public void render(WorldRenderContext context) {

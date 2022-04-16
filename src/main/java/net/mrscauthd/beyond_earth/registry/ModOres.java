@@ -18,6 +18,7 @@ import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placementmodifier.CountPlacementModifier;
 import net.minecraft.world.gen.placementmodifier.HeightRangePlacementModifier;
 import net.minecraft.world.gen.placementmodifier.PlacementModifier;
+import net.minecraft.world.gen.placementmodifier.SquarePlacementModifier;
 import net.mrscauthd.beyond_earth.util.ModIdentifier;
 
 import java.util.Arrays;
@@ -110,6 +111,7 @@ public class ModOres {
 
         List<PlacementModifier> placementModifiers = Arrays.asList(
                 CountPlacementModifier.of(veinsPerChunk),
+                SquarePlacementModifier.of(),
                 HeightRangePlacementModifier.trapezoid(YOffset.fixed(min), YOffset.fixed(max))
         );
 
