@@ -1,33 +1,20 @@
 # Beyond Earth for Minecraft 1.18 (Fabric) #
 
 **This is a rewrite of Beyond Earth for the Fabric Mod Loader.**
+At the moment, Beyond Earth Fabric is not ready to be played on survival, as many features are still absent.
 
-![grafik](https://user-images.githubusercontent.com/65916181/157454393-9aadd2a5-7039-4099-af5a-1438e8bd71d7.png)
+![image](https://user-images.githubusercontent.com/65916181/157454393-9aadd2a5-7039-4099-af5a-1438e8bd71d7.png)
 
 # Discord #
 
 Beyond Earth has a [discord server](https://discord.gg/Xb2nPmN) where you can chat with other Beyond Earth users and us!
 
-# Beyond Earth API #
-
-```groovy
-repositories {
-    maven { url 'https://jitpack.io' }
-}
-
-
-dependencies {
-    implementation 'com.github.MrScautHD:Beyond-Earth:VERSION'
-}
-```
-
-You can see the List of Versions on the Github Tags
-
 # Credits #
 
 * MrScautHD (Developer)
 * ExistingEevee (Developer)
-* [Mvbz](https://www.youtube.com/channel/UC2e-rv7O4zYaKfRfhsuDeow/videos) (Sound Artirst)
+* Alex Nijjar (Fabric Developer)
+* [Mvbz](https://www.youtube.com/channel/UC2e-rv7O4zYaKfRfhsuDeow/videos) (Sound Artist)
 * FritzHackenstein (Texturer)
 * Fizz (Texturer)
 * jopken (Texturer)
