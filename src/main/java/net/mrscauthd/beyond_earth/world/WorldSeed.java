@@ -2,13 +2,13 @@ package net.mrscauthd.beyond_earth.world;
 
 public class WorldSeed {
 
-    private static long SEED = 0;
+    private static long seed = 0;
 
     public static long getSeed() {
-        return SEED;
+        return seed;
     }
 
     public static void setSeed(long seed) {
-        SEED = seed;
+        WorldSeed.seed = seed;
     }
 }

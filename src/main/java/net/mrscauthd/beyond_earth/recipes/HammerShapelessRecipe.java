@@ -36,6 +36,7 @@ public class HammerShapelessRecipe extends ShapelessRecipe {
 
         DefaultedList<ItemStack> defaultedList = DefaultedList.ofSize(inventory.size(), ItemStack.EMPTY);
 
+        // Damage the hammer in the recipe.
         for (int i = 0; i < inventory.size(); i++) {
             ItemStack stack = inventory.getStack(i);
             Item item = stack.getItem();

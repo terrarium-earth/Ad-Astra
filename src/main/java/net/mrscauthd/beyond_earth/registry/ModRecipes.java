@@ -12,6 +12,8 @@ public class ModRecipes {
 
     public static void register() {
 
+        // TODO: Fix server crash with recipes.
+
         // Recipe Types.
         GENERATING_RECIPE = register(new ModRecipeType<>(new ModIdentifier("generating")));
         COMPRESSING_RECIPE = register(new ModRecipeType<>(new ModIdentifier("compressing")));

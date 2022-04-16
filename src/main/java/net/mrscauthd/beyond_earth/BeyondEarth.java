@@ -13,7 +13,6 @@ public class BeyondEarth implements ModInitializer {
     public static final String MOD_ID = "beyond_earth";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-
     @Override
     public void onInitialize() {
 
@@ -23,12 +22,14 @@ public class BeyondEarth implements ModInitializer {
         ModBlockEntities.register();
         ModFluids.register();
         ModArmour.register();
-        ModScreenHandlers.register();
         ModRecipes.register();
+        ModScreenHandlers.register();
 
         // Worldgen
-        ModStructures.register();
+        ModBiomes.register();
+        ModFeatures.register();
         ModOres.register();
+        ModStructures.register();
         Registry.register(Registry.CHUNK_GENERATOR, new ModIdentifier("planet_noise"), PlanetChunkGenerator.CODEC);
 
         BeyondEarth.LOGGER.info("Beyond Earth Initialized!");

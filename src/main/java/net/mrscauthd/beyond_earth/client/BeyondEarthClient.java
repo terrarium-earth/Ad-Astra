@@ -1,18 +1,24 @@
 package net.mrscauthd.beyond_earth.client;
 
+import dev.architectury.platform.Mod;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.item.Item;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.PlayerScreenHandler;
+import net.minecraft.util.Identifier;
+import net.mrscauthd.beyond_earth.BeyondEarth;
 import net.mrscauthd.beyond_earth.client.registry.ModScreens;
 import net.mrscauthd.beyond_earth.client.registry.ModSkies;
 import net.mrscauthd.beyond_earth.client.renderer.FlagBlockEntityRenderer;
@@ -25,6 +31,11 @@ import net.mrscauthd.beyond_earth.registry.ModBlockEntities;
 import net.mrscauthd.beyond_earth.registry.ModFluids;
 import net.mrscauthd.beyond_earth.registry.ModItems;
 import net.mrscauthd.beyond_earth.util.ModIdentifier;
+import net.mrscauthd.beyond_earth.util.ModUtils;
+import net.mrscauthd.beyond_earth.world.SoundUtil;
+import org.apache.commons.lang3.Range;
+
+import java.util.List;
 
 public class BeyondEarthClient implements ClientModInitializer {
 
@@ -86,5 +97,9 @@ public class BeyondEarthClient implements ClientModInitializer {
         });
 
         BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.FUEL_STILL, ModFluids.FLOWING_FUEL);
+
+        ClientPlayNetworking.registerGlobalReceiver(ModUtils.PORTAL_SOUND_PACKET_ID, (client, handler, buf, responseSender) -> {
+            SoundUtil.setSound(buf.readBoolean());
+        });
     }
 }
