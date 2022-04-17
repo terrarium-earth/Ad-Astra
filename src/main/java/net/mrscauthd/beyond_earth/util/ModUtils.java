@@ -138,6 +138,27 @@ public class ModUtils {
         }
     }
 
+    public static float getPlanetGravity(RegistryKey<World> dimension) {
+        if (dimension.equals(World.OVERWORLD)) {
+            return GravityUtil.EARTH_GRAVITY;
+        } else if (dimension.equals(MOON_KEY)) {
+            return GravityUtil.MOON_GRAVITY;
+        } else if (dimension.equals(MARS_KEY)) {
+            return GravityUtil.MARS_GRAVITY;
+        } else if (dimension.equals(VENUS_KEY)) {
+            return GravityUtil.VENUS_GRAVITY;
+        } else if (dimension.equals(MERCURY_KEY)) {
+            return GravityUtil.MERCURY_GRAVITY;
+        } else if (dimension.equals(GLACIO_KEY)) {
+            return GravityUtil.GLACIO_GRAVITY;
+        } else if (isOrbitDimension(dimension)) {
+            return GravityUtil.ORBIT_GRAVITY;
+        } else {
+            BeyondEarth.LOGGER.error("Invalid dimension!");
+            return 1.0f;
+        }
+    }
+
     public static boolean dimensionHasOxygen(World world) {
         return dimensionsWithoutOxygen.stream().noneMatch(world.getRegistryKey()::equals);
     }
