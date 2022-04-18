@@ -15,7 +15,9 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Matrix4f;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3f;
+import net.mrscauthd.beyond_earth.mixin.WorldRendererAccessor;
 import net.mrscauthd.beyond_earth.world.WorldSeed;
 
 import java.util.Random;
@@ -40,15 +42,50 @@ public class SkyUtil {
         }
 
         // Render colours.
-        BackgroundRenderer.clearFog();
+        RenderSystem.disableTexture();
+        Vec3d vec3d = world.getSkyColor(context.gameRenderer().getCamera().getPos(), tickDelta);
+        float f = (float) vec3d.x;
+        float g = (float) vec3d.y;
+        float h = (float) vec3d.z;
+        BackgroundRenderer.setFogBlack();
         RenderSystem.depthMask(false);
-        BackgroundRenderer.clearFog();
+
+        RenderSystem.setShaderColor(f, g, h, 1.0f);
+        ((WorldRendererAccessor) context.worldRenderer()).getLightSkyBuffer().setShader(context.matrixStack().peek().getPositionMatrix(), context.projectionMatrix(), RenderSystem.getShader());
+
+
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
-        RenderSystem.enableTexture();
-        RenderSystem.blendFuncSeparate(GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE, GlStateManager.SrcFactor.ONE, GlStateManager.DstFactor.ZERO);
         renderColouring(colourType, bufferBuilder, matrices, world, tickDelta, context.world().getSkyAngle(tickDelta));
+        RenderSystem.blendFuncSeparate(GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE, GlStateManager.SrcFactor.ONE, GlStateManager.DstFactor.ZERO);
+        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
+        RenderSystem.enableTexture();
+
         return true;
+    }
+
+    public static void postRender(WorldRenderContext context, MatrixStack matrices, ClientWorld world, float tickDelta) {
+
+        Vec3d vec3d = world.getSkyColor(context.gameRenderer().getCamera().getPos(), tickDelta);
+        float f = (float) vec3d.x;
+        float g = (float) vec3d.y;
+        float h = (float) vec3d.z;
+
+        RenderSystem.setShaderColor(0.0f, 0.0f, 0.0f, 1.0f);
+        double cameraPos = MinecraftClient.getInstance().player.getCameraPosVec(tickDelta).y - world.getLevelProperties().getSkyDarknessHeight(world);
+        if (cameraPos < 0.0) {
+            matrices.push();
+            matrices.translate(0.0, 12.0, 0.0);
+            ((WorldRendererAccessor) context.worldRenderer()).getDarkSkyBuffer().setShader(context.matrixStack().peek().getPositionMatrix(), context.projectionMatrix(), RenderSystem.getShader());
+            matrices.pop();
+        }
+        if (world.getDimensionEffects().isAlternateSkyColor()) {
+            RenderSystem.setShaderColor(f * 0.2f + 0.04f, g * 0.2f + 0.04f, h * 0.6f + 0.1f, 1.0f);
+        } else {
+            RenderSystem.setShaderColor(f, g, h, 1.0f);
+        }
+        RenderSystem.enableTexture();
+        RenderSystem.depthMask(true);
     }
 
     private static boolean isSubmerged() {
@@ -100,8 +137,6 @@ public class SkyUtil {
         BufferRenderer.draw(bufferBuilder);
 
         endRendering(context.matrixStack());
-        RenderSystem.enableTexture();
-        RenderSystem.depthMask(true);
     }
 
     public static VertexBuffer renderStars(WorldRenderContext context, BufferBuilder bufferBuilder, VertexBuffer starsBuffer, int stars, boolean fixedStarColour) {

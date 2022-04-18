@@ -77,7 +77,6 @@ public class ModCloudRenderer implements DimensionRenderingRegistry.CloudRendere
                 }
 
                 renderer.setCloudsBuffer(new VertexBuffer());
-//                renderer.renderClouds(bufferBuilder, l, m, n, vec3d);
                 renderClouds(renderer, bufferBuilder, l, m, n, vec3d);
                 bufferBuilder.end();
                 renderer.getCloudsBuffer().upload(bufferBuilder);

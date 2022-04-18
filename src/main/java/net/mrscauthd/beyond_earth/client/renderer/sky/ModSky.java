@@ -64,6 +64,8 @@ public class ModSky implements DimensionRenderingRegistry.SkyRenderer {
 
             SkyUtil.render(context, bufferBuilder, renderable.texture, euler, scale, renderable.disableBlending);
         }
+
+        SkyUtil.postRender(context, matrices, world, tickDelta);
     }
 
     public void updateRenderer(WorldRenderContext context) {

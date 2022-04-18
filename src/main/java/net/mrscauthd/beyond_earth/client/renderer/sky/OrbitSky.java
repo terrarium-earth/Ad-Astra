@@ -3,8 +3,6 @@ package net.mrscauthd.beyond_earth.client.renderer.sky;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3f;
 import net.mrscauthd.beyond_earth.util.ModIdentifier;
@@ -56,6 +54,11 @@ public class OrbitSky extends ModSky {
     @Override
     public OrbitSky withSun() {
         return (OrbitSky) this.withSun(SUN_TEXTURE, 30);
+    }
+
+    @Override
+    public OrbitSky withSun(int scale) {
+        return (OrbitSky) this.withSun(SUN_TEXTURE, scale);
     }
 
     @Override

@@ -8,7 +8,6 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.mrscauthd.beyond_earth.BeyondEarth;
 import net.mrscauthd.beyond_earth.registry.ModBlocks;
 import net.mrscauthd.beyond_earth.util.ModUtils;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,6 +17,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BlockItem.class)
 public class BlockItemMixin {
+
+    private static void playFireExtinguish(BlockPos pos, World world) {
+        world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1, 1);
+    }
 
     @Inject(at = @At(value = "TAIL"), method = "place")
     public void place(ItemPlacementContext context, CallbackInfoReturnable<ActionResult> info) {
@@ -38,8 +41,10 @@ public class BlockItemMixin {
 
             // Torch.
             else if (block instanceof TorchBlock) {
-                world.setBlockState(pos, ModBlocks.COAL_TORCH.getDefaultState(), 3);
-                playSound = true;
+                if (!block.equals(Blocks.REDSTONE_TORCH) && !block.equals(Blocks.REDSTONE_WALL_TORCH)) {
+                    world.setBlockState(pos, ModBlocks.COAL_TORCH.getDefaultState(), 3);
+                    playSound = true;
+                }
             }
 
             // Lantern.
@@ -58,9 +63,5 @@ public class BlockItemMixin {
                 playFireExtinguish(pos, world);
             }
         }
-    }
-
-    private static void playFireExtinguish(BlockPos pos, World world) {
-        world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1, 1);
     }
 }
