@@ -19,14 +19,14 @@ public class VenusSky extends ModSky {
     public VenusSky withMercury() {
         Vec3f euler = new Vec3f(-30, -55, 45);
         this.addToRenderingQueue(EARTH_LIGHT_TEXTURE, false, 2.78f * 2, euler, RenderType.DYNAMIC);
-        return (VenusSky) this.addToRenderingQueue(OrbitSky.MERCURY_TEXTURE, false, 2, euler, RenderType.DYNAMIC);
+        return (VenusSky) this.addToRenderingQueue(OrbitSky.MERCURY_TEXTURE, true, 2, euler, RenderType.DYNAMIC);
     }
 
     @Override
     public VenusSky withEarth(float scale) {
         Vec3f euler = new Vec3f(-25.0f, 90.0f, -25.0f);
         this.addToRenderingQueue(EARTH_LIGHT_TEXTURE, false, 2.78f * scale, euler, RenderType.DYNAMIC);
-        return (VenusSky) this.addToRenderingQueue(EARTH_TEXTURE, false, scale, euler, RenderType.DYNAMIC);
+        return (VenusSky) this.addToRenderingQueue(EARTH_TEXTURE, true, scale, euler, RenderType.DYNAMIC);
     }
 
     @Override

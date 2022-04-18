@@ -1,5 +1,7 @@
 package net.mrscauthd.beyond_earth.util;
 
+import net.minecraft.entity.Entity;
+
 public class GravityUtil {
 
     // Source: https://nssdc.gsfc.nasa.gov/planetary/factsheet/planet_table_ratio.html
@@ -11,4 +13,13 @@ public class GravityUtil {
     public static final float GLACIO_GRAVITY = 1.0f;
 
     public static final float ORBIT_GRAVITY = 0.5f;
+
+    public static double getMixinGravity(double value, Object mixin) {
+        Entity entity = (Entity) mixin;
+        return value * ModUtils.getPlanetGravity(entity.world.getRegistryKey());
+    }
+
+    public static float getMixinGravity(float value, Object mixin) {
+        return (float) GravityUtil.getMixinGravity((double) value, mixin);
+    }
 }
