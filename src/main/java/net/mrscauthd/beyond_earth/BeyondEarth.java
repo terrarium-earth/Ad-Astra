@@ -1,5 +1,8 @@
 package net.mrscauthd.beyond_earth;
 
+import me.shedaniel.rei.RoughlyEnoughItemsCore;
+import me.shedaniel.rei.RoughlyEnoughItemsInitializer;
+import me.shedaniel.rei.api.client.REIRuntime;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.registry.Registry;
 import net.mrscauthd.beyond_earth.registry.*;
@@ -24,8 +27,9 @@ public class BeyondEarth implements ModInitializer {
         ModArmour.register();
         ModRecipes.register();
         ModScreenHandlers.register();
+        ModCommands.register();
 
-        // Worldgen
+        // Worldgen.
         ModBiomes.register();
         ModFeatures.register();
         ModOres.register();

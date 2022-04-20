@@ -163,7 +163,7 @@
   "block.beyond_earth.venus_calorite_ore": "Venus Calorite Ore",
   "block.beyond_earth.calorite_block": "Block of Calorite",
   "block.beyond_earth.raw_calorite_block": "Raw Calorite Block",
-  
+
   "block.beyond_earth.permafrost": "Permafrost",
   "block.beyond_earth.glacio_stone": "Glacio Stone",
   "block.beyond_earth.glacio_stone_bricks": "Glacio Stone Bricks",
@@ -281,7 +281,7 @@
   "message.beyond_earth.no_fuel": "§cNO FUEL! §7Fill the Rocket with §cFuel§7. (§6Sneak and Right Click§7)",
   "message.beyond_earth.hold_space": "§7Hold §cSpace!",
   "message.beyond_earth.speed": "%s Speed",
-  
+
 
   "gui.beyond_earth.oxygen_bubble_distributor.workingarea.text": "Working Area: %1$sx%2$sx%3$s",
   "gui.beyond_earth.oxygen_bubble_distributor.workingarea.show": "Show",
