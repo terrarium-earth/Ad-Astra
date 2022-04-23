@@ -1,9 +1,15 @@
 package net.mrscauthd.beyond_earth.commands;
 
+import static net.minecraft.server.command.CommandManager.argument;
+
+import java.util.Collection;
+import java.util.List;
+
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.Entity;
@@ -17,11 +23,6 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.mrscauthd.beyond_earth.gui.screen_handlers.PlanetSelectionScreenHandler;
 
-import java.util.Collection;
-import java.util.List;
-
-import static net.minecraft.server.command.CommandManager.argument;
-
 // command: /planetgui @e 4
 public class PlanetGuiCommand {
 
@@ -32,10 +33,7 @@ public class PlanetGuiCommand {
                 .then(argument("target", EntityArgumentType.entities())
                         .executes(PlanetGuiCommand::executePartial)
                         .then(argument("tier", IntegerArgumentType.integer())
-                                .executes(PlanetGuiCommand::executeFull)
-                        )
-                )
-        );
+                                .executes(PlanetGuiCommand::executeFull))));
     }
 
     private static int executeSimple(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {

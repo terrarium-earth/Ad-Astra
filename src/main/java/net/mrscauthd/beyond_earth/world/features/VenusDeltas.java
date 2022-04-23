@@ -18,14 +18,17 @@ import java.util.Random;
 
 public class VenusDeltas extends Feature<BasaltColumnsFeatureConfig> {
 
-    private static final ImmutableList<Block> CANNOT_PLACE_ON = ImmutableList.of(Blocks.LAVA, Blocks.BEDROCK, Blocks.MAGMA_BLOCK, Blocks.SOUL_SAND, Blocks.NETHER_BRICKS, Blocks.NETHER_BRICK_FENCE, Blocks.NETHER_BRICK_STAIRS, Blocks.NETHER_WART, Blocks.CHEST, Blocks.SPAWNER);
+    private static final ImmutableList<Block> CANNOT_PLACE_ON = ImmutableList.of(Blocks.LAVA, Blocks.BEDROCK,
+            Blocks.MAGMA_BLOCK, Blocks.SOUL_SAND, Blocks.NETHER_BRICKS, Blocks.NETHER_BRICK_FENCE,
+            Blocks.NETHER_BRICK_STAIRS, Blocks.NETHER_WART, Blocks.CHEST, Blocks.SPAWNER);
 
     public VenusDeltas(Codec<BasaltColumnsFeatureConfig> configCodec) {
         super(configCodec);
     }
 
     @Nullable
-    private static BlockPos findSurface(StructureWorldAccess world, int seaLevel, BlockPos.Mutable pos, int calculatedDistance) {
+    private static BlockPos findSurface(StructureWorldAccess world, int seaLevel, BlockPos.Mutable pos,
+            int calculatedDistance) {
         while (pos.getY() > world.getBottomY() + 1 && calculatedDistance > 0) {
             --calculatedDistance;
             if (canPlaceAt(world, seaLevel, pos)) {
@@ -88,10 +91,12 @@ public class VenusDeltas extends Feature<BasaltColumnsFeatureConfig> {
             int l = flag ? 50 : 15;
             boolean flag1 = false;
 
-            for (BlockPos randomPos : BlockPos.iterateRandomly(random, l, blockpos.getX() - k, blockpos.getY(), blockpos.getZ() - k, blockpos.getX() + k, blockpos.getY(), blockpos.getZ() + k)) {
+            for (BlockPos randomPos : BlockPos.iterateRandomly(random, l, blockpos.getX() - k, blockpos.getY(),
+                    blockpos.getZ() - k, blockpos.getX() + k, blockpos.getY(), blockpos.getZ() + k)) {
                 int calculatedDistance = height - randomPos.getManhattanDistance(blockpos);
                 if (calculatedDistance >= 0) {
-                    flag1 |= this.placeColumn(context.getWorld(), seaLevel, randomPos, calculatedDistance, config.getReach().get(random));
+                    flag1 |= this.placeColumn(context.getWorld(), seaLevel, randomPos, calculatedDistance,
+                            config.getReach().get(random));
                 }
             }
 
@@ -99,12 +104,16 @@ public class VenusDeltas extends Feature<BasaltColumnsFeatureConfig> {
         }
     }
 
-    private boolean placeColumn(StructureWorldAccess world, int seaLevel, BlockPos randomPos, int calculatedDistance, int reach) {
+    private boolean placeColumn(StructureWorldAccess world, int seaLevel, BlockPos randomPos, int calculatedDistance,
+            int reach) {
         boolean flag = false;
 
-        for (BlockPos blockpos : BlockPos.iterate(randomPos.getX() - reach, randomPos.getY(), randomPos.getZ() - reach, randomPos.getX() + reach, randomPos.getY(), randomPos.getZ() + reach)) {
+        for (BlockPos blockpos : BlockPos.iterate(randomPos.getX() - reach, randomPos.getY(), randomPos.getZ() - reach,
+                randomPos.getX() + reach, randomPos.getY(), randomPos.getZ() + reach)) {
             int calculatedDistance2 = blockpos.getManhattanDistance(randomPos);
-            BlockPos blockpos1 = isAirOrLavaOcean(world, seaLevel, blockpos) ? findSurface(world, seaLevel, blockpos.mutableCopy(), calculatedDistance2) : findAir(world, blockpos.mutableCopy(), calculatedDistance2);
+            BlockPos blockpos1 = isAirOrLavaOcean(world, seaLevel, blockpos)
+                    ? findSurface(world, seaLevel, blockpos.mutableCopy(), calculatedDistance2)
+                    : findAir(world, blockpos.mutableCopy(), calculatedDistance2);
             if (blockpos1 != null) {
                 int j = calculatedDistance - calculatedDistance2 / 2;
 

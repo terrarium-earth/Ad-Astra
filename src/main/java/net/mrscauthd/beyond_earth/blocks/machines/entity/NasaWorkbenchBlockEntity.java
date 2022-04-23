@@ -1,5 +1,7 @@
 package net.mrscauthd.beyond_earth.blocks.machines.entity;
 
+import org.jetbrains.annotations.Nullable;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -8,7 +10,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.mrscauthd.beyond_earth.gui.screen_handlers.NasaWorkbenchScreenHandler;
 import net.mrscauthd.beyond_earth.registry.ModBlockEntities;
-import org.jetbrains.annotations.Nullable;
 
 public class NasaWorkbenchBlockEntity extends AbstractMachineBlockEntity {
 
@@ -27,7 +28,6 @@ public class NasaWorkbenchBlockEntity extends AbstractMachineBlockEntity {
         return 15;
     }
 
-    @SuppressWarnings("unused")
     public static void serverTick(World world, BlockPos pos, BlockState state, AbstractMachineBlockEntity blockEntity) {
         if (blockEntity.useEnergy()) {
 

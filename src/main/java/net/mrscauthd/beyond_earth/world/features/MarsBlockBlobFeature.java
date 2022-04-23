@@ -1,6 +1,9 @@
 package net.mrscauthd.beyond_earth.world.features;
 
+import java.util.Random;
+
 import com.mojang.serialization.Codec;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.StructureWorldAccess;
@@ -9,10 +12,7 @@ import net.minecraft.world.gen.feature.SingleStateFeatureConfig;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 import net.mrscauthd.beyond_earth.registry.ModBlocks;
 
-import java.util.Random;
-
 public class MarsBlockBlobFeature extends Feature<SingleStateFeatureConfig> {
-
 
     public MarsBlockBlobFeature(Codec<SingleStateFeatureConfig> configCodec) {
         super(configCodec);

@@ -15,7 +15,7 @@ public class NasaWorkbenchScreenHandler extends AbstractMachineScreenHandler {
 
     public NasaWorkbenchScreenHandler(int syncId, PlayerInventory inventory, NasaWorkbenchBlockEntity entity) {
         super(ModScreenHandlers.NASA_WORKBENCH_SCREEN_HANDLER, syncId, inventory, entity,
-                new Slot[]{
+                new Slot[] {
 
                         // Nose.
                         new Slot(entity, 0, 40, 18),
@@ -53,8 +53,7 @@ public class NasaWorkbenchScreenHandler extends AbstractMachineScreenHandler {
                                 return false;
                             }
                         }
-                }
-        );
+                });
     }
 
     @Override

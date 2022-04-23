@@ -1,13 +1,13 @@
 package net.mrscauthd.beyond_earth.recipes;
 
+import java.util.function.Predicate;
+
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
-
-import java.util.function.Predicate;
 
 public abstract class ModRecipe implements Recipe<Inventory>, Predicate<ItemStack> {
 
@@ -22,7 +22,6 @@ public abstract class ModRecipe implements Recipe<Inventory>, Predicate<ItemStac
         this.output = output;
         this.cookTime = cookTime;
     }
-
 
     @Override
     public boolean matches(Inventory inventory, World world) {

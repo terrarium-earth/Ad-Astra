@@ -1,5 +1,7 @@
 package net.mrscauthd.beyond_earth.blocks.machines.entity;
 
+import org.jetbrains.annotations.Nullable;
+
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -23,13 +25,13 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.mrscauthd.beyond_earth.util.SimpleInventory;
-import org.jetbrains.annotations.Nullable;
 import team.reborn.energy.api.EnergyStorage;
 import team.reborn.energy.api.EnergyStorageUtil;
 import team.reborn.energy.api.base.SimpleSidedEnergyContainer;
 
 @SuppressWarnings("UnstableApiUsage")
-public abstract class AbstractMachineBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, SimpleInventory, SidedInventory {
+public abstract class AbstractMachineBlockEntity extends BlockEntity
+        implements ExtendedScreenHandlerFactory, SimpleInventory, SidedInventory {
 
     private final DefaultedList<ItemStack> inventory;
 
@@ -116,8 +118,7 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
                         getSideEnergyStorage(direction),
                         EnergyStorage.SIDED.find(world, pos.offset(direction), direction.getOpposite()),
                         Long.MAX_VALUE,
-                        null
-                );
+                        null);
             }
         }
     }
@@ -162,7 +163,8 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
         }
     }
 
-    // Updates the chunk every time the energy is changed. Important for updating the screen to show the latest energy value.
+    // Updates the chunk every time the energy is changed. Important for updating
+    // the screen to show the latest energy value.
     @Override
     public void markDirty() {
         super.markDirty();

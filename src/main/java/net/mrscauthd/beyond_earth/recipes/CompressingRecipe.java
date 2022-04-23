@@ -27,12 +27,12 @@ public class CompressingRecipe extends ModRecipe {
         return ModRecipes.COMPRESSING_RECIPE;
     }
 
-
     public static class Serializer implements RecipeSerializer<CompressingRecipe> {
 
         @Override
         public CompressingRecipe read(Identifier id, JsonObject json) {
-            Item item = Registry.ITEM.get(new Identifier(json.get("output").getAsJsonObject().get("item").getAsString()));
+            Item item = Registry.ITEM
+                    .get(new Identifier(json.get("output").getAsJsonObject().get("item").getAsString()));
             short stackSize = json.get("output").getAsJsonObject().get("count").getAsShort();
 
             Ingredient input = Ingredient.fromJson(json.get("input"));

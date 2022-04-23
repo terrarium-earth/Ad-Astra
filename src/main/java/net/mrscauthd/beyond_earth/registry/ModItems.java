@@ -23,25 +23,39 @@ import java.util.List;
 
 public class ModItems {
 
-    public static final ItemGroup ITEM_GROUP_NORMAL = FabricItemGroupBuilder.build(new ModIdentifier("tab_normal"), () -> new ItemStack(ModItems.TIER_1_ROCKET));
-    public static final ItemGroup ITEM_GROUP_MACHINES = FabricItemGroupBuilder.build(new ModIdentifier("tab_machines"), () -> new ItemStack(ModBlocks.NASA_WORKBENCH));
-    public static final ItemGroup ITEM_GROUP_BASICS = FabricItemGroupBuilder.build(new ModIdentifier("tab_basics"), () -> new ItemStack(ModItems.DESH_ENGINE));
-    public static final ItemGroup ITEM_GROUP_MATERIALS = FabricItemGroupBuilder.build(new ModIdentifier("tab_materials"), () -> new ItemStack(ModItems.IRON_PLATE));
-    public static final ItemGroup ITEM_GROUP_FLAGS = FabricItemGroupBuilder.build(new ModIdentifier("tab_flags"), () -> new ItemStack(ModBlocks.FLAG_PURPLE));
-    public static final ItemGroup ITEM_GROUP_GLOBES = FabricItemGroupBuilder.build(new ModIdentifier("tab_globes"), () -> new ItemStack(ModItems.EARTH_GLOBE));
-    public static final ItemGroup ITEM_GROUP_BLOCKS = FabricItemGroupBuilder.build(new ModIdentifier("tab_blocks"), () -> new ItemStack(ModBlocks.MOON_IRON_ORE));
-    public static final ItemGroup ITEM_GROUP_SPAWN_EGGS = FabricItemGroupBuilder.build(new ModIdentifier("tab_spawn_eggs"), () -> new ItemStack(Items.ZOMBIE_SPAWN_EGG)); // Temp icon.
+    public static final ItemGroup ITEM_GROUP_NORMAL = FabricItemGroupBuilder.build(new ModIdentifier("tab_normal"),
+            () -> new ItemStack(ModItems.TIER_1_ROCKET));
+    public static final ItemGroup ITEM_GROUP_MACHINES = FabricItemGroupBuilder.build(new ModIdentifier("tab_machines"),
+            () -> new ItemStack(ModBlocks.NASA_WORKBENCH));
+    public static final ItemGroup ITEM_GROUP_BASICS = FabricItemGroupBuilder.build(new ModIdentifier("tab_basics"),
+            () -> new ItemStack(ModItems.DESH_ENGINE));
+    public static final ItemGroup ITEM_GROUP_MATERIALS = FabricItemGroupBuilder
+            .build(new ModIdentifier("tab_materials"), () -> new ItemStack(ModItems.IRON_PLATE));
+    public static final ItemGroup ITEM_GROUP_FLAGS = FabricItemGroupBuilder.build(new ModIdentifier("tab_flags"),
+            () -> new ItemStack(ModBlocks.FLAG_PURPLE));
+    public static final ItemGroup ITEM_GROUP_GLOBES = FabricItemGroupBuilder.build(new ModIdentifier("tab_globes"),
+            () -> new ItemStack(ModItems.EARTH_GLOBE));
+    public static final ItemGroup ITEM_GROUP_BLOCKS = FabricItemGroupBuilder.build(new ModIdentifier("tab_blocks"),
+            () -> new ItemStack(ModBlocks.MOON_IRON_ORE));
+    public static final ItemGroup ITEM_GROUP_SPAWN_EGGS = FabricItemGroupBuilder
+            .build(new ModIdentifier("tab_spawn_eggs"), () -> new ItemStack(Items.ZOMBIE_SPAWN_EGG)); // Temp icon.
 
     // Vehicles Items.
-    public static final Item TIER_1_ROCKET = new RocketItem(new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
-    public static final Item TIER_2_ROCKET = new RocketItem(new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
-    public static final Item TIER_3_ROCKET = new RocketItem(new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
-    public static final Item TIER_4_ROCKET = new RocketItem(new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
+    public static final Item TIER_1_ROCKET = new RocketItem(
+            new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
+    public static final Item TIER_2_ROCKET = new RocketItem(
+            new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
+    public static final Item TIER_3_ROCKET = new RocketItem(
+            new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
+    public static final Item TIER_4_ROCKET = new RocketItem(
+            new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
     public static final Item ROVER = new RoverItem(new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
 
     // Items.
-    public static final Item CHEESE = new Item(new FabricItemSettings().group(ITEM_GROUP_NORMAL).food(new FoodComponent.Builder().hunger(4).saturationModifier(3.0f).build()));
-    public static final Item HAMMER = new HammerItem(new FabricItemSettings().group(ITEM_GROUP_BASICS).maxCount(1).maxDamage(9));
+    public static final Item CHEESE = new Item(new FabricItemSettings().group(ITEM_GROUP_NORMAL)
+            .food(new FoodComponent.Builder().hunger(4).saturationModifier(3.0f).build()));
+    public static final Item HAMMER = new HammerItem(
+            new FabricItemSettings().group(ITEM_GROUP_BASICS).maxCount(1).maxDamage(9));
     public static final Item IRON_STICK = new Item(new FabricItemSettings().group(ITEM_GROUP_BASICS));
     public static final Item OXYGEN_GEAR = new Item(new FabricItemSettings().group(ITEM_GROUP_BASICS));
     public static final Item OXYGEN_TANK = new Item(new FabricItemSettings().group(ITEM_GROUP_BASICS));
@@ -85,135 +99,234 @@ public class ModItems {
 
     // Flag Items
     public static final BlockItem FLAG = new TallBlockItem(ModBlocks.FLAG, new Item.Settings().group(ITEM_GROUP_FLAGS));
-    public static final BlockItem FLAG_BLUE = new TallBlockItem(ModBlocks.FLAG_BLUE, new Item.Settings().group(ITEM_GROUP_FLAGS));
-    public static final BlockItem FLAG_BROWN = new TallBlockItem(ModBlocks.FLAG_BROWN, new Item.Settings().group(ITEM_GROUP_FLAGS));
-    public static final BlockItem FLAG_CYAN = new TallBlockItem(ModBlocks.FLAG_CYAN, new Item.Settings().group(ITEM_GROUP_FLAGS));
-    public static final BlockItem FLAG_GRAY = new TallBlockItem(ModBlocks.FLAG_GRAY, new Item.Settings().group(ITEM_GROUP_FLAGS));
-    public static final BlockItem FLAG_GREEN = new TallBlockItem(ModBlocks.FLAG_GREEN, new Item.Settings().group(ITEM_GROUP_FLAGS));
-    public static final BlockItem FLAG_LIGHT_BLUE = new TallBlockItem(ModBlocks.FLAG_LIGHT_BLUE, new Item.Settings().group(ITEM_GROUP_FLAGS));
-    public static final BlockItem FLAG_LIME = new TallBlockItem(ModBlocks.FLAG_LIME, new Item.Settings().group(ITEM_GROUP_FLAGS));
-    public static final BlockItem FLAG_MAGENTA = new TallBlockItem(ModBlocks.FLAG_MAGENTA, new Item.Settings().group(ITEM_GROUP_FLAGS));
-    public static final BlockItem FLAG_ORANGE = new TallBlockItem(ModBlocks.FLAG_ORANGE, new Item.Settings().group(ITEM_GROUP_FLAGS));
-    public static final BlockItem FLAG_PINK = new TallBlockItem(ModBlocks.FLAG_PINK, new Item.Settings().group(ITEM_GROUP_FLAGS));
-    public static final BlockItem FLAG_PURPLE = new TallBlockItem(ModBlocks.FLAG_PURPLE, new Item.Settings().group(ITEM_GROUP_FLAGS));
-    public static final BlockItem FLAG_RED = new TallBlockItem(ModBlocks.FLAG_RED, new Item.Settings().group(ITEM_GROUP_FLAGS));
-    public static final BlockItem FLAG_YELLOW = new TallBlockItem(ModBlocks.FLAG_YELLOW, new Item.Settings().group(ITEM_GROUP_FLAGS));
+    public static final BlockItem FLAG_BLUE = new TallBlockItem(ModBlocks.FLAG_BLUE,
+            new Item.Settings().group(ITEM_GROUP_FLAGS));
+    public static final BlockItem FLAG_BROWN = new TallBlockItem(ModBlocks.FLAG_BROWN,
+            new Item.Settings().group(ITEM_GROUP_FLAGS));
+    public static final BlockItem FLAG_CYAN = new TallBlockItem(ModBlocks.FLAG_CYAN,
+            new Item.Settings().group(ITEM_GROUP_FLAGS));
+    public static final BlockItem FLAG_GRAY = new TallBlockItem(ModBlocks.FLAG_GRAY,
+            new Item.Settings().group(ITEM_GROUP_FLAGS));
+    public static final BlockItem FLAG_GREEN = new TallBlockItem(ModBlocks.FLAG_GREEN,
+            new Item.Settings().group(ITEM_GROUP_FLAGS));
+    public static final BlockItem FLAG_LIGHT_BLUE = new TallBlockItem(ModBlocks.FLAG_LIGHT_BLUE,
+            new Item.Settings().group(ITEM_GROUP_FLAGS));
+    public static final BlockItem FLAG_LIME = new TallBlockItem(ModBlocks.FLAG_LIME,
+            new Item.Settings().group(ITEM_GROUP_FLAGS));
+    public static final BlockItem FLAG_MAGENTA = new TallBlockItem(ModBlocks.FLAG_MAGENTA,
+            new Item.Settings().group(ITEM_GROUP_FLAGS));
+    public static final BlockItem FLAG_ORANGE = new TallBlockItem(ModBlocks.FLAG_ORANGE,
+            new Item.Settings().group(ITEM_GROUP_FLAGS));
+    public static final BlockItem FLAG_PINK = new TallBlockItem(ModBlocks.FLAG_PINK,
+            new Item.Settings().group(ITEM_GROUP_FLAGS));
+    public static final BlockItem FLAG_PURPLE = new TallBlockItem(ModBlocks.FLAG_PURPLE,
+            new Item.Settings().group(ITEM_GROUP_FLAGS));
+    public static final BlockItem FLAG_RED = new TallBlockItem(ModBlocks.FLAG_RED,
+            new Item.Settings().group(ITEM_GROUP_FLAGS));
+    public static final BlockItem FLAG_YELLOW = new TallBlockItem(ModBlocks.FLAG_YELLOW,
+            new Item.Settings().group(ITEM_GROUP_FLAGS));
 
     // Globes.
-    public static final BlockItem EARTH_GLOBE = new BlockItem(ModBlocks.EARTH_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.EPIC));
-    public static final BlockItem MOON_GLOBE = new BlockItem(ModBlocks.MOON_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.EPIC));
-    public static final BlockItem MARS_GLOBE = new BlockItem(ModBlocks.MARS_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.EPIC));
-    public static final BlockItem MERCURY_GLOBE = new BlockItem(ModBlocks.MERCURY_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.EPIC));
-    public static final BlockItem VENUS_GLOBE = new BlockItem(ModBlocks.VENUS_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.EPIC));
-    public static final BlockItem GLACIO_GLOBE = new BlockItem(ModBlocks.GLACIO_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.EPIC));
+    public static final BlockItem EARTH_GLOBE = new BlockItem(ModBlocks.EARTH_GLOBE,
+            new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.EPIC));
+    public static final BlockItem MOON_GLOBE = new BlockItem(ModBlocks.MOON_GLOBE,
+            new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.EPIC));
+    public static final BlockItem MARS_GLOBE = new BlockItem(ModBlocks.MARS_GLOBE,
+            new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.EPIC));
+    public static final BlockItem MERCURY_GLOBE = new BlockItem(ModBlocks.MERCURY_GLOBE,
+            new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.EPIC));
+    public static final BlockItem VENUS_GLOBE = new BlockItem(ModBlocks.VENUS_GLOBE,
+            new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.EPIC));
+    public static final BlockItem GLACIO_GLOBE = new BlockItem(ModBlocks.GLACIO_GLOBE,
+            new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.EPIC));
 
     // Torch items.
-    public static final Item COAL_TORCH = new WallStandingBlockItem(ModBlocks.COAL_TORCH, ModBlocks.WALL_COAL_TORCH, new FabricItemSettings().group(ITEM_GROUP_BASICS));
-    public static final Item COAL_LANTERN = new BlockItem(ModBlocks.COAL_LANTERN, new Item.Settings().group(ITEM_GROUP_BASICS));
+    public static final Item COAL_TORCH = new WallStandingBlockItem(ModBlocks.COAL_TORCH, ModBlocks.WALL_COAL_TORCH,
+            new FabricItemSettings().group(ITEM_GROUP_BASICS));
+    public static final Item COAL_LANTERN = new BlockItem(ModBlocks.COAL_LANTERN,
+            new Item.Settings().group(ITEM_GROUP_BASICS));
 
     // Machines.
-    public static final BlockItem NASA_WORKBENCH = new BlockItem(ModBlocks.NASA_WORKBENCH, new Item.Settings().group(ITEM_GROUP_MACHINES).rarity(Rarity.EPIC));
-    public static final BlockItem SOLAR_PANEL = new BlockItem(ModBlocks.SOLAR_PANEL, new Item.Settings().group(ITEM_GROUP_MACHINES)) {
+    public static final BlockItem NASA_WORKBENCH = new BlockItem(ModBlocks.NASA_WORKBENCH,
+            new Item.Settings().group(ITEM_GROUP_MACHINES).rarity(Rarity.EPIC));
+    public static final BlockItem SOLAR_PANEL = new BlockItem(ModBlocks.SOLAR_PANEL,
+            new Item.Settings().group(ITEM_GROUP_MACHINES)) {
         @Override
         public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-            tooltip.add((new TranslatableText("item.beyond_earth.generator.tooltip", SolarPanelBlockEntity.ENERGY_PER_TICK).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
+            tooltip.add(
+                    (new TranslatableText("item.beyond_earth.generator.tooltip", SolarPanelBlockEntity.ENERGY_PER_TICK)
+                            .setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
         }
     };
-    public static final BlockItem COAL_GENERATOR = new BlockItem(ModBlocks.COAL_GENERATOR, new Item.Settings().group(ITEM_GROUP_MACHINES)) {
+    public static final BlockItem COAL_GENERATOR = new BlockItem(ModBlocks.COAL_GENERATOR,
+            new Item.Settings().group(ITEM_GROUP_MACHINES)) {
         @Override
         public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-            tooltip.add((new TranslatableText("item.beyond_earth.generator.tooltip", CoalGeneratorBlockEntity.ENERGY_PER_TICK).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
+            tooltip.add((new TranslatableText("item.beyond_earth.generator.tooltip",
+                    CoalGeneratorBlockEntity.ENERGY_PER_TICK).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
         }
     };
-    public static final BlockItem COMPRESSOR = new BlockItem(ModBlocks.COMPRESSOR, new Item.Settings().group(ITEM_GROUP_MACHINES));
-    public static final BlockItem FUEL_REFINERY = new BlockItem(ModBlocks.FUEL_REFINERY, new Item.Settings().group(ITEM_GROUP_MACHINES));
-    public static final BlockItem OXYGEN_LOADER = new BlockItem(ModBlocks.OXYGEN_LOADER, new Item.Settings().group(ITEM_GROUP_MACHINES));
-    public static final BlockItem OXYGEN_BUBBLE_DISTRIBUTOR = new BlockItem(ModBlocks.OXYGEN_BUBBLE_DISTRIBUTOR, new Item.Settings().group(ITEM_GROUP_MACHINES));
-    public static final BlockItem WATER_PUMP = new BlockItem(ModBlocks.WATER_PUMP, new Item.Settings().group(ITEM_GROUP_MACHINES)) {
+    public static final BlockItem COMPRESSOR = new BlockItem(ModBlocks.COMPRESSOR,
+            new Item.Settings().group(ITEM_GROUP_MACHINES));
+    public static final BlockItem FUEL_REFINERY = new BlockItem(ModBlocks.FUEL_REFINERY,
+            new Item.Settings().group(ITEM_GROUP_MACHINES));
+    public static final BlockItem OXYGEN_LOADER = new BlockItem(ModBlocks.OXYGEN_LOADER,
+            new Item.Settings().group(ITEM_GROUP_MACHINES));
+    public static final BlockItem OXYGEN_BUBBLE_DISTRIBUTOR = new BlockItem(ModBlocks.OXYGEN_BUBBLE_DISTRIBUTOR,
+            new Item.Settings().group(ITEM_GROUP_MACHINES));
+    public static final BlockItem WATER_PUMP = new BlockItem(ModBlocks.WATER_PUMP,
+            new Item.Settings().group(ITEM_GROUP_MACHINES)) {
         @Override
         public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-            tooltip.add((new TranslatableText("item.beyond_earth.water_pump.tooltip", WaterPumpBlockEntity.TRANSFER_PER_TICK).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
+            tooltip.add((new TranslatableText("item.beyond_earth.water_pump.tooltip",
+                    WaterPumpBlockEntity.TRANSFER_PER_TICK).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
         }
     };
 
     // Block Items.
-    public static final BlockItem STEEL_BLOCK = new BlockItem(ModBlocks.STEEL_BLOCK, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem DESH_BLOCK = new BlockItem(ModBlocks.DESH_BLOCK, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem OSTRUM_BLOCK = new BlockItem(ModBlocks.OSTRUM_BLOCK, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem CALORITE_BLOCK = new BlockItem(ModBlocks.CALORITE_BLOCK, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem RAW_DESH_BLOCK = new BlockItem(ModBlocks.RAW_DESH_BLOCK, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem RAW_OSTRUM_BLOCK = new BlockItem(ModBlocks.RAW_OSTRUM_BLOCK, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem RAW_CALORITE_BLOCK = new BlockItem(ModBlocks.RAW_CALORITE_BLOCK, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem IRON_PLATING_BLOCK = new BlockItem(ModBlocks.IRON_PLATING_BLOCK, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem RUSTED_IRON_PILLAR_BLOCK = new BlockItem(ModBlocks.RUSTED_IRON_PILLAR_BLOCK, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem RUSTED_IRON_PLATING_BLOCK = new BlockItem(ModBlocks.RUSTED_IRON_PLATING_BLOCK, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem BLUE_IRON_PLATING_BLOCK = new BlockItem(ModBlocks.BLUE_IRON_PLATING_BLOCK, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem INFERNAL_SPIRE_BLOCK = new BlockItem(ModBlocks.INFERNAL_SPIRE_BLOCK, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem IRON_MARK_BLOCK = new BlockItem(ModBlocks.IRON_MARK_BLOCK, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem SKY_STONE = new BlockItem(ModBlocks.SKY_STONE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem STEEL_BLOCK = new BlockItem(ModBlocks.STEEL_BLOCK,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem DESH_BLOCK = new BlockItem(ModBlocks.DESH_BLOCK,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem OSTRUM_BLOCK = new BlockItem(ModBlocks.OSTRUM_BLOCK,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem CALORITE_BLOCK = new BlockItem(ModBlocks.CALORITE_BLOCK,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem RAW_DESH_BLOCK = new BlockItem(ModBlocks.RAW_DESH_BLOCK,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem RAW_OSTRUM_BLOCK = new BlockItem(ModBlocks.RAW_OSTRUM_BLOCK,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem RAW_CALORITE_BLOCK = new BlockItem(ModBlocks.RAW_CALORITE_BLOCK,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem IRON_PLATING_BLOCK = new BlockItem(ModBlocks.IRON_PLATING_BLOCK,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem RUSTED_IRON_PILLAR_BLOCK = new BlockItem(ModBlocks.RUSTED_IRON_PILLAR_BLOCK,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem RUSTED_IRON_PLATING_BLOCK = new BlockItem(ModBlocks.RUSTED_IRON_PLATING_BLOCK,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem BLUE_IRON_PLATING_BLOCK = new BlockItem(ModBlocks.BLUE_IRON_PLATING_BLOCK,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem INFERNAL_SPIRE_BLOCK = new BlockItem(ModBlocks.INFERNAL_SPIRE_BLOCK,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem IRON_MARK_BLOCK = new BlockItem(ModBlocks.IRON_MARK_BLOCK,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem SKY_STONE = new BlockItem(ModBlocks.SKY_STONE,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
 
-    public static final BlockItem MOON_STONE = new BlockItem(ModBlocks.MOON_STONE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem MOON_STONE_BRICKS = new BlockItem(ModBlocks.MOON_STONE_BRICKS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem CRACKED_MOON_STONE_BRICKS = new BlockItem(ModBlocks.CRACKED_MOON_STONE_BRICKS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem MOON_STONE_BRICK_SLAB = new BlockItem(ModBlocks.MOON_STONE_BRICK_SLAB, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem MOON_STONE_BRICK_STAIRS = new BlockItem(ModBlocks.MOON_STONE_BRICK_STAIRS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem MOON_STONE = new BlockItem(ModBlocks.MOON_STONE,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem MOON_STONE_BRICKS = new BlockItem(ModBlocks.MOON_STONE_BRICKS,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem CRACKED_MOON_STONE_BRICKS = new BlockItem(ModBlocks.CRACKED_MOON_STONE_BRICKS,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem MOON_STONE_BRICK_SLAB = new BlockItem(ModBlocks.MOON_STONE_BRICK_SLAB,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem MOON_STONE_BRICK_STAIRS = new BlockItem(ModBlocks.MOON_STONE_BRICK_STAIRS,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
 
-    public static final BlockItem MARS_STONE = new BlockItem(ModBlocks.MARS_STONE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem MARS_STONE_BRICKS = new BlockItem(ModBlocks.MARS_STONE_BRICKS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem CRACKED_MARS_STONE_BRICKS = new BlockItem(ModBlocks.CRACKED_MARS_STONE_BRICKS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem MARS_STONE_BRICK_SLAB = new BlockItem(ModBlocks.MARS_STONE_BRICK_SLAB, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem MARS_STONE_BRICK_STAIRS = new BlockItem(ModBlocks.MARS_STONE_BRICK_STAIRS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem MARS_STONE = new BlockItem(ModBlocks.MARS_STONE,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem MARS_STONE_BRICKS = new BlockItem(ModBlocks.MARS_STONE_BRICKS,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem CRACKED_MARS_STONE_BRICKS = new BlockItem(ModBlocks.CRACKED_MARS_STONE_BRICKS,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem MARS_STONE_BRICK_SLAB = new BlockItem(ModBlocks.MARS_STONE_BRICK_SLAB,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem MARS_STONE_BRICK_STAIRS = new BlockItem(ModBlocks.MARS_STONE_BRICK_STAIRS,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
 
-    public static final BlockItem MERCURY_STONE = new BlockItem(ModBlocks.MERCURY_STONE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem MERCURY_STONE_BRICKS = new BlockItem(ModBlocks.MERCURY_STONE_BRICKS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem CRACKED_MERCURY_STONE_BRICKS = new BlockItem(ModBlocks.CRACKED_MERCURY_STONE_BRICKS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem MERCURY_STONE_BRICK_SLAB = new BlockItem(ModBlocks.MERCURY_STONE_BRICK_SLAB, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem MERCURY_STONE_BRICK_STAIRS = new BlockItem(ModBlocks.MERCURY_STONE_BRICK_STAIRS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem MERCURY_STONE = new BlockItem(ModBlocks.MERCURY_STONE,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem MERCURY_STONE_BRICKS = new BlockItem(ModBlocks.MERCURY_STONE_BRICKS,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem CRACKED_MERCURY_STONE_BRICKS = new BlockItem(ModBlocks.CRACKED_MERCURY_STONE_BRICKS,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem MERCURY_STONE_BRICK_SLAB = new BlockItem(ModBlocks.MERCURY_STONE_BRICK_SLAB,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem MERCURY_STONE_BRICK_STAIRS = new BlockItem(ModBlocks.MERCURY_STONE_BRICK_STAIRS,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
 
-    public static final BlockItem VENUS_STONE = new BlockItem(ModBlocks.VENUS_STONE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem VENUS_STONE_BRICKS = new BlockItem(ModBlocks.VENUS_STONE_BRICKS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem CRACKED_VENUS_STONE_BRICKS = new BlockItem(ModBlocks.CRACKED_VENUS_STONE_BRICKS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem VENUS_STONE_BRICK_SLAB = new BlockItem(ModBlocks.VENUS_STONE_BRICK_SLAB, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem VENUS_STONE_BRICK_STAIRS = new BlockItem(ModBlocks.VENUS_STONE_BRICK_STAIRS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem VENUS_STONE = new BlockItem(ModBlocks.VENUS_STONE,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem VENUS_STONE_BRICKS = new BlockItem(ModBlocks.VENUS_STONE_BRICKS,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem CRACKED_VENUS_STONE_BRICKS = new BlockItem(ModBlocks.CRACKED_VENUS_STONE_BRICKS,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem VENUS_STONE_BRICK_SLAB = new BlockItem(ModBlocks.VENUS_STONE_BRICK_SLAB,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem VENUS_STONE_BRICK_STAIRS = new BlockItem(ModBlocks.VENUS_STONE_BRICK_STAIRS,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
 
-    public static final BlockItem VENUS_SANDSTONE = new BlockItem(ModBlocks.VENUS_SANDSTONE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem VENUS_SANDSTONE_BRICKS = new BlockItem(ModBlocks.VENUS_SANDSTONE_BRICKS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem CRACKED_VENUS_SANDSTONE_BRICKS = new BlockItem(ModBlocks.CRACKED_VENUS_SANDSTONE_BRICKS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem VENUS_SANDSTONE_BRICK_SLAB = new BlockItem(ModBlocks.VENUS_SANDSTONE_BRICK_SLAB, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem VENUS_SANDSTONE_BRICK_STAIRS = new BlockItem(ModBlocks.VENUS_SANDSTONE_BRICK_STAIRS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem VENUS_SANDSTONE = new BlockItem(ModBlocks.VENUS_SANDSTONE,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem VENUS_SANDSTONE_BRICKS = new BlockItem(ModBlocks.VENUS_SANDSTONE_BRICKS,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem CRACKED_VENUS_SANDSTONE_BRICKS = new BlockItem(
+            ModBlocks.CRACKED_VENUS_SANDSTONE_BRICKS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem VENUS_SANDSTONE_BRICK_SLAB = new BlockItem(ModBlocks.VENUS_SANDSTONE_BRICK_SLAB,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem VENUS_SANDSTONE_BRICK_STAIRS = new BlockItem(ModBlocks.VENUS_SANDSTONE_BRICK_STAIRS,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
 
-    public static final BlockItem PERMAFROST = new BlockItem(ModBlocks.PERMAFROST_STONE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem GLACIO_STONE = new BlockItem(ModBlocks.GLACIO_STONE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem GLACIO_STONE_BRICKS = new BlockItem(ModBlocks.GLACIO_STONE_BRICKS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem CRACKED_GLACIO_STONE_BRICKS = new BlockItem(ModBlocks.CRACKED_GLACIO_STONE_BRICKS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem GLACIO_STONE_BRICK_SLAB = new BlockItem(ModBlocks.GLACIO_STONE_BRICK_SLAB, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem GLACIO_STONE_BRICK_STAIRS = new BlockItem(ModBlocks.GLACIO_STONE_BRICK_STAIRS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem PERMAFROST = new BlockItem(ModBlocks.PERMAFROST_STONE,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem GLACIO_STONE = new BlockItem(ModBlocks.GLACIO_STONE,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem GLACIO_STONE_BRICKS = new BlockItem(ModBlocks.GLACIO_STONE_BRICKS,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem CRACKED_GLACIO_STONE_BRICKS = new BlockItem(ModBlocks.CRACKED_GLACIO_STONE_BRICKS,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem GLACIO_STONE_BRICK_SLAB = new BlockItem(ModBlocks.GLACIO_STONE_BRICK_SLAB,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem GLACIO_STONE_BRICK_STAIRS = new BlockItem(ModBlocks.GLACIO_STONE_BRICK_STAIRS,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
 
-    public static final BlockItem ROCKET_LAUNCH_PAD = new BlockItem(ModBlocks.ROCKET_LAUNCH_PAD, new Item.Settings().group(ITEM_GROUP_NORMAL));
+    public static final BlockItem ROCKET_LAUNCH_PAD = new BlockItem(ModBlocks.ROCKET_LAUNCH_PAD,
+            new Item.Settings().group(ITEM_GROUP_NORMAL));
 
-    public static final BlockItem MOON_SAND = new BlockItem(ModBlocks.MOON_SAND, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem MARS_SAND = new BlockItem(ModBlocks.MARS_SAND, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem VENUS_SAND = new BlockItem(ModBlocks.VENUS_SAND, new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem MOON_SAND = new BlockItem(ModBlocks.MOON_SAND,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem MARS_SAND = new BlockItem(ModBlocks.MARS_SAND,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem VENUS_SAND = new BlockItem(ModBlocks.VENUS_SAND,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
 
-    public static final BlockItem MOON_CHEESE_ORE = new BlockItem(ModBlocks.MOON_CHEESE_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem MOON_DESH_ORE = new BlockItem(ModBlocks.MOON_DESH_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem MOON_IRON_ORE = new BlockItem(ModBlocks.MOON_IRON_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem MOON_ICE_SHARD = new BlockItem(ModBlocks.MOON_ICE_SHARD_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem MARS_IRON_ORE = new BlockItem(ModBlocks.MARS_IRON_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem MARS_DIAMOND_ORE = new BlockItem(ModBlocks.MARS_DIAMOND_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem MARS_OSTRUM_ORE = new BlockItem(ModBlocks.MARS_OSTRUM_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem MARS_ICE_SHARD_ORE = new BlockItem(ModBlocks.MARS_ICE_SHARD_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem MERCURY_IRON_ORE = new BlockItem(ModBlocks.MERCURY_IRON_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem VENUS_COAL_ORE = new BlockItem(ModBlocks.VENUS_COAL_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem VENUS_GOLD_ORE = new BlockItem(ModBlocks.VENUS_GOLD_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem VENUS_DIAMOND_ORE = new BlockItem(ModBlocks.VENUS_DIAMOND_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem VENUS_CALORITE_ORE = new BlockItem(ModBlocks.VENUS_CALORITE_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem GLACIO_ICE_SHARD_ORE = new BlockItem(ModBlocks.GLACIO_ICE_SHARD_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem GLACIO_COAL_ORE = new BlockItem(ModBlocks.GLACIO_COAL_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem GLACIO_COPPER_ORE = new BlockItem(ModBlocks.GLACIO_COPPER_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem GLACIO_IRON_ORE = new BlockItem(ModBlocks.GLACIO_IRON_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-    public static final BlockItem GLACIO_LAPIS_ORE = new BlockItem(ModBlocks.GLACIO_LAPIS_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-
+    public static final BlockItem MOON_CHEESE_ORE = new BlockItem(ModBlocks.MOON_CHEESE_ORE,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem MOON_DESH_ORE = new BlockItem(ModBlocks.MOON_DESH_ORE,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem MOON_IRON_ORE = new BlockItem(ModBlocks.MOON_IRON_ORE,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem MOON_ICE_SHARD = new BlockItem(ModBlocks.MOON_ICE_SHARD_ORE,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem MARS_IRON_ORE = new BlockItem(ModBlocks.MARS_IRON_ORE,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem MARS_DIAMOND_ORE = new BlockItem(ModBlocks.MARS_DIAMOND_ORE,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem MARS_OSTRUM_ORE = new BlockItem(ModBlocks.MARS_OSTRUM_ORE,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem MARS_ICE_SHARD_ORE = new BlockItem(ModBlocks.MARS_ICE_SHARD_ORE,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem MERCURY_IRON_ORE = new BlockItem(ModBlocks.MERCURY_IRON_ORE,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem VENUS_COAL_ORE = new BlockItem(ModBlocks.VENUS_COAL_ORE,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem VENUS_GOLD_ORE = new BlockItem(ModBlocks.VENUS_GOLD_ORE,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem VENUS_DIAMOND_ORE = new BlockItem(ModBlocks.VENUS_DIAMOND_ORE,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem VENUS_CALORITE_ORE = new BlockItem(ModBlocks.VENUS_CALORITE_ORE,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem GLACIO_ICE_SHARD_ORE = new BlockItem(ModBlocks.GLACIO_ICE_SHARD_ORE,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem GLACIO_COAL_ORE = new BlockItem(ModBlocks.GLACIO_COAL_ORE,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem GLACIO_COPPER_ORE = new BlockItem(ModBlocks.GLACIO_COPPER_ORE,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem GLACIO_IRON_ORE = new BlockItem(ModBlocks.GLACIO_IRON_ORE,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
+    public static final BlockItem GLACIO_LAPIS_ORE = new BlockItem(ModBlocks.GLACIO_LAPIS_ORE,
+            new Item.Settings().group(ITEM_GROUP_BLOCKS));
 
     public static void register() {
 

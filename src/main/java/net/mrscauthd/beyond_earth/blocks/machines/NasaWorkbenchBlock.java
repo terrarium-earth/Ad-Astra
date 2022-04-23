@@ -1,5 +1,7 @@
 package net.mrscauthd.beyond_earth.blocks.machines;
 
+import org.jetbrains.annotations.Nullable;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
@@ -14,10 +16,8 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.mrscauthd.beyond_earth.blocks.machines.entity.NasaWorkbenchBlockEntity;
 import net.mrscauthd.beyond_earth.registry.ModBlockEntities;
-import org.jetbrains.annotations.Nullable;
 
 public class NasaWorkbenchBlock extends AbstractMachineBlock {
-
 
     public NasaWorkbenchBlock(Settings settings) {
         super(settings);
@@ -41,7 +41,9 @@ public class NasaWorkbenchBlock extends AbstractMachineBlock {
 
     @Nullable
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return world.isClient ? null : checkType(type, ModBlockEntities.NASA_WORKBENCH_ENTITY, NasaWorkbenchBlockEntity::serverTick);
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state,
+            BlockEntityType<T> type) {
+        return world.isClient ? null
+                : checkType(type, ModBlockEntities.NASA_WORKBENCH_ENTITY, NasaWorkbenchBlockEntity::serverTick);
     }
 }

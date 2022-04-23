@@ -1,5 +1,7 @@
 package net.mrscauthd.beyond_earth.blocks.machines.entity;
 
+import org.jetbrains.annotations.Nullable;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -8,7 +10,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.mrscauthd.beyond_earth.gui.screen_handlers.SolarPanelScreenHandler;
 import net.mrscauthd.beyond_earth.registry.ModBlockEntities;
-import org.jetbrains.annotations.Nullable;
 
 public class SolarPanelBlockEntity extends AbstractMachineBlockEntity {
 
@@ -45,11 +46,11 @@ public class SolarPanelBlockEntity extends AbstractMachineBlockEntity {
         return ENERGY_PER_TICK * 2;
     }
 
-    @SuppressWarnings("unused")
     public static void serverTick(World world, BlockPos pos, BlockState state, AbstractMachineBlockEntity blockEntity) {
         if (blockEntity.useEnergy()) {
             // Check solar panel conditions.
-            if (world.isDay() && !world.isRaining() && !world.isThundering() && world.isSkyVisible(blockEntity.getPos().up())) {
+            if (world.isDay() && !world.isRaining() && !world.isThundering()
+                    && world.isSkyVisible(blockEntity.getPos().up())) {
                 blockEntity.cumulateEnergy();
             }
 

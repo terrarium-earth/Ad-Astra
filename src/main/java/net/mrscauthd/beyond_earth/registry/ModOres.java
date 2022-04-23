@@ -71,13 +71,18 @@ public class ModOres {
         register("glacio_lapis_ore", ModBlocks.GLACIO_LAPIS_ORE, GLACIO_MATCH, GLACIO_TAG, 9, 2, -32, 32);
 
         // Glacio deepslate.
-        register("deepslate_coal_ore", Blocks.DEEPSLATE_COAL_ORE, OreConfiguredFeatures.DEEPSLATE_ORE_REPLACEABLES, GLACIO_TAG, 17, 20, -80, 192);
-        register("deepslate_copper_ore", Blocks.DEEPSLATE_COPPER_ORE, OreConfiguredFeatures.DEEPSLATE_ORE_REPLACEABLES, GLACIO_TAG, 17, 16, -80, 112);
-        register("deepslate_iron_ore", Blocks.DEEPSLATE_IRON_ORE, OreConfiguredFeatures.DEEPSLATE_ORE_REPLACEABLES, GLACIO_TAG, 12, 10, -80, 20);
-        register("deepslate_lapis_ore", Blocks.DEEPSLATE_LAPIS_ORE, OreConfiguredFeatures.DEEPSLATE_ORE_REPLACEABLES, GLACIO_TAG, 9, 2, -80, 10);
+        register("deepslate_coal_ore", Blocks.DEEPSLATE_COAL_ORE, OreConfiguredFeatures.DEEPSLATE_ORE_REPLACEABLES,
+                GLACIO_TAG, 17, 20, -80, 192);
+        register("deepslate_copper_ore", Blocks.DEEPSLATE_COPPER_ORE, OreConfiguredFeatures.DEEPSLATE_ORE_REPLACEABLES,
+                GLACIO_TAG, 17, 16, -80, 112);
+        register("deepslate_iron_ore", Blocks.DEEPSLATE_IRON_ORE, OreConfiguredFeatures.DEEPSLATE_ORE_REPLACEABLES,
+                GLACIO_TAG, 12, 10, -80, 20);
+        register("deepslate_lapis_ore", Blocks.DEEPSLATE_LAPIS_ORE, OreConfiguredFeatures.DEEPSLATE_ORE_REPLACEABLES,
+                GLACIO_TAG, 9, 2, -80, 10);
     }
 
-    private static void register(String id, Block block, RuleTest test, RegistryKey<DimensionOptions> dimension, int veinSize, int veinsPerChunk, int min, int max) {
+    private static void register(String id, Block block, RuleTest test, RegistryKey<DimensionOptions> dimension,
+            int veinSize, int veinsPerChunk, int min, int max) {
         Identifier newId = new ModIdentifier(id);
         ConfiguredFeature<?, ?> configured = createOreConfiguredFeature(newId, block, test, veinSize);
         PlacedFeature feature = createOreFeature(configured, veinsPerChunk, min, max);
@@ -90,32 +95,31 @@ public class ModOres {
         BiomeModifications.addFeature(
                 biomes,
                 GenerationStep.Feature.UNDERGROUND_ORES,
-                RegistryKey.of(Registry.PLACED_FEATURE_KEY, id)
-        );
+                RegistryKey.of(Registry.PLACED_FEATURE_KEY, id));
     }
 
-    public static ConfiguredFeature<?, ?> createOreConfiguredFeature(Identifier id, Block block, RuleTest test, int veinSize) {
+    public static ConfiguredFeature<?, ?> createOreConfiguredFeature(Identifier id, Block block, RuleTest test,
+            int veinSize) {
         ConfiguredFeature<?, ?> configured = new ConfiguredFeature<>(
                 Feature.ORE,
                 new OreFeatureConfig(
                         test,
                         block.getDefaultState(),
-                        veinSize
-                )
-        );
+                        veinSize));
         Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, id, configured);
         return configured;
     }
 
-    public static PlacedFeature createOreFeature(ConfiguredFeature<?, ?> configured, int veinsPerChunk, int min, int max) {
+    public static PlacedFeature createOreFeature(ConfiguredFeature<?, ?> configured, int veinsPerChunk, int min,
+            int max) {
 
         List<PlacementModifier> placementModifiers = Arrays.asList(
                 CountPlacementModifier.of(veinsPerChunk),
                 SquarePlacementModifier.of(),
-                HeightRangePlacementModifier.trapezoid(YOffset.fixed(min), YOffset.fixed(max))
-        );
+                HeightRangePlacementModifier.trapezoid(YOffset.fixed(min), YOffset.fixed(max)));
 
-        return new PlacedFeature(RegistryUtil.getEntry(BuiltinRegistries.CONFIGURED_FEATURE, configured), placementModifiers);
+        return new PlacedFeature(RegistryUtil.getEntry(BuiltinRegistries.CONFIGURED_FEATURE, configured),
+                placementModifiers);
     }
 
     public static RuleTest createTest(String id) {

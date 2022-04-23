@@ -6,7 +6,6 @@ import net.mrscauthd.beyond_earth.blocks.machines.entity.FuelRefineryBlockEntity
 
 public class FuelRefineryBlock extends AbstractMachineBlock {
 
-
     public FuelRefineryBlock(Settings settings) {
         super(settings);
     }
@@ -20,7 +19,6 @@ public class FuelRefineryBlock extends AbstractMachineBlock {
     protected boolean useLit() {
         return true;
     }
-
 
     @Override
     public FuelRefineryBlockEntity createBlockEntity(BlockPos pos, BlockState state) {

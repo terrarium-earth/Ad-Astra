@@ -1,13 +1,12 @@
 package net.mrscauthd.beyond_earth.mixin;
 
-import net.minecraft.client.gl.VertexBuffer;
-import net.minecraft.client.option.CloudRenderMode;
-import net.minecraft.client.render.BufferBuilder;
-import net.minecraft.client.render.WorldRenderer;
-import net.minecraft.util.math.Vec3d;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
-import org.spongepowered.asm.mixin.gen.Invoker;
+
+import net.minecraft.client.gl.VertexBuffer;
+import net.minecraft.client.option.CloudRenderMode;
+import net.minecraft.client.render.WorldRenderer;
+import net.minecraft.util.math.Vec3d;
 
 @Mixin(WorldRenderer.class)
 public interface WorldRendererAccessor {

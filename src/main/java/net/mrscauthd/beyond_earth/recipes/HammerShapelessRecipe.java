@@ -1,6 +1,7 @@
 package net.mrscauthd.beyond_earth.recipes;
 
 import com.google.gson.JsonObject;
+
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -13,7 +14,6 @@ import net.minecraft.util.JsonHelper;
 import net.minecraft.util.collection.DefaultedList;
 import net.mrscauthd.beyond_earth.items.HammerItem;
 import net.mrscauthd.beyond_earth.registry.ModItems;
-import net.mrscauthd.beyond_earth.util.ModIdentifier;
 
 public class HammerShapelessRecipe extends ShapelessRecipe {
 
@@ -43,7 +43,8 @@ public class HammerShapelessRecipe extends ShapelessRecipe {
             if (item instanceof HammerItem) {
                 ItemStack hammer = new ItemStack(ModItems.HAMMER, 1);
                 hammer.setDamage(stack.getDamage() + 1);
-                if (hammer.getDamage() >= hammer.getMaxDamage()) continue;
+                if (hammer.getDamage() >= hammer.getMaxDamage())
+                    continue;
                 defaultedList.set(i, hammer);
             }
         }
@@ -56,13 +57,15 @@ public class HammerShapelessRecipe extends ShapelessRecipe {
         public HammerShapelessRecipe read(Identifier id, JsonObject json) {
             ShapelessRecipe shapelessRecipe = super.read(id, json);
             String group = JsonHelper.getString(json, "group", "");
-            return new HammerShapelessRecipe(shapelessRecipe.getId(), group, shapelessRecipe.getOutput(), shapelessRecipe.getIngredients());
+            return new HammerShapelessRecipe(shapelessRecipe.getId(), group, shapelessRecipe.getOutput(),
+                    shapelessRecipe.getIngredients());
         }
 
         @Override
         public HammerShapelessRecipe read(Identifier id, PacketByteBuf buf) {
             ShapelessRecipe shapelessRecipe = super.read(id, buf);
-            return new HammerShapelessRecipe(shapelessRecipe.getId(), shapelessRecipe.getGroup(), shapelessRecipe.getOutput(), shapelessRecipe.getIngredients());
+            return new HammerShapelessRecipe(shapelessRecipe.getId(), shapelessRecipe.getGroup(),
+                    shapelessRecipe.getOutput(), shapelessRecipe.getIngredients());
         }
     }
 }

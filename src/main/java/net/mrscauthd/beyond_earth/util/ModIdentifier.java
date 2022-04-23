@@ -8,4 +8,3 @@ public class ModIdentifier extends Identifier {
         super(BeyondEarth.MOD_ID, path);
     }
 }
-

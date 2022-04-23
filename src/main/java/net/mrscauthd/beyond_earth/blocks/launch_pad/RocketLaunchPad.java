@@ -1,6 +1,13 @@
 package net.mrscauthd.beyond_earth.blocks.launch_pad;
 
-import net.minecraft.block.*;
+import org.jetbrains.annotations.Nullable;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockRenderType;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.BlockWithEntity;
+import net.minecraft.block.ShapeContext;
+import net.minecraft.block.Waterloggable;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
@@ -19,9 +26,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import net.mrscauthd.beyond_earth.registry.ModBlockEntities;
-import org.jetbrains.annotations.Nullable;
 
-public class RocketLaunchPad extends BlockWithEntity implements Waterloggable, BlockEntityProvider {
+@SuppressWarnings("deprecation")
+public class RocketLaunchPad extends BlockWithEntity implements Waterloggable {
 
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     public static final BooleanProperty STAGE = Properties.LIT;
@@ -32,8 +39,10 @@ public class RocketLaunchPad extends BlockWithEntity implements Waterloggable, B
     }
 
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return world.isClient ? null : checkType(type, ModBlockEntities.ROCKET_LAUNCH_PAD_ENTITY, RocketLaunchPadEntity::serverTick);
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state,
+            BlockEntityType<T> type) {
+        return world.isClient ? null
+                : checkType(type, ModBlockEntities.ROCKET_LAUNCH_PAD_ENTITY, RocketLaunchPadEntity::serverTick);
     }
 
     @Override
@@ -53,7 +62,8 @@ public class RocketLaunchPad extends BlockWithEntity implements Waterloggable, B
     }
 
     @Override
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState,
+            WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (state.get(WATERLOGGED)) {
             world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }

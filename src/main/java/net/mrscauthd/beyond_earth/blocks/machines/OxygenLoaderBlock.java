@@ -6,7 +6,6 @@ import net.mrscauthd.beyond_earth.blocks.machines.entity.OxygenLoaderBlockEntity
 
 public class OxygenLoaderBlock extends AbstractMachineBlock {
 
-
     public OxygenLoaderBlock(Settings settings) {
         super(settings);
     }
@@ -20,7 +19,6 @@ public class OxygenLoaderBlock extends AbstractMachineBlock {
     protected boolean useLit() {
         return true;
     }
-
 
     @Override
     public OxygenLoaderBlockEntity createBlockEntity(BlockPos pos, BlockState state) {

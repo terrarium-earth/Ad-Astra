@@ -26,6 +26,7 @@ public class ModScreenHandlers {
     }
 
     // Simple.
+    @SuppressWarnings("unused")
     private static <T extends ScreenHandler> ScreenHandlerType<T> register(String id, ScreenHandlerType.Factory<T> screenHandler) {
         return Registry.register(Registry.SCREEN_HANDLER, new ModIdentifier(id), new ScreenHandlerType<>(screenHandler));
     }
