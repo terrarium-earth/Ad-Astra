@@ -15,18 +15,19 @@ import net.mrscauthd.beyond_earth.blocks.globes.GlobeBlockEntity;
 @Environment(EnvType.CLIENT)
 public class GlobeBlockEntityRenderer implements BlockEntityRenderer<GlobeBlockEntity> {
 
-    @SuppressWarnings("unused")
     public GlobeBlockEntityRenderer(BlockEntityRendererFactory.Context ctx) {
     }
 
     @Override
-    public void render(GlobeBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+    public void render(GlobeBlockEntity entity, float tickDelta, MatrixStack matrices,
+            VertexConsumerProvider vertexConsumers, int light, int overlay) {
 
         GlobeModel model = GlobeModel.getModel();
 
         model.setYaw(MathHelper.lerp(tickDelta, entity.getCachedYaw(), entity.getYaw()));
 
         BlockState state = entity.getCachedState();
-        GlobeRenderer.render(Registry.BLOCK.getId(state.getBlock()), model, state.get(GlobeBlock.FACING), matrices, vertexConsumers, light, overlay);
+        GlobeRenderer.render(Registry.BLOCK.getId(state.getBlock()), model, state.get(GlobeBlock.FACING), matrices,
+                vertexConsumers, light, overlay);
     }
 }

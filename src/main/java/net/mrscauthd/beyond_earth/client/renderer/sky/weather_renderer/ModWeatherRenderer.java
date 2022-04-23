@@ -1,12 +1,20 @@
 package net.mrscauthd.beyond_earth.client.renderer.sky.weather_renderer;
 
+import java.util.Random;
+
 import com.mojang.blaze3d.systems.RenderSystem;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.*;
+import net.minecraft.client.render.BufferBuilder;
+import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.render.Tessellator;
+import net.minecraft.client.render.VertexFormat;
+import net.minecraft.client.render.VertexFormats;
+import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -16,8 +24,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.mrscauthd.beyond_earth.mixin.WorldRendererAccessor;
 import net.mrscauthd.beyond_earth.util.ModIdentifier;
-
-import java.util.Random;
 
 @Environment(EnvType.CLIENT)
 public class ModWeatherRenderer implements DimensionRenderingRegistry.WeatherRenderer {
@@ -89,7 +95,8 @@ public class ModWeatherRenderer implements DimensionRenderingRegistry.WeatherRen
                         int w = Math.max(t, j);
 
                         if (u != v) {
-                            Random random = new Random((long) p * p * 3121 + p * 45238971L ^ (long) o * o * 418711 + o * 13761L);
+                            Random random = new Random(
+                                    (long) p * p * 3121 + p * 45238971L ^ (long) o * o * 418711 + o * 13761L);
                             mutable.set(p, u, o);
                             float y;
                             float ac;
@@ -98,10 +105,12 @@ public class ModWeatherRenderer implements DimensionRenderingRegistry.WeatherRen
 
                                     m = 0;
                                     RenderSystem.setShaderTexture(0, texture);
-                                    bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR_LIGHT);
+                                    bufferBuilder.begin(VertexFormat.DrawMode.QUADS,
+                                            VertexFormats.POSITION_TEXTURE_COLOR_LIGHT);
                                 }
 
-                                int x = renderer.getTicks() + p * p * 3121 + p * 45238971 + o * o * 418711 + o * 13761 & 31;
+                                int x = renderer.getTicks() + p * p * 3121 + p * 45238971 + o * o * 418711 + o * 13761
+                                        & 31;
                                 y = -((float) x + tickDelta) / 32.0F * (3.0F + random.nextFloat());
                                 double z = (double) p + 0.5 - cameraPosX;
                                 double aa = (double) o + 0.5 - cameraPosZ;
@@ -109,10 +118,26 @@ public class ModWeatherRenderer implements DimensionRenderingRegistry.WeatherRen
                                 ac = ((1.0F - ab * ab) * 0.5F + 0.5F) * h;
                                 mutable.set(p, w, o);
                                 int ad = WorldRenderer.getLightmapCoordinates(world, mutable);
-                                bufferBuilder.vertex((double) p - cameraPosX - r + 0.5, (double) v - cameraPosY, (double) o - cameraPosZ - s + 0.5).texture(0.0F, (float) u * 0.25F + y).color(1.0F, 1.0F, 1.0F, ac).light(ad).next();
-                                bufferBuilder.vertex((double) p - cameraPosX + r + 0.5, (double) v - cameraPosY, (double) o - cameraPosZ + s + 0.5).texture(1.0F, (float) u * 0.25F + y).color(1.0F, 1.0F, 1.0F, ac).light(ad).next();
-                                bufferBuilder.vertex((double) p - cameraPosX + r + 0.5, (double) u - cameraPosY, (double) o - cameraPosZ + s + 0.5).texture(1.0F, (float) v * 0.25F + y).color(1.0F, 1.0F, 1.0F, ac).light(ad).next();
-                                bufferBuilder.vertex((double) p - cameraPosX - r + 0.5, (double) u - cameraPosY, (double) o - cameraPosZ - s + 0.5).texture(0.0F, (float) v * 0.25F + y).color(1.0F, 1.0F, 1.0F, ac).light(ad).next();
+                                bufferBuilder
+                                        .vertex((double) p - cameraPosX - r + 0.5, (double) v - cameraPosY,
+                                                (double) o - cameraPosZ - s + 0.5)
+                                        .texture(0.0F, (float) u * 0.25F + y).color(1.0F, 1.0F, 1.0F, ac).light(ad)
+                                        .next();
+                                bufferBuilder
+                                        .vertex((double) p - cameraPosX + r + 0.5, (double) v - cameraPosY,
+                                                (double) o - cameraPosZ + s + 0.5)
+                                        .texture(1.0F, (float) u * 0.25F + y).color(1.0F, 1.0F, 1.0F, ac).light(ad)
+                                        .next();
+                                bufferBuilder
+                                        .vertex((double) p - cameraPosX + r + 0.5, (double) u - cameraPosY,
+                                                (double) o - cameraPosZ + s + 0.5)
+                                        .texture(1.0F, (float) v * 0.25F + y).color(1.0F, 1.0F, 1.0F, ac).light(ad)
+                                        .next();
+                                bufferBuilder
+                                        .vertex((double) p - cameraPosX - r + 0.5, (double) u - cameraPosY,
+                                                (double) o - cameraPosZ - s + 0.5)
+                                        .texture(0.0F, (float) v * 0.25F + y).color(1.0F, 1.0F, 1.0F, ac).light(ad)
+                                        .next();
                             }
                         }
                     }

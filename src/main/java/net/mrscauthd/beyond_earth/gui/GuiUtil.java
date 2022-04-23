@@ -64,14 +64,17 @@ public class GuiUtil {
         drawHorizontal(matrixStack, left, top, ARROW_WIDTH, ARROW_HEIGHT, ARROW_PATH, ratio);
     }
 
-    public static void drawVertical(MatrixStack matrixStack, int left, int top, int width, int height, Identifier resource, double ratio) {
+    public static void drawVertical(MatrixStack matrixStack, int left, int top, int width, int height,
+            Identifier resource, double ratio) {
         int ratioHeight = (int) Math.ceil(height * ratio);
         int remainHeight = height - ratioHeight;
         RenderSystem.setShaderTexture(0, resource);
-        DrawableHelper.drawTexture(matrixStack, left, top + remainHeight, 0, remainHeight, width, ratioHeight, width, height);
+        DrawableHelper.drawTexture(matrixStack, left, top + remainHeight, 0, remainHeight, width, ratioHeight, width,
+                height);
     }
 
-    public static void drawHorizontal(MatrixStack matrixStack, int left, int top, int width, int height, Identifier resource, double ratio) {
+    public static void drawHorizontal(MatrixStack matrixStack, int left, int top, int width, int height,
+            Identifier resource, double ratio) {
         int ratioWidth = (int) Math.ceil(width * ratio);
 
         RenderSystem.setShaderTexture(0, resource);

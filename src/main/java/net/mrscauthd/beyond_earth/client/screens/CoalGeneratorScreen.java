@@ -1,5 +1,7 @@
 package net.mrscauthd.beyond_earth.client.screens;
 
+import java.awt.Rectangle;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.util.math.MatrixStack;
@@ -11,8 +13,6 @@ import net.mrscauthd.beyond_earth.blocks.machines.entity.CoalGeneratorBlockEntit
 import net.mrscauthd.beyond_earth.gui.GuiUtil;
 import net.mrscauthd.beyond_earth.gui.screen_handlers.CoalGeneratorScreenHandler;
 import net.mrscauthd.beyond_earth.util.ModIdentifier;
-
-import java.awt.*;
 
 @Environment(EnvType.CLIENT)
 public class CoalGeneratorScreen extends AbstractMachineScreen<CoalGeneratorScreenHandler> {
@@ -35,8 +35,10 @@ public class CoalGeneratorScreen extends AbstractMachineScreen<CoalGeneratorScre
 
         CoalGeneratorBlockEntity entity = (CoalGeneratorBlockEntity) blockEntity;
 
-        GuiUtil.drawFire(matrices, this.x + FIRE_LEFT, this.y + FIRE_TOP, entity.getCookTime(), entity.getCookTimeTotal());
-        GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration());
+        GuiUtil.drawFire(matrices, this.x + FIRE_LEFT, this.y + FIRE_TOP, entity.getCookTime(),
+                entity.getCookTimeTotal());
+        GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.blockEntity.getEnergy(),
+                this.blockEntity.getMaxGeneration());
     }
 
     @Override
@@ -47,12 +49,14 @@ public class CoalGeneratorScreen extends AbstractMachineScreen<CoalGeneratorScre
 
         // Energy tooltip.
         if (GuiUtil.isHover(this.getEnergyBounds(), mouseX, mouseY)) {
-            this.renderTooltip(matrices, new TranslatableText("gauge_text.beyond_earth.storage", this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration()), mouseX, mouseY);
+            this.renderTooltip(matrices, new TranslatableText("gauge_text.beyond_earth.storage",
+                    this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration()), mouseX, mouseY);
         }
 
         // Burn time tooltip.
         if (GuiUtil.isHover(this.getFireBounds(), mouseX, mouseY)) {
-            this.renderTooltip(matrices, new TranslatableText("gauge.beyond_earth.burn_time", entity.getCookTime(), entity.getCookTimeTotal()), mouseX, mouseY);
+            this.renderTooltip(matrices, new TranslatableText("gauge.beyond_earth.burn_time", entity.getCookTime(),
+                    entity.getCookTimeTotal()), mouseX, mouseY);
         }
     }
 

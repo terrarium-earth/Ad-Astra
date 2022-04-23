@@ -1,7 +1,14 @@
 package net.mrscauthd.beyond_earth.world.structures;
 
+import java.util.Optional;
+
 import com.mojang.serialization.Codec;
-import net.minecraft.structure.*;
+
+import net.minecraft.structure.PoolStructurePiece;
+import net.minecraft.structure.PostPlacementProcessor;
+import net.minecraft.structure.StructureGeneratorFactory;
+import net.minecraft.structure.StructurePiecesGenerator;
+import net.minecraft.structure.StructureSetKeys;
 import net.minecraft.structure.pool.StructurePoolBasedGenerator;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -10,10 +17,7 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraft.world.gen.feature.StructurePoolFeatureConfig;
 
-import java.util.Optional;
-
 public class Meteor extends StructureFeature<StructurePoolFeatureConfig> {
-
 
     public Meteor(Codec<StructurePoolFeatureConfig> codec) {
         super(codec, Meteor::generate, PostPlacementProcessor.EMPTY);
@@ -27,10 +31,12 @@ public class Meteor extends StructureFeature<StructurePoolFeatureConfig> {
     private static boolean isFeatureChunk(StructureGeneratorFactory.Context<StructurePoolFeatureConfig> context) {
         ChunkPos chunkpos = context.chunkPos();
 
-        return !context.chunkGenerator().method_41053(StructureSetKeys.OCEAN_MONUMENTS, context.seed(), chunkpos.x, chunkpos.z, 10);
+        return !context.chunkGenerator().method_41053(StructureSetKeys.OCEAN_MONUMENTS, context.seed(), chunkpos.x,
+                chunkpos.z, 10);
     }
 
-    public static Optional<StructurePiecesGenerator<StructurePoolFeatureConfig>> generate(StructureGeneratorFactory.Context<StructurePoolFeatureConfig> context) {
+    public static Optional<StructurePiecesGenerator<StructurePoolFeatureConfig>> generate(
+            StructureGeneratorFactory.Context<StructurePoolFeatureConfig> context) {
 
         if (!Meteor.isFeatureChunk(context)) {
             return Optional.empty();
@@ -38,7 +44,8 @@ public class Meteor extends StructureFeature<StructurePoolFeatureConfig> {
 
         BlockPos blockpos = context.chunkPos().getCenterAtY(0);
 
-        int topLandY = context.chunkGenerator().getHeightOnGround(blockpos.getX(), blockpos.getZ(), Heightmap.Type.WORLD_SURFACE_WG, context.world());
+        int topLandY = context.chunkGenerator().getHeightOnGround(blockpos.getX(), blockpos.getZ(),
+                Heightmap.Type.WORLD_SURFACE_WG, context.world());
         blockpos = blockpos.up(topLandY - 20);
 
         return StructurePoolBasedGenerator.generate(context, PoolStructurePiece::new, blockpos, false, false);

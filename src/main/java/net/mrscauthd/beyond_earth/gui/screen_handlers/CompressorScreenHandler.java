@@ -16,7 +16,7 @@ public class CompressorScreenHandler extends AbstractMachineScreenHandler {
 
     public CompressorScreenHandler(int syncId, PlayerInventory inventory, CompressorBlockEntity entity) {
         super(ModScreenHandlers.COMPRESSOR_SCREEN_HANDLER, syncId, inventory, entity,
-                new Slot[]{
+                new Slot[] {
                         new Slot(entity, 0, 40, 37),
                         new Slot(entity, 1, 92, 36) {
                             @Override
@@ -24,7 +24,6 @@ public class CompressorScreenHandler extends AbstractMachineScreenHandler {
                                 return false;
                             }
                         }
-                }
-        );
+                });
     }
 }

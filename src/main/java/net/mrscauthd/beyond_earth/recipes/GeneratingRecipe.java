@@ -24,7 +24,6 @@ public class GeneratingRecipe extends ModRecipe {
         return ModRecipes.GENERATING_RECIPE;
     }
 
-
     public static class Serializer implements RecipeSerializer<GeneratingRecipe> {
 
         @Override

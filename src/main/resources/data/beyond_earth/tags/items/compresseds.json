@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
-    "#beyond_earth:compresseds/steel",
-    "#beyond_earth:compresseds/desh",
-    "#beyond_earth:compresseds/ostrum",
-    "#beyond_earth:compresseds/calorite"
+    "#beyond_earth:compressed/steel",
+    "#beyond_earth:compressed/desh",
+    "#beyond_earth:compressed/ostrum",
+    "#beyond_earth:compressed/calorite"
   ]
 }

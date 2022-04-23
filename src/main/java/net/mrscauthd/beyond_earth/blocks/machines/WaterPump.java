@@ -42,29 +42,48 @@ public class WaterPump extends AbstractMachineBlock {
     }
 
     static {
-        NORTH_SHAPE = VoxelShapes.combine(NORTH_SHAPE, VoxelShapes.cuboid(0.34375, 0, 0.34375, 0.65625, 0.0625, 0.65625), BooleanBiFunction.OR);
-        NORTH_SHAPE = VoxelShapes.combine(NORTH_SHAPE, VoxelShapes.cuboid(0.343749, 0.34375, 0, 0.65625, 0.65625, 0.0625), BooleanBiFunction.OR);
-        NORTH_SHAPE = VoxelShapes.combine(NORTH_SHAPE, VoxelShapes.cuboid(0.375, 0.375, 0.0625, 0.625, 0.625, 0.375), BooleanBiFunction.OR);
-        NORTH_SHAPE = VoxelShapes.combine(NORTH_SHAPE, VoxelShapes.cuboid(0.34375, 0.8125, 0.34375, 0.65625, 1, 0.65625), BooleanBiFunction.OR);
-        NORTH_SHAPE = VoxelShapes.combine(NORTH_SHAPE, VoxelShapes.cuboid(0.375, 0.0625, 0.375, 0.625, 0.8125, 0.625), BooleanBiFunction.OR);
+        NORTH_SHAPE = VoxelShapes.combine(NORTH_SHAPE,
+                VoxelShapes.cuboid(0.34375, 0, 0.34375, 0.65625, 0.0625, 0.65625), BooleanBiFunction.OR);
+        NORTH_SHAPE = VoxelShapes.combine(NORTH_SHAPE,
+                VoxelShapes.cuboid(0.343749, 0.34375, 0, 0.65625, 0.65625, 0.0625), BooleanBiFunction.OR);
+        NORTH_SHAPE = VoxelShapes.combine(NORTH_SHAPE, VoxelShapes.cuboid(0.375, 0.375, 0.0625, 0.625, 0.625, 0.375),
+                BooleanBiFunction.OR);
+        NORTH_SHAPE = VoxelShapes.combine(NORTH_SHAPE,
+                VoxelShapes.cuboid(0.34375, 0.8125, 0.34375, 0.65625, 1, 0.65625), BooleanBiFunction.OR);
+        NORTH_SHAPE = VoxelShapes.combine(NORTH_SHAPE, VoxelShapes.cuboid(0.375, 0.0625, 0.375, 0.625, 0.8125, 0.625),
+                BooleanBiFunction.OR);
 
-        SOUTH_SHAPE = VoxelShapes.combine(SOUTH_SHAPE, VoxelShapes.cuboid(0.34375, 0, 0.34375, 0.65625, 0.0625, 0.65625), BooleanBiFunction.OR);
-        SOUTH_SHAPE = VoxelShapes.combine(SOUTH_SHAPE, VoxelShapes.cuboid(0.343749, 0.34375, 0.9375, 0.65625, 0.65625, 1), BooleanBiFunction.OR);
-        SOUTH_SHAPE = VoxelShapes.combine(SOUTH_SHAPE, VoxelShapes.cuboid(0.375, 0.375, 0.625, 0.625, 0.625, 0.9375), BooleanBiFunction.OR);
-        SOUTH_SHAPE = VoxelShapes.combine(SOUTH_SHAPE, VoxelShapes.cuboid(0.34375, 0.8125, 0.34375, 0.65625, 1, 0.65625), BooleanBiFunction.OR);
-        SOUTH_SHAPE = VoxelShapes.combine(SOUTH_SHAPE, VoxelShapes.cuboid(0.375, 0.0625, 0.375, 0.625, 0.8125, 0.625), BooleanBiFunction.OR);
+        SOUTH_SHAPE = VoxelShapes.combine(SOUTH_SHAPE,
+                VoxelShapes.cuboid(0.34375, 0, 0.34375, 0.65625, 0.0625, 0.65625), BooleanBiFunction.OR);
+        SOUTH_SHAPE = VoxelShapes.combine(SOUTH_SHAPE,
+                VoxelShapes.cuboid(0.343749, 0.34375, 0.9375, 0.65625, 0.65625, 1), BooleanBiFunction.OR);
+        SOUTH_SHAPE = VoxelShapes.combine(SOUTH_SHAPE, VoxelShapes.cuboid(0.375, 0.375, 0.625, 0.625, 0.625, 0.9375),
+                BooleanBiFunction.OR);
+        SOUTH_SHAPE = VoxelShapes.combine(SOUTH_SHAPE,
+                VoxelShapes.cuboid(0.34375, 0.8125, 0.34375, 0.65625, 1, 0.65625), BooleanBiFunction.OR);
+        SOUTH_SHAPE = VoxelShapes.combine(SOUTH_SHAPE, VoxelShapes.cuboid(0.375, 0.0625, 0.375, 0.625, 0.8125, 0.625),
+                BooleanBiFunction.OR);
 
-        EAST_SHAPE = VoxelShapes.combine(EAST_SHAPE, VoxelShapes.cuboid(0.34375, 0, 0.34375, 0.65625, 0.0625, 0.65625), BooleanBiFunction.OR);
-        EAST_SHAPE = VoxelShapes.combine(EAST_SHAPE, VoxelShapes.cuboid(0.9375, 0.34375, 0.343749, 1, 0.65625, 0.65625), BooleanBiFunction.OR);
-        EAST_SHAPE = VoxelShapes.combine(EAST_SHAPE, VoxelShapes.cuboid(0.625, 0.375, 0.375, 0.9375, 0.625, 0.625), BooleanBiFunction.OR);
-        EAST_SHAPE = VoxelShapes.combine(EAST_SHAPE, VoxelShapes.cuboid(0.34375, 0.8125, 0.34375, 0.65625, 1, 0.65625), BooleanBiFunction.OR);
-        EAST_SHAPE = VoxelShapes.combine(EAST_SHAPE, VoxelShapes.cuboid(0.375, 0.0625, 0.375, 0.625, 0.8125, 0.625), BooleanBiFunction.OR);
+        EAST_SHAPE = VoxelShapes.combine(EAST_SHAPE, VoxelShapes.cuboid(0.34375, 0, 0.34375, 0.65625, 0.0625, 0.65625),
+                BooleanBiFunction.OR);
+        EAST_SHAPE = VoxelShapes.combine(EAST_SHAPE, VoxelShapes.cuboid(0.9375, 0.34375, 0.343749, 1, 0.65625, 0.65625),
+                BooleanBiFunction.OR);
+        EAST_SHAPE = VoxelShapes.combine(EAST_SHAPE, VoxelShapes.cuboid(0.625, 0.375, 0.375, 0.9375, 0.625, 0.625),
+                BooleanBiFunction.OR);
+        EAST_SHAPE = VoxelShapes.combine(EAST_SHAPE, VoxelShapes.cuboid(0.34375, 0.8125, 0.34375, 0.65625, 1, 0.65625),
+                BooleanBiFunction.OR);
+        EAST_SHAPE = VoxelShapes.combine(EAST_SHAPE, VoxelShapes.cuboid(0.375, 0.0625, 0.375, 0.625, 0.8125, 0.625),
+                BooleanBiFunction.OR);
 
-        WEST_SHAPE = VoxelShapes.combine(WEST_SHAPE, VoxelShapes.cuboid(0.34375, 0, 0.34375, 0.65625, 0.0625, 0.65625), BooleanBiFunction.OR);
-        WEST_SHAPE = VoxelShapes.combine(WEST_SHAPE, VoxelShapes.cuboid(0, 0.34375, 0.343749, 0.0625, 0.65625, 0.65625), BooleanBiFunction.OR);
-        WEST_SHAPE = VoxelShapes.combine(WEST_SHAPE, VoxelShapes.cuboid(0.0625, 0.375, 0.375, 0.375, 0.625, 0.625), BooleanBiFunction.OR);
-        WEST_SHAPE = VoxelShapes.combine(WEST_SHAPE, VoxelShapes.cuboid(0.34375, 0.8125, 0.34375, 0.65625, 1, 0.65625), BooleanBiFunction.OR);
-        WEST_SHAPE = VoxelShapes.combine(WEST_SHAPE, VoxelShapes.cuboid(0.375, 0.0625, 0.375, 0.625, 0.8125, 0.625), BooleanBiFunction.OR);
-
+        WEST_SHAPE = VoxelShapes.combine(WEST_SHAPE, VoxelShapes.cuboid(0.34375, 0, 0.34375, 0.65625, 0.0625, 0.65625),
+                BooleanBiFunction.OR);
+        WEST_SHAPE = VoxelShapes.combine(WEST_SHAPE, VoxelShapes.cuboid(0, 0.34375, 0.343749, 0.0625, 0.65625, 0.65625),
+                BooleanBiFunction.OR);
+        WEST_SHAPE = VoxelShapes.combine(WEST_SHAPE, VoxelShapes.cuboid(0.0625, 0.375, 0.375, 0.375, 0.625, 0.625),
+                BooleanBiFunction.OR);
+        WEST_SHAPE = VoxelShapes.combine(WEST_SHAPE, VoxelShapes.cuboid(0.34375, 0.8125, 0.34375, 0.65625, 1, 0.65625),
+                BooleanBiFunction.OR);
+        WEST_SHAPE = VoxelShapes.combine(WEST_SHAPE, VoxelShapes.cuboid(0.375, 0.0625, 0.375, 0.625, 0.8125, 0.625),
+                BooleanBiFunction.OR);
     }
 }

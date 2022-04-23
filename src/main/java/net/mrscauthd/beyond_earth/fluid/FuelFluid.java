@@ -7,7 +7,7 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
 import net.mrscauthd.beyond_earth.registry.ModFluids;
 
-public abstract class FuelFluid extends Fluid{
+public abstract class FuelFluid extends Fluid {
     @Override
     public net.minecraft.fluid.Fluid getFlowing() {
         return ModFluids.FLOWING_FUEL;

@@ -1,19 +1,21 @@
 package net.mrscauthd.beyond_earth.world.structures;
 
+import java.util.Optional;
+
 import com.mojang.serialization.Codec;
-import net.minecraft.structure.*;
+
+import net.minecraft.structure.PoolStructurePiece;
+import net.minecraft.structure.PostPlacementProcessor;
+import net.minecraft.structure.StructureGeneratorFactory;
+import net.minecraft.structure.StructurePiecesGenerator;
+import net.minecraft.structure.StructureSetKeys;
 import net.minecraft.structure.pool.StructurePoolBasedGenerator;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraft.world.gen.feature.StructurePoolFeatureConfig;
 
-import java.util.Optional;
-
 public class PygroTower extends StructureFeature<StructurePoolFeatureConfig> {
-
 
     public PygroTower(Codec<StructurePoolFeatureConfig> codec) {
         super(codec, PygroTower::generate, PostPlacementProcessor.EMPTY);
@@ -27,15 +29,18 @@ public class PygroTower extends StructureFeature<StructurePoolFeatureConfig> {
     private static boolean isFeatureChunk(StructureGeneratorFactory.Context<StructurePoolFeatureConfig> context) {
         ChunkPos chunkpos = context.chunkPos();
 
-        return !context.chunkGenerator().method_41053(StructureSetKeys.OCEAN_MONUMENTS, context.seed(), chunkpos.x, chunkpos.z, 10);
+        return !context.chunkGenerator().method_41053(StructureSetKeys.OCEAN_MONUMENTS, context.seed(), chunkpos.x,
+                chunkpos.z, 10);
     }
 
-    public static Optional<StructurePiecesGenerator<StructurePoolFeatureConfig>> generate(StructureGeneratorFactory.Context<StructurePoolFeatureConfig> context) {
+    public static Optional<StructurePiecesGenerator<StructurePoolFeatureConfig>> generate(
+            StructureGeneratorFactory.Context<StructurePoolFeatureConfig> context) {
 
         if (!PygroTower.isFeatureChunk(context)) {
             return Optional.empty();
         }
 
-        return StructurePoolBasedGenerator.generate(context, PoolStructurePiece::new, context.chunkPos().getCenterAtY(0), false, true);
+        return StructurePoolBasedGenerator.generate(context, PoolStructurePiece::new,
+                context.chunkPos().getCenterAtY(0), false, true);
     }
 }

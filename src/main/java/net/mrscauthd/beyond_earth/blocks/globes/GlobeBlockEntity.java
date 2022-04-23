@@ -24,8 +24,6 @@ public class GlobeBlockEntity extends BlockEntity {
         super(ModBlockEntities.GLOBE_BLOCK_ENTITY, pos, state);
     }
 
-
-    @SuppressWarnings("unused")
     public static void tick(World world, BlockPos pos, BlockState state, GlobeBlockEntity blockEntity) {
         if (blockEntity.getAngularVelocity() > 0) {
             // Simulate an inertia effect.

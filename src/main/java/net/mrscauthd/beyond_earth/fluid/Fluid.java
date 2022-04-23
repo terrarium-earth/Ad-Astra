@@ -30,7 +30,8 @@ public abstract class Fluid extends FlowableFluid {
     }
 
     @Override
-    protected boolean canBeReplacedWith(FluidState fluidState, BlockView blockView, BlockPos blockPos, net.minecraft.fluid.Fluid fluid, Direction direction) {
+    protected boolean canBeReplacedWith(FluidState fluidState, BlockView blockView, BlockPos blockPos,
+            net.minecraft.fluid.Fluid fluid, Direction direction) {
         return false;
     }
 

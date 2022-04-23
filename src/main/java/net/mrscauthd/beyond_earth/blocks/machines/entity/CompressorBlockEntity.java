@@ -1,5 +1,7 @@
 package net.mrscauthd.beyond_earth.blocks.machines.entity;
 
+import org.jetbrains.annotations.Nullable;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -12,7 +14,6 @@ import net.mrscauthd.beyond_earth.gui.screen_handlers.CompressorScreenHandler;
 import net.mrscauthd.beyond_earth.recipes.ModRecipe;
 import net.mrscauthd.beyond_earth.registry.ModBlockEntities;
 import net.mrscauthd.beyond_earth.registry.ModRecipes;
-import org.jetbrains.annotations.Nullable;
 
 public class CompressorBlockEntity extends ProcessingMachineBlockEntity {
 
@@ -59,7 +60,6 @@ public class CompressorBlockEntity extends ProcessingMachineBlockEntity {
     public boolean canExtract(int slot, ItemStack stack, Direction dir) {
         return slot == 1;
     }
-
 
     @SuppressWarnings("unused")
     public static void serverTick(World world, BlockPos pos, BlockState state, AbstractMachineBlockEntity blockEntity) {

@@ -3,8 +3,6 @@ package net.mrscauthd.beyond_earth.gui.screen_handlers;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.screen.ScreenHandlerType;
-import net.mrscauthd.beyond_earth.BeyondEarth;
 import net.mrscauthd.beyond_earth.registry.ModScreenHandlers;
 
 public class PlanetSelectionScreenHandler extends ScreenHandler {

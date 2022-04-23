@@ -2,19 +2,11 @@ package net.mrscauthd.beyond_earth.client.screens;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
-import net.mrscauthd.beyond_earth.blocks.machines.NasaWorkbenchBlock;
-import net.mrscauthd.beyond_earth.blocks.machines.entity.CompressorBlockEntity;
-import net.mrscauthd.beyond_earth.gui.GuiUtil;
-import net.mrscauthd.beyond_earth.gui.screen_handlers.CompressorScreenHandler;
 import net.mrscauthd.beyond_earth.gui.screen_handlers.NasaWorkbenchScreenHandler;
 import net.mrscauthd.beyond_earth.util.ModIdentifier;
-
-import java.awt.*;
 
 @Environment(EnvType.CLIENT)
 public class NasaWorkbenchScreen extends AbstractMachineScreen<NasaWorkbenchScreenHandler> {

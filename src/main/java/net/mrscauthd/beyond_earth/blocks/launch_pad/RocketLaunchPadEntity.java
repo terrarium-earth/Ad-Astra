@@ -12,7 +12,6 @@ public class RocketLaunchPadEntity extends BlockEntity {
         super(ModBlockEntities.ROCKET_LAUNCH_PAD_ENTITY, pos, state);
     }
 
-    @SuppressWarnings("unused")
     public static void serverTick(World world, BlockPos pos, BlockState state, RocketLaunchPadEntity blockEntity) {
 
         boolean raise = checkInRadius(true, pos, world) && checkInRadius(false, pos, world);
@@ -22,7 +21,8 @@ public class RocketLaunchPadEntity extends BlockEntity {
     private static boolean checkInRadius(boolean lookForPlatforms, BlockPos pos, World world) {
         for (int i = 0; i < (lookForPlatforms ? 3 : 5); i++) {
             for (int j = 0; j < (lookForPlatforms ? 3 : 5); j++) {
-                BlockPos padPos = new BlockPos(pos.getX() + i - (lookForPlatforms ? 1 : 2), pos.getY(), pos.getZ() + j - (lookForPlatforms ? 1 : 2));
+                BlockPos padPos = new BlockPos(pos.getX() + i - (lookForPlatforms ? 1 : 2), pos.getY(),
+                        pos.getZ() + j - (lookForPlatforms ? 1 : 2));
                 BlockState state = world.getBlockState(padPos);
                 boolean isRocket = state.getBlock() instanceof RocketLaunchPad;
 
