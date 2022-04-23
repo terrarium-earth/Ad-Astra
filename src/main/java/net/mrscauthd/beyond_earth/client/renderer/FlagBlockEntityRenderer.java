@@ -1,11 +1,19 @@
 package net.mrscauthd.beyond_earth.client.renderer;
 
+import java.util.Map;
+
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.model.*;
+import net.minecraft.client.model.ModelData;
+import net.minecraft.client.model.ModelPart;
+import net.minecraft.client.model.ModelPartBuilder;
+import net.minecraft.client.model.ModelPartData;
+import net.minecraft.client.model.ModelTransform;
+import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -18,12 +26,9 @@ import net.minecraft.util.Identifier;
 import net.mrscauthd.beyond_earth.blocks.flags.FlagBlock;
 import net.mrscauthd.beyond_earth.blocks.flags.FlagBlockEntity;
 
-import java.util.Map;
-
 @Environment(EnvType.CLIENT)
 public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEntity> {
 
-    @SuppressWarnings("unused")
     public FlagBlockEntityRenderer(BlockEntityRendererFactory.Context ctx) {
     }
 
@@ -45,6 +50,7 @@ public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEnt
             case EAST -> model.setTransform(ModelTransform.of(8, pivotY, 13, 0, quarterTurn, flip));
             case SOUTH -> model.setTransform(ModelTransform.of(11, pivotY, 8, 0, 0, flip));
             case WEST -> model.setTransform(ModelTransform.of(8, pivotY, 11, 0, quarterTurn, flip));
+            default -> throw new IllegalArgumentException("Unexpected value: " + entity.getCachedState().get(FlagBlock.FACING));
         }
         model.render(matrices, vertexConsumer, light, overlay);
 
@@ -54,6 +60,7 @@ public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEnt
             case EAST -> model1.setTransform(ModelTransform.of(8.001f, pivotY, 5, 0, -quarterTurn, flip));
             case SOUTH -> model1.setTransform(ModelTransform.of(3, pivotY, 7.999f, 0, flip, flip));
             case WEST -> model1.setTransform(ModelTransform.of(8.001f, pivotY, 3, 0, -quarterTurn, flip));
+            default -> throw new IllegalArgumentException("Unexpected value: " + entity.getCachedState().get(FlagBlock.FACING));
         }
         model1.render(matrices, vertexConsumer, light, overlay);
     }

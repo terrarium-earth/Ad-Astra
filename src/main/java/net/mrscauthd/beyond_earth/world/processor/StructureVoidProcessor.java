@@ -21,7 +21,9 @@ public class StructureVoidProcessor extends StructureProcessor {
 
     @Nullable
     @Override
-    public Structure.StructureBlockInfo process(WorldView world, BlockPos pos, BlockPos pivot, Structure.StructureBlockInfo structureBlockInfo, Structure.StructureBlockInfo structureBlockInfo2, StructurePlacementData data) {
+    public Structure.StructureBlockInfo process(WorldView world, BlockPos pos, BlockPos pivot,
+            Structure.StructureBlockInfo structureBlockInfo, Structure.StructureBlockInfo structureBlockInfo2,
+            StructurePlacementData data) {
         if (structureBlockInfo2.state.getBlock().equals(Blocks.STRUCTURE_VOID)) {
             return null;
         }

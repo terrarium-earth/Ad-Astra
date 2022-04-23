@@ -1,5 +1,7 @@
 package net.mrscauthd.beyond_earth.blocks.machines;
 
+import org.jetbrains.annotations.Nullable;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -8,7 +10,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.mrscauthd.beyond_earth.blocks.machines.entity.SolarPanelBlockEntity;
 import net.mrscauthd.beyond_earth.registry.ModBlockEntities;
-import org.jetbrains.annotations.Nullable;
 
 public class SolarPanelBlock extends AbstractMachineBlock {
 
@@ -23,7 +24,9 @@ public class SolarPanelBlock extends AbstractMachineBlock {
 
     @Nullable
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return world.isClient ? null : checkType(type, ModBlockEntities.SOLAR_PANEL_ENTITY, SolarPanelBlockEntity::serverTick);
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state,
+            BlockEntityType<T> type) {
+        return world.isClient ? null
+                : checkType(type, ModBlockEntities.SOLAR_PANEL_ENTITY, SolarPanelBlockEntity::serverTick);
     }
 }

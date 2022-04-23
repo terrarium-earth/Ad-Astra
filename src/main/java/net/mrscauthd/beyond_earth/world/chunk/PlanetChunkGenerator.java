@@ -2,6 +2,7 @@ package net.mrscauthd.beyond_earth.world.chunk;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.structure.StructureSet;
@@ -23,15 +24,24 @@ import net.mrscauthd.beyond_earth.world.WorldSeed;
 
 public class PlanetChunkGenerator extends NoiseChunkGenerator {
 
-    public static final Codec<PlanetChunkGenerator> CODEC = RecordCodecBuilder.create((instance) ->
-            method_41042(instance).and(instance.group(RegistryOps.createRegistryCodec(Registry.NOISE_WORLDGEN).forGetter((generator) ->
-                            ((NoiseChunkGeneratorAccessor) generator).getNoiseRegistry()), BiomeSource.CODEC.fieldOf("biome_source").forGetter((generator) ->
-                            ((ChunkGeneratorAccessor) generator).getPopulationSource()), Codec.LONG.fieldOf("seed").stable().forGetter((generator) ->
-                            ((NoiseChunkGeneratorAccessor) generator).getSeed()), ChunkGeneratorSettings.REGISTRY_CODEC.fieldOf("settings").forGetter((generator) ->
-                            generator.settings)))
-                    .apply(instance, instance.stable(PlanetChunkGenerator::new)));
+    public static final Codec<PlanetChunkGenerator> CODEC = RecordCodecBuilder
+            .create((
+                    instance) -> method_41042(instance)
+                            .and(instance.group(
+                                    RegistryOps.createRegistryCodec(Registry.NOISE_WORLDGEN)
+                                            .forGetter((generator) -> ((NoiseChunkGeneratorAccessor) generator)
+                                                    .getNoiseRegistry()),
+                                    BiomeSource.CODEC.fieldOf("biome_source").forGetter(
+                                            (generator) -> ((ChunkGeneratorAccessor) generator).getPopulationSource()),
+                                    Codec.LONG.fieldOf("seed").stable().forGetter(
+                                            (generator) -> ((NoiseChunkGeneratorAccessor) generator).getSeed()),
+                                    ChunkGeneratorSettings.REGISTRY_CODEC.fieldOf("settings")
+                                            .forGetter((generator) -> generator.settings)))
+                            .apply(instance, instance.stable(PlanetChunkGenerator::new)));
 
-    public PlanetChunkGenerator(Registry<StructureSet> noiseRegistry, Registry<DoublePerlinNoiseSampler.NoiseParameters> structuresRegistry, BiomeSource biomeSource, long seed, RegistryEntry<ChunkGeneratorSettings> settings) {
+    public PlanetChunkGenerator(Registry<StructureSet> noiseRegistry,
+            Registry<DoublePerlinNoiseSampler.NoiseParameters> structuresRegistry, BiomeSource biomeSource, long seed,
+            RegistryEntry<ChunkGeneratorSettings> settings) {
         super(noiseRegistry, structuresRegistry, biomeSource, seed == 0 ? WorldSeed.getSeed() : seed, settings);
     }
 
@@ -39,7 +49,8 @@ public class PlanetChunkGenerator extends NoiseChunkGenerator {
     public ChunkGenerator withSeed(long seed) {
         NoiseChunkGeneratorAccessor noiseAccessor = (NoiseChunkGeneratorAccessor) this;
         ChunkGeneratorAccessor chunkAccessor = (ChunkGeneratorAccessor) this;
-        return new PlanetChunkGenerator(chunkAccessor.getStructureSet(), noiseAccessor.getNoiseRegistry(), this.biomeSource.withSeed(seed), seed, this.settings);
+        return new PlanetChunkGenerator(chunkAccessor.getStructureSet(), noiseAccessor.getNoiseRegistry(),
+                this.biomeSource.withSeed(seed), seed, this.settings);
     }
 
     @Override
@@ -67,7 +78,8 @@ public class PlanetChunkGenerator extends NoiseChunkGenerator {
                 for (z = 0; z < 16; z++) {
                     for (y = 1; y < 9; y++) {
                         if (chunk.getBlockState(new BlockPos(x, this.getMinimumY() + y, z)).isAir()) {
-                            chunk.setBlockState(pos.set(x, this.getMinimumY() + y, z), Blocks.LAVA.getDefaultState(), false);
+                            chunk.setBlockState(pos.set(x, this.getMinimumY() + y, z), Blocks.LAVA.getDefaultState(),
+                                    false);
                         }
                     }
                 }

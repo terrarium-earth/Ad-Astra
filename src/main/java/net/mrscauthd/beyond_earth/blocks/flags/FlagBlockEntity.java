@@ -1,6 +1,9 @@
 package net.mrscauthd.beyond_earth.blocks.flags;
 
 import com.mojang.authlib.GameProfile;
+
+import org.jetbrains.annotations.Nullable;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.SkullBlockEntity;
@@ -12,7 +15,6 @@ import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.util.StringHelper;
 import net.minecraft.util.math.BlockPos;
 import net.mrscauthd.beyond_earth.registry.ModBlockEntities;
-import org.jetbrains.annotations.Nullable;
 
 public class FlagBlockEntity extends BlockEntity {
 

@@ -5,10 +5,18 @@ import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.util.registry.Registry;
+import net.mrscauthd.beyond_earth.blocks.flags.FlagBlockEntity;
 import net.mrscauthd.beyond_earth.blocks.globes.GlobeBlockEntity;
 import net.mrscauthd.beyond_earth.blocks.launch_pad.RocketLaunchPadEntity;
-import net.mrscauthd.beyond_earth.blocks.flags.FlagBlockEntity;
-import net.mrscauthd.beyond_earth.blocks.machines.entity.*;
+import net.mrscauthd.beyond_earth.blocks.machines.entity.AbstractMachineBlockEntity;
+import net.mrscauthd.beyond_earth.blocks.machines.entity.CoalGeneratorBlockEntity;
+import net.mrscauthd.beyond_earth.blocks.machines.entity.CompressorBlockEntity;
+import net.mrscauthd.beyond_earth.blocks.machines.entity.FuelRefineryBlockEntity;
+import net.mrscauthd.beyond_earth.blocks.machines.entity.NasaWorkbenchBlockEntity;
+import net.mrscauthd.beyond_earth.blocks.machines.entity.OxygenBubbleDistributorBlockEntity;
+import net.mrscauthd.beyond_earth.blocks.machines.entity.OxygenLoaderBlockEntity;
+import net.mrscauthd.beyond_earth.blocks.machines.entity.SolarPanelBlockEntity;
+import net.mrscauthd.beyond_earth.blocks.machines.entity.WaterPumpBlockEntity;
 import net.mrscauthd.beyond_earth.util.ModIdentifier;
 import team.reborn.energy.api.EnergyStorage;
 
@@ -32,7 +40,6 @@ public class ModBlockEntities {
     public static BlockEntityType<OxygenBubbleDistributorBlockEntity> OXYGEN_BUBBLE_DISTRIBUTOR_ENTITY;
     public static BlockEntityType<WaterPumpBlockEntity> WATER_PUMP_ENTITY;
 
-
     public static void register() {
         // Flag Block Entity.
         FLAG_BLOCK_ENTITY = register("flag_entity", FlagBlockEntity::new,
@@ -49,8 +56,7 @@ public class ModBlockEntities {
                 ModBlocks.FLAG_PINK,
                 ModBlocks.FLAG_PURPLE,
                 ModBlocks.FLAG_RED,
-                ModBlocks.FLAG_YELLOW
-        );
+                ModBlocks.FLAG_YELLOW);
 
         GLOBE_BLOCK_ENTITY = register("globe_entity", GlobeBlockEntity::new,
                 ModBlocks.EARTH_GLOBE,
@@ -58,31 +64,35 @@ public class ModBlockEntities {
                 ModBlocks.MARS_GLOBE,
                 ModBlocks.MERCURY_GLOBE,
                 ModBlocks.VENUS_GLOBE,
-                ModBlocks.GLACIO_GLOBE
-        );
+                ModBlocks.GLACIO_GLOBE);
 
         // Rocket Launch Pad.
-        ROCKET_LAUNCH_PAD_ENTITY = register("rocket_launch_pad_entity", RocketLaunchPadEntity::new, ModBlocks.ROCKET_LAUNCH_PAD);
+        ROCKET_LAUNCH_PAD_ENTITY = register("rocket_launch_pad_entity", RocketLaunchPadEntity::new,
+                ModBlocks.ROCKET_LAUNCH_PAD);
 
         // Machine Block Entity.
         FUEL_REFINERY_ENTITY = register("fuel_refinery_entity", FuelRefineryBlockEntity::new, ModBlocks.FUEL_REFINERY);
         COMPRESSOR_ENTITY = register("compressor_entity", CompressorBlockEntity::new, ModBlocks.COMPRESSOR);
-        COAL_GENERATOR_ENTITY = register("coal_generator_entity", CoalGeneratorBlockEntity::new, ModBlocks.COAL_GENERATOR);
+        COAL_GENERATOR_ENTITY = register("coal_generator_entity", CoalGeneratorBlockEntity::new,
+                ModBlocks.COAL_GENERATOR);
         OXYGEN_LOADER_ENTITY = register("oxygen_loader_entity", OxygenLoaderBlockEntity::new, ModBlocks.OXYGEN_LOADER);
         SOLAR_PANEL_ENTITY = register("solar_panel_entity", SolarPanelBlockEntity::new, ModBlocks.SOLAR_PANEL);
-        NASA_WORKBENCH_ENTITY = register("nasa_workbench_entity", NasaWorkbenchBlockEntity::new, ModBlocks.NASA_WORKBENCH);
-        OXYGEN_BUBBLE_DISTRIBUTOR_ENTITY = register("oxygen_bubble_distributor_entity", OxygenBubbleDistributorBlockEntity::new, ModBlocks.OXYGEN_BUBBLE_DISTRIBUTOR);
+        NASA_WORKBENCH_ENTITY = register("nasa_workbench_entity", NasaWorkbenchBlockEntity::new,
+                ModBlocks.NASA_WORKBENCH);
+        OXYGEN_BUBBLE_DISTRIBUTOR_ENTITY = register("oxygen_bubble_distributor_entity",
+                OxygenBubbleDistributorBlockEntity::new, ModBlocks.OXYGEN_BUBBLE_DISTRIBUTOR);
         WATER_PUMP_ENTITY = register("water_pump_entity", WaterPumpBlockEntity::new, ModBlocks.WATER_PUMP);
 
-        EnergyStorage.SIDED.registerForBlockEntities((blockEntity, direction) -> ((AbstractMachineBlockEntity) blockEntity).getSideEnergyStorage(direction),
+        EnergyStorage.SIDED.registerForBlockEntities(
+                (blockEntity, direction) -> ((AbstractMachineBlockEntity) blockEntity).getSideEnergyStorage(direction),
                 SOLAR_PANEL_ENTITY,
                 COAL_GENERATOR_ENTITY,
-                COMPRESSOR_ENTITY
-        );
+                COMPRESSOR_ENTITY);
     }
 
-
-    public static <T extends BlockEntity> BlockEntityType<T> register(String id, FabricBlockEntityTypeBuilder.Factory<T> factory, Block... blocks) {
-        return Registry.register(Registry.BLOCK_ENTITY_TYPE, new ModIdentifier(id), FabricBlockEntityTypeBuilder.create(factory, blocks).build(null));
+    public static <T extends BlockEntity> BlockEntityType<T> register(String id,
+            FabricBlockEntityTypeBuilder.Factory<T> factory, Block... blocks) {
+        return Registry.register(Registry.BLOCK_ENTITY_TYPE, new ModIdentifier(id),
+                FabricBlockEntityTypeBuilder.create(factory, blocks).build(null));
     }
 }

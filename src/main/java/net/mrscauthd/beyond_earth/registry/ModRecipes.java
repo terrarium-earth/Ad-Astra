@@ -1,8 +1,11 @@
 package net.mrscauthd.beyond_earth.registry;
 
-import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.mrscauthd.beyond_earth.recipes.*;
+import net.mrscauthd.beyond_earth.recipes.CompressingRecipe;
+import net.mrscauthd.beyond_earth.recipes.GeneratingRecipe;
+import net.mrscauthd.beyond_earth.recipes.HammerShapelessRecipe;
+import net.mrscauthd.beyond_earth.recipes.ModRecipe;
+import net.mrscauthd.beyond_earth.recipes.ModRecipeType;
 import net.mrscauthd.beyond_earth.util.ModIdentifier;
 
 public class ModRecipes {
@@ -19,9 +22,12 @@ public class ModRecipes {
         COMPRESSING_RECIPE = register(new ModRecipeType<>(new ModIdentifier("compressing")));
 
         // Recipe Serializers.
-        Registry.register(Registry.RECIPE_SERIALIZER, new ModIdentifier("hammering"), new HammerShapelessRecipe.Serializer());
-        Registry.register(Registry.RECIPE_SERIALIZER, new ModIdentifier("generating"), new GeneratingRecipe.Serializer());
-        Registry.register(Registry.RECIPE_SERIALIZER, new ModIdentifier("compressing"), new CompressingRecipe.Serializer());
+        Registry.register(Registry.RECIPE_SERIALIZER, new ModIdentifier("hammering"),
+                new HammerShapelessRecipe.Serializer());
+        Registry.register(Registry.RECIPE_SERIALIZER, new ModIdentifier("generating"),
+                new GeneratingRecipe.Serializer());
+        Registry.register(Registry.RECIPE_SERIALIZER, new ModIdentifier("compressing"),
+                new CompressingRecipe.Serializer());
     }
 
     private static <T extends ModRecipeType<?>> T register(T recipe) {

@@ -1,5 +1,7 @@
 package net.mrscauthd.beyond_earth.blocks.machines.entity;
 
+import org.jetbrains.annotations.Nullable;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.Item;
@@ -8,7 +10,6 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
 import net.mrscauthd.beyond_earth.recipes.ModRecipe;
 import net.mrscauthd.beyond_earth.recipes.ModRecipeType;
-import org.jetbrains.annotations.Nullable;
 
 public abstract class ProcessingMachineBlockEntity extends AbstractMachineBlockEntity {
 
@@ -87,7 +88,8 @@ public abstract class ProcessingMachineBlockEntity extends AbstractMachineBlockE
             if (checkOutput) {
                 ItemStack outputSlot = this.getStack(1);
                 ItemStack output = recipe.getOutput();
-                if (!outputSlot.isEmpty() && !outputSlot.getItem().equals(recipe.getOutput().getItem()) || outputSlot.getCount() + output.getCount() > outputSlot.getMaxCount()) {
+                if (!outputSlot.isEmpty() && !outputSlot.getItem().equals(recipe.getOutput().getItem())
+                        || outputSlot.getCount() + output.getCount() > outputSlot.getMaxCount()) {
                     return null;
                 }
             }

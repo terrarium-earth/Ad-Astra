@@ -1,6 +1,14 @@
 package net.mrscauthd.beyond_earth.blocks.globes;
 
-import net.minecraft.block.*;
+import org.jetbrains.annotations.Nullable;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockRenderType;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.BlockWithEntity;
+import net.minecraft.block.HorizontalFacingBlock;
+import net.minecraft.block.ShapeContext;
+import net.minecraft.block.Waterloggable;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
@@ -29,9 +37,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import net.mrscauthd.beyond_earth.registry.ModBlockEntities;
-import org.jetbrains.annotations.Nullable;
 
-public class GlobeBlock extends BlockWithEntity implements Waterloggable, BlockEntityProvider {
+@SuppressWarnings("deprecation")
+public class GlobeBlock extends BlockWithEntity implements Waterloggable {
     public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
@@ -41,11 +49,13 @@ public class GlobeBlock extends BlockWithEntity implements Waterloggable, BlockE
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand,
+            BlockHitResult hit) {
         if (!world.isClient) {
             if (world.getBlockEntity(pos) instanceof GlobeBlockEntity blockEntity) {
 
-                float torque = (float) (Math.PI / (Math.pow(GlobeBlockEntity.DECELERATION, blockEntity.getAngularVelocity()) + 1) / 4);
+                float torque = (float) (Math.PI
+                        / (Math.pow(GlobeBlockEntity.DECELERATION, blockEntity.getAngularVelocity()) + 1) / 4);
                 blockEntity.setAngularVelocity(torque);
                 blockEntity.markDirty();
             }
@@ -65,7 +75,8 @@ public class GlobeBlock extends BlockWithEntity implements Waterloggable, BlockE
     }
 
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state,
+            BlockEntityType<T> type) {
         // Client and sever tick.
         return checkType(type, ModBlockEntities.GLOBE_BLOCK_ENTITY, GlobeBlockEntity::tick);
     }
@@ -76,8 +87,8 @@ public class GlobeBlock extends BlockWithEntity implements Waterloggable, BlockE
     }
 
     @Override
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState
-            neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState,
+            WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (state.get(WATERLOGGED)) {
             world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
@@ -129,6 +140,7 @@ public class GlobeBlock extends BlockWithEntity implements Waterloggable, BlockE
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         FluidState fluidState = ctx.getWorld().getFluidState(ctx.getBlockPos());
-        return this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite()).with(WATERLOGGED, fluidState.getFluid().equals(Fluids.WATER));
+        return this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite()).with(WATERLOGGED,
+                fluidState.getFluid().equals(Fluids.WATER));
     }
 }

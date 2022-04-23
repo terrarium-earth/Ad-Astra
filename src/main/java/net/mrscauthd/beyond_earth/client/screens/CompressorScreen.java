@@ -1,5 +1,7 @@
 package net.mrscauthd.beyond_earth.client.screens;
 
+import java.awt.Rectangle;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.util.math.MatrixStack;
@@ -12,8 +14,6 @@ import net.mrscauthd.beyond_earth.gui.GuiUtil;
 import net.mrscauthd.beyond_earth.gui.screen_handlers.CompressorScreenHandler;
 import net.mrscauthd.beyond_earth.util.ModIdentifier;
 
-import java.awt.*;
-
 @Environment(EnvType.CLIENT)
 public class CompressorScreen extends AbstractMachineScreen<CompressorScreenHandler> {
 
@@ -23,7 +23,6 @@ public class CompressorScreen extends AbstractMachineScreen<CompressorScreenHand
     public static final int ENERGY_TOP = 21;
     public static final int ARROW_LEFT = 62;
     public static final int ARROW_TOP = 36;
-
 
     public CompressorScreen(CompressorScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title, TEXTURE);
@@ -37,8 +36,10 @@ public class CompressorScreen extends AbstractMachineScreen<CompressorScreenHand
 
         CompressorBlockEntity entity = (CompressorBlockEntity) blockEntity;
 
-        GuiUtil.drawArrow(matrices, this.x + ARROW_LEFT, this.y + ARROW_TOP, entity.getCookTime(), entity.getCookTimeTotal());
-        GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration());
+        GuiUtil.drawArrow(matrices, this.x + ARROW_LEFT, this.y + ARROW_TOP, entity.getCookTime(),
+                entity.getCookTimeTotal());
+        GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.blockEntity.getEnergy(),
+                this.blockEntity.getMaxGeneration());
     }
 
     @Override
@@ -49,12 +50,14 @@ public class CompressorScreen extends AbstractMachineScreen<CompressorScreenHand
 
         // Energy tooltip.
         if (GuiUtil.isHover(this.getEnergyBounds(), mouseX, mouseY)) {
-            this.renderTooltip(matrices, new TranslatableText("gauge_text.beyond_earth.storage", this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration()), mouseX, mouseY);
+            this.renderTooltip(matrices, new TranslatableText("gauge_text.beyond_earth.storage",
+                    this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration()), mouseX, mouseY);
         }
 
         // Burn time tooltip.
         if (GuiUtil.isHover(this.getArrowBounds(), mouseX, mouseY)) {
-            this.renderTooltip(matrices, new TranslatableText("gauge.beyond_earth.cook_time", entity.getCookTime(), entity.getCookTimeTotal()), mouseX, mouseY);
+            this.renderTooltip(matrices, new TranslatableText("gauge.beyond_earth.cook_time", entity.getCookTime(),
+                    entity.getCookTimeTotal()), mouseX, mouseY);
         }
     }
 

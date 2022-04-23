@@ -2,6 +2,7 @@ package net.mrscauthd.beyond_earth.client.renderer.sky.cloud_renderer;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry;
@@ -9,7 +10,13 @@ import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.VertexBuffer;
 import net.minecraft.client.option.CloudRenderMode;
-import net.minecraft.client.render.*;
+import net.minecraft.client.render.BackgroundRenderer;
+import net.minecraft.client.render.BufferBuilder;
+import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.render.Shader;
+import net.minecraft.client.render.Tessellator;
+import net.minecraft.client.render.VertexFormat;
+import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
@@ -26,7 +33,6 @@ public class ModCloudRenderer implements DimensionRenderingRegistry.CloudRendere
         texture = VENUS_CLOUD_TEXTURE;
         return this;
     }
-
 
     @Override
     public void render(WorldRenderContext context) {
@@ -45,7 +51,9 @@ public class ModCloudRenderer implements DimensionRenderingRegistry.CloudRendere
             RenderSystem.disableCull();
             RenderSystem.enableBlend();
             RenderSystem.enableDepthTest();
-            RenderSystem.blendFuncSeparate(GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SrcFactor.ONE, GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA);
+            RenderSystem.blendFuncSeparate(GlStateManager.SrcFactor.SRC_ALPHA,
+                    GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SrcFactor.ONE,
+                    GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA);
             RenderSystem.depthMask(true);
             double k = ((float) renderer.getTicks() + tickDelta) * 0.03f;
             double l = (cameraPosX + k) / 12.0;
@@ -60,7 +68,10 @@ public class ModCloudRenderer implements DimensionRenderingRegistry.CloudRendere
             int r = (int) Math.floor(l);
             int s = (int) Math.floor(m / 4.0);
             int t = (int) Math.floor(n);
-            if (r != renderer.getLastCloudsBlockX() || s != renderer.getLastCloudsBlockY() || t != renderer.getLastCloudsBlockZ() || client.options.getCloudRenderMode() != renderer.getLastCloudsRenderMode() || renderer.getLastCloudsColor().squaredDistanceTo(vec3d) > 2.0E-4) {
+            if (r != renderer.getLastCloudsBlockX() || s != renderer.getLastCloudsBlockY()
+                    || t != renderer.getLastCloudsBlockZ()
+                    || client.options.getCloudRenderMode() != renderer.getLastCloudsRenderMode()
+                    || renderer.getLastCloudsColor().squaredDistanceTo(vec3d) > 2.0E-4) {
                 renderer.setLastCloudsBlockX(r);
                 renderer.setLastCloudsBlockY(s);
                 renderer.setLastCloudsBlockZ(t);
@@ -99,7 +110,8 @@ public class ModCloudRenderer implements DimensionRenderingRegistry.CloudRendere
                     }
 
                     Shader shader = RenderSystem.getShader();
-                    renderer.getCloudsBuffer().setShader(matrices.peek().getPositionMatrix(), context.projectionMatrix(), shader);
+                    renderer.getCloudsBuffer().setShader(matrices.peek().getPositionMatrix(),
+                            context.projectionMatrix(), shader);
                 }
             }
 
@@ -110,7 +122,8 @@ public class ModCloudRenderer implements DimensionRenderingRegistry.CloudRendere
         }
     }
 
-    private void renderClouds(WorldRendererAccessor renderer, BufferBuilder builder, double x, double y, double z, Vec3d color) {
+    private void renderClouds(WorldRendererAccessor renderer, BufferBuilder builder, double x, double y, double z,
+            Vec3d color) {
         float k = (float) MathHelper.floor(x) * 0.00390625f;
         float l = (float) MathHelper.floor(z) * 0.00390625f;
         float m = (float) color.x;
@@ -135,57 +148,113 @@ public class ModCloudRenderer implements DimensionRenderingRegistry.CloudRendere
                     float ae = ac * 8;
                     float af = ad * 8;
                     if (ab > -5.0f) {
-                        builder.vertex(ae + 0.0f, ab + 0.0f, af + 8.0f).texture((ae + 0.0f) * 0.00390625f + k, (af + 8.0f) * 0.00390625f + l).color(s, t, u, 0.8f).normal(0.0f, -1.0f, 0.0f).next();
-                        builder.vertex(ae + 8.0f, ab + 0.0f, af + 8.0f).texture((ae + 8.0f) * 0.00390625f + k, (af + 8.0f) * 0.00390625f + l).color(s, t, u, 0.8f).normal(0.0f, -1.0f, 0.0f).next();
-                        builder.vertex(ae + 8.0f, ab + 0.0f, af + 0.0f).texture((ae + 8.0f) * 0.00390625f + k, (af + 0.0f) * 0.00390625f + l).color(s, t, u, 0.8f).normal(0.0f, -1.0f, 0.0f).next();
-                        builder.vertex(ae + 0.0f, ab + 0.0f, af + 0.0f).texture((ae + 0.0f) * 0.00390625f + k, (af + 0.0f) * 0.00390625f + l).color(s, t, u, 0.8f).normal(0.0f, -1.0f, 0.0f).next();
+                        builder.vertex(ae + 0.0f, ab + 0.0f, af + 8.0f)
+                                .texture((ae + 0.0f) * 0.00390625f + k, (af + 8.0f) * 0.00390625f + l)
+                                .color(s, t, u, 0.8f).normal(0.0f, -1.0f, 0.0f).next();
+                        builder.vertex(ae + 8.0f, ab + 0.0f, af + 8.0f)
+                                .texture((ae + 8.0f) * 0.00390625f + k, (af + 8.0f) * 0.00390625f + l)
+                                .color(s, t, u, 0.8f).normal(0.0f, -1.0f, 0.0f).next();
+                        builder.vertex(ae + 8.0f, ab + 0.0f, af + 0.0f)
+                                .texture((ae + 8.0f) * 0.00390625f + k, (af + 0.0f) * 0.00390625f + l)
+                                .color(s, t, u, 0.8f).normal(0.0f, -1.0f, 0.0f).next();
+                        builder.vertex(ae + 0.0f, ab + 0.0f, af + 0.0f)
+                                .texture((ae + 0.0f) * 0.00390625f + k, (af + 0.0f) * 0.00390625f + l)
+                                .color(s, t, u, 0.8f).normal(0.0f, -1.0f, 0.0f).next();
                     }
                     if (ab <= 5.0f) {
-                        builder.vertex(ae + 0.0f, ab + 4.0f - 9.765625E-4f, af + 8.0f).texture((ae + 0.0f) * 0.00390625f + k, (af + 8.0f) * 0.00390625f + l).color(m, n, o, 0.8f).normal(0.0f, 1.0f, 0.0f).next();
-                        builder.vertex(ae + 8.0f, ab + 4.0f - 9.765625E-4f, af + 8.0f).texture((ae + 8.0f) * 0.00390625f + k, (af + 8.0f) * 0.00390625f + l).color(m, n, o, 0.8f).normal(0.0f, 1.0f, 0.0f).next();
-                        builder.vertex(ae + 8.0f, ab + 4.0f - 9.765625E-4f, af + 0.0f).texture((ae + 8.0f) * 0.00390625f + k, (af + 0.0f) * 0.00390625f + l).color(m, n, o, 0.8f).normal(0.0f, 1.0f, 0.0f).next();
-                        builder.vertex(ae + 0.0f, ab + 4.0f - 9.765625E-4f, af + 0.0f).texture((ae + 0.0f) * 0.00390625f + k, (af + 0.0f) * 0.00390625f + l).color(m, n, o, 0.8f).normal(0.0f, 1.0f, 0.0f).next();
+                        builder.vertex(ae + 0.0f, ab + 4.0f - 9.765625E-4f, af + 8.0f)
+                                .texture((ae + 0.0f) * 0.00390625f + k, (af + 8.0f) * 0.00390625f + l)
+                                .color(m, n, o, 0.8f).normal(0.0f, 1.0f, 0.0f).next();
+                        builder.vertex(ae + 8.0f, ab + 4.0f - 9.765625E-4f, af + 8.0f)
+                                .texture((ae + 8.0f) * 0.00390625f + k, (af + 8.0f) * 0.00390625f + l)
+                                .color(m, n, o, 0.8f).normal(0.0f, 1.0f, 0.0f).next();
+                        builder.vertex(ae + 8.0f, ab + 4.0f - 9.765625E-4f, af + 0.0f)
+                                .texture((ae + 8.0f) * 0.00390625f + k, (af + 0.0f) * 0.00390625f + l)
+                                .color(m, n, o, 0.8f).normal(0.0f, 1.0f, 0.0f).next();
+                        builder.vertex(ae + 0.0f, ab + 4.0f - 9.765625E-4f, af + 0.0f)
+                                .texture((ae + 0.0f) * 0.00390625f + k, (af + 0.0f) * 0.00390625f + l)
+                                .color(m, n, o, 0.8f).normal(0.0f, 1.0f, 0.0f).next();
                     }
                     if (ac > -1) {
                         for (ag = 0; ag < 8; ++ag) {
-                            builder.vertex(ae + (float) ag + 0.0f, ab + 0.0f, af + 8.0f).texture((ae + (float) ag + 0.5f) * 0.00390625f + k, (af + 8.0f) * 0.00390625f + l).color(p, q, r, 0.8f).normal(-1.0f, 0.0f, 0.0f).next();
-                            builder.vertex(ae + (float) ag + 0.0f, ab + 4.0f, af + 8.0f).texture((ae + (float) ag + 0.5f) * 0.00390625f + k, (af + 8.0f) * 0.00390625f + l).color(p, q, r, 0.8f).normal(-1.0f, 0.0f, 0.0f).next();
-                            builder.vertex(ae + (float) ag + 0.0f, ab + 4.0f, af + 0.0f).texture((ae + (float) ag + 0.5f) * 0.00390625f + k, (af + 0.0f) * 0.00390625f + l).color(p, q, r, 0.8f).normal(-1.0f, 0.0f, 0.0f).next();
-                            builder.vertex(ae + (float) ag + 0.0f, ab + 0.0f, af + 0.0f).texture((ae + (float) ag + 0.5f) * 0.00390625f + k, (af + 0.0f) * 0.00390625f + l).color(p, q, r, 0.8f).normal(-1.0f, 0.0f, 0.0f).next();
+                            builder.vertex(ae + (float) ag + 0.0f, ab + 0.0f, af + 8.0f)
+                                    .texture((ae + (float) ag + 0.5f) * 0.00390625f + k, (af + 8.0f) * 0.00390625f + l)
+                                    .color(p, q, r, 0.8f).normal(-1.0f, 0.0f, 0.0f).next();
+                            builder.vertex(ae + (float) ag + 0.0f, ab + 4.0f, af + 8.0f)
+                                    .texture((ae + (float) ag + 0.5f) * 0.00390625f + k, (af + 8.0f) * 0.00390625f + l)
+                                    .color(p, q, r, 0.8f).normal(-1.0f, 0.0f, 0.0f).next();
+                            builder.vertex(ae + (float) ag + 0.0f, ab + 4.0f, af + 0.0f)
+                                    .texture((ae + (float) ag + 0.5f) * 0.00390625f + k, (af + 0.0f) * 0.00390625f + l)
+                                    .color(p, q, r, 0.8f).normal(-1.0f, 0.0f, 0.0f).next();
+                            builder.vertex(ae + (float) ag + 0.0f, ab + 0.0f, af + 0.0f)
+                                    .texture((ae + (float) ag + 0.5f) * 0.00390625f + k, (af + 0.0f) * 0.00390625f + l)
+                                    .color(p, q, r, 0.8f).normal(-1.0f, 0.0f, 0.0f).next();
                         }
                     }
                     if (ac <= 1) {
                         for (ag = 0; ag < 8; ++ag) {
-                            builder.vertex(ae + (float) ag + 1.0f - 9.765625E-4f, ab + 0.0f, af + 8.0f).texture((ae + (float) ag + 0.5f) * 0.00390625f + k, (af + 8.0f) * 0.00390625f + l).color(p, q, r, 0.8f).normal(1.0f, 0.0f, 0.0f).next();
-                            builder.vertex(ae + (float) ag + 1.0f - 9.765625E-4f, ab + 4.0f, af + 8.0f).texture((ae + (float) ag + 0.5f) * 0.00390625f + k, (af + 8.0f) * 0.00390625f + l).color(p, q, r, 0.8f).normal(1.0f, 0.0f, 0.0f).next();
-                            builder.vertex(ae + (float) ag + 1.0f - 9.765625E-4f, ab + 4.0f, af + 0.0f).texture((ae + (float) ag + 0.5f) * 0.00390625f + k, (af + 0.0f) * 0.00390625f + l).color(p, q, r, 0.8f).normal(1.0f, 0.0f, 0.0f).next();
-                            builder.vertex(ae + (float) ag + 1.0f - 9.765625E-4f, ab + 0.0f, af + 0.0f).texture((ae + (float) ag + 0.5f) * 0.00390625f + k, (af + 0.0f) * 0.00390625f + l).color(p, q, r, 0.8f).normal(1.0f, 0.0f, 0.0f).next();
+                            builder.vertex(ae + (float) ag + 1.0f - 9.765625E-4f, ab + 0.0f, af + 8.0f)
+                                    .texture((ae + (float) ag + 0.5f) * 0.00390625f + k, (af + 8.0f) * 0.00390625f + l)
+                                    .color(p, q, r, 0.8f).normal(1.0f, 0.0f, 0.0f).next();
+                            builder.vertex(ae + (float) ag + 1.0f - 9.765625E-4f, ab + 4.0f, af + 8.0f)
+                                    .texture((ae + (float) ag + 0.5f) * 0.00390625f + k, (af + 8.0f) * 0.00390625f + l)
+                                    .color(p, q, r, 0.8f).normal(1.0f, 0.0f, 0.0f).next();
+                            builder.vertex(ae + (float) ag + 1.0f - 9.765625E-4f, ab + 4.0f, af + 0.0f)
+                                    .texture((ae + (float) ag + 0.5f) * 0.00390625f + k, (af + 0.0f) * 0.00390625f + l)
+                                    .color(p, q, r, 0.8f).normal(1.0f, 0.0f, 0.0f).next();
+                            builder.vertex(ae + (float) ag + 1.0f - 9.765625E-4f, ab + 0.0f, af + 0.0f)
+                                    .texture((ae + (float) ag + 0.5f) * 0.00390625f + k, (af + 0.0f) * 0.00390625f + l)
+                                    .color(p, q, r, 0.8f).normal(1.0f, 0.0f, 0.0f).next();
                         }
                     }
                     if (ad > -1) {
                         for (ag = 0; ag < 8; ++ag) {
-                            builder.vertex(ae + 0.0f, ab + 4.0f, af + (float) ag + 0.0f).texture((ae + 0.0f) * 0.00390625f + k, (af + (float) ag + 0.5f) * 0.00390625f + l).color(v, w, aa, 0.8f).normal(0.0f, 0.0f, -1.0f).next();
-                            builder.vertex(ae + 8.0f, ab + 4.0f, af + (float) ag + 0.0f).texture((ae + 8.0f) * 0.00390625f + k, (af + (float) ag + 0.5f) * 0.00390625f + l).color(v, w, aa, 0.8f).normal(0.0f, 0.0f, -1.0f).next();
-                            builder.vertex(ae + 8.0f, ab + 0.0f, af + (float) ag + 0.0f).texture((ae + 8.0f) * 0.00390625f + k, (af + (float) ag + 0.5f) * 0.00390625f + l).color(v, w, aa, 0.8f).normal(0.0f, 0.0f, -1.0f).next();
-                            builder.vertex(ae + 0.0f, ab + 0.0f, af + (float) ag + 0.0f).texture((ae + 0.0f) * 0.00390625f + k, (af + (float) ag + 0.5f) * 0.00390625f + l).color(v, w, aa, 0.8f).normal(0.0f, 0.0f, -1.0f).next();
+                            builder.vertex(ae + 0.0f, ab + 4.0f, af + (float) ag + 0.0f)
+                                    .texture((ae + 0.0f) * 0.00390625f + k, (af + (float) ag + 0.5f) * 0.00390625f + l)
+                                    .color(v, w, aa, 0.8f).normal(0.0f, 0.0f, -1.0f).next();
+                            builder.vertex(ae + 8.0f, ab + 4.0f, af + (float) ag + 0.0f)
+                                    .texture((ae + 8.0f) * 0.00390625f + k, (af + (float) ag + 0.5f) * 0.00390625f + l)
+                                    .color(v, w, aa, 0.8f).normal(0.0f, 0.0f, -1.0f).next();
+                            builder.vertex(ae + 8.0f, ab + 0.0f, af + (float) ag + 0.0f)
+                                    .texture((ae + 8.0f) * 0.00390625f + k, (af + (float) ag + 0.5f) * 0.00390625f + l)
+                                    .color(v, w, aa, 0.8f).normal(0.0f, 0.0f, -1.0f).next();
+                            builder.vertex(ae + 0.0f, ab + 0.0f, af + (float) ag + 0.0f)
+                                    .texture((ae + 0.0f) * 0.00390625f + k, (af + (float) ag + 0.5f) * 0.00390625f + l)
+                                    .color(v, w, aa, 0.8f).normal(0.0f, 0.0f, -1.0f).next();
                         }
                     }
-                    if (ad > 1) continue;
+                    if (ad > 1)
+                        continue;
                     for (ag = 0; ag < 8; ++ag) {
-                        builder.vertex(ae + 0.0f, ab + 4.0f, af + (float) ag + 1.0f - 9.765625E-4f).texture((ae + 0.0f) * 0.00390625f + k, (af + (float) ag + 0.5f) * 0.00390625f + l).color(v, w, aa, 0.8f).normal(0.0f, 0.0f, 1.0f).next();
-                        builder.vertex(ae + 8.0f, ab + 4.0f, af + (float) ag + 1.0f - 9.765625E-4f).texture((ae + 8.0f) * 0.00390625f + k, (af + (float) ag + 0.5f) * 0.00390625f + l).color(v, w, aa, 0.8f).normal(0.0f, 0.0f, 1.0f).next();
-                        builder.vertex(ae + 8.0f, ab + 0.0f, af + (float) ag + 1.0f - 9.765625E-4f).texture((ae + 8.0f) * 0.00390625f + k, (af + (float) ag + 0.5f) * 0.00390625f + l).color(v, w, aa, 0.8f).normal(0.0f, 0.0f, 1.0f).next();
-                        builder.vertex(ae + 0.0f, ab + 0.0f, af + (float) ag + 1.0f - 9.765625E-4f).texture((ae + 0.0f) * 0.00390625f + k, (af + (float) ag + 0.5f) * 0.00390625f + l).color(v, w, aa, 0.8f).normal(0.0f, 0.0f, 1.0f).next();
+                        builder.vertex(ae + 0.0f, ab + 4.0f, af + (float) ag + 1.0f - 9.765625E-4f)
+                                .texture((ae + 0.0f) * 0.00390625f + k, (af + (float) ag + 0.5f) * 0.00390625f + l)
+                                .color(v, w, aa, 0.8f).normal(0.0f, 0.0f, 1.0f).next();
+                        builder.vertex(ae + 8.0f, ab + 4.0f, af + (float) ag + 1.0f - 9.765625E-4f)
+                                .texture((ae + 8.0f) * 0.00390625f + k, (af + (float) ag + 0.5f) * 0.00390625f + l)
+                                .color(v, w, aa, 0.8f).normal(0.0f, 0.0f, 1.0f).next();
+                        builder.vertex(ae + 8.0f, ab + 0.0f, af + (float) ag + 1.0f - 9.765625E-4f)
+                                .texture((ae + 8.0f) * 0.00390625f + k, (af + (float) ag + 0.5f) * 0.00390625f + l)
+                                .color(v, w, aa, 0.8f).normal(0.0f, 0.0f, 1.0f).next();
+                        builder.vertex(ae + 0.0f, ab + 0.0f, af + (float) ag + 1.0f - 9.765625E-4f)
+                                .texture((ae + 0.0f) * 0.00390625f + k, (af + (float) ag + 0.5f) * 0.00390625f + l)
+                                .color(v, w, aa, 0.8f).normal(0.0f, 0.0f, 1.0f).next();
                     }
                 }
             }
         } else {
             for (int ah = -32; ah < 32; ah += 32) {
                 for (int ai = -32; ai < 32; ai += 32) {
-                    builder.vertex(ah, ab, ai + 32).texture((float) (ah) * 0.00390625f + k, (float) (ai + 32) * 0.00390625f + l).color(m, n, o, 0.8f).normal(0.0f, -1.0f, 0.0f).next();
-                    builder.vertex(ah + 32, ab, ai + 32).texture((float) (ah + 32) * 0.00390625f + k, (float) (ai + 32) * 0.00390625f + l).color(m, n, o, 0.8f).normal(0.0f, -1.0f, 0.0f).next();
-                    builder.vertex(ah + 32, ab, ai).texture((float) (ah + 32) * 0.00390625f + k, (float) (ai) * 0.00390625f + l).color(m, n, o, 0.8f).normal(0.0f, -1.0f, 0.0f).next();
-                    builder.vertex(ah, ab, ai).texture((float) (ah) * 0.00390625f + k, (float) (ai) * 0.00390625f + l).color(m, n, o, 0.8f).normal(0.0f, -1.0f, 0.0f).next();
+                    builder.vertex(ah, ab, ai + 32)
+                            .texture((float) (ah) * 0.00390625f + k, (float) (ai + 32) * 0.00390625f + l)
+                            .color(m, n, o, 0.8f).normal(0.0f, -1.0f, 0.0f).next();
+                    builder.vertex(ah + 32, ab, ai + 32)
+                            .texture((float) (ah + 32) * 0.00390625f + k, (float) (ai + 32) * 0.00390625f + l)
+                            .color(m, n, o, 0.8f).normal(0.0f, -1.0f, 0.0f).next();
+                    builder.vertex(ah + 32, ab, ai)
+                            .texture((float) (ah + 32) * 0.00390625f + k, (float) (ai) * 0.00390625f + l)
+                            .color(m, n, o, 0.8f).normal(0.0f, -1.0f, 0.0f).next();
+                    builder.vertex(ah, ab, ai).texture((float) (ah) * 0.00390625f + k, (float) (ai) * 0.00390625f + l)
+                            .color(m, n, o, 0.8f).normal(0.0f, -1.0f, 0.0f).next();
                 }
             }
         }

@@ -1,5 +1,11 @@
 package net.mrscauthd.beyond_earth.client.renderer.spacesuit;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.commons.lang3.ArrayUtils;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
@@ -12,11 +18,6 @@ import net.minecraft.util.Identifier;
 import net.mrscauthd.beyond_earth.items.armour.NetheriteSpaceSuit;
 import net.mrscauthd.beyond_earth.registry.ModArmour;
 import net.mrscauthd.beyond_earth.util.ModIdentifier;
-import org.apache.commons.lang3.ArrayUtils;
-
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
 public class SpaceSuitRenderer {
 
@@ -71,6 +72,9 @@ public class SpaceSuitRenderer {
             case FEET -> {
                 map.put("right_leg", new SpaceSuitModel.SPACE_SUIT_P1<>(layer).rightLeg);
                 map.put("left_leg", new SpaceSuitModel.SPACE_SUIT_P1<>(layer).leftLeg);
+            }
+            default -> {
+                
             }
         }
 

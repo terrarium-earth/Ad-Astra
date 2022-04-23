@@ -10,5 +10,4 @@ public class SpaceSuit extends ArmorItem {
     public SpaceSuit(ArmorMaterial material, EquipmentSlot slot, Item.Settings settings) {
         super(material, slot, settings);
     }
-
 }

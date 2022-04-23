@@ -6,7 +6,6 @@ import net.mrscauthd.beyond_earth.blocks.machines.entity.OxygenBubbleDistributor
 
 public class OxygenBubbleDistributorBlock extends AbstractMachineBlock {
 
-
     public OxygenBubbleDistributorBlock(Settings settings) {
         super(settings);
     }
@@ -20,7 +19,6 @@ public class OxygenBubbleDistributorBlock extends AbstractMachineBlock {
     protected boolean useLit() {
         return true;
     }
-
 
     @Override
     public OxygenBubbleDistributorBlockEntity createBlockEntity(BlockPos pos, BlockState state) {

@@ -34,11 +34,13 @@ public class MarsSky extends ModSky {
     }
 
     public MarsSky withPhobos() {
-        return (MarsSky) this.addToRenderingQueue(PHOBOS_TEXTURE, false, 3.0f, new Vec3f(45.0f, -160.0f, 0.0f), RenderType.DYNAMIC);
+        return (MarsSky) this.addToRenderingQueue(PHOBOS_TEXTURE, false, 3.0f, new Vec3f(45.0f, -160.0f, 0.0f),
+                RenderType.DYNAMIC);
     }
 
     public MarsSky withDeimos() {
-        return (MarsSky) this.addToRenderingQueue(DEIMOS_TEXTURE, false, 4.0f, new Vec3f(0.0f, 90.0f, -10.0f), RenderType.DYNAMIC);
+        return (MarsSky) this.addToRenderingQueue(DEIMOS_TEXTURE, false, 4.0f, new Vec3f(0.0f, 90.0f, -10.0f),
+                RenderType.DYNAMIC);
     }
 
     @Override
