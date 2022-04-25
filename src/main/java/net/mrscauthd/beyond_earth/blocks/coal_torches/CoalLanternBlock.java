@@ -24,12 +24,11 @@ public class CoalLanternBlock extends LanternBlock {
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand,
-            BlockHitResult hit) {
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
             ItemStack itemstack = player.getStackInHand(hand);
 
-            if (ModUtils.dimensionHasOxygen(world)) {
+            if (ModUtils.dimensionHasOxygen(false, world.getRegistryKey())) {
                 if (itemstack.getItem() instanceof FlintAndSteelItem || itemstack.getItem() instanceof FireChargeItem) {
 
                     world.setBlockState(pos, Blocks.LANTERN.getStateWithProperties(state), 3);

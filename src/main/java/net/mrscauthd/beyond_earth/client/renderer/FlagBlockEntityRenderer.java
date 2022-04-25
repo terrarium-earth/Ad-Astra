@@ -46,21 +46,21 @@ public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEnt
 
         // Front image of player head.
         switch (entity.getCachedState().get(FlagBlock.FACING)) {
-            case NORTH -> model.setTransform(ModelTransform.of(13, pivotY, 8, 0, 0, flip));
-            case EAST -> model.setTransform(ModelTransform.of(8, pivotY, 13, 0, quarterTurn, flip));
-            case SOUTH -> model.setTransform(ModelTransform.of(11, pivotY, 8, 0, 0, flip));
-            case WEST -> model.setTransform(ModelTransform.of(8, pivotY, 11, 0, quarterTurn, flip));
-            default -> throw new IllegalArgumentException("Unexpected value: " + entity.getCachedState().get(FlagBlock.FACING));
+        case NORTH -> model.setTransform(ModelTransform.of(13, pivotY, 8, 0, 0, flip));
+        case EAST -> model.setTransform(ModelTransform.of(8, pivotY, 13, 0, quarterTurn, flip));
+        case SOUTH -> model.setTransform(ModelTransform.of(11, pivotY, 8, 0, 0, flip));
+        case WEST -> model.setTransform(ModelTransform.of(8, pivotY, 11, 0, quarterTurn, flip));
+        default -> throw new IllegalArgumentException("Unexpected value: " + entity.getCachedState().get(FlagBlock.FACING));
         }
         model.render(matrices, vertexConsumer, light, overlay);
 
         // Back image of player head.
         switch (entity.getCachedState().get(FlagBlock.FACING)) {
-            case NORTH -> model1.setTransform(ModelTransform.of(5, pivotY, 7.999f, 0, flip, flip));
-            case EAST -> model1.setTransform(ModelTransform.of(8.001f, pivotY, 5, 0, -quarterTurn, flip));
-            case SOUTH -> model1.setTransform(ModelTransform.of(3, pivotY, 7.999f, 0, flip, flip));
-            case WEST -> model1.setTransform(ModelTransform.of(8.001f, pivotY, 3, 0, -quarterTurn, flip));
-            default -> throw new IllegalArgumentException("Unexpected value: " + entity.getCachedState().get(FlagBlock.FACING));
+        case NORTH -> model1.setTransform(ModelTransform.of(5, pivotY, 7.999f, 0, flip, flip));
+        case EAST -> model1.setTransform(ModelTransform.of(8.001f, pivotY, 5, 0, -quarterTurn, flip));
+        case SOUTH -> model1.setTransform(ModelTransform.of(3, pivotY, 7.999f, 0, flip, flip));
+        case WEST -> model1.setTransform(ModelTransform.of(8.001f, pivotY, 3, 0, -quarterTurn, flip));
+        default -> throw new IllegalArgumentException("Unexpected value: " + entity.getCachedState().get(FlagBlock.FACING));
         }
         model1.render(matrices, vertexConsumer, light, overlay);
     }

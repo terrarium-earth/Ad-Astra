@@ -33,25 +33,19 @@ public class GlobeModel extends Model {
         ModelPartData modelPartData = modelData.getRoot();
 
         ModelPartData globe = modelPartData.addChild("globe",
-                ModelPartBuilder.create().uv(0, 16).cuboid(-7.0f, -16.0f, 1.0f, 8.0f, 12.0f, 0.0f, new Dilation(0.0f))
-                        .uv(0, 28).cuboid(-4.0f, -1.0f, -2.0f, 6.0f, 1.0f, 6.0f, new Dilation(0.0f)).uv(0, 35)
-                        .cuboid(-3.0f, -5.0f, -1.0f, 4.0f, 1.0f, 4.0f, new Dilation(0.0f)).uv(0, 0).cuboid(-2.0f, -4.0f,
-                                0.0f, 2.0f, 3.0f, 2.0f, new Dilation(0.0f)),
+                ModelPartBuilder.create().uv(0, 16).cuboid(-7.0f, -16.0f, 1.0f, 8.0f, 12.0f, 0.0f, new Dilation(0.0f)).uv(0, 28).cuboid(-4.0f, -1.0f, -2.0f, 6.0f, 1.0f, 6.0f, new Dilation(0.0f))
+                        .uv(0, 35).cuboid(-3.0f, -5.0f, -1.0f, 4.0f, 1.0f, 4.0f, new Dilation(0.0f)).uv(0, 0).cuboid(-2.0f, -4.0f, 0.0f, 2.0f, 3.0f, 2.0f, new Dilation(0.0f)),
                 ModelTransform.pivot(1.0f, 24.0f, -1.0f));
 
-        ModelPartData planet = globe.addChild("planet", ModelPartBuilder.create(),
-                ModelTransform.pivot(-1.0f, -10.0f, 1.0f));
+        ModelPartData planet = globe.addChild("planet", ModelPartBuilder.create(), ModelTransform.pivot(-1.0f, -10.0f, 1.0f));
 
-        planet.addChild("cube_r1",
-                ModelPartBuilder.create().uv(0, 0).cuboid(-4.0f, -4.0f, -4.0f, 8.0f, 8.0f, 8.0f, new Dilation(0.0f)),
-                ModelTransform.of(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f));
+        planet.addChild("cube_r1", ModelPartBuilder.create().uv(0, 0).cuboid(-4.0f, -4.0f, -4.0f, 8.0f, 8.0f, 8.0f, new Dilation(0.0f)), ModelTransform.of(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f));
 
         return TexturedModelData.of(modelData, 64, 64);
     }
 
     @Override
-    public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green,
-            float blue, float alpha) {
+    public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
         globe.render(matrices, vertices, light, overlay);
     }
 
@@ -61,7 +55,6 @@ public class GlobeModel extends Model {
 
     // Get model from client.
     public static GlobeModel getModel() {
-        return new GlobeModel(
-                MinecraftClient.getInstance().getEntityModelLoader().getModelPart(GlobeModel.LAYER_LOCATION));
+        return new GlobeModel(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(GlobeModel.LAYER_LOCATION));
     }
 }

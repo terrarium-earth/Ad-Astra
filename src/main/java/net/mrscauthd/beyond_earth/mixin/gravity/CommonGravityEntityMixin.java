@@ -9,11 +9,7 @@ import net.minecraft.entity.TntEntity;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.mrscauthd.beyond_earth.util.ModUtils;
 
-@Mixin({
-        AbstractMinecartEntity.class,
-        ItemEntity.class,
-        TntEntity.class
-})
+@Mixin({ AbstractMinecartEntity.class, ItemEntity.class, TntEntity.class })
 public abstract class CommonGravityEntityMixin {
     @ModifyConstant(method = "tick", constant = @Constant(doubleValue = -0.04))
     public double setGravity(double value) {

@@ -1,16 +1,11 @@
 {
-  "replace": false,
-  "values": [
-    "beyond_earth:moon_stone_brick_slab",
-	
-	"beyond_earth:mars_stone_brick_slab",
-	
-	"beyond_earth:mercury_stone_brick_slab",
-	
-	"beyond_earth:venus_sandstone_brick_slab",
-	
-	"beyond_earth:venus_stone_brick_slab",
-	
-	"beyond_earth:glacio_stone_brick_slab"
-  ]
+	"replace": false,
+	"values": [
+		"beyond_earth:moon_stone_brick_slab",
+		"beyond_earth:mars_stone_brick_slab",
+		"beyond_earth:mercury_stone_brick_slab",
+		"beyond_earth:venus_sandstone_brick_slab",
+		"beyond_earth:venus_stone_brick_slab",
+		"beyond_earth:glacio_stone_brick_slab"
+	]
 }

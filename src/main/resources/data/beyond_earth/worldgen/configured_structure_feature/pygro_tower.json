@@ -6,7 +6,5 @@
   },
   "biomes": "#beyond_earth:has_structure/pygro_tower_biomes",
   "adapt_noise": true,
-  "spawn_overrides": {
-
-  }
+  "spawn_overrides": {}
 }

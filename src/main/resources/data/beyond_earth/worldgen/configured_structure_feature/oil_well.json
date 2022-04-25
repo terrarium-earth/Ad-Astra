@@ -6,7 +6,5 @@
   },
   "biomes": "#beyond_earth:has_structure/oil_well_biomes",
   "adapt_noise": false,
-  "spawn_overrides": {
-
-  }
+  "spawn_overrides": {}
 }

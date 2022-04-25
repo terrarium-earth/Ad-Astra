@@ -24,8 +24,7 @@ public class PlanetSelectionUtil {
         DrawableHelper.drawTexture(matrices, x, y, 0, 0, width, height, width, height);
     }
 
-    public static void addRotatingTexture(PlanetSelectionScreen screen, MatrixStack matrices, int x, int y, int width,
-            int height, Identifier texture, float speed) {
+    public static void addRotatingTexture(PlanetSelectionScreen screen, MatrixStack matrices, int x, int y, int width, int height, Identifier texture, float speed) {
 
         matrices.push();
 

@@ -57,15 +57,13 @@ public class HammerShapelessRecipe extends ShapelessRecipe {
         public HammerShapelessRecipe read(Identifier id, JsonObject json) {
             ShapelessRecipe shapelessRecipe = super.read(id, json);
             String group = JsonHelper.getString(json, "group", "");
-            return new HammerShapelessRecipe(shapelessRecipe.getId(), group, shapelessRecipe.getOutput(),
-                    shapelessRecipe.getIngredients());
+            return new HammerShapelessRecipe(shapelessRecipe.getId(), group, shapelessRecipe.getOutput(), shapelessRecipe.getIngredients());
         }
 
         @Override
         public HammerShapelessRecipe read(Identifier id, PacketByteBuf buf) {
             ShapelessRecipe shapelessRecipe = super.read(id, buf);
-            return new HammerShapelessRecipe(shapelessRecipe.getId(), shapelessRecipe.getGroup(),
-                    shapelessRecipe.getOutput(), shapelessRecipe.getIngredients());
+            return new HammerShapelessRecipe(shapelessRecipe.getId(), shapelessRecipe.getGroup(), shapelessRecipe.getOutput(), shapelessRecipe.getIngredients());
         }
     }
 }

@@ -1,0 +1,11 @@
+{
+    "galaxy": "beyond_earth:milky_way",
+    "solar_system": "beyond_earth:solar_system",
+    "sun_type": "sun",
+    "planetary_rings": [ 
+        "beyond_earth:mercury",
+        "beyond_earth:venus",
+        "beyond_earth:earth",
+        "beyond_earth:mars"
+    ]
+}

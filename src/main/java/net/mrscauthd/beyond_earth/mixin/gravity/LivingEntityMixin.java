@@ -24,14 +24,13 @@ public abstract class LivingEntityMixin {
     @ModifyVariable(method = "handleFallDamage", at = @At("HEAD"), ordinal = 1)
     private float handleFallDamage(float damageMultiplier) {
         LivingEntity entity = ((LivingEntity) (Object) this);
-        return damageMultiplier * ModUtils.getPlanetGravity(entity.world.getRegistryKey());
+        return damageMultiplier * ModUtils.getPlanetGravity(false, entity.world.getRegistryKey());
     }
 
     @Inject(method = "handleFallDamage", at = @At("HEAD"), cancellable = true)
-    public void handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource,
-            CallbackInfoReturnable<Boolean> info) {
+    public void handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource, CallbackInfoReturnable<Boolean> info) {
         LivingEntity entity = ((LivingEntity) (Object) this);
-        if (fallDistance <= 3 / ModUtils.getPlanetGravity(entity.world.getRegistryKey())) {
+        if (fallDistance <= 3 / ModUtils.getPlanetGravity(false, entity.world.getRegistryKey())) {
             info.setReturnValue(false);
         }
     }

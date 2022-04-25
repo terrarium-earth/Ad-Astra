@@ -300,7 +300,6 @@
               }
             }
           },
-
           {
             "type": "minecraft:condition",
             "if_true": {
@@ -337,7 +336,6 @@
               }
             }
           },
-
           {
             "type": "minecraft:condition",
             "if_true": {

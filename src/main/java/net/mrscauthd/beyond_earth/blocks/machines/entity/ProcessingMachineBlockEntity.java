@@ -88,8 +88,7 @@ public abstract class ProcessingMachineBlockEntity extends AbstractMachineBlockE
             if (checkOutput) {
                 ItemStack outputSlot = this.getStack(1);
                 ItemStack output = recipe.getOutput();
-                if (!outputSlot.isEmpty() && !outputSlot.getItem().equals(recipe.getOutput().getItem())
-                        || outputSlot.getCount() + output.getCount() > outputSlot.getMaxCount()) {
+                if (!outputSlot.isEmpty() && !outputSlot.getItem().equals(recipe.getOutput().getItem()) || outputSlot.getCount() + output.getCount() > outputSlot.getMaxCount()) {
                     return null;
                 }
             }
