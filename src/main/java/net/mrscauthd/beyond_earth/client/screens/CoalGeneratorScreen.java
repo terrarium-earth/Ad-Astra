@@ -35,10 +35,8 @@ public class CoalGeneratorScreen extends AbstractMachineScreen<CoalGeneratorScre
 
         CoalGeneratorBlockEntity entity = (CoalGeneratorBlockEntity) blockEntity;
 
-        GuiUtil.drawFire(matrices, this.x + FIRE_LEFT, this.y + FIRE_TOP, entity.getCookTime(),
-                entity.getCookTimeTotal());
-        GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.blockEntity.getEnergy(),
-                this.blockEntity.getMaxGeneration());
+        GuiUtil.drawFire(matrices, this.x + FIRE_LEFT, this.y + FIRE_TOP, entity.getCookTime(), entity.getCookTimeTotal());
+        GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration());
     }
 
     @Override
@@ -49,14 +47,12 @@ public class CoalGeneratorScreen extends AbstractMachineScreen<CoalGeneratorScre
 
         // Energy tooltip.
         if (GuiUtil.isHover(this.getEnergyBounds(), mouseX, mouseY)) {
-            this.renderTooltip(matrices, new TranslatableText("gauge_text.beyond_earth.storage",
-                    this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration()), mouseX, mouseY);
+            this.renderTooltip(matrices, new TranslatableText("gauge_text.beyond_earth.storage", this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration()), mouseX, mouseY);
         }
 
         // Burn time tooltip.
         if (GuiUtil.isHover(this.getFireBounds(), mouseX, mouseY)) {
-            this.renderTooltip(matrices, new TranslatableText("gauge.beyond_earth.burn_time", entity.getCookTime(),
-                    entity.getCookTimeTotal()), mouseX, mouseY);
+            this.renderTooltip(matrices, new TranslatableText("gauge.beyond_earth.burn_time", entity.getCookTime(), entity.getCookTimeTotal()), mouseX, mouseY);
         }
     }
 

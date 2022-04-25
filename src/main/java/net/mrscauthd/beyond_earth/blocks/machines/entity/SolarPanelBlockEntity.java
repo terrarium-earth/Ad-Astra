@@ -49,8 +49,7 @@ public class SolarPanelBlockEntity extends AbstractMachineBlockEntity {
     public static void serverTick(World world, BlockPos pos, BlockState state, AbstractMachineBlockEntity blockEntity) {
         if (blockEntity.useEnergy()) {
             // Check solar panel conditions.
-            if (world.isDay() && !world.isRaining() && !world.isThundering()
-                    && world.isSkyVisible(blockEntity.getPos().up())) {
+            if (world.isDay() && !world.isRaining() && !world.isThundering() && world.isSkyVisible(blockEntity.getPos().up())) {
                 blockEntity.cumulateEnergy();
             }
 

@@ -18,10 +18,9 @@ import net.mrscauthd.beyond_earth.util.ModUtils;
 public class CampfireBlockEntityMixin {
 
     @Inject(at = @At(value = "HEAD"), method = "litServerTick")
-    private static void litServerTick(World world, BlockPos pos, BlockState state, CampfireBlockEntity campfire,
-            CallbackInfo info) {
+    private static void litServerTick(World world, BlockPos pos, BlockState state, CampfireBlockEntity campfire, CallbackInfo info) {
         // Extinguish the campfire in dimensions with no oxygen.
-        if (!ModUtils.dimensionHasOxygen(world)) {
+        if (!ModUtils.dimensionHasOxygen(false, world.getRegistryKey())) {
             world.setBlockState(pos, state.with(CampfireBlock.LIT, false), 3);
             world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1, 1);
         }

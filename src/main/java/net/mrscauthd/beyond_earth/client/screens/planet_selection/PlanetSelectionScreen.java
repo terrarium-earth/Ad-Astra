@@ -2,6 +2,7 @@ package net.mrscauthd.beyond_earth.client.screens.planet_selection;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
@@ -11,7 +12,8 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.minecraft.client.gui.screen.ingame.HandledScreen;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screen.ingame.ScreenHandlerProvider;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
@@ -20,34 +22,25 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.world.World;
 import net.mrscauthd.beyond_earth.BeyondEarth;
+import net.mrscauthd.beyond_earth.client.BeyondEarthClient;
+import net.mrscauthd.beyond_earth.data.ButtonColour;
+import net.mrscauthd.beyond_earth.data.Planet;
+import net.mrscauthd.beyond_earth.data.SolarSystem;
 import net.mrscauthd.beyond_earth.gui.screen_handlers.PlanetSelectionScreenHandler;
 import net.mrscauthd.beyond_earth.networking.ModC2SPackets;
 import net.mrscauthd.beyond_earth.util.ModIdentifier;
-import net.mrscauthd.beyond_earth.util.ModUtils;
-import net.mrscauthd.beyond_earth.util.PlanetFacts;
 
 @Environment(EnvType.CLIENT)
-public class PlanetSelectionScreen extends HandledScreen<PlanetSelectionScreenHandler> {
+public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvider<PlanetSelectionScreenHandler> {
 
+        // Textures.
         public static final Identifier BACKGROUND_TEXTURE = new ModIdentifier("textures/screens/planet_selection.png");
 
         public static final Identifier MILKY_WAY_TEXTURE = new ModIdentifier("textures/sky/gui/milky_way.png");
 
         public static final Identifier SUN_SOLAR_SYSTEM_TEXTURE = new ModIdentifier("textures/solar_system.png");
-        public static final Identifier PROXIMA_CENTAURI_SOLAR_SYSTEM_TEXTURE = new ModIdentifier(
-                        "textures/proxima_centauri.png");
-
-        public static final Identifier SUN_TEXTURE = new ModIdentifier("textures/sky/gui/sun.png");
-        public static final Identifier BLUE_SUN_TEXTURE = new ModIdentifier("textures/sky/gui/blue_sun.png");
-        public static final Identifier MARS_TEXTURE = new ModIdentifier("textures/sky/gui/mars.png");
-        public static final Identifier EARTH_TEXTURE = new ModIdentifier("textures/sky/gui/earth.png");
-        public static final Identifier VENUS_TEXTURE = new ModIdentifier("textures/sky/gui/venus.png");
-        public static final Identifier MERCURY_TEXTURE = new ModIdentifier("textures/sky/gui/mercury.png");
-        public static final Identifier GLACIO_TEXTURE = new ModIdentifier("textures/sky/gui/glacio.png");
+        public static final Identifier PROXIMA_CENTAURI_SOLAR_SYSTEM_TEXTURE = new ModIdentifier("textures/proxima_centauri.png");
 
         public static final Identifier SMALL_MENU_LIST = new ModIdentifier("textures/rocket_menu_list.png");
         public static final Identifier LARGE_MENU_TEXTURE = new ModIdentifier("textures/rocket_menu_list_2.png");
@@ -55,21 +48,6 @@ public class PlanetSelectionScreen extends HandledScreen<PlanetSelectionScreenHa
         // Text.
         public static final Text CATALOG_TEXT = PlanetSelectionUtil.createText("catalog");
         public static final Text BACK_TEXT = PlanetSelectionUtil.createText("back");
-
-        public static final Text SUN_TEXT = PlanetSelectionUtil.createText("sun");
-        public static final Text PROXIMA_CENTAURI_TEXT = PlanetSelectionUtil.createText("proxima_centauri");
-
-        public static final Text SOLAR_SYSTEM_TEXT = PlanetSelectionUtil.createText("solar_system");
-
-        public static final Text SOLAR_SYSTEM_SUN_TEXT = PlanetSelectionUtil.createText("solar_system_sun");
-        public static final Text SOLAR_SYSTEM_PROXIMA_CENTAURI_TEXT = PlanetSelectionUtil
-                        .createText("solar_system_proxima_centauri");
-
-        public static final Text EARTH_TEXT = PlanetSelectionUtil.createText("earth");
-        public static final Text MARS_TEXT = PlanetSelectionUtil.createText("mars");
-        public static final Text MERCURY_TEXT = PlanetSelectionUtil.createText("mercury");
-        public static final Text VENUS_TEXT = PlanetSelectionUtil.createText("venus");
-        public static final Text GLACIO_TEXT = PlanetSelectionUtil.createText("glacio");
 
         public static final Text PLANET_TEXT = PlanetSelectionUtil.createText("planet");
         public static final Text MOON_TEXT = PlanetSelectionUtil.createText("moon");
@@ -90,100 +68,107 @@ public class PlanetSelectionScreen extends HandledScreen<PlanetSelectionScreenHa
         public static final Text OXYGEN_FALSE_TEXT = PlanetSelectionUtil.createText("oxygen.false");
         public static final Text ITEM_REQUIREMENT_TEXT = PlanetSelectionUtil.createText("item_requirement");
 
-        public static final Text ROCKET_TIER_1_TEXT = new TranslatableText(
-                        "entity." + BeyondEarth.MOD_ID + ".rocket_t" + 1);
-        public static final Text ROCKET_TIER_2_TEXT = new TranslatableText(
-                        "entity." + BeyondEarth.MOD_ID + ".rocket_t" + 2);
-        public static final Text ROCKET_TIER_3_TEXT = new TranslatableText(
-                        "entity." + BeyondEarth.MOD_ID + ".rocket_t" + 3);
-        public static final Text ROCKET_TIER_4_TEXT = new TranslatableText(
-                        "entity." + BeyondEarth.MOD_ID + ".rocket_t" + 4);
+        public static final Text ROCKET_TIER_1_TEXT = new TranslatableText("entity." + BeyondEarth.MOD_ID + ".rocket_t" + 1);
+        public static final Text ROCKET_TIER_2_TEXT = new TranslatableText("entity." + BeyondEarth.MOD_ID + ".rocket_t" + 2);
+        public static final Text ROCKET_TIER_3_TEXT = new TranslatableText("entity." + BeyondEarth.MOD_ID + ".rocket_t" + 3);
+        public static final Text ROCKET_TIER_4_TEXT = new TranslatableText("entity." + BeyondEarth.MOD_ID + ".rocket_t" + 4);
+
+        private final PlanetSelectionScreenHandler handler;
 
         private final Map<Category, LinkedList<PlanetSelectionButton>> categoryButtons = new HashMap<>();
-        PlanetSelectionButton backButton;
+        private PlanetSelectionButton backButton;
+
         private Category currentCategory = Category.MILKY_WAY_CATEGORY;
 
         private float guiTime;
 
-        public PlanetSelectionScreen(PlanetSelectionScreenHandler handler, PlayerInventory inventory, Text title) {
-                super(handler, inventory, title);
+        List<Category> solarSystemsCategories = new LinkedList<>();
 
-                this.backgroundWidth = 512;
-                this.backgroundHeight = 512;
+        public PlanetSelectionScreen(PlanetSelectionScreenHandler handler, PlayerInventory inventory, Text title) {
+                super(title);
+                this.handler = handler;
         }
 
         @Override
         public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-                this.renderBackground(matrices);
+
+                this.renderBackground(matrices, mouseX, mouseY, delta);
                 super.render(matrices, mouseX, mouseY, delta);
-                this.drawMouseoverTooltip(matrices, mouseX, mouseY);
 
                 // Catalog text.
                 this.textRenderer.draw(matrices, CATALOG_TEXT, 24, (this.height / 2.0f) - 143.0f / 2.0f, -1);
         }
 
-        @Override
-        public void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
-
-                // For rotations.
-                this.guiTime += delta;
+        private void renderBackground(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+                super.renderBackground(matrices);
 
                 RenderSystem.setShader(GameRenderer::getPositionTexShader);
                 RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
                 RenderSystem.enableBlend();
                 RenderSystem.defaultBlendFunc();
 
-                // Planet selection background.
+                // For rotations.
+                this.guiTime += delta;
+
+                // // Planet selection background.
                 PlanetSelectionUtil.addTexture(matrices, 0, 0, this.width, this.height, BACKGROUND_TEXTURE);
 
+                int currentPage = this.getPage();
+
+                SolarSystem solarSystem = null;
+                for (SolarSystem system : BeyondEarthClient.solarSystems) {
+                        if (this.currentCategory.id().equals(system.solarSystem())) {
+                                solarSystem = system;
+                                break;
+                        }
+                }
+
+                switch (currentPage) {
+                case 1 -> {
+                        PlanetSelectionUtil.addRotatingTexture(this, matrices, -125, -125, 250, 250, MILKY_WAY_TEXTURE, 0.6f);
+                }
                 // Render the Solar System when inside the Solar System category.
-                if (this.currentCategory.solarSystemType().equals(Category.SOLAR_SYSTEM_TYPE)) {
-                        PlanetSelectionUtil.addTexture(matrices, (this.width - 185) / 2, (this.height - 185) / 2, 185,
-                                        185,
-                                        SUN_SOLAR_SYSTEM_TEXTURE);
-                        PlanetSelectionUtil.addTexture(matrices, (this.width - 15) / 2, (this.height - 15) / 2, 15, 15,
-                                        SUN_TEXTURE);
-                        // orbit the planets along the sun.
-                        PlanetSelectionUtil.addRotatingTexture(this, matrices, -21, -21, 10, 10, MERCURY_TEXTURE,
-                                        PlanetFacts.EARTH_CYCLE / PlanetFacts.MERCURY_CYCLE);
-                        PlanetSelectionUtil.addRotatingTexture(this, matrices, -37, -37, 10, 10, VENUS_TEXTURE,
-                                        PlanetFacts.EARTH_CYCLE / PlanetFacts.VENUS_CYCLE);
-                        PlanetSelectionUtil.addRotatingTexture(this, matrices, -54, -54, 10, 10, EARTH_TEXTURE,
-                                        PlanetFacts.EARTH_CYCLE / PlanetFacts.EARTH_CYCLE);
-                        PlanetSelectionUtil.addRotatingTexture(this, matrices, -70, -70, 10, 10, MARS_TEXTURE,
-                                        PlanetFacts.EARTH_CYCLE / PlanetFacts.MARS_CYCLE);
+                case 2, 3 -> {
 
-                } else if (this.currentCategory.solarSystemType().equals(Category.PROXIMA_CENTAURI_TYPE)) {
-                        PlanetSelectionUtil.addTexture(matrices, (this.width - 185) / 2, (this.height - 185) / 2, 185,
-                                        185,
-                                        PROXIMA_CENTAURI_SOLAR_SYSTEM_TEXTURE);
-                        PlanetSelectionUtil.addTexture(matrices, (this.width - 15) / 2, (this.height - 15) / 2, 15, 15,
-                                        BLUE_SUN_TEXTURE);
-                        // orbit the planets along the blue sun.
-                        PlanetSelectionUtil.addRotatingTexture(this, matrices, -21, -21, 10, 10, GLACIO_TEXTURE,
-                                        PlanetFacts.EARTH_CYCLE / PlanetFacts.GLACIO_CYCLE);
+                        // if (planet != null && solarSystem != null) {
+                        if (solarSystem != null) {
 
-                } else if (this.currentCategory.solarSystemType().equals(Category.MILKY_WAY_TYPE)) {
-                        // Rotate Milky Way.
-                        PlanetSelectionUtil.addRotatingTexture(this, matrices, -125, -125, 250, 250, MILKY_WAY_TEXTURE,
-                                        0.6f);
+                                int rings = solarSystem.planetaryRings().size();
+
+                                // Rings.
+                                PlanetSelectionUtil.addTexture(matrices, (this.width - 185) / 2, (this.height - 185) / 2, 185, 185, SUN_SOLAR_SYSTEM_TEXTURE);
+                                // Sun.
+                                PlanetSelectionUtil.addTexture(matrices, (this.width - 15) / 2, (this.height - 15) / 2, 15, 15, new ModIdentifier("textures/sky/gui/" + solarSystem.sunType().toString().toLowerCase() + ".png"));
+
+                                // Planets.
+                                for (int i = 0; i < solarSystem.planetaryRings().size(); i++) {
+                                        int days = 1;
+                                        int coordinates = -21 - (i * 16);
+                                        Identifier texture = solarSystem.planetaryRings().get(i);
+                                        for (Planet currentPlanet : BeyondEarthClient.planets) {
+                                                if (texture.getPath().equals(currentPlanet.name())) {
+                                                        days = currentPlanet.daysInYear();
+                                                        break;
+                                                }
+                                        }
+                                        PlanetSelectionUtil.addRotatingTexture(this, matrices, coordinates, coordinates, 10, 10, new ModIdentifier("textures/sky/gui/" + texture.getPath() + ".png"), 365 / (float)days);
+                                }
+                        }
+                }
                 }
 
                 // Display either the small or large menu when a planet category is opened.
-                Category parent = this.currentCategory.parent();
-                if (parent != null && parent.parent() != null) {
-                        PlanetSelectionUtil.addTexture(matrices, 0, (this.height / 2) - 177 / 2, 215, 177,
-                                        LARGE_MENU_TEXTURE);
+                if (currentPage == 3) {
+                        PlanetSelectionUtil.addTexture(matrices, 0, (this.height / 2) - 177 / 2, 215, 177, LARGE_MENU_TEXTURE);
                 } else {
-                        PlanetSelectionUtil.addTexture(matrices, 0, (this.height / 2) - 177 / 2, 105, 177,
-                                        SMALL_MENU_LIST);
+                        PlanetSelectionUtil.addTexture(matrices, 0, (this.height / 2) - 177 / 2, 105, 177, SMALL_MENU_LIST);
                 }
 
                 // Disable the back button when there is nothing to go back to.
-                backButton.visible = parent != null;
+                this.backButton.visible = this.currentCategory.parent() != null;
+
                 // Disable buttons that are not part of the current category.
-                this.categoryButtons.forEach((category, buttons) -> buttons
-                                .forEach((button) -> button.visible = category.equals(this.currentCategory)));
+                this.categoryButtons.forEach((category, buttons) -> buttons.forEach((button) -> button.visible = currentCategory.equals(category)));
 
                 RenderSystem.disableBlend();
         }
@@ -192,70 +177,43 @@ public class PlanetSelectionScreen extends HandledScreen<PlanetSelectionScreenHa
         protected void init() {
                 super.init();
 
-                // Set the initial gui time to the world time. This creates a random start
-                // position for each rotating object.
+                // Set the initial gui time to the world time. This creates a random start position for each
+                // rotating object.
                 guiTime = client.world.getTime();
 
-                // Back button.
-                backButton = new PlanetSelectionButton(this.height / 2 - 33, ButtonColour.DARK_BLUE, BACK_TEXT,
-                                PlanetSelectionButton.TooltipType.NONE, 0, ButtonSize.NORMAL, null, button -> {
-                                        if (currentCategory.parent() != null) {
-                                                currentCategory = currentCategory.parent();
-                                        }
-                                });
-
-                // Milky way.
-                this.createButton(ButtonColour.BLUE, SOLAR_SYSTEM_SUN_TEXT, Category.MILKY_WAY_CATEGORY,
-                                Category.SOLAR_SYSTEM_CATEGORY, PlanetSelectionButton.TooltipType.CATEGORY, 1,
-                                ButtonSize.NORMAL);
-                this.createButton(ButtonColour.BLUE, SOLAR_SYSTEM_PROXIMA_CENTAURI_TEXT, Category.MILKY_WAY_CATEGORY,
-                                Category.PROXIMA_CENTAURI_CATEGORY, PlanetSelectionButton.TooltipType.CATEGORY, 4,
-                                ButtonSize.NORMAL);
-
-                // Solar System.
-                this.createButton(ButtonColour.GREEN, EARTH_TEXT, Category.SOLAR_SYSTEM_CATEGORY,
-                                Category.EARTH_CATEGORY,
-                                PlanetSelectionButton.TooltipType.CATEGORY, 1, ButtonSize.NORMAL);
-                this.createButton(ButtonColour.GREEN, MARS_TEXT, Category.SOLAR_SYSTEM_CATEGORY, Category.MARS_CATEGORY,
-                                PlanetSelectionButton.TooltipType.CATEGORY, 2, ButtonSize.NORMAL);
-                this.createButton(ButtonColour.GREEN, VENUS_TEXT, Category.SOLAR_SYSTEM_CATEGORY,
-                                Category.VENUS_CATEGORY,
-                                PlanetSelectionButton.TooltipType.CATEGORY, 3, ButtonSize.NORMAL);
-                this.createButton(ButtonColour.GREEN, MERCURY_TEXT, Category.SOLAR_SYSTEM_CATEGORY,
-                                Category.MERCURY_CATEGORY,
-                                PlanetSelectionButton.TooltipType.CATEGORY, 3, ButtonSize.NORMAL);
-
-                // Proxima Centauri.
-                this.createButton(ButtonColour.RED, GLACIO_TEXT, Category.PROXIMA_CENTAURI_CATEGORY,
-                                Category.GLACIO_CATEGORY,
-                                PlanetSelectionButton.TooltipType.CATEGORY, 4, ButtonSize.NORMAL);
-
-                // Earth.
-                this.createOrbitButton(ButtonColour.BLUE, EARTH_TEXT, Category.EARTH_CATEGORY,
-                                PlanetSelectionButton.TooltipType.PLANET_STAT, 1, ButtonSize.NORMAL,
-                                World.OVERWORLD.getValue());
-                this.createOrbitButton(ButtonColour.BLUE, MOON_TEXT, Category.EARTH_CATEGORY,
-                                PlanetSelectionButton.TooltipType.PLANET_STAT, 1, ButtonSize.NORMAL, ModUtils.MOON);
-
-                // Mars.
-                this.createOrbitButton(ButtonColour.BLUE, MARS_TEXT, Category.MARS_CATEGORY,
-                                PlanetSelectionButton.TooltipType.PLANET_STAT, 2, ButtonSize.NORMAL, ModUtils.MARS);
-
-                // Venus.
-                this.createOrbitButton(ButtonColour.BLUE, VENUS_TEXT, Category.VENUS_CATEGORY,
-                                PlanetSelectionButton.TooltipType.PLANET_STAT, 2, ButtonSize.NORMAL, ModUtils.VENUS);
-
-                // Mercury.
-                this.createOrbitButton(ButtonColour.BLUE, MERCURY_TEXT, Category.MERCURY_CATEGORY,
-                                PlanetSelectionButton.TooltipType.PLANET_STAT, 3, ButtonSize.NORMAL, ModUtils.MERCURY);
-
-                // Glacio.
-                this.createOrbitButton(ButtonColour.BLUE, GLACIO_TEXT, Category.GLACIO_CATEGORY,
-                                PlanetSelectionButton.TooltipType.PLANET_STAT, 4, ButtonSize.NORMAL, ModUtils.GLACIO);
-
-                // Add all category buttons.
+                // The back button. It is always element [0] in the buttons list.
+                this.backButton = new PlanetSelectionButton(10, this.height / 2 - 33, BACK_TEXT, ButtonSize.NORMAL, ButtonColour.DARK_BLUE, pressed -> {
+                        if (currentCategory.parent() != null) {
+                                currentCategory = currentCategory.parent();
+                        }
+                });
                 this.addDrawableChild(backButton);
-                categoryButtons.forEach((category, buttons) -> buttons.forEach(this::addDrawableChild));
+
+                List<Planet> planets = BeyondEarthClient.planets;
+                planets.forEach(planet -> {
+                        if (this.handler.getTier() >= planet.rocketTier()) {
+                                Category galaxyCategory = new Category(planet.galaxy(), null);
+                                Category solarSystemCategory = new Category(planet.solarSystem(), galaxyCategory);
+                                Category planetCategory = new Category(planet.parentDimension() == null ? planet.dimension().getValue() : planet.parentDimension().getValue(), solarSystemCategory);
+
+                                String name = planet.name();
+                                Text label = PlanetSelectionUtil.createText(name);
+
+                                if (!solarSystemsCategories.contains(solarSystemCategory)) {
+                                        solarSystemsCategories.add(solarSystemCategory);
+                                }
+
+                                if (planet.parentDimension() == null) {
+                                        createNavigationButton(label, solarSystemCategory, ButtonSize.NORMAL, planet.buttonColour(), planetCategory);
+                                }
+
+                                createTeleportButton(1, label, planetCategory, ButtonSize.NORMAL, ButtonColour.BLUE, planet.dimension().getValue());
+                                createTeleportButton(2, ORBIT_TEXT, planetCategory, ButtonSize.SMALL, ButtonColour.BLUE, planet.orbitDimension().getValue());
+                                createSpaceStationTeleportButton(3, SPACE_STATION_TEXT, planetCategory, ButtonSize.NORMAL, ButtonColour.GREEN, planet.orbitDimension().getValue());
+                        }
+                });
+
+                this.solarSystemsCategories.forEach((solarSystemCategory -> createSolarSystemButton(solarSystemCategory)));
         }
 
         @Override
@@ -263,96 +221,108 @@ public class PlanetSelectionScreen extends HandledScreen<PlanetSelectionScreenHa
                 return true;
         }
 
-        // Navigation button.
-        private void createButton(ButtonColour type, Text message, Category category, Category child,
-                        PlanetSelectionButton.TooltipType tooltip, int minTier, ButtonSize size) {
-                createButton(type, message, category, tooltip, minTier, size, null,
-                                pressed -> this.currentCategory = child);
+        private void createSolarSystemButton(Category solarSystemCategory) {
+                String name = solarSystemCategory.id().getPath();
+                Text label = PlanetSelectionUtil.createText(name);
+                Category category = new Category(solarSystemCategory.parent().id(), null);
+                createNavigationButton(label, category, ButtonSize.NORMAL, ButtonColour.BLUE, solarSystemCategory);
         }
 
-        // Teleports the player to a dimension.
-        private void createOrbitButton(ButtonColour type, Text message, Category category,
-                        PlanetSelectionButton.TooltipType tooltip, int minTier, ButtonSize size,
-                        Identifier targetDimension) {
-                createButton(type, message, category, tooltip, minTier, size,
-                                RegistryKey.of(Registry.WORLD_KEY, targetDimension),
-                                pressed -> {
-                                        this.client.player.closeHandledScreen();
-                                        PacketByteBuf buf = PacketByteBufs.create();
-                                        buf.writeIdentifier(targetDimension);
-                                        // Tell the server to teleport the player after the button has been pressed.
-                                        ClientPlayNetworking.send(ModC2SPackets.TELEPORT_TO_PLANET_PACKET_ID, buf);
-                                });
-
+        private void createNavigationButton(Text label, Category category, ButtonSize size, ButtonColour colour, Category target) {
+                createButton(label, category, size, colour, press -> {
+                        this.currentCategory = target;
+                });
         }
 
-        private void createButton(ButtonColour type, Text message, Category category,
-                        PlanetSelectionButton.TooltipType tooltip, int minTier, ButtonSize size,
-                        RegistryKey<World> world,
-                        Consumer<ButtonWidget> consumer) {
-                // Only add the button if the rocket is a high enough tier.
-                if (this.handler.getTier() >= minTier) {
-                        LinkedList<PlanetSelectionButton> buttons = this.categoryButtons.get(category);
+        private void createSpaceStationTeleportButton(int row, Text label, Category category, ButtonSize size, ButtonColour colour, Identifier targetDimension) {
+                // TODO
+                createTeleportButton(row, label, category, size, colour, targetDimension);
+        }
 
-                        if (buttons == null) {
-                                buttons = new LinkedList<>();
-                        }
-
-                        int index = buttons.size() + 1;
-                        int startY = this.height / 2 - 55;
-                        int y = startY + 22 * index + (category.parent() != null ? 22 : 0);
-
-                        PlanetSelectionButton button = new PlanetSelectionButton(y, type, message, tooltip, minTier,
-                                        size, world,
-                                        pressed -> consumer.accept(pressed));
-
-                        buttons.add(button);
-                        this.categoryButtons.put(category, buttons);
+        private void createTeleportButton(int row, Text label, Category category, ButtonSize size, ButtonColour colour, Identifier targetDimension) {
+                int newRow = 0;
+                if (row == 2) {
+                        newRow = 76;
+                } else if (row == 3) {
+                        newRow = 118;
                 }
+
+                LinkedList<PlanetSelectionButton> buttons = this.categoryButtons.getOrDefault(category, new LinkedList<>());
+
+                int column = getColumn(category) - (row - 1) * 22;
+                column -= 44 * (buttons.size() / 3);
+                createButton(newRow + 10, column, label, category, size, colour, press -> {
+                        this.client.player.closeHandledScreen();
+                        PacketByteBuf buf = PacketByteBufs.create();
+                        buf.writeIdentifier(targetDimension);
+                        // Tell the server to teleport the player after the button has been pressed.
+                        ClientPlayNetworking.send(ModC2SPackets.TELEPORT_TO_PLANET_PACKET_ID, buf);
+                });
+        }
+
+        private PlanetSelectionButton createButton(Text label, Category category, ButtonSize size, ButtonColour colour, Consumer<ButtonWidget> onClick) {
+                return createButton(10, label, category, size, colour, onClick);
+        }
+
+        private PlanetSelectionButton createButton(int row, Text label, Category category, ButtonSize size, ButtonColour colour, Consumer<ButtonWidget> onClick) {
+
+                int column = getColumn(category);
+                return createButton(row, column, label, category, size, colour, onClick);
+        }
+
+        private PlanetSelectionButton createButton(int row, int column, Text label, Category category, ButtonSize size, ButtonColour colour, Consumer<ButtonWidget> onClick) {
+
+                LinkedList<PlanetSelectionButton> buttons = this.categoryButtons.getOrDefault(category, new LinkedList<>());
+
+                PlanetSelectionButton button = new PlanetSelectionButton(row, column, label, size, colour, pressed -> onClick.accept(pressed));
+                this.addDrawableChild(button);
+
+                buttons.add(button);
+                categoryButtons.put(category, buttons);
+                return button;
+        }
+
+        private int getPage() {
+                Category category = this.currentCategory;
+                if (category.parent() == null) {
+                        // Galaxy screen.
+                        return 1;
+                } else if (category.parent().parent() == null) {
+                        // Solar system screen.
+                        return 2;
+                } else if (category.parent().parent().parent() == null) {
+                        // Planet screen.
+                        return 3;
+                }
+                // Should never be called.
+                BeyondEarth.LOGGER.warn("Invalid page!");
+                return 0;
+        }
+
+        private int getColumn(Category category) {
+                LinkedList<PlanetSelectionButton> buttons = this.categoryButtons.getOrDefault(category, new LinkedList<>());
+                int index = buttons.size() + 1;
+                int startY = this.height / 2 - 55;
+                return startY + 22 * index + (category.parent() != null ? 22 : 0);
+        }
+
+        public int getActiveButtons() {
+                int activeButtons = 0;
+                for (List<PlanetSelectionButton> buttons : this.categoryButtons.values()) {
+                        for (PlanetSelectionButton button : buttons)
+                                if (button.active) {
+                                        activeButtons++;
+                                }
+                }
+                return activeButtons;
         }
 
         public float getGuiTime() {
                 return this.guiTime;
         }
 
-        // Colour of the button.
-        public enum ButtonColour {
-                GREEN(74.0f, 156.0f, 64.0f, 255.0f),
-                RED(166.0f, 47.0f, 48.0f, 255.0f),
-                DARK_BLUE(51.0f, 94.0f, 189.0f, 255.0f),
-                BLUE(75.0f, 158.0f, 217.0f, 255.0f);
-
-                private ModUtils.ColourHolder colour;
-
-                private ButtonColour(float r, float g, float b, float a) {
-                        this.colour = new ModUtils.ColourHolder(r / 255.0f + 0.1f, g / 255.0f + 0.1f, b / 255.0f + 0.1f,
-                                        a / 255.0f + 0.1f);
-                }
-
-                public ModUtils.ColourHolder getColour() {
-                        return this.colour;
-                }
-        }
-
-        public enum ButtonSize {
-                LARGE(75, 20),
-                NORMAL(71, 20),
-                SMALL(37, 20);
-
-                private int width;
-                private int height;
-
-                private ButtonSize(int width, int height) {
-                        this.width = width;
-                        this.height = height;
-                }
-
-                public int getWidth() {
-                        return this.width;
-                }
-
-                public int getHeight() {
-                        return this.height;
-                }
+        @Override
+        public PlanetSelectionScreenHandler getScreenHandler() {
+                return this.handler;
         }
 }

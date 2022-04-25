@@ -6,7 +6,5 @@
   },
   "biomes": "#beyond_earth:has_structure/alien_village_biomes",
   "adapt_noise": false,
-  "spawn_overrides": {
-
-  }
+  "spawn_overrides": {}
 }

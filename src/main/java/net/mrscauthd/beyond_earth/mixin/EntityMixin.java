@@ -20,8 +20,8 @@ public abstract class EntityMixin {
         // orbit dimension.
         RegistryKey<World> key = entity.world.getRegistryKey();
 
-        if (entity.getY() < entity.world.getBottomY() && ModUtils.isOrbitDimension(key)) {
-            ModUtils.teleportToPlanet(key, entity);
+        if (entity.getY() < entity.world.getBottomY() && ModUtils.isOrbitDimension(false, key)) {
+            ModUtils.teleportToWorld(ModUtils.getPlanetOrbit(false, key), entity);
         }
     }
 }

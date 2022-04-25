@@ -31,8 +31,7 @@ public class CompressingRecipe extends ModRecipe {
 
         @Override
         public CompressingRecipe read(Identifier id, JsonObject json) {
-            Item item = Registry.ITEM
-                    .get(new Identifier(json.get("output").getAsJsonObject().get("item").getAsString()));
+            Item item = Registry.ITEM.get(new Identifier(json.get("output").getAsJsonObject().get("item").getAsString()));
             short stackSize = json.get("output").getAsJsonObject().get("count").getAsShort();
 
             Ingredient input = Ingredient.fromJson(json.get("input"));

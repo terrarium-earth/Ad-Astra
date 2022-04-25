@@ -34,9 +34,7 @@ public class CompressorBlock extends AbstractMachineBlock {
 
     @Nullable
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state,
-            BlockEntityType<T> type) {
-        return world.isClient ? null
-                : checkType(type, ModBlockEntities.COMPRESSOR_ENTITY, CompressorBlockEntity::serverTick);
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        return world.isClient ? null : checkType(type, ModBlockEntities.COMPRESSOR_ENTITY, CompressorBlockEntity::serverTick);
     }
 }

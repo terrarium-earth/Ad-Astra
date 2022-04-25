@@ -36,10 +36,8 @@ public class CompressorScreen extends AbstractMachineScreen<CompressorScreenHand
 
         CompressorBlockEntity entity = (CompressorBlockEntity) blockEntity;
 
-        GuiUtil.drawArrow(matrices, this.x + ARROW_LEFT, this.y + ARROW_TOP, entity.getCookTime(),
-                entity.getCookTimeTotal());
-        GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.blockEntity.getEnergy(),
-                this.blockEntity.getMaxGeneration());
+        GuiUtil.drawArrow(matrices, this.x + ARROW_LEFT, this.y + ARROW_TOP, entity.getCookTime(), entity.getCookTimeTotal());
+        GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration());
     }
 
     @Override
@@ -50,14 +48,12 @@ public class CompressorScreen extends AbstractMachineScreen<CompressorScreenHand
 
         // Energy tooltip.
         if (GuiUtil.isHover(this.getEnergyBounds(), mouseX, mouseY)) {
-            this.renderTooltip(matrices, new TranslatableText("gauge_text.beyond_earth.storage",
-                    this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration()), mouseX, mouseY);
+            this.renderTooltip(matrices, new TranslatableText("gauge_text.beyond_earth.storage", this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration()), mouseX, mouseY);
         }
 
         // Burn time tooltip.
         if (GuiUtil.isHover(this.getArrowBounds(), mouseX, mouseY)) {
-            this.renderTooltip(matrices, new TranslatableText("gauge.beyond_earth.cook_time", entity.getCookTime(),
-                    entity.getCookTimeTotal()), mouseX, mouseY);
+            this.renderTooltip(matrices, new TranslatableText("gauge.beyond_earth.cook_time", entity.getCookTime(), entity.getCookTimeTotal()), mouseX, mouseY);
         }
     }
 

@@ -1,10 +1,18 @@
 package net.mrscauthd.beyond_earth;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.registry.Registry;
+import net.mrscauthd.beyond_earth.data.Planet;
+import net.mrscauthd.beyond_earth.data.PlanetData;
+import net.mrscauthd.beyond_earth.data.SolarSystem;
 import net.mrscauthd.beyond_earth.networking.ModC2SPackets;
 import net.mrscauthd.beyond_earth.registry.ModArmour;
 import net.mrscauthd.beyond_earth.registry.ModBiomes;
@@ -25,6 +33,10 @@ public class BeyondEarth implements ModInitializer {
 
     public static final String MOD_ID = "beyond_earth";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+    @Environment(EnvType.SERVER)
+    public static List<Planet> planets = new ArrayList<>();
+    @Environment(EnvType.SERVER)
+    public static List<SolarSystem> solarSystems = new ArrayList<>();
 
     @Override
     public void onInitialize() {
@@ -38,6 +50,9 @@ public class BeyondEarth implements ModInitializer {
         ModRecipes.register();
         ModScreenHandlers.register();
         ModCommands.register();
+
+        // Data.
+        PlanetData.register();
 
         // Worldgen.
         ModBiomes.register();

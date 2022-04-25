@@ -338,5 +338,7 @@
   "gauge.beyond_earth.cooktime": "Cook Time",
   "gauge.beyond_earth.oxygenloading": "Loading",
 
-  "_eof": "eof"
+  "_eof": "eof",
+
+  "gui.beyond_earth.planet_selection.nether": "Addon"
 }

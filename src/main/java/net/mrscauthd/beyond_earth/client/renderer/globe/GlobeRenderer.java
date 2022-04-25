@@ -25,8 +25,7 @@ public class GlobeRenderer {
     public static final Identifier GLACIO_GLOBE = new ModIdentifier("textures/blocks/globes/glacio_globe.png");
 
     // Render model.
-    public static void render(Identifier id, GlobeModel model, Direction direction, MatrixStack matrices,
-            VertexConsumerProvider vertexConsumers, int light, int overlay) {
+    public static void render(Identifier id, GlobeModel model, Direction direction, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
 
         // Get the texture.
         VertexConsumer vertexConsumer;

@@ -31,10 +31,10 @@ public class SpaceSuitRenderer {
             String appendedPathText = stack.getItem() instanceof NetheriteSpaceSuit ? "netherite_" : "";
 
             Identifier texture = switch (slot) {
-                case HEAD -> new ModIdentifier("textures/models/armor/" + appendedPathText + "space_suit_head.png");
-                case CHEST, FEET -> new ModIdentifier("textures/models/armor/" + appendedPathText + "space_suit.png");
-                case LEGS -> new ModIdentifier("textures/models/armor/" + appendedPathText + "space_suit_legs.png");
-                default -> throw new IllegalStateException("Unexpected value: " + slot);
+            case HEAD -> new ModIdentifier("textures/models/armor/" + appendedPathText + "space_suit_head.png");
+            case CHEST, FEET -> new ModIdentifier("textures/models/armor/" + appendedPathText + "space_suit.png");
+            case LEGS -> new ModIdentifier("textures/models/armor/" + appendedPathText + "space_suit_legs.png");
+            default -> throw new IllegalStateException("Unexpected value: " + slot);
             };
 
             ModelPart model = new ModelPart(Collections.emptyList(), map);
@@ -53,29 +53,29 @@ public class SpaceSuitRenderer {
 
         EntityModelLoader modelLoader = MinecraftClient.getInstance().getEntityModelLoader();
         ModelPart layer = switch (slot) {
-            case HEAD, CHEST, FEET -> modelLoader.getModelPart(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION);
-            case LEGS -> modelLoader.getModelPart(SpaceSuitModel.SPACE_SUIT_P2.LAYER_LOCATION);
-            default -> throw new IllegalStateException("Unexpected value: " + slot);
+        case HEAD, CHEST, FEET -> modelLoader.getModelPart(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION);
+        case LEGS -> modelLoader.getModelPart(SpaceSuitModel.SPACE_SUIT_P2.LAYER_LOCATION);
+        default -> throw new IllegalStateException("Unexpected value: " + slot);
         };
 
         switch (slot) {
-            case HEAD -> map.put("head", new SpaceSuitModel.SPACE_SUIT_P1<>(layer).head);
-            case CHEST -> {
-                map.put("body", new SpaceSuitModel.SPACE_SUIT_P1<>(layer).body);
-                map.put("right_arm", new SpaceSuitModel.SPACE_SUIT_P1<>(layer).rightArm);
-                map.put("left_arm", new SpaceSuitModel.SPACE_SUIT_P1<>(layer).leftArm);
-            }
-            case LEGS -> {
-                map.put("right_leg", new SpaceSuitModel.SPACE_SUIT_P2<>(layer).rightLeg);
-                map.put("left_leg", new SpaceSuitModel.SPACE_SUIT_P2<>(layer).leftLeg);
-            }
-            case FEET -> {
-                map.put("right_leg", new SpaceSuitModel.SPACE_SUIT_P1<>(layer).rightLeg);
-                map.put("left_leg", new SpaceSuitModel.SPACE_SUIT_P1<>(layer).leftLeg);
-            }
-            default -> {
-                
-            }
+        case HEAD -> map.put("head", new SpaceSuitModel.SPACE_SUIT_P1<>(layer).head);
+        case CHEST -> {
+            map.put("body", new SpaceSuitModel.SPACE_SUIT_P1<>(layer).body);
+            map.put("right_arm", new SpaceSuitModel.SPACE_SUIT_P1<>(layer).rightArm);
+            map.put("left_arm", new SpaceSuitModel.SPACE_SUIT_P1<>(layer).leftArm);
+        }
+        case LEGS -> {
+            map.put("right_leg", new SpaceSuitModel.SPACE_SUIT_P2<>(layer).rightLeg);
+            map.put("left_leg", new SpaceSuitModel.SPACE_SUIT_P2<>(layer).leftLeg);
+        }
+        case FEET -> {
+            map.put("right_leg", new SpaceSuitModel.SPACE_SUIT_P1<>(layer).rightLeg);
+            map.put("left_leg", new SpaceSuitModel.SPACE_SUIT_P1<>(layer).leftLeg);
+        }
+        default -> {
+
+        }
         }
 
         ModelPart empty = new ModelPart(Collections.emptyList(), Collections.emptyMap());

@@ -14,9 +14,6 @@ public class CoalGeneratorScreenHandler extends AbstractMachineScreenHandler {
     }
 
     public CoalGeneratorScreenHandler(int syncId, PlayerInventory inventory, CoalGeneratorBlockEntity entity) {
-        super(ModScreenHandlers.COAL_GENERATOR_SCREEN_HANDLER, syncId, inventory, entity,
-                new Slot[] {
-                        new Slot(entity, 0, 77, 31)
-                });
+        super(ModScreenHandlers.COAL_GENERATOR_SCREEN_HANDLER, syncId, inventory, entity, new Slot[] { new Slot(entity, 0, 77, 31) });
     }
 }
