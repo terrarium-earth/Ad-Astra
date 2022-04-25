@@ -95,8 +95,7 @@ public class ModWeatherRenderer implements DimensionRenderingRegistry.WeatherRen
                         int w = Math.max(t, j);
 
                         if (u != v) {
-                            Random random = new Random(
-                                    (long) p * p * 3121 + p * 45238971L ^ (long) o * o * 418711 + o * 13761L);
+                            Random random = new Random((long) p * p * 3121 + p * 45238971L ^ (long) o * o * 418711 + o * 13761L);
                             mutable.set(p, u, o);
                             float y;
                             float ac;
@@ -105,12 +104,10 @@ public class ModWeatherRenderer implements DimensionRenderingRegistry.WeatherRen
 
                                     m = 0;
                                     RenderSystem.setShaderTexture(0, texture);
-                                    bufferBuilder.begin(VertexFormat.DrawMode.QUADS,
-                                            VertexFormats.POSITION_TEXTURE_COLOR_LIGHT);
+                                    bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR_LIGHT);
                                 }
 
-                                int x = renderer.getTicks() + p * p * 3121 + p * 45238971 + o * o * 418711 + o * 13761
-                                        & 31;
+                                int x = renderer.getTicks() + p * p * 3121 + p * 45238971 + o * o * 418711 + o * 13761 & 31;
                                 y = -((float) x + tickDelta) / 32.0F * (3.0F + random.nextFloat());
                                 double z = (double) p + 0.5 - cameraPosX;
                                 double aa = (double) o + 0.5 - cameraPosZ;
@@ -118,26 +115,14 @@ public class ModWeatherRenderer implements DimensionRenderingRegistry.WeatherRen
                                 ac = ((1.0F - ab * ab) * 0.5F + 0.5F) * h;
                                 mutable.set(p, w, o);
                                 int ad = WorldRenderer.getLightmapCoordinates(world, mutable);
-                                bufferBuilder
-                                        .vertex((double) p - cameraPosX - r + 0.5, (double) v - cameraPosY,
-                                                (double) o - cameraPosZ - s + 0.5)
-                                        .texture(0.0F, (float) u * 0.25F + y).color(1.0F, 1.0F, 1.0F, ac).light(ad)
-                                        .next();
-                                bufferBuilder
-                                        .vertex((double) p - cameraPosX + r + 0.5, (double) v - cameraPosY,
-                                                (double) o - cameraPosZ + s + 0.5)
-                                        .texture(1.0F, (float) u * 0.25F + y).color(1.0F, 1.0F, 1.0F, ac).light(ad)
-                                        .next();
-                                bufferBuilder
-                                        .vertex((double) p - cameraPosX + r + 0.5, (double) u - cameraPosY,
-                                                (double) o - cameraPosZ + s + 0.5)
-                                        .texture(1.0F, (float) v * 0.25F + y).color(1.0F, 1.0F, 1.0F, ac).light(ad)
-                                        .next();
-                                bufferBuilder
-                                        .vertex((double) p - cameraPosX - r + 0.5, (double) u - cameraPosY,
-                                                (double) o - cameraPosZ - s + 0.5)
-                                        .texture(0.0F, (float) v * 0.25F + y).color(1.0F, 1.0F, 1.0F, ac).light(ad)
-                                        .next();
+                                bufferBuilder.vertex((double) p - cameraPosX - r + 0.5, (double) v - cameraPosY, (double) o - cameraPosZ - s + 0.5).texture(0.0F, (float) u * 0.25F + y)
+                                        .color(1.0F, 1.0F, 1.0F, ac).light(ad).next();
+                                bufferBuilder.vertex((double) p - cameraPosX + r + 0.5, (double) v - cameraPosY, (double) o - cameraPosZ + s + 0.5).texture(1.0F, (float) u * 0.25F + y)
+                                        .color(1.0F, 1.0F, 1.0F, ac).light(ad).next();
+                                bufferBuilder.vertex((double) p - cameraPosX + r + 0.5, (double) u - cameraPosY, (double) o - cameraPosZ + s + 0.5).texture(1.0F, (float) v * 0.25F + y)
+                                        .color(1.0F, 1.0F, 1.0F, ac).light(ad).next();
+                                bufferBuilder.vertex((double) p - cameraPosX - r + 0.5, (double) u - cameraPosY, (double) o - cameraPosZ - s + 0.5).texture(0.0F, (float) v * 0.25F + y)
+                                        .color(1.0F, 1.0F, 1.0F, ac).light(ad).next();
                             }
                         }
                     }

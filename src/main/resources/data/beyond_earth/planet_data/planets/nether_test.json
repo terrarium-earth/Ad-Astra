@@ -1,0 +1,15 @@
+{
+    "name": "nether",
+    "galaxy": "beyond_earth:milky_way",
+    "solar_system": "beyond_earth:solar_system",
+    "dimension": "minecraft:the_nether",
+    "orbit_dimension": "minecraft:the_nether",
+    "parent_dimension": null,
+    "rocket_tier": 2,
+    "gravity": 0.625,
+    "days_in_year": 93,
+    "temperature": 3939,
+    "oxygen": true,
+    "atmosphere_start": 299,
+    "button_color": "purple"
+}

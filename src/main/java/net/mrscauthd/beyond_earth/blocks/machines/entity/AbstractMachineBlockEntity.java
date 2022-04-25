@@ -30,8 +30,7 @@ import team.reborn.energy.api.EnergyStorageUtil;
 import team.reborn.energy.api.base.SimpleSidedEnergyContainer;
 
 @SuppressWarnings("UnstableApiUsage")
-public abstract class AbstractMachineBlockEntity extends BlockEntity
-        implements ExtendedScreenHandlerFactory, SimpleInventory, SidedInventory {
+public abstract class AbstractMachineBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, SimpleInventory, SidedInventory {
 
     private final DefaultedList<ItemStack> inventory;
 
@@ -114,11 +113,7 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity
     public void energyOut() {
         if (useEnergy()) {
             for (Direction direction : Direction.values()) {
-                EnergyStorageUtil.move(
-                        getSideEnergyStorage(direction),
-                        EnergyStorage.SIDED.find(world, pos.offset(direction), direction.getOpposite()),
-                        Long.MAX_VALUE,
-                        null);
+                EnergyStorageUtil.move(getSideEnergyStorage(direction), EnergyStorage.SIDED.find(world, pos.offset(direction), direction.getOpposite()), Long.MAX_VALUE, null);
             }
         }
     }

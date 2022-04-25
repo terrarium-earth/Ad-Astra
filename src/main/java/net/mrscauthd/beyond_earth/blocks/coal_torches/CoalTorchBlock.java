@@ -32,12 +32,11 @@ public class CoalTorchBlock extends Block {
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand,
-            BlockHitResult hit) {
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
             ItemStack itemstack = player.getStackInHand(hand);
 
-            if (ModUtils.dimensionHasOxygen(world)) {
+            if (ModUtils.dimensionHasOxygen(false, world.getRegistryKey())) {
                 if (itemstack.getItem() instanceof FlintAndSteelItem || itemstack.getItem() instanceof FireChargeItem) {
 
                     if (world.getBlockState(pos).getBlock().equals(ModBlocks.COAL_TORCH)) {
@@ -75,8 +74,7 @@ public class CoalTorchBlock extends Block {
     }
 
     @Override
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState,
-            WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         return direction.equals(Direction.DOWN) && !this.canPlaceAt(state, world, pos) ? Blocks.AIR.getDefaultState()
                 : super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }

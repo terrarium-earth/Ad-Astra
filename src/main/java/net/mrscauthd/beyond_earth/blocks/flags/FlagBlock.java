@@ -51,8 +51,7 @@ public class FlagBlock extends BlockWithEntity implements Waterloggable {
 
     public FlagBlock(Settings settings) {
         super(settings);
-        this.setDefaultState(
-                this.stateManager.getDefaultState().with(WATERLOGGED, false).with(HALF, DoubleBlockHalf.LOWER));
+        this.setDefaultState(this.stateManager.getDefaultState().with(WATERLOGGED, false).with(HALF, DoubleBlockHalf.LOWER));
     }
 
     @Override
@@ -61,59 +60,34 @@ public class FlagBlock extends BlockWithEntity implements Waterloggable {
 
         if (state.get(HALF).equals(DoubleBlockHalf.LOWER)) {
             return switch (state.get(FACING)) {
-                case SOUTH -> Stream.of(
-                        boxSimple(14.5, 0, 9, 12.5, 1, 7),
-                        boxSimple(14, 1, 8.5, 13, 16, 7.5))
-                        .reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get()
-                        .offset(offset.getX(), offset.getY(), offset.getZ());
-                case NORTH -> Stream.of(
-                        boxSimple(1.5, 0, 7, 3.5, 1, 9),
-                        boxSimple(2, 1, 7.5, 3, 16, 8.5))
-                        .reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get()
-                        .offset(offset.getX(), offset.getY(), offset.getZ());
-                case EAST -> Stream.of(
-                        boxSimple(9, 0, 1.5, 7, 1, 3.5),
-                        boxSimple(8.5, 1, 2, 7.5, 16, 3))
-                        .reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get()
-                        .offset(offset.getX(), offset.getY(), offset.getZ());
-                case WEST -> Stream.of(
-                        boxSimple(7, 0, 14.5, 9, 1, 12.5),
-                        boxSimple(7.5, 1, 14, 8.5, 16, 13))
-                        .reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get()
-                        .offset(offset.getX(), offset.getY(), offset.getZ());
-                default -> throw new IllegalStateException("Unexpected value: " + state.get(FACING));
+            case SOUTH -> Stream.of(boxSimple(14.5, 0, 9, 12.5, 1, 7), boxSimple(14, 1, 8.5, 13, 16, 7.5)).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get()
+                    .offset(offset.getX(), offset.getY(), offset.getZ());
+            case NORTH -> Stream.of(boxSimple(1.5, 0, 7, 3.5, 1, 9), boxSimple(2, 1, 7.5, 3, 16, 8.5)).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get()
+                    .offset(offset.getX(), offset.getY(), offset.getZ());
+            case EAST -> Stream.of(boxSimple(9, 0, 1.5, 7, 1, 3.5), boxSimple(8.5, 1, 2, 7.5, 16, 3)).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get()
+                    .offset(offset.getX(), offset.getY(), offset.getZ());
+            case WEST -> Stream.of(boxSimple(7, 0, 14.5, 9, 1, 12.5), boxSimple(7.5, 1, 14, 8.5, 16, 13)).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get()
+                    .offset(offset.getX(), offset.getY(), offset.getZ());
+            default -> throw new IllegalStateException("Unexpected value: " + state.get(FACING));
             };
         } else {
             return switch (state.get(FACING)) {
-                case SOUTH -> Stream.of(
-                        boxSimple(14, 0, 8.5, 13, 16, 7.5),
-                        boxSimple(14, 7, 8.5, 1, 15, 7.5))
-                        .reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get()
-                        .offset(offset.getX(), offset.getY(), offset.getZ());
-                case NORTH -> Stream.of(
-                        boxSimple(2, 0, 7.5, 3, 16, 8.5),
-                        boxSimple(2, 7, 7.5, 15, 15, 8.5))
-                        .reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get()
-                        .offset(offset.getX(), offset.getY(), offset.getZ());
-                case EAST -> Stream.of(
-                        boxSimple(8.5, 0, 2, 7.5, 16, 3),
-                        boxSimple(8.5, 7, 2, 7.5, 15, 15))
-                        .reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get()
-                        .offset(offset.getX(), offset.getY(), offset.getZ());
-                case WEST -> Stream.of(
-                        boxSimple(7.5, 0, 14, 8.5, 16, 13),
-                        boxSimple(7.5, 7, 14, 8.5, 15, 1))
-                        .reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get()
-                        .offset(offset.getX(), offset.getY(), offset.getZ());
-                default -> throw new IllegalStateException("Unexpected value: " + state.get(FACING));
+            case SOUTH -> Stream.of(boxSimple(14, 0, 8.5, 13, 16, 7.5), boxSimple(14, 7, 8.5, 1, 15, 7.5)).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get()
+                    .offset(offset.getX(), offset.getY(), offset.getZ());
+            case NORTH -> Stream.of(boxSimple(2, 0, 7.5, 3, 16, 8.5), boxSimple(2, 7, 7.5, 15, 15, 8.5)).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get()
+                    .offset(offset.getX(), offset.getY(), offset.getZ());
+            case EAST -> Stream.of(boxSimple(8.5, 0, 2, 7.5, 16, 3), boxSimple(8.5, 7, 2, 7.5, 15, 15)).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get()
+                    .offset(offset.getX(), offset.getY(), offset.getZ());
+            case WEST -> Stream.of(boxSimple(7.5, 0, 14, 8.5, 16, 13), boxSimple(7.5, 7, 14, 8.5, 15, 1)).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get()
+                    .offset(offset.getX(), offset.getY(), offset.getZ());
+            default -> throw new IllegalStateException("Unexpected value: " + state.get(FACING));
             };
         }
     }
 
     public static VoxelShape boxSimple(double x1, double y1, double z1, double x2, double y2, double z2) {
         Box box = new Box(x1, y1, z1, x2, y2, z2);
-        return VoxelShapes.cuboid(box.minX / 16.0d, box.minY / 16.0d, box.minZ / 16.0d, box.maxX / 16.0d,
-                box.maxY / 16.0d, box.maxZ / 16.0d);
+        return VoxelShapes.cuboid(box.minX / 16.0d, box.minY / 16.0d, box.minZ / 16.0d, box.maxX / 16.0d, box.maxY / 16.0d, box.maxZ / 16.0d);
     }
 
     @Override
@@ -124,13 +98,11 @@ public class FlagBlock extends BlockWithEntity implements Waterloggable {
         super.onBreak(world, pos, state, player);
     }
 
-    private static void destroyOtherSide(DoubleBlockHalf doubleblockhalf, World world, BlockPos pos, BlockState state,
-            PlayerEntity player) {
+    private static void destroyOtherSide(DoubleBlockHalf doubleblockhalf, World world, BlockPos pos, BlockState state, PlayerEntity player) {
         boolean isUpper = doubleblockhalf.equals(DoubleBlockHalf.UPPER);
         BlockPos blockpos = isUpper ? pos.down() : pos.up();
         if (world.getBlockState(blockpos).contains(HALF)) {
-            if (world.getBlockState(blockpos).get(HALF)
-                    .equals(isUpper ? DoubleBlockHalf.LOWER : DoubleBlockHalf.UPPER)) {
+            if (world.getBlockState(blockpos).get(HALF).equals(isUpper ? DoubleBlockHalf.LOWER : DoubleBlockHalf.UPPER)) {
                 world.breakBlock(blockpos, false);
             }
         }
@@ -142,8 +114,7 @@ public class FlagBlock extends BlockWithEntity implements Waterloggable {
     }
 
     @Override
-    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer,
-            ItemStack itemStack) {
+    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
         super.onPlaced(world, pos, state, placer, itemStack);
         world.setBlockState(pos.up(), state.with(HALF, DoubleBlockHalf.UPPER), 3);
 
@@ -172,8 +143,7 @@ public class FlagBlock extends BlockWithEntity implements Waterloggable {
     }
 
     @Override
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState,
-            WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (state.get(WATERLOGGED)) {
             world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
@@ -197,8 +167,7 @@ public class FlagBlock extends BlockWithEntity implements Waterloggable {
 
     @Override
     public long getRenderingSeed(BlockState state, BlockPos pos) {
-        return MathHelper.hashCode(pos.getX(), pos.down(state.get(HALF).equals(DoubleBlockHalf.LOWER) ? 0 : 1).getY(),
-                pos.getZ());
+        return MathHelper.hashCode(pos.getX(), pos.down(state.get(HALF).equals(DoubleBlockHalf.LOWER) ? 0 : 1).getY(), pos.getZ());
     }
 
     @Override
@@ -221,7 +190,6 @@ public class FlagBlock extends BlockWithEntity implements Waterloggable {
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         FluidState fluidState = ctx.getWorld().getFluidState(ctx.getBlockPos());
-        return this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite()).with(WATERLOGGED,
-                fluidState.getFluid().equals(Fluids.WATER));
+        return this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite()).with(WATERLOGGED, fluidState.getFluid().equals(Fluids.WATER));
     }
 }

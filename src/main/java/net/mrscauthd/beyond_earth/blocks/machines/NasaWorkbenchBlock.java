@@ -41,9 +41,7 @@ public class NasaWorkbenchBlock extends AbstractMachineBlock {
 
     @Nullable
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state,
-            BlockEntityType<T> type) {
-        return world.isClient ? null
-                : checkType(type, ModBlockEntities.NASA_WORKBENCH_ENTITY, NasaWorkbenchBlockEntity::serverTick);
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        return world.isClient ? null : checkType(type, ModBlockEntities.NASA_WORKBENCH_ENTITY, NasaWorkbenchBlockEntity::serverTick);
     }
 }

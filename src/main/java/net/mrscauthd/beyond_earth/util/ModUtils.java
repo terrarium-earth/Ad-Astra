@@ -1,8 +1,7 @@
 package net.mrscauthd.beyond_earth.util;
 
-import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
@@ -22,11 +21,14 @@ import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.TeleportTarget;
 import net.minecraft.world.World;
 import net.mrscauthd.beyond_earth.BeyondEarth;
+import net.mrscauthd.beyond_earth.client.BeyondEarthClient;
+import net.mrscauthd.beyond_earth.data.Planet;
 import net.mrscauthd.beyond_earth.networking.ModS2CPackets;
 import net.mrscauthd.beyond_earth.world.SoundUtil;
 
 public class ModUtils {
-    public static final int SPAWN_START = 450;
+
+    public static final float VANILLA_GRAVITY = 9.806f;
 
     public static final Identifier EARTH_ORBIT = new ModIdentifier("earth_orbit");
     public static final Identifier MOON = new ModIdentifier("moon");
@@ -40,71 +42,42 @@ public class ModUtils {
     public static final Identifier GLACIO = new ModIdentifier("glacio");
     public static final Identifier GLACIO_ORBIT = new ModIdentifier("glacio_orbit");
 
-    public static final RegistryKey<World> EARTH_ORBIT_KEY = RegistryKey.of(Registry.WORLD_KEY,
-            EARTH_ORBIT);
+    public static final RegistryKey<World> EARTH_ORBIT_KEY = RegistryKey.of(Registry.WORLD_KEY, EARTH_ORBIT);
     public static final RegistryKey<World> MOON_KEY = RegistryKey.of(Registry.WORLD_KEY, MOON);
-    public static final RegistryKey<World> MOON_ORBIT_KEY = RegistryKey.of(Registry.WORLD_KEY,
-            MOON_ORBIT);
+    public static final RegistryKey<World> MOON_ORBIT_KEY = RegistryKey.of(Registry.WORLD_KEY, MOON_ORBIT);
     public static final RegistryKey<World> MARS_KEY = RegistryKey.of(Registry.WORLD_KEY, MARS);
-    public static final RegistryKey<World> MARS_ORBIT_KEY = RegistryKey.of(Registry.WORLD_KEY,
-            MARS_ORBIT);
+    public static final RegistryKey<World> MARS_ORBIT_KEY = RegistryKey.of(Registry.WORLD_KEY, MARS_ORBIT);
     public static final RegistryKey<World> VENUS_KEY = RegistryKey.of(Registry.WORLD_KEY, VENUS);
-    public static final RegistryKey<World> VENUS_ORBIT_KEY = RegistryKey.of(Registry.WORLD_KEY,
-            VENUS_ORBIT);
-    public static final RegistryKey<World> MERCURY_KEY = RegistryKey.of(Registry.WORLD_KEY,
-            MERCURY);
-    public static final RegistryKey<World> MERCURY_ORBIT_KEY = RegistryKey.of(Registry.WORLD_KEY,
-            MERCURY_ORBIT);
+    public static final RegistryKey<World> VENUS_ORBIT_KEY = RegistryKey.of(Registry.WORLD_KEY, VENUS_ORBIT);
+    public static final RegistryKey<World> MERCURY_KEY = RegistryKey.of(Registry.WORLD_KEY, MERCURY);
+    public static final RegistryKey<World> MERCURY_ORBIT_KEY = RegistryKey.of(Registry.WORLD_KEY, MERCURY_ORBIT);
     public static final RegistryKey<World> GLACIO_KEY = RegistryKey.of(Registry.WORLD_KEY, GLACIO);
-    public static final RegistryKey<World> GLACIO_ORBIT_KEY = RegistryKey.of(Registry.WORLD_KEY,
-            GLACIO_ORBIT);
+    public static final RegistryKey<World> GLACIO_ORBIT_KEY = RegistryKey.of(Registry.WORLD_KEY, GLACIO_ORBIT);
 
-    private static final List<RegistryKey<World>> dimensionsWithoutOxygen = Arrays.asList(
-            EARTH_ORBIT_KEY,
-            MOON_KEY,
-            MOON_ORBIT_KEY,
-            MARS_KEY,
-            MARS_ORBIT_KEY,
-            VENUS_KEY,
-            VENUS_ORBIT_KEY,
-            MERCURY_KEY,
-            MERCURY_ORBIT_KEY,
-            GLACIO_ORBIT_KEY);
+    public static final float ORBIT_TRUE_GRAVITY = 0.0f;
+    public static final int ORBIT_TEMPERATURE = -270;
+    public static final float ORBIT_GRAVITY = 0.5f;
 
-    private static final List<RegistryKey<World>> planets = Arrays.asList(
-            World.OVERWORLD,
-            MOON_KEY,
-            MARS_KEY,
-            VENUS_KEY,
-            MERCURY_KEY,
-            GLACIO_KEY);
+    // Server.
+    public static void teleportToWorld(RegistryKey<World> world, Entity entity) {
+        if (entity.getWorld() instanceof ServerWorld entityWorld && entity.canUsePortals()) {
 
-    private static final List<RegistryKey<World>> orbitDimensions = Arrays.asList(
-            EARTH_ORBIT_KEY,
-            MOON_ORBIT_KEY,
-            MARS_ORBIT_KEY,
-            VENUS_ORBIT_KEY,
-            MERCURY_ORBIT_KEY,
-            GLACIO_ORBIT_KEY);
+            int spawnStart = 450;
+            for (Planet planet : BeyondEarth.planets) {
+                if (planet.dimension().equals(world)) {
+                    spawnStart = planet.atmosphereStart();
+                }
+            }
 
-    public static void teleportToPlanet(RegistryKey<World> dimension, Entity entity) {
-        World world = entity.getWorld();
-        if (!world.isClient && entity.canUsePortals()) {
-            ServerWorld destination = Objects.requireNonNull(entity.getServer())
-                    .getWorld(getCorrespondingOrbitDimension(dimension));
-            teleportToDimension(destination, entity);
-        }
-    }
+            Vec3d newPos = new Vec3d(entity.getX(), spawnStart, entity.getZ());
+            TeleportTarget target = new TeleportTarget(newPos, entity.getVelocity(), entity.getYaw(), entity.getPitch());
 
-    public static void teleportToDimension(ServerWorld destination, Entity entity) {
-        World world = entity.getWorld();
-        if (!world.isClient && entity.canUsePortals()) {
-
-            Vec3d newPos = new Vec3d(entity.getX(), ModUtils.SPAWN_START, entity.getZ());
-            TeleportTarget target = new TeleportTarget(newPos, entity.getVelocity(), entity.getYaw(),
-                    entity.getPitch());
-
-            entity = FabricDimensions.teleport(entity, destination, target);
+            // Change the "earth" registry key to the "overworld" registry key.
+            if (world.getValue().equals(new ModIdentifier("earth"))) {
+                world = World.OVERWORLD;
+            }
+            
+            entity = FabricDimensions.teleport(entity, entityWorld.getServer().getWorld(world), target);
             if (entity instanceof PlayerEntity player) {
                 PacketByteBuf buf = PacketByteBufs.create();
                 buf.writeBoolean(true);
@@ -132,119 +105,86 @@ public class ModUtils {
             }
         }
 
-        if (world.isClient && entity instanceof PlayerEntity) {
+        if (entity instanceof PlayerEntity && entity.getWorld().isClient) {
             SoundUtil.setSound(true);
         }
     }
 
-    public static boolean isOrbitDimension(RegistryKey<World> dimension) {
-        return orbitDimensions.stream().anyMatch(dimension::equals);
-    }
-
-    public static boolean isPlanet(RegistryKey<World> dimension) {
-        return planets.stream().anyMatch(dimension::equals);
-    }
-
-    public static RegistryKey<World> getCorrespondingOrbitDimension(RegistryKey<World> dimension) {
-        if (dimension.equals(EARTH_ORBIT_KEY)) {
-            return World.OVERWORLD;
-        } else if (dimension.equals(MOON_ORBIT_KEY)) {
-            return MOON_KEY;
-        } else if (dimension.equals(MARS_ORBIT_KEY)) {
-            return MARS_KEY;
-        } else if (dimension.equals(VENUS_ORBIT_KEY)) {
-            return VENUS_KEY;
-        } else if (dimension.equals(MERCURY_ORBIT_KEY)) {
-            return MERCURY_KEY;
-        } else if (dimension.equals(GLACIO_ORBIT_KEY)) {
-            return GLACIO_KEY;
+    // Client and server.
+    public static RegistryKey<World> getPlanetOrbit(boolean isClient, RegistryKey<World> world) {
+        if (isSpaceDimension(isClient, world)) {
+            for (Planet planet : (isClient ? BeyondEarthClient.planets : BeyondEarth.planets)) {
+                if (planet.orbitDimension().equals(world)) {
+                    return planet.dimension();
+                }
+            }
+            BeyondEarth.LOGGER.error(world.getValue().toString() + " does not have an orbit world!");
         } else {
-            BeyondEarth.LOGGER.error("Not an orbit dimension!");
-            return World.OVERWORLD;
+            BeyondEarth.LOGGER.error(world.getValue().toString() + " is not a planet or orbit!");
         }
+        return World.OVERWORLD;
     }
 
-    public static float getPlanetGravity(RegistryKey<World> dimension) {
-        if (dimension.equals(World.OVERWORLD)) {
-            return PlanetFacts.EARTH_GRAVITY;
-        } else if (dimension.equals(MOON_KEY)) {
-            return PlanetFacts.MOON_GRAVITY;
-        } else if (dimension.equals(MARS_KEY)) {
-            return PlanetFacts.MARS_GRAVITY;
-        } else if (dimension.equals(VENUS_KEY)) {
-            return PlanetFacts.VENUS_GRAVITY;
-        } else if (dimension.equals(MERCURY_KEY)) {
-            return PlanetFacts.MERCURY_GRAVITY;
-        } else if (dimension.equals(GLACIO_KEY)) {
-            return PlanetFacts.GLACIO_GRAVITY;
-        } else if (isOrbitDimension(dimension)) {
-            return PlanetFacts.ORBIT_GRAVITY;
-        } else {
-            BeyondEarth.LOGGER.error("Invalid dimension!");
-            return PlanetFacts.EARTH_GRAVITY;
+    public static float getPlanetGravity(boolean isClient, RegistryKey<World> world) {
+        for (Planet planet : isClient ? BeyondEarthClient.planets : BeyondEarth.planets) {
+            if (planet.dimension().equals(world)) {
+                return planet.gravity() / VANILLA_GRAVITY;
+            }
         }
+        if (isPlanet(isClient, world)) {
+            BeyondEarth.LOGGER.error(world.getValue().toString() + " does not have a defined gravity!");
+        }
+        return 1.0f;
     }
 
+    public static final List<RegistryKey<World>> getOrbitDimensions(boolean isClient) {
+        List<RegistryKey<World>> worlds = new LinkedList<>();
+        (isClient ? BeyondEarthClient.planets : BeyondEarth.planets).forEach(planet -> {
+            if (!worlds.contains(planet.orbitDimension()))
+                worlds.add(planet.orbitDimension());
+        });
+        return worlds;
+    }
+
+    public static boolean isOrbitDimension(boolean isClient, RegistryKey<World> world) {
+        return getOrbitDimensions(isClient).stream().anyMatch(world::equals);
+    }
+
+    public static final List<RegistryKey<World>> getPlanets(boolean isClient) {
+        List<RegistryKey<World>> worlds = new LinkedList<>();
+        (isClient ? BeyondEarthClient.planets : BeyondEarth.planets).forEach(planet -> worlds.add(planet.dimension()));
+        return worlds;
+    }
+
+    public static boolean isPlanet(boolean isClient, RegistryKey<World> world) {
+        return getPlanets(isClient).stream().anyMatch(world::equals);
+    }
+
+    public static boolean isSpaceDimension(boolean isClient, RegistryKey<World> world) {
+        return isPlanet(isClient, world) || isOrbitDimension(isClient, world);
+    }
+
+    public static final List<RegistryKey<World>> getDimensionsWithoutOxygen(boolean isClient) {
+        List<RegistryKey<World>> worlds = new LinkedList<>();
+        (isClient ? BeyondEarthClient.planets : BeyondEarth.planets).forEach(planet -> {
+            if (planet.oxygen()) {
+                worlds.add(planet.dimension());
+            }
+        });
+        return worlds;
+    }
+
+    public static boolean dimensionHasOxygen(boolean isClient, RegistryKey<World> world) {
+        return getDimensionsWithoutOxygen(isClient).stream().noneMatch(world::equals);
+    }
+
+    // Mixin Util.
     public static double getMixinGravity(double value, Object mixin) {
         Entity entity = (Entity) mixin;
-        return value * ModUtils.getPlanetGravity(entity.world.getRegistryKey());
+        return value * getPlanetGravity(false, entity.world.getRegistryKey());
     }
 
     public static float getMixinGravity(float value, Object mixin) {
         return (float) getMixinGravity((double) value, mixin);
-    }
-
-    public static boolean dimensionHasOxygen(World world) {
-        return dimensionsWithoutOxygen.stream().noneMatch(world.getRegistryKey()::equals);
-    }
-
-    public static boolean dimensionHasOxygen(RegistryKey<World> world) {
-        return dimensionsWithoutOxygen.stream().noneMatch(world::equals);
-    }
-
-    public static float getTrueGravity(RegistryKey<World> world) {
-        if (world.equals(World.OVERWORLD)) {
-            return PlanetFacts.EARTH_TRUE_GRAVITY;
-        } else if (world.equals(MOON_KEY)) {
-            return PlanetFacts.MOON_TRUE_GRAVITY;
-        } else if (world.equals(MARS_KEY)) {
-            return PlanetFacts.MARS_TRUE_GRAVITY;
-        } else if (world.equals(VENUS_KEY)) {
-            return PlanetFacts.VENUS_TRUE_GRAVITY;
-        } else if (world.equals(MERCURY_KEY)) {
-            return PlanetFacts.MERCURY_TRUE_GRAVITY;
-        } else if (world.equals(GLACIO_KEY)) {
-            return PlanetFacts.GLACIO_TRUE_GRAVITY;
-        } else if (isOrbitDimension(world)) {
-            return PlanetFacts.ORBIT_TRUE_GRAVITY;
-        } else {
-            BeyondEarth.LOGGER.error("Invalid dimension!");
-            return PlanetFacts.EARTH_TRUE_GRAVITY;
-        }
-    }
-
-    public static float getTemperature(RegistryKey<World> dimension) {
-        if (dimension.equals(World.OVERWORLD)) {
-            return PlanetFacts.EARTH_TEMPERATURE;
-        } else if (dimension.equals(MOON_KEY)) {
-            return PlanetFacts.MOON_TEMPERATURE;
-        } else if (dimension.equals(MARS_KEY)) {
-            return PlanetFacts.MARS_TEMPERATURE;
-        } else if (dimension.equals(VENUS_KEY)) {
-            return PlanetFacts.VENUS_TEMPERATURE;
-        } else if (dimension.equals(MERCURY_KEY)) {
-            return PlanetFacts.MERCURY_TEMPERATURE;
-        } else if (dimension.equals(GLACIO_KEY)) {
-            return PlanetFacts.GLACIO_TEMPERATURE;
-        } else if (isOrbitDimension(dimension)) {
-            return PlanetFacts.ORBIT_TEMPERATURE;
-        } else {
-            BeyondEarth.LOGGER.error("Invalid dimension!");
-            return PlanetFacts.EARTH_TEMPERATURE;
-        }
-    }
-
-    public record ColourHolder(float r, float g, float b, float a) {
-
     }
 }

@@ -300,7 +300,6 @@
               }
             }
           },
-
           {
             "type": "minecraft:condition",
             "if_true": {
@@ -338,7 +337,6 @@
               }
             }
           },
-
           {
             "type": "minecraft:condition",
             "if_true": {
@@ -414,7 +412,7 @@
             "erosion": 0,
             "weirdness": -0.5,
             "depth": 0,
-            "offset":0
+            "offset": 0
           }
         }
       ]

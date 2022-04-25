@@ -34,7 +34,7 @@ public class BlockItemMixin {
         // Extinguish fire items in dimensions with no oxygen.
         World world = context.getWorld();
         BlockPos pos = context.getBlockPos();
-        if (!ModUtils.dimensionHasOxygen(world)) {
+        if (!ModUtils.dimensionHasOxygen(false, world.getRegistryKey())) {
             BlockState blockstate = world.getBlockState(context.getBlockPos());
             Block block = blockstate.getBlock();
 
@@ -42,8 +42,7 @@ public class BlockItemMixin {
 
             // Wall Torch.
             if (block instanceof WallTorchBlock) {
-                world.setBlockState(pos, ModBlocks.WALL_COAL_TORCH.getDefaultState().with(WallTorchBlock.FACING,
-                        blockstate.get(WallTorchBlock.FACING)), 3);
+                world.setBlockState(pos, ModBlocks.WALL_COAL_TORCH.getDefaultState().with(WallTorchBlock.FACING, blockstate.get(WallTorchBlock.FACING)), 3);
                 playSound = true;
             }
 
@@ -57,8 +56,7 @@ public class BlockItemMixin {
 
             // Lantern.
             else if (block instanceof LanternBlock) {
-                world.setBlockState(pos, ModBlocks.COAL_LANTERN.getDefaultState().with(LanternBlock.HANGING,
-                        blockstate.get(LanternBlock.HANGING)), 3);
+                world.setBlockState(pos, ModBlocks.COAL_LANTERN.getDefaultState().with(LanternBlock.HANGING, blockstate.get(LanternBlock.HANGING)), 3);
                 playSound = true;
             }
 

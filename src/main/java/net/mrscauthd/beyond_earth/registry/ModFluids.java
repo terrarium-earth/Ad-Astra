@@ -33,8 +33,7 @@ public class ModFluids {
         FUEL_BLOCK = new FluidBlock(FUEL_STILL, FabricBlockSettings.copy(Blocks.WATER).strength(100.0f).dropsNothing());
         ModBlocks.register("fuel", FUEL_BLOCK);
 
-        FUEL_BUCKET = new BucketItem(FUEL_STILL,
-                new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1).group(ModItems.ITEM_GROUP_NORMAL));
+        FUEL_BUCKET = new BucketItem(FUEL_STILL, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1).group(ModItems.ITEM_GROUP_NORMAL));
         ModItems.register("fuel_bucket", FUEL_BUCKET);
 
         // Oil Fluid.
@@ -44,8 +43,7 @@ public class ModFluids {
         OIL_BLOCK = new FluidBlock(OIL_STILL, FabricBlockSettings.copy(Blocks.WATER).strength(100.0f).dropsNothing());
         ModBlocks.register("oil", OIL_BLOCK);
 
-        OIL_BUCKET = new BucketItem(OIL_STILL,
-                new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1).group(ModItems.ITEM_GROUP_NORMAL));
+        OIL_BUCKET = new BucketItem(OIL_STILL, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1).group(ModItems.ITEM_GROUP_NORMAL));
         ModItems.register("oil_bucket", OIL_BUCKET);
     }
 }

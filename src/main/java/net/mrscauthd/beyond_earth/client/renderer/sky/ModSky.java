@@ -47,9 +47,7 @@ public class ModSky implements DimensionRenderingRegistry.SkyRenderer {
 
         // Always render stars first.
         if (fastStars > 0) {
-            int stars = (this.context.advancedTranslucency()
-                    || MinecraftClient.getInstance().options.graphicsMode.equals(GraphicsMode.FANCY) ? this.fancyStars
-                            : this.fastStars);
+            int stars = (this.context.advancedTranslucency() || MinecraftClient.getInstance().options.graphicsMode.equals(GraphicsMode.FANCY) ? this.fancyStars : this.fastStars);
             starsBuffer = SkyUtil.renderStars(context, bufferBuilder, starsBuffer, stars, isFixedStarColour());
         }
         // Render everything in the queue orderly.
@@ -57,14 +55,14 @@ public class ModSky implements DimensionRenderingRegistry.SkyRenderer {
             Vec3f euler = renderable.euler;
             float scale = renderable.scale;
             switch (renderable.type) {
-                case DYNAMIC -> euler = new Vec3f(skyAngle * 360.0f + euler.getX(), euler.getY(), euler.getZ());
-                case SCALING -> scale = SkyUtil.getScale();
-                case DEBUG -> {
-                    // Test things without restarting Minecraft.
-                }
-                case STATIC -> {
+            case DYNAMIC -> euler = new Vec3f(skyAngle * 360.0f + euler.getX(), euler.getY(), euler.getZ());
+            case SCALING -> scale = SkyUtil.getScale();
+            case DEBUG -> {
+                // Test things without restarting Minecraft.
+            }
+            case STATIC -> {
 
-                }
+            }
             }
 
             SkyUtil.render(context, bufferBuilder, renderable.texture, euler, scale, renderable.disableBlending);
@@ -90,8 +88,7 @@ public class ModSky implements DimensionRenderingRegistry.SkyRenderer {
     }
 
     // Objects are rendered in the order that they are added.
-    protected ModSky addToRenderingQueue(Identifier texture, boolean disableBlending, float scale, Vec3f euler,
-            RenderType type) {
+    protected ModSky addToRenderingQueue(Identifier texture, boolean disableBlending, float scale, Vec3f euler, RenderType type) {
         renderingQueue.add(new Renderable(texture, disableBlending, scale, euler, type));
         return this;
     }
@@ -143,7 +140,6 @@ public class ModSky implements DimensionRenderingRegistry.SkyRenderer {
     }
 
     /* Stores information that is needed to render things in the sky. */
-    protected record Renderable(Identifier texture, boolean disableBlending, float scale, Vec3f euler,
-            RenderType type) {
+    protected record Renderable(Identifier texture, boolean disableBlending, float scale, Vec3f euler, RenderType type) {
     }
 }

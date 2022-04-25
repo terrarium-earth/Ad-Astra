@@ -13,14 +13,12 @@ public abstract class AbstractMachineScreenHandler extends ScreenHandler {
 
     protected final AbstractMachineBlockEntity blockEntity;
 
-    public AbstractMachineScreenHandler(ScreenHandlerType<?> type, int syncId, PlayerInventory inventory,
-            AbstractMachineBlockEntity entity) {
+    public AbstractMachineScreenHandler(ScreenHandlerType<?> type, int syncId, PlayerInventory inventory, AbstractMachineBlockEntity entity) {
         this(type, syncId, inventory, entity, new Slot[] {});
     }
 
     // Add additional slots.
-    public AbstractMachineScreenHandler(ScreenHandlerType<?> type, int syncId, PlayerInventory inventory,
-            AbstractMachineBlockEntity entity, Slot[] slots) {
+    public AbstractMachineScreenHandler(ScreenHandlerType<?> type, int syncId, PlayerInventory inventory, AbstractMachineBlockEntity entity, Slot[] slots) {
         super(type, syncId);
         this.blockEntity = entity;
 

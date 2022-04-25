@@ -31,12 +31,10 @@ public class Meteor extends StructureFeature<StructurePoolFeatureConfig> {
     private static boolean isFeatureChunk(StructureGeneratorFactory.Context<StructurePoolFeatureConfig> context) {
         ChunkPos chunkpos = context.chunkPos();
 
-        return !context.chunkGenerator().method_41053(StructureSetKeys.OCEAN_MONUMENTS, context.seed(), chunkpos.x,
-                chunkpos.z, 10);
+        return !context.chunkGenerator().method_41053(StructureSetKeys.OCEAN_MONUMENTS, context.seed(), chunkpos.x, chunkpos.z, 10);
     }
 
-    public static Optional<StructurePiecesGenerator<StructurePoolFeatureConfig>> generate(
-            StructureGeneratorFactory.Context<StructurePoolFeatureConfig> context) {
+    public static Optional<StructurePiecesGenerator<StructurePoolFeatureConfig>> generate(StructureGeneratorFactory.Context<StructurePoolFeatureConfig> context) {
 
         if (!Meteor.isFeatureChunk(context)) {
             return Optional.empty();
@@ -44,8 +42,7 @@ public class Meteor extends StructureFeature<StructurePoolFeatureConfig> {
 
         BlockPos blockpos = context.chunkPos().getCenterAtY(0);
 
-        int topLandY = context.chunkGenerator().getHeightOnGround(blockpos.getX(), blockpos.getZ(),
-                Heightmap.Type.WORLD_SURFACE_WG, context.world());
+        int topLandY = context.chunkGenerator().getHeightOnGround(blockpos.getX(), blockpos.getZ(), Heightmap.Type.WORLD_SURFACE_WG, context.world());
         blockpos = blockpos.up(topLandY - 20);
 
         return StructurePoolBasedGenerator.generate(context, PoolStructurePiece::new, blockpos, false, false);

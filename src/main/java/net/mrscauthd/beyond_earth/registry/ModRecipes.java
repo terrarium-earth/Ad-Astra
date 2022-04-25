@@ -22,12 +22,9 @@ public class ModRecipes {
         COMPRESSING_RECIPE = register(new ModRecipeType<>(new ModIdentifier("compressing")));
 
         // Recipe Serializers.
-        Registry.register(Registry.RECIPE_SERIALIZER, new ModIdentifier("hammering"),
-                new HammerShapelessRecipe.Serializer());
-        Registry.register(Registry.RECIPE_SERIALIZER, new ModIdentifier("generating"),
-                new GeneratingRecipe.Serializer());
-        Registry.register(Registry.RECIPE_SERIALIZER, new ModIdentifier("compressing"),
-                new CompressingRecipe.Serializer());
+        Registry.register(Registry.RECIPE_SERIALIZER, new ModIdentifier("hammering"), new HammerShapelessRecipe.Serializer());
+        Registry.register(Registry.RECIPE_SERIALIZER, new ModIdentifier("generating"), new GeneratingRecipe.Serializer());
+        Registry.register(Registry.RECIPE_SERIALIZER, new ModIdentifier("compressing"), new CompressingRecipe.Serializer());
     }
 
     private static <T extends ModRecipeType<?>> T register(T recipe) {

@@ -6,7 +6,5 @@
   },
   "biomes": "#beyond_earth:has_structure/venus_bullet_biomes",
   "adapt_noise": true,
-  "spawn_overrides": {
-
-  }
+  "spawn_overrides": {}
 }
