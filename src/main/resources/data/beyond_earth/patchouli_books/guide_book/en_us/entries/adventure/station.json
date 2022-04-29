@@ -1,0 +1,13 @@
+{
+    "name": "Livin' above",
+    "icon": "beyond_earth:textures/jei/space_station_icon.png",
+    "category": "beyond_earth:rocket_travel",
+    "sortnum": "7",
+    "pages": [
+        {
+            "type": "patchouli:spotlight",
+            "item": "beyond_earth:blue_iron_plating_block",
+            "text": "As with all space, you have all the machines to live outside Earth, but wouldn't looking out of your extraterrestrial base only to see the bland terrain of the planet get boring after a while?$(br)Well, here is the solution! Build a space station! Enjoy the view of the sun and the planet you are orbiting!"
+        }
+    ]
+}

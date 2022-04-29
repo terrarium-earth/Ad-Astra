@@ -10,7 +10,7 @@ import net.mrscauthd.beyond_earth.client.screens.SolarPanelScreen;
 import net.mrscauthd.beyond_earth.client.screens.planet_selection.PlanetSelectionScreen;
 import net.mrscauthd.beyond_earth.registry.ModScreenHandlers;
 
-public class ModScreens {
+public class ClientModScreens {
 
     @Environment(EnvType.CLIENT)
     public static void register() {

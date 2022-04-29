@@ -40,7 +40,7 @@ public class ModSky implements DimensionRenderingRegistry.SkyRenderer {
         this.updateRenderer(context);
         BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
 
-        if (!SkyUtil.preRender(context, bufferBuilder, getColourType(), matrices, world, tickDelta)) {
+        if (!SkyUtil.preRender(context, bufferBuilder, getColourType(), getSunsetAngle(), matrices, world, tickDelta)) {
             // Cancel rendering if the player is in fog, i.e. in lava or powdered snow.
             return;
         }
@@ -57,11 +57,11 @@ public class ModSky implements DimensionRenderingRegistry.SkyRenderer {
             switch (renderable.type) {
             case DYNAMIC -> euler = new Vec3f(skyAngle * 360.0f + euler.getX(), euler.getY(), euler.getZ());
             case SCALING -> scale = SkyUtil.getScale();
+            case STATIC -> {
+            }
             case DEBUG -> {
                 // Test things without restarting Minecraft.
-            }
-            case STATIC -> {
-
+                euler = new Vec3f(skyAngle * 360.0f + euler.getX(), euler.getY(), euler.getZ());
             }
             }
 
@@ -87,6 +87,10 @@ public class ModSky implements DimensionRenderingRegistry.SkyRenderer {
         return true;
     }
 
+    public int getSunsetAngle() {
+        return 0;
+    }
+
     // Objects are rendered in the order that they are added.
     protected ModSky addToRenderingQueue(Identifier texture, boolean disableBlending, float scale, Vec3f euler, RenderType type) {
         renderingQueue.add(new Renderable(texture, disableBlending, scale, euler, type));
@@ -110,7 +114,11 @@ public class ModSky implements DimensionRenderingRegistry.SkyRenderer {
     }
 
     protected ModSky withSun(Identifier texture, int scale) {
-        return this.addToRenderingQueue(texture, false, scale, new Vec3f(0.0f, -90.0f, 0.0f), RenderType.DYNAMIC);
+        return this.withSun(texture, scale, new Vec3f(0.0f, -90.0f, 0.0f));
+    }
+
+    protected ModSky withSun(Identifier texture, int scale, Vec3f euler) {
+        return this.addToRenderingQueue(texture, false, scale, euler, RenderType.DYNAMIC);
     }
 
     public ModSky withEarth(float scale) {
@@ -125,21 +133,21 @@ public class ModSky implements DimensionRenderingRegistry.SkyRenderer {
         return this;
     }
 
-    /* Post-rendering after the Renderable object has been created. */
+    // Post-rendering after the Renderable object has been created.
     protected enum RenderType {
-        STATIC, /* Never moves. */
-        DYNAMIC, /* Moves based on the time of day. */
-        SCALING, /* Scales based on the position away from the player. */
-        DEBUG /* Only for testing while in a debug environment. */
+        STATIC, // Never moves.
+        DYNAMIC, // Moves based on the time of day.
+        SCALING, // Scales based on the position away from the player.
+        DEBUG // Only for testing while in a debug environment without restarting Minecraft.
     }
 
-    /* Changes the colour of the sunset and sunrise */
+    // Changes the colour of the sunset and sunrise.
     protected enum ColourType {
-        VANILLA, /* Vanilla. */
-        MARS /* Custom pink-ish red hue. */
+        VANILLA, // Vanilla.
+        MARS // Custom pink-ish red hue.
     }
 
-    /* Stores information that is needed to render things in the sky. */
+    // Stores information that is needed to render things in the sky.
     protected record Renderable(Identifier texture, boolean disableBlending, float scale, Vec3f euler, RenderType type) {
     }
 }

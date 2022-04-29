@@ -1,0 +1,55 @@
+{
+    "name": "Tips",
+    "icon": "beyond_earth:flag_purple",
+    "category": "beyond_earth:getting_started",
+    "sortnum": "1",
+    "pages": [
+        {
+            "type": "patchouli:spotlight",
+            "title": "Tip: 1",
+            "item": "beyond_earth:flag",
+            "text": "I recommend you take a flag with you!$(br)It marks your achievement of getting to that planet, as well as a way to personalise your bases on different planets."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "title": "Tip: 2",
+            "item": "beyond_earth:cheese",
+            "text": "The moon has cheese! Get some; it's good!$(br)Though there is something a bit off about the flavour, it seems a bit too stale....?"
+        },
+        {
+            "type": "patchouli:spotlight",
+            "title": "Tip: 3",
+            "item": "beyond_earth:rover",
+            "text": "Do you know what would be awesome? Drifting on another planet.$(br)And hey! If you leave tracks, you now have an easy way to get back. It's also good for travel, you know? The moon is quite barren."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "title": "Tip: 4",
+            "item": "beyond_earth:rocket_t4",
+            "text": "Interact [crouch+right click] with the lander when you reach your destination; it would be nice to get your rocket back, ESPECIALLY when you worked hard getting all of that stuff."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "title": "Tip: 5",
+            "item": "beyond_earth:rocket_launch_pad",
+            "text": "Remember to always carry more rocket launch pads and fuel so that you can fuel your rovers as well as the ride back home. You don't want to be stranded there, right?$(br2)Them natives may not be too happy."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "title": "Tip: 6",
+            "item": "minecraft:glowstone",
+            "text": "As oxygen does not exist in adequate amounts outside Earth, regular torches will burn out immediately and must be relit.$(br)However, glowstone still glows in space, so be sure to bring a lot of that."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "title": "Tip: 7",
+            "item": "minecraft:writable_book",
+            "text": "Please use REI in order to find out recipes for this mod. It is a $(o)wonderful$() tool that's usually integrated with numerous mods."
+        },
+        {
+            "type": "patchouli:text",
+            "title": "Tip: External Mods",
+            "text": "$(br) Many mods add materials that are very similar to the ones in Beyond Earth. Feel free to discover all the compatibilities to make the integrated experience satisfying. (WIP on Fabric)"
+        }
+    ]
+}

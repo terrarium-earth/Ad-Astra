@@ -6,6 +6,7 @@ import java.util.List;
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -57,6 +58,10 @@ public class ModUtils {
     public static final float ORBIT_TRUE_GRAVITY = 0.0f;
     public static final int ORBIT_TEMPERATURE = -270;
     public static final float ORBIT_GRAVITY = 0.5f;
+
+    public static boolean modLoaded(String modId) {
+        return FabricLoader.getInstance().isModLoaded(modId);
+    }
 
     // Server.
     public static void teleportToWorld(RegistryKey<World> world, Entity entity) {

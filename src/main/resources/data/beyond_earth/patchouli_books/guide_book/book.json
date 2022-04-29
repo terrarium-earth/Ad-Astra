@@ -1,0 +1,10 @@
+{
+    "name": "Astrodux",
+    "landing_text": "Welcome to your guide to the depths of Space." ,
+    "version": 1,
+    "book_texture":"patchouli:textures/gui/book_blue.png",
+    "model": "beyond_earth:guide_book",
+    "custom_book_item": "beyond_earth:guide_book",
+    "dont_generate_book": true,
+    "show_progress": false
+}

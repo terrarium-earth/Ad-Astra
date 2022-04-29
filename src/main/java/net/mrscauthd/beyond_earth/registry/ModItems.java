@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 import net.mrscauthd.beyond_earth.blocks.machines.entity.CoalGeneratorBlockEntity;
 import net.mrscauthd.beyond_earth.blocks.machines.entity.SolarPanelBlockEntity;
 import net.mrscauthd.beyond_earth.blocks.machines.entity.WaterPumpBlockEntity;
+import net.mrscauthd.beyond_earth.items.GuideBook;
 import net.mrscauthd.beyond_earth.items.HammerItem;
 import net.mrscauthd.beyond_earth.items.vehicles.RocketItem;
 import net.mrscauthd.beyond_earth.items.vehicles.RoverItem;
@@ -38,6 +39,9 @@ public class ModItems {
         public static final Item TIER_3_ROCKET = new RocketItem(new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
         public static final Item TIER_4_ROCKET = new RocketItem(new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
         public static final Item ROVER = new RoverItem(new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
+
+        // Guide book
+        public static final Item GUIDE_BOOK = new GuideBook(new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
 
         // Items.
         public static final Item CHEESE = new Item(new FabricItemSettings().group(ITEM_GROUP_NORMAL).food(new FoodComponent.Builder().hunger(4).saturationModifier(3.0f).build()));
@@ -100,19 +104,19 @@ public class ModItems {
         public static final BlockItem FLAG_YELLOW = new TallBlockItem(ModBlocks.FLAG_YELLOW, new Item.Settings().group(ITEM_GROUP_FLAGS));
 
         // Globes.
-        public static final BlockItem EARTH_GLOBE = new BlockItem(ModBlocks.EARTH_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.EPIC));
-        public static final BlockItem MOON_GLOBE = new BlockItem(ModBlocks.MOON_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.EPIC));
-        public static final BlockItem MARS_GLOBE = new BlockItem(ModBlocks.MARS_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.EPIC));
-        public static final BlockItem MERCURY_GLOBE = new BlockItem(ModBlocks.MERCURY_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.EPIC));
-        public static final BlockItem VENUS_GLOBE = new BlockItem(ModBlocks.VENUS_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.EPIC));
-        public static final BlockItem GLACIO_GLOBE = new BlockItem(ModBlocks.GLACIO_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.EPIC));
+        public static final BlockItem EARTH_GLOBE = new BlockItem(ModBlocks.EARTH_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.RARE));
+        public static final BlockItem MOON_GLOBE = new BlockItem(ModBlocks.MOON_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.RARE));
+        public static final BlockItem MARS_GLOBE = new BlockItem(ModBlocks.MARS_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.RARE));
+        public static final BlockItem MERCURY_GLOBE = new BlockItem(ModBlocks.MERCURY_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.RARE));
+        public static final BlockItem VENUS_GLOBE = new BlockItem(ModBlocks.VENUS_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.RARE));
+        public static final BlockItem GLACIO_GLOBE = new BlockItem(ModBlocks.GLACIO_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.RARE));
 
         // Torch items.
         public static final Item COAL_TORCH = new WallStandingBlockItem(ModBlocks.COAL_TORCH, ModBlocks.WALL_COAL_TORCH, new FabricItemSettings().group(ITEM_GROUP_BASICS));
         public static final Item COAL_LANTERN = new BlockItem(ModBlocks.COAL_LANTERN, new Item.Settings().group(ITEM_GROUP_BASICS));
 
         // Machines.
-        public static final BlockItem NASA_WORKBENCH = new BlockItem(ModBlocks.NASA_WORKBENCH, new Item.Settings().group(ITEM_GROUP_MACHINES).rarity(Rarity.EPIC));
+        public static final BlockItem NASA_WORKBENCH = new BlockItem(ModBlocks.NASA_WORKBENCH, new Item.Settings().group(ITEM_GROUP_MACHINES).rarity(Rarity.UNCOMMON));
         public static final BlockItem SOLAR_PANEL = new BlockItem(ModBlocks.SOLAR_PANEL, new Item.Settings().group(ITEM_GROUP_MACHINES)) {
                 @Override
                 public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
@@ -222,6 +226,9 @@ public class ModItems {
                 register("rocket_t3", TIER_3_ROCKET);
                 register("rocket_t4", TIER_4_ROCKET);
                 register("rover", ROVER);
+
+                // Guide book.
+                register("guide_book", GUIDE_BOOK);
 
                 // Items.
                 register("cheese", CHEESE);

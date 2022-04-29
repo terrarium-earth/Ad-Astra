@@ -1,5 +1,7 @@
 package net.mrscauthd.beyond_earth.client.screens.planet_selection;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -39,8 +41,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 
         public static final Identifier MILKY_WAY_TEXTURE = new ModIdentifier("textures/sky/gui/milky_way.png");
 
-        public static final Identifier SUN_SOLAR_SYSTEM_TEXTURE = new ModIdentifier("textures/solar_system.png");
-        public static final Identifier PROXIMA_CENTAURI_SOLAR_SYSTEM_TEXTURE = new ModIdentifier("textures/proxima_centauri.png");
+        public static final Identifier ORBIT_RING = new ModIdentifier("textures/orbit_ring.png");
 
         public static final Identifier SMALL_MENU_LIST = new ModIdentifier("textures/rocket_menu_list.png");
         public static final Identifier LARGE_MENU_TEXTURE = new ModIdentifier("textures/rocket_menu_list_2.png");
@@ -117,7 +118,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 
                 SolarSystem solarSystem = null;
                 for (SolarSystem system : BeyondEarthClient.solarSystems) {
-                        if (this.currentCategory.id().equals(system.solarSystem())) {
+                        if (this.currentCategory.id().equals(system.solarSystem()) || this.currentCategory.parent() != null && this.currentCategory.parent().id().equals(system.solarSystem())) {
                                 solarSystem = system;
                                 break;
                         }
@@ -130,44 +131,44 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                 // Render the Solar System when inside the Solar System category.
                 case 2, 3 -> {
 
-                        // if (planet != null && solarSystem != null) {
                         if (solarSystem != null) {
 
-                                int rings = solarSystem.planetaryRings().size();
-
-                                // Rings.
-                                PlanetSelectionUtil.addTexture(matrices, (this.width - 185) / 2, (this.height - 185) / 2, 185, 185, SUN_SOLAR_SYSTEM_TEXTURE);
                                 // Sun.
                                 PlanetSelectionUtil.addTexture(matrices, (this.width - 15) / 2, (this.height - 15) / 2, 15, 15, new ModIdentifier("textures/sky/gui/" + solarSystem.sunType().toString().toLowerCase() + ".png"));
 
                                 // Planets.
                                 for (int i = 0; i < solarSystem.planetaryRings().size(); i++) {
+
+                                        // Rings.
+                                        double radius = solarSystem.planetaryRings().get(i).getRight();
+                                        PlanetSelectionUtil.drawCircle(this.width / 2, this.height / 2, radius * 24, 75);
+
                                         int days = 1;
-                                        int coordinates = -21 - (i * 16);
-                                        Identifier texture = solarSystem.planetaryRings().get(i);
+                                        int coordinates = (int) (radius * 17 - 5);
+                                        Identifier texture = solarSystem.planetaryRings().get(i).getLeft();
                                         for (Planet currentPlanet : BeyondEarthClient.planets) {
                                                 if (texture.getPath().equals(currentPlanet.name())) {
                                                         days = currentPlanet.daysInYear();
                                                         break;
                                                 }
                                         }
-                                        PlanetSelectionUtil.addRotatingTexture(this, matrices, coordinates, coordinates, 10, 10, new ModIdentifier("textures/sky/gui/" + texture.getPath() + ".png"), 365 / (float)days);
+                                        PlanetSelectionUtil.addRotatingTexture(this, matrices, coordinates, coordinates, 10, 10, new ModIdentifier("textures/sky/gui/" + texture.getPath() + ".png"), 365 / (float) days);
                                 }
                         }
                 }
                 }
 
-                // Display either the small or large menu when a planet category is opened.
+                // // Display either the small or large menu when a planet category is opened.
                 if (currentPage == 3) {
                         PlanetSelectionUtil.addTexture(matrices, 0, (this.height / 2) - 177 / 2, 215, 177, LARGE_MENU_TEXTURE);
                 } else {
                         PlanetSelectionUtil.addTexture(matrices, 0, (this.height / 2) - 177 / 2, 105, 177, SMALL_MENU_LIST);
                 }
 
-                // Disable the back button when there is nothing to go back to.
+                // // Disable the back button when there is nothing to go back to.
                 this.backButton.visible = this.currentCategory.parent() != null;
 
-                // Disable buttons that are not part of the current category.
+                // // Disable buttons that are not part of the current category.
                 this.categoryButtons.forEach((category, buttons) -> buttons.forEach((button) -> button.visible = currentCategory.equals(category)));
 
                 RenderSystem.disableBlend();

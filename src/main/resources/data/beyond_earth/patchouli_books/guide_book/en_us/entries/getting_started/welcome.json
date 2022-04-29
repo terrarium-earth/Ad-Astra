@@ -1,0 +1,17 @@
+{
+    "name": "Welcome!",
+    "icon": "beyond_earth:oxygen_tank",
+    "category": "beyond_earth:getting_started",
+    "priority": "true",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "title": "The Beginning",
+            "text": "Well? have you visited every biome?$(br)Have you built all your dreams?$(br)Have you finally claimed every tiny piece of land you call the earth?$(br)Have you explored far and wide?$(br)Seen all that can be seen?$(br)well, then, your tiny world is about to get a lot bigger!"
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Imagine the vast unknowns of space, all filled with stars and planets with resources you have never seen before.$(br)Imagine driving rovers through harsh, barren lands in the hope of finding life beyond Earth.$(br)Building rockets that can go to the moon! Rockets to other planets! Rockets to other Stars!$(br)Imagine barren lava-filled landscapes and frozen peaked mountainous terrain. Leave the little world you know and love and view the wonders yet to be discovered!"
+        }
+    ]
+}

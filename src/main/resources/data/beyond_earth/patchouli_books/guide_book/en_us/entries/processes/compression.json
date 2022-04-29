@@ -1,0 +1,17 @@
+{
+    "name": "Compression",
+    "icon": "beyond_earth:compressor",
+    "category": "beyond_earth:process",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Compressed metal plates are required to produce each tier of Rockets and their respective components. $(br2)Compression can be performed in two ways. Either through a hammer or through a compressor. $(br2)All metals beyond Iron [Steel, Desh, Ostrum, Calorite] will require a compressor for processing."
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe": "beyond_earth:hammer",
+            "recipe2": "beyond_earth:compressor",
+            "title": "Compression Methods"
+        }
+    ]
+}

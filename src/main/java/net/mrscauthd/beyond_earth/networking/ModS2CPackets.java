@@ -1,6 +1,11 @@
 package net.mrscauthd.beyond_earth.networking;
 
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.tuple.Pair;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -59,8 +64,9 @@ public class ModS2CPackets {
                 Identifier galaxy = buf.readIdentifier();
                 Identifier solarSystem = buf.readIdentifier();
                 SolarSystem.SunType sunType = buf.readEnumConstant(SolarSystem.SunType.class);
-                List<Identifier> planetaryRings = buf.readList(buf1 -> {
-                    return buf1.readIdentifier();
+                
+                List<Pair<Identifier, Double>> planetaryRings = buf.readList(buf1 -> {
+                    return Pair.of(buf1.readIdentifier(), buf1.readDouble());
                 });
 
                 return new SolarSystem(galaxy, solarSystem, sunType, planetaryRings);

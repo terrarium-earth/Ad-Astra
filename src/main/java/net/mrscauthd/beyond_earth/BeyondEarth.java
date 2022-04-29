@@ -19,6 +19,7 @@ import net.mrscauthd.beyond_earth.registry.ModBiomes;
 import net.mrscauthd.beyond_earth.registry.ModBlockEntities;
 import net.mrscauthd.beyond_earth.registry.ModBlocks;
 import net.mrscauthd.beyond_earth.registry.ModCommands;
+import net.mrscauthd.beyond_earth.registry.ModEntities;
 import net.mrscauthd.beyond_earth.registry.ModFeatures;
 import net.mrscauthd.beyond_earth.registry.ModFluids;
 import net.mrscauthd.beyond_earth.registry.ModItems;
@@ -48,6 +49,7 @@ public class BeyondEarth implements ModInitializer {
         ModFluids.register();
         ModArmour.register();
         ModRecipes.register();
+        ModEntities.register();
         ModScreenHandlers.register();
         ModCommands.register();
 
