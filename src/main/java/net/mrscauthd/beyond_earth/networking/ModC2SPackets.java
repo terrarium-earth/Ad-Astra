@@ -70,8 +70,9 @@ public class ModC2SPackets {
             buf.writeIdentifier(solarSystem.galaxy());
             buf.writeIdentifier(solarSystem.solarSystem());
             buf.writeEnumConstant(solarSystem.sunType());
-            buf.writeCollection(solarSystem.planetaryRings(), (buf1, id) -> {
-                buf1.writeIdentifier(id);
+            buf.writeCollection(solarSystem.planetaryRings(), (buf1, value) -> {
+                buf1.writeIdentifier(value.getLeft());
+                buf1.writeDouble(value.getRight());
             });
         });
         return mainBuf;

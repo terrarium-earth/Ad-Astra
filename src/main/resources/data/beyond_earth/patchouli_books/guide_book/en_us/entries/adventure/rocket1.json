@@ -1,0 +1,19 @@
+{
+    "name": "Your 1st Rocket",
+    "icon": "beyond_earth:rocket_t1",
+    "category": "beyond_earth:rocket_travel",
+    "sortnum": "1",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Being your first rocket, you obviously have only resources you can find on Earth.$(br2)Using steel and iron, one can make a rocket barely powerful enough to leave orbit and make it to the closest celestial body, the Moon!"
+        },
+        {
+            "type": "patchouli:entity",
+            "entity": "beyond_earth:rocket_t1",
+            "title": "Tier 1 Rocket",
+            "offset": "0.5",
+            "scale": "0.9"
+        }
+    ]
+}

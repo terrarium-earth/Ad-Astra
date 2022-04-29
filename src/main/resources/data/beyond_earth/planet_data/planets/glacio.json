@@ -7,7 +7,7 @@
     "parent_dimension": null,
     "rocket_tier": 4,
     "gravity": 3.721,
-    "days_in_year": 88,
+    "days_in_year": 365,
     "temperature": -20,
     "oxygen": true,
     "atmosphere_start": 450,

@@ -1,0 +1,29 @@
+{
+    "name": "Fuel Synthesis",
+    "icon": "beyond_earth:fuel_refinery",
+    "category": "beyond_earth:process",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "All extra-terrestrial vehicles require fuel in order to advance. Fuel, of course, cannot be some primitive substance like wood or coal. Rockets need something a bit more EXPLOSIVE.$(br2)Hence this entry explains where to find resources and how to make rocket fuel."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "beyond_earth:oil_bucket",
+            "title": "Oil Wells",
+            "text": "Oil wells are naturally occurring spouts that can be mainly found in the Ocean. There will be a singular spout with multiple sources surrounding it.$(br2)It is recommended that one bring multiple buckets or ample fluid storage to make enough fuel for all intergalactic adventures."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "beyond_earth:fuel_bucket",
+            "title": "Fuel",
+            "text": "Fuel is the liquid made by processing oil in a refinery. For every bucket of oil put into the refinery, one bucket of fuel is returned.$(br2)It is used to power all rockets and rovers."
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe": "beyond_earth:fuel_refinery",
+            "title": "Fuel Refinery",
+            "text": "As stated earlier, this machine powered by energy can produce fuel by consuming oil."
+        }
+    ]
+}

@@ -1,0 +1,19 @@
+{
+    "name": "A few million miles",
+    "icon": "beyond_earth:rocket_t2",
+    "category": "beyond_earth:rocket_travel",
+    "sortnum": "2",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Being made out of Materials found on the moon, You have successfully launched your first rocket, explored the moon and its wonders, and now crave for somewhere \"beyond.\"$(br2)After collecting plenty of Desh, it's time to move to a REAL planet; your goal? $(br)Mars!"
+        },
+        {
+            "type": "patchouli:entity",
+            "entity": "beyond_earth:rocket_t2",
+            "title": "Tier 2 Rocket",
+            "offset": "0.5",
+            "scale": "0.9"
+        }
+    ]
+}

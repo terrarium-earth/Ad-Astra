@@ -2,10 +2,22 @@
     "galaxy": "beyond_earth:milky_way",
     "solar_system": "beyond_earth:solar_system",
     "sun_type": "sun",
-    "planetary_rings": [ 
-        "beyond_earth:mercury",
-        "beyond_earth:venus",
-        "beyond_earth:earth",
-        "beyond_earth:mars"
+    "planetary_rings": [
+        {
+            "planet": "beyond_earth:mercury",
+            "radius": 1.0
+        },
+        {
+            "planet": "beyond_earth:venus",
+            "radius": 2.0
+        },
+        {
+            "planet": "beyond_earth:earth",
+            "radius": 3.0
+        },
+        {
+            "planet": "beyond_earth:mars",
+            "radius": 4.0
+        }
     ]
 }

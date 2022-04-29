@@ -42,10 +42,11 @@ import net.mrscauthd.beyond_earth.registry.ModBlockEntities;
 public class GlobeBlock extends BlockWithEntity implements Waterloggable {
     public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
+    public static final BooleanProperty POWERED = Properties.POWERED;
 
     public GlobeBlock(Settings settings) {
         super(settings);
-        this.setDefaultState(getDefaultState().with(WATERLOGGED, false));
+        this.setDefaultState(getDefaultState().with(WATERLOGGED, false).with(POWERED, false));
     }
 
     @Override
@@ -118,7 +119,7 @@ public class GlobeBlock extends BlockWithEntity implements Waterloggable {
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(FACING, WATERLOGGED);
+        builder.add(FACING, WATERLOGGED, POWERED);
     }
 
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
@@ -136,6 +137,14 @@ public class GlobeBlock extends BlockWithEntity implements Waterloggable {
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         FluidState fluidState = ctx.getWorld().getFluidState(ctx.getBlockPos());
-        return this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite()).with(WATERLOGGED, fluidState.getFluid().equals(Fluids.WATER));
+        return this.getDefaultState().with(POWERED, ctx.getWorld().isReceivingRedstonePower(ctx.getBlockPos())).with(FACING, ctx.getPlayerFacing().getOpposite()).with(WATERLOGGED, fluidState.getFluid().equals(Fluids.WATER));
+    }
+
+    @Override
+    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
+
+        if (!world.isClient) {
+            world.setBlockState(pos, state.with(POWERED, world.isReceivingRedstonePower(pos)));
+        }
     }
 }
