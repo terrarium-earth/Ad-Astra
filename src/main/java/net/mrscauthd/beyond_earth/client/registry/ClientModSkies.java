@@ -19,7 +19,7 @@ import net.mrscauthd.beyond_earth.client.renderer.sky.weather_renderer.ModWeathe
 import net.mrscauthd.beyond_earth.util.ModUtils;
 
 @Environment(EnvType.CLIENT)
-public class ModSkies {
+public class ClientModSkies {
 
         public static void register() {
 

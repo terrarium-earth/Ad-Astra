@@ -16,9 +16,11 @@ import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.item.Item;
 import net.minecraft.screen.PlayerScreenHandler;
-import net.mrscauthd.beyond_earth.client.registry.ModScreens;
-import net.mrscauthd.beyond_earth.client.registry.ModSkies;
+import net.mrscauthd.beyond_earth.client.registry.ClientModEntities;
+import net.mrscauthd.beyond_earth.client.registry.ClientModScreens;
+import net.mrscauthd.beyond_earth.client.registry.ClientModSkies;
 import net.mrscauthd.beyond_earth.client.renderer.FlagBlockEntityRenderer;
+import net.mrscauthd.beyond_earth.client.renderer.entity.EntityModelLayers;
 import net.mrscauthd.beyond_earth.client.renderer.globe.GlobeBlockEntityRenderer;
 import net.mrscauthd.beyond_earth.client.renderer.globe.GlobeItemRenderer;
 import net.mrscauthd.beyond_earth.client.renderer.globe.GlobeModel;
@@ -47,10 +49,14 @@ public class BeyondEarthClient implements ClientModInitializer {
                 ModS2CPackets.register();
 
                 // GUI.
-                ModScreens.register();
+                ClientModScreens.register();
 
                 // Dimension sky
-                ModSkies.register();
+                ClientModSkies.register();
+
+                // Entities
+                ClientModEntities.register();
+                EntityModelLayers.register();
 
                 // Flag entity rendering.
                 BlockEntityRendererRegistry.register(ModBlockEntities.FLAG_BLOCK_ENTITY, FlagBlockEntityRenderer::new);

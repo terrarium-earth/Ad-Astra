@@ -16,22 +16,27 @@ public class VenusSky extends ModSky {
         return false;
     }
 
+    @Override
+    public int getSunsetAngle() {
+        return 180;
+    }
+
     public VenusSky withMercury() {
-        Vec3f euler = new Vec3f(-30, -55, 45);
+        Vec3f euler = new Vec3f(-25.0f, 90.0f, -25.0f);
         this.addToRenderingQueue(EARTH_LIGHT_TEXTURE, false, 2.78f * 2, euler, RenderType.DYNAMIC);
         return (VenusSky) this.addToRenderingQueue(OrbitSky.MERCURY_TEXTURE, true, 2, euler, RenderType.DYNAMIC);
     }
 
     @Override
     public VenusSky withEarth(float scale) {
-        Vec3f euler = new Vec3f(-25.0f, 90.0f, -25.0f);
+        Vec3f euler = new Vec3f(-30.0f, -55.0f, 45.0f);
         this.addToRenderingQueue(EARTH_LIGHT_TEXTURE, false, 2.78f * scale, euler, RenderType.DYNAMIC);
         return (VenusSky) this.addToRenderingQueue(EARTH_TEXTURE, true, scale, euler, RenderType.DYNAMIC);
     }
 
     @Override
     public VenusSky withSun() {
-        return (VenusSky) this.withSun(RED_SUN_TEXTURE, 20);
+        return (VenusSky) this.withSun(RED_SUN_TEXTURE, 20, new Vec3f(0.0f, 90.0f, 0.0f));
     }
 
     @Override

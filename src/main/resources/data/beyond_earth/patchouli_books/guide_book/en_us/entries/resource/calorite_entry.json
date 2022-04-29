@@ -1,0 +1,18 @@
+{
+    "name": "Calorite",
+    "icon": "beyond_earth:calorite_ingot",
+    "category": "beyond_earth:resources",
+    "sortnum": "4",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Calorite is a resource that is exclusively found on the Venus.$(br)It is used as the core component of the 4th tier Rocket."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "beyond_earth:calorite_ingot",
+            "text": "Calorite ingots are made by Smelting/Blasting Raw Calorite.",
+            "title": "Manufacture"
+        }
+    ]
+}

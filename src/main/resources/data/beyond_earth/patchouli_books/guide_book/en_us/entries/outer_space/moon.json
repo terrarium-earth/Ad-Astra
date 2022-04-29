@@ -1,0 +1,12 @@
+{
+    "name": "The moon",
+    "icon": "beyond_earth:/textures/sky/moon.png",
+    "category": "beyond_earth:space",
+    "sortnum": "1",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "The Moon is a barren landmass with nothing but Moon sand as far as the eye can see. The only thing one can see in the distance is the faint light of $(o)some$() structure that looks like an entrance?"
+        }
+    ]
+}

@@ -25,6 +25,11 @@ public class GlobeBlockEntity extends BlockEntity {
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, GlobeBlockEntity blockEntity) {
+
+        if (state.get(GlobeBlock.POWERED) && blockEntity.getAngularVelocity() <= 0.05f) {
+            blockEntity.setAngularVelocity(0.05f);
+        }
+
         if (blockEntity.getAngularVelocity() > 0) {
             // Simulate an inertia effect.
             blockEntity.setAngularVelocity(blockEntity.getAngularVelocity() - INERTIA);
@@ -34,7 +39,6 @@ public class GlobeBlockEntity extends BlockEntity {
 
         } else if (blockEntity.getAngularVelocity() < 0) {
             blockEntity.setAngularVelocity(0);
-            blockEntity.markDirty();
         }
     }
 

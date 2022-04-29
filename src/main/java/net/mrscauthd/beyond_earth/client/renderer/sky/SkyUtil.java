@@ -40,7 +40,7 @@ public class SkyUtil {
         return Math.max(scale, 4.0f);
     }
 
-    public static boolean preRender(WorldRenderContext context, BufferBuilder bufferBuilder, ModSky.ColourType colourType, MatrixStack matrices, ClientWorld world, float tickDelta) {
+    public static boolean preRender(WorldRenderContext context, BufferBuilder bufferBuilder, ModSky.ColourType colourType, int sunsetAngle, MatrixStack matrices, ClientWorld world, float tickDelta) {
 
         if (isSubmerged(context.camera())) {
             return false;
@@ -60,7 +60,7 @@ public class SkyUtil {
 
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
-        renderColouring(colourType, bufferBuilder, matrices, world, tickDelta, context.world().getSkyAngle(tickDelta));
+        renderColouring(colourType, bufferBuilder, matrices, world, tickDelta, context.world().getSkyAngle(tickDelta), sunsetAngle);
         RenderSystem.blendFuncSeparate(GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE, GlStateManager.SrcFactor.ONE, GlStateManager.DstFactor.ZERO);
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
         RenderSystem.enableTexture();
@@ -159,14 +159,12 @@ public class SkyUtil {
         starsBuffer.upload(bufferBuilder);
 
         if (!fixedStarColour) {
-            float gradient = 1.0f - context.world().getRainGradient(context.tickDelta());
-            float rot = context.world().method_23787(context.tickDelta()) * gradient;
-            if (rot > 0.0f) {
-                RenderSystem.setShaderColor(rot, rot, rot, rot);
-            }
+            float rot = context.world().method_23787(context.tickDelta());
+            RenderSystem.setShaderColor(rot, rot, rot, rot);
         } else {
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
         }
+
         BackgroundRenderer.clearFog();
         starsBuffer.setShader(context.matrixStack().peek().getPositionMatrix(), RenderSystem.getProjectionMatrix(), GameRenderer.getPositionShader());
         context.matrixStack().pop();
@@ -211,7 +209,7 @@ public class SkyUtil {
         }
     }
 
-    public static void renderColouring(ModSky.ColourType type, BufferBuilder bufferBuilder, MatrixStack matrices, ClientWorld world, float tickDelta, float skyAngle) {
+    public static void renderColouring(ModSky.ColourType type, BufferBuilder bufferBuilder, MatrixStack matrices, ClientWorld world, float tickDelta, float skyAngle, int sunsetAngle) {
 
         float[] fogColours = switch (type) {
         case VANILLA -> world.getDimensionEffects().getFogColorOverride(world.getSkyAngle(tickDelta), tickDelta);
@@ -223,7 +221,7 @@ public class SkyUtil {
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
             matrices.push();
             matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(90.0f));
-            float sine = MathHelper.sin(world.getSkyAngleRadians(tickDelta)) < 0.0f ? 180.0f : 0.0f;
+            float sine = MathHelper.sin(world.getSkyAngleRadians(tickDelta)) < 0.0f ? 180.0f : sunsetAngle;
             matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(sine));
             matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(90.0f));
 
