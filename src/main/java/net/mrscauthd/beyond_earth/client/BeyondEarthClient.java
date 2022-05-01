@@ -26,8 +26,10 @@ import net.mrscauthd.beyond_earth.client.renderer.globe.GlobeItemRenderer;
 import net.mrscauthd.beyond_earth.client.renderer.globe.GlobeModel;
 import net.mrscauthd.beyond_earth.client.renderer.spacesuit.SpaceSuitModel;
 import net.mrscauthd.beyond_earth.client.renderer.spacesuit.SpaceSuitRenderer;
+import net.mrscauthd.beyond_earth.client.resource_pack.PlanetResources;
+import net.mrscauthd.beyond_earth.client.resource_pack.SkyRenderer;
+import net.mrscauthd.beyond_earth.client.resource_pack.SolarSystem;
 import net.mrscauthd.beyond_earth.data.Planet;
-import net.mrscauthd.beyond_earth.data.SolarSystem;
 import net.mrscauthd.beyond_earth.networking.ModS2CPackets;
 import net.mrscauthd.beyond_earth.registry.ModBlockEntities;
 import net.mrscauthd.beyond_earth.registry.ModFluids;
@@ -40,10 +42,15 @@ public class BeyondEarthClient implements ClientModInitializer {
         public static List<Planet> planets = new ArrayList<>();
         @Environment(EnvType.CLIENT)
         public static List<SolarSystem> solarSystems = new ArrayList<>();
+        @Environment(EnvType.CLIENT)
+        public static List<SkyRenderer> skyRenderers = new ArrayList<>();
 
         @Override
         @Environment(EnvType.CLIENT)
         public void onInitializeClient() {
+
+                // Assets
+                PlanetResources.register();
 
                 // Packets.
                 ModS2CPackets.register();
@@ -51,10 +58,7 @@ public class BeyondEarthClient implements ClientModInitializer {
                 // GUI.
                 ClientModScreens.register();
 
-                // Dimension sky
-                ClientModSkies.register();
-
-                // Entities
+                // Entities.
                 ClientModEntities.register();
                 EntityModelLayers.register();
 
@@ -93,5 +97,12 @@ public class BeyondEarthClient implements ClientModInitializer {
                 });
 
                 BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.FUEL_STILL, ModFluids.FLOWING_FUEL);
+        }
+
+        // Register after the Resource packs have been loaded.
+        @Environment(EnvType.CLIENT)
+        public static void postAssetRegister() {
+                // Dimension sky.
+                ClientModSkies.register();
         }
 }

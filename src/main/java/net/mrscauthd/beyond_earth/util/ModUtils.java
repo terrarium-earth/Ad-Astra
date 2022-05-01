@@ -136,7 +136,11 @@ public class ModUtils {
                 return planet.gravity() / VANILLA_GRAVITY;
             }
         }
-        if (isPlanet(isClient, world)) {
+        // Orbit gravity is 0.5, allowing for slow fall.
+        if (isOrbitDimension(isClient, world)) {
+            return 0.5f;
+        }
+        if (isSpaceDimension(isClient, world)) {
             BeyondEarth.LOGGER.error(world.getValue().toString() + " does not have a defined gravity!");
         }
         return 1.0f;

@@ -1,0 +1,39 @@
+{
+    "dimension": "beyond_earth:venus_orbit",
+    "stars": {
+        "fancy_count": 13000,
+        "fast_count": 6000,
+        "daylight_visible": true
+    },
+    "sunset_color": "vanilla",
+    "dimension_effects": {
+        "type": "simple"
+    },
+    "cloud_effects": "none",
+    "weather_effects": "none",
+    "horizon_angle": 0,
+    "sky_objects": [
+        {
+            "texture": "sun",
+            "blending": true,
+            "render_type": "dynamic",
+            "scale": 30.0,
+            "rotation": {
+                "x": 0.0,
+                "y": -90.0,
+                "z": 0.0
+            }
+        },
+        {
+            "texture": "venus",
+            "blending": false,
+            "render_type": "scaling",
+            "scale": 25.0,
+            "rotation": {
+                "x": 180.0,
+                "y": 180.0,
+                "z": 0.0
+            }
+        }
+    ]
+}
