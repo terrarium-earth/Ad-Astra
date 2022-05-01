@@ -1,7 +1,5 @@
 package net.mrscauthd.beyond_earth.client.screens.planet_selection;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,8 +20,8 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
 import net.mrscauthd.beyond_earth.BeyondEarth;
 import net.mrscauthd.beyond_earth.client.BeyondEarthClient;
 import net.mrscauthd.beyond_earth.data.ButtonColour;
@@ -31,6 +29,7 @@ import net.mrscauthd.beyond_earth.data.Planet;
 import net.mrscauthd.beyond_earth.data.SolarSystem;
 import net.mrscauthd.beyond_earth.gui.screen_handlers.PlanetSelectionScreenHandler;
 import net.mrscauthd.beyond_earth.networking.ModC2SPackets;
+import net.mrscauthd.beyond_earth.util.MathUtil;
 import net.mrscauthd.beyond_earth.util.ModIdentifier;
 
 @Environment(EnvType.CLIENT)
@@ -38,13 +37,16 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 
         // Textures.
         public static final Identifier BACKGROUND_TEXTURE = new ModIdentifier("textures/screens/planet_selection.png");
-
         public static final Identifier MILKY_WAY_TEXTURE = new ModIdentifier("textures/sky/gui/milky_way.png");
 
-        public static final Identifier ORBIT_RING = new ModIdentifier("textures/orbit_ring.png");
+        public static final Identifier SMALL_MENU_LIST = new ModIdentifier("textures/selection_menu.png");
+        public static final Identifier LARGE_MENU_TEXTURE = new ModIdentifier("textures/selection_menu_large.png");
+        public static final Identifier SCROLL_BAR = new ModIdentifier("textures/scroll_bar.png");
 
-        public static final Identifier SMALL_MENU_LIST = new ModIdentifier("textures/rocket_menu_list.png");
-        public static final Identifier LARGE_MENU_TEXTURE = new ModIdentifier("textures/rocket_menu_list_2.png");
+        public static final int SCROLL_BAR_X = 92;
+        public static final int SCROLL_MIN_Y = 172;
+        public static final int SCROLL_MAX_Y = 269;
+        public static final int SCROLL_SENSITIVITY = 5;
 
         // Text.
         public static final Text CATALOG_TEXT = PlanetSelectionUtil.createText("catalog");
@@ -59,6 +61,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 
         public static final Text SPACE_STATION_TEXT = PlanetSelectionUtil.createText("space_station");
 
+        public static final Text SOLAR_SYSTEM_TEXT = PlanetSelectionUtil.createText("solar_system");
         public static final Text CATEGORY_TEXT = PlanetSelectionUtil.createText("category");
         public static final Text PROVIDED_TEXT = PlanetSelectionUtil.createText("provided");
         public static final Text TYPE_TEXT = PlanetSelectionUtil.createText("type");
@@ -69,19 +72,14 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
         public static final Text OXYGEN_FALSE_TEXT = PlanetSelectionUtil.createText("oxygen.false");
         public static final Text ITEM_REQUIREMENT_TEXT = PlanetSelectionUtil.createText("item_requirement");
 
-        public static final Text ROCKET_TIER_1_TEXT = new TranslatableText("entity." + BeyondEarth.MOD_ID + ".rocket_t" + 1);
-        public static final Text ROCKET_TIER_2_TEXT = new TranslatableText("entity." + BeyondEarth.MOD_ID + ".rocket_t" + 2);
-        public static final Text ROCKET_TIER_3_TEXT = new TranslatableText("entity." + BeyondEarth.MOD_ID + ".rocket_t" + 3);
-        public static final Text ROCKET_TIER_4_TEXT = new TranslatableText("entity." + BeyondEarth.MOD_ID + ".rocket_t" + 4);
-
         private final PlanetSelectionScreenHandler handler;
 
         private final Map<Category, LinkedList<PlanetSelectionButton>> categoryButtons = new HashMap<>();
-        private PlanetSelectionButton backButton;
-
         private Category currentCategory = Category.MILKY_WAY_CATEGORY;
 
         private float guiTime;
+
+        private ButtonWidget scrollBar;
 
         List<Category> solarSystemsCategories = new LinkedList<>();
 
@@ -158,18 +156,21 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                 }
                 }
 
-                // // Display either the small or large menu when a planet category is opened.
+                // Display either the small or large menu when a planet category is opened.
                 if (currentPage == 3) {
                         PlanetSelectionUtil.addTexture(matrices, 0, (this.height / 2) - 177 / 2, 215, 177, LARGE_MENU_TEXTURE);
+                        this.scrollBar.x = 210;
                 } else {
                         PlanetSelectionUtil.addTexture(matrices, 0, (this.height / 2) - 177 / 2, 105, 177, SMALL_MENU_LIST);
+                        this.scrollBar.x = SCROLL_BAR_X;
                 }
 
-                // // Disable the back button when there is nothing to go back to.
-                this.backButton.visible = this.currentCategory.parent() != null;
+                this.categoryButtons.forEach((category, buttons) -> buttons.forEach(button -> button.visible = this.currentCategory.equals(category)));
 
-                // // Disable buttons that are not part of the current category.
-                this.categoryButtons.forEach((category, buttons) -> buttons.forEach((button) -> button.visible = currentCategory.equals(category)));
+                // Disable the back button when there is nothing to go back to.
+                PlanetSelectionButton backButton = this.categoryButtons.get(Category.BACK).get(0);
+                backButton.visible = this.currentCategory.parent() != null;
+                this.scrollBar.visible = this.categoryButtons.get(this.currentCategory).size() > (currentPage == 3 ? 13 : 5);
 
                 RenderSystem.disableBlend();
         }
@@ -178,18 +179,18 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
         protected void init() {
                 super.init();
 
-                // Set the initial gui time to the world time. This creates a random start position for each
-                // rotating object.
+                // Set the initial gui time to the world time. This creates a random start position for each rotating object.
                 guiTime = client.world.getTime();
 
                 // The back button. It is always element [0] in the buttons list.
-                this.backButton = new PlanetSelectionButton(10, this.height / 2 - 33, BACK_TEXT, ButtonSize.NORMAL, ButtonColour.DARK_BLUE, pressed -> {
-                        if (currentCategory.parent() != null) {
-                                currentCategory = currentCategory.parent();
-                        }
-                });
+                LinkedList<PlanetSelectionButton> backButtonList = new LinkedList<>();
+                PlanetSelectionButton backButton = new PlanetSelectionButton(10, this.height / 2 - 33, BACK_TEXT, ButtonSize.NORMAL, ButtonColour.DARK_BLUE, TooltipType.NONE, null, pressed -> onNavigationButtonClick(currentCategory.parent()));
                 this.addDrawableChild(backButton);
+                backButtonList.add(backButton);
 
+                this.categoryButtons.put(Category.BACK, backButtonList);
+
+                // All buttons are data-driven; they are created from files in the /planet_data/planets directory.
                 List<Planet> planets = BeyondEarthClient.planets;
                 planets.forEach(planet -> {
                         if (this.handler.getTier() >= planet.rocketTier()) {
@@ -205,16 +206,34 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                                 }
 
                                 if (planet.parentDimension() == null) {
-                                        createNavigationButton(label, solarSystemCategory, ButtonSize.NORMAL, planet.buttonColour(), planetCategory);
+                                        createNavigationButton(label, solarSystemCategory, ButtonSize.NORMAL, planet.buttonColour(), TooltipType.CATEGORY, planet, planetCategory);
                                 }
 
-                                createTeleportButton(1, label, planetCategory, ButtonSize.NORMAL, ButtonColour.BLUE, planet.dimension().getValue());
-                                createTeleportButton(2, ORBIT_TEXT, planetCategory, ButtonSize.SMALL, ButtonColour.BLUE, planet.orbitDimension().getValue());
+                                createTeleportButton(1, label, planetCategory, ButtonSize.NORMAL, ButtonColour.BLUE, TooltipType.PLANET, planet, planet.dimension().getValue());
+                                createTeleportButton(2, ORBIT_TEXT, planetCategory, ButtonSize.SMALL, ButtonColour.BLUE, TooltipType.ORBIT, null, planet.orbitDimension().getValue());
                                 createSpaceStationTeleportButton(3, SPACE_STATION_TEXT, planetCategory, ButtonSize.NORMAL, ButtonColour.GREEN, planet.orbitDimension().getValue());
                         }
                 });
 
                 this.solarSystemsCategories.forEach((solarSystemCategory -> createSolarSystemButton(solarSystemCategory)));
+
+                // Scroll bar.
+                this.scrollBar = new ButtonWidget(SCROLL_BAR_X, SCROLL_MIN_Y, 4, 8, Text.of(""), pressed -> {
+                }) {
+                        @Override
+                        public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+                                if (this.visible) {
+                                        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+                                        RenderSystem.setShaderTexture(0, SCROLL_BAR);
+                                        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
+                                        RenderSystem.enableBlend();
+                                        RenderSystem.defaultBlendFunc();
+                                        RenderSystem.enableDepthTest();
+                                        drawTexture(matrices, this.x, this.y, 0, 0, this.width, this.height, this.width, this.height);
+                                }
+                        }
+                };
+                this.addDrawableChild(this.scrollBar);
         }
 
         @Override
@@ -222,25 +241,29 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                 return true;
         }
 
+        private void onNavigationButtonClick(Category target) {
+                this.resetButtonScroll();
+                this.scrollBar.y = SCROLL_MIN_Y;
+                this.currentCategory = target;
+        }
+
         private void createSolarSystemButton(Category solarSystemCategory) {
                 String name = solarSystemCategory.id().getPath();
                 Text label = PlanetSelectionUtil.createText(name);
                 Category category = new Category(solarSystemCategory.parent().id(), null);
-                createNavigationButton(label, category, ButtonSize.NORMAL, ButtonColour.BLUE, solarSystemCategory);
+                createNavigationButton(label, category, ButtonSize.NORMAL, ButtonColour.BLUE, TooltipType.SOLAR_SYSTEM, null, solarSystemCategory);
         }
 
-        private void createNavigationButton(Text label, Category category, ButtonSize size, ButtonColour colour, Category target) {
-                createButton(label, category, size, colour, press -> {
-                        this.currentCategory = target;
-                });
+        private void createNavigationButton(Text label, Category category, ButtonSize size, ButtonColour colour, TooltipType tooltip, Planet planetInfo, Category target) {
+                createButton(label, category, size, colour, tooltip, planetInfo, press -> onNavigationButtonClick(target));
         }
 
         private void createSpaceStationTeleportButton(int row, Text label, Category category, ButtonSize size, ButtonColour colour, Identifier targetDimension) {
                 // TODO
-                createTeleportButton(row, label, category, size, colour, targetDimension);
+                createTeleportButton(row, label, category, size, colour, TooltipType.SPACE_STATION, null, targetDimension);
         }
 
-        private void createTeleportButton(int row, Text label, Category category, ButtonSize size, ButtonColour colour, Identifier targetDimension) {
+        private void createTeleportButton(int row, Text label, Category category, ButtonSize size, ButtonColour colour, TooltipType tooltip, Planet planetInfo, Identifier targetDimension) {
                 int newRow = 0;
                 if (row == 2) {
                         newRow = 76;
@@ -252,7 +275,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 
                 int column = getColumn(category) - (row - 1) * 22;
                 column -= 44 * (buttons.size() / 3);
-                createButton(newRow + 10, column, label, category, size, colour, press -> {
+                createButton(newRow + 10, column, label, category, size, colour, tooltip, planetInfo, press -> {
                         this.client.player.closeHandledScreen();
                         PacketByteBuf buf = PacketByteBufs.create();
                         buf.writeIdentifier(targetDimension);
@@ -261,26 +284,99 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                 });
         }
 
-        private PlanetSelectionButton createButton(Text label, Category category, ButtonSize size, ButtonColour colour, Consumer<ButtonWidget> onClick) {
-                return createButton(10, label, category, size, colour, onClick);
+        private PlanetSelectionButton createButton(Text label, Category category, ButtonSize size, ButtonColour colour, TooltipType tooltip, Planet planetInfo, Consumer<ButtonWidget> onClick) {
+                return createButton(10, label, category, size, colour, tooltip, planetInfo, onClick);
         }
 
-        private PlanetSelectionButton createButton(int row, Text label, Category category, ButtonSize size, ButtonColour colour, Consumer<ButtonWidget> onClick) {
+        private PlanetSelectionButton createButton(int row, Text label, Category category, ButtonSize size, ButtonColour colour, TooltipType tooltip, Planet planetInfo, Consumer<ButtonWidget> onClick) {
 
                 int column = getColumn(category);
-                return createButton(row, column, label, category, size, colour, onClick);
+                return createButton(row, column, label, category, size, colour, tooltip, planetInfo, onClick);
         }
 
-        private PlanetSelectionButton createButton(int row, int column, Text label, Category category, ButtonSize size, ButtonColour colour, Consumer<ButtonWidget> onClick) {
+        private PlanetSelectionButton createButton(int row, int column, Text label, Category category, ButtonSize size, ButtonColour colour, TooltipType tooltip, Planet planetInfo, Consumer<ButtonWidget> onClick) {
 
                 LinkedList<PlanetSelectionButton> buttons = this.categoryButtons.getOrDefault(category, new LinkedList<>());
 
-                PlanetSelectionButton button = new PlanetSelectionButton(row, column, label, size, colour, pressed -> onClick.accept(pressed));
+                PlanetSelectionButton button = new PlanetSelectionButton(row, column, label, size, colour, tooltip, planetInfo, pressed -> onClick.accept(pressed));
                 this.addDrawableChild(button);
 
                 buttons.add(button);
                 categoryButtons.put(category, buttons);
                 return button;
+        }
+
+        @Override
+        public boolean mouseScrolled(double mouseX, double mouseY, double amount) {
+                // Simple scrollbar.
+                for (Map.Entry<Category, LinkedList<PlanetSelectionButton>> entry : this.categoryButtons.entrySet()) {
+                        if (this.currentCategory.equals(entry.getKey())) {
+
+                                List<PlanetSelectionButton> buttons = new LinkedList<>();
+                                PlanetSelectionButton backButton = this.categoryButtons.get(Category.BACK).get(0);
+                                // Create a new list with the back button included. We have to do this as the back button is a separate category, so it needs
+                                // to manually be added to this category so that it scrolls with every other button.
+                                buttons.add(backButton);
+                                buttons.addAll(entry.getValue());
+
+                                boolean isLargePage = this.getPage() == 3;
+                                // The amount of buttons that are offscreen.
+                                // The large page had 3 buttons per row so each row needs to be treated as one.
+                                final int overflowButtons = buttons.size() - (isLargePage ? 13 : 5);
+
+                                // Don't scroll if there are not enough buttons.
+                                if (overflowButtons > 0) {
+                                        final int referencePoint = backButton.y;
+                                        final int minThreshold = 169;
+                                        final int maxThreshold = 161 - (overflowButtons * (isLargePage ? 7 : 21));
+                                        int sensitivity = (int) (SCROLL_SENSITIVITY * amount);
+
+                                        // Lock the scroll to the min and max thresholds.
+                                        if (amount > 0) {
+                                                if (referencePoint >= minThreshold) {
+                                                        sensitivity = 0;
+                                                }
+                                        } else if (amount < 0) {
+                                                if (referencePoint <= maxThreshold) {
+                                                        sensitivity = 0;
+                                                }
+                                        }
+
+                                        // Move all buttons based on the scroll.
+                                        for (PlanetSelectionButton button2 : buttons) {
+                                                PlanetSelectionButton button = button2;
+                                                button.y += sensitivity;
+
+                                                // If the user has scrolled too far, i.e., offscreen, move the buttons back to the maximum scrollable distance.
+                                                if (referencePoint >= minThreshold) {
+                                                        button.y -= referencePoint - minThreshold;
+                                                } else if (referencePoint <= maxThreshold) {
+                                                        button.y -= referencePoint - maxThreshold;
+                                                }
+                                        }
+
+                                        float min = maxThreshold / (float) minThreshold;
+                                        float ratio = backButton.y / (float) minThreshold;
+                                        ratio = MathUtil.invLerp(ratio, 1, min);
+
+                                        // Flip min and max for inverse operation.
+                                        this.scrollBar.y = (int) MathHelper.lerp(ratio, SCROLL_MAX_Y, SCROLL_MIN_Y);
+                                }
+
+                                break;
+                        }
+                }
+
+                return super.mouseScrolled(mouseX, mouseY, amount);
+        }
+
+        private void resetButtonScroll() {
+                categoryButtons.values().forEach(list -> {
+                        list.forEach(button -> {
+                                button.y = button.getStartY();
+                        });
+                });
+
         }
 
         private int getPage() {
@@ -307,19 +403,12 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                 return startY + 22 * index + (category.parent() != null ? 22 : 0);
         }
 
-        public int getActiveButtons() {
-                int activeButtons = 0;
-                for (List<PlanetSelectionButton> buttons : this.categoryButtons.values()) {
-                        for (PlanetSelectionButton button : buttons)
-                                if (button.active) {
-                                        activeButtons++;
-                                }
-                }
-                return activeButtons;
-        }
-
         public float getGuiTime() {
                 return this.guiTime;
+        }
+
+        public enum TooltipType {
+                NONE, SOLAR_SYSTEM, CATEGORY, PLANET, ORBIT, SPACE_STATION
         }
 
         @Override

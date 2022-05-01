@@ -9,7 +9,7 @@
     "gravity": 3.72076,
     "days_in_year": 687,
     "temperature": -65,
-    "oxygen": false,
+    "has_oxygen": false,
     "atmosphere_start": 450,
     "button_color": "green"
 }

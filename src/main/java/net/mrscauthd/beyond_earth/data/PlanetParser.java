@@ -22,11 +22,11 @@ public class PlanetParser {
         int rocketTier = jsonObject.get("rocket_tier").getAsInt();
         float gravity = jsonObject.get("gravity").getAsFloat();
         int daysInYear = jsonObject.get("days_in_year").getAsInt();
-        int temperature = jsonObject.get("temperature").getAsInt();
-        boolean oxygen = jsonObject.get("oxygen").getAsBoolean();
+        float temperature = jsonObject.get("temperature").getAsFloat();
+        boolean hasOxygen = jsonObject.get("has_oxygen").getAsBoolean();
         int atmosphereStart = jsonObject.get("atmosphere_start").getAsInt();
         ButtonColour buttonColour = ButtonColour.stringToColour(jsonObject.get("button_color").getAsString());
 
-        return new Planet(name, galaxy, solarSystem, dimension, orbitDimension, parentDimension, rocketTier, gravity, daysInYear, temperature, oxygen, atmosphereStart, buttonColour);
+        return new Planet(name, galaxy, solarSystem, dimension, orbitDimension, parentDimension, rocketTier, gravity, daysInYear, temperature, hasOxygen, atmosphereStart, buttonColour);
     }
 }

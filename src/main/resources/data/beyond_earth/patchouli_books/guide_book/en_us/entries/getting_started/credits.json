@@ -14,7 +14,11 @@
         },
         {
             "type": "patchouli:text",
-            "text": "Many people have collaborated together to build this mod:$(li)Guide Book Writer: Kraaven$()$(li)Forge Dev: MrScautHD$()$(li)Forge Dev: ExistingEevee$()$(li)Fabric Dev: Alex Nijjar$()$(li)Sound Artist: Mvbz$()$(li)Texturer: FritzHackenstien$()$(li)Texturer: Fizz$()$(li)Texturer: SeagullBoi$()$(li)Texturer: Jopken$()$(li)Texturer: Lego245$()$(li)Modeler: Scarecrow$()$(li)Modeler: ShreksRightT***e1$()$(li)Builder: Barracuda,Solar$()$(li)Builder: Spacestar$()$(li)Builder: Checheño$()$(li)Builder: Rer0$()"
+            "text": "Many people have collaborated together to build this mod:$(br)$(li)Guide Book Writer: Kraaven$()$(li)Forge Dev: MrScautHD$()$(li)Forge Dev: ExistingEevee$()$(li)Fabric Dev: Alex Nijjar$()$(li)Sound Artist: Mvbz$()$(li)Texturer: FritzHackenstien$()$(li)Texturer: Fizz$()$(li)Texturer: SeagullBoi$()$(li)Texturer: Jopken$()$(li)Texturer: Lego245$()$(li)Modeler: Scarecrow$()$(li)Modeler: ShreksRightT***e1$()"
+        },
+        {
+            "type": "patchouli:text",
+            "text": "$(li)Builder: Barracuda$(li)Builder: Solar$()$(li)Builder: Spacestar$()$(li)Builder: Checheño$()$(li)Builder: Rer0$()"
         }
     ]
 }

@@ -57,7 +57,7 @@ public class ModC2SPackets {
             buf.writeFloat(planet.gravity());
             buf.writeInt(planet.daysInYear());
             buf.writeFloat(planet.temperature());
-            buf.writeBoolean(planet.oxygen());
+            buf.writeBoolean(planet.hasOxygen());
             buf.writeInt(planet.atmosphereStart());
             buf.writeEnumConstant(planet.buttonColour());
         });

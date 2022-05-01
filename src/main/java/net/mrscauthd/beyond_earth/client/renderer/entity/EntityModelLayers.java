@@ -1,10 +1,7 @@
 package net.mrscauthd.beyond_earth.client.renderer.entity;
 
-import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
-import net.minecraft.client.render.entity.model.EntityModelLayer;
-import net.mrscauthd.beyond_earth.util.ModIdentifier;
 import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 
 @Environment(EnvType.CLIENT)
 public class EntityModelLayers {
