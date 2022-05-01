@@ -172,7 +172,7 @@ public class ModUtils {
     public static final List<RegistryKey<World>> getDimensionsWithoutOxygen(boolean isClient) {
         List<RegistryKey<World>> worlds = new LinkedList<>();
         (isClient ? BeyondEarthClient.planets : BeyondEarth.planets).forEach(planet -> {
-            if (planet.oxygen()) {
+            if (planet.hasOxygen()) {
                 worlds.add(planet.dimension());
             }
         });
@@ -180,7 +180,7 @@ public class ModUtils {
     }
 
     public static boolean dimensionHasOxygen(boolean isClient, RegistryKey<World> world) {
-        return getDimensionsWithoutOxygen(isClient).stream().noneMatch(world::equals);
+        return getDimensionsWithoutOxygen(isClient).stream().anyMatch(world::equals);
     }
 
     // Mixin Util.
