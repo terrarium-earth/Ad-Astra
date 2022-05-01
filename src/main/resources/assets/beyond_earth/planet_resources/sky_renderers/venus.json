@@ -1,0 +1,72 @@
+{
+    "dimension": "beyond_earth:venus",
+    "stars": {
+        "fancy_count": 2000,
+        "fast_count": 2000,
+        "daylight_visible": false
+    },
+    "sunset_color": "vanilla",
+    "dimension_effects": {
+        "type": "foggy"
+    },
+    "cloud_effects": "venus",
+    "weather_effects": "venus",
+    "horizon_angle": 180,
+    "sky_objects": [
+        {
+            "texture": "red_sun",
+            "blending": true,
+            "render_type": "dynamic",
+            "scale": 30.0,
+            "rotation": {
+                "x": 0.0,
+                "y": 90.0,
+                "z": 0.0
+            }
+        },
+        {
+            "texture": "earth_light",
+            "blending": true,
+            "render_type": "dynamic",
+            "scale": 5.5,
+            "rotation": {
+                "x": -30.0,
+                "y": -55.0,
+                "z": 45.0
+            }
+        },
+        {
+            "texture": "earth",
+            "blending": true,
+            "render_type": "dynamic",
+            "scale": 2.0,
+            "rotation": {
+                "x": -30.0,
+                "y": -55.0,
+                "z": 45.0
+            }
+        },
+        {
+            "texture": "earth_light",
+            "blending": true,
+            "render_type": "dynamic",
+            "scale": 5.5,
+            "rotation": {
+                "x": -25.0,
+                "y": 90.0,
+                "z": -25.0
+            }
+        },
+        {
+            "texture": "mercury",
+            "blending": true,
+            "render_type": "dynamic",
+            "scale": 2.0,
+            "rotation": {
+                "x": -25.0,
+                "y": 90.0,
+                "z": -25.0
+            }
+        }
+    ]
+}

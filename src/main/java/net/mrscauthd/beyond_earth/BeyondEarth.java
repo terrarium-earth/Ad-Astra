@@ -12,7 +12,6 @@ import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.registry.Registry;
 import net.mrscauthd.beyond_earth.data.Planet;
 import net.mrscauthd.beyond_earth.data.PlanetData;
-import net.mrscauthd.beyond_earth.data.SolarSystem;
 import net.mrscauthd.beyond_earth.networking.ModC2SPackets;
 import net.mrscauthd.beyond_earth.registry.ModArmour;
 import net.mrscauthd.beyond_earth.registry.ModBiomes;
@@ -36,8 +35,6 @@ public class BeyondEarth implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
     @Environment(EnvType.SERVER)
     public static List<Planet> planets = new ArrayList<>();
-    @Environment(EnvType.SERVER)
-    public static List<SolarSystem> solarSystems = new ArrayList<>();
 
     @Override
     public void onInitialize() {

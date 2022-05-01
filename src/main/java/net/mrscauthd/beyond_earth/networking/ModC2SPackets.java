@@ -22,7 +22,6 @@ public class ModC2SPackets {
         ServerPlayConnectionEvents.JOIN.register((handler, sender, minecraftServer) -> {
             try {
                 sender.sendPacket(ModS2CPackets.DATAPACK_PLANETS_PACKET_ID, createPlanetsDatapackBuf());
-                sender.sendPacket(ModS2CPackets.DATAPACK_SOLAR_SYSTEMS_PACKET_ID, createSolarSystemsDatapackBuf());
             } catch (Exception e) {
                 BeyondEarth.LOGGER.error("Failed to send datapack values to client: " + e);
                 e.printStackTrace();
@@ -60,20 +59,6 @@ public class ModC2SPackets {
             buf.writeBoolean(planet.hasOxygen());
             buf.writeInt(planet.atmosphereStart());
             buf.writeEnumConstant(planet.buttonColour());
-        });
-        return mainBuf;
-    }
-
-    private static PacketByteBuf createSolarSystemsDatapackBuf() {
-        PacketByteBuf mainBuf = PacketByteBufs.create();
-        mainBuf.writeCollection(BeyondEarth.solarSystems, (buf, solarSystem) -> {
-            buf.writeIdentifier(solarSystem.galaxy());
-            buf.writeIdentifier(solarSystem.solarSystem());
-            buf.writeEnumConstant(solarSystem.sunType());
-            buf.writeCollection(solarSystem.planetaryRings(), (buf1, value) -> {
-                buf1.writeIdentifier(value.getLeft());
-                buf1.writeDouble(value.getRight());
-            });
         });
         return mainBuf;
     }

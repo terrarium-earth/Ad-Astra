@@ -34,7 +34,6 @@ public class PlanetData {
             @Override
             public void reload(ResourceManager manager) {
                 List<Planet> planets = new LinkedList<>();
-                List<SolarSystem> solarSystems = new LinkedList<>();
 
                 // Planets.
                 for (Identifier id : manager.findResources("planet_data/planets", path -> path.endsWith(".json"))) {
@@ -53,42 +52,7 @@ public class PlanetData {
                     }
                 }
 
-                // Renderers.
-                for (Identifier id : manager.findResources("planet_data/renderers", path -> path.endsWith(".json"))) {
-                    try {
-                        for (Resource resource : manager.getAllResources(id)) {
-                            InputStreamReader reader = new InputStreamReader(resource.getInputStream());
-                            JsonObject jsonObject = JsonHelper.deserialize(GSON, reader, JsonObject.class);
-
-                            if (jsonObject != null) {
-
-                            }
-                        }
-                    } catch (Exception e) {
-                        BeyondEarth.LOGGER.error("Failed to load Beyond Earth world rendering data from: \"" + id.toString() + "\"", e);
-                        e.printStackTrace();
-                    }
-                }
-
-                // Solar Systems.
-                for (Identifier id : manager.findResources("planet_data/solar_systems", path -> path.endsWith(".json"))) {
-                    try {
-                        for (Resource resource : manager.getAllResources(id)) {
-                            InputStreamReader reader = new InputStreamReader(resource.getInputStream());
-                            JsonObject jsonObject = JsonHelper.deserialize(GSON, reader, JsonObject.class);
-
-                            if (jsonObject != null) {
-                                solarSystems.add(SolarSystemParser.parse(jsonObject));
-                            }
-                        }
-                    } catch (Exception e) {
-                        BeyondEarth.LOGGER.error("Failed to load Beyond Earth solar system data from: \"" + id.toString() + "\"", e);
-                        e.printStackTrace();
-                    }
-                }
-
                 BeyondEarth.planets = planets;
-                BeyondEarth.solarSystems = solarSystems;
             }
         });
     }
