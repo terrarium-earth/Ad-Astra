@@ -1,9 +1,6 @@
 package net.mrscauthd.beyond_earth.networking;
 
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -49,12 +46,12 @@ public class ModS2CPackets {
                 int rocketTier = buf.readInt();
                 float gravity = buf.readFloat();
                 int daysInYear = buf.readInt();
-                int temperature = buf.readInt();
-                boolean oxygen = buf.readBoolean();
+                float temperature = buf.readFloat();
+                boolean hasOxygen = buf.readBoolean();
                 int atmosphereStart = buf.readInt();
                 ButtonColour buttonColour = buf.readEnumConstant(ButtonColour.class);
 
-                return new Planet(name, galaxy, solarSystem, dimension, orbitDimension, parentDimension, rocketTier, gravity, daysInYear, temperature, oxygen, atmosphereStart, buttonColour);
+                return new Planet(name, galaxy, solarSystem, dimension, orbitDimension, parentDimension, rocketTier, gravity, daysInYear, temperature, hasOxygen, atmosphereStart, buttonColour);
             });
         });
 

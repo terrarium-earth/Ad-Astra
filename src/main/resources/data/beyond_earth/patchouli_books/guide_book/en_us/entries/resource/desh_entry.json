@@ -11,7 +11,7 @@
         {
             "type": "patchouli:spotlight",
             "item": "beyond_earth:desh_ingot",
-            "text": "Desh ingots are made by Smelting/Blasting Raw Desh.",
+            "text": "Desh ingots are made by smelting/blasting raw desh.",
             "title": "Manufacture"
         }
     ]

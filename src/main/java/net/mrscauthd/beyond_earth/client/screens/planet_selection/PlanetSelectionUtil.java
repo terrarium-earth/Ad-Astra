@@ -43,7 +43,8 @@ public class PlanetSelectionUtil {
         matrices.pop();
     }
 
-    // Original source, modified for modern Minecraft: https://forums.minecraftforge.net/topic/37625-189draw-a-simple-circle/?do=findComment&comment=200729
+    // Original source, modified for modern Minecraft:
+    // https://forums.minecraftforge.net/topic/37625-189draw-a-simple-circle/?do=findComment&comment=200729
     public static void drawCircle(double x, double y, double radius, int sides) {
         BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
 
