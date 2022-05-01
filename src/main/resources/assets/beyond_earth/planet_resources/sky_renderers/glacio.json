@@ -1,0 +1,50 @@
+{
+    "dimension": "beyond_earth:glacio",
+    "stars": {
+        "fancy_count": 2000,
+        "fast_count": 2000,
+        "daylight_visible": false
+    },
+    "sunset_color": "vanilla",
+    "dimension_effects": {
+        "type": "simple"
+    },
+    "cloud_effects": "vanilla",
+    "weather_effects": "none",
+    "horizon_angle": 0,
+    "sky_objects": [
+        {
+            "texture": "blue_sun",
+            "blending": true,
+            "render_type": "dynamic",
+            "scale": 30.0,
+            "rotation": {
+                "x": 0.0,
+                "y": -90.0,
+                "z": 0.0
+            }
+        },
+        {
+            "texture": "vicinus_light",
+            "blending": true,
+            "render_type": "static",
+            "scale": 48.0,
+            "rotation": {
+                "x": 0.0,
+                "y": -90.0,
+                "z": -30.0
+            }
+        },
+        {
+            "texture": "vicinus",
+            "blending": false,
+            "render_type": "static",
+            "scale": 16.0,
+            "rotation": {
+                "x": 0.0,
+                "y": -90.0,
+                "z": -30.0
+            }
+        }
+    ]
+}

@@ -17,7 +17,7 @@ public enum ButtonColour {
     DARK_BLUE(0, 102, 204),
     PURPLE(102, 0, 255);
 
-    private ColourHolder colour;
+    private final ColourHolder colour;
 
     private ButtonColour(int r, int g, int b) {
         this.colour = new ColourHolder(r / 255.0f, g / 255.0f, b / 255.0f);

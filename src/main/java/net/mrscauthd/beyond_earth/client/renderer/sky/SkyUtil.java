@@ -27,6 +27,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Matrix4f;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3f;
+import net.mrscauthd.beyond_earth.client.resource_pack.SkyRenderer;
 import net.mrscauthd.beyond_earth.mixin.WorldRendererAccessor;
 import net.mrscauthd.beyond_earth.world.WorldSeed;
 
@@ -40,11 +41,7 @@ public class SkyUtil {
         return Math.max(scale, 4.0f);
     }
 
-    public static boolean preRender(WorldRenderContext context, BufferBuilder bufferBuilder, ModSky.ColourType colourType, int sunsetAngle, MatrixStack matrices, ClientWorld world, float tickDelta) {
-
-        if (isSubmerged(context.camera())) {
-            return false;
-        }
+    public static void preRender(WorldRenderContext context, BufferBuilder bufferBuilder, SkyRenderer.SunsetColour colourType, int sunsetAngle, MatrixStack matrices, ClientWorld world, float tickDelta) {
 
         // Render colours.
         RenderSystem.disableTexture();
@@ -64,8 +61,6 @@ public class SkyUtil {
         RenderSystem.blendFuncSeparate(GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE, GlStateManager.SrcFactor.ONE, GlStateManager.DstFactor.ZERO);
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
         RenderSystem.enableTexture();
-
-        return true;
     }
 
     public static void postRender(WorldRenderContext context, MatrixStack matrices, ClientWorld world, float tickDelta) {
@@ -93,7 +88,7 @@ public class SkyUtil {
         RenderSystem.depthMask(true);
     }
 
-    private static boolean isSubmerged(Camera camera) {
+    public static boolean isSubmerged(Camera camera) {
         MinecraftClient client = MinecraftClient.getInstance();
         ClientPlayerEntity player = client.player;
 
@@ -118,17 +113,17 @@ public class SkyUtil {
         matrices.pop();
     }
 
-    public static void render(WorldRenderContext context, BufferBuilder bufferBuilder, Identifier texture, Vec3f euler, float scale, boolean disableBlending) {
+    public static void render(WorldRenderContext context, BufferBuilder bufferBuilder, Identifier texture, Vec3f euler, float scale, boolean blending) {
 
         startRendering(context.matrixStack(), euler);
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
 
         RenderSystem.disableTexture();
 
-        if (disableBlending) {
-            RenderSystem.disableBlend();
-        } else {
+        if (blending) {
             RenderSystem.enableBlend();
+        } else {
+            RenderSystem.disableBlend();
         }
 
         Matrix4f positionMatrix = context.matrixStack().peek().getPositionMatrix();
@@ -209,11 +204,11 @@ public class SkyUtil {
         }
     }
 
-    public static void renderColouring(ModSky.ColourType type, BufferBuilder bufferBuilder, MatrixStack matrices, ClientWorld world, float tickDelta, float skyAngle, int sunsetAngle) {
+    public static void renderColouring(SkyRenderer.SunsetColour type, BufferBuilder bufferBuilder, MatrixStack matrices, ClientWorld world, float tickDelta, float skyAngle, int sunsetAngle) {
 
         float[] fogColours = switch (type) {
         case VANILLA -> world.getDimensionEffects().getFogColorOverride(world.getSkyAngle(tickDelta), tickDelta);
-        case MARS -> MarsSky.getMarsColour(skyAngle);
+        case MARS -> ModSky.getMarsColour(skyAngle);
         };
         if (fogColours != null) {
             RenderSystem.setShader(GameRenderer::getPositionColorShader);

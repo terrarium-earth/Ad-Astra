@@ -1,0 +1,72 @@
+{
+    "dimension": "beyond_earth:mars",
+    "stars": {
+        "fancy_count": 2000,
+        "fast_count": 2000,
+        "daylight_visible": false
+    },
+    "sunset_color": "mars",
+    "dimension_effects": {
+        "type": "foggy"
+    },
+    "cloud_effects": "none",
+    "weather_effects": "none",
+    "horizon_angle": 0,
+    "sky_objects": [
+        {
+            "texture": "blue_sun",
+            "blending": true,
+            "render_type": "dynamic",
+            "scale": 30.0,
+            "rotation": {
+                "x": 0.0,
+                "y": -90.0,
+                "z": 0.0
+            }
+        },
+        {
+            "texture": "earth_light",
+            "blending": true,
+            "render_type": "dynamic",
+            "scale": 2.5,
+            "rotation": {
+                "x": 45.0,
+                "y": 45.0,
+                "z": -135.0
+            }
+        },
+        {
+            "texture": "earth",
+            "blending": true,
+            "render_type": "dynamic",
+            "scale": 1.0,
+            "rotation": {
+                "x": 45.0,
+                "y": 45.0,
+                "z": -135.0
+            }
+        },
+        {
+            "texture": "phobos",
+            "blending": true,
+            "render_type": "dynamic",
+            "scale": 3.0,
+            "rotation": {
+                "x": 45.0,
+                "y": -160.0,
+                "z": 0.0
+            }
+        },
+        {
+            "texture": "deimos",
+            "blending": true,
+            "render_type": "dynamic",
+            "scale": 4.0,
+            "rotation": {
+                "x": 0.0,
+                "y": 90.0,
+                "z": -10.0
+            }
+        }
+    ]
+}
