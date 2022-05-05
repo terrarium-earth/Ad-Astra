@@ -1,5 +1,9 @@
 package net.mrscauthd.beyond_earth.client.screens.planet_selection;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+
+@Environment(EnvType.CLIENT)
 public enum ButtonSize {
         LARGE(75, 20), NORMAL(71, 20), SMALL(37, 20);
 

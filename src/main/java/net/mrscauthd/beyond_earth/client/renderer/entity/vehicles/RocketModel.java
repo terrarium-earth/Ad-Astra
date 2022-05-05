@@ -1,4 +1,4 @@
-package net.mrscauthd.beyond_earth.client.renderer.entity;
+package net.mrscauthd.beyond_earth.client.renderer.entity.vehicles;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

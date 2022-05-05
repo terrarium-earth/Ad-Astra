@@ -90,14 +90,14 @@ public class ModSky implements DimensionRenderingRegistry.SkyRenderer {
     public static float[] getMarsColour(float skyAngle) {
         float[] colours = new float[4];
 
-        float cosine = MathHelper.cos(skyAngle * ((float) Math.PI * 2F)) - 0.0F;
-        if (cosine >= -0.4F && cosine <= 0.4F) {
-            float c = (cosine + 0.0F) / 0.4F * 0.5F + 0.5F;
-            float sine = 1.0F - (1.0F - MathHelper.sin(c * (float) Math.PI)) * 0.99F;
+        float cosine = MathHelper.cos(skyAngle * ((float) Math.PI * 2f)) - 0.0f;
+        if (cosine >= -0.4f && cosine <= 0.4f) {
+            float c = (cosine + 0.0f) / 0.4f * 0.5f + 0.5f;
+            float sine = 1.0f - (1.0f - MathHelper.sin(c * (float) Math.PI)) * 0.99f;
             sine *= sine;
-            colours[0] = c * 0.3F + 0.7F;
-            colours[1] = c * c * 0.6F + 0.4F;
-            colours[2] = c * c * 0.0F + 0.4F;
+            colours[0] = c * 0.3f + 0.7f;
+            colours[1] = c * c * 0.6f + 0.4f;
+            colours[2] = c * c * 0.0f + 0.4f;
             colours[3] = sine;
             return colours;
         } else {

@@ -56,7 +56,7 @@ public class ModCloudRenderer implements DimensionRenderingRegistry.CloudRendere
                         RenderSystem.depthMask(true);
                         double k = ((float) renderer.getTicks() + tickDelta) * 0.03f;
                         double l = (cameraPosX + k) / 12.0;
-                        double m = g - (float) cameraPosY + 0.33F;
+                        double m = g - (float) cameraPosY + 0.33f;
                         double n = cameraPosZ / 12.0 + 0.33000001311302185;
                         l -= MathHelper.floor(l / 2048.0) * 2048;
                         n -= MathHelper.floor(n / 2048.0) * 2048;
