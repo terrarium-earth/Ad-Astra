@@ -12,8 +12,32 @@
     "foliage_color": 7842607
   },
   "creature_spawn_probability": 0.2,
-  "spawners": {},
-  "spawn_costs": {},
+  "spawners": {
+    "monster": [
+      {
+        "type": "beyond_earth:alien_zombie",
+        "weight": 100,
+        "minCount": 1,
+        "maxCount": 3
+      },
+      {
+        "type": "beyond_earth:star_crawler",
+        "weight": 100,
+        "minCount": 1,
+        "maxCount": 3
+      }
+    ]
+  },
+  "spawn_costs": {
+    "beyond_earth:alien_zombie": {
+      "energy_budget": 0.015,
+      "charge": 0.2
+    },
+    "beyond_earth:star_crawler": {
+      "energy_budget": 0.015,
+      "charge": 0.4
+    }
+  },
   "carvers": {
     "air": [
       "minecraft:cave",

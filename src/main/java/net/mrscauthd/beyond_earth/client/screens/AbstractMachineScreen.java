@@ -2,6 +2,8 @@ package net.mrscauthd.beyond_earth.client.screens;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.render.GameRenderer;
@@ -12,6 +14,7 @@ import net.minecraft.util.Identifier;
 import net.mrscauthd.beyond_earth.blocks.machines.entity.AbstractMachineBlockEntity;
 import net.mrscauthd.beyond_earth.gui.screen_handlers.AbstractMachineScreenHandler;
 
+@Environment(EnvType.CLIENT)
 public abstract class AbstractMachineScreen<T extends AbstractMachineScreenHandler> extends HandledScreen<T> {
 
     AbstractMachineBlockEntity blockEntity;

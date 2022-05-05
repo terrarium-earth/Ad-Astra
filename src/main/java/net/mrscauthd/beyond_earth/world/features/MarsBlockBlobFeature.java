@@ -41,7 +41,7 @@ public class MarsBlockBlobFeature extends Feature<SingleStateFeatureConfig> {
                 int i = random.nextInt(2);
                 int j = random.nextInt(2);
                 int k = random.nextInt(2);
-                float f = (float) (i + j + k) * 0.333F + 0.5F;
+                float f = (float) (i + j + k) * 0.333f + 0.5f;
 
                 for (BlockPos blockpos1 : BlockPos.iterate(pos.add(-i, -j, -k), pos.add(i, j, k))) {
                     if (blockpos1.getSquaredDistance(pos) <= (double) (f * f)) {

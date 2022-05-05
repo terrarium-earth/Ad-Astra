@@ -84,7 +84,7 @@ public class VenusDeltas extends Feature<BasaltColumnsFeatureConfig> {
             return false;
         } else {
             int height = config.getHeight().get(random);
-            boolean flag = random.nextFloat() < 0.9F;
+            boolean flag = random.nextFloat() < 0.9f;
             int k = Math.min(height, flag ? 5 : 8);
             int l = flag ? 50 : 15;
             boolean flag1 = false;

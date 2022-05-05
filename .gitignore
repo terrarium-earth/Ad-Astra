@@ -31,3 +31,6 @@ bin/
 # fabric
 
 run/
+
+# hot code replace
+src/main/resources/hotswap-agent.properties

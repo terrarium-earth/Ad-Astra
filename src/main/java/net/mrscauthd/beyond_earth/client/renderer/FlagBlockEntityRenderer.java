@@ -68,8 +68,8 @@ public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEnt
     ModelPart createHeadModel() {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
-        modelPartData.addChild("head", ModelPartBuilder.create().uv(0, 8).cuboid(0, 0, 0, 8.0f, 8.0F, 0.005f), ModelTransform.NONE);
-        modelPartData.addChild("hat", ModelPartBuilder.create().uv(32, 8).cuboid(0, 0, 0, 8.0f, 8.0F, 0.005f), ModelTransform.NONE);
+        modelPartData.addChild("head", ModelPartBuilder.create().uv(0, 8).cuboid(0, 0, 0, 8.0f, 8.0f, 0.005f), ModelTransform.NONE);
+        modelPartData.addChild("hat", ModelPartBuilder.create().uv(32, 8).cuboid(0, 0, 0, 8.0f, 8.0f, 0.005f), ModelTransform.NONE);
         TexturedModelData texturedModelData = TexturedModelData.of(modelData, 64, 64);
         return texturedModelData.createModel();
     }
