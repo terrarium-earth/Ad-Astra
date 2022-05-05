@@ -50,7 +50,7 @@ public class ModWeatherRenderer implements DimensionRenderingRegistry.WeatherRen
         MinecraftClient client = MinecraftClient.getInstance();
 
         float h = client.world.getRainGradient(tickDelta);
-        if (!(h <= 0.0F)) {
+        if (!(h <= 0.0f)) {
             context.lightmapTextureManager().enable();
             World world = client.world;
             int i = MathHelper.floor(cameraPosX);
@@ -70,7 +70,7 @@ public class ModWeatherRenderer implements DimensionRenderingRegistry.WeatherRen
             RenderSystem.depthMask(MinecraftClient.isFabulousGraphicsOrBetter());
             int m = -1;
             RenderSystem.setShader(GameRenderer::getParticleShader);
-            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+            RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
             BlockPos.Mutable mutable = new BlockPos.Mutable();
 
             for (int o = k - l; o <= k + l; ++o) {
@@ -108,21 +108,21 @@ public class ModWeatherRenderer implements DimensionRenderingRegistry.WeatherRen
                                 }
 
                                 int x = renderer.getTicks() + p * p * 3121 + p * 45238971 + o * o * 418711 + o * 13761 & 31;
-                                y = -((float) x + tickDelta) / 32.0F * (3.0F + random.nextFloat());
+                                y = -((float) x + tickDelta) / 32.0f * (3.0f + random.nextFloat());
                                 double z = (double) p + 0.5 - cameraPosX;
                                 double aa = (double) o + 0.5 - cameraPosZ;
                                 float ab = (float) Math.sqrt(z * z + aa * aa) / (float) l;
-                                ac = ((1.0F - ab * ab) * 0.5F + 0.5F) * h;
+                                ac = ((1.0f - ab * ab) * 0.5f + 0.5f) * h;
                                 mutable.set(p, w, o);
                                 int ad = WorldRenderer.getLightmapCoordinates(world, mutable);
-                                bufferBuilder.vertex((double) p - cameraPosX - r + 0.5, (double) v - cameraPosY, (double) o - cameraPosZ - s + 0.5).texture(0.0F, (float) u * 0.25F + y)
-                                        .color(1.0F, 1.0F, 1.0F, ac).light(ad).next();
-                                bufferBuilder.vertex((double) p - cameraPosX + r + 0.5, (double) v - cameraPosY, (double) o - cameraPosZ + s + 0.5).texture(1.0F, (float) u * 0.25F + y)
-                                        .color(1.0F, 1.0F, 1.0F, ac).light(ad).next();
-                                bufferBuilder.vertex((double) p - cameraPosX + r + 0.5, (double) u - cameraPosY, (double) o - cameraPosZ + s + 0.5).texture(1.0F, (float) v * 0.25F + y)
-                                        .color(1.0F, 1.0F, 1.0F, ac).light(ad).next();
-                                bufferBuilder.vertex((double) p - cameraPosX - r + 0.5, (double) u - cameraPosY, (double) o - cameraPosZ - s + 0.5).texture(0.0F, (float) v * 0.25F + y)
-                                        .color(1.0F, 1.0F, 1.0F, ac).light(ad).next();
+                                bufferBuilder.vertex((double) p - cameraPosX - r + 0.5, (double) v - cameraPosY, (double) o - cameraPosZ - s + 0.5).texture(0.0f, (float) u * 0.25f + y)
+                                        .color(1.0f, 1.0f, 1.0f, ac).light(ad).next();
+                                bufferBuilder.vertex((double) p - cameraPosX + r + 0.5, (double) v - cameraPosY, (double) o - cameraPosZ + s + 0.5).texture(1.0f, (float) u * 0.25f + y)
+                                        .color(1.0f, 1.0f, 1.0f, ac).light(ad).next();
+                                bufferBuilder.vertex((double) p - cameraPosX + r + 0.5, (double) u - cameraPosY, (double) o - cameraPosZ + s + 0.5).texture(1.0f, (float) v * 0.25f + y)
+                                        .color(1.0f, 1.0f, 1.0f, ac).light(ad).next();
+                                bufferBuilder.vertex((double) p - cameraPosX - r + 0.5, (double) u - cameraPosY, (double) o - cameraPosZ - s + 0.5).texture(0.0f, (float) v * 0.25f + y)
+                                        .color(1.0f, 1.0f, 1.0f, ac).light(ad).next();
                             }
                         }
                     }

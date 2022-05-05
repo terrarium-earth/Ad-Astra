@@ -18,8 +18,22 @@
     }
   },
   "creature_spawn_probability": 0.2,
-  "spawners": {},
-  "spawn_costs": {},
+  "spawners": {
+    "monster": [
+      {
+        "type": "beyond_earth:martian_raptor",
+        "weight": 100,
+        "minCount": 1,
+        "maxCount": 3
+      }
+    ]
+  },
+  "spawn_costs": {
+    "beyond_earth:martian_raptor": {
+      "energy_budget": 0.015,
+      "charge": 0.2
+    }
+  },
   "carvers": {
     "air": [
       "minecraft:cave",

@@ -20,7 +20,7 @@ import net.mrscauthd.beyond_earth.client.registry.ClientModEntities;
 import net.mrscauthd.beyond_earth.client.registry.ClientModScreens;
 import net.mrscauthd.beyond_earth.client.registry.ClientModSkies;
 import net.mrscauthd.beyond_earth.client.renderer.FlagBlockEntityRenderer;
-import net.mrscauthd.beyond_earth.client.renderer.entity.EntityModelLayers;
+import net.mrscauthd.beyond_earth.client.renderer.entity.item.RocketItemRenderer;
 import net.mrscauthd.beyond_earth.client.renderer.globe.GlobeBlockEntityRenderer;
 import net.mrscauthd.beyond_earth.client.renderer.globe.GlobeItemRenderer;
 import net.mrscauthd.beyond_earth.client.renderer.globe.GlobeModel;
@@ -60,7 +60,9 @@ public class BeyondEarthClient implements ClientModInitializer {
 
                 // Entities.
                 ClientModEntities.register();
-                EntityModelLayers.register();
+
+                // Rocket item.
+                BuiltinItemRendererRegistry.INSTANCE.register(ModItems.TIER_1_ROCKET, new RocketItemRenderer());
 
                 // Flag entity rendering.
                 BlockEntityRendererRegistry.register(ModBlockEntities.FLAG_BLOCK_ENTITY, FlagBlockEntityRenderer::new);

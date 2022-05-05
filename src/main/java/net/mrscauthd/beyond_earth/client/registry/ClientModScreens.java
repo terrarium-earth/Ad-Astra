@@ -10,9 +10,9 @@ import net.mrscauthd.beyond_earth.client.screens.SolarPanelScreen;
 import net.mrscauthd.beyond_earth.client.screens.planet_selection.PlanetSelectionScreen;
 import net.mrscauthd.beyond_earth.registry.ModScreenHandlers;
 
+@Environment(EnvType.CLIENT)
 public class ClientModScreens {
 
-    @Environment(EnvType.CLIENT)
     public static void register() {
         HandledScreens.register(ModScreenHandlers.SOLAR_PANEL_SCREEN_HANDLER, SolarPanelScreen::new);
         HandledScreens.register(ModScreenHandlers.COAL_GENERATOR_SCREEN_HANDLER, CoalGeneratorScreen::new);
