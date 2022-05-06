@@ -12,16 +12,16 @@ import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.util.Identifier;
-import net.mrscauthd.beyond_earth.client.renderer.entity.mobs.models.PygroModel;
+import net.mrscauthd.beyond_earth.client.renderer.entity.mobs.models.PygroEntityModel;
 import net.mrscauthd.beyond_earth.registry.ModEntities;
 import net.mrscauthd.beyond_earth.util.ModIdentifier;
 
 @Environment(EnvType.CLIENT)
-public class PygroRenderer extends PiglinEntityRenderer {
+public class PygroEntityRenderer extends PiglinEntityRenderer {
     private static final Map<EntityType<?>, Identifier> TEXTURES = ImmutableMap.of(ModEntities.PYGRO, new ModIdentifier("textures/entities/pygro.png"), ModEntities.PYGRO_BRUTE, new ModIdentifier("textures/entities/pygro_brute.png"));
 
-    public PygroRenderer(EntityRendererFactory.Context context) {
-        super(context, PygroModel.LAYER_LOCATION, EntityModelLayers.PIGLIN_INNER_ARMOR, EntityModelLayers.PIGLIN_OUTER_ARMOR, false);
+    public PygroEntityRenderer(EntityRendererFactory.Context context) {
+        super(context, PygroEntityModel.LAYER_LOCATION, EntityModelLayers.PIGLIN_INNER_ARMOR, EntityModelLayers.PIGLIN_OUTER_ARMOR, false);
     }
 
     @Override

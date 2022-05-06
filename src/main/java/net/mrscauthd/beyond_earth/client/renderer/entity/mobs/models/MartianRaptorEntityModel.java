@@ -18,14 +18,14 @@ import net.mrscauthd.beyond_earth.entities.mobs.MartianRaptorEntity;
 import net.mrscauthd.beyond_earth.util.ModIdentifier;
 
 @Environment(EnvType.CLIENT)
-public class MartianRaptorModel extends EntityModel<MartianRaptorEntity> {
+public class MartianRaptorEntityModel extends EntityModel<MartianRaptorEntity> {
     public static final EntityModelLayer LAYER_LOCATION = new EntityModelLayer(new ModIdentifier("martian_raptor"), "main");
 
     private final ModelPart body;
     private final ModelPart leg1;
     private final ModelPart leg2;
 
-    public MartianRaptorModel(ModelPart root) {
+    public MartianRaptorEntityModel(ModelPart root) {
         this.body = root.getChild("body");
         this.leg1 = root.getChild("leg1");
         this.leg2 = root.getChild("leg2");

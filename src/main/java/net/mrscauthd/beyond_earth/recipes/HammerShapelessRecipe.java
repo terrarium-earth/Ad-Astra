@@ -12,8 +12,10 @@ import net.minecraft.recipe.ShapelessRecipe;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.collection.DefaultedList;
+import net.mrscauthd.beyond_earth.BeyondEarth;
 import net.mrscauthd.beyond_earth.items.HammerItem;
 import net.mrscauthd.beyond_earth.registry.ModItems;
+import net.mrscauthd.beyond_earth.registry.ModRecipes;
 
 public class HammerShapelessRecipe extends ShapelessRecipe {
 
@@ -28,7 +30,7 @@ public class HammerShapelessRecipe extends ShapelessRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return new ShapelessRecipe.Serializer();
+        return ModRecipes.HAMMER_SERIALIZER;
     }
 
     @Override
@@ -63,6 +65,7 @@ public class HammerShapelessRecipe extends ShapelessRecipe {
         @Override
         public HammerShapelessRecipe read(Identifier id, PacketByteBuf buf) {
             ShapelessRecipe shapelessRecipe = super.read(id, buf);
+            BeyondEarth.LOGGER.info("HELLO");
             return new HammerShapelessRecipe(shapelessRecipe.getId(), shapelessRecipe.getGroup(), shapelessRecipe.getOutput(), shapelessRecipe.getIngredients());
         }
     }

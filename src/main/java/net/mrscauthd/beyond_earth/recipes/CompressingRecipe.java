@@ -19,7 +19,7 @@ public class CompressingRecipe extends ModRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return new Serializer();
+        return ModRecipes.COMPRESSING_SERIALIZER;
     }
 
     @Override
@@ -50,7 +50,6 @@ public class CompressingRecipe extends ModRecipe {
 
         @Override
         public void write(PacketByteBuf buf, CompressingRecipe recipe) {
-            buf.writeIdentifier(recipe.getId());
             recipe.getInputIngredient().write(buf);
             buf.writeItemStack(recipe.getOutput());
             buf.writeShort(recipe.cookTime);
