@@ -8,7 +8,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.mrscauthd.beyond_earth.entities.vehicles.RocketEntity;
 
 @Environment(EnvType.CLIENT)
-public class RocketModel extends EntityModel<RocketEntity> {
+public class RocketEntityModel extends EntityModel<RocketEntity> {
 
     // private final ModelPart base;
 

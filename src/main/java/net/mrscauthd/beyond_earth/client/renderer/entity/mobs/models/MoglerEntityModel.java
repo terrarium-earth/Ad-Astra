@@ -18,7 +18,7 @@ import net.mrscauthd.beyond_earth.entities.mobs.MoglerEntity;
 import net.mrscauthd.beyond_earth.util.ModIdentifier;
 
 @Environment(EnvType.CLIENT)
-public class MoglerModel extends EntityModel<MoglerEntity> {
+public class MoglerEntityModel extends EntityModel<MoglerEntity> {
     public static final EntityModelLayer LAYER_LOCATION = new EntityModelLayer(new ModIdentifier("mogler"), "main");
 
     private final ModelPart body;
@@ -28,7 +28,7 @@ public class MoglerModel extends EntityModel<MoglerEntity> {
     private final ModelPart leg3;
     private final ModelPart leg4;
 
-    public MoglerModel(ModelPart root) {
+    public MoglerEntityModel(ModelPart root) {
         this.body = root.getChild("body");
         this.head = root.getChild("head");
         this.leg1 = root.getChild("leg1");

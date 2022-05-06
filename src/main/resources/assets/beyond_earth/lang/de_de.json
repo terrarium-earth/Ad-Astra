@@ -54,15 +54,12 @@
   "item.beyond_earth.raw_ostrum_block": "Roher Ostrum Block",
   "item.beyond_earth.rocket_t4": "Stufe 4 Rakete",
   "item.beyond_earth.ice_shard": "Eisscholle",
-
   "item.beyond_earth.calorite_ingot": "Calorite Barren",
   "item.beyond_earth.compressed_calorite": "Komprimiertes Calorite",
   "item.beyond_earth.calorite_nugget": "Calorite Klumpen",
   "item.beyond_earth.raw_calorite": "Roheres Calorite",
   "item.beyond_earth.calorite_engine": "Calorite Antrieb",
   "item.beyond_earth.calorite_tank": "Calorite Tank",
-
-
   "itemGroup.tab_normal": "Beyond Earth",
   "itemGroup.tab_flags": "Beyond Earth: Flaggen",
   "itemGroup.tab_blocks": "Beyond Earth: Blöcke",
@@ -70,7 +67,6 @@
   "itemGroup.tab_machines": "Beyond Earth: Maschinen",
   "itemGroup.tab_spawn_eggs": "Beyond Earth: Spawn Eier",
   "itemGroup.tab_materials": "Beyond Earth: Materialen",
-
   "block.beyond_earth.coal_lantern": "Kohle Laterne",
   "block.beyond_earth.oxygen_bubble_distributor": "Sauerstoff Blasen Erzauger",
   "block.beyond_earth.blue_iron_plating_block": "Blaue Eisenmakierungen Block",
@@ -132,36 +128,29 @@
   "block.beyond_earth.moon_ice_shard_ore": "Mond Eis Shard Erz",
   "block.beyond_earth.mars_ice_shard_ore": "Mars Eis Shard Erz",
   "block.beyond_earth.glacio_ice_shard_ore": "Glacio Eis Shard Erz",
-
   "block.beyond_earth.moon_stone_brick_slab": "Mond Steinziegel Stufe",
   "block.beyond_earth.moon_stone_bricks": "Mond Steinziegel",
   "block.beyond_earth.cracked_moon_stone_bricks": "Rissige Mond Steinziegel",
   "block.beyond_earth.moon_stone_brick_stairs": "Mond Steinziegel Treppen",
-
   "block.beyond_earth.mars_stone_brick_slab": "Mars Steinziegel Stufe",
   "block.beyond_earth.mars_stone_bricks": "Mars Steinziegel",
   "block.beyond_earth.cracked_mars_stone_bricks": "Rissige Mars Steinziegel",
   "block.beyond_earth.mars_stone_brick_stairs": "Mars Steinziegel Treppen",
-
   "block.beyond_earth.mercury_stone_brick_slab": "Mercury Steinziegel Stufe",
   "block.beyond_earth.mercury_stone_bricks": "Mercury Steinziegel",
   "block.beyond_earth.cracked_mercury_stone_bricks": "Rissige Mercury Steinziegel",
   "block.beyond_earth.mercury_stone_brick_stairs": "Mercury Steinziegel Treppen",
-
   "block.beyond_earth.venus_stone_brick_slab": "Venus Steinziegel Stufe",
   "block.beyond_earth.venus_stone_bricks": "Venus Steinziegel",
   "block.beyond_earth.cracked_venus_stone_bricks": "Rissige Venus Steinziegel",
   "block.beyond_earth.venus_stone_brick_stairs": "Venus Steinziegel Treppen",
-
   "block.beyond_earth.venus_sandstone_brick_slab": "Venus Sandsteinziegel Stufe",
   "block.beyond_earth.venus_sandstone_bricks": "Venus Sandsteinziegel",
   "block.beyond_earth.cracked_venus_sandstone_bricks": "Rissige Venus Sandsteinziegel",
   "block.beyond_earth.venus_sandstone_brick_stairs": "Venus Sandsteinziegel Treppen",
-
   "block.beyond_earth.venus_calorite_ore": "Venus Calorite Erz",
   "block.beyond_earth.calorite_block": "Caloriteblock",
   "block.beyond_earth.raw_calorite_block": "Roherer Calorite Block",
-  
   "block.beyond_earth.permafrost": "Permafrost",
   "block.beyond_earth.glacio_stone": "Glacio Stein",
   "block.beyond_earth.glacio_stone_bricks": "Glacio Steinziegel",
@@ -172,12 +161,10 @@
   "block.beyond_earth.glacio_copper_ore": "Glacio Kupfer Erz",
   "block.beyond_earth.glacio_iron_ore": "Glacio Eisen Erz",
   "block.beyond_earth.glacio_lapis_ore": "Glacio Lapis Lazuli Erz",
-  
   "fluid.beyond_earth.fuel": "Treibstoff",
   "fluid.fuel": "Treibstoff",
   "fluid.beyond_earth.oil": "Öl",
   "fluid.oil": "Öl",
-
   "entity.beyond_earth.mogler": "Mogler",
   "entity.beyond_earth.pygro": "Pygro",
   "entity.beyond_earth.alien": "Alien",
@@ -190,7 +177,6 @@
   "entity.beyond_earth.rocket_t4": "Stufe 4 Rakete",
   "entity.beyond_earth.lander": "Lander",
   "entity.beyond_earth.rover": "Rover",
-
   "biome.beyond_earth.orbit": "Orbit",
   "biome.beyond_earth.infernal_venus_barrens": "Höllische Venus Landschaft",
   "biome.beyond_earth.venus": "Venus",
@@ -200,28 +186,23 @@
   "biome.beyond_earth.mars_ice_spikes": "Mars Eis Stacheln",
   "biome.beyond_earth.glacio": "Glacio",
   "biome.beyond_earth.glacio_ice_spikes": "Glacio Eis Stacheln",
-
   "advancements.workbench_advancement.title": "NASA Werkbank",
-  "advancements.workbench_advancement.descr": "§bHat eine NASA Werkbank gebaut",
+  "advancements.workbench_advancement.description": "§bHat eine NASA Werkbank gebaut",
   "advancements.rocket_advancement.title": "Stufe 1 Rakete",
-  "advancements.rocket_advancement.descr": "§bHat eine Stufe 1 Rakete gebaut",
+  "advancements.rocket_advancement.description": "§bHat eine Stufe 1 Rakete gebaut",
   "advancements.rocket_tier_2_advancement.title": "Stufe 2 Rakete",
-  "advancements.rocket_tier_2_advancement.descr": "§bHat eine  Stufe 2 Rakete gebaut",
+  "advancements.rocket_tier_2_advancement.description": "§bHat eine  Stufe 2 Rakete gebaut",
   "advancements.rocket_tier_3_advancement.title": "Stufe 3 Rakete",
-  "advancements.rocket_tier_3_advancement.descr": "§bHat eine  Stufe 3 Rakete gebaut",
+  "advancements.rocket_tier_3_advancement.description": "§bHat eine  Stufe 3 Rakete gebaut",
   "advancements.rocket_tier_4_advancement.title": "Stufe 4 Rakete",
-  "advancements.rocket_tier_4_advancement.descr": "§bHat eine Stufe 4 Rakete gebaut ",
+  "advancements.rocket_tier_4_advancement.description": "§bHat eine Stufe 4 Rakete gebaut ",
   "advancements.moon_advancement.title": "Mond",
-  "advancements.moon_advancement.descr": "§bIst auf dem Mond gelandet",
-
+  "advancements.moon_advancement.description": "§bIst auf dem Mond gelandet",
   "effect.beyond_earth.oxygen_bubble_effect": "Sauerstoff Blase",
-
   "key.categories.beyond_earth": "Beyond Earth",
   "key.beyond_earth.rocket_start": "Rakete Starten",
-
   "death.attack.oxygen": "%1$s hat\u0027t keine Luft mehr bekommen",
   "death.attack.venus.acid": "%1$s war eine Opfergabe für die Säure",
-
   "entity.beyond_earth.alien.farmer": "Farmer",
   "entity.beyond_earth.alien.fisherman": "Fischer",
   "entity.beyond_earth.alien.shepherd": "Schafhirte",
@@ -235,7 +216,6 @@
   "entity.beyond_earth.alien.butcher": "Fleischer",
   "entity.beyond_earth.alien.leatherworker": "Lederverarbeiter",
   "entity.beyond_earth.alien.mason": "Maurer",
-
   "block.beyond_earth.molten_desh_fluid": "Geschmolzenes Desh",
   "fluid.beyond_earth.molten_desh": "Geschmolzenes Desh",
   "fluid.beyond_earth.flowing_moltendesh": "Fließendes Geschmolzenes Desh",
@@ -248,7 +228,6 @@
   "fluid.beyond_earth.molten_calorite": "Geschmolzenes Calorite",
   "fluid.beyond_earth.flowing_moltencalorite": "Fließendes geschmolzenes Calorite",
   "item.beyond_earth.molten_calorite_bucket": "Geschmolzenes Calorite Eimer",
-
   "container.beyond_earth.coal_generator": "Kohle Generator",
   "container.beyond_earth.compressor": "Komprimierer",
   "container.beyond_earth.fuel_refinery": "Treibstoff Raffinerie",
@@ -263,20 +242,13 @@
   "container.entity.beyond_earth.rocket_t4": "Stufe 4 Rakete",
   "container.entity.beyond_earth.lander": "Lander",
   "container.entity.beyond_earth.rover": "Rover",
-
-
   "tooltip.beyond_earth.oxygen_bubble_distributor": "Erstellt eine Luftblase %1$s ~ %2$s Blöcke",
-
-
   "message.beyond_earth.no_fuel": "§cKEIN TREIBSTOFF! §7Befülle die Rakete mit §cTreibstoff§7. (§6Shift und Rechtsclick§7)",
   "message.beyond_earth.hold_space": "§7Halte §cLeertaste!",
   "message.beyond_earth.speed": "%s Geschwindigkeit",
-  
-
   "gui.beyond_earth.oxygen_bubble_distributor.workingarea.text": "Umkreis: %1$sx%2$sx%3$s",
   "gui.beyond_earth.oxygen_bubble_distributor.workingarea.show": "Anzeigen",
   "gui.beyond_earth.oxygen_bubble_distributor.workingarea.hide": "Verbergen",
-
   "gui.beyond_earth.planet_selection.catalog": "Katalog",
   "gui.beyond_earth.planet_selection.category": "Kategorie",
   "gui.beyond_earth.planet_selection.type": "Typ",
@@ -303,12 +275,9 @@
   "gui.beyond_earth.planet_selection.solar_system_proxima_centauri": "Proxima Cent.",
   "gui.beyond_earth.planet_selection.proxima_centauri": "Proxima Centauri",
   "gui.beyond_earth.planet_selection.glacio": "Glacio",
-
-
   "jei.tooltip.beyond_earth.oil": "Du kannst Öl im Ozean finden",
   "jei.category.beyond_earth.space_station": "Raumstation",
   "jei.tooltip.beyond_earth.space_station": "Materialien für eine Raumstation",
-
   "gauge_text.beyond_earth.using": "%1$s Nutze: %2$s",
   "gauge_text.beyond_earth.using2": "%1$s Nutze: %2$s/%4$s t",
   "gauge_text.beyond_earth.generating": "%1$s Generiere: %2$s",
@@ -317,7 +286,6 @@
   "gauge_text.beyond_earth.stored": "Gelagert %1$s: %2$s",
   "gauge_text.beyond_earth.capacity": "%1$s Kapazität: %2$s",
   "gauge_text.beyond_earth.transfer": "%1$s Transfer: %2$s",
-
   "gauge.beyond_earth.energy": "Energie",
   "gauge.beyond_earth.fluid": "Flüssigkeit",
   "gauge.beyond_earth.fuel": "Treibstoff",
@@ -325,6 +293,5 @@
   "gauge.beyond_earth.burntime": "Brenndauer",
   "gauge.beyond_earth.cooktime": "Kochdauer",
   "gauge.beyond_earth.oxygenloading": "Lade",
-
   "_eof": "eof"
 }

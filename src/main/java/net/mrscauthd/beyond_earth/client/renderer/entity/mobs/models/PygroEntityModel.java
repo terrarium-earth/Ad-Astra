@@ -15,15 +15,15 @@ import net.minecraft.entity.mob.AbstractPiglinEntity;
 import net.mrscauthd.beyond_earth.util.ModIdentifier;
 
 @Environment(EnvType.CLIENT)
-public class PygroModel<T extends AbstractPiglinEntity> extends PiglinEntityModel<T> {
+public class PygroEntityModel<T extends AbstractPiglinEntity> extends PiglinEntityModel<T> {
     public static final EntityModelLayer LAYER_LOCATION = new EntityModelLayer(new ModIdentifier("pygro"), "main");
 
-    public PygroModel(ModelPart modelPart) {
+    public PygroEntityModel(ModelPart modelPart) {
         super(modelPart);
     }
 
     public static TexturedModelData getModelData() {
-        ModelData modelData = PygroModel.getModelData(Dilation.NONE);
+        ModelData modelData = PygroEntityModel.getModelData(Dilation.NONE);
         ModelPartData modelPartData = modelData.getRoot();
 
         ModelPartData modelPartData1 = modelPartData.addChild("head", ModelPartBuilder.create().uv(0, 0).cuboid(-5.0f, -8.0f, -4.0f, 10.0f, 8.0f, 8.0f, Dilation.NONE).uv(31, 1).cuboid(-2.0f, -4.0f, -5.0f, 4.0f, 4.0f, 1.0f, Dilation.NONE).uv(2, 4)

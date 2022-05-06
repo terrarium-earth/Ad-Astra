@@ -5,10 +5,6 @@ build/
 out/
 classes/
 
-# eclipse
-
-*.launch
-
 # idea
 
 .idea/
@@ -24,13 +20,10 @@ bin/
 .classpath
 .project
 
-# macos
-
-*.DS_Store
-
 # fabric
 
 run/
 
-# hot code replace
-src/main/resources/hotswap-agent.properties
+# macOS
+
+.DS_Store

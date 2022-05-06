@@ -16,7 +16,7 @@ public class GeneratingRecipe extends ModRecipe {
     }
 
     public RecipeSerializer<?> getSerializer() {
-        return new Serializer();
+        return ModRecipes.GENERATING_SERIALIZER;
     }
 
     @Override
@@ -42,7 +42,6 @@ public class GeneratingRecipe extends ModRecipe {
 
         @Override
         public void write(PacketByteBuf buf, GeneratingRecipe recipe) {
-            buf.writeIdentifier(recipe.getId());
             recipe.getInputIngredient().write(buf);
             buf.writeShort(recipe.cookTime);
         }

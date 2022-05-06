@@ -18,7 +18,7 @@ import net.mrscauthd.beyond_earth.entities.mobs.StarCrawlerEntity;
 import net.mrscauthd.beyond_earth.util.ModIdentifier;
 
 @Environment(EnvType.CLIENT)
-public class StarCrawlerModel extends EntityModel<StarCrawlerEntity> {
+public class StarCrawlerEntityModel extends EntityModel<StarCrawlerEntity> {
     public static final EntityModelLayer LAYER_LOCATION = new EntityModelLayer(new ModIdentifier("star_crawler"), "main");
 
     private final ModelPart body;
@@ -27,7 +27,7 @@ public class StarCrawlerModel extends EntityModel<StarCrawlerEntity> {
     private final ModelPart arm3g;
     private final ModelPart arm4g;
 
-    public StarCrawlerModel(ModelPart root) {
+    public StarCrawlerEntityModel(ModelPart root) {
         this.body = root.getChild("body");
         this.arm1g = root.getChild("arm1g");
         this.arm2g = root.getChild("arm2g");

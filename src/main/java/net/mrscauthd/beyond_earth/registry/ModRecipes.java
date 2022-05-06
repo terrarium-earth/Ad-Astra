@@ -1,5 +1,7 @@
 package net.mrscauthd.beyond_earth.registry;
 
+import net.minecraft.recipe.RecipeSerializer;
+import net.minecraft.recipe.ShapelessRecipe;
 import net.minecraft.util.registry.Registry;
 import net.mrscauthd.beyond_earth.recipes.CompressingRecipe;
 import net.mrscauthd.beyond_earth.recipes.GeneratingRecipe;
@@ -13,18 +15,20 @@ public class ModRecipes {
     public static ModRecipeType<ModRecipe> GENERATING_RECIPE;
     public static ModRecipeType<ModRecipe> COMPRESSING_RECIPE;
 
-    public static void register() {
+    public static RecipeSerializer<ShapelessRecipe> HAMMER_SERIALIZER;
+    public static RecipeSerializer<GeneratingRecipe> GENERATING_SERIALIZER;
+    public static RecipeSerializer<CompressingRecipe> COMPRESSING_SERIALIZER;
 
-        // TODO: Fix server crash with recipes.
+    public static void register() {
 
         // Recipe Types.
         GENERATING_RECIPE = register(new ModRecipeType<>(new ModIdentifier("generating")));
         COMPRESSING_RECIPE = register(new ModRecipeType<>(new ModIdentifier("compressing")));
 
         // Recipe Serializers.
-        Registry.register(Registry.RECIPE_SERIALIZER, new ModIdentifier("hammering"), new HammerShapelessRecipe.Serializer());
-        Registry.register(Registry.RECIPE_SERIALIZER, new ModIdentifier("generating"), new GeneratingRecipe.Serializer());
-        Registry.register(Registry.RECIPE_SERIALIZER, new ModIdentifier("compressing"), new CompressingRecipe.Serializer());
+        HAMMER_SERIALIZER = Registry.register(Registry.RECIPE_SERIALIZER, new ModIdentifier("hammering"), new HammerShapelessRecipe.Serializer());
+        GENERATING_SERIALIZER = Registry.register(Registry.RECIPE_SERIALIZER, new ModIdentifier("generating"), new GeneratingRecipe.Serializer());
+        COMPRESSING_SERIALIZER = Registry.register(Registry.RECIPE_SERIALIZER, new ModIdentifier("compressing"), new CompressingRecipe.Serializer());
     }
 
     private static <T extends ModRecipeType<?>> T register(T recipe) {
