@@ -18,7 +18,7 @@ import net.mrscauthd.beyond_earth.entities.mobs.AlienZombieEntity;
 import net.mrscauthd.beyond_earth.util.ModIdentifier;
 
 @Environment(EnvType.CLIENT)
-public class AlienZombieModel extends EntityModel<AlienZombieEntity> {
+public class AlienZombieEntityModel extends EntityModel<AlienZombieEntity> {
     public static final EntityModelLayer LAYER_LOCATION = new EntityModelLayer(new ModIdentifier("alien_zombie"), "main");
 
     private final ModelPart head;
@@ -32,7 +32,7 @@ public class AlienZombieModel extends EntityModel<AlienZombieEntity> {
     private final ModelPart monsterarm3;
     private final ModelPart monsterarm4;
 
-    public AlienZombieModel(ModelPart root) {
+    public AlienZombieEntityModel(ModelPart root) {
         this.head = root.getChild("head");
         this.body = root.getChild("body");
         this.leg0 = root.getChild("leg0");

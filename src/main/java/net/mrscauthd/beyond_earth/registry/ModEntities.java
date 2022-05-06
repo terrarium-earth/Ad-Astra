@@ -56,6 +56,7 @@ public class ModEntities {
 
         public static void register() {
                 // Mob Attributes.
+                FabricDefaultAttributeRegistry.register(ALIEN, AlienEntity.createMobAttributes());
                 FabricDefaultAttributeRegistry.register(ALIEN_ZOMBIE, AlienZombieEntity.createMobAttributes());
                 FabricDefaultAttributeRegistry.register(STAR_CRAWLER, StarCrawlerEntity.createMobAttributes());
                 FabricDefaultAttributeRegistry.register(PYGRO, PygroEntity.createMobAttributes());

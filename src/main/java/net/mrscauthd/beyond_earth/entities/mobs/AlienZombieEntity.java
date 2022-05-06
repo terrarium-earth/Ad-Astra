@@ -14,6 +14,8 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.entity.passive.GolemEntity;
+import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -38,8 +40,9 @@ public class AlienZombieEntity extends HostileEntity implements RangedAttackMob 
         this.goalSelector.add(2, new RevengeGoal(this));
         this.goalSelector.add(3, new WanderAroundGoal(this, 0.8));
         this.goalSelector.add(4, new LookAroundGoal(this));
-        this.targetSelector.add(5, new ActiveTargetGoal<PlayerEntity>(this, PlayerEntity.class, false));
-        this.targetSelector.add(6, new ActiveTargetGoal<AlienEntity>(this, AlienEntity.class, false));
+        this.targetSelector.add(5, new ActiveTargetGoal<>(this, PlayerEntity.class, false));
+        this.targetSelector.add(6, new ActiveTargetGoal<>(this, VillagerEntity.class, false));
+        this.targetSelector.add(7, new ActiveTargetGoal<>(this, GolemEntity.class, false));
         this.goalSelector.add(1, new ProjectileAttackGoal(this, 1.25f, 20, 15) {
             @Override
             public boolean shouldContinue() {

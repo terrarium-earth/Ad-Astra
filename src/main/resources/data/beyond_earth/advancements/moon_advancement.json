@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "item": "beyond_earth:moon_stone"
+    },
+    "title": {
+      "translate": "advancements.moon_advancement.title"
+    },
+    "description": {
+      "translate": "advancements.moon_advancement.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "moon_advancement": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "beyond_earth:moon"
+      }
+    }
+  },
+  "rewards": {
+    "experience": 7
+  },
+  "parent": "beyond_earth:rocket_advancement"
+}

@@ -5,16 +5,18 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
-import net.mrscauthd.beyond_earth.client.renderer.entity.mobs.AlienZombieRenderer;
-import net.mrscauthd.beyond_earth.client.renderer.entity.mobs.MartianRaptorRenderer;
-import net.mrscauthd.beyond_earth.client.renderer.entity.mobs.MoglerRenderer;
-import net.mrscauthd.beyond_earth.client.renderer.entity.mobs.PygroRenderer;
-import net.mrscauthd.beyond_earth.client.renderer.entity.mobs.StarCrawlerRenderer;
-import net.mrscauthd.beyond_earth.client.renderer.entity.mobs.models.AlienZombieModel;
-import net.mrscauthd.beyond_earth.client.renderer.entity.mobs.models.MartianRaptorModel;
-import net.mrscauthd.beyond_earth.client.renderer.entity.mobs.models.MoglerModel;
-import net.mrscauthd.beyond_earth.client.renderer.entity.mobs.models.PygroModel;
-import net.mrscauthd.beyond_earth.client.renderer.entity.mobs.models.StarCrawlerModel;
+import net.mrscauthd.beyond_earth.client.renderer.entity.mobs.AlienEntityRenderer;
+import net.mrscauthd.beyond_earth.client.renderer.entity.mobs.AlienZombieEntityRenderer;
+import net.mrscauthd.beyond_earth.client.renderer.entity.mobs.MartianRaptorEntityRenderer;
+import net.mrscauthd.beyond_earth.client.renderer.entity.mobs.MoglerEntityRenderer;
+import net.mrscauthd.beyond_earth.client.renderer.entity.mobs.PygroEntityRenderer;
+import net.mrscauthd.beyond_earth.client.renderer.entity.mobs.StarCrawlerEntityRenderer;
+import net.mrscauthd.beyond_earth.client.renderer.entity.mobs.models.AlienEntityModel;
+import net.mrscauthd.beyond_earth.client.renderer.entity.mobs.models.AlienZombieEntityModel;
+import net.mrscauthd.beyond_earth.client.renderer.entity.mobs.models.MartianRaptorEntityModel;
+import net.mrscauthd.beyond_earth.client.renderer.entity.mobs.models.MoglerEntityModel;
+import net.mrscauthd.beyond_earth.client.renderer.entity.mobs.models.PygroEntityModel;
+import net.mrscauthd.beyond_earth.client.renderer.entity.mobs.models.StarCrawlerEntityModel;
 import net.mrscauthd.beyond_earth.client.renderer.entity.vehicles.RocketEntityRenderer;
 import net.mrscauthd.beyond_earth.registry.ModEntities;
 
@@ -24,12 +26,13 @@ public class ClientModEntities {
     public static void register() {
 
         // Mobs.
-        EntityRendererRegistry.register(ModEntities.ALIEN_ZOMBIE, AlienZombieRenderer::new);
-        EntityRendererRegistry.register(ModEntities.STAR_CRAWLER, StarCrawlerRenderer::new);
-        EntityRendererRegistry.register(ModEntities.MARTIAN_RAPTOR, MartianRaptorRenderer::new);
-        EntityRendererRegistry.register(ModEntities.PYGRO, PygroRenderer::new);
-        EntityRendererRegistry.register(ModEntities.PYGRO_BRUTE, PygroRenderer::new);
-        EntityRendererRegistry.register(ModEntities.MOGLER, MoglerRenderer::new);
+        EntityRendererRegistry.register(ModEntities.ALIEN, AlienEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntities.ALIEN_ZOMBIE, AlienZombieEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntities.STAR_CRAWLER, StarCrawlerEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntities.MARTIAN_RAPTOR, MartianRaptorEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntities.PYGRO, PygroEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntities.PYGRO_BRUTE, PygroEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntities.MOGLER, MoglerEntityRenderer::new);
 
         // Machines.
         EntityRendererRegistry.register(ModEntities.TIER_1_ROCKET, RocketEntityRenderer::new);
@@ -41,10 +44,11 @@ public class ClientModEntities {
         EntityRendererRegistry.register(ModEntities.ICE_SPIT_ENTITY, FlyingItemEntityRenderer::new);
 
         // Layers.
-        EntityModelLayerRegistry.registerModelLayer(AlienZombieModel.LAYER_LOCATION, AlienZombieModel::getTexturedModelData);
-        EntityModelLayerRegistry.registerModelLayer(StarCrawlerModel.LAYER_LOCATION, StarCrawlerModel::getTexturedModelData);
-        EntityModelLayerRegistry.registerModelLayer(MartianRaptorModel.LAYER_LOCATION, MartianRaptorModel::getTexturedModelData);
-        EntityModelLayerRegistry.registerModelLayer(PygroModel.LAYER_LOCATION, PygroModel::getModelData);
-        EntityModelLayerRegistry.registerModelLayer(MoglerModel.LAYER_LOCATION, MoglerModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(AlienEntityModel.LAYER_LOCATION, AlienEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(AlienZombieEntityModel.LAYER_LOCATION, AlienZombieEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(StarCrawlerEntityModel.LAYER_LOCATION, StarCrawlerEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(MartianRaptorEntityModel.LAYER_LOCATION, MartianRaptorEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(PygroEntityModel.LAYER_LOCATION, PygroEntityModel::getModelData);
+        EntityModelLayerRegistry.registerModelLayer(MoglerEntityModel.LAYER_LOCATION, MoglerEntityModel::getTexturedModelData);
     }
 }
