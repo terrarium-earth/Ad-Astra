@@ -11,7 +11,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.mrscauthd.beyond_earth.registry.ModRecipes;
 
-public class CompressingRecipe extends ModRecipe {
+public class CompressingRecipe extends CookingRecipe {
 
     public CompressingRecipe(Identifier id, Ingredient input, ItemStack output, short cookTime) {
         super(id, input, output, cookTime);

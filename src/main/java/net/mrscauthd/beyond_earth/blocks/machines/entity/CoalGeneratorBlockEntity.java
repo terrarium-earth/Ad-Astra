@@ -10,7 +10,7 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.mrscauthd.beyond_earth.gui.screen_handlers.CoalGeneratorScreenHandler;
-import net.mrscauthd.beyond_earth.recipes.ModRecipe;
+import net.mrscauthd.beyond_earth.recipes.CookingRecipe;
 import net.mrscauthd.beyond_earth.registry.ModBlockEntities;
 import net.mrscauthd.beyond_earth.registry.ModRecipes;
 
@@ -64,7 +64,7 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity {
                     entity.cumulateEnergy();
                     // Check if the input is a valid fuel.
                 } else if (!input.isEmpty()) {
-                    ModRecipe recipe = entity.createRecipe(ModRecipes.GENERATING_RECIPE, input, false);
+                    CookingRecipe recipe = entity.createRecipe(ModRecipes.GENERATING_RECIPE, input, false);
                     if (recipe != null) {
                         input.decrement(1);
                         entity.cookTimeTotal = recipe.getCookTime();

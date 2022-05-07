@@ -1,11 +1,13 @@
 package net.mrscauthd.beyond_earth.client.screens.planet_selection;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
+import com.ibm.icu.impl.Pair;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.fabricmc.api.EnvType;
@@ -17,11 +19,15 @@ import net.minecraft.client.gui.screen.ingame.ScreenHandlerProvider;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.world.World;
 import net.mrscauthd.beyond_earth.BeyondEarth;
 import net.mrscauthd.beyond_earth.client.BeyondEarthClient;
 import net.mrscauthd.beyond_earth.client.resource_pack.SolarSystem;
@@ -29,6 +35,7 @@ import net.mrscauthd.beyond_earth.data.ButtonColour;
 import net.mrscauthd.beyond_earth.data.Planet;
 import net.mrscauthd.beyond_earth.gui.screen_handlers.PlanetSelectionScreenHandler;
 import net.mrscauthd.beyond_earth.networking.ModC2SPackets;
+import net.mrscauthd.beyond_earth.registry.ModRecipes;
 import net.mrscauthd.beyond_earth.util.MathUtil;
 import net.mrscauthd.beyond_earth.util.ModIdentifier;
 
@@ -82,6 +89,8 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
         private ButtonWidget scrollBar;
 
         List<Category> solarSystemsCategories = new LinkedList<>();
+
+        public List<Pair<ItemStack, Integer>> ingredients = new ArrayList<>();
 
         public PlanetSelectionScreen(PlanetSelectionScreenHandler handler, PlayerInventory inventory, Text title) {
                 super(title);
@@ -179,6 +188,33 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
         protected void init() {
                 super.init();
 
+                // Get recipe.
+                PlayerEntity player = this.handler.getPlayer();
+                PlayerInventory inventory = player.getInventory();
+
+                ModRecipes.SPACE_STATION_RECIPE.getRecipes(player.world).forEach(recipe -> {
+                        if (recipe != null) {
+
+                                for (int i = 0; i < recipe.getInputs().length; i++) {
+                                        ItemStack stack = recipe.getInputs()[i].getMatchingStacks()[0].copy();
+                                        // Sets the custom name to the item name to ensure that it always displays the item name and not "Air."
+                                        stack.setCustomName(stack.getName());
+                                        stack.setCount(0);
+
+                                        for (ItemStack slot : inventory.main) {
+                                                if (slot != null) {
+                                                        if (recipe.getInputs()[i].test(slot)) {
+                                                                stack.setCount(inventory.count(slot.getItem()));
+                                                                break;
+                                                        }
+                                                }
+                                        }
+
+                                        ingredients.add(Pair.of(stack, recipe.getStackCounts().get(i)));
+                                }
+                        }
+                });
+
                 // Set the initial gui time to the world time. This creates a random start position for each rotating object.
                 guiTime = client.world.getTime();
 
@@ -209,9 +245,9 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                                         createNavigationButton(label, solarSystemCategory, ButtonSize.NORMAL, planet.buttonColour(), TooltipType.CATEGORY, planet, planetCategory);
                                 }
 
-                                createTeleportButton(1, label, planetCategory, ButtonSize.NORMAL, ButtonColour.BLUE, TooltipType.PLANET, planet, planet.dimension().getValue());
-                                createTeleportButton(2, ORBIT_TEXT, planetCategory, ButtonSize.SMALL, ButtonColour.BLUE, TooltipType.ORBIT, null, planet.orbitDimension().getValue());
-                                createSpaceStationTeleportButton(3, SPACE_STATION_TEXT, planetCategory, ButtonSize.NORMAL, ButtonColour.GREEN, planet.orbitDimension().getValue());
+                                createTeleportButton(1, label, planetCategory, ButtonSize.NORMAL, ButtonColour.BLUE, TooltipType.PLANET, planet, planet.dimension());
+                                createTeleportButton(2, ORBIT_TEXT, planetCategory, ButtonSize.SMALL, ButtonColour.BLUE, TooltipType.ORBIT, null, planet.orbitDimension());
+                                createSpaceStationTeleportButton(3, SPACE_STATION_TEXT, planetCategory, ButtonSize.NORMAL, ButtonColour.GREEN, planet.orbitDimension());
                         }
                 });
 
@@ -258,12 +294,34 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                 createButton(label, category, size, colour, tooltip, planetInfo, press -> onNavigationButtonClick(target));
         }
 
-        private void createSpaceStationTeleportButton(int row, Text label, Category category, ButtonSize size, ButtonColour colour, Identifier targetDimension) {
-                // TODO
-                createTeleportButton(row, label, category, size, colour, TooltipType.SPACE_STATION, null, targetDimension);
+        private void createSpaceStationTeleportButton(int row, Text label, Category category, ButtonSize size, ButtonColour colour, RegistryKey<World> world) {
+                createTeleportButton(row, label, category, size, colour, TooltipType.SPACE_STATION, null, world, press -> {
+                        for (int i = 0; i < this.ingredients.size(); i++) {
+                                Pair<ItemStack, Integer> ingredient = this.ingredients.get(i);
+                                boolean isEnough = ingredient.first.getCount() >= ingredient.second;
+                                if (!isEnough) {
+                                        // Don't do anything if the player does not have the necessary materials.
+                                        return;
+                                }
+                        }
+                        this.client.player.closeHandledScreen();
+                        // Consume the required items to build the Space Station.
+                        ClientPlayNetworking.send(ModC2SPackets.DELETE_SPACE_STATION_ITEMS_PACKET_ID, PacketByteBufs.empty());
+                        PacketByteBuf buf = PacketByteBufs.create();
+                        buf.writeIdentifier(world.getValue());
+                        // Create the space station.
+                        ClientPlayNetworking.send(ModC2SPackets.CREATE_SPACE_STATION_PACKET_ID, buf);
+                        teleportPlayer(world);
+                });
         }
 
-        private void createTeleportButton(int row, Text label, Category category, ButtonSize size, ButtonColour colour, TooltipType tooltip, Planet planetInfo, Identifier targetDimension) {
+        private void createTeleportButton(int row, Text label, Category category, ButtonSize size, ButtonColour colour, TooltipType tooltip, Planet planetInfo, RegistryKey<World> world) {
+                createTeleportButton(row, label, category, size, colour, tooltip, planetInfo, world, press -> {
+                        teleportPlayer(world);
+                });
+        }
+
+        private void createTeleportButton(int row, Text label, Category category, ButtonSize size, ButtonColour colour, TooltipType tooltip, Planet planetInfo, RegistryKey<World> world, Consumer<ButtonWidget> onClick) {
                 int newRow = 0;
                 if (row == 2) {
                         newRow = 76;
@@ -275,13 +333,15 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 
                 int column = getColumn(category) - (row - 1) * 22;
                 column -= 44 * (buttons.size() / 3);
-                createButton(newRow + 10, column, label, category, size, colour, tooltip, planetInfo, press -> {
-                        this.client.player.closeHandledScreen();
-                        PacketByteBuf buf = PacketByteBufs.create();
-                        buf.writeIdentifier(targetDimension);
-                        // Tell the server to teleport the player after the button has been pressed.
-                        ClientPlayNetworking.send(ModC2SPackets.TELEPORT_TO_PLANET_PACKET_ID, buf);
-                });
+                createButton(newRow + 10, column, label, category, size, colour, tooltip, planetInfo, onClick);
+        }
+
+        private void teleportPlayer(RegistryKey<World> world) {
+                this.client.player.closeHandledScreen();
+                PacketByteBuf buf = PacketByteBufs.create();
+                buf.writeIdentifier(world.getValue());
+                // Tell the server to teleport the player after the button has been pressed.
+                ClientPlayNetworking.send(ModC2SPackets.TELEPORT_TO_PLANET_PACKET_ID, buf);
         }
 
         private PlanetSelectionButton createButton(Text label, Category category, ButtonSize size, ButtonColour colour, TooltipType tooltip, Planet planetInfo, Consumer<ButtonWidget> onClick) {
@@ -414,5 +474,9 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
         @Override
         public PlanetSelectionScreenHandler getScreenHandler() {
                 return this.handler;
+        }
+
+        public List<Pair<ItemStack, Integer>> getIngredients() {
+                return this.ingredients;
         }
 }
