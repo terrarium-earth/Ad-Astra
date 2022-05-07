@@ -16,6 +16,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
+import net.mrscauthd.beyond_earth.client.screens.planet_selection.PlanetSelectionScreen.TooltipType;
 import net.mrscauthd.beyond_earth.data.ButtonColour;
 import net.mrscauthd.beyond_earth.data.Planet;
 import net.mrscauthd.beyond_earth.util.ColourHolder;
@@ -36,7 +37,6 @@ public class PlanetSelectionButton extends ButtonWidget {
     private Planet planetInfo;
 
     private final PlanetSelectionScreen.TooltipType tooltip;
-    // private RegistryKey<World> world;
 
     public PlanetSelectionButton(int x, int y, Text label, ButtonSize size, ButtonColour buttonColour, PlanetSelectionScreen.TooltipType tooltip, Planet planetInfo, PressAction onPress) {
 
@@ -128,7 +128,8 @@ public class PlanetSelectionButton extends ButtonWidget {
         case PLANET -> {
             textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.TYPE_TEXT.getString() + ": \u00A73" + (planetInfo.parentDimension() == null ? PlanetSelectionScreen.PLANET_TEXT.getString() : PlanetSelectionScreen.MOON_TEXT.getString())));
             textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.GRAVITY_TEXT.getString() + ": \u00A73" + planetInfo.gravity() + " m/s"));
-            textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.OXYGEN_TEXT.getString() + ": \u00A7" + (planetInfo.hasOxygen() ? ('a' + PlanetSelectionScreen.OXYGEN_TRUE_TEXT.getString()) : ('c' + PlanetSelectionScreen.OXYGEN_FALSE_TEXT.getString()))));
+            textEntries
+                    .add(Text.of("\u00A79" + PlanetSelectionScreen.OXYGEN_TEXT.getString() + ": \u00A7" + (planetInfo.hasOxygen() ? ('a' + PlanetSelectionScreen.OXYGEN_TRUE_TEXT.getString()) : ('c' + PlanetSelectionScreen.OXYGEN_FALSE_TEXT.getString()))));
             String temperatureColour = "\u00A7a";
 
             // Make the temperature text look orange when the temperature is hot and blue when the temperature is cold.
@@ -139,15 +140,29 @@ public class PlanetSelectionButton extends ButtonWidget {
                 // Cold.
                 temperatureColour = "\u00A71";
             }
-            
+
             textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.TEMPERATURE_TEXT.getString() + ": " + temperatureColour + " " + planetInfo.temperature() + " °C"));
         }
-        case ORBIT, SPACE_STATION -> { // TODO: add space station requirements.
+        case SPACE_STATION -> {
+            PlanetSelectionScreen currentScreen = (PlanetSelectionScreen) client.currentScreen;
+            textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.ITEM_REQUIREMENT_TEXT.getString()));
+
+            currentScreen.ingredients.forEach(ingredient -> {
+                boolean isEnough = ingredient.first.getCount() >= ingredient.second;
+                textEntries.add(Text.of("\u00A7" + (isEnough ? "a" : "c") + ingredient.first.getCount() + "/" + ingredient.second + " \u00A73" + ingredient.first.getName().getString()));
+            });
+            textEntries.add(Text.of("\u00A7c----------------"));
+        }
+        default -> {
+
+        }
+        }
+
+        if (tooltip.equals(TooltipType.ORBIT) || tooltip.equals(TooltipType.SPACE_STATION)) {
             textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.TYPE_TEXT.getString() + ": \u00A73" + PlanetSelectionScreen.ORBIT_TEXT.getString()));
             textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.GRAVITY_TEXT.getString() + ": \u00A73" + PlanetSelectionScreen.NO_GRAVITY_TEXT.getString()));
             textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.OXYGEN_TEXT.getString() + ": \u00A7c " + PlanetSelectionScreen.OXYGEN_FALSE_TEXT.getString()));
             textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.TEMPERATURE_TEXT.getString() + ": \u00A71 " + -270.0 + " °C"));
-        }
         }
 
         screen.renderTooltip(matrices, textEntries, mouseX, mouseY);

@@ -10,6 +10,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.network.PacketByteBuf;
@@ -92,19 +93,20 @@ public class ModUtils {
             // Cook food.
             if (entity instanceof ItemEntity item) {
                 ItemStack stack = item.getStack();
-                if (stack.getItem().equals(Items.CHICKEN)) {
+                Item stackItem = stack.getItem();
+                if (stackItem.equals(Items.CHICKEN)) {
                     item.setStack(new ItemStack(Items.COOKED_CHICKEN, stack.getCount()));
-                } else if (stack.getItem().equals(Items.BEEF)) {
+                } else if (stackItem.equals(Items.BEEF)) {
                     item.setStack(new ItemStack(Items.COOKED_BEEF, stack.getCount()));
-                } else if (stack.getItem().equals(Items.PORKCHOP)) {
+                } else if (stackItem.equals(Items.PORKCHOP)) {
                     item.setStack(new ItemStack(Items.COOKED_PORKCHOP, stack.getCount()));
-                } else if (stack.getItem().equals(Items.MUTTON)) {
+                } else if (stackItem.equals(Items.MUTTON)) {
                     item.setStack(new ItemStack(Items.COOKED_MUTTON, stack.getCount()));
-                } else if (stack.getItem().equals(Items.RABBIT)) {
+                } else if (stackItem.equals(Items.RABBIT)) {
                     item.setStack(new ItemStack(Items.COOKED_RABBIT, stack.getCount()));
-                } else if (stack.getItem().equals(Items.COD)) {
+                } else if (stackItem.equals(Items.COD)) {
                     item.setStack(new ItemStack(Items.COOKED_COD, stack.getCount()));
-                } else if (stack.getItem().equals(Items.SALMON)) {
+                } else if (stackItem.equals(Items.SALMON)) {
                     item.setStack(new ItemStack(Items.COOKED_SALMON, stack.getCount()));
                 }
             }

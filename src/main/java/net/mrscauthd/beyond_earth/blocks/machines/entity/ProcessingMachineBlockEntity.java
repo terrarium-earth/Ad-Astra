@@ -8,7 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
-import net.mrscauthd.beyond_earth.recipes.ModRecipe;
+import net.mrscauthd.beyond_earth.recipes.CookingRecipe;
 import net.mrscauthd.beyond_earth.recipes.ModRecipeType;
 
 public abstract class ProcessingMachineBlockEntity extends AbstractMachineBlockEntity {
@@ -77,10 +77,10 @@ public abstract class ProcessingMachineBlockEntity extends AbstractMachineBlockE
         this.markDirty();
     }
 
-    public ModRecipe createRecipe(ModRecipeType<ModRecipe> type, ItemStack testStack, boolean checkOutput) {
+    public <T extends CookingRecipe> CookingRecipe createRecipe(ModRecipeType<T> type, ItemStack testStack, boolean checkOutput) {
         stopCooking();
 
-        ModRecipe recipe = type.findFirst(world, f -> f.test(testStack));
+        CookingRecipe recipe = type.findFirst(this.world, f -> f.test(testStack));
 
         if (recipe != null) {
 
