@@ -11,7 +11,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.mrscauthd.beyond_earth.gui.screen_handlers.CompressorScreenHandler;
-import net.mrscauthd.beyond_earth.recipes.ModRecipe;
+import net.mrscauthd.beyond_earth.recipes.CookingRecipe;
 import net.mrscauthd.beyond_earth.registry.ModBlockEntities;
 import net.mrscauthd.beyond_earth.registry.ModRecipes;
 
@@ -81,7 +81,7 @@ public class CompressorBlockEntity extends ProcessingMachineBlockEntity {
                         entity.finishCooking();
 
                     } else {
-                        ModRecipe recipe = entity.createRecipe(ModRecipes.COMPRESSING_RECIPE, input, true);
+                        CookingRecipe recipe = entity.createRecipe(ModRecipes.COMPRESSING_RECIPE, input, true);
                         if (recipe != null) {
                             entity.cookTimeTotal = recipe.getCookTime();
                             entity.cookTime = 0;

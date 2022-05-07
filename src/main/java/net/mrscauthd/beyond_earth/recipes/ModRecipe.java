@@ -1,5 +1,6 @@
 package net.mrscauthd.beyond_earth.recipes;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 import net.minecraft.inventory.Inventory;
@@ -12,15 +13,18 @@ import net.minecraft.world.World;
 public abstract class ModRecipe implements Recipe<Inventory>, Predicate<ItemStack> {
 
     protected Identifier id;
-    protected Ingredient input;
-    protected ItemStack output;
-    protected short cookTime;
+    protected Ingredient[] inputs = new Ingredient[1];
+    protected List<Integer> stackCounts;
 
-    public ModRecipe(Identifier id, Ingredient input, ItemStack output, short cookTime) {
+    public ModRecipe(Identifier id, Ingredient input) {
         this.id = id;
-        this.input = input;
-        this.output = output;
-        this.cookTime = cookTime;
+        this.inputs[0] = input;
+    }
+
+    public ModRecipe(Identifier id, Ingredient[] input, List<Integer> stackCounts) {
+        this.id = id;
+        this.inputs = input;
+        this.stackCounts = stackCounts;
     }
 
     @Override
@@ -36,14 +40,15 @@ public abstract class ModRecipe implements Recipe<Inventory>, Predicate<ItemStac
     }
 
     @Override
-    public boolean fits(int width, int height) {
+    public ItemStack getOutput() {
         // Unused.
-        return true;
+        return ItemStack.EMPTY;
     }
 
     @Override
-    public ItemStack getOutput() {
-        return this.output.copy();
+    public boolean fits(int width, int height) {
+        // Unused.
+        return true;
     }
 
     @Override
@@ -51,16 +56,20 @@ public abstract class ModRecipe implements Recipe<Inventory>, Predicate<ItemStac
         return this.id;
     }
 
+    public Ingredient[] getInputs() {
+        return this.inputs;
+    }
+    public List<Integer> getStackCounts() {
+        return this.stackCounts;
+    }
+
     @Override
     public boolean test(ItemStack itemStack) {
-        return this.input.test(itemStack);
-    }
-
-    public Ingredient getInputIngredient() {
-        return this.input;
-    }
-
-    public short getCookTime() {
-        return this.cookTime;
+        for (Ingredient input : inputs) {
+            if (input.test(itemStack)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

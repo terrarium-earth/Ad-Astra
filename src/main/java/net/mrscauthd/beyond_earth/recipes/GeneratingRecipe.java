@@ -9,7 +9,7 @@ import net.minecraft.recipe.RecipeType;
 import net.minecraft.util.Identifier;
 import net.mrscauthd.beyond_earth.registry.ModRecipes;
 
-public class GeneratingRecipe extends ModRecipe {
+public class GeneratingRecipe extends CookingRecipe {
 
     public GeneratingRecipe(Identifier id, Ingredient input, ItemStack output, short cookTime) {
         super(id, input, output, cookTime);
