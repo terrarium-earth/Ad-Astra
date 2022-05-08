@@ -14,7 +14,6 @@ repositories {
 	maven { url "https://maven.shedaniel.me/" }
 	maven { url "https://maven.terraformersmc.com" }
 	maven { url 'https://maven.blamejared.com' }
-	maven { url = "https://hephaestus.dev/release" }
 }
 
 dependencies {
@@ -37,8 +36,6 @@ dependencies {
 	}
 
 	modImplementation "vazkii.patchouli:Patchouli:${project.patchouli_version}"
-	
-	modImplementation include("dev.monarkhes:myron:${project.myron_version}")
 }
 
 loom {

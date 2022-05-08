@@ -233,8 +233,8 @@
   "key.categories.beyond_earth": "Beyond Earth",
   "key.beyond_earth.rocket_start": "Rocket Start",
 
-  "death.attack.oxygen": "%1$s could'n\u0027t breathe anymore",
-  "death.attack.venus.acid": "%1$s was a sacrifice to the acid",
+  "death.attack.oxygen": "%1$s couldn't breathe anymore",
+  "death.attack.acid_rain": "%1$s was a sacrifice to the acid",
 
   "entity.beyond_earth.alien.farmer": "Farmer",
   "entity.beyond_earth.alien.fisherman": "Fisherman",
@@ -344,5 +344,5 @@
 
   "_eof": "eof",
 
-  "gui.beyond_earth.planet_selection.nether": "Addon"
+  "tooltip.beyond_earth.space_suit": "\u00A7bOxygen: \u00A7%s/%d mb"
 }

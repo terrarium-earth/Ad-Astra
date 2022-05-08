@@ -14,10 +14,10 @@
     "gravity.ExperienceBottleEntityMixin",
     "gravity.FishingBobberEntityMixin",
     "gravity.CommonGravityEntityMixin",
-    "gravity.LivingEntityMixin",
     "gravity.PersistentProjectileEntityMixin",
     "gravity.PotionEntityMixin",
     "gravity.ThrownEntityMixin",
+    "LivingEntityMixin",
     "NoiseChunkGeneratorAccessor",
     "WorldRendererAccessor"
   ],

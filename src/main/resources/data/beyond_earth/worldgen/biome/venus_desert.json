@@ -1,8 +1,8 @@
 {
   "temperature": 1.6,
   "downfall": 0,
-  "precipitation": "none",
-  "category": "desert",
+  "precipitation": "rain",
+  "category": "none",
   "effects": {
     "sky_color": -3044526,
     "fog_color": -3044526,
