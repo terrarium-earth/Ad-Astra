@@ -202,7 +202,7 @@
   "key.categories.beyond_earth": "Beyond Earth",
   "key.beyond_earth.rocket_start": "Rakete Starten",
   "death.attack.oxygen": "%1$s hat\u0027t keine Luft mehr bekommen",
-  "death.attack.venus.acid": "%1$s war eine Opfergabe für die Säure",
+  "death.attack.acid_rain": "%1$s war eine Opfergabe für die Säure",
   "entity.beyond_earth.alien.farmer": "Farmer",
   "entity.beyond_earth.alien.fisherman": "Fischer",
   "entity.beyond_earth.alien.shepherd": "Schafhirte",

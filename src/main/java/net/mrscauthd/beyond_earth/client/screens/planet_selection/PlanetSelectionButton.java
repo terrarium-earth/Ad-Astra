@@ -21,6 +21,7 @@ import net.mrscauthd.beyond_earth.data.ButtonColour;
 import net.mrscauthd.beyond_earth.data.Planet;
 import net.mrscauthd.beyond_earth.util.ColourHolder;
 import net.mrscauthd.beyond_earth.util.ModIdentifier;
+import net.mrscauthd.beyond_earth.util.ModUtils;
 
 @Environment(EnvType.CLIENT)
 public class PlanetSelectionButton extends ButtonWidget {
@@ -162,7 +163,7 @@ public class PlanetSelectionButton extends ButtonWidget {
             textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.TYPE_TEXT.getString() + ": \u00A73" + PlanetSelectionScreen.ORBIT_TEXT.getString()));
             textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.GRAVITY_TEXT.getString() + ": \u00A73" + PlanetSelectionScreen.NO_GRAVITY_TEXT.getString()));
             textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.OXYGEN_TEXT.getString() + ": \u00A7c " + PlanetSelectionScreen.OXYGEN_FALSE_TEXT.getString()));
-            textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.TEMPERATURE_TEXT.getString() + ": \u00A71 " + -270.0 + " °C"));
+            textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.TEMPERATURE_TEXT.getString() + ": \u00A71 " + ModUtils.ORBIT_TEMPERATURE + " °C"));
         }
 
         screen.renderTooltip(matrices, textEntries, mouseX, mouseY);

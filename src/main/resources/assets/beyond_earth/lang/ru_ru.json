@@ -204,7 +204,7 @@
   "key.categories.beyond_earth": "Beyond Earth",
   "key.beyond_earth.rocket_start": "Запуск ракеты",
   "death.attack.oxygen": "%1$s больше нечем дышать",
-  "death.attack.venus.acid": "%1$s растворился в кислоте",
+  "death.attack.acid_rain": "%1$s растворился в кислоте",
   "entity.beyond_earth.alien.farmer": "Фермер",
   "entity.beyond_earth.alien.fisherman": "Рыбак",
   "entity.beyond_earth.alien.shepherd": "Пастух",

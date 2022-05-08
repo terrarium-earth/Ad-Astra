@@ -12,6 +12,8 @@ import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.fabricmc.fabric.api.client.screen.v1.Screens;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.item.Item;
@@ -29,6 +31,7 @@ import net.mrscauthd.beyond_earth.client.renderer.spacesuit.SpaceSuitRenderer;
 import net.mrscauthd.beyond_earth.client.resource_pack.PlanetResources;
 import net.mrscauthd.beyond_earth.client.resource_pack.SkyRenderer;
 import net.mrscauthd.beyond_earth.client.resource_pack.SolarSystem;
+import net.mrscauthd.beyond_earth.client.screens.PlayerOverlayScreen;
 import net.mrscauthd.beyond_earth.data.Planet;
 import net.mrscauthd.beyond_earth.networking.ModS2CPackets;
 import net.mrscauthd.beyond_earth.registry.ModBlockEntities;
@@ -60,6 +63,9 @@ public class BeyondEarthClient implements ClientModInitializer {
 
                 // Entities.
                 ClientModEntities.register();
+
+                // Overlays.
+                HudRenderCallback.EVENT.register(PlayerOverlayScreen::render);
 
                 // Rocket item.
                 BuiltinItemRendererRegistry.INSTANCE.register(ModItems.TIER_1_ROCKET, new RocketItemRenderer());
