@@ -71,6 +71,13 @@ public class GuiUtil {
         DrawableHelper.drawTexture(matrixStack, left, top + remainHeight, 0, remainHeight, width, ratioHeight, width, height);
     }
 
+    public static void drawVerticalReverse(MatrixStack matrixStack, int left, int top, int width, int height, Identifier resource, double ratio) {
+        int ratioHeight = (int) Math.ceil(height * ratio);
+        int remainHeight = height - ratioHeight;
+        RenderSystem.setShaderTexture(0, resource);
+        DrawableHelper.drawTexture(matrixStack, left, top, 0, 0, width, remainHeight, width, height);
+    }
+
     public static void drawHorizontal(MatrixStack matrixStack, int left, int top, int width, int height, Identifier resource, double ratio) {
         int ratioWidth = (int) Math.ceil(width * ratio);
 

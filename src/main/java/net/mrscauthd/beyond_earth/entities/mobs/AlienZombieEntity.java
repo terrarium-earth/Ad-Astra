@@ -1,8 +1,11 @@
 package net.mrscauthd.beyond_earth.entities.mobs;
 
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.RangedAttackMob;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
@@ -20,11 +23,13 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 import net.mrscauthd.beyond_earth.entities.projectiles.IceSpitEntity;
 import net.mrscauthd.beyond_earth.registry.ModEntities;
 
-public class AlienZombieEntity extends HostileEntity implements RangedAttackMob {
+public class AlienZombieEntity extends HostileEntity implements ModEntity, RangedAttackMob {
 
     public static DefaultAttributeContainer.Builder createMobAttributes() {
         return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3).add(EntityAttributes.GENERIC_MAX_HEALTH, 20).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3);
@@ -74,10 +79,21 @@ public class AlienZombieEntity extends HostileEntity implements RangedAttackMob 
         double targetY = target.getBodyY(0.3333333333333333) - projectile.getY() - 1.1f;
         double targetZ = target.getZ() - this.getZ();
         double calculated = Math.sqrt(targetX * targetX + targetZ * targetZ);
-        projectile.setVelocity(targetX, targetY + calculated * (double)0.2f, targetZ, 1.6f, 14 - this.world.getDifficulty().getId() * 4);
+        projectile.setVelocity(targetX, targetY + calculated * (double) 0.2f, targetZ, 1.6f, 14 - this.world.getDifficulty().getId() * 4);
 
         projectile.setSilent(true);
         this.world.spawnEntity(projectile);
         this.world.playSound(null, this.getBlockPos(), SoundEvents.ENTITY_BLAZE_SHOOT, SoundCategory.PLAYERS, 1, 1);
+    }
+    
+    @Override
+    public boolean canSpawn(WorldAccess world, SpawnReason spawnReason) {
+        BlockState blockState = world.getBlockState(new BlockPos(this.getX(), this.getY() - 1, this.getZ()));
+
+		if (blockState.isOf(Blocks.LAVA) || blockState.isOf(Blocks.AIR)) {
+			return false;
+		}
+
+		return super.canSpawn(world, spawnReason);
     }
 }

@@ -8,11 +8,13 @@ import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -25,6 +27,8 @@ import net.minecraft.world.World;
 import net.mrscauthd.beyond_earth.BeyondEarth;
 import net.mrscauthd.beyond_earth.client.BeyondEarthClient;
 import net.mrscauthd.beyond_earth.data.Planet;
+import net.mrscauthd.beyond_earth.items.armour.NetheriteSpaceSuit;
+import net.mrscauthd.beyond_earth.items.armour.SpaceSuit;
 import net.mrscauthd.beyond_earth.networking.ModS2CPackets;
 import net.mrscauthd.beyond_earth.world.SoundUtil;
 
@@ -57,8 +61,8 @@ public class ModUtils {
     public static final RegistryKey<World> GLACIO_ORBIT_KEY = RegistryKey.of(Registry.WORLD_KEY, GLACIO_ORBIT);
 
     public static final float ORBIT_TRUE_GRAVITY = 0.0f;
-    public static final int ORBIT_TEMPERATURE = -270;
-    public static final float ORBIT_GRAVITY = 0.5f;
+    public static final float ORBIT_TEMPERATURE = -270.0f;
+    public static final float ORBIT_GRAVITY = 0.32f;
 
     public static boolean modLoaded(String modId) {
         return FabricLoader.getInstance().isModLoaded(modId);
@@ -82,7 +86,7 @@ public class ModUtils {
             if (world.getValue().equals(new ModIdentifier("earth"))) {
                 world = World.OVERWORLD;
             }
-            
+
             entity = FabricDimensions.teleport(entity, entityWorld.getServer().getWorld(world), target);
             if (entity instanceof PlayerEntity player) {
                 PacketByteBuf buf = PacketByteBufs.create();
@@ -138,9 +142,9 @@ public class ModUtils {
                 return planet.gravity() / VANILLA_GRAVITY;
             }
         }
-        // Orbit gravity is 0.5, allowing for slow fall.
+        // Orbit gravity is 0.25, allowing for slow fall.
         if (isOrbitDimension(isClient, world)) {
-            return 0.5f;
+            return ORBIT_GRAVITY;
         }
         if (isSpaceDimension(isClient, world)) {
             BeyondEarth.LOGGER.error(world.getValue().toString() + " does not have a defined gravity!");
@@ -185,6 +189,29 @@ public class ModUtils {
         return worlds;
     }
 
+    public static final float getDimensionTemperature(boolean isClient, World world) {
+        return getDimensionTemperature(isClient, world.getRegistryKey());
+    }
+
+    public static final float getDimensionTemperature(boolean isClient, RegistryKey<World> world) {
+        for (Planet planet : isClient ? BeyondEarthClient.planets : BeyondEarth.planets) {
+            if (planet.dimension().equals(world)) {
+                return planet.temperature();
+            }
+        }
+        if (isOrbitDimension(isClient, world)) {
+            return ORBIT_TEMPERATURE;
+        }
+        if (isSpaceDimension(isClient, world)) {
+            BeyondEarth.LOGGER.error(world.getValue().toString() + " does not have a defined temperature!");
+        }
+        return 20.0f;
+    }
+
+    public static boolean dimensionHasOxygen(boolean isClient, World world) {
+        return dimensionHasOxygen(isClient, world.getRegistryKey());
+    }
+
     public static boolean dimensionHasOxygen(boolean isClient, RegistryKey<World> world) {
         return getDimensionsWithoutOxygen(isClient).stream().anyMatch(world::equals);
     }
@@ -197,5 +224,35 @@ public class ModUtils {
 
     public static float getMixinGravity(float value, Object mixin) {
         return (float) getMixinGravity((double) value, mixin);
+    }
+
+    public static boolean hasOxygenatedSpaceSuit(PlayerEntity player) {
+        ItemStack chest = player.getEquippedStack(EquipmentSlot.CHEST);
+        NbtCompound nbt = chest.getNbt();
+
+        if (nbt.contains("Oxygen")) {
+            if (nbt.getInt("Oxygen") > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean hasFullSpaceSet(PlayerEntity player) {
+        for (int i = 0; i < 4; i++) {
+            if (!(player.getInventory().getArmorStack(i).getItem() instanceof SpaceSuit)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean hasFullNetheriteSpaceSet(PlayerEntity player) {
+        for (int i = 0; i < 4; i++) {
+            if (!(player.getInventory().getArmorStack(i).getItem() instanceof NetheriteSpaceSuit)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
