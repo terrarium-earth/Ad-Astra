@@ -11,11 +11,16 @@ import net.minecraft.block.Waterloggable;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
@@ -25,6 +30,8 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
+import net.mrscauthd.beyond_earth.entities.vehicles.RocketEntity;
+import net.mrscauthd.beyond_earth.items.vehicles.RocketItem;
 import net.mrscauthd.beyond_earth.registry.ModBlockEntities;
 
 @SuppressWarnings("deprecation")
@@ -88,5 +95,26 @@ public class RocketLaunchPad extends BlockWithEntity implements Waterloggable {
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new RocketLaunchPadEntity(pos, state);
+    }
+
+    @Override
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        if (state.get(STAGE).equals(true)) {
+            if (world.getBlockEntity(pos) instanceof RocketLaunchPadEntity launchPadEntity) {
+                ItemStack currentStack = player.getStackInHand(hand);
+                if (currentStack.getItem() instanceof RocketItem<?> rocket) {
+                    
+                    RocketEntity rocketEntity = new RocketEntity(rocket.getRocketEntity(), world);
+                    rocketEntity.setDropStack(currentStack.copy());
+                    rocketEntity.setHomeLaunchPad(pos);
+                    currentStack.decrement(1);
+
+                    rocketEntity.setPos(pos.getX() + 0.5f, pos.getY(), pos.getZ() + 0.5f);
+                    world.spawnEntity(rocketEntity);
+                    return ActionResult.CONSUME;
+                }
+            }
+        }
+        return ActionResult.SUCCESS;
     }
 }

@@ -1,9 +1,18 @@
 package net.mrscauthd.beyond_earth.registry;
 
+import java.util.List;
+
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.item.*;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.FoodComponent;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.SpawnEggItem;
+import net.minecraft.item.TallBlockItem;
+import net.minecraft.item.WallStandingBlockItem;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
@@ -14,13 +23,15 @@ import net.minecraft.world.World;
 import net.mrscauthd.beyond_earth.blocks.machines.entity.CoalGeneratorBlockEntity;
 import net.mrscauthd.beyond_earth.blocks.machines.entity.SolarPanelBlockEntity;
 import net.mrscauthd.beyond_earth.blocks.machines.entity.WaterPumpBlockEntity;
+import net.mrscauthd.beyond_earth.entities.vehicles.RocketEntityTier1;
+import net.mrscauthd.beyond_earth.entities.vehicles.RocketEntityTier2;
+import net.mrscauthd.beyond_earth.entities.vehicles.RocketEntityTier3;
+import net.mrscauthd.beyond_earth.entities.vehicles.RocketEntityTier4;
 import net.mrscauthd.beyond_earth.items.GuideBook;
 import net.mrscauthd.beyond_earth.items.HammerItem;
 import net.mrscauthd.beyond_earth.items.vehicles.RocketItem;
 import net.mrscauthd.beyond_earth.items.vehicles.RoverItem;
 import net.mrscauthd.beyond_earth.util.ModIdentifier;
-
-import java.util.List;
 
 public class ModItems {
 
@@ -37,16 +48,16 @@ public class ModItems {
         public static final Item ALIEN_SPAWN_EGG = new SpawnEggItem(ModEntities.ALIEN, -13382401, -11650781, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS));
         public static final Item ALIEN_ZOMBIE_SPAWN_EGG = new SpawnEggItem(ModEntities.ALIEN_ZOMBIE, -14804199, -16740159, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS));
         public static final Item STAR_CRAWLER_SPAWN_EGG = new SpawnEggItem(ModEntities.STAR_CRAWLER, -13421773, -16724788, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS));
-        public static final Item PYGRO_SPAWN_EGG = new SpawnEggItem(ModEntities.PYGRO,-3381760, -6750208, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS));
+        public static final Item PYGRO_SPAWN_EGG = new SpawnEggItem(ModEntities.PYGRO, -3381760, -6750208, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS));
         public static final Item PYGRO_BRUTE_SPAWN_EGG = new SpawnEggItem(ModEntities.PYGRO_BRUTE, -3381760, -67208, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS));
         public static final Item MOGLER_SPAWN_EGG = new SpawnEggItem(ModEntities.MOGLER, -13312, -3407872, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS));
         public static final Item MARTIAN_RAPTOR_SPAWN_EGG = new SpawnEggItem(ModEntities.MARTIAN_RAPTOR, 5349438, -13312, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS));
 
         // Vehicles Items.
-        public static final Item TIER_1_ROCKET = new RocketItem(new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
-        public static final Item TIER_2_ROCKET = new RocketItem(new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
-        public static final Item TIER_3_ROCKET = new RocketItem(new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
-        public static final Item TIER_4_ROCKET = new RocketItem(new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
+        public static final Item TIER_1_ROCKET = new RocketItem<RocketEntityTier1>(ModEntities.TIER_1_ROCKET, new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
+        public static final Item TIER_2_ROCKET = new RocketItem<RocketEntityTier2>(ModEntities.TIER_2_ROCKET, new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
+        public static final Item TIER_3_ROCKET = new RocketItem<RocketEntityTier3>(ModEntities.TIER_3_ROCKET, new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
+        public static final Item TIER_4_ROCKET = new RocketItem<RocketEntityTier4>(ModEntities.TIER_4_ROCKET, new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
         public static final Item ROVER = new RoverItem(new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
 
         // Guide book
@@ -228,7 +239,7 @@ public class ModItems {
         public static final BlockItem GLACIO_LAPIS_ORE = new BlockItem(ModBlocks.GLACIO_LAPIS_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
 
         public static void register() {
-                
+
                 // Spawn eggs.
                 register("alien_spawn_egg", ALIEN_SPAWN_EGG);
                 register("alien_zombie_spawn_egg", ALIEN_ZOMBIE_SPAWN_EGG);
@@ -237,7 +248,7 @@ public class ModItems {
                 register("pygro_brute_spawn_egg", PYGRO_BRUTE_SPAWN_EGG);
                 register("mogler_spawn_egg", MOGLER_SPAWN_EGG);
                 register("martian_raptor_spawn_egg", MARTIAN_RAPTOR_SPAWN_EGG);
-                
+
                 // Vehicles Items.
                 register("rocket_t1", TIER_1_ROCKET);
                 register("rocket_t2", TIER_2_ROCKET);

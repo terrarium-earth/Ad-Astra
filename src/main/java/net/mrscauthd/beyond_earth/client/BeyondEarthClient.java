@@ -13,16 +13,20 @@ import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
-import net.fabricmc.fabric.api.client.screen.v1.Screens;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.item.Item;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.mrscauthd.beyond_earth.client.registry.ClientModEntities;
+import net.mrscauthd.beyond_earth.client.registry.ClientModKeybindings;
+import net.mrscauthd.beyond_earth.client.registry.ClientModParticles;
 import net.mrscauthd.beyond_earth.client.registry.ClientModScreens;
 import net.mrscauthd.beyond_earth.client.registry.ClientModSkies;
 import net.mrscauthd.beyond_earth.client.renderer.FlagBlockEntityRenderer;
-import net.mrscauthd.beyond_earth.client.renderer.entity.item.RocketItemRenderer;
+import net.mrscauthd.beyond_earth.client.renderer.entity.vehicles.rockets.tier_1.RocketItemRendererTier1;
+import net.mrscauthd.beyond_earth.client.renderer.entity.vehicles.rockets.tier_2.RocketItemRendererTier2;
+import net.mrscauthd.beyond_earth.client.renderer.entity.vehicles.rockets.tier_3.RocketItemRendererTier3;
+import net.mrscauthd.beyond_earth.client.renderer.entity.vehicles.rockets.tier_4.RocketItemRendererTier4;
 import net.mrscauthd.beyond_earth.client.renderer.globe.GlobeBlockEntityRenderer;
 import net.mrscauthd.beyond_earth.client.renderer.globe.GlobeItemRenderer;
 import net.mrscauthd.beyond_earth.client.renderer.globe.GlobeModel;
@@ -64,11 +68,20 @@ public class BeyondEarthClient implements ClientModInitializer {
                 // Entities.
                 ClientModEntities.register();
 
+                // Keybindings
+                ClientModKeybindings.register();
+
+                // Particles.
+                ClientModParticles.register();
+
                 // Overlays.
                 HudRenderCallback.EVENT.register(PlayerOverlayScreen::render);
 
                 // Rocket item.
-                BuiltinItemRendererRegistry.INSTANCE.register(ModItems.TIER_1_ROCKET, new RocketItemRenderer());
+                BuiltinItemRendererRegistry.INSTANCE.register(ModItems.TIER_1_ROCKET, new RocketItemRendererTier1());
+                BuiltinItemRendererRegistry.INSTANCE.register(ModItems.TIER_2_ROCKET, new RocketItemRendererTier2());
+                BuiltinItemRendererRegistry.INSTANCE.register(ModItems.TIER_3_ROCKET, new RocketItemRendererTier3());
+                BuiltinItemRendererRegistry.INSTANCE.register(ModItems.TIER_4_ROCKET, new RocketItemRendererTier4());
 
                 // Flag entity rendering.
                 BlockEntityRendererRegistry.register(ModBlockEntities.FLAG_BLOCK_ENTITY, FlagBlockEntityRenderer::new);

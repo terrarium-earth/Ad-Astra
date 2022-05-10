@@ -1,34 +1,23 @@
 package net.mrscauthd.beyond_earth.entities.vehicles;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.Packet;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.mrscauthd.beyond_earth.registry.ModItems;
 
-public class RoverEntity extends Entity {
+public class RoverEntity extends VehicleEntity {
 
     public RoverEntity(EntityType<?> type, World world) {
         super(type, world);
     }
 
     @Override
-    protected void initDataTracker() {
-
+    public boolean isPushable() {
+        return true;
     }
 
     @Override
-    protected void readCustomDataFromNbt(NbtCompound nbt) {
-
-    }
-
-    @Override
-    protected void writeCustomDataToNbt(NbtCompound nbt) {
-
-    }
-
-    @Override
-    public Packet<?> createSpawnPacket() {
-        return null;
+    public ItemStack getDropStack() {
+        return ModItems.ROVER.getDefaultStack();
     }
 }
