@@ -22,7 +22,8 @@
     "WorldRendererAccessor"
   ],
   "client": [
-    "WorldRendererMixin"
+    "client.WorldRendererMixin",
+    "client.BipedEntityModelMixin"
   ],
   "injectors": {
     "defaultRequire": 1

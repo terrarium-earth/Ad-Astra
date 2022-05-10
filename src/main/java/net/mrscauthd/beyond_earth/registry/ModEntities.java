@@ -15,7 +15,10 @@ import net.mrscauthd.beyond_earth.entities.mobs.PygroEntity;
 import net.mrscauthd.beyond_earth.entities.mobs.StarCrawlerEntity;
 import net.mrscauthd.beyond_earth.entities.projectiles.IceSpitEntity;
 import net.mrscauthd.beyond_earth.entities.vehicles.LanderEntity;
-import net.mrscauthd.beyond_earth.entities.vehicles.RocketEntity;
+import net.mrscauthd.beyond_earth.entities.vehicles.RocketEntityTier1;
+import net.mrscauthd.beyond_earth.entities.vehicles.RocketEntityTier2;
+import net.mrscauthd.beyond_earth.entities.vehicles.RocketEntityTier3;
+import net.mrscauthd.beyond_earth.entities.vehicles.RocketEntityTier4;
 import net.mrscauthd.beyond_earth.entities.vehicles.RoverEntity;
 import net.mrscauthd.beyond_earth.util.ModIdentifier;
 
@@ -36,14 +39,14 @@ public class ModEntities {
                         FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, MartianRaptorEntity::new).dimensions(EntityDimensions.fixed(0.75f, 2.0f)).build());
 
         // Machines.
-        public static final EntityType<RocketEntity> TIER_1_ROCKET = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("rocket_t1"),
-                        FabricEntityTypeBuilder.create(SpawnGroup.MISC, RocketEntity::new).dimensions(EntityDimensions.fixed(1.1f, 4.4f)).fireImmune().build());
-        public static final EntityType<RocketEntity> TIER_2_ROCKET = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("rocket_t2"),
-                        FabricEntityTypeBuilder.create(SpawnGroup.MISC, RocketEntity::new).dimensions(EntityDimensions.fixed(1.1f, 4.6f)).fireImmune().build());
-        public static final EntityType<RocketEntity> TIER_3_ROCKET = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("rocket_t3"),
-                        FabricEntityTypeBuilder.create(SpawnGroup.MISC, RocketEntity::new).dimensions(EntityDimensions.fixed(1.1f, 4.8f)).fireImmune().build());
-        public static final EntityType<RocketEntity> TIER_4_ROCKET = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("rocket_t4"),
-                        FabricEntityTypeBuilder.create(SpawnGroup.MISC, RocketEntity::new).dimensions(EntityDimensions.fixed(1.1f, 6.1f)).fireImmune().build());
+        public static final EntityType<RocketEntityTier1> TIER_1_ROCKET = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("rocket_t1"),
+                        FabricEntityTypeBuilder.create(SpawnGroup.MISC, RocketEntityTier1::new).dimensions(EntityDimensions.fixed(1.1f, 4.4f)).fireImmune().build());
+        public static final EntityType<RocketEntityTier2> TIER_2_ROCKET = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("rocket_t2"),
+                        FabricEntityTypeBuilder.create(SpawnGroup.MISC, RocketEntityTier2::new).dimensions(EntityDimensions.fixed(1.1f, 4.6f)).fireImmune().build());
+        public static final EntityType<RocketEntityTier3> TIER_3_ROCKET = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("rocket_t3"),
+                        FabricEntityTypeBuilder.create(SpawnGroup.MISC, RocketEntityTier3::new).dimensions(EntityDimensions.fixed(1.1f, 4.8f)).fireImmune().build());
+        public static final EntityType<RocketEntityTier4> TIER_4_ROCKET = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("rocket_t4"),
+                        FabricEntityTypeBuilder.create(SpawnGroup.MISC, RocketEntityTier4::new).dimensions(EntityDimensions.fixed(1.1f, 6.1f)).fireImmune().build());
 
         public static final EntityType<RoverEntity> ROVER = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("rover"),
                         FabricEntityTypeBuilder.create(SpawnGroup.MISC, RoverEntity::new).dimensions(EntityDimensions.fixed(2.5f, 1.0f)).fireImmune().build());

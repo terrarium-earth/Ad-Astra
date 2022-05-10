@@ -23,8 +23,10 @@ import net.mrscauthd.beyond_earth.registry.ModFeatures;
 import net.mrscauthd.beyond_earth.registry.ModFluids;
 import net.mrscauthd.beyond_earth.registry.ModItems;
 import net.mrscauthd.beyond_earth.registry.ModOres;
+import net.mrscauthd.beyond_earth.registry.ModParticles;
 import net.mrscauthd.beyond_earth.registry.ModRecipes;
 import net.mrscauthd.beyond_earth.registry.ModScreenHandlers;
+import net.mrscauthd.beyond_earth.registry.ModSounds;
 import net.mrscauthd.beyond_earth.registry.ModStructures;
 import net.mrscauthd.beyond_earth.util.ModIdentifier;
 import net.mrscauthd.beyond_earth.world.chunk.PlanetChunkGenerator;
@@ -49,6 +51,8 @@ public class BeyondEarth implements ModInitializer {
         ModEntities.register();
         ModScreenHandlers.register();
         ModCommands.register();
+        ModSounds.register();
+        ModParticles.register();
 
         // Data.
         PlanetData.register();

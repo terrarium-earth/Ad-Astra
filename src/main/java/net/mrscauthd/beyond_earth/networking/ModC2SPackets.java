@@ -13,6 +13,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 import net.mrscauthd.beyond_earth.BeyondEarth;
+import net.mrscauthd.beyond_earth.entities.vehicles.RocketEntity;
 import net.mrscauthd.beyond_earth.registry.ModRecipes;
 import net.mrscauthd.beyond_earth.util.ModIdentifier;
 import net.mrscauthd.beyond_earth.util.ModUtils;
@@ -22,6 +23,8 @@ public class ModC2SPackets {
     public static final Identifier TELEPORT_TO_PLANET_PACKET_ID = new ModIdentifier("teleport_to_planet_packet");
     public static final Identifier DELETE_SPACE_STATION_ITEMS_PACKET_ID = new ModIdentifier("delete_space_station_item_packet");
     public static final Identifier CREATE_SPACE_STATION_PACKET_ID = new ModIdentifier("create_space_station_packet");
+
+    public static final Identifier LAUNCH_ROCKET_PACKET_ID = new ModIdentifier("launch_rocket_packet");
 
     public static void register() {
 
@@ -66,6 +69,15 @@ public class ModC2SPackets {
             ServerWorld world = server.getWorld(RegistryKey.of(Registry.WORLD_KEY, buf.readIdentifier()));
             // Create the Space Station from the nbt file.
             world.getStructureManager().getStructureOrBlank(new ModIdentifier("space_station")).place(world, spaceStationLocation, spaceStationLocation, new StructurePlacementData(), world.random, 2);
+        });
+
+        // Space was pressed while the player was inside of a rocket.
+        ServerPlayNetworking.registerGlobalReceiver(LAUNCH_ROCKET_PACKET_ID, (server, player, handler, buf, responseSender) -> {
+            if (player.getVehicle() instanceof RocketEntity rocket) {
+                if (!rocket.isFlying()) {
+                    rocket.initiateLaunchSequenceFromServer();
+                }
+            }
         });
     }
 

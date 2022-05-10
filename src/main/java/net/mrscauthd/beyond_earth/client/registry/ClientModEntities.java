@@ -17,7 +17,14 @@ import net.mrscauthd.beyond_earth.client.renderer.entity.mobs.models.MartianRapt
 import net.mrscauthd.beyond_earth.client.renderer.entity.mobs.models.MoglerEntityModel;
 import net.mrscauthd.beyond_earth.client.renderer.entity.mobs.models.PygroEntityModel;
 import net.mrscauthd.beyond_earth.client.renderer.entity.mobs.models.StarCrawlerEntityModel;
-import net.mrscauthd.beyond_earth.client.renderer.entity.vehicles.RocketEntityRenderer;
+import net.mrscauthd.beyond_earth.client.renderer.entity.vehicles.rockets.tier_1.RocketEntityModelTier1;
+import net.mrscauthd.beyond_earth.client.renderer.entity.vehicles.rockets.tier_1.RocketEntityRendererTier1;
+import net.mrscauthd.beyond_earth.client.renderer.entity.vehicles.rockets.tier_2.RocketEntityModelTier2;
+import net.mrscauthd.beyond_earth.client.renderer.entity.vehicles.rockets.tier_2.RocketEntityRendererTier2;
+import net.mrscauthd.beyond_earth.client.renderer.entity.vehicles.rockets.tier_3.RocketEntityModelTier3;
+import net.mrscauthd.beyond_earth.client.renderer.entity.vehicles.rockets.tier_3.RocketEntityRendererTier3;
+import net.mrscauthd.beyond_earth.client.renderer.entity.vehicles.rockets.tier_4.RocketEntityModelTier4;
+import net.mrscauthd.beyond_earth.client.renderer.entity.vehicles.rockets.tier_4.RocketEntityRendererTier4;
 import net.mrscauthd.beyond_earth.registry.ModEntities;
 
 @Environment(EnvType.CLIENT)
@@ -35,10 +42,10 @@ public class ClientModEntities {
         EntityRendererRegistry.register(ModEntities.MOGLER, MoglerEntityRenderer::new);
 
         // Machines.
-        EntityRendererRegistry.register(ModEntities.TIER_1_ROCKET, RocketEntityRenderer::new);
-        EntityRendererRegistry.register(ModEntities.TIER_2_ROCKET, RocketEntityRenderer::new);
-        EntityRendererRegistry.register(ModEntities.TIER_3_ROCKET, RocketEntityRenderer::new);
-        EntityRendererRegistry.register(ModEntities.TIER_4_ROCKET, RocketEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntities.TIER_1_ROCKET, RocketEntityRendererTier1::new);
+        EntityRendererRegistry.register(ModEntities.TIER_2_ROCKET, RocketEntityRendererTier2::new);
+        EntityRendererRegistry.register(ModEntities.TIER_3_ROCKET, RocketEntityRendererTier3::new);
+        EntityRendererRegistry.register(ModEntities.TIER_4_ROCKET, RocketEntityRendererTier4::new);
 
         // Projectiles.
         EntityRendererRegistry.register(ModEntities.ICE_SPIT_ENTITY, FlyingItemEntityRenderer::new);
@@ -50,5 +57,11 @@ public class ClientModEntities {
         EntityModelLayerRegistry.registerModelLayer(MartianRaptorEntityModel.LAYER_LOCATION, MartianRaptorEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(PygroEntityModel.LAYER_LOCATION, PygroEntityModel::getModelData);
         EntityModelLayerRegistry.registerModelLayer(MoglerEntityModel.LAYER_LOCATION, MoglerEntityModel::getTexturedModelData);
+
+        // Machine Layers.
+        EntityModelLayerRegistry.registerModelLayer(RocketEntityModelTier1.LAYER_LOCATION, RocketEntityModelTier1::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(RocketEntityModelTier2.LAYER_LOCATION, RocketEntityModelTier2::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(RocketEntityModelTier3.LAYER_LOCATION, RocketEntityModelTier3::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(RocketEntityModelTier4.LAYER_LOCATION, RocketEntityModelTier4::getTexturedModelData);
     }
 }
