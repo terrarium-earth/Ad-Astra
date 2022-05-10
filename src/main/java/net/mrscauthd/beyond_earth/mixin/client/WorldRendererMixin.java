@@ -1,4 +1,4 @@
-package net.mrscauthd.beyond_earth.mixin;
+package net.mrscauthd.beyond_earth.mixin.client;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

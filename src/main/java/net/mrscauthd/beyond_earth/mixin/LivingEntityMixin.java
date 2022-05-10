@@ -12,22 +12,22 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.SkeletonEntity;
-import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.mrscauthd.beyond_earth.client.screens.PlayerOverlayScreen;
 import net.mrscauthd.beyond_earth.entities.mobs.ModEntity;
+import net.mrscauthd.beyond_earth.entities.vehicles.LanderEntity;
+import net.mrscauthd.beyond_earth.entities.vehicles.RocketEntity;
 import net.mrscauthd.beyond_earth.items.armour.SpaceSuit;
 import net.mrscauthd.beyond_earth.registry.ModArmour;
 import net.mrscauthd.beyond_earth.util.ModDamageSource;
@@ -62,11 +62,25 @@ public abstract class LivingEntityMixin {
 
         LivingEntity entity = ((LivingEntity) (Object) this);
 
+        // Rocket.
+        Entity vehicle = entity.getVehicle();
+        if (entity.world.isClient) {
+            if (vehicle instanceof RocketEntity rocket) {
+                PlayerOverlayScreen.shouldRenderBar = true;
+                if (rocket.isFlying()) {
+                    PlayerOverlayScreen.countdownSeconds = rocket.getCountdownSeconds();
+                }
+            } else {
+                PlayerOverlayScreen.shouldRenderBar = false;
+                PlayerOverlayScreen.countdownSeconds = 0;
+            }
+        }
+
         // Venus acid rain.
         if (entity.isTouchingWaterOrRain() && entity.world.getRegistryKey().equals(ModUtils.VENUS_KEY)) {
             boolean affectedByRain = true;
             if (entity instanceof PlayerEntity player) {
-                if (player.isCreative()) {
+                if (player.isCreative() || vehicle instanceof RocketEntity || vehicle instanceof LanderEntity) {
                     affectedByRain = false;
                 }
             }
@@ -86,7 +100,7 @@ public abstract class LivingEntityMixin {
         boolean hasNetheriteSpaceSuit = false;
 
         if (entity instanceof PlayerEntity player) {
-            PlayerOverlayScreen.shouldRender = ModUtils.hasFullSpaceSet(player);
+            PlayerOverlayScreen.shouldRenderOxygen = ModUtils.hasFullSpaceSet(player);
 
             if (ModUtils.hasFullSpaceSet(player) && ModUtils.hasOxygenatedSpaceSuit(player)) {
                 ItemStack chest = player.getEquippedStack(EquipmentSlot.CHEST);
@@ -114,7 +128,7 @@ public abstract class LivingEntityMixin {
                     // Render oxygen info.
                     if (player instanceof ClientPlayerEntity clientPlayer) {
                         double ratio = oxygen / (float) SpaceSuit.getMaxOxygen(isNetherite);
-                        PlayerOverlayScreen.ratio = ratio;
+                        PlayerOverlayScreen.oxygenRatio = ratio;
                     }
                 }
             }
