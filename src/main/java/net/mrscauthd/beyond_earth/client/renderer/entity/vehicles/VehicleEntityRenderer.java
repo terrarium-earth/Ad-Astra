@@ -43,14 +43,25 @@ public abstract class VehicleEntityRenderer<T extends VehicleEntity, M extends E
         matrices.push();
 
         matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(180));
+        matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion((float)entity.getYaw()));
         matrices.translate(0.0, -1.501, 0.0);
+
+        if (entity.isFrozen()) {
+            this.shakeVehicle(entity, tickDelta, matrices);
+        }
 
         VertexConsumer vertexConsumer = vertexConsumers.getBuffer(this.model.getLayer(getTexture(entity)));
         this.model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, 1.0f);
-
         matrices.pop();
 
         super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
+    }
+    
+    private void shakeVehicle(T entity, float tickDelta, MatrixStack matrices) {
+        double shakeDirection1 = (tickDelta * (entity.world.random.nextBoolean() ? 1 : -1)) / 150;
+        double shakeDirection2 = (tickDelta * (entity.world.random.nextBoolean() ? 1 : -1)) / 150;
+        double shakeDirection3 = (tickDelta * (entity.world.random.nextBoolean() ? 1 : -1)) / 150;
+        matrices.translate(shakeDirection1, shakeDirection2, shakeDirection3);
     }
 
     public static void renderItem(Identifier texture, EntityModelLayer layer, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {

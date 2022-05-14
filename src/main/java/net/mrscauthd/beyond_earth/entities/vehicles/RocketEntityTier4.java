@@ -2,7 +2,6 @@ package net.mrscauthd.beyond_earth.entities.vehicles;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -12,7 +11,7 @@ import net.mrscauthd.beyond_earth.registry.ModParticles;
 public class RocketEntityTier4 extends RocketEntity {
 
     public RocketEntityTier4(EntityType<?> type, World world) {
-        super(type, world);
+        super(type, world, 4);
     }
 
     @Override
@@ -31,17 +30,15 @@ public class RocketEntityTier4 extends RocketEntity {
     }
 
     @Override
-    public float getAfterburnerLength() {
-        return 2.9f;
-    }
-
-    @Override
     public void spawnAfterburnerParticles() {
         super.spawnAfterburnerParticles();
-        Vec3d pos = this.getPos();
-        if (this.world.isClient) {
-            this.world.addImportantParticle(ModParticles.SMALL_FLAME, true, pos.x, pos.y, pos.z, 0.0, 0.0, 0.0);
-            this.world.addImportantParticle(ModParticles.SMALL_SMOKE, true, pos.x, pos.y, pos.z, 0.0, 0.0, 0.0);
+        if (this.world instanceof ServerWorld serverWorld) {
+            Vec3d pos = this.getPos();
+            serverWorld.spawnParticles(ModParticles.SMALL_FLAME, pos.getX() + 1, pos.getY(), pos.getZ(), 20, 0.1, 0.1, 0.1, 0.001);
+            serverWorld.spawnParticles(ModParticles.SMALL_SMOKE, pos.getX() + 1, pos.getY(), pos.getZ(), 10, 0.1, 0.1, 0.1, 0.04);
+
+            serverWorld.spawnParticles(ModParticles.SMALL_FLAME, pos.getX() - 1, pos.getY(), pos.getZ(), 20, 0.1, 0.1, 0.1, 0.001);
+            serverWorld.spawnParticles(ModParticles.SMALL_SMOKE, pos.getX() - 1, pos.getY(), pos.getZ(), 10, 0.1, 0.1, 0.1, 0.04);
         }
     }
 }

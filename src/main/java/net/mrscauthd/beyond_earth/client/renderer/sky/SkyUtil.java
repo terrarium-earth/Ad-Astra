@@ -46,9 +46,9 @@ public class SkyUtil {
         // Render colours.
         RenderSystem.disableTexture();
         Vec3d vec3d = world.getSkyColor(context.gameRenderer().getCamera().getPos(), tickDelta);
-        float f = (float) vec3d.x;
-        float g = (float) vec3d.y;
-        float h = (float) vec3d.z;
+        float f = (float) vec3d.getX();
+        float g = (float) vec3d.getY();
+        float h = (float) vec3d.getZ();
         BackgroundRenderer.setFogBlack();
         RenderSystem.depthMask(false);
 
@@ -66,13 +66,13 @@ public class SkyUtil {
     public static void postRender(WorldRenderContext context, MatrixStack matrices, ClientWorld world, float tickDelta) {
 
         Vec3d vec3d = world.getSkyColor(context.gameRenderer().getCamera().getPos(), tickDelta);
-        float f = (float) vec3d.x;
-        float g = (float) vec3d.y;
-        float h = (float) vec3d.z;
+        float f = (float) vec3d.getX();
+        float g = (float) vec3d.getY();
+        float h = (float) vec3d.getZ();
 
         RenderSystem.setShaderColor(0.0f, 0.0f, 0.0f, 1.0f);
         MinecraftClient client = MinecraftClient.getInstance();
-        double cameraPos = client.player.getCameraPosVec(tickDelta).y - world.getLevelProperties().getSkyDarknessHeight(world);
+        double cameraPos = client.player.getCameraPosVec(tickDelta).getY() - world.getLevelProperties().getSkyDarknessHeight(world);
         if (cameraPos < 0.0) {
             matrices.push();
             matrices.translate(0.0, 12.0, 0.0);

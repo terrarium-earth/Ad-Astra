@@ -20,8 +20,8 @@ public class RocketEntityModel<T extends VehicleEntity> extends EntityModel<T> {
     @Override
     public void setAngles(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
         this.rocket.yaw = headYaw / (180f / (float) Math.PI);
-        this.rocket.roll = (float) entity.getLocalYaw();
-        this.rocket.pitch = (float) entity.getLocalPitch();
+        this.rocket.roll = (float) entity.getClientYaw();
+        this.rocket.pitch = (float) entity.getClientPitch();
     }
 
     @Override

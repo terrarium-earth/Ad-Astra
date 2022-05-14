@@ -1,5 +1,6 @@
 {
   "type": "beyond_earth:glacio",
+  "forge:use_server_seed": true,
   "generator": {
     "type": "beyond_earth:planet_noise",
     "seed": 12345,
@@ -44,7 +45,7 @@
             "points": [
               {
                 "location": 0,
-                "derivative": 0.8,
+                "derivative": -1.0,
                 "value": {
                   "coordinate": "erosion",
                   "points": [
@@ -359,6 +360,7 @@
               }
             }
           },
+
           {
             "type": "minecraft:condition",
             "if_true": {

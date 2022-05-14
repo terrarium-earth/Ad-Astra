@@ -8,7 +8,7 @@ import net.mrscauthd.beyond_earth.registry.ModItems;
 public class RocketEntityTier2 extends RocketEntity {
 
     public RocketEntityTier2(EntityType<?> type, World world) {
-        super(type, world);
+        super(type, world, 2);
     }
     
     @Override
@@ -24,10 +24,5 @@ public class RocketEntityTier2 extends RocketEntity {
     @Override
     public ItemStack getDropStack() {
         return ModItems.TIER_2_ROCKET.getDefaultStack();
-    }
-
-    @Override
-    public float getAfterburnerLength() {
-        return 2.4f;     
     }
 }
