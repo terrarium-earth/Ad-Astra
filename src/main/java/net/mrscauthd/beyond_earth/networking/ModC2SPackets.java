@@ -3,6 +3,7 @@ package net.mrscauthd.beyond_earth.networking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.entity.Entity.RemovalReason;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.world.ServerWorld;
@@ -47,6 +48,10 @@ public class ModC2SPackets {
 
                 @Override
                 public void run() {
+                    // Delete the rocket.
+                    if (player.getVehicle() instanceof RocketEntity rocket) {
+                        rocket.remove(RemovalReason.DISCARDED);
+                    }
                     ModUtils.teleportToWorld(targetDimension, player);
                 }
             });

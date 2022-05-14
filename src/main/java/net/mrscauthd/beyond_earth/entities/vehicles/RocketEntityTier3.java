@@ -8,9 +8,9 @@ import net.mrscauthd.beyond_earth.registry.ModItems;
 public class RocketEntityTier3 extends RocketEntity {
 
     public RocketEntityTier3(EntityType<?> type, World world) {
-        super(type, world);
+        super(type, world, 3);
     }
-    
+
     @Override
     public double getMountedHeightOffset() {
         return super.getMountedHeightOffset() + 1.0f;
@@ -24,10 +24,5 @@ public class RocketEntityTier3 extends RocketEntity {
     @Override
     public ItemStack getDropStack() {
         return ModItems.TIER_3_ROCKET.getDefaultStack();
-    }
-
-    @Override
-    public float getAfterburnerLength() {
-        return 2.6f;     
     }
 }

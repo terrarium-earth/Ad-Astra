@@ -7,12 +7,14 @@ import net.mrscauthd.beyond_earth.util.ModIdentifier;
 
 public class ModParticles {
 
-    public static final DefaultParticleType LARGE_FLAME = FabricParticleTypes.simple();
-    public static final DefaultParticleType LARGE_SMOKE = FabricParticleTypes.simple();
-    public static final DefaultParticleType SMALL_FLAME = FabricParticleTypes.simple();
-    public static final DefaultParticleType SMALL_SMOKE = FabricParticleTypes.simple();
+    public static final DefaultParticleType VENUS_RAIN = FabricParticleTypes.simple();
+    public static final DefaultParticleType LARGE_FLAME = FabricParticleTypes.simple(true);
+    public static final DefaultParticleType LARGE_SMOKE = FabricParticleTypes.simple(true);
+    public static final DefaultParticleType SMALL_FLAME = FabricParticleTypes.simple(true);
+    public static final DefaultParticleType SMALL_SMOKE = FabricParticleTypes.simple(true);
 
     public static void register() {
+        Registry.register(Registry.PARTICLE_TYPE, new ModIdentifier("venus_rain"), VENUS_RAIN);
         Registry.register(Registry.PARTICLE_TYPE, new ModIdentifier("large_flame"), LARGE_FLAME);
         Registry.register(Registry.PARTICLE_TYPE, new ModIdentifier("large_smoke"), LARGE_SMOKE);
         Registry.register(Registry.PARTICLE_TYPE, new ModIdentifier("small_flame"), SMALL_FLAME);
