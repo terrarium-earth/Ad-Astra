@@ -5,29 +5,32 @@ import javax.annotation.Nullable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MovementType;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class VehicleEntity extends Entity {
 
-    private double x;
-    private double y;
-    private double z;
-    private double yaw;
-    private double pitch;
-    private int interpolationSteps;
-    
-    private ItemStack dropStack = null;
+    protected int clientInterpolationSteps;
+    protected double clientX;
+    protected double clientY;
+    protected double clientZ;
+    protected double clientYaw;
+    protected double clientPitch;
+    protected double clientXVelocity;
+    protected double clientYVelocity;
+    protected double clientZVelocity;
 
     public VehicleEntity(EntityType<?> type, World world) {
         super(type, world);
@@ -65,56 +68,64 @@ public class VehicleEntity extends Entity {
     public void tick() {
         super.tick();
 
-        this.tickLerp();
-
-        Vec3d vector = this.getVelocity();
-        double x = vector.x;
-        double y = vector.y;
-        double z = vector.z;
-        if (Math.abs(vector.x) < 0.003D) {
-            x = 0.0;
-        }
-
-        if (Math.abs(vector.y) < 0.003D) {
-            y = 0.0;
-        }
-
-        if (Math.abs(vector.z) < 0.003D) {
-            z = 0.0;
-        }
-
-        this.setVelocity(x, y, z);
-
+        this.syncClient();
         this.checkBlockCollision();
+        this.doGravity();
     }
 
-    private void tickLerp() {
-        if (this.isLogicalSideForUpdatingMovement()) {
-            this.interpolationSteps = 0;
-            this.updateTrackedPosition(this.getX(), this.getY(), this.getZ());
-        }
-        if (this.interpolationSteps <= 0) {
+    public void syncClient() {
+        if (this.world.isClient) {
+            if (this.clientInterpolationSteps > 0) {
+                double d = this.getX() + (this.clientX - this.getX()) / (double) this.clientInterpolationSteps;
+                double e = this.getY() + (this.clientY - this.getY()) / (double) this.clientInterpolationSteps;
+                double f = this.getZ() + (this.clientZ - this.getZ()) / (double) this.clientInterpolationSteps;
+                double g = MathHelper.wrapDegrees(this.clientYaw - (double) this.getYaw());
+                this.setYaw(this.getYaw() + (float) g / (float) this.clientInterpolationSteps);
+                this.setPitch(this.getPitch() + (float) (this.clientPitch - (double) this.getPitch()) / (float) this.clientInterpolationSteps);
+                --this.clientInterpolationSteps;
+                this.setPosition(d, e, f);
+                this.setRotation(this.getYaw(), this.getPitch());
+            } else {
+                this.refreshPosition();
+                this.setRotation(this.getYaw(), this.getPitch());
+            }
             return;
         }
-        double d = this.getX() + (this.x - this.getX()) / (double) this.interpolationSteps;
-        double e = this.getY() + (this.y - this.getY()) / (double) this.interpolationSteps;
-        double f = this.getZ() + (this.z - this.getZ()) / (double) this.interpolationSteps;
-        double g = MathHelper.wrapDegrees(this.yaw - (double) this.getYaw());
-        this.setYaw(this.getYaw() + (float) g / (float) this.interpolationSteps);
-        this.setPitch(this.getPitch() + (float) (this.pitch - (double) this.getPitch()) / (float) this.interpolationSteps);
-        --this.interpolationSteps;
-        this.setPosition(d, e, f);
-        this.setRotation(this.getYaw(), this.getPitch());
     }
 
     @Override
     public void updateTrackedPositionAndAngles(double x, double y, double z, float yaw, float pitch, int interpolationSteps, boolean interpolate) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        this.yaw = yaw;
-        this.pitch = pitch;
-        this.interpolationSteps = interpolationSteps;
+        this.clientX = x;
+        this.clientY = y;
+        this.clientZ = z;
+        this.clientYaw = yaw;
+        this.clientPitch = pitch;
+        this.clientInterpolationSteps = interpolationSteps + 2;
+        this.setVelocity(this.clientXVelocity, this.clientYVelocity, this.clientZVelocity);
+    }
+
+    @Override
+    public void setVelocityClient(double x, double y, double z) {
+        this.clientXVelocity = x;
+        this.clientYVelocity = y;
+        this.clientZVelocity = z;
+        this.setVelocity(this.clientXVelocity, this.clientYVelocity, this.clientZVelocity);
+    }
+
+    public void setAnglesClient(double pitch, double yaw) {
+        this.clientYaw = yaw;
+        this.clientPitch = pitch;
+    }
+
+    public void doGravity() {
+        if (!this.hasNoGravity()) {
+            double modifier = 1.0;
+            if (this.isTouchingWater()) {
+                modifier *= 0.25f;
+            }
+            this.setVelocity(this.getVelocity().add(0.0, -0.04 * modifier, 0.0));
+        }
+        this.move(MovementType.SELF, this.getVelocity());
     }
 
     @Override
@@ -144,10 +155,11 @@ public class VehicleEntity extends Entity {
 
     public void drop() {
         if (getDropStack() != null) {
-            Vec3d pos = this.getPos();
+            BlockPos pos = this.getBlockPos();
             ItemStack dropStack = this.getDropStack();
-            this.world.spawnEntity(new ItemEntity(this.world, pos.x, pos.y + 0.5f, pos.z, dropStack));
-            // TODO: Drop inventory.
+            world.playSound(null, pos, SoundEvents.BLOCK_NETHERITE_BLOCK_BREAK, SoundCategory.BLOCKS, 1, 1);
+            this.world.spawnEntity(new ItemEntity(this.world, pos.getX(), pos.getY() + 0.5f, pos.getZ(), dropStack));
+            // TODO: Drop inventory and save nbt in item stack.
         }
 
         if (!this.world.isClient) {
@@ -156,11 +168,7 @@ public class VehicleEntity extends Entity {
     }
 
     public ItemStack getDropStack() {
-        return this.dropStack;
-    }
-
-    public final void setDropStack(ItemStack dropStack) {
-        this.dropStack = dropStack;
+        return null;
     }
 
     @Override
@@ -172,11 +180,6 @@ public class VehicleEntity extends Entity {
     @Override
     protected boolean canAddPassenger(Entity passenger) {
         return this.getPassengerList().size() < this.getMaxPassengers();
-    }
-
-    @Override
-    public Vec3d updatePassengerForDismount(LivingEntity passenger) {
-        return super.updatePassengerForDismount(passenger);
     }
 
     public int getMaxPassengers() {
@@ -192,11 +195,11 @@ public class VehicleEntity extends Entity {
         return true;
     }
 
-    public double getLocalYaw() {
-        return this.yaw;
+    public double getClientYaw() {
+        return this.clientYaw;
     }
 
-    public double getLocalPitch() {
-        return this.pitch;
+    public double getClientPitch() {
+        return this.clientPitch;
     }
 }

@@ -23,7 +23,12 @@
   ],
   "client": [
     "client.WorldRendererMixin",
-    "client.BipedEntityModelMixin"
+    "client.BipedEntityModelMixin",
+    "client.ClientPlayerEntityMixin",
+    "client.CameraInvoker",
+    "client.CameraMixin",
+    "client.GameRendererMixin",
+    "client.PlayerHeldItemFeatureRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

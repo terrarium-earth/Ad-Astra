@@ -38,8 +38,8 @@ public class PlayerOverlayScreen {
 
     // private static final Identifier WARNING_TEXTURE = new ModIdentifier("textures/overlay/warning.png");
 
-    public static double oxygenRatio;
     public static boolean shouldRenderOxygen;
+    public static double oxygenRatio;
 
     public static int countdownSeconds;
 
@@ -80,7 +80,7 @@ public class PlayerOverlayScreen {
         }
 
         if (shouldRenderBar) {
-            int rocketHeight = (int)(player.getY() / 5.3f);
+            int rocketHeight = (int) (player.getY() / 5.3f);
             rocketHeight = MathHelper.clamp(rocketHeight, 0, 113);
 
             int x = 0;

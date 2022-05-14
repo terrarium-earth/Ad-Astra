@@ -54,10 +54,10 @@ public class ModItems {
         public static final Item MARTIAN_RAPTOR_SPAWN_EGG = new SpawnEggItem(ModEntities.MARTIAN_RAPTOR, 5349438, -13312, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS));
 
         // Vehicles Items.
-        public static final Item TIER_1_ROCKET = new RocketItem<RocketEntityTier1>(ModEntities.TIER_1_ROCKET, new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
-        public static final Item TIER_2_ROCKET = new RocketItem<RocketEntityTier2>(ModEntities.TIER_2_ROCKET, new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
-        public static final Item TIER_3_ROCKET = new RocketItem<RocketEntityTier3>(ModEntities.TIER_3_ROCKET, new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
-        public static final Item TIER_4_ROCKET = new RocketItem<RocketEntityTier4>(ModEntities.TIER_4_ROCKET, new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
+        public static final Item TIER_1_ROCKET = new RocketItem<RocketEntityTier1>(ModEntities.TIER_1_ROCKET, 1, new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
+        public static final Item TIER_2_ROCKET = new RocketItem<RocketEntityTier2>(ModEntities.TIER_2_ROCKET, 2, new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
+        public static final Item TIER_3_ROCKET = new RocketItem<RocketEntityTier3>(ModEntities.TIER_3_ROCKET, 3, new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
+        public static final Item TIER_4_ROCKET = new RocketItem<RocketEntityTier4>(ModEntities.TIER_4_ROCKET, 4, new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
         public static final Item ROVER = new RoverItem(new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
 
         // Guide book

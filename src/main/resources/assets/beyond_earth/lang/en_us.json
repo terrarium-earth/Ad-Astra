@@ -234,6 +234,8 @@
   "key.beyond_earth.rocket_start": "Rocket Start",
 
   "death.attack.oxygen": "%1$s couldn't breathe anymore",
+  "death.attack.rocket_flames": "%1$s melted under an active rocket.",
+  "death.attack.rocket_flames.player": "%1$s melted under an active rocket.",
   "death.attack.acid_rain": "%1$s was a sacrifice to the acid",
 
   "entity.beyond_earth.alien.farmer": "Farmer",

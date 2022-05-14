@@ -14,6 +14,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.ScreenHandlerProvider;
 import net.minecraft.client.gui.widget.ButtonWidget;
@@ -179,7 +180,9 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                 // Disable the back button when there is nothing to go back to.
                 PlanetSelectionButton backButton = this.categoryButtons.get(Category.BACK).get(0);
                 backButton.visible = this.currentCategory.parent() != null;
-                this.scrollBar.visible = this.categoryButtons.get(this.currentCategory).size() > (currentPage == 3 ? 13 : 5);
+                if (this.categoryButtons.containsKey(this.currentCategory)) {
+                        this.scrollBar.visible = this.categoryButtons.get(this.currentCategory).size() > (currentPage == 3 ? 13 : 5);
+                }
 
                 RenderSystem.disableBlend();
         }
@@ -478,5 +481,14 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 
         public List<Pair<ItemStack, Integer>> getIngredients() {
                 return this.ingredients;
+        }
+
+        // Do not close.
+        @Override
+        public void close() {
+                MinecraftClient client = MinecraftClient.getInstance();
+                if (client.player.isCreative()) {
+                        super.close();
+                }
         }
 }

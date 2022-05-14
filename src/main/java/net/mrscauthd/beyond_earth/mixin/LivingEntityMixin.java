@@ -56,122 +56,110 @@ public abstract class LivingEntityMixin {
         }
     }
 
-    // Oxygen System.
     @Inject(method = "baseTick", at = @At("TAIL"))
     public void baseTick(CallbackInfo info) {
 
         LivingEntity entity = ((LivingEntity) (Object) this);
 
-        // Rocket.
         Entity vehicle = entity.getVehicle();
-        if (entity.world.isClient) {
-            if (vehicle instanceof RocketEntity rocket) {
-                PlayerOverlayScreen.shouldRenderBar = true;
-                if (rocket.isFlying()) {
-                    PlayerOverlayScreen.countdownSeconds = rocket.getCountdownSeconds();
-                }
-            } else {
-                PlayerOverlayScreen.shouldRenderBar = false;
-                PlayerOverlayScreen.countdownSeconds = 0;
-            }
-        }
+        boolean isCreative = false;
 
         // Venus acid rain.
         if (entity.isTouchingWaterOrRain() && entity.world.getRegistryKey().equals(ModUtils.VENUS_KEY)) {
             boolean affectedByRain = true;
             if (entity instanceof PlayerEntity player) {
-                if (player.isCreative() || vehicle instanceof RocketEntity || vehicle instanceof LanderEntity) {
+                isCreative = player.isCreative();
+                if (isCreative || vehicle instanceof RocketEntity || vehicle instanceof LanderEntity) {
                     affectedByRain = false;
                 }
             }
             if (affectedByRain) {
                 entity.damage(ModDamageSource.ACID_RAIN, 2);
-                entity.setOnFireFor(1);
+                if (entity.world.random.nextBoolean() && entity.world.random.nextBoolean()) {
+                    entity.setOnFireFor(1);
+                }
             }
         }
 
         // All of the entities in Beyond Earth are aliens so they don't need an oxygen system.
-        if (entity instanceof ModEntity) {
-            return;
-        }
+        if (!(entity instanceof ModEntity)) {
+            World world = entity.world;
+            boolean hasOxygen = false;
+            boolean hasNetheriteSpaceSuit = false;
 
-        World world = entity.world;
-        boolean hasOxygen = false;
-        boolean hasNetheriteSpaceSuit = false;
+            if (entity instanceof PlayerEntity player) {
+                PlayerOverlayScreen.shouldRenderOxygen = ModUtils.hasFullSpaceSet(player);
+                isCreative = player.isCreative();
 
-        if (entity instanceof PlayerEntity player) {
-            PlayerOverlayScreen.shouldRenderOxygen = ModUtils.hasFullSpaceSet(player);
+                if (ModUtils.hasFullSpaceSet(player) && ModUtils.hasOxygenatedSpaceSuit(player)) {
+                    ItemStack chest = player.getEquippedStack(EquipmentSlot.CHEST);
+                    NbtCompound nbt = chest.getNbt();
 
-            if (ModUtils.hasFullSpaceSet(player) && ModUtils.hasOxygenatedSpaceSuit(player)) {
-                ItemStack chest = player.getEquippedStack(EquipmentSlot.CHEST);
-                NbtCompound nbt = chest.getNbt();
+                    if (nbt.contains("Oxygen")) {
+                        int oxygen = nbt.getInt("Oxygen");
 
-                if (nbt.contains("Oxygen")) {
-                    int oxygen = nbt.getInt("Oxygen");
-
-                    if (oxygen > 0) {
-                        if (!ModUtils.dimensionHasOxygen(false, world) || entity.isSubmergedInWater()) {
-                            if (!player.isCreative()) {
-                                nbt.putInt("Oxygen", nbt.getInt("Oxygen") - 1);
+                        if (oxygen > 0) {
+                            if (!ModUtils.dimensionHasOxygen(false, world) || entity.isSubmergedInWater()) {
+                                if (!isCreative) {
+                                    nbt.putInt("Oxygen", nbt.getInt("Oxygen") - 1);
+                                }
+                                // Allow the player to breath underwater.
+                                player.setAir(275);
+                                hasOxygen = true;
+                                hasNetheriteSpaceSuit = ModUtils.hasFullNetheriteSpaceSet(player);
                             }
-                            // Allow the player to breath underwater.
-                            player.setAir(275);
-                            hasOxygen = true;
-                            hasNetheriteSpaceSuit = ModUtils.hasFullNetheriteSpaceSet(player);
                         }
-                    }
-                    boolean isNetherite = chest.isOf(ModArmour.NETHERITE_SPACE_SUIT);
-                    if (oxygen > SpaceSuit.getMaxOxygen(isNetherite)) {
-                        nbt.putInt("Oxygen", SpaceSuit.getMaxOxygen(isNetherite));
-                    }
+                        boolean isNetherite = chest.isOf(ModArmour.NETHERITE_SPACE_SUIT);
+                        if (oxygen > SpaceSuit.getMaxOxygen(isNetherite)) {
+                            nbt.putInt("Oxygen", SpaceSuit.getMaxOxygen(isNetherite));
+                        }
 
-                    // Render oxygen info.
-                    if (player instanceof ClientPlayerEntity clientPlayer) {
-                        double ratio = oxygen / (float) SpaceSuit.getMaxOxygen(isNetherite);
-                        PlayerOverlayScreen.oxygenRatio = ratio;
+                        // Render oxygen info.
+                        if (player instanceof ClientPlayerEntity clientPlayer) {
+                            double ratio = oxygen / (float) SpaceSuit.getMaxOxygen(isNetherite);
+                            PlayerOverlayScreen.oxygenRatio = ratio;
+                        }
                     }
                 }
             }
 
-            if (player.isCreative()) {
-                return;
-            }
-        }
-
-        if (!ModUtils.dimensionHasOxygen(false, world)) {
-            float temperature = ModUtils.getDimensionTemperature(false, world);
-            // Freeze the player in extremely cold temperatures.
-            if (temperature <= -65.0f) {
-                if (!hasOxygen) {
-                    if (entity.canFreeze() && !entity.isUndead()) {
-                        // Particles.
-                        if (world.isClient) {
-                            Random random = entity.world.getRandom();
-                            world.addParticle(ParticleTypes.SNOWFLAKE, entity.getX(), entity.getY() + 1, entity.getZ(), MathHelper.nextBetween(random, -1.0f, 1.0f) * 0.083333336f, 0.05f, MathHelper.nextBetween(random, -1.0f, 1.0f) * 0.083333336f);
+            if (!isCreative) {
+                if (!ModUtils.dimensionHasOxygen(false, world)) {
+                    float temperature = ModUtils.getDimensionTemperature(false, world);
+                    // Freeze the player in extremely cold temperatures.
+                    if (temperature <= -65.0f) {
+                        if (!hasOxygen) {
+                            if (entity.canFreeze() && !entity.isUndead()) {
+                                // Particles.
+                                if (world.isClient) {
+                                    Random random = entity.world.getRandom();
+                                    world.addParticle(ParticleTypes.SNOWFLAKE, entity.getX(), entity.getY() + 1, entity.getZ(), MathHelper.nextBetween(random, -1.0f, 1.0f) * 0.083333336f, 0.05f, MathHelper.nextBetween(random, -1.0f, 1.0f) * 0.083333336f);
+                                }
+                                // Freeze effect, like powdered snow.
+                                if (entity.getFrozenTicks() < 300) {
+                                    entity.setFrozenTicks(entity.getFrozenTicks() + 20);
+                                }
+                                entity.damage(ModDamageSource.OXYGEN, 2);
+                            }
+                            // Turn skeletons into strays.
+                            if (entity instanceof SkeletonEntity skeleton) {
+                                skeleton.convertTo(EntityType.STRAY, true);
+                            }
                         }
-                        // Freeze effect, like powdered snow.
-                        if (entity.getFrozenTicks() < 300) {
-                            entity.setFrozenTicks(entity.getFrozenTicks() + 20);
+                        // Burn the player in extremely hot temperatures.
+                    } else if (temperature > 70.0f) {
+                        if (!hasOxygen || !hasNetheriteSpaceSuit) {
+                            if (!entity.isFireImmune()) {
+                                entity.damage(ModDamageSource.OXYGEN, 2);
+                                entity.setOnFireFor(10);
+                            }
                         }
-                        entity.damage(ModDamageSource.OXYGEN, 2);
+                    } else if (!hasOxygen) {
+                        entity.damage(ModDamageSource.OXYGEN, 1);
                     }
-                    // Turn skeletons into strays.
-                    if (entity instanceof SkeletonEntity skeleton) {
-                        skeleton.convertTo(EntityType.STRAY, true);
-                    }
+                    entity.setAir(-20);
                 }
-                // Burn the player in extremely hot temperatures.
-            } else if (temperature > 70.0f) {
-                if (!hasOxygen || !hasNetheriteSpaceSuit) {
-                    if (!entity.isFireImmune()) {
-                        entity.damage(ModDamageSource.OXYGEN, 2);
-                        entity.setOnFireFor(10);
-                    }
-                }
-            } else if (!hasOxygen) {
-                entity.damage(ModDamageSource.OXYGEN, 1);
             }
-            entity.setAir(-20);
         }
     }
 }

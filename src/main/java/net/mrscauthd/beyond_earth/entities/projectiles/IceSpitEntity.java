@@ -43,8 +43,8 @@ public class IceSpitEntity extends ThrownItemEntity {
         double z = this.getZ();
         Vec3d vec = this.getVelocity();
 
-        this.world.addParticle(ParticleTypes.SPIT, x - vec.x, y - vec.y, z - vec.z, 0, 0.001, 0);
-        this.world.addParticle(ParticleTypes.ITEM_SNOWBALL, x - vec.x, y - vec.y, z - vec.z, 0, 0.001, 0);
+        this.world.addParticle(ParticleTypes.SPIT, x - vec.getX(), y - vec.getY(), z - vec.getZ(), 0, 0.001, 0);
+        this.world.addParticle(ParticleTypes.ITEM_SNOWBALL, x - vec.getX(), y - vec.getY(), z - vec.getZ(), 0, 0.001, 0);
     }
 
     @Override

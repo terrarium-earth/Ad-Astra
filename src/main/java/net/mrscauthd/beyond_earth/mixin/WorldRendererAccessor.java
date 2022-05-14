@@ -2,9 +2,11 @@ package net.mrscauthd.beyond_earth.mixin;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
+import org.spongepowered.asm.mixin.gen.Invoker;
 
 import net.minecraft.client.gl.VertexBuffer;
 import net.minecraft.client.option.CloudRenderMode;
+import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.util.math.Vec3d;
 
@@ -67,4 +69,13 @@ public interface WorldRendererAccessor {
 
     @Accessor("field_20795")
     float[] getField_20795();
+
+    @Accessor("field_20793")
+    int getField_20793();
+
+    @Accessor("field_20793")
+    void setField_20793(int value);
+
+    @Invoker("renderClouds")
+    public void invokeRenderClouds(BufferBuilder builder, double x, double y, double z, Vec3d color);
 }
