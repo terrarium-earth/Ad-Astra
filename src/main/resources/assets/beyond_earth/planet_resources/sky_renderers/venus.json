@@ -7,7 +7,7 @@
     },
     "sunset_color": "vanilla",
     "dimension_effects": {
-        "type": "foggy"
+        "type": "foggy_reversed"
     },
     "cloud_effects": "venus",
     "weather_effects": "venus",
