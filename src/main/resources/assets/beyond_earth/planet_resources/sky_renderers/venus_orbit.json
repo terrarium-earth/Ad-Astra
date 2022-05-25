@@ -7,7 +7,7 @@
     },
     "sunset_color": "vanilla",
     "dimension_effects": {
-        "type": "simple"
+        "type": "none"
     },
     "cloud_effects": "none",
     "weather_effects": "none",

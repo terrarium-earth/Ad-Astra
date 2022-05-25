@@ -32,10 +32,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.mrscauthd.beyond_earth.BeyondEarth"
+      "com.github.alexnijjar.beyond_earth.BeyondEarth"
     ],
     "client": [
-      "net.mrscauthd.beyond_earth.client.BeyondEarthClient"
+      "com.github.alexnijjar.beyond_earth.client.BeyondEarthClient"
     ]
   },
   "accessWidener": "beyond_earth.accesswidener",

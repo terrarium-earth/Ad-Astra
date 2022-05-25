@@ -1,11 +1,11 @@
 {
-	"parent": "builtin/entity",
-	"gui_light": "front",
-	"display": {
+  "parent": "builtin/entity",
+  "gui_light": "front",
+  "display": {
     "thirdperson_righthand": {
       "rotation": [
         -0,
-         0,
+        0,
         -90
       ],
       "translation": [
