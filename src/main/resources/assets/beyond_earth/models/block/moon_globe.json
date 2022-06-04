@@ -1,12 +1,6 @@
 {
-  "parent": "block/cube",
+  "parent": "block/cube_all",
   "textures": {
-    "down": "beyond_earth:blocks/globes/moon_globe",
-    "up": "beyond_earth:blocks/globes/moon_globe",
-    "north": "beyond_earth:blocks/globes/moon_globe",
-    "east": "beyond_earth:blocks/globes/moon_globe",
-    "south": "beyond_earth:blocks/globes/moon_globe",
-    "west": "beyond_earth:blocks/globes/moon_globe",
-    "particle": "beyond_earth:blocks/globes/moon_globe"
+    "all": "beyond_earth:blocks/globes/moon_globe"
   }
 }

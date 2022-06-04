@@ -4,75 +4,110 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.github.alexnijjar.beyond_earth.items.armour.NetheriteSpaceSuit;
 import com.github.alexnijjar.beyond_earth.registry.ModArmour;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
-
-import org.apache.commons.lang3.ArrayUtils;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
+import net.minecraft.client.render.entity.model.BipedEntityModel;
+import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.render.entity.model.EntityModelLoader;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
 
+@Environment(EnvType.CLIENT)
 public class SpaceSuitRenderer {
 
-    @Environment(EnvType.CLIENT)
+    public static Identifier SPACE_SUIT_CHEST_LOCATION = new ModIdentifier("textures/models/armor/space_suit.png");
+    public static Identifier NETHERITE_SPACE_SUIT_CHEST_LOCATION = new ModIdentifier("textures/models/armor/netherite_space_suit.png");
+    public static Identifier JET_SUIT_CHEST_LOCATION = new ModIdentifier("textures/models/armor/jet_suit.png");
     public static void register() {
 
+        // Space Suit.
         ArmorRenderer.register((matrices, vertexConsumers, stack, entity, slot, light, contextModel) -> {
-
-            Map<String, ModelPart> map = createModelMap(slot);
-
-            String appendedPathText = stack.getItem() instanceof NetheriteSpaceSuit ? "netherite_" : "";
-
             Identifier texture = switch (slot) {
-            case HEAD -> new ModIdentifier("textures/models/armor/" + appendedPathText + "space_suit_head.png");
-            case CHEST, FEET -> new ModIdentifier("textures/models/armor/" + appendedPathText + "space_suit.png");
-            case LEGS -> new ModIdentifier("textures/models/armor/" + appendedPathText + "space_suit_legs.png");
+            case HEAD -> new ModIdentifier("textures/models/armor/space_suit_head.png");
+            case CHEST, FEET -> SPACE_SUIT_CHEST_LOCATION;
+            case LEGS -> new ModIdentifier("textures/models/armor/space_suit_pants.png");
             default -> throw new IllegalStateException("Unexpected value: " + slot);
             };
 
-            ModelPart model = new ModelPart(Collections.emptyList(), map);
-            SpaceSuitModel.SPACE_SUIT_P1<LivingEntity> armourModel = new SpaceSuitModel.SPACE_SUIT_P1<>(model);
-            armourModel.model = contextModel;
-            armourModel.stack = stack;
+            ModelPart root = new ModelPart(Collections.emptyList(), createModelMap(slot, contextModel, texture, SpaceSuitModel.LAYER_LOCATION));
+            SpaceSuitModel model = new SpaceSuitModel(root, contextModel, texture);
 
-            ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, armourModel, texture);
+            ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, model, texture);
+        }, ModArmour.SPACE_SUIT_SET);
 
-        }, ArrayUtils.addAll(ModArmour.SPACE_SUIT_SET, ModArmour.NETHERITE_SPACE_SUIT_SET));
+        // Netherite Space Suit.
+        ArmorRenderer.register((matrices, vertexConsumers, stack, entity, slot, light, contextModel) -> {
+            Identifier texture = switch (slot) {
+            case HEAD -> new ModIdentifier("textures/models/armor/netherite_space_suit_head.png");
+            case CHEST, FEET -> NETHERITE_SPACE_SUIT_CHEST_LOCATION;
+            case LEGS -> new ModIdentifier("textures/models/armor/netherite_space_suit_pants.png");
+            default -> throw new IllegalStateException("Unexpected value: " + slot);
+            };
+
+            ModelPart root = new ModelPart(Collections.emptyList(), createModelMap(slot, contextModel, texture, SpaceSuitModel.LAYER_LOCATION));
+            SpaceSuitModel model = new SpaceSuitModel(root, contextModel, texture);
+
+            ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, model, texture);
+        }, ModArmour.NETHERITE_SPACE_SUIT_SET);
+
+        // Jet Suit.
+        ArmorRenderer.register((matrices, vertexConsumers, stack, entity, slot, light, contextModel) -> {
+            Identifier texture = switch (slot) {
+            case HEAD, CHEST, FEET -> JET_SUIT_CHEST_LOCATION;
+            case LEGS -> new ModIdentifier("textures/models/armor/jet_suit_pants.png");
+            default -> throw new IllegalStateException("Unexpected value: " + slot);
+            };
+
+            ModelPart root = new ModelPart(Collections.emptyList(), createModelMap(slot, contextModel, texture, JetSuitModel.LAYER_LOCATION));
+            JetSuitModel model = new JetSuitModel(root, contextModel, texture);
+
+            ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, model, texture);
+        }, ModArmour.JET_SUIT_SET);
     }
 
-    @Environment(EnvType.CLIENT)
-    private static Map<String, ModelPart> createModelMap(EquipmentSlot slot) {
+    private static Map<String, ModelPart> createModelMap(EquipmentSlot slot, BipedEntityModel<LivingEntity> contextModel, Identifier headTexture, EntityModelLayer entityLayer) {
         Map<String, ModelPart> map = new HashMap<>();
 
         EntityModelLoader modelLoader = MinecraftClient.getInstance().getEntityModelLoader();
-        ModelPart layer = switch (slot) {
-        case HEAD, CHEST, FEET -> modelLoader.getModelPart(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION);
-        case LEGS -> modelLoader.getModelPart(SpaceSuitModel.SPACE_SUIT_P2.LAYER_LOCATION);
-        default -> throw new IllegalStateException("Unexpected value: " + slot);
-        };
+        ModelPart layer;
+        SpaceSuitModel model = null;
+        SpaceSuitLegsModel legsModel = null;
 
         switch (slot) {
-        case HEAD -> map.put("head", new SpaceSuitModel.SPACE_SUIT_P1<>(layer).head);
-        case CHEST -> {
-            map.put("body", new SpaceSuitModel.SPACE_SUIT_P1<>(layer).body);
-            map.put("right_arm", new SpaceSuitModel.SPACE_SUIT_P1<>(layer).rightArm);
-            map.put("left_arm", new SpaceSuitModel.SPACE_SUIT_P1<>(layer).leftArm);
+        case HEAD, CHEST, FEET -> {
+            layer = modelLoader.getModelPart(entityLayer);
+            model = new SpaceSuitModel(layer, contextModel, headTexture);
         }
         case LEGS -> {
-            map.put("right_leg", new SpaceSuitModel.SPACE_SUIT_P2<>(layer).rightLeg);
-            map.put("left_leg", new SpaceSuitModel.SPACE_SUIT_P2<>(layer).leftLeg);
+            layer = modelLoader.getModelPart(SpaceSuitLegsModel.LAYER_LOCATION);
+            legsModel = new SpaceSuitLegsModel(layer, contextModel, headTexture);
+        }
+        default -> throw new IllegalStateException("Unexpected value: " + slot);
+        }
+
+        switch (slot) {
+        case HEAD -> {
+            map.put("head", model.head);
+        }
+        case CHEST -> {
+            map.put("body", model.body);
+            map.put("right_arm", model.rightArm);
+            map.put("left_arm", model.leftArm);
+        }
+        case LEGS -> {
+            map.put("right_leg", legsModel.rightLeg);
+            map.put("left_leg", legsModel.leftLeg);
         }
         case FEET -> {
-            map.put("right_leg", new SpaceSuitModel.SPACE_SUIT_P1<>(layer).rightLeg);
-            map.put("left_leg", new SpaceSuitModel.SPACE_SUIT_P1<>(layer).leftLeg);
+            map.put("right_leg", model.rightLeg);
+            map.put("left_leg", model.leftLeg);
         }
         default -> {
 
@@ -83,11 +118,11 @@ public class SpaceSuitRenderer {
 
         // Add empty model parts as default values.
         map.putIfAbsent("head", empty);
+        map.putIfAbsent("hat", empty);
         map.putIfAbsent("body", empty);
         map.putIfAbsent("right_arm", empty);
         map.putIfAbsent("left_arm", empty);
         map.putIfAbsent("right_leg", empty);
-
         map.putIfAbsent("left_leg", empty);
         return map;
     }

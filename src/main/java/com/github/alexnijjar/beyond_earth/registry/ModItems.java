@@ -1,5 +1,6 @@
 package com.github.alexnijjar.beyond_earth.registry;
 
+import java.util.Collections;
 import java.util.List;
 
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.CoalGeneratorBlockEntity;
@@ -11,12 +12,17 @@ import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier3;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier4;
 import com.github.alexnijjar.beyond_earth.items.GuideBook;
 import com.github.alexnijjar.beyond_earth.items.HammerItem;
+import com.github.alexnijjar.beyond_earth.items.SpacePaintingItem;
+import com.github.alexnijjar.beyond_earth.items.armour.JetSuit;
+import com.github.alexnijjar.beyond_earth.items.armour.NetheriteSpaceSuit;
+import com.github.alexnijjar.beyond_earth.items.armour.SpaceSuit;
 import com.github.alexnijjar.beyond_earth.items.vehicles.RocketItem;
 import com.github.alexnijjar.beyond_earth.items.vehicles.RoverItem;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.block.Block;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.FoodComponent;
@@ -26,17 +32,95 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.item.TallBlockItem;
 import net.minecraft.item.WallStandingBlockItem;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 public class ModItems {
 
-        public static final ItemGroup ITEM_GROUP_NORMAL = FabricItemGroupBuilder.build(new ModIdentifier("tab_normal"), () -> new ItemStack(ModItems.TIER_1_ROCKET));
+        public static final ItemGroup ITEM_GROUP_NORMAL = FabricItemGroupBuilder.create(new ModIdentifier("tab_normal")).icon(() -> new ItemStack(ModItems.TIER_1_ROCKET)).appendItems(stacks -> {
+
+                ItemStack tier1Rocket = ModItems.TIER_1_ROCKET.getDefaultStack();
+                tier1Rocket.setNbt(new NbtCompound());
+                tier1Rocket.getNbt().putInt("Fuel", RocketItem.MAX_FUEL);
+
+                ItemStack tier2Rocket = ModItems.TIER_2_ROCKET.getDefaultStack();
+                tier2Rocket.setNbt(new NbtCompound());
+                tier2Rocket.getNbt().putInt("Fuel", RocketItem.MAX_FUEL);
+
+                ItemStack tier3Rocket = ModItems.TIER_3_ROCKET.getDefaultStack();
+                tier3Rocket.setNbt(new NbtCompound());
+                tier3Rocket.getNbt().putInt("Fuel", RocketItem.MAX_FUEL);
+
+                ItemStack tier4Rocket = ModItems.TIER_4_ROCKET.getDefaultStack();
+                tier4Rocket.setNbt(new NbtCompound());
+                tier4Rocket.getNbt().putInt("Fuel", RocketItem.MAX_FUEL);
+
+                ItemStack rover = ModItems.ROVER.getDefaultStack();
+                rover.setNbt(new NbtCompound());
+                rover.getNbt().putInt("Fuel", RoverItem.MAX_FUEL);
+
+                ItemStack spaceSuit = ModArmour.SPACE_SUIT.getDefaultStack();
+                spaceSuit.setNbt(new NbtCompound());
+                spaceSuit.getNbt().putInt("Oxygen", SpaceSuit.MAX_OXYGEN);
+
+                ItemStack netheriteSpaceSuit = ModArmour.NETHERITE_SPACE_SUIT.getDefaultStack();
+                netheriteSpaceSuit.setNbt(new NbtCompound());
+                netheriteSpaceSuit.getNbt().putInt("Oxygen", NetheriteSpaceSuit.MAX_OXYGEN);
+
+                ItemStack jetSuit = ModArmour.JET_SUIT.getDefaultStack();
+                jetSuit.setNbt(new NbtCompound());
+                jetSuit.getNbt().putInt("Oxygen", JetSuit.MAX_OXYGEN);
+
+                stacks.addAll(Collections.nCopies(45, ItemStack.EMPTY));
+
+                stacks.set(0, tier1Rocket);
+                stacks.set(1, tier2Rocket);
+                stacks.set(2, tier3Rocket);
+                stacks.set(3, tier4Rocket);
+
+                stacks.set(9, ModItems.TIER_1_ROCKET.getDefaultStack());
+                stacks.set(10, ModItems.TIER_2_ROCKET.getDefaultStack());
+                stacks.set(11, ModItems.TIER_3_ROCKET.getDefaultStack());
+                stacks.set(12, ModItems.TIER_4_ROCKET.getDefaultStack());
+
+                stacks.set(18, rover);
+                stacks.set(19, ModItems.ROVER.getDefaultStack());
+
+                stacks.set(6, ModArmour.OXYGEN_MASK.getDefaultStack());
+                stacks.set(15, spaceSuit);
+                stacks.set(24, ModArmour.SPACE_SUIT.getDefaultStack());
+                stacks.set(33, ModArmour.SPACE_PANTS.getDefaultStack());
+                stacks.set(42, ModArmour.SPACE_BOOTS.getDefaultStack());
+
+                stacks.set(7, ModArmour.NETHERITE_OXYGEN_MASK.getDefaultStack());
+                stacks.set(16, netheriteSpaceSuit);
+                stacks.set(25, ModArmour.NETHERITE_SPACE_SUIT.getDefaultStack());
+                stacks.set(34, ModArmour.NETHERITE_SPACE_PANTS.getDefaultStack());
+                stacks.set(43, ModArmour.NETHERITE_SPACE_BOOTS.getDefaultStack());
+
+                stacks.set(8, ModArmour.JET_SUIT_OXYGEN_MASK.getDefaultStack());
+                stacks.set(17, jetSuit);
+                stacks.set(26, ModArmour.JET_SUIT.getDefaultStack());
+                stacks.set(35, ModArmour.JET_SUIT_PANTS.getDefaultStack());
+                stacks.set(44, ModArmour.JET_SUIT_BOOTS.getDefaultStack());
+
+                stacks.set(27, ModItems.GUIDE_BOOK.getDefaultStack());
+                stacks.set(28, ModItems.SPACE_PAINTING.getDefaultStack());
+                stacks.set(29, ModItems.CHEESE.getDefaultStack());
+
+                stacks.set(36, ModItems.ROCKET_LAUNCH_PAD.getDefaultStack());
+                stacks.set(37, ModFluids.OIL_BUCKET.getDefaultStack());
+                stacks.set(38, ModFluids.FUEL_BUCKET.getDefaultStack());
+
+        }).build();
+
         public static final ItemGroup ITEM_GROUP_MACHINES = FabricItemGroupBuilder.build(new ModIdentifier("tab_machines"), () -> new ItemStack(ModBlocks.NASA_WORKBENCH));
         public static final ItemGroup ITEM_GROUP_BASICS = FabricItemGroupBuilder.build(new ModIdentifier("tab_basics"), () -> new ItemStack(ModItems.DESH_ENGINE));
         public static final ItemGroup ITEM_GROUP_MATERIALS = FabricItemGroupBuilder.build(new ModIdentifier("tab_materials"), () -> new ItemStack(ModItems.IRON_PLATE));
@@ -45,384 +129,274 @@ public class ModItems {
         public static final ItemGroup ITEM_GROUP_BLOCKS = FabricItemGroupBuilder.build(new ModIdentifier("tab_blocks"), () -> new ItemStack(ModBlocks.MOON_IRON_ORE));
         public static final ItemGroup ITEM_GROUP_SPAWN_EGGS = FabricItemGroupBuilder.build(new ModIdentifier("tab_spawn_eggs"), () -> new ItemStack(ModItems.ALIEN_SPAWN_EGG));
 
+        public static final BlockItem ROCKET_LAUNCH_PAD = registerBlockItem(ModBlocks.ROCKET_LAUNCH_PAD);
+
         // Spawn eggs.
-        public static final Item ALIEN_SPAWN_EGG = new SpawnEggItem(ModEntities.ALIEN, -13382401, -11650781, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS));
-        public static final Item ALIEN_ZOMBIE_SPAWN_EGG = new SpawnEggItem(ModEntities.ALIEN_ZOMBIE, -14804199, -16740159, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS));
-        public static final Item STAR_CRAWLER_SPAWN_EGG = new SpawnEggItem(ModEntities.STAR_CRAWLER, -13421773, -16724788, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS));
-        public static final Item PYGRO_SPAWN_EGG = new SpawnEggItem(ModEntities.PYGRO, -3381760, -6750208, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS));
-        public static final Item PYGRO_BRUTE_SPAWN_EGG = new SpawnEggItem(ModEntities.PYGRO_BRUTE, -3381760, -67208, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS));
-        public static final Item MOGLER_SPAWN_EGG = new SpawnEggItem(ModEntities.MOGLER, -13312, -3407872, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS));
-        public static final Item MARTIAN_RAPTOR_SPAWN_EGG = new SpawnEggItem(ModEntities.MARTIAN_RAPTOR, 5349438, -13312, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS));
+        public static final Item ALIEN_SPAWN_EGG = register("alien_spawn_egg", new SpawnEggItem(ModEntities.ALIEN, -13382401, -11650781, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
+        public static final Item ALIEN_ZOMBIE_SPAWN_EGG = register("alien_zombie_spawn_egg", new SpawnEggItem(ModEntities.ALIEN_ZOMBIE, -14804199, -16740159, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
+        public static final Item STAR_CRAWLER_SPAWN_EGG = register("star_crawler_spawn_egg", new SpawnEggItem(ModEntities.STAR_CRAWLER, -13421773, -16724788, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
+        public static final Item MARTIAN_RAPTOR_SPAWN_EGG = register("martian_raptor_spawn_egg", new SpawnEggItem(ModEntities.MARTIAN_RAPTOR, 5349438, -13312, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
+        public static final Item PYGRO_SPAWN_EGG = register("pygro_spawn_egg", new SpawnEggItem(ModEntities.PYGRO, -3381760, -6750208, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
+        public static final Item PYGRO_BRUTE_SPAWN_EGG = register("pygro_brute_spawn_egg", new SpawnEggItem(ModEntities.PYGRO_BRUTE, -3381760, -67208, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
+        public static final Item MOGLER_SPAWN_EGG = register("mogler_spawn_egg", new SpawnEggItem(ModEntities.MOGLER, -13312, -3407872, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
+        public static final Item ZOMBIFIED_MOGLER_SPAWN_EGG = register("zombified_mogler_spawn_egg", new SpawnEggItem(ModEntities.ZOMBIFIED_MOGLER, -13312, 0xE6E6E6, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
 
         // Vehicles Items.
-        public static final Item TIER_1_ROCKET = new RocketItem<RocketEntityTier1>(ModEntities.TIER_1_ROCKET, 1, new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
-        public static final Item TIER_2_ROCKET = new RocketItem<RocketEntityTier2>(ModEntities.TIER_2_ROCKET, 2, new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
-        public static final Item TIER_3_ROCKET = new RocketItem<RocketEntityTier3>(ModEntities.TIER_3_ROCKET, 3, new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
-        public static final Item TIER_4_ROCKET = new RocketItem<RocketEntityTier4>(ModEntities.TIER_4_ROCKET, 4, new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
-        public static final Item ROVER = new RoverItem(new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
+        public static final Item TIER_1_ROCKET = register("rocket_t1", new RocketItem<RocketEntityTier1>(ModEntities.TIER_1_ROCKET, 1, new FabricItemSettings().maxCount(1)));
+        public static final Item TIER_2_ROCKET = register("rocket_t2", new RocketItem<RocketEntityTier2>(ModEntities.TIER_2_ROCKET, 2, new FabricItemSettings().maxCount(1)));
+        public static final Item TIER_3_ROCKET = register("rocket_t3", new RocketItem<RocketEntityTier3>(ModEntities.TIER_3_ROCKET, 3, new FabricItemSettings().maxCount(1)));
+        public static final Item TIER_4_ROCKET = register("rocket_t4", new RocketItem<RocketEntityTier4>(ModEntities.TIER_4_ROCKET, 4, new FabricItemSettings().maxCount(1)));
+        public static final Item ROVER = register("rover", new RoverItem(new FabricItemSettings().maxCount(1)));
 
         // Guide book
-        public static final Item GUIDE_BOOK = new GuideBook(new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1));
+        public static final Item GUIDE_BOOK = register("guide_book", new GuideBook(new FabricItemSettings().maxCount(1)));
 
         // Items.
-        public static final Item CHEESE = new Item(new FabricItemSettings().group(ITEM_GROUP_NORMAL).food(new FoodComponent.Builder().hunger(4).saturationModifier(3.0f).build()));
-        public static final Item HAMMER = new HammerItem(new FabricItemSettings().group(ITEM_GROUP_BASICS).maxCount(1).maxDamage(9));
-        public static final Item IRON_STICK = new Item(new FabricItemSettings().group(ITEM_GROUP_BASICS));
-        public static final Item OXYGEN_GEAR = new Item(new FabricItemSettings().group(ITEM_GROUP_BASICS));
-        public static final Item OXYGEN_TANK = new Item(new FabricItemSettings().group(ITEM_GROUP_BASICS));
-        public static final Item WHEEL = new Item(new FabricItemSettings().group(ITEM_GROUP_BASICS));
-        public static final Item ENGINE_FRAME = new Item(new FabricItemSettings().group(ITEM_GROUP_BASICS));
-        public static final Item ENGINE_FAN = new Item(new FabricItemSettings().group(ITEM_GROUP_BASICS));
-        public static final Item ROCKET_NOSE_CONE = new Item(new FabricItemSettings().group(ITEM_GROUP_BASICS));
-        public static final Item STEEL_ENGINE = new Item(new FabricItemSettings().group(ITEM_GROUP_BASICS));
-        public static final Item DESH_ENGINE = new Item(new FabricItemSettings().group(ITEM_GROUP_BASICS));
-        public static final Item OSTRUM_ENGINE = new Item(new FabricItemSettings().group(ITEM_GROUP_BASICS));
-        public static final Item CALORITE_ENGINE = new Item(new FabricItemSettings().group(ITEM_GROUP_BASICS));
-        public static final Item STEEL_TANK = new Item(new FabricItemSettings().group(ITEM_GROUP_BASICS));
-        public static final Item DESH_TANK = new Item(new FabricItemSettings().group(ITEM_GROUP_BASICS));
-        public static final Item OSTRUM_TANK = new Item(new FabricItemSettings().group(ITEM_GROUP_BASICS));
-        public static final Item CALORITE_TANK = new Item(new FabricItemSettings().group(ITEM_GROUP_BASICS));
-        public static final Item ROCKET_FIN = new Item(new FabricItemSettings().group(ITEM_GROUP_BASICS));
+        public static final Item CHEESE = register("cheese", new Item(new FabricItemSettings().food(new FoodComponent.Builder().hunger(4).saturationModifier(3.0f).build())));
 
-        public static final Item STEEL_INGOT = new Item(new FabricItemSettings().group(ITEM_GROUP_MATERIALS));
-        public static final Item DESH_INGOT = new Item(new FabricItemSettings().group(ITEM_GROUP_MATERIALS));
-        public static final Item OSTRUM_INGOT = new Item(new FabricItemSettings().group(ITEM_GROUP_MATERIALS));
-        public static final Item CALORITE_INGOT = new Item(new FabricItemSettings().group(ITEM_GROUP_MATERIALS));
+        public static final Item SPACE_PAINTING = register("space_painting", new SpacePaintingItem(ModEntities.SPACE_PAINTING, new Item.Settings().rarity(Rarity.UNCOMMON)));
 
-        public static final Item ICE_SHARD = new Item(new FabricItemSettings().group(ITEM_GROUP_MATERIALS));
+        public static final Item HAMMER = register("hammer", new HammerItem(new FabricItemSettings().group(ITEM_GROUP_BASICS).maxCount(1).maxDamage(9)));
 
-        public static final Item IRON_PLATE = new Item(new FabricItemSettings().group(ITEM_GROUP_MATERIALS));
-        public static final Item DESH_PLATE = new Item(new FabricItemSettings().group(ITEM_GROUP_MATERIALS));
+        public static final Item IRON_STICK = registerItem("iron_stick", ITEM_GROUP_BASICS);
+        public static final Item OXYGEN_GEAR = registerItem("oxygen_gear", ITEM_GROUP_BASICS);
+        public static final Item OXYGEN_TANK = registerItem("oxygen_tank", ITEM_GROUP_BASICS);
+        public static final Item WHEEL = registerItem("wheel", ITEM_GROUP_BASICS);
+        public static final Item ENGINE_FRAME = registerItem("engine_frame", ITEM_GROUP_BASICS);
+        public static final Item ENGINE_FAN = registerItem("engine_fan", ITEM_GROUP_BASICS);
+        public static final Item ROCKET_NOSE_CONE = registerItem("rocket_nose_cone", ITEM_GROUP_BASICS);
+        public static final Item STEEL_ENGINE = registerItem("steel_engine", ITEM_GROUP_BASICS);
+        public static final Item DESH_ENGINE = registerItem("desh_engine", ITEM_GROUP_BASICS);
+        public static final Item OSTRUM_ENGINE = registerItem("ostrum_engine", ITEM_GROUP_BASICS);
+        public static final Item CALORITE_ENGINE = registerItem("calorite_engine", ITEM_GROUP_BASICS);
+        public static final Item STEEL_TANK = registerItem("steel_tank", ITEM_GROUP_BASICS);
+        public static final Item DESH_TANK = registerItem("desh_tank", ITEM_GROUP_BASICS);
+        public static final Item OSTRUM_TANK = registerItem("ostrum_tank", ITEM_GROUP_BASICS);
+        public static final Item CALORITE_TANK = registerItem("calorite_tank", ITEM_GROUP_BASICS);
+        public static final Item ROCKET_FIN = registerItem("rocket_fin", ITEM_GROUP_BASICS);
 
-        public static final Item COMPRESSED_STEEL = new Item(new FabricItemSettings().group(ITEM_GROUP_MATERIALS));
-        public static final Item COMPRESSED_DESH = new Item(new FabricItemSettings().group(ITEM_GROUP_MATERIALS));
-        public static final Item COMPRESSED_OSTRUM = new Item(new FabricItemSettings().group(ITEM_GROUP_MATERIALS));
-        public static final Item COMPRESSED_CALORITE = new Item(new FabricItemSettings().group(ITEM_GROUP_MATERIALS));
+        public static final Item STEEL_INGOT = registerItem("steel_ingot", ITEM_GROUP_MATERIALS);
+        public static final Item DESH_INGOT = registerItem("desh_ingot", ITEM_GROUP_MATERIALS);
+        public static final Item OSTRUM_INGOT = registerItem("ostrum_ingot", ITEM_GROUP_MATERIALS);
+        public static final Item CALORITE_INGOT = registerItem("calorite_ingot", ITEM_GROUP_MATERIALS);
 
-        public static final Item STEEL_NUGGET = new Item(new FabricItemSettings().group(ITEM_GROUP_MATERIALS));
-        public static final Item DESH_NUGGET = new Item(new FabricItemSettings().group(ITEM_GROUP_MATERIALS));
-        public static final Item OSTRUM_NUGGET = new Item(new FabricItemSettings().group(ITEM_GROUP_MATERIALS));
-        public static final Item CALORITE_NUGGET = new Item(new FabricItemSettings().group(ITEM_GROUP_MATERIALS));
+        public static final Item ICE_SHARD = registerItem("ice_shard", ITEM_GROUP_MATERIALS);
 
-        public static final Item RAW_DESH = new Item(new FabricItemSettings().group(ITEM_GROUP_MATERIALS));
-        public static final Item RAW_OSTRUM = new Item(new FabricItemSettings().group(ITEM_GROUP_MATERIALS));
-        public static final Item RAW_CALORITE = new Item(new FabricItemSettings().group(ITEM_GROUP_MATERIALS));
+        public static final Item IRON_PLATE = registerItem("iron_plate", ITEM_GROUP_MATERIALS);
+        public static final Item DESH_PLATE = registerItem("desh_plate", ITEM_GROUP_MATERIALS);
+
+        public static final Item COMPRESSED_STEEL = registerItem("compressed_steel", ITEM_GROUP_MATERIALS);
+        public static final Item COMPRESSED_DESH = registerItem("compressed_desh", ITEM_GROUP_MATERIALS);
+        public static final Item COMPRESSED_OSTRUM = registerItem("compressed_ostrum", ITEM_GROUP_MATERIALS);
+        public static final Item COMPRESSED_CALORITE = registerItem("compressed_calorite", ITEM_GROUP_MATERIALS);
+
+        public static final Item STEEL_NUGGET = registerItem("steel_nugget", ITEM_GROUP_MATERIALS);
+        public static final Item DESH_NUGGET = registerItem("desh_nugget", ITEM_GROUP_MATERIALS);
+        public static final Item OSTRUM_NUGGET = registerItem("ostrum_nugget", ITEM_GROUP_MATERIALS);
+        public static final Item CALORITE_NUGGET = registerItem("calorite_nugget", ITEM_GROUP_MATERIALS);
+
+        public static final Item RAW_DESH = registerItem("raw_desh", ITEM_GROUP_MATERIALS);
+        public static final Item RAW_OSTRUM = registerItem("raw_ostrum", ITEM_GROUP_MATERIALS);
+        public static final Item RAW_CALORITE = registerItem("raw_calorite", ITEM_GROUP_MATERIALS);
 
         // Flag Items
-        public static final BlockItem FLAG = new TallBlockItem(ModBlocks.FLAG, new Item.Settings().group(ITEM_GROUP_FLAGS));
-        public static final BlockItem FLAG_BLUE = new TallBlockItem(ModBlocks.FLAG_BLUE, new Item.Settings().group(ITEM_GROUP_FLAGS));
-        public static final BlockItem FLAG_BROWN = new TallBlockItem(ModBlocks.FLAG_BROWN, new Item.Settings().group(ITEM_GROUP_FLAGS));
-        public static final BlockItem FLAG_CYAN = new TallBlockItem(ModBlocks.FLAG_CYAN, new Item.Settings().group(ITEM_GROUP_FLAGS));
-        public static final BlockItem FLAG_GRAY = new TallBlockItem(ModBlocks.FLAG_GRAY, new Item.Settings().group(ITEM_GROUP_FLAGS));
-        public static final BlockItem FLAG_GREEN = new TallBlockItem(ModBlocks.FLAG_GREEN, new Item.Settings().group(ITEM_GROUP_FLAGS));
-        public static final BlockItem FLAG_LIGHT_BLUE = new TallBlockItem(ModBlocks.FLAG_LIGHT_BLUE, new Item.Settings().group(ITEM_GROUP_FLAGS));
-        public static final BlockItem FLAG_LIME = new TallBlockItem(ModBlocks.FLAG_LIME, new Item.Settings().group(ITEM_GROUP_FLAGS));
-        public static final BlockItem FLAG_MAGENTA = new TallBlockItem(ModBlocks.FLAG_MAGENTA, new Item.Settings().group(ITEM_GROUP_FLAGS));
-        public static final BlockItem FLAG_ORANGE = new TallBlockItem(ModBlocks.FLAG_ORANGE, new Item.Settings().group(ITEM_GROUP_FLAGS));
-        public static final BlockItem FLAG_PINK = new TallBlockItem(ModBlocks.FLAG_PINK, new Item.Settings().group(ITEM_GROUP_FLAGS));
-        public static final BlockItem FLAG_PURPLE = new TallBlockItem(ModBlocks.FLAG_PURPLE, new Item.Settings().group(ITEM_GROUP_FLAGS));
-        public static final BlockItem FLAG_RED = new TallBlockItem(ModBlocks.FLAG_RED, new Item.Settings().group(ITEM_GROUP_FLAGS));
-        public static final BlockItem FLAG_YELLOW = new TallBlockItem(ModBlocks.FLAG_YELLOW, new Item.Settings().group(ITEM_GROUP_FLAGS));
+        public static final BlockItem FLAG = registerFlag(ModBlocks.FLAG);
+        public static final BlockItem FLAG_BLUE = registerFlag(ModBlocks.FLAG_BLUE);
+        public static final BlockItem FLAG_BROWN = registerFlag(ModBlocks.FLAG_BROWN);
+        public static final BlockItem FLAG_CYAN = registerFlag(ModBlocks.FLAG_CYAN);
+        public static final BlockItem FLAG_GRAY = registerFlag(ModBlocks.FLAG_GRAY);
+        public static final BlockItem FLAG_GREEN = registerFlag(ModBlocks.FLAG_GREEN);
+        public static final BlockItem FLAG_LIGHT_BLUE = registerFlag(ModBlocks.FLAG_LIGHT_BLUE);
+        public static final BlockItem FLAG_LIME = registerFlag(ModBlocks.FLAG_LIME);
+        public static final BlockItem FLAG_MAGENTA = registerFlag(ModBlocks.FLAG_MAGENTA);
+        public static final BlockItem FLAG_ORANGE = registerFlag(ModBlocks.FLAG_ORANGE);
+        public static final BlockItem FLAG_PINK = registerFlag(ModBlocks.FLAG_PINK);
+        public static final BlockItem FLAG_PURPLE = registerFlag(ModBlocks.FLAG_PURPLE);
+        public static final BlockItem FLAG_RED = registerFlag(ModBlocks.FLAG_RED);
+        public static final BlockItem FLAG_YELLOW = registerFlag(ModBlocks.FLAG_YELLOW);
 
         // Globes.
-        public static final BlockItem EARTH_GLOBE = new BlockItem(ModBlocks.EARTH_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.RARE));
-        public static final BlockItem MOON_GLOBE = new BlockItem(ModBlocks.MOON_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.RARE));
-        public static final BlockItem MARS_GLOBE = new BlockItem(ModBlocks.MARS_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.RARE));
-        public static final BlockItem MERCURY_GLOBE = new BlockItem(ModBlocks.MERCURY_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.RARE));
-        public static final BlockItem VENUS_GLOBE = new BlockItem(ModBlocks.VENUS_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.RARE));
-        public static final BlockItem GLACIO_GLOBE = new BlockItem(ModBlocks.GLACIO_GLOBE, new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.RARE));
+        public static final BlockItem EARTH_GLOBE = registerGlobe(ModBlocks.EARTH_GLOBE);
+        public static final BlockItem MOON_GLOBE = registerGlobe(ModBlocks.MOON_GLOBE);
+        public static final BlockItem MARS_GLOBE = registerGlobe(ModBlocks.MARS_GLOBE);
+        public static final BlockItem MERCURY_GLOBE = registerGlobe(ModBlocks.MERCURY_GLOBE);
+        public static final BlockItem VENUS_GLOBE = registerGlobe(ModBlocks.VENUS_GLOBE);
+        public static final BlockItem GLACIO_GLOBE = registerGlobe(ModBlocks.GLACIO_GLOBE);
 
         // Torch items.
-        public static final Item COAL_TORCH = new WallStandingBlockItem(ModBlocks.COAL_TORCH, ModBlocks.WALL_COAL_TORCH, new FabricItemSettings().group(ITEM_GROUP_BASICS));
-        public static final Item COAL_LANTERN = new BlockItem(ModBlocks.COAL_LANTERN, new Item.Settings().group(ITEM_GROUP_BASICS));
+        public static final Item COAL_TORCH = register("coal_torch", new WallStandingBlockItem(ModBlocks.COAL_TORCH, ModBlocks.WALL_COAL_TORCH, new FabricItemSettings().group(ITEM_GROUP_BASICS)));
+        public static final Item COAL_LANTERN = registerBlockItem(ModBlocks.COAL_LANTERN, ITEM_GROUP_BASICS);
 
         // Machines.
-        public static final BlockItem NASA_WORKBENCH = new BlockItem(ModBlocks.NASA_WORKBENCH, new Item.Settings().group(ITEM_GROUP_MACHINES).rarity(Rarity.UNCOMMON));
-        public static final BlockItem SOLAR_PANEL = new BlockItem(ModBlocks.SOLAR_PANEL, new Item.Settings().group(ITEM_GROUP_MACHINES)) {
+        public static final BlockItem NASA_WORKBENCH = registerBlockItem(ModBlocks.NASA_WORKBENCH, ITEM_GROUP_MACHINES);
+        public static final BlockItem SOLAR_PANEL = register("solar_panel", new BlockItem(ModBlocks.SOLAR_PANEL, new Item.Settings().group(ITEM_GROUP_MACHINES)) {
                 @Override
                 public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
                         tooltip.add((new TranslatableText("item.beyond_earth.generator.tooltip", SolarPanelBlockEntity.ENERGY_PER_TICK).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
                 }
-        };
-        public static final BlockItem COAL_GENERATOR = new BlockItem(ModBlocks.COAL_GENERATOR, new Item.Settings().group(ITEM_GROUP_MACHINES)) {
+        });
+        public static final BlockItem COAL_GENERATOR = register("coal_generator", new BlockItem(ModBlocks.COAL_GENERATOR, new Item.Settings().group(ITEM_GROUP_MACHINES)) {
                 @Override
                 public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
                         tooltip.add((new TranslatableText("item.beyond_earth.generator.tooltip", CoalGeneratorBlockEntity.ENERGY_PER_TICK).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
                 }
-        };
-        public static final BlockItem COMPRESSOR = new BlockItem(ModBlocks.COMPRESSOR, new Item.Settings().group(ITEM_GROUP_MACHINES));
-        public static final BlockItem FUEL_REFINERY = new BlockItem(ModBlocks.FUEL_REFINERY, new Item.Settings().group(ITEM_GROUP_MACHINES));
-        public static final BlockItem OXYGEN_LOADER = new BlockItem(ModBlocks.OXYGEN_LOADER, new Item.Settings().group(ITEM_GROUP_MACHINES));
-        public static final BlockItem OXYGEN_BUBBLE_DISTRIBUTOR = new BlockItem(ModBlocks.OXYGEN_BUBBLE_DISTRIBUTOR, new Item.Settings().group(ITEM_GROUP_MACHINES));
-        public static final BlockItem WATER_PUMP = new BlockItem(ModBlocks.WATER_PUMP, new Item.Settings().group(ITEM_GROUP_MACHINES)) {
+        });
+        public static final BlockItem COMPRESSOR = registerBlockItem(ModBlocks.COMPRESSOR, ITEM_GROUP_MACHINES);
+        public static final BlockItem FUEL_REFINERY = registerBlockItem(ModBlocks.FUEL_REFINERY, ITEM_GROUP_MACHINES);
+        public static final BlockItem OXYGEN_LOADER = registerBlockItem(ModBlocks.OXYGEN_LOADER, ITEM_GROUP_MACHINES);
+        public static final BlockItem OXYGEN_BUBBLE_DISTRIBUTOR = registerBlockItem(ModBlocks.OXYGEN_BUBBLE_DISTRIBUTOR, ITEM_GROUP_MACHINES);
+        public static final BlockItem WATER_PUMP = register("water_pump", new BlockItem(ModBlocks.WATER_PUMP, new Item.Settings().group(ITEM_GROUP_MACHINES)) {
                 @Override
                 public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
                         tooltip.add((new TranslatableText("item.beyond_earth.water_pump.tooltip", WaterPumpBlockEntity.TRANSFER_PER_TICK).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
                 }
-        };
+        });
 
         // Block Items.
-        public static final BlockItem STEEL_BLOCK = new BlockItem(ModBlocks.STEEL_BLOCK, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem DESH_BLOCK = new BlockItem(ModBlocks.DESH_BLOCK, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem OSTRUM_BLOCK = new BlockItem(ModBlocks.OSTRUM_BLOCK, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem CALORITE_BLOCK = new BlockItem(ModBlocks.CALORITE_BLOCK, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem RAW_DESH_BLOCK = new BlockItem(ModBlocks.RAW_DESH_BLOCK, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem RAW_OSTRUM_BLOCK = new BlockItem(ModBlocks.RAW_OSTRUM_BLOCK, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem RAW_CALORITE_BLOCK = new BlockItem(ModBlocks.RAW_CALORITE_BLOCK, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem IRON_PLATING_BLOCK = new BlockItem(ModBlocks.IRON_PLATING_BLOCK, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem RUSTED_IRON_PILLAR_BLOCK = new BlockItem(ModBlocks.RUSTED_IRON_PILLAR_BLOCK, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem RUSTED_IRON_PLATING_BLOCK = new BlockItem(ModBlocks.RUSTED_IRON_PLATING_BLOCK, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem BLUE_IRON_PLATING_BLOCK = new BlockItem(ModBlocks.BLUE_IRON_PLATING_BLOCK, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem INFERNAL_SPIRE_BLOCK = new BlockItem(ModBlocks.INFERNAL_SPIRE_BLOCK, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem IRON_MARK_BLOCK = new BlockItem(ModBlocks.IRON_MARK_BLOCK, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem SKY_STONE = new BlockItem(ModBlocks.SKY_STONE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
+        public static final BlockItem STEEL_BLOCK = registerBlockItem(ModBlocks.STEEL_BLOCK);
+        public static final BlockItem DESH_BLOCK = registerBlockItem(ModBlocks.DESH_BLOCK);
+        public static final BlockItem OSTRUM_BLOCK = registerBlockItem(ModBlocks.OSTRUM_BLOCK);
+        public static final BlockItem CALORITE_BLOCK = registerBlockItem(ModBlocks.CALORITE_BLOCK);
+        public static final BlockItem RAW_DESH_BLOCK = registerBlockItem(ModBlocks.RAW_DESH_BLOCK);
+        public static final BlockItem RAW_OSTRUM_BLOCK = registerBlockItem(ModBlocks.RAW_OSTRUM_BLOCK);
+        public static final BlockItem RAW_CALORITE_BLOCK = registerBlockItem(ModBlocks.RAW_CALORITE_BLOCK);
+        public static final BlockItem IRON_PLATING_BLOCK = registerBlockItem(ModBlocks.IRON_PLATING_BLOCK);
+        public static final BlockItem RUSTED_IRON_PILLAR_BLOCK = registerBlockItem(ModBlocks.RUSTED_IRON_PILLAR_BLOCK);
+        public static final BlockItem RUSTED_IRON_PLATING_BLOCK = registerBlockItem(ModBlocks.RUSTED_IRON_PLATING_BLOCK);
+        public static final BlockItem BLUE_IRON_PLATING_BLOCK = registerBlockItem(ModBlocks.BLUE_IRON_PLATING_BLOCK);
+        public static final BlockItem INFERNAL_SPIRE_BLOCK = registerBlockItem(ModBlocks.INFERNAL_SPIRE_BLOCK);
+        public static final BlockItem IRON_MARK_BLOCK = registerBlockItem(ModBlocks.IRON_MARK_BLOCK);
+        public static final BlockItem SKY_STONE = registerBlockItem(ModBlocks.SKY_STONE);
 
-        public static final BlockItem MOON_STONE = new BlockItem(ModBlocks.MOON_STONE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem MOON_STONE_BRICKS = new BlockItem(ModBlocks.MOON_STONE_BRICKS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem CRACKED_MOON_STONE_BRICKS = new BlockItem(ModBlocks.CRACKED_MOON_STONE_BRICKS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem MOON_STONE_BRICK_SLAB = new BlockItem(ModBlocks.MOON_STONE_BRICK_SLAB, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem MOON_STONE_BRICK_STAIRS = new BlockItem(ModBlocks.MOON_STONE_BRICK_STAIRS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
+        public static final BlockItem MOON_STONE = registerBlockItem(ModBlocks.MOON_STONE);
+        public static final BlockItem MOON_STONE_BRICKS = registerBlockItem(ModBlocks.MOON_STONE_BRICKS);
+        public static final BlockItem CRACKED_MOON_STONE_BRICKS = registerBlockItem(ModBlocks.CRACKED_MOON_STONE_BRICKS);
+        public static final BlockItem MOON_STONE_BRICK_SLAB = registerBlockItem(ModBlocks.MOON_STONE_BRICK_SLAB);
+        public static final BlockItem MOON_STONE_BRICK_STAIRS = registerBlockItem(ModBlocks.MOON_STONE_BRICK_STAIRS);
+        public static final BlockItem CHISELED_MOON_STONE_BRICKS = registerBlockItem(ModBlocks.CHISELED_MOON_STONE_BRICKS);
+        public static final BlockItem CHISELED_MOON_STONE_STAIRS = registerBlockItem(ModBlocks.CHISELED_MOON_STONE_STAIRS);
+        public static final BlockItem CHISELED_MOON_STONE_SLAB = registerBlockItem(ModBlocks.CHISELED_MOON_STONE_SLAB);
+        public static final BlockItem POLISHED_MOON_STONE = registerBlockItem(ModBlocks.POLISHED_MOON_STONE);
+        public static final BlockItem POLISHED_MOON_STONE_STAIRS = registerBlockItem(ModBlocks.POLISHED_MOON_STONE_STAIRS);
+        public static final BlockItem POLISHED_MOON_STONE_SLAB = registerBlockItem(ModBlocks.POLISHED_MOON_STONE_SLAB);
+        public static final BlockItem MOON_PILLAR = registerBlockItem(ModBlocks.MOON_PILLAR);
 
-        public static final BlockItem MARS_STONE = new BlockItem(ModBlocks.MARS_STONE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem MARS_STONE_BRICKS = new BlockItem(ModBlocks.MARS_STONE_BRICKS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem CRACKED_MARS_STONE_BRICKS = new BlockItem(ModBlocks.CRACKED_MARS_STONE_BRICKS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem MARS_STONE_BRICK_SLAB = new BlockItem(ModBlocks.MARS_STONE_BRICK_SLAB, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem MARS_STONE_BRICK_STAIRS = new BlockItem(ModBlocks.MARS_STONE_BRICK_STAIRS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
+        public static final BlockItem MARS_STONE = registerBlockItem(ModBlocks.MARS_STONE);
+        public static final BlockItem MARS_STONE_BRICKS = registerBlockItem(ModBlocks.MARS_STONE_BRICKS);
+        public static final BlockItem CRACKED_MARS_STONE_BRICKS = registerBlockItem(ModBlocks.CRACKED_MARS_STONE_BRICKS);
+        public static final BlockItem MARS_STONE_BRICK_SLAB = registerBlockItem(ModBlocks.MARS_STONE_BRICK_SLAB);
+        public static final BlockItem MARS_STONE_BRICK_STAIRS = registerBlockItem(ModBlocks.MARS_STONE_BRICK_STAIRS);
+        public static final BlockItem CHISELED_MARS_STONE_BRICKS = registerBlockItem(ModBlocks.CHISELED_MARS_STONE_BRICKS);
+        public static final BlockItem CHISELED_MARS_STONE_STAIRS = registerBlockItem(ModBlocks.CHISELED_MARS_STONE_STAIRS);
+        public static final BlockItem CHISELED_MARS_STONE_SLAB = registerBlockItem(ModBlocks.CHISELED_MARS_STONE_SLAB);
+        public static final BlockItem POLISHED_MARS_STONE = registerBlockItem(ModBlocks.POLISHED_MARS_STONE);
+        public static final BlockItem POLISHED_MARS_STONE_STAIRS = registerBlockItem(ModBlocks.POLISHED_MARS_STONE_STAIRS);
+        public static final BlockItem POLISHED_MARS_STONE_SLAB = registerBlockItem(ModBlocks.POLISHED_MARS_STONE_SLAB);
+        public static final BlockItem MARS_PILLAR = registerBlockItem(ModBlocks.MARS_PILLAR);
 
-        public static final BlockItem MERCURY_STONE = new BlockItem(ModBlocks.MERCURY_STONE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem MERCURY_STONE_BRICKS = new BlockItem(ModBlocks.MERCURY_STONE_BRICKS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem CRACKED_MERCURY_STONE_BRICKS = new BlockItem(ModBlocks.CRACKED_MERCURY_STONE_BRICKS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem MERCURY_STONE_BRICK_SLAB = new BlockItem(ModBlocks.MERCURY_STONE_BRICK_SLAB, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem MERCURY_STONE_BRICK_STAIRS = new BlockItem(ModBlocks.MERCURY_STONE_BRICK_STAIRS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
+        public static final BlockItem MERCURY_STONE = registerBlockItem(ModBlocks.MERCURY_STONE);
+        public static final BlockItem MERCURY_STONE_BRICKS = registerBlockItem(ModBlocks.MERCURY_STONE_BRICKS);
+        public static final BlockItem CRACKED_MERCURY_STONE_BRICKS = registerBlockItem(ModBlocks.CRACKED_MERCURY_STONE_BRICKS);
+        public static final BlockItem MERCURY_STONE_BRICK_SLAB = registerBlockItem(ModBlocks.MERCURY_STONE_BRICK_SLAB);
+        public static final BlockItem MERCURY_STONE_BRICK_STAIRS = registerBlockItem(ModBlocks.MERCURY_STONE_BRICK_STAIRS);
+        public static final BlockItem CHISELED_MERCURY_STONE_BRICKS = registerBlockItem(ModBlocks.CHISELED_MERCURY_STONE_BRICKS);
+        public static final BlockItem CHISELED_MERCURY_STONE_STAIRS = registerBlockItem(ModBlocks.CHISELED_MERCURY_STONE_STAIRS);
+        public static final BlockItem CHISELED_MERCURY_STONE_SLAB = registerBlockItem(ModBlocks.CHISELED_MERCURY_STONE_SLAB);
+        public static final BlockItem POLISHED_MERCURY_STONE = registerBlockItem(ModBlocks.POLISHED_MERCURY_STONE);
+        public static final BlockItem POLISHED_MERCURY_STONE_STAIRS = registerBlockItem(ModBlocks.POLISHED_MERCURY_STONE_STAIRS);
+        public static final BlockItem POLISHED_MERCURY_STONE_SLAB = registerBlockItem(ModBlocks.POLISHED_MERCURY_STONE_SLAB);
+        public static final BlockItem MERCURY_PILLAR = registerBlockItem(ModBlocks.MERCURY_PILLAR);
 
-        public static final BlockItem VENUS_STONE = new BlockItem(ModBlocks.VENUS_STONE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem VENUS_STONE_BRICKS = new BlockItem(ModBlocks.VENUS_STONE_BRICKS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem CRACKED_VENUS_STONE_BRICKS = new BlockItem(ModBlocks.CRACKED_VENUS_STONE_BRICKS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem VENUS_STONE_BRICK_SLAB = new BlockItem(ModBlocks.VENUS_STONE_BRICK_SLAB, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem VENUS_STONE_BRICK_STAIRS = new BlockItem(ModBlocks.VENUS_STONE_BRICK_STAIRS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
+        public static final BlockItem VENUS_SANDSTONE = registerBlockItem(ModBlocks.VENUS_SANDSTONE);
+        public static final BlockItem VENUS_SANDSTONE_BRICKS = registerBlockItem(ModBlocks.VENUS_SANDSTONE_BRICKS);
+        public static final BlockItem CRACKED_VENUS_SANDSTONE_BRICKS = registerBlockItem(ModBlocks.CRACKED_VENUS_SANDSTONE_BRICKS);
+        public static final BlockItem VENUS_SANDSTONE_BRICK_SLAB = registerBlockItem(ModBlocks.VENUS_SANDSTONE_BRICK_SLAB);
+        public static final BlockItem VENUS_SANDSTONE_BRICK_STAIRS = registerBlockItem(ModBlocks.VENUS_SANDSTONE_BRICK_STAIRS);
 
-        public static final BlockItem VENUS_SANDSTONE = new BlockItem(ModBlocks.VENUS_SANDSTONE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem VENUS_SANDSTONE_BRICKS = new BlockItem(ModBlocks.VENUS_SANDSTONE_BRICKS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem CRACKED_VENUS_SANDSTONE_BRICKS = new BlockItem(ModBlocks.CRACKED_VENUS_SANDSTONE_BRICKS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem VENUS_SANDSTONE_BRICK_SLAB = new BlockItem(ModBlocks.VENUS_SANDSTONE_BRICK_SLAB, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem VENUS_SANDSTONE_BRICK_STAIRS = new BlockItem(ModBlocks.VENUS_SANDSTONE_BRICK_STAIRS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
+        public static final BlockItem VENUS_STONE = registerBlockItem(ModBlocks.VENUS_STONE);
+        public static final BlockItem VENUS_STONE_BRICKS = registerBlockItem(ModBlocks.VENUS_STONE_BRICKS);
+        public static final BlockItem CRACKED_VENUS_STONE_BRICKS = registerBlockItem(ModBlocks.CRACKED_VENUS_STONE_BRICKS);
+        public static final BlockItem VENUS_STONE_BRICK_SLAB = registerBlockItem(ModBlocks.VENUS_STONE_BRICK_SLAB);
+        public static final BlockItem VENUS_STONE_BRICK_STAIRS = registerBlockItem(ModBlocks.VENUS_STONE_BRICK_STAIRS);
+        public static final BlockItem CHISELED_VENUS_STONE_BRICKS = registerBlockItem(ModBlocks.CHISELED_VENUS_STONE_BRICKS);
+        public static final BlockItem CHISELED_VENUS_STONE_STAIRS = registerBlockItem(ModBlocks.CHISELED_VENUS_STONE_STAIRS);
+        public static final BlockItem CHISELED_VENUS_STONE_SLAB = registerBlockItem(ModBlocks.CHISELED_VENUS_STONE_SLAB);
+        public static final BlockItem POLISHED_VENUS_STONE = registerBlockItem(ModBlocks.POLISHED_VENUS_STONE);
+        public static final BlockItem POLISHED_VENUS_STONE_STAIRS = registerBlockItem(ModBlocks.POLISHED_VENUS_STONE_STAIRS);
+        public static final BlockItem POLISHED_VENUS_STONE_SLAB = registerBlockItem(ModBlocks.POLISHED_VENUS_STONE_SLAB);
+        public static final BlockItem VENUS_PILLAR = registerBlockItem(ModBlocks.VENUS_PILLAR);
 
-        public static final BlockItem PERMAFROST = new BlockItem(ModBlocks.PERMAFROST_STONE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem GLACIO_STONE = new BlockItem(ModBlocks.GLACIO_STONE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem GLACIO_STONE_BRICKS = new BlockItem(ModBlocks.GLACIO_STONE_BRICKS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem CRACKED_GLACIO_STONE_BRICKS = new BlockItem(ModBlocks.CRACKED_GLACIO_STONE_BRICKS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem GLACIO_STONE_BRICK_SLAB = new BlockItem(ModBlocks.GLACIO_STONE_BRICK_SLAB, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem GLACIO_STONE_BRICK_STAIRS = new BlockItem(ModBlocks.GLACIO_STONE_BRICK_STAIRS, new Item.Settings().group(ITEM_GROUP_BLOCKS));
+        public static final BlockItem PERMAFROST_STONE = registerBlockItem(ModBlocks.PERMAFROST_STONE);
+        public static final BlockItem GLACIO_STONE = registerBlockItem(ModBlocks.GLACIO_STONE);
+        public static final BlockItem GLACIO_STONE_BRICKS = registerBlockItem(ModBlocks.GLACIO_STONE_BRICKS);
+        public static final BlockItem CRACKED_GLACIO_STONE_BRICKS = registerBlockItem(ModBlocks.CRACKED_GLACIO_STONE_BRICKS);
+        public static final BlockItem GLACIO_STONE_BRICK_SLAB = registerBlockItem(ModBlocks.GLACIO_STONE_BRICK_SLAB);
+        public static final BlockItem GLACIO_STONE_BRICK_STAIRS = registerBlockItem(ModBlocks.GLACIO_STONE_BRICK_STAIRS);
+        public static final BlockItem CHISELED_GLACIO_STONE_BRICKS = registerBlockItem(ModBlocks.CHISELED_GLACIO_STONE_BRICKS);
+        public static final BlockItem CHISELED_GLACIO_STONE_STAIRS = registerBlockItem(ModBlocks.CHISELED_GLACIO_STONE_STAIRS);
+        public static final BlockItem CHISELED_GLACIO_STONE_SLAB = registerBlockItem(ModBlocks.CHISELED_GLACIO_STONE_SLAB);
+        public static final BlockItem POLISHED_GLACIO_STONE = registerBlockItem(ModBlocks.POLISHED_GLACIO_STONE);
+        public static final BlockItem POLISHED_GLACIO_STONE_STAIRS = registerBlockItem(ModBlocks.POLISHED_GLACIO_STONE_STAIRS);
+        public static final BlockItem POLISHED_GLACIO_STONE_SLAB = registerBlockItem(ModBlocks.POLISHED_GLACIO_STONE_SLAB);
+        public static final BlockItem GLACIO_PILLAR = registerBlockItem(ModBlocks.GLACIO_PILLAR);
 
-        public static final BlockItem ROCKET_LAUNCH_PAD = new BlockItem(ModBlocks.ROCKET_LAUNCH_PAD, new Item.Settings().group(ITEM_GROUP_NORMAL));
+        public static final BlockItem MOON_SAND = registerBlockItem(ModBlocks.MOON_SAND);
+        public static final BlockItem MARS_SAND = registerBlockItem(ModBlocks.MARS_SAND);
+        public static final BlockItem VENUS_SAND = registerBlockItem(ModBlocks.VENUS_SAND);
 
-        public static final BlockItem MOON_SAND = new BlockItem(ModBlocks.MOON_SAND, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem MARS_SAND = new BlockItem(ModBlocks.MARS_SAND, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem VENUS_SAND = new BlockItem(ModBlocks.VENUS_SAND, new Item.Settings().group(ITEM_GROUP_BLOCKS));
+        public static final BlockItem MOON_CHEESE_ORE = registerBlockItem(ModBlocks.MOON_CHEESE_ORE);
+        public static final BlockItem MOON_DESH_ORE = registerBlockItem(ModBlocks.MOON_DESH_ORE);
+        public static final BlockItem MOON_IRON_ORE = registerBlockItem(ModBlocks.MOON_IRON_ORE);
+        public static final BlockItem MOON_ICE_SHARD_ORE = registerBlockItem(ModBlocks.MOON_ICE_SHARD_ORE);
+        public static final BlockItem MARS_IRON_ORE = registerBlockItem(ModBlocks.MARS_IRON_ORE);
+        public static final BlockItem MARS_DIAMOND_ORE = registerBlockItem(ModBlocks.MARS_DIAMOND_ORE);
+        public static final BlockItem MARS_OSTRUM_ORE = registerBlockItem(ModBlocks.MARS_OSTRUM_ORE);
+        public static final BlockItem MARS_ICE_SHARD_ORE = registerBlockItem(ModBlocks.MARS_ICE_SHARD_ORE);
+        public static final BlockItem MERCURY_IRON_ORE = registerBlockItem(ModBlocks.MERCURY_IRON_ORE);
+        public static final BlockItem VENUS_COAL_ORE = registerBlockItem(ModBlocks.VENUS_COAL_ORE);
+        public static final BlockItem VENUS_GOLD_ORE = registerBlockItem(ModBlocks.VENUS_GOLD_ORE);
+        public static final BlockItem VENUS_DIAMOND_ORE = registerBlockItem(ModBlocks.VENUS_DIAMOND_ORE);
+        public static final BlockItem VENUS_CALORITE_ORE = registerBlockItem(ModBlocks.VENUS_CALORITE_ORE);
+        public static final BlockItem GLACIO_ICE_SHARD_ORE = registerBlockItem(ModBlocks.GLACIO_ICE_SHARD_ORE);
+        public static final BlockItem GLACIO_COAL_ORE = registerBlockItem(ModBlocks.GLACIO_COAL_ORE);
+        public static final BlockItem GLACIO_COPPER_ORE = registerBlockItem(ModBlocks.GLACIO_COPPER_ORE);
+        public static final BlockItem GLACIO_IRON_ORE = registerBlockItem(ModBlocks.GLACIO_IRON_ORE);
+        public static final BlockItem GLACIO_LAPIS_ORE = registerBlockItem(ModBlocks.GLACIO_LAPIS_ORE);
 
-        public static final BlockItem MOON_CHEESE_ORE = new BlockItem(ModBlocks.MOON_CHEESE_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem MOON_DESH_ORE = new BlockItem(ModBlocks.MOON_DESH_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem MOON_IRON_ORE = new BlockItem(ModBlocks.MOON_IRON_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem MOON_ICE_SHARD = new BlockItem(ModBlocks.MOON_ICE_SHARD_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem MARS_IRON_ORE = new BlockItem(ModBlocks.MARS_IRON_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem MARS_DIAMOND_ORE = new BlockItem(ModBlocks.MARS_DIAMOND_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem MARS_OSTRUM_ORE = new BlockItem(ModBlocks.MARS_OSTRUM_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem MARS_ICE_SHARD_ORE = new BlockItem(ModBlocks.MARS_ICE_SHARD_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem MERCURY_IRON_ORE = new BlockItem(ModBlocks.MERCURY_IRON_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem VENUS_COAL_ORE = new BlockItem(ModBlocks.VENUS_COAL_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem VENUS_GOLD_ORE = new BlockItem(ModBlocks.VENUS_GOLD_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem VENUS_DIAMOND_ORE = new BlockItem(ModBlocks.VENUS_DIAMOND_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem VENUS_CALORITE_ORE = new BlockItem(ModBlocks.VENUS_CALORITE_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem GLACIO_ICE_SHARD_ORE = new BlockItem(ModBlocks.GLACIO_ICE_SHARD_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem GLACIO_COAL_ORE = new BlockItem(ModBlocks.GLACIO_COAL_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem GLACIO_COPPER_ORE = new BlockItem(ModBlocks.GLACIO_COPPER_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem GLACIO_IRON_ORE = new BlockItem(ModBlocks.GLACIO_IRON_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-        public static final BlockItem GLACIO_LAPIS_ORE = new BlockItem(ModBlocks.GLACIO_LAPIS_ORE, new Item.Settings().group(ITEM_GROUP_BLOCKS));
-
-        public static void register() {
-
-                // Spawn eggs.
-                register("alien_spawn_egg", ALIEN_SPAWN_EGG);
-                register("alien_zombie_spawn_egg", ALIEN_ZOMBIE_SPAWN_EGG);
-                register("star_crawler_spawn_egg", STAR_CRAWLER_SPAWN_EGG);
-                register("pygro_spawn_egg", PYGRO_SPAWN_EGG);
-                register("pygro_brute_spawn_egg", PYGRO_BRUTE_SPAWN_EGG);
-                register("mogler_spawn_egg", MOGLER_SPAWN_EGG);
-                register("martian_raptor_spawn_egg", MARTIAN_RAPTOR_SPAWN_EGG);
-
-                // Vehicles Items.
-                register("rocket_t1", TIER_1_ROCKET);
-                register("rocket_t2", TIER_2_ROCKET);
-                register("rocket_t3", TIER_3_ROCKET);
-                register("rocket_t4", TIER_4_ROCKET);
-                register("rover", ROVER);
-
-                // Guide book.
-                register("guide_book", GUIDE_BOOK);
-
-                // Items.
-                register("cheese", CHEESE);
-                register("hammer", HAMMER);
-                register("iron_stick", IRON_STICK);
-                register("oxygen_gear", OXYGEN_GEAR);
-                register("oxygen_tank", OXYGEN_TANK);
-                register("wheel", WHEEL);
-                register("engine_frame", ENGINE_FRAME);
-                register("engine_fan", ENGINE_FAN);
-                register("rocket_nose_cone", ROCKET_NOSE_CONE);
-                register("steel_engine", STEEL_ENGINE);
-                register("desh_engine", DESH_ENGINE);
-                register("ostrum_engine", OSTRUM_ENGINE);
-                register("calorite_engine", CALORITE_ENGINE);
-                register("steel_tank", STEEL_TANK);
-                register("desh_tank", DESH_TANK);
-                register("ostrum_tank", OSTRUM_TANK);
-                register("calorite_tank", CALORITE_TANK);
-                register("rocket_fin", ROCKET_FIN);
-
-                register("steel_ingot", STEEL_INGOT);
-                register("desh_ingot", DESH_INGOT);
-                register("ostrum_ingot", OSTRUM_INGOT);
-                register("calorite_ingot", CALORITE_INGOT);
-
-                register("ice_shard", ICE_SHARD);
-
-                register("iron_plate", IRON_PLATE);
-                register("desh_plate", DESH_PLATE);
-
-                register("compressed_steel", COMPRESSED_STEEL);
-                register("compressed_desh", COMPRESSED_DESH);
-                register("compressed_ostrum", COMPRESSED_OSTRUM);
-                register("compressed_calorite", COMPRESSED_CALORITE);
-
-                register("steel_nugget", STEEL_NUGGET);
-                register("desh_nugget", DESH_NUGGET);
-                register("ostrum_nugget", OSTRUM_NUGGET);
-                register("calorite_nugget", CALORITE_NUGGET);
-
-                register("raw_desh", RAW_DESH);
-                register("raw_ostrum", RAW_OSTRUM);
-                register("raw_calorite", RAW_CALORITE);
-
-                // Flag Items.
-                register("flag", FLAG);
-                register("flag_blue", FLAG_BLUE);
-                register("flag_brown", FLAG_BROWN);
-                register("flag_cyan", FLAG_CYAN);
-                register("flag_gray", FLAG_GRAY);
-                register("flag_green", FLAG_GREEN);
-                register("flag_light_blue", FLAG_LIGHT_BLUE);
-                register("flag_lime", FLAG_LIME);
-                register("flag_magenta", FLAG_MAGENTA);
-                register("flag_orange", FLAG_ORANGE);
-                register("flag_pink", FLAG_PINK);
-                register("flag_purple", FLAG_PURPLE);
-                register("flag_red", FLAG_RED);
-                register("flag_yellow", FLAG_YELLOW);
-
-                // Globes.
-                register("earth_globe", EARTH_GLOBE);
-                register("moon_globe", MOON_GLOBE);
-                register("mars_globe", MARS_GLOBE);
-                register("mercury_globe", MERCURY_GLOBE);
-                register("venus_globe", VENUS_GLOBE);
-                register("glacio_globe", GLACIO_GLOBE);
-
-                // Rocket Launch Pad.
-                register("rocket_launch_pad", ROCKET_LAUNCH_PAD);
-
-                // Torch items.
-                register("coal_torch", COAL_TORCH);
-                register("coal_lantern", COAL_LANTERN);
-
-                // Machines.
-                register("nasa_workbench", NASA_WORKBENCH);
-                register("solar_panel", SOLAR_PANEL);
-                register("coal_generator", COAL_GENERATOR);
-                register("compressor", COMPRESSOR);
-                register("fuel_refinery", FUEL_REFINERY);
-                register("oxygen_loader", OXYGEN_LOADER);
-                register("oxygen_bubble_distributor", OXYGEN_BUBBLE_DISTRIBUTOR);
-                register("water_pump", WATER_PUMP);
-
-                // Block Items.
-                register("steel_block", STEEL_BLOCK);
-                register("desh_block", DESH_BLOCK);
-                register("ostrum_block", OSTRUM_BLOCK);
-                register("calorite_block", CALORITE_BLOCK);
-                register("raw_desh_block", RAW_DESH_BLOCK);
-                register("raw_ostrum_block", RAW_OSTRUM_BLOCK);
-                register("raw_calorite_block", RAW_CALORITE_BLOCK);
-                register("iron_plating_block", IRON_PLATING_BLOCK);
-                register("rusted_iron_pillar_block", RUSTED_IRON_PILLAR_BLOCK);
-                register("rusted_iron_plating_block", RUSTED_IRON_PLATING_BLOCK);
-                register("blue_iron_plating_block", BLUE_IRON_PLATING_BLOCK);
-                register("infernal_spire_block", INFERNAL_SPIRE_BLOCK);
-                register("iron_mark_block", IRON_MARK_BLOCK);
-                register("sky_stone", SKY_STONE);
-
-                register("moon_stone", MOON_STONE);
-                register("moon_stone_bricks", MOON_STONE_BRICKS);
-                register("cracked_moon_stone_bricks", CRACKED_MOON_STONE_BRICKS);
-                register("moon_stone_brick_slab", MOON_STONE_BRICK_SLAB);
-                register("moon_stone_brick_stairs", MOON_STONE_BRICK_STAIRS);
-
-                register("mars_stone", MARS_STONE);
-                register("mars_stone_bricks", MARS_STONE_BRICKS);
-                register("cracked_mars_stone_bricks", CRACKED_MARS_STONE_BRICKS);
-                register("mars_stone_brick_slab", MARS_STONE_BRICK_SLAB);
-                register("mars_stone_brick_stairs", MARS_STONE_BRICK_STAIRS);
-
-                register("mercury_stone", MERCURY_STONE);
-                register("mercury_stone_bricks", MERCURY_STONE_BRICKS);
-                register("cracked_mercury_stone_bricks", CRACKED_MERCURY_STONE_BRICKS);
-                register("mercury_stone_brick_slab", MERCURY_STONE_BRICK_SLAB);
-                register("mercury_stone_brick_stairs", MERCURY_STONE_BRICK_STAIRS);
-
-                register("venus_stone", VENUS_STONE);
-                register("venus_stone_bricks", VENUS_STONE_BRICKS);
-                register("cracked_venus_stone_bricks", CRACKED_VENUS_STONE_BRICKS);
-                register("venus_stone_brick_slab", VENUS_STONE_BRICK_SLAB);
-                register("venus_stone_brick_stairs", VENUS_STONE_BRICK_STAIRS);
-
-                register("venus_sandstone", VENUS_SANDSTONE);
-                register("venus_sandstone_bricks", VENUS_SANDSTONE_BRICKS);
-                register("cracked_venus_sandstone_bricks", CRACKED_VENUS_SANDSTONE_BRICKS);
-                register("venus_sandstone_brick_slab", VENUS_SANDSTONE_BRICK_SLAB);
-                register("venus_sandstone_brick_stairs", VENUS_SANDSTONE_BRICK_STAIRS);
-
-                register("permafrost", PERMAFROST);
-                register("glacio_stone", GLACIO_STONE);
-                register("glacio_stone_bricks", GLACIO_STONE_BRICKS);
-                register("cracked_glacio_stone_bricks", CRACKED_GLACIO_STONE_BRICKS);
-                register("glacio_stone_brick_slab", GLACIO_STONE_BRICK_SLAB);
-                register("glacio_stone_brick_stairs", GLACIO_STONE_BRICK_STAIRS);
-
-                register("moon_sand", MOON_SAND);
-                register("mars_sand", MARS_SAND);
-                register("venus_sand", VENUS_SAND);
-
-                register("moon_cheese_ore", MOON_CHEESE_ORE);
-                register("moon_desh_ore", MOON_DESH_ORE);
-                register("moon_iron_ore", MOON_IRON_ORE);
-                register("moon_ice_shard_ore", MOON_ICE_SHARD);
-                register("mars_iron_ore", MARS_IRON_ORE);
-                register("mars_diamond_ore", MARS_DIAMOND_ORE);
-                register("mars_ostrum_ore", MARS_OSTRUM_ORE);
-                register("mars_ice_shard_ore", MARS_ICE_SHARD_ORE);
-                register("mercury_iron_ore", MERCURY_IRON_ORE);
-                register("venus_coal_ore", VENUS_COAL_ORE);
-                register("venus_gold_ore", VENUS_GOLD_ORE);
-                register("venus_diamond_ore", VENUS_DIAMOND_ORE);
-                register("venus_calorite_ore", VENUS_CALORITE_ORE);
-                register("glacio_ice_shard_ore", GLACIO_ICE_SHARD_ORE);
-                register("glacio_coal_ore", GLACIO_COAL_ORE);
-                register("glacio_copper_ore", GLACIO_COPPER_ORE);
-                register("glacio_iron_ore", GLACIO_IRON_ORE);
-                register("glacio_lapis_ore", GLACIO_LAPIS_ORE);
+        public static BlockItem registerFlag(Block flag) {
+                TallBlockItem item = new TallBlockItem(flag, new Item.Settings().group(ITEM_GROUP_FLAGS));
+                register(Registry.BLOCK.getId(flag), item);
+                return item;
         }
 
-        public static void register(String id, Item item) {
-                Registry.register(Registry.ITEM, new ModIdentifier(id), item);
+        public static BlockItem registerGlobe(Block globe) {
+                BlockItem item = new BlockItem(globe, new Item.Settings().group(ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.RARE));
+                register(Registry.BLOCK.getId(globe), item);
+                return item;
+        }
+
+        public static BlockItem registerBlockItem(Block block) {
+                return registerBlockItem(block, ITEM_GROUP_BLOCKS);
+        }
+
+        public static BlockItem registerBlockItem(Block block, ItemGroup group) {
+                BlockItem item = new BlockItem(block, new Item.Settings().group(group));
+                register(Registry.BLOCK.getId(block), item);
+                return item;
+        }
+
+        public static Item registerItem(String id, ItemGroup group) {
+                Item item = new Item(new Item.Settings().group(group));
+                register(id, item);
+                return item;
+        }
+
+        public static <T extends Item> T register(String id, T item) {
+                return register(new ModIdentifier(id), item);
+        }
+
+        public static <T extends Item> T register(Identifier id, T item) {
+                Registry.register(Registry.ITEM, id, item);
+                return item;
         }
 }

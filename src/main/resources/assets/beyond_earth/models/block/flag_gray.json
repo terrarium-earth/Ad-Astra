@@ -1,5 +1,5 @@
 {
-  "parent": "beyond_earth:custom/flage",
+  "parent": "beyond_earth:custom/flag",
   "textures": {
     "all": "beyond_earth:blocks/flag_gray",
     "particle": "beyond_earth:blocks/flag_gray",

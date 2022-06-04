@@ -3,20 +3,6 @@ package com.github.alexnijjar.beyond_earth.client;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
-import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
-import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
-import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.item.Item;
-import net.minecraft.screen.PlayerScreenHandler;
 import com.github.alexnijjar.beyond_earth.client.registry.ClientModEntities;
 import com.github.alexnijjar.beyond_earth.client.registry.ClientModKeybindings;
 import com.github.alexnijjar.beyond_earth.client.registry.ClientModParticles;
@@ -31,6 +17,8 @@ import com.github.alexnijjar.beyond_earth.client.renderer.entity.vehicles.rover.
 import com.github.alexnijjar.beyond_earth.client.renderer.globe.GlobeBlockEntityRenderer;
 import com.github.alexnijjar.beyond_earth.client.renderer.globe.GlobeItemRenderer;
 import com.github.alexnijjar.beyond_earth.client.renderer.globe.GlobeModel;
+import com.github.alexnijjar.beyond_earth.client.renderer.spacesuit.JetSuitModel;
+import com.github.alexnijjar.beyond_earth.client.renderer.spacesuit.SpaceSuitLegsModel;
 import com.github.alexnijjar.beyond_earth.client.renderer.spacesuit.SpaceSuitModel;
 import com.github.alexnijjar.beyond_earth.client.renderer.spacesuit.SpaceSuitRenderer;
 import com.github.alexnijjar.beyond_earth.client.resource_pack.PlanetResources;
@@ -40,9 +28,25 @@ import com.github.alexnijjar.beyond_earth.client.screens.PlayerOverlayScreen;
 import com.github.alexnijjar.beyond_earth.data.Planet;
 import com.github.alexnijjar.beyond_earth.networking.ModS2CPackets;
 import com.github.alexnijjar.beyond_earth.registry.ModBlockEntities;
+import com.github.alexnijjar.beyond_earth.registry.ModBlocks;
 import com.github.alexnijjar.beyond_earth.registry.ModFluids;
 import com.github.alexnijjar.beyond_earth.registry.ModItems;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
+
+import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
+import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
+import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.item.Item;
+import net.minecraft.screen.PlayerScreenHandler;
 
 public class BeyondEarthClient implements ClientModInitializer {
 
@@ -100,8 +104,9 @@ public class BeyondEarthClient implements ClientModInitializer {
                 }
 
                 // Custom space suit rendering.
-                EntityModelLayerRegistry.registerModelLayer(SpaceSuitModel.SPACE_SUIT_P1.LAYER_LOCATION, SpaceSuitModel.SPACE_SUIT_P1::createBodyLayer);
-                EntityModelLayerRegistry.registerModelLayer(SpaceSuitModel.SPACE_SUIT_P2.LAYER_LOCATION, SpaceSuitModel.SPACE_SUIT_P2::createBodyLayer);
+                EntityModelLayerRegistry.registerModelLayer(SpaceSuitModel.LAYER_LOCATION, SpaceSuitModel::getTexturedModelData);
+                EntityModelLayerRegistry.registerModelLayer(SpaceSuitLegsModel.LAYER_LOCATION, SpaceSuitLegsModel::getTexturedModelData);
+                EntityModelLayerRegistry.registerModelLayer(JetSuitModel.LAYER_LOCATION, JetSuitModel::getTexturedModelData);
                 SpaceSuitRenderer.register();
 
                 // Fluids.
@@ -122,12 +127,15 @@ public class BeyondEarthClient implements ClientModInitializer {
                 });
 
                 BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.FUEL_STILL, ModFluids.FLOWING_FUEL);
+                BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.OIL_STILL, ModFluids.FLOWING_OIL);
+
+                BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), ModBlocks.NASA_WORKBENCH, ModBlocks.WATER_PUMP);
         }
 
         // Register after the Resource packs have been loaded.
         @Environment(EnvType.CLIENT)
         public static void postAssetRegister() {
-                // Dimension sky.
+                // World sky.
                 ClientModSkies.register();
         }
 }

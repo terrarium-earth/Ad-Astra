@@ -1,5 +1,5 @@
 {
-    "dimension": "beyond_earth:mars",
+    "world": "beyond_earth:mars",
     "stars": {
         "fancy_count": 2000,
         "fast_count": 2000,

@@ -1,12 +1,6 @@
 {
-  "parent": "block/cube",
+  "parent": "block/cube_all",
   "textures": {
-    "down": "beyond_earth:blocks/ostrum_block",
-    "up": "beyond_earth:blocks/ostrum_block",
-    "north": "beyond_earth:blocks/ostrum_block",
-    "east": "beyond_earth:blocks/ostrum_block",
-    "south": "beyond_earth:blocks/ostrum_block",
-    "west": "beyond_earth:blocks/ostrum_block",
-    "particle": "beyond_earth:blocks/ostrum_block"
+    "all": "beyond_earth:blocks/ostrum_block"
   }
 }

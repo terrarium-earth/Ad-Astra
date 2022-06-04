@@ -1,5 +1,8 @@
 package com.github.alexnijjar.beyond_earth.entities.vehicles;
 
+import com.github.alexnijjar.beyond_earth.util.ModKeyBindings;
+import com.github.alexnijjar.beyond_earth.util.ModUtils;
+
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.player.PlayerEntity;
@@ -9,8 +12,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class LanderEntity extends VehicleEntity {
-
-    public boolean isPressingSpace;
 
     public LanderEntity(EntityType<?> type, World world) {
         super(type, world);
@@ -53,7 +54,7 @@ public class LanderEntity extends VehicleEntity {
         if (this.getFirstPassenger() instanceof PlayerEntity player) {
 
             // Player is clicking 'space' to move upward.
-            if (this.isPressingSpace) {
+            if (ModKeyBindings.jumpKeyDown(player)) {
                 this.applyBoosters();
             }
         }
@@ -70,7 +71,7 @@ public class LanderEntity extends VehicleEntity {
             // Particles.
             if (this.world instanceof ServerWorld serverWorld) {
                 Vec3d pos = this.getPos();
-                serverWorld.spawnParticles(ParticleTypes.SPIT, pos.getX(), pos.getY() - 0.3, pos.getZ(), 3, 0.1, 0.1, 0.1, 0.001);
+                ModUtils.spawnForcedParticles(serverWorld, ParticleTypes.SPIT, pos.getX(), pos.getY() - 0.3, pos.getZ(), 3, 0.1, 0.1, 0.1, 0.001);
             }
 
             this.move(MovementType.SELF, this.getVelocity());

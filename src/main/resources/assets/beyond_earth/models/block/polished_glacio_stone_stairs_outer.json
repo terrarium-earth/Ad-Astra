@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "beyond_earth:blocks/polished_glacio_stone",
+    "top": "beyond_earth:blocks/polished_glacio_stone",
+    "side": "beyond_earth:blocks/polished_glacio_stone"
+  }
+}

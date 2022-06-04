@@ -11,6 +11,9 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -38,24 +41,24 @@ public class VehicleEntity extends Entity {
     protected double clientYVelocity;
     protected double clientZVelocity;
 
-    protected double speed;
+    protected static final TrackedData<Float> SPEED = DataTracker.registerData(VehicleEntity.class, TrackedDataHandlerRegistry.FLOAT);
 
     public VehicleEntity(EntityType<?> type, World world) {
         super(type, world);
+        this.syncClient();
     }
 
     @Override
     protected void initDataTracker() {
+        this.dataTracker.startTracking(SPEED, 0.0f);
     }
 
     @Override
     protected void readCustomDataFromNbt(NbtCompound nbt) {
-        this.speed = nbt.getDouble("Speed");
     }
 
     @Override
     protected void writeCustomDataToNbt(NbtCompound nbt) {
-        nbt.putDouble("Speed", this.speed);
     }
 
     @Override
@@ -102,6 +105,14 @@ public class VehicleEntity extends Entity {
         }
     }
 
+    public float getSpeed() {
+        return this.dataTracker.get(SPEED);
+    }
+
+    public void setSpeed(float value) {
+        this.dataTracker.set(SPEED, value);
+    }
+
     @Override
     public void updateTrackedPositionAndAngles(double x, double y, double z, float yaw, float pitch, int interpolationSteps, boolean interpolate) {
         this.clientX = x;
@@ -133,7 +144,7 @@ public class VehicleEntity extends Entity {
                 modifier *= 0.01;
             }
 
-            float gravity = ModUtils.getPlanetGravity(world.isClient(), this.world.getRegistryKey());
+            float gravity = ModUtils.getPlanetGravity(this.world);
             if (this instanceof LanderEntity) {
                 modifier *= MathHelper.clamp(gravity * 2, 0.2f, 1.0f);
             } else {
@@ -142,23 +153,24 @@ public class VehicleEntity extends Entity {
 
             this.setVelocity(this.getVelocity().add(0.0, -0.04 * modifier, 0.0));
         }
-        this.move(MovementType.SELF, this.getVelocity());
 
         // Slow down the vehicle.
-        this.speed = MathHelper.clamp(this.speed, -0.1, 0.1);
-
-        this.speed /= 1.2;
-        if (this.speed < 0.0001 && this.speed > -0.0001) {
-            this.speed = 0.0;
+        
+        this.setSpeed(this.getSpeed() / 1.1f);
+        if (this.getSpeed() < 0.001 && this.getSpeed() > -0.001) {
+            this.setSpeed(0.0f);
         }
+        this.setSpeed(MathHelper.clamp(this.getSpeed(), -0.1f, 0.2f));
 
+        
         // Move the vehicle.
         BlockPos velocityAffectingPos = this.getVelocityAffectingPos();
         float slipperiness = this.world.getBlockState(velocityAffectingPos).getBlock().getSlipperiness();
         Vec3d movement = this.applyMovementInput(new Vec3d(this.getPitch(), 0, 1), slipperiness);
-
         double speedModifier = this.onGround ? slipperiness * 0.80f : 0.80f;
         this.setVelocity(movement.getX() * speedModifier, movement.getY() * 0.98, movement.getZ() * speedModifier);
+        
+        this.move(MovementType.SELF, this.getVelocity());
     }
 
     @Override
@@ -205,7 +217,7 @@ public class VehicleEntity extends Entity {
     public void explode(float powerMultiplier) {
         if (!this.world.isClient) {
             for (int i = 0; i < 3; i++) {
-                world.createExplosion(null, this.getX() + 0.5, this.getY() + 0.5, this.getZ() + 0.5, 7.0f * powerMultiplier, true, Explosion.DestructionType.DESTROY);
+                world.createExplosion(null, this.getX(), this.getY() + 0.5, this.getZ(), 7.0f * powerMultiplier, ModUtils.worldHasOxygen(this.world), Explosion.DestructionType.DESTROY);
             }
         }
         this.remove(RemovalReason.DISCARDED);
@@ -224,7 +236,7 @@ public class VehicleEntity extends Entity {
     }
 
     private float getMovementSpeed(float slipperiness) {
-        return (float) (this.speed * (0.21600002f / (slipperiness * slipperiness * slipperiness)));
+        return (float) (this.getSpeed() * (0.21600002f / (slipperiness * slipperiness * slipperiness)));
     }
 
     public Vec3d applyMovementInput(Vec3d movementInput, float slipperiness) {

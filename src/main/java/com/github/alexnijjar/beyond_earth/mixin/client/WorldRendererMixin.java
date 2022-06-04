@@ -5,7 +5,6 @@ import java.util.Random;
 import com.github.alexnijjar.beyond_earth.client.BeyondEarthClient;
 import com.github.alexnijjar.beyond_earth.client.resource_pack.SkyRenderer;
 import com.github.alexnijjar.beyond_earth.client.resource_pack.SkyRenderer.WeatherEffects;
-import com.github.alexnijjar.beyond_earth.mixin.WorldRendererAccessor;
 import com.github.alexnijjar.beyond_earth.registry.ModParticles;
 import com.github.alexnijjar.beyond_earth.world.SoundUtil;
 

@@ -1,12 +1,6 @@
 {
-  "parent": "block/cube",
+  "parent": "block/cube_all",
   "textures": {
-    "down": "beyond_earth:blocks/mars_ore_iron",
-    "up": "beyond_earth:blocks/mars_ore_iron",
-    "north": "beyond_earth:blocks/mars_ore_iron",
-    "east": "beyond_earth:blocks/mars_ore_iron",
-    "south": "beyond_earth:blocks/mars_ore_iron",
-    "west": "beyond_earth:blocks/mars_ore_iron",
-    "particle": "beyond_earth:blocks/mars_ore_iron"
+    "all": "beyond_earth:blocks/mars_ore_iron"
   }
 }

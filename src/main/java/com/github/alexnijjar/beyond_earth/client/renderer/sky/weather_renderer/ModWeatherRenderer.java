@@ -2,7 +2,7 @@ package com.github.alexnijjar.beyond_earth.client.renderer.sky.weather_renderer;
 
 import java.util.Random;
 
-import com.github.alexnijjar.beyond_earth.mixin.WorldRendererAccessor;
+import com.github.alexnijjar.beyond_earth.mixin.client.WorldRendererAccessor;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 import com.mojang.blaze3d.systems.RenderSystem;
 

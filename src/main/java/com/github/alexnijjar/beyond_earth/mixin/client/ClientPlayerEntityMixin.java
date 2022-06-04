@@ -5,7 +5,6 @@ import com.github.alexnijjar.beyond_earth.entities.vehicles.LanderEntity;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntity;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.VehicleEntity;
 import com.github.alexnijjar.beyond_earth.items.armour.SpaceSuit;
-import com.github.alexnijjar.beyond_earth.registry.ModArmour;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -31,17 +30,18 @@ public class ClientPlayerEntityMixin {
 
         if (ModUtils.hasFullSpaceSet(player)) {
             ItemStack chest = player.getEquippedStack(EquipmentSlot.CHEST);
-            NbtCompound nbt = chest.getNbt();
-
             int oxygen = 0;
-            if (nbt.contains("Oxygen")) {
-                oxygen = nbt.getInt("Oxygen");
-            }
+            if (chest.getItem() instanceof SpaceSuit suit) {
+                NbtCompound nbt = chest.getNbt();
 
-            // Render oxygen info.
-            boolean isNetherite = chest.isOf(ModArmour.NETHERITE_SPACE_SUIT);
-            double ratio = oxygen / (float) SpaceSuit.getMaxOxygen(isNetherite);
-            PlayerOverlayScreen.oxygenRatio = ratio;
+                if (nbt.contains("Oxygen")) {
+                    oxygen = nbt.getInt("Oxygen");
+                }
+
+                // Render oxygen info.
+                double ratio = oxygen / (float) suit.getMaxOxygen();
+                PlayerOverlayScreen.oxygenRatio = ratio;
+            }
         }
 
         if (player.getVehicle() instanceof VehicleEntity vehicle) {
@@ -55,10 +55,9 @@ public class ClientPlayerEntityMixin {
                 }
             }
 
-            
             // Show the warning screen when falling in a lander.
             if (vehicle instanceof LanderEntity lander) {
-                
+
                 double speed = lander.getVelocity().getY();
                 if (speed != 0) {
                     PlayerOverlayScreen.shouldRenderWarning = true;

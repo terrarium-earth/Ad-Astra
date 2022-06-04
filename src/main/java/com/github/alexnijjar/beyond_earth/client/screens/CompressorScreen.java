@@ -27,8 +27,6 @@ public class CompressorScreen extends AbstractMachineScreen<CompressorScreenHand
 
     public CompressorScreen(CompressorScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title, TEXTURE);
-        this.backgroundWidth = 177;
-        this.backgroundHeight = 168;
     }
 
     @Override

@@ -1,5 +1,5 @@
 {
-    "dimension": "beyond_earth:venus",
+    "world": "beyond_earth:venus",
     "stars": {
         "fancy_count": 2000,
         "fast_count": 2000,

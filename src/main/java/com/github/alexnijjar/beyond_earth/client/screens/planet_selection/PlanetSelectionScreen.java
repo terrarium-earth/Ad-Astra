@@ -30,7 +30,6 @@ import net.minecraft.client.gui.screen.ingame.ScreenHandlerProvider;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
@@ -52,8 +51,8 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
         public static final Identifier SCROLL_BAR = new ModIdentifier("textures/scroll_bar.png");
 
         public static final int SCROLL_BAR_X = 92;
-        public static final int SCROLL_MIN_Y = 172;
-        public static final int SCROLL_MAX_Y = 269;
+        public int minScrollY = 177;
+        public int maxScrollY = 274;
         public static final int SCROLL_SENSITIVITY = 5;
 
         // Text.
@@ -96,6 +95,30 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
         public PlanetSelectionScreen(PlanetSelectionScreenHandler handler, PlayerInventory inventory, Text title) {
                 super(title);
                 this.handler = handler;
+
+                // Get recipe.
+                ModRecipes.SPACE_STATION_RECIPE.getRecipes(handler.getPlayer().world).forEach(recipe -> {
+                        if (recipe != null) {
+
+                                for (int i = 0; i < recipe.getInputs().length; i++) {
+                                        ItemStack stack = recipe.getInputs()[i].getMatchingStacks()[0].copy();
+                                        // Sets the custom name to the item name to ensure that it always displays the item name and not "Air."
+                                        stack.setCustomName(stack.getName());
+                                        stack.setCount(0);
+
+                                        for (ItemStack slot : inventory.main) {
+                                                if (slot != null) {
+                                                        if (recipe.getInputs()[i].test(slot)) {
+                                                                stack.setCount(inventory.count(slot.getItem()));
+                                                                break;
+                                                        }
+                                                }
+                                        }
+
+                                        ingredients.add(Pair.of(stack, recipe.getStackCounts().get(i)));
+                                }
+                        }
+                });
         }
 
         @Override
@@ -184,6 +207,9 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                         this.scrollBar.visible = this.categoryButtons.get(this.currentCategory).size() > (currentPage == 3 ? 13 : 5);
                 }
 
+                minScrollY = (this.height / 2) - 33;
+                maxScrollY = (this.height / 2) + 64;
+
                 RenderSystem.disableBlend();
         }
 
@@ -191,39 +217,12 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
         protected void init() {
                 super.init();
 
-                // Get recipe.
-                PlayerEntity player = this.handler.getPlayer();
-                PlayerInventory inventory = player.getInventory();
-
-                ModRecipes.SPACE_STATION_RECIPE.getRecipes(player.world).forEach(recipe -> {
-                        if (recipe != null) {
-
-                                for (int i = 0; i < recipe.getInputs().length; i++) {
-                                        ItemStack stack = recipe.getInputs()[i].getMatchingStacks()[0].copy();
-                                        // Sets the custom name to the item name to ensure that it always displays the item name and not "Air."
-                                        stack.setCustomName(stack.getName());
-                                        stack.setCount(0);
-
-                                        for (ItemStack slot : inventory.main) {
-                                                if (slot != null) {
-                                                        if (recipe.getInputs()[i].test(slot)) {
-                                                                stack.setCount(inventory.count(slot.getItem()));
-                                                                break;
-                                                        }
-                                                }
-                                        }
-
-                                        ingredients.add(Pair.of(stack, recipe.getStackCounts().get(i)));
-                                }
-                        }
-                });
-
                 // Set the initial gui time to the world time. This creates a random start position for each rotating object.
                 guiTime = client.world.getTime();
 
                 // The back button. It is always element [0] in the buttons list.
                 LinkedList<PlanetSelectionButton> backButtonList = new LinkedList<>();
-                PlanetSelectionButton backButton = new PlanetSelectionButton(10, this.height / 2 - 33, BACK_TEXT, ButtonSize.NORMAL, ButtonColour.DARK_BLUE, TooltipType.NONE, null, pressed -> onNavigationButtonClick(currentCategory.parent()));
+                PlanetSelectionButton backButton = new PlanetSelectionButton(10, this.height / 2 - 36, BACK_TEXT, ButtonSize.NORMAL, ButtonColour.DARK_BLUE, TooltipType.NONE, null, pressed -> onNavigationButtonClick(currentCategory.parent()));
                 this.addDrawableChild(backButton);
                 backButtonList.add(backButton);
 
@@ -235,7 +234,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                         if (this.handler.getTier() >= planet.rocketTier()) {
                                 Category galaxyCategory = new Category(planet.galaxy(), null);
                                 Category solarSystemCategory = new Category(planet.solarSystem(), galaxyCategory);
-                                Category planetCategory = new Category(planet.parentDimension() == null ? planet.dimension().getValue() : planet.parentDimension().getValue(), solarSystemCategory);
+                                Category planetCategory = new Category(planet.parentWorld() == null ? planet.world().getValue() : planet.parentWorld().getValue(), solarSystemCategory);
 
                                 String name = planet.name();
                                 Text label = PlanetSelectionUtil.createText(name);
@@ -244,20 +243,20 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                                         solarSystemsCategories.add(solarSystemCategory);
                                 }
 
-                                if (planet.parentDimension() == null) {
+                                if (planet.parentWorld() == null) {
                                         createNavigationButton(label, solarSystemCategory, ButtonSize.NORMAL, planet.buttonColour(), TooltipType.CATEGORY, planet, planetCategory);
                                 }
 
-                                createTeleportButton(1, label, planetCategory, ButtonSize.NORMAL, ButtonColour.BLUE, TooltipType.PLANET, planet, planet.dimension());
-                                createTeleportButton(2, ORBIT_TEXT, planetCategory, ButtonSize.SMALL, ButtonColour.BLUE, TooltipType.ORBIT, null, planet.orbitDimension());
-                                createSpaceStationTeleportButton(3, SPACE_STATION_TEXT, planetCategory, ButtonSize.NORMAL, ButtonColour.GREEN, planet.orbitDimension());
+                                createTeleportButton(1, label, planetCategory, ButtonSize.NORMAL, ButtonColour.BLUE, TooltipType.PLANET, planet, planet.world());
+                                createTeleportButton(2, ORBIT_TEXT, planetCategory, ButtonSize.SMALL, ButtonColour.BLUE, TooltipType.ORBIT, null, planet.orbitWorld());
+                                createSpaceStationTeleportButton(3, SPACE_STATION_TEXT, planetCategory, ButtonSize.NORMAL, ButtonColour.GREEN, planet.orbitWorld());
                         }
                 });
 
                 this.solarSystemsCategories.forEach((solarSystemCategory -> createSolarSystemButton(solarSystemCategory)));
 
                 // Scroll bar.
-                this.scrollBar = new ButtonWidget(SCROLL_BAR_X, SCROLL_MIN_Y, 4, 8, Text.of(""), pressed -> {
+                this.scrollBar = new ButtonWidget(SCROLL_BAR_X, minScrollY, 4, 8, Text.of(""), pressed -> {
                 }) {
                         @Override
                         public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
@@ -282,7 +281,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 
         private void onNavigationButtonClick(Category target) {
                 this.resetButtonScroll();
-                this.scrollBar.y = SCROLL_MIN_Y;
+                this.scrollBar.y = minScrollY;
                 this.currentCategory = target;
         }
 
@@ -309,11 +308,11 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                         }
                         this.client.player.closeHandledScreen();
                         // Consume the required items to build the Space Station.
-                        ClientPlayNetworking.send(ModC2SPackets.DELETE_SPACE_STATION_ITEMS_PACKET_ID, PacketByteBufs.empty());
+                        ClientPlayNetworking.send(ModC2SPackets.DELETE_SPACE_STATION_ITEMS, PacketByteBufs.empty());
                         PacketByteBuf buf = PacketByteBufs.create();
                         buf.writeIdentifier(world.getValue());
                         // Create the space station.
-                        ClientPlayNetworking.send(ModC2SPackets.CREATE_SPACE_STATION_PACKET_ID, buf);
+                        ClientPlayNetworking.send(ModC2SPackets.CREATE_SPACE_STATION, buf);
                         teleportPlayer(world);
                 });
         }
@@ -344,7 +343,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                 PacketByteBuf buf = PacketByteBufs.create();
                 buf.writeIdentifier(world.getValue());
                 // Tell the server to teleport the player after the button has been pressed.
-                ClientPlayNetworking.send(ModC2SPackets.TELEPORT_TO_PLANET_PACKET_ID, buf);
+                ClientPlayNetworking.send(ModC2SPackets.TELEPORT_TO_PLANET, buf);
         }
 
         private PlanetSelectionButton createButton(Text label, Category category, ButtonSize size, ButtonColour colour, TooltipType tooltip, Planet planetInfo, Consumer<ButtonWidget> onClick) {
@@ -390,8 +389,8 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                                 // Don't scroll if there are not enough buttons.
                                 if (overflowButtons > 0) {
                                         final int referencePoint = backButton.y;
-                                        final int minThreshold = 169;
-                                        final int maxThreshold = 161 - (overflowButtons * (isLargePage ? 7 : 21));
+                                        int minThreshold = this.height / 2 - 35;
+                                        int maxThreshold = (this.height / 2 - 38) - (overflowButtons * (isLargePage ? 7 : 21));
                                         int sensitivity = (int) (SCROLL_SENSITIVITY * amount);
 
                                         // Lock the scroll to the min and max thresholds.
@@ -410,7 +409,6 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                                                 PlanetSelectionButton button = button2;
                                                 button.y += sensitivity;
 
-                                                // If the user has scrolled too far, i.e., offscreen, move the buttons back to the maximum scrollable distance.
                                                 if (referencePoint >= minThreshold) {
                                                         button.y -= referencePoint - minThreshold;
                                                 } else if (referencePoint <= maxThreshold) {
@@ -423,7 +421,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                                         ratio = MathUtil.invLerp(ratio, 1, min);
 
                                         // Flip min and max for inverse operation.
-                                        this.scrollBar.y = (int) MathHelper.lerp(ratio, SCROLL_MAX_Y, SCROLL_MIN_Y);
+                                        this.scrollBar.y = (int) MathHelper.lerp(ratio, maxScrollY, minScrollY);
                                 }
 
                                 break;
@@ -462,7 +460,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
         private int getColumn(Category category) {
                 LinkedList<PlanetSelectionButton> buttons = this.categoryButtons.getOrDefault(category, new LinkedList<>());
                 int index = buttons.size() + 1;
-                int startY = this.height / 2 - 55;
+                int startY = this.height / 2 - 58;
                 return startY + 22 * index + (category.parent() != null ? 22 : 0);
         }
 
@@ -491,4 +489,11 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                         super.close();
                 }
         }
+
+        @Override
+        public void resize(MinecraftClient client, int width, int height) {
+                super.resize(client, width, height);
+                // this.resetButtonScroll();
+        }
+
 }

@@ -1,5 +1,5 @@
 {
-    "dimension": "beyond_earth:mercury",
+    "world": "beyond_earth:mercury",
     "stars": {
         "fancy_count": 13000,
         "fast_count": 6000,

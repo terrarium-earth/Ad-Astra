@@ -1,12 +1,6 @@
 {
-  "parent": "block/cube",
+  "parent": "block/cube_all",
   "textures": {
-    "down": "beyond_earth:blocks/mercury_stone_bricks",
-    "up": "beyond_earth:blocks/mercury_stone_bricks",
-    "north": "beyond_earth:blocks/mercury_stone_bricks",
-    "east": "beyond_earth:blocks/mercury_stone_bricks",
-    "south": "beyond_earth:blocks/mercury_stone_bricks",
-    "west": "beyond_earth:blocks/mercury_stone_bricks",
-    "particle": "beyond_earth:blocks/mercury_stone_bricks"
+    "all": "beyond_earth:blocks/mercury_stone_bricks"
   }
 }

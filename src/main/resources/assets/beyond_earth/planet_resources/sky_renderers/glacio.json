@@ -1,9 +1,9 @@
 {
-    "dimension": "beyond_earth:glacio",
+    "world": "beyond_earth:glacio",
     "stars": {
         "fancy_count": 2000,
         "fast_count": 2000,
-        "daylight_visible": false
+        "daylight_visible": true
     },
     "sunset_color": "vanilla",
     "dimension_effects": {

@@ -1,29 +1,41 @@
 package com.github.alexnijjar.beyond_earth.entities.vehicles;
 
 import com.github.alexnijjar.beyond_earth.registry.ModItems;
+import com.github.alexnijjar.beyond_earth.util.ModKeyBindings;
+import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class RoverEntity extends VehicleEntity {
 
-    private double turnSpeed;
-
     public double wheelPitch;
     public double antennaDishYaw;
 
     public double prevAntennaDishYaw;
     public double prevWheelPitch;
+    public float prevRoverYaw;
+
+    protected static final TrackedData<Float> TURN_SPEED = DataTracker.registerData(RoverEntity.class, TrackedDataHandlerRegistry.FLOAT);
 
     public RoverEntity(EntityType<?> type, World world) {
         super(type, world);
         this.stepHeight = 1.0f;
+    }
+    
+
+    @Override
+    protected void initDataTracker() {
+        super.initDataTracker();
+        this.dataTracker.startTracking(TURN_SPEED, 0.0f);
     }
 
     @Override
@@ -39,16 +51,6 @@ public class RoverEntity extends VehicleEntity {
     @Override
     public boolean isCollidable() {
         return false;
-    }
-
-    @Override
-    protected void readCustomDataFromNbt(NbtCompound nbt) {
-        this.turnSpeed = nbt.getDouble("TurnSpeed");
-    }
-
-    @Override
-    protected void writeCustomDataToNbt(NbtCompound nbt) {
-        nbt.putDouble("TurnSpeed", this.turnSpeed);
     }
 
     @Override
@@ -69,52 +71,58 @@ public class RoverEntity extends VehicleEntity {
     private void travel() {
 
         this.prevWheelPitch = wheelPitch;
+        this.prevRoverYaw = this.getYaw();
 
-        // Player controls, sadly, only the rider detects the controls, so other clients do not know when the rider is pressing buttons
-        // to move. This is problematic for the wheel rotation, so to counteract it, the wheel rotation needs to be calculated based on
-        // the difference in position.
         if (this.getFirstPassenger() instanceof PlayerEntity player) {
 
             // Player is clicking 'w' to move forward.
-            if (player.forwardSpeed > 0) {
-                this.speed += 0.01 * (this.submergedInWater ? 0.5 : 1.0);
+            if (ModKeyBindings.forwardKeyDown(player)) {
+                this.setSpeed(this.getSpeed() + 0.1f * (this.submergedInWater ? 0.5f : 1.0f));
             }
             // Player is clicking 's' to move backward.
-            else if (player.forwardSpeed < 0) {
-                this.speed -= 0.005 * (this.submergedInWater ? 0.5 : 1.0);
+            if (ModKeyBindings.backKeyDown(player)) {
+                this.setSpeed(this.getSpeed() - 0.05f * (this.submergedInWater ? 0.5f : 1.0f));
             }
 
             // Player is clicking 'a' to move left.
-            if (player.sidewaysSpeed > 0) {
-                this.turnSpeed -= 10 * speed;
+            if (ModKeyBindings.leftKeyDown(player)) {
+                this.setTurnSpeed(this.getTurnSpeed() - 15.0f * this.getSpeed());
                 // Slow down for better turns.
                 this.setVelocity(new Vec3d(this.getVelocity().getX() / 1.1, this.getVelocity().getY(), this.getVelocity().getZ() / 1.1));
             }
             // Player is clicking 'd' to move right.
-            else if (player.sidewaysSpeed < 0) {
-                this.turnSpeed += 10 * speed;
+            if (ModKeyBindings.rightKeyDown(player)) {
+                this.setTurnSpeed(this.getTurnSpeed() + 15.0f * this.getSpeed());
                 // Slow down for better turns.
                 this.setVelocity(new Vec3d(this.getVelocity().getX() / 1.1, this.getVelocity().getY(), this.getVelocity().getZ() / 1.1));
             }
         }
 
-        this.turnSpeed = MathHelper.clamp(this.turnSpeed, -3.0, 3.0);
-        this.turnSpeed /= 1.1;
-        if (this.turnSpeed < 0.1 && this.turnSpeed > -0.1) {
-            this.turnSpeed = 0.0;
+        this.setTurnSpeed(MathHelper.clamp(this.getTurnSpeed(), -3.0f, 3.0f));
+        this.setTurnSpeed(this.getTurnSpeed() / 1.1f);
+        if (this.getTurnSpeed() < 0.1 && this.getTurnSpeed()> -0.1) {
+            this.setTurnSpeed(0.0f);
         }
 
-        this.setYaw(this.getYaw() + (float) turnSpeed);
+        ModUtils.rotateVehicleYaw(this, this.getYaw() + this.getTurnSpeed());
 
         // Animate wheels.
-        double wheelSpeed = computeWheelSpeed();
-        this.wheelPitch += wheelSpeed * 10.0;
+        this.wheelPitch += this.getSpeed() * 7;
+
     }
 
     @Override
     public void updatePassengerPosition(Entity passenger) {
         this.copyEntityData(passenger);
         super.updatePassengerPosition(passenger);
+    }
+
+    public float getTurnSpeed() {
+        return this.dataTracker.get(TURN_SPEED);
+    }
+
+    public void setTurnSpeed(float value) {
+        this.dataTracker.set(TURN_SPEED, value);
     }
 
     // Lock body rotation while still allowing the player to look around (same as boat).
@@ -130,37 +138,5 @@ public class RoverEntity extends VehicleEntity {
     @Override
     public void onPassengerLookAround(Entity passenger) {
         this.copyEntityData(passenger);
-    }
-
-    // It needs to be done like this so that it synchs with all clients, and not just the rider.
-    protected double computeWheelSpeed() {
-        Vec3d difference = new Vec3d(this.prevX, this.prevY, this.prevZ).relativize(this.getPos());
-        float yaw = this.getYaw();
-        boolean isReversing = false;
-        // System.out.println(yaw);
-
-        // Calculate which way the wheels should rotate based on the yaw.
-        if (yaw > 0) {
-            if (yaw >= 180 && yaw < 270) {
-                isReversing = difference.getZ() > 0;
-            } else if (yaw >= 270) {
-                isReversing = difference.getX() < 0;
-            } else {
-                isReversing = difference.getX() > 0;
-            }
-        } else {
-            yaw = MathHelper.abs(yaw);
-            if (yaw >= 90 && yaw < 180) {
-                isReversing = difference.getX() < 0;
-            } else if (yaw >= 180 && yaw < 270) {
-                isReversing = difference.getZ() > 0;
-            } else if (yaw >= 270) {
-                isReversing = difference.getX() > 0;
-            } else {
-                isReversing = difference.getZ() < 0;
-            }
-        }
-
-        return difference.horizontalLengthSquared() * (isReversing ? -1 : 1);
     }
 }

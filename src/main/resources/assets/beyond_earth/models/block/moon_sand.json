@@ -1,12 +1,6 @@
 {
-  "parent": "block/cube",
+  "parent": "block/cube_all",
   "textures": {
-    "down": "beyond_earth:blocks/moon_sand",
-    "up": "beyond_earth:blocks/moon_sand",
-    "north": "beyond_earth:blocks/moon_sand",
-    "east": "beyond_earth:blocks/moon_sand",
-    "south": "beyond_earth:blocks/moon_sand",
-    "west": "beyond_earth:blocks/moon_sand",
-    "particle": "beyond_earth:blocks/moon_sand"
+    "all": "beyond_earth:blocks/moon_sand"
   }
 }

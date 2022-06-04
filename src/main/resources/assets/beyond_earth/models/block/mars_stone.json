@@ -1,12 +1,6 @@
 {
-  "parent": "block/cube",
+  "parent": "block/cube_all",
   "textures": {
-    "down": "beyond_earth:blocks/mars_stone",
-    "up": "beyond_earth:blocks/mars_stone",
-    "north": "beyond_earth:blocks/mars_stone",
-    "east": "beyond_earth:blocks/mars_stone",
-    "south": "beyond_earth:blocks/mars_stone",
-    "west": "beyond_earth:blocks/mars_stone",
-    "particle": "beyond_earth:blocks/mars_stone"
+    "all": "beyond_earth:blocks/mars_stone"
   }
 }

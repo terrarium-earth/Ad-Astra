@@ -15,10 +15,10 @@ public class PlanetParser {
         String name = jsonObject.get("name").getAsString();
         Identifier galaxy = new Identifier(jsonObject.get("galaxy").getAsString());
         Identifier solarSystem = new Identifier(jsonObject.get("solar_system").getAsString());
-        RegistryKey<World> dimension = RegistryKey.of(Registry.WORLD_KEY, new Identifier(jsonObject.get("dimension").getAsString()));
-        RegistryKey<World> orbitDimension = RegistryKey.of(Registry.WORLD_KEY, new Identifier(jsonObject.get("orbit_dimension").getAsString()));
-        JsonElement optional = jsonObject.get("parent_dimension");
-        RegistryKey<World> parentDimension = optional.isJsonNull() ? null : RegistryKey.of(Registry.WORLD_KEY, new Identifier(jsonObject.get("parent_dimension").getAsString()));
+        RegistryKey<World> dimension = RegistryKey.of(Registry.WORLD_KEY, new Identifier(jsonObject.get("world").getAsString()));
+        RegistryKey<World> orbitDimension = RegistryKey.of(Registry.WORLD_KEY, new Identifier(jsonObject.get("orbit_world").getAsString()));
+        JsonElement optional = jsonObject.get("parent_world");
+        RegistryKey<World> parentWorld = optional.isJsonNull() ? null : RegistryKey.of(Registry.WORLD_KEY, new Identifier(jsonObject.get("parent_world").getAsString()));
         int rocketTier = jsonObject.get("rocket_tier").getAsInt();
         float gravity = jsonObject.get("gravity").getAsFloat();
         int daysInYear = jsonObject.get("days_in_year").getAsInt();
@@ -27,6 +27,6 @@ public class PlanetParser {
         int atmosphereStart = jsonObject.get("atmosphere_start").getAsInt();
         ButtonColour buttonColour = ButtonColour.stringToColour(jsonObject.get("button_color").getAsString());
 
-        return new Planet(name, galaxy, solarSystem, dimension, orbitDimension, parentDimension, rocketTier, gravity, daysInYear, temperature, hasOxygen, atmosphereStart, buttonColour);
+        return new Planet(name, galaxy, solarSystem, dimension, orbitDimension, parentWorld, rocketTier, gravity, daysInYear, temperature, hasOxygen, atmosphereStart, buttonColour);
     }
 }

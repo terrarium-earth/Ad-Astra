@@ -9,6 +9,7 @@ import com.github.alexnijjar.beyond_earth.data.Planet;
 import com.github.alexnijjar.beyond_earth.util.ColourHolder;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
+import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.fabricmc.api.EnvType;
@@ -29,6 +30,8 @@ public class PlanetSelectionButton extends ButtonWidget {
     public static final Identifier LARGE_BUTTON_TEXTURE = new ModIdentifier("textures/buttons/large_button.png");
     public static final Identifier BUTTON_TEXTURE = new ModIdentifier("textures/buttons/button.png");
     public static final Identifier SMALL_BUTTON_TEXTURE = new ModIdentifier("textures/buttons/small_button.png");
+
+    public static final Identifier WHITE_TEXTURE = new ModIdentifier("textures/white.png");
 
     private int startY;
     private Text label;
@@ -73,18 +76,29 @@ public class PlanetSelectionButton extends ButtonWidget {
 
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        if (this.visible && this.y < 269 && this.y > 160) {
-            MinecraftClient client = MinecraftClient.getInstance();
 
-            RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        if (this.visible) {
+
+            MinecraftClient client = MinecraftClient.getInstance();
+            int scale = (int) client.getWindow().getScaleFactor();
+            int screenY = client.getWindow().getScaledHeight();
+            int maxY = ((screenY / 2) - 167 / 2) * scale;
 
             ColourHolder lightColour = this.buttonColourLightened;
             ColourHolder color = this.buttonColour;
-            Boolean over = this.isMouseOver(mouseX, mouseY);
-            RenderSystem.setShaderColor((over ? lightColour.r() : color.r()), (over ? lightColour.g() : color.g()), (over ? lightColour.b() : color.b()), 1.0f);
+            boolean over = this.isMouseOver(mouseX, mouseY);
+
+            RenderSystem.enableBlend();
+            RenderSystem.setShader(GameRenderer::getPositionTexShader);
             RenderSystem.enableDepthTest();
 
-            // button texture.
+            // Render mask.
+            RenderSystem.assertOnRenderThread();
+            GlStateManager._enableScissorTest();
+            RenderSystem.assertOnRenderThread();
+            GlStateManager._scissorBox(0, maxY, 215 * scale, 127 * scale);
+
+            RenderSystem.setShaderColor((over ? lightColour.r() : color.r()), (over ? lightColour.g() : color.g()), (over ? lightColour.b() : color.b()), 1.0f);
             RenderSystem.setShaderTexture(0, switch (this.buttonSize) {
             case LARGE -> LARGE_BUTTON_TEXTURE;
             case NORMAL -> BUTTON_TEXTURE;
@@ -92,10 +106,10 @@ public class PlanetSelectionButton extends ButtonWidget {
             });
 
             drawTexture(matrices, this.x, this.y, 0, 0, this.width, this.height, buttonSize.getWidth(), buttonSize.getHeight());
+            drawText(matrices, client);
 
-            TextRenderer textRenderer = client.textRenderer;
-            int colour = this.active ? 16777215 : 10526880;
-            drawCenteredText(matrices, textRenderer, this.getMessage(), this.x + this.width / 2, this.y + (this.height - 8) / 2, colour | MathHelper.ceil(this.alpha * 255.0f) << 24);
+            RenderSystem.assertOnRenderThread();
+            GlStateManager._disableScissorTest();
 
             if (this.isMouseOver(mouseX, mouseY)) {
                 renderTooltips(matrices, mouseX, mouseY, client);
@@ -103,6 +117,12 @@ public class PlanetSelectionButton extends ButtonWidget {
 
             RenderSystem.disableDepthTest();
         }
+    }
+
+    public void drawText(MatrixStack matrices, MinecraftClient client) {
+        TextRenderer textRenderer = client.textRenderer;
+        int colour = this.active ? 16777215 : 10526880;
+        drawCenteredText(matrices, textRenderer, this.getMessage(), this.x + this.width / 2, this.y + (this.height - 8) / 2, colour | MathHelper.ceil(this.alpha * 255.0f) << 24);
     }
 
     public int getStartY() {
@@ -127,7 +147,7 @@ public class PlanetSelectionButton extends ButtonWidget {
             textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.PROVIDED_TEXT.getString() + ": \u00A7b" + "Tier " + planetInfo.rocketTier() + " Rocket"));
         }
         case PLANET -> {
-            textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.TYPE_TEXT.getString() + ": \u00A73" + (planetInfo.parentDimension() == null ? PlanetSelectionScreen.PLANET_TEXT.getString() : PlanetSelectionScreen.MOON_TEXT.getString())));
+            textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.TYPE_TEXT.getString() + ": \u00A73" + (planetInfo.parentWorld() == null ? PlanetSelectionScreen.PLANET_TEXT.getString() : PlanetSelectionScreen.MOON_TEXT.getString())));
             textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.GRAVITY_TEXT.getString() + ": \u00A73" + planetInfo.gravity() + " m/s"));
             textEntries
                     .add(Text.of("\u00A79" + PlanetSelectionScreen.OXYGEN_TEXT.getString() + ": \u00A7" + (planetInfo.hasOxygen() ? ('a' + PlanetSelectionScreen.OXYGEN_TRUE_TEXT.getString()) : ('c' + PlanetSelectionScreen.OXYGEN_FALSE_TEXT.getString()))));

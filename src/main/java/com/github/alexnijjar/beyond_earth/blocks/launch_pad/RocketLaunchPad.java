@@ -1,13 +1,5 @@
 package com.github.alexnijjar.beyond_earth.blocks.launch_pad;
 
-import java.util.List;
-
-import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntity;
-import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier1;
-import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier2;
-import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier3;
-import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier4;
-import com.github.alexnijjar.beyond_earth.items.vehicles.RocketItem;
 import com.github.alexnijjar.beyond_earth.registry.ModBlockEntities;
 
 import org.jetbrains.annotations.Nullable;
@@ -21,21 +13,12 @@ import net.minecraft.block.Waterloggable;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.item.ItemStack;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
@@ -106,58 +89,5 @@ public class RocketLaunchPad extends BlockWithEntity implements Waterloggable {
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new RocketLaunchPadEntity(pos, state);
-    }
-
-    @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (!world.isClient) {
-
-            if (state.get(STAGE).equals(true)) {
-                if (world.getBlockEntity(pos) instanceof RocketLaunchPadEntity launchPadEntity) {
-                    ItemStack currentStack = player.getStackInHand(hand);
-                    if (currentStack.getItem() instanceof RocketItem<?> rocket) {
-
-                        RocketEntity rocketEntity = null;
-
-                        int tier = rocket.getTier();
-                        switch (tier) {
-                        case 1 -> {
-                            rocketEntity = new RocketEntityTier1(rocket.getRocketEntity(), world);
-                        }
-                        case 2 -> {
-                            rocketEntity = new RocketEntityTier2(rocket.getRocketEntity(), world);
-                        }
-                        case 3 -> {
-                            rocketEntity = new RocketEntityTier3(rocket.getRocketEntity(), world);
-                        }
-                        case 4 -> {
-                            rocketEntity = new RocketEntityTier4(rocket.getRocketEntity(), world);
-                        }
-                        }
-
-                        if (rocketEntity != null) {
-
-                            // Check if a rocket is already placed on the pad.
-                            Box scanAbove = new Box(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
-                            List<RocketEntity> entities = ((ServerWorld) world).getEntitiesByClass(RocketEntity.class, scanAbove, entity -> true);
-                            if (!entities.isEmpty()) {
-                                return ActionResult.PASS;
-                            }
-
-                            rocketEntity.setHomeLaunchPad(pos);
-                            currentStack.decrement(1);
-                            world.playSound(null, pos, SoundEvents.BLOCK_NETHERITE_BLOCK_PLACE, SoundCategory.BLOCKS, 1, 1);
-
-                            rocketEntity.setPosition(pos.getX() + 0.5f, pos.getY(), pos.getZ() + 0.5f);
-                            rocketEntity.setYaw(Math.round(player.getYaw() / 90) * 90);
-                            world.spawnEntity(rocketEntity);
-
-                            return ActionResult.SUCCESS;
-                        }
-                    }
-                }
-            }
-        }
-        return ActionResult.PASS;
     }
 }

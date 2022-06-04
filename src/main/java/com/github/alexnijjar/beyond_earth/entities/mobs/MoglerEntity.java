@@ -10,6 +10,8 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.HoglinEntity;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.passive.PassiveEntity;
@@ -53,5 +55,13 @@ public class MoglerEntity extends HoglinEntity implements ModEntity {
         }
 
         return super.canSpawn(world, spawnReason);
+    }
+
+    @Override
+    protected void zombify(ServerWorld world) {
+        ZombifiedMoglerEntity zombifiedMoglerEntity = this.convertTo(ModEntities.ZOMBIFIED_MOGLER, true);
+        if (zombifiedMoglerEntity != null) {
+            zombifiedMoglerEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 200, 0));
+        }
     }
 }

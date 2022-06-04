@@ -1,12 +1,6 @@
 {
-  "parent": "block/cube",
+  "parent": "block/cube_all",
   "textures": {
-    "down": "beyond_earth:blocks/glacio_lapis_ore",
-    "up": "beyond_earth:blocks/glacio_lapis_ore",
-    "north": "beyond_earth:blocks/glacio_lapis_ore",
-    "east": "beyond_earth:blocks/glacio_lapis_ore",
-    "south": "beyond_earth:blocks/glacio_lapis_ore",
-    "west": "beyond_earth:blocks/glacio_lapis_ore",
-    "particle": "beyond_earth:blocks/glacio_lapis_ore"
+    "all": "beyond_earth:blocks/glacio_lapis_ore"
   }
 }

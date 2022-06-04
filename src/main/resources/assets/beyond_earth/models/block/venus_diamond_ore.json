@@ -1,12 +1,6 @@
 {
-  "parent": "block/cube",
+  "parent": "block/cube_all",
   "textures": {
-    "down": "beyond_earth:blocks/venus_diamond_ore",
-    "up": "beyond_earth:blocks/venus_diamond_ore",
-    "north": "beyond_earth:blocks/venus_diamond_ore",
-    "east": "beyond_earth:blocks/venus_diamond_ore",
-    "south": "beyond_earth:blocks/venus_diamond_ore",
-    "west": "beyond_earth:blocks/venus_diamond_ore",
-    "particle": "beyond_earth:blocks/venus_diamond_ore"
+    "all": "beyond_earth:blocks/venus_diamond_ore"
   }
 }

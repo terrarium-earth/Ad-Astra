@@ -1,5 +1,5 @@
 {
-    "dimension": "beyond_earth:moon_orbit",
+    "world": "beyond_earth:moon_orbit",
     "stars": {
         "fancy_count": 13000,
         "fast_count": 6000,

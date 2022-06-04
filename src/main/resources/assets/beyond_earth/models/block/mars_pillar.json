@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "beyond_earth:blocks/mars_pillar_top",
+    "up": "beyond_earth:blocks/mars_pillar_top",
+    "north": "beyond_earth:blocks/mars_pillar",
+    "east": "beyond_earth:blocks/mars_pillar",
+    "south": "beyond_earth:blocks/mars_pillar",
+    "west": "beyond_earth:blocks/mars_pillar",
+    "particle": "beyond_earth:blocks/mars_pillar_top"
+  }
+}
