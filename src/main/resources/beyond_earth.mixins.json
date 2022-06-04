@@ -9,6 +9,7 @@
     "coal_torches.CampfireBlockEntityMixin",
     "coal_torches.FireBlockMixin",
     "EntityMixin",
+    "EntityInvoker",
     "gravity.BoatEntityMixin",
     "GeneratorOptionsMixin",
     "gravity.ExperienceBottleEntityMixin",
@@ -18,8 +19,10 @@
     "gravity.PotionEntityMixin",
     "gravity.ThrownEntityMixin",
     "LivingEntityMixin",
+    "PaintingEntityMixin",
+    "PlayerEntityMixin",
     "NoiseChunkGeneratorAccessor",
-    "WorldRendererAccessor"
+    "PiglinSpecificSensorMixin"
   ],
   "client": [
     "client.WorldRendererMixin",
@@ -29,7 +32,9 @@
     "client.CameraMixin",
     "client.EntityRendererMixin",
     "client.GameRendererMixin",
-    "client.PlayerHeldItemFeatureRendererMixin"
+    "client.HeldItemRendererMixin",
+    "client.WorldRendererAccessor",
+    "client.PlayerEntityRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

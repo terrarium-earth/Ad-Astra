@@ -25,15 +25,17 @@ public abstract class GameRendererMixin {
 
         if (client.getCameraEntity() instanceof ClientPlayerEntity player) {
             if (player.getVehicle() instanceof RocketEntity entity) {
-                if (entity.isFlying()) {
-                    info.cancel();
+                if (entity.getPhase() != 3) {
+                    if (entity.isFlying()) {
+                        info.cancel();
 
-                    float f = player.horizontalSpeed - player.prevHorizontalSpeed;
-                    float g = -(player.horizontalSpeed + f * tickDelta);
-                    float h = MathHelper.lerp(tickDelta, 0.075f, -0.075f);
-                    matrices.translate(MathHelper.sin(g * (float) Math.PI) * h * 0.5f, -Math.abs(MathHelper.cos(g * (float) Math.PI) * h), 0.0);
-                    matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(MathHelper.sin(g * (float) Math.PI) * h * 3.0f));
-                    matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(Math.abs(MathHelper.cos(g * (float) Math.PI - 0.2f) * h) * 5.0f));
+                        float f = player.horizontalSpeed - player.prevHorizontalSpeed;
+                        float g = -(player.horizontalSpeed + f * tickDelta);
+                        float h = MathHelper.lerp(tickDelta, 0.075f, -0.075f);
+                        matrices.translate(MathHelper.sin(g * (float) Math.PI) * h * 0.5f, -Math.abs(MathHelper.cos(g * (float) Math.PI) * h), 0.0);
+                        matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(MathHelper.sin(g * (float) Math.PI) * h * 3.0f));
+                        matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(Math.abs(MathHelper.cos(g * (float) Math.PI - 0.2f) * h) * 5.0f));
+                    }
                 }
             }
         }

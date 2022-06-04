@@ -89,6 +89,6 @@ public abstract class VehicleEntityRenderer<T extends VehicleEntity, M extends E
     }
 
     public int getYawOffset() {
-        return 0;
+        return 180;
     }
 }

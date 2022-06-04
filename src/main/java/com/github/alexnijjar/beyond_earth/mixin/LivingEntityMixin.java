@@ -5,7 +5,7 @@ import java.util.Random;
 import com.github.alexnijjar.beyond_earth.entities.mobs.ModEntity;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.VehicleEntity;
 import com.github.alexnijjar.beyond_earth.items.armour.SpaceSuit;
-import com.github.alexnijjar.beyond_earth.registry.ModArmour;
+import com.github.alexnijjar.beyond_earth.registry.ModTags;
 import com.github.alexnijjar.beyond_earth.util.ModDamageSource;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
@@ -23,6 +23,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -43,7 +44,7 @@ public abstract class LivingEntityMixin {
     @ModifyVariable(method = "handleFallDamage", at = @At("HEAD"), ordinal = 1)
     private float handleFallDamage(float damageMultiplier) {
         LivingEntity entity = ((LivingEntity) (Object) this);
-        return damageMultiplier * ModUtils.getPlanetGravity(false, entity.world.getRegistryKey());
+        return damageMultiplier * ModUtils.getPlanetGravity(entity.world);
     }
 
     @Inject(method = "handleFallDamage", at = @At("HEAD"), cancellable = true)
@@ -57,8 +58,27 @@ public abstract class LivingEntityMixin {
             }
         }
 
-        if (fallDistance <= 3 / ModUtils.getPlanetGravity(false, entity.world.getRegistryKey())) {
+        if (fallDistance <= 3 / ModUtils.getPlanetGravity(entity.world)) {
             info.setReturnValue(false);
+        }
+
+        if (entity instanceof PlayerEntity player) {
+            if (ModUtils.hasFullJetSuitSet(player)) {
+                info.setReturnValue(false);
+            }
+        }
+    }
+
+    @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
+    public void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> info) {
+        LivingEntity entity = ((LivingEntity) (Object) this);
+
+        if (source.isFire() || source.equals(DamageSource.HOT_FLOOR)) {
+            if ((entity.isOnFire() || source.equals(DamageSource.HOT_FLOOR))) {
+                if (ModUtils.checkTag(entity, ModTags.FIRE_IMMUNE_TAG)) {
+                    info.setReturnValue(false);
+                }
+            }
         }
     }
 
@@ -67,6 +87,10 @@ public abstract class LivingEntityMixin {
 
         LivingEntity entity = ((LivingEntity) (Object) this);
 
+        if (entity instanceof ArmorStandEntity) {
+            return;
+        }
+
         Entity vehicle = entity.getVehicle();
         boolean isCreative = false;
 
@@ -74,12 +98,16 @@ public abstract class LivingEntityMixin {
             isCreative = player.isCreative();
         }
 
+        if (ModUtils.checkTag(entity, ModTags.FIRE_IMMUNE_TAG)) {
+            return;
+        }
+
         // Venus acid rain.
-        if (entity.isTouchingWaterOrRain() && entity.world.getRegistryKey().equals(ModUtils.VENUS_KEY)) {
+        if (((EntityInvoker) entity).invokeIsBeingRainedOn() && entity.world.getRegistryKey().equals(ModUtils.VENUS_KEY)) {
             boolean affectedByRain = true;
 
             if (vehicle instanceof VehicleEntity vehicleEntity) {
-                affectedByRain = vehicleEntity.fullyConcealsRider();
+                affectedByRain = !vehicleEntity.fullyConcealsRider();
             }
 
             if (affectedByRain && !isCreative) {
@@ -91,6 +119,10 @@ public abstract class LivingEntityMixin {
         }
 
         // All of the living entities in Beyond Earth are aliens so they don't need an oxygen system.
+        if (entity instanceof ModEntity) {
+            return;
+        }
+
         if (!(entity instanceof ModEntity)) {
             World world = entity.world;
             boolean hasOxygen = false;
@@ -105,28 +137,30 @@ public abstract class LivingEntityMixin {
                     if (nbt.contains("Oxygen")) {
                         int oxygen = nbt.getInt("Oxygen");
 
-                        if (oxygen > 0) {
-                            if (!ModUtils.dimensionHasOxygen(false, world) || entity.isSubmergedInWater()) {
-                                if (!isCreative) {
-                                    nbt.putInt("Oxygen", nbt.getInt("Oxygen") - 1);
+                        if (chest.getItem() instanceof SpaceSuit suit) {
+                            if (oxygen > 0) {
+                                if (!ModUtils.worldHasOxygen(world) || entity.isSubmergedInWater()) {
+                                    if (!isCreative) {
+                                        nbt.putInt("Oxygen", nbt.getInt("Oxygen") - 1);
+                                    }
+                                    // Allow the player to breath underwater.
+                                    player.setAir(275);
+                                    hasOxygen = true;
+                                    entity.setFrozenTicks(0);
+                                    hasNetheriteSpaceSuit = ModUtils.hasFullNetheriteSpaceSet(player);
                                 }
-                                // Allow the player to breath underwater.
-                                player.setAir(275);
-                                hasOxygen = true;
-                                hasNetheriteSpaceSuit = ModUtils.hasFullNetheriteSpaceSet(player);
                             }
-                        }
-                        boolean isNetherite = chest.isOf(ModArmour.NETHERITE_SPACE_SUIT);
-                        if (oxygen > SpaceSuit.getMaxOxygen(isNetherite)) {
-                            nbt.putInt("Oxygen", SpaceSuit.getMaxOxygen(isNetherite));
+                            if (oxygen > suit.getMaxOxygen()) {
+                                nbt.putInt("Oxygen", suit.getMaxOxygen());
+                            }
                         }
                     }
                 }
             }
 
             if (!isCreative) {
-                if (!ModUtils.dimensionHasOxygen(false, world)) {
-                    float temperature = ModUtils.getDimensionTemperature(false, world);
+                if (!ModUtils.worldHasOxygen(world)) {
+                    float temperature = ModUtils.getWorldTemperature(world);
                     // Freeze the player in extremely cold temperatures.
                     if (temperature <= -65.0f) {
                         if (!hasOxygen) {

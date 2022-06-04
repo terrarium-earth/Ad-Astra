@@ -37,7 +37,7 @@ public class CoalTorchBlock extends Block {
         if (!world.isClient) {
             ItemStack itemstack = player.getStackInHand(hand);
 
-            if (ModUtils.dimensionHasOxygen(false, world.getRegistryKey())) {
+            if (ModUtils.worldHasOxygen(world)) {
                 if (itemstack.getItem() instanceof FlintAndSteelItem || itemstack.getItem() instanceof FireChargeItem) {
 
                     if (world.getBlockState(pos).getBlock().equals(ModBlocks.COAL_TORCH)) {

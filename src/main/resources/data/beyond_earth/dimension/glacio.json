@@ -1,6 +1,5 @@
 {
   "type": "beyond_earth:glacio",
-  "forge:use_server_seed": true,
   "generator": {
     "type": "beyond_earth:planet_noise",
     "seed": 12345,

@@ -123,7 +123,6 @@ public class PlayerOverlayScreen {
         // Warning screen.
         if (shouldRenderWarning) {
 
-            // System.out.println(",ol");
             matrices.push();
             RenderSystem.enableBlend();
             RenderSystem.setShader(GameRenderer::getPositionTexShader);

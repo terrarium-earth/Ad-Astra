@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import net.minecraft.client.render.entity.model.BipedEntityModel;
+import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -33,10 +34,12 @@ public abstract class BipedEntityModelMixin {
     public void setAnglesTail(LivingEntity livingEntity, float f, float g, float h, float i, float j, CallbackInfo info) {
         BipedEntityModel<PlayerEntity> model = ((BipedEntityModel<PlayerEntity>) (Object) this);
         Item currentItem = livingEntity.getStackInHand(livingEntity.getActiveHand()).getItem();
-        if ((currentItem instanceof RocketItem || currentItem instanceof RoverItem) && !(livingEntity.getVehicle() instanceof RocketEntity) && !(livingEntity.getVehicle() instanceof LanderEntity)) {
-            // Move the arms so that it looks like the player is holding the rocket in the air with both arms.
-            model.rightArm.pitch = -2.8f;
-            model.leftArm.pitch = model.rightArm.pitch;
+        if (!livingEntity.getPose().equals(EntityPose.SWIMMING)) {
+            if ((currentItem instanceof RocketItem || currentItem instanceof RoverItem) && !(livingEntity.getVehicle() instanceof RocketEntity) && !(livingEntity.getVehicle() instanceof LanderEntity)) {
+                // Move the arms so that it looks like the player is holding the rocket in the air with both arms.
+                model.rightArm.pitch = -2.8f;
+                model.leftArm.pitch = model.rightArm.pitch;
+            }
         }
     }
 }

@@ -19,7 +19,7 @@ public class SkyRendererParser {
 
     public static SkyRenderer parse(JsonObject jsonObject) {
 
-        RegistryKey<World> dimension = RegistryKey.of(Registry.WORLD_KEY, new Identifier(jsonObject.get("dimension").getAsString()));
+        RegistryKey<World> dimension = RegistryKey.of(Registry.WORLD_KEY, new Identifier(jsonObject.get("world").getAsString()));
 
         JsonObject starsObject = jsonObject.get("stars").getAsJsonObject();
         int fancyStars = starsObject.get("fancy_count").getAsInt();

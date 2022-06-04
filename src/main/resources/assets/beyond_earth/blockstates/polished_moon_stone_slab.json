@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "beyond_earth:block/polished_moon_stone_slab"
+    },
+    "type=double": {
+      "model": "beyond_earth:block/polished_moon_stone"
+    },
+    "type=top": {
+      "model": "beyond_earth:block/polished_moon_stone_slab_top"
+    }
+  }
+}

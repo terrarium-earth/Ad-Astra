@@ -77,6 +77,14 @@ public class FlagBlock extends BlockWithEntity implements Waterloggable {
         }
     }
 
+    @Override
+    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
+        super.neighborUpdate(state, world, pos, block, fromPos, notify);
+        if (world.getBlockState(pos.down()).isAir()) {
+            world.breakBlock(pos, true);
+        }
+    }
+
     public static VoxelShape boxSimple(double x1, double y1, double z1, double x2, double y2, double z2) {
         Box box = new Box(x1, y1, z1, x2, y2, z2);
         return VoxelShapes.cuboid(box.minX / 16.0d, box.minY / 16.0d, box.minZ / 16.0d, box.maxX / 16.0d, box.maxY / 16.0d, box.maxZ / 16.0d);

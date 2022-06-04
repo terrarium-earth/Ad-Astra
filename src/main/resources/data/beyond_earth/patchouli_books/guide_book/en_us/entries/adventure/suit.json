@@ -15,7 +15,7 @@
         },
         {
             "type": "patchouli:crafting",
-            "recipe": "beyond_earth:space_leggings",
+            "recipe": "beyond_earth:space_pants",
             "recipe2": "beyond_earth:space_boots"
         },
         {

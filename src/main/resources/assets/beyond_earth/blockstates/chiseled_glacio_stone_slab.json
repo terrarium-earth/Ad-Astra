@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "beyond_earth:block/chiseled_glacio_stone_slab"
+    },
+    "type=double": {
+      "model": "beyond_earth:block/chiseled_glacio_stone_bricks"
+    },
+    "type=top": {
+      "model": "beyond_earth:block/chiseled_glacio_stone_slab_top"
+    }
+  }
+}

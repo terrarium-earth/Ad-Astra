@@ -1,16 +1,15 @@
 package com.github.alexnijjar.beyond_earth.networking;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.entities.vehicles.LanderEntity;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntity;
 import com.github.alexnijjar.beyond_earth.registry.ModRecipes;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
+import com.github.alexnijjar.beyond_earth.util.ModKeyBindings;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.entity.Entity.RemovalReason;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -24,21 +23,25 @@ import net.minecraft.world.World;
 
 public class ModC2SPackets {
 
-    public static final Identifier TELEPORT_TO_PLANET_PACKET_ID = new ModIdentifier("teleport_to_planet_packet");
-    public static final Identifier DELETE_SPACE_STATION_ITEMS_PACKET_ID = new ModIdentifier("delete_space_station_item_packet");
-    public static final Identifier CREATE_SPACE_STATION_PACKET_ID = new ModIdentifier("create_space_station_packet");
+    public static final Identifier TELEPORT_TO_PLANET = new ModIdentifier("teleport_to_planet");
+    public static final Identifier DELETE_SPACE_STATION_ITEMS = new ModIdentifier("delete_space_station_item");
+    public static final Identifier CREATE_SPACE_STATION = new ModIdentifier("create_space_station");
 
-    public static final Identifier LAUNCH_ROCKET_PACKET_ID = new ModIdentifier("launch_rocket_packet");
+    public static final Identifier LAUNCH_ROCKET = new ModIdentifier("launch_rocket");
 
-    public static final Identifier START_LANDER_BOOSTERS = new ModIdentifier("start_lander_boosters_packet");
-    public static final Identifier END_LANDER_BOOSTERS = new ModIdentifier("end_lander_boosters_packet");
+    public static final Identifier JUMP_KEY_CHANGED = new ModIdentifier("jump_key_changed");
+    public static final Identifier SPRINT_KEY_CHANGED = new ModIdentifier("sprint_key_changed");
+    public static final Identifier FORWARD_KEY_CHANGED = new ModIdentifier("forward_key_changed");
+    public static final Identifier BACK_KEY_CHANGED = new ModIdentifier("back_key_changed");
+    public static final Identifier LEFT_KEY_CHANGED = new ModIdentifier("left_key_changed");
+    public static final Identifier RIGHT_KEY_CHANGED = new ModIdentifier("right_key_changed");
 
     public static void register() {
 
         // Send planets packet.
         ServerPlayConnectionEvents.JOIN.register((handler, sender, minecraftServer) -> {
             try {
-                sender.sendPacket(ModS2CPackets.DATAPACK_PLANETS_PACKET_ID, createPlanetsDatapackBuf());
+                sender.sendPacket(ModS2CPackets.DATAPACK_PLANETS, createPlanetsDatapackBuf());
             } catch (Exception e) {
                 BeyondEarth.LOGGER.error("Failed to send datapack values to client: " + e);
                 e.printStackTrace();
@@ -46,7 +49,7 @@ public class ModC2SPackets {
         });
 
         // Teleport to a planet.
-        ServerPlayNetworking.registerGlobalReceiver(TELEPORT_TO_PLANET_PACKET_ID, (server, player, handler, buf, responseSender) -> {
+        ServerPlayNetworking.registerGlobalReceiver(TELEPORT_TO_PLANET, (server, player, handler, buf, responseSender) -> {
             RegistryKey<World> targetDimension = RegistryKey.of(Registry.WORLD_KEY, buf.readIdentifier());
 
             // Teleport has to be called on the server thread.
@@ -54,17 +57,13 @@ public class ModC2SPackets {
 
                 @Override
                 public void run() {
-                    // Delete the rocket.
-                    if (player.getVehicle() instanceof RocketEntity rocket) {
-                        rocket.remove(RemovalReason.DISCARDED);
-                    }
                     ModUtils.teleportToWorld(targetDimension, player, true);
                 }
             });
         });
 
         // Delete Space Station items.
-        ServerPlayNetworking.registerGlobalReceiver(DELETE_SPACE_STATION_ITEMS_PACKET_ID, (server, player, handler, buf, responseSender) -> {
+        ServerPlayNetworking.registerGlobalReceiver(DELETE_SPACE_STATION_ITEMS, (server, player, handler, buf, responseSender) -> {
             PlayerInventory inventory = player.getInventory();
 
             ModRecipes.SPACE_STATION_RECIPE.getRecipes(player.world).forEach(recipe -> {
@@ -75,7 +74,7 @@ public class ModC2SPackets {
         });
 
         // Spawn the Space Station in the world.
-        ServerPlayNetworking.registerGlobalReceiver(CREATE_SPACE_STATION_PACKET_ID, (server, player, handler, buf, responseSender) -> {
+        ServerPlayNetworking.registerGlobalReceiver(CREATE_SPACE_STATION, (server, player, handler, buf, responseSender) -> {
             BlockPos spaceStationLocation = new BlockPos(player.getX() - 15.5f, 100, player.getZ() - 15.5f);
             ServerWorld world = server.getWorld(RegistryKey.of(Registry.WORLD_KEY, buf.readIdentifier()));
             // Create the Space Station from the nbt file.
@@ -83,7 +82,7 @@ public class ModC2SPackets {
         });
 
         // Space was pressed while the player was inside of a rocket.
-        ServerPlayNetworking.registerGlobalReceiver(LAUNCH_ROCKET_PACKET_ID, (server, player, handler, buf, responseSender) -> {
+        ServerPlayNetworking.registerGlobalReceiver(LAUNCH_ROCKET, (server, player, handler, buf, responseSender) -> {
             if (player.getVehicle() instanceof RocketEntity rocket) {
                 if (!rocket.isFlying()) {
                     rocket.initiateLaunchSequenceFromServer();
@@ -94,25 +93,34 @@ public class ModC2SPackets {
                 for (ServerPlayerEntity serverPlayer : server.getPlayerManager().getPlayerList()) {
                     PacketByteBuf buffer = PacketByteBufs.create();
                     buffer.writeInt(id);
-                    serverPlayer.networkHandler.sendPacket(responseSender.createPacket(ModS2CPackets.START_ROCKET_PACKET_ID, buffer));
+                    serverPlayer.networkHandler.sendPacket(responseSender.createPacket(ModS2CPackets.START_ROCKET, buffer));
                 }
             }
         });
 
-        // Player pressed space to start boosting the lander.
-        ServerPlayNetworking.registerGlobalReceiver(START_LANDER_BOOSTERS, (server, player, handler, buf, responseSender) -> {
-            if (player.getVehicle() instanceof LanderEntity lander) {
-                lander.isPressingSpace = true;
-            }
+        ServerPlayNetworking.registerGlobalReceiver(JUMP_KEY_CHANGED, (server, player, handler, buf, responseSender) -> {
+            ModKeyBindings.pressedKeyOnServer(buf.readUuid(), "jump", buf.readBoolean());
         });
 
-        // Player let go of space to end boosting the lander.
-        ServerPlayNetworking.registerGlobalReceiver(END_LANDER_BOOSTERS, (server, player, handler, buf, responseSender) -> {
-            if (player.getVehicle() instanceof LanderEntity lander) {
-                lander.isPressingSpace = false;
-            }
+        ServerPlayNetworking.registerGlobalReceiver(SPRINT_KEY_CHANGED, (server, player, handler, buf, responseSender) -> {
+            ModKeyBindings.pressedKeyOnServer(buf.readUuid(), "sprint", buf.readBoolean());
         });
 
+        ServerPlayNetworking.registerGlobalReceiver(FORWARD_KEY_CHANGED, (server, player, handler, buf, responseSender) -> {
+            ModKeyBindings.pressedKeyOnServer(buf.readUuid(), "forward", buf.readBoolean());
+        });
+
+        ServerPlayNetworking.registerGlobalReceiver(BACK_KEY_CHANGED, (server, player, handler, buf, responseSender) -> {
+            ModKeyBindings.pressedKeyOnServer(buf.readUuid(), "back", buf.readBoolean());
+        });
+
+        ServerPlayNetworking.registerGlobalReceiver(LEFT_KEY_CHANGED, (server, player, handler, buf, responseSender) -> {
+            ModKeyBindings.pressedKeyOnServer(buf.readUuid(), "left", buf.readBoolean());
+        });
+
+        ServerPlayNetworking.registerGlobalReceiver(RIGHT_KEY_CHANGED, (server, player, handler, buf, responseSender) -> {
+            ModKeyBindings.pressedKeyOnServer(buf.readUuid(), "right", buf.readBoolean());
+        });
     }
 
     private static PacketByteBuf createPlanetsDatapackBuf() {
@@ -121,9 +129,9 @@ public class ModC2SPackets {
             buf.writeString(planet.name());
             buf.writeIdentifier(planet.galaxy());
             buf.writeIdentifier(planet.solarSystem());
-            buf.writeIdentifier(planet.dimension().getValue());
-            buf.writeIdentifier(planet.orbitDimension().getValue());
-            buf.writeIdentifier(planet.parentDimension() == null ? new Identifier("empty") : planet.parentDimension().getValue());
+            buf.writeIdentifier(planet.world().getValue());
+            buf.writeIdentifier(planet.orbitWorld().getValue());
+            buf.writeIdentifier(planet.parentWorld() == null ? new Identifier("empty") : planet.parentWorld().getValue());
             buf.writeInt(planet.rocketTier());
             buf.writeFloat(planet.gravity());
             buf.writeInt(planet.daysInYear());

@@ -9,13 +9,12 @@ import com.github.alexnijjar.beyond_earth.networking.ModC2SPackets;
 import com.github.alexnijjar.beyond_earth.registry.ModArmour;
 import com.github.alexnijjar.beyond_earth.registry.ModBiomes;
 import com.github.alexnijjar.beyond_earth.registry.ModBlockEntities;
-import com.github.alexnijjar.beyond_earth.registry.ModBlocks;
 import com.github.alexnijjar.beyond_earth.registry.ModCommands;
 import com.github.alexnijjar.beyond_earth.registry.ModEntities;
 import com.github.alexnijjar.beyond_earth.registry.ModFeatures;
 import com.github.alexnijjar.beyond_earth.registry.ModFluids;
-import com.github.alexnijjar.beyond_earth.registry.ModItems;
 import com.github.alexnijjar.beyond_earth.registry.ModOres;
+import com.github.alexnijjar.beyond_earth.registry.ModPaintings;
 import com.github.alexnijjar.beyond_earth.registry.ModParticles;
 import com.github.alexnijjar.beyond_earth.registry.ModRecipes;
 import com.github.alexnijjar.beyond_earth.registry.ModScreenHandlers;
@@ -43,8 +42,6 @@ public class BeyondEarth implements ModInitializer {
     public void onInitialize() {
 
         // Registry.
-        ModItems.register();
-        ModBlocks.register();
         ModBlockEntities.register();
         ModFluids.register();
         ModArmour.register();
@@ -54,6 +51,7 @@ public class BeyondEarth implements ModInitializer {
         ModCommands.register();
         ModSounds.register();
         ModParticles.register();
+        ModPaintings.register();
 
         // Data.
         PlanetData.register();

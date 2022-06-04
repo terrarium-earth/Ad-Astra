@@ -31,11 +31,6 @@ public class RoverEntityRenderer extends VehicleEntityRenderer<RoverEntity, Rove
     }
 
     @Override
-    public int getYawOffset() {
-        return 180;
-    }
-
-    @Override
     public boolean shouldRender(RoverEntity entity, Frustum frustum, double x, double y, double z) {
         return frustum.isVisible(entity.getBoundingBox().expand(4));
     }

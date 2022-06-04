@@ -3,7 +3,7 @@ package com.github.alexnijjar.beyond_earth.client.renderer.sky;
 import java.util.Random;
 
 import com.github.alexnijjar.beyond_earth.client.resource_pack.SkyRenderer;
-import com.github.alexnijjar.beyond_earth.mixin.WorldRendererAccessor;
+import com.github.alexnijjar.beyond_earth.mixin.client.WorldRendererAccessor;
 import com.github.alexnijjar.beyond_earth.world.WorldSeed;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
