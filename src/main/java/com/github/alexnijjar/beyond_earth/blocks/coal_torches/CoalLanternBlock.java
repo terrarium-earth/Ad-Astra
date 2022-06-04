@@ -29,7 +29,7 @@ public class CoalLanternBlock extends LanternBlock {
         if (!world.isClient) {
             ItemStack itemstack = player.getStackInHand(hand);
 
-            if (ModUtils.dimensionHasOxygen(false, world.getRegistryKey())) {
+            if (ModUtils.worldHasOxygen(world)) {
                 if (itemstack.getItem() instanceof FlintAndSteelItem || itemstack.getItem() instanceof FireChargeItem) {
 
                     world.setBlockState(pos, Blocks.LANTERN.getStateWithProperties(state), 3);

@@ -1,7 +1,7 @@
 {
   "temperature": -0.7,
-  "downfall": 0,
-  "precipitation": "none",
+  "downfall": 1,
+  "precipitation": "snow",
   "category": "icy",
   "effects": {
     "sky_color": -3044526,
@@ -35,7 +35,9 @@
       "minecraft:lush_caves_clay",
       "minecraft:lush_caves_vegetation",
       "minecraft:classic_vines_cave_feature",
-      "minecraft:ice_spike"
+      "minecraft:ice_spike",
+      "minecraft:ice_patch",
+      "minecraft:freeze_top_layer"
     ]
   ]
 }

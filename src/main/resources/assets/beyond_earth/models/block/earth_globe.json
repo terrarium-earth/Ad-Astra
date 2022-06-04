@@ -1,12 +1,6 @@
 {
-  "parent": "block/cube",
+  "parent": "block/cube_all",
   "textures": {
-    "down": "beyond_earth:blocks/globes/earth_globe",
-    "up": "beyond_earth:blocks/globes/earth_globe",
-    "north": "beyond_earth:blocks/globes/earth_globe",
-    "east": "beyond_earth:blocks/globes/earth_globe",
-    "south": "beyond_earth:blocks/globes/earth_globe",
-    "west": "beyond_earth:blocks/globes/earth_globe",
-    "particle": "beyond_earth:blocks/globes/earth_globe"
+    "all": "beyond_earth:blocks/globes/earth_globe"
   }
 }

@@ -1,8 +1,8 @@
 {
   "temperature": -0.7,
   "downfall": 1,
-  "precipitation": "none",
-  "category": "none",
+  "precipitation": "snow",
+  "category": "icy",
   "effects": {
     "sky_color": 8756735,
     "fog_color": 12638463,

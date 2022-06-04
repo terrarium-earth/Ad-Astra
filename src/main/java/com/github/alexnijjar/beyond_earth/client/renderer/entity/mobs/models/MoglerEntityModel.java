@@ -1,6 +1,5 @@
 package com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.models;
 
-import com.github.alexnijjar.beyond_earth.entities.mobs.MoglerEntity;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 
 import net.fabricmc.api.EnvType;
@@ -16,10 +15,13 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.mob.HoglinEntity;
+import net.minecraft.entity.mob.ZoglinEntity;
 import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
-public class MoglerEntityModel extends EntityModel<MoglerEntity> {
+public class MoglerEntityModel<T extends Entity> extends EntityModel<T> {
     public static final EntityModelLayer LAYER_LOCATION = new EntityModelLayer(new ModIdentifier("mogler"), "main");
 
     private final ModelPart body;
@@ -39,16 +41,37 @@ public class MoglerEntityModel extends EntityModel<MoglerEntity> {
     }
 
     @Override
-    public void setAngles(MoglerEntity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
-        this.head.yaw = headYaw * ((float) Math.PI / 180.0f);
-        int i = entity.getMovementCooldownTicks();
-        float f = 1.0f - (float) MathHelper.abs(10 - 2 * i) / 10.0f;
-        this.head.pitch = MathHelper.lerp(f, 0.0f, -1.14906584f);
+    public void setAngles(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
 
-        this.leg1.pitch = MathHelper.cos(limbAngle) * 1.2f * limbDistance;
-        this.leg2.pitch = MathHelper.cos(limbAngle + (float) Math.PI) * 1.2f * limbDistance;
-        this.leg3.pitch = this.leg1.pitch;
-        this.leg4.pitch = this.leg2.pitch;
+        HoglinEntity hoglin = null;
+        ZoglinEntity zoglin = null;
+
+        if (entity instanceof HoglinEntity hog) {
+            hoglin = hog;
+        }
+
+        if (entity instanceof ZoglinEntity zog) {
+            zoglin = zog;
+        }
+
+        
+        if (entity instanceof HoglinEntity || entity instanceof ZoglinEntity) {
+            this.head.yaw = headYaw * ((float) Math.PI / 180.0f);
+            int i = 0;
+            if (hoglin != null) {
+                i = hoglin.getMovementCooldownTicks();
+            }
+            else if (zoglin != null) {
+                i = zoglin.getMovementCooldownTicks();
+            }
+            float f = 1.0f - (float) MathHelper.abs(10 - 2 * i) / 10.0f;
+            this.head.pitch = MathHelper.lerp(f, 0.0f, -1.14906584f);
+
+            this.leg1.pitch = MathHelper.cos(limbAngle) * 1.2f * limbDistance;
+            this.leg2.pitch = MathHelper.cos(limbAngle + (float) Math.PI) * 1.2f * limbDistance;
+            this.leg3.pitch = this.leg1.pitch;
+            this.leg4.pitch = this.leg2.pitch;
+        }
     }
 
     @Override

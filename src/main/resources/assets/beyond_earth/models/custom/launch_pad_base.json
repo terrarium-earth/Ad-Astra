@@ -1,6 +1,6 @@
 {
 	"credit": "Made with Blockbench",
-	"parent": "launch_pad",
+	"parent": "beyond_earth:launch_pad",
 	"texture_size": [
 		32,
 		32

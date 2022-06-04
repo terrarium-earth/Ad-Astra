@@ -7,6 +7,9 @@ import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.client.BeyondEarthClient;
 import com.github.alexnijjar.beyond_earth.data.Planet;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.LanderEntity;
+import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntity;
+import com.github.alexnijjar.beyond_earth.entities.vehicles.VehicleEntity;
+import com.github.alexnijjar.beyond_earth.items.armour.JetSuit;
 import com.github.alexnijjar.beyond_earth.items.armour.NetheriteSpaceSuit;
 import com.github.alexnijjar.beyond_earth.items.armour.SpaceSuit;
 import com.github.alexnijjar.beyond_earth.networking.ModS2CPackets;
@@ -18,16 +21,23 @@ import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.Entity.RemovalReason;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.particle.ParticleEffect;
+import net.minecraft.recipe.Ingredient;
+import net.minecraft.recipe.RecipeType;
+import net.minecraft.recipe.SmokingRecipe;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.tag.TagKey;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
@@ -64,8 +74,10 @@ public class ModUtils {
     public static final RegistryKey<World> GLACIO_KEY = RegistryKey.of(Registry.WORLD_KEY, GLACIO);
     public static final RegistryKey<World> GLACIO_ORBIT_KEY = RegistryKey.of(Registry.WORLD_KEY, GLACIO_ORBIT);
 
+    // Real gravity.
     public static final float ORBIT_TRUE_GRAVITY = 0.0f;
     public static final float ORBIT_TEMPERATURE = -270.0f;
+    // Simulated gravity.
     public static final float ORBIT_GRAVITY = 0.32f;
 
     public static boolean modLoaded(String modId) {
@@ -76,6 +88,7 @@ public class ModUtils {
     public static void teleportToWorld(RegistryKey<World> world, Entity entity, boolean spawnLander) {
         if (entity.getWorld() instanceof ServerWorld entityWorld && entity.canUsePortals()) {
 
+            Entity vehicle = entity.getVehicle();
             Entity landerRider = null;
             if (entity instanceof LanderEntity lander) {
                 landerRider = lander.getFirstPassenger();
@@ -83,7 +96,7 @@ public class ModUtils {
 
             int spawnStart = 450;
             for (Planet planet : BeyondEarth.planets) {
-                if (planet.dimension().equals(world)) {
+                if (planet.world().equals(world)) {
                     spawnStart = planet.atmosphereStart();
                 }
             }
@@ -101,17 +114,22 @@ public class ModUtils {
             if (entity instanceof PlayerEntity player) {
                 PacketByteBuf buf = PacketByteBufs.create();
                 buf.writeBoolean(true);
-                ServerPlayNetworking.send((ServerPlayerEntity) player, ModS2CPackets.PORTAL_SOUND_PACKET_ID, buf);
+                ServerPlayNetworking.send((ServerPlayerEntity) player, ModS2CPackets.PORTAL_SOUND, buf);
 
-                if (spawnLander) {
+                if (vehicle instanceof RocketEntity) {
+                    if (spawnLander) {
 
-                    LanderEntity lander = new LanderEntity(ModEntities.LANDER, targetWorld);
+                        // Delete the rocket.
+                        vehicle.remove(RemovalReason.DISCARDED);
 
-                    lander.setPosition(player.getPos());
-                    targetWorld.spawnEntity(lander);
-                    player.sendMessage(new TranslatableText("message." + BeyondEarth.MOD_ID + ".hold_space"), false);
+                        LanderEntity lander = new LanderEntity(ModEntities.LANDER, targetWorld);
 
-                    player.startRiding(lander);
+                        lander.setPosition(player.getPos());
+                        targetWorld.spawnEntity(lander);
+                        player.sendMessage(new TranslatableText("message." + BeyondEarth.MOD_ID + ".hold_space"), false);
+
+                        player.startRiding(lander);
+                    }
                 }
             }
 
@@ -120,134 +138,109 @@ public class ModUtils {
                 landerRider.startRiding(entity);
             }
 
-            // Cook food.
-            if (entity instanceof ItemEntity item) {
-                ItemStack stack = item.getStack();
-                Item stackItem = stack.getItem();
-                if (stackItem.equals(Items.CHICKEN)) {
-                    item.setStack(new ItemStack(Items.COOKED_CHICKEN, stack.getCount()));
-                } else if (stackItem.equals(Items.BEEF)) {
-                    item.setStack(new ItemStack(Items.COOKED_BEEF, stack.getCount()));
-                } else if (stackItem.equals(Items.PORKCHOP)) {
-                    item.setStack(new ItemStack(Items.COOKED_PORKCHOP, stack.getCount()));
-                } else if (stackItem.equals(Items.MUTTON)) {
-                    item.setStack(new ItemStack(Items.COOKED_MUTTON, stack.getCount()));
-                } else if (stackItem.equals(Items.RABBIT)) {
-                    item.setStack(new ItemStack(Items.COOKED_RABBIT, stack.getCount()));
-                } else if (stackItem.equals(Items.COD)) {
-                    item.setStack(new ItemStack(Items.COOKED_COD, stack.getCount()));
-                } else if (stackItem.equals(Items.SALMON)) {
-                    item.setStack(new ItemStack(Items.COOKED_SALMON, stack.getCount()));
-                }
-            }
+            cookFood(entity);
         }
 
-        if (entity instanceof PlayerEntity && entity.getWorld().isClient)
-
-        {
+        if (entity instanceof PlayerEntity && entity.getWorld().isClient) {
             SoundUtil.setSound(true);
         }
     }
 
-    // Client and server.
-    public static RegistryKey<World> getPlanetOrbit(boolean isClient, RegistryKey<World> world) {
-        if (isSpaceDimension(isClient, world)) {
-            for (Planet planet : (isClient ? BeyondEarthClient.planets : BeyondEarth.planets)) {
-                if (planet.orbitDimension().equals(world)) {
-                    return planet.dimension();
+    public static void cookFood(Entity entity) {
+        if (entity instanceof ItemEntity item) {
+            ItemStack stack = item.getStack();
+            ItemStack foodOutput = null;
+
+            for (SmokingRecipe recipe : entity.getWorld().getRecipeManager().listAllOfType(RecipeType.SMOKING)) {
+                for (Ingredient ingredient : recipe.getIngredients()) {
+                    if (ingredient.test(stack)) {
+                        foodOutput = recipe.getOutput();
+                    }
                 }
             }
-            BeyondEarth.LOGGER.error(world.getValue().toString() + " does not have an orbit world!");
+
+            if (foodOutput != null) {
+                item.setStack(new ItemStack(foodOutput.getItem(), stack.getCount()));
+            }
+        }
+    }
+
+    public static RegistryKey<World> getPlanetOrbit(World world) {
+        if (isSpaceWorld(world)) {
+            for (Planet planet : (world.isClient ? BeyondEarthClient.planets : BeyondEarth.planets)) {
+                if (planet.orbitWorld().equals(world.getRegistryKey())) {
+                    return planet.world();
+                }
+            }
+            BeyondEarth.LOGGER.error(world.getRegistryKey().getValue().toString() + " does not have an orbit world!");
         } else {
-            BeyondEarth.LOGGER.error(world.getValue().toString() + " is not a planet or orbit!");
+            BeyondEarth.LOGGER.error(world.getRegistryKey().getValue().toString() + " is not a planet or orbit!");
         }
         return World.OVERWORLD;
     }
 
-    public static float getPlanetGravity(boolean isClient, RegistryKey<World> world) {
-        for (Planet planet : isClient ? BeyondEarthClient.planets : BeyondEarth.planets) {
-            if (planet.dimension().equals(world)) {
+    public static float getPlanetGravity(World world) {
+        for (Planet planet : world.isClient ? BeyondEarthClient.planets : BeyondEarth.planets) {
+            if (planet.world().equals(world.getRegistryKey())) {
                 return planet.gravity() / VANILLA_GRAVITY;
             }
         }
         // Orbit gravity is 0.25, allowing for slow fall.
-        if (isOrbitDimension(isClient, world)) {
+        if (isOrbitWorld(world)) {
             return ORBIT_GRAVITY;
         }
-        if (isSpaceDimension(isClient, world)) {
-            BeyondEarth.LOGGER.error(world.getValue().toString() + " does not have a defined gravity!");
+        if (isSpaceWorld(world)) {
+            BeyondEarth.LOGGER.error(world.getRegistryKey().getValue().toString() + " does not have a defined gravity!");
         }
         return 1.0f;
     }
 
-    public static final List<RegistryKey<World>> getOrbitDimensions(boolean isClient) {
-        List<RegistryKey<World>> worlds = new LinkedList<>();
-        (isClient ? BeyondEarthClient.planets : BeyondEarth.planets).forEach(planet -> {
-            if (!worlds.contains(planet.orbitDimension()))
-                worlds.add(planet.orbitDimension());
-        });
-        return worlds;
+    public static boolean isOrbitWorld(World world) {
+        return getOrbitWorlds(world.isClient).stream().anyMatch(world.getRegistryKey()::equals);
     }
 
-    public static boolean isOrbitDimension(boolean isClient, RegistryKey<World> world) {
-        return getOrbitDimensions(isClient).stream().anyMatch(world::equals);
+    public static boolean isPlanet(World world) {
+        return getPlanets(world.isClient).stream().anyMatch(world.getRegistryKey()::equals);
     }
 
-    public static final List<RegistryKey<World>> getPlanets(boolean isClient) {
-        List<RegistryKey<World>> worlds = new LinkedList<>();
-        (isClient ? BeyondEarthClient.planets : BeyondEarth.planets).forEach(planet -> worlds.add(planet.dimension()));
-        return worlds;
+    public static boolean isSpaceWorld(World world) {
+        return isPlanet(world) || isOrbitWorld(world);
     }
 
-    public static boolean isPlanet(boolean isClient, RegistryKey<World> world) {
-        return getPlanets(isClient).stream().anyMatch(world::equals);
-    }
-
-    public static boolean isSpaceDimension(boolean isClient, RegistryKey<World> world) {
-        return isPlanet(isClient, world) || isOrbitDimension(isClient, world);
-    }
-
-    public static final List<RegistryKey<World>> getDimensionsWithoutOxygen(boolean isClient) {
-        List<RegistryKey<World>> worlds = new LinkedList<>();
-        (isClient ? BeyondEarthClient.planets : BeyondEarth.planets).forEach(planet -> {
-            if (planet.hasOxygen()) {
-                worlds.add(planet.dimension());
-            }
-        });
-        return worlds;
-    }
-
-    public static final float getDimensionTemperature(boolean isClient, World world) {
-        return getDimensionTemperature(isClient, world.getRegistryKey());
-    }
-
-    public static final float getDimensionTemperature(boolean isClient, RegistryKey<World> world) {
-        for (Planet planet : isClient ? BeyondEarthClient.planets : BeyondEarth.planets) {
-            if (planet.dimension().equals(world)) {
+    public static final float getWorldTemperature(World world) {
+        for (Planet planet : world.isClient ? BeyondEarthClient.planets : BeyondEarth.planets) {
+            if (planet.world().equals(world.getRegistryKey())) {
                 return planet.temperature();
             }
         }
-        if (isOrbitDimension(isClient, world)) {
+        if (isOrbitWorld(world)) {
             return ORBIT_TEMPERATURE;
         }
-        if (isSpaceDimension(isClient, world)) {
-            BeyondEarth.LOGGER.error(world.getValue().toString() + " does not have a defined temperature!");
+        if (isSpaceWorld(world)) {
+            BeyondEarth.LOGGER.error(world.getRegistryKey().getValue().toString() + " does not have a defined temperature!");
         }
         return 20.0f;
     }
 
-    public static boolean dimensionHasOxygen(boolean isClient, World world) {
-        return dimensionHasOxygen(isClient, world.getRegistryKey());
-    }
-
-    public static boolean dimensionHasOxygen(boolean isClient, RegistryKey<World> world) {
-        return getDimensionsWithoutOxygen(isClient).stream().anyMatch(world::equals);
+    public static boolean worldHasOxygen(World world) {
+        // Make all worlds that don't have a defined oxygen, like vanilla and modded dimensions have oxygen.
+        boolean worldIsDefinedInDataPack = false;
+        for (Planet planet : world.isClient ? BeyondEarthClient.planets : BeyondEarth.planets) {
+            if (planet.world().equals(world.getRegistryKey())) {
+                worldIsDefinedInDataPack = true;
+                break;
+            }
+        }
+        if (!worldIsDefinedInDataPack) {
+            return true;
+        }
+        return getWorldsWithoutOxygen(world.isClient).stream().anyMatch(world.getRegistryKey()::equals);
     }
 
     // Mixin Util.
     public static double getMixinGravity(double value, Object mixin) {
         Entity entity = (Entity) mixin;
-        return value * getPlanetGravity(false, entity.world.getRegistryKey());
+        return value * getPlanetGravity(entity.world);
     }
 
     public static float getMixinGravity(float value, Object mixin) {
@@ -266,21 +259,75 @@ public class ModUtils {
         return false;
     }
 
-    public static boolean hasFullSpaceSet(PlayerEntity player) {
-        for (int i = 0; i < 4; i++) {
-            if (!(player.getInventory().getArmorStack(i).getItem() instanceof SpaceSuit)) {
+    public static boolean hasFullSpaceSet(LivingEntity entity) {
+        for (ItemStack armourItem : entity.getArmorItems()) {
+            if (!(armourItem.getItem() instanceof SpaceSuit)) {
                 return false;
             }
         }
         return true;
     }
 
-    public static boolean hasFullNetheriteSpaceSet(PlayerEntity player) {
-        for (int i = 0; i < 4; i++) {
-            if (!(player.getInventory().getArmorStack(i).getItem() instanceof NetheriteSpaceSuit)) {
+    public static boolean hasFullNetheriteSpaceSet(LivingEntity entity) {
+        for (ItemStack armourItem : entity.getArmorItems()) {
+            if (!(armourItem.getItem() instanceof NetheriteSpaceSuit)) {
                 return false;
             }
         }
         return true;
+    }
+
+    public static boolean hasFullJetSuitSet(LivingEntity entity) {
+        for (ItemStack armourItem : entity.getArmorItems()) {
+            if (!(armourItem.getItem() instanceof JetSuit)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean checkTag(Entity entity, TagKey<EntityType<?>> tag) {
+        return entity.getType().isIn(tag);
+    }
+
+    public static boolean checkTag(ItemStack stack, TagKey<Item> tag) {
+        return stack.isIn(tag);
+    }
+
+    public static <T extends ParticleEffect> void spawnForcedParticles(ServerWorld world, T particle, double x, double y, double z, int count, double deltaX, double deltaY, double deltaZ, double speed) {
+        for (ServerPlayerEntity player : world.getPlayers()) {
+            world.spawnParticles(player, particle, true, x, y, z, count, deltaX, deltaY, deltaZ, speed);
+        }
+    }
+
+    private static final List<RegistryKey<World>> getOrbitWorlds(boolean isClient) {
+        List<RegistryKey<World>> worlds = new LinkedList<>();
+        (isClient ? BeyondEarthClient.planets : BeyondEarth.planets).forEach(planet -> {
+            if (!worlds.contains(planet.orbitWorld()))
+                worlds.add(planet.orbitWorld());
+        });
+        return worlds;
+    }
+
+    private static final List<RegistryKey<World>> getPlanets(boolean isClient) {
+        List<RegistryKey<World>> worlds = new LinkedList<>();
+        (isClient ? BeyondEarthClient.planets : BeyondEarth.planets).forEach(planet -> worlds.add(planet.world()));
+        return worlds;
+    }
+
+    private static final List<RegistryKey<World>> getWorldsWithoutOxygen(boolean isClient) {
+        List<RegistryKey<World>> worlds = new LinkedList<>();
+        (isClient ? BeyondEarthClient.planets : BeyondEarth.planets).forEach(planet -> {
+            if (planet.hasOxygen()) {
+                worlds.add(planet.world());
+            }
+        });
+        return worlds;
+    }
+
+    public static void rotateVehicleYaw(VehicleEntity vehicle, float newYaw) {
+        vehicle.setYaw(newYaw);
+        vehicle.setBodyYaw(newYaw);
+        vehicle.prevYaw = newYaw;
     }
 }

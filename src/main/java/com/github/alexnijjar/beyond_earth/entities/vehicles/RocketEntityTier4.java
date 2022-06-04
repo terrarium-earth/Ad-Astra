@@ -2,10 +2,12 @@ package com.github.alexnijjar.beyond_earth.entities.vehicles;
 
 import com.github.alexnijjar.beyond_earth.registry.ModItems;
 import com.github.alexnijjar.beyond_earth.registry.ModParticles;
+import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
@@ -36,21 +38,14 @@ public class RocketEntityTier4 extends RocketEntity {
         if (this.world instanceof ServerWorld serverWorld) {
             Vec3d pos = this.getPos();
 
-            int particleX = switch ((int) this.getYaw()) {
-            case 0, 360 -> 1;
-            case 90 -> 0;
-            case -90 -> 0;
-            case -180, 180 -> 1;
-            default -> 0;
-            };
+            float xRotator = MathHelper.cos((float) (this.getY() * (Math.PI / 180f))) * (0.7f + 0.21f);
+            float zRotator = MathHelper.sin((float) (this.getY() * (Math.PI / 180f))) * (0.7f + 0.21f);
 
-            int particleZ = particleX == 1 ? 0 : 1;
+            ModUtils.spawnForcedParticles(serverWorld, ModParticles.SMALL_FLAME, pos.getX() + xRotator, pos.getY() + 0.35, pos.getZ() + zRotator, 20, 0.1, 0.1, 0.1, 0.001);
+            ModUtils.spawnForcedParticles(serverWorld, ModParticles.SMALL_SMOKE, pos.getX() + xRotator, pos.getY() + 0.35, pos.getZ() + zRotator, 10, 0.1, 0.1, 0.1, 0.001);
 
-            serverWorld.spawnParticles(ModParticles.SMALL_FLAME, pos.getX() + particleX, pos.getY(), pos.getZ() + particleZ, 20, 0.1, 0.1, 0.1, 0.001);
-            serverWorld.spawnParticles(ModParticles.SMALL_SMOKE, pos.getX() + particleX, pos.getY(), pos.getZ() + particleZ, 10, 0.1, 0.1, 0.1, 0.04);
-
-            serverWorld.spawnParticles(ModParticles.SMALL_FLAME, pos.getX() - particleX, pos.getY(), pos.getZ() - particleZ, 20, 0.1, 0.1, 0.1, 0.001);
-            serverWorld.spawnParticles(ModParticles.SMALL_SMOKE, pos.getX() - particleX, pos.getY(), pos.getZ() - particleZ, 10, 0.1, 0.1, 0.1, 0.04);
+            ModUtils.spawnForcedParticles(serverWorld, ModParticles.SMALL_FLAME, pos.getX() - xRotator, pos.getY() + 0.35, pos.getZ() - zRotator, 20, 0.1, 0.1, 0.1, 0.001);
+            ModUtils.spawnForcedParticles(serverWorld, ModParticles.SMALL_SMOKE, pos.getX() - xRotator, pos.getY() + 0.35, pos.getZ() - zRotator, 10, 0.1, 0.1, 0.1, 0.001);
         }
     }
 }

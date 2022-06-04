@@ -11,11 +11,11 @@ import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
-public class MoglerEntityRenderer extends MobEntityRenderer<MoglerEntity, MoglerEntityModel> {
-    public static final Identifier TEXTURE = new ModIdentifier("textures/entities/mogler_entity.png");
+public class MoglerEntityRenderer extends MobEntityRenderer<MoglerEntity, MoglerEntityModel<MoglerEntity>> {
+    public static final Identifier TEXTURE = new ModIdentifier("textures/entities/mogler.png");
 
     public MoglerEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, new MoglerEntityModel(context.getPart(MoglerEntityModel.LAYER_LOCATION)), 0.7f);
+        super(context, new MoglerEntityModel<>(context.getPart(MoglerEntityModel.LAYER_LOCATION)), 0.7f);
     }
 
     @Override

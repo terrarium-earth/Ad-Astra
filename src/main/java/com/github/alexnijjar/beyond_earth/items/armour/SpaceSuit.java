@@ -20,9 +20,8 @@ import net.minecraft.world.World;
 public class SpaceSuit extends ArmorItem {
 
     // 1 days of oxygen.
+    public static final int BASE_OXYGEN = 24000;
     public static final int MAX_OXYGEN = 24000;
-    // 2 days oxygen.
-    public static final int MAX_OXYGEN_NETHERITE = 48000;
 
     public SpaceSuit(ArmorMaterial material, EquipmentSlot slot, Item.Settings settings) {
         super(material, slot, settings);
@@ -30,19 +29,20 @@ public class SpaceSuit extends ArmorItem {
 
     @Override
     public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-        if (stack.isOf(ModArmour.SPACE_SUIT) || stack.isOf(ModArmour.NETHERITE_SPACE_SUIT)) {
-            boolean isNetherite = stack.isOf(ModArmour.NETHERITE_SPACE_SUIT);
-            NbtCompound nbt = stack.getNbt();
-            if (nbt.contains("Oxygen")) {
-                int oxygen = nbt.getInt("Oxygen");
-                tooltip.add(new TranslatableText("tooltip.beyond_earth.space_suit", oxygen, getMaxOxygen(isNetherite)).setStyle(Style.EMPTY.withColor(oxygen > 0 ? Formatting.GREEN : Formatting.RED)));
-            } else {
-                tooltip.add(new TranslatableText("tooltip.beyond_earth.space_suit", 0, getMaxOxygen(isNetherite)).setStyle(Style.EMPTY.withColor(Formatting.RED)));
+        if (stack.hasNbt()) {
+            if (stack.isOf(ModArmour.SPACE_SUIT) || stack.isOf(ModArmour.NETHERITE_SPACE_SUIT) || stack.isOf(ModArmour.JET_SUIT)) {
+                NbtCompound nbt = stack.getNbt();
+                if (nbt.contains("Oxygen")) {
+                    int oxygen = nbt.getInt("Oxygen");
+                    tooltip.add(new TranslatableText("tooltip.beyond_earth.space_suit", oxygen, getMaxOxygen()).setStyle(Style.EMPTY.withColor(oxygen > 0 ? Formatting.GREEN : Formatting.RED)));
+                } else {
+                    tooltip.add(new TranslatableText("tooltip.beyond_earth.space_suit", 0, getMaxOxygen()).setStyle(Style.EMPTY.withColor(Formatting.RED)));
+                }
             }
         }
     }
 
-    public static int getMaxOxygen(boolean isNetherite) {
-        return isNetherite ? MAX_OXYGEN_NETHERITE : MAX_OXYGEN;
+    public int getMaxOxygen() {
+        return MAX_OXYGEN;
     }
 }

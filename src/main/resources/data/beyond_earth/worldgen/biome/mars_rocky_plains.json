@@ -1,8 +1,8 @@
 {
-  "temperature": -0.7,
+  "temperature": 0.8,
   "downfall": 0,
   "precipitation": "none",
-  "category": "none",
+  "category": "plains",
   "effects": {
     "sky_color": -3044526,
     "fog_color": -3044526,

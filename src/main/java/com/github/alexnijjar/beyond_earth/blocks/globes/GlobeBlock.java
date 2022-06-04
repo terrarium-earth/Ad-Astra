@@ -143,9 +143,14 @@ public class GlobeBlock extends BlockWithEntity implements Waterloggable {
 
     @Override
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
-
+        super.neighborUpdate(state, world, pos, block, fromPos, notify);
+        
         if (!world.isClient) {
             world.setBlockState(pos, state.with(POWERED, world.isReceivingRedstonePower(pos)));
+        }
+
+        if (world.getBlockState(pos.down()).isAir()) {
+            world.breakBlock(pos, true);
         }
     }
 }

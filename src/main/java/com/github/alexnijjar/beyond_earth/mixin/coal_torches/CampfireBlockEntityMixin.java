@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.CampfireBlock;
 import net.minecraft.block.entity.CampfireBlockEntity;
 import net.minecraft.sound.SoundCategory;
@@ -20,10 +21,12 @@ public class CampfireBlockEntityMixin {
 
     @Inject(at = @At(value = "HEAD"), method = "litServerTick")
     private static void litServerTick(World world, BlockPos pos, BlockState state, CampfireBlockEntity campfire, CallbackInfo info) {
-        // Extinguish the campfire in dimensions with no oxygen.
-        if (!ModUtils.dimensionHasOxygen(false, world.getRegistryKey())) {
-            world.setBlockState(pos, state.with(CampfireBlock.LIT, false), 3);
-            world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1, 1);
+        // Extinguish the campfire in worlds with no oxygen.
+        if (!state.getBlock().equals(Blocks.SOUL_CAMPFIRE)) {
+            if (!ModUtils.worldHasOxygen(world)) {
+                world.setBlockState(pos, state.with(CampfireBlock.LIT, false), 3);
+                world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1, 1);
+            }
         }
     }
 }

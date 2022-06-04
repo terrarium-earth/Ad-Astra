@@ -1,6 +1,6 @@
 package com.github.alexnijjar.beyond_earth.client.renderer.sky.cloud_renderer;
 
-import com.github.alexnijjar.beyond_earth.mixin.WorldRendererAccessor;
+import com.github.alexnijjar.beyond_earth.mixin.client.WorldRendererAccessor;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;

@@ -17,6 +17,14 @@ public abstract class EntityRendererMixin {
 
     @Inject(method = "shouldRender", at = @At("HEAD"), cancellable = true)
     public void shouldRender(Entity entity, Frustum frustum, double x, double y, double z, CallbackInfoReturnable<Boolean> info) {
+        
+        // Make rocket invisible.
+        if (entity instanceof RocketEntity rocket) {
+            if (rocket.getPhase() == 3) {
+                info.setReturnValue(false);
+            }
+        }
+        
         if (entity.getVehicle() instanceof VehicleEntity vehicle) {
             if (!vehicle.shouldRenderPlayer()) {
                 info.setReturnValue(false);
@@ -27,13 +35,6 @@ public abstract class EntityRendererMixin {
                 if (rocket.getPhase() == 3) {
                     info.setReturnValue(false);
                 }
-            }
-        }
-
-        // Make rocket invisible.
-        if (entity instanceof RocketEntity rocket) {
-            if (rocket.getPhase() == 3) {
-                info.setReturnValue(false);
             }
         }
     }
