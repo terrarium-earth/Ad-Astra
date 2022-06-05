@@ -68,7 +68,7 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
         }
     };
 
-    public boolean useEnergy() {
+    public boolean usesEnergy() {
         return false;
     }
 
@@ -112,7 +112,7 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
 
     // Send energy to surrounding machines.
     public void energyOut() {
-        if (useEnergy()) {
+        if (usesEnergy()) {
             for (Direction direction : Direction.values()) {
                 EnergyStorageUtil.move(getSideEnergyStorage(direction), EnergyStorage.SIDED.find(world, pos.offset(direction), direction.getOpposite()), Long.MAX_VALUE, null);
             }
@@ -143,7 +143,7 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
         if (getInventorySize() > 0) {
             Inventories.readNbt(nbt, this.inventory);
         }
-        if (useEnergy()) {
+        if (usesEnergy()) {
             this.energyStorage.amount = nbt.getLong("energy");
         }
     }
@@ -154,7 +154,7 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
         if (getInventorySize() > 0) {
             Inventories.writeNbt(nbt, this.inventory);
         }
-        if (useEnergy()) {
+        if (usesEnergy()) {
             nbt.putLong("energy", energyStorage.amount);
         }
     }

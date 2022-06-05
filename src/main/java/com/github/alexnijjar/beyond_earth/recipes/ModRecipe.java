@@ -3,6 +3,8 @@ package com.github.alexnijjar.beyond_earth.recipes;
 import java.util.List;
 import java.util.function.Predicate;
 
+import com.github.alexnijjar.beyond_earth.util.SimpleInventory;
+
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
@@ -64,13 +66,26 @@ public abstract class ModRecipe implements Recipe<Inventory>, Predicate<ItemStac
         return this.stackCounts;
     }
 
+    // Checks if the stack matches the recipe inputs.
     @Override
     public boolean test(ItemStack itemStack) {
-        for (Ingredient input : inputs) {
+        for (Ingredient input : this.inputs) {
             if (input.test(itemStack)) {
                 return true;
             }
         }
         return false;
+    }
+
+    // Tests if everything in the inventory matches the recipe in the correct order.
+    public boolean test(SimpleInventory inventory) {
+
+        for (int i = 0; i < this.inputs.length; i++) {
+            if (!inputs[i].test(inventory.getItems().get(i))) {
+                return false;
+            }
+        }
+        
+        return true;
     }
 }

@@ -25,7 +25,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
-public class MartianRaptorEntity extends HostileEntity implements ModEntity {
+public class MartianRaptorEntity extends HostileEntity {
 
     private int movementCooldownTicks;
 

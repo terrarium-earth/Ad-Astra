@@ -1,6 +1,6 @@
 {
     "name": "Livin' above",
-    "icon": "beyond_earth:textures/jei/space_station_icon.png",
+    "icon": "beyond_earth:textures/rei/space_station_icon.png",
     "category": "beyond_earth:rocket_travel",
     "sortnum": "7",
     "pages": [

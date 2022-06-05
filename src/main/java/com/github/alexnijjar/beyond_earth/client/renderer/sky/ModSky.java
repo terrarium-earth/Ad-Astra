@@ -28,6 +28,7 @@ public class ModSky implements DimensionRenderingRegistry.SkyRenderer {
     private SunsetColour sunsetColour;
     private List<SkyObject> skyObjects;
     private int horizonAngle;
+    private boolean shouldRenderWhileRaining;
 
     @Override
     public void render(WorldRenderContext context) {
@@ -36,7 +37,7 @@ public class ModSky implements DimensionRenderingRegistry.SkyRenderer {
         BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
         MinecraftClient client = MinecraftClient.getInstance();
 
-        if (client.world.isRaining()) {
+        if (shouldRenderWhileRaining && client.world.isRaining()) {
             return;
         }
         // Cancel rendering if the player is in fog, i.e. in lava or powdered snow.
@@ -88,6 +89,10 @@ public class ModSky implements DimensionRenderingRegistry.SkyRenderer {
 
     public void setSkyObjects(List<SkyObject> skyObjects) {
         this.skyObjects = skyObjects;
+    }
+
+    public void disableRenderingWhileRaining(boolean value) {
+        this.shouldRenderWhileRaining = value; 
     }
 
     // Custom pink sunset and sunrise.

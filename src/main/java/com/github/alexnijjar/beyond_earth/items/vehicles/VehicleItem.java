@@ -25,10 +25,11 @@ public abstract class VehicleItem extends Item {
 			if (nbt.contains("Fuel")) {
 				int fuel = nbt.getInt("Fuel");
 				tooltip.add(new TranslatableText("tooltip.beyond_earth.vehicle_fuel", fuel, getMaxFuel()).setStyle(Style.EMPTY.withColor(fuel > 0 ? Formatting.GREEN : Formatting.RED)));
-			} else {
-				tooltip.add(new TranslatableText("tooltip.beyond_earth.vehicle_fuel", 0, getMaxFuel()).setStyle(Style.EMPTY.withColor(Formatting.RED)));
 			}
+		} else {
+			tooltip.add(new TranslatableText("tooltip.beyond_earth.vehicle_fuel", 0, getMaxFuel()).setStyle(Style.EMPTY.withColor(Formatting.RED)));
 		}
+
 	}
 
 	public abstract int getMaxFuel();

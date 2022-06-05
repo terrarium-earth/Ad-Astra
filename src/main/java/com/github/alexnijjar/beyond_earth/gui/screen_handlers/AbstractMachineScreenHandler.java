@@ -9,10 +9,12 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.screen.slot.SlotActionType;
+import net.minecraft.world.World;
 
 public abstract class AbstractMachineScreenHandler extends ScreenHandler {
 
     protected final AbstractMachineBlockEntity blockEntity;
+    protected final World world;
 
     public AbstractMachineScreenHandler(ScreenHandlerType<?> type, int syncId, PlayerInventory inventory, AbstractMachineBlockEntity entity) {
         this(type, syncId, inventory, entity, new Slot[] {});
@@ -22,6 +24,7 @@ public abstract class AbstractMachineScreenHandler extends ScreenHandler {
     public AbstractMachineScreenHandler(ScreenHandlerType<?> type, int syncId, PlayerInventory inventory, AbstractMachineBlockEntity entity, Slot[] slots) {
         super(type, syncId);
         this.blockEntity = entity;
+        this.world = entity.getWorld();
 
         checkSize(inventory, this.blockEntity.getInventorySize());
 

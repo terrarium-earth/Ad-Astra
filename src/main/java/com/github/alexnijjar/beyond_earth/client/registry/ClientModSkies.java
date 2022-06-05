@@ -27,6 +27,7 @@ public class ClientModSkies {
                         sky.setSunsetColour(skyRenderer.sunsetColour());
                         sky.setSkyObjects(skyRenderer.skyObjects());
                         sky.setHorizonAngle(skyRenderer.horizonAngle());
+                        sky.disableRenderingWhileRaining(!skyRenderer.weatherEffects().equals(SkyRenderer.WeatherEffects.NONE));
                         DimensionRenderingRegistry.registerSkyRenderer(skyRenderer.dimension(), sky);
 
                         // Dimension Effects.
