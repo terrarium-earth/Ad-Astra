@@ -53,7 +53,7 @@ public class CompressingRecipe extends CookingRecipe {
         public void write(PacketByteBuf buf, CompressingRecipe recipe) {
             recipe.getInputIngredient().write(buf);
             buf.writeItemStack(recipe.getOutput());
-            buf.writeShort(recipe.cookTime);
+            buf.writeShort(recipe.getCookTime());
         }
     }
 }

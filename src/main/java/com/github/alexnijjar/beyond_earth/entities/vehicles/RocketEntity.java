@@ -39,10 +39,10 @@ public class RocketEntity extends VehicleEntity {
     public static final float ROCKET_MAX_SPEED = 0.85f;
 
     protected static final TrackedData<Boolean> HAS_LAUNCH_PAD = DataTracker.registerData(RocketEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-    private static final TrackedData<Boolean> FLYING = DataTracker.registerData(RocketEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-    private static final TrackedData<Integer> COUNTDOWN_TICKS = DataTracker.registerData(RocketEntity.class, TrackedDataHandlerRegistry.INTEGER);
-    private static final TrackedData<Integer> TIER = DataTracker.registerData(RocketEntity.class, TrackedDataHandlerRegistry.INTEGER);
-    private static final TrackedData<Integer> PHASE = DataTracker.registerData(RocketEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    protected static final TrackedData<Boolean> FLYING = DataTracker.registerData(RocketEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    protected static final TrackedData<Integer> COUNTDOWN_TICKS = DataTracker.registerData(RocketEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    protected static final TrackedData<Integer> TIER = DataTracker.registerData(RocketEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    protected static final TrackedData<Integer> PHASE = DataTracker.registerData(RocketEntity.class, TrackedDataHandlerRegistry.INTEGER);
 
     public RocketEntity(EntityType<?> type, World world, int tier) {
         super(type, world);
@@ -63,6 +63,9 @@ public class RocketEntity extends VehicleEntity {
     public Vec3d updatePassengerForDismount(LivingEntity passenger) {
         int exitDirection = Math.round(passenger.getYaw() / 90) * 90;
         Vec3d pos = passenger.getPos();
+        if (passenger instanceof PlayerEntity player) {
+            player.getAbilities().allowFlying = false;
+        }
 
         // Exit velocity.
         double velocityY = this.getVelocity().getY() * 2.5;
@@ -110,6 +113,7 @@ public class RocketEntity extends VehicleEntity {
             if (ModKeyBindings.rightKeyDown(player)) {
                 ModUtils.rotateVehicleYaw(this, this.getYaw() + 1);
             }
+            player.getAbilities().allowFlying = true;
         }
 
         if (this.getY() >= ATMOSPHERE_LEAVE || this.getFrozenTicks() > 1000) {
@@ -174,6 +178,7 @@ public class RocketEntity extends VehicleEntity {
                     if (this.world instanceof ServerWorld serverWorld) {
                         stopRocketSoundForRider((ServerPlayerEntity) player);
                     }
+                    player.getAbilities().allowFlying = false;
                 }
                 this.setInvisible(true);
                 this.setBoundingBox(Box.from(Vec3d.ZERO));

@@ -90,12 +90,19 @@ public abstract class AbstractMachineBlock extends BlockWithEntity {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof AbstractMachineBlockEntity machineBlock) {
                 if (machineBlock.getInventorySize() > 0) {
+                    if (this.removeOutput()) {
+                        machineBlock.removeStack(machineBlock.getInventorySize() - 1);
+                    }
                     ItemScatterer.spawn(world, pos, machineBlock);
                     world.updateComparators(pos, this);
                 }
             }
             super.onStateReplaced(state, world, pos, newState, moved);
         }
+    }
+
+    public boolean removeOutput() {
+        return false;
     }
 
     @Override

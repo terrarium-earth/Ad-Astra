@@ -8,7 +8,7 @@ import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.ZoglinEntity;
 import net.minecraft.world.World;
 
-public class ZombifiedMoglerEntity extends ZoglinEntity implements ModEntity {
+public class ZombifiedMoglerEntity extends ZoglinEntity {
 
     public static DefaultAttributeContainer.Builder createMobAttributes() {
         return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 40.0).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3f).add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 0.6f)

@@ -62,13 +62,11 @@ public class CompressorBlockEntity extends ProcessingMachineBlockEntity {
         return slot == 1;
     }
 
-    @SuppressWarnings("unused")
     public static void serverTick(World world, BlockPos pos, BlockState state, AbstractMachineBlockEntity blockEntity) {
-        if (blockEntity.useEnergy()) {
+        if (blockEntity.usesEnergy()) {
             CompressorBlockEntity entity = (CompressorBlockEntity) blockEntity;
 
             ItemStack input = entity.getStack(0);
-            ItemStack output = entity.getStack(1);
 
             if (entity.getEnergy() > 0) {
 

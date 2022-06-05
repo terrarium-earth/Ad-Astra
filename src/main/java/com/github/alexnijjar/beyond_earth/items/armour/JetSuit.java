@@ -33,10 +33,16 @@ public class JetSuit extends NetheriteSpaceSuit {
         double speed = 0.5f;
         Vec3d rotationVector = player.getRotationVector().multiply(speed);
 
+        // Don't fly the jetsuit in creative.
+        if (player.getAbilities().flying) {
+            return;
+        }
+        
         if (ModKeyBindings.sprintKeyDown(player)) {
 
             if (!player.isOnGround() && !player.isFallFlying() && !player.isTouchingWater() && !player.hasStatusEffect(StatusEffects.LEVITATION)) {
                 player.startFallFlying();
+                player.getAbilities().allowFlying = true;
             }
             if (player.isFallFlying()) {
                 Vec3d velocity = player.getVelocity();
@@ -50,6 +56,9 @@ public class JetSuit extends NetheriteSpaceSuit {
                 player.setVelocity(player.getVelocity().getX(), 0.25, player.getVelocity().getZ());
             }
             player.stopFallFlying();
+            if (!player.isCreative()) {
+                player.getAbilities().allowFlying = false;
+            }
         }
 
         player.move(MovementType.SELF, player.getVelocity());
@@ -64,8 +73,10 @@ public class JetSuit extends NetheriteSpaceSuit {
             ModUtils.spawnForcedParticles(serverWorld, ParticleTypes.FLAME, pos.getX() + xRotator, pos.getY(), pos.getZ() + zRotator, 1, 0.0, 0.0, 0.0, 0.001);
             ModUtils.spawnForcedParticles(serverWorld, ParticleTypes.FLAME, pos.getX() - xRotator, pos.getY(), pos.getZ() - zRotator, 1, 0.0, 0.0, 0.0, 0.001);
 
-            // ModUtils.spawnForcedParticles(serverWorld, ParticleTypes.FLAME, pos.getX() + xRotator, pos.getY() + zRotator, pos.getZ(), 1, 0, 0, 0, 0.0f);
-            // ModUtils.spawnForcedParticles(serverWorld, ParticleTypes.FLAME, pos.getX() - xRotator, pos.getY() - zRotator, pos.getZ(), 1, 0, 0, 0, 0.0f);
+            // ModUtils.spawnForcedParticles(serverWorld, ParticleTypes.FLAME, pos.getX() + xRotator, pos.getY() + zRotator, pos.getZ(), 1,
+            // 0, 0, 0, 0.0f);
+            // ModUtils.spawnForcedParticles(serverWorld, ParticleTypes.FLAME, pos.getX() - xRotator, pos.getY() - zRotator, pos.getZ(), 1,
+            // 0, 0, 0, 0.0f);
         }
     }
 }

@@ -129,7 +129,9 @@ public class BeyondEarthClient implements ClientModInitializer {
                 BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.FUEL_STILL, ModFluids.FLOWING_FUEL);
                 BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.OIL_STILL, ModFluids.FLOWING_OIL);
 
-                BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), ModBlocks.NASA_WORKBENCH, ModBlocks.WATER_PUMP);
+                BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), ModBlocks.WATER_PUMP);
+                // TODO: Fix Nasa workbench being partly invisible.
+                // BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutoutMipped(), ModBlocks.NASA_WORKBENCH);
         }
 
         // Register after the Resource packs have been loaded.
