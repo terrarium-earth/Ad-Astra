@@ -52,7 +52,7 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity {
     }
 
     public static void serverTick(World world, BlockPos pos, BlockState state, AbstractMachineBlockEntity blockEntity) {
-        if (blockEntity.useEnergy()) {
+        if (blockEntity.usesEnergy()) {
             CoalGeneratorBlockEntity entity = (CoalGeneratorBlockEntity) blockEntity;
 
             ItemStack input = entity.getItems().get(0);

@@ -2,13 +2,6 @@ package com.github.alexnijjar.beyond_earth.mixin;
 
 import java.util.Random;
 
-import com.github.alexnijjar.beyond_earth.entities.mobs.ModEntity;
-import com.github.alexnijjar.beyond_earth.entities.vehicles.VehicleEntity;
-import com.github.alexnijjar.beyond_earth.items.armour.SpaceSuit;
-import com.github.alexnijjar.beyond_earth.registry.ModTags;
-import com.github.alexnijjar.beyond_earth.util.ModDamageSource;
-import com.github.alexnijjar.beyond_earth.util.ModUtils;
-
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
@@ -18,12 +11,17 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import com.github.alexnijjar.beyond_earth.entities.vehicles.VehicleEntity;
+import com.github.alexnijjar.beyond_earth.items.armour.SpaceSuit;
+import com.github.alexnijjar.beyond_earth.registry.ModTags;
+import com.github.alexnijjar.beyond_earth.util.ModDamageSource;
+import com.github.alexnijjar.beyond_earth.util.ModUtils;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -75,7 +73,7 @@ public abstract class LivingEntityMixin {
 
         if (source.isFire() || source.equals(DamageSource.HOT_FLOOR)) {
             if ((entity.isOnFire() || source.equals(DamageSource.HOT_FLOOR))) {
-                if (ModUtils.checkTag(entity, ModTags.FIRE_IMMUNE_TAG)) {
+                if (ModUtils.checkTag(entity, ModTags.FIRE_IMMUNE)) {
                     info.setReturnValue(false);
                 }
             }
@@ -87,10 +85,6 @@ public abstract class LivingEntityMixin {
 
         LivingEntity entity = ((LivingEntity) (Object) this);
 
-        if (entity instanceof ArmorStandEntity) {
-            return;
-        }
-
         Entity vehicle = entity.getVehicle();
         boolean isCreative = false;
 
@@ -98,7 +92,7 @@ public abstract class LivingEntityMixin {
             isCreative = player.isCreative();
         }
 
-        if (ModUtils.checkTag(entity, ModTags.FIRE_IMMUNE_TAG)) {
+        if (ModUtils.checkTag(entity, ModTags.FIRE_IMMUNE)) {
             return;
         }
 
@@ -118,12 +112,7 @@ public abstract class LivingEntityMixin {
             }
         }
 
-        // All of the living entities in Beyond Earth are aliens so they don't need an oxygen system.
-        if (entity instanceof ModEntity) {
-            return;
-        }
-
-        if (!(entity instanceof ModEntity)) {
+        if (!ModUtils.checkTag(entity, ModTags.LIVES_WITHOUT_OXYGEN)) {
             World world = entity.world;
             boolean hasOxygen = false;
             boolean hasNetheriteSpaceSuit = false;

@@ -44,7 +44,7 @@ public class GeneratingRecipe extends CookingRecipe {
         @Override
         public void write(PacketByteBuf buf, GeneratingRecipe recipe) {
             recipe.getInputIngredient().write(buf);
-            buf.writeShort(recipe.cookTime);
+            buf.writeShort(recipe.getCookTime());
         }
     }
 }

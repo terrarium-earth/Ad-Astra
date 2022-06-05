@@ -13,7 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
-public class PygroEntity extends PiglinEntity implements ModEntity {
+public class PygroEntity extends PiglinEntity {
 
     public static DefaultAttributeContainer.Builder createMobAttributes() {
         return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.35).add(EntityAttributes.GENERIC_MAX_HEALTH, 16).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5);

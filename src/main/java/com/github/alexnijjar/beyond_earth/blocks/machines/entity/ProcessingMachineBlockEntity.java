@@ -27,7 +27,7 @@ public abstract class ProcessingMachineBlockEntity extends AbstractMachineBlockE
     }
 
     @Override
-    public boolean useEnergy() {
+    public boolean usesEnergy() {
         return true;
     }
 

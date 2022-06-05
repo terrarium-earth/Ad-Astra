@@ -139,7 +139,8 @@ public class ModItems {
         public static final Item PYGRO_SPAWN_EGG = register("pygro_spawn_egg", new SpawnEggItem(ModEntities.PYGRO, -3381760, -6750208, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
         public static final Item PYGRO_BRUTE_SPAWN_EGG = register("pygro_brute_spawn_egg", new SpawnEggItem(ModEntities.PYGRO_BRUTE, -3381760, -67208, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
         public static final Item MOGLER_SPAWN_EGG = register("mogler_spawn_egg", new SpawnEggItem(ModEntities.MOGLER, -13312, -3407872, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
-        public static final Item ZOMBIFIED_MOGLER_SPAWN_EGG = register("zombified_mogler_spawn_egg", new SpawnEggItem(ModEntities.ZOMBIFIED_MOGLER, -13312, 0xE6E6E6, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
+        public static final Item ZOMBIFIED_MOGLER_SPAWN_EGG = register("zombified_mogler_spawn_egg", new SpawnEggItem(ModEntities.ZOMBIFIED_MOGLER, 12537409, 7988821, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
+        public static final Item ALIEN_WANDERING_TRADER_SPAWN_EGG = register("alien_wandering_trader_spawn_egg", new SpawnEggItem(ModEntities.ALIEN_WANDERING_TRADER, 5993415, 2868874, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
 
         // Vehicles Items.
         public static final Item TIER_1_ROCKET = register("rocket_t1", new RocketItem<RocketEntityTier1>(ModEntities.TIER_1_ROCKET, 1, new FabricItemSettings().maxCount(1)));

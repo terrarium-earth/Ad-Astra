@@ -1,0 +1,79 @@
+{
+	"type": "beyond_earth:nasa_workbench",
+	"ingredients": [
+		{
+			"ingredient": {
+				"item": "beyond_earth:rocket_nose_cone"
+			}
+		},
+		{
+			"ingredient": {
+				"tag": "c:compressed_calorite"
+			}
+		},
+		{
+			"ingredient": {
+				"tag": "c:compressed_calorite"
+			}
+		},
+		{
+			"ingredient": {
+				"tag": "c:compressed_calorite"
+			}
+		},
+		{
+			"ingredient": {
+				"tag": "c:compressed_calorite"
+			}
+		},
+		{
+			"ingredient": {
+				"tag": "c:compressed_calorite"
+			}
+		},
+		{
+			"ingredient": {
+				"tag": "c:compressed_calorite"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "minecraft:bucket"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "beyond_earth:calorite_tank"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "beyond_earth:calorite_tank"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "minecraft:bucket"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "beyond_earth:rocket_fin"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "beyond_earth:calorite_engine"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "beyond_earth:rocket_fin"
+			}
+		}
+	],
+	"output": {
+		"item": "beyond_earth:rocket_t4",
+		"count": 1
+	}
+}

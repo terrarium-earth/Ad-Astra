@@ -36,6 +36,11 @@ public class NasaWorkbenchBlock extends AbstractMachineBlock {
     }
 
     @Override
+    public boolean removeOutput() {
+        return true;
+    }
+
+    @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         Vec3d offset = state.getModelOffset(world, pos);
         return VoxelShapes.union(Block.createCuboidShape(0, 0, 0, 16, 19.2, 16)).offset(offset.getX(), offset.getY(), offset.getZ());

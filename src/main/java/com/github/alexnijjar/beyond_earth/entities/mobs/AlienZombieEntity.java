@@ -30,7 +30,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
-public class AlienZombieEntity extends HostileEntity implements ModEntity, RangedAttackMob {
+public class AlienZombieEntity extends HostileEntity implements RangedAttackMob {
 
     public static DefaultAttributeContainer.Builder createMobAttributes() {
         return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3).add(EntityAttributes.GENERIC_MAX_HEALTH, 20).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3);
@@ -47,8 +47,9 @@ public class AlienZombieEntity extends HostileEntity implements ModEntity, Range
         this.goalSelector.add(3, new WanderAroundGoal(this, 0.8));
         this.goalSelector.add(4, new LookAroundGoal(this));
         this.targetSelector.add(5, new ActiveTargetGoal<>(this, PlayerEntity.class, false));
-        this.targetSelector.add(6, new ActiveTargetGoal<>(this, VillagerEntity.class, false));
-        this.targetSelector.add(7, new ActiveTargetGoal<>(this, GolemEntity.class, false));
+        this.targetSelector.add(7, new ActiveTargetGoal<>(this, VillagerEntity.class, false));
+        this.targetSelector.add(8, new ActiveTargetGoal<>(this, AlienWanderingTraderEntity.class, false));
+        this.targetSelector.add(9, new ActiveTargetGoal<>(this, GolemEntity.class, false));
         this.goalSelector.add(1, new ProjectileAttackGoal(this, 1.25f, 20, 15) {
             @Override
             public boolean shouldContinue() {

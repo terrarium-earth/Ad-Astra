@@ -1,18 +1,25 @@
 package com.github.alexnijjar.beyond_earth.recipes;
 
+import java.util.List;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.util.Identifier;
 
 public abstract class CookingRecipe extends ModRecipe {
 
-    protected ItemStack output;
-    protected short cookTime;
+    private ItemStack output;
+    private short cookTime;
 
     public CookingRecipe(Identifier id, Ingredient input, ItemStack output, short cookTime) {
         super(id, input);
         this.output = output;
         this.cookTime = cookTime;
+    }
+
+    public CookingRecipe(Identifier id, Ingredient[] input, List<Integer> stackCounts, ItemStack output) {
+        super(id, input, stackCounts);
+        this.output = output;
     }
 
     @Override

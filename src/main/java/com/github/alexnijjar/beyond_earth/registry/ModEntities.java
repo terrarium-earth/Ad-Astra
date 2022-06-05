@@ -2,6 +2,7 @@ package com.github.alexnijjar.beyond_earth.registry;
 
 import com.github.alexnijjar.beyond_earth.entities.SpacePaintingEntity;
 import com.github.alexnijjar.beyond_earth.entities.mobs.AlienEntity;
+import com.github.alexnijjar.beyond_earth.entities.mobs.AlienWanderingTraderEntity;
 import com.github.alexnijjar.beyond_earth.entities.mobs.AlienZombieEntity;
 import com.github.alexnijjar.beyond_earth.entities.mobs.MartianRaptorEntity;
 import com.github.alexnijjar.beyond_earth.entities.mobs.MoglerEntity;
@@ -42,6 +43,8 @@ public class ModEntities {
                         FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, MoglerEntity::new).dimensions(EntityDimensions.fixed(1.4f, 1.4f)).build());
         public static final EntityType<ZombifiedMoglerEntity> ZOMBIFIED_MOGLER = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("zombified_mogler"),
                         FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ZombifiedMoglerEntity::new).dimensions(EntityDimensions.fixed(1.4f, 1.4f)).build());
+                        public static final EntityType<AlienWanderingTraderEntity> ALIEN_WANDERING_TRADER = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("alien_wandering_trader"),
+                        FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, AlienWanderingTraderEntity::new).dimensions(EntityDimensions.fixed(0.6f, 1.95f)).build());
 
         // Machines.
         public static final EntityType<RocketEntityTier1> TIER_1_ROCKET = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("rocket_t1"),
@@ -59,7 +62,7 @@ public class ModEntities {
                         FabricEntityTypeBuilder.create(SpawnGroup.MISC, LanderEntity::new).dimensions(EntityDimensions.fixed(1.0f, 2.0f)).fireImmune().build());
 
         public static final EntityType<SpacePaintingEntity> SPACE_PAINTING = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("space_painting"),
-                        FabricEntityTypeBuilder.<SpacePaintingEntity>create(SpawnGroup.MISC, SpacePaintingEntity::new).dimensions(EntityDimensions.fixed(0.5f, 0.5f)).trackRangeChunks(10).trackedUpdateRate(Integer.MAX_VALUE).build());
+                        FabricEntityTypeBuilder.<SpacePaintingEntity>create(SpawnGroup.MISC, SpacePaintingEntity::new).dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
 
         // Projectiles.
         public static final EntityType<IceSpitEntity> ICE_SPIT_ENTITY = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("ice_spit_entity"),
@@ -75,5 +78,6 @@ public class ModEntities {
                 FabricDefaultAttributeRegistry.register(PYGRO_BRUTE, PygroBruteEntity.createMobAttributes());
                 FabricDefaultAttributeRegistry.register(MOGLER, MoglerEntity.createMobAttributes());
                 FabricDefaultAttributeRegistry.register(ZOMBIFIED_MOGLER, ZombifiedMoglerEntity.createMobAttributes());
+                FabricDefaultAttributeRegistry.register(ALIEN_WANDERING_TRADER, AlienEntity.createMobAttributes());
         }
 }

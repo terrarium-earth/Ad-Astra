@@ -1,6 +1,7 @@
 package com.github.alexnijjar.beyond_earth.client.registry;
 
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.AlienEntityRenderer;
+import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.AlienWanderingTraderEntityRenderer;
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.AlienZombieEntityRenderer;
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.MartianRaptorEntityRenderer;
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.MoglerEntityRenderer;
@@ -47,6 +48,7 @@ public class ClientModEntities {
         EntityRendererRegistry.register(ModEntities.PYGRO_BRUTE, PygroEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.MOGLER, MoglerEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.ZOMBIFIED_MOGLER, ZombifiedMoglerEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntities.ALIEN_WANDERING_TRADER, AlienWanderingTraderEntityRenderer::new);
 
         // Machines.
         EntityRendererRegistry.register(ModEntities.TIER_1_ROCKET, RocketEntityRendererTier1::new);

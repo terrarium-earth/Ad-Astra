@@ -1,0 +1,19 @@
+{
+  "replace": false,
+  "values": [
+    "beyond_earth:alien",
+    "beyond_earth:alien_zombie",
+    "beyond_earth:star_crawler",
+    "beyond_earth:martian_raptor",
+    "beyond_earth:pygro",
+    "beyond_earth:pygro_brute",
+    "beyond_earth:mogler",
+    "beyond_earth:zombified_mogler",
+    "beyond_earth:alien_wandering_trader",
+    "minecraft:ender_dragon",
+    "minecraft:wither",
+    "minecraft:skeleton",
+    "minecraft:stray",
+    "minecraft:armor_stand"
+  ]
+}
