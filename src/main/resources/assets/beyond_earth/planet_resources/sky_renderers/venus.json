@@ -1,8 +1,8 @@
 {
     "world": "beyond_earth:venus",
     "stars": {
-        "fancy_count": 2000,
-        "fast_count": 2000,
+        "fancy_count": 3000,
+        "fast_count": 3000,
         "daylight_visible": false
     },
     "sunset_color": "vanilla",

@@ -92,7 +92,7 @@ public class ModSky implements DimensionRenderingRegistry.SkyRenderer {
     }
 
     public void disableRenderingWhileRaining(boolean value) {
-        this.shouldRenderWhileRaining = value; 
+        this.shouldRenderWhileRaining = value;
     }
 
     // Custom pink sunset and sunrise.
