@@ -1,8 +1,8 @@
 {
     "world": "beyond_earth:mars",
     "stars": {
-        "fancy_count": 2000,
-        "fast_count": 2000,
+        "fancy_count": 4000,
+        "fast_count": 4000,
         "daylight_visible": false
     },
     "sunset_color": "mars",
