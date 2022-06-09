@@ -13,7 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 
@@ -34,9 +33,9 @@ public class SpaceSuit extends ArmorItem {
                 NbtCompound nbt = stack.getNbt();
                 if (nbt.contains("Oxygen")) {
                     int oxygen = nbt.getInt("Oxygen");
-                    tooltip.add(new TranslatableText("tooltip.beyond_earth.space_suit", oxygen, getMaxOxygen()).setStyle(Style.EMPTY.withColor(oxygen > 0 ? Formatting.GREEN : Formatting.RED)));
+                    tooltip.add(Text.translatable("tooltip.beyond_earth.space_suit", oxygen, getMaxOxygen()).setStyle(Style.EMPTY.withColor(oxygen > 0 ? Formatting.GREEN : Formatting.RED)));
                 } else {
-                    tooltip.add(new TranslatableText("tooltip.beyond_earth.space_suit", 0, getMaxOxygen()).setStyle(Style.EMPTY.withColor(Formatting.RED)));
+                    tooltip.add(Text.translatable("tooltip.beyond_earth.space_suit", 0, getMaxOxygen()).setStyle(Style.EMPTY.withColor(Formatting.RED)));
                 }
             }
         }

@@ -34,7 +34,7 @@ public abstract class AbstractSpaceSuitModel extends BipedEntityModel<LivingEnti
 
 	@SuppressWarnings("unchecked")
 	public <T extends LivingEntity> AbstractSpaceSuitModel(ModelPart root, BipedEntityModel<T> contextModel, Identifier headTexture, MinecraftClient client) {
-		super(new EntityRendererFactory.Context(client.getEntityRenderDispatcher(), client.getItemRenderer(), client.getResourceManager(), client.getEntityModelLoader(), client.textRenderer).getPart(EntityModelLayers.PLAYER_INNER_ARMOR));
+		super(new EntityRendererFactory.Context(client.getEntityRenderDispatcher(), client.getItemRenderer(), client.getBlockRenderManager(), client.getEntityRenderDispatcher().getHeldItemRenderer(), client.getResourceManager(), client.getEntityModelLoader(), client.textRenderer).getPart(EntityModelLayers.PLAYER_INNER_ARMOR));
 		this.contextModel = contextModel;
 		this.headTexture = headTexture;
 		ModelPart empty = new ModelPart(Collections.EMPTY_LIST, Collections.EMPTY_MAP);

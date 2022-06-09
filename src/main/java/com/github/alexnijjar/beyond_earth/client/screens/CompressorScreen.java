@@ -12,7 +12,6 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
@@ -47,12 +46,12 @@ public class CompressorScreen extends AbstractMachineScreen<CompressorScreenHand
 
         // Energy tooltip.
         if (GuiUtil.isHover(this.getEnergyBounds(), mouseX, mouseY)) {
-            this.renderTooltip(matrices, new TranslatableText("gauge_text.beyond_earth.storage", this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration()), mouseX, mouseY);
+            this.renderTooltip(matrices, Text.translatable("gauge_text.beyond_earth.storage", this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration()), mouseX, mouseY);
         }
 
         // Burn time tooltip.
         if (GuiUtil.isHover(this.getArrowBounds(), mouseX, mouseY)) {
-            this.renderTooltip(matrices, new TranslatableText("gauge.beyond_earth.cook_time", entity.getCookTime(), entity.getCookTimeTotal()), mouseX, mouseY);
+            this.renderTooltip(matrices, Text.translatable("gauge.beyond_earth.cook_time", entity.getCookTime(), entity.getCookTimeTotal()), mouseX, mouseY);
         }
     }
 

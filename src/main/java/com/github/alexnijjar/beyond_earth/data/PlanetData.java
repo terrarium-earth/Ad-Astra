@@ -36,7 +36,7 @@ public class PlanetData {
                 List<Planet> planets = new LinkedList<>();
 
                 // Planets.
-                for (Identifier id : manager.findResources("planet_data/planets", path -> path.endsWith(".json"))) {
+                for (Identifier id : manager.findResources("planet_data/planets", path -> path.getPath().endsWith(".json")).keySet()) {
                     try {
                         for (Resource resource : manager.getAllResources(id)) {
                             InputStreamReader reader = new InputStreamReader(resource.getInputStream());

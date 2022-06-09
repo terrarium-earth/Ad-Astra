@@ -1,4 +1,4 @@
-# Beyond Earth for Minecraft 1.18 (Fabric) #
+# Beyond Earth for Minecraft 1.19 (Fabric) #
 
 **This is a rewrite of Beyond Earth for the Fabric Mod Loader.**
 At the moment, Beyond Earth Fabric is not ready to be played on survival, as many features are still absent.

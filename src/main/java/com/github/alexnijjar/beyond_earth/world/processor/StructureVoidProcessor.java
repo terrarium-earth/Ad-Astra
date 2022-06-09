@@ -1,13 +1,13 @@
 package com.github.alexnijjar.beyond_earth.world.processor;
 
+import org.jetbrains.annotations.Nullable;
+
 import com.github.alexnijjar.beyond_earth.registry.ModStructures;
 import com.mojang.serialization.Codec;
 
-import org.jetbrains.annotations.Nullable;
-
 import net.minecraft.block.Blocks;
-import net.minecraft.structure.Structure;
 import net.minecraft.structure.StructurePlacementData;
+import net.minecraft.structure.StructureTemplate;
 import net.minecraft.structure.processor.StructureProcessor;
 import net.minecraft.structure.processor.StructureProcessorType;
 import net.minecraft.util.math.BlockPos;
@@ -23,7 +23,7 @@ public class StructureVoidProcessor extends StructureProcessor {
 
     @Nullable
     @Override
-    public Structure.StructureBlockInfo process(WorldView world, BlockPos pos, BlockPos pivot, Structure.StructureBlockInfo structureBlockInfo, Structure.StructureBlockInfo structureBlockInfo2, StructurePlacementData data) {
+    public StructureTemplate.StructureBlockInfo process(WorldView world, BlockPos pos, BlockPos pivot, StructureTemplate.StructureBlockInfo structureBlockInfo, StructureTemplate.StructureBlockInfo structureBlockInfo2, StructurePlacementData data) {
         if (structureBlockInfo2.state.getBlock().equals(Blocks.STRUCTURE_VOID)) {
             return null;
         }

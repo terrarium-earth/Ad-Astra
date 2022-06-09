@@ -70,12 +70,12 @@ public interface WorldRendererAccessor {
     @Accessor("field_20795")
     float[] getField_20795();
 
-    @Accessor("field_20793")
-    int getField_20793();
+    @Accessor("rainSoundCounter")
+    int getRainSoundCounter();
 
-    @Accessor("field_20793")
-    void setField_20793(int value);
+    @Accessor("rainSoundCounter")
+    void setRainSoundCounter(int value);
 
     @Invoker("renderClouds")
-    public void invokeRenderClouds(BufferBuilder builder, double x, double y, double z, Vec3d color);
+    public BufferBuilder.BuiltBuffer invokeRenderClouds(BufferBuilder builder, double x, double y, double z, Vec3d color);
 }

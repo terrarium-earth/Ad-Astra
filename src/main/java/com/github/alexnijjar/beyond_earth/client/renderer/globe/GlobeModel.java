@@ -29,7 +29,7 @@ public class GlobeModel extends Model {
         globe = root.getChild("globe");
     }
 
-    public static TexturedModelData createLayer() {
+    public static TexturedModelData getTexturedModelData() {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
 

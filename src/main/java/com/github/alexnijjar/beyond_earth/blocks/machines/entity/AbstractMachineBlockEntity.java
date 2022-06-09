@@ -1,8 +1,8 @@
 package com.github.alexnijjar.beyond_earth.blocks.machines.entity;
 
-import com.github.alexnijjar.beyond_earth.util.SimpleInventory;
-
 import org.jetbrains.annotations.Nullable;
+
+import com.github.alexnijjar.beyond_earth.util.SimpleInventory;
 
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
@@ -22,7 +22,6 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -129,7 +128,7 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
 
     @Override
     public Text getDisplayName() {
-        return new TranslatableText(getCachedState().getBlock().getTranslationKey());
+        return Text.translatable(getCachedState().getBlock().getTranslationKey());
     }
 
     @Override

@@ -1,12 +1,11 @@
 package com.github.alexnijjar.beyond_earth.world.features;
 
-import java.util.Random;
-
 import com.github.alexnijjar.beyond_earth.registry.ModBlocks;
 import com.mojang.serialization.Codec;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.SingleStateFeatureConfig;

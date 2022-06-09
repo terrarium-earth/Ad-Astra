@@ -23,8 +23,8 @@ import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.util.DefaultSkinHelper;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.dynamic.DynamicSerializableUuid;
 
 @Environment(EnvType.CLIENT)
 public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEntity> {
@@ -84,6 +84,6 @@ public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEnt
         if (map.containsKey(MinecraftProfileTexture.Type.SKIN)) {
             return RenderLayer.getEntityTranslucent(minecraftClient.getSkinProvider().loadSkin(map.get(MinecraftProfileTexture.Type.SKIN), MinecraftProfileTexture.Type.SKIN));
         }
-        return RenderLayer.getEntityCutoutNoCull(DefaultSkinHelper.getTexture(PlayerEntity.getUuidFromProfile(profile)));
+        return RenderLayer.getEntityCutoutNoCull(DefaultSkinHelper.getTexture(DynamicSerializableUuid.getUuidFromProfile(profile)));
     }
 }

@@ -2,7 +2,7 @@ package com.github.alexnijjar.beyond_earth.registry;
 
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 
-import net.minecraft.entity.decoration.painting.PaintingMotive;
+import net.minecraft.entity.decoration.painting.PaintingVariant;
 import net.minecraft.util.registry.Registry;
 
 public class ModPaintings {
@@ -24,7 +24,7 @@ public class ModPaintings {
 		register("sun", 80, 80);
 	}
 
-	private static PaintingMotive register(String name, int width, int height) {
-		return Registry.register(Registry.PAINTING_MOTIVE, new ModIdentifier(name), new PaintingMotive(width, height));
+	private static PaintingVariant register(String name, int width, int height) {
+		return Registry.register(Registry.PAINTING_VARIANT, new ModIdentifier(name), new PaintingVariant(width, height));
 	}
 }

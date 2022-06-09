@@ -83,8 +83,7 @@ public class ModCloudRenderer implements DimensionRenderingRegistry.CloudRendere
 
                                 renderer.setCloudsBuffer(new VertexBuffer());
                                 renderer.invokeRenderClouds(bufferBuilder, l, m, n, colour);
-                                bufferBuilder.end();
-                                renderer.getCloudsBuffer().upload(bufferBuilder);
+                                renderer.getCloudsBuffer().upload(bufferBuilder.end());
                         }
 
                         RenderSystem.setShader(GameRenderer::getPositionTexColorNormalShader);
@@ -104,7 +103,7 @@ public class ModCloudRenderer implements DimensionRenderingRegistry.CloudRendere
                                         }
 
                                         Shader shader = RenderSystem.getShader();
-                                        renderer.getCloudsBuffer().setShader(matrices.peek().getPositionMatrix(), context.projectionMatrix(), shader);
+                                        renderer.getCloudsBuffer().draw(matrices.peek().getPositionMatrix(), context.projectionMatrix(), shader);
                                 }
                         }
 

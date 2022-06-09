@@ -14,7 +14,6 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.RegistryKey;
@@ -128,7 +127,7 @@ public class PlayerOverlayScreen {
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
 
             // Flashing.
-            float sine = (float)Math.sin((client.world.getTime() + client.getTickDelta()) / 2.0f);
+            float sine = (float) Math.sin((client.world.getTime() + client.getTickDelta()) / 2.0f);
 
             sine = MathHelper.clamp(sine, 0.0f, 1.0f);
             RenderSystem.setShaderColor(sine, sine, sine, sine);
@@ -140,7 +139,7 @@ public class PlayerOverlayScreen {
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
 
             // Speed text.
-            TranslatableText text = new TranslatableText("message." + BeyondEarth.MOD_ID + ".speed", Math.round(speed * 10.0) / 10.0);
+            Text text = Text.translatable("message." + BeyondEarth.MOD_ID + ".speed", Math.round(speed * 10.0) / 10.0);
             client.textRenderer.drawWithShadow(matrices, text, screenX / 2 - 29, 80, -3407872);
 
             RenderSystem.disableBlend();

@@ -1,17 +1,15 @@
 package com.github.alexnijjar.beyond_earth.mixin.client;
 
-import java.util.Random;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.github.alexnijjar.beyond_earth.client.BeyondEarthClient;
 import com.github.alexnijjar.beyond_earth.client.resource_pack.SkyRenderer;
 import com.github.alexnijjar.beyond_earth.client.resource_pack.SkyRenderer.WeatherEffects;
 import com.github.alexnijjar.beyond_earth.registry.ModParticles;
 import com.github.alexnijjar.beyond_earth.world.SoundUtil;
-
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -21,7 +19,6 @@ import net.minecraft.client.option.ParticlesMode;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.particle.ParticleTypes;
@@ -32,6 +29,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3i;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.Heightmap;
@@ -44,7 +42,7 @@ public abstract class WorldRendererMixin {
 
     // Cancel the portal sound when the player falls out of orbit.
     @Inject(method = "processWorldEvent", at = @At("HEAD"), cancellable = true)
-    public void processWorldEvent(PlayerEntity source, int eventId, BlockPos pos, int data, CallbackInfo info) {
+    public void processWorldEvent(int eventId, BlockPos pos, int data, CallbackInfo info) {
 
         if (SoundUtil.getSound()) {
             // Portal id is 1032.
@@ -69,11 +67,11 @@ public abstract class WorldRendererMixin {
                 if (f <= 0.0f) {
                     return;
                 }
-                Random random = new Random((long) worldRenderer.getTicks() * 312987231);
+                Random random = Random.create((long) worldRenderer.getTicks() * 312987231);
                 ClientWorld worldView = client.world;
                 BlockPos blockPos = new BlockPos(camera.getPos());
                 Vec3i blockPos2 = null;
-                int i = (int) (100.0f * f * f) / (client.options.particles == ParticlesMode.DECREASED ? 2 : 1);
+                int i = (int) (100.0f * f * f) / (client.options.getParticles().getValue().equals(ParticlesMode.DECREASED) ? 2 : 1);
                 for (int j = 0; j < i; ++j) {
                     int k = random.nextInt(21) - 10;
                     int l = random.nextInt(21) - 10;
@@ -82,7 +80,7 @@ public abstract class WorldRendererMixin {
                     if (blockPos3.getY() <= worldView.getBottomY() || blockPos3.getY() > blockPos.getY() + 10 || blockPos3.getY() < blockPos.getY() - 10 || biome.getPrecipitation() != Biome.Precipitation.RAIN || !biome.doesNotSnow(blockPos3))
                         continue;
                     blockPos2 = blockPos3.down();
-                    if (client.options.particles == ParticlesMode.MINIMAL)
+                    if (client.options.getParticles().getValue().equals(ParticlesMode.MINIMAL))
                         break;
                     double d = random.nextDouble();
                     double e = random.nextDouble();
@@ -95,9 +93,9 @@ public abstract class WorldRendererMixin {
                     DefaultParticleType particleEffect = fluidState.isIn(FluidTags.LAVA) || blockState.isOf(Blocks.MAGMA_BLOCK) || CampfireBlock.isLitCampfire(blockState) ? ParticleTypes.SMOKE : ModParticles.VENUS_RAIN;
                     client.world.addParticle(particleEffect, (double) blockPos2.getX() + d, (double) blockPos2.getY() + m, (double) blockPos2.getZ() + e, 0.0, 0.0, 0.0);
                 }
-                worldRenderer.setField_20793(worldRenderer.getField_20793() + 1);
-                if (blockPos2 != null && random.nextInt(3) < worldRenderer.getField_20793()) {
-                    worldRenderer.setField_20793(0);
+                worldRenderer.setRainSoundCounter(worldRenderer.getRainSoundCounter() + 1);
+                if (blockPos2 != null && random.nextInt(3) < worldRenderer.getRainSoundCounter()) {
+                    worldRenderer.setRainSoundCounter(0);
                     if (blockPos2.getY() > blockPos.getY() + 1 && worldView.getTopPosition(Heightmap.Type.MOTION_BLOCKING, blockPos).getY() > MathHelper.floor(blockPos.getY())) {
                         client.world.playSound((BlockPos) blockPos2, SoundEvents.WEATHER_RAIN_ABOVE, SoundCategory.WEATHER, 0.1f, 0.5f, false);
                     } else {

@@ -14,7 +14,6 @@ import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3f;
 
@@ -22,7 +21,7 @@ import net.minecraft.util.math.Vec3f;
 public class PlanetSelectionUtil {
 
     public static Text createText(String text) {
-        return new TranslatableText("gui." + BeyondEarth.MOD_ID + ".planet_selection." + text);
+        return Text.translatable("gui." + BeyondEarth.MOD_ID + ".planet_selection." + text);
     }
 
     public static void addTexture(MatrixStack matrices, int x, int y, int width, int height, Identifier texture) {
@@ -61,8 +60,7 @@ public class PlanetSelectionUtil {
             }
         }
 
-        bufferBuilder.end();
-        BufferRenderer.draw(bufferBuilder);
+        BufferRenderer.drawWithShader(bufferBuilder.end());
 
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
     }

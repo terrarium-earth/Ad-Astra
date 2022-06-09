@@ -38,7 +38,7 @@ import net.minecraft.recipe.SmokingRecipe;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.tag.TagKey;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
@@ -126,7 +126,7 @@ public class ModUtils {
 
                         lander.setPosition(player.getPos());
                         targetWorld.spawnEntity(lander);
-                        player.sendMessage(new TranslatableText("message." + BeyondEarth.MOD_ID + ".hold_space"), false);
+                        player.sendMessage(Text.translatable("message." + BeyondEarth.MOD_ID + ".hold_space"), false);
 
                         player.startRiding(lander);
                     }

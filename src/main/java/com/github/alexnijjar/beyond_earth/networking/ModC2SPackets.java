@@ -78,7 +78,7 @@ public class ModC2SPackets {
             BlockPos spaceStationLocation = new BlockPos(player.getX() - 15.5f, 100, player.getZ() - 15.5f);
             ServerWorld world = server.getWorld(RegistryKey.of(Registry.WORLD_KEY, buf.readIdentifier()));
             // Create the Space Station from the nbt file.
-            world.getStructureManager().getStructureOrBlank(new ModIdentifier("space_station")).place(world, spaceStationLocation, spaceStationLocation, new StructurePlacementData(), world.random, 2);
+            world.getStructureTemplateManager().getTemplateOrBlank(new ModIdentifier("space_station")).place(world, spaceStationLocation, spaceStationLocation, new StructurePlacementData(), world.random, 2);
         });
 
         // Space was pressed while the player was inside of a rocket.

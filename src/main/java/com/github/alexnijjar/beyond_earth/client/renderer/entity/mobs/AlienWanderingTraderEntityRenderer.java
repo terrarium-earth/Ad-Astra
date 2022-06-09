@@ -20,8 +20,8 @@ public class AlienWanderingTraderEntityRenderer extends MobEntityRenderer<AlienW
 
     public AlienWanderingTraderEntityRenderer(EntityRendererFactory.Context context) {
         super(context, new VillagerResemblingModel<>(context.getPart(EntityModelLayers.WANDERING_TRADER)), 0.5f);
-        this.addFeature(new HeadFeatureRenderer<AlienWanderingTraderEntity, VillagerResemblingModel<AlienWanderingTraderEntity>>(this, context.getModelLoader()));
-        this.addFeature(new VillagerHeldItemFeatureRenderer<AlienWanderingTraderEntity, VillagerResemblingModel<AlienWanderingTraderEntity>>(this));
+        this.addFeature(new HeadFeatureRenderer<AlienWanderingTraderEntity, VillagerResemblingModel<AlienWanderingTraderEntity>>(this, context.getModelLoader(), context.getHeldItemRenderer()));
+        this.addFeature(new VillagerHeldItemFeatureRenderer<AlienWanderingTraderEntity, VillagerResemblingModel<AlienWanderingTraderEntity>>(this, context.getHeldItemRenderer()));
     }
 
     @Override

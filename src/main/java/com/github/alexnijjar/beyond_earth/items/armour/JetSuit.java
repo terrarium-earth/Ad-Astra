@@ -64,7 +64,7 @@ public class JetSuit extends NetheriteSpaceSuit {
         player.move(MovementType.SELF, player.getVelocity());
 
         if (world instanceof ServerWorld serverWorld) {
-            Vec3d pos = player.getTrackedPosition();
+            Vec3d pos = player.getPos();
 
             // TODO: redo particles.
             float xRotator = MathHelper.cos((float) (player.getY() * (Math.PI / 180f))) * (0.7f + 0.21f);

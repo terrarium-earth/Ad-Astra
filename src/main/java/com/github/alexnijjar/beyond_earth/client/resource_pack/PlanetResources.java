@@ -42,7 +42,7 @@ public class PlanetResources {
                 List<SolarSystem> solarSystems = new LinkedList<>();
 
                 // Sky Renderers.
-                for (Identifier id : manager.findResources("planet_resources/sky_renderers", path -> path.endsWith(".json"))) {
+                for (Identifier id : manager.findResources("planet_resources/sky_renderers", path -> path.getPath().endsWith(".json")).keySet()) {
                     try {
                         for (Resource resource : manager.getAllResources(id)) {
                             InputStreamReader reader = new InputStreamReader(resource.getInputStream());
@@ -59,7 +59,7 @@ public class PlanetResources {
                 }
 
                 // Solar Systems.
-                for (Identifier id : manager.findResources("planet_resources/solar_systems", path -> path.endsWith(".json"))) {
+                for (Identifier id : manager.findResources("planet_resources/solar_systems", path -> path.getPath().endsWith(".json")).keySet()) {
                     try {
                         for (Resource resource : manager.getAllResources(id)) {
                             InputStreamReader reader = new InputStreamReader(resource.getInputStream());

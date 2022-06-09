@@ -35,7 +35,6 @@ import net.minecraft.item.WallStandingBlockItem;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
@@ -233,13 +232,13 @@ public class ModItems {
         public static final BlockItem SOLAR_PANEL = register("solar_panel", new BlockItem(ModBlocks.SOLAR_PANEL, new Item.Settings().group(ITEM_GROUP_MACHINES)) {
                 @Override
                 public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-                        tooltip.add((new TranslatableText("item.beyond_earth.generator.tooltip", SolarPanelBlockEntity.ENERGY_PER_TICK).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
+                        tooltip.add((Text.translatable("item.beyond_earth.generator.tooltip", SolarPanelBlockEntity.ENERGY_PER_TICK).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
                 }
         });
         public static final BlockItem COAL_GENERATOR = register("coal_generator", new BlockItem(ModBlocks.COAL_GENERATOR, new Item.Settings().group(ITEM_GROUP_MACHINES)) {
                 @Override
                 public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-                        tooltip.add((new TranslatableText("item.beyond_earth.generator.tooltip", CoalGeneratorBlockEntity.ENERGY_PER_TICK).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
+                        tooltip.add((Text.translatable("item.beyond_earth.generator.tooltip", CoalGeneratorBlockEntity.ENERGY_PER_TICK).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
                 }
         });
         public static final BlockItem COMPRESSOR = registerBlockItem(ModBlocks.COMPRESSOR, ITEM_GROUP_MACHINES);
@@ -249,7 +248,7 @@ public class ModItems {
         public static final BlockItem WATER_PUMP = register("water_pump", new BlockItem(ModBlocks.WATER_PUMP, new Item.Settings().group(ITEM_GROUP_MACHINES)) {
                 @Override
                 public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-                        tooltip.add((new TranslatableText("item.beyond_earth.water_pump.tooltip", WaterPumpBlockEntity.TRANSFER_PER_TICK).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
+                        tooltip.add((Text.translatable("item.beyond_earth.water_pump.tooltip", WaterPumpBlockEntity.TRANSFER_PER_TICK).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
                 }
         });
 

@@ -1,7 +1,5 @@
 package com.github.alexnijjar.beyond_earth.client.renderer.sky;
 
-import java.util.Random;
-
 import com.github.alexnijjar.beyond_earth.client.resource_pack.SkyRenderer;
 import com.github.alexnijjar.beyond_earth.mixin.client.WorldRendererAccessor;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
@@ -31,6 +29,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Matrix4f;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.math.random.Random;
 
 @Environment(EnvType.CLIENT)
 public class SkyUtil {
@@ -54,7 +53,7 @@ public class SkyUtil {
         RenderSystem.depthMask(false);
 
         RenderSystem.setShaderColor(f, g, h, 1.0f);
-        ((WorldRendererAccessor) context.worldRenderer()).getLightSkyBuffer().setShader(context.matrixStack().peek().getPositionMatrix(), context.projectionMatrix(), RenderSystem.getShader());
+        ((WorldRendererAccessor) context.worldRenderer()).getLightSkyBuffer().draw(context.matrixStack().peek().getPositionMatrix(), context.projectionMatrix(), RenderSystem.getShader());
 
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
@@ -79,7 +78,7 @@ public class SkyUtil {
             if (cameraPos < 0.0) {
                 matrices.push();
                 matrices.translate(0.0, 12.0, 0.0);
-                ((WorldRendererAccessor) context.worldRenderer()).getDarkSkyBuffer().setShader(context.matrixStack().peek().getPositionMatrix(), context.projectionMatrix(), RenderSystem.getShader());
+                ((WorldRendererAccessor) context.worldRenderer()).getDarkSkyBuffer().draw(context.matrixStack().peek().getPositionMatrix(), context.projectionMatrix(), RenderSystem.getShader());
                 matrices.pop();
             }
         }
@@ -138,8 +137,7 @@ public class SkyUtil {
         bufferBuilder.vertex(positionMatrix, scale, (float) 100.0, -scale).texture(1.0f, 0.0f).next();
         bufferBuilder.vertex(positionMatrix, scale, (float) 100.0, scale).texture(1.0f, 1.0f).next();
         bufferBuilder.vertex(positionMatrix, -scale, (float) 100.0, scale).texture(0.0f, 1.0f).next();
-        bufferBuilder.end();
-        BufferRenderer.draw(bufferBuilder);
+        BufferRenderer.drawWithShader(bufferBuilder.end());
 
         endRendering(context.matrixStack());
     }
@@ -155,8 +153,7 @@ public class SkyUtil {
 
         starsBuffer = new VertexBuffer();
         SkyUtil.renderStars(bufferBuilder, stars);
-        bufferBuilder.end();
-        starsBuffer.upload(bufferBuilder);
+        starsBuffer.upload(bufferBuilder.end());
 
         if (!fixedStarColour) {
             float rot = context.world().method_23787(context.tickDelta());
@@ -166,14 +163,14 @@ public class SkyUtil {
         }
 
         BackgroundRenderer.clearFog();
-        starsBuffer.setShader(context.matrixStack().peek().getPositionMatrix(), RenderSystem.getProjectionMatrix(), GameRenderer.getPositionColorShader());
+        starsBuffer.draw(context.matrixStack().peek().getPositionMatrix(), RenderSystem.getProjectionMatrix(), GameRenderer.getPositionColorShader());
         context.matrixStack().pop();
         return starsBuffer;
     }
 
     private static void renderStars(BufferBuilder buffer, int stars) {
         RenderSystem.setShader(GameRenderer::getPositionColorShader);
-        Random random = new Random(WorldSeed.getSeed());
+        Random random = Random.create(WorldSeed.getSeed());
         float size = random.nextFloat() * (1.1f - 0.5f);
         buffer.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR);
         for (int i = 0; i < stars; ++i) {
@@ -264,8 +261,7 @@ public class SkyUtil {
                 float cosine = MathHelper.cos(o);
                 bufferBuilder.vertex(matrix4f, MathHelper.sin(o) * 120.0f, cosine * 120.0f, -cosine * 40.0f * fogColours[3]).color(fogColours[0], fogColours[1], fogColours[2], 0.0f).next();
             }
-            bufferBuilder.end();
-            BufferRenderer.draw(bufferBuilder);
+            BufferRenderer.drawWithShader(bufferBuilder.end());
             matrices.pop();
         }
     }

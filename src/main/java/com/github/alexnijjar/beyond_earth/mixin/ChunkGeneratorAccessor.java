@@ -11,9 +11,9 @@ import net.minecraft.world.gen.chunk.ChunkGenerator;
 @Mixin(ChunkGenerator.class)
 public interface ChunkGeneratorAccessor {
 
-    @Accessor("field_37053")
+    @Accessor("structureSetRegistry")
     Registry<StructureSet> getStructureSet();
 
-    @Accessor("populationSource")
-    BiomeSource getPopulationSource();
+    @Accessor("biomeSource")
+    BiomeSource getBiomeSource();
 }

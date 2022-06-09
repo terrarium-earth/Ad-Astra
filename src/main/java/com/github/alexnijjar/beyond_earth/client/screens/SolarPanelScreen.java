@@ -8,7 +8,6 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
@@ -28,9 +27,9 @@ public class SolarPanelScreen extends AbstractMachineScreen<SolarPanelScreenHand
         int first = this.titleY;
 
         if (this.blockEntity != null) {
-            this.textRenderer.draw(matrices, new TranslatableText("gauge_text.beyond_earth.stored", this.blockEntity.getEnergy()), first, 28, 0x3C3C3C);
-            this.textRenderer.draw(matrices, new TranslatableText("gauge_text.beyond_earth.capacity", this.blockEntity.getMaxGeneration()), first, 40, 0x3C3C3C);
-            this.textRenderer.draw(matrices, new TranslatableText("gauge_text.beyond_earth.max_generation", this.blockEntity.getEnergyPerTick()), first, 52, 0x3C3C3C);
+            this.textRenderer.draw(matrices, Text.translatable("gauge_text.beyond_earth.stored", this.blockEntity.getEnergy()), first, 28, 0x3C3C3C);
+            this.textRenderer.draw(matrices, Text.translatable("gauge_text.beyond_earth.capacity", this.blockEntity.getMaxGeneration()), first, 40, 0x3C3C3C);
+            this.textRenderer.draw(matrices, Text.translatable("gauge_text.beyond_earth.max_generation", this.blockEntity.getEnergyPerTick()), first, 52, 0x3C3C3C);
         }
     }
 }
