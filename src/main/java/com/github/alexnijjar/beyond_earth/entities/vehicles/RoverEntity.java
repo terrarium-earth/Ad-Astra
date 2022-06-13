@@ -105,6 +105,9 @@ public class RoverEntity extends VehicleEntity {
         }
 
         ModUtils.rotateVehicleYaw(this, this.getYaw() + this.getTurnSpeed());
+        if (this.getFirstPassenger() instanceof PlayerEntity player) {
+            player.setYaw(player.getYaw() + this.getTurnSpeed());
+        }
 
         // Animate wheels.
         this.wheelPitch += this.getSpeed() * 7;

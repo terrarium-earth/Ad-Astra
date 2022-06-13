@@ -63,9 +63,6 @@ public class RocketEntity extends VehicleEntity {
     public Vec3d updatePassengerForDismount(LivingEntity passenger) {
         int exitDirection = Math.round(passenger.getYaw() / 90) * 90;
         Vec3d pos = passenger.getPos();
-        if (passenger instanceof PlayerEntity player) {
-            player.getAbilities().allowFlying = false;
-        }
 
         // Exit velocity.
         double velocityY = this.getVelocity().getY() * 2.5;
@@ -113,7 +110,6 @@ public class RocketEntity extends VehicleEntity {
             if (ModKeyBindings.rightKeyDown(player)) {
                 ModUtils.rotateVehicleYaw(this, this.getYaw() + 1);
             }
-            player.getAbilities().allowFlying = true;
         }
 
         if (this.getY() >= ATMOSPHERE_LEAVE || this.getFrozenTicks() > 1000) {

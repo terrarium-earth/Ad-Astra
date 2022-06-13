@@ -82,8 +82,10 @@ public class ModCloudRenderer implements DimensionRenderingRegistry.CloudRendere
                                 }
 
                                 renderer.setCloudsBuffer(new VertexBuffer());
-                                renderer.invokeRenderClouds(bufferBuilder, l, m, n, colour);
-                                renderer.getCloudsBuffer().upload(bufferBuilder.end());
+                                BufferBuilder.BuiltBuffer builtBuffer = renderer.invokeRenderClouds(bufferBuilder, l, m, n, colour);
+                                renderer.getCloudsBuffer().bind();
+                                renderer.getCloudsBuffer().upload(builtBuffer);
+                                VertexBuffer.unbind();
                         }
 
                         RenderSystem.setShader(GameRenderer::getPositionTexColorNormalShader);
@@ -93,20 +95,18 @@ public class ModCloudRenderer implements DimensionRenderingRegistry.CloudRendere
                         matrices.scale(12.0f, 1.0f, 12.0f);
                         matrices.translate(-o, p, -q);
                         if (renderer.getCloudsBuffer() != null) {
-                                int u = renderer.getLastCloudsRenderMode() == CloudRenderMode.FANCY ? 0 : 1;
-
-                                for (int v = u; v < 2; ++v) {
+                                renderer.getCloudsBuffer().bind();
+                                for (int v = renderer.getLastCloudsRenderMode() == CloudRenderMode.FANCY ? 0 : 1; v < 2; ++v) {
                                         if (v == 0) {
                                                 RenderSystem.colorMask(false, false, false, false);
                                         } else {
                                                 RenderSystem.colorMask(true, true, true, true);
                                         }
-
                                         Shader shader = RenderSystem.getShader();
-                                        renderer.getCloudsBuffer().draw(matrices.peek().getPositionMatrix(), context.projectionMatrix(), shader);
+                                        renderer.getCloudsBuffer().draw(matrices.peek().getPositionMatrix(), RenderSystem.getProjectionMatrix(), shader);
                                 }
+                                VertexBuffer.unbind();
                         }
-
                         matrices.pop();
                         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
                         RenderSystem.enableCull();

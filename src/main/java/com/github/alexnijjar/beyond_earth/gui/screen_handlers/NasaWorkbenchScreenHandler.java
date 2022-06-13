@@ -83,7 +83,7 @@ public class NasaWorkbenchScreenHandler extends AbstractMachineScreenHandler {
         NasaWorkbenchBlockEntity entity = (NasaWorkbenchBlockEntity) blockEntity;
 
         if (slotIndex == 14) {
-            if (!entity.isEmpty()) {
+            if (!entity.getItems().get(14).isEmpty()) {
                 entity.spawnResultParticles();
                 entity.spawnOutputAndClearInput(this.stackCounts, this.output);
             }

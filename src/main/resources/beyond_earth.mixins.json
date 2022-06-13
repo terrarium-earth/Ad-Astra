@@ -9,7 +9,6 @@
     "EntityMixin",
     "GeneratorOptionsMixin",
     "LivingEntityMixin",
-    "PaintingEntityMixin",
     "PaintingEntityInvoker",
     "PiglinSpecificSensorMixin",
     "PlayerEntityMixin",

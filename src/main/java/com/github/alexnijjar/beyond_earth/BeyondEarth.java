@@ -63,6 +63,6 @@ public class BeyondEarth implements ModInitializer {
         // Packets.
         ModC2SPackets.register();
 
-        BeyondEarth.LOGGER.info("Beyond Earth Initialized!");
+        BeyondEarth.LOGGER.info("Beyond Earth Initialized! 🚀");
     }
 }

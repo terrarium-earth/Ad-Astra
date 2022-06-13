@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 public record SkyRenderer(RegistryKey<World> dimension, SkyRenderer.StarsRenderer starsRenderer, SkyRenderer.SunsetColour sunsetColour, SkyRenderer.DimensionEffects effects, SkyRenderer.CloudEffects cloudEffects, SkyRenderer.WeatherEffects weatherEffects,
         int horizonAngle, List<SkyRenderer.SkyObject> skyObjects) {
 
-    public record StarsRenderer(int fancyStars, int fastStars, boolean daylightVisible) {
+    public record StarsRenderer(int fancyStars, int fastStars, boolean colouredStars, boolean daylightVisible) {
     }
 
     public record SkyObject(Identifier texture, boolean blending, RenderType renderType, float scale, Vec3f rotation) {

@@ -9,6 +9,7 @@ import net.minecraft.block.PowderSnowBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
@@ -48,6 +49,7 @@ public class VehicleEntity extends Entity {
         this.syncClient();
     }
 
+
     @Override
     protected void initDataTracker() {
         this.dataTracker.startTracking(SPEED, 0.0f);
@@ -79,6 +81,10 @@ public class VehicleEntity extends Entity {
     @Override
     public void tick() {
         super.tick();
+
+        if (this.getFirstPassenger() instanceof PlayerEntity player) {
+            player.getAbilities().allowFlying = true;
+        }
 
         this.syncClient();
         this.checkBlockCollision();
@@ -137,6 +143,17 @@ public class VehicleEntity extends Entity {
         this.clientPitch = pitch;
     }
 
+    public Vec3d updatePassengerForDismount(LivingEntity passenger) {
+
+        if (passenger instanceof PlayerEntity player) {
+            if (!player.isCreative()) {
+                player.getAbilities().allowFlying = false;
+            }
+        }
+
+        return super.updatePassengerForDismount(passenger);
+    }
+
     public void doGravity() {
         if (!this.hasNoGravity()) {
             double modifier = 1.0;
@@ -155,21 +172,20 @@ public class VehicleEntity extends Entity {
         }
 
         // Slow down the vehicle.
-        
+
         this.setSpeed(this.getSpeed() / 1.1f);
         if (this.getSpeed() < 0.001 && this.getSpeed() > -0.001) {
             this.setSpeed(0.0f);
         }
         this.setSpeed(MathHelper.clamp(this.getSpeed(), -0.1f, 0.2f));
 
-        
         // Move the vehicle.
         BlockPos velocityAffectingPos = this.getVelocityAffectingPos();
         float slipperiness = this.world.getBlockState(velocityAffectingPos).getBlock().getSlipperiness();
         Vec3d movement = this.applyMovementInput(new Vec3d(this.getPitch(), 0, 1), slipperiness);
-        double speedModifier = this.onGround ? slipperiness * 0.80f : 0.80f;
+        double speedModifier = this.onGround ? slipperiness * 1.0f : slipperiness * 0.70f;
         this.setVelocity(movement.getX() * speedModifier, movement.getY() * 0.98, movement.getZ() * speedModifier);
-        
+
         this.move(MovementType.SELF, this.getVelocity());
     }
 
@@ -193,8 +209,10 @@ public class VehicleEntity extends Entity {
     public boolean damage(DamageSource source, float amount) {
         if (amount > 0) {
             if (source.getAttacker() instanceof PlayerEntity player) {
-                this.drop();
-                return true;
+                if (!(player.getVehicle() instanceof VehicleEntity)) {
+                    this.drop();
+                    return true;
+                }
             }
         }
         return false;

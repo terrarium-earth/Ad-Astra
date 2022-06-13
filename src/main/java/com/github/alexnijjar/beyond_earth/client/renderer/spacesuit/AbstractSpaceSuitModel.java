@@ -48,7 +48,7 @@ public abstract class AbstractSpaceSuitModel extends BipedEntityModel<LivingEnti
 
 	@Override
 	public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
-
+		
 		this.handSwingProgress = this.contextModel.handSwingProgress;
 		this.riding = this.contextModel.riding;
 		this.child = this.contextModel.child;
@@ -62,15 +62,30 @@ public abstract class AbstractSpaceSuitModel extends BipedEntityModel<LivingEnti
 		this.rightLeg.copyTransform(this.contextModel.rightLeg);
 		this.leftLeg.copyTransform(this.contextModel.leftLeg);
 
+		matrices.push();
+		if (this.child) {
+			matrices.scale(0.5f, 0.5f, 0.5f);
+			matrices.translate(0, 1.5f, 0);
+		}
+
 		this.body.render(matrices, vertices, light, overlay);
 		this.rightArm.render(matrices, vertices, light, overlay);
 		this.leftArm.render(matrices, vertices, light, overlay);
 		this.rightLeg.render(matrices, vertices, light, overlay);
 		this.leftLeg.render(matrices, vertices, light, overlay);
+		matrices.pop();
+		
+		matrices.push();
+		if (this.child) {
+			matrices.scale(0.8f, 0.8f, 0.8f);
+			matrices.translate(0, 1.0f, 0);
+		}
 
 		MinecraftClient client = MinecraftClient.getInstance();
 		boolean hasEnchantments = client.player.getEquippedStack(EquipmentSlot.HEAD).hasEnchantments();
 		this.head.render(matrices, getVertex(RenderLayer.getEntityTranslucent(getTexture()), hasEnchantments, client), light, overlay);
+		matrices.pop();
+
 	}
 
 	public static VertexConsumer getVertex(RenderLayer renderLayer, boolean hasEnchantments, MinecraftClient client) {

@@ -24,8 +24,9 @@ public class SkyRendererParser {
         JsonObject starsObject = jsonObject.get("stars").getAsJsonObject();
         int fancyStars = starsObject.get("fancy_count").getAsInt();
         int fastStars = starsObject.get("fast_count").getAsInt();
+        boolean colouredStars = starsObject.get("colored_stars").getAsBoolean();
         boolean daylightVisible = starsObject.get("daylight_visible").getAsBoolean();
-        SkyRenderer.StarsRenderer starsRenderer = new SkyRenderer.StarsRenderer(fancyStars, fastStars, daylightVisible);
+        SkyRenderer.StarsRenderer starsRenderer = new SkyRenderer.StarsRenderer(fancyStars, fastStars, colouredStars, daylightVisible);
 
         SkyRenderer.SunsetColour sunsetColour = SkyRenderer.SunsetColour.valueOf(jsonObject.get("sunset_color").getAsString().toUpperCase());
 

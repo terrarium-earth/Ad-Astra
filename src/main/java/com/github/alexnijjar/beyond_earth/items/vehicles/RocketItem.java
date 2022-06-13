@@ -10,6 +10,7 @@ import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier3;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier4;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.block.FluidBlock;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -41,6 +42,19 @@ public class RocketItem<T extends RocketEntity> extends VehicleItem {
             BlockPos pos = context.getBlockPos();
             BlockState state = world.getBlockState(pos);
             PlayerEntity player = context.getPlayer();
+
+             // Check if the block can be spawned in a 3x8x3 radius.
+            for (int x = pos.getX() - 1; x < pos.getX() + 2; x++) {
+                for (int y = pos.getY() + 1; y < pos.getY() + 9; y++) {
+                    for (int z = pos.getZ() - 1; z < pos.getZ() + 2; z++) {
+                        BlockPos testBlockPos = new BlockPos(x, y, z);
+                        BlockState testBlock = world.getBlockState(testBlockPos);
+                        if (!testBlock.isAir() && !(testBlock.getBlock() instanceof FluidBlock)) {
+                            return ActionResult.FAIL;
+                        }
+                    }
+                }
+            }
 
             if (state.getBlock() instanceof RocketLaunchPad pad) {
                 if (state.get(RocketLaunchPad.STAGE).equals(true)) {
@@ -88,7 +102,7 @@ public class RocketItem<T extends RocketEntity> extends VehicleItem {
                 }
             }
         }
-        return ActionResult.SUCCESS;
+        return ActionResult.PASS;
     }
 
     public EntityType<T> getRocketEntity() {

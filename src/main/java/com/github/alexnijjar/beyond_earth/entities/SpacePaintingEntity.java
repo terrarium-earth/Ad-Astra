@@ -1,11 +1,8 @@
 package com.github.alexnijjar.beyond_earth.entities;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
-
-import org.apache.commons.compress.utils.Lists;
+import java.util.Optional;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.mixin.PaintingEntityInvoker;
@@ -18,6 +15,7 @@ import net.minecraft.entity.decoration.painting.PaintingEntity;
 import net.minecraft.entity.decoration.painting.PaintingVariant;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
@@ -30,49 +28,56 @@ public class SpacePaintingEntity extends PaintingEntity {
 		super(entityType, world);
 	}
 
-	public SpacePaintingEntity(World world, BlockPos pos, Direction direction) {
+	protected SpacePaintingEntity(World world, BlockPos pos) {
 		this(ModEntities.SPACE_PAINTING, world);
 		this.attachmentPos = pos;
+	}
 
-		List<PaintingVariant> paintings = Lists.newArrayList(Registry.PAINTING_VARIANT.iterator());
-		List<PaintingVariant> paintingsToRemove = new LinkedList<>();
+	public static Optional<SpacePaintingEntity> placeSpacePainting(World world, BlockPos pos, Direction facing) {
+		SpacePaintingEntity paintingEntity = new SpacePaintingEntity(world, pos);
 
-		// Only keep paintings from this mod.
-		for (PaintingVariant painting : paintings) {
-			if (!Registry.PAINTING_VARIANT.getId(painting).getNamespace().equals(BeyondEarth.MOD_ID)) {
-				paintingsToRemove.add(painting);
+		List<RegistryEntry<PaintingVariant>> spacePaintings = getSpacePaintings();
+
+		if (spacePaintings.isEmpty()) {
+			return Optional.empty();
+		}
+
+		paintingEntity.setFacing(facing);
+		spacePaintings.removeIf(variant -> {
+			((PaintingEntityInvoker) paintingEntity).invokeSetVariant(variant);
+			return !paintingEntity.canStayAttached();
+		});
+
+		if (spacePaintings.isEmpty()) {
+			return Optional.empty();
+		}
+
+		int i = spacePaintings.stream().mapToInt(SpacePaintingEntity::getSize).max().orElse(0);
+		spacePaintings.removeIf(variant -> SpacePaintingEntity.getSize(variant) < i);
+		Optional<RegistryEntry<PaintingVariant>> optional = Util.getRandomOrEmpty(spacePaintings, paintingEntity.random);
+
+		if (optional.isEmpty()) {
+			return Optional.empty();
+		}
+
+		((PaintingEntityInvoker) paintingEntity).invokeSetVariant(optional.get());
+		paintingEntity.setFacing(facing);
+		return Optional.of(paintingEntity);
+	}
+
+	protected static int getSize(RegistryEntry<PaintingVariant> variant) {
+		return variant.value().getWidth() * variant.value().getHeight();
+	}
+
+	public static List<RegistryEntry<PaintingVariant>> getSpacePaintings() {
+		List<RegistryEntry<PaintingVariant>> paintings = new ArrayList<>();
+		Registry.PAINTING_VARIANT.forEach(painting -> {
+			if (Registry.PAINTING_VARIANT.getId(painting).getNamespace().equals(BeyondEarth.MOD_ID)) {
+				paintings.add(RegistryEntry.of(painting));
 			}
-		}
-		paintings.removeAll(paintingsToRemove);
+		});
 
-		PaintingVariant painting;
-		ArrayList<PaintingVariant> possiblePaintings = Lists.newArrayList();
-		int i = 0;
-		Iterator<PaintingVariant> iterator = paintings.stream().iterator();
-
-		while (iterator.hasNext()) {
-			painting = (PaintingVariant) iterator.next();
-			((PaintingEntityInvoker)this).invokeSetVariant(RegistryEntry.of(painting));
-			this.setFacing(direction);
-			if (!this.canStayAttached())
-				continue;
-			possiblePaintings.add(painting);
-			int j = painting.getWidth() * painting.getHeight();
-			if (j <= i)
-				continue;
-			i = j;
-		}
-		if (!possiblePaintings.isEmpty()) {
-			Iterator<PaintingVariant> iterator2 = possiblePaintings.iterator();
-			while (iterator2.hasNext()) {
-				painting = (PaintingVariant) iterator2.next();
-				if (painting.getWidth() * painting.getHeight() >= i)
-					continue;
-				iterator2.remove();
-			}
-			((PaintingEntityInvoker)this).invokeSetVariant(RegistryEntry.of(possiblePaintings.get(this.random.nextInt(possiblePaintings.size()))));
-		}
-		this.setFacing(direction);
+		return paintings;
 	}
 
 	@Override

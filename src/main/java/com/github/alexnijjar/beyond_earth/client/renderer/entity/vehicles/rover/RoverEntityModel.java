@@ -88,6 +88,14 @@ public class RoverEntityModel extends VehicleEntityModel<RoverEntity> {
         frame.getChild("Wheel3").pitch = wheelPitch;
         frame.getChild("Wheel4").pitch = wheelPitch;
 
+        frame.getChild("Wheel1").yaw = entity.getTurnSpeed() > 0 ? 5 : -5;
+        frame.getChild("Wheel3").yaw = entity.getTurnSpeed() > 0 ? 5 : -5;
+
+        float turnSpeed = entity.getTurnSpeed();
+        float turnYaw = (float) Math.toRadians(turnSpeed * 5.0f);
+        frame.getChild("Wheel1").yaw = turnYaw;
+        frame.getChild("Wheel3").yaw = turnYaw;
+
         this.frame.getChild("sat").yaw = antennaDishYaw;
     }
 }

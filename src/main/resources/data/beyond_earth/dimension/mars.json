@@ -4,7 +4,7 @@
     "type": "minecraft:noise",
     "settings": {
       "sea_level": 63,
-      "disable_mob_generation": true,
+      "disable_mob_generation": false,
       "aquifers_enabled": false,
       "ore_veins_enabled": false,
       "legacy_random_source": false,
@@ -18,28 +18,7 @@
         "min_y": -64,
         "height": 384,
         "size_horizontal": 1,
-        "size_vertical": 2,
-        "sampling": {
-          "xz_scale": 1.1,
-          "y_scale": 1.1,
-          "xz_factor": 80,
-          "y_factor": 90
-        },
-        "bottom_slide": {
-          "target": -30,
-          "size": 0,
-          "offset": 0
-        },
-        "top_slide": {
-          "target": -10,
-          "size": 3,
-          "offset": 0
-        },
-        "terrain_shaper": {
-          "offset": 0.3,
-          "factor": 4,
-          "jaggedness": 0
-        }
+        "size_vertical": 2
       },
       "noise_router": {
         "barrier": {
@@ -85,9 +64,9 @@
           "shift_z": "minecraft:shift_z"
         },
         "continents": "minecraft:overworld/continents",
-        "ridges": "minecraft:overworld/ridges",
         "erosion": "minecraft:overworld/erosion",
         "depth": "minecraft:overworld/depth",
+        "ridges": "minecraft:overworld/ridges",
         "initial_density_without_jaggedness": {
           "type": "minecraft:mul",
           "argument1": 4,
@@ -115,7 +94,7 @@
                 "argument": {
                   "type": "minecraft:blend_density",
                   "argument": {
-                    "type": "minecraft:slide",
+                    "type": "minecraft:blend_density",
                     "argument": {
                       "type": "minecraft:range_choice",
                       "input": "minecraft:overworld/sloped_cheese",
@@ -277,6 +256,7 @@
           "y_scale": 1
         }
       },
+      "spawn_target": [],
       "surface_rule": {
         "type": "minecraft:sequence",
         "sequence": [
@@ -399,7 +379,7 @@
             "erosion": 0,
             "weirdness": -0.25,
             "depth": 0,
-            "offset": 0.0
+            "offset": 0
           }
         },
         {

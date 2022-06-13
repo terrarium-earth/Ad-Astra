@@ -1,6 +1,7 @@
 package com.github.alexnijjar.beyond_earth.client.renderer.sky;
 
 import com.github.alexnijjar.beyond_earth.client.resource_pack.SkyRenderer;
+import com.github.alexnijjar.beyond_earth.client.resource_pack.SkyRenderer.StarsRenderer;
 import com.github.alexnijjar.beyond_earth.mixin.client.WorldRendererAccessor;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 import com.github.alexnijjar.beyond_earth.world.WorldSeed;
@@ -142,7 +143,7 @@ public class SkyUtil {
         endRendering(context.matrixStack());
     }
 
-    public static VertexBuffer renderStars(WorldRenderContext context, BufferBuilder bufferBuilder, VertexBuffer starsBuffer, int stars, boolean fixedStarColour) {
+    public static VertexBuffer renderStars(WorldRenderContext context, BufferBuilder bufferBuilder, VertexBuffer starsBuffer, int stars, StarsRenderer starsRenderer) {
 
         startRendering(context.matrixStack(), new Vec3f(-30.0f, 0.0f, context.world().getSkyAngle(context.tickDelta()) * 360.0f));
         RenderSystem.setShader(GameRenderer::getPositionColorShader);
@@ -152,10 +153,12 @@ public class SkyUtil {
         }
 
         starsBuffer = new VertexBuffer();
-        SkyUtil.renderStars(bufferBuilder, stars);
-        starsBuffer.upload(bufferBuilder.end());
+        BufferBuilder.BuiltBuffer builtBuffer = SkyUtil.renderStars(bufferBuilder, stars, starsRenderer.colouredStars());
+        starsBuffer.bind();
+        starsBuffer.upload(builtBuffer);
+        VertexBuffer.unbind();
 
-        if (!fixedStarColour) {
+        if (!starsRenderer.daylightVisible()) {
             float rot = context.world().method_23787(context.tickDelta());
             RenderSystem.setShaderColor(rot, rot, rot, rot);
         } else {
@@ -163,21 +166,23 @@ public class SkyUtil {
         }
 
         BackgroundRenderer.clearFog();
+        starsBuffer.bind();
         starsBuffer.draw(context.matrixStack().peek().getPositionMatrix(), RenderSystem.getProjectionMatrix(), GameRenderer.getPositionColorShader());
+        VertexBuffer.unbind();
+
         context.matrixStack().pop();
         return starsBuffer;
     }
 
-    private static void renderStars(BufferBuilder buffer, int stars) {
+    private static BufferBuilder.BuiltBuffer renderStars(BufferBuilder buffer, int stars, boolean colouredStars) {
         RenderSystem.setShader(GameRenderer::getPositionColorShader);
         Random random = Random.create(WorldSeed.getSeed());
-        float size = random.nextFloat() * (1.1f - 0.5f);
         buffer.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR);
         for (int i = 0; i < stars; ++i) {
             double d = random.nextFloat() * 2.0f - 1.0f;
             double e = random.nextFloat() * 2.0f - 1.0f;
             double f = random.nextFloat() * 2.0f - 1.0f;
-            double g = 0.15f + random.nextFloat() * size;
+            double g = 0.15f + random.nextFloat() * 0.15;
             double h = d * d + e * e + f * f;
             if (!(h < 1.0) || !(h > 0.01))
                 continue;
@@ -195,30 +200,32 @@ public class SkyUtil {
             double t = Math.sin(s);
             double u = Math.cos(s);
 
-            int starR;
-            int starG;
-            int starB;
-            int colourChannel = random.nextInt(5);
-            if (colourChannel == 0) { // Blue.
-                starR = 204;
-                starG = 238;
-                starB = 255;
-            } else if (colourChannel == 1) { // Purple.
-                starR = 204;
-                starG = 153;
-                starB = 255;
-            } else if (colourChannel == 2) { // Yellow.
-                starR = 255;
-                starG = 255;
-                starB = 153;
-            } else if (colourChannel == 3) { // Orange.
-                starR = 255;
-                starG = 204;
-                starB = 102;
-            } else { // White.
-                starR = 255;
-                starG = 255;
-                starB = 255;
+            int starR = 255;
+            int starG = 255;
+            int starB = 255;
+            if (colouredStars) {
+                int colourChannel = random.nextInt(5);
+                if (colourChannel == 0) { // Blue.
+                    starR = 204;
+                    starG = 238;
+                    starB = 255;
+                } else if (colourChannel == 1) { // Purple.
+                    starR = 204;
+                    starG = 153;
+                    starB = 255;
+                } else if (colourChannel == 2) { // Yellow.
+                    starR = 255;
+                    starG = 255;
+                    starB = 153;
+                } else if (colourChannel == 3) { // Orange.
+                    starR = 255;
+                    starG = 204;
+                    starB = 102;
+                } else { // White.
+                    starR = 255;
+                    starG = 255;
+                    starB = 255;
+                }
             }
 
             for (int v = 0; v < 4; ++v) {
@@ -234,6 +241,7 @@ public class SkyUtil {
                 buffer.vertex(j + af, k + ad, l + ah).color(starR, starG, starB, 255).next();
             }
         }
+        return buffer.end();
     }
 
     public static void renderColouring(SkyRenderer.SunsetColour type, BufferBuilder bufferBuilder, MatrixStack matrices, ClientWorld world, float tickDelta, float skyAngle, int sunsetAngle) {

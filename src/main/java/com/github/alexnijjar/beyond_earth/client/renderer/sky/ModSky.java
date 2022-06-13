@@ -50,7 +50,7 @@ public class ModSky implements DimensionRenderingRegistry.SkyRenderer {
         // Stars.
         if (this.starsRenderer.fastStars() > 0) {
             int stars = (context.advancedTranslucency() || client.options.getGraphicsMode().getValue().equals(GraphicsMode.FANCY) ? this.starsRenderer.fancyStars() : this.starsRenderer.fastStars());
-            starsBuffer = SkyUtil.renderStars(context, bufferBuilder, starsBuffer, stars, this.starsRenderer.daylightVisible());
+            starsBuffer = SkyUtil.renderStars(context, bufferBuilder, starsBuffer, stars, this.starsRenderer);
         }
 
         // Render all sky objects.

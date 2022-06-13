@@ -1,7 +1,7 @@
 {
   "type": "minecraft:jigsaw",
   "start_pool": "beyond_earth:run_venus_tower/side_venus_tower_start",
-  "size": 1,
+  "size": 7,
   "max_distance_from_center": 80,
   "biomes": "#beyond_earth:has_structure/pygro_tower_biomes",
   "step": "surface_structures",

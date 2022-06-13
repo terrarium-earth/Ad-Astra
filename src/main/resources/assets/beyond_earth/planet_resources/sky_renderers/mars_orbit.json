@@ -3,6 +3,7 @@
     "stars": {
         "fancy_count": 13000,
         "fast_count": 6000,
+        "colored_stars": true,
         "daylight_visible": true
     },
     "sunset_color": "vanilla",
