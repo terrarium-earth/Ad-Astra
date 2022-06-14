@@ -226,6 +226,7 @@
   "gauge_text.beyond_earth.capacity": "Energy Capacity: %s E",
   "gauge_text.beyond_earth.max_generation": "Max. Energy Generation: %s E/t",
   "gauge_text.beyond_earth.storage": "Energy: %s E / %d E",
+  "gauge_text.beyond_earth.liquid_storage": "%s mB / %d mB",
   "gauge_text.beyond_earth.stored": "Stored Energy: %s E",
 
   "gui.beyond_earth.oxygen_bubble_distributor.workingarea.hide": "Hide",

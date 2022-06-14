@@ -9,7 +9,6 @@ import com.github.alexnijjar.beyond_earth.data.Planet;
 import com.github.alexnijjar.beyond_earth.util.ColourHolder;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
-import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.fabricmc.api.EnvType;
@@ -93,10 +92,7 @@ public class PlanetSelectionButton extends ButtonWidget {
             RenderSystem.enableDepthTest();
 
             // Render mask.
-            RenderSystem.assertOnRenderThread();
-            GlStateManager._enableScissorTest();
-            RenderSystem.assertOnRenderThread();
-            GlStateManager._scissorBox(0, maxY, 215 * scale, 127 * scale);
+            RenderSystem.enableScissor(0, maxY, 215 * scale, 127 * scale);
 
             RenderSystem.setShaderColor((over ? lightColour.r() : color.r()), (over ? lightColour.g() : color.g()), (over ? lightColour.b() : color.b()), 1.0f);
             RenderSystem.setShaderTexture(0, switch (this.buttonSize) {
@@ -108,8 +104,7 @@ public class PlanetSelectionButton extends ButtonWidget {
             drawTexture(matrices, this.x, this.y, 0, 0, this.width, this.height, buttonSize.getWidth(), buttonSize.getHeight());
             drawText(matrices, client);
 
-            RenderSystem.assertOnRenderThread();
-            GlStateManager._disableScissorTest();
+            RenderSystem.disableScissor();
 
             if (this.isMouseOver(mouseX, mouseY)) {
                 renderTooltips(matrices, mouseX, mouseY, client);

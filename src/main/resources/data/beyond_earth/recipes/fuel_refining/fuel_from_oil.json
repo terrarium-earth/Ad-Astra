@@ -1,0 +1,11 @@
+{
+   "type": "beyond_earth:fuel_refinery",
+   "input": {
+      "tag": "beyond_earth:oil",
+      "amount": 2
+   },
+   "output": {
+      "name": "beyond_earth:fuel",
+      "amount": 2
+   }
+}

@@ -6,6 +6,7 @@ import com.github.alexnijjar.beyond_earth.blocks.launch_pad.RocketLaunchPadEntit
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.AbstractMachineBlockEntity;
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.CoalGeneratorBlockEntity;
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.CompressorBlockEntity;
+import com.github.alexnijjar.beyond_earth.blocks.machines.entity.FluidMachineBlockEntity;
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.FuelRefineryBlockEntity;
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.NasaWorkbenchBlockEntity;
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.OxygenBubbleDistributorBlockEntity;
@@ -15,6 +16,7 @@ import com.github.alexnijjar.beyond_earth.blocks.machines.entity.WaterPumpBlockE
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
@@ -61,7 +63,9 @@ public class ModBlockEntities {
                 OXYGEN_BUBBLE_DISTRIBUTOR_ENTITY = register("oxygen_bubble_distributor_entity", OxygenBubbleDistributorBlockEntity::new, ModBlocks.OXYGEN_BUBBLE_DISTRIBUTOR);
                 WATER_PUMP_ENTITY = register("water_pump_entity", WaterPumpBlockEntity::new, ModBlocks.WATER_PUMP);
 
-                EnergyStorage.SIDED.registerForBlockEntities((blockEntity, direction) -> ((AbstractMachineBlockEntity) blockEntity).getSideEnergyStorage(direction), SOLAR_PANEL_ENTITY, COAL_GENERATOR_ENTITY, COMPRESSOR_ENTITY);
+                EnergyStorage.SIDED.registerForBlockEntities((blockEntity, direction) -> ((AbstractMachineBlockEntity) blockEntity).getSideEnergyStorage(direction), SOLAR_PANEL_ENTITY, COAL_GENERATOR_ENTITY, COMPRESSOR_ENTITY, FUEL_REFINERY_ENTITY);
+
+                FluidStorage.SIDED.registerForBlockEntities((blockEntity, direction) -> ((FluidMachineBlockEntity) blockEntity).fluidStorage, FUEL_REFINERY_ENTITY, OXYGEN_LOADER_ENTITY, OXYGEN_BUBBLE_DISTRIBUTOR_ENTITY, WATER_PUMP_ENTITY);
         }
 
         public static <T extends BlockEntity> BlockEntityType<T> register(String id, FabricBlockEntityTypeBuilder.Factory<T> factory, Block... blocks) {

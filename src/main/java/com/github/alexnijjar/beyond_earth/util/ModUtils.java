@@ -330,4 +330,8 @@ public class ModUtils {
         vehicle.setBodyYaw(newYaw);
         vehicle.prevYaw = newYaw;
     }
+
+    public static long dropletsToMillibuckets(long droplets) {
+        return droplets / 81;
+    }
 }

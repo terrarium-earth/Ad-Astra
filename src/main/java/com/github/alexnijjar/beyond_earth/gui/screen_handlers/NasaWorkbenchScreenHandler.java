@@ -32,13 +32,19 @@ public class NasaWorkbenchScreenHandler extends AbstractMachineScreenHandler {
                 new Slot(entity, 0, 40, 18),
 
                 // Body.
-                new Slot(entity, 1, 31, 18 * 2), new Slot(entity, 2, 49, 18 * 2), new Slot(entity, 3, 31, 18 * 3), new Slot(entity, 4, 49, 18 * 3), new Slot(entity, 5, 31, 18 * 4), new Slot(entity, 6, 49, 18 * 4),
+                new Slot(entity, 1, 31, 18 * 2), //
+                new Slot(entity, 2, 49, 18 * 2), //
+                new Slot(entity, 3, 31, 18 * 3), //
+                new Slot(entity, 4, 49, 18 * 3), //
+                new Slot(entity, 5, 31, 18 * 4), //
+                new Slot(entity, 6, 49, 18 * 4), //
 
                 // Left fin.
                 new Slot(entity, 7, 13, 18 * 5),
 
                 // Tank.
-                new Slot(entity, 8, 31, 18 * 5), new Slot(entity, 9, 49, 18 * 5),
+                new Slot(entity, 8, 31, 18 * 5), //
+                new Slot(entity, 9, 49, 18 * 5), //
 
                 // Right fin.
                 new Slot(entity, 10, 67, 18 * 5),
@@ -63,19 +69,8 @@ public class NasaWorkbenchScreenHandler extends AbstractMachineScreenHandler {
     }
 
     @Override
-    protected void setPlayerInventory(PlayerInventory inventory) {
-        int m;
-        int l;
-
-        for (m = 0; m < 3; ++m) {
-            for (l = 0; l < 9; ++l) {
-                addSlot(new Slot(inventory, l + m * 9 + 9, 8 + l * 18, 142 + m * 18));
-            }
-        }
-
-        for (m = 0; m < 9; ++m) {
-            addSlot(new Slot(inventory, m, 8 + m * 18, 200));
-        }
+    public int getPlayerInventoryOffset() {
+        return 58;
     }
 
     @Override
@@ -96,11 +91,6 @@ public class NasaWorkbenchScreenHandler extends AbstractMachineScreenHandler {
     @Override
     public void onContentChanged(Inventory inventory) {
         this.updateContent();
-    }
-
-    @Override
-    public boolean onButtonClick(PlayerEntity player, int id) {
-        return super.onButtonClick(player, id);
     }
 
     public void updateContent() {

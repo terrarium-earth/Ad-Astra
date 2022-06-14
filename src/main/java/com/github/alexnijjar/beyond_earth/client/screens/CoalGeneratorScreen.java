@@ -46,12 +46,12 @@ public class CoalGeneratorScreen extends AbstractMachineScreen<CoalGeneratorScre
         CoalGeneratorBlockEntity entity = (CoalGeneratorBlockEntity) blockEntity;
 
         // Energy tooltip.
-        if (GuiUtil.isHover(this.getEnergyBounds(), mouseX, mouseY)) {
+        if (GuiUtil.isHovering(this.getEnergyBounds(), mouseX, mouseY)) {
             this.renderTooltip(matrices, Text.translatable("gauge_text.beyond_earth.storage", this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration()), mouseX, mouseY);
         }
 
         // Burn time tooltip.
-        if (GuiUtil.isHover(this.getFireBounds(), mouseX, mouseY)) {
+        if (GuiUtil.isHovering(this.getFireBounds(), mouseX, mouseY)) {
             this.renderTooltip(matrices, Text.translatable("gauge.beyond_earth.burn_time", entity.getCookTime(), entity.getCookTimeTotal()), mouseX, mouseY);
         }
     }
