@@ -1,11 +1,11 @@
 {
-  "name": "beyond_earth:run_meteor/side_meteor_start",
+  "name": "beyond_earth:meteor/meteor",
   "fallback": "minecraft:empty",
   "elements": [
     {
       "weight": 50,
       "element": {
-        "location": "beyond_earth:meteor1",
+        "location": "beyond_earth:meteor_1",
         "processors": "beyond_earth:void_processor",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
@@ -14,7 +14,7 @@
     {
       "weight": 50,
       "element": {
-        "location": "beyond_earth:meteor2",
+        "location": "beyond_earth:meteor_2",
         "processors": "beyond_earth:void_processor",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
@@ -23,7 +23,7 @@
     {
       "weight": 50,
       "element": {
-        "location": "beyond_earth:meteor3",
+        "location": "beyond_earth:meteor_3",
         "processors": "beyond_earth:void_processor",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
@@ -32,7 +32,7 @@
     {
       "weight": 50,
       "element": {
-        "location": "beyond_earth:meteor4",
+        "location": "beyond_earth:meteor_4",
         "processors": "beyond_earth:void_processor",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
@@ -41,7 +41,7 @@
     {
       "weight": 50,
       "element": {
-        "location": "beyond_earth:meteor5",
+        "location": "beyond_earth:meteor_5",
         "processors": "beyond_earth:void_processor",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
@@ -50,7 +50,7 @@
     {
       "weight": 50,
       "element": {
-        "location": "beyond_earth:meteor6",
+        "location": "beyond_earth:meteor_6",
         "processors": "beyond_earth:void_processor",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"

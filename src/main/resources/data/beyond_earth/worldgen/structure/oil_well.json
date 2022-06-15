@@ -1,7 +1,7 @@
 {
   "type": "minecraft:jigsaw",
-  "start_pool": "beyond_earth:run_oil/side_oil_start",
-  "size": 7,
+  "start_pool": "beyond_earth:oil_well/oil_well",
+  "size": 1,
   "max_distance_from_center": 80,
   "biomes": "#beyond_earth:has_structure/oil_well_biomes",
   "step": "surface_structures",

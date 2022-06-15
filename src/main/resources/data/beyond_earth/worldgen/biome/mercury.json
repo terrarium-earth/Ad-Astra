@@ -44,7 +44,8 @@
       "minecraft:patch_fire",
       "minecraft:patch_soul_fire",
       "minecraft:ore_magma",
-      "minecraft:spring_closed_double"
+      "minecraft:spring_closed_double",
+      "beyond_earth:mercury_iron_ore"
     ]
   ]
 }

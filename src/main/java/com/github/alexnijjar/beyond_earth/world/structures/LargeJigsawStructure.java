@@ -56,10 +56,6 @@ public class LargeJigsawStructure extends Structure {
             return Optional.empty();
         }
 
-        if (!LargeJigsawStructure.extraSpawningChecks(context)) {
-            return Optional.empty();
-        }
-
         int startY = this.startHeight.get(context.random(), new HeightContext(context.chunkGenerator(), context.world()));
 
         ChunkPos chunkPos = context.chunkPos();

@@ -35,7 +35,13 @@
       "minecraft:patch_fire",
       "minecraft:patch_soul_fire",
       "minecraft:ore_magma",
-      "minecraft:spring_closed_double"
+      "minecraft:spring_closed_double",
+      "beyond_earth:venus_deltas_large",
+      "beyond_earth:venus_deltas_small",
+      "beyond_earth:venus_coal_ore",
+      "beyond_earth:venus_gold_ore",
+      "beyond_earth:venus_diamond_ore",
+      "beyond_earth:venus_calorite_ore"
     ]
   ]
 }

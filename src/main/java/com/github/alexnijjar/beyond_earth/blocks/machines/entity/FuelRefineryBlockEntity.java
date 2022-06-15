@@ -69,9 +69,8 @@ public class FuelRefineryBlockEntity extends FluidMachineBlockEntity {
             FluidVariant water = FluidVariant.of(Fluids.WATER);
             
             try (Transaction transaction = Transaction.openOuter()) {
-                // Try to insert, will return how much was actually inserted.
-                long amountInserted = entity.fluidStorage.insert(water, FluidConstants.BUCKET / 10, transaction);
-                if (amountInserted == FluidConstants.BUCKET / 10) {
+                long amountInserted = entity.fluidStorage.insert(water, FluidConstants.BUCKET / 100, transaction);
+                if (amountInserted == FluidConstants.BUCKET / 100) {
                     transaction.commit();
                 }
             }

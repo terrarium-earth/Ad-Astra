@@ -66,14 +66,13 @@ public class GuiUtil {
     }
 
     public static void drawFluidTank(MatrixStack matrixStack, int x, int y, long fluidAmount, long fluidCapacity, FluidVariant fluid) {
-
         // Draw the fluid.
         drawFluid(matrixStack, 37, x, y, fluidAmount, fluidCapacity, fluid);
         // Draw the fluid tank.
         drawVertical(matrixStack, x, y, FLUID_TANK_WIDTH, FLUID_TANK_HEIGHT, FLUID_TANK_TEXTURE, 1.0);
     }
 
-    public static void drawFluid(MatrixStack matrixStack, int offset, int x, int y, long fluidAmount, long fluidCapacity, FluidVariant fluid) {
+    public static void drawFluid(MatrixStack matrices, int offset, int x, int y, long fluidAmount, long fluidCapacity, FluidVariant fluid) {
 
         if (fluid.isBlank()) {
             return;
@@ -98,7 +97,7 @@ public class GuiUtil {
         // First, the sprite is rendered in full, and then it is masked based on how full the fluid tank is.
         RenderSystem.enableScissor(x * scale, maxY, FLUID_TANK_WIDTH * scale, (int) ((FLUID_TANK_HEIGHT - 1) * scale * ratio));
         for (int i = 1; i < 4; i++) {
-            DrawableHelper.drawSprite(matrixStack, x + 1, FLUID_TANK_HEIGHT + y - (spriteHeight * i) - 1, 0, FLUID_TANK_WIDTH - 2, spriteHeight, sprite);
+            DrawableHelper.drawSprite(matrices, x + 1, FLUID_TANK_HEIGHT + y - (spriteHeight * i) - 1, 0, FLUID_TANK_WIDTH - 2, spriteHeight, sprite);
         }
         RenderSystem.disableScissor();
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
