@@ -1,8 +1,10 @@
 package com.github.alexnijjar.beyond_earth.util;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.FluidMachineBlockEntity;
+import com.github.alexnijjar.beyond_earth.items.armour.SpaceSuit;
 import com.github.alexnijjar.beyond_earth.recipes.ConversionRecipe;
 
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
@@ -25,7 +27,7 @@ public class FluidUtils {
 		return millibuckets * 81;
 	}
 
-	public static SingleVariantStorage<FluidVariant> createTank(FluidMachineBlockEntity blockEntity, long tankSize) {
+	public static <T extends ConversionRecipe> SingleVariantStorage<FluidVariant> createTank(FluidMachineBlockEntity blockEntity, long tankSize) {
 		return new SingleVariantStorage<>() {
 			@Override
 			protected FluidVariant getBlankVariant() {
@@ -59,7 +61,7 @@ public class FluidUtils {
 			if (inputTankFluid.equals(recipeInputVariant)) {
 
 				try (Transaction transaction = Transaction.openOuter()) {
-					long maxFluid = millibucketsToDroplets(10);
+					long maxFluid = millibucketsToDroplets(5);
 					long convertedMaxFluid = (long) (maxFluid * conversionRatio);
 					if (inventory.inputTank.extract(recipeInputVariant, maxFluid, transaction) == maxFluid && inventory.outputTank.insert(recipeOutputVariant, convertedMaxFluid, transaction) == convertedMaxFluid) {
 						transaction.commit();
@@ -72,25 +74,36 @@ public class FluidUtils {
 	}
 
 	// Inserts a fluid storage, such as a bucket into a tank.
-	public static void insertFluidIntoTank(FluidMachineBlockEntity inventory, int insertSlot, int extractSlot) {
-		ContainerItemContext context = ContainerItemContext.withInitial(inventory.getStack(insertSlot));
-		Storage<FluidVariant> storage = context.find(FluidStorage.ITEM);
+	public static void insertFluidIntoTank(FluidMachineBlockEntity inventory, int insertSlot, int extractSlot, Predicate<FluidVariant> filter) {
+		if (inventory.canInsert(extractSlot, inventory.getStack(insertSlot), null)) {
+			ContainerItemContext context = ContainerItemContext.withInitial(inventory.getStack(insertSlot));
+			Storage<FluidVariant> storage = context.find(FluidStorage.ITEM);
 
-		if (storage != null) {
-			if (StorageUtil.move(storage, inventory.inputTank, f -> true, Long.MAX_VALUE, null) > 0) {
-				consumeStorage(inventory, context, insertSlot, extractSlot);
+			if (storage != null) {
+				if (StorageUtil.move(storage, inventory.inputTank, filter, Long.MAX_VALUE, null) > 0) {
+					consumeStorage(inventory, context, insertSlot, extractSlot);
+				}
 			}
 		}
 	}
 
 	// Extracts fluid from a tank and inserts it into a storage, such as a bucket.
 	public static void extractFluidFromTank(FluidMachineBlockEntity inventory, int insertSlot, int extractSlot) {
-		ContainerItemContext context = ContainerItemContext.withInitial(inventory.getStack(insertSlot));
-		Storage<FluidVariant> storage = context.find(FluidStorage.ITEM);
+		if (inventory.canInsert(extractSlot, inventory.getStack(insertSlot), null)) {
+			ItemStack extractCopy = inventory.getStack(insertSlot).copy();
+			extractCopy.setCount(1);
+			ContainerItemContext context = ContainerItemContext.withInitial(extractCopy);
+			Storage<FluidVariant> storage = context.find(FluidStorage.ITEM);
 
-		if (storage != null) {
-			if (StorageUtil.move(inventory.outputTank, storage, f -> true, Long.MAX_VALUE, null) > 0) {
-				consumeStorage(inventory, context, insertSlot, extractSlot);
+			if (storage != null) {
+				if (StorageUtil.move(inventory.outputTank, storage, f -> true, Long.MAX_VALUE, null) > 0) {
+					if (extractCopy.getItem() instanceof SpaceSuit) {
+						inventory.setStack(insertSlot, context.getItemVariant().toStack());
+						inventory.markDirty();
+					} else {
+						consumeStorage(inventory, context, insertSlot, extractSlot);
+					}
+				}
 			}
 		}
 	}

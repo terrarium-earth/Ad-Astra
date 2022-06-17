@@ -187,7 +187,8 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
 
     @Override
     public boolean canInsert(int slot, ItemStack stack, Direction dir) {
-        return true;
+        ItemStack slotStack = this.getStack(slot);
+        return slotStack.isEmpty() || (slotStack.isOf(stack.getItem()) && slotStack.getCount() <= slotStack.getMaxCount());
     }
 
     @Override

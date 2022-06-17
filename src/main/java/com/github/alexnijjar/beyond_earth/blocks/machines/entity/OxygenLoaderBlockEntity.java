@@ -18,6 +18,7 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.util.math.BlockPos;
 
 public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
+
     public static final long MAX_ENERGY = 9000L;
     public static final long ENERGY_PER_TICK = 10L;
     public static final int TANK_SIZE = 3;
@@ -35,6 +36,7 @@ public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
     public long getOutputSize() {
         return TANK_SIZE;
     }
+
 
     @Override
     public boolean usesEnergy() {
@@ -76,7 +78,8 @@ public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
             ItemStack outputExtractSlot = this.getItems().get(3);
 
             if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxCount()) {
-                FluidUtils.insertFluidIntoTank(this, 0, 1);
+                ModRecipes.OXYGEN_CONVERSION_RECIPE.getRecipes(this.world);
+                FluidUtils.insertFluidIntoTank(this, 0, 1, f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.getRecipes(this.world).stream().anyMatch(r -> r.getFluidInput().equals(f.getFluid())));
             }
 
             if (!outputInsertSlot.isEmpty() && outputExtractSlot.getCount() < outputExtractSlot.getMaxCount()) {

@@ -14,13 +14,13 @@ public abstract class FluidMachineBlockEntity extends AbstractMachineBlockEntity
     public final SingleVariantStorage<FluidVariant> inputTank = FluidUtils.createTank(this, getInputSize());
     public final SingleVariantStorage<FluidVariant> outputTank = FluidUtils.createTank(this, getOutputSize());
 
-    public abstract long getInputSize();
-
-    public abstract long getOutputSize();
-
     public FluidMachineBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
         super(blockEntityType, blockPos, blockState);
     }
+
+    public abstract long getInputSize();
+
+    public abstract long getOutputSize();
 
     @Override
     public void readNbt(NbtCompound nbt) {

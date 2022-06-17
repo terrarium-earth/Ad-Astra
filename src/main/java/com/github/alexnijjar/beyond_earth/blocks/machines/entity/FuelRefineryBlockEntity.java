@@ -77,7 +77,7 @@ public class FuelRefineryBlockEntity extends FluidMachineBlockEntity {
             ItemStack outputExtractSlot = this.getItems().get(3);
 
             if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxCount()) {
-                FluidUtils.insertFluidIntoTank(this, 0, 1);
+                FluidUtils.insertFluidIntoTank(this, 0, 1, f -> ModRecipes.FUEL_CONVERSION_RECIPE.getRecipes(this.world).stream().anyMatch(r -> r.getFluidInput().equals(f.getFluid())));
             }
 
             if (!outputInsertSlot.isEmpty() && outputExtractSlot.getCount() < outputExtractSlot.getMaxCount()) {
