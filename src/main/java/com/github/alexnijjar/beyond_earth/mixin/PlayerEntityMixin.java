@@ -13,6 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin {
@@ -33,9 +34,12 @@ public abstract class PlayerEntityMixin {
 
         if (!player.hasVehicle()) {
             if (ModUtils.hasFullJetSuitSet(player)) {
-                if (player.getEquippedStack(EquipmentSlot.CHEST).getItem() instanceof JetSuit jetSuit) {
+                ItemStack chest = player.getEquippedStack(EquipmentSlot.CHEST);
+                if (chest.getItem() instanceof JetSuit jetSuit) {
                     if (ModKeyBindings.jumpKeyDown(player)) {
-                        jetSuit.fly(player);
+                        jetSuit.fly(player, chest);
+                    } else {
+                        jetSuit.isFlying = false;
                     }
                 }
             }

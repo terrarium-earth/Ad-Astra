@@ -1,4 +1,4 @@
-package com.github.alexnijjar.beyond_earth.fluid;
+package com.github.alexnijjar.beyond_earth.blocks.fluid;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -11,7 +11,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 
-public abstract class Fluid extends FlowableFluid {
+public abstract class ModFluid extends FlowableFluid {
 
     @Override
     public boolean matchesType(net.minecraft.fluid.Fluid fluid) {

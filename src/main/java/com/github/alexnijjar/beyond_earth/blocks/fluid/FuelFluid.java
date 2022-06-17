@@ -1,21 +1,22 @@
-package com.github.alexnijjar.beyond_earth.fluid;
+package com.github.alexnijjar.beyond_earth.blocks.fluid;
 
 import com.github.alexnijjar.beyond_earth.registry.ModFluids;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
 
-public abstract class FuelFluid extends Fluid {
+public abstract class FuelFluid extends ModFluid {
     @Override
-    public net.minecraft.fluid.Fluid getFlowing() {
+    public Fluid getFlowing() {
         return ModFluids.FLOWING_FUEL;
     }
 
     @Override
-    public net.minecraft.fluid.Fluid getStill() {
+    public Fluid getStill() {
         return ModFluids.FUEL_STILL;
     }
 
@@ -31,7 +32,7 @@ public abstract class FuelFluid extends Fluid {
 
     public static class Flowing extends FuelFluid {
         @Override
-        protected void appendProperties(StateManager.Builder<net.minecraft.fluid.Fluid, FluidState> builder) {
+        protected void appendProperties(StateManager.Builder<Fluid, FluidState> builder) {
             super.appendProperties(builder);
             builder.add(LEVEL);
         }

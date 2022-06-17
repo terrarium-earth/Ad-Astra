@@ -6,14 +6,24 @@ import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 
 public class OxygenBubbleDistributorBlockEntity extends FluidMachineBlockEntity {
-    
+
     public static final int TANK_SIZE = 3;
+
     public OxygenBubbleDistributorBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.OXYGEN_BUBBLE_DISTRIBUTOR_ENTITY, blockPos, blockState);
     }
 
     @Override
-    public int getBuckets() {
+    public long getInputSize() {
         return TANK_SIZE;
+    }
+
+    @Override
+    public long getOutputSize() {
+        return TANK_SIZE;
+    }
+
+    @Override
+    public void tick() {
     }
 }

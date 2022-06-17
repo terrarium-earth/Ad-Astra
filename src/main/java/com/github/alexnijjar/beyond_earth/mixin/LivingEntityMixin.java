@@ -23,7 +23,6 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.Random;
@@ -120,26 +119,17 @@ public abstract class LivingEntityMixin {
 
                 if (ModUtils.hasFullSpaceSet(player) && ModUtils.hasOxygenatedSpaceSuit(player)) {
                     ItemStack chest = player.getEquippedStack(EquipmentSlot.CHEST);
-                    NbtCompound nbt = chest.getNbt();
+                    if (chest.getItem() instanceof SpaceSuit suit) {
+                        long oxygen = suit.getAmount(chest);
 
-                    if (nbt.contains("Oxygen")) {
-                        int oxygen = nbt.getInt("Oxygen");
-
-                        if (chest.getItem() instanceof SpaceSuit suit) {
-                            if (oxygen > 0) {
-                                if (!ModUtils.worldHasOxygen(world) || entity.isSubmergedInWater()) {
-                                    if (!isCreative) {
-                                        nbt.putInt("Oxygen", nbt.getInt("Oxygen") - 1);
-                                    }
-                                    // Allow the player to breath underwater.
-                                    player.setAir(275);
-                                    hasOxygen = true;
-                                    entity.setFrozenTicks(0);
-                                    hasNetheriteSpaceSuit = ModUtils.hasFullNetheriteSpaceSet(player);
-                                }
-                            }
-                            if (oxygen > suit.getMaxOxygen()) {
-                                nbt.putInt("Oxygen", suit.getMaxOxygen());
+                        if (oxygen > 0) {
+                            if (!ModUtils.worldHasOxygen(world) || entity.isSubmergedInWater()) {
+                                // Allow the player to breath underwater.
+                                player.setAir(275);
+                                hasOxygen = true;
+                                entity.setFrozenTicks(0);
+                                hasNetheriteSpaceSuit = ModUtils.hasFullNetheriteSpaceSet(player);
+                                suit.setAmount(chest, oxygen - 3);
                             }
                         }
                     }

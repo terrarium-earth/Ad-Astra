@@ -1,16 +1,15 @@
 package com.github.alexnijjar.beyond_earth.blocks.machines.entity;
 
+import org.jetbrains.annotations.Nullable;
+
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.SolarPanelScreenHandler;
 import com.github.alexnijjar.beyond_earth.registry.ModBlockEntities;
-
-import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 public class SolarPanelBlockEntity extends AbstractMachineBlockEntity {
 
@@ -47,14 +46,17 @@ public class SolarPanelBlockEntity extends AbstractMachineBlockEntity {
         return ENERGY_PER_TICK * 2;
     }
 
-    public static void serverTick(World world, BlockPos pos, BlockState state, AbstractMachineBlockEntity blockEntity) {
-        if (blockEntity.usesEnergy()) {
-            // Check solar panel conditions.
-            if (world.isDay() && !world.isRaining() && !world.isThundering() && world.isSkyVisible(blockEntity.getPos().up())) {
-                blockEntity.cumulateEnergy();
-            }
+    @Override
+    public void tick() {
+        if (!this.world.isClient) {
+            if (this.usesEnergy()) {
+                // Check solar panel conditions.
+                if (world.isDay() && !world.isRaining() && !world.isThundering() && world.isSkyVisible(this.getPos().up())) {
+                    this.cumulateEnergy();
+                }
 
-            blockEntity.energyOut();
+                this.energyOut();
+            }
         }
     }
 }

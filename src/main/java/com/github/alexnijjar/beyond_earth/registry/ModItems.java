@@ -66,16 +66,14 @@ public class ModItems {
                 rover.getNbt().putInt("Fuel", RoverItem.MAX_FUEL);
 
                 ItemStack spaceSuit = ModArmour.SPACE_SUIT.getDefaultStack();
-                spaceSuit.setNbt(new NbtCompound());
-                spaceSuit.getNbt().putInt("Oxygen", SpaceSuit.MAX_OXYGEN);
+                ((SpaceSuit) spaceSuit.getItem()).setAmount(spaceSuit, ((SpaceSuit) spaceSuit.getItem()).getTankSize());
 
                 ItemStack netheriteSpaceSuit = ModArmour.NETHERITE_SPACE_SUIT.getDefaultStack();
-                netheriteSpaceSuit.setNbt(new NbtCompound());
-                netheriteSpaceSuit.getNbt().putInt("Oxygen", NetheriteSpaceSuit.MAX_OXYGEN);
+                ((NetheriteSpaceSuit) netheriteSpaceSuit.getItem()).setAmount(netheriteSpaceSuit, ((NetheriteSpaceSuit) netheriteSpaceSuit.getItem()).getTankSize());
 
                 ItemStack jetSuit = ModArmour.JET_SUIT.getDefaultStack();
-                jetSuit.setNbt(new NbtCompound());
-                jetSuit.getNbt().putInt("Oxygen", JetSuit.MAX_OXYGEN);
+                ((JetSuit) jetSuit.getItem()).setAmount(jetSuit, ((JetSuit) jetSuit.getItem()).getTankSize());
+                ((JetSuit) jetSuit.getItem()).setStoredEnergy(jetSuit, JetSuit.MAX_ENERGY);
 
                 stacks.addAll(Collections.nCopies(45, ItemStack.EMPTY));
 
@@ -113,10 +111,11 @@ public class ModItems {
                 stacks.set(27, ModItems.GUIDE_BOOK.getDefaultStack());
                 stacks.set(28, ModItems.SPACE_PAINTING.getDefaultStack());
                 stacks.set(29, ModItems.CHEESE.getDefaultStack());
+                stacks.set(30, ModItems.ROCKET_LAUNCH_PAD.getDefaultStack());
 
-                stacks.set(36, ModItems.ROCKET_LAUNCH_PAD.getDefaultStack());
-                stacks.set(37, ModFluids.OIL_BUCKET.getDefaultStack());
-                stacks.set(38, ModFluids.FUEL_BUCKET.getDefaultStack());
+                stacks.set(36, ModFluids.OIL_BUCKET.getDefaultStack());
+                stacks.set(37, ModFluids.FUEL_BUCKET.getDefaultStack());
+                stacks.set(38, ModFluids.OXYGEN_BUCKET.getDefaultStack());
 
         }).build();
 

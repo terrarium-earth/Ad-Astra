@@ -1,11 +1,11 @@
 package com.github.alexnijjar.beyond_earth.blocks.machines.entity;
 
+import org.jetbrains.annotations.Nullable;
+
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.CompressorScreenHandler;
 import com.github.alexnijjar.beyond_earth.recipes.CookingRecipe;
 import com.github.alexnijjar.beyond_earth.registry.ModBlockEntities;
 import com.github.alexnijjar.beyond_earth.registry.ModRecipes;
-
-import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -14,12 +14,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
 
 public class CompressorBlockEntity extends ProcessingMachineBlockEntity {
 
     public static final long MAX_ENERGY = 9000L;
-    public static final long ENERGY_PER_TICK = 1L;
+    public static final long ENERGY_PER_TICK = 5L;
 
     public CompressorBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.COMPRESSOR_ENTITY, blockPos, blockState);
@@ -62,32 +61,37 @@ public class CompressorBlockEntity extends ProcessingMachineBlockEntity {
         return slot == 1;
     }
 
-    public static void serverTick(World world, BlockPos pos, BlockState state, AbstractMachineBlockEntity blockEntity) {
-        if (blockEntity.usesEnergy()) {
-            CompressorBlockEntity entity = (CompressorBlockEntity) blockEntity;
+    @Override
+    public void tick() {
+        if (!this.world.isClient) {
+            if (this.usesEnergy()) {
 
-            ItemStack input = entity.getStack(0);
+                ItemStack input = this.getStack(0);
 
-            if (entity.getEnergy() > 0) {
+                if (this.getEnergy() > 0) {
 
-                if (!input.isEmpty() && (input.getItem().equals(entity.inputItem) || entity.inputItem == null)) {
-                    if (entity.cookTime < entity.cookTimeTotal) {
-                        entity.cookTime++;
-                        entity.drainEnergy();
+                    if (!input.isEmpty() && (input.getItem().equals(this.inputItem) || this.inputItem == null)) {
+                        this.setActive(true);
+                        if (this.cookTime < this.cookTimeTotal) {
+                            this.cookTime++;
+                            this.drainEnergy();
 
-                    } else if (entity.outputStack != null) {
-                        input.decrement(1);
-                        entity.finishCooking();
+                        } else if (this.outputStack != null) {
+                            input.decrement(1);
+                            this.finishCooking();
 
-                    } else {
-                        CookingRecipe recipe = entity.createRecipe(ModRecipes.COMPRESSING_RECIPE, input, true);
-                        if (recipe != null) {
-                            entity.cookTimeTotal = recipe.getCookTime();
-                            entity.cookTime = 0;
+                        } else {
+                            CookingRecipe recipe = this.createRecipe(ModRecipes.COMPRESSING_RECIPE, input, true);
+                            if (recipe != null) {
+                                this.cookTimeTotal = recipe.getCookTime();
+                                this.cookTime = 0;
+                            }
                         }
+                    } else if (this.outputStack != null) {
+                        this.stopCooking();
+                    } else {
+                        this.setActive(false);
                     }
-                } else if (entity.outputStack != null) {
-                    entity.stopCooking();
                 }
             }
         }

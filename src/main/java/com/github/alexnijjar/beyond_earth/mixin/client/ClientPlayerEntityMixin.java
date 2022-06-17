@@ -1,5 +1,10 @@
 package com.github.alexnijjar.beyond_earth.mixin.client;
 
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
 import com.github.alexnijjar.beyond_earth.client.screens.PlayerOverlayScreen;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.LanderEntity;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntity;
@@ -7,15 +12,9 @@ import com.github.alexnijjar.beyond_earth.entities.vehicles.VehicleEntity;
 import com.github.alexnijjar.beyond_earth.items.armour.SpaceSuit;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
 
 @Mixin(ClientPlayerEntity.class)
 public class ClientPlayerEntityMixin {
@@ -30,16 +29,11 @@ public class ClientPlayerEntityMixin {
 
         if (ModUtils.hasFullSpaceSet(player)) {
             ItemStack chest = player.getEquippedStack(EquipmentSlot.CHEST);
-            int oxygen = 0;
             if (chest.getItem() instanceof SpaceSuit suit) {
-                NbtCompound nbt = chest.getNbt();
-
-                if (nbt.contains("Oxygen")) {
-                    oxygen = nbt.getInt("Oxygen");
-                }
+                long oxygen = suit.getAmount(chest);
 
                 // Render oxygen info.
-                double ratio = oxygen / (float) suit.getMaxOxygen();
+                double ratio = oxygen / (float) suit.getTankSize();
                 PlayerOverlayScreen.oxygenRatio = ratio;
             }
         }

@@ -2,6 +2,7 @@ package com.github.alexnijjar.beyond_earth.blocks.machines.entity;
 
 import org.jetbrains.annotations.Nullable;
 
+import com.github.alexnijjar.beyond_earth.blocks.machines.AbstractMachineBlock;
 import com.github.alexnijjar.beyond_earth.util.SimpleInventory;
 
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
@@ -29,7 +30,6 @@ import team.reborn.energy.api.EnergyStorage;
 import team.reborn.energy.api.EnergyStorageUtil;
 import team.reborn.energy.api.base.SimpleSidedEnergyContainer;
 
-@SuppressWarnings("UnstableApiUsage")
 public abstract class AbstractMachineBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, SimpleInventory, SidedInventory {
 
     private final DefaultedList<ItemStack> inventory;
@@ -37,6 +37,9 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
     public AbstractMachineBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
         super(blockEntityType, blockPos, blockState);
         inventory = DefaultedList.ofSize(getInventorySize(), ItemStack.EMPTY);
+    }
+
+    public void tick() {
     }
 
     @Nullable
@@ -89,6 +92,10 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
 
     public int getInventorySize() {
         return 0;
+    }
+
+    public void setActive(boolean active) {
+        this.world.setBlockState(this.getPos(), this.getCachedState().with(AbstractMachineBlock.LIT, active));
     }
 
     public void cumulateEnergy() {

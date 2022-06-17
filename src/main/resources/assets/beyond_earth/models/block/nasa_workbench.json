@@ -1,13 +1,13 @@
 {
   "parent": "beyond_earth:custom/nasa_workbench",
   "textures": {
-    "all": "beyond_earth:blocks/workbench_nasa_top_2",
-    "particle": "beyond_earth:blocks/workbench_nasa_top_2",
-    "1": "beyond_earth:blocks/workbench_nasa_top",
-    "2": "beyond_earth:blocks/workbench_nasa_top_2",
+    "all": "beyond_earth:blocks/nasa_workbench_top_overlay",
+    "particle": "beyond_earth:blocks/nasa_workbench_top_overlay",
+    "1": "beyond_earth:blocks/nasa_workbench_top",
+    "2": "beyond_earth:blocks/nasa_workbench_top_overlay",
     "3": "beyond_earth:blocks/nasa_workbench_main",
-    "4": "beyond_earth:blocks/workbench_nasa_side",
-    "5": "beyond_earth:blocks/workbench_nasa_holder",
-    "missing": "beyond_earth:blocks/workbench_nasa_top"
+    "4": "beyond_earth:blocks/nasa_workbench_side",
+    "5": "beyond_earth:blocks/nasa_workbench_holder",
+    "missing": "beyond_earth:blocks/nasa_workbench_top"
   }
 }

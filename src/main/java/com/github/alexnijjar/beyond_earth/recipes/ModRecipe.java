@@ -18,6 +18,10 @@ public abstract class ModRecipe implements Recipe<Inventory>, Predicate<ItemStac
     protected Ingredient[] inputs = new Ingredient[1];
     protected List<Integer> stackCounts;
 
+    public ModRecipe(Identifier id) {
+        this.id = id;
+    }
+    
     public ModRecipe(Identifier id, Ingredient input) {
         this.id = id;
         this.inputs[0] = input;

@@ -63,9 +63,9 @@ public class ModBlockEntities {
                 OXYGEN_BUBBLE_DISTRIBUTOR_ENTITY = register("oxygen_bubble_distributor_entity", OxygenBubbleDistributorBlockEntity::new, ModBlocks.OXYGEN_BUBBLE_DISTRIBUTOR);
                 WATER_PUMP_ENTITY = register("water_pump_entity", WaterPumpBlockEntity::new, ModBlocks.WATER_PUMP);
 
-                EnergyStorage.SIDED.registerForBlockEntities((blockEntity, direction) -> ((AbstractMachineBlockEntity) blockEntity).getSideEnergyStorage(direction), SOLAR_PANEL_ENTITY, COAL_GENERATOR_ENTITY, COMPRESSOR_ENTITY, FUEL_REFINERY_ENTITY);
+                EnergyStorage.SIDED.registerForBlockEntities((blockEntity, direction) -> ((AbstractMachineBlockEntity) blockEntity).getSideEnergyStorage(direction), SOLAR_PANEL_ENTITY, COAL_GENERATOR_ENTITY, COMPRESSOR_ENTITY, FUEL_REFINERY_ENTITY, OXYGEN_LOADER_ENTITY);
 
-                FluidStorage.SIDED.registerForBlockEntities((blockEntity, direction) -> ((FluidMachineBlockEntity) blockEntity).fluidStorage, FUEL_REFINERY_ENTITY, OXYGEN_LOADER_ENTITY, OXYGEN_BUBBLE_DISTRIBUTOR_ENTITY, WATER_PUMP_ENTITY);
+                FluidStorage.SIDED.registerForBlockEntities((blockEntity, direction) -> ((FluidMachineBlockEntity) blockEntity).inputTank, FUEL_REFINERY_ENTITY, OXYGEN_LOADER_ENTITY, OXYGEN_BUBBLE_DISTRIBUTOR_ENTITY, WATER_PUMP_ENTITY);
         }
 
         public static <T extends BlockEntity> BlockEntityType<T> register(String id, FabricBlockEntityTypeBuilder.Factory<T> factory, Block... blocks) {

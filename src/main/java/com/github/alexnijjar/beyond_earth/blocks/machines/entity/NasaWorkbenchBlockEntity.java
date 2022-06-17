@@ -23,7 +23,6 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
 
 public class NasaWorkbenchBlockEntity extends AbstractMachineBlockEntity {
 
@@ -86,14 +85,18 @@ public class NasaWorkbenchBlockEntity extends AbstractMachineBlockEntity {
 
     }
 
-    public static void serverTick(World world, BlockPos pos, BlockState state, AbstractMachineBlockEntity blockEntity) {
-        NasaWorkbenchBlockEntity entity = (NasaWorkbenchBlockEntity) blockEntity;
-
-        for (ItemStack input : entity.getItems()) {
-            if (!input.isEmpty()) {
-                NasaWorkbenchRecipe recipe = ModRecipes.NASA_WORKBENCH_RECIPE.findFirst(world, f -> f.test(input));
-                if (recipe != null) {
-                    entity.spawnWorkingParticles();
+    @Override
+    public void tick() {
+        if (!this.world.isClient) {
+            for (ItemStack input : this.getItems()) {
+                if (!input.isEmpty()) {
+                    NasaWorkbenchRecipe recipe = ModRecipes.NASA_WORKBENCH_RECIPE.findFirst(world, f -> f.test(input));
+                    if (recipe != null) {
+                        this.spawnWorkingParticles();
+                        this.setActive(true);
+                    } else {
+                        this.setActive(false);
+                    }
                 }
             }
         }

@@ -2,8 +2,8 @@
   "parent": "block/cube",
   "textures": {
     "down": "beyond_earth:blocks/machine_back",
-    "up": "beyond_earth:blocks/vent_back",
-    "north": "beyond_earth:blocks/oxygen_bubble_distributor_front",
+    "up": "beyond_earth:blocks/machine_back",
+    "north": "beyond_earth:blocks/oxygen_loader_front_active",
     "east": "beyond_earth:blocks/machine_side",
     "south": "beyond_earth:blocks/machine_side",
     "west": "beyond_earth:blocks/machine_side",

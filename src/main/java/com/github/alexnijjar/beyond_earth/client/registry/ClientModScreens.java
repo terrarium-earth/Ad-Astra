@@ -2,7 +2,7 @@ package com.github.alexnijjar.beyond_earth.client.registry;
 
 import com.github.alexnijjar.beyond_earth.client.screens.CoalGeneratorScreen;
 import com.github.alexnijjar.beyond_earth.client.screens.CompressorScreen;
-import com.github.alexnijjar.beyond_earth.client.screens.FuelRefineryScreen;
+import com.github.alexnijjar.beyond_earth.client.screens.ConversionScreen;
 import com.github.alexnijjar.beyond_earth.client.screens.NasaWorkbenchScreen;
 import com.github.alexnijjar.beyond_earth.client.screens.SolarPanelScreen;
 import com.github.alexnijjar.beyond_earth.client.screens.planet_selection.PlanetSelectionScreen;
@@ -20,7 +20,7 @@ public class ClientModScreens {
         HandledScreens.register(ModScreenHandlers.COAL_GENERATOR_SCREEN_HANDLER, CoalGeneratorScreen::new);
         HandledScreens.register(ModScreenHandlers.COMPRESSOR_SCREEN_HANDLER, CompressorScreen::new);
         HandledScreens.register(ModScreenHandlers.NASA_WORKBENCH_SCREEN_HANDLER, NasaWorkbenchScreen::new);
-        HandledScreens.register(ModScreenHandlers.FUEL_REFINERY_SCREEN_HANDLER, FuelRefineryScreen::new);
+        HandledScreens.register(ModScreenHandlers.CONVERSION_SCREEN_HANDLER, (handler, playerInventory, title) -> new ConversionScreen(handler, playerInventory, title));
 
         HandledScreens.register(ModScreenHandlers.PLANET_SELECTION_SCREEN_HANDLER, PlanetSelectionScreen::new);
     }

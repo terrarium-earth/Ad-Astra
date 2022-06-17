@@ -29,7 +29,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.recipe.Ingredient;
@@ -249,13 +248,10 @@ public class ModUtils {
 
     public static boolean hasOxygenatedSpaceSuit(PlayerEntity player) {
         ItemStack chest = player.getEquippedStack(EquipmentSlot.CHEST);
-        NbtCompound nbt = chest.getNbt();
-
-        if (nbt.contains("Oxygen")) {
-            if (nbt.getInt("Oxygen") > 0) {
-                return true;
-            }
+        if (chest.getItem() instanceof SpaceSuit suit) {
+            return suit.getAmount(chest) > 0;
         }
+
         return false;
     }
 
@@ -329,9 +325,5 @@ public class ModUtils {
         vehicle.setYaw(newYaw);
         vehicle.setBodyYaw(newYaw);
         vehicle.prevYaw = newYaw;
-    }
-
-    public static long dropletsToMillibuckets(long droplets) {
-        return droplets / 81;
     }
 }

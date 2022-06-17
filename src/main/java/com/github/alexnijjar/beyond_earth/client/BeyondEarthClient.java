@@ -114,6 +114,8 @@ public class BeyondEarthClient implements ClientModInitializer {
                                 new SimpleFluidRenderHandler(new ModIdentifier("blocks/fluid_fuel_still"), new ModIdentifier("blocks/fluid_fuel_flow"), new ModIdentifier("blocks/fuel_overlay")));
                 FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.OIL_STILL, ModFluids.FLOWING_OIL,
                                 new SimpleFluidRenderHandler(new ModIdentifier("blocks/fluid_oil_still"), new ModIdentifier("blocks/fluid_oil_flow"), new ModIdentifier("blocks/oil_overlay")));
+                                FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.OXYGEN_STILL,
+                                new SimpleFluidRenderHandler(new ModIdentifier("blocks/fluid_oxygen_still"), new ModIdentifier("blocks/fluid_oxygen_still"), new ModIdentifier("blocks/fluid_oxygen_still")));
 
                 // Fluid textures.
                 ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register((atlasTexture, registry) -> {
@@ -124,10 +126,13 @@ public class BeyondEarthClient implements ClientModInitializer {
                         registry.register(new ModIdentifier("blocks/fluid_oil_still"));
                         registry.register(new ModIdentifier("blocks/fluid_oil_flow"));
                         registry.register(new ModIdentifier("blocks/oil_overlay"));
+
+                        registry.register(new ModIdentifier("blocks/fluid_oxygen_still"));
                 });
 
                 BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.FUEL_STILL, ModFluids.FLOWING_FUEL);
                 BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.OIL_STILL, ModFluids.FLOWING_OIL);
+                BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.OXYGEN_STILL);
 
                 BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), ModBlocks.WATER_PUMP);
                 BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(), ModBlocks.COAL_LANTERN);

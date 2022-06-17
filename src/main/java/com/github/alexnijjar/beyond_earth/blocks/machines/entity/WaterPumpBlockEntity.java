@@ -15,7 +15,16 @@ public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
     }
 
     @Override
-    public int getBuckets() {
+    public long getInputSize() {
         return TANK_SIZE;
+    }
+
+    @Override
+    public long getOutputSize() {
+        return 0;
+    }
+
+    @Override
+    public void tick() {
     }
 }

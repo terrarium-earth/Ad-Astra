@@ -117,6 +117,7 @@
   "block.beyond_earth.nasa_workbench": "§dNASA Workbench",
   "block.beyond_earth.oil": "Oil",
   "block.beyond_earth.ostrum_block": "Block of Ostrum",
+  "block.beyond_earth.oxygen": "Oxygen",
   "block.beyond_earth.oxygen_bubble_distributor": "Oxygen Bubble Distributor",
   "block.beyond_earth.oxygen_loader": "Oxygen Loader",
   "block.beyond_earth.permafrost": "Permafrost",
@@ -212,6 +213,7 @@
   "entity.beyond_earth.rocket_t3": "Tier 3 Rocket",
   "entity.beyond_earth.rocket_t4": "Tier 4 Rocket",
   "entity.beyond_earth.rover": "Rover",
+  "entity.beyond_earth.space_painting": "Space Painting",
   "entity.beyond_earth.star_crawler": "Star Crawler",
   "entity.beyond_earth.zombified_mogler": "Zombified Mogler",
 
@@ -225,7 +227,7 @@
   "gauge.beyond_earth.oxygenloading": "Loading",
   "gauge_text.beyond_earth.capacity": "Energy Capacity: %s E",
   "gauge_text.beyond_earth.max_generation": "Max. Energy Generation: %s E/t",
-  "gauge_text.beyond_earth.storage": "Energy: %s E / %d E",
+  "gauge_text.beyond_earth.storage": "\u00A7eEnergy: %s E / %d E",
   "gauge_text.beyond_earth.liquid_storage": "%s mB / %d mB",
   "gauge_text.beyond_earth.stored": "Stored Energy: %s E",
 
@@ -302,6 +304,7 @@
   "item.beyond_earth.ostrum_ingot": "Ostrum Ingot",
   "item.beyond_earth.ostrum_nugget": "Ostrum Nugget",
   "item.beyond_earth.ostrum_tank": "Ostrum Tank",
+  "item.beyond_earth.oxygen_bucket": "Oxygen Bucket",
   "item.beyond_earth.oxygen_gear": "Oxygen Gear",
   "item.beyond_earth.oxygen_mask": "Oxygen Mask",
   "item.beyond_earth.oxygen_tank": "Oxygen Tank",
@@ -330,7 +333,7 @@
   "item.beyond_earth.steel_nugget": "Steel Nugget",
   "item.beyond_earth.steel_tank": "Steel Tank",
   "item.beyond_earth.water_pump": "Water Pump",
-  "item.beyond_earth.water_pump.tooltip": "Fluid Transfer: %s mb/t",
+  "item.beyond_earth.water_pump.tooltip": "Fluid Transfer: %s mB/t",
   "item.beyond_earth.wheel": "Wheel",
   "item.beyond_earth.zombified_mogler_spawn_egg": "Zombified Mogler Spawn Egg",
 
@@ -352,6 +355,6 @@
   "message.beyond_earth.speed": "%s m/s",
 
   "tooltip.beyond_earth.oxygen_bubble_distributor": "Make an Oxygen Bullet %1$s ~ %2$s Blocks",
-  "tooltip.beyond_earth.space_suit": "\u00A7bOxygen: \u00A7%s/%d mb",
-  "tooltip.beyond_earth.vehicle_fuel": "\u00A7bFuel: \u00A7%s/%d mb"
+  "tooltip.beyond_earth.space_suit": "\u00A7bOxygen: \u00A7%s/%d mB",
+  "tooltip.beyond_earth.vehicle_fuel": "\u00A7bFuel: \u00A7%s/%d mB"
 }

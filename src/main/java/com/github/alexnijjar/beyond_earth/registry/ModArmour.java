@@ -18,25 +18,25 @@ public class ModArmour {
         public static final ArmorMaterial JET_SUIT_ARMOUR_MATERIAL = new JetSuitMaterial();
 
         // Spacesuit.
-        public static final Item OXYGEN_MASK = new SpaceSuit(SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings());
-        public static final Item SPACE_SUIT = new SpaceSuit(SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings());
-        public static final Item SPACE_PANTS = new SpaceSuit(SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings());
-        public static final Item SPACE_BOOTS = new SpaceSuit(SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.FEET, new Item.Settings());
+        public static final SpaceSuit OXYGEN_MASK = new SpaceSuit(SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings());
+        public static final SpaceSuit SPACE_SUIT = new SpaceSuit(SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings());
+        public static final SpaceSuit SPACE_PANTS = new SpaceSuit(SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings());
+        public static final SpaceSuit SPACE_BOOTS = new SpaceSuit(SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.FEET, new Item.Settings());
 
         // Netherite Spacesuit.
-        public static final Item NETHERITE_OXYGEN_MASK = new NetheriteSpaceSuit(NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().fireproof());
-        public static final Item NETHERITE_SPACE_SUIT = new NetheriteSpaceSuit(NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().fireproof());
-        public static final Item NETHERITE_SPACE_PANTS = new NetheriteSpaceSuit(NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().fireproof());
-        public static final Item NETHERITE_SPACE_BOOTS = new NetheriteSpaceSuit(NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().fireproof());
+        public static final NetheriteSpaceSuit NETHERITE_OXYGEN_MASK = new NetheriteSpaceSuit(NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().fireproof());
+        public static final NetheriteSpaceSuit NETHERITE_SPACE_SUIT = new NetheriteSpaceSuit(NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().fireproof());
+        public static final NetheriteSpaceSuit NETHERITE_SPACE_PANTS = new NetheriteSpaceSuit(NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().fireproof());
+        public static final NetheriteSpaceSuit NETHERITE_SPACE_BOOTS = new NetheriteSpaceSuit(NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().fireproof());
 
-        public static final Item JET_SUIT_OXYGEN_MASK = new JetSuit(JET_SUIT_ARMOUR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().fireproof());
-        public static final Item JET_SUIT = new JetSuit(JET_SUIT_ARMOUR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().fireproof());
-        public static final Item JET_SUIT_PANTS = new JetSuit(JET_SUIT_ARMOUR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().fireproof());
-        public static final Item JET_SUIT_BOOTS = new JetSuit(JET_SUIT_ARMOUR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().fireproof());
+        public static final JetSuit JET_SUIT_OXYGEN_MASK = new JetSuit(JET_SUIT_ARMOUR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().fireproof());
+        public static final JetSuit JET_SUIT = new JetSuit(JET_SUIT_ARMOUR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().fireproof());
+        public static final JetSuit JET_SUIT_PANTS = new JetSuit(JET_SUIT_ARMOUR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().fireproof());
+        public static final JetSuit JET_SUIT_BOOTS = new JetSuit(JET_SUIT_ARMOUR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().fireproof());
 
-        public static final Item[] SPACE_SUIT_SET = { OXYGEN_MASK, SPACE_SUIT, SPACE_PANTS, SPACE_BOOTS };
-        public static final Item[] NETHERITE_SPACE_SUIT_SET = { NETHERITE_OXYGEN_MASK, NETHERITE_SPACE_SUIT, NETHERITE_SPACE_PANTS, NETHERITE_SPACE_BOOTS };
-        public static final Item[] JET_SUIT_SET = { JET_SUIT_OXYGEN_MASK, JET_SUIT, JET_SUIT_PANTS, JET_SUIT_BOOTS };
+        public static final SpaceSuit[] SPACE_SUIT_SET = { OXYGEN_MASK, SPACE_SUIT, SPACE_PANTS, SPACE_BOOTS };
+        public static final NetheriteSpaceSuit[] NETHERITE_SPACE_SUIT_SET = { NETHERITE_OXYGEN_MASK, NETHERITE_SPACE_SUIT, NETHERITE_SPACE_PANTS, NETHERITE_SPACE_BOOTS };
+        public static final JetSuit[] JET_SUIT_SET = { JET_SUIT_OXYGEN_MASK, JET_SUIT, JET_SUIT_PANTS, JET_SUIT_BOOTS };
 
         public static void register() {
 
@@ -57,5 +57,10 @@ public class ModArmour {
                 ModItems.register("jet_suit", JET_SUIT);
                 ModItems.register("jet_suit_pants", JET_SUIT_PANTS);
                 ModItems.register("jet_suit_boots", JET_SUIT_BOOTS);
+
+                // Space suit oxygen tank
+                SPACE_SUIT.registerOxygenTank();
+                NETHERITE_SPACE_SUIT.registerOxygenTank();
+                JET_SUIT.registerOxygenTank();
         }
 }
