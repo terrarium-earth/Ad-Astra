@@ -38,14 +38,14 @@ public class RocketEntityTier4 extends RocketEntity {
         if (this.world instanceof ServerWorld serverWorld) {
             Vec3d pos = this.getPos();
 
-            float xRotator = MathHelper.cos((float) (this.getY() * (Math.PI / 180f))) * (0.7f + 0.21f);
-            float zRotator = MathHelper.sin((float) (this.getY() * (Math.PI / 180f))) * (0.7f + 0.21f);
+            float xRotator = MathHelper.cos(this.getYaw() * ((float) Math.PI / 180)) * (0.7f + 0.21f * (float) 1);
+            float zRotator = MathHelper.sin(this.getYaw() * ((float) Math.PI / 180)) * (0.7f + 0.21f * (float) 1);
 
             ModUtils.spawnForcedParticles(serverWorld, ModParticles.SMALL_FLAME, pos.getX() + xRotator, pos.getY() + 0.35, pos.getZ() + zRotator, 20, 0.1, 0.1, 0.1, 0.001);
-            ModUtils.spawnForcedParticles(serverWorld, ModParticles.SMALL_SMOKE, pos.getX() + xRotator, pos.getY() + 0.35, pos.getZ() + zRotator, 10, 0.1, 0.1, 0.1, 0.001);
+            ModUtils.spawnForcedParticles(serverWorld, ModParticles.SMALL_SMOKE, pos.getX() + xRotator, pos.getY() + 0.35, pos.getZ() + zRotator, 10, 0.1, 0.1, 0.1, 0.04);
 
             ModUtils.spawnForcedParticles(serverWorld, ModParticles.SMALL_FLAME, pos.getX() - xRotator, pos.getY() + 0.35, pos.getZ() - zRotator, 20, 0.1, 0.1, 0.1, 0.001);
-            ModUtils.spawnForcedParticles(serverWorld, ModParticles.SMALL_SMOKE, pos.getX() - xRotator, pos.getY() + 0.35, pos.getZ() - zRotator, 10, 0.1, 0.1, 0.1, 0.001);
+            ModUtils.spawnForcedParticles(serverWorld, ModParticles.SMALL_SMOKE, pos.getX() - xRotator, pos.getY() + 0.35, pos.getZ() - zRotator, 10, 0.1, 0.1, 0.1, 0.04);
         }
     }
 }

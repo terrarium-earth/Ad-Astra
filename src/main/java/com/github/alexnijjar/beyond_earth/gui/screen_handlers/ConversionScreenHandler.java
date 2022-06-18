@@ -8,14 +8,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.slot.Slot;
 
-public class ConversionScreenHandler<T extends FluidMachineBlockEntity> extends AbstractMachineScreenHandler {
+public class ConversionScreenHandler extends AbstractMachineScreenHandler {
 
-    @SuppressWarnings("unchecked")
     public ConversionScreenHandler(int syncId, PlayerInventory inventory, PacketByteBuf buf) {
-        this(syncId, inventory, (T) inventory.player.world.getBlockEntity(buf.readBlockPos()));
+        this(syncId, inventory, (FluidMachineBlockEntity) inventory.player.world.getBlockEntity(buf.readBlockPos()));
     }
 
-    public ConversionScreenHandler(int syncId, PlayerInventory inventory, T entity) {
+    public ConversionScreenHandler(int syncId, PlayerInventory inventory, FluidMachineBlockEntity entity) {
         super(ModScreenHandlers.CONVERSION_SCREEN_HANDLER, syncId, inventory, entity, new Slot[] {
 
                 // Left Insert.

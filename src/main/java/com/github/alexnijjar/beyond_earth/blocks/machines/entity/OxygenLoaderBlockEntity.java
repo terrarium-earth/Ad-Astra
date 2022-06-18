@@ -66,7 +66,7 @@ public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
     @Nullable
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
-        return new ConversionScreenHandler<OxygenLoaderBlockEntity>(syncId, inv, this);
+        return new ConversionScreenHandler(syncId, inv, this);
     }
 
     @Override

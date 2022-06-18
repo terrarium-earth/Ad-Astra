@@ -45,6 +45,11 @@ public class FluidUtils {
 			}
 
 			@Override
+			protected boolean canExtract(FluidVariant variant) {
+				return true;
+			}
+
+			@Override
 			protected void onFinalCommit() {
 				blockEntity.markDirty();
 			}

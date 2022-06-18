@@ -39,7 +39,7 @@ public abstract class PlayerEntityMixin {
                     if (ModKeyBindings.jumpKeyDown(player)) {
                         jetSuit.fly(player, chest);
                     } else {
-                        jetSuit.isFlying = false;
+                        jetSuit.isFallFlying = false;
                     }
                 }
             }

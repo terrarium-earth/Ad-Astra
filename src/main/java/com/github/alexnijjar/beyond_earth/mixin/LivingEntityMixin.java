@@ -57,12 +57,6 @@ public abstract class LivingEntityMixin {
         if (fallDistance <= 3 / ModUtils.getPlanetGravity(entity.world)) {
             info.setReturnValue(false);
         }
-
-        if (entity instanceof PlayerEntity player) {
-            if (ModUtils.hasFullJetSuitSet(player)) {
-                info.setReturnValue(false);
-            }
-        }
     }
 
     @Inject(method = "damage", at = @At("HEAD"), cancellable = true)

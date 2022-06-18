@@ -41,6 +41,7 @@ public class VehicleEntity extends Entity {
     protected double clientXVelocity;
     protected double clientYVelocity;
     protected double clientZVelocity;
+    public float previousYaw;
 
     protected static final TrackedData<Float> SPEED = DataTracker.registerData(VehicleEntity.class, TrackedDataHandlerRegistry.FLOAT);
 
@@ -81,6 +82,7 @@ public class VehicleEntity extends Entity {
     @Override
     public void tick() {
         super.tick();
+        this.previousYaw = this.getYaw();
 
         if (this.getFirstPassenger() instanceof PlayerEntity player) {
             player.getAbilities().allowFlying = true;

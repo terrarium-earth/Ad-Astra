@@ -18,6 +18,7 @@ import com.github.alexnijjar.beyond_earth.items.armour.NetheriteSpaceSuit;
 import com.github.alexnijjar.beyond_earth.items.armour.SpaceSuit;
 import com.github.alexnijjar.beyond_earth.items.vehicles.RocketItem;
 import com.github.alexnijjar.beyond_earth.items.vehicles.RoverItem;
+import com.github.alexnijjar.beyond_earth.util.FluidUtils;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
@@ -247,7 +248,7 @@ public class ModItems {
         public static final BlockItem WATER_PUMP = register("water_pump", new BlockItem(ModBlocks.WATER_PUMP, new Item.Settings().group(ITEM_GROUP_MACHINES)) {
                 @Override
                 public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-                        tooltip.add((Text.translatable("item.beyond_earth.water_pump.tooltip", WaterPumpBlockEntity.TRANSFER_PER_TICK).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
+                        tooltip.add((Text.translatable("item.beyond_earth.water_pump.tooltip", FluidUtils.dropletsToMillibuckets(WaterPumpBlockEntity.TRANSFER_PER_TICK)).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
                 }
         });
 

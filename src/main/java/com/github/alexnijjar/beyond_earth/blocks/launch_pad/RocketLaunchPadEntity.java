@@ -13,10 +13,11 @@ public class RocketLaunchPadEntity extends BlockEntity {
         super(ModBlockEntities.ROCKET_LAUNCH_PAD_ENTITY, pos, state);
     }
 
-    public static void serverTick(World world, BlockPos pos, BlockState state, RocketLaunchPadEntity blockEntity) {
-
-        boolean raise = checkInRadius(true, pos, world) && checkInRadius(false, pos, world);
-        world.setBlockState(pos, state.with(RocketLaunchPad.STAGE, raise));
+    public void tick() {
+        if (world.isClient) {
+            boolean raise = checkInRadius(true, pos, this.world) && checkInRadius(false, this.getPos(), this.world);
+            this.world.setBlockState(pos, this.getCachedState().with(RocketLaunchPad.STAGE, raise));
+        }
     }
 
     private static boolean checkInRadius(boolean lookForPlatforms, BlockPos pos, World world) {

@@ -6,6 +6,7 @@ import com.github.alexnijjar.beyond_earth.gui.screen_handlers.ConversionScreenHa
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.NasaWorkbenchScreenHandler;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.PlanetSelectionScreenHandler;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.SolarPanelScreenHandler;
+import com.github.alexnijjar.beyond_earth.gui.screen_handlers.WaterPumpScreenHandler;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
@@ -19,7 +20,8 @@ public class ModScreenHandlers {
     public static ScreenHandlerType<CoalGeneratorScreenHandler> COAL_GENERATOR_SCREEN_HANDLER;
     public static ScreenHandlerType<CompressorScreenHandler> COMPRESSOR_SCREEN_HANDLER;
     public static ScreenHandlerType<NasaWorkbenchScreenHandler> NASA_WORKBENCH_SCREEN_HANDLER;
-    public static ScreenHandlerType<ConversionScreenHandler<?>> CONVERSION_SCREEN_HANDLER;
+    public static ScreenHandlerType<ConversionScreenHandler> CONVERSION_SCREEN_HANDLER;
+    public static ScreenHandlerType<WaterPumpScreenHandler> WATER_PUMP_SCREEN_HANDLER;
 
     public static ScreenHandlerType<PlanetSelectionScreenHandler> PLANET_SELECTION_SCREEN_HANDLER;
 
@@ -30,6 +32,7 @@ public class ModScreenHandlers {
         COMPRESSOR_SCREEN_HANDLER = register("compressor_gui", CompressorScreenHandler::new);
         NASA_WORKBENCH_SCREEN_HANDLER = register("nasa_workbench_gui", NasaWorkbenchScreenHandler::new);
         CONVERSION_SCREEN_HANDLER = register("conversion_gui", ConversionScreenHandler::new);
+        WATER_PUMP_SCREEN_HANDLER = register("water_pump_gui", WaterPumpScreenHandler::new);
 
         PLANET_SELECTION_SCREEN_HANDLER = register("planet_selection_gui", (syncId, playerInventory, buf) -> new PlanetSelectionScreenHandler(syncId, playerInventory.player, buf));
     }

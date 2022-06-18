@@ -5,6 +5,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import com.github.alexnijjar.beyond_earth.client.renderer.spacesuit.AbstractSpaceSuitModel;
 import com.github.alexnijjar.beyond_earth.client.renderer.spacesuit.JetSuitModel;
 import com.github.alexnijjar.beyond_earth.client.renderer.spacesuit.SpaceSuitModel;
 import com.github.alexnijjar.beyond_earth.client.renderer.spacesuit.SpaceSuitRenderer;
@@ -16,6 +17,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.client.render.entity.model.EntityModelLoader;
@@ -54,23 +56,24 @@ public class PlayerEntityRendererMixin {
             EntityModelLoader modelLoader = MinecraftClient.getInstance().getEntityModelLoader();
             if (spaceSuit instanceof JetSuit) {
                 texture = SpaceSuitRenderer.JET_SUIT_CHEST_LOCATION;
-                model = new SpaceSuitModel(modelLoader.getModelPart(SpaceSuitModel.LAYER_LOCATION), renderer.getModel(), texture);
+                model = new JetSuitModel(modelLoader.getModelPart(JetSuitModel.LAYER_LOCATION), renderer.getModel(), texture);
 
             } else if (spaceSuit instanceof NetheriteSpaceSuit) {
                 texture = SpaceSuitRenderer.NETHERITE_SPACE_SUIT_CHEST_LOCATION;
                 model = new SpaceSuitModel(modelLoader.getModelPart(SpaceSuitModel.LAYER_LOCATION), renderer.getModel(), texture);
             } else {
                 texture = SpaceSuitRenderer.SPACE_SUIT_CHEST_LOCATION;
-                model = new JetSuitModel(modelLoader.getModelPart(JetSuitModel.LAYER_LOCATION), renderer.getModel(), texture);
+                model = new SpaceSuitModel(modelLoader.getModelPart(SpaceSuitModel.LAYER_LOCATION), renderer.getModel(), texture);
             }
 
             matrices.push();
             matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(4));
             
+            VertexConsumer vertex = AbstractSpaceSuitModel.getVertex(RenderLayer.getEntityCutout(texture), player.getEquippedStack(EquipmentSlot.CHEST).hasEnchantments(), MinecraftClient.getInstance());
             if (right) {
-                model.rightArm.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntityTranslucent(texture)), light, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, 1.0f);
+                model.rightArm.render(matrices, vertex, light, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, 1.0f);
             } else {
-                model.leftArm.render(matrices, vertexConsumers.getBuffer(RenderLayer.getEntityTranslucent(texture)), light, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, 1.0f);
+                model.leftArm.render(matrices, vertex, light, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, 1.0f);
             }
             matrices.pop();
         }

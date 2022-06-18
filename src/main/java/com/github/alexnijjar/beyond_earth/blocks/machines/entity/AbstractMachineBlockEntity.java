@@ -95,7 +95,9 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
     }
 
     public void setActive(boolean active) {
-        this.world.setBlockState(this.getPos(), this.getCachedState().with(AbstractMachineBlock.LIT, active));
+        if (this.getCachedState().contains(AbstractMachineBlock.LIT)) {
+            this.world.setBlockState(this.getPos(), this.getCachedState().with(AbstractMachineBlock.LIT, active));
+        }
     }
 
     public void cumulateEnergy() {
@@ -126,11 +128,15 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
     }
 
     public EnergyStorage getSideEnergyStorage(@Nullable Direction side) {
-        return energyStorage.getSideStorage(side);
+        return this.energyStorage.getSideStorage(side);
     }
 
     public long getEnergy() {
-        return energyStorage.amount;
+        return this.energyStorage.amount;
+    }
+
+    public boolean hasEnergy() {
+        return this.usesEnergy() && this.energyStorage.amount > 0;
     }
 
     @Override
@@ -140,7 +146,7 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
 
     @Override
     public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
-        buf.writeBlockPos(this.pos);
+        buf.writeBlockPos(this.getPos());
     }
 
     @Override

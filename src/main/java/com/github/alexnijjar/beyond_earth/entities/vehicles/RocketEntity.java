@@ -26,7 +26,6 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
@@ -168,7 +167,6 @@ public class RocketEntity extends VehicleEntity {
         this.getPassengerList().forEach(passenger -> {
             if (passenger instanceof PlayerEntity player) {
                 if (!(player.currentScreenHandler instanceof PlanetSelectionScreenHandler)) {
-                    player.playerScreenHandler.close(player);
                     player.openHandledScreen(new PlanetSelectionHandlerFactory(this.getTier()));
 
                     if (this.world instanceof ServerWorld serverWorld) {
@@ -176,8 +174,6 @@ public class RocketEntity extends VehicleEntity {
                     }
                     player.getAbilities().allowFlying = false;
                 }
-                this.setInvisible(true);
-                this.setBoundingBox(Box.from(Vec3d.ZERO));
             }
         });
     }

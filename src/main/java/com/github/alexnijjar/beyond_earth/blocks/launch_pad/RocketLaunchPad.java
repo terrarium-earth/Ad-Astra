@@ -1,7 +1,5 @@
 package com.github.alexnijjar.beyond_earth.blocks.launch_pad;
 
-import com.github.alexnijjar.beyond_earth.registry.ModBlockEntities;
-
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.block.Block;
@@ -41,7 +39,11 @@ public class RocketLaunchPad extends BlockWithEntity implements Waterloggable {
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return world.isClient ? null : checkType(type, ModBlockEntities.ROCKET_LAUNCH_PAD_ENTITY, RocketLaunchPadEntity::serverTick);
+        return (entityWorld, pos, entityState, blockEntity) -> {
+			if (blockEntity instanceof RocketLaunchPadEntity launchPad) {
+				launchPad.tick();
+			}
+		};
     }
 
     @Override

@@ -11,8 +11,6 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MovementType;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
@@ -21,7 +19,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import team.reborn.energy.api.base.SimpleBatteryItem;
@@ -30,7 +27,8 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
 
     // 0.2M E.
     public static final long MAX_ENERGY = 200000;
-    public boolean isFlying;
+    public static final double SPEED = 0.5;
+    public boolean isFallFlying;
 
     public JetSuit(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
         super(material, slot, settings);
@@ -43,7 +41,7 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
 
     @Override
     public boolean useCustomElytra(LivingEntity entity, ItemStack chestStack, boolean tickElytra) {
-        return isFlying;
+        return this.isFallFlying;
     }
 
     // Display energy.
@@ -52,65 +50,73 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
         super.appendTooltip(stack, world, tooltip, context);
         if (stack.isOf(ModArmour.JET_SUIT)) {
             long energy = this.getStoredEnergy(stack);
-            tooltip.add(Text.translatable("gauge_text.beyond_earth.storage", energy,MAX_ENERGY).setStyle(Style.EMPTY.withColor(energy > 0 ? Formatting.GREEN : Formatting.RED)));
+            tooltip.add(Text.translatable("gauge_text.beyond_earth.storage", energy, MAX_ENERGY).setStyle(Style.EMPTY.withColor(energy > 0 ? Formatting.GREEN : Formatting.RED)));
         }
     }
 
     public void fly(PlayerEntity player, ItemStack stack) {
-
-        World world = player.world;
-
-        if (this.getStoredEnergy(stack) <= 0) {
-            return;
-        }
-
-        double speed = 0.5f;
-        long energyUsed = 0;
-        Vec3d rotationVector = player.getRotationVector().multiply(speed);
-
-        // Don't fly the jetsuit in creative.
+        // Don't fly the Jet Suit in creative.
         if (player.getAbilities().flying) {
             return;
         }
 
-        if (ModKeyBindings.sprintKeyDown(player)) {
-            if (!player.isOnGround() && !player.isFallFlying() && !player.isTouchingWater() && !player.hasStatusEffect(StatusEffects.LEVITATION)) {
-                player.startFallFlying();
-                isFlying = true;
-            }
-            if (player.isFallFlying()) {
-                energyUsed += 12;
-                Vec3d velocity = player.getVelocity();
-                player.setVelocity(velocity.add(rotationVector.getX() * 0.1 + (rotationVector.getX() * 1.5 - velocity.getX()) * 0.5, rotationVector.getY() * 0.1 + (rotationVector.getY() * 1.5 - velocity.getY()) * 0.5,
-                        rotationVector.getZ() * 0.1 + (rotationVector.getZ() * 1.5 - velocity.getZ()) * 0.5));
-            }
-
-        } else {
-            energyUsed += 6;
-            player.setVelocity(player.getVelocity().add(0.0, ModUtils.getPlanetGravity(world) * 0.25, 0.0));
-            if (player.getVelocity().getY() > 0.25) {
-                player.setVelocity(player.getVelocity().getX(), 0.25, player.getVelocity().getZ());
-            }
-            player.stopFallFlying();
+        // Don't fly if the Jet Suit has no energy.
+        if (this.getStoredEnergy(stack) <= 0) {
+            return;
         }
 
-        this.tryUseEnergy(stack, energyUsed);
-        player.move(MovementType.SELF, player.getVelocity());
+        if (ModKeyBindings.sprintKeyDown(player)) {
+            this.fallFly(player, stack);
+        } else {
+            this.hover(player, stack);
+        }
 
-        if (world instanceof ServerWorld serverWorld) {
+        if (!player.world.isClient) {
+            if (isFallFlying) {
+                if (!player.isFallFlying()) {
+                    player.startFallFlying();
+                }
+            } else {
+                if (player.isFallFlying()) {
+                    player.stopFallFlying();
+                }
+            }
+
+            this.spawnParticles(player, stack);
+        }
+
+    }
+
+    public void hover(PlayerEntity player, ItemStack stack) {
+        this.tryUseEnergy(stack, 6);
+        isFallFlying = false;
+
+        double speed = ModUtils.getPlanetGravity(player.world) * 0.25;
+        player.setVelocity(player.getVelocity().add(0.0, speed, 0.0));
+        if (player.getVelocity().getY() > speed * 10) {
+            player.setVelocity(player.getVelocity().getX(), speed * 10, player.getVelocity().getZ());
+        }
+    }
+
+    public void fallFly(PlayerEntity player, ItemStack stack) {
+        this.tryUseEnergy(stack, 12);
+        isFallFlying = true;
+
+        Vec3d rotationVector = player.getRotationVector().multiply(SPEED);
+        Vec3d velocity = player.getVelocity();
+        player.setVelocity(velocity.add(rotationVector.getX() * 0.1 + (rotationVector.getX() * 1.5 - velocity.getX()) * 0.5, rotationVector.getY() * 0.1 + (rotationVector.getY() * 1.5 - velocity.getY()) * 0.5,
+                rotationVector.getZ() * 0.1 + (rotationVector.getZ() * 1.5 - velocity.getZ()) * 0.5));
+    }
+
+    public void spawnParticles(PlayerEntity player, ItemStack stack) {
+        if (player.world instanceof ServerWorld serverWorld) {
             Vec3d pos = player.getPos();
 
-            // TODO: redo particles.
-            float xRotator = MathHelper.cos((float) (player.getY() * (Math.PI / 180f))) * (0.7f + 0.21f);
-            float zRotator = MathHelper.sin((float) (player.getY() * (Math.PI / 180f))) * (0.7f + 0.21f);
-
-            ModUtils.spawnForcedParticles(serverWorld, ParticleTypes.FLAME, pos.getX() + xRotator, pos.getY(), pos.getZ() + zRotator, 1, 0.0, 0.0, 0.0, 0.001);
-            ModUtils.spawnForcedParticles(serverWorld, ParticleTypes.FLAME, pos.getX() - xRotator, pos.getY(), pos.getZ() - zRotator, 1, 0.0, 0.0, 0.0, 0.001);
-
-            // ModUtils.spawnForcedParticles(serverWorld, ParticleTypes.FLAME, pos.getX() + xRotator, pos.getY() + zRotator, pos.getZ(), 1,
-            // 0, 0, 0, 0.0f);
-            // ModUtils.spawnForcedParticles(serverWorld, ParticleTypes.FLAME, pos.getX() - xRotator, pos.getY() - zRotator, pos.getZ(), 1,
-            // 0, 0, 0, 0.0f);
+            if (player.isFallFlying()) {
+                ModUtils.spawnForcedParticles(serverWorld, ParticleTypes.FLAME, pos.getX(), pos.getY(), pos.getZ(), 1, 0.0, 0.0, 0.0, 0);
+            } else {
+                ModUtils.spawnForcedParticles(serverWorld, ParticleTypes.FLAME, pos.getX(), pos.getY(), pos.getZ(), 1, 0.0, 0.0, 0.0, 0);
+            }
         }
     }
 

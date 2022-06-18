@@ -64,35 +64,31 @@ public class CompressorBlockEntity extends ProcessingMachineBlockEntity {
     @Override
     public void tick() {
         if (!this.world.isClient) {
-            if (this.usesEnergy()) {
-
+            if (this.hasEnergy()) {
                 ItemStack input = this.getStack(0);
+                if (!input.isEmpty() && (input.getItem().equals(this.inputItem) || this.inputItem == null)) {
+                    this.setActive(true);
+                    if (this.cookTime < this.cookTimeTotal) {
+                        this.cookTime++;
+                        this.drainEnergy();
 
-                if (this.getEnergy() > 0) {
-
-                    if (!input.isEmpty() && (input.getItem().equals(this.inputItem) || this.inputItem == null)) {
-                        this.setActive(true);
-                        if (this.cookTime < this.cookTimeTotal) {
-                            this.cookTime++;
-                            this.drainEnergy();
-
-                        } else if (this.outputStack != null) {
-                            input.decrement(1);
-                            this.finishCooking();
-
-                        } else {
-                            CookingRecipe recipe = this.createRecipe(ModRecipes.COMPRESSING_RECIPE, input, true);
-                            if (recipe != null) {
-                                this.cookTimeTotal = recipe.getCookTime();
-                                this.cookTime = 0;
-                            }
-                        }
                     } else if (this.outputStack != null) {
-                        this.stopCooking();
+                        input.decrement(1);
+                        this.finishCooking();
+
                     } else {
-                        this.setActive(false);
+                        CookingRecipe recipe = this.createRecipe(ModRecipes.COMPRESSING_RECIPE, input, true);
+                        if (recipe != null) {
+                            this.cookTimeTotal = recipe.getCookTime();
+                            this.cookTime = 0;
+                        }
                     }
+                } else if (this.outputStack != null) {
+                    this.stopCooking();
+                } else {
+                    this.setActive(false);
                 }
+
             }
         }
     }

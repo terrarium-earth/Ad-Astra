@@ -65,7 +65,7 @@ public class FuelRefineryBlockEntity extends FluidMachineBlockEntity {
     @Nullable
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
-        return new ConversionScreenHandler<FuelRefineryBlockEntity>(syncId, inv, this);
+        return new ConversionScreenHandler(syncId, inv, this);
     }
 
     @Override
@@ -84,18 +84,16 @@ public class FuelRefineryBlockEntity extends FluidMachineBlockEntity {
                 FluidUtils.extractFluidFromTank(this, 2, 3);
             }
 
-            if (this.usesEnergy()) {
-                if (this.getEnergy() > 0) {
-                    List<FuelConversionRecipe> recipes = ModRecipes.FUEL_CONVERSION_RECIPE.getRecipes(this.world);
-                    if (FluidUtils.convertFluid(this, recipes)) {
-                        this.drainEnergy();
-                        this.setActive(true);
-                    } else {
-                        this.setActive(false);
-                    }
+            if (this.hasEnergy()) {
+                List<FuelConversionRecipe> recipes = ModRecipes.FUEL_CONVERSION_RECIPE.getRecipes(this.world);
+                if (FluidUtils.convertFluid(this, recipes)) {
+                    this.drainEnergy();
+                    this.setActive(true);
                 } else {
                     this.setActive(false);
                 }
+            } else {
+                this.setActive(false);
             }
         }
     }
