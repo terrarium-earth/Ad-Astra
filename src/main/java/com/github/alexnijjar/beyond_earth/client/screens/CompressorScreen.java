@@ -3,7 +3,6 @@ package com.github.alexnijjar.beyond_earth.client.screens;
 import java.awt.Rectangle;
 
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.CompressorBlockEntity;
-import com.github.alexnijjar.beyond_earth.gui.GuiUtil;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.CompressorScreenHandler;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 

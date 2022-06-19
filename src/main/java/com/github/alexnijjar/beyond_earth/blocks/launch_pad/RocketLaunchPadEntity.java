@@ -14,7 +14,7 @@ public class RocketLaunchPadEntity extends BlockEntity {
     }
 
     public void tick() {
-        if (world.isClient) {
+        if (!world.isClient) {
             boolean raise = checkInRadius(true, pos, this.world) && checkInRadius(false, this.getPos(), this.world);
             this.world.setBlockState(pos, this.getCachedState().with(RocketLaunchPad.STAGE, raise));
         }

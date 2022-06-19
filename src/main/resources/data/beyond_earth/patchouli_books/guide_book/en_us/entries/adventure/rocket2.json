@@ -1,6 +1,6 @@
 {
     "name": "A few million miles",
-    "icon": "beyond_earth:rocket_t2",
+    "icon": "beyond_earth:tier_2_rocket",
     "category": "beyond_earth:rocket_travel",
     "sortnum": "2",
     "pages": [
@@ -10,7 +10,7 @@
         },
         {
             "type": "patchouli:entity",
-            "entity": "beyond_earth:rocket_t2",
+            "entity": "beyond_earth:tier_2_rocket",
             "title": "Tier 2 Rocket",
             "offset": "0.5",
             "scale": "0.9"

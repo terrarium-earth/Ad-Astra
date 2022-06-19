@@ -16,6 +16,7 @@ import com.github.alexnijjar.beyond_earth.registry.ModCommands;
 import com.github.alexnijjar.beyond_earth.registry.ModEntities;
 import com.github.alexnijjar.beyond_earth.registry.ModFeatures;
 import com.github.alexnijjar.beyond_earth.registry.ModFluids;
+import com.github.alexnijjar.beyond_earth.registry.ModItems;
 import com.github.alexnijjar.beyond_earth.registry.ModPaintings;
 import com.github.alexnijjar.beyond_earth.registry.ModParticles;
 import com.github.alexnijjar.beyond_earth.registry.ModRecipes;
@@ -38,6 +39,7 @@ public class BeyondEarth implements ModInitializer {
     public void onInitialize() {
 
         // Registry.
+        ModItems.register();
         ModBlockEntities.register();
         ModFluids.register();
         ModArmour.register();

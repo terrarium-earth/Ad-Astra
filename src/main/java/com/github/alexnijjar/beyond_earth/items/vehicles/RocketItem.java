@@ -9,12 +9,15 @@ import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier2;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier3;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier4;
 
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -24,7 +27,7 @@ import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 
 public class RocketItem<T extends RocketEntity> extends VehicleItem {
-    public static final int MAX_FUEL = 1000;
+    public static final long TANK_SIZE = 3 * FluidConstants.BUCKET;
 
     private EntityType<T> rocketEntity;
     private int tier;
@@ -43,7 +46,7 @@ public class RocketItem<T extends RocketEntity> extends VehicleItem {
             BlockState state = world.getBlockState(pos);
             PlayerEntity player = context.getPlayer();
 
-             // Check if the block can be spawned in a 3x8x3 radius.
+            // Check if the block can be spawned in a 3x8x3 radius.
             for (int x = pos.getX() - 1; x < pos.getX() + 2; x++) {
                 for (int y = pos.getY() + 1; y < pos.getY() + 9; y++) {
                     for (int z = pos.getZ() - 1; z < pos.getZ() + 2; z++) {
@@ -58,8 +61,8 @@ public class RocketItem<T extends RocketEntity> extends VehicleItem {
 
             if (state.getBlock() instanceof RocketLaunchPad pad) {
                 if (state.get(RocketLaunchPad.STAGE).equals(true)) {
-                    ItemStack currentStack = player.getStackInHand(context.getHand());
-                    if (currentStack.getItem() instanceof RocketItem<?> rocket) {
+                    ItemStack rocketStack = player.getStackInHand(context.getHand());
+                    if (rocketStack.getItem() instanceof RocketItem<?> rocket) {
 
                         RocketEntity rocketEntity = null;
 
@@ -88,8 +91,16 @@ public class RocketItem<T extends RocketEntity> extends VehicleItem {
                                 return ActionResult.PASS;
                             }
 
+                            NbtCompound nbt = rocketStack.getOrCreateNbt();
+                            if (nbt.contains("Fluid")) {
+                                this.insertIntoTank(rocketEntity.inputTank, rocketStack);
+                            }
+                            if (nbt.contains("Inventory")) {
+                                rocketEntity.getInventory().readNbtList(nbt.getList("Inventory", NbtElement.COMPOUND_TYPE));
+                            }
+
                             rocketEntity.assignLaunchPad(true);
-                            currentStack.decrement(1);
+                            rocketStack.decrement(1);
                             world.playSound(null, pos, SoundEvents.BLOCK_NETHERITE_BLOCK_PLACE, SoundCategory.BLOCKS, 1, 1);
 
                             rocketEntity.setPosition(pos.getX() + 0.5f, pos.getY(), pos.getZ() + 0.5f);
@@ -114,7 +125,7 @@ public class RocketItem<T extends RocketEntity> extends VehicleItem {
     }
 
     @Override
-    public int getMaxFuel() {
-        return MAX_FUEL;
+    public long getTankSize() {
+        return TANK_SIZE;
     }
 }

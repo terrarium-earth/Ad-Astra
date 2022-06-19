@@ -37,7 +37,6 @@ public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
         return TANK_SIZE;
     }
 
-
     @Override
     public boolean usesEnergy() {
         return true;
@@ -86,18 +85,16 @@ public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
                 FluidUtils.extractFluidFromTank(this, 2, 3);
             }
 
-            if (this.usesEnergy()) {
-                if (this.getEnergy() > 0) {
-                    List<OxygenConversionRecipe> recipes = ModRecipes.OXYGEN_CONVERSION_RECIPE.getRecipes(this.world);
-                    if (FluidUtils.convertFluid(this, recipes)) {
-                        this.drainEnergy();
-                        this.setActive(true);
-                    } else {
-                        this.setActive(false);
-                    }
+            if (this.hasEnergy()) {
+                List<OxygenConversionRecipe> recipes = ModRecipes.OXYGEN_CONVERSION_RECIPE.getRecipes(this.world);
+                if (FluidUtils.convertFluid(this, recipes)) {
+                    this.drainEnergy();
+                    this.setActive(true);
                 } else {
                     this.setActive(false);
                 }
+            } else {
+                this.setActive(false);
             }
         }
     }

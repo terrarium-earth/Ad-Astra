@@ -59,8 +59,8 @@ public class ModArmour {
                 ModItems.register("jet_suit_boots", JET_SUIT_BOOTS);
 
                 // Space suit oxygen tank
-                SPACE_SUIT.registerOxygenTank();
-                NETHERITE_SPACE_SUIT.registerOxygenTank();
-                JET_SUIT.registerOxygenTank();
+                ModItems.registerTank(SPACE_SUIT);
+                ModItems.registerTank(NETHERITE_SPACE_SUIT);
+                ModItems.registerTank(JET_SUIT);
         }
 }

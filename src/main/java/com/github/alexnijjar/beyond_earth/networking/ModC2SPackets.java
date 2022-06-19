@@ -50,14 +50,14 @@ public class ModC2SPackets {
 
         // Teleport to a planet.
         ServerPlayNetworking.registerGlobalReceiver(TELEPORT_TO_PLANET, (server, player, handler, buf, responseSender) -> {
-            RegistryKey<World> targetDimension = RegistryKey.of(Registry.WORLD_KEY, buf.readIdentifier());
+            RegistryKey<World> targetDimension = getWorld(buf.readIdentifier());
 
             // Teleport has to be called on the server thread.
             server.execute(new Runnable() {
 
                 @Override
                 public void run() {
-                    ModUtils.teleportToWorld(targetDimension, player, true);
+                    ModUtils.teleportToWorld(targetDimension, player);
                 }
             });
         });
@@ -121,6 +121,15 @@ public class ModC2SPackets {
         ServerPlayNetworking.registerGlobalReceiver(RIGHT_KEY_CHANGED, (server, player, handler, buf, responseSender) -> {
             ModKeyBindings.pressedKeyOnServer(buf.readUuid(), "right", buf.readBoolean());
         });
+    }
+
+    private static RegistryKey<World> getWorld(Identifier id) {
+        RegistryKey<World> targetDimension = RegistryKey.of(Registry.WORLD_KEY, id);
+        // Change the "earth" registry key to the "overworld" registry key.
+        if (targetDimension.getValue().equals(new ModIdentifier("earth"))) {
+            targetDimension = World.OVERWORLD;
+        }
+        return targetDimension;
     }
 
     private static PacketByteBuf createPlanetsDatapackBuf() {

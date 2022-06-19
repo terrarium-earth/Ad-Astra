@@ -89,7 +89,7 @@ public class BeyondEarthClient implements ClientModInitializer {
                 BuiltinItemRendererRegistry.INSTANCE.register(ModItems.TIER_4_ROCKET, new RocketItemRendererTier4());
 
                 // Rover item.
-                BuiltinItemRendererRegistry.INSTANCE.register(ModItems.ROVER, new RoverItemRenderer());
+                BuiltinItemRendererRegistry.INSTANCE.register(ModItems.TIER_1_ROVER, new RoverItemRenderer());
 
                 // Flag entity rendering.
                 BlockEntityRendererRegistry.register(ModBlockEntities.FLAG_BLOCK_ENTITY, FlagBlockEntityRenderer::new);
@@ -114,7 +114,7 @@ public class BeyondEarthClient implements ClientModInitializer {
                                 new SimpleFluidRenderHandler(new ModIdentifier("blocks/fluid_fuel_still"), new ModIdentifier("blocks/fluid_fuel_flow"), new ModIdentifier("blocks/fuel_overlay")));
                 FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.OIL_STILL, ModFluids.FLOWING_OIL,
                                 new SimpleFluidRenderHandler(new ModIdentifier("blocks/fluid_oil_still"), new ModIdentifier("blocks/fluid_oil_flow"), new ModIdentifier("blocks/oil_overlay")));
-                                FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.OXYGEN_STILL,
+                FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.OXYGEN_STILL,
                                 new SimpleFluidRenderHandler(new ModIdentifier("blocks/fluid_oxygen_still"), new ModIdentifier("blocks/fluid_oxygen_still"), new ModIdentifier("blocks/fluid_oxygen_still")));
 
                 // Fluid textures.
@@ -137,7 +137,7 @@ public class BeyondEarthClient implements ClientModInitializer {
                 BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), ModBlocks.WATER_PUMP);
                 BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(), ModBlocks.COAL_LANTERN);
                 // TODO: Fix Nasa workbench being partly invisible.
-                // BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutoutMipped(), ModBlocks.NASA_WORKBENCH);
+                BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), ModBlocks.NASA_WORKBENCH);
         }
 
         // Register after the Resource packs have been loaded.

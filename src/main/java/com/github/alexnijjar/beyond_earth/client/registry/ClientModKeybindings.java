@@ -10,6 +10,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.text.Text;
 
 @Environment(EnvType.CLIENT)
 public class ClientModKeybindings {
@@ -37,9 +38,13 @@ public class ClientModKeybindings {
                 if (client.options.jumpKey.isPressed()) {
                     if (client.player.getVehicle() instanceof RocketEntity rocket) {
                         if (!rocket.isFlying()) {
-                            PacketByteBuf buf = PacketByteBufs.create();
-                            buf.writeInt(rocket.getId());
-                            ClientPlayNetworking.send(ModC2SPackets.LAUNCH_ROCKET, buf);
+                            if (rocket.getFluidAmount() >= rocket.inputTank.getCapacity()) {
+                                PacketByteBuf buf = PacketByteBufs.create();
+                                buf.writeInt(rocket.getId());
+                                ClientPlayNetworking.send(ModC2SPackets.LAUNCH_ROCKET, buf);
+                            } else if (sentJumpPacket) {
+                                client.player.sendMessage(Text.translatable("message.beyond_earth.no_fuel"));
+                            }
                         }
                     }
                 }

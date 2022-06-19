@@ -1,6 +1,6 @@
 {
     "name": "Beyond our star",
-    "icon": "beyond_earth:rocket_t4",
+    "icon": "beyond_earth:tier_4_rocket",
     "category": "beyond_earth:rocket_travel",
     "sortnum": "4",
     "pages": [
@@ -10,7 +10,7 @@
         },
         {
             "type": "patchouli:entity",
-            "entity": "beyond_earth:rocket_t4",
+            "entity": "beyond_earth:tier_4_rocket",
             "title": "Tier 4 Rocket",
             "offset": "0.5",
             "scale": "0.9"

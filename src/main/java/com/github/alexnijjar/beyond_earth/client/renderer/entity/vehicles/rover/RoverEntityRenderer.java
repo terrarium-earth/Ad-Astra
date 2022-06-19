@@ -14,7 +14,7 @@ import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
 public class RoverEntityRenderer extends VehicleEntityRenderer<RoverEntity, RoverEntityModel> {
-    public static final Identifier TEXTURE = new ModIdentifier("textures/vehicles/rover.png");
+    public static final Identifier TEXTURE = new ModIdentifier("textures/vehicles/tier_1_rover.png");
 
     public RoverEntityRenderer(EntityRendererFactory.Context context) {
         super(context, new RoverEntityModel(context.getPart(RoverEntityModel.LAYER_LOCATION)), 0.0f);

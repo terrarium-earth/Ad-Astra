@@ -8,32 +8,52 @@
 		},
 		{
 			"ingredient": {
-				"tag": "c:compressed_steel"
+				"tag": "c:compressed_ostrum"
 			}
 		},
 		{
 			"ingredient": {
-				"tag": "c:compressed_steel"
+				"tag": "c:compressed_ostrum"
 			}
 		},
 		{
 			"ingredient": {
-				"tag": "c:compressed_steel"
+				"tag": "c:compressed_ostrum"
 			}
 		},
 		{
 			"ingredient": {
-				"tag": "c:compressed_steel"
+				"tag": "c:compressed_ostrum"
 			}
 		},
 		{
 			"ingredient": {
-				"tag": "c:compressed_steel"
+				"tag": "c:compressed_ostrum"
 			}
 		},
 		{
 			"ingredient": {
-				"tag": "c:compressed_steel"
+				"tag": "c:compressed_ostrum"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "minecraft:bucket"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "beyond_earth:ostrum_tank"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "beyond_earth:ostrum_tank"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "minecraft:bucket"
 			}
 		},
 		{
@@ -43,27 +63,7 @@
 		},
 		{
 			"ingredient": {
-				"item": "beyond_earth:steel_tank"
-			}
-		},
-		{
-			"ingredient": {
-				"item": "beyond_earth:steel_tank"
-			}
-		},
-		{
-			"ingredient": {
-				"item": "beyond_earth:rocket_fin"
-			}
-		},
-		{
-			"ingredient": {
-				"item": "beyond_earth:rocket_fin"
-			}
-		},
-		{
-			"ingredient": {
-				"item": "beyond_earth:steel_engine"
+				"item": "beyond_earth:ostrum_engine"
 			}
 		},
 		{
@@ -73,7 +73,7 @@
 		}
 	],
 	"output": {
-		"item": "beyond_earth:rocket_t1",
+		"item": "beyond_earth:tier_3_rocket",
 		"count": 1
 	}
 }

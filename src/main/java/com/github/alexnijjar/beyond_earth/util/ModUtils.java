@@ -12,13 +12,9 @@ import com.github.alexnijjar.beyond_earth.entities.vehicles.VehicleEntity;
 import com.github.alexnijjar.beyond_earth.items.armour.JetSuit;
 import com.github.alexnijjar.beyond_earth.items.armour.NetheriteSpaceSuit;
 import com.github.alexnijjar.beyond_earth.items.armour.SpaceSuit;
-import com.github.alexnijjar.beyond_earth.networking.ModS2CPackets;
 import com.github.alexnijjar.beyond_earth.registry.ModEntities;
-import com.github.alexnijjar.beyond_earth.world.SoundUtil;
 
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.Entity.RemovalReason;
@@ -29,7 +25,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.RecipeType;
@@ -83,84 +78,70 @@ public class ModUtils {
         return FabricLoader.getInstance().isModLoaded(modId);
     }
 
-    // Server.
-    public static void teleportToWorld(RegistryKey<World> world, Entity entity, boolean spawnLander) {
-        if (entity.getWorld() instanceof ServerWorld entityWorld && entity.canUsePortals()) {
-
-            Entity vehicle = entity.getVehicle();
-            Entity landerRider = null;
-            if (entity instanceof LanderEntity lander) {
-                landerRider = lander.getFirstPassenger();
-            }
-
-            int spawnStart = 450;
-            for (Planet planet : BeyondEarth.planets) {
-                if (planet.world().equals(world)) {
-                    spawnStart = planet.atmosphereStart();
-                }
-            }
-
-            Vec3d newPos = new Vec3d(entity.getX(), spawnStart, entity.getZ());
-            TeleportTarget target = new TeleportTarget(newPos, entity.getVelocity(), entity.getYaw(), entity.getPitch());
-
-            // Change the "earth" registry key to the "overworld" registry key.
-            if (world.getValue().equals(new ModIdentifier("earth"))) {
-                world = World.OVERWORLD;
-            }
-
+    public static void teleportToWorld(RegistryKey<World> world, Entity entity) {
+        if (entity.getWorld() instanceof ServerWorld entityWorld) {
             ServerWorld targetWorld = entityWorld.getServer().getWorld(world);
-            entity = FabricDimensions.teleport(entity, targetWorld, target);
+            Vec3d targetPosition = new Vec3d(entity.getX(), getSpawnStart(targetWorld), entity.getZ());
+            List<Entity> entitiesToTeleport = new LinkedList<>();
+
             if (entity instanceof PlayerEntity player) {
-                PacketByteBuf buf = PacketByteBufs.create();
-                buf.writeBoolean(true);
-                ServerPlayNetworking.send((ServerPlayerEntity) player, ModS2CPackets.PORTAL_SOUND, buf);
+                if (player.getVehicle() instanceof RocketEntity rocket) {
+                    player.sendMessage(Text.translatable("message." + BeyondEarth.MOD_ID + ".hold_space"), false);
+                    entity = createLander(rocket, targetWorld, targetPosition);
+                    rocket.remove(RemovalReason.DISCARDED);
+                    entitiesToTeleport.add(entity);
+                    entitiesToTeleport.add(player);
+                }
+            } else {
+                entitiesToTeleport.add(entity);
+            }
 
-                if (vehicle instanceof RocketEntity) {
-                    if (spawnLander) {
+            if (entity instanceof ItemEntity itemEntity) {
+                cookFood(itemEntity);
+            }
 
-                        // Delete the rocket.
-                        vehicle.remove(RemovalReason.DISCARDED);
+            entitiesToTeleport.addAll(entity.getPassengerList());
 
-                        LanderEntity lander = new LanderEntity(ModEntities.LANDER, targetWorld);
+            List<Entity> teleportedEntities = new LinkedList<>();
+            for (Entity entityToTeleport : entitiesToTeleport) {
+                TeleportTarget target = new TeleportTarget(targetPosition, entityToTeleport.getVelocity(), entityToTeleport.getYaw(), entityToTeleport.getPitch());
+                teleportedEntities.add(FabricDimensions.teleport(entityToTeleport, targetWorld, target));
+            }
 
-                        lander.setPosition(player.getPos());
-                        targetWorld.spawnEntity(lander);
-                        player.sendMessage(Text.translatable("message." + BeyondEarth.MOD_ID + ".hold_space"), false);
-
-                        player.startRiding(lander);
-                    }
+            if (!teleportedEntities.isEmpty()) {
+                entity = teleportedEntities.get(0);
+                for (int i = 1; i < teleportedEntities.size(); i++) {
+                    teleportedEntities.get(i).startRiding(entity);
                 }
             }
-
-            if (landerRider != null) {
-                teleportToWorld(world, landerRider, false);
-                landerRider.startRiding(entity);
-            }
-
-            cookFood(entity);
-        }
-
-        if (entity instanceof PlayerEntity && entity.getWorld().isClient) {
-            SoundUtil.setSound(true);
         }
     }
 
-    public static void cookFood(Entity entity) {
-        if (entity instanceof ItemEntity item) {
-            ItemStack stack = item.getStack();
-            ItemStack foodOutput = null;
+    public static LanderEntity createLander(RocketEntity rocket, ServerWorld targetWorld, Vec3d targetPosition) {
+        LanderEntity lander = new LanderEntity(ModEntities.LANDER, targetWorld);
+        lander.setPosition(targetPosition);
+        for (int i = 0; i < rocket.getInventorySize(); i++) {
+            lander.getInventory().setStack(i, rocket.getInventory().getStack(i));
+        }
+        lander.getInventory().setStack(10, rocket.getDropStack());
+        targetWorld.spawnEntity(lander);
+        return lander;
+    }
 
-            for (SmokingRecipe recipe : entity.getWorld().getRecipeManager().listAllOfType(RecipeType.SMOKING)) {
-                for (Ingredient ingredient : recipe.getIngredients()) {
-                    if (ingredient.test(stack)) {
-                        foodOutput = recipe.getOutput();
-                    }
+    public static void cookFood(ItemEntity itemEntity) {
+        ItemStack stack = itemEntity.getStack();
+        ItemStack foodOutput = null;
+
+        for (SmokingRecipe recipe : itemEntity.getWorld().getRecipeManager().listAllOfType(RecipeType.SMOKING)) {
+            for (Ingredient ingredient : recipe.getIngredients()) {
+                if (ingredient.test(stack)) {
+                    foodOutput = recipe.getOutput();
                 }
             }
+        }
 
-            if (foodOutput != null) {
-                item.setStack(new ItemStack(foodOutput.getItem(), stack.getCount()));
-            }
+        if (foodOutput != null) {
+            itemEntity.setStack(new ItemStack(foodOutput.getItem(), stack.getCount()));
         }
     }
 
@@ -192,6 +173,16 @@ public class ModUtils {
             BeyondEarth.LOGGER.error(world.getRegistryKey().getValue().toString() + " does not have a defined gravity!");
         }
         return 1.0f;
+    }
+
+    public static int getSpawnStart(World world) {
+        int spawnStart = 450;
+        for (Planet planet : world.isClient ? BeyondEarthClient.planets : BeyondEarth.planets) {
+            if (planet.world().equals(world.getRegistryKey())) {
+                spawnStart = planet.atmosphereStart();
+            }
+        }
+        return spawnStart;
     }
 
     public static boolean isOrbitWorld(World world) {

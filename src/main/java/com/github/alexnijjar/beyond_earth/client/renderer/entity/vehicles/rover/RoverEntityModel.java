@@ -19,7 +19,7 @@ import net.minecraft.util.math.MathHelper;
 @Environment(EnvType.CLIENT)
 public class RoverEntityModel extends VehicleEntityModel<RoverEntity> {
 
-    public static final EntityModelLayer LAYER_LOCATION = new EntityModelLayer(new ModIdentifier("rover"), "main");
+    public static final EntityModelLayer LAYER_LOCATION = new EntityModelLayer(new ModIdentifier("tier_1_rover"), "main");
 
     public RoverEntityModel(ModelPart root) {
         super(root, "Frame");

@@ -7,9 +7,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.collection.DefaultedList;
 
 // From tutorial.
-public interface SimpleInventory extends Inventory {
+public interface ModInventory extends Inventory {
 
-    static SimpleInventory of(DefaultedList<ItemStack> items) {
+    static ModInventory of(DefaultedList<ItemStack> items) {
         return () -> items;
     }
 
@@ -70,5 +70,16 @@ public interface SimpleInventory extends Inventory {
     @Override
     default boolean canPlayerUse(PlayerEntity player) {
         return true;
+    }
+
+    public static ModInventory create(int slots) {
+        return new ModInventory() {
+            private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(slots, ItemStack.EMPTY);
+
+            @Override
+            public DefaultedList<ItemStack> getItems() {
+                return this.inventory;
+            }
+        };
     }
 }

@@ -27,6 +27,7 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
 
     // 0.2M E.
     public static final long MAX_ENERGY = 200000;
+    public static final long TANK_SIZE = 4 * FluidConstants.BUCKET;
     public static final double SPEED = 0.5;
     public boolean isFallFlying;
 
@@ -36,7 +37,7 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
 
     @Override
     public long getTankSize() {
-        return 4 * FluidConstants.BUCKET;
+        return TANK_SIZE;
     }
 
     @Override
@@ -88,7 +89,9 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
     }
 
     public void hover(PlayerEntity player, ItemStack stack) {
-        this.tryUseEnergy(stack, 6);
+        if (!this.tryUseEnergy(stack, 12)) {
+            this.setStoredEnergy(stack, 0);
+        }
         isFallFlying = false;
 
         double speed = ModUtils.getPlanetGravity(player.world) * 0.25;
@@ -99,7 +102,9 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
     }
 
     public void fallFly(PlayerEntity player, ItemStack stack) {
-        this.tryUseEnergy(stack, 12);
+        if (!this.tryUseEnergy(stack, 24)) {
+            this.setStoredEnergy(stack, 0);
+        }
         isFallFlying = true;
 
         Vec3d rotationVector = player.getRotationVector().multiply(SPEED);

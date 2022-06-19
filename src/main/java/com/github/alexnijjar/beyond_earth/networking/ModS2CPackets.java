@@ -5,7 +5,6 @@ import com.github.alexnijjar.beyond_earth.data.ButtonColour;
 import com.github.alexnijjar.beyond_earth.data.Planet;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntity;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
-import com.github.alexnijjar.beyond_earth.world.SoundUtil;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -17,16 +16,12 @@ import net.minecraft.world.World;
 
 public class ModS2CPackets {
 
-    public static final Identifier PORTAL_SOUND = new ModIdentifier("portal_sound");
     public static final Identifier DATAPACK_PLANETS = new ModIdentifier("datapack_planets");
     public static final Identifier START_ROCKET = new ModIdentifier("start_rocket");
 
     @Environment(EnvType.CLIENT)
     public static void register() {
         // Sound packet.
-        ClientPlayNetworking.registerGlobalReceiver(PORTAL_SOUND, (client, handler, buf, responseSender) -> {
-            SoundUtil.setSound(buf.readBoolean());
-        });
 
         // Receive planet data on client.
         ClientPlayNetworking.registerGlobalReceiver(DATAPACK_PLANETS, (client, handler, mainBuf, responseSender) -> {

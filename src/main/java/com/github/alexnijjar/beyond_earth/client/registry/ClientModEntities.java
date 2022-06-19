@@ -52,11 +52,11 @@ public class ClientModEntities {
         EntityRendererRegistry.register(ModEntities.ALIEN_WANDERING_TRADER, AlienWanderingTraderEntityRenderer::new);
 
         // Machines.
-        EntityRendererRegistry.register(ModEntities.TIER_1_ROCKET, RocketEntityRendererTier1::new);
-        EntityRendererRegistry.register(ModEntities.TIER_2_ROCKET, RocketEntityRendererTier2::new);
-        EntityRendererRegistry.register(ModEntities.TIER_3_ROCKET, RocketEntityRendererTier3::new);
-        EntityRendererRegistry.register(ModEntities.TIER_4_ROCKET, RocketEntityRendererTier4::new);
-        EntityRendererRegistry.register(ModEntities.ROVER, RoverEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntities.ROCKET_TIER_1, RocketEntityRendererTier1::new);
+        EntityRendererRegistry.register(ModEntities.ROCKET_TIER_2, RocketEntityRendererTier2::new);
+        EntityRendererRegistry.register(ModEntities.ROCKET_TIER_3, RocketEntityRendererTier3::new);
+        EntityRendererRegistry.register(ModEntities.ROCKET_TIER_4, RocketEntityRendererTier4::new);
+        EntityRendererRegistry.register(ModEntities.ROVER_TIER_1, RoverEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.LANDER, LanderEntityRenderer::new);
 
         // Projectiles.

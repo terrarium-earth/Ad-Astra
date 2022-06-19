@@ -6,12 +6,14 @@ import net.minecraft.item.ArmorMaterial;
 
 public class NetheriteSpaceSuit extends SpaceSuit {
 
+    public static final long TANK_SIZE = 2 * FluidConstants.BUCKET;
+
     public NetheriteSpaceSuit(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
         super(material, slot, settings);
     }
 
     @Override
     public long getTankSize() {
-        return 2 * FluidConstants.BUCKET;
+        return TANK_SIZE;
     }
 }

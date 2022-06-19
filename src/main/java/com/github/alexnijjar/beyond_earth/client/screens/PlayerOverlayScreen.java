@@ -1,7 +1,6 @@
 package com.github.alexnijjar.beyond_earth.client.screens;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.gui.GuiUtil;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 import com.mojang.blaze3d.systems.RenderSystem;

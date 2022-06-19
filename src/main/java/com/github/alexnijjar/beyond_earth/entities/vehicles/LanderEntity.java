@@ -1,5 +1,6 @@
 package com.github.alexnijjar.beyond_earth.entities.vehicles;
 
+import com.github.alexnijjar.beyond_earth.gui.LanderScreenHandlerFactory;
 import com.github.alexnijjar.beyond_earth.util.ModKeyBindings;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
@@ -8,6 +9,9 @@ import net.minecraft.entity.MovementType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
@@ -18,8 +22,27 @@ public class LanderEntity extends VehicleEntity {
     }
 
     @Override
+    public int getInventorySize() {
+        return 11;
+    }
+
+    @Override
+    public ActionResult interact(PlayerEntity player, Hand hand) {
+        super.interact(player, hand);
+        this.openInventory(player, new LanderScreenHandlerFactory(this));
+        return ActionResult.SUCCESS;
+    }
+
+    @Override
     public double getMountedHeightOffset() {
         return super.getMountedHeightOffset() + 1.6f;
+    }
+
+    // Drop inventory contents instead of dropping itself.
+    @Override
+    public void drop() {
+        ItemScatterer.spawn(this.world, this.getBlockPos(), this.getInventory());
+        super.drop();
     }
 
     @Override

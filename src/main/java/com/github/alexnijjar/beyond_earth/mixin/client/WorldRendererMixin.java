@@ -9,12 +9,13 @@ import com.github.alexnijjar.beyond_earth.client.BeyondEarthClient;
 import com.github.alexnijjar.beyond_earth.client.resource_pack.SkyRenderer;
 import com.github.alexnijjar.beyond_earth.client.resource_pack.SkyRenderer.WeatherEffects;
 import com.github.alexnijjar.beyond_earth.registry.ModParticles;
-import com.github.alexnijjar.beyond_earth.world.SoundUtil;
+import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CampfireBlock;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.option.ParticlesMode;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.WorldRenderer;
@@ -43,11 +44,11 @@ public abstract class WorldRendererMixin {
     // Cancel the portal sound when the player falls out of orbit.
     @Inject(method = "processWorldEvent", at = @At("HEAD"), cancellable = true)
     public void processWorldEvent(int eventId, BlockPos pos, int data, CallbackInfo info) {
-
-        if (SoundUtil.getSound()) {
-            // Portal id is 1032.
-            if (eventId == WorldEvents.TRAVEL_THROUGH_PORTAL) {
-                SoundUtil.setSound(false);
+        if (eventId == WorldEvents.TRAVEL_THROUGH_PORTAL) {
+            MinecraftClient client = MinecraftClient.getInstance();
+            ClientPlayerEntity player = client.player;
+            // Don't player the portal sound if the player teleported to the new world.
+            if (((int)player.getPos().getY()) == ModUtils.getSpawnStart(player.world)) {
                 info.cancel();
             }
         }

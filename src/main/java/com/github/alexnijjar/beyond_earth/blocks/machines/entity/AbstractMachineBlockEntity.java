@@ -3,7 +3,7 @@ package com.github.alexnijjar.beyond_earth.blocks.machines.entity;
 import org.jetbrains.annotations.Nullable;
 
 import com.github.alexnijjar.beyond_earth.blocks.machines.AbstractMachineBlock;
-import com.github.alexnijjar.beyond_earth.util.SimpleInventory;
+import com.github.alexnijjar.beyond_earth.util.ModInventory;
 
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
@@ -30,7 +30,7 @@ import team.reborn.energy.api.EnergyStorage;
 import team.reborn.energy.api.EnergyStorageUtil;
 import team.reborn.energy.api.base.SimpleSidedEnergyContainer;
 
-public abstract class AbstractMachineBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, SimpleInventory, SidedInventory {
+public abstract class AbstractMachineBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, ModInventory, SidedInventory {
 
     private final DefaultedList<ItemStack> inventory;
 

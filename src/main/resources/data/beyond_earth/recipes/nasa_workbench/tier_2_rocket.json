@@ -8,32 +8,32 @@
 		},
 		{
 			"ingredient": {
-				"tag": "c:compressed_ostrum"
+				"tag": "c:compressed_desh"
 			}
 		},
 		{
 			"ingredient": {
-				"tag": "c:compressed_ostrum"
+				"tag": "c:compressed_desh"
 			}
 		},
 		{
 			"ingredient": {
-				"tag": "c:compressed_ostrum"
+				"tag": "c:compressed_desh"
 			}
 		},
 		{
 			"ingredient": {
-				"tag": "c:compressed_ostrum"
+				"tag": "c:compressed_desh"
 			}
 		},
 		{
 			"ingredient": {
-				"tag": "c:compressed_ostrum"
+				"tag": "c:compressed_desh"
 			}
 		},
 		{
 			"ingredient": {
-				"tag": "c:compressed_ostrum"
+				"tag": "c:compressed_desh"
 			}
 		},
 		{
@@ -43,12 +43,12 @@
 		},
 		{
 			"ingredient": {
-				"item": "beyond_earth:ostrum_tank"
+				"item": "beyond_earth:desh_tank"
 			}
 		},
 		{
 			"ingredient": {
-				"item": "beyond_earth:ostrum_tank"
+				"item": "beyond_earth:desh_tank"
 			}
 		},
 		{
@@ -63,7 +63,7 @@
 		},
 		{
 			"ingredient": {
-				"item": "beyond_earth:ostrum_engine"
+				"item": "beyond_earth:desh_engine"
 			}
 		},
 		{
@@ -73,7 +73,7 @@
 		}
 	],
 	"output": {
-		"item": "beyond_earth:rocket_t3",
+		"item": "beyond_earth:tier_2_rocket",
 		"count": 1
 	}
 }

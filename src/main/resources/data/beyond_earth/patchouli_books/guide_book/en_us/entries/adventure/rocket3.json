@@ -1,6 +1,6 @@
 {
     "name": "All over the star system",
-    "icon": "beyond_earth:rocket_t3",
+    "icon": "beyond_earth:tier_3_rocket",
     "category": "beyond_earth:rocket_travel",
     "sortnum": "3",
     "pages": [
@@ -10,7 +10,7 @@
         },
         {
             "type": "patchouli:entity",
-            "entity": "beyond_earth:rocket_t3",
+            "entity": "beyond_earth:tier_3_rocket",
             "title": "Tier 3 Rocket",
             "offset": "0.5",
             "scale": "0.9"

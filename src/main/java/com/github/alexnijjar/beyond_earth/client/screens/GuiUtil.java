@@ -1,10 +1,12 @@
-package com.github.alexnijjar.beyond_earth.gui;
+package com.github.alexnijjar.beyond_earth.client.screens;
 
 import java.awt.Rectangle;
 
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 import com.mojang.blaze3d.systems.RenderSystem;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.transfer.v1.client.fluid.FluidVariantRendering;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.minecraft.client.MinecraftClient;
@@ -14,6 +16,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.util.Identifier;
 
+@Environment(EnvType.CLIENT)
 public class GuiUtil {
 
     public static final int FIRE_WIDTH = 14;
@@ -65,9 +68,9 @@ public class GuiUtil {
         drawVertical(matrixStack, x, y, ENERGY_WIDTH, ENERGY_HEIGHT, ENERGY_TEXTURE, ratio);
     }
 
-    public static void drawFluidTank(MatrixStack matrixStack, int x, int y, long fluidAmount, long fluidCapacity, FluidVariant fluid) {
+    public static void drawFluidTank(MatrixStack matrixStack, int x, int y, long fluidAmount, long fluidCapacity, FluidVariant fluid, int offset) {
         // Draw the fluid.
-        drawFluid(matrixStack, 37, x, y, fluidAmount, fluidCapacity, fluid);
+        drawFluid(matrixStack, offset, x, y, fluidAmount, fluidCapacity, fluid);
         // Draw the fluid tank.
         drawVertical(matrixStack, x, y, FLUID_TANK_WIDTH, FLUID_TANK_HEIGHT, FLUID_TANK_TEXTURE, 1.0);
     }

@@ -19,13 +19,13 @@
         {
             "type": "patchouli:spotlight",
             "title": "Tip: 3",
-            "item": "beyond_earth:rover",
+            "item": "beyond_earth:tier_1_rover",
             "text": "Do you know what would be awesome? Drifting on another planet.$(br)And hey! If you leave tracks, you now have an easy way to get back. It's also good for travel, you know? The moon is quite barren."
         },
         {
             "type": "patchouli:spotlight",
             "title": "Tip: 4",
-            "item": "beyond_earth:rocket_t4",
+            "item": "beyond_earth:tier_4_rocket",
             "text": "Interact [crouch+right click] with the lander when you reach your destination; it would be nice to get your rocket back, ESPECIALLY when you worked hard getting all of that stuff."
         },
         {

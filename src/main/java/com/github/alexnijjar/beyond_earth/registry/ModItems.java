@@ -10,6 +10,7 @@ import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier1;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier2;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier3;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier4;
+import com.github.alexnijjar.beyond_earth.items.FluidContainingItem.TankStorage;
 import com.github.alexnijjar.beyond_earth.items.GuideBook;
 import com.github.alexnijjar.beyond_earth.items.HammerItem;
 import com.github.alexnijjar.beyond_earth.items.SpacePaintingItem;
@@ -18,11 +19,14 @@ import com.github.alexnijjar.beyond_earth.items.armour.NetheriteSpaceSuit;
 import com.github.alexnijjar.beyond_earth.items.armour.SpaceSuit;
 import com.github.alexnijjar.beyond_earth.items.vehicles.RocketItem;
 import com.github.alexnijjar.beyond_earth.items.vehicles.RoverItem;
+import com.github.alexnijjar.beyond_earth.items.vehicles.VehicleItem;
 import com.github.alexnijjar.beyond_earth.util.FluidUtils;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.minecraft.block.Block;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.BlockItem;
@@ -33,7 +37,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.item.TallBlockItem;
 import net.minecraft.item.WallStandingBlockItem;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -47,24 +50,24 @@ public class ModItems {
         public static final ItemGroup ITEM_GROUP_NORMAL = FabricItemGroupBuilder.create(new ModIdentifier("tab_normal")).icon(() -> new ItemStack(ModItems.TIER_1_ROCKET)).appendItems(stacks -> {
 
                 ItemStack tier1Rocket = ModItems.TIER_1_ROCKET.getDefaultStack();
-                tier1Rocket.setNbt(new NbtCompound());
-                tier1Rocket.getNbt().putInt("Fuel", RocketItem.MAX_FUEL);
+                ((VehicleItem) tier1Rocket.getItem()).setAmount(tier1Rocket, ((VehicleItem) tier1Rocket.getItem()).getTankSize());
+                ((VehicleItem) tier1Rocket.getItem()).setFluid(tier1Rocket, FluidVariant.of(ModFluids.FUEL_STILL));
 
                 ItemStack tier2Rocket = ModItems.TIER_2_ROCKET.getDefaultStack();
-                tier2Rocket.setNbt(new NbtCompound());
-                tier2Rocket.getNbt().putInt("Fuel", RocketItem.MAX_FUEL);
+                ((VehicleItem) tier2Rocket.getItem()).setAmount(tier2Rocket, ((VehicleItem) tier2Rocket.getItem()).getTankSize());
+                ((VehicleItem) tier2Rocket.getItem()).setFluid(tier2Rocket, FluidVariant.of(ModFluids.FUEL_STILL));
 
                 ItemStack tier3Rocket = ModItems.TIER_3_ROCKET.getDefaultStack();
-                tier3Rocket.setNbt(new NbtCompound());
-                tier3Rocket.getNbt().putInt("Fuel", RocketItem.MAX_FUEL);
+                ((VehicleItem) tier3Rocket.getItem()).setAmount(tier3Rocket, ((VehicleItem) tier3Rocket.getItem()).getTankSize());
+                ((VehicleItem) tier3Rocket.getItem()).setFluid(tier3Rocket, FluidVariant.of(ModFluids.FUEL_STILL));
 
                 ItemStack tier4Rocket = ModItems.TIER_4_ROCKET.getDefaultStack();
-                tier4Rocket.setNbt(new NbtCompound());
-                tier4Rocket.getNbt().putInt("Fuel", RocketItem.MAX_FUEL);
+                ((VehicleItem) tier4Rocket.getItem()).setAmount(tier4Rocket, ((VehicleItem) tier4Rocket.getItem()).getTankSize());
+                ((VehicleItem) tier4Rocket.getItem()).setFluid(tier4Rocket, FluidVariant.of(ModFluids.FUEL_STILL));
 
-                ItemStack rover = ModItems.ROVER.getDefaultStack();
-                rover.setNbt(new NbtCompound());
-                rover.getNbt().putInt("Fuel", RoverItem.MAX_FUEL);
+                ItemStack tier1Rover = ModItems.TIER_1_ROVER.getDefaultStack();
+                ((VehicleItem) tier1Rover.getItem()).setAmount(tier1Rover, ((VehicleItem) tier1Rover.getItem()).getTankSize());
+                ((VehicleItem) tier1Rover.getItem()).setFluid(tier1Rover, FluidVariant.of(ModFluids.FUEL_STILL));
 
                 ItemStack spaceSuit = ModArmour.SPACE_SUIT.getDefaultStack();
                 ((SpaceSuit) spaceSuit.getItem()).setAmount(spaceSuit, ((SpaceSuit) spaceSuit.getItem()).getTankSize());
@@ -88,8 +91,8 @@ public class ModItems {
                 stacks.set(11, ModItems.TIER_3_ROCKET.getDefaultStack());
                 stacks.set(12, ModItems.TIER_4_ROCKET.getDefaultStack());
 
-                stacks.set(18, rover);
-                stacks.set(19, ModItems.ROVER.getDefaultStack());
+                stacks.set(18, tier1Rover);
+                stacks.set(19, ModItems.TIER_1_ROVER.getDefaultStack());
 
                 stacks.set(6, ModArmour.OXYGEN_MASK.getDefaultStack());
                 stacks.set(15, spaceSuit);
@@ -128,7 +131,7 @@ public class ModItems {
         public static final ItemGroup ITEM_GROUP_BLOCKS = FabricItemGroupBuilder.build(new ModIdentifier("tab_blocks"), () -> new ItemStack(ModBlocks.MOON_IRON_ORE));
         public static final ItemGroup ITEM_GROUP_SPAWN_EGGS = FabricItemGroupBuilder.build(new ModIdentifier("tab_spawn_eggs"), () -> new ItemStack(ModItems.ALIEN_SPAWN_EGG));
 
-        public static final BlockItem ROCKET_LAUNCH_PAD = registerBlockItem(ModBlocks.ROCKET_LAUNCH_PAD);
+        public static final BlockItem ROCKET_LAUNCH_PAD = registerBlockItem(ModBlocks.ROCKET_LAUNCH_PAD, null);
 
         // Spawn eggs.
         public static final Item ALIEN_SPAWN_EGG = register("alien_spawn_egg", new SpawnEggItem(ModEntities.ALIEN, -13382401, -11650781, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
@@ -142,11 +145,11 @@ public class ModItems {
         public static final Item ALIEN_WANDERING_TRADER_SPAWN_EGG = register("alien_wandering_trader_spawn_egg", new SpawnEggItem(ModEntities.ALIEN_WANDERING_TRADER, 5993415, 2868874, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
 
         // Vehicles Items.
-        public static final Item TIER_1_ROCKET = register("rocket_t1", new RocketItem<RocketEntityTier1>(ModEntities.TIER_1_ROCKET, 1, new FabricItemSettings().maxCount(1)));
-        public static final Item TIER_2_ROCKET = register("rocket_t2", new RocketItem<RocketEntityTier2>(ModEntities.TIER_2_ROCKET, 2, new FabricItemSettings().maxCount(1)));
-        public static final Item TIER_3_ROCKET = register("rocket_t3", new RocketItem<RocketEntityTier3>(ModEntities.TIER_3_ROCKET, 3, new FabricItemSettings().maxCount(1)));
-        public static final Item TIER_4_ROCKET = register("rocket_t4", new RocketItem<RocketEntityTier4>(ModEntities.TIER_4_ROCKET, 4, new FabricItemSettings().maxCount(1)));
-        public static final Item ROVER = register("rover", new RoverItem(new FabricItemSettings().maxCount(1)));
+        public static final Item TIER_1_ROCKET = register("tier_1_rocket", new RocketItem<RocketEntityTier1>(ModEntities.ROCKET_TIER_1, 1, new FabricItemSettings().maxCount(1)));
+        public static final Item TIER_2_ROCKET = register("tier_2_rocket", new RocketItem<RocketEntityTier2>(ModEntities.ROCKET_TIER_2, 2, new FabricItemSettings().maxCount(1)));
+        public static final Item TIER_3_ROCKET = register("tier_3_rocket", new RocketItem<RocketEntityTier3>(ModEntities.ROCKET_TIER_3, 3, new FabricItemSettings().maxCount(1)));
+        public static final Item TIER_4_ROCKET = register("tier_4_rocket", new RocketItem<RocketEntityTier4>(ModEntities.ROCKET_TIER_4, 4, new FabricItemSettings().maxCount(1)));
+        public static final Item TIER_1_ROVER = register("tier_1_rover", new RoverItem(new FabricItemSettings().maxCount(1)));
 
         // Guide book
         public static final Item GUIDE_BOOK = register("guide_book", new GuideBook(new FabricItemSettings().maxCount(1)));
@@ -363,6 +366,14 @@ public class ModItems {
         public static final BlockItem GLACIO_IRON_ORE = registerBlockItem(ModBlocks.GLACIO_IRON_ORE);
         public static final BlockItem GLACIO_LAPIS_ORE = registerBlockItem(ModBlocks.GLACIO_LAPIS_ORE);
 
+        public static void register() {
+                registerTank(TIER_1_ROCKET);
+                registerTank(TIER_2_ROCKET);
+                registerTank(TIER_3_ROCKET);
+                registerTank(TIER_4_ROCKET);
+                registerTank(TIER_1_ROVER);
+        }
+
         public static BlockItem registerFlag(Block flag) {
                 TallBlockItem item = new TallBlockItem(flag, new Item.Settings().group(ITEM_GROUP_FLAGS));
                 register(Registry.BLOCK.getId(flag), item);
@@ -398,5 +409,9 @@ public class ModItems {
         public static <T extends Item> T register(Identifier id, T item) {
                 Registry.register(Registry.ITEM, id, item);
                 return item;
+        }
+
+        public static void registerTank(Item tank) {
+                FluidStorage.ITEM.registerForItems(TankStorage::new, tank);
         }
 }

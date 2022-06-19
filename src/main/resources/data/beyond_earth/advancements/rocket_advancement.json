@@ -2,7 +2,7 @@
   "display": {
     "background": "beyond_earth:textures/blocks/iron_plating_block.png",
     "icon": {
-      "item": "beyond_earth:rocket_t1"
+      "item": "beyond_earth:tier_1_rocket"
     },
     "title": {
       "translate": "advancements.rocket_advancement.title"
@@ -22,7 +22,7 @@
         "items": [
           {
             "items": [
-              "beyond_earth:rocket_t1"
+              "beyond_earth:tier_1_rocket"
             ]
           }
         ]

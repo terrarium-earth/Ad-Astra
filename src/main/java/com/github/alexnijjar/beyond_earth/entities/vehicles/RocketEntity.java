@@ -3,7 +3,7 @@ package com.github.alexnijjar.beyond_earth.entities.vehicles;
 import java.util.List;
 
 import com.github.alexnijjar.beyond_earth.blocks.launch_pad.RocketLaunchPad;
-import com.github.alexnijjar.beyond_earth.gui.PlanetSelectionHandlerFactory;
+import com.github.alexnijjar.beyond_earth.gui.PlanetSelectionScreenHandlerFactory;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.PlanetSelectionScreenHandler;
 import com.github.alexnijjar.beyond_earth.registry.ModParticles;
 import com.github.alexnijjar.beyond_earth.registry.ModSounds;
@@ -25,6 +25,8 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -49,6 +51,23 @@ public class RocketEntity extends VehicleEntity {
     }
 
     @Override
+    public int getInventorySize() {
+        return 10;
+    }
+
+    @Override
+    public long getTankSize() {
+        return 3;
+    }
+
+    @Override
+    public ActionResult interact(PlayerEntity player, Hand hand) {
+        super.interact(player, hand);
+        this.openInventory(player);
+        return ActionResult.SUCCESS;
+    }
+
+    @Override
     protected void initDataTracker() {
         super.initDataTracker();
         this.dataTracker.startTracking(HAS_LAUNCH_PAD, false);
@@ -60,6 +79,7 @@ public class RocketEntity extends VehicleEntity {
 
     @Override
     public Vec3d updatePassengerForDismount(LivingEntity passenger) {
+        super.updatePassengerForDismount(passenger);
         int exitDirection = Math.round(passenger.getYaw() / 90) * 90;
         Vec3d pos = passenger.getPos();
 
@@ -167,12 +187,14 @@ public class RocketEntity extends VehicleEntity {
         this.getPassengerList().forEach(passenger -> {
             if (passenger instanceof PlayerEntity player) {
                 if (!(player.currentScreenHandler instanceof PlanetSelectionScreenHandler)) {
-                    player.openHandledScreen(new PlanetSelectionHandlerFactory(this.getTier()));
+                    player.openHandledScreen(new PlanetSelectionScreenHandlerFactory(this.getTier()));
 
                     if (this.world instanceof ServerWorld serverWorld) {
                         stopRocketSoundForRider((ServerPlayerEntity) player);
                     }
-                    player.getAbilities().allowFlying = false;
+                    if (!player.isCreative()) {
+                        player.getAbilities().allowFlying = false;
+                    }
                 }
             }
         });

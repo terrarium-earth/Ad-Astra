@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.FluidMachineBlockEntity;
 import com.github.alexnijjar.beyond_earth.items.armour.SpaceSuit;
+import com.github.alexnijjar.beyond_earth.items.vehicles.VehicleItem;
 import com.github.alexnijjar.beyond_earth.recipes.ConversionRecipe;
 
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
@@ -15,6 +16,7 @@ import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 
 public class FluidUtils {
@@ -40,18 +42,22 @@ public class FluidUtils {
 			}
 
 			@Override
-			protected boolean canInsert(FluidVariant variant) {
-				return true;
-			}
-
-			@Override
-			protected boolean canExtract(FluidVariant variant) {
-				return true;
-			}
-
-			@Override
 			protected void onFinalCommit() {
 				blockEntity.markDirty();
+			}
+		};
+	}
+
+	public static <T extends ConversionRecipe> SingleVariantStorage<FluidVariant> createTank(long tankSize) {
+		return new SingleVariantStorage<>() {
+			@Override
+			protected FluidVariant getBlankVariant() {
+				return FluidVariant.blank();
+			}
+
+			@Override
+			protected long getCapacity(FluidVariant variant) {
+				return tankSize * FluidConstants.BUCKET;
 			}
 		};
 	}
@@ -80,13 +86,33 @@ public class FluidUtils {
 
 	// Inserts a fluid storage, such as a bucket into a tank.
 	public static void insertFluidIntoTank(FluidMachineBlockEntity inventory, int insertSlot, int extractSlot, Predicate<FluidVariant> filter) {
-		if (inventory.canInsert(extractSlot, inventory.getStack(insertSlot), null)) {
-			ContainerItemContext context = ContainerItemContext.withInitial(inventory.getStack(insertSlot));
-			Storage<FluidVariant> storage = context.find(FluidStorage.ITEM);
+		ContainerItemContext context = ContainerItemContext.withInitial(inventory.getStack(insertSlot));
+		Storage<FluidVariant> storage = context.find(FluidStorage.ITEM);
 
-			if (storage != null) {
-				if (StorageUtil.move(storage, inventory.inputTank, filter, Long.MAX_VALUE, null) > 0) {
-					consumeStorage(inventory, context, insertSlot, extractSlot);
+		if (storage != null) {
+			try (Transaction transaction = Transaction.openOuter()) {
+				if (StorageUtil.move(storage, inventory.inputTank, filter, Long.MAX_VALUE, transaction) > 0) {
+					if (canInsert(inventory, extractSlot, context)) {
+						consumeStorage(inventory, context, insertSlot, extractSlot);
+						transaction.commit();
+					}
+				}
+
+			}
+		}
+	}
+
+	public static void insertFluidIntoTank(CustomInventory inventory, Storage<FluidVariant> inputTank, int insertSlot, int extractSlot, Predicate<FluidVariant> filter) {
+		ContainerItemContext context = ContainerItemContext.withInitial(inventory.getStack(insertSlot));
+		Storage<FluidVariant> storage = context.find(FluidStorage.ITEM);
+
+		if (storage != null) {
+			try (Transaction transaction = Transaction.openOuter()) {
+				if (StorageUtil.move(storage, inputTank, filter, Long.MAX_VALUE, transaction) > 0) {
+					if (canInsert(inventory, extractSlot, context)) {
+						consumeStorage(inventory, context, insertSlot, extractSlot);
+						transaction.commit();
+					}
 				}
 			}
 		}
@@ -94,19 +120,22 @@ public class FluidUtils {
 
 	// Extracts fluid from a tank and inserts it into a storage, such as a bucket.
 	public static void extractFluidFromTank(FluidMachineBlockEntity inventory, int insertSlot, int extractSlot) {
-		if (inventory.canInsert(extractSlot, inventory.getStack(insertSlot), null)) {
-			ItemStack extractCopy = inventory.getStack(insertSlot).copy();
-			extractCopy.setCount(1);
-			ContainerItemContext context = ContainerItemContext.withInitial(extractCopy);
-			Storage<FluidVariant> storage = context.find(FluidStorage.ITEM);
+		ItemStack extractCopy = inventory.getStack(insertSlot).copy();
+		ContainerItemContext context = ContainerItemContext.withInitial(extractCopy);
+		extractCopy.setCount(1);
+		Storage<FluidVariant> storage = context.find(FluidStorage.ITEM);
 
-			if (storage != null) {
-				if (StorageUtil.move(inventory.outputTank, storage, f -> true, Long.MAX_VALUE, null) > 0) {
-					if (extractCopy.getItem() instanceof SpaceSuit) {
-						inventory.setStack(insertSlot, context.getItemVariant().toStack());
-						inventory.markDirty();
-					} else {
-						consumeStorage(inventory, context, insertSlot, extractSlot);
+		if (storage != null) {
+			try (Transaction transaction = Transaction.openOuter()) {
+				if (StorageUtil.move(inventory.outputTank, storage, f -> true, Long.MAX_VALUE, transaction) > 0) {
+					if (canInsert(inventory, extractSlot, context)) {
+						if (extractCopy.getItem() instanceof SpaceSuit || extractCopy.getItem() instanceof VehicleItem) {
+							inventory.setStack(insertSlot, context.getItemVariant().toStack());
+							inventory.markDirty();
+						} else {
+							consumeStorage(inventory, context, insertSlot, extractSlot);
+						}
+						transaction.commit();
 					}
 				}
 			}
@@ -119,5 +148,18 @@ public class FluidUtils {
 		inventory.setStack(extractSlot, new ItemStack(emptyStack.getItem(), inventory.getStack(extractSlot).getCount() + 1));
 		inventory.getItems().get(insertSlot).decrement(1);
 		inventory.markDirty();
+	}
+
+	public static void consumeStorage(CustomInventory inventory, ContainerItemContext context, int insertSlot, int extractSlot) {
+		ItemStack emptyStack = context.getItemVariant().toStack();
+		inventory.setStack(extractSlot, new ItemStack(emptyStack.getItem(), inventory.getStack(extractSlot).getCount() + 1));
+		inventory.stacks.get(insertSlot).decrement(1);
+		inventory.markDirty();
+	}
+
+	public static boolean canInsert(Inventory inventory, int extractSlot, ContainerItemContext context) {
+		ItemStack emptyStack = context.getItemVariant().toStack();
+		ItemStack extractSlotStack = inventory.getStack(extractSlot);
+		return extractSlotStack.isEmpty() || (emptyStack.isOf(extractSlotStack.getItem()) && extractSlotStack.getCount() <= extractSlotStack.getMaxCount());
 	}
 }

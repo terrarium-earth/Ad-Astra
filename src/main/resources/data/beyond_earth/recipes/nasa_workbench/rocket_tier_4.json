@@ -8,52 +8,32 @@
 		},
 		{
 			"ingredient": {
-				"tag": "c:compressed_desh"
+				"tag": "c:compressed_steel"
 			}
 		},
 		{
 			"ingredient": {
-				"tag": "c:compressed_desh"
+				"tag": "c:compressed_steel"
 			}
 		},
 		{
 			"ingredient": {
-				"tag": "c:compressed_desh"
+				"tag": "c:compressed_steel"
 			}
 		},
 		{
 			"ingredient": {
-				"tag": "c:compressed_desh"
+				"tag": "c:compressed_steel"
 			}
 		},
 		{
 			"ingredient": {
-				"tag": "c:compressed_desh"
+				"tag": "c:compressed_steel"
 			}
 		},
 		{
 			"ingredient": {
-				"tag": "c:compressed_desh"
-			}
-		},
-		{
-			"ingredient": {
-				"item": "minecraft:bucket"
-			}
-		},
-		{
-			"ingredient": {
-				"item": "beyond_earth:desh_tank"
-			}
-		},
-		{
-			"ingredient": {
-				"item": "beyond_earth:desh_tank"
-			}
-		},
-		{
-			"ingredient": {
-				"item": "minecraft:bucket"
+				"tag": "c:compressed_steel"
 			}
 		},
 		{
@@ -63,7 +43,27 @@
 		},
 		{
 			"ingredient": {
-				"item": "beyond_earth:desh_engine"
+				"item": "beyond_earth:steel_tank"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "beyond_earth:steel_tank"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "beyond_earth:rocket_fin"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "beyond_earth:rocket_fin"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "beyond_earth:steel_engine"
 			}
 		},
 		{
@@ -73,7 +73,7 @@
 		}
 	],
 	"output": {
-		"item": "beyond_earth:rocket_t2",
+		"item": "beyond_earth:tier_1_rocket",
 		"count": 1
 	}
 }

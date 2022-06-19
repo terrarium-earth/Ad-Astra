@@ -4,6 +4,7 @@ import com.github.alexnijjar.beyond_earth.registry.ModItems;
 import com.github.alexnijjar.beyond_earth.util.ModKeyBindings;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.data.DataTracker;
@@ -11,6 +12,8 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -24,13 +27,36 @@ public class RoverEntity extends VehicleEntity {
     public double prevWheelPitch;
     public float prevRoverYaw;
 
+    public static final long FUEL_PER_TICK = FluidConstants.BUCKET / 1500;
+
     protected static final TrackedData<Float> TURN_SPEED = DataTracker.registerData(RoverEntity.class, TrackedDataHandlerRegistry.FLOAT);
 
     public RoverEntity(EntityType<?> type, World world) {
         super(type, world);
         this.stepHeight = 1.0f;
     }
-    
+
+    @Override
+    public int getInventorySize() {
+        return 10;
+    }
+
+    @Override
+    public long getTankSize() {
+        return 3;
+    }
+
+    @Override
+    public long getFuelPerTick() {
+        return FUEL_PER_TICK;
+    }
+
+    @Override
+    public ActionResult interact(PlayerEntity player, Hand hand) {
+        super.interact(player, hand);
+        this.openInventory(player);
+        return ActionResult.SUCCESS;
+    }
 
     @Override
     protected void initDataTracker() {
@@ -40,12 +66,13 @@ public class RoverEntity extends VehicleEntity {
 
     @Override
     public double getMountedHeightOffset() {
+        super.getMountedHeightOffset();
         return super.getMountedHeightOffset() + 0.60f;
     }
 
     @Override
     public ItemStack getDropStack() {
-        return ModItems.ROVER.getDefaultStack();
+        return ModItems.TIER_1_ROVER.getDefaultStack();
     }
 
     @Override
@@ -75,32 +102,42 @@ public class RoverEntity extends VehicleEntity {
 
         if (this.getFirstPassenger() instanceof PlayerEntity player) {
 
-            // Player is clicking 'w' to move forward.
-            if (ModKeyBindings.forwardKeyDown(player)) {
-                this.setSpeed(this.getSpeed() + 0.1f * (this.submergedInWater ? 0.5f : 1.0f));
-            }
-            // Player is clicking 's' to move backward.
-            if (ModKeyBindings.backKeyDown(player)) {
-                this.setSpeed(this.getSpeed() - 0.05f * (this.submergedInWater ? 0.5f : 1.0f));
-            }
+            if (this.inputTank.amount > 0) {
+                boolean shouldConsumeFuel = false;
 
-            // Player is clicking 'a' to move left.
-            if (ModKeyBindings.leftKeyDown(player)) {
-                this.setTurnSpeed(this.getTurnSpeed() - 15.0f * this.getSpeed());
-                // Slow down for better turns.
-                this.setVelocity(new Vec3d(this.getVelocity().getX() / 1.1, this.getVelocity().getY(), this.getVelocity().getZ() / 1.1));
-            }
-            // Player is clicking 'd' to move right.
-            if (ModKeyBindings.rightKeyDown(player)) {
-                this.setTurnSpeed(this.getTurnSpeed() + 15.0f * this.getSpeed());
-                // Slow down for better turns.
-                this.setVelocity(new Vec3d(this.getVelocity().getX() / 1.1, this.getVelocity().getY(), this.getVelocity().getZ() / 1.1));
+                // Player is clicking 'w' to move forward.
+                if (ModKeyBindings.forwardKeyDown(player)) {
+                    this.setSpeed(this.getSpeed() + 0.1f * (this.submergedInWater ? 0.5f : 1.0f));
+                    shouldConsumeFuel = true;
+                }
+                // Player is clicking 's' to move backward.
+                if (ModKeyBindings.backKeyDown(player)) {
+                    this.setSpeed(this.getSpeed() - 0.05f * (this.submergedInWater ? 0.5f : 1.0f));
+                    shouldConsumeFuel = true;
+                }
+
+                // Player is clicking 'a' to move left.
+                if (ModKeyBindings.leftKeyDown(player)) {
+                    this.setTurnSpeed(this.getTurnSpeed() - 15.0f * this.getSpeed());
+                    // Slow down for better turns.
+                    this.setVelocity(new Vec3d(this.getVelocity().getX() / 1.1, this.getVelocity().getY(), this.getVelocity().getZ() / 1.1));
+                }
+                // Player is clicking 'd' to move right.
+                if (ModKeyBindings.rightKeyDown(player)) {
+                    this.setTurnSpeed(this.getTurnSpeed() + 15.0f * this.getSpeed());
+                    // Slow down for better turns.
+                    this.setVelocity(new Vec3d(this.getVelocity().getX() / 1.1, this.getVelocity().getY(), this.getVelocity().getZ() / 1.1));
+                }
+
+                if (shouldConsumeFuel) {
+                    this.consumeFuel();
+                }
             }
         }
 
         this.setTurnSpeed(MathHelper.clamp(this.getTurnSpeed(), -3.0f, 3.0f));
         this.setTurnSpeed(this.getTurnSpeed() / 1.1f);
-        if (this.getTurnSpeed() < 0.1 && this.getTurnSpeed()> -0.1) {
+        if (this.getTurnSpeed() < 0.1 && this.getTurnSpeed() > -0.1) {
             this.setTurnSpeed(0.0f);
         }
 

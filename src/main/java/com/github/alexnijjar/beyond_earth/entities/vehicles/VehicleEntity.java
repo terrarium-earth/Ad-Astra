@@ -2,8 +2,17 @@ package com.github.alexnijjar.beyond_earth.entities.vehicles;
 
 import javax.annotation.Nullable;
 
+import com.github.alexnijjar.beyond_earth.gui.VehicleScreenHandlerFactory;
+import com.github.alexnijjar.beyond_earth.items.vehicles.VehicleItem;
+import com.github.alexnijjar.beyond_earth.registry.ModFluids;
+import com.github.alexnijjar.beyond_earth.util.CustomInventory;
+import com.github.alexnijjar.beyond_earth.util.FluidUtils;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
+import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.PowderSnowBlock;
 import net.minecraft.entity.Entity;
@@ -18,19 +27,22 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
 import net.minecraft.network.Packet;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
 
-public class VehicleEntity extends Entity {
+public abstract class VehicleEntity extends Entity {
 
     protected int clientInterpolationSteps;
     protected double clientX;
@@ -43,26 +55,44 @@ public class VehicleEntity extends Entity {
     protected double clientZVelocity;
     public float previousYaw;
 
+    public final SingleVariantStorage<FluidVariant> inputTank = FluidUtils.createTank(this.getTankSize());
+    private final CustomInventory inventory = new CustomInventory(this.getInventorySize());
+
     protected static final TrackedData<Float> SPEED = DataTracker.registerData(VehicleEntity.class, TrackedDataHandlerRegistry.FLOAT);
+    public static final TrackedData<Integer> FLUID_AMOUNT = DataTracker.registerData(VehicleEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    public static final TrackedData<String> FLUID_VARIANT = DataTracker.registerData(VehicleEntity.class, TrackedDataHandlerRegistry.STRING);
 
     public VehicleEntity(EntityType<?> type, World world) {
         super(type, world);
         this.syncClient();
     }
 
-
     @Override
     protected void initDataTracker() {
         this.dataTracker.startTracking(SPEED, 0.0f);
+        this.dataTracker.startTracking(FLUID_AMOUNT, 0);
+        this.dataTracker.startTracking(FLUID_VARIANT, "beyond_earth:fuel");
     }
 
     @Override
     protected void readCustomDataFromNbt(NbtCompound nbt) {
+        this.inventory.readNbtList(nbt.getList("Inventory", NbtElement.COMPOUND_TYPE));
+        inputTank.variant = FluidVariant.fromNbt(nbt.getCompound("inputFluid"));
+        inputTank.amount = nbt.getLong("inputAmount");
     }
 
     @Override
     protected void writeCustomDataToNbt(NbtCompound nbt) {
+        nbt.put("Inventory", this.inventory.toNbtList());
+        nbt.put("inputFluid", inputTank.variant.toNbt());
+        nbt.putLong("inputAmount", inputTank.amount);
     }
+
+    public CustomInventory getInventory() {
+        return this.inventory;
+    }
+
+    public abstract int getInventorySize();
 
     @Override
     public Packet<?> createSpawnPacket() {
@@ -79,18 +109,54 @@ public class VehicleEntity extends Entity {
         return true;
     }
 
+    public long getTankSize() {
+        return 0;
+    }
+
+    public long getFuelPerTick() {
+        return 0;
+    }
+
+    public void tryInsertingIntoTank() {
+        if (this.getInventorySize() > 1) {
+            if (!this.world.isClient) {
+                FluidUtils.insertFluidIntoTank(this.getInventory(), this.inputTank, 0, 1, f -> f.equals(FluidVariant.of(ModFluids.FUEL_STILL)));
+            }
+        }
+    }
+
+    public int getFluidAmount() {
+        return this.dataTracker.get(FLUID_AMOUNT);
+    }
+
+    public FluidVariant getFluidVariant() {
+        return FluidVariant.of(Registry.FLUID.get(new Identifier(this.dataTracker.get(FLUID_VARIANT))));
+    }
+
+    public void consumeFuel() {
+        if (!this.world.isClient) {
+            try (Transaction transaction = Transaction.openOuter()) {
+                if (this.inputTank.extract(FluidVariant.of(ModFluids.FUEL_STILL), this.getFuelPerTick(), transaction) > 0) {
+                    transaction.commit();
+                }
+            }
+        }
+    }
+
     @Override
     public void tick() {
         super.tick();
         this.previousYaw = this.getYaw();
 
-        if (this.getFirstPassenger() instanceof PlayerEntity player) {
-            player.getAbilities().allowFlying = true;
-        }
+        this.tryInsertingIntoTank();
 
         this.syncClient();
         this.checkBlockCollision();
         this.doGravity();
+        if (!this.world.isClient) {
+            this.dataTracker.set(FLUID_AMOUNT, (int) this.inputTank.amount);
+            this.dataTracker.set(FLUID_VARIANT, Registry.FLUID.getId(this.inputTank.variant.getFluid()).toString());
+        }
     }
 
     public void syncClient() {
@@ -149,6 +215,7 @@ public class VehicleEntity extends Entity {
 
         if (passenger instanceof PlayerEntity player) {
             if (!player.isCreative()) {
+                player.getAbilities().flying = false;
                 player.getAbilities().allowFlying = false;
             }
         }
@@ -202,9 +269,22 @@ public class VehicleEntity extends Entity {
         if (!this.world.isClient) {
             player.setYaw(this.getYaw());
             player.setPitch(this.getPitch());
+            player.getAbilities().allowFlying = true;
             return player.startRiding(this) ? ActionResult.CONSUME : ActionResult.PASS;
         }
         return ActionResult.SUCCESS;
+    }
+
+    public void openInventory(PlayerEntity player) {
+        openInventory(player, new VehicleScreenHandlerFactory(this));
+    }
+
+    public void openInventory(PlayerEntity player, ExtendedScreenHandlerFactory handler) {
+        if (!player.world.isClient) {
+            if (player.isSneaking()) {
+                player.openHandledScreen(handler);
+            }
+        }
     }
 
     @Override
@@ -224,9 +304,16 @@ public class VehicleEntity extends Entity {
         if (getDropStack() != null) {
             BlockPos pos = this.getBlockPos();
             ItemStack dropStack = this.getDropStack();
+
+            // Set the fluid and fluid variant in the dropped item.
+            ((VehicleItem) dropStack.getItem()).setAmount(dropStack, this.inputTank.amount);
+            ((VehicleItem) dropStack.getItem()).setFluid(dropStack, this.inputTank.variant);
+            NbtCompound nbt = dropStack.getOrCreateNbt();
+            // Set the inventory in the dropped item.
+            nbt.put("Inventory", this.inventory.toNbtList());
+
             world.playSound(null, pos, SoundEvents.BLOCK_NETHERITE_BLOCK_BREAK, SoundCategory.BLOCKS, 1, 1);
             this.world.spawnEntity(new ItemEntity(this.world, pos.getX(), pos.getY() + 0.5f, pos.getZ(), dropStack));
-            // TODO: Drop inventory and save nbt in item stack.
         }
 
         if (!this.world.isClient) {

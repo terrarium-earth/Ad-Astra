@@ -10,7 +10,7 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 
-public record PlanetSelectionHandlerFactory(int tier) implements ExtendedScreenHandlerFactory {
+public record PlanetSelectionScreenHandlerFactory(int tier) implements ExtendedScreenHandlerFactory {
 
     @Override
     public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
@@ -18,12 +18,12 @@ public record PlanetSelectionHandlerFactory(int tier) implements ExtendedScreenH
     }
 
     @Override
-    public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
+    public ScreenHandler createMenu(int syncId, PlayerInventory inventory, PlayerEntity player) {
         return new PlanetSelectionScreenHandler(syncId, player, tier);
     }
 
     @Override
     public Text getDisplayName() {
-        return Text.of("Planet Selection");
+        return Text.translatable("gui.beyond_earth.planet_selection.name");
     }
 }

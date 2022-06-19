@@ -1,6 +1,6 @@
 {
     "name": "Your 1st Rocket",
-    "icon": "beyond_earth:rocket_t1",
+    "icon": "beyond_earth:tier_1_rocket",
     "category": "beyond_earth:rocket_travel",
     "sortnum": "1",
     "pages": [
@@ -10,7 +10,7 @@
         },
         {
             "type": "patchouli:entity",
-            "entity": "beyond_earth:rocket_t1",
+            "entity": "beyond_earth:tier_1_rocket",
             "title": "Tier 1 Rocket",
             "offset": "0.5",
             "scale": "0.9"
