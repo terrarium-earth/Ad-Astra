@@ -2,6 +2,8 @@ package com.github.alexnijjar.beyond_earth.util;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.client.BeyondEarthClient;
@@ -68,10 +70,7 @@ public class ModUtils {
     public static final RegistryKey<World> GLACIO_KEY = RegistryKey.of(Registry.WORLD_KEY, GLACIO);
     public static final RegistryKey<World> GLACIO_ORBIT_KEY = RegistryKey.of(Registry.WORLD_KEY, GLACIO_ORBIT);
 
-    // Real gravity.
-    public static final float ORBIT_TRUE_GRAVITY = 0.0f;
     public static final float ORBIT_TEMPERATURE = -270.0f;
-    // Simulated gravity.
     public static final float ORBIT_GRAVITY = 0.32f;
 
     public static boolean modLoaded(String modId) {
@@ -91,6 +90,8 @@ public class ModUtils {
                     rocket.remove(RemovalReason.DISCARDED);
                     entitiesToTeleport.add(entity);
                     entitiesToTeleport.add(player);
+                } else if (!(player.getVehicle() instanceof LanderEntity)) {
+                    entitiesToTeleport.add(entity);
                 }
             } else {
                 entitiesToTeleport.add(entity);
@@ -115,6 +116,13 @@ public class ModUtils {
                 }
             }
         }
+    }
+
+    public static void teleportPlayer(RegistryKey<World> world, ServerPlayerEntity player) {
+        ServerWorld targetWorld = player.getServer().getWorld(world);
+        Vec3d targetPosition = new Vec3d(player.getX(), getSpawnStart(targetWorld), player.getZ());
+        TeleportTarget target = new TeleportTarget(targetPosition, player.getVelocity(), player.getYaw(), player.getPitch());
+        player = FabricDimensions.teleport(player, targetWorld, target);
     }
 
     public static LanderEntity createLander(RocketEntity rocket, ServerWorld targetWorld, Vec3d targetPosition) {
@@ -213,16 +221,11 @@ public class ModUtils {
     }
 
     public static boolean worldHasOxygen(World world) {
-        // Make all worlds that don't have a defined oxygen, like vanilla and modded dimensions have oxygen.
-        boolean worldIsDefinedInDataPack = false;
-        for (Planet planet : world.isClient ? BeyondEarthClient.planets : BeyondEarth.planets) {
-            if (planet.world().equals(world.getRegistryKey())) {
-                worldIsDefinedInDataPack = true;
-                break;
-            }
-        }
-        if (!worldIsDefinedInDataPack) {
+        if (getBeyondEarthDimensions(world.isClient).stream().noneMatch(world.getRegistryKey()::equals)) {
             return true;
+        }
+        if (getOrbitWorlds(world.isClient).stream().anyMatch(world.getRegistryKey()::equals)) {
+            return false;
         }
         return getWorldsWithoutOxygen(world.isClient).stream().anyMatch(world.getRegistryKey()::equals);
     }
@@ -287,7 +290,11 @@ public class ModUtils {
         }
     }
 
-    private static final List<RegistryKey<World>> getOrbitWorlds(boolean isClient) {
+    public static List<RegistryKey<World>> getBeyondEarthDimensions(boolean isClient) {
+        return Stream.concat(getPlanets(isClient).stream(), getOrbitWorlds(isClient).stream()).collect(Collectors.toList());
+    }
+
+    public static List<RegistryKey<World>> getOrbitWorlds(boolean isClient) {
         List<RegistryKey<World>> worlds = new LinkedList<>();
         (isClient ? BeyondEarthClient.planets : BeyondEarth.planets).forEach(planet -> {
             if (!worlds.contains(planet.orbitWorld()))
@@ -296,7 +303,7 @@ public class ModUtils {
         return worlds;
     }
 
-    private static final List<RegistryKey<World>> getPlanets(boolean isClient) {
+    public static List<RegistryKey<World>> getPlanets(boolean isClient) {
         List<RegistryKey<World>> worlds = new LinkedList<>();
         (isClient ? BeyondEarthClient.planets : BeyondEarth.planets).forEach(planet -> worlds.add(planet.world()));
         return worlds;
@@ -304,11 +311,7 @@ public class ModUtils {
 
     private static final List<RegistryKey<World>> getWorldsWithoutOxygen(boolean isClient) {
         List<RegistryKey<World>> worlds = new LinkedList<>();
-        (isClient ? BeyondEarthClient.planets : BeyondEarth.planets).forEach(planet -> {
-            if (planet.hasOxygen()) {
-                worlds.add(planet.world());
-            }
-        });
+        (isClient ? BeyondEarthClient.planets : BeyondEarth.planets).stream().filter(planet -> planet.hasOxygen()).forEach(planet -> worlds.add(planet.world()));
         return worlds;
     }
 

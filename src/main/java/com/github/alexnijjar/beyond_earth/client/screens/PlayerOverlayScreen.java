@@ -56,7 +56,7 @@ public class PlayerOverlayScreen {
         ClientPlayerEntity player = client.player;
 
         // Oxygen.
-        if (shouldRenderOxygen) {
+        if (shouldRenderOxygen && !client.options.debugEnabled) {
 
             int x = 5;
             int y = 25;
@@ -84,7 +84,7 @@ public class PlayerOverlayScreen {
         }
 
         // Planet bar.
-        if (shouldRenderBar) {
+        if (shouldRenderBar && !client.options.debugEnabled) {
             int rocketHeight = (int) (player.getY() / 5.3f);
             rocketHeight = MathHelper.clamp(rocketHeight, 0, 113);
 

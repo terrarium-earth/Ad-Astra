@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
+import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantItemStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.item.ItemStack;
@@ -13,12 +14,18 @@ public interface FluidContainingItem {
 
 	public long getTankSize();
 
-	public default void insertIntoTank(Storage<FluidVariant> storage, ItemStack stack) {
+	public default boolean insertIntoTank(Storage<FluidVariant> storage, ItemStack stack) {
 		try (Transaction transaction = Transaction.openOuter()) {
 			if (storage.insert(this.getFluid(stack), this.getAmount(stack), transaction) == this.getAmount(stack)) {
 				transaction.commit();
+				return true;
 			}
 		}
+		return false;
+	}
+
+	public default long transferFluid(Storage<FluidVariant> from, Storage<FluidVariant> to) {
+		return StorageUtil.move(from, to, f -> true, Long.MAX_VALUE, null);
 	}
 
 	public default FluidVariant getFluid(ItemStack stack) {
@@ -49,7 +56,7 @@ public interface FluidContainingItem {
 		nbt.putLong("Amount", amount);
 	}
 
-	class TankStorage extends SingleVariantItemStorage<FluidVariant> {
+	public class TankStorage extends SingleVariantItemStorage<FluidVariant> {
 
 		private FluidContainingItem item;
 

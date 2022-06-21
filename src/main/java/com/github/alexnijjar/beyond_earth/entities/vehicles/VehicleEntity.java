@@ -13,8 +13,6 @@ import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.PowderSnowBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
@@ -64,7 +62,6 @@ public abstract class VehicleEntity extends Entity {
 
     public VehicleEntity(EntityType<?> type, World world) {
         super(type, world);
-        this.syncClient();
     }
 
     @Override
@@ -88,94 +85,84 @@ public abstract class VehicleEntity extends Entity {
         nbt.putLong("inputAmount", inputTank.amount);
     }
 
-    public CustomInventory getInventory() {
-        return this.inventory;
-    }
-
-    public abstract int getInventorySize();
-
-    @Override
-    public Packet<?> createSpawnPacket() {
-        return new EntitySpawnS2CPacket(this);
-    }
-
-    @Override
-    public boolean collides() {
-        return true;
-    }
-
-    @Override
-    public boolean isCollidable() {
-        return true;
-    }
-
-    public long getTankSize() {
-        return 0;
-    }
-
-    public long getFuelPerTick() {
-        return 0;
-    }
-
-    public void tryInsertingIntoTank() {
-        if (this.getInventorySize() > 1) {
-            if (!this.world.isClient) {
-                FluidUtils.insertFluidIntoTank(this.getInventory(), this.inputTank, 0, 1, f -> f.equals(FluidVariant.of(ModFluids.FUEL_STILL)));
-            }
-        }
-    }
-
-    public int getFluidAmount() {
-        return this.dataTracker.get(FLUID_AMOUNT);
-    }
-
-    public FluidVariant getFluidVariant() {
-        return FluidVariant.of(Registry.FLUID.get(new Identifier(this.dataTracker.get(FLUID_VARIANT))));
-    }
-
-    public void consumeFuel() {
-        if (!this.world.isClient) {
-            try (Transaction transaction = Transaction.openOuter()) {
-                if (this.inputTank.extract(FluidVariant.of(ModFluids.FUEL_STILL), this.getFuelPerTick(), transaction) > 0) {
-                    transaction.commit();
-                }
-            }
-        }
-    }
-
     @Override
     public void tick() {
         super.tick();
         this.previousYaw = this.getYaw();
 
         this.tryInsertingIntoTank();
-
-        this.syncClient();
         this.checkBlockCollision();
-        this.doGravity();
         if (!this.world.isClient) {
             this.dataTracker.set(FLUID_AMOUNT, (int) this.inputTank.amount);
             this.dataTracker.set(FLUID_VARIANT, Registry.FLUID.getId(this.inputTank.variant.getFluid()).toString());
         }
+
+
+        this.doGravity();
+        this.slowDown();
+        this.doMovement();
+    }
+
+    public void slowDown() {
+        this.setSpeed(this.getSpeed() / 1.1f);
+        if (this.getSpeed() < 0.001 && this.getSpeed() > -0.001) {
+            this.setSpeed(0.0f);
+        }
+        this.setSpeed(MathHelper.clamp(this.getSpeed(), -0.1f, 0.2f));
+    }
+
+    public void doGravity() {
+        if (!this.hasNoGravity()) {
+            double gravity = 0.8;
+            if (this.submergedInWater) {
+                gravity *= 0.01;
+            }
+
+            float planetGravity = ModUtils.getPlanetGravity(this.world);
+            if (this instanceof LanderEntity) {
+                gravity = 0.5;
+            } else {
+                gravity *= planetGravity;
+            }
+
+            this.setVelocity(this.getVelocity().add(0.0, -0.04 * gravity, 0.0));
+        }
+    }
+
+    public void doMovement() {
+        BlockPos velocityAffectingPos = this.getVelocityAffectingPos();
+        float slipperiness = this.world.getBlockState(velocityAffectingPos).getBlock().getSlipperiness();
+        Vec3d movement = this.applyMovementInput(new Vec3d(this.getPitch(), 0, 1), slipperiness);
+        double speedModifier = this.onGround ? slipperiness * 1.0f : slipperiness * 0.70f;
+        this.setVelocity(movement.getX() * speedModifier, movement.getY() * 0.98, movement.getZ() * speedModifier);
+
+        this.move(MovementType.SELF, this.getVelocity());
+    }
+
+    private float getMovementSpeed(float slipperiness) {
+        return this.getSpeed() * (0.21600002f / (slipperiness * slipperiness * slipperiness));
+    }
+
+    public Vec3d applyMovementInput(Vec3d movementInput, float slipperiness) {
+        this.updateVelocity(this.getMovementSpeed(slipperiness), movementInput);
+        this.move(MovementType.SELF, this.getVelocity());
+        return this.getVelocity();
     }
 
     public void syncClient() {
-        if (this.world.isClient) {
-            if (this.clientInterpolationSteps > 0) {
-                double d = this.getX() + (this.clientX - this.getX()) / (double) this.clientInterpolationSteps;
-                double e = this.getY() + (this.clientY - this.getY()) / (double) this.clientInterpolationSteps;
-                double f = this.getZ() + (this.clientZ - this.getZ()) / (double) this.clientInterpolationSteps;
-                double g = MathHelper.wrapDegrees(this.clientYaw - (double) this.getYaw());
-                this.setYaw(this.getYaw() + (float) g / (float) this.clientInterpolationSteps);
-                this.setPitch(this.getPitch() + (float) (this.clientPitch - (double) this.getPitch()) / (float) this.clientInterpolationSteps);
-                --this.clientInterpolationSteps;
-                this.setPosition(d, e, f);
-                this.setRotation(this.getYaw(), this.getPitch());
-            } else {
-                this.refreshPosition();
-                this.setRotation(this.getYaw(), this.getPitch());
-            }
-            return;
+        if (this.clientInterpolationSteps > 0) {
+            double d = this.getX() + (this.clientX - this.getX()) / (double) this.clientInterpolationSteps;
+            double e = this.getY() + (this.clientY - this.getY()) / (double) this.clientInterpolationSteps;
+            double f = this.getZ() + (this.clientZ - this.getZ()) / (double) this.clientInterpolationSteps;
+            double g = MathHelper.wrapDegrees(this.clientYaw - (double) this.getYaw());
+            this.setYaw(this.getYaw() + (float) g / (float) this.clientInterpolationSteps);
+            this.setPitch(this.getPitch() + (float) (this.clientPitch - (double) this.getPitch()) / (float) this.clientInterpolationSteps);
+            --this.clientInterpolationSteps;
+            this.setPosition(d, e, f);
+            this.setRotation(this.getYaw(), this.getPitch());
+        } else {
+            this.refreshPosition();
+            this.setRotation(this.getYaw(), this.getPitch());
         }
     }
 
@@ -221,41 +208,6 @@ public abstract class VehicleEntity extends Entity {
         }
 
         return super.updatePassengerForDismount(passenger);
-    }
-
-    public void doGravity() {
-        if (!this.hasNoGravity()) {
-            double modifier = 1.0;
-            if (this.submergedInWater) {
-                modifier *= 0.01;
-            }
-
-            float gravity = ModUtils.getPlanetGravity(this.world);
-            if (this instanceof LanderEntity) {
-                modifier *= MathHelper.clamp(gravity * 2, 0.2f, 1.0f);
-            } else {
-                modifier *= gravity;
-            }
-
-            this.setVelocity(this.getVelocity().add(0.0, -0.04 * modifier, 0.0));
-        }
-
-        // Slow down the vehicle.
-
-        this.setSpeed(this.getSpeed() / 1.1f);
-        if (this.getSpeed() < 0.001 && this.getSpeed() > -0.001) {
-            this.setSpeed(0.0f);
-        }
-        this.setSpeed(MathHelper.clamp(this.getSpeed(), -0.1f, 0.2f));
-
-        // Move the vehicle.
-        BlockPos velocityAffectingPos = this.getVelocityAffectingPos();
-        float slipperiness = this.world.getBlockState(velocityAffectingPos).getBlock().getSlipperiness();
-        Vec3d movement = this.applyMovementInput(new Vec3d(this.getPitch(), 0, 1), slipperiness);
-        double speedModifier = this.onGround ? slipperiness * 1.0f : slipperiness * 0.70f;
-        this.setVelocity(movement.getX() * speedModifier, movement.getY() * 0.98, movement.getZ() * speedModifier);
-
-        this.move(MovementType.SELF, this.getVelocity());
     }
 
     @Override
@@ -323,37 +275,22 @@ public abstract class VehicleEntity extends Entity {
 
     public void explode(float powerMultiplier) {
         if (!this.world.isClient) {
-            for (int i = 0; i < 3; i++) {
-                world.createExplosion(null, this.getX(), this.getY() + 0.5, this.getZ(), 7.0f * powerMultiplier, ModUtils.worldHasOxygen(this.world), Explosion.DestructionType.DESTROY);
-            }
+            world.createExplosion(this, this.getX(), this.getY() + 0.5, this.getZ(), 7.0f * powerMultiplier, ModUtils.worldHasOxygen(this.world), Explosion.DestructionType.DESTROY);
         }
         this.remove(RemovalReason.DISCARDED);
     }
 
     @Override
     public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
-        if (this.getVelocity().getY() < -1.0) {
-            this.explode(1);
+        if (this.getVelocity().getY() < -0.4) {
+            this.explode(0.55f);
+            return true;
         }
-        return super.handleFallDamage(fallDistance, damageMultiplier, damageSource);
+        return false;
     }
 
     public ItemStack getDropStack() {
         return null;
-    }
-
-    private float getMovementSpeed(float slipperiness) {
-        return (float) (this.getSpeed() * (0.21600002f / (slipperiness * slipperiness * slipperiness)));
-    }
-
-    public Vec3d applyMovementInput(Vec3d movementInput, float slipperiness) {
-        this.updateVelocity(this.getMovementSpeed(slipperiness), movementInput);
-        this.move(MovementType.SELF, this.getVelocity());
-        Vec3d vec3d = this.getVelocity();
-        if (this.horizontalCollision && (this.getBlockStateAtPos().isOf(Blocks.POWDER_SNOW) && PowderSnowBlock.canWalkOnPowderSnow(this))) {
-            vec3d = new Vec3d(vec3d.x, 0.2, vec3d.z);
-        }
-        return vec3d;
     }
 
     @Override
@@ -399,5 +336,60 @@ public abstract class VehicleEntity extends Entity {
 
     public boolean renderPlanetBar() {
         return false;
+    }
+
+    @Override
+    public boolean collides() {
+        return true;
+    }
+
+    @Override
+    public boolean isCollidable() {
+        return true;
+    }
+
+    public long getTankSize() {
+        return 0;
+    }
+
+    public long getFuelPerTick() {
+        return 0;
+    }
+
+    public CustomInventory getInventory() {
+        return this.inventory;
+    }
+
+    public abstract int getInventorySize();
+
+    @Override
+    public Packet<?> createSpawnPacket() {
+        return new EntitySpawnS2CPacket(this);
+    }
+
+    public void tryInsertingIntoTank() {
+        if (this.getInventorySize() > 1) {
+            if (!this.world.isClient) {
+                FluidUtils.insertFluidIntoTank(this.getInventory(), this.inputTank, 0, 1, f -> f.equals(FluidVariant.of(ModFluids.FUEL_STILL)));
+            }
+        }
+    }
+
+    public int getFluidAmount() {
+        return this.dataTracker.get(FLUID_AMOUNT);
+    }
+
+    public FluidVariant getFluidVariant() {
+        return FluidVariant.of(Registry.FLUID.get(new Identifier(this.dataTracker.get(FLUID_VARIANT))));
+    }
+
+    public void consumeFuel() {
+        if (!this.world.isClient) {
+            try (Transaction transaction = Transaction.openOuter()) {
+                if (this.inputTank.extract(FluidVariant.of(ModFluids.FUEL_STILL), this.getFuelPerTick(), transaction) > 0) {
+                    transaction.commit();
+                }
+            }
+        }
     }
 }

@@ -7,7 +7,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.render.BufferBuilder;
-import net.minecraft.client.render.BufferRenderer;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.VertexFormat;
@@ -42,26 +41,20 @@ public class PlanetSelectionUtil {
         matrices.pop();
     }
 
-    // Original source, modified for modern Minecraft:
-    // https://forums.minecraftforge.net/topic/37625-189draw-a-simple-circle/?do=findComment&comment=200729
     public static void drawCircle(double x, double y, double radius, int sides) {
-        BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
 
-        RenderSystem.setShaderColor(36 / 255.0f, 50 / 255.0f, 123 / 255.0f, 1.0f);
-        RenderSystem.setShader(GameRenderer::getPositionShader);
-
-        bufferBuilder.begin(VertexFormat.DrawMode.DEBUG_LINE_STRIP, VertexFormats.POSITION);
+        Tessellator tessellator = Tessellator.getInstance();
+        BufferBuilder bufferBuilder = tessellator.getBuffer();
+        RenderSystem.setShader(GameRenderer::getPositionColorShader);
 
         double width = radius - 0.6;
         for (double i = width; i < radius - 0.5 + 1; i += 0.1) {
+            bufferBuilder.begin(VertexFormat.DrawMode.DEBUG_LINE_STRIP, VertexFormats.POSITION_COLOR);
             for (int j = 0; j <= sides; j++) {
                 double angle = (Math.PI * 2 * j / sides) + Math.toRadians(180);
-                bufferBuilder.vertex(x + Math.sin(angle) * i, y + Math.cos(angle) * i, 0).next();
+                bufferBuilder.vertex(x + Math.sin(angle) * i, y + Math.cos(angle) * i, 0).color(36, 50, 123, 255).next();
             }
+            tessellator.draw();
         }
-
-        BufferRenderer.drawWithShader(bufferBuilder.end());
-
-        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
     }
 }

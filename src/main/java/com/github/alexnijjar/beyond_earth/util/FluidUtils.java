@@ -4,8 +4,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.FluidMachineBlockEntity;
-import com.github.alexnijjar.beyond_earth.items.armour.SpaceSuit;
-import com.github.alexnijjar.beyond_earth.items.vehicles.VehicleItem;
+import com.github.alexnijjar.beyond_earth.items.FluidContainingItem;
 import com.github.alexnijjar.beyond_earth.recipes.ConversionRecipe;
 
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
@@ -27,6 +26,10 @@ public class FluidUtils {
 
 	public static long millibucketsToDroplets(long millibuckets) {
 		return millibuckets * 81;
+	}
+
+	public static Storage<FluidVariant> getStorage(ItemStack stack) {
+		return ContainerItemContext.withInitial(stack).find(FluidStorage.ITEM);
 	}
 
 	public static <T extends ConversionRecipe> SingleVariantStorage<FluidVariant> createTank(FluidMachineBlockEntity blockEntity, long tankSize) {
@@ -129,7 +132,7 @@ public class FluidUtils {
 			try (Transaction transaction = Transaction.openOuter()) {
 				if (StorageUtil.move(inventory.outputTank, storage, f -> true, Long.MAX_VALUE, transaction) > 0) {
 					if (canInsert(inventory, extractSlot, context)) {
-						if (extractCopy.getItem() instanceof SpaceSuit || extractCopy.getItem() instanceof VehicleItem) {
+						if (extractCopy.getItem() instanceof FluidContainingItem) {
 							inventory.setStack(insertSlot, context.getItemVariant().toStack());
 							inventory.markDirty();
 						} else {

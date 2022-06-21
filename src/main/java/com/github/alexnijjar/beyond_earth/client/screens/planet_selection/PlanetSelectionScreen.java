@@ -210,7 +210,11 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                 minScrollY = (this.height / 2) - 33;
                 maxScrollY = (this.height / 2) + 64;
 
+                RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
                 RenderSystem.disableBlend();
+                RenderSystem.disableDepthTest();
+                RenderSystem.disableTexture();
+                RenderSystem.disableScissor();
         }
 
         @Override

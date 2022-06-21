@@ -53,9 +53,9 @@ public class ClientPlayerEntityMixin {
             if (vehicle instanceof LanderEntity lander) {
 
                 double speed = lander.getVelocity().getY();
-                if (speed != 0) {
+                if (speed < 0.0) {
                     PlayerOverlayScreen.shouldRenderWarning = true;
-                    PlayerOverlayScreen.speed = speed * 60;
+                    PlayerOverlayScreen.speed = speed * 130;
                 } else {
                     disableOverlays = true;
                 }

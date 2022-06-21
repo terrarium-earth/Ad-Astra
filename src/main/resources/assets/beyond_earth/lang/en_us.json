@@ -206,7 +206,7 @@
   "gauge.beyond_earth.oxygenloading": "Loading",
   "gauge_text.beyond_earth.capacity": "Energy Capacity: %s E",
   "gauge_text.beyond_earth.max_generation": "Max. Energy Generation: %s E/t",
-  "gauge_text.beyond_earth.storage": "\u00A7eEnergy: %s E / %d E",
+  "gauge_text.beyond_earth.storage": "§eEnergy: %s E / %d E",
   "gauge_text.beyond_earth.liquid_storage": "%s mB / %d mB",
   "gauge_text.beyond_earth.stored": "Stored Energy: %s E",
   "gui.beyond_earth.oxygen_bubble_distributor.workingarea.hide": "Hide",
@@ -327,6 +327,7 @@
   "message.beyond_earth.hold_space": "§7Hold §cSpace!",
   "message.beyond_earth.no_fuel": "§cNO FUEL! §7Fill the Rocket with §cFuel§7. (§6Sneak and Right Click§7)",
   "message.beyond_earth.speed": "%s m/s",
+  "tooltip.beyond_earth.consumable": "§2Consumable",
   "tooltip.beyond_earth.oxygen_bubble_distributor": "Make an Oxygen Bullet %1$s ~ %2$s Blocks",
   "tooltip.beyond_earth.space_suit": "\u00A7bOxygen: \u00A7%s/%d mB",
   "tooltip.beyond_earth.vehicle_fuel": "\u00A7bFuel: \u00A7%s/%d mB"

@@ -75,7 +75,6 @@ public class PlanetSelectionButton extends ButtonWidget {
 
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-
         if (this.visible) {
 
             MinecraftClient client = MinecraftClient.getInstance();

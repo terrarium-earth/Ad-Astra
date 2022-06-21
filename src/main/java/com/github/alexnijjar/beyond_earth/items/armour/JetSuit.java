@@ -19,6 +19,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import team.reborn.energy.api.base.SimpleBatteryItem;
@@ -28,7 +29,7 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
     // 0.2M E.
     public static final long MAX_ENERGY = 200000;
     public static final long TANK_SIZE = 4 * FluidConstants.BUCKET;
-    public static final double SPEED = 0.5;
+    public static final double SPEED = 0.8;
     public boolean isFallFlying;
 
     public JetSuit(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
@@ -94,7 +95,7 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
         }
         isFallFlying = false;
 
-        double speed = ModUtils.getPlanetGravity(player.world) * 0.25;
+        double speed = MathHelper.clamp(0.4 - (ModUtils.getPlanetGravity(player.world) * 0.25), 0.1, 0.2);
         player.setVelocity(player.getVelocity().add(0.0, speed, 0.0));
         if (player.getVelocity().getY() > speed * 10) {
             player.setVelocity(player.getVelocity().getX(), speed * 10, player.getVelocity().getZ());
@@ -107,7 +108,8 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
         }
         isFallFlying = true;
 
-        Vec3d rotationVector = player.getRotationVector().multiply(SPEED);
+        double speed = SPEED - (ModUtils.getPlanetGravity(player.world) * 0.25);
+        Vec3d rotationVector = player.getRotationVector().multiply(speed);
         Vec3d velocity = player.getVelocity();
         player.setVelocity(velocity.add(rotationVector.getX() * 0.1 + (rotationVector.getX() * 1.5 - velocity.getX()) * 0.5, rotationVector.getY() * 0.1 + (rotationVector.getY() * 1.5 - velocity.getY()) * 0.5,
                 rotationVector.getZ() * 0.1 + (rotationVector.getZ() * 1.5 - velocity.getZ()) * 0.5));

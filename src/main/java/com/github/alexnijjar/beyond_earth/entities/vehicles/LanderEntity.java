@@ -81,11 +81,12 @@ public class LanderEntity extends VehicleEntity {
                 this.applyBoosters();
             }
         }
+        this.syncClient();
     }
 
     public void applyBoosters() {
-        if (this.getVelocity().getY() != 0) {
-            this.setVelocity(this.getVelocity().add(0.0, 0.05, 0.0));
+        if (this.getVelocity().getY() < 0.0) {
+            this.setVelocity(this.getVelocity().add(0.0, 0.025, 0.0));
 
             if (this.getVelocity().getY() > -0.1) {
                 this.setVelocity(0.0, -0.1, 0.0);

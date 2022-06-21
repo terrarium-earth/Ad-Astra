@@ -13,6 +13,7 @@ import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier4;
 import com.github.alexnijjar.beyond_earth.items.FluidContainingItem.TankStorage;
 import com.github.alexnijjar.beyond_earth.items.GuideBook;
 import com.github.alexnijjar.beyond_earth.items.HammerItem;
+import com.github.alexnijjar.beyond_earth.items.OxygenTankItem;
 import com.github.alexnijjar.beyond_earth.items.SpacePaintingItem;
 import com.github.alexnijjar.beyond_earth.items.armour.JetSuit;
 import com.github.alexnijjar.beyond_earth.items.armour.NetheriteSpaceSuit;
@@ -71,15 +72,22 @@ public class ModItems {
 
                 ItemStack spaceSuit = ModArmour.SPACE_SUIT.getDefaultStack();
                 ((SpaceSuit) spaceSuit.getItem()).setAmount(spaceSuit, ((SpaceSuit) spaceSuit.getItem()).getTankSize());
+                ((SpaceSuit) spaceSuit.getItem()).setFluid(spaceSuit, FluidVariant.of(ModFluids.OXYGEN_STILL));
 
                 ItemStack netheriteSpaceSuit = ModArmour.NETHERITE_SPACE_SUIT.getDefaultStack();
                 ((NetheriteSpaceSuit) netheriteSpaceSuit.getItem()).setAmount(netheriteSpaceSuit, ((NetheriteSpaceSuit) netheriteSpaceSuit.getItem()).getTankSize());
+                ((SpaceSuit) netheriteSpaceSuit.getItem()).setFluid(netheriteSpaceSuit, FluidVariant.of(ModFluids.OXYGEN_STILL));
 
                 ItemStack jetSuit = ModArmour.JET_SUIT.getDefaultStack();
                 ((JetSuit) jetSuit.getItem()).setAmount(jetSuit, ((JetSuit) jetSuit.getItem()).getTankSize());
+                ((SpaceSuit) jetSuit.getItem()).setFluid(jetSuit, FluidVariant.of(ModFluids.OXYGEN_STILL));
                 ((JetSuit) jetSuit.getItem()).setStoredEnergy(jetSuit, JetSuit.MAX_ENERGY);
 
-                stacks.addAll(Collections.nCopies(45, ItemStack.EMPTY));
+                ItemStack oxygenTank = ModItems.OXYGEN_TANK.getDefaultStack();
+                ((OxygenTankItem) oxygenTank.getItem()).setAmount(oxygenTank, ((OxygenTankItem) oxygenTank.getItem()).getTankSize());
+                ((OxygenTankItem) oxygenTank.getItem()).setFluid(oxygenTank, FluidVariant.of(ModFluids.OXYGEN_STILL));
+
+                stacks.addAll(Collections.nCopies(54, ItemStack.EMPTY));
 
                 stacks.set(0, tier1Rocket);
                 stacks.set(1, tier2Rocket);
@@ -91,8 +99,8 @@ public class ModItems {
                 stacks.set(11, ModItems.TIER_3_ROCKET.getDefaultStack());
                 stacks.set(12, ModItems.TIER_4_ROCKET.getDefaultStack());
 
-                stacks.set(18, tier1Rover);
-                stacks.set(19, ModItems.TIER_1_ROVER.getDefaultStack());
+                stacks.set(19, tier1Rover);
+                stacks.set(18, ModItems.TIER_1_ROVER.getDefaultStack());
 
                 stacks.set(6, ModArmour.OXYGEN_MASK.getDefaultStack());
                 stacks.set(15, spaceSuit);
@@ -112,14 +120,17 @@ public class ModItems {
                 stacks.set(35, ModArmour.JET_SUIT_PANTS.getDefaultStack());
                 stacks.set(44, ModArmour.JET_SUIT_BOOTS.getDefaultStack());
 
-                stacks.set(27, ModItems.GUIDE_BOOK.getDefaultStack());
-                stacks.set(28, ModItems.SPACE_PAINTING.getDefaultStack());
-                stacks.set(29, ModItems.CHEESE.getDefaultStack());
-                stacks.set(30, ModItems.ROCKET_LAUNCH_PAD.getDefaultStack());
+                stacks.set(27, ModItems.OXYGEN_TANK.getDefaultStack());
+                stacks.set(28, oxygenTank);
 
-                stacks.set(36, ModFluids.OIL_BUCKET.getDefaultStack());
-                stacks.set(37, ModFluids.FUEL_BUCKET.getDefaultStack());
-                stacks.set(38, ModFluids.OXYGEN_BUCKET.getDefaultStack());
+                stacks.set(36, ModItems.GUIDE_BOOK.getDefaultStack());
+                stacks.set(37, ModItems.SPACE_PAINTING.getDefaultStack());
+                stacks.set(38, ModItems.CHEESE.getDefaultStack());
+                stacks.set(39, ModItems.ROCKET_LAUNCH_PAD.getDefaultStack());
+
+                stacks.set(45, ModFluids.OIL_BUCKET.getDefaultStack());
+                stacks.set(46, ModFluids.FUEL_BUCKET.getDefaultStack());
+                stacks.set(47, ModFluids.OXYGEN_BUCKET.getDefaultStack());
 
         }).build();
 
@@ -151,6 +162,9 @@ public class ModItems {
         public static final Item TIER_4_ROCKET = register("tier_4_rocket", new RocketItem<RocketEntityTier4>(ModEntities.ROCKET_TIER_4, 4, new FabricItemSettings().maxCount(1)));
         public static final Item TIER_1_ROVER = register("tier_1_rover", new RoverItem(new FabricItemSettings().maxCount(1)));
 
+        // Oxygen tank.
+        public static final Item OXYGEN_TANK = register("oxygen_tank", new OxygenTankItem(new FabricItemSettings().maxCount(1)));
+
         // Guide book
         public static final Item GUIDE_BOOK = register("guide_book", new GuideBook(new FabricItemSettings().maxCount(1)));
 
@@ -163,7 +177,6 @@ public class ModItems {
 
         public static final Item IRON_STICK = registerItem("iron_stick", ITEM_GROUP_BASICS);
         public static final Item OXYGEN_GEAR = registerItem("oxygen_gear", ITEM_GROUP_BASICS);
-        public static final Item OXYGEN_TANK = registerItem("oxygen_tank", ITEM_GROUP_BASICS);
         public static final Item WHEEL = registerItem("wheel", ITEM_GROUP_BASICS);
         public static final Item ENGINE_FRAME = registerItem("engine_frame", ITEM_GROUP_BASICS);
         public static final Item ENGINE_FAN = registerItem("engine_fan", ITEM_GROUP_BASICS);
@@ -372,6 +385,7 @@ public class ModItems {
                 registerTank(TIER_3_ROCKET);
                 registerTank(TIER_4_ROCKET);
                 registerTank(TIER_1_ROVER);
+                registerTank(OXYGEN_TANK);
         }
 
         public static BlockItem registerFlag(Block flag) {

@@ -57,7 +57,11 @@ public class ModC2SPackets {
 
                 @Override
                 public void run() {
-                    ModUtils.teleportToWorld(targetDimension, player);
+                    if (player.getVehicle() instanceof RocketEntity) {
+                        ModUtils.teleportToWorld(targetDimension, player);
+                    } else {
+                        ModUtils.teleportPlayer(targetDimension, player);
+                    }
                 }
             });
         });

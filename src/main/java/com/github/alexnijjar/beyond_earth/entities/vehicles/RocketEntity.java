@@ -36,8 +36,8 @@ public class RocketEntity extends VehicleEntity {
     // 10 seconds.
     public static final int ATMOSPHERE_LEAVE = 600;
     public static final int MAX_COUNTDOWN_TICKS = 200;
-    public static final float ROCKET_ACCELERATION = 0.01f;
-    public static final float ROCKET_MAX_SPEED = 0.85f;
+    public static final float ROCKET_ACCELERATION = 0.005f;
+    public static final float ROCKET_MAX_SPEED = 0.4f;
 
     protected static final TrackedData<Boolean> HAS_LAUNCH_PAD = DataTracker.registerData(RocketEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     protected static final TrackedData<Boolean> FLYING = DataTracker.registerData(RocketEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
