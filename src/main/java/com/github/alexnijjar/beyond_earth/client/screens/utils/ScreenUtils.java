@@ -1,4 +1,4 @@
-package com.github.alexnijjar.beyond_earth.client.screens.planet_selection;
+package com.github.alexnijjar.beyond_earth.client.screens.utils;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -17,10 +17,10 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3f;
 
 @Environment(EnvType.CLIENT)
-public class PlanetSelectionUtil {
+public class ScreenUtils {
 
     public static Text createText(String text) {
-        return Text.translatable("gui." + BeyondEarth.MOD_ID + ".planet_selection." + text);
+        return Text.translatable("gui." + BeyondEarth.MOD_ID + ".text." + text);
     }
 
     public static void addTexture(MatrixStack matrices, int x, int y, int width, int height, Identifier texture) {

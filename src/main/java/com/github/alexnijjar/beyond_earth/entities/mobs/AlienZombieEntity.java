@@ -1,7 +1,7 @@
 package com.github.alexnijjar.beyond_earth.entities.mobs;
 
 import com.github.alexnijjar.beyond_earth.entities.projectiles.IceSpitEntity;
-import com.github.alexnijjar.beyond_earth.registry.ModEntities;
+import com.github.alexnijjar.beyond_earth.registry.ModEntityTypes;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -75,7 +75,7 @@ public class AlienZombieEntity extends HostileEntity implements RangedAttackMob 
 
     @Override
     public void attack(LivingEntity target, float pullProgress) {
-        IceSpitEntity projectile = new IceSpitEntity(ModEntities.ICE_SPIT_ENTITY, this, this.world);
+        IceSpitEntity projectile = new IceSpitEntity(ModEntityTypes.ICE_SPIT_ENTITY, this, this.world);
 
         double targetX = target.getX() - this.getX();
         double targetY = target.getBodyY(0.3333333333333333) - projectile.getY() - 1.1f;

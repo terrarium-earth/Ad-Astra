@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import com.github.alexnijjar.beyond_earth.client.BeyondEarthClient;
 import com.github.alexnijjar.beyond_earth.client.resource_pack.SkyRenderer;
 import com.github.alexnijjar.beyond_earth.client.resource_pack.SkyRenderer.WeatherEffects;
-import com.github.alexnijjar.beyond_earth.registry.ModParticles;
+import com.github.alexnijjar.beyond_earth.registry.ModParticleTypes;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
 import net.minecraft.block.BlockState;
@@ -48,7 +48,7 @@ public abstract class WorldRendererMixin {
             MinecraftClient client = MinecraftClient.getInstance();
             ClientPlayerEntity player = client.player;
             // Don't player the portal sound if the player teleported to the new world.
-            if (((int)player.getPos().getY()) == ModUtils.getSpawnStart(player.world)) {
+            if (((int) player.getPos().getY()) == ModUtils.getSpawnStart(player.world)) {
                 info.cancel();
             }
         }
@@ -91,7 +91,7 @@ public abstract class WorldRendererMixin {
                     double g = voxelShape.getEndingCoord(Direction.Axis.Y, d, e);
                     double h = fluidState.getHeight(worldView, (BlockPos) blockPos2);
                     double m = Math.max(g, h);
-                    DefaultParticleType particleEffect = fluidState.isIn(FluidTags.LAVA) || blockState.isOf(Blocks.MAGMA_BLOCK) || CampfireBlock.isLitCampfire(blockState) ? ParticleTypes.SMOKE : ModParticles.VENUS_RAIN;
+                    DefaultParticleType particleEffect = fluidState.isIn(FluidTags.LAVA) || blockState.isOf(Blocks.MAGMA_BLOCK) || CampfireBlock.isLitCampfire(blockState) ? ParticleTypes.SMOKE : ModParticleTypes.VENUS_RAIN;
                     client.world.addParticle(particleEffect, (double) blockPos2.getX() + d, (double) blockPos2.getY() + m, (double) blockPos2.getZ() + e, 0.0, 0.0, 0.0);
                 }
                 worldRenderer.setRainSoundCounter(worldRenderer.getRainSoundCounter() + 1);

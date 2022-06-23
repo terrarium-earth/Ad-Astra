@@ -1,4 +1,4 @@
-package com.github.alexnijjar.beyond_earth.client.screens.planet_selection;
+package com.github.alexnijjar.beyond_earth.client.screens.utils;
 
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 

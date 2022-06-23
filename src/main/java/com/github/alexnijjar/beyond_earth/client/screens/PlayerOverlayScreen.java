@@ -41,6 +41,7 @@ public class PlayerOverlayScreen {
 
     public static boolean shouldRenderOxygen;
     public static double oxygenRatio;
+    public static boolean doesNotNeedOxygen;
 
     public static int countdownSeconds;
 
@@ -68,9 +69,14 @@ public class PlayerOverlayScreen {
             GuiUtil.drawVertical(matrices, x, y, textureWidth, textureHeight, OXYGEN_TANK_FULL_TEXTURE, oxygenRatio);
 
             // Oxygen text.
-            Text text = Text.of((Math.round(oxygenRatio * 100)) + "%");
+            float oxygen = Math.round(oxygenRatio * 100);
+            Text text = Text.of((oxygen) + "%");
             int textWidth = client.textRenderer.getWidth(text);
-            client.textRenderer.drawWithShadow(matrices, text, (x + (textureWidth - textWidth) / 2), y + textureHeight + 3, 0xFFFFFF);
+            if (doesNotNeedOxygen) {
+                client.textRenderer.drawWithShadow(matrices, text, (x + (textureWidth - textWidth) / 2), y + textureHeight + 3, 0x7FFF00);
+            } else {
+                client.textRenderer.drawWithShadow(matrices, text, (x + (textureWidth - textWidth) / 2), y + textureHeight + 3, oxygen <= 0.0f ? 0xDC143C : 0xFFFFFF);
+            }
         }
 
         // Timer.
@@ -145,6 +151,8 @@ public class PlayerOverlayScreen {
             matrices.pop();
         }
     }
+    
+    
 
     public static Identifier getTimerTexture() {
         return new ModIdentifier("textures/timer/timer" + countdownSeconds + ".png");

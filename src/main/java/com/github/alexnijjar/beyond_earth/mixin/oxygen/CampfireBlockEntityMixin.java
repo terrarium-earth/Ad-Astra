@@ -1,4 +1,4 @@
-package com.github.alexnijjar.beyond_earth.mixin.coal_torches;
+package com.github.alexnijjar.beyond_earth.mixin.oxygen;
 
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
@@ -23,7 +23,7 @@ public class CampfireBlockEntityMixin {
     private static void litServerTick(World world, BlockPos pos, BlockState state, CampfireBlockEntity campfire, CallbackInfo info) {
         // Extinguish the campfire in worlds with no oxygen.
         if (!state.getBlock().equals(Blocks.SOUL_CAMPFIRE)) {
-            if (!ModUtils.worldHasOxygen(world)) {
+            if (!ModUtils.worldHasOxygen(world, pos)) {
                 world.setBlockState(pos, state.with(CampfireBlock.LIT, false), 3);
                 world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1, 1);
             }

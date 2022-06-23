@@ -1,8 +1,9 @@
 package com.github.alexnijjar.beyond_earth.client.registry;
 
 import com.github.alexnijjar.beyond_earth.client.particles.LargeFlameParticle;
+import com.github.alexnijjar.beyond_earth.client.particles.OxygenBubbleParticle;
 import com.github.alexnijjar.beyond_earth.client.particles.SmallFlameParticle;
-import com.github.alexnijjar.beyond_earth.registry.ModParticles;
+import com.github.alexnijjar.beyond_earth.registry.ModParticleTypes;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 
 import net.fabricmc.api.EnvType;
@@ -25,10 +26,11 @@ public class ClientModParticles {
             registry.register(new ModIdentifier("particle/small_smoke"));
         }));
 
-        ParticleFactoryRegistry.getInstance().register(ModParticles.VENUS_RAIN, WaterSplashParticle.Factory::new);
-        ParticleFactoryRegistry.getInstance().register(ModParticles.LARGE_FLAME, LargeFlameParticle.Factory::new);
-        ParticleFactoryRegistry.getInstance().register(ModParticles.LARGE_SMOKE, LargeFlameParticle.Factory::new);
-        ParticleFactoryRegistry.getInstance().register(ModParticles.SMALL_FLAME, SmallFlameParticle.Factory::new);
-        ParticleFactoryRegistry.getInstance().register(ModParticles.SMALL_SMOKE, SmallFlameParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticleTypes.VENUS_RAIN, WaterSplashParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticleTypes.LARGE_FLAME, LargeFlameParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticleTypes.LARGE_SMOKE, LargeFlameParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticleTypes.SMALL_FLAME, SmallFlameParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticleTypes.SMALL_SMOKE, SmallFlameParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticleTypes.OXYGEN_BUBBLE, OxygenBubbleParticle.Factory::new);
     }
 }

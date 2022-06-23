@@ -35,6 +35,7 @@ public class ClientPlayerEntityMixin {
                 // Render oxygen info.
                 double ratio = oxygen / (float) suit.getTankSize();
                 PlayerOverlayScreen.oxygenRatio = ratio;
+                PlayerOverlayScreen.doesNotNeedOxygen = ModUtils.worldHasOxygen(player.world, player);
             }
         }
 

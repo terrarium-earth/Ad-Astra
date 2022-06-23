@@ -5,7 +5,7 @@ import java.util.List;
 import com.github.alexnijjar.beyond_earth.blocks.launch_pad.RocketLaunchPad;
 import com.github.alexnijjar.beyond_earth.gui.PlanetSelectionScreenHandlerFactory;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.PlanetSelectionScreenHandler;
-import com.github.alexnijjar.beyond_earth.registry.ModParticles;
+import com.github.alexnijjar.beyond_earth.registry.ModParticleTypes;
 import com.github.alexnijjar.beyond_earth.registry.ModSounds;
 import com.github.alexnijjar.beyond_earth.util.ModDamageSource;
 import com.github.alexnijjar.beyond_earth.util.ModKeyBindings;
@@ -213,8 +213,8 @@ public class RocketEntity extends VehicleEntity {
         if (this.world instanceof ServerWorld serverWorld) {
             Vec3d pos = this.getPos();
 
-            ModUtils.spawnForcedParticles(serverWorld, ModParticles.LARGE_FLAME, pos.getX(), pos.getY(), pos.getZ(), 20, 0.1, 0.1, 0.1, 0.001);
-            ModUtils.spawnForcedParticles(serverWorld, ModParticles.LARGE_SMOKE, pos.getX(), pos.getY(), pos.getZ(), 10, 0.1, 0.1, 0.1, 0.001);
+            ModUtils.spawnForcedParticles(serverWorld, ModParticleTypes.LARGE_FLAME, pos.getX(), pos.getY(), pos.getZ(), 20, 0.1, 0.1, 0.1, 0.001);
+            ModUtils.spawnForcedParticles(serverWorld, ModParticleTypes.LARGE_SMOKE, pos.getX(), pos.getY(), pos.getZ(), 10, 0.1, 0.1, 0.1, 0.001);
         }
     }
 

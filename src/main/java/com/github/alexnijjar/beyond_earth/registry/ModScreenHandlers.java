@@ -5,6 +5,7 @@ import com.github.alexnijjar.beyond_earth.gui.screen_handlers.CompressorScreenHa
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.ConversionScreenHandler;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.LanderScreenHandler;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.NasaWorkbenchScreenHandler;
+import com.github.alexnijjar.beyond_earth.gui.screen_handlers.OxygenBubbleDistributorScreenHandler;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.PlanetSelectionScreenHandler;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.SolarPanelScreenHandler;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.VehicleScreenHandler;
@@ -24,6 +25,7 @@ public class ModScreenHandlers {
     public static ScreenHandlerType<NasaWorkbenchScreenHandler> NASA_WORKBENCH_SCREEN_HANDLER;
     public static ScreenHandlerType<ConversionScreenHandler> CONVERSION_SCREEN_HANDLER;
     public static ScreenHandlerType<WaterPumpScreenHandler> WATER_PUMP_SCREEN_HANDLER;
+    public static ScreenHandlerType<OxygenBubbleDistributorScreenHandler> OXYGEN_BUBBLE_DISTRIBUTOR_SCREEN_HANDLER;
 
     public static ScreenHandlerType<VehicleScreenHandler> VEHICLE_SCREEN_HANDLER;
     public static ScreenHandlerType<LanderScreenHandler> LANDER_SCREEN_HANDLER;
@@ -32,20 +34,20 @@ public class ModScreenHandlers {
 
     public static void register() {
 
-        SOLAR_PANEL_SCREEN_HANDLER = register("solar_panel_gui", SolarPanelScreenHandler::new);
-        COAL_GENERATOR_SCREEN_HANDLER = register("coal_generator_gui", CoalGeneratorScreenHandler::new);
-        COMPRESSOR_SCREEN_HANDLER = register("compressor_gui", CompressorScreenHandler::new);
-        NASA_WORKBENCH_SCREEN_HANDLER = register("nasa_workbench_gui", NasaWorkbenchScreenHandler::new);
-        CONVERSION_SCREEN_HANDLER = register("conversion_gui", ConversionScreenHandler::new);
-        WATER_PUMP_SCREEN_HANDLER = register("water_pump_gui", WaterPumpScreenHandler::new);
+        SOLAR_PANEL_SCREEN_HANDLER = register("solar_panel_screen_handler", SolarPanelScreenHandler::new);
+        COAL_GENERATOR_SCREEN_HANDLER = register("coal_generator_screen_handler", CoalGeneratorScreenHandler::new);
+        COMPRESSOR_SCREEN_HANDLER = register("compressor_screen_handler", CompressorScreenHandler::new);
+        NASA_WORKBENCH_SCREEN_HANDLER = register("nasa_workbench_screen_handler", NasaWorkbenchScreenHandler::new);
+        CONVERSION_SCREEN_HANDLER = register("conversion_screen_handler", ConversionScreenHandler::new);
+        WATER_PUMP_SCREEN_HANDLER = register("water_pump_screen_handler", WaterPumpScreenHandler::new);
 
-        VEHICLE_SCREEN_HANDLER = register("vehicle_gui", VehicleScreenHandler::new);
-        LANDER_SCREEN_HANDLER = register("lander_gui", LanderScreenHandler::new);
+        VEHICLE_SCREEN_HANDLER = register("vehicle_screen_handler", VehicleScreenHandler::new);
+        LANDER_SCREEN_HANDLER = register("lander_screen_handler", LanderScreenHandler::new);
+        OXYGEN_BUBBLE_DISTRIBUTOR_SCREEN_HANDLER  = register("oxygen_bubble_distributor_screen_handler", OxygenBubbleDistributorScreenHandler::new);
 
-        PLANET_SELECTION_SCREEN_HANDLER = register("planet_selection_gui", (syncId, playerInventory, buf) -> new PlanetSelectionScreenHandler(syncId, playerInventory.player, buf));
+        PLANET_SELECTION_SCREEN_HANDLER = register("planet_selection_screen_handler", (syncId, playerInventory, buf) -> new PlanetSelectionScreenHandler(syncId, playerInventory.player, buf));
     }
 
-    // Extended.
     public static <T extends ScreenHandler> ScreenHandlerType<T> register(String id, ExtendedScreenHandlerType.ExtendedFactory<T> screenHandler) {
         return Registry.register(Registry.SCREEN_HANDLER, new ModIdentifier(id), new ExtendedScreenHandlerType<>(screenHandler));
     }

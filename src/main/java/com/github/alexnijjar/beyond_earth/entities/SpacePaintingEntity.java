@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.mixin.PaintingEntityInvoker;
-import com.github.alexnijjar.beyond_earth.registry.ModEntities;
+import com.github.alexnijjar.beyond_earth.registry.ModEntityTypes;
 import com.github.alexnijjar.beyond_earth.registry.ModItems;
 
 import net.minecraft.entity.EntityType;
@@ -29,7 +29,7 @@ public class SpacePaintingEntity extends PaintingEntity {
 	}
 
 	protected SpacePaintingEntity(World world, BlockPos pos) {
-		this(ModEntities.SPACE_PAINTING, world);
+		this(ModEntityTypes.SPACE_PAINTING, world);
 		this.attachmentPos = pos;
 	}
 

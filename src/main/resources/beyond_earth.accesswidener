@@ -3,3 +3,4 @@ accessible  field   net/minecraft/inventory/SimpleInventory stacks  Lnet/minecra
 extendable  class   net/minecraft/world/gen/chunk/NoiseChunkGenerator
 extendable  method  net/minecraft/entity/mob/HoglinEntity    zombify    (Lnet/minecraft/server/world/ServerWorld;)V
 extendable  method  net/minecraft/entity/mob/ZoglinEntity    shouldAttack    (Lnet/minecraft/entity/LivingEntity;)Z
+accessible  field  net/minecraft/item/BucketItem    fluid    Lnet/minecraft/fluid/Fluid;

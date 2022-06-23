@@ -1,7 +1,7 @@
 package com.github.alexnijjar.beyond_earth.items.vehicles;
 
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RoverEntity;
-import com.github.alexnijjar.beyond_earth.registry.ModEntities;
+import com.github.alexnijjar.beyond_earth.registry.ModEntityTypes;
 
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.minecraft.block.BlockState;
@@ -43,7 +43,7 @@ public class RoverItem extends VehicleItem {
             }
 
             ItemStack roverStack = context.getPlayer().getStackInHand(context.getHand());
-            RoverEntity rover = new RoverEntity(ModEntities.ROVER_TIER_1, world);
+            RoverEntity rover = new RoverEntity(ModEntityTypes.ROVER_TIER_1, world);
             NbtCompound nbt = roverStack.getOrCreateNbt();
             if (nbt.contains("Fluid")) {
                 this.insertIntoTank(rover.inputTank, roverStack);

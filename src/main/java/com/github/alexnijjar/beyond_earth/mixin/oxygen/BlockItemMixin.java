@@ -1,4 +1,4 @@
-package com.github.alexnijjar.beyond_earth.mixin.coal_torches;
+package com.github.alexnijjar.beyond_earth.mixin.oxygen;
 
 import com.github.alexnijjar.beyond_earth.registry.ModBlocks;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
@@ -35,7 +35,7 @@ public class BlockItemMixin {
         // Extinguish fire items in dimensions with no oxygen.
         World world = context.getWorld();
         BlockPos pos = context.getBlockPos();
-        if (!ModUtils.worldHasOxygen(world)) {
+        if (!ModUtils.worldHasOxygen(world, pos)) {
             BlockState blockstate = world.getBlockState(context.getBlockPos());
             Block block = blockstate.getBlock();
 

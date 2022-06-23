@@ -1,9 +1,9 @@
-package com.github.alexnijjar.beyond_earth.client.screens.planet_selection;
+package com.github.alexnijjar.beyond_earth.client.screens.utils;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import com.github.alexnijjar.beyond_earth.client.screens.planet_selection.PlanetSelectionScreen.TooltipType;
+import com.github.alexnijjar.beyond_earth.client.screens.utils.PlanetSelectionScreen.TooltipType;
 import com.github.alexnijjar.beyond_earth.data.ButtonColour;
 import com.github.alexnijjar.beyond_earth.data.Planet;
 import com.github.alexnijjar.beyond_earth.util.ColourHolder;
@@ -24,7 +24,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
-public class PlanetSelectionButton extends ButtonWidget {
+public class CustomButton extends ButtonWidget {
 
     public static final Identifier LARGE_BUTTON_TEXTURE = new ModIdentifier("textures/buttons/large_button.png");
     public static final Identifier BUTTON_TEXTURE = new ModIdentifier("textures/buttons/button.png");
@@ -40,8 +40,9 @@ public class PlanetSelectionButton extends ButtonWidget {
     private Planet planetInfo;
 
     private final PlanetSelectionScreen.TooltipType tooltip;
+    public boolean doMask = true;
 
-    public PlanetSelectionButton(int x, int y, Text label, ButtonSize size, ButtonColour buttonColour, PlanetSelectionScreen.TooltipType tooltip, Planet planetInfo, PressAction onPress) {
+    public CustomButton(int x, int y, Text label, ButtonSize size, ButtonColour buttonColour, PlanetSelectionScreen.TooltipType tooltip, Planet planetInfo, PressAction onPress) {
 
         super(x, y, size.getWidth(), size.getHeight(), adjustText(label), onPress);
 
@@ -90,8 +91,10 @@ public class PlanetSelectionButton extends ButtonWidget {
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
             RenderSystem.enableDepthTest();
 
-            // Render mask.
-            RenderSystem.enableScissor(0, maxY, 215 * scale, 127 * scale);
+            if (doMask) {
+                // Render mask.
+                RenderSystem.enableScissor(0, maxY, 215 * scale, 127 * scale);
+            }
 
             RenderSystem.setShaderColor((over ? lightColour.r() : color.r()), (over ? lightColour.g() : color.g()), (over ? lightColour.b() : color.b()), 1.0f);
             RenderSystem.setShaderTexture(0, switch (this.buttonSize) {
@@ -103,7 +106,9 @@ public class PlanetSelectionButton extends ButtonWidget {
             drawTexture(matrices, this.x, this.y, 0, 0, this.width, this.height, buttonSize.getWidth(), buttonSize.getHeight());
             drawText(matrices, client);
 
-            RenderSystem.disableScissor();
+            if (doMask) {
+                RenderSystem.disableScissor();
+            }
 
             if (this.isMouseOver(mouseX, mouseY)) {
                 renderTooltips(matrices, mouseX, mouseY, client);

@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.client.BeyondEarthClient;
+import com.github.alexnijjar.beyond_earth.client.utils.ClientOxygenUtils;
 import com.github.alexnijjar.beyond_earth.data.Planet;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.LanderEntity;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntity;
@@ -14,7 +15,7 @@ import com.github.alexnijjar.beyond_earth.entities.vehicles.VehicleEntity;
 import com.github.alexnijjar.beyond_earth.items.armour.JetSuit;
 import com.github.alexnijjar.beyond_earth.items.armour.NetheriteSpaceSuit;
 import com.github.alexnijjar.beyond_earth.items.armour.SpaceSuit;
-import com.github.alexnijjar.beyond_earth.registry.ModEntities;
+import com.github.alexnijjar.beyond_earth.registry.ModEntityTypes;
 
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
 import net.fabricmc.loader.api.FabricLoader;
@@ -36,6 +37,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.tag.TagKey;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
@@ -126,7 +128,7 @@ public class ModUtils {
     }
 
     public static LanderEntity createLander(RocketEntity rocket, ServerWorld targetWorld, Vec3d targetPosition) {
-        LanderEntity lander = new LanderEntity(ModEntities.LANDER, targetWorld);
+        LanderEntity lander = new LanderEntity(ModEntityTypes.LANDER, targetWorld);
         lander.setPosition(targetPosition);
         for (int i = 0; i < rocket.getInventorySize(); i++) {
             lander.getInventory().setStack(i, rocket.getInventory().getStack(i));
@@ -228,6 +230,19 @@ public class ModUtils {
             return false;
         }
         return getWorldsWithoutOxygen(world.isClient).stream().anyMatch(world.getRegistryKey()::equals);
+    }
+
+    public static boolean worldHasOxygen(World world, LivingEntity entity) {
+        return worldHasOxygen(world, entity.getBlockPos().up());
+    }
+
+    public static boolean worldHasOxygen(World world, BlockPos pos) {
+        boolean hasOxygen = worldHasOxygen(world);
+        if (world.isClient) {
+            return ClientOxygenUtils.posHasOxygen(pos) || hasOxygen;
+        } else {
+            return OxygenUtils.posHasOxygen(pos) || hasOxygen;
+        }
     }
 
     // Mixin Util.

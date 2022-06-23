@@ -110,8 +110,12 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
     }
 
     public void drainEnergy() {
+        this.drainEnergy(this.getEnergyPerTick());
+    }
+
+    public void drainEnergy(long amount) {
         if (this.energyStorage.amount > 0) {
-            this.energyStorage.amount -= this.getEnergyPerTick();
+            this.energyStorage.amount -= amount;
         } else {
             this.energyStorage.amount = 0;
         }

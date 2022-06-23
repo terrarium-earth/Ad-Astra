@@ -26,7 +26,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.util.registry.Registry;
 
-public class ModEntities {
+public class ModEntityTypes {
 
         // Mobs.
         public static final EntityType<AlienEntity> ALIEN = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("alien"), FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, AlienEntity::new).dimensions(EntityDimensions.fixed(0.75f, 2.5f)).build());

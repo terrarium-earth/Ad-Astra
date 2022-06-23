@@ -1,4 +1,4 @@
-package com.github.alexnijjar.beyond_earth.mixin.coal_torches;
+package com.github.alexnijjar.beyond_earth.mixin.oxygen;
 
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
@@ -22,7 +22,7 @@ public class FireBlockMixin {
     public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify, CallbackInfo info) {
         // Extinguish the fire in dimensions with no oxygen.
         if (!state.getBlock().equals(Blocks.SOUL_FIRE)) {
-            if (!ModUtils.worldHasOxygen(world)) {
+            if (!ModUtils.worldHasOxygen(world, pos)) {
                 world.removeBlock(pos, false);
                 world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1, 1);
             }

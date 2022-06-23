@@ -32,7 +32,11 @@ public class ConversionScreen extends AbstractMachineScreen<ConversionScreenHand
     public static final int ARROW_TOP = 36;
 
     public ConversionScreen(ConversionScreenHandler handler, PlayerInventory inventory, Text title) {
-        super(handler, inventory, title, TEXTURE);
+        this(handler, inventory, title, TEXTURE);
+    }
+
+    public ConversionScreen(ConversionScreenHandler handler, PlayerInventory inventory, Text title, Identifier texture) {
+        super(handler, inventory, title, texture);
         this.backgroundWidth = 177;
         this.backgroundHeight = 172;
         this.playerInventoryTitleY = this.backgroundHeight - 92;

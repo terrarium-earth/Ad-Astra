@@ -1,7 +1,7 @@
 package com.github.alexnijjar.beyond_earth.entities.vehicles;
 
 import com.github.alexnijjar.beyond_earth.registry.ModItems;
-import com.github.alexnijjar.beyond_earth.registry.ModParticles;
+import com.github.alexnijjar.beyond_earth.registry.ModParticleTypes;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
 import net.minecraft.entity.EntityType;
@@ -41,11 +41,11 @@ public class RocketEntityTier4 extends RocketEntity {
             float xRotator = MathHelper.cos(this.getYaw() * ((float) Math.PI / 180)) * (0.7f + 0.21f * (float) 1);
             float zRotator = MathHelper.sin(this.getYaw() * ((float) Math.PI / 180)) * (0.7f + 0.21f * (float) 1);
 
-            ModUtils.spawnForcedParticles(serverWorld, ModParticles.SMALL_FLAME, pos.getX() + xRotator, pos.getY() + 0.35, pos.getZ() + zRotator, 20, 0.1, 0.1, 0.1, 0.001);
-            ModUtils.spawnForcedParticles(serverWorld, ModParticles.SMALL_SMOKE, pos.getX() + xRotator, pos.getY() + 0.35, pos.getZ() + zRotator, 10, 0.1, 0.1, 0.1, 0.04);
+            ModUtils.spawnForcedParticles(serverWorld, ModParticleTypes.SMALL_FLAME, pos.getX() + xRotator, pos.getY() + 0.35, pos.getZ() + zRotator, 20, 0.1, 0.1, 0.1, 0.001);
+            ModUtils.spawnForcedParticles(serverWorld, ModParticleTypes.SMALL_SMOKE, pos.getX() + xRotator, pos.getY() + 0.35, pos.getZ() + zRotator, 10, 0.1, 0.1, 0.1, 0.04);
 
-            ModUtils.spawnForcedParticles(serverWorld, ModParticles.SMALL_FLAME, pos.getX() - xRotator, pos.getY() + 0.35, pos.getZ() - zRotator, 20, 0.1, 0.1, 0.1, 0.001);
-            ModUtils.spawnForcedParticles(serverWorld, ModParticles.SMALL_SMOKE, pos.getX() - xRotator, pos.getY() + 0.35, pos.getZ() - zRotator, 10, 0.1, 0.1, 0.1, 0.04);
+            ModUtils.spawnForcedParticles(serverWorld, ModParticleTypes.SMALL_FLAME, pos.getX() - xRotator, pos.getY() + 0.35, pos.getZ() - zRotator, 20, 0.1, 0.1, 0.1, 0.001);
+            ModUtils.spawnForcedParticles(serverWorld, ModParticleTypes.SMALL_SMOKE, pos.getX() - xRotator, pos.getY() + 0.35, pos.getZ() - zRotator, 10, 0.1, 0.1, 0.1, 0.04);
         }
     }
 }
