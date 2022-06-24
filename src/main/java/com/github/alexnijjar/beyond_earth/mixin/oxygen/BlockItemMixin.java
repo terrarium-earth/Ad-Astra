@@ -1,12 +1,12 @@
 package com.github.alexnijjar.beyond_earth.mixin.oxygen;
 
-import com.github.alexnijjar.beyond_earth.registry.ModBlocks;
-import com.github.alexnijjar.beyond_earth.util.ModUtils;
-
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import com.github.alexnijjar.beyond_earth.registry.ModBlocks;
+import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -34,41 +34,43 @@ public class BlockItemMixin {
     public void place(ItemPlacementContext context, CallbackInfoReturnable<ActionResult> info) {
         // Extinguish fire items in dimensions with no oxygen.
         World world = context.getWorld();
-        BlockPos pos = context.getBlockPos();
-        if (!ModUtils.worldHasOxygen(world, pos)) {
-            BlockState blockstate = world.getBlockState(context.getBlockPos());
-            Block block = blockstate.getBlock();
+        if (!world.isClient) {
+            BlockPos pos = context.getBlockPos();
+            if (!ModUtils.worldHasOxygen(world, pos)) {
+                BlockState blockstate = world.getBlockState(context.getBlockPos());
+                Block block = blockstate.getBlock();
 
-            boolean playSound = false;
+                boolean playSound = false;
 
-            // Wall Torch.
-            if (block instanceof WallTorchBlock && !block.equals(Blocks.SOUL_WALL_TORCH)) {
-                world.setBlockState(pos, ModBlocks.WALL_COAL_TORCH.getDefaultState().with(WallTorchBlock.FACING, blockstate.get(WallTorchBlock.FACING)), 3);
-                playSound = true;
-            }
-
-            // Torch.
-            else if (block instanceof TorchBlock && !block.equals(Blocks.SOUL_TORCH)) {
-                if (!block.equals(Blocks.REDSTONE_TORCH) && !block.equals(Blocks.REDSTONE_WALL_TORCH)) {
-                    world.setBlockState(pos, ModBlocks.COAL_TORCH.getDefaultState(), 3);
+                // Wall Torch.
+                if (block instanceof WallTorchBlock && !block.equals(Blocks.SOUL_WALL_TORCH)) {
+                    world.setBlockState(pos, ModBlocks.WALL_COAL_TORCH.getDefaultState().with(WallTorchBlock.FACING, blockstate.get(WallTorchBlock.FACING)), 3);
                     playSound = true;
                 }
-            }
 
-            // Lantern.
-            else if (block instanceof LanternBlock && !block.equals(Blocks.SOUL_LANTERN)) {
-                world.setBlockState(pos, ModBlocks.COAL_LANTERN.getDefaultState().with(LanternBlock.HANGING, blockstate.get(LanternBlock.HANGING)), 3);
-                playSound = true;
-            }
+                // Torch.
+                else if (block instanceof TorchBlock && !block.equals(Blocks.SOUL_TORCH) && !block.equals(Blocks.SOUL_WALL_TORCH)) {
+                    if (!block.equals(Blocks.REDSTONE_TORCH) && !block.equals(Blocks.REDSTONE_WALL_TORCH)) {
+                        world.setBlockState(pos, ModBlocks.COAL_TORCH.getDefaultState(), 3);
+                        playSound = true;
+                    }
+                }
 
-            // Campfire.
-            else if ((block instanceof CampfireBlock && !block.equals(Blocks.SOUL_CAMPFIRE)) && blockstate.get(CampfireBlock.LIT)) {
-                world.setBlockState(pos, blockstate.with(CampfireBlock.LIT, false), 3);
-                playSound = true;
-            }
+                // Lantern.
+                else if (block instanceof LanternBlock && !block.equals(Blocks.SOUL_LANTERN)) {
+                    world.setBlockState(pos, ModBlocks.COAL_LANTERN.getDefaultState().with(LanternBlock.HANGING, blockstate.get(LanternBlock.HANGING)), 3);
+                    playSound = true;
+                }
 
-            if (playSound) {
-                playFireExtinguish(pos, world);
+                // Campfire.
+                else if ((block instanceof CampfireBlock && !block.equals(Blocks.SOUL_CAMPFIRE)) && blockstate.get(CampfireBlock.LIT)) {
+                    world.setBlockState(pos, blockstate.with(CampfireBlock.LIT, false), 3);
+                    playSound = true;
+                }
+
+                if (playSound) {
+                    playFireExtinguish(pos, world);
+                }
             }
         }
     }

@@ -5,7 +5,7 @@ import com.github.alexnijjar.beyond_earth.client.screens.CompressorScreen;
 import com.github.alexnijjar.beyond_earth.client.screens.ConversionScreen;
 import com.github.alexnijjar.beyond_earth.client.screens.LanderScreen;
 import com.github.alexnijjar.beyond_earth.client.screens.NasaWorkbenchScreen;
-import com.github.alexnijjar.beyond_earth.client.screens.OxygenBubbleDistributorScreen;
+import com.github.alexnijjar.beyond_earth.client.screens.OxygenDistributorScreen;
 import com.github.alexnijjar.beyond_earth.client.screens.SolarPanelScreen;
 import com.github.alexnijjar.beyond_earth.client.screens.VehicleScreen;
 import com.github.alexnijjar.beyond_earth.client.screens.WaterPumpScreen;
@@ -26,7 +26,7 @@ public class ClientModScreens {
         HandledScreens.register(ModScreenHandlers.NASA_WORKBENCH_SCREEN_HANDLER, NasaWorkbenchScreen::new);
         HandledScreens.register(ModScreenHandlers.CONVERSION_SCREEN_HANDLER, ConversionScreen::new);
         HandledScreens.register(ModScreenHandlers.WATER_PUMP_SCREEN_HANDLER, WaterPumpScreen::new);
-        HandledScreens.register(ModScreenHandlers.OXYGEN_BUBBLE_DISTRIBUTOR_SCREEN_HANDLER, OxygenBubbleDistributorScreen::new);
+        HandledScreens.register(ModScreenHandlers.OXYGEN_DISTRIBUTOR_SCREEN_HANDLER, OxygenDistributorScreen::new);
 
         HandledScreens.register(ModScreenHandlers.VEHICLE_SCREEN_HANDLER, VehicleScreen::new);
         HandledScreens.register(ModScreenHandlers.LANDER_SCREEN_HANDLER, LanderScreen::new);

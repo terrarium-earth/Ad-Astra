@@ -239,9 +239,9 @@ public class ModUtils {
     public static boolean worldHasOxygen(World world, BlockPos pos) {
         boolean hasOxygen = worldHasOxygen(world);
         if (world.isClient) {
-            return ClientOxygenUtils.posHasOxygen(pos) || hasOxygen;
+            return ClientOxygenUtils.posHasOxygen(world, pos) || hasOxygen;
         } else {
-            return OxygenUtils.posHasOxygen(pos) || hasOxygen;
+            return OxygenUtils.posHasOxygen(world, pos) || hasOxygen;
         }
     }
 

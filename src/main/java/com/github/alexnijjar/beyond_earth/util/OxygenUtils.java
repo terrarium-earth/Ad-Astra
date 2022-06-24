@@ -1,66 +1,122 @@
 package com.github.alexnijjar.beyond_earth.util;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.commons.lang3.tuple.Pair;
 
 import com.github.alexnijjar.beyond_earth.registry.ModBlocks;
 
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.CampfireBlock;
+import net.minecraft.block.CandleBlock;
+import net.minecraft.block.CandleCakeBlock;
 import net.minecraft.block.FireBlock;
 import net.minecraft.block.TorchBlock;
 import net.minecraft.block.WallTorchBlock;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.property.Properties;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.world.World;
 
 public class OxygenUtils {
 
-    public static List<BlockPos> oxygenLocations = new ArrayList<>();
+    private static Map<Pair<RegistryKey<World>, BlockPos>, Set<BlockPos>> oxygenLocations = new HashMap<>();
 
-    static {
-        ServerTickEvents.START_SERVER_TICK.register(server -> {
-        });
+    // Checks if there is oxygen in a specific block in a specific dimension.
+    public static boolean posHasOxygen(World world, BlockPos pos) {
+        for (Map.Entry<Pair<RegistryKey<World>, BlockPos>, Set<BlockPos>> entry : oxygenLocations.entrySet()) {
+            if (world.getRegistryKey().equals(entry.getKey().getLeft())) {
+                if (entry.getValue().contains(pos)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
-    public static boolean posHasOxygen(BlockPos pos) {
-        return oxygenLocations.contains(pos);
+    public static int getOxygenBlocksCount(World world, BlockPos source) {
+        if (oxygenLocations.containsKey(Pair.of(Pair.of(world.getRegistryKey(), source), source))) {
+            return oxygenLocations.get(Pair.of(Pair.of(world.getRegistryKey(), source), source)).size();
+        } else {
+            return 0;
+        }
     }
 
-    public static void removeEntries(ServerWorld world, List<BlockPos> entries) {
+    public static void setEntry(World world, BlockPos source, Set<BlockPos> entries) {
+        if (oxygenLocations.containsKey(Pair.of(world.getRegistryKey(), source))) {
+            Set<BlockPos> locations = oxygenLocations.get(Pair.of(world.getRegistryKey(), source));
+            if (!entries.equals(locations)) {
+                Set<BlockPos> removedLocations = new HashSet<>(locations);
+                removedLocations.removeAll(entries);
+                deoxygenizeBlocks(world, removedLocations);
+            }
+        }
+
+        oxygenLocations.put(Pair.of(world.getRegistryKey(), source), entries);
+
+    }
+
+    public static void removeEntry(World world, BlockPos source) {
+        if (!oxygenLocations.containsKey(Pair.of(world.getRegistryKey(), source))) {
+            return;
+        }
+        deoxygenizeBlocks(world, oxygenLocations.get(Pair.of(world.getRegistryKey(), source)));
+        oxygenLocations.remove(Pair.of(world.getRegistryKey(), source));
+    }
+
+    public static void deoxygenizeBlocks(World world, Set<BlockPos> entries) {
         for (BlockPos pos : entries) {
+
             BlockState state = world.getBlockState(pos);
 
             if (state.isAir()) {
                 continue;
             }
-            
-            if (state.getBlock() instanceof TorchBlock && !state.getBlock().equals(Blocks.SOUL_TORCH)) {
-                world.setBlockState(pos, ModBlocks.COAL_TORCH.getDefaultState());
-                continue;
-            }
 
-            if (state.getBlock() instanceof WallTorchBlock && !state.getBlock().equals(Blocks.SOUL_WALL_TORCH)) {
+            Block block = state.getBlock();
+            if (block instanceof WallTorchBlock && !block.equals(Blocks.SOUL_WALL_TORCH)) {
                 world.setBlockState(pos, ModBlocks.WALL_COAL_TORCH.getDefaultState().with(WallTorchBlock.FACING, state.get(WallTorchBlock.FACING)));
                 continue;
             }
 
-            if (state.getBlock() instanceof FireBlock) {
+            if (block instanceof TorchBlock && !block.equals(Blocks.SOUL_TORCH) && !block.equals(Blocks.SOUL_WALL_TORCH)) {
+                world.setBlockState(pos, ModBlocks.COAL_TORCH.getDefaultState());
+                continue;
+            }
+
+            if (block instanceof CandleCakeBlock) {
+                world.setBlockState(pos, block.getDefaultState().with(CandleCakeBlock.LIT, false));
+                continue;
+            }
+
+            if (block instanceof CandleBlock) {
+               world.setBlockState(pos, block.getDefaultState().with(CandleBlock.CANDLES, state.get(CandleBlock.CANDLES)).with(CandleBlock.LIT, false));
+                continue;
+            }
+
+            if (block instanceof FireBlock) {
                 world.removeBlock(pos, false);
                 continue;
             }
 
+            if (block instanceof CampfireBlock) {
+                world.setBlockState(pos, state.with(CampfireBlock.LIT, false).with(CampfireBlock.FACING, state.get(CampfireBlock.FACING)));
+                continue;
+            }
+
             if (state.getFluidState().isIn(FluidTags.WATER)) {
-                if (state.getBlock().equals(Blocks.WATER)) {
+                if (block.equals(Blocks.WATER)) {
                     world.setBlockState(pos, Blocks.AIR.getDefaultState());
                 } else {
                     world.setBlockState(pos, state.with(Properties.WATERLOGGED, false));
                 }
-                continue;
             }
         }
-        oxygenLocations.removeAll(entries);
     }
 }

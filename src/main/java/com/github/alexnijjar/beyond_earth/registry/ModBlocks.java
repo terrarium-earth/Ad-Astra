@@ -10,7 +10,7 @@ import com.github.alexnijjar.beyond_earth.blocks.machines.CoalGeneratorBlock;
 import com.github.alexnijjar.beyond_earth.blocks.machines.CompressorBlock;
 import com.github.alexnijjar.beyond_earth.blocks.machines.FuelRefineryBlock;
 import com.github.alexnijjar.beyond_earth.blocks.machines.NasaWorkbenchBlock;
-import com.github.alexnijjar.beyond_earth.blocks.machines.OxygenBubbleDistributorBlock;
+import com.github.alexnijjar.beyond_earth.blocks.machines.OxygenDistributorBlock;
 import com.github.alexnijjar.beyond_earth.blocks.machines.OxygenLoaderBlock;
 import com.github.alexnijjar.beyond_earth.blocks.machines.SolarPanelBlock;
 import com.github.alexnijjar.beyond_earth.blocks.machines.WaterPump;
@@ -71,7 +71,7 @@ public class ModBlocks {
         public static final Block OXYGEN_LOADER = register("oxygen_loader", new OxygenLoaderBlock(FabricBlockSettings.copy(FUEL_REFINERY)));
         public static final Block SOLAR_PANEL = register("solar_panel", new SolarPanelBlock(FabricBlockSettings.copy(FUEL_REFINERY)));
         public static final Block NASA_WORKBENCH = register("nasa_workbench", new NasaWorkbenchBlock(FabricBlockSettings.copy(FUEL_REFINERY).nonOpaque()));
-        public static final Block OXYGEN_BUBBLE_DISTRIBUTOR = register("oxygen_bubble_distributor", new OxygenBubbleDistributorBlock(FabricBlockSettings.copy(FUEL_REFINERY)));
+        public static final Block OXYGEN_DISTRIBUTOR = register("oxygen_distributor", new OxygenDistributorBlock(FabricBlockSettings.copy(FUEL_REFINERY)));
         public static final Block WATER_PUMP = register("water_pump", new WaterPump(FabricBlockSettings.copy(FUEL_REFINERY).nonOpaque()));
 
         // Blocks.

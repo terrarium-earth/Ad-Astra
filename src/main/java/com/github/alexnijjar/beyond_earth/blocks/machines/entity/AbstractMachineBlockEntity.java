@@ -109,17 +109,20 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
         this.markDirty();
     }
 
-    public void drainEnergy() {
-        this.drainEnergy(this.getEnergyPerTick());
+    public boolean drainEnergy() {
+        return this.drainEnergy(this.getEnergyPerTick());
     }
 
-    public void drainEnergy(long amount) {
-        if (this.energyStorage.amount > 0) {
+    public boolean drainEnergy(long amount) {
+        if (this.energyStorage.amount - amount > 0) {
             this.energyStorage.amount -= amount;
+            this.markDirty();
+            return true;
         } else {
             this.energyStorage.amount = 0;
+            this.markDirty();
+            return false;
         }
-        this.markDirty();
     }
 
     // Send energy to surrounding machines.

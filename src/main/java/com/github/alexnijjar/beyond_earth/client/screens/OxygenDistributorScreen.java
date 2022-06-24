@@ -4,14 +4,14 @@ import java.awt.Rectangle;
 import java.util.Arrays;
 
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.FluidMachineBlockEntity;
-import com.github.alexnijjar.beyond_earth.blocks.machines.entity.OxygenBubbleDistributorBlockEntity;
+import com.github.alexnijjar.beyond_earth.blocks.machines.entity.OxygenDistributorBlockEntity;
 import com.github.alexnijjar.beyond_earth.client.screens.utils.ButtonSize;
 import com.github.alexnijjar.beyond_earth.client.screens.utils.CustomButton;
 import com.github.alexnijjar.beyond_earth.client.screens.utils.PlanetSelectionScreen.TooltipType;
 import com.github.alexnijjar.beyond_earth.client.screens.utils.ScreenUtils;
 import com.github.alexnijjar.beyond_earth.client.utils.ClientOxygenUtils;
 import com.github.alexnijjar.beyond_earth.data.ButtonColour;
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.OxygenBubbleDistributorScreenHandler;
+import com.github.alexnijjar.beyond_earth.gui.screen_handlers.OxygenDistributorScreenHandler;
 import com.github.alexnijjar.beyond_earth.util.FluidUtils;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 
@@ -23,9 +23,9 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
-public class OxygenBubbleDistributorScreen extends AbstractMachineScreen<OxygenBubbleDistributorScreenHandler> {
+public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistributorScreenHandler> {
 
-    private static final Identifier TEXTURE = new ModIdentifier("textures/screens/oxygen_bubble_distributor.png");
+    private static final Identifier TEXTURE = new ModIdentifier("textures/screens/oxygen_distributor.png");
     private static final Identifier WARNING_SIGN = new ModIdentifier("textures/overlay/warning_sign.png");
 
     Text SHOW_TEXT = ScreenUtils.createText("show");
@@ -45,7 +45,7 @@ public class OxygenBubbleDistributorScreen extends AbstractMachineScreen<OxygenB
 
     CustomButton visibleButton;
 
-    public OxygenBubbleDistributorScreen(OxygenBubbleDistributorScreenHandler handler, PlayerInventory inventory, Text title) {
+    public OxygenDistributorScreen(OxygenDistributorScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title, TEXTURE);
         this.backgroundWidth = 177;
         this.backgroundHeight = 172;
@@ -93,13 +93,8 @@ public class OxygenBubbleDistributorScreen extends AbstractMachineScreen<OxygenB
 
         if (ClientOxygenUtils.oxygenLeak) {
             if (GuiUtil.isHovering(getWarningSignBounds(), mouseX, mouseY)) {
-                this.renderTooltip(matrices, Arrays.asList(
-                        Text.translatable("gauge_text.beyond_earth.oxygen_leak_warning[0]"),
-                        Text.translatable("gauge_text.beyond_earth.oxygen_leak_warning[1]"),
-                        Text.translatable("gauge_text.beyond_earth.oxygen_leak_warning[2]"),
-                        Text.translatable("gauge_text.beyond_earth.oxygen_leak_warning[3]"),
-                        Text.translatable("gauge_text.beyond_earth.oxygen_leak_warning[4]")
-                    ), mouseX, mouseY);
+                this.renderTooltip(matrices, Arrays.asList(Text.translatable("gauge_text.beyond_earth.oxygen_leak_warning[0]"), Text.translatable("gauge_text.beyond_earth.oxygen_leak_warning[1]"),
+                        Text.translatable("gauge_text.beyond_earth.oxygen_leak_warning[2]"), Text.translatable("gauge_text.beyond_earth.oxygen_leak_warning[3]"), Text.translatable("gauge_text.beyond_earth.oxygen_leak_warning[4]")), mouseX, mouseY);
             }
         }
     }
@@ -109,7 +104,7 @@ public class OxygenBubbleDistributorScreen extends AbstractMachineScreen<OxygenB
         super.drawForeground(matrices, mouseX, mouseY);
         matrices.push();
         matrices.scale(0.75f, 0.75f, 0.75f);
-        Text oxygenBlockAmount = Text.of("Oxygen Blocks: " + ClientOxygenUtils.oxygenLocations.size() + " / " + OxygenBubbleDistributorBlockEntity.MAX_BLOCK_CHECKS);
+        Text oxygenBlockAmount = Text.of("Oxygen Blocks: " + ClientOxygenUtils.getOxygenBlocksCount(this.blockEntity.getWorld(), this.blockEntity.getPos()) + " / " + OxygenDistributorBlockEntity.MAX_BLOCK_CHECKS);
         this.textRenderer.draw(matrices, oxygenBlockAmount, 90, 110, 0x404040);
         matrices.pop();
     }

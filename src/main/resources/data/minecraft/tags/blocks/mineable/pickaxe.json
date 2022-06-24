@@ -7,7 +7,7 @@
     "beyond_earth:oxygen_loader",
     "beyond_earth:solar_panel",
     "beyond_earth:nasa_workbench",
-    "beyond_earth:oxygen_bubble_distributor",
+    "beyond_earth:oxygen_distributor",
     "beyond_earth:water_pump",
     "beyond_earth:raw_desh_block",
     "beyond_earth:raw_ostrum_block",
@@ -94,7 +94,6 @@
     "beyond_earth:glacio_stone_brick_stairs",
     "beyond_earth:glacio_stone",
     "beyond_earth:permafrost",
-
     "beyond_earth:chiseled_mars_stone_bricks",
     "beyond_earth:chiseled_venus_stone_bricks",
     "beyond_earth:chiseled_mercury_stone_bricks",

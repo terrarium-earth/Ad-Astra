@@ -15,8 +15,8 @@
         },
         {
             "type": "patchouli:spotlight",
-            "item": "beyond_earth:oxygen_bubble_distributor",
-            "recipe": "beyond_earth:oxygen_bubble_distributor",
+            "item": "beyond_earth:oxygen_distributor",
+            "recipe": "beyond_earth:oxygen_distributor",
             "text": "$(br)A player's best friend and fail-safe in outer space.$(br)This machine can create a hospitable \"oxygen bubble\" for the player to live in without the Space-suit requirement. As long as there is a stable source of water and energy, this bubble will not pop.",
             "title": "Oxygen Distributor"
         },
@@ -26,7 +26,7 @@
         },
         {
             "type": "patchouli:crafting",
-            "recipe": "beyond_earth:oxygen_bubble_distributor",
+            "recipe": "beyond_earth:oxygen_distributor",
             "recipe2": "beyond_earth:oxygen_loader",
             "title": "Recipes"
         }

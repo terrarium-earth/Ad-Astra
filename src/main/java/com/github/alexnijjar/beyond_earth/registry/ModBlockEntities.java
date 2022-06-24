@@ -9,7 +9,7 @@ import com.github.alexnijjar.beyond_earth.blocks.machines.entity.CompressorBlock
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.FluidMachineBlockEntity;
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.FuelRefineryBlockEntity;
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.NasaWorkbenchBlockEntity;
-import com.github.alexnijjar.beyond_earth.blocks.machines.entity.OxygenBubbleDistributorBlockEntity;
+import com.github.alexnijjar.beyond_earth.blocks.machines.entity.OxygenDistributorBlockEntity;
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.OxygenLoaderBlockEntity;
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.SolarPanelBlockEntity;
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.WaterPumpBlockEntity;
@@ -40,7 +40,7 @@ public class ModBlockEntities {
         public static BlockEntityType<OxygenLoaderBlockEntity> OXYGEN_LOADER_ENTITY;
         public static BlockEntityType<SolarPanelBlockEntity> SOLAR_PANEL_ENTITY;
         public static BlockEntityType<NasaWorkbenchBlockEntity> NASA_WORKBENCH_ENTITY;
-        public static BlockEntityType<OxygenBubbleDistributorBlockEntity> OXYGEN_BUBBLE_DISTRIBUTOR_ENTITY;
+        public static BlockEntityType<OxygenDistributorBlockEntity> OXYGEN_DISTRIBUTOR_ENTITY;
         public static BlockEntityType<WaterPumpBlockEntity> WATER_PUMP_ENTITY;
 
         public static void register() {
@@ -60,11 +60,12 @@ public class ModBlockEntities {
                 OXYGEN_LOADER_ENTITY = register("oxygen_loader_entity", OxygenLoaderBlockEntity::new, ModBlocks.OXYGEN_LOADER);
                 SOLAR_PANEL_ENTITY = register("solar_panel_entity", SolarPanelBlockEntity::new, ModBlocks.SOLAR_PANEL);
                 NASA_WORKBENCH_ENTITY = register("nasa_workbench_entity", NasaWorkbenchBlockEntity::new, ModBlocks.NASA_WORKBENCH);
-                OXYGEN_BUBBLE_DISTRIBUTOR_ENTITY = register("oxygen_bubble_distributor_entity", OxygenBubbleDistributorBlockEntity::new, ModBlocks.OXYGEN_BUBBLE_DISTRIBUTOR);
+                OXYGEN_DISTRIBUTOR_ENTITY = register("oxygen_distributor_entity", OxygenDistributorBlockEntity::new, ModBlocks.OXYGEN_DISTRIBUTOR);
                 WATER_PUMP_ENTITY = register("water_pump_entity", WaterPumpBlockEntity::new, ModBlocks.WATER_PUMP);
 
-                EnergyStorage.SIDED.registerForBlockEntities((blockEntity, direction) -> ((AbstractMachineBlockEntity) blockEntity).getSideEnergyStorage(direction), SOLAR_PANEL_ENTITY, COAL_GENERATOR_ENTITY, COMPRESSOR_ENTITY, FUEL_REFINERY_ENTITY, OXYGEN_LOADER_ENTITY, OXYGEN_BUBBLE_DISTRIBUTOR_ENTITY, WATER_PUMP_ENTITY);
-                FluidStorage.SIDED.registerForBlockEntities((blockEntity, direction) -> ((FluidMachineBlockEntity) blockEntity).inputTank, FUEL_REFINERY_ENTITY, OXYGEN_LOADER_ENTITY, OXYGEN_BUBBLE_DISTRIBUTOR_ENTITY, WATER_PUMP_ENTITY);
+                EnergyStorage.SIDED.registerForBlockEntities((blockEntity, direction) -> ((AbstractMachineBlockEntity) blockEntity).getSideEnergyStorage(direction), SOLAR_PANEL_ENTITY, COAL_GENERATOR_ENTITY, COMPRESSOR_ENTITY, FUEL_REFINERY_ENTITY,
+                                OXYGEN_LOADER_ENTITY, OXYGEN_DISTRIBUTOR_ENTITY, WATER_PUMP_ENTITY);
+                FluidStorage.SIDED.registerForBlockEntities((blockEntity, direction) -> ((FluidMachineBlockEntity) blockEntity).inputTank, FUEL_REFINERY_ENTITY, OXYGEN_LOADER_ENTITY, OXYGEN_DISTRIBUTOR_ENTITY, WATER_PUMP_ENTITY);
         }
 
         public static <T extends BlockEntity> BlockEntityType<T> register(String id, FabricBlockEntityTypeBuilder.Factory<T> factory, Block... blocks) {

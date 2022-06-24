@@ -102,19 +102,19 @@ public class ModItems {
                 stacks.set(19, tier1Rover);
                 stacks.set(18, ModItems.TIER_1_ROVER.getDefaultStack());
 
-                stacks.set(6, ModArmour.OXYGEN_MASK.getDefaultStack());
+                stacks.set(6, ModArmour.SPACE_HELMET.getDefaultStack());
                 stacks.set(15, spaceSuit);
                 stacks.set(24, ModArmour.SPACE_SUIT.getDefaultStack());
                 stacks.set(33, ModArmour.SPACE_PANTS.getDefaultStack());
                 stacks.set(42, ModArmour.SPACE_BOOTS.getDefaultStack());
 
-                stacks.set(7, ModArmour.NETHERITE_OXYGEN_MASK.getDefaultStack());
+                stacks.set(7, ModArmour.NETHERITE_SPACE_HELMET.getDefaultStack());
                 stacks.set(16, netheriteSpaceSuit);
                 stacks.set(25, ModArmour.NETHERITE_SPACE_SUIT.getDefaultStack());
                 stacks.set(34, ModArmour.NETHERITE_SPACE_PANTS.getDefaultStack());
                 stacks.set(43, ModArmour.NETHERITE_SPACE_BOOTS.getDefaultStack());
 
-                stacks.set(8, ModArmour.JET_SUIT_OXYGEN_MASK.getDefaultStack());
+                stacks.set(8, ModArmour.JET_SUIT_SPACE_HELMET.getDefaultStack());
                 stacks.set(17, jetSuit);
                 stacks.set(26, ModArmour.JET_SUIT.getDefaultStack());
                 stacks.set(35, ModArmour.JET_SUIT_PANTS.getDefaultStack());
@@ -260,7 +260,7 @@ public class ModItems {
         public static final BlockItem COMPRESSOR = registerBlockItem(ModBlocks.COMPRESSOR, ITEM_GROUP_MACHINES);
         public static final BlockItem FUEL_REFINERY = registerBlockItem(ModBlocks.FUEL_REFINERY, ITEM_GROUP_MACHINES);
         public static final BlockItem OXYGEN_LOADER = registerBlockItem(ModBlocks.OXYGEN_LOADER, ITEM_GROUP_MACHINES);
-        public static final BlockItem OXYGEN_BUBBLE_DISTRIBUTOR = registerBlockItem(ModBlocks.OXYGEN_BUBBLE_DISTRIBUTOR, ITEM_GROUP_MACHINES);
+        public static final BlockItem OXYGEN_DISTRIBUTOR = registerBlockItem(ModBlocks.OXYGEN_DISTRIBUTOR, ITEM_GROUP_MACHINES);
         public static final BlockItem WATER_PUMP = register("water_pump", new BlockItem(ModBlocks.WATER_PUMP, new Item.Settings().group(ITEM_GROUP_MACHINES)) {
                 @Override
                 public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {

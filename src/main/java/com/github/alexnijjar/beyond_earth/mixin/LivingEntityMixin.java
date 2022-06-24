@@ -109,28 +109,28 @@ public abstract class LivingEntityMixin {
                 boolean hasOxygen = false;
                 boolean hasNetheriteSpaceSuit = false;
 
-                if (entity instanceof PlayerEntity player) {
+                if (!isCreative) {
+                    if (entity instanceof PlayerEntity player) {
 
-                    if (ModUtils.hasFullSpaceSet(player) && ModUtils.hasOxygenatedSpaceSuit(player)) {
-                        ItemStack chest = player.getEquippedStack(EquipmentSlot.CHEST);
-                        if (chest.getItem() instanceof SpaceSuit suit) {
-                            long oxygen = suit.getAmount(chest);
+                        if (ModUtils.hasFullSpaceSet(player) && ModUtils.hasOxygenatedSpaceSuit(player)) {
+                            ItemStack chest = player.getEquippedStack(EquipmentSlot.CHEST);
+                            if (chest.getItem() instanceof SpaceSuit suit) {
+                                long oxygen = suit.getAmount(chest);
 
-                            if (oxygen > 0) {
-                                if (!ModUtils.worldHasOxygen(world, player) || entity.isSubmergedInWater()) {
-                                    // Allow the player to breath underwater.
-                                    player.setAir(275);
-                                    hasOxygen = true;
-                                    entity.setFrozenTicks(0);
-                                    hasNetheriteSpaceSuit = ModUtils.hasFullNetheriteSpaceSet(player);
-                                    suit.setAmount(chest, oxygen - 3);
+                                if (oxygen > 0) {
+                                    if (!ModUtils.worldHasOxygen(world, player) || entity.isSubmergedInWater()) {
+                                        // Allow the player to breath underwater.
+                                        player.setAir(275);
+                                        hasOxygen = true;
+                                        entity.setFrozenTicks(0);
+                                        hasNetheriteSpaceSuit = ModUtils.hasFullNetheriteSpaceSet(player);
+                                        suit.setAmount(chest, oxygen - 3);
+                                    }
                                 }
                             }
                         }
                     }
-                }
 
-                if (!isCreative) {
                     if (!ModUtils.worldHasOxygen(world, entity)) {
                         float temperature = ModUtils.getWorldTemperature(world);
                         // Freeze the player in extremely cold temperatures.

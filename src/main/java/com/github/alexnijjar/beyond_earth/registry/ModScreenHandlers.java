@@ -5,7 +5,7 @@ import com.github.alexnijjar.beyond_earth.gui.screen_handlers.CompressorScreenHa
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.ConversionScreenHandler;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.LanderScreenHandler;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.NasaWorkbenchScreenHandler;
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.OxygenBubbleDistributorScreenHandler;
+import com.github.alexnijjar.beyond_earth.gui.screen_handlers.OxygenDistributorScreenHandler;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.PlanetSelectionScreenHandler;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.SolarPanelScreenHandler;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.VehicleScreenHandler;
@@ -25,7 +25,7 @@ public class ModScreenHandlers {
     public static ScreenHandlerType<NasaWorkbenchScreenHandler> NASA_WORKBENCH_SCREEN_HANDLER;
     public static ScreenHandlerType<ConversionScreenHandler> CONVERSION_SCREEN_HANDLER;
     public static ScreenHandlerType<WaterPumpScreenHandler> WATER_PUMP_SCREEN_HANDLER;
-    public static ScreenHandlerType<OxygenBubbleDistributorScreenHandler> OXYGEN_BUBBLE_DISTRIBUTOR_SCREEN_HANDLER;
+    public static ScreenHandlerType<OxygenDistributorScreenHandler> OXYGEN_DISTRIBUTOR_SCREEN_HANDLER;
 
     public static ScreenHandlerType<VehicleScreenHandler> VEHICLE_SCREEN_HANDLER;
     public static ScreenHandlerType<LanderScreenHandler> LANDER_SCREEN_HANDLER;
@@ -43,7 +43,7 @@ public class ModScreenHandlers {
 
         VEHICLE_SCREEN_HANDLER = register("vehicle_screen_handler", VehicleScreenHandler::new);
         LANDER_SCREEN_HANDLER = register("lander_screen_handler", LanderScreenHandler::new);
-        OXYGEN_BUBBLE_DISTRIBUTOR_SCREEN_HANDLER  = register("oxygen_bubble_distributor_screen_handler", OxygenBubbleDistributorScreenHandler::new);
+        OXYGEN_DISTRIBUTOR_SCREEN_HANDLER = register("oxygen_distributor_screen_handler", OxygenDistributorScreenHandler::new);
 
         PLANET_SELECTION_SCREEN_HANDLER = register("planet_selection_screen_handler", (syncId, playerInventory, buf) -> new PlanetSelectionScreenHandler(syncId, playerInventory.player, buf));
     }
