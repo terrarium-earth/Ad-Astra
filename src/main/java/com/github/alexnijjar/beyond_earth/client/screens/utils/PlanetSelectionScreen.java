@@ -101,15 +101,15 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                 ModRecipes.SPACE_STATION_RECIPE.getRecipes(handler.getPlayer().world).forEach(recipe -> {
                         if (recipe != null) {
 
-                                for (int i = 0; i < recipe.getInputs().length; i++) {
-                                        ItemStack stack = recipe.getInputs()[i].getMatchingStacks()[0].copy();
+                                for (int i = 0; i < recipe.getInputs().size(); i++) {
+                                        ItemStack stack = recipe.getInputs().get(i).getMatchingStacks()[0].copy();
                                         // Sets the custom name to the item name to ensure that it always displays the item name and not "Air."
                                         stack.setCustomName(stack.getName());
                                         stack.setCount(0);
 
                                         for (ItemStack slot : inventory.main) {
                                                 if (slot != null) {
-                                                        if (recipe.getInputs()[i].test(slot)) {
+                                                        if (recipe.getInputs().get(i).test(slot)) {
                                                                 stack.setCount(inventory.count(slot.getItem()));
                                                                 break;
                                                         }

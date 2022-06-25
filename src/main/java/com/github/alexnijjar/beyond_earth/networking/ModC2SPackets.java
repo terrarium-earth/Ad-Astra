@@ -71,8 +71,8 @@ public class ModC2SPackets {
             PlayerInventory inventory = player.getInventory();
 
             ModRecipes.SPACE_STATION_RECIPE.getRecipes(player.world).forEach(recipe -> {
-                for (int i = 0; i < recipe.getInputs().length; i++) {
-                    inventory.remove(recipe.getInputs()[i]::test, recipe.getStackCounts().get(i), inventory);
+                for (int i = 0; i < recipe.getInputs().size(); i++) {
+                    inventory.remove(recipe.getInputs().get(i)::test, recipe.getStackCounts().get(i), inventory);
                 }
             });
         });

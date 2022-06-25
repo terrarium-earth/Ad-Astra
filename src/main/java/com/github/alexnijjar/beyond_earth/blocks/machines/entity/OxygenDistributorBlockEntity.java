@@ -129,10 +129,11 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 
                         long amountOfFluidToExtract = (long) (positions.size() * OXYGEN_USAGE_MULTIPLIER);
                         if (this.outputTank.amount > amountOfFluidToExtract) {
-                            try (Transaction transaction = Transaction.openOuter()) {
-                                if (!this.outputTank.isResourceBlank()) {
-                                    if (this.outputTank.extract(this.outputTank.getResource(), amountOfFluidToExtract, transaction) == amountOfFluidToExtract) {
-                                        if (this.drainEnergy((long) (positions.size() * ENERGY_USAGE_MULTIPLIER))) {
+                            if (this.getEnergy() > ((long) (positions.size() * ENERGY_USAGE_MULTIPLIER))) {
+                                try (Transaction transaction = Transaction.openOuter()) {
+                                    if (!this.outputTank.isResourceBlank()) {
+                                        if (this.outputTank.extract(this.outputTank.getResource(), amountOfFluidToExtract, transaction) == amountOfFluidToExtract) {
+                                            this.drainEnergy((long) (positions.size() * ENERGY_USAGE_MULTIPLIER));
                                             OxygenUtils.setEntry(world, pos, positions);
                                             transaction.commit();
                                             this.setActive(true);
@@ -140,6 +141,11 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
                                     } else {
                                         OxygenUtils.removeEntry(world, pos);
                                     }
+                                }
+                            } else {
+                                OxygenUtils.removeEntry(world, pos);
+                                if (this.inputTank.amount <= 0 && this.outputTank.amount < 100) {
+                                    this.outputTank.amount = 0;
                                 }
                             }
                         } else {

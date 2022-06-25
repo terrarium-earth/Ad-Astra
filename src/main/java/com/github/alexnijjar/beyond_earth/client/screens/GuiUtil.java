@@ -35,9 +35,8 @@ public class GuiUtil {
     public static final Identifier FIRE_TEXTURE = new ModIdentifier("textures/fire_on.png");
     public static final Identifier ARROW_TEXTURE = new ModIdentifier("textures/animated_arrow_full.png");
     public static final Identifier OXYGEN_CONTENT_TEXTURE = new ModIdentifier("textures/oxygen.png");
-    public static final Identifier OXYGEN_TANK_TEXTURE = new ModIdentifier("textures/fluid_tank_fore.png");
     public static final Identifier ENERGY_TEXTURE = new ModIdentifier("textures/energy_full.png");
-    public static final Identifier FLUID_TANK_TEXTURE = new ModIdentifier("textures/fluid_tank_fore.png");
+    public static final Identifier FLUID_TANK_TEXTURE = new ModIdentifier("textures/fluid_tank.png");
 
     public static boolean isHovering(Rectangle bounds, double x, double y) {
         double left = bounds.getX();
@@ -68,14 +67,24 @@ public class GuiUtil {
         drawVertical(matrixStack, x, y, ENERGY_WIDTH, ENERGY_HEIGHT, ENERGY_TEXTURE, ratio);
     }
 
-    public static void drawFluidTank(MatrixStack matrixStack, int x, int y, long fluidAmount, long fluidCapacity, FluidVariant fluid, int offset) {
-        // Draw the fluid.
-        drawFluid(matrixStack, offset, x, y, fluidAmount, fluidCapacity, fluid);
-        // Draw the fluid tank.
-        drawVertical(matrixStack, x, y, FLUID_TANK_WIDTH, FLUID_TANK_HEIGHT, FLUID_TANK_TEXTURE, 1.0);
+    public static void drawFluidTank(MatrixStack matrices, int x, int y, long fluidAmount, long fluidCapacity, FluidVariant fluid) {
+        double ratio = fluidCapacity > 0 ? createRatio(fluidAmount, fluidCapacity) : 0;
+        drawFluidTank(matrices, x, y, ratio, fluid);
     }
 
-    public static void drawFluid(MatrixStack matrices, int offset, int x, int y, long fluidAmount, long fluidCapacity, FluidVariant fluid) {
+    public static void drawFluidTank(MatrixStack matrices, int x, int y, double ratio, FluidVariant fluid) {
+        // Draw the fluid.
+        drawFluid(matrices, x, y, ratio, fluid);
+        // Draw the fluid tank.
+        drawVertical(matrices, x, y, FLUID_TANK_WIDTH, FLUID_TANK_HEIGHT, FLUID_TANK_TEXTURE, 1.0);
+    }
+
+    public static void drawAccentingFluidTank(MatrixStack matrices, int x, int y, double ratio, FluidVariant fluid) {
+        ratio = 1.0 - ratio;
+        drawFluidTank(matrices, x, y, ratio, fluid);
+    }
+
+    private static void drawFluid(MatrixStack matrices, int x, int y, double ratio, FluidVariant fluid) {
 
         if (fluid.isBlank()) {
             return;
@@ -85,15 +94,13 @@ public class GuiUtil {
         int color = FluidVariantRendering.getColor(fluid);
 
         int spriteHeight = sprite.getHeight();
-        double ratio = fluidCapacity > 0 ? createRatio(fluidAmount, fluidCapacity) : 0;
 
         // From Tech Reborn fluid rendering.
         RenderSystem.setShaderColor((color >> 16 & 255) / 255.0f, (float) (color >> 8 & 255) / 255.0f, (float) (color & 255) / 255.0f, 1.0f);
 
         MinecraftClient client = MinecraftClient.getInstance();
         int scale = (int) client.getWindow().getScaleFactor();
-        int screenY = client.getWindow().getScaledHeight();
-        int maxY = ((screenY / 2) + offset / 2) * scale;
+        int maxY = (client.getWindow().getHeight() - ((FLUID_TANK_HEIGHT + y) * scale));
 
         RenderSystem.setShaderTexture(0, PlayerScreenHandler.BLOCK_ATLAS_TEXTURE);
 
@@ -121,6 +128,11 @@ public class GuiUtil {
         int remainHeight = height - ratioHeight;
         RenderSystem.setShaderTexture(0, resource);
         DrawableHelper.drawTexture(matrixStack, x, y + remainHeight, 0, remainHeight, width, ratioHeight, width, height);
+    }
+
+    public static void drawAccentingVertical(MatrixStack matrixStack, int x, int y, int width, int height, Identifier resource, double ratio) {
+        ratio = 1.0 - ratio;
+        drawVertical(matrixStack, x, y, width, height, resource, ratio);
     }
 
     public static void drawVerticalReverse(MatrixStack matrixStack, int x, int y, int width, int height, Identifier resource, double ratio) {

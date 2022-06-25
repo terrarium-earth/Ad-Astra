@@ -1,5 +1,6 @@
 package com.github.alexnijjar.beyond_earth.recipes;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -15,7 +16,7 @@ import net.minecraft.world.World;
 public abstract class ModRecipe implements Recipe<Inventory>, Predicate<ItemStack> {
 
     protected Identifier id;
-    protected Ingredient[] inputs = new Ingredient[1];
+    protected final List<Ingredient> inputs = new ArrayList<>();
     protected List<Integer> stackCounts;
 
     public ModRecipe(Identifier id) {
@@ -24,12 +25,12 @@ public abstract class ModRecipe implements Recipe<Inventory>, Predicate<ItemStac
 
     public ModRecipe(Identifier id, Ingredient input) {
         this.id = id;
-        this.inputs[0] = input;
+        this.inputs.add(input);
     }
 
-    public ModRecipe(Identifier id, Ingredient[] input, List<Integer> stackCounts) {
+    public ModRecipe(Identifier id, List<Ingredient> input, List<Integer> stackCounts) {
         this.id = id;
-        this.inputs = input;
+        this.inputs.addAll(input);
         this.stackCounts = stackCounts;
     }
 
@@ -62,7 +63,7 @@ public abstract class ModRecipe implements Recipe<Inventory>, Predicate<ItemStac
         return this.id;
     }
 
-    public Ingredient[] getInputs() {
+    public List<Ingredient> getInputs() {
         return this.inputs;
     }
 
@@ -84,8 +85,8 @@ public abstract class ModRecipe implements Recipe<Inventory>, Predicate<ItemStac
     // Tests if everything in the inventory matches the recipe in the correct order.
     public boolean test(ModInventory inventory) {
 
-        for (int i = 0; i < this.inputs.length; i++) {
-            if (!inputs[i].test(inventory.getItems().get(i))) {
+        for (int i = 0; i < this.inputs.size(); i++) {
+            if (!inputs.get(i).test(inventory.getItems().get(i))) {
                 return false;
             }
         }
