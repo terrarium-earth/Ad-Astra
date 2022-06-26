@@ -1,6 +1,7 @@
 package com.github.alexnijjar.beyond_earth.client.screens.utils;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -235,6 +236,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 
                 // All buttons are data-driven; they are created from files in the /planet_data/planets directory.
                 List<Planet> planets = BeyondEarthClient.planets;
+                planets.sort(Comparator.comparing(s -> s.name()));
                 planets.forEach(planet -> {
                         if (this.handler.getTier() >= planet.rocketTier()) {
                                 Category galaxyCategory = new Category(planet.galaxy(), null);
@@ -500,5 +502,4 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                 super.resize(client, width, height);
                 // this.resetButtonScroll();
         }
-
 }

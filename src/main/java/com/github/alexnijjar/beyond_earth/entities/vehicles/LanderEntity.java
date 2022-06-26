@@ -1,5 +1,6 @@
 package com.github.alexnijjar.beyond_earth.entities.vehicles;
 
+import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.gui.LanderScreenHandlerFactory;
 import com.github.alexnijjar.beyond_earth.util.ModKeyBindings;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
@@ -86,10 +87,10 @@ public class LanderEntity extends VehicleEntity {
 
     public void applyBoosters() {
         if (this.getVelocity().getY() < 0.0) {
-            this.setVelocity(this.getVelocity().add(0.0, 0.025, 0.0));
+            this.setVelocity(this.getVelocity().add(0.0, BeyondEarth.CONFIG.mainConfig.landerBoosterSpeed, 0.0));
 
-            if (this.getVelocity().getY() > -0.1) {
-                this.setVelocity(0.0, -0.1, 0.0);
+            if (this.getVelocity().getY() > BeyondEarth.CONFIG.mainConfig.landerBoosterThreshold) {
+                this.setVelocity(0.0, BeyondEarth.CONFIG.mainConfig.landerBoosterThreshold, 0.0);
             }
 
             // Particles.

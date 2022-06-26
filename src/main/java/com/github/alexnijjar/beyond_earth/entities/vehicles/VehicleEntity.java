@@ -2,6 +2,7 @@ package com.github.alexnijjar.beyond_earth.entities.vehicles;
 
 import javax.annotation.Nullable;
 
+import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.gui.VehicleScreenHandlerFactory;
 import com.github.alexnijjar.beyond_earth.items.vehicles.VehicleItem;
 import com.github.alexnijjar.beyond_earth.registry.ModFluids;
@@ -108,7 +109,7 @@ public abstract class VehicleEntity extends Entity {
         if (this.getSpeed() < 0.001 && this.getSpeed() > -0.001) {
             this.setSpeed(0.0f);
         }
-        this.setSpeed(MathHelper.clamp(this.getSpeed(), -0.1f, 0.2f));
+        this.setSpeed(MathHelper.clamp(this.getSpeed(), BeyondEarth.CONFIG.mainConfig.vehicleMinSpeed, BeyondEarth.CONFIG.mainConfig.vehicleMaxSpeed));
     }
 
     public void doGravity() {
@@ -125,7 +126,7 @@ public abstract class VehicleEntity extends Entity {
                 gravity *= planetGravity;
             }
 
-            this.setVelocity(this.getVelocity().add(0.0, -0.04 * gravity, 0.0));
+            this.setVelocity(this.getVelocity().add(0.0, BeyondEarth.CONFIG.mainConfig.vehicleGravity * gravity, 0.0));
         }
     }
 
@@ -282,8 +283,8 @@ public abstract class VehicleEntity extends Entity {
 
     @Override
     public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
-        if (this.getVelocity().getY() < -0.4) {
-            this.explode(0.55f);
+        if (this.getVelocity().getY() < BeyondEarth.CONFIG.mainConfig.vehicleFallingExplosionThreshold) {
+            this.explode(BeyondEarth.CONFIG.mainConfig.vehicleFallingExplosionMultiplier);
             return true;
         }
         return false;

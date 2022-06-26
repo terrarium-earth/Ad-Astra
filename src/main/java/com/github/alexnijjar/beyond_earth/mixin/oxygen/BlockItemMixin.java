@@ -5,6 +5,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.registry.ModBlocks;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
@@ -32,6 +33,9 @@ public class BlockItemMixin {
 
     @Inject(at = @At(value = "TAIL"), method = "place")
     public void place(ItemPlacementContext context, CallbackInfoReturnable<ActionResult> info) {
+        if (!BeyondEarth.CONFIG.mainConfig.doOxygen) {
+            return;
+        }
         // Extinguish fire items in dimensions with no oxygen.
         World world = context.getWorld();
         if (!world.isClient) {

@@ -3,6 +3,7 @@ package com.github.alexnijjar.beyond_earth.registry;
 import java.util.Collections;
 import java.util.List;
 
+import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.CoalGeneratorBlockEntity;
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.SolarPanelBlockEntity;
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.WaterPumpBlockEntity;
@@ -30,19 +31,25 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.minecraft.block.Block;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.BucketItem;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.item.TallBlockItem;
 import net.minecraft.item.WallStandingBlockItem;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
+import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
@@ -70,15 +77,15 @@ public class ModItems {
                 ((VehicleItem) tier1Rover.getItem()).setAmount(tier1Rover, ((VehicleItem) tier1Rover.getItem()).getTankSize());
                 ((VehicleItem) tier1Rover.getItem()).setFluid(tier1Rover, FluidVariant.of(ModFluids.FUEL_STILL));
 
-                ItemStack spaceSuit = ModArmour.SPACE_SUIT.getDefaultStack();
+                ItemStack spaceSuit = ModItems.SPACE_SUIT.getDefaultStack();
                 ((SpaceSuit) spaceSuit.getItem()).setAmount(spaceSuit, ((SpaceSuit) spaceSuit.getItem()).getTankSize());
                 ((SpaceSuit) spaceSuit.getItem()).setFluid(spaceSuit, FluidVariant.of(ModFluids.OXYGEN_STILL));
 
-                ItemStack netheriteSpaceSuit = ModArmour.NETHERITE_SPACE_SUIT.getDefaultStack();
+                ItemStack netheriteSpaceSuit = ModItems.NETHERITE_SPACE_SUIT.getDefaultStack();
                 ((NetheriteSpaceSuit) netheriteSpaceSuit.getItem()).setAmount(netheriteSpaceSuit, ((NetheriteSpaceSuit) netheriteSpaceSuit.getItem()).getTankSize());
                 ((SpaceSuit) netheriteSpaceSuit.getItem()).setFluid(netheriteSpaceSuit, FluidVariant.of(ModFluids.OXYGEN_STILL));
 
-                ItemStack jetSuit = ModArmour.JET_SUIT.getDefaultStack();
+                ItemStack jetSuit = ModItems.JET_SUIT.getDefaultStack();
                 ((JetSuit) jetSuit.getItem()).setAmount(jetSuit, ((JetSuit) jetSuit.getItem()).getTankSize());
                 ((SpaceSuit) jetSuit.getItem()).setFluid(jetSuit, FluidVariant.of(ModFluids.OXYGEN_STILL));
                 ((JetSuit) jetSuit.getItem()).setStoredEnergy(jetSuit, JetSuit.MAX_ENERGY);
@@ -102,23 +109,23 @@ public class ModItems {
                 stacks.set(19, tier1Rover);
                 stacks.set(18, ModItems.TIER_1_ROVER.getDefaultStack());
 
-                stacks.set(6, ModArmour.SPACE_HELMET.getDefaultStack());
+                stacks.set(6, ModItems.SPACE_HELMET.getDefaultStack());
                 stacks.set(15, spaceSuit);
-                stacks.set(24, ModArmour.SPACE_SUIT.getDefaultStack());
-                stacks.set(33, ModArmour.SPACE_PANTS.getDefaultStack());
-                stacks.set(42, ModArmour.SPACE_BOOTS.getDefaultStack());
+                stacks.set(24, ModItems.SPACE_SUIT.getDefaultStack());
+                stacks.set(33, ModItems.SPACE_PANTS.getDefaultStack());
+                stacks.set(42, ModItems.SPACE_BOOTS.getDefaultStack());
 
-                stacks.set(7, ModArmour.NETHERITE_SPACE_HELMET.getDefaultStack());
+                stacks.set(7, ModItems.NETHERITE_SPACE_HELMET.getDefaultStack());
                 stacks.set(16, netheriteSpaceSuit);
-                stacks.set(25, ModArmour.NETHERITE_SPACE_SUIT.getDefaultStack());
-                stacks.set(34, ModArmour.NETHERITE_SPACE_PANTS.getDefaultStack());
-                stacks.set(43, ModArmour.NETHERITE_SPACE_BOOTS.getDefaultStack());
+                stacks.set(25, ModItems.NETHERITE_SPACE_SUIT.getDefaultStack());
+                stacks.set(34, ModItems.NETHERITE_SPACE_PANTS.getDefaultStack());
+                stacks.set(43, ModItems.NETHERITE_SPACE_BOOTS.getDefaultStack());
 
-                stacks.set(8, ModArmour.JET_SUIT_SPACE_HELMET.getDefaultStack());
+                stacks.set(8, ModItems.JET_SUIT_SPACE_HELMET.getDefaultStack());
                 stacks.set(17, jetSuit);
-                stacks.set(26, ModArmour.JET_SUIT.getDefaultStack());
-                stacks.set(35, ModArmour.JET_SUIT_PANTS.getDefaultStack());
-                stacks.set(44, ModArmour.JET_SUIT_BOOTS.getDefaultStack());
+                stacks.set(26, ModItems.JET_SUIT.getDefaultStack());
+                stacks.set(35, ModItems.JET_SUIT_PANTS.getDefaultStack());
+                stacks.set(44, ModItems.JET_SUIT_BOOTS.getDefaultStack());
 
                 stacks.set(27, ModItems.OXYGEN_TANK.getDefaultStack());
                 stacks.set(28, oxygenTank);
@@ -128,9 +135,9 @@ public class ModItems {
                 stacks.set(38, ModItems.CHEESE.getDefaultStack());
                 stacks.set(39, ModItems.ROCKET_LAUNCH_PAD.getDefaultStack());
 
-                stacks.set(45, ModFluids.OIL_BUCKET.getDefaultStack());
-                stacks.set(46, ModFluids.FUEL_BUCKET.getDefaultStack());
-                stacks.set(47, ModFluids.OXYGEN_BUCKET.getDefaultStack());
+                stacks.set(45, ModItems.OIL_BUCKET.getDefaultStack());
+                stacks.set(46, ModItems.FUEL_BUCKET.getDefaultStack());
+                stacks.set(47, ModItems.OXYGEN_BUCKET.getDefaultStack());
 
         }).build();
 
@@ -142,19 +149,6 @@ public class ModItems {
         public static final ItemGroup ITEM_GROUP_BLOCKS = FabricItemGroupBuilder.build(new ModIdentifier("tab_blocks"), () -> new ItemStack(ModBlocks.MOON_IRON_ORE));
         public static final ItemGroup ITEM_GROUP_SPAWN_EGGS = FabricItemGroupBuilder.build(new ModIdentifier("tab_spawn_eggs"), () -> new ItemStack(ModItems.ALIEN_SPAWN_EGG));
 
-        public static final BlockItem ROCKET_LAUNCH_PAD = registerBlockItem(ModBlocks.ROCKET_LAUNCH_PAD, null);
-
-        // Spawn eggs.
-        public static final Item ALIEN_SPAWN_EGG = register("alien_spawn_egg", new SpawnEggItem(ModEntityTypes.ALIEN, -13382401, -11650781, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
-        public static final Item ALIEN_ZOMBIE_SPAWN_EGG = register("alien_zombie_spawn_egg", new SpawnEggItem(ModEntityTypes.ALIEN_ZOMBIE, -14804199, -16740159, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
-        public static final Item STAR_CRAWLER_SPAWN_EGG = register("star_crawler_spawn_egg", new SpawnEggItem(ModEntityTypes.STAR_CRAWLER, -13421773, -16724788, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
-        public static final Item MARTIAN_RAPTOR_SPAWN_EGG = register("martian_raptor_spawn_egg", new SpawnEggItem(ModEntityTypes.MARTIAN_RAPTOR, 5349438, -13312, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
-        public static final Item PYGRO_SPAWN_EGG = register("pygro_spawn_egg", new SpawnEggItem(ModEntityTypes.PYGRO, -3381760, -6750208, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
-        public static final Item PYGRO_BRUTE_SPAWN_EGG = register("pygro_brute_spawn_egg", new SpawnEggItem(ModEntityTypes.PYGRO_BRUTE, -3381760, -67208, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
-        public static final Item MOGLER_SPAWN_EGG = register("mogler_spawn_egg", new SpawnEggItem(ModEntityTypes.MOGLER, -13312, -3407872, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
-        public static final Item ZOMBIFIED_MOGLER_SPAWN_EGG = register("zombified_mogler_spawn_egg", new SpawnEggItem(ModEntityTypes.ZOMBIFIED_MOGLER, 12537409, 7988821, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
-        public static final Item ALIEN_WANDERING_TRADER_SPAWN_EGG = register("alien_wandering_trader_spawn_egg", new SpawnEggItem(ModEntityTypes.ALIEN_WANDERING_TRADER, 5993415, 2868874, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
-
         // Vehicles Items.
         public static final Item TIER_1_ROCKET = register("tier_1_rocket", new RocketItem<RocketEntityTier1>(ModEntityTypes.ROCKET_TIER_1, 1, new FabricItemSettings().maxCount(1)));
         public static final Item TIER_2_ROCKET = register("tier_2_rocket", new RocketItem<RocketEntityTier2>(ModEntityTypes.ROCKET_TIER_2, 2, new FabricItemSettings().maxCount(1)));
@@ -165,15 +159,71 @@ public class ModItems {
         // Oxygen tank.
         public static final Item OXYGEN_TANK = register("oxygen_tank", new OxygenTankItem(new FabricItemSettings().maxCount(1)));
 
-        // Guide book
+        // Guide book.
         public static final Item GUIDE_BOOK = register("guide_book", new GuideBook(new FabricItemSettings().maxCount(1)));
-
-        // Items.
-        public static final Item CHEESE = register("cheese", new Item(new FabricItemSettings().food(new FoodComponent.Builder().hunger(4).saturationModifier(3.0f).build())));
 
         public static final Item SPACE_PAINTING = register("space_painting", new SpacePaintingItem(ModEntityTypes.SPACE_PAINTING, new Item.Settings().rarity(Rarity.UNCOMMON)));
 
-        public static final Item HAMMER = register("hammer", new HammerItem(new FabricItemSettings().group(ITEM_GROUP_BASICS).maxCount(1).maxDamage(9)));
+        public static final Item CHEESE = register("cheese", new Item(new FabricItemSettings().food(new FoodComponent.Builder().hunger(4).saturationModifier(3.0f).build())));
+
+        // Launch pad.
+        public static final BlockItem ROCKET_LAUNCH_PAD = registerBlockItem(ModBlocks.ROCKET_LAUNCH_PAD, null);
+
+        // Buckets.
+        public static final Item OIL_BUCKET = register("oil_bucket", new BucketItem(ModFluids.OIL_STILL, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1)));
+        public static final Item FUEL_BUCKET = register("fuel_bucket", new BucketItem(ModFluids.FUEL_STILL, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1)));
+        public static final Item OXYGEN_BUCKET = register("oxygen_bucket", new BucketItem(ModFluids.OXYGEN_STILL, new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1)) {
+                @Override
+                public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+                        ItemStack itemStack = user.getStackInHand(hand);
+                        return TypedActionResult.fail(itemStack);
+                }
+        });
+
+        // Spacesuit.
+        public static final SpaceSuit SPACE_HELMET = register("space_helmet", new SpaceSuit(ModArmour.SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings()));
+        public static final SpaceSuit SPACE_SUIT = register("space_suit", new SpaceSuit(ModArmour.SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings()));
+        public static final SpaceSuit SPACE_PANTS = register("space_pants", new SpaceSuit(ModArmour.SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings()));
+        public static final SpaceSuit SPACE_BOOTS = register("space_boots", new SpaceSuit(ModArmour.SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.FEET, new Item.Settings()));
+
+        // Netherite Spacesuit.
+        public static final NetheriteSpaceSuit NETHERITE_SPACE_HELMET = register("netherite_space_helmet", new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().fireproof()));
+        public static final NetheriteSpaceSuit NETHERITE_SPACE_SUIT = register("netherite_space_suit", new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().fireproof()));
+        public static final NetheriteSpaceSuit NETHERITE_SPACE_PANTS = register("netherite_space_pants", new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().fireproof()));
+        public static final NetheriteSpaceSuit NETHERITE_SPACE_BOOTS = register("netherite_space_boots", new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().fireproof()));
+
+        // Jet Suit.
+        public static final JetSuit JET_SUIT_SPACE_HELMET = register("jet_suit_space_helmet", new JetSuit(ModArmour.JET_SUIT_ARMOUR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().fireproof()));
+        public static final JetSuit JET_SUIT = register("jet_suit", new JetSuit(ModArmour.JET_SUIT_ARMOUR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().fireproof()));
+        public static final JetSuit JET_SUIT_PANTS = register("jet_suit_pants", new JetSuit(ModArmour.JET_SUIT_ARMOUR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().fireproof()));
+        public static final JetSuit JET_SUIT_BOOTS = register("jet_suit_boots", new JetSuit(ModArmour.JET_SUIT_ARMOUR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().fireproof()));
+
+        // Machines.
+        public static final BlockItem NASA_WORKBENCH = registerBlockItem(ModBlocks.NASA_WORKBENCH, ITEM_GROUP_MACHINES);
+        public static final BlockItem SOLAR_PANEL = register("solar_panel", new BlockItem(ModBlocks.SOLAR_PANEL, new Item.Settings().group(ITEM_GROUP_MACHINES)) {
+                @Override
+                public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
+                        tooltip.add((Text.translatable("item.beyond_earth.generator.tooltip", SolarPanelBlockEntity.ENERGY_PER_TICK).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
+                }
+        });
+        public static final BlockItem COAL_GENERATOR = register("coal_generator", new BlockItem(ModBlocks.COAL_GENERATOR, new Item.Settings().group(ITEM_GROUP_MACHINES)) {
+                @Override
+                public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
+                        tooltip.add((Text.translatable("item.beyond_earth.generator.tooltip", CoalGeneratorBlockEntity.ENERGY_PER_TICK).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
+                }
+        });
+        public static final BlockItem COMPRESSOR = registerBlockItem(ModBlocks.COMPRESSOR, ITEM_GROUP_MACHINES);
+        public static final BlockItem FUEL_REFINERY = registerBlockItem(ModBlocks.FUEL_REFINERY, ITEM_GROUP_MACHINES);
+        public static final BlockItem OXYGEN_LOADER = registerBlockItem(ModBlocks.OXYGEN_LOADER, ITEM_GROUP_MACHINES);
+        public static final BlockItem OXYGEN_DISTRIBUTOR = registerBlockItem(ModBlocks.OXYGEN_DISTRIBUTOR, ITEM_GROUP_MACHINES);
+        public static final BlockItem WATER_PUMP = register("water_pump", new BlockItem(ModBlocks.WATER_PUMP, new Item.Settings().group(ITEM_GROUP_MACHINES)) {
+                @Override
+                public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
+                        tooltip.add((Text.translatable("item.beyond_earth.water_pump.tooltip", FluidUtils.dropletsToMillibuckets(WaterPumpBlockEntity.TRANSFER_PER_TICK)).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
+                }
+        });
+
+        public static final Item HAMMER = register("hammer", new HammerItem(new FabricItemSettings().group(ITEM_GROUP_BASICS).maxCount(1).maxDamage(BeyondEarth.CONFIG.mainConfig.hammerDurability)));
 
         public static final Item IRON_STICK = registerItem("iron_stick", ITEM_GROUP_BASICS);
         public static final Item OXYGEN_GEAR = registerItem("oxygen_gear", ITEM_GROUP_BASICS);
@@ -190,6 +240,10 @@ public class ModItems {
         public static final Item OSTRUM_TANK = registerItem("ostrum_tank", ITEM_GROUP_BASICS);
         public static final Item CALORITE_TANK = registerItem("calorite_tank", ITEM_GROUP_BASICS);
         public static final Item ROCKET_FIN = registerItem("rocket_fin", ITEM_GROUP_BASICS);
+
+        // Torch items.
+        public static final Item COAL_TORCH = register("coal_torch", new WallStandingBlockItem(ModBlocks.COAL_TORCH, ModBlocks.WALL_COAL_TORCH, new FabricItemSettings().group(ITEM_GROUP_BASICS)));
+        public static final Item COAL_LANTERN = registerBlockItem(ModBlocks.COAL_LANTERN, ITEM_GROUP_BASICS);
 
         public static final Item STEEL_INGOT = registerItem("steel_ingot", ITEM_GROUP_MATERIALS);
         public static final Item DESH_INGOT = registerItem("desh_ingot", ITEM_GROUP_MATERIALS);
@@ -239,35 +293,6 @@ public class ModItems {
         public static final BlockItem VENUS_GLOBE = registerGlobe(ModBlocks.VENUS_GLOBE);
         public static final BlockItem GLACIO_GLOBE = registerGlobe(ModBlocks.GLACIO_GLOBE);
 
-        // Torch items.
-        public static final Item COAL_TORCH = register("coal_torch", new WallStandingBlockItem(ModBlocks.COAL_TORCH, ModBlocks.WALL_COAL_TORCH, new FabricItemSettings().group(ITEM_GROUP_BASICS)));
-        public static final Item COAL_LANTERN = registerBlockItem(ModBlocks.COAL_LANTERN, ITEM_GROUP_BASICS);
-
-        // Machines.
-        public static final BlockItem NASA_WORKBENCH = registerBlockItem(ModBlocks.NASA_WORKBENCH, ITEM_GROUP_MACHINES);
-        public static final BlockItem SOLAR_PANEL = register("solar_panel", new BlockItem(ModBlocks.SOLAR_PANEL, new Item.Settings().group(ITEM_GROUP_MACHINES)) {
-                @Override
-                public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-                        tooltip.add((Text.translatable("item.beyond_earth.generator.tooltip", SolarPanelBlockEntity.ENERGY_PER_TICK).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
-                }
-        });
-        public static final BlockItem COAL_GENERATOR = register("coal_generator", new BlockItem(ModBlocks.COAL_GENERATOR, new Item.Settings().group(ITEM_GROUP_MACHINES)) {
-                @Override
-                public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-                        tooltip.add((Text.translatable("item.beyond_earth.generator.tooltip", CoalGeneratorBlockEntity.ENERGY_PER_TICK).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
-                }
-        });
-        public static final BlockItem COMPRESSOR = registerBlockItem(ModBlocks.COMPRESSOR, ITEM_GROUP_MACHINES);
-        public static final BlockItem FUEL_REFINERY = registerBlockItem(ModBlocks.FUEL_REFINERY, ITEM_GROUP_MACHINES);
-        public static final BlockItem OXYGEN_LOADER = registerBlockItem(ModBlocks.OXYGEN_LOADER, ITEM_GROUP_MACHINES);
-        public static final BlockItem OXYGEN_DISTRIBUTOR = registerBlockItem(ModBlocks.OXYGEN_DISTRIBUTOR, ITEM_GROUP_MACHINES);
-        public static final BlockItem WATER_PUMP = register("water_pump", new BlockItem(ModBlocks.WATER_PUMP, new Item.Settings().group(ITEM_GROUP_MACHINES)) {
-                @Override
-                public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-                        tooltip.add((Text.translatable("item.beyond_earth.water_pump.tooltip", FluidUtils.dropletsToMillibuckets(WaterPumpBlockEntity.TRANSFER_PER_TICK)).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
-                }
-        });
-
         // Block Items.
         public static final BlockItem STEEL_BLOCK = registerBlockItem(ModBlocks.STEEL_BLOCK);
         public static final BlockItem DESH_BLOCK = registerBlockItem(ModBlocks.DESH_BLOCK);
@@ -284,6 +309,7 @@ public class ModItems {
         public static final BlockItem IRON_MARK_BLOCK = registerBlockItem(ModBlocks.IRON_MARK_BLOCK);
         public static final BlockItem SKY_STONE = registerBlockItem(ModBlocks.SKY_STONE);
 
+        public static final BlockItem MOON_SAND = registerBlockItem(ModBlocks.MOON_SAND);
         public static final BlockItem MOON_STONE = registerBlockItem(ModBlocks.MOON_STONE);
         public static final BlockItem MOON_STONE_BRICKS = registerBlockItem(ModBlocks.MOON_STONE_BRICKS);
         public static final BlockItem CRACKED_MOON_STONE_BRICKS = registerBlockItem(ModBlocks.CRACKED_MOON_STONE_BRICKS);
@@ -297,6 +323,7 @@ public class ModItems {
         public static final BlockItem POLISHED_MOON_STONE_SLAB = registerBlockItem(ModBlocks.POLISHED_MOON_STONE_SLAB);
         public static final BlockItem MOON_PILLAR = registerBlockItem(ModBlocks.MOON_PILLAR);
 
+        public static final BlockItem MARS_SAND = registerBlockItem(ModBlocks.MARS_SAND);
         public static final BlockItem MARS_STONE = registerBlockItem(ModBlocks.MARS_STONE);
         public static final BlockItem MARS_STONE_BRICKS = registerBlockItem(ModBlocks.MARS_STONE_BRICKS);
         public static final BlockItem CRACKED_MARS_STONE_BRICKS = registerBlockItem(ModBlocks.CRACKED_MARS_STONE_BRICKS);
@@ -329,6 +356,7 @@ public class ModItems {
         public static final BlockItem VENUS_SANDSTONE_BRICK_SLAB = registerBlockItem(ModBlocks.VENUS_SANDSTONE_BRICK_SLAB);
         public static final BlockItem VENUS_SANDSTONE_BRICK_STAIRS = registerBlockItem(ModBlocks.VENUS_SANDSTONE_BRICK_STAIRS);
 
+        public static final BlockItem VENUS_SAND = registerBlockItem(ModBlocks.VENUS_SAND);
         public static final BlockItem VENUS_STONE = registerBlockItem(ModBlocks.VENUS_STONE);
         public static final BlockItem VENUS_STONE_BRICKS = registerBlockItem(ModBlocks.VENUS_STONE_BRICKS);
         public static final BlockItem CRACKED_VENUS_STONE_BRICKS = registerBlockItem(ModBlocks.CRACKED_VENUS_STONE_BRICKS);
@@ -356,10 +384,6 @@ public class ModItems {
         public static final BlockItem POLISHED_GLACIO_STONE_SLAB = registerBlockItem(ModBlocks.POLISHED_GLACIO_STONE_SLAB);
         public static final BlockItem GLACIO_PILLAR = registerBlockItem(ModBlocks.GLACIO_PILLAR);
 
-        public static final BlockItem MOON_SAND = registerBlockItem(ModBlocks.MOON_SAND);
-        public static final BlockItem MARS_SAND = registerBlockItem(ModBlocks.MARS_SAND);
-        public static final BlockItem VENUS_SAND = registerBlockItem(ModBlocks.VENUS_SAND);
-
         public static final BlockItem MOON_CHEESE_ORE = registerBlockItem(ModBlocks.MOON_CHEESE_ORE);
         public static final BlockItem MOON_DESH_ORE = registerBlockItem(ModBlocks.MOON_DESH_ORE);
         public static final BlockItem MOON_IRON_ORE = registerBlockItem(ModBlocks.MOON_IRON_ORE);
@@ -378,6 +402,17 @@ public class ModItems {
         public static final BlockItem GLACIO_COPPER_ORE = registerBlockItem(ModBlocks.GLACIO_COPPER_ORE);
         public static final BlockItem GLACIO_IRON_ORE = registerBlockItem(ModBlocks.GLACIO_IRON_ORE);
         public static final BlockItem GLACIO_LAPIS_ORE = registerBlockItem(ModBlocks.GLACIO_LAPIS_ORE);
+
+        // Spawn eggs.
+        public static final Item ALIEN_SPAWN_EGG = register("alien_spawn_egg", new SpawnEggItem(ModEntityTypes.ALIEN, -13382401, -11650781, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
+        public static final Item ALIEN_ZOMBIE_SPAWN_EGG = register("alien_zombie_spawn_egg", new SpawnEggItem(ModEntityTypes.ALIEN_ZOMBIE, -14804199, -16740159, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
+        public static final Item STAR_CRAWLER_SPAWN_EGG = register("star_crawler_spawn_egg", new SpawnEggItem(ModEntityTypes.STAR_CRAWLER, -13421773, -16724788, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
+        public static final Item MARTIAN_RAPTOR_SPAWN_EGG = register("martian_raptor_spawn_egg", new SpawnEggItem(ModEntityTypes.MARTIAN_RAPTOR, 5349438, -13312, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
+        public static final Item PYGRO_SPAWN_EGG = register("pygro_spawn_egg", new SpawnEggItem(ModEntityTypes.PYGRO, -3381760, -6750208, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
+        public static final Item PYGRO_BRUTE_SPAWN_EGG = register("pygro_brute_spawn_egg", new SpawnEggItem(ModEntityTypes.PYGRO_BRUTE, -3381760, -67208, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
+        public static final Item MOGLER_SPAWN_EGG = register("mogler_spawn_egg", new SpawnEggItem(ModEntityTypes.MOGLER, -13312, -3407872, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
+        public static final Item ZOMBIFIED_MOGLER_SPAWN_EGG = register("zombified_mogler_spawn_egg", new SpawnEggItem(ModEntityTypes.ZOMBIFIED_MOGLER, 12537409, 7988821, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
+        // public static final Item ALIEN_WANDERING_TRADER_SPAWN_EGG = register("alien_wandering_trader_spawn_egg", new SpawnEggItem(ModEntityTypes.ALIEN_WANDERING_TRADER, 5993415, 2868874, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
 
         public static void register() {
                 registerTank(TIER_1_ROCKET);

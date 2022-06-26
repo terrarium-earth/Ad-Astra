@@ -7,6 +7,7 @@ import java.util.Set;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.registry.ModBlocks;
 
 import net.minecraft.block.Block;
@@ -18,6 +19,7 @@ import net.minecraft.block.CandleCakeBlock;
 import net.minecraft.block.FireBlock;
 import net.minecraft.block.TorchBlock;
 import net.minecraft.block.WallTorchBlock;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.property.Properties;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
@@ -29,7 +31,10 @@ public class OxygenUtils {
     private static Map<Pair<RegistryKey<World>, BlockPos>, Set<BlockPos>> oxygenLocations = new HashMap<>();
 
     // Checks if there is oxygen in a specific block in a specific dimension.
-    public static boolean posHasOxygen(World world, BlockPos pos) {
+    public static boolean posHasOxygen(ServerWorld world, BlockPos pos) {
+        if (world.getServer().getTicks() <= BeyondEarth.CONFIG.mainConfig.oxygenGracePeriodTicks) {
+            return true;
+        }
         for (Map.Entry<Pair<RegistryKey<World>, BlockPos>, Set<BlockPos>> entry : oxygenLocations.entrySet()) {
             if (world.getRegistryKey().equals(entry.getKey().getLeft())) {
                 if (entry.getValue().contains(pos)) {

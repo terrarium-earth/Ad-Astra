@@ -5,6 +5,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
 import net.minecraft.block.BlockState;
@@ -24,6 +25,9 @@ import net.minecraft.world.event.GameEvent;
 public class FlintAndSteelItemMixin {
     @Inject(at = @At(value = "HEAD"), method = "useOnBlock", cancellable = true)
     public void useOnBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> info) {
+        if (!BeyondEarth.CONFIG.mainConfig.doOxygen) {
+            return;
+        }
         PlayerEntity player = context.getPlayer();
         World world = context.getWorld();
         if (!world.isClient) {

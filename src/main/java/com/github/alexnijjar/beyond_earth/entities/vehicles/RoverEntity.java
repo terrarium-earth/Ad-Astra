@@ -1,5 +1,6 @@
 package com.github.alexnijjar.beyond_earth.entities.vehicles;
 
+import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.registry.ModItems;
 import com.github.alexnijjar.beyond_earth.util.ModKeyBindings;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
@@ -43,7 +44,7 @@ public class RoverEntity extends VehicleEntity {
 
     @Override
     public long getTankSize() {
-        return 3;
+        return BeyondEarth.CONFIG.mainConfig.roverTankBuckets;
     }
 
     @Override
@@ -85,7 +86,7 @@ public class RoverEntity extends VehicleEntity {
         super.tick();
         this.travel();
         antennaDishYaw += 0.1;
-        if (this.isInLava()) {
+        if (BeyondEarth.CONFIG.mainConfig.explodeRoverInLava && this.isInLava()) {
             this.explode(0.35f);
         }
     }
@@ -107,24 +108,24 @@ public class RoverEntity extends VehicleEntity {
 
                 // Player is clicking 'w' to move forward.
                 if (ModKeyBindings.forwardKeyDown(player)) {
-                    this.setSpeed(this.getSpeed() + 0.1f * (this.submergedInWater ? 0.5f : 1.0f));
+                    this.setSpeed(this.getSpeed() + BeyondEarth.CONFIG.mainConfig.roverForwardSpeed * (this.submergedInWater ? 0.5f : 1.0f));
                     shouldConsumeFuel = true;
                 }
                 // Player is clicking 's' to move backward.
                 if (ModKeyBindings.backKeyDown(player)) {
-                    this.setSpeed(this.getSpeed() - 0.05f * (this.submergedInWater ? 0.5f : 1.0f));
+                    this.setSpeed(this.getSpeed() - BeyondEarth.CONFIG.mainConfig.roverBackwardSpeed * (this.submergedInWater ? 0.5f : 1.0f));
                     shouldConsumeFuel = true;
                 }
 
                 // Player is clicking 'a' to move left.
                 if (ModKeyBindings.leftKeyDown(player)) {
-                    this.setTurnSpeed(this.getTurnSpeed() - 15.0f * this.getSpeed());
+                    this.setTurnSpeed(this.getTurnSpeed() - BeyondEarth.CONFIG.mainConfig.roverTurnSpeed * this.getSpeed());
                     // Slow down for better turns.
                     this.setVelocity(new Vec3d(this.getVelocity().getX() / 1.1, this.getVelocity().getY(), this.getVelocity().getZ() / 1.1));
                 }
                 // Player is clicking 'd' to move right.
                 if (ModKeyBindings.rightKeyDown(player)) {
-                    this.setTurnSpeed(this.getTurnSpeed() + 15.0f * this.getSpeed());
+                    this.setTurnSpeed(this.getTurnSpeed() + BeyondEarth.CONFIG.mainConfig.roverTurnSpeed * this.getSpeed());
                     // Slow down for better turns.
                     this.setVelocity(new Vec3d(this.getVelocity().getX() / 1.1, this.getVelocity().getY(), this.getVelocity().getZ() / 1.1));
                 }
@@ -135,8 +136,8 @@ public class RoverEntity extends VehicleEntity {
             }
         }
 
-        this.setTurnSpeed(MathHelper.clamp(this.getTurnSpeed(), -3.0f, 3.0f));
-        this.setTurnSpeed(this.getTurnSpeed() / 1.1f);
+        this.setTurnSpeed(MathHelper.clamp(this.getTurnSpeed(), -BeyondEarth.CONFIG.mainConfig.roverMaxTurnSpeed, BeyondEarth.CONFIG.mainConfig.roverMaxTurnSpeed));
+        this.setTurnSpeed(this.getTurnSpeed() * BeyondEarth.CONFIG.mainConfig.roverDeceleration);
         if (this.getTurnSpeed() < 0.1 && this.getTurnSpeed() > -0.1) {
             this.setTurnSpeed(0.0f);
         }

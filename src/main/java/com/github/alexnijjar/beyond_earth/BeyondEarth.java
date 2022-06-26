@@ -1,7 +1,7 @@
 package com.github.alexnijjar.beyond_earth;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +37,7 @@ public class BeyondEarth implements ModInitializer {
     public static BeyondEarthConfig CONFIG;
 
     @Environment(EnvType.SERVER)
-    public static List<Planet> planets = new ArrayList<>();
+    public static Set<Planet> planets = new HashSet<>();
 
     @Override
     public void onInitialize() {
@@ -47,10 +47,10 @@ public class BeyondEarth implements ModInitializer {
         CONFIG = AutoConfig.getConfigHolder(BeyondEarthConfig.class).getConfig();
 
         // Registry.
-        ModItems.register();
-        ModBlockEntities.register();
         ModFluids.register();
+        ModItems.register();
         ModArmour.register();
+        ModBlockEntities.register();
         ModRecipes.register();
         ModEntityTypes.register();
         ModScreenHandlers.register();

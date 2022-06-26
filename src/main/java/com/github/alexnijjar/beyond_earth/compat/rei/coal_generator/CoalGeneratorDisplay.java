@@ -1,9 +1,9 @@
-package com.github.alexnijjar.beyond_earth.client.rei.fuel_conversion;
+package com.github.alexnijjar.beyond_earth.compat.rei.coal_generator;
 
 import java.util.List;
 
 import com.github.alexnijjar.beyond_earth.compat.rei.REICategories;
-import com.github.alexnijjar.beyond_earth.recipes.FuelConversionRecipe;
+import com.github.alexnijjar.beyond_earth.recipes.GeneratingRecipe;
 
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.Display;
@@ -13,20 +13,20 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
 @Environment(EnvType.CLIENT)
-public record FuelConversionDisplay(FuelConversionRecipe recipe) implements Display {
+public record CoalGeneratorDisplay(GeneratingRecipe recipe) implements Display {
 
     @Override
     public List<EntryIngredient> getInputEntries() {
-        return List.of(EntryIngredients.of(recipe.getFluidInput()));
+        return EntryIngredients.ofIngredients(recipe.getInputs());
     }
 
     @Override
     public List<EntryIngredient> getOutputEntries() {
-        return List.of(EntryIngredients.of(recipe.getFluidOutput()));
+        return List.of(EntryIngredients.of(recipe.getOutput()));
     }
 
     @Override
     public CategoryIdentifier<?> getCategoryIdentifier() {
-        return REICategories.FUEL_CONVERSION_CATEGORY;
+        return REICategories.COAL_GENERATOR_CATEGORY;
     }
 }

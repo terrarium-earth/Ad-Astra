@@ -50,7 +50,7 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
         this.backgroundWidth = 177;
         this.backgroundHeight = 172;
         this.playerInventoryTitleY = this.backgroundHeight - 92;
-        ClientOxygenUtils.requestOxygenCalculationsOnClient = true;
+
     }
 
     @Override
@@ -107,14 +107,6 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
         Text oxygenBlockAmount = Text.of("Oxygen Blocks: " + ClientOxygenUtils.getOxygenBlocksCount(this.blockEntity.getWorld(), this.blockEntity.getPos()) + " / " + OxygenDistributorBlockEntity.MAX_BLOCK_CHECKS);
         this.textRenderer.draw(matrices, oxygenBlockAmount, 90, 110, 0x404040);
         matrices.pop();
-    }
-
-    @Override
-    public void close() {
-        super.close();
-        if (!ClientOxygenUtils.renderOxygenParticles) {
-            ClientOxygenUtils.requestOxygenCalculationsOnClient = false;
-        }
     }
 
     @Override

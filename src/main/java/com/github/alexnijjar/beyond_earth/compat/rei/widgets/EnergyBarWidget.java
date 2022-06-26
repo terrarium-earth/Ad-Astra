@@ -1,12 +1,12 @@
-package com.github.alexnijjar.beyond_earth.client.rei.widgets;
+package com.github.alexnijjar.beyond_earth.compat.rei.widgets;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import com.github.alexnijjar.beyond_earth.client.rei.utils.REIUtils;
 import com.github.alexnijjar.beyond_earth.client.screens.GuiUtil;
 import com.github.alexnijjar.beyond_earth.client.screens.utils.ScreenUtils;
+import com.github.alexnijjar.beyond_earth.compat.rei.utils.REIUtils;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import me.shedaniel.clothconfig2.api.animator.NumberAnimator;

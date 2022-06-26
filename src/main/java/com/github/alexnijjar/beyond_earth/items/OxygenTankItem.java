@@ -2,11 +2,11 @@ package com.github.alexnijjar.beyond_earth.items;
 
 import java.util.List;
 
-import com.github.alexnijjar.beyond_earth.registry.ModArmour;
+import com.github.alexnijjar.beyond_earth.BeyondEarth;
+import com.github.alexnijjar.beyond_earth.registry.ModItems;
 import com.github.alexnijjar.beyond_earth.util.FluidUtils;
 
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.PlayerInventoryStorage;
 import net.fabricmc.fabric.impl.transfer.context.PlayerContainerItemContext;
@@ -26,7 +26,7 @@ import net.minecraft.world.World;
 
 public class OxygenTankItem extends Item implements FluidContainingItem {
 
-    public static final long TANK_SIZE = FluidConstants.BUCKET / 2;
+    public static final long TANK_SIZE = BeyondEarth.CONFIG.mainConfig.oxygenTankSize;
 
     public OxygenTankItem(Settings settings) {
         super(settings);
@@ -50,7 +50,7 @@ public class OxygenTankItem extends Item implements FluidContainingItem {
         ItemStack tank = user.getStackInHand(hand);
         if (!world.isClient) {
             ItemStack chest = user.getEquippedStack(EquipmentSlot.CHEST);
-            if (chest.isOf(ModArmour.SPACE_SUIT) || chest.isOf(ModArmour.NETHERITE_SPACE_SUIT) || chest.isOf(ModArmour.JET_SUIT)) {
+            if (chest.isOf(ModItems.SPACE_SUIT) || chest.isOf(ModItems.NETHERITE_SPACE_SUIT) || chest.isOf(ModItems.JET_SUIT)) {
 
                 PlayerInventoryStorage playerWrapper = PlayerInventoryStorage.of(user);
                 ContainerItemContext from = ContainerItemContext.withInitial(tank);

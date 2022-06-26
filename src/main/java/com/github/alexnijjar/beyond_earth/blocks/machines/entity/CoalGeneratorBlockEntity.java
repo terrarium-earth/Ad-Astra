@@ -2,6 +2,7 @@ package com.github.alexnijjar.beyond_earth.blocks.machines.entity;
 
 import org.jetbrains.annotations.Nullable;
 
+import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.CoalGeneratorScreenHandler;
 import com.github.alexnijjar.beyond_earth.recipes.CookingRecipe;
 import com.github.alexnijjar.beyond_earth.registry.ModBlockEntities;
@@ -16,8 +17,8 @@ import net.minecraft.util.math.BlockPos;
 
 public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity {
 
-    public static final long MAX_ENERGY = 9000L;
-    public static final long ENERGY_PER_TICK = 2L;
+    public static final long MAX_ENERGY = BeyondEarth.CONFIG.mainConfig.coalGeneratorMaxEnergy;
+    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.mainConfig.coalGeneratorEnergyPerTick;
 
     public CoalGeneratorBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.COAL_GENERATOR_ENTITY, blockPos, blockState);

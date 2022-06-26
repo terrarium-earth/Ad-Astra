@@ -1,11 +1,11 @@
-package com.github.alexnijjar.beyond_earth.client.rei.coal_generator;
+package com.github.alexnijjar.beyond_earth.compat.rei.coal_generator;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.CoalGeneratorBlockEntity;
-import com.github.alexnijjar.beyond_earth.client.rei.widgets.EnergyBarWidget;
 import com.github.alexnijjar.beyond_earth.compat.rei.REICategories;
+import com.github.alexnijjar.beyond_earth.compat.rei.widgets.EnergyBarWidget;
 import com.github.alexnijjar.beyond_earth.registry.ModBlocks;
 
 import me.shedaniel.math.Point;

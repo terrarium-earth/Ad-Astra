@@ -1,12 +1,12 @@
-package com.github.alexnijjar.beyond_earth.client.rei.oxygen_conversion;
+package com.github.alexnijjar.beyond_earth.compat.rei.fuel_conversion;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.github.alexnijjar.beyond_earth.blocks.machines.entity.OxygenLoaderBlockEntity;
-import com.github.alexnijjar.beyond_earth.client.rei.widgets.EnergyBarWidget;
-import com.github.alexnijjar.beyond_earth.client.rei.widgets.FluidBarWidget;
+import com.github.alexnijjar.beyond_earth.blocks.machines.entity.FuelRefineryBlockEntity;
 import com.github.alexnijjar.beyond_earth.compat.rei.REICategories;
+import com.github.alexnijjar.beyond_earth.compat.rei.widgets.EnergyBarWidget;
+import com.github.alexnijjar.beyond_earth.compat.rei.widgets.FluidBarWidget;
 import com.github.alexnijjar.beyond_earth.registry.ModBlocks;
 
 import dev.architectury.fluid.FluidStack;
@@ -25,20 +25,20 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.minecraft.text.Text;
 
 @Environment(EnvType.CLIENT)
-public class OxygenConversionCategory implements DisplayCategory<OxygenConversionDisplay> {
+public class FuelConversionCategory implements DisplayCategory<FuelConversionDisplay> {
 
     @Override
     public Renderer getIcon() {
-        return EntryStacks.of(ModBlocks.OXYGEN_LOADER.asItem());
+        return EntryStacks.of(ModBlocks.FUEL_REFINERY.asItem());
     }
 
     @Override
     public Text getTitle() {
-        return Text.translatable(ModBlocks.OXYGEN_LOADER.getTranslationKey());
+        return Text.translatable(ModBlocks.FUEL_REFINERY.getTranslationKey());
     }
 
     @Override
-    public int getDisplayWidth(OxygenConversionDisplay display) {
+    public int getDisplayWidth(FuelConversionDisplay display) {
         return 147;
     }
 
@@ -48,12 +48,12 @@ public class OxygenConversionCategory implements DisplayCategory<OxygenConversio
     }
 
     @Override
-    public CategoryIdentifier<? extends OxygenConversionDisplay> getCategoryIdentifier() {
-        return REICategories.OXYGEN_CONVERSION_CATEGORY;
+    public CategoryIdentifier<? extends FuelConversionDisplay> getCategoryIdentifier() {
+        return REICategories.FUEL_CONVERSION_CATEGORY;
     }
 
     @Override
-    public List<Widget> setupDisplay(OxygenConversionDisplay display, Rectangle bounds) {
+    public List<Widget> setupDisplay(FuelConversionDisplay display, Rectangle bounds) {
         Point startPoint = new Point(bounds.getCenterX() - 60, bounds.getCenterY() - 35);
 
         List<Widget> widgets = new ArrayList<>();
@@ -77,8 +77,7 @@ public class OxygenConversionCategory implements DisplayCategory<OxygenConversio
 
         Widget widget = new EnergyBarWidget(new Point(startPoint.x + 90, startPoint.y), false).animationDurationTicks(150);
         widgets.add(widget);
-
-        widgets.add(Widgets.withTooltip(Widgets.withBounds(widget, bounds), Text.translatable("rei.tooltip.beyond_earth.energy_using", OxygenLoaderBlockEntity.ENERGY_PER_TICK)));
+        widgets.add(Widgets.withTooltip(Widgets.withBounds(widget, bounds), Text.translatable("rei.tooltip.beyond_earth.energy_using", FuelRefineryBlockEntity.ENERGY_PER_TICK)));
 
         return widgets;
     }

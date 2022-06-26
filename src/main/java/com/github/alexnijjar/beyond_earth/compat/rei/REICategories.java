@@ -1,11 +1,11 @@
 package com.github.alexnijjar.beyond_earth.compat.rei;
 
-import com.github.alexnijjar.beyond_earth.client.rei.coal_generator.CoalGeneratorDisplay;
-import com.github.alexnijjar.beyond_earth.client.rei.compressor.CompressorDisplay;
-import com.github.alexnijjar.beyond_earth.client.rei.fuel_conversion.FuelConversionDisplay;
-import com.github.alexnijjar.beyond_earth.client.rei.nasa_workbench.NasaWorkbenchDisplay;
-import com.github.alexnijjar.beyond_earth.client.rei.oxygen_conversion.OxygenConversionDisplay;
-import com.github.alexnijjar.beyond_earth.client.rei.space_station.SpaceStationDisplay;
+import com.github.alexnijjar.beyond_earth.compat.rei.coal_generator.CoalGeneratorDisplay;
+import com.github.alexnijjar.beyond_earth.compat.rei.compressor.CompressorDisplay;
+import com.github.alexnijjar.beyond_earth.compat.rei.fuel_conversion.FuelConversionDisplay;
+import com.github.alexnijjar.beyond_earth.compat.rei.nasa_workbench.NasaWorkbenchDisplay;
+import com.github.alexnijjar.beyond_earth.compat.rei.oxygen_conversion.OxygenConversionDisplay;
+import com.github.alexnijjar.beyond_earth.compat.rei.space_station.SpaceStationDisplay;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;

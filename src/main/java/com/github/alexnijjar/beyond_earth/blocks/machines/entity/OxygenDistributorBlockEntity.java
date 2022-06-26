@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
+import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.client.utils.ClientOxygenUtils;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.OxygenDistributorScreenHandler;
 import com.github.alexnijjar.beyond_earth.recipes.OxygenConversionRecipe;
@@ -29,16 +30,16 @@ import net.minecraft.util.math.BlockPos;
 
 public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 
-    public static final long MAX_ENERGY = 20000L;
-    public static final long ENERGY_PER_TICK = 5L;
-    public static final int TANK_SIZE = 3;
-    public static final int MAX_BLOCK_CHECKS = 2000;
-    public static final int UPDATE_OXYGEN_FILLER_TICKS = 100;
+    public static final long MAX_ENERGY = BeyondEarth.CONFIG.mainConfig.oxygenDistributorGeneratorMaxEnergy;
+    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.mainConfig.oxygenDistributorGeneratorEnergyPerTick;
+    public static final int TANK_SIZE = BeyondEarth.CONFIG.mainConfig.oxygenDistributorTankBuckets;
+    public static final int MAX_BLOCK_CHECKS = BeyondEarth.CONFIG.mainConfig.oxygenDistributorMaxBlockChecks;
+    public static final int UPDATE_OXYGEN_FILLER_TICKS = BeyondEarth.CONFIG.mainConfig.oxygenDistributorRefreshTicks;
 
-    public static final double OXYGEN_USAGE_MULTIPLIER = 0.8;
-    public static final double ENERGY_USAGE_MULTIPLIER = 0.5;
+    public static final double OXYGEN_USAGE_MULTIPLIER = BeyondEarth.CONFIG.mainConfig.oxygenDistributorOxygenMultiplier;
+    public static final double ENERGY_USAGE_MULTIPLIER = BeyondEarth.CONFIG.mainConfig.oxygenDistributorEnergyMultiplier;
 
-    private int oxygenFillCheckTicks;
+    private int oxygenFillCheckTicks = UPDATE_OXYGEN_FILLER_TICKS;
 
     @Environment(EnvType.CLIENT)
     private int clientOxygenFillCheckTicks;
@@ -163,7 +164,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 
         if (this.world instanceof ClientWorld world) {
             if (this.outputTank.amount > 0) {
-                if (clientOxygenFillCheckTicks >= (ClientOxygenUtils.requestOxygenCalculationsOnClient ? UPDATE_OXYGEN_FILLER_TICKS : UPDATE_OXYGEN_FILLER_TICKS * 10)) {
+                if (clientOxygenFillCheckTicks >= UPDATE_OXYGEN_FILLER_TICKS) {
                     OxygenFillerAlgorithm floodFiller = new OxygenFillerAlgorithm(world, MAX_BLOCK_CHECKS);
                     Set<BlockPos> positions = floodFiller.runAlgorithm(pos.up());
 

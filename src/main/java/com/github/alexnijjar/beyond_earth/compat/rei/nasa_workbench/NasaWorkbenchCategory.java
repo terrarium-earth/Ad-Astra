@@ -1,4 +1,4 @@
-package com.github.alexnijjar.beyond_earth.client.rei.nasa_workbench;
+package com.github.alexnijjar.beyond_earth.compat.rei.nasa_workbench;
 
 import java.util.ArrayList;
 import java.util.List;

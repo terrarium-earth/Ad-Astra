@@ -1,6 +1,7 @@
 package com.github.alexnijjar.beyond_earth.blocks.fluid;
 
 import com.github.alexnijjar.beyond_earth.registry.ModFluids;
+import com.github.alexnijjar.beyond_earth.registry.ModItems;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.fluid.Fluid;
@@ -26,7 +27,7 @@ public abstract class OxygenFluid extends ModFluid {
 
     @Override
     public Item getBucketItem() {
-        return ModFluids.OXYGEN_BUCKET;
+        return ModItems.OXYGEN_BUCKET;
     }
 
     @Override

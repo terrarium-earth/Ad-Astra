@@ -1,18 +1,17 @@
-package com.github.alexnijjar.beyond_earth.client.rei;
+package com.github.alexnijjar.beyond_earth.compat.rei;
 
-import com.github.alexnijjar.beyond_earth.client.rei.coal_generator.CoalGeneratorCategory;
-import com.github.alexnijjar.beyond_earth.client.rei.coal_generator.CoalGeneratorDisplay;
-import com.github.alexnijjar.beyond_earth.client.rei.compressor.CompressorCategory;
-import com.github.alexnijjar.beyond_earth.client.rei.compressor.CompressorDisplay;
-import com.github.alexnijjar.beyond_earth.client.rei.fuel_conversion.FuelConversionCategory;
-import com.github.alexnijjar.beyond_earth.client.rei.fuel_conversion.FuelConversionDisplay;
-import com.github.alexnijjar.beyond_earth.client.rei.nasa_workbench.NasaWorkbenchCategory;
-import com.github.alexnijjar.beyond_earth.client.rei.nasa_workbench.NasaWorkbenchDisplay;
-import com.github.alexnijjar.beyond_earth.client.rei.oxygen_conversion.OxygenConversionCategory;
-import com.github.alexnijjar.beyond_earth.client.rei.oxygen_conversion.OxygenConversionDisplay;
-import com.github.alexnijjar.beyond_earth.client.rei.space_station.SpaceStationCategory;
-import com.github.alexnijjar.beyond_earth.client.rei.space_station.SpaceStationDisplay;
-import com.github.alexnijjar.beyond_earth.compat.rei.REICategories;
+import com.github.alexnijjar.beyond_earth.compat.rei.coal_generator.CoalGeneratorCategory;
+import com.github.alexnijjar.beyond_earth.compat.rei.coal_generator.CoalGeneratorDisplay;
+import com.github.alexnijjar.beyond_earth.compat.rei.compressor.CompressorCategory;
+import com.github.alexnijjar.beyond_earth.compat.rei.compressor.CompressorDisplay;
+import com.github.alexnijjar.beyond_earth.compat.rei.fuel_conversion.FuelConversionCategory;
+import com.github.alexnijjar.beyond_earth.compat.rei.fuel_conversion.FuelConversionDisplay;
+import com.github.alexnijjar.beyond_earth.compat.rei.nasa_workbench.NasaWorkbenchCategory;
+import com.github.alexnijjar.beyond_earth.compat.rei.nasa_workbench.NasaWorkbenchDisplay;
+import com.github.alexnijjar.beyond_earth.compat.rei.oxygen_conversion.OxygenConversionCategory;
+import com.github.alexnijjar.beyond_earth.compat.rei.oxygen_conversion.OxygenConversionDisplay;
+import com.github.alexnijjar.beyond_earth.compat.rei.space_station.SpaceStationCategory;
+import com.github.alexnijjar.beyond_earth.compat.rei.space_station.SpaceStationDisplay;
 import com.github.alexnijjar.beyond_earth.recipes.CompressingRecipe;
 import com.github.alexnijjar.beyond_earth.recipes.FuelConversionRecipe;
 import com.github.alexnijjar.beyond_earth.recipes.GeneratingRecipe;
@@ -20,7 +19,7 @@ import com.github.alexnijjar.beyond_earth.recipes.NasaWorkbenchRecipe;
 import com.github.alexnijjar.beyond_earth.recipes.OxygenConversionRecipe;
 import com.github.alexnijjar.beyond_earth.recipes.SpaceStationRecipe;
 import com.github.alexnijjar.beyond_earth.registry.ModBlocks;
-import com.github.alexnijjar.beyond_earth.registry.ModFluids;
+import com.github.alexnijjar.beyond_earth.registry.ModItems;
 import com.github.alexnijjar.beyond_earth.registry.ModRecipes;
 
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
@@ -67,7 +66,7 @@ public class BeyondEarthClientPlugin implements REIClientPlugin {
         registry.registerRecipeFiller(NasaWorkbenchRecipe.class, ModRecipes.NASA_WORKBENCH_RECIPE, NasaWorkbenchDisplay::new);
         registry.registerRecipeFiller(SpaceStationRecipe.class, ModRecipes.SPACE_STATION_RECIPE, SpaceStationDisplay::new);
 
-        DefaultInformationDisplay info = DefaultInformationDisplay.createFromEntry(EntryStacks.of(ModFluids.OIL_BUCKET), Text.translatable("rei.text.beyond_earth.oil.title"));
+        DefaultInformationDisplay info = DefaultInformationDisplay.createFromEntry(EntryStacks.of(ModItems.OIL_BUCKET), Text.translatable("rei.text.beyond_earth.oil.title"));
         info.lines(Text.translatable("rei.text.beyond_earth.oil.body"));
         registry.add(info);
     }

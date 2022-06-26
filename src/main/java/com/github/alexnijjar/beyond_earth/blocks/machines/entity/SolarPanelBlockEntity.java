@@ -2,6 +2,7 @@ package com.github.alexnijjar.beyond_earth.blocks.machines.entity;
 
 import org.jetbrains.annotations.Nullable;
 
+import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.SolarPanelScreenHandler;
 import com.github.alexnijjar.beyond_earth.registry.ModBlockEntities;
 
@@ -13,8 +14,8 @@ import net.minecraft.util.math.BlockPos;
 
 public class SolarPanelBlockEntity extends AbstractMachineBlockEntity {
 
-    public static final long MAX_ENERGY = 9000L;
-    public static final long ENERGY_PER_TICK = 5L;
+    public static final long MAX_ENERGY = BeyondEarth.CONFIG.mainConfig.solarPanelGeneratorMaxEnergy;
+    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.mainConfig.solarPanelGeneratorEnergyPerTick;
 
     public SolarPanelBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.SOLAR_PANEL_ENTITY, blockPos, blockState);

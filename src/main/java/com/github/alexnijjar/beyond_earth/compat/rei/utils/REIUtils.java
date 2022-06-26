@@ -1,4 +1,4 @@
-package com.github.alexnijjar.beyond_earth.client.rei.utils;
+package com.github.alexnijjar.beyond_earth.compat.rei.utils;
 
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 

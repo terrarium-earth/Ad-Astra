@@ -1,11 +1,12 @@
 package com.github.alexnijjar.beyond_earth.mixin.oxygen;
 
-import com.github.alexnijjar.beyond_earth.util.ModUtils;
-
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import com.github.alexnijjar.beyond_earth.BeyondEarth;
+import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -20,6 +21,9 @@ public class FireBlockMixin {
 
     @Inject(at = @At(value = "HEAD"), method = "onBlockAdded")
     public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify, CallbackInfo info) {
+        if (!BeyondEarth.CONFIG.mainConfig.doOxygen) {
+            return;
+        }
         // Extinguish the fire in dimensions with no oxygen.
         if (!state.getBlock().equals(Blocks.SOUL_FIRE)) {
             if (!ModUtils.worldHasOxygen(world, pos)) {

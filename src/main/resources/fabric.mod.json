@@ -10,8 +10,8 @@
     "MrScautHD (Author)",
     "ExistingEevee (Forge Developer)",
     "Facu (Texturer)",
-    "FritzHackenstein (Texturer)",
     "Fizz (Texturer)",
+    "FritzHackenstein (Texturer)",
     "jopken (Texturer)",
     "Scarecrow (Modeler)",
     "ShrekRightT*****le1 (Modeler)",
@@ -23,7 +23,7 @@
     "Retr0 (Builder)"
   ],
   "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/beyond-earth-fabric",
+    "homepage": "https://modrinth.com/mod/beyond-earth-fabric",
     "sources": "https://github.com/AlexNijjar/Beyond-Earth-Fabric"
   },
 
@@ -42,7 +42,7 @@
       "com.github.alexnijjar.beyond_earth.config.ModMenuConfig"
     ],
     "rei_client": [
-      "com.github.alexnijjar.beyond_earth.client.rei.BeyondEarthClientPlugin"
+      "com.github.alexnijjar.beyond_earth.compat.rei.BeyondEarthClientPlugin"
     ]
   },
   "accessWidener": "beyond_earth.accesswidener",

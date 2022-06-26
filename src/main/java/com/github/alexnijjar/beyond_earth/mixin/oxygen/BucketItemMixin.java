@@ -5,6 +5,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
 import net.minecraft.block.Block;
@@ -33,6 +34,9 @@ public class BucketItemMixin {
     // Evaporate water in a no-oxygen environment. Water is not evaporated in a oxygen distributor.
     @Inject(at = @At(value = "HEAD"), method = "placeFluid", cancellable = true)
     public void placeFluid(PlayerEntity player, World world, BlockPos pos, BlockHitResult hitResult, CallbackInfoReturnable<Boolean> info) {
+        if (!BeyondEarth.CONFIG.mainConfig.doOxygen) {
+            return;
+        }
         BucketItem bucketItem = (BucketItem) (Object) this;
 
         if (bucketItem.fluid.isIn(FluidTags.WATER)) {

@@ -101,15 +101,15 @@ public class SkyUtil {
         return cameraSubmersionType.equals(CameraSubmersionType.POWDER_SNOW) || cameraSubmersionType.equals(CameraSubmersionType.LAVA) || player.hasStatusEffect(StatusEffects.BLINDNESS);
     }
 
-    private static void startRendering(MatrixStack matrices, Vec3f euler) {
+    private static void startRendering(MatrixStack matrices, Vec3f rotation) {
 
         matrices.push();
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
 
         // Rotation.
-        matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(euler.getY()));
-        matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(euler.getZ()));
-        matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(euler.getX()));
+        matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(rotation.getY()));
+        matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(rotation.getZ()));
+        matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(rotation.getX()));
     }
 
     private static void endRendering(MatrixStack matrices) {

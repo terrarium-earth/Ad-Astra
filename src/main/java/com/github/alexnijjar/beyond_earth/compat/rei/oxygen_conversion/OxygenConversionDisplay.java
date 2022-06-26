@@ -1,9 +1,9 @@
-package com.github.alexnijjar.beyond_earth.client.rei.nasa_workbench;
+package com.github.alexnijjar.beyond_earth.compat.rei.oxygen_conversion;
 
 import java.util.List;
 
 import com.github.alexnijjar.beyond_earth.compat.rei.REICategories;
-import com.github.alexnijjar.beyond_earth.recipes.NasaWorkbenchRecipe;
+import com.github.alexnijjar.beyond_earth.recipes.OxygenConversionRecipe;
 
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.Display;
@@ -13,20 +13,20 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
 @Environment(EnvType.CLIENT)
-public record NasaWorkbenchDisplay(NasaWorkbenchRecipe recipe) implements Display {
+public record OxygenConversionDisplay(OxygenConversionRecipe recipe) implements Display {
 
     @Override
     public List<EntryIngredient> getInputEntries() {
-        return EntryIngredients.ofIngredients(recipe.getInputs());
+        return List.of(EntryIngredients.of(recipe.getFluidInput()));
     }
 
     @Override
     public List<EntryIngredient> getOutputEntries() {
-        return List.of(EntryIngredients.of(recipe.getOutput()));
+        return List.of(EntryIngredients.of(recipe.getFluidOutput()));
     }
 
     @Override
     public CategoryIdentifier<?> getCategoryIdentifier() {
-        return REICategories.NASA_WORKBENCH_CATEGORY;
+        return REICategories.OXYGEN_CONVERSION_CATEGORY;
     }
 }

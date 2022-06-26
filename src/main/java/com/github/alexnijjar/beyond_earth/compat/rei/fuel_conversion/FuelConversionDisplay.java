@@ -1,9 +1,9 @@
-package com.github.alexnijjar.beyond_earth.client.rei.space_station;
+package com.github.alexnijjar.beyond_earth.compat.rei.fuel_conversion;
 
 import java.util.List;
 
 import com.github.alexnijjar.beyond_earth.compat.rei.REICategories;
-import com.github.alexnijjar.beyond_earth.recipes.SpaceStationRecipe;
+import com.github.alexnijjar.beyond_earth.recipes.FuelConversionRecipe;
 
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.Display;
@@ -13,20 +13,20 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
 @Environment(EnvType.CLIENT)
-public record SpaceStationDisplay(SpaceStationRecipe recipe) implements Display {
+public record FuelConversionDisplay(FuelConversionRecipe recipe) implements Display {
 
     @Override
     public List<EntryIngredient> getInputEntries() {
-        return EntryIngredients.ofIngredients(recipe.getInputs());
+        return List.of(EntryIngredients.of(recipe.getFluidInput()));
     }
 
     @Override
     public List<EntryIngredient> getOutputEntries() {
-        return List.of(EntryIngredients.of(recipe.getOutput()));
+        return List.of(EntryIngredients.of(recipe.getFluidOutput()));
     }
 
     @Override
     public CategoryIdentifier<?> getCategoryIdentifier() {
-        return REICategories.SPACE_STATION_CATEGORY;
+        return REICategories.FUEL_CONVERSION_CATEGORY;
     }
 }

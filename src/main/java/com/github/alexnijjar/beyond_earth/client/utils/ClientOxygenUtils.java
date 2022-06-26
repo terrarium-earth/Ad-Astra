@@ -6,11 +6,13 @@ import java.util.Set;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.registry.ModParticleTypes;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
@@ -18,9 +20,10 @@ import net.minecraft.world.World;
 @Environment(EnvType.CLIENT)
 public class ClientOxygenUtils {
 
-    public static boolean requestOxygenCalculationsOnClient;
+    public static final int UPDATE_OXYGEN_FILLER_TICKS = BeyondEarth.CONFIG.mainConfig.oxygenDistributorRefreshTicks;
     public static boolean renderOxygenParticles;
-    private static int spawnOxygenBubblesTick;
+    private static int spawnOxygenBubblesTick = UPDATE_OXYGEN_FILLER_TICKS;
+    public static long currentClientTick;
 
     // Contains every pos in all dimensions with oxygen.
     private static Map<Pair<RegistryKey<World>, BlockPos>, Set<BlockPos>> oxygenLocations = new HashMap<>();
@@ -28,8 +31,9 @@ public class ClientOxygenUtils {
 
     static {
         ClientTickEvents.START_CLIENT_TICK.register(client -> {
+            currentClientTick++;
             if (client.world != null) {
-                if (spawnOxygenBubblesTick >= 30) {
+                if (spawnOxygenBubblesTick >= UPDATE_OXYGEN_FILLER_TICKS) {
                     if (renderOxygenParticles) {
                         for (Map.Entry<Pair<RegistryKey<World>, BlockPos>, Set<BlockPos>> entry : oxygenLocations.entrySet()) {
                             if (client.world.getRegistryKey().equals(entry.getKey().getLeft())) {
@@ -49,7 +53,10 @@ public class ClientOxygenUtils {
     }
 
     // Checks if there is oxygen in a specific block in a specific dimension.
-    public static boolean posHasOxygen(World world, BlockPos pos) {
+    public static boolean posHasOxygen(ClientWorld world, BlockPos pos) {
+        if (currentClientTick <= BeyondEarth.CONFIG.mainConfig.oxygenGracePeriodTicks) {
+            return true;
+        }
         for (Map.Entry<Pair<RegistryKey<World>, BlockPos>, Set<BlockPos>> entry : oxygenLocations.entrySet()) {
             if (world.getRegistryKey().equals(entry.getKey().getLeft())) {
                 if (entry.getValue().contains(pos)) {

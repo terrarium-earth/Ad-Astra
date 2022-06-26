@@ -1,9 +1,9 @@
-package com.github.alexnijjar.beyond_earth.client.rei.compressor;
+package com.github.alexnijjar.beyond_earth.compat.rei.space_station;
 
 import java.util.List;
 
 import com.github.alexnijjar.beyond_earth.compat.rei.REICategories;
-import com.github.alexnijjar.beyond_earth.recipes.CompressingRecipe;
+import com.github.alexnijjar.beyond_earth.recipes.SpaceStationRecipe;
 
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.Display;
@@ -13,7 +13,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
 @Environment(EnvType.CLIENT)
-public record CompressorDisplay(CompressingRecipe recipe) implements Display {
+public record SpaceStationDisplay(SpaceStationRecipe recipe) implements Display {
 
     @Override
     public List<EntryIngredient> getInputEntries() {
@@ -27,6 +27,6 @@ public record CompressorDisplay(CompressingRecipe recipe) implements Display {
 
     @Override
     public CategoryIdentifier<?> getCategoryIdentifier() {
-        return REICategories.COMPRESSOR_CATEGORY;
+        return REICategories.SPACE_STATION_CATEGORY;
     }
 }

@@ -4,3 +4,4 @@ extendable  class   net/minecraft/world/gen/chunk/NoiseChunkGenerator
 extendable  method  net/minecraft/entity/mob/HoglinEntity    zombify    (Lnet/minecraft/server/world/ServerWorld;)V
 extendable  method  net/minecraft/entity/mob/ZoglinEntity    shouldAttack    (Lnet/minecraft/entity/LivingEntity;)Z
 accessible  field  net/minecraft/item/BucketItem    fluid    Lnet/minecraft/fluid/Fluid;
+accessible  field   net/minecraft/client/sound/SoundManager     soundSystem     Lnet/minecraft/client/sound/SoundSystem;

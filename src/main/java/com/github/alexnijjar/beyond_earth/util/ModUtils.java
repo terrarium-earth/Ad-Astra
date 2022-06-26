@@ -1,7 +1,9 @@
 package com.github.alexnijjar.beyond_earth.util;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -19,6 +21,7 @@ import com.github.alexnijjar.beyond_earth.registry.ModEntityTypes;
 
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.Entity.RemovalReason;
 import net.minecraft.entity.EntityType;
@@ -83,7 +86,7 @@ public class ModUtils {
         if (entity.getWorld() instanceof ServerWorld entityWorld) {
             ServerWorld targetWorld = entityWorld.getServer().getWorld(world);
             Vec3d targetPosition = new Vec3d(entity.getX(), getSpawnStart(targetWorld), entity.getZ());
-            List<Entity> entitiesToTeleport = new LinkedList<>();
+            Set<Entity> entitiesToTeleport = new HashSet<>();
 
             if (entity instanceof PlayerEntity player) {
                 if (player.getVehicle() instanceof RocketEntity rocket) {
@@ -239,9 +242,9 @@ public class ModUtils {
     public static boolean worldHasOxygen(World world, BlockPos pos) {
         boolean hasOxygen = worldHasOxygen(world);
         if (world.isClient) {
-            return ClientOxygenUtils.posHasOxygen(world, pos) || hasOxygen;
+            return ClientOxygenUtils.posHasOxygen((ClientWorld) world, pos) || hasOxygen;
         } else {
-            return OxygenUtils.posHasOxygen(world, pos) || hasOxygen;
+            return OxygenUtils.posHasOxygen((ServerWorld) world, pos) || hasOxygen;
         }
     }
 
@@ -305,12 +308,12 @@ public class ModUtils {
         }
     }
 
-    public static List<RegistryKey<World>> getBeyondEarthDimensions(boolean isClient) {
-        return Stream.concat(getPlanets(isClient).stream(), getOrbitWorlds(isClient).stream()).collect(Collectors.toList());
+    public static Set<RegistryKey<World>> getBeyondEarthDimensions(boolean isClient) {
+        return Stream.concat(getPlanets(isClient).stream(), getOrbitWorlds(isClient).stream()).collect(Collectors.toSet());
     }
 
-    public static List<RegistryKey<World>> getOrbitWorlds(boolean isClient) {
-        List<RegistryKey<World>> worlds = new LinkedList<>();
+    public static Set<RegistryKey<World>> getOrbitWorlds(boolean isClient) {
+        Set<RegistryKey<World>> worlds = new HashSet<>();
         (isClient ? BeyondEarthClient.planets : BeyondEarth.planets).forEach(planet -> {
             if (!worlds.contains(planet.orbitWorld()))
                 worlds.add(planet.orbitWorld());
@@ -318,14 +321,14 @@ public class ModUtils {
         return worlds;
     }
 
-    public static List<RegistryKey<World>> getPlanets(boolean isClient) {
-        List<RegistryKey<World>> worlds = new LinkedList<>();
+    public static Set<RegistryKey<World>> getPlanets(boolean isClient) {
+        Set<RegistryKey<World>> worlds = new HashSet<>();
         (isClient ? BeyondEarthClient.planets : BeyondEarth.planets).forEach(planet -> worlds.add(planet.world()));
         return worlds;
     }
 
-    private static final List<RegistryKey<World>> getWorldsWithoutOxygen(boolean isClient) {
-        List<RegistryKey<World>> worlds = new LinkedList<>();
+    private static final Set<RegistryKey<World>> getWorldsWithoutOxygen(boolean isClient) {
+        Set<RegistryKey<World>> worlds = new HashSet<>();
         (isClient ? BeyondEarthClient.planets : BeyondEarth.planets).stream().filter(planet -> planet.hasOxygen()).forEach(planet -> worlds.add(planet.world()));
         return worlds;
     }

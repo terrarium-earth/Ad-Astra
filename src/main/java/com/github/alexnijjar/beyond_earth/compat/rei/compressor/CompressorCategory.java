@@ -1,11 +1,11 @@
-package com.github.alexnijjar.beyond_earth.client.rei.compressor;
+package com.github.alexnijjar.beyond_earth.compat.rei.compressor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.CompressorBlockEntity;
-import com.github.alexnijjar.beyond_earth.client.rei.widgets.EnergyBarWidget;
 import com.github.alexnijjar.beyond_earth.compat.rei.REICategories;
+import com.github.alexnijjar.beyond_earth.compat.rei.widgets.EnergyBarWidget;
 import com.github.alexnijjar.beyond_earth.registry.ModBlocks;
 
 import me.shedaniel.math.Point;

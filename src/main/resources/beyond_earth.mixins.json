@@ -4,7 +4,6 @@
   "package": "com.github.alexnijjar.beyond_earth.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "ChunkGeneratorAccessor",
     "EntityInvoker",
     "EntityMixin",
     "GeneratorOptionsMixin",
@@ -33,6 +32,7 @@
     "client.GameRendererMixin",
     "client.HeldItemRendererMixin",
     "client.PlayerEntityRendererMixin",
+    "client.SoundManagerMixin",
     "client.WorldRendererAccessor",
     "client.WorldRendererMixin"
   ],

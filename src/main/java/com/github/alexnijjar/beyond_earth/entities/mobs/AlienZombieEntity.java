@@ -1,5 +1,6 @@
 package com.github.alexnijjar.beyond_earth.entities.mobs;
 
+import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.entities.projectiles.IceSpitEntity;
 import com.github.alexnijjar.beyond_earth.registry.ModEntityTypes;
 
@@ -90,6 +91,10 @@ public class AlienZombieEntity extends HostileEntity implements RangedAttackMob 
 
     @Override
     public boolean canSpawn(WorldAccess world, SpawnReason spawnReason) {
+        if (!BeyondEarth.CONFIG.mainConfig.spawnAlienZombies) {
+            return false;
+        }
+
         BlockState blockState = world.getBlockState(new BlockPos(this.getX(), this.getY() - 1, this.getZ()));
 
         if (blockState.isOf(Blocks.LAVA) || blockState.isOf(Blocks.AIR)) {

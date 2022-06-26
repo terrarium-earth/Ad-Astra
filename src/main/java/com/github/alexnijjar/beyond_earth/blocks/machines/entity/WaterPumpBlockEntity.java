@@ -2,6 +2,7 @@ package com.github.alexnijjar.beyond_earth.blocks.machines.entity;
 
 import javax.annotation.Nullable;
 
+import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.blocks.machines.AbstractMachineBlock;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.WaterPumpScreenHandler;
 import com.github.alexnijjar.beyond_earth.registry.ModBlockEntities;
@@ -24,10 +25,10 @@ import net.minecraft.util.math.Direction;
 
 public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
 
-    public static final long MAX_ENERGY = 9000L;
-    public static final int TANK_SIZE = 6;
-    public static final long ENERGY_PER_TICK = 3L;
-    public static final long TRANSFER_PER_TICK = FluidConstants.BLOCK / 100;
+    public static final long MAX_ENERGY = BeyondEarth.CONFIG.mainConfig.waterPumpGeneratorMaxEnergy;
+    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.mainConfig.waterPumpGeneratorEnergyPerTick;
+    public static final int TANK_SIZE = BeyondEarth.CONFIG.mainConfig.waterPumpTankBuckets;
+    public static final long TRANSFER_PER_TICK = BeyondEarth.CONFIG.mainConfig.waterPumpTransferPerTick;
     public static final Direction[] INSERT_DIRECTIONS = { Direction.UP, Direction.SOUTH };
 
     private long waterExtracted;
@@ -105,10 +106,12 @@ public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
                         this.setActive(false);
                     }
 
-                    // Delete the water block after it has been fully extracted.
-                    if (waterExtracted >= FluidConstants.BLOCK) {
-                        waterExtracted = 0;
-                        world.setBlockState(this.getPos().down(), Blocks.AIR.getDefaultState());
+                    if (BeyondEarth.CONFIG.mainConfig.deleteWaterBelowWaterPump) {
+                        // Delete the water block after it has been fully extracted.
+                        if (waterExtracted >= FluidConstants.BLOCK) {
+                            waterExtracted = 0;
+                            world.setBlockState(this.getPos().down(), Blocks.AIR.getDefaultState());
+                        }
                     }
                 }
             } else {

@@ -1,5 +1,7 @@
 package com.github.alexnijjar.beyond_earth.entities.mobs;
 
+import com.github.alexnijjar.beyond_earth.BeyondEarth;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
@@ -53,6 +55,10 @@ public class StarCrawlerEntity extends HostileEntity {
 
     @Override
     public boolean canSpawn(WorldAccess world, SpawnReason spawnReason) {
+        if (!BeyondEarth.CONFIG.mainConfig.spawnStarCrawlers) {
+            return false;
+        }
+
         BlockState blockState = world.getBlockState(new BlockPos(this.getX(), this.getY() - 1, this.getZ()));
 
         if (blockState.isOf(Blocks.LAVA) || blockState.isOf(Blocks.AIR)) {

@@ -2,12 +2,12 @@ package com.github.alexnijjar.beyond_earth.items.armour;
 
 import java.util.List;
 
-import com.github.alexnijjar.beyond_earth.registry.ModArmour;
+import com.github.alexnijjar.beyond_earth.BeyondEarth;
+import com.github.alexnijjar.beyond_earth.registry.ModItems;
 import com.github.alexnijjar.beyond_earth.util.ModKeyBindings;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
 import net.fabricmc.fabric.api.entity.event.v1.FabricElytraItem;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -26,10 +26,10 @@ import team.reborn.energy.api.base.SimpleBatteryItem;
 
 public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, FabricElytraItem {
 
-    // 0.2M E.
-    public static final long MAX_ENERGY = 200000;
-    public static final long TANK_SIZE = 4 * FluidConstants.BUCKET;
-    public static final double SPEED = 0.8;
+    public static final long MAX_ENERGY = BeyondEarth.CONFIG.mainConfig.jetSuitMaxEnergy;
+    public static final long TANK_SIZE = BeyondEarth.CONFIG.mainConfig.jetSuitTankSize;
+    public static final double SPEED = BeyondEarth.CONFIG.mainConfig.jetSuitSpeed;
+    public static final double UPWARDS_SPEED = BeyondEarth.CONFIG.mainConfig.jetSuitUpwardsSpeed;
     public boolean isFallFlying;
 
     public JetSuit(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
@@ -50,7 +50,7 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
     @Override
     public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);
-        if (stack.isOf(ModArmour.JET_SUIT)) {
+        if (stack.isOf(ModItems.JET_SUIT)) {
             long energy = this.getStoredEnergy(stack);
             tooltip.add(Text.translatable("gauge_text.beyond_earth.storage", energy, MAX_ENERGY).setStyle(Style.EMPTY.withColor(energy > 0 ? Formatting.GREEN : Formatting.RED)));
         }
@@ -95,7 +95,7 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
         }
         isFallFlying = false;
 
-        double speed = MathHelper.clamp(0.4 - (ModUtils.getPlanetGravity(player.world) * 0.25), 0.1, 0.2);
+        double speed = MathHelper.clamp(UPWARDS_SPEED - (ModUtils.getPlanetGravity(player.world) * 0.25), 0.1, 0.2);
         player.setVelocity(player.getVelocity().add(0.0, speed, 0.0));
         if (player.getVelocity().getY() > speed * 10) {
             player.setVelocity(player.getVelocity().getX(), speed * 10, player.getVelocity().getZ());
@@ -116,6 +116,9 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
     }
 
     public void spawnParticles(PlayerEntity player, ItemStack stack) {
+        if (!BeyondEarth.CONFIG.mainConfig.spawnJetSuitParticles) {
+            return;
+        }
         if (player.world instanceof ServerWorld serverWorld) {
             Vec3d pos = player.getPos();
 

@@ -1,4 +1,4 @@
-package com.github.alexnijjar.beyond_earth.client.rei.space_station;
+package com.github.alexnijjar.beyond_earth.compat.rei.space_station;
 
 import java.util.ArrayList;
 import java.util.List;

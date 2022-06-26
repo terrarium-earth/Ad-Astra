@@ -1,5 +1,6 @@
 package com.github.alexnijjar.beyond_earth.mixin.gravity;
 
+import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -12,6 +13,10 @@ import net.minecraft.entity.vehicle.BoatEntity;
 public abstract class BoatEntityMixin {
     @ModifyConstant(method = "updateVelocity", constant = @Constant(doubleValue = -0.03999999910593033, ordinal = 1))
     public double setGravity(double value) {
-        return ModUtils.getMixinGravity(value, this);
+        if (BeyondEarth.CONFIG.mainConfig.doEntityGravity) {
+            return ModUtils.getMixinGravity(value, this);
+        } else {
+            return value;
+        }
     }
 }
