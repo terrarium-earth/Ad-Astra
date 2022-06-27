@@ -2,7 +2,7 @@
     "name": "Launch Details",
     "icon": "beyond_earth:rocket_launch_pad",
     "category": "beyond_earth:rocket_travel",
-    "sortnum": "5",
+    "sortnum": 5,
     "pages": [
         {
             "type": "patchouli:text",

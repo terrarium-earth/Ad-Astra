@@ -15,11 +15,14 @@ import net.minecraft.entity.decoration.painting.PaintingEntity;
 import net.minecraft.entity.decoration.painting.PaintingVariant;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryEntry;
+import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 
 public class SpacePaintingEntity extends PaintingEntity {
@@ -60,6 +63,7 @@ public class SpacePaintingEntity extends PaintingEntity {
 			return Optional.empty();
 		}
 
+		System.out.println(optional.get());
 		((PaintingEntityInvoker) paintingEntity).invokeSetVariant(optional.get());
 		paintingEntity.setFacing(facing);
 		return Optional.of(paintingEntity);
@@ -78,6 +82,23 @@ public class SpacePaintingEntity extends PaintingEntity {
 		});
 
 		return paintings;
+	}
+
+	@Override
+	public void readCustomDataFromNbt(NbtCompound nbt) {
+
+		super.readCustomDataFromNbt(nbt);
+		RegistryKey<PaintingVariant> registryKey = RegistryKey.of(Registry.PAINTING_VARIANT_KEY, new Identifier(nbt.getString("variant")));
+		((PaintingEntityInvoker) this).invokeSetVariant(Registry.PAINTING_VARIANT.getEntry(registryKey).get());
+		this.facing = Direction.fromHorizontal(nbt.getByte("facing"));
+		this.setFacing(this.facing);
+	}
+
+	@Override
+	public void writeCustomDataToNbt(NbtCompound nbt) {
+		super.writeCustomDataToNbt(nbt);
+		nbt.putString("variant", Registry.PAINTING_VARIANT.getId(this.getVariant().value()).toString());
+		nbt.putByte("facing", (byte) this.facing.getHorizontal());
 	}
 
 	@Override

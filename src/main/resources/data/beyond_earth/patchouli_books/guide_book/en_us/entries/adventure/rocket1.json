@@ -2,7 +2,7 @@
     "name": "Your 1st Rocket",
     "icon": "beyond_earth:tier_1_rocket",
     "category": "beyond_earth:rocket_travel",
-    "sortnum": "1",
+    "sortnum": 1,
     "pages": [
         {
             "type": "patchouli:text",

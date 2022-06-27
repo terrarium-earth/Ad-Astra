@@ -23,6 +23,7 @@ bin/
 # fabric
 
 run/
+src/main/generated
 
 # macOS
 

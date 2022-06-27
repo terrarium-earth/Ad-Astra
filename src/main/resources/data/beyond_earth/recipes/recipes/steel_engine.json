@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "engines",
+  "key": {
+    "#": {
+      "tag": "c:compressed_steel"
+    },
+    "E": {
+      "item": "beyond_earth:engine_frame"
+    },
+    "F": {
+      "item": "beyond_earth:engine_fan"
+    }
+  },
+  "pattern": [
+    "###",
+    " E ",
+    " F "
+  ],
+  "result": {
+    "item": "beyond_earth:steel_engine"
+  }
+}

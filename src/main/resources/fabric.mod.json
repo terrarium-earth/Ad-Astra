@@ -38,6 +38,9 @@
     "client": [
       "com.github.alexnijjar.beyond_earth.client.BeyondEarthClient"
     ],
+    "fabric-datagen": [
+      "com.github.alexnijjar.beyond_earth.datagen.BeyondEarthDataGenEntrypoint"
+    ],
     "modmenu": [
       "com.github.alexnijjar.beyond_earth.config.ModMenuConfig"
     ],

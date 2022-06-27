@@ -2,7 +2,7 @@
     "name": "Tips",
     "icon": "beyond_earth:flag_purple",
     "category": "beyond_earth:getting_started",
-    "sortnum": "1",
+    "sortnum": 1,
     "pages": [
         {
             "type": "patchouli:spotlight",

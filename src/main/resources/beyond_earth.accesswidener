@@ -1,6 +1,5 @@
 accessWidener   v1  named
 accessible  field   net/minecraft/inventory/SimpleInventory stacks  Lnet/minecraft/util/collection/DefaultedList;
-extendable  class   net/minecraft/world/gen/chunk/NoiseChunkGenerator
 extendable  method  net/minecraft/entity/mob/HoglinEntity    zombify    (Lnet/minecraft/server/world/ServerWorld;)V
 extendable  method  net/minecraft/entity/mob/ZoglinEntity    shouldAttack    (Lnet/minecraft/entity/LivingEntity;)Z
 accessible  field  net/minecraft/item/BucketItem    fluid    Lnet/minecraft/fluid/Fluid;

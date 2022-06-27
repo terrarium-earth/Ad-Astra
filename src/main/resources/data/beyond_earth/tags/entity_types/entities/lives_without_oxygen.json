@@ -14,6 +14,7 @@
     "minecraft:wither",
     "minecraft:skeleton",
     "minecraft:stray",
-    "minecraft:armor_stand"
+    "minecraft:armor_stand",
+    "minecraft:warden"
   ]
 }

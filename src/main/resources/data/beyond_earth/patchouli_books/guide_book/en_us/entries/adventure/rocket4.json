@@ -2,7 +2,7 @@
     "name": "Beyond our star",
     "icon": "beyond_earth:tier_4_rocket",
     "category": "beyond_earth:rocket_travel",
-    "sortnum": "4",
+    "sortnum": 4,
     "pages": [
         {
             "type": "patchouli:text",

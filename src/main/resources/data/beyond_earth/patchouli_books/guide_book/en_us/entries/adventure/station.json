@@ -1,8 +1,8 @@
 {
     "name": "Livin' above",
-    "icon": "beyond_earth:textures/rei/space_station_icon.png",
+    "icon": "beyond_earth:textures/screens/rei/space_station_icon.png",
     "category": "beyond_earth:rocket_travel",
-    "sortnum": "7",
+    "sortnum": 7,
     "pages": [
         {
             "type": "patchouli:spotlight",

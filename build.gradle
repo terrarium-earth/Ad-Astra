@@ -38,8 +38,41 @@ dependencies {
 	modImplementation "vazkii.patchouli:Patchouli:${project.patchouli_version}"
 }
 
+sourceSets {
+		main {
+			compileClasspath += main.compileClasspath
+			runtimeClasspath += main.runtimeClasspath
+		}
+	}
+
 loom {
 	accessWidenerPath = file("src/main/resources/beyond_earth.accesswidener")
+	runs {
+		datagenClient {
+			client()
+
+			runDir = "build/datagen"
+
+			vmArg("-Dfabric-api.datagen")
+			vmArg("-Dfabric-api.datagen.output-dir=${file("src/main/generated")}")
+
+			ideConfigGenerated project.rootProject == project
+			name = "Datagen Client"
+			source sourceSets.main
+		}
+		datagenServer {
+			server()
+
+			runDir = "build/datagen"
+
+			vmArg("-Dfabric-api.datagen")
+			vmArg("-Dfabric-api.datagen.output-dir=${file("src/main/generated")}")
+
+			ideConfigGenerated project.rootProject == project
+			name = "Datagen Server"
+			source sourceSets.main
+		}
+	}
 }
 
 processResources {

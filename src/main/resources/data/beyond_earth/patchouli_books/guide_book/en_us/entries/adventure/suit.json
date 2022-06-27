@@ -2,7 +2,7 @@
     "name": "Space-Suit",
     "icon": "beyond_earth:space_helmet",
     "category": "beyond_earth:rocket_travel",
-    "sortnum": "6",
+    "sortnum": 6,
     "pages": [
         {
             "type": "patchouli:text",

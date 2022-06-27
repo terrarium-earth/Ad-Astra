@@ -2,7 +2,7 @@
     "name": "Steel",
     "icon": "beyond_earth:steel_ingot",
     "category": "beyond_earth:resources",
-    "sortnum": "1",
+    "sortnum": 1,
     "pages": [
         {
             "type": "patchouli:text",

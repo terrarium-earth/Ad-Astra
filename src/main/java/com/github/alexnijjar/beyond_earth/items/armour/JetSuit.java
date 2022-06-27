@@ -19,7 +19,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import team.reborn.energy.api.base.SimpleBatteryItem;
@@ -95,10 +94,10 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
         }
         isFallFlying = false;
 
-        double speed = MathHelper.clamp(UPWARDS_SPEED - (ModUtils.getPlanetGravity(player.world) * 0.25), 0.1, 0.2);
+        double speed = UPWARDS_SPEED;
         player.setVelocity(player.getVelocity().add(0.0, speed, 0.0));
-        if (player.getVelocity().getY() > speed * 10) {
-            player.setVelocity(player.getVelocity().getX(), speed * 10, player.getVelocity().getZ());
+        if (player.getVelocity().getY() > speed) {
+            player.setVelocity(player.getVelocity().getX(), speed, player.getVelocity().getZ());
         }
     }
 

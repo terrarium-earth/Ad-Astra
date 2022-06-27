@@ -2,7 +2,7 @@
     "name": "Mars",
     "icon": "beyond_earth:/textures/sky/mars.png",
     "category": "beyond_earth:space",
-    "sortnum": "2",
+    "sortnum": 2,
     "pages": [
         {
             "type": "patchouli:text",

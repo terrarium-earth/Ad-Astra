@@ -120,7 +120,7 @@ public class SoundManagerMixin {
 
             @Override
             public float getVolume() {
-                return sound.getVolume() / 12.0f;
+                return sound.getVolume() / 10.0f;
             }
 
             @Override

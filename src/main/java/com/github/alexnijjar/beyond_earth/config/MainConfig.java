@@ -11,7 +11,7 @@ public class MainConfig implements ConfigData {
     @ConfigEntry.Gui.Tooltip(count = 1)
     public double jetSuitSpeed = 0.8;
     @ConfigEntry.Gui.Tooltip(count = 1)
-    public double jetSuitUpwardsSpeed = 0.3;
+    public double jetSuitUpwardsSpeed = 0.5;
     @ConfigEntry.Gui.Tooltip(count = 2)
     public boolean doSpaceMuffler = true;
 
@@ -26,7 +26,7 @@ public class MainConfig implements ConfigData {
     public boolean spawnJetSuitParticles = true;
 
     @ConfigEntry.Gui.Tooltip(count = 1)
-    public double vehicleFallingExplosionThreshold = -0.4;
+    public double vehicleFallingExplosionThreshold = -0.7;
     @ConfigEntry.Gui.Tooltip(count = 1)
     public float vehicleFallingExplosionMultiplier = 0.55f;
     public double vehicleGravity = -0.04;

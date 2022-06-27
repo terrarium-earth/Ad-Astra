@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 1.0,
+  "ingredient": {
+    "item": "beyond_earth:moon_desh_ore"
+  },
+  "result": "beyond_earth:desh_ingot"
+}

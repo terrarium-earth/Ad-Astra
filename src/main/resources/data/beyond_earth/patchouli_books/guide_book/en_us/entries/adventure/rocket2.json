@@ -2,7 +2,7 @@
     "name": "A few million miles",
     "icon": "beyond_earth:tier_2_rocket",
     "category": "beyond_earth:rocket_travel",
-    "sortnum": "2",
+    "sortnum": 2,
     "pages": [
         {
             "type": "patchouli:text",

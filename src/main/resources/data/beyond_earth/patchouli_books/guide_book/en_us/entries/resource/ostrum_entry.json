@@ -2,7 +2,7 @@
     "name": "Ostrum",
     "icon": "beyond_earth:ostrum_ingot",
     "category": "beyond_earth:resources",
-    "sortnum": "3",
+    "sortnum": 3,
     "pages": [
         {
             "type": "patchouli:text",

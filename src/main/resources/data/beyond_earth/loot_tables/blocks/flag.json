@@ -2,27 +2,19 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "rolls": 1,
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "conditions": [
-            {
-              "condition": "minecraft:block_state_property",
-              "block": "beyond_earth:flag",
-              "properties": {
-                "half": "lower"
-              }
-            }
-          ],
-          "name": "beyond_earth:flag"
-        }
-      ],
+      "bonus_rolls": 0.0,
       "conditions": [
         {
           "condition": "minecraft:survives_explosion"
         }
-      ]
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "beyond_earth:flag"
+        }
+      ],
+      "rolls": 1.0
     }
   ]
 }

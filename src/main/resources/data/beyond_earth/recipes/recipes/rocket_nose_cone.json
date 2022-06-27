@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "tag": "c:compressed_steel"
+    },
+    "|": {
+      "item": "minecraft:lightning_rod"
+    }
+  },
+  "pattern": [
+    " | ",
+    " # ",
+    "###"
+  ],
+  "result": {
+    "item": "beyond_earth:rocket_nose_cone"
+  }
+}

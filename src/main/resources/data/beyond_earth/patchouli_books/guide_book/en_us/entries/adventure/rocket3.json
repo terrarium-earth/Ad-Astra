@@ -2,7 +2,7 @@
     "name": "All over the star system",
     "icon": "beyond_earth:tier_3_rocket",
     "category": "beyond_earth:rocket_travel",
-    "sortnum": "3",
+    "sortnum": 3,
     "pages": [
         {
             "type": "patchouli:text",

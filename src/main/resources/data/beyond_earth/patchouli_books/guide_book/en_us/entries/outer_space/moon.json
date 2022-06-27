@@ -2,7 +2,7 @@
     "name": "The moon",
     "icon": "beyond_earth:/textures/sky/moon.png",
     "category": "beyond_earth:space",
-    "sortnum": "1",
+    "sortnum": 1,
     "pages": [
         {
             "type": "patchouli:text",

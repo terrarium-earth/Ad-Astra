@@ -2,7 +2,7 @@
     "name": "Calorite",
     "icon": "beyond_earth:calorite_ingot",
     "category": "beyond_earth:resources",
-    "sortnum": "4",
+    "sortnum": 4,
     "pages": [
         {
             "type": "patchouli:text",

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "calorite_ingot",
+  "key": {
+    "#": {
+      "item": "beyond_earth:calorite_nugget"
+    }
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "item": "beyond_earth:calorite_ingot"
+  }
+}

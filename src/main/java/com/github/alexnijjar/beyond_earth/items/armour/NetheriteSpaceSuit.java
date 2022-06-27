@@ -7,7 +7,7 @@ import net.minecraft.item.ArmorMaterial;
 
 public class NetheriteSpaceSuit extends SpaceSuit {
 
-    public static final long TANK_SIZE = 2 * BeyondEarth.CONFIG.mainConfig.netheriteSpaceSuitTankSize;
+    public static final long TANK_SIZE = BeyondEarth.CONFIG.mainConfig.netheriteSpaceSuitTankSize;
 
     public NetheriteSpaceSuit(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
         super(material, slot, settings);

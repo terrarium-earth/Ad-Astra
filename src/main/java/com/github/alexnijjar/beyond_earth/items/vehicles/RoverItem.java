@@ -35,7 +35,7 @@ public class RoverItem extends VehicleItem {
                     for (int z = pos.getZ() - 1; z < pos.getZ() + 2; z++) {
                         BlockPos testBlockPos = new BlockPos(x, y, z);
                         BlockState testBlock = world.getBlockState(testBlockPos);
-                        if (!testBlock.isAir() && !(testBlock.getBlock() instanceof FluidBlock)) {
+                        if (testBlock.isFullCube(world, testBlockPos) && !(testBlock.getBlock() instanceof FluidBlock)) {
                             return ActionResult.FAIL;
                         }
                     }

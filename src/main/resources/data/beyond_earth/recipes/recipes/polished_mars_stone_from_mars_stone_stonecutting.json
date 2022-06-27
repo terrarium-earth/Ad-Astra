@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "beyond_earth:mars_stone"
+  },
+  "result": "beyond_earth:polished_mars_stone"
+}

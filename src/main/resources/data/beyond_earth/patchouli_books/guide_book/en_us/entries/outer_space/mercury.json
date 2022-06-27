@@ -2,7 +2,7 @@
     "name": "Mercury",
     "icon": "beyond_earth:/textures/sky/mercury.png",
     "category": "beyond_earth:space",
-    "sortnum": "4",
+    "sortnum": 4,
     "pages": [
         {
             "type": "patchouli:text",

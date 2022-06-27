@@ -1,5 +1,8 @@
 package com.github.alexnijjar.beyond_earth.registry;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.github.alexnijjar.beyond_earth.blocks.coal_torches.CoalLanternBlock;
 import com.github.alexnijjar.beyond_earth.blocks.coal_torches.CoalTorchBlock;
 import com.github.alexnijjar.beyond_earth.blocks.coal_torches.WallCoalTorchBlock;
@@ -30,8 +33,10 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.Registry;
 
-public class ModBlocks {
+public interface ModBlocks {
 
+        public static Set<Block> blocks = new HashSet<>();
+        
         // Rocket Launch Pad.
         public static final Block ROCKET_LAUNCH_PAD = register("rocket_launch_pad", new RocketLaunchPad(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
 
@@ -61,7 +66,7 @@ public class ModBlocks {
 
         // Torch blocks.
         public static final Block COAL_TORCH = register("coal_torch", new CoalTorchBlock(FabricBlockSettings.of(Material.DECORATION).noCollision().breakInstantly().sounds(BlockSoundGroup.WOOD)));
-        public static final Block WALL_COAL_TORCH = register("wall_coal_torch", new WallCoalTorchBlock(FabricBlockSettings.of(Material.DECORATION).noCollision().breakInstantly().sounds(BlockSoundGroup.WOOD)));
+        public static final Block WALL_COAL_TORCH = register("wall_coal_torch", new WallCoalTorchBlock(FabricBlockSettings.of(Material.DECORATION).noCollision().breakInstantly().sounds(BlockSoundGroup.WOOD)), true);
         public static final Block COAL_LANTERN = register("coal_lantern", new CoalLanternBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.LANTERN).strength(3.5f).nonOpaque()));
 
         // Machines.
@@ -196,7 +201,14 @@ public class ModBlocks {
         public static final Block GLACIO_LAPIS_ORE = register("glacio_lapis_ore", new OreBlock(FabricBlockSettings.copy(Blocks.IRON_ORE), UniformIntProvider.create(2, 5)));
 
         public static Block register(String id, Block block) {
+                return register(id, block, false);
+        }
+
+        public static Block register(String id, Block block, boolean exclude) {
                 Registry.register(Registry.BLOCK, new ModIdentifier(id), block);
+                if (!exclude) {
+                        blocks.add(block);
+                }
                 return block;
         }
 }

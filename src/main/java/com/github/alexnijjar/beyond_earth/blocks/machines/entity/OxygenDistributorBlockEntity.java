@@ -19,7 +19,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
@@ -162,7 +161,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
             }
         }
 
-        if (this.world instanceof ClientWorld world) {
+        if (this.world.isClient) {
             if (this.outputTank.amount > 0) {
                 if (clientOxygenFillCheckTicks >= UPDATE_OXYGEN_FILLER_TICKS) {
                     OxygenFillerAlgorithm floodFiller = new OxygenFillerAlgorithm(world, MAX_BLOCK_CHECKS);

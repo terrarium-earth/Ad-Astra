@@ -1,15 +1,15 @@
 {
     "name": "Credits",
-    "icon": "beyond_earth:/textures/painting/painting_galaxy.png",
+    "icon": "beyond_earth:/textures/painting/earth.png",
     "category": "beyond_earth:getting_started",
-    "sortnum": "2",
+    "sortnum": 2,
     "pages": [
         {
             "type": "patchouli:link",
             "title": "Bonus",
             "item": "minecraft:writable_book",
             "text": "Thank you for playing Beyond Earth!$(br2)This mod is currently a work in progress and has many new and exciting features planned!$(br)Feel free to check the CurseForge or Modrinth page to see what new updates are coming out.",
-            "url": "https://www.curseforge.com/minecraft/mc-mods/beyond-earth",
+            "url": "https://modrinth.com/mod/beyond-earth-fabric",
             "link_text": "Mod Page"
         },
         {
