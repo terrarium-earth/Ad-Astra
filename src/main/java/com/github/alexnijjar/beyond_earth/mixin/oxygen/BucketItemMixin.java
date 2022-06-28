@@ -33,7 +33,7 @@ public class BucketItemMixin {
 
     // Evaporate water in a no-oxygen environment. Water is not evaporated in a oxygen distributor.
     @Inject(at = @At(value = "HEAD"), method = "placeFluid", cancellable = true)
-    public void placeFluid(PlayerEntity player, World world, BlockPos pos, BlockHitResult hitResult, CallbackInfoReturnable<Boolean> info) {
+    public void placeFluid(PlayerEntity player, World world, BlockPos pos, BlockHitResult hitResult, CallbackInfoReturnable<Boolean> ci) {
         if (!BeyondEarth.CONFIG.mainConfig.doOxygen) {
             return;
         }
@@ -49,13 +49,13 @@ public class BucketItemMixin {
                 for (int l = 0; l < 8; ++l) {
                     world.addParticle(ParticleTypes.LARGE_SMOKE, (double) i + Math.random(), (double) j + Math.random(), (double) k + Math.random(), 0.0, 0.0, 0.0);
                 }
-                info.setReturnValue(true);
+                ci.setReturnValue(true);
             } else if (world.getDimension().ultrawarm()) {
-                info.cancel();
+                ci.cancel();
 
                 boolean bl2;
                 if (!(bucketItem.fluid instanceof FlowableFluid)) {
-                    info.setReturnValue(false);
+                    ci.setReturnValue(false);
                 }
                 BlockState blockState = world.getBlockState(pos);
                 Block block = blockState.getBlock();
@@ -63,14 +63,14 @@ public class BucketItemMixin {
                 boolean bl = blockState.canBucketPlace(bucketItem.fluid);
                 bl2 = blockState.isAir() || bl || block instanceof FluidFillable && ((FluidFillable) ((Object) block)).canFillWithFluid(world, pos, blockState, bucketItem.fluid);
                 if (!bl2) {
-                    info.setReturnValue(hitResult != null && bucketItem.placeFluid(player, world, hitResult.getBlockPos().offset(hitResult.getSide()), null));
+                    ci.setReturnValue(hitResult != null && bucketItem.placeFluid(player, world, hitResult.getBlockPos().offset(hitResult.getSide()), null));
                 }
                 if (block instanceof FluidFillable && bucketItem.fluid.equals(Fluids.WATER)) {
                     ((FluidFillable) ((Object) block)).tryFillWithFluid(world, pos, blockState, ((FlowableFluid) bucketItem.fluid).getStill(false));
                     SoundEvent soundEvent = bucketItem.fluid.isIn(FluidTags.LAVA) ? SoundEvents.ITEM_BUCKET_EMPTY_LAVA : SoundEvents.ITEM_BUCKET_EMPTY;
                     world.playSound(player, pos, soundEvent, SoundCategory.BLOCKS, 1.0f, 1.0f);
                     world.emitGameEvent((Entity) player, GameEvent.FLUID_PLACE, pos);
-                    info.setReturnValue(true);
+                    ci.setReturnValue(true);
                 }
                 if (!world.isClient && bl && !material.isLiquid()) {
                     world.breakBlock(pos, true);
@@ -79,10 +79,10 @@ public class BucketItemMixin {
                     SoundEvent soundEvent = bucketItem.fluid.isIn(FluidTags.LAVA) ? SoundEvents.ITEM_BUCKET_EMPTY_LAVA : SoundEvents.ITEM_BUCKET_EMPTY;
                     world.playSound(player, pos, soundEvent, SoundCategory.BLOCKS, 1.0f, 1.0f);
                     world.emitGameEvent((Entity) player, GameEvent.FLUID_PLACE, pos);
-                    info.setReturnValue(true);
+                    ci.setReturnValue(true);
                 }
 
-                info.setReturnValue(true);
+                ci.setReturnValue(true);
             }
         }
     }

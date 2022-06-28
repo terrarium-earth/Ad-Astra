@@ -24,7 +24,7 @@ import net.minecraft.util.math.BlockPos;
 public class SoundManagerMixin {
 
     @Inject(method = "Lnet/minecraft/client/sound/SoundManager;play(Lnet/minecraft/client/sound/SoundInstance;)V", at = @At("HEAD"), cancellable = true)
-    public void play(SoundInstance sound, CallbackInfo info) {
+    public void play(SoundInstance sound, CallbackInfo ci) {
 
         if (sound.getCategory().equals(SoundCategory.MASTER)) {
             return;
@@ -43,7 +43,7 @@ public class SoundManagerMixin {
 
         MinecraftClient client = MinecraftClient.getInstance();
         if (client.world != null && ModUtils.isOrbitWorld(client.world) && !ModUtils.worldHasOxygen(client.world, new BlockPos(sound.getX(), sound.getY(), sound.getZ()))) {
-            info.cancel();
+            ci.cancel();
             SoundManager manager = (SoundManager) (Object) (this);
             SoundInstance newSound = getSpaceSoundInstance(sound);
             manager.soundSystem.play(newSound);
@@ -51,7 +51,7 @@ public class SoundManagerMixin {
     }
 
     @Inject(method = "Lnet/minecraft/client/sound/SoundManager;play(Lnet/minecraft/client/sound/SoundInstance;I)V", at = @At("HEAD"), cancellable = true)
-    public void play(SoundInstance sound, int delay, CallbackInfo info) {
+    public void play(SoundInstance sound, int delay, CallbackInfo ci) {
 
         if (sound.getCategory().equals(SoundCategory.MASTER)) {
             return;
@@ -73,7 +73,7 @@ public class SoundManagerMixin {
         }
         MinecraftClient client = MinecraftClient.getInstance();
         if (client.world != null && ModUtils.isOrbitWorld(client.world) && !ModUtils.worldHasOxygen(client.world, new BlockPos(sound.getX(), sound.getY(), sound.getZ()))) {
-            info.cancel();
+            ci.cancel();
             SoundManager manager = (SoundManager) (Object) (this);
             SoundInstance newSound = getSpaceSoundInstance(sound);
             manager.soundSystem.play(newSound, delay);

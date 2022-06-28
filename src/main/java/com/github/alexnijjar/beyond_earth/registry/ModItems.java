@@ -191,10 +191,14 @@ public interface ModItems {
         public static final SpaceSuit SPACE_BOOTS = register("space_boots", new SpaceSuit(ModArmour.SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.FEET, new FabricItemSettings().group(ITEM_GROUP_NORMAL)));
 
         // Netherite Spacesuit.
-        public static final NetheriteSpaceSuit NETHERITE_SPACE_HELMET = register("netherite_space_helmet", new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.HEAD, new FabricItemSettings().group(ITEM_GROUP_NORMAL).fireproof()));
-        public static final NetheriteSpaceSuit NETHERITE_SPACE_SUIT = register("netherite_space_suit", new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.CHEST, new FabricItemSettings().group(ITEM_GROUP_NORMAL).fireproof()));
-        public static final NetheriteSpaceSuit NETHERITE_SPACE_PANTS = register("netherite_space_pants", new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.LEGS, new FabricItemSettings().group(ITEM_GROUP_NORMAL).fireproof()));
-        public static final NetheriteSpaceSuit NETHERITE_SPACE_BOOTS = register("netherite_space_boots", new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.FEET, new FabricItemSettings().group(ITEM_GROUP_NORMAL).fireproof()));
+        public static final NetheriteSpaceSuit NETHERITE_SPACE_HELMET = register("netherite_space_helmet",
+                        new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.HEAD, new FabricItemSettings().group(ITEM_GROUP_NORMAL).fireproof()));
+        public static final NetheriteSpaceSuit NETHERITE_SPACE_SUIT = register("netherite_space_suit",
+                        new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.CHEST, new FabricItemSettings().group(ITEM_GROUP_NORMAL).fireproof()));
+        public static final NetheriteSpaceSuit NETHERITE_SPACE_PANTS = register("netherite_space_pants",
+                        new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.LEGS, new FabricItemSettings().group(ITEM_GROUP_NORMAL).fireproof()));
+        public static final NetheriteSpaceSuit NETHERITE_SPACE_BOOTS = register("netherite_space_boots",
+                        new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.FEET, new FabricItemSettings().group(ITEM_GROUP_NORMAL).fireproof()));
 
         // Jet Suit.
         public static final JetSuit JET_SUIT_SPACE_HELMET = register("jet_suit_space_helmet", new JetSuit(ModArmour.JET_SUIT_ARMOUR_MATERIAL, EquipmentSlot.HEAD, new FabricItemSettings().group(ITEM_GROUP_NORMAL).fireproof()));
@@ -306,13 +310,18 @@ public interface ModItems {
         public static final BlockItem RAW_OSTRUM_BLOCK = registerBlockItem(ModBlocks.RAW_OSTRUM_BLOCK);
         public static final BlockItem RAW_CALORITE_BLOCK = registerBlockItem(ModBlocks.RAW_CALORITE_BLOCK);
         public static final BlockItem IRON_PLATING_BLOCK = registerBlockItem(ModBlocks.IRON_PLATING_BLOCK);
-        public static final BlockItem RUSTED_IRON_PILLAR_BLOCK = registerBlockItem(ModBlocks.RUSTED_IRON_PILLAR_BLOCK);
-        public static final BlockItem RUSTED_IRON_PLATING_BLOCK = registerBlockItem(ModBlocks.RUSTED_IRON_PLATING_BLOCK);
+        public static final BlockItem IRON_PILLAR_BLOCK = registerBlockItem(ModBlocks.IRON_PILLAR_BLOCK);
+        public static final BlockItem DESH_PLATING_BLOCK = registerBlockItem(ModBlocks.DESH_PLATING_BLOCK);
         public static final BlockItem BLUE_IRON_PLATING_BLOCK = registerBlockItem(ModBlocks.BLUE_IRON_PLATING_BLOCK);
+        public static final BlockItem DESH_PILLAR_BLOCK = registerBlockItem(ModBlocks.DESH_PILLAR_BLOCK);
+        public static final BlockItem OSTRUM_PLATING_BLOCK = registerBlockItem(ModBlocks.OSTRUM_PLATING_BLOCK);
+        public static final BlockItem OSTRUM_PILLAR_BLOCK = registerBlockItem(ModBlocks.OSTRUM_PILLAR_BLOCK);
+        public static final BlockItem CALORITE_PLATING_BLOCK = registerBlockItem(ModBlocks.CALORITE_PLATING_BLOCK);
+        public static final BlockItem CALORITE_PILLAR_BLOCK = registerBlockItem(ModBlocks.CALORITE_PILLAR_BLOCK);
         public static final BlockItem INFERNAL_SPIRE_BLOCK = registerBlockItem(ModBlocks.INFERNAL_SPIRE_BLOCK);
         public static final BlockItem IRON_MARK_BLOCK = registerBlockItem(ModBlocks.IRON_MARK_BLOCK);
         public static final BlockItem SKY_STONE = registerBlockItem(ModBlocks.SKY_STONE);
-
+        
         public static final BlockItem MOON_SAND = registerBlockItem(ModBlocks.MOON_SAND);
         public static final BlockItem MOON_STONE = registerBlockItem(ModBlocks.MOON_STONE);
         public static final BlockItem MOON_STONE_BRICKS = registerBlockItem(ModBlocks.MOON_STONE_BRICKS);

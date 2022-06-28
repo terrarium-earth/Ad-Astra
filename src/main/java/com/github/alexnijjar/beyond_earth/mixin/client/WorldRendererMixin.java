@@ -43,20 +43,20 @@ public abstract class WorldRendererMixin {
 
     // Cancel the portal sound when the player falls out of orbit.
     @Inject(method = "processWorldEvent", at = @At("HEAD"), cancellable = true)
-    public void processWorldEvent(int eventId, BlockPos pos, int data, CallbackInfo info) {
+    public void processWorldEvent(int eventId, BlockPos pos, int data, CallbackInfo ci) {
         if (eventId == WorldEvents.TRAVEL_THROUGH_PORTAL) {
             MinecraftClient client = MinecraftClient.getInstance();
             ClientPlayerEntity player = client.player;
             // Don't player the portal sound if the player teleported to the new world.
             if (((int) player.getPos().getY()) == ModUtils.getSpawnStart(player.world)) {
-                info.cancel();
+                ci.cancel();
             }
         }
     }
 
     // Venus rain.
     @Inject(method = "tickRainSplashing", at = @At("HEAD"), cancellable = true)
-    public void tickRainSplashing(Camera camera, CallbackInfo info) {
+    public void tickRainSplashing(Camera camera, CallbackInfo ci) {
         WorldRendererAccessor worldRenderer = (WorldRendererAccessor) ((WorldRenderer) (Object) this);
 
         MinecraftClient client = MinecraftClient.getInstance();
@@ -103,7 +103,7 @@ public abstract class WorldRendererMixin {
                         client.world.playSound((BlockPos) blockPos2, SoundEvents.WEATHER_RAIN, SoundCategory.WEATHER, 0.2f, 1.0f, false);
                     }
                 }
-                info.cancel();
+                ci.cancel();
                 break;
             }
         }

@@ -2,7 +2,6 @@ package com.github.alexnijjar.beyond_earth.registry;
 
 import com.github.alexnijjar.beyond_earth.blocks.flags.FlagBlockEntity;
 import com.github.alexnijjar.beyond_earth.blocks.globes.GlobeBlockEntity;
-import com.github.alexnijjar.beyond_earth.blocks.launch_pad.RocketLaunchPadEntity;
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.AbstractMachineBlockEntity;
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.CoalGeneratorBlockEntity;
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.CompressorBlockEntity;
@@ -31,8 +30,6 @@ public class ModBlockEntities {
         // Globe Block Entity
         public static BlockEntityType<GlobeBlockEntity> GLOBE_BLOCK_ENTITY;
 
-        public static BlockEntityType<RocketLaunchPadEntity> ROCKET_LAUNCH_PAD_ENTITY;
-
         // Machine Block Entity.
         public static BlockEntityType<FuelRefineryBlockEntity> FUEL_REFINERY_ENTITY;
         public static BlockEntityType<CompressorBlockEntity> COMPRESSOR_ENTITY;
@@ -49,9 +46,6 @@ public class ModBlockEntities {
                                 ModBlocks.FLAG_MAGENTA, ModBlocks.FLAG_ORANGE, ModBlocks.FLAG_PINK, ModBlocks.FLAG_PURPLE, ModBlocks.FLAG_RED, ModBlocks.FLAG_YELLOW);
 
                 GLOBE_BLOCK_ENTITY = register("globe_entity", GlobeBlockEntity::new, ModBlocks.EARTH_GLOBE, ModBlocks.MOON_GLOBE, ModBlocks.MARS_GLOBE, ModBlocks.MERCURY_GLOBE, ModBlocks.VENUS_GLOBE, ModBlocks.GLACIO_GLOBE);
-
-                // Rocket Launch Pad.
-                ROCKET_LAUNCH_PAD_ENTITY = register("rocket_launch_pad_entity", RocketLaunchPadEntity::new, ModBlocks.ROCKET_LAUNCH_PAD);
 
                 // Machine Block Entity.
                 FUEL_REFINERY_ENTITY = register("fuel_refinery_entity", FuelRefineryBlockEntity::new, ModBlocks.FUEL_REFINERY);

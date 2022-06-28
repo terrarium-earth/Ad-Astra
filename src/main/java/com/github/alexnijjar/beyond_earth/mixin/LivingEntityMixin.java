@@ -49,36 +49,36 @@ public abstract class LivingEntityMixin {
     }
 
     @Inject(method = "handleFallDamage", at = @At("HEAD"), cancellable = true)
-    public void handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource, CallbackInfoReturnable<Boolean> info) {
+    public void handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource, CallbackInfoReturnable<Boolean> ci) {
 
         LivingEntity entity = ((LivingEntity) (Object) this);
 
         if (entity.getVehicle() instanceof VehicleEntity vehicle) {
             if (!vehicle.canRiderTakeFallDamage()) {
-                info.setReturnValue(false);
+                ci.setReturnValue(false);
             }
         }
 
         if (fallDistance <= 3 / ModUtils.getPlanetGravity(entity.world)) {
-            info.setReturnValue(false);
+            ci.setReturnValue(false);
         }
     }
 
     @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
-    public void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> info) {
+    public void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> ci) {
         LivingEntity entity = ((LivingEntity) (Object) this);
 
         if (source.isFire() || source.equals(DamageSource.HOT_FLOOR)) {
             if ((entity.isOnFire() || source.equals(DamageSource.HOT_FLOOR))) {
                 if (ModUtils.checkTag(entity, ModTags.FIRE_IMMUNE)) {
-                    info.setReturnValue(false);
+                    ci.setReturnValue(false);
                 }
             }
         }
     }
 
     @Inject(method = "baseTick", at = @At("TAIL"))
-    public void baseTick(CallbackInfo info) {
+    public void baseTick(CallbackInfo ci) {
 
         LivingEntity entity = ((LivingEntity) (Object) this);
 

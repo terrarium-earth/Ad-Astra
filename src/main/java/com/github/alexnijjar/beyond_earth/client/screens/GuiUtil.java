@@ -80,8 +80,7 @@ public class GuiUtil {
     }
 
     public static void drawAccentingFluidTank(MatrixStack matrices, int x, int y, double ratio, FluidVariant fluid) {
-        ratio = 1.0 - ratio;
-        drawFluidTank(matrices, x, y, ratio, fluid);
+        drawFluidTank(matrices, x, y, 1.0 - ratio, fluid);
     }
 
     private static void drawFluid(MatrixStack matrices, int x, int y, double ratio, FluidVariant fluid) {
@@ -91,24 +90,24 @@ public class GuiUtil {
         }
 
         Sprite sprite = FluidVariantRendering.getSprite(fluid);
-        int color = FluidVariantRendering.getColor(fluid);
-
+        int colour = FluidVariantRendering.getColor(fluid);
         int spriteHeight = sprite.getHeight();
 
         // From Tech Reborn fluid rendering.
-        RenderSystem.setShaderColor((color >> 16 & 255) / 255.0f, (float) (color >> 8 & 255) / 255.0f, (float) (color & 255) / 255.0f, 1.0f);
+        RenderSystem.setShaderColor((colour >> 16 & 255) / 255.0f, (float) (colour >> 8 & 255) / 255.0f, (float) (colour & 255) / 255.0f, 1.0f);
 
         MinecraftClient client = MinecraftClient.getInstance();
         int scale = (int) client.getWindow().getScaleFactor();
-        int maxY = (client.getWindow().getHeight() - ((FLUID_TANK_HEIGHT + y) * scale));
+        int scissorY = (client.getWindow().getHeight() - ((FLUID_TANK_HEIGHT + y) * scale));
 
         RenderSystem.setShaderTexture(0, PlayerScreenHandler.BLOCK_ATLAS_TEXTURE);
 
         // First, the sprite is rendered in full, and then it is masked based on how full the fluid tank is.
-        RenderSystem.enableScissor(x * scale, maxY, FLUID_TANK_WIDTH * scale, (int) ((FLUID_TANK_HEIGHT - 1) * scale * ratio));
+        RenderSystem.enableScissor(x * scale, scissorY, FLUID_TANK_WIDTH * scale, (int) ((FLUID_TANK_HEIGHT - 1) * scale * ratio));
         for (int i = 1; i < 4; i++) {
             DrawableHelper.drawSprite(matrices, x + 1, FLUID_TANK_HEIGHT + y - (spriteHeight * i) - 1, 0, FLUID_TANK_WIDTH - 2, spriteHeight, sprite);
         }
+        
         RenderSystem.disableScissor();
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
     }

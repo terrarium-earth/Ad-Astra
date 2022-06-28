@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "desh_plating",
+  "key": {
+    "#": {
+      "item": "beyond_earth:iron_plating_block"
+    },
+    "|": {
+      "tag": "c:compressed_ostrum"
+    }
+  },
+  "pattern": [
+    "###",
+    "#|#",
+    "###"
+  ],
+  "result": {
+    "count": 8,
+    "item": "beyond_earth:ostrum_plating_block"
+  }
+}

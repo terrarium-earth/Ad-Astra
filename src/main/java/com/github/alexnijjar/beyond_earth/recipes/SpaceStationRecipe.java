@@ -32,7 +32,6 @@ public class SpaceStationRecipe extends ModRecipe {
 
         @Override
         public SpaceStationRecipe read(Identifier id, JsonObject json) {
-
             List<Ingredient> ingredients = new LinkedList<>();
             List<Integer> stackCounts = new LinkedList<>();
             json.getAsJsonArray("ingredients").forEach(element -> {
@@ -46,7 +45,6 @@ public class SpaceStationRecipe extends ModRecipe {
 
         @Override
         public SpaceStationRecipe read(Identifier id, PacketByteBuf buf) {
-
             List<Ingredient> ingredients = buf.readList(buf2 -> {
                 return Ingredient.fromPacket(buf2);
             });

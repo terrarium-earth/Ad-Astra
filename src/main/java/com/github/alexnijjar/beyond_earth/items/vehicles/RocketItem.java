@@ -46,7 +46,7 @@ public class RocketItem<T extends RocketEntity> extends VehicleItem {
             BlockState state = world.getBlockState(pos);
             PlayerEntity player = context.getPlayer();
 
-            // Check if the block can be spawned in a 3x8x3 radius.
+            // Check if the block can be spawned in a 3x8x3 radius
             for (int x = pos.getX() - 1; x < pos.getX() + 2; x++) {
                 for (int y = pos.getY() + 1; y < pos.getY() + 9; y++) {
                     for (int z = pos.getZ() - 1; z < pos.getZ() + 2; z++) {
@@ -84,7 +84,7 @@ public class RocketItem<T extends RocketEntity> extends VehicleItem {
 
                         if (rocketEntity != null) {
 
-                            // Check if a rocket is already placed on the pad.
+                            // Check if a rocket is already placed on the pad
                             Box scanAbove = new Box(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
                             List<RocketEntity> entities = ((ServerWorld) world).getEntitiesByClass(RocketEntity.class, scanAbove, entity -> true);
                             if (!entities.isEmpty()) {

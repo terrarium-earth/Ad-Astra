@@ -29,6 +29,7 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
     public static final long TANK_SIZE = BeyondEarth.CONFIG.mainConfig.jetSuitTankSize;
     public static final double SPEED = BeyondEarth.CONFIG.mainConfig.jetSuitSpeed;
     public static final double UPWARDS_SPEED = BeyondEarth.CONFIG.mainConfig.jetSuitUpwardsSpeed;
+    public static final long JET_SUIT_ENERGY_PER_TICK = BeyondEarth.CONFIG.mainConfig.jetSuitEnergyPerTick;
     public boolean isFallFlying;
 
     public JetSuit(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
@@ -80,16 +81,17 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
             } else {
                 if (player.isFallFlying()) {
                     player.stopFallFlying();
+                    if (!player.isCreative()) {
+                    }
                 }
             }
 
             this.spawnParticles(player, stack);
         }
-
     }
 
     public void hover(PlayerEntity player, ItemStack stack) {
-        if (!this.tryUseEnergy(stack, 12)) {
+        if (!this.tryUseEnergy(stack, JET_SUIT_ENERGY_PER_TICK)) {
             this.setStoredEnergy(stack, 0);
         }
         isFallFlying = false;
@@ -102,7 +104,7 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
     }
 
     public void fallFly(PlayerEntity player, ItemStack stack) {
-        if (!this.tryUseEnergy(stack, 24)) {
+        if (!this.tryUseEnergy(stack, JET_SUIT_ENERGY_PER_TICK * 2)) {
             this.setStoredEnergy(stack, 0);
         }
         isFallFlying = true;

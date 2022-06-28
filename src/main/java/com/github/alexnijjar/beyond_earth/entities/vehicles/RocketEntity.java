@@ -193,9 +193,6 @@ public class RocketEntity extends VehicleEntity {
                     if (this.world instanceof ServerWorld serverWorld) {
                         stopRocketSoundForRider((ServerPlayerEntity) player);
                     }
-                    if (!player.isCreative()) {
-                        player.getAbilities().allowFlying = false;
-                    }
                 }
             }
         });

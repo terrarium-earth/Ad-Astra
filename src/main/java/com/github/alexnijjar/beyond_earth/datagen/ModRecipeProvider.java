@@ -112,7 +112,10 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		offerPillarRecipe(exporter, VENUS_PILLAR, VENUS_STONE_BRICKS);
 		offerPillarRecipe(exporter, MERCURY_PILLAR, MERCURY_STONE_BRICKS);
 		offerPillarRecipe(exporter, GLACIO_PILLAR, GLACIO_STONE_BRICKS);
-		offerPillarRecipe(exporter, RUSTED_IRON_PILLAR_BLOCK, RUSTED_IRON_PLATING_BLOCK);
+		offerPillarRecipe(exporter, IRON_PILLAR_BLOCK, IRON_PLATING_BLOCK);
+		offerPillarRecipe(exporter, DESH_PILLAR_BLOCK, DESH_PLATING_BLOCK);
+		offerPillarRecipe(exporter, OSTRUM_PILLAR_BLOCK, OSTRUM_PLATING_BLOCK);
+		offerPillarRecipe(exporter, CALORITE_PILLAR_BLOCK, CALORITE_PLATING_BLOCK);
 
 		// Compacting
 		offerReversibleCompactingRecipes(exporter, ModItems.STEEL_INGOT, STEEL_BLOCK);
@@ -165,9 +168,9 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		// Metals
 
 		offerQuadRecipe(exporter, IRON_PLATING_BLOCK, ModTags.IRON_PLATES);
-
-		ShapedRecipeJsonBuilder.create(RUSTED_IRON_PLATING_BLOCK, 8).input(Character.valueOf('#'), IRON_PLATING_BLOCK).input(Character.valueOf('|'), ModTags.DESH_PLATES).pattern("###").pattern("#|#").pattern("###").group("rusted_iron_plating")
-				.criterion(hasItem(IRON_PLATING_BLOCK), conditionsFromItem(IRON_PLATING_BLOCK)).offerTo(exporter);
+		offerPlatingRecipe(exporter, DESH_PLATING_BLOCK, ModTags.DESH_PLATES);
+		offerPlatingRecipe(exporter, OSTRUM_PLATING_BLOCK, ModTags.COMPRESSED_OSTRUM);
+		offerPlatingRecipe(exporter, CALORITE_PLATING_BLOCK, ModTags.COMPRESSED_CALORITE);
 
 		ShapedRecipeJsonBuilder.create(BLUE_IRON_PLATING_BLOCK, 6).input(Character.valueOf('#'), ModTags.IRON_PLATES).input(Character.valueOf('G'), Blocks.GLOWSTONE).input(Character.valueOf('B'), Items.BLUE_DYE).pattern("#B#").pattern("#G#").pattern("#B#")
 				.group("blue_iron_plating").criterion(hasItem(ModItems.IRON_PLATE), conditionsFromTag(ModTags.IRON_PLATES)).offerTo(exporter);
@@ -194,8 +197,8 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 				.criterion(hasItem(ModItems.IRON_PLATE), conditionsFromTag(ModTags.IRON_PLATES)).offerTo(exporter);
 
 		// Fuel Refinery
-		ShapedRecipeJsonBuilder.create(FUEL_REFINERY).input(Character.valueOf('#'), ModTags.COMPRESSED_STEEL).input(Character.valueOf('F'), Blocks.FURNACE).input(Character.valueOf('B'), Items.BUCKET).pattern("###").pattern("BFB").pattern("###")
-				.group(null).criterion(hasItem(ModItems.COMPRESSED_STEEL), conditionsFromTag(ModTags.COMPRESSED_STEEL)).offerTo(exporter);
+		ShapedRecipeJsonBuilder.create(FUEL_REFINERY).input(Character.valueOf('#'), ModTags.COMPRESSED_STEEL).input(Character.valueOf('F'), Blocks.FURNACE).input(Character.valueOf('B'), Items.BUCKET).pattern("###").pattern("BFB").pattern("###").group(null)
+				.criterion(hasItem(ModItems.COMPRESSED_STEEL), conditionsFromTag(ModTags.COMPRESSED_STEEL)).offerTo(exporter);
 
 		// Oxygen Loader
 		ShapedRecipeJsonBuilder.create(OXYGEN_LOADER).input(Character.valueOf('#'), ModTags.COMPRESSED_STEEL).input(Character.valueOf('T'), ModItems.OXYGEN_TANK).input(Character.valueOf('L'), Blocks.LIGHTNING_ROD)
@@ -230,8 +233,8 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		// Items
 
 		// Rover
-		ShapedRecipeJsonBuilder.create(ModItems.TIER_1_ROVER).input(Character.valueOf('#'), ModItems.WHEEL).input(Character.valueOf('S'), ModTags.STEEL_BLOCKS).input(Character.valueOf('|'), ModTags.IRON_RODS).input(Character.valueOf('D'), ModTags.DESH_BLOCKS)
-				.input(Character.valueOf('P'), ModItems.DESH_PLATE).input(Character.valueOf('E'), ModItems.DESH_ENGINE).pattern("D |").pattern("SDE").pattern("#P#").group(null)
+		ShapedRecipeJsonBuilder.create(ModItems.TIER_1_ROVER).input(Character.valueOf('#'), ModItems.WHEEL).input(Character.valueOf('S'), ModTags.STEEL_BLOCKS).input(Character.valueOf('|'), ModTags.IRON_RODS)
+				.input(Character.valueOf('D'), ModTags.DESH_BLOCKS).input(Character.valueOf('P'), ModItems.DESH_PLATE).input(Character.valueOf('E'), ModItems.DESH_ENGINE).pattern("D |").pattern("SDE").pattern("#P#").group(null)
 				.criterion(hasItem(ModItems.COMPRESSED_DESH), conditionsFromTag(ModTags.COMPRESSED_DESH)).offerTo(exporter);
 
 		// Oxygen Tank
@@ -354,6 +357,11 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 
 	public static void offerQuadRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, TagKey<Item> input) {
 		RecipeProvider.createCondensingRecipe(output, Ingredient.fromTag(input)).criterion("item", conditionsFromTag(input)).offerTo(exporter);
+	}
+
+	public static void offerPlatingRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, TagKey<Item> input) {
+		ShapedRecipeJsonBuilder.create(output, 8).input(Character.valueOf('#'), IRON_PLATING_BLOCK).input(Character.valueOf('|'), input).pattern("###").pattern("#|#").pattern("###").group("desh_plating")
+				.criterion(hasItem(IRON_PLATING_BLOCK), conditionsFromTag(input)).offerTo(exporter);
 	}
 
 	public static void offerCustomSlabRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, ItemConvertible input) {

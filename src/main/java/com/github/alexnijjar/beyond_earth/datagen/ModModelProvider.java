@@ -63,7 +63,7 @@ public class ModModelProvider extends FabricModelProvider implements ModBlocks {
         blockStateModelGenerator.registerSimpleCubeAll(RAW_OSTRUM_BLOCK);
         blockStateModelGenerator.registerSimpleCubeAll(RAW_CALORITE_BLOCK);
         blockStateModelGenerator.registerSimpleCubeAll(IRON_PLATING_BLOCK);
-        blockStateModelGenerator.registerSimpleCubeAll(RUSTED_IRON_PLATING_BLOCK);
+        blockStateModelGenerator.registerSimpleCubeAll(DESH_PLATING_BLOCK);
         blockStateModelGenerator.registerSimpleCubeAll(SKY_STONE);
         blockStateModelGenerator.registerSimpleCubeAll(MOON_STONE);
         blockStateModelGenerator.registerSimpleCubeAll(CRACKED_MOON_STONE_BRICKS);

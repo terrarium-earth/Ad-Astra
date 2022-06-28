@@ -21,7 +21,9 @@
     "gravity.FishingBobberEntityMixin",
     "gravity.PersistentProjectileEntityMixin",
     "gravity.PotionEntityMixin",
-    "gravity.ThrownEntityMixin"
+    "gravity.ThrownEntityMixin",
+    "ServerPlayNetworkHandlerMixin",
+    "ServerPlayNetworkHandlerAccessor"
   ],
   "client": [
     "client.BipedEntityModelMixin",

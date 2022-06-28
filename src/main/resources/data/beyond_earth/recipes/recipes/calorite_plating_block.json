@@ -1,12 +1,12 @@
 {
   "type": "minecraft:crafting_shaped",
-  "group": "rusted_iron_plating",
+  "group": "desh_plating",
   "key": {
     "#": {
       "item": "beyond_earth:iron_plating_block"
     },
     "|": {
-      "tag": "c:desh_plates"
+      "tag": "c:compressed_calorite"
     }
   },
   "pattern": [
@@ -16,6 +16,6 @@
   ],
   "result": {
     "count": 8,
-    "item": "beyond_earth:rusted_iron_plating_block"
+    "item": "beyond_earth:calorite_plating_block"
   }
 }

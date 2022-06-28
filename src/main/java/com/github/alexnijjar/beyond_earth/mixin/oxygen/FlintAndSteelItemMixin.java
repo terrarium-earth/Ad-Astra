@@ -24,7 +24,7 @@ import net.minecraft.world.event.GameEvent;
 @Mixin(FlintAndSteelItem.class)
 public class FlintAndSteelItemMixin {
     @Inject(at = @At(value = "HEAD"), method = "useOnBlock", cancellable = true)
-    public void useOnBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> info) {
+    public void useOnBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> ci) {
         if (!BeyondEarth.CONFIG.mainConfig.doOxygen) {
             return;
         }
@@ -39,7 +39,7 @@ public class FlintAndSteelItemMixin {
                     if (player != null) {
                         context.getStack().damage(1, player, p -> p.sendToolBreakStatus(context.getHand()));
                     }
-                    info.setReturnValue(ActionResult.SUCCESS);
+                    ci.setReturnValue(ActionResult.SUCCESS);
                 }
             }
         }

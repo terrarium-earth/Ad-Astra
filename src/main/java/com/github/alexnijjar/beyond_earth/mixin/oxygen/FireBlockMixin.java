@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 public class FireBlockMixin {
 
     @Inject(at = @At(value = "HEAD"), method = "onBlockAdded")
-    public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify, CallbackInfo info) {
+    public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify, CallbackInfo ci) {
         if (!BeyondEarth.CONFIG.mainConfig.doOxygen) {
             return;
         }

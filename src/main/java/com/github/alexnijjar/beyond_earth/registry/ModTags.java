@@ -33,7 +33,7 @@ public class ModTags {
 	public static final TagKey<Item> STEEL_NUGGETS = TagKey.of(Registry.ITEM_KEY, new Identifier("c:steel_nuggets"));
 	
     public static final TagKey<Item> STEEL_BLOCKS = TagKey.of(Registry.ITEM_KEY, new Identifier("c:steel_blocks"));
-    public static final TagKey<Item> DESH_BLOCKS = TagKey.of(Registry.ITEM_KEY, new Identifier("c:steel_blocks"));
+    public static final TagKey<Item> DESH_BLOCKS = TagKey.of(Registry.ITEM_KEY, new Identifier("c:desh_blocks"));
     public static final TagKey<Item> OSTRUM_BLOCKS = TagKey.of(Registry.ITEM_KEY, new Identifier("c:ostrum_blocks"));
     public static final TagKey<Item> CALORITE_BLOCKS = TagKey.of(Registry.ITEM_KEY, new Identifier("c:calorite_blocks"));
 }

@@ -16,7 +16,7 @@ import net.minecraft.world.BlockView;
 public abstract class CameraMixin {
 
     @Inject(method = "update", at = @At("TAIL"), cancellable = true)
-    public void update(BlockView area, Entity focusedEntity, boolean thirdPerson, boolean inverseView, float tickDelta, CallbackInfo info) {
+    public void update(BlockView area, Entity focusedEntity, boolean thirdPerson, boolean inverseView, float tickDelta, CallbackInfo ci) {
         if (BeyondEarth.CONFIG.mainConfig.moveCameraInVehicle) {
             CameraInvoker camera = (CameraInvoker) ((Camera) (Object) this);
             if (thirdPerson && focusedEntity.getVehicle() instanceof VehicleEntity vehicle) {

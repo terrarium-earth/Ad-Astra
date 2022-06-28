@@ -13,9 +13,9 @@ import net.minecraft.entity.projectile.thrown.ThrownEntity;
 @Mixin(ThrownEntity.class)
 public abstract class ThrownEntityMixin {
     @Inject(method = "getGravity", at = @At("HEAD"), cancellable = true)
-    public void getGravity(CallbackInfoReturnable<Float> info) {
+    public void getGravity(CallbackInfoReturnable<Float> ci) {
         if (BeyondEarth.CONFIG.mainConfig.doEntityGravity) {
-            info.setReturnValue(ModUtils.getMixinGravity(0.03f, this));
+            ci.setReturnValue(ModUtils.getMixinGravity(0.03f, this));
         }
     }
 }

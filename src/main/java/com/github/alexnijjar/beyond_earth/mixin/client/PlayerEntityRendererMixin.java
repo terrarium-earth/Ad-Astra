@@ -30,21 +30,21 @@ import net.minecraft.util.math.Vec3f;
 public class PlayerEntityRendererMixin {
 
     @Inject(method = "renderRightArm", at = @At("HEAD"), cancellable = true)
-    public void renderRightArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, CallbackInfo info) {
+    public void renderRightArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, CallbackInfo ci) {
         if (player.getEquippedStack(EquipmentSlot.CHEST).getItem() instanceof SpaceSuit spaceSuit) {
-            info.cancel();
+            ci.cancel();
             this.renderArm(matrices, vertexConsumers, light, player, true);
         }
     }
 
     @Inject(method = "renderLeftArm", at = @At("HEAD"), cancellable = true)
-    public void renderLeftArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, CallbackInfo info) {
+    public void renderLeftArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, CallbackInfo ci) {
         if (player.getEquippedStack(EquipmentSlot.CHEST).getItem() instanceof SpaceSuit spaceSuit) {
-            info.cancel();
+            ci.cancel();
             this.renderArm(matrices, vertexConsumers, light, player, false);
         }
     }
-    
+
     // Render space suit arm in first person.
     private void renderArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, boolean right) {
         if (player.getEquippedStack(EquipmentSlot.CHEST).getItem() instanceof SpaceSuit spaceSuit) {
@@ -68,7 +68,7 @@ public class PlayerEntityRendererMixin {
 
             matrices.push();
             matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(4));
-            
+
             VertexConsumer vertex = AbstractSpaceSuitModel.getVertex(RenderLayer.getEntityCutout(texture), player.getEquippedStack(EquipmentSlot.CHEST).hasEnchantments(), MinecraftClient.getInstance());
             if (right) {
                 model.rightArm.render(matrices, vertex, light, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, 1.0f);

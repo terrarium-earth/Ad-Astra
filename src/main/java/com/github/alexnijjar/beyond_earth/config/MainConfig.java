@@ -12,6 +12,7 @@ public class MainConfig implements ConfigData {
     public double jetSuitSpeed = 0.8;
     @ConfigEntry.Gui.Tooltip(count = 1)
     public double jetSuitUpwardsSpeed = 0.5;
+    public long jetSuitEnergyPerTick = 28;
     @ConfigEntry.Gui.Tooltip(count = 2)
     public boolean doSpaceMuffler = true;
 
@@ -22,7 +23,7 @@ public class MainConfig implements ConfigData {
     public long netheriteSpaceSuitTankSize = FluidConstants.BUCKET * 2;
 
     public long jetSuitTankSize = FluidConstants.BUCKET * 4;
-    public long jetSuitMaxEnergy = 200000L;
+    public long jetSuitMaxEnergy = 600000L;
     public boolean spawnJetSuitParticles = true;
 
     @ConfigEntry.Gui.Tooltip(count = 1)
@@ -106,7 +107,7 @@ public class MainConfig implements ConfigData {
     public long waterPumpTransferPerTick = FluidConstants.BLOCK / 100;
     public boolean deleteWaterBelowWaterPump = true;
 
-    public int hammerDurability = 9;
+    public int hammerDurability = 64;
 
     @ConfigEntry.Gui.Tooltip(count = 2)
     public boolean moveCameraInVehicle = true;

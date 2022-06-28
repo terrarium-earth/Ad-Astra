@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
 
 public abstract class ModRecipe implements Recipe<Inventory>, Predicate<ItemStack> {
@@ -63,8 +64,12 @@ public abstract class ModRecipe implements Recipe<Inventory>, Predicate<ItemStac
         return this.id;
     }
 
-    public List<Ingredient> getInputs() {
-        return this.inputs;
+
+    @Override
+    public DefaultedList<Ingredient> getIngredients() {
+        DefaultedList<Ingredient> defaultedList = DefaultedList.of();
+        defaultedList.addAll(this.inputs);
+        return defaultedList;
     }
 
     public List<Integer> getStackCounts() {

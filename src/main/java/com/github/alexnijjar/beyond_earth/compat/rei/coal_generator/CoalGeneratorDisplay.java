@@ -17,7 +17,7 @@ public record CoalGeneratorDisplay(GeneratingRecipe recipe) implements Display {
 
     @Override
     public List<EntryIngredient> getInputEntries() {
-        return EntryIngredients.ofIngredients(recipe.getInputs());
+        return EntryIngredients.ofIngredients(recipe.getIngredients());
     }
 
     @Override

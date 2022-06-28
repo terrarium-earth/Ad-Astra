@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "ingredient": {
-    "item": "beyond_earth:rusted_iron_plating_block"
-  },
-  "result": "beyond_earth:rusted_iron_pillar_block"
-}

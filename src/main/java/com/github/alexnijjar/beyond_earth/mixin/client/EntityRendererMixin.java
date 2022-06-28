@@ -16,24 +16,24 @@ import net.minecraft.entity.Entity;
 public abstract class EntityRendererMixin {
 
     @Inject(method = "shouldRender", at = @At("HEAD"), cancellable = true)
-    public void shouldRender(Entity entity, Frustum frustum, double x, double y, double z, CallbackInfoReturnable<Boolean> info) {
-        
+    public void shouldRender(Entity entity, Frustum frustum, double x, double y, double z, CallbackInfoReturnable<Boolean> ci) {
+
         // Make rocket invisible.
         if (entity instanceof RocketEntity rocket) {
             if (rocket.getPhase() == 3) {
-                info.setReturnValue(false);
+                ci.setReturnValue(false);
             }
         }
-        
+
         if (entity.getVehicle() instanceof VehicleEntity vehicle) {
             if (!vehicle.shouldRenderPlayer()) {
-                info.setReturnValue(false);
+                ci.setReturnValue(false);
             }
 
             // Make player that is in the planet selection screen invisible.
             if (entity.getVehicle() instanceof RocketEntity rocket) {
                 if (rocket.getPhase() == 3) {
-                    info.setReturnValue(false);
+                    ci.setReturnValue(false);
                 }
             }
         }

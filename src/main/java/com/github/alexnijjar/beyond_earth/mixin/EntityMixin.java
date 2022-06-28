@@ -13,7 +13,7 @@ import net.minecraft.entity.Entity;
 public abstract class EntityMixin {
 
     @Inject(method = "baseTick", at = @At("TAIL"))
-    private void baseTick(CallbackInfo info) {
+    private void baseTick(CallbackInfo ci) {
         Entity entity = ((Entity) (Object) this);
 
         // Teleport the entity to the planet when they fall in the void while in an orbit dimension.

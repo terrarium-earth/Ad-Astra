@@ -86,7 +86,7 @@ public class ModUtils {
         if (entity.getWorld() instanceof ServerWorld entityWorld) {
             ServerWorld targetWorld = entityWorld.getServer().getWorld(world);
             Vec3d targetPosition = new Vec3d(entity.getX(), getSpawnStart(targetWorld), entity.getZ());
-            Set<Entity> entitiesToTeleport = new HashSet<>();
+            List<Entity> entitiesToTeleport = new LinkedList<>();
 
             if (entity instanceof PlayerEntity player) {
                 if (player.getVehicle() instanceof RocketEntity rocket) {

@@ -17,7 +17,7 @@ public record NasaWorkbenchDisplay(NasaWorkbenchRecipe recipe) implements Displa
 
     @Override
     public List<EntryIngredient> getInputEntries() {
-        return EntryIngredients.ofIngredients(recipe.getInputs());
+        return EntryIngredients.ofIngredients(recipe.getIngredients());
     }
 
     @Override

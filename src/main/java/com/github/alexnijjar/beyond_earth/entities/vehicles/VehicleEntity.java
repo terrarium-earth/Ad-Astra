@@ -17,7 +17,6 @@ import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
@@ -199,18 +198,6 @@ public abstract class VehicleEntity extends Entity {
         this.clientPitch = pitch;
     }
 
-    public Vec3d updatePassengerForDismount(LivingEntity passenger) {
-
-        if (passenger instanceof PlayerEntity player) {
-            if (!player.isCreative()) {
-                player.getAbilities().flying = false;
-                player.getAbilities().allowFlying = false;
-            }
-        }
-
-        return super.updatePassengerForDismount(passenger);
-    }
-
     @Override
     public ActionResult interact(PlayerEntity player, Hand hand) {
         if (player.shouldCancelInteraction()) {
@@ -222,7 +209,6 @@ public abstract class VehicleEntity extends Entity {
         if (!this.world.isClient) {
             player.setYaw(this.getYaw());
             player.setPitch(this.getPitch());
-            player.getAbilities().allowFlying = true;
             return player.startRiding(this) ? ActionResult.CONSUME : ActionResult.PASS;
         }
         return ActionResult.SUCCESS;

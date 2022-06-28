@@ -1,16 +1,10 @@
 package com.github.alexnijjar.beyond_earth.blocks.launch_pad;
 
-import org.jetbrains.annotations.Nullable;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.Waterloggable;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityTicker;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.state.StateManager;
@@ -27,7 +21,7 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 
 @SuppressWarnings("deprecation")
-public class RocketLaunchPad extends BlockWithEntity implements Waterloggable {
+public class RocketLaunchPad extends Block implements Waterloggable {
 
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     public static final BooleanProperty STAGE = Properties.LIT;
@@ -35,15 +29,6 @@ public class RocketLaunchPad extends BlockWithEntity implements Waterloggable {
     public RocketLaunchPad(Settings settings) {
         super(settings);
         this.setDefaultState(getDefaultState().with(WATERLOGGED, false).with(STAGE, false));
-    }
-
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return (entityWorld, pos, entityState, blockEntity) -> {
-			if (blockEntity instanceof RocketLaunchPadEntity launchPad) {
-				launchPad.tick();
-			}
-		};
     }
 
     @Override
@@ -75,6 +60,49 @@ public class RocketLaunchPad extends BlockWithEntity implements Waterloggable {
         builder.add(WATERLOGGED, STAGE);
     }
 
+    @Override
+    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
+        super.neighborUpdate(state, world, pos, sourceBlock, sourcePos, notify);
+        if (!world.isClient) {
+            boolean raise = checkInRadius(true, pos, world) && checkInRadius(false, pos, world);
+            world.setBlockState(pos, state.with(STAGE, raise));
+        }
+    }
+
+    @Override
+    public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
+        // Update all the neighbors in a 3x3 area.
+        if (!world.isClient) {
+            boolean raise = checkInRadius(true, pos, world) && checkInRadius(false, pos, world);
+            if (raise) {
+                world.setBlockState(pos, state.with(STAGE, raise));
+            } else {
+                world.updateNeighbor(pos.north().east(), this, pos);
+                world.updateNeighbor(pos.north().west(), this, pos);
+                world.updateNeighbor(pos.south().east(), this, pos);
+                world.updateNeighbor(pos.south().west(), this, pos);
+                for (Direction dir : Direction.values()) {
+                    world.updateNeighbor(pos.offset(dir), this, pos);
+                }
+            }
+        }
+        super.onBlockAdded(state, world, pos, oldState, notify);
+    }
+
+    @Override
+    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+        if (!world.isClient) {
+            for (Direction dir : Direction.values()) {
+                world.updateNeighbor(pos.offset(dir), this, pos);
+            }
+            world.updateNeighbor(pos.north().east(), this, pos);
+            world.updateNeighbor(pos.north().west(), this, pos);
+            world.updateNeighbor(pos.south().east(), this, pos);
+            world.updateNeighbor(pos.south().west(), this, pos);
+        }
+        super.onStateReplaced(state, world, pos, newState, moved);
+    }
+
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         return Block.hasTopRim(world, pos.down());
     }
@@ -87,9 +115,31 @@ public class RocketLaunchPad extends BlockWithEntity implements Waterloggable {
         return super.getFluidState(state);
     }
 
-    @Nullable
-    @Override
-    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new RocketLaunchPadEntity(pos, state);
+    private static boolean checkInRadius(boolean lookForPlatforms, BlockPos pos, World world) {
+        for (int i = 0; i < (lookForPlatforms ? 3 : 5); i++) {
+            for (int j = 0; j < (lookForPlatforms ? 3 : 5); j++) {
+                BlockPos padPos = new BlockPos(pos.getX() + i - (lookForPlatforms ? 1 : 2), pos.getY(), pos.getZ() + j - (lookForPlatforms ? 1 : 2));
+                BlockState state = world.getBlockState(padPos);
+                boolean isRocket = state.getBlock() instanceof RocketLaunchPad;
+
+                // Skip for self.
+                if (padPos.equals(pos)) {
+                    continue;
+                }
+
+                if (lookForPlatforms) {
+                    // Checks if every block in a 3x3 radius is a rocket launch pad.
+                    if (!isRocket) {
+                        return false;
+                    }
+                } else {
+                    // Checks if every block in a 5x5 radius is not a raised rocket launch pad.
+                    if (isRocket && state.get(RocketLaunchPad.STAGE).equals(true)) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 }

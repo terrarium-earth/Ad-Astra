@@ -63,7 +63,6 @@ public class SpacePaintingEntity extends PaintingEntity {
 			return Optional.empty();
 		}
 
-		System.out.println(optional.get());
 		((PaintingEntityInvoker) paintingEntity).invokeSetVariant(optional.get());
 		paintingEntity.setFacing(facing);
 		return Optional.of(paintingEntity);

@@ -182,7 +182,7 @@ public class SkyUtil {
             double d = random.nextFloat() * 2.0f - 1.0f;
             double e = random.nextFloat() * 2.0f - 1.0f;
             double f = random.nextFloat() * 2.0f - 1.0f;
-            double g = 0.15f + random.nextFloat() * 0.15;
+            double g = 0.15f + random.nextFloat() * 0.01;
             double h = d * d + e * e + f * f;
             if (!(h < 1.0) || !(h > 0.01))
                 continue;

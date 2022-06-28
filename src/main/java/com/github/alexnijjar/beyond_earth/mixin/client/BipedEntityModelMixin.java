@@ -19,7 +19,7 @@ import net.minecraft.item.Item;
 public abstract class BipedEntityModelMixin {
 
     @Inject(method = "setAngles", at = @At("HEAD"))
-    public void setAnglesHead(LivingEntity livingEntity, float f, float g, float h, float i, float j, CallbackInfo info) {
+    public void setAnglesHead(LivingEntity livingEntity, float f, float g, float h, float i, float j, CallbackInfo ci) {
         BipedEntityModel<PlayerEntity> model = ((BipedEntityModel<PlayerEntity>) (Object) this);
         if (livingEntity.getVehicle() instanceof VehicleEntity vehicle) {
             // Disable the sitting pose while standing in a rocket.
@@ -28,7 +28,7 @@ public abstract class BipedEntityModelMixin {
     }
 
     @Inject(method = "setAngles", at = @At("TAIL"))
-    public void setAnglesTail(LivingEntity livingEntity, float f, float g, float h, float i, float j, CallbackInfo info) {
+    public void setAnglesTail(LivingEntity livingEntity, float f, float g, float h, float i, float j, CallbackInfo ci) {
         BipedEntityModel<PlayerEntity> model = ((BipedEntityModel<PlayerEntity>) (Object) this);
         Item currentItem = livingEntity.getStackInHand(livingEntity.getActiveHand()).getItem();
 
@@ -37,7 +37,7 @@ public abstract class BipedEntityModelMixin {
             mainHand = false;
             currentItem = livingEntity.getOffHandStack().getItem();
         }
-        
+
         if (!livingEntity.getPose().equals(EntityPose.SWIMMING)) {
             if (currentItem instanceof VehicleItem) {
                 // Move the arms so that it looks like the player is holding the rocket in the air with both arms.

@@ -20,19 +20,19 @@ import net.minecraft.item.ItemStack;
 public abstract class PlayerEntityMixin {
 
     @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
-    public void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> info) {
+    public void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> ci) {
         if (BeyondEarth.CONFIG.mainConfig.netheriteSpaceSuitHasFireResistance) {
             PlayerEntity player = ((PlayerEntity) (Object) this);
             if (source.isFire() || source.equals(DamageSource.HOT_FLOOR)) {
                 if ((player.isOnFire() || source.equals(DamageSource.HOT_FLOOR)) && ModUtils.hasFullNetheriteSpaceSet(player)) {
-                    info.setReturnValue(false);
+                    ci.setReturnValue(false);
                 }
             }
         }
     }
 
     @Inject(method = "tick", at = @At("TAIL"))
-    public void tick(CallbackInfo info) {
+    public void tick(CallbackInfo ci) {
         if (BeyondEarth.CONFIG.mainConfig.enableJetSuitFlight) {
             PlayerEntity player = ((PlayerEntity) (Object) this);
             if (!player.hasVehicle()) {
@@ -51,14 +51,14 @@ public abstract class PlayerEntityMixin {
     }
 
     @Inject(method = "checkFallFlying", at = @At("HEAD"), cancellable = true)
-    public void checkFallFlying(CallbackInfoReturnable<Boolean> info) {
+    public void checkFallFlying(CallbackInfoReturnable<Boolean> ci) {
         if (BeyondEarth.CONFIG.mainConfig.enableJetSuitFlight) {
             PlayerEntity player = ((PlayerEntity) (Object) this);
             if (!player.hasVehicle()) {
                 if (ModUtils.hasFullJetSuitSet(player)) {
                     if (player.getEquippedStack(EquipmentSlot.CHEST).getItem() instanceof JetSuit jetSuit) {
                         if (ModKeyBindings.sprintKeyDown(player)) {
-                            info.setReturnValue(true);
+                            ci.setReturnValue(true);
                         }
                     }
                 }

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "beyond_earth:desh_plating_block"
+  },
+  "result": "beyond_earth:desh_pillar_block"
+}

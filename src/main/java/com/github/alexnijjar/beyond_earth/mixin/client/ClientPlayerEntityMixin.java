@@ -20,7 +20,7 @@ import net.minecraft.item.ItemStack;
 public class ClientPlayerEntityMixin {
 
     @Inject(method = "tick", at = @At("TAIL"))
-    public void baseTick(CallbackInfo info) {
+    public void baseTick(CallbackInfo ci) {
 
         ClientPlayerEntity player = ((ClientPlayerEntity) (Object) this);
         boolean disableOverlays = false;
