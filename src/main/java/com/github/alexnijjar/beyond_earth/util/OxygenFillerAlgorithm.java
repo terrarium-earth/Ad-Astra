@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.Set;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.DoorBlock;
 import net.minecraft.block.HorizontalConnectingBlock;
 import net.minecraft.block.TrapdoorBlock;
@@ -67,7 +68,7 @@ public class OxygenFillerAlgorithm {
 
             // Prevent oxygen from escaping from glass panes.
             if (state.getBlock() instanceof HorizontalConnectingBlock) {
-                if (!state.isOpaque()) {
+                if (!state.isOpaque() && !state.getBlock().equals(Blocks.IRON_BARS)) {
                     continue;
                 }
             }

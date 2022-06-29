@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:raw_gold"
+          "name": "beyond_earth:coal_torch"
         }
       ],
       "rolls": 1.0

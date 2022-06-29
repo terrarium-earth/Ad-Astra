@@ -98,6 +98,10 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                 super(title);
                 this.handler = handler;
 
+                // Set the initial gui time to the world time. This creates a random start position for each rotating object.
+                MinecraftClient client = MinecraftClient.getInstance();
+                guiTime = client.world.getTime();
+
                 // Get recipe.
                 ModRecipes.SPACE_STATION_RECIPE.getRecipes(handler.getPlayer().world).forEach(recipe -> {
                         if (recipe != null) {
@@ -223,9 +227,6 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
         protected void init() {
                 super.init();
 
-                // Set the initial gui time to the world time. This creates a random start position for each rotating object.
-                guiTime = client.world.getTime();
-
                 // The back button. It is always element [0] in the buttons list.
                 LinkedList<CustomButton> backButtonList = new LinkedList<>();
                 CustomButton backButton = new CustomButton(10, this.height / 2 - 36, BACK_TEXT, ButtonSize.NORMAL, ButtonColour.DARK_BLUE, TooltipType.NONE, null, pressed -> onNavigationButtonClick(currentCategory.parent()));
@@ -263,7 +264,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                 this.solarSystemsCategories.forEach((solarSystemCategory -> createSolarSystemButton(solarSystemCategory)));
 
                 // Scroll bar.
-                this.scrollBar = new ButtonWidget(SCROLL_BAR_X, minScrollY, 4, 8, Text.of(""), pressed -> {
+                this.scrollBar = new ButtonWidget(SCROLL_BAR_X, minScrollY, 4, 8, Text.empty(), pressed -> {
                 }) {
                         @Override
                         public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
@@ -499,7 +500,8 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 
         @Override
         public void resize(MinecraftClient client, int width, int height) {
+                this.categoryButtons.clear();
+                this.resetButtonScroll();
                 super.resize(client, width, height);
-                // this.resetButtonScroll();
         }
 }

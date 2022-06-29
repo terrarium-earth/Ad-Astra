@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "beyond_earth:moon_ice_shard_ore"
+          "name": "beyond_earth:ice_shard"
         }
       ],
       "rolls": 1.0

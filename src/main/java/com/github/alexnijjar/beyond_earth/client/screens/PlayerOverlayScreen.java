@@ -69,7 +69,7 @@ public class PlayerOverlayScreen {
             GuiUtil.drawVertical(matrices, x, y, textureWidth, textureHeight, OXYGEN_TANK_FULL_TEXTURE, oxygenRatio);
 
             // Oxygen text.
-            float oxygen = Math.round(oxygenRatio * 100);
+            double oxygen = Math.round(oxygenRatio * 1000) / 10.0;
             Text text = Text.of((oxygen) + "%");
             int textWidth = client.textRenderer.getWidth(text);
             if (doesNotNeedOxygen) {

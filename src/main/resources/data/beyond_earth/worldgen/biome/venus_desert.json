@@ -9,7 +9,7 @@
     "water_fog_color": 329011,
     "grass_color": 9551193,
     "foliage_color": 7842607,
-    "particle": {
+	"particle": {
       "options": {
         "type": "minecraft:crimson_spore"
       },

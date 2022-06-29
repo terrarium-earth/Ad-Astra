@@ -24,15 +24,15 @@
       "minecraft:freeze_top_layer",
       "minecraft:amethyst_geode",
       "minecraft:glow_lichen",
-      "beyond_earth:glacio_ice_shard_ore",
-      "beyond_earth:glacio_coal_ore",
-      "beyond_earth:glacio_copper_ore",
-      "beyond_earth:glacio_iron_ore",
-      "beyond_earth:glacio_lapis_ore",
-      "beyond_earth:glacio_deepslate_coal_ore",
-      "beyond_earth:glacio_deepslate_copper_ore",
-      "beyond_earth:glacio_deepslate_iron_ore",
-      "beyond_earth:glacio_deepslate_lapis_ore"
+	  "beyond_earth:glacio_ice_shard_ore",
+	  "beyond_earth:glacio_coal_ore",
+	  "beyond_earth:glacio_copper_ore",
+	  "beyond_earth:glacio_iron_ore",
+	  "beyond_earth:glacio_lapis_ore",
+	  "beyond_earth:glacio_deepslate_coal_ore",
+	  "beyond_earth:glacio_deepslate_copper_ore",
+	  "beyond_earth:glacio_deepslate_iron_ore",
+	  "beyond_earth:glacio_deepslate_lapis_ore"
     ]
   ]
 }

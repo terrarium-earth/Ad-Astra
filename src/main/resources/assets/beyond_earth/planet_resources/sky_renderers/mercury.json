@@ -18,7 +18,7 @@
     "horizon_angle": 0,
     "sky_objects": [
         {
-            "texture": "sun",
+            "texture": "beyond_earth:textures/sky/normal_sun.png",
             "blending": true,
             "render_type": "dynamic",
             "scale": 60.0,

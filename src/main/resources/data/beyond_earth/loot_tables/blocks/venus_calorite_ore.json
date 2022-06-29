@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "beyond_earth:venus_calorite_ore"
+          "name": "beyond_earth:raw_calorite"
         }
       ],
       "rolls": 1.0

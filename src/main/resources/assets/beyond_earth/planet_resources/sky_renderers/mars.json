@@ -15,7 +15,7 @@
     "horizon_angle": 0,
     "sky_objects": [
         {
-            "texture": "blue_sun",
+            "texture": "beyond_earth:textures/sky/blue_sun.png",
             "blending": true,
             "render_type": "dynamic",
             "scale": 30.0,
@@ -26,18 +26,7 @@
             }
         },
         {
-            "texture": "earth_light",
-            "blending": true,
-            "render_type": "dynamic",
-            "scale": 2.5,
-            "rotation": {
-                "x": 45.0,
-                "y": 45.0,
-                "z": -135.0
-            }
-        },
-        {
-            "texture": "earth",
+            "texture": "beyond_earth:textures/sky/earth.png",
             "blending": true,
             "render_type": "dynamic",
             "scale": 1.0,
@@ -48,7 +37,23 @@
             }
         },
         {
-            "texture": "phobos",
+            "texture": "beyond_earth:textures/sky/light.png",
+            "blending": true,
+            "render_type": "dynamic",
+            "scale": 2.5,
+            "color": {
+                "r": 128,
+                "g": 191,
+                "b": 255
+            },
+            "rotation": {
+                "x": 45.0,
+                "y": 45.0,
+                "z": -135.0
+            }
+        },
+        {
+            "texture": "beyond_earth:textures/sky/phobos.png",
             "blending": true,
             "render_type": "dynamic",
             "scale": 3.0,
@@ -59,10 +64,42 @@
             }
         },
         {
-            "texture": "deimos",
+            "texture": "beyond_earth:textures/sky/light.png",
             "blending": true,
             "render_type": "dynamic",
             "scale": 4.0,
+            "color": {
+                "r": 255,
+                "g": 217,
+                "b": 179
+            },
+            "rotation": {
+                "x": 45.0,
+                "y": -160.0,
+                "z": 0.0
+            }
+        },
+        {
+            "texture": "beyond_earth:textures/sky/deimos.png",
+            "blending": true,
+            "render_type": "dynamic",
+            "scale": 4.0,
+            "rotation": {
+                "x": 0.0,
+                "y": 90.0,
+                "z": -10.0
+            }
+        },
+        {
+            "texture": "beyond_earth:textures/sky/light.png",
+            "blending": true,
+            "render_type": "dynamic",
+            "scale": 4.0,
+            "color": {
+                "r": 255,
+                "g": 255,
+                "b": 204
+            },
             "rotation": {
                 "x": 0.0,
                 "y": 90.0,

@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "beyond_earth:venus_diamond_ore"
+          "name": "minecraft:diamond"
         }
       ],
       "rolls": 1.0

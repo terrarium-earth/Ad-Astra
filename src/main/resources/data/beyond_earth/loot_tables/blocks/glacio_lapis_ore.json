@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "beyond_earth:glacio_lapis_ore"
+          "name": "minecraft:lapis_lazuli"
         }
       ],
       "rolls": 1.0

@@ -9,9 +9,9 @@
     }
   },
   "pattern": [
-    "###",
-    " | ",
-    " | "
+    " # ",
+    " |#",
+    "|  "
   ],
   "result": {
     "item": "beyond_earth:hammer"

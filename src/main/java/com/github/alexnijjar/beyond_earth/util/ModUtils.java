@@ -236,7 +236,7 @@ public class ModUtils {
     }
 
     public static boolean worldHasOxygen(World world, LivingEntity entity) {
-        return worldHasOxygen(world, entity.getBlockPos().up());
+        return worldHasOxygen(world, new BlockPos(entity.getEyePos()));
     }
 
     public static boolean worldHasOxygen(World world, BlockPos pos) {

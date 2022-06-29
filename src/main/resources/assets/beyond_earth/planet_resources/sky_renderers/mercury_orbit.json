@@ -15,10 +15,10 @@
     "horizon_angle": 0,
     "sky_objects": [
         {
-            "texture": "sun",
+            "texture": "beyond_earth:textures/sky/sun.png",
             "blending": true,
             "render_type": "dynamic",
-            "scale": 30.0,
+            "scale": 100.0,
             "rotation": {
                 "x": 0.0,
                 "y": -90.0,
@@ -26,10 +26,26 @@
             }
         },
         {
-            "texture": "mercury",
+            "texture": "beyond_earth:textures/sky/mercury.png",
             "blending": false,
             "render_type": "scaling",
-            "scale": 25.0,
+            "scale": 1.0,
+            "rotation": {
+                "x": 180.0,
+                "y": 180.0,
+                "z": 0.0
+            }
+        },
+        {
+            "texture": "beyond_earth:textures/sky/light.png",
+            "blending": true,
+            "render_type": "scaling",
+            "scale": 3.0,
+            "color": {
+                "r": 255,
+                "g": 204,
+                "b": 255
+            },
             "rotation": {
                 "x": 180.0,
                 "y": 180.0,

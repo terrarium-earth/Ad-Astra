@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "beyond_earth:glacio_iron_ore"
+          "name": "minecraft:raw_iron"
         }
       ],
       "rolls": 1.0

@@ -17,12 +17,12 @@ import net.minecraft.world.gen.feature.BasaltColumnsFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
 
-public class VenusDeltas extends Feature<BasaltColumnsFeatureConfig> {
+public class InfernalSpireColumn extends Feature<BasaltColumnsFeatureConfig> {
 
     private static final ImmutableList<Block> CANNOT_PLACE_ON = ImmutableList.of(Blocks.LAVA, Blocks.BEDROCK, Blocks.MAGMA_BLOCK, Blocks.SOUL_SAND, Blocks.NETHER_BRICKS, Blocks.NETHER_BRICK_FENCE, Blocks.NETHER_BRICK_STAIRS, Blocks.NETHER_WART,
             Blocks.CHEST, Blocks.SPAWNER);
 
-    public VenusDeltas(Codec<BasaltColumnsFeatureConfig> configCodec) {
+    public InfernalSpireColumn(Codec<BasaltColumnsFeatureConfig> configCodec) {
         super(configCodec);
     }
 

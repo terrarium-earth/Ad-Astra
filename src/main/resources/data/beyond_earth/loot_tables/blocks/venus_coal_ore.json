@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "beyond_earth:venus_coal_ore"
+          "name": "minecraft:coal"
         }
       ],
       "rolls": 1.0

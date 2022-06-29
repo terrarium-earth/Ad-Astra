@@ -167,7 +167,7 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 
 		// Metals
 
-		offerQuadRecipe(exporter, IRON_PLATING_BLOCK, ModTags.IRON_PLATES);
+		offerQuadRecipe(exporter, 16, IRON_PLATING_BLOCK, ModTags.IRON_PLATES);
 		offerPlatingRecipe(exporter, DESH_PLATING_BLOCK, ModTags.DESH_PLATES);
 		offerPlatingRecipe(exporter, OSTRUM_PLATING_BLOCK, ModTags.COMPRESSED_OSTRUM);
 		offerPlatingRecipe(exporter, CALORITE_PLATING_BLOCK, ModTags.COMPRESSED_CALORITE);
@@ -292,7 +292,7 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 				.pattern("# #").pattern("B B").group(null).criterion(hasItem(ModItems.COMPRESSED_CALORITE), conditionsFromTag(ModTags.COMPRESSED_CALORITE)).offerTo(exporter);
 
 		// Hammer
-		ShapedRecipeJsonBuilder.create(ModItems.HAMMER).input(Character.valueOf('#'), Items.IRON_INGOT).input(Character.valueOf('|'), Items.STICK).pattern("###").pattern(" | ").pattern(" | ").group(null)
+		ShapedRecipeJsonBuilder.create(ModItems.HAMMER).input(Character.valueOf('#'), Items.IRON_INGOT).input(Character.valueOf('|'), Items.STICK).pattern(" # ").pattern(" |#").pattern("|  ").group(null)
 				.criterion(hasItem(Items.IRON_INGOT), conditionsFromItem(Items.IRON_INGOT)).offerTo(exporter);
 
 		// Iron Stick
@@ -357,6 +357,10 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 
 	public static void offerQuadRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, TagKey<Item> input) {
 		RecipeProvider.createCondensingRecipe(output, Ingredient.fromTag(input)).criterion("item", conditionsFromTag(input)).offerTo(exporter);
+	}
+
+	public static void offerQuadRecipe(Consumer<RecipeJsonProvider> exporter, int amount, ItemConvertible output, TagKey<Item> input) {
+		ShapedRecipeJsonBuilder.create(output, amount).input(Character.valueOf('S'), input).pattern("SS").pattern("SS").criterion(hasItem(Items.IRON_INGOT), conditionsFromTag(input)).offerTo(exporter);
 	}
 
 	public static void offerPlatingRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, TagKey<Item> input) {

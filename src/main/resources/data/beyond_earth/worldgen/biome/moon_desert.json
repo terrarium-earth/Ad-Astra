@@ -1,5 +1,5 @@
 {
-  "temperature": 0.7,
+  "temperature": -0.7,
   "downfall": 0,
   "precipitation": "none",
   "effects": {
@@ -13,13 +13,13 @@
   "creature_spawn_probability": 0.2,
   "spawners": {
     "monster": [
-      {
+	  {
         "type": "beyond_earth:alien_zombie",
         "weight": 100,
         "minCount": 1,
         "maxCount": 3
       },
-      {
+	  {
         "type": "beyond_earth:star_crawler",
         "weight": 100,
         "minCount": 1,
@@ -32,7 +32,7 @@
       "energy_budget": 0.015,
       "charge": 0.2
     },
-    "beyond_earth:star_crawler": {
+	"beyond_earth:star_crawler": {
       "energy_budget": 0.015,
       "charge": 0.4
     }
@@ -49,11 +49,11 @@
       "minecraft:large_dripstone",
       "minecraft:dripstone_cluster",
       "minecraft:pointed_dripstone",
-      "beyond_earth:moon_cheese_ore",
-      "beyond_earth:moon_soul_soil",
-      "beyond_earth:moon_ice_shard_ore",
-      "beyond_earth:moon_iron_ore",
-      "beyond_earth:moon_desh_ore"
+	  "beyond_earth:moon_cheese_ore",
+	  "beyond_earth:moon_soul_soil",
+	  "beyond_earth:moon_ice_shard_ore",
+	  "beyond_earth:moon_iron_ore",
+	  "beyond_earth:moon_desh_ore"
     ]
   ]
 }

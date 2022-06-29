@@ -311,15 +311,15 @@ public interface ModItems {
         public static final BlockItem RAW_CALORITE_BLOCK = registerBlockItem(ModBlocks.RAW_CALORITE_BLOCK);
         public static final BlockItem IRON_PLATING_BLOCK = registerBlockItem(ModBlocks.IRON_PLATING_BLOCK);
         public static final BlockItem IRON_PILLAR_BLOCK = registerBlockItem(ModBlocks.IRON_PILLAR_BLOCK);
-        public static final BlockItem DESH_PLATING_BLOCK = registerBlockItem(ModBlocks.DESH_PLATING_BLOCK);
+        public static final BlockItem IRON_MARK_BLOCK = registerBlockItem(ModBlocks.IRON_MARK_BLOCK);
         public static final BlockItem BLUE_IRON_PLATING_BLOCK = registerBlockItem(ModBlocks.BLUE_IRON_PLATING_BLOCK);
+        public static final BlockItem DESH_PLATING_BLOCK = registerBlockItem(ModBlocks.DESH_PLATING_BLOCK);
         public static final BlockItem DESH_PILLAR_BLOCK = registerBlockItem(ModBlocks.DESH_PILLAR_BLOCK);
         public static final BlockItem OSTRUM_PLATING_BLOCK = registerBlockItem(ModBlocks.OSTRUM_PLATING_BLOCK);
         public static final BlockItem OSTRUM_PILLAR_BLOCK = registerBlockItem(ModBlocks.OSTRUM_PILLAR_BLOCK);
         public static final BlockItem CALORITE_PLATING_BLOCK = registerBlockItem(ModBlocks.CALORITE_PLATING_BLOCK);
         public static final BlockItem CALORITE_PILLAR_BLOCK = registerBlockItem(ModBlocks.CALORITE_PILLAR_BLOCK);
         public static final BlockItem INFERNAL_SPIRE_BLOCK = registerBlockItem(ModBlocks.INFERNAL_SPIRE_BLOCK);
-        public static final BlockItem IRON_MARK_BLOCK = registerBlockItem(ModBlocks.IRON_MARK_BLOCK);
         public static final BlockItem SKY_STONE = registerBlockItem(ModBlocks.SKY_STONE);
         
         public static final BlockItem MOON_SAND = registerBlockItem(ModBlocks.MOON_SAND);

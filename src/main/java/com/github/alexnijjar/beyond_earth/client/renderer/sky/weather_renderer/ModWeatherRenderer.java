@@ -27,7 +27,7 @@ import net.minecraft.world.biome.Biome;
 @Environment(EnvType.CLIENT)
 public class ModWeatherRenderer implements DimensionRenderingRegistry.WeatherRenderer {
 
-    private static final Identifier VENUS_RAIN_TEXTURE = new ModIdentifier("textures/sky/rain.png");
+    private static final Identifier VENUS_RAIN_TEXTURE = new ModIdentifier("textures/sky/venus/rain.png");
 
     private Identifier texture;
 
