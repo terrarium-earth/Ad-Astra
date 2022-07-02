@@ -88,9 +88,11 @@ public interface ModBlocks {
         public static final Block RAW_OSTRUM_BLOCK = register("raw_ostrum_block", new Block(FabricBlockSettings.copy(Blocks.RAW_IRON_BLOCK)));
         public static final Block RAW_CALORITE_BLOCK = register("raw_calorite_block", new Block(FabricBlockSettings.copy(Blocks.RAW_IRON_BLOCK)));
         public static final Block IRON_PLATING_BLOCK = register("iron_plating_block", new Block(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
+        public static final Block IRON_PILLAR_BLOCK = register("iron_pillar_block", new PillarBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
         public static final Block IRON_MARK_BLOCK = register("iron_mark_block", new PillarBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
         public static final Block BLUE_IRON_PLATING_BLOCK = register("blue_iron_plating_block", new PillarBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(state -> 15)));
-        public static final Block IRON_PILLAR_BLOCK = register("iron_pillar_block", new PillarBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
+        public static final Block STEEL_PLATING_BLOCK = register("steel_plating_block", new Block(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
+        public static final Block STEEL_PILLAR_BLOCK = register("steel_pillar_block", new PillarBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
         public static final Block DESH_PLATING_BLOCK = register("desh_plating_block", new Block(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
         public static final Block DESH_PILLAR_BLOCK = register("desh_pillar_block", new PillarBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
         public static final Block OSTRUM_PLATING_BLOCK = register("ostrum_plating_block", new Block(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));

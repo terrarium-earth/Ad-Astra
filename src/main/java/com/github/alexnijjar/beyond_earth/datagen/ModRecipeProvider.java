@@ -113,6 +113,7 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		offerPillarRecipe(exporter, MERCURY_PILLAR, MERCURY_STONE_BRICKS);
 		offerPillarRecipe(exporter, GLACIO_PILLAR, GLACIO_STONE_BRICKS);
 		offerPillarRecipe(exporter, IRON_PILLAR_BLOCK, IRON_PLATING_BLOCK);
+		offerPillarRecipe(exporter, STEEL_PILLAR_BLOCK, STEEL_PLATING_BLOCK);
 		offerPillarRecipe(exporter, DESH_PILLAR_BLOCK, DESH_PLATING_BLOCK);
 		offerPillarRecipe(exporter, OSTRUM_PILLAR_BLOCK, OSTRUM_PLATING_BLOCK);
 		offerPillarRecipe(exporter, CALORITE_PILLAR_BLOCK, CALORITE_PLATING_BLOCK);
@@ -168,6 +169,7 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		// Metals
 
 		offerQuadRecipe(exporter, 16, IRON_PLATING_BLOCK, ModTags.IRON_PLATES);
+		offerPlatingRecipe(exporter, STEEL_PLATING_BLOCK, ModTags.COMPRESSED_STEEL);
 		offerPlatingRecipe(exporter, DESH_PLATING_BLOCK, ModTags.DESH_PLATES);
 		offerPlatingRecipe(exporter, OSTRUM_PLATING_BLOCK, ModTags.COMPRESSED_OSTRUM);
 		offerPlatingRecipe(exporter, CALORITE_PLATING_BLOCK, ModTags.COMPRESSED_CALORITE);
@@ -242,7 +244,7 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 				.criterion(hasItem(ModItems.COMPRESSED_STEEL), conditionsFromTag(ModTags.COMPRESSED_STEEL)).offerTo(exporter);
 
 		// Guide Book
-		ShapedRecipeJsonBuilder.create(ModItems.GUIDE_BOOK).input(Character.valueOf('#'), Items.BOOK).input(Character.valueOf('|'), SKY_STONE).pattern("#").pattern("|").group(null).criterion(hasItem(Items.BOOK), conditionsFromItem(Items.BOOK))
+		ShapedRecipeJsonBuilder.create(ModItems.ASTRODUX).input(Character.valueOf('#'), Items.BOOK).input(Character.valueOf('S'), ModItems.STEEL_INGOT).pattern("SSS").pattern("S#S").pattern("SSS").group(null).criterion(hasItem(Items.BOOK), conditionsFromItem(Items.BOOK))
 				.offerTo(exporter);
 
 		// Compacting nuggets
@@ -278,7 +280,7 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 				.pattern("D D").pattern("# #").group(null).criterion(hasItem(ModItems.COMPRESSED_OSTRUM), conditionsFromTag(ModTags.COMPRESSED_OSTRUM)).offerTo(exporter);
 
 		// Jet Suit
-		ShapedRecipeJsonBuilder.create(ModItems.JET_SUIT_SPACE_HELMET).input(Character.valueOf('#'), ModTags.COMPRESSED_CALORITE).input(Character.valueOf('N'), ModItems.NETHERITE_SPACE_HELMET).input(Character.valueOf('G'), Blocks.ORANGE_STAINED_GLASS)
+		ShapedRecipeJsonBuilder.create(ModItems.JET_SUIT_HELMET).input(Character.valueOf('#'), ModTags.COMPRESSED_CALORITE).input(Character.valueOf('N'), ModItems.NETHERITE_SPACE_HELMET).input(Character.valueOf('G'), Blocks.ORANGE_STAINED_GLASS)
 				.pattern("#N#").pattern("#G#").group(null).criterion(hasItem(ModItems.COMPRESSED_CALORITE), conditionsFromTag(ModTags.COMPRESSED_CALORITE)).offerTo(exporter);
 
 		ShapedRecipeJsonBuilder.create(ModItems.JET_SUIT).input(Character.valueOf('#'), ModTags.COMPRESSED_CALORITE).input(Character.valueOf('B'), ModTags.CALORITE_BLOCKS).input(Character.valueOf('N'), ModItems.NETHERITE_SPACE_SUIT)

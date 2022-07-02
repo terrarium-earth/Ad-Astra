@@ -70,7 +70,7 @@ public class SpaceSuitRenderer {
             JetSuitModel model = new JetSuitModel(root, contextModel, texture);
 
             ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, model, texture);
-        }, ModItems.JET_SUIT_SPACE_HELMET, ModItems.JET_SUIT, ModItems.JET_SUIT_PANTS, ModItems.JET_SUIT_BOOTS);
+        }, ModItems.JET_SUIT_HELMET, ModItems.JET_SUIT, ModItems.JET_SUIT_PANTS, ModItems.JET_SUIT_BOOTS);
     }
 
     private static Map<String, ModelPart> createModelMap(EquipmentSlot slot, BipedEntityModel<LivingEntity> contextModel, Identifier headTexture, EntityModelLayer entityLayer) {

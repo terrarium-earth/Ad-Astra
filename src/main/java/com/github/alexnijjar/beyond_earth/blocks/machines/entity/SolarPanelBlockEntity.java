@@ -14,8 +14,8 @@ import net.minecraft.util.math.BlockPos;
 
 public class SolarPanelBlockEntity extends AbstractMachineBlockEntity {
 
-    public static final long MAX_ENERGY = BeyondEarth.CONFIG.mainConfig.solarPanelGeneratorMaxEnergy;
-    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.mainConfig.solarPanelGeneratorEnergyPerTick;
+    public static final long MAX_ENERGY = BeyondEarth.CONFIG.mainConfig.solarPanelMaxEnergy;
+    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.mainConfig.solarPanelEnergyPerTick;
 
     public SolarPanelBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.SOLAR_PANEL_ENTITY, blockPos, blockState);

@@ -29,8 +29,8 @@ import net.minecraft.util.math.BlockPos;
 
 public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 
-    public static final long MAX_ENERGY = BeyondEarth.CONFIG.mainConfig.oxygenDistributorGeneratorMaxEnergy;
-    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.mainConfig.oxygenDistributorGeneratorEnergyPerTick;
+    public static final long MAX_ENERGY = BeyondEarth.CONFIG.mainConfig.oxygenDistributorMaxEnergy;
+    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.mainConfig.oxygenDistributorEnergyPerTick;
     public static final int TANK_SIZE = BeyondEarth.CONFIG.mainConfig.oxygenDistributorTankBuckets;
     public static final int MAX_BLOCK_CHECKS = BeyondEarth.CONFIG.mainConfig.oxygenDistributorMaxBlockChecks;
     public static final int UPDATE_OXYGEN_FILLER_TICKS = BeyondEarth.CONFIG.mainConfig.oxygenDistributorRefreshTicks;
@@ -169,7 +169,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 
                     long amountOfFluidToExtract = (long) (positions.size() * 0.8);
                     if (this.outputTank.amount > amountOfFluidToExtract) {
-                        if (this.getEnergy() > 0 && this.outputTank.amount > 0) {
+                        if (this.getEnergy() > ((long) (positions.size() * ENERGY_USAGE_MULTIPLIER))) {
                             ClientOxygenUtils.setEntry(world, pos, positions);
                             ClientOxygenUtils.oxygenLeak = floodFiller.oxygenLeakDetected();
                         } else {

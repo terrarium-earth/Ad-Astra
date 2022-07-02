@@ -1,0 +1,24 @@
+{
+    "name": "Netherite Space Suit",
+    "icon": "beyond_earth:netherite_space_helmet",
+    "sortnum": 1,
+    "category": "beyond_earth:surviving_mars",
+    "pages": [
+        {
+            "type": "patchouli:spotlight",
+            "title": "Netherite Space Suit",
+            "item": "beyond_earth:netherite_space_helmet",
+            "text": "The netherite space suit is an upgraded version of the standard space suit, featuring permanent fire resistance, more protection and the ability to survive on Venus and Mercury. Before you travel to these planets, you must craft the netherite space suit armour or else you will burn to death."
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe": "beyond_earth:recipes/netherite_space_helmet",
+            "recipe2": "beyond_earth:recipes/netherite_space_suit"
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe": "beyond_earth:recipes/netherite_space_pants",
+            "recipe2": "beyond_earth:recipes/netherite_space_boots"
+        }
+    ]
+}

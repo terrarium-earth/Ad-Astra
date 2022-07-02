@@ -157,7 +157,7 @@ public class ModModelProvider extends FabricModelProvider implements ModBlocks {
         }
 
         itemModelGenerator.register(ModItems.OXYGEN_TANK, Models.GENERATED);
-        itemModelGenerator.register(ModItems.GUIDE_BOOK, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ASTRODUX, Models.GENERATED);
         itemModelGenerator.register(ModItems.SPACE_PAINTING, Models.GENERATED);
         itemModelGenerator.register(ModItems.CHEESE, Models.GENERATED);
         itemModelGenerator.register(ModItems.OIL_BUCKET, Models.GENERATED);
@@ -171,7 +171,7 @@ public class ModModelProvider extends FabricModelProvider implements ModBlocks {
         itemModelGenerator.register(ModItems.NETHERITE_SPACE_SUIT, Models.GENERATED);
         itemModelGenerator.register(ModItems.NETHERITE_SPACE_PANTS, Models.GENERATED);
         itemModelGenerator.register(ModItems.NETHERITE_SPACE_BOOTS, Models.GENERATED);
-        itemModelGenerator.register(ModItems.JET_SUIT_SPACE_HELMET, Models.GENERATED);
+        itemModelGenerator.register(ModItems.JET_SUIT_HELMET, Models.GENERATED);
         itemModelGenerator.register(ModItems.JET_SUIT, Models.GENERATED);
         itemModelGenerator.register(ModItems.JET_SUIT_PANTS, Models.GENERATED);
         itemModelGenerator.register(ModItems.JET_SUIT_BOOTS, Models.GENERATED);

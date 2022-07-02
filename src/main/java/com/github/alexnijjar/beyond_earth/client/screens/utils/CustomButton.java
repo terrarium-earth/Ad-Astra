@@ -79,9 +79,9 @@ public class CustomButton extends ButtonWidget {
         if (this.visible) {
 
             MinecraftClient client = MinecraftClient.getInstance();
-            int scale = (int) client.getWindow().getScaleFactor();
-            int screenY = client.getWindow().getScaledHeight();
-            int maxY = ((screenY / 2) - 167 / 2) * scale;
+            double scale = client.getWindow().getScaleFactor();
+            int screenHeight = client.getWindow().getScaledHeight();
+            int scissorY = (int)(((screenHeight / 2) - 83) * scale);
 
             ColourHolder lightColour = this.buttonColourLightened;
             ColourHolder color = this.buttonColour;
@@ -91,9 +91,9 @@ public class CustomButton extends ButtonWidget {
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
             RenderSystem.enableDepthTest();
 
-            if (doMask) {
-                // Render mask.
-                RenderSystem.enableScissor(0, maxY, 215 * scale, 127 * scale);
+            if (this.doMask) {
+                // Render mask
+                RenderSystem.enableScissor(0, scissorY, (int)(215 * scale), (int)(127 * scale));
             }
 
             RenderSystem.setShaderColor((over ? lightColour.r() : color.r()), (over ? lightColour.g() : color.g()), (over ? lightColour.b() : color.b()), 1.0f);
@@ -106,7 +106,7 @@ public class CustomButton extends ButtonWidget {
             drawTexture(matrices, this.x, this.y, 0, 0, this.width, this.height, buttonSize.getWidth(), buttonSize.getHeight());
             drawText(matrices, client);
 
-            if (doMask) {
+            if (this.doMask) {
                 RenderSystem.disableScissor();
             }
 

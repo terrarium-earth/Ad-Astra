@@ -19,11 +19,14 @@ public class ClientModParticles {
     public static void register() {
 
         ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register(((atlasTexture, registry) -> {
-            registry.register(new ModIdentifier("particles/venus_rain"));
-            registry.register(new ModIdentifier("particles/large_flame"));
-            registry.register(new ModIdentifier("particles/large_smoke"));
-            registry.register(new ModIdentifier("particles/small_flame"));
-            registry.register(new ModIdentifier("particles/small_smoke"));
+            registry.register(new ModIdentifier("particle/flame_1"));
+            registry.register(new ModIdentifier("particle/flame_2"));
+            registry.register(new ModIdentifier("particle/flame_3"));
+            registry.register(new ModIdentifier("particle/flame_4"));
+            registry.register(new ModIdentifier("particle/venus_rain_1"));
+            registry.register(new ModIdentifier("particle/venus_rain_2"));
+            registry.register(new ModIdentifier("particle/venus_rain_3"));
+            registry.register(new ModIdentifier("particle/venus_rain_4"));
         }));
 
         ParticleFactoryRegistry.getInstance().register(ModParticleTypes.VENUS_RAIN, WaterSplashParticle.Factory::new);

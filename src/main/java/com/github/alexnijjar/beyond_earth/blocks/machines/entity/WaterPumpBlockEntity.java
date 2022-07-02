@@ -25,8 +25,8 @@ import net.minecraft.util.math.Direction;
 
 public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
 
-    public static final long MAX_ENERGY = BeyondEarth.CONFIG.mainConfig.waterPumpGeneratorMaxEnergy;
-    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.mainConfig.waterPumpGeneratorEnergyPerTick;
+    public static final long MAX_ENERGY = BeyondEarth.CONFIG.mainConfig.waterPumpMaxEnergy;
+    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.mainConfig.waterPumpEnergyPerTick;
     public static final int TANK_SIZE = BeyondEarth.CONFIG.mainConfig.waterPumpTankBuckets;
     public static final long TRANSFER_PER_TICK = BeyondEarth.CONFIG.mainConfig.waterPumpTransferPerTick;
     public static final Direction[] INSERT_DIRECTIONS = { Direction.UP, Direction.SOUTH };

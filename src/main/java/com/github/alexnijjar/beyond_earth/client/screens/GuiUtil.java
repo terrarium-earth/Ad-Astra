@@ -93,21 +93,25 @@ public class GuiUtil {
         int colour = FluidVariantRendering.getColor(fluid);
         int spriteHeight = sprite.getHeight();
 
-        // From Tech Reborn fluid rendering.
         RenderSystem.setShaderColor((colour >> 16 & 255) / 255.0f, (float) (colour >> 8 & 255) / 255.0f, (float) (colour & 255) / 255.0f, 1.0f);
-
-        MinecraftClient client = MinecraftClient.getInstance();
-        int scale = (int) client.getWindow().getScaleFactor();
-        int scissorY = (client.getWindow().getHeight() - ((FLUID_TANK_HEIGHT + y) * scale));
-
         RenderSystem.setShaderTexture(0, PlayerScreenHandler.BLOCK_ATLAS_TEXTURE);
 
+        MinecraftClient client = MinecraftClient.getInstance();
+        double scale = (int) client.getWindow().getScaleFactor();
+        int screenHeight = client.getWindow().getScaledHeight();
+
+        int scissorX = (int)(x * scale);
+        int scissorY = (int) (((screenHeight - y - FLUID_TANK_HEIGHT)) * scale);
+        int scissorWidth = (int)(FLUID_TANK_WIDTH * scale);
+        int scissorHeight = (int) ((FLUID_TANK_HEIGHT - 1) * scale * ratio);
+
         // First, the sprite is rendered in full, and then it is masked based on how full the fluid tank is.
-        RenderSystem.enableScissor(x * scale, scissorY, FLUID_TANK_WIDTH * scale, (int) ((FLUID_TANK_HEIGHT - 1) * scale * ratio));
+        RenderSystem.enableScissor(scissorX, scissorY, scissorWidth, scissorHeight);
+
         for (int i = 1; i < 4; i++) {
             DrawableHelper.drawSprite(matrices, x + 1, FLUID_TANK_HEIGHT + y - (spriteHeight * i) - 1, 0, FLUID_TANK_WIDTH - 2, spriteHeight, sprite);
         }
-        
+
         RenderSystem.disableScissor();
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
     }
@@ -148,11 +152,11 @@ public class GuiUtil {
         DrawableHelper.drawTexture(matrixStack, x, y, 0, 0, ratioWidth, height, width, height);
     }
 
-    private static double createRatio(long a, long b) {
+    public static double createRatio(long a, long b) {
         return (double) a / (double) b;
     }
 
-    private static double createRatio(short a, short b) {
+    public static double createRatio(short a, short b) {
         return (float) a / (float) b;
     }
 }

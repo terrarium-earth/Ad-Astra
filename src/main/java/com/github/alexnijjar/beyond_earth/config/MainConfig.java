@@ -46,6 +46,7 @@ public class MainConfig implements ConfigData {
     public int rocketTankBuckets = 3;
 
     public boolean explodeRoverInLava = true;
+    public long roverFuelPerTick = FluidConstants.BUCKET / 2000;
     public float roverForwardSpeed = 0.1f;
     public float roverBackwardSpeed = 0.05f;
     public float roverTurnSpeed = 15.0f;
@@ -69,17 +70,17 @@ public class MainConfig implements ConfigData {
     public boolean enableJetSuitFlight = true;
 
     public long coalGeneratorMaxEnergy = 9000L;
-    public long coalGeneratorEnergyPerTick = 2L;
+    public long coalGeneratorEnergyPerTick = 5L;
 
-    public long compressorGeneratorMaxEnergy = 9000L;
-    public long compressorGeneratorEnergyPerTick = 5L;
+    public long compressorMaxEnergy = 9000L;
+    public long compressorEnergyPerTick = 5L;
 
-    public long fuelRefineryGeneratorMaxEnergy = 9000L;
-    public long fuelRefineryGeneratorEnergyPerTick = 10L;
+    public long fuelRefineryMaxEnergy = 9000L;
+    public long fuelRefineryEnergyPerTick = 5L;
     public int fuelRefineryTankBuckets = 3;
 
-    public long oxygenDistributorGeneratorMaxEnergy = 20000L;
-    public long oxygenDistributorGeneratorEnergyPerTick = 5L;
+    public long oxygenDistributorMaxEnergy = 20000L;
+    public long oxygenDistributorEnergyPerTick = 10L;
     public int oxygenDistributorTankBuckets = 3;
     @ConfigEntry.Gui.Tooltip(count = 5)
     @ConfigEntry.BoundedDiscrete(min = 1, max = 4000)
@@ -92,17 +93,17 @@ public class MainConfig implements ConfigData {
     @ConfigEntry.Gui.Tooltip(count = 1)
     public double oxygenDistributorOxygenMultiplier = 0.8;
     @ConfigEntry.Gui.Tooltip(count = 1)
-    public double oxygenDistributorEnergyMultiplier = 0.5;
+    public double oxygenDistributorEnergyMultiplier = 3.0;
 
-    public long oxygenLoaderGeneratorMaxEnergy = 9000L;
-    public long oxygenLoaderGeneratorEnergyPerTick = 10L;
+    public long oxygenLoaderMaxEnergy = 9000L;
+    public long oxygenLoaderEnergyPerTick = 5L;
     public int oxygenLoaderTankBuckets = 3;
 
-    public long solarPanelGeneratorMaxEnergy = 9000L;
-    public long solarPanelGeneratorEnergyPerTick = 5L;
+    public long solarPanelMaxEnergy = 18000L;
+    public long solarPanelEnergyPerTick = 10L;
 
-    public long waterPumpGeneratorMaxEnergy = 9000L;
-    public long waterPumpGeneratorEnergyPerTick = 5L;
+    public long waterPumpMaxEnergy = 9000L;
+    public long waterPumpEnergyPerTick = 10L;
     public int waterPumpTankBuckets = 6;
     public long waterPumpTransferPerTick = FluidConstants.BLOCK / 100;
     public boolean deleteWaterBelowWaterPump = true;

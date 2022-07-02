@@ -64,52 +64,52 @@ public class BeyondEarthClient implements ClientModInitializer {
                 // Assets
                 PlanetResources.register();
 
-                // Packets.
+                // Packets
                 ModS2CPackets.register();
 
-                // GUI.
+                // GUI
                 ClientModScreens.register();
 
-                // Entities.
+                // Entities
                 ClientModEntities.register();
 
                 // Keybindings
                 ClientModKeybindings.register();
 
-                // Particles.
+                // Particles
                 ClientModParticles.register();
 
-                // Overlays.
+                // Overlays
                 HudRenderCallback.EVENT.register(PlayerOverlayScreen::render);
 
-                // Rocket item.
+                // Rocket item
                 BuiltinItemRendererRegistry.INSTANCE.register(ModItems.TIER_1_ROCKET, new RocketItemRendererTier1());
                 BuiltinItemRendererRegistry.INSTANCE.register(ModItems.TIER_2_ROCKET, new RocketItemRendererTier2());
                 BuiltinItemRendererRegistry.INSTANCE.register(ModItems.TIER_3_ROCKET, new RocketItemRendererTier3());
                 BuiltinItemRendererRegistry.INSTANCE.register(ModItems.TIER_4_ROCKET, new RocketItemRendererTier4());
 
-                // Rover item.
+                // Rover item
                 BuiltinItemRendererRegistry.INSTANCE.register(ModItems.TIER_1_ROVER, new RoverItemRenderer());
 
-                // Flag entity rendering.
+                // Flag entity rendering
                 BlockEntityRendererRegistry.register(ModBlockEntities.FLAG_BLOCK_ENTITY, FlagBlockEntityRenderer::new);
 
-                // Globe entity rendering.
+                // Globe entity rendering
                 BlockEntityRendererRegistry.register(ModBlockEntities.GLOBE_BLOCK_ENTITY, GlobeBlockEntityRenderer::new);
                 EntityModelLayerRegistry.registerModelLayer(GlobeModel.LAYER_LOCATION, GlobeModel::getTexturedModelData);
 
-                // Globe item rendering.
+                // Globe item rendering
                 for (Item item : new Item[] { ModItems.EARTH_GLOBE, ModItems.MOON_GLOBE, ModItems.MARS_GLOBE, ModItems.MERCURY_GLOBE, ModItems.VENUS_GLOBE, ModItems.GLACIO_GLOBE }) {
                         BuiltinItemRendererRegistry.INSTANCE.register(item, new GlobeItemRenderer());
                 }
 
-                // Custom space suit rendering.
+                // Custom space suit rendering
                 EntityModelLayerRegistry.registerModelLayer(SpaceSuitModel.LAYER_LOCATION, SpaceSuitModel::getTexturedModelData);
                 EntityModelLayerRegistry.registerModelLayer(SpaceSuitLegsModel.LAYER_LOCATION, SpaceSuitLegsModel::getTexturedModelData);
                 EntityModelLayerRegistry.registerModelLayer(JetSuitModel.LAYER_LOCATION, JetSuitModel::getTexturedModelData);
                 SpaceSuitRenderer.register();
 
-                // Fluids.
+                // Fluids
                 FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.FUEL_STILL, ModFluids.FLOWING_FUEL,
                                 new SimpleFluidRenderHandler(new ModIdentifier("blocks/fluid_fuel_still"), new ModIdentifier("blocks/fluid_fuel_flow"), new ModIdentifier("blocks/fuel_overlay")));
                 FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.OIL_STILL, ModFluids.FLOWING_OIL,
@@ -117,7 +117,7 @@ public class BeyondEarthClient implements ClientModInitializer {
                 FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.OXYGEN_STILL,
                                 new SimpleFluidRenderHandler(new ModIdentifier("blocks/fluid_oxygen_still"), new ModIdentifier("blocks/fluid_oxygen_still"), new ModIdentifier("blocks/fluid_oxygen_still")));
 
-                // Fluid textures.
+                // Fluid textures
                 ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register((atlasTexture, registry) -> {
                         registry.register(new ModIdentifier("blocks/fluid_fuel_still"));
                         registry.register(new ModIdentifier("blocks/fluid_fuel_flow"));
@@ -139,10 +139,10 @@ public class BeyondEarthClient implements ClientModInitializer {
                 BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), ModBlocks.NASA_WORKBENCH);
         }
 
-        // Register after the Resource packs have been loaded.
+        // Register after the Resource packs have been loaded
         @Environment(EnvType.CLIENT)
         public static void postAssetRegister() {
-                // World sky.
+                // World sky
                 ClientModSkies.register();
         }
 }

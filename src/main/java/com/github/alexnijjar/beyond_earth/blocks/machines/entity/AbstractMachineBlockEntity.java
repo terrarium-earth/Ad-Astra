@@ -143,7 +143,7 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
     }
 
     public boolean hasEnergy() {
-        return this.usesEnergy() && this.energyStorage.amount > 0;
+        return this.usesEnergy() && this.energyStorage.amount > this.getEnergyPerTick();
     }
 
     @Override

@@ -1,0 +1,19 @@
+{
+    "name": "Rover",
+    "icon": "beyond_earth:tier_1_rover",
+    "sortnum": 3,
+    "category": "beyond_earth:the_moon",
+    "pages": [
+        {
+            "type": "patchouli:spotlight",
+            "title": "Rover",
+            "item": "beyond_earth:tier_1_rover",
+            "text": "The rover is a land vehicle capable of driving on the rough terrain of moons and planets. It's exceptionally fast and has an inventory capable of storing eight items. To use it, fill the rover with fuel (shift-click and place fuel buckets in the left input slot)."
+        },
+        {
+            "type": "patchouli:entity",
+            "entity": "beyond_earth:tier_1_rover",
+            "scale": 0.36
+        }
+    ]
+}

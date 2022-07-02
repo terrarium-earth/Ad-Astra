@@ -119,6 +119,7 @@ public class SkyUtil {
         matrices.pop();
     }
 
+    // For rendering textures in the sky
     public static void render(WorldRenderContext context, BufferBuilder bufferBuilder, Identifier texture, ColourHolder colour, Vec3f rotation, float scale, boolean blending) {
 
         startRendering(context.matrixStack(), rotation);
@@ -206,19 +207,19 @@ public class SkyUtil {
             int starB = 255;
             if (colouredStars) {
                 int colourChannel = random.nextInt(5);
-                if (colourChannel == 0) { // Blue.
+                if (colourChannel == 0) { // Blue
                     starR = 204;
                     starG = 238;
                     starB = 255;
-                } else if (colourChannel == 1) { // Purple.
+                } else if (colourChannel == 1) { // Purple
                     starR = 204;
                     starG = 153;
                     starB = 255;
-                } else if (colourChannel == 2) { // Yellow.
+                } else if (colourChannel == 2) { // Yellow
                     starR = 255;
                     starG = 255;
                     starB = 153;
-                } else if (colourChannel == 3) { // Orange.
+                } else if (colourChannel == 3) { // Orange
                     starR = 255;
                     starG = 204;
                     starB = 102;

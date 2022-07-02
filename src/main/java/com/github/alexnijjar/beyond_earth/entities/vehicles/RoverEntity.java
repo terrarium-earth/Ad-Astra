@@ -5,7 +5,6 @@ import com.github.alexnijjar.beyond_earth.registry.ModItems;
 import com.github.alexnijjar.beyond_earth.util.ModKeyBindings;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.data.DataTracker;
@@ -28,7 +27,7 @@ public class RoverEntity extends VehicleEntity {
     public double prevWheelPitch;
     public float prevRoverYaw;
 
-    public static final long FUEL_PER_TICK = FluidConstants.BUCKET / 1500;
+    public static final long FUEL_PER_TICK = BeyondEarth.CONFIG.mainConfig.roverFuelPerTick;
 
     protected static final TrackedData<Float> TURN_SPEED = DataTracker.registerData(RoverEntity.class, TrackedDataHandlerRegistry.FLOAT);
 

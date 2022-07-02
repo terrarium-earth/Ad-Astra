@@ -118,7 +118,7 @@ public class OxygenUtils {
             if (state.getFluidState().isIn(FluidTags.WATER)) {
                 if (block.equals(Blocks.WATER)) {
                     world.setBlockState(pos, Blocks.AIR.getDefaultState());
-                } else {
+                } else if (state.contains(Properties.WATERLOGGED)) {
                     world.setBlockState(pos, state.with(Properties.WATERLOGGED, false));
                 }
             }

@@ -14,7 +14,7 @@ import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier2;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier3;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier4;
 import com.github.alexnijjar.beyond_earth.items.FluidContainingItem.TankStorage;
-import com.github.alexnijjar.beyond_earth.items.GuideBook;
+import com.github.alexnijjar.beyond_earth.items.Astrodux;
 import com.github.alexnijjar.beyond_earth.items.HammerItem;
 import com.github.alexnijjar.beyond_earth.items.OxygenTankItem;
 import com.github.alexnijjar.beyond_earth.items.SpacePaintingItem;
@@ -125,7 +125,7 @@ public interface ModItems {
                 stacks.set(34, ModItems.NETHERITE_SPACE_PANTS.getDefaultStack());
                 stacks.set(43, ModItems.NETHERITE_SPACE_BOOTS.getDefaultStack());
 
-                stacks.set(8, ModItems.JET_SUIT_SPACE_HELMET.getDefaultStack());
+                stacks.set(8, ModItems.JET_SUIT_HELMET.getDefaultStack());
                 stacks.set(17, jetSuit);
                 stacks.set(26, ModItems.JET_SUIT.getDefaultStack());
                 stacks.set(35, ModItems.JET_SUIT_PANTS.getDefaultStack());
@@ -134,7 +134,7 @@ public interface ModItems {
                 stacks.set(27, ModItems.OXYGEN_TANK.getDefaultStack());
                 stacks.set(28, oxygenTank);
 
-                stacks.set(36, ModItems.GUIDE_BOOK.getDefaultStack());
+                stacks.set(36, ModItems.ASTRODUX.getDefaultStack());
                 stacks.set(37, ModItems.SPACE_PAINTING.getDefaultStack());
                 stacks.set(38, ModItems.CHEESE.getDefaultStack());
                 stacks.set(39, ModItems.ROCKET_LAUNCH_PAD.getDefaultStack());
@@ -164,7 +164,7 @@ public interface ModItems {
         public static final Item OXYGEN_TANK = register("oxygen_tank", new OxygenTankItem(new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1)));
 
         // Guide book.
-        public static final Item GUIDE_BOOK = register("guide_book", new GuideBook(new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1)));
+        public static final Item ASTRODUX = register("astrodux", new Astrodux(new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1)));
 
         public static final Item SPACE_PAINTING = register("space_painting", new SpacePaintingItem(ModEntityTypes.SPACE_PAINTING, new FabricItemSettings().group(ITEM_GROUP_NORMAL).rarity(Rarity.UNCOMMON)));
 
@@ -201,7 +201,7 @@ public interface ModItems {
                         new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.FEET, new FabricItemSettings().group(ITEM_GROUP_NORMAL).fireproof()));
 
         // Jet Suit.
-        public static final JetSuit JET_SUIT_SPACE_HELMET = register("jet_suit_space_helmet", new JetSuit(ModArmour.JET_SUIT_ARMOUR_MATERIAL, EquipmentSlot.HEAD, new FabricItemSettings().group(ITEM_GROUP_NORMAL).fireproof()));
+        public static final JetSuit JET_SUIT_HELMET = register("jet_suit_helmet", new JetSuit(ModArmour.JET_SUIT_ARMOUR_MATERIAL, EquipmentSlot.HEAD, new FabricItemSettings().group(ITEM_GROUP_NORMAL).fireproof()));
         public static final JetSuit JET_SUIT = register("jet_suit", new JetSuit(ModArmour.JET_SUIT_ARMOUR_MATERIAL, EquipmentSlot.CHEST, new FabricItemSettings().group(ITEM_GROUP_NORMAL).fireproof()));
         public static final JetSuit JET_SUIT_PANTS = register("jet_suit_pants", new JetSuit(ModArmour.JET_SUIT_ARMOUR_MATERIAL, EquipmentSlot.LEGS, new FabricItemSettings().group(ITEM_GROUP_NORMAL).fireproof()));
         public static final JetSuit JET_SUIT_BOOTS = register("jet_suit_boots", new JetSuit(ModArmour.JET_SUIT_ARMOUR_MATERIAL, EquipmentSlot.FEET, new FabricItemSettings().group(ITEM_GROUP_NORMAL).fireproof()));
@@ -313,6 +313,8 @@ public interface ModItems {
         public static final BlockItem IRON_PILLAR_BLOCK = registerBlockItem(ModBlocks.IRON_PILLAR_BLOCK);
         public static final BlockItem IRON_MARK_BLOCK = registerBlockItem(ModBlocks.IRON_MARK_BLOCK);
         public static final BlockItem BLUE_IRON_PLATING_BLOCK = registerBlockItem(ModBlocks.BLUE_IRON_PLATING_BLOCK);
+        public static final BlockItem STEEL_PLATING_BLOCK = registerBlockItem(ModBlocks.STEEL_PLATING_BLOCK);
+        public static final BlockItem STEEL_PILLAR_BLOCK = registerBlockItem(ModBlocks.STEEL_PILLAR_BLOCK);
         public static final BlockItem DESH_PLATING_BLOCK = registerBlockItem(ModBlocks.DESH_PLATING_BLOCK);
         public static final BlockItem DESH_PILLAR_BLOCK = registerBlockItem(ModBlocks.DESH_PILLAR_BLOCK);
         public static final BlockItem OSTRUM_PLATING_BLOCK = registerBlockItem(ModBlocks.OSTRUM_PLATING_BLOCK);
@@ -321,7 +323,7 @@ public interface ModItems {
         public static final BlockItem CALORITE_PILLAR_BLOCK = registerBlockItem(ModBlocks.CALORITE_PILLAR_BLOCK);
         public static final BlockItem INFERNAL_SPIRE_BLOCK = registerBlockItem(ModBlocks.INFERNAL_SPIRE_BLOCK);
         public static final BlockItem SKY_STONE = registerBlockItem(ModBlocks.SKY_STONE);
-        
+
         public static final BlockItem MOON_SAND = registerBlockItem(ModBlocks.MOON_SAND);
         public static final BlockItem MOON_STONE = registerBlockItem(ModBlocks.MOON_STONE);
         public static final BlockItem MOON_STONE_BRICKS = registerBlockItem(ModBlocks.MOON_STONE_BRICKS);
