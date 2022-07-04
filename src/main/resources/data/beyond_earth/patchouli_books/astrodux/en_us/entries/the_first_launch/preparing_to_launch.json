@@ -1,0 +1,16 @@
+{
+    "name": "Preparing to Launch",
+    "icon": "beyond_earth:tier_1_rocket",
+    "sortnum": 4,
+    "category": "beyond_earth:the_first_launch",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "$(#ff0000)Follow these steps very carefully! $()Missing even one thing here could make your life tough, or worse, cause you to be stranded on the moon!$(br2)In order to return to earth from the moon, you need two basic things: nine rocket launch pads and three buckets of fuel."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Place these items in the inventory of your rocket, and ensure that you always have them every time you launch a rocket. Finally, you should bring multiple full oxygen tanks, plentiful food, soul torches or glowstone, weapons and tools. Once you have this, you are ready to launch! Enter the rocket and press $(k:jump)!"
+        }
+    ]
+}

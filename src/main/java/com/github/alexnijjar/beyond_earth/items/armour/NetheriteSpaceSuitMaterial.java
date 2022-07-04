@@ -49,6 +49,6 @@ public class NetheriteSpaceSuitMaterial implements ArmorMaterial {
 
     @Override
     public float getKnockbackResistance() {
-        return 1;
+        return 0.1f;
     }
 }

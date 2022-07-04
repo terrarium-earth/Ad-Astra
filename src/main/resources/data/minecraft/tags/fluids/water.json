@@ -4,6 +4,7 @@
     "beyond_earth:fuel",
     "beyond_earth:flowing_fuel",
     "beyond_earth:oil",
-    "beyond_earth:flowing_oil"
+    "beyond_earth:flowing_oil",
+    "beyond_earth:oxygen"
   ]
 }

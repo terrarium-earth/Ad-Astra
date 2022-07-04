@@ -1,6 +1,6 @@
 package com.github.alexnijjar.beyond_earth.entities.mobs;
 
-import com.github.alexnijjar.beyond_earth.registry.ModEntities;
+import com.github.alexnijjar.beyond_earth.registry.ModEntityTypes;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -35,7 +35,7 @@ public class AlienEntity extends VillagerEntity {
 
     @Override
     public VillagerEntity createChild(ServerWorld serverWorld, PassiveEntity passiveEntity) {
-        AlienEntity entity = new AlienEntity(ModEntities.ALIEN, serverWorld);
+        AlienEntity entity = new AlienEntity(ModEntityTypes.ALIEN, serverWorld);
         entity.initialize(serverWorld, serverWorld.getLocalDifficulty(entity.getBlockPos()), SpawnReason.BREEDING, null, null);
         return entity;
     }

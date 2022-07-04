@@ -11,7 +11,7 @@ import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
 public class RocketEntityRendererTier1 extends VehicleEntityRenderer<RocketEntityTier1, RocketEntityModelTier1> {
-    public static final Identifier TEXTURE = new ModIdentifier("textures/vehicles/rocket_t1.png");
+    public static final Identifier TEXTURE = new ModIdentifier("textures/vehicles/tier_1_rocket.png");
 
     public RocketEntityRendererTier1(EntityRendererFactory.Context context) {
         super(context, new RocketEntityModelTier1(context.getPart(RocketEntityModelTier1.LAYER_LOCATION)), 0.5f);

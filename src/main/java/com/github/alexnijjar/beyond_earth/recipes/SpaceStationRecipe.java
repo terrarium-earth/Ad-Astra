@@ -14,8 +14,8 @@ import net.minecraft.util.Identifier;
 
 public class SpaceStationRecipe extends ModRecipe {
 
-    public SpaceStationRecipe(Identifier id, Ingredient[] inputs, List<Integer> stackCounts) {
-        super(id, inputs, stackCounts);
+    public SpaceStationRecipe(Identifier id, List<Ingredient> input, List<Integer> stackCounts) {
+        super(id, input, stackCounts);
     }
 
     @Override
@@ -32,7 +32,6 @@ public class SpaceStationRecipe extends ModRecipe {
 
         @Override
         public SpaceStationRecipe read(Identifier id, JsonObject json) {
-
             List<Ingredient> ingredients = new LinkedList<>();
             List<Integer> stackCounts = new LinkedList<>();
             json.getAsJsonArray("ingredients").forEach(element -> {
@@ -41,12 +40,11 @@ public class SpaceStationRecipe extends ModRecipe {
                 stackCounts.add(jsonObject.get("count").getAsInt());
             });
 
-            return new SpaceStationRecipe(id, ingredients.toArray(new Ingredient[0]), stackCounts);
+            return new SpaceStationRecipe(id, ingredients, stackCounts);
         }
 
         @Override
         public SpaceStationRecipe read(Identifier id, PacketByteBuf buf) {
-
             List<Ingredient> ingredients = buf.readList(buf2 -> {
                 return Ingredient.fromPacket(buf2);
             });
@@ -54,7 +52,7 @@ public class SpaceStationRecipe extends ModRecipe {
                 return buf2.readInt();
             });
 
-            return new SpaceStationRecipe(id, ingredients.toArray(new Ingredient[0]), stackCounts);
+            return new SpaceStationRecipe(id, ingredients, stackCounts);
         }
 
         @Override

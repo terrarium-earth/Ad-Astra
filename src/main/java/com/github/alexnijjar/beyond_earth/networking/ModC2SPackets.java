@@ -50,14 +50,18 @@ public class ModC2SPackets {
 
         // Teleport to a planet.
         ServerPlayNetworking.registerGlobalReceiver(TELEPORT_TO_PLANET, (server, player, handler, buf, responseSender) -> {
-            RegistryKey<World> targetDimension = RegistryKey.of(Registry.WORLD_KEY, buf.readIdentifier());
+            RegistryKey<World> targetDimension = getWorld(buf.readIdentifier());
 
             // Teleport has to be called on the server thread.
             server.execute(new Runnable() {
 
                 @Override
                 public void run() {
-                    ModUtils.teleportToWorld(targetDimension, player, true);
+                    if (player.getVehicle() instanceof RocketEntity) {
+                        ModUtils.teleportToWorld(targetDimension, player);
+                    } else {
+                        ModUtils.teleportPlayer(targetDimension, player);
+                    }
                 }
             });
         });
@@ -67,8 +71,8 @@ public class ModC2SPackets {
             PlayerInventory inventory = player.getInventory();
 
             ModRecipes.SPACE_STATION_RECIPE.getRecipes(player.world).forEach(recipe -> {
-                for (int i = 0; i < recipe.getInputs().length; i++) {
-                    inventory.remove(recipe.getInputs()[i]::test, recipe.getStackCounts().get(i), inventory);
+                for (int i = 0; i < recipe.getIngredients().size(); i++) {
+                    inventory.remove(recipe.getIngredients().get(i)::test, recipe.getStackCounts().get(i), inventory);
                 }
             });
         });
@@ -121,6 +125,15 @@ public class ModC2SPackets {
         ServerPlayNetworking.registerGlobalReceiver(RIGHT_KEY_CHANGED, (server, player, handler, buf, responseSender) -> {
             ModKeyBindings.pressedKeyOnServer(buf.readUuid(), "right", buf.readBoolean());
         });
+    }
+
+    private static RegistryKey<World> getWorld(Identifier id) {
+        RegistryKey<World> targetDimension = RegistryKey.of(Registry.WORLD_KEY, id);
+        // Change the "earth" registry key to the "overworld" registry key.
+        if (targetDimension.getValue().equals(new ModIdentifier("earth"))) {
+            targetDimension = World.OVERWORLD;
+        }
+        return targetDimension;
     }
 
     private static PacketByteBuf createPlanetsDatapackBuf() {

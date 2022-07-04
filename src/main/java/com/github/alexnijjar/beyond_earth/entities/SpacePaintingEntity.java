@@ -5,11 +5,11 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.registry.ModEntities;
-import com.github.alexnijjar.beyond_earth.registry.ModItems;
-
 import org.apache.commons.compress.utils.Lists;
+
+import com.github.alexnijjar.beyond_earth.BeyondEarth;
+import com.github.alexnijjar.beyond_earth.registry.ModEntityTypes;
+import com.github.alexnijjar.beyond_earth.registry.ModItems;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
@@ -29,7 +29,7 @@ public class SpacePaintingEntity extends PaintingEntity {
 	}
 	
 	public SpacePaintingEntity(World world, BlockPos pos, Direction direction) {
-		this(ModEntities.SPACE_PAINTING, world);
+		this(ModEntityTypes.SPACE_PAINTING, world);
 		this.attachmentPos = pos;
 
 		List<PaintingMotive> motives = Lists.newArrayList(Registry.PAINTING_MOTIVE.iterator());

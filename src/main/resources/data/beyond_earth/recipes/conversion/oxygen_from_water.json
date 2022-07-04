@@ -1,0 +1,10 @@
+{
+   "type": "beyond_earth:oxygen_conversion",
+   "input": {
+      "tag": "minecraft:water"
+   },
+   "output": {
+      "name": "beyond_earth:oxygen"
+   },
+   "conversion_ratio": 0.05
+}

@@ -1,11 +1,12 @@
 package com.github.alexnijjar.beyond_earth.blocks.machines.entity;
 
+import org.jetbrains.annotations.Nullable;
+
+import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.CoalGeneratorScreenHandler;
 import com.github.alexnijjar.beyond_earth.recipes.CookingRecipe;
 import com.github.alexnijjar.beyond_earth.registry.ModBlockEntities;
 import com.github.alexnijjar.beyond_earth.registry.ModRecipes;
-
-import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -13,12 +14,11 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity {
 
-    public static final long MAX_ENERGY = 9000L;
-    public static final long ENERGY_PER_TICK = 2L;
+    public static final long MAX_ENERGY = BeyondEarth.CONFIG.coalGenerator.maxEnergy;
+    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.coalGenerator.energyPerTick;
 
     public CoalGeneratorBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.COAL_GENERATOR_ENTITY, blockPos, blockState);
@@ -51,30 +51,34 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity {
         return 1;
     }
 
-    public static void serverTick(World world, BlockPos pos, BlockState state, AbstractMachineBlockEntity blockEntity) {
-        if (blockEntity.usesEnergy()) {
-            CoalGeneratorBlockEntity entity = (CoalGeneratorBlockEntity) blockEntity;
+    @Override
+    public void tick() {
+        if (!this.world.isClient) {
+            if (this.usesEnergy()) {
+                ItemStack input = this.getItems().get(0);
 
-            ItemStack input = entity.getItems().get(0);
+                if (this.getEnergy() < this.getMaxGeneration()) {
 
-            if (entity.getEnergy() < entity.getMaxGeneration()) {
-
-                // Consume the fuel.
-                if (entity.cookTime > 0) {
-                    entity.cookTime--;
-                    entity.cumulateEnergy();
-                    // Check if the input is a valid fuel.
-                } else if (!input.isEmpty()) {
-                    CookingRecipe recipe = entity.createRecipe(ModRecipes.GENERATING_RECIPE, input, false);
-                    if (recipe != null) {
-                        input.decrement(1);
-                        entity.cookTimeTotal = recipe.getCookTime();
-                        entity.cookTime = recipe.getCookTime();
+                    // Consume the fuel.
+                    if (this.cookTime > 0) {
+                        this.cookTime--;
+                        this.cumulateEnergy();
+                        this.setActive(true);
+                        // Check if the input is a valid fuel.
+                    } else if (!input.isEmpty()) {
+                        CookingRecipe recipe = this.createRecipe(ModRecipes.GENERATING_RECIPE, input, false);
+                        if (recipe != null) {
+                            input.decrement(1);
+                            this.cookTimeTotal = recipe.getCookTime();
+                            this.cookTime = recipe.getCookTime();
+                        }
+                    } else {
+                        this.setActive(false);
                     }
                 }
+                // Send energy to surrounding blocks.
+                this.energyOut();
             }
-            // Send energy to surrounding blocks.
-            entity.energyOut();
         }
     }
 }

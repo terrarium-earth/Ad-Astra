@@ -1,5 +1,7 @@
 package com.github.alexnijjar.beyond_earth.blocks.machines;
 
+import java.util.function.ToIntFunction;
+
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.AbstractMachineBlockEntity;
 
 import net.minecraft.block.Block;
@@ -8,6 +10,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
@@ -33,8 +37,17 @@ public abstract class AbstractMachineBlock extends BlockWithEntity {
     public static final BooleanProperty LIT = Properties.LIT;
 
     public AbstractMachineBlock(Settings settings) {
-        super(settings);
+        super(settings.luminance(getLuminance()));
         this.setDefaultState(this.buildDefaultState());
+    }
+
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        return (entityWorld, pos, entityState, blockEntity) -> {
+			if (blockEntity instanceof AbstractMachineBlockEntity machine) {
+				machine.tick();
+			}
+		};
     }
 
     protected BlockState buildDefaultState() {
@@ -83,6 +96,10 @@ public abstract class AbstractMachineBlock extends BlockWithEntity {
             return state;
         }
     }
+    
+    private static ToIntFunction<BlockState> getLuminance() {
+		return (blockState) -> blockState.contains(LIT) ? (blockState.get(LIT) ? 12 : 0) : 0;
+	}
 
     @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {

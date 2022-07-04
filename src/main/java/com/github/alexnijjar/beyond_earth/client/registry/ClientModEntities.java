@@ -26,13 +26,14 @@ import com.github.alexnijjar.beyond_earth.client.renderer.entity.vehicles.rocket
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.vehicles.rockets.tier_4.RocketEntityRendererTier4;
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.vehicles.rover.RoverEntityModel;
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.vehicles.rover.RoverEntityRenderer;
-import com.github.alexnijjar.beyond_earth.registry.ModEntities;
+import com.github.alexnijjar.beyond_earth.registry.ModEntityTypes;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
+import net.minecraft.client.render.entity.PaintingEntityRenderer;
 
 @Environment(EnvType.CLIENT)
 public class ClientModEntities {
@@ -40,26 +41,29 @@ public class ClientModEntities {
     public static void register() {
 
         // Mobs.
-        EntityRendererRegistry.register(ModEntities.ALIEN, AlienEntityRenderer::new);
-        EntityRendererRegistry.register(ModEntities.ALIEN_ZOMBIE, AlienZombieEntityRenderer::new);
-        EntityRendererRegistry.register(ModEntities.STAR_CRAWLER, StarCrawlerEntityRenderer::new);
-        EntityRendererRegistry.register(ModEntities.MARTIAN_RAPTOR, MartianRaptorEntityRenderer::new);
-        EntityRendererRegistry.register(ModEntities.PYGRO, PygroEntityRenderer::new);
-        EntityRendererRegistry.register(ModEntities.PYGRO_BRUTE, PygroEntityRenderer::new);
-        EntityRendererRegistry.register(ModEntities.MOGLER, MoglerEntityRenderer::new);
-        EntityRendererRegistry.register(ModEntities.ZOMBIFIED_MOGLER, ZombifiedMoglerEntityRenderer::new);
-        EntityRendererRegistry.register(ModEntities.ALIEN_WANDERING_TRADER, AlienWanderingTraderEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.ALIEN, AlienEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.ALIEN_ZOMBIE, AlienZombieEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.STAR_CRAWLER, StarCrawlerEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.MARTIAN_RAPTOR, MartianRaptorEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.PYGRO, PygroEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.PYGRO_BRUTE, PygroEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.MOGLER, MoglerEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.ZOMBIFIED_MOGLER, ZombifiedMoglerEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.ALIEN_WANDERING_TRADER, AlienWanderingTraderEntityRenderer::new);
 
         // Machines.
-        EntityRendererRegistry.register(ModEntities.TIER_1_ROCKET, RocketEntityRendererTier1::new);
-        EntityRendererRegistry.register(ModEntities.TIER_2_ROCKET, RocketEntityRendererTier2::new);
-        EntityRendererRegistry.register(ModEntities.TIER_3_ROCKET, RocketEntityRendererTier3::new);
-        EntityRendererRegistry.register(ModEntities.TIER_4_ROCKET, RocketEntityRendererTier4::new);
-        EntityRendererRegistry.register(ModEntities.ROVER, RoverEntityRenderer::new);
-        EntityRendererRegistry.register(ModEntities.LANDER, LanderEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.ROCKET_TIER_1, RocketEntityRendererTier1::new);
+        EntityRendererRegistry.register(ModEntityTypes.ROCKET_TIER_2, RocketEntityRendererTier2::new);
+        EntityRendererRegistry.register(ModEntityTypes.ROCKET_TIER_3, RocketEntityRendererTier3::new);
+        EntityRendererRegistry.register(ModEntityTypes.ROCKET_TIER_4, RocketEntityRendererTier4::new);
+        EntityRendererRegistry.register(ModEntityTypes.ROVER_TIER_1, RoverEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.LANDER, LanderEntityRenderer::new);
 
         // Projectiles.
-        EntityRendererRegistry.register(ModEntities.ICE_SPIT_ENTITY, FlyingItemEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.ICE_SPIT_ENTITY, FlyingItemEntityRenderer::new);
+
+        // Painting.
+        EntityRendererRegistry.register(ModEntityTypes.SPACE_PAINTING, PaintingEntityRenderer::new);
 
         // Layers.
         EntityModelLayerRegistry.registerModelLayer(AlienEntityModel.LAYER_LOCATION, AlienEntityModel::getTexturedModelData);

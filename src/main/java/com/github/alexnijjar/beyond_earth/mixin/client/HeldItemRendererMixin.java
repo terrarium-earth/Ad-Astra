@@ -20,15 +20,15 @@ import net.minecraft.item.ItemStack;
 @Mixin(HeldItemRenderer.class)
 public class HeldItemRendererMixin {
     @Inject(method = "renderItem", at = @At("HEAD"), cancellable = true)
-    public void renderItem(LivingEntity entity, ItemStack stack, ModelTransformation.Mode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo info) {
+    public void renderItem(LivingEntity entity, ItemStack stack, ModelTransformation.Mode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
         // Disable item rendering while in a vehicle.
         if (entity.getVehicle() instanceof RocketEntity || entity.getVehicle() instanceof LanderEntity) {
-            info.cancel();
+            ci.cancel();
         }
 
         // disable item rendering while holding a vehicle item and swimming.
         if (stack.getItem() instanceof VehicleItem && entity.getPose().equals(EntityPose.SWIMMING)) {
-            info.cancel();
+            ci.cancel();
         }
     }
 }

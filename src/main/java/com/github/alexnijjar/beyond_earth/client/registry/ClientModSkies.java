@@ -30,7 +30,7 @@ public class ClientModSkies {
                         sky.disableRenderingWhileRaining(!skyRenderer.weatherEffects().equals(SkyRenderer.WeatherEffects.NONE));
                         DimensionRenderingRegistry.registerSkyRenderer(skyRenderer.dimension(), sky);
 
-                        // Dimension Effects.
+                        // Dimension Effects
                         switch (skyRenderer.effects().type()) {
                         case SIMPLE -> DimensionRenderingRegistry.registerDimensionEffects(skyRenderer.dimension().getValue(), new ModDimensionEffects());
                         case NONE -> DimensionRenderingRegistry.registerDimensionEffects(skyRenderer.dimension().getValue(), new ModDimensionEffects() {
@@ -64,7 +64,7 @@ public class ClientModSkies {
                         });
                         }
 
-                        // Cloud renderer.
+                        // Cloud renderer
                         switch (skyRenderer.cloudEffects()) {
                         case NONE -> DimensionRenderingRegistry.registerCloudRenderer(skyRenderer.dimension(), new CloudRenderer() {
                                 @Override

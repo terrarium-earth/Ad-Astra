@@ -2,7 +2,7 @@ package com.github.alexnijjar.beyond_earth.entities.mobs;
 
 import javax.annotation.Nullable;
 
-import com.github.alexnijjar.beyond_earth.registry.ModEntities;
+import com.github.alexnijjar.beyond_earth.registry.ModEntityTypes;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -39,7 +39,7 @@ public class MoglerEntity extends HoglinEntity {
     @Override
     @Nullable
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
-        MoglerEntity moglerEntity = ModEntities.MOGLER.create(world);
+        MoglerEntity moglerEntity = ModEntityTypes.MOGLER.create(world);
         if (moglerEntity != null) {
             moglerEntity.setPersistent();
         }
@@ -59,7 +59,7 @@ public class MoglerEntity extends HoglinEntity {
 
     @Override
     protected void zombify(ServerWorld world) {
-        ZombifiedMoglerEntity zombifiedMoglerEntity = this.convertTo(ModEntities.ZOMBIFIED_MOGLER, true);
+        ZombifiedMoglerEntity zombifiedMoglerEntity = this.convertTo(ModEntityTypes.ZOMBIFIED_MOGLER, true);
         if (zombifiedMoglerEntity != null) {
             zombifiedMoglerEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 200, 0));
         }

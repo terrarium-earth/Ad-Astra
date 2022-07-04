@@ -18,6 +18,6 @@ public class NasaWorkbenchScreen extends AbstractMachineScreen<NasaWorkbenchScre
         super(handler, inventory, title, TEXTURE);
         this.backgroundWidth = 176;
         this.backgroundHeight = 224;
-        this.playerInventoryTitleY = this.backgroundHeight - 92;
+        this.playerInventoryTitleY = this.backgroundHeight - 93;
     }
 }

@@ -1,5 +1,6 @@
 package com.github.alexnijjar.beyond_earth.mixin.client;
 
+import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.VehicleEntity;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -15,11 +16,13 @@ import net.minecraft.world.BlockView;
 public abstract class CameraMixin {
 
     @Inject(method = "update", at = @At("TAIL"), cancellable = true)
-    public void update(BlockView area, Entity focusedEntity, boolean thirdPerson, boolean inverseView, float tickDelta, CallbackInfo info) {
-        CameraInvoker camera = (CameraInvoker) ((Camera) (Object) this);
-        if (thirdPerson && focusedEntity.getVehicle() instanceof VehicleEntity vehicle) {
-            if (vehicle.doHighFov()) {
-                camera.invokeMoveBy(-camera.invokeClipToSpace(12.0), 0.0, 0.0);
+    public void update(BlockView area, Entity focusedEntity, boolean thirdPerson, boolean inverseView, float tickDelta, CallbackInfo ci) {
+        if (BeyondEarth.CONFIG.vehicles.moveCameraInVehicle) {
+            CameraInvoker camera = (CameraInvoker) ((Camera) (Object) this);
+            if (thirdPerson && focusedEntity.getVehicle() instanceof VehicleEntity vehicle) {
+                if (vehicle.doHighFov()) {
+                    camera.invokeMoveBy(-camera.invokeClipToSpace(12.0), 0.0, 0.0);
+                }
             }
         }
     }

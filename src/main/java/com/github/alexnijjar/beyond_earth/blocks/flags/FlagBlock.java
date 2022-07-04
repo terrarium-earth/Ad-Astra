@@ -116,7 +116,9 @@ public class FlagBlock extends BlockWithEntity implements Waterloggable {
     @Override
     public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
         super.onPlaced(world, pos, state, placer, itemStack);
-        world.setBlockState(pos.up(), state.with(HALF, DoubleBlockHalf.UPPER), 3);
+
+        boolean waterAbove = world.getFluidState(pos.up()).isOf(Fluids.WATER);
+        world.setBlockState(pos.up(), state.with(HALF, DoubleBlockHalf.UPPER).with(WATERLOGGED, waterAbove), 3);
 
         BlockEntity blockEntity = world.getBlockEntity(pos.up());
 

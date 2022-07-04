@@ -18,8 +18,4 @@ public class ModBiomes {
         public static final RegistryKey<Biome> MOON_DESERT = RegistryKey.of(Registry.BIOME_KEY, new ModIdentifier("moon_desert"));
         public static final RegistryKey<Biome> ORBIT = RegistryKey.of(Registry.BIOME_KEY, new ModIdentifier("orbit"));
         public static final RegistryKey<Biome> VENUS_DESERT = RegistryKey.of(Registry.BIOME_KEY, new ModIdentifier("venus_desert"));
-
-        public static void register() {
-
-        }
 }

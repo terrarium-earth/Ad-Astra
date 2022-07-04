@@ -1,7 +1,6 @@
 package com.github.alexnijjar.beyond_earth.client.screens;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.gui.GuiUtil;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -43,6 +42,7 @@ public class PlayerOverlayScreen {
 
     public static boolean shouldRenderOxygen;
     public static double oxygenRatio;
+    public static boolean doesNotNeedOxygen;
 
     public static int countdownSeconds;
 
@@ -58,7 +58,7 @@ public class PlayerOverlayScreen {
         ClientPlayerEntity player = client.player;
 
         // Oxygen.
-        if (shouldRenderOxygen) {
+        if (shouldRenderOxygen && !client.options.debugEnabled) {
 
             int x = 5;
             int y = 25;
@@ -70,9 +70,14 @@ public class PlayerOverlayScreen {
             GuiUtil.drawVertical(matrices, x, y, textureWidth, textureHeight, OXYGEN_TANK_FULL_TEXTURE, oxygenRatio);
 
             // Oxygen text.
-            Text text = Text.of((Math.round(oxygenRatio * 100)) + "%");
+            double oxygen = Math.round(oxygenRatio * 1000) / 10.0;
+            Text text = Text.of((oxygen) + "%");
             int textWidth = client.textRenderer.getWidth(text);
-            client.textRenderer.drawWithShadow(matrices, text, (x + (textureWidth - textWidth) / 2), y + textureHeight + 3, 0xFFFFFF);
+            if (doesNotNeedOxygen) {
+                client.textRenderer.drawWithShadow(matrices, text, (x + (textureWidth - textWidth) / 2), y + textureHeight + 3, 0x7FFF00);
+            } else {
+                client.textRenderer.drawWithShadow(matrices, text, (x + (textureWidth - textWidth) / 2), y + textureHeight + 3, oxygen <= 0.0f ? 0xDC143C : 0xFFFFFF);
+            }
         }
 
         // Timer.
@@ -86,7 +91,7 @@ public class PlayerOverlayScreen {
         }
 
         // Planet bar.
-        if (shouldRenderBar) {
+        if (shouldRenderBar && !client.options.debugEnabled) {
             int rocketHeight = (int) (player.getY() / 5.3f);
             rocketHeight = MathHelper.clamp(rocketHeight, 0, 113);
 
@@ -128,7 +133,7 @@ public class PlayerOverlayScreen {
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
 
             // Flashing.
-            float sine = (float)Math.sin((client.world.getTime() + client.getTickDelta()) / 2.0f);
+            float sine = (float) Math.sin((client.world.getTime() + client.getTickDelta()) / 2.0f);
 
             sine = MathHelper.clamp(sine, 0.0f, 1.0f);
             RenderSystem.setShaderColor(sine, sine, sine, sine);
@@ -140,7 +145,7 @@ public class PlayerOverlayScreen {
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
 
             // Speed text.
-            TranslatableText text = new TranslatableText("message." + BeyondEarth.MOD_ID + ".speed", Math.round(speed * 10.0) / 10.0);
+            Text text = new TranslatableText("message." + BeyondEarth.MOD_ID + ".speed", Math.round(speed * 10.0) / 10.0);
             client.textRenderer.drawWithShadow(matrices, text, screenX / 2 - 29, 80, -3407872);
 
             RenderSystem.disableBlend();

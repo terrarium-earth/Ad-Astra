@@ -17,7 +17,7 @@ public abstract class CookingRecipe extends ModRecipe {
         this.cookTime = cookTime;
     }
 
-    public CookingRecipe(Identifier id, Ingredient[] input, List<Integer> stackCounts, ItemStack output) {
+    public CookingRecipe(Identifier id, List<Ingredient> input, List<Integer> stackCounts, ItemStack output) {
         super(id, input, stackCounts);
         this.output = output;
     }
@@ -28,7 +28,7 @@ public abstract class CookingRecipe extends ModRecipe {
     }
 
     public Ingredient getInputIngredient() {
-        return this.inputs[0];
+        return this.inputs.get(0);
     }
 
     public short getCookTime() {

@@ -1,0 +1,79 @@
+{
+	"type": "beyond_earth:nasa_workbench",
+	"ingredients": [
+		{
+			"ingredient": {
+				"item": "beyond_earth:rocket_nose_cone"
+			}
+		},
+		{
+			"ingredient": {
+				"tag": "c:compressed_steel"
+			}
+		},
+		{
+			"ingredient": {
+				"tag": "c:compressed_steel"
+			}
+		},
+		{
+			"ingredient": {
+				"tag": "c:compressed_steel"
+			}
+		},
+		{
+			"ingredient": {
+				"tag": "c:compressed_steel"
+			}
+		},
+		{
+			"ingredient": {
+				"tag": "c:compressed_steel"
+			}
+		},
+		{
+			"ingredient": {
+				"tag": "c:compressed_steel"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "beyond_earth:rocket_fin"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "beyond_earth:steel_tank"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "beyond_earth:steel_tank"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "beyond_earth:rocket_fin"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "beyond_earth:rocket_fin"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "beyond_earth:steel_engine"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "beyond_earth:rocket_fin"
+			}
+		}
+	],
+	"output": {
+		"item": "beyond_earth:tier_1_rocket",
+		"count": 1
+	}
+}

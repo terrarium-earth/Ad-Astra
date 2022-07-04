@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.github.alexnijjar.beyond_earth.registry.ModArmour;
+import com.github.alexnijjar.beyond_earth.registry.ModItems;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 
 import net.fabricmc.api.EnvType;
@@ -25,6 +25,7 @@ public class SpaceSuitRenderer {
     public static Identifier SPACE_SUIT_CHEST_LOCATION = new ModIdentifier("textures/models/armor/space_suit.png");
     public static Identifier NETHERITE_SPACE_SUIT_CHEST_LOCATION = new ModIdentifier("textures/models/armor/netherite_space_suit.png");
     public static Identifier JET_SUIT_CHEST_LOCATION = new ModIdentifier("textures/models/armor/jet_suit.png");
+
     public static void register() {
 
         // Space Suit.
@@ -40,7 +41,7 @@ public class SpaceSuitRenderer {
             SpaceSuitModel model = new SpaceSuitModel(root, contextModel, texture);
 
             ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, model, texture);
-        }, ModArmour.SPACE_SUIT_SET);
+        }, ModItems.SPACE_HELMET, ModItems.SPACE_SUIT, ModItems.SPACE_PANTS, ModItems.SPACE_BOOTS);
 
         // Netherite Space Suit.
         ArmorRenderer.register((matrices, vertexConsumers, stack, entity, slot, light, contextModel) -> {
@@ -55,7 +56,7 @@ public class SpaceSuitRenderer {
             SpaceSuitModel model = new SpaceSuitModel(root, contextModel, texture);
 
             ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, model, texture);
-        }, ModArmour.NETHERITE_SPACE_SUIT_SET);
+        }, ModItems.NETHERITE_SPACE_HELMET, ModItems.NETHERITE_SPACE_SUIT, ModItems.NETHERITE_SPACE_PANTS, ModItems.NETHERITE_SPACE_BOOTS);
 
         // Jet Suit.
         ArmorRenderer.register((matrices, vertexConsumers, stack, entity, slot, light, contextModel) -> {
@@ -69,7 +70,7 @@ public class SpaceSuitRenderer {
             JetSuitModel model = new JetSuitModel(root, contextModel, texture);
 
             ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, model, texture);
-        }, ModArmour.JET_SUIT_SET);
+        }, ModItems.JET_SUIT_HELMET, ModItems.JET_SUIT, ModItems.JET_SUIT_PANTS, ModItems.JET_SUIT_BOOTS);
     }
 
     private static Map<String, ModelPart> createModelMap(EquipmentSlot slot, BipedEntityModel<LivingEntity> contextModel, Identifier headTexture, EntityModelLayer entityLayer) {
