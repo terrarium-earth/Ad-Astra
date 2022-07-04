@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "beyond_earth:blocks/steel_pillar_top",
+    "up": "beyond_earth:blocks/steel_pillar_top",
+    "north": "beyond_earth:blocks/steel_pillar",
+    "east": "beyond_earth:blocks/steel_pillar",
+    "south": "beyond_earth:blocks/steel_pillar",
+    "west": "beyond_earth:blocks/steel_pillar",
+    "particle": "beyond_earth:blocks/steel_pillar_top"
+  }
+}

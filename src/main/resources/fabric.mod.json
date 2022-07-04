@@ -6,15 +6,16 @@
   "name": "Beyond Earth",
   "description": "Fly to Other Planets and Beyond!",
   "authors": [
-    "MrScautHD (Forge Developer)",
-    "ExistingEevee (Forge Developer)",
     "Alex Nijjar (Fabric Developer)",
-    "Mvbz (Sound Artist)",
-    "FritzHackenstein (Texturer)",
+    "MrScautHD (Author)",
+    "ExistingEevee (Forge Developer)",
+    "Facu (Texturer)",
     "Fizz (Texturer)",
+    "FritzHackenstein (Texturer)",
     "jopken (Texturer)",
     "Scarecrow (Modeler)",
     "ShrekRightT*****le1 (Modeler)",
+    "Mvbz (Sound Artist)",
     "Barracuda (Builder)",
     "Solar (Builder)",
     "SpaceStar (Builder)",
@@ -22,8 +23,8 @@
     "Retr0 (Builder)"
   ],
   "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/beyond-earth-fabric",
-    "sources": "https://github.com/MrScautHD/Beyond-Earth"
+    "homepage": "https://modrinth.com/mod/beyond-earth-fabric",
+    "sources": "https://github.com/AlexNijjar/Beyond-Earth-Fabric"
   },
 
   "license": "LGPL-3",
@@ -36,6 +37,15 @@
     ],
     "client": [
       "com.github.alexnijjar.beyond_earth.client.BeyondEarthClient"
+    ],
+    "fabric-datagen": [
+      "com.github.alexnijjar.beyond_earth.datagen.BeyondEarthDataGenEntrypoint"
+    ],
+    "modmenu": [
+      "com.github.alexnijjar.beyond_earth.config.ModMenuConfig"
+    ],
+    "rei_client": [
+      "com.github.alexnijjar.beyond_earth.compat.rei.BeyondEarthClientPlugin"
     ]
   },
   "accessWidener": "beyond_earth.accesswidener",
@@ -44,9 +54,10 @@
   ],
 
   "depends": {
-    "fabricloader": ">=0.13.3",
+    "fabricloader": ">=0.14.8",
     "fabric": "*",
     "minecraft": "1.18.x",
+    "cloth-config": ">=6.2.62",
     "java": ">=17"
   },
   "suggests": {

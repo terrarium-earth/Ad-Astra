@@ -3,7 +3,9 @@ package com.github.alexnijjar.beyond_earth.client.renderer.sky;
 import java.util.Random;
 
 import com.github.alexnijjar.beyond_earth.client.resource_pack.SkyRenderer;
+import com.github.alexnijjar.beyond_earth.client.resource_pack.SkyRenderer.StarsRenderer;
 import com.github.alexnijjar.beyond_earth.mixin.client.WorldRendererAccessor;
+import com.github.alexnijjar.beyond_earth.util.ColourHolder;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 import com.github.alexnijjar.beyond_earth.world.WorldSeed;
 import com.mojang.blaze3d.platform.GlStateManager;
@@ -101,15 +103,15 @@ public class SkyUtil {
         return cameraSubmersionType.equals(CameraSubmersionType.POWDER_SNOW) || cameraSubmersionType.equals(CameraSubmersionType.LAVA) || player.hasStatusEffect(StatusEffects.BLINDNESS);
     }
 
-    private static void startRendering(MatrixStack matrices, Vec3f euler) {
+    private static void startRendering(MatrixStack matrices, Vec3f rotation) {
 
         matrices.push();
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
 
         // Rotation.
-        matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(euler.getY()));
-        matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(euler.getZ()));
-        matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(euler.getX()));
+        matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(rotation.getY()));
+        matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(rotation.getZ()));
+        matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(rotation.getX()));
     }
 
     private static void endRendering(MatrixStack matrices) {
@@ -118,10 +120,11 @@ public class SkyUtil {
         matrices.pop();
     }
 
-    public static void render(WorldRenderContext context, BufferBuilder bufferBuilder, Identifier texture, Vec3f euler, float scale, boolean blending) {
+    // For rendering textures in the sky
+    public static void render(WorldRenderContext context, BufferBuilder bufferBuilder, Identifier texture, ColourHolder colour, Vec3f rotation, float scale, boolean blending) {
 
-        startRendering(context.matrixStack(), euler);
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        startRendering(context.matrixStack(), rotation);
+        RenderSystem.setShader(GameRenderer::getPositionColorTexShader);
 
         RenderSystem.disableTexture();
 
@@ -133,18 +136,18 @@ public class SkyUtil {
 
         Matrix4f positionMatrix = context.matrixStack().peek().getPositionMatrix();
         RenderSystem.setShaderTexture(0, texture);
-        bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE);
-        bufferBuilder.vertex(positionMatrix, -scale, (float) 100.0, -scale).texture(0.0f, 0.0f).next();
-        bufferBuilder.vertex(positionMatrix, scale, (float) 100.0, -scale).texture(1.0f, 0.0f).next();
-        bufferBuilder.vertex(positionMatrix, scale, (float) 100.0, scale).texture(1.0f, 1.0f).next();
-        bufferBuilder.vertex(positionMatrix, -scale, (float) 100.0, scale).texture(0.0f, 1.0f).next();
+        bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR_TEXTURE);
+        bufferBuilder.vertex(positionMatrix, -scale, (float) 100.0, -scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).texture(0.0f, 0.0f).next();
+        bufferBuilder.vertex(positionMatrix, scale, (float) 100.0, -scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).texture(1.0f, 0.0f).next();
+        bufferBuilder.vertex(positionMatrix, scale, (float) 100.0, scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).texture(1.0f, 1.0f).next();
+        bufferBuilder.vertex(positionMatrix, -scale, (float) 100.0, scale).color((int) colour.r(), (int) colour.g(), (int)colour.b(), 255).texture(0.0f, 1.0f).next();
         bufferBuilder.end();
         BufferRenderer.draw(bufferBuilder);
 
         endRendering(context.matrixStack());
     }
 
-    public static VertexBuffer renderStars(WorldRenderContext context, BufferBuilder bufferBuilder, VertexBuffer starsBuffer, int stars, boolean fixedStarColour) {
+    public static VertexBuffer renderStars(WorldRenderContext context, BufferBuilder bufferBuilder, VertexBuffer starsBuffer, int stars, StarsRenderer starsRenderer) {
 
         startRendering(context.matrixStack(), new Vec3f(-30.0f, 0.0f, context.world().getSkyAngle(context.tickDelta()) * 360.0f));
         RenderSystem.setShader(GameRenderer::getPositionColorShader);
@@ -154,11 +157,11 @@ public class SkyUtil {
         }
 
         starsBuffer = new VertexBuffer();
-        SkyUtil.renderStars(bufferBuilder, stars);
+        SkyUtil.renderStars(bufferBuilder, stars, starsRenderer.colouredStars());
         bufferBuilder.end();
         starsBuffer.upload(bufferBuilder);
 
-        if (!fixedStarColour) {
+        if (!starsRenderer.daylightVisible()) {
             float rot = context.world().method_23787(context.tickDelta());
             RenderSystem.setShaderColor(rot, rot, rot, rot);
         } else {
@@ -171,16 +174,15 @@ public class SkyUtil {
         return starsBuffer;
     }
 
-    private static void renderStars(BufferBuilder buffer, int stars) {
+    private static void renderStars(BufferBuilder buffer, int stars, boolean colouredStars) {
         RenderSystem.setShader(GameRenderer::getPositionColorShader);
         Random random = new Random(WorldSeed.getSeed());
-        float size = random.nextFloat() * (1.1f - 0.5f);
         buffer.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR);
         for (int i = 0; i < stars; ++i) {
             double d = random.nextFloat() * 2.0f - 1.0f;
             double e = random.nextFloat() * 2.0f - 1.0f;
             double f = random.nextFloat() * 2.0f - 1.0f;
-            double g = 0.15f + random.nextFloat() * size;
+            double g = 0.15f + random.nextFloat() * 0.01;
             double h = d * d + e * e + f * f;
             if (!(h < 1.0) || !(h > 0.01))
                 continue;
@@ -198,30 +200,32 @@ public class SkyUtil {
             double t = Math.sin(s);
             double u = Math.cos(s);
 
-            int starR;
-            int starG;
-            int starB;
-            int colourChannel = random.nextInt(5);
-            if (colourChannel == 0) { // Blue.
-                starR = 204;
-                starG = 238;
-                starB = 255;
-            } else if (colourChannel == 1) { // Purple.
-                starR = 204;
-                starG = 153;
-                starB = 255;
-            } else if (colourChannel == 2) { // Yellow.
-                starR = 255;
-                starG = 255;
-                starB = 153;
-            } else if (colourChannel == 3) { // Orange.
-                starR = 255;
-                starG = 204;
-                starB = 102;
-            } else { // White.
-                starR = 255;
-                starG = 255;
-                starB = 255;
+            int starR = 255;
+            int starG = 255;
+            int starB = 255;
+            if (colouredStars) {
+                int colourChannel = random.nextInt(5);
+                if (colourChannel == 0) { // Blue
+                    starR = 204;
+                    starG = 238;
+                    starB = 255;
+                } else if (colourChannel == 1) { // Purple
+                    starR = 204;
+                    starG = 153;
+                    starB = 255;
+                } else if (colourChannel == 2) { // Yellow
+                    starR = 255;
+                    starG = 255;
+                    starB = 153;
+                } else if (colourChannel == 3) { // Orange
+                    starR = 255;
+                    starG = 204;
+                    starB = 102;
+                } else { // White.
+                    starR = 255;
+                    starG = 255;
+                    starB = 255;
+                }
             }
 
             for (int v = 0; v < 4; ++v) {

@@ -3,6 +3,7 @@
     "stars": {
         "fancy_count": 13000,
         "fast_count": 6000,
+        "colored_stars": true,
         "daylight_visible": true
     },
     "sunset_color": "vanilla",
@@ -14,7 +15,7 @@
     "horizon_angle": 0,
     "sky_objects": [
         {
-            "texture": "sun",
+            "texture": "beyond_earth:textures/sky/sun.png",
             "blending": true,
             "render_type": "dynamic",
             "scale": 30.0,
@@ -25,10 +26,10 @@
             }
         },
         {
-            "texture": "earth_light",
-            "blending": true,
+            "texture": "beyond_earth:textures/sky/earth.png",
+            "blending": false,
             "render_type": "static",
-            "scale": 25.0,
+            "scale": 9.0,
             "rotation": {
                 "x": 0.0,
                 "y": -90.0,
@@ -36,10 +37,26 @@
             }
         },
         {
-            "texture": "earth",
-            "blending": false,
+            "texture": "beyond_earth:textures/sky/earth.png",
+            "blending": true,
             "render_type": "static",
             "scale": 9.0,
+            "rotation": {
+                "x": 0.0,
+                "y": -90.0,
+                "z": -30.0
+            }
+        },
+        {
+            "texture": "beyond_earth:textures/sky/light.png",
+            "blending": true,
+            "render_type": "static",
+            "scale": 25.0,
+            "color": {
+                "r": 128,
+                "g": 191,
+                "b": 255
+            },
             "rotation": {
                 "x": 0.0,
                 "y": -90.0,

@@ -17,8 +17,8 @@ import net.minecraft.util.registry.Registry;
 
 public class NasaWorkbenchRecipe extends CookingRecipe {
 
-    public NasaWorkbenchRecipe(Identifier id, Ingredient[] inputs, List<Integer> stackCounts, ItemStack output) {
-        super(id, inputs, stackCounts, output);
+    public NasaWorkbenchRecipe(Identifier id, List<Ingredient> input, List<Integer> stackCounts, ItemStack output) {
+        super(id, input, stackCounts, output);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class NasaWorkbenchRecipe extends CookingRecipe {
             short stackSize = json.get("output").getAsJsonObject().get("count").getAsShort();
             ItemStack output = new ItemStack(item, stackSize);
 
-            return new NasaWorkbenchRecipe(id, ingredients.toArray(new Ingredient[0]), stackCounts, output);
+            return new NasaWorkbenchRecipe(id, ingredients, stackCounts, output);
         }
 
         @Override
@@ -66,7 +66,7 @@ public class NasaWorkbenchRecipe extends CookingRecipe {
             });
             ItemStack output = buf.readItemStack();
 
-            return new NasaWorkbenchRecipe(id, ingredients.toArray(new Ingredient[0]), stackCounts, output);
+            return new NasaWorkbenchRecipe(id, ingredients, stackCounts, output);
         }
 
         @Override

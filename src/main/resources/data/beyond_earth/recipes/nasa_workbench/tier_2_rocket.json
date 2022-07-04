@@ -1,0 +1,79 @@
+{
+	"type": "beyond_earth:nasa_workbench",
+	"ingredients": [
+		{
+			"ingredient": {
+				"item": "beyond_earth:rocket_nose_cone"
+			}
+		},
+		{
+			"ingredient": {
+				"tag": "c:compressed_desh"
+			}
+		},
+		{
+			"ingredient": {
+				"tag": "c:compressed_desh"
+			}
+		},
+		{
+			"ingredient": {
+				"tag": "c:compressed_desh"
+			}
+		},
+		{
+			"ingredient": {
+				"tag": "c:compressed_desh"
+			}
+		},
+		{
+			"ingredient": {
+				"tag": "c:compressed_desh"
+			}
+		},
+		{
+			"ingredient": {
+				"tag": "c:compressed_desh"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "beyond_earth:rocket_fin"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "beyond_earth:desh_tank"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "beyond_earth:desh_tank"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "beyond_earth:rocket_fin"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "beyond_earth:rocket_fin"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "beyond_earth:desh_engine"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "beyond_earth:rocket_fin"
+			}
+		}
+	],
+	"output": {
+		"item": "beyond_earth:tier_2_rocket",
+		"count": 1
+	}
+}

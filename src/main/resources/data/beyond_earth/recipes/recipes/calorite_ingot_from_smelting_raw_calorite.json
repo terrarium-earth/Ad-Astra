@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 1.0,
+  "ingredient": {
+    "item": "beyond_earth:raw_calorite"
+  },
+  "result": "beyond_earth:calorite_ingot"
+}

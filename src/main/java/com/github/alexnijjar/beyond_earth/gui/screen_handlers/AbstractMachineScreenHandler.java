@@ -52,13 +52,17 @@ public abstract class AbstractMachineScreenHandler extends ScreenHandler {
 
         for (m = 0; m < 3; ++m) {
             for (l = 0; l < 9; ++l) {
-                addSlot(new Slot(inventory, l + m * 9 + 9, 8 + l * 18, 84 + m * 18));
+                addSlot(new Slot(inventory, l + m * 9 + 9, 8 + l * 18, 84 + this.getPlayerInventoryOffset() + m * 18));
             }
         }
 
         for (m = 0; m < 9; ++m) {
-            addSlot(new Slot(inventory, m, 8 + m * 18, 142));
+            addSlot(new Slot(inventory, m, 8 + m * 18, 142 + this.getPlayerInventoryOffset()));
         }
+    }
+
+    public int getPlayerInventoryOffset() {
+        return 0;
     }
 
     @Override

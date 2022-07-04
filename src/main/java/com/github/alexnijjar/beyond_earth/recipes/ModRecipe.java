@@ -1,31 +1,37 @@
 package com.github.alexnijjar.beyond_earth.recipes;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-import com.github.alexnijjar.beyond_earth.util.SimpleInventory;
+import com.github.alexnijjar.beyond_earth.util.ModInventory;
 
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
 
 public abstract class ModRecipe implements Recipe<Inventory>, Predicate<ItemStack> {
 
     protected Identifier id;
-    protected Ingredient[] inputs = new Ingredient[1];
+    protected final List<Ingredient> inputs = new ArrayList<>();
     protected List<Integer> stackCounts;
+
+    public ModRecipe(Identifier id) {
+        this.id = id;
+    }
 
     public ModRecipe(Identifier id, Ingredient input) {
         this.id = id;
-        this.inputs[0] = input;
+        this.inputs.add(input);
     }
 
-    public ModRecipe(Identifier id, Ingredient[] input, List<Integer> stackCounts) {
+    public ModRecipe(Identifier id, List<Ingredient> input, List<Integer> stackCounts) {
         this.id = id;
-        this.inputs = input;
+        this.inputs.addAll(input);
         this.stackCounts = stackCounts;
     }
 
@@ -58,8 +64,12 @@ public abstract class ModRecipe implements Recipe<Inventory>, Predicate<ItemStac
         return this.id;
     }
 
-    public Ingredient[] getInputs() {
-        return this.inputs;
+
+    @Override
+    public DefaultedList<Ingredient> getIngredients() {
+        DefaultedList<Ingredient> defaultedList = DefaultedList.of();
+        defaultedList.addAll(this.inputs);
+        return defaultedList;
     }
 
     public List<Integer> getStackCounts() {
@@ -78,14 +88,14 @@ public abstract class ModRecipe implements Recipe<Inventory>, Predicate<ItemStac
     }
 
     // Tests if everything in the inventory matches the recipe in the correct order.
-    public boolean test(SimpleInventory inventory) {
+    public boolean test(ModInventory inventory) {
 
-        for (int i = 0; i < this.inputs.length; i++) {
-            if (!inputs[i].test(inventory.getItems().get(i))) {
+        for (int i = 0; i < this.inputs.size(); i++) {
+            if (!inputs.get(i).test(inventory.getItems().get(i))) {
                 return false;
             }
         }
-        
+
         return true;
     }
 }

@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "tag": "c:compressed_desh"
+    },
+    "F": {
+      "item": "beyond_earth:engine_fan"
+    },
+    "G": {
+      "item": "beyond_earth:oxygen_gear"
+    },
+    "L": {
+      "item": "beyond_earth:oxygen_loader"
+    },
+    "T": {
+      "item": "beyond_earth:oxygen_tank"
+    }
+  },
+  "pattern": [
+    "FFF",
+    "TLT",
+    "#G#"
+  ],
+  "result": {
+    "item": "beyond_earth:oxygen_distributor"
+  }
+}

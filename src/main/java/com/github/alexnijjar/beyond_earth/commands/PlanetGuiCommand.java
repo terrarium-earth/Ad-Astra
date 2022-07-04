@@ -5,7 +5,7 @@ import static net.minecraft.server.command.CommandManager.argument;
 import java.util.Collection;
 import java.util.List;
 
-import com.github.alexnijjar.beyond_earth.gui.PlanetSelectionHandlerFactory;
+import com.github.alexnijjar.beyond_earth.gui.PlanetSelectionScreenHandlerFactory;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
@@ -46,7 +46,7 @@ public class PlanetGuiCommand {
         entities.forEach((entity) -> {
             if (entity instanceof PlayerEntity player) {
                 player.playerScreenHandler.close(player);
-                player.openHandledScreen(new PlanetSelectionHandlerFactory(tier));
+                player.openHandledScreen(new PlanetSelectionScreenHandlerFactory(tier));
             }
         });
 

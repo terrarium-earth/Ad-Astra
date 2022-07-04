@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "desh_plating",
+  "key": {
+    "#": {
+      "item": "beyond_earth:iron_plating"
+    },
+    "|": {
+      "tag": "c:desh_plates"
+    }
+  },
+  "pattern": [
+    "###",
+    "#|#",
+    "###"
+  ],
+  "result": {
+    "count": 8,
+    "item": "beyond_earth:desh_plating"
+  }
+}

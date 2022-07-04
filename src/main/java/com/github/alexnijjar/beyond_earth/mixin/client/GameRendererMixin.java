@@ -19,7 +19,7 @@ public abstract class GameRendererMixin {
 
     // Shake the player camera when inside of a vehicle.
     @Inject(at = @At(value = "HEAD"), method = "bobView", cancellable = true)
-    public void bobView(MatrixStack matrices, float tickDelta, CallbackInfo info) {
+    public void bobView(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
 
         MinecraftClient client = MinecraftClient.getInstance();
 
@@ -27,7 +27,7 @@ public abstract class GameRendererMixin {
             if (player.getVehicle() instanceof RocketEntity entity) {
                 if (entity.getPhase() != 3) {
                     if (entity.isFlying()) {
-                        info.cancel();
+                        ci.cancel();
 
                         float f = player.horizontalSpeed - player.prevHorizontalSpeed;
                         float g = -(player.horizontalSpeed + f * tickDelta);

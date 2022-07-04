@@ -1,7 +1,5 @@
 package com.github.alexnijjar.beyond_earth.blocks.globes;
 
-import com.github.alexnijjar.beyond_earth.registry.ModBlockEntities;
-
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.block.Block;
@@ -76,8 +74,11 @@ public class GlobeBlock extends BlockWithEntity implements Waterloggable {
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        // Client and sever tick.
-        return checkType(type, ModBlockEntities.GLOBE_BLOCK_ENTITY, GlobeBlockEntity::tick);
+        return (entityWorld, pos, entityState, blockEntity) -> {
+			if (blockEntity instanceof GlobeBlockEntity globe) {
+				globe.tick();
+			}
+		};
     }
 
     @Override

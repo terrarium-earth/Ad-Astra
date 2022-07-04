@@ -40,36 +40,37 @@ public class ModSky implements DimensionRenderingRegistry.SkyRenderer {
         if (shouldRenderWhileRaining && client.world.isRaining()) {
             return;
         }
-        // Cancel rendering if the player is in fog, i.e. in lava or powdered snow.
+        // Cancel rendering if the player is in fog, i.e. in lava or powdered snow
         if (SkyUtil.isSubmerged(context.camera())) {
             return;
         }
 
         SkyUtil.preRender(context, bufferBuilder, this.sunsetColour, horizonAngle, context.matrixStack(), context.world(), context.tickDelta());
 
-        // Stars.
+        // Stars
         if (this.starsRenderer.fastStars() > 0) {
             int stars = (context.advancedTranslucency() || client.options.graphicsMode.equals(GraphicsMode.FANCY) ? this.starsRenderer.fancyStars() : this.starsRenderer.fastStars());
-            starsBuffer = SkyUtil.renderStars(context, bufferBuilder, starsBuffer, stars, this.starsRenderer.daylightVisible());
+            starsBuffer = SkyUtil.renderStars(context, bufferBuilder, starsBuffer, stars, this.starsRenderer);
         }
 
-        // Render all sky objects.
+        // Render all sky objects
         for (SkyObject skyObject : this.skyObjects) {
 
             float scale = skyObject.scale();
             Vec3f rotation = skyObject.rotation();
             switch (skyObject.renderType()) {
             case STATIC -> {
-                // Do not modify the scale or rotation.
+                // Do not modify the scale or rotation
             }
             case DYNAMIC -> rotation = new Vec3f(skyAngle * 360.0f + rotation.getX(), rotation.getY(), rotation.getZ());
-            case SCALING -> scale = SkyUtil.getScale();
+            case SCALING -> scale *= SkyUtil.getScale();
             case DEBUG -> {
-                // Test things without restarting Minecraft.
+                // Test things without restarting Minecraft
                 rotation = new Vec3f(skyAngle * 360.0f + rotation.getX(), rotation.getY(), rotation.getZ());
             }
             }
-            SkyUtil.render(context, bufferBuilder, skyObject.texture(), rotation, scale, skyObject.blending());
+            SkyUtil.render(context, bufferBuilder, skyObject.texture(), skyObject.colour(), rotation, scale, skyObject.blending());
+            // RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
         }
 
         SkyUtil.postRender(context, context.matrixStack(), context.world(), context.tickDelta());
@@ -95,7 +96,7 @@ public class ModSky implements DimensionRenderingRegistry.SkyRenderer {
         this.shouldRenderWhileRaining = value;
     }
 
-    // Custom pink sunset and sunrise.
+    // Custom pink sunset and sunrise
     public static float[] getMarsColour(float skyAngle) {
         float[] colours = new float[4];
 
