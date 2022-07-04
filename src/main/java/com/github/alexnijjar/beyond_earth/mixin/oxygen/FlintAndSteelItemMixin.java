@@ -25,7 +25,7 @@ import net.minecraft.world.event.GameEvent;
 public class FlintAndSteelItemMixin {
     @Inject(at = @At(value = "HEAD"), method = "useOnBlock", cancellable = true)
     public void useOnBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> ci) {
-        if (!BeyondEarth.CONFIG.mainConfig.doOxygen) {
+        if (!BeyondEarth.CONFIG.world.doOxygen) {
             return;
         }
         PlayerEntity player = context.getPlayer();

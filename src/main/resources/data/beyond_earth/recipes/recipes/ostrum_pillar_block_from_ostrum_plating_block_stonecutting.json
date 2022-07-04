@@ -2,7 +2,7 @@
   "type": "minecraft:stonecutting",
   "count": 1,
   "ingredient": {
-    "item": "beyond_earth:ostrum_plating_block"
+    "item": "beyond_earth:ostrum_plating"
   },
-  "result": "beyond_earth:ostrum_pillar_block"
+  "result": "beyond_earth:ostrum_pillar"
 }

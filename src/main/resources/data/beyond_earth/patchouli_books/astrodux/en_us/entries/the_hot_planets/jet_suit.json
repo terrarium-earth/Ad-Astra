@@ -12,7 +12,7 @@
         },
         {
             "type": "patchouli:text",
-            "text": "It's got two modes of flight: ascending and boosted. Ascending makes the wearer fly upwards, while boosted is similar to an elytra that's constantly being propelled by fireworks. The Jet Suit is powered by energy and must be charged to fly."
+            "text": "It's got two modes of flight: ascending and boosted. Ascending makes the wearer fly upwards, while boosted is similar to an elytra that's constantly being propelled by fireworks. The Jet Suit is powered by energy and must be charged to fly. It can be charged with an energizer."
         },
         {
             "type": "patchouli:crafting",

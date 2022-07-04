@@ -17,7 +17,7 @@ public abstract class CameraMixin {
 
     @Inject(method = "update", at = @At("TAIL"), cancellable = true)
     public void update(BlockView area, Entity focusedEntity, boolean thirdPerson, boolean inverseView, float tickDelta, CallbackInfo ci) {
-        if (BeyondEarth.CONFIG.mainConfig.moveCameraInVehicle) {
+        if (BeyondEarth.CONFIG.vehicles.moveCameraInVehicle) {
             CameraInvoker camera = (CameraInvoker) ((Camera) (Object) this);
             if (thirdPerson && focusedEntity.getVehicle() instanceof VehicleEntity vehicle) {
                 if (vehicle.doHighFov()) {

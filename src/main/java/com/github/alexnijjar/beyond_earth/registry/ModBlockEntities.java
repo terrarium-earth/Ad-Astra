@@ -5,6 +5,7 @@ import com.github.alexnijjar.beyond_earth.blocks.globes.GlobeBlockEntity;
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.AbstractMachineBlockEntity;
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.CoalGeneratorBlockEntity;
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.CompressorBlockEntity;
+import com.github.alexnijjar.beyond_earth.blocks.machines.entity.EnergizerBlockEntity;
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.FluidMachineBlockEntity;
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.FuelRefineryBlockEntity;
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.NasaWorkbenchBlockEntity;
@@ -39,6 +40,7 @@ public class ModBlockEntities {
         public static BlockEntityType<NasaWorkbenchBlockEntity> NASA_WORKBENCH_ENTITY;
         public static BlockEntityType<OxygenDistributorBlockEntity> OXYGEN_DISTRIBUTOR_ENTITY;
         public static BlockEntityType<WaterPumpBlockEntity> WATER_PUMP_ENTITY;
+        public static BlockEntityType<EnergizerBlockEntity> ENERGIZER;
 
         public static void register() {
                 // Flag Block Entity.
@@ -56,9 +58,10 @@ public class ModBlockEntities {
                 NASA_WORKBENCH_ENTITY = register("nasa_workbench_entity", NasaWorkbenchBlockEntity::new, ModBlocks.NASA_WORKBENCH);
                 OXYGEN_DISTRIBUTOR_ENTITY = register("oxygen_distributor_entity", OxygenDistributorBlockEntity::new, ModBlocks.OXYGEN_DISTRIBUTOR);
                 WATER_PUMP_ENTITY = register("water_pump_entity", WaterPumpBlockEntity::new, ModBlocks.WATER_PUMP);
+                ENERGIZER = register("energizer_entity", EnergizerBlockEntity::new, ModBlocks.ENERGIZER);
 
                 EnergyStorage.SIDED.registerForBlockEntities((blockEntity, direction) -> ((AbstractMachineBlockEntity) blockEntity).getSideEnergyStorage(direction), SOLAR_PANEL_ENTITY, COAL_GENERATOR_ENTITY, COMPRESSOR_ENTITY, FUEL_REFINERY_ENTITY,
-                                OXYGEN_LOADER_ENTITY, OXYGEN_DISTRIBUTOR_ENTITY, WATER_PUMP_ENTITY);
+                                OXYGEN_LOADER_ENTITY, OXYGEN_DISTRIBUTOR_ENTITY, WATER_PUMP_ENTITY, ENERGIZER);
                 FluidStorage.SIDED.registerForBlockEntities((blockEntity, direction) -> ((FluidMachineBlockEntity) blockEntity).inputTank, FUEL_REFINERY_ENTITY, OXYGEN_LOADER_ENTITY, OXYGEN_DISTRIBUTOR_ENTITY, WATER_PUMP_ENTITY);
         }
 

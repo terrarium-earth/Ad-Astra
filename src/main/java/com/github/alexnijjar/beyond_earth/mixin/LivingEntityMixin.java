@@ -34,7 +34,7 @@ public abstract class LivingEntityMixin {
 
     @ModifyConstant(method = "travel", constant = @Constant(doubleValue = 0.08))
     public double setGravity(double value) {
-        if (BeyondEarth.CONFIG.mainConfig.doLivingEntityGravity) {
+        if (BeyondEarth.CONFIG.world.doLivingEntityGravity) {
             return ModUtils.getMixinGravity(value, this);
         } else {
             return value;
@@ -94,7 +94,7 @@ public abstract class LivingEntityMixin {
                 return;
             }
 
-            if (BeyondEarth.CONFIG.mainConfig.acidRainBurns) {
+            if (BeyondEarth.CONFIG.world.acidRainBurns) {
                 // Venus acid rain.
                 if (((EntityInvoker) entity).invokeIsBeingRainedOn() && entity.world.getRegistryKey().equals(ModUtils.VENUS_KEY)) {
                     boolean affectedByRain = true;
@@ -112,7 +112,7 @@ public abstract class LivingEntityMixin {
                 }
             }
 
-            if (BeyondEarth.CONFIG.mainConfig.doOxygen) {
+            if (BeyondEarth.CONFIG.world.doOxygen) {
                 if (!ModUtils.checkTag(entity, ModTags.LIVES_WITHOUT_OXYGEN)) {
                     boolean hasOxygen = false;
                     boolean hasNetheriteSpaceSuit = false;

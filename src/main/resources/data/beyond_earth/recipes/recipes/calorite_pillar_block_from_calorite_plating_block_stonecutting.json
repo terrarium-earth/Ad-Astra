@@ -2,7 +2,7 @@
   "type": "minecraft:stonecutting",
   "count": 1,
   "ingredient": {
-    "item": "beyond_earth:calorite_plating_block"
+    "item": "beyond_earth:calorite_plating"
   },
-  "result": "beyond_earth:calorite_pillar_block"
+  "result": "beyond_earth:calorite_pillar"
 }

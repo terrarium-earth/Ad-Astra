@@ -30,7 +30,7 @@ public class SoundManagerMixin {
             return;
         }
 
-        if (!BeyondEarth.CONFIG.mainConfig.doSpaceMuffler) {
+        if (!BeyondEarth.CONFIG.world.doSpaceMuffler) {
             return;
         }
         if (sound.getId().equals(ModSounds.ROCKET_LAUNCH_SOUND_ID)) {
@@ -57,7 +57,7 @@ public class SoundManagerMixin {
             return;
         }
 
-        if (!BeyondEarth.CONFIG.mainConfig.doSpaceMuffler) {
+        if (!BeyondEarth.CONFIG.world.doSpaceMuffler) {
             return;
         }
         if (sound.getId().equals(ModSounds.ROCKET_LAUNCH_SOUND_ID)) {
@@ -68,7 +68,7 @@ public class SoundManagerMixin {
             return;
         }
 
-        if (!BeyondEarth.CONFIG.mainConfig.doSpaceMuffler) {
+        if (!BeyondEarth.CONFIG.world.doSpaceMuffler) {
             return;
         }
         MinecraftClient client = MinecraftClient.getInstance();

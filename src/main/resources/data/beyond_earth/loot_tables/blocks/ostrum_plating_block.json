@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "beyond_earth:ostrum_plating_block"
+          "name": "beyond_earth:ostrum_plating"
         }
       ],
       "rolls": 1.0

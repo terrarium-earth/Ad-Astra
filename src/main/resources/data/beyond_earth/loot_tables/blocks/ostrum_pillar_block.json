@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "beyond_earth:ostrum_pillar_block"
+          "name": "beyond_earth:ostrum_pillar"
         }
       ],
       "rolls": 1.0

@@ -82,15 +82,14 @@ public class LanderEntity extends VehicleEntity {
                 this.applyBoosters();
             }
         }
-        this.syncClient();
     }
 
     public void applyBoosters() {
         if (this.getVelocity().getY() < 0.0) {
-            this.setVelocity(this.getVelocity().add(0.0, BeyondEarth.CONFIG.mainConfig.landerBoosterSpeed, 0.0));
+            this.setVelocity(this.getVelocity().add(0.0, BeyondEarth.CONFIG.lander.boosterSpeed, 0.0));
 
-            if (this.getVelocity().getY() > BeyondEarth.CONFIG.mainConfig.landerBoosterThreshold) {
-                this.setVelocity(0.0, BeyondEarth.CONFIG.mainConfig.landerBoosterThreshold, 0.0);
+            if (this.getVelocity().getY() > BeyondEarth.CONFIG.lander.boosterThreshold) {
+                this.setVelocity(0.0, BeyondEarth.CONFIG.lander.boosterThreshold, 0.0);
             }
 
             // Particles.

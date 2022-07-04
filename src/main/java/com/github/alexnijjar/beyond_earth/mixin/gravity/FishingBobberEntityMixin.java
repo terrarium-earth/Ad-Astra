@@ -13,7 +13,7 @@ import net.minecraft.entity.projectile.FishingBobberEntity;
 public abstract class FishingBobberEntityMixin {
     @ModifyConstant(method = "tick", constant = @Constant(doubleValue = -0.03))
     double getGravity(double value) {
-        if (BeyondEarth.CONFIG.mainConfig.doEntityGravity) {
+        if (BeyondEarth.CONFIG.world.doEntityGravity) {
             return ModUtils.getMixinGravity(value, this);
         } else {
             return value;

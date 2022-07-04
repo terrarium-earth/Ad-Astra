@@ -14,8 +14,8 @@ import net.minecraft.util.math.BlockPos;
 
 public class SolarPanelBlockEntity extends AbstractMachineBlockEntity {
 
-    public static final long MAX_ENERGY = BeyondEarth.CONFIG.mainConfig.solarPanelMaxEnergy;
-    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.mainConfig.solarPanelEnergyPerTick;
+    public static final long MAX_ENERGY = BeyondEarth.CONFIG.solarPanel.maxEnergy;
+    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.solarPanel.energyPerTick;
 
     public SolarPanelBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.SOLAR_PANEL_ENTITY, blockPos, blockState);
@@ -50,14 +50,12 @@ public class SolarPanelBlockEntity extends AbstractMachineBlockEntity {
     @Override
     public void tick() {
         if (!this.world.isClient) {
-            if (this.usesEnergy()) {
-                // Check solar panel conditions.
-                if (world.isDay() && !world.isRaining() && !world.isThundering() && world.isSkyVisible(this.getPos().up())) {
-                    this.cumulateEnergy();
-                }
-
-                this.energyOut();
+            // Check solar panel conditions.
+            if (world.isDay() && !world.isRaining() && !world.isThundering() && world.isSkyVisible(this.getPos().up())) {
+                this.cumulateEnergy();
             }
+
+            this.energyOut();
         }
     }
 }

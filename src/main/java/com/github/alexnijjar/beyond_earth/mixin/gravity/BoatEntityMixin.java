@@ -13,7 +13,7 @@ import net.minecraft.entity.vehicle.BoatEntity;
 public abstract class BoatEntityMixin {
     @ModifyConstant(method = "updateVelocity", constant = @Constant(doubleValue = -0.03999999910593033, ordinal = 1))
     public double setGravity(double value) {
-        if (BeyondEarth.CONFIG.mainConfig.doEntityGravity) {
+        if (BeyondEarth.CONFIG.world.doEntityGravity) {
             return ModUtils.getMixinGravity(value, this);
         } else {
             return value;

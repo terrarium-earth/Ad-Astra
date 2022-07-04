@@ -14,7 +14,7 @@ public abstract class PersistentProjectileEntityMixin {
 
     @ModifyConstant(method = "tick", constant = @Constant(doubleValue = 0.05000000074505806))
     public double setGravity(double value) {
-        if (BeyondEarth.CONFIG.mainConfig.doEntityGravity) {
+        if (BeyondEarth.CONFIG.world.doEntityGravity) {
             return ModUtils.getMixinGravity(value, this);
         } else {
             return value;

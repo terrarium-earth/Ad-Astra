@@ -28,7 +28,7 @@ import net.minecraft.util.registry.Registry;
 
 public class ModEntityTypes {
 
-        // Mobs.
+        // Mobs
         public static final EntityType<AlienEntity> ALIEN = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("alien"), FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, AlienEntity::new).dimensions(EntityDimensions.fixed(0.75f, 2.5f)).build());
         public static final EntityType<AlienZombieEntity> ALIEN_ZOMBIE = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("alien_zombie"),
                         FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, AlienZombieEntity::new).dimensions(EntityDimensions.fixed(0.6f, 2.4f)).build());
@@ -46,7 +46,7 @@ public class ModEntityTypes {
         public static final EntityType<AlienWanderingTraderEntity> ALIEN_WANDERING_TRADER = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("alien_wandering_trader"),
                         FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, AlienWanderingTraderEntity::new).dimensions(EntityDimensions.fixed(0.6f, 1.95f)).build());
 
-        // Machines.
+        // Machines
         public static final EntityType<RocketEntityTier1> ROCKET_TIER_1 = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("tier_1_rocket"),
                         FabricEntityTypeBuilder.create(SpawnGroup.MISC, RocketEntityTier1::new).dimensions(EntityDimensions.fixed(1.1f, 4.4f)).fireImmune().build());
         public static final EntityType<RocketEntityTier2> ROCKET_TIER_2 = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("tier_2_rocket"),
@@ -57,19 +57,19 @@ public class ModEntityTypes {
                         FabricEntityTypeBuilder.create(SpawnGroup.MISC, RocketEntityTier4::new).dimensions(EntityDimensions.fixed(1.1f, 6.1f)).fireImmune().build());
 
         public static final EntityType<RoverEntity> ROVER_TIER_1 = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("tier_1_rover"),
-                        FabricEntityTypeBuilder.create(SpawnGroup.MISC, RoverEntity::new).dimensions(EntityDimensions.fixed(2.5f, 1.0f)).fireImmune().build());
+                        FabricEntityTypeBuilder.create(SpawnGroup.MISC, RoverEntity::new).dimensions(EntityDimensions.fixed(1.8f, 1.5f)).fireImmune().build());
         public static final EntityType<LanderEntity> LANDER = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("lander"),
-                        FabricEntityTypeBuilder.create(SpawnGroup.MISC, LanderEntity::new).dimensions(EntityDimensions.fixed(1.0f, 2.0f)).fireImmune().build());
+                        FabricEntityTypeBuilder.create(SpawnGroup.MISC, LanderEntity::new).dimensions(EntityDimensions.fixed(1.2f, 2.0f)).fireImmune().build());
 
         public static final EntityType<SpacePaintingEntity> SPACE_PAINTING = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("space_painting"),
                         FabricEntityTypeBuilder.<SpacePaintingEntity>create(SpawnGroup.MISC, SpacePaintingEntity::new).dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
 
-        // Projectiles.
+        // Projectiles
         public static final EntityType<IceSpitEntity> ICE_SPIT_ENTITY = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("ice_spit_entity"),
                         FabricEntityTypeBuilder.<IceSpitEntity>create(SpawnGroup.MISC, IceSpitEntity::new).dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
 
         public static void register() {
-                // Mob Attributes.
+                // Mob Attributes
                 FabricDefaultAttributeRegistry.register(ALIEN, AlienEntity.createMobAttributes());
                 FabricDefaultAttributeRegistry.register(ALIEN_ZOMBIE, AlienZombieEntity.createMobAttributes());
                 FabricDefaultAttributeRegistry.register(STAR_CRAWLER, StarCrawlerEntity.createMobAttributes());

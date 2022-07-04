@@ -20,9 +20,9 @@ import net.minecraft.util.math.BlockPos;
 
 public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
 
-    public static final long MAX_ENERGY = BeyondEarth.CONFIG.mainConfig.oxygenLoaderMaxEnergy;
-    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.mainConfig.oxygenLoaderEnergyPerTick;
-    public static final int TANK_SIZE = BeyondEarth.CONFIG.mainConfig.oxygenLoaderTankBuckets;
+    public static final long MAX_ENERGY = BeyondEarth.CONFIG.oxygenLoader.maxEnergy;
+    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.oxygenLoader.energyPerTick;
+    public static final int TANK_SIZE = BeyondEarth.CONFIG.oxygenLoader.tankBuckets;
 
     public OxygenLoaderBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.OXYGEN_LOADER_ENTITY, blockPos, blockState);

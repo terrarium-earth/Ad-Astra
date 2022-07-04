@@ -230,8 +230,9 @@ public interface ModItems {
                         tooltip.add((Text.translatable("item.beyond_earth.water_pump.tooltip", FluidUtils.dropletsToMillibuckets(WaterPumpBlockEntity.TRANSFER_PER_TICK)).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
                 }
         });
+        public static final BlockItem ENERGIZER = registerBlockItem(ModBlocks.ENERGIZER, ITEM_GROUP_MACHINES);
 
-        public static final Item HAMMER = register("hammer", new HammerItem(new FabricItemSettings().group(ITEM_GROUP_BASICS).maxCount(1).maxDamage(BeyondEarth.CONFIG.mainConfig.hammerDurability)));
+        public static final Item HAMMER = register("hammer", new HammerItem(new FabricItemSettings().group(ITEM_GROUP_BASICS).maxCount(1).maxDamage(BeyondEarth.CONFIG.world.hammerDurability)));
 
         public static final Item IRON_STICK = registerItem("iron_stick", ITEM_GROUP_BASICS);
         public static final Item OXYGEN_GEAR = registerItem("oxygen_gear", ITEM_GROUP_BASICS);
@@ -309,18 +310,20 @@ public interface ModItems {
         public static final BlockItem RAW_DESH_BLOCK = registerBlockItem(ModBlocks.RAW_DESH_BLOCK);
         public static final BlockItem RAW_OSTRUM_BLOCK = registerBlockItem(ModBlocks.RAW_OSTRUM_BLOCK);
         public static final BlockItem RAW_CALORITE_BLOCK = registerBlockItem(ModBlocks.RAW_CALORITE_BLOCK);
-        public static final BlockItem IRON_PLATING_BLOCK = registerBlockItem(ModBlocks.IRON_PLATING_BLOCK);
-        public static final BlockItem IRON_PILLAR_BLOCK = registerBlockItem(ModBlocks.IRON_PILLAR_BLOCK);
-        public static final BlockItem IRON_MARK_BLOCK = registerBlockItem(ModBlocks.IRON_MARK_BLOCK);
-        public static final BlockItem BLUE_IRON_PLATING_BLOCK = registerBlockItem(ModBlocks.BLUE_IRON_PLATING_BLOCK);
-        public static final BlockItem STEEL_PLATING_BLOCK = registerBlockItem(ModBlocks.STEEL_PLATING_BLOCK);
-        public static final BlockItem STEEL_PILLAR_BLOCK = registerBlockItem(ModBlocks.STEEL_PILLAR_BLOCK);
-        public static final BlockItem DESH_PLATING_BLOCK = registerBlockItem(ModBlocks.DESH_PLATING_BLOCK);
-        public static final BlockItem DESH_PILLAR_BLOCK = registerBlockItem(ModBlocks.DESH_PILLAR_BLOCK);
-        public static final BlockItem OSTRUM_PLATING_BLOCK = registerBlockItem(ModBlocks.OSTRUM_PLATING_BLOCK);
-        public static final BlockItem OSTRUM_PILLAR_BLOCK = registerBlockItem(ModBlocks.OSTRUM_PILLAR_BLOCK);
-        public static final BlockItem CALORITE_PLATING_BLOCK = registerBlockItem(ModBlocks.CALORITE_PLATING_BLOCK);
-        public static final BlockItem CALORITE_PILLAR_BLOCK = registerBlockItem(ModBlocks.CALORITE_PILLAR_BLOCK);
+
+        public static final BlockItem IRON_PLATING = registerBlockItem(ModBlocks.IRON_PLATING);
+        public static final BlockItem IRON_PILLAR = registerBlockItem(ModBlocks.IRON_PILLAR);
+        public static final BlockItem MARKED_IRON_PILLAR = registerBlockItem(ModBlocks.MARKED_IRON_PILLAR);
+        public static final BlockItem BLUE_IRON_PILLAR = registerBlockItem(ModBlocks.BLUE_IRON_PILLAR);
+        public static final BlockItem STEEL_PLATING = registerBlockItem(ModBlocks.STEEL_PLATING);
+        public static final BlockItem STEEL_PILLAR = registerBlockItem(ModBlocks.STEEL_PILLAR);
+        public static final BlockItem DESH_PLATING = registerBlockItem(ModBlocks.DESH_PLATING);
+        public static final BlockItem DESH_PILLAR = registerBlockItem(ModBlocks.DESH_PILLAR);
+        public static final BlockItem OSTRUM_PLATING = registerBlockItem(ModBlocks.OSTRUM_PLATING);
+        public static final BlockItem OSTRUM_PILLAR = registerBlockItem(ModBlocks.OSTRUM_PILLAR);
+        public static final BlockItem CALORITE_PLATING = registerBlockItem(ModBlocks.CALORITE_PLATING);
+        public static final BlockItem CALORITE_PILLAR = registerBlockItem(ModBlocks.CALORITE_PILLAR);
+
         public static final BlockItem INFERNAL_SPIRE_BLOCK = registerBlockItem(ModBlocks.INFERNAL_SPIRE_BLOCK);
         public static final BlockItem SKY_STONE = registerBlockItem(ModBlocks.SKY_STONE);
 

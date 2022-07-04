@@ -8,15 +8,16 @@ import com.github.alexnijjar.beyond_earth.client.registry.ClientModKeybindings;
 import com.github.alexnijjar.beyond_earth.client.registry.ClientModParticles;
 import com.github.alexnijjar.beyond_earth.client.registry.ClientModScreens;
 import com.github.alexnijjar.beyond_earth.client.registry.ClientModSkies;
-import com.github.alexnijjar.beyond_earth.client.renderer.FlagBlockEntityRenderer;
+import com.github.alexnijjar.beyond_earth.client.renderer.block.EnergizerBlockEntityRenderer;
+import com.github.alexnijjar.beyond_earth.client.renderer.block.FlagBlockEntityRenderer;
+import com.github.alexnijjar.beyond_earth.client.renderer.block.globe.GlobeBlockEntityRenderer;
+import com.github.alexnijjar.beyond_earth.client.renderer.block.globe.GlobeItemRenderer;
+import com.github.alexnijjar.beyond_earth.client.renderer.block.globe.GlobeModel;
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.vehicles.rockets.tier_1.RocketItemRendererTier1;
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.vehicles.rockets.tier_2.RocketItemRendererTier2;
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.vehicles.rockets.tier_3.RocketItemRendererTier3;
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.vehicles.rockets.tier_4.RocketItemRendererTier4;
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.vehicles.rover.RoverItemRenderer;
-import com.github.alexnijjar.beyond_earth.client.renderer.globe.GlobeBlockEntityRenderer;
-import com.github.alexnijjar.beyond_earth.client.renderer.globe.GlobeItemRenderer;
-import com.github.alexnijjar.beyond_earth.client.renderer.globe.GlobeModel;
 import com.github.alexnijjar.beyond_earth.client.renderer.spacesuit.JetSuitModel;
 import com.github.alexnijjar.beyond_earth.client.renderer.spacesuit.SpaceSuitLegsModel;
 import com.github.alexnijjar.beyond_earth.client.renderer.spacesuit.SpaceSuitModel;
@@ -98,6 +99,9 @@ public class BeyondEarthClient implements ClientModInitializer {
                 BlockEntityRendererRegistry.register(ModBlockEntities.GLOBE_BLOCK_ENTITY, GlobeBlockEntityRenderer::new);
                 EntityModelLayerRegistry.registerModelLayer(GlobeModel.LAYER_LOCATION, GlobeModel::getTexturedModelData);
 
+                // Energizer block entity
+                BlockEntityRendererRegistry.register(ModBlockEntities.ENERGIZER, EnergizerBlockEntityRenderer::new);
+
                 // Globe item rendering
                 for (Item item : new Item[] { ModItems.EARTH_GLOBE, ModItems.MOON_GLOBE, ModItems.MARS_GLOBE, ModItems.MERCURY_GLOBE, ModItems.VENUS_GLOBE, ModItems.GLACIO_GLOBE }) {
                         BuiltinItemRendererRegistry.INSTANCE.register(item, new GlobeItemRenderer());
@@ -134,7 +138,7 @@ public class BeyondEarthClient implements ClientModInitializer {
                 BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.OIL_STILL, ModFluids.FLOWING_OIL);
                 BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.OXYGEN_STILL);
 
-                BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), ModBlocks.WATER_PUMP);
+                BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), ModBlocks.WATER_PUMP, ModBlocks.ENERGIZER);
                 BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(), ModBlocks.COAL_LANTERN);
                 BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), ModBlocks.NASA_WORKBENCH);
         }

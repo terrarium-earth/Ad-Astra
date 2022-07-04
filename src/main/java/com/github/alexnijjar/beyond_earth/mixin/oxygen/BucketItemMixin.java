@@ -34,7 +34,7 @@ public class BucketItemMixin {
     // Evaporate water in a no-oxygen environment. Water is not evaporated in a oxygen distributor.
     @Inject(at = @At(value = "HEAD"), method = "placeFluid", cancellable = true)
     public void placeFluid(PlayerEntity player, World world, BlockPos pos, BlockHitResult hitResult, CallbackInfoReturnable<Boolean> ci) {
-        if (!BeyondEarth.CONFIG.mainConfig.doOxygen) {
+        if (!BeyondEarth.CONFIG.world.doOxygen) {
             return;
         }
         BucketItem bucketItem = (BucketItem) (Object) this;

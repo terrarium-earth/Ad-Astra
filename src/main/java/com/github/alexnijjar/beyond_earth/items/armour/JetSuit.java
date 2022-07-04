@@ -25,11 +25,11 @@ import team.reborn.energy.api.base.SimpleBatteryItem;
 
 public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, FabricElytraItem {
 
-    public static final long MAX_ENERGY = BeyondEarth.CONFIG.mainConfig.jetSuitMaxEnergy;
-    public static final long TANK_SIZE = BeyondEarth.CONFIG.mainConfig.jetSuitTankSize;
-    public static final double SPEED = BeyondEarth.CONFIG.mainConfig.jetSuitSpeed;
-    public static final double UPWARDS_SPEED = BeyondEarth.CONFIG.mainConfig.jetSuitUpwardsSpeed;
-    public static final long JET_SUIT_ENERGY_PER_TICK = BeyondEarth.CONFIG.mainConfig.jetSuitEnergyPerTick;
+    public static final long MAX_ENERGY = BeyondEarth.CONFIG.spaceSuit.jetSuitMaxEnergy;
+    public static final long TANK_SIZE = BeyondEarth.CONFIG.spaceSuit.jetSuitTankSize;
+    public static final double SPEED = BeyondEarth.CONFIG.spaceSuit.jetSuitSpeed;
+    public static final double UPWARDS_SPEED = BeyondEarth.CONFIG.spaceSuit.jetSuitUpwardsSpeed;
+    public static final long JET_SUIT_ENERGY_PER_TICK = BeyondEarth.CONFIG.spaceSuit.jetSuitEnergyPerTick;
     public boolean isFallFlying;
 
     public JetSuit(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
@@ -117,7 +117,7 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
     }
 
     public void spawnParticles(PlayerEntity player, ItemStack stack) {
-        if (!BeyondEarth.CONFIG.mainConfig.spawnJetSuitParticles) {
+        if (!BeyondEarth.CONFIG.spaceSuit.spawnJetSuitParticles) {
             return;
         }
         if (player.world instanceof ServerWorld serverWorld) {

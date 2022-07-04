@@ -32,7 +32,7 @@ public class OxygenUtils {
 
     // Checks if there is oxygen in a specific block in a specific dimension.
     public static boolean posHasOxygen(ServerWorld world, BlockPos pos) {
-        if (world.getServer().getTicks() <= BeyondEarth.CONFIG.mainConfig.oxygenGracePeriodTicks) {
+        if (world.getServer().getTicks() <= BeyondEarth.CONFIG.oxygenDistributor.oxygenGracePeriodTicks) {
             return true;
         }
         for (Map.Entry<Pair<RegistryKey<World>, BlockPos>, Set<BlockPos>> entry : oxygenLocations.entrySet()) {

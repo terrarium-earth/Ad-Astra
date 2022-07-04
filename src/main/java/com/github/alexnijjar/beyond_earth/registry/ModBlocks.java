@@ -11,12 +11,13 @@ import com.github.alexnijjar.beyond_earth.blocks.globes.GlobeBlock;
 import com.github.alexnijjar.beyond_earth.blocks.launch_pad.RocketLaunchPad;
 import com.github.alexnijjar.beyond_earth.blocks.machines.CoalGeneratorBlock;
 import com.github.alexnijjar.beyond_earth.blocks.machines.CompressorBlock;
+import com.github.alexnijjar.beyond_earth.blocks.machines.EnergizerBlock;
 import com.github.alexnijjar.beyond_earth.blocks.machines.FuelRefineryBlock;
 import com.github.alexnijjar.beyond_earth.blocks.machines.NasaWorkbenchBlock;
 import com.github.alexnijjar.beyond_earth.blocks.machines.OxygenDistributorBlock;
 import com.github.alexnijjar.beyond_earth.blocks.machines.OxygenLoaderBlock;
 import com.github.alexnijjar.beyond_earth.blocks.machines.SolarPanelBlock;
-import com.github.alexnijjar.beyond_earth.blocks.machines.WaterPump;
+import com.github.alexnijjar.beyond_earth.blocks.machines.WaterPumpBlock;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -77,7 +78,8 @@ public interface ModBlocks {
         public static final Block SOLAR_PANEL = register("solar_panel", new SolarPanelBlock(FabricBlockSettings.copy(FUEL_REFINERY)));
         public static final Block NASA_WORKBENCH = register("nasa_workbench", new NasaWorkbenchBlock(FabricBlockSettings.copy(FUEL_REFINERY).nonOpaque()));
         public static final Block OXYGEN_DISTRIBUTOR = register("oxygen_distributor", new OxygenDistributorBlock(FabricBlockSettings.copy(FUEL_REFINERY)));
-        public static final Block WATER_PUMP = register("water_pump", new WaterPump(FabricBlockSettings.copy(FUEL_REFINERY).nonOpaque()));
+        public static final Block WATER_PUMP = register("water_pump", new WaterPumpBlock(FabricBlockSettings.copy(FUEL_REFINERY).nonOpaque()));
+        public static final Block ENERGIZER = register("energizer", new EnergizerBlock(FabricBlockSettings.copy(FUEL_REFINERY).nonOpaque()));
 
         // Blocks
         public static final Block STEEL_BLOCK = register("steel_block", new Block(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
@@ -87,18 +89,19 @@ public interface ModBlocks {
         public static final Block RAW_DESH_BLOCK = register("raw_desh_block", new Block(FabricBlockSettings.copy(Blocks.RAW_IRON_BLOCK)));
         public static final Block RAW_OSTRUM_BLOCK = register("raw_ostrum_block", new Block(FabricBlockSettings.copy(Blocks.RAW_IRON_BLOCK)));
         public static final Block RAW_CALORITE_BLOCK = register("raw_calorite_block", new Block(FabricBlockSettings.copy(Blocks.RAW_IRON_BLOCK)));
-        public static final Block IRON_PLATING_BLOCK = register("iron_plating_block", new Block(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
-        public static final Block IRON_PILLAR_BLOCK = register("iron_pillar_block", new PillarBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
-        public static final Block IRON_MARK_BLOCK = register("iron_mark_block", new PillarBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
-        public static final Block BLUE_IRON_PLATING_BLOCK = register("blue_iron_plating_block", new PillarBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(state -> 15)));
-        public static final Block STEEL_PLATING_BLOCK = register("steel_plating_block", new Block(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
-        public static final Block STEEL_PILLAR_BLOCK = register("steel_pillar_block", new PillarBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
-        public static final Block DESH_PLATING_BLOCK = register("desh_plating_block", new Block(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
-        public static final Block DESH_PILLAR_BLOCK = register("desh_pillar_block", new PillarBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
-        public static final Block OSTRUM_PLATING_BLOCK = register("ostrum_plating_block", new Block(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
-        public static final Block OSTRUM_PILLAR_BLOCK = register("ostrum_pillar_block", new PillarBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
-        public static final Block CALORITE_PLATING_BLOCK = register("calorite_plating_block", new Block(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
-        public static final Block CALORITE_PILLAR_BLOCK = register("calorite_pillar_block", new PillarBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
+
+        public static final Block IRON_PLATING = register("iron_plating", new Block(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
+        public static final Block IRON_PILLAR = register("iron_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
+        public static final Block MARKED_IRON_PILLAR = register("marked_iron_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
+        public static final Block BLUE_IRON_PILLAR = register("blue_iron_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(state -> 15)));
+        public static final Block STEEL_PLATING = register("steel_plating", new Block(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
+        public static final Block STEEL_PILLAR = register("steel_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
+        public static final Block DESH_PLATING = register("desh_plating", new Block(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
+        public static final Block DESH_PILLAR = register("desh_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
+        public static final Block OSTRUM_PLATING = register("ostrum_plating", new Block(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
+        public static final Block OSTRUM_PILLAR = register("ostrum_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
+        public static final Block CALORITE_PLATING = register("calorite_plating", new Block(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
+        public static final Block CALORITE_PILLAR = register("calorite_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
 
         public static final Block SKY_STONE = register("sky_stone", new Block(FabricBlockSettings.copy(Blocks.STONE)));
 

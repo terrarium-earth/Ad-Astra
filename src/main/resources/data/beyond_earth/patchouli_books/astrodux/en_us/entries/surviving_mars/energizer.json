@@ -1,0 +1,18 @@
+{
+    "name": "Energizer",
+    "icon": "beyond_earth:energizer",
+    "sortnum": 1,
+    "category": "beyond_earth:surviving_mars",
+    "pages": [
+        {
+            "type": "patchouli:spotlight",
+            "title": "Energizer",
+            "item": "beyond_earth:energizer",
+            "text": "The energizer is a machine capable of powering items and storing large amounts of energy. To charge an item, power the energizer and then right-click on the energizer with that item. It stores 2 million energy, making it capable of charging machines for a very long time."
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe": "beyond_earth:recipes/energizer"
+        }
+    ]
+}

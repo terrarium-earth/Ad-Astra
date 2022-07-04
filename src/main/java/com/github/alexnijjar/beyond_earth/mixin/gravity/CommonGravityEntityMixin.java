@@ -15,7 +15,7 @@ import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 public abstract class CommonGravityEntityMixin {
     @ModifyConstant(method = "tick", constant = @Constant(doubleValue = -0.04))
     public double setGravity(double value) {
-        if (BeyondEarth.CONFIG.mainConfig.doEntityGravity) {
+        if (BeyondEarth.CONFIG.world.doEntityGravity) {
             return ModUtils.getMixinGravity(value, this);
         } else {
             return value;

@@ -17,8 +17,8 @@ import net.minecraft.util.math.BlockPos;
 
 public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity {
 
-    public static final long MAX_ENERGY = BeyondEarth.CONFIG.mainConfig.coalGeneratorMaxEnergy;
-    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.mainConfig.coalGeneratorEnergyPerTick;
+    public static final long MAX_ENERGY = BeyondEarth.CONFIG.coalGenerator.maxEnergy;
+    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.coalGenerator.energyPerTick;
 
     public CoalGeneratorBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.COAL_GENERATOR_ENTITY, blockPos, blockState);

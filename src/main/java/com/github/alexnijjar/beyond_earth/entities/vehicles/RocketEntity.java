@@ -35,10 +35,10 @@ import net.minecraft.world.World;
 public class RocketEntity extends VehicleEntity {
 
     // 10 seconds.
-    public static final int ATMOSPHERE_LEAVE = BeyondEarth.CONFIG.mainConfig.rocketAtmosphereLeave;
-    public static final int MAX_COUNTDOWN_TICKS = BeyondEarth.CONFIG.mainConfig.rocketCountDownTicks;
-    public static final double ROCKET_ACCELERATION = BeyondEarth.CONFIG.mainConfig.rocketAcceleration;
-    public static final double ROCKET_MAX_SPEED = BeyondEarth.CONFIG.mainConfig.rocketMaxSpeed;
+    public static final int ATMOSPHERE_LEAVE = BeyondEarth.CONFIG.rocket.atmosphereLeave;
+    public static final int MAX_COUNTDOWN_TICKS = BeyondEarth.CONFIG.rocket.countDownTicks;
+    public static final double ROCKET_ACCELERATION = BeyondEarth.CONFIG.rocket.acceleration;
+    public static final double ROCKET_MAX_SPEED = BeyondEarth.CONFIG.rocket.maxSpeed;
 
     protected static final TrackedData<Boolean> HAS_LAUNCH_PAD = DataTracker.registerData(RocketEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     protected static final TrackedData<Boolean> FLYING = DataTracker.registerData(RocketEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
@@ -58,7 +58,7 @@ public class RocketEntity extends VehicleEntity {
 
     @Override
     public long getTankSize() {
-        return BeyondEarth.CONFIG.mainConfig.rocketTankBuckets;
+        return BeyondEarth.CONFIG.rocket.tankBuckets;
     }
 
     @Override
@@ -223,7 +223,7 @@ public class RocketEntity extends VehicleEntity {
             if (ModUtils.hasFullNetheriteSpaceSet(entity) || (entity.getVehicle() != null && entity.getVehicle().equals(this))) {
                 continue;
             }
-            if (BeyondEarth.CONFIG.mainConfig.entitiesBurnUnderRocket && !entity.isFireImmune()) {
+            if (BeyondEarth.CONFIG.rocket.entitiesBurnUnderRocket && !entity.isFireImmune()) {
                 entity.setOnFireFor(10);
                 entity.damage(ModDamageSource.ROCKET_FLAMES, 10);
                 BlockState belowBlock = this.world.getBlockState(entity.getBlockPos().down());

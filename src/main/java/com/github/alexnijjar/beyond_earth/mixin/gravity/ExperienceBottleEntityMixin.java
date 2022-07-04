@@ -14,7 +14,7 @@ import net.minecraft.entity.projectile.thrown.ExperienceBottleEntity;
 public abstract class ExperienceBottleEntityMixin {
     @Inject(method = "getGravity", at = @At("HEAD"), cancellable = true)
     public void getGravity(CallbackInfoReturnable<Float> ci) {
-        if (BeyondEarth.CONFIG.mainConfig.doEntityGravity) {
+        if (BeyondEarth.CONFIG.world.doEntityGravity) {
             ci.setReturnValue(ModUtils.getMixinGravity(0.07f, this));
         }
     }

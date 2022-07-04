@@ -17,7 +17,7 @@ public class RoverEntityRenderer extends VehicleEntityRenderer<RoverEntity, Rove
     public static final Identifier TEXTURE = new ModIdentifier("textures/vehicles/tier_1_rover.png");
 
     public RoverEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, new RoverEntityModel(context.getPart(RoverEntityModel.LAYER_LOCATION)), 0.0f);
+        super(context, new RoverEntityModel(context.getPart(RoverEntityModel.LAYER_LOCATION)), 1.0f);
     }
 
     @Override

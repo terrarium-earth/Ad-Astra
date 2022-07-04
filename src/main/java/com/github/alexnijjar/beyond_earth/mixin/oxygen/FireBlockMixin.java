@@ -21,7 +21,7 @@ public class FireBlockMixin {
 
     @Inject(at = @At(value = "HEAD"), method = "onBlockAdded")
     public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify, CallbackInfo ci) {
-        if (!BeyondEarth.CONFIG.mainConfig.doOxygen) {
+        if (!BeyondEarth.CONFIG.world.doOxygen) {
             return;
         }
         // Extinguish the fire in dimensions with no oxygen.

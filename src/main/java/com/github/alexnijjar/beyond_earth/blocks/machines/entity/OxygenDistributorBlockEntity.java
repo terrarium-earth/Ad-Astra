@@ -29,14 +29,14 @@ import net.minecraft.util.math.BlockPos;
 
 public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 
-    public static final long MAX_ENERGY = BeyondEarth.CONFIG.mainConfig.oxygenDistributorMaxEnergy;
-    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.mainConfig.oxygenDistributorEnergyPerTick;
-    public static final int TANK_SIZE = BeyondEarth.CONFIG.mainConfig.oxygenDistributorTankBuckets;
-    public static final int MAX_BLOCK_CHECKS = BeyondEarth.CONFIG.mainConfig.oxygenDistributorMaxBlockChecks;
-    public static final int UPDATE_OXYGEN_FILLER_TICKS = BeyondEarth.CONFIG.mainConfig.oxygenDistributorRefreshTicks;
+    public static final long MAX_ENERGY = BeyondEarth.CONFIG.oxygenDistributor.maxEnergy;
+    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.oxygenDistributor.energyPerTick;
+    public static final int TANK_SIZE = BeyondEarth.CONFIG.oxygenDistributor.tankBuckets;
+    public static final int MAX_BLOCK_CHECKS = BeyondEarth.CONFIG.oxygenDistributor.maxBlockChecks;
+    public static final int UPDATE_OXYGEN_FILLER_TICKS = BeyondEarth.CONFIG.oxygenDistributor.refreshTicks;
 
-    public static final double OXYGEN_USAGE_MULTIPLIER = BeyondEarth.CONFIG.mainConfig.oxygenDistributorOxygenMultiplier;
-    public static final double ENERGY_USAGE_MULTIPLIER = BeyondEarth.CONFIG.mainConfig.oxygenDistributorEnergyMultiplier;
+    public static final double OXYGEN_USAGE_MULTIPLIER = BeyondEarth.CONFIG.oxygenDistributor.oxygenMultiplier;
+    public static final double ENERGY_USAGE_MULTIPLIER = BeyondEarth.CONFIG.oxygenDistributor.energyMultiplier;
 
     private int oxygenFillCheckTicks = UPDATE_OXYGEN_FILLER_TICKS;
 

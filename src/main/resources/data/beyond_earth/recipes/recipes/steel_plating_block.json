@@ -3,7 +3,7 @@
   "group": "desh_plating",
   "key": {
     "#": {
-      "item": "beyond_earth:iron_plating_block"
+      "item": "beyond_earth:iron_plating"
     },
     "|": {
       "tag": "c:compressed_steel"
@@ -16,6 +16,6 @@
   ],
   "result": {
     "count": 8,
-    "item": "beyond_earth:steel_plating_block"
+    "item": "beyond_earth:steel_plating"
   }
 }

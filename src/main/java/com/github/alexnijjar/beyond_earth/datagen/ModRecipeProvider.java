@@ -112,11 +112,11 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		offerPillarRecipe(exporter, VENUS_PILLAR, VENUS_STONE_BRICKS);
 		offerPillarRecipe(exporter, MERCURY_PILLAR, MERCURY_STONE_BRICKS);
 		offerPillarRecipe(exporter, GLACIO_PILLAR, GLACIO_STONE_BRICKS);
-		offerPillarRecipe(exporter, IRON_PILLAR_BLOCK, IRON_PLATING_BLOCK);
-		offerPillarRecipe(exporter, STEEL_PILLAR_BLOCK, STEEL_PLATING_BLOCK);
-		offerPillarRecipe(exporter, DESH_PILLAR_BLOCK, DESH_PLATING_BLOCK);
-		offerPillarRecipe(exporter, OSTRUM_PILLAR_BLOCK, OSTRUM_PLATING_BLOCK);
-		offerPillarRecipe(exporter, CALORITE_PILLAR_BLOCK, CALORITE_PLATING_BLOCK);
+		offerPillarRecipe(exporter, IRON_PILLAR, IRON_PLATING);
+		offerPillarRecipe(exporter, STEEL_PILLAR, STEEL_PLATING);
+		offerPillarRecipe(exporter, DESH_PILLAR, DESH_PLATING);
+		offerPillarRecipe(exporter, OSTRUM_PILLAR, OSTRUM_PLATING);
+		offerPillarRecipe(exporter, CALORITE_PILLAR, CALORITE_PLATING);
 
 		// Compacting
 		offerReversibleCompactingRecipes(exporter, ModItems.STEEL_INGOT, STEEL_BLOCK);
@@ -168,16 +168,16 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 
 		// Metals
 
-		offerQuadRecipe(exporter, 16, IRON_PLATING_BLOCK, ModTags.IRON_PLATES);
-		offerPlatingRecipe(exporter, STEEL_PLATING_BLOCK, ModTags.COMPRESSED_STEEL);
-		offerPlatingRecipe(exporter, DESH_PLATING_BLOCK, ModTags.DESH_PLATES);
-		offerPlatingRecipe(exporter, OSTRUM_PLATING_BLOCK, ModTags.COMPRESSED_OSTRUM);
-		offerPlatingRecipe(exporter, CALORITE_PLATING_BLOCK, ModTags.COMPRESSED_CALORITE);
+		offerQuadRecipe(exporter, 16, IRON_PLATING, ModTags.IRON_PLATES);
+		offerPlatingRecipe(exporter, STEEL_PLATING, ModTags.COMPRESSED_STEEL);
+		offerPlatingRecipe(exporter, DESH_PLATING, ModTags.DESH_PLATES);
+		offerPlatingRecipe(exporter, OSTRUM_PLATING, ModTags.COMPRESSED_OSTRUM);
+		offerPlatingRecipe(exporter, CALORITE_PLATING, ModTags.COMPRESSED_CALORITE);
 
-		ShapedRecipeJsonBuilder.create(BLUE_IRON_PLATING_BLOCK, 6).input(Character.valueOf('#'), ModTags.IRON_PLATES).input(Character.valueOf('G'), Blocks.GLOWSTONE).input(Character.valueOf('B'), Items.BLUE_DYE).pattern("#B#").pattern("#G#").pattern("#B#")
-				.group("blue_iron_plating").criterion(hasItem(ModItems.IRON_PLATE), conditionsFromTag(ModTags.IRON_PLATES)).offerTo(exporter);
+		ShapedRecipeJsonBuilder.create(BLUE_IRON_PILLAR, 6).input(Character.valueOf('#'), ModTags.IRON_PLATES).input(Character.valueOf('G'), Blocks.GLOWSTONE).input(Character.valueOf('B'), Items.BLUE_DYE).pattern("#B#").pattern("#G#").pattern("#B#")
+				.group("blue_iron_pillar").criterion(hasItem(ModItems.IRON_PLATE), conditionsFromTag(ModTags.IRON_PLATES)).offerTo(exporter);
 
-		ShapedRecipeJsonBuilder.create(IRON_MARK_BLOCK, 6).input(Character.valueOf('#'), ModTags.IRON_PLATES).input(Character.valueOf('Y'), Items.YELLOW_DYE).input(Character.valueOf('B'), Items.BLACK_DYE).pattern("#Y#").pattern("#B#").pattern("#Y#")
+		ShapedRecipeJsonBuilder.create(MARKED_IRON_PILLAR, 6).input(Character.valueOf('#'), ModTags.IRON_PLATES).input(Character.valueOf('Y'), Items.YELLOW_DYE).input(Character.valueOf('B'), Items.BLACK_DYE).pattern("#Y#").pattern("#B#").pattern("#Y#")
 				.group(null).criterion(hasItem(ModItems.IRON_PLATE), conditionsFromTag(ModTags.IRON_PLATES)).offerTo(exporter);
 
 		// Machines
@@ -216,6 +216,10 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		ShapedRecipeJsonBuilder.create(WATER_PUMP).input(Character.valueOf('#'), ModTags.DESH_PLATES).input(Character.valueOf('H'), Blocks.HOPPER).input(Character.valueOf('D'), Blocks.DISPENSER).pattern(" D ").pattern(" #D").pattern(" H ").group(null)
 				.criterion(hasItem(ModItems.DESH_PLATE), conditionsFromTag(ModTags.DESH_PLATES)).offerTo(exporter);
 
+		// Energizer
+		ShapedRecipeJsonBuilder.create(ENERGIZER).input(Character.valueOf('#'), ModTags.COMPRESSED_OSTRUM).input(Character.valueOf('D'), Blocks.DIAMOND_BLOCK).input(Character.valueOf('I'), Items.DIAMOND).pattern("#I#").pattern("#D#").pattern("###")
+				.group(null).criterion(hasItem(ModItems.COMPRESSED_OSTRUM), conditionsFromTag(ModTags.COMPRESSED_OSTRUM)).offerTo(exporter);
+
 		// Flags
 		offerFlagRecipe(exporter, FLAG, Blocks.WHITE_WOOL);
 		offerFlagRecipe(exporter, FLAG_BLUE, Blocks.BLUE_WOOL);
@@ -244,8 +248,8 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 				.criterion(hasItem(ModItems.COMPRESSED_STEEL), conditionsFromTag(ModTags.COMPRESSED_STEEL)).offerTo(exporter);
 
 		// Guide Book
-		ShapedRecipeJsonBuilder.create(ModItems.ASTRODUX).input(Character.valueOf('#'), Items.BOOK).input(Character.valueOf('S'), ModItems.STEEL_INGOT).pattern("SSS").pattern("S#S").pattern("SSS").group(null).criterion(hasItem(Items.BOOK), conditionsFromItem(Items.BOOK))
-				.offerTo(exporter);
+		ShapedRecipeJsonBuilder.create(ModItems.ASTRODUX).input(Character.valueOf('#'), Items.BOOK).input(Character.valueOf('S'), ModItems.STEEL_INGOT).pattern("SSS").pattern("S#S").pattern("SSS").group(null)
+				.criterion(hasItem(Items.BOOK), conditionsFromItem(Items.BOOK)).offerTo(exporter);
 
 		// Compacting nuggets
 		offerReversibleCompactingRecipesWithCompactingRecipeGroup(exporter, ModItems.STEEL_NUGGET, ModItems.STEEL_INGOT, "steel_ingot_from_nuggets", "steel_ingot");
@@ -366,8 +370,8 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 	}
 
 	public static void offerPlatingRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, TagKey<Item> input) {
-		ShapedRecipeJsonBuilder.create(output, 8).input(Character.valueOf('#'), IRON_PLATING_BLOCK).input(Character.valueOf('|'), input).pattern("###").pattern("#|#").pattern("###").group("desh_plating")
-				.criterion(hasItem(IRON_PLATING_BLOCK), conditionsFromTag(input)).offerTo(exporter);
+		ShapedRecipeJsonBuilder.create(output, 8).input(Character.valueOf('#'), IRON_PLATING).input(Character.valueOf('|'), input).pattern("###").pattern("#|#").pattern("###").group("desh_plating").criterion(hasItem(IRON_PLATING), conditionsFromTag(input))
+				.offerTo(exporter);
 	}
 
 	public static void offerCustomSlabRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, ItemConvertible input) {

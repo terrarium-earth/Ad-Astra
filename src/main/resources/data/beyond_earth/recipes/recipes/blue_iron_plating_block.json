@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "group": "blue_iron_plating",
+  "group": "blue_iron_pillar",
   "key": {
     "#": {
       "tag": "c:iron_plates"
@@ -19,6 +19,6 @@
   ],
   "result": {
     "count": 6,
-    "item": "beyond_earth:blue_iron_plating_block"
+    "item": "beyond_earth:blue_iron_pillar"
   }
 }

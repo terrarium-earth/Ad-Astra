@@ -1,7 +1,7 @@
 {
     "name": "Venus and Mercury",
     "icon": "beyond_earth:/textures/sky/gui/venus.png",
-    "sortnum": 2,
+    "sortnum": 3,
     "category": "beyond_earth:surviving_mars",
     "pages": [
         {

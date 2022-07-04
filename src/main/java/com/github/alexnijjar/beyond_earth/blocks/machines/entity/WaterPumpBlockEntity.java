@@ -25,10 +25,10 @@ import net.minecraft.util.math.Direction;
 
 public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
 
-    public static final long MAX_ENERGY = BeyondEarth.CONFIG.mainConfig.waterPumpMaxEnergy;
-    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.mainConfig.waterPumpEnergyPerTick;
-    public static final int TANK_SIZE = BeyondEarth.CONFIG.mainConfig.waterPumpTankBuckets;
-    public static final long TRANSFER_PER_TICK = BeyondEarth.CONFIG.mainConfig.waterPumpTransferPerTick;
+    public static final long MAX_ENERGY = BeyondEarth.CONFIG.waterPump.maxEnergy;
+    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.waterPump.energyPerTick;
+    public static final int TANK_SIZE = BeyondEarth.CONFIG.waterPump.tankBuckets;
+    public static final long TRANSFER_PER_TICK = BeyondEarth.CONFIG.waterPump.transferPerTick;
     public static final Direction[] INSERT_DIRECTIONS = { Direction.UP, Direction.SOUTH };
 
     private long waterExtracted;
@@ -106,7 +106,7 @@ public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
                         this.setActive(false);
                     }
 
-                    if (BeyondEarth.CONFIG.mainConfig.deleteWaterBelowWaterPump) {
+                    if (BeyondEarth.CONFIG.waterPump.deleteWaterBelowWaterPump) {
                         // Delete the water block after it has been fully extracted.
                         if (waterExtracted >= FluidConstants.BLOCK) {
                             waterExtracted = 0;

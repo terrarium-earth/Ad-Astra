@@ -26,7 +26,7 @@ import net.minecraft.world.World;
 
 public class OxygenTankItem extends Item implements FluidContainingItem {
 
-    public static final long TANK_SIZE = BeyondEarth.CONFIG.mainConfig.oxygenTankSize;
+    public static final long TANK_SIZE = BeyondEarth.CONFIG.world.oxygenTankSize;
 
     public OxygenTankItem(Settings settings) {
         super(settings);

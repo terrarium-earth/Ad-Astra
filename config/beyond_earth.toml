@@ -1,0 +1,83 @@
+[world]
+spawnAlienZombies = true
+spawnStarCrawlers = true
+spawnMartianRaptors = true
+doEntityGravity = true
+doLivingEntityGravity = true
+acidRainBurns = true
+doOxygen = true
+doSpaceMuffler = true
+oxygenTankSize = 40500
+hammerDurability = 64
+[spaceSuit]
+spaceSuitTankSize = 81000
+netheriteSpaceSuitTankSize = 162000
+netheriteSpaceSuitHasFireResistance = true
+jetSuitSpeed = 0.8
+jetSuitUpwardsSpeed = 0.5
+jetSuitEnergyPerTick = 64
+jetSuitTankSize = 324000
+jetSuitMaxEnergy = 2000000
+spawnJetSuitParticles = true
+enableJetSuitFlight = true
+[vehicles]
+fallingExplosionThreshold = -0.7
+fallingExplosionMultiplier = 0.55
+gravity = -0.04
+minSpeed = -0.1
+maxSpeed = 0.2
+moveCameraInVehicle = true
+[rocket]
+atmosphereLeave = 600
+countDownTicks = 200
+acceleration = 0.005
+maxSpeed = 0.5
+entitiesBurnUnderRocket = true
+tankBuckets = 3
+[rover]
+explodeRoverInLava = true
+fuelPerTick = 40
+forwardSpeed = 0.1
+backwardSpeed = 0.05
+turnSpeed = 15.0
+maxTurnSpeed = 3.0
+deceleration = 0.9
+tankBuckets = 3
+[lander]
+boosterSpeed = 0.025
+boosterThreshold = -0.1
+[coalGenerator]
+maxEnergy = 9000
+energyPerTick = 10
+[compressor]
+maxEnergy = 9000
+energyPerTick = 10
+[fuelRefinery]
+maxEnergy = 9000
+energyPerTick = 10
+tankBuckets = 3
+[oxygenLoader]
+maxEnergy = 9000
+energyPerTick = 10
+tankBuckets = 3
+[oxygenDistributor]
+maxEnergy = 20000
+energyPerTick = 15
+tankBuckets = 3
+maxBlockChecks = 2000
+refreshTicks = 100
+oxygenMultiplier = 0.8
+energyMultiplier = 3.0
+oxygenGracePeriodTicks = 140
+[solarPanel]
+maxEnergy = 18000
+energyPerTick = 15
+[waterPump]
+maxEnergy = 9000
+energyPerTick = 15
+tankBuckets = 6
+transferPerTick = 810
+deleteWaterBelowWaterPump = true
+[energizer]
+maxEnergy = 2000000
+energyPerTick = 64

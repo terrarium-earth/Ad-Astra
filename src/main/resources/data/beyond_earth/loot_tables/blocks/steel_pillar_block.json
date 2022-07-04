@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "beyond_earth:steel_pillar_block"
+          "name": "beyond_earth:steel_pillar"
         }
       ],
       "rolls": 1.0

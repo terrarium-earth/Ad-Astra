@@ -12,6 +12,11 @@ public class SolarPanelBlock extends AbstractMachineBlock {
     }
 
     @Override
+    protected boolean useFacing() {
+        return true;
+    }
+
+    @Override
     public SolarPanelBlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new SolarPanelBlockEntity(pos, state);
     }

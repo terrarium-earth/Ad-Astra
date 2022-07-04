@@ -20,9 +20,9 @@ import net.minecraft.util.math.BlockPos;
 
 public class FuelRefineryBlockEntity extends FluidMachineBlockEntity {
 
-    public static final long MAX_ENERGY = BeyondEarth.CONFIG.mainConfig.fuelRefineryMaxEnergy;
-    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.mainConfig.fuelRefineryEnergyPerTick;
-    public static final int TANK_SIZE = BeyondEarth.CONFIG.mainConfig.fuelRefineryTankBuckets;
+    public static final long MAX_ENERGY = BeyondEarth.CONFIG.fuelRefinery.maxEnergy;
+    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.fuelRefinery.energyPerTick;
+    public static final int TANK_SIZE = BeyondEarth.CONFIG.fuelRefinery.tankBuckets;
 
     public FuelRefineryBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.FUEL_REFINERY_ENTITY, blockPos, blockState);

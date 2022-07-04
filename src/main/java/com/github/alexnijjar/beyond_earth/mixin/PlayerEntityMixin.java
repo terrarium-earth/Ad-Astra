@@ -21,10 +21,11 @@ public abstract class PlayerEntityMixin {
 
     @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
     public void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> ci) {
-        if (BeyondEarth.CONFIG.mainConfig.netheriteSpaceSuitHasFireResistance) {
+        if (BeyondEarth.CONFIG.spaceSuit.netheriteSpaceSuitHasFireResistance) {
             PlayerEntity player = ((PlayerEntity) (Object) this);
-            if (source.isFire() || source.equals(DamageSource.HOT_FLOOR)) {
-                if ((player.isOnFire() || source.equals(DamageSource.HOT_FLOOR)) && ModUtils.hasFullNetheriteSpaceSet(player)) {
+            if (source.isFire() || source.equals(DamageSource.HOT_FLOOR) ) {
+                if (ModUtils.hasFullNetheriteSpaceSet(player)) {
+                    player.setFireTicks(0);
                     ci.setReturnValue(false);
                 }
             }
@@ -33,7 +34,7 @@ public abstract class PlayerEntityMixin {
 
     @Inject(method = "tick", at = @At("TAIL"))
     public void tick(CallbackInfo ci) {
-        if (BeyondEarth.CONFIG.mainConfig.enableJetSuitFlight) {
+        if (BeyondEarth.CONFIG.spaceSuit.enableJetSuitFlight) {
             PlayerEntity player = ((PlayerEntity) (Object) this);
             if (!player.hasVehicle()) {
                 if (ModUtils.hasFullJetSuitSet(player)) {
@@ -52,7 +53,7 @@ public abstract class PlayerEntityMixin {
 
     @Inject(method = "checkFallFlying", at = @At("HEAD"), cancellable = true)
     public void checkFallFlying(CallbackInfoReturnable<Boolean> ci) {
-        if (BeyondEarth.CONFIG.mainConfig.enableJetSuitFlight) {
+        if (BeyondEarth.CONFIG.spaceSuit.enableJetSuitFlight) {
             PlayerEntity player = ((PlayerEntity) (Object) this);
             if (!player.hasVehicle()) {
                 if (ModUtils.hasFullJetSuitSet(player)) {

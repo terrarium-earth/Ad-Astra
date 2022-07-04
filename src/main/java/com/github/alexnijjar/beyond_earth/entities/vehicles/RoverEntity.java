@@ -7,6 +7,7 @@ import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -18,16 +19,16 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
+// summon beyond_earth:tier_1_rover ~ ~1 ~ {Passengers:[{id:"minecraft:husk"},{id:"minecraft:husk"}]}
+// summon beyond_earth:tier_1_rover ~ ~1 ~ {Passengers:[{id:"minecraft:husk"}]}
 public class RoverEntity extends VehicleEntity {
 
     public double wheelPitch;
-    public double antennaDishYaw;
 
-    public double prevAntennaDishYaw;
     public double prevWheelPitch;
     public float prevRoverYaw;
 
-    public static final long FUEL_PER_TICK = BeyondEarth.CONFIG.mainConfig.roverFuelPerTick;
+    public static final long FUEL_PER_TICK = BeyondEarth.CONFIG.rover.fuelPerTick;
 
     protected static final TrackedData<Float> TURN_SPEED = DataTracker.registerData(RoverEntity.class, TrackedDataHandlerRegistry.FLOAT);
 
@@ -43,7 +44,7 @@ public class RoverEntity extends VehicleEntity {
 
     @Override
     public long getTankSize() {
-        return BeyondEarth.CONFIG.mainConfig.roverTankBuckets;
+        return BeyondEarth.CONFIG.rover.tankBuckets;
     }
 
     @Override
@@ -76,16 +77,10 @@ public class RoverEntity extends VehicleEntity {
     }
 
     @Override
-    public boolean isCollidable() {
-        return false;
-    }
-
-    @Override
     public void tick() {
         super.tick();
         this.travel();
-        antennaDishYaw += 0.1;
-        if (BeyondEarth.CONFIG.mainConfig.explodeRoverInLava && this.isInLava()) {
+        if (BeyondEarth.CONFIG.rover.explodeRoverInLava && this.isInLava()) {
             this.explode(0.35f);
         }
     }
@@ -101,30 +96,29 @@ public class RoverEntity extends VehicleEntity {
         this.prevRoverYaw = this.getYaw();
 
         if (this.getFirstPassenger() instanceof PlayerEntity player) {
-
             if (this.inputTank.amount > 0) {
                 boolean shouldConsumeFuel = false;
 
                 // Player is clicking 'w' to move forward.
                 if (ModKeyBindings.forwardKeyDown(player)) {
-                    this.setSpeed(this.getSpeed() + BeyondEarth.CONFIG.mainConfig.roverForwardSpeed * (this.submergedInWater ? 0.5f : 1.0f));
+                    this.setSpeed(this.getSpeed() + BeyondEarth.CONFIG.rover.forwardSpeed * (this.submergedInWater ? 0.5f : 1.0f));
                     shouldConsumeFuel = true;
                 }
                 // Player is clicking 's' to move backward.
                 if (ModKeyBindings.backKeyDown(player)) {
-                    this.setSpeed(this.getSpeed() - BeyondEarth.CONFIG.mainConfig.roverBackwardSpeed * (this.submergedInWater ? 0.5f : 1.0f));
+                    this.setSpeed(this.getSpeed() - BeyondEarth.CONFIG.rover.backwardSpeed * (this.submergedInWater ? 0.5f : 1.0f));
                     shouldConsumeFuel = true;
                 }
 
                 // Player is clicking 'a' to move left.
                 if (ModKeyBindings.leftKeyDown(player)) {
-                    this.setTurnSpeed(this.getTurnSpeed() - BeyondEarth.CONFIG.mainConfig.roverTurnSpeed * this.getSpeed());
+                    this.setTurnSpeed(this.getTurnSpeed() - BeyondEarth.CONFIG.rover.turnSpeed * this.getSpeed());
                     // Slow down for better turns.
                     this.setVelocity(new Vec3d(this.getVelocity().getX() / 1.1, this.getVelocity().getY(), this.getVelocity().getZ() / 1.1));
                 }
                 // Player is clicking 'd' to move right.
                 if (ModKeyBindings.rightKeyDown(player)) {
-                    this.setTurnSpeed(this.getTurnSpeed() + BeyondEarth.CONFIG.mainConfig.roverTurnSpeed * this.getSpeed());
+                    this.setTurnSpeed(this.getTurnSpeed() + BeyondEarth.CONFIG.rover.turnSpeed * this.getSpeed());
                     // Slow down for better turns.
                     this.setVelocity(new Vec3d(this.getVelocity().getX() / 1.1, this.getVelocity().getY(), this.getVelocity().getZ() / 1.1));
                 }
@@ -135,26 +129,81 @@ public class RoverEntity extends VehicleEntity {
             }
         }
 
-        this.setTurnSpeed(MathHelper.clamp(this.getTurnSpeed(), -BeyondEarth.CONFIG.mainConfig.roverMaxTurnSpeed, BeyondEarth.CONFIG.mainConfig.roverMaxTurnSpeed));
-        this.setTurnSpeed(this.getTurnSpeed() * BeyondEarth.CONFIG.mainConfig.roverDeceleration);
+        this.setTurnSpeed(MathHelper.clamp(this.getTurnSpeed(), -BeyondEarth.CONFIG.rover.maxTurnSpeed, BeyondEarth.CONFIG.rover.maxTurnSpeed));
+        this.setTurnSpeed(this.getTurnSpeed() * BeyondEarth.CONFIG.rover.deceleration);
         if (this.getTurnSpeed() < 0.1 && this.getTurnSpeed() > -0.1) {
             this.setTurnSpeed(0.0f);
         }
 
         ModUtils.rotateVehicleYaw(this, this.getYaw() + this.getTurnSpeed());
-        if (this.getFirstPassenger() instanceof PlayerEntity player) {
-            player.setYaw(player.getYaw() + this.getTurnSpeed());
+        for (Entity passenger : this.getPassengerList()) {
+            passenger.setYaw(passenger.getYaw() + this.getTurnSpeed());
         }
 
         // Animate wheels.
         this.wheelPitch += this.getSpeed() * 7;
-
     }
 
     @Override
     public void updatePassengerPosition(Entity passenger) {
         this.copyEntityData(passenger);
-        super.updatePassengerPosition(passenger);
+        this.updatePassengerPosition(passenger, Entity::setPosition);
+    }
+
+    public double getPassengerXOffset() {
+        return 0.63;
+    }
+
+    public double getPassengerZOffset() {
+        return -0.37;
+    }
+
+    public double getSecondPassengerXOffset() {
+        return -0.5;
+    }
+
+    public double getSecondPassengerZOffset() {
+        return -0.37;
+    }
+
+    private void updatePassengerPosition(Entity passenger, PositionUpdater positionUpdater) {
+        if (!this.hasPassenger(passenger)) {
+            return;
+        }
+
+        double d = this.getY() + this.getMountedHeightOffset() + passenger.getHeightOffset();
+
+        // Keep the passengers in their seats
+        if (passenger.equals(this.getFirstPassenger())) {
+            double xRotator = Math.cos((this.getYaw() - 35) * ((float) Math.PI / 180)) * 0.55f;
+            double zRotator = Math.sin((this.getYaw() - 35) * ((float) Math.PI / 180)) * 0.55f;
+            positionUpdater.accept(passenger, this.getX() + xRotator, d, this.getZ() + zRotator);
+        } else {
+            double xRotator = Math.cos((this.getYaw() + 30) * ((float) Math.PI / 180)) * -0.65f;
+            double zRotator = Math.sin((this.getYaw() + 30) * ((float) Math.PI / 180)) * -0.65f;
+            positionUpdater.accept(passenger, this.getX() + xRotator, d, this.getZ() + zRotator);
+        }
+    }
+
+    @Override
+    public Vec3d updatePassengerForDismount(LivingEntity passenger) {
+            Vec3d pos = passenger.getPos();
+            if (this.getPassengerList().size() == 0) {
+                double xRotator = Math.cos(this.getYaw() * ((float) Math.PI / 180)) * 0.9f;
+                double zRotator = Math.sin(this.getYaw() * ((float) Math.PI / 180)) * 0.9f;
+                passenger.setVelocity(this.getVelocity());
+                return new Vec3d(pos.getX() + xRotator, pos.getY(), pos.getZ() + zRotator);
+            } else {
+                double xRotator = Math.cos(this.getYaw() * ((float) Math.PI / 180)) * -1.0f;
+                double zRotator = Math.sin(this.getYaw() * ((float) Math.PI / 180)) * -1.0f;
+                passenger.setVelocity(this.getVelocity());
+                return new Vec3d(pos.getX() + xRotator, pos.getY(), pos.getZ() + zRotator);
+            }
+    }
+
+    @Override
+    public int getMaxPassengers() {
+        return 2;
     }
 
     public float getTurnSpeed() {

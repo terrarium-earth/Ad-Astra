@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "#": {
-      "item": "beyond_earth:ostrum_plating_block"
+      "item": "beyond_earth:ostrum_plating"
     }
   },
   "pattern": [
@@ -11,6 +11,6 @@
   ],
   "result": {
     "count": 2,
-    "item": "beyond_earth:ostrum_pillar_block"
+    "item": "beyond_earth:ostrum_pillar"
   }
 }

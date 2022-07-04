@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 @Environment(EnvType.CLIENT)
 public class ClientOxygenUtils {
 
-    public static final int UPDATE_OXYGEN_FILLER_TICKS = BeyondEarth.CONFIG.mainConfig.oxygenDistributorRefreshTicks;
+    public static final int UPDATE_OXYGEN_FILLER_TICKS = BeyondEarth.CONFIG.oxygenDistributor.refreshTicks;
     public static boolean renderOxygenParticles;
     private static int spawnOxygenBubblesTick = UPDATE_OXYGEN_FILLER_TICKS;
     public static long currentClientTick;
@@ -54,7 +54,7 @@ public class ClientOxygenUtils {
 
     // Checks if there is oxygen in a specific block in a specific dimension.
     public static boolean posHasOxygen(ClientWorld world, BlockPos pos) {
-        if (currentClientTick <= BeyondEarth.CONFIG.mainConfig.oxygenGracePeriodTicks) {
+        if (currentClientTick <= BeyondEarth.CONFIG.oxygenDistributor.oxygenGracePeriodTicks) {
             return true;
         }
         for (Map.Entry<Pair<RegistryKey<World>, BlockPos>, Set<BlockPos>> entry : oxygenLocations.entrySet()) {

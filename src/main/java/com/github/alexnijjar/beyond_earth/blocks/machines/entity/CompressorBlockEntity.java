@@ -18,8 +18,8 @@ import net.minecraft.util.math.Direction;
 
 public class CompressorBlockEntity extends ProcessingMachineBlockEntity {
 
-    public static final long MAX_ENERGY = BeyondEarth.CONFIG.mainConfig.compressorMaxEnergy;
-    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.mainConfig.compressorEnergyPerTick;
+    public static final long MAX_ENERGY = BeyondEarth.CONFIG.compressor.maxEnergy;
+    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.compressor.energyPerTick;
 
     public CompressorBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.COMPRESSOR_ENTITY, blockPos, blockState);

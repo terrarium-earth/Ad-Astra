@@ -37,20 +37,23 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
 
 public abstract class VehicleEntity extends Entity {
 
-    protected int clientInterpolationSteps;
     protected double clientX;
     protected double clientY;
     protected double clientZ;
     public double clientYaw;
     public double clientPitch;
+    private int field_7708;
+
     protected double clientXVelocity;
     protected double clientYVelocity;
     protected double clientZVelocity;
+
     public float previousYaw;
 
     public final SingleVariantStorage<FluidVariant> inputTank = FluidUtils.createTank(this.getTankSize());
@@ -86,83 +89,98 @@ public abstract class VehicleEntity extends Entity {
     }
 
     @Override
+    public void updateTrackedPositionAndAngles(double x, double y, double z, float yaw, float pitch, int interpolationSteps, boolean interpolate) {
+        this.clientX = x;
+        this.clientY = y;
+        this.clientZ = z;
+        this.clientYaw = yaw;
+        this.clientPitch = pitch;
+        this.field_7708 = 10;
+        this.setVelocity(this.clientXVelocity, this.clientYVelocity, this.clientZVelocity);
+    }
+
+    private void updatePositionAndRotation() {
+        if (this.isLogicalSideForUpdatingMovement()) {
+            this.field_7708 = 0;
+            this.updateTrackedPosition(this.getX(), this.getY(), this.getZ());
+        }
+        if (this.field_7708 <= 0) {
+            return;
+        }
+        double d = this.getX() + (this.clientX - this.getX()) / (double) this.field_7708;
+        double e = this.getY() + (this.clientY - this.getY()) / (double) this.field_7708;
+        double f = this.getZ() + (this.clientZ - this.getZ()) / (double) this.field_7708;
+        double g = MathHelper.wrapDegrees(this.clientYaw - (double) this.getYaw());
+        this.setYaw(this.getYaw() + (float) g / (float) this.field_7708);
+        this.setPitch(this.getPitch() + (float) (this.clientPitch - (double) this.getPitch()) / (float) this.field_7708);
+        --this.field_7708;
+        this.setPosition(d, e, f);
+        this.setRotation(this.getYaw(), this.getPitch());
+    }
+
+    @Override
+    public void setVelocityClient(double x, double y, double z) {
+        this.clientXVelocity = x;
+        this.clientYVelocity = y;
+        this.clientZVelocity = z;
+        this.setVelocity(this.clientXVelocity, this.clientYVelocity, this.clientZVelocity);
+    }
+
+    @Override
     public void tick() {
-        super.tick();
         this.previousYaw = this.getYaw();
 
-        this.tryInsertingIntoTank();
+        super.tick();
+        this.updatePositionAndRotation();
+        this.doMovement();
+        this.slowDown();
+        this.doGravity();
+        this.move(MovementType.SELF, this.getVelocity());
         this.checkBlockCollision();
+
+        this.tryInsertingIntoTank();
         if (!this.world.isClient) {
             this.dataTracker.set(FLUID_AMOUNT, (int) this.inputTank.amount);
             this.dataTracker.set(FLUID_VARIANT, Registry.FLUID.getId(this.inputTank.variant.getFluid()).toString());
         }
-
-
-        this.doGravity();
-        this.slowDown();
-        this.doMovement();
     }
 
+    // Sets the velocity based on the current speed and the current direction.
+    public void doMovement() {
+        this.setPitch(0);
+        Vec3d movement = this.getRotationVector(this.getPitch(), this.getYaw());
+
+        // Save the current y velocity so we can use it later.
+        double yVelocity = this.getVelocity().getY();
+
+        this.setVelocity(this.getVelocity().add(movement.getX(), 0.0, movement.getZ()).multiply(this.getSpeed()));
+
+        // Prevent the vehicle from going too fast.
+        double maxVelocity = 0.75;
+        if (this.getVelocity().lengthSquared() > maxVelocity * maxVelocity) {
+            this.setVelocity(this.getVelocity().normalize().multiply(maxVelocity));
+        }
+
+        // Set the y velocity back to the original value, as it was modified by the movement.
+        this.setVelocity(new Vec3d(this.getVelocity().getX(), yVelocity, this.getVelocity().getZ()));
+    }
+
+    // Slow down the vehicle until a full stop is reached.
     public void slowDown() {
         this.setSpeed(this.getSpeed() / 1.1f);
         if (this.getSpeed() < 0.001 && this.getSpeed() > -0.001) {
             this.setSpeed(0.0f);
         }
-        this.setSpeed(MathHelper.clamp(this.getSpeed(), BeyondEarth.CONFIG.mainConfig.vehicleMinSpeed, BeyondEarth.CONFIG.mainConfig.vehicleMaxSpeed));
+        this.setSpeed(MathHelper.clamp(this.getSpeed(), BeyondEarth.CONFIG.vehicles.minSpeed, BeyondEarth.CONFIG.vehicles.maxSpeed));
     }
 
+    // Apply gravity to the vehicle.
     public void doGravity() {
         if (!this.hasNoGravity()) {
-            double gravity = 0.8;
-            if (this.submergedInWater) {
-                gravity *= 0.01;
+            this.setVelocity(this.getVelocity().add(0, -0.03, 0));
+            if (this.getVelocity().getY() < BeyondEarth.CONFIG.vehicles.gravity) {
+                this.setVelocity(new Vec3d(this.getVelocity().getX(), BeyondEarth.CONFIG.vehicles.gravity, this.getVelocity().getZ()));
             }
-
-            float planetGravity = ModUtils.getPlanetGravity(this.world);
-            if (this instanceof LanderEntity) {
-                gravity = 0.5;
-            } else {
-                gravity *= planetGravity;
-            }
-
-            this.setVelocity(this.getVelocity().add(0.0, BeyondEarth.CONFIG.mainConfig.vehicleGravity * gravity, 0.0));
-        }
-    }
-
-    public void doMovement() {
-        BlockPos velocityAffectingPos = this.getVelocityAffectingPos();
-        float slipperiness = this.world.getBlockState(velocityAffectingPos).getBlock().getSlipperiness();
-        Vec3d movement = this.applyMovementInput(new Vec3d(this.getPitch(), 0, 1), slipperiness);
-        double speedModifier = this.onGround ? slipperiness * 1.0f : slipperiness * 0.70f;
-        this.setVelocity(movement.getX() * speedModifier, movement.getY() * 0.98, movement.getZ() * speedModifier);
-
-        this.move(MovementType.SELF, this.getVelocity());
-    }
-
-    private float getMovementSpeed(float slipperiness) {
-        return this.getSpeed() * (0.21600002f / (slipperiness * slipperiness * slipperiness));
-    }
-
-    public Vec3d applyMovementInput(Vec3d movementInput, float slipperiness) {
-        this.updateVelocity(this.getMovementSpeed(slipperiness), movementInput);
-        this.move(MovementType.SELF, this.getVelocity());
-        return this.getVelocity();
-    }
-
-    public void syncClient() {
-        if (this.clientInterpolationSteps > 0) {
-            double d = this.getX() + (this.clientX - this.getX()) / (double) this.clientInterpolationSteps;
-            double e = this.getY() + (this.clientY - this.getY()) / (double) this.clientInterpolationSteps;
-            double f = this.getZ() + (this.clientZ - this.getZ()) / (double) this.clientInterpolationSteps;
-            double g = MathHelper.wrapDegrees(this.clientYaw - (double) this.getYaw());
-            this.setYaw(this.getYaw() + (float) g / (float) this.clientInterpolationSteps);
-            this.setPitch(this.getPitch() + (float) (this.clientPitch - (double) this.getPitch()) / (float) this.clientInterpolationSteps);
-            --this.clientInterpolationSteps;
-            this.setPosition(d, e, f);
-            this.setRotation(this.getYaw(), this.getPitch());
-        } else {
-            this.refreshPosition();
-            this.setRotation(this.getYaw(), this.getPitch());
         }
     }
 
@@ -175,38 +193,14 @@ public abstract class VehicleEntity extends Entity {
     }
 
     @Override
-    public void updateTrackedPositionAndAngles(double x, double y, double z, float yaw, float pitch, int interpolationSteps, boolean interpolate) {
-        this.clientX = x;
-        this.clientY = y;
-        this.clientZ = z;
-        this.clientYaw = yaw;
-        this.clientPitch = pitch;
-        this.clientInterpolationSteps = interpolationSteps + 2;
-        this.setVelocity(this.clientXVelocity, this.clientYVelocity, this.clientZVelocity);
-    }
-
-    @Override
-    public void setVelocityClient(double x, double y, double z) {
-        this.clientXVelocity = x;
-        this.clientYVelocity = y;
-        this.clientZVelocity = z;
-        this.setVelocity(this.clientXVelocity, this.clientYVelocity, this.clientZVelocity);
-    }
-
-    public void setAnglesClient(double pitch, double yaw) {
-        this.clientYaw = yaw;
-        this.clientPitch = pitch;
-    }
-
-    @Override
     public ActionResult interact(PlayerEntity player, Hand hand) {
         if (player.shouldCancelInteraction()) {
             return ActionResult.PASS;
         }
-        if (this.hasPassengers()) {
-            return ActionResult.PASS;
-        }
         if (!this.world.isClient) {
+            if (this.getPassengerList().size() > this.getMaxPassengers()) {
+                return ActionResult.PASS;
+            }
             player.setYaw(this.getYaw());
             player.setPitch(this.getPitch());
             return player.startRiding(this) ? ActionResult.CONSUME : ActionResult.PASS;
@@ -240,7 +234,7 @@ public abstract class VehicleEntity extends Entity {
     }
 
     public void drop() {
-        if (getDropStack() != null) {
+        if (getDropStack() != null && this.world.getGameRules().getBoolean(GameRules.DO_TILE_DROPS)) {
             BlockPos pos = this.getBlockPos();
             ItemStack dropStack = this.getDropStack();
 
@@ -269,8 +263,8 @@ public abstract class VehicleEntity extends Entity {
 
     @Override
     public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
-        if (this.getVelocity().getY() < BeyondEarth.CONFIG.mainConfig.vehicleFallingExplosionThreshold) {
-            this.explode(BeyondEarth.CONFIG.mainConfig.vehicleFallingExplosionMultiplier);
+        if (this.getVelocity().getY() < BeyondEarth.CONFIG.vehicles.fallingExplosionThreshold) {
+            this.explode(BeyondEarth.CONFIG.vehicles.fallingExplosionMultiplier);
             return true;
         }
         return false;

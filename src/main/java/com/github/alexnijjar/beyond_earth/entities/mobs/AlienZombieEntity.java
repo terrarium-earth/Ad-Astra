@@ -91,7 +91,7 @@ public class AlienZombieEntity extends HostileEntity implements RangedAttackMob 
 
     @Override
     public boolean canSpawn(WorldAccess world, SpawnReason spawnReason) {
-        if (!BeyondEarth.CONFIG.mainConfig.spawnAlienZombies) {
+        if (!BeyondEarth.CONFIG.world.spawnAlienZombies) {
             return false;
         }
 

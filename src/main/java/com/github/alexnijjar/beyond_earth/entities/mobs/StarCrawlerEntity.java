@@ -55,7 +55,7 @@ public class StarCrawlerEntity extends HostileEntity {
 
     @Override
     public boolean canSpawn(WorldAccess world, SpawnReason spawnReason) {
-        if (!BeyondEarth.CONFIG.mainConfig.spawnStarCrawlers) {
+        if (!BeyondEarth.CONFIG.world.spawnStarCrawlers) {
             return false;
         }
 
