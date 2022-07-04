@@ -2,10 +2,11 @@ package com.github.alexnijjar.beyond_earth.entities.vehicles;
 
 import java.util.List;
 
+import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.blocks.launch_pad.RocketLaunchPad;
-import com.github.alexnijjar.beyond_earth.gui.PlanetSelectionHandlerFactory;
+import com.github.alexnijjar.beyond_earth.gui.PlanetSelectionScreenHandlerFactory;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.PlanetSelectionScreenHandler;
-import com.github.alexnijjar.beyond_earth.registry.ModParticles;
+import com.github.alexnijjar.beyond_earth.registry.ModParticleTypes;
 import com.github.alexnijjar.beyond_earth.registry.ModSounds;
 import com.github.alexnijjar.beyond_earth.util.ModDamageSource;
 import com.github.alexnijjar.beyond_earth.util.ModKeyBindings;
@@ -25,18 +26,19 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class RocketEntity extends VehicleEntity {
 
     // 10 seconds.
-    public static final int ATMOSPHERE_LEAVE = 600;
-    public static final int MAX_COUNTDOWN_TICKS = 200;
-    public static final float ROCKET_ACCELERATION = 0.01f;
-    public static final float ROCKET_MAX_SPEED = 0.85f;
+    public static final int ATMOSPHERE_LEAVE = BeyondEarth.CONFIG.rocket.atmosphereLeave;
+    public static final int MAX_COUNTDOWN_TICKS = BeyondEarth.CONFIG.rocket.countDownTicks;
+    public static final double ROCKET_ACCELERATION = BeyondEarth.CONFIG.rocket.acceleration;
+    public static final double ROCKET_MAX_SPEED = BeyondEarth.CONFIG.rocket.maxSpeed;
 
     protected static final TrackedData<Boolean> HAS_LAUNCH_PAD = DataTracker.registerData(RocketEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     protected static final TrackedData<Boolean> FLYING = DataTracker.registerData(RocketEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
@@ -47,6 +49,23 @@ public class RocketEntity extends VehicleEntity {
     public RocketEntity(EntityType<?> type, World world, int tier) {
         super(type, world);
         this.setTier(tier);
+    }
+
+    @Override
+    public int getInventorySize() {
+        return 10;
+    }
+
+    @Override
+    public long getTankSize() {
+        return BeyondEarth.CONFIG.rocket.tankBuckets;
+    }
+
+    @Override
+    public ActionResult interact(PlayerEntity player, Hand hand) {
+        super.interact(player, hand);
+        this.openInventory(player);
+        return ActionResult.SUCCESS;
     }
 
     @Override
@@ -61,11 +80,9 @@ public class RocketEntity extends VehicleEntity {
 
     @Override
     public Vec3d updatePassengerForDismount(LivingEntity passenger) {
+        super.updatePassengerForDismount(passenger);
         int exitDirection = Math.round(passenger.getYaw() / 90) * 90;
         Vec3d pos = passenger.getPos();
-        if (passenger instanceof PlayerEntity player) {
-            player.getAbilities().allowFlying = false;
-        }
 
         // Exit velocity.
         double velocityY = this.getVelocity().getY() * 2.5;
@@ -113,7 +130,6 @@ public class RocketEntity extends VehicleEntity {
             if (ModKeyBindings.rightKeyDown(player)) {
                 ModUtils.rotateVehicleYaw(this, this.getYaw() + 1);
             }
-            player.getAbilities().allowFlying = true;
         }
 
         if (this.getY() >= ATMOSPHERE_LEAVE || this.getFrozenTicks() > 1000) {
@@ -172,16 +188,12 @@ public class RocketEntity extends VehicleEntity {
         this.getPassengerList().forEach(passenger -> {
             if (passenger instanceof PlayerEntity player) {
                 if (!(player.currentScreenHandler instanceof PlanetSelectionScreenHandler)) {
-                    player.playerScreenHandler.close(player);
-                    player.openHandledScreen(new PlanetSelectionHandlerFactory(this.getTier()));
+                    player.openHandledScreen(new PlanetSelectionScreenHandlerFactory(this.getTier()));
 
                     if (this.world instanceof ServerWorld serverWorld) {
                         stopRocketSoundForRider((ServerPlayerEntity) player);
                     }
-                    player.getAbilities().allowFlying = false;
                 }
-                this.setInvisible(true);
-                this.setBoundingBox(Box.from(Vec3d.ZERO));
             }
         });
     }
@@ -199,8 +211,8 @@ public class RocketEntity extends VehicleEntity {
         if (this.world instanceof ServerWorld serverWorld) {
             Vec3d pos = this.getPos();
 
-            ModUtils.spawnForcedParticles(serverWorld, ModParticles.LARGE_FLAME, pos.getX(), pos.getY(), pos.getZ(), 20, 0.1, 0.1, 0.1, 0.001);
-            ModUtils.spawnForcedParticles(serverWorld, ModParticles.LARGE_SMOKE, pos.getX(), pos.getY(), pos.getZ(), 10, 0.1, 0.1, 0.1, 0.001);
+            ModUtils.spawnForcedParticles(serverWorld, ModParticleTypes.LARGE_FLAME, pos.getX(), pos.getY(), pos.getZ(), 20, 0.1, 0.1, 0.1, 0.001);
+            ModUtils.spawnForcedParticles(serverWorld, ModParticleTypes.LARGE_SMOKE, pos.getX(), pos.getY(), pos.getZ(), 10, 0.1, 0.1, 0.1, 0.001);
         }
     }
 
@@ -211,7 +223,7 @@ public class RocketEntity extends VehicleEntity {
             if (ModUtils.hasFullNetheriteSpaceSet(entity) || (entity.getVehicle() != null && entity.getVehicle().equals(this))) {
                 continue;
             }
-            if (!entity.isFireImmune()) {
+            if (BeyondEarth.CONFIG.rocket.entitiesBurnUnderRocket && !entity.isFireImmune()) {
                 entity.setOnFireFor(10);
                 entity.damage(ModDamageSource.ROCKET_FLAMES, 10);
                 BlockState belowBlock = this.world.getBlockState(entity.getBlockPos().down());

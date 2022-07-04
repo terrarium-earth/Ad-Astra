@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 0.2,
+  "ingredient": {
+    "item": "beyond_earth:mercury_stone_bricks"
+  },
+  "result": "beyond_earth:cracked_mercury_stone_bricks"
+}

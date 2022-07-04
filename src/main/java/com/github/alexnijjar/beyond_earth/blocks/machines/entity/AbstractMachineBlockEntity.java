@@ -1,8 +1,9 @@
 package com.github.alexnijjar.beyond_earth.blocks.machines.entity;
 
-import com.github.alexnijjar.beyond_earth.util.SimpleInventory;
-
 import org.jetbrains.annotations.Nullable;
+
+import com.github.alexnijjar.beyond_earth.blocks.machines.AbstractMachineBlock;
+import com.github.alexnijjar.beyond_earth.util.ModInventory;
 
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
@@ -30,14 +31,16 @@ import team.reborn.energy.api.EnergyStorage;
 import team.reborn.energy.api.EnergyStorageUtil;
 import team.reborn.energy.api.base.SimpleSidedEnergyContainer;
 
-@SuppressWarnings("UnstableApiUsage")
-public abstract class AbstractMachineBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, SimpleInventory, SidedInventory {
+public abstract class AbstractMachineBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, ModInventory, SidedInventory {
 
     private final DefaultedList<ItemStack> inventory;
 
     public AbstractMachineBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
         super(blockEntityType, blockPos, blockState);
         inventory = DefaultedList.ofSize(getInventorySize(), ItemStack.EMPTY);
+    }
+
+    public void tick() {
     }
 
     @Nullable
@@ -92,6 +95,12 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
         return 0;
     }
 
+    public void setActive(boolean active) {
+        if (this.getCachedState().contains(AbstractMachineBlock.LIT)) {
+            this.world.setBlockState(this.getPos(), this.getCachedState().with(AbstractMachineBlock.LIT, active));
+        }
+    }
+
     public void cumulateEnergy() {
         if (this.energyStorage.amount < this.getMaxGeneration()) {
             this.energyStorage.amount += this.getEnergyPerTick();
@@ -101,13 +110,20 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
         this.markDirty();
     }
 
-    public void drainEnergy() {
-        if (this.energyStorage.amount > 0) {
-            this.energyStorage.amount -= this.getEnergyPerTick();
+    public boolean drainEnergy() {
+        return this.drainEnergy(this.getEnergyPerTick());
+    }
+
+    public boolean drainEnergy(long amount) {
+        if (this.energyStorage.amount - amount > 0) {
+            this.energyStorage.amount -= amount;
+            this.markDirty();
+            return true;
         } else {
             this.energyStorage.amount = 0;
+            this.markDirty();
+            return false;
         }
-        this.markDirty();
     }
 
     // Send energy to surrounding machines.
@@ -120,11 +136,15 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
     }
 
     public EnergyStorage getSideEnergyStorage(@Nullable Direction side) {
-        return energyStorage.getSideStorage(side);
+        return this.energyStorage.getSideStorage(side);
     }
 
     public long getEnergy() {
-        return energyStorage.amount;
+        return this.energyStorage.amount;
+    }
+
+    public boolean hasEnergy() {
+        return this.usesEnergy() && this.energyStorage.amount > this.getEnergyPerTick();
     }
 
     @Override
@@ -134,7 +154,7 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
 
     @Override
     public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
-        buf.writeBlockPos(this.pos);
+        buf.writeBlockPos(this.getPos());
     }
 
     @Override
@@ -181,7 +201,8 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
 
     @Override
     public boolean canInsert(int slot, ItemStack stack, Direction dir) {
-        return true;
+        ItemStack slotStack = this.getStack(slot);
+        return slotStack.isEmpty() || (slotStack.isOf(stack.getItem()) && slotStack.getCount() <= slotStack.getMaxCount());
     }
 
     @Override

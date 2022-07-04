@@ -3,7 +3,7 @@ package com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs;
 import java.util.Map;
 
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.models.PygroEntityModel;
-import com.github.alexnijjar.beyond_earth.registry.ModEntities;
+import com.github.alexnijjar.beyond_earth.registry.ModEntityTypes;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 import com.google.common.collect.ImmutableMap;
 
@@ -18,7 +18,7 @@ import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
 public class PygroEntityRenderer extends PiglinEntityRenderer {
-    private static final Map<EntityType<?>, Identifier> TEXTURES = ImmutableMap.of(ModEntities.PYGRO, new ModIdentifier("textures/entities/pygro.png"), ModEntities.PYGRO_BRUTE, new ModIdentifier("textures/entities/pygro_brute.png"));
+    private static final Map<EntityType<?>, Identifier> TEXTURES = ImmutableMap.of(ModEntityTypes.PYGRO, new ModIdentifier("textures/entities/pygro.png"), ModEntityTypes.PYGRO_BRUTE, new ModIdentifier("textures/entities/pygro_brute.png"));
 
     public PygroEntityRenderer(EntityRendererFactory.Context context) {
         super(context, PygroEntityModel.LAYER_LOCATION, EntityModelLayers.PIGLIN_INNER_ARMOR, EntityModelLayers.PIGLIN_OUTER_ARMOR, false);

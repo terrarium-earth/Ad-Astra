@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "beyond_earth:wheel"
+    },
+    "D": {
+      "tag": "c:desh_blocks"
+    },
+    "E": {
+      "item": "beyond_earth:desh_engine"
+    },
+    "P": {
+      "item": "beyond_earth:desh_plate"
+    },
+    "S": {
+      "tag": "c:steel_blocks"
+    },
+    "|": {
+      "tag": "c:iron_rods"
+    }
+  },
+  "pattern": [
+    "D |",
+    "SDE",
+    "#P#"
+  ],
+  "result": {
+    "item": "beyond_earth:tier_1_rover"
+  }
+}

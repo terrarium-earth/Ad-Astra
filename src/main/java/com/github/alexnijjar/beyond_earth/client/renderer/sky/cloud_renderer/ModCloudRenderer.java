@@ -24,7 +24,7 @@ import net.minecraft.util.math.Vec3d;
 
 @Environment(EnvType.CLIENT)
 public class ModCloudRenderer implements DimensionRenderingRegistry.CloudRenderer {
-        private static final Identifier VENUS_CLOUD_TEXTURE = new ModIdentifier("textures/sky/clouds.png");
+        private static final Identifier VENUS_CLOUD_TEXTURE = new ModIdentifier("textures/sky/venus/clouds.png");
         private Identifier texture;
 
         public ModCloudRenderer withVenus() {

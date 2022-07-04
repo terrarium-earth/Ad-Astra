@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "tag": "c:compressed_calorite"
+    },
+    "N": {
+      "item": "beyond_earth:netherite_space_pants"
+    }
+  },
+  "pattern": [
+    "#N#",
+    "# #",
+    "# #"
+  ],
+  "result": {
+    "item": "beyond_earth:jet_suit_pants"
+  }
+}

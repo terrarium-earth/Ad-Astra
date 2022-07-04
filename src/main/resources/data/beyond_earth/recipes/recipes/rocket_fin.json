@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "tag": "c:compressed_steel"
+    }
+  },
+  "pattern": [
+    " # ",
+    "###",
+    "# #"
+  ],
+  "result": {
+    "count": 4,
+    "item": "beyond_earth:rocket_fin"
+  }
+}

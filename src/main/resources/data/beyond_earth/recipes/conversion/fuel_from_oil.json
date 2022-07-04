@@ -1,0 +1,10 @@
+{
+   "type": "beyond_earth:fuel_conversion",
+   "input": {
+      "tag": "beyond_earth:oil"
+   },
+   "output": {
+      "name": "beyond_earth:fuel"
+   },
+   "conversion_ratio": 1.0
+}

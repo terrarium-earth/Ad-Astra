@@ -10,7 +10,6 @@ import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 public class GlobeBlockEntity extends BlockEntity {
 
@@ -25,21 +24,20 @@ public class GlobeBlockEntity extends BlockEntity {
         super(ModBlockEntities.GLOBE_BLOCK_ENTITY, pos, state);
     }
 
-    public static void tick(World world, BlockPos pos, BlockState state, GlobeBlockEntity blockEntity) {
-
-        if (state.get(GlobeBlock.POWERED) && blockEntity.getAngularVelocity() <= 0.05f) {
-            blockEntity.setAngularVelocity(0.05f);
+    public void tick() {
+        if (this.getCachedState().get(GlobeBlock.POWERED) && this.getAngularVelocity() <= 0.05f) {
+            this.setAngularVelocity(0.05f);
         }
 
-        if (blockEntity.getAngularVelocity() > 0) {
+        if (this.getAngularVelocity() > 0) {
             // Simulate an inertia effect.
-            blockEntity.setAngularVelocity(blockEntity.getAngularVelocity() - INERTIA);
+            this.setAngularVelocity(this.getAngularVelocity() - INERTIA);
 
-            blockEntity.setCachedYaw(blockEntity.getYaw());
-            blockEntity.setYaw(blockEntity.getYaw() - blockEntity.getAngularVelocity());
+            this.setCachedYaw(this.getYaw());
+            this.setYaw(this.getYaw() - this.getAngularVelocity());
 
-        } else if (blockEntity.getAngularVelocity() < 0) {
-            blockEntity.setAngularVelocity(0);
+        } else if (this.getAngularVelocity() < 0) {
+            this.setAngularVelocity(0);
         }
     }
 

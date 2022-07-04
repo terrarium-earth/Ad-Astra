@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "beyond_earth:rocket_t4"
+      "item": "beyond_earth:tier_4_rocket"
     },
     "title": {
-      "translate": "advancements.rocket_tier_4_advancement.title"
+      "translate": "advancements.tier_4_rocket_advancement.title"
     },
     "description": {
-      "translate": "advancements.rocket_tier_4_advancement.description"
+      "translate": "advancements.tier_4_rocket_advancement.description"
     },
     "frame": "goal",
     "show_toast": true,
@@ -15,13 +15,13 @@
     "hidden": false
   },
   "criteria": {
-    "rocket_tier_4_advancement": {
+    "tier_4_rocket_advancement": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "beyond_earth:rocket_t4"
+              "beyond_earth:tier_4_rocket"
             ]
           }
         ]

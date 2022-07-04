@@ -19,7 +19,7 @@ public class GeneratorOptionsMixin {
     // Gets the world seed to replace the default value of '0' for custom
     // dimensions.
     @Inject(at = @At(value = "TAIL"), method = "<init>(JZZLnet/minecraft/util/registry/Registry;Ljava/util/Optional;)V")
-    private void GeneratorOptions(long seed, boolean generateStructures, boolean bonusChest, Registry<DimensionOptions> options, Optional<String> legacyCustomOptions, CallbackInfo info) {
+    private void GeneratorOptions(long seed, boolean generateStructures, boolean bonusChest, Registry<DimensionOptions> options, Optional<String> legacyCustomOptions, CallbackInfo ci) {
         WorldSeed.setSeed(seed);
     }
 }

@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "experience": 0.7,
-  "cookingtime": 100,
-  "ingredient": {
-    "item": "beyond_earth:glacio_copper_ore"
-  },
-  "result": "minecraft:copper_ingot"
-}

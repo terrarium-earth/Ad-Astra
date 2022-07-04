@@ -18,7 +18,7 @@ import net.minecraft.client.render.entity.model.EntityModelLayer;
 @Environment(EnvType.CLIENT)
 public class RocketEntityModelTier4 extends VehicleEntityModel<RocketEntityTier4> {
 
-        public static final EntityModelLayer LAYER_LOCATION = new EntityModelLayer(new ModIdentifier("rocket_t4"), "main");
+        public static final EntityModelLayer LAYER_LOCATION = new EntityModelLayer(new ModIdentifier("tier_4_rocket"), "main");
 
         public RocketEntityModelTier4(ModelPart root) {
                 super(root, "rocket");

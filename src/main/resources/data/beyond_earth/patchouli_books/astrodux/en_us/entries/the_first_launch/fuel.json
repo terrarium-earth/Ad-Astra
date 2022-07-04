@@ -1,0 +1,30 @@
+{
+    "name": "Fuel",
+    "icon": "beyond_earth:fuel_bucket",
+    "sortnum": 2,
+    "category": "beyond_earth:the_first_launch",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Even after you place your rocket, you will not be able to fly just yet. To fly, you will need to fill the rocket with fuel."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "title": "Obtaining Fuel",
+            "item": "beyond_earth:oil_bucket",
+            "text": "Oil is found in large amounts spouting over the ocean surface. Collect as much oil as you can, as oil is non-renewable, and you need a lot of it for each rocket launch."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "title": "Obtaining Fuel",
+            "item": "beyond_earth:fuel_bucket",
+            "text": "After collecting enough oil (at least six buckets for a launch and return), you will need to refine the oil into fuel. To do this, you will need to craft a fuel refinery. Power it, then place the oil in the left slot, and it will be refined into fuel."
+        },
+        {
+            "type": "patchouli:crafting",
+            "title": "Fuel Refinery",
+            "recipe": "beyond_earth:recipes/fuel_refinery",
+            "text": "Shift-click on the rocket to open its inventory, then place three buckets of fuel into the input slot. Place the other three buckets into the rocket's inventory for a return trip."
+        }
+    ]
+}
