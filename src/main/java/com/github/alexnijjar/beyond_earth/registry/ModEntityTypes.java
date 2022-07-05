@@ -62,7 +62,7 @@ public class ModEntityTypes {
                         FabricEntityTypeBuilder.create(SpawnGroup.MISC, LanderEntity::new).dimensions(EntityDimensions.fixed(1.2f, 2.0f)).fireImmune().build());
 
         public static final EntityType<SpacePaintingEntity> SPACE_PAINTING = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("space_painting"),
-                        FabricEntityTypeBuilder.<SpacePaintingEntity>create(SpawnGroup.MISC, SpacePaintingEntity::new).dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
+                        FabricEntityTypeBuilder.<SpacePaintingEntity>create(SpawnGroup.MISC, SpacePaintingEntity::new).dimensions(EntityDimensions.fixed(0.5f, 0.5f)).trackRangeChunks(10).trackedUpdateRate(Integer.MAX_VALUE).build());
 
         // Projectiles
         public static final EntityType<IceSpitEntity> ICE_SPIT_ENTITY = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("ice_spit_entity"),
