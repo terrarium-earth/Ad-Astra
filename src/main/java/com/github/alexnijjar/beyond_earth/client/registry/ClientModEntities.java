@@ -33,7 +33,6 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
-import net.minecraft.client.render.entity.PaintingEntityRenderer;
 
 @Environment(EnvType.CLIENT)
 public class ClientModEntities {
@@ -61,9 +60,6 @@ public class ClientModEntities {
 
         // Projectiles.
         EntityRendererRegistry.register(ModEntityTypes.ICE_SPIT_ENTITY, FlyingItemEntityRenderer::new);
-
-        // Painting.
-        EntityRendererRegistry.register(ModEntityTypes.SPACE_PAINTING, PaintingEntityRenderer::new);
 
         // Layers.
         EntityModelLayerRegistry.registerModelLayer(AlienEntityModel.LAYER_LOCATION, AlienEntityModel::getTexturedModelData);
