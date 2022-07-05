@@ -18,6 +18,5 @@ public class BeyondEarthDataGenEntrypoint implements DataGeneratorEntrypoint {
 		fabricDataGenerator.addProvider(ModBlockLootTableProvider::new);
 		fabricDataGenerator.addProvider(ModRecipeProvider::new);
 		BeyondEarth.LOGGER.info("Beyond Earth Datagen finished 🚀");
-		
 	}
 }

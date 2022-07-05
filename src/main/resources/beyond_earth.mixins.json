@@ -10,6 +10,7 @@
     "GeneratorOptionsMixin",
     "LivingEntityMixin",
     "NoiseChunkGeneratorAccessor",
+    "PaintingEntityMixin",
     "PiglinSpecificSensorMixin",
     "PlayerEntityMixin",
     "oxygen.BlockItemMixin",
