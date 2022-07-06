@@ -171,7 +171,7 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		offerQuadRecipe(exporter, VENUS_SANDSTONE, VENUS_SAND);
 
 		// Ice
-		offerQuadRecipe(exporter, ModItems.ICE_SHARD, Blocks.PACKED_ICE);
+		offerQuadRecipe(exporter, 1, Blocks.PACKED_ICE, ModItems.ICE_SHARD);
 
 		// Rocket Launch Pad
 		ShapedRecipeJsonBuilder.create(ROCKET_LAUNCH_PAD, 9).input(Character.valueOf('#'), ModTags.COMPRESSED_STEEL).input(Character.valueOf('|'), ModTags.IRON_PLATES).pattern("#|#").pattern("|#|").pattern("#|#").group("rocket_launch_pad")
@@ -228,7 +228,7 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 				.criterion(hasItem(ModItems.DESH_PLATE), conditionsFromTag(ModTags.DESH_PLATES)).offerTo(exporter);
 
 		// Energizer
-		ShapedRecipeJsonBuilder.create(ENERGIZER).input(Character.valueOf('#'), ModTags.COMPRESSED_OSTRUM).input(Character.valueOf('D'), Blocks.DIAMOND_BLOCK).input(Character.valueOf('I'), Items.DIAMOND).pattern("#I#").pattern("#D#").pattern("###")
+		ShapedRecipeJsonBuilder.create(ENERGIZER).input(Character.valueOf('#'), ModTags.COMPRESSED_OSTRUM).input(Character.valueOf('D'), Blocks.DIAMOND_BLOCK).input(Character.valueOf('I'), Items.DIAMOND).input(Character.valueOf('B'), OSTRUM_BLOCK).pattern("#I#").pattern("#D#").pattern("B#B")
 				.group(null).criterion(hasItem(ModItems.COMPRESSED_OSTRUM), conditionsFromTag(ModTags.COMPRESSED_OSTRUM)).offerTo(exporter);
 
 		// Cryo Freezer
@@ -378,6 +378,10 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 
 	public static void offerQuadRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, TagKey<Item> input) {
 		RecipeProvider.createCondensingRecipe(output, Ingredient.fromTag(input)).criterion("item", conditionsFromTag(input)).offerTo(exporter);
+	}
+
+	public static void offerQuadRecipe(Consumer<RecipeJsonProvider> exporter, int amount, ItemConvertible output, ItemConvertible input) {
+		ShapedRecipeJsonBuilder.create(output, amount).input(Character.valueOf('S'), input).pattern("SS").pattern("SS").criterion(hasItem(Items.IRON_INGOT), conditionsFromItem(input)).offerTo(exporter);
 	}
 
 	public static void offerQuadRecipe(Consumer<RecipeJsonProvider> exporter, int amount, ItemConvertible output, TagKey<Item> input) {

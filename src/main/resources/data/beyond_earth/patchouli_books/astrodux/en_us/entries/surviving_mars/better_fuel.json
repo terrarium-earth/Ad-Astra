@@ -12,7 +12,7 @@
         },
         {
             "type": "patchouli:text",
-            "text": "It's created by collecting ice shards, which are found as an ore underground on cold planets. The ice shard then needs to be inserted into a Cryo Freezer, and it will convert to 50 mB of Cryo Fuel. Alternatively, you can convert ice, packed ice and blue ice to fuel."
+            "text": "It's created by collecting ice shards, which are found as an ore underground on cold planets. The ice shard then needs to be inserted into a Cryo Freezer, and it will convert to 30 mB of Cryo Fuel. Alternatively, you can convert ice, packed ice and blue ice to fuel."
         },
         {
             "type": "patchouli:crafting",

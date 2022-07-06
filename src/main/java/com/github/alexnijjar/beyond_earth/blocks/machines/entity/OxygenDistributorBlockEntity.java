@@ -117,9 +117,6 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
                 List<OxygenConversionRecipe> recipes = ModRecipes.OXYGEN_CONVERSION_RECIPE.getRecipes(this.world);
                 if (FluidUtils.convertFluid(this, recipes)) {
                     this.drainEnergy();
-                    this.setActive(true);
-                } else {
-                    this.setActive(false);
                 }
 
                 if (oxygenFillCheckTicks >= UPDATE_OXYGEN_FILLER_TICKS) {
@@ -136,7 +133,6 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
                                             this.drainEnergy((long) (positions.size() * ENERGY_USAGE_MULTIPLIER));
                                             OxygenUtils.setEntry(world, pos, positions);
                                             transaction.commit();
-                                            this.setActive(true);
                                         }
                                     } else {
                                         OxygenUtils.removeEntry(world, pos);
@@ -158,6 +154,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
                     oxygenFillCheckTicks = 0;
                 }
                 oxygenFillCheckTicks++;
+                this.setActive(this.hasEnergy() && this.outputTank.amount > 0);
             }
         }
 
