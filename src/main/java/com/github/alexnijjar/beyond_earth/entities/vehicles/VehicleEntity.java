@@ -5,7 +5,7 @@ import javax.annotation.Nullable;
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.gui.VehicleScreenHandlerFactory;
 import com.github.alexnijjar.beyond_earth.items.vehicles.VehicleItem;
-import com.github.alexnijjar.beyond_earth.registry.ModFluids;
+import com.github.alexnijjar.beyond_earth.registry.ModTags;
 import com.github.alexnijjar.beyond_earth.util.CustomInventory;
 import com.github.alexnijjar.beyond_earth.util.FluidUtils;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
@@ -348,10 +348,12 @@ public abstract class VehicleEntity extends Entity {
         return new EntitySpawnS2CPacket(this);
     }
 
+    @SuppressWarnings("deprecation")
     public void tryInsertingIntoTank() {
         if (this.getInventorySize() > 1) {
             if (!this.world.isClient) {
-                FluidUtils.insertFluidIntoTank(this.getInventory(), this.inputTank, 0, 1, f -> f.equals(FluidVariant.of(ModFluids.FUEL_STILL)));
+                FluidUtils.insertFluidIntoTank(this.getInventory(), this.inputTank, 0, 1, f -> f.getFluid().isIn(ModTags.FUELS));
+
             }
         }
     }
@@ -367,7 +369,7 @@ public abstract class VehicleEntity extends Entity {
     public void consumeFuel() {
         if (!this.world.isClient) {
             try (Transaction transaction = Transaction.openOuter()) {
-                if (this.inputTank.extract(FluidVariant.of(ModFluids.FUEL_STILL), this.getFuelPerTick(), transaction) > 0) {
+                if (this.inputTank.extract(this.inputTank.getResource(), this.getFuelPerTick(), transaction) > 0) {
                     transaction.commit();
                 }
             }

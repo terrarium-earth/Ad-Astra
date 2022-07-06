@@ -1,5 +1,6 @@
 package com.github.alexnijjar.beyond_earth.registry;
 
+import com.github.alexnijjar.beyond_earth.blocks.fluid.CryoFuelFluid;
 import com.github.alexnijjar.beyond_earth.blocks.fluid.FuelFluid;
 import com.github.alexnijjar.beyond_earth.blocks.fluid.OilFluid;
 import com.github.alexnijjar.beyond_earth.blocks.fluid.OxygenFluid;
@@ -22,26 +23,37 @@ public class ModFluids {
     public static FlowableFluid FLOWING_FUEL;
     public static Block FUEL_BLOCK;
 
+    public static FlowableFluid CRYO_FUEL_STILL;
+    public static FlowableFluid FLOWING_CRYO_FUEL;
+    public static Block CRYO_FUEL_BLOCK;
+
     public static FlowableFluid OXYGEN_STILL;
     public static Block OXYGEN_BLOCK;
 
     public static void register() {
         
-        // Oil Fluid.
+        // Oil
         OIL_STILL = Registry.register(Registry.FLUID, new ModIdentifier("oil"), new OilFluid.Still());
         FLOWING_OIL = Registry.register(Registry.FLUID, new ModIdentifier("flowing_oil"), new OilFluid.Flowing());
         
         OIL_BLOCK = new FluidBlock(OIL_STILL, FabricBlockSettings.copy(Blocks.WATER).strength(100.0f).dropsNothing());
         ModBlocks.register("oil", OIL_BLOCK);
         
-        // Fuel Fluid.
+        // Fuel
         FUEL_STILL = Registry.register(Registry.FLUID, new ModIdentifier("fuel"), new FuelFluid.Still());
         FLOWING_FUEL = Registry.register(Registry.FLUID, new ModIdentifier("flowing_fuel"), new FuelFluid.Flowing());
 
         FUEL_BLOCK = new FluidBlock(FUEL_STILL, FabricBlockSettings.copy(Blocks.WATER).strength(100.0f).dropsNothing());
         ModBlocks.register("fuel", FUEL_BLOCK);
 
-        // Oxygen Fluid.
+        // Cryo Fuel
+        CRYO_FUEL_STILL = Registry.register(Registry.FLUID, new ModIdentifier("cryo_fuel"), new CryoFuelFluid.Still());
+        FLOWING_CRYO_FUEL = Registry.register(Registry.FLUID, new ModIdentifier("flowing_cryo_fuel"), new CryoFuelFluid.Flowing());
+
+        CRYO_FUEL_BLOCK = new FluidBlock(CRYO_FUEL_STILL, FabricBlockSettings.copy(Blocks.WATER).strength(100.0f).dropsNothing());
+        ModBlocks.register("cryo_fuel", CRYO_FUEL_BLOCK);
+
+        // Oxygen
         OXYGEN_STILL = Registry.register(Registry.FLUID, new ModIdentifier("oxygen"), new OxygenFluid.Still());
 
         // Oxygen is not a placable fluid.

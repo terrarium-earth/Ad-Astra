@@ -34,7 +34,7 @@ public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
     private long waterExtracted;
 
     public WaterPumpBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntities.WATER_PUMP_ENTITY, blockPos, blockState);
+        super(ModBlockEntities.WATER_PUMP, blockPos, blockState);
     }
 
     @Override

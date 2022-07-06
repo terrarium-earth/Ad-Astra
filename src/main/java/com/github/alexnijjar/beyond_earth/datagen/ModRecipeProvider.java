@@ -45,6 +45,13 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		offerBlastingRecipe(exporter, GLACIO_LAPIS_ORE, Items.LAPIS_LAZULI);
 		offerBlastingRecipe(exporter, ImmutableList.of(MARS_DIAMOND_ORE, VENUS_DIAMOND_ORE), Items.DIAMOND);
 
+		// Stone
+		offerSmelting(exporter, ImmutableList.of(MOON_COBBLESTONE), MOON_STONE, 0.2f, 200, null);
+		offerSmelting(exporter, ImmutableList.of(MARS_COBBLESTONE), MARS_STONE, 0.2f, 200, null);
+		offerSmelting(exporter, ImmutableList.of(VENUS_COBBLESTONE), VENUS_STONE, 0.2f, 200, null);
+		offerSmelting(exporter, ImmutableList.of(MERCURY_COBBLESTONE), MERCURY_STONE, 0.2f, 200, null);
+		offerSmelting(exporter, ImmutableList.of(GLACIO_COBBLESTONE), GLACIO_STONE, 0.2f, 200, null);
+
 		// Slabs
 		offerCustomSlabRecipe(exporter, MOON_STONE_BRICK_SLAB, MOON_STONE);
 		offerCustomSlabRecipe(exporter, CHISELED_MOON_STONE_SLAB, CHISELED_MOON_STONE_BRICKS);
@@ -222,6 +229,10 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 
 		// Energizer
 		ShapedRecipeJsonBuilder.create(ENERGIZER).input(Character.valueOf('#'), ModTags.COMPRESSED_OSTRUM).input(Character.valueOf('D'), Blocks.DIAMOND_BLOCK).input(Character.valueOf('I'), Items.DIAMOND).pattern("#I#").pattern("#D#").pattern("###")
+				.group(null).criterion(hasItem(ModItems.COMPRESSED_OSTRUM), conditionsFromTag(ModTags.COMPRESSED_OSTRUM)).offerTo(exporter);
+
+		// Cryo Freezer
+		ShapedRecipeJsonBuilder.create(CRYO_FREEZER).input(Character.valueOf('#'), ModTags.COMPRESSED_OSTRUM).input(Character.valueOf('O'), ModItems.OSTRUM_INGOT).input(Character.valueOf('T'), ModItems.OSTRUM_TANK).input(Character.valueOf('B'), OSTRUM_BLOCK).pattern("#O#").pattern("OTO").pattern("BOB")
 				.group(null).criterion(hasItem(ModItems.COMPRESSED_OSTRUM), conditionsFromTag(ModTags.COMPRESSED_OSTRUM)).offerTo(exporter);
 
 		// Flags

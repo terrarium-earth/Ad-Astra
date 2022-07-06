@@ -25,7 +25,7 @@ public class FuelRefineryBlockEntity extends FluidMachineBlockEntity {
     public static final int TANK_SIZE = BeyondEarth.CONFIG.fuelRefinery.tankBuckets;
 
     public FuelRefineryBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntities.FUEL_REFINERY_ENTITY, blockPos, blockState);
+        super(ModBlockEntities.FUEL_REFINERY, blockPos, blockState);
     }
 
     @Override

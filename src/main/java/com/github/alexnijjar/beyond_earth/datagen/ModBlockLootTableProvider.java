@@ -23,6 +23,12 @@ class ModBlockLootTableProvider extends FabricBlockLootTableProvider implements 
 
 		this.addDrop(WALL_COAL_TORCH, ModItems.COAL_TORCH);
 
+		this.addDrop(MOON_STONE, block -> BlockLootTableGenerator.drops(block, MOON_COBBLESTONE));
+		this.addDrop(MARS_STONE, block -> BlockLootTableGenerator.drops(block, MARS_COBBLESTONE));
+		this.addDrop(VENUS_STONE, block -> BlockLootTableGenerator.drops(block, VENUS_COBBLESTONE));
+		this.addDrop(MERCURY_STONE, block -> BlockLootTableGenerator.drops(block, MERCURY_COBBLESTONE));
+		this.addDrop(GLACIO_STONE, block -> BlockLootTableGenerator.drops(block, GLACIO_COBBLESTONE));
+
 		this.addDrop(MOON_CHEESE_ORE, block -> BlockLootTableGenerator.oreDrops(block, ModItems.CHEESE));
 		this.addDrop(MOON_DESH_ORE, block -> BlockLootTableGenerator.oreDrops(block, ModItems.RAW_DESH));
 		this.addDrop(MOON_IRON_ORE, block -> BlockLootTableGenerator.oreDrops(block, Items.RAW_IRON));

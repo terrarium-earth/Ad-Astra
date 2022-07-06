@@ -25,7 +25,7 @@ public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
     public static final int TANK_SIZE = BeyondEarth.CONFIG.oxygenLoader.tankBuckets;
 
     public OxygenLoaderBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntities.OXYGEN_LOADER_ENTITY, blockPos, blockState);
+        super(ModBlockEntities.OXYGEN_LOADER, blockPos, blockState);
     }
 
     @Override

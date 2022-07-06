@@ -143,6 +143,7 @@ public interface ModItems {
                 stacks.set(45, ModItems.OIL_BUCKET.getDefaultStack());
                 stacks.set(46, ModItems.FUEL_BUCKET.getDefaultStack());
                 stacks.set(47, ModItems.OXYGEN_BUCKET.getDefaultStack());
+                stacks.set(48, ModItems.CRYO_FUEL_BUCKET.getDefaultStack());
 
         }).build();
 
@@ -177,6 +178,7 @@ public interface ModItems {
         // Buckets.
         public static final Item OIL_BUCKET = register("oil_bucket", new BucketItem(ModFluids.OIL_STILL, new FabricItemSettings().group(ITEM_GROUP_NORMAL).recipeRemainder(Items.BUCKET).maxCount(1)));
         public static final Item FUEL_BUCKET = register("fuel_bucket", new BucketItem(ModFluids.FUEL_STILL, new FabricItemSettings().group(ITEM_GROUP_NORMAL).recipeRemainder(Items.BUCKET).maxCount(1)));
+        public static final Item CRYO_FUEL_BUCKET = register("cryo_fuel_bucket", new BucketItem(ModFluids.CRYO_FUEL_STILL, new FabricItemSettings().group(ITEM_GROUP_NORMAL).recipeRemainder(Items.BUCKET).maxCount(1)));
         public static final Item OXYGEN_BUCKET = register("oxygen_bucket", new BucketItem(ModFluids.OXYGEN_STILL, new FabricItemSettings().group(ITEM_GROUP_NORMAL).recipeRemainder(Items.BUCKET).maxCount(1)) {
                 @Override
                 public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
@@ -232,6 +234,7 @@ public interface ModItems {
                 }
         });
         public static final BlockItem ENERGIZER = registerBlockItem(ModBlocks.ENERGIZER, ITEM_GROUP_MACHINES);
+        public static final BlockItem CRYO_FREEZER = registerBlockItem(ModBlocks.CRYO_FREEZER, ITEM_GROUP_MACHINES);
 
         public static final Item HAMMER = register("hammer", new HammerItem(new FabricItemSettings().group(ITEM_GROUP_BASICS).maxCount(1).maxDamage(BeyondEarth.CONFIG.world.hammerDurability)));
 
@@ -330,6 +333,7 @@ public interface ModItems {
 
         public static final BlockItem MOON_SAND = registerBlockItem(ModBlocks.MOON_SAND);
         public static final BlockItem MOON_STONE = registerBlockItem(ModBlocks.MOON_STONE);
+        public static final BlockItem MOON_COBBLESTONE = registerBlockItem(ModBlocks.MOON_COBBLESTONE);
         public static final BlockItem MOON_STONE_BRICKS = registerBlockItem(ModBlocks.MOON_STONE_BRICKS);
         public static final BlockItem CRACKED_MOON_STONE_BRICKS = registerBlockItem(ModBlocks.CRACKED_MOON_STONE_BRICKS);
         public static final BlockItem MOON_STONE_BRICK_SLAB = registerBlockItem(ModBlocks.MOON_STONE_BRICK_SLAB);
@@ -344,6 +348,7 @@ public interface ModItems {
 
         public static final BlockItem MARS_SAND = registerBlockItem(ModBlocks.MARS_SAND);
         public static final BlockItem MARS_STONE = registerBlockItem(ModBlocks.MARS_STONE);
+        public static final BlockItem MARS_COBBLESTONE = registerBlockItem(ModBlocks.MARS_COBBLESTONE);
         public static final BlockItem CONGLOMERATE = registerBlockItem(ModBlocks.CONGLOMERATE);
         public static final BlockItem POLISHED_CONGLOMERATE = registerBlockItem(ModBlocks.POLISHED_CONGLOMERATE);
         public static final BlockItem MARS_STONE_BRICKS = registerBlockItem(ModBlocks.MARS_STONE_BRICKS);
@@ -359,6 +364,7 @@ public interface ModItems {
         public static final BlockItem MARS_PILLAR = registerBlockItem(ModBlocks.MARS_PILLAR);
 
         public static final BlockItem MERCURY_STONE = registerBlockItem(ModBlocks.MERCURY_STONE);
+        public static final BlockItem MERCURY_COBBLESTONE = registerBlockItem(ModBlocks.MERCURY_COBBLESTONE);
         public static final BlockItem MERCURY_STONE_BRICKS = registerBlockItem(ModBlocks.MERCURY_STONE_BRICKS);
         public static final BlockItem CRACKED_MERCURY_STONE_BRICKS = registerBlockItem(ModBlocks.CRACKED_MERCURY_STONE_BRICKS);
         public static final BlockItem MERCURY_STONE_BRICK_SLAB = registerBlockItem(ModBlocks.MERCURY_STONE_BRICK_SLAB);
@@ -379,6 +385,7 @@ public interface ModItems {
 
         public static final BlockItem VENUS_SAND = registerBlockItem(ModBlocks.VENUS_SAND);
         public static final BlockItem VENUS_STONE = registerBlockItem(ModBlocks.VENUS_STONE);
+        public static final BlockItem VENUS_COBBLESTONE = registerBlockItem(ModBlocks.VENUS_COBBLESTONE);
         public static final BlockItem VENUS_STONE_BRICKS = registerBlockItem(ModBlocks.VENUS_STONE_BRICKS);
         public static final BlockItem CRACKED_VENUS_STONE_BRICKS = registerBlockItem(ModBlocks.CRACKED_VENUS_STONE_BRICKS);
         public static final BlockItem VENUS_STONE_BRICK_SLAB = registerBlockItem(ModBlocks.VENUS_STONE_BRICK_SLAB);
@@ -395,6 +402,7 @@ public interface ModItems {
         public static final BlockItem PERMAFROST_BRICKS = registerBlockItem(ModBlocks.PERMAFROST_BRICKS);
         public static final BlockItem CRACKED_PERMAFROST_BRICKS = registerBlockItem(ModBlocks.CRACKED_PERMAFROST_BRICKS);
         public static final BlockItem GLACIO_STONE = registerBlockItem(ModBlocks.GLACIO_STONE);
+        public static final BlockItem GLACIO_COBBLESTONE = registerBlockItem(ModBlocks.GLACIO_COBBLESTONE);
         public static final BlockItem GLACIO_STONE_BRICKS = registerBlockItem(ModBlocks.GLACIO_STONE_BRICKS);
         public static final BlockItem CRACKED_GLACIO_STONE_BRICKS = registerBlockItem(ModBlocks.CRACKED_GLACIO_STONE_BRICKS);
         public static final BlockItem GLACIO_STONE_BRICK_SLAB = registerBlockItem(ModBlocks.GLACIO_STONE_BRICK_SLAB);
