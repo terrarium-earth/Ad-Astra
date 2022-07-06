@@ -44,7 +44,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
     private int clientOxygenFillCheckTicks;
 
     public OxygenDistributorBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntities.OXYGEN_DISTRIBUTOR_ENTITY, blockPos, blockState);
+        super(ModBlockEntities.OXYGEN_DISTRIBUTOR, blockPos, blockState);
     }
 
     @Override

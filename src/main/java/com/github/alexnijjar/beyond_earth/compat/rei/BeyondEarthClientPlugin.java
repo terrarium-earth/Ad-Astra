@@ -4,6 +4,8 @@ import com.github.alexnijjar.beyond_earth.compat.rei.coal_generator.CoalGenerato
 import com.github.alexnijjar.beyond_earth.compat.rei.coal_generator.CoalGeneratorDisplay;
 import com.github.alexnijjar.beyond_earth.compat.rei.compressor.CompressorCategory;
 import com.github.alexnijjar.beyond_earth.compat.rei.compressor.CompressorDisplay;
+import com.github.alexnijjar.beyond_earth.compat.rei.cryo_freezer.CryoFreezerConversionCategory;
+import com.github.alexnijjar.beyond_earth.compat.rei.cryo_freezer.CryoFreezerConversionDisplay;
 import com.github.alexnijjar.beyond_earth.compat.rei.fuel_conversion.FuelConversionCategory;
 import com.github.alexnijjar.beyond_earth.compat.rei.fuel_conversion.FuelConversionDisplay;
 import com.github.alexnijjar.beyond_earth.compat.rei.nasa_workbench.NasaWorkbenchCategory;
@@ -13,6 +15,7 @@ import com.github.alexnijjar.beyond_earth.compat.rei.oxygen_conversion.OxygenCon
 import com.github.alexnijjar.beyond_earth.compat.rei.space_station.SpaceStationCategory;
 import com.github.alexnijjar.beyond_earth.compat.rei.space_station.SpaceStationDisplay;
 import com.github.alexnijjar.beyond_earth.recipes.CompressingRecipe;
+import com.github.alexnijjar.beyond_earth.recipes.CryoFuelConversionRecipe;
 import com.github.alexnijjar.beyond_earth.recipes.FuelConversionRecipe;
 import com.github.alexnijjar.beyond_earth.recipes.GeneratingRecipe;
 import com.github.alexnijjar.beyond_earth.recipes.NasaWorkbenchRecipe;
@@ -43,6 +46,7 @@ public class BeyondEarthClientPlugin implements REIClientPlugin {
         registry.add(new CompressorCategory());
         registry.add(new FuelConversionCategory());
         registry.add(new OxygenConversionCategory());
+        registry.add(new CryoFreezerConversionCategory());
         registry.add(new NasaWorkbenchCategory());
         registry.add(new SpaceStationCategory());
 
@@ -50,6 +54,7 @@ public class BeyondEarthClientPlugin implements REIClientPlugin {
         registry.addWorkstations(REICategories.COMPRESSOR_CATEGORY, EntryStacks.of(ModBlocks.COMPRESSOR));
         registry.addWorkstations(REICategories.FUEL_CONVERSION_CATEGORY, EntryStacks.of(ModBlocks.FUEL_REFINERY));
         registry.addWorkstations(REICategories.OXYGEN_CONVERSION_CATEGORY, EntryStacks.of(ModBlocks.OXYGEN_LOADER), EntryStacks.of(ModBlocks.OXYGEN_DISTRIBUTOR));
+        registry.addWorkstations(REICategories.CRYO_FREEZER_CONVERSION_CATEGORY, EntryStacks.of(ModBlocks.CRYO_FREEZER));
         registry.addWorkstations(REICategories.NASA_WORKBENCH_CATEGORY, EntryStacks.of(ModBlocks.NASA_WORKBENCH));
         registry.addWorkstations(REICategories.SPACE_STATION_CATEGORY, EntryStacks.of(ItemStack.EMPTY));
 
@@ -63,6 +68,7 @@ public class BeyondEarthClientPlugin implements REIClientPlugin {
         registry.registerRecipeFiller(CompressingRecipe.class, ModRecipes.COMPRESSING_RECIPE, CompressorDisplay::new);
         registry.registerRecipeFiller(FuelConversionRecipe.class, ModRecipes.FUEL_CONVERSION_RECIPE, FuelConversionDisplay::new);
         registry.registerRecipeFiller(OxygenConversionRecipe.class, ModRecipes.OXYGEN_CONVERSION_RECIPE, OxygenConversionDisplay::new);
+        registry.registerRecipeFiller(CryoFuelConversionRecipe.class, ModRecipes.CRYO_FUEL_CONVERSION_RECIPE, CryoFreezerConversionDisplay::new);
         registry.registerRecipeFiller(NasaWorkbenchRecipe.class, ModRecipes.NASA_WORKBENCH_RECIPE, NasaWorkbenchDisplay::new);
         registry.registerRecipeFiller(SpaceStationRecipe.class, ModRecipes.SPACE_STATION_RECIPE, SpaceStationDisplay::new);
 

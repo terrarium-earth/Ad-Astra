@@ -18,7 +18,7 @@ public class SolarPanelBlockEntity extends AbstractMachineBlockEntity {
     public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.solarPanel.energyPerTick;
 
     public SolarPanelBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntities.SOLAR_PANEL_ENTITY, blockPos, blockState);
+        super(ModBlockEntities.SOLAR_PANEL, blockPos, blockState);
     }
 
     @Nullable

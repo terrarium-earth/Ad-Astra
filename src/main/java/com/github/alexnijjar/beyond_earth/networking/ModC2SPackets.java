@@ -90,14 +90,14 @@ public class ModC2SPackets {
             if (player.getVehicle() instanceof RocketEntity rocket) {
                 if (!rocket.isFlying()) {
                     rocket.initiateLaunchSequenceFromServer();
-                }
 
-                // Tell all clients to start rendering the rocket launch.
-                int id = buf.readInt();
-                for (ServerPlayerEntity serverPlayer : server.getPlayerManager().getPlayerList()) {
-                    PacketByteBuf buffer = PacketByteBufs.create();
-                    buffer.writeInt(id);
-                    serverPlayer.networkHandler.sendPacket(responseSender.createPacket(ModS2CPackets.START_ROCKET, buffer));
+                    // Tell all clients to start rendering the rocket launch.
+                    int id = buf.readInt();
+                    for (ServerPlayerEntity serverPlayer : server.getPlayerManager().getPlayerList()) {
+                        PacketByteBuf buffer = PacketByteBufs.create();
+                        buffer.writeInt(id);
+                        serverPlayer.networkHandler.sendPacket(responseSender.createPacket(ModS2CPackets.START_ROCKET, buffer));
+                    }
                 }
             }
         });

@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "beyond_earth:fuel",
+    "beyond_earth:flowing_fuel",
+    "beyond_earth:cryo_fuel",
+    "beyond_earth:flowing_cryo_fuel"
+  ]
+}

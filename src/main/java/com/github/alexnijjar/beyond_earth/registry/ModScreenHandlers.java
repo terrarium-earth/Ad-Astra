@@ -3,6 +3,7 @@ package com.github.alexnijjar.beyond_earth.registry;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.CoalGeneratorScreenHandler;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.CompressorScreenHandler;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.ConversionScreenHandler;
+import com.github.alexnijjar.beyond_earth.gui.screen_handlers.CryoFreezerScreenHandler;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.LanderScreenHandler;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.NasaWorkbenchScreenHandler;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.OxygenDistributorScreenHandler;
@@ -26,6 +27,7 @@ public class ModScreenHandlers {
     public static ScreenHandlerType<ConversionScreenHandler> CONVERSION_SCREEN_HANDLER;
     public static ScreenHandlerType<WaterPumpScreenHandler> WATER_PUMP_SCREEN_HANDLER;
     public static ScreenHandlerType<OxygenDistributorScreenHandler> OXYGEN_DISTRIBUTOR_SCREEN_HANDLER;
+    public static ScreenHandlerType<CryoFreezerScreenHandler> CRYO_FREEZER_SCREEN_HANDLER;
 
     public static ScreenHandlerType<VehicleScreenHandler> VEHICLE_SCREEN_HANDLER;
     public static ScreenHandlerType<LanderScreenHandler> LANDER_SCREEN_HANDLER;
@@ -40,6 +42,7 @@ public class ModScreenHandlers {
         NASA_WORKBENCH_SCREEN_HANDLER = register("nasa_workbench_screen_handler", NasaWorkbenchScreenHandler::new);
         CONVERSION_SCREEN_HANDLER = register("conversion_screen_handler", ConversionScreenHandler::new);
         WATER_PUMP_SCREEN_HANDLER = register("water_pump_screen_handler", WaterPumpScreenHandler::new);
+        CRYO_FREEZER_SCREEN_HANDLER = register("cryo_freezer_screen_handler", CryoFreezerScreenHandler::new);
 
         VEHICLE_SCREEN_HANDLER = register("vehicle_screen_handler", VehicleScreenHandler::new);
         LANDER_SCREEN_HANDLER = register("lander_screen_handler", LanderScreenHandler::new);

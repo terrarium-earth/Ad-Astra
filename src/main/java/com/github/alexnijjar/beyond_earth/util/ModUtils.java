@@ -17,6 +17,7 @@ import com.github.alexnijjar.beyond_earth.entities.vehicles.VehicleEntity;
 import com.github.alexnijjar.beyond_earth.items.armour.JetSuit;
 import com.github.alexnijjar.beyond_earth.items.armour.NetheriteSpaceSuit;
 import com.github.alexnijjar.beyond_earth.items.armour.SpaceSuit;
+import com.github.alexnijjar.beyond_earth.items.vehicles.VehicleItem;
 import com.github.alexnijjar.beyond_earth.registry.ModEntityTypes;
 
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
@@ -136,7 +137,10 @@ public class ModUtils {
         for (int i = 0; i < rocket.getInventorySize(); i++) {
             lander.getInventory().setStack(i, rocket.getInventory().getStack(i));
         }
-        lander.getInventory().setStack(10, rocket.getDropStack());
+        ItemStack stack = rocket.getDropStack();
+        ((VehicleItem) stack.getItem()).setFluid(stack, rocket.getFluidVariant());
+        ((VehicleItem) stack.getItem()).setAmount(stack, rocket.getFluidAmount());
+        lander.getInventory().setStack(10, stack);
         targetWorld.spawnEntity(lander);
         return lander;
     }

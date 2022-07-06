@@ -21,7 +21,7 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity {
     public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.coalGenerator.energyPerTick;
 
     public CoalGeneratorBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntities.COAL_GENERATOR_ENTITY, blockPos, blockState);
+        super(ModBlockEntities.COAL_GENERATOR, blockPos, blockState);
     }
 
     @Nullable
@@ -59,12 +59,12 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity {
 
                 if (this.getEnergy() < this.getMaxGeneration()) {
 
-                    // Consume the fuel.
+                    // Consume the fuel
                     if (this.cookTime > 0) {
                         this.cookTime--;
                         this.cumulateEnergy();
                         this.setActive(true);
-                        // Check if the input is a valid fuel.
+                        // Check if the input is a valid fuel
                     } else if (!input.isEmpty()) {
                         CookingRecipe recipe = this.createRecipe(ModRecipes.GENERATING_RECIPE, input, false);
                         if (recipe != null) {

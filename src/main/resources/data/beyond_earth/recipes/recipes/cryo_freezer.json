@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#O#",
+    "OTO",
+    "BOB"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:compressed_ostrum"
+    },
+    "O": {
+      "item": "beyond_earth:ostrum_ingot"
+    },
+    "T": {
+      "item": "beyond_earth:ostrum_tank"
+    },
+    "B": {
+      "item": "beyond_earth:ostrum_block"
+    }
+  },
+  "result": {
+    "item": "beyond_earth:cryo_freezer"
+  }
+}

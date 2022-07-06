@@ -6,12 +6,15 @@ import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.blocks.launch_pad.RocketLaunchPad;
 import com.github.alexnijjar.beyond_earth.gui.PlanetSelectionScreenHandlerFactory;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.PlanetSelectionScreenHandler;
+import com.github.alexnijjar.beyond_earth.registry.ModFluids;
 import com.github.alexnijjar.beyond_earth.registry.ModParticleTypes;
 import com.github.alexnijjar.beyond_earth.registry.ModSounds;
 import com.github.alexnijjar.beyond_earth.util.ModDamageSource;
 import com.github.alexnijjar.beyond_earth.util.ModKeyBindings;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
@@ -258,6 +261,7 @@ public class RocketEntity extends VehicleEntity {
         this.setCountdownTicks(MAX_COUNTDOWN_TICKS);
         // For shaking.
         this.setFrozenTicks(Integer.MAX_VALUE);
+        this.inputTank.amount -= getRequiredAmountForLaunch(this.inputTank.getResource());
     }
 
     public boolean hasLaunchPad() {
@@ -359,5 +363,13 @@ public class RocketEntity extends VehicleEntity {
     public static void stopRocketSoundForRider(ServerPlayerEntity rider) {
         StopSoundS2CPacket stopSoundS2CPacket = new StopSoundS2CPacket(ModSounds.ROCKET_LAUNCH_SOUND_ID, SoundCategory.AMBIENT);
         rider.networkHandler.sendPacket(stopSoundS2CPacket);
+    }
+
+    public static long getRequiredAmountForLaunch(FluidVariant variant) {
+        if (variant.isOf(ModFluids.CRYO_FUEL_STILL)) {
+            return FluidConstants.BUCKET;
+        } else {
+            return FluidConstants.BUCKET * 3;
+        }
     }
 }

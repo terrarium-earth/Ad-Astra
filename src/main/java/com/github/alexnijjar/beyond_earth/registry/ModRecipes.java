@@ -1,6 +1,7 @@
 package com.github.alexnijjar.beyond_earth.registry;
 
 import com.github.alexnijjar.beyond_earth.recipes.CompressingRecipe;
+import com.github.alexnijjar.beyond_earth.recipes.CryoFuelConversionRecipe;
 import com.github.alexnijjar.beyond_earth.recipes.FuelConversionRecipe;
 import com.github.alexnijjar.beyond_earth.recipes.GeneratingRecipe;
 import com.github.alexnijjar.beyond_earth.recipes.HammerShapelessRecipe;
@@ -22,6 +23,7 @@ public class ModRecipes {
     public static ModRecipeType<NasaWorkbenchRecipe> NASA_WORKBENCH_RECIPE;
     public static ModRecipeType<FuelConversionRecipe> FUEL_CONVERSION_RECIPE;
     public static ModRecipeType<OxygenConversionRecipe> OXYGEN_CONVERSION_RECIPE;
+    public static ModRecipeType<CryoFuelConversionRecipe> CRYO_FUEL_CONVERSION_RECIPE;
 
     public static RecipeSerializer<ShapelessRecipe> HAMMER_SERIALIZER;
     public static RecipeSerializer<GeneratingRecipe> GENERATING_SERIALIZER;
@@ -30,6 +32,7 @@ public class ModRecipes {
     public static RecipeSerializer<NasaWorkbenchRecipe> NASA_WORKBENCH_SERIALIZER;
     public static RecipeSerializer<FuelConversionRecipe> FUEL_CONVERSION_SERIALIZER;
     public static RecipeSerializer<OxygenConversionRecipe> OXYGEN_CONVERSION_SERIALIZER;
+    public static RecipeSerializer<CryoFuelConversionRecipe> CRYO_FUEL_CONVERSION_SERIALIZER;
 
     public static void register() {
 
@@ -40,6 +43,7 @@ public class ModRecipes {
         NASA_WORKBENCH_RECIPE = register(new ModRecipeType<>(new ModIdentifier("nasa_workbench")));
         FUEL_CONVERSION_RECIPE = register(new ModRecipeType<>(new ModIdentifier("fuel_conversion")));
         OXYGEN_CONVERSION_RECIPE = register(new ModRecipeType<>(new ModIdentifier("oxygen_conversion")));
+        CRYO_FUEL_CONVERSION_RECIPE = register(new ModRecipeType<>(new ModIdentifier("cryo_fuel_conversion")));
 
         // Recipe Serializers.
         HAMMER_SERIALIZER = Registry.register(Registry.RECIPE_SERIALIZER, new ModIdentifier("hammering"), new HammerShapelessRecipe.Serializer());
@@ -49,6 +53,7 @@ public class ModRecipes {
         NASA_WORKBENCH_SERIALIZER = Registry.register(Registry.RECIPE_SERIALIZER, new ModIdentifier("nasa_workbench"), new NasaWorkbenchRecipe.Serializer());
         FUEL_CONVERSION_SERIALIZER = Registry.register(Registry.RECIPE_SERIALIZER, new ModIdentifier("fuel_conversion"), new FuelConversionRecipe.Serializer());
         OXYGEN_CONVERSION_SERIALIZER = Registry.register(Registry.RECIPE_SERIALIZER, new ModIdentifier("oxygen_conversion"), new OxygenConversionRecipe.Serializer());
+        CRYO_FUEL_CONVERSION_SERIALIZER = Registry.register(Registry.RECIPE_SERIALIZER, new ModIdentifier("cryo_fuel_conversion"), new CryoFuelConversionRecipe.Serializer());
     }
 
     private static <T extends ModRecipeType<?>> T register(T recipe) {
