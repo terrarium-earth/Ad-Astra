@@ -1,0 +1,22 @@
+{
+    "name": "Better Fuel",
+    "icon": "beyond_earth:cryo_freezer",
+    "sortnum": 2,
+    "category": "beyond_earth:surviving_mars",
+    "pages": [
+        {
+            "type": "patchouli:spotlight",
+            "title": "Cryo Freezer",
+            "item": "beyond_earth:cryo_freezer",
+            "text": "Fuel is hard to get; it requires venturing out to the ocean, looking for oil spouts. The Cryo Freezer introduces a new way to obtain a better fuel - Cryo Fuel. Cryo Fuel is much more efficient than refined fuel, allowing you to launch a rocket with just one bucket."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "It's created by collecting ice shards, which are found as an ore underground on cold planets. The ice shard then needs to be inserted into a Cryo Freezer, and it will convert to 50 mB of Cryo Fuel. Alternatively, you can convert ice, packed ice and blue ice to fuel."
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe": "beyond_earth:recipes/cryo_freezer"
+        }
+    ]
+}

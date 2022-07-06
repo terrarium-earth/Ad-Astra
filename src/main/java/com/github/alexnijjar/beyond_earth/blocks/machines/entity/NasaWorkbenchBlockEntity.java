@@ -29,7 +29,7 @@ public class NasaWorkbenchBlockEntity extends AbstractMachineBlockEntity {
     private List<NasaWorkbenchRecipe> acceptedInputs = new ArrayList<>();
 
     public NasaWorkbenchBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntities.NASA_WORKBENCH_ENTITY, blockPos, blockState);
+        super(ModBlockEntities.NASA_WORKBENCH, blockPos, blockState);
     }
 
     @Nullable

@@ -21,6 +21,8 @@ public class GuiUtil {
 
     public static final int FIRE_WIDTH = 14;
     public static final int FIRE_HEIGHT = 14;
+    public static final int SNOWFLAKE_WIDTH = 13;
+    public static final int SNOWFLAKE_HEIGHT = 13;
     public static final int ARROW_WIDTH = 24;
     public static final int ARROW_HEIGHT = 17;
     public static final int OXYGEN_TANK_WIDTH = 14;
@@ -33,6 +35,7 @@ public class GuiUtil {
     public static final int FLUID_TANK_HEIGHT = 48;
 
     public static final Identifier FIRE_TEXTURE = new ModIdentifier("textures/fire_on.png");
+    public static final Identifier SNOWFLAKE_TEXTURE = new ModIdentifier("textures/snowflake.png");
     public static final Identifier ARROW_TEXTURE = new ModIdentifier("textures/animated_arrow_full.png");
     public static final Identifier OXYGEN_CONTENT_TEXTURE = new ModIdentifier("textures/oxygen.png");
     public static final Identifier ENERGY_TEXTURE = new ModIdentifier("textures/energy_full.png");
@@ -100,9 +103,9 @@ public class GuiUtil {
         double scale = (int) client.getWindow().getScaleFactor();
         int screenHeight = client.getWindow().getScaledHeight();
 
-        int scissorX = (int)(x * scale);
+        int scissorX = (int) (x * scale);
         int scissorY = (int) (((screenHeight - y - FLUID_TANK_HEIGHT)) * scale);
-        int scissorWidth = (int)(FLUID_TANK_WIDTH * scale);
+        int scissorWidth = (int) (FLUID_TANK_WIDTH * scale);
         int scissorHeight = (int) ((FLUID_TANK_HEIGHT - 1) * scale * ratio);
 
         // First, the sprite is rendered in full, and then it is masked based on how full the fluid tank is.
@@ -119,6 +122,11 @@ public class GuiUtil {
     public static void drawFire(MatrixStack matrixStack, int x, int y, short burnTime, short totalBurnTime) {
         double ratio = totalBurnTime > 0 ? createRatio(burnTime, totalBurnTime) : 0;
         drawVertical(matrixStack, x, y, FIRE_WIDTH, FIRE_HEIGHT, FIRE_TEXTURE, ratio);
+    }
+
+    public static void drawSnowflake(MatrixStack matrixStack, int x, int y, short burnTime, short totalBurnTime) {
+        double ratio = totalBurnTime > 0 ? createRatio(burnTime, totalBurnTime) : 0;
+        drawHorizontal(matrixStack, x, y, SNOWFLAKE_WIDTH, SNOWFLAKE_HEIGHT, SNOWFLAKE_TEXTURE, ratio);
     }
 
     public static void drawArrow(MatrixStack matrixStack, int x, int y, short burnTime, short totalBurnTime) {

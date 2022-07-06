@@ -38,7 +38,7 @@ public class ClientModKeybindings {
                 if (client.options.jumpKey.isPressed()) {
                     if (client.player.getVehicle() instanceof RocketEntity rocket) {
                         if (!rocket.isFlying()) {
-                            if (rocket.getFluidAmount() >= rocket.inputTank.getCapacity()) {
+                            if (rocket.getFluidAmount() >= RocketEntity.getRequiredAmountForLaunch(rocket.getFluidVariant())) {
                                 PacketByteBuf buf = PacketByteBufs.create();
                                 buf.writeInt(rocket.getId());
                                 ClientPlayNetworking.send(ModC2SPackets.LAUNCH_ROCKET, buf);

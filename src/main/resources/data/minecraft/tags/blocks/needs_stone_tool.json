@@ -99,6 +99,7 @@
     "beyond_earth:polished_conglomerate",
     "beyond_earth:permafrost_bricks",
     "beyond_earth:cracked_permafrost_bricks",
-    "beyond_earth:energizer"
+    "beyond_earth:energizer",
+    "beyond_earth:cryo_freezer"
   ]
 }

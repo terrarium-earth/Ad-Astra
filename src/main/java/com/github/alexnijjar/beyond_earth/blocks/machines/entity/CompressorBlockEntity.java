@@ -22,7 +22,7 @@ public class CompressorBlockEntity extends ProcessingMachineBlockEntity {
     public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.compressor.energyPerTick;
 
     public CompressorBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntities.COMPRESSOR_ENTITY, blockPos, blockState);
+        super(ModBlockEntities.COMPRESSOR, blockPos, blockState);
     }
 
     @Nullable
@@ -89,7 +89,6 @@ public class CompressorBlockEntity extends ProcessingMachineBlockEntity {
                 } else {
                     this.setActive(false);
                 }
-
             }
         }
     }

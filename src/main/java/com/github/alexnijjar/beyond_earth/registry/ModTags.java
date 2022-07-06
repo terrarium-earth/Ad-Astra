@@ -3,6 +3,7 @@ package com.github.alexnijjar.beyond_earth.registry;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 
 import net.minecraft.entity.EntityType;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
@@ -10,7 +11,9 @@ import net.minecraft.util.registry.Registry;
 
 public class ModTags {
 	public static final TagKey<EntityType<?>> FIRE_IMMUNE = TagKey.of(Registry.ENTITY_TYPE_KEY, new ModIdentifier("entities/fire_immune"));
-	public static final TagKey<EntityType<?>> LIVES_WITHOUT_OXYGEN = TagKey.of(Registry.ENTITY_TYPE_KEY, new ModIdentifier("entities/lives_without_oxygen"));
+    public static final TagKey<EntityType<?>> LIVES_WITHOUT_OXYGEN = TagKey.of(Registry.ENTITY_TYPE_KEY, new ModIdentifier("entities/lives_without_oxygen"));
+    
+	public static final TagKey<Fluid> FUELS = TagKey.of(Registry.FLUID_KEY, new ModIdentifier("fuels"));
 
 	public static final TagKey<Item> CALORITE_INGOTS = TagKey.of(Registry.ITEM_KEY, new Identifier("c:calorite_ingots"));
     public static final TagKey<Item> CALORITE_NUGGETS = TagKey.of(Registry.ITEM_KEY, new Identifier("c:calorite_nuggets"));

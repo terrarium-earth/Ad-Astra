@@ -116,6 +116,8 @@ public class BeyondEarthClient implements ClientModInitializer {
                 // Fluids
                 FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.FUEL_STILL, ModFluids.FLOWING_FUEL,
                                 new SimpleFluidRenderHandler(new ModIdentifier("blocks/fluid_fuel_still"), new ModIdentifier("blocks/fluid_fuel_flow"), new ModIdentifier("blocks/fuel_overlay")));
+                FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.CRYO_FUEL_STILL, ModFluids.FLOWING_CRYO_FUEL,
+                                new SimpleFluidRenderHandler(new ModIdentifier("blocks/fluid_cryo_fuel_still"), new ModIdentifier("blocks/fluid_cryo_fuel_flow"), new ModIdentifier("blocks/cryo_fuel_overlay")));
                 FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.OIL_STILL, ModFluids.FLOWING_OIL,
                                 new SimpleFluidRenderHandler(new ModIdentifier("blocks/fluid_oil_still"), new ModIdentifier("blocks/fluid_oil_flow"), new ModIdentifier("blocks/oil_overlay")));
                 FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.OXYGEN_STILL,
@@ -127,6 +129,10 @@ public class BeyondEarthClient implements ClientModInitializer {
                         registry.register(new ModIdentifier("blocks/fluid_fuel_flow"));
                         registry.register(new ModIdentifier("blocks/fuel_overlay"));
 
+                        registry.register(new ModIdentifier("blocks/fluid_cryo_fuel_still"));
+                        registry.register(new ModIdentifier("blocks/fluid_cryo_fuel_flow"));
+                        registry.register(new ModIdentifier("blocks/cryo_fuel_overlay"));
+
                         registry.register(new ModIdentifier("blocks/fluid_oil_still"));
                         registry.register(new ModIdentifier("blocks/fluid_oil_flow"));
                         registry.register(new ModIdentifier("blocks/oil_overlay"));
@@ -135,6 +141,7 @@ public class BeyondEarthClient implements ClientModInitializer {
                 });
 
                 BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.FUEL_STILL, ModFluids.FLOWING_FUEL);
+                BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.CRYO_FUEL_STILL, ModFluids.FLOWING_CRYO_FUEL);
                 BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.OIL_STILL, ModFluids.FLOWING_OIL);
                 BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.OXYGEN_STILL);
 

@@ -41,6 +41,8 @@ public class BeyondEarthConfig implements ConfigData {
     public WaterPumpConfig waterPump = new WaterPumpConfig();
     @ConfigEntry.Gui.CollapsibleObject
     public EnergizerConfig energizer = new EnergizerConfig();
+    @ConfigEntry.Gui.CollapsibleObject
+    public CryoFreezerConfig cryoFreezer = new CryoFreezerConfig();
 
     public static class WorldConfig {
         public boolean spawnAlienZombies = true;
@@ -66,7 +68,7 @@ public class BeyondEarthConfig implements ConfigData {
         public double jetSuitSpeed = 0.8;
         @ConfigEntry.Gui.Tooltip(count = 1)
         public double jetSuitUpwardsSpeed = 0.5;
-        public long jetSuitEnergyPerTick = 48;
+        public long jetSuitEnergyPerTick = 72;
         public long jetSuitTankSize = FluidConstants.BUCKET * 4;
         public long jetSuitMaxEnergy = 2000000L;
         public boolean spawnJetSuitParticles = true;
@@ -173,5 +175,11 @@ public class BeyondEarthConfig implements ConfigData {
     public static class EnergizerConfig {
         public long maxEnergy = 2000000L;
         public long energyPerTick = 64L;
+    }
+
+    public static class CryoFreezerConfig {
+        public long maxEnergy = 30000L;
+        public long energyPerTick = 24L;
+        public int tankBuckets = 3;
     }
 }

@@ -11,6 +11,7 @@ import com.github.alexnijjar.beyond_earth.blocks.globes.GlobeBlock;
 import com.github.alexnijjar.beyond_earth.blocks.launch_pad.RocketLaunchPad;
 import com.github.alexnijjar.beyond_earth.blocks.machines.CoalGeneratorBlock;
 import com.github.alexnijjar.beyond_earth.blocks.machines.CompressorBlock;
+import com.github.alexnijjar.beyond_earth.blocks.machines.CryoFreezerBlock;
 import com.github.alexnijjar.beyond_earth.blocks.machines.EnergizerBlock;
 import com.github.alexnijjar.beyond_earth.blocks.machines.FuelRefineryBlock;
 import com.github.alexnijjar.beyond_earth.blocks.machines.NasaWorkbenchBlock;
@@ -80,6 +81,7 @@ public interface ModBlocks {
         public static final Block OXYGEN_DISTRIBUTOR = register("oxygen_distributor", new OxygenDistributorBlock(FabricBlockSettings.copy(FUEL_REFINERY)));
         public static final Block WATER_PUMP = register("water_pump", new WaterPumpBlock(FabricBlockSettings.copy(FUEL_REFINERY).nonOpaque()));
         public static final Block ENERGIZER = register("energizer", new EnergizerBlock(FabricBlockSettings.copy(FUEL_REFINERY).nonOpaque()));
+        public static final Block CRYO_FREEZER = register("cryo_freezer", new CryoFreezerBlock(FabricBlockSettings.copy(FUEL_REFINERY)));
 
         // Blocks
         public static final Block STEEL_BLOCK = register("steel_block", new Block(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
@@ -106,7 +108,8 @@ public interface ModBlocks {
         public static final Block SKY_STONE = register("sky_stone", new Block(FabricBlockSettings.copy(Blocks.STONE)));
 
         // Moon stones
-        public static final Block MOON_STONE = register("moon_stone", new Block(FabricBlockSettings.copy(Blocks.STONE)));
+        public static final Block MOON_STONE = register("moon_stone", new Block(FabricBlockSettings.copy(Blocks.STONE)), true);
+        public static final Block MOON_COBBLESTONE = register("moon_cobblestone", new Block(FabricBlockSettings.copy(Blocks.COBBLESTONE)));
         public static final Block CONGLOMERATE = register("conglomerate", new Block(FabricBlockSettings.copy(Blocks.STONE)));
         public static final Block POLISHED_CONGLOMERATE = register("polished_conglomerate", new Block(FabricBlockSettings.copy(Blocks.STONE)));
         public static final Block CRACKED_MOON_STONE_BRICKS = register("cracked_moon_stone_bricks", new Block(FabricBlockSettings.copy(Blocks.STONE)));
@@ -122,7 +125,8 @@ public interface ModBlocks {
         public static final Block MOON_PILLAR = register("moon_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.STONE_BRICKS)));
 
         // Mars stones
-        public static final Block MARS_STONE = register("mars_stone", new Block(FabricBlockSettings.of(Material.STONE, MapColor.ORANGE).sounds(BlockSoundGroup.STONE).strength(1.5f, 1.0f).requiresTool()));
+        public static final Block MARS_STONE = register("mars_stone", new Block(FabricBlockSettings.of(Material.STONE, MapColor.ORANGE).sounds(BlockSoundGroup.STONE).strength(1.5f, 1.0f).requiresTool()), true);
+        public static final Block MARS_COBBLESTONE = register("mars_cobblestone", new Block(FabricBlockSettings.copy(Blocks.COBBLESTONE)));
         public static final Block CRACKED_MARS_STONE_BRICKS = register("cracked_mars_stone_bricks", new Block(FabricBlockSettings.copy(Blocks.STONE)));
         public static final Block MARS_STONE_BRICKS = register("mars_stone_bricks", new Block(FabricBlockSettings.copy(Blocks.STONE_BRICKS)));
         public static final Block MARS_STONE_BRICK_SLAB = register("mars_stone_brick_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.STONE_BRICKS)));
@@ -136,7 +140,8 @@ public interface ModBlocks {
         public static final Block MARS_PILLAR = register("mars_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.STONE_BRICKS)));
 
         // Mercury stones
-        public static final Block MERCURY_STONE = register("mercury_stone", new Block(FabricBlockSettings.copy(Blocks.STONE)));
+        public static final Block MERCURY_STONE = register("mercury_stone", new Block(FabricBlockSettings.copy(Blocks.STONE)), true);
+        public static final Block MERCURY_COBBLESTONE = register("mercury_cobblestone", new Block(FabricBlockSettings.copy(Blocks.COBBLESTONE)));
         public static final Block CRACKED_MERCURY_STONE_BRICKS = register("cracked_mercury_stone_bricks", new Block(FabricBlockSettings.copy(Blocks.STONE)));
         public static final Block MERCURY_STONE_BRICKS = register("mercury_stone_bricks", new Block(FabricBlockSettings.copy(Blocks.STONE_BRICKS)));
         public static final Block MERCURY_STONE_BRICK_SLAB = register("mercury_stone_brick_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.STONE_BRICKS)));
@@ -157,7 +162,8 @@ public interface ModBlocks {
         public static final Block VENUS_SANDSTONE_BRICK_STAIRS = register("venus_sandstone_brick_stairs", new StairsBlock(VENUS_SANDSTONE_BRICKS.getDefaultState(), FabricBlockSettings.copy(Blocks.SMOOTH_SANDSTONE)));
 
         // Venus stones
-        public static final Block VENUS_STONE = register("venus_stone", new Block(FabricBlockSettings.of(Material.STONE, MapColor.TERRACOTTA_ORANGE).sounds(BlockSoundGroup.STONE).strength(1.5f, 1.0f).requiresTool()));
+        public static final Block VENUS_STONE = register("venus_stone", new Block(FabricBlockSettings.of(Material.STONE, MapColor.TERRACOTTA_ORANGE).sounds(BlockSoundGroup.STONE).strength(1.5f, 1.0f).requiresTool()), true);
+        public static final Block VENUS_COBBLESTONE = register("venus_cobblestone", new Block(FabricBlockSettings.copy(Blocks.COBBLESTONE)));
         public static final Block CRACKED_VENUS_STONE_BRICKS = register("cracked_venus_stone_bricks", new Block(FabricBlockSettings.copy(Blocks.STONE)));
         public static final Block VENUS_STONE_BRICKS = register("venus_stone_bricks", new Block(FabricBlockSettings.copy(Blocks.STONE_BRICKS)));
         public static final Block VENUS_STONE_BRICK_SLAB = register("venus_stone_brick_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.STONE_BRICKS)));
@@ -171,7 +177,8 @@ public interface ModBlocks {
         public static final Block VENUS_PILLAR = register("venus_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.STONE_BRICKS)));
 
         // Glacio stones
-        public static final Block GLACIO_STONE = register("glacio_stone", new Block(FabricBlockSettings.of(Material.STONE, MapColor.TERRACOTTA_ORANGE).sounds(BlockSoundGroup.STONE).strength(1.5f, 1.0f).requiresTool()));
+        public static final Block GLACIO_STONE = register("glacio_stone", new Block(FabricBlockSettings.of(Material.STONE, MapColor.TERRACOTTA_ORANGE).sounds(BlockSoundGroup.STONE).strength(1.5f, 1.0f).requiresTool()), true);
+        public static final Block GLACIO_COBBLESTONE = register("glacio_cobblestone", new Block(FabricBlockSettings.copy(Blocks.COBBLESTONE)));
         public static final Block PERMAFROST = register("permafrost", new Block(FabricBlockSettings.copy(Blocks.STONE)));
         public static final Block PERMAFROST_BRICKS = register("permafrost_bricks", new Block(FabricBlockSettings.copy(Blocks.STONE)));
         public static final Block CRACKED_PERMAFROST_BRICKS = register("cracked_permafrost_bricks", new Block(FabricBlockSettings.copy(Blocks.STONE)));

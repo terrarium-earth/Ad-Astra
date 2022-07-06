@@ -2,6 +2,7 @@ package com.github.alexnijjar.beyond_earth.compat.rei;
 
 import com.github.alexnijjar.beyond_earth.compat.rei.coal_generator.CoalGeneratorDisplay;
 import com.github.alexnijjar.beyond_earth.compat.rei.compressor.CompressorDisplay;
+import com.github.alexnijjar.beyond_earth.compat.rei.cryo_freezer.CryoFreezerConversionDisplay;
 import com.github.alexnijjar.beyond_earth.compat.rei.fuel_conversion.FuelConversionDisplay;
 import com.github.alexnijjar.beyond_earth.compat.rei.nasa_workbench.NasaWorkbenchDisplay;
 import com.github.alexnijjar.beyond_earth.compat.rei.oxygen_conversion.OxygenConversionDisplay;
@@ -15,6 +16,7 @@ public class REICategories {
     public static final CategoryIdentifier<CompressorDisplay> COMPRESSOR_CATEGORY = CategoryIdentifier.of(new ModIdentifier("compressor"));
     public static final CategoryIdentifier<FuelConversionDisplay> FUEL_CONVERSION_CATEGORY = CategoryIdentifier.of(new ModIdentifier("fuel_conversion"));
     public static final CategoryIdentifier<OxygenConversionDisplay> OXYGEN_CONVERSION_CATEGORY = CategoryIdentifier.of(new ModIdentifier("oxygen_conversion"));
+    public static final CategoryIdentifier<CryoFreezerConversionDisplay> CRYO_FREEZER_CONVERSION_CATEGORY = CategoryIdentifier.of(new ModIdentifier("cryo_freezer_conversion"));
     public static final CategoryIdentifier<NasaWorkbenchDisplay> NASA_WORKBENCH_CATEGORY = CategoryIdentifier.of(new ModIdentifier("nasa_workbench"));
     public static final CategoryIdentifier<SpaceStationDisplay> SPACE_STATION_CATEGORY = CategoryIdentifier.of(new ModIdentifier("space_station"));
 }

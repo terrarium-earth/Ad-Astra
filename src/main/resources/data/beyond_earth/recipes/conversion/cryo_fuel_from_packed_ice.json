@@ -1,0 +1,10 @@
+{
+    "type": "beyond_earth:cryo_fuel_conversion",
+    "input": {
+       "item": "minecraft:packed_ice"
+    },
+    "output": {
+       "name": "beyond_earth:cryo_fuel"
+    },
+    "conversion_ratio": 0.002
+ }
