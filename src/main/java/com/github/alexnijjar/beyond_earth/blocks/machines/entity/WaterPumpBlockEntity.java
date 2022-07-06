@@ -119,7 +119,9 @@ public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
             }
 
             if (this.hasEnergy()) {
-                this.drainEnergy();
+                if (this.outputTank.amount < this.outputTank.getCapacity()) {
+                    this.drainEnergy();
+                }
                 // Insert the fluid into nearby tanks.
                 for (Direction direction : new Direction[] { Direction.UP, this.getCachedState().get(AbstractMachineBlock.FACING) }) {
                     Storage<FluidVariant> storage = FluidStorage.SIDED.find(this.world, this.getPos().offset(direction), direction);
