@@ -6,11 +6,10 @@
   ],
   "key": {
     "S": {
-      "item": "minecraft:packed_ice"
+      "item": "beyond_earth:ice_shard"
     }
   },
   "result": {
-    "item": "beyond_earth:ice_shard",
-    "count": 4
+    "item": "minecraft:packed_ice"
   }
 }

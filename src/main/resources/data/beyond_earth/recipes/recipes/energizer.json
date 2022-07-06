@@ -3,7 +3,7 @@
   "pattern": [
     "#I#",
     "#D#",
-    "###"
+    "B#B"
   ],
   "key": {
     "#": {
@@ -14,6 +14,9 @@
     },
     "I": {
       "item": "minecraft:diamond"
+    },
+    "B": {
+      "item": "beyond_earth:ostrum_block"
     }
   },
   "result": {

@@ -11,6 +11,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 public class SolarPanelBlockEntity extends AbstractMachineBlockEntity {
 
@@ -51,7 +52,7 @@ public class SolarPanelBlockEntity extends AbstractMachineBlockEntity {
     public void tick() {
         if (!this.world.isClient) {
             // Check solar panel conditions.
-            if (world.isDay() && !world.isRaining() && !world.isThundering() && world.isSkyVisible(this.getPos().up())) {
+            if (world.isDay() && (!this.world.getRegistryKey().equals(World.OVERWORLD) || !this.world.isRaining() && !this.world.isThundering()) && world.isSkyVisible(this.getPos().up())) {
                 this.cumulateEnergy();
             }
 
