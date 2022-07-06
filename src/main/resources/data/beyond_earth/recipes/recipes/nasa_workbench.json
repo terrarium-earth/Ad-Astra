@@ -1,30 +1,30 @@
 {
   "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TLT",
+    "#C#",
+    "RBR"
+  ],
   "key": {
     "#": {
       "tag": "c:compressed_steel"
     },
-    "B": {
-      "tag": "c:steel_blocks"
-    },
     "C": {
       "item": "minecraft:crafting_table"
     },
-    "L": {
-      "item": "minecraft:lever"
+    "B": {
+      "tag": "c:steel_blocks"
     },
     "R": {
       "item": "minecraft:redstone_block"
     },
     "T": {
       "item": "minecraft:redstone_torch"
+    },
+    "L": {
+      "item": "minecraft:lever"
     }
   },
-  "pattern": [
-    "TLT",
-    "#C#",
-    "RBR"
-  ],
   "result": {
     "item": "beyond_earth:nasa_workbench"
   }

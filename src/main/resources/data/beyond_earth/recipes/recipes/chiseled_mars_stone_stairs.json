@@ -1,17 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
-  "key": {
-    "#": {
-      "item": "beyond_earth:chiseled_mars_stone_bricks"
-    }
-  },
   "pattern": [
     "#  ",
     "## ",
     "###"
   ],
+  "key": {
+    "#": {
+      "item": "beyond_earth:chiseled_mars_stone_bricks"
+    }
+  },
   "result": {
-    "count": 4,
-    "item": "beyond_earth:chiseled_mars_stone_stairs"
+    "item": "beyond_earth:chiseled_mars_stone_stairs",
+    "count": 4
   }
 }

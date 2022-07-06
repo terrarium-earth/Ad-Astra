@@ -1,8 +1,8 @@
 {
   "type": "minecraft:stonecutting",
-  "count": 1,
   "ingredient": {
     "item": "beyond_earth:venus_sandstone_bricks"
   },
-  "result": "beyond_earth:venus_sandstone_brick_stairs"
+  "result": "beyond_earth:venus_sandstone_brick_stairs",
+  "count": 1
 }

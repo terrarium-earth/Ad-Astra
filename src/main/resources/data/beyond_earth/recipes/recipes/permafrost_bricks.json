@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SS",
+    "SS"
+  ],
+  "key": {
+    "S": {
+      "item": "beyond_earth:permafrost"
+    }
+  },
+  "result": {
+    "item": "beyond_earth:permafrost_bricks",
+    "count": 4
+  }
+}

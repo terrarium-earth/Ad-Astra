@@ -1,17 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
-  "key": {
-    "#": {
-      "item": "beyond_earth:polished_mercury_stone"
-    }
-  },
   "pattern": [
     "#  ",
     "## ",
     "###"
   ],
+  "key": {
+    "#": {
+      "item": "beyond_earth:polished_mercury_stone"
+    }
+  },
   "result": {
-    "count": 4,
-    "item": "beyond_earth:polished_mercury_stone_stairs"
+    "item": "beyond_earth:polished_mercury_stone_stairs",
+    "count": 4
   }
 }

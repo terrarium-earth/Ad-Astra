@@ -1,6 +1,11 @@
 {
   "type": "minecraft:crafting_shaped",
   "group": "engines",
+  "pattern": [
+    "###",
+    " E ",
+    " F "
+  ],
   "key": {
     "#": {
       "tag": "c:compressed_desh"
@@ -12,11 +17,6 @@
       "item": "beyond_earth:engine_fan"
     }
   },
-  "pattern": [
-    "###",
-    " E ",
-    " F "
-  ],
   "result": {
     "item": "beyond_earth:desh_engine"
   }

@@ -1,9 +1,9 @@
 {
   "type": "minecraft:smelting",
-  "cookingtime": 200,
-  "experience": 1.0,
   "ingredient": {
     "item": "beyond_earth:venus_calorite_ore"
   },
-  "result": "beyond_earth:calorite_ingot"
+  "result": "beyond_earth:calorite_ingot",
+  "experience": 1.0,
+  "cookingtime": 200
 }

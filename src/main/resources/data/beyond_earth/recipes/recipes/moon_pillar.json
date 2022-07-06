@@ -1,16 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "#"
+  ],
   "key": {
     "#": {
       "item": "beyond_earth:moon_stone_bricks"
     }
   },
-  "pattern": [
-    "#",
-    "#"
-  ],
   "result": {
-    "count": 2,
-    "item": "beyond_earth:moon_pillar"
+    "item": "beyond_earth:moon_pillar",
+    "count": 2
   }
 }

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SS",
+    "SS"
+  ],
+  "key": {
+    "S": {
+      "tag": "c:iron_plates"
+    }
+  },
+  "result": {
+    "item": "beyond_earth:iron_plating",
+    "count": 16
+  }
+}
