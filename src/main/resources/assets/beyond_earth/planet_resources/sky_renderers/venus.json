@@ -27,9 +27,9 @@
         },
         {
             "texture": "beyond_earth:textures/sky/earth.png",
-            "blending": true,
+            "blending": false,
             "render_type": "dynamic",
-            "scale": 2.0,
+            "scale": 1.0,
             "rotation": {
                 "x": -30.0,
                 "y": -55.0,
@@ -40,7 +40,7 @@
             "texture": "beyond_earth:textures/sky/light.png",
             "blending": true,
             "render_type": "dynamic",
-            "scale": 4.5,
+            "scale": 2.5,
             "color": {
                 "r": 128,
                 "g": 191,
@@ -54,9 +54,9 @@
         },
         {
             "texture": "beyond_earth:textures/sky/mercury.png",
-            "blending": true,
+            "blending": false,
             "render_type": "dynamic",
-            "scale": 2.0,
+            "scale": 1.0,
             "rotation": {
                 "x": -25.0,
                 "y": 90.0,
@@ -67,16 +67,16 @@
             "texture": "beyond_earth:textures/sky/light.png",
             "blending": true,
             "render_type": "dynamic",
-            "scale": 5.5,
+            "scale": 2.0,
             "color": {
                 "r": 255,
                 "g": 204,
                 "b": 255
             },
             "rotation": {
-                "x": -30.0,
-                "y": -55.0,
-                "z": 45.0
+                "x": -25.0,
+                "y": 90.0,
+                "z": -25.0
             }
         }
     ]

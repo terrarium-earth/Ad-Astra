@@ -1,5 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#G#"
+  ],
   "key": {
     "#": {
       "tag": "c:steel_ingots"
@@ -8,10 +12,6 @@
       "item": "minecraft:orange_stained_glass_pane"
     }
   },
-  "pattern": [
-    "###",
-    "#G#"
-  ],
   "result": {
     "item": "beyond_earth:space_helmet"
   }

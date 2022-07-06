@@ -94,6 +94,11 @@
     "beyond_earth:chiseled_glacio_stone_slab",
     "beyond_earth:polished_glacio_stone",
     "beyond_earth:polished_glacio_stone_stairs",
-    "beyond_earth:polished_glacio_stone_slab"
+    "beyond_earth:polished_glacio_stone_slab",
+    "beyond_earth:conglomerate",
+    "beyond_earth:polished_conglomerate",
+    "beyond_earth:permafrost_bricks",
+    "beyond_earth:cracked_permafrost_bricks",
+    "beyond_earth:energizer"
   ]
 }

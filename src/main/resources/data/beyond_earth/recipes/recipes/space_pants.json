@@ -1,5 +1,10 @@
 {
   "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "W W",
+    "# #"
+  ],
   "key": {
     "#": {
       "tag": "c:steel_ingots"
@@ -8,11 +13,6 @@
       "item": "minecraft:white_wool"
     }
   },
-  "pattern": [
-    "###",
-    "W W",
-    "# #"
-  ],
   "result": {
     "item": "beyond_earth:space_pants"
   }

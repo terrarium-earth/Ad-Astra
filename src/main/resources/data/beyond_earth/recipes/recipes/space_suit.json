@@ -1,24 +1,24 @@
 {
   "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    "TOT",
+    "#W#"
+  ],
   "key": {
     "#": {
       "tag": "c:steel_ingots"
+    },
+    "W": {
+      "item": "minecraft:white_wool"
     },
     "O": {
       "item": "beyond_earth:oxygen_gear"
     },
     "T": {
       "item": "beyond_earth:oxygen_tank"
-    },
-    "W": {
-      "item": "minecraft:white_wool"
     }
   },
-  "pattern": [
-    "# #",
-    "TOT",
-    "#W#"
-  ],
   "result": {
     "item": "beyond_earth:space_suit"
   }

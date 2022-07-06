@@ -1,8 +1,8 @@
 {
   "type": "minecraft:stonecutting",
-  "count": 1,
   "ingredient": {
     "item": "beyond_earth:chiseled_mars_stone_bricks"
   },
-  "result": "beyond_earth:chiseled_mars_stone_stairs"
+  "result": "beyond_earth:chiseled_mars_stone_stairs",
+  "count": 1
 }

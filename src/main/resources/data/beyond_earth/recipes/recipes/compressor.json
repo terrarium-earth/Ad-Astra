@@ -1,5 +1,10 @@
 {
   "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#P#",
+    "# #",
+    "#P#"
+  ],
   "key": {
     "#": {
       "tag": "c:iron_plates"
@@ -8,11 +13,6 @@
       "item": "minecraft:piston"
     }
   },
-  "pattern": [
-    "#P#",
-    "# #",
-    "#P#"
-  ],
   "result": {
     "item": "beyond_earth:compressor"
   }

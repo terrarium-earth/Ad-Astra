@@ -1,9 +1,9 @@
 {
   "type": "minecraft:smelting",
-  "cookingtime": 200,
-  "experience": 0.2,
   "ingredient": {
     "item": "beyond_earth:cracked_venus_stone_bricks"
   },
-  "result": "beyond_earth:cracked_venus_stone_bricks"
+  "result": "beyond_earth:cracked_venus_stone_bricks",
+  "experience": 0.2,
+  "cookingtime": 200
 }

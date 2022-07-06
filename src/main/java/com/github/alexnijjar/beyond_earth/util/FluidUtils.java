@@ -124,8 +124,8 @@ public class FluidUtils {
 	// Extracts fluid from a tank and inserts it into a storage, such as a bucket.
 	public static void extractFluidFromTank(FluidMachineBlockEntity inventory, int insertSlot, int extractSlot) {
 		ItemStack extractCopy = inventory.getStack(insertSlot).copy();
-		ContainerItemContext context = ContainerItemContext.withInitial(extractCopy);
 		extractCopy.setCount(1);
+		ContainerItemContext context = ContainerItemContext.withInitial(extractCopy);
 		Storage<FluidVariant> storage = context.find(FluidStorage.ITEM);
 
 		if (storage != null) {

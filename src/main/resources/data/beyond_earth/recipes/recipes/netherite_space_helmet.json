@@ -1,20 +1,20 @@
 {
   "type": "minecraft:crafting_shaped",
-  "key": {
-    "#": {
-      "tag": "c:compressed_ostrum"
-    },
-    "G": {
-      "item": "minecraft:orange_stained_glass_pane"
-    },
-    "N": {
-      "item": "minecraft:netherite_ingot"
-    }
-  },
   "pattern": [
     "#N#",
     "#G#"
   ],
+  "key": {
+    "#": {
+      "tag": "c:compressed_ostrum"
+    },
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "G": {
+      "item": "minecraft:orange_stained_glass_pane"
+    }
+  },
   "result": {
     "item": "beyond_earth:netherite_space_helmet"
   }

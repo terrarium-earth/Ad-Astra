@@ -1,16 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
   "group": "ostrum_ingot",
-  "key": {
-    "#": {
-      "item": "beyond_earth:ostrum_nugget"
-    }
-  },
   "pattern": [
     "###",
     "###",
     "###"
   ],
+  "key": {
+    "#": {
+      "item": "beyond_earth:ostrum_nugget"
+    }
+  },
   "result": {
     "item": "beyond_earth:ostrum_ingot"
   }

@@ -1,16 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SS",
+    "SS"
+  ],
   "key": {
     "S": {
       "item": "beyond_earth:mars_stone"
     }
   },
-  "pattern": [
-    "SS",
-    "SS"
-  ],
   "result": {
-    "count": 4,
-    "item": "beyond_earth:mars_stone_bricks"
+    "item": "beyond_earth:mars_stone_bricks",
+    "count": 4
   }
 }
