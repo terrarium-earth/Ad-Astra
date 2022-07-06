@@ -1,6 +1,11 @@
 {
   "type": "minecraft:crafting_shaped",
   "group": "flag",
+  "pattern": [
+    "|##",
+    "|##",
+    "|  "
+  ],
   "key": {
     "#": {
       "item": "minecraft:blue_wool"
@@ -9,11 +14,6 @@
       "tag": "c:iron_rods"
     }
   },
-  "pattern": [
-    "|##",
-    "|##",
-    "|  "
-  ],
   "result": {
     "item": "beyond_earth:flag_blue"
   }

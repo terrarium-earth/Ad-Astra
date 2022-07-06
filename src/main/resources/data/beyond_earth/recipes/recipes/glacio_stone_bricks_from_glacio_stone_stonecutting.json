@@ -1,8 +1,8 @@
 {
   "type": "minecraft:stonecutting",
-  "count": 1,
   "ingredient": {
     "item": "beyond_earth:glacio_stone"
   },
-  "result": "beyond_earth:glacio_stone_bricks"
+  "result": "beyond_earth:glacio_stone_bricks",
+  "count": 1
 }

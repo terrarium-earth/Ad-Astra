@@ -1,9 +1,9 @@
 {
   "type": "minecraft:smelting",
-  "cookingtime": 200,
-  "experience": 1.0,
   "ingredient": {
     "item": "beyond_earth:glacio_coal_ore"
   },
-  "result": "minecraft:coal"
+  "result": "minecraft:coal",
+  "experience": 1.0,
+  "cookingtime": 200
 }

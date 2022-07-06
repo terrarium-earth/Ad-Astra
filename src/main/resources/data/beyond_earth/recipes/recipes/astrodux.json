@@ -1,5 +1,10 @@
 {
   "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "S#S",
+    "SSS"
+  ],
   "key": {
     "#": {
       "item": "minecraft:book"
@@ -8,11 +13,6 @@
       "item": "beyond_earth:steel_ingot"
     }
   },
-  "pattern": [
-    "SSS",
-    "S#S",
-    "SSS"
-  ],
   "result": {
     "item": "beyond_earth:astrodux"
   }

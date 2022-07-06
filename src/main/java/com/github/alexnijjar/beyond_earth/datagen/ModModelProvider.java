@@ -87,7 +87,7 @@ public class ModModelProvider extends FabricModelProvider implements ModBlocks {
         blockStateModelGenerator.registerSimpleCubeAll(CHISELED_VENUS_STONE_BRICKS);
         blockStateModelGenerator.registerSimpleCubeAll(POLISHED_VENUS_STONE);
         blockStateModelGenerator.registerSimpleCubeAll(GLACIO_STONE);
-        blockStateModelGenerator.registerSimpleCubeAll(PERMAFROST_STONE);
+        blockStateModelGenerator.registerSimpleCubeAll(PERMAFROST);
         blockStateModelGenerator.registerSimpleCubeAll(CRACKED_GLACIO_STONE_BRICKS);
         blockStateModelGenerator.registerSimpleCubeAll(GLACIO_STONE_BRICKS);
         blockStateModelGenerator.registerSimpleCubeAll(CHISELED_GLACIO_STONE_BRICKS);

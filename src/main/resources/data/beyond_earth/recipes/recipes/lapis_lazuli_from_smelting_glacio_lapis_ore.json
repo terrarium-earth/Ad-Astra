@@ -1,9 +1,9 @@
 {
   "type": "minecraft:smelting",
-  "cookingtime": 200,
-  "experience": 1.0,
   "ingredient": {
     "item": "beyond_earth:glacio_lapis_ore"
   },
-  "result": "minecraft:lapis_lazuli"
+  "result": "minecraft:lapis_lazuli",
+  "experience": 1.0,
+  "cookingtime": 200
 }

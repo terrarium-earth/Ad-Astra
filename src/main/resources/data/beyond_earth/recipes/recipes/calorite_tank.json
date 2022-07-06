@@ -1,22 +1,22 @@
 {
   "type": "minecraft:crafting_shaped",
   "group": "tanks",
-  "key": {
-    "#": {
-      "tag": "c:compressed_calorite"
-    },
-    "U": {
-      "item": "minecraft:bucket"
-    },
-    "|": {
-      "tag": "c:iron_rods"
-    }
-  },
   "pattern": [
     "## ",
     "#U|",
     "## "
   ],
+  "key": {
+    "#": {
+      "tag": "c:compressed_calorite"
+    },
+    "|": {
+      "tag": "c:iron_rods"
+    },
+    "U": {
+      "item": "minecraft:bucket"
+    }
+  },
   "result": {
     "item": "beyond_earth:calorite_tank"
   }

@@ -90,6 +90,7 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		offerStonecuttingRecipe(exporter, VENUS_STONE_BRICKS, VENUS_STONE);
 		offerStonecuttingRecipe(exporter, MERCURY_STONE_BRICKS, MERCURY_STONE);
 		offerStonecuttingRecipe(exporter, GLACIO_STONE_BRICKS, GLACIO_STONE);
+		offerStonecuttingRecipe(exporter, PERMAFROST_BRICKS, PERMAFROST);
 
 		// Chiseled
 		offerStonecuttingRecipe(exporter, CHISELED_MOON_STONE_BRICKS, MOON_STONE);
@@ -104,6 +105,7 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		offerStonecuttingRecipe(exporter, POLISHED_VENUS_STONE, VENUS_STONE);
 		offerStonecuttingRecipe(exporter, POLISHED_MERCURY_STONE, MERCURY_STONE);
 		offerStonecuttingRecipe(exporter, POLISHED_GLACIO_STONE, GLACIO_STONE);
+		offerStonecuttingRecipe(exporter, POLISHED_CONGLOMERATE, CONGLOMERATE);
 		// <---
 
 		// Pillars
@@ -134,6 +136,7 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		offerCrackedBricksSmeltingRecipe(exporter, ImmutableList.of(VENUS_STONE_BRICKS), CRACKED_VENUS_STONE_BRICKS);
 		offerCrackedBricksSmeltingRecipe(exporter, ImmutableList.of(MERCURY_STONE_BRICKS), CRACKED_MERCURY_STONE_BRICKS);
 		offerCrackedBricksSmeltingRecipe(exporter, ImmutableList.of(GLACIO_STONE_BRICKS), CRACKED_GLACIO_STONE_BRICKS);
+		offerCrackedBricksSmeltingRecipe(exporter, ImmutableList.of(PERMAFROST_BRICKS), CRACKED_PERMAFROST_BRICKS);
 
 		// Polished
 		offerPolishedStoneRecipe(exporter, POLISHED_MOON_STONE, MOON_STONE);
@@ -155,6 +158,7 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		offerQuadRecipe(exporter, VENUS_STONE_BRICKS, VENUS_STONE);
 		offerQuadRecipe(exporter, MERCURY_STONE_BRICKS, MERCURY_STONE);
 		offerQuadRecipe(exporter, GLACIO_STONE_BRICKS, GLACIO_STONE);
+		offerQuadRecipe(exporter, PERMAFROST_BRICKS, PERMAFROST);
 
 		// Sandstone
 		offerQuadRecipe(exporter, VENUS_SANDSTONE, VENUS_SAND);

@@ -7,6 +7,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.github.alexnijjar.beyond_earth.entities.vehicles.VehicleEntity;
 import com.github.alexnijjar.beyond_earth.items.vehicles.VehicleItem;
+import com.github.alexnijjar.beyond_earth.registry.ModItems;
 
 import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.entity.EntityPose;
@@ -39,7 +40,7 @@ public abstract class BipedEntityModelMixin {
         }
 
         if (!livingEntity.getPose().equals(EntityPose.SWIMMING)) {
-            if (currentItem instanceof VehicleItem) {
+            if (currentItem instanceof VehicleItem || currentItem.equals(ModItems.TIER_1_ROVER)) {
                 // Move the arms so that it looks like the player is holding the rocket in the air with both arms.
                 if (mainHand) {
                     model.rightArm.pitch = -2.8f;

@@ -344,6 +344,8 @@ public interface ModItems {
 
         public static final BlockItem MARS_SAND = registerBlockItem(ModBlocks.MARS_SAND);
         public static final BlockItem MARS_STONE = registerBlockItem(ModBlocks.MARS_STONE);
+        public static final BlockItem CONGLOMERATE = registerBlockItem(ModBlocks.CONGLOMERATE);
+        public static final BlockItem POLISHED_CONGLOMERATE = registerBlockItem(ModBlocks.POLISHED_CONGLOMERATE);
         public static final BlockItem MARS_STONE_BRICKS = registerBlockItem(ModBlocks.MARS_STONE_BRICKS);
         public static final BlockItem CRACKED_MARS_STONE_BRICKS = registerBlockItem(ModBlocks.CRACKED_MARS_STONE_BRICKS);
         public static final BlockItem MARS_STONE_BRICK_SLAB = registerBlockItem(ModBlocks.MARS_STONE_BRICK_SLAB);
@@ -389,7 +391,9 @@ public interface ModItems {
         public static final BlockItem POLISHED_VENUS_STONE_SLAB = registerBlockItem(ModBlocks.POLISHED_VENUS_STONE_SLAB);
         public static final BlockItem VENUS_PILLAR = registerBlockItem(ModBlocks.VENUS_PILLAR);
 
-        public static final BlockItem PERMAFROST_STONE = registerBlockItem(ModBlocks.PERMAFROST_STONE);
+        public static final BlockItem PERMAFROST = registerBlockItem(ModBlocks.PERMAFROST);
+        public static final BlockItem PERMAFROST_BRICKS = registerBlockItem(ModBlocks.PERMAFROST_BRICKS);
+        public static final BlockItem CRACKED_PERMAFROST_BRICKS = registerBlockItem(ModBlocks.CRACKED_PERMAFROST_BRICKS);
         public static final BlockItem GLACIO_STONE = registerBlockItem(ModBlocks.GLACIO_STONE);
         public static final BlockItem GLACIO_STONE_BRICKS = registerBlockItem(ModBlocks.GLACIO_STONE_BRICKS);
         public static final BlockItem CRACKED_GLACIO_STONE_BRICKS = registerBlockItem(ModBlocks.CRACKED_GLACIO_STONE_BRICKS);

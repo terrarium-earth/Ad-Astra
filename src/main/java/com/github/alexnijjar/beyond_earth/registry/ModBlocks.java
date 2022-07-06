@@ -107,6 +107,8 @@ public interface ModBlocks {
 
         // Moon stones
         public static final Block MOON_STONE = register("moon_stone", new Block(FabricBlockSettings.copy(Blocks.STONE)));
+        public static final Block CONGLOMERATE = register("conglomerate", new Block(FabricBlockSettings.copy(Blocks.STONE)));
+        public static final Block POLISHED_CONGLOMERATE = register("polished_conglomerate", new Block(FabricBlockSettings.copy(Blocks.STONE)));
         public static final Block CRACKED_MOON_STONE_BRICKS = register("cracked_moon_stone_bricks", new Block(FabricBlockSettings.copy(Blocks.STONE)));
         public static final Block MOON_STONE_BRICKS = register("moon_stone_bricks", new Block(FabricBlockSettings.copy(Blocks.STONE_BRICKS)));
         public static final Block MOON_STONE_BRICK_SLAB = register("moon_stone_brick_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.STONE_BRICKS)));
@@ -170,7 +172,9 @@ public interface ModBlocks {
 
         // Glacio stones
         public static final Block GLACIO_STONE = register("glacio_stone", new Block(FabricBlockSettings.of(Material.STONE, MapColor.TERRACOTTA_ORANGE).sounds(BlockSoundGroup.STONE).strength(1.5f, 1.0f).requiresTool()));
-        public static final Block PERMAFROST_STONE = register("permafrost", new Block(FabricBlockSettings.copy(Blocks.STONE)));
+        public static final Block PERMAFROST = register("permafrost", new Block(FabricBlockSettings.copy(Blocks.STONE)));
+        public static final Block PERMAFROST_BRICKS = register("permafrost_bricks", new Block(FabricBlockSettings.copy(Blocks.STONE)));
+        public static final Block CRACKED_PERMAFROST_BRICKS = register("cracked_permafrost_bricks", new Block(FabricBlockSettings.copy(Blocks.STONE)));
         public static final Block CRACKED_GLACIO_STONE_BRICKS = register("cracked_glacio_stone_bricks", new Block(FabricBlockSettings.copy(Blocks.STONE)));
         public static final Block GLACIO_STONE_BRICKS = register("glacio_stone_bricks", new Block(FabricBlockSettings.copy(Blocks.STONE_BRICKS)));
         public static final Block GLACIO_STONE_BRICK_SLAB = register("glacio_stone_brick_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.STONE_BRICKS)));

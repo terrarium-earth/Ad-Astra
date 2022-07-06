@@ -8,7 +8,6 @@ import com.github.alexnijjar.beyond_earth.world.features.VenusDeltas;
 
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
-import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
@@ -36,7 +35,7 @@ public class ModFeatures {
         public static final Identifier VENUS_DELTAS_LARGE_ID = new ModIdentifier("venus_deltas_large");
 
         private static final Feature<SingleStateFeatureConfig> MARS_ROCK_FEATURE = new MarsBlockBlobFeature(SingleStateFeatureConfig.CODEC);
-        public static final ConfiguredFeature<?, ?> MARS_ROCK_CONFIGURED_FEATURE = createFeatureConfiguredFeature(MARS_ROCK_ID, MARS_ROCK_FEATURE, new SingleStateFeatureConfig(Blocks.POLISHED_GRANITE.getDefaultState()));
+        public static final ConfiguredFeature<?, ?> MARS_ROCK_CONFIGURED_FEATURE = createFeatureConfiguredFeature(MARS_ROCK_ID, MARS_ROCK_FEATURE, new SingleStateFeatureConfig(ModBlocks.CONGLOMERATE.getDefaultState()));
         public static final PlacedFeature MARS_ROCK = new PlacedFeature(RegistryUtil.getEntry(BuiltinRegistries.CONFIGURED_FEATURE, MARS_ROCK_CONFIGURED_FEATURE),
                         List.of(CountPlacementModifier.of(2), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of()));
 
