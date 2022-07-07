@@ -70,7 +70,7 @@ public class BeyondEarthConfig implements ConfigData {
         public double jetSuitUpwardsSpeed = 0.5;
         public long jetSuitEnergyPerTick = 72;
         public long jetSuitTankSize = FluidConstants.BUCKET * 4;
-        public long jetSuitMaxEnergy = 2000000L;
+        public long jetSuitMaxEnergy = 1000000L;
         public boolean spawnJetSuitParticles = true;
         public boolean enableJetSuitFlight = true;
     }

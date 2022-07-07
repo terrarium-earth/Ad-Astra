@@ -152,9 +152,7 @@ public abstract class LivingEntityMixin {
                                                 (double) MathHelper.nextBetween(random, -1.0f, 1.0f) * 0.083333336, 0);
 
                                         // Freeze effect, like powdered snow.
-                                        if (entity.getFrozenTicks() < 300) {
-                                            entity.setFrozenTicks(entity.getFrozenTicks() + 20);
-                                        }
+                                        entity.setFrozenTicks(Math.min(entity.getMinFreezeDamageTicks(), entity.getFrozenTicks() + 5));
                                         entity.damage(ModDamageSource.OXYGEN, 2);
                                     }
                                     // Turn skeletons into strays.

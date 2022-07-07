@@ -238,11 +238,12 @@ public class RocketEntity extends VehicleEntity {
     }
 
     private void travel() {
+        double multiplier = (this.inputTank.getResource().equals(FluidVariant.of(ModFluids.CRYO_FUEL_STILL)) ? 2.5 : 1.0);
         if (!this.hasNoGravity()) {
-            this.setVelocity(this.getVelocity().add(0.0, ROCKET_ACCELERATION, 0.0));
+            this.setVelocity(this.getVelocity().add(0.0, ROCKET_ACCELERATION * multiplier, 0.0));
         }
 
-        if (this.getVelocity().getY() > ROCKET_MAX_SPEED) {
+        if (this.getVelocity().getY() > ROCKET_MAX_SPEED * multiplier) {
             this.setVelocity(0.0, ROCKET_MAX_SPEED, 0.0);
         }
 

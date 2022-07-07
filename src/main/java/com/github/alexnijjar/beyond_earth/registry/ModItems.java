@@ -14,9 +14,11 @@ import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier2;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier3;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier4;
 import com.github.alexnijjar.beyond_earth.items.Astrodux;
+import com.github.alexnijjar.beyond_earth.items.EnergizerBlockItem;
 import com.github.alexnijjar.beyond_earth.items.FluidContainingItem.TankStorage;
 import com.github.alexnijjar.beyond_earth.items.HammerItem;
 import com.github.alexnijjar.beyond_earth.items.OxygenTankItem;
+import com.github.alexnijjar.beyond_earth.items.SolarPanelBlockItem;
 import com.github.alexnijjar.beyond_earth.items.SpacePaintingItem;
 import com.github.alexnijjar.beyond_earth.items.armour.JetSuit;
 import com.github.alexnijjar.beyond_earth.items.armour.NetheriteSpaceSuit;
@@ -211,7 +213,7 @@ public interface ModItems {
 
         // Machines.
         public static final BlockItem NASA_WORKBENCH = registerBlockItem(ModBlocks.NASA_WORKBENCH, ITEM_GROUP_MACHINES);
-        public static final BlockItem SOLAR_PANEL = register("solar_panel", new BlockItem(ModBlocks.SOLAR_PANEL, new FabricItemSettings().group(ITEM_GROUP_MACHINES)) {
+        public static final BlockItem SOLAR_PANEL = register("solar_panel", new SolarPanelBlockItem(ModBlocks.SOLAR_PANEL, new FabricItemSettings().group(ITEM_GROUP_MACHINES)) {
                 @Override
                 public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
                         tooltip.add((new TranslatableText("item.beyond_earth.generator.tooltip", SolarPanelBlockEntity.ENERGY_PER_TICK).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
@@ -233,7 +235,7 @@ public interface ModItems {
                         tooltip.add((new TranslatableText("item.beyond_earth.water_pump.tooltip", FluidUtils.dropletsToMillibuckets(WaterPumpBlockEntity.TRANSFER_PER_TICK)).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
                 }
         });
-        public static final BlockItem ENERGIZER = registerBlockItem(ModBlocks.ENERGIZER, ITEM_GROUP_MACHINES);
+        public static final BlockItem ENERGIZER = register("energizer", new EnergizerBlockItem(ModBlocks.ENERGIZER, new FabricItemSettings().group(ITEM_GROUP_MACHINES)));
         public static final BlockItem CRYO_FREEZER = registerBlockItem(ModBlocks.CRYO_FREEZER, ITEM_GROUP_MACHINES);
 
         public static final Item HAMMER = register("hammer", new HammerItem(new FabricItemSettings().group(ITEM_GROUP_BASICS).maxCount(1).maxDamage(BeyondEarth.CONFIG.world.hammerDurability)));
