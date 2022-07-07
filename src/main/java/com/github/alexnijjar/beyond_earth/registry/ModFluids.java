@@ -1,5 +1,6 @@
 package com.github.alexnijjar.beyond_earth.registry;
 
+import com.github.alexnijjar.beyond_earth.blocks.fluid.CryoFuelBlock;
 import com.github.alexnijjar.beyond_earth.blocks.fluid.CryoFuelFluid;
 import com.github.alexnijjar.beyond_earth.blocks.fluid.FuelFluid;
 import com.github.alexnijjar.beyond_earth.blocks.fluid.OilFluid;
@@ -31,14 +32,14 @@ public class ModFluids {
     public static Block OXYGEN_BLOCK;
 
     public static void register() {
-        
+
         // Oil
         OIL_STILL = Registry.register(Registry.FLUID, new ModIdentifier("oil"), new OilFluid.Still());
         FLOWING_OIL = Registry.register(Registry.FLUID, new ModIdentifier("flowing_oil"), new OilFluid.Flowing());
-        
+
         OIL_BLOCK = new FluidBlock(OIL_STILL, FabricBlockSettings.copy(Blocks.WATER).strength(100.0f).dropsNothing());
         ModBlocks.register("oil", OIL_BLOCK);
-        
+
         // Fuel
         FUEL_STILL = Registry.register(Registry.FLUID, new ModIdentifier("fuel"), new FuelFluid.Still());
         FLOWING_FUEL = Registry.register(Registry.FLUID, new ModIdentifier("flowing_fuel"), new FuelFluid.Flowing());
@@ -50,7 +51,7 @@ public class ModFluids {
         CRYO_FUEL_STILL = Registry.register(Registry.FLUID, new ModIdentifier("cryo_fuel"), new CryoFuelFluid.Still());
         FLOWING_CRYO_FUEL = Registry.register(Registry.FLUID, new ModIdentifier("flowing_cryo_fuel"), new CryoFuelFluid.Flowing());
 
-        CRYO_FUEL_BLOCK = new FluidBlock(CRYO_FUEL_STILL, FabricBlockSettings.copy(Blocks.WATER).strength(100.0f).dropsNothing());
+        CRYO_FUEL_BLOCK = new CryoFuelBlock(CRYO_FUEL_STILL, FabricBlockSettings.copy(Blocks.WATER).strength(100.0f).dropsNothing());
         ModBlocks.register("cryo_fuel", CRYO_FUEL_BLOCK);
 
         // Oxygen

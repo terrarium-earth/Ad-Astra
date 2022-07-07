@@ -8,7 +8,7 @@
             "type": "patchouli:spotlight",
             "title": "Energizer",
             "item": "beyond_earth:energizer",
-            "text": "The energizer is a machine capable of powering items and storing large amounts of energy. To charge an item, power the energizer and then right-click on the energizer with that item. It stores 2 million energy, making it capable of charging machines for a very long time."
+            "text": "The energizer is a machine capable of powering items and storing large amounts of energy. To charge an item, power the energizer and then right-click on the energizer with that item. It stores 2 million energy, making it capable of charging machines for a very long time. It also retains its energy when broken."
         },
         {
             "type": "patchouli:crafting",
