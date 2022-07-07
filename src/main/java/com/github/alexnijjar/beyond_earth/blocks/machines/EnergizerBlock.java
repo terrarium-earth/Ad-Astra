@@ -1,11 +1,16 @@
 package com.github.alexnijjar.beyond_earth.blocks.machines;
 
+import java.util.List;
+
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.EnergizerBlockEntity;
+import com.github.alexnijjar.beyond_earth.registry.ModItems;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.state.StateManager.Builder;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.ActionResult;
@@ -62,5 +67,13 @@ public class EnergizerBlock extends AbstractMachineBlock {
         protected void appendProperties(Builder<Block, BlockState> builder) {
                 super.appendProperties(builder);
                 builder.add(POWER);
+        }
+
+        @Override
+        public List<ItemStack> getDroppedStacks(BlockState state, net.minecraft.loot.context.LootContext.Builder builder) {
+                BlockEntity blockEntity = builder.getNullable(LootContextParameters.BLOCK_ENTITY);
+                ItemStack stack = ModItems.ENERGIZER.getDefaultStack();
+                stack.getOrCreateNbt().putLong("energy", ((EnergizerBlockEntity) blockEntity).energyStorage.amount);
+                return List.of(stack);
         }
 }

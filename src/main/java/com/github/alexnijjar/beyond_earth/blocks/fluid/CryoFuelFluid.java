@@ -26,6 +26,8 @@ public abstract class CryoFuelFluid extends ModFluid {
         return ModItems.CRYO_FUEL_BUCKET;
     }
 
+    
+
     @Override
     protected BlockState toBlockState(FluidState state) {
         return ModFluids.CRYO_FUEL_BLOCK.getDefaultState().with(Properties.LEVEL_15, getBlockStateLevel(state));
