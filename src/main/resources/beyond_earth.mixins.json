@@ -21,6 +21,7 @@
     "gravity.CommonGravityEntityMixin",
     "gravity.ExperienceBottleEntityMixin",
     "gravity.FishingBobberEntityMixin",
+    "gravity.LivingEntityGravityMixin",
     "gravity.PersistentProjectileEntityMixin",
     "gravity.PotionEntityMixin",
     "gravity.ThrownEntityMixin",

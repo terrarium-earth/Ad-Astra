@@ -3,22 +3,23 @@ package com.github.alexnijjar.beyond_earth.mixin.gravity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.projectile.PersistentProjectileEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.Vec3d;
 
-@Mixin(PersistentProjectileEntity.class)
-public abstract class PersistentProjectileEntityMixin {
+@Mixin(LivingEntity.class)
+public class LivingEntityGravityMixin {
 
-    private static final double CONSTANT = 0.05;
+    private static final double CONSTANT = 0.08;
 
-    @Inject(method = "tick", at = @At("TAIL"), cancellable = true)
-    public void tick(CallbackInfo ci) {
+    @Inject(method = "travel", at = @At("TAIL"), cancellable = true)
+    public void travel(CallbackInfo ci) {
         if (BeyondEarth.CONFIG.world.doEntityGravity) {
             Entity entity = (Entity) (Object) this;
             if (!entity.hasNoGravity()) {
@@ -27,5 +28,12 @@ public abstract class PersistentProjectileEntityMixin {
                 entity.setVelocity(velocity.getX(), velocity.getY() + CONSTANT - newGravity, velocity.getZ());
             }
         }
+    }
+
+    // Make fall damage gravity-dependant
+    @ModifyVariable(method = "handleFallDamage", at = @At("HEAD"), ordinal = 1)
+    private float handleFallDamage(float damageMultiplier) {
+        LivingEntity entity = ((LivingEntity) (Object) this);
+        return damageMultiplier * ModUtils.getPlanetGravity(entity.world);
     }
 }
