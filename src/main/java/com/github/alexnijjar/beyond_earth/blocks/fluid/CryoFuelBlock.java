@@ -23,7 +23,7 @@ public class CryoFuelBlock extends FluidBlock {
 
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if (!(entity instanceof LivingEntity) || entity.getBlockStateAtPos().isOf(this)) {
+        if (entity instanceof LivingEntity) {
             entity.slowMovement(state, new Vec3d(0.9f, 1.5, 0.9f));
             if (world.isClient) {
                 Random random = world.getRandom();
@@ -32,13 +32,12 @@ public class CryoFuelBlock extends FluidBlock {
                     world.addParticle(ParticleTypes.SNOWFLAKE, entity.getX(), pos.getY() + 1, entity.getZ(), MathHelper.nextBetween(random, -1.0f, 1.0f) * 0.083333336f, 0.05f, MathHelper.nextBetween(random, -1.0f, 1.0f) * 0.083333336f);
                 }
             }
-        }
-        entity.setInPowderSnow(true);
-        entity.setFrozenTicks(Math.min(entity.getMinFreezeDamageTicks(), entity.getFrozenTicks() + 5));
-        if (!world.isClient) {
-            entity.setOnFire(false);
-            entity.damage(ModDamageSource.CRYO_FUEL, 4 * (entity.isFireImmune() ? 2 : 1));
+            entity.setInPowderSnow(true);
+            entity.setFrozenTicks(Math.min(entity.getMinFreezeDamageTicks(), entity.getFrozenTicks() + 5));
+            if (!world.isClient) {
+                entity.setOnFire(false);
+                entity.damage(ModDamageSource.CRYO_FUEL, 4 * (entity.isFireImmune() ? 2 : 1));
+            }
         }
     }
-
 }

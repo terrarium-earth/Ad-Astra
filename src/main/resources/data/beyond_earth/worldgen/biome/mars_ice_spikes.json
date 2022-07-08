@@ -28,6 +28,9 @@
   },
   "features": [
     [
+      "minecraft:large_dripstone",
+      "minecraft:dripstone_cluster",
+      "minecraft:pointed_dripstone",
       "minecraft:fossil_upper",
       "minecraft:fossil_lower",
       "minecraft:lush_caves_ceiling_vegetation",
