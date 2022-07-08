@@ -2,7 +2,7 @@
   "temperature": 0.8,
   "downfall": 0,
   "precipitation": "none",
-  "category": "plains",
+  "category": "none",
   "effects": {
     "sky_color": -3044526,
     "fog_color": -3044526,
@@ -43,6 +43,9 @@
   },
   "features": [
     [
+      "minecraft:large_dripstone",
+      "minecraft:dripstone_cluster",
+      "minecraft:pointed_dripstone",
       "minecraft:fossil_upper",
       "minecraft:fossil_lower",
       "minecraft:lush_caves_ceiling_vegetation",

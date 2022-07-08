@@ -19,8 +19,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-// summon beyond_earth:tier_1_rover ~ ~1 ~ {Passengers:[{id:"minecraft:husk"},{id:"minecraft:husk"}]}
-// summon beyond_earth:tier_1_rover ~ ~1 ~ {Passengers:[{id:"minecraft:husk"}]}
 public class RoverEntity extends VehicleEntity {
 
     public double wheelPitch;

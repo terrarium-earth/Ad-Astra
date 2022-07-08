@@ -145,27 +145,27 @@ public abstract class VehicleEntity extends Entity {
         }
     }
 
-    // Sets the velocity based on the current speed and the current direction.
+    // Sets the velocity based on the current speed and the current direction
     public void doMovement() {
         this.setPitch(0);
         Vec3d movement = this.getRotationVector(this.getPitch(), this.getYaw());
 
-        // Save the current y velocity so we can use it later.
+        // Save the current y velocity so we can use it later
         double yVelocity = this.getVelocity().getY();
 
         this.setVelocity(this.getVelocity().add(movement.getX(), 0.0, movement.getZ()).multiply(this.getSpeed()));
 
-        // Prevent the vehicle from going too fast.
+        // Prevent the vehicle from going too fast
         double maxVelocity = 0.75;
         if (this.getVelocity().lengthSquared() > maxVelocity * maxVelocity) {
             this.setVelocity(this.getVelocity().normalize().multiply(maxVelocity));
         }
 
-        // Set the y velocity back to the original value, as it was modified by the movement.
+        // Set the y velocity back to the original value, as it was modified by the movement
         this.setVelocity(new Vec3d(this.getVelocity().getX(), yVelocity, this.getVelocity().getZ()));
     }
 
-    // Slow down the vehicle until a full stop is reached.
+    // Slow down the vehicle until a full stop is reached
     public void slowDown() {
         this.setSpeed(this.getSpeed() / 1.1f);
         if (this.getSpeed() < 0.001 && this.getSpeed() > -0.001) {
@@ -177,7 +177,12 @@ public abstract class VehicleEntity extends Entity {
     // Apply gravity to the vehicle.
     public void doGravity() {
         if (!this.hasNoGravity()) {
-            this.setVelocity(this.getVelocity().add(0, -0.03, 0));
+            // Slow down the gravity while in water
+            if (this.isTouchingWater()) {
+                this.setVelocity(this.getVelocity().add(0, -0.0001, 0));
+            } else {
+                this.setVelocity(this.getVelocity().add(0, -0.03, 0));
+            }
             if (this.getVelocity().getY() < BeyondEarth.CONFIG.vehicles.gravity) {
                 this.setVelocity(new Vec3d(this.getVelocity().getX(), BeyondEarth.CONFIG.vehicles.gravity, this.getVelocity().getZ()));
             }

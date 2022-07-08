@@ -1,22 +1,31 @@
 package com.github.alexnijjar.beyond_earth.mixin.gravity;
 
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.Constant;
-import org.spongepowered.asm.mixin.injection.ModifyConstant;
-
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.vehicle.BoatEntity;
+import net.minecraft.util.math.Vec3d;
 
 @Mixin(BoatEntity.class)
 public abstract class BoatEntityMixin {
-    @ModifyConstant(method = "updateVelocity", constant = @Constant(doubleValue = -0.03999999910593033, ordinal = 1))
-    public double setGravity(double value) {
+
+    private static final double CONSTANT = -0.04;
+
+    @Inject(method = "updateVelocity", at = @At("TAIL"), cancellable = true)
+    public void updateVelocity(CallbackInfo ci) {
         if (BeyondEarth.CONFIG.world.doEntityGravity) {
-            return ModUtils.getMixinGravity(value, this);
-        } else {
-            return value;
+            Entity entity = (Entity) (Object) this;
+            if (!entity.hasNoGravity()) {
+                Vec3d velocity = entity.getVelocity();
+                double newGravity = ModUtils.getMixinGravity(CONSTANT, this);
+                entity.setVelocity(velocity.getX(), velocity.getY() - CONSTANT + newGravity, velocity.getZ());
+            }
         }
     }
 }

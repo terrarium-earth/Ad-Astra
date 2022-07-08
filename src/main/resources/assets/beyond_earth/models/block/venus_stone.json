@@ -1,6 +1,12 @@
 {
-  "parent": "block/cube_all",
+  "parent": "block/cube",
   "textures": {
-    "all": "beyond_earth:blocks/venus_stone"
+    "down": "beyond_earth:blocks/venus_stone_top",
+    "up": "beyond_earth:blocks/venus_stone_top",
+    "north": "beyond_earth:blocks/venus_stone_side",
+    "east": "beyond_earth:blocks/venus_stone_side",
+    "south": "beyond_earth:blocks/venus_stone_side",
+    "west": "beyond_earth:blocks/venus_stone_side",
+    "particle": "beyond_earth:blocks/venus_stone_side"
   }
 }

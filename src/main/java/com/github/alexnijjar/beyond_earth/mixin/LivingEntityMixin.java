@@ -4,10 +4,7 @@ import java.util.Random;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyConstant;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -32,22 +29,6 @@ import net.minecraft.util.math.MathHelper;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
-
-    @ModifyConstant(method = "travel", constant = @Constant(doubleValue = 0.08))
-    public double setGravity(double value) {
-        if (BeyondEarth.CONFIG.world.doLivingEntityGravity) {
-            return ModUtils.getMixinGravity(value, this);
-        } else {
-            return value;
-        }
-    }
-
-    // Make fall damage gravity-dependant.
-    @ModifyVariable(method = "handleFallDamage", at = @At("HEAD"), ordinal = 1)
-    private float handleFallDamage(float damageMultiplier) {
-        LivingEntity entity = ((LivingEntity) (Object) this);
-        return damageMultiplier * ModUtils.getPlanetGravity(entity.world);
-    }
 
     @Inject(method = "handleFallDamage", at = @At("HEAD"), cancellable = true)
     public void handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource, CallbackInfoReturnable<Boolean> ci) {
