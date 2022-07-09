@@ -17,8 +17,33 @@
       "probability": 0.014
     }
   },
-  "spawners": {},
-  "spawn_costs": {},
+  "creature_spawn_probability": 0.2,
+  "spawners": {
+    "monster": [
+      {
+        "type": "beyond_earth:mogler",
+        "weight": 100,
+        "minCount": 1,
+        "maxCount": 3
+      },
+      {
+        "type": "beyond_earth:sulfur_creeper",
+        "weight": 100,
+        "minCount": 1,
+        "maxCount": 3
+      }
+    ]
+  },
+  "spawn_costs": {
+    "beyond_earth:mogler": {
+      "energy_budget": 0.015,
+      "charge": 0.2
+    },
+    "beyond_earth:sulfur_creeper": {
+      "energy_budget": 0.02,
+      "charge": 0.2
+    }
+  },
   "carvers": {
     "air": [
       "minecraft:cave",

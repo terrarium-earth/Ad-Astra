@@ -2,6 +2,7 @@ package com.github.alexnijjar.beyond_earth.entities.mobs;
 
 import javax.annotation.Nullable;
 
+import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.registry.ModEntityTypes;
 
 import net.minecraft.block.BlockState;
@@ -48,6 +49,10 @@ public class MoglerEntity extends HoglinEntity {
 
     @Override
     public boolean canSpawn(WorldAccess world, SpawnReason spawnReason) {
+        if (!BeyondEarth.CONFIG.world.spawnMoglers) {
+            return false;
+        }
+
         BlockState blockState = world.getBlockState(new BlockPos(this.getX(), this.getY() - 1, this.getZ()));
 
         if (blockState.isOf(Blocks.LAVA) || blockState.isOf(Blocks.AIR)) {

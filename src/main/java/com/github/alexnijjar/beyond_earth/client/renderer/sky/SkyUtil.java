@@ -6,7 +6,6 @@ import com.github.alexnijjar.beyond_earth.client.resource_pack.SkyRenderer;
 import com.github.alexnijjar.beyond_earth.client.resource_pack.SkyRenderer.StarsRenderer;
 import com.github.alexnijjar.beyond_earth.mixin.client.WorldRendererAccessor;
 import com.github.alexnijjar.beyond_earth.util.ColourHolder;
-import com.github.alexnijjar.beyond_earth.util.ModUtils;
 import com.github.alexnijjar.beyond_earth.world.WorldSeed;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -74,17 +73,6 @@ public class SkyUtil {
         float h = (float) vec3d.getZ();
 
         RenderSystem.setShaderColor(0.0f, 0.0f, 0.0f, 1.0f);
-        MinecraftClient client = MinecraftClient.getInstance();
-
-        if (ModUtils.isOrbitWorld(client.player.world)) {
-            double cameraPos = client.player.getCameraPosVec(tickDelta).getY() - world.getLevelProperties().getSkyDarknessHeight(world);
-            if (cameraPos < 0.0) {
-                matrices.push();
-                matrices.translate(0.0, 12.0, 0.0);
-                ((WorldRendererAccessor) context.worldRenderer()).getDarkSkyBuffer().setShader(context.matrixStack().peek().getPositionMatrix(), context.projectionMatrix(), RenderSystem.getShader());
-                matrices.pop();
-            }
-        }
 
         if (world.getDimensionEffects().isAlternateSkyColor()) {
             RenderSystem.setShaderColor(f * 0.2f + 0.04f, g * 0.2f + 0.04f, h * 0.6f + 0.1f, 1.0f);
@@ -140,7 +128,7 @@ public class SkyUtil {
         bufferBuilder.vertex(positionMatrix, -scale, (float) 100.0, -scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).texture(0.0f, 0.0f).next();
         bufferBuilder.vertex(positionMatrix, scale, (float) 100.0, -scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).texture(1.0f, 0.0f).next();
         bufferBuilder.vertex(positionMatrix, scale, (float) 100.0, scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).texture(1.0f, 1.0f).next();
-        bufferBuilder.vertex(positionMatrix, -scale, (float) 100.0, scale).color((int) colour.r(), (int) colour.g(), (int)colour.b(), 255).texture(0.0f, 1.0f).next();
+        bufferBuilder.vertex(positionMatrix, -scale, (float) 100.0, scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).texture(0.0f, 1.0f).next();
         bufferBuilder.end();
         BufferRenderer.draw(bufferBuilder);
 

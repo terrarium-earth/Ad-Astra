@@ -4,6 +4,7 @@
   "package": "com.github.alexnijjar.beyond_earth.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "BlockMixin",
     "ChunkGeneratorAccessor",
     "EntityInvoker",
     "EntityMixin",

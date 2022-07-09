@@ -87,7 +87,7 @@ public abstract class LivingEntityMixin {
 
                     if (affectedByRain && !isCreative) {
                         entity.damage(ModDamageSource.ACID_RAIN, 2);
-                        if (entity.world.random.nextBoolean() && entity.world.random.nextBoolean()) {
+                        if (entity.world.random.nextBoolean() && entity.world.random.nextBoolean() && entity.world.random.nextBoolean()) {
                             entity.setOnFireFor(1);
                         }
                     }

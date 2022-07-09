@@ -13,10 +13,13 @@ import com.github.alexnijjar.beyond_earth.registry.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.CactusBlock;
 import net.minecraft.block.CampfireBlock;
 import net.minecraft.block.CandleBlock;
 import net.minecraft.block.CandleCakeBlock;
+import net.minecraft.block.FarmlandBlock;
 import net.minecraft.block.FireBlock;
+import net.minecraft.block.PlantBlock;
 import net.minecraft.block.TorchBlock;
 import net.minecraft.block.WallTorchBlock;
 import net.minecraft.server.world.ServerWorld;
@@ -101,7 +104,7 @@ public class OxygenUtils {
             }
 
             if (block instanceof CandleBlock) {
-               world.setBlockState(pos, block.getDefaultState().with(CandleBlock.CANDLES, state.get(CandleBlock.CANDLES)).with(CandleBlock.LIT, false));
+                world.setBlockState(pos, block.getDefaultState().with(CandleBlock.CANDLES, state.get(CandleBlock.CANDLES)).with(CandleBlock.LIT, false));
                 continue;
             }
 
@@ -112,6 +115,16 @@ public class OxygenUtils {
 
             if (block instanceof CampfireBlock) {
                 world.setBlockState(pos, state.with(CampfireBlock.LIT, false).with(CampfireBlock.FACING, state.get(CampfireBlock.FACING)));
+                continue;
+            }
+
+            if (block instanceof PlantBlock || block instanceof CactusBlock) {
+                world.removeBlock(pos, true);
+                continue;
+            }
+
+            if (block instanceof FarmlandBlock) {
+                world.setBlockState(pos, state.with(FarmlandBlock.MOISTURE, 0));
                 continue;
             }
 
