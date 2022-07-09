@@ -57,7 +57,7 @@ public class ModOres {
                 register("mars_ice_shard_ore", ModBlocks.MARS_ICE_SHARD_ORE, MARS_MATCH, MARS_TAG, 10, 8, -32, 32);
                 register("mars_conglomerate", ModBlocks.CONGLOMERATE, MARS_MATCH, MARS_TAG, 40, 10, -32, 100);
                 register("mars_iron_ore", ModBlocks.MARS_IRON_ORE, MARS_MATCH, MARS_TAG, 11, 10, -24, 56);
-                register("mars_diamond_ore", ModBlocks.MARS_DIAMOND_ORE, MARS_MATCH, MARS_TAG, 7, 7, -80, 80);
+                register("mars_diamond_ore", ModBlocks.MARS_DIAMOND_ORE, MARS_MATCH, MARS_TAG, 5, 5, -80, 80);
                 register("mars_ostrum_ore", ModBlocks.MARS_OSTRUM_ORE, MARS_MATCH, MARS_TAG, 8, 6, -80, 80);
 
                 // Mercury
@@ -66,7 +66,7 @@ public class ModOres {
                 // Venus
                 register("venus_coal_ore", ModBlocks.VENUS_COAL_ORE, VENUS_MATCH, VENUS_TAG, 17, 20, -80, 192);
                 register("venus_gold_ore", ModBlocks.VENUS_GOLD_ORE, VENUS_MATCH, VENUS_TAG, 10, 4, -64, 32);
-                register("venus_diamond_ore", ModBlocks.VENUS_DIAMOND_ORE, VENUS_MATCH, VENUS_TAG, 9, 5, -80, 80);
+                register("venus_diamond_ore", ModBlocks.VENUS_DIAMOND_ORE, VENUS_MATCH, VENUS_TAG, 5, 5, -80, 80);
                 register("venus_calorite_ore", ModBlocks.VENUS_CALORITE_ORE, VENUS_MATCH, VENUS_TAG, 8, 6, -80, 80);
 
                 // Glacio

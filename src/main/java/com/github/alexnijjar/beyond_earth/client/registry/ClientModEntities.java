@@ -7,6 +7,7 @@ import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.MartianRap
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.MoglerEntityRenderer;
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.PygroEntityRenderer;
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.StarCrawlerEntityRenderer;
+import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.SulfurCreeperEntityRenderer;
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.ZombifiedMoglerEntityRenderer;
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.models.AlienEntityModel;
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.models.AlienZombieEntityModel;
@@ -14,6 +15,7 @@ import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.models.Mar
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.models.MoglerEntityModel;
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.models.PygroEntityModel;
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.models.StarCrawlerEntityModel;
+import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.models.SulfurCreeperEntityModel;
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.vehicles.lander.LanderEntityModel;
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.vehicles.lander.LanderEntityRenderer;
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.vehicles.rockets.tier_1.RocketEntityModelTier1;
@@ -48,6 +50,7 @@ public class ClientModEntities {
         EntityRendererRegistry.register(ModEntityTypes.PYGRO_BRUTE, PygroEntityRenderer::new);
         EntityRendererRegistry.register(ModEntityTypes.MOGLER, MoglerEntityRenderer::new);
         EntityRendererRegistry.register(ModEntityTypes.ZOMBIFIED_MOGLER, ZombifiedMoglerEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.SULFUR_CREEPER, SulfurCreeperEntityRenderer::new);
         EntityRendererRegistry.register(ModEntityTypes.ALIEN_WANDERING_TRADER, AlienWanderingTraderEntityRenderer::new);
 
         // Machines.
@@ -68,6 +71,7 @@ public class ClientModEntities {
         EntityModelLayerRegistry.registerModelLayer(MartianRaptorEntityModel.LAYER_LOCATION, MartianRaptorEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(PygroEntityModel.LAYER_LOCATION, PygroEntityModel::getModelData);
         EntityModelLayerRegistry.registerModelLayer(MoglerEntityModel.LAYER_LOCATION, MoglerEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(SulfurCreeperEntityModel.LAYER_LOCATION, SulfurCreeperEntityModel::getTexturedModelData);
 
         // Machine Layers.
         EntityModelLayerRegistry.registerModelLayer(RocketEntityModelTier1.LAYER_LOCATION, RocketEntityModelTier1::getTexturedModelData);

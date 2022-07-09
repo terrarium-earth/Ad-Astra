@@ -8,7 +8,7 @@
     },
     "sunset_color": "mars",
     "dimension_effects": {
-        "type": "foggy"
+        "type": "simple"
     },
     "cloud_effects": "none",
     "weather_effects": "none",
