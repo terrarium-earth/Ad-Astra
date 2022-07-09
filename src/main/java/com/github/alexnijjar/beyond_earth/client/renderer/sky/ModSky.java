@@ -95,7 +95,7 @@ public class ModSky implements DimensionRenderingRegistry.SkyRenderer {
         this.shouldRenderWhileRaining = value;
     }
 
-    // Custom pink sunset and sunrise
+    // Custom blue sunset and sunrise
     public static float[] getMarsColour(float skyAngle) {
         float[] colours = new float[4];
 
@@ -104,9 +104,9 @@ public class ModSky implements DimensionRenderingRegistry.SkyRenderer {
             float c = (cosine + 0.0f) / 0.4f * 0.5f + 0.5f;
             float sine = 1.0f - (1.0f - MathHelper.sin(c * (float) Math.PI)) * 0.99f;
             sine *= sine;
-            colours[0] = c * 0.3f + 0.7f;
-            colours[1] = c * c * 0.6f + 0.4f;
-            colours[2] = c * c * 0.0f + 0.4f;
+            colours[0] = c * 0.3f;
+            colours[1] = c * c * 0.6f + 0.55f;
+            colours[2] = c * c * 0.0f + 0.8f;
             colours[3] = sine;
             return colours;
         } else {

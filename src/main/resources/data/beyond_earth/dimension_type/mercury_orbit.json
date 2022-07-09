@@ -1,9 +1,9 @@
 {
   "ultrawarm": true,
-  "natural": false,
+  "natural": true,
   "piglin_safe": false,
   "respawn_anchor_works": false,
-  "bed_works": false,
+  "bed_works": true,
   "has_raids": false,
   "has_skylight": true,
   "has_ceiling": false,

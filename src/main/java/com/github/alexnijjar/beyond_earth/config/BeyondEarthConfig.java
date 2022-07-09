@@ -48,6 +48,8 @@ public class BeyondEarthConfig implements ConfigData {
         public boolean spawnAlienZombies = true;
         public boolean spawnStarCrawlers = true;
         public boolean spawnMartianRaptors = true;
+        public boolean spawnMoglers = true;
+        public boolean spawnSulfurCreepers = true;
         @ConfigEntry.Gui.Tooltip(count = 1)
         public boolean doEntityGravity = true;
         @ConfigEntry.Gui.Tooltip(count = 1)
@@ -129,7 +131,7 @@ public class BeyondEarthConfig implements ConfigData {
 
     public static class FuelRefineryConfig {
         public long maxEnergy = 9000L;
-        public long energyPerTick = 10L;
+        public long energyPerTick = 30L;
         public int tankBuckets = 3;
     }
 

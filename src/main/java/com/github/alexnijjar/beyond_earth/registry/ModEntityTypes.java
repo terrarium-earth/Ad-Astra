@@ -9,6 +9,7 @@ import com.github.alexnijjar.beyond_earth.entities.mobs.MoglerEntity;
 import com.github.alexnijjar.beyond_earth.entities.mobs.PygroBruteEntity;
 import com.github.alexnijjar.beyond_earth.entities.mobs.PygroEntity;
 import com.github.alexnijjar.beyond_earth.entities.mobs.StarCrawlerEntity;
+import com.github.alexnijjar.beyond_earth.entities.mobs.SulfurCreeperEntity;
 import com.github.alexnijjar.beyond_earth.entities.mobs.ZombifiedMoglerEntity;
 import com.github.alexnijjar.beyond_earth.entities.projectiles.IceSpitEntity;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.LanderEntity;
@@ -45,6 +46,8 @@ public class ModEntityTypes {
                         FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ZombifiedMoglerEntity::new).dimensions(EntityDimensions.fixed(1.4f, 1.4f)).build());
         public static final EntityType<AlienWanderingTraderEntity> ALIEN_WANDERING_TRADER = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("alien_wandering_trader"),
                         FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, AlienWanderingTraderEntity::new).dimensions(EntityDimensions.fixed(0.6f, 1.95f)).build());
+                        public static final EntityType<SulfurCreeperEntity> SULFUR_CREEPER = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("sulfur_creeper"),
+                        FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, SulfurCreeperEntity::new).dimensions(EntityDimensions.fixed(0.6f, 1.7f)).trackRangeChunks(8).build());
 
         // Machines
         public static final EntityType<RocketEntityTier1> ROCKET_TIER_1 = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("tier_1_rocket"),
@@ -79,5 +82,6 @@ public class ModEntityTypes {
                 FabricDefaultAttributeRegistry.register(MOGLER, MoglerEntity.createMobAttributes());
                 FabricDefaultAttributeRegistry.register(ZOMBIFIED_MOGLER, ZombifiedMoglerEntity.createMobAttributes());
                 FabricDefaultAttributeRegistry.register(ALIEN_WANDERING_TRADER, AlienEntity.createMobAttributes());
+                FabricDefaultAttributeRegistry.register(SULFUR_CREEPER, SulfurCreeperEntity.createMobAttributes());
         }
 }
