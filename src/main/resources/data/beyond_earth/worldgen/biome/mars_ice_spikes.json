@@ -4,8 +4,8 @@
   "precipitation": "snow",
   "category": "icy",
   "effects": {
-    "sky_color": -3044526,
-    "fog_color": -3044526,
+    "sky_color": 15117444,
+    "fog_color": 15117444,
     "water_color": 4159204,
     "water_fog_color": 329011,
     "grass_color": 9551193,
@@ -28,9 +28,6 @@
   },
   "features": [
     [
-      "minecraft:large_dripstone",
-      "minecraft:dripstone_cluster",
-      "minecraft:pointed_dripstone",
       "minecraft:fossil_upper",
       "minecraft:fossil_lower",
       "minecraft:lush_caves_ceiling_vegetation",
@@ -41,6 +38,11 @@
       "minecraft:ice_spike",
       "minecraft:ice_patch",
       "minecraft:freeze_top_layer"
+    ],
+    [
+      "minecraft:large_dripstone",
+      "minecraft:dripstone_cluster",
+      "minecraft:pointed_dripstone"
     ]
   ]
 }

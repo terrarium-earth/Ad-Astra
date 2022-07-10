@@ -4,7 +4,7 @@
       "model": "beyond_earth:block/venus_sandstone_brick_slab"
     },
     "type=double": {
-      "model": "beyond_earth:block/venus_sandstone_bricks"
+      "model": "minecraft:block/air"
     },
     "type=top": {
       "model": "beyond_earth:block/venus_sandstone_brick_slab_top"

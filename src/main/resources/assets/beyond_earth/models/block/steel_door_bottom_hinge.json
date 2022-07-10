@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_rh",
+  "textures": {
+    "top": "beyond_earth:block/steel_door_top",
+    "bottom": "beyond_earth:block/steel_door_bottom"
+  }
+}

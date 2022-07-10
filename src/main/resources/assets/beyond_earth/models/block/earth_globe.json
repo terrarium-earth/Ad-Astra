@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "beyond_earth:blocks/globes/earth_globe"
+    "all": "beyond_earth:block/globes/earth_globe"
   }
 }

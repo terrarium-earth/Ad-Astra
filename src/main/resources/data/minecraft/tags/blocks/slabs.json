@@ -16,6 +16,11 @@
 		"beyond_earth:chiseled_mercury_stone_slab",
 		"beyond_earth:polished_mercury_stone_slab",
 		"beyond_earth:chiseled_glacio_stone_slab",
-		"beyond_earth:polished_glacio_stone_slab"
+		"beyond_earth:polished_glacio_stone_slab",
+		"beyond_earth:iron_plating_slab",
+		"beyond_earth:steel_plating_slab",
+		"beyond_earth:desh_plating_slab",
+		"beyond_earth:ostrum_plating_slab",
+		"beyond_earth:calorite_plating_slab"
 	]
 }

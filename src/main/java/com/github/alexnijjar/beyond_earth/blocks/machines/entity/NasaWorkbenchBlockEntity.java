@@ -74,8 +74,8 @@ public class NasaWorkbenchBlockEntity extends AbstractMachineBlockEntity {
 
     public void spawnOutputAndClearInput(List<Integer> stackCounts, ItemStack output) {
         BlockPos pos = this.getPos();
-        ItemEntity itemEntity = new ItemEntity(world, pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, output.copy());
-        itemEntity.setVelocity(itemEntity.getVelocity().multiply(1.5));
+        ItemEntity itemEntity = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 2.5, pos.getZ() + 0.5, output.copy());
+        itemEntity.setVelocity(itemEntity.getVelocity().multiply(0.5));
         this.world.spawnEntity(itemEntity);
         itemEntity.setToDefaultPickupDelay();
 

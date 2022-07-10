@@ -16,6 +16,11 @@
     "beyond_earth:chiseled_mercury_stone_stairs",
     "beyond_earth:polished_mercury_stone_stairs",
     "beyond_earth:chiseled_glacio_stone_stairs",
-    "beyond_earth:polished_glacio_stone_stairs"
+    "beyond_earth:polished_glacio_stone_stairs",
+    "beyond_earth:iron_plating_stairs",
+    "beyond_earth:steel_plating_stairs",    
+    "beyond_earth:desh_plating_stairs",
+    "beyond_earth:ostrum_plating_stairs",
+    "beyond_earth:calorite_plating_stairs"
   ]
 }

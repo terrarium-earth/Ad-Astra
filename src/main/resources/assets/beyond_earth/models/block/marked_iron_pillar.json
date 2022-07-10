@@ -1,12 +1,7 @@
 {
-  "parent": "block/cube",
+  "parent": "minecraft:block/cube_column",
   "textures": {
-    "down": "beyond_earth:blocks/marked_iron_pillar_bottom",
-    "up": "beyond_earth:blocks/marked_iron_pillar_bottom",
-    "north": "beyond_earth:blocks/marked_iron_pillar_side",
-    "east": "beyond_earth:blocks/marked_iron_pillar_side",
-    "south": "beyond_earth:blocks/marked_iron_pillar_side",
-    "west": "beyond_earth:blocks/marked_iron_pillar_side",
-    "particle": "beyond_earth:blocks/marked_iron_pillar_bottom"
+    "end": "beyond_earth:block/marked_iron_pillar_top",
+    "side": "beyond_earth:block/marked_iron_pillar"
   }
 }

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "beyond_earth:block/calorite_plating_slab"
+    },
+    "type=double": {
+      "model": "beyond_earth:block/calorite_plating"
+    },
+    "type=top": {
+      "model": "beyond_earth:block/calorite_plating_slab_top"
+    }
+  }
+}

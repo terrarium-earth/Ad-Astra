@@ -10,7 +10,7 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 
 @Config(name = "beyond_earth")
-@Config.Gui.Background("beyond_earth:textures/blocks/machine_down.png")
+@Config.Gui.Background("beyond_earth:textures/block/machine_down.png")
 public class BeyondEarthConfig implements ConfigData {
 
     @ConfigEntry.Gui.CollapsibleObject

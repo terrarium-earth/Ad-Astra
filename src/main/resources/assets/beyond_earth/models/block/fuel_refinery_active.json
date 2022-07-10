@@ -1,12 +1,12 @@
 {
   "parent": "block/cube",
   "textures": {
-    "down": "beyond_earth:blocks/steel_machine_back",
-    "up": "beyond_earth:blocks/steel_machine_back",
-    "north": "beyond_earth:blocks/fuel_refinery_front_active",
-    "east": "beyond_earth:blocks/steel_machine_side",
-    "south": "beyond_earth:blocks/steel_machine_side",
-    "west": "beyond_earth:blocks/steel_machine_side",
-    "particle": "beyond_earth:blocks/steel_machine_back"
+    "down": "beyond_earth:block/steel_machine_back",
+    "up": "beyond_earth:block/steel_machine_back",
+    "north": "beyond_earth:block/fuel_refinery_front_active",
+    "east": "beyond_earth:block/steel_machine_side",
+    "south": "beyond_earth:block/steel_machine_side",
+    "west": "beyond_earth:block/steel_machine_side",
+    "particle": "beyond_earth:block/steel_machine_back"
   }
 }

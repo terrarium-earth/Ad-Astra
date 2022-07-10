@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "button",
+  "ingredients": [
+    {
+      "item": "beyond_earth:iron_plating"
+    }
+  ],
+  "result": {
+    "item": "beyond_earth:iron_plating_button"
+  }
+}

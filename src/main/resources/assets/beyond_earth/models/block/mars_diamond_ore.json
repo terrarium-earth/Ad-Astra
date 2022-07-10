@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "beyond_earth:blocks/mars_ore_diamond"
+    "all": "beyond_earth:block/mars_ore_diamond"
   }
 }
