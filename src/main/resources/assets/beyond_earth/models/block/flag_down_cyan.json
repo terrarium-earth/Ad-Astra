@@ -1,9 +1,9 @@
 {
   "parent": "beyond_earth:custom/flag_down",
   "textures": {
-    "all": "beyond_earth:blocks/flag_cyan",
-    "particle": "beyond_earth:blocks/flag_cyan",
-    "0": "beyond_earth:blocks/flag_cyan",
-    "missing": "beyond_earth:blocks/flag_cyan"
+    "all": "beyond_earth:block/flag_cyan",
+    "particle": "beyond_earth:block/flag_cyan",
+    "0": "beyond_earth:block/flag_cyan",
+    "missing": "beyond_earth:block/flag_cyan"
   }
 }

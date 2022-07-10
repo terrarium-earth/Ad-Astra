@@ -1,9 +1,9 @@
 {
   "parent": "beyond_earth:custom/flag",
   "textures": {
-    "all": "beyond_earth:blocks/flag_light_blue",
-    "particle": "beyond_earth:blocks/flag_light_blue",
-    "0": "beyond_earth:blocks/flag_light_blue",
-    "missing": "beyond_earth:blocks/flag_light_blue"
+    "all": "beyond_earth:block/flag_light_blue",
+    "particle": "beyond_earth:block/flag_light_blue",
+    "0": "beyond_earth:block/flag_light_blue",
+    "missing": "beyond_earth:block/flag_light_blue"
   }
 }

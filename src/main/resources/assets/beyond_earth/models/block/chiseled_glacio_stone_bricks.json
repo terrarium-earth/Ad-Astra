@@ -1,6 +1,6 @@
 {
-  "parent": "block/cube_all",
+  "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "beyond_earth:blocks/chiseled_glacio_stone_bricks"
+    "all": "beyond_earth:block/chiseled_glacio_stone_bricks"
   }
 }

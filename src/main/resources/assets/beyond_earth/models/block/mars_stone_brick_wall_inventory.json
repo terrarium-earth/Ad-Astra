@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "beyond_earth:block/mars_stone_bricks"
+  }
+}

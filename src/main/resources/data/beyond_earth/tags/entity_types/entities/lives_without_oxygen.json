@@ -17,7 +17,6 @@
     "minecraft:stray",
     "minecraft:armor_stand",
     "minecraft:iron_golem",
-    "minecraft:snow_golem",
-    "minecraft:warden"
+    "minecraft:snow_golem"
   ]
 }

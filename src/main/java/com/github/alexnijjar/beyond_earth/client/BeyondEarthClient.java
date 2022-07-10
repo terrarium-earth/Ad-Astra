@@ -115,29 +115,29 @@ public class BeyondEarthClient implements ClientModInitializer {
 
                 // Fluids
                 FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.FUEL_STILL, ModFluids.FLOWING_FUEL,
-                                new SimpleFluidRenderHandler(new ModIdentifier("blocks/fluid_fuel_still"), new ModIdentifier("blocks/fluid_fuel_flow"), new ModIdentifier("blocks/fuel_overlay")));
+                                new SimpleFluidRenderHandler(new ModIdentifier("block/fluid_fuel_still"), new ModIdentifier("block/fluid_fuel_flow"), new ModIdentifier("block/fuel_overlay")));
                 FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.CRYO_FUEL_STILL, ModFluids.FLOWING_CRYO_FUEL,
-                                new SimpleFluidRenderHandler(new ModIdentifier("blocks/fluid_cryo_fuel_still"), new ModIdentifier("blocks/fluid_cryo_fuel_flow"), new ModIdentifier("blocks/cryo_fuel_overlay")));
+                                new SimpleFluidRenderHandler(new ModIdentifier("block/fluid_cryo_fuel_still"), new ModIdentifier("block/fluid_cryo_fuel_flow"), new ModIdentifier("block/cryo_fuel_overlay")));
                 FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.OIL_STILL, ModFluids.FLOWING_OIL,
-                                new SimpleFluidRenderHandler(new ModIdentifier("blocks/fluid_oil_still"), new ModIdentifier("blocks/fluid_oil_flow"), new ModIdentifier("blocks/oil_overlay")));
+                                new SimpleFluidRenderHandler(new ModIdentifier("block/fluid_oil_still"), new ModIdentifier("block/fluid_oil_flow"), new ModIdentifier("block/oil_overlay")));
                 FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.OXYGEN_STILL,
-                                new SimpleFluidRenderHandler(new ModIdentifier("blocks/fluid_oxygen_still"), new ModIdentifier("blocks/fluid_oxygen_still"), new ModIdentifier("blocks/fluid_oxygen_still")));
+                                new SimpleFluidRenderHandler(new ModIdentifier("block/fluid_oxygen_still"), new ModIdentifier("block/fluid_oxygen_still"), new ModIdentifier("block/fluid_oxygen_still")));
 
                 // Fluid textures
                 ClientSpriteRegistryCallback.event(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE).register((atlasTexture, registry) -> {
-                        registry.register(new ModIdentifier("blocks/fluid_fuel_still"));
-                        registry.register(new ModIdentifier("blocks/fluid_fuel_flow"));
-                        registry.register(new ModIdentifier("blocks/fuel_overlay"));
+                        registry.register(new ModIdentifier("block/fluid_fuel_still"));
+                        registry.register(new ModIdentifier("block/fluid_fuel_flow"));
+                        registry.register(new ModIdentifier("block/fuel_overlay"));
 
-                        registry.register(new ModIdentifier("blocks/fluid_cryo_fuel_still"));
-                        registry.register(new ModIdentifier("blocks/fluid_cryo_fuel_flow"));
-                        registry.register(new ModIdentifier("blocks/cryo_fuel_overlay"));
+                        registry.register(new ModIdentifier("block/fluid_cryo_fuel_still"));
+                        registry.register(new ModIdentifier("block/fluid_cryo_fuel_flow"));
+                        registry.register(new ModIdentifier("block/cryo_fuel_overlay"));
 
-                        registry.register(new ModIdentifier("blocks/fluid_oil_still"));
-                        registry.register(new ModIdentifier("blocks/fluid_oil_flow"));
-                        registry.register(new ModIdentifier("blocks/oil_overlay"));
+                        registry.register(new ModIdentifier("block/fluid_oil_still"));
+                        registry.register(new ModIdentifier("block/fluid_oil_flow"));
+                        registry.register(new ModIdentifier("block/oil_overlay"));
 
-                        registry.register(new ModIdentifier("blocks/fluid_oxygen_still"));
+                        registry.register(new ModIdentifier("block/fluid_oxygen_still"));
                 });
 
                 BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.FUEL_STILL, ModFluids.FLOWING_FUEL);
@@ -145,7 +145,7 @@ public class BeyondEarthClient implements ClientModInitializer {
                 BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.OIL_STILL, ModFluids.FLOWING_OIL);
                 BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.OXYGEN_STILL);
 
-                BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), ModBlocks.WATER_PUMP, ModBlocks.ENERGIZER);
+                BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), ModBlocks.WATER_PUMP, ModBlocks.ENERGIZER, ModBlocks.STEEL_DOOR);
                 BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(), ModBlocks.COAL_LANTERN);
                 BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), ModBlocks.NASA_WORKBENCH);
         }

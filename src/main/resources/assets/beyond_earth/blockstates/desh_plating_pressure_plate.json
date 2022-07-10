@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "beyond_earth:block/desh_plating_pressure_plate"
+    },
+    "powered=true": {
+      "model": "beyond_earth:block/desh_plating_pressure_plate_down"
+    }
+  }
+}

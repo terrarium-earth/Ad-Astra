@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "beyond_earth:blocks/raw_desh_block"
+    "all": "beyond_earth:block/raw_desh_block"
   }
 }

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/button",
+  "textures": {
+    "texture": "beyond_earth:block/calorite_plating"
+  }
+}

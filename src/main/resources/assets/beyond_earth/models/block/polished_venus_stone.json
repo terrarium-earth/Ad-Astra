@@ -1,6 +1,6 @@
 {
-  "parent": "block/cube_all",
+  "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "beyond_earth:blocks/polished_venus_stone"
+    "all": "beyond_earth:block/polished_venus_stone"
   }
 }

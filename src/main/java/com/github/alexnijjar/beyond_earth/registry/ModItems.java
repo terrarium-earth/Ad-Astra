@@ -144,8 +144,8 @@ public interface ModItems {
 
                 stacks.set(45, ModItems.OIL_BUCKET.getDefaultStack());
                 stacks.set(46, ModItems.FUEL_BUCKET.getDefaultStack());
-                stacks.set(47, ModItems.OXYGEN_BUCKET.getDefaultStack());
-                stacks.set(48, ModItems.CRYO_FUEL_BUCKET.getDefaultStack());
+                stacks.set(47, ModItems.CRYO_FUEL_BUCKET.getDefaultStack());
+                stacks.set(48, ModItems.OXYGEN_BUCKET.getDefaultStack());
 
         }).build();
 
@@ -318,17 +318,43 @@ public interface ModItems {
         public static final BlockItem RAW_CALORITE_BLOCK = registerBlockItem(ModBlocks.RAW_CALORITE_BLOCK);
 
         public static final BlockItem IRON_PLATING = registerBlockItem(ModBlocks.IRON_PLATING);
+        public static final BlockItem IRON_PLATING_STAIRS = registerBlockItem(ModBlocks.IRON_PLATING_STAIRS);
+        public static final BlockItem IRON_PLATING_SLAB = registerBlockItem(ModBlocks.IRON_PLATING_SLAB);
         public static final BlockItem IRON_PILLAR = registerBlockItem(ModBlocks.IRON_PILLAR);
+        public static final BlockItem IRON_PLATING_BUTTON = registerBlockItem(ModBlocks.IRON_PLATING_BUTTON);
+        public static final BlockItem IRON_PLATING_PRESSURE_PLATE = registerBlockItem(ModBlocks.IRON_PLATING_PRESSURE_PLATE);
         public static final BlockItem MARKED_IRON_PILLAR = registerBlockItem(ModBlocks.MARKED_IRON_PILLAR);
         public static final BlockItem BLUE_IRON_PILLAR = registerBlockItem(ModBlocks.BLUE_IRON_PILLAR);
+
         public static final BlockItem STEEL_PLATING = registerBlockItem(ModBlocks.STEEL_PLATING);
+        public static final BlockItem STEEL_PLATING_STAIRS = registerBlockItem(ModBlocks.STEEL_PLATING_STAIRS);
+        public static final BlockItem STEEL_PLATING_SLAB = registerBlockItem(ModBlocks.STEEL_PLATING_SLAB);
         public static final BlockItem STEEL_PILLAR = registerBlockItem(ModBlocks.STEEL_PILLAR);
+        public static final BlockItem STEEL_PLATING_BUTTON = registerBlockItem(ModBlocks.STEEL_PLATING_BUTTON);
+        public static final BlockItem STEEL_PLATING_PRESSURE_PLATE = registerBlockItem(ModBlocks.STEEL_PLATING_PRESSURE_PLATE);
+        public static final BlockItem STEEL_DOOR = registerBlockItem(ModBlocks.STEEL_DOOR);
+
         public static final BlockItem DESH_PLATING = registerBlockItem(ModBlocks.DESH_PLATING);
+        public static final BlockItem DESH_PLATING_STAIRS = registerBlockItem(ModBlocks.DESH_PLATING_STAIRS);
+        public static final BlockItem DESH_PLATING_SLAB = registerBlockItem(ModBlocks.DESH_PLATING_SLAB);
         public static final BlockItem DESH_PILLAR = registerBlockItem(ModBlocks.DESH_PILLAR);
+        public static final BlockItem DESH_PLATING_BUTTON = registerBlockItem(ModBlocks.DESH_PLATING_BUTTON);
+        public static final BlockItem DESH_PLATING_PRESSURE_PLATE = registerBlockItem(ModBlocks.DESH_PLATING_PRESSURE_PLATE);
+
         public static final BlockItem OSTRUM_PLATING = registerBlockItem(ModBlocks.OSTRUM_PLATING);
+        public static final BlockItem OSTRUM_PLATING_STAIRS = registerBlockItem(ModBlocks.OSTRUM_PLATING_STAIRS);
+        public static final BlockItem OSTRUM_PLATING_SLAB = registerBlockItem(ModBlocks.OSTRUM_PLATING_SLAB);
         public static final BlockItem OSTRUM_PILLAR = registerBlockItem(ModBlocks.OSTRUM_PILLAR);
+        public static final BlockItem OSTRUM_PLATING_BUTTON = registerBlockItem(ModBlocks.OSTRUM_PLATING_BUTTON);
+        public static final BlockItem OSTRUM_PLATING_PRESSURE_PLATE = registerBlockItem(ModBlocks.OSTRUM_PLATING_PRESSURE_PLATE);
+
         public static final BlockItem CALORITE_PLATING = registerBlockItem(ModBlocks.CALORITE_PLATING);
+        public static final BlockItem CALORITE_PLATING_STAIRS = registerBlockItem(ModBlocks.CALORITE_PLATING_STAIRS);
+        public static final BlockItem CALORITE_PLATING_SLAB = registerBlockItem(ModBlocks.CALORITE_PLATING_SLAB);
         public static final BlockItem CALORITE_PILLAR = registerBlockItem(ModBlocks.CALORITE_PILLAR);
+        public static final BlockItem CALORITE_PLATING_BUTTON = registerBlockItem(ModBlocks.CALORITE_PLATING_BUTTON);
+        public static final BlockItem CALORITE_PLATING_PRESSURE_PLATE = registerBlockItem(ModBlocks.CALORITE_PLATING_PRESSURE_PLATE);
+
 
         public static final BlockItem INFERNAL_SPIRE_BLOCK = registerBlockItem(ModBlocks.INFERNAL_SPIRE_BLOCK);
         public static final BlockItem SKY_STONE = registerBlockItem(ModBlocks.SKY_STONE);
@@ -347,6 +373,7 @@ public interface ModItems {
         public static final BlockItem POLISHED_MOON_STONE_STAIRS = registerBlockItem(ModBlocks.POLISHED_MOON_STONE_STAIRS);
         public static final BlockItem POLISHED_MOON_STONE_SLAB = registerBlockItem(ModBlocks.POLISHED_MOON_STONE_SLAB);
         public static final BlockItem MOON_PILLAR = registerBlockItem(ModBlocks.MOON_PILLAR);
+        public static final BlockItem MOON_STONE_BRICK_WALL = registerBlockItem(ModBlocks.MOON_STONE_BRICK_WALL);
 
         public static final BlockItem MARS_SAND = registerBlockItem(ModBlocks.MARS_SAND);
         public static final BlockItem MARS_STONE = registerBlockItem(ModBlocks.MARS_STONE);
@@ -364,6 +391,7 @@ public interface ModItems {
         public static final BlockItem POLISHED_MARS_STONE_STAIRS = registerBlockItem(ModBlocks.POLISHED_MARS_STONE_STAIRS);
         public static final BlockItem POLISHED_MARS_STONE_SLAB = registerBlockItem(ModBlocks.POLISHED_MARS_STONE_SLAB);
         public static final BlockItem MARS_PILLAR = registerBlockItem(ModBlocks.MARS_PILLAR);
+        public static final BlockItem MARS_STONE_BRICK_WALL = registerBlockItem(ModBlocks.MARS_STONE_BRICK_WALL);
 
         public static final BlockItem MERCURY_STONE = registerBlockItem(ModBlocks.MERCURY_STONE);
         public static final BlockItem MERCURY_COBBLESTONE = registerBlockItem(ModBlocks.MERCURY_COBBLESTONE);
@@ -378,6 +406,7 @@ public interface ModItems {
         public static final BlockItem POLISHED_MERCURY_STONE_STAIRS = registerBlockItem(ModBlocks.POLISHED_MERCURY_STONE_STAIRS);
         public static final BlockItem POLISHED_MERCURY_STONE_SLAB = registerBlockItem(ModBlocks.POLISHED_MERCURY_STONE_SLAB);
         public static final BlockItem MERCURY_PILLAR = registerBlockItem(ModBlocks.MERCURY_PILLAR);
+        public static final BlockItem MERCURY_STONE_BRICK_WALL = registerBlockItem(ModBlocks.MERCURY_STONE_BRICK_WALL);
 
         public static final BlockItem VENUS_SANDSTONE = registerBlockItem(ModBlocks.VENUS_SANDSTONE);
         public static final BlockItem VENUS_SANDSTONE_BRICKS = registerBlockItem(ModBlocks.VENUS_SANDSTONE_BRICKS);
@@ -399,6 +428,7 @@ public interface ModItems {
         public static final BlockItem POLISHED_VENUS_STONE_STAIRS = registerBlockItem(ModBlocks.POLISHED_VENUS_STONE_STAIRS);
         public static final BlockItem POLISHED_VENUS_STONE_SLAB = registerBlockItem(ModBlocks.POLISHED_VENUS_STONE_SLAB);
         public static final BlockItem VENUS_PILLAR = registerBlockItem(ModBlocks.VENUS_PILLAR);
+        public static final BlockItem VENUS_STONE_BRICK_WALL = registerBlockItem(ModBlocks.VENUS_STONE_BRICK_WALL);
 
         public static final BlockItem PERMAFROST = registerBlockItem(ModBlocks.PERMAFROST);
         public static final BlockItem PERMAFROST_BRICKS = registerBlockItem(ModBlocks.PERMAFROST_BRICKS);
@@ -416,6 +446,7 @@ public interface ModItems {
         public static final BlockItem POLISHED_GLACIO_STONE_STAIRS = registerBlockItem(ModBlocks.POLISHED_GLACIO_STONE_STAIRS);
         public static final BlockItem POLISHED_GLACIO_STONE_SLAB = registerBlockItem(ModBlocks.POLISHED_GLACIO_STONE_SLAB);
         public static final BlockItem GLACIO_PILLAR = registerBlockItem(ModBlocks.GLACIO_PILLAR);
+        public static final BlockItem GLACIO_STONE_BRICK_WALL = registerBlockItem(ModBlocks.GLACIO_STONE_BRICK_WALL);
 
         public static final BlockItem MOON_CHEESE_ORE = registerBlockItem(ModBlocks.MOON_CHEESE_ORE);
         public static final BlockItem MOON_DESH_ORE = registerBlockItem(ModBlocks.MOON_DESH_ORE);

@@ -6,8 +6,8 @@
 		32
 	],
 	"textures": {
-		"0": "beyond_earth:blocks/launch_pad",
-		"particle": "beyond_earth:blocks/launch_pad"
+		"0": "beyond_earth:block/launch_pad",
+		"particle": "beyond_earth:block/launch_pad"
 	},
 	"elements": [
 		{

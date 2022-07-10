@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "beyond_earth:blocks/cracked_mercury_stone_bricks"
+    "all": "beyond_earth:block/cracked_mercury_stone_bricks"
   }
 }

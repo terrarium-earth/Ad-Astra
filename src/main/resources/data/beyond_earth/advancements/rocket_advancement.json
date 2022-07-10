@@ -1,6 +1,6 @@
 {
   "display": {
-    "background": "beyond_earth:textures/blocks/iron_plating.png",
+    "background": "beyond_earth:textures/block/iron_plating.png",
     "icon": {
       "item": "beyond_earth:tier_1_rocket"
     },

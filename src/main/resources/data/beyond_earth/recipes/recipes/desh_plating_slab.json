@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "beyond_earth:desh_plating"
+    }
+  },
+  "result": {
+    "item": "beyond_earth:desh_plating_slab",
+    "count": 6
+  }
+}

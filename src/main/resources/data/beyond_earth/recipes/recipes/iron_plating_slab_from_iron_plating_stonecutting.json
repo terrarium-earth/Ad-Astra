@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "beyond_earth:iron_plating"
+  },
+  "result": "beyond_earth:iron_plating_slab",
+  "count": 2
+}

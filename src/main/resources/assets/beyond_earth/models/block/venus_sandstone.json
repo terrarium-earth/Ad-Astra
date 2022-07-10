@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "beyond_earth:blocks/venus_sandstone"
+    "all": "beyond_earth:block/venus_sandstone"
   }
 }

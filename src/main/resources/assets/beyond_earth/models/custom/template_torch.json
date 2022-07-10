@@ -3,8 +3,8 @@
 	"parent": "template_torch",
 	"ambientocclusion": false,
 	"textures": {
-		"2": "beyond_earth:blocks/coal_torch",
-		"particle": "beyond_earth:blocks/coal_torch"
+		"2": "beyond_earth:block/coal_torch",
+		"particle": "beyond_earth:block/coal_torch"
 	},
 	"elements": [
 		{
