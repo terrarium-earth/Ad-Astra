@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "beyond_earth:items/engine_steel"
+    "layer0": "beyond_earth:item/engine_steel"
   }
 }

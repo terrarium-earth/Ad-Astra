@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "beyond_earth:items/item_iron_stick"
+    "layer0": "beyond_earth:item/item_iron_stick"
   }
 }

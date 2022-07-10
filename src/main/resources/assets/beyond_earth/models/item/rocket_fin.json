@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "beyond_earth:items/item_fin"
+    "layer0": "beyond_earth:item/item_fin"
   }
 }

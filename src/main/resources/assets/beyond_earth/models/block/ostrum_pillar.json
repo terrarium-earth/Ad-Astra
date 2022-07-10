@@ -1,12 +1,7 @@
 {
-  "parent": "block/cube",
+  "parent": "minecraft:block/cube_column",
   "textures": {
-    "down": "beyond_earth:blocks/ostrum_pillar_top",
-    "up": "beyond_earth:blocks/ostrum_pillar_top",
-    "north": "beyond_earth:blocks/ostrum_pillar",
-    "east": "beyond_earth:blocks/ostrum_pillar",
-    "south": "beyond_earth:blocks/ostrum_pillar",
-    "west": "beyond_earth:blocks/ostrum_pillar",
-    "particle": "beyond_earth:blocks/ostrum_pillar_top"
+    "end": "beyond_earth:block/ostrum_pillar_top",
+    "side": "beyond_earth:block/ostrum_pillar"
   }
 }

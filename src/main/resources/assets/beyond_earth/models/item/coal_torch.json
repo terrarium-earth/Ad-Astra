@@ -1,6 +1,6 @@
 {
-  "parent": "item/generated",
+  "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "beyond_earth:items/coal_torch"
+    "layer0": "beyond_earth:block/coal_torch"
   }
 }

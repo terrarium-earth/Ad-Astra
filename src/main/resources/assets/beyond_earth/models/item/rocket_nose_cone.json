@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "beyond_earth:items/rocket_nose_cone"
+    "layer0": "beyond_earth:item/rocket_nose_cone"
   }
 }

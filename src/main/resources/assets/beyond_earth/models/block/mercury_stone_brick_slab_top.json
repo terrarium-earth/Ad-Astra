@@ -1,8 +1,8 @@
 {
-  "parent": "block/slab_top",
+  "parent": "minecraft:block/slab_top",
   "textures": {
-    "bottom": "beyond_earth:blocks/mercury_stone_bricks",
-    "top": "beyond_earth:blocks/mercury_stone_bricks",
-    "side": "beyond_earth:blocks/mercury_stone_bricks"
+    "bottom": "beyond_earth:block/mercury_stone_bricks",
+    "top": "beyond_earth:block/mercury_stone_bricks",
+    "side": "beyond_earth:block/mercury_stone_bricks"
   }
 }

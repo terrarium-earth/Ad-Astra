@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "beyond_earth:blocks/glacio_iron_ore"
+    "all": "beyond_earth:block/glacio_iron_ore"
   }
 }

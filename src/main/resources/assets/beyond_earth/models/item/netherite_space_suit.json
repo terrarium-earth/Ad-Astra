@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "beyond_earth:items/netherite_space_suit"
+    "layer0": "beyond_earth:item/netherite_space_suit"
   }
 }

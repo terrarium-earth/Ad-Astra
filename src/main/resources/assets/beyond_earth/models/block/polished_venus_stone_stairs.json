@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/stairs",
   "textures": {
-    "bottom": "beyond_earth:blocks/polished_venus_stone",
-    "top": "beyond_earth:blocks/polished_venus_stone",
-    "side": "beyond_earth:blocks/polished_venus_stone"
+    "bottom": "beyond_earth:block/polished_venus_stone",
+    "top": "beyond_earth:block/polished_venus_stone",
+    "side": "beyond_earth:block/polished_venus_stone"
   }
 }

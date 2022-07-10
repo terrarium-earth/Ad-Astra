@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "beyond_earth:items/space_suit"
+    "layer0": "beyond_earth:item/space_suit"
   }
 }

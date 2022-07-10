@@ -57,6 +57,10 @@ public class PlayerOverlayScreen {
         int screenY = client.getWindow().getScaledHeight();
         ClientPlayerEntity player = client.player;
 
+        if (player.isSpectator()) {
+            return;
+        }
+
         // Oxygen.
         if (shouldRenderOxygen && !client.options.debugEnabled) {
 

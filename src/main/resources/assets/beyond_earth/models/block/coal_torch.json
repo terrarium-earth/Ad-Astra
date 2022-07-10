@@ -1,9 +1,6 @@
 {
-  "parent": "beyond_earth:custom/template_torch",
+  "parent": "minecraft:block/template_torch",
   "textures": {
-    "all": "beyond_earth:blocks/coal_torch",
-    "particle": "beyond_earth:blocks/coal_torch",
-    "2": "beyond_earth:blocks/coal_torch",
-    "missing": "beyond_earth:blocks/coal_torch"
+    "torch": "beyond_earth:block/coal_torch"
   }
 }

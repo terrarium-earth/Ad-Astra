@@ -22,6 +22,7 @@ class ModBlockLootTableProvider extends FabricBlockLootTableProvider implements 
 		}
 
 		this.addDrop(WALL_COAL_TORCH, ModItems.COAL_TORCH);
+		this.addDrop(STEEL_DOOR, BlockLootTableGenerator::addDoorDrop);
 
 		this.addDrop(MOON_STONE, block -> BlockLootTableGenerator.drops(block, MOON_COBBLESTONE));
 		this.addDrop(MARS_STONE, block -> BlockLootTableGenerator.drops(block, MARS_COBBLESTONE));

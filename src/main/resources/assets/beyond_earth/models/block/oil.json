@@ -1,5 +1,5 @@
 {
   "textures": {
-    "particle": "beyond_earth:blocks/fluid_oil_still"
+    "particle": "beyond_earth:block/fluid_oil_still"
   }
 }

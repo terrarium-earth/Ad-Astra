@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "beyond_earth:blocks/mercury_cobblestone"
+    "all": "beyond_earth:block/mercury_cobblestone"
   }
 }

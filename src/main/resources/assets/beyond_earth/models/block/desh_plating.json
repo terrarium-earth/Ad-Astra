@@ -1,6 +1,6 @@
 {
-  "parent": "block/cube_all",
+  "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "beyond_earth:blocks/desh_plating"
+    "all": "beyond_earth:block/desh_plating"
   }
 }
