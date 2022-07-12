@@ -8,7 +8,10 @@ import com.github.alexnijjar.beyond_earth.util.FluidUtils;
 
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.item.PlayerInventoryStorage;
+import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
+import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
 import net.fabricmc.fabric.impl.transfer.context.PlayerContainerItemContext;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
@@ -54,16 +57,12 @@ public class OxygenTankItem extends Item implements FluidContainingItem {
             if (chest.isOf(ModItems.SPACE_SUIT) || chest.isOf(ModItems.NETHERITE_SPACE_SUIT) || chest.isOf(ModItems.JET_SUIT)) {
 
                 PlayerInventoryStorage playerWrapper = PlayerInventoryStorage.of(user);
-                ContainerItemContext from = ContainerItemContext.withInitial(tank);
-                PlayerContainerItemContext to = new PlayerContainerItemContext(user, playerWrapper.getSlot(38));
+                Storage<FluidVariant> from = ContainerItemContext.ofPlayerHand(user, hand).find(FluidStorage.ITEM);
+                Storage<FluidVariant> to = new PlayerContainerItemContext(user, playerWrapper.getSlot(38)).find(FluidStorage.ITEM);
 
-                if (from != null && to != null) {
-                    long amountExtracted;
-                    if ((amountExtracted = this.transferFluid(from.find(FluidStorage.ITEM), to.find(FluidStorage.ITEM))) > 0) {
-                        this.setAmount(tank, this.getAmount(tank) - amountExtracted);
-                        world.playSound(null, user.getBlockPos(), SoundEvents.ENTITY_GENERIC_DRINK, SoundCategory.PLAYERS, 1, 1);
-                        return TypedActionResult.consume(tank);
-                    }
+                if (StorageUtil.move(from, to, f -> true, Long.MAX_VALUE, null) > 0) {
+                    world.playSound(null, user.getBlockPos(), SoundEvents.ENTITY_GENERIC_DRINK, SoundCategory.PLAYERS, 1, 1);
+                    return TypedActionResult.consume(tank);
                 }
             }
         }

@@ -54,6 +54,9 @@ public class SolarPanelBlockEntity extends AbstractMachineBlockEntity {
             // Check solar panel conditions.
             if (world.isDay() && (!this.world.getRegistryKey().equals(World.OVERWORLD) || !this.world.isRaining() && !this.world.isThundering()) && world.isSkyVisible(this.getPos().up())) {
                 this.cumulateEnergy();
+                this.setActive(true);
+            } else {
+                this.setActive(false);
             }
 
             this.energyOut();

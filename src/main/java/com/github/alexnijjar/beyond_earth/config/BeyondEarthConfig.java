@@ -103,7 +103,7 @@ public class BeyondEarthConfig implements ConfigData {
 
         public static class RoverConfig {
             public boolean explodeRoverInLava = true;
-            public long fuelPerTick = FluidConstants.BUCKET / 2500;
+            public long fuelPerTick = FluidConstants.BUCKET / 3000;
             public float forwardSpeed = 0.2f;
             public float backwardSpeed = 0.15f;
             public float turnSpeed = 15.0f;
@@ -168,7 +168,7 @@ public class BeyondEarthConfig implements ConfigData {
 
     public static class WaterPumpConfig {
         public long maxEnergy = 9000L;
-        public long energyPerTick = 15L;
+        public long energyPerTick = 10L;
         public int tankBuckets = 6;
         public long transferPerTick = FluidConstants.BLOCK / 100;
         public boolean deleteWaterBelowWaterPump = true;
