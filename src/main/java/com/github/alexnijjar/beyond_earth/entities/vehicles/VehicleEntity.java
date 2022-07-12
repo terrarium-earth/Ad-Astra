@@ -358,7 +358,6 @@ public abstract class VehicleEntity extends Entity {
         if (this.getInventorySize() > 1) {
             if (!this.world.isClient) {
                 FluidUtils.insertFluidIntoTank(this.getInventory(), this.inputTank, 0, 1, f -> f.getFluid().isIn(ModTags.FUELS));
-
             }
         }
     }

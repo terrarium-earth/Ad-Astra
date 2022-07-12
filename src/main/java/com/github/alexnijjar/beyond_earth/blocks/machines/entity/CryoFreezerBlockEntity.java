@@ -157,7 +157,7 @@ public class CryoFreezerBlockEntity extends FluidMachineBlockEntity {
             ItemStack outputExtractSlot = this.getStack(2);
 
             if (!outputInsertSlot.isEmpty() && outputExtractSlot.getCount() < outputExtractSlot.getMaxCount()) {
-                FluidUtils.extractFluidFromTank(this, 1, 2);
+                FluidUtils.extractFluidFromTank(this, this.outputTank, 1, 2);
             }
 
             if (this.hasEnergy()) {

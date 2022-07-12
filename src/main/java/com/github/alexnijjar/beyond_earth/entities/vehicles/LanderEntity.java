@@ -6,7 +6,6 @@ import com.github.alexnijjar.beyond_earth.util.ModKeyBindings;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MovementType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
@@ -86,7 +85,7 @@ public class LanderEntity extends VehicleEntity {
 
     public void applyBoosters() {
         if (this.getVelocity().getY() < 0.0) {
-            this.setVelocity(this.getVelocity().add(0.0, BeyondEarth.CONFIG.lander.boosterSpeed, 0.0));
+            this.setVelocity(this.getVelocity().add(0.0, 0.1, 0.0));
 
             if (this.getVelocity().getY() > BeyondEarth.CONFIG.lander.boosterThreshold) {
                 this.setVelocity(0.0, BeyondEarth.CONFIG.lander.boosterThreshold, 0.0);
@@ -97,8 +96,6 @@ public class LanderEntity extends VehicleEntity {
                 Vec3d pos = this.getPos();
                 ModUtils.spawnForcedParticles(serverWorld, ParticleTypes.SPIT, pos.getX(), pos.getY() - 0.3, pos.getZ(), 3, 0.1, 0.1, 0.1, 0.001);
             }
-
-            this.move(MovementType.SELF, this.getVelocity());
         }
     }
 }

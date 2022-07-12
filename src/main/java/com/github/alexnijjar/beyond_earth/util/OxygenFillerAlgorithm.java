@@ -18,15 +18,10 @@ public class OxygenFillerAlgorithm {
 
     private World world;
     private int maxBlockChecks;
-    private boolean oxygenLeak;
 
     public OxygenFillerAlgorithm(World world, int maxBlockChecks) {
         this.world = world;
         this.maxBlockChecks = maxBlockChecks;
-    }
-
-    public boolean oxygenLeakDetected() {
-        return this.oxygenLeak;
     }
 
     public Set<BlockPos> runAlgorithm(BlockPos start) {
@@ -40,7 +35,6 @@ public class OxygenFillerAlgorithm {
             // Cancel if the the amount of oxygen exceeds the limit. This is the case if there was an oxygen leak or the room was too
             // large to support the oxygen.
             if (positions.size() >= this.maxBlockChecks) {
-                oxygenLeak = true;
                 break;
             }
 
@@ -48,7 +42,6 @@ public class OxygenFillerAlgorithm {
 
             // Don't have oxygen above the world height limit.
             if (pos.getY() > this.world.getHeight()) {
-                oxygenLeak = true;
                 break;
             }
 

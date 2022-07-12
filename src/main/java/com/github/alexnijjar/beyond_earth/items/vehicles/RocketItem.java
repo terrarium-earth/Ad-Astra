@@ -93,7 +93,9 @@ public class RocketItem<T extends RocketEntity> extends VehicleItem {
 
                             NbtCompound nbt = rocketStack.getOrCreateNbt();
                             if (nbt.contains("Fluid")) {
-                                this.insertIntoTank(rocketEntity.inputTank, rocketStack);
+                                if (!this.getFluid(rocketStack).isBlank()) {
+                                    this.insertIntoTank(rocketEntity.inputTank, rocketStack);
+                                }
                             }
                             if (nbt.contains("Inventory")) {
                                 rocketEntity.getInventory().readNbtList(nbt.getList("Inventory", NbtElement.COMPOUND_TYPE));

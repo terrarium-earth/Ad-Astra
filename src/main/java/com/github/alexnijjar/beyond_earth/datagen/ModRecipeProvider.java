@@ -319,16 +319,16 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 				.criterion(hasItem(ModItems.STEEL_INGOT), conditionsFromTag(ModTags.STEEL_INGOTS)).offerTo(exporter);
 
 		// Netherite
-		ShapedRecipeJsonBuilder.create(ModItems.NETHERITE_SPACE_HELMET).input(Character.valueOf('#'), ModTags.COMPRESSED_OSTRUM).input(Character.valueOf('N'), Items.NETHERITE_INGOT).input(Character.valueOf('G'), Blocks.ORANGE_STAINED_GLASS_PANE)
+		ShapedRecipeJsonBuilder.create(ModItems.NETHERITE_SPACE_HELMET).input(Character.valueOf('#'), ModTags.COMPRESSED_OSTRUM).input(Character.valueOf('N'), Items.NETHERITE_HELMET).input(Character.valueOf('G'), Blocks.ORANGE_STAINED_GLASS_PANE)
 				.pattern("#N#").pattern("#G#").group(null).criterion(hasItem(ModItems.COMPRESSED_OSTRUM), conditionsFromTag(ModTags.COMPRESSED_OSTRUM)).offerTo(exporter);
 
-		ShapedRecipeJsonBuilder.create(ModItems.NETHERITE_SPACE_SUIT).input(Character.valueOf('#'), ModTags.COMPRESSED_OSTRUM).input(Character.valueOf('N'), Items.NETHERITE_INGOT).input(Character.valueOf('O'), ModItems.OXYGEN_GEAR)
+		ShapedRecipeJsonBuilder.create(ModItems.NETHERITE_SPACE_SUIT).input(Character.valueOf('#'), ModTags.COMPRESSED_OSTRUM).input(Character.valueOf('N'), Items.NETHERITE_CHESTPLATE).input(Character.valueOf('O'), ModItems.OXYGEN_GEAR)
 				.input(Character.valueOf('T'), ModItems.OXYGEN_TANK).pattern("# #").pattern("TOT").pattern("#N#").group(null).criterion(hasItem(ModItems.COMPRESSED_OSTRUM), conditionsFromTag(ModTags.COMPRESSED_OSTRUM)).offerTo(exporter);
 
-		ShapedRecipeJsonBuilder.create(ModItems.NETHERITE_SPACE_PANTS).input(Character.valueOf('#'), ModTags.COMPRESSED_OSTRUM).input(Character.valueOf('N'), Items.NETHERITE_INGOT).input(Character.valueOf('D'), ModItems.COMPRESSED_DESH).pattern("#N#")
+		ShapedRecipeJsonBuilder.create(ModItems.NETHERITE_SPACE_PANTS).input(Character.valueOf('#'), ModTags.COMPRESSED_OSTRUM).input(Character.valueOf('N'), Items.NETHERITE_LEGGINGS).input(Character.valueOf('D'), ModItems.COMPRESSED_DESH).pattern("#N#")
 				.pattern("D D").pattern("# #").group(null).criterion(hasItem(ModItems.COMPRESSED_OSTRUM), conditionsFromTag(ModTags.COMPRESSED_OSTRUM)).offerTo(exporter);
 
-		ShapedRecipeJsonBuilder.create(ModItems.NETHERITE_SPACE_BOOTS).input(Character.valueOf('#'), ModTags.COMPRESSED_OSTRUM).input(Character.valueOf('N'), Items.NETHERITE_INGOT).input(Character.valueOf('D'), ModItems.COMPRESSED_DESH).pattern(" N ")
+		ShapedRecipeJsonBuilder.create(ModItems.NETHERITE_SPACE_BOOTS).input(Character.valueOf('#'), ModTags.COMPRESSED_OSTRUM).input(Character.valueOf('N'), Items.NETHERITE_BOOTS).input(Character.valueOf('D'), ModItems.COMPRESSED_DESH).pattern(" N ")
 				.pattern("D D").pattern("# #").group(null).criterion(hasItem(ModItems.COMPRESSED_OSTRUM), conditionsFromTag(ModTags.COMPRESSED_OSTRUM)).offerTo(exporter);
 
 		// Jet Suit
