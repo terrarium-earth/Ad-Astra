@@ -27,7 +27,6 @@ public class ClientOxygenUtils {
 
     // Contains every pos in all dimensions with oxygen.
     private static Map<Pair<RegistryKey<World>, BlockPos>, Set<BlockPos>> oxygenLocations = new HashMap<>();
-    public static boolean oxygenLeak;
 
     static {
         ClientTickEvents.START_CLIENT_TICK.register(client -> {

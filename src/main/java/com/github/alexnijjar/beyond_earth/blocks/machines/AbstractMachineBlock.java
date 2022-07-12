@@ -44,10 +44,10 @@ public abstract class AbstractMachineBlock extends BlockWithEntity {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
         return (entityWorld, pos, entityState, blockEntity) -> {
-			if (blockEntity instanceof AbstractMachineBlockEntity machine) {
-				machine.tick();
-			}
-		};
+            if (blockEntity instanceof AbstractMachineBlockEntity machine) {
+                machine.tick();
+            }
+        };
     }
 
     protected BlockState buildDefaultState() {
@@ -96,10 +96,14 @@ public abstract class AbstractMachineBlock extends BlockWithEntity {
             return state;
         }
     }
-    
+
     private static ToIntFunction<BlockState> getLuminance() {
-		return (blockState) -> blockState.contains(LIT) ? (blockState.get(LIT) ? 12 : 0) : 0;
-	}
+        return (blockState) -> blockState.contains(LIT) ? (blockState.get(LIT) ? ((AbstractMachineBlock) blockState.getBlock()).getBrightness() : 0) : 0;
+    }
+
+    public int getBrightness() {
+        return 12;
+    }
 
     @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {

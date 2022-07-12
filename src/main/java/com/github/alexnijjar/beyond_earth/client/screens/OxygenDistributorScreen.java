@@ -3,6 +3,8 @@ package com.github.alexnijjar.beyond_earth.client.screens;
 import java.awt.Rectangle;
 import java.util.Arrays;
 
+import com.github.alexnijjar.beyond_earth.BeyondEarth;
+import com.github.alexnijjar.beyond_earth.blocks.machines.AbstractMachineBlock;
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.FluidMachineBlockEntity;
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.OxygenDistributorBlockEntity;
 import com.github.alexnijjar.beyond_earth.client.screens.utils.ButtonSize;
@@ -68,8 +70,13 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
         visibleButton.setMessage(ClientOxygenUtils.renderOxygenParticles ? HIDE_TEXT : SHOW_TEXT);
 
         // Render a warning sign if there is an oxygen leak detected.
-        if (ClientOxygenUtils.oxygenLeak) {
+        int oxygenBlocksCount = ClientOxygenUtils.getOxygenBlocksCount(this.blockEntity.getWorld(), this.blockEntity.getPos());
+        boolean oxygenLeak = oxygenBlocksCount >= BeyondEarth.CONFIG.oxygenDistributor.maxBlockChecks;
+        if (oxygenLeak) {
             ScreenUtils.addTexture(matrices, this.width / 2 - 85, this.height / 2 - 100, 14, 15, WARNING_SIGN);
+        }
+        if (oxygenBlocksCount <= 0 && entity.getCachedState().get(AbstractMachineBlock.LIT)) {
+            ScreenUtils.addTexture(matrices, this.width / 2 - 67, this.height / 2 - 100, 14, 15, WARNING_SIGN);
         }
     }
 
@@ -92,12 +99,20 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
             this.renderTooltip(matrices, new TranslatableText("gauge_text.beyond_earth.liquid_storage", FluidUtils.dropletsToMillibuckets(entity.outputTank.getAmount()), FluidUtils.dropletsToMillibuckets(entity.outputTank.getCapacity())), mouseX, mouseY);
         }
 
-        if (ClientOxygenUtils.oxygenLeak) {
-            if (GuiUtil.isHovering(getWarningSignBounds(), mouseX, mouseY)) {
+        int oxygenBlocksCount = ClientOxygenUtils.getOxygenBlocksCount(this.blockEntity.getWorld(), this.blockEntity.getPos());
+        boolean oxygenLeak = ClientOxygenUtils.getOxygenBlocksCount(this.blockEntity.getWorld(), this.blockEntity.getPos()) >= BeyondEarth.CONFIG.oxygenDistributor.maxBlockChecks;
+        if (oxygenLeak) {
+            if (GuiUtil.isHovering(getOxygenLeakWarningSignBounds(), mouseX, mouseY)) {
                 this.renderTooltip(
                         matrices, Arrays.asList(new TranslatableText("gauge_text.beyond_earth.oxygen_leak_warning[0]"), new TranslatableText("gauge_text.beyond_earth.oxygen_leak_warning[1]"),
                                 new TranslatableText("gauge_text.beyond_earth.oxygen_leak_warning[2]"), new TranslatableText("gauge_text.beyond_earth.oxygen_leak_warning[3]"), new TranslatableText("gauge_text.beyond_earth.oxygen_leak_warning[4]")),
                         mouseX, mouseY);
+            }
+        }
+
+        if (oxygenBlocksCount <= 0 && entity.getCachedState().get(AbstractMachineBlock.LIT)) {
+            if (GuiUtil.isHovering(getBlockedWarningSignBounds(), mouseX, mouseY)) {
+                this.renderTooltip(matrices, Arrays.asList(new TranslatableText("gauge_text.beyond_earth.blocked_warning[0]"), new TranslatableText("gauge_text.beyond_earth.blocked_warning[1]")), mouseX, mouseY);
             }
         }
     }
@@ -130,8 +145,12 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
         return GuiUtil.getFluidTankBounds(this.x + OUTPUT_TANK_LEFT, this.y + OUTPUT_TANK_TOP);
     }
 
-    public Rectangle getWarningSignBounds() {
+    public Rectangle getOxygenLeakWarningSignBounds() {
         return new Rectangle(this.width / 2 - 85, this.height / 2 - 100, 14, 15);
+    }
+
+    public Rectangle getBlockedWarningSignBounds() {
+        return new Rectangle(this.width / 2 - 67, this.height / 2 - 100, 14, 15);
     }
 
     public Rectangle getEnergyBounds() {

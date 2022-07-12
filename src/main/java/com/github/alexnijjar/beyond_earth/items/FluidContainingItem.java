@@ -87,8 +87,22 @@ public interface FluidContainingItem {
 
 		@Override
 		protected ItemVariant getUpdatedVariant(ItemVariant currentVariant, FluidVariant newResource, long newAmount) {
-			ItemStack stack = currentVariant.toStack();
-			if (!newResource.isBlank() && newAmount > 0) {
+			ItemStack stack = new ItemStack(currentVariant.getItem());
+			NbtCompound nbt = currentVariant.copyNbt();
+
+			if (nbt != null && !nbt.isEmpty()) {
+				if (nbt.contains("Fluid")) {
+					nbt.remove("Fluid");
+				}
+				if (nbt.contains("Amount")) {
+					nbt.remove("Amount");
+				}
+				stack.setNbt(nbt);
+			}
+
+			if (!newResource.isBlank() && newAmount > 0)
+
+			{
 				item.setFluid(stack, newResource);
 				item.setAmount(stack, newAmount);
 			}

@@ -1,5 +1,6 @@
 package com.github.alexnijjar.beyond_earth.client.screens;
 
+import com.github.alexnijjar.beyond_earth.blocks.machines.AbstractMachineBlock;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.SolarPanelScreenHandler;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 
@@ -19,6 +20,7 @@ public class SolarPanelScreen extends AbstractMachineScreen<SolarPanelScreenHand
     public SolarPanelScreen(SolarPanelScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title, TEXTURE);
     }
+    
 
     @Override
     protected void drawForeground(MatrixStack matrices, int mouseX, int mouseY) {
@@ -28,9 +30,11 @@ public class SolarPanelScreen extends AbstractMachineScreen<SolarPanelScreenHand
         int first = this.titleY;
 
         if (this.blockEntity != null) {
-            this.textRenderer.draw(matrices, new TranslatableText("gauge_text.beyond_earth.stored", this.blockEntity.getEnergy()), first, 28, 0x3C3C3C);
-            this.textRenderer.draw(matrices, new TranslatableText("gauge_text.beyond_earth.capacity", this.blockEntity.getMaxGeneration()), first, 40, 0x3C3C3C);
-            this.textRenderer.draw(matrices, new TranslatableText("gauge_text.beyond_earth.max_generation", this.blockEntity.getEnergyPerTick()), first, 52, 0x3C3C3C);
+            int offset = 8;
+            this.textRenderer.draw(matrices, new TranslatableText("gauge_text.beyond_earth.state." + (this.blockEntity.getCachedState().get(AbstractMachineBlock.LIT) ? "on" : "off")), first, offset + 12, 0x3C3C3C);
+            this.textRenderer.draw(matrices, new TranslatableText("gauge_text.beyond_earth.stored", this.blockEntity.getEnergy()), first, offset + 12 * 2, 0x3C3C3C);
+            this.textRenderer.draw(matrices, new TranslatableText("gauge_text.beyond_earth.capacity", this.blockEntity.getMaxGeneration()), first, offset + 12 * 3, 0x3C3C3C);
+            this.textRenderer.draw(matrices, new TranslatableText("gauge_text.beyond_earth.max_generation", this.blockEntity.getEnergyPerTick()), first, offset + 12 * 4, 0x3C3C3C);
         }
     }
 }

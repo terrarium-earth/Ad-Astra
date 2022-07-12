@@ -110,7 +110,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 
             if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxCount()) {
                 ModRecipes.OXYGEN_CONVERSION_RECIPE.getRecipes(this.world);
-                FluidUtils.insertFluidIntoTank(this, 0, 1, f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.getRecipes(this.world).stream().anyMatch(r -> r.getFluidInput().equals(f.getFluid())));
+                FluidUtils.insertFluidIntoTank(this, this.inputTank, 0, 1, f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.getRecipes(this.world).stream().anyMatch(r -> r.getFluidInput().equals(f.getFluid())));
             }
 
             if (this.hasEnergy()) {
@@ -168,7 +168,6 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
                     if (this.outputTank.amount > amountOfFluidToExtract) {
                         if (this.getEnergy() > ((long) (positions.size() * ENERGY_USAGE_MULTIPLIER))) {
                             ClientOxygenUtils.setEntry(world, pos, positions);
-                            ClientOxygenUtils.oxygenLeak = floodFiller.oxygenLeakDetected();
                         } else {
                             ClientOxygenUtils.removeEntry(world, pos);
                         }

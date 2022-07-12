@@ -46,7 +46,9 @@ public class RoverItem extends VehicleItem {
             RoverEntity rover = new RoverEntity(ModEntityTypes.ROVER_TIER_1, world);
             NbtCompound nbt = roverStack.getOrCreateNbt();
             if (nbt.contains("Fluid")) {
-                this.insertIntoTank(rover.inputTank, roverStack);
+                if (!this.getFluid(roverStack).isBlank()) {
+                    this.insertIntoTank(rover.inputTank, roverStack);
+                }
             }
             if (nbt.contains("Inventory")) {
                 rover.getInventory().readNbtList(nbt.getList("Inventory", NbtElement.COMPOUND_TYPE));

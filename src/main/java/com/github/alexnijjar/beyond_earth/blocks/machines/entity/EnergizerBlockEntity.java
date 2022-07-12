@@ -46,7 +46,7 @@ public class EnergizerBlockEntity extends AbstractMachineBlockEntity {
 
     @Override
     public long getMaxEnergyInsert() {
-        return ENERGY_PER_TICK * 128;
+        return ENERGY_PER_TICK * 8;
     }
 
     @Override
