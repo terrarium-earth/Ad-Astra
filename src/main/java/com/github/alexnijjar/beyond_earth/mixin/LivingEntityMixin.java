@@ -44,6 +44,11 @@ public abstract class LivingEntityMixin {
         if (fallDistance <= 3 / ModUtils.getPlanetGravity(entity.world)) {
             ci.setReturnValue(false);
         }
+
+        // Reduce fall damage if wearing a jet suit
+        if (fallDistance <= 10 && ModUtils.hasFullJetSuitSet(entity)) {
+            ci.setReturnValue(false);
+        }
     }
 
     @Inject(method = "damage", at = @At("HEAD"), cancellable = true)

@@ -126,9 +126,7 @@ public class RoverEntityModel extends VehicleEntityModel<RoverEntity> {
 
     @Override
     public void setAngles(RoverEntity entity, float tickDelta, float limbDistance, float animationProgress, float headYaw, float headPitch) {
-        float newYaw = MathHelper.lerp(tickDelta, entity.prevRoverYaw, entity.getYaw());
-        this.frame.yaw = (float) Math.toRadians(newYaw);
-        this.frame.roll = 0.0f;
+        super.setAngles(entity, tickDelta, limbDistance, animationProgress, headYaw, headPitch);
         this.frame.pivotX = 0.0f;
         this.frame.pivotY = 7.5401f;
         this.frame.pivotZ = 0.0f;
@@ -141,7 +139,8 @@ public class RoverEntityModel extends VehicleEntityModel<RoverEntity> {
         wheels.getChild("Wheel3").pitch = wheelPitch;
         wheels.getChild("Wheel4").pitch = wheelPitch;
 
-        wheels.getChild("Wheel1").yaw = (float) Math.toRadians(entity.getTurnSpeed() * 5);
-        wheels.getChild("Wheel2").yaw = (float) Math.toRadians(entity.getTurnSpeed() * 5);
+        float speed = MathHelper.sign(entity.getSpeed());
+        wheels.getChild("Wheel1").yaw = (float) Math.toRadians(speed * entity.getTurnSpeed() * 5);
+        wheels.getChild("Wheel2").yaw = (float) Math.toRadians(speed * entity.getTurnSpeed() * 5);
     }
 }

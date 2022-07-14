@@ -165,22 +165,22 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                 case 1 -> {
                         ScreenUtils.addRotatingTexture(this, matrices, -125, -125, 250, 250, MILKY_WAY_TEXTURE, 0.6f);
                 }
-                // Render the Solar System when inside the Solar System category.
+                // Render the Solar System when inside the Solar System category
                 case 2, 3 -> {
 
                         if (solarSystem != null) {
 
-                                // Sun.
+                                // Sun
                                 ScreenUtils.addTexture(matrices, (this.width - 15) / 2, (this.height - 15) / 2, 15, 15, new ModIdentifier("textures/sky/gui/" + solarSystem.sunType().toString().toLowerCase() + ".png"));
 
-                                // Planets.
+                                // Planets
                                 for (int i = 0; i < solarSystem.planetaryRings().size(); i++) {
 
-                                        // Rings.
+                                        // Rings
                                         double radius = solarSystem.planetaryRings().get(i).getRight();
                                         ScreenUtils.drawCircle(this.width / 2, this.height / 2, radius * 24, 75);
 
-                                        int days = 1;
+                                        int days = 365;
                                         int coordinates = (int) (radius * 17 - 5);
                                         Identifier texture = solarSystem.planetaryRings().get(i).getLeft();
                                         for (Planet currentPlanet : BeyondEarthClient.planets) {
@@ -451,16 +451,16 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
         private int getPage() {
                 Category category = this.currentCategory;
                 if (category.parent() == null) {
-                        // Galaxy screen.
+                        // Galaxy screen
                         return 1;
                 } else if (category.parent().parent() == null) {
-                        // Solar system screen.
+                        // Solar system screen
                         return 2;
                 } else if (category.parent().parent().parent() == null) {
-                        // Planet screen.
+                        // Planet screen
                         return 3;
                 }
-                // Should never be called.
+                // Should never be called
                 BeyondEarth.LOGGER.warn("Invalid page!");
                 return 0;
         }
@@ -489,7 +489,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                 return this.ingredients;
         }
 
-        // Do not close.
+        // Do not close unless in creative mode
         @Override
         public void close() {
                 MinecraftClient client = MinecraftClient.getInstance();
@@ -498,6 +498,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                 }
         }
 
+        // Reset the buttons when the window size is changed
         @Override
         public void resize(MinecraftClient client, int width, int height) {
                 this.categoryButtons.clear();

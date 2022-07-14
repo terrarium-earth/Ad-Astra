@@ -1,6 +1,7 @@
 package com.github.alexnijjar.beyond_earth.blocks.machines.entity;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
+import com.github.alexnijjar.beyond_earth.blocks.machines.AbstractMachineBlock;
 import com.github.alexnijjar.beyond_earth.blocks.machines.EnergizerBlock;
 import com.github.alexnijjar.beyond_earth.registry.ModBlockEntities;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
@@ -58,18 +59,22 @@ public class EnergizerBlockEntity extends AbstractMachineBlockEntity {
     public void tick() {
         if (!this.world.isClient) {
 
-            ItemStack stack = this.getStack(0).copy();
-            if (!stack.isEmpty() && this.hasEnergy()) {
-                long moved = EnergyStorageUtil.move(this.getSideEnergyStorage(null), ContainerItemContext.ofSingleSlot(InventoryStorage.of(this, null).getSlots().get(0)).find(EnergyStorage.ITEM), this.getEnergyPerTick(), null);
-                if (moved > 0) {
-                    this.setActive(true);
-                    if (this.world instanceof ServerWorld serverWorld) {
-                        BlockPos pos = this.getPos();
-                        ModUtils.spawnForcedParticles(serverWorld, ParticleTypes.ELECTRIC_SPARK, pos.getX() + 0.5, pos.getY() + 1.8, pos.getZ() + 0.5, 2, 0.1, 0.1, 0.1, 0.1);
+            if (!this.getCachedState().get(AbstractMachineBlock.POWERED)) {
+                ItemStack stack = this.getStack(0);
+                this.setActive(true);
+                if (!stack.isEmpty()) {
+                    if (this.hasEnergy()) {
+                        long moved = EnergyStorageUtil.move(this.getSideEnergyStorage(null), ContainerItemContext.ofSingleSlot(InventoryStorage.of(this, null).getSlots().get(0)).find(EnergyStorage.ITEM), this.getEnergyPerTick(), null);
+                        if (moved > 0) {
+                            if (this.world instanceof ServerWorld serverWorld) {
+                                BlockPos pos = this.getPos();
+                                ModUtils.spawnForcedParticles(serverWorld, ParticleTypes.ELECTRIC_SPARK, pos.getX() + 0.5, pos.getY() + 1.8, pos.getZ() + 0.5, 2, 0.1, 0.1, 0.1, 0.1);
+                            }
+                        }
                     }
+                } else {
+                    this.setActive(false);
                 }
-            } else {
-                this.setActive(false);
             }
 
             float ratio = (float) this.getEnergy() / (float) this.getMaxGeneration();

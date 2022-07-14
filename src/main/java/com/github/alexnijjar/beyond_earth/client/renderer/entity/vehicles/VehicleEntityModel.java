@@ -21,7 +21,7 @@ public class VehicleEntityModel<T extends VehicleEntity> extends EntityModel<T> 
 
     @Override
     public void setAngles(T entity, float tickDelta, float limbDistance, float animationProgress, float headYaw, float headPitch) {
-        float newYaw = MathHelper.lerp(tickDelta, entity.prevYaw, entity.getYaw());
+        float newYaw = MathHelper.lerp(tickDelta, entity.previousYaw, entity.getYaw());
         this.frame.yaw = (float) Math.toRadians(newYaw);
         this.frame.roll = 0.0f;
     }

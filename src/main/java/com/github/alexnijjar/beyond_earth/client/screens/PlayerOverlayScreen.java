@@ -1,6 +1,7 @@
 package com.github.alexnijjar.beyond_earth.client.screens;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
+import com.github.alexnijjar.beyond_earth.client.screens.GuiUtil.FloatDrawableHelper;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -61,7 +62,7 @@ public class PlayerOverlayScreen {
             return;
         }
 
-        // Oxygen.
+        // Oxygen
         if (shouldRenderOxygen && !client.options.debugEnabled) {
 
             int x = 5;
@@ -84,7 +85,7 @@ public class PlayerOverlayScreen {
             }
         }
 
-        // Timer.
+        // Timer
         if (countdownSeconds > 0) {
 
             int x = screenX / 2 - 31;
@@ -94,9 +95,9 @@ public class PlayerOverlayScreen {
             DrawableHelper.drawTexture(matrices, x, y, 0, 0, 60, 38, 60, 38);
         }
 
-        // Planet bar.
+        // Planet bar
         if (shouldRenderBar && !client.options.debugEnabled) {
-            int rocketHeight = (int) (player.getY() / 5.3f);
+            float rocketHeight = (float)(player.getY() / 5.3);
             rocketHeight = MathHelper.clamp(rocketHeight, 0, 113);
 
             int x = 0;
@@ -120,16 +121,16 @@ public class PlayerOverlayScreen {
                 planet = ORBIT_PLANET_BAR_TEXTURE;
             }
 
-            // Draw planet.
+            // Draw planet
             RenderSystem.setShaderTexture(0, planet);
             DrawableHelper.drawTexture(matrices, x, y, 0, 0, 16, 128, 16, 128);
 
-            // Draw rocket.
+            // Draw rocket indicator
             RenderSystem.setShaderTexture(0, ROCKET_PLANET_BAR_TEXTURE);
-            DrawableHelper.drawTexture(matrices, 4, (screenY / 2) + (103 / 2) - rocketHeight, 0, 0, 8, 11, 8, 11);
+            FloatDrawableHelper.drawTexture(matrices, 4.0f, (screenY / 2) + (103 / 2) - rocketHeight, 0, 0, 8, 11, 8, 11);
         }
 
-        // Warning screen.
+        // Warning screen
         if (shouldRenderWarning) {
 
             matrices.push();

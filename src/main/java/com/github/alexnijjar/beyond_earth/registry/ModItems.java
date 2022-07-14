@@ -7,6 +7,7 @@ import java.util.Set;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.CoalGeneratorBlockEntity;
+import com.github.alexnijjar.beyond_earth.blocks.machines.entity.EnergizerBlockEntity;
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.SolarPanelBlockEntity;
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.WaterPumpBlockEntity;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier1;
@@ -149,7 +150,21 @@ public interface ModItems {
 
         }).build();
 
-        public static final ItemGroup ITEM_GROUP_MACHINES = FabricItemGroupBuilder.build(new ModIdentifier("tab_machines"), () -> new ItemStack(ModBlocks.NASA_WORKBENCH));
+        public static final ItemGroup ITEM_GROUP_MACHINES = FabricItemGroupBuilder.create(new ModIdentifier("tab_machines")).icon(() -> new ItemStack(ModItems.NASA_WORKBENCH)).appendItems(stacks -> {
+                stacks.add(ModItems.COAL_GENERATOR.getDefaultStack());
+                stacks.add(ModItems.COMPRESSOR.getDefaultStack());
+                stacks.add(ModItems.NASA_WORKBENCH.getDefaultStack());
+                stacks.add(ModItems.FUEL_REFINERY.getDefaultStack());
+                stacks.add(ModItems.OXYGEN_LOADER.getDefaultStack());
+                stacks.add(ModItems.SOLAR_PANEL.getDefaultStack());
+                stacks.add(ModItems.OXYGEN_DISTRIBUTOR.getDefaultStack());
+                stacks.add(ModItems.WATER_PUMP.getDefaultStack());
+                ItemStack energizer = ModItems.ENERGIZER.getDefaultStack();
+                energizer.getOrCreateNbt().putLong("energy", EnergizerBlockEntity.MAX_ENERGY);
+                stacks.add(ModItems.ENERGIZER.getDefaultStack());
+                stacks.add(energizer);
+                stacks.add(ModItems.CRYO_FREEZER.getDefaultStack());
+        }).build();
         public static final ItemGroup ITEM_GROUP_BASICS = FabricItemGroupBuilder.build(new ModIdentifier("tab_basics"), () -> new ItemStack(ModItems.DESH_ENGINE));
         public static final ItemGroup ITEM_GROUP_MATERIALS = FabricItemGroupBuilder.build(new ModIdentifier("tab_materials"), () -> new ItemStack(ModItems.IRON_PLATE));
         public static final ItemGroup ITEM_GROUP_FLAGS = FabricItemGroupBuilder.build(new ModIdentifier("tab_flags"), () -> new ItemStack(ModBlocks.FLAG_PURPLE));
@@ -212,13 +227,6 @@ public interface ModItems {
         public static final JetSuit JET_SUIT_BOOTS = register("jet_suit_boots", new JetSuit(ModArmour.JET_SUIT_ARMOUR_MATERIAL, EquipmentSlot.FEET, new FabricItemSettings().group(ITEM_GROUP_NORMAL).fireproof()));
 
         // Machines
-        public static final BlockItem NASA_WORKBENCH = registerBlockItem(ModBlocks.NASA_WORKBENCH, ITEM_GROUP_MACHINES);
-        public static final BlockItem SOLAR_PANEL = register("solar_panel", new SolarPanelBlockItem(ModBlocks.SOLAR_PANEL, new FabricItemSettings().group(ITEM_GROUP_MACHINES)) {
-                @Override
-                public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-                        tooltip.add((new TranslatableText("item.beyond_earth.generator.tooltip", SolarPanelBlockEntity.ENERGY_PER_TICK).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
-                }
-        });
         public static final BlockItem COAL_GENERATOR = register("coal_generator", new BlockItem(ModBlocks.COAL_GENERATOR, new FabricItemSettings().group(ITEM_GROUP_MACHINES)) {
                 @Override
                 public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
@@ -226,8 +234,15 @@ public interface ModItems {
                 }
         });
         public static final BlockItem COMPRESSOR = registerBlockItem(ModBlocks.COMPRESSOR, ITEM_GROUP_MACHINES);
+        public static final BlockItem NASA_WORKBENCH = registerBlockItem(ModBlocks.NASA_WORKBENCH, ITEM_GROUP_MACHINES);
         public static final BlockItem FUEL_REFINERY = registerBlockItem(ModBlocks.FUEL_REFINERY, ITEM_GROUP_MACHINES);
         public static final BlockItem OXYGEN_LOADER = registerBlockItem(ModBlocks.OXYGEN_LOADER, ITEM_GROUP_MACHINES);
+        public static final BlockItem SOLAR_PANEL = register("solar_panel", new SolarPanelBlockItem(ModBlocks.SOLAR_PANEL, new FabricItemSettings().group(ITEM_GROUP_MACHINES)) {
+                @Override
+                public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
+                        tooltip.add((new TranslatableText("item.beyond_earth.generator.tooltip", SolarPanelBlockEntity.ENERGY_PER_TICK).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
+                }
+        });
         public static final BlockItem OXYGEN_DISTRIBUTOR = registerBlockItem(ModBlocks.OXYGEN_DISTRIBUTOR, ITEM_GROUP_MACHINES);
         public static final BlockItem WATER_PUMP = register("water_pump", new BlockItem(ModBlocks.WATER_PUMP, new FabricItemSettings().group(ITEM_GROUP_MACHINES)) {
                 @Override
