@@ -17,6 +17,7 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MovementType;
@@ -29,10 +30,12 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.tag.FluidTags;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.World;
 
 public class RocketEntity extends VehicleEntity {
@@ -87,17 +90,7 @@ public class RocketEntity extends VehicleEntity {
         int exitDirection = Math.round(passenger.getYaw() / 90) * 90;
         Vec3d pos = passenger.getPos();
 
-        // Exit velocity.
-        double velocityY = this.getVelocity().getY() * 2.5;
-        passenger.setVelocity(switch (exitDirection) {
-        case 0, 360 -> new Vec3d(0, velocityY * 1.5, velocityY);
-        case 90 -> new Vec3d(-velocityY, velocityY * 1.5, 0);
-        case -90 -> new Vec3d(velocityY, velocityY * 1.5, 0);
-        case -180, 180 -> new Vec3d(0, velocityY * 1.5, -velocityY);
-        default -> throw new IllegalArgumentException("Unexpected value: " + exitDirection);
-        });
-
-        // Set the position to teleport out of the rocket.
+        // Set the position to teleport out of the rocket
         Vec3d exitPos = switch (exitDirection) {
         case 0, 360 -> new Vec3d(pos.getX(), pos.getY(), pos.getZ() + 1.5f);
         case 90 -> new Vec3d(pos.getX() - 1.5f, pos.getY(), pos.getZ());
@@ -106,15 +99,21 @@ public class RocketEntity extends VehicleEntity {
         default -> throw new IllegalArgumentException("Unexpected value: " + exitDirection);
         };
 
-        // Place the rider up to 3 blocks below the rocket.
+        // Place the rider up to 3 blocks below the rocket
         int checks = 3;
         BlockPos exitBlockPos = new BlockPos(exitPos);
-        while (this.world.getBlockState(exitBlockPos).isAir() && checks > 0) {
+        while (!this.world.getBlockState(exitBlockPos).isSolidBlock(this.world, exitBlockPos) && checks > 0) {
             exitBlockPos = exitBlockPos.down();
             checks--;
         }
 
-        return new Vec3d(exitBlockPos.getX(), exitBlockPos.up().getY(), exitBlockPos.getZ());
+        BlockState exitBlockState = this.world.getBlockState(exitBlockPos.up());
+        VoxelShape collisionShape = exitBlockState.getCollisionShape(this.world, exitBlockPos);
+        double yOffset = 0.0;
+        if (!collisionShape.isEmpty()) {
+            yOffset = exitBlockState.getCollisionShape(this.world, exitBlockPos).getBoundingBox().getYLength();
+        }
+        return new Vec3d(exitBlockPos.getX(), exitBlockPos.up().getY() + yOffset, exitBlockPos.getZ());
     }
 
     public void assignLaunchPad(boolean value) {
@@ -128,10 +127,10 @@ public class RocketEntity extends VehicleEntity {
         // Rotate the rocket when the player strafes left or right.
         if (this.getFirstPassenger() instanceof PlayerEntity player) {
             if (ModKeyBindings.leftKeyDown(player)) {
-                ModUtils.rotateVehicleYaw(this, this.getYaw() - 1);
+                this.rotateRocketAndPassengers(-1.0f);
             }
             if (ModKeyBindings.rightKeyDown(player)) {
-                ModUtils.rotateVehicleYaw(this, this.getYaw() + 1);
+                this.rotateRocketAndPassengers(1.0f);
             }
         }
 
@@ -171,7 +170,7 @@ public class RocketEntity extends VehicleEntity {
                 this.setPhase(3);
             }
         }
-        if (this.isInLava()) {
+        if (this.isSubmergedIn(FluidTags.LAVA)) {
             this.explode(0.45f);
         }
     }
@@ -361,6 +360,13 @@ public class RocketEntity extends VehicleEntity {
         }
     }
 
+    public void rotateRocketAndPassengers(float rotation) {
+        ModUtils.rotateVehicleYaw(this, this.getYaw() + rotation);
+        for (Entity passenger : this.getPassengerList()) {
+            passenger.setYaw(passenger.getYaw() + rotation);
+        }
+    }
+
     public static void stopRocketSoundForRider(ServerPlayerEntity rider) {
         StopSoundS2CPacket stopSoundS2CPacket = new StopSoundS2CPacket(ModSounds.ROCKET_LAUNCH_SOUND_ID, SoundCategory.AMBIENT);
         rider.networkHandler.sendPacket(stopSoundS2CPacket);
@@ -373,4 +379,5 @@ public class RocketEntity extends VehicleEntity {
             return FluidConstants.BUCKET * 3;
         }
     }
+
 }

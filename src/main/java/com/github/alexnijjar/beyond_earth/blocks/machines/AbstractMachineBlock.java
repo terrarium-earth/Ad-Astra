@@ -35,6 +35,7 @@ public abstract class AbstractMachineBlock extends BlockWithEntity {
 
     public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
     public static final BooleanProperty LIT = Properties.LIT;
+    public static final BooleanProperty POWERED = Properties.POWERED;
 
     public AbstractMachineBlock(Settings settings) {
         super(settings.luminance(getLuminance()));
@@ -140,6 +141,8 @@ public abstract class AbstractMachineBlock extends BlockWithEntity {
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         super.appendProperties(builder);
 
+        builder.add(POWERED);
+
         if (this.useFacing()) {
             builder.add(FACING);
         }
@@ -151,14 +154,22 @@ public abstract class AbstractMachineBlock extends BlockWithEntity {
 
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        BlockState state = this.getDefaultState();
-
+        BlockState state = this.getDefaultState().with(POWERED, false);
         return this.useFacing() ? state.with(FACING, ctx.getPlayerFacing().getOpposite()) : state;
     }
 
     @Override
     public boolean hasComparatorOutput(BlockState state) {
         return true;
+    }
+
+    @Override
+    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
+        super.neighborUpdate(state, world, pos, block, fromPos, notify);
+
+        if (!world.isClient) {
+            world.setBlockState(pos, state.with(POWERED, world.isReceivingRedstonePower(pos)));
+        }
     }
 
     @Override

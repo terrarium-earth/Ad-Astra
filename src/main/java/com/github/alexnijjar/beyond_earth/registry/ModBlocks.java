@@ -44,7 +44,7 @@ public interface ModBlocks {
         public static Set<Block> blocks = new HashSet<>();
 
         // Rocket Launch Pad
-        public static final Block ROCKET_LAUNCH_PAD = register("rocket_launch_pad", new RocketLaunchPad(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
+        public static final Block ROCKET_LAUNCH_PAD = register("rocket_launch_pad", new RocketLaunchPad(FabricBlockSettings.copy(Blocks.CUT_COPPER)));
 
         // Flag Blocks
         public static final Block FLAG = register("flag", new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1)));
@@ -96,41 +96,41 @@ public interface ModBlocks {
         public static final Block RAW_OSTRUM_BLOCK = register("raw_ostrum_block", new Block(FabricBlockSettings.copy(Blocks.RAW_IRON_BLOCK)));
         public static final Block RAW_CALORITE_BLOCK = register("raw_calorite_block", new Block(FabricBlockSettings.copy(Blocks.RAW_IRON_BLOCK)));
 
-        public static final Block IRON_PLATING = register("iron_plating", new Block(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
-        public static final Block IRON_PLATING_STAIRS = register("iron_plating_stairs", new StairsBlock(IRON_PLATING.getDefaultState(), FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
-        public static final Block IRON_PLATING_SLAB = register("iron_plating_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
-        public static final Block IRON_PILLAR = register("iron_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
+        public static final Block IRON_PLATING = register("iron_plating", new Block(FabricBlockSettings.copy(Blocks.CUT_COPPER)));
+        public static final Block IRON_PLATING_STAIRS = register("iron_plating_stairs", new StairsBlock(IRON_PLATING.getDefaultState(), FabricBlockSettings.copy(Blocks.CUT_COPPER)));
+        public static final Block IRON_PLATING_SLAB = register("iron_plating_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.CUT_COPPER)));
+        public static final Block IRON_PILLAR = register("iron_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.CUT_COPPER)));
         public static final Block IRON_PLATING_BUTTON = register("iron_plating_button", new StoneButtonBlock(FabricBlockSettings.copy(Blocks.STONE_BUTTON)));
         public static final Block IRON_PLATING_PRESSURE_PLATE = register("iron_plating_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(Blocks.STONE_PRESSURE_PLATE)));
-        public static final Block MARKED_IRON_PILLAR = register("marked_iron_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
-        public static final Block BLUE_IRON_PILLAR = register("blue_iron_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK).luminance(state -> 15)));
+        public static final Block MARKED_IRON_PILLAR = register("marked_iron_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.CUT_COPPER)));
+        public static final Block BLUE_IRON_PILLAR = register("blue_iron_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.CUT_COPPER).luminance(state -> 15)));
 
-        public static final Block STEEL_PLATING = register("steel_plating", new Block(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
-        public static final Block STEEL_PLATING_STAIRS = register("steel_plating_stairs", new StairsBlock(STEEL_PLATING.getDefaultState(), FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
-        public static final Block STEEL_PLATING_SLAB = register("steel_plating_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
-        public static final Block STEEL_PILLAR = register("steel_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
+        public static final Block STEEL_PLATING = register("steel_plating", new Block(FabricBlockSettings.copy(Blocks.CUT_COPPER)));
+        public static final Block STEEL_PLATING_STAIRS = register("steel_plating_stairs", new StairsBlock(STEEL_PLATING.getDefaultState(), FabricBlockSettings.copy(Blocks.CUT_COPPER)));
+        public static final Block STEEL_PLATING_SLAB = register("steel_plating_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.CUT_COPPER)));
+        public static final Block STEEL_PILLAR = register("steel_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.CUT_COPPER)));
         public static final Block STEEL_PLATING_BUTTON = register("steel_plating_button", new StoneButtonBlock(FabricBlockSettings.copy(Blocks.STONE_BUTTON)));
         public static final Block STEEL_PLATING_PRESSURE_PLATE = register("steel_plating_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(Blocks.STONE_PRESSURE_PLATE)));
         public static final Block STEEL_DOOR = register("steel_door", new DoorBlock(FabricBlockSettings.copy(Blocks.IRON_DOOR)), true);
 
-        public static final Block DESH_PLATING = register("desh_plating", new Block(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
-        public static final Block DESH_PLATING_STAIRS = register("desh_plating_stairs", new StairsBlock(DESH_PLATING.getDefaultState(), FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
-        public static final Block DESH_PLATING_SLAB = register("desh_plating_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
-        public static final Block DESH_PILLAR = register("desh_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
+        public static final Block DESH_PLATING = register("desh_plating", new Block(FabricBlockSettings.copy(Blocks.CUT_COPPER)));
+        public static final Block DESH_PLATING_STAIRS = register("desh_plating_stairs", new StairsBlock(DESH_PLATING.getDefaultState(), FabricBlockSettings.copy(Blocks.CUT_COPPER)));
+        public static final Block DESH_PLATING_SLAB = register("desh_plating_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.CUT_COPPER)));
+        public static final Block DESH_PILLAR = register("desh_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.CUT_COPPER)));
         public static final Block DESH_PLATING_BUTTON = register("desh_plating_button", new StoneButtonBlock(FabricBlockSettings.copy(Blocks.STONE_BUTTON)));
         public static final Block DESH_PLATING_PRESSURE_PLATE = register("desh_plating_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(Blocks.STONE_PRESSURE_PLATE)));
 
-        public static final Block OSTRUM_PLATING = register("ostrum_plating", new Block(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
-        public static final Block OSTRUM_PLATING_STAIRS = register("ostrum_plating_stairs", new StairsBlock(OSTRUM_PLATING.getDefaultState(), FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
-        public static final Block OSTRUM_PLATING_SLAB = register("ostrum_plating_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
-        public static final Block OSTRUM_PILLAR = register("ostrum_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
+        public static final Block OSTRUM_PLATING = register("ostrum_plating", new Block(FabricBlockSettings.copy(Blocks.CUT_COPPER)));
+        public static final Block OSTRUM_PLATING_STAIRS = register("ostrum_plating_stairs", new StairsBlock(OSTRUM_PLATING.getDefaultState(), FabricBlockSettings.copy(Blocks.CUT_COPPER)));
+        public static final Block OSTRUM_PLATING_SLAB = register("ostrum_plating_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.CUT_COPPER)));
+        public static final Block OSTRUM_PILLAR = register("ostrum_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.CUT_COPPER)));
         public static final Block OSTRUM_PLATING_BUTTON = register("ostrum_plating_button", new StoneButtonBlock(FabricBlockSettings.copy(Blocks.STONE_BUTTON)));
         public static final Block OSTRUM_PLATING_PRESSURE_PLATE = register("ostrum_plating_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(Blocks.STONE_PRESSURE_PLATE)));
 
-        public static final Block CALORITE_PLATING = register("calorite_plating", new Block(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
-        public static final Block CALORITE_PLATING_STAIRS = register("calorite_plating_stairs", new StairsBlock(CALORITE_PLATING.getDefaultState(), FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
-        public static final Block CALORITE_PLATING_SLAB = register("calorite_plating_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
-        public static final Block CALORITE_PILLAR = register("calorite_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
+        public static final Block CALORITE_PLATING = register("calorite_plating", new Block(FabricBlockSettings.copy(Blocks.CUT_COPPER)));
+        public static final Block CALORITE_PLATING_STAIRS = register("calorite_plating_stairs", new StairsBlock(CALORITE_PLATING.getDefaultState(), FabricBlockSettings.copy(Blocks.CUT_COPPER)));
+        public static final Block CALORITE_PLATING_SLAB = register("calorite_plating_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.CUT_COPPER)));
+        public static final Block CALORITE_PILLAR = register("calorite_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.CUT_COPPER)));
         public static final Block CALORITE_PLATING_BUTTON = register("calorite_plating_button", new StoneButtonBlock(FabricBlockSettings.copy(Blocks.STONE_BUTTON)));
         public static final Block CALORITE_PLATING_PRESSURE_PLATE = register("calorite_plating_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(Blocks.STONE_PRESSURE_PLATE)));
 
@@ -236,17 +236,17 @@ public interface ModBlocks {
         public static final Block MOON_CHEESE_ORE = register("moon_cheese_ore", new OreBlock(FabricBlockSettings.copy(Blocks.IRON_ORE), UniformIntProvider.create(0, 2)), true);
         public static final Block MOON_DESH_ORE = register("moon_desh_ore", new OreBlock(FabricBlockSettings.copy(Blocks.IRON_ORE)), true);
         public static final Block MOON_IRON_ORE = register("moon_iron_ore", new OreBlock(FabricBlockSettings.copy(Blocks.IRON_ORE)), true);
-        public static final Block MOON_ICE_SHARD_ORE = register("moon_ice_shard_ore", new OreBlock(FabricBlockSettings.copy(Blocks.IRON_ORE), UniformIntProvider.create(0, 2)), true);
+        public static final Block MOON_ICE_SHARD_ORE = register("moon_ice_shard_ore", new OreBlock(FabricBlockSettings.copy(Blocks.IRON_ORE), UniformIntProvider.create(2, 5)), true);
         public static final Block MARS_IRON_ORE = register("mars_iron_ore", new OreBlock(FabricBlockSettings.copy(Blocks.IRON_ORE)), true);
         public static final Block MARS_DIAMOND_ORE = register("mars_diamond_ore", new OreBlock(FabricBlockSettings.copy(Blocks.IRON_ORE), UniformIntProvider.create(3, 7)), true);
         public static final Block MARS_OSTRUM_ORE = register("mars_ostrum_ore", new OreBlock(FabricBlockSettings.copy(Blocks.IRON_ORE)), true);
-        public static final Block MARS_ICE_SHARD_ORE = register("mars_ice_shard_ore", new OreBlock(FabricBlockSettings.copy(Blocks.IRON_ORE), UniformIntProvider.create(0, 2)), true);
+        public static final Block MARS_ICE_SHARD_ORE = register("mars_ice_shard_ore", new OreBlock(FabricBlockSettings.copy(Blocks.IRON_ORE), UniformIntProvider.create(2, 5)), true);
         public static final Block MERCURY_IRON_ORE = register("mercury_iron_ore", new OreBlock(FabricBlockSettings.copy(Blocks.IRON_ORE)), true);
         public static final Block VENUS_COAL_ORE = register("venus_coal_ore", new OreBlock(FabricBlockSettings.copy(Blocks.IRON_ORE), UniformIntProvider.create(0, 2)), true);
         public static final Block VENUS_GOLD_ORE = register("venus_gold_ore", new OreBlock(FabricBlockSettings.copy(Blocks.IRON_ORE)), true);
         public static final Block VENUS_DIAMOND_ORE = register("venus_diamond_ore", new OreBlock(FabricBlockSettings.copy(Blocks.IRON_ORE), UniformIntProvider.create(3, 7)), true);
         public static final Block VENUS_CALORITE_ORE = register("venus_calorite_ore", new OreBlock(FabricBlockSettings.copy(Blocks.IRON_ORE)), true);
-        public static final Block GLACIO_ICE_SHARD_ORE = register("glacio_ice_shard_ore", new OreBlock(FabricBlockSettings.copy(Blocks.IRON_ORE), UniformIntProvider.create(0, 2)), true);
+        public static final Block GLACIO_ICE_SHARD_ORE = register("glacio_ice_shard_ore", new OreBlock(FabricBlockSettings.copy(Blocks.IRON_ORE), UniformIntProvider.create(2, 5)), true);
         public static final Block GLACIO_COAL_ORE = register("glacio_coal_ore", new OreBlock(FabricBlockSettings.copy(Blocks.IRON_ORE), UniformIntProvider.create(0, 2)), true);
         public static final Block GLACIO_COPPER_ORE = register("glacio_copper_ore", new OreBlock(FabricBlockSettings.copy(Blocks.IRON_ORE)), true);
         public static final Block GLACIO_IRON_ORE = register("glacio_iron_ore", new OreBlock(FabricBlockSettings.copy(Blocks.IRON_ORE)), true);

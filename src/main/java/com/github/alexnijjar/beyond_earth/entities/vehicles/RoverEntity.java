@@ -13,6 +13,7 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tag.FluidTags;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
@@ -24,7 +25,6 @@ public class RoverEntity extends VehicleEntity {
     public double wheelPitch;
 
     public double prevWheelPitch;
-    public float prevRoverYaw;
 
     public static final long FUEL_PER_TICK = BeyondEarth.CONFIG.rover.fuelPerTick;
 
@@ -78,7 +78,7 @@ public class RoverEntity extends VehicleEntity {
     public void tick() {
         super.tick();
         this.travel();
-        if (BeyondEarth.CONFIG.rover.explodeRoverInLava && this.isInLava()) {
+        if (BeyondEarth.CONFIG.rover.explodeRoverInLava && this.isSubmergedIn(FluidTags.LAVA)) {
             this.explode(0.35f);
         }
     }
@@ -91,7 +91,7 @@ public class RoverEntity extends VehicleEntity {
     private void travel() {
 
         this.prevWheelPitch = wheelPitch;
-        this.prevRoverYaw = this.getYaw();
+        this.previousYaw = this.getYaw();
 
         if (this.getFirstPassenger() instanceof PlayerEntity player) {
             if (this.inputTank.amount > 0) {
@@ -99,13 +99,15 @@ public class RoverEntity extends VehicleEntity {
 
                 // Player is clicking 'w' to move forward.
                 if (ModKeyBindings.forwardKeyDown(player)) {
-                    this.setSpeed(this.getSpeed() + BeyondEarth.CONFIG.rover.forwardSpeed * (this.submergedInWater ? 0.5f : 1.0f));
+                    // this.setSpeed((this.getSpeed() + BeyondEarth.CONFIG.rover.forwardSpeed) * ((this.isTouchingWater() || this.isInLava()) ? 0.5f : 1.0f));
                     shouldConsumeFuel = true;
+                    this.setSpeed((this.isTouchingWater() || this.isInLava()) ? 0.25f : 1.0f);
                 }
                 // Player is clicking 's' to move backward.
                 if (ModKeyBindings.backKeyDown(player)) {
-                    this.setSpeed(this.getSpeed() - BeyondEarth.CONFIG.rover.backwardSpeed * (this.submergedInWater ? 0.5f : 1.0f));
+                    // this.setSpeed((this.getSpeed() - BeyondEarth.CONFIG.rover.backwardSpeed) * ((this.isTouchingWater() || this.isInLava()) ? 0.5f : 1.0f));
                     shouldConsumeFuel = true;
+                    this.setSpeed((this.isTouchingWater() || this.isInLava()) ? -0.1f : -0.5f);
                 }
 
                 // Player is clicking 'a' to move left.
