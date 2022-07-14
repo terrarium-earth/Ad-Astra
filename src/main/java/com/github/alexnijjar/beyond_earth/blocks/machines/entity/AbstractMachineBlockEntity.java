@@ -128,7 +128,7 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
 
     // Send energy to surrounding machines.
     public void energyOut() {
-        if (usesEnergy()) {
+        if (usesEnergy() && !this.getCachedState().get(AbstractMachineBlock.POWERED)) {
             for (Direction direction : Direction.values()) {
                 EnergyStorageUtil.move(getSideEnergyStorage(direction), EnergyStorage.SIDED.find(world, pos.offset(direction), direction.getOpposite()), Long.MAX_VALUE, null);
             }

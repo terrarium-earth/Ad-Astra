@@ -1,5 +1,6 @@
 package com.github.alexnijjar.beyond_earth.client.renderer.block;
 
+import com.github.alexnijjar.beyond_earth.blocks.machines.AbstractMachineBlock;
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.EnergizerBlockEntity;
 
 import net.fabricmc.api.EnvType;
@@ -25,6 +26,10 @@ public class EnergizerBlockEntityRenderer implements BlockEntityRenderer<Energiz
         ItemStack stack = blockEntity.getStack(0);
 
         if (stack.isEmpty()) {
+            return;
+        }
+
+        if (!blockEntity.getCachedState().get(AbstractMachineBlock.LIT)) {
             return;
         }
 

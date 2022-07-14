@@ -8,6 +8,7 @@
     "ChunkGeneratorAccessor",
     "EntityInvoker",
     "EntityMixin",
+    "FireworkRocketItemMixin",
     "GeneratorOptionsMixin",
     "LivingEntityMixin",
     "NoiseChunkGeneratorAccessor",

@@ -1,8 +1,17 @@
 package com.github.alexnijjar.beyond_earth.gui.screen_handlers;
 
+import org.jetbrains.annotations.Nullable;
+
 import com.github.alexnijjar.beyond_earth.entities.vehicles.VehicleEntity;
 import com.github.alexnijjar.beyond_earth.registry.ModScreenHandlers;
 
+import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.fluid.base.FullItemFluidStorage;
+import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
+import net.fabricmc.fabric.api.transfer.v1.storage.base.CombinedStorage;
+import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantItemStorage;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
@@ -18,7 +27,14 @@ public class VehicleScreenHandler extends AbstractVehicleScreenHandler {
         super(ModScreenHandlers.VEHICLE_SCREEN_HANDLER, syncId, inventory, entity, new Slot[] {
 
                 // Left input slot.
-                new Slot(entity.getInventory(), 0, 8, 63),
+                new Slot(entity.getInventory(), 0, 8, 63) {
+                    @Override
+                    public boolean canInsert(ItemStack stack) {
+                        @Nullable
+                        Storage<FluidVariant> context = ContainerItemContext.withInitial(stack).find(FluidStorage.ITEM);
+                        return context instanceof CombinedStorage || context instanceof FullItemFluidStorage || context instanceof SingleVariantItemStorage<FluidVariant>;
+                    }
+                },
                 // Left output slot.
                 new Slot(entity.getInventory(), 1, 26, 63) {
                     @Override

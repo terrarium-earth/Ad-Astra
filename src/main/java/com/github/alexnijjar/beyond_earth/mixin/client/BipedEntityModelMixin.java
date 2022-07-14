@@ -33,21 +33,23 @@ public abstract class BipedEntityModelMixin {
         BipedEntityModel<PlayerEntity> model = ((BipedEntityModel<PlayerEntity>) (Object) this);
         Item currentItem = livingEntity.getStackInHand(livingEntity.getActiveHand()).getItem();
 
-        boolean mainHand = true;
-        if (!(currentItem instanceof VehicleItem)) {
-            mainHand = false;
-            currentItem = livingEntity.getOffHandStack().getItem();
-        }
+        if (currentItem != null) {
+            boolean mainHand = true;
+            if (!(currentItem instanceof VehicleItem)) {
+                mainHand = false;
+                currentItem = livingEntity.getOffHandStack().getItem();
+            }
 
-        if (!livingEntity.getPose().equals(EntityPose.SWIMMING)) {
-            if (currentItem instanceof VehicleItem || currentItem.equals(ModItems.TIER_1_ROVER)) {
-                // Move the arms so that it looks like the player is holding the rocket in the air with both arms.
-                if (mainHand) {
-                    model.rightArm.pitch = -2.8f;
-                    model.leftArm.pitch = model.rightArm.pitch;
-                } else {
-                    model.leftArm.pitch = -2.8f;
-                    model.rightArm.pitch = model.leftArm.pitch;
+            if (!livingEntity.getPose().equals(EntityPose.SWIMMING)) {
+                if (currentItem instanceof VehicleItem || ModItems.TIER_1_ROVER.equals(currentItem)) {
+                    // Move the arms so that it looks like the player is holding the rocket in the air with both arms.
+                    if (mainHand) {
+                        model.rightArm.pitch = -2.8f;
+                        model.leftArm.pitch = model.rightArm.pitch;
+                    } else {
+                        model.leftArm.pitch = -2.8f;
+                        model.rightArm.pitch = model.leftArm.pitch;
+                    }
                 }
             }
         }

@@ -33,6 +33,16 @@ public class EnergizerBlock extends AbstractMachineBlock {
         }
 
         @Override
+        protected boolean useLit() {
+                return true;
+        }
+
+        @Override
+        public int getBrightness() {
+                return 2;
+        }
+
+        @Override
         protected BlockState buildDefaultState() {
                 return super.buildDefaultState().with(POWER, 0);
         }
@@ -44,20 +54,18 @@ public class EnergizerBlock extends AbstractMachineBlock {
 
         @Override
         public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-                if (world.getBlockEntity(pos) instanceof EnergizerBlockEntity entity) {
-                        ItemStack playerStack = player.getStackInHand(hand);
-                        if (entity.getStack(0).isEmpty() && !playerStack.isEmpty() && playerStack.getCount() == 1) {
-                                if (!world.isClient) {
+                if (!world.isClient) {
+                        if (world.getBlockEntity(pos) instanceof EnergizerBlockEntity entity) {
+                                ItemStack playerStack = player.getStackInHand(hand);
+                                if (entity.getStack(0).isEmpty() && !playerStack.isEmpty() && playerStack.getCount() == 1) {
                                         player.setStackInHand(hand, ItemStack.EMPTY);
-                                }
-                                entity.setStack(0, playerStack);
-                                return ActionResult.SUCCESS;
-                        } else if (playerStack.isEmpty()) {
-                                if (!world.isClient) {
+                                        entity.setStack(0, playerStack);
+                                        return ActionResult.SUCCESS;
+                                } else if (playerStack.isEmpty()) {
                                         player.setStackInHand(hand, entity.getStack(0));
+                                        entity.clear();
+                                        return ActionResult.SUCCESS;
                                 }
-                                entity.clear();
-                                return ActionResult.SUCCESS;
                         }
                 }
                 return super.onUse(state, world, pos, player, hand, hit);

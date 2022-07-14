@@ -156,7 +156,7 @@ public class BeyondEarthConfig implements ConfigData {
         @ConfigEntry.Gui.Tooltip(count = 1)
         public double oxygenMultiplier = 0.8;
         @ConfigEntry.Gui.Tooltip(count = 1)
-        public double energyMultiplier = 4.0;
+        public double energyMultiplier = 3.0;
         @ConfigEntry.Gui.Tooltip(count = 4)
         public int oxygenGracePeriodTicks = 140;
     }

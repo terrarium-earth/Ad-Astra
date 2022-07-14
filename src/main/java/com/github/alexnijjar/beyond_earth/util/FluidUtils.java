@@ -152,7 +152,6 @@ public class FluidUtils {
 	}
 
 	public static boolean canInsert(Inventory inventory, int extractSlot, ContainerItemContext context) {
-		ItemStack emptyStack = context.getItemVariant().toStack();
 		ItemStack extractSlotStack = inventory.getStack(extractSlot);
 		return !(!extractSlotStack.isEmpty() && (!ItemStack.canCombine(extractSlotStack, extractSlotStack) || extractSlotStack.getCount() >= extractSlotStack.getMaxCount()));
 	}
