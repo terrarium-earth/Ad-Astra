@@ -1,0 +1,10 @@
+{
+    "replace": false,
+    "values": [
+      "beyond_earth:moon_cobblestone",
+      "beyond_earth:mars_cobblestone",
+      "beyond_earth:venus_cobblestone",
+      "beyond_earth:mercury_cobblestone",
+      "beyond_earth:glacio_cobblestone"
+    ]
+  }

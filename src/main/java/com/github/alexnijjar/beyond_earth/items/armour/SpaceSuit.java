@@ -1,6 +1,7 @@
 package com.github.alexnijjar.beyond_earth.items.armour;
 
 import java.util.List;
+import java.util.stream.StreamSupport;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.items.FluidContainingItem;
@@ -9,6 +10,7 @@ import com.github.alexnijjar.beyond_earth.util.FluidUtils;
 
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
@@ -38,5 +40,24 @@ public class SpaceSuit extends ArmorItem implements FluidContainingItem {
     @Override
     public long getTankSize() {
         return TANK_SIZE;
+    }
+
+    public static boolean hasFullSet(LivingEntity entity) {
+        return StreamSupport.stream(entity.getArmorItems().spliterator(), false).allMatch(s -> s.getItem() instanceof SpaceSuit);
+    }
+
+    /**
+     * Checks if the entity is wearing a space suit and if that space suit has oxygen.
+     * @param entity The entity wearing the space suit
+     * @return Whether the entity has oxygen or not
+    
+     */
+    public static boolean hasOxygenatedSpaceSuit(LivingEntity entity) {
+        ItemStack chest = entity.getEquippedStack(EquipmentSlot.CHEST);
+        if (chest.getItem() instanceof SpaceSuit suit) {
+            return suit.getAmount(chest) > 0;
+        }
+
+        return false;
     }
 }

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:desh_ingot_from_nuggets"
+    ]
+  },
+  "criteria": {
+    "has_desh_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "beyond_earth:desh_nugget"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:desh_ingot_from_nuggets"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_desh_nugget",
+      "has_the_recipe"
+    ]
+  ]
+}

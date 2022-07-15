@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.github.alexnijjar.beyond_earth.entities.vehicles.VehicleEntity;
-import com.github.alexnijjar.beyond_earth.util.ModUtils;
+import com.github.alexnijjar.beyond_earth.items.armour.JetSuit;
 
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -19,7 +19,7 @@ public class ServerPlayNetworkHandlerMixin {
         ServerPlayerEntity player = handler.getPlayer();
 
         // Prevent the player from being kicked for flying a jet suit
-        if (ModUtils.hasFullJetSuitSet(player)) {
+        if (JetSuit.hasFullSet(player)) {
             handler.setFloatingTicks(0);
         }
 

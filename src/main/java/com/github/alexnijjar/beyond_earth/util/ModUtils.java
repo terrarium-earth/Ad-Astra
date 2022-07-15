@@ -14,9 +14,6 @@ import com.github.alexnijjar.beyond_earth.data.Planet;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.LanderEntity;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntity;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.VehicleEntity;
-import com.github.alexnijjar.beyond_earth.items.armour.JetSuit;
-import com.github.alexnijjar.beyond_earth.items.armour.NetheriteSpaceSuit;
-import com.github.alexnijjar.beyond_earth.items.armour.SpaceSuit;
 import com.github.alexnijjar.beyond_earth.items.vehicles.VehicleItem;
 import com.github.alexnijjar.beyond_earth.registry.ModEntityTypes;
 
@@ -26,7 +23,6 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.Entity.RemovalReason;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -40,7 +36,6 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.tag.TagKey;
 import net.minecraft.text.TranslatableText;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
@@ -50,32 +45,19 @@ import net.minecraft.world.World;
 
 public class ModUtils {
 
+    public static final RegistryKey<World> EARTH_ORBIT_KEY = RegistryKey.of(Registry.WORLD_KEY, new ModIdentifier("earth_orbit"));
+    public static final RegistryKey<World> MOON_KEY = RegistryKey.of(Registry.WORLD_KEY, new ModIdentifier("moon"));
+    public static final RegistryKey<World> MOON_ORBIT_KEY = RegistryKey.of(Registry.WORLD_KEY, new ModIdentifier("moon_orbit"));
+    public static final RegistryKey<World> MARS_KEY = RegistryKey.of(Registry.WORLD_KEY, new ModIdentifier("mars"));
+    public static final RegistryKey<World> MARS_ORBIT_KEY = RegistryKey.of(Registry.WORLD_KEY, new ModIdentifier("mars_orbit"));
+    public static final RegistryKey<World> VENUS_KEY = RegistryKey.of(Registry.WORLD_KEY, new ModIdentifier("venus"));
+    public static final RegistryKey<World> VENUS_ORBIT_KEY = RegistryKey.of(Registry.WORLD_KEY, new ModIdentifier("venus_orbit"));
+    public static final RegistryKey<World> MERCURY_KEY = RegistryKey.of(Registry.WORLD_KEY, new ModIdentifier("mercury"));
+    public static final RegistryKey<World> MERCURY_ORBIT_KEY = RegistryKey.of(Registry.WORLD_KEY, new ModIdentifier("mercury_orbit"));
+    public static final RegistryKey<World> GLACIO_KEY = RegistryKey.of(Registry.WORLD_KEY, new ModIdentifier("glacio"));
+    public static final RegistryKey<World> GLACIO_ORBIT_KEY = RegistryKey.of(Registry.WORLD_KEY, new ModIdentifier("glacio_orbit"));
+
     public static final float VANILLA_GRAVITY = 9.806f;
-
-    public static final Identifier EARTH_ORBIT = new ModIdentifier("earth_orbit");
-    public static final Identifier MOON = new ModIdentifier("moon");
-    public static final Identifier MOON_ORBIT = new ModIdentifier("moon_orbit");
-    public static final Identifier MARS = new ModIdentifier("mars");
-    public static final Identifier MARS_ORBIT = new ModIdentifier("mars_orbit");
-    public static final Identifier VENUS = new ModIdentifier("venus");
-    public static final Identifier VENUS_ORBIT = new ModIdentifier("venus_orbit");
-    public static final Identifier MERCURY = new ModIdentifier("mercury");
-    public static final Identifier MERCURY_ORBIT = new ModIdentifier("mercury_orbit");
-    public static final Identifier GLACIO = new ModIdentifier("glacio");
-    public static final Identifier GLACIO_ORBIT = new ModIdentifier("glacio_orbit");
-
-    public static final RegistryKey<World> EARTH_ORBIT_KEY = RegistryKey.of(Registry.WORLD_KEY, EARTH_ORBIT);
-    public static final RegistryKey<World> MOON_KEY = RegistryKey.of(Registry.WORLD_KEY, MOON);
-    public static final RegistryKey<World> MOON_ORBIT_KEY = RegistryKey.of(Registry.WORLD_KEY, MOON_ORBIT);
-    public static final RegistryKey<World> MARS_KEY = RegistryKey.of(Registry.WORLD_KEY, MARS);
-    public static final RegistryKey<World> MARS_ORBIT_KEY = RegistryKey.of(Registry.WORLD_KEY, MARS_ORBIT);
-    public static final RegistryKey<World> VENUS_KEY = RegistryKey.of(Registry.WORLD_KEY, VENUS);
-    public static final RegistryKey<World> VENUS_ORBIT_KEY = RegistryKey.of(Registry.WORLD_KEY, VENUS_ORBIT);
-    public static final RegistryKey<World> MERCURY_KEY = RegistryKey.of(Registry.WORLD_KEY, MERCURY);
-    public static final RegistryKey<World> MERCURY_ORBIT_KEY = RegistryKey.of(Registry.WORLD_KEY, MERCURY_ORBIT);
-    public static final RegistryKey<World> GLACIO_KEY = RegistryKey.of(Registry.WORLD_KEY, GLACIO);
-    public static final RegistryKey<World> GLACIO_ORBIT_KEY = RegistryKey.of(Registry.WORLD_KEY, GLACIO_ORBIT);
-
     public static final float ORBIT_TEMPERATURE = -270.0f;
     public static final float ORBIT_GRAVITY = 0.32f;
 
@@ -83,16 +65,24 @@ public class ModUtils {
         return FabricLoader.getInstance().isModLoaded(modId);
     }
 
-    public static void teleportToWorld(RegistryKey<World> world, Entity entity) {
+    /**
+     * Teleports an entity to a different dimension. If the entity is a player in a rocket, the player will teleport with a lander.
+     * If the entity is raw food, the food will be cooked.
+     * 
+     * @param targetWorld The world to the entity teleport to
+     * @param entity      The entity to teleport
+     * @see #teleportPlayer(RegistryKey, ServerPlayerEntity)
+     */
+    public static void teleportToWorld(RegistryKey<World> targetWorld, Entity entity) {
         if (entity.getWorld() instanceof ServerWorld entityWorld) {
-            ServerWorld targetWorld = entityWorld.getServer().getWorld(world);
-            Vec3d targetPosition = new Vec3d(entity.getX(), getSpawnStart(targetWorld), entity.getZ());
+            ServerWorld world = entityWorld.getServer().getWorld(targetWorld);
+            Vec3d targetPosition = new Vec3d(entity.getX(), getSpawnStart(world), entity.getZ());
             List<Entity> entitiesToTeleport = new LinkedList<>();
 
             if (entity instanceof PlayerEntity player) {
                 if (player.getVehicle() instanceof RocketEntity rocket) {
                     player.sendMessage(new TranslatableText("message." + BeyondEarth.MOD_ID + ".hold_space"), false);
-                    entity = createLander(rocket, targetWorld, targetPosition);
+                    entity = createLander(rocket, world, targetPosition);
                     rocket.remove(RemovalReason.DISCARDED);
                     entitiesToTeleport.add(entity);
                     entitiesToTeleport.add(player);
@@ -112,7 +102,7 @@ public class ModUtils {
             List<Entity> teleportedEntities = new LinkedList<>();
             for (Entity entityToTeleport : entitiesToTeleport) {
                 TeleportTarget target = new TeleportTarget(targetPosition, entityToTeleport.getVelocity(), entityToTeleport.getYaw(), entityToTeleport.getPitch());
-                teleportedEntities.add(FabricDimensions.teleport(entityToTeleport, targetWorld, target));
+                teleportedEntities.add(FabricDimensions.teleport(entityToTeleport, world, target));
             }
 
             if (!teleportedEntities.isEmpty()) {
@@ -124,13 +114,27 @@ public class ModUtils {
         }
     }
 
-    public static void teleportPlayer(RegistryKey<World> world, ServerPlayerEntity player) {
-        ServerWorld targetWorld = player.getServer().getWorld(world);
-        Vec3d targetPosition = new Vec3d(player.getX(), getSpawnStart(targetWorld), player.getZ());
+    /**
+     * A simplified version of {@link #teleportToWorld(RegistryKey, World)} for teleporting players.
+     * 
+     * @param targetWorld The world to teleport the player at
+     * @param player      The player to teleport
+     */
+    public static void teleportPlayer(RegistryKey<World> targetWorld, ServerPlayerEntity player) {
+        ServerWorld world = player.getServer().getWorld(targetWorld);
+        Vec3d targetPosition = new Vec3d(player.getX(), getSpawnStart(world), player.getZ());
         TeleportTarget target = new TeleportTarget(targetPosition, player.getVelocity(), player.getYaw(), player.getPitch());
-        player = FabricDimensions.teleport(player, targetWorld, target);
+        player = FabricDimensions.teleport(player, world, target);
     }
 
+    /**
+     * Spawns a lander in a target world and position.
+     * 
+     * @param rocket         The rocket to create a lander from
+     * @param targetWorld    The world to spawn the lander in
+     * @param targetPosition The position to spawn the lander at
+     * @return A spawned lander entity at the same position as the rocket and with the same inventory
+     */
     public static LanderEntity createLander(RocketEntity rocket, ServerWorld targetWorld, Vec3d targetPosition) {
         LanderEntity lander = new LanderEntity(ModEntityTypes.LANDER, targetWorld);
         lander.setPosition(targetPosition);
@@ -145,6 +149,12 @@ public class ModUtils {
         return lander;
     }
 
+    /**
+     * Gets the cooked variant of a raw food, if it exists, and then spawns the item entity. The cooked variant is obtained by using
+     * a smoking recipe, and then obtaining the result of that recipe.
+     * 
+     * @param itemEntity The item to try to convert into cooked food
+     */
     public static void cookFood(ItemEntity itemEntity) {
         ItemStack stack = itemEntity.getStack();
         ItemStack foodOutput = null;
@@ -162,6 +172,11 @@ public class ModUtils {
         }
     }
 
+    /**
+     * Gets the world's orbit dimension. The orbit dimension is where the planet's space station spawns and where the lander drops.
+     * 
+     * @return The world's orbit dimension, or the overworld if no orbit is defined
+     */
     public static RegistryKey<World> getPlanetOrbit(World world) {
         if (isSpaceWorld(world)) {
             for (Planet planet : (world.isClient ? BeyondEarthClient.planets : BeyondEarth.planets)) {
@@ -176,6 +191,12 @@ public class ModUtils {
         return World.OVERWORLD;
     }
 
+    /**
+     * Gets the gravity of the world, in ratio to earth gravity. So a gravity of 1.0 is equivalent to earth gravity, while 0.5 would
+     * be half of earth's gravity and 2.0 would be twice the earth's gravity.
+     * 
+     * @return The gravity of the world or earth gravity if the world does not have a defined gravity
+     */
     public static float getPlanetGravity(World world) {
         for (Planet planet : world.isClient ? BeyondEarthClient.planets : BeyondEarth.planets) {
             if (planet.world().equals(world.getRegistryKey())) {
@@ -192,6 +213,12 @@ public class ModUtils {
         return 1.0f;
     }
 
+    /**
+     * Gets the spawn start of the world. The spawn start is the position that the player will spawn at after falling through an
+     * orbit dimension.
+     * 
+     * @return The spawn start of the world, or y 450 if the world does not have a defined spawn start
+     */
     public static int getSpawnStart(World world) {
         int spawnStart = 450;
         for (Planet planet : world.isClient ? BeyondEarthClient.planets : BeyondEarth.planets) {
@@ -202,18 +229,11 @@ public class ModUtils {
         return spawnStart;
     }
 
-    public static boolean isOrbitWorld(World world) {
-        return getOrbitWorlds(world.isClient).stream().anyMatch(world.getRegistryKey()::equals);
-    }
-
-    public static boolean isPlanet(World world) {
-        return getPlanets(world.isClient).stream().anyMatch(world.getRegistryKey()::equals);
-    }
-
-    public static boolean isSpaceWorld(World world) {
-        return isPlanet(world) || isOrbitWorld(world);
-    }
-
+    /**
+     * Gets the temperature of the world in celsius.
+     * 
+     * @return The temperature of the world, or 20° for dimensions without a defined temperature
+     */
     public static final float getWorldTemperature(World world) {
         for (Planet planet : world.isClient ? BeyondEarthClient.planets : BeyondEarth.planets) {
             if (planet.world().equals(world.getRegistryKey())) {
@@ -229,6 +249,68 @@ public class ModUtils {
         return 20.0f;
     }
 
+    // Mixin Util
+    public static double getMixinGravity(double value, Object mixin) {
+        Entity entity = (Entity) mixin;
+        return value * getPlanetGravity(entity.world);
+    }
+
+    public static float getMixinGravity(float value, Object mixin) {
+        return (float) getMixinGravity((double) value, mixin);
+    }
+
+    /**
+     * Gets every Beyond Earth dimension, regardless of whether it is a planet or an orbit.
+     */
+    public static Set<RegistryKey<World>> getBeyondEarthDimensions(boolean isClient) {
+        return Stream.concat(getPlanets(isClient).stream(), getOrbitWorlds(isClient).stream()).collect(Collectors.toSet());
+    }
+
+    /**
+     * Checks if the world is labeled as an orbit dimension.
+     */
+    public static boolean isOrbitWorld(World world) {
+        return getOrbitWorlds(world.isClient).stream().anyMatch(world.getRegistryKey()::equals);
+    }
+
+    /**
+     * Gets all of the dimensions that are considered orbit worlds.
+     */
+    public static Set<RegistryKey<World>> getOrbitWorlds(boolean isClient) {
+        Set<RegistryKey<World>> worlds = new HashSet<>();
+        (isClient ? BeyondEarthClient.planets : BeyondEarth.planets).forEach(planet -> {
+            if (!worlds.contains(planet.orbitWorld()))
+                worlds.add(planet.orbitWorld());
+        });
+        return worlds;
+    }
+
+    /**
+     * Check if the world is labeled as a planet dimension.
+     */
+    public static boolean isPlanet(World world) {
+        return getPlanets(world.isClient).stream().anyMatch(world.getRegistryKey()::equals);
+    }
+
+    /**
+     * Gets all of the dimensions that are considered planets or moons, i.e. a dimension from this mod that is not an orbit world.
+     */
+    public static Set<RegistryKey<World>> getPlanets(boolean isClient) {
+        Set<RegistryKey<World>> worlds = new HashSet<>();
+        (isClient ? BeyondEarthClient.planets : BeyondEarth.planets).forEach(planet -> worlds.add(planet.world()));
+        return worlds;
+    }
+
+    /**
+     * Checks if the world is either a planet or an orbit world.
+     */
+    public static boolean isSpaceWorld(World world) {
+        return isPlanet(world) || isOrbitWorld(world);
+    }
+
+    /**
+     * Checks if a world has oxygen, regardless of position.
+     */
     public static boolean worldHasOxygen(World world) {
         if (getBeyondEarthDimensions(world.isClient).stream().noneMatch(world.getRegistryKey()::equals)) {
             return true;
@@ -239,10 +321,16 @@ public class ModUtils {
         return getWorldsWithoutOxygen(world.isClient).stream().anyMatch(world.getRegistryKey()::equals);
     }
 
+    /**
+     * Checks if an entity has oxygen.
+     */
     public static boolean worldHasOxygen(World world, LivingEntity entity) {
         return worldHasOxygen(world, new BlockPos(entity.getEyePos()));
     }
 
+    /**
+     * Checks if a block pos has oxygen.
+     */
     public static boolean worldHasOxygen(World world, BlockPos pos) {
         boolean hasOxygen = worldHasOxygen(world);
         if (world.isClient) {
@@ -252,50 +340,35 @@ public class ModUtils {
         }
     }
 
-    // Mixin Util.
-    public static double getMixinGravity(double value, Object mixin) {
-        Entity entity = (Entity) mixin;
-        return value * getPlanetGravity(entity.world);
+    /**
+     * Gets all of the dimensions in Beyond Earth that have no oxygen.
+     */
+    public static final Set<RegistryKey<World>> getWorldsWithoutOxygen(boolean isClient) {
+        Set<RegistryKey<World>> worlds = new HashSet<>();
+        (isClient ? BeyondEarthClient.planets : BeyondEarth.planets).stream().filter(planet -> planet.hasOxygen()).forEach(planet -> worlds.add(planet.world()));
+        return worlds;
     }
 
-    public static float getMixinGravity(float value, Object mixin) {
-        return (float) getMixinGravity((double) value, mixin);
-    }
-
-    public static boolean hasOxygenatedSpaceSuit(PlayerEntity player) {
-        ItemStack chest = player.getEquippedStack(EquipmentSlot.CHEST);
-        if (chest.getItem() instanceof SpaceSuit suit) {
-            return suit.getAmount(chest) > 0;
+    /**
+     * Spawns a server-side particle that renders regardless of the distance away from the player. This is important as normal
+     * particles are only rendered at up to 32 blocks away.
+     */
+    public static <T extends ParticleEffect> void spawnForcedParticles(ServerWorld world, T particle, double x, double y, double z, int count, double deltaX, double deltaY, double deltaZ, double speed) {
+        for (ServerPlayerEntity player : world.getPlayers()) {
+            world.spawnParticles(player, particle, true, x, y, z, count, deltaX, deltaY, deltaZ, speed);
         }
-
-        return false;
     }
 
-    public static boolean hasFullSpaceSet(LivingEntity entity) {
-        for (ItemStack armourItem : entity.getArmorItems()) {
-            if (!(armourItem.getItem() instanceof SpaceSuit)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public static boolean hasFullNetheriteSpaceSet(LivingEntity entity) {
-        for (ItemStack armourItem : entity.getArmorItems()) {
-            if (!(armourItem.getItem() instanceof NetheriteSpaceSuit)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public static boolean hasFullJetSuitSet(LivingEntity entity) {
-        for (ItemStack armourItem : entity.getArmorItems()) {
-            if (!(armourItem.getItem() instanceof JetSuit)) {
-                return false;
-            }
-        }
-        return true;
+    /**
+     * Rotates the vehicle yaw without causing any stuttering effect or visual glitches.
+     * 
+     * @param vehicle The vehicle to apply the rotation
+     * @param newYaw  The new yaw to apply to the vehicle
+     */
+    public static void rotateVehicleYaw(VehicleEntity vehicle, float newYaw) {
+        vehicle.setYaw(newYaw);
+        vehicle.setBodyYaw(newYaw);
+        vehicle.prevYaw = newYaw;
     }
 
     public static boolean checkTag(Entity entity, TagKey<EntityType<?>> tag) {
@@ -304,42 +377,5 @@ public class ModUtils {
 
     public static boolean checkTag(ItemStack stack, TagKey<Item> tag) {
         return stack.isIn(tag);
-    }
-
-    public static <T extends ParticleEffect> void spawnForcedParticles(ServerWorld world, T particle, double x, double y, double z, int count, double deltaX, double deltaY, double deltaZ, double speed) {
-        for (ServerPlayerEntity player : world.getPlayers()) {
-            world.spawnParticles(player, particle, true, x, y, z, count, deltaX, deltaY, deltaZ, speed);
-        }
-    }
-
-    public static Set<RegistryKey<World>> getBeyondEarthDimensions(boolean isClient) {
-        return Stream.concat(getPlanets(isClient).stream(), getOrbitWorlds(isClient).stream()).collect(Collectors.toSet());
-    }
-
-    public static Set<RegistryKey<World>> getOrbitWorlds(boolean isClient) {
-        Set<RegistryKey<World>> worlds = new HashSet<>();
-        (isClient ? BeyondEarthClient.planets : BeyondEarth.planets).forEach(planet -> {
-            if (!worlds.contains(planet.orbitWorld()))
-                worlds.add(planet.orbitWorld());
-        });
-        return worlds;
-    }
-
-    public static Set<RegistryKey<World>> getPlanets(boolean isClient) {
-        Set<RegistryKey<World>> worlds = new HashSet<>();
-        (isClient ? BeyondEarthClient.planets : BeyondEarth.planets).forEach(planet -> worlds.add(planet.world()));
-        return worlds;
-    }
-
-    private static final Set<RegistryKey<World>> getWorldsWithoutOxygen(boolean isClient) {
-        Set<RegistryKey<World>> worlds = new HashSet<>();
-        (isClient ? BeyondEarthClient.planets : BeyondEarth.planets).stream().filter(planet -> planet.hasOxygen()).forEach(planet -> worlds.add(planet.world()));
-        return worlds;
-    }
-
-    public static void rotateVehicleYaw(VehicleEntity vehicle, float newYaw) {
-        vehicle.setYaw(newYaw);
-        vehicle.setBodyYaw(newYaw);
-        vehicle.prevYaw = newYaw;
     }
 }

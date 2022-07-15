@@ -112,7 +112,9 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
 
         if (oxygenBlocksCount <= 0 && entity.getCachedState().get(AbstractMachineBlock.LIT)) {
             if (GuiUtil.isHovering(getBlockedWarningSignBounds(), mouseX, mouseY)) {
-                this.renderTooltip(matrices, Arrays.asList(new TranslatableText("gauge_text.beyond_earth.blocked_warning[0]"), new TranslatableText("gauge_text.beyond_earth.blocked_warning[1]")), mouseX, mouseY);
+                this.renderTooltip(matrices,
+                        Arrays.asList(new TranslatableText("gauge_text.beyond_earth.blocked_warning[0]"), new TranslatableText("gauge_text.beyond_earth.blocked_warning[1]"), new TranslatableText("gauge_text.beyond_earth.blocked_warning[2]")), mouseX,
+                        mouseY);
             }
         }
     }

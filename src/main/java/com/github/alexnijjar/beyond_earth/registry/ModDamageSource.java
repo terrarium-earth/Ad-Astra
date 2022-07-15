@@ -1,10 +1,10 @@
-package com.github.alexnijjar.beyond_earth.util;
+package com.github.alexnijjar.beyond_earth.registry;
 
 import net.minecraft.entity.damage.DamageSource;
 
 public class ModDamageSource extends DamageSource {
 
-    // Custom death sources.
+    // Custom death sources
     public static final DamageSource OXYGEN = new ModDamageSource("oxygen").setBypassesArmor();
     public static final DamageSource ROCKET_FLAMES = new ModDamageSource("rocket_flames").setFire();
     public static final DamageSource CRYO_FUEL = new ModDamageSource("cryo_fuel");

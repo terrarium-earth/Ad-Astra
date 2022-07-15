@@ -2,7 +2,7 @@ package com.github.alexnijjar.beyond_earth.blocks.fluid;
 
 import java.util.Random;
 
-import com.github.alexnijjar.beyond_earth.util.ModDamageSource;
+import com.github.alexnijjar.beyond_earth.registry.ModDamageSource;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FluidBlock;

@@ -16,7 +16,7 @@ import net.minecraft.world.WorldAccess;
 public class PygroEntity extends PiglinEntity {
 
     public static DefaultAttributeContainer.Builder createMobAttributes() {
-        return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.35).add(EntityAttributes.GENERIC_MAX_HEALTH, 16).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5);
+        return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.45).add(EntityAttributes.GENERIC_MAX_HEALTH, 24).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 6);
     }
 
     public PygroEntity(EntityType<? extends AbstractPiglinEntity> entityType, World world) {

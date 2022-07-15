@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "beyond_earth:glacio_stone_bricks"
+    ]
+  },
+  "criteria": {
+    "has_glacio_stone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "beyond_earth:glacio_stone"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "beyond_earth:glacio_stone_bricks"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_glacio_stone",
+      "has_the_recipe"
+    ]
+  ]
+}

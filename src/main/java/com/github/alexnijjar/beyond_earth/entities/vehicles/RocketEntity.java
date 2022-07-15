@@ -6,10 +6,11 @@ import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.blocks.launch_pad.RocketLaunchPad;
 import com.github.alexnijjar.beyond_earth.gui.PlanetSelectionScreenHandlerFactory;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.PlanetSelectionScreenHandler;
+import com.github.alexnijjar.beyond_earth.items.armour.NetheriteSpaceSuit;
+import com.github.alexnijjar.beyond_earth.registry.ModDamageSource;
 import com.github.alexnijjar.beyond_earth.registry.ModFluids;
 import com.github.alexnijjar.beyond_earth.registry.ModParticleTypes;
 import com.github.alexnijjar.beyond_earth.registry.ModSounds;
-import com.github.alexnijjar.beyond_earth.util.ModDamageSource;
 import com.github.alexnijjar.beyond_earth.util.ModKeyBindings;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
@@ -222,7 +223,7 @@ public class RocketEntity extends VehicleEntity {
     private void burnEntitiesUnderRocket() {
         List<LivingEntity> entities = world.getEntitiesByClass(LivingEntity.class, this.getBoundingBox().expand(2, 30, 2).offset(0, -37, 0), entity -> true);
         for (LivingEntity entity : entities) {
-            if (ModUtils.hasFullNetheriteSpaceSet(entity) || (entity.getVehicle() != null && entity.getVehicle().equals(this))) {
+            if (NetheriteSpaceSuit.hasFullSet(entity) || (entity.getVehicle() != null && entity.getVehicle().equals(this))) {
                 continue;
             }
             if (BeyondEarth.CONFIG.rocket.entitiesBurnUnderRocket && !entity.isFireImmune()) {

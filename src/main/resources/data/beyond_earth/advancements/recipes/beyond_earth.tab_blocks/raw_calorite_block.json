@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:raw_calorite_block"
+    ]
+  },
+  "criteria": {
+    "has_raw_calorite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "beyond_earth:raw_calorite"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:raw_calorite_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_raw_calorite",
+      "has_the_recipe"
+    ]
+  ]
+}

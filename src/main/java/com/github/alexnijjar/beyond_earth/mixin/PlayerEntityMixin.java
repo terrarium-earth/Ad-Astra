@@ -8,8 +8,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.items.armour.JetSuit;
+import com.github.alexnijjar.beyond_earth.items.armour.NetheriteSpaceSuit;
 import com.github.alexnijjar.beyond_earth.util.ModKeyBindings;
-import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.damage.DamageSource;
@@ -24,7 +24,7 @@ public abstract class PlayerEntityMixin {
         if (BeyondEarth.CONFIG.spaceSuit.netheriteSpaceSuitHasFireResistance) {
             PlayerEntity player = ((PlayerEntity) (Object) this);
             if (source.isFire() || source.equals(DamageSource.HOT_FLOOR) ) {
-                if (ModUtils.hasFullNetheriteSpaceSet(player)) {
+                if (NetheriteSpaceSuit.hasFullSet(player)) {
                     player.setFireTicks(0);
                     ci.setReturnValue(false);
                 }
@@ -37,7 +37,7 @@ public abstract class PlayerEntityMixin {
         if (BeyondEarth.CONFIG.spaceSuit.enableJetSuitFlight) {
             PlayerEntity player = ((PlayerEntity) (Object) this);
             if (!player.hasVehicle()) {
-                if (ModUtils.hasFullJetSuitSet(player)) {
+                if (JetSuit.hasFullSet(player)) {
                     ItemStack chest = player.getEquippedStack(EquipmentSlot.CHEST);
                     if (chest.getItem() instanceof JetSuit jetSuit) {
                         if (ModKeyBindings.jumpKeyDown(player)) {
@@ -56,7 +56,7 @@ public abstract class PlayerEntityMixin {
         if (BeyondEarth.CONFIG.spaceSuit.enableJetSuitFlight) {
             PlayerEntity player = ((PlayerEntity) (Object) this);
             if (!player.hasVehicle()) {
-                if (ModUtils.hasFullJetSuitSet(player)) {
+                if (JetSuit.hasFullSet(player)) {
                     if (player.getEquippedStack(EquipmentSlot.CHEST).getItem() instanceof JetSuit jetSuit) {
                         if (ModKeyBindings.sprintKeyDown(player)) {
                             ci.setReturnValue(true);

@@ -33,6 +33,9 @@ public class FluidUtils {
 		return millibuckets * 81;
 	}
 
+	/**
+	 * Creates a fluid tank for a block entity. Every time the tank is modified, the block entity is marked dirty.
+	 */
 	public static <T extends ConversionRecipe> SingleVariantStorage<FluidVariant> createTank(FluidMachineBlockEntity blockEntity, long tankSize) {
 		return new SingleVariantStorage<>() {
 			@Override
@@ -52,6 +55,9 @@ public class FluidUtils {
 		};
 	}
 
+	/**
+	 * Creates a fluid tank that does not do anything on the final commit.
+	 */
 	public static <T extends ConversionRecipe> SingleVariantStorage<FluidVariant> createTank(long tankSize) {
 		return new SingleVariantStorage<>() {
 			@Override
@@ -66,7 +72,9 @@ public class FluidUtils {
 		};
 	}
 
-	// Transfers and converts a fluid from the input tank to the output tank.
+	/**
+	 * Transfers and converts a fluid from the input tank to the output tank.
+	 */
 	public static <T extends ConversionRecipe> boolean convertFluid(FluidMachineBlockEntity inventory, List<T> recipes) {
 		FluidVariant inputTankFluid = inventory.inputTank.variant;
 		for (T recipe : recipes) {
@@ -82,8 +90,10 @@ public class FluidUtils {
 		return false;
 	}
 
-	// Inserts fluid from an input item, such as a bucket, into the input tank. The item is then emptied and placed into the output
-	// slot.
+	/**
+	 * Inserts fluid from an input item, such as a bucket, into the input tank. The item is then emptied and placed into the output
+	 * slot.
+	 */
 	public static void insertFluidIntoTank(Inventory inventory, Storage<FluidVariant> inputTank, int insertSlot, int extractSlot, Predicate<FluidVariant> filter) {
 		ItemStack original = inventory.getStack(insertSlot).copy();
 		inventory.getStack(insertSlot).setCount(1);
@@ -100,7 +110,7 @@ public class FluidUtils {
 					inventory.setStack(extractSlot, stack);
 
 					transaction.commit();
-					
+
 					inventory.setStack(insertSlot, original.copy());
 					return;
 				}
@@ -125,7 +135,9 @@ public class FluidUtils {
 		inventory.setStack(insertSlot, original.copy());
 	}
 
-	// Extracts fluid from an output, and inserts it into a fluid-holding item. The item is then moved to the output slot.
+	/**
+	 * Extracts fluid from an output, and inserts it into a fluid-holding item. The item is then moved to the output slot.
+	 */
 	public static void extractFluidFromTank(Inventory inventory, Storage<FluidVariant> outputTank, int insertSlot, int extractSlot) {
 		ItemStack original = inventory.getStack(insertSlot).copy();
 		inventory.getStack(insertSlot).setCount(1);
@@ -151,11 +163,33 @@ public class FluidUtils {
 		}
 	}
 
+	/**
+	 * Checks if a stack can be inserted into the output slot.
+	 */
 	public static boolean canInsert(Inventory inventory, int extractSlot, ContainerItemContext context) {
 		ItemStack extractSlotStack = inventory.getStack(extractSlot);
 		return !(!extractSlotStack.isEmpty() && (!ItemStack.canCombine(extractSlotStack, extractSlotStack) || extractSlotStack.getCount() >= extractSlotStack.getMaxCount()));
 	}
 
+	/**
+	 * Move resources between two storages, matching the passed filter, and return the amount that was successfully transferred.
+	 *
+	 * @param from            The source storage. May be null.
+	 * @param to              The target storage. May be null.
+	 * @param filter          The filter for transferred resources. Only resources for which this filter returns {@code true} will
+	 *                        be transferred. This filter will never be tested with a blank resource, and filters are encouraged to
+	 *                        throw an exception if this guarantee is violated.
+	 * @param maxAmount       The maximum amount that will be transferred.
+	 * @param transaction     The transaction this transfer is part of, or {@code null} if a transaction should be opened just for
+	 *                        this transfer.
+	 * @param <T>             The type of resources to move.
+	 * @param outputFluid     The fluid to output as the result.
+	 * @param conversionRatio A ratio of the input to output fluid. For example, if 100 millibuckets are put in and the conversion
+	 *                        ratio is 0.5, then 25 millibuckets will be output.
+	 * @return The total amount of resources that was successfully transferred.
+	 * @throws IllegalStateException If no transaction is passed and a transaction is already active on the current thread.
+	 * @see {@link StorageUtil#move(Storage, Storage, Predicate, long, Transaction)}
+	 */
 	public static long convertAndMove(@Nullable Storage<FluidVariant> from, @Nullable Storage<FluidVariant> to, Predicate<FluidVariant> filter, long maxAmount, @Nullable TransactionContext transaction, FluidVariant outputFluid, double conversionRatio) {
 		if (from == null || to == null)
 			return 0;
