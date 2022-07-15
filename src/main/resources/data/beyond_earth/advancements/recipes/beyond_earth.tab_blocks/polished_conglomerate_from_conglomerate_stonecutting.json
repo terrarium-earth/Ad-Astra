@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:polished_conglomerate_from_conglomerate_stonecutting"
+    ]
+  },
+  "criteria": {
+    "has_conglomerate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "beyond_earth:conglomerate"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:polished_conglomerate_from_conglomerate_stonecutting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_conglomerate",
+      "has_the_recipe"
+    ]
+  ]
+}

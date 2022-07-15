@@ -6,6 +6,21 @@
     "beyond_earth:mercury_stone_brick_stairs",
     "beyond_earth:venus_sandstone_brick_stairs",
     "beyond_earth:venus_stone_brick_stairs",
-    "beyond_earth:glacio_stone_brick_stairs"
+    "beyond_earth:glacio_stone_brick_stairs",
+    "beyond_earth:chiseled_moon_stone_stairs",
+    "beyond_earth:polished_moon_stone_stairs",
+    "beyond_earth:chiseled_mars_stone_stairs",
+    "beyond_earth:polished_mars_stone_stairs",
+    "beyond_earth:chiseled_venus_stone_stairs",
+    "beyond_earth:polished_venus_stone_stairs",
+    "beyond_earth:chiseled_mercury_stone_stairs",
+    "beyond_earth:polished_mercury_stone_stairs",
+    "beyond_earth:chiseled_glacio_stone_stairs",
+    "beyond_earth:polished_glacio_stone_stairs",
+    "beyond_earth:iron_plating_stairs",
+    "beyond_earth:steel_plating_stairs",    
+    "beyond_earth:desh_plating_stairs",
+    "beyond_earth:ostrum_plating_stairs",
+    "beyond_earth:calorite_plating_stairs"
   ]
 }

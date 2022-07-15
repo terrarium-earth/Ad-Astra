@@ -12,6 +12,10 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 
+/**
+ * Checks if a key is pressed, on both the client or server. On the server, it's saved for every player by mapping their UUID to
+ * an instance of this class. Then, when a specific player presses a key, it's only pressed for that player's UUID.
+ */
 public class ModKeyBindings {
     public static final Map<UUID, ModKeyBindings> PLAYER_KEYS = new HashMap<>();
 

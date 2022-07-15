@@ -99,13 +99,11 @@ public class RoverEntity extends VehicleEntity {
 
                 // Player is clicking 'w' to move forward.
                 if (ModKeyBindings.forwardKeyDown(player)) {
-                    // this.setSpeed((this.getSpeed() + BeyondEarth.CONFIG.rover.forwardSpeed) * ((this.isTouchingWater() || this.isInLava()) ? 0.5f : 1.0f));
                     shouldConsumeFuel = true;
                     this.setSpeed((this.isTouchingWater() || this.isInLava()) ? 0.25f : 1.0f);
                 }
                 // Player is clicking 's' to move backward.
                 if (ModKeyBindings.backKeyDown(player)) {
-                    // this.setSpeed((this.getSpeed() - BeyondEarth.CONFIG.rover.backwardSpeed) * ((this.isTouchingWater() || this.isInLava()) ? 0.5f : 1.0f));
                     shouldConsumeFuel = true;
                     this.setSpeed((this.isTouchingWater() || this.isInLava()) ? -0.1f : -0.5f);
                 }

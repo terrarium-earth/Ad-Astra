@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "beyond_earth:oxygen_tank"
+    ]
+  },
+  "criteria": {
+    "has_compressed_steel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "c:compressed_steel"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "beyond_earth:oxygen_tank"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_compressed_steel",
+      "has_the_recipe"
+    ]
+  ]
+}

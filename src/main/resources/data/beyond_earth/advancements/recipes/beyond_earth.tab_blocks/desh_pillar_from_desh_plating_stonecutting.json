@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:desh_pillar_from_desh_plating_stonecutting"
+    ]
+  },
+  "criteria": {
+    "has_desh_plating": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "beyond_earth:desh_plating"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:desh_pillar_from_desh_plating_stonecutting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_desh_plating",
+      "has_the_recipe"
+    ]
+  ]
+}

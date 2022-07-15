@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "beyond_earth:calorite_plating_stairs"
+    ]
+  },
+  "criteria": {
+    "has_calorite_plating": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "beyond_earth:calorite_plating"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "beyond_earth:calorite_plating_stairs"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_calorite_plating",
+      "has_the_recipe"
+    ]
+  ]
+}

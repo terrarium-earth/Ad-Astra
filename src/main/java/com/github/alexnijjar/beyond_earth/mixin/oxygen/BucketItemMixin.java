@@ -10,6 +10,7 @@ import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.FluidFillable;
 import net.minecraft.block.Material;
 import net.minecraft.entity.Entity;
@@ -45,6 +46,10 @@ public class BucketItemMixin {
                 int i = pos.getX();
                 int j = pos.getY();
                 int k = pos.getZ();
+                if (ModUtils.getWorldTemperature(world) < 0) {
+                    world.setBlockState(pos, Blocks.ICE.getDefaultState());
+
+                }
                 world.playSound(player, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5f, 2.6f + (world.random.nextFloat() - world.random.nextFloat()) * 0.8f);
                 for (int l = 0; l < 8; ++l) {
                     world.addParticle(ParticleTypes.LARGE_SMOKE, (double) i + Math.random(), (double) j + Math.random(), (double) k + Math.random(), 0.0, 0.0, 0.0);

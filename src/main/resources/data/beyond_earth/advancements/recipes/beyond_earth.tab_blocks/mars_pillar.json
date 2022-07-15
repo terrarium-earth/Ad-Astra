@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "beyond_earth:mars_pillar"
+    ]
+  },
+  "criteria": {
+    "has_mars_stone_bricks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "beyond_earth:mars_stone_bricks"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "beyond_earth:mars_pillar"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_mars_stone_bricks",
+      "has_the_recipe"
+    ]
+  ]
+}

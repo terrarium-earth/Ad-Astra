@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "beyond_earth:moon_stone_brick_slab"
+    ]
+  },
+  "criteria": {
+    "has_moon_stone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "beyond_earth:moon_stone"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "beyond_earth:moon_stone_brick_slab"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_moon_stone",
+      "has_the_recipe"
+    ]
+  ]
+}

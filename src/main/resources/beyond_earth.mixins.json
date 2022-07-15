@@ -10,6 +10,7 @@
     "EntityMixin",
     "FireworkRocketItemMixin",
     "GeneratorOptionsMixin",
+    "IceBlockMixin",
     "LivingEntityMixin",
     "NoiseChunkGeneratorAccessor",
     "PaintingEntityMixin",

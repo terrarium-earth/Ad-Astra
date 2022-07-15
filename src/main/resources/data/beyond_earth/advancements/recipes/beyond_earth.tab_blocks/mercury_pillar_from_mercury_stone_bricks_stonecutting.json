@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:mercury_pillar_from_mercury_stone_bricks_stonecutting"
+    ]
+  },
+  "criteria": {
+    "has_mercury_stone_bricks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "beyond_earth:mercury_stone_bricks"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:mercury_pillar_from_mercury_stone_bricks_stonecutting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_mercury_stone_bricks",
+      "has_the_recipe"
+    ]
+  ]
+}

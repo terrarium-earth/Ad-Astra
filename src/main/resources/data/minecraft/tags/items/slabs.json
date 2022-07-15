@@ -6,6 +6,21 @@
 		"beyond_earth:mercury_stone_brick_slab",
 		"beyond_earth:venus_sandstone_brick_slab",
 		"beyond_earth:venus_stone_brick_slab",
-		"beyond_earth:glacio_stone_brick_slab"
+		"beyond_earth:glacio_stone_brick_slab",
+		"beyond_earth:chiseled_moon_stone_slab",
+		"beyond_earth:polished_moon_stone_slab",
+		"beyond_earth:chiseled_mars_stone_slab",
+		"beyond_earth:polished_mars_stone_slab",
+		"beyond_earth:chiseled_venus_stone_slab",
+		"beyond_earth:polished_venus_stone_slab",
+		"beyond_earth:chiseled_mercury_stone_slab",
+		"beyond_earth:polished_mercury_stone_slab",
+		"beyond_earth:chiseled_glacio_stone_slab",
+		"beyond_earth:polished_glacio_stone_slab",
+		"beyond_earth:iron_plating_slab",
+		"beyond_earth:steel_plating_slab",
+		"beyond_earth:desh_plating_slab",
+		"beyond_earth:ostrum_plating_slab",
+		"beyond_earth:calorite_plating_slab"
 	]
 }

@@ -24,10 +24,11 @@ public class ClientPlayerEntityMixin {
 
         ClientPlayerEntity player = ((ClientPlayerEntity) (Object) this);
         boolean disableOverlays = false;
+        boolean hasFullSet = SpaceSuit.hasFullSet(player);
 
-        PlayerOverlayScreen.shouldRenderOxygen = ModUtils.hasFullSpaceSet(player);
+        PlayerOverlayScreen.shouldRenderOxygen = hasFullSet;
 
-        if (ModUtils.hasFullSpaceSet(player)) {
+        if (hasFullSet) {
             ItemStack chest = player.getEquippedStack(EquipmentSlot.CHEST);
             if (chest.getItem() instanceof SpaceSuit suit) {
                 long oxygen = suit.getAmount(chest);

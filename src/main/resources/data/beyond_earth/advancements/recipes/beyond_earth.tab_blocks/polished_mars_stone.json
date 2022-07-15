@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "beyond_earth:polished_mars_stone"
+    ]
+  },
+  "criteria": {
+    "has_mars_stone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "beyond_earth:mars_stone"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "beyond_earth:polished_mars_stone"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_mars_stone",
+      "has_the_recipe"
+    ]
+  ]
+}
