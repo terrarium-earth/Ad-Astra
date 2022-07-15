@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "beyond_earth:tier_1_rover"
+    ]
+  },
+  "criteria": {
+    "has_compressed_desh": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "c:compressed_desh"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "beyond_earth:tier_1_rover"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_compressed_desh",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -25,7 +25,7 @@ public class ClientOxygenUtils {
     private static int spawnOxygenBubblesTick = UPDATE_OXYGEN_FILLER_TICKS;
     public static long currentClientTick;
 
-    // Contains every pos in all dimensions with oxygen.
+    // Contains every pos in all dimensions with oxygen
     private static Map<Pair<RegistryKey<World>, BlockPos>, Set<BlockPos>> oxygenLocations = new HashMap<>();
 
     static {
@@ -70,6 +70,13 @@ public class ClientOxygenUtils {
         oxygenLocations.put(Pair.of(world.getRegistryKey(), source), entries);
     }
 
+    /**
+     * Gets the amount of blocks that an oxygen distributor is distributing.
+     * 
+     * @param world  The world to check for oxygen in
+     * @param source The oxygen distributor position
+     * @return The amount of blocks that an oxygen distributor is distributing oxygen to
+     */
     public static int getOxygenBlocksCount(World world, BlockPos source) {
         if (oxygenLocations.containsKey(Pair.of(world.getRegistryKey(), source))) {
             return oxygenLocations.get(Pair.of(world.getRegistryKey(), source)).size();

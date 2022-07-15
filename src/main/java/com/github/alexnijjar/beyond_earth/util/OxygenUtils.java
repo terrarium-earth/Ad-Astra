@@ -31,9 +31,12 @@ import net.minecraft.world.World;
 
 public class OxygenUtils {
 
+    // Contains every pos in all dimensions with oxygen.
     private static Map<Pair<RegistryKey<World>, BlockPos>, Set<BlockPos>> oxygenLocations = new HashMap<>();
 
-    // Checks if there is oxygen in a specific block in a specific dimension.
+    /**
+     * Checks if there is oxygen in a specific block in a specific dimension.
+     */
     public static boolean posHasOxygen(ServerWorld world, BlockPos pos) {
         if (world.getServer().getTicks() <= BeyondEarth.CONFIG.oxygenDistributor.oxygenGracePeriodTicks) {
             return true;
@@ -48,6 +51,13 @@ public class OxygenUtils {
         return false;
     }
 
+    /**
+     * Gets the amount of blocks that an oxygen distributor is distributing.
+     * 
+     * @param world  The world to check for oxygen in
+     * @param source The oxygen distributor position
+     * @return The amount of blocks that an oxygen distributor is distributing oxygen to
+     */
     public static int getOxygenBlocksCount(World world, BlockPos source) {
         if (oxygenLocations.containsKey(Pair.of(Pair.of(world.getRegistryKey(), source), source))) {
             return oxygenLocations.get(Pair.of(Pair.of(world.getRegistryKey(), source), source)).size();
@@ -74,11 +84,22 @@ public class OxygenUtils {
         if (!oxygenLocations.containsKey(Pair.of(world.getRegistryKey(), source))) {
             return;
         }
-        deoxygenizeBlocks(world, oxygenLocations.get(Pair.of(world.getRegistryKey(), source)));
         oxygenLocations.remove(Pair.of(world.getRegistryKey(), source));
+        deoxygenizeBlocks(world, oxygenLocations.get(Pair.of(world.getRegistryKey(), source)));
     }
 
+    /**
+     * Removes the oxygen from a set of blocks. For example, turns water into ice or air, converts torches into coal torches, puts
+     * out flames, kills plants etc.
+     */
     public static void deoxygenizeBlocks(World world, Set<BlockPos> entries) {
+        if (entries == null) {
+            return;
+        }
+        if (ModUtils.worldHasOxygen(world)) {
+            return;
+        }
+        
         for (BlockPos pos : entries) {
 
             BlockState state = world.getBlockState(pos);
@@ -130,7 +151,11 @@ public class OxygenUtils {
 
             if (state.getFluidState().isIn(FluidTags.WATER)) {
                 if (block.equals(Blocks.WATER)) {
-                    world.setBlockState(pos, Blocks.AIR.getDefaultState());
+                    if (ModUtils.getWorldTemperature(world) < 0) {
+                        world.setBlockState(pos, Blocks.ICE.getDefaultState());
+                    } else {
+                        world.setBlockState(pos, Blocks.AIR.getDefaultState());
+                    }
                 } else if (state.contains(Properties.WATERLOGGED)) {
                     world.setBlockState(pos, state.with(Properties.WATERLOGGED, false));
                 }

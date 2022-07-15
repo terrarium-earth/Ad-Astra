@@ -10,9 +10,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.VehicleEntity;
+import com.github.alexnijjar.beyond_earth.items.armour.JetSuit;
+import com.github.alexnijjar.beyond_earth.items.armour.NetheriteSpaceSuit;
 import com.github.alexnijjar.beyond_earth.items.armour.SpaceSuit;
+import com.github.alexnijjar.beyond_earth.registry.ModDamageSource;
 import com.github.alexnijjar.beyond_earth.registry.ModTags;
-import com.github.alexnijjar.beyond_earth.util.ModDamageSource;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
 import net.minecraft.entity.Entity;
@@ -20,6 +22,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -46,7 +49,7 @@ public abstract class LivingEntityMixin {
         }
 
         // Reduce fall damage if wearing a jet suit
-        if (fallDistance <= 10 && ModUtils.hasFullJetSuitSet(entity)) {
+        if (fallDistance <= 10 && JetSuit.hasFullSet(entity)) {
             ci.setReturnValue(false);
         }
     }
@@ -107,7 +110,7 @@ public abstract class LivingEntityMixin {
                     if (!isCreative) {
                         if (entity instanceof PlayerEntity player) {
 
-                            if (ModUtils.hasFullSpaceSet(player) && ModUtils.hasOxygenatedSpaceSuit(player)) {
+                            if (SpaceSuit.hasFullSet(player) && SpaceSuit.hasOxygenatedSpaceSuit(player)) {
                                 ItemStack chest = player.getEquippedStack(EquipmentSlot.CHEST);
                                 if (chest.getItem() instanceof SpaceSuit suit) {
                                     long oxygen = suit.getAmount(chest);
@@ -118,7 +121,7 @@ public abstract class LivingEntityMixin {
                                             player.setAir(275);
                                             hasOxygen = true;
                                             entity.setFrozenTicks(0);
-                                            hasNetheriteSpaceSuit = ModUtils.hasFullNetheriteSpaceSet(player);
+                                            hasNetheriteSpaceSuit = NetheriteSpaceSuit.hasFullSet(player);
                                             suit.setAmount(chest, oxygen - 3);
                                         }
                                     }
@@ -148,7 +151,7 @@ public abstract class LivingEntityMixin {
                                 }
                                 // Burn the player in extremely hot temperatures.
                             } else if (temperature > 70.0f) {
-                                if (!hasOxygen || !hasNetheriteSpaceSuit) {
+                                if (!hasOxygen || (!hasNetheriteSpaceSuit && !entity.hasStatusEffect(StatusEffects.FIRE_RESISTANCE))) {
                                     if (!entity.isFireImmune()) {
                                         entity.damage(ModDamageSource.OXYGEN, 2);
                                         entity.setOnFireFor(10);

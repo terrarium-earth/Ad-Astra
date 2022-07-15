@@ -29,7 +29,7 @@ import net.minecraft.world.explosion.Explosion;
 public class SulfurCreeperEntity extends CreeperEntity {
 
     public static DefaultAttributeContainer.Builder createMobAttributes() {
-        return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25);
+        return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.35);
     }
 
     public SulfurCreeperEntity(EntityType<? extends CreeperEntity> entityType, World world) {

@@ -1,6 +1,7 @@
 package com.github.alexnijjar.beyond_earth.items.armour;
 
 import java.util.List;
+import java.util.stream.StreamSupport;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.registry.ModItems;
@@ -145,5 +146,9 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
     @Override
     public long getEnergyMaxOutput() {
         return 256;
+    }
+
+    public static boolean hasFullSet(LivingEntity entity) {
+        return StreamSupport.stream(entity.getArmorItems().spliterator(), false).allMatch(s -> s.getItem() instanceof JetSuit);
     }
 }

@@ -202,7 +202,7 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		offerQuadRecipe(exporter, VENUS_SANDSTONE, VENUS_SAND);
 
 		// Ice
-		offerQuadRecipe(exporter, 1, Blocks.PACKED_ICE, ModItems.ICE_SHARD);
+		offerQuadRecipe(exporter, 1, Blocks.ICE, ModItems.ICE_SHARD);
 
 		// Rocket Launch Pad
 		ShapedRecipeJsonBuilder.create(ROCKET_LAUNCH_PAD, 9).input(Character.valueOf('#'), ModTags.COMPRESSED_STEEL).input(Character.valueOf('|'), ModTags.IRON_PLATES).pattern("#|#").pattern("|#|").pattern("#|#").group("rocket_launch_pad")

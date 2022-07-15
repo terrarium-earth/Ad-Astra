@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "beyond_earth:jet_suit_helmet"
+    ]
+  },
+  "criteria": {
+    "has_compressed_calorite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "c:compressed_calorite"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "beyond_earth:jet_suit_helmet"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_compressed_calorite",
+      "has_the_recipe"
+    ]
+  ]
+}

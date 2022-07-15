@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:desh_ingot"
+    ]
+  },
+  "criteria": {
+    "has_desh_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "beyond_earth:desh_block"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:desh_ingot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_desh_block",
+      "has_the_recipe"
+    ]
+  ]
+}

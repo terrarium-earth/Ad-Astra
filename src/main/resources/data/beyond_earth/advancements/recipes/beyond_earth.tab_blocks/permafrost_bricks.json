@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "beyond_earth:permafrost_bricks"
+    ]
+  },
+  "criteria": {
+    "has_permafrost": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "beyond_earth:permafrost"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "beyond_earth:permafrost_bricks"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_permafrost",
+      "has_the_recipe"
+    ]
+  ]
+}

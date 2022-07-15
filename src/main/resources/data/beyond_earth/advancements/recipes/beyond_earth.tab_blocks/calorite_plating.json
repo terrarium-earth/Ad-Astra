@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "beyond_earth:calorite_plating"
+    ]
+  },
+  "criteria": {
+    "has_iron_plating": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "c:compressed_calorite"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "beyond_earth:calorite_plating"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_iron_plating",
+      "has_the_recipe"
+    ]
+  ]
+}

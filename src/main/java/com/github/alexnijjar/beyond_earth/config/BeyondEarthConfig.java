@@ -104,8 +104,6 @@ public class BeyondEarthConfig implements ConfigData {
         public static class RoverConfig {
             public boolean explodeRoverInLava = true;
             public long fuelPerTick = FluidConstants.BUCKET / 3000;
-            public float forwardSpeed = 0.2f;
-            public float backwardSpeed = 0.15f;
             public float turnSpeed = 15.0f;
             public float maxTurnSpeed = 4.0f;
             public float deceleration = 0.9f;
