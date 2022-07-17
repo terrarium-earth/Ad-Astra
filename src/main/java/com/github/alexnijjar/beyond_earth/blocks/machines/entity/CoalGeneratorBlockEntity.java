@@ -14,6 +14,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 
 public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity {
 
@@ -52,6 +53,16 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity {
     }
 
     @Override
+    public boolean canInsert(int slot, ItemStack stack, Direction dir) {
+        return slot == 0;
+    }
+
+    @Override
+    public boolean canExtract(int slot, ItemStack stack, Direction dir) {
+        return false;
+    }
+
+    @Override
     public void tick() {
         if (!this.world.isClient) {
             if (this.usesEnergy()) {
@@ -75,6 +86,8 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity {
                     } else {
                         this.setActive(false);
                     }
+                } else {
+                    this.setActive(false);
                 }
                 // Send energy to surrounding blocks.
                 this.energyOut();

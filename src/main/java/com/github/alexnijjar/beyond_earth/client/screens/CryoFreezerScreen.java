@@ -15,7 +15,7 @@ import net.minecraft.util.Identifier;
 
 public class CryoFreezerScreen extends AbstractMachineScreen<CryoFreezerScreenHandler> {
 
-    private static final Identifier TEXTURE = new ModIdentifier("textures/screens/cryo_freezer.png");
+    private static final Identifier TEXTURE = new ModIdentifier("textures/gui/screens/cryo_freezer.png");
 
     public static final int SNOWFLAKE_LEFT = 68;
     public static final int SNOWFLAKE_TOP = 52;
@@ -44,7 +44,7 @@ public class CryoFreezerScreen extends AbstractMachineScreen<CryoFreezerScreenHa
         CryoFreezerBlockEntity entity = (CryoFreezerBlockEntity) blockEntity;
 
         GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration());
-        GuiUtil.drawFluidTank(matrices, this.x + OUTPUT_TANK_LEFT, this.y + OUTPUT_TANK_TOP, entity.outputTank.getAmount(), entity.outputTank.getCapacity(), entity.outputTank.getResource());
+        GuiUtil.drawFluidTank(matrices, this.x + OUTPUT_TANK_LEFT, this.y + OUTPUT_TANK_TOP, entity.inputTank.getAmount(), entity.inputTank.getCapacity(), entity.inputTank.getResource());
         GuiUtil.drawSnowflake(matrices, this.x + SNOWFLAKE_LEFT, this.y + SNOWFLAKE_TOP, entity.getCookTime(), entity.getCookTimeTotal());
     }
 
@@ -60,7 +60,7 @@ public class CryoFreezerScreen extends AbstractMachineScreen<CryoFreezerScreenHa
         }
 
         if (GuiUtil.isHovering(this.getOutputTankBounds(), mouseX, mouseY)) {
-            this.renderTooltip(matrices, new TranslatableText("gauge_text.beyond_earth.liquid_storage", FluidUtils.dropletsToMillibuckets(entity.outputTank.getAmount()), FluidUtils.dropletsToMillibuckets(entity.outputTank.getCapacity())), mouseX, mouseY);
+            this.renderTooltip(matrices, new TranslatableText("gauge_text.beyond_earth.liquid_storage", FluidUtils.dropletsToMillibuckets(entity.inputTank.getAmount()), FluidUtils.dropletsToMillibuckets(entity.inputTank.getCapacity())), mouseX, mouseY);
         }
     }
 

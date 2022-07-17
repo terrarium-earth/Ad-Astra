@@ -45,12 +45,12 @@ import net.minecraft.world.World;
 public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvider<PlanetSelectionScreenHandler> {
 
         // Textures.
-        public static final Identifier BACKGROUND_TEXTURE = new ModIdentifier("textures/screens/planet_selection.png");
+        public static final Identifier BACKGROUND_TEXTURE = new ModIdentifier("textures/gui/screens/planet_selection.png");
         public static final Identifier MILKY_WAY_TEXTURE = new ModIdentifier("textures/sky/gui/milky_way.png");
 
-        public static final Identifier SMALL_MENU_LIST = new ModIdentifier("textures/selection_menu.png");
-        public static final Identifier LARGE_MENU_TEXTURE = new ModIdentifier("textures/selection_menu_large.png");
-        public static final Identifier SCROLL_BAR = new ModIdentifier("textures/scroll_bar.png");
+        public static final Identifier SMALL_MENU_LIST = new ModIdentifier("textures/gui/selection_menu.png");
+        public static final Identifier LARGE_MENU_TEXTURE = new ModIdentifier("textures/gui/selection_menu_large.png");
+        public static final Identifier SCROLL_BAR = new ModIdentifier("textures/gui/scroll_bar.png");
 
         public static final int SCROLL_BAR_X = 92;
         public int minScrollY = 177;

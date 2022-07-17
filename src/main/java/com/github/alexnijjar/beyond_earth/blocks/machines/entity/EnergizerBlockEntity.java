@@ -13,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import team.reborn.energy.api.EnergyStorage;
 import team.reborn.energy.api.EnergyStorageUtil;
 
@@ -53,6 +54,16 @@ public class EnergizerBlockEntity extends AbstractMachineBlockEntity {
     @Override
     public long getMaxEnergyExtract() {
         return ENERGY_PER_TICK * 8;
+    }
+
+    @Override
+    public boolean canInsert(int slot, ItemStack stack, Direction dir) {
+        return slot == 0;
+    }
+
+    @Override
+    public boolean canExtract(int slot, ItemStack stack, Direction dir) {
+        return slot == 0;
     }
 
     @Override

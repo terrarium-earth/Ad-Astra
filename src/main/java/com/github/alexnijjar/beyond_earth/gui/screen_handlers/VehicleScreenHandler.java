@@ -1,8 +1,7 @@
 package com.github.alexnijjar.beyond_earth.gui.screen_handlers;
 
-import org.jetbrains.annotations.Nullable;
-
 import com.github.alexnijjar.beyond_earth.entities.vehicles.VehicleEntity;
+import com.github.alexnijjar.beyond_earth.gui.NoInventorySlot;
 import com.github.alexnijjar.beyond_earth.registry.ModScreenHandlers;
 
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
@@ -27,10 +26,12 @@ public class VehicleScreenHandler extends AbstractVehicleScreenHandler {
         super(ModScreenHandlers.VEHICLE_SCREEN_HANDLER, syncId, inventory, entity, new Slot[] {
 
                 // Left input slot.
-                new Slot(entity.getInventory(), 0, 8, 63) {
+                new NoInventorySlot(entity.getInventory(), 0, 8, 63) {
                     @Override
                     public boolean canInsert(ItemStack stack) {
-                        @Nullable
+                        if (!super.canInsert(stack)) {
+                            return false;
+                        }
                         Storage<FluidVariant> context = ContainerItemContext.withInitial(stack).find(FluidStorage.ITEM);
                         return context instanceof CombinedStorage || context instanceof FullItemFluidStorage || context instanceof SingleVariantItemStorage<FluidVariant>;
                     }
@@ -43,26 +44,26 @@ public class VehicleScreenHandler extends AbstractVehicleScreenHandler {
                     }
                 },
 
-                // Inventory.
-                new Slot(entity.getInventory(), 2, 97, 16),
+                // Inventory
+                new NoInventorySlot(entity.getInventory(), 2, 98, 15),
                 //
-                new Slot(entity.getInventory(), 3, 97 + 18, 16),
+                new NoInventorySlot(entity.getInventory(), 3, 98 + 18, 15),
                 //
-                new Slot(entity.getInventory(), 4, 97 + 18 * 2, 16),
+                new NoInventorySlot(entity.getInventory(), 4, 98 + 18 * 2, 15),
                 //
-                new Slot(entity.getInventory(), 5, 97 + 18 * 3, 16),
+                new NoInventorySlot(entity.getInventory(), 5, 98 + 18 * 3, 15),
                 //
-                new Slot(entity.getInventory(), 6, 97, 34),
+                new NoInventorySlot(entity.getInventory(), 6, 98, 33),
                 //
-                new Slot(entity.getInventory(), 7, 97 + 18, 34),
+                new NoInventorySlot(entity.getInventory(), 7, 98 + 18, 33),
                 //
-                new Slot(entity.getInventory(), 8, 97 + 18 * 2, 34),
+                new NoInventorySlot(entity.getInventory(), 8, 98 + 18 * 2, 33),
                 //
-                new Slot(entity.getInventory(), 9, 97 + 18 * 3, 34), });
+                new NoInventorySlot(entity.getInventory(), 9, 98 + 18 * 3, 33), });
     }
 
     @Override
     public int getPlayerInventoryOffset() {
-        return 10;
+        return 9;
     }
 }

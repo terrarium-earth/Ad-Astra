@@ -41,12 +41,12 @@ public class GuiUtil {
     public static final int FLUID_TANK_WIDTH = 14;
     public static final int FLUID_TANK_HEIGHT = 48;
 
-    public static final Identifier FIRE_TEXTURE = new ModIdentifier("textures/fire_on.png");
-    public static final Identifier SNOWFLAKE_TEXTURE = new ModIdentifier("textures/snowflake.png");
-    public static final Identifier ARROW_TEXTURE = new ModIdentifier("textures/animated_arrow_full.png");
-    public static final Identifier OXYGEN_CONTENT_TEXTURE = new ModIdentifier("textures/oxygen.png");
-    public static final Identifier ENERGY_TEXTURE = new ModIdentifier("textures/energy_full.png");
-    public static final Identifier FLUID_TANK_TEXTURE = new ModIdentifier("textures/fluid_tank.png");
+    public static final Identifier FIRE_TEXTURE = new ModIdentifier("textures/gui/fire_on.png");
+    public static final Identifier SNOWFLAKE_TEXTURE = new ModIdentifier("textures/gui/snowflake.png");
+    public static final Identifier ARROW_TEXTURE = new ModIdentifier("textures/gui/animated_arrow_full.png");
+    public static final Identifier OXYGEN_CONTENT_TEXTURE = new ModIdentifier("textures/gui/oxygen.png");
+    public static final Identifier ENERGY_TEXTURE = new ModIdentifier("textures/gui/energy_full.png");
+    public static final Identifier FLUID_TANK_TEXTURE = new ModIdentifier("textures/gui/fluid_tank.png");
 
     public static boolean isHovering(Rectangle bounds, double x, double y) {
         double left = bounds.getX();

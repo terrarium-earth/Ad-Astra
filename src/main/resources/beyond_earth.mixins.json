@@ -29,7 +29,8 @@
     "gravity.PotionEntityMixin",
     "gravity.ThrownEntityMixin",
     "ServerPlayNetworkHandlerMixin",
-    "ServerPlayNetworkHandlerAccessor"
+    "ServerPlayNetworkHandlerAccessor",
+    "ServerWorldMixin"
   ],
   "client": [
     "client.BipedEntityModelMixin",

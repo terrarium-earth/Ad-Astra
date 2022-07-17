@@ -17,6 +17,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 
 public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
 
@@ -61,6 +62,16 @@ public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
     @Override
     public int getInventorySize() {
         return 4;
+    }
+
+    @Override
+    public boolean canInsert(int slot, ItemStack stack, Direction dir) {
+        return slot == 0;
+    }
+
+    @Override
+    public boolean canExtract(int slot, ItemStack stack, Direction dir) {
+        return slot == 1 || slot == 3;
     }
 
     @Nullable

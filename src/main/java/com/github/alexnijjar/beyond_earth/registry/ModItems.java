@@ -98,10 +98,6 @@ public interface ModItems {
                 ((SpaceSuit) jetSuit.getItem()).setFluid(jetSuit, FluidVariant.of(ModFluids.OXYGEN_STILL));
                 ((JetSuit) jetSuit.getItem()).setStoredEnergy(jetSuit, JetSuit.MAX_ENERGY);
 
-                ItemStack oxygenTank = ModItems.OXYGEN_TANK.getDefaultStack();
-                ((OxygenTankItem) oxygenTank.getItem()).setAmount(oxygenTank, ((OxygenTankItem) oxygenTank.getItem()).getTankSize());
-                ((OxygenTankItem) oxygenTank.getItem()).setFluid(oxygenTank, FluidVariant.of(ModFluids.OXYGEN_STILL));
-
                 stacks.addAll(Collections.nCopies(54, ItemStack.EMPTY));
 
                 stacks.set(0, tier1Rocket);
@@ -136,7 +132,7 @@ public interface ModItems {
                 stacks.set(44, ModItems.JET_SUIT_BOOTS.getDefaultStack());
 
                 stacks.set(27, ModItems.OXYGEN_TANK.getDefaultStack());
-                stacks.set(28, oxygenTank);
+                stacks.set(28, OxygenTankItem.createOxygenatedTank());
 
                 stacks.set(36, ModItems.ASTRODUX.getDefaultStack());
                 stacks.set(37, ModItems.SPACE_PAINTING.getDefaultStack());
@@ -371,7 +367,7 @@ public interface ModItems {
         public static final BlockItem CALORITE_PLATING_PRESSURE_PLATE = registerBlockItem(ModBlocks.CALORITE_PLATING_PRESSURE_PLATE);
 
         public static final BlockItem SKY_STONE = registerBlockItem(ModBlocks.SKY_STONE);
-        
+
         public static final BlockItem MOON_SAND = registerBlockItem(ModBlocks.MOON_SAND);
         public static final BlockItem MOON_STONE = registerBlockItem(ModBlocks.MOON_STONE);
         public static final BlockItem MOON_COBBLESTONE = registerBlockItem(ModBlocks.MOON_COBBLESTONE);
@@ -405,7 +401,7 @@ public interface ModItems {
         public static final BlockItem MARS_STONE_BRICK_WALL = registerBlockItem(ModBlocks.MARS_STONE_BRICK_WALL);
         public static final BlockItem CONGLOMERATE = registerBlockItem(ModBlocks.CONGLOMERATE);
         public static final BlockItem POLISHED_CONGLOMERATE = registerBlockItem(ModBlocks.POLISHED_CONGLOMERATE);
-        
+
         public static final BlockItem VENUS_SAND = registerBlockItem(ModBlocks.VENUS_SAND);
         public static final BlockItem VENUS_STONE = registerBlockItem(ModBlocks.VENUS_STONE);
         public static final BlockItem VENUS_COBBLESTONE = registerBlockItem(ModBlocks.VENUS_COBBLESTONE);
@@ -421,7 +417,7 @@ public interface ModItems {
         public static final BlockItem POLISHED_VENUS_STONE_SLAB = registerBlockItem(ModBlocks.POLISHED_VENUS_STONE_SLAB);
         public static final BlockItem VENUS_PILLAR = registerBlockItem(ModBlocks.VENUS_PILLAR);
         public static final BlockItem VENUS_STONE_BRICK_WALL = registerBlockItem(ModBlocks.VENUS_STONE_BRICK_WALL);
-        
+
         public static final BlockItem VENUS_SANDSTONE = registerBlockItem(ModBlocks.VENUS_SANDSTONE);
         public static final BlockItem VENUS_SANDSTONE_BRICKS = registerBlockItem(ModBlocks.VENUS_SANDSTONE_BRICKS);
         public static final BlockItem CRACKED_VENUS_SANDSTONE_BRICKS = registerBlockItem(ModBlocks.CRACKED_VENUS_SANDSTONE_BRICKS);
@@ -491,9 +487,7 @@ public interface ModItems {
         public static final Item MOGLER_SPAWN_EGG = register("mogler_spawn_egg", new SpawnEggItem(ModEntityTypes.MOGLER, -13312, -3407872, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
         public static final Item ZOMBIFIED_MOGLER_SPAWN_EGG = register("zombified_mogler_spawn_egg", new SpawnEggItem(ModEntityTypes.ZOMBIFIED_MOGLER, 12537409, 7988821, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
         public static final Item SULFUR_CREEPER_SPAWN_EGG = register("sulfur_creeper_spawn_egg", new SpawnEggItem(ModEntityTypes.SULFUR_CREEPER, 13930288, 11303196, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
-        // public static final Item ALIEN_WANDERING_TRADER_SPAWN_EGG = register("alien_wandering_trader_spawn_egg", new
-        // SpawnEggItem(ModEntityTypes.ALIEN_WANDERING_TRADER, 5993415, 2868874, new
-        // FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
+        public static final Item ALIEN_WANDERING_TRADER_SPAWN_EGG = register("alien_wandering_trader_spawn_egg", new SpawnEggItem(ModEntityTypes.ALIEN_WANDERING_TRADER, 5993415, 8537301, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));
 
         public static void register() {
                 registerTank(TIER_1_ROCKET);
