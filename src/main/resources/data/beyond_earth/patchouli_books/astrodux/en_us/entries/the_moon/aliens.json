@@ -14,6 +14,10 @@
             "type": "patchouli:entity",
             "entity": "beyond_earth:alien",
             "default_rotation": 45
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Aliens have different trades than earth villagers, featuring planet-specific materials, space suits and oxygen gear."
         }
     ]
 }

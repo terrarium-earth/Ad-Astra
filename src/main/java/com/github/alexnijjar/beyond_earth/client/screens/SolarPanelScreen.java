@@ -15,12 +15,11 @@ import net.minecraft.util.Identifier;
 @Environment(EnvType.CLIENT)
 public class SolarPanelScreen extends AbstractMachineScreen<SolarPanelScreenHandler> {
 
-    private static final Identifier TEXTURE = new ModIdentifier("textures/screens/solar_panel.png");
+    private static final Identifier TEXTURE = new ModIdentifier("textures/gui/screens/solar_panel.png");
 
     public SolarPanelScreen(SolarPanelScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title, TEXTURE);
     }
-    
 
     @Override
     protected void drawForeground(MatrixStack matrices, int mouseX, int mouseY) {

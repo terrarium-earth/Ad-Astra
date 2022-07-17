@@ -5,6 +5,7 @@ import com.github.alexnijjar.beyond_earth.gui.screen_handlers.CompressorScreenHa
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.ConversionScreenHandler;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.CryoFreezerScreenHandler;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.LanderScreenHandler;
+import com.github.alexnijjar.beyond_earth.gui.screen_handlers.LargeVehicleScreenHandler;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.NasaWorkbenchScreenHandler;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.OxygenDistributorScreenHandler;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.PlanetSelectionScreenHandler;
@@ -30,6 +31,7 @@ public class ModScreenHandlers {
     public static ScreenHandlerType<CryoFreezerScreenHandler> CRYO_FREEZER_SCREEN_HANDLER;
 
     public static ScreenHandlerType<VehicleScreenHandler> VEHICLE_SCREEN_HANDLER;
+    public static ScreenHandlerType<LargeVehicleScreenHandler> LARGE_VEHICLE_SCREEN_HANDLER;
     public static ScreenHandlerType<LanderScreenHandler> LANDER_SCREEN_HANDLER;
 
     public static ScreenHandlerType<PlanetSelectionScreenHandler> PLANET_SELECTION_SCREEN_HANDLER;
@@ -45,6 +47,7 @@ public class ModScreenHandlers {
         CRYO_FREEZER_SCREEN_HANDLER = register("cryo_freezer_screen_handler", CryoFreezerScreenHandler::new);
 
         VEHICLE_SCREEN_HANDLER = register("vehicle_screen_handler", VehicleScreenHandler::new);
+        LARGE_VEHICLE_SCREEN_HANDLER = register("large_vehicle_screen_handler", LargeVehicleScreenHandler::new);
         LANDER_SCREEN_HANDLER = register("lander_screen_handler", LanderScreenHandler::new);
         OXYGEN_DISTRIBUTOR_SCREEN_HANDLER = register("oxygen_distributor_screen_handler", OxygenDistributorScreenHandler::new);
 

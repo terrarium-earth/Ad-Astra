@@ -27,17 +27,17 @@ public class PlayerOverlayScreen {
     private static final Identifier OXYGEN_TANK_FULL_TEXTURE = new ModIdentifier("textures/overlay/oxygen_tank_full.png");
 
     // Planet bar textures.
-    private static final Identifier EARTH_PLANET_BAR_TEXTURE = new ModIdentifier("textures/planet_bar/earth_planet_bar.png");
-    private static final Identifier MOON_PLANET_BAR_TEXTURE = new ModIdentifier("textures/planet_bar/moon_planet_bar.png");
-    private static final Identifier MARS_PLANET_BAR_TEXTURE = new ModIdentifier("textures/planet_bar/mars_planet_bar.png");
-    private static final Identifier VENUS_PLANET_BAR_TEXTURE = new ModIdentifier("textures/planet_bar/venus_planet_bar.png");
-    private static final Identifier MERCURY_PLANET_BAR_TEXTURE = new ModIdentifier("textures/planet_bar/mercury_planet_bar.png");
+    private static final Identifier EARTH_PLANET_BAR_TEXTURE = new ModIdentifier("textures/gui/planet_bar/earth_planet_bar.png");
+    private static final Identifier MOON_PLANET_BAR_TEXTURE = new ModIdentifier("textures/gui/planet_bar/moon_planet_bar.png");
+    private static final Identifier MARS_PLANET_BAR_TEXTURE = new ModIdentifier("textures/gui/planet_bar/mars_planet_bar.png");
+    private static final Identifier VENUS_PLANET_BAR_TEXTURE = new ModIdentifier("textures/gui/planet_bar/venus_planet_bar.png");
+    private static final Identifier MERCURY_PLANET_BAR_TEXTURE = new ModIdentifier("textures/gui/planet_bar/mercury_planet_bar.png");
 
-    private static final Identifier GLACIO_PLANET_BAR_TEXTURE = new ModIdentifier("textures/planet_bar/glacio_planet_bar.png");
+    private static final Identifier GLACIO_PLANET_BAR_TEXTURE = new ModIdentifier("textures/gui/planet_bar/glacio_planet_bar.png");
 
-    private static final Identifier ORBIT_PLANET_BAR_TEXTURE = new ModIdentifier("textures/planet_bar/orbit_planet_bar.png");
+    private static final Identifier ORBIT_PLANET_BAR_TEXTURE = new ModIdentifier("textures/gui/planet_bar/orbit_planet_bar.png");
 
-    private static final Identifier ROCKET_PLANET_BAR_TEXTURE = new ModIdentifier("textures/planet_bar/rocket.png");
+    private static final Identifier ROCKET_PLANET_BAR_TEXTURE = new ModIdentifier("textures/gui/planet_bar/rocket.png");
 
     private static final Identifier WARNING_TEXTURE = new ModIdentifier("textures/overlay/warning.png");
 
@@ -97,7 +97,7 @@ public class PlayerOverlayScreen {
 
         // Planet bar
         if (shouldRenderBar && !client.options.debugEnabled) {
-            float rocketHeight = (float)(player.getY() / 5.3);
+            float rocketHeight = (float) (player.getY() / 5.3);
             rocketHeight = MathHelper.clamp(rocketHeight, 0, 113);
 
             int x = 0;
@@ -159,6 +159,6 @@ public class PlayerOverlayScreen {
     }
 
     public static Identifier getTimerTexture() {
-        return new ModIdentifier("textures/timer/timer" + countdownSeconds + ".png");
+        return new ModIdentifier("textures/gui/countdown_numbers/" + countdownSeconds + ".png");
     }
 }

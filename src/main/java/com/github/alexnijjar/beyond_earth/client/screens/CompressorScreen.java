@@ -17,7 +17,7 @@ import net.minecraft.util.Identifier;
 @Environment(EnvType.CLIENT)
 public class CompressorScreen extends AbstractMachineScreen<CompressorScreenHandler> {
 
-    private static final Identifier TEXTURE = new ModIdentifier("textures/screens/compressor.png");
+    private static final Identifier TEXTURE = new ModIdentifier("textures/gui/screens/compressor.png");
 
     public static final int ENERGY_LEFT = 144;
     public static final int ENERGY_TOP = 21;

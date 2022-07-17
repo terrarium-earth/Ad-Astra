@@ -17,7 +17,7 @@ import net.minecraft.util.Identifier;
 @Environment(EnvType.CLIENT)
 public class CoalGeneratorScreen extends AbstractMachineScreen<CoalGeneratorScreenHandler> {
 
-    private static final Identifier TEXTURE = new ModIdentifier("textures/screens/coal_generator.png");
+    private static final Identifier TEXTURE = new ModIdentifier("textures/gui/screens/coal_generator.png");
 
     public static final int FIRE_LEFT = 77;
     public static final int FIRE_TOP = 49;

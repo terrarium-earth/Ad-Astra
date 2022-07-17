@@ -1,0 +1,10 @@
+{
+    "replace": false,
+    "values": [
+        "beyond_earth:tier_1_rover",
+        "beyond_earth:tier_1_rocket",
+        "beyond_earth:tier_2_rocket",
+        "beyond_earth:tier_3_rocket",
+        "beyond_earth:tier_4_rocket"
+    ]
+}

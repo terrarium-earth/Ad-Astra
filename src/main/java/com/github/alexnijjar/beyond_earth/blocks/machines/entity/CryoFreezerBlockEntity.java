@@ -21,6 +21,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 
 public class CryoFreezerBlockEntity extends FluidMachineBlockEntity {
 
@@ -67,7 +68,7 @@ public class CryoFreezerBlockEntity extends FluidMachineBlockEntity {
             CryoFuelConversionRecipe recipe = this.createRecipe(ModRecipes.CRYO_FUEL_CONVERSION_RECIPE, this.getStack(0), false);
             if (recipe != null) {
                 try (Transaction transaction = Transaction.openOuter()) {
-                    if (this.outputTank.insert(FluidVariant.of(recipe.getFluidOutput()), FluidUtils.millibucketsToDroplets((long) (1000 * recipe.getConversionRatio())), transaction) > 0) {
+                    if (this.inputTank.insert(FluidVariant.of(recipe.getFluidOutput()), FluidUtils.millibucketsToDroplets((long) (1000 * recipe.getConversionRatio())), transaction) > 0) {
                         transaction.commit();
                     }
                 }
@@ -86,12 +87,12 @@ public class CryoFreezerBlockEntity extends FluidMachineBlockEntity {
 
     @Override
     public long getInputSize() {
-        return 0;
+        return TANK_SIZE;
     }
 
     @Override
     public long getOutputSize() {
-        return TANK_SIZE;
+        return 0;
     }
 
     @Override
@@ -117,6 +118,16 @@ public class CryoFreezerBlockEntity extends FluidMachineBlockEntity {
     @Override
     public int getInventorySize() {
         return 3;
+    }
+
+    @Override
+    public boolean canInsert(int slot, ItemStack stack, Direction dir) {
+        return slot == 0;
+    }
+
+    @Override
+    public boolean canExtract(int slot, ItemStack stack, Direction dir) {
+        return slot == 2;
     }
 
     @Nullable
@@ -157,11 +168,11 @@ public class CryoFreezerBlockEntity extends FluidMachineBlockEntity {
             ItemStack outputExtractSlot = this.getStack(2);
 
             if (!outputInsertSlot.isEmpty() && outputExtractSlot.getCount() < outputExtractSlot.getMaxCount()) {
-                FluidUtils.extractFluidFromTank(this, this.outputTank, 1, 2);
+                FluidUtils.extractFluidFromTank(this, this.inputTank, 1, 2);
             }
 
             if (this.hasEnergy()) {
-                if ((!input.isEmpty() && (input.getItem().equals(this.inputItem) || this.inputItem == null)) && this.outputTank.getAmount() < this.outputTank.getCapacity()) {
+                if ((!input.isEmpty() && (input.getItem().equals(this.inputItem) || this.inputItem == null)) && this.inputTank.getAmount() < this.inputTank.getCapacity()) {
                     this.setActive(true);
                     if (this.cookTime < this.cookTimeTotal) {
                         this.cookTime++;

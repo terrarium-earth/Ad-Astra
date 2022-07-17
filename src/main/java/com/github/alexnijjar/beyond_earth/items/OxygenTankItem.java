@@ -3,6 +3,7 @@ package com.github.alexnijjar.beyond_earth.items;
 import java.util.List;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
+import com.github.alexnijjar.beyond_earth.registry.ModFluids;
 import com.github.alexnijjar.beyond_earth.registry.ModItems;
 import com.github.alexnijjar.beyond_earth.util.FluidUtils;
 
@@ -67,5 +68,12 @@ public class OxygenTankItem extends Item implements FluidContainingItem {
             }
         }
         return super.use(world, user, hand);
+    }
+
+    public static ItemStack createOxygenatedTank() {
+        ItemStack oxygenTank = ModItems.OXYGEN_TANK.getDefaultStack();
+        ((OxygenTankItem) oxygenTank.getItem()).setAmount(oxygenTank, ((OxygenTankItem) oxygenTank.getItem()).getTankSize());
+        ((OxygenTankItem) oxygenTank.getItem()).setFluid(oxygenTank, FluidVariant.of(ModFluids.OXYGEN_STILL));
+        return oxygenTank;
     }
 }

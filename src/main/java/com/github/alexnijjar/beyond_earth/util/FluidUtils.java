@@ -167,8 +167,9 @@ public class FluidUtils {
 	 * Checks if a stack can be inserted into the output slot.
 	 */
 	public static boolean canInsert(Inventory inventory, int extractSlot, ContainerItemContext context) {
+		ItemStack stack = context.getItemVariant().toStack();
 		ItemStack extractSlotStack = inventory.getStack(extractSlot);
-		return !(!extractSlotStack.isEmpty() && (!ItemStack.canCombine(extractSlotStack, extractSlotStack) || extractSlotStack.getCount() >= extractSlotStack.getMaxCount()));
+		return !(!extractSlotStack.isEmpty() && (!ItemStack.canCombine(extractSlotStack, stack) || extractSlotStack.getCount() >= extractSlotStack.getMaxCount()));
 	}
 
 	/**

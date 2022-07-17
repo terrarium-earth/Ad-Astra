@@ -17,7 +17,7 @@ import net.minecraft.util.Identifier;
 @Environment(EnvType.CLIENT)
 public class VehicleScreen extends AbstractVehicleScreen<VehicleScreenHandler> {
 
-    private static final Identifier TEXTURE = new ModIdentifier("textures/screens/vehicle.png");
+    private static final Identifier TEXTURE = new ModIdentifier("textures/gui/screens/vehicle_small.png");
 
     public static final int INPUT_TANK_LEFT = 9;
     public static final int INPUT_TANK_TOP = 11;

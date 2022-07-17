@@ -59,8 +59,8 @@ public class OxygenUtils {
      * @return The amount of blocks that an oxygen distributor is distributing oxygen to
      */
     public static int getOxygenBlocksCount(World world, BlockPos source) {
-        if (oxygenLocations.containsKey(Pair.of(Pair.of(world.getRegistryKey(), source), source))) {
-            return oxygenLocations.get(Pair.of(Pair.of(world.getRegistryKey(), source), source)).size();
+        if (oxygenLocations.containsKey(Pair.of(world.getRegistryKey(), source))) {
+            return oxygenLocations.get(Pair.of(world.getRegistryKey(), source)).size();
         } else {
             return 0;
         }

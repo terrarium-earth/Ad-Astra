@@ -45,7 +45,7 @@ public class NasaWorkbenchBlockEntity extends AbstractMachineBlockEntity {
 
     @Override
     public boolean canInsert(int slot, ItemStack stack, Direction dir) {
-        return slot != 14;
+        return slot < 14;
     }
 
     @Override

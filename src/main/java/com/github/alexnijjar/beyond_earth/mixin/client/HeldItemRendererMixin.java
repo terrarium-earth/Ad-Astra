@@ -38,7 +38,7 @@ public class HeldItemRendererMixin {
     public void updateHeldItems(CallbackInfo ci) {
         // Disable item rendering while in a vehicle
         MinecraftClient client = MinecraftClient.getInstance();
-        if (client.player != null) {
+        if (client.player != null && client.player.getMainHandStack() != null && !client.player.getMainHandStack().isEmpty()) {
             if (client.player.getVehicle() instanceof RocketEntity || client.player.getVehicle() instanceof LanderEntity) {
                 ci.cancel();
             }
