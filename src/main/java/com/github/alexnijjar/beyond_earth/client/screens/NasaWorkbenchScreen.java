@@ -12,7 +12,7 @@ import net.minecraft.util.Identifier;
 @Environment(EnvType.CLIENT)
 public class NasaWorkbenchScreen extends AbstractMachineScreen<NasaWorkbenchScreenHandler> {
 
-    private static final Identifier TEXTURE = new ModIdentifier("textures/screens/nasa_workbench.png");
+    private static final Identifier TEXTURE = new ModIdentifier("textures/gui/screens/nasa_workbench.png");
 
     public NasaWorkbenchScreen(NasaWorkbenchScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title, TEXTURE);

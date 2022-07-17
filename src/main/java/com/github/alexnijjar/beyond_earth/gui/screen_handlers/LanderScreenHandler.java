@@ -1,6 +1,7 @@
 package com.github.alexnijjar.beyond_earth.gui.screen_handlers;
 
 import com.github.alexnijjar.beyond_earth.entities.vehicles.VehicleEntity;
+import com.github.alexnijjar.beyond_earth.gui.NoInventorySlot;
 import com.github.alexnijjar.beyond_earth.registry.ModScreenHandlers;
 
 import net.minecraft.entity.player.PlayerInventory;
@@ -27,22 +28,22 @@ public class LanderScreenHandler extends AbstractVehicleScreenHandler {
                     }
                 },
 
-                // Inventory.
-                new Slot(entity.getInventory(), 2, 97, 16),
+                // Inventory
+                new NoInventorySlot(entity.getInventory(), 2, 98, 15),
                 //
-                new Slot(entity.getInventory(), 3, 97 + 18, 16),
+                new NoInventorySlot(entity.getInventory(), 3, 98 + 18, 15),
                 //
-                new Slot(entity.getInventory(), 4, 97 + 18 * 2, 16),
+                new NoInventorySlot(entity.getInventory(), 4, 98 + 18 * 2, 15),
                 //
-                new Slot(entity.getInventory(), 5, 97 + 18 * 3, 16),
+                new NoInventorySlot(entity.getInventory(), 5, 98 + 18 * 3, 15),
                 //
-                new Slot(entity.getInventory(), 6, 97, 34),
+                new NoInventorySlot(entity.getInventory(), 6, 98, 33),
                 //
-                new Slot(entity.getInventory(), 7, 97 + 18, 34),
+                new NoInventorySlot(entity.getInventory(), 7, 98 + 18, 33),
                 //
-                new Slot(entity.getInventory(), 8, 97 + 18 * 2, 34),
+                new NoInventorySlot(entity.getInventory(), 8, 98 + 18 * 2, 33),
                 //
-                new Slot(entity.getInventory(), 9, 97 + 18 * 3, 34),
+                new NoInventorySlot(entity.getInventory(), 9, 98 + 18 * 3, 33),
                 
                 // Rocket slot.
                 new Slot(entity.getInventory(), 10, 40, 24) {
@@ -55,6 +56,6 @@ public class LanderScreenHandler extends AbstractVehicleScreenHandler {
 
     @Override
     public int getPlayerInventoryOffset() {
-        return 10;
+        return 9;
     }
 }

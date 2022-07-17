@@ -1,6 +1,7 @@
 package com.github.alexnijjar.beyond_earth.entities.vehicles;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
+import com.github.alexnijjar.beyond_earth.gui.LargeVehicleScreenHandlerFactory;
 import com.github.alexnijjar.beyond_earth.registry.ModItems;
 import com.github.alexnijjar.beyond_earth.util.ModKeyBindings;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
@@ -37,7 +38,12 @@ public class RoverEntity extends VehicleEntity {
 
     @Override
     public int getInventorySize() {
-        return 10;
+        return 18;
+    }
+
+    @Override
+    public void openInventory(PlayerEntity player) {
+        openInventory(player, new LargeVehicleScreenHandlerFactory(this));
     }
 
     @Override

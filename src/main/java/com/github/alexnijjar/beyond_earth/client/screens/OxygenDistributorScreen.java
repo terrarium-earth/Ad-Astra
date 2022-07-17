@@ -28,7 +28,7 @@ import net.minecraft.util.Identifier;
 @Environment(EnvType.CLIENT)
 public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistributorScreenHandler> {
 
-    private static final Identifier TEXTURE = new ModIdentifier("textures/screens/oxygen_distributor.png");
+    private static final Identifier TEXTURE = new ModIdentifier("textures/gui/screens/oxygen_distributor.png");
     private static final Identifier WARNING_SIGN = new ModIdentifier("textures/overlay/warning_sign.png");
 
     Text SHOW_TEXT = ScreenUtils.createText("show");

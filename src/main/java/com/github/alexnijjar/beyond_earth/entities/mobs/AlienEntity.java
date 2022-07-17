@@ -1,7 +1,9 @@
 package com.github.alexnijjar.beyond_earth.entities.mobs;
 
+import com.github.alexnijjar.beyond_earth.entities.AlienTradeOffers;
 import com.github.alexnijjar.beyond_earth.registry.ModEntityTypes;
 
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
@@ -14,6 +16,9 @@ import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.village.TradeOfferList;
+import net.minecraft.village.TradeOffers;
+import net.minecraft.village.VillagerData;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
@@ -49,5 +54,21 @@ public class AlienEntity extends VillagerEntity {
         }
 
         return super.canSpawn(world, spawnReason);
+    }
+
+    // Custom trade offers
+    @Override
+    protected void fillRecipes() {
+        VillagerData villagerData = this.getVillagerData();
+        Int2ObjectMap<TradeOffers.Factory[]> int2ObjectMap = AlienTradeOffers.PROFESSION_TO_LEVELED_TRADE.get(villagerData.getProfession());
+        if (int2ObjectMap == null || int2ObjectMap.isEmpty()) {
+            return;
+        }
+        TradeOffers.Factory[] factorys = (TradeOffers.Factory[])int2ObjectMap.get(villagerData.getLevel());
+        if (factorys == null) {
+            return;
+        }
+        TradeOfferList tradeOfferList = this.getOffers();
+        this.fillRecipesFromPool(tradeOfferList, factorys, 2);
     }
 }

@@ -26,9 +26,9 @@ import net.minecraft.util.math.MathHelper;
 @Environment(EnvType.CLIENT)
 public class CustomButton extends ButtonWidget {
 
-    public static final Identifier LARGE_BUTTON_TEXTURE = new ModIdentifier("textures/buttons/large_button.png");
-    public static final Identifier BUTTON_TEXTURE = new ModIdentifier("textures/buttons/button.png");
-    public static final Identifier SMALL_BUTTON_TEXTURE = new ModIdentifier("textures/buttons/small_button.png");
+    public static final Identifier LARGE_BUTTON_TEXTURE = new ModIdentifier("textures/gui/buttons/large_button.png");
+    public static final Identifier BUTTON_TEXTURE = new ModIdentifier("textures/gui/buttons/button.png");
+    public static final Identifier SMALL_BUTTON_TEXTURE = new ModIdentifier("textures/gui/buttons/small_button.png");
 
     public static final Identifier WHITE_TEXTURE = new ModIdentifier("textures/white.png");
 

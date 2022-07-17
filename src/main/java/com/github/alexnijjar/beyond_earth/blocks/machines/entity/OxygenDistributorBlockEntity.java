@@ -26,6 +26,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 
 public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 
@@ -101,6 +102,16 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
     }
 
     @Override
+    public boolean canInsert(int slot, ItemStack stack, Direction dir) {
+        return slot == 0;
+    }
+
+    @Override
+    public boolean canExtract(int slot, ItemStack stack, Direction dir) {
+        return slot == 1;
+    }
+
+    @Override
     public void tick() {
 
         BlockPos pos = this.getPos();
@@ -154,8 +165,8 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
                     oxygenFillCheckTicks = 0;
                 }
                 oxygenFillCheckTicks++;
-                this.setActive(this.hasEnergy() && this.outputTank.amount > 0);
             }
+            this.setActive(OxygenUtils.getOxygenBlocksCount(this.world, this.getPos()) > 0);
         }
 
         if (this.world.isClient) {

@@ -13,7 +13,7 @@ import net.minecraft.util.Identifier;
 @Environment(EnvType.CLIENT)
 public class LanderScreen extends AbstractVehicleScreen<LanderScreenHandler> {
 
-    private static final Identifier TEXTURE = new ModIdentifier("textures/screens/lander.png");
+    private static final Identifier TEXTURE = new ModIdentifier("textures/gui/screens/lander.png");
 
     public LanderScreen(LanderScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title, TEXTURE);

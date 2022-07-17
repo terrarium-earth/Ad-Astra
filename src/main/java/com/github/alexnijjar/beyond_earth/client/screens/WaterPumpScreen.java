@@ -18,7 +18,7 @@ import net.minecraft.util.Identifier;
 @Environment(EnvType.CLIENT)
 public class WaterPumpScreen extends AbstractMachineScreen<WaterPumpScreenHandler> {
 
-    private static final Identifier TEXTURE = new ModIdentifier("textures/screens/water_pump.png");
+    private static final Identifier TEXTURE = new ModIdentifier("textures/gui/screens/water_pump.png");
 
     public static final int INPUT_TANK_LEFT = 75;
     public static final int INPUT_TANK_TOP = 21;

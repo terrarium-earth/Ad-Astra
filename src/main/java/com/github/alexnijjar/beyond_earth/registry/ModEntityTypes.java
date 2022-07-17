@@ -51,13 +51,13 @@ public class ModEntityTypes {
 
         // Machines
         public static final EntityType<RocketEntityTier1> ROCKET_TIER_1 = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("tier_1_rocket"),
-                        FabricEntityTypeBuilder.create(SpawnGroup.MISC, RocketEntityTier1::new).dimensions(EntityDimensions.fixed(1.1f, 4.4f)).fireImmune().build());
+                        FabricEntityTypeBuilder.create(SpawnGroup.MISC, RocketEntityTier1::new).dimensions(EntityDimensions.fixed(1.1f, 4.6f)).fireImmune().build());
         public static final EntityType<RocketEntityTier2> ROCKET_TIER_2 = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("tier_2_rocket"),
-                        FabricEntityTypeBuilder.create(SpawnGroup.MISC, RocketEntityTier2::new).dimensions(EntityDimensions.fixed(1.1f, 4.6f)).fireImmune().build());
+                        FabricEntityTypeBuilder.create(SpawnGroup.MISC, RocketEntityTier2::new).dimensions(EntityDimensions.fixed(1.1f, 4.8f)).fireImmune().build());
         public static final EntityType<RocketEntityTier3> ROCKET_TIER_3 = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("tier_3_rocket"),
-                        FabricEntityTypeBuilder.create(SpawnGroup.MISC, RocketEntityTier3::new).dimensions(EntityDimensions.fixed(1.1f, 4.8f)).fireImmune().build());
+                        FabricEntityTypeBuilder.create(SpawnGroup.MISC, RocketEntityTier3::new).dimensions(EntityDimensions.fixed(1.1f, 5.5f)).fireImmune().build());
         public static final EntityType<RocketEntityTier4> ROCKET_TIER_4 = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("tier_4_rocket"),
-                        FabricEntityTypeBuilder.create(SpawnGroup.MISC, RocketEntityTier4::new).dimensions(EntityDimensions.fixed(1.1f, 6.1f)).fireImmune().build());
+                        FabricEntityTypeBuilder.create(SpawnGroup.MISC, RocketEntityTier4::new).dimensions(EntityDimensions.fixed(1.1f, 7.0f)).fireImmune().build());
 
         public static final EntityType<RoverEntity> ROVER_TIER_1 = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("tier_1_rover"),
                         FabricEntityTypeBuilder.create(SpawnGroup.MISC, RoverEntity::new).dimensions(EntityDimensions.fixed(1.8f, 1.5f)).fireImmune().build());
