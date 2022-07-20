@@ -3,6 +3,7 @@ package com.github.alexnijjar.beyond_earth.client.utils;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -34,12 +35,15 @@ public class ClientOxygenUtils {
             if (client.world != null) {
                 if (spawnOxygenBubblesTick >= UPDATE_OXYGEN_FILLER_TICKS) {
                     if (renderOxygenParticles) {
-                        for (Map.Entry<Pair<RegistryKey<World>, BlockPos>, Set<BlockPos>> entry : oxygenLocations.entrySet()) {
-                            if (client.world.getRegistryKey().equals(entry.getKey().getLeft())) {
-                                for (BlockPos oxygenPos : entry.getValue()) {
-                                    client.particleManager.addParticle(ModParticleTypes.OXYGEN_BUBBLE, oxygenPos.getX() + 0.5, oxygenPos.getY() + 0.5, oxygenPos.getZ() + 0.5, 0, 0, 0);
-                                }
-                            }
+                        RegistryKey<World> worldKey = client.world.getRegistryKey();
+                        // copilot <3
+                        Map<Pair<RegistryKey<World>, BlockPos>, Set<BlockPos>> locationsInDimension = oxygenLocations.entrySet().stream().filter(entry -> entry.getKey().getLeft().equals(worldKey))
+                                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+                        // get all the oxygen location values into a set
+                        Set<BlockPos> oxygenLocationsSet = locationsInDimension.values().stream().flatMap(Set::stream).collect(Collectors.toSet());
+
+                        for (BlockPos pos : oxygenLocationsSet) {
+                            client.particleManager.addParticle(ModParticleTypes.OXYGEN_BUBBLE, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 0, 0, 0);
                         }
                     }
                     spawnOxygenBubblesTick = 0;

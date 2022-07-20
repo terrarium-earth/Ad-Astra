@@ -60,8 +60,8 @@ public class RocketEntityModelTier4 extends VehicleEntityModel<RocketEntityTier4
                 ModelPartData main = rocket.addChild("main",
                                 ModelPartBuilder.create().uv(36, -18).cuboid(-9.0f, -74.0f, -9.0f, 0.0f, 59.0f, 18.0f, new Dilation(0.0f)).uv(36, -18).cuboid(9.0f, -74.0f, -9.0f, 0.0f, 59.0f, 18.0f, new Dilation(0.0f)).uv(36, 0)
                                                 .cuboid(-9.0f, -74.0f, 9.0f, 18.0f, 59.0f, 0.0f, new Dilation(0.0f)).uv(0, 0).cuboid(-9.0f, -74.0f, -9.0f, 18.0f, 59.0f, 0.0f, new Dilation(0.0f)).uv(73, 67)
-                                                .cuboid(-9.0f, -74.0f, -9.0f, 2.0f, 59.0f, 2.0f, new Dilation(0.0f)).uv(77, 69).cuboid(-9.0f, -74.0f, -1.0f, 2.0f, 59.0f, 0.0f, new Dilation(0.0f)).uv(77, 69)
-                                                .cuboid(7.0f, -74.0f, 1.0f, 2.0f, 59.0f, 0.0f, new Dilation(0.0f)).uv(77, 69).cuboid(7.0f, -74.0f, -1.0f, 2.0f, 59.0f, 0.0f, new Dilation(0.0f)).uv(77, 69)
+                                                .cuboid(-9.0f, -74.0f, -9.0f, 2.0f, 59.0f, 2.0f, new Dilation(0.0f)).uv(75, 69).cuboid(-9.0f, -74.0f, -1.0f, 2.0f, 59.0f, 0.0f, new Dilation(0.0f)).uv(75, 69)
+                                                .cuboid(7.0f, -74.0f, 1.0f, 2.0f, 59.0f, 0.0f, new Dilation(0.0f)).uv(75, 69).cuboid(7.0f, -74.0f, -1.0f, 2.0f, 59.0f, 0.0f, new Dilation(0.0f)).uv(75, 69)
                                                 .cuboid(-9.0f, -74.0f, 1.0f, 2.0f, 59.0f, 0.0f, new Dilation(0.0f)).uv(-18, 59).cuboid(-9.0f, -15.0f, -9.0f, 18.0f, 0.0f, 18.0f, new Dilation(0.0f)).uv(-18, 59)
                                                 .cuboid(-9.0f, -73.0f, -9.0f, 18.0f, 0.0f, 18.0f, new Dilation(0.0f)).uv(35, 72).cuboid(-4.0f, -52.0f, -10.0f, 8.0f, 0.0f, 1.0f, new Dilation(0.0f)).uv(35, 72)
                                                 .cuboid(-4.0f, -44.0f, -10.0f, 8.0f, 0.0f, 1.0f, new Dilation(0.0f)).uv(62, 58).cuboid(-4.0f, -52.0f, -10.0f, 0.0f, 8.0f, 1.0f, new Dilation(0.0f)).uv(36, 59)
@@ -74,7 +74,7 @@ public class RocketEntityModelTier4 extends VehicleEntityModel<RocketEntityTier4
 
                 ModelPartData main_r3 = main.addChild("main_r3", ModelPartBuilder.create().uv(73, 67).cuboid(-1.0f, -29.5f, -1.0f, 2.0f, 59.0f, 2.0f, new Dilation(0.0f)), ModelTransform.of(8.0f, -44.5f, -8.0f, 0.0f, -1.5708f, 0.0f));
 
-                ModelPartData main_r4 = main.addChild("main_r4", ModelPartBuilder.create().uv(77, 69).cuboid(-1.0f, -29.5f, -14.0f, 2.0f, 59.0f, 0.0f, new Dilation(0.0f)).uv(77, 69).cuboid(-1.0f, -29.5f, 0.0f, 2.0f, 59.0f, 0.0f, new Dilation(0.0f)),
+                ModelPartData main_r4 = main.addChild("main_r4", ModelPartBuilder.create().uv(75, 69).cuboid(-1.0f, -29.5f, -14.0f, 2.0f, 59.0f, 0.0f, new Dilation(0.0f)).uv(75, 69).cuboid(-1.0f, -29.5f, 0.0f, 2.0f, 59.0f, 0.0f, new Dilation(0.0f)),
                                 ModelTransform.of(-7.0f, -44.5f, 0.0f, 0.0f, -1.5708f, 0.0f));
 
                 ModelPartData fins = main.addChild("fins", ModelPartBuilder.create(), ModelTransform.pivot(-2.0f, -8.0f, -2.0f));

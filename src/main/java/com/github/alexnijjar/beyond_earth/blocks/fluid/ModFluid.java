@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.fluid.FlowableFluid;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -14,7 +15,7 @@ import net.minecraft.world.WorldView;
 public abstract class ModFluid extends FlowableFluid {
 
     @Override
-    public boolean matchesType(net.minecraft.fluid.Fluid fluid) {
+    public boolean matchesType(Fluid fluid) {
         return fluid.equals(getStill()) || fluid.equals(getFlowing());
     }
 
@@ -30,7 +31,7 @@ public abstract class ModFluid extends FlowableFluid {
     }
 
     @Override
-    protected boolean canBeReplacedWith(FluidState fluidState, BlockView blockView, BlockPos blockPos, net.minecraft.fluid.Fluid fluid, Direction direction) {
+    protected boolean canBeReplacedWith(FluidState fluidState, BlockView blockView, BlockPos blockPos, Fluid fluid, Direction direction) {
         return false;
     }
 

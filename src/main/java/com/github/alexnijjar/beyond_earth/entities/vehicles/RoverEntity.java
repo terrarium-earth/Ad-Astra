@@ -21,6 +21,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
+// /summon beyond_earth:tier_1_rover ~ ~1 ~ {Passengers:[{id:"beyond_earth:pygro"},{id:"beyond_earth:pygro"}]}
 public class RoverEntity extends VehicleEntity {
 
     public double wheelPitch;
@@ -179,12 +180,12 @@ public class RoverEntity extends VehicleEntity {
 
         // Keep the passengers in their seats
         if (passenger.equals(this.getFirstPassenger())) {
-            double xRotator = Math.cos((this.getYaw() - 35) * ((float) Math.PI / 180)) * 0.55f;
-            double zRotator = Math.sin((this.getYaw() - 35) * ((float) Math.PI / 180)) * 0.55f;
+            double xRotator = Math.cos((this.getYaw() - 50) * ((float) Math.PI / 180)) * 0.85f;
+            double zRotator = Math.sin((this.getYaw() - 50) * ((float) Math.PI / 180)) * 0.85f;
             positionUpdater.accept(passenger, this.getX() + xRotator, d, this.getZ() + zRotator);
         } else {
-            double xRotator = Math.cos((this.getYaw() + 30) * ((float) Math.PI / 180)) * -0.65f;
-            double zRotator = Math.sin((this.getYaw() + 30) * ((float) Math.PI / 180)) * -0.65f;
+            double xRotator = Math.cos((this.getYaw() + 50) * ((float) Math.PI / 180)) * -0.85f;
+            double zRotator = Math.sin((this.getYaw() + 50) * ((float) Math.PI / 180)) * -0.85f;
             positionUpdater.accept(passenger, this.getX() + xRotator, d, this.getZ() + zRotator);
         }
     }

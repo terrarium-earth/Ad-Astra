@@ -17,6 +17,7 @@ import com.github.alexnijjar.beyond_earth.blocks.machines.FuelRefineryBlock;
 import com.github.alexnijjar.beyond_earth.blocks.machines.NasaWorkbenchBlock;
 import com.github.alexnijjar.beyond_earth.blocks.machines.OxygenDistributorBlock;
 import com.github.alexnijjar.beyond_earth.blocks.machines.OxygenLoaderBlock;
+import com.github.alexnijjar.beyond_earth.blocks.machines.OxygenSensorBlock;
 import com.github.alexnijjar.beyond_earth.blocks.machines.SolarPanelBlock;
 import com.github.alexnijjar.beyond_earth.blocks.machines.WaterPumpBlock;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
@@ -86,6 +87,7 @@ public interface ModBlocks {
         public static final Block WATER_PUMP = register("water_pump", new WaterPumpBlock(FabricBlockSettings.copy(FUEL_REFINERY).nonOpaque()));
         public static final Block ENERGIZER = register("energizer", new EnergizerBlock(FabricBlockSettings.copy(FUEL_REFINERY).nonOpaque()));
         public static final Block CRYO_FREEZER = register("cryo_freezer", new CryoFreezerBlock(FabricBlockSettings.copy(FUEL_REFINERY)));
+        public static final Block OXYGEN_SENSOR = register("oxygen_sensor", new OxygenSensorBlock(FabricBlockSettings.copy(FUEL_REFINERY)));
 
         // Blocks
         public static final Block STEEL_BLOCK = register("steel_block", new Block(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
