@@ -1,6 +1,6 @@
-![graphic](https://raw.githubusercontent.com/MrScautHD/Beyond-Earth/1.19/src/main/resources/logo.png)
+![graphic](https://i.imgur.com/7wEkubZ.png)
 
-![graphic](https://user-images.githubusercontent.com/65916181/157454393-9aadd2a5-7039-4099-af5a-1438e8bd71d7.png)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/796g9fvAAGA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 <a href="https://discord.gg/Xb2nPmN">
   <p align="center">
@@ -32,4 +32,10 @@ Beyond Earth is a technology and space exploration mod for modern versions of Mi
 - Guidebook for in-game documentation
 - Many more features to discover yourself!
 
-This is a port of the original Forge mod "Beyond Earth" which can be found [here.](https://github.com/MrScautHD/Beyond-Earth)
+![1](https://i.imgur.com/vcPgoWH.png)
+![2](https://i.imgur.com/FJa4zvf.png)
+![3](https://i.imgur.com/XGh3PmI.jpg)
+![4](https://i.imgur.com/JqG3o4b.png)
+
+### Forge
+This is a port of the original mod with the same name for Forge. The Forge version can be found [here.](https://modrinth.com/mod/beyond-earth)

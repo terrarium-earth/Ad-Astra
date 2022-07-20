@@ -12,6 +12,7 @@ import com.github.alexnijjar.beyond_earth.blocks.machines.entity.FuelRefineryBlo
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.NasaWorkbenchBlockEntity;
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.OxygenDistributorBlockEntity;
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.OxygenLoaderBlockEntity;
+import com.github.alexnijjar.beyond_earth.blocks.machines.entity.OxygenSensorBlockEntity;
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.SolarPanelBlockEntity;
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.WaterPumpBlockEntity;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
@@ -43,15 +44,15 @@ public class ModBlockEntities {
         public static BlockEntityType<WaterPumpBlockEntity> WATER_PUMP;
         public static BlockEntityType<EnergizerBlockEntity> ENERGIZER;
         public static BlockEntityType<CryoFreezerBlockEntity> CRYO_FREEZER;
+        public static BlockEntityType<OxygenSensorBlockEntity> OXYGEN_SENSOR;
 
         public static void register() {
-                // Flag Block Entity.
                 FLAG_BLOCK_ENTITY = register("flag_entity", FlagBlockEntity::new, ModBlocks.FLAG, ModBlocks.FLAG_BLUE, ModBlocks.FLAG_BROWN, ModBlocks.FLAG_CYAN, ModBlocks.FLAG_GRAY, ModBlocks.FLAG_GREEN, ModBlocks.FLAG_LIGHT_BLUE, ModBlocks.FLAG_LIME,
                                 ModBlocks.FLAG_MAGENTA, ModBlocks.FLAG_ORANGE, ModBlocks.FLAG_PINK, ModBlocks.FLAG_PURPLE, ModBlocks.FLAG_RED, ModBlocks.FLAG_YELLOW);
 
                 GLOBE_BLOCK_ENTITY = register("globe_entity", GlobeBlockEntity::new, ModBlocks.EARTH_GLOBE, ModBlocks.MOON_GLOBE, ModBlocks.MARS_GLOBE, ModBlocks.MERCURY_GLOBE, ModBlocks.VENUS_GLOBE, ModBlocks.GLACIO_GLOBE);
 
-                // Machine Block Entity.
+                // Machine block entities
                 FUEL_REFINERY = register("fuel_refinery_entity", FuelRefineryBlockEntity::new, ModBlocks.FUEL_REFINERY);
                 COMPRESSOR = register("compressor_entity", CompressorBlockEntity::new, ModBlocks.COMPRESSOR);
                 COAL_GENERATOR = register("coal_generator_entity", CoalGeneratorBlockEntity::new, ModBlocks.COAL_GENERATOR);
@@ -62,6 +63,7 @@ public class ModBlockEntities {
                 WATER_PUMP = register("water_pump_entity", WaterPumpBlockEntity::new, ModBlocks.WATER_PUMP);
                 ENERGIZER = register("energizer_entity", EnergizerBlockEntity::new, ModBlocks.ENERGIZER);
                 CRYO_FREEZER = register("cryo_freezer_entity", CryoFreezerBlockEntity::new, ModBlocks.CRYO_FREEZER);
+                OXYGEN_SENSOR = register("oxygen_sensor", OxygenSensorBlockEntity::new, ModBlocks.OXYGEN_SENSOR);
 
                 EnergyStorage.SIDED.registerForBlockEntities((blockEntity, direction) -> ((AbstractMachineBlockEntity) blockEntity).getSideEnergyStorage(direction), SOLAR_PANEL, COAL_GENERATOR, COMPRESSOR, FUEL_REFINERY, OXYGEN_LOADER, OXYGEN_DISTRIBUTOR,
                                 WATER_PUMP, ENERGIZER, CRYO_FREEZER);

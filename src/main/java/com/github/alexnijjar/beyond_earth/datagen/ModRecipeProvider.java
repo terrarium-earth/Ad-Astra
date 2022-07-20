@@ -268,6 +268,10 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		ShapedRecipeJsonBuilder.create(CRYO_FREEZER).input(Character.valueOf('#'), ModTags.COMPRESSED_OSTRUM).input(Character.valueOf('O'), ModItems.OSTRUM_INGOT).input(Character.valueOf('T'), ModItems.OSTRUM_TANK)
 				.input(Character.valueOf('B'), OSTRUM_BLOCK).pattern("#O#").pattern("OTO").pattern("BOB").group(null).criterion(hasItem(ModItems.COMPRESSED_OSTRUM), conditionsFromTag(ModTags.COMPRESSED_OSTRUM)).offerTo(exporter);
 
+		// Oxygen Sensor
+		ShapedRecipeJsonBuilder.create(OXYGEN_SENSOR).input(Character.valueOf('#'), ModTags.COMPRESSED_OSTRUM).input(Character.valueOf('O'), ModItems.OSTRUM_INGOT).input(Character.valueOf('V'), Items.OBSERVER).input(Character.valueOf('L'), Items.REDSTONE_LAMP).input(Character.valueOf('F'), ModItems.ENGINE_FAN)
+		.pattern("#F#").pattern("OVO").pattern("#L#").group(null).criterion(hasItem(ModItems.COMPRESSED_OSTRUM), conditionsFromTag(ModTags.COMPRESSED_OSTRUM)).offerTo(exporter);
+
 		// Flags
 		offerFlagRecipe(exporter, FLAG, Blocks.WHITE_WOOL);
 		offerFlagRecipe(exporter, FLAG_BLUE, Blocks.BLUE_WOOL);

@@ -29,8 +29,7 @@ public class ClientModKeybindings {
     private static boolean sentLeftPacket;
     private static boolean sentRightPacket;
 
-    public static void register() {
-
+    static {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
 
             if (client.world != null && client.player != null) {

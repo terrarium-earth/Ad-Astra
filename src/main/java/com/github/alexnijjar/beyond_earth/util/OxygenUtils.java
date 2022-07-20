@@ -22,7 +22,6 @@ import net.minecraft.block.FireBlock;
 import net.minecraft.block.PlantBlock;
 import net.minecraft.block.TorchBlock;
 import net.minecraft.block.WallTorchBlock;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.property.Properties;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
@@ -37,10 +36,15 @@ public class OxygenUtils {
     /**
      * Checks if there is oxygen in a specific block in a specific dimension.
      */
-    public static boolean posHasOxygen(ServerWorld world, BlockPos pos) {
+    public static boolean posHasOxygen(World world, BlockPos pos) {
         if (world.getServer().getTicks() <= BeyondEarth.CONFIG.oxygenDistributor.oxygenGracePeriodTicks) {
             return true;
         }
+
+        if (ModUtils.worldHasOxygen(world)) {
+            return true;
+        }
+
         for (Map.Entry<Pair<RegistryKey<World>, BlockPos>, Set<BlockPos>> entry : oxygenLocations.entrySet()) {
             if (world.getRegistryKey().equals(entry.getKey().getLeft())) {
                 if (entry.getValue().contains(pos)) {
@@ -67,42 +71,44 @@ public class OxygenUtils {
     }
 
     public static void setEntry(World world, BlockPos source, Set<BlockPos> entries) {
-        if (oxygenLocations.containsKey(Pair.of(world.getRegistryKey(), source))) {
-            Set<BlockPos> locations = oxygenLocations.get(Pair.of(world.getRegistryKey(), source));
-            if (!entries.equals(locations)) {
-                Set<BlockPos> removedLocations = new HashSet<>(locations);
-                removedLocations.removeAll(entries);
-                deoxygenizeBlocks(world, removedLocations);
+        // Get all the entries that have changed. If they are have been removed, deoxygenate their pos.
+        Set<BlockPos> locations = oxygenLocations.get(Pair.of(world.getRegistryKey(), source));
+        if (locations != null && !locations.isEmpty()) {
+            Set<BlockPos> changedPositions = new HashSet<>(locations);
+            changedPositions.removeAll(entries);
+            if (changedPositions.size() > 0) {
+                deoxygenizeBlocks(world, changedPositions, source);
             }
         }
-
         oxygenLocations.put(Pair.of(world.getRegistryKey(), source), entries);
-
     }
 
     public static void removeEntry(World world, BlockPos source) {
-        if (!oxygenLocations.containsKey(Pair.of(world.getRegistryKey(), source))) {
-            return;
+        if (oxygenLocations.containsKey(Pair.of(world.getRegistryKey(), source))) {
+            deoxygenizeBlocks(world, oxygenLocations.get(Pair.of(world.getRegistryKey(), source)), source);
         }
-        oxygenLocations.remove(Pair.of(world.getRegistryKey(), source));
-        deoxygenizeBlocks(world, oxygenLocations.get(Pair.of(world.getRegistryKey(), source)));
     }
 
     /**
      * Removes the oxygen from a set of blocks. For example, turns water into ice or air, converts torches into coal torches, puts
      * out flames, kills plants etc.
      */
-    public static void deoxygenizeBlocks(World world, Set<BlockPos> entries) {
+    public static void deoxygenizeBlocks(World world, Set<BlockPos> entries, BlockPos source) {
         if (entries == null) {
             return;
         }
         if (ModUtils.worldHasOxygen(world)) {
             return;
         }
-        
-        for (BlockPos pos : entries) {
+
+        for (BlockPos pos : new HashSet<>(entries)) {
 
             BlockState state = world.getBlockState(pos);
+
+            oxygenLocations.get(Pair.of(world.getRegistryKey(), source)).remove(pos);
+            if (ModUtils.worldHasOxygen(world, pos)) {
+                continue;
+            }
 
             if (state.isAir()) {
                 continue;

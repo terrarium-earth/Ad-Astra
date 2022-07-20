@@ -19,6 +19,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.SpawnHelper;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.level.ServerWorldProperties;
@@ -87,7 +88,7 @@ public class AlienWanderingTraderManager implements Spawner {
         }
         
         // Only spawn on planets
-        if (!ModUtils.isPlanet(world)) {
+        if (!ModUtils.isPlanet(world) || world.getRegistryKey().equals(World.OVERWORLD)) {
             return false;
         }
         if (this.random.nextInt(10) != 0) {

@@ -1,7 +1,8 @@
 package com.github.alexnijjar.beyond_earth.util;
 
 import java.util.HashSet;
-import java.util.LinkedList;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import net.minecraft.block.BlockState;
@@ -31,7 +32,7 @@ public class OxygenFillerAlgorithm {
 
         Set<BlockPos> positions = new HashSet<>();
         // This is a non-recursive flood fill algorithm, because it has better performance and avoids stack-overflow errors
-        LinkedList<BlockPos> queue = new LinkedList<>();
+        LinkedHashSet<BlockPos> queue = new LinkedHashSet<>();
         queue.add(start);
         while (!queue.isEmpty()) {
 
@@ -41,14 +42,16 @@ public class OxygenFillerAlgorithm {
                 break;
             }
 
-            BlockPos pos = queue.poll();
+            Iterator<BlockPos> iterator = queue.iterator();
+            BlockPos pos = iterator.next();
+            iterator.remove();
 
             // Don't have oxygen above the world height limit
             if (pos.getY() > this.world.getHeight()) {
                 break;
             }
 
-            BlockState state = this.world.getBlockState(pos); 
+            BlockState state = this.world.getBlockState(pos);
 
             // Cancel for solid blocks but still let things like slabs, torches and ladders through
             if (state.isFullCube(this.world, pos)) {
