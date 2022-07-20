@@ -135,31 +135,23 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
                         OxygenFillerAlgorithm floodFiller = new OxygenFillerAlgorithm(this.world, MAX_BLOCK_CHECKS);
                         Set<BlockPos> positions = floodFiller.runAlgorithm(pos.up());
 
-                        long amountOfFluidToExtract = (long) (positions.size() * OXYGEN_USAGE_MULTIPLIER);
-                        if (this.outputTank.amount > amountOfFluidToExtract) {
-                            if (this.getEnergy() > ((long) (positions.size() * ENERGY_USAGE_MULTIPLIER))) {
-                                try (Transaction transaction = Transaction.openOuter()) {
-                                    if (!this.outputTank.isResourceBlank()) {
-                                        if (this.outputTank.extract(this.outputTank.getResource(), amountOfFluidToExtract, transaction) == amountOfFluidToExtract) {
-                                            this.drainEnergy((long) (positions.size() * ENERGY_USAGE_MULTIPLIER));
-                                            OxygenUtils.setEntry(world, pos, positions);
-                                            transaction.commit();
+                        if (positions.size() > 0) {
+                            long amountOfFluidToExtract = (long) (positions.size() * OXYGEN_USAGE_MULTIPLIER);
+                            if (this.outputTank.amount > amountOfFluidToExtract) {
+                                if (this.getEnergy() > ((long) (positions.size() * ENERGY_USAGE_MULTIPLIER))) {
+                                    try (Transaction transaction = Transaction.openOuter()) {
+                                        if (!this.outputTank.isResourceBlank()) {
+                                            if (this.outputTank.extract(this.outputTank.getResource(), amountOfFluidToExtract, transaction) == amountOfFluidToExtract) {
+                                                this.drainEnergy((long) (positions.size() * ENERGY_USAGE_MULTIPLIER));
+                                                OxygenUtils.setEntry(world, pos, positions);
+                                                transaction.commit();
+                                            }
                                         }
-                                    } else {
-                                        OxygenUtils.removeEntry(world, pos);
                                     }
-                                }
-                            } else {
-                                OxygenUtils.removeEntry(world, pos);
-                                if (this.inputTank.amount <= 0 && this.outputTank.amount < 100) {
-                                    this.outputTank.amount = 0;
                                 }
                             }
                         } else {
                             OxygenUtils.removeEntry(world, pos);
-                            if (this.inputTank.amount <= 0 && this.outputTank.amount < 100) {
-                                this.outputTank.amount = 0;
-                            }
                         }
                     }
                     oxygenFillCheckTicks = 0;

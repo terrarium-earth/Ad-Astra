@@ -9,8 +9,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.util.math.Vec3d;
 
 @Mixin(LivingEntity.class)
@@ -21,9 +21,11 @@ public class LivingEntityGravityMixin {
     @Inject(method = "travel", at = @At("TAIL"), cancellable = true)
     public void travel(CallbackInfo ci) {
         if (BeyondEarth.CONFIG.world.doEntityGravity) {
-            Entity entity = (Entity) (Object) this;
-            if (!entity.hasNoGravity()) {
-                Vec3d velocity = entity.getVelocity();
+            LivingEntity entity = (LivingEntity) (Object) this;
+
+            Vec3d velocity = entity.getVelocity();
+
+            if (!entity.hasNoGravity() && !entity.isTouchingWater() && !entity.isInLava() && !entity.isFallFlying() && !entity.hasStatusEffect(StatusEffects.SLOW_FALLING)) {
                 double newGravity = ModUtils.getMixinGravity(CONSTANT, this);
                 entity.setVelocity(velocity.getX(), velocity.getY() + CONSTANT - newGravity, velocity.getZ());
             }

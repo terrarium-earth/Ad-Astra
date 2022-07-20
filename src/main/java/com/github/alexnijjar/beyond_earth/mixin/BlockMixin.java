@@ -34,11 +34,15 @@ public class BlockMixin {
         }
 
         if (block instanceof GrassBlock) {
-            world.setBlockState(pos, Blocks.DIRT.getDefaultState());
+            if (!ModUtils.worldHasOxygen(world, pos)) {
+                world.setBlockState(pos, Blocks.DIRT.getDefaultState());
+            }
         }
 
         if (block instanceof LeavesBlock) {
-            world.breakBlock(pos, false);
+            if (!ModUtils.worldHasOxygen(world, pos)) {
+                world.breakBlock(pos, false);
+            }
         }
     }
 }

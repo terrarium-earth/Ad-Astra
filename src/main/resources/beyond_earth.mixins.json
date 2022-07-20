@@ -9,6 +9,7 @@
     "EntityInvoker",
     "EntityMixin",
     "FireworkRocketItemMixin",
+    "FluidBlockMixin",
     "GeneratorOptionsMixin",
     "IceBlockMixin",
     "LivingEntityMixin",

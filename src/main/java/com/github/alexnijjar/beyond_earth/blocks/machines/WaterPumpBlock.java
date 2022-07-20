@@ -4,6 +4,7 @@ import com.github.alexnijjar.beyond_earth.blocks.machines.entity.WaterPumpBlockE
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
+import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
@@ -35,6 +36,12 @@ public class WaterPumpBlock extends AbstractMachineBlock {
                 case WEST -> WEST_SHAPE;
                 default -> throw new IllegalStateException("Unexpected value: " + state.get(FACING));
                 };
+        }
+
+        @Override
+        public BlockState getPlacementState(ItemPlacementContext ctx) {
+                BlockState state = this.getDefaultState().with(POWERED, false);
+                return this.useFacing() ? state.with(FACING, ctx.getPlayerFacing()) : state;
         }
 
         @Override

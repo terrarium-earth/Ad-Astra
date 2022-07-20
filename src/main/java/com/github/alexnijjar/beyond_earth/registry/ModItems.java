@@ -160,6 +160,7 @@ public interface ModItems {
                 stacks.add(ModItems.ENERGIZER.getDefaultStack());
                 stacks.add(energizer);
                 stacks.add(ModItems.CRYO_FREEZER.getDefaultStack());
+                stacks.add(ModItems.OXYGEN_SENSOR.getDefaultStack());
         }).build();
         public static final ItemGroup ITEM_GROUP_BASICS = FabricItemGroupBuilder.build(new ModIdentifier("tab_basics"), () -> new ItemStack(ModItems.DESH_ENGINE));
         public static final ItemGroup ITEM_GROUP_MATERIALS = FabricItemGroupBuilder.build(new ModIdentifier("tab_materials"), () -> new ItemStack(ModItems.IRON_PLATE));
@@ -246,8 +247,9 @@ public interface ModItems {
                         tooltip.add((new TranslatableText("item.beyond_earth.water_pump.tooltip", FluidUtils.dropletsToMillibuckets(WaterPumpBlockEntity.TRANSFER_PER_TICK)).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
                 }
         });
-        public static final BlockItem ENERGIZER = register("energizer", new EnergizerBlockItem(ModBlocks.ENERGIZER, new FabricItemSettings().group(ITEM_GROUP_MACHINES)));
+        public static final BlockItem ENERGIZER = register("energizer", new EnergizerBlockItem(ModBlocks.ENERGIZER, new FabricItemSettings().group(ITEM_GROUP_MACHINES).maxCount(1)));
         public static final BlockItem CRYO_FREEZER = registerBlockItem(ModBlocks.CRYO_FREEZER, ITEM_GROUP_MACHINES);
+        public static final BlockItem OXYGEN_SENSOR = registerBlockItem(ModBlocks.OXYGEN_SENSOR, ITEM_GROUP_MACHINES);
 
         public static final Item HAMMER = register("hammer", new HammerItem(new FabricItemSettings().group(ITEM_GROUP_BASICS).maxCount(1).maxDamage(BeyondEarth.CONFIG.world.hammerDurability)));
 

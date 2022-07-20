@@ -54,6 +54,7 @@ public abstract class AbstractMachineBlock extends BlockWithEntity {
     protected BlockState buildDefaultState() {
         BlockState state = this.stateManager.getDefaultState();
 
+        state = state.with(POWERED, false);
         if (this.useFacing()) {
             state = state.with(FACING, Direction.NORTH);
         }
@@ -139,13 +140,12 @@ public abstract class AbstractMachineBlock extends BlockWithEntity {
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        super.appendProperties(builder);
-
-        builder.add(POWERED);
-
+        
         if (this.useFacing()) {
             builder.add(FACING);
         }
+
+        builder.add(POWERED);
 
         if (this.useLit()) {
             builder.add(LIT);
@@ -163,12 +163,18 @@ public abstract class AbstractMachineBlock extends BlockWithEntity {
         return true;
     }
 
+    public boolean doRedstoneCheck() {
+        return true;
+    }
+
     @Override
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
         super.neighborUpdate(state, world, pos, block, fromPos, notify);
 
-        if (!world.isClient) {
-            world.setBlockState(pos, state.with(POWERED, world.isReceivingRedstonePower(pos)));
+        if (this.doRedstoneCheck()) {
+            if (!world.isClient) {
+                world.setBlockState(pos, state.with(POWERED, world.isReceivingRedstonePower(pos)));
+            }
         }
     }
 
