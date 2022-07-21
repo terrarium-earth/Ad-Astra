@@ -1,0 +1,14 @@
+{
+    "structures": [
+      {
+        "structure": "beyond_earth:dungeon/moon/moon_dungeon",
+        "weight": 1
+      }
+    ],
+    "placement": {
+      "salt": 1224463880,
+      "spacing": 20,
+      "separation": 10,
+      "type": "minecraft:random_spread"
+    }
+  }

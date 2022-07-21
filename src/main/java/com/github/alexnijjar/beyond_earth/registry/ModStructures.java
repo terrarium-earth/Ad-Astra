@@ -4,6 +4,7 @@ import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 import com.github.alexnijjar.beyond_earth.world.processor.StructureVoidProcessor;
 import com.github.alexnijjar.beyond_earth.world.structures.AlienVillage;
 import com.github.alexnijjar.beyond_earth.world.structures.Meteor;
+import com.github.alexnijjar.beyond_earth.world.structures.MoonDungeon;
 import com.github.alexnijjar.beyond_earth.world.structures.OilWell;
 import com.github.alexnijjar.beyond_earth.world.structures.PygroTower;
 import com.github.alexnijjar.beyond_earth.world.structures.PygroVillage;
@@ -17,6 +18,7 @@ import net.minecraft.world.gen.feature.StructurePoolFeatureConfig;
 public class ModStructures {
 
     public static StructureFeature<StructurePoolFeatureConfig> ALIEN_VILLAGE = new AlienVillage();
+    public static StructureFeature<StructurePoolFeatureConfig> MOON_DUNGEON = new MoonDungeon();
     public static StructureFeature<StructurePoolFeatureConfig> METEOR = new Meteor(StructurePoolFeatureConfig.CODEC);
     public static StructureFeature<StructurePoolFeatureConfig> OIL_WELL = new OilWell(StructurePoolFeatureConfig.CODEC);
     public static StructureFeature<StructurePoolFeatureConfig> PYGRO_TOWER = new PygroTower(StructurePoolFeatureConfig.CODEC);
@@ -32,6 +34,8 @@ public class ModStructures {
         register("pygro_tower", PYGRO_TOWER);
         register("pygro_village", PYGRO_VILLAGE);
         register("venus_bullet", VENUS_BULLET);
+
+        register("moon_dungeon", MOON_DUNGEON);
 
         Registry.register(Registry.STRUCTURE_PROCESSOR, new ModIdentifier("structure_void_processor"), STRUCTURE_VOID_PROCESSOR);
     }

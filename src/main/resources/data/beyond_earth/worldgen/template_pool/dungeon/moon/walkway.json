@@ -1,0 +1,42 @@
+{
+    "name": "beyond_earth:dungeon/moon/walkway",
+    "fallback": "minecraft:empty",
+    "elements": [
+      {
+        "weight": 100,
+        "element": {
+          "location": "beyond_earth:dungeon/moon/walkway",
+          "processors": "minecraft:empty",
+          "projection": "rigid",
+          "element_type": "minecraft:single_pool_element"
+        }
+      },
+      {
+        "weight": 100,
+        "element": {
+          "location": "beyond_earth:dungeon/moon/turn",
+          "processors": "minecraft:empty",
+          "projection": "rigid",
+          "element_type": "minecraft:single_pool_element"
+        }
+      },
+      {
+        "weight": 100,
+        "element": {
+          "location": "beyond_earth:dungeon/moon/cross",
+          "processors": "minecraft:empty",
+          "projection": "rigid",
+          "element_type": "minecraft:single_pool_element"
+        }
+      },
+      {
+        "weight": 100,
+        "element": {
+          "location": "beyond_earth:dungeon/moon/fork",
+          "processors": "minecraft:empty",
+          "projection": "rigid",
+          "element_type": "minecraft:single_pool_element"
+        }
+      }
+    ]
+  }

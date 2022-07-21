@@ -32,7 +32,7 @@ public class PygroTower extends StructureFeature<StructurePoolFeatureConfig> {
         return !context.chunkGenerator().method_41053(StructureSetKeys.OCEAN_MONUMENTS, context.seed(), chunkpos.x, chunkpos.z, 10);
     }
 
-    public static Optional<StructurePiecesGenerator<StructurePoolFeatureConfig>> generate(StructureGeneratorFactory.Context<StructurePoolFeatureConfig> context) {
+    private static Optional<StructurePiecesGenerator<StructurePoolFeatureConfig>> generate(StructureGeneratorFactory.Context<StructurePoolFeatureConfig> context) {
 
         if (!PygroTower.isFeatureChunk(context)) {
             return Optional.empty();
