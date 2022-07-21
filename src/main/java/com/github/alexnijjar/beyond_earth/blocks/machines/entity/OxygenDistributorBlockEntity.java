@@ -22,7 +22,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
@@ -46,18 +45,6 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 
     public OxygenDistributorBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.OXYGEN_DISTRIBUTOR, blockPos, blockState);
-    }
-
-    @Override
-    public void readNbt(NbtCompound nbt) {
-        super.readNbt(nbt);
-        this.oxygenFillCheckTicks = nbt.getInt("OxygenFillCheckTicks");
-    }
-
-    @Override
-    public void writeNbt(NbtCompound nbt) {
-        super.writeNbt(nbt);
-        nbt.putInt("OxygenFillCheckTicks", oxygenFillCheckTicks);
     }
 
     @Override
@@ -155,8 +142,9 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
                         }
                     }
                     oxygenFillCheckTicks = 0;
+                } else {
+                    oxygenFillCheckTicks++;
                 }
-                oxygenFillCheckTicks++;
             }
             this.setActive(OxygenUtils.getOxygenBlocksCount(this.world, this.getPos()) > 0);
         }
