@@ -7,7 +7,7 @@
                 {
                     "type": "minecraft:item",
                     "name": "beyond_earth:space_painting",
-                    "weight": 7
+                    "weight": 3
                 },
                 {
                     "type": "minecraft:item",
@@ -23,7 +23,7 @@
                         }
                     ],
                     "name": "beyond_earth:moon_sand",
-                    "weight": 20
+                    "weight": 40
                 },
                 {
                     "type": "minecraft:item",
@@ -39,7 +39,7 @@
                         }
                     ],
                     "name": "minecraft:ice",
-                    "weight": 40
+                    "weight": 20
                 },
                 {
                     "type": "minecraft:item",
@@ -70,7 +70,7 @@
                             "function": "minecraft:set_count"
                         }
                     ],
-                    "name": "beyond_earth:raw_ostrum",
+                    "name": "beyond_earth:raw_desh",
                     "weight": 10
                 },
                 {
@@ -166,7 +166,7 @@
                         }
                     ],
                     "name": "minecraft:book",
-                    "weight": 10
+                    "weight": 5
                 }
             ],
             "rolls": {

@@ -17,10 +17,10 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraft.world.gen.feature.StructurePoolFeatureConfig;
 
-public class AlienVillage extends StructureFeature<StructurePoolFeatureConfig> {
+public class MoonDungeon extends StructureFeature<StructurePoolFeatureConfig> {
 
-    public AlienVillage() {
-        super(JigsawConfigurator.CODEC, AlienVillage::generate, PostPlacementProcessor.EMPTY);
+    public MoonDungeon() {
+        super(JigsawConfigurator.CODEC, MoonDungeon::generate, PostPlacementProcessor.EMPTY);
     }
 
     @Override
@@ -36,14 +36,14 @@ public class AlienVillage extends StructureFeature<StructurePoolFeatureConfig> {
 
     private static Optional<StructurePiecesGenerator<StructurePoolFeatureConfig>> generate(StructureGeneratorFactory.Context<StructurePoolFeatureConfig> context) {
 
-        if (!AlienVillage.isFeatureChunk(context)) {
+        if (!MoonDungeon.isFeatureChunk(context)) {
             return Optional.empty();
         }
 
         BlockPos blockpos = context.chunkPos().getCenterAtY(0);
 
         int topLandY = context.chunkGenerator().getHeightOnGround(blockpos.getX(), blockpos.getZ(), Heightmap.Type.WORLD_SURFACE_WG, context.world());
-        blockpos = blockpos.up(topLandY - 20);
+        blockpos = blockpos.up(topLandY - 40);
 
         return StructurePoolBasedGenerator.generate(context, PoolStructurePiece::new, blockpos, false, false);
     }

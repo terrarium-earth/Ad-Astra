@@ -14,6 +14,6 @@ public class JigsawConfigurator extends StructurePoolFeatureConfig {
 
     // Increases the max start pool size to 30 instead of 7.
     public static final Codec<StructurePoolFeatureConfig> CODEC = RecordCodecBuilder
-            .create((instance) -> instance.group(StructurePool.REGISTRY_CODEC.fieldOf("start_pool").forGetter(StructurePoolFeatureConfig::getStartPool), Codec.intRange(0, 30).fieldOf("size").forGetter(StructurePoolFeatureConfig::getSize)).apply(instance,
+            .create((instance) -> instance.group(StructurePool.REGISTRY_CODEC.fieldOf("start_pool").forGetter(StructurePoolFeatureConfig::getStartPool), Codec.intRange(0, 50).fieldOf("size").forGetter(StructurePoolFeatureConfig::getSize)).apply(instance,
                     StructurePoolFeatureConfig::new));
 }

@@ -9,6 +9,7 @@ import com.github.alexnijjar.beyond_earth.client.screens.PlayerOverlayScreen;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.LanderEntity;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntity;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.VehicleEntity;
+import com.github.alexnijjar.beyond_earth.items.armour.JetSuit;
 import com.github.alexnijjar.beyond_earth.items.armour.SpaceSuit;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
@@ -23,25 +24,36 @@ public class ClientPlayerEntityMixin {
     public void baseTick(CallbackInfo ci) {
 
         ClientPlayerEntity player = ((ClientPlayerEntity) (Object) this);
-        boolean disableOverlays = false;
-        boolean hasFullSet = SpaceSuit.hasFullSet(player);
+        ItemStack chest = player.getEquippedStack(EquipmentSlot.CHEST);
 
-        PlayerOverlayScreen.shouldRenderOxygen = hasFullSet;
-
-        if (hasFullSet) {
-            ItemStack chest = player.getEquippedStack(EquipmentSlot.CHEST);
+        if (SpaceSuit.hasFullSet(player)) {
+            PlayerOverlayScreen.shouldRenderOxygen = true;
             if (chest.getItem() instanceof SpaceSuit suit) {
                 long oxygen = suit.getAmount(chest);
 
-                // Render oxygen info.
-                double ratio = oxygen / (float) suit.getTankSize();
+                // Render oxygen info
+                double ratio = oxygen / (double) suit.getTankSize();
                 PlayerOverlayScreen.oxygenRatio = ratio;
                 PlayerOverlayScreen.doesNotNeedOxygen = ModUtils.worldHasOxygen(player.world, player) && !player.isSubmergedInWater();
             }
+        } else {
+            PlayerOverlayScreen.shouldRenderOxygen = false;
+        }
+
+        if (JetSuit.hasFullSet(player)) {
+            PlayerOverlayScreen.shouldRenderBattery = true;
+            if (chest.getItem() instanceof JetSuit suit) {
+
+                // Render battery info
+                double ratio = (double) suit.getStoredEnergy(chest) / (double) suit.getEnergyCapacity();
+                PlayerOverlayScreen.batteryRatio = ratio;
+            }
+        } else {
+            PlayerOverlayScreen.shouldRenderBattery = false;
         }
 
         if (player.getVehicle() instanceof VehicleEntity vehicle) {
-            // Rocket.
+            // Rocket
             if (vehicle.renderPlanetBar()) {
                 PlayerOverlayScreen.shouldRenderBar = true;
                 if (vehicle instanceof RocketEntity rocket) {
@@ -51,7 +63,7 @@ public class ClientPlayerEntityMixin {
                 }
             }
 
-            // Show the warning screen when falling in a lander.
+            // Show the warning screen when falling in a lander
             if (vehicle instanceof LanderEntity lander) {
 
                 double speed = lander.getVelocity().getY();
@@ -59,19 +71,12 @@ public class ClientPlayerEntityMixin {
                     PlayerOverlayScreen.shouldRenderWarning = true;
                     PlayerOverlayScreen.speed = speed * 55;
                 } else {
-                    disableOverlays = true;
+                    PlayerOverlayScreen.disableAllVehicleOverlays();
                 }
             }
 
         } else {
-            disableOverlays = true;
-        }
-
-        if (disableOverlays) {
-            // Disable all of the overlays.
-            PlayerOverlayScreen.shouldRenderBar = false;
-            PlayerOverlayScreen.countdownSeconds = 0;
-            PlayerOverlayScreen.shouldRenderWarning = false;
+            PlayerOverlayScreen.disableAllVehicleOverlays();
         }
     }
 }

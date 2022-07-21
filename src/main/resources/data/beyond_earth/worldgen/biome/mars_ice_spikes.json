@@ -28,8 +28,6 @@
   },
   "features": [
     [
-      "minecraft:fossil_upper",
-      "minecraft:fossil_lower",
       "minecraft:lush_caves_ceiling_vegetation",
       "minecraft:cave_vines",
       "minecraft:lush_caves_clay",

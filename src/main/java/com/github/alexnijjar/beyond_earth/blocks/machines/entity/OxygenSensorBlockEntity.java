@@ -6,8 +6,11 @@ import com.github.alexnijjar.beyond_earth.util.OxygenUtils;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 
 public class OxygenSensorBlockEntity extends AbstractMachineBlockEntity {
+
+    public static final Direction[] CHECK_DIRECTIONS = new Direction[] { Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST, Direction.UP };
 
     public OxygenSensorBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.OXYGEN_SENSOR, blockPos, blockState);
@@ -16,7 +19,14 @@ public class OxygenSensorBlockEntity extends AbstractMachineBlockEntity {
     @Override
     public void tick() {
         if (!this.world.isClient) {
-            this.world.setBlockState(this.getPos(), this.getCachedState().with(OxygenSensorBlock.POWERED, OxygenUtils.posHasOxygen(this.world, this.getPos().up())));
+            boolean hasOxygen = false;
+            for (Direction dir : CHECK_DIRECTIONS) {
+                if (OxygenUtils.posHasOxygen(this.world, this.pos.offset(dir))) {
+                    hasOxygen = true;
+                    break;
+                }
+            }
+            this.world.setBlockState(this.getPos(), this.getCachedState().with(OxygenSensorBlock.POWERED, hasOxygen));
         }
-    } 
+    }
 }

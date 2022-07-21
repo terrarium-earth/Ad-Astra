@@ -23,8 +23,8 @@ import net.minecraft.world.World;
 @Environment(EnvType.CLIENT)
 public class PlayerOverlayScreen {
 
-    private static final Identifier OXYGEN_TANK_EMPTY_TEXTURE = new ModIdentifier("textures/overlay/oxygen_tank_empty.png");
-    private static final Identifier OXYGEN_TANK_FULL_TEXTURE = new ModIdentifier("textures/overlay/oxygen_tank_full.png");
+    private static final Identifier OXYGEN_TANK_EMPTY_TEXTURE = new ModIdentifier("textures/gui/overlay/oxygen_tank_empty.png");
+    private static final Identifier OXYGEN_TANK_FULL_TEXTURE = new ModIdentifier("textures/gui/overlay/oxygen_tank_full.png");
 
     // Planet bar textures.
     private static final Identifier EARTH_PLANET_BAR_TEXTURE = new ModIdentifier("textures/gui/planet_bar/earth_planet_bar.png");
@@ -39,7 +39,10 @@ public class PlayerOverlayScreen {
 
     private static final Identifier ROCKET_PLANET_BAR_TEXTURE = new ModIdentifier("textures/gui/planet_bar/rocket.png");
 
-    private static final Identifier WARNING_TEXTURE = new ModIdentifier("textures/overlay/warning.png");
+    private static final Identifier WARNING_TEXTURE = new ModIdentifier("textures/gui/overlay/warning.png");
+
+    private static final Identifier BATTERY_TEXTURE = new ModIdentifier("textures/gui/overlay/battery.png");
+    private static final Identifier BATTERY_EMPTY_TEXTURE = new ModIdentifier("textures/gui/overlay/battery_empty.png");
 
     public static boolean shouldRenderOxygen;
     public static double oxygenRatio;
@@ -51,6 +54,9 @@ public class PlayerOverlayScreen {
 
     public static boolean shouldRenderWarning;
     public static double speed;
+
+    public static boolean shouldRenderBattery;
+    public static double batteryRatio;
 
     public static void render(MatrixStack matrices, float delta) {
         MinecraftClient client = MinecraftClient.getInstance();
@@ -83,6 +89,23 @@ public class PlayerOverlayScreen {
             } else {
                 client.textRenderer.drawWithShadow(matrices, text, (x + (textureWidth - textWidth) / 2), y + textureHeight + 3, oxygen <= 0.0f ? 0xDC143C : 0xFFFFFF);
             }
+        }
+
+        // Battery
+        if (shouldRenderBattery && !client.options.debugEnabled) {
+
+            int x = screenX - 75;
+            int y = 25;
+
+            int textureWidth = (int)(49 * 1.4);
+            int textureHeight = (int)(27 * 1.4);
+            GuiUtil.drawHorizontal(matrices, x, y, textureWidth, textureHeight, BATTERY_EMPTY_TEXTURE, 1.0);
+            GuiUtil.drawHorizontal(matrices, x, y, textureWidth, textureHeight, BATTERY_TEXTURE, batteryRatio);
+
+            double energy = Math.round(batteryRatio * 1000) / 10.0;
+            Text text = Text.of((energy) + "%");
+            int textWidth = client.textRenderer.getWidth(text);
+            client.textRenderer.drawWithShadow(matrices, text, (x + (textureWidth - textWidth) / 2), y + textureHeight + 3, 0x6082B6);
         }
 
         // Timer
@@ -156,6 +179,19 @@ public class PlayerOverlayScreen {
             RenderSystem.disableBlend();
             matrices.pop();
         }
+    }
+
+    public static void disableAllOverlays() {
+        shouldRenderOxygen = false;
+        shouldRenderBattery = false;
+        shouldRenderBar = false;
+        shouldRenderWarning = false;
+    }
+
+    public static void disableAllVehicleOverlays() {
+        PlayerOverlayScreen.shouldRenderBar = false;
+        PlayerOverlayScreen.countdownSeconds = 0;
+        PlayerOverlayScreen.shouldRenderWarning = false;
     }
 
     public static Identifier getTimerTexture() {
