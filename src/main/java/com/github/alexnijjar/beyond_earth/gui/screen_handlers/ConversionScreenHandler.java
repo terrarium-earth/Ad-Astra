@@ -18,18 +18,18 @@ public class ConversionScreenHandler extends AbstractMachineScreenHandler {
         super(ModScreenHandlers.CONVERSION_SCREEN_HANDLER, syncId, inventory, entity, new Slot[] {
 
                 // Left Insert.
-                new Slot(entity, 0, 26, 22),
+                new Slot(entity, 0, 12, 22),
                 // Left Extract.
-                new Slot(entity, 1, 26, 52) {
+                new Slot(entity, 1, 12, 52) {
                     @Override
                     public boolean canInsert(ItemStack stack) {
                         return false;
                     }
                 },
                 // Right Insert.
-                new Slot(entity, 2, 92, 22),
+                new Slot(entity, 2, 127, 22),
                 // Right Extract.
-                new Slot(entity, 3, 92, 52) {
+                new Slot(entity, 3, 127, 52) {
                     @Override
                     public boolean canInsert(ItemStack stack) {
                         return false;
@@ -39,6 +39,6 @@ public class ConversionScreenHandler extends AbstractMachineScreenHandler {
 
     @Override
     public int getPlayerInventoryOffset() {
-        return 6;
+        return 18;
     }
 }

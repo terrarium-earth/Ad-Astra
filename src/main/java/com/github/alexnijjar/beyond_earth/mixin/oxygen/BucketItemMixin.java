@@ -6,7 +6,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
+import com.github.alexnijjar.beyond_earth.registry.ModFluids;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
+import com.github.alexnijjar.beyond_earth.util.OxygenUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -42,12 +44,15 @@ public class BucketItemMixin {
 
         if (bucketItem.fluid.isIn(FluidTags.WATER)) {
 
-            if (!ModUtils.worldHasOxygen(world, pos)) {
+            if (!OxygenUtils.worldHasOxygen(world, pos) && !bucketItem.fluid.equals(ModFluids.CRYO_FUEL_STILL)) {
                 int i = pos.getX();
                 int j = pos.getY();
                 int k = pos.getZ();
                 if (ModUtils.getWorldTemperature(world) < 0) {
-                    world.setBlockState(pos, Blocks.ICE.getDefaultState());
+                    BlockState state = world.getBlockState(pos);
+                    if (state.isAir()) {
+                        world.setBlockState(pos, Blocks.ICE.getDefaultState());
+                    }
 
                 }
                 world.playSound(player, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5f, 2.6f + (world.random.nextFloat() - world.random.nextFloat()) * 0.8f);

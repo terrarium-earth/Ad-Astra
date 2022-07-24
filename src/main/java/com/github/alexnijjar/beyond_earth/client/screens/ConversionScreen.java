@@ -20,22 +20,19 @@ public class ConversionScreen extends AbstractMachineScreen<ConversionScreenHand
 
     private static final Identifier TEXTURE = new ModIdentifier("textures/gui/screens/conversion.png");
 
-    public static final int INPUT_TANK_LEFT = 9;
+    public static final int INPUT_TANK_LEFT = 42;
     public static final int INPUT_TANK_TOP = 21;
 
-    public static final int OUTPUT_TANK_LEFT = 75;
+    public static final int OUTPUT_TANK_LEFT = 99;
     public static final int OUTPUT_TANK_TOP = 21;
 
-    public static final int ENERGY_LEFT = 144;
-    public static final int ENERGY_TOP = 21;
-
-    public static final int ARROW_LEFT = 48;
-    public static final int ARROW_TOP = 36;
+    public static final int ENERGY_LEFT = 150;
+    public static final int ENERGY_TOP = 22;
 
     public ConversionScreen(ConversionScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title, TEXTURE);
         this.backgroundWidth = 177;
-        this.backgroundHeight = 172;
+        this.backgroundHeight = 184;
         this.playerInventoryTitleY = this.backgroundHeight - 92;
     }
 
@@ -81,5 +78,10 @@ public class ConversionScreen extends AbstractMachineScreen<ConversionScreenHand
 
     public Rectangle getEnergyBounds() {
         return GuiUtil.getEnergyBounds(this.x + ENERGY_LEFT, this.y + ENERGY_TOP);
+    }
+
+    @Override
+    public int getTextColour() {
+        return 0x2C282E;
     }
 }

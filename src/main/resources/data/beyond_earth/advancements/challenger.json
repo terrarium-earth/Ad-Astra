@@ -1,0 +1,55 @@
+{
+    "display": {
+        "icon": {
+            "item": "beyond_earth:earth_globe"
+        },
+        "title": {
+            "translate": "advancements.challenger.title"
+        },
+        "description": {
+            "translate": "advancements.challenger.description"
+        },
+        "frame": "challenge",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "challenger": {
+            "conditions": {
+                "items": [
+                    {
+                        "items": [
+                            "beyond_earth:moon_globe"
+                        ]
+                    },
+                    {
+                        "items": [
+                            "beyond_earth:mars_globe"
+                        ]
+                    },
+                    {
+                        "items": [
+                            "beyond_earth:venus_globe"
+                        ]
+                    },
+                    {
+                        "items": [
+                            "beyond_earth:mercury_globe"
+                        ]
+                    },
+                    {
+                        "items": [
+                            "beyond_earth:glacio_globe"
+                        ]
+                    }
+                ]
+            },
+            "trigger": "minecraft:inventory_changed"
+        }
+    },
+    "rewards": {
+        "experience": 300
+    },
+    "parent": "beyond_earth:interstellar"
+}

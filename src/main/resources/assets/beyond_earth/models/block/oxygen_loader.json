@@ -1,12 +1,12 @@
 {
   "parent": "block/cube",
   "textures": {
-    "down": "beyond_earth:block/steel_machine_back",
+    "down": "beyond_earth:block/steel_machine_bottom",
     "up": "beyond_earth:block/steel_machine_back",
     "north": "beyond_earth:block/oxygen_loader_front",
     "east": "beyond_earth:block/steel_machine_side",
     "south": "beyond_earth:block/steel_machine_side",
     "west": "beyond_earth:block/steel_machine_side",
-    "particle": "beyond_earth:block/steel_machine_back"
+    "particle": "beyond_earth:block/oxygen_loader_front"
   }
 }

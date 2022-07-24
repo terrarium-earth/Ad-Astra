@@ -1,0 +1,35 @@
+{
+  "display": {
+    "icon": {
+      "item": "beyond_earth:tier_1_rocket"
+    },
+    "title": {
+      "translate": "advancements.tier_1_rocket.title"
+    },
+    "description": {
+      "translate": "advancements.tier_1_rocket.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "tier_1_rocket": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "beyond_earth:tier_1_rocket"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 50
+  },
+  "parent": "beyond_earth:beyond_earth"
+}

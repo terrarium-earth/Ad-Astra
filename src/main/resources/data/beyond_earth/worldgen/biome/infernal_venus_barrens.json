@@ -31,6 +31,12 @@
         "weight": 100,
         "minCount": 1,
         "maxCount": 3
+      },
+      {
+        "type": "beyond_earth:zombified_pygro",
+        "weight": 100,
+        "minCount": 1,
+        "maxCount": 2
       }
     ]
   },
@@ -41,6 +47,10 @@
     },
     "beyond_earth:sulfur_creeper": {
       "energy_budget": 0.02,
+      "charge": 0.2
+    },
+    "beyond_earth:zombified_pygro": {
+      "energy_budget": 0.012,
       "charge": 0.2
     }
   },

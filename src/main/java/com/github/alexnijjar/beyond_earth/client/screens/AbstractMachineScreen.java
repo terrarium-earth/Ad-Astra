@@ -43,4 +43,14 @@ public abstract class AbstractMachineScreen<T extends AbstractMachineScreenHandl
         super.render(matrices, mouseX, mouseY, delta);
         drawMouseoverTooltip(matrices, mouseX, mouseY);
     }
+
+    public int getTextColour() {
+        return 0x404040;
+    }
+
+    @Override
+    protected void drawForeground(MatrixStack matrices, int mouseX, int mouseY) {
+        this.textRenderer.draw(matrices, this.title, (float)this.titleX, (float)this.titleY, this.getTextColour());
+        this.textRenderer.draw(matrices, this.playerInventoryTitle, (float)this.playerInventoryTitleX, (float)this.playerInventoryTitleY, this.getTextColour());
+    }
 }

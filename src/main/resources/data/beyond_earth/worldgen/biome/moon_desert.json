@@ -5,7 +5,7 @@
   "category": "none",
   "effects": {
     "sky_color": 0,
-    "fog_color": 0,
+    "fog_color": 1447444,
     "water_color": 4159204,
     "water_fog_color": 329011,
     "grass_color": 9551193,
@@ -15,7 +15,7 @@
   "spawners": {
     "monster": [
       {
-        "type": "beyond_earth:alien_zombie",
+        "type": "beyond_earth:corrupted_lunarian",
         "weight": 100,
         "minCount": 1,
         "maxCount": 3
@@ -29,7 +29,7 @@
     ]
   },
   "spawn_costs": {
-    "beyond_earth:alien_zombie": {
+    "beyond_earth:corrupted_lunarian": {
       "energy_budget": 0.015,
       "charge": 0.2
     },

@@ -25,10 +25,6 @@ import net.minecraft.util.math.Direction;
 
 public class CryoFreezerBlockEntity extends FluidMachineBlockEntity {
 
-    public static final long MAX_ENERGY = BeyondEarth.CONFIG.cryoFreezer.maxEnergy;
-    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.cryoFreezer.energyPerTick;
-    public static final int TANK_SIZE = BeyondEarth.CONFIG.cryoFreezer.tankBuckets;
-
     protected short cookTime;
     protected short cookTimeTotal;
 
@@ -87,7 +83,7 @@ public class CryoFreezerBlockEntity extends FluidMachineBlockEntity {
 
     @Override
     public long getInputSize() {
-        return TANK_SIZE;
+        return BeyondEarth.CONFIG.cryoFreezer.tankBuckets;
     }
 
     @Override
@@ -102,17 +98,17 @@ public class CryoFreezerBlockEntity extends FluidMachineBlockEntity {
 
     @Override
     public long getMaxGeneration() {
-        return MAX_ENERGY;
+        return BeyondEarth.CONFIG.cryoFreezer.maxEnergy;
     }
 
     @Override
     public long getEnergyPerTick() {
-        return ENERGY_PER_TICK;
+        return BeyondEarth.CONFIG.cryoFreezer.energyPerTick;
     }
 
     @Override
     public long getMaxEnergyInsert() {
-        return ENERGY_PER_TICK * 32;
+        return BeyondEarth.CONFIG.cryoFreezer.energyPerTick * 32;
     }
 
     @Override
@@ -179,8 +175,8 @@ public class CryoFreezerBlockEntity extends FluidMachineBlockEntity {
                         this.drainEnergy();
 
                     } else if (this.outputFluid != null) {
-                        input.decrement(1);
                         this.finishCooking();
+                        input.decrement(1);
 
                     } else {
                         CryoFuelConversionRecipe recipe = this.createRecipe(ModRecipes.CRYO_FUEL_CONVERSION_RECIPE, input, false);

@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.github.alexnijjar.beyond_earth.world.AlienWanderingTraderManager;
+import com.github.alexnijjar.beyond_earth.world.LunarianWanderingTraderManager;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.WorldGenerationProgressListener;
@@ -23,15 +23,16 @@ import net.minecraft.world.level.ServerWorldProperties;
 import net.minecraft.world.level.storage.LevelStorage;
 import net.minecraft.world.spawner.Spawner;
 
-// Adds alien wandering trader spawning
+// Adds lunarian wandering trader spawning
 @Mixin(ServerWorld.class)
 public class ServerWorldMixin {
     @Inject(at = @At(value = "TAIL"), method = "<init>")
-    public void ServerWorld(MinecraftServer server, Executor workerExecutor, LevelStorage.Session session, ServerWorldProperties properties, RegistryKey<World> worldKey, RegistryEntry<DimensionType> registryEntry, WorldGenerationProgressListener worldGenerationProgressListener, ChunkGenerator chunkGenerator, boolean debugWorld, long seed, List<Spawner> spawners, boolean shouldTickTime, CallbackInfo ci) {
+    public void ServerWorld(MinecraftServer server, Executor workerExecutor, LevelStorage.Session session, ServerWorldProperties properties, RegistryKey<World> worldKey, RegistryEntry<DimensionType> registryEntry,
+            WorldGenerationProgressListener worldGenerationProgressListener, ChunkGenerator chunkGenerator, boolean debugWorld, long seed, List<Spawner> spawners, boolean shouldTickTime, CallbackInfo ci) {
 
         List<Spawner> serverSpawners = new ArrayList<>(((ServerWorld) (Object) this).spawners);
         if (!shouldTickTime) {
-            serverSpawners.add(new AlienWanderingTraderManager(properties));
+            serverSpawners.add(new LunarianWanderingTraderManager(properties));
             ((ServerWorld) (Object) this).spawners = serverSpawners;
         }
     }

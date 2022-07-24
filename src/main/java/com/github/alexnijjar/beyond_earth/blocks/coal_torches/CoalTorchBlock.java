@@ -1,7 +1,7 @@
 package com.github.alexnijjar.beyond_earth.blocks.coal_torches;
 
 import com.github.alexnijjar.beyond_earth.registry.ModBlocks;
-import com.github.alexnijjar.beyond_earth.util.ModUtils;
+import com.github.alexnijjar.beyond_earth.util.OxygenUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -37,7 +37,7 @@ public class CoalTorchBlock extends Block {
         if (!world.isClient) {
             ItemStack itemstack = player.getStackInHand(hand);
 
-            if (ModUtils.worldHasOxygen(world, pos)) {
+            if (OxygenUtils.worldHasOxygen(world, pos)) {
                 if (itemstack.getItem() instanceof FlintAndSteelItem || itemstack.getItem() instanceof FireChargeItem) {
 
                     if (world.getBlockState(pos).getBlock().equals(ModBlocks.COAL_TORCH)) {

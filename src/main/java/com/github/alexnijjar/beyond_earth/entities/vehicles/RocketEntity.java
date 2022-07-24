@@ -41,12 +41,6 @@ import net.minecraft.world.World;
 
 public class RocketEntity extends VehicleEntity {
 
-    // 10 seconds.
-    public static final int ATMOSPHERE_LEAVE = BeyondEarth.CONFIG.rocket.atmosphereLeave;
-    public static final int MAX_COUNTDOWN_TICKS = BeyondEarth.CONFIG.rocket.countDownTicks;
-    public static final double ROCKET_ACCELERATION = BeyondEarth.CONFIG.rocket.acceleration;
-    public static final double ROCKET_MAX_SPEED = BeyondEarth.CONFIG.rocket.maxSpeed;
-
     protected static final TrackedData<Boolean> HAS_LAUNCH_PAD = DataTracker.registerData(RocketEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     protected static final TrackedData<Boolean> FLYING = DataTracker.registerData(RocketEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     protected static final TrackedData<Integer> COUNTDOWN_TICKS = DataTracker.registerData(RocketEntity.class, TrackedDataHandlerRegistry.INTEGER);
@@ -135,7 +129,7 @@ public class RocketEntity extends VehicleEntity {
             }
         }
 
-        if (this.getY() >= ATMOSPHERE_LEAVE || this.getFrozenTicks() > 1000) {
+        if (this.getY() >= BeyondEarth.CONFIG.rocket.atmosphereLeave || this.getFrozenTicks() > 1000) {
             this.setFlying(true);
         }
         if (!this.isFlying()) {
@@ -157,7 +151,7 @@ public class RocketEntity extends VehicleEntity {
                 this.spawnSmokeParticles();
                 this.setPhase(1);
                 // Phase two: the rocket has launched.
-            } else if (this.getY() < ATMOSPHERE_LEAVE) {
+            } else if (this.getY() < BeyondEarth.CONFIG.rocket.atmosphereLeave) {
                 this.spawnAfterburnerParticles();
                 this.burnEntitiesUnderRocket();
                 this.travel();
@@ -166,7 +160,7 @@ public class RocketEntity extends VehicleEntity {
                 }
                 this.setPhase(2);
                 // Phase three: the rocket has reached the required height.
-            } else if (this.getY() >= ATMOSPHERE_LEAVE) {
+            } else if (this.getY() >= BeyondEarth.CONFIG.rocket.atmosphereLeave) {
                 openPlanetSelectionGui();
                 this.setPhase(3);
             }
@@ -240,11 +234,11 @@ public class RocketEntity extends VehicleEntity {
     private void travel() {
         double multiplier = (this.inputTank.getResource().equals(FluidVariant.of(ModFluids.CRYO_FUEL_STILL)) ? 2.5 : 1.0);
         if (!this.hasNoGravity()) {
-            this.setVelocity(this.getVelocity().add(0.0, ROCKET_ACCELERATION * multiplier, 0.0));
+            this.setVelocity(this.getVelocity().add(0.0, BeyondEarth.CONFIG.rocket.acceleration * multiplier, 0.0));
         }
 
-        if (this.getVelocity().getY() > ROCKET_MAX_SPEED * multiplier) {
-            this.setVelocity(0.0, ROCKET_MAX_SPEED, 0.0);
+        if (this.getVelocity().getY() > BeyondEarth.CONFIG.rocket.maxSpeed * multiplier) {
+            this.setVelocity(0.0, BeyondEarth.CONFIG.rocket.maxSpeed, 0.0);
         }
 
         this.move(MovementType.SELF, this.getVelocity());
@@ -259,7 +253,7 @@ public class RocketEntity extends VehicleEntity {
     public void initiateLaunchSequence() {
 
         this.setFlying(true);
-        this.setCountdownTicks(MAX_COUNTDOWN_TICKS);
+        this.setCountdownTicks(BeyondEarth.CONFIG.rocket.countDownTicks);
         // For shaking.
         this.setFrozenTicks(Integer.MAX_VALUE);
         this.inputTank.amount -= getRequiredAmountForLaunch(this.inputTank.getResource());
@@ -344,7 +338,7 @@ public class RocketEntity extends VehicleEntity {
 
     // Explode on block collision.
     private void explodeIfStopped() {
-        if (this.getVelocity().getY() < ROCKET_MAX_SPEED / 10 && this.getVelocity().getY() > -0.000001) {
+        if (this.getVelocity().getY() < BeyondEarth.CONFIG.rocket.maxSpeed / 10 && this.getVelocity().getY() > -0.000001) {
             this.explode();
         }
     }
@@ -353,7 +347,7 @@ public class RocketEntity extends VehicleEntity {
         if (this.world instanceof ServerWorld serverWorld) {
             // Increase explosion power the higher the tier.
             float tierMultiplier = 1 + this.getTier() * 0.25f;
-            if (this.getVelocity().getY() > (ROCKET_MAX_SPEED / 1.25f)) {
+            if (this.getVelocity().getY() > (BeyondEarth.CONFIG.rocket.maxSpeed / 1.25f)) {
                 // Increase explosion power at a high speed.
                 tierMultiplier *= 1.25f;
             }

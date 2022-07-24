@@ -3,7 +3,7 @@ package com.github.alexnijjar.beyond_earth.compat.rei.compressor;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.github.alexnijjar.beyond_earth.blocks.machines.entity.CompressorBlockEntity;
+import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.compat.rei.REICategories;
 import com.github.alexnijjar.beyond_earth.compat.rei.widgets.EnergyBarWidget;
 import com.github.alexnijjar.beyond_earth.registry.ModBlocks;
@@ -42,7 +42,7 @@ public class CompressorCategory implements DisplayCategory<CompressorDisplay> {
 
     @Override
     public int getDisplayHeight() {
-        return 80;
+        return 90;
     }
 
     @Override
@@ -65,9 +65,9 @@ public class CompressorCategory implements DisplayCategory<CompressorDisplay> {
 
         widgets.add(Widgets.createSlot(new Point(startPoint.x + 50, startPoint.y - 0)).entries(outputs.get(0)).markOutput());
 
-        Widget widget = new EnergyBarWidget(new Point(startPoint.x + 90, startPoint.y - 10), false).animationDurationTicks(150);
+        Widget widget = new EnergyBarWidget(new Point(startPoint.x + 110, startPoint.y - 13), false).animationDurationTicks(150);
         widgets.add(widget);
-        widgets.add(Widgets.withTooltip(Widgets.withBounds(widget, bounds), new TranslatableText("rei.tooltip.beyond_earth.energy_using", CompressorBlockEntity.ENERGY_PER_TICK)));
+        widgets.add(Widgets.withTooltip(Widgets.withBounds(widget, bounds), new TranslatableText("rei.tooltip.beyond_earth.energy_using", BeyondEarth.CONFIG.compressor.energyPerTick)));
 
         Text ratioText = new TranslatableText("rei.text.beyond_earth.seconds", display.recipe().getCookTime() / 20);
         widgets.add(Widgets.createLabel(new Point(startPoint.x + 60, startPoint.y + 45), ratioText).centered().noShadow().color(0xFF404040, 0xFFBBBBBB));

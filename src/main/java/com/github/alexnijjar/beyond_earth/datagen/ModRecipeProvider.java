@@ -75,6 +75,7 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		offerCustomSlabRecipe(exporter, DESH_PLATING_SLAB, DESH_PLATING);
 		offerCustomSlabRecipe(exporter, OSTRUM_PLATING_SLAB, OSTRUM_PLATING);
 		offerCustomSlabRecipe(exporter, CALORITE_PLATING_SLAB, CALORITE_PLATING);
+		offerCustomSlabRecipe(exporter, PERMAFROST_BRICK_SLAB, PERMAFROST_BRICKS);
 
 		// Walls
 		offerWallRecipe(exporter, MOON_STONE_BRICK_WALL, MOON_STONE_BRICKS);
@@ -104,6 +105,7 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		offerStairsRecipe(exporter, DESH_PLATING_STAIRS, DESH_PLATING);
 		offerStairsRecipe(exporter, OSTRUM_PLATING_STAIRS, OSTRUM_PLATING);
 		offerStairsRecipe(exporter, CALORITE_PLATING_STAIRS, CALORITE_PLATING);
+		offerStairsRecipe(exporter, PERMAFROST_BRICK_STAIRS, PERMAFROST_BRICKS);
 
 		// Buttons
 		offerButtonRecipe(exporter, IRON_PLATING_BUTTON, IRON_PLATING);

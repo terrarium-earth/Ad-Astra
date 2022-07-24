@@ -45,11 +45,12 @@ public class BeyondEarthConfig implements ConfigData {
     public CryoFreezerConfig cryoFreezer = new CryoFreezerConfig();
 
     public static class WorldConfig {
-        public boolean spawnAlienZombies = true;
+        public boolean spawnCorruptedLunarians = true;
         public boolean spawnStarCrawlers = true;
         public boolean spawnMartianRaptors = true;
         public boolean spawnMoglers = true;
         public boolean spawnSulfurCreepers = true;
+        public boolean spawnLunarianWanderingTrader = true;
         @ConfigEntry.Gui.Tooltip(count = 1)
         public boolean doEntityGravity = true;
         @ConfigEntry.Gui.Tooltip(count = 1)
@@ -144,19 +145,15 @@ public class BeyondEarthConfig implements ConfigData {
         public long energyPerTick = 15L;
         public int tankBuckets = 3;
         @ConfigEntry.Gui.Tooltip(count = 5)
-        @ConfigEntry.BoundedDiscrete(min = 1, max = 4000)
-        @ConfigEntry.Gui.RequiresRestart
+        @ConfigEntry.BoundedDiscrete(min = 1, max = 10000)
         public int maxBlockChecks = 2000;
         @ConfigEntry.Gui.Tooltip(count = 2)
-        @ConfigEntry.BoundedDiscrete(min = 50, max = 2000)
-        @ConfigEntry.Gui.RequiresRestart
-        public int refreshTicks = 100;
+        @ConfigEntry.BoundedDiscrete(min = 0, max = 500)
+        public int refreshTicks = 60;
         @ConfigEntry.Gui.Tooltip(count = 1)
         public double oxygenMultiplier = 0.8;
         @ConfigEntry.Gui.Tooltip(count = 1)
         public double energyMultiplier = 3.0;
-        @ConfigEntry.Gui.Tooltip(count = 4)
-        public int oxygenGracePeriodTicks = 140;
     }
 
     public static class SolarPanelConfig {

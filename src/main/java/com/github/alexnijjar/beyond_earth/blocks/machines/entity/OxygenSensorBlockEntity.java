@@ -5,6 +5,7 @@ import com.github.alexnijjar.beyond_earth.registry.ModBlockEntities;
 import com.github.alexnijjar.beyond_earth.util.OxygenUtils;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 
@@ -18,15 +19,15 @@ public class OxygenSensorBlockEntity extends AbstractMachineBlockEntity {
 
     @Override
     public void tick() {
-        if (!this.world.isClient) {
+        if (this.world instanceof ServerWorld serverWorld) {
             boolean hasOxygen = false;
             for (Direction dir : CHECK_DIRECTIONS) {
-                if (OxygenUtils.posHasOxygen(this.world, this.pos.offset(dir))) {
+                if (OxygenUtils.posHasOxygen(serverWorld, this.pos.offset(dir))) {
                     hasOxygen = true;
                     break;
                 }
             }
-            this.world.setBlockState(this.getPos(), this.getCachedState().with(OxygenSensorBlock.POWERED, hasOxygen));
+            serverWorld.setBlockState(this.getPos(), this.getCachedState().with(OxygenSensorBlock.POWERED, hasOxygen));
         }
     }
 }

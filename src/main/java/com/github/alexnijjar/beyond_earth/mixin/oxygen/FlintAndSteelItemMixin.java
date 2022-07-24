@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.util.ModUtils;
+import com.github.alexnijjar.beyond_earth.util.OxygenUtils;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CampfireBlock;
@@ -33,7 +33,7 @@ public class FlintAndSteelItemMixin {
         if (!world.isClient) {
             BlockState blockState = world.getBlockState(context.getBlockPos());
             if (CampfireBlock.canBeLit(blockState) || CandleBlock.canBeLit(blockState) || CandleCakeBlock.canBeLit(blockState)) {
-                if (!ModUtils.worldHasOxygen(world, context.getBlockPos())) {
+                if (!OxygenUtils.worldHasOxygen(world, context.getBlockPos())) {
                     world.playSound(player, context.getBlockPos(), SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0f, world.getRandom().nextFloat() * 0.4f + 0.8f);
                     world.emitGameEvent(player, GameEvent.BLOCK_CHANGE, context.getBlockPos());
                     if (player != null) {

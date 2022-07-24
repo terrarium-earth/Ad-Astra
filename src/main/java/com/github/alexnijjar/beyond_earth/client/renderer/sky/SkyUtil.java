@@ -96,7 +96,7 @@ public class SkyUtil {
         matrices.push();
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
 
-        // Rotation.
+        // Rotation
         matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(rotation.getY()));
         matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(rotation.getZ()));
         matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(rotation.getX()));
@@ -125,10 +125,10 @@ public class SkyUtil {
         Matrix4f positionMatrix = context.matrixStack().peek().getPositionMatrix();
         RenderSystem.setShaderTexture(0, texture);
         bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR_TEXTURE);
-        bufferBuilder.vertex(positionMatrix, -scale, (float) 100.0, -scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).texture(0.0f, 0.0f).next();
-        bufferBuilder.vertex(positionMatrix, scale, (float) 100.0, -scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).texture(1.0f, 0.0f).next();
-        bufferBuilder.vertex(positionMatrix, scale, (float) 100.0, scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).texture(1.0f, 1.0f).next();
-        bufferBuilder.vertex(positionMatrix, -scale, (float) 100.0, scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).texture(0.0f, 1.0f).next();
+        bufferBuilder.vertex(positionMatrix, -scale, 100.0f, -scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).texture(1.0f, 0.0f).next();
+        bufferBuilder.vertex(positionMatrix, scale, 100.0f, -scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).texture(0.0f, 0.0f).next();
+        bufferBuilder.vertex(positionMatrix, scale, 100.0f, scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).texture(0.0f, 1.0f).next();
+        bufferBuilder.vertex(positionMatrix, -scale, 100.0f, scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).texture(1.0f, 1.0f).next();
         bufferBuilder.end();
         BufferRenderer.draw(bufferBuilder);
 

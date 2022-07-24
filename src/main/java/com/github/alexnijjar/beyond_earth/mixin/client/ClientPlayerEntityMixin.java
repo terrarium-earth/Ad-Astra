@@ -11,7 +11,7 @@ import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntity;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.VehicleEntity;
 import com.github.alexnijjar.beyond_earth.items.armour.JetSuit;
 import com.github.alexnijjar.beyond_earth.items.armour.SpaceSuit;
-import com.github.alexnijjar.beyond_earth.util.ModUtils;
+import com.github.alexnijjar.beyond_earth.util.OxygenUtils;
 
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.EquipmentSlot;
@@ -34,7 +34,7 @@ public class ClientPlayerEntityMixin {
                 // Render oxygen info
                 double ratio = oxygen / (double) suit.getTankSize();
                 PlayerOverlayScreen.oxygenRatio = ratio;
-                PlayerOverlayScreen.doesNotNeedOxygen = ModUtils.worldHasOxygen(player.world, player) && !player.isSubmergedInWater();
+                PlayerOverlayScreen.doesNotNeedOxygen = OxygenUtils.worldHasOxygen(player.world, player) && !player.isSubmergedInWater();
             }
         } else {
             PlayerOverlayScreen.shouldRenderOxygen = false;

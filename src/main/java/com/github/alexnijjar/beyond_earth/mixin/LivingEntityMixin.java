@@ -16,6 +16,7 @@ import com.github.alexnijjar.beyond_earth.items.armour.SpaceSuit;
 import com.github.alexnijjar.beyond_earth.registry.ModDamageSource;
 import com.github.alexnijjar.beyond_earth.registry.ModTags;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
+import com.github.alexnijjar.beyond_earth.util.OxygenUtils;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -49,7 +50,7 @@ public abstract class LivingEntityMixin {
         }
 
         // Reduce fall damage if wearing a jet suit
-        if (fallDistance <= 10 && JetSuit.hasFullSet(entity)) {
+        if (fallDistance <= 20 && JetSuit.hasFullSet(entity)) {
             ci.setReturnValue(false);
         }
     }
@@ -116,7 +117,7 @@ public abstract class LivingEntityMixin {
                                     long oxygen = suit.getAmount(chest);
 
                                     if (oxygen > 0) {
-                                        if (!ModUtils.worldHasOxygen(world, player) || entity.isSubmergedInWater()) {
+                                        if (!OxygenUtils.worldHasOxygen(world, player) || entity.isSubmergedInWater()) {
                                             // Allow the player to breath underwater.
                                             player.setAir(275);
                                             hasOxygen = true;
@@ -129,7 +130,7 @@ public abstract class LivingEntityMixin {
                             }
                         }
 
-                        if (!ModUtils.worldHasOxygen(world, entity)) {
+                        if (!OxygenUtils.worldHasOxygen(world, entity)) {
                             float temperature = ModUtils.getWorldTemperature(world);
                             // Freeze the player in extremely cold temperatures.
                             if (temperature <= -65.0f) {

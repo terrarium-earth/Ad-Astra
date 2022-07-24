@@ -1,7 +1,7 @@
 {
   "parent": "block/cube",
   "textures": {
-    "down": "beyond_earth:block/coal_generator_top",
+    "down": "beyond_earth:block/coal_generator_bottom",
     "up": "beyond_earth:block/coal_generator_top",
     "north": "beyond_earth:block/coal_generator_front_active",
     "east": "beyond_earth:block/machine_side",

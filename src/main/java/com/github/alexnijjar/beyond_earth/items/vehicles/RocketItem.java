@@ -8,12 +8,14 @@ import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier1;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier2;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier3;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier4;
+import com.github.alexnijjar.beyond_earth.registry.ModFluids;
 
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.nbt.NbtCompound;
@@ -36,6 +38,11 @@ public class RocketItem<T extends RocketEntity> extends VehicleItem {
         super(settings);
         this.rocketEntity = rocketEntity;
         this.tier = tier;
+    }
+
+    @Override
+    public List<Fluid> getInputFluids() {
+        return List.of(ModFluids.FUEL_STILL, ModFluids.CRYO_FUEL_STILL);
     }
 
     @Override
