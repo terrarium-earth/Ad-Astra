@@ -1,5 +1,7 @@
 package com.github.alexnijjar.beyond_earth.items;
 
+import java.util.List;
+
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
@@ -7,6 +9,7 @@ import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantItemStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 
@@ -23,6 +26,8 @@ public interface FluidContainingItem {
 		}
 		return false;
 	}
+
+	public List<Fluid> getInputFluids();
 
 	public default long transferFluid(Storage<FluidVariant> from, Storage<FluidVariant> to) {
 		return StorageUtil.move(from, to, f -> true, Long.MAX_VALUE, null);
@@ -63,6 +68,11 @@ public interface FluidContainingItem {
 		public TankStorage(ItemStack stack, ContainerItemContext context) {
 			super(context);
 			item = (FluidContainingItem) stack.getItem();
+		}
+
+		@Override
+		protected boolean canInsert(FluidVariant resource) {
+			return item.getInputFluids().contains(resource.getFluid());
 		}
 
 		@Override

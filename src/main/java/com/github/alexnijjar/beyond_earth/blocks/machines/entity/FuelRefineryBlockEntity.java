@@ -21,22 +21,18 @@ import net.minecraft.util.math.Direction;
 
 public class FuelRefineryBlockEntity extends FluidMachineBlockEntity {
 
-    public static final long MAX_ENERGY = BeyondEarth.CONFIG.fuelRefinery.maxEnergy;
-    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.fuelRefinery.energyPerTick;
-    public static final int TANK_SIZE = BeyondEarth.CONFIG.fuelRefinery.tankBuckets;
-
     public FuelRefineryBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.FUEL_REFINERY, blockPos, blockState);
     }
 
     @Override
     public long getInputSize() {
-        return TANK_SIZE;
+        return BeyondEarth.CONFIG.fuelRefinery.tankBuckets;
     }
 
     @Override
     public long getOutputSize() {
-        return TANK_SIZE;
+        return BeyondEarth.CONFIG.fuelRefinery.tankBuckets;
     }
 
     @Override
@@ -46,17 +42,17 @@ public class FuelRefineryBlockEntity extends FluidMachineBlockEntity {
 
     @Override
     public long getMaxGeneration() {
-        return MAX_ENERGY;
+        return BeyondEarth.CONFIG.fuelRefinery.maxEnergy;
     }
 
     @Override
     public long getEnergyPerTick() {
-        return ENERGY_PER_TICK;
+        return BeyondEarth.CONFIG.fuelRefinery.energyPerTick;
     }
 
     @Override
     public long getMaxEnergyInsert() {
-        return ENERGY_PER_TICK * 32;
+        return BeyondEarth.CONFIG.fuelRefinery.energyPerTick * 32;
     }
 
     @Override

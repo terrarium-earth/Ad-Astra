@@ -19,9 +19,6 @@ import team.reborn.energy.api.EnergyStorageUtil;
 
 public class EnergizerBlockEntity extends AbstractMachineBlockEntity {
 
-    public static final long MAX_ENERGY = BeyondEarth.CONFIG.energizer.maxEnergy;
-    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.energizer.energyPerTick;
-
     public EnergizerBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.ENERGIZER, blockPos, blockState);
     }
@@ -38,22 +35,22 @@ public class EnergizerBlockEntity extends AbstractMachineBlockEntity {
 
     @Override
     public long getMaxGeneration() {
-        return MAX_ENERGY;
+        return BeyondEarth.CONFIG.energizer.maxEnergy;
     }
 
     @Override
     public long getEnergyPerTick() {
-        return ENERGY_PER_TICK;
+        return BeyondEarth.CONFIG.energizer.energyPerTick;
     }
 
     @Override
     public long getMaxEnergyInsert() {
-        return ENERGY_PER_TICK * 8;
+        return BeyondEarth.CONFIG.energizer.energyPerTick * 8;
     }
 
     @Override
     public long getMaxEnergyExtract() {
-        return ENERGY_PER_TICK * 8;
+        return BeyondEarth.CONFIG.energizer.energyPerTick * 12;
     }
 
     @Override

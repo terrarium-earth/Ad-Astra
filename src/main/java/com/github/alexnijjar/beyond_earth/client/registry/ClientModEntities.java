@@ -1,17 +1,17 @@
 package com.github.alexnijjar.beyond_earth.client.registry;
 
-import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.AlienEntityRenderer;
-import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.AlienWanderingTraderEntityRenderer;
-import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.AlienZombieEntityRenderer;
+import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.CorruptedLunarianEntityRenderer;
+import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.LunarianEntityRenderer;
+import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.LunarianWanderingTraderEntityRenderer;
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.MartianRaptorEntityRenderer;
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.MoglerEntityRenderer;
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.PygroEntityRenderer;
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.StarCrawlerEntityRenderer;
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.SulfurCreeperEntityRenderer;
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.ZombifiedMoglerEntityRenderer;
-import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.models.AlienEntityModel;
-import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.models.AlienWanderingTraderEntityModel;
-import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.models.AlienZombieEntityModel;
+import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.models.CorruptedLunarianEntityModel;
+import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.models.LunarianEntityModel;
+import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.models.LunarianWanderingTraderEntityModel;
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.models.MartianRaptorEntityModel;
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.models.MoglerEntityModel;
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.models.PygroEntityModel;
@@ -43,16 +43,17 @@ public class ClientModEntities {
     public static void register() {
 
         // Mobs.
-        EntityRendererRegistry.register(ModEntityTypes.ALIEN, AlienEntityRenderer::new);
-        EntityRendererRegistry.register(ModEntityTypes.ALIEN_ZOMBIE, AlienZombieEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.LUNARIAN, LunarianEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.CORRUPTED_LUNARIAN, CorruptedLunarianEntityRenderer::new);
         EntityRendererRegistry.register(ModEntityTypes.STAR_CRAWLER, StarCrawlerEntityRenderer::new);
         EntityRendererRegistry.register(ModEntityTypes.MARTIAN_RAPTOR, MartianRaptorEntityRenderer::new);
         EntityRendererRegistry.register(ModEntityTypes.PYGRO, PygroEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.ZOMBIFIED_PYGRO, PygroEntityRenderer::new);
         EntityRendererRegistry.register(ModEntityTypes.PYGRO_BRUTE, PygroEntityRenderer::new);
         EntityRendererRegistry.register(ModEntityTypes.MOGLER, MoglerEntityRenderer::new);
         EntityRendererRegistry.register(ModEntityTypes.ZOMBIFIED_MOGLER, ZombifiedMoglerEntityRenderer::new);
         EntityRendererRegistry.register(ModEntityTypes.SULFUR_CREEPER, SulfurCreeperEntityRenderer::new);
-        EntityRendererRegistry.register(ModEntityTypes.ALIEN_WANDERING_TRADER, AlienWanderingTraderEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntityTypes.LUNARIAN_WANDERING_TRADER, LunarianWanderingTraderEntityRenderer::new);
 
         // Machines.
         EntityRendererRegistry.register(ModEntityTypes.ROCKET_TIER_1, RocketEntityRendererTier1::new);
@@ -66,14 +67,14 @@ public class ClientModEntities {
         EntityRendererRegistry.register(ModEntityTypes.ICE_SPIT_ENTITY, FlyingItemEntityRenderer::new);
 
         // Layers.
-        EntityModelLayerRegistry.registerModelLayer(AlienEntityModel.LAYER_LOCATION, AlienEntityModel::getTexturedModelData);
-        EntityModelLayerRegistry.registerModelLayer(AlienZombieEntityModel.LAYER_LOCATION, AlienZombieEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(LunarianEntityModel.LAYER_LOCATION, LunarianEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(CorruptedLunarianEntityModel.LAYER_LOCATION, CorruptedLunarianEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(StarCrawlerEntityModel.LAYER_LOCATION, StarCrawlerEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(MartianRaptorEntityModel.LAYER_LOCATION, MartianRaptorEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(PygroEntityModel.LAYER_LOCATION, PygroEntityModel::getModelData);
         EntityModelLayerRegistry.registerModelLayer(MoglerEntityModel.LAYER_LOCATION, MoglerEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(SulfurCreeperEntityModel.LAYER_LOCATION, SulfurCreeperEntityModel::getTexturedModelData);
-        EntityModelLayerRegistry.registerModelLayer(AlienWanderingTraderEntityModel.LAYER_LOCATION, AlienWanderingTraderEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(LunarianWanderingTraderEntityModel.LAYER_LOCATION, LunarianWanderingTraderEntityModel::getTexturedModelData);
 
         // Machine Layers.
         EntityModelLayerRegistry.registerModelLayer(RocketEntityModelTier1.LAYER_LOCATION, RocketEntityModelTier1::getTexturedModelData);

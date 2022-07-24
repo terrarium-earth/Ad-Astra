@@ -1,9 +1,9 @@
 package com.github.alexnijjar.beyond_earth.registry;
 
 import com.github.alexnijjar.beyond_earth.entities.SpacePaintingEntity;
-import com.github.alexnijjar.beyond_earth.entities.mobs.AlienEntity;
-import com.github.alexnijjar.beyond_earth.entities.mobs.AlienWanderingTraderEntity;
-import com.github.alexnijjar.beyond_earth.entities.mobs.AlienZombieEntity;
+import com.github.alexnijjar.beyond_earth.entities.mobs.CorruptedLunarianEntity;
+import com.github.alexnijjar.beyond_earth.entities.mobs.LunarianEntity;
+import com.github.alexnijjar.beyond_earth.entities.mobs.LunarianWanderingTraderEntity;
 import com.github.alexnijjar.beyond_earth.entities.mobs.MartianRaptorEntity;
 import com.github.alexnijjar.beyond_earth.entities.mobs.MoglerEntity;
 import com.github.alexnijjar.beyond_earth.entities.mobs.PygroBruteEntity;
@@ -11,6 +11,7 @@ import com.github.alexnijjar.beyond_earth.entities.mobs.PygroEntity;
 import com.github.alexnijjar.beyond_earth.entities.mobs.StarCrawlerEntity;
 import com.github.alexnijjar.beyond_earth.entities.mobs.SulfurCreeperEntity;
 import com.github.alexnijjar.beyond_earth.entities.mobs.ZombifiedMoglerEntity;
+import com.github.alexnijjar.beyond_earth.entities.mobs.ZombifiedPygroEntity;
 import com.github.alexnijjar.beyond_earth.entities.projectiles.IceSpitEntity;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.LanderEntity;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier1;
@@ -30,24 +31,27 @@ import net.minecraft.util.registry.Registry;
 public class ModEntityTypes {
 
         // Mobs
-        public static final EntityType<AlienEntity> ALIEN = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("alien"), FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, AlienEntity::new).dimensions(EntityDimensions.fixed(0.75f, 2.5f)).build());
-        public static final EntityType<AlienZombieEntity> ALIEN_ZOMBIE = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("alien_zombie"),
-                        FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, AlienZombieEntity::new).dimensions(EntityDimensions.fixed(0.6f, 2.4f)).build());
+        public static final EntityType<LunarianEntity> LUNARIAN = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("lunarian"),
+                        FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, LunarianEntity::new).dimensions(EntityDimensions.fixed(0.75f, 2.5f)).build());
+        public static final EntityType<CorruptedLunarianEntity> CORRUPTED_LUNARIAN = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("corrupted_lunarian"),
+                        FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, CorruptedLunarianEntity::new).dimensions(EntityDimensions.fixed(0.6f, 2.4f)).build());
         public static final EntityType<StarCrawlerEntity> STAR_CRAWLER = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("star_crawler"),
                         FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, StarCrawlerEntity::new).dimensions(EntityDimensions.fixed(1.3f, 1.0f)).build());
         public static final EntityType<MartianRaptorEntity> MARTIAN_RAPTOR = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("martian_raptor"),
                         FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, MartianRaptorEntity::new).dimensions(EntityDimensions.fixed(0.75f, 2.0f)).build());
         public static final EntityType<PygroEntity> PYGRO = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("pygro"), FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, PygroEntity::new).dimensions(EntityDimensions.fixed(0.6f, 1.8f)).build());
+        public static final EntityType<ZombifiedPygroEntity> ZOMBIFIED_PYGRO = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("zombified_pygro"),
+                        FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ZombifiedPygroEntity::new).dimensions(EntityDimensions.fixed(0.6f, 1.8f)).fireImmune().build());
         public static final EntityType<PygroBruteEntity> PYGRO_BRUTE = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("pygro_brute"),
-                        FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, PygroBruteEntity::new).dimensions(EntityDimensions.fixed(0.6f, 1.8f)).build());
+                        FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, PygroBruteEntity::new).dimensions(EntityDimensions.fixed(0.6f, 1.8f)).fireImmune().build());
         public static final EntityType<MoglerEntity> MOGLER = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("mogler"),
-                        FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, MoglerEntity::new).dimensions(EntityDimensions.fixed(1.4f, 1.4f)).build());
+                        FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, MoglerEntity::new).dimensions(EntityDimensions.fixed(1.4f, 1.4f)).fireImmune().build());
         public static final EntityType<ZombifiedMoglerEntity> ZOMBIFIED_MOGLER = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("zombified_mogler"),
-                        FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ZombifiedMoglerEntity::new).dimensions(EntityDimensions.fixed(1.4f, 1.4f)).build());
-        public static final EntityType<AlienWanderingTraderEntity> ALIEN_WANDERING_TRADER = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("alien_wandering_trader"),
-                        FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, AlienWanderingTraderEntity::new).dimensions(EntityDimensions.fixed(0.6f, 1.95f)).build());
-                        public static final EntityType<SulfurCreeperEntity> SULFUR_CREEPER = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("sulfur_creeper"),
-                        FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, SulfurCreeperEntity::new).dimensions(EntityDimensions.fixed(0.6f, 1.7f)).trackRangeChunks(8).build());
+                        FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ZombifiedMoglerEntity::new).dimensions(EntityDimensions.fixed(1.4f, 1.4f)).fireImmune().build());
+        public static final EntityType<LunarianWanderingTraderEntity> LUNARIAN_WANDERING_TRADER = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("lunarian_wandering_trader"),
+                        FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, LunarianWanderingTraderEntity::new).dimensions(EntityDimensions.fixed(0.6f, 1.95f)).fireImmune().build());
+        public static final EntityType<SulfurCreeperEntity> SULFUR_CREEPER = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("sulfur_creeper"),
+                        FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, SulfurCreeperEntity::new).dimensions(EntityDimensions.fixed(0.6f, 1.7f)).trackRangeChunks(8).fireImmune().build());
 
         // Machines
         public static final EntityType<RocketEntityTier1> ROCKET_TIER_1 = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("tier_1_rocket"),
@@ -73,15 +77,16 @@ public class ModEntityTypes {
 
         public static void register() {
                 // Mob Attributes
-                FabricDefaultAttributeRegistry.register(ALIEN, AlienEntity.createMobAttributes());
-                FabricDefaultAttributeRegistry.register(ALIEN_ZOMBIE, AlienZombieEntity.createMobAttributes());
+                FabricDefaultAttributeRegistry.register(LUNARIAN, LunarianEntity.createMobAttributes());
+                FabricDefaultAttributeRegistry.register(CORRUPTED_LUNARIAN, CorruptedLunarianEntity.createMobAttributes());
                 FabricDefaultAttributeRegistry.register(STAR_CRAWLER, StarCrawlerEntity.createMobAttributes());
                 FabricDefaultAttributeRegistry.register(MARTIAN_RAPTOR, MartianRaptorEntity.createMobAttributes());
                 FabricDefaultAttributeRegistry.register(PYGRO, PygroEntity.createMobAttributes());
+                FabricDefaultAttributeRegistry.register(ZOMBIFIED_PYGRO, ZombifiedPygroEntity.createMobAttributes());
                 FabricDefaultAttributeRegistry.register(PYGRO_BRUTE, PygroBruteEntity.createMobAttributes());
                 FabricDefaultAttributeRegistry.register(MOGLER, MoglerEntity.createMobAttributes());
                 FabricDefaultAttributeRegistry.register(ZOMBIFIED_MOGLER, ZombifiedMoglerEntity.createMobAttributes());
-                FabricDefaultAttributeRegistry.register(ALIEN_WANDERING_TRADER, AlienEntity.createMobAttributes());
+                FabricDefaultAttributeRegistry.register(LUNARIAN_WANDERING_TRADER, LunarianEntity.createMobAttributes());
                 FabricDefaultAttributeRegistry.register(SULFUR_CREEPER, SulfurCreeperEntity.createMobAttributes());
         }
 }

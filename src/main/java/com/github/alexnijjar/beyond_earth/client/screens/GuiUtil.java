@@ -34,8 +34,8 @@ public class GuiUtil {
     public static final int ARROW_HEIGHT = 17;
     public static final int OXYGEN_TANK_WIDTH = 14;
     public static final int OXYGEN_TANK_HEIGHT = 48;
-    public static final int ENERGY_WIDTH = 24;
-    public static final int ENERGY_HEIGHT = 48;
+    public static final int ENERGY_WIDTH = 13;
+    public static final int ENERGY_HEIGHT = 46;
     public static final int FUEL_WIDTH = 48;
     public static final int FUEL_HEIGHT = 48;
     public static final int FLUID_TANK_WIDTH = 14;

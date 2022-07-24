@@ -51,6 +51,33 @@
                 "y": 180.0,
                 "z": 0.0
             }
+        },
+        {
+            "texture": "beyond_earth:textures/sky/moon.png",
+            "blending": false,
+            "render_type": "static",
+            "scale": 8.0,
+            "rotation": {
+                "x": 30.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        },
+        {
+            "texture": "beyond_earth:textures/sky/light.png",
+            "blending": true,
+            "render_type": "static",
+            "scale": 22.0,
+            "color": {
+                "r": 255,
+                "g": 255,
+                "b": 179
+            },
+            "rotation": {
+                "x": 30.0,
+                "y": 0.0,
+                "z": 0.0
+            }
         }
     ]
 }

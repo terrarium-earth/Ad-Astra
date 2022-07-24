@@ -1,12 +1,12 @@
 package com.github.alexnijjar.beyond_earth.blocks.machines;
 
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.OxygenDistributorBlockEntity;
-import com.github.alexnijjar.beyond_earth.client.utils.ClientOxygenUtils;
 import com.github.alexnijjar.beyond_earth.util.OxygenUtils;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
@@ -50,10 +50,8 @@ public class OxygenDistributorBlock extends AbstractMachineBlock {
     }
 
     public static void removeOxygen(World world, BlockPos pos) {
-        if (!world.isClient) {
-            OxygenUtils.removeEntry(world, pos);
-        } else {
-            ClientOxygenUtils.removeEntry(world, pos);
+        if (world instanceof ServerWorld serverWorld) {
+            OxygenUtils.removeEntry(serverWorld, pos);
         }
     }
 }

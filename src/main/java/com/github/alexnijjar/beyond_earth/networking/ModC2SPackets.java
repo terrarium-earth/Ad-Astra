@@ -1,6 +1,7 @@
 package com.github.alexnijjar.beyond_earth.networking;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
+import com.github.alexnijjar.beyond_earth.blocks.machines.entity.OxygenDistributorBlockEntity;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntity;
 import com.github.alexnijjar.beyond_earth.registry.ModRecipes;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
@@ -14,6 +15,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.structure.Structure;
 import net.minecraft.structure.StructurePlacementData;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
@@ -35,6 +37,8 @@ public class ModC2SPackets {
     public static final Identifier BACK_KEY_CHANGED = new ModIdentifier("back_key_changed");
     public static final Identifier LEFT_KEY_CHANGED = new ModIdentifier("left_key_changed");
     public static final Identifier RIGHT_KEY_CHANGED = new ModIdentifier("right_key_changed");
+
+    public static final Identifier TOGGLE_SHOW_DISTRIBUTOR = new ModIdentifier("toggle_show_distributor");
 
     public static void register() {
 
@@ -79,11 +83,11 @@ public class ModC2SPackets {
 
         // Spawn the Space Station in the world.
         ServerPlayNetworking.registerGlobalReceiver(CREATE_SPACE_STATION, (server, player, handler, buf, responseSender) -> {
-            BlockPos playerPos = player.getBlockPos();
-            BlockPos spaceStationLocation = new BlockPos(playerPos.getX() - 15, 100, playerPos.getZ() - 15);
             ServerWorld world = server.getWorld(RegistryKey.of(Registry.WORLD_KEY, buf.readIdentifier()));
             // Create the Space Station from the nbt file.
-            world.getStructureManager().getStructureOrBlank(new ModIdentifier("space_station")).place(world, spaceStationLocation, spaceStationLocation, new StructurePlacementData(), world.random, 2);
+            Structure structure = world.getStructureManager().getStructureOrBlank(new ModIdentifier("space_station"));
+            BlockPos pos = new BlockPos(player.getX() - (structure.getSize().getX() / 2), 100, player.getZ() - (structure.getSize().getZ() / 2));
+            structure.place(world, pos, pos, new StructurePlacementData(), world.random, 2);
         });
 
         // Space was pressed while the player was inside of a rocket.
@@ -125,6 +129,20 @@ public class ModC2SPackets {
 
         ServerPlayNetworking.registerGlobalReceiver(RIGHT_KEY_CHANGED, (server, player, handler, buf, responseSender) -> {
             ModKeyBindings.pressedKeyOnServer(buf.readUuid(), "right", buf.readBoolean());
+        });
+
+        ServerPlayNetworking.registerGlobalReceiver(TOGGLE_SHOW_DISTRIBUTOR, (server, player, handler, buf, responseSender) -> {
+            ServerWorld world = server.getWorld(RegistryKey.of(Registry.WORLD_KEY, buf.readIdentifier()));
+            BlockPos pos = buf.readBlockPos();
+
+            server.execute(new Runnable() {
+                @Override
+                public void run() {
+                    if (world.getBlockEntity(pos) instanceof OxygenDistributorBlockEntity oxygenDistributor) {
+                        oxygenDistributor.setShowOxygen(!oxygenDistributor.shouldShowOxygen());
+                    }
+                }
+            });
         });
     }
 

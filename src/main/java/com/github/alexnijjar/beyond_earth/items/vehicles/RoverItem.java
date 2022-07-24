@@ -1,11 +1,15 @@
 package com.github.alexnijjar.beyond_earth.items.vehicles;
 
+import java.util.List;
+
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RoverEntity;
 import com.github.alexnijjar.beyond_earth.registry.ModEntityTypes;
+import com.github.alexnijjar.beyond_earth.registry.ModFluids;
 
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FluidBlock;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.nbt.NbtCompound;
@@ -21,6 +25,11 @@ public class RoverItem extends VehicleItem {
 
     public RoverItem(Settings settings) {
         super(settings);
+    }
+
+    @Override
+    public List<Fluid> getInputFluids() {
+        return List.of(ModFluids.FUEL_STILL, ModFluids.CRYO_FUEL_STILL);
     }
 
     @Override

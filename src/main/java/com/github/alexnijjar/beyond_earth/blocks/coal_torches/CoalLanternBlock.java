@@ -1,6 +1,6 @@
 package com.github.alexnijjar.beyond_earth.blocks.coal_torches;
 
-import com.github.alexnijjar.beyond_earth.util.ModUtils;
+import com.github.alexnijjar.beyond_earth.util.OxygenUtils;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -29,7 +29,7 @@ public class CoalLanternBlock extends LanternBlock {
         if (!world.isClient) {
             ItemStack itemstack = player.getStackInHand(hand);
 
-            if (ModUtils.worldHasOxygen(world)) {
+            if (OxygenUtils.worldHasOxygen(world)) {
                 if (itemstack.getItem() instanceof FlintAndSteelItem || itemstack.getItem() instanceof FireChargeItem) {
 
                     world.setBlockState(pos, Blocks.LANTERN.getStateWithProperties(state), 3);

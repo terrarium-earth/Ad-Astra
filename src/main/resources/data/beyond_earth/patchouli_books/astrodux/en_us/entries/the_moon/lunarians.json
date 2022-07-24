@@ -1,0 +1,23 @@
+{
+    "name": "Lunarians",
+    "icon": "beyond_earth:moon_stone_bricks",
+    "sortnum": 4,
+    "category": "beyond_earth:the_moon",
+    "pages": [
+        {
+            "type": "patchouli:spotlight",
+            "title": "Lunarian",
+            "item": "beyond_earth:moon_stone_bricks",
+            "text": "Throughout the moon, There are small, inhabited underground villages. These villages contain an alien form of the earth villager, who call themselves Lunarians. Unlike their earth counterpart, Lunarian don't need oxygen and can survive the chilling environment of the moon."
+        },
+        {
+            "type": "patchouli:entity",
+            "entity": "beyond_earth:lunarian",
+            "default_rotation": 45
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Lunarian have different trades than earth villagers, featuring planet-specific materials, space suits and oxygen gear."
+        }
+    ]
+}

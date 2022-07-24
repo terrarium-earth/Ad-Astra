@@ -18,9 +18,6 @@ import net.minecraft.util.math.Direction;
 
 public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity {
 
-    public static final long MAX_ENERGY = BeyondEarth.CONFIG.coalGenerator.maxEnergy;
-    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.coalGenerator.energyPerTick;
-
     public CoalGeneratorBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.COAL_GENERATOR, blockPos, blockState);
     }
@@ -33,17 +30,17 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity {
 
     @Override
     public long getMaxGeneration() {
-        return MAX_ENERGY;
+        return BeyondEarth.CONFIG.coalGenerator.maxEnergy;
     }
 
     @Override
     public long getEnergyPerTick() {
-        return ENERGY_PER_TICK;
+        return BeyondEarth.CONFIG.coalGenerator.energyPerTick;
     }
 
     @Override
     public long getMaxEnergyExtract() {
-        return ENERGY_PER_TICK * 2;
+        return BeyondEarth.CONFIG.coalGenerator.energyPerTick * 2;
     }
 
     // Only input.

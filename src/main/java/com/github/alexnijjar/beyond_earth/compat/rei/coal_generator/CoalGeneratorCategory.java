@@ -3,7 +3,7 @@ package com.github.alexnijjar.beyond_earth.compat.rei.coal_generator;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.github.alexnijjar.beyond_earth.blocks.machines.entity.CoalGeneratorBlockEntity;
+import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.compat.rei.REICategories;
 import com.github.alexnijjar.beyond_earth.compat.rei.widgets.EnergyBarWidget;
 import com.github.alexnijjar.beyond_earth.registry.ModBlocks;
@@ -42,7 +42,7 @@ public class CoalGeneratorCategory implements DisplayCategory<CoalGeneratorDispl
 
     @Override
     public int getDisplayHeight() {
-        return 80;
+        return 90;
     }
 
     @Override
@@ -62,11 +62,11 @@ public class CoalGeneratorCategory implements DisplayCategory<CoalGeneratorDispl
         widgets.add(Widgets.createSlot(startPoint).entries(inputs.get(0)).markInput());
         widgets.add(Widgets.createBurningFire(new Point(startPoint.x + 1, startPoint.y + 20)).animationDurationTicks(cookTime));
 
-        Widget widget = new EnergyBarWidget(new Point(startPoint.x + 60, startPoint.y - 10), true).animationDurationTicks(150);
+        Widget widget = new EnergyBarWidget(new Point(startPoint.x + 80, startPoint.y - 13), true).animationDurationTicks(150);
         widgets.add(widget);
-        widgets.add(Widgets.withTooltip(Widgets.withBounds(widget, bounds), new TranslatableText("rei.tooltip.beyond_earth.energy_generating", CoalGeneratorBlockEntity.ENERGY_PER_TICK)));
+        widgets.add(Widgets.withTooltip(Widgets.withBounds(widget, bounds), new TranslatableText("rei.tooltip.beyond_earth.energy_generating", BeyondEarth.CONFIG.coalGenerator.energyPerTick)));
 
-        Text ratioText = new TranslatableText("rei.text.beyond_earth.generates", display.recipe().getCookTime() * CoalGeneratorBlockEntity.ENERGY_PER_TICK);
+        Text ratioText = new TranslatableText("rei.text.beyond_earth.generates", display.recipe().getCookTime() * BeyondEarth.CONFIG.coalGenerator.energyPerTick);
         widgets.add(Widgets.createLabel(new Point(startPoint.x + 30, startPoint.y + 45), ratioText).centered().noShadow().color(0xFF404040, 0xFFBBBBBB));
 
         return widgets;

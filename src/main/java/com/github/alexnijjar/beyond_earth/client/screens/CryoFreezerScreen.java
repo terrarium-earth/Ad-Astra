@@ -17,23 +17,20 @@ public class CryoFreezerScreen extends AbstractMachineScreen<CryoFreezerScreenHa
 
     private static final Identifier TEXTURE = new ModIdentifier("textures/gui/screens/cryo_freezer.png");
 
-    public static final int SNOWFLAKE_LEFT = 68;
-    public static final int SNOWFLAKE_TOP = 52;
+    public static final int SNOWFLAKE_LEFT = 54;
+    public static final int SNOWFLAKE_TOP = 71;
 
-    public static final int OUTPUT_TANK_LEFT = 90;
-    public static final int OUTPUT_TANK_TOP = 21;
+    public static final int OUTPUT_TANK_LEFT = 85;
+    public static final int OUTPUT_TANK_TOP = 37;
 
-    public static final int ENERGY_LEFT = 144;
-    public static final int ENERGY_TOP = 21;
-
-    public static final int ARROW_LEFT = 48;
-    public static final int ARROW_TOP = 36;
+    public static final int ENERGY_LEFT = 149;
+    public static final int ENERGY_TOP = 27;
 
     public CryoFreezerScreen(CryoFreezerScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title, TEXTURE);
         this.backgroundWidth = 177;
-        this.backgroundHeight = 168;
-        this.playerInventoryTitleY = this.backgroundHeight - 92;
+        this.backgroundHeight = 177;
+        this.playerInventoryTitleY = this.backgroundHeight - 88;
     }
 
     @Override
@@ -70,5 +67,10 @@ public class CryoFreezerScreen extends AbstractMachineScreen<CryoFreezerScreenHa
 
     public Rectangle getEnergyBounds() {
         return GuiUtil.getEnergyBounds(this.x + ENERGY_LEFT, this.y + ENERGY_TOP);
+    }
+
+    @Override
+    public int getTextColour() {
+        return 0xccffff;
     }
 }

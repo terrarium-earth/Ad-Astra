@@ -15,9 +15,6 @@ import net.minecraft.world.World;
 
 public class SolarPanelBlockEntity extends AbstractMachineBlockEntity {
 
-    public static final long MAX_ENERGY = BeyondEarth.CONFIG.solarPanel.maxEnergy;
-    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.solarPanel.energyPerTick;
-
     public SolarPanelBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.SOLAR_PANEL, blockPos, blockState);
     }
@@ -35,17 +32,17 @@ public class SolarPanelBlockEntity extends AbstractMachineBlockEntity {
 
     @Override
     public long getMaxGeneration() {
-        return MAX_ENERGY;
+        return BeyondEarth.CONFIG.solarPanel.maxEnergy;
     }
 
     @Override
     public long getEnergyPerTick() {
-        return ENERGY_PER_TICK;
+        return BeyondEarth.CONFIG.solarPanel.energyPerTick;
     }
 
     @Override
     public long getMaxEnergyExtract() {
-        return ENERGY_PER_TICK * 2;
+        return BeyondEarth.CONFIG.solarPanel.energyPerTick * 2;
     }
 
     @Override

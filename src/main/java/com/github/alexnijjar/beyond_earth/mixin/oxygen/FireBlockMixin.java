@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.util.ModUtils;
+import com.github.alexnijjar.beyond_earth.util.OxygenUtils;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -26,7 +26,7 @@ public class FireBlockMixin {
         }
         // Extinguish the fire in dimensions with no oxygen.
         if (!state.getBlock().equals(Blocks.SOUL_FIRE)) {
-            if (!ModUtils.worldHasOxygen(world, pos)) {
+            if (!OxygenUtils.worldHasOxygen(world, pos)) {
                 world.removeBlock(pos, false);
                 world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1, 1);
             }

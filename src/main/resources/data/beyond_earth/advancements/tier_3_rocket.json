@@ -1,0 +1,35 @@
+{
+  "display": {
+    "icon": {
+      "item": "beyond_earth:tier_3_rocket"
+    },
+    "title": {
+      "translate": "advancements.tier_3_rocket.title"
+    },
+    "description": {
+      "translate": "advancements.tier_3_rocket.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "tier_3_rocket": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "beyond_earth:tier_3_rocket"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 100
+  },
+  "parent": "beyond_earth:mars"
+}

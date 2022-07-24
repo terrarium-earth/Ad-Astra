@@ -18,9 +18,9 @@ public class OxygenDistributorScreenHandler extends AbstractMachineScreenHandler
         super(ModScreenHandlers.OXYGEN_DISTRIBUTOR_SCREEN_HANDLER, syncId, inventory, entity, new Slot[] {
 
                 // Left Insert.
-                new Slot(entity, 0, 26, 22),
+                new Slot(entity, 0, 17, 58),
                 // Left Extract.
-                new Slot(entity, 1, 26, 52) {
+                new Slot(entity, 1, 17, 88) {
                     @Override
                     public boolean canInsert(ItemStack stack) {
                         return false;
@@ -30,6 +30,6 @@ public class OxygenDistributorScreenHandler extends AbstractMachineScreenHandler
 
     @Override
     public int getPlayerInventoryOffset() {
-        return 6;
+        return 54;
     }
 }

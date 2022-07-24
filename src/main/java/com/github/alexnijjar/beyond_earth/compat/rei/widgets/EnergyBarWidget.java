@@ -63,7 +63,7 @@ public class EnergyBarWidget extends BurningFire {
         RenderSystem.blendFuncSeparate(770, 771, 1, 0);
         RenderSystem.blendFunc(770, 771);
 
-        ScreenUtils.addTexture(matrices, this.bounds.x, this.bounds.y, this.bounds.width, this.bounds.height, REIUtils.ENERGY_EMPTY_TEXTURE);
+        ScreenUtils.addTexture(matrices, this.bounds.x - 2, this.bounds.y - 6, (int)(19 * 0.9), (int)(64 * 0.96), REIUtils.ENERGY_EMPTY_TEXTURE);
 
         double ratio = (this.bounds.height - MathHelper.ceil((System.currentTimeMillis() / (animationDuration / this.bounds.height) % this.bounds.height))) / (double) this.bounds.height;
         if (this.increasing) {

@@ -1,0 +1,10 @@
+{
+  "type": "beyond_earth:lunarian_village",
+  "config": {
+    "start_pool": "beyond_earth:run_lunarian_village/side_lunarian_start",
+    "size": 25
+  },
+  "biomes": "#beyond_earth:has_structure/lunarian_village_biomes",
+  "adapt_noise": false,
+  "spawn_overrides": {}
+}

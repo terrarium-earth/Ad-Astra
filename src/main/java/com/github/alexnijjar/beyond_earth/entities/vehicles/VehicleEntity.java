@@ -8,7 +8,7 @@ import com.github.alexnijjar.beyond_earth.items.vehicles.VehicleItem;
 import com.github.alexnijjar.beyond_earth.registry.ModTags;
 import com.github.alexnijjar.beyond_earth.util.CustomInventory;
 import com.github.alexnijjar.beyond_earth.util.FluidUtils;
-import com.github.alexnijjar.beyond_earth.util.ModUtils;
+import com.github.alexnijjar.beyond_earth.util.OxygenUtils;
 
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
@@ -261,7 +261,7 @@ public abstract class VehicleEntity extends Entity {
 
     public void explode(float powerMultiplier) {
         if (!this.world.isClient) {
-            world.createExplosion(this, this.getX(), this.getY() + 0.5, this.getZ(), 7.0f * powerMultiplier, ModUtils.worldHasOxygen(this.world), Explosion.DestructionType.DESTROY);
+            world.createExplosion(this, this.getX(), this.getY() + 0.5, this.getZ(), 7.0f * powerMultiplier, OxygenUtils.worldHasOxygen(this.world), Explosion.DestructionType.DESTROY);
         }
         this.remove(RemovalReason.DISCARDED);
     }

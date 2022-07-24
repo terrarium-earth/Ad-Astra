@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.github.alexnijjar.beyond_earth.util.ModUtils;
+import com.github.alexnijjar.beyond_earth.util.OxygenUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -28,19 +28,19 @@ public class BlockMixin {
     public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack, CallbackInfo ci) {
         Block block = (Block) (Object) this;
         if (block instanceof PlantBlock || block instanceof CactusBlock) {
-            if (!ModUtils.worldHasOxygen(world, pos)) {
+            if (!OxygenUtils.worldHasOxygen(world, pos)) {
                 world.breakBlock(pos, true);
             }
         }
 
         if (block instanceof GrassBlock) {
-            if (!ModUtils.worldHasOxygen(world, pos)) {
+            if (!OxygenUtils.worldHasOxygen(world, pos)) {
                 world.setBlockState(pos, Blocks.DIRT.getDefaultState());
             }
         }
 
         if (block instanceof LeavesBlock) {
-            if (!ModUtils.worldHasOxygen(world, pos)) {
+            if (!OxygenUtils.worldHasOxygen(world, pos)) {
                 world.breakBlock(pos, false);
             }
         }

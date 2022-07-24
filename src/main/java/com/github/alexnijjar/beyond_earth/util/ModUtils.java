@@ -9,7 +9,6 @@ import java.util.stream.Stream;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.client.BeyondEarthClient;
-import com.github.alexnijjar.beyond_earth.client.utils.ClientOxygenUtils;
 import com.github.alexnijjar.beyond_earth.data.Planet;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.LanderEntity;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntity;
@@ -19,12 +18,10 @@ import com.github.alexnijjar.beyond_earth.registry.ModEntityTypes;
 
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.Entity.RemovalReason;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -36,7 +33,6 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.tag.TagKey;
 import net.minecraft.text.TranslatableText;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
@@ -76,13 +72,14 @@ public class ModUtils {
     public static void teleportToWorld(RegistryKey<World> targetWorld, Entity entity) {
         if (entity.getWorld() instanceof ServerWorld entityWorld) {
             ServerWorld world = entityWorld.getServer().getWorld(targetWorld);
-            Vec3d targetPosition = new Vec3d(entity.getX(), getSpawnStart(world), entity.getZ());
+            Vec3d targetPosition = new Vec3d(entity.getPos().getX(), getSpawnStart(world), entity.getZ());
             List<Entity> entitiesToTeleport = new LinkedList<>();
 
             if (entity instanceof PlayerEntity player) {
                 if (player.getVehicle() instanceof RocketEntity rocket) {
                     player.sendMessage(new TranslatableText("message." + BeyondEarth.MOD_ID + ".hold_space"), false);
                     entity = createLander(rocket, world, targetPosition);
+                    targetPosition = new Vec3d(rocket.getBlockPos().getX() - 1.5f, getSpawnStart(rocket.world), rocket.getBlockPos().getZ() + 0.3f);
                     rocket.remove(RemovalReason.DISCARDED);
                     entitiesToTeleport.add(entity);
                     entitiesToTeleport.add(player);
@@ -137,7 +134,7 @@ public class ModUtils {
      */
     public static LanderEntity createLander(RocketEntity rocket, ServerWorld targetWorld, Vec3d targetPosition) {
         LanderEntity lander = new LanderEntity(ModEntityTypes.LANDER, targetWorld);
-        lander.setPosition(targetPosition);
+        lander.setPosition(new Vec3d(rocket.getBlockPos().getX(), getSpawnStart(rocket.world), rocket.getBlockPos().getZ()));
         for (int i = 0; i < rocket.getInventorySize(); i++) {
             lander.getInventory().setStack(i, rocket.getInventory().getStack(i));
         }
@@ -306,38 +303,6 @@ public class ModUtils {
      */
     public static boolean isSpaceWorld(World world) {
         return isPlanet(world) || isOrbitWorld(world);
-    }
-
-    /**
-     * Checks if a world has oxygen, regardless of position.
-     */
-    public static boolean worldHasOxygen(World world) {
-        if (getBeyondEarthDimensions(world.isClient).stream().noneMatch(world.getRegistryKey()::equals)) {
-            return true;
-        }
-        if (getOrbitWorlds(world.isClient).stream().anyMatch(world.getRegistryKey()::equals)) {
-            return false;
-        }
-        return getWorldsWithoutOxygen(world.isClient).stream().anyMatch(world.getRegistryKey()::equals);
-    }
-
-    /**
-     * Checks if an entity has oxygen.
-     */
-    public static boolean worldHasOxygen(World world, LivingEntity entity) {
-        return worldHasOxygen(world, new BlockPos(entity.getEyePos()));
-    }
-
-    /**
-     * Checks if a block pos has oxygen.
-     */
-    public static boolean worldHasOxygen(World world, BlockPos pos) {
-        boolean hasOxygen = worldHasOxygen(world);
-        if (world.isClient) {
-            return ClientOxygenUtils.posHasOxygen((ClientWorld) world, pos) || hasOxygen;
-        } else {
-            return OxygenUtils.posHasOxygen((ServerWorld) world, pos) || hasOxygen;
-        }
     }
 
     /**

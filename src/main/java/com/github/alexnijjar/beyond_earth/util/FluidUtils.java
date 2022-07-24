@@ -76,6 +76,9 @@ public class FluidUtils {
 	 * Transfers and converts a fluid from the input tank to the output tank.
 	 */
 	public static <T extends ConversionRecipe> boolean convertFluid(FluidMachineBlockEntity inventory, List<T> recipes) {
+		if (recipes == null) {
+			return false;
+		}
 		FluidVariant inputTankFluid = inventory.inputTank.variant;
 		for (T recipe : recipes) {
 			double conversionRatio = recipe.getConversionRatio();
