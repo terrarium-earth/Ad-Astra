@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.items.armour.SpaceSuit;
-import com.github.alexnijjar.beyond_earth.util.ModUtils;
+import com.github.alexnijjar.beyond_earth.util.OxygenUtils;
 
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.minecraft.block.BlockState;
@@ -64,7 +64,7 @@ public class SulfurCreeperEntity extends CreeperEntity {
                     long oxygen = suit.getAmount(chest);
 
                     if (oxygen > 0) {
-                        if (!ModUtils.worldHasOxygen(world, player)) {
+                        if (!OxygenUtils.worldHasOxygen(world, player)) {
                             suit.setAmount(chest, oxygen - FluidConstants.BUCKET / 3);
                             if ((suit.getAmount(chest) <= 0)) {
                                 suit.setAmount(chest, 0);

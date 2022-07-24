@@ -17,6 +17,7 @@ import net.fabricmc.fabric.impl.transfer.context.PlayerContainerItemContext;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
@@ -35,6 +36,11 @@ public class OxygenTankItem extends Item implements FluidContainingItem {
 
     public OxygenTankItem(Settings settings) {
         super(settings);
+    }
+
+    @Override
+    public List<Fluid> getInputFluids() {
+        return List.of(ModFluids.OXYGEN_STILL);
     }
 
     @Override

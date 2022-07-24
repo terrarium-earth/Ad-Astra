@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "item": "beyond_earth:mars_globe"
+    },
+    "title": {
+      "translate": "advancements.mars.title"
+    },
+    "description": {
+      "translate": "advancements.mars.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "mars": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "beyond_earth:mars"
+      }
+    }
+  },
+  "rewards": {
+    "experience": 75
+  },
+  "parent": "beyond_earth:tier_2_rocket"
+}

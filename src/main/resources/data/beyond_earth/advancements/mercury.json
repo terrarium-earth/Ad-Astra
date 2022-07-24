@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "item": "beyond_earth:mercury_globe"
+    },
+    "title": {
+      "translate": "advancements.mercury.title"
+    },
+    "description": {
+      "translate": "advancements.mercury.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "mercury": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "beyond_earth:mercury"
+      }
+    }
+  },
+  "rewards": {
+    "experience": 100
+  },
+  "parent": "beyond_earth:tier_3_rocket"
+}

@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "item": "beyond_earth:glacio_globe"
+    },
+    "title": {
+      "translate": "advancements.interstellar.title"
+    },
+    "description": {
+      "translate": "advancements.interstellar.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "interstellar": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "beyond_earth:glacio"
+      }
+    }
+  },
+  "rewards": {
+    "experience": 200
+  },
+  "parent": "beyond_earth:tier_4_rocket"
+}

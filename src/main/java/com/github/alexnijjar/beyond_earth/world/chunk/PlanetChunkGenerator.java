@@ -6,7 +6,6 @@ import com.github.alexnijjar.beyond_earth.world.WorldSeed;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
-import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.structure.StructureSet;
 import net.minecraft.util.dynamic.RegistryOps;
@@ -31,7 +30,7 @@ public class PlanetChunkGenerator extends NoiseChunkGenerator {
             .apply(instance, instance.stable(PlanetChunkGenerator::new)));
 
     public PlanetChunkGenerator(Registry<StructureSet> noiseRegistry, Registry<DoublePerlinNoiseSampler.NoiseParameters> structuresRegistry, BiomeSource biomeSource, long seed, RegistryEntry<ChunkGeneratorSettings> settings) {
-        super(noiseRegistry, structuresRegistry, biomeSource, seed == 0 ? WorldSeed.getSeed() : seed, settings);
+        super(noiseRegistry, structuresRegistry, biomeSource, (seed == 0 || seed == 12345) ? WorldSeed.getSeed() : seed, settings);
     }
 
     @Override
@@ -43,8 +42,6 @@ public class PlanetChunkGenerator extends NoiseChunkGenerator {
 
     @Override
     public void buildSurface(ChunkRegion region, StructureAccessor structures, Chunk chunk) {
-        BlockState bedrock = Blocks.BEDROCK.getDefaultState();
-
         BlockPos.Mutable pos = new BlockPos.Mutable();
 
         int x;
@@ -55,7 +52,7 @@ public class PlanetChunkGenerator extends NoiseChunkGenerator {
         if (!defaultBlock.isAir()) {
             for (x = 0; x < 16; x++) {
                 for (z = 0; z < 16; z++) {
-                    chunk.setBlockState(pos.set(x, this.getMinimumY(), z), bedrock, false);
+                    chunk.setBlockState(pos.set(x, this.getMinimumY(), z), Blocks.BEDROCK.getDefaultState(), false);
                 }
             }
         }

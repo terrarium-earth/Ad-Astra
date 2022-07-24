@@ -29,12 +29,13 @@ public class CustomButton extends ButtonWidget {
     public static final Identifier LARGE_BUTTON_TEXTURE = new ModIdentifier("textures/gui/buttons/large_button.png");
     public static final Identifier BUTTON_TEXTURE = new ModIdentifier("textures/gui/buttons/button.png");
     public static final Identifier SMALL_BUTTON_TEXTURE = new ModIdentifier("textures/gui/buttons/small_button.png");
+    public static final Identifier STEEL_BUTTON_TEXTURE = new ModIdentifier("textures/gui/buttons/steel_button.png");
 
     public static final Identifier WHITE_TEXTURE = new ModIdentifier("textures/white.png");
 
     private int startY;
     private Text label;
-    private ButtonSize buttonSize;
+    private ButtonType buttonSize;
     private ColourHolder buttonColourLightened;
     private ColourHolder buttonColour;
     private Planet planetInfo;
@@ -42,7 +43,7 @@ public class CustomButton extends ButtonWidget {
     private final PlanetSelectionScreen.TooltipType tooltip;
     public boolean doMask = true;
 
-    public CustomButton(int x, int y, Text label, ButtonSize size, ButtonColour buttonColour, PlanetSelectionScreen.TooltipType tooltip, Planet planetInfo, PressAction onPress) {
+    public CustomButton(int x, int y, Text label, ButtonType size, ButtonColour buttonColour, PlanetSelectionScreen.TooltipType tooltip, Planet planetInfo, PressAction onPress) {
 
         super(x, y, size.getWidth(), size.getHeight(), adjustText(label), onPress);
 
@@ -81,7 +82,7 @@ public class CustomButton extends ButtonWidget {
             MinecraftClient client = MinecraftClient.getInstance();
             double scale = client.getWindow().getScaleFactor();
             int screenHeight = client.getWindow().getScaledHeight();
-            int scissorY = (int)(((screenHeight / 2) - 83) * scale);
+            int scissorY = (int) (((screenHeight / 2) - 83) * scale);
 
             ColourHolder lightColour = this.buttonColourLightened;
             ColourHolder color = this.buttonColour;
@@ -93,7 +94,7 @@ public class CustomButton extends ButtonWidget {
 
             if (this.doMask) {
                 // Render mask
-                RenderSystem.enableScissor(0, scissorY, (int)(215 * scale), (int)(127 * scale));
+                RenderSystem.enableScissor(0, scissorY, (int) (215 * scale), (int) (127 * scale));
             }
 
             RenderSystem.setShaderColor((over ? lightColour.r() : color.r()), (over ? lightColour.g() : color.g()), (over ? lightColour.b() : color.b()), 1.0f);
@@ -101,6 +102,7 @@ public class CustomButton extends ButtonWidget {
             case LARGE -> LARGE_BUTTON_TEXTURE;
             case NORMAL -> BUTTON_TEXTURE;
             case SMALL -> SMALL_BUTTON_TEXTURE;
+            case STEEL -> STEEL_BUTTON_TEXTURE;
             });
 
             drawTexture(matrices, this.x, this.y, 0, 0, this.width, this.height, buttonSize.getWidth(), buttonSize.getHeight());

@@ -9,6 +9,7 @@ import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Item;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
+import net.minecraft.world.WorldView;
 
 public abstract class CryoFuelFluid extends ModFluid {
     @Override
@@ -26,7 +27,10 @@ public abstract class CryoFuelFluid extends ModFluid {
         return ModItems.CRYO_FUEL_BUCKET;
     }
 
-    
+    @Override
+    protected int getFlowSpeed(WorldView worldView) {
+        return 2;
+    }
 
     @Override
     protected BlockState toBlockState(FluidState state) {

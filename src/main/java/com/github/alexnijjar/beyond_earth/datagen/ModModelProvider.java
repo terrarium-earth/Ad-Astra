@@ -80,6 +80,7 @@ public class ModModelProvider extends FabricModelProvider implements ModBlocks {
         registerSlab(blockStateModelGenerator, GLACIO_STONE_BRICK_SLAB, GLACIO_STONE_BRICKS);
         registerSlab(blockStateModelGenerator, CHISELED_GLACIO_STONE_SLAB, CHISELED_GLACIO_STONE_BRICKS);
         registerSlab(blockStateModelGenerator, POLISHED_GLACIO_STONE_SLAB, POLISHED_GLACIO_STONE);
+        registerSlab(blockStateModelGenerator, PERMAFROST_BRICK_SLAB, PERMAFROST_BRICKS);
     }
 
     public static void registerSlab(BlockStateModelGenerator blockStateModelGenerator, Block slab, Block source) {

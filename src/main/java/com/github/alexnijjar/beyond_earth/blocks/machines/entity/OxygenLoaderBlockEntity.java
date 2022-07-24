@@ -21,22 +21,18 @@ import net.minecraft.util.math.Direction;
 
 public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
 
-    public static final long MAX_ENERGY = BeyondEarth.CONFIG.oxygenLoader.maxEnergy;
-    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.oxygenLoader.energyPerTick;
-    public static final int TANK_SIZE = BeyondEarth.CONFIG.oxygenLoader.tankBuckets;
-
     public OxygenLoaderBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.OXYGEN_LOADER, blockPos, blockState);
     }
 
     @Override
     public long getInputSize() {
-        return TANK_SIZE;
+        return BeyondEarth.CONFIG.oxygenLoader.tankBuckets;
     }
 
     @Override
     public long getOutputSize() {
-        return TANK_SIZE;
+        return BeyondEarth.CONFIG.oxygenLoader.tankBuckets;
     }
 
     @Override
@@ -46,17 +42,17 @@ public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
 
     @Override
     public long getMaxGeneration() {
-        return MAX_ENERGY;
+        return BeyondEarth.CONFIG.oxygenLoader.maxEnergy;
     }
 
     @Override
     public long getEnergyPerTick() {
-        return ENERGY_PER_TICK;
+        return BeyondEarth.CONFIG.oxygenLoader.energyPerTick;
     }
 
     @Override
     public long getMaxEnergyInsert() {
-        return ENERGY_PER_TICK * 32;
+        return BeyondEarth.CONFIG.oxygenLoader.energyPerTick * 32;
     }
 
     @Override

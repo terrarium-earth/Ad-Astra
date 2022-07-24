@@ -5,12 +5,14 @@ import java.util.stream.StreamSupport;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.items.FluidContainingItem;
+import com.github.alexnijjar.beyond_earth.registry.ModFluids;
 import com.github.alexnijjar.beyond_earth.registry.ModItems;
 import com.github.alexnijjar.beyond_earth.util.FluidUtils;
 
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
@@ -27,6 +29,11 @@ public class SpaceSuit extends ArmorItem implements FluidContainingItem {
 
     public SpaceSuit(ArmorMaterial material, EquipmentSlot slot, Item.Settings settings) {
         super(material, slot, settings);
+    }
+
+    @Override
+    public List<Fluid> getInputFluids() {
+        return List.of(ModFluids.OXYGEN_STILL);
     }
 
     @Override

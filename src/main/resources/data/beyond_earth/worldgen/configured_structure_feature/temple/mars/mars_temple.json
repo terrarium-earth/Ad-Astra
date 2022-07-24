@@ -1,0 +1,10 @@
+{
+    "type": "beyond_earth:mars_temple",
+    "config": {
+        "start_pool": "beyond_earth:temple/mars/start_pool",
+        "size": 1
+    },
+    "biomes": "#beyond_earth:has_structure/mars_temple_biomes",
+    "adapt_noise": true,
+    "spawn_overrides": {}
+}

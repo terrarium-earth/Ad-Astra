@@ -1,0 +1,50 @@
+{
+    "display": {
+        "icon": {
+            "item": "beyond_earth:jet_suit_helmet"
+        },
+        "title": {
+            "translate": "advancements.jet_suit.title"
+        },
+        "description": {
+            "translate": "advancements.jet_suit.description"
+        },
+        "frame": "challenge",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "jet_suit": {
+            "conditions": {
+                "items": [
+                    {
+                        "items": [
+                            "beyond_earth:jet_suit_helmet"
+                        ]
+                    },
+                    {
+                        "items": [
+                            "beyond_earth:jet_suit"
+                        ]
+                    },
+                    {
+                        "items": [
+                            "beyond_earth:jet_suit_pants"
+                        ]
+                    },
+                    {
+                        "items": [
+                            "beyond_earth:jet_suit_boots"
+                        ]
+                    }
+                ]
+            },
+            "trigger": "minecraft:inventory_changed"
+        }
+    },
+    "rewards": {
+        "experience": 250
+    },
+    "parent": "beyond_earth:venus"
+}

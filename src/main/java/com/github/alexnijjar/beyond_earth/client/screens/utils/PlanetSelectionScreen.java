@@ -229,7 +229,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 
                 // The back button. It is always element [0] in the buttons list.
                 LinkedList<CustomButton> backButtonList = new LinkedList<>();
-                CustomButton backButton = new CustomButton(10, this.height / 2 - 36, BACK_TEXT, ButtonSize.NORMAL, ButtonColour.DARK_BLUE, TooltipType.NONE, null, pressed -> onNavigationButtonClick(currentCategory.parent()));
+                CustomButton backButton = new CustomButton(10, this.height / 2 - 36, BACK_TEXT, ButtonType.NORMAL, ButtonColour.DARK_BLUE, TooltipType.NONE, null, pressed -> onNavigationButtonClick(currentCategory.parent()));
                 this.addDrawableChild(backButton);
                 backButtonList.add(backButton);
 
@@ -252,12 +252,12 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                                 }
 
                                 if (planet.parentWorld() == null) {
-                                        createNavigationButton(label, solarSystemCategory, ButtonSize.NORMAL, planet.buttonColour(), TooltipType.CATEGORY, planet, planetCategory);
+                                        createNavigationButton(label, solarSystemCategory, ButtonType.NORMAL, planet.buttonColour(), TooltipType.CATEGORY, planet, planetCategory);
                                 }
 
-                                createTeleportButton(1, label, planetCategory, ButtonSize.NORMAL, ButtonColour.BLUE, TooltipType.PLANET, planet, planet.world());
-                                createTeleportButton(2, ORBIT_TEXT, planetCategory, ButtonSize.SMALL, ButtonColour.BLUE, TooltipType.ORBIT, null, planet.orbitWorld());
-                                createSpaceStationTeleportButton(3, SPACE_STATION_TEXT, planetCategory, ButtonSize.NORMAL, ButtonColour.GREEN, planet.orbitWorld());
+                                createTeleportButton(1, label, planetCategory, ButtonType.NORMAL, ButtonColour.BLUE, TooltipType.PLANET, planet, planet.world());
+                                createTeleportButton(2, ORBIT_TEXT, planetCategory, ButtonType.SMALL, ButtonColour.BLUE, TooltipType.ORBIT, null, planet.orbitWorld());
+                                createSpaceStationTeleportButton(3, SPACE_STATION_TEXT, planetCategory, ButtonType.NORMAL, ButtonColour.GREEN, planet.orbitWorld());
                         }
                 });
 
@@ -297,14 +297,14 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                 String name = solarSystemCategory.id().getPath();
                 Text label = ScreenUtils.createText(name);
                 Category category = new Category(solarSystemCategory.parent().id(), null);
-                createNavigationButton(label, category, ButtonSize.NORMAL, ButtonColour.BLUE, TooltipType.SOLAR_SYSTEM, null, solarSystemCategory);
+                createNavigationButton(label, category, ButtonType.NORMAL, ButtonColour.BLUE, TooltipType.SOLAR_SYSTEM, null, solarSystemCategory);
         }
 
-        private void createNavigationButton(Text label, Category category, ButtonSize size, ButtonColour colour, TooltipType tooltip, Planet planetInfo, Category target) {
+        private void createNavigationButton(Text label, Category category, ButtonType size, ButtonColour colour, TooltipType tooltip, Planet planetInfo, Category target) {
                 createButton(label, category, size, colour, tooltip, planetInfo, press -> onNavigationButtonClick(target));
         }
 
-        private void createSpaceStationTeleportButton(int row, Text label, Category category, ButtonSize size, ButtonColour colour, RegistryKey<World> world) {
+        private void createSpaceStationTeleportButton(int row, Text label, Category category, ButtonType size, ButtonColour colour, RegistryKey<World> world) {
                 createTeleportButton(row, label, category, size, colour, TooltipType.SPACE_STATION, null, world, press -> {
                         for (int i = 0; i < this.ingredients.size(); i++) {
                                 Pair<ItemStack, Integer> ingredient = this.ingredients.get(i);
@@ -325,13 +325,13 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                 });
         }
 
-        private void createTeleportButton(int row, Text label, Category category, ButtonSize size, ButtonColour colour, TooltipType tooltip, Planet planetInfo, RegistryKey<World> world) {
+        private void createTeleportButton(int row, Text label, Category category, ButtonType size, ButtonColour colour, TooltipType tooltip, Planet planetInfo, RegistryKey<World> world) {
                 createTeleportButton(row, label, category, size, colour, tooltip, planetInfo, world, press -> {
                         teleportPlayer(world);
                 });
         }
 
-        private void createTeleportButton(int row, Text label, Category category, ButtonSize size, ButtonColour colour, TooltipType tooltip, Planet planetInfo, RegistryKey<World> world, Consumer<ButtonWidget> onClick) {
+        private void createTeleportButton(int row, Text label, Category category, ButtonType size, ButtonColour colour, TooltipType tooltip, Planet planetInfo, RegistryKey<World> world, Consumer<ButtonWidget> onClick) {
                 int newRow = 0;
                 if (row == 2) {
                         newRow = 76;
@@ -354,17 +354,17 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                 ClientPlayNetworking.send(ModC2SPackets.TELEPORT_TO_PLANET, buf);
         }
 
-        private CustomButton createButton(Text label, Category category, ButtonSize size, ButtonColour colour, TooltipType tooltip, Planet planetInfo, Consumer<ButtonWidget> onClick) {
+        private CustomButton createButton(Text label, Category category, ButtonType size, ButtonColour colour, TooltipType tooltip, Planet planetInfo, Consumer<ButtonWidget> onClick) {
                 return createButton(10, label, category, size, colour, tooltip, planetInfo, onClick);
         }
 
-        private CustomButton createButton(int row, Text label, Category category, ButtonSize size, ButtonColour colour, TooltipType tooltip, Planet planetInfo, Consumer<ButtonWidget> onClick) {
+        private CustomButton createButton(int row, Text label, Category category, ButtonType size, ButtonColour colour, TooltipType tooltip, Planet planetInfo, Consumer<ButtonWidget> onClick) {
 
                 int column = getColumn(category);
                 return createButton(row, column, label, category, size, colour, tooltip, planetInfo, onClick);
         }
 
-        private CustomButton createButton(int row, int column, Text label, Category category, ButtonSize size, ButtonColour colour, TooltipType tooltip, Planet planetInfo, Consumer<ButtonWidget> onClick) {
+        private CustomButton createButton(int row, int column, Text label, Category category, ButtonType size, ButtonColour colour, TooltipType tooltip, Planet planetInfo, Consumer<ButtonWidget> onClick) {
 
                 LinkedList<CustomButton> buttons = this.categoryButtons.getOrDefault(category, new LinkedList<>());
 

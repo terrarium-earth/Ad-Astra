@@ -25,10 +25,7 @@ import net.minecraft.world.World;
 public class RoverEntity extends VehicleEntity {
 
     public double wheelPitch;
-
     public double prevWheelPitch;
-
-    public static final long FUEL_PER_TICK = BeyondEarth.CONFIG.rover.fuelPerTick;
 
     protected static final TrackedData<Float> TURN_SPEED = DataTracker.registerData(RoverEntity.class, TrackedDataHandlerRegistry.FLOAT);
 
@@ -54,7 +51,7 @@ public class RoverEntity extends VehicleEntity {
 
     @Override
     public long getFuelPerTick() {
-        return FUEL_PER_TICK;
+        return BeyondEarth.CONFIG.rover.fuelPerTick;
     }
 
     @Override
@@ -192,18 +189,18 @@ public class RoverEntity extends VehicleEntity {
 
     @Override
     public Vec3d updatePassengerForDismount(LivingEntity passenger) {
-            Vec3d pos = passenger.getPos();
-            if (this.getPassengerList().size() == 0) {
-                double xRotator = Math.cos(this.getYaw() * ((float) Math.PI / 180)) * 0.9f;
-                double zRotator = Math.sin(this.getYaw() * ((float) Math.PI / 180)) * 0.9f;
-                passenger.setVelocity(this.getVelocity());
-                return new Vec3d(pos.getX() + xRotator, pos.getY(), pos.getZ() + zRotator);
-            } else {
-                double xRotator = Math.cos(this.getYaw() * ((float) Math.PI / 180)) * -1.0f;
-                double zRotator = Math.sin(this.getYaw() * ((float) Math.PI / 180)) * -1.0f;
-                passenger.setVelocity(this.getVelocity());
-                return new Vec3d(pos.getX() + xRotator, pos.getY(), pos.getZ() + zRotator);
-            }
+        Vec3d pos = passenger.getPos();
+        if (this.getPassengerList().size() == 0) {
+            double xRotator = Math.cos(this.getYaw() * ((float) Math.PI / 180)) * 0.9f;
+            double zRotator = Math.sin(this.getYaw() * ((float) Math.PI / 180)) * 0.9f;
+            passenger.setVelocity(this.getVelocity());
+            return new Vec3d(pos.getX() + xRotator, pos.getY(), pos.getZ() + zRotator);
+        } else {
+            double xRotator = Math.cos(this.getYaw() * ((float) Math.PI / 180)) * -1.0f;
+            double zRotator = Math.sin(this.getYaw() * ((float) Math.PI / 180)) * -1.0f;
+            passenger.setVelocity(this.getVelocity());
+            return new Vec3d(pos.getX() + xRotator, pos.getY(), pos.getZ() + zRotator);
+        }
     }
 
     @Override

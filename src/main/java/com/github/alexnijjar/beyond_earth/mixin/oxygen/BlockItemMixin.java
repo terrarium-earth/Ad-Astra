@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.registry.ModBlocks;
-import com.github.alexnijjar.beyond_earth.util.ModUtils;
+import com.github.alexnijjar.beyond_earth.util.OxygenUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -40,7 +40,7 @@ public class BlockItemMixin {
         World world = context.getWorld();
         if (!world.isClient) {
             BlockPos pos = context.getBlockPos();
-            if (!ModUtils.worldHasOxygen(world, pos)) {
+            if (!OxygenUtils.worldHasOxygen(world, pos)) {
                 BlockState blockstate = world.getBlockState(context.getBlockPos());
                 Block block = blockstate.getBlock();
 

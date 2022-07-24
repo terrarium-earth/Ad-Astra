@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "beyond_earth:item/tank_desh"
+    "layer0": "beyond_earth:item/desh_tank"
   }
 }
