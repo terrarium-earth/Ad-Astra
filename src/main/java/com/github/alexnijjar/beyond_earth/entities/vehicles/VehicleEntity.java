@@ -76,14 +76,14 @@ public abstract class VehicleEntity extends Entity {
 
     @Override
     protected void readCustomDataFromNbt(NbtCompound nbt) {
-        this.inventory.readNbtList(nbt.getList("Inventory", NbtElement.COMPOUND_TYPE));
+        this.inventory.readNbtList(nbt.getList("inventory", NbtElement.COMPOUND_TYPE));
         inputTank.variant = FluidVariant.fromNbt(nbt.getCompound("inputFluid"));
         inputTank.amount = nbt.getLong("inputAmount");
     }
 
     @Override
     protected void writeCustomDataToNbt(NbtCompound nbt) {
-        nbt.put("Inventory", this.inventory.toNbtList());
+        nbt.put("inventory", this.inventory.toNbtList());
         nbt.put("inputFluid", inputTank.variant.toNbt());
         nbt.putLong("inputAmount", inputTank.amount);
     }
@@ -248,7 +248,7 @@ public abstract class VehicleEntity extends Entity {
             ((VehicleItem) dropStack.getItem()).setFluid(dropStack, this.inputTank.variant);
             NbtCompound nbt = dropStack.getOrCreateNbt();
             // Set the inventory in the dropped item.
-            nbt.put("Inventory", this.inventory.toNbtList());
+            nbt.put("inventory", this.inventory.toNbtList());
 
             world.playSound(null, pos, SoundEvents.BLOCK_NETHERITE_BLOCK_BREAK, SoundCategory.BLOCKS, 1, 1);
             this.world.spawnEntity(new ItemEntity(this.world, pos.getX(), pos.getY() + 0.5f, pos.getZ(), dropStack));

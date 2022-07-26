@@ -4,12 +4,15 @@ import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.util.ColourHolder;
 
 public enum ButtonColour {
-    WHITE(255, 255, 255), GREY(128, 128, 128), BLACK(0, 0, 0), RED(230, 46, 0), DARK_RED(128, 0, 0), ORANGE(255, 102, 0), YELLOW(255, 255, 0), GREEN(0, 179, 0), DARK_GREEN(0, 102, 0), BLUE(0, 184, 230), DARK_BLUE(0, 102, 204), PURPLE(102, 0, 255);
+    WHITE(255, 255, 255, 255), GREY(128, 128, 128, ButtonColour.ALPHA), BLACK(0, 0, 0, ButtonColour.ALPHA), RED(230, 46, 0, ButtonColour.ALPHA), DARK_RED(128, 0, 0, ButtonColour.ALPHA), ORANGE(255, ButtonColour.ALPHA, 0, ButtonColour.ALPHA),
+    YELLOW(255, 255, 0, ButtonColour.ALPHA), GREEN(0, 179, 0, ButtonColour.ALPHA), DARK_GREEN(0, ButtonColour.ALPHA, 0, ButtonColour.ALPHA), BLUE(0, 184, 230, ButtonColour.ALPHA), DARK_BLUE(0, ButtonColour.ALPHA, 204, ButtonColour.ALPHA),
+    PURPLE(ButtonColour.ALPHA, 0, 255, ButtonColour.ALPHA);
 
     private final ColourHolder colour;
+    public static final short ALPHA = 154;
 
-    private ButtonColour(int r, int g, int b) {
-        this.colour = new ColourHolder(r / 255.0f, g / 255.0f, b / 255.0f);
+    private ButtonColour(int r, int g, int b, int a) {
+        this.colour = new ColourHolder(r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f);
     }
 
     public ColourHolder getColour() {

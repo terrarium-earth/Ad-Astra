@@ -29,8 +29,8 @@ public class CryoFreezerScreen extends AbstractMachineScreen<CryoFreezerScreenHa
     public CryoFreezerScreen(CryoFreezerScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title, TEXTURE);
         this.backgroundWidth = 177;
-        this.backgroundHeight = 177;
-        this.playerInventoryTitleY = this.backgroundHeight - 88;
+        this.backgroundHeight = 181;
+        this.playerInventoryTitleY = this.backgroundHeight - 93;
     }
 
     @Override

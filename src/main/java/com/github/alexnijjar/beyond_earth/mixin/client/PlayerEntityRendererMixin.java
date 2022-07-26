@@ -12,6 +12,7 @@ import com.github.alexnijjar.beyond_earth.client.renderer.spacesuit.SpaceSuitRen
 import com.github.alexnijjar.beyond_earth.items.armour.JetSuit;
 import com.github.alexnijjar.beyond_earth.items.armour.NetheriteSpaceSuit;
 import com.github.alexnijjar.beyond_earth.items.armour.SpaceSuit;
+import com.github.alexnijjar.beyond_earth.items.vehicles.VehicleItem;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -31,6 +32,10 @@ public class PlayerEntityRendererMixin {
 
     @Inject(method = "renderRightArm", at = @At("HEAD"), cancellable = true)
     public void renderRightArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, CallbackInfo ci) {
+        if (player.getOffHandStack().getItem() instanceof VehicleItem) {
+            ci.cancel();
+            return;
+        }
         if (player.getEquippedStack(EquipmentSlot.CHEST).getItem() instanceof SpaceSuit spaceSuit) {
             ci.cancel();
             this.renderArm(matrices, vertexConsumers, light, player, true);

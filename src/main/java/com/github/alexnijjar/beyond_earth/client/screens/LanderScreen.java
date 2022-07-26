@@ -17,13 +17,18 @@ public class LanderScreen extends AbstractVehicleScreen<LanderScreenHandler> {
 
     public LanderScreen(LanderScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title, TEXTURE);
-        this.backgroundWidth = 176;
-        this.backgroundHeight = 176;
+        this.backgroundWidth = 177;
+        this.backgroundHeight = 174;
         this.playerInventoryTitleY = this.backgroundHeight - 93;
     }
 
     @Override
     protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
         super.drawBackground(matrices, delta, mouseX, mouseY);
+    }
+
+    @Override
+    public int getTextColour() {
+        return 0x2C282E;
     }
 }

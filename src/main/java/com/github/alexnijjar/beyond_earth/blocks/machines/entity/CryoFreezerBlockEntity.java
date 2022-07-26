@@ -40,15 +40,15 @@ public class CryoFreezerBlockEntity extends FluidMachineBlockEntity {
     @Override
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
-        this.cookTime = nbt.getShort("CookTime");
-        this.cookTimeTotal = nbt.getShort("CookTimeTotal");
+        this.cookTime = nbt.getShort("cookTime");
+        this.cookTimeTotal = nbt.getShort("cookTimeTotal");
     }
 
     @Override
     public void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
-        nbt.putShort("CookTime", this.cookTime);
-        nbt.putShort("CookTimeTotal", this.cookTimeTotal);
+        nbt.putShort("cookTime", this.cookTime);
+        nbt.putShort("cookTimeTotal", this.cookTimeTotal);
     }
 
     public short getCookTime() {

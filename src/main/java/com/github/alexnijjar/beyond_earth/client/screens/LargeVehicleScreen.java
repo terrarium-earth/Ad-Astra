@@ -19,13 +19,13 @@ public class LargeVehicleScreen extends AbstractVehicleScreen<LargeVehicleScreen
 
     private static final Identifier TEXTURE = new ModIdentifier("textures/gui/screens/vehicle_large.png");
 
-    public static final int INPUT_TANK_LEFT = 9;
-    public static final int INPUT_TANK_TOP = 11;
+    public static final int INPUT_TANK_LEFT = 50;
+    public static final int INPUT_TANK_TOP = 25;
 
     public LargeVehicleScreen(LargeVehicleScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title, TEXTURE);
-        this.backgroundWidth = 176;
-        this.backgroundHeight = 176;
+        this.backgroundWidth = 177;
+        this.backgroundHeight = 181;
         this.playerInventoryTitleY = this.backgroundHeight - 93;
     }
 
@@ -49,5 +49,10 @@ public class LargeVehicleScreen extends AbstractVehicleScreen<LargeVehicleScreen
 
     public Rectangle getInputTankBounds() {
         return GuiUtil.getFluidTankBounds(this.x + INPUT_TANK_LEFT, this.y + INPUT_TANK_TOP);
+    }
+
+    @Override
+    public int getTextColour() {
+        return 0x2C282E;
     }
 }

@@ -16,8 +16,13 @@ public class NasaWorkbenchScreen extends AbstractMachineScreen<NasaWorkbenchScre
 
     public NasaWorkbenchScreen(NasaWorkbenchScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title, TEXTURE);
-        this.backgroundWidth = 176;
+        this.backgroundWidth = 177;
         this.backgroundHeight = 224;
         this.playerInventoryTitleY = this.backgroundHeight - 93;
+    }
+
+    @Override
+    public int getTextColour() {
+        return 0x2C282E;
     }
 }

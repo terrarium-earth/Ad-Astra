@@ -162,6 +162,7 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 
 		// Compacting
 		offerReversibleCompactingRecipes(exporter, ModItems.STEEL_INGOT, STEEL_BLOCK);
+		offerReversibleCompactingRecipes(exporter, ModItems.CHEESE, CHEESE_BLOCK);
 		offerReversibleCompactingRecipes(exporter, ModItems.DESH_INGOT, DESH_BLOCK);
 		offerReversibleCompactingRecipes(exporter, ModItems.OSTRUM_INGOT, OSTRUM_BLOCK);
 		offerReversibleCompactingRecipes(exporter, ModItems.CALORITE_INGOT, CALORITE_BLOCK);

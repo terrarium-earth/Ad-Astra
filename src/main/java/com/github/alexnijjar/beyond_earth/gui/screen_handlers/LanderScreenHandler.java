@@ -4,6 +4,13 @@ import com.github.alexnijjar.beyond_earth.entities.vehicles.VehicleEntity;
 import com.github.alexnijjar.beyond_earth.gui.NoInventorySlot;
 import com.github.alexnijjar.beyond_earth.registry.ModScreenHandlers;
 
+import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.fluid.base.FullItemFluidStorage;
+import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
+import net.fabricmc.fabric.api.transfer.v1.storage.base.CombinedStorage;
+import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantItemStorage;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
@@ -18,10 +25,19 @@ public class LanderScreenHandler extends AbstractVehicleScreenHandler {
     public LanderScreenHandler(int syncId, PlayerInventory inventory, VehicleEntity entity) {
         super(ModScreenHandlers.LANDER_SCREEN_HANDLER, syncId, inventory, entity, new Slot[] {
 
-                // Left input slot.
-                new Slot(entity.getInventory(), 0, 8, 63),
-                // Left output slot.
-                new Slot(entity.getInventory(), 1, 26, 63) {
+                // Left input slot
+                new NoInventorySlot(entity.getInventory(), 0, 19, 58) {
+                    @Override
+                    public boolean canInsert(ItemStack stack) {
+                        if (!super.canInsert(stack)) {
+                            return false;
+                        }
+                        Storage<FluidVariant> context = ContainerItemContext.withInitial(stack).find(FluidStorage.ITEM);
+                        return context instanceof CombinedStorage || context instanceof FullItemFluidStorage || context instanceof SingleVariantItemStorage<FluidVariant>;
+                    }
+                },
+                // Left output slot
+                new NoInventorySlot(entity.getInventory(), 1, 48, 58) {
                     @Override
                     public boolean canInsert(ItemStack stack) {
                         return false;
@@ -29,24 +45,24 @@ public class LanderScreenHandler extends AbstractVehicleScreenHandler {
                 },
 
                 // Inventory
-                new NoInventorySlot(entity.getInventory(), 2, 98, 15),
+                new NoInventorySlot(entity.getInventory(), 2, 85, 31),
                 //
-                new NoInventorySlot(entity.getInventory(), 3, 98 + 18, 15),
+                new NoInventorySlot(entity.getInventory(), 3, 85 + 18, 31),
                 //
-                new NoInventorySlot(entity.getInventory(), 4, 98 + 18 * 2, 15),
+                new NoInventorySlot(entity.getInventory(), 4, 85 + 18 * 2, 31),
                 //
-                new NoInventorySlot(entity.getInventory(), 5, 98 + 18 * 3, 15),
+                new NoInventorySlot(entity.getInventory(), 5, 85 + 18 * 3, 31),
                 //
-                new NoInventorySlot(entity.getInventory(), 6, 98, 33),
+                new NoInventorySlot(entity.getInventory(), 6, 85, 49),
                 //
-                new NoInventorySlot(entity.getInventory(), 7, 98 + 18, 33),
+                new NoInventorySlot(entity.getInventory(), 7, 85 + 18, 49),
                 //
-                new NoInventorySlot(entity.getInventory(), 8, 98 + 18 * 2, 33),
+                new NoInventorySlot(entity.getInventory(), 8, 85 + 18 * 2, 49),
                 //
-                new NoInventorySlot(entity.getInventory(), 9, 98 + 18 * 3, 33),
-                
+                new NoInventorySlot(entity.getInventory(), 9, 85 + 18 * 3, 49),
+
                 // Rocket slot.
-                new Slot(entity.getInventory(), 10, 40, 24) {
+                new Slot(entity.getInventory(), 10, 34, 27) {
                     @Override
                     public boolean canInsert(ItemStack stack) {
                         return false;
@@ -56,6 +72,6 @@ public class LanderScreenHandler extends AbstractVehicleScreenHandler {
 
     @Override
     public int getPlayerInventoryOffset() {
-        return 9;
+        return 8;
     }
 }

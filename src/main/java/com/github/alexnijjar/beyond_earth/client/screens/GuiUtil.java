@@ -30,8 +30,10 @@ public class GuiUtil {
     public static final int FIRE_HEIGHT = 14;
     public static final int SNOWFLAKE_WIDTH = 13;
     public static final int SNOWFLAKE_HEIGHT = 13;
-    public static final int ARROW_WIDTH = 24;
-    public static final int ARROW_HEIGHT = 17;
+    public static final int SUN_WIDTH = 21;
+    public static final int SUN_HEIGHT = 21;
+    public static final int HAMMER_WIDTH = 13;
+    public static final int HAMMER_HEIGHT = 13;
     public static final int OXYGEN_TANK_WIDTH = 14;
     public static final int OXYGEN_TANK_HEIGHT = 48;
     public static final int ENERGY_WIDTH = 13;
@@ -43,7 +45,8 @@ public class GuiUtil {
 
     public static final Identifier FIRE_TEXTURE = new ModIdentifier("textures/gui/fire_on.png");
     public static final Identifier SNOWFLAKE_TEXTURE = new ModIdentifier("textures/gui/snowflake.png");
-    public static final Identifier ARROW_TEXTURE = new ModIdentifier("textures/gui/animated_arrow_full.png");
+    public static final Identifier SUN_TEXTURE = new ModIdentifier("textures/gui/sun.png");
+    public static final Identifier HAMMER_TEXTURE = new ModIdentifier("textures/gui/hammer.png");
     public static final Identifier OXYGEN_CONTENT_TEXTURE = new ModIdentifier("textures/gui/oxygen.png");
     public static final Identifier ENERGY_TEXTURE = new ModIdentifier("textures/gui/energy_full.png");
     public static final Identifier FLUID_TANK_TEXTURE = new ModIdentifier("textures/gui/fluid_tank.png");
@@ -60,8 +63,8 @@ public class GuiUtil {
         return new Rectangle(x, y, FLUID_TANK_WIDTH, FLUID_TANK_HEIGHT);
     }
 
-    public static Rectangle getArrowBounds(int x, int y) {
-        return new Rectangle(x, y, ARROW_WIDTH, ARROW_HEIGHT);
+    public static Rectangle getHammerBounds(int x, int y) {
+        return new Rectangle(x, y, HAMMER_WIDTH, HAMMER_HEIGHT);
     }
 
     public static Rectangle getEnergyBounds(int x, int y) {
@@ -136,9 +139,13 @@ public class GuiUtil {
         drawHorizontal(matrixStack, x, y, SNOWFLAKE_WIDTH, SNOWFLAKE_HEIGHT, SNOWFLAKE_TEXTURE, ratio);
     }
 
-    public static void drawArrow(MatrixStack matrixStack, int x, int y, short burnTime, short totalBurnTime) {
+    public static void drawSun(MatrixStack matrixStack, int x, int y) {
+        drawHorizontal(matrixStack, x, y, SUN_WIDTH, SUN_HEIGHT, SUN_TEXTURE, 1.0);
+    }
+
+    public static void drawHammer(MatrixStack matrixStack, int x, int y, short burnTime, short totalBurnTime) {
         double ratio = totalBurnTime > 0 ? createRatio(burnTime, totalBurnTime) : 0;
-        drawHorizontal(matrixStack, x, y, ARROW_WIDTH, ARROW_HEIGHT, ARROW_TEXTURE, ratio);
+        drawHorizontal(matrixStack, x, y, HAMMER_WIDTH, HAMMER_HEIGHT, HAMMER_TEXTURE, ratio);
     }
 
     public static void drawVertical(MatrixStack matrixStack, int x, int y, int width, int height, Identifier resource, double ratio) {
@@ -183,11 +190,12 @@ public class GuiUtil {
         public static void drawTexture(MatrixStack matrices, float x, float y, int width, int height, float u, float v, int regionWidth, int regionHeight, int textureWidth, int textureHeight) {
             FloatDrawableHelper.drawTexture(matrices, x, x + width, y, y + height, 0, regionWidth, regionHeight, u, v, textureWidth, textureHeight);
         }
-    
+
         private static void drawTexture(MatrixStack matrices, float x0, float x1, float y0, float y1, int z, int regionWidth, int regionHeight, float u, float v, int textureWidth, int textureHeight) {
-            FloatDrawableHelper.drawTexturedQuad(matrices.peek().getPositionMatrix(), x0, x1, y0, y1, z, (u + 0.0f) / (float)textureWidth, (u + (float)regionWidth) / (float)textureWidth, (v + 0.0f) / (float)textureHeight, (v + (float)regionHeight) / (float)textureHeight);
+            FloatDrawableHelper.drawTexturedQuad(matrices.peek().getPositionMatrix(), x0, x1, y0, y1, z, (u + 0.0f) / (float) textureWidth, (u + (float) regionWidth) / (float) textureWidth, (v + 0.0f) / (float) textureHeight,
+                    (v + (float) regionHeight) / (float) textureHeight);
         }
-    
+
         private static void drawTexturedQuad(Matrix4f matrix, float x0, float x1, float y0, float y1, int z, float u0, float u1, float v0, float v1) {
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
             BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();

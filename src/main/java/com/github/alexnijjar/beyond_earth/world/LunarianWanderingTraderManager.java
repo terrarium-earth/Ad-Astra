@@ -65,7 +65,7 @@ public class LunarianWanderingTraderManager implements Spawner {
         if (this.spawnDelay > 0) {
             return 0;
         }
-        this.spawnDelay = DEFAULT_SPAWN_TIMER;
+        this.spawnDelay = DEFAULT_SPAWN_DELAY;
         if (!world.getGameRules().getBoolean(GameRules.DO_MOB_SPAWNING)) {
             return 0;
         }

@@ -1,5 +1,7 @@
 package com.github.alexnijjar.beyond_earth.client.screens;
 
+import java.awt.Rectangle;
+
 import com.github.alexnijjar.beyond_earth.blocks.machines.AbstractMachineBlock;
 import com.github.alexnijjar.beyond_earth.gui.screen_handlers.SolarPanelScreenHandler;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
@@ -17,23 +19,54 @@ public class SolarPanelScreen extends AbstractMachineScreen<SolarPanelScreenHand
 
     private static final Identifier TEXTURE = new ModIdentifier("textures/gui/screens/solar_panel.png");
 
+    public static final int SUN_LEFT = 35;
+    public static final int SUN_TOP = 59;
+
+    public static final int ENERGY_LEFT = 108;
+    public static final int ENERGY_TOP = 69;
+
     public SolarPanelScreen(SolarPanelScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title, TEXTURE);
+        this.backgroundWidth = 177;
+        this.backgroundHeight = 228;
+        this.titleY = 46;
+        this.playerInventoryTitleY = this.backgroundHeight - 93;
+    }
+
+    @Override
+    protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
+        super.drawBackground(matrices, delta, mouseX, mouseY);
+
+        GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration());
+        if (this.blockEntity.getCachedState().get(AbstractMachineBlock.LIT)) {
+            GuiUtil.drawSun(matrices, this.x + SUN_LEFT, this.y + SUN_TOP);
+        }
     }
 
     @Override
     protected void drawForeground(MatrixStack matrices, int mouseX, int mouseY) {
         super.drawForeground(matrices, mouseX, mouseY);
 
-        // Just to silence IDEA.
-        int first = this.titleY;
+        this.textRenderer.draw(matrices, new TranslatableText("gauge_text.beyond_earth.max_generation"), this.titleY - 20, 8, 0x3B7A43);
+        this.textRenderer.draw(matrices, Text.of(this.blockEntity.getEnergyPerTick() + " E/t"), this.titleY - 21, 18, 0x3B7A43);
+    }
 
-        if (this.blockEntity != null) {
-            int offset = 8;
-            this.textRenderer.draw(matrices, new TranslatableText("gauge_text.beyond_earth.state." + (this.blockEntity.getCachedState().get(AbstractMachineBlock.LIT) ? "on" : "off")), first, offset + 12, 0x3C3C3C);
-            this.textRenderer.draw(matrices, new TranslatableText("gauge_text.beyond_earth.stored", this.blockEntity.getEnergy()), first, offset + 12 * 2, 0x3C3C3C);
-            this.textRenderer.draw(matrices, new TranslatableText("gauge_text.beyond_earth.capacity", this.blockEntity.getMaxGeneration()), first, offset + 12 * 3, 0x3C3C3C);
-            this.textRenderer.draw(matrices, new TranslatableText("gauge_text.beyond_earth.max_generation", this.blockEntity.getEnergyPerTick()), first, offset + 12 * 4, 0x3C3C3C);
+    @Override
+    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+        super.render(matrices, mouseX, mouseY, delta);
+
+        // Energy tooltip
+        if (GuiUtil.isHovering(this.getEnergyBounds(), mouseX, mouseY)) {
+            this.renderTooltip(matrices, new TranslatableText("gauge_text.beyond_earth.storage", this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration()), mouseX, mouseY);
         }
+    }
+
+    public Rectangle getEnergyBounds() {
+        return GuiUtil.getEnergyBounds(this.x + ENERGY_LEFT, this.y + ENERGY_TOP);
+    }
+
+    @Override
+    public int getTextColour() {
+        return 0x2C282E;
     }
 }

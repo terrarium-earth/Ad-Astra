@@ -17,11 +17,11 @@ public class CompressorScreenHandler extends AbstractMachineScreenHandler {
 
     @Override
     public int getPlayerInventoryOffset() {
-        return 2;
+        return 30;
     }
 
     public CompressorScreenHandler(int syncId, PlayerInventory inventory, CompressorBlockEntity entity) {
-        super(ModScreenHandlers.COMPRESSOR_SCREEN_HANDLER, syncId, inventory, entity, new Slot[] { new Slot(entity, 0, 40, 37), new Slot(entity, 1, 92, 36) {
+        super(ModScreenHandlers.COMPRESSOR_SCREEN_HANDLER, syncId, inventory, entity, new Slot[] { new Slot(entity, 0, 40, 62), new Slot(entity, 1, 92, 62) {
             @Override
             public boolean canInsert(ItemStack stack) {
                 return false;

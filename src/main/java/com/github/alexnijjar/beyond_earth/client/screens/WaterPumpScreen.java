@@ -20,22 +20,21 @@ public class WaterPumpScreen extends AbstractMachineScreen<WaterPumpScreenHandle
 
     private static final Identifier TEXTURE = new ModIdentifier("textures/gui/screens/water_pump.png");
 
-    public static final int INPUT_TANK_LEFT = 75;
-    public static final int INPUT_TANK_TOP = 21;
+    public static final int INPUT_TANK_LEFT = 80;
+    public static final int INPUT_TANK_TOP = 30;
 
-    public static final int ENERGY_LEFT = 144;
-    public static final int ENERGY_TOP = 21;
+    public static final int ENERGY_LEFT = 146;
+    public static final int ENERGY_TOP = 30;
 
     public WaterPumpScreen(WaterPumpScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title, TEXTURE);
         this.backgroundWidth = 177;
-        this.backgroundHeight = 172;
+        this.backgroundHeight = 180;
         this.playerInventoryTitleY = this.backgroundHeight - 92;
     }
 
     @Override
     protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
-
         super.drawBackground(matrices, delta, mouseX, mouseY);
 
         FluidMachineBlockEntity entity = (FluidMachineBlockEntity) blockEntity;
@@ -50,7 +49,7 @@ public class WaterPumpScreen extends AbstractMachineScreen<WaterPumpScreenHandle
 
         FluidMachineBlockEntity entity = (FluidMachineBlockEntity) blockEntity;
 
-        // Energy tooltip.
+        // Energy tooltip
         if (GuiUtil.isHovering(this.getEnergyBounds(), mouseX, mouseY)) {
             this.renderTooltip(matrices, new TranslatableText("gauge_text.beyond_earth.storage", this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration()), mouseX, mouseY);
         }
@@ -67,5 +66,10 @@ public class WaterPumpScreen extends AbstractMachineScreen<WaterPumpScreenHandle
 
     public Rectangle getEnergyBounds() {
         return GuiUtil.getEnergyBounds(this.x + ENERGY_LEFT, this.y + ENERGY_TOP);
+    }
+
+    @Override
+    public int getTextColour() {
+        return 0x2C282E;
     }
 }

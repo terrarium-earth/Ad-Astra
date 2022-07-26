@@ -23,8 +23,6 @@ public abstract class AbstractMachineScreen<T extends AbstractMachineScreenHandl
     public AbstractMachineScreen(T handler, PlayerInventory inventory, Text title, Identifier texture) {
         super(handler, inventory, title);
         this.texture = texture;
-        this.backgroundWidth = 176;
-        this.backgroundHeight = 166;
         this.playerInventoryTitleY = this.backgroundHeight - 92;
         blockEntity = this.getScreenHandler().getBlockEntity();
     }

@@ -8,6 +8,7 @@ import java.util.Set;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.DoorBlock;
+import net.minecraft.block.GrassBlock;
 import net.minecraft.block.HorizontalConnectingBlock;
 import net.minecraft.block.IceBlock;
 import net.minecraft.block.LadderBlock;
@@ -56,7 +57,7 @@ public class OxygenFillerAlgorithm {
 
             // Cancel for solid blocks but still let things like slabs, torches and ladders through
             if (state.isFullCube(this.world, pos)) {
-                if (!(state.getBlock() instanceof IceBlock) && !(state.getBlock() instanceof LadderBlock)) {
+                if (!(state.getBlock() instanceof IceBlock) && !(state.getBlock() instanceof GrassBlock) && !(state.getBlock() instanceof LadderBlock)) {
                     continue;
                 }
             }
@@ -73,8 +74,7 @@ public class OxygenFillerAlgorithm {
             for (Direction dir : Direction.values()) {
                 if (state.isSideSolidFullSquare(world, pos, dir)) {
 
-                    // Allow oxygen to go through ice blocks, so that they still turn into water when broken
-                    if (state.getBlock() instanceof IceBlock && state.getBlock() instanceof LadderBlock) {
+                    if (state.getBlock() instanceof LadderBlock) {
                         continue;
                     }
 
