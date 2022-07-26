@@ -30,7 +30,7 @@ public class PlanetChunkGenerator extends NoiseChunkGenerator {
             .apply(instance, instance.stable(PlanetChunkGenerator::new)));
 
     public PlanetChunkGenerator(Registry<StructureSet> noiseRegistry, Registry<DoublePerlinNoiseSampler.NoiseParameters> structuresRegistry, BiomeSource biomeSource, long seed, RegistryEntry<ChunkGeneratorSettings> settings) {
-        super(noiseRegistry, structuresRegistry, biomeSource, (seed == 0 || seed == 12345) ? WorldSeed.getSeed() : seed, settings);
+        super(noiseRegistry, structuresRegistry, biomeSource, WorldSeed.getSeed() + seed, settings);
     }
 
     @Override

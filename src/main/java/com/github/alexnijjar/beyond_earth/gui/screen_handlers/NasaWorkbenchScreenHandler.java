@@ -28,38 +28,38 @@ public class NasaWorkbenchScreenHandler extends AbstractMachineScreenHandler {
     public NasaWorkbenchScreenHandler(int syncId, PlayerInventory inventory, NasaWorkbenchBlockEntity entity) {
         super(ModScreenHandlers.NASA_WORKBENCH_SCREEN_HANDLER, syncId, inventory, entity, new Slot[] {
 
-                // Nose.
-                new Slot(entity, 0, 40, 18),
+                // Nose
+                new Slot(entity, 0, 56, 20),
 
-                // Body.
-                new Slot(entity, 1, 31, 18 * 2), //
-                new Slot(entity, 2, 49, 18 * 2), //
-                new Slot(entity, 3, 31, 18 * 3), //
-                new Slot(entity, 4, 49, 18 * 3), //
-                new Slot(entity, 5, 31, 18 * 4), //
-                new Slot(entity, 6, 49, 18 * 4), //
+                // Body
+                new Slot(entity, 1, 47, 18 * 2 + 2), //
+                new Slot(entity, 2, 65, 18 * 2 + 2), //
+                new Slot(entity, 3, 47, 18 * 3 + 2), //
+                new Slot(entity, 4, 65, 18 * 3 + 2), //
+                new Slot(entity, 5, 47, 18 * 4 + 2), //
+                new Slot(entity, 6, 65, 18 * 4 + 2), //
 
-                // Left fin.
-                new Slot(entity, 7, 13, 18 * 5),
+                // Left fin
+                new Slot(entity, 7, 29, 18 * 5 + 2),
 
-                // Tank.
-                new Slot(entity, 8, 31, 18 * 5), //
-                new Slot(entity, 9, 49, 18 * 5), //
+                // Tank
+                new Slot(entity, 8, 47, 18 * 5 + 2), //
+                new Slot(entity, 9, 65, 18 * 5 + 2), //
 
-                // Right fin.
-                new Slot(entity, 10, 67, 18 * 5),
+                // Right fin
+                new Slot(entity, 10, 83, 18 * 5 + 2),
 
-                // Left fin.
-                new Slot(entity, 11, 13, 18 * 6),
+                // Left fin
+                new Slot(entity, 11, 29, 18 * 6 + 2),
 
-                // Engine.
-                new Slot(entity, 12, 40, 18 * 6),
+                // Engine
+                new Slot(entity, 12, 56, 18 * 6 + 2),
 
-                // Right fin.
-                new Slot(entity, 13, 67, 18 * 6),
+                // Right fin
+                new Slot(entity, 13, 83, 18 * 6 + 2),
 
-                // Output.
-                new Slot(entity, 14, 133, 74) {
+                // Output
+                new Slot(entity, 14, 129, 56) {
                     @Override
                     public boolean canInsert(ItemStack stack) {
                         return false;

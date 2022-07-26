@@ -15,4 +15,9 @@ public class SolarPanelScreenHandler extends AbstractMachineScreenHandler {
     public SolarPanelScreenHandler(int syncId, PlayerInventory inventory, SolarPanelBlockEntity entity) {
         super(ModScreenHandlers.SOLAR_PANEL_SCREEN_HANDLER, syncId, inventory, entity);
     }
+
+    @Override
+    public int getPlayerInventoryOffset() {
+        return 62;
+    }
 }

@@ -24,10 +24,11 @@ public class Astrodux extends Item {
         if (user instanceof ServerPlayerEntity player) {
             if (ModUtils.modLoaded("patchouli")) {
                 PatchouliAPI.get().openBookGUI(player, new ModIdentifier("astrodux"));
+                return TypedActionResult.success(user.getStackInHand(hand));
             } else {
                 user.sendMessage(new TranslatableText("info.beyond_earth.install_patchouli"), true);
             }
         }
-        return TypedActionResult.success(user.getStackInHand(hand));
+        return TypedActionResult.fail(user.getStackInHand(hand));
     }
 }

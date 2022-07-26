@@ -83,8 +83,6 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
             } else {
                 if (player.isFallFlying()) {
                     player.stopFallFlying();
-                    if (!player.isCreative()) {
-                    }
                 }
             }
 
@@ -93,6 +91,7 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
     }
 
     public void hover(PlayerEntity player, ItemStack stack) {
+        player.fallDistance /= 2;
         if (!player.isCreative() && !this.tryUseEnergy(stack, JET_SUIT_ENERGY_PER_TICK)) {
             this.setStoredEnergy(stack, 0);
         }
@@ -106,6 +105,9 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
     }
 
     public void fallFly(PlayerEntity player, ItemStack stack) {
+        if (player.isOnGround()) {
+            player.fallDistance /= 2;
+        }
         if (!player.isCreative() && !this.tryUseEnergy(stack, JET_SUIT_ENERGY_PER_TICK * 2)) {
             this.setStoredEnergy(stack, 0);
         }

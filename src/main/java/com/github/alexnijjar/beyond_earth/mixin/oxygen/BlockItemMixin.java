@@ -31,7 +31,7 @@ public class BlockItemMixin {
         world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1, 1);
     }
 
-    @Inject(at = @At(value = "TAIL"), method = "place")
+    @Inject(method = "place", at = @At(value = "TAIL"))
     public void place(ItemPlacementContext context, CallbackInfoReturnable<ActionResult> info) {
         if (!BeyondEarth.CONFIG.world.doOxygen) {
             return;

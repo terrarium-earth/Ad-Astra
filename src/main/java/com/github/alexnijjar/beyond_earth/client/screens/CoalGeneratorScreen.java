@@ -19,14 +19,17 @@ public class CoalGeneratorScreen extends AbstractMachineScreen<CoalGeneratorScre
 
     private static final Identifier TEXTURE = new ModIdentifier("textures/gui/screens/coal_generator.png");
 
-    public static final int FIRE_LEFT = 77;
-    public static final int FIRE_TOP = 49;
+    public static final int FIRE_LEFT = 81;
+    public static final int FIRE_TOP = 57;
 
-    public static final int ENERGY_LEFT = 144;
-    public static final int ENERGY_TOP = 21;
+    public static final int ENERGY_LEFT = 146;
+    public static final int ENERGY_TOP = 28;
 
     public CoalGeneratorScreen(CoalGeneratorScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title, TEXTURE);
+        this.backgroundWidth = 176;
+        this.backgroundHeight = 177;
+        this.playerInventoryTitleY = this.backgroundHeight - 93;
     }
 
     @Override

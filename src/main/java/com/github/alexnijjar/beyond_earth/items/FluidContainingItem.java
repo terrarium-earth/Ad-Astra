@@ -35,8 +35,8 @@ public interface FluidContainingItem {
 
 	public default FluidVariant getFluid(ItemStack stack) {
 		NbtCompound nbt = stack.getOrCreateNbt();
-		if (nbt.contains("Fluid")) {
-			return FluidVariant.fromNbt(nbt.getCompound("Fluid"));
+		if (nbt.contains("fluid")) {
+			return FluidVariant.fromNbt(nbt.getCompound("fluid"));
 		} else {
 			return FluidVariant.blank();
 		}
@@ -44,13 +44,13 @@ public interface FluidContainingItem {
 
 	public default void setFluid(ItemStack stack, FluidVariant variant) {
 		NbtCompound nbt = stack.getOrCreateNbt();
-		nbt.put("Fluid", variant.toNbt());
+		nbt.put("fluid", variant.toNbt());
 	}
 
 	public default long getAmount(ItemStack stack) {
 		NbtCompound nbt = stack.getOrCreateNbt();
-		if (nbt.contains("Amount")) {
-			return nbt.getLong("Amount");
+		if (nbt.contains("amount")) {
+			return nbt.getLong("amount");
 		} else {
 			return 0;
 		}
@@ -58,7 +58,7 @@ public interface FluidContainingItem {
 
 	public default void setAmount(ItemStack stack, long amount) {
 		NbtCompound nbt = stack.getOrCreateNbt();
-		nbt.putLong("Amount", amount);
+		nbt.putLong("amount", amount);
 	}
 
 	public class TankStorage extends SingleVariantItemStorage<FluidVariant> {
@@ -101,11 +101,11 @@ public interface FluidContainingItem {
 			NbtCompound nbt = currentVariant.copyNbt();
 
 			if (nbt != null && !nbt.isEmpty()) {
-				if (nbt.contains("Fluid")) {
-					nbt.remove("Fluid");
+				if (nbt.contains("fluid")) {
+					nbt.remove("fluid");
 				}
-				if (nbt.contains("Amount")) {
-					nbt.remove("Amount");
+				if (nbt.contains("amount")) {
+					nbt.remove("amount");
 				}
 				stack.setNbt(nbt);
 			}

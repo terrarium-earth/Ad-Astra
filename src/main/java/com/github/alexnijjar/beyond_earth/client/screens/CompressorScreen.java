@@ -19,16 +19,16 @@ public class CompressorScreen extends AbstractMachineScreen<CompressorScreenHand
 
     private static final Identifier TEXTURE = new ModIdentifier("textures/gui/screens/compressor.png");
 
-    public static final int ENERGY_LEFT = 144;
-    public static final int ENERGY_TOP = 21;
-    public static final int ARROW_LEFT = 62;
-    public static final int ARROW_TOP = 36;
+    public static final int ENERGY_LEFT = 147;
+    public static final int ENERGY_TOP = 30;
+    public static final int HAMMER_LEFT = 67;
+    public static final int HAMMER_TOP = 63;
 
     public CompressorScreen(CompressorScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title, TEXTURE);
         this.backgroundWidth = 177;
-        this.backgroundHeight = 168;
-        this.playerInventoryTitleY = this.backgroundHeight - 92;
+        this.backgroundHeight = 196;
+        this.playerInventoryTitleY = this.backgroundHeight - 93;
     }
 
     @Override
@@ -37,7 +37,7 @@ public class CompressorScreen extends AbstractMachineScreen<CompressorScreenHand
 
         CompressorBlockEntity entity = (CompressorBlockEntity) blockEntity;
 
-        GuiUtil.drawArrow(matrices, this.x + ARROW_LEFT, this.y + ARROW_TOP, entity.getCookTime(), entity.getCookTimeTotal());
+        GuiUtil.drawHammer(matrices, this.x + HAMMER_LEFT, this.y + HAMMER_TOP, entity.getCookTime(), entity.getCookTimeTotal());
         GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration());
     }
 
@@ -53,7 +53,7 @@ public class CompressorScreen extends AbstractMachineScreen<CompressorScreenHand
         }
 
         // Burn time tooltip.
-        if (GuiUtil.isHovering(this.getArrowBounds(), mouseX, mouseY)) {
+        if (GuiUtil.isHovering(this.getHammerBounds(), mouseX, mouseY)) {
             this.renderTooltip(matrices, new TranslatableText("gauge.beyond_earth.cook_time", entity.getCookTime(), entity.getCookTimeTotal()), mouseX, mouseY);
         }
     }
@@ -62,7 +62,7 @@ public class CompressorScreen extends AbstractMachineScreen<CompressorScreenHand
         return GuiUtil.getEnergyBounds(this.x + ENERGY_LEFT, this.y + ENERGY_TOP);
     }
 
-    public Rectangle getArrowBounds() {
-        return GuiUtil.getArrowBounds(this.x + ARROW_LEFT, this.y + ARROW_TOP);
+    public Rectangle getHammerBounds() {
+        return GuiUtil.getHammerBounds(this.x + HAMMER_LEFT, this.y + HAMMER_TOP);
     }
 }

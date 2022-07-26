@@ -1,6 +1,6 @@
 {
     "name": "Mars",
-    "icon": "beyond_earth:/textures/sky/gui/mars.png",
+    "icon": "beyond_earth:/textures/sky/mars.png",
     "sortnum": 5,
     "category": "beyond_earth:the_moon",
     "pages": [

@@ -85,7 +85,7 @@ public class FluidUtils {
 			FluidVariant recipeInputVariant = FluidVariant.of(recipe.getFluidInput());
 			FluidVariant recipeOutputVariant = FluidVariant.of(recipe.getFluidOutput());
 			if (inputTankFluid.equals(recipeInputVariant)) {
-				if (convertAndMove(inventory.inputTank, inventory.outputTank, f -> true, millibucketsToDroplets(5), null, recipeOutputVariant, conversionRatio) > 0) {
+				if (convertAndMove(inventory.inputTank, inventory.outputTank, f -> true, millibucketsToDroplets(10), null, recipeOutputVariant, conversionRatio) > 0) {
 					return true;
 				}
 			}

@@ -14,10 +14,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 
 public class RoverItem extends VehicleItem {
@@ -53,14 +55,22 @@ public class RoverItem extends VehicleItem {
 
             ItemStack roverStack = context.getPlayer().getStackInHand(context.getHand());
             RoverEntity rover = new RoverEntity(ModEntityTypes.ROVER_TIER_1, world);
+
+            // Prevent placing rovers in rovers
+            Box scanAbove = new Box(pos.getX() - 2, pos.getY() - 2, pos.getZ() - 2, pos.getX() + 2, pos.getY() + 2, pos.getZ() + 2);
+            List<RoverEntity> entities = ((ServerWorld) world).getEntitiesByClass(RoverEntity.class, scanAbove, entity -> true);
+            if (!entities.isEmpty()) {
+                return ActionResult.PASS;
+            }
+
             NbtCompound nbt = roverStack.getOrCreateNbt();
-            if (nbt.contains("Fluid")) {
+            if (nbt.contains("fluid")) {
                 if (!this.getFluid(roverStack).isBlank()) {
                     this.insertIntoTank(rover.inputTank, roverStack);
                 }
             }
-            if (nbt.contains("Inventory")) {
-                rover.getInventory().readNbtList(nbt.getList("Inventory", NbtElement.COMPOUND_TYPE));
+            if (nbt.contains("inventory")) {
+                rover.getInventory().readNbtList(nbt.getList("inventory", NbtElement.COMPOUND_TYPE));
             }
             rover.setYaw(context.getPlayer().getYaw());
             rover.setPosition(context.getHitPos().add(0, 0, 1));

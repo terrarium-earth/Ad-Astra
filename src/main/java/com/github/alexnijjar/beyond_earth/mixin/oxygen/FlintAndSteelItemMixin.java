@@ -23,7 +23,7 @@ import net.minecraft.world.event.GameEvent;
 
 @Mixin(FlintAndSteelItem.class)
 public class FlintAndSteelItemMixin {
-    @Inject(at = @At(value = "HEAD"), method = "useOnBlock", cancellable = true)
+    @Inject(method = "useOnBlock", at = @At(value = "HEAD"), cancellable = true)
     public void useOnBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> ci) {
         if (!BeyondEarth.CONFIG.world.doOxygen) {
             return;

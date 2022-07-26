@@ -35,7 +35,7 @@ import net.minecraft.world.event.GameEvent;
 public class BucketItemMixin {
 
     // Evaporate water in a no-oxygen environment. Water is not evaporated in a oxygen distributor.
-    @Inject(at = @At(value = "HEAD"), method = "placeFluid", cancellable = true)
+    @Inject(method = "placeFluid", at = @At(value = "HEAD"), cancellable = true)
     public void placeFluid(PlayerEntity player, World world, BlockPos pos, BlockHitResult hitResult, CallbackInfoReturnable<Boolean> ci) {
         if (!BeyondEarth.CONFIG.world.doOxygen) {
             return;
