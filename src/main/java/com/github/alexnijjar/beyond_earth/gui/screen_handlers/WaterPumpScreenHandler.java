@@ -19,6 +19,6 @@ public class WaterPumpScreenHandler extends AbstractMachineScreenHandler {
 
     @Override
     public int getPlayerInventoryOffset() {
-        return 6;
+        return 14;
     }
 }

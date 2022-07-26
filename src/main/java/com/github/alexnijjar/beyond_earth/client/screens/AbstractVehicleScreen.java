@@ -45,9 +45,13 @@ public abstract class AbstractVehicleScreen<T extends AbstractVehicleScreenHandl
         drawMouseoverTooltip(matrices, mouseX, mouseY);
     }
 
+    public int getTextColour() {
+        return 0x404040;
+    }
+
     @Override
     protected void drawForeground(MatrixStack matrices, int mouseX, int mouseY) {
-        this.textRenderer.draw(matrices, this.title, (float)(this.titleX - textRenderer.getWidth(this.title) / 2), (float)this.titleY, 0x404040);
-        this.textRenderer.draw(matrices, this.playerInventoryTitle, (float) this.playerInventoryTitleX, (float) this.playerInventoryTitleY, 0x404040);
+        this.textRenderer.draw(matrices, this.title, (float)(this.titleX - textRenderer.getWidth(this.title) / 2), (float)this.titleY, this.getTextColour());
+        this.textRenderer.draw(matrices, this.playerInventoryTitle, (float) this.playerInventoryTitleX, (float) this.playerInventoryTitleY, this.getTextColour());
     }
 }

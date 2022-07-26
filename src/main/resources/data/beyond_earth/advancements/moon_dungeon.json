@@ -24,7 +24,7 @@
                         "entity": "this",
                         "predicate": {
                             "location": {
-                                "structure": "beyond_earth:moon_dungeon"
+                                "feature": "beyond_earth:moon_dungeon"
                             }
                         }
                     }

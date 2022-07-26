@@ -31,7 +31,7 @@ public class SoundManagerMixin {
 
     @Inject(method = "Lnet/minecraft/client/sound/SoundManager;play(Lnet/minecraft/client/sound/SoundInstance;I)V", at = @At("HEAD"), cancellable = true)
     public void play(SoundInstance sound, int delay, CallbackInfo ci) {
-       this.modifySound(sound, delay, ci);
+        this.modifySound(sound, delay, ci);
     }
 
     private void modifySound(SoundInstance sound, int delay, CallbackInfo ci) {
@@ -53,18 +53,20 @@ public class SoundManagerMixin {
         if (!BeyondEarth.CONFIG.world.doSpaceMuffler) {
             return;
         }
-        
+
         MinecraftClient client = MinecraftClient.getInstance();
         if (client.world == null) {
             return;
         }
 
-        boolean noOxygen = !OxygenUtils.worldHasOxygen(client.world, new BlockPos(sound.getX(), sound.getY(), sound.getZ()));
-        if (client.world != null && ModUtils.isOrbitWorld(client.world) && (noOxygen) || sound.getCategory().equals(SoundCategory.MUSIC)) {
-            ci.cancel();
-            SoundManager manager = (SoundManager) (Object) (this);
-            SoundInstance newSound = getSpaceSoundInstance(sound, (sound.getCategory().equals(SoundCategory.MUSIC) ? 1.0f : 0.1f), 0.1f);
-            manager.soundSystem.play(newSound);
+        if (ModUtils.isOrbitWorld(client.world)) {
+            boolean noOxygen = !OxygenUtils.worldHasOxygen(client.world, new BlockPos(sound.getX(), sound.getY(), sound.getZ()));
+            if (client.world != null && noOxygen || sound.getCategory().equals(SoundCategory.MUSIC)) {
+                ci.cancel();
+                SoundManager manager = (SoundManager) (Object) (this);
+                SoundInstance newSound = getSpaceSoundInstance(sound, (sound.getCategory().equals(SoundCategory.MUSIC) ? 1.0f : 0.1f), 0.1f);
+                manager.soundSystem.play(newSound);
+            }
         }
     }
 

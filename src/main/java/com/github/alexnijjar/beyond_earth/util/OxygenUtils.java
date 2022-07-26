@@ -24,6 +24,7 @@ import net.minecraft.block.CandleBlock;
 import net.minecraft.block.CandleCakeBlock;
 import net.minecraft.block.FarmlandBlock;
 import net.minecraft.block.FireBlock;
+import net.minecraft.block.GrassBlock;
 import net.minecraft.block.PlantBlock;
 import net.minecraft.block.TorchBlock;
 import net.minecraft.block.WallTorchBlock;
@@ -191,6 +192,11 @@ public class OxygenUtils {
 
             if (block instanceof CampfireBlock) {
                 world.setBlockState(pos, state.with(CampfireBlock.LIT, false).with(CampfireBlock.FACING, state.get(CampfireBlock.FACING)));
+                continue;
+            }
+
+            if (block instanceof GrassBlock) {
+                world.setBlockState(pos, Blocks.DIRT.getDefaultState());
                 continue;
             }
 

@@ -46,7 +46,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 
         // Textures.
         public static final Identifier BACKGROUND_TEXTURE = new ModIdentifier("textures/gui/screens/planet_selection.png");
-        public static final Identifier MILKY_WAY_TEXTURE = new ModIdentifier("textures/sky/gui/milky_way.png");
+        public static final Identifier MILKY_WAY_TEXTURE = new ModIdentifier("textures/sky/milky_way.png");
 
         public static final Identifier SMALL_MENU_LIST = new ModIdentifier("textures/gui/selection_menu.png");
         public static final Identifier LARGE_MENU_TEXTURE = new ModIdentifier("textures/gui/selection_menu_large.png");
@@ -189,7 +189,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                                                         break;
                                                 }
                                         }
-                                        ScreenUtils.addRotatingTexture(this, matrices, coordinates, coordinates, 10, 10, new ModIdentifier("textures/sky/gui/" + texture.getPath() + ".png"), 365 / (float) days);
+                                        ScreenUtils.addRotatingTexture(this, matrices, coordinates, coordinates, 10, 10, new ModIdentifier("textures/sky/" + texture.getPath() + ".png"), 365 / (float) days);
                                 }
                         }
                 }

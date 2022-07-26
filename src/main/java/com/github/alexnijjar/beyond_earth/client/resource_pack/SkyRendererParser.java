@@ -35,7 +35,7 @@ public class SkyRendererParser {
         int starR = dimensionEffectsObject.has("r") ? dimensionEffectsObject.get("r").getAsInt() : 255;
         int starG = dimensionEffectsObject.has("g") ? dimensionEffectsObject.get("g").getAsInt() : 255;
         int starB = dimensionEffectsObject.has("b") ? dimensionEffectsObject.get("b").getAsInt() : 255;
-        SkyRenderer.DimensionEffects effects = new SkyRenderer.DimensionEffects(dimensionEffectType, new ColourHolder(starR / 255.0f, starG / 255.0f, starB / 255.0f));
+        SkyRenderer.DimensionEffects effects = new SkyRenderer.DimensionEffects(dimensionEffectType, new ColourHolder(starR / 255.0f, starG / 255.0f, starB / 255.0f, 1.0f));
 
         SkyRenderer.CloudEffects cloudEffects = SkyRenderer.CloudEffects.valueOf(jsonObject.get("cloud_effects").getAsString().toUpperCase());
         SkyRenderer.WeatherEffects weatherEffects = SkyRenderer.WeatherEffects.valueOf(jsonObject.get("weather_effects").getAsString().toUpperCase());
@@ -55,9 +55,9 @@ public class SkyRendererParser {
                 int r = colourObject.has("r") ? colourObject.get("r").getAsInt() : 255;
                 int g = colourObject.has("g") ? colourObject.get("g").getAsInt() : 255;
                 int b = colourObject.has("b") ? colourObject.get("b").getAsInt() : 255;
-                colour = new ColourHolder(r, g, b);
+                colour = new ColourHolder(r, g, b, 255);
             } else {
-                colour = new ColourHolder(255, 255, 255);
+                colour = new ColourHolder(255, 255, 255, 255);
             }
 
             JsonObject rotationObject = skyObject.get("rotation").getAsJsonObject();

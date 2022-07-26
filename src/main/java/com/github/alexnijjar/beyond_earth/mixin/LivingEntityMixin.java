@@ -10,7 +10,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.VehicleEntity;
-import com.github.alexnijjar.beyond_earth.items.armour.JetSuit;
 import com.github.alexnijjar.beyond_earth.items.armour.NetheriteSpaceSuit;
 import com.github.alexnijjar.beyond_earth.items.armour.SpaceSuit;
 import com.github.alexnijjar.beyond_earth.registry.ModDamageSource;
@@ -46,11 +45,6 @@ public abstract class LivingEntityMixin {
         }
 
         if (fallDistance <= 3 / ModUtils.getPlanetGravity(entity.world)) {
-            ci.setReturnValue(false);
-        }
-
-        // Reduce fall damage if wearing a jet suit
-        if (fallDistance <= 20 && JetSuit.hasFullSet(entity)) {
             ci.setReturnValue(false);
         }
     }

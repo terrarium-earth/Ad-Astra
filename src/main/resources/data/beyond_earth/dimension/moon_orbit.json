@@ -2,7 +2,7 @@
   "type": "beyond_earth:moon_orbit",
   "generator": {
     "type": "beyond_earth:planet_noise",
-    "seed": 12345,
+    "seed": 8,
     "settings": {
       "sea_level": 63,
       "disable_mob_generation": false,

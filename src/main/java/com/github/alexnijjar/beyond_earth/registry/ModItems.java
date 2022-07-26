@@ -320,6 +320,7 @@ public interface ModItems {
 
         // Block Items
         public static final BlockItem STEEL_BLOCK = registerBlockItem(ModBlocks.STEEL_BLOCK);
+        public static final BlockItem CHEESE_BLOCK = registerBlockItem(ModBlocks.CHEESE_BLOCK);
         public static final BlockItem DESH_BLOCK = registerBlockItem(ModBlocks.DESH_BLOCK);
         public static final BlockItem OSTRUM_BLOCK = registerBlockItem(ModBlocks.OSTRUM_BLOCK);
         public static final BlockItem CALORITE_BLOCK = registerBlockItem(ModBlocks.CALORITE_BLOCK);

@@ -52,7 +52,7 @@ public class CustomButton extends ButtonWidget {
         this.buttonSize = size;
         ColourHolder colour = buttonColour.getColour();
         // The button becomes lightened when the mouse hovers over the button.
-        this.buttonColourLightened = new ColourHolder(colour.r() + 0.1f, colour.g() + 0.1f, colour.b() + 0.1f);
+        this.buttonColourLightened = new ColourHolder(colour.r() + 0.1f, colour.g() + 0.1f, colour.b() + 0.1f, colour.a());
         // This is the normal colour when the button is not being hovered over.
         this.buttonColour = colour;
         this.tooltip = tooltip;
@@ -97,7 +97,7 @@ public class CustomButton extends ButtonWidget {
                 RenderSystem.enableScissor(0, scissorY, (int) (215 * scale), (int) (127 * scale));
             }
 
-            RenderSystem.setShaderColor((over ? lightColour.r() : color.r()), (over ? lightColour.g() : color.g()), (over ? lightColour.b() : color.b()), 1.0f);
+            RenderSystem.setShaderColor((over ? lightColour.r() : color.r()), (over ? lightColour.g() : color.g()), (over ? lightColour.b() : color.b()), color.a());
             RenderSystem.setShaderTexture(0, switch (this.buttonSize) {
             case LARGE -> LARGE_BUTTON_TEXTURE;
             case NORMAL -> BUTTON_TEXTURE;

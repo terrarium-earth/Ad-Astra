@@ -26,7 +26,7 @@ public class LargeVehicleScreenHandler extends AbstractVehicleScreenHandler {
         super(ModScreenHandlers.LARGE_VEHICLE_SCREEN_HANDLER, syncId, inventory, entity, new Slot[] {
 
                 // Left input slot.
-                new NoInventorySlot(entity.getInventory(), 0, 8, 63) {
+                new NoInventorySlot(entity.getInventory(), 0, 20, 26) {
                     @Override
                     public boolean canInsert(ItemStack stack) {
                         if (!super.canInsert(stack)) {
@@ -37,7 +37,7 @@ public class LargeVehicleScreenHandler extends AbstractVehicleScreenHandler {
                     }
                 },
                 // Left output slot.
-                new Slot(entity.getInventory(), 1, 26, 63) {
+                new NoInventorySlot(entity.getInventory(), 1, 20, 56) {
                     @Override
                     public boolean canInsert(ItemStack stack) {
                         return false;
@@ -45,43 +45,41 @@ public class LargeVehicleScreenHandler extends AbstractVehicleScreenHandler {
                 },
 
                 // Inventory
-                new NoInventorySlot(entity.getInventory(), 2, 98, 15),
+                new NoInventorySlot(entity.getInventory(), 2, 86, 16),
                 //
-                new NoInventorySlot(entity.getInventory(), 3, 98 + 18, 15),
+                new NoInventorySlot(entity.getInventory(), 3, 86 + 18, 16),
                 //
-                new NoInventorySlot(entity.getInventory(), 4, 98 + 18 * 2, 15),
+                new NoInventorySlot(entity.getInventory(), 4, 86 + 18 * 2, 16),
                 //
-                new NoInventorySlot(entity.getInventory(), 5, 98 + 18 * 3, 15),
+                new NoInventorySlot(entity.getInventory(), 5, 86 + 18 * 3, 16),
                 //
-                new NoInventorySlot(entity.getInventory(), 6, 98, 33),
+                new NoInventorySlot(entity.getInventory(), 6, 86, 34),
                 //
-                new NoInventorySlot(entity.getInventory(), 7, 98 + 18, 33),
+                new NoInventorySlot(entity.getInventory(), 7, 86 + 18, 34),
                 //
-                new NoInventorySlot(entity.getInventory(), 8, 98 + 18 * 2, 33),
+                new NoInventorySlot(entity.getInventory(), 8, 86 + 18 * 2, 34),
                 //
-                new NoInventorySlot(entity.getInventory(), 9, 98 + 18 * 3, 33),
+                new NoInventorySlot(entity.getInventory(), 9, 86 + 18 * 3, 34),
                 //
-                new NoInventorySlot(entity.getInventory(), 10, 98, 51), 
+                new NoInventorySlot(entity.getInventory(), 10, 86, 52),
                 //
-                new NoInventorySlot(entity.getInventory(), 11, 98 + 18, 51), 
+                new NoInventorySlot(entity.getInventory(), 11, 86 + 18, 52),
                 //
-                new NoInventorySlot(entity.getInventory(), 12, 98 + 18 * 2, 51), 
+                new NoInventorySlot(entity.getInventory(), 12, 86 + 18 * 2, 52),
                 //
-                new NoInventorySlot(entity.getInventory(), 13, 98 + 18 * 3, 51), 
+                new NoInventorySlot(entity.getInventory(), 13, 86 + 18 * 3, 52),
                 //
-                new NoInventorySlot(entity.getInventory(), 14, 98, 69), 
+                new NoInventorySlot(entity.getInventory(), 14, 86, 70),
                 //
-                new NoInventorySlot(entity.getInventory(), 15, 98 + 18, 69), 
+                new NoInventorySlot(entity.getInventory(), 15, 86 + 18, 70),
                 //
-                new NoInventorySlot(entity.getInventory(), 16, 98 + 18 * 2, 69), 
+                new NoInventorySlot(entity.getInventory(), 16, 86 + 18 * 2, 70),
                 //
-                new NoInventorySlot(entity.getInventory(), 17, 98 + 18 * 3, 69), 
-                
-            });
+                new NoInventorySlot(entity.getInventory(), 17, 86 + 18 * 3, 70), });
     }
 
     @Override
     public int getPlayerInventoryOffset() {
-        return 9;
+        return 15;
     }
 }

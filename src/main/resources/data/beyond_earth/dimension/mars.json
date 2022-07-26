@@ -2,7 +2,7 @@
   "type": "beyond_earth:mars",
   "generator": {
     "type": "beyond_earth:planet_noise",
-    "seed": 12345,
+    "seed": 5,
     "settings": {
       "sea_level": 63,
       "disable_mob_generation": true,

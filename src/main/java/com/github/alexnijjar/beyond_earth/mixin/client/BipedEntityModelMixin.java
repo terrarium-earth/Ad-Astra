@@ -7,7 +7,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.github.alexnijjar.beyond_earth.entities.vehicles.VehicleEntity;
 import com.github.alexnijjar.beyond_earth.items.vehicles.VehicleItem;
-import com.github.alexnijjar.beyond_earth.registry.ModItems;
 
 import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.entity.EntityPose;
@@ -28,30 +27,27 @@ public abstract class BipedEntityModelMixin {
         }
     }
 
+    // Make it look like the player is holding the vehicle above their head
     @Inject(method = "setAngles", at = @At("TAIL"))
     public void setAnglesTail(LivingEntity livingEntity, float f, float g, float h, float i, float j, CallbackInfo ci) {
-        BipedEntityModel<PlayerEntity> model = ((BipedEntityModel<PlayerEntity>) (Object) this);
-        Item currentItem = livingEntity.getStackInHand(livingEntity.getActiveHand()).getItem();
-
-        if (currentItem != null) {
-            boolean mainHand = true;
-            if (!(currentItem instanceof VehicleItem)) {
-                mainHand = false;
-                currentItem = livingEntity.getOffHandStack().getItem();
-            }
-
-            if (!livingEntity.getPose().equals(EntityPose.SWIMMING)) {
-                if (currentItem instanceof VehicleItem || ModItems.TIER_1_ROVER.equals(currentItem)) {
-                    // Move the arms so that it looks like the player is holding the rocket in the air with both arms.
-                    if (mainHand) {
-                        model.rightArm.pitch = -2.8f;
-                        model.leftArm.pitch = model.rightArm.pitch;
-                    } else {
-                        model.leftArm.pitch = -2.8f;
-                        model.rightArm.pitch = model.leftArm.pitch;
-                    }
-                }
-            }
+        if (livingEntity.getPose().equals(EntityPose.SWIMMING)) {
+            return;
         }
+
+        BipedEntityModel<PlayerEntity> model = ((BipedEntityModel<PlayerEntity>) (Object) this);
+        Item mainHandItem = livingEntity.getMainHandStack().getItem();
+        Item offhandItem = livingEntity.getOffHandStack().getItem();
+
+
+        // Move the arms so that it looks like the player is holding the vehicle in the air with both arms.
+        if (mainHandItem instanceof VehicleItem) {
+            model.rightArm.pitch = -2.8f;
+            model.leftArm.pitch = model.rightArm.pitch;
+        } else if (offhandItem instanceof VehicleItem) {
+            model.leftArm.pitch = -2.8f;
+            model.rightArm.pitch = model.leftArm.pitch;
+        }
+
+        
     }
 }

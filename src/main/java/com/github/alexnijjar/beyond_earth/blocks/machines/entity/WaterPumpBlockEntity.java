@@ -76,13 +76,13 @@ public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
     @Override
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
-        this.waterExtracted = nbt.getLong("WaterExtracted");
+        this.waterExtracted = nbt.getLong("waterExtracted");
     }
 
     @Override
     public void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
-        nbt.putLong("WaterExtracted", this.waterExtracted);
+        nbt.putLong("waterExtracted", this.waterExtracted);
     }
 
     @Override

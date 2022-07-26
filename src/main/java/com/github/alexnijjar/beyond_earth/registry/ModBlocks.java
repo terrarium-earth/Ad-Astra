@@ -91,6 +91,7 @@ public interface ModBlocks {
 
         // Blocks
         public static final Block STEEL_BLOCK = register("steel_block", new Block(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
+        public static final Block CHEESE_BLOCK = register("cheese_block", new Block(FabricBlockSettings.copy(Blocks.SPONGE).sounds(BlockSoundGroup.SLIME)));
         public static final Block DESH_BLOCK = register("desh_block", new Block(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
         public static final Block OSTRUM_BLOCK = register("ostrum_block", new Block(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));
         public static final Block CALORITE_BLOCK = register("calorite_block", new Block(FabricBlockSettings.copy(Blocks.IRON_BLOCK)));

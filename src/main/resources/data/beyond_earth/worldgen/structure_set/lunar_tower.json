@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "beyond_earth:lunar_tower",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 1224436180,
+    "spacing": 29,
+    "separation": 12,
+    "type": "minecraft:random_spread"
+  }
+}

@@ -246,7 +246,7 @@ public class RocketEntity extends VehicleEntity {
 
     public void initiateLaunchSequenceFromServer() {
         initiateLaunchSequence();
-        world.playSoundFromEntity(null, this, ModSounds.ROCKET_LAUNCH_SOUND_EVENT, SoundCategory.AMBIENT, 1, 1);
+        world.playSound(null, this.getBlockPos(), ModSounds.ROCKET_LAUNCH_SOUND_EVENT, SoundCategory.AMBIENT, 1, 1);
     }
 
     // Synonymous on client and server.
@@ -351,6 +351,9 @@ public class RocketEntity extends VehicleEntity {
                 // Increase explosion power at a high speed.
                 tierMultiplier *= 1.25f;
             }
+            if (this.getY() <= BeyondEarth.CONFIG.rocket.atmosphereLeave) {
+                serverWorld.getPlayers().forEach(RocketEntity::stopRocketSoundForRider);
+            }
             this.explode(tierMultiplier);
         }
     }
@@ -374,5 +377,4 @@ public class RocketEntity extends VehicleEntity {
             return FluidConstants.BUCKET * 3;
         }
     }
-
 }
