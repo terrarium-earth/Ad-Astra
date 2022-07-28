@@ -6,11 +6,14 @@ import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
+import net.minecraft.client.render.entity.feature.HeadFeatureRenderer;
+import net.minecraft.client.render.entity.feature.VillagerHeldItemFeatureRenderer;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.village.VillagerProfession;
 
-public class LunarianEntityRenderer extends MobEntityRenderer<LunarianEntity, LunarianEntityModel> {
-    public static final Identifier TEXTURE = new ModIdentifier("textures/entities/lunarian/entity_lunarian.png");
+public class LunarianEntityRenderer extends MobEntityRenderer<LunarianEntity, LunarianEntityModel<LunarianEntity>> {
+    public static final Identifier TEXTURE = new ModIdentifier("textures/entities/lunarian/lunarian.png");
     public static final Identifier FARMER_TEXTURE = new ModIdentifier("textures/entities/lunarian/farmer_lunarian.png");
     public static final Identifier FISHERMAN_TEXTURE = new ModIdentifier("textures/entities/lunarian/fisherman_lunarian.png");
     public static final Identifier SHEPHERD_TEXTURE = new ModIdentifier("textures/entities/lunarian/shepherd_lunarian.png");
@@ -26,7 +29,9 @@ public class LunarianEntityRenderer extends MobEntityRenderer<LunarianEntity, Lu
     public static final Identifier MASON_TEXTURE = new ModIdentifier("textures/entities/lunarian/mason_lunarian.png");
 
     public LunarianEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, new LunarianEntityModel(context.getPart(LunarianEntityModel.LAYER_LOCATION)), 0.5f);
+        super(context, new LunarianEntityModel<>(context.getPart(LunarianEntityModel.LAYER_LOCATION)), 0.5f);
+        this.addFeature(new HeadFeatureRenderer<LunarianEntity, LunarianEntityModel<LunarianEntity>>(this, context.getModelLoader()));
+        this.addFeature(new VillagerHeldItemFeatureRenderer<LunarianEntity, LunarianEntityModel<LunarianEntity>>(this));
     }
 
     @Override
@@ -64,4 +69,14 @@ public class LunarianEntityRenderer extends MobEntityRenderer<LunarianEntity, Lu
         }
     }
 
+    protected void scale(LunarianEntity villagerEntity, MatrixStack matrixStack, float f) {
+        float g = 0.9375f;
+        if (villagerEntity.isBaby()) {
+            g *= 0.5f;
+            this.shadowRadius = 0.25f;
+        } else {
+            this.shadowRadius = 0.5f;
+        }
+        matrixStack.scale(g, g, g);
+    }
 }

@@ -1,6 +1,6 @@
 {
   "name": "beyond_earth:lunarian_village/entrance",
-  "fallback": "minecraft:empty",
+  "fallback": "beyond_earth:lunarian_village/end",
   "elements": [
     {
       "weight": 150,

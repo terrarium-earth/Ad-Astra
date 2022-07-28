@@ -1,6 +1,6 @@
 {
     "name": "beyond_earth:dungeon/moon/walkway",
-    "fallback": "minecraft:empty",
+    "fallback": "beyond_earth:dungeon/moon/end",
     "elements": [
       {
         "weight": 100,
