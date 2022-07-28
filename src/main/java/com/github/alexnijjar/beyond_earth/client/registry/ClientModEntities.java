@@ -11,7 +11,6 @@ import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.SulfurCree
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.ZombifiedMoglerEntityRenderer;
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.models.CorruptedLunarianEntityModel;
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.models.LunarianEntityModel;
-import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.models.LunarianWanderingTraderEntityModel;
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.models.MartianRaptorEntityModel;
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.models.MoglerEntityModel;
 import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.models.PygroEntityModel;
@@ -74,7 +73,6 @@ public class ClientModEntities {
         EntityModelLayerRegistry.registerModelLayer(PygroEntityModel.LAYER_LOCATION, PygroEntityModel::getModelData);
         EntityModelLayerRegistry.registerModelLayer(MoglerEntityModel.LAYER_LOCATION, MoglerEntityModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(SulfurCreeperEntityModel.LAYER_LOCATION, SulfurCreeperEntityModel::getTexturedModelData);
-        EntityModelLayerRegistry.registerModelLayer(LunarianWanderingTraderEntityModel.LAYER_LOCATION, LunarianWanderingTraderEntityModel::getTexturedModelData);
 
         // Machine Layers.
         EntityModelLayerRegistry.registerModelLayer(RocketEntityModelTier1.LAYER_LOCATION, RocketEntityModelTier1::getTexturedModelData);

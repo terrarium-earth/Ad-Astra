@@ -2,29 +2,27 @@ package com.github.alexnijjar.beyond_earth.registry;
 
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 import com.github.alexnijjar.beyond_earth.world.processor.StructureVoidProcessor;
-import com.github.alexnijjar.beyond_earth.world.structures.LunarianVillage;
-import com.github.alexnijjar.beyond_earth.world.structures.Meteor;
-import com.github.alexnijjar.beyond_earth.world.structures.MoonDungeon;
-import com.github.alexnijjar.beyond_earth.world.structures.OilWell;
-import com.github.alexnijjar.beyond_earth.world.structures.PygroVillage;
 import com.github.alexnijjar.beyond_earth.world.structures.SimpleStructure;
 
+import net.minecraft.structure.StructureGeneratorFactory;
 import net.minecraft.structure.processor.StructureProcessorType;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraft.world.gen.feature.StructurePoolFeatureConfig;
 
 public class ModStructures {
 
-    public static StructureFeature<StructurePoolFeatureConfig> LUNARIAN_VILLAGE = new LunarianVillage();
-    public static StructureFeature<StructurePoolFeatureConfig> MOON_DUNGEON = new MoonDungeon();
-    public static StructureFeature<StructurePoolFeatureConfig> MARS_TEMPLE = new SimpleStructure(StructurePoolFeatureConfig.CODEC);
-    public static StructureFeature<StructurePoolFeatureConfig> LUNAR_TOWER = new SimpleStructure(StructurePoolFeatureConfig.CODEC);
-    public static StructureFeature<StructurePoolFeatureConfig> METEOR = new Meteor(StructurePoolFeatureConfig.CODEC);
-    public static StructureFeature<StructurePoolFeatureConfig> OIL_WELL = new OilWell(StructurePoolFeatureConfig.CODEC);
-    public static StructureFeature<StructurePoolFeatureConfig> PYGRO_TOWER = new SimpleStructure(StructurePoolFeatureConfig.CODEC);
-    public static StructureFeature<StructurePoolFeatureConfig> PYGRO_VILLAGE = new PygroVillage();
-    public static StructureFeature<StructurePoolFeatureConfig> VENUS_BULLET = new SimpleStructure(StructurePoolFeatureConfig.CODEC);
+    public static StructureFeature<StructurePoolFeatureConfig> LUNARIAN_VILLAGE = new SimpleStructure(-20);
+    public static StructureFeature<StructurePoolFeatureConfig> MOON_DUNGEON = new SimpleStructure(-40, ModStructures::placeAwayFromLunarianVillage);
+    public static StructureFeature<StructurePoolFeatureConfig> MARS_TEMPLE = new SimpleStructure(0);
+    public static StructureFeature<StructurePoolFeatureConfig> LUNAR_TOWER = new SimpleStructure(0, ModStructures::placeAwayFromLunarianVillage);
+    public static StructureFeature<StructurePoolFeatureConfig> METEOR = new SimpleStructure(-20);
+    public static StructureFeature<StructurePoolFeatureConfig> OIL_WELL = new SimpleStructure(-10);
+    public static StructureFeature<StructurePoolFeatureConfig> PYGRO_TOWER = new SimpleStructure(0);
+    public static StructureFeature<StructurePoolFeatureConfig> PYGRO_VILLAGE = new SimpleStructure(0);
+    public static StructureFeature<StructurePoolFeatureConfig> VENUS_BULLET = new SimpleStructure(0);
 
     public static final StructureProcessorType<StructureVoidProcessor> STRUCTURE_VOID_PROCESSOR = () -> StructureVoidProcessor.CODEC;
 
@@ -45,5 +43,10 @@ public class ModStructures {
 
     public static void register(String id, StructureFeature<StructurePoolFeatureConfig> feature) {
         Registry.register(Registry.STRUCTURE_FEATURE, new ModIdentifier(id), feature);
+    }
+
+    private static boolean placeAwayFromLunarianVillage(StructureGeneratorFactory.Context<StructurePoolFeatureConfig> context) {
+        ChunkPos chunkpos = context.chunkPos();
+        return !context.chunkGenerator().method_41053(RegistryKey.of(Registry.STRUCTURE_SET_KEY, new ModIdentifier("lunarian_village")), context.seed(), chunkpos.x, chunkpos.z, 10);
     }
 }
