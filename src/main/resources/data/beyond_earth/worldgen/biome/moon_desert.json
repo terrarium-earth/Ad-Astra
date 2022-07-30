@@ -49,7 +49,12 @@
     [
       "minecraft:large_dripstone",
       "minecraft:dripstone_cluster",
-      "minecraft:pointed_dripstone"
+      "minecraft:pointed_dripstone",
+      "beyond_earth:moon_cheese_ore",
+      "beyond_earth:moon_soul_soil",
+      "beyond_earth:moon_ice_shard_ore",
+      "beyond_earth:moon_iron_ore",
+      "beyond_earth:moon_desh_ore"
     ]
   ]
 }

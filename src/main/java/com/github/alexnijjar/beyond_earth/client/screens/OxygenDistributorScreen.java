@@ -11,8 +11,8 @@ import com.github.alexnijjar.beyond_earth.client.screens.utils.CustomButton;
 import com.github.alexnijjar.beyond_earth.client.screens.utils.PlanetSelectionScreen.TooltipType;
 import com.github.alexnijjar.beyond_earth.client.screens.utils.ScreenUtils;
 import com.github.alexnijjar.beyond_earth.data.ButtonColour;
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.OxygenDistributorScreenHandler;
 import com.github.alexnijjar.beyond_earth.networking.ModC2SPackets;
+import com.github.alexnijjar.beyond_earth.screen.handler.OxygenDistributorScreenHandler;
 import com.github.alexnijjar.beyond_earth.util.FluidUtils;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 import com.github.alexnijjar.beyond_earth.util.OxygenUtils;
@@ -38,22 +38,22 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
     Text HIDE_TEXT = ScreenUtils.createText("hide");
 
     public static final int INPUT_TANK_LEFT = 50;
-    public static final int INPUT_TANK_TOP = 57;
+    public static final int INPUT_TANK_TOP = 80;
 
     public static final int OUTPUT_TANK_LEFT = 114;
-    public static final int OUTPUT_TANK_TOP = 57;
+    public static final int OUTPUT_TANK_TOP = 80;
 
     public static final int ENERGY_LEFT = 147;
-    public static final int ENERGY_TOP = 58;
+    public static final int ENERGY_TOP = 82;
 
     CustomButton visibleButton;
 
     public OxygenDistributorScreen(OxygenDistributorScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title, TEXTURE);
         this.backgroundWidth = 177;
-        this.backgroundHeight = 220;
+        this.backgroundHeight = 244;
         this.playerInventoryTitleY = this.backgroundHeight - 92;
-        this.titleY = 41;
+        this.titleY = 67;
 
     }
 
@@ -73,10 +73,10 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
         // Render a warning sign if there is an oxygen leak detected.
         boolean oxygenLeak = OxygenUtils.getOxygenBlocksCount(this.blockEntity.getWorld(), this.blockEntity.getPos()) >= BeyondEarth.CONFIG.oxygenDistributor.maxBlockChecks;
         if (oxygenLeak) {
-            ScreenUtils.addTexture(matrices, this.width / 2 - 85, this.height / 2 - 125, 14, 15, WARNING_SIGN);
+            ScreenUtils.addTexture(matrices, this.width / 2 - 85, this.height / 2 - 137, 14, 15, WARNING_SIGN);
         }
         if (OxygenUtils.getOxygenBlocksCount(this.blockEntity.getWorld(), this.blockEntity.getPos()) <= 0 && entity.hasEnergy() && entity.outputTank.amount > 0) {
-            ScreenUtils.addTexture(matrices, this.width / 2 - 67, this.height / 2 - 125, 14, 15, WARNING_SIGN);
+            ScreenUtils.addTexture(matrices, this.width / 2 - 67, this.height / 2 - 137, 14, 15, WARNING_SIGN);
         }
     }
 
@@ -86,17 +86,16 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
 
         FluidMachineBlockEntity entity = (FluidMachineBlockEntity) blockEntity;
 
-        // Energy tooltip.
         if (GuiUtil.isHovering(this.getEnergyBounds(), mouseX, mouseY)) {
-            this.renderTooltip(matrices, new TranslatableText("gauge_text.beyond_earth.storage", this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration()), mouseX, mouseY);
+            GuiUtil.drawEnergyTooltip(this, matrices, entity, mouseX, mouseY);
         }
 
         if (GuiUtil.isHovering(this.getInputTankBounds(), mouseX, mouseY)) {
-            this.renderTooltip(matrices, new TranslatableText("gauge_text.beyond_earth.liquid_storage", FluidUtils.dropletsToMillibuckets(entity.inputTank.getAmount()), FluidUtils.dropletsToMillibuckets(entity.inputTank.getCapacity())), mouseX, mouseY);
+            GuiUtil.drawTankTooltip(this, matrices, entity.inputTank, mouseX, mouseY);
         }
 
         if (GuiUtil.isHovering(this.getOutputTankBounds(), mouseX, mouseY)) {
-            this.renderTooltip(matrices, new TranslatableText("gauge_text.beyond_earth.liquid_storage", FluidUtils.dropletsToMillibuckets(entity.outputTank.getAmount()), FluidUtils.dropletsToMillibuckets(entity.outputTank.getCapacity())), mouseX, mouseY);
+            GuiUtil.drawTankTooltip(this, matrices, entity.outputTank, mouseX, mouseY);
         }
 
         int oxygenBlocksCount = OxygenUtils.getOxygenBlocksCount(this.blockEntity.getWorld(), this.blockEntity.getPos());
@@ -122,13 +121,24 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
     @Override
     protected void drawForeground(MatrixStack matrices, int mouseX, int mouseY) {
         super.drawForeground(matrices, mouseX, mouseY);
+        long oxygenBlocksCount = OxygenUtils.getOxygenBlocksCount(this.blockEntity.getWorld(), this.blockEntity.getPos());
         matrices.push();
         matrices.scale(0.75f, 0.75f, 0.75f);
         Text oxygenBlockText = new TranslatableText("gauge_text.beyond_earth.oxygen_blocks");
-        Text oxygenBlockAmount = Text.of(OxygenUtils.getOxygenBlocksCount(this.blockEntity.getWorld(), this.blockEntity.getPos()) + " / " + BeyondEarth.CONFIG.oxygenDistributor.maxBlockChecks);
+        Text oxygenBlockAmount = Text.of(oxygenBlocksCount + " / " + BeyondEarth.CONFIG.oxygenDistributor.maxBlockChecks);
         matrices.scale(1.2f, 1.2f, 1.2f);
-        this.textRenderer.draw(matrices, oxygenBlockText, 11, 8, 0x3B7A43);
-        this.textRenderer.draw(matrices, oxygenBlockAmount, 11, 21, 0x3B7A43);
+        int offset = 25;
+        this.textRenderer.draw(matrices, oxygenBlockText, 11, offset + 11, 0x68d975);
+        this.textRenderer.draw(matrices, oxygenBlockAmount, 11, offset + 24, 0x68d975);
+
+        OxygenDistributorBlockEntity entity = (OxygenDistributorBlockEntity) this.blockEntity;
+        long oxygenUsagePerTick = entity.getFluidToExtract(oxygenBlocksCount);
+        long energyUsagePerTick = entity.getEnergyToConsume(oxygenBlocksCount);
+
+        float oxygenUsageRounded = FluidUtils.dropletsToMillibucketsFloat(oxygenUsagePerTick);
+        oxygenUsageRounded = (float) (Math.round(oxygenUsageRounded * 100.0) / 100.0);
+        this.textRenderer.draw(matrices, new TranslatableText("gauge_text.beyond_earth.fluid_per_tick", oxygenUsageRounded), 11, offset + -5, 0x68d975);
+        this.textRenderer.draw(matrices, new TranslatableText("gauge_text.beyond_earth.energy_per_tick", energyUsagePerTick), 11, offset + -17, 0x68d975);
         matrices.pop();
     }
 
@@ -136,7 +146,7 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
     protected void init() {
         super.init();
         OxygenDistributorBlockEntity oxygenDistributor = ((OxygenDistributorBlockEntity) this.blockEntity);
-        visibleButton = new CustomButton(this.width / 2 + 10, this.height / 2 - 95, oxygenDistributor.shouldShowOxygen() ? HIDE_TEXT : SHOW_TEXT, ButtonType.STEEL, ButtonColour.WHITE, TooltipType.NONE, null, pressed -> {
+        visibleButton = new CustomButton(this.width / 2 + 10, this.height / 2 - 83, oxygenDistributor.shouldShowOxygen() ? HIDE_TEXT : SHOW_TEXT, ButtonType.STEEL, ButtonColour.WHITE, TooltipType.NONE, null, pressed -> {
             PacketByteBuf buf = PacketByteBufs.create();
             buf.writeIdentifier(this.blockEntity.getWorld().getRegistryKey().getValue());
             buf.writeBlockPos(this.blockEntity.getPos());
@@ -156,11 +166,11 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
     }
 
     public Rectangle getOxygenLeakWarningSignBounds() {
-        return new Rectangle(this.width / 2 - 85, this.height / 2 - 125, 14, 15);
+        return new Rectangle(this.width / 2 - 85, this.height / 2 - 137, 14, 15);
     }
 
     public Rectangle getBlockedWarningSignBounds() {
-        return new Rectangle(this.width / 2 - 67, this.height / 2 - 125, 14, 15);
+        return new Rectangle(this.width / 2 - 67, this.height / 2 - 137, 14, 15);
     }
 
     public Rectangle getEnergyBounds() {

@@ -1,26 +1,19 @@
 {
   "schemaVersion": 1,
   "id": "beyond_earth",
-  "version": "1.0.0",
+  "version": "1.0.2",
 
   "name": "Beyond Earth",
   "description": "Fly to Other Planets and Beyond!",
   "authors": [
-    "Alex Nijjar (Fabric Developer)",
-    "MrScautHD (Author)",
-    "ExistingEevee (Forge Developer)",
-    "Facu (Texturer)",
-    "Fizz (Texturer)",
-    "FritzHackenstein (Texturer)",
-    "jopken (Texturer)",
-    "Scarecrow (Modeler)",
-    "ShrekRightT*****le1 (Modeler)",
-    "Mvbz (Sound Artist)",
-    "Barracuda (Builder)",
-    "Solar (Builder)",
-    "SpaceStar (Builder)",
-    "Checheño (Builder)",
-    "Retr0 (Builder)"
+    "Alex Nijjar",
+    "MrScautHD",
+    "Facu",
+    "Fizz",
+    "FritzHackenstein",
+    "Barracuda",
+    "Checheño",
+    "SpaceStar"
   ],
   "contact": {
     "homepage": "https://modrinth.com/mod/beyond-earth-fabric",

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.alexnijjar.beyond_earth.client.registry.ClientModEntities;
+import com.github.alexnijjar.beyond_earth.client.registry.ClientModKeybindings;
 import com.github.alexnijjar.beyond_earth.client.registry.ClientModParticles;
 import com.github.alexnijjar.beyond_earth.client.registry.ClientModScreens;
 import com.github.alexnijjar.beyond_earth.client.registry.ClientModSkies;
@@ -75,6 +76,9 @@ public class BeyondEarthClient implements ClientModInitializer {
 
                 // Particles
                 ClientModParticles.register();
+
+                // Keybindings
+                ClientModKeybindings.register();
 
                 // Overlays
                 HudRenderCallback.EVENT.register(PlayerOverlayScreen::render);

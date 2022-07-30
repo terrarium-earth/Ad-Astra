@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
+import com.github.alexnijjar.beyond_earth.advancement.ModCriteria;
 import com.github.alexnijjar.beyond_earth.client.BeyondEarthClient;
 import com.github.alexnijjar.beyond_earth.data.Planet;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.LanderEntity;
@@ -166,6 +167,10 @@ public class ModUtils {
 
         if (foodOutput != null) {
             itemEntity.setStack(new ItemStack(foodOutput.getItem(), stack.getCount()));
+            ServerPlayerEntity playerEntity = (ServerPlayerEntity) itemEntity.world.getPlayerByUuid(itemEntity.getThrower());
+            if (playerEntity != null) {
+                ModCriteria.FOOD_COOKED_IN_ATMOSPHERE.trigger(playerEntity);
+            }
         }
     }
 

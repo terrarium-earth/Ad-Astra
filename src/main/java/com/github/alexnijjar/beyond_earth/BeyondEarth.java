@@ -17,7 +17,6 @@ import com.github.alexnijjar.beyond_earth.registry.ModEntityTypes;
 import com.github.alexnijjar.beyond_earth.registry.ModFeatures;
 import com.github.alexnijjar.beyond_earth.registry.ModFluids;
 import com.github.alexnijjar.beyond_earth.registry.ModItems;
-import com.github.alexnijjar.beyond_earth.registry.ModOres;
 import com.github.alexnijjar.beyond_earth.registry.ModPaintings;
 import com.github.alexnijjar.beyond_earth.registry.ModParticleTypes;
 import com.github.alexnijjar.beyond_earth.registry.ModRecipes;
@@ -68,7 +67,6 @@ public class BeyondEarth implements ModInitializer {
 
         // Worldgen.
         ModFeatures.register();
-        ModOres.register();
         ModStructures.register();
         Registry.register(Registry.CHUNK_GENERATOR, new ModIdentifier("planet_noise"), PlanetChunkGenerator.CODEC);
 

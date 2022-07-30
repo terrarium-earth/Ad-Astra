@@ -3,12 +3,11 @@ package com.github.alexnijjar.beyond_earth.items;
 import com.github.alexnijjar.beyond_earth.registry.ModBlocks;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.Direction;
 
-public class SolarPanelBlockItem extends BlockItem {
+public class SolarPanelBlockItem extends MachineBlockItem {
 
     public SolarPanelBlockItem(Block block, Settings settings) {
         super(block, settings);

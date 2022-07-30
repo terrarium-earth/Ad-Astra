@@ -3,9 +3,9 @@ package com.github.alexnijjar.beyond_earth.entities.vehicles;
 import javax.annotation.Nullable;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.gui.VehicleScreenHandlerFactory;
 import com.github.alexnijjar.beyond_earth.items.vehicles.VehicleItem;
 import com.github.alexnijjar.beyond_earth.registry.ModTags;
+import com.github.alexnijjar.beyond_earth.screen.VehicleScreenHandlerFactory;
 import com.github.alexnijjar.beyond_earth.util.CustomInventory;
 import com.github.alexnijjar.beyond_earth.util.FluidUtils;
 import com.github.alexnijjar.beyond_earth.util.OxygenUtils;

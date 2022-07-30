@@ -1,7 +1,7 @@
 package com.github.alexnijjar.beyond_earth.client.screens;
 
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.AbstractMachineBlockEntity;
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.AbstractMachineScreenHandler;
+import com.github.alexnijjar.beyond_earth.screen.handler.AbstractMachineScreenHandler;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.fabricmc.api.EnvType;

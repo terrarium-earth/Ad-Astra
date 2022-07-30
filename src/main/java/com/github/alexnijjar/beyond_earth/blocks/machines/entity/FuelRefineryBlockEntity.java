@@ -5,10 +5,10 @@ import java.util.List;
 import org.jetbrains.annotations.Nullable;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.ConversionScreenHandler;
 import com.github.alexnijjar.beyond_earth.recipes.FuelConversionRecipe;
 import com.github.alexnijjar.beyond_earth.registry.ModBlockEntities;
 import com.github.alexnijjar.beyond_earth.registry.ModRecipes;
+import com.github.alexnijjar.beyond_earth.screen.handler.ConversionScreenHandler;
 import com.github.alexnijjar.beyond_earth.util.FluidUtils;
 
 import net.minecraft.block.BlockState;
@@ -94,7 +94,7 @@ public class FuelRefineryBlockEntity extends FluidMachineBlockEntity {
 
             if (this.hasEnergy()) {
                 List<FuelConversionRecipe> recipes = ModRecipes.FUEL_CONVERSION_RECIPE.getRecipes(this.world);
-                if (FluidUtils.convertFluid(this, recipes)) {
+                if (FluidUtils.convertFluid(this, recipes, 10)) {
                     this.drainEnergy();
                     this.setActive(true);
                 } else {

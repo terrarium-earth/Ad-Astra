@@ -3,10 +3,10 @@ package com.github.alexnijjar.beyond_earth.blocks.machines.entity;
 import org.jetbrains.annotations.Nullable;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.CoalGeneratorScreenHandler;
 import com.github.alexnijjar.beyond_earth.recipes.CookingRecipe;
 import com.github.alexnijjar.beyond_earth.registry.ModBlockEntities;
 import com.github.alexnijjar.beyond_earth.registry.ModRecipes;
+import com.github.alexnijjar.beyond_earth.screen.handler.CoalGeneratorScreenHandler;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;

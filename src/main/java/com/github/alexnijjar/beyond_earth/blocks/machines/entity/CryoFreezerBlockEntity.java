@@ -3,11 +3,11 @@ package com.github.alexnijjar.beyond_earth.blocks.machines.entity;
 import javax.annotation.Nullable;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.CryoFreezerScreenHandler;
 import com.github.alexnijjar.beyond_earth.recipes.CryoFuelConversionRecipe;
 import com.github.alexnijjar.beyond_earth.recipes.ModRecipeType;
 import com.github.alexnijjar.beyond_earth.registry.ModBlockEntities;
 import com.github.alexnijjar.beyond_earth.registry.ModRecipes;
+import com.github.alexnijjar.beyond_earth.screen.handler.CryoFreezerScreenHandler;
 import com.github.alexnijjar.beyond_earth.util.FluidUtils;
 
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;

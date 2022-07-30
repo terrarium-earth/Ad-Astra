@@ -1,7 +1,6 @@
 package com.github.alexnijjar.beyond_earth.util;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
@@ -9,6 +8,7 @@ import com.github.alexnijjar.beyond_earth.client.registry.ClientModKeybindings;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 
@@ -17,7 +17,7 @@ import net.minecraft.entity.player.PlayerEntity;
  * an instance of this class. Then, when a specific player presses a key, it's only pressed for that player's UUID.
  */
 public class ModKeyBindings {
-    public static final Map<UUID, ModKeyBindings> PLAYER_KEYS = new HashMap<>();
+    public static final HashMap<UUID, ModKeyBindings> PLAYER_KEYS = new HashMap<>();
 
     private boolean clickingJump;
     private boolean clickingSprint;
@@ -125,5 +125,13 @@ public class ModKeyBindings {
         case "right" -> PLAYER_KEYS.get(uuid).clickingRight = keyDown;
         default -> BeyondEarth.LOGGER.warn("Invalid Keypress on server packet: " + key);
         }
+    }
+
+    static {
+        ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> {
+            if (PLAYER_KEYS.containsKey(handler.getPlayer().getUuid())) {
+                PLAYER_KEYS.remove(handler.getPlayer().getUuid());
+            }
+        });
     }
 }

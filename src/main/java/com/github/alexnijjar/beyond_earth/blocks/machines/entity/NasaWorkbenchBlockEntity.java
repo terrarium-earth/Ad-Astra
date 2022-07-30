@@ -5,10 +5,10 @@ import java.util.List;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.NasaWorkbenchScreenHandler;
 import com.github.alexnijjar.beyond_earth.recipes.NasaWorkbenchRecipe;
 import com.github.alexnijjar.beyond_earth.registry.ModBlockEntities;
 import com.github.alexnijjar.beyond_earth.registry.ModRecipes;
+import com.github.alexnijjar.beyond_earth.screen.handler.NasaWorkbenchScreenHandler;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
 import net.minecraft.block.BlockState;

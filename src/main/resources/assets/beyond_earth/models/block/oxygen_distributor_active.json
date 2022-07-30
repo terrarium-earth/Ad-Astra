@@ -5,7 +5,7 @@
     "up": "beyond_earth:block/vent_back",
     "north": "beyond_earth:block/oxygen_distributor_front_active",
     "east": "beyond_earth:block/oxygen_distributor_side",
-    "south": "beyond_earth:block/steel_machine_side",
+    "south": "beyond_earth:block/oxygen_distributor_side",
     "west": "beyond_earth:block/oxygen_distributor_side",
     "particle": "beyond_earth:block/oxygen_distributor_front_active"
   }

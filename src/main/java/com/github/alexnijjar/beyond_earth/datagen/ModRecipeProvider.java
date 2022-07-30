@@ -33,10 +33,10 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 
 		// Blasting + Smelting
 		offerBlastingRecipe(exporter, Items.IRON_INGOT, ModItems.STEEL_INGOT);
-		offerBlastingRecipe(exporter, ImmutableList.of(MOON_DESH_ORE, ModItems.RAW_DESH), ModItems.DESH_INGOT);
-		offerBlastingRecipe(exporter, ImmutableList.of(MARS_OSTRUM_ORE, ModItems.RAW_OSTRUM), ModItems.OSTRUM_INGOT);
-		offerBlastingRecipe(exporter, ImmutableList.of(VENUS_CALORITE_ORE, ModItems.RAW_CALORITE), ModItems.CALORITE_INGOT);
-		offerBlastingRecipe(exporter, ImmutableList.of(MOON_ICE_SHARD_ORE, MARS_ICE_SHARD_ORE, GLACIO_ICE_SHARD_ORE), ModItems.ICE_SHARD);
+		offerBlastingRecipe(exporter, ImmutableList.of(DEEPSLATE_DESH_ORE, MOON_DESH_ORE, ModItems.RAW_DESH), ModItems.DESH_INGOT);
+		offerBlastingRecipe(exporter, ImmutableList.of(DEEPSLATE_OSTRUM_ORE, MARS_OSTRUM_ORE, ModItems.RAW_OSTRUM), ModItems.OSTRUM_INGOT);
+		offerBlastingRecipe(exporter, ImmutableList.of(DEEPSLATE_CALORITE_ORE, VENUS_CALORITE_ORE, ModItems.RAW_CALORITE), ModItems.CALORITE_INGOT);
+		offerBlastingRecipe(exporter, ImmutableList.of(DEEPSLATE_ICE_SHARD_ORE, MOON_ICE_SHARD_ORE, MARS_ICE_SHARD_ORE, GLACIO_ICE_SHARD_ORE), ModItems.ICE_SHARD);
 
 		offerBlastingRecipe(exporter, MOON_CHEESE_ORE, ModItems.CHEESE);
 		offerBlastingRecipe(exporter, ImmutableList.of(VENUS_COAL_ORE, GLACIO_COAL_ORE), Items.COAL);

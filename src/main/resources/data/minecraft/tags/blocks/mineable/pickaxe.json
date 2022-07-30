@@ -175,6 +175,10 @@
     "beyond_earth:calorite_plating_pressure_plate",
     "beyond_earth:steel_door",
     "beyond_earth:permafrost_brick_stairs",
-    "beyond_earth:permafrost_brick_slab"
+    "beyond_earth:permafrost_brick_slab",
+    "beyond_earth:deepslate_ice_shard_ore",
+    "beyond_earth:deepslate_desh_ore",
+    "beyond_earth:deepslate_ostrum_ore",
+    "beyond_earth:deepslate_calorite_ore"
   ]
 }

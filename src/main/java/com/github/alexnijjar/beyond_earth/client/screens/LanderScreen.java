@@ -1,6 +1,6 @@
 package com.github.alexnijjar.beyond_earth.client.screens;
 
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.LanderScreenHandler;
+import com.github.alexnijjar.beyond_earth.screen.handler.LanderScreenHandler;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 
 import net.fabricmc.api.EnvType;

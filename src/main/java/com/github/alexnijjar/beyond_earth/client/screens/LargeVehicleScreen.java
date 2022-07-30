@@ -2,8 +2,7 @@ package com.github.alexnijjar.beyond_earth.client.screens;
 
 import java.awt.Rectangle;
 
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.LargeVehicleScreenHandler;
-import com.github.alexnijjar.beyond_earth.util.FluidUtils;
+import com.github.alexnijjar.beyond_earth.screen.handler.LargeVehicleScreenHandler;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 
 import net.fabricmc.api.EnvType;
@@ -11,7 +10,6 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
@@ -42,8 +40,7 @@ public class LargeVehicleScreen extends AbstractVehicleScreen<LargeVehicleScreen
         super.render(matrices, mouseX, mouseY, delta);
 
         if (GuiUtil.isHovering(this.getInputTankBounds(), mouseX, mouseY)) {
-            this.renderTooltip(matrices, new TranslatableText("gauge_text.beyond_earth.liquid_storage", FluidUtils.dropletsToMillibuckets(this.vehicle.getFluidAmount()), FluidUtils.dropletsToMillibuckets(this.vehicle.inputTank.getCapacity())), mouseX,
-                    mouseY);
+            GuiUtil.drawTankTooltip(this, matrices, this.vehicle.inputTank, mouseX, mouseY);
         }
     }
 

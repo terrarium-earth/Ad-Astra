@@ -29,20 +29,21 @@ public class ClientModKeybindings {
     private static boolean sentLeftPacket;
     private static boolean sentRightPacket;
 
-    static {
+    public static void register() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
 
-            if (client.world != null && client.player != null) {
-
-                if (client.options.jumpKey.isPressed()) {
-                    if (client.player.getVehicle() instanceof RocketEntity rocket) {
-                        if (!rocket.isFlying()) {
-                            if (rocket.getFluidAmount() >= RocketEntity.getRequiredAmountForLaunch(rocket.getFluidVariant())) {
-                                PacketByteBuf buf = PacketByteBufs.create();
-                                buf.writeInt(rocket.getId());
-                                ClientPlayNetworking.send(ModC2SPackets.LAUNCH_ROCKET, buf);
-                            } else if (sentJumpPacket) {
-                                client.player.sendMessage(new TranslatableText("message.beyond_earth.no_fuel"), false);
+            if (client.world != null) {
+                if (client.player != null) {
+                    if (client.options.jumpKey.isPressed()) {
+                        if (client.player.getVehicle() instanceof RocketEntity rocket) {
+                            if (!rocket.isFlying()) {
+                                if (rocket.getFluidAmount() >= RocketEntity.getRequiredAmountForLaunch(rocket.getFluidVariant())) {
+                                    PacketByteBuf buf = PacketByteBufs.create();
+                                    buf.writeInt(rocket.getId());
+                                    ClientPlayNetworking.send(ModC2SPackets.LAUNCH_ROCKET, buf);
+                                } else if (sentJumpPacket) {
+                                    client.player.sendMessage(new TranslatableText("message.beyond_earth.no_fuel"), false);
+                                }
                             }
                         }
                     }
