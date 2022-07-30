@@ -22,6 +22,10 @@
     "beyond_earth:energizer",
     "beyond_earth:cryo_freezer",
     "beyond_earth:oxygen_sensor",
-    "beyond_earth:steel_door"
+    "beyond_earth:steel_door",
+    "beyond_earth:deepslate_ice_shard_ore",
+    "beyond_earth:deepslate_desh_ore",
+    "beyond_earth:deepslate_ostrum_ore",
+    "beyond_earth:deepslate_calorite_ore"
   ]
 }

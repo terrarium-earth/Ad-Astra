@@ -1,17 +1,17 @@
 package com.github.alexnijjar.beyond_earth.registry;
 
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.CoalGeneratorScreenHandler;
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.CompressorScreenHandler;
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.ConversionScreenHandler;
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.CryoFreezerScreenHandler;
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.LanderScreenHandler;
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.LargeVehicleScreenHandler;
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.NasaWorkbenchScreenHandler;
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.OxygenDistributorScreenHandler;
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.PlanetSelectionScreenHandler;
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.SolarPanelScreenHandler;
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.VehicleScreenHandler;
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.WaterPumpScreenHandler;
+import com.github.alexnijjar.beyond_earth.screen.handler.CoalGeneratorScreenHandler;
+import com.github.alexnijjar.beyond_earth.screen.handler.CompressorScreenHandler;
+import com.github.alexnijjar.beyond_earth.screen.handler.ConversionScreenHandler;
+import com.github.alexnijjar.beyond_earth.screen.handler.CryoFreezerScreenHandler;
+import com.github.alexnijjar.beyond_earth.screen.handler.LanderScreenHandler;
+import com.github.alexnijjar.beyond_earth.screen.handler.LargeVehicleScreenHandler;
+import com.github.alexnijjar.beyond_earth.screen.handler.NasaWorkbenchScreenHandler;
+import com.github.alexnijjar.beyond_earth.screen.handler.OxygenDistributorScreenHandler;
+import com.github.alexnijjar.beyond_earth.screen.handler.PlanetSelectionScreenHandler;
+import com.github.alexnijjar.beyond_earth.screen.handler.SolarPanelScreenHandler;
+import com.github.alexnijjar.beyond_earth.screen.handler.VehicleScreenHandler;
+import com.github.alexnijjar.beyond_earth.screen.handler.WaterPumpScreenHandler;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;

@@ -1,0 +1,13 @@
+{
+  "type": "beyond_earth:infernal_spire_column",
+  "config": {
+    "reach": 1,
+    "height": {
+      "type": "minecraft:uniform",
+      "value": {
+        "min_inclusive": 1,
+        "max_inclusive": 4
+      }
+    }
+  }
+}

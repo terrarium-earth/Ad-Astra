@@ -1,6 +1,6 @@
 package com.github.alexnijjar.beyond_earth.client.screens;
 
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.NasaWorkbenchScreenHandler;
+import com.github.alexnijjar.beyond_earth.screen.handler.NasaWorkbenchScreenHandler;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 
 import net.fabricmc.api.EnvType;

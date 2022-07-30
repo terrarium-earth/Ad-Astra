@@ -72,7 +72,7 @@ public abstract class LivingEntityMixin {
             boolean isCreative = false;
 
             if (entity instanceof PlayerEntity player) {
-                isCreative = player.isCreative();
+                isCreative = player.isCreative() || player.isSpectator();
             }
 
             if (ModUtils.checkTag(entity, ModTags.FIRE_IMMUNE)) {

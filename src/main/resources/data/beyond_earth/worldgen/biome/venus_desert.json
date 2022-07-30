@@ -61,5 +61,14 @@
       "minecraft:canyon"
     ]
   },
-  "features": []
+  "features": [
+    [
+      "minecraft:patch_soul_fire",
+      "minecraft:spring_closed_double",
+      "beyond_earth:venus_coal_ore",
+      "beyond_earth:venus_gold_ore",
+      "beyond_earth:venus_diamond_ore",
+      "beyond_earth:venus_calorite_ore"
+    ]
+  ]
 }

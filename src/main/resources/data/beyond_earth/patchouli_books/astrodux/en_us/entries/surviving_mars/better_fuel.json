@@ -12,11 +12,17 @@
         },
         {
             "type": "patchouli:text",
-            "text": "It's created by collecting ice shards, which are found as an ore underground on cold planets. The ice shard then needs to be inserted into a Cryo Freezer, and it will convert to 30 mB of Cryo Fuel. Alternatively, you can convert ice, packed ice and blue ice to fuel."
+            "text": "It's created by collecting ice shards, which are found as an ore underground on cold planets. The ice shard then needs to be inserted into a Cryo Freezer, and it will convert to 25 mB of Cryo Fuel. Alternatively, you can convert ice, packed ice and blue ice to fuel. Once you've made at least two buckets (one for a launch and the other for a return trip), place the buckets in the rocket fuel slot."
         },
         {
             "type": "patchouli:crafting",
             "recipe": "beyond_earth:recipes/cryo_freezer"
+        },
+        {
+            "type": "patchouli:spotlight",
+            "title": "Cryo Fuel",
+            "item": "beyond_earth:cryo_fuel_bucket",
+            "text": "In addition to being an excellent fuel, cryo fuel has some other features. When placed, it will damage anything inside, similar to lava. It can be placed in space and the nether without evaporating. Lastly, it freezes water, allowing for an infinite ice source."
         }
     ]
 }

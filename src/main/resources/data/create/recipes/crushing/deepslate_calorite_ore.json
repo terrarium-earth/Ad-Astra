@@ -1,0 +1,33 @@
+{
+    "fabric:load_conditions": [
+        {
+            "condition": "fabric:all_mods_loaded",
+            "values": [
+                "create"
+            ]
+        }
+    ],
+    "type": "create:crushing",
+    "ingredients": [
+        {
+            "item": "beyond_earth:deepslate_calorite_ore"
+        }
+    ],
+    "results": [
+        {
+            "item": "beyond_earth:raw_calorite",
+            "count": 2
+        },
+        {
+            "item": "beyond_earth:raw_calorite",
+            "count": 1,
+            "chance": 0.25
+        },
+        {
+            "item": "minecraft:deepslate",
+            "count": 1,
+            "chance": 0.125
+        }
+    ],
+    "processingTime": 300
+}

@@ -1,8 +1,8 @@
 package com.github.alexnijjar.beyond_earth.entities.vehicles;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.gui.LargeVehicleScreenHandlerFactory;
 import com.github.alexnijjar.beyond_earth.registry.ModItems;
+import com.github.alexnijjar.beyond_earth.screen.LargeVehicleScreenHandlerFactory;
 import com.github.alexnijjar.beyond_earth.util.ModKeyBindings;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 

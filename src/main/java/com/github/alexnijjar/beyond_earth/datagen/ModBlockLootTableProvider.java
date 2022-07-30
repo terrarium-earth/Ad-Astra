@@ -37,17 +37,21 @@ class ModBlockLootTableProvider extends FabricBlockLootTableProvider implements 
 		this.addDrop(MARS_IRON_ORE, block -> BlockLootTableGenerator.oreDrops(block, Items.RAW_IRON));
 		this.addDrop(MARS_ICE_SHARD_ORE, block -> BlockLootTableGenerator.oreDrops(block, ModItems.ICE_SHARD));
 		this.addDrop(MARS_DIAMOND_ORE, block -> BlockLootTableGenerator.oreDrops(block, Items.DIAMOND));
-		this.addDrop(MARS_OSTRUM_ORE, block -> BlockLootTableGenerator.oreDrops(block,ModItems.RAW_OSTRUM));
+		this.addDrop(MARS_OSTRUM_ORE, block -> BlockLootTableGenerator.oreDrops(block, ModItems.RAW_OSTRUM));
 		this.addDrop(MARS_ICE_SHARD_ORE, block -> BlockLootTableGenerator.oreDrops(block, ModItems.ICE_SHARD));
 		this.addDrop(MERCURY_IRON_ORE, block -> BlockLootTableGenerator.oreDrops(block, Items.RAW_IRON));
 		this.addDrop(VENUS_COAL_ORE, block -> BlockLootTableGenerator.oreDrops(block, Items.COAL));
 		this.addDrop(VENUS_GOLD_ORE, block -> BlockLootTableGenerator.oreDrops(block, Items.RAW_GOLD));
-		this.addDrop(VENUS_DIAMOND_ORE, block -> BlockLootTableGenerator.oreDrops(block,Items.DIAMOND));
-		this.addDrop(VENUS_CALORITE_ORE, block -> BlockLootTableGenerator.oreDrops(block,ModItems.RAW_CALORITE));
+		this.addDrop(VENUS_DIAMOND_ORE, block -> BlockLootTableGenerator.oreDrops(block, Items.DIAMOND));
+		this.addDrop(VENUS_CALORITE_ORE, block -> BlockLootTableGenerator.oreDrops(block, ModItems.RAW_CALORITE));
 		this.addDrop(GLACIO_ICE_SHARD_ORE, block -> BlockLootTableGenerator.oreDrops(block, ModItems.ICE_SHARD));
 		this.addDrop(GLACIO_COAL_ORE, block -> BlockLootTableGenerator.oreDrops(block, Items.COAL));
 		this.addDrop(GLACIO_COPPER_ORE, BlockLootTableGenerator::copperOreDrops);
 		this.addDrop(GLACIO_IRON_ORE, block -> BlockLootTableGenerator.oreDrops(block, Items.RAW_IRON));
 		this.addDrop(GLACIO_LAPIS_ORE, BlockLootTableGenerator::lapisOreDrops);
+		this.addDrop(DEEPSLATE_ICE_SHARD_ORE, block -> BlockLootTableGenerator.oreDrops(block, ModItems.ICE_SHARD));
+		this.addDrop(DEEPSLATE_DESH_ORE, block -> BlockLootTableGenerator.oreDrops(block, ModItems.RAW_DESH));
+		this.addDrop(DEEPSLATE_OSTRUM_ORE, block -> BlockLootTableGenerator.oreDrops(block, ModItems.RAW_OSTRUM));
+		this.addDrop(DEEPSLATE_CALORITE_ORE, block -> BlockLootTableGenerator.oreDrops(block, ModItems.RAW_CALORITE));
 	}
 }

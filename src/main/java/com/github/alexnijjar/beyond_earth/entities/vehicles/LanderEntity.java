@@ -1,7 +1,7 @@
 package com.github.alexnijjar.beyond_earth.entities.vehicles;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.gui.LanderScreenHandlerFactory;
+import com.github.alexnijjar.beyond_earth.screen.LanderScreenHandlerFactory;
 import com.github.alexnijjar.beyond_earth.util.ModKeyBindings;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
