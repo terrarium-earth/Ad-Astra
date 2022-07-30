@@ -3,7 +3,7 @@ package com.github.alexnijjar.beyond_earth.client.screens;
 import java.awt.Rectangle;
 
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.CompressorBlockEntity;
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.CompressorScreenHandler;
+import com.github.alexnijjar.beyond_earth.screen.handler.CompressorScreenHandler;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 
 import net.fabricmc.api.EnvType;
@@ -47,9 +47,8 @@ public class CompressorScreen extends AbstractMachineScreen<CompressorScreenHand
 
         CompressorBlockEntity entity = (CompressorBlockEntity) blockEntity;
 
-        // Energy tooltip.
         if (GuiUtil.isHovering(this.getEnergyBounds(), mouseX, mouseY)) {
-            this.renderTooltip(matrices, new TranslatableText("gauge_text.beyond_earth.storage", this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration()), mouseX, mouseY);
+            GuiUtil.drawEnergyTooltip(this, matrices, entity, mouseX, mouseY);
         }
 
         // Burn time tooltip.

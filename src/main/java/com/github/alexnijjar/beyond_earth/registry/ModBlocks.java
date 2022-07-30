@@ -256,6 +256,10 @@ public interface ModBlocks {
         public static final Block GLACIO_COPPER_ORE = register("glacio_copper_ore", new OreBlock(FabricBlockSettings.copy(Blocks.IRON_ORE)), true);
         public static final Block GLACIO_IRON_ORE = register("glacio_iron_ore", new OreBlock(FabricBlockSettings.copy(Blocks.IRON_ORE)), true);
         public static final Block GLACIO_LAPIS_ORE = register("glacio_lapis_ore", new OreBlock(FabricBlockSettings.copy(Blocks.IRON_ORE), UniformIntProvider.create(2, 5)), true);
+        public static final Block DEEPSLATE_ICE_SHARD_ORE = register("deepslate_ice_shard_ore", new OreBlock(FabricBlockSettings.copy(Blocks.DEEPSLATE_IRON_ORE), UniformIntProvider.create(3, 6)), true);
+        public static final Block DEEPSLATE_DESH_ORE = register("deepslate_desh_ore", new OreBlock(FabricBlockSettings.copy(Blocks.DEEPSLATE_IRON_ORE)), true);
+        public static final Block DEEPSLATE_OSTRUM_ORE = register("deepslate_ostrum_ore", new OreBlock(FabricBlockSettings.copy(Blocks.DEEPSLATE_IRON_ORE)), true);
+        public static final Block DEEPSLATE_CALORITE_ORE = register("deepslate_calorite_ore", new OreBlock(FabricBlockSettings.copy(Blocks.DEEPSLATE_IRON_ORE)), true);
 
         public static Block register(String id, Block block) {
                 return register(id, block, false);

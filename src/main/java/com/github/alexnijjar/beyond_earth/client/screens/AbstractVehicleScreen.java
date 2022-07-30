@@ -1,7 +1,7 @@
 package com.github.alexnijjar.beyond_earth.client.screens;
 
 import com.github.alexnijjar.beyond_earth.entities.vehicles.VehicleEntity;
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.AbstractVehicleScreenHandler;
+import com.github.alexnijjar.beyond_earth.screen.handler.AbstractVehicleScreenHandler;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.fabricmc.api.EnvType;

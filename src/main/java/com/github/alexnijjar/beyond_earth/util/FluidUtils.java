@@ -33,6 +33,14 @@ public class FluidUtils {
 		return millibuckets * 81;
 	}
 
+	public static float dropletsToMillibucketsFloat(long droplets) {
+		return droplets / 81.0f;
+	}
+
+	public static float millibucketsToDropletsFloat(long millibuckets) {
+		return millibuckets * 81.0f;
+	}
+
 	/**
 	 * Creates a fluid tank for a block entity. Every time the tank is modified, the block entity is marked dirty.
 	 */
@@ -75,7 +83,7 @@ public class FluidUtils {
 	/**
 	 * Transfers and converts a fluid from the input tank to the output tank.
 	 */
-	public static <T extends ConversionRecipe> boolean convertFluid(FluidMachineBlockEntity inventory, List<T> recipes) {
+	public static <T extends ConversionRecipe> boolean convertFluid(FluidMachineBlockEntity inventory, List<T> recipes, int transferPerTick) {
 		if (recipes == null) {
 			return false;
 		}
@@ -85,8 +93,10 @@ public class FluidUtils {
 			FluidVariant recipeInputVariant = FluidVariant.of(recipe.getFluidInput());
 			FluidVariant recipeOutputVariant = FluidVariant.of(recipe.getFluidOutput());
 			if (inputTankFluid.equals(recipeInputVariant)) {
-				if (convertAndMove(inventory.inputTank, inventory.outputTank, f -> true, millibucketsToDroplets(10), null, recipeOutputVariant, conversionRatio) > 0) {
+				if (convertAndMove(inventory.inputTank, inventory.outputTank, f -> true, millibucketsToDroplets(transferPerTick), null, recipeOutputVariant, conversionRatio) > 0) {
 					return true;
+				} else {
+					inventory.inputTank.amount = 0;
 				}
 			}
 		}

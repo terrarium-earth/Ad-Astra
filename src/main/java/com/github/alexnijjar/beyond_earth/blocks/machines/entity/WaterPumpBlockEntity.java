@@ -4,8 +4,8 @@ import javax.annotation.Nullable;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.blocks.machines.AbstractMachineBlock;
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.WaterPumpScreenHandler;
 import com.github.alexnijjar.beyond_earth.registry.ModBlockEntities;
+import com.github.alexnijjar.beyond_earth.screen.handler.WaterPumpScreenHandler;
 
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
@@ -25,10 +25,6 @@ import net.minecraft.util.math.Direction;
 
 public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
 
-    public static final long MAX_ENERGY = BeyondEarth.CONFIG.waterPump.maxEnergy;
-    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.waterPump.energyPerTick;
-    public static final int TANK_SIZE = BeyondEarth.CONFIG.waterPump.tankBuckets;
-    public static final long TRANSFER_PER_TICK = BeyondEarth.CONFIG.waterPump.transferPerTick;
     public static final Direction[] INSERT_DIRECTIONS = { Direction.UP, Direction.SOUTH };
 
     private long waterExtracted;
@@ -39,7 +35,7 @@ public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
 
     @Override
     public long getInputSize() {
-        return TANK_SIZE;
+        return BeyondEarth.CONFIG.waterPump.tankBuckets;
     }
 
     @Override
@@ -54,17 +50,17 @@ public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
 
     @Override
     public long getMaxGeneration() {
-        return MAX_ENERGY;
+        return BeyondEarth.CONFIG.waterPump.maxEnergy;
     }
 
     @Override
     public long getEnergyPerTick() {
-        return ENERGY_PER_TICK;
+        return BeyondEarth.CONFIG.waterPump.energyPerTick;
     }
 
     @Override
     public long getMaxEnergyInsert() {
-        return ENERGY_PER_TICK * 32;
+        return BeyondEarth.CONFIG.waterPump.energyPerTick * 32;
     }
 
     @Nullable
@@ -94,12 +90,12 @@ public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
                 if (water.isOf(Blocks.WATER) && water.get(FluidBlock.LEVEL) == 0) {
 
                     // Drain the water block and add it to the tank.
-                    if (this.hasEnergy()) {
+                    if (!this.getCachedState().get(AbstractMachineBlock.POWERED) && this.hasEnergy()) {
                         this.setActive(true);
                         this.drainEnergy();
-                        waterExtracted += TRANSFER_PER_TICK;
+                        waterExtracted += BeyondEarth.CONFIG.waterPump.transferPerTick;
                         try (Transaction transaction = Transaction.openOuter()) {
-                            this.inputTank.insert(waterFluid, TRANSFER_PER_TICK, transaction);
+                            this.inputTank.insert(waterFluid, BeyondEarth.CONFIG.waterPump.transferPerTick, transaction);
                             transaction.commit();
                         }
                     } else {
@@ -127,7 +123,8 @@ public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
                     Storage<FluidVariant> storage = FluidStorage.SIDED.find(this.world, this.getPos().offset(direction), direction);
                     if (storage != null) {
                         try (Transaction transaction = Transaction.openOuter()) {
-                            if (this.inputTank.extract(waterFluid, TRANSFER_PER_TICK, transaction) == TRANSFER_PER_TICK && storage.insert(waterFluid, TRANSFER_PER_TICK, transaction) == TRANSFER_PER_TICK) {
+                            long transferPerTick = BeyondEarth.CONFIG.waterPump.transferPerTick;
+                            if (this.inputTank.extract(waterFluid, transferPerTick, transaction) == transferPerTick && storage.insert(waterFluid, transferPerTick, transaction) == transferPerTick) {
                                 transaction.commit();
                             }
                         }

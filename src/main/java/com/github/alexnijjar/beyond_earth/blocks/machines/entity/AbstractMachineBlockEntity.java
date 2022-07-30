@@ -126,6 +126,14 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
         }
     }
 
+    public boolean canDrainEnergy() {
+        return this.canDrainEnergy(this.getEnergyPerTick());
+    }
+    
+    public boolean canDrainEnergy(long amount) {
+        return this.energyStorage.amount - amount > 0;       
+    }
+
     // Send energy to surrounding machines.
     public void energyOut() {
         if (usesEnergy() && !this.getCachedState().get(AbstractMachineBlock.POWERED)) {

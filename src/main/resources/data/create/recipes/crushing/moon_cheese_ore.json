@@ -1,0 +1,33 @@
+{
+    "fabric:load_conditions": [
+        {
+            "condition": "fabric:all_mods_loaded",
+            "values": [
+                "create"
+            ]
+        }
+    ],
+    "type": "create:crushing",
+    "ingredients": [
+        {
+            "item": "beyond_earth:moon_cheese_ore"
+        }
+    ],
+    "results": [
+        {
+            "item": "beyond_earth:cheese",
+            "count": 1
+        },
+        {
+            "item": "beyond_earth:cheese",
+            "count": 1,
+            "chance": 0.25
+        },
+        {
+            "item": "beyond_earth:moon_stone",
+            "count": 1,
+            "chance": 0.125
+        }
+    ],
+    "processingTime": 300
+}

@@ -2,6 +2,8 @@ package com.github.alexnijjar.beyond_earth.client.screens;
 
 import java.awt.Rectangle;
 
+import com.github.alexnijjar.beyond_earth.blocks.machines.entity.AbstractMachineBlockEntity;
+import com.github.alexnijjar.beyond_earth.util.FluidUtils;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 import com.mojang.blaze3d.systems.RenderSystem;
 
@@ -9,8 +11,10 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.transfer.v1.client.fluid.FluidVariantRendering;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.BufferRenderer;
 import net.minecraft.client.render.GameRenderer;
@@ -19,7 +23,13 @@ import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.screen.PlayerScreenHandler;
+import net.minecraft.text.Style;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Matrix4f;
 
@@ -86,10 +96,12 @@ public class GuiUtil {
     }
 
     public static void drawFluidTank(MatrixStack matrices, int x, int y, double ratio, FluidVariant fluid) {
-        // Draw the fluid.
+        // Draw the fluid
         drawFluid(matrices, x, y, ratio, fluid);
-        // Draw the fluid tank.
+        // Draw the fluid tank
+        RenderSystem.enableBlend();
         drawVertical(matrices, x, y, FLUID_TANK_WIDTH, FLUID_TANK_HEIGHT, FLUID_TANK_TEXTURE, 1.0);
+        RenderSystem.disableBlend();
     }
 
     public static void drawAccentingFluidTank(MatrixStack matrices, int x, int y, double ratio, FluidVariant fluid) {
@@ -180,6 +192,22 @@ public class GuiUtil {
 
     public static double createRatio(short a, short b) {
         return (float) a / (float) b;
+    }
+
+    public static Text getFluidTranslation(Fluid fluid) {
+        if (fluid.equals(Fluids.EMPTY)) {
+            return new TranslatableText("item.beyond_earth.empty_tank").setStyle(Style.EMPTY.withColor(Formatting.AQUA));
+        }
+        return new TranslatableText(fluid.getDefaultState().getBlockState().getBlock().getTranslationKey()).setStyle(Style.EMPTY.withColor(Formatting.AQUA));
+    }
+
+    public static void drawEnergyTooltip(Screen screen, MatrixStack matrices, AbstractMachineBlockEntity machine, int mouseX, int mouseY) {
+        screen.renderTooltip(matrices, new TranslatableText("gauge_text.beyond_earth.storage", machine.getEnergy(), machine.getMaxGeneration()).setStyle(Style.EMPTY.withColor(Formatting.GOLD)), mouseX, mouseY);
+    }
+
+    public static void drawTankTooltip(Screen screen, MatrixStack matrices, SingleVariantStorage<FluidVariant> tank, int mouseX, int mouseY) {
+        screen.renderTooltip(matrices, new TranslatableText("gauge_text.beyond_earth.liquid_storage", FluidUtils.dropletsToMillibuckets(tank.getAmount()), FluidUtils.dropletsToMillibuckets(tank.getCapacity()))
+                .setStyle(Style.EMPTY.withColor(Formatting.GOLD)).append(Text.of(", ")).append(GuiUtil.getFluidTranslation(tank.getResource().getFluid())), mouseX, mouseY);
     }
 
     public static class FloatDrawableHelper {

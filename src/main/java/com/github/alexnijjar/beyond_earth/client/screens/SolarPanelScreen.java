@@ -3,7 +3,7 @@ package com.github.alexnijjar.beyond_earth.client.screens;
 import java.awt.Rectangle;
 
 import com.github.alexnijjar.beyond_earth.blocks.machines.AbstractMachineBlock;
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.SolarPanelScreenHandler;
+import com.github.alexnijjar.beyond_earth.screen.handler.SolarPanelScreenHandler;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 
 import net.fabricmc.api.EnvType;
@@ -47,17 +47,16 @@ public class SolarPanelScreen extends AbstractMachineScreen<SolarPanelScreenHand
     protected void drawForeground(MatrixStack matrices, int mouseX, int mouseY) {
         super.drawForeground(matrices, mouseX, mouseY);
 
-        this.textRenderer.draw(matrices, new TranslatableText("gauge_text.beyond_earth.max_generation"), this.titleY - 20, 8, 0x3B7A43);
-        this.textRenderer.draw(matrices, Text.of(this.blockEntity.getEnergyPerTick() + " E/t"), this.titleY - 21, 18, 0x3B7A43);
+        this.textRenderer.draw(matrices, new TranslatableText("gauge_text.beyond_earth.max_generation"), this.titleY - 20, 8, 0x68d975);
+        this.textRenderer.draw(matrices, new TranslatableText("gauge_text.beyond_earth.energy_per_tick", this.blockEntity.getEnergyPerTick()), this.titleY - 21, 18, 0x68d975);
     }
 
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         super.render(matrices, mouseX, mouseY, delta);
 
-        // Energy tooltip
         if (GuiUtil.isHovering(this.getEnergyBounds(), mouseX, mouseY)) {
-            this.renderTooltip(matrices, new TranslatableText("gauge_text.beyond_earth.storage", this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration()), mouseX, mouseY);
+            GuiUtil.drawEnergyTooltip(this, matrices, this.blockEntity, mouseX, mouseY);
         }
     }
 

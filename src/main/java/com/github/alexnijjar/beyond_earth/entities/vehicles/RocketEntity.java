@@ -3,14 +3,15 @@ package com.github.alexnijjar.beyond_earth.entities.vehicles;
 import java.util.List;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
+import com.github.alexnijjar.beyond_earth.advancement.ModCriteria;
 import com.github.alexnijjar.beyond_earth.blocks.launch_pad.RocketLaunchPad;
-import com.github.alexnijjar.beyond_earth.gui.PlanetSelectionScreenHandlerFactory;
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.PlanetSelectionScreenHandler;
 import com.github.alexnijjar.beyond_earth.items.armour.NetheriteSpaceSuit;
 import com.github.alexnijjar.beyond_earth.registry.ModDamageSource;
 import com.github.alexnijjar.beyond_earth.registry.ModFluids;
 import com.github.alexnijjar.beyond_earth.registry.ModParticleTypes;
 import com.github.alexnijjar.beyond_earth.registry.ModSounds;
+import com.github.alexnijjar.beyond_earth.screen.PlanetSelectionScreenHandlerFactory;
+import com.github.alexnijjar.beyond_earth.screen.handler.PlanetSelectionScreenHandler;
 import com.github.alexnijjar.beyond_earth.util.ModKeyBindings;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
@@ -46,6 +47,8 @@ public class RocketEntity extends VehicleEntity {
     protected static final TrackedData<Integer> COUNTDOWN_TICKS = DataTracker.registerData(RocketEntity.class, TrackedDataHandlerRegistry.INTEGER);
     protected static final TrackedData<Integer> TIER = DataTracker.registerData(RocketEntity.class, TrackedDataHandlerRegistry.INTEGER);
     protected static final TrackedData<Integer> PHASE = DataTracker.registerData(RocketEntity.class, TrackedDataHandlerRegistry.INTEGER);
+
+    private PlayerEntity lastRider;
 
     public RocketEntity(EntityType<?> type, World world, int tier) {
         super(type, world);
@@ -121,6 +124,7 @@ public class RocketEntity extends VehicleEntity {
 
         // Rotate the rocket when the player strafes left or right.
         if (this.getFirstPassenger() instanceof PlayerEntity player) {
+            this.lastRider = player;
             if (ModKeyBindings.leftKeyDown(player)) {
                 this.rotateRocketAndPassengers(-1.0f);
             }
@@ -179,6 +183,9 @@ public class RocketEntity extends VehicleEntity {
 
     public void openPlanetSelectionGui() {
         if (!this.hasPassengers()) {
+            if (!this.world.isClient) {
+                ModCriteria.ROCKET_DESTROYED.trigger((ServerPlayerEntity) this.lastRider);
+            }
             this.explode();
             return;
         }

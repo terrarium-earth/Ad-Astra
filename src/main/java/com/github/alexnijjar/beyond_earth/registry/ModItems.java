@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Set;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.blocks.machines.entity.WaterPumpBlockEntity;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier1;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier2;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier3;
@@ -15,6 +14,7 @@ import com.github.alexnijjar.beyond_earth.items.Astrodux;
 import com.github.alexnijjar.beyond_earth.items.EnergizerBlockItem;
 import com.github.alexnijjar.beyond_earth.items.FluidContainingItem.TankStorage;
 import com.github.alexnijjar.beyond_earth.items.HammerItem;
+import com.github.alexnijjar.beyond_earth.items.MachineBlockItem;
 import com.github.alexnijjar.beyond_earth.items.OxygenTankItem;
 import com.github.alexnijjar.beyond_earth.items.SolarPanelBlockItem;
 import com.github.alexnijjar.beyond_earth.items.SpacePaintingItem;
@@ -221,32 +221,76 @@ public interface ModItems {
         public static final JetSuit JET_SUIT_BOOTS = register("jet_suit_boots", new JetSuit(ModArmour.JET_SUIT_ARMOUR_MATERIAL, EquipmentSlot.FEET, new FabricItemSettings().group(ITEM_GROUP_NORMAL).fireproof()));
 
         // Machines
-        public static final BlockItem COAL_GENERATOR = register("coal_generator", new BlockItem(ModBlocks.COAL_GENERATOR, new FabricItemSettings().group(ITEM_GROUP_MACHINES)) {
+        public static final BlockItem COAL_GENERATOR = register("coal_generator", new MachineBlockItem(ModBlocks.COAL_GENERATOR, new FabricItemSettings().group(ITEM_GROUP_MACHINES)) {
                 @Override
                 public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-                        tooltip.add((new TranslatableText("item.beyond_earth.generator.tooltip", BeyondEarth.CONFIG.coalGenerator.energyPerTick).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
+                        tooltip.add((new TranslatableText("item.beyond_earth.generator_energy.tooltip", BeyondEarth.CONFIG.coalGenerator.energyPerTick).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
+                        tooltip.add((new TranslatableText("item.beyond_earth.coal_generator.tooltip", BeyondEarth.CONFIG.coalGenerator.energyPerTick).setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
                 }
         });
-        public static final BlockItem COMPRESSOR = registerBlockItem(ModBlocks.COMPRESSOR, ITEM_GROUP_MACHINES);
-        public static final BlockItem NASA_WORKBENCH = registerBlockItem(ModBlocks.NASA_WORKBENCH, ITEM_GROUP_MACHINES);
-        public static final BlockItem FUEL_REFINERY = registerBlockItem(ModBlocks.FUEL_REFINERY, ITEM_GROUP_MACHINES);
-        public static final BlockItem OXYGEN_LOADER = registerBlockItem(ModBlocks.OXYGEN_LOADER, ITEM_GROUP_MACHINES);
+        public static final BlockItem COMPRESSOR = register("compressor", new MachineBlockItem(ModBlocks.COMPRESSOR, new FabricItemSettings().group(ITEM_GROUP_MACHINES)) {
+                @Override
+                public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
+                        tooltip.add((new TranslatableText("item.beyond_earth.compressor.tooltip", BeyondEarth.CONFIG.coalGenerator.energyPerTick).setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+                }
+        });
+        public static final BlockItem NASA_WORKBENCH = register("nasa_workbench", new MachineBlockItem(ModBlocks.NASA_WORKBENCH, new FabricItemSettings().group(ITEM_GROUP_MACHINES)) {
+                @Override
+                public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
+                        tooltip.add((new TranslatableText("item.beyond_earth.nasa_workbench.tooltip", BeyondEarth.CONFIG.coalGenerator.energyPerTick).setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+                }
+        });
+        public static final BlockItem FUEL_REFINERY = register("fuel_refinery", new MachineBlockItem(ModBlocks.FUEL_REFINERY, new FabricItemSettings().group(ITEM_GROUP_MACHINES)) {
+                @Override
+                public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
+                        tooltip.add((new TranslatableText("item.beyond_earth.fuel_refinery.tooltip", BeyondEarth.CONFIG.coalGenerator.energyPerTick).setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+                }
+        });
+        public static final BlockItem OXYGEN_LOADER = register("oxygen_loader", new MachineBlockItem(ModBlocks.OXYGEN_LOADER, new FabricItemSettings().group(ITEM_GROUP_MACHINES)) {
+                @Override
+                public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
+                        tooltip.add((new TranslatableText("item.beyond_earth.oxygen_loader.tooltip", BeyondEarth.CONFIG.coalGenerator.energyPerTick).setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+                }
+        });
         public static final BlockItem SOLAR_PANEL = register("solar_panel", new SolarPanelBlockItem(ModBlocks.SOLAR_PANEL, new FabricItemSettings().group(ITEM_GROUP_MACHINES)) {
                 @Override
                 public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-                        tooltip.add((new TranslatableText("item.beyond_earth.generator.tooltip", BeyondEarth.CONFIG.solarPanel.energyPerTick).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
+                        tooltip.add((new TranslatableText("item.beyond_earth.generator_energy.tooltip", BeyondEarth.CONFIG.solarPanel.energyPerTick).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
+                        tooltip.add((new TranslatableText("item.beyond_earth.solar_panel.tooltip", BeyondEarth.CONFIG.solarPanel.energyPerTick).setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
                 }
         });
-        public static final BlockItem OXYGEN_DISTRIBUTOR = registerBlockItem(ModBlocks.OXYGEN_DISTRIBUTOR, ITEM_GROUP_MACHINES);
-        public static final BlockItem WATER_PUMP = register("water_pump", new BlockItem(ModBlocks.WATER_PUMP, new FabricItemSettings().group(ITEM_GROUP_MACHINES)) {
+        public static final BlockItem OXYGEN_DISTRIBUTOR = register("oxygen_distributor", new MachineBlockItem(ModBlocks.OXYGEN_DISTRIBUTOR, new FabricItemSettings().group(ITEM_GROUP_MACHINES)) {
                 @Override
                 public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-                        tooltip.add((new TranslatableText("item.beyond_earth.water_pump.tooltip", FluidUtils.dropletsToMillibuckets(WaterPumpBlockEntity.TRANSFER_PER_TICK)).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
+                        tooltip.add((new TranslatableText("item.beyond_earth.oxygen_distributor.tooltip", BeyondEarth.CONFIG.coalGenerator.energyPerTick).setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
                 }
         });
-        public static final BlockItem ENERGIZER = register("energizer", new EnergizerBlockItem(ModBlocks.ENERGIZER, new FabricItemSettings().group(ITEM_GROUP_MACHINES).maxCount(1)));
-        public static final BlockItem CRYO_FREEZER = registerBlockItem(ModBlocks.CRYO_FREEZER, ITEM_GROUP_MACHINES);
-        public static final BlockItem OXYGEN_SENSOR = registerBlockItem(ModBlocks.OXYGEN_SENSOR, ITEM_GROUP_MACHINES);
+        public static final BlockItem WATER_PUMP = register("water_pump", new MachineBlockItem(ModBlocks.WATER_PUMP, new FabricItemSettings().group(ITEM_GROUP_MACHINES)) {
+                @Override
+                public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
+                        tooltip.add((new TranslatableText("item.beyond_earth.fluid_transfer_rate.tooltip", FluidUtils.dropletsToMillibuckets(BeyondEarth.CONFIG.waterPump.transferPerTick)).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
+                        tooltip.add((new TranslatableText("item.beyond_earth.water_pump.tooltip", FluidUtils.dropletsToMillibuckets(BeyondEarth.CONFIG.waterPump.transferPerTick)).setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+                }
+        });
+        public static final BlockItem ENERGIZER = register("energizer", new EnergizerBlockItem(ModBlocks.ENERGIZER, new FabricItemSettings().group(ITEM_GROUP_MACHINES).maxCount(1)) {
+                @Override
+                public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
+                        super.appendTooltip(stack, world, tooltip, context);
+                        tooltip.add((new TranslatableText("item.beyond_earth.energizer.tooltip").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+                }
+        });
+        public static final BlockItem CRYO_FREEZER = register("cryo_freezer", new MachineBlockItem(ModBlocks.CRYO_FREEZER, new FabricItemSettings().group(ITEM_GROUP_MACHINES).maxCount(1)) {
+                @Override
+                public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
+                        tooltip.add((new TranslatableText("item.beyond_earth.cryo_freezer.tooltip").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+                }
+        });
+        public static final BlockItem OXYGEN_SENSOR = register("oxygen_sensor", new MachineBlockItem(ModBlocks.OXYGEN_SENSOR, new FabricItemSettings().group(ITEM_GROUP_MACHINES).maxCount(1)) {
+                @Override
+                public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
+                        tooltip.add((new TranslatableText("item.beyond_earth.oxygen_sensor.tooltip").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+                }
+        });
 
         public static final Item HAMMER = register("hammer", new HammerItem(new FabricItemSettings().group(ITEM_GROUP_BASICS).maxCount(1).maxDamage(BeyondEarth.CONFIG.world.hammerDurability)));
 
@@ -462,17 +506,21 @@ public interface ModItems {
 
         public static final BlockItem MOON_CHEESE_ORE = registerBlockItem(ModBlocks.MOON_CHEESE_ORE);
         public static final BlockItem MOON_DESH_ORE = registerBlockItem(ModBlocks.MOON_DESH_ORE);
+        public static final BlockItem DEEPSLATE_DESH_ORE = registerBlockItem(ModBlocks.DEEPSLATE_DESH_ORE);
         public static final BlockItem MOON_IRON_ORE = registerBlockItem(ModBlocks.MOON_IRON_ORE);
         public static final BlockItem MOON_ICE_SHARD_ORE = registerBlockItem(ModBlocks.MOON_ICE_SHARD_ORE);
+        public static final BlockItem DEEPSLATE_ICE_SHARD_ORE = registerBlockItem(ModBlocks.DEEPSLATE_ICE_SHARD_ORE);
         public static final BlockItem MARS_IRON_ORE = registerBlockItem(ModBlocks.MARS_IRON_ORE);
         public static final BlockItem MARS_DIAMOND_ORE = registerBlockItem(ModBlocks.MARS_DIAMOND_ORE);
         public static final BlockItem MARS_OSTRUM_ORE = registerBlockItem(ModBlocks.MARS_OSTRUM_ORE);
+        public static final BlockItem DEEPSLATE_OSTRUM_ORE = registerBlockItem(ModBlocks.DEEPSLATE_OSTRUM_ORE);
         public static final BlockItem MARS_ICE_SHARD_ORE = registerBlockItem(ModBlocks.MARS_ICE_SHARD_ORE);
         public static final BlockItem MERCURY_IRON_ORE = registerBlockItem(ModBlocks.MERCURY_IRON_ORE);
         public static final BlockItem VENUS_COAL_ORE = registerBlockItem(ModBlocks.VENUS_COAL_ORE);
         public static final BlockItem VENUS_GOLD_ORE = registerBlockItem(ModBlocks.VENUS_GOLD_ORE);
         public static final BlockItem VENUS_DIAMOND_ORE = registerBlockItem(ModBlocks.VENUS_DIAMOND_ORE);
         public static final BlockItem VENUS_CALORITE_ORE = registerBlockItem(ModBlocks.VENUS_CALORITE_ORE);
+        public static final BlockItem DEEPSLATE_CALORITE_ORE = registerBlockItem(ModBlocks.DEEPSLATE_CALORITE_ORE);
         public static final BlockItem GLACIO_ICE_SHARD_ORE = registerBlockItem(ModBlocks.GLACIO_ICE_SHARD_ORE);
         public static final BlockItem GLACIO_COAL_ORE = registerBlockItem(ModBlocks.GLACIO_COAL_ORE);
         public static final BlockItem GLACIO_COPPER_ORE = registerBlockItem(ModBlocks.GLACIO_COPPER_ORE);

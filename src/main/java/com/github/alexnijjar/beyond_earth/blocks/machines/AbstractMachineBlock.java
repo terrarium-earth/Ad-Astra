@@ -3,6 +3,8 @@ package com.github.alexnijjar.beyond_earth.blocks.machines;
 import java.util.function.ToIntFunction;
 
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.AbstractMachineBlockEntity;
+import com.github.alexnijjar.beyond_earth.blocks.machines.entity.FluidMachineBlockEntity;
+import com.github.alexnijjar.beyond_earth.blocks.machines.entity.OxygenDistributorBlockEntity;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
@@ -14,7 +16,10 @@ import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
@@ -28,6 +33,7 @@ import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 @SuppressWarnings("deprecation")
@@ -135,12 +141,12 @@ public abstract class AbstractMachineBlock extends BlockWithEntity {
 
     @Override
     public PistonBehavior getPistonBehavior(BlockState state) {
-        return PistonBehavior.PUSH_ONLY;
+        return PistonBehavior.BLOCK;
     }
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        
+
         if (this.useFacing()) {
             builder.add(FACING);
         }
@@ -183,5 +189,29 @@ public abstract class AbstractMachineBlock extends BlockWithEntity {
         BlockEntity blockEntity = world.getBlockEntity(pos);
 
         return blockEntity instanceof AbstractMachineBlockEntity ? ScreenHandler.calculateComparatorOutput(blockEntity) : 0;
+    }
+
+    // Get nbt in stack when picking block
+    @Override
+    public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
+        ItemStack stack = super.getPickStack(world, pos, state);
+        if (world.getBlockEntity(pos) instanceof AbstractMachineBlockEntity machineBlock) {
+            NbtCompound nbt = stack.getOrCreateNbt();
+            Inventories.writeNbt(nbt, machineBlock.getItems());
+            nbt.putLong("energy", machineBlock.energyStorage.amount);
+
+            if (machineBlock instanceof FluidMachineBlockEntity fluidMachine) {
+                nbt.put("inputFluid", fluidMachine.inputTank.variant.toNbt());
+                nbt.putLong("inputAmount", fluidMachine.inputTank.amount);
+
+                nbt.put("outputFluid", fluidMachine.outputTank.variant.toNbt());
+                nbt.putLong("outputAmount", fluidMachine.outputTank.amount);
+
+                if (machineBlock instanceof OxygenDistributorBlockEntity oxygenDistributorMachine) {
+                    nbt.putBoolean("showOxygen", oxygenDistributorMachine.shouldShowOxygen());
+                }
+            }
+        }
+        return stack;
     }
 }

@@ -3,14 +3,12 @@ package com.github.alexnijjar.beyond_earth.client.screens;
 import java.awt.Rectangle;
 
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.CryoFreezerBlockEntity;
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.CryoFreezerScreenHandler;
-import com.github.alexnijjar.beyond_earth.util.FluidUtils;
+import com.github.alexnijjar.beyond_earth.screen.handler.CryoFreezerScreenHandler;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
 public class CryoFreezerScreen extends AbstractMachineScreen<CryoFreezerScreenHandler> {
@@ -51,13 +49,12 @@ public class CryoFreezerScreen extends AbstractMachineScreen<CryoFreezerScreenHa
 
         CryoFreezerBlockEntity entity = (CryoFreezerBlockEntity) blockEntity;
 
-        // Energy tooltip.
         if (GuiUtil.isHovering(this.getEnergyBounds(), mouseX, mouseY)) {
-            this.renderTooltip(matrices, new TranslatableText("gauge_text.beyond_earth.storage", this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration()), mouseX, mouseY);
+            GuiUtil.drawEnergyTooltip(this, matrices, entity, mouseX, mouseY);
         }
 
         if (GuiUtil.isHovering(this.getOutputTankBounds(), mouseX, mouseY)) {
-            this.renderTooltip(matrices, new TranslatableText("gauge_text.beyond_earth.liquid_storage", FluidUtils.dropletsToMillibuckets(entity.inputTank.getAmount()), FluidUtils.dropletsToMillibuckets(entity.inputTank.getCapacity())), mouseX, mouseY);
+            GuiUtil.drawTankTooltip(this, matrices, entity.outputTank, mouseX, mouseY);
         }
     }
 
