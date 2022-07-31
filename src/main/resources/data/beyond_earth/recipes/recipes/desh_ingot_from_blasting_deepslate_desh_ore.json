@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "beyond_earth:deepslate_desh_ore"
+  },
+  "result": "beyond_earth:desh_ingot",
+  "experience": 1.0,
+  "cookingtime": 100
+}

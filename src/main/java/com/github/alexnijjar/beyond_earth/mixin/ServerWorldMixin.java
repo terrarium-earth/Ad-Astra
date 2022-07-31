@@ -14,20 +14,20 @@ import com.github.alexnijjar.beyond_earth.world.LunarianWanderingTraderManager;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.WorldGenerationProgressListener;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.registry.RegistryEntry;
+import net.minecraft.util.Holder;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionType;
+import net.minecraft.world.gen.Spawner;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.level.ServerWorldProperties;
 import net.minecraft.world.level.storage.LevelStorage;
-import net.minecraft.world.spawner.Spawner;
 
 // Adds lunarian wandering trader spawning
 @Mixin(ServerWorld.class)
 public class ServerWorldMixin {
     @Inject(at = @At(value = "TAIL"), method = "<init>")
-    public void ServerWorld(MinecraftServer server, Executor workerExecutor, LevelStorage.Session session, ServerWorldProperties properties, RegistryKey<World> worldKey, RegistryEntry<DimensionType> registryEntry,
+    public void ServerWorld(MinecraftServer minecraftServer, Executor executor, LevelStorage.Session session, ServerWorldProperties properties, RegistryKey<World> registryKey, Holder<DimensionType> holder,
             WorldGenerationProgressListener worldGenerationProgressListener, ChunkGenerator chunkGenerator, boolean debugWorld, long seed, List<Spawner> spawners, boolean shouldTickTime, CallbackInfo ci) {
 
         List<Spawner> serverSpawners = new ArrayList<>(((ServerWorld) (Object) this).spawners);

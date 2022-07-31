@@ -69,12 +69,12 @@ public class GlobeBlockEntity extends BlockEntity {
 
     @Override
     public Packet<ClientPlayPacketListener> toUpdatePacket() {
-        return BlockEntityUpdateS2CPacket.create(this);
+        return BlockEntityUpdateS2CPacket.of(this);
     }
 
     @Override
     public NbtCompound toInitialChunkDataNbt() {
-        return this.createNbt();
+        return this.toNbt();
     }
 
     public float getAngularVelocity() {

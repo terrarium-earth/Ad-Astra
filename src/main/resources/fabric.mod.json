@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "beyond_earth",
-  "version": "1.0.2",
+  "version": "${version}",
 
   "name": "Beyond Earth",
   "description": "Fly to Other Planets and Beyond!",

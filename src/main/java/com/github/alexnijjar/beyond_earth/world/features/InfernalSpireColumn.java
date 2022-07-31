@@ -76,7 +76,7 @@ public class InfernalSpireColumn extends Feature<BasaltColumnsFeatureConfig> {
     }
 
     @Override
-    public boolean generate(FeatureContext<BasaltColumnsFeatureConfig> context) {
+    public boolean place(FeatureContext<BasaltColumnsFeatureConfig> context) {
 
         int seaLevel = context.getGenerator().getSeaLevel();
         BlockPos blockpos = context.getOrigin();

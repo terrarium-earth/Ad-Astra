@@ -136,7 +136,7 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
         long energyUsagePerTick = entity.getEnergyToConsume(oxygenBlocksCount);
 
         float oxygenUsageRounded = FluidUtils.dropletsToMillibucketsFloat(oxygenUsagePerTick);
-        oxygenUsageRounded = (float) (Math.round(oxygenUsageRounded * 100.0) / 100.0);
+        oxygenUsageRounded = (float) (Math.round(oxygenUsageRounded * 1000.0) / 1000.0);
         this.textRenderer.draw(matrices, new TranslatableText("gauge_text.beyond_earth.fluid_per_tick", oxygenUsageRounded), 11, offset + -5, 0x68d975);
         this.textRenderer.draw(matrices, new TranslatableText("gauge_text.beyond_earth.energy_per_tick", energyUsagePerTick), 11, offset + -17, 0x68d975);
         matrices.pop();
