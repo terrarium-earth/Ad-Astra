@@ -13,6 +13,7 @@ import com.github.alexnijjar.beyond_earth.networking.ModC2SPackets;
 import com.github.alexnijjar.beyond_earth.registry.ModArmour;
 import com.github.alexnijjar.beyond_earth.registry.ModBlockEntities;
 import com.github.alexnijjar.beyond_earth.registry.ModCommands;
+import com.github.alexnijjar.beyond_earth.registry.ModCriteria;
 import com.github.alexnijjar.beyond_earth.registry.ModEntityTypes;
 import com.github.alexnijjar.beyond_earth.registry.ModFeatures;
 import com.github.alexnijjar.beyond_earth.registry.ModFluids;
@@ -72,6 +73,8 @@ public class BeyondEarth implements ModInitializer {
 
         // Packets.
         ModC2SPackets.register();
+
+        ModCriteria.register();
 
         BeyondEarth.LOGGER.info("Beyond Earth Initialized! 🚀");
     }

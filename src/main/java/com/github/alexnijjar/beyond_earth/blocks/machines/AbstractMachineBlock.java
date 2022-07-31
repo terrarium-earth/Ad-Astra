@@ -82,10 +82,8 @@ public abstract class AbstractMachineBlock extends BlockWithEntity {
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
-            AbstractMachineBlockEntity blockEntity = (AbstractMachineBlockEntity) world.getBlockEntity(pos);
-
-            if (blockEntity != null) {
-                player.openHandledScreen(blockEntity);
+            if (world.getBlockEntity(pos) instanceof AbstractMachineBlockEntity machineBlock) {
+                player.openHandledScreen(machineBlock);
             }
         }
         return ActionResult.SUCCESS;

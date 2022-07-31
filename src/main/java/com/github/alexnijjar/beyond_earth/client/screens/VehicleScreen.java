@@ -32,9 +32,7 @@ public class VehicleScreen extends AbstractVehicleScreen<VehicleScreenHandler> {
 
         super.drawBackground(matrices, delta, mouseX, mouseY);
 
-        if (GuiUtil.isHovering(this.getInputTankBounds(), mouseX, mouseY)) {
-            GuiUtil.drawTankTooltip(this, matrices, this.vehicle.inputTank, mouseX, mouseY);
-        }
+        GuiUtil.drawFluidTank(matrices, this.x + INPUT_TANK_LEFT, this.y + INPUT_TANK_TOP, this.vehicle.getFluidAmount(), this.vehicle.inputTank.getCapacity(), this.vehicle.getFluidVariant());
     }
 
     @Override
@@ -42,7 +40,7 @@ public class VehicleScreen extends AbstractVehicleScreen<VehicleScreenHandler> {
         super.render(matrices, mouseX, mouseY, delta);
 
         if (GuiUtil.isHovering(this.getInputTankBounds(), mouseX, mouseY)) {
-            GuiUtil.drawTankTooltip(this, matrices, this.vehicle.inputTank, mouseX, mouseY);
+            GuiUtil.drawTankTooltip(this, matrices, this.vehicle.getFluidAmount(), this.vehicle.inputTank.getCapacity(), this.vehicle.getFluidVariant(), mouseX, mouseY);
         }
     }
 

@@ -21,6 +21,7 @@ public class ClientModKeybindings {
     public static boolean clickingBack;
     public static boolean clickingLeft;
     public static boolean clickingRight;
+    public static boolean clickingShift;
 
     private static boolean sentJumpPacket;
     private static boolean sentSprintPacket;
@@ -31,6 +32,13 @@ public class ClientModKeybindings {
 
     public static void register() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
+
+            clickingJump = client.options.jumpKey.isPressed();
+            clickingSprint = client.options.sprintKey.isPressed();
+            clickingForward = client.options.forwardKey.isPressed();
+            clickingBack = client.options.backKey.isPressed();
+            clickingLeft = client.options.leftKey.isPressed();
+            clickingRight = client.options.rightKey.isPressed();
 
             if (client.world != null) {
                 if (client.player != null) {
@@ -48,13 +56,6 @@ public class ClientModKeybindings {
                         }
                     }
                 }
-
-                clickingJump = client.options.jumpKey.isPressed();
-                clickingSprint = client.options.sprintKey.isPressed();
-                clickingForward = client.options.forwardKey.isPressed();
-                clickingBack = client.options.backKey.isPressed();
-                clickingLeft = client.options.leftKey.isPressed();
-                clickingRight = client.options.rightKey.isPressed();
 
                 if (clickingJump && sentJumpPacket) {
                     ClientPlayNetworking.send(ModC2SPackets.JUMP_KEY_CHANGED, createKeyDownBuf());
