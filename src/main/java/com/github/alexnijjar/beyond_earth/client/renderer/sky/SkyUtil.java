@@ -55,12 +55,12 @@ public class SkyUtil {
         RenderSystem.depthMask(false);
 
         RenderSystem.setShaderColor(f, g, h, 1.0f);
-        ((WorldRendererAccessor) context.worldRenderer()).getLightSkyBuffer().setShader(context.matrixStack().peek().getPositionMatrix(), context.projectionMatrix(), RenderSystem.getShader());
+        ((WorldRendererAccessor) context.worldRenderer()).getLightSkyBuffer().setShader(context.matrixStack().peek().getModel(), context.projectionMatrix(), RenderSystem.getShader());
 
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
         renderColouring(colourType, bufferBuilder, matrices, world, tickDelta, context.world().getSkyAngle(tickDelta), sunsetAngle);
-        RenderSystem.blendFuncSeparate(GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE, GlStateManager.SrcFactor.ONE, GlStateManager.DstFactor.ZERO);
+        RenderSystem.blendFuncSeparate(GlStateManager.class_4535.SRC_ALPHA, GlStateManager.class_4534.ONE, GlStateManager.class_4535.ONE, GlStateManager.class_4534.ZERO);
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
         RenderSystem.enableTexture();
     }
@@ -74,7 +74,7 @@ public class SkyUtil {
 
         RenderSystem.setShaderColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-        if (world.getDimensionEffects().isAlternateSkyColor()) {
+        if (world.getSkyProperties().isAlternateSkyColor()) {
             RenderSystem.setShaderColor(f * 0.2f + 0.04f, g * 0.2f + 0.04f, h * 0.6f + 0.1f, 1.0f);
         } else {
             RenderSystem.setShaderColor(f, g, h, 1.0f);
@@ -122,7 +122,7 @@ public class SkyUtil {
             RenderSystem.disableBlend();
         }
 
-        Matrix4f positionMatrix = context.matrixStack().peek().getPositionMatrix();
+        Matrix4f positionMatrix = context.matrixStack().peek().getModel();
         RenderSystem.setShaderTexture(0, texture);
         bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR_TEXTURE);
         bufferBuilder.vertex(positionMatrix, -scale, 100.0f, -scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).texture(1.0f, 0.0f).next();
@@ -150,14 +150,14 @@ public class SkyUtil {
         starsBuffer.upload(bufferBuilder);
 
         if (!starsRenderer.daylightVisible()) {
-            float rot = context.world().method_23787(context.tickDelta());
+            float rot = context.world().getStarBrightness(context.tickDelta());
             RenderSystem.setShaderColor(rot, rot, rot, rot);
         } else {
             RenderSystem.setShaderColor(0.8f, 0.8f, 0.8f, 0.8f);
         }
 
-        BackgroundRenderer.clearFog();
-        starsBuffer.setShader(context.matrixStack().peek().getPositionMatrix(), RenderSystem.getProjectionMatrix(), GameRenderer.getPositionColorShader());
+        BackgroundRenderer.setFogBlack();
+        starsBuffer.setShader(context.matrixStack().peek().getModel(), RenderSystem.getProjectionMatrix(), GameRenderer.getPositionColorShader());
         context.matrixStack().pop();
         return starsBuffer;
     }
@@ -234,7 +234,7 @@ public class SkyUtil {
     public static void renderColouring(SkyRenderer.SunsetColour type, BufferBuilder bufferBuilder, MatrixStack matrices, ClientWorld world, float tickDelta, float skyAngle, int sunsetAngle) {
 
         float[] fogColours = switch (type) {
-        case VANILLA -> world.getDimensionEffects().getFogColorOverride(world.getSkyAngle(tickDelta), tickDelta);
+        case VANILLA -> world.getSkyProperties().getFogColorOverride(world.getSkyAngle(tickDelta), tickDelta);
         case MARS -> ModSky.getMarsColour(skyAngle);
         };
         if (fogColours != null) {
@@ -247,7 +247,7 @@ public class SkyUtil {
             matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(sine));
             matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(90.0f));
 
-            Matrix4f matrix4f = matrices.peek().getPositionMatrix();
+            Matrix4f matrix4f = matrices.peek().getModel();
             bufferBuilder.begin(VertexFormat.DrawMode.TRIANGLE_FAN, VertexFormats.POSITION_COLOR);
             bufferBuilder.vertex(matrix4f, 0.0f, 100.0f, 0.0f).color(fogColours[0], fogColours[1], fogColours[2], fogColours[3]).next();
 

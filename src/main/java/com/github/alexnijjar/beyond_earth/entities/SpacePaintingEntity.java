@@ -15,12 +15,12 @@ import net.minecraft.entity.decoration.painting.PaintingMotive;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.util.Holder;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 
@@ -38,7 +38,7 @@ public class SpacePaintingEntity extends PaintingEntity {
 	public static Optional<SpacePaintingEntity> placeSpacePainting(World world, BlockPos pos, Direction facing) {
 		SpacePaintingEntity paintingEntity = new SpacePaintingEntity(world, pos);
 
-		List<RegistryEntry<PaintingMotive>> spacePaintings = getSpacePaintings();
+		List<Holder<PaintingMotive>> spacePaintings = getSpacePaintings();
 
 		if (spacePaintings.isEmpty()) {
 			return Optional.empty();
@@ -56,7 +56,7 @@ public class SpacePaintingEntity extends PaintingEntity {
 
 		int i = spacePaintings.stream().mapToInt(SpacePaintingEntity::getSize).max().orElse(0);
 		spacePaintings.removeIf(variant -> SpacePaintingEntity.getSize(variant) < i);
-		Optional<RegistryEntry<PaintingMotive>> optional = Util.getRandomOrEmpty(spacePaintings, paintingEntity.random);
+		Optional<Holder<PaintingMotive>> optional = Util.getRandom(spacePaintings, paintingEntity.random);
 
 		if (optional.isEmpty()) {
 			return Optional.empty();
@@ -67,15 +67,15 @@ public class SpacePaintingEntity extends PaintingEntity {
 		return Optional.of(paintingEntity);
 	}
 
-	protected static int getSize(RegistryEntry<PaintingMotive> variant) {
+	protected static int getSize(Holder<PaintingMotive> variant) {
 		return variant.value().getWidth() * variant.value().getHeight();
 	}
 
-	public static List<RegistryEntry<PaintingMotive>> getSpacePaintings() {
-		List<RegistryEntry<PaintingMotive>> paintings = new ArrayList<>();
+	public static List<Holder<PaintingMotive>> getSpacePaintings() {
+		List<Holder<PaintingMotive>> paintings = new ArrayList<>();
 		Registry.PAINTING_MOTIVE.forEach(painting -> {
 			if (Registry.PAINTING_MOTIVE.getId(painting).getNamespace().equals(BeyondEarth.MOD_ID)) {
-				paintings.add(RegistryEntry.of(painting));
+				paintings.add(Holder.createDirect(painting));
 			}
 		});
 
@@ -87,7 +87,7 @@ public class SpacePaintingEntity extends PaintingEntity {
 
 		super.readCustomDataFromNbt(nbt);
 		RegistryKey<PaintingMotive> registryKey = RegistryKey.of(Registry.MOTIVE_KEY, new Identifier(nbt.getString("Motive")));
-		this.motive = Registry.PAINTING_MOTIVE.getEntry(registryKey).get().value();
+		this.motive = Registry.PAINTING_MOTIVE.getHolder(registryKey).get().value();
 		this.facing = Direction.fromHorizontal(nbt.getByte("Facing"));
 		this.setFacing(this.facing);
 	}

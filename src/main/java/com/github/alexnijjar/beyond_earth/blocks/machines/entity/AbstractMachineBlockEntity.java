@@ -129,9 +129,9 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
     public boolean canDrainEnergy() {
         return this.canDrainEnergy(this.getEnergyPerTick());
     }
-    
+
     public boolean canDrainEnergy(long amount) {
-        return this.energyStorage.amount - amount > 0;       
+        return this.energyStorage.amount - amount > 0;
     }
 
     // Send energy to surrounding machines.
@@ -226,11 +226,11 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
     @Nullable
     @Override
     public Packet<ClientPlayPacketListener> toUpdatePacket() {
-        return BlockEntityUpdateS2CPacket.create(this);
+        return BlockEntityUpdateS2CPacket.of(this);
     }
 
     @Override
     public NbtCompound toInitialChunkDataNbt() {
-        return this.createNbt();
+        return this.toNbt();
     }
 }

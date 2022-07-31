@@ -19,7 +19,7 @@ public class SulfurCreeperChargeFeatureRenderer extends EnergySwirlOverlayFeatur
     }
 
     @Override
-    protected float getEnergySwirlX(float partialAge) {
+    protected float getEnergySwirlOffsetX(float partialAge) {
         return partialAge * 0.01f;
     }
 

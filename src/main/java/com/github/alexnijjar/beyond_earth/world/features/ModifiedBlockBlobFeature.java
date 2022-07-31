@@ -19,7 +19,7 @@ public class ModifiedBlockBlobFeature extends Feature<SingleStateFeatureConfig> 
     }
 
     @Override
-    public boolean generate(FeatureContext<SingleStateFeatureConfig> context) {
+    public boolean place(FeatureContext<SingleStateFeatureConfig> context) {
         BlockPos pos = context.getOrigin();
         StructureWorldAccess world = context.getWorld();
         Random random = context.getRandom();

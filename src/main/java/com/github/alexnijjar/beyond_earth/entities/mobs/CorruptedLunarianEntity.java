@@ -11,11 +11,11 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.RangedAttackMob;
-import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.ai.goal.ProjectileAttackGoal;
 import net.minecraft.entity.ai.goal.RevengeGoal;
+import net.minecraft.entity.ai.goal.TargetGoal;
 import net.minecraft.entity.ai.goal.WanderAroundGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -47,10 +47,10 @@ public class CorruptedLunarianEntity extends HostileEntity implements RangedAtta
         this.goalSelector.add(2, new RevengeGoal(this));
         this.goalSelector.add(3, new WanderAroundGoal(this, 0.8));
         this.goalSelector.add(4, new LookAroundGoal(this));
-        this.targetSelector.add(5, new ActiveTargetGoal<>(this, PlayerEntity.class, false));
-        this.targetSelector.add(7, new ActiveTargetGoal<>(this, VillagerEntity.class, false));
-        this.targetSelector.add(8, new ActiveTargetGoal<>(this, LunarianWanderingTraderEntity.class, false));
-        this.targetSelector.add(9, new ActiveTargetGoal<>(this, GolemEntity.class, false));
+        this.targetSelector.add(5, new TargetGoal<>(this, PlayerEntity.class, false));
+        this.targetSelector.add(7, new TargetGoal<>(this, VillagerEntity.class, false));
+        this.targetSelector.add(8, new TargetGoal<>(this, LunarianWanderingTraderEntity.class, false));
+        this.targetSelector.add(9, new TargetGoal<>(this, GolemEntity.class, false));
         this.goalSelector.add(1, new ProjectileAttackGoal(this, 1.25f, 20, 15) {
             @Override
             public boolean shouldContinue() {
