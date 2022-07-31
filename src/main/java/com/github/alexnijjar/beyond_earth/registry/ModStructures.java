@@ -4,7 +4,7 @@ import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 import com.github.alexnijjar.beyond_earth.world.processor.StructureVoidProcessor;
 import com.github.alexnijjar.beyond_earth.world.structures.SimpleStructure;
 
-import net.minecraft.structure.StructureGeneratorFactory;
+import net.minecraft.structure.StructurePiecesGeneratorFactory;
 import net.minecraft.structure.processor.StructureProcessorType;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.registry.Registry;
@@ -45,8 +45,8 @@ public class ModStructures {
         Registry.register(Registry.STRUCTURE_FEATURE, new ModIdentifier(id), feature);
     }
 
-    private static boolean placeAwayFromLunarianVillage(StructureGeneratorFactory.Context<StructurePoolFeatureConfig> context) {
+    private static boolean placeAwayFromLunarianVillage(StructurePiecesGeneratorFactory.Context<StructurePoolFeatureConfig> context) {
         ChunkPos chunkpos = context.chunkPos();
-        return !context.chunkGenerator().method_41053(RegistryKey.of(Registry.STRUCTURE_SET_KEY, new ModIdentifier("lunarian_village")), context.seed(), chunkpos.x, chunkpos.z, 10);
+        return !context.chunkGenerator().method_41053(RegistryKey.of(Registry.STRUCTURE_SET_WORLDGEN, new ModIdentifier("lunarian_village")), context.seed(), chunkpos.x, chunkpos.z, 10);
     }
 }

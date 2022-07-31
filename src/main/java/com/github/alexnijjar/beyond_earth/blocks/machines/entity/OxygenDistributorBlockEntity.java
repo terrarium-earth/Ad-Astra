@@ -135,14 +135,17 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
         }
 
         if (this.drainEnergy(amountOfEnergyToConsume)) {
-            ModUtils.spawnForcedParticles((ServerWorld) this.world, ModParticleTypes.OXYGEN_BUBBLE, this.getPos().getX() + 0.5, this.getPos().getY() + 0.5, this.getPos().getZ() + 0.5, 1, 0.0, 0.0, 0.0, 0.1);
+            ModUtils.spawnForcedParticles((ServerWorld) this.world, ModParticleTypes.OXYGEN_BUBBLE, this.getPos().getX() + 0.5, this.getPos().getY() + 0.5, this.getPos().getZ() + 0.5, 1, 0.0, 0.0, 0.0, 0.03);
         }
     }
 
     public boolean canDistribute(int oxygenBlocks) {
         long amountOfFluidToExtract = this.getFluidToExtract(oxygenBlocks);
         long amountOfEnergyToConsume = this.getEnergyToConsume(oxygenBlocks);
-        if (this.getCachedState().get(AbstractMachineBlock.POWERED)) {
+        if (this.outputTank.isResourceBlank()) {
+            return false;
+        }
+        else if (this.getCachedState().get(AbstractMachineBlock.POWERED)) {
             return false;
         }
         else if (!this.canDrainEnergy(amountOfEnergyToConsume)) {

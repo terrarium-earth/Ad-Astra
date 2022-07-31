@@ -55,7 +55,7 @@ public class SulfurCreeperEntity extends CreeperEntity {
     protected void explode() {
         if (!this.world.isClient) {
             Explosion.DestructionType destructionType = this.world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING) ? Explosion.DestructionType.DESTROY : Explosion.DestructionType.NONE;
-            float f = this.shouldRenderOverlay() ? 2.0f : 1.0f;
+            float f = this.isOverlayConditionMet() ? 2.0f : 1.0f;
             this.dead = true;
             Explosion explosion = this.world.createExplosion(this, this.getX(), this.getY(), this.getZ(), 2.5f * f, destructionType);
             for (PlayerEntity player : explosion.getAffectedPlayers().keySet()) {

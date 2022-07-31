@@ -16,6 +16,7 @@ import net.minecraft.block.CactusBlock;
 import net.minecraft.block.GrassBlock;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.PlantBlock;
+import net.minecraft.block.VineBlock;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -40,6 +41,12 @@ public class BlockMixin {
         }
 
         if (block instanceof LeavesBlock) {
+            if (!OxygenUtils.worldHasOxygen(world, pos)) {
+                world.breakBlock(pos, false);
+            }
+        }
+
+        if (block instanceof VineBlock) {
             if (!OxygenUtils.worldHasOxygen(world, pos)) {
                 world.breakBlock(pos, false);
             }

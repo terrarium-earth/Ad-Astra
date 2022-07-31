@@ -12,11 +12,11 @@ import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.block.StoneButtonBlock;
 import net.minecraft.block.WallBlock;
-import net.minecraft.data.client.BlockStateModelGenerator;
-import net.minecraft.data.client.BlockStateModelGenerator.BlockTexturePool;
 import net.minecraft.data.client.ItemModelGenerator;
-import net.minecraft.data.client.Models;
-import net.minecraft.data.client.TexturedModel;
+import net.minecraft.data.client.model.BlockStateModelGenerator;
+import net.minecraft.data.client.model.BlockStateModelGenerator.BlockTexturePool;
+import net.minecraft.data.client.model.Models;
+import net.minecraft.data.client.model.TexturedModel;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -34,7 +34,7 @@ public class ModModelProvider extends FabricModelProvider implements ModBlocks {
             Identifier id = Registry.BLOCK.getId(block);
             if (block instanceof StairsBlock stair) {
                 TexturedModel texturedModel = TexturedModel.CUBE_ALL.get(stair.baseBlock);
-                BlockTexturePool pool = blockStateModelGenerator.new BlockTexturePool(texturedModel.getTextures());
+                BlockTexturePool pool = blockStateModelGenerator.new BlockTexturePool(texturedModel.getTexture());
                 pool.stairs(block);
             }
 
@@ -44,19 +44,19 @@ public class ModModelProvider extends FabricModelProvider implements ModBlocks {
 
             if (block instanceof WallBlock) {
                 TexturedModel texturedModel = TexturedModel.CUBE_ALL.get(getReplacedPathBlock(id, "_wall", "s"));
-                BlockTexturePool pool = blockStateModelGenerator.new BlockTexturePool(texturedModel.getTextures());
+                BlockTexturePool pool = blockStateModelGenerator.new BlockTexturePool(texturedModel.getTexture());
                 pool.wall(block);
             }
 
             if (block instanceof StoneButtonBlock) {
                 TexturedModel texturedModel = TexturedModel.CUBE_ALL.get(getReplacedPathBlock(id, "_button", ""));
-                BlockTexturePool pool = blockStateModelGenerator.new BlockTexturePool(texturedModel.getTextures());
+                BlockTexturePool pool = blockStateModelGenerator.new BlockTexturePool(texturedModel.getTexture());
                 pool.button(block);
             }
 
             if (block instanceof PressurePlateBlock) {
                 TexturedModel texturedModel = TexturedModel.CUBE_ALL.get(getReplacedPathBlock(id, "_pressure_plate", ""));
-                BlockTexturePool pool = blockStateModelGenerator.new BlockTexturePool(texturedModel.getTextures());
+                BlockTexturePool pool = blockStateModelGenerator.new BlockTexturePool(texturedModel.getTexture());
                 pool.pressurePlate(block);
             }
         }
@@ -85,7 +85,7 @@ public class ModModelProvider extends FabricModelProvider implements ModBlocks {
 
     public static void registerSlab(BlockStateModelGenerator blockStateModelGenerator, Block slab, Block source) {
         TexturedModel texturedModel = TexturedModel.CUBE_ALL.get(source);
-        BlockTexturePool pool = blockStateModelGenerator.new BlockTexturePool(texturedModel.getTextures());
+        BlockTexturePool pool = blockStateModelGenerator.new BlockTexturePool(texturedModel.getTexture());
         pool.base(source, Models.CUBE_ALL);
         pool.slab(slab);
     }

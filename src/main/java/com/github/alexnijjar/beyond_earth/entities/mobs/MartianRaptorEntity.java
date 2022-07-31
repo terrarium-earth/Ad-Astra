@@ -8,7 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.goal.ActiveTargetGoal;
+import net.minecraft.entity.ai.goal.TargetGoal;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.ai.goal.PounceAtTargetGoal;
@@ -35,7 +35,7 @@ public class MartianRaptorEntity extends HostileEntity {
         return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3).add(EntityAttributes.GENERIC_MAX_HEALTH, 26).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 8);
     }
 
-public MartianRaptorEntity(EntityType<? extends HostileEntity> entityType, World world) {
+    public MartianRaptorEntity(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
     }
 
@@ -46,7 +46,7 @@ public MartianRaptorEntity(EntityType<? extends HostileEntity> entityType, World
         this.goalSelector.add(3, new WanderAroundGoal(this, 0.8));
         this.goalSelector.add(4, new LookAroundGoal(this));
         this.goalSelector.add(5, new PounceAtTargetGoal(this, 0.2f));
-        this.targetSelector.add(6, new ActiveTargetGoal<PlayerEntity>(this, PlayerEntity.class, false));
+        this.targetSelector.add(6, new TargetGoal<PlayerEntity>(this, PlayerEntity.class, false));
         this.goalSelector.add(7, new WanderAroundFarGoal((PathAwareEntity) this, 1.0));
     }
 
@@ -98,7 +98,7 @@ public MartianRaptorEntity(EntityType<? extends HostileEntity> entityType, World
         if (!BeyondEarth.CONFIG.world.spawnMartianRaptors) {
             return false;
         }
-        
+
         BlockState blockState = world.getBlockState(new BlockPos(this.getX(), this.getY() - 1, this.getZ()));
 
         if (blockState.isOf(Blocks.LAVA) || blockState.isOf(Blocks.AIR)) {

@@ -5,7 +5,9 @@ import javax.annotation.Nullable;
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.blocks.machines.AbstractMachineBlock;
 import com.github.alexnijjar.beyond_earth.registry.ModBlockEntities;
+import com.github.alexnijjar.beyond_earth.registry.ModParticleTypes;
 import com.github.alexnijjar.beyond_earth.screen.handler.WaterPumpScreenHandler;
+import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
@@ -20,6 +22,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 
@@ -92,6 +95,7 @@ public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
                     // Drain the water block and add it to the tank.
                     if (!this.getCachedState().get(AbstractMachineBlock.POWERED) && this.hasEnergy()) {
                         this.setActive(true);
+                        ModUtils.spawnForcedParticles((ServerWorld) this.world, ModParticleTypes.OXYGEN_BUBBLE, this.getPos().getX() + 0.5, this.getPos().getY() - 0.5, this.getPos().getZ() + 0.5, 1, 0.0, 0.0, 0.0, 0.01);
                         this.drainEnergy();
                         waterExtracted += BeyondEarth.CONFIG.waterPump.transferPerTick;
                         try (Transaction transaction = Transaction.openOuter()) {

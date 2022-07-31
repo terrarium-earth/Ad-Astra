@@ -7,12 +7,11 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import net.minecraft.block.Blocks;
-import net.minecraft.structure.StructureSet;
-import net.minecraft.util.dynamic.RegistryOps;
+import net.minecraft.util.Holder;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.noise.DoublePerlinNoiseSampler;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryEntry;
+import net.minecraft.util.registry.RegistryOps;
 import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.chunk.Chunk;
@@ -20,16 +19,17 @@ import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.ChunkGeneratorSettings;
 import net.minecraft.world.gen.chunk.NoiseChunkGenerator;
+import net.minecraft.world.gen.structure.StructureSet;
 
 public class PlanetChunkGenerator extends NoiseChunkGenerator {
 
     public static final Codec<PlanetChunkGenerator> CODEC = RecordCodecBuilder.create((instance) -> method_41042(instance)
-            .and(instance.group(RegistryOps.createRegistryCodec(Registry.NOISE_WORLDGEN).forGetter((generator) -> ((NoiseChunkGeneratorAccessor) generator).getNoiseRegistry()),
+            .and(instance.group(RegistryOps.getRegistry(Registry.NOISE_KEY).forGetter((generator) -> ((NoiseChunkGeneratorAccessor) generator).getNoiseRegistry()),
                     BiomeSource.CODEC.fieldOf("biome_source").forGetter((generator) -> ((ChunkGeneratorAccessor) generator).getPopulationSource()),
                     Codec.LONG.fieldOf("seed").stable().forGetter((generator) -> ((NoiseChunkGeneratorAccessor) generator).getSeed()), ChunkGeneratorSettings.REGISTRY_CODEC.fieldOf("settings").forGetter((generator) -> generator.settings)))
             .apply(instance, instance.stable(PlanetChunkGenerator::new)));
 
-    public PlanetChunkGenerator(Registry<StructureSet> noiseRegistry, Registry<DoublePerlinNoiseSampler.NoiseParameters> structuresRegistry, BiomeSource biomeSource, long seed, RegistryEntry<ChunkGeneratorSettings> settings) {
+    public PlanetChunkGenerator(Registry<StructureSet> noiseRegistry, Registry<DoublePerlinNoiseSampler.NoiseParameters> structuresRegistry, BiomeSource biomeSource, long seed, Holder<ChunkGeneratorSettings> settings) {
         super(noiseRegistry, structuresRegistry, biomeSource, WorldSeed.getSeed() + seed, settings);
     }
 

@@ -75,10 +75,10 @@ public class GlobeBlock extends BlockWithEntity implements Waterloggable {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
         return (entityWorld, pos, entityState, blockEntity) -> {
-			if (blockEntity instanceof GlobeBlockEntity globe) {
-				globe.tick();
-			}
-		};
+            if (blockEntity instanceof GlobeBlockEntity globe) {
+                globe.tick();
+            }
+        };
     }
 
     @Override
@@ -89,7 +89,7 @@ public class GlobeBlock extends BlockWithEntity implements Waterloggable {
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         if (state.get(WATERLOGGED)) {
-            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
@@ -145,7 +145,7 @@ public class GlobeBlock extends BlockWithEntity implements Waterloggable {
     @Override
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
         super.neighborUpdate(state, world, pos, block, fromPos, notify);
-        
+
         if (!world.isClient) {
             world.setBlockState(pos, state.with(POWERED, world.isReceivingRedstonePower(pos)));
         }

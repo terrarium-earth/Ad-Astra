@@ -44,12 +44,12 @@ public class ModCloudRenderer implements DimensionRenderingRegistry.CloudRendere
                 MatrixStack matrices = context.matrixStack();
                 float tickDelta = context.tickDelta();
                 MinecraftClient client = MinecraftClient.getInstance();
-                float g = context.world().getDimensionEffects().getCloudsHeight();
+                float g = context.world().getSkyProperties().getCloudsHeight();
                 if (!Float.isNaN(g)) {
                         RenderSystem.disableCull();
                         RenderSystem.enableBlend();
                         RenderSystem.enableDepthTest();
-                        RenderSystem.blendFuncSeparate(GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SrcFactor.ONE, GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA);
+                        RenderSystem.blendFuncSeparate(GlStateManager.class_4535.SRC_ALPHA, GlStateManager.class_4534.ONE_MINUS_SRC_ALPHA, GlStateManager.class_4535.ONE, GlStateManager.class_4534.ONE_MINUS_SRC_ALPHA);
                         RenderSystem.depthMask(true);
                         double k = ((float) renderer.getTicks() + tickDelta) * 0.03f;
                         double l = (cameraPosX + k) / 12.0;
@@ -104,7 +104,7 @@ public class ModCloudRenderer implements DimensionRenderingRegistry.CloudRendere
                                         }
 
                                         Shader shader = RenderSystem.getShader();
-                                        renderer.getCloudsBuffer().setShader(matrices.peek().getPositionMatrix(), context.projectionMatrix(), shader);
+                                        renderer.getCloudsBuffer().setShader(matrices.peek().getModel(), context.projectionMatrix(), shader);
                                 }
                         }
 

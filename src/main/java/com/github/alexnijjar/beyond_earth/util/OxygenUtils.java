@@ -27,6 +27,7 @@ import net.minecraft.block.FireBlock;
 import net.minecraft.block.GrassBlock;
 import net.minecraft.block.PlantBlock;
 import net.minecraft.block.TorchBlock;
+import net.minecraft.block.VineBlock;
 import net.minecraft.block.WallTorchBlock;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -148,6 +149,9 @@ public class OxygenUtils {
             return;
         }
         if (worldHasOxygen(world)) {
+            if (oxygenLocations.containsKey(Pair.of(world.getRegistryKey(), source))) {
+                oxygenLocations.remove(Pair.of(world.getRegistryKey(), source));
+            }
             return;
         }
 
@@ -200,7 +204,7 @@ public class OxygenUtils {
                 continue;
             }
 
-            if (block instanceof PlantBlock || block instanceof CactusBlock) {
+            if (block instanceof PlantBlock || block instanceof CactusBlock || block instanceof VineBlock) {
                 world.removeBlock(pos, true);
                 continue;
             }
