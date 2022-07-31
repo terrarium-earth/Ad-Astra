@@ -8,13 +8,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.advancement.ModCriteria;
 import com.github.alexnijjar.beyond_earth.client.BeyondEarthClient;
 import com.github.alexnijjar.beyond_earth.data.Planet;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.LanderEntity;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntity;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.VehicleEntity;
 import com.github.alexnijjar.beyond_earth.items.vehicles.VehicleItem;
+import com.github.alexnijjar.beyond_earth.registry.ModCriteria;
 import com.github.alexnijjar.beyond_earth.registry.ModEntityTypes;
 
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;

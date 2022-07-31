@@ -4,10 +4,10 @@
             "item": "minecraft:tnt"
         },
         "title": {
-            "translate": "advancements.wasted_technology.title"
+            "translate": "advancements.rocket_destroyed.title"
         },
         "description": {
-            "translate": "advancements.wasted_technology.description"
+            "translate": "advancements.rocket_destroyed.description"
         },
         "frame": "goal",
         "show_toast": true,
@@ -15,7 +15,7 @@
         "hidden": false
     },
     "criteria": {
-        "wasted_technology": {
+        "rocket_destroyed": {
             "trigger": "beyond_earth:rocket_destroyed",
             "conditions": {
             }
