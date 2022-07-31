@@ -2,7 +2,7 @@ package com.github.alexnijjar.beyond_earth.items.vehicles;
 
 import java.util.List;
 
-import com.github.alexnijjar.beyond_earth.blocks.launch_pad.RocketLaunchPad;
+import com.github.alexnijjar.beyond_earth.blocks.pads.RocketLaunchPad;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntity;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier1;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier2;

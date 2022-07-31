@@ -3,9 +3,9 @@ package com.github.alexnijjar.beyond_earth.entities.vehicles;
 import java.util.List;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.advancement.ModCriteria;
-import com.github.alexnijjar.beyond_earth.blocks.launch_pad.RocketLaunchPad;
+import com.github.alexnijjar.beyond_earth.blocks.pads.RocketLaunchPad;
 import com.github.alexnijjar.beyond_earth.items.armour.NetheriteSpaceSuit;
+import com.github.alexnijjar.beyond_earth.registry.ModCriteria;
 import com.github.alexnijjar.beyond_earth.registry.ModDamageSource;
 import com.github.alexnijjar.beyond_earth.registry.ModFluids;
 import com.github.alexnijjar.beyond_earth.registry.ModParticleTypes;
