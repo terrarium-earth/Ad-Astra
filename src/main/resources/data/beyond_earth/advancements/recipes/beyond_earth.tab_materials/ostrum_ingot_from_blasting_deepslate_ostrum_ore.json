@@ -2,17 +2,17 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:moon_stone_bricks_from_moon_stone_stonecutting"
+      "minecraft:ostrum_ingot_from_blasting_deepslate_ostrum_ore"
     ]
   },
   "criteria": {
-    "has_moon_stone": {
+    "has_deepslate_ostrum_ore": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "beyond_earth:moon_stone"
+              "beyond_earth:deepslate_ostrum_ore"
             ]
           }
         ]
@@ -21,13 +21,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "minecraft:moon_stone_bricks_from_moon_stone_stonecutting"
+        "recipe": "minecraft:ostrum_ingot_from_blasting_deepslate_ostrum_ore"
       }
     }
   },
   "requirements": [
     [
-      "has_moon_stone",
+      "has_deepslate_ostrum_ore",
       "has_the_recipe"
     ]
   ]

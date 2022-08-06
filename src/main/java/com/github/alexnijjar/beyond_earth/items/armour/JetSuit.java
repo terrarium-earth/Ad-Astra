@@ -27,11 +27,6 @@ import team.reborn.energy.api.base.SimpleBatteryItem;
 
 public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, FabricElytraItem {
 
-    public static final long MAX_ENERGY = BeyondEarth.CONFIG.spaceSuit.jetSuitMaxEnergy;
-    public static final long TANK_SIZE = BeyondEarth.CONFIG.spaceSuit.jetSuitTankSize;
-    public static final double SPEED = BeyondEarth.CONFIG.spaceSuit.jetSuitSpeed;
-    public static final double UPWARDS_SPEED = BeyondEarth.CONFIG.spaceSuit.jetSuitUpwardsSpeed;
-    public static final long JET_SUIT_ENERGY_PER_TICK = BeyondEarth.CONFIG.spaceSuit.jetSuitEnergyPerTick;
     public boolean isFallFlying;
 
     public JetSuit(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
@@ -40,7 +35,7 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
 
     @Override
     public long getTankSize() {
-        return TANK_SIZE;
+        return BeyondEarth.CONFIG.spaceSuit.jetSuitTankSize;
     }
 
     @Override
@@ -54,7 +49,7 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
         super.appendTooltip(stack, world, tooltip, context);
         if (stack.isOf(ModItems.JET_SUIT)) {
             long energy = this.getStoredEnergy(stack);
-            tooltip.add(new TranslatableText("gauge_text.beyond_earth.storage", energy, MAX_ENERGY).setStyle(Style.EMPTY.withColor(energy > 0 ? Formatting.GREEN : Formatting.RED)));
+            tooltip.add(new TranslatableText("gauge_text.beyond_earth.storage", energy, BeyondEarth.CONFIG.spaceSuit.jetSuitMaxEnergy).setStyle(Style.EMPTY.withColor(energy > 0 ? Formatting.GREEN : Formatting.RED)));
         }
     }
 
@@ -92,12 +87,12 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
 
     public void hover(PlayerEntity player, ItemStack stack) {
         player.fallDistance /= 2;
-        if (!player.isCreative() && !this.tryUseEnergy(stack, JET_SUIT_ENERGY_PER_TICK)) {
+        if (!player.isCreative() && !this.tryUseEnergy(stack, BeyondEarth.CONFIG.spaceSuit.jetSuitEnergyPerTick)) {
             this.setStoredEnergy(stack, 0);
         }
         isFallFlying = false;
 
-        double speed = UPWARDS_SPEED;
+        double speed = BeyondEarth.CONFIG.spaceSuit.jetSuitUpwardsSpeed;
         player.setVelocity(player.getVelocity().add(0.0, speed, 0.0));
         if (player.getVelocity().getY() > speed) {
             player.setVelocity(player.getVelocity().getX(), speed, player.getVelocity().getZ());
@@ -108,12 +103,12 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
         if (player.isOnGround()) {
             player.fallDistance /= 2;
         }
-        if (!player.isCreative() && !this.tryUseEnergy(stack, JET_SUIT_ENERGY_PER_TICK * 2)) {
+        if (!player.isCreative() && !this.tryUseEnergy(stack, BeyondEarth.CONFIG.spaceSuit.jetSuitEnergyPerTick * 2)) {
             this.setStoredEnergy(stack, 0);
         }
         isFallFlying = true;
 
-        double speed = SPEED - (ModUtils.getPlanetGravity(player.world) * 0.25);
+        double speed = BeyondEarth.CONFIG.spaceSuit.jetSuitSpeed - (ModUtils.getPlanetGravity(player.world) * 0.25);
         Vec3d rotationVector = player.getRotationVector().multiply(speed);
         Vec3d velocity = player.getVelocity();
         player.setVelocity(velocity.add(rotationVector.getX() * 0.1 + (rotationVector.getX() * 1.5 - velocity.getX()) * 0.5, rotationVector.getY() * 0.1 + (rotationVector.getY() * 1.5 - velocity.getY()) * 0.5,
@@ -137,7 +132,7 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
 
     @Override
     public long getEnergyCapacity() {
-        return MAX_ENERGY;
+        return BeyondEarth.CONFIG.spaceSuit.jetSuitMaxEnergy;
     }
 
     @Override

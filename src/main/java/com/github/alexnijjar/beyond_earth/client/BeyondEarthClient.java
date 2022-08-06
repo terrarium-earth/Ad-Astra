@@ -22,7 +22,9 @@ import com.github.alexnijjar.beyond_earth.client.renderer.spacesuit.JetSuitModel
 import com.github.alexnijjar.beyond_earth.client.renderer.spacesuit.SpaceSuitLegsModel;
 import com.github.alexnijjar.beyond_earth.client.renderer.spacesuit.SpaceSuitModel;
 import com.github.alexnijjar.beyond_earth.client.renderer.spacesuit.SpaceSuitRenderer;
+import com.github.alexnijjar.beyond_earth.client.resource_pack.Galaxy;
 import com.github.alexnijjar.beyond_earth.client.resource_pack.PlanetResources;
+import com.github.alexnijjar.beyond_earth.client.resource_pack.PlanetRing;
 import com.github.alexnijjar.beyond_earth.client.resource_pack.SkyRenderer;
 import com.github.alexnijjar.beyond_earth.client.resource_pack.SolarSystem;
 import com.github.alexnijjar.beyond_earth.client.screens.PlayerOverlayScreen;
@@ -57,6 +59,10 @@ public class BeyondEarthClient implements ClientModInitializer {
         public static List<SolarSystem> solarSystems = new ArrayList<>();
         @Environment(EnvType.CLIENT)
         public static List<SkyRenderer> skyRenderers = new ArrayList<>();
+        @Environment(EnvType.CLIENT)
+        public static List<PlanetRing> planetRings = new ArrayList<>();
+        @Environment(EnvType.CLIENT)
+        public static List<Galaxy> galaxies = new ArrayList<>();
 
         @Override
         @Environment(EnvType.CLIENT)

@@ -78,11 +78,14 @@ public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
 
     @Override
     public void tick() {
+        super.tick();
         if (!this.world.isClient) {
             ItemStack insertSlot = this.getItems().get(0);
             ItemStack extractSlot = this.getItems().get(1);
             ItemStack outputInsertSlot = this.getItems().get(2);
             ItemStack outputExtractSlot = this.getItems().get(3);
+
+            System.out.println(this.inputTank.isResourceBlank());
 
             if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxCount()) {
                 ModRecipes.OXYGEN_CONVERSION_RECIPE.getRecipes(this.world);

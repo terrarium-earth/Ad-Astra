@@ -79,12 +79,12 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 
     @Override
     public long getEnergyPerTick() {
-        return BeyondEarth.CONFIG.oxygenDistributor.energyPerTick;
+        return BeyondEarth.CONFIG.oxygenDistributor.fluidConversionEnergyPerTick;
     }
 
     @Override
     public long getMaxEnergyInsert() {
-        return BeyondEarth.CONFIG.oxygenDistributor.energyPerTick * 32;
+        return BeyondEarth.CONFIG.oxygenDistributor.fluidConversionEnergyPerTick * 512;
     }
 
     @Override
@@ -113,11 +113,13 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
     }
 
     public long getFluidToExtract(long oxygenBlocks) {
-        return (long) ((oxygenBlocks * BeyondEarth.CONFIG.oxygenDistributor.oxygenMultiplier) / 40);
+        long value = (long) ((oxygenBlocks * BeyondEarth.CONFIG.oxygenDistributor.oxygenMultiplier) / 40);
+        return value == 0 ? 1 : value;
     }
 
     public long getEnergyToConsume(long oxygenBlocks) {
-        return (long) ((oxygenBlocks * BeyondEarth.CONFIG.oxygenDistributor.energyMultiplier) / 75);
+        long value = (long) ((oxygenBlocks * BeyondEarth.CONFIG.oxygenDistributor.energyMultiplier) / 75);
+        return value == 0 ? 1 : value;
     }
 
     public void extractResources() {
@@ -144,11 +146,9 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
         long amountOfEnergyToConsume = this.getEnergyToConsume(oxygenBlocks);
         if (this.outputTank.isResourceBlank()) {
             return false;
-        }
-        else if (this.getCachedState().get(AbstractMachineBlock.POWERED)) {
+        } else if (this.getCachedState().get(AbstractMachineBlock.POWERED)) {
             return false;
-        }
-        else if (!this.canDrainEnergy(amountOfEnergyToConsume)) {
+        } else if (!this.canDrainEnergy(amountOfEnergyToConsume)) {
             return false;
         } else if (this.outputTank.variant.isBlank()) {
             return false;
@@ -160,7 +160,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 
     @Override
     public void tick() {
-
+        super.tick();
         BlockPos pos = this.getPos();
 
         ItemStack insertSlot = this.getItems().get(0);
@@ -183,15 +183,17 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 
         // Distribute the oxygen every certain amount of ticks. The algorithm is then run to determine how much oxygen to distribute.
         if (oxygenFillCheckTicks >= BeyondEarth.CONFIG.oxygenDistributor.refreshTicks) {
-            OxygenFillerAlgorithm floodFiller = new OxygenFillerAlgorithm(this.world, this.getMaxBlockChecks());
-            Set<BlockPos> positions = floodFiller.runAlgorithm(pos.up());
+            if (this.energyStorage.amount > 0 && this.outputTank.amount > 0 && !this.getCachedState().get(AbstractMachineBlock.POWERED)) {
+                OxygenFillerAlgorithm floodFiller = new OxygenFillerAlgorithm(this.world, this.getMaxBlockChecks());
+                Set<BlockPos> positions = floodFiller.runAlgorithm(pos.up());
 
-            if (this.canDistribute(positions.size())) {
-                OxygenUtils.setEntry(this.world, pos, positions);
-            } else {
-                OxygenUtils.removeEntry(this.world, this.getPos());
+                if (this.canDistribute(positions.size())) {
+                    OxygenUtils.setEntry(this.world, pos, positions);
+                } else {
+                    OxygenUtils.removeEntry(this.world, this.getPos());
+                }
             }
-            
+
             oxygenFillCheckTicks = 0;
         } else {
             oxygenFillCheckTicks++;

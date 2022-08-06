@@ -46,6 +46,8 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
     public static final int ENERGY_LEFT = 147;
     public static final int ENERGY_TOP = 82;
 
+    private boolean displayConversionEnergyCost = false;
+
     CustomButton visibleButton;
 
     public OxygenDistributorScreen(OxygenDistributorScreenHandler handler, PlayerInventory inventory, Text title) {
@@ -123,22 +125,35 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
         super.drawForeground(matrices, mouseX, mouseY);
         long oxygenBlocksCount = OxygenUtils.getOxygenBlocksCount(this.blockEntity.getWorld(), this.blockEntity.getPos());
         matrices.push();
-        matrices.scale(0.75f, 0.75f, 0.75f);
+        matrices.scale(0.9f, 0.9f, 0.9f);
         Text oxygenBlockText = new TranslatableText("gauge_text.beyond_earth.oxygen_blocks");
         Text oxygenBlockAmount = Text.of(oxygenBlocksCount + " / " + BeyondEarth.CONFIG.oxygenDistributor.maxBlockChecks);
-        matrices.scale(1.2f, 1.2f, 1.2f);
+
         int offset = 25;
         this.textRenderer.draw(matrices, oxygenBlockText, 11, offset + 11, 0x68d975);
         this.textRenderer.draw(matrices, oxygenBlockAmount, 11, offset + 24, 0x68d975);
 
         OxygenDistributorBlockEntity entity = (OxygenDistributorBlockEntity) this.blockEntity;
-        long oxygenUsagePerTick = entity.getFluidToExtract(oxygenBlocksCount);
+
         long energyUsagePerTick = entity.getEnergyToConsume(oxygenBlocksCount);
+
+        if (displayConversionEnergyCost) {
+            energyUsagePerTick += entity.getEnergyPerTick();
+            this.displayConversionEnergyCost = false;
+        } else if (entity.inputTank.amount > 0 && entity.outputTank.amount < entity.outputTank.getCapacity()) {
+            energyUsagePerTick += entity.getEnergyPerTick();
+            displayConversionEnergyCost = true;
+        }
+
+        long oxygenUsagePerTick = entity.getFluidToExtract(oxygenBlocksCount);
 
         float oxygenUsageRounded = FluidUtils.dropletsToMillibucketsFloat(oxygenUsagePerTick);
         oxygenUsageRounded = (float) (Math.round(oxygenUsageRounded * 1000.0) / 1000.0);
-        this.textRenderer.draw(matrices, new TranslatableText("gauge_text.beyond_earth.fluid_per_tick", oxygenUsageRounded), 11, offset + -5, 0x68d975);
+
+        // Energy per tick text
         this.textRenderer.draw(matrices, new TranslatableText("gauge_text.beyond_earth.energy_per_tick", energyUsagePerTick), 11, offset + -17, 0x68d975);
+        // Oxygen usage per tick text
+        this.textRenderer.draw(matrices, new TranslatableText("gauge_text.beyond_earth.fluid_per_tick", oxygenUsageRounded), 11, offset + -5, 0x68d975);
         matrices.pop();
     }
 

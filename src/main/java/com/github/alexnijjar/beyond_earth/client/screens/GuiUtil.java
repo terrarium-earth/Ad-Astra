@@ -31,6 +31,7 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Matrix4f;
 
 @Environment(EnvType.CLIENT)
@@ -202,7 +203,7 @@ public class GuiUtil {
     }
 
     public static void drawEnergyTooltip(Screen screen, MatrixStack matrices, AbstractMachineBlockEntity machine, int mouseX, int mouseY) {
-        screen.renderTooltip(matrices, new TranslatableText("gauge_text.beyond_earth.storage", machine.getEnergy(), machine.getMaxGeneration()).setStyle(Style.EMPTY.withColor(Formatting.GOLD)), mouseX, mouseY);
+        screen.renderTooltip(matrices, new TranslatableText("gauge_text.beyond_earth.storage", MathHelper.clamp(machine.getEnergy(), 0, machine.getMaxGeneration()), machine.getMaxGeneration()).setStyle(Style.EMPTY.withColor(Formatting.GOLD)), mouseX, mouseY);
     }
 
     public static void drawTankTooltip(Screen screen, MatrixStack matrices, SingleVariantStorage<FluidVariant> tank, int mouseX, int mouseY) {

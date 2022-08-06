@@ -156,13 +156,14 @@ public class RoverEntityModel extends VehicleEntityModel<RoverEntity> {
                 float wheelPitch = (float) MathHelper.lerp(tickDelta, entity.prevWheelPitch / 3.0, entity.wheelPitch / 3.0);
 
                 ModelPart wheels = this.frame.getChild("Wheels");
-                this.frame.getChild("Wheels").getChild("Wheel1").pitch = wheelPitch;
+                wheels.getChild("Wheel1").pitch = wheelPitch;
                 wheels.getChild("Wheel2").pitch = wheelPitch;
                 wheels.getChild("Wheel3").pitch = wheelPitch;
                 wheels.getChild("Wheel4").pitch = wheelPitch;
 
-                float speed = MathHelper.sign(entity.getSpeed());
-                wheels.getChild("Wheel1").yaw = (float) Math.toRadians(speed * entity.getTurnSpeed() * 5);
-                wheels.getChild("Wheel2").yaw = (float) Math.toRadians(speed * entity.getTurnSpeed() * 5);
+				float speed = MathHelper.sign(entity.getSpeed());
+				float wheelYaw = MathHelper.clamp((float) Math.toRadians(speed * entity.getTurnSpeed() * 5), -0.5f, 0.5f);
+				wheels.getChild("Wheel1").yaw = wheelYaw;
+				wheels.getChild("Wheel2").yaw = wheelYaw;
         }
 }

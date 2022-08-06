@@ -1,8 +1,9 @@
 package com.github.alexnijjar.beyond_earth.data;
 
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
@@ -33,7 +34,7 @@ public class PlanetData {
 
             @Override
             public void reload(ResourceManager manager) {
-                Set<Planet> planets = new HashSet<>();
+                List<Planet> planets = new ArrayList<>();
 
                 // Planets.
                 for (Identifier id : manager.findResources("planet_data/planets", path -> path.endsWith(".json"))) {
@@ -52,7 +53,7 @@ public class PlanetData {
                     }
                 }
 
-                BeyondEarth.planets = planets;
+                BeyondEarth.planets = new HashSet<>(planets);
             }
         });
     }

@@ -78,6 +78,7 @@ public class FuelRefineryBlockEntity extends FluidMachineBlockEntity {
 
     @Override
     public void tick() {
+        super.tick();
         if (!this.world.isClient) {
             ItemStack insertSlot = this.getItems().get(0);
             ItemStack extractSlot = this.getItems().get(1);

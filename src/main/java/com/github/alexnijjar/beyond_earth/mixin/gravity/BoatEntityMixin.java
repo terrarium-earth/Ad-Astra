@@ -19,7 +19,7 @@ public abstract class BoatEntityMixin {
 
     @Inject(method = "updateVelocity", at = @At("TAIL"), cancellable = true)
     public void updateVelocity(CallbackInfo ci) {
-        if (BeyondEarth.CONFIG.world.doEntityGravity) {
+        if (BeyondEarth.CONFIG.general.doEntityGravity) {
             Entity entity = (Entity) (Object) this;
             if (!entity.hasNoGravity()) {
                 Vec3d velocity = entity.getVelocity();

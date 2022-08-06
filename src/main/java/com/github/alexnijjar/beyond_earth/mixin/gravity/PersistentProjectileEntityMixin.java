@@ -19,7 +19,7 @@ public abstract class PersistentProjectileEntityMixin {
 
     @Inject(method = "tick", at = @At("TAIL"), cancellable = true)
     public void tick(CallbackInfo ci) {
-        if (BeyondEarth.CONFIG.world.doEntityGravity) {
+        if (BeyondEarth.CONFIG.general.doEntityGravity) {
             Entity entity = (Entity) (Object) this;
             if (!entity.hasNoGravity()) {
                 Vec3d velocity = entity.getVelocity();

@@ -29,7 +29,7 @@
             "texture": "beyond_earth:textures/sky/vicinus.png",
             "blending": false,
             "render_type": "static",
-            "scale": 16.0,
+            "scale": 40.0,
             "rotation": {
                 "x": 30.0,
                 "y": 0.0,
@@ -40,7 +40,7 @@
             "texture": "beyond_earth:textures/sky/light.png",
             "blending": true,
             "render_type": "static",
-            "scale": 48.0,
+            "scale": 120.0,
             "color": {
                 "r": 204,
                 "g": 153,

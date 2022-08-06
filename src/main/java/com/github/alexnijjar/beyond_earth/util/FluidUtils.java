@@ -95,8 +95,6 @@ public class FluidUtils {
 			if (inputTankFluid.equals(recipeInputVariant)) {
 				if (convertAndMove(inventory.inputTank, inventory.outputTank, f -> true, millibucketsToDroplets(transferPerTick), null, recipeOutputVariant, conversionRatio) > 0) {
 					return true;
-				} else {
-					inventory.inputTank.amount = 0;
 				}
 			}
 		}

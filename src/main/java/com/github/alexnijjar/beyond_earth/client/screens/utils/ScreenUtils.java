@@ -1,6 +1,7 @@
 package com.github.alexnijjar.beyond_earth.client.screens.utils;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
+import com.github.alexnijjar.beyond_earth.util.ColourHolder;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.fabricmc.api.EnvType;
@@ -24,6 +25,10 @@ public class ScreenUtils {
         return new TranslatableText("gui." + BeyondEarth.MOD_ID + ".text." + text);
     }
 
+    public static Text createText(Identifier text) {
+        return new TranslatableText("gui." + text.getNamespace() + ".text." + text.getPath());
+    }
+
     public static void addTexture(MatrixStack matrices, int x, int y, int width, int height, Identifier texture) {
         RenderSystem.setShaderTexture(0, texture);
         DrawableHelper.drawTexture(matrices, x, y, 0, 0, width, height, width, height);
@@ -42,7 +47,7 @@ public class ScreenUtils {
         matrices.pop();
     }
 
-    public static void drawCircle(double x, double y, double radius, int sides) {
+    public static void drawCircle(double x, double y, double radius, int sides, ColourHolder ringColour) {
 
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferBuilder = tessellator.getBuffer();
@@ -53,7 +58,7 @@ public class ScreenUtils {
             bufferBuilder.begin(VertexFormat.DrawMode.DEBUG_LINE_STRIP, VertexFormats.POSITION_COLOR);
             for (int j = 0; j <= sides; j++) {
                 double angle = (Math.PI * 2 * j / sides) + Math.toRadians(180);
-                bufferBuilder.vertex(x + Math.sin(angle) * i, y + Math.cos(angle) * i, 0).color(36, 50, 123, 255).next();
+                bufferBuilder.vertex(x + Math.sin(angle) * i, y + Math.cos(angle) * i, 0).color((int) ringColour.r(), (int) ringColour.g(), (int) ringColour.b(), (int) ringColour.a()).next();
             }
             tessellator.draw();
         }

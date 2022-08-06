@@ -2,17 +2,17 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:venus_stone_bricks_from_venus_stone_stonecutting"
+      "minecraft:calorite_ingot_from_blasting_deepslate_calorite_ore"
     ]
   },
   "criteria": {
-    "has_venus_stone": {
+    "has_deepslate_calorite_ore": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "beyond_earth:venus_stone"
+              "beyond_earth:deepslate_calorite_ore"
             ]
           }
         ]
@@ -21,13 +21,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "minecraft:venus_stone_bricks_from_venus_stone_stonecutting"
+        "recipe": "minecraft:calorite_ingot_from_blasting_deepslate_calorite_ore"
       }
     }
   },
   "requirements": [
     [
-      "has_venus_stone",
+      "has_deepslate_calorite_ore",
       "has_the_recipe"
     ]
   ]

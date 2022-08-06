@@ -49,7 +49,7 @@ public interface ModItemGroups {
         ItemStack jetSuit = ModItems.JET_SUIT.getDefaultStack();
         ((JetSuit) jetSuit.getItem()).setAmount(jetSuit, ((JetSuit) jetSuit.getItem()).getTankSize());
         ((SpaceSuit) jetSuit.getItem()).setFluid(jetSuit, FluidVariant.of(ModFluids.OXYGEN_STILL));
-        ((JetSuit) jetSuit.getItem()).setStoredEnergy(jetSuit, JetSuit.MAX_ENERGY);
+        ((JetSuit) jetSuit.getItem()).setStoredEnergy(jetSuit, BeyondEarth.CONFIG.spaceSuit.jetSuitMaxEnergy);
 
         stacks.addAll(Collections.nCopies(54, ItemStack.EMPTY));
 

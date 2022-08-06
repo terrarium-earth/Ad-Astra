@@ -48,7 +48,7 @@ public abstract class VehicleEntity extends Entity {
     protected double clientZ;
     public double clientYaw;
     public double clientPitch;
-    private int field_7708;
+    private int clientInterpolationSteps;
 
     protected double clientXVelocity;
     protected double clientYVelocity;
@@ -95,25 +95,25 @@ public abstract class VehicleEntity extends Entity {
         this.clientZ = z;
         this.clientYaw = yaw;
         this.clientPitch = pitch;
-        this.field_7708 = 10;
+        this.clientInterpolationSteps = 10;
         this.setVelocity(this.clientXVelocity, this.clientYVelocity, this.clientZVelocity);
     }
 
     private void updatePositionAndRotation() {
         if (this.isLogicalSideForUpdatingMovement()) {
-            this.field_7708 = 0;
+            this.clientInterpolationSteps = 0;
             this.updateTrackedPosition(this.getX(), this.getY(), this.getZ());
         }
-        if (this.field_7708 <= 0) {
+        if (this.clientInterpolationSteps <= 0) {
             return;
         }
-        double d = this.getX() + (this.clientX - this.getX()) / (double) this.field_7708;
-        double e = this.getY() + (this.clientY - this.getY()) / (double) this.field_7708;
-        double f = this.getZ() + (this.clientZ - this.getZ()) / (double) this.field_7708;
+        double d = this.getX() + (this.clientX - this.getX()) / (double) this.clientInterpolationSteps;
+        double e = this.getY() + (this.clientY - this.getY()) / (double) this.clientInterpolationSteps;
+        double f = this.getZ() + (this.clientZ - this.getZ()) / (double) this.clientInterpolationSteps;
         double g = MathHelper.wrapDegrees(this.clientYaw - (double) this.getYaw());
-        this.setYaw(this.getYaw() + (float) g / (float) this.field_7708);
-        this.setPitch(this.getPitch() + (float) (this.clientPitch - (double) this.getPitch()) / (float) this.field_7708);
-        --this.field_7708;
+        this.setYaw(this.getYaw() + (float) g / (float) this.clientInterpolationSteps);
+        this.setPitch(this.getPitch() + (float) (this.clientPitch - (double) this.getPitch()) / (float) this.clientInterpolationSteps);
+        --this.clientInterpolationSteps;
         this.setPosition(d, e, f);
         this.setRotation(this.getYaw(), this.getPitch());
     }
@@ -156,10 +156,10 @@ public abstract class VehicleEntity extends Entity {
         this.setVelocity(this.getVelocity().add(movement.getX(), 0.0, movement.getZ()).multiply(this.getSpeed()));
 
         // Prevent the vehicle from going too fast
-        double maxVelocity = 0.75;
-        if (this.getVelocity().lengthSquared() > maxVelocity * maxVelocity) {
-            this.setVelocity(this.getVelocity().normalize().multiply(maxVelocity));
-        }
+        // double maxVelocity = 0.75;
+        // if (this.getVelocity().lengthSquared() > maxVelocity * maxVelocity) {
+        // this.setVelocity(this.getVelocity().normalize().multiply(maxVelocity));
+        // }
 
         // Set the y velocity back to the original value, as it was modified by the movement
         this.setVelocity(new Vec3d(this.getVelocity().getX(), yVelocity, this.getVelocity().getZ()));
@@ -167,15 +167,29 @@ public abstract class VehicleEntity extends Entity {
 
     // Slow down the vehicle until a full stop is reached
     public void slowDown() {
-        this.setSpeed(this.getSpeed() / 1.1f);
+        this.setSpeed(this.getSpeed() / 1.05f);
         if (this.getSpeed() < 0.001 && this.getSpeed() > -0.001) {
             this.setSpeed(0.0f);
         }
-        this.setSpeed(MathHelper.clamp(this.getSpeed(), BeyondEarth.CONFIG.vehicles.minSpeed, BeyondEarth.CONFIG.vehicles.maxSpeed));
+        this.setSpeed(MathHelper.clamp(this.getSpeed(), this.getMinSpeed(), this.getMaxSpeed()));
+    }
+
+    public float getMinSpeed() {
+        return -0.2f;
+    }
+
+    public float getMaxSpeed() {
+        return 0.4f;
     }
 
     // Apply gravity to the vehicle.
+    @SuppressWarnings("deprecation")
     public void doGravity() {
+
+        if (!world.isChunkLoaded(this.getBlockPos())) {
+            return;
+        }
+
         if (!this.hasNoGravity()) {
             // Slow down the gravity while in water
             if (this.isTouchingWater()) {
@@ -255,7 +269,7 @@ public abstract class VehicleEntity extends Entity {
         }
 
         if (!this.world.isClient) {
-            this.remove(RemovalReason.DISCARDED);
+            this.discard();
         }
     }
 
@@ -263,14 +277,16 @@ public abstract class VehicleEntity extends Entity {
         if (!this.world.isClient) {
             world.createExplosion(this, this.getX(), this.getY() + 0.5, this.getZ(), 7.0f * powerMultiplier, OxygenUtils.worldHasOxygen(this.world), Explosion.DestructionType.DESTROY);
         }
-        this.remove(RemovalReason.DISCARDED);
+        this.discard();
     }
 
     @Override
     public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
         if (this.getVelocity().getY() < BeyondEarth.CONFIG.vehicles.fallingExplosionThreshold) {
-            this.explode(BeyondEarth.CONFIG.vehicles.fallingExplosionMultiplier);
-            return true;
+            if (this.isOnGround()) {
+                this.explode(BeyondEarth.CONFIG.vehicles.fallingExplosionMultiplier);
+                return true;
+            }
         }
         return false;
     }

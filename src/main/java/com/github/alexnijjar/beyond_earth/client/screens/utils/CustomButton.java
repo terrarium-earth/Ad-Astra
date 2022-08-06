@@ -105,7 +105,7 @@ public class CustomButton extends ButtonWidget {
             case STEEL -> STEEL_BUTTON_TEXTURE;
             });
 
-            drawTexture(matrices, this.x, this.y, 0, 0, this.width, this.height, buttonSize.getWidth(), buttonSize.getHeight());
+            drawTexture(matrices, (this.buttonSize.equals(ButtonType.LARGE) ? this.x - 2 : this.x), this.y, 0, 0, this.width, this.height, buttonSize.getWidth(), buttonSize.getHeight());
             drawText(matrices, client);
 
             if (this.doMask) {
@@ -123,7 +123,13 @@ public class CustomButton extends ButtonWidget {
     public void drawText(MatrixStack matrices, MinecraftClient client) {
         TextRenderer textRenderer = client.textRenderer;
         int colour = this.active ? 16777215 : 10526880;
-        drawCenteredText(matrices, textRenderer, this.getMessage(), this.x + this.width / 2, this.y + (this.height - 8) / 2, colour | MathHelper.ceil(this.alpha * 255.0f) << 24);
+        matrices.push();
+        float scale = 0.9f;
+        matrices.scale(scale, scale, scale);
+        int x = (this.buttonSize.equals(ButtonType.LARGE) ? this.x - 2 : this.x);
+        matrices.translate(4 + (x / 9.5f), this.y / 8.5f, 0);
+        drawCenteredText(matrices, textRenderer, this.getMessage(), x + this.width / 2, this.y + (this.height - 8) / 2, colour | MathHelper.ceil(this.alpha * 255.0f) << 24);
+        matrices.pop();
     }
 
     public int getStartY() {
@@ -138,6 +144,10 @@ public class CustomButton extends ButtonWidget {
         switch (tooltip) {
         case NONE -> {
 
+        }
+        case GALAXY -> {
+            textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.CATEGORY_TEXT.getString() + ": \u00A7b" + label.getString()));
+            textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.TYPE_TEXT.getString() + ": \u00A75" + PlanetSelectionScreen.GALAXY_TEXT.getString()));
         }
         case SOLAR_SYSTEM -> {
             textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.CATEGORY_TEXT.getString() + ": \u00A7b" + label.getString()));

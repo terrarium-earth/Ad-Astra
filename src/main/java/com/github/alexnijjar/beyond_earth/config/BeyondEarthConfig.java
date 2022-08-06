@@ -12,9 +12,8 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 @Config(name = "beyond_earth")
 @Config.Gui.Background("beyond_earth:textures/block/machine_down.png")
 public class BeyondEarthConfig implements ConfigData {
-
     @ConfigEntry.Gui.CollapsibleObject
-    public WorldConfig world = new WorldConfig();
+    public GeneralConfig general = new GeneralConfig();
     @ConfigEntry.Gui.CollapsibleObject
     public SpaceSuitConfig spaceSuit = new SpaceSuitConfig();
     @ConfigEntry.Gui.CollapsibleObject
@@ -44,7 +43,7 @@ public class BeyondEarthConfig implements ConfigData {
     @ConfigEntry.Gui.CollapsibleObject
     public CryoFreezerConfig cryoFreezer = new CryoFreezerConfig();
 
-    public static class WorldConfig {
+    public static class GeneralConfig {
         public boolean spawnCorruptedLunarians = true;
         public boolean spawnStarCrawlers = true;
         public boolean spawnMartianRaptors = true;
@@ -60,7 +59,14 @@ public class BeyondEarthConfig implements ConfigData {
         @ConfigEntry.Gui.Tooltip(count = 2)
         public boolean doSpaceMuffler = true;
         public long oxygenTankSize = FluidConstants.BUCKET / 2;
+        @ConfigEntry.Gui.RequiresRestart
         public int hammerDurability = 64;
+        public float orbitGravity = 3.26f;
+        public boolean giveAstroduxAtSpawn = false;
+        public int oxygenBarXOffset = 0;
+        public int oxygenBarYOffset = 0;
+        public int energyBarXOffset = 0;
+        public int energyBarYOffset = 0;
     }
 
     public static class SpaceSuitConfig {
@@ -71,7 +77,7 @@ public class BeyondEarthConfig implements ConfigData {
         public double jetSuitSpeed = 0.8;
         @ConfigEntry.Gui.Tooltip(count = 1)
         public double jetSuitUpwardsSpeed = 0.5;
-        public long jetSuitEnergyPerTick = 72;
+        public long jetSuitEnergyPerTick = 100;
         public long jetSuitTankSize = FluidConstants.BUCKET * 4;
         public long jetSuitMaxEnergy = 1000000L;
         public boolean spawnJetSuitParticles = true;
@@ -82,10 +88,8 @@ public class BeyondEarthConfig implements ConfigData {
         @ConfigEntry.Gui.Tooltip(count = 1)
         public double fallingExplosionThreshold = -1.2;
         @ConfigEntry.Gui.Tooltip(count = 1)
-        public float fallingExplosionMultiplier = 0.55f;
+        public float fallingExplosionMultiplier = 0.7f;
         public double gravity = -2.0;
-        public float minSpeed = -0.15f;
-        public float maxSpeed = 0.2f;
         @ConfigEntry.Gui.Tooltip(count = 2)
         public boolean moveCameraInVehicle = true;
 
@@ -105,9 +109,11 @@ public class BeyondEarthConfig implements ConfigData {
         public static class RoverConfig {
             public boolean explodeRoverInLava = true;
             public long fuelPerTick = FluidConstants.BUCKET / 3000;
-            public float turnSpeed = 15.0f;
-            public float maxTurnSpeed = 4.0f;
+            public float turnSpeed = 3.0f;
+            public float maxTurnSpeed = 6.0f;
             public float deceleration = 0.9f;
+            public float minSpeed = -0.2f;
+            public float maxSpeed = 0.4f;
             public int tankBuckets = 3;
         }
 
@@ -142,10 +148,10 @@ public class BeyondEarthConfig implements ConfigData {
 
     public static class OxygenDistributorConfig {
         public long maxEnergy = 20000L;
-        public long energyPerTick = 15L;
+        public long fluidConversionEnergyPerTick = 5L;
         public int tankBuckets = 3;
         @ConfigEntry.Gui.Tooltip(count = 5)
-        @ConfigEntry.BoundedDiscrete(min = 1, max = 10000)
+        @ConfigEntry.BoundedDiscrete(min = 1, max = 50000)
         public int maxBlockChecks = 2000;
         @ConfigEntry.Gui.Tooltip(count = 2)
         @ConfigEntry.BoundedDiscrete(min = 0, max = 500)

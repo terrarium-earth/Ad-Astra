@@ -26,5 +26,9 @@ public abstract class CommonGravityEntityMixin {
             double newGravity = ModUtils.getMixinGravity(CONSTANT, this);
             entity.setVelocity(velocity.getX(), velocity.getY() - CONSTANT + newGravity, velocity.getZ());
         }
+
+        if (entity instanceof AbstractMinecartEntity && entity.getY() < entity.world.getBottomY() && ModUtils.isOrbitWorld(entity.world)) {
+            ModUtils.teleportToWorld(ModUtils.getPlanetOrbit(entity.world), entity);
+        }
     }
 }

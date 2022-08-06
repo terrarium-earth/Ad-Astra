@@ -71,8 +71,8 @@ public class PlayerOverlayScreen {
         // Oxygen
         if (shouldRenderOxygen && !client.options.debugEnabled) {
 
-            int x = 5;
-            int y = 25;
+            int x = 5 + BeyondEarth.CONFIG.general.oxygenBarXOffset;
+            int y = 25 + BeyondEarth.CONFIG.general.oxygenBarYOffset;
 
             int textureWidth = 62;
             int textureHeight = 52;
@@ -94,8 +94,8 @@ public class PlayerOverlayScreen {
         // Battery
         if (shouldRenderBattery && !client.options.debugEnabled) {
 
-            int x = screenX - 75;
-            int y = 25;
+            int x = screenX - 75 - BeyondEarth.CONFIG.general.energyBarXOffset;
+            int y = 25 + BeyondEarth.CONFIG.general.energyBarYOffset;
 
             int textureWidth = (int)(49 * 1.4);
             int textureHeight = (int)(27 * 1.4);
@@ -120,7 +120,7 @@ public class PlayerOverlayScreen {
 
         // Planet bar
         if (shouldRenderBar && !client.options.debugEnabled) {
-            float rocketHeight = (float) (player.getY() / 5.3);
+            float rocketHeight = (float) (player.getY() / (BeyondEarth.CONFIG.rocket.atmosphereLeave / 113.0f));
             rocketHeight = MathHelper.clamp(rocketHeight, 0, 113);
 
             int x = 0;

@@ -20,7 +20,6 @@ import com.github.alexnijjar.beyond_earth.registry.ModEntityTypes;
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.Entity.RemovalReason;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -56,7 +55,6 @@ public class ModUtils {
 
     public static final float VANILLA_GRAVITY = 9.806f;
     public static final float ORBIT_TEMPERATURE = -270.0f;
-    public static final float ORBIT_GRAVITY = 0.32f;
 
     public static boolean modLoaded(String modId) {
         return FabricLoader.getInstance().isModLoaded(modId);
@@ -73,18 +71,17 @@ public class ModUtils {
     public static void teleportToWorld(RegistryKey<World> targetWorld, Entity entity) {
         if (entity.getWorld() instanceof ServerWorld entityWorld) {
             ServerWorld world = entityWorld.getServer().getWorld(targetWorld);
-            Vec3d targetPosition = new Vec3d(entity.getPos().getX(), getSpawnStart(world), entity.getZ());
+            Vec3d targetPosition = new Vec3d(entity.getPos().getX(), BeyondEarth.CONFIG.rocket.atmosphereLeave, entity.getZ());
             List<Entity> entitiesToTeleport = new LinkedList<>();
 
             if (entity instanceof PlayerEntity player) {
                 if (player.getVehicle() instanceof RocketEntity rocket) {
                     player.sendMessage(new TranslatableText("message." + BeyondEarth.MOD_ID + ".hold_space"), false);
                     entity = createLander(rocket, world, targetPosition);
-                    targetPosition = new Vec3d(rocket.getBlockPos().getX() - 1.5f, getSpawnStart(rocket.world), rocket.getBlockPos().getZ() + 0.3f);
-                    rocket.remove(RemovalReason.DISCARDED);
+                    rocket.discard();
                     entitiesToTeleport.add(entity);
                     entitiesToTeleport.add(player);
-                } else if (!(player.getVehicle() instanceof LanderEntity)) {
+                } else if (!(player.getVehicle() != null && player.getVehicle().getPassengerList().size() > 0)) {
                     entitiesToTeleport.add(entity);
                 }
             } else {
@@ -106,7 +103,7 @@ public class ModUtils {
             if (!teleportedEntities.isEmpty()) {
                 entity = teleportedEntities.get(0);
                 for (int i = 1; i < teleportedEntities.size(); i++) {
-                    teleportedEntities.get(i).startRiding(entity);
+                    teleportedEntities.get(i).startRiding(entity, true);
                 }
             }
         }
@@ -120,7 +117,7 @@ public class ModUtils {
      */
     public static void teleportPlayer(RegistryKey<World> targetWorld, ServerPlayerEntity player) {
         ServerWorld world = player.getServer().getWorld(targetWorld);
-        Vec3d targetPosition = new Vec3d(player.getX(), getSpawnStart(world), player.getZ());
+        Vec3d targetPosition = new Vec3d(player.getX(), BeyondEarth.CONFIG.rocket.atmosphereLeave, player.getZ());
         TeleportTarget target = new TeleportTarget(targetPosition, player.getVelocity(), player.getYaw(), player.getPitch());
         player = FabricDimensions.teleport(player, world, target);
     }
@@ -135,7 +132,7 @@ public class ModUtils {
      */
     public static LanderEntity createLander(RocketEntity rocket, ServerWorld targetWorld, Vec3d targetPosition) {
         LanderEntity lander = new LanderEntity(ModEntityTypes.LANDER, targetWorld);
-        lander.setPosition(new Vec3d(rocket.getBlockPos().getX(), getSpawnStart(rocket.world), rocket.getBlockPos().getZ()));
+        lander.setPosition(new Vec3d(rocket.getBlockPos().getX(), BeyondEarth.CONFIG.rocket.atmosphereLeave, rocket.getBlockPos().getZ()));
         for (int i = 0; i < rocket.getInventorySize(); i++) {
             lander.getInventory().setStack(i, rocket.getInventory().getStack(i));
         }
@@ -207,28 +204,12 @@ public class ModUtils {
         }
         // Orbit gravity is 0.25, allowing for slow fall.
         if (isOrbitWorld(world)) {
-            return ORBIT_GRAVITY;
+            return BeyondEarth.CONFIG.general.orbitGravity / VANILLA_GRAVITY;
         }
         if (isSpaceWorld(world)) {
             BeyondEarth.LOGGER.error(world.getRegistryKey().getValue().toString() + " does not have a defined gravity!");
         }
         return 1.0f;
-    }
-
-    /**
-     * Gets the spawn start of the world. The spawn start is the position that the player will spawn at after falling through an
-     * orbit dimension.
-     * 
-     * @return The spawn start of the world, or y 450 if the world does not have a defined spawn start
-     */
-    public static int getSpawnStart(World world) {
-        int spawnStart = 450;
-        for (Planet planet : world.isClient ? BeyondEarthClient.planets : BeyondEarth.planets) {
-            if (planet.world().equals(world.getRegistryKey())) {
-                spawnStart = planet.atmosphereStart();
-            }
-        }
-        return spawnStart;
     }
 
     /**

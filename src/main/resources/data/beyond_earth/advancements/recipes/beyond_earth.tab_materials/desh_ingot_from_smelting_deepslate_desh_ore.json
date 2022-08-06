@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:desh_ingot_from_smelting_deepslate_desh_ore"
+    ]
+  },
+  "criteria": {
+    "has_deepslate_desh_ore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "beyond_earth:deepslate_desh_ore"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:desh_ingot_from_smelting_deepslate_desh_ore"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_deepslate_desh_ore",
+      "has_the_recipe"
+    ]
+  ]
+}

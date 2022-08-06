@@ -12,7 +12,7 @@ public class PlanetParser {
 
     public static Planet parse(JsonObject jsonObject) {
 
-        String name = jsonObject.get("name").getAsString();
+        String translation = jsonObject.get("translation").getAsString();
         Identifier galaxy = new Identifier(jsonObject.get("galaxy").getAsString());
         Identifier solarSystem = new Identifier(jsonObject.get("solar_system").getAsString());
         RegistryKey<World> dimension = RegistryKey.of(Registry.WORLD_KEY, new Identifier(jsonObject.get("world").getAsString()));
@@ -24,9 +24,8 @@ public class PlanetParser {
         int daysInYear = jsonObject.get("days_in_year").getAsInt();
         float temperature = jsonObject.get("temperature").getAsFloat();
         boolean hasOxygen = jsonObject.get("has_oxygen").getAsBoolean();
-        int atmosphereStart = jsonObject.get("atmosphere_start").getAsInt();
         ButtonColour buttonColour = ButtonColour.stringToColour(jsonObject.get("button_color").getAsString());
 
-        return new Planet(name, galaxy, solarSystem, dimension, orbitDimension, parentWorld, rocketTier, gravity, daysInYear, temperature, hasOxygen, atmosphereStart, buttonColour);
+        return new Planet(translation, galaxy, solarSystem, dimension, orbitDimension, parentWorld, rocketTier, gravity, daysInYear, temperature, hasOxygen, buttonColour);
     }
 }

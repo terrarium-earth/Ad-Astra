@@ -1,11 +1,8 @@
 package com.github.alexnijjar.beyond_earth.client.resource_pack;
 
-import java.util.LinkedList;
-import java.util.List;
-
+import com.github.alexnijjar.beyond_earth.data.ButtonColour;
+import com.github.alexnijjar.beyond_earth.util.ColourHolder;
 import com.google.gson.JsonObject;
-
-import org.apache.commons.lang3.tuple.Pair;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -18,15 +15,15 @@ public class SolarSystemParser {
 
         Identifier galaxy = new Identifier(jsonObject.get("galaxy").getAsString());
         Identifier solarSystem = new Identifier(jsonObject.get("solar_system").getAsString());
-        SolarSystem.SunType sunType = SolarSystem.SunType.valueOf(jsonObject.get("sun_type").getAsString().toUpperCase());
+        Identifier sun = new Identifier(jsonObject.get("sun").getAsString());
+        int sunScale = jsonObject.get("sun_scale").getAsInt();
+        ButtonColour buttonColour = ButtonColour.stringToColour(jsonObject.get("button_color").getAsString());
+        JsonObject ringColours = jsonObject.get("ring_color").getAsJsonObject();
+        int ringR = ringColours.get("r").getAsInt();
+        int ringG = ringColours.get("g").getAsInt();
+        int ringB = ringColours.get("b").getAsInt();
+        int ringA = ringColours.get("a").getAsInt();
 
-        List<Pair<Identifier, Double>> planetaryRings = new LinkedList<>();
-        jsonObject.get("planetary_rings").getAsJsonArray().forEach(ring -> {
-            Identifier planet = new Identifier(ring.getAsJsonObject().get("planet").getAsString());
-            double radius = ring.getAsJsonObject().get("radius").getAsDouble();
-            planetaryRings.add(Pair.of(planet, radius));
-        });
-
-        return new SolarSystem(galaxy, solarSystem, sunType, planetaryRings);
+        return new SolarSystem(galaxy, solarSystem, sun, sunScale, buttonColour, new ColourHolder(ringR, ringG, ringB, ringA));
     }
 }

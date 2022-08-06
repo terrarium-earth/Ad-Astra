@@ -9,7 +9,7 @@ import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier1;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier2;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier3;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier4;
-import com.github.alexnijjar.beyond_earth.items.Astrodux;
+import com.github.alexnijjar.beyond_earth.items.AstroduxItem;
 import com.github.alexnijjar.beyond_earth.items.EnergizerBlockItem;
 import com.github.alexnijjar.beyond_earth.items.FluidContainingItem.TankStorage;
 import com.github.alexnijjar.beyond_earth.items.HammerItem;
@@ -68,7 +68,7 @@ public interface ModItems extends ModItemGroups {
         public static final Item OXYGEN_TANK = register("oxygen_tank", new OxygenTankItem(new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1)));
 
         // Guide book
-        public static final Item ASTRODUX = register("astrodux", new Astrodux(new FabricItemSettings().group(ITEM_GROUP_NORMAL).maxCount(1)));
+        public static final Item ASTRODUX = register("astrodux", new AstroduxItem(new FabricItemSettings().group(ITEM_GROUP_NORMAL)));
 
         public static final Item SPACE_PAINTING = register("space_painting", new SpacePaintingItem(ModEntityTypes.SPACE_PAINTING, new FabricItemSettings().group(ITEM_GROUP_NORMAL).rarity(Rarity.UNCOMMON)));
 
@@ -255,7 +255,7 @@ public interface ModItems extends ModItemGroups {
                 }
         });
 
-        public static final Item HAMMER = register("hammer", new HammerItem(new FabricItemSettings().group(ITEM_GROUP_BASICS).maxCount(1).maxDamage(BeyondEarth.CONFIG.world.hammerDurability)));
+        public static final Item HAMMER = register("hammer", new HammerItem(new FabricItemSettings().group(ITEM_GROUP_BASICS).maxCount(1).maxDamage(BeyondEarth.CONFIG.general.hammerDurability)));
 
         public static final Item IRON_STICK = registerItem("iron_stick", ITEM_GROUP_BASICS);
         public static final Item OXYGEN_GEAR = registerItem("oxygen_gear", ITEM_GROUP_BASICS);

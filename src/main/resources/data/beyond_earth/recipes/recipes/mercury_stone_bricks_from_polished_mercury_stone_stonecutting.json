@@ -1,7 +1,7 @@
 {
   "type": "minecraft:stonecutting",
   "ingredient": {
-    "item": "beyond_earth:mercury_stone"
+    "item": "beyond_earth:polished_mercury_stone"
   },
   "result": "beyond_earth:mercury_stone_bricks",
   "count": 1

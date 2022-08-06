@@ -91,7 +91,7 @@ public class CorruptedLunarianEntity extends HostileEntity implements RangedAtta
 
     @Override
     public boolean canSpawn(WorldAccess world, SpawnReason spawnReason) {
-        if (!BeyondEarth.CONFIG.world.spawnCorruptedLunarians) {
+        if (!BeyondEarth.CONFIG.general.spawnCorruptedLunarians) {
             return false;
         }
 
