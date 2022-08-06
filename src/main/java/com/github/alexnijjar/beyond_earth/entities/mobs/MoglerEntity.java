@@ -49,7 +49,7 @@ public class MoglerEntity extends HoglinEntity {
 
     @Override
     public boolean canSpawn(WorldAccess world, SpawnReason spawnReason) {
-        if (!BeyondEarth.CONFIG.world.spawnMoglers) {
+        if (!BeyondEarth.CONFIG.general.spawnMoglers) {
             return false;
         }
 

@@ -86,6 +86,7 @@ public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
 
     @Override
     public void tick() {
+        super.tick();
         if (!this.world.isClient) {
             FluidVariant waterFluid = FluidVariant.of(Fluids.WATER);
             BlockState water = this.world.getBlockState(this.getPos().down());

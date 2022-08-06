@@ -79,7 +79,7 @@ public abstract class LivingEntityMixin {
                 return;
             }
 
-            if (BeyondEarth.CONFIG.world.acidRainBurns) {
+            if (BeyondEarth.CONFIG.general.acidRainBurns) {
                 // Venus acid rain.
                 if (((EntityInvoker) entity).invokeIsBeingRainedOn() && entity.world.getRegistryKey().equals(ModUtils.VENUS_KEY)) {
                     boolean affectedByRain = true;
@@ -97,7 +97,7 @@ public abstract class LivingEntityMixin {
                 }
             }
 
-            if (BeyondEarth.CONFIG.world.doOxygen) {
+            if (BeyondEarth.CONFIG.general.doOxygen) {
                 if (!ModUtils.checkTag(entity, ModTags.LIVES_WITHOUT_OXYGEN)) {
                     boolean hasOxygen = false;
                     boolean hasNetheriteSpaceSuit = false;
@@ -113,7 +113,7 @@ public abstract class LivingEntityMixin {
                                     if (oxygen > 0) {
                                         if (!OxygenUtils.worldHasOxygen(world, player) || entity.isSubmergedInWater()) {
                                             // Allow the player to breath underwater.
-                                            player.setAir(275);
+                                            player.setAir(Math.min(player.getMaxAir(), player.getAir() + 4));
                                             hasOxygen = true;
                                             entity.setFrozenTicks(0);
                                             hasNetheriteSpaceSuit = NetheriteSpaceSuit.hasFullSet(player);
@@ -135,27 +135,29 @@ public abstract class LivingEntityMixin {
                                         ModUtils.spawnForcedParticles((world), ParticleTypes.SNOWFLAKE, entity.getX(), entity.getY() + 1, entity.getZ(), 1, MathHelper.nextBetween(random, -1.0f, 1.0f) * 0.083333336f, 0.05,
                                                 (double) MathHelper.nextBetween(random, -1.0f, 1.0f) * 0.083333336, 0);
 
-                                        // Freeze effect, like powdered snow.
+                                        // Freeze effect, like powdered snow
                                         entity.setFrozenTicks(Math.min(entity.getMinFreezeDamageTicks(), entity.getFrozenTicks() + 5));
                                         entity.damage(ModDamageSource.OXYGEN, 2);
+                                        entity.setAir(-20);
                                     }
-                                    // Turn skeletons into strays.
+                                    // Turn skeletons into strays
                                     if (entity instanceof SkeletonEntity skeleton) {
                                         skeleton.convertTo(EntityType.STRAY, true);
                                     }
                                 }
-                                // Burn the player in extremely hot temperatures.
+                                // Burn the player in extremely hot temperatures
                             } else if (temperature > 70.0f) {
                                 if (!hasOxygen || (!hasNetheriteSpaceSuit && !entity.hasStatusEffect(StatusEffects.FIRE_RESISTANCE))) {
                                     if (!entity.isFireImmune()) {
                                         entity.damage(ModDamageSource.OXYGEN, 2);
+                                        entity.setAir(-20);
                                         entity.setOnFireFor(10);
                                     }
                                 }
                             } else if (!hasOxygen) {
                                 entity.damage(ModDamageSource.OXYGEN, 1);
+                                entity.setAir(-20);
                             }
-                            entity.setAir(-20);
                         }
                     }
                 }

@@ -33,7 +33,6 @@ public class OxygenFillerAlgorithm {
     public Set<BlockPos> runAlgorithm(BlockPos start) {
 
         Set<BlockPos> positions = new HashSet<>();
-        // This is a non-recursive flood fill algorithm, because it has better performance and avoids stack-overflow errors
         Set<BlockPos> queue = new LinkedHashSet<>();
         queue.add(start);
         main: while (!queue.isEmpty()) {
@@ -57,7 +56,7 @@ public class OxygenFillerAlgorithm {
 
             // Cancel for solid blocks but still let things like slabs, torches and ladders through
             if (state.isFullCube(this.world, pos)) {
-                if (!(state.getBlock() instanceof IceBlock) && !(state.getBlock() instanceof GrassBlock) && !(state.getBlock() instanceof LadderBlock)) {
+                if (!(state.getBlock() instanceof IceBlock) && !(state.getBlock() instanceof GrassBlock)) {
                     continue;
                 }
             }

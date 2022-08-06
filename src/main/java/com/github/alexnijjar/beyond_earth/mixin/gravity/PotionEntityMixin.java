@@ -14,7 +14,7 @@ import net.minecraft.entity.projectile.thrown.PotionEntity;
 public abstract class PotionEntityMixin {
     @Inject(method = "getGravity", at = @At("HEAD"), cancellable = true)
     public void getGravity(CallbackInfoReturnable<Float> ci) {
-        if (BeyondEarth.CONFIG.world.doEntityGravity) {
+        if (BeyondEarth.CONFIG.general.doEntityGravity) {
             ci.setReturnValue(ModUtils.getMixinGravity(0.05f, this));
         }
     }

@@ -95,7 +95,7 @@ public class MartianRaptorEntity extends HostileEntity {
 
     @Override
     public boolean canSpawn(WorldAccess world, SpawnReason spawnReason) {
-        if (!BeyondEarth.CONFIG.world.spawnMartianRaptors) {
+        if (!BeyondEarth.CONFIG.general.spawnMartianRaptors) {
             return false;
         }
 

@@ -1,5 +1,5 @@
 {
-    "name": "mars",
+    "translation": "gui.beyond_earth.text.mars",
     "galaxy": "beyond_earth:milky_way",
     "solar_system": "beyond_earth:solar_system",
     "world": "beyond_earth:mars",
@@ -10,6 +10,5 @@
     "days_in_year": 687,
     "temperature": -65,
     "has_oxygen": false,
-    "atmosphere_start": 450,
-    "button_color": "green"
+    "button_color": "red"
 }

@@ -38,9 +38,9 @@ public class SkyUtil {
 
     public static float getScale() {
         MinecraftClient client = MinecraftClient.getInstance();
-        float distance = (float) (-3000.0f + client.player.getY() * 6.0f);
+        float distance = (float) (-3000.0f + client.player.getY() * 4.5f);
         float scale = 100 * (0.2f - distance / 10000.0f);
-        return Math.max(scale, 4.0f);
+        return Math.max(scale, 0.5f);
     }
 
     public static void preRender(WorldRenderContext context, BufferBuilder bufferBuilder, SkyRenderer.SunsetColour colourType, int sunsetAngle, MatrixStack matrices, ClientWorld world, float tickDelta) {

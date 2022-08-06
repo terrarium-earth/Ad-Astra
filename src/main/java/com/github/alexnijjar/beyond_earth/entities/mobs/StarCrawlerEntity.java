@@ -9,11 +9,13 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.ai.goal.RevengeGoal;
+import net.minecraft.entity.ai.goal.TargetGoal;
 import net.minecraft.entity.ai.goal.WanderAroundGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -36,11 +38,7 @@ public class StarCrawlerEntity extends HostileEntity {
         this.goalSelector.add(2, new WanderAroundGoal(this, 0.6));
         this.goalSelector.add(3, new RevengeGoal(this));
         this.goalSelector.add(4, new LookAroundGoal(this));
-    }
-
-    @Override
-    protected boolean isDisallowedInPeaceful() {
-        return false;
+        this.targetSelector.add(5, new TargetGoal<>(this, PlayerEntity.class, false));
     }
 
     @Override
@@ -55,7 +53,7 @@ public class StarCrawlerEntity extends HostileEntity {
 
     @Override
     public boolean canSpawn(WorldAccess world, SpawnReason spawnReason) {
-        if (!BeyondEarth.CONFIG.world.spawnStarCrawlers) {
+        if (!BeyondEarth.CONFIG.general.spawnStarCrawlers) {
             return false;
         }
 

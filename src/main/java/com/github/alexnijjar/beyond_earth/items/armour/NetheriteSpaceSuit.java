@@ -10,15 +10,13 @@ import net.minecraft.item.ArmorMaterial;
 
 public class NetheriteSpaceSuit extends SpaceSuit {
 
-    public static final long TANK_SIZE = BeyondEarth.CONFIG.spaceSuit.netheriteSpaceSuitTankSize;
-
     public NetheriteSpaceSuit(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
         super(material, slot, settings);
     }
 
     @Override
     public long getTankSize() {
-        return TANK_SIZE;
+        return BeyondEarth.CONFIG.spaceSuit.netheriteSpaceSuitTankSize;
     }
 
     public static boolean hasFullSet(LivingEntity entity) {

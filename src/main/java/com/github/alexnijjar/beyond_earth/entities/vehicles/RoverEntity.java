@@ -104,12 +104,12 @@ public class RoverEntity extends VehicleEntity {
                 // Player is clicking 'w' to move forward.
                 if (ModKeyBindings.forwardKeyDown(player)) {
                     shouldConsumeFuel = true;
-                    this.setSpeed((this.isTouchingWater() || this.isInLava()) ? 0.25f : 1.0f);
+                    this.setSpeed(this.getSpeed() + 0.1f);
                 }
                 // Player is clicking 's' to move backward.
                 if (ModKeyBindings.backKeyDown(player)) {
                     shouldConsumeFuel = true;
-                    this.setSpeed((this.isTouchingWater() || this.isInLava()) ? -0.1f : -0.5f);
+                    this.setSpeed(this.getSpeed() + ((this.isTouchingWater() || this.isInLava()) ? -0.01f : -0.05f));
                 }
 
                 // Player is clicking 'a' to move left.
@@ -152,22 +152,6 @@ public class RoverEntity extends VehicleEntity {
         this.updatePassengerPosition(passenger, Entity::setPosition);
     }
 
-    public double getPassengerXOffset() {
-        return 0.63;
-    }
-
-    public double getPassengerZOffset() {
-        return -0.37;
-    }
-
-    public double getSecondPassengerXOffset() {
-        return -0.5;
-    }
-
-    public double getSecondPassengerZOffset() {
-        return -0.37;
-    }
-
     private void updatePassengerPosition(Entity passenger, PositionUpdater positionUpdater) {
         if (!this.hasPassenger(passenger)) {
             return;
@@ -206,6 +190,16 @@ public class RoverEntity extends VehicleEntity {
     @Override
     public int getMaxPassengers() {
         return 2;
+    }
+
+    @Override
+    public float getMinSpeed() {
+        return BeyondEarth.CONFIG.rover.minSpeed;
+    }
+
+    @Override
+    public float getMaxSpeed() {
+        return BeyondEarth.CONFIG.rover.maxSpeed;
     }
 
     public float getTurnSpeed() {

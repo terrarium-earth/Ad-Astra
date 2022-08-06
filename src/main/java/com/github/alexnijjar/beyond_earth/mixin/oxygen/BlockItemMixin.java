@@ -33,7 +33,7 @@ public class BlockItemMixin {
 
     @Inject(method = "place", at = @At(value = "TAIL"))
     public void place(ItemPlacementContext context, CallbackInfoReturnable<ActionResult> info) {
-        if (!BeyondEarth.CONFIG.world.doOxygen) {
+        if (!BeyondEarth.CONFIG.general.doOxygen) {
             return;
         }
         // Extinguish fire items in dimensions with no oxygen.

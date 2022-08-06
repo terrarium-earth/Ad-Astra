@@ -9,7 +9,6 @@ import com.github.alexnijjar.beyond_earth.entities.vehicles.LanderEntity;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntity;
 import com.github.alexnijjar.beyond_earth.entities.vehicles.VehicleEntity;
 import com.github.alexnijjar.beyond_earth.items.vehicles.VehicleItem;
-import com.github.alexnijjar.beyond_earth.registry.ModItems;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -20,7 +19,6 @@ import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.Vec3f;
 
 @Mixin(HeldItemRenderer.class)
 public class HeldItemRendererMixin {
@@ -38,11 +36,6 @@ public class HeldItemRendererMixin {
             if (stack.getItem() instanceof VehicleItem) {
                 if (entity.getPose().equals(EntityPose.SWIMMING)) {
                     ci.cancel();
-                }
-
-                // Rotate the rocket a bit so that the tier 3 model doesn't clip into the player's head
-                if (stack.getItem().equals(ModItems.TIER_3_ROCKET)) {
-                    matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(-20));
                 }
 
                 // Only render the main hand stack if the player is holding a vehicle in both the main hand and off hand

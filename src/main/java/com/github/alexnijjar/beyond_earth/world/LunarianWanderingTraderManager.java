@@ -92,7 +92,7 @@ public class LunarianWanderingTraderManager implements Spawner {
             return false;
         }
 
-        if (!BeyondEarth.CONFIG.world.spawnCorruptedLunarians) {
+        if (!BeyondEarth.CONFIG.general.spawnCorruptedLunarians) {
             return false;
         }
 

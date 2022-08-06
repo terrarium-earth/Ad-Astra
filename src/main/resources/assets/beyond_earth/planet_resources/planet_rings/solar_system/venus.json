@@ -1,0 +1,8 @@
+{
+    "galaxy": "beyond_earth:milky_way",
+    "solar_system": "beyond_earth:solar_system",
+    "texture": "beyond_earth:textures/sky/venus.png",
+    "speed": 225,
+    "scale": 11,
+    "radius": 2.0
+}

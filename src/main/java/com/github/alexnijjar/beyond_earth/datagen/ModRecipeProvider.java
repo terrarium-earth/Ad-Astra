@@ -6,7 +6,6 @@ import java.util.function.Consumer;
 import com.github.alexnijjar.beyond_earth.registry.ModBlocks;
 import com.github.alexnijjar.beyond_earth.registry.ModItems;
 import com.github.alexnijjar.beyond_earth.registry.ModTags;
-import com.google.common.collect.ImmutableList;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
@@ -30,27 +29,28 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 
 		// Blocks
 
+		// Blasting
+		offerBlasting(exporter, List.of(Items.IRON_INGOT), ModItems.STEEL_INGOT, 1.0f, 100, null);
 		// Blasting + Smelting
-		offerBlastingRecipe(exporter, Items.IRON_INGOT, ModItems.STEEL_INGOT);
-		offerBlastingRecipe(exporter, ImmutableList.of(DEEPSLATE_DESH_ORE, MOON_DESH_ORE, ModItems.RAW_DESH), ModItems.DESH_INGOT);
-		offerBlastingRecipe(exporter, ImmutableList.of(DEEPSLATE_OSTRUM_ORE, MARS_OSTRUM_ORE, ModItems.RAW_OSTRUM), ModItems.OSTRUM_INGOT);
-		offerBlastingRecipe(exporter, ImmutableList.of(DEEPSLATE_CALORITE_ORE, VENUS_CALORITE_ORE, ModItems.RAW_CALORITE), ModItems.CALORITE_INGOT);
-		offerBlastingRecipe(exporter, ImmutableList.of(DEEPSLATE_ICE_SHARD_ORE, MOON_ICE_SHARD_ORE, MARS_ICE_SHARD_ORE, GLACIO_ICE_SHARD_ORE), ModItems.ICE_SHARD);
+		offerBlastingRecipe(exporter, List.of(DEEPSLATE_DESH_ORE, MOON_DESH_ORE, ModItems.RAW_DESH), ModItems.DESH_INGOT);
+		offerBlastingRecipe(exporter, List.of(DEEPSLATE_OSTRUM_ORE, MARS_OSTRUM_ORE, ModItems.RAW_OSTRUM), ModItems.OSTRUM_INGOT);
+		offerBlastingRecipe(exporter, List.of(DEEPSLATE_CALORITE_ORE, VENUS_CALORITE_ORE, ModItems.RAW_CALORITE), ModItems.CALORITE_INGOT);
+		offerBlastingRecipe(exporter, List.of(DEEPSLATE_ICE_SHARD_ORE, MOON_ICE_SHARD_ORE, MARS_ICE_SHARD_ORE, GLACIO_ICE_SHARD_ORE), ModItems.ICE_SHARD);
 
 		offerBlastingRecipe(exporter, MOON_CHEESE_ORE, ModItems.CHEESE);
-		offerBlastingRecipe(exporter, ImmutableList.of(VENUS_COAL_ORE, GLACIO_COAL_ORE), Items.COAL);
+		offerBlastingRecipe(exporter, List.of(VENUS_COAL_ORE, GLACIO_COAL_ORE), Items.COAL);
 		offerBlastingRecipe(exporter, GLACIO_COPPER_ORE, Items.COPPER_INGOT);
-		offerBlastingRecipe(exporter, ImmutableList.of(MOON_IRON_ORE, MARS_IRON_ORE, MERCURY_IRON_ORE, GLACIO_IRON_ORE), Items.IRON_INGOT);
+		offerBlastingRecipe(exporter, List.of(MOON_IRON_ORE, MARS_IRON_ORE, MERCURY_IRON_ORE, GLACIO_IRON_ORE), Items.IRON_INGOT);
 		offerBlastingRecipe(exporter, VENUS_GOLD_ORE, Items.GOLD_INGOT);
 		offerBlastingRecipe(exporter, GLACIO_LAPIS_ORE, Items.LAPIS_LAZULI);
-		offerBlastingRecipe(exporter, ImmutableList.of(MARS_DIAMOND_ORE, VENUS_DIAMOND_ORE), Items.DIAMOND);
+		offerBlastingRecipe(exporter, List.of(MARS_DIAMOND_ORE, VENUS_DIAMOND_ORE), Items.DIAMOND);
 
 		// Stone
-		offerSmelting(exporter, ImmutableList.of(MOON_COBBLESTONE), MOON_STONE, 0.2f, 200, null);
-		offerSmelting(exporter, ImmutableList.of(MARS_COBBLESTONE), MARS_STONE, 0.2f, 200, null);
-		offerSmelting(exporter, ImmutableList.of(VENUS_COBBLESTONE), VENUS_STONE, 0.2f, 200, null);
-		offerSmelting(exporter, ImmutableList.of(MERCURY_COBBLESTONE), MERCURY_STONE, 0.2f, 200, null);
-		offerSmelting(exporter, ImmutableList.of(GLACIO_COBBLESTONE), GLACIO_STONE, 0.2f, 200, null);
+		offerSmelting(exporter, List.of(MOON_COBBLESTONE), MOON_STONE, 0.2f, 200, null);
+		offerSmelting(exporter, List.of(MARS_COBBLESTONE), MARS_STONE, 0.2f, 200, null);
+		offerSmelting(exporter, List.of(VENUS_COBBLESTONE), VENUS_STONE, 0.2f, 200, null);
+		offerSmelting(exporter, List.of(MERCURY_COBBLESTONE), MERCURY_STONE, 0.2f, 200, null);
+		offerSmelting(exporter, List.of(GLACIO_COBBLESTONE), GLACIO_STONE, 0.2f, 200, null);
 
 		// Slabs
 		offerCustomSlabRecipe(exporter, MOON_STONE_BRICK_SLAB, MOON_STONE);
@@ -123,12 +123,12 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		// Stonecutting
 		// --->
 		// Bricks
-		offerStonecuttingRecipe(exporter, MOON_STONE_BRICKS, MOON_STONE);
-		offerStonecuttingRecipe(exporter, MARS_STONE_BRICKS, MARS_STONE);
+		offerStonecuttingRecipe(exporter, MOON_STONE_BRICKS, POLISHED_MOON_STONE);
+		offerStonecuttingRecipe(exporter, MARS_STONE_BRICKS, POLISHED_MARS_STONE);
 		offerStonecuttingRecipe(exporter, VENUS_SANDSTONE_BRICKS, VENUS_SANDSTONE);
-		offerStonecuttingRecipe(exporter, VENUS_STONE_BRICKS, VENUS_STONE);
-		offerStonecuttingRecipe(exporter, MERCURY_STONE_BRICKS, MERCURY_STONE);
-		offerStonecuttingRecipe(exporter, GLACIO_STONE_BRICKS, GLACIO_STONE);
+		offerStonecuttingRecipe(exporter, VENUS_STONE_BRICKS, POLISHED_VENUS_STONE);
+		offerStonecuttingRecipe(exporter, MERCURY_STONE_BRICKS, POLISHED_MERCURY_STONE);
+		offerStonecuttingRecipe(exporter, GLACIO_STONE_BRICKS, POLISHED_GLACIO_STONE);
 		offerStonecuttingRecipe(exporter, PERMAFROST_BRICKS, PERMAFROST);
 
 		// Chiseled
@@ -170,13 +170,13 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		offerReversibleCompactingRecipes(exporter, ModItems.RAW_CALORITE, RAW_CALORITE_BLOCK);
 
 		// Cracked
-		offerCrackedBricksSmeltingRecipe(exporter, ImmutableList.of(MOON_STONE_BRICKS), CRACKED_MOON_STONE_BRICKS);
-		offerCrackedBricksSmeltingRecipe(exporter, ImmutableList.of(MARS_STONE_BRICKS), CRACKED_MARS_STONE_BRICKS);
-		offerCrackedBricksSmeltingRecipe(exporter, ImmutableList.of(CRACKED_VENUS_STONE_BRICKS), CRACKED_VENUS_STONE_BRICKS);
-		offerCrackedBricksSmeltingRecipe(exporter, ImmutableList.of(VENUS_STONE_BRICKS), CRACKED_VENUS_STONE_BRICKS);
-		offerCrackedBricksSmeltingRecipe(exporter, ImmutableList.of(MERCURY_STONE_BRICKS), CRACKED_MERCURY_STONE_BRICKS);
-		offerCrackedBricksSmeltingRecipe(exporter, ImmutableList.of(GLACIO_STONE_BRICKS), CRACKED_GLACIO_STONE_BRICKS);
-		offerCrackedBricksSmeltingRecipe(exporter, ImmutableList.of(PERMAFROST_BRICKS), CRACKED_PERMAFROST_BRICKS);
+		offerCrackedBricksSmeltingRecipe(exporter, List.of(MOON_STONE_BRICKS), CRACKED_MOON_STONE_BRICKS);
+		offerCrackedBricksSmeltingRecipe(exporter, List.of(MARS_STONE_BRICKS), CRACKED_MARS_STONE_BRICKS);
+		offerCrackedBricksSmeltingRecipe(exporter, List.of(CRACKED_VENUS_STONE_BRICKS), CRACKED_VENUS_STONE_BRICKS);
+		offerCrackedBricksSmeltingRecipe(exporter, List.of(VENUS_STONE_BRICKS), CRACKED_VENUS_STONE_BRICKS);
+		offerCrackedBricksSmeltingRecipe(exporter, List.of(MERCURY_STONE_BRICKS), CRACKED_MERCURY_STONE_BRICKS);
+		offerCrackedBricksSmeltingRecipe(exporter, List.of(GLACIO_STONE_BRICKS), CRACKED_GLACIO_STONE_BRICKS);
+		offerCrackedBricksSmeltingRecipe(exporter, List.of(PERMAFROST_BRICKS), CRACKED_PERMAFROST_BRICKS);
 
 		// Polished
 		offerPolishedStoneRecipe(exporter, POLISHED_MOON_STONE, MOON_STONE);
@@ -186,11 +186,11 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		offerPolishedStoneRecipe(exporter, POLISHED_GLACIO_STONE, GLACIO_STONE);
 
 		// Chiseled
-		offerChiseledBlockRecipe(exporter, CHISELED_MOON_STONE_BRICKS, MOON_STONE_BRICKS);
-		offerChiseledBlockRecipe(exporter, CHISELED_MARS_STONE_BRICKS, MARS_STONE_BRICKS);
-		offerChiseledBlockRecipe(exporter, CHISELED_VENUS_STONE_BRICKS, VENUS_STONE_BRICKS);
-		offerChiseledBlockRecipe(exporter, CHISELED_MERCURY_STONE_BRICKS, MERCURY_STONE_BRICKS);
-		offerChiseledBlockRecipe(exporter, CHISELED_GLACIO_STONE_BRICKS, GLACIO_STONE_BRICKS);
+		offerChiseledBlockRecipe(exporter, CHISELED_MOON_STONE_BRICKS, MOON_STONE_BRICK_SLAB);
+		offerChiseledBlockRecipe(exporter, CHISELED_MARS_STONE_BRICKS, MARS_STONE_BRICK_SLAB);
+		offerChiseledBlockRecipe(exporter, CHISELED_VENUS_STONE_BRICKS, VENUS_STONE_BRICK_SLAB);
+		offerChiseledBlockRecipe(exporter, CHISELED_MERCURY_STONE_BRICKS, MERCURY_STONE_BRICK_SLAB);
+		offerChiseledBlockRecipe(exporter, CHISELED_GLACIO_STONE_BRICKS, GLACIO_STONE_BRICK_SLAB);
 
 		// Bricks
 		offerQuadRecipe(exporter, MOON_STONE_BRICKS, MOON_STONE);
@@ -310,6 +310,8 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		offerReversibleCompactingRecipesWithCompactedItemGroup(exporter, ModItems.OSTRUM_NUGGET, ModItems.OSTRUM_INGOT, "ostrum_ingot_from_nuggets", "ostrum_ingot");
 		offerReversibleCompactingRecipesWithCompactedItemGroup(exporter, ModItems.CALORITE_NUGGET, ModItems.CALORITE_INGOT, "calorite_ingot_from_nuggets", "calorite_ingot");
 
+		ShapelessRecipeJsonFactory.create(Items.FLINT_AND_STEEL).m_jrksubfg(ModTags.STEEL_INGOTS).input(Items.FLINT).criterion("has_flint", conditionsFromItem(Items.FLINT)).criterion("has_obsidian", conditionsFromItem(Blocks.OBSIDIAN)).offerTo(exporter);
+
 		// Armour
 		ShapedRecipeJsonFactory.create(ModItems.SPACE_HELMET).m_hadhiznl(Character.valueOf('#'), ModTags.STEEL_INGOTS).input(Character.valueOf('G'), Blocks.ORANGE_STAINED_GLASS_PANE).pattern("###").pattern("#G#").group(null)
 				.criterion("has_tag", method_10420(ModTags.STEEL_INGOTS)).offerTo(exporter);
@@ -355,8 +357,7 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 				.criterion(hasItem(Items.IRON_INGOT), conditionsFromItem(Items.IRON_INGOT)).offerTo(exporter);
 
 		// Iron Stick
-		ShapedRecipeJsonFactory.create(ModItems.IRON_STICK, 4).m_hadhiznl(Character.valueOf('#'), ModTags.IRON_PLATES).pattern("#").pattern("#").group("iron_sticks").criterion("has_tag", method_10420(ModTags.IRON_PLATES))
-				.offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.IRON_STICK, 4).m_hadhiznl(Character.valueOf('#'), ModTags.IRON_PLATES).pattern("#").pattern("#").group("iron_sticks").criterion("has_tag", method_10420(ModTags.IRON_PLATES)).offerTo(exporter);
 
 		// Oxygen Gear
 		ShapedRecipeJsonFactory.create(ModItems.OXYGEN_GEAR).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_STEEL).m_hadhiznl(Character.valueOf('|'), ModTags.IRON_RODS).pattern(" | ").pattern("#|#").pattern("#|#").group(null)
@@ -442,7 +443,7 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 	}
 
 	public void offerBlastingRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible input, ItemConvertible output) {
-		offerBlastingRecipe(exporter, ImmutableList.of(input), output);
+		offerBlastingRecipe(exporter, List.of(input), output);
 	}
 
 	public void offerBlastingRecipe(Consumer<RecipeJsonProvider> exporter, List<ItemConvertible> inputs, ItemConvertible output) {

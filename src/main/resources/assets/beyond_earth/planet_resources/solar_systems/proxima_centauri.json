@@ -1,11 +1,13 @@
 {
     "galaxy": "beyond_earth:milky_way",
     "solar_system": "beyond_earth:proxima_centauri",
-    "sun_type": "blue_sun",
-    "planetary_rings": [
-        {
-            "planet": "beyond_earth:glacio",
-            "radius": 4.0
-        }
-    ]
+    "sun": "beyond_earth:textures/sky/gui/blue_sun.png",
+    "sun_scale": 18,
+    "button_color": "turquoise",
+    "ring_color": {
+        "r": 0,
+        "g": 128,
+        "b": 128,
+        "a": 200
+    }
 }

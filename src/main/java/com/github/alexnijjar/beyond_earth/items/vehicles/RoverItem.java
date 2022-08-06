@@ -23,7 +23,6 @@ import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 
 public class RoverItem extends VehicleItem {
-    public static final long TANK_SIZE = 3 * FluidConstants.BUCKET;
 
     public RoverItem(Settings settings) {
         super(settings);
@@ -83,6 +82,6 @@ public class RoverItem extends VehicleItem {
 
     @Override
     public long getTankSize() {
-        return TANK_SIZE;
+        return 3 * FluidConstants.BUCKET;
     }
 }

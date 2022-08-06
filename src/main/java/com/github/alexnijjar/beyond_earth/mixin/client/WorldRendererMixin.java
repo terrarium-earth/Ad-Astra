@@ -7,11 +7,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.client.BeyondEarthClient;
 import com.github.alexnijjar.beyond_earth.client.resource_pack.SkyRenderer;
 import com.github.alexnijjar.beyond_earth.client.resource_pack.SkyRenderer.WeatherEffects;
 import com.github.alexnijjar.beyond_earth.registry.ModParticleTypes;
-import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -50,7 +50,7 @@ public abstract class WorldRendererMixin {
             MinecraftClient client = MinecraftClient.getInstance();
             ClientPlayerEntity player = client.player;
             // Don't player the portal sound if the player teleported to the new world.
-            if (((int) player.getPos().getY()) == ModUtils.getSpawnStart(player.world)) {
+            if (((int) player.getPos().getY()) == BeyondEarth.CONFIG.rocket.atmosphereLeave) {
                 ci.cancel();
             }
         }

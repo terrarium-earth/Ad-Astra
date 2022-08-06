@@ -25,8 +25,6 @@ import net.minecraft.world.World;
 
 public class SpaceSuit extends ArmorItem implements FluidContainingItem {
 
-    public static final long TANK_SIZE = BeyondEarth.CONFIG.spaceSuit.spaceSuitTankSize;
-
     public SpaceSuit(ArmorMaterial material, EquipmentSlot slot, Item.Settings settings) {
         super(material, slot, settings);
     }
@@ -46,7 +44,7 @@ public class SpaceSuit extends ArmorItem implements FluidContainingItem {
 
     @Override
     public long getTankSize() {
-        return TANK_SIZE;
+        return BeyondEarth.CONFIG.spaceSuit.spaceSuitTankSize;
     }
 
     public static boolean hasFullSet(LivingEntity entity) {

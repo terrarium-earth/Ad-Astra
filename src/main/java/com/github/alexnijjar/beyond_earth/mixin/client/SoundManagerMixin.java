@@ -39,7 +39,7 @@ public class SoundManagerMixin {
             return;
         }
 
-        if (!BeyondEarth.CONFIG.world.doSpaceMuffler) {
+        if (!BeyondEarth.CONFIG.general.doSpaceMuffler) {
             return;
         }
         if (sound.getId().equals(ModSounds.ROCKET_LAUNCH_SOUND_ID)) {
@@ -50,7 +50,7 @@ public class SoundManagerMixin {
             return;
         }
 
-        if (!BeyondEarth.CONFIG.world.doSpaceMuffler) {
+        if (!BeyondEarth.CONFIG.general.doSpaceMuffler) {
             return;
         }
 
@@ -61,10 +61,10 @@ public class SoundManagerMixin {
 
         if (ModUtils.isOrbitWorld(client.world)) {
             boolean noOxygen = !OxygenUtils.worldHasOxygen(client.world, new BlockPos(sound.getX(), sound.getY(), sound.getZ()));
-            if (client.world != null && noOxygen || sound.getCategory().equals(SoundCategory.MUSIC)) {
+            if (client.world != null && noOxygen || sound.getCategory().equals(SoundCategory.MUSIC) || sound.getCategory().equals(SoundCategory.RECORDS)) {
                 ci.cancel();
                 SoundManager manager = (SoundManager) (Object) (this);
-                SoundInstance newSound = getSpaceSoundInstance(sound, (sound.getCategory().equals(SoundCategory.MUSIC) ? 1.0f : 0.1f), 0.1f);
+                SoundInstance newSound = getSpaceSoundInstance(sound, ((sound.getCategory().equals(SoundCategory.MUSIC) || sound.getCategory().equals(SoundCategory.RECORDS)) ? 1.0f : 0.1f), 0.1f);
                 manager.soundSystem.play(newSound);
             }
         }

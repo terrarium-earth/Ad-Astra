@@ -2,17 +2,17 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:steel_ingot_from_smelting_iron_ingot"
+      "minecraft:mars_stone_bricks_from_polished_mars_stone_stonecutting"
     ]
   },
   "criteria": {
-    "has_iron_ingot": {
+    "has_polished_mars_stone": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:iron_ingot"
+              "beyond_earth:polished_mars_stone"
             ]
           }
         ]
@@ -21,13 +21,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "minecraft:steel_ingot_from_smelting_iron_ingot"
+        "recipe": "minecraft:mars_stone_bricks_from_polished_mars_stone_stonecutting"
       }
     }
   },
   "requirements": [
     [
-      "has_iron_ingot",
+      "has_polished_mars_stone",
       "has_the_recipe"
     ]
   ]

@@ -2,17 +2,17 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:mars_stone_bricks_from_mars_stone_stonecutting"
+      "minecraft:ice_shard_from_blasting_deepslate_ice_shard_ore"
     ]
   },
   "criteria": {
-    "has_mars_stone": {
+    "has_deepslate_ice_shard_ore": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "beyond_earth:mars_stone"
+              "beyond_earth:deepslate_ice_shard_ore"
             ]
           }
         ]
@@ -21,13 +21,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "minecraft:mars_stone_bricks_from_mars_stone_stonecutting"
+        "recipe": "minecraft:ice_shard_from_blasting_deepslate_ice_shard_ore"
       }
     }
   },
   "requirements": [
     [
-      "has_mars_stone",
+      "has_deepslate_ice_shard_ore",
       "has_the_recipe"
     ]
   ]

@@ -1,0 +1,8 @@
+{
+    "galaxy": "beyond_earth:milky_way",
+    "solar_system": "beyond_earth:proxima_centauri",
+    "texture": "beyond_earth:textures/sky/glacio.png",
+    "speed": 365,
+    "scale": 10,
+    "radius": 4.0
+}
