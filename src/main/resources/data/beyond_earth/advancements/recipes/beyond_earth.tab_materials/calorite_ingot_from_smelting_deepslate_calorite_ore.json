@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:calorite_ingot_from_smelting_deepslate_calorite_ore"
+    ]
+  },
+  "criteria": {
+    "has_deepslate_calorite_ore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "beyond_earth:deepslate_calorite_ore"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:calorite_ingot_from_smelting_deepslate_calorite_ore"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_deepslate_calorite_ore",
+      "has_the_recipe"
+    ]
+  ]
+}

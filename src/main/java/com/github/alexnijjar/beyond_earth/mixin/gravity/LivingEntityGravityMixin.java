@@ -20,7 +20,7 @@ public class LivingEntityGravityMixin {
 
     @Inject(method = "travel", at = @At("TAIL"), cancellable = true)
     public void travel(CallbackInfo ci) {
-        if (BeyondEarth.CONFIG.world.doEntityGravity) {
+        if (BeyondEarth.CONFIG.general.doLivingEntityGravity) {
             LivingEntity entity = (LivingEntity) (Object) this;
 
             Vec3d velocity = entity.getVelocity();

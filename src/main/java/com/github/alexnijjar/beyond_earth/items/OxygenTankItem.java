@@ -32,8 +32,6 @@ import net.minecraft.world.World;
 
 public class OxygenTankItem extends Item implements FluidContainingItem {
 
-    public static final long TANK_SIZE = BeyondEarth.CONFIG.world.oxygenTankSize;
-
     public OxygenTankItem(Settings settings) {
         super(settings);
     }
@@ -52,7 +50,7 @@ public class OxygenTankItem extends Item implements FluidContainingItem {
 
     @Override
     public long getTankSize() {
-        return TANK_SIZE;
+        return BeyondEarth.CONFIG.general.oxygenTankSize;
     }
 
     // Consume the tank and give the player oxygen.

@@ -18,8 +18,8 @@ public class CryoFreezerScreen extends AbstractMachineScreen<CryoFreezerScreenHa
     public static final int SNOWFLAKE_LEFT = 54;
     public static final int SNOWFLAKE_TOP = 71;
 
-    public static final int OUTPUT_TANK_LEFT = 85;
-    public static final int OUTPUT_TANK_TOP = 37;
+    public static final int INPUT_TANK_LEFT = 85;
+    public static final int INPUT_TANK_TOP = 37;
 
     public static final int ENERGY_LEFT = 149;
     public static final int ENERGY_TOP = 27;
@@ -39,7 +39,7 @@ public class CryoFreezerScreen extends AbstractMachineScreen<CryoFreezerScreenHa
         CryoFreezerBlockEntity entity = (CryoFreezerBlockEntity) blockEntity;
 
         GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration());
-        GuiUtil.drawFluidTank(matrices, this.x + OUTPUT_TANK_LEFT, this.y + OUTPUT_TANK_TOP, entity.inputTank.getAmount(), entity.inputTank.getCapacity(), entity.inputTank.getResource());
+        GuiUtil.drawFluidTank(matrices, this.x + INPUT_TANK_LEFT, this.y + INPUT_TANK_TOP, entity.inputTank.getAmount(), entity.inputTank.getCapacity(), entity.inputTank.getResource());
         GuiUtil.drawSnowflake(matrices, this.x + SNOWFLAKE_LEFT, this.y + SNOWFLAKE_TOP, entity.getCookTime(), entity.getCookTimeTotal());
     }
 
@@ -54,12 +54,12 @@ public class CryoFreezerScreen extends AbstractMachineScreen<CryoFreezerScreenHa
         }
 
         if (GuiUtil.isHovering(this.getOutputTankBounds(), mouseX, mouseY)) {
-            GuiUtil.drawTankTooltip(this, matrices, entity.outputTank, mouseX, mouseY);
+            GuiUtil.drawTankTooltip(this, matrices, entity.inputTank, mouseX, mouseY);
         }
     }
 
     public Rectangle getOutputTankBounds() {
-        return GuiUtil.getFluidTankBounds(this.x + OUTPUT_TANK_LEFT, this.y + OUTPUT_TANK_TOP);
+        return GuiUtil.getFluidTankBounds(this.x + INPUT_TANK_LEFT, this.y + INPUT_TANK_TOP);
     }
 
     public Rectangle getEnergyBounds() {

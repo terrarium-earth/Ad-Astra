@@ -157,6 +157,7 @@ public class CryoFreezerBlockEntity extends FluidMachineBlockEntity {
 
     @Override
     public void tick() {
+        super.tick();
         if (!this.world.isClient) {
 
             ItemStack input = this.getStack(0);

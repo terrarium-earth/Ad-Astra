@@ -18,6 +18,7 @@ import net.minecraft.util.math.Direction;
 
 public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity {
 
+    int ticksToTurnOff = 0;
     public CoalGeneratorBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.COAL_GENERATOR, blockPos, blockState);
     }
@@ -72,6 +73,7 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity {
                         this.cookTime--;
                         this.cumulateEnergy();
                         this.setActive(true);
+                        ticksToTurnOff = 7;
                         // Check if the input is a valid fuel
                     } else if (!input.isEmpty()) {
                         CookingRecipe recipe = this.createRecipe(ModRecipes.GENERATING_RECIPE, input, false);
@@ -84,7 +86,10 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity {
                         this.setActive(false);
                     }
                 } else {
-                    this.setActive(false);
+                    ticksToTurnOff--;
+                        if (ticksToTurnOff <= 0) {
+                            this.setActive(false);
+                        }
                 }
                 // Send energy to surrounding blocks.
                 this.energyOut();

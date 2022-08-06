@@ -77,25 +77,25 @@ public class LanderEntity extends VehicleEntity {
         if (this.getFirstPassenger() instanceof PlayerEntity player) {
 
             // Player is clicking 'space' to move upward.
-            if (ModKeyBindings.jumpKeyDown(player)) {
-                this.applyBoosters();
+            if (!this.isOnGround()) {
+                if (ModKeyBindings.jumpKeyDown(player)) {
+                    this.applyBoosters();
+                }
             }
         }
     }
 
     public void applyBoosters() {
-        if (this.getVelocity().getY() < 0.0) {
-            this.setVelocity(this.getVelocity().add(0.0, 0.1, 0.0));
+        this.setVelocity(this.getVelocity().add(0.0, 0.1, 0.0));
 
-            if (this.getVelocity().getY() > BeyondEarth.CONFIG.lander.boosterThreshold) {
-                this.setVelocity(0.0, BeyondEarth.CONFIG.lander.boosterThreshold, 0.0);
-            }
+        if (this.getVelocity().getY() > BeyondEarth.CONFIG.lander.boosterThreshold) {
+            this.setVelocity(0.0, BeyondEarth.CONFIG.lander.boosterThreshold, 0.0);
+        }
 
-            // Particles.
-            if (this.world instanceof ServerWorld serverWorld) {
-                Vec3d pos = this.getPos();
-                ModUtils.spawnForcedParticles(serverWorld, ParticleTypes.SPIT, pos.getX(), pos.getY() - 0.3, pos.getZ(), 3, 0.1, 0.1, 0.1, 0.001);
-            }
+        // Particles
+        if (this.world instanceof ServerWorld serverWorld) {
+            Vec3d pos = this.getPos();
+            ModUtils.spawnForcedParticles(serverWorld, ParticleTypes.SPIT, pos.getX(), pos.getY() - 0.3, pos.getZ(), 3, 0.1, 0.1, 0.1, 0.001);
         }
     }
 }

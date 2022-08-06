@@ -1,23 +1,13 @@
 {
     "galaxy": "beyond_earth:milky_way",
     "solar_system": "beyond_earth:solar_system",
-    "sun_type": "sun",
-    "planetary_rings": [
-        {
-            "planet": "beyond_earth:mercury",
-            "radius": 1.0
-        },
-        {
-            "planet": "beyond_earth:venus",
-            "radius": 2.0
-        },
-        {
-            "planet": "beyond_earth:earth",
-            "radius": 3.0
-        },
-        {
-            "planet": "beyond_earth:mars",
-            "radius": 4.0
-        }
-    ]
+    "sun": "beyond_earth:textures/sky/gui/sun.png",
+    "sun_scale": 15,
+    "button_color": "blue",
+    "ring_color": {
+        "r": 36,
+        "g": 50,
+        "b": 123,
+        "a": 200
+    }
 }

@@ -43,7 +43,7 @@ public class ModC2SPackets {
     public static void register() {
 
         // Send planets packet.
-        ServerPlayConnectionEvents.JOIN.register((handler, sender, minecraftServer) -> {
+        ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
             try {
                 sender.sendPacket(ModS2CPackets.DATAPACK_PLANETS, createPlanetsDatapackBuf());
             } catch (Exception e) {
@@ -158,7 +158,7 @@ public class ModC2SPackets {
     private static PacketByteBuf createPlanetsDatapackBuf() {
         PacketByteBuf mainBuf = PacketByteBufs.create();
         mainBuf.writeCollection(BeyondEarth.planets, (buf, planet) -> {
-            buf.writeString(planet.name());
+            buf.writeString(planet.translation());
             buf.writeIdentifier(planet.galaxy());
             buf.writeIdentifier(planet.solarSystem());
             buf.writeIdentifier(planet.world().getValue());
@@ -169,7 +169,6 @@ public class ModC2SPackets {
             buf.writeInt(planet.daysInYear());
             buf.writeFloat(planet.temperature());
             buf.writeBoolean(planet.hasOxygen());
-            buf.writeInt(planet.atmosphereStart());
             buf.writeEnumConstant(planet.buttonColour());
         });
         return mainBuf;

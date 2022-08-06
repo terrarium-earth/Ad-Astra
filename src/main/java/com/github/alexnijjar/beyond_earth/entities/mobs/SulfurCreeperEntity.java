@@ -38,7 +38,7 @@ public class SulfurCreeperEntity extends CreeperEntity {
 
     @Override
     public boolean canSpawn(WorldAccess world, SpawnReason spawnReason) {
-        if (!BeyondEarth.CONFIG.world.spawnSulfurCreepers) {
+        if (!BeyondEarth.CONFIG.general.spawnSulfurCreepers) {
             return false;
         }
 

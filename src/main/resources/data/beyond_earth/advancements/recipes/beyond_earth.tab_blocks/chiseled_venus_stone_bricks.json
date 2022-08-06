@@ -6,13 +6,13 @@
     ]
   },
   "criteria": {
-    "has_venus_stone_bricks": {
+    "has_venus_stone_brick_slab": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "beyond_earth:venus_stone_bricks"
+              "beyond_earth:venus_stone_brick_slab"
             ]
           }
         ]
@@ -27,7 +27,7 @@
   },
   "requirements": [
     [
-      "has_venus_stone_bricks",
+      "has_venus_stone_brick_slab",
       "has_the_recipe"
     ]
   ]

@@ -1,7 +1,7 @@
 package com.github.alexnijjar.beyond_earth.client.resource_pack;
 
 import java.io.InputStreamReader;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
@@ -38,10 +38,12 @@ public class PlanetResources {
             @Override
             public void reload(ResourceManager manager) {
 
-                List<SkyRenderer> skyRenderers = new LinkedList<>();
-                List<SolarSystem> solarSystems = new LinkedList<>();
+                List<SkyRenderer> skyRenderers = new ArrayList<>();
+                List<SolarSystem> solarSystems = new ArrayList<>();
+                List<PlanetRing> planetRings = new ArrayList<>();
+                List<Galaxy> galaxies = new ArrayList<>();
 
-                // Sky Renderers.
+                // Sky Renderers
                 for (Identifier id : manager.findResources("planet_resources/sky_renderers", path -> path.endsWith(".json"))) {
                     try {
                         for (Resource resource : manager.getAllResources(id)) {
@@ -58,7 +60,7 @@ public class PlanetResources {
                     }
                 }
 
-                // Solar Systems.
+                // Solar Systems
                 for (Identifier id : manager.findResources("planet_resources/solar_systems", path -> path.endsWith(".json"))) {
                     try {
                         for (Resource resource : manager.getAllResources(id)) {
@@ -75,8 +77,44 @@ public class PlanetResources {
                     }
                 }
 
+                for (Identifier id : manager.findResources("planet_resources/planet_rings", path -> path.endsWith(".json"))) {
+                    try {
+                        for (Resource resource : manager.getAllResources(id)) {
+                            InputStreamReader reader = new InputStreamReader(resource.getInputStream());
+                            JsonObject jsonObject = JsonHelper.deserialize(GSON, reader, JsonObject.class);
+
+                            if (jsonObject != null) {
+                                planetRings.add(PlanetRingParser.parse(jsonObject));
+                            }
+                        }
+                    } catch (Exception e) {
+                        BeyondEarth.LOGGER.error("Failed to load Beyond Earth planet ring assets from: \"" + id.toString() + "\"", e);
+                        e.printStackTrace();
+                    }
+                }
+
+                for (Identifier id : manager.findResources("planet_resources/galaxy", path -> path.endsWith(".json"))) {
+                    try {
+                        for (Resource resource : manager.getAllResources(id)) {
+                            InputStreamReader reader = new InputStreamReader(resource.getInputStream());
+                            JsonObject jsonObject = JsonHelper.deserialize(GSON, reader, JsonObject.class);
+
+                            if (jsonObject != null) {
+                                galaxies.add(GalaxyParser.parse(jsonObject));
+                            }
+                        }
+                    } catch (Exception e) {
+                        BeyondEarth.LOGGER.error("Failed to load Beyond Earth galaxy assets from: \"" + id.toString() + "\"", e);
+                        e.printStackTrace();
+                    }
+                }
+
+                solarSystems.sort((s1, s2) -> s1.solarSystem().compareTo(s2.solarSystem()));
+                galaxies.sort((g1, g2) -> g1.galaxy().compareTo(g2.galaxy()));
                 BeyondEarthClient.skyRenderers = skyRenderers;
                 BeyondEarthClient.solarSystems = solarSystems;
+                BeyondEarthClient.planetRings = planetRings;
+                BeyondEarthClient.galaxies = galaxies;
                 BeyondEarthClient.postAssetRegister();
             }
         });

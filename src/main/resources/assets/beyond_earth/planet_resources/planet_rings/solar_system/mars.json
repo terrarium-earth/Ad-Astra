@@ -1,0 +1,8 @@
+{
+    "galaxy": "beyond_earth:milky_way",
+    "solar_system": "beyond_earth:solar_system",
+    "texture": "beyond_earth:textures/sky/mars.png",
+    "speed": 687,
+    "scale": 10,
+    "radius": 4.0
+}

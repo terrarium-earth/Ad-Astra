@@ -1,0 +1,8 @@
+{
+    "galaxy": "beyond_earth:milky_way",
+    "solar_system": "beyond_earth:solar_system",
+    "texture": "beyond_earth:textures/sky/mercury.png",
+    "speed": 88,
+    "scale": 8,
+    "radius": 1.0
+}

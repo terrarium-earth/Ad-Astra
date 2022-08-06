@@ -1,7 +1,7 @@
 {
   "type": "minecraft:stonecutting",
   "ingredient": {
-    "item": "beyond_earth:venus_stone"
+    "item": "beyond_earth:polished_venus_stone"
   },
   "result": "beyond_earth:venus_stone_bricks",
   "count": 1

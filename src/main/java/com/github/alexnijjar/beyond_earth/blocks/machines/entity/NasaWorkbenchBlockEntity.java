@@ -82,7 +82,7 @@ public class NasaWorkbenchBlockEntity extends AbstractMachineBlockEntity {
         for (int i = 0; i < this.getItems().size() - 1; i++) {
             this.getItems().get(i).decrement(stackCounts.get(i));
         }
-
+        this.markDirty();
     }
 
     @Override

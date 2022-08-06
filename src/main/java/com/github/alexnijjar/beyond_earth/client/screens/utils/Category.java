@@ -11,7 +11,8 @@ public record Category(Identifier id, Category parent) {
 
         public static final Category BACK = new Category(new ModIdentifier("back"), null);
 
-        public static final Category MILKY_WAY_CATEGORY = new Category(new ModIdentifier("milky_way"), null);
+        public static final Category GALAXY_CATEGORY = new Category(new ModIdentifier("galaxy"), null);
+        public static final Category MILKY_WAY_CATEGORY = new Category(new ModIdentifier("milky_way"), GALAXY_CATEGORY);
         public static final Category SOLAR_SYSTEM_CATEGORY = new Category(new ModIdentifier("solar_system"), MILKY_WAY_CATEGORY);
         public static final Category PROXIMA_CENTAURI_CATEGORY = new Category(new ModIdentifier("proxima_centauri"), MILKY_WAY_CATEGORY);
 

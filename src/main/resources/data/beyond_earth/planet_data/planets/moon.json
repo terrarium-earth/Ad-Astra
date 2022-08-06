@@ -1,15 +1,14 @@
 {
-    "name": "moon",
+    "translation": "gui.beyond_earth.text.moon",
     "galaxy": "beyond_earth:milky_way",
     "solar_system": "beyond_earth:solar_system",
     "world": "beyond_earth:moon",
-    "orbit_world": "beyond_earth:moon_orbit",
+    "orbit_world": "beyond_earth:earth_orbit",
     "parent_world": "minecraft:overworld",
     "rocket_tier": 1,
     "gravity": 1.625,
     "days_in_year": 27,
     "temperature": -160,
     "has_oxygen": false,
-    "atmosphere_start": 450,
-    "button_color": "blue"
+    "button_color": "grey"
 }

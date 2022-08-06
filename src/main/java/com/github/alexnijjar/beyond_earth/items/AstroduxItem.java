@@ -1,21 +1,25 @@
 package com.github.alexnijjar.beyond_earth.items;
 
+import com.github.alexnijjar.beyond_earth.BeyondEarth;
+import com.github.alexnijjar.beyond_earth.registry.ModItems;
 import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 import com.github.alexnijjar.beyond_earth.util.ModUtils;
 
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.stat.Stats;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import vazkii.patchouli.api.PatchouliAPI;
 
-public class Astrodux extends Item {
+public class AstroduxItem extends Item {
 
-    public Astrodux(Settings settings) {
+    public AstroduxItem(Settings settings) {
         super(settings);
     }
 
@@ -30,5 +34,16 @@ public class Astrodux extends Item {
             }
         }
         return TypedActionResult.fail(user.getStackInHand(hand));
+    }
+
+    // Give guidebook at spawn
+    static {
+        ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
+            if (BeyondEarth.CONFIG.general.giveAstroduxAtSpawn) {
+                if (handler.getPlayer().getStatHandler().getStat(Stats.CUSTOM.getOrCreateStat(Stats.TOTAL_WORLD_TIME)) <= 0) {
+                    handler.getPlayer().giveItemStack(ModItems.ASTRODUX.getDefaultStack());
+                }
+            }
+        });
     }
 }

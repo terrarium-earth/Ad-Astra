@@ -27,7 +27,7 @@ public class ModS2CPackets {
         ClientPlayNetworking.registerGlobalReceiver(DATAPACK_PLANETS, (client, handler, mainBuf, responseSender) -> {
             BeyondEarthClient.planets = mainBuf.readList(buf -> {
 
-                String name = buf.readString();
+                String translation = buf.readString();
                 Identifier galaxy = buf.readIdentifier();
                 Identifier solarSystem = buf.readIdentifier();
                 RegistryKey<World> dimension = RegistryKey.of(Registry.WORLD_KEY, buf.readIdentifier());
@@ -39,10 +39,9 @@ public class ModS2CPackets {
                 int daysInYear = buf.readInt();
                 float temperature = buf.readFloat();
                 boolean hasOxygen = buf.readBoolean();
-                int atmosphereStart = buf.readInt();
                 ButtonColour buttonColour = buf.readEnumConstant(ButtonColour.class);
 
-                return new Planet(name, galaxy, solarSystem, dimension, orbitDimension, parentWorld, rocketTier, gravity, daysInYear, temperature, hasOxygen, atmosphereStart, buttonColour);
+                return new Planet(translation, galaxy, solarSystem, dimension, orbitDimension, parentWorld, rocketTier, gravity, daysInYear, temperature, hasOxygen, buttonColour);
             });
         });
 

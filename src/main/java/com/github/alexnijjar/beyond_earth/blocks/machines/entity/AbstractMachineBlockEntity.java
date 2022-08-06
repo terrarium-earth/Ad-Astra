@@ -40,8 +40,7 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
         inventory = DefaultedList.ofSize(getInventorySize(), ItemStack.EMPTY);
     }
 
-    public void tick() {
-    }
+    public abstract void tick();
 
     @Nullable
     @Override
@@ -115,15 +114,18 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
     }
 
     public boolean drainEnergy(long amount) {
-        if (this.energyStorage.amount - amount > 0) {
-            this.energyStorage.amount -= amount;
-            this.markDirty();
-            return true;
-        } else {
-            this.energyStorage.amount = 0;
-            this.markDirty();
-            return false;
+        if (!this.world.isClient) {
+            if (this.energyStorage.amount - amount > 0) {
+                this.energyStorage.amount -= amount;
+                this.markDirty();
+                return true;
+            } else {
+                this.energyStorage.amount = 0;
+                this.markDirty();
+                return false;
+            }
         }
+        return false;
     }
 
     public boolean canDrainEnergy() {

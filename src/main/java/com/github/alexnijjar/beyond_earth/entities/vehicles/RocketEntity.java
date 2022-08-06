@@ -184,7 +184,9 @@ public class RocketEntity extends VehicleEntity {
     public void openPlanetSelectionGui() {
         if (!this.hasPassengers()) {
             if (!this.world.isClient) {
-                ModCriteria.ROCKET_DESTROYED.trigger((ServerPlayerEntity) this.lastRider);
+                if (this.lastRider != null) {
+                    ModCriteria.ROCKET_DESTROYED.trigger((ServerPlayerEntity) this.lastRider);
+                }
             }
             this.explode();
             return;
@@ -345,7 +347,7 @@ public class RocketEntity extends VehicleEntity {
 
     // Explode on block collision.
     private void explodeIfStopped() {
-        if (this.getVelocity().getY() < BeyondEarth.CONFIG.rocket.maxSpeed / 10 && this.getVelocity().getY() > -0.000001) {
+        if (this.getVelocity().getY() < 0.05 && this.getVelocity().getY() > -0.000001) {
             this.explode();
         }
     }
@@ -354,7 +356,7 @@ public class RocketEntity extends VehicleEntity {
         if (this.world instanceof ServerWorld serverWorld) {
             // Increase explosion power the higher the tier.
             float tierMultiplier = 1 + this.getTier() * 0.25f;
-            if (this.getVelocity().getY() > (BeyondEarth.CONFIG.rocket.maxSpeed / 1.25f)) {
+            if (this.getVelocity().getY() > 4) {
                 // Increase explosion power at a high speed.
                 tierMultiplier *= 1.25f;
             }

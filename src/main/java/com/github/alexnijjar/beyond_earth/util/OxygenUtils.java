@@ -42,14 +42,12 @@ public class OxygenUtils {
 
     // Contains every pos in all dimensions with oxygen.
     public static Map<Pair<RegistryKey<World>, BlockPos>, Set<BlockPos>> oxygenLocations = new HashMap<>();
-    public static Map<Pair<RegistryKey<World>, BlockPos>, Set<BlockPos>> clientOxygenLocations = new HashMap<>();
 
-    public static final int UPDATE_OXYGEN_FILLER_TICKS = BeyondEarth.CONFIG.oxygenDistributor.refreshTicks;
-    public static int spawnOxygenBubblesTick = UPDATE_OXYGEN_FILLER_TICKS;
+    public static int spawnOxygenBubblesTick = BeyondEarth.CONFIG.oxygenDistributor.refreshTicks;
 
     static {
         ServerTickEvents.START_SERVER_TICK.register(server -> {
-            if (spawnOxygenBubblesTick >= UPDATE_OXYGEN_FILLER_TICKS) {
+            if (spawnOxygenBubblesTick >= BeyondEarth.CONFIG.oxygenDistributor.refreshTicks) {
                 for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
                     ServerWorld world = player.getWorld();
 
@@ -66,7 +64,7 @@ public class OxygenUtils {
                     }).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
                     // get all the oxygen location values into a set
-                    Set<BlockPos> oxygenLocationsSet = locationsInDimension.values().stream().flatMap(Set::stream).collect(Collectors.toSet());
+                    Set<BlockPos> oxygenLocationsSet = new HashSet<>(locationsInDimension.values()).stream().flatMap(Set::stream).collect(Collectors.toSet());
 
                     for (BlockPos pos : oxygenLocationsSet) {
                         ModUtils.spawnForcedParticles(world, ModParticleTypes.OXYGEN_BUBBLE, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 1, 0.0, 0.0, 0.0, 0.0);
@@ -110,8 +108,8 @@ public class OxygenUtils {
      * @return The amount of blocks that an oxygen distributor is distributing oxygen to
      */
     public static int getOxygenBlocksCount(World world, BlockPos source) {
-        if (oxygenLocations.containsKey(Pair.of(world.getRegistryKey(), source))) {
-            return oxygenLocations.get(Pair.of(world.getRegistryKey(), source)).size();
+        if (oxygenLocations.containsKey(getOxygenSource(world, source))) {
+            return oxygenLocations.get(getOxygenSource(world, source)).size();
         } else {
             return 0;
         }
@@ -119,24 +117,23 @@ public class OxygenUtils {
 
     public static void setEntry(World world, BlockPos source, Set<BlockPos> entries) {
         // Get all the entries that have changed. If they are have been removed, deoxygenate their pos.
-        if (world instanceof ServerWorld serverWorld) {
-            Set<BlockPos> locations = oxygenLocations.get(Pair.of(serverWorld.getRegistryKey(), source));
-            if (locations != null && !locations.isEmpty()) {
-                Set<BlockPos> changedPositions = new HashSet<>(locations);
-                changedPositions.removeAll(entries);
-                if (changedPositions.size() > 0) {
-                    deoxygenizeBlocks(serverWorld, changedPositions, source);
+        if (!world.isClient) {
+
+            if (oxygenLocations.containsKey(getOxygenSource(world, source))) {
+                Set<BlockPos> changedPositions = new HashSet<>(oxygenLocations.get(getOxygenSource(world, source)));
+                if (changedPositions != null && !changedPositions.isEmpty()) {
+                    changedPositions.removeAll(entries);
+                    deoxygenizeBlocks((ServerWorld) world, changedPositions, source);
                 }
             }
+            oxygenLocations.put(getOxygenSource(world, source), entries);
         }
-        oxygenLocations.put(Pair.of(world.getRegistryKey(), source), entries);
     }
 
     public static void removeEntry(World world, BlockPos source) {
-        if (oxygenLocations.containsKey(Pair.of(world.getRegistryKey(), source))) {
-            if (world instanceof ServerWorld) {
-                deoxygenizeBlocks((ServerWorld) world, oxygenLocations.get(Pair.of(world.getRegistryKey(), source)), source);
-            }
+        OxygenUtils.setEntry(world, source, Set.of());
+        if (oxygenLocations.containsKey(getOxygenSource(world, source))) {
+            oxygenLocations.remove(getOxygenSource(world, source));
         }
     }
 
@@ -148,9 +145,13 @@ public class OxygenUtils {
         if (entries == null) {
             return;
         }
+        if (entries.isEmpty()) {
+            return;
+        }
+
         if (worldHasOxygen(world)) {
-            if (oxygenLocations.containsKey(Pair.of(world.getRegistryKey(), source))) {
-                oxygenLocations.remove(Pair.of(world.getRegistryKey(), source));
+            if (oxygenLocations.containsKey(getOxygenSource(world, source))) {
+                oxygenLocations.remove(getOxygenSource(world, source));
             }
             return;
         }
@@ -159,7 +160,7 @@ public class OxygenUtils {
 
             BlockState state = world.getBlockState(pos);
 
-            oxygenLocations.get(Pair.of(world.getRegistryKey(), source)).remove(pos);
+            oxygenLocations.get(getOxygenSource(world, source)).remove(pos);
             if (worldHasOxygen(world, pos)) {
                 continue;
             }
@@ -221,8 +222,7 @@ public class OxygenUtils {
                     } else {
                         world.setBlockState(pos, Blocks.AIR.getDefaultState());
                     }
-                }
-                else if (state.contains(Properties.WATERLOGGED)) {
+                } else if (state.contains(Properties.WATERLOGGED)) {
                     world.setBlockState(pos, state.with(Properties.WATERLOGGED, false));
                 }
             }
@@ -262,5 +262,9 @@ public class OxygenUtils {
         }
 
         return posHasOxygen(world, pos);
+    }
+
+    public static Pair<RegistryKey<World>, BlockPos> getOxygenSource(World world, BlockPos source) {
+        return Pair.of(world.getRegistryKey(), source);
     }
 }
