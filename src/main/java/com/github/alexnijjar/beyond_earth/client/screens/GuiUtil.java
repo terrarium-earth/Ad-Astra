@@ -96,6 +96,10 @@ public class GuiUtil {
         drawFluidTank(matrices, x, y, ratio, fluid);
     }
 
+    public static void drawAccentingFluidTank(MatrixStack matrices, int x, int y, double ratio, FluidVariant fluid) {
+        drawFluidTank(matrices, x, y, 1.0 - ratio, fluid);
+    }
+
     public static void drawFluidTank(MatrixStack matrices, int x, int y, double ratio, FluidVariant fluid) {
         // Draw the fluid
         drawFluid(matrices, x, y, ratio, fluid);
@@ -103,10 +107,6 @@ public class GuiUtil {
         RenderSystem.enableBlend();
         drawVertical(matrices, x, y, FLUID_TANK_WIDTH, FLUID_TANK_HEIGHT, FLUID_TANK_TEXTURE, 1.0);
         RenderSystem.disableBlend();
-    }
-
-    public static void drawAccentingFluidTank(MatrixStack matrices, int x, int y, double ratio, FluidVariant fluid) {
-        drawFluidTank(matrices, x, y, 1.0 - ratio, fluid);
     }
 
     private static void drawFluid(MatrixStack matrices, int x, int y, double ratio, FluidVariant fluid) {
@@ -135,7 +135,7 @@ public class GuiUtil {
         RenderSystem.enableScissor(scissorX, scissorY, scissorWidth, scissorHeight);
 
         for (int i = 1; i < 4; i++) {
-            DrawableHelper.drawSprite(matrices, x + 1, FLUID_TANK_HEIGHT + y - (spriteHeight * i) - 1, 0, FLUID_TANK_WIDTH - 2, spriteHeight, sprite);
+            DrawableHelper.drawSprite(matrices, x + 1, FLUID_TANK_HEIGHT + y - (spriteHeight * i), 0, FLUID_TANK_WIDTH - 2, spriteHeight, sprite);
         }
 
         RenderSystem.disableScissor();
@@ -203,7 +203,8 @@ public class GuiUtil {
     }
 
     public static void drawEnergyTooltip(Screen screen, MatrixStack matrices, AbstractMachineBlockEntity machine, int mouseX, int mouseY) {
-        screen.renderTooltip(matrices, new TranslatableText("gauge_text.beyond_earth.storage", MathHelper.clamp(machine.getEnergy(), 0, machine.getMaxGeneration()), machine.getMaxGeneration()).setStyle(Style.EMPTY.withColor(Formatting.GOLD)), mouseX, mouseY);
+        screen.renderTooltip(matrices, new TranslatableText("gauge_text.beyond_earth.storage", MathHelper.clamp(machine.getEnergy(), 0, machine.getMaxGeneration()), machine.getMaxGeneration()).setStyle(Style.EMPTY.withColor(Formatting.GOLD)), mouseX,
+                mouseY);
     }
 
     public static void drawTankTooltip(Screen screen, MatrixStack matrices, SingleVariantStorage<FluidVariant> tank, int mouseX, int mouseY) {
@@ -211,8 +212,8 @@ public class GuiUtil {
     }
 
     public static void drawTankTooltip(Screen screen, MatrixStack matrices, long amount, long capacity, FluidVariant variant, int mouseX, int mouseY) {
-        screen.renderTooltip(matrices, new TranslatableText("gauge_text.beyond_earth.liquid_storage", FluidUtils.dropletsToMillibuckets(amount), FluidUtils.dropletsToMillibuckets(capacity))
-                .setStyle(Style.EMPTY.withColor(Formatting.GOLD)).append(Text.of(", ")).append(GuiUtil.getFluidTranslation(variant.getFluid())), mouseX, mouseY);
+        screen.renderTooltip(matrices, new TranslatableText("gauge_text.beyond_earth.liquid_storage", FluidUtils.dropletsToMillibuckets(amount), FluidUtils.dropletsToMillibuckets(capacity)).setStyle(Style.EMPTY.withColor(Formatting.GOLD))
+                .append(Text.of(", ")).append(GuiUtil.getFluidTranslation(variant.getFluid())), mouseX, mouseY);
     }
 
     public static class FloatDrawableHelper {

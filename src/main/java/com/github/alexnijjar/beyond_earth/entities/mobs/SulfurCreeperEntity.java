@@ -7,8 +7,6 @@ import com.github.alexnijjar.beyond_earth.items.armour.SpaceSuit;
 import com.github.alexnijjar.beyond_earth.util.OxygenUtils;
 
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.AreaEffectCloudEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
@@ -20,7 +18,6 @@ import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
@@ -34,21 +31,6 @@ public class SulfurCreeperEntity extends CreeperEntity {
 
     public SulfurCreeperEntity(EntityType<? extends CreeperEntity> entityType, World world) {
         super(entityType, world);
-    }
-
-    @Override
-    public boolean canSpawn(WorldAccess world, SpawnReason spawnReason) {
-        if (!BeyondEarth.CONFIG.general.spawnSulfurCreepers) {
-            return false;
-        }
-
-        BlockState blockState = world.getBlockState(new BlockPos(this.getX(), this.getY() - 1, this.getZ()));
-
-        if (blockState.isOf(Blocks.LAVA) || blockState.isOf(Blocks.AIR)) {
-            return false;
-        }
-
-        return super.canSpawn(world, spawnReason);
     }
 
     @Override
@@ -88,5 +70,13 @@ public class SulfurCreeperEntity extends CreeperEntity {
                 this.world.spawnEntity(areaEffectCloudEntity);
             }
         }
+    }
+
+    @Override
+    public boolean canSpawn(WorldAccess world, SpawnReason spawnReason) {
+        if (!BeyondEarth.CONFIG.general.spawnSulfurCreepers) {
+            return false;
+        }
+        return super.canSpawn(world, spawnReason);
     }
 }

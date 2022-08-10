@@ -34,8 +34,12 @@ dependencies {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
 
-	modCompileOnly "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
-	modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
+	// EMI
+	modImplementation "dev.emi:emi:${emi_version}"
+
+	// REI
+	modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:$project.rei_version")
+    modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:$project.rei_version")
 
 	include modApi("teamreborn:energy:${project.techreborn_energy_version}") {
 		exclude(group: "net.fabricmc.fabric-api")
