@@ -23,6 +23,7 @@ public class FluidBarWidget extends EnergyBarWidget {
         this.fluid = fluid;
     }
 
+    @Override
     public void renderBackground(MatrixStack matrices, boolean dark, float alpha) {
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, alpha);
 

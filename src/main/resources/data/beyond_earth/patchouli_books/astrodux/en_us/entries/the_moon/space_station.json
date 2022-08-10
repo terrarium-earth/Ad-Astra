@@ -1,6 +1,6 @@
 {
     "name": "Space Station",
-    "icon": "beyond_earth:/textures/gui/screens/rei/space_station_icon.png",
+    "icon": "beyond_earth:/textures/gui/space_station_icon.png",
     "sortnum": 0,
     "category": "beyond_earth:the_moon",
     "pages": [

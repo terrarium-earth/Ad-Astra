@@ -66,7 +66,7 @@ public class ModSky implements DimensionRenderingRegistry.SkyRenderer {
             case SCALING -> scale *= SkyUtil.getScale();
             case DEBUG -> {
                 // Test things without restarting Minecraft
-                rotation = new Vec3f(skyAngle * 360.0f + 10, -94, 192);
+                rotation = new Vec3f(60, 0, 0);
             }
             }
             SkyUtil.render(context, bufferBuilder, skyObject.texture(), skyObject.colour(), rotation, scale, skyObject.blending());
