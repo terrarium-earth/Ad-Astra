@@ -23,10 +23,13 @@ import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
 
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.fabricmc.fabric.mixin.object.builder.SpawnRestrictionAccessor;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.Heightmap;
 
 public class ModEntityTypes {
 
@@ -88,5 +91,17 @@ public class ModEntityTypes {
                 FabricDefaultAttributeRegistry.register(ZOMBIFIED_MOGLER, ZombifiedMoglerEntity.createMobAttributes());
                 FabricDefaultAttributeRegistry.register(LUNARIAN_WANDERING_TRADER, LunarianEntity.createMobAttributes());
                 FabricDefaultAttributeRegistry.register(SULFUR_CREEPER, SulfurCreeperEntity.createMobAttributes());
+
+                SpawnRestrictionAccessor.callRegister(LUNARIAN, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, LunarianEntity::canMobSpawn);
+                SpawnRestrictionAccessor.callRegister(CORRUPTED_LUNARIAN, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, CorruptedLunarianEntity::canSpawnInDark);
+                SpawnRestrictionAccessor.callRegister(STAR_CRAWLER, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, StarCrawlerEntity::canSpawnInDark);
+                SpawnRestrictionAccessor.callRegister(MARTIAN_RAPTOR, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MartianRaptorEntity::canSpawnInDark);
+                SpawnRestrictionAccessor.callRegister(PYGRO, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, PygroEntity::canSpawnInDark);
+                SpawnRestrictionAccessor.callRegister(ZOMBIFIED_PYGRO, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ZombifiedPygroEntity::canSpawnInDark);
+                SpawnRestrictionAccessor.callRegister(PYGRO_BRUTE, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, PygroBruteEntity::canSpawnInDark);
+                SpawnRestrictionAccessor.callRegister(MOGLER, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MoglerEntity::canMobSpawn);
+                SpawnRestrictionAccessor.callRegister(ZOMBIFIED_MOGLER, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ZombifiedMoglerEntity::canSpawnInDark);
+                SpawnRestrictionAccessor.callRegister(LUNARIAN_WANDERING_TRADER, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, LunarianEntity::canMobSpawn);
+                SpawnRestrictionAccessor.callRegister(SULFUR_CREEPER, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, SulfurCreeperEntity::canSpawnInDark);
         }
 }

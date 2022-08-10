@@ -172,7 +172,7 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		// Cracked
 		offerCrackedBricksSmeltingRecipe(exporter, List.of(MOON_STONE_BRICKS), CRACKED_MOON_STONE_BRICKS);
 		offerCrackedBricksSmeltingRecipe(exporter, List.of(MARS_STONE_BRICKS), CRACKED_MARS_STONE_BRICKS);
-		offerCrackedBricksSmeltingRecipe(exporter, List.of(CRACKED_VENUS_STONE_BRICKS), CRACKED_VENUS_STONE_BRICKS);
+		offerCrackedBricksSmeltingRecipe(exporter, List.of(VENUS_STONE_BRICKS), CRACKED_VENUS_SANDSTONE_BRICKS);
 		offerCrackedBricksSmeltingRecipe(exporter, List.of(VENUS_STONE_BRICKS), CRACKED_VENUS_STONE_BRICKS);
 		offerCrackedBricksSmeltingRecipe(exporter, List.of(MERCURY_STONE_BRICKS), CRACKED_MERCURY_STONE_BRICKS);
 		offerCrackedBricksSmeltingRecipe(exporter, List.of(GLACIO_STONE_BRICKS), CRACKED_GLACIO_STONE_BRICKS);
@@ -199,6 +199,7 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		offerQuadRecipe(exporter, MERCURY_STONE_BRICKS, MERCURY_STONE);
 		offerQuadRecipe(exporter, GLACIO_STONE_BRICKS, GLACIO_STONE);
 		offerQuadRecipe(exporter, PERMAFROST_BRICKS, PERMAFROST);
+		offerQuadRecipe(exporter, VENUS_SANDSTONE_BRICKS, VENUS_SANDSTONE);
 
 		// Sandstone
 		offerQuadRecipe(exporter, VENUS_SANDSTONE, VENUS_SAND);

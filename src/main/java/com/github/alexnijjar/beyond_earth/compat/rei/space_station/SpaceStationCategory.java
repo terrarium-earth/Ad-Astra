@@ -28,7 +28,7 @@ import net.minecraft.util.Identifier;
 @Environment(EnvType.CLIENT)
 public class SpaceStationCategory implements DisplayCategory<SpaceStationDisplay> {
 
-    public static final Identifier ICON = new ModIdentifier("textures/gui/screens/rei/space_station_icon.png");
+    public static final Identifier ICON = new ModIdentifier("textures/gui/space_station_icon.png");
 
     @Override
     public Renderer getIcon() {

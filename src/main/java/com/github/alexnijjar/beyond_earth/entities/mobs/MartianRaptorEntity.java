@@ -2,17 +2,15 @@ package com.github.alexnijjar.beyond_earth.entities.mobs;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.goal.TargetGoal;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.ai.goal.PounceAtTargetGoal;
 import net.minecraft.entity.ai.goal.RevengeGoal;
+import net.minecraft.entity.ai.goal.TargetGoal;
 import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
 import net.minecraft.entity.ai.goal.WanderAroundGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -23,7 +21,6 @@ import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
@@ -98,13 +95,6 @@ public class MartianRaptorEntity extends HostileEntity {
         if (!BeyondEarth.CONFIG.general.spawnMartianRaptors) {
             return false;
         }
-
-        BlockState blockState = world.getBlockState(new BlockPos(this.getX(), this.getY() - 1, this.getZ()));
-
-        if (blockState.isOf(Blocks.LAVA) || blockState.isOf(Blocks.AIR)) {
-            return false;
-        }
-
         return super.canSpawn(world, spawnReason);
     }
 }

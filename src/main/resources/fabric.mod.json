@@ -1,16 +1,14 @@
 {
   "schemaVersion": 1,
   "id": "beyond_earth",
-  "version": "${version}",
+  "version": "1.0.3",
 
   "name": "Beyond Earth",
   "description": "Fly to Other Planets and Beyond!",
   "authors": [
     "Alex Nijjar",
-    "MrScautHD",
     "Facu",
     "Fizz",
-    "FritzHackenstein",
     "Barracuda",
     "Checheño",
     "SpaceStar"
@@ -36,6 +34,9 @@
     ],
     "modmenu": [
       "com.github.alexnijjar.beyond_earth.config.ModMenuConfig"
+    ],
+    "emi": [
+       "com.github.alexnijjar.beyond_earth.compat.emi.BeyondEarthEmiPlugin"
     ],
     "rei_client": [
       "com.github.alexnijjar.beyond_earth.compat.rei.BeyondEarthClientPlugin"

@@ -50,7 +50,7 @@ public class EnergyBarWidget extends BurningFire {
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         this.darkBackgroundAlpha.update(delta);
-        renderBackground(matrices, false, 1.0f);
+        this.renderBackground(matrices, false, 1.0f);
         if (darkBackgroundAlpha.value() > 0) {
             renderBackground(matrices, true, this.darkBackgroundAlpha.value());
         }
