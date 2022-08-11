@@ -3,6 +3,7 @@ package com.github.alexnijjar.beyond_earth.registry;
 import java.util.HashSet;
 import java.util.Set;
 
+// import com.github.alexnijjar.beyond_earth.blocks.cables.CableBlock;
 import com.github.alexnijjar.beyond_earth.blocks.flags.FlagBlock;
 import com.github.alexnijjar.beyond_earth.blocks.globes.GlobeBlock;
 import com.github.alexnijjar.beyond_earth.blocks.machines.CoalGeneratorBlock;
@@ -76,7 +77,11 @@ public interface ModBlocks {
         public static final Block WALL_COAL_TORCH = register("wall_coal_torch", new WallCoalTorchBlock(FabricBlockSettings.of(Material.DECORATION).noCollision().breakInstantly().sounds(BlockSoundGroup.WOOD)), true);
         public static final Block COAL_LANTERN = register("coal_lantern", new CoalLanternBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.LANTERN).strength(3.5f).nonOpaque()));
 
+        // public static final Block STEEL_CABLE = register("steel_cable", new CableBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(2.5f, 1.0f)));
+        // public static final Block DESH_CABLE = register("desh_cable", new CableBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(2.5f, 1.0f)));
+
         // Machines
+
         public static final Block FUEL_REFINERY = register("fuel_refinery", new FuelRefineryBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(5.0f, 1.0f).requiresTool()));
         public static final Block COMPRESSOR = register("compressor", new CompressorBlock(FabricBlockSettings.copy(FUEL_REFINERY)));
         public static final Block COAL_GENERATOR = register("coal_generator", new CoalGeneratorBlock(FabricBlockSettings.copy(FUEL_REFINERY)));

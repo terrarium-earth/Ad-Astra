@@ -1,5 +1,6 @@
 package com.github.alexnijjar.beyond_earth.items.armour;
 
+import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.registry.ModItems;
 
 import net.minecraft.entity.EquipmentSlot;
@@ -20,7 +21,7 @@ public class JetSuitMaterial implements ArmorMaterial {
 
     @Override
     public int getProtectionAmount(EquipmentSlot slot) {
-        return PROTECTION_VALUES[slot.getEntitySlotId()];
+        return PROTECTION_VALUES[slot.getEntitySlotId()] * BeyondEarth.CONFIG.spaceSuit.jetSuitProtectionMultiplier;
     }
 
     @Override
@@ -30,7 +31,7 @@ public class JetSuitMaterial implements ArmorMaterial {
 
     @Override
     public SoundEvent getEquipSound() {
-        return SoundEvents.ITEM_ARMOR_EQUIP_LEATHER;
+        return SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE;
     }
 
     @Override
@@ -45,7 +46,7 @@ public class JetSuitMaterial implements ArmorMaterial {
 
     @Override
     public float getToughness() {
-        return 4;
+        return BeyondEarth.CONFIG.spaceSuit.jetSuitArmorToughness;
     }
 
     @Override

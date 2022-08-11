@@ -2,9 +2,9 @@ package com.github.alexnijjar.beyond_earth.client.renderer.sky;
 
 import java.util.List;
 
-import com.github.alexnijjar.beyond_earth.client.resource_pack.SkyRenderer.SkyObject;
-import com.github.alexnijjar.beyond_earth.client.resource_pack.SkyRenderer.StarsRenderer;
-import com.github.alexnijjar.beyond_earth.client.resource_pack.SkyRenderer.SunsetColour;
+import com.github.alexnijjar.beyond_earth.client.resourcepack.SkyRenderer.SkyObject;
+import com.github.alexnijjar.beyond_earth.client.resourcepack.SkyRenderer.StarsRenderer;
+import com.github.alexnijjar.beyond_earth.client.resourcepack.SkyRenderer.SunsetColour;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
