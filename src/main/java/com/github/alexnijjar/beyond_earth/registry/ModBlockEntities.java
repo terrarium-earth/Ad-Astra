@@ -1,5 +1,6 @@
 package com.github.alexnijjar.beyond_earth.registry;
 
+// import com.github.alexnijjar.beyond_earth.blocks.cables.CableBlockEntity;
 import com.github.alexnijjar.beyond_earth.blocks.flags.FlagBlockEntity;
 import com.github.alexnijjar.beyond_earth.blocks.globes.GlobeBlockEntity;
 import com.github.alexnijjar.beyond_earth.blocks.machines.entity.AbstractMachineBlockEntity;
@@ -46,6 +47,8 @@ public class ModBlockEntities {
         public static BlockEntityType<CryoFreezerBlockEntity> CRYO_FREEZER;
         public static BlockEntityType<OxygenSensorBlockEntity> OXYGEN_SENSOR;
 
+        // public static BlockEntityType<CableBlockEntity> CABLE;
+
         public static void register() {
                 FLAG_BLOCK_ENTITY = register("flag_entity", FlagBlockEntity::new, ModBlocks.FLAG, ModBlocks.FLAG_BLUE, ModBlocks.FLAG_BROWN, ModBlocks.FLAG_CYAN, ModBlocks.FLAG_GRAY, ModBlocks.FLAG_GREEN, ModBlocks.FLAG_LIGHT_BLUE, ModBlocks.FLAG_LIME,
                                 ModBlocks.FLAG_MAGENTA, ModBlocks.FLAG_ORANGE, ModBlocks.FLAG_PINK, ModBlocks.FLAG_PURPLE, ModBlocks.FLAG_RED, ModBlocks.FLAG_YELLOW);
@@ -65,8 +68,12 @@ public class ModBlockEntities {
                 CRYO_FREEZER = register("cryo_freezer_entity", CryoFreezerBlockEntity::new, ModBlocks.CRYO_FREEZER);
                 OXYGEN_SENSOR = register("oxygen_sensor", OxygenSensorBlockEntity::new, ModBlocks.OXYGEN_SENSOR);
 
+                // CABLE = register("steel_cable", CableBlockEntity::new, ModBlocks.STEEL_CABLE, ModBlocks.DESH_CABLE);
+
                 EnergyStorage.SIDED.registerForBlockEntities((blockEntity, direction) -> ((AbstractMachineBlockEntity) blockEntity).getSideEnergyStorage(direction), SOLAR_PANEL, COAL_GENERATOR, COMPRESSOR, FUEL_REFINERY, OXYGEN_LOADER, OXYGEN_DISTRIBUTOR,
                                 WATER_PUMP, ENERGIZER, CRYO_FREEZER);
+
+                // EnergyStorage.SIDED.registerForBlockEntities((blockEntity, direction) -> ((CableBlockEntity) blockEntity).getSideEnergyStorage(direction), CABLE);
                 FluidStorage.SIDED.registerForBlockEntities((blockEntity, direction) -> ((FluidMachineBlockEntity) blockEntity).inputTank, FUEL_REFINERY, OXYGEN_LOADER, OXYGEN_DISTRIBUTOR, WATER_PUMP, CRYO_FREEZER);
         }
 

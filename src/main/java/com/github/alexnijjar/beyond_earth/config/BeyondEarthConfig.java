@@ -77,11 +77,13 @@ public class BeyondEarthConfig implements ConfigData {
         public double jetSuitSpeed = 0.8;
         @ConfigEntry.Gui.Tooltip(count = 1)
         public double jetSuitUpwardsSpeed = 0.5;
-        public long jetSuitEnergyPerTick = 100;
+        public long jetSuitEnergyPerTick = 80;
         public long jetSuitTankSize = FluidConstants.BUCKET * 4;
         public long jetSuitMaxEnergy = 1000000L;
         public boolean spawnJetSuitParticles = true;
         public boolean enableJetSuitFlight = true;
+        public int jetSuitProtectionMultiplier = 1;
+        public int jetSuitArmorToughness = 5;
     }
 
     public static class VehiclesConfig {

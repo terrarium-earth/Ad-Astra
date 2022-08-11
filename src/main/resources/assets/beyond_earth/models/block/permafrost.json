@@ -1,6 +1,7 @@
 {
-  "parent": "block/cube_all",
+  "parent": "minecraft:block/cube_column",
   "textures": {
-    "all": "beyond_earth:block/permafrost"
+    "end": "beyond_earth:block/permafrost_top",
+    "side": "beyond_earth:block/permafrost_side"
   }
 }

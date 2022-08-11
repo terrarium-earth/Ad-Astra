@@ -9,8 +9,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.client.BeyondEarthClient;
-import com.github.alexnijjar.beyond_earth.client.resource_pack.SkyRenderer;
-import com.github.alexnijjar.beyond_earth.client.resource_pack.SkyRenderer.WeatherEffects;
+import com.github.alexnijjar.beyond_earth.client.resourcepack.SkyRenderer;
+import com.github.alexnijjar.beyond_earth.client.resourcepack.SkyRenderer.WeatherEffects;
 import com.github.alexnijjar.beyond_earth.registry.ModParticleTypes;
 
 import net.minecraft.block.BlockState;
