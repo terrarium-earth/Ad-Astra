@@ -85,8 +85,6 @@ public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
             ItemStack outputInsertSlot = this.getItems().get(2);
             ItemStack outputExtractSlot = this.getItems().get(3);
 
-            System.out.println(this.inputTank.isResourceBlank());
-
             if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxCount()) {
                 ModRecipes.OXYGEN_CONVERSION_RECIPE.getRecipes(this.world);
                 FluidUtils.insertFluidIntoTank(this, this.inputTank, 0, 1, f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.getRecipes(this.world).stream().anyMatch(r -> r.getFluidInput().equals(f.getFluid())));
