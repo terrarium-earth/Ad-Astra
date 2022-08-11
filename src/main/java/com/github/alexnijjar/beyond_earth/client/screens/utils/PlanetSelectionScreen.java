@@ -107,7 +107,6 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                         currentCategory = Category.MILKY_WAY_CATEGORY;
 
                 }
-                System.out.println(BeyondEarthClient.galaxies);
 
                 // Set the initial gui time to the world time. This creates a random start position for each rotating object.
                 MinecraftClient client = MinecraftClient.getInstance();
