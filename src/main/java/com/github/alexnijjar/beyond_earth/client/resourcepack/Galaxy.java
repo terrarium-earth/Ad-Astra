@@ -1,4 +1,4 @@
-package com.github.alexnijjar.beyond_earth.client.resource_pack;
+package com.github.alexnijjar.beyond_earth.client.resourcepack;
 
 import com.github.alexnijjar.beyond_earth.data.ButtonColour;
 

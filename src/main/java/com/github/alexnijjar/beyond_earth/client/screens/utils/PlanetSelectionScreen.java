@@ -11,9 +11,9 @@ import java.util.function.Consumer;
 
 import com.github.alexnijjar.beyond_earth.BeyondEarth;
 import com.github.alexnijjar.beyond_earth.client.BeyondEarthClient;
-import com.github.alexnijjar.beyond_earth.client.resource_pack.Galaxy;
-import com.github.alexnijjar.beyond_earth.client.resource_pack.PlanetRing;
-import com.github.alexnijjar.beyond_earth.client.resource_pack.SolarSystem;
+import com.github.alexnijjar.beyond_earth.client.resourcepack.Galaxy;
+import com.github.alexnijjar.beyond_earth.client.resourcepack.PlanetRing;
+import com.github.alexnijjar.beyond_earth.client.resourcepack.SolarSystem;
 import com.github.alexnijjar.beyond_earth.data.ButtonColour;
 import com.github.alexnijjar.beyond_earth.data.Planet;
 import com.github.alexnijjar.beyond_earth.networking.ModC2SPackets;

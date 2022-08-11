@@ -255,6 +255,7 @@ public interface ModItems extends ModItemGroups {
                 }
         });
 
+
         public static final Item HAMMER = register("hammer", new HammerItem(new FabricItemSettings().group(ITEM_GROUP_BASICS).maxCount(1).maxDamage(BeyondEarth.CONFIG.general.hammerDurability)));
 
         public static final Item IRON_STICK = registerItem("iron_stick", ITEM_GROUP_BASICS);
@@ -324,6 +325,9 @@ public interface ModItems extends ModItemGroups {
         public static final BlockItem MERCURY_GLOBE = registerGlobe(ModBlocks.MERCURY_GLOBE);
         public static final BlockItem VENUS_GLOBE = registerGlobe(ModBlocks.VENUS_GLOBE);
         public static final BlockItem GLACIO_GLOBE = registerGlobe(ModBlocks.GLACIO_GLOBE);
+        
+        // public static final BlockItem STEEL_CABLE = register("steel_cable", new BlockItem(ModBlocks.STEEL_CABLE, new FabricItemSettings().group(ITEM_GROUP_MACHINES)));
+        // public static final BlockItem DESH_CABLE = register("desh_cable", new BlockItem(ModBlocks.DESH_CABLE, new FabricItemSettings().group(ITEM_GROUP_MACHINES)));
 
         // Block Items
         public static final BlockItem STEEL_BLOCK = registerBlockItem(ModBlocks.STEEL_BLOCK);
