@@ -21,9 +21,4 @@ public class ModFeatures {
 		Registry.register(Registry.FEATURE, MODIFIED_BLOCK_BLOCK, MODIFIED_BLOCK_BLOB_FEATURE);
 	}
 
-	public static <FC extends FeatureConfig, F extends Feature<FC>> ConfiguredFeature<?, ?> createFeatureConfiguredFeature(Identifier id, F feature, FC config) {
-		ConfiguredFeature<?, ?> configured = new ConfiguredFeature<>(feature, config);
-		Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, id, configured);
-		return configured;
-	}
 }

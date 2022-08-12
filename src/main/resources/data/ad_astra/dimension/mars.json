@@ -305,8 +305,8 @@
             "if_true": {
               "type": "minecraft:biome",
               "biome_is": [
-                "ad_astra:martian_desert",
-                "ad_astra:rocky_martian_plains"
+                "ad_astra:martian_wastelands",
+                "ad_astra:martian_canyon_creek"
               ]
             },
             "then_run": {
@@ -380,7 +380,7 @@
       "type": "minecraft:multi_noise",
       "biomes": [
         {
-          "biome": "ad_astra:martian_desert",
+          "biome": "ad_astra:martian_wastelands",
           "parameters": {
             "temperature": -0.5,
             "humidity": 0,
@@ -392,7 +392,7 @@
           }
         },
         {
-          "biome": "ad_astra:rocky_martian_plains",
+          "biome": "ad_astra:martian_canyon_creek",
           "parameters": {
             "temperature": -0.5,
             "humidity": 0,
