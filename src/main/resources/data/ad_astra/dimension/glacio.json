@@ -364,8 +364,8 @@
             "if_true": {
               "type": "minecraft:biome",
               "biome_is": [
-                "ad_astra:glacio",
-                "ad_astra:glacio_ice_spikes"
+                "ad_astra:glacio_snowy_barrens",
+                "ad_astra:glacio_ice_peaks"
               ]
             },
             "then_run": {
@@ -460,7 +460,7 @@
       "type": "minecraft:multi_noise",
       "biomes": [
         {
-          "biome": "ad_astra:glacio",
+          "biome": "ad_astra:glacio_snowy_barrens",
           "parameters": {
             "temperature": 1,
             "humidity": -1,
@@ -472,7 +472,7 @@
           }
         },
         {
-          "biome": "ad_astra:glacio_ice_spikes",
+          "biome": "ad_astra:glacio_ice_peaks",
           "parameters": {
             "temperature": -0.5,
             "humidity": 0,

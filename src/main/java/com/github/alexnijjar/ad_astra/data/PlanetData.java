@@ -36,7 +36,7 @@ public class PlanetData {
 				List<Planet> planets = new ArrayList<>();
 
 				// Planets.
-				for (Identifier id : manager.findResources("space/planets", path -> path.endsWith(".json"))) {
+				for (Identifier id : manager.findResources("planet_data/planets", path -> path.endsWith(".json"))) {
 					try {
 						for (Resource resource : manager.getAllResources(id)) {
 							InputStreamReader reader = new InputStreamReader(resource.getInputStream());

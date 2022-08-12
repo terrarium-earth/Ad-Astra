@@ -305,7 +305,7 @@
             "if_true": {
               "type": "minecraft:biome",
               "biome_is": [
-                "ad_astra:venus_desert"
+                "ad_astra:venus_wastelands"
               ]
             },
             "then_run": {
@@ -475,7 +475,7 @@
       "type": "minecraft:multi_noise",
       "biomes": [
         {
-          "biome": "ad_astra:venus_desert",
+          "biome": "ad_astra:venus_wastelands",
           "parameters": {
             "temperature": 1,
             "humidity": -1,
