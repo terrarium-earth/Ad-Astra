@@ -9,16 +9,16 @@ import net.minecraft.world.World;
 
 public class ZombifiedPygroEntity extends ZombifiedPiglinEntity {
 
-    public ZombifiedPygroEntity(EntityType<? extends ZombifiedPiglinEntity> entityType, World world) {
-        super(entityType, world);
-    }
+	public ZombifiedPygroEntity(EntityType<? extends ZombifiedPiglinEntity> entityType, World world) {
+		super(entityType, world);
+	}
 
-    public static DefaultAttributeContainer.Builder createMobAttributes() {
-        return ZombieEntity.createZombieAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 28.0).add(EntityAttributes.ZOMBIE_SPAWN_REINFORCEMENTS, 0.0).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.26f).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 8.0);
-    }
+	public static DefaultAttributeContainer.Builder createMobAttributes() {
+		return ZombieEntity.createZombieAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 28.0).add(EntityAttributes.ZOMBIE_SPAWN_REINFORCEMENTS, 0.0).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.26f).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 8.0);
+	}
 
-    @Override
-    public boolean canImmediatelyDespawn(double distanceSquared) {
-        return false;
-    }
+	@Override
+	public boolean canImmediatelyDespawn(double distanceSquared) {
+		return false;
+	}
 }
