@@ -1,20 +1,22 @@
 {
   "schemaVersion": 1,
   "id": "ad_astra",
-  "version": "1.0.3",
+  "version": "${version}",
 
-  "name": "Ad Astra",
-  "description": "Fly to Other Planets and Beyond!",
+  "name": "Ad Astra!",
+  "description": "Live long and prosper, Ad Astra!",
   "authors": [
     "Alex Nijjar",
     "Facu",
     "Fizz",
     "Barracuda",
-    "Checheño",
-    "SpaceStar"
+    "Checheno",
+    "SpaceStar",
+    "OliviaTheVampire",
+    "Bunny"
   ],
   "contact": {
-    "homepage": "https://modrinth.com/mod/ad-astra-fabric",
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/ad-astra",
     "sources": "https://github.com/AlexNijjar/Ad-Astra-Fabric"
   },
 
