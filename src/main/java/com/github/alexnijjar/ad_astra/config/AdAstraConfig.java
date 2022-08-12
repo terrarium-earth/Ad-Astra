@@ -77,7 +77,7 @@ public class AdAstraConfig implements ConfigData {
         public double jetSuitSpeed = 0.8;
         @ConfigEntry.Gui.Tooltip(count = 1)
         public double jetSuitUpwardsSpeed = 0.5;
-        public long jetSuitEnergyPerTick = 80;
+        public long jetSuitEnergyPerTick = 60;
         public long jetSuitTankSize = FluidConstants.BUCKET * 4;
         public long jetSuitMaxEnergy = 1000000L;
         public boolean spawnJetSuitParticles = true;
@@ -115,7 +115,7 @@ public class AdAstraConfig implements ConfigData {
             public float maxTurnSpeed = 6.0f;
             public float deceleration = 0.9f;
             public float minSpeed = -0.2f;
-            public float maxSpeed = 0.4f;
+            public float maxSpeed = 0.3f;
             public int tankBuckets = 3;
         }
 
@@ -179,7 +179,7 @@ public class AdAstraConfig implements ConfigData {
 
     public static class EnergizerConfig {
         public long maxEnergy = 2000000L;
-        public long energyPerTick = 64L;
+        public long energyPerTick = 170L;
     }
 
     public static class CryoFreezerConfig {
