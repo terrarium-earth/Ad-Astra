@@ -1,0 +1,50 @@
+{
+  "temperature": -0.7,
+  "downfall": 1,
+  "precipitation": "snow",
+  "category": "icy",
+  "effects": {
+    "sky_color": 15117444,
+    "fog_color": 15117444,
+    "water_color": 4159204,
+    "water_fog_color": 329011,
+    "grass_color": 9551193,
+    "foliage_color": 7842607,
+    "particle": {
+      "options": {
+        "type": "minecraft:crimson_spore"
+      },
+      "probability": 0.014
+    }
+  },
+  "spawners": {},
+  "spawn_costs": {},
+  "carvers": {
+    "air": [
+      "minecraft:cave",
+      "minecraft:cave_extra_underground",
+      "minecraft:canyon"
+    ]
+  },
+  "features": [
+    [
+      "minecraft:lush_caves_ceiling_vegetation",
+      "minecraft:cave_vines",
+      "minecraft:lush_caves_clay",
+      "minecraft:lush_caves_vegetation",
+      "minecraft:classic_vines_cave_feature",
+      "minecraft:ice_spike",
+      "minecraft:ice_patch",
+      "minecraft:freeze_top_layer",
+      "ad_astra:mars_ice_shard_ore",
+      "ad_astra:mars_iron_ore",
+      "ad_astra:mars_diamond_ore",
+      "ad_astra:mars_ostrum_ore"
+    ],
+    [
+      "minecraft:large_dripstone",
+      "minecraft:dripstone_cluster",
+      "minecraft:pointed_dripstone"
+    ]
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_torch_wall",
+  "textures": {
+    "torch": "ad_astra:block/coal_torch"
+  }
+}

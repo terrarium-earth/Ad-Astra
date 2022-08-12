@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "ad_astra:raw_calorite"
+  },
+  "result": "ad_astra:calorite_ingot",
+  "experience": 1.0,
+  "cookingtime": 100
+}

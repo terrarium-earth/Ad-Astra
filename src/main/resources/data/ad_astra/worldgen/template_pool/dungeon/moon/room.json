@@ -1,0 +1,60 @@
+{
+    "name": "ad_astra:dungeon/moon/room",
+    "fallback": "ad_astra:dungeon/moon/walkway",
+    "elements": [
+      {
+        "weight": 75,
+        "element": {
+          "location": "ad_astra:dungeon/moon/walkway",
+          "processors": "minecraft:empty",
+          "projection": "rigid",
+          "element_type": "minecraft:single_pool_element"
+        }
+      },
+      {
+        "weight": 75,
+        "element": {
+          "location": "ad_astra:dungeon/moon/turn",
+          "processors": "minecraft:empty",
+          "projection": "rigid",
+          "element_type": "minecraft:single_pool_element"
+        }
+      },
+      {
+        "weight": 75,
+        "element": {
+          "location": "ad_astra:dungeon/moon/cross",
+          "processors": "minecraft:empty",
+          "projection": "rigid",
+          "element_type": "minecraft:single_pool_element"
+        }
+      },
+      {
+        "weight": 75,
+        "element": {
+          "location": "ad_astra:dungeon/moon/fork",
+          "processors": "minecraft:empty",
+          "projection": "rigid",
+          "element_type": "minecraft:single_pool_element"
+        }
+      },
+      {
+        "weight": 150,
+        "element": {
+          "location": "ad_astra:dungeon/moon/chest_room",
+          "processors": "minecraft:empty",
+          "projection": "rigid",
+          "element_type": "minecraft:single_pool_element"
+        }
+      },
+      {
+        "weight": 150,
+        "element": {
+          "location": "ad_astra:dungeon/moon/boss_room",
+          "processors": "minecraft:empty",
+          "projection": "rigid",
+          "element_type": "minecraft:single_pool_element"
+        }
+      }
+    ]
+  }

@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north,powered=false": {
+      "model": "ad_astra:block/oxygen_sensor_off"
+    },
+    "facing=east,powered=false": {
+      "model": "ad_astra:block/oxygen_sensor_off",
+      "y": 90
+    },
+    "facing=south,powered=false": {
+      "model": "ad_astra:block/oxygen_sensor_off",
+      "y": 180
+    },
+    "facing=west,powered=false": {
+      "model": "ad_astra:block/oxygen_sensor_off",
+      "y": 270
+    },
+    "facing=north,powered=true": {
+      "model": "ad_astra:block/oxygen_sensor_on"
+    },
+    "facing=east,powered=true": {
+      "model": "ad_astra:block/oxygen_sensor_on",
+      "y": 90
+    },
+    "facing=south,powered=true": {
+      "model": "ad_astra:block/oxygen_sensor_on",
+      "y": 180
+    },
+    "facing=west,powered=true": {
+      "model": "ad_astra:block/oxygen_sensor_on",
+      "y": 270
+    }
+  }
+}

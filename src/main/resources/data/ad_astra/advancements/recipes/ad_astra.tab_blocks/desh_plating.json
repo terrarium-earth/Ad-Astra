@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "ad_astra:desh_plating"
+    ]
+  },
+  "criteria": {
+    "has_tag": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "c:desh_plates"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "ad_astra:desh_plating"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_tag",
+      "has_the_recipe"
+    ]
+  ]
+}

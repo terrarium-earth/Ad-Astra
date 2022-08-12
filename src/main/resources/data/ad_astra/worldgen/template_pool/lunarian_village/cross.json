@@ -1,0 +1,15 @@
+{
+  "name": "ad_astra:lunarian_village/entrance",
+  "fallback": "ad_astra:lunarian_village/hallway",
+  "elements": [
+    {
+      "weight": 100,
+      "element": {
+        "location": "ad_astra:village/moon/lunarian_village/cross",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

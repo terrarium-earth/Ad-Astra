@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north,half=lower": {
+      "model": "ad_astra:block/flag_down_red"
+    },
+    "facing=east,half=lower": {
+      "model": "ad_astra:block/flag_down_red",
+      "y": 90
+    },
+    "facing=south,half=lower": {
+      "model": "ad_astra:block/flag_down_red",
+      "y": 180
+    },
+    "facing=west,half=lower": {
+      "model": "ad_astra:block/flag_down_red",
+      "y": 270
+    },
+    "facing=north,half=upper": {
+      "model": "ad_astra:block/flag_up_red"
+    },
+    "facing=east,half=upper": {
+      "model": "ad_astra:block/flag_up_red",
+      "y": 90
+    },
+    "facing=south,half=upper": {
+      "model": "ad_astra:block/flag_up_red",
+      "y": 180
+    },
+    "facing=west,half=upper": {
+      "model": "ad_astra:block/flag_up_red",
+      "y": 270
+    }
+  }
+}

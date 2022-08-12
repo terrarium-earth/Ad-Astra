@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "ad_astra:steel_ingot"
+    }
+  },
+  "result": {
+    "item": "ad_astra:steel_block"
+  }
+}

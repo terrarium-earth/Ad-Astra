@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "ad_astra:block/venus_sandstone_brick_slab"
+    },
+    "type=double": {
+      "model": "minecraft:block/air"
+    },
+    "type=top": {
+      "model": "ad_astra:block/venus_sandstone_brick_slab_top"
+    }
+  }
+}

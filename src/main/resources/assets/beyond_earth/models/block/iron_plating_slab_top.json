@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "beyond_earth:block/iron_plating",
-    "top": "beyond_earth:block/iron_plating",
-    "side": "beyond_earth:block/iron_plating"
-  }
-}

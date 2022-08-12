@@ -1,0 +1,50 @@
+{
+    "display": {
+        "icon": {
+            "item": "ad_astra:space_helmet"
+        },
+        "title": {
+            "translate": "advancements.space_suit.title"
+        },
+        "description": {
+            "translate": "advancements.space_suit.description"
+        },
+        "frame": "goal",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "space_suit": {
+            "conditions": {
+                "items": [
+                    {
+                        "items": [
+                            "ad_astra:space_helmet"
+                        ]
+                    },
+                    {
+                        "items": [
+                            "ad_astra:space_suit"
+                        ]
+                    },
+                    {
+                        "items": [
+                            "ad_astra:space_pants"
+                        ]
+                    },
+                    {
+                        "items": [
+                            "ad_astra:space_boots"
+                        ]
+                    }
+                ]
+            },
+            "trigger": "minecraft:inventory_changed"
+        }
+    },
+    "rewards": {
+        "experience": 25
+    },
+    "parent": "ad_astra:ad_astra"
+}

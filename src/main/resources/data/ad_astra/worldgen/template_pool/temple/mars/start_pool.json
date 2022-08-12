@@ -1,0 +1,15 @@
+{
+  "name": "ad_astra:temple/mars/start_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 100,
+      "element": {
+        "location": "ad_astra:temple/mars/mars_temple",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+    "display": {
+        "icon": {
+            "item": "ad_astra:netherite_space_helmet"
+        },
+        "title": {
+            "translate": "advancements.netherite_space_suit.title"
+        },
+        "description": {
+            "translate": "advancements.netherite_space_suit.description"
+        },
+        "frame": "challenge",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "netherite_space_suit": {
+            "conditions": {
+                "items": [
+                    {
+                        "items": [
+                            "ad_astra:netherite_space_helmet"
+                        ]
+                    },
+                    {
+                        "items": [
+                            "ad_astra:netherite_space_suit"
+                        ]
+                    },
+                    {
+                        "items": [
+                            "ad_astra:netherite_space_pants"
+                        ]
+                    },
+                    {
+                        "items": [
+                            "ad_astra:netherite_space_boots"
+                        ]
+                    }
+                ]
+            },
+            "trigger": "minecraft:inventory_changed"
+        }
+    },
+    "rewards": {
+        "experience": 150
+    },
+    "parent": "ad_astra:mars"
+}

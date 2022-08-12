@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FFF",
+    "TLT",
+    "#G#"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:compressed_desh"
+    },
+    "T": {
+      "item": "ad_astra:oxygen_tank"
+    },
+    "L": {
+      "item": "ad_astra:oxygen_loader"
+    },
+    "F": {
+      "item": "ad_astra:engine_fan"
+    },
+    "G": {
+      "item": "ad_astra:oxygen_gear"
+    }
+  },
+  "result": {
+    "item": "ad_astra:oxygen_distributor"
+  }
+}

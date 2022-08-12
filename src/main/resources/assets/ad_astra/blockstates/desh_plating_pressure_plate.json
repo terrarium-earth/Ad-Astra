@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "ad_astra:block/desh_plating_pressure_plate"
+    },
+    "powered=true": {
+      "model": "ad_astra:block/desh_plating_pressure_plate_down"
+    }
+  }
+}

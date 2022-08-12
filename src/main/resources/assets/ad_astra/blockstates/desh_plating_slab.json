@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "ad_astra:block/desh_plating_slab"
+    },
+    "type=double": {
+      "model": "ad_astra:block/desh_plating"
+    },
+    "type=top": {
+      "model": "ad_astra:block/desh_plating_slab_top"
+    }
+  }
+}

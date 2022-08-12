@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "beyond_earth:block/polished_venus_stone",
-    "top": "beyond_earth:block/polished_venus_stone",
-    "side": "beyond_earth:block/polished_venus_stone"
-  }
-}

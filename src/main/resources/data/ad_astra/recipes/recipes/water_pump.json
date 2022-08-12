@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " D ",
+    " #D",
+    " H "
+  ],
+  "key": {
+    "#": {
+      "tag": "c:desh_plates"
+    },
+    "H": {
+      "item": "minecraft:hopper"
+    },
+    "D": {
+      "item": "minecraft:dispenser"
+    }
+  },
+  "result": {
+    "item": "ad_astra:water_pump"
+  }
+}

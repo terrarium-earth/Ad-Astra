@@ -1,8 +1,0 @@
-{
-    "galaxy": "beyond_earth:milky_way",
-    "solar_system": "beyond_earth:solar_system",
-    "texture": "beyond_earth:textures/sky/uranus.png",
-    "speed": 1200,
-    "scale": 23,
-    "radius": 7.0
-}

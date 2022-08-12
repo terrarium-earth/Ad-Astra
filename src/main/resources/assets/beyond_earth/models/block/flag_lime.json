@@ -1,9 +1,0 @@
-{
-  "parent": "beyond_earth:custom/flag",
-  "textures": {
-    "all": "beyond_earth:block/flag_lime",
-    "particle": "beyond_earth:block/flag_lime",
-    "0": "beyond_earth:block/flag_lime",
-    "missing": "beyond_earth:block/flag_lime"
-  }
-}

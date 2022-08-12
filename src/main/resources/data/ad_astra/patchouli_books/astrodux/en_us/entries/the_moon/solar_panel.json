@@ -1,0 +1,19 @@
+{
+    "name": "Solar Panel",
+    "icon": "ad_astra:solar_panel",
+    "sortnum": 1,
+    "category": "ad_astra:the_moon",
+    "pages": [
+        {
+            "type": "patchouli:spotlight",
+            "title": "Solar Panel",
+            "item": "ad_astra:solar_panel",
+            "text": "The solar panel is an upgraded version of the coal generator, producing more energy per tick while being self-reliant. It can power the more energy-demanding machines; however, it will only work during the day."
+        },
+        {
+            "type": "patchouli:crafting",
+            "title": "Solar Panel",
+            "recipe": "ad_astra:recipes/solar_panel"
+        }
+    ]
+}

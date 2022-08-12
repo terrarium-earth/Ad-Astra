@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "ad_astra:raw_desh_block"
+    }
+  ],
+  "result": {
+    "item": "ad_astra:raw_desh",
+    "count": 9
+  }
+}

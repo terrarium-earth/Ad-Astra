@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " N ",
+    "D D",
+    "# #"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:compressed_ostrum"
+    },
+    "N": {
+      "item": "minecraft:netherite_boots"
+    },
+    "D": {
+      "item": "ad_astra:compressed_desh"
+    }
+  },
+  "result": {
+    "item": "ad_astra:netherite_space_boots"
+  }
+}

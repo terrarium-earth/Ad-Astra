@@ -1,0 +1,14 @@
+{
+    "translation": "gui.ad_astra.text.mercury",
+    "galaxy": "ad_astra:milky_way",
+    "solar_system": "ad_astra:solar_system",
+    "world": "ad_astra:mercury",
+    "orbit_world": "ad_astra:mercury_orbit",
+    "parent_world": null,
+    "rocket_tier": 3,
+    "gravity": 3.7,
+    "days_in_year": 88,
+    "temperature": 167,
+    "has_oxygen": false,
+    "button_color": "dark_red"
+}

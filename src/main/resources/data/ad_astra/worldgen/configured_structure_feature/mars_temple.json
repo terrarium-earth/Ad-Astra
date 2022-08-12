@@ -1,0 +1,10 @@
+{
+    "type": "ad_astra:mars_temple",
+    "config": {
+        "start_pool": "ad_astra:temple/mars/start_pool",
+        "size": 1
+    },
+    "biomes": "#ad_astra:has_structure/mars_temple_biomes",
+    "adapt_noise": true,
+    "spawn_overrides": {}
+}

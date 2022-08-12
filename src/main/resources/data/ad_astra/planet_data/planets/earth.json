@@ -1,0 +1,14 @@
+{
+    "translation": "gui.ad_astra.text.earth",
+    "galaxy": "ad_astra:milky_way",
+    "solar_system": "ad_astra:solar_system",
+    "world": "minecraft:overworld",
+    "orbit_world": "ad_astra:earth_orbit",
+    "parent_world": null,
+    "rocket_tier": 1,
+    "gravity": 9.806,
+    "days_in_year": 365,
+    "temperature": 15,
+    "has_oxygen": true,
+    "button_color": "green"
+}

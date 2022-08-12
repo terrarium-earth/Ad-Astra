@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#F#",
+    "TLT",
+    "#R#"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:compressed_steel"
+    },
+    "T": {
+      "item": "ad_astra:oxygen_tank"
+    },
+    "L": {
+      "item": "minecraft:lightning_rod"
+    },
+    "R": {
+      "item": "minecraft:redstone_block"
+    },
+    "F": {
+      "item": "ad_astra:engine_fan"
+    }
+  },
+  "result": {
+    "item": "ad_astra:oxygen_loader"
+  }
+}

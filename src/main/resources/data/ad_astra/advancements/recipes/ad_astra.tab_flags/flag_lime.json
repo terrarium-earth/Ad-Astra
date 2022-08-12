@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "ad_astra:flag_lime"
+    ]
+  },
+  "criteria": {
+    "has_lime_wool": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:lime_wool"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "ad_astra:flag_lime"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_lime_wool",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SS",
+    "SS"
+  ],
+  "key": {
+    "S": {
+      "item": "ad_astra:glacio_stone"
+    }
+  },
+  "result": {
+    "item": "ad_astra:polished_glacio_stone",
+    "count": 4
+  }
+}

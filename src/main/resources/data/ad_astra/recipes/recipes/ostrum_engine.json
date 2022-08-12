@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "engines",
+  "pattern": [
+    "###",
+    " E ",
+    " F "
+  ],
+  "key": {
+    "#": {
+      "tag": "c:compressed_ostrum"
+    },
+    "E": {
+      "item": "ad_astra:engine_frame"
+    },
+    "F": {
+      "item": "ad_astra:engine_fan"
+    }
+  },
+  "result": {
+    "item": "ad_astra:ostrum_engine"
+  }
+}

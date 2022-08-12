@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "ad_astra:raw_ostrum"
+    }
+  },
+  "result": {
+    "item": "ad_astra:raw_ostrum_block"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "item": "ad_astra:mars_globe"
+    },
+    "title": {
+      "translate": "advancements.mars.title"
+    },
+    "description": {
+      "translate": "advancements.mars.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "mars": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "ad_astra:mars"
+      }
+    }
+  },
+  "rewards": {
+    "experience": 75
+  },
+  "parent": "ad_astra:tier_2_rocket"
+}

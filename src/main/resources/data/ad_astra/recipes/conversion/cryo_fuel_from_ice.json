@@ -1,0 +1,10 @@
+{
+    "type": "ad_astra:cryo_fuel_conversion",
+    "input": {
+       "item": "minecraft:ice"
+    },
+    "output": {
+       "name": "ad_astra:cryo_fuel"
+    },
+    "conversion_ratio": 0.001
+ }

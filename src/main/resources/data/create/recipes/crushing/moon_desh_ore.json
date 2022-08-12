@@ -10,21 +10,21 @@
     "type": "create:crushing",
     "ingredients": [
         {
-            "item": "beyond_earth:moon_desh_ore"
+            "item": "ad_astra:moon_desh_ore"
         }
     ],
     "results": [
         {
-            "item": "beyond_earth:raw_desh",
+            "item": "ad_astra:raw_desh",
             "count": 1
         },
         {
-            "item": "beyond_earth:raw_desh",
+            "item": "ad_astra:raw_desh",
             "count": 1,
             "chance": 0.25
         },
         {
-            "item": "beyond_earth:moon_stone",
+            "item": "ad_astra:moon_stone",
             "count": 1,
             "chance": 0.125
         }

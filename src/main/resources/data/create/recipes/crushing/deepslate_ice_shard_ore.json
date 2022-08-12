@@ -10,16 +10,16 @@
     "type": "create:crushing",
     "ingredients": [
         {
-            "item": "beyond_earth:deepslate_ice_shard_ore"
+            "item": "ad_astra:deepslate_ice_shard_ore"
         }
     ],
     "results": [
         {
-            "item": "beyond_earth:ice_shard",
+            "item": "ad_astra:ice_shard",
             "count": 2
         },
         {
-            "item": "beyond_earth:ice_shard",
+            "item": "ad_astra:ice_shard",
             "count": 1,
             "chance": 0.25
         },

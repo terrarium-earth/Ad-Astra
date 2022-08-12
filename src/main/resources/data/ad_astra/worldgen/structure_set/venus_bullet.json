@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "ad_astra:venus_bullet",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 1539450951,
+    "spacing": 27,
+    "separation": 14,
+    "type": "minecraft:random_spread"
+  }
+}

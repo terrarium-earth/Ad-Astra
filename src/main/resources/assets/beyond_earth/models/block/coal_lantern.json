@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/template_lantern",
-  "textures": {
-    "lantern": "beyond_earth:block/coal_lantern"
-  }
-}

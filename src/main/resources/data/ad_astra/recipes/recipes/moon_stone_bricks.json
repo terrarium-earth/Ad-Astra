@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SS",
+    "SS"
+  ],
+  "key": {
+    "S": {
+      "item": "ad_astra:moon_stone"
+    }
+  },
+  "result": {
+    "item": "ad_astra:moon_stone_bricks",
+    "count": 4
+  }
+}

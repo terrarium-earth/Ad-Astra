@@ -1,0 +1,14 @@
+{
+    "translation": "gui.ad_astra.text.mars",
+    "galaxy": "ad_astra:milky_way",
+    "solar_system": "ad_astra:solar_system",
+    "world": "ad_astra:mars",
+    "orbit_world": "ad_astra:mars_orbit",
+    "parent_world": null,
+    "rocket_tier": 2,
+    "gravity": 3.72076,
+    "days_in_year": 687,
+    "temperature": -65,
+    "has_oxygen": false,
+    "button_color": "red"
+}

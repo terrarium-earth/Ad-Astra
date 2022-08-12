@@ -1,0 +1,132 @@
+{
+  "name": "ad_astra:lunarian_village/entrance",
+  "fallback": "ad_astra:lunarian_village/hallway",
+  "elements": [
+    {
+      "weight": 150,
+      "element": {
+        "location": "ad_astra:village/moon/lunarian_village/cross",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 130,
+      "element": {
+        "location": "ad_astra:village/moon/lunarian_village/fork",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 100,
+      "element": {
+        "location": "ad_astra:village/moon/lunarian_village/hallway",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 120,
+      "element": {
+        "location": "ad_astra:village/moon/lunarian_village/turn",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 100,
+      "element": {
+        "location": "ad_astra:village/moon/lunarian_village/bedroom_1",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 100,
+      "element": {
+        "location": "ad_astra:village/moon/lunarian_village/bedroom_2",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 100,
+      "element": {
+        "location": "ad_astra:village/moon/lunarian_village/bedroom_3",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 100,
+      "element": {
+        "location": "ad_astra:village/moon/lunarian_village/bedroom_4",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 100,
+      "element": {
+        "location": "ad_astra:village/moon/lunarian_village/cooking",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 100,
+      "element": {
+        "location": "ad_astra:village/moon/lunarian_village/fluids",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 100,
+      "element": {
+        "location": "ad_astra:village/moon/lunarian_village/metalworks_1",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 100,
+      "element": {
+        "location": "ad_astra:village/moon/lunarian_village/metalworks_2",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 100,
+      "element": {
+        "location": "ad_astra:village/moon/lunarian_village/mushroom_farm",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 100,
+      "element": {
+        "location": "ad_astra:village/moon/lunarian_village/trees",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

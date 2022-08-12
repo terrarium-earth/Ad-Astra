@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "beyond_earth:block/polished_mercury_stone",
-    "top": "beyond_earth:block/polished_mercury_stone",
-    "side": "beyond_earth:block/polished_mercury_stone"
-  }
-}

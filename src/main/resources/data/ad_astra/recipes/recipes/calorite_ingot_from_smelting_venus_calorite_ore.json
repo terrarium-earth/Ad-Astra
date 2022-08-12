@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "ad_astra:venus_calorite_ore"
+  },
+  "result": "ad_astra:calorite_ingot",
+  "experience": 1.0,
+  "cookingtime": 200
+}

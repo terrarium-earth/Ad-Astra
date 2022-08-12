@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "beyond_earth:moon_desh_ore",
-    "beyond_earth:deepslate_desh_ore"
+    "ad_astra:moon_desh_ore",
+    "ad_astra:deepslate_desh_ore"
   ]
 }

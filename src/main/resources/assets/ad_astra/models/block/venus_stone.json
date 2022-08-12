@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "ad_astra:block/venus_stone_top",
+    "up": "ad_astra:block/venus_stone_top",
+    "north": "ad_astra:block/venus_stone_side",
+    "east": "ad_astra:block/venus_stone_side",
+    "south": "ad_astra:block/venus_stone_side",
+    "west": "ad_astra:block/venus_stone_side",
+    "particle": "ad_astra:block/venus_stone_side"
+  }
+}

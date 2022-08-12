@@ -1,8 +1,0 @@
-{
-  "parent": "block/slab",
-  "textures": {
-    "bottom": "beyond_earth:block/venus_sandstone_bricks",
-    "top": "beyond_earth:block/venus_sandstone_bricks",
-    "side": "beyond_earth:block/venus_sandstone_bricks"
-  }
-}

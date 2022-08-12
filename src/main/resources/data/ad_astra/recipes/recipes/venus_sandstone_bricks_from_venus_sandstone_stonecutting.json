@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "ad_astra:venus_sandstone"
+  },
+  "result": "ad_astra:venus_sandstone_bricks",
+  "count": 1
+}

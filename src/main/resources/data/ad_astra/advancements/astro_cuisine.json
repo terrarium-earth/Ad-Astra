@@ -1,0 +1,28 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:cooked_beef"
+        },
+        "title": {
+            "translate": "advancements.astro_cuisine.title"
+        },
+        "description": {
+            "translate": "advancements.astro_cuisine.description"
+        },
+        "frame": "goal",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "food_cooked_in_atmosphere": {
+            "trigger": "ad_astra:food_cooked_in_atmosphere",
+            "conditions": {
+            }
+        }
+    },
+    "rewards": {
+        "experience": 300
+    },
+    "parent": "ad_astra:tier_1_rocket"
+}

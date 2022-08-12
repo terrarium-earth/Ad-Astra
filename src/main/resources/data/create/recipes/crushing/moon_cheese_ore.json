@@ -10,21 +10,21 @@
     "type": "create:crushing",
     "ingredients": [
         {
-            "item": "beyond_earth:moon_cheese_ore"
+            "item": "ad_astra:moon_cheese_ore"
         }
     ],
     "results": [
         {
-            "item": "beyond_earth:cheese",
+            "item": "ad_astra:cheese",
             "count": 1
         },
         {
-            "item": "beyond_earth:cheese",
+            "item": "ad_astra:cheese",
             "count": 1,
             "chance": 0.25
         },
         {
-            "item": "beyond_earth:moon_stone",
+            "item": "ad_astra:moon_stone",
             "count": 1,
             "chance": 0.125
         }

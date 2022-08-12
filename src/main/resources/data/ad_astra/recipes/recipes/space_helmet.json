@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#G#"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:steel_ingots"
+    },
+    "G": {
+      "item": "minecraft:orange_stained_glass_pane"
+    }
+  },
+  "result": {
+    "item": "ad_astra:space_helmet"
+  }
+}

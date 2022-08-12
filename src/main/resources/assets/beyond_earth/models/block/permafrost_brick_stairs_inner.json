@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "beyond_earth:block/permafrost_bricks",
-    "top": "beyond_earth:block/permafrost_bricks",
-    "side": "beyond_earth:block/permafrost_bricks"
-  }
-}

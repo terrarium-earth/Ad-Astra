@@ -10,21 +10,21 @@
     "type": "create:crushing",
     "ingredients": [
         {
-            "item": "beyond_earth:venus_calorite_ore"
+            "item": "ad_astra:venus_calorite_ore"
         }
     ],
     "results": [
         {
-            "item": "beyond_earth:raw_calorite",
+            "item": "ad_astra:raw_calorite",
             "count": 1
         },
         {
-            "item": "beyond_earth:raw_calorite",
+            "item": "ad_astra:raw_calorite",
             "count": 1,
             "chance": 0.25
         },
         {
-            "item": "beyond_earth:venus_stone",
+            "item": "ad_astra:venus_stone",
             "count": 1,
             "chance": 0.125
         }
