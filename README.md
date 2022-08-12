@@ -19,7 +19,7 @@
 # Ad Astra
 Ad Astra! is a technology and space exploration mod for modern versions of Minecraft. It allows you to build rockets capable of space travel. You can explore multiple planets throughout the Solar System, build oxygenated space stations and bases and survive in space. You've always wanted to visit other planets, and now with Ad Astra!, you can fulfill your dreams of becoming an astronaut!
 
-![Banner](https://i.imgur.com/I0ziXY4.jpg)
+![Banner](https://media.discordapp.net/attachments/1005790947365376060/1007374451828084836/Ad_Astra_Banner.png?width=1440&height=691)
 
 ## Features
 - Five planets/moons in two solar systems: Moon, Mars, Venus, Mercury and Glacio
