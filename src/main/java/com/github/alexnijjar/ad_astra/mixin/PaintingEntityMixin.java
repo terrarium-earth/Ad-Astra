@@ -1,19 +1,17 @@
 package com.github.alexnijjar.ad_astra.mixin;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.google.common.collect.Lists;
-
+import net.minecraft.entity.decoration.painting.PaintingEntity;
+import net.minecraft.entity.decoration.painting.PaintingMotive;
+import net.minecraft.util.registry.Registry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
-import net.minecraft.entity.decoration.painting.PaintingEntity;
-import net.minecraft.entity.decoration.painting.PaintingMotive;
-import net.minecraft.util.registry.Registry;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 @Mixin(PaintingEntity.class)
 public class PaintingEntityMixin {

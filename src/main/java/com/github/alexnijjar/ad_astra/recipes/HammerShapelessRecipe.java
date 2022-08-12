@@ -4,7 +4,6 @@ import com.github.alexnijjar.ad_astra.items.HammerItem;
 import com.github.alexnijjar.ad_astra.registry.ModItems;
 import com.github.alexnijjar.ad_astra.registry.ModRecipes;
 import com.google.gson.JsonObject;
-
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -18,53 +17,53 @@ import net.minecraft.util.collection.DefaultedList;
 
 public class HammerShapelessRecipe extends ShapelessRecipe {
 
-    public HammerShapelessRecipe(Identifier id, String group, ItemStack output, DefaultedList<Ingredient> input) {
-        super(id, group, output, input);
-    }
+	public HammerShapelessRecipe(Identifier id, String group, ItemStack output, DefaultedList<Ingredient> input) {
+		super(id, group, output, input);
+	}
 
-    @Override
-    public ItemStack craft(CraftingInventory craftingInventory) {
-        return getOutput().copy();
-    }
+	@Override
+	public ItemStack craft(CraftingInventory craftingInventory) {
+		return getOutput().copy();
+	}
 
-    @Override
-    public RecipeSerializer<?> getSerializer() {
-        return ModRecipes.HAMMER_SERIALIZER;
-    }
+	@Override
+	public RecipeSerializer<?> getSerializer() {
+		return ModRecipes.HAMMER_SERIALIZER;
+	}
 
-    @Override
-    public DefaultedList<ItemStack> getRemainder(CraftingInventory inventory) {
+	@Override
+	public DefaultedList<ItemStack> getRemainder(CraftingInventory inventory) {
 
-        DefaultedList<ItemStack> defaultedList = DefaultedList.ofSize(inventory.size(), ItemStack.EMPTY);
+		DefaultedList<ItemStack> defaultedList = DefaultedList.ofSize(inventory.size(), ItemStack.EMPTY);
 
-        // Damage the hammer in the recipe.
-        for (int i = 0; i < inventory.size(); i++) {
-            ItemStack stack = inventory.getStack(i);
-            Item item = stack.getItem();
-            if (item instanceof HammerItem) {
-                ItemStack hammer = new ItemStack(ModItems.HAMMER, 1);
-                hammer.setDamage(stack.getDamage() + 1);
-                if (hammer.getDamage() >= hammer.getMaxDamage())
-                    continue;
-                defaultedList.set(i, hammer);
-            }
-        }
-        return defaultedList;
-    }
+		// Damage the hammer in the recipe.
+		for (int i = 0; i < inventory.size(); i++) {
+			ItemStack stack = inventory.getStack(i);
+			Item item = stack.getItem();
+			if (item instanceof HammerItem) {
+				ItemStack hammer = new ItemStack(ModItems.HAMMER, 1);
+				hammer.setDamage(stack.getDamage() + 1);
+				if (hammer.getDamage() >= hammer.getMaxDamage())
+					continue;
+				defaultedList.set(i, hammer);
+			}
+		}
+		return defaultedList;
+	}
 
-    public static class Serializer extends ShapelessRecipe.Serializer {
+	public static class Serializer extends ShapelessRecipe.Serializer {
 
-        @Override
-        public HammerShapelessRecipe read(Identifier id, JsonObject json) {
-            ShapelessRecipe shapelessRecipe = super.read(id, json);
-            String group = JsonHelper.getString(json, "group", "");
-            return new HammerShapelessRecipe(shapelessRecipe.getId(), group, shapelessRecipe.getOutput(), shapelessRecipe.getIngredients());
-        }
+		@Override
+		public HammerShapelessRecipe read(Identifier id, JsonObject json) {
+			ShapelessRecipe shapelessRecipe = super.read(id, json);
+			String group = JsonHelper.getString(json, "group", "");
+			return new HammerShapelessRecipe(shapelessRecipe.getId(), group, shapelessRecipe.getOutput(), shapelessRecipe.getIngredients());
+		}
 
-        @Override
-        public HammerShapelessRecipe read(Identifier id, PacketByteBuf buf) {
-            ShapelessRecipe shapelessRecipe = super.read(id, buf);
-            return new HammerShapelessRecipe(shapelessRecipe.getId(), shapelessRecipe.getGroup(), shapelessRecipe.getOutput(), shapelessRecipe.getIngredients());
-        }
-    }
+		@Override
+		public HammerShapelessRecipe read(Identifier id, PacketByteBuf buf) {
+			ShapelessRecipe shapelessRecipe = super.read(id, buf);
+			return new HammerShapelessRecipe(shapelessRecipe.getId(), shapelessRecipe.getGroup(), shapelessRecipe.getOutput(), shapelessRecipe.getIngredients());
+		}
+	}
 }

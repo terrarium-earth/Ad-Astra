@@ -1,13 +1,8 @@
 package com.github.alexnijjar.ad_astra.entities;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.registry.ModEntityTypes;
 import com.github.alexnijjar.ad_astra.registry.ModItems;
-
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.decoration.painting.PaintingEntity;
@@ -23,6 +18,10 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 public class SpacePaintingEntity extends PaintingEntity {
 
