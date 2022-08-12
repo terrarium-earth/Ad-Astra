@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "id": "beyond_earth",
+  "id": "ad_astra",
   "version": "1.0.3",
 
-  "name": "Beyond Earth",
+  "name": "Ad Astra",
   "description": "Fly to Other Planets and Beyond!",
   "authors": [
     "Alex Nijjar",
@@ -14,37 +14,37 @@
     "SpaceStar"
   ],
   "contact": {
-    "homepage": "https://modrinth.com/mod/beyond-earth-fabric",
-    "sources": "https://github.com/AlexNijjar/Beyond-Earth-Fabric"
+    "homepage": "https://modrinth.com/mod/ad-astra-fabric",
+    "sources": "https://github.com/AlexNijjar/Ad-Astra-Fabric"
   },
 
   "license": "LGPL-3",
-  "icon": "assets/beyond_earth/icon.png",
+  "icon": "assets/ad_astra/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.github.alexnijjar.beyond_earth.BeyondEarth"
+      "com.github.alexnijjar.ad_astra.AdAstra"
     ],
     "client": [
-      "com.github.alexnijjar.beyond_earth.client.BeyondEarthClient"
+      "com.github.alexnijjar.ad_astra.client.AdAstraClient"
     ],
     "fabric-datagen": [
-      "com.github.alexnijjar.beyond_earth.datagen.BeyondEarthDataGenEntrypoint"
+      "com.github.alexnijjar.ad_astra.datagen.AdAstraDataGenEntrypoint"
     ],
     "modmenu": [
-      "com.github.alexnijjar.beyond_earth.config.ModMenuConfig"
+      "com.github.alexnijjar.ad_astra.config.ModMenuConfig"
     ],
     "emi": [
-       "com.github.alexnijjar.beyond_earth.compat.emi.BeyondEarthEmiPlugin"
+       "com.github.alexnijjar.ad_astra.compat.emi.AdAstraEmiPlugin"
     ],
     "rei_client": [
-      "com.github.alexnijjar.beyond_earth.compat.rei.BeyondEarthClientPlugin"
+      "com.github.alexnijjar.ad_astra.compat.rei.AdAstraClientPlugin"
     ]
   },
-  "accessWidener": "beyond_earth.accesswidener",
+  "accessWidener": "ad_astra.accesswidener",
   "mixins": [
-    "beyond_earth.mixins.json"
+    "ad_astra.mixins.json"
   ],
 
   "depends": {

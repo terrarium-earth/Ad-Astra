@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
-    "beyond_earth:moon_ice_shard_ore",
-    "beyond_earth:mars_ice_shard_ore",
-    "beyond_earth:glacio_ice_shard_ore",
-    "beyond_earth:deepslate_ice_shard_ore"
+    "ad_astra:moon_ice_shard_ore",
+    "ad_astra:mars_ice_shard_ore",
+    "ad_astra:glacio_ice_shard_ore",
+    "ad_astra:deepslate_ice_shard_ore"
   ]
 }

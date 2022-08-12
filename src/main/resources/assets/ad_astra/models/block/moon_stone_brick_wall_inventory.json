@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "ad_astra:block/moon_stone_bricks"
+  }
+}

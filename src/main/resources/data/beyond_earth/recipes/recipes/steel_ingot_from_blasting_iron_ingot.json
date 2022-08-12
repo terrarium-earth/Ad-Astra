@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "ingredient": {
-    "item": "minecraft:iron_ingot"
-  },
-  "result": "beyond_earth:steel_ingot",
-  "experience": 1.0,
-  "cookingtime": 100
-}

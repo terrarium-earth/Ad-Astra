@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "ad_astra:pygro_tower",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 1360696494,
+    "spacing": 29,
+    "separation": 19,
+    "type": "minecraft:random_spread"
+  }
+}

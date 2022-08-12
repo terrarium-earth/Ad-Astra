@@ -1,0 +1,9 @@
+{
+  "parent": "ad_astra:custom/flag",
+  "textures": {
+    "all": "ad_astra:block/flag_lime",
+    "particle": "ad_astra:block/flag_lime",
+    "0": "ad_astra:block/flag_lime",
+    "missing": "ad_astra:block/flag_lime"
+  }
+}

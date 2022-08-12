@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "ad_astra:ostrum_ingot"
+    }
+  ],
+  "result": {
+    "item": "ad_astra:ostrum_nugget",
+    "count": 9
+  }
+}

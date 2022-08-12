@@ -1,0 +1,10 @@
+{
+  "type": "ad_astra:pygro_tower",
+  "config": {
+    "start_pool": "ad_astra:run_venus_tower/side_venus_tower_start",
+    "size": 1
+  },
+  "biomes": "#ad_astra:has_structure/pygro_tower_biomes",
+  "adapt_noise": true,
+  "spawn_overrides": {}
+}

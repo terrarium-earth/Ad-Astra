@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "ad_astra:glacio_lapis_ore"
+  },
+  "result": "minecraft:lapis_lazuli",
+  "experience": 1.0,
+  "cookingtime": 100
+}

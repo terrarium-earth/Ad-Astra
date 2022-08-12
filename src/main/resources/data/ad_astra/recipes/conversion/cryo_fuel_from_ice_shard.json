@@ -1,0 +1,10 @@
+{
+    "type": "ad_astra:cryo_fuel_conversion",
+    "input": {
+       "item": "ad_astra:ice_shard"
+    },
+    "output": {
+       "name": "ad_astra:cryo_fuel"
+    },
+    "conversion_ratio": 0.025
+ }

@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "ad_astra:block/oxygen_sensor_bottom",
+    "up": "ad_astra:block/oxygen_sensor_vent",
+    "north": "ad_astra:block/oxygen_sensor_on",
+    "east": "ad_astra:block/oxygen_sensor_on",
+    "south": "ad_astra:block/oxygen_sensor_on",
+    "west": "ad_astra:block/oxygen_sensor_on",
+    "particle": "ad_astra:block/oxygen_sensor_on"
+  }
+}

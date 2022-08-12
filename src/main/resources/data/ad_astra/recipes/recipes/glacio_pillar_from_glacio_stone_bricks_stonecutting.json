@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "ad_astra:glacio_stone_bricks"
+  },
+  "result": "ad_astra:glacio_pillar",
+  "count": 1
+}

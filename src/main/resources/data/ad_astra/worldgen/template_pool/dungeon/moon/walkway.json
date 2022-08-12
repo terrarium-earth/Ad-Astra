@@ -1,0 +1,42 @@
+{
+    "name": "ad_astra:dungeon/moon/walkway",
+    "fallback": "ad_astra:dungeon/moon/end",
+    "elements": [
+      {
+        "weight": 100,
+        "element": {
+          "location": "ad_astra:dungeon/moon/walkway",
+          "processors": "minecraft:empty",
+          "projection": "rigid",
+          "element_type": "minecraft:single_pool_element"
+        }
+      },
+      {
+        "weight": 100,
+        "element": {
+          "location": "ad_astra:dungeon/moon/turn",
+          "processors": "minecraft:empty",
+          "projection": "rigid",
+          "element_type": "minecraft:single_pool_element"
+        }
+      },
+      {
+        "weight": 100,
+        "element": {
+          "location": "ad_astra:dungeon/moon/cross",
+          "processors": "minecraft:empty",
+          "projection": "rigid",
+          "element_type": "minecraft:single_pool_element"
+        }
+      },
+      {
+        "weight": 100,
+        "element": {
+          "location": "ad_astra:dungeon/moon/fork",
+          "processors": "minecraft:empty",
+          "projection": "rigid",
+          "element_type": "minecraft:single_pool_element"
+        }
+      }
+    ]
+  }

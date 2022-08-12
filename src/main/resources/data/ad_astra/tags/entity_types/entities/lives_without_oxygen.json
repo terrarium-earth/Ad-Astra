@@ -1,0 +1,23 @@
+{
+  "replace": false,
+  "values": [
+    "ad_astra:lunarian",
+    "ad_astra:corrupted_lunarian",
+    "ad_astra:star_crawler",
+    "ad_astra:martian_raptor",
+    "ad_astra:pygro",
+    "ad_astra:zombified_pygro",
+    "ad_astra:pygro_brute",
+    "ad_astra:mogler",
+    "ad_astra:zombified_mogler",
+    "ad_astra:sulfur_creeper",
+    "ad_astra:lunarian_wandering_trader",
+    "minecraft:ender_dragon",
+    "minecraft:wither",
+    "minecraft:skeleton",
+    "minecraft:stray",
+    "minecraft:armor_stand",
+    "minecraft:iron_golem",
+    "minecraft:snow_golem"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "type": "ad_astra:oil_well",
+  "config": {
+    "start_pool": "ad_astra:run_oil/side_oil_start",
+    "size": 1
+  },
+  "biomes": "#ad_astra:has_structure/oil_well_biomes",
+  "adapt_noise": false,
+  "spawn_overrides": {}
+}

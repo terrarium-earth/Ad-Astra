@@ -1,0 +1,19 @@
+{
+    "name": "Rover",
+    "icon": "ad_astra:tier_1_rover",
+    "sortnum": 3,
+    "category": "ad_astra:the_moon",
+    "pages": [
+        {
+            "type": "patchouli:spotlight",
+            "title": "Rover",
+            "item": "ad_astra:tier_1_rover",
+            "text": "The rover is a land vehicle capable of driving on the rough terrain of moons and planets. It's exceptionally fast, has an inventory capable of storing eight items and has two seats for multiple riders. To use it, fill the rover with fuel (shift-click and place fuel buckets in the left input slot)."
+        },
+        {
+            "type": "patchouli:entity",
+            "entity": "ad_astra:tier_1_rover",
+            "scale": 0.36
+        }
+    ]
+}

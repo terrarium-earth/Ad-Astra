@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "beyond_earth:block/calorite_plating",
-    "top": "beyond_earth:block/calorite_plating",
-    "side": "beyond_earth:block/calorite_plating"
-  }
-}

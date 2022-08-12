@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "desh_plating",
+  "pattern": [
+    "###",
+    "#|#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "ad_astra:iron_plating"
+    },
+    "|": {
+      "tag": "c:compressed_calorite"
+    }
+  },
+  "result": {
+    "item": "ad_astra:calorite_plating",
+    "count": 8
+  }
+}

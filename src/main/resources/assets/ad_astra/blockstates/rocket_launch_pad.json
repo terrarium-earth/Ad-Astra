@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "ad_astra:block/rocket_launch_pad"
+    },
+    "lit=true": {
+      "model": "ad_astra:block/rocket_launch_pad_base"
+    }
+  }
+}

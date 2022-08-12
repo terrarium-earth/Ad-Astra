@@ -1,10 +1,10 @@
 {
     "replace": false,
     "values": [
-        "beyond_earth:iron_plating_button",
-        "beyond_earth:steel_plating_button",
-        "beyond_earth:desh_plating_button",
-        "beyond_earth:ostrum_plating_button",
-        "beyond_earth:calorite_plating_button"
+        "ad_astra:iron_plating_button",
+        "ad_astra:steel_plating_button",
+        "ad_astra:desh_plating_button",
+        "ad_astra:ostrum_plating_button",
+        "ad_astra:calorite_plating_button"
     ]
 }

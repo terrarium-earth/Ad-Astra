@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "calorite_ingot",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "ad_astra:calorite_nugget"
+    }
+  },
+  "result": {
+    "item": "ad_astra:calorite_ingot"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "ad_astra:deepslate_desh_ore"
+  },
+  "result": "ad_astra:desh_ingot",
+  "experience": 1.0,
+  "cookingtime": 200
+}

@@ -1,0 +1,12 @@
+{
+  "feature": "ad_astra:large_infernal_spire_column",
+  "placement": [
+    {
+      "type": "minecraft:count_on_every_layer",
+      "count": 2
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "beyond_earth:mercury_iron_ore"
-  },
-  "result": "minecraft:iron_ingot",
-  "experience": 1.0,
-  "cookingtime": 200
-}

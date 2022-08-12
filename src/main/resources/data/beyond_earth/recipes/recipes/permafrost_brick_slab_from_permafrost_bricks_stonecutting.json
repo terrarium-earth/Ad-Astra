@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "beyond_earth:permafrost_bricks"
-  },
-  "result": "beyond_earth:permafrost_brick_slab",
-  "count": 2
-}

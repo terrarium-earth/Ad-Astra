@@ -56,7 +56,7 @@ sourceSets {
 	}
 
 loom {
-	accessWidenerPath = file("src/main/resources/beyond_earth.accesswidener")
+	accessWidenerPath = file("src/main/resources/ad_astra.accesswidener")
 	runs {
 		datagen {
 			server()

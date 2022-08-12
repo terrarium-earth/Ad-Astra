@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "beyond_earth:block/moon_pillar_top",
-    "side": "beyond_earth:block/moon_pillar"
-  }
-}

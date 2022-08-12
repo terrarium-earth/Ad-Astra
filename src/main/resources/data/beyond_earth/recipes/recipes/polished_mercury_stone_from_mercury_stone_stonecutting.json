@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "beyond_earth:mercury_stone"
-  },
-  "result": "beyond_earth:polished_mercury_stone",
-  "count": 1
-}

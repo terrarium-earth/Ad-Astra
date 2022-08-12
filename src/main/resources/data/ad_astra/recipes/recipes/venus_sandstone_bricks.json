@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SS",
+    "SS"
+  ],
+  "key": {
+    "S": {
+      "item": "ad_astra:venus_sandstone"
+    }
+  },
+  "result": {
+    "item": "ad_astra:venus_sandstone_bricks",
+    "count": 4
+  }
+}

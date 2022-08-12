@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:chiseled_mercury_stone_bricks_from_mercury_stone_stonecutting"
+    ]
+  },
+  "criteria": {
+    "has_mercury_stone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ad_astra:mercury_stone"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:chiseled_mercury_stone_bricks_from_mercury_stone_stonecutting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_mercury_stone",
+      "has_the_recipe"
+    ]
+  ]
+}

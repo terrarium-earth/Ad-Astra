@@ -10,21 +10,21 @@
     "type": "create:crushing",
     "ingredients": [
         {
-            "item": "beyond_earth:mars_ostrum_ore"
+            "item": "ad_astra:mars_ostrum_ore"
         }
     ],
     "results": [
         {
-            "item": "beyond_earth:raw_ostrum",
+            "item": "ad_astra:raw_ostrum",
             "count": 1
         },
         {
-            "item": "beyond_earth:raw_ostrum",
+            "item": "ad_astra:raw_ostrum",
             "count": 1,
             "chance": 0.25
         },
         {
-            "item": "beyond_earth:mars_stone",
+            "item": "ad_astra:mars_stone",
             "count": 1,
             "chance": 0.125
         }

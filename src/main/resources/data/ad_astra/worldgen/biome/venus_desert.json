@@ -1,0 +1,74 @@
+{
+  "temperature": 1.6,
+  "downfall": 1,
+  "precipitation": "rain",
+  "category": "none",
+  "effects": {
+    "sky_color": -3044526,
+    "fog_color": -3044526,
+    "water_color": 4159204,
+    "water_fog_color": 329011,
+    "grass_color": 9551193,
+    "foliage_color": 7842607,
+    "particle": {
+      "options": {
+        "type": "minecraft:crimson_spore"
+      },
+      "probability": 0.014
+    }
+  },
+  "creature_spawn_probability": 0.2,
+  "spawners": {
+    "monster": [
+      {
+        "type": "ad_astra:mogler",
+        "weight": 100,
+        "minCount": 1,
+        "maxCount": 3
+      },
+      {
+        "type": "ad_astra:sulfur_creeper",
+        "weight": 100,
+        "minCount": 1,
+        "maxCount": 3
+      },
+      {
+        "type": "ad_astra:zombified_pygro",
+        "weight": 100,
+        "minCount": 1,
+        "maxCount": 2
+      }
+    ]
+  },
+  "spawn_costs": {
+    "ad_astra:mogler": {
+      "energy_budget": 0.015,
+      "charge": 0.2
+    },
+    "ad_astra:sulfur_creeper": {
+      "energy_budget": 0.02,
+      "charge": 0.2
+    },
+    "ad_astra:zombified_pygro": {
+      "energy_budget": 0.012,
+      "charge": 0.2
+    }
+  },
+  "carvers": {
+    "air": [
+      "minecraft:cave",
+      "minecraft:cave_extra_underground",
+      "minecraft:canyon"
+    ]
+  },
+  "features": [
+    [
+      "minecraft:patch_soul_fire",
+      "minecraft:spring_closed_double",
+      "ad_astra:venus_coal_ore",
+      "ad_astra:venus_gold_ore",
+      "ad_astra:venus_diamond_ore",
+      "ad_astra:venus_calorite_ore"
+    ]
+  ]
+}

@@ -1,0 +1,10 @@
+{
+   "type": "ad_astra:oxygen_conversion",
+   "input": {
+      "tag": "minecraft:water"
+   },
+   "output": {
+      "name": "ad_astra:oxygen"
+   },
+   "conversion_ratio": 0.05
+}

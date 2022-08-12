@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "ad_astra:blue_iron_pillar"
+    ]
+  },
+  "criteria": {
+    "has_tag": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "c:iron_plates"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "ad_astra:blue_iron_pillar"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_tag",
+      "has_the_recipe"
+    ]
+  ]
+}

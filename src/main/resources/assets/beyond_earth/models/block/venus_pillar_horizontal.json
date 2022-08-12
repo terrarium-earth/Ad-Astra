@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column_horizontal",
-  "textures": {
-    "end": "beyond_earth:block/venus_pillar_top",
-    "side": "beyond_earth:block/venus_pillar"
-  }
-}

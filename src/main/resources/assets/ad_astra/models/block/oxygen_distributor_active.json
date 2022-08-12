@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "ad_astra:block/steel_machine_bottom",
+    "up": "ad_astra:block/vent_back",
+    "north": "ad_astra:block/oxygen_distributor_front_active",
+    "east": "ad_astra:block/oxygen_distributor_side",
+    "south": "ad_astra:block/oxygen_distributor_side",
+    "west": "ad_astra:block/oxygen_distributor_side",
+    "particle": "ad_astra:block/oxygen_distributor_front_active"
+  }
+}

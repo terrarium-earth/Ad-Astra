@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "W W",
+    "# #"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:steel_ingots"
+    },
+    "W": {
+      "item": "minecraft:white_wool"
+    }
+  },
+  "result": {
+    "item": "ad_astra:space_boots"
+  }
+}

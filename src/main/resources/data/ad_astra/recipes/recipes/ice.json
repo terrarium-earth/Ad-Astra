@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SS",
+    "SS"
+  ],
+  "key": {
+    "S": {
+      "item": "ad_astra:ice_shard"
+    }
+  },
+  "result": {
+    "item": "minecraft:ice"
+  }
+}

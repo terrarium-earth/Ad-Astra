@@ -1,7 +1,0 @@
-{
-  "type": "beyond_earth:generating",
-  "input": {
-    "item": "minecraft:charcoal"
-  },
-  "burnTime": 400
-}

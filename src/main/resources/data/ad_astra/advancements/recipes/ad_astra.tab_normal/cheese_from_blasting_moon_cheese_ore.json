@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:cheese_from_blasting_moon_cheese_ore"
+    ]
+  },
+  "criteria": {
+    "has_moon_cheese_ore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ad_astra:moon_cheese_ore"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:cheese_from_blasting_moon_cheese_ore"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_moon_cheese_ore",
+      "has_the_recipe"
+    ]
+  ]
+}

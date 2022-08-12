@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SS",
+    "SS"
+  ],
+  "key": {
+    "S": {
+      "item": "ad_astra:mars_stone"
+    }
+  },
+  "result": {
+    "item": "ad_astra:polished_mars_stone",
+    "count": 4
+  }
+}

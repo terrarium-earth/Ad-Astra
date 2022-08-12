@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "ad_astra:venus_coal_ore"
+  },
+  "result": "minecraft:coal",
+  "experience": 1.0,
+  "cookingtime": 200
+}

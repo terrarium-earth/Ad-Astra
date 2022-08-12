@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "beyond_earth:mars_diamond_ore",
-    "beyond_earth:venus_diamond_ore"
+    "ad_astra:mars_diamond_ore",
+    "ad_astra:venus_diamond_ore"
   ]
 }

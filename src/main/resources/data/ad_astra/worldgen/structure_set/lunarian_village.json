@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "ad_astra:lunarian_village",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 2118452159,
+    "spacing": 30,
+    "separation": 14,
+    "type": "minecraft:random_spread"
+  }
+}

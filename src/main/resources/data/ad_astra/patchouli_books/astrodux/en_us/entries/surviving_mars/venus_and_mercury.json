@@ -1,0 +1,18 @@
+{
+    "name": "Venus and Mercury",
+    "icon": "ad_astra:/textures/sky/venus.png",
+    "sortnum": 4,
+    "category": "ad_astra:surviving_mars",
+    "pages": [
+        {
+            "type": "patchouli:spotlight",
+            "title": "Calorite",
+            "item": "ad_astra:calorite_ingot",
+            "text": "Once you have enough Ostrum to craft a complete netherite space suit set and all of the components of the tier three rocket, you can travel to Venus and Mercury. Please note that if you enter these planets without a netherite space suit or fire resistance, you will die very fast. The next material that you seek is Calorite."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "Calorite is used to craft the ultimate rocket capable of travelling to a new solar system."
+        }
+    ]
+}

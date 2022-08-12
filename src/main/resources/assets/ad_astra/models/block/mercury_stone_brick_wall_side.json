@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_wall_side",
+  "textures": {
+    "wall": "ad_astra:block/mercury_stone_bricks"
+  }
+}

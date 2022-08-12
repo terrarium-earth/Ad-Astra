@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "beyond_earth:block/ostrum_plating",
-    "top": "beyond_earth:block/ostrum_plating",
-    "side": "beyond_earth:block/ostrum_plating"
-  }
-}

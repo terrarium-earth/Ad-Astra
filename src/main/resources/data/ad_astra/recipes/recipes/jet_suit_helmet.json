@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#N#",
+    "#G#"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:compressed_calorite"
+    },
+    "N": {
+      "item": "ad_astra:netherite_space_helmet"
+    },
+    "G": {
+      "item": "minecraft:orange_stained_glass"
+    }
+  },
+  "result": {
+    "item": "ad_astra:jet_suit_helmet"
+  }
+}

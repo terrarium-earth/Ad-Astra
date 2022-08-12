@@ -1,0 +1,10 @@
+{
+    "type": "ad_astra:moon_dungeon",
+    "config": {
+        "start_pool": "ad_astra:dungeon/moon/entrance",
+        "size": 30
+    },
+    "biomes": "#ad_astra:has_structure/moon_dungeon_biomes",
+    "adapt_noise": false,
+    "spawn_overrides": {}
+}

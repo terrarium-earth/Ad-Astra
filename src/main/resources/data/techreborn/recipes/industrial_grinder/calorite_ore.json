@@ -21,11 +21,11 @@
 	],
 	"results": [
 		{
-			"item": "beyond_earth:raw_calorite",
+			"item": "ad_astra:raw_calorite",
 			"count": 3
 		},
 		{
-			"item": "beyond_earth:calorite_nugget",
+			"item": "ad_astra:calorite_nugget",
 		  	"count": 3
 		}
 	]

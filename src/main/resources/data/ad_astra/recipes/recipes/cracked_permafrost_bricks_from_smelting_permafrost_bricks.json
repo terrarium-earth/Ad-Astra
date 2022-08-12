@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "ad_astra:permafrost_bricks"
+  },
+  "result": "ad_astra:cracked_permafrost_bricks",
+  "experience": 0.2,
+  "cookingtime": 200
+}
