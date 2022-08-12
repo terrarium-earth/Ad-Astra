@@ -1,7 +1,5 @@
 package com.github.alexnijjar.ad_astra.client.renderer.spacesuit;
 
-import java.util.Collections;
-
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.RenderLayer;
@@ -16,11 +14,13 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
 
+import java.util.Collections;
+
 public abstract class AbstractSpaceSuitModel extends BipedEntityModel<LivingEntity> {
 
-	private BipedEntityModel<?> contextModel;
+	private final BipedEntityModel<?> contextModel;
 
-	private Identifier headTexture;
+	private final Identifier headTexture;
 	public ModelPart head;
 	public ModelPart body;
 	public ModelPart rightArm;

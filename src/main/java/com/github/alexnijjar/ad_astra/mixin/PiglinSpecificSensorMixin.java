@@ -1,21 +1,19 @@
 package com.github.alexnijjar.ad_astra.mixin;
 
-import java.util.Optional;
-
 import com.github.alexnijjar.ad_astra.entities.mobs.PygroBruteEntity;
 import com.github.alexnijjar.ad_astra.entities.mobs.PygroEntity;
-
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.brain.MemoryModuleType;
+import net.minecraft.entity.ai.brain.sensor.PiglinSpecificSensor;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.brain.MemoryModuleType;
-import net.minecraft.entity.ai.brain.sensor.PiglinSpecificSensor;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
+import java.util.Optional;
 
 @Mixin(PiglinSpecificSensor.class)
 public class PiglinSpecificSensorMixin {

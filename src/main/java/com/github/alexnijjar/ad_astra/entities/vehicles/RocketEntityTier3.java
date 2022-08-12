@@ -3,7 +3,6 @@ package com.github.alexnijjar.ad_astra.entities.vehicles;
 import com.github.alexnijjar.ad_astra.registry.ModItems;
 import com.github.alexnijjar.ad_astra.registry.ModParticleTypes;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
-
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
@@ -13,39 +12,39 @@ import net.minecraft.world.World;
 
 public class RocketEntityTier3 extends RocketEntity {
 
-    public RocketEntityTier3(EntityType<?> type, World world) {
-        super(type, world, 3);
-    }
+	public RocketEntityTier3(EntityType<?> type, World world) {
+		super(type, world, 3);
+	}
 
-    @Override
-    public double getMountedHeightOffset() {
-        return super.getMountedHeightOffset() + 1.0f;
-    }
+	@Override
+	public double getMountedHeightOffset() {
+		return super.getMountedHeightOffset() + 1.0f;
+	}
 
-    @Override
-    public boolean shouldSit() {
-        return false;
-    }
+	@Override
+	public boolean shouldSit() {
+		return false;
+	}
 
-    @Override
-    public ItemStack getDropStack() {
-        return ModItems.TIER_3_ROCKET.getDefaultStack();
-    }
+	@Override
+	public ItemStack getDropStack() {
+		return ModItems.TIER_3_ROCKET.getDefaultStack();
+	}
 
-    @Override
-    public void spawnAfterburnerParticles() {
-        super.spawnAfterburnerParticles();
-        if (this.world instanceof ServerWorld serverWorld) {
-            Vec3d pos = this.getPos();
+	@Override
+	public void spawnAfterburnerParticles() {
+		super.spawnAfterburnerParticles();
+		if (this.world instanceof ServerWorld serverWorld) {
+			Vec3d pos = this.getPos();
 
-            float xRotator = MathHelper.cos(this.getYaw() * ((float) Math.PI / 180.0f)) * 0.98f;
-            float zRotator = MathHelper.sin(this.getYaw() * ((float) Math.PI / 180.0f)) * 0.98f;
+			float xRotator = MathHelper.cos(this.getYaw() * ((float) Math.PI / 180.0f)) * 0.98f;
+			float zRotator = MathHelper.sin(this.getYaw() * ((float) Math.PI / 180.0f)) * 0.98f;
 
-            ModUtils.spawnForcedParticles(serverWorld, ModParticleTypes.SMALL_FLAME, pos.getX() + xRotator, pos.getY() + 0.35, pos.getZ() + zRotator, 20, 0.1, 0.1, 0.1, 0.001);
-            ModUtils.spawnForcedParticles(serverWorld, ModParticleTypes.SMALL_SMOKE, pos.getX() + xRotator, pos.getY() + 0.35, pos.getZ() + zRotator, 10, 0.1, 0.1, 0.1, 0.04);
+			ModUtils.spawnForcedParticles(serverWorld, ModParticleTypes.SMALL_FLAME, pos.getX() + xRotator, pos.getY() + 0.35, pos.getZ() + zRotator, 20, 0.1, 0.1, 0.1, 0.001);
+			ModUtils.spawnForcedParticles(serverWorld, ModParticleTypes.SMALL_SMOKE, pos.getX() + xRotator, pos.getY() + 0.35, pos.getZ() + zRotator, 10, 0.1, 0.1, 0.1, 0.04);
 
-            ModUtils.spawnForcedParticles(serverWorld, ModParticleTypes.SMALL_FLAME, pos.getX() - xRotator, pos.getY() + 0.35, pos.getZ() - zRotator, 20, 0.1, 0.1, 0.1, 0.001);
-            ModUtils.spawnForcedParticles(serverWorld, ModParticleTypes.SMALL_SMOKE, pos.getX() - xRotator, pos.getY() + 0.35, pos.getZ() - zRotator, 10, 0.1, 0.1, 0.1, 0.04);
-        }
-    }
+			ModUtils.spawnForcedParticles(serverWorld, ModParticleTypes.SMALL_FLAME, pos.getX() - xRotator, pos.getY() + 0.35, pos.getZ() - zRotator, 20, 0.1, 0.1, 0.1, 0.001);
+			ModUtils.spawnForcedParticles(serverWorld, ModParticleTypes.SMALL_SMOKE, pos.getX() - xRotator, pos.getY() + 0.35, pos.getZ() - zRotator, 10, 0.1, 0.1, 0.1, 0.04);
+		}
+	}
 }

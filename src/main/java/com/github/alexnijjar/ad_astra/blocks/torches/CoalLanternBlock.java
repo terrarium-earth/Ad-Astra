@@ -1,7 +1,6 @@
 package com.github.alexnijjar.ad_astra.blocks.torches;
 
 import com.github.alexnijjar.ad_astra.util.OxygenUtils;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LanternBlock;
@@ -20,40 +19,40 @@ import net.minecraft.world.World;
 
 public class CoalLanternBlock extends LanternBlock {
 
-    public CoalLanternBlock(Settings settings) {
-        super(settings);
-    }
+	public CoalLanternBlock(Settings settings) {
+		super(settings);
+	}
 
-    @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (!world.isClient) {
-            ItemStack itemstack = player.getStackInHand(hand);
+	@Override
+	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+		if (!world.isClient) {
+			ItemStack itemstack = player.getStackInHand(hand);
 
-            if (OxygenUtils.worldHasOxygen(world)) {
-                if (itemstack.getItem() instanceof FlintAndSteelItem || itemstack.getItem() instanceof FireChargeItem) {
+			if (OxygenUtils.worldHasOxygen(world)) {
+				if (itemstack.getItem() instanceof FlintAndSteelItem || itemstack.getItem() instanceof FireChargeItem) {
 
-                    world.setBlockState(pos, Blocks.LANTERN.getStateWithProperties(state), 3);
+					world.setBlockState(pos, Blocks.LANTERN.getStateWithProperties(state), 3);
 
-                    itemstack.getItem().use(world, player, hand);
+					itemstack.getItem().use(world, player, hand);
 
-                    boolean hasFlint = itemstack.getItem() instanceof FlintAndSteelItem;
+					boolean hasFlint = itemstack.getItem() instanceof FlintAndSteelItem;
 
-                    if (hasFlint) {
-                        world.playSound(null, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1, 1);
-                    } else {
-                        world.playSound(null, pos, SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.BLOCKS, 1, 1);
-                    }
+					if (hasFlint) {
+						world.playSound(null, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1, 1);
+					} else {
+						world.playSound(null, pos, SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.BLOCKS, 1, 1);
+					}
 
-                    if (!player.isCreative()) {
-                        if (hasFlint) {
-                            itemstack.damage(1, world.random, (ServerPlayerEntity) player);
-                        } else {
-                            itemstack.decrement(1);
-                        }
-                    }
-                }
-            }
-        }
-        return ActionResult.SUCCESS;
-    }
+					if (!player.isCreative()) {
+						if (hasFlint) {
+							itemstack.damage(1, world.random, (ServerPlayerEntity) player);
+						} else {
+							itemstack.decrement(1);
+						}
+					}
+				}
+			}
+		}
+		return ActionResult.SUCCESS;
+	}
 }

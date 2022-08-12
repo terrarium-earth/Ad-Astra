@@ -6,13 +6,13 @@ import net.fabricmc.api.Environment;
 @Environment(EnvType.CLIENT)
 public class SoundUtil {
 
-    private static boolean shouldPlay = false;
+	private static boolean shouldPlay = false;
 
-    public static boolean getSound() {
-        return shouldPlay;
-    }
+	public static boolean getSound() {
+		return shouldPlay;
+	}
 
-    public static void setSound(boolean value) {
-        shouldPlay = value;
-    }
+	public static void setSound(boolean value) {
+		shouldPlay = value;
+	}
 }
