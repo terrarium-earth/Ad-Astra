@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "ad_astra:mars_desert",
-    "ad_astra:mars_rocky_plains"
+    "ad_astra:martian_wastelands",
+    "ad_astra:martian_canyon_creek"
   ]
 }

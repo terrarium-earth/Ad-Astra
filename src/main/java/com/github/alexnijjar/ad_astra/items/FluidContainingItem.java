@@ -1,7 +1,5 @@
 package com.github.alexnijjar.ad_astra.items;
 
-import java.util.List;
-
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
@@ -13,11 +11,13 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 
+import java.util.List;
+
 public interface FluidContainingItem {
 
-	public long getTankSize();
+	long getTankSize();
 
-	public default boolean insertIntoTank(Storage<FluidVariant> storage, ItemStack stack) {
+	default boolean insertIntoTank(Storage<FluidVariant> storage, ItemStack stack) {
 		try (Transaction transaction = Transaction.openOuter()) {
 			if (storage.insert(this.getFluid(stack), this.getAmount(stack), transaction) == this.getAmount(stack)) {
 				transaction.commit();
@@ -27,13 +27,13 @@ public interface FluidContainingItem {
 		return false;
 	}
 
-	public List<Fluid> getInputFluids();
+	List<Fluid> getInputFluids();
 
-	public default long transferFluid(Storage<FluidVariant> from, Storage<FluidVariant> to) {
+	default long transferFluid(Storage<FluidVariant> from, Storage<FluidVariant> to) {
 		return StorageUtil.move(from, to, f -> true, Long.MAX_VALUE, null);
 	}
 
-	public default FluidVariant getFluid(ItemStack stack) {
+	default FluidVariant getFluid(ItemStack stack) {
 		NbtCompound nbt = stack.getOrCreateNbt();
 		if (nbt.contains("fluid")) {
 			return FluidVariant.fromNbt(nbt.getCompound("fluid"));
@@ -42,12 +42,12 @@ public interface FluidContainingItem {
 		}
 	}
 
-	public default void setFluid(ItemStack stack, FluidVariant variant) {
+	default void setFluid(ItemStack stack, FluidVariant variant) {
 		NbtCompound nbt = stack.getOrCreateNbt();
 		nbt.put("fluid", variant.toNbt());
 	}
 
-	public default long getAmount(ItemStack stack) {
+	default long getAmount(ItemStack stack) {
 		NbtCompound nbt = stack.getOrCreateNbt();
 		if (nbt.contains("amount")) {
 			return nbt.getLong("amount");
@@ -56,14 +56,14 @@ public interface FluidContainingItem {
 		}
 	}
 
-	public default void setAmount(ItemStack stack, long amount) {
+	default void setAmount(ItemStack stack, long amount) {
 		NbtCompound nbt = stack.getOrCreateNbt();
 		nbt.putLong("amount", amount);
 	}
 
-	public class TankStorage extends SingleVariantItemStorage<FluidVariant> {
+	class TankStorage extends SingleVariantItemStorage<FluidVariant> {
 
-		private FluidContainingItem item;
+		private final FluidContainingItem item;
 
 		public TankStorage(ItemStack stack, ContainerItemContext context) {
 			super(context);
@@ -110,9 +110,7 @@ public interface FluidContainingItem {
 				stack.setNbt(nbt);
 			}
 
-			if (!newResource.isBlank() && newAmount > 0)
-
-			{
+			if (!newResource.isBlank() && newAmount > 0) {
 				item.setFluid(stack, newResource);
 				item.setAmount(stack, newAmount);
 			}

@@ -305,7 +305,7 @@
             "if_true": {
               "type": "minecraft:biome",
               "biome_is": [
-                "ad_astra:mercury"
+                "ad_astra:mercury_deltas"
               ]
             },
             "then_run": {
@@ -341,7 +341,7 @@
             "if_true": {
               "type": "minecraft:biome",
               "biome_is": [
-                "ad_astra:mercury"
+                "ad_astra:mercury_deltas"
               ]
             },
             "then_run": {
@@ -455,7 +455,7 @@
       "type": "minecraft:multi_noise",
       "biomes": [
         {
-          "biome": "ad_astra:mercury",
+          "biome": "ad_astra:mercury_deltas",
           "parameters": {
             "temperature": 0,
             "humidity": 0,

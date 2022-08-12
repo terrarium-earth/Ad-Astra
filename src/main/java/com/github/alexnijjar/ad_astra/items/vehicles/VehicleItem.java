@@ -1,10 +1,7 @@
 package com.github.alexnijjar.ad_astra.items.vehicles;
 
-import java.util.List;
-
 import com.github.alexnijjar.ad_astra.items.FluidContainingItem;
 import com.github.alexnijjar.ad_astra.util.FluidUtils;
-
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -13,6 +10,8 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public abstract class VehicleItem extends Item implements FluidContainingItem {
 

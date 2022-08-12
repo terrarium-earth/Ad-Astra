@@ -43,11 +43,6 @@
   },
   "features": [
     [
-      "minecraft:lush_caves_ceiling_vegetation",
-      "minecraft:cave_vines",
-      "minecraft:lush_caves_clay",
-      "minecraft:lush_caves_vegetation",
-      "minecraft:classic_vines_cave_feature",
       "ad_astra:mars_rock",
       "ad_astra:mars_ice_shard_ore",
       "ad_astra:mars_iron_ore",

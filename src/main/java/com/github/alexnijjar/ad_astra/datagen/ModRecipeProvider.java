@@ -1,12 +1,8 @@
 package com.github.alexnijjar.ad_astra.datagen;
 
-import java.util.List;
-import java.util.function.Consumer;
-
 import com.github.alexnijjar.ad_astra.registry.ModBlocks;
 import com.github.alexnijjar.ad_astra.registry.ModItems;
 import com.github.alexnijjar.ad_astra.registry.ModTags;
-
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.block.Blocks;
@@ -18,6 +14,9 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.tag.TagKey;
+
+import java.util.List;
+import java.util.function.Consumer;
 
 class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 	ModRecipeProvider(FabricDataGenerator dataGenerator) {

@@ -305,7 +305,7 @@
             "if_true": {
               "type": "minecraft:biome",
               "biome_is": [
-                "ad_astra:moon_desert"
+                "ad_astra:lunar_wastelands"
               ]
             },
             "then_run": {
@@ -341,7 +341,7 @@
     },
     "biome_source": {
       "type": "minecraft:fixed",
-      "biome": "ad_astra:moon_desert"
+      "biome": "ad_astra:lunar_wastelands"
     }
   }
 }

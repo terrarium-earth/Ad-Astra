@@ -5,12 +5,12 @@ import net.minecraft.item.ItemStack;
 
 public class HammerItem extends Item {
 
-    public HammerItem(Settings settings) {
-        super(settings);
-    }
+	public HammerItem(Settings settings) {
+		super(settings);
+	}
 
-    @Override
-    public boolean isEnchantable(ItemStack stack) {
-        return false;
-    }
+	@Override
+	public boolean isEnchantable(ItemStack stack) {
+		return false;
+	}
 }
