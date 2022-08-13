@@ -37,6 +37,33 @@
           "projection": "rigid",
           "element_type": "minecraft:single_pool_element"
         }
+      },
+      {
+        "weight": 30,
+        "element": {
+          "location": "ad_astra:dungeon/moon/ladders1",
+          "processors": "minecraft:empty",
+          "projection": "rigid",
+          "element_type": "minecraft:single_pool_element"
+        }
+      },
+      {
+        "weight": 30,
+        "element": {
+          "location": "ad_astra:dungeon/moon/stairs1",
+          "processors": "minecraft:empty",
+          "projection": "rigid",
+          "element_type": "minecraft:single_pool_element"
+        }
+      },
+      {
+        "weight": 30,
+        "element": {
+          "location": "ad_astra:dungeon/moon/stairs2",
+          "processors": "minecraft:empty",
+          "projection": "rigid",
+          "element_type": "minecraft:single_pool_element"
+        }
       }
     ]
   }

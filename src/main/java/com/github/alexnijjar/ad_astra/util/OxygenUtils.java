@@ -109,8 +109,8 @@ public class OxygenUtils {
 					deoxygenizeBlocks((ServerWorld) world, changedPositions, source);
 				}
 			}
-			oxygenLocations.put(getOxygenSource(world, source), entries);
 		}
+		oxygenLocations.put(getOxygenSource(world, source), entries);
 	}
 
 	public static void removeEntry(World world, BlockPos source) {
