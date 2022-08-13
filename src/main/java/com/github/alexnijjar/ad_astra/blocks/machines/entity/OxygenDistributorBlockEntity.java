@@ -1,5 +1,10 @@
 package com.github.alexnijjar.ad_astra.blocks.machines.entity;
 
+import java.util.List;
+import java.util.Set;
+
+import javax.annotation.Nullable;
+
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.blocks.machines.AbstractMachineBlock;
 import com.github.alexnijjar.ad_astra.recipes.OxygenConversionRecipe;
@@ -11,6 +16,7 @@ import com.github.alexnijjar.ad_astra.util.FluidUtils;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
 import com.github.alexnijjar.ad_astra.util.OxygenFillerAlgorithm;
 import com.github.alexnijjar.ad_astra.util.OxygenUtils;
+
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -21,10 +27,6 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-
-import javax.annotation.Nullable;
-import java.util.List;
-import java.util.Set;
 
 public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 
@@ -199,7 +201,9 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 		}
 
 		boolean active = OxygenUtils.getOxygenBlocksCount(this.world, this.getPos()) > 0;
-		this.setActive(active);
+		if (!world.isClient) {
+			this.setActive(active);
+		}
 		if (active && !this.world.isClient) {
 			this.extractResources();
 		}

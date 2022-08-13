@@ -3,7 +3,7 @@
     "fallback": "ad_astra:dungeon/moon/walkway",
     "elements": [
       {
-        "weight": 75,
+        "weight": 30,
         "element": {
           "location": "ad_astra:dungeon/moon/walkway",
           "processors": "minecraft:empty",
@@ -12,7 +12,7 @@
         }
       },
       {
-        "weight": 75,
+        "weight": 30,
         "element": {
           "location": "ad_astra:dungeon/moon/turn",
           "processors": "minecraft:empty",
@@ -21,7 +21,7 @@
         }
       },
       {
-        "weight": 75,
+        "weight": 30,
         "element": {
           "location": "ad_astra:dungeon/moon/cross",
           "processors": "minecraft:empty",
@@ -30,7 +30,7 @@
         }
       },
       {
-        "weight": 75,
+        "weight": 30,
         "element": {
           "location": "ad_astra:dungeon/moon/fork",
           "processors": "minecraft:empty",
@@ -39,9 +39,27 @@
         }
       },
       {
-        "weight": 150,
+        "weight": 20,
         "element": {
-          "location": "ad_astra:dungeon/moon/chest_room",
+          "location": "ad_astra:dungeon/moon/ladders1",
+          "processors": "minecraft:empty",
+          "projection": "rigid",
+          "element_type": "minecraft:single_pool_element"
+        }
+      },
+      {
+        "weight": 20,
+        "element": {
+          "location": "ad_astra:dungeon/moon/stairs1",
+          "processors": "minecraft:empty",
+          "projection": "rigid",
+          "element_type": "minecraft:single_pool_element"
+        }
+      },
+      {
+        "weight": 20,
+        "element": {
+          "location": "ad_astra:dungeon/moon/stairs2",
           "processors": "minecraft:empty",
           "projection": "rigid",
           "element_type": "minecraft:single_pool_element"
@@ -51,6 +69,96 @@
         "weight": 150,
         "element": {
           "location": "ad_astra:dungeon/moon/boss_room",
+          "processors": "minecraft:empty",
+          "projection": "rigid",
+          "element_type": "minecraft:single_pool_element"
+        }
+      },
+      {
+        "weight": 60,
+        "element": {
+          "location": "ad_astra:dungeon/moon/chest_room",
+          "processors": "minecraft:empty",
+          "projection": "rigid",
+          "element_type": "minecraft:single_pool_element"
+        }
+      },
+      {
+        "weight": 60,
+        "element": {
+          "location": "ad_astra:dungeon/moon/library",
+          "processors": "minecraft:empty",
+          "projection": "rigid",
+          "element_type": "minecraft:single_pool_element"
+        }
+      },
+      {
+        "weight": 60,
+        "element": {
+          "location": "ad_astra:dungeon/moon/main",
+          "processors": "minecraft:empty",
+          "projection": "rigid",
+          "element_type": "minecraft:single_pool_element"
+        }
+      },
+      {
+        "weight": 60,
+        "element": {
+          "location": "ad_astra:dungeon/moon/meet",
+          "processors": "minecraft:empty",
+          "projection": "rigid",
+          "element_type": "minecraft:single_pool_element"
+        }
+      },
+      {
+        "weight": 60,
+        "element": {
+          "location": "ad_astra:dungeon/moon/plant",
+          "processors": "minecraft:empty",
+          "projection": "rigid",
+          "element_type": "minecraft:single_pool_element"
+        }
+      },
+      {
+        "weight": 60,
+        "element": {
+          "location": "ad_astra:dungeon/moon/prison",
+          "processors": "minecraft:empty",
+          "projection": "rigid",
+          "element_type": "minecraft:single_pool_element"
+        }
+      },
+      {
+        "weight": 60,
+        "element": {
+          "location": "ad_astra:dungeon/moon/spawn_room2",
+          "processors": "minecraft:empty",
+          "projection": "rigid",
+          "element_type": "minecraft:single_pool_element"
+        }
+      },
+      {
+        "weight": 60,
+        "element": {
+          "location": "ad_astra:dungeon/moon/statue",
+          "processors": "minecraft:empty",
+          "projection": "rigid",
+          "element_type": "minecraft:single_pool_element"
+        }
+      },
+      {
+        "weight": 60,
+        "element": {
+          "location": "ad_astra:dungeon/moon/storage",
+          "processors": "minecraft:empty",
+          "projection": "rigid",
+          "element_type": "minecraft:single_pool_element"
+        }
+      },
+      {
+        "weight": 60,
+        "element": {
+          "location": "ad_astra:dungeon/moon/war1",
           "processors": "minecraft:empty",
           "projection": "rigid",
           "element_type": "minecraft:single_pool_element"

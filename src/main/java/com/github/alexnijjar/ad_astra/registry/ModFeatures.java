@@ -3,10 +3,12 @@ package com.github.alexnijjar.ad_astra.registry;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.github.alexnijjar.ad_astra.world.features.InfernalSpireColumn;
 import com.github.alexnijjar.ad_astra.world.features.ModifiedBlockBlobFeature;
+
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.feature.BasaltColumnsFeatureConfig;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.SingleStateFeatureConfig;
 
 public class ModFeatures {
 
