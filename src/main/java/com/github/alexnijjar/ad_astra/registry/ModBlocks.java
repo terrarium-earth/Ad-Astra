@@ -1,21 +1,46 @@
 package com.github.alexnijjar.ad_astra.registry;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import com.github.alexnijjar.ad_astra.blocks.cables.DeshCableBlock;
+import com.github.alexnijjar.ad_astra.blocks.cables.SteelCableBlock;
 import com.github.alexnijjar.ad_astra.blocks.flags.FlagBlock;
 import com.github.alexnijjar.ad_astra.blocks.globes.GlobeBlock;
-import com.github.alexnijjar.ad_astra.blocks.machines.*;
+import com.github.alexnijjar.ad_astra.blocks.machines.CoalGeneratorBlock;
+import com.github.alexnijjar.ad_astra.blocks.machines.CompressorBlock;
+import com.github.alexnijjar.ad_astra.blocks.machines.CryoFreezerBlock;
+import com.github.alexnijjar.ad_astra.blocks.machines.EnergizerBlock;
+import com.github.alexnijjar.ad_astra.blocks.machines.FuelRefineryBlock;
+import com.github.alexnijjar.ad_astra.blocks.machines.NasaWorkbenchBlock;
+import com.github.alexnijjar.ad_astra.blocks.machines.OxygenDistributorBlock;
+import com.github.alexnijjar.ad_astra.blocks.machines.OxygenLoaderBlock;
+import com.github.alexnijjar.ad_astra.blocks.machines.OxygenSensorBlock;
+import com.github.alexnijjar.ad_astra.blocks.machines.SolarPanelBlock;
+import com.github.alexnijjar.ad_astra.blocks.machines.WaterPumpBlock;
 import com.github.alexnijjar.ad_astra.blocks.pads.RocketLaunchPad;
 import com.github.alexnijjar.ad_astra.blocks.torches.CoalLanternBlock;
 import com.github.alexnijjar.ad_astra.blocks.torches.CoalTorchBlock;
 import com.github.alexnijjar.ad_astra.blocks.torches.WallCoalTorchBlock;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
+
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.DoorBlock;
+import net.minecraft.block.FallingBlock;
+import net.minecraft.block.MapColor;
+import net.minecraft.block.Material;
+import net.minecraft.block.OreBlock;
+import net.minecraft.block.PillarBlock;
+import net.minecraft.block.PressurePlateBlock;
+import net.minecraft.block.SlabBlock;
+import net.minecraft.block.StairsBlock;
+import net.minecraft.block.StoneButtonBlock;
+import net.minecraft.block.WallBlock;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.Registry;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public interface ModBlocks {
 
@@ -53,8 +78,8 @@ public interface ModBlocks {
 	Block WALL_COAL_TORCH = register("wall_coal_torch", new WallCoalTorchBlock(FabricBlockSettings.of(Material.DECORATION).noCollision().breakInstantly().sounds(BlockSoundGroup.WOOD)), true);
 	Block COAL_LANTERN = register("coal_lantern", new CoalLanternBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.LANTERN).strength(3.5f).nonOpaque()));
 
-	// public static final Block STEEL_CABLE = register("steel_cable", new CableBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(2.5f, 1.0f)));
-	// public static final Block DESH_CABLE = register("desh_cable", new CableBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(2.5f, 1.0f)));
+	public static final Block STEEL_CABLE = register("steel_cable", new SteelCableBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(2.5f, 1.0f)));
+	public static final Block DESH_CABLE = register("desh_cable", new DeshCableBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(2.5f, 1.0f)));
 
 	// Machines
 

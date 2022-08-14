@@ -1,0 +1,41 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "#cable",
+		"particle": "#cable"
+	},
+	"elements": [
+		{
+			"from": [11, 5, 5],
+			"to": [14, 11, 11],
+			"faces": {
+				"north": {"uv": [6, 0, 9, 6], "texture": "#cable"},
+				"east": {"uv": [0, 0, 6, 6], "texture": "#cable"},
+				"south": {"uv": [6, 0, 9, 6], "texture": "#cable"},
+				"west": {"uv": [0, 0, 6, 6], "texture": "#cable"},
+				"up": {"uv": [6, 0, 9, 6], "texture": "#cable"},
+				"down": {"uv": [6, 0, 9, 6], "texture": "#cable"}
+			}
+		},
+		{
+			"from": [14, 4, 4],
+			"to": [16, 12, 12],
+			"faces": {
+				"north": {"uv": [0, 6, 2, 14], "texture": "#cable"},
+				"east": {"uv": [2, 6, 10, 14], "texture": "#cable"},
+				"south": {"uv": [2, 6, 0, 14], "texture": "#cable"},
+				"west": {"uv": [2, 6, 10, 14], "texture": "#cable"},
+				"up": {"uv": [2, 6, 0, 14], "texture": "#cable"},
+				"down": {"uv": [2, 6, 0, 14], "texture": "#cable"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "connection",
+			"origin": [0, 0, 0],
+			"color": 0,
+			"children": [0, 1]
+		}
+	]
+}

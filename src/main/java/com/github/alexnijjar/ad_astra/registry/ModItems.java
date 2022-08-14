@@ -306,8 +306,8 @@ public interface ModItems extends ModItemGroups {
 	BlockItem VENUS_GLOBE = registerGlobe(ModBlocks.VENUS_GLOBE);
 	BlockItem GLACIO_GLOBE = registerGlobe(ModBlocks.GLACIO_GLOBE);
 
-	// public static final BlockItem STEEL_CABLE = register("steel_cable", new BlockItem(ModBlocks.STEEL_CABLE, new FabricItemSettings().group(ITEM_GROUP_MACHINES)));
-	// public static final BlockItem DESH_CABLE = register("desh_cable", new BlockItem(ModBlocks.DESH_CABLE, new FabricItemSettings().group(ITEM_GROUP_MACHINES)));
+	public static final BlockItem STEEL_CABLE = register("steel_cable", new BlockItem(ModBlocks.STEEL_CABLE, new FabricItemSettings().group(ITEM_GROUP_MACHINES)));
+	public static final BlockItem DESH_CABLE = register("desh_cable", new BlockItem(ModBlocks.DESH_CABLE, new FabricItemSettings().group(ITEM_GROUP_MACHINES)));
 
 	// Block Items
 	BlockItem STEEL_BLOCK = registerBlockItem(ModBlocks.STEEL_BLOCK);

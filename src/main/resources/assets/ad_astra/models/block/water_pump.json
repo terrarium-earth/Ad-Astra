@@ -1,5 +1,5 @@
 {
-  "parent": "ad_astra:custom/water_pump",
+  "parent": "ad_astra:template/water_pump",
   "textures": {
     "0": "ad_astra:block/water_pump",
     "particle": "ad_astra:block/water_pump"
