@@ -1,0 +1,33 @@
+{
+	"multipart": [
+		{
+			"apply": {
+				"model": "ad_astra:block/cable/desh_cable_core"
+			}
+		},
+		{
+			"when": { "north": "true" },
+			"apply": { "model": "ad_astra:block/cable/desh_cable_side", "y": 270 }
+		},
+		{
+			"when": { "east": "true" },
+			"apply": { "model": "ad_astra:block/cable/desh_cable_side", "y": 0 }
+		},
+		{
+			"when": { "south": "true" },
+			"apply": { "model": "ad_astra:block/cable/desh_cable_side", "y": 90 }
+		},
+		{
+			"when": { "west": "true" },
+			"apply": { "model": "ad_astra:block/cable/desh_cable_side", "y": 180 }
+		},
+		{
+			"when": { "up": "true" },
+			"apply": { "model": "ad_astra:block/cable/desh_cable_side", "x": 0}
+		},
+		{
+			"when": { "down": "true" },
+			"apply": { "model": "ad_astra:block/cable/desh_cable_side", "x": 180 }
+		}
+	]
+}

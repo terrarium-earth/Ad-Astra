@@ -1,5 +1,5 @@
 {
-  "parent": "ad_astra:custom/flag_up",
+  "parent": "ad_astra:template/flag_up",
   "textures": {
     "all": "ad_astra:block/flag_lime",
     "particle": "ad_astra:block/flag_lime",

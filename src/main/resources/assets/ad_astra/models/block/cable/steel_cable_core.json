@@ -1,0 +1,6 @@
+{
+    "parent": "ad_astra:template/cable/template_thin_cable_core",
+    "textures": {
+        "cable": "ad_astra:block/cable/steel_cable"
+    }
+}
