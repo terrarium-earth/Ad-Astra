@@ -143,20 +143,6 @@
         },
         {
           "type": "minecraft:item",
-          "name": "ad_astra:steel_ingot",
-          "weight": 20,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 1
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
           "name": "ad_astra:moon_sand",
           "weight": 20,
           "functions": [
@@ -208,20 +194,6 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:gold_nugget",
-          "weight": 20,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 1
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "ad_astra:steel_ingot",
           "weight": 20,
           "functions": [
             {
