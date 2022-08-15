@@ -1,16 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
+  "group": "iron_plates",
   "pattern": [
-    "SS",
-    "SS"
+    "###",
+    "###",
+    "###"
   ],
   "key": {
-    "S": {
+    "#": {
       "tag": "c:iron_plates"
     }
   },
   "result": {
     "item": "ad_astra:iron_plating",
-    "count": 16
+    "count": 32
   }
 }

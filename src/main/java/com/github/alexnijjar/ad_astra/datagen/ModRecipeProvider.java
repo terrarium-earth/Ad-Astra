@@ -212,7 +212,8 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 
 		// Metals
 
-		offerQuadRecipe(exporter, 16, IRON_PLATING, ModTags.IRON_PLATES);
+		ShapedRecipeJsonFactory.create(IRON_PLATING, 32).m_hadhiznl(Character.valueOf('#'), ModTags.IRON_PLATES).pattern("###").pattern("###").pattern("###").group("iron_plates")
+				.criterion("has_tag", method_10420(ModTags.COMPRESSED_STEEL)).offerTo(exporter);
 		offerPlatingRecipe(exporter, STEEL_PLATING, ModTags.COMPRESSED_STEEL);
 		offerPlatingRecipe(exporter, DESH_PLATING, ModTags.DESH_PLATES);
 		offerPlatingRecipe(exporter, OSTRUM_PLATING, ModTags.COMPRESSED_OSTRUM);

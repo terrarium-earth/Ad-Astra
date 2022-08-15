@@ -2,16 +2,18 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "ad_astra:iron_plating"
+      "minecraft:cracked_venus_sandstone_bricks_from_smelting_venus_stone_bricks"
     ]
   },
   "criteria": {
-    "has_tag": {
+    "has_venus_stone_bricks": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "tag": "c:compressed_steel"
+            "items": [
+              "ad_astra:venus_stone_bricks"
+            ]
           }
         ]
       }
@@ -19,13 +21,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "ad_astra:iron_plating"
+        "recipe": "minecraft:cracked_venus_sandstone_bricks_from_smelting_venus_stone_bricks"
       }
     }
   },
   "requirements": [
     [
-      "has_tag",
+      "has_venus_stone_bricks",
       "has_the_recipe"
     ]
   ]

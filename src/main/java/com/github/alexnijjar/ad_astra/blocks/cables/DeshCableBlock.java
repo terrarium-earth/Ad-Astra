@@ -8,7 +8,7 @@ public class DeshCableBlock extends CableBlock {
 
     @Override
     public double getCableSize() {
-        return 0.300;
+        return 0.312;
     }
 
     @Override
@@ -18,7 +18,7 @@ public class DeshCableBlock extends CableBlock {
 
     @Override
     public int getEnergyTransfer() {
-        return Integer.MAX_VALUE;
+        return 16;
     }
 
     @Override

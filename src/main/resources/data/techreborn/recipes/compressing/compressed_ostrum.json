@@ -1,0 +1,17 @@
+{
+    "type": "techreborn:compressor",
+    "power": 2,
+    "time": 400,
+    "ingredients": [
+      {
+        "tag": "c:ostrum_ingots",
+        "count": 1
+      }
+    ],
+    "results": [
+      {
+        "item": "ad_astra:compressed_ostrum"
+      }
+    ]
+  }
+  
