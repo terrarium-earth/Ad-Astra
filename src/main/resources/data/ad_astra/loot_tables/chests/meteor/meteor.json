@@ -81,22 +81,6 @@
                             "function": "minecraft:set_count"
                         }
                     ],
-                    "name": "ad_astra:steel_ingot",
-                    "weight": 10
-                },
-                {
-                    "type": "minecraft:item",
-                    "functions": [
-                        {
-                            "add": false,
-                            "count": {
-                                "type": "minecraft:uniform",
-                                "max": 2.0,
-                                "min": 1.0
-                            },
-                            "function": "minecraft:set_count"
-                        }
-                    ],
                     "name": "minecraft:diamond",
                     "weight": 5
                 }
