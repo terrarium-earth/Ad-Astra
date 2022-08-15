@@ -76,7 +76,6 @@ public class ModBlockEntities {
 		EnergyStorage.SIDED.registerForBlockEntities((blockEntity, direction) -> ((AbstractMachineBlockEntity) blockEntity).getSideEnergyStorage(direction), SOLAR_PANEL, COAL_GENERATOR, COMPRESSOR, FUEL_REFINERY, OXYGEN_LOADER, OXYGEN_DISTRIBUTOR,
 				WATER_PUMP, ENERGIZER, CRYO_FREEZER);
 
-		EnergyStorage.SIDED.registerForBlockEntities((blockEntity, direction) -> ((CableBlockEntity) blockEntity).getSideEnergyStorage(direction), CABLE);
 		FluidStorage.SIDED.registerForBlockEntities((blockEntity, direction) -> ((FluidMachineBlockEntity) blockEntity).inputTank, FUEL_REFINERY, OXYGEN_LOADER, OXYGEN_DISTRIBUTOR, WATER_PUMP, CRYO_FREEZER);
 	}
 

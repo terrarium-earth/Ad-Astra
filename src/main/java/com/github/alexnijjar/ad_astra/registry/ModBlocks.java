@@ -3,8 +3,7 @@ package com.github.alexnijjar.ad_astra.registry;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.github.alexnijjar.ad_astra.blocks.cables.DeshCableBlock;
-import com.github.alexnijjar.ad_astra.blocks.cables.SteelCableBlock;
+import com.github.alexnijjar.ad_astra.blocks.cables.CableBlock;
 import com.github.alexnijjar.ad_astra.blocks.flags.FlagBlock;
 import com.github.alexnijjar.ad_astra.blocks.globes.GlobeBlock;
 import com.github.alexnijjar.ad_astra.blocks.machines.CoalGeneratorBlock;
@@ -78,8 +77,8 @@ public interface ModBlocks {
 	Block WALL_COAL_TORCH = register("wall_coal_torch", new WallCoalTorchBlock(FabricBlockSettings.of(Material.DECORATION).noCollision().breakInstantly().sounds(BlockSoundGroup.WOOD)), true);
 	Block COAL_LANTERN = register("coal_lantern", new CoalLanternBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.LANTERN).strength(3.5f).nonOpaque()));
 
-	public static final Block STEEL_CABLE = register("steel_cable", new SteelCableBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(2.5f, 1.0f)));
-	public static final Block DESH_CABLE = register("desh_cable", new DeshCableBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(2.5f, 1.0f)));
+	public static final Block STEEL_CABLE = register("steel_cable", new CableBlock(160, 1, 0.344, FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(2.5f, 1.0f)));
+	public static final Block DESH_CABLE = register("desh_cable", new CableBlock(320, 2, 0.312, FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(2.5f, 1.0f)));
 
 	// Machines
 
