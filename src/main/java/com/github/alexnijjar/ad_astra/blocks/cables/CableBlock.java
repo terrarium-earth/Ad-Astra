@@ -29,7 +29,7 @@ import net.minecraft.world.WorldAccess;
 import team.reborn.energy.api.EnergyStorage;
 
 @SuppressWarnings("deprecation")
-public abstract class CableBlock extends BlockWithEntity implements Waterloggable {
+public class CableBlock extends BlockWithEntity implements Waterloggable {
 
     public static final BooleanProperty UP = BooleanProperty.of("up");
     public static final BooleanProperty DOWN = BooleanProperty.of("down");
@@ -38,6 +38,10 @@ public abstract class CableBlock extends BlockWithEntity implements Waterloggabl
     public static final BooleanProperty SOUTH = BooleanProperty.of("south");
     public static final BooleanProperty WEST = BooleanProperty.of("west");
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
+
+    private int transferRate;
+    private int decay;
+    private double size;
 
     public static final Map<Direction, BooleanProperty> DIRECTIONS = Util.make(new HashMap<>(), map -> {
         map.put(Direction.UP, UP);
@@ -48,9 +52,12 @@ public abstract class CableBlock extends BlockWithEntity implements Waterloggabl
         map.put(Direction.WEST, WEST);
     });
 
-    public CableBlock(Settings settings) {
+    public CableBlock(int transferRate, int decay, double size, Settings settings) {
         super(settings);
         this.setDefaultState(getDefaultState().with(UP, false).with(DOWN, false).with(NORTH, false).with(EAST, false).with(SOUTH, false).with(WEST, false).with(WATERLOGGED, false));
+        this.transferRate = transferRate;
+        this.decay = decay;
+        this.size = size;
     }
 
     @Override
@@ -116,9 +123,11 @@ public abstract class CableBlock extends BlockWithEntity implements Waterloggabl
     public void updateShape(World world, BlockPos pos, BlockState state) {
         for (Direction dir : Direction.values()) {
             BlockPos offset = pos.offset(dir);
+            boolean connect;
             EnergyStorage storage = EnergyStorage.SIDED.find(world, offset, dir.getOpposite());
+            connect = storage != null || world.getBlockState(offset).getBlock() instanceof CableBlock;
 
-            world.setBlockState(pos, world.getBlockState(pos).with(DIRECTIONS.get(dir), storage != null));
+            world.setBlockState(pos, world.getBlockState(pos).with(DIRECTIONS.get(dir), connect));
             if (world.getBlockState(offset).getBlock().equals(this)) {
                 world.setBlockState(offset, world.getBlockState(offset).with(DIRECTIONS.get(dir.getOpposite()), true));
             }
@@ -127,7 +136,6 @@ public abstract class CableBlock extends BlockWithEntity implements Waterloggabl
 
     // Expand the voxel shape to match the model
     public VoxelShape updateOutlineShape(BlockState state) {
-        double size = this.getCableSize();
         VoxelShape shape = VoxelShapes.cuboid(size, size, size, 1 - size, 1 - size, 1 - size);
         
         if (state.get(UP)) {
@@ -152,11 +160,11 @@ public abstract class CableBlock extends BlockWithEntity implements Waterloggabl
         return shape;
     }
 
-    public abstract double getCableSize();
+    public int getTransferRate() {
+        return transferRate;
+    }
 
-    public abstract int getEnergyDecay();
-
-    public abstract int getEnergyTransfer();
-
-    public abstract long getEnergyCapacity();
+    public int getDecay() {
+        return decay;
+    }
 }

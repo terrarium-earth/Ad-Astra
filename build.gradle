@@ -45,6 +45,9 @@ dependencies {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
 
+	modRuntimeOnly 'RebornCore:RebornCore-1.18:+'
+	modRuntimeOnly 'TechReborn:TechReborn-1.18:+'
+
 	modImplementation "vazkii.patchouli:Patchouli:${project.patchouli_version}"
 }
 
