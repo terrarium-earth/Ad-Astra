@@ -2,17 +2,17 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:cracked_venus_stone_bricks_from_smelting_cracked_venus_stone_bricks"
+      "ad_astra:venus_sandstone_bricks"
     ]
   },
   "criteria": {
-    "has_cracked_venus_stone_bricks": {
+    "has_venus_sandstone": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "ad_astra:cracked_venus_stone_bricks"
+              "ad_astra:venus_sandstone"
             ]
           }
         ]
@@ -21,13 +21,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "minecraft:cracked_venus_stone_bricks_from_smelting_cracked_venus_stone_bricks"
+        "recipe": "ad_astra:venus_sandstone_bricks"
       }
     }
   },
   "requirements": [
     [
-      "has_cracked_venus_stone_bricks",
+      "has_venus_sandstone",
       "has_the_recipe"
     ]
   ]

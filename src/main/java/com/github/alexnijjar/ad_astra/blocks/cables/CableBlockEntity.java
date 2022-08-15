@@ -1,11 +1,16 @@
 package com.github.alexnijjar.ad_astra.blocks.cables;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import javax.annotation.Nullable;
 
 import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
 
 import net.fabricmc.fabric.api.lookup.v1.block.BlockApiCache;
-import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -13,17 +18,18 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import team.reborn.energy.api.EnergyStorage;
-import team.reborn.energy.api.EnergyStorageUtil;
 import team.reborn.energy.api.base.SimpleSidedEnergyContainer;
 
 public class CableBlockEntity extends BlockEntity {
+
+    public List<CableBlockEntity> connectedCables = new ArrayList<>();
 
     public CableBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.CABLE, pos, state);
     }
 
     @SuppressWarnings("unchecked")
-	private final BlockApiCache<EnergyStorage, Direction>[] adjacentCaches = new BlockApiCache[6];
+    private final BlockApiCache<EnergyStorage, Direction>[] adjacentCaches = new BlockApiCache[6];
 
     public final SimpleSidedEnergyContainer energyStorage = new SimpleSidedEnergyContainer() {
         @Override
@@ -85,55 +91,55 @@ public class CableBlockEntity extends BlockEntity {
     }
 
     private BlockApiCache<EnergyStorage, Direction> getAdjacentCache(Direction direction) {
-		if (adjacentCaches[direction.getId()] == null) {
-			adjacentCaches[direction.getId()] = BlockApiCache.create(EnergyStorage.SIDED, (ServerWorld) world, pos.offset(direction));
-		}
-		return adjacentCaches[direction.getId()];
-	}
+        if (adjacentCaches[direction.getId()] == null) {
+            adjacentCaches[direction.getId()] = BlockApiCache.create(EnergyStorage.SIDED, (ServerWorld) world, pos.offset(direction));
+        }
+        return adjacentCaches[direction.getId()];
+    }
 
-	@Nullable
-	BlockEntity getAdjacentBlockEntity(Direction direction) {
-		return getAdjacentCache(direction).getBlockEntity();
-	}
+    @Nullable
+    BlockEntity getAdjacentBlockEntity(Direction direction) {
+        return getAdjacentCache(direction).getBlockEntity();
+    }
 
     @SuppressWarnings("deprecation")
     public void tick() {
-        if (this.world instanceof ServerWorld severWorld) {
-            if (!severWorld.isChunkLoaded(this.getPos())) {
+        if (this.world instanceof ServerWorld serverWorld) {
+            if (!serverWorld.isChunkLoaded(this.getPos())) {
                 return;
             }
 
-            for (Direction dir : Direction.values()) {
-                BlockApiCache<EnergyStorage, Direction> adjacentEnergy = this.getAdjacentCache(dir);
+            Set<Direction> connectedDirections = CableBlock.DIRECTIONS.entrySet().stream().filter(f -> this.getCachedState().get(f.getValue())).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)).keySet();
 
+            for (Direction dir : connectedDirections) {
+                BlockApiCache<EnergyStorage, Direction> adjacentEnergy = this.getAdjacentCache(dir);
                 if (adjacentEnergy == null) {
                     continue;
                 }
-                
-                if (adjacentEnergy.getBlockEntity() instanceof CableBlockEntity adjacentCable) {
 
+                BlockEntity adjacentBlockEntity = adjacentEnergy.getBlockEntity();
+
+                if (adjacentBlockEntity == null) {
+                    continue;
                 }
 
+                EnergyStorage adjacentStorage = adjacentEnergy.find(adjacentBlockEntity.getCachedState(), dir);
+                if (adjacentStorage == null) {
+                    continue;
+                }
 
-                
+                if (adjacentBlockEntity instanceof CableBlockEntity cable) {
 
+                    if (this.connectedCables.stream().anyMatch(f -> f.getPos().equals(adjacentBlockEntity.getPos()))) {
+                        continue;
+                    }
 
+                    cable.connectedCables.add(this);
+                }
 
-
-
-
-
-                // try (Transaction transaction = Transaction.openOuter()) {
-
-
-
-
-                //     if (storage.getAmount() < this.energyStorage.amount) {
-                //         long amountMoved = EnergyStorageUtil.move(getSideEnergyStorage(dir), storage, Long.MAX_VALUE, transaction);
-                //         transaction.commit();
-                //     }
-                // }
+                this.connectedCables.clear();
             }
         }
+
     }
 }

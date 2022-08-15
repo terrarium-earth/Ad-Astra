@@ -8,7 +8,7 @@ public class SteelCableBlock extends CableBlock {
 
     @Override
     public double getCableSize() {
-        return 0.375;
+        return 0.344;
     }
 
     @Override
