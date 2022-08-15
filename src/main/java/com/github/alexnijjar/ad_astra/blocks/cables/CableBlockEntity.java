@@ -1,20 +1,19 @@
 package com.github.alexnijjar.ad_astra.blocks.cables;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
-
+import net.fabricmc.fabric.api.lookup.v1.block.BlockApiLookup;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 import team.reborn.energy.api.EnergyStorage;
 import team.reborn.energy.api.EnergyStorageUtil;
 
-public class CableBlockEntity extends BlockEntity {
+import java.util.*;
+
+public class CableBlockEntity extends BlockEntity implements InteractablePipe<EnergyStorage> {
     private final List<EnergyStorage> consumers = new ArrayList<>();
     private EnergyStorage source;
 
@@ -22,51 +21,70 @@ public class CableBlockEntity extends BlockEntity {
         super(ModBlockEntities.CABLE, pos, state);
     }
 
-    public void tick() {
-        if (this.world != null && !this.world.isClient()) {
-            if (world.getTime() % 5 == 0) {
-                this.source = null;
-                this.consumers.clear();
-                Set<BlockPos> visitedNodes = new HashSet<>();
-                List<BlockPos> openNodes = new ArrayList<>();
-                openNodes.add(this.getPos());
-                visitedNodes.add(this.getPos());
-                for (Direction direction : Direction.values()) {
-                    BlockPos offset = this.getPos().offset(direction);
-                    EnergyStorage potentialSource = EnergyStorage.SIDED.find(world, offset, direction);
-                    if (potentialSource != null && potentialSource.supportsExtraction()) {
-                        source = EnergyStorage.SIDED.find(world, offset, direction);
-                        break;
-                    }
-                }
-                if (source != null) {
-                    while (!openNodes.isEmpty()) {
-                        BlockPos openNode = openNodes.get(openNodes.size() - 1);
-                        for (Direction direction : Direction.values()) {
-                            BlockPos offset = openNode.offset(direction).toImmutable();
-                            BlockEntity entity = world.getBlockEntity(offset);
-                            if (!visitedNodes.contains(offset) && entity instanceof CableBlockEntity) {
-                                openNodes.add(offset);
-                            } else {
-                                EnergyStorage potentialConsumer = EnergyStorage.SIDED.find(world, offset, direction);
-                                if (potentialConsumer != null && potentialConsumer.supportsInsertion()) {
-                                    consumers.add(EnergyStorage.SIDED.find(world, offset, direction));
-                                }
-                            }
-                        }
-                        openNodes.remove(openNode);
-                        visitedNodes.add(openNode);
-                    }
-                }
+    @Override
+    public boolean supportsAutoExtract() {
+        return true;
+    }
 
-            } else if (source != null && !consumers.isEmpty() && this.getCachedState().getBlock() instanceof CableBlock cableBlock) {
-                int notTransferred = cableBlock.getTransferRate();
-                int transferAmount = cableBlock.getTransferRate() / consumers.size();
+    @Override
+    public boolean canTakeFrom(EnergyStorage source) {
+        return source.supportsExtraction();
+    }
 
-                for (EnergyStorage consumer : consumers) {
-                    EnergyStorageUtil.move(this.source, consumer, Math.min(notTransferred, transferAmount), null);
-                }
-            }
+    @Override
+    public boolean canInsertInto(EnergyStorage consumer) {
+        return consumer.supportsInsertion();
+    }
+
+    @Override
+    public boolean canConnectTo(BlockEntity next) {
+        return true;
+    }
+
+    @Override
+    @SuppressWarnings("UnstableApiUsage")
+    public int insertInto(EnergyStorage consumer, int leftover) {
+        if (getSource() != null && !getConsumers().isEmpty()) {
+            return leftover - (int) EnergyStorageUtil.move(getSource(), consumer, Math.max(0, leftover / getConsumers().size()), null);
         }
+        return leftover;
+    }
+
+    @Override
+    public EnergyStorage getInteraction(World world, BlockPos pos, Direction direction) {
+        return EnergyStorage.SIDED.find(world, pos, direction);
+    }
+
+    @Override
+    public @Nullable EnergyStorage getSource() {
+        return source;
+    }
+
+    @Override
+    public void setSource(EnergyStorage source) {
+        this.source = source;
+    }
+
+    @Override
+    public void clearSource() {
+        this.source = null;
+    }
+
+    @Override
+    public List<EnergyStorage> getConsumers() {
+        return consumers;
+    }
+
+    @Override
+    public int getWorkTime() {
+        return 5;
+    }
+
+    @Override
+    public int getTransferAmount() {
+        if(this.getCachedState().getBlock() instanceof CableBlock cableBlock) {
+            return cableBlock.getTransferRate();
+        }
+        return 0;
     }
 }

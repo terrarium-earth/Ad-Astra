@@ -69,7 +69,7 @@ public class CableBlock extends BlockWithEntity implements Waterloggable {
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
         return (entityWorld, pos, entityState, blockEntity) -> {
             if (blockEntity instanceof CableBlockEntity cable) {
-                cable.tick();
+                cable.pipeTick();
             }
         };
     }
