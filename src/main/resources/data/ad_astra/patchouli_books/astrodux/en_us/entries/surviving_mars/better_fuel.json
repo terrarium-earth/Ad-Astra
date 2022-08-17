@@ -1,7 +1,7 @@
 {
     "name": "Better Fuel",
     "icon": "ad_astra:cryo_freezer",
-    "sortnum": 2,
+    "sortnum": 3,
     "category": "ad_astra:surviving_mars",
     "pages": [
         {

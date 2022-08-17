@@ -77,6 +77,16 @@ public class ModModelProvider extends FabricModelProvider implements ModBlocks {
 		registerSlab(blockStateModelGenerator, PERMAFROST_BRICK_SLAB, PERMAFROST_BRICKS);
 		registerSlab(blockStateModelGenerator, POLISHED_PERMAFROST_SLAB, POLISHED_PERMAFROST);
 		registerSlab(blockStateModelGenerator, CHISELED_PERMAFROST_BRICK_SLAB, CHISELED_PERMAFROST_BRICKS);
+		registerSlab(blockStateModelGenerator, MOON_COBBLESTONE_SLAB, MOON_COBBLESTONE);
+		registerSlab(blockStateModelGenerator, MOON_STONE_SLAB, MOON_STONE);
+		registerSlab(blockStateModelGenerator, MARS_COBBLESTONE_SLAB, MARS_COBBLESTONE);
+		registerSlab(blockStateModelGenerator, MARS_STONE_SLAB, MARS_STONE);
+		registerSlab(blockStateModelGenerator, VENUS_COBBLESTONE_SLAB, VENUS_COBBLESTONE);
+		registerSlab(blockStateModelGenerator, VENUS_STONE_SLAB, VENUS_STONE);
+		registerSlab(blockStateModelGenerator, MERCURY_COBBLESTONE_SLAB, MERCURY_COBBLESTONE);
+		registerSlab(blockStateModelGenerator, MERCURY_STONE_SLAB, MERCURY_STONE);
+		registerSlab(blockStateModelGenerator, GLACIO_COBBLESTONE_SLAB, GLACIO_COBBLESTONE);
+		registerSlab(blockStateModelGenerator, GLACIO_STONE_SLAB, GLACIO_STONE);
 	}
 
 	public static void registerSlab(BlockStateModelGenerator blockStateModelGenerator, Block slab, Block source) {

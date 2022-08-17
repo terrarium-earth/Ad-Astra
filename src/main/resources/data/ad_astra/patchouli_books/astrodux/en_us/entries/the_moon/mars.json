@@ -1,7 +1,7 @@
 {
     "name": "Mars",
     "icon": "ad_astra:/textures/sky/mars.png",
-    "sortnum": 5,
+    "sortnum": 6,
     "category": "ad_astra:the_moon",
     "pages": [
         {

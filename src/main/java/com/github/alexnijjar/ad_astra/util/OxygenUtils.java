@@ -101,7 +101,6 @@ public class OxygenUtils {
 	public static void setEntry(World world, BlockPos source, Set<BlockPos> entries) {
 		// Get all the entries that have changed. If they are have been removed, deoxygenate their pos.
 		if (!world.isClient) {
-
 			if (oxygenLocations.containsKey(getOxygenSource(world, source))) {
 				Set<BlockPos> changedPositions = new HashSet<>(oxygenLocations.get(getOxygenSource(world, source)));
 				if (changedPositions != null && !changedPositions.isEmpty()) {

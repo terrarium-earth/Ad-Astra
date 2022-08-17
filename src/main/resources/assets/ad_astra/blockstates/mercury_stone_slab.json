@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "ad_astra:block/mercury_stone_slab"
+    },
+    "type=double": {
+      "model": "ad_astra:block/mercury_stone"
+    },
+    "type=top": {
+      "model": "ad_astra:block/mercury_stone_slab_top"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+    "name": "Fluid Pipes",
+    "icon": "ad_astra:ostrum_fluid_pipe",
+    "sortnum": 1,
+    "category": "ad_astra:surviving_mars",
+    "pages": [
+        {
+            "type": "patchouli:spotlight",
+            "title": "Fluid Pipes",
+            "item": "ad_astra:ostrum_fluid_pipe",
+            "text": "Fluid pipes are similar to cables but with fluid transfer instead of energy transfer. To use them, craft some fluid pipes and a wrench. Then, right-click on one of the pipes with the wrench to cycle through the pipe's modes: 'none,' 'normal,' 'insert,' and 'extract.'"
+        },
+        {
+            "type": "patchouli:crafting",
+            "text": "Pipes with 'insert' set will receive fluid from the network, while pipes with 'extract' set will pump fluid into the network.",
+            "recipe": "ad_astra:recipes/desh_fluid_pipe"
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe": "ad_astra:recipes/ostrum_fluid_pipe",
+            "recipe2": "ad_astra:recipes/wrench"
+        }
+    ]
+}

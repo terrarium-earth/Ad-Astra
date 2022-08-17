@@ -7,5 +7,14 @@
         "stream": false
       }
     ]
+  },
+  "wrench": {
+    "category": "blocks",
+    "sounds": [
+      {
+        "name": "ad_astra:wrench",
+        "stream": false
+      }
+    ]
   }
 }

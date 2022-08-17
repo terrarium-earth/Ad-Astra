@@ -3,6 +3,8 @@ package com.github.alexnijjar.ad_astra.blocks.pipes;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.github.alexnijjar.ad_astra.registry.ModSoundEvents;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -18,6 +20,7 @@ import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.state.StateManager.Builder;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
@@ -190,6 +193,7 @@ public class CableBlock extends BlockWithEntity implements Waterloggable, Wrench
                 property = DIRECTIONS.get(Direction.UP);
             }
             world.setBlockState(pos, state.with(property, !state.get(property)));
+            world.playSound(null, pos, ModSoundEvents.WRENCH, SoundCategory.BLOCKS, 1, 1);
         }
     }
 }

@@ -1,5 +1,12 @@
 package com.github.alexnijjar.ad_astra.util;
 
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.client.AdAstraClient;
 import com.github.alexnijjar.ad_astra.data.Planet;
@@ -9,6 +16,7 @@ import com.github.alexnijjar.ad_astra.entities.vehicles.VehicleEntity;
 import com.github.alexnijjar.ad_astra.items.vehicles.VehicleItem;
 import com.github.alexnijjar.ad_astra.registry.ModCriteria;
 import com.github.alexnijjar.ad_astra.registry.ModEntityTypes;
+
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.Entity;
@@ -30,13 +38,6 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.TeleportTarget;
 import net.minecraft.world.World;
-
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ModUtils {
 
@@ -60,8 +61,7 @@ public class ModUtils {
 	}
 
 	/**
-	 * Teleports an entity to a different dimension. If the entity is a player in a rocket, the player will teleport with a lander.
-	 * If the entity is raw food, the food will be cooked.
+	 * Teleports an entity to a different dimension. If the entity is a player in a rocket, the player will teleport with a lander. If the entity is raw food, the food will be cooked.
 	 *
 	 * @param targetWorld The world to the entity teleport to
 	 * @param entity      The entity to teleport
@@ -144,8 +144,7 @@ public class ModUtils {
 	}
 
 	/**
-	 * Gets the cooked variant of a raw food, if it exists, and then spawns the item entity. The cooked variant is obtained by using
-	 * a smoking recipe, and then obtaining the result of that recipe.
+	 * Gets the cooked variant of a raw food, if it exists, and then spawns the item entity. The cooked variant is obtained by using a smoking recipe, and then obtaining the result of that recipe.
 	 *
 	 * @param itemEntity The item to try to convert into cooked food
 	 */
@@ -190,8 +189,7 @@ public class ModUtils {
 	}
 
 	/**
-	 * Gets the gravity of the world, in ratio to earth gravity. So a gravity of 1.0 is equivalent to earth gravity, while 0.5 would
-	 * be half of earth's gravity and 2.0 would be twice the earth's gravity.
+	 * Gets the gravity of the world, in ratio to earth gravity. So a gravity of 1.0 is equivalent to earth gravity, while 0.5 would be half of earth's gravity and 2.0 would be twice the earth's gravity.
 	 *
 	 * @return The gravity of the world or earth gravity if the world does not have a defined gravity
 	 */
@@ -299,8 +297,7 @@ public class ModUtils {
 	}
 
 	/**
-	 * Spawns a server-side particle that renders regardless of the distance away from the player. This is important as normal
-	 * particles are only rendered at up to 32 blocks away.
+	 * Spawns a server-side particle that renders regardless of the distance away from the player. This is important as normal particles are only rendered at up to 32 blocks away.
 	 */
 	public static <T extends ParticleEffect> void spawnForcedParticles(ServerWorld world, T particle, double x, double y, double z, int count, double deltaX, double deltaY, double deltaZ, double speed) {
 		for (ServerPlayerEntity player : world.getPlayers()) {
@@ -326,5 +323,39 @@ public class ModUtils {
 
 	public static boolean checkTag(ItemStack stack, TagKey<Item> tag) {
 		return stack.isIn(tag);
+	}
+
+	public static long getSolarEnergy(RegistryKey<World> world) {
+		if (world.equals(World.OVERWORLD)) {
+			return 10;
+		} else if (world.equals(World.NETHER)) {
+			return 4;
+		} else if (world.equals(World.END)) {
+			return 15;
+		} else if (world.equals(EARTH_ORBIT_KEY)) {
+			return 13;
+		} else if (world.equals(MOON_KEY)) {
+			return 13;
+		} else if (world.equals(MOON_ORBIT_KEY)) {
+			return 14;
+		} else if (world.equals(MARS_KEY)) {
+			return 9;
+		} else if (world.equals(MARS_ORBIT_KEY)) {
+			return 11;
+		} else if (world.equals(VENUS_KEY)) {
+			return 6;
+		} else if (world.equals(VENUS_ORBIT_KEY)) {
+			return 15;
+		} else if (world.equals(MERCURY_KEY)) {
+			return 17;
+		} else if (world.equals(MERCURY_ORBIT_KEY)) {
+			return 18;
+		} else if (world.equals(GLACIO_KEY)) {
+			return 11;
+		} else if (world.equals(GLACIO_ORBIT_KEY)) {
+			return 14;
+		} else {
+			return 10;
+		}
 	}
 }

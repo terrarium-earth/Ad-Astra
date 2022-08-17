@@ -32,9 +32,9 @@ public interface InteractablePipe<T> {
 
     List<Node<T>> getConsumers();
 
-    World getWorld();
+    World getPipeWorld();
 
-    BlockPos getPos();
+    BlockPos getPipePos();
 
     int getWorkTime();
 
@@ -45,18 +45,18 @@ public interface InteractablePipe<T> {
     }
 
     default void pipeTick() {
-        if (!getWorld().isClient()) {
-            if (getWorld().getTime() % getWorkTime() == 0) {
+        if (!getPipeWorld().isClient()) {
+            if (getPipeWorld().getTime() % getWorkTime() == 0) {
                 clearSource();
                 this.getConsumers().clear();
                 Set<BlockPos> visitedNodes = new HashSet<>();
                 Set<BlockPos> availableNodes = new HashSet<>();
                 if (supportsAutoExtract()) {
-                    availableNodes.add(this.getPos());
+                    availableNodes.add(this.getPipePos());
                     for (int i = 0; i < Direction.values().length; i++) {
                         Direction direction = Direction.byId(i);
-                        BlockPos offset = this.getPos().offset(direction);
-                        T potentialSource = getInteraction(getWorld(), offset, direction);
+                        BlockPos offset = this.getPipePos().offset(direction);
+                        T potentialSource = getInteraction(getPipeWorld(), offset, direction);
                         if (potentialSource != null && canTakeFrom(potentialSource)) {
                             this.setSource(new Node<>(potentialSource, direction, offset));
                             break;
@@ -70,18 +70,18 @@ public interface InteractablePipe<T> {
                         List<BlockPos> temporaryOpenNodes = new ArrayList<>();
 
                         for (BlockPos node : availableNodes) {
-                            BlockEntity current = getWorld().getBlockEntity(node);
+                            BlockEntity current = getPipeWorld().getBlockEntity(node);
                             for (int i = 0; i < Direction.values().length; i++) {
                                 Direction direction = Direction.byId(i);
                                 BlockPos offset = node.offset(direction);
-                                BlockEntity entity = getWorld().getBlockEntity(offset);
+                                BlockEntity entity = getPipeWorld().getBlockEntity(offset);
                                 if (!visitedNodes.contains(offset) && entity instanceof InteractablePipe<?> pipe) {
                                     // Additional if statement to optimize performance; If it's a pipe but cant connect, it shouldn't check if it is a consumer (because it's already a pipe)
                                     if (pipe.canConnectTo(current)) {
                                         temporaryOpenNodes.add(offset);
                                     }
                                 } else {
-                                    T potentialConsumer = getInteraction(getWorld(), offset, direction);
+                                    T potentialConsumer = getInteraction(getPipeWorld(), offset, direction);
                                     if (potentialConsumer != null && this.canInsertInto(potentialConsumer)) {
                                         this.getConsumers().add(new Node<>(potentialConsumer, direction, node));
                                     }

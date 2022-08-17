@@ -47,6 +47,10 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<En
         BlockState state = this.getCachedState();
         BlockState state2 = world.getBlockState(pos);
 
+        if (state.isAir() || state2.isAir()) {
+            return;
+        }
+
         if (!state.get(CableBlock.DIRECTIONS.get(this.getSource().direction()))) {
             return;
         }
@@ -91,10 +95,20 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<En
     }
 
     @Override
+    public World getPipeWorld() {
+        return this.world;
+    }
+
+    @Override
     public long getTransferAmount() {
         if (this.getCachedState().getBlock() instanceof CableBlock cableBlock) {
             return cableBlock.getTransferRate();
         }
         return 0;
+    }
+
+    @Override
+    public BlockPos getPipePos() {
+        return this.getPos();
     }
 }

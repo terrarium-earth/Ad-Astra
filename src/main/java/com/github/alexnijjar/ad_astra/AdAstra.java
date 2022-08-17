@@ -44,7 +44,7 @@ public class AdAstra implements ModInitializer {
 		ModEntityTypes.register();
 		ModScreenHandlers.register();
 		ModCommands.register();
-		ModSounds.register();
+		ModSoundEvents.register();
 		ModParticleTypes.register();
 		ModPaintings.register();
 
