@@ -23,6 +23,7 @@ public class ModModelProvider extends FabricModelProvider implements ModBlocks {
 	public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
 		blockStateModelGenerator.registerTorch(COAL_TORCH, WALL_COAL_TORCH);
 		blockStateModelGenerator.registerDoor(STEEL_DOOR);
+		blockStateModelGenerator.registerTrapdoor(STEEL_TRAPDOOR);
 		for (Block block : blocks) {
 			Identifier id = Registry.BLOCK.getId(block);
 			if (block instanceof StairsBlock stair) {
@@ -74,6 +75,8 @@ public class ModModelProvider extends FabricModelProvider implements ModBlocks {
 		registerSlab(blockStateModelGenerator, CHISELED_GLACIO_STONE_SLAB, CHISELED_GLACIO_STONE_BRICKS);
 		registerSlab(blockStateModelGenerator, POLISHED_GLACIO_STONE_SLAB, POLISHED_GLACIO_STONE);
 		registerSlab(blockStateModelGenerator, PERMAFROST_BRICK_SLAB, PERMAFROST_BRICKS);
+		registerSlab(blockStateModelGenerator, POLISHED_PERMAFROST_SLAB, POLISHED_PERMAFROST);
+		registerSlab(blockStateModelGenerator, CHISELED_PERMAFROST_BRICK_SLAB, CHISELED_PERMAFROST_BRICKS);
 	}
 
 	public static void registerSlab(BlockStateModelGenerator blockStateModelGenerator, Block slab, Block source) {

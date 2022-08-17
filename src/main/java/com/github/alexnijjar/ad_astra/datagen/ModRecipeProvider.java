@@ -1,8 +1,12 @@
 package com.github.alexnijjar.ad_astra.datagen;
 
+import java.util.List;
+import java.util.function.Consumer;
+
 import com.github.alexnijjar.ad_astra.registry.ModBlocks;
 import com.github.alexnijjar.ad_astra.registry.ModItems;
 import com.github.alexnijjar.ad_astra.registry.ModTags;
+
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.block.Blocks;
@@ -14,9 +18,6 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.tag.TagKey;
-
-import java.util.List;
-import java.util.function.Consumer;
 
 class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 	ModRecipeProvider(FabricDataGenerator dataGenerator) {
@@ -74,6 +75,8 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		offerCustomSlabRecipe(exporter, OSTRUM_PLATING_SLAB, OSTRUM_PLATING);
 		offerCustomSlabRecipe(exporter, CALORITE_PLATING_SLAB, CALORITE_PLATING);
 		offerCustomSlabRecipe(exporter, PERMAFROST_BRICK_SLAB, PERMAFROST_BRICKS);
+		offerCustomSlabRecipe(exporter, POLISHED_PERMAFROST_SLAB, POLISHED_PERMAFROST);
+		offerCustomSlabRecipe(exporter, CHISELED_PERMAFROST_BRICK_SLAB, CHISELED_PERMAFROST_BRICKS);
 
 		// Walls
 		offerWallRecipe(exporter, MOON_STONE_BRICK_WALL, MOON_STONE_BRICKS);
@@ -81,6 +84,7 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		offerWallRecipe(exporter, VENUS_STONE_BRICK_WALL, VENUS_STONE_BRICKS);
 		offerWallRecipe(exporter, MERCURY_STONE_BRICK_WALL, MERCURY_STONE_BRICKS);
 		offerWallRecipe(exporter, GLACIO_STONE_BRICK_WALL, GLACIO_STONE_BRICKS);
+		offerWallRecipe(exporter, PERMAFROST_BRICK_WALL, PERMAFROST_BRICKS);
 
 		// Stairs
 		offerStairsRecipe(exporter, MOON_STONE_BRICK_STAIRS, MOON_STONE_BRICKS);
@@ -104,6 +108,8 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		offerStairsRecipe(exporter, OSTRUM_PLATING_STAIRS, OSTRUM_PLATING);
 		offerStairsRecipe(exporter, CALORITE_PLATING_STAIRS, CALORITE_PLATING);
 		offerStairsRecipe(exporter, PERMAFROST_BRICK_STAIRS, PERMAFROST_BRICKS);
+		offerStairsRecipe(exporter, POLISHED_PERMAFROST_STAIRS, POLISHED_PERMAFROST);
+		offerStairsRecipe(exporter, CHISELED_PERMAFROST_BRICK_STAIRS, CHISELED_PERMAFROST_BRICKS);
 
 		// Buttons
 		offerButtonRecipe(exporter, IRON_PLATING_BUTTON, IRON_PLATING);
@@ -136,6 +142,7 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		offerStonecuttingRecipe(exporter, CHISELED_VENUS_STONE_BRICKS, VENUS_STONE);
 		offerStonecuttingRecipe(exporter, CHISELED_MERCURY_STONE_BRICKS, MERCURY_STONE);
 		offerStonecuttingRecipe(exporter, CHISELED_GLACIO_STONE_BRICKS, GLACIO_STONE);
+		offerStonecuttingRecipe(exporter, CHISELED_PERMAFROST_BRICKS, PERMAFROST);
 
 		// Polished
 		offerStonecuttingRecipe(exporter, POLISHED_MOON_STONE, MOON_STONE);
@@ -144,6 +151,7 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		offerStonecuttingRecipe(exporter, POLISHED_MERCURY_STONE, MERCURY_STONE);
 		offerStonecuttingRecipe(exporter, POLISHED_GLACIO_STONE, GLACIO_STONE);
 		offerStonecuttingRecipe(exporter, POLISHED_CONGLOMERATE, CONGLOMERATE);
+		offerStonecuttingRecipe(exporter, POLISHED_PERMAFROST, PERMAFROST);
 		// <---
 
 		// Pillars
@@ -157,6 +165,7 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		offerPillarRecipe(exporter, DESH_PILLAR, DESH_PLATING);
 		offerPillarRecipe(exporter, OSTRUM_PILLAR, OSTRUM_PLATING);
 		offerPillarRecipe(exporter, CALORITE_PILLAR, CALORITE_PLATING);
+		offerPillarRecipe(exporter, PERMAFROST_PILLAR, PERMAFROST_BRICKS);
 
 		// Compacting
 		offerReversibleCompactingRecipes(exporter, ModItems.STEEL_INGOT, STEEL_BLOCK);
@@ -183,6 +192,8 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		offerPolishedStoneRecipe(exporter, POLISHED_VENUS_STONE, VENUS_STONE);
 		offerPolishedStoneRecipe(exporter, POLISHED_MERCURY_STONE, MERCURY_STONE);
 		offerPolishedStoneRecipe(exporter, POLISHED_GLACIO_STONE, GLACIO_STONE);
+		offerPolishedStoneRecipe(exporter, POLISHED_CONGLOMERATE, CONGLOMERATE);
+		offerPolishedStoneRecipe(exporter, POLISHED_PERMAFROST, PERMAFROST);
 
 		// Chiseled
 		offerChiseledBlockRecipe(exporter, CHISELED_MOON_STONE_BRICKS, MOON_STONE_BRICK_SLAB);
@@ -190,6 +201,7 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		offerChiseledBlockRecipe(exporter, CHISELED_VENUS_STONE_BRICKS, VENUS_STONE_BRICK_SLAB);
 		offerChiseledBlockRecipe(exporter, CHISELED_MERCURY_STONE_BRICKS, MERCURY_STONE_BRICK_SLAB);
 		offerChiseledBlockRecipe(exporter, CHISELED_GLACIO_STONE_BRICKS, GLACIO_STONE_BRICK_SLAB);
+		offerChiseledBlockRecipe(exporter, CHISELED_PERMAFROST_BRICKS, PERMAFROST_BRICK_SLAB);
 
 		// Bricks
 		offerQuadRecipe(exporter, MOON_STONE_BRICKS, MOON_STONE);
@@ -199,6 +211,8 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		offerQuadRecipe(exporter, GLACIO_STONE_BRICKS, GLACIO_STONE);
 		offerQuadRecipe(exporter, PERMAFROST_BRICKS, PERMAFROST);
 		offerQuadRecipe(exporter, VENUS_SANDSTONE_BRICKS, VENUS_SANDSTONE);
+
+		offerQuadRecipe(exporter, PERMAFROST_TILES, PERMAFROST_BRICKS);
 
 		// Sandstone
 		offerQuadRecipe(exporter, VENUS_SANDSTONE, VENUS_SAND);
@@ -212,14 +226,16 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 
 		// Metals
 
-		ShapedRecipeJsonFactory.create(IRON_PLATING, 32).m_hadhiznl(Character.valueOf('#'), ModTags.IRON_PLATES).pattern("###").pattern("###").pattern("###").group("iron_plates")
-				.criterion("has_tag", method_10420(ModTags.COMPRESSED_STEEL)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(IRON_PLATING, 32).m_hadhiznl(Character.valueOf('#'), ModTags.IRON_PLATES).pattern("###").pattern("###").pattern("###").group("iron_plates").criterion("has_tag", method_10420(ModTags.COMPRESSED_STEEL))
+				.offerTo(exporter);
 		offerPlatingRecipe(exporter, STEEL_PLATING, ModTags.COMPRESSED_STEEL);
 		offerPlatingRecipe(exporter, DESH_PLATING, ModTags.DESH_PLATES);
 		offerPlatingRecipe(exporter, OSTRUM_PLATING, ModTags.COMPRESSED_OSTRUM);
 		offerPlatingRecipe(exporter, CALORITE_PLATING, ModTags.COMPRESSED_CALORITE);
 
 		createDoorRecipe(STEEL_DOOR, Ingredient.ofItems(ModItems.COMPRESSED_STEEL)).criterion("has_tag", method_10420(ModTags.COMPRESSED_STEEL)).offerTo(exporter);
+
+		createTrapdoorRecipe(STEEL_TRAPDOOR, Ingredient.ofItems(ModItems.COMPRESSED_STEEL)).criterion("has_tag", method_10420(ModTags.COMPRESSED_STEEL)).offerTo(exporter);
 
 		ShapedRecipeJsonFactory.create(BLUE_IRON_PILLAR, 6).m_hadhiznl(Character.valueOf('#'), ModTags.IRON_PLATES).input(Character.valueOf('G'), Blocks.GLOWSTONE).input(Character.valueOf('B'), Items.BLUE_DYE).pattern("#B#").pattern("#G#").pattern("#B#")
 				.group("blue_iron_pillar").criterion("has_tag", method_10420(ModTags.IRON_PLATES)).offerTo(exporter);
@@ -273,6 +289,19 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		// Oxygen Sensor
 		ShapedRecipeJsonFactory.create(OXYGEN_SENSOR).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_OSTRUM).input(Character.valueOf('O'), ModItems.OSTRUM_INGOT).input(Character.valueOf('V'), Items.OBSERVER)
 				.input(Character.valueOf('L'), Items.REDSTONE_LAMP).input(Character.valueOf('F'), ModItems.ENGINE_FAN).pattern("#F#").pattern("OVO").pattern("#L#").group(null).criterion("has_tag", method_10420(ModTags.COMPRESSED_OSTRUM)).offerTo(exporter);
+
+		// Cables
+		ShapedRecipeJsonFactory.create(STEEL_CABLE, 4).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_STEEL).input(Character.valueOf('C'), Items.COPPER_INGOT).pattern("###").pattern("CCC").pattern("###").group(null)
+				.criterion("has_tag", method_10420(ModTags.COMPRESSED_STEEL)).offerTo(exporter);
+
+		ShapedRecipeJsonFactory.create(DESH_CABLE, 4).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_DESH).input(Character.valueOf('C'), Items.COPPER_INGOT).pattern("###").pattern("CCC").pattern("###").group(null)
+				.criterion("has_tag", method_10420(ModTags.COMPRESSED_DESH)).offerTo(exporter);
+
+		ShapedRecipeJsonFactory.create(DESH_FLUID_PIPE, 4).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_DESH).input(Character.valueOf('C'), Items.GLASS).pattern("###").pattern("CCC").pattern("###").group(null)
+				.criterion("has_tag", method_10420(ModTags.COMPRESSED_DESH)).offerTo(exporter);
+
+		ShapedRecipeJsonFactory.create(OSTRUM_FLUID_PIPE, 4).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_OSTRUM).input(Character.valueOf('C'), Items.GLASS).pattern("###").pattern("CCC").pattern("###").group(null)
+				.criterion("has_tag", method_10420(ModTags.COMPRESSED_OSTRUM)).offerTo(exporter);
 
 		// Flags
 		offerFlagRecipe(exporter, FLAG, Blocks.WHITE_WOOL);
@@ -405,6 +434,8 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 
 		ShapedRecipeJsonFactory.create(ModItems.CALORITE_TANK).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_CALORITE).m_hadhiznl(Character.valueOf('|'), ModTags.IRON_RODS).input(Character.valueOf('U'), Items.BUCKET).pattern("## ").pattern("#U|")
 				.pattern("## ").group("tanks").criterion("has_tag", method_10420(ModTags.COMPRESSED_CALORITE)).offerTo(exporter);
+
+		ShapedRecipeJsonFactory.create(ModItems.WRENCH).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_DESH).pattern("# #").pattern(" # ").pattern(" # ").group(null).criterion("has_tag", method_10420(ModTags.COMPRESSED_DESH)).offerTo(exporter);
 
 		// Fin
 		ShapedRecipeJsonFactory.create(ModItems.ROCKET_FIN, 4).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_STEEL).pattern(" # ").pattern("###").pattern("# #").group(null).criterion("has_tag", method_10420(ModTags.COMPRESSED_STEEL))

@@ -118,92 +118,96 @@ public class OxygenUtils {
 	}
 
 	/**
-	 * Removes the oxygen from a set of blocks. For example, turns water into ice or air, converts torches into coal torches, puts
-	 * out flames, kills plants etc.
+	 * Removes the oxygen from a set of blocks. For example, turns water into ice or air, converts torches into coal torches, puts out flames, kills plants etc.
 	 */
 	public static void deoxygenizeBlocks(ServerWorld world, Set<BlockPos> entries, BlockPos source) {
-		if (entries == null) {
-			return;
-		}
-		if (entries.isEmpty()) {
-			return;
-		}
-
-		if (worldHasOxygen(world)) {
-			oxygenLocations.remove(getOxygenSource(world, source));
-			return;
-		}
-
-		for (BlockPos pos : new HashSet<>(entries)) {
-
-			BlockState state = world.getBlockState(pos);
-
-			oxygenLocations.get(getOxygenSource(world, source)).remove(pos);
-			if (worldHasOxygen(world, pos)) {
-				continue;
+		try {
+			if (entries == null) {
+				return;
+			}
+			if (entries.isEmpty()) {
+				return;
 			}
 
-			if (state.isAir()) {
-				continue;
+			if (worldHasOxygen(world)) {
+				oxygenLocations.remove(getOxygenSource(world, source));
+				return;
 			}
 
-			Block block = state.getBlock();
-			if (block instanceof WallTorchBlock && !block.equals(Blocks.SOUL_WALL_TORCH)) {
-				world.setBlockState(pos, ModBlocks.WALL_COAL_TORCH.getDefaultState().with(WallTorchBlock.FACING, state.get(WallTorchBlock.FACING)));
-				continue;
-			}
+			for (BlockPos pos : new HashSet<>(entries)) {
 
-			if (block instanceof TorchBlock && !block.equals(Blocks.SOUL_TORCH) && !block.equals(Blocks.SOUL_WALL_TORCH)) {
-				world.setBlockState(pos, ModBlocks.COAL_TORCH.getDefaultState());
-				continue;
-			}
+				BlockState state = world.getBlockState(pos);
 
-			if (block instanceof CandleCakeBlock) {
-				world.setBlockState(pos, block.getDefaultState().with(CandleCakeBlock.LIT, false));
-				continue;
-			}
+				oxygenLocations.get(getOxygenSource(world, source)).remove(pos);
+				if (worldHasOxygen(world, pos)) {
+					continue;
+				}
 
-			if (block instanceof CandleBlock) {
-				world.setBlockState(pos, block.getDefaultState().with(CandleBlock.CANDLES, state.get(CandleBlock.CANDLES)).with(CandleBlock.LIT, false));
-				continue;
-			}
+				if (state.isAir()) {
+					continue;
+				}
 
-			if (block instanceof FireBlock) {
-				world.removeBlock(pos, false);
-				continue;
-			}
+				Block block = state.getBlock();
+				if (block instanceof WallTorchBlock && !block.equals(Blocks.SOUL_WALL_TORCH)) {
+					world.setBlockState(pos, ModBlocks.WALL_COAL_TORCH.getDefaultState().with(WallTorchBlock.FACING, state.get(WallTorchBlock.FACING)));
+					continue;
+				}
 
-			if (block instanceof CampfireBlock) {
-				world.setBlockState(pos, state.with(CampfireBlock.LIT, false).with(CampfireBlock.FACING, state.get(CampfireBlock.FACING)));
-				continue;
-			}
+				if (block instanceof TorchBlock && !block.equals(Blocks.SOUL_TORCH) && !block.equals(Blocks.SOUL_WALL_TORCH)) {
+					world.setBlockState(pos, ModBlocks.COAL_TORCH.getDefaultState());
+					continue;
+				}
 
-			if (block instanceof GrassBlock) {
-				world.setBlockState(pos, Blocks.DIRT.getDefaultState());
-				continue;
-			}
+				if (block instanceof CandleCakeBlock) {
+					world.setBlockState(pos, block.getDefaultState().with(CandleCakeBlock.LIT, false));
+					continue;
+				}
 
-			if (block instanceof PlantBlock || block instanceof CactusBlock || block instanceof VineBlock) {
-				world.removeBlock(pos, true);
-				continue;
-			}
+				if (block instanceof CandleBlock) {
+					world.setBlockState(pos, block.getDefaultState().with(CandleBlock.CANDLES, state.get(CandleBlock.CANDLES)).with(CandleBlock.LIT, false));
+					continue;
+				}
 
-			if (block instanceof FarmlandBlock) {
-				world.setBlockState(pos, state.with(FarmlandBlock.MOISTURE, 0));
-				continue;
-			}
+				if (block instanceof FireBlock) {
+					world.removeBlock(pos, false);
+					continue;
+				}
 
-			if (state.getFluidState().isIn(FluidTags.WATER)) {
-				if (!block.equals(ModFluids.CRYO_FUEL_BLOCK)) {
-					if (ModUtils.getWorldTemperature(world) < 0) {
-						world.setBlockState(pos, Blocks.ICE.getDefaultState());
-					} else {
-						world.setBlockState(pos, Blocks.AIR.getDefaultState());
+				if (block instanceof CampfireBlock) {
+					world.setBlockState(pos, state.with(CampfireBlock.LIT, false).with(CampfireBlock.FACING, state.get(CampfireBlock.FACING)));
+					continue;
+				}
+
+				if (block instanceof GrassBlock) {
+					world.setBlockState(pos, Blocks.DIRT.getDefaultState());
+					continue;
+				}
+
+				if (block instanceof PlantBlock || block instanceof CactusBlock || block instanceof VineBlock) {
+					world.removeBlock(pos, true);
+					continue;
+				}
+
+				if (block instanceof FarmlandBlock) {
+					world.setBlockState(pos, state.with(FarmlandBlock.MOISTURE, 0));
+					continue;
+				}
+
+				if (state.getFluidState().isIn(FluidTags.WATER)) {
+					if (!block.equals(ModFluids.CRYO_FUEL_BLOCK)) {
+						if (ModUtils.getWorldTemperature(world) < 0) {
+							world.setBlockState(pos, Blocks.ICE.getDefaultState());
+						} else {
+							world.setBlockState(pos, Blocks.AIR.getDefaultState());
+						}
+					} else if (state.contains(Properties.WATERLOGGED)) {
+						world.setBlockState(pos, state.with(Properties.WATERLOGGED, false));
 					}
-				} else if (state.contains(Properties.WATERLOGGED)) {
-					world.setBlockState(pos, state.with(Properties.WATERLOGGED, false));
 				}
 			}
+		} catch (UnsupportedOperationException e) {
+			AdAstra.LOGGER.error("Error deoxygenizing blocks");
+			e.printStackTrace();
 		}
 	}
 

@@ -11,8 +11,8 @@ import net.minecraft.util.math.BlockPos;
 
 public abstract class FluidMachineBlockEntity extends AbstractMachineBlockEntity {
 
-	public final SingleVariantStorage<FluidVariant> inputTank = FluidUtils.createTank(this, getInputSize());
-	public final SingleVariantStorage<FluidVariant> outputTank = FluidUtils.createTank(this, getOutputSize());
+	public final SingleVariantStorage<FluidVariant> inputTank = FluidUtils.createTank(this, getInputSize(), true, true);
+	public final SingleVariantStorage<FluidVariant> outputTank = FluidUtils.createTank(this, getOutputSize(), true, true);
 
 	public FluidMachineBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
 		super(blockEntityType, blockPos, blockState);

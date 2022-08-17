@@ -22,6 +22,8 @@
     "ad_astra:desh_plating_stairs",
     "ad_astra:ostrum_plating_stairs",
     "ad_astra:calorite_plating_stairs",
-    "ad_astra:permafrost_brick_stairs"
+    "ad_astra:permafrost_brick_stairs",
+    "ad_astra:chiseled_permafrost_brick_stairs",
+    "ad_astra:polished_permafrost_stairs"
   ]
 }

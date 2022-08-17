@@ -1,26 +1,36 @@
 package com.github.alexnijjar.ad_astra.mixin.client;
 
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.registry.ModSounds;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
 import com.github.alexnijjar.ad_astra.util.OxygenUtils;
+
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.sound.Sound;
 import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.client.sound.SoundManager;
+import net.minecraft.client.sound.SoundSystem;
 import net.minecraft.client.sound.WeightedSoundSet;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 // Custom space sounds.
 @Mixin(SoundManager.class)
 public class SoundManagerMixin {
+
+	@Shadow
+	@Final
+	private SoundSystem soundSystem;
 
 	@Inject(method = "Lnet/minecraft/client/sound/SoundManager;play(Lnet/minecraft/client/sound/SoundInstance;)V", at = @At("HEAD"), cancellable = true)
 	public void play(SoundInstance sound, CallbackInfo ci) {
@@ -32,6 +42,7 @@ public class SoundManagerMixin {
 		this.modifySound(sound, delay, ci);
 	}
 
+	@Unique
 	private void modifySound(SoundInstance sound, int delay, CallbackInfo ci) {
 		if (sound.getCategory().equals(SoundCategory.MASTER)) {
 			return;
@@ -61,13 +72,13 @@ public class SoundManagerMixin {
 			boolean noOxygen = !OxygenUtils.worldHasOxygen(client.world, new BlockPos(sound.getX(), sound.getY(), sound.getZ()));
 			if (client.world != null && noOxygen || sound.getCategory().equals(SoundCategory.MUSIC) || sound.getCategory().equals(SoundCategory.RECORDS)) {
 				ci.cancel();
-				SoundManager manager = (SoundManager) (Object) (this);
 				SoundInstance newSound = getSpaceSoundInstance(sound, ((sound.getCategory().equals(SoundCategory.MUSIC) || sound.getCategory().equals(SoundCategory.RECORDS)) ? 1.0f : 0.1f), 0.1f);
-				manager.soundSystem.play(newSound);
+				this.soundSystem.play(newSound);
 			}
 		}
 	}
 
+	@Unique
 	private static SoundInstance getSpaceSoundInstance(SoundInstance sound, float volume, float pitch) {
 		return new SoundInstance() {
 

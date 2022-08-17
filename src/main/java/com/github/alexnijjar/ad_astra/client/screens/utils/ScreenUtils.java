@@ -3,10 +3,16 @@ package com.github.alexnijjar.ad_astra.client.screens.utils;
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.util.ColourHolder;
 import com.mojang.blaze3d.systems.RenderSystem;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
-import net.minecraft.client.render.*;
+import net.minecraft.client.render.BufferBuilder;
+import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.render.Tessellator;
+import net.minecraft.client.render.VertexFormat;
+import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
@@ -31,6 +37,13 @@ public class ScreenUtils {
 
 	public static void addRotatingTexture(PlanetSelectionScreen screen, MatrixStack matrices, int x, int y, int width, int height, Identifier texture, float speed) {
 
+		double scale = MinecraftClient.getInstance().getWindow().getScaleFactor();
+		x /= scale / 5.3;
+		y /= scale / 5.3;
+
+		width /= scale / 5.3;
+		height /= scale / 5.3;
+
 		matrices.push();
 
 		matrices.translate(screen.width / 2.0f, screen.height / 2.0f, 0);
@@ -38,7 +51,6 @@ public class ScreenUtils {
 
 		addTexture(matrices, x, y, width, height, texture);
 
-		matrices.translate(-screen.width / 2.0f, -screen.height / 2.0f, 0);
 		matrices.pop();
 	}
 
@@ -47,6 +59,9 @@ public class ScreenUtils {
 		Tessellator tessellator = Tessellator.getInstance();
 		BufferBuilder bufferBuilder = tessellator.getBuffer();
 		RenderSystem.setShader(GameRenderer::getPositionColorShader);
+
+		double scale = MinecraftClient.getInstance().getWindow().getScaleFactor();
+		radius /= scale / 5.3;
 
 		double width = radius - 0.6;
 		for (double i = width; i < radius - 0.5 + 1; i += 0.1) {

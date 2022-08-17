@@ -1,21 +1,21 @@
-package com.github.alexnijjar.ad_astra.blocks.cables;
+package com.github.alexnijjar.ad_astra.blocks.pipes;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
-import net.fabricmc.fabric.api.lookup.v1.block.BlockApiLookup;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 import team.reborn.energy.api.EnergyStorage;
 import team.reborn.energy.api.EnergyStorageUtil;
 
-import java.util.*;
-
 public class CableBlockEntity extends BlockEntity implements InteractablePipe<EnergyStorage> {
-    private final List<EnergyStorage> consumers = new ArrayList<>();
-    private EnergyStorage source;
+    private List<Node<EnergyStorage>> consumers = new ArrayList<>();
+    private Node<EnergyStorage> source;
 
     public CableBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.CABLE, pos, state);
@@ -43,11 +43,21 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<En
 
     @Override
     @SuppressWarnings("UnstableApiUsage")
-    public int insertInto(EnergyStorage consumer, int leftover) {
-        if (getSource() != null && !getConsumers().isEmpty()) {
-            return leftover - (int) EnergyStorageUtil.move(getSource(), consumer, Math.max(0, leftover / getConsumers().size()), null);
+    public void insertInto(EnergyStorage consumer, Direction direction, BlockPos pos) {
+        BlockState state = this.getCachedState();
+        BlockState state2 = world.getBlockState(pos);
+
+        if (!state.get(CableBlock.DIRECTIONS.get(this.getSource().direction()))) {
+            return;
         }
-        return leftover;
+
+        if (!state2.get(CableBlock.DIRECTIONS.get(direction))) {
+            return;
+        }
+
+        if (getSource().storage() != null && getConsumers().size() > 0) {
+            EnergyStorageUtil.move(getSource().storage(), consumer, Math.max(0, this.getTransferAmount() / getConsumers().size()), null);
+        }
     }
 
     @Override
@@ -56,12 +66,12 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<En
     }
 
     @Override
-    public @Nullable EnergyStorage getSource() {
+    public Node<EnergyStorage> getSource() {
         return source;
     }
 
     @Override
-    public void setSource(EnergyStorage source) {
+    public void setSource(Node<EnergyStorage> source) {
         this.source = source;
     }
 
@@ -71,8 +81,8 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<En
     }
 
     @Override
-    public List<EnergyStorage> getConsumers() {
-        return consumers;
+    public List<Node<EnergyStorage>> getConsumers() {
+        return this.consumers;
     }
 
     @Override
@@ -81,8 +91,8 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<En
     }
 
     @Override
-    public int getTransferAmount() {
-        if(this.getCachedState().getBlock() instanceof CableBlock cableBlock) {
+    public long getTransferAmount() {
+        if (this.getCachedState().getBlock() instanceof CableBlock cableBlock) {
             return cableBlock.getTransferRate();
         }
         return 0;

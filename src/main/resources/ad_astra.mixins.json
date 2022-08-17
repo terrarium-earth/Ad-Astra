@@ -30,12 +30,10 @@
     "gravity.PotionEntityMixin",
     "gravity.ThrownEntityMixin",
     "ServerPlayNetworkHandlerMixin",
-    "ServerPlayNetworkHandlerAccessor",
     "ServerWorldMixin"
   ],
   "client": [
     "client.BipedEntityModelMixin",
-    "client.CameraInvoker",
     "client.CameraMixin",
     "client.ClientPlayerEntityMixin",
     "client.EntityRendererMixin",
