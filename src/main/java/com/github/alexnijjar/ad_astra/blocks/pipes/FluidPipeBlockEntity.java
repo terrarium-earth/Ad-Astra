@@ -50,6 +50,10 @@ public class FluidPipeBlockEntity extends BlockEntity implements InteractablePip
         BlockState state = this.getCachedState();
         BlockState state2 = world.getBlockState(pos);
 
+        if (state.isAir() || state2.isAir()) {
+            return;
+        }
+
         if (!(state.getBlock() instanceof FluidPipeBlock && state2.getBlock() instanceof FluidPipeBlock)) {
             return;
         }
@@ -118,11 +122,21 @@ public class FluidPipeBlockEntity extends BlockEntity implements InteractablePip
     }
 
     @Override
+    public World getPipeWorld() {
+        return this.world;
+    }
+
+    @Override
     public long getTransferAmount() {
         if (this.getCachedState().getBlock() instanceof FluidPipeBlock fluidPipe) {
             return fluidPipe.getTransferRate();
         }
         return 0;
+    }
+
+    @Override
+    public BlockPos getPipePos() {
+        return this.getPos();
     }
 
 }

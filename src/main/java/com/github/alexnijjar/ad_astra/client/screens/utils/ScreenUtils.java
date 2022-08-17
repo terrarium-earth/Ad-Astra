@@ -40,6 +40,8 @@ public class ScreenUtils {
 		double scale = MinecraftClient.getInstance().getWindow().getScaleFactor();
 		x /= scale / 5.3;
 		y /= scale / 5.3;
+		x += 1;
+		y += 1;
 
 		width /= scale / 5.3;
 		height /= scale / 5.3;

@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.github.alexnijjar.ad_astra.AdAstra;
-import com.github.alexnijjar.ad_astra.registry.ModSounds;
+import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
 import com.github.alexnijjar.ad_astra.util.OxygenUtils;
 
@@ -51,7 +51,7 @@ public class SoundManagerMixin {
 		if (!AdAstra.CONFIG.general.doSpaceMuffler) {
 			return;
 		}
-		if (sound.getId().equals(ModSounds.ROCKET_LAUNCH_SOUND_ID)) {
+		if (sound.getId().equals(new ModIdentifier("rocket_fly"))) {
 			return;
 		}
 

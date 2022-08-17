@@ -1,13 +1,21 @@
 package com.github.alexnijjar.ad_astra.entities.vehicles;
 
+import java.util.List;
+
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.blocks.pads.RocketLaunchPad;
 import com.github.alexnijjar.ad_astra.items.armour.NetheriteSpaceSuit;
-import com.github.alexnijjar.ad_astra.registry.*;
+import com.github.alexnijjar.ad_astra.registry.ModCriteria;
+import com.github.alexnijjar.ad_astra.registry.ModDamageSource;
+import com.github.alexnijjar.ad_astra.registry.ModFluids;
+import com.github.alexnijjar.ad_astra.registry.ModParticleTypes;
+import com.github.alexnijjar.ad_astra.registry.ModSoundEvents;
 import com.github.alexnijjar.ad_astra.screen.PlanetSelectionScreenHandlerFactory;
 import com.github.alexnijjar.ad_astra.screen.handler.PlanetSelectionScreenHandler;
+import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.github.alexnijjar.ad_astra.util.ModKeyBindings;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
+
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.minecraft.block.BlockState;
@@ -32,8 +40,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.World;
-
-import java.util.List;
 
 public class RocketEntity extends VehicleEntity {
 
@@ -85,11 +91,11 @@ public class RocketEntity extends VehicleEntity {
 
 		// Set the position to teleport out of the rocket
 		Vec3d exitPos = switch (exitDirection) {
-			case 0, 360 -> new Vec3d(pos.getX(), pos.getY(), pos.getZ() + 1.5f);
-			case 90 -> new Vec3d(pos.getX() - 1.5f, pos.getY(), pos.getZ());
-			case -90 -> new Vec3d(pos.getX() + 1.5f, pos.getY(), pos.getZ());
-			case -180, 180 -> new Vec3d(pos.getX(), pos.getY(), pos.getZ() - 1.5f);
-			default -> throw new IllegalArgumentException("Unexpected value: " + exitDirection);
+		case 0, 360 -> new Vec3d(pos.getX(), pos.getY(), pos.getZ() + 1.5f);
+		case 90 -> new Vec3d(pos.getX() - 1.5f, pos.getY(), pos.getZ());
+		case -90 -> new Vec3d(pos.getX() + 1.5f, pos.getY(), pos.getZ());
+		case -180, 180 -> new Vec3d(pos.getX(), pos.getY(), pos.getZ() - 1.5f);
+		default -> throw new IllegalArgumentException("Unexpected value: " + exitDirection);
 		};
 
 		// Place the rider up to 3 blocks below the rocket
@@ -250,7 +256,7 @@ public class RocketEntity extends VehicleEntity {
 
 	public void initiateLaunchSequenceFromServer() {
 		initiateLaunchSequence();
-		world.playSound(null, this.getBlockPos(), ModSounds.ROCKET_LAUNCH_SOUND_EVENT, SoundCategory.AMBIENT, 1, 1);
+		world.playSound(null, this.getBlockPos(), ModSoundEvents.ROCKET_LAUNCH_SOUND_EVENT, SoundCategory.AMBIENT, 1, 1);
 	}
 
 	// Synonymous on client and server.
@@ -370,7 +376,7 @@ public class RocketEntity extends VehicleEntity {
 	}
 
 	public static void stopRocketSoundForRider(ServerPlayerEntity rider) {
-		StopSoundS2CPacket stopSoundS2CPacket = new StopSoundS2CPacket(ModSounds.ROCKET_LAUNCH_SOUND_ID, SoundCategory.AMBIENT);
+		StopSoundS2CPacket stopSoundS2CPacket = new StopSoundS2CPacket(new ModIdentifier("rocket_fly"), SoundCategory.AMBIENT);
 		rider.networkHandler.sendPacket(stopSoundS2CPacket);
 	}
 

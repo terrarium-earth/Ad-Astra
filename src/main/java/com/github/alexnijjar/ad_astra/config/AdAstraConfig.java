@@ -166,7 +166,7 @@ public class AdAstraConfig implements ConfigData {
 
     public static class SolarPanelConfig {
         public long maxEnergy = 18000L;
-        public long energyPerTick = 15L;
+        public double energyMultiplier = 1.0;
     }
 
     public static class WaterPumpConfig {

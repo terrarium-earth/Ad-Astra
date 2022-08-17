@@ -77,6 +77,16 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		offerCustomSlabRecipe(exporter, PERMAFROST_BRICK_SLAB, PERMAFROST_BRICKS);
 		offerCustomSlabRecipe(exporter, POLISHED_PERMAFROST_SLAB, POLISHED_PERMAFROST);
 		offerCustomSlabRecipe(exporter, CHISELED_PERMAFROST_BRICK_SLAB, CHISELED_PERMAFROST_BRICKS);
+		offerCustomSlabRecipe(exporter, MOON_COBBLESTONE_SLAB, MOON_COBBLESTONE);
+		offerCustomSlabRecipe(exporter, MARS_COBBLESTONE_SLAB, MARS_COBBLESTONE);
+		offerCustomSlabRecipe(exporter, VENUS_COBBLESTONE_SLAB, VENUS_COBBLESTONE);
+		offerCustomSlabRecipe(exporter, MERCURY_COBBLESTONE_SLAB, MERCURY_COBBLESTONE);
+		offerCustomSlabRecipe(exporter, GLACIO_COBBLESTONE_SLAB, GLACIO_COBBLESTONE);
+		offerCustomSlabRecipe(exporter, MOON_STONE_SLAB, MOON_STONE);
+		offerCustomSlabRecipe(exporter, MARS_STONE_SLAB, MARS_STONE);
+		offerCustomSlabRecipe(exporter, VENUS_STONE_SLAB, VENUS_STONE);
+		offerCustomSlabRecipe(exporter, MERCURY_STONE_SLAB, MERCURY_STONE);
+		offerCustomSlabRecipe(exporter, GLACIO_STONE_SLAB, GLACIO_STONE);
 
 		// Walls
 		offerWallRecipe(exporter, MOON_STONE_BRICK_WALL, MOON_STONE_BRICKS);
@@ -110,6 +120,17 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		offerStairsRecipe(exporter, PERMAFROST_BRICK_STAIRS, PERMAFROST_BRICKS);
 		offerStairsRecipe(exporter, POLISHED_PERMAFROST_STAIRS, POLISHED_PERMAFROST);
 		offerStairsRecipe(exporter, CHISELED_PERMAFROST_BRICK_STAIRS, CHISELED_PERMAFROST_BRICKS);
+		offerStairsRecipe(exporter, MOON_COBBLESTONE_STAIRS, MOON_COBBLESTONE);
+		offerStairsRecipe(exporter, MARS_COBBLESTONE_STAIRS, MARS_COBBLESTONE);
+		offerStairsRecipe(exporter, VENUS_COBBLESTONE_STAIRS, VENUS_COBBLESTONE);
+		offerStairsRecipe(exporter, MERCURY_COBBLESTONE_STAIRS, MERCURY_COBBLESTONE);
+		offerStairsRecipe(exporter, GLACIO_COBBLESTONE_STAIRS, GLACIO_COBBLESTONE);
+		offerStairsRecipe(exporter, MOON_STONE_STAIRS, MOON_STONE);
+		offerStairsRecipe(exporter, MARS_STONE_STAIRS, MARS_STONE);
+		offerStairsRecipe(exporter, VENUS_STONE_STAIRS, VENUS_STONE);
+		offerStairsRecipe(exporter, MERCURY_STONE_STAIRS, MERCURY_STONE);
+		offerStairsRecipe(exporter, GLACIO_STONE_STAIRS, GLACIO_STONE);
+		
 
 		// Buttons
 		offerButtonRecipe(exporter, IRON_PLATING_BUTTON, IRON_PLATING);

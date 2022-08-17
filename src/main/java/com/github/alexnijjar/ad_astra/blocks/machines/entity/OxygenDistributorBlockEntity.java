@@ -191,7 +191,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 
 			if (this.canDistribute(positions.size())) {
 				OxygenUtils.setEntry(this.world, pos, positions);
-			} else {
+			} else if (!world.isClient) {
 				OxygenUtils.removeEntry(this.world, this.getPos());
 			}
 

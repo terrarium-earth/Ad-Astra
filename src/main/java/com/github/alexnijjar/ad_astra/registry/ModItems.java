@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.github.alexnijjar.ad_astra.AdAstra;
+import com.github.alexnijjar.ad_astra.blocks.machines.entity.SolarPanelBlockEntity;
 import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntityTier1;
 import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntityTier2;
 import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntityTier3;
@@ -174,7 +175,7 @@ public interface ModItems extends ModItemGroups {
 	BlockItem SOLAR_PANEL = register("solar_panel", new SolarPanelBlockItem(ModBlocks.SOLAR_PANEL, new FabricItemSettings().group(ITEM_GROUP_MACHINES)) {
 		@Override
 		public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-			tooltip.add((new TranslatableText("item.ad_astra.generator_energy.tooltip", AdAstra.CONFIG.solarPanel.energyPerTick).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
+			tooltip.add((new TranslatableText("item.ad_astra.generator_energy.tooltip", SolarPanelBlockEntity.getEnergyForDimension(world)).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
 			if (world != null && world.isClient) {
 				if (Screen.hasShiftDown()) {
 					tooltip.add((new TranslatableText("item.ad_astra.solar_panel.tooltip[0]").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
@@ -253,7 +254,7 @@ public interface ModItems extends ModItemGroups {
 	});
 
 	Item WRENCH = register("wrench", new WrenchItem(new FabricItemSettings().group(ITEM_GROUP_MACHINES).maxCount(1)));
-	
+
 	Item HAMMER = register("hammer", new HammerItem(new FabricItemSettings().group(ITEM_GROUP_BASICS).maxCount(1).maxDamage(AdAstra.CONFIG.general.hammerDurability)));
 
 	Item IRON_STICK = registerItem("iron_stick", ITEM_GROUP_BASICS);
@@ -383,7 +384,11 @@ public interface ModItems extends ModItemGroups {
 
 	BlockItem MOON_SAND = registerBlockItem(ModBlocks.MOON_SAND);
 	BlockItem MOON_STONE = registerBlockItem(ModBlocks.MOON_STONE);
+	BlockItem MOON_STONE_STAIRS = registerBlockItem(ModBlocks.MOON_STONE_STAIRS);
+	BlockItem MOON_STONE_SLAB = registerBlockItem(ModBlocks.MOON_STONE_SLAB);
 	BlockItem MOON_COBBLESTONE = registerBlockItem(ModBlocks.MOON_COBBLESTONE);
+	BlockItem MOON_COBBLESTONE_STAIRS = registerBlockItem(ModBlocks.MOON_COBBLESTONE_STAIRS);
+	BlockItem MOON_COBBLESTONE_SLAB = registerBlockItem(ModBlocks.MOON_COBBLESTONE_SLAB);
 	BlockItem MOON_STONE_BRICKS = registerBlockItem(ModBlocks.MOON_STONE_BRICKS);
 	BlockItem CRACKED_MOON_STONE_BRICKS = registerBlockItem(ModBlocks.CRACKED_MOON_STONE_BRICKS);
 	BlockItem MOON_STONE_BRICK_SLAB = registerBlockItem(ModBlocks.MOON_STONE_BRICK_SLAB);
@@ -399,7 +404,11 @@ public interface ModItems extends ModItemGroups {
 
 	BlockItem MARS_SAND = registerBlockItem(ModBlocks.MARS_SAND);
 	BlockItem MARS_STONE = registerBlockItem(ModBlocks.MARS_STONE);
+	BlockItem MARS_STONE_STAIRS = registerBlockItem(ModBlocks.MARS_STONE_STAIRS);
+	BlockItem MARS_STONE_SLAB = registerBlockItem(ModBlocks.MARS_STONE_SLAB);
 	BlockItem MARS_COBBLESTONE = registerBlockItem(ModBlocks.MARS_COBBLESTONE);
+	BlockItem MARS_COBBLESTONE_STAIRS = registerBlockItem(ModBlocks.MARS_COBBLESTONE_STAIRS);
+	BlockItem MARS_COBBLESTONE_SLAB = registerBlockItem(ModBlocks.MARS_COBBLESTONE_SLAB);
 	BlockItem MARS_STONE_BRICKS = registerBlockItem(ModBlocks.MARS_STONE_BRICKS);
 	BlockItem CRACKED_MARS_STONE_BRICKS = registerBlockItem(ModBlocks.CRACKED_MARS_STONE_BRICKS);
 	BlockItem MARS_STONE_BRICK_SLAB = registerBlockItem(ModBlocks.MARS_STONE_BRICK_SLAB);
@@ -417,7 +426,11 @@ public interface ModItems extends ModItemGroups {
 
 	BlockItem VENUS_SAND = registerBlockItem(ModBlocks.VENUS_SAND);
 	BlockItem VENUS_STONE = registerBlockItem(ModBlocks.VENUS_STONE);
+	BlockItem VENUS_STONE_STAIRS = registerBlockItem(ModBlocks.VENUS_STONE_STAIRS);
+	BlockItem VENUS_STONE_SLAB = registerBlockItem(ModBlocks.VENUS_STONE_SLAB);
 	BlockItem VENUS_COBBLESTONE = registerBlockItem(ModBlocks.VENUS_COBBLESTONE);
+	BlockItem VENUS_COBBLESTONE_STAIRS = registerBlockItem(ModBlocks.VENUS_COBBLESTONE_STAIRS);
+	BlockItem VENUS_COBBLESTONE_SLAB = registerBlockItem(ModBlocks.VENUS_COBBLESTONE_SLAB);
 	BlockItem VENUS_STONE_BRICKS = registerBlockItem(ModBlocks.VENUS_STONE_BRICKS);
 	BlockItem CRACKED_VENUS_STONE_BRICKS = registerBlockItem(ModBlocks.CRACKED_VENUS_STONE_BRICKS);
 	BlockItem VENUS_STONE_BRICK_SLAB = registerBlockItem(ModBlocks.VENUS_STONE_BRICK_SLAB);
@@ -439,7 +452,11 @@ public interface ModItems extends ModItemGroups {
 	BlockItem INFERNAL_SPIRE_BLOCK = registerBlockItem(ModBlocks.INFERNAL_SPIRE_BLOCK);
 
 	BlockItem MERCURY_STONE = registerBlockItem(ModBlocks.MERCURY_STONE);
+	BlockItem MERCURY_STONE_STAIRS = registerBlockItem(ModBlocks.MERCURY_STONE_STAIRS);
+	BlockItem MERCURY_STONE_SLAB = registerBlockItem(ModBlocks.MERCURY_STONE_SLAB);
 	BlockItem MERCURY_COBBLESTONE = registerBlockItem(ModBlocks.MERCURY_COBBLESTONE);
+	BlockItem MERCURY_COBBLESTONE_STAIRS = registerBlockItem(ModBlocks.MERCURY_COBBLESTONE_STAIRS);
+	BlockItem MERCURY_COBBLESTONE_SLAB = registerBlockItem(ModBlocks.MERCURY_COBBLESTONE_SLAB);
 	BlockItem MERCURY_STONE_BRICKS = registerBlockItem(ModBlocks.MERCURY_STONE_BRICKS);
 	BlockItem CRACKED_MERCURY_STONE_BRICKS = registerBlockItem(ModBlocks.CRACKED_MERCURY_STONE_BRICKS);
 	BlockItem MERCURY_STONE_BRICK_SLAB = registerBlockItem(ModBlocks.MERCURY_STONE_BRICK_SLAB);
@@ -454,7 +471,11 @@ public interface ModItems extends ModItemGroups {
 	BlockItem MERCURY_STONE_BRICK_WALL = registerBlockItem(ModBlocks.MERCURY_STONE_BRICK_WALL);
 
 	BlockItem GLACIO_STONE = registerBlockItem(ModBlocks.GLACIO_STONE);
+	BlockItem GLACIO_STONE_STAIRS = registerBlockItem(ModBlocks.GLACIO_STONE_STAIRS);
+	BlockItem GLACIO_STONE_SLAB = registerBlockItem(ModBlocks.GLACIO_STONE_SLAB);
 	BlockItem GLACIO_COBBLESTONE = registerBlockItem(ModBlocks.GLACIO_COBBLESTONE);
+	BlockItem GLACIO_COBBLESTONE_STAIRS = registerBlockItem(ModBlocks.GLACIO_COBBLESTONE_STAIRS);
+	BlockItem GLACIO_COBBLESTONE_SLAB = registerBlockItem(ModBlocks.GLACIO_COBBLESTONE_SLAB);
 	BlockItem GLACIO_STONE_BRICKS = registerBlockItem(ModBlocks.GLACIO_STONE_BRICKS);
 	BlockItem CRACKED_GLACIO_STONE_BRICKS = registerBlockItem(ModBlocks.CRACKED_GLACIO_STONE_BRICKS);
 	BlockItem GLACIO_STONE_BRICK_SLAB = registerBlockItem(ModBlocks.GLACIO_STONE_BRICK_SLAB);

@@ -1,15 +1,18 @@
 package com.github.alexnijjar.ad_astra.blocks.machines.entity;
 
+import org.jetbrains.annotations.Nullable;
+
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
 import com.github.alexnijjar.ad_astra.screen.handler.SolarPanelScreenHandler;
+import com.github.alexnijjar.ad_astra.util.ModUtils;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 
 public class SolarPanelBlockEntity extends AbstractMachineBlockEntity {
 
@@ -35,12 +38,12 @@ public class SolarPanelBlockEntity extends AbstractMachineBlockEntity {
 
 	@Override
 	public long getEnergyPerTick() {
-		return AdAstra.CONFIG.solarPanel.energyPerTick;
+		return getEnergyForDimension(this.getWorld());
 	}
 
 	@Override
 	public long getMaxEnergyExtract() {
-		return AdAstra.CONFIG.solarPanel.energyPerTick * 2;
+		return (long) (AdAstra.CONFIG.solarPanel.energyMultiplier * 15.0);
 	}
 
 	@Override
@@ -55,6 +58,14 @@ public class SolarPanelBlockEntity extends AbstractMachineBlockEntity {
 			}
 
 			this.energyOut();
+		}
+	}
+
+	public static long getEnergyForDimension(World world) {
+		if (world != null) {
+			return (long) (ModUtils.getSolarEnergy(world.getRegistryKey()) * AdAstra.CONFIG.solarPanel.energyMultiplier);
+		} else {
+			return 0;
 		}
 	}
 }

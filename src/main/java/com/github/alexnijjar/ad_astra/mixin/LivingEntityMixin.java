@@ -131,12 +131,14 @@ public abstract class LivingEntityMixin {
 								if (!hasOxygen) {
 									if (entity.canFreeze() && !entity.isUndead()) {
 										// Particles.
-										Random random = entity.world.getRandom();
-										ModUtils.spawnForcedParticles((world), ParticleTypes.SNOWFLAKE, entity.getX(), entity.getY() + 1, entity.getZ(), 1, MathHelper.nextBetween(random, -1.0f, 1.0f) * 0.083333336f, 0.05,
-												(double) MathHelper.nextBetween(random, -1.0f, 1.0f) * 0.083333336, 0);
+										if (!SpaceSuit.hasFullSet(entity)) {
+											Random random = entity.world.getRandom();
+											ModUtils.spawnForcedParticles((world), ParticleTypes.SNOWFLAKE, entity.getX(), entity.getY() + 1, entity.getZ(), 1, MathHelper.nextBetween(random, -1.0f, 1.0f) * 0.083333336f, 0.05,
+													(double) MathHelper.nextBetween(random, -1.0f, 1.0f) * 0.083333336, 0);
 
-										// Freeze effect, like powdered snow
-										entity.setFrozenTicks(Math.min(entity.getMinFreezeDamageTicks(), entity.getFrozenTicks() + 5));
+											// Freeze effect, like powdered snow
+											entity.setFrozenTicks(Math.min(entity.getMinFreezeDamageTicks(), entity.getFrozenTicks() + 5));
+										}
 										entity.damage(ModDamageSource.OXYGEN, 2);
 										entity.setAir(-20);
 									}
@@ -163,5 +165,5 @@ public abstract class LivingEntityMixin {
 				}
 			}
 		}
-	}	
+	}
 }

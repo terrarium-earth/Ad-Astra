@@ -1,7 +1,7 @@
 {
     "name": "Venus and Mercury",
     "icon": "ad_astra:/textures/sky/venus.png",
-    "sortnum": 4,
+    "sortnum": 5,
     "category": "ad_astra:surviving_mars",
     "pages": [
         {

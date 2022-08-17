@@ -3,6 +3,8 @@ package com.github.alexnijjar.ad_astra.blocks.pipes;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.github.alexnijjar.ad_astra.registry.ModSoundEvents;
+
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
@@ -21,6 +23,7 @@ import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.state.StateManager.Builder;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.EnumProperty;
@@ -194,6 +197,7 @@ public class FluidPipeBlock extends BlockWithEntity implements Waterloggable, Wr
                 property = DIRECTIONS.get(Direction.UP);
             }
             world.setBlockState(pos, state.with(property, this.togglePipeState(state.get(property), user)));
+            world.playSound(null, pos, ModSoundEvents.WRENCH, SoundCategory.BLOCKS, 1, 1);
         }
     }
 
