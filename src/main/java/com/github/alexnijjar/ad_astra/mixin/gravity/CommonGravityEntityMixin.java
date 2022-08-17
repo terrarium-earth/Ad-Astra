@@ -1,19 +1,23 @@
 package com.github.alexnijjar.ad_astra.mixin.gravity;
 
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
 import com.github.alexnijjar.ad_astra.util.ModUtils;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.TntEntity;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.util.math.Vec3d;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = {AbstractMinecartEntity.class, ItemEntity.class, TntEntity.class})
 public abstract class CommonGravityEntityMixin {
 
+	@Unique
 	private static final double CONSTANT = -0.04;
 
 	@Inject(method = "tick", at = @At("TAIL"), cancellable = true)

@@ -115,6 +115,9 @@ public interface ModItemGroups {
 		stacks.add(ModItems.OXYGEN_SENSOR.getDefaultStack());
 		stacks.add(ModItems.STEEL_CABLE.getDefaultStack());
 		stacks.add(ModItems.DESH_CABLE.getDefaultStack());
+		stacks.add(ModItems.DESH_FLUID_PIPE.getDefaultStack());
+		stacks.add(ModItems.OSTRUM_FLUID_PIPE.getDefaultStack());
+		stacks.add(ModItems.WRENCH.getDefaultStack());
 	}).build();
 	ItemGroup ITEM_GROUP_BASICS = FabricItemGroupBuilder.build(new ModIdentifier("tab_basics"), () -> new ItemStack(ModItems.DESH_ENGINE));
 	ItemGroup ITEM_GROUP_MATERIALS = FabricItemGroupBuilder.build(new ModIdentifier("tab_materials"), () -> new ItemStack(ModItems.IRON_PLATE));

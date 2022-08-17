@@ -22,6 +22,8 @@
 		"ad_astra:desh_plating_slab",
 		"ad_astra:ostrum_plating_slab",
 		"ad_astra:calorite_plating_slab",
-		"ad_astra:permafrost_brick_slab"
+		"ad_astra:permafrost_brick_slab",
+		"ad_astra:chiseled_permafrost_brick_slab",
+		"ad_astra:polished_permafrost_slab"
 	]
 }

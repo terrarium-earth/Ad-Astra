@@ -3,7 +3,7 @@
     "galaxy": "ad_astra:milky_way",
     "solar_system": "ad_astra:solar_system",
     "world": "ad_astra:moon",
-    "orbit_world": "ad_astra:earth_orbit",
+    "orbit_world": "ad_astra:moon_orbit",
     "parent_world": "minecraft:overworld",
     "rocket_tier": 1,
     "gravity": 1.625,

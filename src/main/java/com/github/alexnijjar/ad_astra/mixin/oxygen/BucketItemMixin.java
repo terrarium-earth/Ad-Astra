@@ -1,6 +1,7 @@
 package com.github.alexnijjar.ad_astra.mixin.oxygen;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -17,6 +18,7 @@ import net.minecraft.block.FluidFillable;
 import net.minecraft.block.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FlowableFluid;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BucketItem;
 import net.minecraft.particle.ParticleTypes;
@@ -31,7 +33,10 @@ import net.minecraft.world.event.GameEvent;
 
 @Mixin(BucketItem.class)
 @SuppressWarnings("deprecation")
-public class BucketItemMixin {
+public abstract class BucketItemMixin {
+
+	@Shadow
+	private Fluid fluid;
 
 	// Evaporate water in a no-oxygen environment. Water is not evaporated in a oxygen distributor.
 	@Inject(method = "placeFluid", at = @At(value = "HEAD"), cancellable = true)
@@ -41,9 +46,9 @@ public class BucketItemMixin {
 		}
 		BucketItem bucketItem = (BucketItem) (Object) this;
 
-		if (bucketItem.fluid.isIn(FluidTags.WATER)) {
+		if (this.fluid.isIn(FluidTags.WATER)) {
 
-			if (!OxygenUtils.worldHasOxygen(world, pos) && !bucketItem.fluid.equals(ModFluids.CRYO_FUEL_STILL)) {
+			if (!OxygenUtils.worldHasOxygen(world, pos) && !this.fluid.equals(ModFluids.CRYO_FUEL_STILL)) {
 				int i = pos.getX();
 				int j = pos.getY();
 				int k = pos.getZ();
@@ -63,20 +68,20 @@ public class BucketItemMixin {
 				ci.cancel();
 
 				boolean bl2;
-				if (!(bucketItem.fluid instanceof FlowableFluid)) {
+				if (!(this.fluid instanceof FlowableFluid)) {
 					ci.setReturnValue(false);
 				}
 				BlockState blockState = world.getBlockState(pos);
 				Block block = blockState.getBlock();
 				Material material = blockState.getMaterial();
-				boolean bl = blockState.canBucketPlace(bucketItem.fluid);
-				bl2 = blockState.isAir() || bl || block instanceof FluidFillable && ((FluidFillable) block).canFillWithFluid(world, pos, blockState, bucketItem.fluid);
+				boolean bl = blockState.canBucketPlace(this.fluid);
+				bl2 = blockState.isAir() || bl || block instanceof FluidFillable && ((FluidFillable) block).canFillWithFluid(world, pos, blockState, this.fluid);
 				if (!bl2) {
 					ci.setReturnValue(hitResult != null && bucketItem.placeFluid(player, world, hitResult.getBlockPos().offset(hitResult.getSide()), null));
 				}
-				if (block instanceof FluidFillable && bucketItem.fluid.equals(Fluids.WATER)) {
-					((FluidFillable) block).tryFillWithFluid(world, pos, blockState, ((FlowableFluid) bucketItem.fluid).getStill(false));
-					SoundEvent soundEvent = bucketItem.fluid.isIn(FluidTags.LAVA) ? SoundEvents.ITEM_BUCKET_EMPTY_LAVA : SoundEvents.ITEM_BUCKET_EMPTY;
+				if (block instanceof FluidFillable && this.fluid.equals(Fluids.WATER)) {
+					((FluidFillable) block).tryFillWithFluid(world, pos, blockState, ((FlowableFluid) this.fluid).getStill(false));
+					SoundEvent soundEvent = this.fluid.isIn(FluidTags.LAVA) ? SoundEvents.ITEM_BUCKET_EMPTY_LAVA : SoundEvents.ITEM_BUCKET_EMPTY;
 					world.playSound(player, pos, soundEvent, SoundCategory.BLOCKS, 1.0f, 1.0f);
 					world.emitGameEvent(player, GameEvent.FLUID_PLACE, pos);
 					ci.setReturnValue(true);
@@ -84,8 +89,8 @@ public class BucketItemMixin {
 				if (!world.isClient && bl && !material.isLiquid()) {
 					world.breakBlock(pos, true);
 				}
-				if (world.setBlockState(pos, bucketItem.fluid.getDefaultState().getBlockState(), Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD) || blockState.getFluidState().isStill()) {
-					SoundEvent soundEvent = bucketItem.fluid.isIn(FluidTags.LAVA) ? SoundEvents.ITEM_BUCKET_EMPTY_LAVA : SoundEvents.ITEM_BUCKET_EMPTY;
+				if (world.setBlockState(pos, this.fluid.getDefaultState().getBlockState(), Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD) || blockState.getFluidState().isStill()) {
+					SoundEvent soundEvent = this.fluid.isIn(FluidTags.LAVA) ? SoundEvents.ITEM_BUCKET_EMPTY_LAVA : SoundEvents.ITEM_BUCKET_EMPTY;
 					world.playSound(player, pos, soundEvent, SoundCategory.BLOCKS, 1.0f, 1.0f);
 					world.emitGameEvent(player, GameEvent.FLUID_PLACE, pos);
 					ci.setReturnValue(true);

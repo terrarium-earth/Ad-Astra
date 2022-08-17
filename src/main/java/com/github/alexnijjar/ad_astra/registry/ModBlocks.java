@@ -3,7 +3,6 @@ package com.github.alexnijjar.ad_astra.registry;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.github.alexnijjar.ad_astra.blocks.cables.CableBlock;
 import com.github.alexnijjar.ad_astra.blocks.flags.FlagBlock;
 import com.github.alexnijjar.ad_astra.blocks.globes.GlobeBlock;
 import com.github.alexnijjar.ad_astra.blocks.machines.CoalGeneratorBlock;
@@ -18,9 +17,12 @@ import com.github.alexnijjar.ad_astra.blocks.machines.OxygenSensorBlock;
 import com.github.alexnijjar.ad_astra.blocks.machines.SolarPanelBlock;
 import com.github.alexnijjar.ad_astra.blocks.machines.WaterPumpBlock;
 import com.github.alexnijjar.ad_astra.blocks.pads.RocketLaunchPad;
+import com.github.alexnijjar.ad_astra.blocks.pipes.CableBlock;
+import com.github.alexnijjar.ad_astra.blocks.pipes.FluidPipeBlock;
 import com.github.alexnijjar.ad_astra.blocks.torches.CoalLanternBlock;
 import com.github.alexnijjar.ad_astra.blocks.torches.CoalTorchBlock;
 import com.github.alexnijjar.ad_astra.blocks.torches.WallCoalTorchBlock;
+import com.github.alexnijjar.ad_astra.util.FluidUtils;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -36,6 +38,7 @@ import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.block.StoneButtonBlock;
+import net.minecraft.block.TrapdoorBlock;
 import net.minecraft.block.WallBlock;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
@@ -77,11 +80,13 @@ public interface ModBlocks {
 	Block WALL_COAL_TORCH = register("wall_coal_torch", new WallCoalTorchBlock(FabricBlockSettings.of(Material.DECORATION).noCollision().breakInstantly().sounds(BlockSoundGroup.WOOD)), true);
 	Block COAL_LANTERN = register("coal_lantern", new CoalLanternBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.LANTERN).strength(3.5f).nonOpaque()));
 
-	public static final Block STEEL_CABLE = register("steel_cable", new CableBlock(160, 1, 0.344, FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(2.5f, 1.0f)));
-	public static final Block DESH_CABLE = register("desh_cable", new CableBlock(320, 2, 0.312, FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(2.5f, 1.0f)));
+	public static final Block STEEL_CABLE = register("steel_cable", new CableBlock(16, 2, 0.344, FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.NETHERITE).strength(1.0f, 1.0f)));
+	public static final Block DESH_CABLE = register("desh_cable", new CableBlock(32, 1, 0.312, FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.NETHERITE).strength(1.0f, 1.0f)));
+
+	public static final Block DESH_FLUID_PIPE = register("desh_fluid_pipe", new FluidPipeBlock(FluidUtils.millibucketsToDroplets(25), 1, 0.312, FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.NETHERITE).strength(1.0f, 1.0f)));
+	public static final Block OSTRUM_FLUID_PIPE = register("ostrum_fluid_pipe", new FluidPipeBlock(FluidUtils.millibucketsToDroplets(50), 1, 0.312, FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.NETHERITE).strength(1.0f, 1.0f)));
 
 	// Machines
-
 	Block FUEL_REFINERY = register("fuel_refinery", new FuelRefineryBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(5.0f, 1.0f).requiresTool()));
 	Block COMPRESSOR = register("compressor", new CompressorBlock(FabricBlockSettings.copy(FUEL_REFINERY)));
 	Block COAL_GENERATOR = register("coal_generator", new CoalGeneratorBlock(FabricBlockSettings.copy(FUEL_REFINERY)));
@@ -120,6 +125,7 @@ public interface ModBlocks {
 	Block STEEL_PLATING_BUTTON = register("steel_plating_button", new StoneButtonBlock(FabricBlockSettings.copy(Blocks.STONE_BUTTON)));
 	Block STEEL_PLATING_PRESSURE_PLATE = register("steel_plating_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(Blocks.STONE_PRESSURE_PLATE)));
 	Block STEEL_DOOR = register("steel_door", new DoorBlock(FabricBlockSettings.copy(Blocks.IRON_DOOR)), true);
+	Block STEEL_TRAPDOOR = register("steel_trapdoor", new TrapdoorBlock(FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR)));
 
 	Block DESH_PLATING = register("desh_plating", new Block(FabricBlockSettings.copy(Blocks.CUT_COPPER)));
 	Block DESH_PLATING_STAIRS = register("desh_plating_stairs", new StairsBlock(DESH_PLATING.getDefaultState(), FabricBlockSettings.copy(Blocks.CUT_COPPER)));
@@ -241,6 +247,16 @@ public interface ModBlocks {
 	Block PERMAFROST_BRICK_STAIRS = register("permafrost_brick_stairs", new StairsBlock(PERMAFROST_BRICKS.getDefaultState(), FabricBlockSettings.copy(PERMAFROST_BRICKS)));
 	Block PERMAFROST_BRICK_SLAB = register("permafrost_brick_slab", new SlabBlock(FabricBlockSettings.copy(PERMAFROST_BRICKS)));
 	Block CRACKED_PERMAFROST_BRICKS = register("cracked_permafrost_bricks", new Block(FabricBlockSettings.copy(Blocks.STONE)));
+
+	Block PERMAFROST_TILES = register("permafrost_tiles", new Block(FabricBlockSettings.copy(Blocks.CHISELED_STONE_BRICKS)));
+	Block CHISELED_PERMAFROST_BRICKS = register("chiseled_permafrost_bricks", new Block(FabricBlockSettings.copy(Blocks.CHISELED_STONE_BRICKS)));
+	Block CHISELED_PERMAFROST_BRICK_STAIRS = register("chiseled_permafrost_brick_stairs", new StairsBlock(CHISELED_PERMAFROST_BRICKS.getDefaultState(), FabricBlockSettings.copy(CHISELED_PERMAFROST_BRICKS)));
+	Block CHISELED_PERMAFROST_BRICK_SLAB = register("chiseled_permafrost_brick_slab", new SlabBlock(FabricBlockSettings.copy(CHISELED_PERMAFROST_BRICKS)));
+	Block POLISHED_PERMAFROST = register("polished_permafrost", new Block(FabricBlockSettings.copy(Blocks.POLISHED_DIORITE)));
+	Block POLISHED_PERMAFROST_STAIRS = register("polished_permafrost_stairs", new StairsBlock(POLISHED_PERMAFROST.getDefaultState(), FabricBlockSettings.copy(POLISHED_PERMAFROST)));
+	Block POLISHED_PERMAFROST_SLAB = register("polished_permafrost_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.POLISHED_DIORITE)));
+	Block PERMAFROST_PILLAR = register("permafrost_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.STONE_BRICKS)));
+	Block PERMAFROST_BRICK_WALL = register("permafrost_brick_wall", new WallBlock(FabricBlockSettings.copy(Blocks.STONE_BRICK_WALL)));
 
 	// Ores
 	Block MOON_CHEESE_ORE = register("moon_cheese_ore", new OreBlock(FabricBlockSettings.copy(Blocks.IRON_ORE), UniformIntProvider.create(0, 2)), true);

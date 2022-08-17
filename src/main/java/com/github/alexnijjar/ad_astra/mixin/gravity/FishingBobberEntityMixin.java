@@ -1,16 +1,21 @@
 package com.github.alexnijjar.ad_astra.mixin.gravity;
 
-import com.github.alexnijjar.ad_astra.util.ModUtils;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.projectile.FishingBobberEntity;
-import net.minecraft.util.math.Vec3d;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import com.github.alexnijjar.ad_astra.util.ModUtils;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.projectile.FishingBobberEntity;
+import net.minecraft.util.math.Vec3d;
+
 @Mixin(FishingBobberEntity.class)
 public abstract class FishingBobberEntityMixin {
+
+	@Unique
 	private static final double CONSTANT = -0.03;
 
 	@Inject(method = "tick", at = @At("TAIL"), cancellable = true)

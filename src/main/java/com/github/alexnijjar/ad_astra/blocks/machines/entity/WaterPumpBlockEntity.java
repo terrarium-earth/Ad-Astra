@@ -1,11 +1,14 @@
 package com.github.alexnijjar.ad_astra.blocks.machines.entity;
 
+import javax.annotation.Nullable;
+
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.blocks.machines.AbstractMachineBlock;
 import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
 import com.github.alexnijjar.ad_astra.registry.ModParticleTypes;
 import com.github.alexnijjar.ad_astra.screen.handler.WaterPumpScreenHandler;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
+
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
@@ -23,11 +26,9 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 
-import javax.annotation.Nullable;
-
 public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
 
-	public static final Direction[] INSERT_DIRECTIONS = {Direction.UP, Direction.SOUTH};
+	public static final Direction[] INSERT_DIRECTIONS = { Direction.UP, Direction.SOUTH };
 
 	private long waterExtracted;
 
@@ -123,7 +124,7 @@ public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
 					this.drainEnergy();
 				}
 				// Insert the fluid into nearby tanks.
-				for (Direction direction : new Direction[]{Direction.UP, this.getCachedState().get(AbstractMachineBlock.FACING)}) {
+				for (Direction direction : new Direction[] { Direction.UP, this.getCachedState().get(AbstractMachineBlock.FACING) }) {
 					Storage<FluidVariant> storage = FluidStorage.SIDED.find(this.world, this.getPos().offset(direction), direction);
 					if (storage != null) {
 						try (Transaction transaction = Transaction.openOuter()) {

@@ -1,4 +1,4 @@
-package com.github.alexnijjar.ad_astra.blocks.cables;
+package com.github.alexnijjar.ad_astra.blocks.pipes;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,9 +12,12 @@ import net.minecraft.block.Waterloggable;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager.Builder;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
@@ -29,7 +32,7 @@ import net.minecraft.world.WorldAccess;
 import team.reborn.energy.api.EnergyStorage;
 
 @SuppressWarnings("deprecation")
-public class CableBlock extends BlockWithEntity implements Waterloggable {
+public class CableBlock extends BlockWithEntity implements Waterloggable, Wrenchable {
 
     public static final BooleanProperty UP = BooleanProperty.of("up");
     public static final BooleanProperty DOWN = BooleanProperty.of("down");
@@ -39,7 +42,7 @@ public class CableBlock extends BlockWithEntity implements Waterloggable {
     public static final BooleanProperty WEST = BooleanProperty.of("west");
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
-    private int transferRate;
+    private long transferRate;
     private int decay;
     private double size;
 
@@ -52,7 +55,7 @@ public class CableBlock extends BlockWithEntity implements Waterloggable {
         map.put(Direction.WEST, WEST);
     });
 
-    public CableBlock(int transferRate, int decay, double size, Settings settings) {
+    public CableBlock(long transferRate, int decay, double size, Settings settings) {
         super(settings);
         this.setDefaultState(getDefaultState().with(UP, false).with(DOWN, false).with(NORTH, false).with(EAST, false).with(SOUTH, false).with(WEST, false).with(WATERLOGGED, false));
         this.transferRate = transferRate;
@@ -68,8 +71,8 @@ public class CableBlock extends BlockWithEntity implements Waterloggable {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
         return (entityWorld, pos, entityState, blockEntity) -> {
-            if (blockEntity instanceof CableBlockEntity cable) {
-                cable.pipeTick();
+            if (blockEntity instanceof InteractablePipe<?> pipe) {
+                pipe.pipeTick();
             }
         };
     }
@@ -99,6 +102,18 @@ public class CableBlock extends BlockWithEntity implements Waterloggable {
         if (state.get(WATERLOGGED)) {
             world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
+
+        EnergyStorage storage = EnergyStorage.SIDED.find((World)world, neighborPos, null);
+        boolean connect = storage != null || world.getBlockState(neighborPos).getBlock() instanceof CableBlock;
+        if (connect) {
+            world.setBlockState(pos, world.getBlockState(pos).with(DIRECTIONS.get(direction), connect), 0);
+            if (world.getBlockState(neighborPos).getBlock().equals(this)) {
+                world.setBlockState(neighborPos, world.getBlockState(neighborPos).with(DIRECTIONS.get(direction.getOpposite()), true), 0);
+            }
+        } else {
+            world.setBlockState(pos, world.getBlockState(pos).with(DIRECTIONS.get(direction), false), 0);
+        }
+
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
@@ -108,28 +123,24 @@ public class CableBlock extends BlockWithEntity implements Waterloggable {
     }
 
     @Override
-    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
-        super.neighborUpdate(state, world, pos, block, fromPos, notify);
-        this.updateShape(world, pos, state);
-    }
-
-    @Override
-    public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
-        super.onBlockAdded(state, world, pos, oldState, notify);
+    public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
+        super.onPlaced(world, pos, state, placer, itemStack);
         this.updateShape(world, pos, state);
     }
 
     // Expand to other cables and machines
     public void updateShape(World world, BlockPos pos, BlockState state) {
-        for (Direction dir : Direction.values()) {
-            BlockPos offset = pos.offset(dir);
-            boolean connect;
-            EnergyStorage storage = EnergyStorage.SIDED.find(world, offset, dir.getOpposite());
-            connect = storage != null || world.getBlockState(offset).getBlock() instanceof CableBlock;
+        if (!world.isClient) {
+            for (Direction dir : Direction.values()) {
+                BlockPos offset = pos.offset(dir);
+                EnergyStorage storage = EnergyStorage.SIDED.find(world, offset, null);
+                boolean connect = storage != null || world.getBlockState(offset).getBlock() instanceof CableBlock;
 
-            world.setBlockState(pos, world.getBlockState(pos).with(DIRECTIONS.get(dir), connect));
-            if (world.getBlockState(offset).getBlock().equals(this)) {
-                world.setBlockState(offset, world.getBlockState(offset).with(DIRECTIONS.get(dir.getOpposite()), true));
+                world.setBlockState(pos, world.getBlockState(pos).with(DIRECTIONS.get(dir), connect));
+                if (world.getBlockState(offset).getBlock().equals(this)) {
+
+                    world.setBlockState(offset, world.getBlockState(offset).with(DIRECTIONS.get(dir.getOpposite()), true));
+                }
             }
         }
     }
@@ -137,7 +148,7 @@ public class CableBlock extends BlockWithEntity implements Waterloggable {
     // Expand the voxel shape to match the model
     public VoxelShape updateOutlineShape(BlockState state) {
         VoxelShape shape = VoxelShapes.cuboid(size, size, size, 1 - size, 1 - size, 1 - size);
-        
+
         if (state.get(UP)) {
             shape = VoxelShapes.union(shape, VoxelShapes.cuboid(size, size, size, 1 - size, 1, 1 - size));
         }
@@ -160,11 +171,25 @@ public class CableBlock extends BlockWithEntity implements Waterloggable {
         return shape;
     }
 
-    public int getTransferRate() {
-        return transferRate;
+    public long getTransferRate() {
+        return this.transferRate;
     }
 
     public int getDecay() {
-        return decay;
+        return this.decay;
+    }
+
+    @Override
+    public void handleWrench(World world, BlockPos pos, BlockState state, Direction dir, PlayerEntity user) {
+        if (!world.isClient) {
+            BooleanProperty property = DIRECTIONS.get(user.getMovementDirection());
+            int pitch = (int) user.getPitch();
+            if (pitch > 60) {
+                property = DIRECTIONS.get(Direction.DOWN);
+            } else if (pitch < -60) {
+                property = DIRECTIONS.get(Direction.UP);
+            }
+            world.setBlockState(pos, state.with(property, !state.get(property)));
+        }
     }
 }

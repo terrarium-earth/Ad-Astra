@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "ad_astra:block/polished_permafrost_slab"
+    },
+    "type=double": {
+      "model": "ad_astra:block/polished_permafrost"
+    },
+    "type=top": {
+      "model": "ad_astra:block/polished_permafrost_slab_top"
+    }
+  }
+}

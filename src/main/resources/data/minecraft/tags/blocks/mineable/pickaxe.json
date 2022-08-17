@@ -174,11 +174,24 @@
     "ad_astra:calorite_plating_button",
     "ad_astra:calorite_plating_pressure_plate",
     "ad_astra:steel_door",
+    "ad_astra:steel_trapdoor",
     "ad_astra:permafrost_brick_stairs",
     "ad_astra:permafrost_brick_slab",
     "ad_astra:deepslate_ice_shard_ore",
     "ad_astra:deepslate_desh_ore",
     "ad_astra:deepslate_ostrum_ore",
-    "ad_astra:deepslate_calorite_ore"
+    "ad_astra:deepslate_calorite_ore",
+    "ad_astra:steel_cable",
+    "ad_astra:desh_cable",
+    "ad_astra:permafrost_tiles",
+    "ad_astra:chiseled_permafrost_bricks",
+    "ad_astra:chiseled_permafrost_brick_stairs",
+    "ad_astra:chiseled_permafrost_brick_slab",
+    "ad_astra:polished_permafrost",
+    "ad_astra:polished_permafrost_stairs",
+    "ad_astra:polished_permafrost_slab",
+    "ad_astra:permafrost_pillar",
+    "ad_astra:permafrost_brick_wall"
+
   ]
 }

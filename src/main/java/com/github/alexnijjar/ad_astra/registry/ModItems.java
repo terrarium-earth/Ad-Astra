@@ -1,12 +1,23 @@
 package com.github.alexnijjar.ad_astra.registry;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntityTier1;
 import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntityTier2;
 import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntityTier3;
 import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntityTier4;
-import com.github.alexnijjar.ad_astra.items.*;
+import com.github.alexnijjar.ad_astra.items.AstroduxItem;
+import com.github.alexnijjar.ad_astra.items.EnergizerBlockItem;
 import com.github.alexnijjar.ad_astra.items.FluidContainingItem.TankStorage;
+import com.github.alexnijjar.ad_astra.items.HammerItem;
+import com.github.alexnijjar.ad_astra.items.MachineBlockItem;
+import com.github.alexnijjar.ad_astra.items.OxygenTankItem;
+import com.github.alexnijjar.ad_astra.items.SolarPanelBlockItem;
+import com.github.alexnijjar.ad_astra.items.SpacePaintingItem;
+import com.github.alexnijjar.ad_astra.items.WrenchItem;
 import com.github.alexnijjar.ad_astra.items.armour.JetSuit;
 import com.github.alexnijjar.ad_astra.items.armour.NetheriteSpaceSuit;
 import com.github.alexnijjar.ad_astra.items.armour.SpaceSuit;
@@ -14,6 +25,7 @@ import com.github.alexnijjar.ad_astra.items.vehicles.RocketItem;
 import com.github.alexnijjar.ad_astra.items.vehicles.RoverItem;
 import com.github.alexnijjar.ad_astra.util.FluidUtils;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
+
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.minecraft.block.Block;
@@ -21,17 +33,26 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.*;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.BucketItem;
+import net.minecraft.item.FoodComponent;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.item.SpawnEggItem;
+import net.minecraft.item.TallBlockItem;
+import net.minecraft.item.WallStandingBlockItem;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
-import net.minecraft.util.*;
+import net.minecraft.util.Formatting;
+import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
+import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 public interface ModItems extends ModItemGroups {
 
@@ -76,14 +97,10 @@ public interface ModItems extends ModItemGroups {
 	SpaceSuit SPACE_BOOTS = register("space_boots", new SpaceSuit(ModArmour.SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.FEET, new FabricItemSettings().group(ITEM_GROUP_NORMAL)));
 
 	// Netherite Spacesuit
-	NetheriteSpaceSuit NETHERITE_SPACE_HELMET = register("netherite_space_helmet",
-			new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.HEAD, new FabricItemSettings().group(ITEM_GROUP_NORMAL).fireproof()));
-	NetheriteSpaceSuit NETHERITE_SPACE_SUIT = register("netherite_space_suit",
-			new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.CHEST, new FabricItemSettings().group(ITEM_GROUP_NORMAL).fireproof()));
-	NetheriteSpaceSuit NETHERITE_SPACE_PANTS = register("netherite_space_pants",
-			new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.LEGS, new FabricItemSettings().group(ITEM_GROUP_NORMAL).fireproof()));
-	NetheriteSpaceSuit NETHERITE_SPACE_BOOTS = register("netherite_space_boots",
-			new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.FEET, new FabricItemSettings().group(ITEM_GROUP_NORMAL).fireproof()));
+	NetheriteSpaceSuit NETHERITE_SPACE_HELMET = register("netherite_space_helmet", new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.HEAD, new FabricItemSettings().group(ITEM_GROUP_NORMAL).fireproof()));
+	NetheriteSpaceSuit NETHERITE_SPACE_SUIT = register("netherite_space_suit", new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.CHEST, new FabricItemSettings().group(ITEM_GROUP_NORMAL).fireproof()));
+	NetheriteSpaceSuit NETHERITE_SPACE_PANTS = register("netherite_space_pants", new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.LEGS, new FabricItemSettings().group(ITEM_GROUP_NORMAL).fireproof()));
+	NetheriteSpaceSuit NETHERITE_SPACE_BOOTS = register("netherite_space_boots", new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.FEET, new FabricItemSettings().group(ITEM_GROUP_NORMAL).fireproof()));
 
 	// Jet Suit
 	JetSuit JET_SUIT_HELMET = register("jet_suit_helmet", new JetSuit(ModArmour.JET_SUIT_ARMOUR_MATERIAL, EquipmentSlot.HEAD, new FabricItemSettings().group(ITEM_GROUP_NORMAL).fireproof()));
@@ -235,7 +252,8 @@ public interface ModItems extends ModItemGroups {
 		}
 	});
 
-
+	Item WRENCH = register("wrench", new WrenchItem(new FabricItemSettings().group(ITEM_GROUP_MACHINES).maxCount(1)));
+	
 	Item HAMMER = register("hammer", new HammerItem(new FabricItemSettings().group(ITEM_GROUP_BASICS).maxCount(1).maxDamage(AdAstra.CONFIG.general.hammerDurability)));
 
 	Item IRON_STICK = registerItem("iron_stick", ITEM_GROUP_BASICS);
@@ -309,6 +327,9 @@ public interface ModItems extends ModItemGroups {
 	public static final BlockItem STEEL_CABLE = register("steel_cable", new BlockItem(ModBlocks.STEEL_CABLE, new FabricItemSettings().group(ITEM_GROUP_MACHINES)));
 	public static final BlockItem DESH_CABLE = register("desh_cable", new BlockItem(ModBlocks.DESH_CABLE, new FabricItemSettings().group(ITEM_GROUP_MACHINES)));
 
+	public static final BlockItem DESH_FLUID_PIPE = register("desh_fluid_pipe", new BlockItem(ModBlocks.DESH_FLUID_PIPE, new FabricItemSettings().group(ITEM_GROUP_MACHINES)));
+	public static final BlockItem OSTRUM_FLUID_PIPE = register("ostrum_fluid_pipe", new BlockItem(ModBlocks.OSTRUM_FLUID_PIPE, new FabricItemSettings().group(ITEM_GROUP_MACHINES)));
+
 	// Block Items
 	BlockItem STEEL_BLOCK = registerBlockItem(ModBlocks.STEEL_BLOCK);
 	BlockItem CHEESE_BLOCK = registerBlockItem(ModBlocks.CHEESE_BLOCK);
@@ -335,6 +356,7 @@ public interface ModItems extends ModItemGroups {
 	BlockItem STEEL_PLATING_BUTTON = registerBlockItem(ModBlocks.STEEL_PLATING_BUTTON);
 	BlockItem STEEL_PLATING_PRESSURE_PLATE = registerBlockItem(ModBlocks.STEEL_PLATING_PRESSURE_PLATE);
 	BlockItem STEEL_DOOR = registerBlockItem(ModBlocks.STEEL_DOOR);
+	BlockItem STEEL_TRAPDOOR = registerBlockItem(ModBlocks.STEEL_TRAPDOOR);
 
 	BlockItem DESH_PLATING = registerBlockItem(ModBlocks.DESH_PLATING);
 	BlockItem DESH_PLATING_STAIRS = registerBlockItem(ModBlocks.DESH_PLATING_STAIRS);
@@ -450,6 +472,15 @@ public interface ModItems extends ModItemGroups {
 	BlockItem PERMAFROST_BRICK_STAIRS = registerBlockItem(ModBlocks.PERMAFROST_BRICK_STAIRS);
 	BlockItem PERMAFROST_BRICK_SLAB = registerBlockItem(ModBlocks.PERMAFROST_BRICK_SLAB);
 	BlockItem CRACKED_PERMAFROST_BRICKS = registerBlockItem(ModBlocks.CRACKED_PERMAFROST_BRICKS);
+	BlockItem PERMAFROST_TILES = registerBlockItem(ModBlocks.PERMAFROST_TILES);
+	BlockItem CHISELED_PERMAFROST_BRICKS = registerBlockItem(ModBlocks.CHISELED_PERMAFROST_BRICKS);
+	BlockItem CHISELED_PERMAFROST_BRICK_STAIRS = registerBlockItem(ModBlocks.CHISELED_PERMAFROST_BRICK_STAIRS);
+	BlockItem CHISELED_PERMAFROST_BRICK_SLAB = registerBlockItem(ModBlocks.CHISELED_PERMAFROST_BRICK_SLAB);
+	BlockItem POLISHED_PERMAFROST = registerBlockItem(ModBlocks.POLISHED_PERMAFROST);
+	BlockItem POLISHED_PERMAFROST_STAIRS = registerBlockItem(ModBlocks.POLISHED_PERMAFROST_STAIRS);
+	BlockItem POLISHED_PERMAFROST_SLAB = registerBlockItem(ModBlocks.POLISHED_PERMAFROST_SLAB);
+	BlockItem PERMAFROST_PILLAR = registerBlockItem(ModBlocks.PERMAFROST_PILLAR);
+	BlockItem PERMAFROST_BRICK_WALL = registerBlockItem(ModBlocks.PERMAFROST_BRICK_WALL);
 
 	BlockItem MOON_CHEESE_ORE = registerBlockItem(ModBlocks.MOON_CHEESE_ORE);
 	BlockItem MOON_DESH_ORE = registerBlockItem(ModBlocks.MOON_DESH_ORE);

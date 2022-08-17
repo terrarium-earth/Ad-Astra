@@ -1,5 +1,11 @@
 package com.github.alexnijjar.ad_astra.mixin.client;
 
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
 import com.github.alexnijjar.ad_astra.client.renderer.spacesuit.AbstractSpaceSuitModel;
 import com.github.alexnijjar.ad_astra.client.renderer.spacesuit.JetSuitModel;
 import com.github.alexnijjar.ad_astra.client.renderer.spacesuit.SpaceSuitModel;
@@ -8,6 +14,7 @@ import com.github.alexnijjar.ad_astra.items.armour.JetSuit;
 import com.github.alexnijjar.ad_astra.items.armour.NetheriteSpaceSuit;
 import com.github.alexnijjar.ad_astra.items.armour.SpaceSuit;
 import com.github.alexnijjar.ad_astra.items.vehicles.VehicleItem;
+
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.OverlayTexture;
@@ -20,10 +27,6 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3f;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PlayerEntityRenderer.class)
 public class PlayerEntityRendererMixin {
@@ -49,6 +52,7 @@ public class PlayerEntityRendererMixin {
 	}
 
 	// Render space suit arm in first person.
+	@Unique
 	private void renderArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, boolean right) {
 		if (player.getEquippedStack(EquipmentSlot.CHEST).getItem() instanceof SpaceSuit spaceSuit) {
 

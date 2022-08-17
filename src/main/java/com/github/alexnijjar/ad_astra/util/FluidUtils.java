@@ -42,7 +42,7 @@ public class FluidUtils {
 	/**
 	 * Creates a fluid tank for a block entity. Every time the tank is modified, the block entity is marked dirty.
 	 */
-	public static <T extends ConversionRecipe> SingleVariantStorage<FluidVariant> createTank(FluidMachineBlockEntity blockEntity, long tankSize) {
+	public static <T extends ConversionRecipe> SingleVariantStorage<FluidVariant> createTank(FluidMachineBlockEntity blockEntity, long tankSize, boolean insert, boolean extract) {
 		return new SingleVariantStorage<>() {
 			@Override
 			protected FluidVariant getBlankVariant() {
@@ -57,6 +57,15 @@ public class FluidUtils {
 			@Override
 			protected void onFinalCommit() {
 				blockEntity.markDirty();
+			}
+
+			protected boolean canInsert(FluidVariant variant) {
+				return insert;
+			}
+
+			@Override
+			protected boolean canExtract(FluidVariant variant) {
+				return extract;
 			}
 		};
 	}

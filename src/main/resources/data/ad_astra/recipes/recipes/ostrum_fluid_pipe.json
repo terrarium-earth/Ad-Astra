@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "CCC",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:compressed_ostrum"
+    },
+    "C": {
+      "item": "minecraft:glass"
+    }
+  },
+  "result": {
+    "item": "ad_astra:ostrum_fluid_pipe",
+    "count": 4
+  }
+}

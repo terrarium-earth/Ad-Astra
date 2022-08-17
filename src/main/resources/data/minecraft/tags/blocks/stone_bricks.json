@@ -19,6 +19,8 @@
     "ad_astra:chiseled_mercury_stone_bricks",
     "ad_astra:chiseled_glacio_stone_bricks",
     "ad_astra:permafrost_bricks",
-    "ad_astra:cracked_permafrost_bricks"
+    "ad_astra:cracked_permafrost_bricks",
+    "ad_astra:permafrost_tiles",
+    "ad_astra:chiseled_permafrost_bricks"
   ]
 }

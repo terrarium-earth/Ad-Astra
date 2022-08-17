@@ -1,24 +1,26 @@
 {
-    "replace": false,
-    "values": [
-      "ad_astra:moon_stone_bricks",
-      "ad_astra:cracked_moon_stone_bricks",
-      "ad_astra:mars_stone_bricks",
-      "ad_astra:cracked_mars_stone_bricks",
-      "ad_astra:mercury_stone_bricks",
-      "ad_astra:cracked_mercury_stone_bricks",
-      "ad_astra:venus_stone_bricks",
-      "ad_astra:cracked_venus_stone_bricks",
-      "ad_astra:venus_sandstone_bricks",
-      "ad_astra:cracked_venus_sandstone_bricks",
-      "ad_astra:glacio_stone_bricks",
-      "ad_astra:cracked_glacio_stone_bricks",
-      "ad_astra:chiseled_moon_stone_bricks",
-      "ad_astra:chiseled_mars_stone_bricks",
-      "ad_astra:chiseled_venus_stone_bricks",
-      "ad_astra:chiseled_mercury_stone_bricks",
-      "ad_astra:chiseled_glacio_stone_bricks",
-      "ad_astra:permafrost_bricks",
-      "ad_astra:cracked_permafrost_bricks"
-    ]
-  }
+  "replace": false,
+  "values": [
+    "ad_astra:moon_stone_bricks",
+    "ad_astra:cracked_moon_stone_bricks",
+    "ad_astra:mars_stone_bricks",
+    "ad_astra:cracked_mars_stone_bricks",
+    "ad_astra:mercury_stone_bricks",
+    "ad_astra:cracked_mercury_stone_bricks",
+    "ad_astra:venus_stone_bricks",
+    "ad_astra:cracked_venus_stone_bricks",
+    "ad_astra:venus_sandstone_bricks",
+    "ad_astra:cracked_venus_sandstone_bricks",
+    "ad_astra:glacio_stone_bricks",
+    "ad_astra:cracked_glacio_stone_bricks",
+    "ad_astra:chiseled_moon_stone_bricks",
+    "ad_astra:chiseled_mars_stone_bricks",
+    "ad_astra:chiseled_venus_stone_bricks",
+    "ad_astra:chiseled_mercury_stone_bricks",
+    "ad_astra:chiseled_glacio_stone_bricks",
+    "ad_astra:permafrost_bricks",
+    "ad_astra:cracked_permafrost_bricks",
+    "ad_astra:permafrost_tiles",
+    "ad_astra:chiseled_permafrost_bricks"
+  ]
+}
