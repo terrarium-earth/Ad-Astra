@@ -1,4 +1,4 @@
-package com.github.alexnijjar.beyond_earth.blocks.coal_torches;
+package com.github.alexnijjar.ad_astra.blocks.coal_torches;
 
 import java.util.Map;
 

@@ -1,6 +1,6 @@
-package com.github.alexnijjar.beyond_earth.blocks.coal_torches;
+package com.github.alexnijjar.ad_astra.blocks.coal_torches;
 
-import com.github.alexnijjar.beyond_earth.util.ModUtils;
+import com.github.alexnijjar.ad_astra.util.ModUtils;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

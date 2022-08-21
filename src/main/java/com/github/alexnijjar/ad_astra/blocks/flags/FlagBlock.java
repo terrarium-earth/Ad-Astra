@@ -1,4 +1,4 @@
-package com.github.alexnijjar.beyond_earth.blocks.flags;
+package com.github.alexnijjar.ad_astra.blocks.flags;
 
 import java.util.stream.Stream;
 

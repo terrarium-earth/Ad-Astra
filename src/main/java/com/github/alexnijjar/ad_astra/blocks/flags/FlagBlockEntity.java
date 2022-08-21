@@ -1,6 +1,6 @@
-package com.github.alexnijjar.beyond_earth.blocks.flags;
+package com.github.alexnijjar.ad_astra.blocks.flags;
 
-import com.github.alexnijjar.beyond_earth.registry.ModBlockEntities;
+import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
 import com.mojang.authlib.GameProfile;
 
 import org.jetbrains.annotations.Nullable;
