@@ -1,4 +1,4 @@
-package com.github.alexnijjar.beyond_earth.blocks.globes;
+package com.github.alexnijjar.ad_astra.blocks.globes;
 
 import org.jetbrains.annotations.Nullable;
 

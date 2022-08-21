@@ -1,11 +1,11 @@
-package com.github.alexnijjar.beyond_earth.commands;
+package com.github.alexnijjar.ad_astra.commands;
 
 import static net.minecraft.server.command.CommandManager.argument;
 
 import java.util.Collection;
 import java.util.List;
 
-import com.github.alexnijjar.beyond_earth.gui.PlanetSelectionScreenHandlerFactory;
+import com.github.alexnijjar.ad_astra.gui.PlanetSelectionScreenHandlerFactory;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;

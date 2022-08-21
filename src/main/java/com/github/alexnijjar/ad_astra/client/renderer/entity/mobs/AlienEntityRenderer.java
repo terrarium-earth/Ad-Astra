@@ -1,8 +1,8 @@
-package com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs;
+package com.github.alexnijjar.ad_astra.client.renderer.entity.mobs;
 
-import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.models.AlienEntityModel;
-import com.github.alexnijjar.beyond_earth.entities.mobs.AlienEntity;
-import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
+import com.github.alexnijjar.ad_astra.client.renderer.entity.mobs.models.AlienEntityModel;
+import com.github.alexnijjar.ad_astra.entities.mobs.AlienEntity;
+import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;

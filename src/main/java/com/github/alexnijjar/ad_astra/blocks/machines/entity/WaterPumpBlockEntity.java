@@ -1,11 +1,11 @@
-package com.github.alexnijjar.beyond_earth.blocks.machines.entity;
+package com.github.alexnijjar.ad_astra.blocks.machines.entity;
 
 import javax.annotation.Nullable;
 
-import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.blocks.machines.AbstractMachineBlock;
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.WaterPumpScreenHandler;
-import com.github.alexnijjar.beyond_earth.registry.ModBlockEntities;
+import com.github.alexnijjar.ad_astra.BeyondEarth;
+import com.github.alexnijjar.ad_astra.blocks.machines.AbstractMachineBlock;
+import com.github.alexnijjar.ad_astra.gui.screen_handlers.WaterPumpScreenHandler;
+import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
 
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;

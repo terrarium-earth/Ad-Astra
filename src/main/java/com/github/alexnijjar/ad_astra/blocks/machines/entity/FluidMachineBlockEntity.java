@@ -1,6 +1,6 @@
-package com.github.alexnijjar.beyond_earth.blocks.machines.entity;
+package com.github.alexnijjar.ad_astra.blocks.machines.entity;
 
-import com.github.alexnijjar.beyond_earth.util.FluidUtils;
+import com.github.alexnijjar.ad_astra.util.FluidUtils;
 
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;

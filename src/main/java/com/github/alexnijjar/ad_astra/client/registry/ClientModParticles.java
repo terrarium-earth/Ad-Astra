@@ -1,10 +1,10 @@
-package com.github.alexnijjar.beyond_earth.client.registry;
+package com.github.alexnijjar.ad_astra.client.registry;
 
-import com.github.alexnijjar.beyond_earth.client.particles.LargeFlameParticle;
-import com.github.alexnijjar.beyond_earth.client.particles.OxygenBubbleParticle;
-import com.github.alexnijjar.beyond_earth.client.particles.SmallFlameParticle;
-import com.github.alexnijjar.beyond_earth.registry.ModParticleTypes;
-import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
+import com.github.alexnijjar.ad_astra.client.particles.LargeFlameParticle;
+import com.github.alexnijjar.ad_astra.client.particles.OxygenBubbleParticle;
+import com.github.alexnijjar.ad_astra.client.particles.SmallFlameParticle;
+import com.github.alexnijjar.ad_astra.registry.ModParticleTypes;
+import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

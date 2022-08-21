@@ -1,4 +1,4 @@
-package com.github.alexnijjar.beyond_earth.client.resource_pack;
+package com.github.alexnijjar.ad_astra.client.resource_pack;
 
 import java.util.List;
 

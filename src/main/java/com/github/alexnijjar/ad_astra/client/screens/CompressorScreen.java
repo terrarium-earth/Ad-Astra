@@ -1,10 +1,10 @@
-package com.github.alexnijjar.beyond_earth.client.screens;
+package com.github.alexnijjar.ad_astra.client.screens;
 
 import java.awt.Rectangle;
 
-import com.github.alexnijjar.beyond_earth.blocks.machines.entity.CompressorBlockEntity;
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.CompressorScreenHandler;
-import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
+import com.github.alexnijjar.ad_astra.blocks.machines.entity.CompressorBlockEntity;
+import com.github.alexnijjar.ad_astra.gui.screen_handlers.CompressorScreenHandler;
+import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -48,12 +48,12 @@ public class CompressorScreen extends AbstractMachineScreen<CompressorScreenHand
 
         // Energy tooltip.
         if (GuiUtil.isHovering(this.getEnergyBounds(), mouseX, mouseY)) {
-            this.renderTooltip(matrices, Text.translatable("gauge_text.beyond_earth.storage", this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration()), mouseX, mouseY);
+            this.renderTooltip(matrices, Text.translatable("gauge_text.ad_astra.storage", this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration()), mouseX, mouseY);
         }
 
         // Burn time tooltip.
         if (GuiUtil.isHovering(this.getArrowBounds(), mouseX, mouseY)) {
-            this.renderTooltip(matrices, Text.translatable("gauge.beyond_earth.cook_time", entity.getCookTime(), entity.getCookTimeTotal()), mouseX, mouseY);
+            this.renderTooltip(matrices, Text.translatable("gauge.ad_astra.cook_time", entity.getCookTime(), entity.getCookTimeTotal()), mouseX, mouseY);
         }
     }
 

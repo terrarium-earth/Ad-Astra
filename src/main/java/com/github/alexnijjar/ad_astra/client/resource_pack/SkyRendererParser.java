@@ -1,9 +1,9 @@
-package com.github.alexnijjar.beyond_earth.client.resource_pack;
+package com.github.alexnijjar.ad_astra.client.resource_pack;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import com.github.alexnijjar.beyond_earth.util.ColourHolder;
+import com.github.alexnijjar.ad_astra.util.ColourHolder;
 import com.google.gson.JsonObject;
 
 import net.fabricmc.api.EnvType;

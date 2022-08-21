@@ -1,7 +1,7 @@
-package com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.models;
+package com.github.alexnijjar.ad_astra.client.renderer.entity.mobs.models;
 
-import com.github.alexnijjar.beyond_earth.entities.mobs.AlienEntity;
-import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
+import com.github.alexnijjar.ad_astra.entities.mobs.AlienEntity;
+import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 
 import net.minecraft.client.model.Dilation;
 import net.minecraft.client.model.ModelData;

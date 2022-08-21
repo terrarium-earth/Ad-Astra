@@ -1,9 +1,9 @@
-package com.github.alexnijjar.beyond_earth.compat.rei.coal_generator;
+package com.github.alexnijjar.ad_astra.compat.rei.coal_generator;
 
 import java.util.List;
 
-import com.github.alexnijjar.beyond_earth.compat.rei.REICategories;
-import com.github.alexnijjar.beyond_earth.recipes.GeneratingRecipe;
+import com.github.alexnijjar.ad_astra.compat.rei.REICategories;
+import com.github.alexnijjar.ad_astra.recipes.GeneratingRecipe;
 
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.Display;

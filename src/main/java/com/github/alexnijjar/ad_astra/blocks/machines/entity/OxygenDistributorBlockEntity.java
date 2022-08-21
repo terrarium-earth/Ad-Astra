@@ -1,19 +1,19 @@
-package com.github.alexnijjar.beyond_earth.blocks.machines.entity;
+package com.github.alexnijjar.ad_astra.blocks.machines.entity;
 
 import java.util.List;
 import java.util.Set;
 
 import javax.annotation.Nullable;
 
-import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.client.utils.ClientOxygenUtils;
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.OxygenDistributorScreenHandler;
-import com.github.alexnijjar.beyond_earth.recipes.OxygenConversionRecipe;
-import com.github.alexnijjar.beyond_earth.registry.ModBlockEntities;
-import com.github.alexnijjar.beyond_earth.registry.ModRecipes;
-import com.github.alexnijjar.beyond_earth.util.FluidUtils;
-import com.github.alexnijjar.beyond_earth.util.OxygenFillerAlgorithm;
-import com.github.alexnijjar.beyond_earth.util.OxygenUtils;
+import com.github.alexnijjar.ad_astra.BeyondEarth;
+import com.github.alexnijjar.ad_astra.client.utils.ClientOxygenUtils;
+import com.github.alexnijjar.ad_astra.gui.screen_handlers.OxygenDistributorScreenHandler;
+import com.github.alexnijjar.ad_astra.recipes.OxygenConversionRecipe;
+import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
+import com.github.alexnijjar.ad_astra.registry.ModRecipes;
+import com.github.alexnijjar.ad_astra.util.FluidUtils;
+import com.github.alexnijjar.ad_astra.util.OxygenFillerAlgorithm;
+import com.github.alexnijjar.ad_astra.util.OxygenUtils;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

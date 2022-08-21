@@ -1,15 +1,15 @@
-package com.github.alexnijjar.beyond_earth.blocks.machines.entity;
+package com.github.alexnijjar.ad_astra.blocks.machines.entity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.NasaWorkbenchScreenHandler;
-import com.github.alexnijjar.beyond_earth.recipes.NasaWorkbenchRecipe;
-import com.github.alexnijjar.beyond_earth.registry.ModBlockEntities;
-import com.github.alexnijjar.beyond_earth.registry.ModRecipes;
-import com.github.alexnijjar.beyond_earth.util.ModUtils;
+import com.github.alexnijjar.ad_astra.gui.screen_handlers.NasaWorkbenchScreenHandler;
+import com.github.alexnijjar.ad_astra.recipes.NasaWorkbenchRecipe;
+import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
+import com.github.alexnijjar.ad_astra.registry.ModRecipes;
+import com.github.alexnijjar.ad_astra.util.ModUtils;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.ItemEntity;

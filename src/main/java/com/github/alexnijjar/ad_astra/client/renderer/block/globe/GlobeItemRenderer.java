@@ -1,4 +1,4 @@
-package com.github.alexnijjar.beyond_earth.client.renderer.block.globe;
+package com.github.alexnijjar.ad_astra.client.renderer.block.globe;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

@@ -1,14 +1,14 @@
-package com.github.alexnijjar.beyond_earth.client.screens.utils;
+package com.github.alexnijjar.ad_astra.client.screens.utils;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import com.github.alexnijjar.beyond_earth.client.screens.utils.PlanetSelectionScreen.TooltipType;
-import com.github.alexnijjar.beyond_earth.data.ButtonColour;
-import com.github.alexnijjar.beyond_earth.data.Planet;
-import com.github.alexnijjar.beyond_earth.util.ColourHolder;
-import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
-import com.github.alexnijjar.beyond_earth.util.ModUtils;
+import com.github.alexnijjar.ad_astra.client.screens.utils.PlanetSelectionScreen.TooltipType;
+import com.github.alexnijjar.ad_astra.data.ButtonColour;
+import com.github.alexnijjar.ad_astra.data.Planet;
+import com.github.alexnijjar.ad_astra.util.ColourHolder;
+import com.github.alexnijjar.ad_astra.util.ModIdentifier;
+import com.github.alexnijjar.ad_astra.util.ModUtils;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.fabricmc.api.EnvType;

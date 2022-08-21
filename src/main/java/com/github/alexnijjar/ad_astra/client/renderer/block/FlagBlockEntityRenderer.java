@@ -1,9 +1,9 @@
-package com.github.alexnijjar.beyond_earth.client.renderer.block;
+package com.github.alexnijjar.ad_astra.client.renderer.block;
 
 import java.util.Map;
 
-import com.github.alexnijjar.beyond_earth.blocks.flags.FlagBlock;
-import com.github.alexnijjar.beyond_earth.blocks.flags.FlagBlockEntity;
+import com.github.alexnijjar.ad_astra.blocks.flags.FlagBlock;
+import com.github.alexnijjar.ad_astra.blocks.flags.FlagBlockEntity;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 

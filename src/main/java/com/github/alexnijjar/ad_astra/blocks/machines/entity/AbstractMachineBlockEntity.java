@@ -1,9 +1,9 @@
-package com.github.alexnijjar.beyond_earth.blocks.machines.entity;
+package com.github.alexnijjar.ad_astra.blocks.machines.entity;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.github.alexnijjar.beyond_earth.blocks.machines.AbstractMachineBlock;
-import com.github.alexnijjar.beyond_earth.util.ModInventory;
+import com.github.alexnijjar.ad_astra.blocks.machines.AbstractMachineBlock;
+import com.github.alexnijjar.ad_astra.util.ModInventory;
 
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;

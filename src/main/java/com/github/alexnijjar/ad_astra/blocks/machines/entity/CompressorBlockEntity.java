@@ -1,12 +1,12 @@
-package com.github.alexnijjar.beyond_earth.blocks.machines.entity;
+package com.github.alexnijjar.ad_astra.blocks.machines.entity;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.CompressorScreenHandler;
-import com.github.alexnijjar.beyond_earth.recipes.CookingRecipe;
-import com.github.alexnijjar.beyond_earth.registry.ModBlockEntities;
-import com.github.alexnijjar.beyond_earth.registry.ModRecipes;
+import com.github.alexnijjar.ad_astra.BeyondEarth;
+import com.github.alexnijjar.ad_astra.gui.screen_handlers.CompressorScreenHandler;
+import com.github.alexnijjar.ad_astra.recipes.CookingRecipe;
+import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
+import com.github.alexnijjar.ad_astra.registry.ModRecipes;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;

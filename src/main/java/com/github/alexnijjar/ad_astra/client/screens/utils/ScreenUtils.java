@@ -1,6 +1,6 @@
-package com.github.alexnijjar.beyond_earth.client.screens.utils;
+package com.github.alexnijjar.ad_astra.client.screens.utils;
 
-import com.github.alexnijjar.beyond_earth.BeyondEarth;
+import com.github.alexnijjar.ad_astra.BeyondEarth;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.fabricmc.api.EnvType;

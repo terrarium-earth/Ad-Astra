@@ -1,6 +1,6 @@
-package com.github.alexnijjar.beyond_earth.blocks.machines;
+package com.github.alexnijjar.ad_astra.blocks.machines;
 
-import com.github.alexnijjar.beyond_earth.blocks.machines.entity.NasaWorkbenchBlockEntity;
+import com.github.alexnijjar.ad_astra.blocks.machines.entity.NasaWorkbenchBlockEntity;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

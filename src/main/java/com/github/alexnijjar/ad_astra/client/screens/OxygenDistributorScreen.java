@@ -1,19 +1,19 @@
-package com.github.alexnijjar.beyond_earth.client.screens;
+package com.github.alexnijjar.ad_astra.client.screens;
 
 import java.awt.Rectangle;
 import java.util.Arrays;
 
-import com.github.alexnijjar.beyond_earth.blocks.machines.entity.FluidMachineBlockEntity;
-import com.github.alexnijjar.beyond_earth.blocks.machines.entity.OxygenDistributorBlockEntity;
-import com.github.alexnijjar.beyond_earth.client.screens.utils.ButtonSize;
-import com.github.alexnijjar.beyond_earth.client.screens.utils.CustomButton;
-import com.github.alexnijjar.beyond_earth.client.screens.utils.PlanetSelectionScreen.TooltipType;
-import com.github.alexnijjar.beyond_earth.client.screens.utils.ScreenUtils;
-import com.github.alexnijjar.beyond_earth.client.utils.ClientOxygenUtils;
-import com.github.alexnijjar.beyond_earth.data.ButtonColour;
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.OxygenDistributorScreenHandler;
-import com.github.alexnijjar.beyond_earth.util.FluidUtils;
-import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
+import com.github.alexnijjar.ad_astra.blocks.machines.entity.FluidMachineBlockEntity;
+import com.github.alexnijjar.ad_astra.blocks.machines.entity.OxygenDistributorBlockEntity;
+import com.github.alexnijjar.ad_astra.client.screens.utils.ButtonSize;
+import com.github.alexnijjar.ad_astra.client.screens.utils.CustomButton;
+import com.github.alexnijjar.ad_astra.client.screens.utils.PlanetSelectionScreen.TooltipType;
+import com.github.alexnijjar.ad_astra.client.screens.utils.ScreenUtils;
+import com.github.alexnijjar.ad_astra.client.utils.ClientOxygenUtils;
+import com.github.alexnijjar.ad_astra.data.ButtonColour;
+import com.github.alexnijjar.ad_astra.gui.screen_handlers.OxygenDistributorScreenHandler;
+import com.github.alexnijjar.ad_astra.util.FluidUtils;
+import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -80,21 +80,21 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
 
         // Energy tooltip.
         if (GuiUtil.isHovering(this.getEnergyBounds(), mouseX, mouseY)) {
-            this.renderTooltip(matrices, Text.translatable("gauge_text.beyond_earth.storage", this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration()), mouseX, mouseY);
+            this.renderTooltip(matrices, Text.translatable("gauge_text.ad_astra.storage", this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration()), mouseX, mouseY);
         }
 
         if (GuiUtil.isHovering(this.getInputTankBounds(), mouseX, mouseY)) {
-            this.renderTooltip(matrices, Text.translatable("gauge_text.beyond_earth.liquid_storage", FluidUtils.dropletsToMillibuckets(entity.inputTank.getAmount()), FluidUtils.dropletsToMillibuckets(entity.inputTank.getCapacity())), mouseX, mouseY);
+            this.renderTooltip(matrices, Text.translatable("gauge_text.ad_astra.liquid_storage", FluidUtils.dropletsToMillibuckets(entity.inputTank.getAmount()), FluidUtils.dropletsToMillibuckets(entity.inputTank.getCapacity())), mouseX, mouseY);
         }
 
         if (GuiUtil.isHovering(this.getOutputTankBounds(), mouseX, mouseY)) {
-            this.renderTooltip(matrices, Text.translatable("gauge_text.beyond_earth.liquid_storage", FluidUtils.dropletsToMillibuckets(entity.outputTank.getAmount()), FluidUtils.dropletsToMillibuckets(entity.outputTank.getCapacity())), mouseX, mouseY);
+            this.renderTooltip(matrices, Text.translatable("gauge_text.ad_astra.liquid_storage", FluidUtils.dropletsToMillibuckets(entity.outputTank.getAmount()), FluidUtils.dropletsToMillibuckets(entity.outputTank.getCapacity())), mouseX, mouseY);
         }
 
         if (ClientOxygenUtils.oxygenLeak) {
             if (GuiUtil.isHovering(getWarningSignBounds(), mouseX, mouseY)) {
-                this.renderTooltip(matrices, Arrays.asList(Text.translatable("gauge_text.beyond_earth.oxygen_leak_warning[0]"), Text.translatable("gauge_text.beyond_earth.oxygen_leak_warning[1]"),
-                        Text.translatable("gauge_text.beyond_earth.oxygen_leak_warning[2]"), Text.translatable("gauge_text.beyond_earth.oxygen_leak_warning[3]"), Text.translatable("gauge_text.beyond_earth.oxygen_leak_warning[4]")), mouseX, mouseY);
+                this.renderTooltip(matrices, Arrays.asList(Text.translatable("gauge_text.ad_astra.oxygen_leak_warning[0]"), Text.translatable("gauge_text.ad_astra.oxygen_leak_warning[1]"),
+                        Text.translatable("gauge_text.ad_astra.oxygen_leak_warning[2]"), Text.translatable("gauge_text.ad_astra.oxygen_leak_warning[3]"), Text.translatable("gauge_text.ad_astra.oxygen_leak_warning[4]")), mouseX, mouseY);
             }
         }
     }

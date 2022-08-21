@@ -1,4 +1,4 @@
-package com.github.alexnijjar.beyond_earth.client.renderer.spacesuit;
+package com.github.alexnijjar.ad_astra.client.renderer.spacesuit;
 
 import java.util.Collections;
 

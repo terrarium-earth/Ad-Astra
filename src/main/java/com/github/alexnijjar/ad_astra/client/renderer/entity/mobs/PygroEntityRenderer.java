@@ -1,10 +1,10 @@
-package com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs;
+package com.github.alexnijjar.ad_astra.client.renderer.entity.mobs;
 
 import java.util.Map;
 
-import com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.models.PygroEntityModel;
-import com.github.alexnijjar.beyond_earth.registry.ModEntityTypes;
-import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
+import com.github.alexnijjar.ad_astra.client.renderer.entity.mobs.models.PygroEntityModel;
+import com.github.alexnijjar.ad_astra.registry.ModEntityTypes;
+import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.google.common.collect.ImmutableMap;
 
 import net.fabricmc.api.EnvType;

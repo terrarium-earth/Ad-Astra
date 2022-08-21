@@ -1,6 +1,6 @@
-package com.github.alexnijjar.beyond_earth.client.renderer.spacesuit;
+package com.github.alexnijjar.ad_astra.client.renderer.spacesuit;
 
-import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
+import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 
 import net.minecraft.client.model.Dilation;
 import net.minecraft.client.model.ModelData;

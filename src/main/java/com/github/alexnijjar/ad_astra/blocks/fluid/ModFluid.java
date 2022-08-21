@@ -1,4 +1,4 @@
-package com.github.alexnijjar.beyond_earth.blocks.fluid;
+package com.github.alexnijjar.ad_astra.blocks.fluid;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

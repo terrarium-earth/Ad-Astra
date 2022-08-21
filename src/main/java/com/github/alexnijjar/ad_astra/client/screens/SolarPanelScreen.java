@@ -1,7 +1,7 @@
-package com.github.alexnijjar.beyond_earth.client.screens;
+package com.github.alexnijjar.ad_astra.client.screens;
 
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.SolarPanelScreenHandler;
-import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
+import com.github.alexnijjar.ad_astra.gui.screen_handlers.SolarPanelScreenHandler;
+import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -27,9 +27,9 @@ public class SolarPanelScreen extends AbstractMachineScreen<SolarPanelScreenHand
         int first = this.titleY;
 
         if (this.blockEntity != null) {
-            this.textRenderer.draw(matrices, Text.translatable("gauge_text.beyond_earth.stored", this.blockEntity.getEnergy()), first, 28, 0x3C3C3C);
-            this.textRenderer.draw(matrices, Text.translatable("gauge_text.beyond_earth.capacity", this.blockEntity.getMaxGeneration()), first, 40, 0x3C3C3C);
-            this.textRenderer.draw(matrices, Text.translatable("gauge_text.beyond_earth.max_generation", this.blockEntity.getEnergyPerTick()), first, 52, 0x3C3C3C);
+            this.textRenderer.draw(matrices, Text.translatable("gauge_text.ad_astra.stored", this.blockEntity.getEnergy()), first, 28, 0x3C3C3C);
+            this.textRenderer.draw(matrices, Text.translatable("gauge_text.ad_astra.capacity", this.blockEntity.getMaxGeneration()), first, 40, 0x3C3C3C);
+            this.textRenderer.draw(matrices, Text.translatable("gauge_text.ad_astra.max_generation", this.blockEntity.getEnergyPerTick()), first, 52, 0x3C3C3C);
         }
     }
 }

@@ -1,7 +1,7 @@
-package com.github.alexnijjar.beyond_earth.client.renderer.block.globe;
+package com.github.alexnijjar.ad_astra.client.renderer.block.globe;
 
-import com.github.alexnijjar.beyond_earth.blocks.globes.GlobeBlock;
-import com.github.alexnijjar.beyond_earth.blocks.globes.GlobeBlockEntity;
+import com.github.alexnijjar.ad_astra.blocks.globes.GlobeBlock;
+import com.github.alexnijjar.ad_astra.blocks.globes.GlobeBlockEntity;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

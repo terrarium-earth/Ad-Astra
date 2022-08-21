@@ -1,11 +1,11 @@
-package com.github.alexnijjar.beyond_earth.client.screens;
+package com.github.alexnijjar.ad_astra.client.screens;
 
 import java.awt.Rectangle;
 
-import com.github.alexnijjar.beyond_earth.blocks.machines.entity.FluidMachineBlockEntity;
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.WaterPumpScreenHandler;
-import com.github.alexnijjar.beyond_earth.util.FluidUtils;
-import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
+import com.github.alexnijjar.ad_astra.blocks.machines.entity.FluidMachineBlockEntity;
+import com.github.alexnijjar.ad_astra.gui.screen_handlers.WaterPumpScreenHandler;
+import com.github.alexnijjar.ad_astra.util.FluidUtils;
+import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -51,12 +51,12 @@ public class WaterPumpScreen extends AbstractMachineScreen<WaterPumpScreenHandle
 
         // Energy tooltip.
         if (GuiUtil.isHovering(this.getEnergyBounds(), mouseX, mouseY)) {
-            this.renderTooltip(matrices, Text.translatable("gauge_text.beyond_earth.storage", this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration()), mouseX, mouseY);
+            this.renderTooltip(matrices, Text.translatable("gauge_text.ad_astra.storage", this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration()), mouseX, mouseY);
         }
 
         // Tank tooltip.
         if (GuiUtil.isHovering(this.getInputTankBounds(), mouseX, mouseY)) {
-            this.renderTooltip(matrices, Text.translatable("gauge_text.beyond_earth.liquid_storage", FluidUtils.dropletsToMillibuckets(entity.inputTank.getAmount()), FluidUtils.dropletsToMillibuckets(entity.inputTank.getCapacity())), mouseX, mouseY);
+            this.renderTooltip(matrices, Text.translatable("gauge_text.ad_astra.liquid_storage", FluidUtils.dropletsToMillibuckets(entity.inputTank.getAmount()), FluidUtils.dropletsToMillibuckets(entity.inputTank.getCapacity())), mouseX, mouseY);
         }
     }
 

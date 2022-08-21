@@ -1,4 +1,4 @@
-package com.github.alexnijjar.beyond_earth.blocks.launch_pad;
+package com.github.alexnijjar.ad_astra.blocks.launch_pad;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;

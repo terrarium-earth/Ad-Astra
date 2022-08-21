@@ -1,12 +1,12 @@
-package com.github.alexnijjar.beyond_earth.client.registry;
+package com.github.alexnijjar.ad_astra.client.registry;
 
-import com.github.alexnijjar.beyond_earth.client.BeyondEarthClient;
-import com.github.alexnijjar.beyond_earth.client.renderer.sky.ModSky;
-import com.github.alexnijjar.beyond_earth.client.renderer.sky.cloud_renderer.ModCloudRenderer;
-import com.github.alexnijjar.beyond_earth.client.renderer.sky.dimension_effects.ModDimensionEffects;
-import com.github.alexnijjar.beyond_earth.client.renderer.sky.weather_renderer.ModWeatherRenderer;
-import com.github.alexnijjar.beyond_earth.client.resource_pack.SkyRenderer;
-import com.github.alexnijjar.beyond_earth.util.ColourHolder;
+import com.github.alexnijjar.ad_astra.client.BeyondEarthClient;
+import com.github.alexnijjar.ad_astra.client.renderer.sky.ModSky;
+import com.github.alexnijjar.ad_astra.client.renderer.sky.cloud_renderer.ModCloudRenderer;
+import com.github.alexnijjar.ad_astra.client.renderer.sky.dimension_effects.ModDimensionEffects;
+import com.github.alexnijjar.ad_astra.client.renderer.sky.weather_renderer.ModWeatherRenderer;
+import com.github.alexnijjar.ad_astra.client.resource_pack.SkyRenderer;
+import com.github.alexnijjar.ad_astra.util.ColourHolder;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

@@ -1,7 +1,7 @@
-package com.github.alexnijjar.beyond_earth.client.renderer.sky.weather_renderer;
+package com.github.alexnijjar.ad_astra.client.renderer.sky.weather_renderer;
 
-import com.github.alexnijjar.beyond_earth.mixin.client.WorldRendererAccessor;
-import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
+import com.github.alexnijjar.ad_astra.mixin.client.WorldRendererAccessor;
+import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.fabricmc.api.EnvType;

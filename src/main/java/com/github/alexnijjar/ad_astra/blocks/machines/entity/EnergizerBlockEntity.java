@@ -1,9 +1,9 @@
-package com.github.alexnijjar.beyond_earth.blocks.machines.entity;
+package com.github.alexnijjar.ad_astra.blocks.machines.entity;
 
-import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.blocks.machines.EnergizerBlock;
-import com.github.alexnijjar.beyond_earth.registry.ModBlockEntities;
-import com.github.alexnijjar.beyond_earth.util.ModUtils;
+import com.github.alexnijjar.ad_astra.BeyondEarth;
+import com.github.alexnijjar.ad_astra.blocks.machines.EnergizerBlock;
+import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
+import com.github.alexnijjar.ad_astra.util.ModUtils;
 
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
 import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage;

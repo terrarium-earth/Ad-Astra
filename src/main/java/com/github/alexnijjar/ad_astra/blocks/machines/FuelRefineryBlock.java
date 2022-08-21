@@ -1,6 +1,6 @@
-package com.github.alexnijjar.beyond_earth.blocks.machines;
+package com.github.alexnijjar.ad_astra.blocks.machines;
 
-import com.github.alexnijjar.beyond_earth.blocks.machines.entity.FuelRefineryBlockEntity;
+import com.github.alexnijjar.ad_astra.blocks.machines.entity.FuelRefineryBlockEntity;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;

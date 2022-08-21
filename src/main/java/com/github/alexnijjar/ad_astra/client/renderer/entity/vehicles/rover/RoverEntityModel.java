@@ -1,8 +1,8 @@
-package com.github.alexnijjar.beyond_earth.client.renderer.entity.vehicles.rover;
+package com.github.alexnijjar.ad_astra.client.renderer.entity.vehicles.rover;
 
-import com.github.alexnijjar.beyond_earth.client.renderer.entity.vehicles.VehicleEntityModel;
-import com.github.alexnijjar.beyond_earth.entities.vehicles.RoverEntity;
-import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
+import com.github.alexnijjar.ad_astra.client.renderer.entity.vehicles.VehicleEntityModel;
+import com.github.alexnijjar.ad_astra.entities.vehicles.RoverEntity;
+import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

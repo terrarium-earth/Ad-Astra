@@ -1,4 +1,4 @@
-package com.github.alexnijjar.beyond_earth.client.screens.utils;
+package com.github.alexnijjar.ad_astra.client.screens.utils;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -8,16 +8,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
-import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.client.BeyondEarthClient;
-import com.github.alexnijjar.beyond_earth.client.resource_pack.SolarSystem;
-import com.github.alexnijjar.beyond_earth.data.ButtonColour;
-import com.github.alexnijjar.beyond_earth.data.Planet;
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.PlanetSelectionScreenHandler;
-import com.github.alexnijjar.beyond_earth.networking.ModC2SPackets;
-import com.github.alexnijjar.beyond_earth.registry.ModRecipes;
-import com.github.alexnijjar.beyond_earth.util.MathUtil;
-import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
+import com.github.alexnijjar.ad_astra.BeyondEarth;
+import com.github.alexnijjar.ad_astra.client.BeyondEarthClient;
+import com.github.alexnijjar.ad_astra.client.resource_pack.SolarSystem;
+import com.github.alexnijjar.ad_astra.data.ButtonColour;
+import com.github.alexnijjar.ad_astra.data.Planet;
+import com.github.alexnijjar.ad_astra.gui.screen_handlers.PlanetSelectionScreenHandler;
+import com.github.alexnijjar.ad_astra.networking.ModC2SPackets;
+import com.github.alexnijjar.ad_astra.registry.ModRecipes;
+import com.github.alexnijjar.ad_astra.util.MathUtil;
+import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.ibm.icu.impl.Pair;
 import com.mojang.blaze3d.systems.RenderSystem;
 

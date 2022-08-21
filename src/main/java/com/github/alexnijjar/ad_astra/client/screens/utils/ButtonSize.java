@@ -1,4 +1,4 @@
-package com.github.alexnijjar.beyond_earth.client.screens.utils;
+package com.github.alexnijjar.ad_astra.client.screens.utils;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

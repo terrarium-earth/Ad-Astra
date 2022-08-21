@@ -1,10 +1,10 @@
-package com.github.alexnijjar.beyond_earth.client.screens;
+package com.github.alexnijjar.ad_astra.client.screens;
 
 import java.awt.Rectangle;
 
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.VehicleScreenHandler;
-import com.github.alexnijjar.beyond_earth.util.FluidUtils;
-import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
+import com.github.alexnijjar.ad_astra.gui.screen_handlers.VehicleScreenHandler;
+import com.github.alexnijjar.ad_astra.util.FluidUtils;
+import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -41,7 +41,7 @@ public class VehicleScreen extends AbstractVehicleScreen<VehicleScreenHandler> {
         super.render(matrices, mouseX, mouseY, delta);
 
         if (GuiUtil.isHovering(this.getInputTankBounds(), mouseX, mouseY)) {
-            this.renderTooltip(matrices, Text.translatable("gauge_text.beyond_earth.liquid_storage", FluidUtils.dropletsToMillibuckets(this.vehicle.getFluidAmount()), FluidUtils.dropletsToMillibuckets(this.vehicle.inputTank.getCapacity())), mouseX, mouseY);
+            this.renderTooltip(matrices, Text.translatable("gauge_text.ad_astra.liquid_storage", FluidUtils.dropletsToMillibuckets(this.vehicle.getFluidAmount()), FluidUtils.dropletsToMillibuckets(this.vehicle.inputTank.getCapacity())), mouseX, mouseY);
         }
     }
 

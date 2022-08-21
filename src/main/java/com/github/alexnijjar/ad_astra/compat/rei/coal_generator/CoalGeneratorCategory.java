@@ -1,12 +1,12 @@
-package com.github.alexnijjar.beyond_earth.compat.rei.coal_generator;
+package com.github.alexnijjar.ad_astra.compat.rei.coal_generator;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.github.alexnijjar.beyond_earth.blocks.machines.entity.CoalGeneratorBlockEntity;
-import com.github.alexnijjar.beyond_earth.compat.rei.REICategories;
-import com.github.alexnijjar.beyond_earth.compat.rei.widgets.EnergyBarWidget;
-import com.github.alexnijjar.beyond_earth.registry.ModBlocks;
+import com.github.alexnijjar.ad_astra.blocks.machines.entity.CoalGeneratorBlockEntity;
+import com.github.alexnijjar.ad_astra.compat.rei.REICategories;
+import com.github.alexnijjar.ad_astra.compat.rei.widgets.EnergyBarWidget;
+import com.github.alexnijjar.ad_astra.registry.ModBlocks;
 
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
@@ -63,9 +63,9 @@ public class CoalGeneratorCategory implements DisplayCategory<CoalGeneratorDispl
 
         Widget widget = new EnergyBarWidget(new Point(startPoint.x + 60, startPoint.y - 10), true).animationDurationTicks(150);
         widgets.add(widget);
-        widgets.add(Widgets.withTooltip(Widgets.withBounds(widget, bounds), Text.translatable("rei.tooltip.beyond_earth.energy_generating", CoalGeneratorBlockEntity.ENERGY_PER_TICK)));
+        widgets.add(Widgets.withTooltip(Widgets.withBounds(widget, bounds), Text.translatable("rei.tooltip.ad_astra.energy_generating", CoalGeneratorBlockEntity.ENERGY_PER_TICK)));
 
-        Text ratioText = Text.translatable("rei.text.beyond_earth.generates", display.recipe().getCookTime() * CoalGeneratorBlockEntity.ENERGY_PER_TICK);
+        Text ratioText = Text.translatable("rei.text.ad_astra.generates", display.recipe().getCookTime() * CoalGeneratorBlockEntity.ENERGY_PER_TICK);
         widgets.add(Widgets.createLabel(new Point(startPoint.x + 30, startPoint.y + 45), ratioText).centered().noShadow().color(0xFF404040, 0xFFBBBBBB));
 
         return widgets;

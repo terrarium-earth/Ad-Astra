@@ -1,11 +1,11 @@
-package com.github.alexnijjar.beyond_earth.client.renderer.sky;
+package com.github.alexnijjar.ad_astra.client.renderer.sky;
 
-import com.github.alexnijjar.beyond_earth.client.resource_pack.SkyRenderer;
-import com.github.alexnijjar.beyond_earth.client.resource_pack.SkyRenderer.StarsRenderer;
-import com.github.alexnijjar.beyond_earth.mixin.client.WorldRendererAccessor;
-import com.github.alexnijjar.beyond_earth.util.ColourHolder;
-import com.github.alexnijjar.beyond_earth.util.ModUtils;
-import com.github.alexnijjar.beyond_earth.world.WorldSeed;
+import com.github.alexnijjar.ad_astra.client.resource_pack.SkyRenderer;
+import com.github.alexnijjar.ad_astra.client.resource_pack.SkyRenderer.StarsRenderer;
+import com.github.alexnijjar.ad_astra.mixin.client.WorldRendererAccessor;
+import com.github.alexnijjar.ad_astra.util.ColourHolder;
+import com.github.alexnijjar.ad_astra.util.ModUtils;
+import com.github.alexnijjar.ad_astra.world.WorldSeed;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 

@@ -1,7 +1,7 @@
-package com.github.alexnijjar.beyond_earth.blocks.fluid;
+package com.github.alexnijjar.ad_astra.blocks.fluid;
 
-import com.github.alexnijjar.beyond_earth.registry.ModFluids;
-import com.github.alexnijjar.beyond_earth.registry.ModItems;
+import com.github.alexnijjar.ad_astra.registry.ModFluids;
+import com.github.alexnijjar.ad_astra.registry.ModItems;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.fluid.Fluid;

@@ -1,12 +1,12 @@
-package com.github.alexnijjar.beyond_earth.client.resource_pack;
+package com.github.alexnijjar.ad_astra.client.resource_pack;
 
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.client.BeyondEarthClient;
-import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
+import com.github.alexnijjar.ad_astra.BeyondEarth;
+import com.github.alexnijjar.ad_astra.client.BeyondEarthClient;
+import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;

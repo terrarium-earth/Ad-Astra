@@ -1,6 +1,6 @@
-package com.github.alexnijjar.beyond_earth.client.renderer.entity.vehicles.rockets.tier_3;
+package com.github.alexnijjar.ad_astra.client.renderer.entity.vehicles.rockets.tier_3;
 
-import com.github.alexnijjar.beyond_earth.client.renderer.entity.vehicles.VehicleEntityRenderer;
+import com.github.alexnijjar.ad_astra.client.renderer.entity.vehicles.VehicleEntityRenderer;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

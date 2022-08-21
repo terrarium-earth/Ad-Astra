@@ -1,7 +1,7 @@
-package com.github.alexnijjar.beyond_earth.blocks.machines.entity;
+package com.github.alexnijjar.ad_astra.blocks.machines.entity;
 
-import com.github.alexnijjar.beyond_earth.recipes.CookingRecipe;
-import com.github.alexnijjar.beyond_earth.recipes.ModRecipeType;
+import com.github.alexnijjar.ad_astra.recipes.CookingRecipe;
+import com.github.alexnijjar.ad_astra.recipes.ModRecipeType;
 
 import org.jetbrains.annotations.Nullable;
 

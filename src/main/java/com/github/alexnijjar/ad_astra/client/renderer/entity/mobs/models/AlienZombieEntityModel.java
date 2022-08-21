@@ -1,7 +1,7 @@
-package com.github.alexnijjar.beyond_earth.client.renderer.entity.mobs.models;
+package com.github.alexnijjar.ad_astra.client.renderer.entity.mobs.models;
 
-import com.github.alexnijjar.beyond_earth.entities.mobs.AlienZombieEntity;
-import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
+import com.github.alexnijjar.ad_astra.entities.mobs.AlienZombieEntity;
+import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

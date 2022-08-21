@@ -1,8 +1,8 @@
-package com.github.alexnijjar.beyond_earth.blocks.machines;
+package com.github.alexnijjar.ad_astra.blocks.machines;
 
 import java.util.function.ToIntFunction;
 
-import com.github.alexnijjar.beyond_earth.blocks.machines.entity.AbstractMachineBlockEntity;
+import com.github.alexnijjar.ad_astra.blocks.machines.entity.AbstractMachineBlockEntity;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;

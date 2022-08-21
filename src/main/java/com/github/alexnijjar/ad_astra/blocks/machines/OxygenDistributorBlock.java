@@ -1,8 +1,8 @@
-package com.github.alexnijjar.beyond_earth.blocks.machines;
+package com.github.alexnijjar.ad_astra.blocks.machines;
 
-import com.github.alexnijjar.beyond_earth.blocks.machines.entity.OxygenDistributorBlockEntity;
-import com.github.alexnijjar.beyond_earth.client.utils.ClientOxygenUtils;
-import com.github.alexnijjar.beyond_earth.util.OxygenUtils;
+import com.github.alexnijjar.ad_astra.blocks.machines.entity.OxygenDistributorBlockEntity;
+import com.github.alexnijjar.ad_astra.client.utils.ClientOxygenUtils;
+import com.github.alexnijjar.ad_astra.util.OxygenUtils;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
