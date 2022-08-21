@@ -1,15 +1,15 @@
-package com.github.alexnijjar.beyond_earth.datagen;
+package com.github.alexnijjar.ad_astra.datagen;
 
-import com.github.alexnijjar.beyond_earth.BeyondEarth;
+import com.github.alexnijjar.ad_astra.AdAstra;
 
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 
-public class BeyondEarthDataGenEntrypoint implements DataGeneratorEntrypoint {
+public class AdAstraDataGenEntrypoint implements DataGeneratorEntrypoint {
 
 	@Override
 	public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
-		BeyondEarth.LOGGER.info("Beyond Earth Datagen started...");
+		AdAstra.LOGGER.info("Beyond Earth Datagen started...");
 
 		// Client
 		fabricDataGenerator.addProvider(ModModelProvider::new);
@@ -17,7 +17,7 @@ public class BeyondEarthDataGenEntrypoint implements DataGeneratorEntrypoint {
 		// Server
 		fabricDataGenerator.addProvider(ModBlockLootTableProvider::new);
 		fabricDataGenerator.addProvider(ModRecipeProvider::new);
-		BeyondEarth.LOGGER.info("Beyond Earth Datagen finished 🚀");
+		AdAstra.LOGGER.info("Beyond Earth Datagen finished 🚀");
 		
 	}
 }

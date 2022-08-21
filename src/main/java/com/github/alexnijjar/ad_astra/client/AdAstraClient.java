@@ -49,7 +49,7 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.item.Item;
 import net.minecraft.screen.PlayerScreenHandler;
 
-public class BeyondEarthClient implements ClientModInitializer {
+public class AdAstraClient implements ClientModInitializer {
 
         @Environment(EnvType.CLIENT)
         public static List<Planet> planets = new ArrayList<>();

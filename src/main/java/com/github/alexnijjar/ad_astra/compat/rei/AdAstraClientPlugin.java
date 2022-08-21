@@ -1,26 +1,26 @@
-package com.github.alexnijjar.beyond_earth.compat.rei;
+package com.github.alexnijjar.ad_astra.compat.rei;
 
-import com.github.alexnijjar.beyond_earth.compat.rei.coal_generator.CoalGeneratorCategory;
-import com.github.alexnijjar.beyond_earth.compat.rei.coal_generator.CoalGeneratorDisplay;
-import com.github.alexnijjar.beyond_earth.compat.rei.compressor.CompressorCategory;
-import com.github.alexnijjar.beyond_earth.compat.rei.compressor.CompressorDisplay;
-import com.github.alexnijjar.beyond_earth.compat.rei.fuel_conversion.FuelConversionCategory;
-import com.github.alexnijjar.beyond_earth.compat.rei.fuel_conversion.FuelConversionDisplay;
-import com.github.alexnijjar.beyond_earth.compat.rei.nasa_workbench.NasaWorkbenchCategory;
-import com.github.alexnijjar.beyond_earth.compat.rei.nasa_workbench.NasaWorkbenchDisplay;
-import com.github.alexnijjar.beyond_earth.compat.rei.oxygen_conversion.OxygenConversionCategory;
-import com.github.alexnijjar.beyond_earth.compat.rei.oxygen_conversion.OxygenConversionDisplay;
-import com.github.alexnijjar.beyond_earth.compat.rei.space_station.SpaceStationCategory;
-import com.github.alexnijjar.beyond_earth.compat.rei.space_station.SpaceStationDisplay;
-import com.github.alexnijjar.beyond_earth.recipes.CompressingRecipe;
-import com.github.alexnijjar.beyond_earth.recipes.FuelConversionRecipe;
-import com.github.alexnijjar.beyond_earth.recipes.GeneratingRecipe;
-import com.github.alexnijjar.beyond_earth.recipes.NasaWorkbenchRecipe;
-import com.github.alexnijjar.beyond_earth.recipes.OxygenConversionRecipe;
-import com.github.alexnijjar.beyond_earth.recipes.SpaceStationRecipe;
-import com.github.alexnijjar.beyond_earth.registry.ModBlocks;
-import com.github.alexnijjar.beyond_earth.registry.ModItems;
-import com.github.alexnijjar.beyond_earth.registry.ModRecipes;
+import com.github.alexnijjar.ad_astra.compat.rei.coal_generator.CoalGeneratorCategory;
+import com.github.alexnijjar.ad_astra.compat.rei.coal_generator.CoalGeneratorDisplay;
+import com.github.alexnijjar.ad_astra.compat.rei.compressor.CompressorCategory;
+import com.github.alexnijjar.ad_astra.compat.rei.compressor.CompressorDisplay;
+import com.github.alexnijjar.ad_astra.compat.rei.fuel_conversion.FuelConversionCategory;
+import com.github.alexnijjar.ad_astra.compat.rei.fuel_conversion.FuelConversionDisplay;
+import com.github.alexnijjar.ad_astra.compat.rei.nasa_workbench.NasaWorkbenchCategory;
+import com.github.alexnijjar.ad_astra.compat.rei.nasa_workbench.NasaWorkbenchDisplay;
+import com.github.alexnijjar.ad_astra.compat.rei.oxygen_conversion.OxygenConversionCategory;
+import com.github.alexnijjar.ad_astra.compat.rei.oxygen_conversion.OxygenConversionDisplay;
+import com.github.alexnijjar.ad_astra.compat.rei.space_station.SpaceStationCategory;
+import com.github.alexnijjar.ad_astra.compat.rei.space_station.SpaceStationDisplay;
+import com.github.alexnijjar.ad_astra.recipes.CompressingRecipe;
+import com.github.alexnijjar.ad_astra.recipes.FuelConversionRecipe;
+import com.github.alexnijjar.ad_astra.recipes.GeneratingRecipe;
+import com.github.alexnijjar.ad_astra.recipes.NasaWorkbenchRecipe;
+import com.github.alexnijjar.ad_astra.recipes.OxygenConversionRecipe;
+import com.github.alexnijjar.ad_astra.recipes.SpaceStationRecipe;
+import com.github.alexnijjar.ad_astra.registry.ModBlocks;
+import com.github.alexnijjar.ad_astra.registry.ModItems;
+import com.github.alexnijjar.ad_astra.registry.ModRecipes;
 
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
@@ -33,7 +33,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 
 @Environment(EnvType.CLIENT)
-public class BeyondEarthClientPlugin implements REIClientPlugin {
+public class AdAstraClientPlugin implements REIClientPlugin {
 
     @SuppressWarnings("removal")
     @Override
@@ -66,8 +66,8 @@ public class BeyondEarthClientPlugin implements REIClientPlugin {
         registry.registerRecipeFiller(NasaWorkbenchRecipe.class, ModRecipes.NASA_WORKBENCH_RECIPE, NasaWorkbenchDisplay::new);
         registry.registerRecipeFiller(SpaceStationRecipe.class, ModRecipes.SPACE_STATION_RECIPE, SpaceStationDisplay::new);
 
-        DefaultInformationDisplay info = DefaultInformationDisplay.createFromEntry(EntryStacks.of(ModItems.OIL_BUCKET), Text.translatable("rei.text.beyond_earth.oil.title"));
-        info.lines(Text.translatable("rei.text.beyond_earth.oil.body"));
+        DefaultInformationDisplay info = DefaultInformationDisplay.createFromEntry(EntryStacks.of(ModItems.OIL_BUCKET), Text.translatable("rei.text.ad_astra.oil.title"));
+        info.lines(Text.translatable("rei.text.ad_astra.oil.body"));
         registry.add(info);
     }
 }

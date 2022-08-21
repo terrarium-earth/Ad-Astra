@@ -1,11 +1,11 @@
-package com.github.alexnijjar.beyond_earth.datagen;
+package com.github.alexnijjar.ad_astra.datagen;
 
 import java.util.List;
 import java.util.function.Consumer;
 
-import com.github.alexnijjar.beyond_earth.registry.ModBlocks;
-import com.github.alexnijjar.beyond_earth.registry.ModItems;
-import com.github.alexnijjar.beyond_earth.registry.ModTags;
+import com.github.alexnijjar.ad_astra.registry.ModBlocks;
+import com.github.alexnijjar.ad_astra.registry.ModItems;
+import com.github.alexnijjar.ad_astra.registry.ModTags;
 import com.google.common.collect.ImmutableList;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;

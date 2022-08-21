@@ -1,12 +1,12 @@
-package com.github.alexnijjar.beyond_earth.compat.rei;
+package com.github.alexnijjar.ad_astra.compat.rei;
 
-import com.github.alexnijjar.beyond_earth.compat.rei.coal_generator.CoalGeneratorDisplay;
-import com.github.alexnijjar.beyond_earth.compat.rei.compressor.CompressorDisplay;
-import com.github.alexnijjar.beyond_earth.compat.rei.fuel_conversion.FuelConversionDisplay;
-import com.github.alexnijjar.beyond_earth.compat.rei.nasa_workbench.NasaWorkbenchDisplay;
-import com.github.alexnijjar.beyond_earth.compat.rei.oxygen_conversion.OxygenConversionDisplay;
-import com.github.alexnijjar.beyond_earth.compat.rei.space_station.SpaceStationDisplay;
-import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
+import com.github.alexnijjar.ad_astra.compat.rei.coal_generator.CoalGeneratorDisplay;
+import com.github.alexnijjar.ad_astra.compat.rei.compressor.CompressorDisplay;
+import com.github.alexnijjar.ad_astra.compat.rei.fuel_conversion.FuelConversionDisplay;
+import com.github.alexnijjar.ad_astra.compat.rei.nasa_workbench.NasaWorkbenchDisplay;
+import com.github.alexnijjar.ad_astra.compat.rei.oxygen_conversion.OxygenConversionDisplay;
+import com.github.alexnijjar.ad_astra.compat.rei.space_station.SpaceStationDisplay;
+import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 

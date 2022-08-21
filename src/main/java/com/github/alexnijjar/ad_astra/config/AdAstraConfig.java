@@ -1,17 +1,17 @@
-package com.github.alexnijjar.beyond_earth.config;
+package com.github.alexnijjar.ad_astra.config;
 
-import com.github.alexnijjar.beyond_earth.config.BeyondEarthConfig.VehiclesConfig.LanderConfig;
-import com.github.alexnijjar.beyond_earth.config.BeyondEarthConfig.VehiclesConfig.RocketConfig;
-import com.github.alexnijjar.beyond_earth.config.BeyondEarthConfig.VehiclesConfig.RoverConfig;
+import com.github.alexnijjar.ad_astra.config.AdAstraConfig.VehiclesConfig.LanderConfig;
+import com.github.alexnijjar.ad_astra.config.AdAstraConfig.VehiclesConfig.RocketConfig;
+import com.github.alexnijjar.ad_astra.config.AdAstraConfig.VehiclesConfig.RoverConfig;
 
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 
-@Config(name = "beyond_earth")
-@Config.Gui.Background("beyond_earth:textures/blocks/machine_down.png")
-public class BeyondEarthConfig implements ConfigData {
+@Config(name = "ad_astra")
+@Config.Gui.Background("ad_astra:textures/blocks/machine_down.png")
+public class AdAstraConfig implements ConfigData {
 
     @ConfigEntry.Gui.CollapsibleObject
     public WorldConfig world = new WorldConfig();
