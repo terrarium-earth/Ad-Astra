@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "ad_astra:oil_well",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 1224466880,
+    "spacing": 16,
+    "separation": 11,
+    "type": "minecraft:random_spread"
+  }
+}

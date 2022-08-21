@@ -1,7 +1,7 @@
-package com.github.alexnijjar.beyond_earth.items.vehicles;
+package com.github.alexnijjar.ad_astra.items.vehicles;
 
-import com.github.alexnijjar.beyond_earth.entities.vehicles.RoverEntity;
-import com.github.alexnijjar.beyond_earth.registry.ModEntityTypes;
+import com.github.alexnijjar.ad_astra.entities.vehicles.RoverEntity;
+import com.github.alexnijjar.ad_astra.registry.ModEntityTypes;
 
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.minecraft.block.BlockState;

@@ -1,11 +1,11 @@
-package com.github.alexnijjar.beyond_earth.items.armour;
+package com.github.alexnijjar.ad_astra.items.armour;
 
 import java.util.List;
 
-import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.registry.ModItems;
-import com.github.alexnijjar.beyond_earth.util.ModKeyBindings;
-import com.github.alexnijjar.beyond_earth.util.ModUtils;
+import com.github.alexnijjar.ad_astra.AdAstra;
+import com.github.alexnijjar.ad_astra.registry.ModItems;
+import com.github.alexnijjar.ad_astra.util.ModKeyBindings;
+import com.github.alexnijjar.ad_astra.util.ModUtils;
 
 import net.fabricmc.fabric.api.entity.event.v1.FabricElytraItem;
 import net.minecraft.client.item.TooltipContext;
@@ -25,11 +25,11 @@ import team.reborn.energy.api.base.SimpleBatteryItem;
 
 public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, FabricElytraItem {
 
-    public static final long MAX_ENERGY = BeyondEarth.CONFIG.spaceSuit.jetSuitMaxEnergy;
-    public static final long TANK_SIZE = BeyondEarth.CONFIG.spaceSuit.jetSuitTankSize;
-    public static final double SPEED = BeyondEarth.CONFIG.spaceSuit.jetSuitSpeed;
-    public static final double UPWARDS_SPEED = BeyondEarth.CONFIG.spaceSuit.jetSuitUpwardsSpeed;
-    public static final long JET_SUIT_ENERGY_PER_TICK = BeyondEarth.CONFIG.spaceSuit.jetSuitEnergyPerTick;
+    public static final long MAX_ENERGY = AdAstra.CONFIG.spaceSuit.jetSuitMaxEnergy;
+    public static final long TANK_SIZE = AdAstra.CONFIG.spaceSuit.jetSuitTankSize;
+    public static final double SPEED = AdAstra.CONFIG.spaceSuit.jetSuitSpeed;
+    public static final double UPWARDS_SPEED = AdAstra.CONFIG.spaceSuit.jetSuitUpwardsSpeed;
+    public static final long JET_SUIT_ENERGY_PER_TICK = AdAstra.CONFIG.spaceSuit.jetSuitEnergyPerTick;
     public boolean isFallFlying;
 
     public JetSuit(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
@@ -52,7 +52,7 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
         super.appendTooltip(stack, world, tooltip, context);
         if (stack.isOf(ModItems.JET_SUIT)) {
             long energy = this.getStoredEnergy(stack);
-            tooltip.add(Text.translatable("gauge_text.beyond_earth.storage", energy, MAX_ENERGY).setStyle(Style.EMPTY.withColor(energy > 0 ? Formatting.GREEN : Formatting.RED)));
+            tooltip.add(Text.translatable("gauge_text.ad_astra.storage", energy, MAX_ENERGY).setStyle(Style.EMPTY.withColor(energy > 0 ? Formatting.GREEN : Formatting.RED)));
         }
     }
 
@@ -117,7 +117,7 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
     }
 
     public void spawnParticles(PlayerEntity player, ItemStack stack) {
-        if (!BeyondEarth.CONFIG.spaceSuit.spawnJetSuitParticles) {
+        if (!AdAstra.CONFIG.spaceSuit.spawnJetSuitParticles) {
             return;
         }
         if (player.world instanceof ServerWorld serverWorld) {

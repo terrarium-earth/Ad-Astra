@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "beyond_earth:block/oil"
+      "model": "ad_astra:block/oil"
     }
   }
 }

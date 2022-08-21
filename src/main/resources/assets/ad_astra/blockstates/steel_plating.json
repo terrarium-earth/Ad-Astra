@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "beyond_earth:block/steel_plating"
+      "model": "ad_astra:block/steel_plating"
     }
   }
 }

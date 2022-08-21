@@ -1,8 +1,8 @@
-package com.github.alexnijjar.beyond_earth.mixin;
+package com.github.alexnijjar.ad_astra.mixin;
 
 import java.util.Optional;
 
-import com.github.alexnijjar.beyond_earth.world.WorldSeed;
+import com.github.alexnijjar.ad_astra.world.WorldSeed;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

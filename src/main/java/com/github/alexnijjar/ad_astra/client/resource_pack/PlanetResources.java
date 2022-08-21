@@ -4,8 +4,8 @@ import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.github.alexnijjar.ad_astra.BeyondEarth;
-import com.github.alexnijjar.ad_astra.client.BeyondEarthClient;
+import com.github.alexnijjar.ad_astra.AdAstra;
+import com.github.alexnijjar.ad_astra.client.AdAstraClient;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -53,7 +53,7 @@ public class PlanetResources {
                             }
                         }
                     } catch (Exception e) {
-                        BeyondEarth.LOGGER.error("Failed to load Beyond Earth sky rendering assets from: \"" + id.toString() + "\"", e);
+                        AdAstra.LOGGER.error("Failed to load Ad Astra sky rendering assets from: \"" + id.toString() + "\"", e);
                         e.printStackTrace();
                     }
                 }
@@ -70,14 +70,14 @@ public class PlanetResources {
                             }
                         }
                     } catch (Exception e) {
-                        BeyondEarth.LOGGER.error("Failed to load Beyond Earth solar system assets from: \"" + id.toString() + "\"", e);
+                        AdAstra.LOGGER.error("Failed to load Ad Astra solar system assets from: \"" + id.toString() + "\"", e);
                         e.printStackTrace();
                     }
                 }
 
-                BeyondEarthClient.skyRenderers = skyRenderers;
-                BeyondEarthClient.solarSystems = solarSystems;
-                BeyondEarthClient.postAssetRegister();
+                AdAstraClient.skyRenderers = skyRenderers;
+                AdAstraClient.solarSystems = solarSystems;
+                AdAstraClient.postAssetRegister();
             }
         });
     }

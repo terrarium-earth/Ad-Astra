@@ -1,6 +1,6 @@
-package com.github.alexnijjar.beyond_earth.registry;
+package com.github.alexnijjar.ad_astra.registry;
 
-import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
+import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 
 import net.minecraft.entity.decoration.painting.PaintingVariant;
 import net.minecraft.util.registry.Registry;

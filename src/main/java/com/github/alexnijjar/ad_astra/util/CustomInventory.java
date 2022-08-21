@@ -1,4 +1,4 @@
-package com.github.alexnijjar.beyond_earth.util;
+package com.github.alexnijjar.ad_astra.util;
 
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;

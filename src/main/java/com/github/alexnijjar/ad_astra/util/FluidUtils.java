@@ -1,11 +1,11 @@
-package com.github.alexnijjar.beyond_earth.util;
+package com.github.alexnijjar.ad_astra.util;
 
 import java.util.List;
 import java.util.function.Predicate;
 
-import com.github.alexnijjar.beyond_earth.blocks.machines.entity.FluidMachineBlockEntity;
-import com.github.alexnijjar.beyond_earth.items.FluidContainingItem;
-import com.github.alexnijjar.beyond_earth.recipes.ConversionRecipe;
+import com.github.alexnijjar.ad_astra.blocks.machines.entity.FluidMachineBlockEntity;
+import com.github.alexnijjar.ad_astra.items.FluidContainingItem;
+import com.github.alexnijjar.ad_astra.recipes.ConversionRecipe;
 
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;

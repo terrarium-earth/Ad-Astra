@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 2,
-  "ingredient": {
-    "item": "beyond_earth:moon_stone"
-  },
-  "result": "beyond_earth:moon_stone_brick_slab"
-}

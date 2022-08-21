@@ -1,17 +1,17 @@
-package com.github.alexnijjar.beyond_earth.mixin.client;
+package com.github.alexnijjar.ad_astra.mixin.client;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.github.alexnijjar.beyond_earth.client.renderer.spacesuit.AbstractSpaceSuitModel;
-import com.github.alexnijjar.beyond_earth.client.renderer.spacesuit.JetSuitModel;
-import com.github.alexnijjar.beyond_earth.client.renderer.spacesuit.SpaceSuitModel;
-import com.github.alexnijjar.beyond_earth.client.renderer.spacesuit.SpaceSuitRenderer;
-import com.github.alexnijjar.beyond_earth.items.armour.JetSuit;
-import com.github.alexnijjar.beyond_earth.items.armour.NetheriteSpaceSuit;
-import com.github.alexnijjar.beyond_earth.items.armour.SpaceSuit;
+import com.github.alexnijjar.ad_astra.client.renderer.spacesuit.AbstractSpaceSuitModel;
+import com.github.alexnijjar.ad_astra.client.renderer.spacesuit.JetSuitModel;
+import com.github.alexnijjar.ad_astra.client.renderer.spacesuit.SpaceSuitModel;
+import com.github.alexnijjar.ad_astra.client.renderer.spacesuit.SpaceSuitRenderer;
+import com.github.alexnijjar.ad_astra.items.armour.JetSuit;
+import com.github.alexnijjar.ad_astra.items.armour.NetheriteSpaceSuit;
+import com.github.alexnijjar.ad_astra.items.armour.SpaceSuit;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;

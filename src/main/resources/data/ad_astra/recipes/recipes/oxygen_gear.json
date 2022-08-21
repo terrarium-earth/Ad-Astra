@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "tag": "c:compressed_steel"
+    },
+    "|": {
+      "tag": "c:iron_rods"
+    }
+  },
+  "pattern": [
+    " | ",
+    "#|#",
+    "#|#"
+  ],
+  "result": {
+    "item": "ad_astra:oxygen_gear"
+  }
+}

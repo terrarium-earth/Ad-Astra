@@ -1,11 +1,11 @@
-package com.github.alexnijjar.beyond_earth.networking;
+package com.github.alexnijjar.ad_astra.networking;
 
-import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntity;
-import com.github.alexnijjar.beyond_earth.registry.ModRecipes;
-import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
-import com.github.alexnijjar.beyond_earth.util.ModKeyBindings;
-import com.github.alexnijjar.beyond_earth.util.ModUtils;
+import com.github.alexnijjar.ad_astra.AdAstra;
+import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntity;
+import com.github.alexnijjar.ad_astra.registry.ModRecipes;
+import com.github.alexnijjar.ad_astra.util.ModIdentifier;
+import com.github.alexnijjar.ad_astra.util.ModKeyBindings;
+import com.github.alexnijjar.ad_astra.util.ModUtils;
 
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
@@ -43,7 +43,7 @@ public class ModC2SPackets {
             try {
                 sender.sendPacket(ModS2CPackets.DATAPACK_PLANETS, createPlanetsDatapackBuf());
             } catch (Exception e) {
-                BeyondEarth.LOGGER.error("Failed to send datapack values to client: " + e);
+                AdAstra.LOGGER.error("Failed to send datapack values to client: " + e);
                 e.printStackTrace();
             }
         });
@@ -138,7 +138,7 @@ public class ModC2SPackets {
 
     private static PacketByteBuf createPlanetsDatapackBuf() {
         PacketByteBuf mainBuf = PacketByteBufs.create();
-        mainBuf.writeCollection(BeyondEarth.planets, (buf, planet) -> {
+        mainBuf.writeCollection(AdAstra.planets, (buf, planet) -> {
             buf.writeString(planet.name());
             buf.writeIdentifier(planet.galaxy());
             buf.writeIdentifier(planet.solarSystem());

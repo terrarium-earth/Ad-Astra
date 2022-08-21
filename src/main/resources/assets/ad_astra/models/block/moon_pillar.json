@@ -1,12 +1,12 @@
 {
   "parent": "block/cube",
   "textures": {
-    "down": "beyond_earth:blocks/moon_pillar_top",
-    "up": "beyond_earth:blocks/moon_pillar_top",
-    "north": "beyond_earth:blocks/moon_pillar",
-    "east": "beyond_earth:blocks/moon_pillar",
-    "south": "beyond_earth:blocks/moon_pillar",
-    "west": "beyond_earth:blocks/moon_pillar",
-    "particle": "beyond_earth:blocks/moon_pillar_top"
+    "down": "ad_astra:blocks/moon_pillar_top",
+    "up": "ad_astra:blocks/moon_pillar_top",
+    "north": "ad_astra:blocks/moon_pillar",
+    "east": "ad_astra:blocks/moon_pillar",
+    "south": "ad_astra:blocks/moon_pillar",
+    "west": "ad_astra:blocks/moon_pillar",
+    "particle": "ad_astra:blocks/moon_pillar_top"
   }
 }

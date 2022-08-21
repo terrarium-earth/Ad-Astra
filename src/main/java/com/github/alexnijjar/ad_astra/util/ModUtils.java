@@ -1,4 +1,4 @@
-package com.github.alexnijjar.beyond_earth.util;
+package com.github.alexnijjar.ad_astra.util;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -7,17 +7,17 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.client.BeyondEarthClient;
-import com.github.alexnijjar.beyond_earth.client.utils.ClientOxygenUtils;
-import com.github.alexnijjar.beyond_earth.data.Planet;
-import com.github.alexnijjar.beyond_earth.entities.vehicles.LanderEntity;
-import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntity;
-import com.github.alexnijjar.beyond_earth.entities.vehicles.VehicleEntity;
-import com.github.alexnijjar.beyond_earth.items.armour.JetSuit;
-import com.github.alexnijjar.beyond_earth.items.armour.NetheriteSpaceSuit;
-import com.github.alexnijjar.beyond_earth.items.armour.SpaceSuit;
-import com.github.alexnijjar.beyond_earth.registry.ModEntityTypes;
+import com.github.alexnijjar.ad_astra.AdAstra;
+import com.github.alexnijjar.ad_astra.client.AdAstraClient;
+import com.github.alexnijjar.ad_astra.client.utils.ClientOxygenUtils;
+import com.github.alexnijjar.ad_astra.data.Planet;
+import com.github.alexnijjar.ad_astra.entities.vehicles.LanderEntity;
+import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntity;
+import com.github.alexnijjar.ad_astra.entities.vehicles.VehicleEntity;
+import com.github.alexnijjar.ad_astra.items.armour.JetSuit;
+import com.github.alexnijjar.ad_astra.items.armour.NetheriteSpaceSuit;
+import com.github.alexnijjar.ad_astra.items.armour.SpaceSuit;
+import com.github.alexnijjar.ad_astra.registry.ModEntityTypes;
 
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
 import net.fabricmc.loader.api.FabricLoader;
@@ -90,7 +90,7 @@ public class ModUtils {
 
             if (entity instanceof PlayerEntity player) {
                 if (player.getVehicle() instanceof RocketEntity rocket) {
-                    player.sendMessage(Text.translatable("message." + BeyondEarth.MOD_ID + ".hold_space"), false);
+                    player.sendMessage(Text.translatable("message." + AdAstra.MOD_ID + ".hold_space"), false);
                     entity = createLander(rocket, targetWorld, targetPosition);
                     rocket.remove(RemovalReason.DISCARDED);
                     entitiesToTeleport.add(entity);
@@ -160,20 +160,20 @@ public class ModUtils {
 
     public static RegistryKey<World> getPlanetOrbit(World world) {
         if (isSpaceWorld(world)) {
-            for (Planet planet : (world.isClient ? BeyondEarthClient.planets : BeyondEarth.planets)) {
+            for (Planet planet : (world.isClient ? AdAstraClient.planets : AdAstra.planets)) {
                 if (planet.orbitWorld().equals(world.getRegistryKey())) {
                     return planet.world();
                 }
             }
-            BeyondEarth.LOGGER.error(world.getRegistryKey().getValue().toString() + " does not have an orbit world!");
+            AdAstra.LOGGER.error(world.getRegistryKey().getValue().toString() + " does not have an orbit world!");
         } else {
-            BeyondEarth.LOGGER.error(world.getRegistryKey().getValue().toString() + " is not a planet or orbit!");
+            AdAstra.LOGGER.error(world.getRegistryKey().getValue().toString() + " is not a planet or orbit!");
         }
         return World.OVERWORLD;
     }
 
     public static float getPlanetGravity(World world) {
-        for (Planet planet : world.isClient ? BeyondEarthClient.planets : BeyondEarth.planets) {
+        for (Planet planet : world.isClient ? AdAstraClient.planets : AdAstra.planets) {
             if (planet.world().equals(world.getRegistryKey())) {
                 return planet.gravity() / VANILLA_GRAVITY;
             }
@@ -183,14 +183,14 @@ public class ModUtils {
             return ORBIT_GRAVITY;
         }
         if (isSpaceWorld(world)) {
-            BeyondEarth.LOGGER.error(world.getRegistryKey().getValue().toString() + " does not have a defined gravity!");
+            AdAstra.LOGGER.error(world.getRegistryKey().getValue().toString() + " does not have a defined gravity!");
         }
         return 1.0f;
     }
 
     public static int getSpawnStart(World world) {
         int spawnStart = 450;
-        for (Planet planet : world.isClient ? BeyondEarthClient.planets : BeyondEarth.planets) {
+        for (Planet planet : world.isClient ? AdAstraClient.planets : AdAstra.planets) {
             if (planet.world().equals(world.getRegistryKey())) {
                 spawnStart = planet.atmosphereStart();
             }
@@ -211,7 +211,7 @@ public class ModUtils {
     }
 
     public static final float getWorldTemperature(World world) {
-        for (Planet planet : world.isClient ? BeyondEarthClient.planets : BeyondEarth.planets) {
+        for (Planet planet : world.isClient ? AdAstraClient.planets : AdAstra.planets) {
             if (planet.world().equals(world.getRegistryKey())) {
                 return planet.temperature();
             }
@@ -220,13 +220,13 @@ public class ModUtils {
             return ORBIT_TEMPERATURE;
         }
         if (isSpaceWorld(world)) {
-            BeyondEarth.LOGGER.error(world.getRegistryKey().getValue().toString() + " does not have a defined temperature!");
+            AdAstra.LOGGER.error(world.getRegistryKey().getValue().toString() + " does not have a defined temperature!");
         }
         return 20.0f;
     }
 
     public static boolean worldHasOxygen(World world) {
-        if (getBeyondEarthDimensions(world.isClient).stream().noneMatch(world.getRegistryKey()::equals)) {
+        if (getAdAstraDimensions(world.isClient).stream().noneMatch(world.getRegistryKey()::equals)) {
             return true;
         }
         if (getOrbitWorlds(world.isClient).stream().anyMatch(world.getRegistryKey()::equals)) {
@@ -308,13 +308,13 @@ public class ModUtils {
         }
     }
 
-    public static Set<RegistryKey<World>> getBeyondEarthDimensions(boolean isClient) {
+    public static Set<RegistryKey<World>> getAdAstraDimensions(boolean isClient) {
         return Stream.concat(getPlanets(isClient).stream(), getOrbitWorlds(isClient).stream()).collect(Collectors.toSet());
     }
 
     public static Set<RegistryKey<World>> getOrbitWorlds(boolean isClient) {
         Set<RegistryKey<World>> worlds = new HashSet<>();
-        (isClient ? BeyondEarthClient.planets : BeyondEarth.planets).forEach(planet -> {
+        (isClient ? AdAstraClient.planets : AdAstra.planets).forEach(planet -> {
             if (!worlds.contains(planet.orbitWorld()))
                 worlds.add(planet.orbitWorld());
         });
@@ -323,13 +323,13 @@ public class ModUtils {
 
     public static Set<RegistryKey<World>> getPlanets(boolean isClient) {
         Set<RegistryKey<World>> worlds = new HashSet<>();
-        (isClient ? BeyondEarthClient.planets : BeyondEarth.planets).forEach(planet -> worlds.add(planet.world()));
+        (isClient ? AdAstraClient.planets : AdAstra.planets).forEach(planet -> worlds.add(planet.world()));
         return worlds;
     }
 
     private static final Set<RegistryKey<World>> getWorldsWithoutOxygen(boolean isClient) {
         Set<RegistryKey<World>> worlds = new HashSet<>();
-        (isClient ? BeyondEarthClient.planets : BeyondEarth.planets).stream().filter(planet -> planet.hasOxygen()).forEach(planet -> worlds.add(planet.world()));
+        (isClient ? AdAstraClient.planets : AdAstra.planets).stream().filter(planet -> planet.hasOxygen()).forEach(planet -> worlds.add(planet.world()));
         return worlds;
     }
 

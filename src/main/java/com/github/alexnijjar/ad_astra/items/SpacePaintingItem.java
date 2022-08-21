@@ -1,8 +1,8 @@
-package com.github.alexnijjar.beyond_earth.items;
+package com.github.alexnijjar.ad_astra.items;
 
 import java.util.Optional;
 
-import com.github.alexnijjar.beyond_earth.entities.SpacePaintingEntity;
+import com.github.alexnijjar.ad_astra.entities.SpacePaintingEntity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;

@@ -1,6 +1,6 @@
-package com.github.alexnijjar.beyond_earth.registry;
+package com.github.alexnijjar.ad_astra.registry;
 
-import com.github.alexnijjar.beyond_earth.commands.PlanetGuiCommand;
+import com.github.alexnijjar.ad_astra.commands.PlanetGuiCommand;
 
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 

@@ -1,10 +1,10 @@
 {
-    "galaxy": "beyond_earth:milky_way",
-    "solar_system": "beyond_earth:proxima_centauri",
+    "galaxy": "ad_astra:milky_way",
+    "solar_system": "ad_astra:proxima_centauri",
     "sun_type": "blue_sun",
     "planetary_rings": [
         {
-            "planet": "beyond_earth:glacio",
+            "planet": "ad_astra:glacio",
             "radius": 4.0
         }
     ]

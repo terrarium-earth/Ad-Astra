@@ -1,11 +1,11 @@
-package com.github.alexnijjar.beyond_earth.util;
+package com.github.alexnijjar.ad_astra.util;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.client.registry.ClientModKeybindings;
+import com.github.alexnijjar.ad_astra.AdAstra;
+import com.github.alexnijjar.ad_astra.client.registry.ClientModKeybindings;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -68,7 +68,7 @@ public class ModKeyBindings {
             return PLAYER_KEYS.get(player.getUuid()).clickingRight;
         }
         }
-        BeyondEarth.LOGGER.warn("Invalid Keypress on server: " + key);
+        AdAstra.LOGGER.warn("Invalid Keypress on server: " + key);
         return false;
     }
 
@@ -101,7 +101,7 @@ public class ModKeyBindings {
         }
         }
 
-        BeyondEarth.LOGGER.warn("Invalid Keypress on client: " + key);
+        AdAstra.LOGGER.warn("Invalid Keypress on client: " + key);
         return false;
     }
 
@@ -119,7 +119,7 @@ public class ModKeyBindings {
         case "left" -> PLAYER_KEYS.get(uuid).clickingLeft = keyDown;
 
         case "right" -> PLAYER_KEYS.get(uuid).clickingRight = keyDown;
-        default -> BeyondEarth.LOGGER.warn("Invalid Keypress on server packet: " + key);
+        default -> AdAstra.LOGGER.warn("Invalid Keypress on server packet: " + key);
         }
     }
 }

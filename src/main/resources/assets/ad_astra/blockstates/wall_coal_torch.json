@@ -1,18 +1,18 @@
 {
   "variants": {
     "facing=east": {
-      "model": "beyond_earth:block/wall_coal_torch"
+      "model": "ad_astra:block/wall_coal_torch"
     },
     "facing=north": {
-      "model": "beyond_earth:block/wall_coal_torch",
+      "model": "ad_astra:block/wall_coal_torch",
       "y": 270
     },
     "facing=south": {
-      "model": "beyond_earth:block/wall_coal_torch",
+      "model": "ad_astra:block/wall_coal_torch",
       "y": 90
     },
     "facing=west": {
-      "model": "beyond_earth:block/wall_coal_torch",
+      "model": "ad_astra:block/wall_coal_torch",
       "y": 180
     }
   }

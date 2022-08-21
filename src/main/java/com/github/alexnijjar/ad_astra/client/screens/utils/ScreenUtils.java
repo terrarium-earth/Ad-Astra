@@ -1,6 +1,6 @@
 package com.github.alexnijjar.ad_astra.client.screens.utils;
 
-import com.github.alexnijjar.ad_astra.BeyondEarth;
+import com.github.alexnijjar.ad_astra.AdAstra;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.fabricmc.api.EnvType;
@@ -20,7 +20,7 @@ import net.minecraft.util.math.Vec3f;
 public class ScreenUtils {
 
     public static Text createText(String text) {
-        return Text.translatable("gui." + BeyondEarth.MOD_ID + ".text." + text);
+        return Text.translatable("gui." + AdAstra.MOD_ID + ".text." + text);
     }
 
     public static void addTexture(MatrixStack matrices, int x, int y, int width, int height, Identifier texture) {

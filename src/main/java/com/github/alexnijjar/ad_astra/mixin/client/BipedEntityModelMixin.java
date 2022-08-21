@@ -1,12 +1,12 @@
-package com.github.alexnijjar.beyond_earth.mixin.client;
+package com.github.alexnijjar.ad_astra.mixin.client;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.github.alexnijjar.beyond_earth.entities.vehicles.VehicleEntity;
-import com.github.alexnijjar.beyond_earth.items.vehicles.VehicleItem;
+import com.github.alexnijjar.ad_astra.entities.vehicles.VehicleEntity;
+import com.github.alexnijjar.ad_astra.items.vehicles.VehicleItem;
 
 import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.entity.EntityPose;

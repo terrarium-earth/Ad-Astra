@@ -1,8 +1,8 @@
-package com.github.alexnijjar.beyond_earth.entities.mobs;
+package com.github.alexnijjar.ad_astra.entities.mobs;
 
-import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.entities.projectiles.IceSpitEntity;
-import com.github.alexnijjar.beyond_earth.registry.ModEntityTypes;
+import com.github.alexnijjar.ad_astra.AdAstra;
+import com.github.alexnijjar.ad_astra.entities.projectiles.IceSpitEntity;
+import com.github.alexnijjar.ad_astra.registry.ModEntityTypes;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -91,7 +91,7 @@ public class AlienZombieEntity extends HostileEntity implements RangedAttackMob 
 
     @Override
     public boolean canSpawn(WorldAccess world, SpawnReason spawnReason) {
-        if (!BeyondEarth.CONFIG.world.spawnAlienZombies) {
+        if (!AdAstra.CONFIG.world.spawnAlienZombies) {
             return false;
         }
 

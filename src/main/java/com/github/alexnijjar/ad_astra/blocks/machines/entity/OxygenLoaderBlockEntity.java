@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import com.github.alexnijjar.ad_astra.BeyondEarth;
+import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.gui.screen_handlers.ConversionScreenHandler;
 import com.github.alexnijjar.ad_astra.recipes.OxygenConversionRecipe;
 import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
@@ -20,9 +20,9 @@ import net.minecraft.util.math.BlockPos;
 
 public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
 
-    public static final long MAX_ENERGY = BeyondEarth.CONFIG.oxygenLoader.maxEnergy;
-    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.oxygenLoader.energyPerTick;
-    public static final int TANK_SIZE = BeyondEarth.CONFIG.oxygenLoader.tankBuckets;
+    public static final long MAX_ENERGY = AdAstra.CONFIG.oxygenLoader.maxEnergy;
+    public static final long ENERGY_PER_TICK = AdAstra.CONFIG.oxygenLoader.energyPerTick;
+    public static final int TANK_SIZE = AdAstra.CONFIG.oxygenLoader.tankBuckets;
 
     public OxygenLoaderBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.OXYGEN_LOADER_ENTITY, blockPos, blockState);

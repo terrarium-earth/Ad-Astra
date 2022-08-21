@@ -1,10 +1,10 @@
-package com.github.alexnijjar.beyond_earth.items;
+package com.github.alexnijjar.ad_astra.items;
 
 import java.util.List;
 
-import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.registry.ModItems;
-import com.github.alexnijjar.beyond_earth.util.FluidUtils;
+import com.github.alexnijjar.ad_astra.AdAstra;
+import com.github.alexnijjar.ad_astra.registry.ModItems;
+import com.github.alexnijjar.ad_astra.util.FluidUtils;
 
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
@@ -26,7 +26,7 @@ import net.minecraft.world.World;
 
 public class OxygenTankItem extends Item implements FluidContainingItem {
 
-    public static final long TANK_SIZE = BeyondEarth.CONFIG.world.oxygenTankSize;
+    public static final long TANK_SIZE = AdAstra.CONFIG.world.oxygenTankSize;
 
     public OxygenTankItem(Settings settings) {
         super(settings);
@@ -35,8 +35,8 @@ public class OxygenTankItem extends Item implements FluidContainingItem {
     @Override
     public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
         long oxygen = FluidUtils.dropletsToMillibuckets(this.getAmount(stack));
-        tooltip.add(Text.translatable("tooltip.beyond_earth.consumable"));
-        tooltip.add(Text.translatable("tooltip.beyond_earth.space_suit", oxygen, FluidUtils.dropletsToMillibuckets(getTankSize())).setStyle(Style.EMPTY.withColor(oxygen > 0 ? Formatting.GREEN : Formatting.RED)));
+        tooltip.add(Text.translatable("tooltip.ad_astra.consumable"));
+        tooltip.add(Text.translatable("tooltip.ad_astra.space_suit", oxygen, FluidUtils.dropletsToMillibuckets(getTankSize())).setStyle(Style.EMPTY.withColor(oxygen > 0 ? Formatting.GREEN : Formatting.RED)));
     }
 
     @Override

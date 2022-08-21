@@ -1,6 +1,6 @@
-// package com.github.alexnijjar.beyond_earth.world.chunk;
+// package com.github.alexnijjar.ad_astra.world.chunk;
 
-// import com.github.alexnijjar.beyond_earth.mixin.NoiseChunkGeneratorAccessor;
+// import com.github.alexnijjar.ad_astra.mixin.NoiseChunkGeneratorAccessor;
 // import com.mojang.serialization.Codec;
 // import com.mojang.serialization.codecs.RecordCodecBuilder;
 

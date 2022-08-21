@@ -1,10 +1,10 @@
-package com.github.alexnijjar.beyond_earth.compat.rei.widgets;
+package com.github.alexnijjar.ad_astra.compat.rei.widgets;
 
 import java.util.Objects;
 
-import com.github.alexnijjar.beyond_earth.client.screens.GuiUtil;
-import com.github.alexnijjar.beyond_earth.client.screens.utils.ScreenUtils;
-import com.github.alexnijjar.beyond_earth.compat.rei.utils.REIUtils;
+import com.github.alexnijjar.ad_astra.client.screens.GuiUtil;
+import com.github.alexnijjar.ad_astra.client.screens.utils.ScreenUtils;
+import com.github.alexnijjar.ad_astra.compat.rei.utils.REIUtils;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import me.shedaniel.math.Point;

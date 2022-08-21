@@ -2,7 +2,7 @@ package com.github.alexnijjar.ad_astra.blocks.machines.entity;
 
 import javax.annotation.Nullable;
 
-import com.github.alexnijjar.ad_astra.BeyondEarth;
+import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.blocks.machines.AbstractMachineBlock;
 import com.github.alexnijjar.ad_astra.gui.screen_handlers.WaterPumpScreenHandler;
 import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
@@ -25,10 +25,10 @@ import net.minecraft.util.math.Direction;
 
 public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
 
-    public static final long MAX_ENERGY = BeyondEarth.CONFIG.waterPump.maxEnergy;
-    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.waterPump.energyPerTick;
-    public static final int TANK_SIZE = BeyondEarth.CONFIG.waterPump.tankBuckets;
-    public static final long TRANSFER_PER_TICK = BeyondEarth.CONFIG.waterPump.transferPerTick;
+    public static final long MAX_ENERGY = AdAstra.CONFIG.waterPump.maxEnergy;
+    public static final long ENERGY_PER_TICK = AdAstra.CONFIG.waterPump.energyPerTick;
+    public static final int TANK_SIZE = AdAstra.CONFIG.waterPump.tankBuckets;
+    public static final long TRANSFER_PER_TICK = AdAstra.CONFIG.waterPump.transferPerTick;
     public static final Direction[] INSERT_DIRECTIONS = { Direction.UP, Direction.SOUTH };
 
     private long waterExtracted;
@@ -106,7 +106,7 @@ public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
                         this.setActive(false);
                     }
 
-                    if (BeyondEarth.CONFIG.waterPump.deleteWaterBelowWaterPump) {
+                    if (AdAstra.CONFIG.waterPump.deleteWaterBelowWaterPump) {
                         // Delete the water block after it has been fully extracted.
                         if (waterExtracted >= FluidConstants.BLOCK) {
                             waterExtracted = 0;

@@ -1,18 +1,18 @@
 {
   "variants": {
     "facing=north": {
-      "model": "beyond_earth:block/nasa_workbench"
+      "model": "ad_astra:block/nasa_workbench"
     },
     "facing=east": {
-      "model": "beyond_earth:block/nasa_workbench",
+      "model": "ad_astra:block/nasa_workbench",
       "y": 90
     },
     "facing=south": {
-      "model": "beyond_earth:block/nasa_workbench",
+      "model": "ad_astra:block/nasa_workbench",
       "y": 180
     },
     "facing=west": {
-      "model": "beyond_earth:block/nasa_workbench",
+      "model": "ad_astra:block/nasa_workbench",
       "y": 270
     }
   }

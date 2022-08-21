@@ -1,8 +1,8 @@
-package com.github.alexnijjar.beyond_earth.entities.mobs;
+package com.github.alexnijjar.ad_astra.entities.mobs;
 
 import javax.annotation.Nullable;
 
-import com.github.alexnijjar.beyond_earth.registry.ModEntityTypes;
+import com.github.alexnijjar.ad_astra.registry.ModEntityTypes;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

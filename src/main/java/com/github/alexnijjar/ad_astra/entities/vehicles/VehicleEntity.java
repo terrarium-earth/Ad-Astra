@@ -1,14 +1,14 @@
-package com.github.alexnijjar.beyond_earth.entities.vehicles;
+package com.github.alexnijjar.ad_astra.entities.vehicles;
 
 import javax.annotation.Nullable;
 
-import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.gui.VehicleScreenHandlerFactory;
-import com.github.alexnijjar.beyond_earth.items.vehicles.VehicleItem;
-import com.github.alexnijjar.beyond_earth.registry.ModFluids;
-import com.github.alexnijjar.beyond_earth.util.CustomInventory;
-import com.github.alexnijjar.beyond_earth.util.FluidUtils;
-import com.github.alexnijjar.beyond_earth.util.ModUtils;
+import com.github.alexnijjar.ad_astra.AdAstra;
+import com.github.alexnijjar.ad_astra.gui.VehicleScreenHandlerFactory;
+import com.github.alexnijjar.ad_astra.items.vehicles.VehicleItem;
+import com.github.alexnijjar.ad_astra.registry.ModFluids;
+import com.github.alexnijjar.ad_astra.util.CustomInventory;
+import com.github.alexnijjar.ad_astra.util.FluidUtils;
+import com.github.alexnijjar.ad_astra.util.ModUtils;
 
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
@@ -71,7 +71,7 @@ public abstract class VehicleEntity extends Entity {
     protected void initDataTracker() {
         this.dataTracker.startTracking(SPEED, 0.0f);
         this.dataTracker.startTracking(FLUID_AMOUNT, 0);
-        this.dataTracker.startTracking(FLUID_VARIANT, "beyond_earth:fuel");
+        this.dataTracker.startTracking(FLUID_VARIANT, "ad_astra:fuel");
     }
 
     @Override
@@ -171,15 +171,15 @@ public abstract class VehicleEntity extends Entity {
         if (this.getSpeed() < 0.001 && this.getSpeed() > -0.001) {
             this.setSpeed(0.0f);
         }
-        this.setSpeed(MathHelper.clamp(this.getSpeed(), BeyondEarth.CONFIG.vehicles.minSpeed, BeyondEarth.CONFIG.vehicles.maxSpeed));
+        this.setSpeed(MathHelper.clamp(this.getSpeed(), AdAstra.CONFIG.vehicles.minSpeed, AdAstra.CONFIG.vehicles.maxSpeed));
     }
 
     // Apply gravity to the vehicle.
     public void doGravity() {
         if (!this.hasNoGravity()) {
             this.setVelocity(this.getVelocity().add(0, -0.03, 0));
-            if (this.getVelocity().getY() < BeyondEarth.CONFIG.vehicles.gravity) {
-                this.setVelocity(new Vec3d(this.getVelocity().getX(), BeyondEarth.CONFIG.vehicles.gravity, this.getVelocity().getZ()));
+            if (this.getVelocity().getY() < AdAstra.CONFIG.vehicles.gravity) {
+                this.setVelocity(new Vec3d(this.getVelocity().getX(), AdAstra.CONFIG.vehicles.gravity, this.getVelocity().getZ()));
             }
         }
     }
@@ -263,8 +263,8 @@ public abstract class VehicleEntity extends Entity {
 
     @Override
     public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
-        if (this.getVelocity().getY() < BeyondEarth.CONFIG.vehicles.fallingExplosionThreshold) {
-            this.explode(BeyondEarth.CONFIG.vehicles.fallingExplosionMultiplier);
+        if (this.getVelocity().getY() < AdAstra.CONFIG.vehicles.fallingExplosionThreshold) {
+            this.explode(AdAstra.CONFIG.vehicles.fallingExplosionMultiplier);
             return true;
         }
         return false;

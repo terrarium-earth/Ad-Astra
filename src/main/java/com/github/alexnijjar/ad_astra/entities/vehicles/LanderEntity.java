@@ -1,9 +1,9 @@
-package com.github.alexnijjar.beyond_earth.entities.vehicles;
+package com.github.alexnijjar.ad_astra.entities.vehicles;
 
-import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.gui.LanderScreenHandlerFactory;
-import com.github.alexnijjar.beyond_earth.util.ModKeyBindings;
-import com.github.alexnijjar.beyond_earth.util.ModUtils;
+import com.github.alexnijjar.ad_astra.AdAstra;
+import com.github.alexnijjar.ad_astra.gui.LanderScreenHandlerFactory;
+import com.github.alexnijjar.ad_astra.util.ModKeyBindings;
+import com.github.alexnijjar.ad_astra.util.ModUtils;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;
@@ -86,10 +86,10 @@ public class LanderEntity extends VehicleEntity {
 
     public void applyBoosters() {
         if (this.getVelocity().getY() < 0.0) {
-            this.setVelocity(this.getVelocity().add(0.0, BeyondEarth.CONFIG.lander.boosterSpeed, 0.0));
+            this.setVelocity(this.getVelocity().add(0.0, AdAstra.CONFIG.lander.boosterSpeed, 0.0));
 
-            if (this.getVelocity().getY() > BeyondEarth.CONFIG.lander.boosterThreshold) {
-                this.setVelocity(0.0, BeyondEarth.CONFIG.lander.boosterThreshold, 0.0);
+            if (this.getVelocity().getY() > AdAstra.CONFIG.lander.boosterThreshold) {
+                this.setVelocity(0.0, AdAstra.CONFIG.lander.boosterThreshold, 0.0);
             }
 
             // Particles.

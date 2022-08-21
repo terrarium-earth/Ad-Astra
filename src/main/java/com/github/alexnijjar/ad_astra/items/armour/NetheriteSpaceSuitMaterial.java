@@ -1,4 +1,4 @@
-package com.github.alexnijjar.beyond_earth.items.armour;
+package com.github.alexnijjar.ad_astra.items.armour;
 
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorMaterial;

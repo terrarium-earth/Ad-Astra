@@ -1,16 +1,16 @@
-package com.github.alexnijjar.beyond_earth.mixin.client;
+package com.github.alexnijjar.ad_astra.mixin.client;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.github.alexnijjar.beyond_earth.client.screens.PlayerOverlayScreen;
-import com.github.alexnijjar.beyond_earth.entities.vehicles.LanderEntity;
-import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntity;
-import com.github.alexnijjar.beyond_earth.entities.vehicles.VehicleEntity;
-import com.github.alexnijjar.beyond_earth.items.armour.SpaceSuit;
-import com.github.alexnijjar.beyond_earth.util.ModUtils;
+import com.github.alexnijjar.ad_astra.client.screens.PlayerOverlayScreen;
+import com.github.alexnijjar.ad_astra.entities.vehicles.LanderEntity;
+import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntity;
+import com.github.alexnijjar.ad_astra.entities.vehicles.VehicleEntity;
+import com.github.alexnijjar.ad_astra.items.armour.SpaceSuit;
+import com.github.alexnijjar.ad_astra.util.ModUtils;
 
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.EquipmentSlot;

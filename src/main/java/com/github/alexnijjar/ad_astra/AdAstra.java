@@ -69,6 +69,6 @@ public class AdAstra implements ModInitializer {
         // Packets.
         ModC2SPackets.register();
 
-        AdAstra.LOGGER.info("Beyond Earth Initialized! 🚀");
+        AdAstra.LOGGER.info("Ad Astra Initialized! 🚀");
     }
 }

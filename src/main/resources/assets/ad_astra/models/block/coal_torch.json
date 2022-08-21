@@ -1,9 +1,9 @@
 {
-  "parent": "beyond_earth:custom/template_torch",
+  "parent": "ad_astra:custom/template_torch",
   "textures": {
-    "all": "beyond_earth:blocks/coal_torch",
-    "particle": "beyond_earth:blocks/coal_torch",
-    "2": "beyond_earth:blocks/coal_torch",
-    "missing": "beyond_earth:blocks/coal_torch"
+    "all": "ad_astra:blocks/coal_torch",
+    "particle": "ad_astra:blocks/coal_torch",
+    "2": "ad_astra:blocks/coal_torch",
+    "missing": "ad_astra:blocks/coal_torch"
   }
 }

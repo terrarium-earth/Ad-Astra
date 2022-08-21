@@ -1,6 +1,6 @@
-package com.github.alexnijjar.beyond_earth.entities.vehicles;
+package com.github.alexnijjar.ad_astra.entities.vehicles;
 
-import com.github.alexnijjar.beyond_earth.registry.ModItems;
+import com.github.alexnijjar.ad_astra.registry.ModItems;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemStack;

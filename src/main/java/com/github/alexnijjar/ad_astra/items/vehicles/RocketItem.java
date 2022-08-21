@@ -1,13 +1,13 @@
-package com.github.alexnijjar.beyond_earth.items.vehicles;
+package com.github.alexnijjar.ad_astra.items.vehicles;
 
 import java.util.List;
 
-import com.github.alexnijjar.beyond_earth.blocks.launch_pad.RocketLaunchPad;
-import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntity;
-import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier1;
-import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier2;
-import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier3;
-import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier4;
+import com.github.alexnijjar.ad_astra.blocks.launch_pad.RocketLaunchPad;
+import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntity;
+import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntityTier1;
+import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntityTier2;
+import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntityTier3;
+import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntityTier4;
 
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.minecraft.block.BlockState;

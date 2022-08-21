@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "beyond_earth:block/polished_moon_stone"
+      "model": "ad_astra:block/polished_moon_stone"
     }
   }
 }

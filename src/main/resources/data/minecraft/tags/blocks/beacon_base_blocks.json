@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
-    "beyond_earth:steel_block",
-    "beyond_earth:desh_block",
-    "beyond_earth:ostrum_block",
-    "beyond_earth:calorite_block"
+    "ad_astra:steel_block",
+    "ad_astra:desh_block",
+    "ad_astra:ostrum_block",
+    "ad_astra:calorite_block"
   ]
 }

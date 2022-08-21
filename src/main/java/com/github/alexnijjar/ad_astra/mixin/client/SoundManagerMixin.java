@@ -1,13 +1,13 @@
-package com.github.alexnijjar.beyond_earth.mixin.client;
+package com.github.alexnijjar.ad_astra.mixin.client;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.registry.ModSounds;
-import com.github.alexnijjar.beyond_earth.util.ModUtils;
+import com.github.alexnijjar.ad_astra.AdAstra;
+import com.github.alexnijjar.ad_astra.registry.ModSounds;
+import com.github.alexnijjar.ad_astra.util.ModUtils;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.sound.Sound;
@@ -30,7 +30,7 @@ public class SoundManagerMixin {
             return;
         }
 
-        if (!BeyondEarth.CONFIG.world.doSpaceMuffler) {
+        if (!AdAstra.CONFIG.world.doSpaceMuffler) {
             return;
         }
         if (sound.getId().equals(ModSounds.ROCKET_LAUNCH_SOUND_ID)) {
@@ -57,7 +57,7 @@ public class SoundManagerMixin {
             return;
         }
 
-        if (!BeyondEarth.CONFIG.world.doSpaceMuffler) {
+        if (!AdAstra.CONFIG.world.doSpaceMuffler) {
             return;
         }
         if (sound.getId().equals(ModSounds.ROCKET_LAUNCH_SOUND_ID)) {
@@ -68,7 +68,7 @@ public class SoundManagerMixin {
             return;
         }
 
-        if (!BeyondEarth.CONFIG.world.doSpaceMuffler) {
+        if (!AdAstra.CONFIG.world.doSpaceMuffler) {
             return;
         }
         MinecraftClient client = MinecraftClient.getInstance();

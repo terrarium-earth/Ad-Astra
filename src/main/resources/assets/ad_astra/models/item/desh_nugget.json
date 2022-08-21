@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "beyond_earth:items/desh_nugget"
+    "layer0": "ad_astra:items/desh_nugget"
   }
 }

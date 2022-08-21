@@ -1,4 +1,4 @@
-package com.github.alexnijjar.beyond_earth.items;
+package com.github.alexnijjar.ad_astra.items;
 
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;

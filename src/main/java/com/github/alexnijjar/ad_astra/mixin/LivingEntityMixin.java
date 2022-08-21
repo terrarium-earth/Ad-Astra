@@ -1,4 +1,4 @@
-package com.github.alexnijjar.beyond_earth.mixin;
+package com.github.alexnijjar.ad_astra.mixin;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -9,12 +9,12 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.entities.vehicles.VehicleEntity;
-import com.github.alexnijjar.beyond_earth.items.armour.SpaceSuit;
-import com.github.alexnijjar.beyond_earth.registry.ModTags;
-import com.github.alexnijjar.beyond_earth.util.ModDamageSource;
-import com.github.alexnijjar.beyond_earth.util.ModUtils;
+import com.github.alexnijjar.ad_astra.AdAstra;
+import com.github.alexnijjar.ad_astra.entities.vehicles.VehicleEntity;
+import com.github.alexnijjar.ad_astra.items.armour.SpaceSuit;
+import com.github.alexnijjar.ad_astra.registry.ModTags;
+import com.github.alexnijjar.ad_astra.util.ModDamageSource;
+import com.github.alexnijjar.ad_astra.util.ModUtils;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -34,7 +34,7 @@ public abstract class LivingEntityMixin {
 
     @ModifyConstant(method = "travel", constant = @Constant(doubleValue = 0.08))
     public double setGravity(double value) {
-        if (BeyondEarth.CONFIG.world.doLivingEntityGravity) {
+        if (AdAstra.CONFIG.world.doLivingEntityGravity) {
             return ModUtils.getMixinGravity(value, this);
         } else {
             return value;
@@ -94,7 +94,7 @@ public abstract class LivingEntityMixin {
                 return;
             }
 
-            if (BeyondEarth.CONFIG.world.acidRainBurns) {
+            if (AdAstra.CONFIG.world.acidRainBurns) {
                 // Venus acid rain.
                 if (((EntityInvoker) entity).invokeIsBeingRainedOn() && entity.world.getRegistryKey().equals(ModUtils.VENUS_KEY)) {
                     boolean affectedByRain = true;
@@ -112,7 +112,7 @@ public abstract class LivingEntityMixin {
                 }
             }
 
-            if (BeyondEarth.CONFIG.world.doOxygen) {
+            if (AdAstra.CONFIG.world.doOxygen) {
                 if (!ModUtils.checkTag(entity, ModTags.LIVES_WITHOUT_OXYGEN)) {
                     boolean hasOxygen = false;
                     boolean hasNetheriteSpaceSuit = false;

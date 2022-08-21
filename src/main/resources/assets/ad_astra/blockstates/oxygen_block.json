@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "beyond_earth:block/oxygen_block"
+      "model": "ad_astra:block/oxygen_block"
     }
   }
 }

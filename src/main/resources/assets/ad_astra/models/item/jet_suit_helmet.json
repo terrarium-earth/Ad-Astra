@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "beyond_earth:items/jet_suit_helmet"
+    "layer0": "ad_astra:items/jet_suit_helmet"
   }
 }

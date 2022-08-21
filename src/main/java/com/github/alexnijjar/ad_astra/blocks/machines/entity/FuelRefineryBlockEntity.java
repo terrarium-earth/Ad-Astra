@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.github.alexnijjar.ad_astra.BeyondEarth;
+import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.gui.screen_handlers.ConversionScreenHandler;
 import com.github.alexnijjar.ad_astra.recipes.FuelConversionRecipe;
 import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
@@ -20,9 +20,9 @@ import net.minecraft.util.math.BlockPos;
 
 public class FuelRefineryBlockEntity extends FluidMachineBlockEntity {
 
-    public static final long MAX_ENERGY = BeyondEarth.CONFIG.fuelRefinery.maxEnergy;
-    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.fuelRefinery.energyPerTick;
-    public static final int TANK_SIZE = BeyondEarth.CONFIG.fuelRefinery.tankBuckets;
+    public static final long MAX_ENERGY = AdAstra.CONFIG.fuelRefinery.maxEnergy;
+    public static final long ENERGY_PER_TICK = AdAstra.CONFIG.fuelRefinery.energyPerTick;
+    public static final int TANK_SIZE = AdAstra.CONFIG.fuelRefinery.tankBuckets;
 
     public FuelRefineryBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.FUEL_REFINERY_ENTITY, blockPos, blockState);

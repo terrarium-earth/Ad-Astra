@@ -1,7 +1,7 @@
-package com.github.alexnijjar.beyond_earth.items;
+package com.github.alexnijjar.ad_astra.items;
 
-import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
-import com.github.alexnijjar.beyond_earth.util.ModUtils;
+import com.github.alexnijjar.ad_astra.util.ModIdentifier;
+import com.github.alexnijjar.ad_astra.util.ModUtils;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -25,7 +25,7 @@ public class Astrodux extends Item {
             if (ModUtils.modLoaded("patchouli")) {
                 PatchouliAPI.get().openBookGUI(player, new ModIdentifier("astrodux"));
             } else {
-                user.sendMessage(Text.translatable("info.beyond_earth.install_patchouli"), true);
+                user.sendMessage(Text.translatable("info.ad_astra.install_patchouli"), true);
             }
         }
         return TypedActionResult.success(user.getStackInHand(hand));

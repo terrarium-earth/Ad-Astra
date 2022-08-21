@@ -1,6 +1,6 @@
-package com.github.alexnijjar.beyond_earth.gui;
+package com.github.alexnijjar.ad_astra.gui;
 
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.PlanetSelectionScreenHandler;
+import com.github.alexnijjar.ad_astra.gui.screen_handlers.PlanetSelectionScreenHandler;
 
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.entity.player.PlayerEntity;
@@ -24,6 +24,6 @@ public record PlanetSelectionScreenHandlerFactory(int tier) implements ExtendedS
 
     @Override
     public Text getDisplayName() {
-        return Text.translatable("gui.beyond_earth.planet_selection.name");
+        return Text.translatable("gui.ad_astra.planet_selection.name");
     }
 }

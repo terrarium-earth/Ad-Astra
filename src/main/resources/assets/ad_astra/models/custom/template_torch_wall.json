@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"ambientocclusion": false,
 	"textures": {
-		"2": "beyond_earth:blocks/torch",
-		"particle": "beyond_earth:blocks/torch"
+		"2": "ad_astra:blocks/torch",
+		"particle": "ad_astra:blocks/torch"
 	},
 	"elements": [
 		{

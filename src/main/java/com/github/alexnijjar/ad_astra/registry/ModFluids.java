@@ -1,9 +1,9 @@
-package com.github.alexnijjar.beyond_earth.registry;
+package com.github.alexnijjar.ad_astra.registry;
 
-import com.github.alexnijjar.beyond_earth.blocks.fluid.FuelFluid;
-import com.github.alexnijjar.beyond_earth.blocks.fluid.OilFluid;
-import com.github.alexnijjar.beyond_earth.blocks.fluid.OxygenFluid;
-import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
+import com.github.alexnijjar.ad_astra.blocks.fluid.FuelFluid;
+import com.github.alexnijjar.ad_astra.blocks.fluid.OilFluid;
+import com.github.alexnijjar.ad_astra.blocks.fluid.OxygenFluid;
+import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;

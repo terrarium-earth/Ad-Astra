@@ -1,8 +1,8 @@
-package com.github.alexnijjar.beyond_earth.world.processor;
+package com.github.alexnijjar.ad_astra.world.processor;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.github.alexnijjar.beyond_earth.registry.ModStructures;
+import com.github.alexnijjar.ad_astra.registry.ModStructures;
 import com.mojang.serialization.Codec;
 
 import net.minecraft.block.Blocks;

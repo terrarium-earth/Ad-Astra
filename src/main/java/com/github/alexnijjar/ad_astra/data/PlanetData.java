@@ -1,11 +1,11 @@
-package com.github.alexnijjar.beyond_earth.data;
+package com.github.alexnijjar.ad_astra.data;
 
 import java.io.InputStreamReader;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
+import com.github.alexnijjar.ad_astra.AdAstra;
+import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -47,12 +47,12 @@ public class PlanetData {
                             }
                         }
                     } catch (Exception e) {
-                        BeyondEarth.LOGGER.error("Failed to load Beyond Earth planet data from: \"" + id.toString() + "\"", e);
+                        AdAstra.LOGGER.error("Failed to load Ad Astra planet data from: \"" + id.toString() + "\"", e);
                         e.printStackTrace();
                     }
                 }
 
-                BeyondEarth.planets = planets;
+                AdAstra.planets = planets;
             }
         });
     }

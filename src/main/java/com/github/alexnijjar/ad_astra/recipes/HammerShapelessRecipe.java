@@ -1,8 +1,8 @@
-package com.github.alexnijjar.beyond_earth.recipes;
+package com.github.alexnijjar.ad_astra.recipes;
 
-import com.github.alexnijjar.beyond_earth.items.HammerItem;
-import com.github.alexnijjar.beyond_earth.registry.ModItems;
-import com.github.alexnijjar.beyond_earth.registry.ModRecipes;
+import com.github.alexnijjar.ad_astra.items.HammerItem;
+import com.github.alexnijjar.ad_astra.registry.ModItems;
+import com.github.alexnijjar.ad_astra.registry.ModRecipes;
 import com.google.gson.JsonObject;
 
 import net.minecraft.inventory.CraftingInventory;

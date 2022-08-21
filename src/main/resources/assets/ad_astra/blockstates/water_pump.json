@@ -1,18 +1,18 @@
 {
   "variants": {
     "facing=north": {
-      "model": "beyond_earth:block/water_pump"
+      "model": "ad_astra:block/water_pump"
     },
     "facing=east": {
-      "model": "beyond_earth:block/water_pump",
+      "model": "ad_astra:block/water_pump",
       "y": 90
     },
     "facing=south": {
-      "model": "beyond_earth:block/water_pump",
+      "model": "ad_astra:block/water_pump",
       "y": 180
     },
     "facing=west": {
-      "model": "beyond_earth:block/water_pump",
+      "model": "ad_astra:block/water_pump",
       "y": 270
     }
   }

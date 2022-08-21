@@ -1,11 +1,11 @@
 {
-	"parent": "beyond_earth:custom/energizer",
+	"parent": "ad_astra:custom/energizer",
 	"textures": {
-		"0": "beyond_earth:blocks/energizer_top",
-		"1": "beyond_earth:blocks/energizer_bottom",
-		"2": "beyond_earth:blocks/energizer_ring",
-		"3": "beyond_earth:blocks/energizer_side_yellow",
-		"9": "beyond_earth:blocks/energizer_steel_arm",
-		"particle": "beyond_earth:blocks/energizer_top"
+		"0": "ad_astra:blocks/energizer_top",
+		"1": "ad_astra:blocks/energizer_bottom",
+		"2": "ad_astra:blocks/energizer_ring",
+		"3": "ad_astra:blocks/energizer_side_yellow",
+		"9": "ad_astra:blocks/energizer_steel_arm",
+		"particle": "ad_astra:blocks/energizer_top"
 	}
 }

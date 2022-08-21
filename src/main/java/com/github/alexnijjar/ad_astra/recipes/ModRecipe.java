@@ -1,10 +1,10 @@
-package com.github.alexnijjar.beyond_earth.recipes;
+package com.github.alexnijjar.ad_astra.recipes;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-import com.github.alexnijjar.beyond_earth.util.ModInventory;
+import com.github.alexnijjar.ad_astra.util.ModInventory;
 
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;

@@ -1,6 +1,6 @@
 package com.github.alexnijjar.ad_astra.client.registry;
 
-import com.github.alexnijjar.ad_astra.client.BeyondEarthClient;
+import com.github.alexnijjar.ad_astra.client.AdAstraClient;
 import com.github.alexnijjar.ad_astra.client.renderer.sky.ModSky;
 import com.github.alexnijjar.ad_astra.client.renderer.sky.cloud_renderer.ModCloudRenderer;
 import com.github.alexnijjar.ad_astra.client.renderer.sky.dimension_effects.ModDimensionEffects;
@@ -20,7 +20,7 @@ public class ClientModSkies {
 
         public static void register() {
 
-                for (SkyRenderer skyRenderer : BeyondEarthClient.skyRenderers) {
+                for (SkyRenderer skyRenderer : AdAstraClient.skyRenderers) {
 
                         ModSky sky = new ModSky();
                         sky.setStars(skyRenderer.starsRenderer());

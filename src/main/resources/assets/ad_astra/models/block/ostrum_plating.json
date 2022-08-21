@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "beyond_earth:blocks/ostrum_plating"
+    "all": "ad_astra:blocks/ostrum_plating"
   }
 }

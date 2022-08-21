@@ -1,9 +1,9 @@
-package com.github.alexnijjar.beyond_earth.compat.rei.nasa_workbench;
+package com.github.alexnijjar.ad_astra.compat.rei.nasa_workbench;
 
 import java.util.List;
 
-import com.github.alexnijjar.beyond_earth.compat.rei.REICategories;
-import com.github.alexnijjar.beyond_earth.recipes.NasaWorkbenchRecipe;
+import com.github.alexnijjar.ad_astra.compat.rei.REICategories;
+import com.github.alexnijjar.ad_astra.recipes.NasaWorkbenchRecipe;
 
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.Display;

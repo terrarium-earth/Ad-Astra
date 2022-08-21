@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "beyond_earth:block/calorite_plating"
+      "model": "ad_astra:block/calorite_plating"
     }
   }
 }

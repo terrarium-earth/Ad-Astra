@@ -1,4 +1,4 @@
-package com.github.alexnijjar.beyond_earth.world;
+package com.github.alexnijjar.ad_astra.world;
 
 public class WorldSeed {
 

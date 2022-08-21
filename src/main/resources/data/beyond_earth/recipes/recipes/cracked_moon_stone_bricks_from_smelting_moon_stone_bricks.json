@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "cookingtime": 200,
-  "experience": 0.2,
-  "ingredient": {
-    "item": "beyond_earth:moon_stone_bricks"
-  },
-  "result": "beyond_earth:cracked_moon_stone_bricks"
-}

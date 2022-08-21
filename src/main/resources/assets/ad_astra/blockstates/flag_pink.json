@@ -1,33 +1,33 @@
 {
   "variants": {
     "facing=north,half=lower": {
-      "model": "beyond_earth:block/flag_down_pink"
+      "model": "ad_astra:block/flag_down_pink"
     },
     "facing=east,half=lower": {
-      "model": "beyond_earth:block/flag_down_pink",
+      "model": "ad_astra:block/flag_down_pink",
       "y": 90
     },
     "facing=south,half=lower": {
-      "model": "beyond_earth:block/flag_down_pink",
+      "model": "ad_astra:block/flag_down_pink",
       "y": 180
     },
     "facing=west,half=lower": {
-      "model": "beyond_earth:block/flag_down_pink",
+      "model": "ad_astra:block/flag_down_pink",
       "y": 270
     },
     "facing=north,half=upper": {
-      "model": "beyond_earth:block/flag_up_pink"
+      "model": "ad_astra:block/flag_up_pink"
     },
     "facing=east,half=upper": {
-      "model": "beyond_earth:block/flag_up_pink",
+      "model": "ad_astra:block/flag_up_pink",
       "y": 90
     },
     "facing=south,half=upper": {
-      "model": "beyond_earth:block/flag_up_pink",
+      "model": "ad_astra:block/flag_up_pink",
       "y": 180
     },
     "facing=west,half=upper": {
-      "model": "beyond_earth:block/flag_up_pink",
+      "model": "ad_astra:block/flag_up_pink",
       "y": 270
     }
   }

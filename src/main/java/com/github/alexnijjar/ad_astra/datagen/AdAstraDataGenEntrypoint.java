@@ -9,7 +9,7 @@ public class AdAstraDataGenEntrypoint implements DataGeneratorEntrypoint {
 
 	@Override
 	public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
-		AdAstra.LOGGER.info("Beyond Earth Datagen started...");
+		AdAstra.LOGGER.info("Ad Astra Datagen started...");
 
 		// Client
 		fabricDataGenerator.addProvider(ModModelProvider::new);
@@ -17,7 +17,7 @@ public class AdAstraDataGenEntrypoint implements DataGeneratorEntrypoint {
 		// Server
 		fabricDataGenerator.addProvider(ModBlockLootTableProvider::new);
 		fabricDataGenerator.addProvider(ModRecipeProvider::new);
-		AdAstra.LOGGER.info("Beyond Earth Datagen finished 🚀");
+		AdAstra.LOGGER.info("Ad Astra Datagen finished 🚀");
 		
 	}
 }

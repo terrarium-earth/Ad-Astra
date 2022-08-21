@@ -1,6 +1,6 @@
-package com.github.alexnijjar.beyond_earth.entities.mobs;
+package com.github.alexnijjar.ad_astra.entities.mobs;
 
-import com.github.alexnijjar.beyond_earth.BeyondEarth;
+import com.github.alexnijjar.ad_astra.AdAstra;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -55,7 +55,7 @@ public class StarCrawlerEntity extends HostileEntity {
 
     @Override
     public boolean canSpawn(WorldAccess world, SpawnReason spawnReason) {
-        if (!BeyondEarth.CONFIG.world.spawnStarCrawlers) {
+        if (!AdAstra.CONFIG.world.spawnStarCrawlers) {
             return false;
         }
 

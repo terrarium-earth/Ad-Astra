@@ -1,13 +1,13 @@
-package com.github.alexnijjar.beyond_earth.mixin.client;
+package com.github.alexnijjar.ad_astra.mixin.client;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.github.alexnijjar.beyond_earth.entities.vehicles.LanderEntity;
-import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntity;
-import com.github.alexnijjar.beyond_earth.items.vehicles.VehicleItem;
+import com.github.alexnijjar.ad_astra.entities.vehicles.LanderEntity;
+import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntity;
+import com.github.alexnijjar.ad_astra.items.vehicles.VehicleItem;
 
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.item.HeldItemRenderer;

@@ -1,4 +1,4 @@
-package com.github.alexnijjar.beyond_earth.data;
+package com.github.alexnijjar.ad_astra.data;
 
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.RegistryKey;

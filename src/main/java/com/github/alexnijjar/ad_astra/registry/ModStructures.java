@@ -1,8 +1,8 @@
-package com.github.alexnijjar.beyond_earth.registry;
+package com.github.alexnijjar.ad_astra.registry;
 
-import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
-import com.github.alexnijjar.beyond_earth.world.processor.StructureVoidProcessor;
-import com.github.alexnijjar.beyond_earth.world.structures.LargeJigsawStructure;
+import com.github.alexnijjar.ad_astra.util.ModIdentifier;
+import com.github.alexnijjar.ad_astra.world.processor.StructureVoidProcessor;
+import com.github.alexnijjar.ad_astra.world.structures.LargeJigsawStructure;
 import com.mojang.serialization.Codec;
 
 import net.minecraft.structure.processor.StructureProcessorType;

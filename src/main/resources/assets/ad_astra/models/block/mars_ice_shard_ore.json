@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "beyond_earth:blocks/mars_ice_shard_ore"
+    "all": "ad_astra:blocks/mars_ice_shard_ore"
   }
 }

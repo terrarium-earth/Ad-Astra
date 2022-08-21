@@ -1,10 +1,10 @@
-package com.github.alexnijjar.beyond_earth.networking;
+package com.github.alexnijjar.ad_astra.networking;
 
-import com.github.alexnijjar.beyond_earth.client.BeyondEarthClient;
-import com.github.alexnijjar.beyond_earth.data.ButtonColour;
-import com.github.alexnijjar.beyond_earth.data.Planet;
-import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntity;
-import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
+import com.github.alexnijjar.ad_astra.client.AdAstraClient;
+import com.github.alexnijjar.ad_astra.data.ButtonColour;
+import com.github.alexnijjar.ad_astra.data.Planet;
+import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntity;
+import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -25,7 +25,7 @@ public class ModS2CPackets {
 
         // Receive planet data on client.
         ClientPlayNetworking.registerGlobalReceiver(DATAPACK_PLANETS, (client, handler, mainBuf, responseSender) -> {
-            BeyondEarthClient.planets = mainBuf.readList(buf -> {
+            AdAstraClient.planets = mainBuf.readList(buf -> {
 
                 String name = buf.readString();
                 Identifier galaxy = buf.readIdentifier();

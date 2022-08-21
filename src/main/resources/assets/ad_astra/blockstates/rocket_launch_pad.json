@@ -1,10 +1,10 @@
 {
   "variants": {
     "lit=false": {
-      "model": "beyond_earth:block/rocket_launch_pad"
+      "model": "ad_astra:block/rocket_launch_pad"
     },
     "lit=true": {
-      "model": "beyond_earth:block/rocket_launch_pad_base"
+      "model": "ad_astra:block/rocket_launch_pad_base"
     }
   }
 }

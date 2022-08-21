@@ -2,7 +2,7 @@ package com.github.alexnijjar.ad_astra.blocks.machines.entity;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.github.alexnijjar.ad_astra.BeyondEarth;
+import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.gui.screen_handlers.CompressorScreenHandler;
 import com.github.alexnijjar.ad_astra.recipes.CookingRecipe;
 import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
@@ -18,8 +18,8 @@ import net.minecraft.util.math.Direction;
 
 public class CompressorBlockEntity extends ProcessingMachineBlockEntity {
 
-    public static final long MAX_ENERGY = BeyondEarth.CONFIG.compressor.maxEnergy;
-    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.compressor.energyPerTick;
+    public static final long MAX_ENERGY = AdAstra.CONFIG.compressor.maxEnergy;
+    public static final long ENERGY_PER_TICK = AdAstra.CONFIG.compressor.energyPerTick;
 
     public CompressorBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.COMPRESSOR_ENTITY, blockPos, blockState);

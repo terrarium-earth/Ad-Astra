@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "beyond_earth:block/venus_stone"
+      "model": "ad_astra:block/venus_stone"
     }
   }
 }

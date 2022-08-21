@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "beyond_earth:blocks/solar_panel",
-		"particle": "beyond_earth:blocks/solar_panel"
+		"0": "ad_astra:blocks/solar_panel",
+		"particle": "ad_astra:blocks/solar_panel"
 	},
 	"elements": [
 		{

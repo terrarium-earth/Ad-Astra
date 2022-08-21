@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "tag": "c:compressed_steel"
+    },
+    "B": {
+      "tag": "c:steel_blocks"
+    },
+    "C": {
+      "item": "minecraft:crafting_table"
+    },
+    "L": {
+      "item": "minecraft:lever"
+    },
+    "R": {
+      "item": "minecraft:redstone_block"
+    },
+    "T": {
+      "item": "minecraft:redstone_torch"
+    }
+  },
+  "pattern": [
+    "TLT",
+    "#C#",
+    "RBR"
+  ],
+  "result": {
+    "item": "ad_astra:nasa_workbench"
+  }
+}

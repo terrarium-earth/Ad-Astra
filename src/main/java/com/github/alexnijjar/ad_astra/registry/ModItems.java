@@ -1,31 +1,31 @@
-package com.github.alexnijjar.beyond_earth.registry;
+package com.github.alexnijjar.ad_astra.registry;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.blocks.machines.entity.CoalGeneratorBlockEntity;
-import com.github.alexnijjar.beyond_earth.blocks.machines.entity.SolarPanelBlockEntity;
-import com.github.alexnijjar.beyond_earth.blocks.machines.entity.WaterPumpBlockEntity;
-import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier1;
-import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier2;
-import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier3;
-import com.github.alexnijjar.beyond_earth.entities.vehicles.RocketEntityTier4;
-import com.github.alexnijjar.beyond_earth.items.FluidContainingItem.TankStorage;
-import com.github.alexnijjar.beyond_earth.items.Astrodux;
-import com.github.alexnijjar.beyond_earth.items.HammerItem;
-import com.github.alexnijjar.beyond_earth.items.OxygenTankItem;
-import com.github.alexnijjar.beyond_earth.items.SpacePaintingItem;
-import com.github.alexnijjar.beyond_earth.items.armour.JetSuit;
-import com.github.alexnijjar.beyond_earth.items.armour.NetheriteSpaceSuit;
-import com.github.alexnijjar.beyond_earth.items.armour.SpaceSuit;
-import com.github.alexnijjar.beyond_earth.items.vehicles.RocketItem;
-import com.github.alexnijjar.beyond_earth.items.vehicles.RoverItem;
-import com.github.alexnijjar.beyond_earth.items.vehicles.VehicleItem;
-import com.github.alexnijjar.beyond_earth.util.FluidUtils;
-import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
+import com.github.alexnijjar.ad_astra.AdAstra;
+import com.github.alexnijjar.ad_astra.blocks.machines.entity.CoalGeneratorBlockEntity;
+import com.github.alexnijjar.ad_astra.blocks.machines.entity.SolarPanelBlockEntity;
+import com.github.alexnijjar.ad_astra.blocks.machines.entity.WaterPumpBlockEntity;
+import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntityTier1;
+import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntityTier2;
+import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntityTier3;
+import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntityTier4;
+import com.github.alexnijjar.ad_astra.items.FluidContainingItem.TankStorage;
+import com.github.alexnijjar.ad_astra.items.Astrodux;
+import com.github.alexnijjar.ad_astra.items.HammerItem;
+import com.github.alexnijjar.ad_astra.items.OxygenTankItem;
+import com.github.alexnijjar.ad_astra.items.SpacePaintingItem;
+import com.github.alexnijjar.ad_astra.items.armour.JetSuit;
+import com.github.alexnijjar.ad_astra.items.armour.NetheriteSpaceSuit;
+import com.github.alexnijjar.ad_astra.items.armour.SpaceSuit;
+import com.github.alexnijjar.ad_astra.items.vehicles.RocketItem;
+import com.github.alexnijjar.ad_astra.items.vehicles.RoverItem;
+import com.github.alexnijjar.ad_astra.items.vehicles.VehicleItem;
+import com.github.alexnijjar.ad_astra.util.FluidUtils;
+import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -211,13 +211,13 @@ public interface ModItems {
         public static final BlockItem SOLAR_PANEL = register("solar_panel", new BlockItem(ModBlocks.SOLAR_PANEL, new FabricItemSettings().group(ITEM_GROUP_MACHINES)) {
                 @Override
                 public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-                        tooltip.add((Text.translatable("item.beyond_earth.generator.tooltip", SolarPanelBlockEntity.ENERGY_PER_TICK).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
+                        tooltip.add((Text.translatable("item.ad_astra.generator.tooltip", SolarPanelBlockEntity.ENERGY_PER_TICK).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
                 }
         });
         public static final BlockItem COAL_GENERATOR = register("coal_generator", new BlockItem(ModBlocks.COAL_GENERATOR, new FabricItemSettings().group(ITEM_GROUP_MACHINES)) {
                 @Override
                 public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-                        tooltip.add((Text.translatable("item.beyond_earth.generator.tooltip", CoalGeneratorBlockEntity.ENERGY_PER_TICK).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
+                        tooltip.add((Text.translatable("item.ad_astra.generator.tooltip", CoalGeneratorBlockEntity.ENERGY_PER_TICK).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
                 }
         });
         public static final BlockItem COMPRESSOR = registerBlockItem(ModBlocks.COMPRESSOR, ITEM_GROUP_MACHINES);
@@ -227,12 +227,12 @@ public interface ModItems {
         public static final BlockItem WATER_PUMP = register("water_pump", new BlockItem(ModBlocks.WATER_PUMP, new FabricItemSettings().group(ITEM_GROUP_MACHINES)) {
                 @Override
                 public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-                        tooltip.add((Text.translatable("item.beyond_earth.water_pump.tooltip", FluidUtils.dropletsToMillibuckets(WaterPumpBlockEntity.TRANSFER_PER_TICK)).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
+                        tooltip.add((Text.translatable("item.ad_astra.water_pump.tooltip", FluidUtils.dropletsToMillibuckets(WaterPumpBlockEntity.TRANSFER_PER_TICK)).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
                 }
         });
         public static final BlockItem ENERGIZER = registerBlockItem(ModBlocks.ENERGIZER, ITEM_GROUP_MACHINES);
 
-        public static final Item HAMMER = register("hammer", new HammerItem(new FabricItemSettings().group(ITEM_GROUP_BASICS).maxCount(1).maxDamage(BeyondEarth.CONFIG.world.hammerDurability)));
+        public static final Item HAMMER = register("hammer", new HammerItem(new FabricItemSettings().group(ITEM_GROUP_BASICS).maxCount(1).maxDamage(AdAstra.CONFIG.world.hammerDurability)));
 
         public static final Item IRON_STICK = registerItem("iron_stick", ITEM_GROUP_BASICS);
         public static final Item OXYGEN_GEAR = registerItem("oxygen_gear", ITEM_GROUP_BASICS);

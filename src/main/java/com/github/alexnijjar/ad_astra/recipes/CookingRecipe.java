@@ -1,4 +1,4 @@
-package com.github.alexnijjar.beyond_earth.recipes;
+package com.github.alexnijjar.ad_astra.recipes;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "beyond_earth:moon_sand",
-    "beyond_earth:mars_sand",
-    "beyond_earth:venus_sand"
+    "ad_astra:moon_sand",
+    "ad_astra:mars_sand",
+    "ad_astra:venus_sand"
   ]
 }

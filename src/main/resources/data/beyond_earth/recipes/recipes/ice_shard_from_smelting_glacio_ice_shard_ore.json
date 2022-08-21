@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "cookingtime": 200,
-  "experience": 1.0,
-  "ingredient": {
-    "item": "beyond_earth:glacio_ice_shard_ore"
-  },
-  "result": "beyond_earth:ice_shard"
-}

@@ -1,18 +1,18 @@
 {
   "variants": {
     "facing=north": {
-      "model": "beyond_earth:block/solar_panel",
+      "model": "ad_astra:block/solar_panel",
       "y": 180
     },
     "facing=east": {
-      "model": "beyond_earth:block/solar_panel",
+      "model": "ad_astra:block/solar_panel",
       "y": 270
     },
     "facing=south": {
-      "model": "beyond_earth:block/solar_panel"
+      "model": "ad_astra:block/solar_panel"
     },
     "facing=west": {
-      "model": "beyond_earth:block/solar_panel",
+      "model": "ad_astra:block/solar_panel",
       "y": 90
     }
   }

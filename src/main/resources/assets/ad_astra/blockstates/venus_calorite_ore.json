@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "beyond_earth:block/venus_calorite_ore"
+      "model": "ad_astra:block/venus_calorite_ore"
     }
   }
 }

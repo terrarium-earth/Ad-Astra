@@ -1,4 +1,4 @@
-package com.github.alexnijjar.beyond_earth.client.utils;
+package com.github.alexnijjar.ad_astra.client.utils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,8 +6,8 @@ import java.util.Set;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.registry.ModParticleTypes;
+import com.github.alexnijjar.ad_astra.AdAstra;
+import com.github.alexnijjar.ad_astra.registry.ModParticleTypes;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 @Environment(EnvType.CLIENT)
 public class ClientOxygenUtils {
 
-    public static final int UPDATE_OXYGEN_FILLER_TICKS = BeyondEarth.CONFIG.oxygenDistributor.refreshTicks;
+    public static final int UPDATE_OXYGEN_FILLER_TICKS = AdAstra.CONFIG.oxygenDistributor.refreshTicks;
     public static boolean renderOxygenParticles;
     private static int spawnOxygenBubblesTick = UPDATE_OXYGEN_FILLER_TICKS;
     public static long currentClientTick;
@@ -54,7 +54,7 @@ public class ClientOxygenUtils {
 
     // Checks if there is oxygen in a specific block in a specific dimension.
     public static boolean posHasOxygen(ClientWorld world, BlockPos pos) {
-        if (currentClientTick <= BeyondEarth.CONFIG.oxygenDistributor.oxygenGracePeriodTicks) {
+        if (currentClientTick <= AdAstra.CONFIG.oxygenDistributor.oxygenGracePeriodTicks) {
             return true;
         }
         for (Map.Entry<Pair<RegistryKey<World>, BlockPos>, Set<BlockPos>> entry : oxygenLocations.entrySet()) {

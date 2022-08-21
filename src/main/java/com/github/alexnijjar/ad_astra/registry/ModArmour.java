@@ -1,8 +1,8 @@
-package com.github.alexnijjar.beyond_earth.registry;
+package com.github.alexnijjar.ad_astra.registry;
 
-import com.github.alexnijjar.beyond_earth.items.armour.JetSuitMaterial;
-import com.github.alexnijjar.beyond_earth.items.armour.NetheriteSpaceSuitMaterial;
-import com.github.alexnijjar.beyond_earth.items.armour.SpaceSuitMaterial;
+import com.github.alexnijjar.ad_astra.items.armour.JetSuitMaterial;
+import com.github.alexnijjar.ad_astra.items.armour.NetheriteSpaceSuitMaterial;
+import com.github.alexnijjar.ad_astra.items.armour.SpaceSuitMaterial;
 
 import net.minecraft.item.ArmorMaterial;
 

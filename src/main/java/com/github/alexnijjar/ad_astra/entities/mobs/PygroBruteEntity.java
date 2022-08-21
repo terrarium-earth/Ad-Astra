@@ -1,4 +1,4 @@
-package com.github.alexnijjar.beyond_earth.entities.mobs;
+package com.github.alexnijjar.ad_astra.entities.mobs;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

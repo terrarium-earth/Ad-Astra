@@ -1,6 +1,6 @@
 package com.github.alexnijjar.ad_astra.client.screens;
 
-import com.github.alexnijjar.ad_astra.BeyondEarth;
+import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -144,7 +144,7 @@ public class PlayerOverlayScreen {
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
 
             // Speed text.
-            Text text = Text.translatable("message." + BeyondEarth.MOD_ID + ".speed", Math.round(speed * 10.0) / 10.0);
+            Text text = Text.translatable("message." + AdAstra.MOD_ID + ".speed", Math.round(speed * 10.0) / 10.0);
             client.textRenderer.drawWithShadow(matrices, text, screenX / 2 - 29, 80, -3407872);
 
             RenderSystem.disableBlend();

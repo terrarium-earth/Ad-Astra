@@ -3,7 +3,7 @@
     "category": "neutral",
     "sounds": [
       {
-        "name": "beyond_earth:rocket_fly",
+        "name": "ad_astra:rocket_fly",
         "stream": false
       }
     ]

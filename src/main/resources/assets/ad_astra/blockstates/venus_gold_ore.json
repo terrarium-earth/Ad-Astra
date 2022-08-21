@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "beyond_earth:block/venus_gold_ore"
+      "model": "ad_astra:block/venus_gold_ore"
     }
   }
 }

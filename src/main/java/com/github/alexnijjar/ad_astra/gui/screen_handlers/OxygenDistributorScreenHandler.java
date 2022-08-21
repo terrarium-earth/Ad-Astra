@@ -1,7 +1,7 @@
-package com.github.alexnijjar.beyond_earth.gui.screen_handlers;
+package com.github.alexnijjar.ad_astra.gui.screen_handlers;
 
-import com.github.alexnijjar.beyond_earth.blocks.machines.entity.OxygenDistributorBlockEntity;
-import com.github.alexnijjar.beyond_earth.registry.ModScreenHandlers;
+import com.github.alexnijjar.ad_astra.blocks.machines.entity.OxygenDistributorBlockEntity;
+import com.github.alexnijjar.ad_astra.registry.ModScreenHandlers;
 
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;

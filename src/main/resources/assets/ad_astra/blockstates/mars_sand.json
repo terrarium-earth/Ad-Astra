@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "beyond_earth:block/mars_sand"
+      "model": "ad_astra:block/mars_sand"
     }
   }
 }

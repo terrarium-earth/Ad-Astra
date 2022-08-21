@@ -1,13 +1,13 @@
-package com.github.alexnijjar.beyond_earth.entities;
+package com.github.alexnijjar.ad_astra.entities;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.mixin.PaintingEntityInvoker;
-import com.github.alexnijjar.beyond_earth.registry.ModEntityTypes;
-import com.github.alexnijjar.beyond_earth.registry.ModItems;
+import com.github.alexnijjar.ad_astra.AdAstra;
+import com.github.alexnijjar.ad_astra.mixin.PaintingEntityInvoker;
+import com.github.alexnijjar.ad_astra.registry.ModEntityTypes;
+import com.github.alexnijjar.ad_astra.registry.ModItems;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
@@ -75,7 +75,7 @@ public class SpacePaintingEntity extends PaintingEntity {
 	public static List<RegistryEntry<PaintingVariant>> getSpacePaintings() {
 		List<RegistryEntry<PaintingVariant>> paintings = new ArrayList<>();
 		Registry.PAINTING_VARIANT.forEach(painting -> {
-			if (Registry.PAINTING_VARIANT.getId(painting).getNamespace().equals(BeyondEarth.MOD_ID)) {
+			if (Registry.PAINTING_VARIANT.getId(painting).getNamespace().equals(AdAstra.MOD_ID)) {
 				paintings.add(RegistryEntry.of(painting));
 			}
 		});

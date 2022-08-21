@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "beyond_earth:blocks/oxygen_block"
+    "all": "ad_astra:blocks/oxygen_block"
   }
 }

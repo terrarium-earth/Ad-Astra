@@ -1,12 +1,12 @@
-package com.github.alexnijjar.beyond_earth.mixin.gravity;
+package com.github.alexnijjar.ad_astra.mixin.gravity;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.util.ModUtils;
+import com.github.alexnijjar.ad_astra.AdAstra;
+import com.github.alexnijjar.ad_astra.util.ModUtils;
 
 import net.minecraft.entity.projectile.thrown.ExperienceBottleEntity;
 
@@ -14,7 +14,7 @@ import net.minecraft.entity.projectile.thrown.ExperienceBottleEntity;
 public abstract class ExperienceBottleEntityMixin {
     @Inject(method = "getGravity", at = @At("HEAD"), cancellable = true)
     public void getGravity(CallbackInfoReturnable<Float> ci) {
-        if (BeyondEarth.CONFIG.world.doEntityGravity) {
+        if (AdAstra.CONFIG.world.doEntityGravity) {
             ci.setReturnValue(ModUtils.getMixinGravity(0.07f, this));
         }
     }

@@ -1,9 +1,9 @@
-package com.github.alexnijjar.beyond_earth.compat.rei.oxygen_conversion;
+package com.github.alexnijjar.ad_astra.compat.rei.oxygen_conversion;
 
 import java.util.List;
 
-import com.github.alexnijjar.beyond_earth.compat.rei.REICategories;
-import com.github.alexnijjar.beyond_earth.recipes.OxygenConversionRecipe;
+import com.github.alexnijjar.ad_astra.compat.rei.REICategories;
+import com.github.alexnijjar.ad_astra.recipes.OxygenConversionRecipe;
 
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.Display;

@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
-import com.github.alexnijjar.ad_astra.BeyondEarth;
-import com.github.alexnijjar.ad_astra.client.BeyondEarthClient;
+import com.github.alexnijjar.ad_astra.AdAstra;
+import com.github.alexnijjar.ad_astra.client.AdAstraClient;
 import com.github.alexnijjar.ad_astra.client.resource_pack.SolarSystem;
 import com.github.alexnijjar.ad_astra.data.ButtonColour;
 import com.github.alexnijjar.ad_astra.data.Planet;
@@ -154,7 +154,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                 int currentPage = this.getPage();
 
                 SolarSystem solarSystem = null;
-                for (SolarSystem system : BeyondEarthClient.solarSystems) {
+                for (SolarSystem system : AdAstraClient.solarSystems) {
                         if (this.currentCategory.id().equals(system.solarSystem()) || this.currentCategory.parent() != null && this.currentCategory.parent().id().equals(system.solarSystem())) {
                                 solarSystem = system;
                                 break;
@@ -183,7 +183,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                                         int days = 1;
                                         int coordinates = (int) (radius * 17 - 5);
                                         Identifier texture = solarSystem.planetaryRings().get(i).getLeft();
-                                        for (Planet currentPlanet : BeyondEarthClient.planets) {
+                                        for (Planet currentPlanet : AdAstraClient.planets) {
                                                 if (texture.getPath().equals(currentPlanet.name())) {
                                                         days = currentPlanet.daysInYear();
                                                         break;
@@ -236,7 +236,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                 this.categoryButtons.put(Category.BACK, backButtonList);
 
                 // All buttons are data-driven; they are created from files in the /planet_data/planets directory.
-                List<Planet> planets = BeyondEarthClient.planets;
+                List<Planet> planets = AdAstraClient.planets;
                 planets.sort(Comparator.comparing(s -> s.name()));
                 planets.forEach(planet -> {
                         if (this.handler.getTier() >= planet.rocketTier()) {
@@ -461,7 +461,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
                         return 3;
                 }
                 // Should never be called.
-                BeyondEarth.LOGGER.warn("Invalid page!");
+                AdAstra.LOGGER.warn("Invalid page!");
                 return 0;
         }
 

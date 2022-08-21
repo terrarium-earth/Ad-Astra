@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "beyond_earth:block/mars_diamond_ore"
+      "model": "ad_astra:block/mars_diamond_ore"
     }
   }
 }

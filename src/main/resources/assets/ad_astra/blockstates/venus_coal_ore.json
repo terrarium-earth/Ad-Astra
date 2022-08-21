@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "beyond_earth:block/venus_coal_ore"
+      "model": "ad_astra:block/venus_coal_ore"
     }
   }
 }

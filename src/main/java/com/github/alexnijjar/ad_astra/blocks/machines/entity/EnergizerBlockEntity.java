@@ -1,6 +1,6 @@
 package com.github.alexnijjar.ad_astra.blocks.machines.entity;
 
-import com.github.alexnijjar.ad_astra.BeyondEarth;
+import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.blocks.machines.EnergizerBlock;
 import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
@@ -17,8 +17,8 @@ import team.reborn.energy.api.EnergyStorageUtil;
 
 public class EnergizerBlockEntity extends AbstractMachineBlockEntity {
 
-    public static final long MAX_ENERGY = BeyondEarth.CONFIG.energizer.maxEnergy;
-    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.energizer.energyPerTick;
+    public static final long MAX_ENERGY = AdAstra.CONFIG.energizer.maxEnergy;
+    public static final long ENERGY_PER_TICK = AdAstra.CONFIG.energizer.energyPerTick;
 
     public EnergizerBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.ENERGIZER, blockPos, blockState);

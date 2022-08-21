@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "beyond_earth:items/oil_bucket"
+    "layer0": "ad_astra:items/oil_bucket"
   }
 }

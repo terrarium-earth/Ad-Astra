@@ -1,8 +1,8 @@
-package com.github.alexnijjar.beyond_earth.world.features;
+package com.github.alexnijjar.ad_astra.world.features;
 
 import javax.annotation.Nullable;
 
-import com.github.alexnijjar.beyond_earth.registry.ModBlocks;
+import com.github.alexnijjar.ad_astra.registry.ModBlocks;
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 

@@ -1,9 +1,9 @@
-package com.github.alexnijjar.beyond_earth.recipes;
+package com.github.alexnijjar.ad_astra.recipes;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import com.github.alexnijjar.beyond_earth.registry.ModRecipes;
+import com.github.alexnijjar.ad_astra.registry.ModRecipes;
 import com.google.gson.JsonObject;
 
 import net.minecraft.item.Item;

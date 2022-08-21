@@ -1,6 +1,6 @@
-package com.github.alexnijjar.beyond_earth.compat.rei.utils;
+package com.github.alexnijjar.ad_astra.compat.rei.utils;
 
-import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
+import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

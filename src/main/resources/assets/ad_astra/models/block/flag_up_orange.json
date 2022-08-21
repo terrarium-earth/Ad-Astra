@@ -1,9 +1,9 @@
 {
-  "parent": "beyond_earth:custom/flag_up",
+  "parent": "ad_astra:custom/flag_up",
   "textures": {
-    "all": "beyond_earth:blocks/flag_orange",
-    "particle": "beyond_earth:blocks/flag_orange",
-    "0": "beyond_earth:blocks/flag_orange",
-    "missing": "beyond_earth:blocks/flag_orange"
+    "all": "ad_astra:blocks/flag_orange",
+    "particle": "ad_astra:blocks/flag_orange",
+    "0": "ad_astra:blocks/flag_orange",
+    "missing": "ad_astra:blocks/flag_orange"
   }
 }

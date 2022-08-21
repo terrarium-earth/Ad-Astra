@@ -1,5 +1,5 @@
 {
-    "world": "beyond_earth:venus",
+    "world": "ad_astra:venus",
     "stars": {
         "fancy_count": 3000,
         "fast_count": 3000,
@@ -15,7 +15,7 @@
     "horizon_angle": 180,
     "sky_objects": [
         {
-            "texture": "beyond_earth:textures/sky/red_sun.png",
+            "texture": "ad_astra:textures/sky/red_sun.png",
             "blending": true,
             "render_type": "dynamic",
             "scale": 30.0,
@@ -26,7 +26,7 @@
             }
         },
         {
-            "texture": "beyond_earth:textures/sky/earth.png",
+            "texture": "ad_astra:textures/sky/earth.png",
             "blending": true,
             "render_type": "dynamic",
             "scale": 2.0,
@@ -37,7 +37,7 @@
             }
         },
         {
-            "texture": "beyond_earth:textures/sky/light.png",
+            "texture": "ad_astra:textures/sky/light.png",
             "blending": true,
             "render_type": "dynamic",
             "scale": 4.5,
@@ -53,7 +53,7 @@
             }
         },
         {
-            "texture": "beyond_earth:textures/sky/mercury.png",
+            "texture": "ad_astra:textures/sky/mercury.png",
             "blending": true,
             "render_type": "dynamic",
             "scale": 2.0,
@@ -64,7 +64,7 @@
             }
         },
         {
-            "texture": "beyond_earth:textures/sky/light.png",
+            "texture": "ad_astra:textures/sky/light.png",
             "blending": true,
             "render_type": "dynamic",
             "scale": 5.5,

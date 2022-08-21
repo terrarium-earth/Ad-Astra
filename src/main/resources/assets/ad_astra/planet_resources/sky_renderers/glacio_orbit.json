@@ -1,5 +1,5 @@
 {
-    "world": "beyond_earth:glacio_orbit",
+    "world": "ad_astra:glacio_orbit",
     "stars": {
         "fancy_count": 13000,
         "fast_count": 6000,
@@ -15,7 +15,7 @@
     "horizon_angle": 0,
     "sky_objects": [
         {
-            "texture": "beyond_earth:textures/sky/sun.png",
+            "texture": "ad_astra:textures/sky/sun.png",
             "blending": true,
             "render_type": "dynamic",
             "scale": 20.0,
@@ -31,7 +31,7 @@
             }
         },
         {
-            "texture": "beyond_earth:textures/sky/glacio.png",
+            "texture": "ad_astra:textures/sky/glacio.png",
             "blending": false,
             "render_type": "scaling",
             "scale": 1.0,
@@ -42,7 +42,7 @@
             }
         },
         {
-            "texture": "beyond_earth:textures/sky/light.png",
+            "texture": "ad_astra:textures/sky/light.png",
             "blending": true,
             "render_type": "scaling",
             "scale": 3.0,

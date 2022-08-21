@@ -1,15 +1,15 @@
-package com.github.alexnijjar.beyond_earth.mixin.client;
+package com.github.alexnijjar.ad_astra.mixin.client;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.github.alexnijjar.beyond_earth.client.BeyondEarthClient;
-import com.github.alexnijjar.beyond_earth.client.resource_pack.SkyRenderer;
-import com.github.alexnijjar.beyond_earth.client.resource_pack.SkyRenderer.WeatherEffects;
-import com.github.alexnijjar.beyond_earth.registry.ModParticleTypes;
-import com.github.alexnijjar.beyond_earth.util.ModUtils;
+import com.github.alexnijjar.ad_astra.client.AdAstraClient;
+import com.github.alexnijjar.ad_astra.client.resource_pack.SkyRenderer;
+import com.github.alexnijjar.ad_astra.client.resource_pack.SkyRenderer.WeatherEffects;
+import com.github.alexnijjar.ad_astra.registry.ModParticleTypes;
+import com.github.alexnijjar.ad_astra.util.ModUtils;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -61,7 +61,7 @@ public abstract class WorldRendererMixin {
 
         MinecraftClient client = MinecraftClient.getInstance();
         RegistryKey<World> world = client.world.getRegistryKey();
-        for (SkyRenderer skyRenderer : BeyondEarthClient.skyRenderers) {
+        for (SkyRenderer skyRenderer : AdAstraClient.skyRenderers) {
             if (world.equals(skyRenderer.dimension()) && skyRenderer.weatherEffects().equals(WeatherEffects.VENUS)) {
 
                 float f = client.world.getRainGradient(1.0f) / (MinecraftClient.isFancyGraphicsOrBetter() ? 1.0f : 2.0f);

@@ -1,6 +1,6 @@
-package com.github.alexnijjar.beyond_earth.gui.screen_handlers;
+package com.github.alexnijjar.ad_astra.gui.screen_handlers;
 
-import com.github.alexnijjar.beyond_earth.blocks.machines.entity.AbstractMachineBlockEntity;
+import com.github.alexnijjar.ad_astra.blocks.machines.entity.AbstractMachineBlockEntity;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;

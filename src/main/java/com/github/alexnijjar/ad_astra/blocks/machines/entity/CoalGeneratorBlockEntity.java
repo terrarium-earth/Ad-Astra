@@ -2,7 +2,7 @@ package com.github.alexnijjar.ad_astra.blocks.machines.entity;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.github.alexnijjar.ad_astra.BeyondEarth;
+import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.gui.screen_handlers.CoalGeneratorScreenHandler;
 import com.github.alexnijjar.ad_astra.recipes.CookingRecipe;
 import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
@@ -17,8 +17,8 @@ import net.minecraft.util.math.BlockPos;
 
 public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity {
 
-    public static final long MAX_ENERGY = BeyondEarth.CONFIG.coalGenerator.maxEnergy;
-    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.coalGenerator.energyPerTick;
+    public static final long MAX_ENERGY = AdAstra.CONFIG.coalGenerator.maxEnergy;
+    public static final long ENERGY_PER_TICK = AdAstra.CONFIG.coalGenerator.energyPerTick;
 
     public CoalGeneratorBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.COAL_GENERATOR_ENTITY, blockPos, blockState);

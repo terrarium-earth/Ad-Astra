@@ -1,19 +1,19 @@
-package com.github.alexnijjar.beyond_earth.registry;
+package com.github.alexnijjar.ad_astra.registry;
 
-import com.github.alexnijjar.beyond_earth.blocks.flags.FlagBlockEntity;
-import com.github.alexnijjar.beyond_earth.blocks.globes.GlobeBlockEntity;
-import com.github.alexnijjar.beyond_earth.blocks.machines.entity.AbstractMachineBlockEntity;
-import com.github.alexnijjar.beyond_earth.blocks.machines.entity.CoalGeneratorBlockEntity;
-import com.github.alexnijjar.beyond_earth.blocks.machines.entity.CompressorBlockEntity;
-import com.github.alexnijjar.beyond_earth.blocks.machines.entity.EnergizerBlockEntity;
-import com.github.alexnijjar.beyond_earth.blocks.machines.entity.FluidMachineBlockEntity;
-import com.github.alexnijjar.beyond_earth.blocks.machines.entity.FuelRefineryBlockEntity;
-import com.github.alexnijjar.beyond_earth.blocks.machines.entity.NasaWorkbenchBlockEntity;
-import com.github.alexnijjar.beyond_earth.blocks.machines.entity.OxygenDistributorBlockEntity;
-import com.github.alexnijjar.beyond_earth.blocks.machines.entity.OxygenLoaderBlockEntity;
-import com.github.alexnijjar.beyond_earth.blocks.machines.entity.SolarPanelBlockEntity;
-import com.github.alexnijjar.beyond_earth.blocks.machines.entity.WaterPumpBlockEntity;
-import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
+import com.github.alexnijjar.ad_astra.blocks.flags.FlagBlockEntity;
+import com.github.alexnijjar.ad_astra.blocks.globes.GlobeBlockEntity;
+import com.github.alexnijjar.ad_astra.blocks.machines.entity.AbstractMachineBlockEntity;
+import com.github.alexnijjar.ad_astra.blocks.machines.entity.CoalGeneratorBlockEntity;
+import com.github.alexnijjar.ad_astra.blocks.machines.entity.CompressorBlockEntity;
+import com.github.alexnijjar.ad_astra.blocks.machines.entity.EnergizerBlockEntity;
+import com.github.alexnijjar.ad_astra.blocks.machines.entity.FluidMachineBlockEntity;
+import com.github.alexnijjar.ad_astra.blocks.machines.entity.FuelRefineryBlockEntity;
+import com.github.alexnijjar.ad_astra.blocks.machines.entity.NasaWorkbenchBlockEntity;
+import com.github.alexnijjar.ad_astra.blocks.machines.entity.OxygenDistributorBlockEntity;
+import com.github.alexnijjar.ad_astra.blocks.machines.entity.OxygenLoaderBlockEntity;
+import com.github.alexnijjar.ad_astra.blocks.machines.entity.SolarPanelBlockEntity;
+import com.github.alexnijjar.ad_astra.blocks.machines.entity.WaterPumpBlockEntity;
+import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;

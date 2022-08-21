@@ -1,9 +1,9 @@
-package com.github.alexnijjar.beyond_earth.entities.vehicles;
+package com.github.alexnijjar.ad_astra.entities.vehicles;
 
-import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.registry.ModItems;
-import com.github.alexnijjar.beyond_earth.util.ModKeyBindings;
-import com.github.alexnijjar.beyond_earth.util.ModUtils;
+import com.github.alexnijjar.ad_astra.AdAstra;
+import com.github.alexnijjar.ad_astra.registry.ModItems;
+import com.github.alexnijjar.ad_astra.util.ModKeyBindings;
+import com.github.alexnijjar.ad_astra.util.ModUtils;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -19,8 +19,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-// summon beyond_earth:tier_1_rover ~ ~1 ~ {Passengers:[{id:"minecraft:husk"},{id:"minecraft:husk"}]}
-// summon beyond_earth:tier_1_rover ~ ~1 ~ {Passengers:[{id:"minecraft:husk"}]}
+// summon ad_astra:tier_1_rover ~ ~1 ~ {Passengers:[{id:"minecraft:husk"},{id:"minecraft:husk"}]}
+// summon ad_astra:tier_1_rover ~ ~1 ~ {Passengers:[{id:"minecraft:husk"}]}
 public class RoverEntity extends VehicleEntity {
 
     public double wheelPitch;
@@ -28,7 +28,7 @@ public class RoverEntity extends VehicleEntity {
     public double prevWheelPitch;
     public float prevRoverYaw;
 
-    public static final long FUEL_PER_TICK = BeyondEarth.CONFIG.rover.fuelPerTick;
+    public static final long FUEL_PER_TICK = AdAstra.CONFIG.rover.fuelPerTick;
 
     protected static final TrackedData<Float> TURN_SPEED = DataTracker.registerData(RoverEntity.class, TrackedDataHandlerRegistry.FLOAT);
 
@@ -44,7 +44,7 @@ public class RoverEntity extends VehicleEntity {
 
     @Override
     public long getTankSize() {
-        return BeyondEarth.CONFIG.rover.tankBuckets;
+        return AdAstra.CONFIG.rover.tankBuckets;
     }
 
     @Override
@@ -80,7 +80,7 @@ public class RoverEntity extends VehicleEntity {
     public void tick() {
         super.tick();
         this.travel();
-        if (BeyondEarth.CONFIG.rover.explodeRoverInLava && this.isInLava()) {
+        if (AdAstra.CONFIG.rover.explodeRoverInLava && this.isInLava()) {
             this.explode(0.35f);
         }
     }
@@ -101,24 +101,24 @@ public class RoverEntity extends VehicleEntity {
 
                 // Player is clicking 'w' to move forward.
                 if (ModKeyBindings.forwardKeyDown(player)) {
-                    this.setSpeed(this.getSpeed() + BeyondEarth.CONFIG.rover.forwardSpeed * (this.submergedInWater ? 0.5f : 1.0f));
+                    this.setSpeed(this.getSpeed() + AdAstra.CONFIG.rover.forwardSpeed * (this.submergedInWater ? 0.5f : 1.0f));
                     shouldConsumeFuel = true;
                 }
                 // Player is clicking 's' to move backward.
                 if (ModKeyBindings.backKeyDown(player)) {
-                    this.setSpeed(this.getSpeed() - BeyondEarth.CONFIG.rover.backwardSpeed * (this.submergedInWater ? 0.5f : 1.0f));
+                    this.setSpeed(this.getSpeed() - AdAstra.CONFIG.rover.backwardSpeed * (this.submergedInWater ? 0.5f : 1.0f));
                     shouldConsumeFuel = true;
                 }
 
                 // Player is clicking 'a' to move left.
                 if (ModKeyBindings.leftKeyDown(player)) {
-                    this.setTurnSpeed(this.getTurnSpeed() - BeyondEarth.CONFIG.rover.turnSpeed * this.getSpeed());
+                    this.setTurnSpeed(this.getTurnSpeed() - AdAstra.CONFIG.rover.turnSpeed * this.getSpeed());
                     // Slow down for better turns.
                     this.setVelocity(new Vec3d(this.getVelocity().getX() / 1.1, this.getVelocity().getY(), this.getVelocity().getZ() / 1.1));
                 }
                 // Player is clicking 'd' to move right.
                 if (ModKeyBindings.rightKeyDown(player)) {
-                    this.setTurnSpeed(this.getTurnSpeed() + BeyondEarth.CONFIG.rover.turnSpeed * this.getSpeed());
+                    this.setTurnSpeed(this.getTurnSpeed() + AdAstra.CONFIG.rover.turnSpeed * this.getSpeed());
                     // Slow down for better turns.
                     this.setVelocity(new Vec3d(this.getVelocity().getX() / 1.1, this.getVelocity().getY(), this.getVelocity().getZ() / 1.1));
                 }
@@ -129,8 +129,8 @@ public class RoverEntity extends VehicleEntity {
             }
         }
 
-        this.setTurnSpeed(MathHelper.clamp(this.getTurnSpeed(), -BeyondEarth.CONFIG.rover.maxTurnSpeed, BeyondEarth.CONFIG.rover.maxTurnSpeed));
-        this.setTurnSpeed(this.getTurnSpeed() * BeyondEarth.CONFIG.rover.deceleration);
+        this.setTurnSpeed(MathHelper.clamp(this.getTurnSpeed(), -AdAstra.CONFIG.rover.maxTurnSpeed, AdAstra.CONFIG.rover.maxTurnSpeed));
+        this.setTurnSpeed(this.getTurnSpeed() * AdAstra.CONFIG.rover.deceleration);
         if (this.getTurnSpeed() < 0.1 && this.getTurnSpeed() > -0.1) {
             this.setTurnSpeed(0.0f);
         }

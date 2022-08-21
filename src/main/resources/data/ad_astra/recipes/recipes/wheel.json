@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "tag": "c:compressed_steel"
+    },
+    "B": {
+      "item": "minecraft:black_dye"
+    }
+  },
+  "pattern": [
+    " B ",
+    "B#B",
+    " B "
+  ],
+  "result": {
+    "item": "ad_astra:wheel"
+  }
+}

@@ -5,7 +5,7 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
-import com.github.alexnijjar.ad_astra.BeyondEarth;
+import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.client.utils.ClientOxygenUtils;
 import com.github.alexnijjar.ad_astra.gui.screen_handlers.OxygenDistributorScreenHandler;
 import com.github.alexnijjar.ad_astra.recipes.OxygenConversionRecipe;
@@ -29,14 +29,14 @@ import net.minecraft.util.math.BlockPos;
 
 public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 
-    public static final long MAX_ENERGY = BeyondEarth.CONFIG.oxygenDistributor.maxEnergy;
-    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.oxygenDistributor.energyPerTick;
-    public static final int TANK_SIZE = BeyondEarth.CONFIG.oxygenDistributor.tankBuckets;
-    public static final int MAX_BLOCK_CHECKS = BeyondEarth.CONFIG.oxygenDistributor.maxBlockChecks;
-    public static final int UPDATE_OXYGEN_FILLER_TICKS = BeyondEarth.CONFIG.oxygenDistributor.refreshTicks;
+    public static final long MAX_ENERGY = AdAstra.CONFIG.oxygenDistributor.maxEnergy;
+    public static final long ENERGY_PER_TICK = AdAstra.CONFIG.oxygenDistributor.energyPerTick;
+    public static final int TANK_SIZE = AdAstra.CONFIG.oxygenDistributor.tankBuckets;
+    public static final int MAX_BLOCK_CHECKS = AdAstra.CONFIG.oxygenDistributor.maxBlockChecks;
+    public static final int UPDATE_OXYGEN_FILLER_TICKS = AdAstra.CONFIG.oxygenDistributor.refreshTicks;
 
-    public static final double OXYGEN_USAGE_MULTIPLIER = BeyondEarth.CONFIG.oxygenDistributor.oxygenMultiplier;
-    public static final double ENERGY_USAGE_MULTIPLIER = BeyondEarth.CONFIG.oxygenDistributor.energyMultiplier;
+    public static final double OXYGEN_USAGE_MULTIPLIER = AdAstra.CONFIG.oxygenDistributor.oxygenMultiplier;
+    public static final double ENERGY_USAGE_MULTIPLIER = AdAstra.CONFIG.oxygenDistributor.energyMultiplier;
 
     private int oxygenFillCheckTicks = UPDATE_OXYGEN_FILLER_TICKS;
 

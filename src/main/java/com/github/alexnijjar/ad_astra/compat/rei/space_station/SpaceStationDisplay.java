@@ -1,9 +1,9 @@
-package com.github.alexnijjar.beyond_earth.compat.rei.space_station;
+package com.github.alexnijjar.ad_astra.compat.rei.space_station;
 
 import java.util.List;
 
-import com.github.alexnijjar.beyond_earth.compat.rei.REICategories;
-import com.github.alexnijjar.beyond_earth.recipes.SpaceStationRecipe;
+import com.github.alexnijjar.ad_astra.compat.rei.REICategories;
+import com.github.alexnijjar.ad_astra.recipes.SpaceStationRecipe;
 
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.Display;

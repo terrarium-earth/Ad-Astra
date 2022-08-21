@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "beyond_earth:block/chiseled_glacio_stone_bricks"
+      "model": "ad_astra:block/chiseled_glacio_stone_bricks"
     }
   }
 }

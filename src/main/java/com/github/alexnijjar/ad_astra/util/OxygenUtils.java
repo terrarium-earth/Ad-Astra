@@ -1,4 +1,4 @@
-package com.github.alexnijjar.beyond_earth.util;
+package com.github.alexnijjar.ad_astra.util;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -7,8 +7,8 @@ import java.util.Set;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.github.alexnijjar.beyond_earth.BeyondEarth;
-import com.github.alexnijjar.beyond_earth.registry.ModBlocks;
+import com.github.alexnijjar.ad_astra.AdAstra;
+import com.github.alexnijjar.ad_astra.registry.ModBlocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -32,7 +32,7 @@ public class OxygenUtils {
 
     // Checks if there is oxygen in a specific block in a specific dimension.
     public static boolean posHasOxygen(ServerWorld world, BlockPos pos) {
-        if (world.getServer().getTicks() <= BeyondEarth.CONFIG.oxygenDistributor.oxygenGracePeriodTicks) {
+        if (world.getServer().getTicks() <= AdAstra.CONFIG.oxygenDistributor.oxygenGracePeriodTicks) {
             return true;
         }
         for (Map.Entry<Pair<RegistryKey<World>, BlockPos>, Set<BlockPos>> entry : oxygenLocations.entrySet()) {

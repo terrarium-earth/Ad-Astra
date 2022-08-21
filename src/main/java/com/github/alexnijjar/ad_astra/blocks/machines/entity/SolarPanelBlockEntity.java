@@ -2,7 +2,7 @@ package com.github.alexnijjar.ad_astra.blocks.machines.entity;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.github.alexnijjar.ad_astra.BeyondEarth;
+import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.gui.screen_handlers.SolarPanelScreenHandler;
 import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
 
@@ -14,8 +14,8 @@ import net.minecraft.util.math.BlockPos;
 
 public class SolarPanelBlockEntity extends AbstractMachineBlockEntity {
 
-    public static final long MAX_ENERGY = BeyondEarth.CONFIG.solarPanel.maxEnergy;
-    public static final long ENERGY_PER_TICK = BeyondEarth.CONFIG.solarPanel.energyPerTick;
+    public static final long MAX_ENERGY = AdAstra.CONFIG.solarPanel.maxEnergy;
+    public static final long ENERGY_PER_TICK = AdAstra.CONFIG.solarPanel.energyPerTick;
 
     public SolarPanelBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.SOLAR_PANEL_ENTITY, blockPos, blockState);

@@ -1,14 +1,14 @@
-package com.github.alexnijjar.beyond_earth.registry;
+package com.github.alexnijjar.ad_astra.registry;
 
-import com.github.alexnijjar.beyond_earth.recipes.CompressingRecipe;
-import com.github.alexnijjar.beyond_earth.recipes.FuelConversionRecipe;
-import com.github.alexnijjar.beyond_earth.recipes.GeneratingRecipe;
-import com.github.alexnijjar.beyond_earth.recipes.HammerShapelessRecipe;
-import com.github.alexnijjar.beyond_earth.recipes.ModRecipeType;
-import com.github.alexnijjar.beyond_earth.recipes.NasaWorkbenchRecipe;
-import com.github.alexnijjar.beyond_earth.recipes.OxygenConversionRecipe;
-import com.github.alexnijjar.beyond_earth.recipes.SpaceStationRecipe;
-import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
+import com.github.alexnijjar.ad_astra.recipes.CompressingRecipe;
+import com.github.alexnijjar.ad_astra.recipes.FuelConversionRecipe;
+import com.github.alexnijjar.ad_astra.recipes.GeneratingRecipe;
+import com.github.alexnijjar.ad_astra.recipes.HammerShapelessRecipe;
+import com.github.alexnijjar.ad_astra.recipes.ModRecipeType;
+import com.github.alexnijjar.ad_astra.recipes.NasaWorkbenchRecipe;
+import com.github.alexnijjar.ad_astra.recipes.OxygenConversionRecipe;
+import com.github.alexnijjar.ad_astra.recipes.SpaceStationRecipe;
+import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.ShapelessRecipe;

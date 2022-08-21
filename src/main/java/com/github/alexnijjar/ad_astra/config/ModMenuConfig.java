@@ -1,4 +1,4 @@
-package com.github.alexnijjar.beyond_earth.config;
+package com.github.alexnijjar.ad_astra.config;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
@@ -12,6 +12,6 @@ public class ModMenuConfig implements ModMenuApi {
 
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
-        return parent -> AutoConfig.getConfigScreen(BeyondEarthConfig.class, parent).get();
+        return parent -> AutoConfig.getConfigScreen(AdAstraConfig.class, parent).get();
     }
 }

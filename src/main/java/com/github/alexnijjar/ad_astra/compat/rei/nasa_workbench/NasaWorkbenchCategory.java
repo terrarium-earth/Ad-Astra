@@ -1,10 +1,10 @@
-package com.github.alexnijjar.beyond_earth.compat.rei.nasa_workbench;
+package com.github.alexnijjar.ad_astra.compat.rei.nasa_workbench;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.github.alexnijjar.beyond_earth.compat.rei.REICategories;
-import com.github.alexnijjar.beyond_earth.registry.ModBlocks;
+import com.github.alexnijjar.ad_astra.compat.rei.REICategories;
+import com.github.alexnijjar.ad_astra.registry.ModBlocks;
 
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;

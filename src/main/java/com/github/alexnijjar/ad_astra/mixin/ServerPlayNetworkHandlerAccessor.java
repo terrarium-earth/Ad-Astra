@@ -1,4 +1,4 @@
-package com.github.alexnijjar.beyond_earth.mixin;
+package com.github.alexnijjar.ad_astra.mixin;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;

@@ -1,7 +1,7 @@
-package com.github.alexnijjar.beyond_earth.gui;
+package com.github.alexnijjar.ad_astra.gui;
 
-import com.github.alexnijjar.beyond_earth.entities.vehicles.VehicleEntity;
-import com.github.alexnijjar.beyond_earth.gui.screen_handlers.VehicleScreenHandler;
+import com.github.alexnijjar.ad_astra.entities.vehicles.VehicleEntity;
+import com.github.alexnijjar.ad_astra.gui.screen_handlers.VehicleScreenHandler;
 
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.entity.player.PlayerEntity;

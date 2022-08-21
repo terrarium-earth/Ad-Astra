@@ -1,8 +1,8 @@
-package com.github.alexnijjar.beyond_earth.world.structures;
+package com.github.alexnijjar.ad_astra.world.structures;
 
 import java.util.Optional;
 
-import com.github.alexnijjar.beyond_earth.registry.ModStructures;
+import com.github.alexnijjar.ad_astra.registry.ModStructures;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 

@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "beyond_earth:block/moon_cheese_ore"
+      "model": "ad_astra:block/moon_cheese_ore"
     }
   }
 }

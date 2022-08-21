@@ -1,4 +1,4 @@
-package com.github.alexnijjar.beyond_earth.data;
+package com.github.alexnijjar.ad_astra.data;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

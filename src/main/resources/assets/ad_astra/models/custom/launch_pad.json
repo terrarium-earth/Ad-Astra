@@ -1,13 +1,13 @@
 {
 	"credit": "Made with Blockbench",
-	"parent": "beyond_earth:launch_pad",
+	"parent": "ad_astra:launch_pad",
 	"texture_size": [
 		32,
 		32
 	],
 	"textures": {
-		"0": "beyond_earth:blocks/launch_pad",
-		"particle": "beyond_earth:blocks/launch_pad"
+		"0": "ad_astra:blocks/launch_pad",
+		"particle": "ad_astra:blocks/launch_pad"
 	},
 	"elements": [
 		{

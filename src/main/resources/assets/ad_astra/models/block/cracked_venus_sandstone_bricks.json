@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "beyond_earth:blocks/cracked_venus_sandstone_bricks"
+    "all": "ad_astra:blocks/cracked_venus_sandstone_bricks"
   }
 }

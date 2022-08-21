@@ -1,15 +1,15 @@
 {
   "variants": {
     "axis=x": {
-      "model": "beyond_earth:block/steel_pillar",
+      "model": "ad_astra:block/steel_pillar",
       "x": 90,
       "y": 90
     },
     "axis=y": {
-      "model": "beyond_earth:block/steel_pillar"
+      "model": "ad_astra:block/steel_pillar"
     },
     "axis=z": {
-      "model": "beyond_earth:block/steel_pillar",
+      "model": "ad_astra:block/steel_pillar",
       "x": 90
     }
   }

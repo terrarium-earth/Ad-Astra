@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "beyond_earth:items/item_ice_shard"
+    "layer0": "ad_astra:items/item_ice_shard"
   },
   "display": {
     "thirdperson_righthand": {

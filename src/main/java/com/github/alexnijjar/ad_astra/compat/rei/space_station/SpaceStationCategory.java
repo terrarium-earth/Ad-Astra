@@ -1,11 +1,11 @@
-package com.github.alexnijjar.beyond_earth.compat.rei.space_station;
+package com.github.alexnijjar.ad_astra.compat.rei.space_station;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.github.alexnijjar.beyond_earth.client.screens.utils.ScreenUtils;
-import com.github.alexnijjar.beyond_earth.compat.rei.REICategories;
-import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
+import com.github.alexnijjar.ad_astra.client.screens.utils.ScreenUtils;
+import com.github.alexnijjar.ad_astra.compat.rei.REICategories;
+import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
@@ -51,7 +51,7 @@ public class SpaceStationCategory implements DisplayCategory<SpaceStationDisplay
 
     @Override
     public Text getTitle() {
-        return Text.translatable("rei.category.beyond_earth.space_station");
+        return Text.translatable("rei.category.ad_astra.space_station");
     }
 
     @Override

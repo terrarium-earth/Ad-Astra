@@ -1,24 +1,24 @@
-package com.github.alexnijjar.beyond_earth.registry;
+package com.github.alexnijjar.ad_astra.registry;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import com.github.alexnijjar.beyond_earth.blocks.coal_torches.CoalLanternBlock;
-import com.github.alexnijjar.beyond_earth.blocks.coal_torches.CoalTorchBlock;
-import com.github.alexnijjar.beyond_earth.blocks.coal_torches.WallCoalTorchBlock;
-import com.github.alexnijjar.beyond_earth.blocks.flags.FlagBlock;
-import com.github.alexnijjar.beyond_earth.blocks.globes.GlobeBlock;
-import com.github.alexnijjar.beyond_earth.blocks.launch_pad.RocketLaunchPad;
-import com.github.alexnijjar.beyond_earth.blocks.machines.CoalGeneratorBlock;
-import com.github.alexnijjar.beyond_earth.blocks.machines.CompressorBlock;
-import com.github.alexnijjar.beyond_earth.blocks.machines.EnergizerBlock;
-import com.github.alexnijjar.beyond_earth.blocks.machines.FuelRefineryBlock;
-import com.github.alexnijjar.beyond_earth.blocks.machines.NasaWorkbenchBlock;
-import com.github.alexnijjar.beyond_earth.blocks.machines.OxygenDistributorBlock;
-import com.github.alexnijjar.beyond_earth.blocks.machines.OxygenLoaderBlock;
-import com.github.alexnijjar.beyond_earth.blocks.machines.SolarPanelBlock;
-import com.github.alexnijjar.beyond_earth.blocks.machines.WaterPumpBlock;
-import com.github.alexnijjar.beyond_earth.util.ModIdentifier;
+import com.github.alexnijjar.ad_astra.blocks.coal_torches.CoalLanternBlock;
+import com.github.alexnijjar.ad_astra.blocks.coal_torches.CoalTorchBlock;
+import com.github.alexnijjar.ad_astra.blocks.coal_torches.WallCoalTorchBlock;
+import com.github.alexnijjar.ad_astra.blocks.flags.FlagBlock;
+import com.github.alexnijjar.ad_astra.blocks.globes.GlobeBlock;
+import com.github.alexnijjar.ad_astra.blocks.launch_pad.RocketLaunchPad;
+import com.github.alexnijjar.ad_astra.blocks.machines.CoalGeneratorBlock;
+import com.github.alexnijjar.ad_astra.blocks.machines.CompressorBlock;
+import com.github.alexnijjar.ad_astra.blocks.machines.EnergizerBlock;
+import com.github.alexnijjar.ad_astra.blocks.machines.FuelRefineryBlock;
+import com.github.alexnijjar.ad_astra.blocks.machines.NasaWorkbenchBlock;
+import com.github.alexnijjar.ad_astra.blocks.machines.OxygenDistributorBlock;
+import com.github.alexnijjar.ad_astra.blocks.machines.OxygenLoaderBlock;
+import com.github.alexnijjar.ad_astra.blocks.machines.SolarPanelBlock;
+import com.github.alexnijjar.ad_astra.blocks.machines.WaterPumpBlock;
+import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;

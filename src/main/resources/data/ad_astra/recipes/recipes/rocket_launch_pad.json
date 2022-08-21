@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "rocket_launch_pad",
+  "key": {
+    "#": {
+      "tag": "c:compressed_steel"
+    },
+    "|": {
+      "tag": "c:iron_plates"
+    }
+  },
+  "pattern": [
+    "#|#",
+    "|#|",
+    "#|#"
+  ],
+  "result": {
+    "count": 9,
+    "item": "ad_astra:rocket_launch_pad"
+  }
+}

@@ -1,5 +1,5 @@
 {
-    "world": "beyond_earth:mars",
+    "world": "ad_astra:mars",
     "stars": {
         "fancy_count": 4000,
         "fast_count": 4000,
@@ -15,7 +15,7 @@
     "horizon_angle": 0,
     "sky_objects": [
         {
-            "texture": "beyond_earth:textures/sky/blue_sun.png",
+            "texture": "ad_astra:textures/sky/blue_sun.png",
             "blending": true,
             "render_type": "dynamic",
             "scale": 30.0,
@@ -26,7 +26,7 @@
             }
         },
         {
-            "texture": "beyond_earth:textures/sky/earth.png",
+            "texture": "ad_astra:textures/sky/earth.png",
             "blending": true,
             "render_type": "dynamic",
             "scale": 1.0,
@@ -37,7 +37,7 @@
             }
         },
         {
-            "texture": "beyond_earth:textures/sky/light.png",
+            "texture": "ad_astra:textures/sky/light.png",
             "blending": true,
             "render_type": "dynamic",
             "scale": 2.5,
@@ -53,7 +53,7 @@
             }
         },
         {
-            "texture": "beyond_earth:textures/sky/phobos.png",
+            "texture": "ad_astra:textures/sky/phobos.png",
             "blending": true,
             "render_type": "dynamic",
             "scale": 3.0,
@@ -64,7 +64,7 @@
             }
         },
         {
-            "texture": "beyond_earth:textures/sky/light.png",
+            "texture": "ad_astra:textures/sky/light.png",
             "blending": true,
             "render_type": "dynamic",
             "scale": 4.0,
@@ -80,7 +80,7 @@
             }
         },
         {
-            "texture": "beyond_earth:textures/sky/deimos.png",
+            "texture": "ad_astra:textures/sky/deimos.png",
             "blending": true,
             "render_type": "dynamic",
             "scale": 4.0,
@@ -91,7 +91,7 @@
             }
         },
         {
-            "texture": "beyond_earth:textures/sky/light.png",
+            "texture": "ad_astra:textures/sky/light.png",
             "blending": true,
             "render_type": "dynamic",
             "scale": 4.0,

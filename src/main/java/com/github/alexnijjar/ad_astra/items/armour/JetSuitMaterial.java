@@ -1,6 +1,6 @@
-package com.github.alexnijjar.beyond_earth.items.armour;
+package com.github.alexnijjar.ad_astra.items.armour;
 
-import com.github.alexnijjar.beyond_earth.registry.ModItems;
+import com.github.alexnijjar.ad_astra.registry.ModItems;
 
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorMaterial;

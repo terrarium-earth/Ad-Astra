@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 2,
-  "ingredient": {
-    "item": "beyond_earth:chiseled_venus_stone_bricks"
-  },
-  "result": "beyond_earth:chiseled_venus_stone_slab"
-}

@@ -1,9 +1,9 @@
-package com.github.alexnijjar.beyond_earth.compat.rei.compressor;
+package com.github.alexnijjar.ad_astra.compat.rei.compressor;
 
 import java.util.List;
 
-import com.github.alexnijjar.beyond_earth.compat.rei.REICategories;
-import com.github.alexnijjar.beyond_earth.recipes.CompressingRecipe;
+import com.github.alexnijjar.ad_astra.compat.rei.REICategories;
+import com.github.alexnijjar.ad_astra.recipes.CompressingRecipe;
 
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.Display;

@@ -1,5 +1,5 @@
 {
-    "world": "beyond_earth:glacio",
+    "world": "ad_astra:glacio",
     "stars": {
         "fancy_count": 2000,
         "fast_count": 2000,
@@ -15,7 +15,7 @@
     "horizon_angle": 0,
     "sky_objects": [
         {
-            "texture": "beyond_earth:textures/sky/blue_sun.png",
+            "texture": "ad_astra:textures/sky/blue_sun.png",
             "blending": true,
             "render_type": "dynamic",
             "scale": 30.0,
@@ -26,7 +26,7 @@
             }
         },
         {
-            "texture": "beyond_earth:textures/sky/vicinus.png",
+            "texture": "ad_astra:textures/sky/vicinus.png",
             "blending": false,
             "render_type": "static",
             "scale": 16.0,
@@ -37,7 +37,7 @@
             }
         },
         {
-            "texture": "beyond_earth:textures/sky/light.png",
+            "texture": "ad_astra:textures/sky/light.png",
             "blending": true,
             "render_type": "static",
             "scale": 48.0,

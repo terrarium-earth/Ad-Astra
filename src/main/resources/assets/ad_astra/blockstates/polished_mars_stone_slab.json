@@ -1,13 +1,13 @@
 {
   "variants": {
     "type=bottom": {
-      "model": "beyond_earth:block/polished_mars_stone_slab"
+      "model": "ad_astra:block/polished_mars_stone_slab"
     },
     "type=double": {
-      "model": "beyond_earth:block/polished_mars_stone"
+      "model": "ad_astra:block/polished_mars_stone"
     },
     "type=top": {
-      "model": "beyond_earth:block/polished_mars_stone_slab_top"
+      "model": "ad_astra:block/polished_mars_stone_slab_top"
     }
   }
 }

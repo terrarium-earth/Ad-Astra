@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "beyond_earth:block/glacio_lapis_ore"
+      "model": "ad_astra:block/glacio_lapis_ore"
     }
   }
 }

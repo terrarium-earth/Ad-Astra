@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "flag",
+  "key": {
+    "#": {
+      "item": "minecraft:pink_wool"
+    },
+    "|": {
+      "tag": "c:iron_rods"
+    }
+  },
+  "pattern": [
+    "|##",
+    "|##",
+    "|  "
+  ],
+  "result": {
+    "item": "ad_astra:flag_pink"
+  }
+}
