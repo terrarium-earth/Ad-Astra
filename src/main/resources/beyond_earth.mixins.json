@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "com.github.alexnijjar.beyond_earth.mixin",
+  "package": "com.github.alexnijjar.ad_astra.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "EntityInvoker",

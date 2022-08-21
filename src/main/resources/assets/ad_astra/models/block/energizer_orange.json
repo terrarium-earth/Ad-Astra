@@ -1,0 +1,11 @@
+{
+	"parent": "beyond_earth:custom/energizer",
+	"textures": {
+		"0": "beyond_earth:blocks/energizer_top",
+		"1": "beyond_earth:blocks/energizer_bottom",
+		"2": "beyond_earth:blocks/energizer_ring",
+		"3": "beyond_earth:blocks/energizer_side_orange",
+		"9": "beyond_earth:blocks/energizer_steel_arm",
+		"particle": "beyond_earth:blocks/energizer_top"
+	}
+}
