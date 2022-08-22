@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "ad_astra:blocks/coal_generator_top",
+    "up": "ad_astra:blocks/coal_generator_top",
+    "north": "ad_astra:blocks/coal_generator_front",
+    "east": "ad_astra:blocks/machine_side",
+    "south": "ad_astra:blocks/machine_side",
+    "west": "ad_astra:blocks/machine_side",
+    "particle": "ad_astra:blocks/coal_generator_top"
+  }
+}

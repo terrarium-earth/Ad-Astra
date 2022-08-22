@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "ad_astra:block/chiseled_mars_stone_slab"
+    },
+    "type=double": {
+      "model": "ad_astra:block/chiseled_mars_stone_bricks"
+    },
+    "type=top": {
+      "model": "ad_astra:block/chiseled_mars_stone_slab_top"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "ad_astra:alien",
+    "ad_astra:alien_zombie",
+    "ad_astra:star_crawler",
+    "ad_astra:martian_raptor",
+    "ad_astra:pygro",
+    "ad_astra:pygro_brute",
+    "ad_astra:mogler",
+    "ad_astra:zombified_mogler",
+    "ad_astra:alien_wandering_trader",
+    "minecraft:ender_dragon",
+    "minecraft:wither",
+    "minecraft:skeleton",
+    "minecraft:stray",
+    "minecraft:armor_stand",
+    "minecraft:iron_golem",
+    "minecraft:snow_golem",
+    "minecraft:warden"
+  ]
+}

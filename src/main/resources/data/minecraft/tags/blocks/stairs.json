@@ -1,21 +1,21 @@
 {
   "replace": false,
   "values": [
-    "beyond_earth:moon_stone_brick_stairs",
-    "beyond_earth:mars_stone_brick_stairs",
-    "beyond_earth:mercury_stone_brick_stairs",
-    "beyond_earth:venus_sandstone_brick_stairs",
-    "beyond_earth:venus_stone_brick_stairs",
-    "beyond_earth:glacio_stone_brick_stairs",
-    "beyond_earth:chiseled_moon_stone_stairs",
-    "beyond_earth:polished_moon_stone_stairs",
-    "beyond_earth:chiseled_mars_stone_stairs",
-    "beyond_earth:polished_mars_stone_stairs",
-    "beyond_earth:chiseled_venus_stone_stairs",
-    "beyond_earth:polished_venus_stone_stairs",
-    "beyond_earth:chiseled_mercury_stone_stairs",
-    "beyond_earth:polished_mercury_stone_stairs",
-    "beyond_earth:chiseled_glacio_stone_stairs",
-    "beyond_earth:polished_glacio_stone_stairs"
+    "ad_astra:moon_stone_brick_stairs",
+    "ad_astra:mars_stone_brick_stairs",
+    "ad_astra:mercury_stone_brick_stairs",
+    "ad_astra:venus_sandstone_brick_stairs",
+    "ad_astra:venus_stone_brick_stairs",
+    "ad_astra:glacio_stone_brick_stairs",
+    "ad_astra:chiseled_moon_stone_stairs",
+    "ad_astra:polished_moon_stone_stairs",
+    "ad_astra:chiseled_mars_stone_stairs",
+    "ad_astra:polished_mars_stone_stairs",
+    "ad_astra:chiseled_venus_stone_stairs",
+    "ad_astra:polished_venus_stone_stairs",
+    "ad_astra:chiseled_mercury_stone_stairs",
+    "ad_astra:polished_mercury_stone_stairs",
+    "ad_astra:chiseled_glacio_stone_stairs",
+    "ad_astra:polished_glacio_stone_stairs"
   ]
 }

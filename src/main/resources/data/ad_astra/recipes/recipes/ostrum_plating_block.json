@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "desh_plating",
+  "key": {
+    "#": {
+      "item": "ad_astra:iron_plating"
+    },
+    "|": {
+      "tag": "c:compressed_ostrum"
+    }
+  },
+  "pattern": [
+    "###",
+    "#|#",
+    "###"
+  ],
+  "result": {
+    "count": 8,
+    "item": "ad_astra:ostrum_plating"
+  }
+}

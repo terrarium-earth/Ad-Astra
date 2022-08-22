@@ -1,0 +1,11 @@
+{
+  "rocket_fly": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "ad_astra:rocket_fly",
+        "stream": false
+      }
+    ]
+  }
+}

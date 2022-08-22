@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "beyond_earth:blocks/polished_mars_stone",
-    "top": "beyond_earth:blocks/polished_mars_stone",
-    "side": "beyond_earth:blocks/polished_mars_stone"
-  }
-}

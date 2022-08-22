@@ -1,8 +1,0 @@
-{
-  "parent": "beyond_earth:custom/launch_pad",
-  "textures": {
-    "all": "beyond_earth:blocks/launch_pad",
-    "particle": "beyond_earth:blocks/launch_pad",
-    "1": "beyond_earth:blocks/launch_pad"
-  }
-}

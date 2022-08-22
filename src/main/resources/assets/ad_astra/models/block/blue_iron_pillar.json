@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "ad_astra:blocks/blue_iron_pillar_top",
+    "up": "ad_astra:blocks/blue_iron_pillar_top",
+    "north": "ad_astra:blocks/blue_iron_pillar",
+    "east": "ad_astra:blocks/blue_iron_pillar",
+    "south": "ad_astra:blocks/blue_iron_pillar",
+    "west": "ad_astra:blocks/blue_iron_pillar",
+    "particle": "ad_astra:blocks/blue_iron_pillar_top"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "block/inner_stairs",
+  "textures": {
+    "bottom": "ad_astra:blocks/moon_stone_bricks",
+    "top": "ad_astra:blocks/moon_stone_bricks",
+    "side": "ad_astra:blocks/moon_stone_bricks"
+  }
+}

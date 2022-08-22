@@ -1,0 +1,15 @@
+{
+    "name": "venus",
+    "galaxy": "ad_astra:milky_way",
+    "solar_system": "ad_astra:solar_system",
+    "world": "ad_astra:venus",
+    "orbit_world": "ad_astra:venus_orbit",
+    "parent_world": null,
+    "rocket_tier": 3,
+    "gravity": 8.87,
+    "days_in_year": 225,
+    "temperature": 464,
+    "has_oxygen": false,
+    "atmosphere_start": 450,
+    "button_color": "green"
+}

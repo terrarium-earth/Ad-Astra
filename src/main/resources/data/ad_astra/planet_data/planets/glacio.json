@@ -1,0 +1,15 @@
+{
+    "name": "glacio",
+    "galaxy": "ad_astra:milky_way",
+    "solar_system": "ad_astra:proxima_centauri",
+    "world": "ad_astra:glacio",
+    "orbit_world": "ad_astra:glacio_orbit",
+    "parent_world": null,
+    "rocket_tier": 4,
+    "gravity": 3.721,
+    "days_in_year": 365,
+    "temperature": -20,
+    "has_oxygen": true,
+    "atmosphere_start": 450,
+    "button_color": "green"
+}

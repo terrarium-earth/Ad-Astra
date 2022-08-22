@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "ad_astra:items/item_iron_stick"
+  }
+}

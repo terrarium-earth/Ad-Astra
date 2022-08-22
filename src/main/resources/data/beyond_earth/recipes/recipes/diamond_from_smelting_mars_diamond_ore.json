@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "cookingtime": 200,
-  "experience": 1.0,
-  "ingredient": {
-    "item": "beyond_earth:mars_diamond_ore"
-  },
-  "result": "minecraft:diamond"
-}

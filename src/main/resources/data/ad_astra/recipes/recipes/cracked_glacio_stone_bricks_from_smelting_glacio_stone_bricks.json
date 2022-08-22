@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 0.2,
+  "ingredient": {
+    "item": "ad_astra:glacio_stone_bricks"
+  },
+  "result": "ad_astra:cracked_glacio_stone_bricks"
+}

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "tag": "c:compressed_ostrum"
+    },
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "O": {
+      "item": "ad_astra:oxygen_gear"
+    },
+    "T": {
+      "item": "ad_astra:oxygen_tank"
+    }
+  },
+  "pattern": [
+    "# #",
+    "TOT",
+    "#N#"
+  ],
+  "result": {
+    "item": "ad_astra:netherite_space_suit"
+  }
+}

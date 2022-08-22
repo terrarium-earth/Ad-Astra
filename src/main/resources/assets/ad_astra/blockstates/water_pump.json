@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "ad_astra:block/water_pump"
+    },
+    "facing=east": {
+      "model": "ad_astra:block/water_pump",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "ad_astra:block/water_pump",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "ad_astra:block/water_pump",
+      "y": 270
+    }
+  }
+}

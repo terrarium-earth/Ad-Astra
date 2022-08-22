@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "ad_astra:polished_venus_stone"
+  },
+  "result": "ad_astra:polished_venus_stone_slab"
+}

@@ -1,0 +1,11 @@
+{
+    "galaxy": "ad_astra:milky_way",
+    "solar_system": "ad_astra:proxima_centauri",
+    "sun_type": "blue_sun",
+    "planetary_rings": [
+        {
+            "planet": "ad_astra:glacio",
+            "radius": 4.0
+        }
+    ]
+}

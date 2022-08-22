@@ -1,0 +1,35 @@
+{
+  "display": {
+    "icon": {
+      "item": "ad_astra:tier_4_rocket"
+    },
+    "title": {
+      "translate": "advancements.tier_4_rocket_advancement.title"
+    },
+    "description": {
+      "translate": "advancements.tier_4_rocket_advancement.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "tier_4_rocket_advancement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ad_astra:tier_4_rocket"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 7
+  },
+  "parent": "ad_astra:rocket_advancement"
+}

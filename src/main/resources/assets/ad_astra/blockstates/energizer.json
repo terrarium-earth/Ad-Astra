@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "power=0": {
+      "model": "ad_astra:block/energizer_empty"
+    },
+    "power=1": {
+      "model": "ad_astra:block/energizer_red"
+    },
+    "power=2": {
+      "model": "ad_astra:block/energizer_orange"
+    },
+    "power=3": {
+      "model": "ad_astra:block/energizer_yellow"
+    },
+    "power=4": {
+      "model": "ad_astra:block/energizer_green"
+    },
+    "power=5": {
+      "model": "ad_astra:block/energizer_blue"
+    }
+  }
+}

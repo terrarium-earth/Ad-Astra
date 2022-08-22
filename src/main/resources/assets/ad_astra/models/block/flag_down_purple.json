@@ -1,0 +1,9 @@
+{
+  "parent": "ad_astra:custom/flag_down",
+  "textures": {
+    "all": "ad_astra:blocks/flag_purple",
+    "particle": "ad_astra:blocks/flag_purple",
+    "0": "ad_astra:blocks/flag_purple",
+    "missing": "ad_astra:blocks/flag_purple"
+  }
+}

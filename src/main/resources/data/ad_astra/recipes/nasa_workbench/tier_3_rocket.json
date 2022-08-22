@@ -1,0 +1,79 @@
+{
+	"type": "ad_astra:nasa_workbench",
+	"ingredients": [
+		{
+			"ingredient": {
+				"item": "ad_astra:rocket_nose_cone"
+			}
+		},
+		{
+			"ingredient": {
+				"tag": "c:compressed_ostrum"
+			}
+		},
+		{
+			"ingredient": {
+				"tag": "c:compressed_ostrum"
+			}
+		},
+		{
+			"ingredient": {
+				"tag": "c:compressed_ostrum"
+			}
+		},
+		{
+			"ingredient": {
+				"tag": "c:compressed_ostrum"
+			}
+		},
+		{
+			"ingredient": {
+				"tag": "c:compressed_ostrum"
+			}
+		},
+		{
+			"ingredient": {
+				"tag": "c:compressed_ostrum"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "ad_astra:rocket_fin"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "ad_astra:ostrum_tank"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "ad_astra:ostrum_tank"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "ad_astra:rocket_fin"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "ad_astra:rocket_fin"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "ad_astra:ostrum_engine"
+			}
+		},
+		{
+			"ingredient": {
+				"item": "ad_astra:rocket_fin"
+			}
+		}
+	],
+	"output": {
+		"item": "ad_astra:tier_3_rocket",
+		"count": 1
+	}
+}

@@ -1,0 +1,23 @@
+{
+    "galaxy": "ad_astra:milky_way",
+    "solar_system": "ad_astra:solar_system",
+    "sun_type": "sun",
+    "planetary_rings": [
+        {
+            "planet": "ad_astra:mercury",
+            "radius": 1.0
+        },
+        {
+            "planet": "ad_astra:venus",
+            "radius": 2.0
+        },
+        {
+            "planet": "ad_astra:earth",
+            "radius": 3.0
+        },
+        {
+            "planet": "ad_astra:mars",
+            "radius": 4.0
+        }
+    ]
+}

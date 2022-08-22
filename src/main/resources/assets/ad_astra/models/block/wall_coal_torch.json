@@ -1,0 +1,9 @@
+{
+  "parent": "ad_astra:custom/template_torch_wall",
+  "textures": {
+    "all": "ad_astra:blocks/coal_torch",
+    "particle": "ad_astra:blocks/coal_torch",
+    "2": "ad_astra:blocks/coal_torch",
+    "missing": "ad_astra:blocks/coal_torch"
+  }
+}

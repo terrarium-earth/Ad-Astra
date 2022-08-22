@@ -1,0 +1,11 @@
+{
+  "type": "ad_astra:compressing",
+  "input": {
+    "tag": "c:desh_ingots"
+  },
+  "output": {
+    "item": "ad_astra:compressed_desh",
+    "count": 1
+  },
+  "cookTime": 200
+}

@@ -1,0 +1,19 @@
+{
+    "name": "Aliens",
+    "icon": "ad_astra:moon_stone_bricks",
+    "sortnum": 4,
+    "category": "ad_astra:the_moon",
+    "pages": [
+        {
+            "type": "patchouli:spotlight",
+            "title": "Alien",
+            "item": "ad_astra:moon_stone_bricks",
+            "text": "Throughout the moon, There are small, inhabited underground villages. These villages contain an alien form of the earth villager. Unlike their earth counterpart, these alien villagers don't need oxygen and can survive the chilling environment of the moon."
+        },
+        {
+            "type": "patchouli:entity",
+            "entity": "ad_astra:alien",
+            "default_rotation": 45
+        }
+    ]
+}

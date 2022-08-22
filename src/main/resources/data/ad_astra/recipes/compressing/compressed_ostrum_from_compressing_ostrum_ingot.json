@@ -1,0 +1,11 @@
+{
+  "type": "ad_astra:compressing",
+  "input": {
+    "tag": "c:ostrum_ingots"
+  },
+  "output": {
+    "item": "ad_astra:compressed_ostrum",
+    "count": 1
+  },
+  "cookTime": 200
+}

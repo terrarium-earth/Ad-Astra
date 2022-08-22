@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "cookingtime": 100,
-  "experience": 1.0,
-  "ingredient": {
-    "item": "beyond_earth:glacio_coal_ore"
-  },
-  "result": "minecraft:coal"
-}

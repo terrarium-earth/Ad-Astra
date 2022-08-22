@@ -1,0 +1,11 @@
+{
+	"parent": "ad_astra:custom/energizer",
+	"textures": {
+		"0": "ad_astra:blocks/energizer_top",
+		"1": "ad_astra:blocks/energizer_bottom",
+		"2": "ad_astra:blocks/energizer_ring",
+		"3": "ad_astra:blocks/energizer_side_yellow",
+		"9": "ad_astra:blocks/energizer_steel_arm",
+		"particle": "ad_astra:blocks/energizer_top"
+	}
+}

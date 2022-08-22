@@ -1,0 +1,36 @@
+{
+  "temperature": 1.6,
+  "downfall": 1,
+  "precipitation": "rain",
+  "effects": {
+    "sky_color": -3044526,
+    "fog_color": -3044526,
+    "water_color": 4159204,
+    "water_fog_color": 329011,
+    "grass_color": 9551193,
+    "foliage_color": 7842607,
+	"particle": {
+      "options": {
+        "type": "minecraft:crimson_spore"
+      },
+      "probability": 0.014
+    }
+  },
+  "spawners": {},
+  "spawn_costs": {},
+  "carvers": {
+    "air": [
+      "minecraft:cave",
+      "minecraft:cave_extra_underground",
+      "minecraft:canyon"
+    ]
+  },
+  "features": [
+    [
+      "ad_astra:venus_coal_ore",
+      "ad_astra:venus_gold_ore",
+      "ad_astra:venus_diamond_ore",
+      "ad_astra:venus_calorite_ore"
+    ]
+  ]
+}

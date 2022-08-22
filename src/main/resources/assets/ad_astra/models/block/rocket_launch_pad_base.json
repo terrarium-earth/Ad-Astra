@@ -1,0 +1,8 @@
+{
+  "parent": "ad_astra:custom/launch_pad_base",
+  "textures": {
+    "all": "ad_astra:blocks/launch_pad",
+    "particle": "ad_astra:blocks/launch_pad",
+    "1": "ad_astra:blocks/launch_pad"
+  }
+}

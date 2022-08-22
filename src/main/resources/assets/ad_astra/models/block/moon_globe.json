@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "ad_astra:blocks/globes/moon_globe"
+  }
+}

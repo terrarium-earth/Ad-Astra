@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "cookingtime": 100,
+  "experience": 1.0,
+  "ingredient": {
+    "item": "ad_astra:glacio_ice_shard_ore"
+  },
+  "result": "ad_astra:ice_shard"
+}

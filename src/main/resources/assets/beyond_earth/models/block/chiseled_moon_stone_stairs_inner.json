@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "beyond_earth:blocks/chiseled_moon_stone_bricks",
-    "top": "beyond_earth:blocks/chiseled_moon_stone_bricks",
-    "side": "beyond_earth:blocks/chiseled_moon_stone_bricks"
-  }
-}
