@@ -20,7 +20,7 @@ public class PiglinSpecificSensorMixin {
 
 	// Disable Pygros running away from soul blocks.
 	@Inject(method = "findPiglinRepellent", at = @At("HEAD"), cancellable = true)
-	private static void findPiglinRepellent(ServerWorld world, LivingEntity entity, CallbackInfoReturnable<Optional<BlockPos>> ci) {
+	private static void adastra_findPiglinRepellent(ServerWorld world, LivingEntity entity, CallbackInfoReturnable<Optional<BlockPos>> ci) {
 		if (entity instanceof PygroEntity || entity instanceof PygroBruteEntity) {
 			ci.setReturnValue(BlockPos.findClosest(entity.getBlockPos(), 8, 4, pos -> false));
 		}
@@ -28,7 +28,7 @@ public class PiglinSpecificSensorMixin {
 
 	// Disable Pygros attacking players without gold.
 	@Inject(method = "sense", at = @At("TAIL"))
-	public void sense(ServerWorld world, LivingEntity entity, CallbackInfo ci) {
+	public void adastra_sense(ServerWorld world, LivingEntity entity, CallbackInfo ci) {
 		if (entity instanceof PygroEntity || entity instanceof PygroBruteEntity) {
 			entity.getBrain().forget(MemoryModuleType.NEAREST_TARGETABLE_PLAYER_NOT_WEARING_GOLD);
 		}

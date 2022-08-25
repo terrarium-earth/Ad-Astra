@@ -117,6 +117,7 @@ public class GlobeBlock extends BlockWithEntity implements Waterloggable {
 		builder.add(FACING, WATERLOGGED, POWERED);
 	}
 
+	@Override
 	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
 		return Block.hasTopRim(world, pos.down());
 	}

@@ -1,7 +1,8 @@
 package com.github.alexnijjar.ad_astra.blocks.torches;
 
 import com.github.alexnijjar.ad_astra.registry.ModBlocks;
-import com.github.alexnijjar.ad_astra.util.OxygenUtils;
+import com.github.alexnijjar.ad_astra.util.entity.OxygenUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -36,7 +37,7 @@ public class CoalTorchBlock extends Block {
 		if (!world.isClient) {
 			ItemStack itemstack = player.getStackInHand(hand);
 
-			if (OxygenUtils.worldHasOxygen(world, pos)) {
+			if (OxygenUtils.posHasOxygen(world, pos)) {
 				if (itemstack.getItem() instanceof FlintAndSteelItem || itemstack.getItem() instanceof FireChargeItem) {
 
 					if (world.getBlockState(pos).getBlock().equals(ModBlocks.COAL_TORCH)) {

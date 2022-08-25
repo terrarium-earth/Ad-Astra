@@ -11,7 +11,7 @@ import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
 public class MoglerEntityRenderer extends MobEntityRenderer<MoglerEntity, MoglerEntityModel<MoglerEntity>> {
-	public static final Identifier TEXTURE = new ModIdentifier("textures/entities/mogler.png");
+	public static final Identifier TEXTURE = new ModIdentifier("textures/entity/mogler.png");
 
 	public MoglerEntityRenderer(EntityRendererFactory.Context context) {
 		super(context, new MoglerEntityModel<>(context.getPart(MoglerEntityModel.LAYER_LOCATION)), 0.7f);

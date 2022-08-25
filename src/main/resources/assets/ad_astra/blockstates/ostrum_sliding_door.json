@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "ad_astra:block/door/ostrum_sliding_door"
+    }
+  }
+}

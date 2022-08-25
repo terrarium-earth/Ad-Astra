@@ -1,6 +1,6 @@
 {
-    "parent": "ad_astra:template/cable/thick_cable_core",
+    "parent": "ad_astra:template/pipe/thick_pipe_core",
     "textures": {
-        "cable": "ad_astra:block/pipe/desh_fluid_pipe_insert"
+        "pipe": "ad_astra:block/pipe/desh_fluid_pipe"
     }
 }

@@ -29,6 +29,20 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 
 		// Blocks
 
+		// Glacian Wood
+		offerBarkBlockRecipe(exporter, STRIPPED_GLACIAN_LOG, GLACIAN_LOG);
+		offerPlanksRecipe(exporter, GLACIAN_PLANKS, ModTags.GLACIAN_LOGS);
+		createStairsRecipe(GLACIAN_STAIRS, Ingredient.ofItems(GLACIAN_PLANKS)).criterion(hasItem(GLACIAN_PLANKS), conditionsFromItem(GLACIAN_PLANKS)).offerTo(exporter);
+		offerSlabRecipe(exporter, GLACIAN_SLAB, GLACIAN_PLANKS);
+		createDoorRecipe(GLACIAN_DOOR, Ingredient.ofItems(GLACIAN_PLANKS)).criterion("has_tag", method_10420(ModTags.GLACIAN_LOGS)).offerTo(exporter);
+		createTrapdoorRecipe(GLACIAN_TRAPDOOR, Ingredient.ofItems(ModItems.GLACIAN_PLANKS)).criterion("has_tag", method_10420(ModTags.GLACIAN_LOGS)).offerTo(exporter);
+		createFenceRecipe(GLACIAN_FENCE, Ingredient.ofItems(GLACIAN_PLANKS)).criterion("has_tag", method_10420(ModTags.GLACIAN_LOGS)).offerTo(exporter);
+		createFenceGateRecipe(GLACIAN_FENCE_GATE, Ingredient.ofItems(GLACIAN_PLANKS)).criterion("has_tag", method_10420(ModTags.GLACIAN_LOGS)).offerTo(exporter);
+		offerButtonRecipe(exporter, GLACIAN_BUTTON, GLACIAN_PLANKS);
+		createPressurePlateRecipe(exporter, GLACIAN_PRESSURE_PLATE, GLACIAN_PLANKS);
+		createSignRecipe(GLACIAN_SIGN, Ingredient.ofItems(GLACIAN_PLANKS)).criterion("has_tag", method_10420(ModTags.GLACIAN_LOGS)).offerTo(exporter);
+
+
 		// Blasting
 		offerBlasting(exporter, List.of(Items.IRON_INGOT), ModItems.STEEL_INGOT, 1.0f, 100, null);
 		// Blasting + Smelting
@@ -97,40 +111,39 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		offerWallRecipe(exporter, PERMAFROST_BRICK_WALL, PERMAFROST_BRICKS);
 
 		// Stairs
-		offerStairsRecipe(exporter, MOON_STONE_BRICK_STAIRS, MOON_STONE_BRICKS);
-		offerStairsRecipe(exporter, CHISELED_MOON_STONE_STAIRS, CHISELED_MOON_STONE_BRICKS);
-		offerStairsRecipe(exporter, POLISHED_MOON_STONE_STAIRS, POLISHED_MOON_STONE);
-		offerStairsRecipe(exporter, MARS_STONE_BRICK_STAIRS, MARS_STONE_BRICKS);
-		offerStairsRecipe(exporter, CHISELED_MARS_STONE_STAIRS, CHISELED_MARS_STONE_BRICKS);
-		offerStairsRecipe(exporter, POLISHED_MARS_STONE_STAIRS, POLISHED_MARS_STONE);
-		offerStairsRecipe(exporter, VENUS_SANDSTONE_BRICK_STAIRS, VENUS_SANDSTONE_BRICKS);
-		offerStairsRecipe(exporter, VENUS_STONE_BRICK_STAIRS, VENUS_STONE_BRICKS);
-		offerStairsRecipe(exporter, CHISELED_VENUS_STONE_STAIRS, CHISELED_VENUS_STONE_BRICKS);
-		offerStairsRecipe(exporter, POLISHED_VENUS_STONE_STAIRS, POLISHED_VENUS_STONE);
-		offerStairsRecipe(exporter, MERCURY_STONE_BRICK_STAIRS, MERCURY_STONE_BRICKS);
-		offerStairsRecipe(exporter, CHISELED_MERCURY_STONE_STAIRS, CHISELED_MERCURY_STONE_BRICKS);
-		offerStairsRecipe(exporter, POLISHED_MERCURY_STONE_STAIRS, POLISHED_MERCURY_STONE);
-		offerStairsRecipe(exporter, GLACIO_STONE_BRICK_STAIRS, GLACIO_STONE_BRICKS);
-		offerStairsRecipe(exporter, CHISELED_GLACIO_STONE_STAIRS, CHISELED_GLACIO_STONE_BRICKS);
-		offerStairsRecipe(exporter, IRON_PLATING_STAIRS, IRON_PLATING);
-		offerStairsRecipe(exporter, STEEL_PLATING_STAIRS, STEEL_PLATING);
-		offerStairsRecipe(exporter, DESH_PLATING_STAIRS, DESH_PLATING);
-		offerStairsRecipe(exporter, OSTRUM_PLATING_STAIRS, OSTRUM_PLATING);
-		offerStairsRecipe(exporter, CALORITE_PLATING_STAIRS, CALORITE_PLATING);
-		offerStairsRecipe(exporter, PERMAFROST_BRICK_STAIRS, PERMAFROST_BRICKS);
-		offerStairsRecipe(exporter, POLISHED_PERMAFROST_STAIRS, POLISHED_PERMAFROST);
-		offerStairsRecipe(exporter, CHISELED_PERMAFROST_BRICK_STAIRS, CHISELED_PERMAFROST_BRICKS);
-		offerStairsRecipe(exporter, MOON_COBBLESTONE_STAIRS, MOON_COBBLESTONE);
-		offerStairsRecipe(exporter, MARS_COBBLESTONE_STAIRS, MARS_COBBLESTONE);
-		offerStairsRecipe(exporter, VENUS_COBBLESTONE_STAIRS, VENUS_COBBLESTONE);
-		offerStairsRecipe(exporter, MERCURY_COBBLESTONE_STAIRS, MERCURY_COBBLESTONE);
-		offerStairsRecipe(exporter, GLACIO_COBBLESTONE_STAIRS, GLACIO_COBBLESTONE);
-		offerStairsRecipe(exporter, MOON_STONE_STAIRS, MOON_STONE);
-		offerStairsRecipe(exporter, MARS_STONE_STAIRS, MARS_STONE);
-		offerStairsRecipe(exporter, VENUS_STONE_STAIRS, VENUS_STONE);
-		offerStairsRecipe(exporter, MERCURY_STONE_STAIRS, MERCURY_STONE);
-		offerStairsRecipe(exporter, GLACIO_STONE_STAIRS, GLACIO_STONE);
-		
+		offerCustomStairsRecipe(exporter, MOON_STONE_BRICK_STAIRS, MOON_STONE_BRICKS);
+		offerCustomStairsRecipe(exporter, CHISELED_MOON_STONE_STAIRS, CHISELED_MOON_STONE_BRICKS);
+		offerCustomStairsRecipe(exporter, POLISHED_MOON_STONE_STAIRS, POLISHED_MOON_STONE);
+		offerCustomStairsRecipe(exporter, MARS_STONE_BRICK_STAIRS, MARS_STONE_BRICKS);
+		offerCustomStairsRecipe(exporter, CHISELED_MARS_STONE_STAIRS, CHISELED_MARS_STONE_BRICKS);
+		offerCustomStairsRecipe(exporter, POLISHED_MARS_STONE_STAIRS, POLISHED_MARS_STONE);
+		offerCustomStairsRecipe(exporter, VENUS_SANDSTONE_BRICK_STAIRS, VENUS_SANDSTONE_BRICKS);
+		offerCustomStairsRecipe(exporter, VENUS_STONE_BRICK_STAIRS, VENUS_STONE_BRICKS);
+		offerCustomStairsRecipe(exporter, CHISELED_VENUS_STONE_STAIRS, CHISELED_VENUS_STONE_BRICKS);
+		offerCustomStairsRecipe(exporter, POLISHED_VENUS_STONE_STAIRS, POLISHED_VENUS_STONE);
+		offerCustomStairsRecipe(exporter, MERCURY_STONE_BRICK_STAIRS, MERCURY_STONE_BRICKS);
+		offerCustomStairsRecipe(exporter, CHISELED_MERCURY_STONE_STAIRS, CHISELED_MERCURY_STONE_BRICKS);
+		offerCustomStairsRecipe(exporter, POLISHED_MERCURY_STONE_STAIRS, POLISHED_MERCURY_STONE);
+		offerCustomStairsRecipe(exporter, GLACIO_STONE_BRICK_STAIRS, GLACIO_STONE_BRICKS);
+		offerCustomStairsRecipe(exporter, CHISELED_GLACIO_STONE_STAIRS, CHISELED_GLACIO_STONE_BRICKS);
+		offerCustomStairsRecipe(exporter, IRON_PLATING_STAIRS, IRON_PLATING);
+		offerCustomStairsRecipe(exporter, STEEL_PLATING_STAIRS, STEEL_PLATING);
+		offerCustomStairsRecipe(exporter, DESH_PLATING_STAIRS, DESH_PLATING);
+		offerCustomStairsRecipe(exporter, OSTRUM_PLATING_STAIRS, OSTRUM_PLATING);
+		offerCustomStairsRecipe(exporter, CALORITE_PLATING_STAIRS, CALORITE_PLATING);
+		offerCustomStairsRecipe(exporter, PERMAFROST_BRICK_STAIRS, PERMAFROST_BRICKS);
+		offerCustomStairsRecipe(exporter, POLISHED_PERMAFROST_STAIRS, POLISHED_PERMAFROST);
+		offerCustomStairsRecipe(exporter, CHISELED_PERMAFROST_BRICK_STAIRS, CHISELED_PERMAFROST_BRICKS);
+		offerCustomStairsRecipe(exporter, MOON_COBBLESTONE_STAIRS, MOON_COBBLESTONE);
+		offerCustomStairsRecipe(exporter, MARS_COBBLESTONE_STAIRS, MARS_COBBLESTONE);
+		offerCustomStairsRecipe(exporter, VENUS_COBBLESTONE_STAIRS, VENUS_COBBLESTONE);
+		offerCustomStairsRecipe(exporter, MERCURY_COBBLESTONE_STAIRS, MERCURY_COBBLESTONE);
+		offerCustomStairsRecipe(exporter, GLACIO_COBBLESTONE_STAIRS, GLACIO_COBBLESTONE);
+		offerCustomStairsRecipe(exporter, MOON_STONE_STAIRS, MOON_STONE);
+		offerCustomStairsRecipe(exporter, MARS_STONE_STAIRS, MARS_STONE);
+		offerCustomStairsRecipe(exporter, VENUS_STONE_STAIRS, VENUS_STONE);
+		offerCustomStairsRecipe(exporter, MERCURY_STONE_STAIRS, MERCURY_STONE);
+		offerCustomStairsRecipe(exporter, GLACIO_STONE_STAIRS, GLACIO_STONE);
 
 		// Buttons
 		offerButtonRecipe(exporter, IRON_PLATING_BUTTON, IRON_PLATING);
@@ -255,8 +268,24 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		offerPlatingRecipe(exporter, CALORITE_PLATING, ModTags.COMPRESSED_CALORITE);
 
 		createDoorRecipe(STEEL_DOOR, Ingredient.ofItems(ModItems.COMPRESSED_STEEL)).criterion("has_tag", method_10420(ModTags.COMPRESSED_STEEL)).offerTo(exporter);
-
 		createTrapdoorRecipe(STEEL_TRAPDOOR, Ingredient.ofItems(ModItems.COMPRESSED_STEEL)).criterion("has_tag", method_10420(ModTags.COMPRESSED_STEEL)).offerTo(exporter);
+
+		// Doors
+		ShapedRecipeJsonFactory.create(IRON_SLIDING_DOOR).input(Character.valueOf('#'), Items.IRON_BLOCK).input(Character.valueOf('C'), ModItems.IRON_PLATE).input(Character.valueOf('P'), Items.GLASS_PANE).pattern("CCC").pattern("P#P").pattern("CCC")
+				.group("sliding_door").criterion("has_item", conditionsFromItem(Items.IRON_BLOCK)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(STEEL_SLIDING_DOOR).m_hadhiznl(Character.valueOf('#'), ModTags.STEEL_BLOCKS).input(Character.valueOf('C'), ModItems.COMPRESSED_STEEL).input(Character.valueOf('P'), Items.GLASS_PANE).pattern("CCC").pattern("P#P")
+				.pattern("CCC").group("sliding_door").criterion("has_item", method_10420(ModTags.STEEL_BLOCKS)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(DESH_SLIDING_DOOR).m_hadhiznl(Character.valueOf('#'), ModTags.DESH_BLOCKS).input(Character.valueOf('C'), ModItems.DESH_PLATE).input(Character.valueOf('P'), Items.GLASS_PANE).pattern("CCC").pattern("P#P")
+				.pattern("CCC").group("sliding_door").criterion("has_item", method_10420(ModTags.DESH_BLOCKS)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(OSTRUM_SLIDING_DOOR).m_hadhiznl(Character.valueOf('#'), ModTags.OSTRUM_BLOCKS).input(Character.valueOf('C'), ModItems.COMPRESSED_OSTRUM).input(Character.valueOf('P'), Items.GLASS_PANE).pattern("CCC").pattern("P#P")
+				.pattern("CCC").group("sliding_door").criterion("has_item", method_10420(ModTags.OSTRUM_BLOCKS)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(CALORITE_SLIDING_DOOR).m_hadhiznl(Character.valueOf('#'), ModTags.CALORITE_BLOCKS).input(Character.valueOf('C'), ModItems.COMPRESSED_CALORITE).input(Character.valueOf('P'), Items.GLASS_PANE).pattern("CCC")
+				.pattern("P#P").pattern("CCC").group("sliding_door").criterion("has_item", method_10420(ModTags.CALORITE_BLOCKS)).offerTo(exporter);
+
+		ShapedRecipeJsonFactory.create(AIRLOCK).m_hadhiznl(Character.valueOf('#'), ModTags.STEEL_BLOCKS).input(Character.valueOf('C'), ModItems.COMPRESSED_STEEL).pattern("CC#").pattern("CCC").pattern("#CC").group("sliding_door")
+				.criterion("has_tag", method_10420(ModTags.STEEL_BLOCKS)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(REINFORCED_DOOR).m_hadhiznl(Character.valueOf('#'), ModTags.STEEL_BLOCKS).input(Character.valueOf('O'), Blocks.OBSIDIAN).input(Character.valueOf('G'), Items.GLASS_PANE).pattern("O#O").pattern("G#G").pattern("O#O")
+				.group("sliding_door").criterion("has_tag", method_10420(ModTags.STEEL_BLOCKS)).offerTo(exporter);
 
 		ShapedRecipeJsonFactory.create(BLUE_IRON_PILLAR, 6).m_hadhiznl(Character.valueOf('#'), ModTags.IRON_PLATES).input(Character.valueOf('G'), Blocks.GLOWSTONE).input(Character.valueOf('B'), Items.BLUE_DYE).pattern("#B#").pattern("#G#").pattern("#B#")
 				.group("blue_iron_pillar").criterion("has_tag", method_10420(ModTags.IRON_PLATES)).offerTo(exporter);
@@ -490,7 +519,7 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		offerStonecuttingRecipe(exporter, output, input, 2);
 	}
 
-	public void offerStairsRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, ItemConvertible input) {
+	public void offerCustomStairsRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, ItemConvertible input) {
 		createStairsRecipe(output, Ingredient.ofItems(input)).criterion(hasItem(input), conditionsFromItem(input)).offerTo(exporter);
 		offerStonecuttingRecipe(exporter, output, input);
 	}

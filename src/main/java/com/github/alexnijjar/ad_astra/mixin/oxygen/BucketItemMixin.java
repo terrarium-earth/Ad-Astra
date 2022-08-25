@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.registry.ModFluids;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
-import com.github.alexnijjar.ad_astra.util.OxygenUtils;
+import com.github.alexnijjar.ad_astra.util.entity.OxygenUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -40,15 +40,20 @@ public abstract class BucketItemMixin {
 
 	// Evaporate water in a no-oxygen environment. Water is not evaporated in a oxygen distributor.
 	@Inject(method = "placeFluid", at = @At(value = "HEAD"), cancellable = true)
-	public void placeFluid(PlayerEntity player, World world, BlockPos pos, BlockHitResult hitResult, CallbackInfoReturnable<Boolean> ci) {
+	public void adastra_placeFluid(PlayerEntity player, World world, BlockPos pos, BlockHitResult hitResult, CallbackInfoReturnable<Boolean> ci) {
 		if (!AdAstra.CONFIG.general.doOxygen) {
 			return;
 		}
+
+		if (!ModUtils.isSpaceWorld(world)) {
+			return;
+		}
+
 		BucketItem bucketItem = (BucketItem) (Object) this;
 
 		if (this.fluid.isIn(FluidTags.WATER)) {
 
-			if (!OxygenUtils.worldHasOxygen(world, pos) && !this.fluid.equals(ModFluids.CRYO_FUEL_STILL)) {
+			if (!OxygenUtils.posHasOxygen(world, pos) && !this.fluid.equals(ModFluids.CRYO_FUEL_STILL)) {
 				int i = pos.getX();
 				int j = pos.getY();
 				int k = pos.getZ();

@@ -165,6 +165,7 @@ public class ModC2SPackets {
 			buf.writeIdentifier(planet.parentWorld() == null ? new Identifier("empty") : planet.parentWorld().getValue());
 			buf.writeInt(planet.rocketTier());
 			buf.writeFloat(planet.gravity());
+			buf.writeBoolean(planet.hasAtmosphere());
 			buf.writeInt(planet.daysInYear());
 			buf.writeFloat(planet.temperature());
 			buf.writeBoolean(planet.hasOxygen());

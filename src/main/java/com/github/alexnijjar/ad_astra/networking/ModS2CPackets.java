@@ -1,10 +1,15 @@
 package com.github.alexnijjar.ad_astra.networking;
 
-import com.github.alexnijjar.ad_astra.client.AdAstraClient;
+import java.util.HashSet;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.data.ButtonColour;
 import com.github.alexnijjar.ad_astra.data.Planet;
 import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntity;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -24,7 +29,7 @@ public class ModS2CPackets {
 
 		// Receive planet data on client.
 		ClientPlayNetworking.registerGlobalReceiver(DATAPACK_PLANETS, (client, handler, mainBuf, responseSender) -> {
-			AdAstraClient.planets = mainBuf.readList(buf -> {
+			AdAstra.planets = new HashSet<>(mainBuf.readList(buf -> {
 
 				String translation = buf.readString();
 				Identifier galaxy = buf.readIdentifier();
@@ -35,13 +40,18 @@ public class ModS2CPackets {
 				RegistryKey<World> parentWorld = id.equals(new Identifier("empty")) ? null : RegistryKey.of(Registry.WORLD_KEY, id);
 				int rocketTier = buf.readInt();
 				float gravity = buf.readFloat();
+				boolean hasAtmosphere = buf.readBoolean();
 				int daysInYear = buf.readInt();
 				float temperature = buf.readFloat();
 				boolean hasOxygen = buf.readBoolean();
 				ButtonColour buttonColour = buf.readEnumConstant(ButtonColour.class);
 
-				return new Planet(translation, galaxy, solarSystem, dimension, orbitDimension, parentWorld, rocketTier, gravity, daysInYear, temperature, hasOxygen, buttonColour);
-			});
+				return new Planet(translation, galaxy, solarSystem, dimension, orbitDimension, parentWorld, rocketTier, gravity, hasAtmosphere, daysInYear, temperature, hasOxygen, buttonColour);
+			}));
+			AdAstra.planetWorlds = AdAstra.planets.stream().map(Planet::world).collect(Collectors.toSet());
+			AdAstra.orbitWorlds = AdAstra.planets.stream().map(Planet::orbitWorld).collect(Collectors.toSet());
+			AdAstra.adAstraDimensions = Stream.concat(AdAstra.planetWorlds.stream(), AdAstra.orbitWorlds.stream()).collect(Collectors.toSet());
+			AdAstra.worldsWithOxygen = AdAstra.planets.stream().filter(Planet::hasOxygen).map(Planet::world).collect(Collectors.toSet());
 		});
 
 		// Tells each client to start rendering the rocket launch.

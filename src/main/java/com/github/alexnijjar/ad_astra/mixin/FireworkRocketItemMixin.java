@@ -15,8 +15,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(FireworkRocketItem.class)
 public class FireworkRocketItemMixin {
 
+	// Cancel firework boost with jet suit
 	@Inject(method = "use", at = @At("HEAD"), cancellable = true)
-	public void use(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> ci) {
+	public void adastra_use(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> ci) {
 		if (JetSuit.hasFullSet(user)) {
 			ci.setReturnValue(TypedActionResult.pass(user.getStackInHand(hand)));
 		}

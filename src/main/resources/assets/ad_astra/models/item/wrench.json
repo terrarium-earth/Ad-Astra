@@ -2,5 +2,41 @@
   "parent": "item/generated",
   "textures": {
     "layer0": "ad_astra:item/wrench"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [
+        45,
+        90,
+        0
+      ],
+      "translation": [
+        0.0,
+        2.0,
+        0.0
+      ],
+      "scale": [
+        0.55,
+        0.55,
+        0.55
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        45,
+        90,
+        0
+      ],
+      "translation": [
+        0.0,
+        2.0,
+        0.0
+      ],
+      "scale": [
+        0.55,
+        0.55,
+        0.55
+      ]
+    }
   }
 }

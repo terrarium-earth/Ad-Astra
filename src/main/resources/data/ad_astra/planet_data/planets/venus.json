@@ -7,6 +7,7 @@
     "parent_world": null,
     "rocket_tier": 3,
     "gravity": 8.87,
+    "has_atmosphere": true,
     "days_in_year": 225,
     "temperature": 464,
     "has_oxygen": false,

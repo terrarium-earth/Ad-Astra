@@ -1,7 +1,10 @@
 package com.github.alexnijjar.ad_astra.datagen;
 
+import com.github.alexnijjar.ad_astra.blocks.door.DoorState;
+import com.github.alexnijjar.ad_astra.blocks.door.SlidingDoorBlock;
 import com.github.alexnijjar.ad_astra.registry.ModBlocks;
 import com.github.alexnijjar.ad_astra.registry.ModItems;
+
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.block.Block;
@@ -21,7 +24,17 @@ class ModBlockLootTableProvider extends FabricBlockLootTableProvider implements 
 		}
 
 		this.addDrop(WALL_COAL_TORCH, ModItems.COAL_TORCH);
+		this.addDrop(GLACIAN_WALL_SIGN, ModItems.GLACIAN_SIGN);
 		this.addDrop(STEEL_DOOR, BlockLootTableGenerator::addDoorDrop);
+		this.addDrop(GLACIAN_DOOR, BlockLootTableGenerator::addDoorDrop);
+
+		this.addDrop(IRON_SLIDING_DOOR, BlockLootTableGenerator.dropsWithProperty(ModBlocks.IRON_SLIDING_DOOR, SlidingDoorBlock.LOCATION, DoorState.BOTTOM));
+		this.addDrop(STEEL_SLIDING_DOOR, BlockLootTableGenerator.dropsWithProperty(ModBlocks.STEEL_SLIDING_DOOR, SlidingDoorBlock.LOCATION, DoorState.BOTTOM));
+		this.addDrop(DESH_SLIDING_DOOR, BlockLootTableGenerator.dropsWithProperty(ModBlocks.DESH_SLIDING_DOOR, SlidingDoorBlock.LOCATION, DoorState.BOTTOM));
+		this.addDrop(OSTRUM_SLIDING_DOOR, BlockLootTableGenerator.dropsWithProperty(ModBlocks.OSTRUM_SLIDING_DOOR, SlidingDoorBlock.LOCATION, DoorState.BOTTOM));
+		this.addDrop(CALORITE_SLIDING_DOOR, BlockLootTableGenerator.dropsWithProperty(ModBlocks.CALORITE_SLIDING_DOOR, SlidingDoorBlock.LOCATION, DoorState.BOTTOM));
+		this.addDrop(AIRLOCK, BlockLootTableGenerator.dropsWithProperty(ModBlocks.AIRLOCK, SlidingDoorBlock.LOCATION, DoorState.BOTTOM));
+		this.addDrop(REINFORCED_DOOR, BlockLootTableGenerator.dropsWithProperty(ModBlocks.REINFORCED_DOOR, SlidingDoorBlock.LOCATION, DoorState.BOTTOM));
 
 		this.addDrop(MOON_STONE, block -> BlockLootTableGenerator.drops(block, MOON_COBBLESTONE));
 		this.addDrop(MARS_STONE, block -> BlockLootTableGenerator.drops(block, MARS_COBBLESTONE));

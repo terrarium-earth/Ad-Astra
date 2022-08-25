@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.registry.ModBlocks;
-import com.github.alexnijjar.ad_astra.util.OxygenUtils;
+import com.github.alexnijjar.ad_astra.util.entity.OxygenUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -29,12 +29,12 @@ import net.minecraft.world.World;
 public class BlockItemMixin {
 
 	@Unique
-	private static void playFireExtinguish(BlockPos pos, World world) {
+	private static void adastra_playFireExtinguish(BlockPos pos, World world) {
 		world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1, 1);
 	}
 
 	@Inject(method = "place", at = @At(value = "TAIL"))
-	public void place(ItemPlacementContext context, CallbackInfoReturnable<ActionResult> info) {
+	public void adastra_place(ItemPlacementContext context, CallbackInfoReturnable<ActionResult> info) {
 		if (!AdAstra.CONFIG.general.doOxygen) {
 			return;
 		}
@@ -42,7 +42,7 @@ public class BlockItemMixin {
 		World world = context.getWorld();
 		if (!world.isClient) {
 			BlockPos pos = context.getBlockPos();
-			if (!OxygenUtils.worldHasOxygen(world, pos)) {
+			if (!OxygenUtils.posHasOxygen(world, pos)) {
 				BlockState blockstate = world.getBlockState(context.getBlockPos());
 				Block block = blockstate.getBlock();
 
@@ -75,7 +75,7 @@ public class BlockItemMixin {
 				}
 
 				if (playSound) {
-					playFireExtinguish(pos, world);
+					adastra_playFireExtinguish(pos, world);
 				}
 			}
 		}

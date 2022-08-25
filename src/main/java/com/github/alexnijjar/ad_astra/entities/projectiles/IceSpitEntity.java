@@ -51,7 +51,7 @@ public class IceSpitEntity extends ThrownItemEntity {
 	protected void onEntityHit(EntityHitResult entityHitResult) {
 		super.onEntityHit(entityHitResult);
 		Entity entity = entityHitResult.getEntity();
-		entity.damage(DamageSource.thrownProjectile(this, this.getOwner()), 4);
+		entity.damage(DamageSource.thrownProjectile(this, null), 4);
 	}
 
 	@Override

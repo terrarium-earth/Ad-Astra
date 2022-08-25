@@ -12,7 +12,8 @@ import com.github.alexnijjar.ad_astra.networking.ModC2SPackets;
 import com.github.alexnijjar.ad_astra.screen.handler.OxygenDistributorScreenHandler;
 import com.github.alexnijjar.ad_astra.util.FluidUtils;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
-import com.github.alexnijjar.ad_astra.util.OxygenUtils;
+import com.github.alexnijjar.ad_astra.util.entity.OxygenUtils;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;

@@ -1,8 +1,16 @@
 package com.github.alexnijjar.ad_astra.client;
 
-import com.github.alexnijjar.ad_astra.client.registry.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.github.alexnijjar.ad_astra.client.registry.ClientModEntities;
+import com.github.alexnijjar.ad_astra.client.registry.ClientModKeybindings;
+import com.github.alexnijjar.ad_astra.client.registry.ClientModParticles;
+import com.github.alexnijjar.ad_astra.client.registry.ClientModScreens;
+import com.github.alexnijjar.ad_astra.client.registry.ClientModSkies;
 import com.github.alexnijjar.ad_astra.client.renderer.block.EnergizerBlockEntityRenderer;
 import com.github.alexnijjar.ad_astra.client.renderer.block.FlagBlockEntityRenderer;
+import com.github.alexnijjar.ad_astra.client.renderer.block.SlidingDoorBlockEntityRenderer;
 import com.github.alexnijjar.ad_astra.client.renderer.block.globe.GlobeBlockEntityRenderer;
 import com.github.alexnijjar.ad_astra.client.renderer.block.globe.GlobeItemRenderer;
 import com.github.alexnijjar.ad_astra.client.renderer.block.globe.GlobeModel;
@@ -15,7 +23,11 @@ import com.github.alexnijjar.ad_astra.client.renderer.spacesuit.JetSuitModel;
 import com.github.alexnijjar.ad_astra.client.renderer.spacesuit.SpaceSuitLegsModel;
 import com.github.alexnijjar.ad_astra.client.renderer.spacesuit.SpaceSuitModel;
 import com.github.alexnijjar.ad_astra.client.renderer.spacesuit.SpaceSuitRenderer;
-import com.github.alexnijjar.ad_astra.client.resourcepack.*;
+import com.github.alexnijjar.ad_astra.client.resourcepack.Galaxy;
+import com.github.alexnijjar.ad_astra.client.resourcepack.PlanetResources;
+import com.github.alexnijjar.ad_astra.client.resourcepack.PlanetRing;
+import com.github.alexnijjar.ad_astra.client.resourcepack.SkyRenderer;
+import com.github.alexnijjar.ad_astra.client.resourcepack.SolarSystem;
 import com.github.alexnijjar.ad_astra.client.screens.PlayerOverlayScreen;
 import com.github.alexnijjar.ad_astra.data.Planet;
 import com.github.alexnijjar.ad_astra.networking.ModS2CPackets;
@@ -24,10 +36,12 @@ import com.github.alexnijjar.ad_astra.registry.ModBlocks;
 import com.github.alexnijjar.ad_astra.registry.ModFluids;
 import com.github.alexnijjar.ad_astra.registry.ModItems;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
+
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
@@ -36,11 +50,10 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.TexturedRenderLayers;
+import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.item.Item;
 import net.minecraft.screen.PlayerScreenHandler;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class AdAstraClient implements ClientModInitializer {
 
@@ -99,8 +112,27 @@ public class AdAstraClient implements ClientModInitializer {
 		// Energizer block entity
 		BlockEntityRendererRegistry.register(ModBlockEntities.ENERGIZER, EnergizerBlockEntityRenderer::new);
 
+		// Sliding door
+		BlockEntityRendererRegistry.register(ModBlockEntities.SLIDING_DOOR, SlidingDoorBlockEntityRenderer::new);
+
+		ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> out.accept(SlidingDoorBlockEntityRenderer.IRON_SLIDING_DOOR_MODEL));
+		ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> out.accept(SlidingDoorBlockEntityRenderer.STEEL_SLIDING_DOOR_MODEL));
+		ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> out.accept(SlidingDoorBlockEntityRenderer.DESH_SLIDING_DOOR_MODEL));
+		ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> out.accept(SlidingDoorBlockEntityRenderer.OSTRUM_SLIDING_DOOR_MODEL));
+		ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> out.accept(SlidingDoorBlockEntityRenderer.CALORITE_SLIDING_DOOR_MODEL));
+		ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> out.accept(SlidingDoorBlockEntityRenderer.AIRLOCK_MODEL));
+		ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> out.accept(SlidingDoorBlockEntityRenderer.REINFORCED_DOOR_MODEL));
+
+		ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> out.accept(SlidingDoorBlockEntityRenderer.IRON_SLIDING_DOOR_MODEL_FLIPPED));
+		ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> out.accept(SlidingDoorBlockEntityRenderer.STEEL_SLIDING_DOOR_MODEL_FLIPPED));
+		ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> out.accept(SlidingDoorBlockEntityRenderer.DESH_SLIDING_DOOR_MODEL_FLIPPED));
+		ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> out.accept(SlidingDoorBlockEntityRenderer.OSTRUM_SLIDING_DOOR_MODEL_FLIPPED));
+		ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> out.accept(SlidingDoorBlockEntityRenderer.CALORITE_SLIDING_MODEL_FLIPPED));
+		ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> out.accept(SlidingDoorBlockEntityRenderer.AIRLOCK_MODEL_FLIPPED));
+		ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> out.accept(SlidingDoorBlockEntityRenderer.REINFORCED_DOOR_MODEL_FLIPPED));
+
 		// Globe item rendering
-		for (Item item : new Item[]{ModItems.EARTH_GLOBE, ModItems.MOON_GLOBE, ModItems.MARS_GLOBE, ModItems.MERCURY_GLOBE, ModItems.VENUS_GLOBE, ModItems.GLACIO_GLOBE}) {
+		for (Item item : new Item[] { ModItems.EARTH_GLOBE, ModItems.MOON_GLOBE, ModItems.MARS_GLOBE, ModItems.MERCURY_GLOBE, ModItems.VENUS_GLOBE, ModItems.GLACIO_GLOBE }) {
 			BuiltinItemRendererRegistry.INSTANCE.register(item, new GlobeItemRenderer());
 		}
 
@@ -115,8 +147,7 @@ public class AdAstraClient implements ClientModInitializer {
 				new SimpleFluidRenderHandler(new ModIdentifier("block/fluid_fuel_still"), new ModIdentifier("block/fluid_fuel_flow"), new ModIdentifier("block/fuel_overlay")));
 		FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.CRYO_FUEL_STILL, ModFluids.FLOWING_CRYO_FUEL,
 				new SimpleFluidRenderHandler(new ModIdentifier("block/fluid_cryo_fuel_still"), new ModIdentifier("block/fluid_cryo_fuel_flow"), new ModIdentifier("block/cryo_fuel_overlay")));
-		FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.OIL_STILL, ModFluids.FLOWING_OIL,
-				new SimpleFluidRenderHandler(new ModIdentifier("block/fluid_oil_still"), new ModIdentifier("block/fluid_oil_flow"), new ModIdentifier("block/oil_overlay")));
+		FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.OIL_STILL, ModFluids.FLOWING_OIL, new SimpleFluidRenderHandler(new ModIdentifier("block/fluid_oil_still"), new ModIdentifier("block/fluid_oil_flow"), new ModIdentifier("block/oil_overlay")));
 		FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.OXYGEN_STILL, new SimpleFluidRenderHandler(new ModIdentifier("block/fluid_oxygen_still"), new ModIdentifier("block/fluid_oxygen_still"), new ModIdentifier("block/fluid_oxygen_still")));
 
 		// Fluid textures
@@ -141,9 +172,13 @@ public class AdAstraClient implements ClientModInitializer {
 		BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.OIL_STILL, ModFluids.FLOWING_OIL);
 		BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.OXYGEN_STILL);
 
-		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), ModBlocks.WATER_PUMP, ModBlocks.ENERGIZER, ModBlocks.STEEL_DOOR, ModBlocks.STEEL_TRAPDOOR, ModBlocks.COAL_TORCH, ModBlocks.WALL_COAL_TORCH);
-		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(), ModBlocks.COAL_LANTERN);
+		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), ModBlocks.WATER_PUMP, ModBlocks.ENERGIZER, ModBlocks.STEEL_DOOR, ModBlocks.STEEL_TRAPDOOR, ModBlocks.GLACIAN_DOOR, ModBlocks.GLACIAN_TRAPDOOR, ModBlocks.COAL_TORCH,
+				ModBlocks.WALL_COAL_TORCH);
+		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(), ModBlocks.COAL_LANTERN, ModBlocks.GLACIAN_LEAVES);
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), ModBlocks.NASA_WORKBENCH);
+
+		// Sign textures
+		TexturedRenderLayers.WOOD_TYPE_TEXTURES.put(ModBlocks.GLACIAN, new SpriteIdentifier(TexturedRenderLayers.SIGNS_ATLAS_TEXTURE, new ModIdentifier("entity/signs/" + ModBlocks.GLACIAN.getName())));
 	}
 
 	// Register after the Resource packs have been loaded

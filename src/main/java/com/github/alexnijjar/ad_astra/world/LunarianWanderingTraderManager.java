@@ -90,7 +90,7 @@ public class LunarianWanderingTraderManager implements Spawner {
 		}
 
 		// Only spawn on planets
-		if (!ModUtils.isPlanet(world) || world.getRegistryKey().equals(World.OVERWORLD)) {
+		if (!ModUtils.isPlanet(world)) {
 			return false;
 		}
 		BlockPos blockPos = playerEntity.getBlockPos();

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "sliding_door",
+  "pattern": [
+    "CCC",
+    "P#P",
+    "CCC"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:desh_blocks"
+    },
+    "C": {
+      "item": "ad_astra:desh_plate"
+    },
+    "P": {
+      "item": "minecraft:glass_pane"
+    }
+  },
+  "result": {
+    "item": "ad_astra:desh_sliding_door"
+  }
+}

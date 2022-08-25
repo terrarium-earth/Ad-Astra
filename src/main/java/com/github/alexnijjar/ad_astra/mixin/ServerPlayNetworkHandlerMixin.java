@@ -21,11 +21,11 @@ public class ServerPlayNetworkHandlerMixin {
 	private int vehicleFloatingTicks;
 
 	@Inject(method = "tick", at = @At("HEAD"))
-	public void tick(CallbackInfo ci) {
+	public void adastra_tick(CallbackInfo ci) {
 		ServerPlayerEntity player = ((ServerPlayNetworkHandler) (Object) this).player;
 
 		// Prevent the player from being kicked for flying a jet suit
-		if (JetSuit.hasFullSet(player)) {
+		if (!player.isOnGround() && JetSuit.hasFullSet(player)) {
 			this.floatingTicks = 0;
 		}
 

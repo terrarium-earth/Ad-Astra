@@ -20,7 +20,7 @@ import net.minecraft.item.ItemStack;
 @Mixin(HeldItemRenderer.class)
 public class HeldItemRendererMixin {
 	@Inject(method = "renderItem", at = @At("HEAD"), cancellable = true)
-	public void renderItem(LivingEntity entity, ItemStack stack, ModelTransformation.Mode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
+	public void adastra_renderItem(LivingEntity entity, ItemStack stack, ModelTransformation.Mode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
 		if (stack != null && !stack.isEmpty()) {
 			// Disable item rendering while in a vehicle
 			if (entity.getVehicle() instanceof VehicleEntity vehicle) {

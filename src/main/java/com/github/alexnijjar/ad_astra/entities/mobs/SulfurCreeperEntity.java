@@ -2,7 +2,8 @@ package com.github.alexnijjar.ad_astra.entities.mobs;
 
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.items.armour.SpaceSuit;
-import com.github.alexnijjar.ad_astra.util.OxygenUtils;
+import com.github.alexnijjar.ad_astra.util.entity.OxygenUtils;
+
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.minecraft.entity.AreaEffectCloudEntity;
 import net.minecraft.entity.EntityType;
@@ -45,7 +46,7 @@ public class SulfurCreeperEntity extends CreeperEntity {
 					long oxygen = suit.getAmount(chest);
 
 					if (oxygen > 0) {
-						if (!OxygenUtils.worldHasOxygen(world, player)) {
+						if (!OxygenUtils.entityHasOxygen(world, player)) {
 							suit.setAmount(chest, oxygen - FluidConstants.BUCKET / 3);
 							if ((suit.getAmount(chest) <= 0)) {
 								suit.setAmount(chest, 0);

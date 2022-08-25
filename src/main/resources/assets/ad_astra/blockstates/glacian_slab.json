@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "ad_astra:block/glacian_slab"
+    },
+    "type=double": {
+      "model": "ad_astra:block/glacian_planks"
+    },
+    "type=top": {
+      "model": "ad_astra:block/glacian_slab_top"
+    }
+  }
+}

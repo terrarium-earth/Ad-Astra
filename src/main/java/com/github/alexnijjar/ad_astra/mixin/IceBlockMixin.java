@@ -1,7 +1,8 @@
 package com.github.alexnijjar.ad_astra.mixin;
 
 import com.github.alexnijjar.ad_astra.util.ModUtils;
-import com.github.alexnijjar.ad_astra.util.OxygenUtils;
+import com.github.alexnijjar.ad_astra.util.entity.OxygenUtils;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.IceBlock;
@@ -21,15 +22,15 @@ import javax.annotation.Nullable;
 public class IceBlockMixin {
 
 	@Inject(method = "afterBreak", at = @At("TAIL"), cancellable = true)
-	public void afterBreak(World world, PlayerEntity player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack, CallbackInfo ci) {
-		if (!OxygenUtils.worldHasOxygen(world, pos) && ModUtils.getWorldTemperature(world) < 0) {
+	public void adastra_afterBreak(World world, PlayerEntity player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack, CallbackInfo ci) {
+		if (!OxygenUtils.posHasOxygen(world, pos) && ModUtils.getWorldTemperature(world) < 0) {
 			world.setBlockState(pos, Blocks.AIR.getDefaultState());
 		}
 	}
 
 	@Inject(method = "melt", at = @At("HEAD"), cancellable = true)
-	public void melt(BlockState state, World world, BlockPos pos, CallbackInfo ci) {
-		if (!OxygenUtils.worldHasOxygen(world, pos) && ModUtils.getWorldTemperature(world) < 0) {
+	public void adastra_melt(BlockState state, World world, BlockPos pos, CallbackInfo ci) {
+		if (!OxygenUtils.posHasOxygen(world, pos) && ModUtils.getWorldTemperature(world) < 0) {
 			ci.cancel();
 		}
 	}

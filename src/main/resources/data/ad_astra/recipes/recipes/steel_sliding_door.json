@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "sliding_door",
+  "pattern": [
+    "CCC",
+    "P#P",
+    "CCC"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:steel_blocks"
+    },
+    "C": {
+      "item": "ad_astra:compressed_steel"
+    },
+    "P": {
+      "item": "minecraft:glass_pane"
+    }
+  },
+  "result": {
+    "item": "ad_astra:steel_sliding_door"
+  }
+}

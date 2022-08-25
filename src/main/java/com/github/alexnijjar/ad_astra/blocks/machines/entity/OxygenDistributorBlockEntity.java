@@ -14,8 +14,8 @@ import com.github.alexnijjar.ad_astra.registry.ModRecipes;
 import com.github.alexnijjar.ad_astra.screen.handler.OxygenDistributorScreenHandler;
 import com.github.alexnijjar.ad_astra.util.FluidUtils;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
-import com.github.alexnijjar.ad_astra.util.OxygenFillerAlgorithm;
-import com.github.alexnijjar.ad_astra.util.OxygenUtils;
+import com.github.alexnijjar.ad_astra.util.entity.OxygenFillerAlgorithm;
+import com.github.alexnijjar.ad_astra.util.entity.OxygenUtils;
 
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.BlockState;
@@ -29,7 +29,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 
 public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
-	
+
 	private int oxygenFillCheckTicks = AdAstra.CONFIG.oxygenDistributor.refreshTicks;
 	private boolean showOxygen = false;
 
@@ -158,13 +158,13 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 			return false;
 		} else if (this.outputTank.variant.isBlank()) {
 			return false;
-		} else return this.outputTank.simulateExtract(this.outputTank.getResource(), amountOfFluidToExtract, null) == amountOfFluidToExtract;
+		} else
+			return this.outputTank.simulateExtract(this.outputTank.getResource(), amountOfFluidToExtract, null) == amountOfFluidToExtract;
 	}
 
 	@Override
 	public void tick() {
 		super.tick();
-		BlockPos pos = this.getPos();
 
 		ItemStack insertSlot = this.getItems().get(0);
 		ItemStack extractSlot = this.getItems().get(1);
@@ -186,26 +186,54 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 
 		// Distribute the oxygen every certain amount of ticks. The algorithm is then run to determine how much oxygen to distribute.
 		if (oxygenFillCheckTicks >= AdAstra.CONFIG.oxygenDistributor.refreshTicks) {
-			OxygenFillerAlgorithm floodFiller = new OxygenFillerAlgorithm(this.world, this.getMaxBlockChecks());
-			Set<BlockPos> positions = floodFiller.runAlgorithm(pos.up());
-
-			if (this.canDistribute(positions.size())) {
-				OxygenUtils.setEntry(this.world, pos, positions);
-			} else if (!world.isClient) {
-				OxygenUtils.removeEntry(this.world, this.getPos());
-			}
-
+			this.runAlgorithm();
 			oxygenFillCheckTicks = 0;
 		} else {
 			oxygenFillCheckTicks++;
 		}
 
-		boolean active = OxygenUtils.getOxygenBlocksCount(this.world, this.getPos()) > 0;
 		if (!world.isClient) {
+			boolean active = OxygenUtils.getOxygenBlocksCount(this.world, this.getPos()) > 0;
 			this.setActive(active);
+
+			if (active) {
+				this.extractResources();
+			}
 		}
-		if (active && !this.world.isClient) {
-			this.extractResources();
+
+	}
+
+	public void runAlgorithm() {
+		if (this.world.isClient) {
+			if (!this.getCachedState().get(AbstractMachineBlock.LIT)) {
+				return;
+			}
+		} else {
+			if (this.outputTank.amount <= 0 && this.energyStorage.amount <= 0) {
+				return;
+			}
+		}
+
+		OxygenFillerAlgorithm floodFiller = new OxygenFillerAlgorithm(this.world, this.getMaxBlockChecks());
+		Set<BlockPos> positions = floodFiller.runAlgorithm(pos.up());
+
+		if (this.canDistribute(positions.size())) {
+			OxygenUtils.setEntry(this.world, pos, positions);
+		} else if (!world.isClient) {
+			OxygenUtils.removeEntry(this.world, this.getPos());
+		}
+
+		if (this.shouldShowOxygen()) {
+			this.spawnParticles(positions);
+		}
+	}
+
+	// Spawn the bubble particles in each oxygenated position. The "show" button must be clicked in the oxygen distributor GUI in order to work.
+	public void spawnParticles(Set<BlockPos> positions) {
+		if (!world.isClient && this.getCachedState().get(AbstractMachineBlock.LIT)) {
+			for (BlockPos pos : positions) {
+				ModUtils.spawnForcedParticles((ServerWorld) this.getWorld(), ModParticleTypes.OXYGEN_BUBBLE, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 1, 0.0, 0.0, 0.0, 0.0);
+			}
 		}
 	}
 }

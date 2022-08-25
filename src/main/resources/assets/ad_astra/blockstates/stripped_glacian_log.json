@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "ad_astra:block/stripped_glacian_log_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "ad_astra:block/stripped_glacian_log"
+    },
+    "axis=z": {
+      "model": "ad_astra:block/stripped_glacian_log_horizontal",
+      "x": 90
+    }
+  }
+}

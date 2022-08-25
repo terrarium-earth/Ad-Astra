@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "sliding_door",
+  "pattern": [
+    "CCC",
+    "P#P",
+    "CCC"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:iron_block"
+    },
+    "C": {
+      "item": "ad_astra:iron_plate"
+    },
+    "P": {
+      "item": "minecraft:glass_pane"
+    }
+  },
+  "result": {
+    "item": "ad_astra:iron_sliding_door"
+  }
+}

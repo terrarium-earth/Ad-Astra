@@ -18,7 +18,7 @@ public interface InteractablePipe<T> {
 
     boolean canInsertInto(T consumer);
 
-    boolean canConnectTo(BlockEntity next);
+    boolean canConnectTo(BlockEntity next, Direction direction, BlockPos pos);
 
     void insertInto(T consumer, Direction direction, BlockPos pos);
 
@@ -53,8 +53,7 @@ public interface InteractablePipe<T> {
                 Set<BlockPos> availableNodes = new HashSet<>();
                 if (supportsAutoExtract()) {
                     availableNodes.add(this.getPipePos());
-                    for (int i = 0; i < Direction.values().length; i++) {
-                        Direction direction = Direction.byId(i);
+                    for (Direction direction : Direction.values()) {
                         BlockPos offset = this.getPipePos().offset(direction);
                         T potentialSource = getInteraction(getPipeWorld(), offset, direction);
                         if (potentialSource != null && canTakeFrom(potentialSource)) {
@@ -71,13 +70,12 @@ public interface InteractablePipe<T> {
 
                         for (BlockPos node : availableNodes) {
                             BlockEntity current = getPipeWorld().getBlockEntity(node);
-                            for (int i = 0; i < Direction.values().length; i++) {
-                                Direction direction = Direction.byId(i);
+                            for (Direction direction : Direction.values()) {
                                 BlockPos offset = node.offset(direction);
                                 BlockEntity entity = getPipeWorld().getBlockEntity(offset);
                                 if (!visitedNodes.contains(offset) && entity instanceof InteractablePipe<?> pipe) {
                                     // Additional if statement to optimize performance; If it's a pipe but cant connect, it shouldn't check if it is a consumer (because it's already a pipe)
-                                    if (pipe.canConnectTo(current)) {
+                                    if (pipe.canConnectTo(current, direction, offset)) {
                                         temporaryOpenNodes.add(offset);
                                     }
                                 } else {

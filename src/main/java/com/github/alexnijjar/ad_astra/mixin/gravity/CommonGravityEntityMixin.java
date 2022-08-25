@@ -21,11 +21,11 @@ public abstract class CommonGravityEntityMixin {
 	private static final double CONSTANT = -0.04;
 
 	@Inject(method = "tick", at = @At("TAIL"), cancellable = true)
-	public void tick(CallbackInfo ci) {
+	public void adastra_tick(CallbackInfo ci) {
 		Entity entity = (Entity) (Object) this;
 		if (!entity.hasNoGravity()) {
 			Vec3d velocity = entity.getVelocity();
-			double newGravity = ModUtils.getMixinGravity(CONSTANT, this);
+			double newGravity = CONSTANT * ModUtils.getPlanetGravity(entity.world);
 			entity.setVelocity(velocity.getX(), velocity.getY() - CONSTANT + newGravity, velocity.getZ());
 		}
 

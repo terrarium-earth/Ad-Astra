@@ -1,0 +1,19 @@
+{
+  "replace": false,
+  "values": [
+    "ad_astra:glacian_log",
+    "ad_astra:stripped_glacian_log",
+    "ad_astra:glacian_leaves",
+    "ad_astra:glacian_planks",
+    "ad_astra:glacian_stairs",
+    "ad_astra:glacian_slab",
+    "ad_astra:glacian_door",
+    "ad_astra:glacian_trapdoor",
+    "ad_astra:glacian_fence",
+    "ad_astra:glacian_fence_gate",
+    "ad_astra:glacian_button",
+    "ad_astra:glacian_pressure_plate",
+    "ad_astra:glacian_sign",
+    "ad_astra:glacian_wall_sign"
+  ]
+}

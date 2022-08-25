@@ -37,8 +37,8 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<En
     }
 
     @Override
-    public boolean canConnectTo(BlockEntity next) {
-        return true;
+    public boolean canConnectTo(BlockEntity next, Direction direction, BlockPos pos) {
+        return next.getCachedState().getBlock() instanceof CableBlock && next.getCachedState().get(CableBlock.DIRECTIONS.get(direction.getOpposite()));
     }
 
     @Override
@@ -47,7 +47,7 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<En
         BlockState state = this.getCachedState();
         BlockState state2 = world.getBlockState(pos);
 
-        if (state.isAir() || state2.isAir()) {
+        if (!(state.getBlock() instanceof CableBlock) || !(state2.getBlock() instanceof CableBlock)) {
             return;
         }
 
@@ -62,6 +62,7 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<En
         if (getSource().storage() != null && getConsumers().size() > 0) {
             EnergyStorageUtil.move(getSource().storage(), consumer, Math.max(0, this.getTransferAmount() / getConsumers().size()), null);
         }
+
     }
 
     @Override

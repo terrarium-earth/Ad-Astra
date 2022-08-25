@@ -1,10 +1,27 @@
 package com.github.alexnijjar.ad_astra.registry;
 
 import com.github.alexnijjar.ad_astra.entities.SpacePaintingEntity;
-import com.github.alexnijjar.ad_astra.entities.mobs.*;
+import com.github.alexnijjar.ad_astra.entities.mobs.CorruptedLunarianEntity;
+import com.github.alexnijjar.ad_astra.entities.mobs.GlacianRamEntity;
+import com.github.alexnijjar.ad_astra.entities.mobs.LunarianEntity;
+import com.github.alexnijjar.ad_astra.entities.mobs.LunarianWanderingTraderEntity;
+import com.github.alexnijjar.ad_astra.entities.mobs.MartianRaptorEntity;
+import com.github.alexnijjar.ad_astra.entities.mobs.MoglerEntity;
+import com.github.alexnijjar.ad_astra.entities.mobs.PygroBruteEntity;
+import com.github.alexnijjar.ad_astra.entities.mobs.PygroEntity;
+import com.github.alexnijjar.ad_astra.entities.mobs.StarCrawlerEntity;
+import com.github.alexnijjar.ad_astra.entities.mobs.SulfurCreeperEntity;
+import com.github.alexnijjar.ad_astra.entities.mobs.ZombifiedMoglerEntity;
+import com.github.alexnijjar.ad_astra.entities.mobs.ZombifiedPygroEntity;
 import com.github.alexnijjar.ad_astra.entities.projectiles.IceSpitEntity;
-import com.github.alexnijjar.ad_astra.entities.vehicles.*;
+import com.github.alexnijjar.ad_astra.entities.vehicles.LanderEntity;
+import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntityTier1;
+import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntityTier2;
+import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntityTier3;
+import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntityTier4;
+import com.github.alexnijjar.ad_astra.entities.vehicles.RoverEntity;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
+
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.fabricmc.fabric.mixin.object.builder.SpawnRestrictionAccessor;
@@ -39,6 +56,8 @@ public class ModEntityTypes {
 			FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, LunarianWanderingTraderEntity::new).dimensions(EntityDimensions.fixed(0.6f, 1.95f)).fireImmune().build());
 	public static final EntityType<SulfurCreeperEntity> SULFUR_CREEPER = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("sulfur_creeper"),
 			FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, SulfurCreeperEntity::new).dimensions(EntityDimensions.fixed(0.6f, 1.7f)).trackRangeChunks(8).fireImmune().build());
+			public static final EntityType<GlacianRamEntity> GLACIAN_RAM = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("glacian_ram"),
+			FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, GlacianRamEntity::new).dimensions(EntityDimensions.fixed(0.9f, 1.3f)).trackRangeChunks(10).build());
 
 	// Machines
 	public static final EntityType<RocketEntityTier1> ROCKET_TIER_1 = Registry.register(Registry.ENTITY_TYPE, new ModIdentifier("tier_1_rocket"),
@@ -75,6 +94,7 @@ public class ModEntityTypes {
 		FabricDefaultAttributeRegistry.register(ZOMBIFIED_MOGLER, ZombifiedMoglerEntity.createMobAttributes());
 		FabricDefaultAttributeRegistry.register(LUNARIAN_WANDERING_TRADER, LunarianEntity.createMobAttributes());
 		FabricDefaultAttributeRegistry.register(SULFUR_CREEPER, SulfurCreeperEntity.createMobAttributes());
+		FabricDefaultAttributeRegistry.register(GLACIAN_RAM, GlacianRamEntity.createMobAttributes());
 
 		SpawnRestrictionAccessor.callRegister(LUNARIAN, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, LunarianEntity::canMobSpawn);
 		SpawnRestrictionAccessor.callRegister(CORRUPTED_LUNARIAN, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, CorruptedLunarianEntity::canSpawnInDark);
@@ -87,5 +107,6 @@ public class ModEntityTypes {
 		SpawnRestrictionAccessor.callRegister(ZOMBIFIED_MOGLER, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ZombifiedMoglerEntity::canSpawnInDark);
 		SpawnRestrictionAccessor.callRegister(LUNARIAN_WANDERING_TRADER, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, LunarianEntity::canMobSpawn);
 		SpawnRestrictionAccessor.callRegister(SULFUR_CREEPER, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, SulfurCreeperEntity::canSpawnInDark);
+		SpawnRestrictionAccessor.callRegister(GLACIAN_RAM, SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, GlacianRamEntity::canMobSpawn);
 	}
 }

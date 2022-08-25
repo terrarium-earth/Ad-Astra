@@ -11,6 +11,10 @@ import net.minecraft.util.registry.Registry;
 public class ModTags {
 	public static final TagKey<EntityType<?>> FIRE_IMMUNE = TagKey.of(Registry.ENTITY_TYPE_KEY, new ModIdentifier("entities/fire_immune"));
 	public static final TagKey<EntityType<?>> LIVES_WITHOUT_OXYGEN = TagKey.of(Registry.ENTITY_TYPE_KEY, new ModIdentifier("entities/lives_without_oxygen"));
+	public static final TagKey<Item> FREEZE_RESISTANT = TagKey.of(Registry.ITEM_KEY, new ModIdentifier("freeze_resistant"));
+	public static final TagKey<Item> HEAT_RESISTANT = TagKey.of(Registry.ITEM_KEY, new ModIdentifier("heat_resistant"));
+	public static final TagKey<Item> OXYGENATED_ARMOR = TagKey.of(Registry.ITEM_KEY, new ModIdentifier("oxygenated_armor"));
+	public static final TagKey<Item> GLACIAN_LOGS = TagKey.of(Registry.ITEM_KEY, new ModIdentifier("glacian_logs"));
 
 	public static final TagKey<Fluid> FUELS = TagKey.of(Registry.FLUID_KEY, new ModIdentifier("fuels"));
 

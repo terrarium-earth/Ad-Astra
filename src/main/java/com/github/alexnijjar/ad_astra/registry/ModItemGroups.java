@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack;
 import java.util.Collections;
 
 public interface ModItemGroups {
-	ItemGroup ITEM_GROUP_NORMAL = FabricItemGroupBuilder.create(new ModIdentifier("tab_normal")).icon(() -> new ItemStack(ModItems.TIER_1_ROCKET)).appendItems(stacks -> {
+	public static final ItemGroup ITEM_GROUP_NORMAL = FabricItemGroupBuilder.create(new ModIdentifier("tab_normal")).icon(() -> new ItemStack(ModItems.TIER_1_ROCKET)).appendItems(stacks -> {
 
 		ItemStack tier1Rocket = ModItems.TIER_1_ROCKET.getDefaultStack();
 		((VehicleItem) tier1Rocket.getItem()).setAmount(tier1Rocket, ((VehicleItem) tier1Rocket.getItem()).getTankSize());
@@ -98,7 +98,7 @@ public interface ModItemGroups {
 
 	}).build();
 
-	ItemGroup ITEM_GROUP_MACHINES = FabricItemGroupBuilder.create(new ModIdentifier("tab_machines")).icon(() -> new ItemStack(ModItems.NASA_WORKBENCH)).appendItems(stacks -> {
+	public static final ItemGroup ITEM_GROUP_MACHINES = FabricItemGroupBuilder.create(new ModIdentifier("tab_machines")).icon(() -> new ItemStack(ModItems.NASA_WORKBENCH)).appendItems(stacks -> {
 		stacks.add(ModItems.COAL_GENERATOR.getDefaultStack());
 		stacks.add(ModItems.COMPRESSOR.getDefaultStack());
 		stacks.add(ModItems.NASA_WORKBENCH.getDefaultStack());

@@ -1,4 +1,4 @@
-package com.github.alexnijjar.ad_astra.util;
+package com.github.alexnijjar.ad_astra.util.entity;
 
 import net.minecraft.block.*;
 import net.minecraft.util.math.BlockPos;
@@ -9,6 +9,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
+
+import com.github.alexnijjar.ad_astra.blocks.door.SlidingDoorBlock;
 
 /**
  * A 3D flood fill algorithm that will fill an entire structure with oxygen.
@@ -60,6 +62,14 @@ public class OxygenFillerAlgorithm {
 			// Prevent oxygen from escaping from glass panes
 			if (state.getBlock() instanceof HorizontalConnectingBlock) {
 				if (!state.isOpaque() && !state.getBlock().equals(Blocks.IRON_BARS)) {
+					continue;
+				}
+			}
+
+			// Make airlocks work
+			if (state.getBlock() instanceof SlidingDoorBlock door) {
+				BlockState mainState = world.getBlockState(door.getMainPos(state, pos));
+				if (mainState.contains(SlidingDoorBlock.OPEN) && !mainState.get(SlidingDoorBlock.OPEN)) {
 					continue;
 				}
 			}

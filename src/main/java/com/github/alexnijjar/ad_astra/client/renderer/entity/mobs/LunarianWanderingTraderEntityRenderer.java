@@ -14,7 +14,7 @@ import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
 public class LunarianWanderingTraderEntityRenderer extends MobEntityRenderer<LunarianWanderingTraderEntity, LunarianEntityModel<LunarianWanderingTraderEntity>> {
-	public static final Identifier TEXTURE = new ModIdentifier("textures/entities/lunarian/lunarian_wandering_trader.png");
+	public static final Identifier TEXTURE = new ModIdentifier("textures/entity/lunarian/lunarian_wandering_trader.png");
 
 	public LunarianWanderingTraderEntityRenderer(EntityRendererFactory.Context context) {
 		super(context, new LunarianEntityModel<>(context.getPart(LunarianEntityModel.LAYER_LOCATION)), 0.5f);

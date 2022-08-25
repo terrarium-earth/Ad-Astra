@@ -17,7 +17,7 @@ public abstract class GameRendererMixin {
 
 	// Shake the player camera when inside of a vehicle.
 	@Inject(at = @At(value = "HEAD"), method = "bobView", cancellable = true)
-	public void bobView(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
+	public void adastra_bobView(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
 
 		MinecraftClient client = MinecraftClient.getInstance();
 

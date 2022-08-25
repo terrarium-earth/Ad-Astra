@@ -4,6 +4,8 @@
   "package": "com.github.alexnijjar.ad_astra.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "AxeItemAccessor",
+    "BlockEntityTypeAccessor",
     "BlockMixin",
     "ChunkGeneratorAccessor",
     "EntityInvoker",
@@ -30,7 +32,8 @@
     "gravity.PotionEntityMixin",
     "gravity.ThrownEntityMixin",
     "ServerPlayNetworkHandlerMixin",
-    "ServerWorldMixin"
+    "ServerWorldMixin",
+    "SignTypeInvoker"
   ],
   "client": [
     "client.BipedEntityModelMixin",

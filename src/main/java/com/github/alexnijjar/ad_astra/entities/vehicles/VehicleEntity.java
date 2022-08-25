@@ -6,7 +6,8 @@ import com.github.alexnijjar.ad_astra.registry.ModTags;
 import com.github.alexnijjar.ad_astra.screen.VehicleScreenHandlerFactory;
 import com.github.alexnijjar.ad_astra.util.CustomInventory;
 import com.github.alexnijjar.ad_astra.util.FluidUtils;
-import com.github.alexnijjar.ad_astra.util.OxygenUtils;
+import com.github.alexnijjar.ad_astra.util.entity.OxygenUtils;
+
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;

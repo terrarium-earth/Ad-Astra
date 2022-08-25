@@ -39,7 +39,7 @@ public class FluidPipeBlockEntity extends BlockEntity implements InteractablePip
     }
 
     @Override
-    public boolean canConnectTo(BlockEntity next) {
+    public boolean canConnectTo(BlockEntity next, Direction direction, BlockPos pos) {
         return true;
     }
 
@@ -50,15 +50,11 @@ public class FluidPipeBlockEntity extends BlockEntity implements InteractablePip
         BlockState state = this.getCachedState();
         BlockState state2 = world.getBlockState(pos);
 
-        if (state.isAir() || state2.isAir()) {
+        if (!(state.getBlock() instanceof FluidPipeBlock) || !(state2.getBlock() instanceof FluidPipeBlock)) {
             return;
         }
 
-        if (!(state.getBlock() instanceof FluidPipeBlock && state2.getBlock() instanceof FluidPipeBlock)) {
-            return;
-        }
-
-        PipeState pipeState = state.get(FluidPipeBlock.DIRECTIONS.get(source.direction()));
+        PipeState pipeState = state.get(FluidPipeBlock.DIRECTIONS.get(this.getSource().direction()));
         PipeState pipeState2 = state2.get(FluidPipeBlock.DIRECTIONS.get(direction));
 
         Storage<FluidVariant> input;
