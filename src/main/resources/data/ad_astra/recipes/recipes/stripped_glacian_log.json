@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bark",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "ad_astra:glacian_log"
+    }
+  },
+  "result": {
+    "item": "ad_astra:stripped_glacian_log",
+    "count": 3
+  }
+}

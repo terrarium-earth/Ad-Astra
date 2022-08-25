@@ -1,7 +1,8 @@
 package com.github.alexnijjar.ad_astra.mixin.oxygen;
 
 import com.github.alexnijjar.ad_astra.AdAstra;
-import com.github.alexnijjar.ad_astra.util.OxygenUtils;
+import com.github.alexnijjar.ad_astra.util.entity.OxygenUtils;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CampfireBlock;
 import net.minecraft.block.CandleBlock;
@@ -22,7 +23,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(FlintAndSteelItem.class)
 public class FlintAndSteelItemMixin {
 	@Inject(method = "useOnBlock", at = @At(value = "HEAD"), cancellable = true)
-	public void useOnBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> ci) {
+	public void adastra_useOnBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> ci) {
 		if (!AdAstra.CONFIG.general.doOxygen) {
 			return;
 		}
@@ -31,7 +32,7 @@ public class FlintAndSteelItemMixin {
 		if (!world.isClient) {
 			BlockState blockState = world.getBlockState(context.getBlockPos());
 			if (CampfireBlock.canBeLit(blockState) || CandleBlock.canBeLit(blockState) || CandleCakeBlock.canBeLit(blockState)) {
-				if (!OxygenUtils.worldHasOxygen(world, context.getBlockPos())) {
+				if (!OxygenUtils.posHasOxygen(world, context.getBlockPos())) {
 					world.playSound(player, context.getBlockPos(), SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0f, world.getRandom().nextFloat() * 0.4f + 0.8f);
 					world.emitGameEvent(player, GameEvent.BLOCK_CHANGE, context.getBlockPos());
 					if (player != null) {

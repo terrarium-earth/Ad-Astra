@@ -11,7 +11,16 @@
     "grass_color": 9551193,
     "foliage_color": 16777215
   },
-  "spawners": {},
+  "spawners": {
+    "creature": [
+      {
+        "type": "ad_astra:glacian_ram",
+        "weight": 12,
+        "minCount": 2,
+        "maxCount": 4
+      }
+    ]
+  },
   "spawn_costs": {},
   "carvers": {
     "air": [

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#W#",
+    "#W#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "W": {
+      "item": "ad_astra:glacian_planks"
+    }
+  },
+  "result": {
+    "item": "ad_astra:glacian_fence_gate"
+  }
+}

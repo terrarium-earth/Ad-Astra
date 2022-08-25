@@ -17,7 +17,7 @@ import java.util.List;
 public class PaintingEntityMixin {
 
 	@ModifyVariable(method = "Lnet/minecraft/entity/decoration/painting/PaintingEntity;<init>(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/Direction;)V", at = @At("STORE"), ordinal = 0)
-	private Iterator<PaintingMotive> modifyIterator(Iterator<PaintingMotive> iterator) {
+	private Iterator<PaintingMotive> adastra_modifyIterator(Iterator<PaintingMotive> iterator) {
 		List<PaintingMotive> motives = Lists.newArrayList(iterator);
 		List<PaintingMotive> motivesToRemove = new LinkedList<>();
 

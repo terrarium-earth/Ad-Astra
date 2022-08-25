@@ -17,8 +17,8 @@ import java.util.Map;
 
 @Environment(EnvType.CLIENT)
 public class PygroEntityRenderer extends PiglinEntityRenderer {
-	private static final Map<EntityType<?>, Identifier> TEXTURES = ImmutableMap.of(ModEntityTypes.ZOMBIFIED_PYGRO, new ModIdentifier("textures/entities/zombified_pygro.png"), ModEntityTypes.PYGRO, new ModIdentifier("textures/entities/pygro.png"),
-			ModEntityTypes.PYGRO_BRUTE, new ModIdentifier("textures/entities/pygro_brute.png"));
+	private static final Map<EntityType<?>, Identifier> TEXTURES = ImmutableMap.of(ModEntityTypes.ZOMBIFIED_PYGRO, new ModIdentifier("textures/entity/zombified_pygro.png"), ModEntityTypes.PYGRO, new ModIdentifier("textures/entity/pygro.png"),
+			ModEntityTypes.PYGRO_BRUTE, new ModIdentifier("textures/entity/pygro_brute.png"));
 
 	public PygroEntityRenderer(EntityRendererFactory.Context context) {
 		super(context, PygroEntityModel.LAYER_LOCATION, EntityModelLayers.PIGLIN_INNER_ARMOR, EntityModelLayers.PIGLIN_OUTER_ARMOR, false);

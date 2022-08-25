@@ -1,7 +1,18 @@
 package com.github.alexnijjar.ad_astra.blocks.flags;
 
+import java.util.stream.Stream;
+
+import org.jetbrains.annotations.Nullable;
+
 import com.mojang.authlib.GameProfile;
-import net.minecraft.block.*;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockRenderType;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.BlockWithEntity;
+import net.minecraft.block.HorizontalFacingBlock;
+import net.minecraft.block.ShapeContext;
+import net.minecraft.block.Waterloggable;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.block.piston.PistonBehavior;
@@ -20,16 +31,18 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.function.BooleanBiFunction;
-import net.minecraft.util.math.*;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.stream.Stream;
+import net.minecraft.world.explosion.Explosion;
 
 @SuppressWarnings("deprecation")
 public class FlagBlock extends BlockWithEntity implements Waterloggable {
@@ -48,27 +61,19 @@ public class FlagBlock extends BlockWithEntity implements Waterloggable {
 
 		if (state.get(HALF).equals(DoubleBlockHalf.LOWER)) {
 			return switch (state.get(FACING)) {
-				case SOUTH ->
-						Stream.of(boxSimple(14.5, 0, 9, 12.5, 1, 7), boxSimple(14, 1, 8.5, 13, 16, 7.5)).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get().offset(offset.getX(), offset.getY(), offset.getZ());
-				case NORTH ->
-						Stream.of(boxSimple(1.5, 0, 7, 3.5, 1, 9), boxSimple(2, 1, 7.5, 3, 16, 8.5)).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get().offset(offset.getX(), offset.getY(), offset.getZ());
-				case EAST ->
-						Stream.of(boxSimple(9, 0, 1.5, 7, 1, 3.5), boxSimple(8.5, 1, 2, 7.5, 16, 3)).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get().offset(offset.getX(), offset.getY(), offset.getZ());
-				case WEST ->
-						Stream.of(boxSimple(7, 0, 14.5, 9, 1, 12.5), boxSimple(7.5, 1, 14, 8.5, 16, 13)).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get().offset(offset.getX(), offset.getY(), offset.getZ());
-				default -> throw new IllegalStateException("Unexpected value: " + state.get(FACING));
+			case SOUTH -> Stream.of(boxSimple(14.5, 0, 9, 12.5, 1, 7), boxSimple(14, 1, 8.5, 13, 16, 7.5)).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get().offset(offset.getX(), offset.getY(), offset.getZ());
+			case NORTH -> Stream.of(boxSimple(1.5, 0, 7, 3.5, 1, 9), boxSimple(2, 1, 7.5, 3, 16, 8.5)).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get().offset(offset.getX(), offset.getY(), offset.getZ());
+			case EAST -> Stream.of(boxSimple(9, 0, 1.5, 7, 1, 3.5), boxSimple(8.5, 1, 2, 7.5, 16, 3)).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get().offset(offset.getX(), offset.getY(), offset.getZ());
+			case WEST -> Stream.of(boxSimple(7, 0, 14.5, 9, 1, 12.5), boxSimple(7.5, 1, 14, 8.5, 16, 13)).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get().offset(offset.getX(), offset.getY(), offset.getZ());
+			default -> throw new IllegalStateException("Unexpected value: " + state.get(FACING));
 			};
 		} else {
 			return switch (state.get(FACING)) {
-				case SOUTH ->
-						Stream.of(boxSimple(14, 0, 8.5, 13, 16, 7.5), boxSimple(14, 7, 8.5, 1, 15, 7.5)).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get().offset(offset.getX(), offset.getY(), offset.getZ());
-				case NORTH ->
-						Stream.of(boxSimple(2, 0, 7.5, 3, 16, 8.5), boxSimple(2, 7, 7.5, 15, 15, 8.5)).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get().offset(offset.getX(), offset.getY(), offset.getZ());
-				case EAST ->
-						Stream.of(boxSimple(8.5, 0, 2, 7.5, 16, 3), boxSimple(8.5, 7, 2, 7.5, 15, 15)).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get().offset(offset.getX(), offset.getY(), offset.getZ());
-				case WEST ->
-						Stream.of(boxSimple(7.5, 0, 14, 8.5, 16, 13), boxSimple(7.5, 7, 14, 8.5, 15, 1)).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get().offset(offset.getX(), offset.getY(), offset.getZ());
-				default -> throw new IllegalStateException("Unexpected value: " + state.get(FACING));
+			case SOUTH -> Stream.of(boxSimple(14, 0, 8.5, 13, 16, 7.5), boxSimple(14, 7, 8.5, 1, 15, 7.5)).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get().offset(offset.getX(), offset.getY(), offset.getZ());
+			case NORTH -> Stream.of(boxSimple(2, 0, 7.5, 3, 16, 8.5), boxSimple(2, 7, 7.5, 15, 15, 8.5)).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get().offset(offset.getX(), offset.getY(), offset.getZ());
+			case EAST -> Stream.of(boxSimple(8.5, 0, 2, 7.5, 16, 3), boxSimple(8.5, 7, 2, 7.5, 15, 15)).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get().offset(offset.getX(), offset.getY(), offset.getZ());
+			case WEST -> Stream.of(boxSimple(7.5, 0, 14, 8.5, 16, 13), boxSimple(7.5, 7, 14, 8.5, 15, 1)).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get().offset(offset.getX(), offset.getY(), offset.getZ());
+			default -> throw new IllegalStateException("Unexpected value: " + state.get(FACING));
 			};
 		}
 	}
@@ -89,12 +94,20 @@ public class FlagBlock extends BlockWithEntity implements Waterloggable {
 	@Override
 	public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
 		if (!world.isClient()) {
-			destroyOtherSide(state.get(HALF), world, pos, state, player);
+			destroyOtherSide(state.get(HALF), world, pos);
 		}
 		super.onBreak(world, pos, state, player);
 	}
 
-	private static void destroyOtherSide(DoubleBlockHalf doubleblockhalf, World world, BlockPos pos, BlockState state, PlayerEntity player) {
+	@Override
+	public void onDestroyedByExplosion(World world, BlockPos pos, Explosion explosion) {
+		if (!world.isClient()) {
+			destroyOtherSide(world.getBlockState(pos).get(HALF), world, pos);
+		}
+		super.onDestroyedByExplosion(world, pos, explosion);
+	}
+
+	private static void destroyOtherSide(DoubleBlockHalf doubleblockhalf, World world, BlockPos pos) {
 		boolean isUpper = doubleblockhalf.equals(DoubleBlockHalf.UPPER);
 		BlockPos blockpos = isUpper ? pos.down() : pos.up();
 		if (world.getBlockState(blockpos).contains(HALF)) {
@@ -173,6 +186,7 @@ public class FlagBlock extends BlockWithEntity implements Waterloggable {
 		builder.add(FACING, WATERLOGGED, HALF);
 	}
 
+	@Override
 	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
 		return Block.hasTopRim(world, pos.down());
 	}

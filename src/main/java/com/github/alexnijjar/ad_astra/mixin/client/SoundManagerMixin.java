@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
-import com.github.alexnijjar.ad_astra.util.OxygenUtils;
+import com.github.alexnijjar.ad_astra.util.entity.OxygenUtils;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.sound.Sound;
@@ -33,17 +33,17 @@ public class SoundManagerMixin {
 	private SoundSystem soundSystem;
 
 	@Inject(method = "Lnet/minecraft/client/sound/SoundManager;play(Lnet/minecraft/client/sound/SoundInstance;)V", at = @At("HEAD"), cancellable = true)
-	public void play(SoundInstance sound, CallbackInfo ci) {
-		this.modifySound(sound, 0, ci);
+	public void adastra_play(SoundInstance sound, CallbackInfo ci) {
+		this.adastra_modifySound(sound, 0, ci);
 	}
 
 	@Inject(method = "Lnet/minecraft/client/sound/SoundManager;play(Lnet/minecraft/client/sound/SoundInstance;I)V", at = @At("HEAD"), cancellable = true)
-	public void play(SoundInstance sound, int delay, CallbackInfo ci) {
-		this.modifySound(sound, delay, ci);
+	public void adastra_play(SoundInstance sound, int delay, CallbackInfo ci) {
+		this.adastra_modifySound(sound, delay, ci);
 	}
 
 	@Unique
-	private void modifySound(SoundInstance sound, int delay, CallbackInfo ci) {
+	private void adastra_modifySound(SoundInstance sound, int delay, CallbackInfo ci) {
 		if (sound.getCategory().equals(SoundCategory.MASTER)) {
 			return;
 		}
@@ -69,10 +69,10 @@ public class SoundManagerMixin {
 		}
 
 		if (ModUtils.isOrbitWorld(client.world)) {
-			boolean noOxygen = !OxygenUtils.worldHasOxygen(client.world, new BlockPos(sound.getX(), sound.getY(), sound.getZ()));
-			if (client.world != null && noOxygen || sound.getCategory().equals(SoundCategory.MUSIC) || sound.getCategory().equals(SoundCategory.RECORDS)) {
+			boolean noOxygen = !OxygenUtils.posHasOxygen(client.world, new BlockPos(sound.getX(), sound.getY(), sound.getZ()));
+			if (client.world != null && noOxygen || sound.getCategory().equals(SoundCategory.MUSIC) || sound.getCategory().equals(SoundCategory.RECORDS) || sound.getCategory().equals(SoundCategory.AMBIENT)) {
 				ci.cancel();
-				SoundInstance newSound = getSpaceSoundInstance(sound, ((sound.getCategory().equals(SoundCategory.MUSIC) || sound.getCategory().equals(SoundCategory.RECORDS)) ? 1.0f : 0.1f), 0.1f);
+				SoundInstance newSound = getSpaceSoundInstance(sound, ((sound.getCategory().equals(SoundCategory.MUSIC) || sound.getCategory().equals(SoundCategory.RECORDS) || sound.getCategory().equals(SoundCategory.AMBIENT)) ? 1.0f : 0.1f), 0.1f);
 				this.soundSystem.play(newSound);
 			}
 		}

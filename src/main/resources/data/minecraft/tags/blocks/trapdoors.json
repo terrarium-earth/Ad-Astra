@@ -1,6 +1,7 @@
 {
 	"replace": false,
 	"values": [
-		"ad_astra:steel_trapdoor"
+		"ad_astra:steel_trapdoor",
+		"ad_astra:glacian_trapdoor"
 	]
 }

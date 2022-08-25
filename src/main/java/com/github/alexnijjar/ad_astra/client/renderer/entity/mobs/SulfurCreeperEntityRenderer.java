@@ -14,7 +14,7 @@ import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
 public class SulfurCreeperEntityRenderer extends MobEntityRenderer<SulfurCreeperEntity, SulfurCreeperEntityModel<SulfurCreeperEntity>> {
-	public static final Identifier TEXTURE = new ModIdentifier("textures/entities/sulfur_creeper.png");
+	public static final Identifier TEXTURE = new ModIdentifier("textures/entity/sulfur_creeper.png");
 
 	public SulfurCreeperEntityRenderer(EntityRendererFactory.Context context) {
 		super(context, new SulfurCreeperEntityModel<>(context.getPart(SulfurCreeperEntityModel.LAYER_LOCATION)), 0.7f);

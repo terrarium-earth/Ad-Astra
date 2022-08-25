@@ -11,7 +11,7 @@ import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
 public class MartianRaptorEntityRenderer extends MobEntityRenderer<MartianRaptorEntity, MartianRaptorEntityModel> {
-	public static final Identifier TEXTURE = new ModIdentifier("textures/entities/martian_raptor.png");
+	public static final Identifier TEXTURE = new ModIdentifier("textures/entity/martian_raptor.png");
 
 	public MartianRaptorEntityRenderer(EntityRendererFactory.Context context) {
 		super(context, new MartianRaptorEntityModel(context.getPart(MartianRaptorEntityModel.LAYER_LOCATION)), 0.5f);

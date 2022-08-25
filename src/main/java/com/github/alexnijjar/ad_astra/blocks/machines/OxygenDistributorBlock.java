@@ -1,7 +1,8 @@
 package com.github.alexnijjar.ad_astra.blocks.machines;
 
 import com.github.alexnijjar.ad_astra.blocks.machines.entity.OxygenDistributorBlockEntity;
-import com.github.alexnijjar.ad_astra.util.OxygenUtils;
+import com.github.alexnijjar.ad_astra.util.entity.OxygenUtils;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.player.PlayerEntity;

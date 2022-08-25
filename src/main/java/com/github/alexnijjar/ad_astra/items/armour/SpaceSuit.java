@@ -22,6 +22,8 @@ import net.minecraft.world.World;
 import java.util.List;
 import java.util.stream.StreamSupport;
 
+import org.apache.commons.lang3.Range;
+
 public class SpaceSuit extends ArmorItem implements FluidContainingItem {
 
 	public SpaceSuit(ArmorMaterial material, EquipmentSlot slot, Item.Settings settings) {
@@ -46,6 +48,10 @@ public class SpaceSuit extends ArmorItem implements FluidContainingItem {
 		return AdAstra.CONFIG.spaceSuit.spaceSuitTankSize;
 	}
 
+	public Range<Integer> getTemperatureThreshold() {
+		return Range.between(-300, 60);
+	}
+
 	public static boolean hasFullSet(LivingEntity entity) {
 		return StreamSupport.stream(entity.getArmorItems().spliterator(), false).allMatch(s -> s.getItem() instanceof SpaceSuit);
 	}
@@ -63,5 +69,12 @@ public class SpaceSuit extends ArmorItem implements FluidContainingItem {
 		}
 
 		return false;
+	}
+
+	public static void consumeSpaceSuitOxygen(LivingEntity entity, long amount) {
+		ItemStack chest = entity.getEquippedStack(EquipmentSlot.CHEST);
+		if (chest.getItem() instanceof SpaceSuit suit) {
+			suit.setAmount(chest, suit.getAmount(chest) - amount);
+		}
 	}
 }

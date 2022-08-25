@@ -211,6 +211,13 @@
     "ad_astra:glacio_cobblestone_slab",
     "ad_astra:glacio_cobblestone_stairs",
     "ad_astra:glacio_stone_slab",
-    "ad_astra:glacio_stone_stairs"
+    "ad_astra:glacio_stone_stairs",
+    "ad_astra:iron_sliding_door",
+    "ad_astra:steel_sliding_door",
+    "ad_astra:desh_sliding_door",
+    "ad_astra:ostrum_sliding_door",
+    "ad_astra:calorite_sliding_door",
+    "ad_astra:airlock",
+    "ad_astra:reinforced_door"
   ]
 }

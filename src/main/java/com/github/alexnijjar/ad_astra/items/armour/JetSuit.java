@@ -1,9 +1,13 @@
 package com.github.alexnijjar.ad_astra.items.armour;
 
+import java.util.List;
+import java.util.stream.StreamSupport;
+
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.registry.ModItems;
 import com.github.alexnijjar.ad_astra.util.ModKeyBindings;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
+
 import net.fabricmc.fabric.api.entity.event.v1.FabricElytraItem;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
@@ -20,9 +24,6 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import team.reborn.energy.api.base.SimpleBatteryItem;
-
-import java.util.List;
-import java.util.stream.StreamSupport;
 
 public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, FabricElytraItem {
 

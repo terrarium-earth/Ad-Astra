@@ -1,14 +1,10 @@
 package com.github.alexnijjar.ad_astra.util;
 
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import com.github.alexnijjar.ad_astra.AdAstra;
-import com.github.alexnijjar.ad_astra.client.AdAstraClient;
 import com.github.alexnijjar.ad_astra.data.Planet;
 import com.github.alexnijjar.ad_astra.entities.vehicles.LanderEntity;
 import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntity;
@@ -16,12 +12,14 @@ import com.github.alexnijjar.ad_astra.entities.vehicles.VehicleEntity;
 import com.github.alexnijjar.ad_astra.items.vehicles.VehicleItem;
 import com.github.alexnijjar.ad_astra.registry.ModCriteria;
 import com.github.alexnijjar.ad_astra.registry.ModEntityTypes;
+import com.github.alexnijjar.ad_astra.registry.ModTags;
 
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -175,17 +173,7 @@ public class ModUtils {
 	 * @return The world's orbit dimension, or the overworld if no orbit is defined
 	 */
 	public static RegistryKey<World> getPlanetOrbit(World world) {
-		if (isSpaceWorld(world)) {
-			for (Planet planet : (world.isClient ? AdAstraClient.planets : AdAstra.planets)) {
-				if (planet.orbitWorld().equals(world.getRegistryKey())) {
-					return planet.world();
-				}
-			}
-			AdAstra.LOGGER.error(world.getRegistryKey().getValue().toString() + " does not have an orbit world!");
-		} else {
-			AdAstra.LOGGER.error(world.getRegistryKey().getValue().toString() + " is not a planet or orbit!");
-		}
-		return World.OVERWORLD;
+		return AdAstra.planets.stream().filter(p -> p.orbitWorld().equals(world.getRegistryKey())).map(Planet::world).findFirst().orElse(World.OVERWORLD);
 	}
 
 	/**
@@ -194,19 +182,19 @@ public class ModUtils {
 	 * @return The gravity of the world or earth gravity if the world does not have a defined gravity
 	 */
 	public static float getPlanetGravity(World world) {
-		for (Planet planet : world.isClient ? AdAstraClient.planets : AdAstra.planets) {
-			if (planet.world().equals(world.getRegistryKey())) {
-				return planet.gravity() / VANILLA_GRAVITY;
-			}
+		// Do not affect gravity for non-Ad Astra dimensions
+		if (!ModUtils.isSpaceWorld(world)) {
+			return 1.0f;
 		}
-		// Orbit gravity is 0.25, allowing for slow fall.
+
 		if (isOrbitWorld(world)) {
-			return AdAstra.CONFIG.general.orbitGravity / VANILLA_GRAVITY;
+			return 3.0f / VANILLA_GRAVITY;
 		}
-		if (isSpaceWorld(world)) {
-			AdAstra.LOGGER.error(world.getRegistryKey().getValue().toString() + " does not have a defined gravity!");
-		}
-		return 1.0f;
+		return AdAstra.planets.stream().filter(p -> p.orbitWorld().equals(world.getRegistryKey())).map(Planet::gravity).findFirst().orElse(VANILLA_GRAVITY) / VANILLA_GRAVITY;
+	}
+
+	public static boolean planetHasAtmosphere(World world) {
+		return AdAstra.planets.stream().filter(p -> p.orbitWorld().equals(world.getRegistryKey())).map(Planet::hasAtmosphere).findFirst().orElse(false);
 	}
 
 	/**
@@ -215,69 +203,10 @@ public class ModUtils {
 	 * @return The temperature of the world, or 20° for dimensions without a defined temperature
 	 */
 	public static final float getWorldTemperature(World world) {
-		for (Planet planet : world.isClient ? AdAstraClient.planets : AdAstra.planets) {
-			if (planet.world().equals(world.getRegistryKey())) {
-				return planet.temperature();
-			}
-		}
 		if (isOrbitWorld(world)) {
 			return ORBIT_TEMPERATURE;
 		}
-		if (isSpaceWorld(world)) {
-			AdAstra.LOGGER.error(world.getRegistryKey().getValue().toString() + " does not have a defined temperature!");
-		}
-		return 20.0f;
-	}
-
-	// Mixin Util
-	public static double getMixinGravity(double value, Object mixin) {
-		Entity entity = (Entity) mixin;
-		return value * getPlanetGravity(entity.world);
-	}
-
-	public static float getMixinGravity(float value, Object mixin) {
-		return (float) getMixinGravity((double) value, mixin);
-	}
-
-	/**
-	 * Gets every Ad Astra dimension, regardless of whether it is a planet or an orbit.
-	 */
-	public static Set<RegistryKey<World>> getAdAstraDimensions(boolean isClient) {
-		return Stream.concat(getPlanets(isClient).stream(), getOrbitWorlds(isClient).stream()).collect(Collectors.toSet());
-	}
-
-	/**
-	 * Checks if the world is labeled as an orbit dimension.
-	 */
-	public static boolean isOrbitWorld(World world) {
-		return getOrbitWorlds(world.isClient).stream().anyMatch(world.getRegistryKey()::equals);
-	}
-
-	/**
-	 * Gets all of the dimensions that are considered orbit worlds.
-	 */
-	public static Set<RegistryKey<World>> getOrbitWorlds(boolean isClient) {
-		Set<RegistryKey<World>> worlds = new HashSet<>();
-		(isClient ? AdAstraClient.planets : AdAstra.planets).forEach(planet -> {
-			worlds.add(planet.orbitWorld());
-		});
-		return worlds;
-	}
-
-	/**
-	 * Check if the world is labeled as a planet dimension.
-	 */
-	public static boolean isPlanet(World world) {
-		return getPlanets(world.isClient).stream().anyMatch(world.getRegistryKey()::equals);
-	}
-
-	/**
-	 * Gets all of the dimensions that are considered planets or moons, i.e. a dimension from this mod that is not an orbit world.
-	 */
-	public static Set<RegistryKey<World>> getPlanets(boolean isClient) {
-		Set<RegistryKey<World>> worlds = new HashSet<>();
-		(isClient ? AdAstraClient.planets : AdAstra.planets).forEach(planet -> worlds.add(planet.world()));
-		return worlds;
+		return AdAstra.planets.stream().filter(p -> p.orbitWorld().equals(world.getRegistryKey())).map(Planet::temperature).findFirst().orElse(20.0f);
 	}
 
 	/**
@@ -288,12 +217,20 @@ public class ModUtils {
 	}
 
 	/**
-	 * Gets all of the dimensions in Ad Astra that have no oxygen.
+	 * Check if the world is labeled as a planet dimension.
 	 */
-	public static final Set<RegistryKey<World>> getWorldsWithoutOxygen(boolean isClient) {
-		Set<RegistryKey<World>> worlds = new HashSet<>();
-		(isClient ? AdAstraClient.planets : AdAstra.planets).stream().filter(planet -> planet.hasOxygen()).forEach(planet -> worlds.add(planet.world()));
-		return worlds;
+	public static boolean isPlanet(World world) {
+		if (World.OVERWORLD.equals(world.getRegistryKey())) {
+			return false;
+		}
+		return AdAstra.planetWorlds.contains(world.getRegistryKey());
+	}
+
+	/**
+	 * Checks if the world is labeled as an orbit dimension.
+	 */
+	public static boolean isOrbitWorld(World world) {
+		return AdAstra.orbitWorlds.contains(world.getRegistryKey());
 	}
 
 	/**
@@ -323,6 +260,18 @@ public class ModUtils {
 
 	public static boolean checkTag(ItemStack stack, TagKey<Item> tag) {
 		return stack.isIn(tag);
+	}
+
+	public static boolean armourIsFreezeResistant(LivingEntity entity) {
+		return StreamSupport.stream(entity.getArmorItems().spliterator(), false).allMatch(s -> s.isIn(ModTags.FREEZE_RESISTANT));
+	}
+
+	public static boolean armourIsHeatResistant(LivingEntity entity) {
+		return StreamSupport.stream(entity.getArmorItems().spliterator(), false).allMatch(s -> s.isIn(ModTags.HEAT_RESISTANT));
+	}
+
+	public static boolean armourIsOxygenated(LivingEntity entity) {
+		return StreamSupport.stream(entity.getArmorItems().spliterator(), false).allMatch(s -> s.isIn(ModTags.OXYGENATED_ARMOR));
 	}
 
 	public static long getSolarEnergy(RegistryKey<World> world) {

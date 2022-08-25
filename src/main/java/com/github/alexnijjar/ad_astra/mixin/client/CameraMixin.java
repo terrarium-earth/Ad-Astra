@@ -17,7 +17,7 @@ import net.minecraft.world.BlockView;
 public abstract class CameraMixin {
 
 	@Inject(method = "update", at = @At("TAIL"), cancellable = true)
-	public void update(BlockView area, Entity focusedEntity, boolean thirdPerson, boolean inverseView, float tickDelta, CallbackInfo ci) {
+	public void adastra_update(BlockView area, Entity focusedEntity, boolean thirdPerson, boolean inverseView, float tickDelta, CallbackInfo ci) {
 		if (AdAstra.CONFIG.vehicles.moveCameraInVehicle) {
 			if (thirdPerson && focusedEntity.getVehicle() instanceof VehicleEntity vehicle) {
 				if (vehicle.doHighFov()) {

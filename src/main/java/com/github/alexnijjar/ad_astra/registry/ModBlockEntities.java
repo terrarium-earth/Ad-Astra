@@ -1,5 +1,10 @@
 package com.github.alexnijjar.ad_astra.registry;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import com.github.alexnijjar.ad_astra.blocks.door.SlidingDoorBlockEntity;
+
 // import com.github.alexnijjar.ad_astra.blocks.cables.CableBlockEntity;
 
 import com.github.alexnijjar.ad_astra.blocks.flags.FlagBlockEntity;
@@ -19,6 +24,7 @@ import com.github.alexnijjar.ad_astra.blocks.machines.entity.SolarPanelBlockEnti
 import com.github.alexnijjar.ad_astra.blocks.machines.entity.WaterPumpBlockEntity;
 import com.github.alexnijjar.ad_astra.blocks.pipes.CableBlockEntity;
 import com.github.alexnijjar.ad_astra.blocks.pipes.FluidPipeBlockEntity;
+import com.github.alexnijjar.ad_astra.mixin.BlockEntityTypeAccessor;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
@@ -49,6 +55,7 @@ public class ModBlockEntities {
 	public static BlockEntityType<EnergizerBlockEntity> ENERGIZER;
 	public static BlockEntityType<CryoFreezerBlockEntity> CRYO_FREEZER;
 	public static BlockEntityType<OxygenSensorBlockEntity> OXYGEN_SENSOR;
+	public static BlockEntityType<SlidingDoorBlockEntity> SLIDING_DOOR;
 
 	public static BlockEntityType<CableBlockEntity> CABLE;
 	public static BlockEntityType<FluidPipeBlockEntity> FLUID_PIPE;
@@ -71,9 +78,18 @@ public class ModBlockEntities {
 		ENERGIZER = register("energizer_entity", EnergizerBlockEntity::new, ModBlocks.ENERGIZER);
 		CRYO_FREEZER = register("cryo_freezer_entity", CryoFreezerBlockEntity::new, ModBlocks.CRYO_FREEZER);
 		OXYGEN_SENSOR = register("oxygen_sensor", OxygenSensorBlockEntity::new, ModBlocks.OXYGEN_SENSOR);
+		SLIDING_DOOR = register("sliding_door", SlidingDoorBlockEntity::new, ModBlocks.IRON_SLIDING_DOOR, ModBlocks.STEEL_SLIDING_DOOR, ModBlocks.DESH_SLIDING_DOOR, ModBlocks.OSTRUM_SLIDING_DOOR, ModBlocks.CALORITE_SLIDING_DOOR, ModBlocks.AIRLOCK,
+				ModBlocks.REINFORCED_DOOR);
 
 		CABLE = register("cable", CableBlockEntity::new, ModBlocks.STEEL_CABLE, ModBlocks.DESH_CABLE);
 		FLUID_PIPE = register("fluid_pipe", FluidPipeBlockEntity::new, ModBlocks.DESH_FLUID_PIPE, ModBlocks.OSTRUM_FLUID_PIPE);
+
+		// Add custom signs to the sign block entity registry
+		BlockEntityTypeAccessor signRegistry = ((BlockEntityTypeAccessor) BlockEntityType.SIGN);
+		Set<Block> blocks = new HashSet<>(signRegistry.getBlocks());
+		blocks.add(ModBlocks.GLACIAN_SIGN);
+		blocks.add(ModBlocks.GLACIAN_WALL_SIGN);
+		signRegistry.setBlocks(blocks);
 
 		EnergyStorage.SIDED.registerForBlockEntities((blockEntity, direction) -> ((AbstractMachineBlockEntity) blockEntity).getSideEnergyStorage(direction), SOLAR_PANEL, COAL_GENERATOR, COMPRESSOR, FUEL_REFINERY, OXYGEN_LOADER, OXYGEN_DISTRIBUTOR,
 				WATER_PUMP, ENERGIZER, CRYO_FREEZER);

@@ -16,7 +16,7 @@ import net.minecraft.util.registry.Registry;
 @Environment(EnvType.CLIENT)
 public class GlobeRenderer {
 
-	// Textures.
+	// Textures
 	public static final Identifier EARTH_GLOBE = new ModIdentifier("textures/block/globes/earth_globe.png");
 	public static final Identifier MOON_GLOBE = new ModIdentifier("textures/block/globes/moon_globe.png");
 	public static final Identifier MARS_GLOBE = new ModIdentifier("textures/block/globes/mars_globe.png");
@@ -24,10 +24,10 @@ public class GlobeRenderer {
 	public static final Identifier VENUS_GLOBE = new ModIdentifier("textures/block/globes/venus_globe.png");
 	public static final Identifier GLACIO_GLOBE = new ModIdentifier("textures/block/globes/glacio_globe.png");
 
-	// Render model.
+	// Render model
 	public static void render(Identifier id, GlobeModel model, Direction direction, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
 
-		// Get the texture.
+		// Get the texture
 		VertexConsumer vertexConsumer;
 		if (id.equals(Registry.BLOCK.getId(ModBlocks.EARTH_GLOBE))) {
 			vertexConsumer = vertexConsumers.getBuffer(RenderLayer.getEntityCutoutNoCullZOffset(EARTH_GLOBE));
@@ -49,7 +49,7 @@ public class GlobeRenderer {
 		matrices.scale(-1.0f, -1.0f, 1.0f);
 		matrices.multiply(direction.getRotationQuaternion());
 
-		// Turn upright.
+		// Turn upright
 		matrices.multiply(Vec3f.NEGATIVE_X.getDegreesQuaternion(90));
 
 		model.render(matrices, vertexConsumer, light, overlay, 1.0f, 1.0f, 1.0f, 1.0f);

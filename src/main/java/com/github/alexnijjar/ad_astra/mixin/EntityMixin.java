@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class EntityMixin {
 
 	@Inject(method = "tick", at = @At("TAIL"))
-	private void tick(CallbackInfo ci) {
+	private void adastra_tick(CallbackInfo ci) {
 		Entity entity = ((Entity) (Object) this);
 
 		// Teleport the entity to the planet when they fall in the void while in an orbit dimension

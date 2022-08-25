@@ -11,7 +11,7 @@ import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
 public class StarCrawlerEntityRenderer extends MobEntityRenderer<StarCrawlerEntity, StarCrawlerEntityModel> {
-	public static final Identifier TEXTURE = new ModIdentifier("textures/entities/star_crawler.png");
+	public static final Identifier TEXTURE = new ModIdentifier("textures/entity/star_crawler.png");
 
 	public StarCrawlerEntityRenderer(EntityRendererFactory.Context context) {
 		super(context, new StarCrawlerEntityModel(context.getPart(StarCrawlerEntityModel.LAYER_LOCATION)), 0.0f);

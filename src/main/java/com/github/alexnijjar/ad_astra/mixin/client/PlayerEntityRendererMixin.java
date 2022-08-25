@@ -32,28 +32,28 @@ import net.minecraft.util.math.Vec3f;
 public class PlayerEntityRendererMixin {
 
 	@Inject(method = "renderRightArm", at = @At("HEAD"), cancellable = true)
-	public void renderRightArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, CallbackInfo ci) {
+	public void adastra_renderRightArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, CallbackInfo ci) {
 		if (player.getOffHandStack().getItem() instanceof VehicleItem) {
 			ci.cancel();
 			return;
 		}
 		if (player.getEquippedStack(EquipmentSlot.CHEST).getItem() instanceof SpaceSuit spaceSuit) {
 			ci.cancel();
-			this.renderArm(matrices, vertexConsumers, light, player, true);
+			this.adastra_renderArm(matrices, vertexConsumers, light, player, true);
 		}
 	}
 
 	@Inject(method = "renderLeftArm", at = @At("HEAD"), cancellable = true)
-	public void renderLeftArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, CallbackInfo ci) {
+	public void adastra_renderLeftArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, CallbackInfo ci) {
 		if (player.getEquippedStack(EquipmentSlot.CHEST).getItem() instanceof SpaceSuit spaceSuit) {
 			ci.cancel();
-			this.renderArm(matrices, vertexConsumers, light, player, false);
+			this.adastra_renderArm(matrices, vertexConsumers, light, player, false);
 		}
 	}
 
 	// Render space suit arm in first person.
 	@Unique
-	private void renderArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, boolean right) {
+	private void adastra_renderArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, boolean right) {
 		if (player.getEquippedStack(EquipmentSlot.CHEST).getItem() instanceof SpaceSuit spaceSuit) {
 
 			PlayerEntityRenderer renderer = (PlayerEntityRenderer) (Object) (this);

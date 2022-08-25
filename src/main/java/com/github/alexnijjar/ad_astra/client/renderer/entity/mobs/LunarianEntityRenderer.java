@@ -12,20 +12,20 @@ import net.minecraft.util.Identifier;
 import net.minecraft.village.VillagerProfession;
 
 public class LunarianEntityRenderer extends MobEntityRenderer<LunarianEntity, LunarianEntityModel<LunarianEntity>> {
-	public static final Identifier TEXTURE = new ModIdentifier("textures/entities/lunarian/lunarian.png");
-	public static final Identifier FARMER_TEXTURE = new ModIdentifier("textures/entities/lunarian/farmer_lunarian.png");
-	public static final Identifier FISHERMAN_TEXTURE = new ModIdentifier("textures/entities/lunarian/fisherman_lunarian.png");
-	public static final Identifier SHEPHERD_TEXTURE = new ModIdentifier("textures/entities/lunarian/shepherd_lunarian.png");
-	public static final Identifier FLETCHER_TEXTURE = new ModIdentifier("textures/entities/lunarian/fletcher_lunarian.png");
-	public static final Identifier LIBRARIAN_TEXTURE = new ModIdentifier("textures/entities/lunarian/librarian_lunarian.png");
-	public static final Identifier CARTOGRAPHER_TEXTURE = new ModIdentifier("textures/entities/lunarian/cartographer_lunarian.png");
-	public static final Identifier CLERIC_TEXTURE = new ModIdentifier("textures/entities/lunarian/cleric_lunarian.png");
-	public static final Identifier ARMORER_TEXTURE = new ModIdentifier("textures/entities/lunarian/armorer_lunarian.png");
-	public static final Identifier WEAPONSMITH_TEXTURE = new ModIdentifier("textures/entities/lunarian/weaponsmith_lunarian.png");
-	public static final Identifier TOOLSMITH_TEXTURE = new ModIdentifier("textures/entities/lunarian/toolsmith_lunarian.png");
-	public static final Identifier BUTCHER_TEXTURE = new ModIdentifier("textures/entities/lunarian/butcher_lunarian.png");
-	public static final Identifier LEATHERWORKER_TEXTURE = new ModIdentifier("textures/entities/lunarian/leatherworker_lunarian.png");
-	public static final Identifier MASON_TEXTURE = new ModIdentifier("textures/entities/lunarian/mason_lunarian.png");
+	public static final Identifier TEXTURE = new ModIdentifier("textures/entity/lunarian/lunarian.png");
+	public static final Identifier FARMER_TEXTURE = new ModIdentifier("textures/entity/lunarian/farmer_lunarian.png");
+	public static final Identifier FISHERMAN_TEXTURE = new ModIdentifier("textures/entity/lunarian/fisherman_lunarian.png");
+	public static final Identifier SHEPHERD_TEXTURE = new ModIdentifier("textures/entity/lunarian/shepherd_lunarian.png");
+	public static final Identifier FLETCHER_TEXTURE = new ModIdentifier("textures/entity/lunarian/fletcher_lunarian.png");
+	public static final Identifier LIBRARIAN_TEXTURE = new ModIdentifier("textures/entity/lunarian/librarian_lunarian.png");
+	public static final Identifier CARTOGRAPHER_TEXTURE = new ModIdentifier("textures/entity/lunarian/cartographer_lunarian.png");
+	public static final Identifier CLERIC_TEXTURE = new ModIdentifier("textures/entity/lunarian/cleric_lunarian.png");
+	public static final Identifier ARMORER_TEXTURE = new ModIdentifier("textures/entity/lunarian/armorer_lunarian.png");
+	public static final Identifier WEAPONSMITH_TEXTURE = new ModIdentifier("textures/entity/lunarian/weaponsmith_lunarian.png");
+	public static final Identifier TOOLSMITH_TEXTURE = new ModIdentifier("textures/entity/lunarian/toolsmith_lunarian.png");
+	public static final Identifier BUTCHER_TEXTURE = new ModIdentifier("textures/entity/lunarian/butcher_lunarian.png");
+	public static final Identifier LEATHERWORKER_TEXTURE = new ModIdentifier("textures/entity/lunarian/leatherworker_lunarian.png");
+	public static final Identifier MASON_TEXTURE = new ModIdentifier("textures/entity/lunarian/mason_lunarian.png");
 
 	public LunarianEntityRenderer(EntityRendererFactory.Context context) {
 		super(context, new LunarianEntityModel<>(context.getPart(LunarianEntityModel.LAYER_LOCATION)), 0.5f);

@@ -99,8 +99,9 @@ public class RocketLaunchPad extends Block implements Waterloggable {
 		super.onStateReplaced(state, world, pos, newState, moved);
 	}
 
+	@Override
 	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-		return Block.hasTopRim(world, pos.down());
+		return !(world.getBlockState(pos.down()).getBlock() instanceof RocketLaunchPad);
 	}
 
 	@Override

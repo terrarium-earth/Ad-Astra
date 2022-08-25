@@ -1,5 +1,14 @@
 package com.github.alexnijjar.ad_astra.client.screens.utils;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.Consumer;
+
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.client.AdAstraClient;
 import com.github.alexnijjar.ad_astra.client.resourcepack.Galaxy;
@@ -14,6 +23,7 @@ import com.github.alexnijjar.ad_astra.util.MathUtil;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.ibm.icu.impl.Pair;
 import com.mojang.blaze3d.systems.RenderSystem;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -34,9 +44,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
-
-import java.util.*;
-import java.util.function.Consumer;
 
 @Environment(EnvType.CLIENT)
 public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvider<PlanetSelectionScreenHandler> {
@@ -238,7 +245,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 		this.categoryButtons.put(Category.BACK, backButtonList);
 
 		// All buttons are data-driven; they are created from files in the /planet_data/planets directory.
-		List<Planet> planets = new ArrayList<>(AdAstraClient.planets);
+		List<Planet> planets = new ArrayList<>(AdAstra.planets);
 		planets.sort((g1, g2) -> g1.translation().substring(Math.abs(g1.translation().indexOf(".text"))).compareTo(g2.translation().substring(Math.abs(g2.translation().indexOf(".text")))));
 		planets.forEach(planet -> {
 

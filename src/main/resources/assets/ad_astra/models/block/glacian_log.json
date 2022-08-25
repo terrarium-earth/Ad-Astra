@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "ad_astra:block/glacian_log_top",
+    "side": "ad_astra:block/glacian_log"
+  }
+}

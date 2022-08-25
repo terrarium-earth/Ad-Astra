@@ -18,12 +18,12 @@ public abstract class BoatEntityMixin {
 	private static final double CONSTANT = -0.04;
 
 	@Inject(method = "updateVelocity", at = @At("TAIL"), cancellable = true)
-	public void updateVelocity(CallbackInfo ci) {
+	public void adastra_updateVelocity(CallbackInfo ci) {
 		if (AdAstra.CONFIG.general.doEntityGravity) {
 			Entity entity = (Entity) (Object) this;
 			if (!entity.hasNoGravity()) {
 				Vec3d velocity = entity.getVelocity();
-				double newGravity = ModUtils.getMixinGravity(CONSTANT, this);
+				double newGravity = CONSTANT * ModUtils.getPlanetGravity(entity.world);
 				entity.setVelocity(velocity.getX(), velocity.getY() - CONSTANT + newGravity, velocity.getZ());
 			}
 		}

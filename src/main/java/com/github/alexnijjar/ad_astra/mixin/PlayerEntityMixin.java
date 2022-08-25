@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class PlayerEntityMixin {
 
 	@Inject(method = "damage", at = @At("HEAD"), cancellable = true)
-	public void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> ci) {
+	public void adastra_damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> ci) {
 		if (AdAstra.CONFIG.spaceSuit.netheriteSpaceSuitHasFireResistance) {
 			PlayerEntity player = ((PlayerEntity) (Object) this);
 			if (source.isFire() || source.equals(DamageSource.HOT_FLOOR)) {
@@ -31,33 +31,17 @@ public abstract class PlayerEntityMixin {
 	}
 
 	@Inject(method = "tick", at = @At("TAIL"))
-	public void tick(CallbackInfo ci) {
+	public void adastra_tick(CallbackInfo ci) {
 		if (AdAstra.CONFIG.spaceSuit.enableJetSuitFlight) {
 			PlayerEntity player = ((PlayerEntity) (Object) this);
 			if (!player.hasVehicle()) {
-				if (JetSuit.hasFullSet(player)) {
-					ItemStack chest = player.getEquippedStack(EquipmentSlot.CHEST);
-					if (chest.getItem() instanceof JetSuit jetSuit) {
-						if (ModKeyBindings.jumpKeyDown(player)) {
+				ItemStack chest = player.getEquippedStack(EquipmentSlot.CHEST);
+				if (chest.getItem() instanceof JetSuit jetSuit) {
+					if (ModKeyBindings.jumpKeyDown(player)) {
+						if (JetSuit.hasFullSet(player)) {
 							jetSuit.fly(player, chest);
 						} else {
 							jetSuit.isFallFlying = false;
-						}
-					}
-				}
-			}
-		}
-	}
-
-	@Inject(method = "checkFallFlying", at = @At("HEAD"), cancellable = true)
-	public void checkFallFlying(CallbackInfoReturnable<Boolean> ci) {
-		if (AdAstra.CONFIG.spaceSuit.enableJetSuitFlight) {
-			PlayerEntity player = ((PlayerEntity) (Object) this);
-			if (!player.hasVehicle()) {
-				if (JetSuit.hasFullSet(player)) {
-					if (player.getEquippedStack(EquipmentSlot.CHEST).getItem() instanceof JetSuit jetSuit) {
-						if (ModKeyBindings.sprintKeyDown(player)) {
-							ci.setReturnValue(true);
 						}
 					}
 				}
