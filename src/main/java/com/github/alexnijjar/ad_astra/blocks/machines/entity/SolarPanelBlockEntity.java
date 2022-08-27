@@ -63,7 +63,7 @@ public class SolarPanelBlockEntity extends AbstractMachineBlockEntity {
 
 	public static long getEnergyForDimension(World world) {
 		if (world != null) {
-			return (long) (ModUtils.getSolarEnergy(world.getRegistryKey()) * AdAstra.CONFIG.solarPanel.energyMultiplier);
+			return (long) (ModUtils.getSolarEnergy(world) * AdAstra.CONFIG.solarPanel.energyMultiplier);
 		} else {
 			return 0;
 		}

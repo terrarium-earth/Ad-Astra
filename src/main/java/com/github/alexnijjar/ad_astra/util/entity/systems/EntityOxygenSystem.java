@@ -27,10 +27,16 @@ public class EntityOxygenSystem {
             return;
         }
 
-        boolean entityHasOxygen = OxygenUtils.entityHasOxygen(world, entity) && !entity.isSubmergedInWater();
+        boolean entityHasOxygen = OxygenUtils.entityHasOxygen(world, entity);
+        boolean hasOxygenatedSpaceSuit = SpaceSuit.hasOxygenatedSpaceSuit(entity) && SpaceSuit.hasFullSet(entity);
+
+        if (entityHasOxygen && hasOxygenatedSpaceSuit && entity.isSubmergedInWater() && !entity.canBreatheInWater()) {
+            consumeOxygen(entity, world);
+            return;
+        }
 
         if (!entityHasOxygen) {
-            if (SpaceSuit.hasOxygenatedSpaceSuit(entity)) {
+            if (hasOxygenatedSpaceSuit) {
                 consumeOxygen(entity, world);
             } else if (!ModUtils.armourIsOxygenated(entity)) {
                 entity.damage(ModDamageSource.OXYGEN, 1);

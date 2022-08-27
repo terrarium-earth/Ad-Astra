@@ -61,9 +61,9 @@
             "texture": "ad_astra:textures/sky/vicinus.png",
             "blending": false,
             "render_type": "static",
-            "scale": 16.0,
+            "scale": 40.0,
             "rotation": {
-                "x": 30.0,
+                "x": 60.0,
                 "y": 0.0,
                 "z": 0.0
             }
@@ -72,14 +72,14 @@
             "texture": "ad_astra:textures/sky/light.png",
             "blending": true,
             "render_type": "static",
-            "scale": 48.0,
+            "scale": 120.0,
             "color": {
                 "r": 204,
                 "g": 153,
                 "b": 255
             },
             "rotation": {
-                "x": 30.0,
+                "x": 60.0,
                 "y": 0.0,
                 "z": 0.0
             }

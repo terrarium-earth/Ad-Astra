@@ -31,7 +31,7 @@ public class PlanetSoundPlayer implements ClientPlayerTickable {
         if (this.ticksUntilPlay <= 0) {
             float randomVal = this.player.world.random.nextFloat();
             // 1 in 100 per tick
-            if (randomVal < 0.0002f) {
+            if (randomVal < 0.00005f) {
                 SoundEvent randomSpaceSound;
                 this.ticksUntilPlay = 2000;
 

@@ -42,7 +42,6 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
-import net.minecraft.world.explosion.Explosion;
 
 @SuppressWarnings("deprecation")
 public class FlagBlock extends BlockWithEntity implements Waterloggable {
@@ -81,40 +80,18 @@ public class FlagBlock extends BlockWithEntity implements Waterloggable {
 	@Override
 	public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
 		super.neighborUpdate(state, world, pos, block, fromPos, notify);
-		if (world.getBlockState(pos.down()).isAir()) {
-			world.breakBlock(pos, true);
+		if (!world.isClient) {
+			if (world.getBlockState(pos).get(HALF).equals(DoubleBlockHalf.LOWER) && world.getBlockState(pos.up()).isAir()) {
+				world.breakBlock(pos, false);
+			} else if (world.getBlockState(pos).get(HALF).equals(DoubleBlockHalf.UPPER) && world.getBlockState(pos.down()).isAir()) {
+				world.breakBlock(pos, false);
+			}
 		}
 	}
 
 	public static VoxelShape boxSimple(double x1, double y1, double z1, double x2, double y2, double z2) {
 		Box box = new Box(x1, y1, z1, x2, y2, z2);
 		return VoxelShapes.cuboid(box.minX / 16.0d, box.minY / 16.0d, box.minZ / 16.0d, box.maxX / 16.0d, box.maxY / 16.0d, box.maxZ / 16.0d);
-	}
-
-	@Override
-	public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-		if (!world.isClient()) {
-			destroyOtherSide(state.get(HALF), world, pos);
-		}
-		super.onBreak(world, pos, state, player);
-	}
-
-	@Override
-	public void onDestroyedByExplosion(World world, BlockPos pos, Explosion explosion) {
-		if (!world.isClient()) {
-			destroyOtherSide(world.getBlockState(pos).get(HALF), world, pos);
-		}
-		super.onDestroyedByExplosion(world, pos, explosion);
-	}
-
-	private static void destroyOtherSide(DoubleBlockHalf doubleblockhalf, World world, BlockPos pos) {
-		boolean isUpper = doubleblockhalf.equals(DoubleBlockHalf.UPPER);
-		BlockPos blockpos = isUpper ? pos.down() : pos.up();
-		if (world.getBlockState(blockpos).contains(HALF)) {
-			if (world.getBlockState(blockpos).get(HALF).equals(isUpper ? DoubleBlockHalf.LOWER : DoubleBlockHalf.UPPER)) {
-				world.breakBlock(blockpos, false);
-			}
-		}
 	}
 
 	@Override

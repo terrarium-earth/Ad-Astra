@@ -190,11 +190,11 @@ public class ModUtils {
 		if (isOrbitWorld(world)) {
 			return 3.0f / VANILLA_GRAVITY;
 		}
-		return AdAstra.planets.stream().filter(p -> p.orbitWorld().equals(world.getRegistryKey())).map(Planet::gravity).findFirst().orElse(VANILLA_GRAVITY) / VANILLA_GRAVITY;
+		return AdAstra.planets.stream().filter(p -> p.world().equals(world.getRegistryKey())).map(Planet::gravity).findFirst().orElse(VANILLA_GRAVITY) / VANILLA_GRAVITY;
 	}
 
 	public static boolean planetHasAtmosphere(World world) {
-		return AdAstra.planets.stream().filter(p -> p.orbitWorld().equals(world.getRegistryKey())).map(Planet::hasAtmosphere).findFirst().orElse(false);
+		return AdAstra.planets.stream().filter(p -> p.world().equals(world.getRegistryKey())).map(Planet::hasAtmosphere).findFirst().orElse(false);
 	}
 
 	/**
@@ -206,7 +206,7 @@ public class ModUtils {
 		if (isOrbitWorld(world)) {
 			return ORBIT_TEMPERATURE;
 		}
-		return AdAstra.planets.stream().filter(p -> p.orbitWorld().equals(world.getRegistryKey())).map(Planet::temperature).findFirst().orElse(20.0f);
+		return AdAstra.planets.stream().filter(p -> p.world().equals(world.getRegistryKey())).map(Planet::temperature).findFirst().orElse(20.0f);
 	}
 
 	/**
@@ -274,37 +274,13 @@ public class ModUtils {
 		return StreamSupport.stream(entity.getArmorItems().spliterator(), false).allMatch(s -> s.isIn(ModTags.OXYGENATED_ARMOR));
 	}
 
-	public static long getSolarEnergy(RegistryKey<World> world) {
-		if (world.equals(World.OVERWORLD)) {
-			return 10;
-		} else if (world.equals(World.NETHER)) {
-			return 4;
-		} else if (world.equals(World.END)) {
-			return 15;
-		} else if (world.equals(EARTH_ORBIT_KEY)) {
-			return 13;
-		} else if (world.equals(MOON_KEY)) {
-			return 13;
-		} else if (world.equals(MOON_ORBIT_KEY)) {
-			return 14;
-		} else if (world.equals(MARS_KEY)) {
-			return 9;
-		} else if (world.equals(MARS_ORBIT_KEY)) {
-			return 11;
-		} else if (world.equals(VENUS_KEY)) {
-			return 6;
-		} else if (world.equals(VENUS_ORBIT_KEY)) {
-			return 15;
-		} else if (world.equals(MERCURY_KEY)) {
-			return 17;
-		} else if (world.equals(MERCURY_ORBIT_KEY)) {
-			return 18;
-		} else if (world.equals(GLACIO_KEY)) {
-			return 11;
-		} else if (world.equals(GLACIO_ORBIT_KEY)) {
-			return 14;
+	public static long getSolarEnergy(World world) {
+		if (isOrbitWorld(world)) {
+			return AdAstra.planets.stream().filter(p -> p.orbitWorld().equals(world.getRegistryKey())).map(Planet::orbitSolarPower).findFirst().orElse(15L);
+		} else if (isPlanet(world)) {
+			return AdAstra.planets.stream().filter(p -> p.world().equals(world.getRegistryKey())).map(Planet::solarPower).findFirst().orElse(15L);
 		} else {
-			return 10;
+			return 15L;
 		}
 	}
 }

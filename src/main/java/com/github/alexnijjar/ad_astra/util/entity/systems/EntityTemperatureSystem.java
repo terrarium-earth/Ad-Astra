@@ -7,6 +7,7 @@ import org.apache.commons.lang3.Range;
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.items.armour.NetheriteSpaceSuit;
 import com.github.alexnijjar.ad_astra.items.armour.SpaceSuit;
+import com.github.alexnijjar.ad_astra.registry.ModTags;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
 import com.github.alexnijjar.ad_astra.util.entity.OxygenUtils;
 
@@ -27,6 +28,10 @@ public class EntityTemperatureSystem {
         if (entity.isUndead()) {
             return;
         }
+        
+        if (ModUtils.checkTag(entity, ModTags.LIVES_WITHOUT_OXYGEN)) {
+            return;
+        }
 
         float temperature = ModUtils.getWorldTemperature(world);
 
@@ -35,7 +40,7 @@ public class EntityTemperatureSystem {
             temperature = 20.0f;
         }
 
-        Range<Integer> temperatureResistance = Range.between(-65, 70);
+        Range<Integer> temperatureResistance = Range.between(-60, 70);
         if (SpaceSuit.hasFullSet(entity)) {
             temperatureResistance = ((SpaceSuit) entity.getArmorItems().iterator().next().getItem()).getTemperatureThreshold();
         }
@@ -48,7 +53,7 @@ public class EntityTemperatureSystem {
     }
 
     private static void burnEntity(LivingEntity entity, ServerWorld world) {
-        entity.damage(DamageSource.ON_FIRE, 6);
+        entity.damage(DamageSource.ON_FIRE, 2);
         entity.setOnFireFor(10);
     }
 

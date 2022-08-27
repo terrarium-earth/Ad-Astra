@@ -41,7 +41,7 @@ public class AdAstra implements ModInitializer {
 	public static AdAstraConfig CONFIG;
 
 	public static Set<Planet> planets = new HashSet<>();
-	public static Set<RegistryKey<World>> adAstraDimensions = new HashSet<>();
+	public static Set<RegistryKey<World>> adAstraWorlds = new HashSet<>();
 	public static Set<RegistryKey<World>> orbitWorlds = new HashSet<>();
 	public static Set<RegistryKey<World>> planetWorlds = new HashSet<>();
 	public static Set<RegistryKey<World>> worldsWithOxygen = new HashSet<>();

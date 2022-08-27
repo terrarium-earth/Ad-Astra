@@ -23,9 +23,11 @@ public class PlanetParser {
 		boolean hasAtmosphere = jsonObject.has("has_atmosphere") ? jsonObject.get("has_atmosphere").getAsBoolean() : false;
 		int daysInYear = jsonObject.get("days_in_year").getAsInt();
 		float temperature = jsonObject.get("temperature").getAsFloat();
+		long solarPower = jsonObject.has("solar_power") ? jsonObject.get("solar_power").getAsLong() : 15;
+		long orbitSolarPower = jsonObject.has("orbit_solar_power") ? jsonObject.get("orbit_solar_power").getAsLong() : 15;
 		boolean hasOxygen = jsonObject.get("has_oxygen").getAsBoolean();
 		ButtonColour buttonColour = ButtonColour.stringToColour(jsonObject.get("button_color").getAsString());
 
-		return new Planet(translation, galaxy, solarSystem, dimension, orbitDimension, parentWorld, rocketTier, gravity, hasAtmosphere, daysInYear, temperature, hasOxygen, buttonColour);
+		return new Planet(translation, galaxy, solarSystem, dimension, orbitDimension, parentWorld, rocketTier, gravity, hasAtmosphere, daysInYear, temperature,solarPower, orbitSolarPower, hasOxygen, buttonColour);
 	}
 }

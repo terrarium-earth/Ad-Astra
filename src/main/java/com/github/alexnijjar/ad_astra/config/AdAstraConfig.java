@@ -59,7 +59,6 @@ public class AdAstraConfig implements ConfigData {
         @ConfigEntry.Gui.Tooltip(count = 2)
         public boolean doSpaceMuffler = true;
         public long oxygenTankSize = FluidConstants.BUCKET / 2;
-        @ConfigEntry.Gui.RequiresRestart
         public int hammerDurability = 64;
         public float orbitGravity = 3.26f;
         public boolean giveAstroduxAtSpawn = false;
