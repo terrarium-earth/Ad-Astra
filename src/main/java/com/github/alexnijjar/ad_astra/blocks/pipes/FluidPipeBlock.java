@@ -20,7 +20,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.World;
-import net.minecraft.world.chunk.WorldChunk;
 
 public class FluidPipeBlock extends AbstractPipeBlock {
 
@@ -62,12 +61,16 @@ public class FluidPipeBlock extends AbstractPipeBlock {
             boolean connect = world.getBlockState(offset).getBlock() instanceof FluidPipeBlock || FluidStorage.SIDED.find(world, offset, direction) != null;
 
             if (connect) {
-                world.setBlockState(pos, world.getBlockState(pos).with(DIRECTIONS.get(direction), PipeState.NORMAL), Block.NOTIFY_ALL);
+                if (world.getBlockState(pos).get(DIRECTIONS.get(direction)).equals(PipeState.NONE)) {
+                    world.setBlockState(pos, world.getBlockState(pos).with(DIRECTIONS.get(direction), PipeState.NORMAL), Block.NOTIFY_ALL);
+                }
                 if (world.getBlockState(offset).getBlock().equals(this)) {
                     world.setBlockState(offset, world.getBlockState(offset).with(DIRECTIONS.get(direction.getOpposite()), PipeState.NORMAL), Block.NOTIFY_ALL);
                 }
             } else {
-                world.setBlockState(pos, world.getBlockState(pos).with(DIRECTIONS.get(direction), PipeState.NONE), Block.NOTIFY_ALL);
+                if (world.getBlockState(pos).get(DIRECTIONS.get(direction)).equals(PipeState.NORMAL)) {
+                    world.setBlockState(pos, world.getBlockState(pos).with(DIRECTIONS.get(direction), PipeState.NONE), Block.NOTIFY_ALL);
+                }
             }
         }
     }
@@ -109,8 +112,7 @@ public class FluidPipeBlock extends AbstractPipeBlock {
             } else if (pitch < -60) {
                 property = DIRECTIONS.get(Direction.UP);
             }
-            WorldChunk chunk = world.getWorldChunk(pos);
-            chunk.setBlockState(pos, state.with(property, this.togglePipeState(state.get(property), user)), false);
+            world.setBlockState(pos, state.with(property, this.togglePipeState(state.get(property), user)), Block.NOTIFY_ALL, 0);
             world.playSound(null, pos, ModSoundEvents.WRENCH, SoundCategory.BLOCKS, 1, 1);
         }
     }

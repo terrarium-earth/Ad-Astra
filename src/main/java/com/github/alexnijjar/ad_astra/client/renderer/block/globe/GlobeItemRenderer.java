@@ -19,7 +19,7 @@ public class GlobeItemRenderer implements BuiltinItemRendererRegistry.DynamicIte
 
 		GlobeModel model = GlobeModel.getModel();
 
-		// Constant spin.
+		// Constant spin
 		MinecraftClient client = MinecraftClient.getInstance();
 		model.setYaw((client.world.getTime() + (client.isPaused() ? 0 : client.getTickDelta())) / -20);
 

@@ -109,8 +109,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 		}
 
 		// Set the initial gui time to the world time. This creates a random start position for each rotating object.
-		MinecraftClient client = MinecraftClient.getInstance();
-		guiTime = client.world.getTime();
+		guiTime = handler.getPlayer().world.getRandom().nextFloat(100000.0f);
 
 		// Get recipe.
 		ModRecipes.SPACE_STATION_RECIPE.getRecipes(handler.getPlayer().world).forEach(recipe -> {
@@ -141,7 +140,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 	public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
 
 		// For rotations
-		this.guiTime += delta;
+		this.guiTime += 0.6f;
 		this.renderBackground(matrices, mouseX, mouseY, delta);
 		super.render(matrices, mouseX, mouseY, delta);
 

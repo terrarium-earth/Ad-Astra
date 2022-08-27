@@ -19,7 +19,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.World;
-import net.minecraft.world.chunk.WorldChunk;
 import team.reborn.energy.api.EnergyStorage;
 
 public class CableBlock extends AbstractPipeBlock {
@@ -109,8 +108,7 @@ public class CableBlock extends AbstractPipeBlock {
             } else if (pitch < -60) {
                 property = DIRECTIONS.get(Direction.UP);
             }
-            WorldChunk chunk = world.getWorldChunk(pos);
-            chunk.setBlockState(pos, state.with(property, !state.get(property)), false);
+            world.setBlockState(pos, state.with(property, !state.get(property)), Block.NOTIFY_ALL, 0);
             world.playSound(null, pos, ModSoundEvents.WRENCH, SoundCategory.BLOCKS, 1, 1);
         }
     }

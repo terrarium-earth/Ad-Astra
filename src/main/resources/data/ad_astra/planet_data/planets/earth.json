@@ -10,6 +10,8 @@
     "has_atmosphere": true,
     "days_in_year": 365,
     "temperature": 15,
+    "solar_power": 13,
+    "orbit_solar_power": 15,
     "has_oxygen": true,
     "button_color": "green"
 }

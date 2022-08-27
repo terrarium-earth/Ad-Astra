@@ -1,6 +1,7 @@
 {
   "rocket_fly": {
     "category": "neutral",
+    "subtitle": "subtitles.ad_astra.rocket_fly",
     "sounds": [
       {
         "name": "ad_astra:rocket_fly",
@@ -10,6 +11,7 @@
   },
   "wrench": {
     "category": "ambient",
+    "subtitle": "subtitles.ad_astra.wrench",
     "sounds": [
       {
         "name": "ad_astra:wrench",
@@ -28,6 +30,7 @@
   },
   "alien_watcher": {
     "category": "ambient",
+    "subtitle": "subtitles.ad_astra.alien_watcher",
     "sounds": [
       {
         "name": "ad_astra:alien_watcher",
@@ -37,6 +40,7 @@
   },
   "drone_fly_by": {
     "category": "ambient",
+    "subtitle": "subtitles.ad_astra.drone_fly_by",
     "sounds": [
       {
         "name": "ad_astra:drone_fly_by",
@@ -46,6 +50,7 @@
   },
   "flying_saucer": {
     "category": "ambient",
+    "subtitle": "subtitles.ad_astra.flying_saucer",
     "sounds": [
       {
         "name": "ad_astra:flying_saucer",
@@ -55,6 +60,7 @@
   },
   "imminent_doom": {
     "category": "ambient",
+    "subtitle": "subtitles.ad_astra.imminent_doom",
     "sounds": [
       {
         "name": "ad_astra:imminent_doom",
@@ -64,6 +70,7 @@
   },
   "light_speed_travel": {
     "category": "ambient",
+    "subtitle": "subtitles.ad_astra.light_speed_travel",
     "sounds": [
       {
         "name": "ad_astra:light_speed_travel",
@@ -73,6 +80,7 @@
   },
   "passing_spaceship": {
     "category": "ambient",
+    "subtitle": "subtitles.ad_astra.passing_spaceship",
     "sounds": [
       {
         "name": "ad_astra:passing_spaceship",
@@ -82,6 +90,7 @@
   },
   "space_laser": {
     "category": "ambient",
+    "subtitle": "subtitles.ad_astra.space_laser",
     "sounds": [
       {
         "name": "ad_astra:space_laser",
@@ -91,6 +100,7 @@
   },
   "wormhole": {
     "category": "ambient",
+    "subtitle": "subtitles.ad_astra.wormhole",
     "sounds": [
       {
         "name": "ad_astra:wormhole",
@@ -100,6 +110,7 @@
   },
   "large_door_open": {
     "category": "block",
+    "subtitle": "subtitles.ad_astra.large_door_open",
     "sounds": [
       {
         "name": "ad_astra:large_door_open",
@@ -109,6 +120,7 @@
   },
   "large_door_close": {
     "category": "block",
+    "subtitle": "subtitles.ad_astra.large_door_close",
     "sounds": [
       {
         "name": "ad_astra:large_door_close",
@@ -118,6 +130,7 @@
   },
   "small_door_open": {
     "category": "block",
+    "subtitle": "subtitles.ad_astra.small_door_open",
     "sounds": [
       {
         "name": "ad_astra:small_door_open",

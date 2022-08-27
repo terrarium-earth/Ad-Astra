@@ -168,6 +168,8 @@ public class ModC2SPackets {
 			buf.writeBoolean(planet.hasAtmosphere());
 			buf.writeInt(planet.daysInYear());
 			buf.writeFloat(planet.temperature());
+			buf.writeLong(planet.solarPower());
+			buf.writeLong(planet.orbitSolarPower());
 			buf.writeBoolean(planet.hasOxygen());
 			buf.writeEnumConstant(planet.buttonColour());
 		});

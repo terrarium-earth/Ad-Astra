@@ -21,7 +21,7 @@
     "sources": "https://github.com/AlexNijjar/Ad-Astra-Fabric"
   },
 
-  "license": "LGPL-3",
+  "license": "MIT",
   "icon": "assets/ad_astra/icon.png",
 
   "environment": "*",

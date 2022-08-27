@@ -37,14 +37,15 @@ public class ScreenUtils {
 
 	public static void addRotatingTexture(PlanetSelectionScreen screen, MatrixStack matrices, int x, int y, int width, int height, Identifier texture, float speed) {
 
-		double scale = MinecraftClient.getInstance().getWindow().getScaleFactor();
-		x /= scale / 5.3;
-		y /= scale / 5.3;
+		double scale = MinecraftClient.getInstance().getWindow().getScaledHeight() / 400.0;
+		
+		x *= scale;
+		y *= scale;
 		x += 1;
 		y += 1;
 
-		width /= scale / 5.3;
-		height /= scale / 5.3;
+		width *= scale;
+		height *= scale;
 
 		matrices.push();
 
@@ -62,8 +63,9 @@ public class ScreenUtils {
 		BufferBuilder bufferBuilder = tessellator.getBuffer();
 		RenderSystem.setShader(GameRenderer::getPositionColorShader);
 
-		double scale = MinecraftClient.getInstance().getWindow().getScaleFactor();
-		radius /= scale / 5.3;
+
+		double scale = MinecraftClient.getInstance().getWindow().getScaledHeight() / 400.0;
+		radius *= scale;
 
 		double width = radius - 0.6;
 		for (double i = width; i < radius - 0.5 + 1; i += 0.1) {

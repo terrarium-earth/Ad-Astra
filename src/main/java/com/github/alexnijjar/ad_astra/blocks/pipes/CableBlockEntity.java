@@ -38,7 +38,7 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<En
 
     @Override
     public boolean canConnectTo(BlockEntity next, Direction direction, BlockPos pos) {
-        return next.getCachedState().getBlock() instanceof CableBlock && next.getCachedState().get(CableBlock.DIRECTIONS.get(direction.getOpposite()));
+        return true;
     }
 
     @Override

@@ -84,7 +84,7 @@ public class SlidingDoorBlock extends BlockWithEntity {
     @Override
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
         super.onBreak(world, pos, state, player);
-        breakDoor(world, world.getBlockState(pos), pos);
+        breakDoor(world, world.getBlockState(pos), pos, !player.isCreative());
     }
 
     @Override
@@ -93,14 +93,14 @@ public class SlidingDoorBlock extends BlockWithEntity {
             BlockPos offset = pos.offset(direction);
             BlockState state = world.getBlockState(offset);
             if (state.getBlock().equals(this)) {
-                breakDoor(world, state, offset);
+                breakDoor(world, state, offset, true);
                 break;
             }
         }
         super.onDestroyedByExplosion(world, pos, explosion);
     }
 
-    public void breakDoor(World world, BlockState state, BlockPos pos) {
+    public void breakDoor(World world, BlockState state, BlockPos pos, boolean drop) {
         if (!world.isClient && state.getBlock().equals(this)) {
             BlockPos mainPos = this.getMainPos(state, pos);
             BlockState main = world.getBlockState(this.getMainPos(state, pos));
@@ -108,7 +108,7 @@ public class SlidingDoorBlock extends BlockWithEntity {
                 Direction direction = state.get(FACING).rotateYCounterclockwise();
 
                 // Bottom
-                world.breakBlock(mainPos, true);
+                world.breakBlock(mainPos, drop);
                 // Bottom Left
                 world.breakBlock(mainPos.offset(direction), false);
                 // Bottom Right

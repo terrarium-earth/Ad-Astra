@@ -43,14 +43,16 @@ public class ModS2CPackets {
 				boolean hasAtmosphere = buf.readBoolean();
 				int daysInYear = buf.readInt();
 				float temperature = buf.readFloat();
+				long solarPower = buf.readLong();
+				long orbitSolarPower = buf.readLong();
 				boolean hasOxygen = buf.readBoolean();
 				ButtonColour buttonColour = buf.readEnumConstant(ButtonColour.class);
 
-				return new Planet(translation, galaxy, solarSystem, dimension, orbitDimension, parentWorld, rocketTier, gravity, hasAtmosphere, daysInYear, temperature, hasOxygen, buttonColour);
+				return new Planet(translation, galaxy, solarSystem, dimension, orbitDimension, parentWorld, rocketTier, gravity, hasAtmosphere, daysInYear, temperature, solarPower, orbitSolarPower, hasOxygen, buttonColour);
 			}));
 			AdAstra.planetWorlds = AdAstra.planets.stream().map(Planet::world).collect(Collectors.toSet());
 			AdAstra.orbitWorlds = AdAstra.planets.stream().map(Planet::orbitWorld).collect(Collectors.toSet());
-			AdAstra.adAstraDimensions = Stream.concat(AdAstra.planetWorlds.stream(), AdAstra.orbitWorlds.stream()).collect(Collectors.toSet());
+			AdAstra.adAstraWorlds = Stream.concat(AdAstra.planetWorlds.stream(), AdAstra.orbitWorlds.stream()).collect(Collectors.toSet());
 			AdAstra.worldsWithOxygen = AdAstra.planets.stream().filter(Planet::hasOxygen).map(Planet::world).collect(Collectors.toSet());
 		});
 

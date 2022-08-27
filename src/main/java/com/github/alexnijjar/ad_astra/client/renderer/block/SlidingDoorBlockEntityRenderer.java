@@ -56,8 +56,8 @@ public class SlidingDoorBlockEntityRenderer implements BlockEntityRenderer<Slidi
         if (entity.getCachedState().get(SlidingDoorBlock.LOCATION).equals(DoorState.BOTTOM)) {
             float slide = MathHelper.lerp(tickDelta, entity.getPreviousSlideTicks(), entity.getSlideTicks()) / 81.0f;
 
-            Identifier doorModel;
             Identifier doorModelFlipped;
+            Identifier doorModel;
             Block type = entity.getCachedState().getBlock();
 
             float offset = 0;
@@ -77,14 +77,15 @@ public class SlidingDoorBlockEntityRenderer implements BlockEntityRenderer<Slidi
                 doorModel = CALORITE_SLIDING_DOOR_MODEL;
                 doorModelFlipped = CALORITE_SLIDING_MODEL_FLIPPED;
             } else if (type.equals(ModBlocks.AIRLOCK)) {
-                doorModel = AIRLOCK_MODEL_FLIPPED;
-                doorModelFlipped = AIRLOCK_MODEL;
-                offset = 0.25f;
+                doorModel = AIRLOCK_MODEL;
+                doorModelFlipped = AIRLOCK_MODEL_FLIPPED;
+                slide -= 0.094f;
+                offset = 0.155f;
             } else if (type.equals(ModBlocks.REINFORCED_DOOR)) {
                 doorModel = REINFORCED_DOOR_MODEL_FLIPPED;
                 doorModelFlipped = REINFORCED_DOOR_MODEL;
-                slide += 0.0625f;
-                offset = 0.29f;
+                slide -= 0.094f;
+                offset = 0.095f;
             } else {
                 return;
             }
@@ -110,7 +111,7 @@ public class SlidingDoorBlockEntityRenderer implements BlockEntityRenderer<Slidi
                 matrices.translate(0.0f, 0.0f, offset);
             }
             matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(degrees.getOpposite().asRotation()));
-            renderDoor(entity, (degrees.equals(Direction.WEST) || degrees.equals(Direction.EAST)) ? doorModelFlipped : doorModel, tickDelta, matrices, vertexConsumers, light, overlay);
+            renderDoor(entity, (degrees.equals(Direction.WEST) || degrees.equals(Direction.EAST)) ? doorModel : doorModelFlipped, tickDelta, matrices, vertexConsumers, light, overlay);
             matrices.pop();
 
             matrices.push();
@@ -132,7 +133,7 @@ public class SlidingDoorBlockEntityRenderer implements BlockEntityRenderer<Slidi
                 matrices.translate(0.0f, 0.0f, offset);
             }
             matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(degrees.getOpposite().asRotation()));
-            renderDoor(entity, (degrees.equals(Direction.WEST) || degrees.equals(Direction.EAST)) ? doorModel : doorModelFlipped, tickDelta, matrices, vertexConsumers, light, overlay);
+            renderDoor(entity, (degrees.equals(Direction.WEST) || degrees.equals(Direction.EAST)) ? doorModelFlipped : doorModel, tickDelta, matrices, vertexConsumers, light, overlay);
             matrices.pop();
         }
     }
