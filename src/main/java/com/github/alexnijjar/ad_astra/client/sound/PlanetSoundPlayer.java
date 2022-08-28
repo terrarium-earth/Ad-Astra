@@ -29,11 +29,11 @@ public class PlanetSoundPlayer implements ClientPlayerTickable {
 
         --this.ticksUntilPlay;
         if (this.ticksUntilPlay <= 0) {
-            float randomVal = this.player.world.random.nextFloat();
+            double randomVal = this.player.world.random.nextDouble();
             // 1 in 100 per tick
-            if (randomVal < 0.00005f) {
+            if (randomVal < 0.000015) {
                 SoundEvent randomSpaceSound;
-                this.ticksUntilPlay = 2000;
+                this.ticksUntilPlay = 5000;
 
                 if (ModUtils.isOrbitWorld(this.player.world)) {
                     randomSpaceSound = ModSoundEvents.SPACE_SOUNDS[this.player.world.random.nextInt(ModSoundEvents.SPACE_SOUNDS.length)];

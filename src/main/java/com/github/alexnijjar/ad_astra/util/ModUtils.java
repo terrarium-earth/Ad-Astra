@@ -13,6 +13,7 @@ import com.github.alexnijjar.ad_astra.items.vehicles.VehicleItem;
 import com.github.alexnijjar.ad_astra.registry.ModCriteria;
 import com.github.alexnijjar.ad_astra.registry.ModEntityTypes;
 import com.github.alexnijjar.ad_astra.registry.ModTags;
+import com.github.alexnijjar.ad_astra.util.algorithms.LandFinder;
 
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
 import net.fabricmc.loader.api.FabricLoader;
@@ -31,6 +32,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.tag.TagKey;
 import net.minecraft.text.TranslatableText;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
@@ -68,13 +70,19 @@ public class ModUtils {
 	public static void teleportToWorld(RegistryKey<World> targetWorld, Entity entity) {
 		if (entity.getWorld() instanceof ServerWorld entityWorld) {
 			ServerWorld world = entityWorld.getServer().getWorld(targetWorld);
-			Vec3d targetPosition = new Vec3d(entity.getPos().getX(), AdAstra.CONFIG.rocket.atmosphereLeave, entity.getZ());
 			List<Entity> entitiesToTeleport = new LinkedList<>();
+			
+			BlockPos originPos = new BlockPos(entity.getPos().getX(), AdAstra.CONFIG.rocket.atmosphereLeave, entity.getPos().getZ());
+			BlockPos targetPos = originPos;
+
+			if (entity instanceof PlayerEntity player || entity instanceof LanderEntity) {
+				targetPos = LandFinder.findNearestLand(world, originPos, 50);
+			}
 
 			if (entity instanceof PlayerEntity player) {
 				if (player.getVehicle() instanceof RocketEntity rocket) {
 					player.sendMessage(new TranslatableText("message." + AdAstra.MOD_ID + ".hold_space"), false);
-					entity = createLander(rocket, world, targetPosition);
+					entity = createLander(rocket, world);
 					rocket.discard();
 					entitiesToTeleport.add(entity);
 					entitiesToTeleport.add(player);
@@ -92,8 +100,9 @@ public class ModUtils {
 			entitiesToTeleport.addAll(entity.getPassengerList());
 
 			List<Entity> teleportedEntities = new LinkedList<>();
+
 			for (Entity entityToTeleport : entitiesToTeleport) {
-				TeleportTarget target = new TeleportTarget(targetPosition, entityToTeleport.getVelocity(), entityToTeleport.getYaw(), entityToTeleport.getPitch());
+				TeleportTarget target = new TeleportTarget(new Vec3d(targetPos.getX(), targetPos.getY(), targetPos.getZ()), entityToTeleport.getVelocity(), entityToTeleport.getYaw(), entityToTeleport.getPitch());
 				teleportedEntities.add(FabricDimensions.teleport(entityToTeleport, world, target));
 			}
 
@@ -114,8 +123,9 @@ public class ModUtils {
 	 */
 	public static void teleportPlayer(RegistryKey<World> targetWorld, ServerPlayerEntity player) {
 		ServerWorld world = player.getServer().getWorld(targetWorld);
-		Vec3d targetPosition = new Vec3d(player.getX(), AdAstra.CONFIG.rocket.atmosphereLeave, player.getZ());
-		TeleportTarget target = new TeleportTarget(targetPosition, player.getVelocity(), player.getYaw(), player.getPitch());
+		BlockPos targetPosition = new BlockPos(player.getBlockPos().getX(), AdAstra.CONFIG.rocket.atmosphereLeave, player.getBlockPos().getZ());
+		targetPosition = LandFinder.findNearestLand(world, targetPosition, 50);
+		TeleportTarget target = new TeleportTarget(new Vec3d(targetPosition.getX(), targetPosition.getY(), targetPosition.getZ()), player.getVelocity(), player.getYaw(), player.getPitch());
 		player = FabricDimensions.teleport(player, world, target);
 	}
 
@@ -127,9 +137,8 @@ public class ModUtils {
 	 * @param targetPosition The position to spawn the lander at
 	 * @return A spawned lander entity at the same position as the rocket and with the same inventory
 	 */
-	public static LanderEntity createLander(RocketEntity rocket, ServerWorld targetWorld, Vec3d targetPosition) {
+	public static LanderEntity createLander(RocketEntity rocket, ServerWorld targetWorld) {
 		LanderEntity lander = new LanderEntity(ModEntityTypes.LANDER, targetWorld);
-		lander.setPosition(new Vec3d(rocket.getBlockPos().getX(), AdAstra.CONFIG.rocket.atmosphereLeave, rocket.getBlockPos().getZ()));
 		for (int i = 0; i < rocket.getInventorySize(); i++) {
 			lander.getInventory().setStack(i, rocket.getInventory().getStack(i));
 		}
