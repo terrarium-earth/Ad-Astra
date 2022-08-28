@@ -14,7 +14,7 @@ import com.github.alexnijjar.ad_astra.registry.ModRecipes;
 import com.github.alexnijjar.ad_astra.screen.handler.OxygenDistributorScreenHandler;
 import com.github.alexnijjar.ad_astra.util.FluidUtils;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
-import com.github.alexnijjar.ad_astra.util.entity.OxygenFillerAlgorithm;
+import com.github.alexnijjar.ad_astra.util.algorithms.OxygenFillerAlgorithm;
 import com.github.alexnijjar.ad_astra.util.entity.OxygenUtils;
 
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;

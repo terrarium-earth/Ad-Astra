@@ -1,4 +1,4 @@
-package com.github.alexnijjar.ad_astra.util.entity;
+package com.github.alexnijjar.ad_astra.util.algorithms;
 
 import net.minecraft.block.*;
 import net.minecraft.util.math.BlockPos;
