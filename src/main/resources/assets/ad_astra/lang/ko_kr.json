@@ -304,7 +304,7 @@
     "gauge_text.ad_astra.liquid_storage": "%s mB / %d mB",
     "gauge_text.ad_astra.max_generation": "Max. Energy Generation",
     "gauge_text.ad_astra.oxygen_blocks": "산소 블록:",
-    "gauge_text.ad_astra.oxygen_leak_warning[0]": "§4O산소 부족이 감지되었습니다! §f이것은 어딘가",
+    "gauge_text.ad_astra.oxygen_leak_warning[0]": "§4산소 부족이 감지되었습니다! §f이것은 어딘가",
     "gauge_text.ad_astra.oxygen_leak_warning[1]": "이 건물/구조물 안에 구멍이 있거나",
     "gauge_text.ad_astra.oxygen_leak_warning[2]": "이 분사기로 감당하기에 너무",
     "gauge_text.ad_astra.oxygen_leak_warning[3]": "클 수 있습니다. 건물이 확실하게",
