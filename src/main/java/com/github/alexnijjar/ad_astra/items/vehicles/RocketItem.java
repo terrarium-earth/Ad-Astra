@@ -110,7 +110,7 @@ public class RocketItem<T extends RocketEntity> extends VehicleItem {
 							rocketStack.decrement(1);
 							world.playSound(null, pos, SoundEvents.BLOCK_NETHERITE_BLOCK_PLACE, SoundCategory.BLOCKS, 1, 1);
 
-							rocketEntity.setPosition(pos.getX() + 0.5, pos.getY() + 0.26, pos.getZ() + 0.5);
+							rocketEntity.setPosition(pos.getX() + 0.5, pos.getY() + 0.23, pos.getZ() + 0.5);
 							rocketEntity.setYaw(Math.round((player.getYaw() + 180) / 90) * 90);
 							world.spawnEntity(rocketEntity);
 

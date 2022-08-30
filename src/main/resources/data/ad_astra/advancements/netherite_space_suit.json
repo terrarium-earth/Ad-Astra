@@ -4,10 +4,10 @@
             "item": "ad_astra:netherite_space_helmet"
         },
         "title": {
-            "translate": "advancements.netherite_space_suit.title"
+            "translate": "advancements.ad_astra.netherite_space_suit.title"
         },
         "description": {
-            "translate": "advancements.netherite_space_suit.description"
+            "translate": "advancements.ad_astra.netherite_space_suit.description"
         },
         "frame": "challenge",
         "show_toast": true,

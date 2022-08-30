@@ -25,12 +25,14 @@ public class EntityTemperatureSystem {
         if (!AdAstra.CONFIG.general.doOxygen) {
             return;
         }
-        if (entity.isUndead()) {
-            return;
-        }
-        
-        if (ModUtils.checkTag(entity, ModTags.LIVES_WITHOUT_OXYGEN)) {
-            return;
+        if (!entity.getType().equals(EntityType.SKELETON)) {
+            if (entity.isUndead()) {
+                return;
+            }
+
+            if (ModUtils.checkTag(entity, ModTags.LIVES_WITHOUT_OXYGEN)) {
+                return;
+            }
         }
 
         float temperature = ModUtils.getWorldTemperature(world);

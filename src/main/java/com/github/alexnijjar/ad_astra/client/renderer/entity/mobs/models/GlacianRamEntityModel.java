@@ -38,13 +38,13 @@ public class GlacianRamEntityModel<T extends GlacianRamEntity> extends Quadruped
         ModelPartData ear_right = head.addChild("ear_right", ModelPartBuilder.create().uv(21, 38).mirrored().cuboid(-7.8985f, -0.5f, -1.5f, 4.0f, 1.0f, 3.0f, new Dilation(0.0f)).mirrored(false),
                 ModelTransform.of(7.3249f, 2.0408f, 1.35f, 0.0f, 0.0f, 0.9599f));
 
-        ModelPartData left_front_leg = modelPartData.addChild("left_front_leg", ModelPartBuilder.create().uv(0, 54).cuboid(-1.0f, -6.0f, 0.0f, 3.0f, 7.0f, 3.0f, new Dilation(0.0f)), ModelTransform.pivot(2.0f, 24.0f, -1.0f));
+		ModelPartData left_front_leg = modelPartData.addChild("left_front_leg", ModelPartBuilder.create().uv(0, 54).cuboid(-1.5f, -1.5f, -0.5f, 3.0f, 7.0f, 3.0f, new Dilation(0.0f)), ModelTransform.pivot(2.5f, 19.5f, -0.5f));
 
-        ModelPartData right_front_leg = modelPartData.addChild("right_front_leg", ModelPartBuilder.create().uv(12, 30).cuboid(-6.0f, -6.0f, 0.0f, 3.0f, 7.0f, 3.0f, new Dilation(0.0f)), ModelTransform.pivot(2.0f, 24.0f, -1.0f));
+		ModelPartData right_front_leg = modelPartData.addChild("right_front_leg", ModelPartBuilder.create().uv(12, 30).cuboid(-1.5f, -1.5f, -1.5f, 3.0f, 7.0f, 3.0f, new Dilation(0.0f)), ModelTransform.pivot(-2.5f, 19.5f, 0.5f));
 
-        ModelPartData left_hind_leg = modelPartData.addChild("left_hind_leg", ModelPartBuilder.create().uv(0, 54).cuboid(1.0f, -6.0f, 0.0f, 3.0f, 7.0f, 3.0f, new Dilation(0.0f)), ModelTransform.pivot(0.5f, 24.0f, 8.0f));
+		ModelPartData left_hind_leg = modelPartData.addChild("left_hind_leg", ModelPartBuilder.create().uv(0, 54).cuboid(0.5f, -1.5f, -0.5f, 3.0f, 7.0f, 3.0f, new Dilation(0.0f)), ModelTransform.pivot(1.0f, 19.5f, 8.5f));
 
-        ModelPartData right_hind_leg = modelPartData.addChild("right_hind_leg", ModelPartBuilder.create().uv(12, 30).cuboid(-6.5f, -6.0f, 0.0f, 3.0f, 7.0f, 3.0f, new Dilation(0.0f)), ModelTransform.pivot(2.0f, 24.0f, 8.0f));
+		ModelPartData right_hind_leg = modelPartData.addChild("right_hind_leg", ModelPartBuilder.create().uv(12, 30).cuboid(-2.0f, -1.5f, -1.5f, 3.0f, 7.0f, 3.0f, new Dilation(0.0f)), ModelTransform.pivot(-2.5f, 19.5f, 9.5f));
 
         ModelPartData body = modelPartData.addChild("body",
                 ModelPartBuilder.create().uv(0, 40).cuboid(-1.5f, -2.4f, -7.6f, 3.0f, 2.0f, 3.0f, new Dilation(0.0f)).uv(0, 40).cuboid(5.5f, 1.6f, -0.6f, 0.0f, 2.0f, 6.0f, new Dilation(0.0f)).uv(0, 0)

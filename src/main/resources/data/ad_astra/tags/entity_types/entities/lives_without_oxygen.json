@@ -18,6 +18,7 @@
     "minecraft:stray",
     "minecraft:armor_stand",
     "minecraft:iron_golem",
-    "minecraft:snow_golem"
+    "minecraft:snow_golem",
+    "minecraft:magma_cube"
   ]
 }

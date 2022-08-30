@@ -99,9 +99,9 @@ public class CableBlock extends AbstractPipeBlock {
     }
 
     @Override
-    public void handleWrench(World world, BlockPos pos, BlockState state, Direction dir, PlayerEntity user) {
+    public void handleWrench(World world, BlockPos pos, BlockState state, Direction side, PlayerEntity user) {
         if (!world.isClient) {
-            BooleanProperty property = DIRECTIONS.get(user.getMovementDirection());
+            BooleanProperty property = DIRECTIONS.get(user.isSneaking() ? user.getMovementDirection() : side);
             int pitch = (int) user.getPitch();
             if (pitch > 60) {
                 property = DIRECTIONS.get(Direction.DOWN);

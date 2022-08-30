@@ -4,10 +4,10 @@
       "item": "ad_astra:mars_globe"
     },
     "title": {
-      "translate": "advancements.mars.title"
+      "translate": "advancements.ad_astra.mars.title"
     },
     "description": {
-      "translate": "advancements.mars.description"
+      "translate": "advancements.ad_astra.mars.description"
     },
     "frame": "goal",
     "show_toast": true,

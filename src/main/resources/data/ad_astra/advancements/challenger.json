@@ -4,10 +4,10 @@
             "item": "ad_astra:earth_globe"
         },
         "title": {
-            "translate": "advancements.challenger.title"
+            "translate": "advancements.ad_astra.challenger.title"
         },
         "description": {
-            "translate": "advancements.challenger.description"
+            "translate": "advancements.ad_astra.challenger.description"
         },
         "frame": "challenge",
         "show_toast": true,

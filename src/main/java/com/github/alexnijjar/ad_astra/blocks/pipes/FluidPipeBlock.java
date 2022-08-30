@@ -103,9 +103,9 @@ public class FluidPipeBlock extends AbstractPipeBlock {
     }
 
     @Override
-    public void handleWrench(World world, BlockPos pos, BlockState state, Direction dir, PlayerEntity user) {
+    public void handleWrench(World world, BlockPos pos, BlockState state, Direction side, PlayerEntity user) {
         if (!world.isClient) {
-            EnumProperty<PipeState> property = DIRECTIONS.get(user.getMovementDirection());
+            EnumProperty<PipeState> property = DIRECTIONS.get(user.isSneaking() ? user.getMovementDirection() : side);
             int pitch = (int) user.getPitch();
             if (pitch > 60) {
                 property = DIRECTIONS.get(Direction.DOWN);
@@ -118,38 +118,20 @@ public class FluidPipeBlock extends AbstractPipeBlock {
     }
 
     public PipeState togglePipeState(PipeState state, PlayerEntity user) {
-        if (!user.isSneaking()) {
-            if (state.equals(PipeState.NONE)) {
-                user.sendMessage(new TranslatableText("info.ad_astra.normal"), true);
-                return PipeState.NORMAL;
-            } else if (state.equals(PipeState.NORMAL)) {
-                user.sendMessage(new TranslatableText("info.ad_astra.insert"), true);
-                return PipeState.INSERT;
-            } else if (state.equals(PipeState.INSERT)) {
-                user.sendMessage(new TranslatableText("info.ad_astra.extract"), true);
-                return PipeState.EXTRACT;
-            } else if (state.equals(PipeState.EXTRACT)) {
-                user.sendMessage(new TranslatableText("info.ad_astra.none"), true);
-                return PipeState.NONE;
-            } else {
-                return PipeState.NONE;
-            }
+        if (state.equals(PipeState.NONE)) {
+            user.sendMessage(new TranslatableText("info.ad_astra.normal"), true);
+            return PipeState.NORMAL;
+        } else if (state.equals(PipeState.NORMAL)) {
+            user.sendMessage(new TranslatableText("info.ad_astra.insert"), true);
+            return PipeState.INSERT;
+        } else if (state.equals(PipeState.INSERT)) {
+            user.sendMessage(new TranslatableText("info.ad_astra.extract"), true);
+            return PipeState.EXTRACT;
+        } else if (state.equals(PipeState.EXTRACT)) {
+            user.sendMessage(new TranslatableText("info.ad_astra.none"), true);
+            return PipeState.NONE;
         } else {
-            if (state.equals(PipeState.NONE)) {
-                user.sendMessage(new TranslatableText("info.ad_astra.normal"), true);
-                return PipeState.EXTRACT;
-            } else if (state.equals(PipeState.NORMAL)) {
-                user.sendMessage(new TranslatableText("info.ad_astra.insert"), true);
-                return PipeState.NONE;
-            } else if (state.equals(PipeState.INSERT)) {
-                user.sendMessage(new TranslatableText("info.ad_astra.extract"), true);
-                return PipeState.NORMAL;
-            } else if (state.equals(PipeState.EXTRACT)) {
-                user.sendMessage(new TranslatableText("info.ad_astra.none"), true);
-                return PipeState.INSERT;
-            } else {
-                return PipeState.NONE;
-            }
+            return PipeState.NONE;
         }
     }
 }

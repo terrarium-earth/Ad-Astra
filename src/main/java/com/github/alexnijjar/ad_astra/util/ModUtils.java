@@ -1,7 +1,8 @@
 package com.github.alexnijjar.ad_astra.util;
 
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
-import java.util.List;
+import java.util.Set;
 import java.util.stream.StreamSupport;
 
 import com.github.alexnijjar.ad_astra.AdAstra;
@@ -21,7 +22,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleEffect;
@@ -29,10 +29,12 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.SmokingRecipe;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ChunkTicketType;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.tag.TagKey;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
@@ -68,24 +70,20 @@ public class ModUtils {
 	 * @see #teleportPlayer(RegistryKey, ServerPlayerEntity)
 	 */
 	public static void teleportToWorld(RegistryKey<World> targetWorld, Entity entity) {
-		if (entity.getWorld() instanceof ServerWorld entityWorld) {
-			ServerWorld world = entityWorld.getServer().getWorld(targetWorld);
-			List<Entity> entitiesToTeleport = new LinkedList<>();
-			
-			BlockPos originPos = new BlockPos(entity.getPos().getX(), AdAstra.CONFIG.rocket.atmosphereLeave, entity.getPos().getZ());
-			BlockPos targetPos = originPos;
+		if (entity.getWorld() instanceof ServerWorld oldWorld) {
+			ServerWorld world = oldWorld.getServer().getWorld(targetWorld);
+			Set<Entity> entitiesToTeleport = new LinkedHashSet<>();
 
-			if (entity instanceof PlayerEntity player || entity instanceof LanderEntity) {
-				targetPos = LandFinder.findNearestLand(world, originPos, 50);
-			}
+			Vec3d targetPos = new Vec3d(entity.getX(), AdAstra.CONFIG.rocket.atmosphereLeave, entity.getZ());
 
-			if (entity instanceof PlayerEntity player) {
+			if (entity instanceof ServerPlayerEntity player) {
 				if (player.getVehicle() instanceof RocketEntity rocket) {
 					player.sendMessage(new TranslatableText("message." + AdAstra.MOD_ID + ".hold_space"), false);
-					entity = createLander(rocket, world);
+					entity = createLander(rocket, world, targetPos);
 					rocket.discard();
 					entitiesToTeleport.add(entity);
 					entitiesToTeleport.add(player);
+
 				} else if (!(player.getVehicle() != null && player.getVehicle().getPassengerList().size() > 0)) {
 					entitiesToTeleport.add(entity);
 				}
@@ -99,18 +97,35 @@ public class ModUtils {
 
 			entitiesToTeleport.addAll(entity.getPassengerList());
 
-			List<Entity> teleportedEntities = new LinkedList<>();
-
 			for (Entity entityToTeleport : entitiesToTeleport) {
-				TeleportTarget target = new TeleportTarget(new Vec3d(targetPos.getX(), targetPos.getY(), targetPos.getZ()), entityToTeleport.getVelocity(), entityToTeleport.getYaw(), entityToTeleport.getPitch());
+				if (entityToTeleport instanceof ServerPlayerEntity) {
+					ChunkPos chunkPos = new ChunkPos(new BlockPos(targetPos.getX(), targetPos.getY(), targetPos.getZ()));
+					world.getChunkManager().addTicket(ChunkTicketType.POST_TELEPORT, chunkPos, 1, entityToTeleport.getId());
+					break;
+				}
+			}
+
+			LinkedList<Entity> teleportedEntities = new LinkedList<>();
+			for (Entity entityToTeleport : entitiesToTeleport) {
+
+				TeleportTarget target = new TeleportTarget(targetPos, entityToTeleport.getVelocity(), entityToTeleport.getYaw(), entityToTeleport.getPitch());
 				teleportedEntities.add(FabricDimensions.teleport(entityToTeleport, world, target));
 			}
 
-			if (!teleportedEntities.isEmpty()) {
-				entity = teleportedEntities.get(0);
-				for (int i = 1; i < teleportedEntities.size(); i++) {
-					teleportedEntities.get(i).startRiding(entity, true);
+			Entity first = teleportedEntities.poll();
+
+			// Move the lander to the closest land
+			if (first instanceof LanderEntity) {
+				Vec3d nearestLand = LandFinder.findNearestLand(first.getWorld(), new Vec3d(first.getX(), AdAstra.CONFIG.rocket.atmosphereLeave, first.getZ()), 70);
+				first.refreshPositionAndAngles(nearestLand.getX(), nearestLand.getY(), nearestLand.getZ(), first.getYaw(), first.getPitch());
+			}
+
+			for (Entity teleportedEntity : teleportedEntities) {
+				if (first instanceof LanderEntity) {
+					Vec3d nearestLand = LandFinder.findNearestLand(teleportedEntity.getWorld(), new Vec3d(teleportedEntity.getX(), AdAstra.CONFIG.rocket.atmosphereLeave, teleportedEntity.getZ()), 70);
+					teleportedEntity.refreshPositionAndAngles(nearestLand.getX(), nearestLand.getY(), nearestLand.getZ(), teleportedEntity.getYaw(), teleportedEntity.getPitch());
 				}
+				teleportedEntity.startRiding(first, true);
 			}
 		}
 	}
@@ -123,9 +138,10 @@ public class ModUtils {
 	 */
 	public static void teleportPlayer(RegistryKey<World> targetWorld, ServerPlayerEntity player) {
 		ServerWorld world = player.getServer().getWorld(targetWorld);
-		BlockPos targetPosition = new BlockPos(player.getBlockPos().getX(), AdAstra.CONFIG.rocket.atmosphereLeave, player.getBlockPos().getZ());
-		targetPosition = LandFinder.findNearestLand(world, targetPosition, 50);
-		TeleportTarget target = new TeleportTarget(new Vec3d(targetPosition.getX(), targetPosition.getY(), targetPosition.getZ()), player.getVelocity(), player.getYaw(), player.getPitch());
+		Vec3d targetPos = new Vec3d(player.getBlockPos().getX(), AdAstra.CONFIG.rocket.atmosphereLeave, player.getBlockPos().getZ());
+		ChunkPos chunkPos = new ChunkPos(new BlockPos(targetPos.getX(), targetPos.getY(), targetPos.getZ()));
+		world.getChunkManager().addTicket(ChunkTicketType.POST_TELEPORT, chunkPos, 1, player.getId());
+		TeleportTarget target = new TeleportTarget(targetPos, player.getVelocity(), player.getYaw(), player.getPitch());
 		player = FabricDimensions.teleport(player, world, target);
 	}
 
@@ -137,8 +153,10 @@ public class ModUtils {
 	 * @param targetPosition The position to spawn the lander at
 	 * @return A spawned lander entity at the same position as the rocket and with the same inventory
 	 */
-	public static LanderEntity createLander(RocketEntity rocket, ServerWorld targetWorld) {
+	public static LanderEntity createLander(RocketEntity rocket, ServerWorld targetWorld, Vec3d target) {
 		LanderEntity lander = new LanderEntity(ModEntityTypes.LANDER, targetWorld);
+		lander.setPosition(target);
+
 		for (int i = 0; i < rocket.getInventorySize(); i++) {
 			lander.getInventory().setStack(i, rocket.getInventory().getStack(i));
 		}
@@ -146,6 +164,7 @@ public class ModUtils {
 		((VehicleItem) stack.getItem()).setFluid(stack, rocket.getFluidVariant());
 		((VehicleItem) stack.getItem()).setAmount(stack, rocket.getFluidAmount());
 		lander.getInventory().setStack(10, stack);
+
 		targetWorld.spawnEntity(lander);
 		return lander;
 	}

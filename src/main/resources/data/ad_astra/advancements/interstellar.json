@@ -4,10 +4,10 @@
       "item": "ad_astra:glacio_globe"
     },
     "title": {
-      "translate": "advancements.interstellar.title"
+      "translate": "advancements.ad_astra.interstellar.title"
     },
     "description": {
-      "translate": "advancements.interstellar.description"
+      "translate": "advancements.ad_astra.interstellar.description"
     },
     "frame": "challenge",
     "show_toast": true,
