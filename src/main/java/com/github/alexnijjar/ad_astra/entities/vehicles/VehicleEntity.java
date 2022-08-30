@@ -155,12 +155,6 @@ public abstract class VehicleEntity extends Entity {
 
 		this.setVelocity(this.getVelocity().add(movement.getX(), 0.0, movement.getZ()).multiply(this.getSpeed()));
 
-		// Prevent the vehicle from going too fast
-		// double maxVelocity = 0.75;
-		// if (this.getVelocity().lengthSquared() > maxVelocity * maxVelocity) {
-		// this.setVelocity(this.getVelocity().normalize().multiply(maxVelocity));
-		// }
-
 		// Set the y velocity back to the original value, as it was modified by the movement
 		this.setVelocity(new Vec3d(this.getVelocity().getX(), yVelocity, this.getVelocity().getZ()));
 	}

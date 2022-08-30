@@ -516,7 +516,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 	@Override
 	public void onClose() {
 		MinecraftClient client = MinecraftClient.getInstance();
-		if (client.player.isCreative()) {
+		if (client.player.isCreative() || client.player.isSpectator()) {
 			super.onClose();
 		}
 	}

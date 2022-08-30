@@ -37,7 +37,7 @@ import net.minecraft.world.World;
 public class AdAstra implements ModInitializer {
 
 	public static final String MOD_ID = "ad_astra";
-	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+	public static final Logger LOGGER = LoggerFactory.getLogger("Ad Astra");
 	public static AdAstraConfig CONFIG;
 
 	public static Set<Planet> planets = new HashSet<>();

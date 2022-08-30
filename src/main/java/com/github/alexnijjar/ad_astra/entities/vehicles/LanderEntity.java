@@ -4,6 +4,7 @@ import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.screen.LanderScreenHandlerFactory;
 import com.github.alexnijjar.ad_astra.util.ModKeyBindings;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
+
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleTypes;
@@ -11,7 +12,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class LanderEntity extends VehicleEntity {
@@ -73,9 +73,8 @@ public class LanderEntity extends VehicleEntity {
 	public void tick() {
 		super.tick();
 
+		// Player is clicking 'space' to move upward.
 		if (this.getFirstPassenger() instanceof PlayerEntity player) {
-
-			// Player is clicking 'space' to move upward.
 			if (!this.isOnGround()) {
 				if (ModKeyBindings.jumpKeyDown(player)) {
 					this.applyBoosters();
@@ -92,9 +91,8 @@ public class LanderEntity extends VehicleEntity {
 		}
 
 		// Particles
-		if (this.world instanceof ServerWorld serverWorld) {
-			Vec3d pos = this.getPos();
-			ModUtils.spawnForcedParticles(serverWorld, ParticleTypes.SPIT, pos.getX(), pos.getY() - 0.3, pos.getZ(), 3, 0.1, 0.1, 0.1, 0.001);
+		if (!this.world.isClient) {
+			ModUtils.spawnForcedParticles((ServerWorld) this.getWorld(), ParticleTypes.SPIT, this.getX(), this.getY() - 0.3, this.getZ(), 3, 0.1, 0.1, 0.1, 0.001);
 		}
 	}
 }

@@ -7,7 +7,7 @@
             "translate": "advancements.astro_cuisine.title"
         },
         "description": {
-            "translate": "advancements.astro_cuisine.description"
+            "translate": "advancements.ad_astra.astro_cuisine.description"
         },
         "frame": "goal",
         "show_toast": true,
@@ -17,8 +17,7 @@
     "criteria": {
         "food_cooked_in_atmosphere": {
             "trigger": "ad_astra:food_cooked_in_atmosphere",
-            "conditions": {
-            }
+            "conditions": {}
         }
     },
     "rewards": {

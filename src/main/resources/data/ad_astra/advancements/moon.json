@@ -4,10 +4,10 @@
       "item": "ad_astra:moon_globe"
     },
     "title": {
-      "translate": "advancements.moon.title"
+      "translate": "advancements.ad_astra.moon.title"
     },
     "description": {
-      "translate": "advancements.moon.description"
+      "translate": "advancements.ad_astra.moon.description"
     },
     "frame": "goal",
     "show_toast": true,

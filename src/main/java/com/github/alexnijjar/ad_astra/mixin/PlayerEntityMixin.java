@@ -40,9 +40,9 @@ public abstract class PlayerEntityMixin {
 					if (ModKeyBindings.jumpKeyDown(player)) {
 						if (JetSuit.hasFullSet(player)) {
 							jetSuit.fly(player, chest);
-						} else {
-							jetSuit.isFallFlying = false;
 						}
+					} else {
+						jetSuit.isFallFlying = false;
 					}
 				}
 			}

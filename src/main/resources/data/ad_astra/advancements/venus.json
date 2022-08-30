@@ -4,10 +4,10 @@
       "item": "ad_astra:venus_globe"
     },
     "title": {
-      "translate": "advancements.venus.title"
+      "translate": "advancements.ad_astra.venus.title"
     },
     "description": {
-      "translate": "advancements.venus.description"
+      "translate": "advancements.ad_astra.venus.description"
     },
     "frame": "goal",
     "show_toast": true,

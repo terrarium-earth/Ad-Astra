@@ -47,7 +47,7 @@ public class PlanetWeatherSoundPlayer implements ClientPlayerTickable {
         private final ClientPlayerEntity player;
 
         public MusicLoop(ClientPlayerEntity player, SoundEvent soundEvent) {
-            super(soundEvent, SoundCategory.AMBIENT);
+            super(soundEvent, SoundCategory.WEATHER);
             this.player = player;
             this.repeat = true;
             this.repeatDelay = 0;
@@ -65,14 +65,14 @@ public class PlanetWeatherSoundPlayer implements ClientPlayerTickable {
             MinecraftClient client = MinecraftClient.getInstance();
 
             double height = 80.0;
-            double max = 0.2;
+            double max = 0.05;
             if (world.isRaining()) {
                 height -= 10.0;
                 max += 0.1;
             }
             if (world.isThundering()) {
                 height -= 50.0;
-                max += 0.6;
+                max += 0.2;
             }
             float volume = (float) MathHelper.clamp((this.player.getY() - 80) / height, 0.0f, max);
 

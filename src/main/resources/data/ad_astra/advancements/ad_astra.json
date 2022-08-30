@@ -5,10 +5,10 @@
       "item": "ad_astra:earth_globe"
     },
     "title": {
-      "translate": "advancements.ad_astra.title"
+      "translate": "advancements.ad_astra.ad_astra.title"
     },
     "description": {
-      "translate": "advancements.ad_astra.description"
+      "translate": "advancements.ad_astra.ad_astra.description"
     },
     "frame": "goal",
     "show_toast": true,

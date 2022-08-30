@@ -8,5 +8,5 @@ import net.minecraft.world.World;
 
 public interface Wrenchable {
 
-    void handleWrench(World world, BlockPos pos, BlockState state, Direction dir, PlayerEntity user);
+    void handleWrench(World world, BlockPos pos, BlockState state, Direction side, PlayerEntity user);
 }

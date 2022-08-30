@@ -4,10 +4,10 @@
       "item": "ad_astra:mercury_globe"
     },
     "title": {
-      "translate": "advancements.mercury.title"
+      "translate": "advancements.ad_astra.mercury.title"
     },
     "description": {
-      "translate": "advancements.mercury.description"
+      "translate": "advancements.ad_astra.mercury.description"
     },
     "frame": "goal",
     "show_toast": true,

@@ -4,10 +4,10 @@
             "item": "ad_astra:jet_suit_helmet"
         },
         "title": {
-            "translate": "advancements.jet_suit.title"
+            "translate": "advancements.ad_astra.jet_suit.title"
         },
         "description": {
-            "translate": "advancements.jet_suit.description"
+            "translate": "advancements.ad_astra.jet_suit.description"
         },
         "frame": "challenge",
         "show_toast": true,

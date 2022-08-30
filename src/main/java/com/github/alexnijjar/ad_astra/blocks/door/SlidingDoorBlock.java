@@ -187,20 +187,19 @@ public class SlidingDoorBlock extends BlockWithEntity {
 
     }
 
-
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         return this.getDefaultState().with(POWERED, ctx.getWorld().isReceivingRedstonePower(ctx.getBlockPos())).with(FACING, ctx.getPlayerFacing().getOpposite());
     }
-    
+
     @Override
-	public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
-		super.neighborUpdate(state, world, pos, block, fromPos, notify);
+    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
+        super.neighborUpdate(state, world, pos, block, fromPos, notify);
 
         if (!world.isClient) {
-			world.setBlockState(pos, state.with(POWERED, world.isReceivingRedstonePower(pos)));
-		}
-	}
+            world.setBlockState(pos, state.with(POWERED, world.isReceivingRedstonePower(pos)));
+        }
+    }
 
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
@@ -221,7 +220,10 @@ public class SlidingDoorBlock extends BlockWithEntity {
 
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new SlidingDoorBlockEntity(pos, state);
+        if (state.get(LOCATION).equals(DoorState.BOTTOM)) {
+            return new SlidingDoorBlockEntity(pos, state);
+        }
+        return null;
     }
 
     @Override
