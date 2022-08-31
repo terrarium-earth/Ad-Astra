@@ -1,17 +1,17 @@
 package com.github.alexnijjar.ad_astra.client.screens;
 
+import java.awt.Rectangle;
+
 import com.github.alexnijjar.ad_astra.blocks.machines.entity.CoalGeneratorBlockEntity;
 import com.github.alexnijjar.ad_astra.screen.handler.CoalGeneratorScreenHandler;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
-
-import java.awt.*;
 
 @Environment(EnvType.CLIENT)
 public class CoalGeneratorScreen extends AbstractMachineScreen<CoalGeneratorScreenHandler> {
@@ -53,7 +53,7 @@ public class CoalGeneratorScreen extends AbstractMachineScreen<CoalGeneratorScre
 
 		// Burn time tooltip.
 		if (GuiUtil.isHovering(this.getFireBounds(), mouseX, mouseY)) {
-			this.renderTooltip(matrices, new TranslatableText("gauge.ad_astra.burn_time", entity.getCookTime(), entity.getCookTimeTotal()), mouseX, mouseY);
+			this.renderTooltip(matrices, Text.translatable("gauge.ad_astra.burn_time", entity.getCookTime(), entity.getCookTimeTotal()), mouseX, mouseY);
 		}
 	}
 

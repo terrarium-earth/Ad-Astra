@@ -32,7 +32,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ChunkTicketType;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.tag.TagKey;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
@@ -78,7 +78,7 @@ public class ModUtils {
 
 			if (entity instanceof ServerPlayerEntity player) {
 				if (player.getVehicle() instanceof RocketEntity rocket) {
-					player.sendMessage(new TranslatableText("message." + AdAstra.MOD_ID + ".hold_space"), false);
+					player.sendMessage(Text.translatable("message." + AdAstra.MOD_ID + ".hold_space"), false);
 					entity = createLander(rocket, world, targetPos);
 					rocket.discard();
 					entitiesToTeleport.add(entity);

@@ -3,6 +3,7 @@ package com.github.alexnijjar.ad_astra.client.renderer.entity.mobs;
 import com.github.alexnijjar.ad_astra.client.renderer.entity.mobs.models.LunarianEntityModel;
 import com.github.alexnijjar.ad_astra.entities.mobs.LunarianWanderingTraderEntity;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.entity.EntityRendererFactory;
@@ -18,8 +19,8 @@ public class LunarianWanderingTraderEntityRenderer extends MobEntityRenderer<Lun
 
 	public LunarianWanderingTraderEntityRenderer(EntityRendererFactory.Context context) {
 		super(context, new LunarianEntityModel<>(context.getPart(LunarianEntityModel.LAYER_LOCATION)), 0.5f);
-		this.addFeature(new HeadFeatureRenderer<LunarianWanderingTraderEntity, LunarianEntityModel<LunarianWanderingTraderEntity>>(this, context.getModelLoader()));
-		this.addFeature(new VillagerHeldItemFeatureRenderer<LunarianWanderingTraderEntity, LunarianEntityModel<LunarianWanderingTraderEntity>>(this));
+		this.addFeature(new HeadFeatureRenderer<>(this, context.getModelLoader(), context.getHeldItemRenderer()));
+		this.addFeature(new VillagerHeldItemFeatureRenderer<>(this, context.getHeldItemRenderer()));
 	}
 
 	@Override

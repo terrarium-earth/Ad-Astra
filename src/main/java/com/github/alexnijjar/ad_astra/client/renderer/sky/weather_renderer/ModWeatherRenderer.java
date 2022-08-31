@@ -1,14 +1,22 @@
 package com.github.alexnijjar.ad_astra.client.renderer.sky.weather_renderer;
 
+import java.util.Random;
+
 import com.github.alexnijjar.ad_astra.mixin.client.WorldRendererAccessor;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.Tessellator;
+import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.blaze3d.vertex.VertexFormats;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.*;
+import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -16,8 +24,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-
-import java.util.Random;
 
 @Environment(EnvType.CLIENT)
 public class ModWeatherRenderer implements DimensionRenderingRegistry.WeatherRenderer {
@@ -51,7 +57,7 @@ public class ModWeatherRenderer implements DimensionRenderingRegistry.WeatherRen
 			int j = MathHelper.floor(cameraPosY);
 			int k = MathHelper.floor(cameraPosZ);
 			Tessellator tessellator = Tessellator.getInstance();
-			BufferBuilder bufferBuilder = tessellator.getBuffer();
+			BufferBuilder bufferBuilder = tessellator.getBufferBuilder();
 			RenderSystem.disableCull();
 			RenderSystem.enableBlend();
 			RenderSystem.defaultBlendFunc();
@@ -70,8 +76,8 @@ public class ModWeatherRenderer implements DimensionRenderingRegistry.WeatherRen
 			for (int o = k - l; o <= k + l; ++o) {
 				for (int p = i - l; p <= i + l; ++p) {
 					int q = (o - k + 16) * 32 + p - i + 16;
-					double r = (double) renderer.getField_20794()[q] * 0.5;
-					double s = (double) renderer.getField_20795()[q] * 0.5;
+					double r = (double) renderer.getRainSizeX()[q] * 0.5;
+					double s = (double) renderer.getRainSizeZ()[q] * 0.5;
 					mutable.set(p, cameraPosY, o);
 					Biome biome = world.getBiome(mutable).value();
 					if (biome.getPrecipitation() != Biome.Precipitation.NONE) {
@@ -109,10 +115,10 @@ public class ModWeatherRenderer implements DimensionRenderingRegistry.WeatherRen
 								ac = ((1.0f - ab * ab) * 0.5f + 0.5f) * h;
 								mutable.set(p, w, o);
 								int ad = WorldRenderer.getLightmapCoordinates(world, mutable);
-								bufferBuilder.vertex((double) p - cameraPosX - r + 0.5, (double) v - cameraPosY, (double) o - cameraPosZ - s + 0.5).texture(0.0f, (float) u * 0.25f + y).color(1.0f, 1.0f, 1.0f, ac).light(ad).next();
-								bufferBuilder.vertex((double) p - cameraPosX + r + 0.5, (double) v - cameraPosY, (double) o - cameraPosZ + s + 0.5).texture(1.0f, (float) u * 0.25f + y).color(1.0f, 1.0f, 1.0f, ac).light(ad).next();
-								bufferBuilder.vertex((double) p - cameraPosX + r + 0.5, (double) u - cameraPosY, (double) o - cameraPosZ + s + 0.5).texture(1.0f, (float) v * 0.25f + y).color(1.0f, 1.0f, 1.0f, ac).light(ad).next();
-								bufferBuilder.vertex((double) p - cameraPosX - r + 0.5, (double) u - cameraPosY, (double) o - cameraPosZ - s + 0.5).texture(0.0f, (float) v * 0.25f + y).color(1.0f, 1.0f, 1.0f, ac).light(ad).next();
+								bufferBuilder.vertex((double) p - cameraPosX - r + 0.5, (double) v - cameraPosY, (double) o - cameraPosZ - s + 0.5).uv(0.0f, (float) u * 0.25f + y).color(1.0f, 1.0f, 1.0f, ac).light(ad).next();
+								bufferBuilder.vertex((double) p - cameraPosX + r + 0.5, (double) v - cameraPosY, (double) o - cameraPosZ + s + 0.5).uv(1.0f, (float) u * 0.25f + y).color(1.0f, 1.0f, 1.0f, ac).light(ad).next();
+								bufferBuilder.vertex((double) p - cameraPosX + r + 0.5, (double) u - cameraPosY, (double) o - cameraPosZ + s + 0.5).uv(1.0f, (float) v * 0.25f + y).color(1.0f, 1.0f, 1.0f, ac).light(ad).next();
+								bufferBuilder.vertex((double) p - cameraPosX - r + 0.5, (double) u - cameraPosY, (double) o - cameraPosZ - s + 0.5).uv(0.0f, (float) v * 0.25f + y).color(1.0f, 1.0f, 1.0f, ac).light(ad).next();
 							}
 						}
 					}

@@ -50,7 +50,6 @@ import net.minecraft.item.TallBlockItem;
 import net.minecraft.item.WallStandingBlockItem;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
@@ -117,12 +116,12 @@ public interface ModItems extends ModItemGroups {
 	public static final BlockItem COAL_GENERATOR = register("coal_generator", new MachineBlockItem(ModBlocks.COAL_GENERATOR, new FabricItemSettings().group(ITEM_GROUP_MACHINES)) {
 		@Override
 		public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-			tooltip.add((new TranslatableText("item.ad_astra.generator_energy.tooltip", AdAstra.CONFIG.coalGenerator.energyPerTick).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
+			tooltip.add((Text.translatable("item.ad_astra.generator_energy.tooltip", AdAstra.CONFIG.coalGenerator.energyPerTick).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
 			if (world != null && world.isClient) {
 				if (Screen.hasShiftDown()) {
-					tooltip.add((new TranslatableText("item.ad_astra.coal_generator.tooltip").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+					tooltip.add((Text.translatable("item.ad_astra.coal_generator.tooltip").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
 				} else {
-					tooltip.add((new TranslatableText("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
+					tooltip.add((Text.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
 				}
 			}
 		}
@@ -132,9 +131,9 @@ public interface ModItems extends ModItemGroups {
 		public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
 			if (world != null && world.isClient) {
 				if (Screen.hasShiftDown()) {
-					tooltip.add((new TranslatableText("item.ad_astra.compressor.tooltip").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+					tooltip.add((Text.translatable("item.ad_astra.compressor.tooltip").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
 				} else {
-					tooltip.add((new TranslatableText("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
+					tooltip.add((Text.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
 				}
 			}
 		}
@@ -144,9 +143,9 @@ public interface ModItems extends ModItemGroups {
 		public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
 			if (world != null && world.isClient) {
 				if (Screen.hasShiftDown()) {
-					tooltip.add((new TranslatableText("item.ad_astra.nasa_workbench.tooltip").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+					tooltip.add((Text.translatable("item.ad_astra.nasa_workbench.tooltip").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
 				} else {
-					tooltip.add((new TranslatableText("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
+					tooltip.add((Text.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
 				}
 			}
 		}
@@ -156,9 +155,9 @@ public interface ModItems extends ModItemGroups {
 		public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
 			if (world != null && world.isClient) {
 				if (Screen.hasShiftDown()) {
-					tooltip.add((new TranslatableText("item.ad_astra.fuel_refinery.tooltip").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+					tooltip.add((Text.translatable("item.ad_astra.fuel_refinery.tooltip").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
 				} else {
-					tooltip.add((new TranslatableText("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
+					tooltip.add((Text.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
 				}
 			}
 		}
@@ -168,10 +167,10 @@ public interface ModItems extends ModItemGroups {
 		public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
 			if (world != null && world.isClient) {
 				if (Screen.hasShiftDown()) {
-					tooltip.add((new TranslatableText("item.ad_astra.oxygen_loader.tooltip[0]").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
-					tooltip.add((new TranslatableText("item.ad_astra.oxygen_loader.tooltip[1]").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+					tooltip.add((Text.translatable("item.ad_astra.oxygen_loader.tooltip[0]").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+					tooltip.add((Text.translatable("item.ad_astra.oxygen_loader.tooltip[1]").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
 				} else {
-					tooltip.add((new TranslatableText("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
+					tooltip.add((Text.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
 				}
 			}
 		}
@@ -179,13 +178,13 @@ public interface ModItems extends ModItemGroups {
 	public static final BlockItem SOLAR_PANEL = register("solar_panel", new SolarPanelBlockItem(ModBlocks.SOLAR_PANEL, new FabricItemSettings().group(ITEM_GROUP_MACHINES)) {
 		@Override
 		public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-			tooltip.add((new TranslatableText("item.ad_astra.generator_energy.tooltip", SolarPanelBlockEntity.getEnergyForDimension(world)).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
+			tooltip.add((Text.translatable("item.ad_astra.generator_energy.tooltip", SolarPanelBlockEntity.getEnergyForDimension(world)).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
 			if (world != null && world.isClient) {
 				if (Screen.hasShiftDown()) {
-					tooltip.add((new TranslatableText("item.ad_astra.solar_panel.tooltip[0]").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
-					tooltip.add((new TranslatableText("item.ad_astra.solar_panel.tooltip[1]").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+					tooltip.add((Text.translatable("item.ad_astra.solar_panel.tooltip[0]").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+					tooltip.add((Text.translatable("item.ad_astra.solar_panel.tooltip[1]").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
 				} else {
-					tooltip.add((new TranslatableText("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
+					tooltip.add((Text.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
 				}
 			}
 		}
@@ -195,10 +194,10 @@ public interface ModItems extends ModItemGroups {
 		public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
 			if (world != null && world.isClient) {
 				if (Screen.hasShiftDown()) {
-					tooltip.add((new TranslatableText("item.ad_astra.oxygen_distributor.tooltip[0]").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
-					tooltip.add((new TranslatableText("item.ad_astra.oxygen_distributor.tooltip[1]").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+					tooltip.add((Text.translatable("item.ad_astra.oxygen_distributor.tooltip[0]").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+					tooltip.add((Text.translatable("item.ad_astra.oxygen_distributor.tooltip[1]").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
 				} else {
-					tooltip.add((new TranslatableText("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
+					tooltip.add((Text.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
 				}
 			}
 		}
@@ -206,13 +205,13 @@ public interface ModItems extends ModItemGroups {
 	public static final BlockItem WATER_PUMP = register("water_pump", new MachineBlockItem(ModBlocks.WATER_PUMP, new FabricItemSettings().group(ITEM_GROUP_MACHINES)) {
 		@Override
 		public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-			tooltip.add((new TranslatableText("item.ad_astra.fluid_transfer_rate.tooltip", FluidUtils.dropletsToMillibuckets(AdAstra.CONFIG.waterPump.transferPerTick)).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
+			tooltip.add((Text.translatable("item.ad_astra.fluid_transfer_rate.tooltip", FluidUtils.dropletsToMillibuckets(AdAstra.CONFIG.waterPump.transferPerTick)).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
 			if (world != null && world.isClient) {
 				if (Screen.hasShiftDown()) {
-					tooltip.add((new TranslatableText("item.ad_astra.water_pump.tooltip[0]", FluidUtils.dropletsToMillibuckets(AdAstra.CONFIG.waterPump.transferPerTick)).setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
-					tooltip.add((new TranslatableText("item.ad_astra.water_pump.tooltip[1]", FluidUtils.dropletsToMillibuckets(AdAstra.CONFIG.waterPump.transferPerTick)).setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+					tooltip.add((Text.translatable("item.ad_astra.water_pump.tooltip[0]", FluidUtils.dropletsToMillibuckets(AdAstra.CONFIG.waterPump.transferPerTick)).setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+					tooltip.add((Text.translatable("item.ad_astra.water_pump.tooltip[1]", FluidUtils.dropletsToMillibuckets(AdAstra.CONFIG.waterPump.transferPerTick)).setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
 				} else {
-					tooltip.add((new TranslatableText("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
+					tooltip.add((Text.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
 				}
 			}
 		}
@@ -223,10 +222,10 @@ public interface ModItems extends ModItemGroups {
 			super.appendTooltip(stack, world, tooltip, context);
 			if (world != null && world.isClient) {
 				if (Screen.hasShiftDown()) {
-					tooltip.add((new TranslatableText("item.ad_astra.energizer.tooltip[0]").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
-					tooltip.add((new TranslatableText("item.ad_astra.energizer.tooltip[1]").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+					tooltip.add((Text.translatable("item.ad_astra.energizer.tooltip[0]").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+					tooltip.add((Text.translatable("item.ad_astra.energizer.tooltip[1]").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
 				} else {
-					tooltip.add((new TranslatableText("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
+					tooltip.add((Text.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
 				}
 			}
 		}
@@ -236,9 +235,9 @@ public interface ModItems extends ModItemGroups {
 		public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
 			if (world != null && world.isClient) {
 				if (Screen.hasShiftDown()) {
-					tooltip.add((new TranslatableText("item.ad_astra.cryo_freezer.tooltip").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+					tooltip.add((Text.translatable("item.ad_astra.cryo_freezer.tooltip").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
 				} else {
-					tooltip.add((new TranslatableText("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
+					tooltip.add((Text.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
 				}
 			}
 		}
@@ -248,10 +247,10 @@ public interface ModItems extends ModItemGroups {
 		public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
 			if (world != null && world.isClient) {
 				if (Screen.hasShiftDown()) {
-					tooltip.add((new TranslatableText("item.ad_astra.oxygen_sensor.tooltip[0]").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
-					tooltip.add((new TranslatableText("item.ad_astra.oxygen_sensor.tooltip[1]").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+					tooltip.add((Text.translatable("item.ad_astra.oxygen_sensor.tooltip[0]").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+					tooltip.add((Text.translatable("item.ad_astra.oxygen_sensor.tooltip[1]").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
 				} else {
-					tooltip.add((new TranslatableText("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
+					tooltip.add((Text.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
 				}
 			}
 		}
@@ -337,7 +336,7 @@ public interface ModItems extends ModItemGroups {
 
 	public static final BlockItem STEEL_DOOR = registerBlockItem(ModBlocks.STEEL_DOOR);
 	public static final BlockItem STEEL_TRAPDOOR = registerBlockItem(ModBlocks.STEEL_TRAPDOOR);
-	
+
 	public static final BlockItem IRON_SLIDING_DOOR = registerBlockItem(ModBlocks.IRON_SLIDING_DOOR);
 	public static final BlockItem STEEL_SLIDING_DOOR = registerBlockItem(ModBlocks.STEEL_SLIDING_DOOR);
 	public static final BlockItem DESH_SLIDING_DOOR = registerBlockItem(ModBlocks.DESH_SLIDING_DOOR);
@@ -553,7 +552,6 @@ public interface ModItems extends ModItemGroups {
 	public static final BlockItem GLACIO_COPPER_ORE = registerBlockItem(ModBlocks.GLACIO_COPPER_ORE);
 	public static final BlockItem GLACIO_IRON_ORE = registerBlockItem(ModBlocks.GLACIO_IRON_ORE);
 	public static final BlockItem GLACIO_LAPIS_ORE = registerBlockItem(ModBlocks.GLACIO_LAPIS_ORE);
-
 
 	// Spawn eggs
 	public static final Item LUNARIAN_SPAWN_EGG = register("lunarian_spawn_egg", new SpawnEggItem(ModEntityTypes.LUNARIAN, -13382401, -11650781, new FabricItemSettings().group(ITEM_GROUP_SPAWN_EGGS)));

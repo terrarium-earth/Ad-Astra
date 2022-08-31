@@ -1,11 +1,16 @@
 package com.github.alexnijjar.ad_astra.client.resourcepack;
 
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.client.AdAstraClient;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
@@ -15,10 +20,6 @@ import net.minecraft.resource.ResourceManager;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
-
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 
 @Environment(EnvType.CLIENT)
 public class PlanetResources {
@@ -43,10 +44,10 @@ public class PlanetResources {
 				List<Galaxy> galaxies = new ArrayList<>();
 
 				// Sky Renderers
-				for (Identifier id : manager.findResources("planet_resources/sky_renderers", path -> path.endsWith(".json"))) {
+				for (Identifier id : manager.findResources("planet_resources/sky_renderers", path -> path.getPath().endsWith(".json")).keySet()) {
 					try {
 						for (Resource resource : manager.getAllResources(id)) {
-							InputStreamReader reader = new InputStreamReader(resource.getInputStream());
+							InputStreamReader reader = new InputStreamReader(resource.open());
 							JsonObject jsonObject = JsonHelper.deserialize(GSON, reader, JsonObject.class);
 
 							if (jsonObject != null) {
@@ -60,10 +61,10 @@ public class PlanetResources {
 				}
 
 				// Solar Systems
-				for (Identifier id : manager.findResources("planet_resources/solar_systems", path -> path.endsWith(".json"))) {
+				for (Identifier id : manager.findResources("planet_resources/solar_systems", path -> path.getPath().endsWith(".json")).keySet()) {
 					try {
 						for (Resource resource : manager.getAllResources(id)) {
-							InputStreamReader reader = new InputStreamReader(resource.getInputStream());
+							InputStreamReader reader = new InputStreamReader(resource.open());
 							JsonObject jsonObject = JsonHelper.deserialize(GSON, reader, JsonObject.class);
 
 							if (jsonObject != null) {
@@ -76,10 +77,10 @@ public class PlanetResources {
 					}
 				}
 
-				for (Identifier id : manager.findResources("planet_resources/planet_rings", path -> path.endsWith(".json"))) {
+				for (Identifier id : manager.findResources("planet_resources/planet_rings", path -> path.getPath().endsWith(".json")).keySet()) {
 					try {
 						for (Resource resource : manager.getAllResources(id)) {
-							InputStreamReader reader = new InputStreamReader(resource.getInputStream());
+							InputStreamReader reader = new InputStreamReader(resource.open());
 							JsonObject jsonObject = JsonHelper.deserialize(GSON, reader, JsonObject.class);
 
 							if (jsonObject != null) {
@@ -92,10 +93,10 @@ public class PlanetResources {
 					}
 				}
 
-				for (Identifier id : manager.findResources("planet_resources/galaxy", path -> path.endsWith(".json"))) {
+				for (Identifier id : manager.findResources("planet_resources/galaxy", path -> path.getPath().endsWith(".json")).keySet()) {
 					try {
 						for (Resource resource : manager.getAllResources(id)) {
-							InputStreamReader reader = new InputStreamReader(resource.getInputStream());
+							InputStreamReader reader = new InputStreamReader(resource.open());
 							JsonObject jsonObject = JsonHelper.deserialize(GSON, reader, JsonObject.class);
 
 							if (jsonObject != null) {

@@ -11,6 +11,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.sound.MovingSoundInstance;
+import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.client.sound.SoundManager;
 import net.minecraft.client.util.ClientPlayerTickable;
 import net.minecraft.client.world.ClientWorld;
@@ -47,7 +48,7 @@ public class PlanetWeatherSoundPlayer implements ClientPlayerTickable {
         private final ClientPlayerEntity player;
 
         public MusicLoop(ClientPlayerEntity player, SoundEvent soundEvent) {
-            super(soundEvent, SoundCategory.WEATHER);
+            super(soundEvent, SoundCategory.WEATHER, SoundInstance.method_43221());
             this.player = player;
             this.repeat = true;
             this.repeatDelay = 0;

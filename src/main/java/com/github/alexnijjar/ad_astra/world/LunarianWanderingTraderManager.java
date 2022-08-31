@@ -1,25 +1,31 @@
 package com.github.alexnijjar.ad_astra.world;
 
+import java.util.Optional;
+import java.util.Random;
+
+import org.jetbrains.annotations.Nullable;
+
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.registry.ModEntityTypes;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
+
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.entity.passive.WanderingTraderEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.tag.BiomeTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.BiomeKeys;
+import net.minecraft.world.BlockView;
+import net.minecraft.world.GameRules;
+import net.minecraft.world.Heightmap;
+import net.minecraft.world.SpawnHelper;
+import net.minecraft.world.WorldView;
 import net.minecraft.world.gen.Spawner;
 import net.minecraft.world.level.ServerWorldProperties;
 import net.minecraft.world.poi.PointOfInterestStorage;
-import net.minecraft.world.poi.PointOfInterestType;
-
-import javax.annotation.Nullable;
-import java.util.Optional;
-import java.util.Random;
+import net.minecraft.world.poi.PointOfInterestTypes;
 
 public class LunarianWanderingTraderManager implements Spawner {
 
@@ -93,17 +99,20 @@ public class LunarianWanderingTraderManager implements Spawner {
 		if (!ModUtils.isPlanet(world)) {
 			return false;
 		}
+
 		BlockPos blockPos = playerEntity.getBlockPos();
 		PointOfInterestStorage pointOfInterestStorage = world.getPointOfInterestStorage();
-		Optional<BlockPos> optional = pointOfInterestStorage.getPosition(PointOfInterestType.MEETING.getCompletionCondition(), pos -> true, blockPos, 48, PointOfInterestStorage.OccupationStatus.ANY);
-		BlockPos blockPos2 = optional.orElse(blockPos);
+		Optional<BlockPos> optional = pointOfInterestStorage.getPosition(holder -> holder.isRegistryKey(PointOfInterestTypes.MEETING), pos -> true, blockPos, 48, PointOfInterestStorage.OccupationStatus.ANY);
+		BlockPos blockPos2 = (BlockPos) optional.orElse(blockPos);
 		BlockPos blockPos3 = this.getNearbySpawnPos(world, blockPos2, 48);
 		if (blockPos3 != null && this.doesNotSuffocateAt(world, blockPos3)) {
-			if (world.getBiome(blockPos3).isRegistryKey(BiomeKeys.THE_VOID)) {
+			if (world.getBiome(blockPos3).hasTag(BiomeTags.WITHOUT_WANDERING_TRADER_SPAWNS)) {
 				return false;
 			}
+
 			WanderingTraderEntity wanderingTraderEntity = ModEntityTypes.LUNARIAN_WANDERING_TRADER.spawn(world, null, null, null, blockPos3, SpawnReason.EVENT, false, false);
 			if (wanderingTraderEntity != null) {
+
 				this.properties.setWanderingTraderId(wanderingTraderEntity.getUuid());
 				wanderingTraderEntity.setDespawnDelay(48000);
 				wanderingTraderEntity.setWanderTarget(blockPos2);

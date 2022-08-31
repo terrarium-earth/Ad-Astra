@@ -41,7 +41,7 @@ public abstract class OxygenFluid extends ModFluid {
 		}
 
 		@Override
-		public boolean isStill(FluidState fluidState) {
+		public boolean isSource(FluidState fluidState) {
 			return true;
 		}
 	}

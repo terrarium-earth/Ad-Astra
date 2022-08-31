@@ -1,9 +1,17 @@
 package com.github.alexnijjar.ad_astra.client.screens;
 
+import java.awt.Rectangle;
+
 import com.github.alexnijjar.ad_astra.blocks.machines.entity.AbstractMachineBlockEntity;
 import com.github.alexnijjar.ad_astra.util.FluidUtils;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.BufferRenderer;
+import com.mojang.blaze3d.vertex.Tessellator;
+import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.blaze3d.vertex.VertexFormats;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.transfer.v1.client.fluid.FluidVariantRendering;
@@ -12,7 +20,7 @@ import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.render.*;
+import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.fluid.Fluid;
@@ -20,13 +28,10 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Matrix4f;
-
-import java.awt.*;
 
 @Environment(EnvType.CLIENT)
 public class GuiUtil {
@@ -191,13 +196,13 @@ public class GuiUtil {
 
 	public static Text getFluidTranslation(Fluid fluid) {
 		if (fluid.equals(Fluids.EMPTY)) {
-			return new TranslatableText("item.ad_astra.empty_tank").setStyle(Style.EMPTY.withColor(Formatting.AQUA));
+			return Text.translatable("item.ad_astra.empty_tank").setStyle(Style.EMPTY.withColor(Formatting.AQUA));
 		}
-		return new TranslatableText(fluid.getDefaultState().getBlockState().getBlock().getTranslationKey()).setStyle(Style.EMPTY.withColor(Formatting.AQUA));
+		return Text.translatable(fluid.getDefaultState().getBlockState().getBlock().getTranslationKey()).setStyle(Style.EMPTY.withColor(Formatting.AQUA));
 	}
 
 	public static void drawEnergyTooltip(Screen screen, MatrixStack matrices, AbstractMachineBlockEntity machine, int mouseX, int mouseY) {
-		screen.renderTooltip(matrices, new TranslatableText("gauge_text.ad_astra.storage", MathHelper.clamp(machine.getEnergy(), 0, machine.getMaxGeneration()), machine.getMaxGeneration()).setStyle(Style.EMPTY.withColor(Formatting.GOLD)), mouseX, mouseY);
+		screen.renderTooltip(matrices, Text.translatable("gauge_text.ad_astra.storage", MathHelper.clamp(machine.getEnergy(), 0, machine.getMaxGeneration()), machine.getMaxGeneration()).setStyle(Style.EMPTY.withColor(Formatting.GOLD)), mouseX, mouseY);
 	}
 
 	public static void drawTankTooltip(Screen screen, MatrixStack matrices, SingleVariantStorage<FluidVariant> tank, int mouseX, int mouseY) {
@@ -205,7 +210,7 @@ public class GuiUtil {
 	}
 
 	public static void drawTankTooltip(Screen screen, MatrixStack matrices, long amount, long capacity, FluidVariant variant, int mouseX, int mouseY) {
-		screen.renderTooltip(matrices, new TranslatableText("gauge_text.ad_astra.liquid_storage", FluidUtils.dropletsToMillibuckets(amount), FluidUtils.dropletsToMillibuckets(capacity)).setStyle(Style.EMPTY.withColor(Formatting.GOLD)).append(Text.of(", "))
+		screen.renderTooltip(matrices, Text.translatable("gauge_text.ad_astra.liquid_storage", FluidUtils.dropletsToMillibuckets(amount), FluidUtils.dropletsToMillibuckets(capacity)).setStyle(Style.EMPTY.withColor(Formatting.GOLD)).append(Text.of(", "))
 				.append(GuiUtil.getFluidTranslation(variant.getFluid())), mouseX, mouseY);
 	}
 
@@ -225,14 +230,13 @@ public class GuiUtil {
 
 		private static void drawTexturedQuad(Matrix4f matrix, float x0, float x1, float y0, float y1, int z, float u0, float u1, float v0, float v1) {
 			RenderSystem.setShader(GameRenderer::getPositionTexShader);
-			BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
+			BufferBuilder bufferBuilder = Tessellator.getInstance().getBufferBuilder();
 			bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE);
-			bufferBuilder.vertex(matrix, x0, y1, z).texture(u0, v1).next();
-			bufferBuilder.vertex(matrix, x1, y1, z).texture(u1, v1).next();
-			bufferBuilder.vertex(matrix, x1, y0, z).texture(u1, v0).next();
-			bufferBuilder.vertex(matrix, x0, y0, z).texture(u0, v0).next();
-			bufferBuilder.end();
-			BufferRenderer.draw(bufferBuilder);
+			bufferBuilder.vertex(matrix, x0, y1, z).uv(u0, v1).next();
+			bufferBuilder.vertex(matrix, x1, y1, z).uv(u1, v1).next();
+			bufferBuilder.vertex(matrix, x1, y0, z).uv(u1, v0).next();
+			bufferBuilder.vertex(matrix, x0, y0, z).uv(u0, v0).next();
+			BufferRenderer.drawWithShader(bufferBuilder.end());
 		}
 	}
 }

@@ -1,17 +1,17 @@
 package com.github.alexnijjar.ad_astra.client.screens;
 
+import java.awt.Rectangle;
+
 import com.github.alexnijjar.ad_astra.blocks.machines.AbstractMachineBlock;
 import com.github.alexnijjar.ad_astra.screen.handler.SolarPanelScreenHandler;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
-
-import java.awt.*;
 
 @Environment(EnvType.CLIENT)
 public class SolarPanelScreen extends AbstractMachineScreen<SolarPanelScreenHandler> {
@@ -46,8 +46,8 @@ public class SolarPanelScreen extends AbstractMachineScreen<SolarPanelScreenHand
 	protected void drawForeground(MatrixStack matrices, int mouseX, int mouseY) {
 		super.drawForeground(matrices, mouseX, mouseY);
 
-		this.textRenderer.draw(matrices, new TranslatableText("gauge_text.ad_astra.max_generation"), this.titleY - 20, 8, 0x68d975);
-		this.textRenderer.draw(matrices, new TranslatableText("gauge_text.ad_astra.energy_per_tick", this.blockEntity.getEnergyPerTick()), this.titleY - 21, 18, 0x68d975);
+		this.textRenderer.draw(matrices, Text.translatable("gauge_text.ad_astra.max_generation"), this.titleY - 20, 8, 0x68d975);
+		this.textRenderer.draw(matrices, Text.translatable("gauge_text.ad_astra.energy_per_tick", this.blockEntity.getEnergyPerTick()), this.titleY - 21, 18, 0x68d975);
 	}
 
 	@Override

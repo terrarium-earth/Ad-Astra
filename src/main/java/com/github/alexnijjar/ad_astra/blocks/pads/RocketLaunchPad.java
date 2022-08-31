@@ -1,6 +1,10 @@
 package com.github.alexnijjar.ad_astra.blocks.pads;
 
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockRenderType;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.ShapeContext;
+import net.minecraft.block.Waterloggable;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.state.StateManager;
@@ -73,12 +77,12 @@ public class RocketLaunchPad extends Block implements Waterloggable {
 			if (raise) {
 				world.setBlockState(pos, state.with(STAGE, raise));
 			} else {
-				world.updateNeighbor(pos.north().east(), this, pos);
-				world.updateNeighbor(pos.north().west(), this, pos);
-				world.updateNeighbor(pos.south().east(), this, pos);
-				world.updateNeighbor(pos.south().west(), this, pos);
+				world.m_asiupuuh(pos.north().east(), this, pos);
+				world.m_asiupuuh(pos.north().west(), this, pos);
+				world.m_asiupuuh(pos.south().east(), this, pos);
+				world.m_asiupuuh(pos.south().west(), this, pos);
 				for (Direction dir : Direction.values()) {
-					world.updateNeighbor(pos.offset(dir), this, pos);
+					world.m_asiupuuh(pos.offset(dir), this, pos);
 				}
 			}
 		}
@@ -89,12 +93,12 @@ public class RocketLaunchPad extends Block implements Waterloggable {
 	public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
 		if (!world.isClient) {
 			for (Direction dir : Direction.values()) {
-				world.updateNeighbor(pos.offset(dir), this, pos);
+				world.m_asiupuuh(pos.offset(dir), this, pos);
 			}
-			world.updateNeighbor(pos.north().east(), this, pos);
-			world.updateNeighbor(pos.north().west(), this, pos);
-			world.updateNeighbor(pos.south().east(), this, pos);
-			world.updateNeighbor(pos.south().west(), this, pos);
+			world.m_asiupuuh(pos.north().east(), this, pos);
+			world.m_asiupuuh(pos.north().west(), this, pos);
+			world.m_asiupuuh(pos.south().east(), this, pos);
+			world.m_asiupuuh(pos.south().west(), this, pos);
 		}
 		super.onStateReplaced(state, world, pos, newState, moved);
 	}

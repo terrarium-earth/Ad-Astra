@@ -7,6 +7,7 @@ import com.github.alexnijjar.ad_astra.blocks.door.SlidingDoorBlock;
 import com.github.alexnijjar.ad_astra.blocks.door.SlidingDoorBlockEntity;
 import com.github.alexnijjar.ad_astra.registry.ModBlocks;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -14,7 +15,6 @@ import net.fabricmc.fabric.api.client.model.BakedModelManagerHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
@@ -149,7 +149,7 @@ public class SlidingDoorBlockEntityRenderer implements BlockEntityRenderer<Slidi
         MatrixStack.Entry entry1 = matrices.peek();
 
         for (BakedQuad quad : quads1) {
-            vertexConsumer1.quad(entry1, quad, 1, 1, 1, light, overlay);
+            vertexConsumer1.bakedQuad(entry1, quad, 1, 1, 1, light, overlay);
         }
     }
 }

@@ -1,5 +1,8 @@
 package com.github.alexnijjar.ad_astra.client.screens;
 
+import java.awt.Rectangle;
+import java.util.Arrays;
+
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.blocks.machines.entity.FluidMachineBlockEntity;
 import com.github.alexnijjar.ad_astra.blocks.machines.entity.OxygenDistributorBlockEntity;
@@ -22,11 +25,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
-
-import java.awt.*;
-import java.util.Arrays;
 
 @Environment(EnvType.CLIENT)
 public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistributorScreenHandler> {
@@ -104,15 +103,15 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
 		boolean oxygenLeak = OxygenUtils.getOxygenBlocksCount(this.blockEntity.getWorld(), this.blockEntity.getPos()) >= AdAstra.CONFIG.oxygenDistributor.maxBlockChecks;
 		if (oxygenLeak) {
 			if (GuiUtil.isHovering(getOxygenLeakWarningSignBounds(), mouseX, mouseY)) {
-				this.renderTooltip(matrices, Arrays.asList(new TranslatableText("gauge_text.ad_astra.oxygen_leak_warning[0]"), new TranslatableText("gauge_text.ad_astra.oxygen_leak_warning[1]"),
-						new TranslatableText("gauge_text.ad_astra.oxygen_leak_warning[2]"), new TranslatableText("gauge_text.ad_astra.oxygen_leak_warning[3]"), new TranslatableText("gauge_text.ad_astra.oxygen_leak_warning[4]")), mouseX, mouseY);
+				this.renderTooltip(matrices, Arrays.asList(Text.translatable("gauge_text.ad_astra.oxygen_leak_warning[0]"), Text.translatable("gauge_text.ad_astra.oxygen_leak_warning[1]"), Text.translatable("gauge_text.ad_astra.oxygen_leak_warning[2]"),
+						Text.translatable("gauge_text.ad_astra.oxygen_leak_warning[3]"), Text.translatable("gauge_text.ad_astra.oxygen_leak_warning[4]")), mouseX, mouseY);
 			}
 		}
 
 		if (oxygenBlocksCount <= 0 && entity.hasEnergy() && entity.outputTank.amount > 0) {
 			if (GuiUtil.isHovering(getBlockedWarningSignBounds(), mouseX, mouseY)) {
-				this.renderTooltip(matrices, Arrays.asList(new TranslatableText("gauge_text.ad_astra.blocked_warning[0]"), new TranslatableText("gauge_text.ad_astra.blocked_warning[1]"), new TranslatableText("gauge_text.ad_astra.blocked_warning[2]")),
-						mouseX, mouseY);
+				this.renderTooltip(matrices, Arrays.asList(Text.translatable("gauge_text.ad_astra.blocked_warning[0]"), Text.translatable("gauge_text.ad_astra.blocked_warning[1]"), Text.translatable("gauge_text.ad_astra.blocked_warning[2]")), mouseX,
+						mouseY);
 			}
 		}
 	}
@@ -123,7 +122,7 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
 		long oxygenBlocksCount = OxygenUtils.getOxygenBlocksCount(this.blockEntity.getWorld(), this.blockEntity.getPos());
 		matrices.push();
 		matrices.scale(0.9f, 0.9f, 0.9f);
-		Text oxygenBlockText = new TranslatableText("gauge_text.ad_astra.oxygen_blocks");
+		Text oxygenBlockText = Text.translatable("gauge_text.ad_astra.oxygen_blocks");
 		Text oxygenBlockAmount = Text.of(oxygenBlocksCount + " / " + AdAstra.CONFIG.oxygenDistributor.maxBlockChecks);
 
 		int offset = 25;
@@ -148,9 +147,9 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
 		oxygenUsageRounded = (float) (Math.round(oxygenUsageRounded * 1000.0) / 1000.0);
 
 		// Energy per tick text
-		this.textRenderer.draw(matrices, new TranslatableText("gauge_text.ad_astra.energy_per_tick", energyUsagePerTick), 11, offset + -17, 0x68d975);
+		this.textRenderer.draw(matrices, Text.translatable("gauge_text.ad_astra.energy_per_tick", energyUsagePerTick), 11, offset + -17, 0x68d975);
 		// Oxygen usage per tick text
-		this.textRenderer.draw(matrices, new TranslatableText("gauge_text.ad_astra.fluid_per_tick", oxygenUsageRounded), 11, offset + -5, 0x68d975);
+		this.textRenderer.draw(matrices, Text.translatable("gauge_text.ad_astra.fluid_per_tick", oxygenUsageRounded), 11, offset + -5, 0x68d975);
 		matrices.pop();
 	}
 

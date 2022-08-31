@@ -2,6 +2,7 @@ package com.github.alexnijjar.ad_astra.blocks.fluid;
 
 import com.github.alexnijjar.ad_astra.registry.ModFluids;
 import com.github.alexnijjar.ad_astra.registry.ModItems;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
@@ -49,7 +50,7 @@ public abstract class CryoFuelFluid extends ModFluid {
 		}
 
 		@Override
-		public boolean isStill(FluidState fluidState) {
+		public boolean isSource(FluidState fluidState) {
 			return false;
 		}
 	}
@@ -61,7 +62,7 @@ public abstract class CryoFuelFluid extends ModFluid {
 		}
 
 		@Override
-		public boolean isStill(FluidState fluidState) {
+		public boolean isSource(FluidState fluidState) {
 			return true;
 		}
 	}

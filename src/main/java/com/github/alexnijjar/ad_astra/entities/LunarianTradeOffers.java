@@ -3,7 +3,6 @@ package com.github.alexnijjar.ad_astra.entities;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 import org.jetbrains.annotations.Nullable;
@@ -28,31 +27,24 @@ import net.minecraft.item.DyeItem;
 import net.minecraft.item.DyeableArmorItem;
 import net.minecraft.item.DyeableItem;
 import net.minecraft.item.EnchantedBookItem;
-import net.minecraft.item.FilledMapItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.SuspiciousStewItem;
-import net.minecraft.item.map.MapIcon;
-import net.minecraft.item.map.MapState;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.recipe.BrewingRecipeRegistry;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.tag.TagKey;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Util;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.village.TradeOffer;
 import net.minecraft.village.TradeOffers.Factory;
 import net.minecraft.village.VillagerDataContainer;
 import net.minecraft.village.VillagerProfession;
 import net.minecraft.village.VillagerType;
-import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
 
 public class LunarianTradeOffers {
 	public static final Map<VillagerProfession, Int2ObjectMap<Factory[]>> PROFESSION_TO_LEVELED_TRADE = Util.make(Maps.newHashMap(), map -> {
@@ -223,7 +215,7 @@ public class LunarianTradeOffers {
 		}
 
 		@Override
-		public TradeOffer create(Entity entity, Random random) {
+		public TradeOffer create(Entity entity, RandomGenerator random) {
 			ItemStack itemStack = new ItemStack(this.buy, this.price);
 			return new TradeOffer(itemStack, new ItemStack(Items.EMERALD), this.maxUses, this.experience, this.multiplier);
 		}
@@ -263,7 +255,7 @@ public class LunarianTradeOffers {
 		}
 
 		@Override
-		public TradeOffer create(Entity entity, Random random) {
+		public TradeOffer create(Entity entity, RandomGenerator random) {
 			ItemStack stack = new ItemStack(this.sell.getItem(), this.count);
 			stack.setNbt((this.sell.getNbt()));
 			return new TradeOffer(new ItemStack(Items.EMERALD, this.price), stack, this.maxUses, this.experience, this.multiplier);
@@ -285,7 +277,7 @@ public class LunarianTradeOffers {
 
 		@Override
 		@Nullable
-		public TradeOffer create(Entity entity, Random random) {
+		public TradeOffer create(Entity entity, RandomGenerator random) {
 			ItemStack itemStack = new ItemStack(Items.SUSPICIOUS_STEW, 1);
 			SuspiciousStewItem.addEffectToStew(itemStack, this.effect, this.duration);
 			return new TradeOffer(new ItemStack(Items.EMERALD, 1), itemStack, 12, this.experience, this.multiplier);
@@ -319,7 +311,7 @@ public class LunarianTradeOffers {
 
 		@Override
 		@Nullable
-		public TradeOffer create(Entity entity, Random random) {
+		public TradeOffer create(Entity entity, RandomGenerator random) {
 			return new TradeOffer(new ItemStack(Items.EMERALD, this.price), new ItemStack(this.secondBuy.getItem(), this.secondCount), new ItemStack(this.sell.getItem(), this.sellCount), this.maxUses, this.experience, this.multiplier);
 		}
 	}
@@ -344,7 +336,7 @@ public class LunarianTradeOffers {
 		}
 
 		@Override
-		public TradeOffer create(Entity entity, Random random) {
+		public TradeOffer create(Entity entity, RandomGenerator random) {
 			int i = 5 + random.nextInt(15);
 			ItemStack itemStack = EnchantmentHelper.enchant(random, new ItemStack(this.tool.getItem()), i, false);
 			int j = Math.min(this.basePrice + i, 64);
@@ -371,7 +363,7 @@ public class LunarianTradeOffers {
 
 		@Override
 		@Nullable
-		public TradeOffer create(Entity entity, Random random) {
+		public TradeOffer create(Entity entity, RandomGenerator random) {
 			if (entity instanceof VillagerDataContainer) {
 				ItemStack itemStack = new ItemStack(this.map.get(((VillagerDataContainer) entity).getVillagerData().getType()), this.count);
 				return new TradeOffer(itemStack, new ItemStack(Items.EMERALD), this.maxUses, this.experience, 0.05f);
@@ -402,7 +394,7 @@ public class LunarianTradeOffers {
 		}
 
 		@Override
-		public TradeOffer create(Entity entity, Random random) {
+		public TradeOffer create(Entity entity, RandomGenerator random) {
 			ItemStack itemStack = new ItemStack(Items.EMERALD, this.price);
 			List<Potion> list = Registry.POTION.stream().filter(potion -> !potion.getEffects().isEmpty() && BrewingRecipeRegistry.isBrewable(potion)).collect(Collectors.toList());
 			Potion potion2 = list.get(random.nextInt(list.size()));
@@ -419,7 +411,7 @@ public class LunarianTradeOffers {
 		}
 
 		@Override
-		public TradeOffer create(Entity entity, Random random) {
+		public TradeOffer create(Entity entity, RandomGenerator random) {
 			List<Enchantment> list = Registry.ENCHANTMENT.stream().filter(Enchantment::isAvailableForEnchantedBookOffer).collect(Collectors.toList());
 			Enchantment enchantment = list.get(random.nextInt(list.size()));
 			int i = MathHelper.nextInt(random, enchantment.getMinLevel(), enchantment.getMaxLevel());
@@ -432,42 +424,6 @@ public class LunarianTradeOffers {
 				j = 64;
 			}
 			return new TradeOffer(new ItemStack(Items.EMERALD, j), new ItemStack(Items.BOOK), itemStack, 12, this.experience, 0.2f);
-		}
-	}
-
-	static class SellMapFactory implements Factory {
-		private final int price;
-		private final TagKey<ConfiguredStructureFeature<?, ?>> structure;
-		private final String nameKey;
-		private final MapIcon.Type iconType;
-		private final int maxUses;
-		private final int experience;
-
-		public SellMapFactory(int price, TagKey<ConfiguredStructureFeature<?, ?>> structure, String nameKey, MapIcon.Type iconType, int maxUses, int experience) {
-			this.price = price;
-			this.structure = structure;
-			this.nameKey = nameKey;
-			this.iconType = iconType;
-			this.maxUses = maxUses;
-			this.experience = experience;
-		}
-
-		@Override
-		@Nullable
-		public TradeOffer create(Entity entity, Random random) {
-			if (!(entity.world instanceof ServerWorld)) {
-				return null;
-			}
-			ServerWorld serverWorld = (ServerWorld) entity.world;
-			BlockPos blockPos = serverWorld.locateStructure(this.structure, entity.getBlockPos(), 100, true);
-			if (blockPos != null) {
-				ItemStack itemStack = FilledMapItem.createMap(serverWorld, blockPos.getX(), blockPos.getZ(), (byte) 2, true, true);
-				FilledMapItem.fillExplorationMap(serverWorld, itemStack);
-				MapState.addDecorationsNbt(itemStack, blockPos, "+", this.iconType);
-				itemStack.setCustomName(new TranslatableText(this.nameKey));
-				return new TradeOffer(new ItemStack(Items.EMERALD, this.price), new ItemStack(Items.COMPASS), itemStack, this.maxUses, this.experience, 0.2f);
-			}
-			return null;
 		}
 	}
 
@@ -489,7 +445,7 @@ public class LunarianTradeOffers {
 		}
 
 		@Override
-		public TradeOffer create(Entity entity, Random random) {
+		public TradeOffer create(Entity entity, RandomGenerator random) {
 			ItemStack itemStack = new ItemStack(Items.EMERALD, this.price);
 			ItemStack itemStack2 = new ItemStack(this.sell);
 			if (this.sell instanceof DyeableArmorItem) {
@@ -506,7 +462,7 @@ public class LunarianTradeOffers {
 			return new TradeOffer(itemStack, itemStack2, this.maxUses, this.experience, 0.2f);
 		}
 
-		private static DyeItem getDye(Random random) {
+		private static DyeItem getDye(RandomGenerator random) {
 			return DyeItem.byColor(DyeColor.byId(random.nextInt(16)));
 		}
 	}

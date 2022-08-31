@@ -1,5 +1,7 @@
 package com.github.alexnijjar.ad_astra.entities.vehicles;
 
+import org.jetbrains.annotations.Nullable;
+
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.items.vehicles.VehicleItem;
 import com.github.alexnijjar.ad_astra.registry.ModTags;
@@ -38,8 +40,6 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
-
-import javax.annotation.Nullable;
 
 public abstract class VehicleEntity extends Entity {
 
@@ -102,7 +102,7 @@ public abstract class VehicleEntity extends Entity {
 	private void updatePositionAndRotation() {
 		if (this.isLogicalSideForUpdatingMovement()) {
 			this.clientInterpolationSteps = 0;
-			this.updateTrackedPosition(this.getX(), this.getY(), this.getZ());
+			this.syncPacketPositionCodec(this.getX(), this.getY(), this.getZ());
 		}
 		if (this.clientInterpolationSteps <= 0) {
 			return;

@@ -13,7 +13,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.state.StateManager.Builder;
 import net.minecraft.state.property.EnumProperty;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -119,16 +119,16 @@ public class FluidPipeBlock extends AbstractPipeBlock {
 
     public PipeState togglePipeState(PipeState state, PlayerEntity user) {
         if (state.equals(PipeState.NONE)) {
-            user.sendMessage(new TranslatableText("info.ad_astra.normal"), true);
+            user.sendMessage(Text.translatable("info.ad_astra.normal"), true);
             return PipeState.NORMAL;
         } else if (state.equals(PipeState.NORMAL)) {
-            user.sendMessage(new TranslatableText("info.ad_astra.insert"), true);
+            user.sendMessage(Text.translatable("info.ad_astra.insert"), true);
             return PipeState.INSERT;
         } else if (state.equals(PipeState.INSERT)) {
-            user.sendMessage(new TranslatableText("info.ad_astra.extract"), true);
+            user.sendMessage(Text.translatable("info.ad_astra.extract"), true);
             return PipeState.EXTRACT;
         } else if (state.equals(PipeState.EXTRACT)) {
-            user.sendMessage(new TranslatableText("info.ad_astra.none"), true);
+            user.sendMessage(Text.translatable("info.ad_astra.none"), true);
             return PipeState.NONE;
         } else {
             return PipeState.NONE;

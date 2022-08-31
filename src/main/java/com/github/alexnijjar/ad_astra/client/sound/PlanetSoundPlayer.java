@@ -7,6 +7,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.sound.MovingSoundInstance;
+import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.client.sound.SoundManager;
 import net.minecraft.client.util.ClientPlayerTickable;
 import net.minecraft.sound.SoundCategory;
@@ -55,7 +56,7 @@ public class PlanetSoundPlayer implements ClientPlayerTickable {
         private final ClientPlayerEntity player;
 
         public SpaceSound(ClientPlayerEntity player, SoundEvent soundEvent) {
-            super(soundEvent, SoundCategory.AMBIENT);
+            super(soundEvent, SoundCategory.AMBIENT, SoundInstance.method_43221());
             this.player = player;
             this.repeat = false;
             this.repeatDelay = 0;

@@ -1,13 +1,15 @@
 package com.github.alexnijjar.ad_astra.mixin.client;
 
-import net.minecraft.client.gl.VertexBuffer;
-import net.minecraft.client.option.CloudRenderMode;
-import net.minecraft.client.render.BufferBuilder;
-import net.minecraft.client.render.WorldRenderer;
-import net.minecraft.util.math.Vec3d;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.gen.Invoker;
+
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.VertexBuffer;
+
+import net.minecraft.client.option.CloudRenderMode;
+import net.minecraft.client.render.WorldRenderer;
+import net.minecraft.util.math.Vec3d;
 
 @Mixin(WorldRenderer.class)
 public interface WorldRendererAccessor {
@@ -63,18 +65,12 @@ public interface WorldRendererAccessor {
 	@Accessor("lastCloudsBlockZ")
 	void setLastCloudsBlockZ(int value);
 
-	@Accessor("field_20794")
-	float[] getField_20794();
+	@Accessor("rainSizeX")
+	float[] getRainSizeX();
 
-	@Accessor("field_20795")
-	float[] getField_20795();
-
-	@Accessor("field_20793")
-	int getField_20793();
-
-	@Accessor("field_20793")
-	void setField_20793(int value);
+	@Accessor("rainSizeZ")
+	float[] getRainSizeZ();
 
 	@Invoker("renderClouds")
-	void invokeRenderClouds(BufferBuilder builder, double x, double y, double z, Vec3d color);
+	public BufferBuilder.RenderedBuffer invokeRenderClouds(BufferBuilder builder, double x, double y, double z, Vec3d color);
 }

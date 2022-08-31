@@ -1,5 +1,5 @@
 {
-  "name": "ad_astra:run_meteor/side_meteor_start",
+  "name": "ad_astra:meteor/meteor",
   "fallback": "minecraft:empty",
   "elements": [
     {
