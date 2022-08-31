@@ -3,19 +3,18 @@ package com.github.alexnijjar.ad_astra.client.screens.utils;
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.util.ColourHolder;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.Tessellator;
+import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.blaze3d.vertex.VertexFormats;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
-import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.GameRenderer;
-import net.minecraft.client.render.Tessellator;
-import net.minecraft.client.render.VertexFormat;
-import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3f;
 
@@ -23,11 +22,11 @@ import net.minecraft.util.math.Vec3f;
 public class ScreenUtils {
 
 	public static Text createText(String text) {
-		return new TranslatableText("gui." + AdAstra.MOD_ID + ".text." + text);
+		return Text.translatable("gui." + AdAstra.MOD_ID + ".text." + text);
 	}
 
 	public static Text createText(Identifier text) {
-		return new TranslatableText("gui." + text.getNamespace() + ".text." + text.getPath());
+		return Text.translatable("gui." + text.getNamespace() + ".text." + text.getPath());
 	}
 
 	public static void addTexture(MatrixStack matrices, int x, int y, int width, int height, Identifier texture) {
@@ -38,7 +37,7 @@ public class ScreenUtils {
 	public static void addRotatingTexture(PlanetSelectionScreen screen, MatrixStack matrices, int x, int y, int width, int height, Identifier texture, float speed) {
 
 		double scale = MinecraftClient.getInstance().getWindow().getScaledHeight() / 400.0;
-		
+
 		x *= scale;
 		y *= scale;
 		x += 1;
@@ -60,9 +59,8 @@ public class ScreenUtils {
 	public static void drawCircle(double x, double y, double radius, int sides, ColourHolder ringColour) {
 
 		Tessellator tessellator = Tessellator.getInstance();
-		BufferBuilder bufferBuilder = tessellator.getBuffer();
+		BufferBuilder bufferBuilder = tessellator.getBufferBuilder();
 		RenderSystem.setShader(GameRenderer::getPositionColorShader);
-
 
 		double scale = MinecraftClient.getInstance().getWindow().getScaledHeight() / 400.0;
 		radius *= scale;

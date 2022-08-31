@@ -1,21 +1,22 @@
 package com.github.alexnijjar.ad_astra.client.renderer.sky;
 
+import java.util.List;
+
 import com.github.alexnijjar.ad_astra.client.resourcepack.SkyRenderer.SkyObject;
 import com.github.alexnijjar.ad_astra.client.resourcepack.SkyRenderer.StarsRenderer;
 import com.github.alexnijjar.ad_astra.client.resourcepack.SkyRenderer.SunsetColour;
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.Tessellator;
+import com.mojang.blaze3d.vertex.VertexBuffer;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gl.VertexBuffer;
 import net.minecraft.client.option.GraphicsMode;
-import net.minecraft.client.render.BufferBuilder;
-import net.minecraft.client.render.Tessellator;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3f;
-
-import java.util.List;
 
 @Environment(EnvType.CLIENT)
 public class ModSky implements DimensionRenderingRegistry.SkyRenderer {
@@ -33,7 +34,7 @@ public class ModSky implements DimensionRenderingRegistry.SkyRenderer {
 	public void render(WorldRenderContext context) {
 
 		this.skyAngle = context.world().getSkyAngle(context.tickDelta());
-		BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
+		BufferBuilder bufferBuilder = Tessellator.getInstance().getBufferBuilder();
 		MinecraftClient client = MinecraftClient.getInstance();
 
 		if (shouldRenderWhileRaining && client.world.isRaining()) {
@@ -48,7 +49,7 @@ public class ModSky implements DimensionRenderingRegistry.SkyRenderer {
 
 		// Stars
 		if (this.starsRenderer.fastStars() > 0) {
-			int stars = (context.advancedTranslucency() || client.options.graphicsMode.equals(GraphicsMode.FANCY) ? this.starsRenderer.fancyStars() : this.starsRenderer.fastStars());
+			int stars = (context.advancedTranslucency() || client.options.getGraphicsMode().get().equals(GraphicsMode.FANCY) ? this.starsRenderer.fancyStars() : this.starsRenderer.fastStars());
 			starsBuffer = SkyUtil.renderStars(context, bufferBuilder, starsBuffer, stars, this.starsRenderer);
 		}
 

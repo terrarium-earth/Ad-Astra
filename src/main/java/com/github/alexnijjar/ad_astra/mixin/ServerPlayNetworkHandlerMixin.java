@@ -20,7 +20,7 @@ public class ServerPlayNetworkHandlerMixin {
 	@Shadow
 	private int vehicleFloatingTicks;
 
-	@Inject(method = "tick", at = @At("HEAD"))
+	@Inject(method = "method_18784", at = @At("HEAD"))
 	public void adastra_tick(CallbackInfo ci) {
 		ServerPlayerEntity player = ((ServerPlayNetworkHandler) (Object) this).player;
 

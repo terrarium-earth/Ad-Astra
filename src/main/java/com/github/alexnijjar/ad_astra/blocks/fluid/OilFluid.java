@@ -43,7 +43,7 @@ public abstract class OilFluid extends ModFluid {
 		}
 
 		@Override
-		public boolean isStill(FluidState fluidState) {
+		public boolean isSource(FluidState fluidState) {
 			return false;
 		}
 	}
@@ -55,7 +55,7 @@ public abstract class OilFluid extends ModFluid {
 		}
 
 		@Override
-		public boolean isStill(FluidState fluidState) {
+		public boolean isSource(FluidState fluidState) {
 			return true;
 		}
 	}

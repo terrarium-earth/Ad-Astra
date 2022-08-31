@@ -4,13 +4,14 @@ import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.registry.ModItems;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
+
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.stat.Stats;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
@@ -29,7 +30,7 @@ public class AstroduxItem extends Item {
 				PatchouliAPI.get().openBookGUI(player, new ModIdentifier("astrodux"));
 				return TypedActionResult.success(user.getStackInHand(hand));
 			} else {
-				user.sendMessage(new TranslatableText("info.ad_astra.install_patchouli"), true);
+				user.sendMessage(Text.translatable("info.ad_astra.install_patchouli"), true);
 			}
 		}
 		return TypedActionResult.fail(user.getStackInHand(hand));

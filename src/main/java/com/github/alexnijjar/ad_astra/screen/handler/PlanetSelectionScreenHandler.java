@@ -1,6 +1,7 @@
 package com.github.alexnijjar.ad_astra.screen.handler;
 
 import com.github.alexnijjar.ad_astra.registry.ModScreenHandlers;
+
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
@@ -35,7 +36,7 @@ public class PlanetSelectionScreenHandler extends ScreenHandler {
 	}
 
 	@Override
-	public ItemStack transferSlot(PlayerEntity player, int index) {
+	public ItemStack quickTransfer(PlayerEntity player, int index) {
 		return null;
 	}
 }

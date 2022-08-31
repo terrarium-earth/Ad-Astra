@@ -51,10 +51,10 @@
   ],
 
   "depends": {
-    "fabricloader": ">=0.14.8",
+    "fabricloader": ">=0.14.9",
     "fabric": "*",
-    "minecraft": "1.18.x",
-    "cloth-config": ">=6.2.62",
+    "minecraft": "1.19.x",
+    "cloth-config": ">=8.0.75",
     "java": ">=17"
   },
   "suggests": {

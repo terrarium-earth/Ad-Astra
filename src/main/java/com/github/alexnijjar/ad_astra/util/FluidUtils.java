@@ -1,8 +1,14 @@
 package com.github.alexnijjar.ad_astra.util;
 
+import java.util.List;
+import java.util.function.Predicate;
+
+import org.jetbrains.annotations.Nullable;
+
 import com.github.alexnijjar.ad_astra.blocks.machines.entity.FluidMachineBlockEntity;
 import com.github.alexnijjar.ad_astra.items.FluidContainingItem;
 import com.github.alexnijjar.ad_astra.recipes.ConversionRecipe;
+
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
@@ -16,10 +22,6 @@ import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
-
-import javax.annotation.Nullable;
-import java.util.List;
-import java.util.function.Predicate;
 
 public class FluidUtils {
 
@@ -216,7 +218,7 @@ public class FluidUtils {
 		long totalMoved = 0;
 
 		try (Transaction iterationTransaction = Transaction.openNested(transaction)) {
-			for (StorageView<FluidVariant> view : from.iterable(iterationTransaction)) {
+			for (StorageView<FluidVariant> view : from) {
 				if (view.isResourceBlank())
 					continue;
 				FluidVariant resource = view.getResource();

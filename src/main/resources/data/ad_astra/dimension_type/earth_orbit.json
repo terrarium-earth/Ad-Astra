@@ -13,5 +13,7 @@
   "infiniburn": "#minecraft:infiniburn_overworld",
   "min_y": 0,
   "height": 256,
-  "effects": "ad_astra:earth_orbit"
+  "effects": "ad_astra:earth_orbit",
+  "monster_spawn_light_level": 0,
+  "monster_spawn_block_light_limit": 0
 }

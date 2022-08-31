@@ -4,14 +4,19 @@ import com.github.alexnijjar.ad_astra.mixin.client.WorldRendererAccessor;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.Tessellator;
+import com.mojang.blaze3d.vertex.VertexBuffer;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gl.VertexBuffer;
 import net.minecraft.client.option.CloudRenderMode;
-import net.minecraft.client.render.*;
+import net.minecraft.client.render.BackgroundRenderer;
+import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.render.ShaderProgram;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
@@ -39,31 +44,32 @@ public class ModCloudRenderer implements DimensionRenderingRegistry.CloudRendere
 		MatrixStack matrices = context.matrixStack();
 		float tickDelta = context.tickDelta();
 		MinecraftClient client = MinecraftClient.getInstance();
-		float g = context.world().getSkyProperties().getCloudsHeight();
-		if (!Float.isNaN(g)) {
+
+		float f = context.world().getSkyProperties().getCloudsHeight();
+		if (!Float.isNaN(f)) {
 			RenderSystem.disableCull();
 			RenderSystem.enableBlend();
 			RenderSystem.enableDepthTest();
 			RenderSystem.blendFuncSeparate(GlStateManager.class_4535.SRC_ALPHA, GlStateManager.class_4534.ONE_MINUS_SRC_ALPHA, GlStateManager.class_4535.ONE, GlStateManager.class_4534.ONE_MINUS_SRC_ALPHA);
 			RenderSystem.depthMask(true);
-			double k = ((float) renderer.getTicks() + tickDelta) * 0.03f;
-			double l = (cameraPosX + k) / 12.0;
-			double m = g - (float) cameraPosY + 0.33f;
-			double n = cameraPosZ / 12.0 + 0.33000001311302185;
-			l -= MathHelper.floor(l / 2048.0) * 2048;
-			n -= MathHelper.floor(n / 2048.0) * 2048;
-			float o = (float) (l - (double) MathHelper.floor(l));
-			float p = (float) (m / 4.0 - (double) MathHelper.floor(m / 4.0)) * 4.0f;
-			float q = (float) (n - (double) MathHelper.floor(n));
+			double e = (double) (((float) renderer.getTicks() + tickDelta) * 0.03F);
+			double i = (cameraPosX + e) / 12.0;
+			double j = (double) (f - (float) cameraPosY + 0.33F);
+			double k = cameraPosZ / 12.0 + 0.33F;
+			i -= (double) (MathHelper.floor(i / 2048.0) * 2048);
+			k -= (double) (MathHelper.floor(k / 2048.0) * 2048);
+			float l = (float) (i - (double) MathHelper.floor(i));
+			float m = (float) (j / 4.0 - (double) MathHelper.floor(j / 4.0)) * 4.0F;
+			float n = (float) (k - (double) MathHelper.floor(k));
 			Vec3d colour = context.world().getCloudsColor(tickDelta);
-			int r = (int) Math.floor(l);
-			int s = (int) Math.floor(m / 4.0);
-			int t = (int) Math.floor(n);
-			if (r != renderer.getLastCloudsBlockX() || s != renderer.getLastCloudsBlockY() || t != renderer.getLastCloudsBlockZ() || client.options.getCloudRenderMode() != renderer.getLastCloudsRenderMode()
+			int o = (int) Math.floor(i);
+			int p = (int) Math.floor(j / 4.0);
+			int q = (int) Math.floor(k);
+			if (o != renderer.getLastCloudsBlockX() || p != renderer.getLastCloudsBlockY() || q != renderer.getLastCloudsBlockZ() || client.options.getCloudRenderMode() != renderer.getLastCloudsRenderMode()
 					|| renderer.getLastCloudsColor().squaredDistanceTo(colour) > 2.0E-4) {
-				renderer.setLastCloudsBlockX(r);
-				renderer.setLastCloudsBlockY(s);
-				renderer.setLastCloudsBlockZ(t);
+				renderer.setLastCloudsBlockX(o);
+				renderer.setLastCloudsBlockY(p);
+				renderer.setLastCloudsBlockZ(q);
 				renderer.setLastCloudsColor(colour);
 				renderer.setLastCloudsRenderMode(client.options.getCloudRenderMode());
 				renderer.setCloudsDirty(true);
@@ -71,40 +77,44 @@ public class ModCloudRenderer implements DimensionRenderingRegistry.CloudRendere
 
 			if (renderer.getCloudsDirty()) {
 				renderer.setCloudsDirty(false);
-				BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
+				BufferBuilder bufferBuilder = Tessellator.getInstance().getBufferBuilder();
 				if (renderer.getCloudsBuffer() != null) {
 					renderer.getCloudsBuffer().close();
 				}
 
 				renderer.setCloudsBuffer(new VertexBuffer());
-				renderer.invokeRenderClouds(bufferBuilder, l, m, n, colour);
-				bufferBuilder.end();
-				renderer.getCloudsBuffer().upload(bufferBuilder);
+				BufferBuilder.RenderedBuffer renderedBuffer = renderer.invokeRenderClouds(bufferBuilder, i, j, k, colour);
+				renderer.getCloudsBuffer().bind();
+				renderer.getCloudsBuffer().upload(renderedBuffer);
+				VertexBuffer.unbind();
 			}
 
 			RenderSystem.setShader(GameRenderer::getPositionTexColorNormalShader);
 			RenderSystem.setShaderTexture(0, texture);
-			BackgroundRenderer.setFogBlack();
+			BackgroundRenderer.setShaderFogColor();
 			matrices.push();
-			matrices.scale(12.0f, 1.0f, 12.0f);
-			matrices.translate(-o, p, -q);
+			matrices.scale(12.0F, 1.0F, 12.0F);
+			matrices.translate((double) (-l), (double) m, (double) (-n));
 			if (renderer.getCloudsBuffer() != null) {
-				int u = renderer.getLastCloudsRenderMode() == CloudRenderMode.FANCY ? 0 : 1;
+				renderer.getCloudsBuffer().bind();
+				int r = renderer.getLastCloudsRenderMode().equals(CloudRenderMode.FANCY) ? 0 : 1;
 
-				for (int v = u; v < 2; ++v) {
-					if (v == 0) {
+				for (int s = r; s < 2; ++s) {
+					if (s == 0) {
 						RenderSystem.colorMask(false, false, false, false);
 					} else {
 						RenderSystem.colorMask(true, true, true, true);
 					}
 
-					Shader shader = RenderSystem.getShader();
-					renderer.getCloudsBuffer().setShader(matrices.peek().getModel(), context.projectionMatrix(), shader);
+					ShaderProgram shaderProgram = RenderSystem.getShader();
+					renderer.getCloudsBuffer().setShader(matrices.peek().getModel(), context.projectionMatrix(), shaderProgram);
 				}
+
+				VertexBuffer.unbind();
 			}
 
 			matrices.pop();
-			RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
+			RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 			RenderSystem.enableCull();
 			RenderSystem.disableBlend();
 		}

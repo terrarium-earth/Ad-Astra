@@ -37,6 +37,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
+import net.minecraft.client.render.entity.PaintingEntityRenderer;
 
 @Environment(EnvType.CLIENT)
 public class ClientModEntities {
@@ -64,6 +65,9 @@ public class ClientModEntities {
 		EntityRendererRegistry.register(ModEntityTypes.ROCKET_TIER_4, RocketEntityRendererTier4::new);
 		EntityRendererRegistry.register(ModEntityTypes.ROVER_TIER_1, RoverEntityRenderer::new);
 		EntityRendererRegistry.register(ModEntityTypes.LANDER, LanderEntityRenderer::new);
+
+		// Painting
+		EntityRendererRegistry.register(ModEntityTypes.SPACE_PAINTING, PaintingEntityRenderer::new);
 
 		// Projectiles
 		EntityRendererRegistry.register(ModEntityTypes.ICE_SPIT_ENTITY, FlyingItemEntityRenderer::new);

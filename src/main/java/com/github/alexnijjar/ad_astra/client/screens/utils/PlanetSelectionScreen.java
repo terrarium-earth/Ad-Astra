@@ -39,7 +39,6 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.RegistryKey;
@@ -109,7 +108,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 		}
 
 		// Set the initial gui time to the world time. This creates a random start position for each rotating object.
-		guiTime = handler.getPlayer().world.getRandom().nextFloat(100000.0f);
+		guiTime = handler.getPlayer().world.getRandom().nextFloat() * 100000.0f;
 
 		// Get recipe.
 		ModRecipes.SPACE_STATION_RECIPE.getRecipes(handler.getPlayer().world).forEach(recipe -> {
@@ -253,7 +252,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 				Category solarSystemCategory = new Category(planet.solarSystem(), galaxyCategory);
 				Category planetCategory = new Category(planet.parentWorld() == null ? planet.world().getValue() : planet.parentWorld().getValue(), solarSystemCategory);
 
-				Text label = new TranslatableText(planet.translation());
+				Text label = Text.translatable(planet.translation());
 
 				this.galaxyCategories.add(galaxyCategory);
 				this.solarSystemsCategories.add(solarSystemCategory);
@@ -514,10 +513,10 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 
 	// Do not close unless in creative mode
 	@Override
-	public void onClose() {
+	public void closeScreen() {
 		MinecraftClient client = MinecraftClient.getInstance();
 		if (client.player.isCreative() || client.player.isSpectator()) {
-			super.onClose();
+			super.closeScreen();
 		}
 	}
 

@@ -19,6 +19,8 @@
     "minecraft:armor_stand",
     "minecraft:iron_golem",
     "minecraft:snow_golem",
-    "minecraft:magma_cube"
+    "minecraft:magma_cube",
+    "minecraft:allay",
+    "minecraft:warden"
   ]
 }

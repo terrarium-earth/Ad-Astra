@@ -1,17 +1,17 @@
 package com.github.alexnijjar.ad_astra.client.screens;
 
+import java.awt.Rectangle;
+
 import com.github.alexnijjar.ad_astra.blocks.machines.entity.CompressorBlockEntity;
 import com.github.alexnijjar.ad_astra.screen.handler.CompressorScreenHandler;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
-
-import java.awt.*;
 
 @Environment(EnvType.CLIENT)
 public class CompressorScreen extends AbstractMachineScreen<CompressorScreenHandler> {
@@ -52,7 +52,7 @@ public class CompressorScreen extends AbstractMachineScreen<CompressorScreenHand
 
 		// Burn time tooltip.
 		if (GuiUtil.isHovering(this.getHammerBounds(), mouseX, mouseY)) {
-			this.renderTooltip(matrices, new TranslatableText("gauge.ad_astra.cook_time", entity.getCookTime(), entity.getCookTimeTotal()), mouseX, mouseY);
+			this.renderTooltip(matrices, Text.translatable("gauge.ad_astra.cook_time", entity.getCookTime(), entity.getCookTimeTotal()), mouseX, mouseY);
 		}
 	}
 

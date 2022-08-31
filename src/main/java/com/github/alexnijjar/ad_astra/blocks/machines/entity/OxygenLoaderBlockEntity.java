@@ -1,11 +1,16 @@
 package com.github.alexnijjar.ad_astra.blocks.machines.entity;
 
+import java.util.List;
+
+import org.jetbrains.annotations.Nullable;
+
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.recipes.OxygenConversionRecipe;
 import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
 import com.github.alexnijjar.ad_astra.registry.ModRecipes;
 import com.github.alexnijjar.ad_astra.screen.handler.ConversionScreenHandler;
 import com.github.alexnijjar.ad_astra.util.FluidUtils;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -13,9 +18,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-
-import javax.annotation.Nullable;
-import java.util.List;
 
 public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
 

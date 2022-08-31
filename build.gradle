@@ -37,15 +37,15 @@ dependencies {
 	modImplementation "dev.emi:emi:${emi_version}"
 
 	// REI
-	modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:$project.rei_version")
-    modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:$project.rei_version")
+	// modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:$project.rei_version")
+    // modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:$project.rei_version")
 
 	include modApi("teamreborn:energy:${project.techreborn_energy_version}") {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
 
-	modRuntimeOnly 'RebornCore:RebornCore-1.18:+'
-	modRuntimeOnly 'TechReborn:TechReborn-1.18:+'
+	modRuntimeOnly 'RebornCore:RebornCore-1.19:+'
+	modRuntimeOnly 'TechReborn:TechReborn-1.19:+'
 
 	modImplementation "vazkii.patchouli:Patchouli:${project.patchouli_version}"
 }

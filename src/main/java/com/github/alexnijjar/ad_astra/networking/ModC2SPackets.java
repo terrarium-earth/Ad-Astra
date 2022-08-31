@@ -7,6 +7,7 @@ import com.github.alexnijjar.ad_astra.registry.ModRecipes;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.github.alexnijjar.ad_astra.util.ModKeyBindings;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
+
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -84,7 +85,7 @@ public class ModC2SPackets {
 		ServerPlayNetworking.registerGlobalReceiver(CREATE_SPACE_STATION, (server, player, handler, buf, responseSender) -> {
 			ServerWorld world = server.getWorld(RegistryKey.of(Registry.WORLD_KEY, buf.readIdentifier()));
 			// Create the Space Station from the nbt file.
-			Structure structure = world.getStructureManager().getStructureOrBlank(new ModIdentifier("space_station"));
+			Structure structure = world.getStructureTemplateManager().getStructureOrBlank(new ModIdentifier("space_station"));
 			BlockPos pos = new BlockPos(player.getX() - (structure.getSize().getX() / 2), 100, player.getZ() - (structure.getSize().getZ() / 2));
 			structure.place(world, pos, pos, new StructurePlacementData(), world.random, 2);
 		});

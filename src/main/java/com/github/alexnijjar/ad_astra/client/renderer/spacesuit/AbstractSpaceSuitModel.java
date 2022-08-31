@@ -1,11 +1,14 @@
 package com.github.alexnijjar.ad_astra.client.renderer.spacesuit;
 
+import java.util.Collections;
+
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.blaze3d.vertex.VertexConsumers;
+
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.VertexConsumers;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayers;
@@ -13,8 +16,6 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
-
-import java.util.Collections;
 
 public abstract class AbstractSpaceSuitModel extends BipedEntityModel<LivingEntity> {
 
@@ -34,7 +35,7 @@ public abstract class AbstractSpaceSuitModel extends BipedEntityModel<LivingEnti
 
 	@SuppressWarnings("unchecked")
 	public <T extends LivingEntity> AbstractSpaceSuitModel(ModelPart root, BipedEntityModel<T> contextModel, Identifier headTexture, MinecraftClient client) {
-		super(new EntityRendererFactory.Context(client.getEntityRenderDispatcher(), client.getItemRenderer(), client.getResourceManager(), client.getEntityModelLoader(), client.textRenderer).getPart(EntityModelLayers.PLAYER_INNER_ARMOR));
+		super(new EntityRendererFactory.Context(client.getEntityRenderDispatcher(), client.getItemRenderer(), client.getBlockRenderManager(), client.getEntityRenderDispatcher().getHeldItemRenderer(), client.getResourceManager(), client.getEntityModelLoader(), client.textRenderer).getPart(EntityModelLayers.PLAYER_INNER_ARMOR));
 		this.contextModel = contextModel;
 		this.headTexture = headTexture;
 		ModelPart empty = new ModelPart(Collections.EMPTY_LIST, Collections.EMPTY_MAP);

@@ -1,5 +1,7 @@
 package com.github.alexnijjar.ad_astra.client.renderer.sky;
 
+import java.util.Random;
+
 import com.github.alexnijjar.ad_astra.client.resourcepack.SkyRenderer;
 import com.github.alexnijjar.ad_astra.client.resourcepack.SkyRenderer.StarsRenderer;
 import com.github.alexnijjar.ad_astra.mixin.client.WorldRendererAccessor;
@@ -7,13 +9,21 @@ import com.github.alexnijjar.ad_astra.util.ColourHolder;
 import com.github.alexnijjar.ad_astra.world.WorldSeed;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.BufferRenderer;
+import com.mojang.blaze3d.vertex.VertexBuffer;
+import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.blaze3d.vertex.VertexFormats;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gl.VertexBuffer;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.render.*;
+import net.minecraft.client.render.BackgroundRenderer;
+import net.minecraft.client.render.Camera;
+import net.minecraft.client.render.CameraSubmersionType;
+import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.effect.StatusEffects;
@@ -23,12 +33,10 @@ import net.minecraft.util.math.Matrix4f;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3f;
 
-import java.util.Random;
-
 @Environment(EnvType.CLIENT)
 public class SkyUtil {
 
-	public static float getScale() {
+    public static float getScale() {
 		MinecraftClient client = MinecraftClient.getInstance();
 		float distance = (float) (-3000.0f + client.player.getY() * 4.5f);
 		float scale = 100 * (0.2f - distance / 10000.0f);
@@ -43,7 +51,7 @@ public class SkyUtil {
 		float f = (float) vec3d.getX();
 		float g = (float) vec3d.getY();
 		float h = (float) vec3d.getZ();
-		BackgroundRenderer.setFogBlack();
+		BackgroundRenderer.setShaderFogColor();
 		RenderSystem.depthMask(false);
 
 		RenderSystem.setShaderColor(f, g, h, 1.0f);
@@ -57,7 +65,7 @@ public class SkyUtil {
 		RenderSystem.enableTexture();
 	}
 
-	public static void postRender(WorldRenderContext context, MatrixStack matrices, ClientWorld world, float tickDelta) {
+    public static void postRender(WorldRenderContext context, MatrixStack matrices, ClientWorld world, float tickDelta) {
 
 		Vec3d vec3d = world.getSkyColor(context.gameRenderer().getCamera().getPos(), tickDelta);
 		float f = (float) vec3d.getX();
@@ -100,8 +108,8 @@ public class SkyUtil {
 		matrices.pop();
 	}
 
-	// For rendering textures in the sky
-	public static void render(WorldRenderContext context, BufferBuilder bufferBuilder, Identifier texture, ColourHolder colour, Vec3f rotation, float scale, boolean blending) {
+    // For rendering textures in the sky
+    public static void render(WorldRenderContext context, BufferBuilder bufferBuilder, Identifier texture, ColourHolder colour, Vec3f rotation, float scale, boolean blending) {
 
 		startRendering(context.matrixStack(), rotation);
 		RenderSystem.setShader(GameRenderer::getPositionColorTexShader);
@@ -117,17 +125,16 @@ public class SkyUtil {
 		Matrix4f positionMatrix = context.matrixStack().peek().getModel();
 		RenderSystem.setShaderTexture(0, texture);
 		bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR_TEXTURE);
-		bufferBuilder.vertex(positionMatrix, -scale, 100.0f, -scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).texture(1.0f, 0.0f).next();
-		bufferBuilder.vertex(positionMatrix, scale, 100.0f, -scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).texture(0.0f, 0.0f).next();
-		bufferBuilder.vertex(positionMatrix, scale, 100.0f, scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).texture(0.0f, 1.0f).next();
-		bufferBuilder.vertex(positionMatrix, -scale, 100.0f, scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).texture(1.0f, 1.0f).next();
-		bufferBuilder.end();
-		BufferRenderer.draw(bufferBuilder);
+		bufferBuilder.vertex(positionMatrix, -scale, 100.0f, -scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).uv(1.0f, 0.0f).next();
+		bufferBuilder.vertex(positionMatrix, scale, 100.0f, -scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).uv(0.0f, 0.0f).next();
+		bufferBuilder.vertex(positionMatrix, scale, 100.0f, scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).uv(0.0f, 1.0f).next();
+		bufferBuilder.vertex(positionMatrix, -scale, 100.0f, scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).uv(1.0f, 1.0f).next();
+		BufferRenderer.drawWithShader(bufferBuilder.end());
 
 		endRendering(context.matrixStack());
 	}
 
-	public static VertexBuffer renderStars(WorldRenderContext context, BufferBuilder bufferBuilder, VertexBuffer starsBuffer, int stars, StarsRenderer starsRenderer) {
+    public static VertexBuffer renderStars(WorldRenderContext context, BufferBuilder bufferBuilder, VertexBuffer starsBuffer, int stars, StarsRenderer starsRenderer) {
 
 		startRendering(context.matrixStack(), new Vec3f(-30.0f, 0.0f, context.world().getSkyAngle(context.tickDelta()) * 360.0f));
 		RenderSystem.setShader(GameRenderer::getPositionColorShader);
@@ -137,9 +144,10 @@ public class SkyUtil {
 		}
 
 		starsBuffer = new VertexBuffer();
-		SkyUtil.renderStars(bufferBuilder, stars, starsRenderer.colouredStars());
-		bufferBuilder.end();
-		starsBuffer.upload(bufferBuilder);
+		BufferBuilder.RenderedBuffer renderedBuffer = SkyUtil.renderStars(bufferBuilder, stars, starsRenderer.colouredStars());
+		starsBuffer.bind();
+		starsBuffer.upload(renderedBuffer);
+		VertexBuffer.unbind();
 
 		if (!starsRenderer.daylightVisible()) {
 			float rot = context.world().getStarBrightness(context.tickDelta());
@@ -148,13 +156,16 @@ public class SkyUtil {
 			RenderSystem.setShaderColor(0.8f, 0.8f, 0.8f, 0.8f);
 		}
 
-		BackgroundRenderer.setFogBlack();
-		starsBuffer.setShader(context.matrixStack().peek().getModel(), RenderSystem.getProjectionMatrix(), GameRenderer.getPositionColorShader());
-		context.matrixStack().pop();
-		return starsBuffer;
-	}
+        BackgroundRenderer.clearFog();
+        starsBuffer.bind();
+        starsBuffer.setShader(context.matrixStack().peek().getModel(), RenderSystem.getProjectionMatrix(), GameRenderer.getPositionColorShader());
+        VertexBuffer.unbind();
 
-	private static void renderStars(BufferBuilder buffer, int stars, boolean colouredStars) {
+        context.matrixStack().pop();
+        return starsBuffer;
+    }
+
+    private static BufferBuilder.RenderedBuffer renderStars(BufferBuilder buffer, int stars, boolean colouredStars) {
 		RenderSystem.setShader(GameRenderer::getPositionColorShader);
 		Random random = new Random(WorldSeed.getSeed());
 		buffer.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR);
@@ -221,13 +232,14 @@ public class SkyUtil {
 				buffer.vertex(j + af, k + ad, l + ah).color(starR, starG, starB, 255).next();
 			}
 		}
+		return buffer.end();
 	}
 
-	public static void renderColouring(SkyRenderer.SunsetColour type, BufferBuilder bufferBuilder, MatrixStack matrices, ClientWorld world, float tickDelta, float skyAngle, int sunsetAngle) {
+    public static void renderColouring(SkyRenderer.SunsetColour type, BufferBuilder bufferBuilder, MatrixStack matrices, ClientWorld world, float tickDelta, float skyAngle, int sunsetAngle) {
 
 		float[] fogColours = switch (type) {
-			case VANILLA -> world.getSkyProperties().getFogColorOverride(world.getSkyAngle(tickDelta), tickDelta);
-			case MARS -> ModSky.getMarsColour(skyAngle);
+		case VANILLA -> world.getSkyProperties().getFogColorOverride(world.getSkyAngle(tickDelta), tickDelta);
+		case MARS -> ModSky.getMarsColour(skyAngle);
 		};
 		if (fogColours != null) {
 			RenderSystem.setShader(GameRenderer::getPositionColorShader);
@@ -248,8 +260,8 @@ public class SkyUtil {
 				float cosine = MathHelper.cos(o);
 				bufferBuilder.vertex(matrix4f, MathHelper.sin(o) * 120.0f, cosine * 120.0f, -cosine * 40.0f * fogColours[3]).color(fogColours[0], fogColours[1], fogColours[2], 0.0f).next();
 			}
-			bufferBuilder.end();
-			BufferRenderer.draw(bufferBuilder);
+
+			BufferRenderer.draw(bufferBuilder.end());
 			matrices.pop();
 		}
 	}

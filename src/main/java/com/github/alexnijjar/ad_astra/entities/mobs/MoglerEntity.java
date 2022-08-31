@@ -1,7 +1,10 @@
 package com.github.alexnijjar.ad_astra.entities.mobs;
 
+import org.jetbrains.annotations.Nullable;
+
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.registry.ModEntityTypes;
+
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -14,8 +17,6 @@ import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
-
-import javax.annotation.Nullable;
 
 public class MoglerEntity extends HoglinEntity {
 

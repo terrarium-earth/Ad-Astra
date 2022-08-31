@@ -1,20 +1,21 @@
 package com.github.alexnijjar.ad_astra.world.features;
 
+import org.jetbrains.annotations.Nullable;
+
 import com.github.alexnijjar.ad_astra.registry.ModBlocks;
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.BasaltColumnsFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
-
-import javax.annotation.Nullable;
-import java.util.Random;
 
 public class InfernalSpireColumn extends Feature<BasaltColumnsFeatureConfig> {
 
@@ -78,7 +79,7 @@ public class InfernalSpireColumn extends Feature<BasaltColumnsFeatureConfig> {
 
 		int seaLevel = context.getGenerator().getSeaLevel();
 		BlockPos blockpos = context.getOrigin();
-		Random random = context.getRandom();
+		RandomGenerator random = context.getRandom();
 		BasaltColumnsFeatureConfig config = context.getConfig();
 		if (!canPlaceAt(context.getWorld(), seaLevel, blockpos.mutableCopy())) {
 			return false;

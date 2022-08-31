@@ -69,7 +69,7 @@ public abstract class BucketItemMixin {
 					world.addParticle(ParticleTypes.LARGE_SMOKE, (double) i + Math.random(), (double) j + Math.random(), (double) k + Math.random(), 0.0, 0.0, 0.0);
 				}
 				ci.setReturnValue(true);
-			} else if (world.getDimension().isUltrawarm()) {
+			} else if (world.getDimension().ultraWarm()) {
 				ci.cancel();
 
 				boolean bl2;
@@ -94,7 +94,7 @@ public abstract class BucketItemMixin {
 				if (!world.isClient && bl && !material.isLiquid()) {
 					world.breakBlock(pos, true);
 				}
-				if (world.setBlockState(pos, this.fluid.getDefaultState().getBlockState(), Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD) || blockState.getFluidState().isStill()) {
+				if (world.setBlockState(pos, this.fluid.getDefaultState().getBlockState(), Block.NOTIFY_ALL | Block.REDRAW_ON_MAIN_THREAD) || blockState.getFluidState().isSource()) {
 					SoundEvent soundEvent = this.fluid.isIn(FluidTags.LAVA) ? SoundEvents.ITEM_BUCKET_EMPTY_LAVA : SoundEvents.ITEM_BUCKET_EMPTY;
 					world.playSound(player, pos, soundEvent, SoundCategory.BLOCKS, 1.0f, 1.0f);
 					world.emitGameEvent(player, GameEvent.FLUID_PLACE, pos);

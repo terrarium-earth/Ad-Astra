@@ -1,5 +1,5 @@
 {
-  "name": "ad_astra:run_oil/side_oil_start",
+  "name": "ad_astra:oil_well/oil_well",
   "fallback": "minecraft:empty",
   "elements": [
     {

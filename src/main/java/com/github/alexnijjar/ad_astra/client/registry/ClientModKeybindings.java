@@ -2,6 +2,7 @@ package com.github.alexnijjar.ad_astra.client.registry;
 
 import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntity;
 import com.github.alexnijjar.ad_astra.networking.ModC2SPackets;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -9,7 +10,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 
 @Environment(EnvType.CLIENT)
 public class ClientModKeybindings {
@@ -49,7 +50,7 @@ public class ClientModKeybindings {
 									buf.writeInt(rocket.getId());
 									ClientPlayNetworking.send(ModC2SPackets.LAUNCH_ROCKET, buf);
 								} else if (sentJumpPacket) {
-									client.player.sendMessage(new TranslatableText("message.ad_astra.no_fuel"), false);
+									client.player.sendMessage(Text.translatable("message.ad_astra.no_fuel"), false);
 								}
 							}
 						}

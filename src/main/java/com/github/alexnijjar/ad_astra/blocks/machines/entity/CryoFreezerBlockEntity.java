@@ -1,5 +1,7 @@
 package com.github.alexnijjar.ad_astra.blocks.machines.entity;
 
+import org.jetbrains.annotations.Nullable;
+
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.recipes.CryoFuelConversionRecipe;
 import com.github.alexnijjar.ad_astra.recipes.ModRecipeType;
@@ -7,6 +9,7 @@ import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
 import com.github.alexnijjar.ad_astra.registry.ModRecipes;
 import com.github.alexnijjar.ad_astra.screen.handler.CryoFreezerScreenHandler;
 import com.github.alexnijjar.ad_astra.util.FluidUtils;
+
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.BlockState;
@@ -19,8 +22,6 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-
-import javax.annotation.Nullable;
 
 public class CryoFreezerBlockEntity extends FluidMachineBlockEntity {
 

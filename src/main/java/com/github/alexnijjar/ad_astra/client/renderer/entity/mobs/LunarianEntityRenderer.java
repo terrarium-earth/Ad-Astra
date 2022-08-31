@@ -3,6 +3,7 @@ package com.github.alexnijjar.ad_astra.client.renderer.entity.mobs;
 import com.github.alexnijjar.ad_astra.client.renderer.entity.mobs.models.LunarianEntityModel;
 import com.github.alexnijjar.ad_astra.entities.mobs.LunarianEntity;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
+
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.render.entity.feature.HeadFeatureRenderer;
@@ -29,8 +30,8 @@ public class LunarianEntityRenderer extends MobEntityRenderer<LunarianEntity, Lu
 
 	public LunarianEntityRenderer(EntityRendererFactory.Context context) {
 		super(context, new LunarianEntityModel<>(context.getPart(LunarianEntityModel.LAYER_LOCATION)), 0.5f);
-		this.addFeature(new HeadFeatureRenderer<LunarianEntity, LunarianEntityModel<LunarianEntity>>(this, context.getModelLoader()));
-		this.addFeature(new VillagerHeldItemFeatureRenderer<LunarianEntity, LunarianEntityModel<LunarianEntity>>(this));
+		this.addFeature(new HeadFeatureRenderer<>(this, context.getModelLoader(), context.getHeldItemRenderer()));
+		this.addFeature(new VillagerHeldItemFeatureRenderer<>(this, context.getHeldItemRenderer()));
 	}
 
 	@Override

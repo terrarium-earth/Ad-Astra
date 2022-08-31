@@ -24,13 +24,10 @@ import com.github.alexnijjar.ad_astra.registry.ModRecipes;
 import com.github.alexnijjar.ad_astra.registry.ModScreenHandlers;
 import com.github.alexnijjar.ad_astra.registry.ModSoundEvents;
 import com.github.alexnijjar.ad_astra.registry.ModStructures;
-import com.github.alexnijjar.ad_astra.util.ModIdentifier;
-import com.github.alexnijjar.ad_astra.world.chunk.PlanetChunkGenerator;
 
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 
@@ -72,7 +69,6 @@ public class AdAstra implements ModInitializer {
 		// Worldgen
 		ModFeatures.register();
 		ModStructures.register();
-		Registry.register(Registry.CHUNK_GENERATOR, new ModIdentifier("planet_noise"), PlanetChunkGenerator.CODEC);
 
 		// Packets
 		ModC2SPackets.register();
