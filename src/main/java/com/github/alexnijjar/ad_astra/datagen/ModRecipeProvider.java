@@ -42,7 +42,6 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		createPressurePlateRecipe(exporter, GLACIAN_PRESSURE_PLATE, GLACIAN_PLANKS);
 		createSignRecipe(GLACIAN_SIGN, Ingredient.ofItems(GLACIAN_PLANKS)).criterion("has_tag", method_10420(ModTags.GLACIAN_LOGS)).offerTo(exporter);
 
-
 		// Blasting
 		offerBlasting(exporter, List.of(Items.IRON_INGOT), ModItems.STEEL_INGOT, 1.0f, 100, null);
 		// Blasting + Smelting
@@ -432,6 +431,9 @@ class ModRecipeProvider extends FabricRecipeProvider implements ModBlocks {
 		ShapedRecipeJsonFactory.create(ModItems.JET_SUIT_BOOTS).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_CALORITE).m_hadhiznl(Character.valueOf('B'), ModTags.CALORITE_BLOCKS).input(Character.valueOf('N'), ModItems.NETHERITE_SPACE_BOOTS)
 				.pattern(" N ").pattern("# #").pattern("B B").group(null).criterion("has_tag", method_10420(ModTags.COMPRESSED_CALORITE)).offerTo(exporter);
 
+		// Soul Torch
+		ShapedRecipeJsonFactory.create(Items.SOUL_TORCH).input(Character.valueOf('#'), ModItems.COAL_TORCH).input(Character.valueOf('S'), Items.SOUL_SOIL).pattern("S").pattern("#")
+				.criterion(hasItem(ModItems.COAL_TORCH), conditionsFromItem(ModItems.COAL_TORCH)).offerTo(exporter);
 		// Hammer
 		ShapedRecipeJsonFactory.create(ModItems.HAMMER).input(Character.valueOf('#'), Items.IRON_INGOT).input(Character.valueOf('|'), Items.STICK).pattern(" # ").pattern(" |#").pattern("|  ").group(null)
 				.criterion(hasItem(Items.IRON_INGOT), conditionsFromItem(Items.IRON_INGOT)).offerTo(exporter);

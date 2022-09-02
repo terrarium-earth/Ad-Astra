@@ -19,8 +19,6 @@ import com.github.alexnijjar.ad_astra.client.renderer.entity.vehicles.rockets.ti
 import com.github.alexnijjar.ad_astra.client.renderer.entity.vehicles.rockets.tier_3.RocketItemRendererTier3;
 import com.github.alexnijjar.ad_astra.client.renderer.entity.vehicles.rockets.tier_4.RocketItemRendererTier4;
 import com.github.alexnijjar.ad_astra.client.renderer.entity.vehicles.rover.RoverItemRenderer;
-import com.github.alexnijjar.ad_astra.client.renderer.spacesuit.JetSuitModel;
-import com.github.alexnijjar.ad_astra.client.renderer.spacesuit.SpaceSuitLegsModel;
 import com.github.alexnijjar.ad_astra.client.renderer.spacesuit.SpaceSuitModel;
 import com.github.alexnijjar.ad_astra.client.renderer.spacesuit.SpaceSuitRenderer;
 import com.github.alexnijjar.ad_astra.client.resourcepack.Galaxy;
@@ -138,8 +136,6 @@ public class AdAstraClient implements ClientModInitializer {
 
 		// Custom space suit rendering
 		EntityModelLayerRegistry.registerModelLayer(SpaceSuitModel.LAYER_LOCATION, SpaceSuitModel::getTexturedModelData);
-		EntityModelLayerRegistry.registerModelLayer(SpaceSuitLegsModel.LAYER_LOCATION, SpaceSuitLegsModel::getTexturedModelData);
-		EntityModelLayerRegistry.registerModelLayer(JetSuitModel.LAYER_LOCATION, JetSuitModel::getTexturedModelData);
 		SpaceSuitRenderer.register();
 
 		// Fluids

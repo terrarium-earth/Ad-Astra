@@ -1,6 +1,6 @@
 {
     "sea_level": 0,
-    "disable_mob_generation": true,
+    "disable_mob_generation": false,
     "aquifers_enabled": false,
     "ore_veins_enabled": false,
     "legacy_random_source": false,
@@ -33,7 +33,56 @@
         "vein_ridged": 0,
         "vein_gap": 0
     },
-    "spawn_target": [],
+    "spawn_target": [
+        {
+            "erosion": [
+                -1,
+                1
+            ],
+            "depth": 0,
+            "weirdness": [
+                -1,
+                -0.16
+            ],
+            "offset": 0,
+            "temperature": [
+                -1,
+                1
+            ],
+            "humidity": [
+                -1,
+                1
+            ],
+            "continentalness": [
+                -0.11,
+                1
+            ]
+        },
+        {
+            "erosion": [
+                -1,
+                1
+            ],
+            "depth": 0,
+            "weirdness": [
+                0.16,
+                1
+            ],
+            "offset": 0,
+            "temperature": [
+                -1,
+                1
+            ],
+            "humidity": [
+                -1,
+                1
+            ],
+            "continentalness": [
+                -0.11,
+                1
+            ]
+        }
+    ],
     "surface_rule": {
         "type": "minecraft:block",
         "result_state": {

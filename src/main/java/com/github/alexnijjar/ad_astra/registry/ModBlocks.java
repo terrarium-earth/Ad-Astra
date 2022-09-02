@@ -301,18 +301,18 @@ public interface ModBlocks {
 	public static final SignType GLACIAN = SignTypeInvoker.adastra_invokeRegister(SignTypeInvoker.adastra_init("glacian"));
 
 	// Glacian Wood
-	public static final Block GLACIAN_LOG = register("glacian_log", new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_LOG).mapColor(MapColor.LIGHT_BLUE_GRAY)));
-	public static final Block STRIPPED_GLACIAN_LOG = register("stripped_glacian_log", new PillarBlock(FabricBlockSettings.copyOf(Blocks.STRIPPED_OAK_LOG).mapColor(MapColor.LIGHT_BLUE_GRAY)));
-	public static final Block GLACIAN_LEAVES = register("glacian_leaves", new LeavesBlock(FabricBlockSettings.copy(Blocks.OAK_LEAVES).nonOpaque()));
-	public static final Block GLACIAN_PLANKS = register("glacian_planks", new Block(FabricBlockSettings.copy(Blocks.OAK_PLANKS)));
-	public static final Block GLACIAN_STAIRS = register("glacian_stairs", new StairsBlock(GLACIAN_PLANKS.getDefaultState(), FabricBlockSettings.copy(Blocks.OAK_PLANKS)));
-	public static final Block GLACIAN_SLAB = register("glacian_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS)));
-	public static final Block GLACIAN_DOOR = register("glacian_door", new DoorBlock(FabricBlockSettings.copy(Blocks.OAK_DOOR)), true);
-	public static final Block GLACIAN_TRAPDOOR = register("glacian_trapdoor", new TrapdoorBlock(FabricBlockSettings.copy(Blocks.OAK_TRAPDOOR)));
-	public static final Block GLACIAN_FENCE = register("glacian_fence", new FenceBlock(FabricBlockSettings.copy(Blocks.OAK_FENCE)));
-	public static final Block GLACIAN_FENCE_GATE = register("glacian_fence_gate", new FenceGateBlock(FabricBlockSettings.copy(Blocks.OAK_FENCE_GATE)));
+	public static final Block GLACIAN_LOG = register("glacian_log", new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_LOG).mapColor(MapColor.LIGHT_BLUE_GRAY).slipperiness(0.5f)));
+	public static final Block STRIPPED_GLACIAN_LOG = register("stripped_glacian_log", new PillarBlock(FabricBlockSettings.copyOf(Blocks.STRIPPED_OAK_LOG).mapColor(MapColor.LIGHT_BLUE_GRAY).slipperiness(0.5f)));
+	public static final Block GLACIAN_LEAVES = register("glacian_leaves", new LeavesBlock(FabricBlockSettings.copy(Blocks.OAK_LEAVES).nonOpaque().slipperiness(0.5f)));
+	public static final Block GLACIAN_PLANKS = register("glacian_planks", new Block(FabricBlockSettings.copy(Blocks.OAK_PLANKS).slipperiness(0.5f).slipperiness(0.5f)));
+	public static final Block GLACIAN_STAIRS = register("glacian_stairs", new StairsBlock(GLACIAN_PLANKS.getDefaultState(), FabricBlockSettings.copy(Blocks.OAK_PLANKS).slipperiness(0.5f)));
+	public static final Block GLACIAN_SLAB = register("glacian_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).slipperiness(0.5f)));
+	public static final Block GLACIAN_DOOR = register("glacian_door", new DoorBlock(FabricBlockSettings.copy(Blocks.OAK_DOOR).slipperiness(0.5f)), true);
+	public static final Block GLACIAN_TRAPDOOR = register("glacian_trapdoor", new TrapdoorBlock(FabricBlockSettings.copy(Blocks.OAK_TRAPDOOR).slipperiness(0.5f)));
+	public static final Block GLACIAN_FENCE = register("glacian_fence", new FenceBlock(FabricBlockSettings.copy(Blocks.OAK_FENCE).slipperiness(0.5f).slipperiness(0.5f)));
+	public static final Block GLACIAN_FENCE_GATE = register("glacian_fence_gate", new FenceGateBlock(FabricBlockSettings.copy(Blocks.OAK_FENCE_GATE).slipperiness(0.5f)));
 	public static final Block GLACIAN_BUTTON = register("glacian_button", new WoodenButtonBlock(FabricBlockSettings.copy(Blocks.OAK_BUTTON)));
-	public static final Block GLACIAN_PRESSURE_PLATE = register("glacian_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, FabricBlockSettings.copy(Blocks.OAK_PRESSURE_PLATE)));
+	public static final Block GLACIAN_PRESSURE_PLATE = register("glacian_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, FabricBlockSettings.copy(Blocks.OAK_PRESSURE_PLATE).slipperiness(0.5f)));
 	public static final Block GLACIAN_SIGN = register("glacian_sign", new SignBlock(FabricBlockSettings.copy(Blocks.OAK_SIGN), GLACIAN));
 	public static final Block GLACIAN_WALL_SIGN = register("glacian_wall_sign", new WallSignBlock(FabricBlockSettings.copy(Blocks.OAK_WALL_SIGN).dropsLike(GLACIAN_SIGN), GLACIAN), true);
 	public static final Block GLACIAN_FUR = register("glacian_fur", new Block(FabricBlockSettings.copy(Blocks.WHITE_WOOL)));
