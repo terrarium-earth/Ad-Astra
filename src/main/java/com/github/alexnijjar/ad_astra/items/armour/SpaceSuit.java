@@ -15,8 +15,8 @@ import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.fluid.Fluid;
-import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.DyeableArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Style;
@@ -24,7 +24,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 
-public class SpaceSuit extends ArmorItem implements FluidContainingItem {
+public class SpaceSuit extends DyeableArmorItem implements FluidContainingItem {
 
 	public SpaceSuit(ArmorMaterial material, EquipmentSlot slot, Item.Settings settings) {
 		super(material, slot, settings);
@@ -76,5 +76,11 @@ public class SpaceSuit extends ArmorItem implements FluidContainingItem {
 		if (chest.getItem() instanceof SpaceSuit suit) {
 			suit.setAmount(chest, suit.getAmount(chest) - amount);
 		}
+	}
+
+	@Override
+	public int getColor(ItemStack stack) {
+		int colour = super.getColor(stack);
+		return colour == 10511680 ? 0xFFFFFF : colour;
 	}
 }

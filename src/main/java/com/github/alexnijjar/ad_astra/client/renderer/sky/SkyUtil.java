@@ -133,6 +133,7 @@ public class SkyUtil {
 
 		endRendering(context.matrixStack());
 	}
+	
 
     public static VertexBuffer renderStars(WorldRenderContext context, BufferBuilder bufferBuilder, VertexBuffer starsBuffer, int stars, StarsRenderer starsRenderer) {
 
