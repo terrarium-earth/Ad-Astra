@@ -2,7 +2,7 @@
   "parent": "minecraft:block/outer_stairs",
   "textures": {
     "bottom": "ad_astra:block/ostrum_plating",
-    "top": "ad_astra:block/ostrum_plating",
-    "side": "ad_astra:block/ostrum_plating"
+    "side": "ad_astra:block/ostrum_plating",
+    "top": "ad_astra:block/ostrum_plating"
   }
 }

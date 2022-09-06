@@ -1,24 +1,24 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "#O#",
-    "OTO",
-    "BOB"
-  ],
   "key": {
     "#": {
       "tag": "c:compressed_ostrum"
+    },
+    "B": {
+      "item": "ad_astra:ostrum_block"
     },
     "O": {
       "item": "ad_astra:ostrum_ingot"
     },
     "T": {
       "item": "ad_astra:ostrum_tank"
-    },
-    "B": {
-      "item": "ad_astra:ostrum_block"
     }
   },
+  "pattern": [
+    "#O#",
+    "OTO",
+    "BOB"
+  ],
   "result": {
     "item": "ad_astra:cryo_freezer"
   }

@@ -309,7 +309,7 @@
     "gauge_text.ad_astra.oxygen_leak_warning[2]": "이 분사기로 감당하기에 너무",
     "gauge_text.ad_astra.oxygen_leak_warning[3]": "클 수 있습니다. 건물이 확실하게",
     "gauge_text.ad_astra.oxygen_leak_warning[4]": "구멍이 없는지 있는지 확인하세요.",
-    "gauge_text.ad_astra.storage": "§e에너지: %s ⚡ / %d E",
+    "gauge_text.ad_astra.storage": "§e에너지: %s ⚡ / %d ⚡",
     "gui.ad_astra.text.back": "뒤로",
     "gui.ad_astra.text.catalog": "카탈로그",
     "gui.ad_astra.text.category": "카테고리",

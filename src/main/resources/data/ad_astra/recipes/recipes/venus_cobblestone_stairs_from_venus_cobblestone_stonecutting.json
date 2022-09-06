@@ -1,8 +1,8 @@
 {
   "type": "minecraft:stonecutting",
+  "count": 1,
   "ingredient": {
     "item": "ad_astra:venus_cobblestone"
   },
-  "result": "ad_astra:venus_cobblestone_stairs",
-  "count": 1
+  "result": "ad_astra:venus_cobblestone_stairs"
 }

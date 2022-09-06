@@ -1,16 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "SS",
-    "SS"
-  ],
   "key": {
     "S": {
       "item": "ad_astra:permafrost"
     }
   },
+  "pattern": [
+    "SS",
+    "SS"
+  ],
   "result": {
-    "item": "ad_astra:permafrost_bricks",
-    "count": 4
+    "count": 4,
+    "item": "ad_astra:permafrost_bricks"
   }
 }

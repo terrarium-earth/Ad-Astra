@@ -2,7 +2,7 @@
   "parent": "minecraft:block/outer_stairs",
   "textures": {
     "bottom": "ad_astra:block/chiseled_glacio_stone_bricks",
-    "top": "ad_astra:block/chiseled_glacio_stone_bricks",
-    "side": "ad_astra:block/chiseled_glacio_stone_bricks"
+    "side": "ad_astra:block/chiseled_glacio_stone_bricks",
+    "top": "ad_astra:block/chiseled_glacio_stone_bricks"
   }
 }

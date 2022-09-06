@@ -1,9 +1,9 @@
 {
   "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 1.0,
   "ingredient": {
     "item": "ad_astra:venus_gold_ore"
   },
-  "result": "minecraft:gold_ingot",
-  "experience": 1.0,
-  "cookingtime": 200
+  "result": "minecraft:gold_ingot"
 }

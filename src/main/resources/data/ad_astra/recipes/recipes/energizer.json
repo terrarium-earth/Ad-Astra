@@ -1,24 +1,24 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "#I#",
-    "#D#",
-    "B#B"
-  ],
   "key": {
     "#": {
       "tag": "c:compressed_ostrum"
+    },
+    "B": {
+      "item": "ad_astra:ostrum_block"
     },
     "D": {
       "item": "minecraft:diamond_block"
     },
     "I": {
       "item": "minecraft:diamond"
-    },
-    "B": {
-      "item": "ad_astra:ostrum_block"
     }
   },
+  "pattern": [
+    "#I#",
+    "#D#",
+    "B#B"
+  ],
   "result": {
     "item": "ad_astra:energizer"
   }
