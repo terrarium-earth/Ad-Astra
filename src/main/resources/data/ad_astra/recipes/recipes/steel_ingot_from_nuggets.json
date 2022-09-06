@@ -1,16 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
   "group": "steel_ingot",
-  "pattern": [
-    "###",
-    "###",
-    "###"
-  ],
   "key": {
     "#": {
       "item": "ad_astra:steel_nugget"
     }
   },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
   "result": {
     "item": "ad_astra:steel_ingot"
   }

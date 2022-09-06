@@ -79,6 +79,15 @@
             }
         },
         "final_density": {
+            "type": "minecraft:max",
+            "argument1": {
+                "type": "minecraft:y_clamped_gradient",
+                "from_y": -64,
+                "to_y": -63,
+                "from_value": 1,
+                "to_value": -1
+            },
+            "argument2": {
             "type": "minecraft:min",
             "argument1": {
                 "type": "minecraft:squeeze",
@@ -198,6 +207,7 @@
                 }
             },
             "argument2": "minecraft:overworld/caves/noodle"
+        }
         },
         "vein_toggle": {
             "type": "minecraft:interpolated",

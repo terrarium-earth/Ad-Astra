@@ -1,9 +1,9 @@
 {
   "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 1.0,
   "ingredient": {
     "item": "ad_astra:raw_ostrum"
   },
-  "result": "ad_astra:ostrum_ingot",
-  "experience": 1.0,
-  "cookingtime": 200
+  "result": "ad_astra:ostrum_ingot"
 }

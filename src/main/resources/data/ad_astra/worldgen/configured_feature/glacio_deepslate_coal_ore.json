@@ -10,7 +10,7 @@
           "tag": "minecraft:deepslate_ore_replaceables"
         },
         "state": {
-          "Name": "ad_astra:glacio_deepslate_coal_ore"
+          "Name": "minecraft:deepslate_coal_ore"
         }
       }
     ]

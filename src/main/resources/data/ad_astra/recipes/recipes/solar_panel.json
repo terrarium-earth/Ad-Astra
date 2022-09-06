@@ -1,21 +1,21 @@
 {
   "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "tag": "c:compressed_desh"
+    },
+    "G": {
+      "item": "minecraft:blue_stained_glass"
+    },
+    "S": {
+      "item": "ad_astra:compressed_steel"
+    }
+  },
   "pattern": [
     "GGG",
     "S#S",
     "###"
   ],
-  "key": {
-    "#": {
-      "tag": "c:compressed_desh"
-    },
-    "S": {
-      "item": "ad_astra:compressed_steel"
-    },
-    "G": {
-      "item": "minecraft:blue_stained_glass"
-    }
-  },
   "result": {
     "item": "ad_astra:solar_panel"
   }

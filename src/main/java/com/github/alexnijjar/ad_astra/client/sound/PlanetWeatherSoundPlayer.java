@@ -66,7 +66,7 @@ public class PlanetWeatherSoundPlayer implements ClientPlayerTickable {
             MinecraftClient client = MinecraftClient.getInstance();
 
             double height = 80.0;
-            double max = 0.05;
+            double max = 0.2;
             if (world.isRaining()) {
                 height -= 10.0;
                 max += 0.1;

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_right",
+  "textures": {
+    "bottom": "ad_astra:block/glacian_door_bottom",
+    "top": "ad_astra:block/glacian_door_top"
+  }
+}

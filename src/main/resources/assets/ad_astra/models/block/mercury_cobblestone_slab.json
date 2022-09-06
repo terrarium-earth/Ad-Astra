@@ -2,7 +2,7 @@
   "parent": "minecraft:block/slab",
   "textures": {
     "bottom": "ad_astra:block/mercury_cobblestone",
-    "top": "ad_astra:block/mercury_cobblestone",
-    "side": "ad_astra:block/mercury_cobblestone"
+    "side": "ad_astra:block/mercury_cobblestone",
+    "top": "ad_astra:block/mercury_cobblestone"
   }
 }

@@ -1,16 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "###",
-    "###"
-  ],
   "key": {
     "#": {
       "item": "ad_astra:glacian_planks"
     }
   },
+  "pattern": [
+    "###",
+    "###"
+  ],
   "result": {
-    "item": "ad_astra:glacian_trapdoor",
-    "count": 2
+    "count": 2,
+    "item": "ad_astra:glacian_trapdoor"
   }
 }

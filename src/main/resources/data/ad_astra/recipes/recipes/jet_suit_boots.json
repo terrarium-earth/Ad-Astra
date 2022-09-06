@@ -1,10 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    " N ",
-    "# #",
-    "B B"
-  ],
   "key": {
     "#": {
       "tag": "c:compressed_calorite"
@@ -16,6 +11,11 @@
       "item": "ad_astra:netherite_space_boots"
     }
   },
+  "pattern": [
+    " N ",
+    "# #",
+    "B B"
+  ],
   "result": {
     "item": "ad_astra:jet_suit_boots"
   }
