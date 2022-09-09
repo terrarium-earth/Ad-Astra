@@ -60,9 +60,9 @@ public class SlidingDoorBlockEntity extends BlockEntity {
 
             if (!world.isClient) {
                 if (!open && slideTicks == 94) {
-                    world.playSound(null, pos, ModSoundEvents.LARGE_DOOR_CLOSE, SoundCategory.BLOCKS, 0.5f, 1);
+                    world.playSound(null, pos, ModSoundEvents.LARGE_DOOR_CLOSE, SoundCategory.BLOCKS, 0.3f, 1);
                 } else if (open && slideTicks == 6) {
-                    world.playSound(null, pos, ModSoundEvents.LARGE_DOOR_OPEN, SoundCategory.BLOCKS, 0.5f, 1);
+                    world.playSound(null, pos, ModSoundEvents.LARGE_DOOR_OPEN, SoundCategory.BLOCKS, 0.3f, 1);
                 }
             }
             slideTicks = MathHelper.clamp(slideTicks, 0, 100);

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "ad_astra:block/strophar_mushroom"
+  }
+}

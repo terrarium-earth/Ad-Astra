@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_left_open",
+  "textures": {
+    "bottom": "ad_astra:block/aeronos_door_bottom",
+    "top": "ad_astra:block/aeronos_door_top"
+  }
+}

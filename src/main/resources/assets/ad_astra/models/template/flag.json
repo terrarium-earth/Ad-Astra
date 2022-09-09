@@ -1,6 +1,5 @@
 {
   "credit": "Made with Blockbench",
-  "parent": "flag",
   "elements": [
     {
       "from": [
@@ -75,7 +74,7 @@
             1,
             1
           ],
-          "texture": "#missing"
+          "texture": "#0"
         }
       }
     },
@@ -193,7 +192,7 @@
             1,
             8
           ],
-          "texture": "#missing"
+          "texture": "#0"
         },
         "south": {
           "uv": [
@@ -211,7 +210,7 @@
             1,
             8
           ],
-          "texture": "#missing"
+          "texture": "#0"
         },
         "up": {
           "uv": [
@@ -220,7 +219,7 @@
             14,
             1
           ],
-          "texture": "#missing"
+          "texture": "#0"
         },
         "down": {
           "uv": [
@@ -229,7 +228,7 @@
             14,
             1
           ],
-          "texture": "#missing"
+          "texture": "#0"
         }
       }
     }

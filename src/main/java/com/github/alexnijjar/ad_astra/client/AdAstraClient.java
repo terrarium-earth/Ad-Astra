@@ -19,6 +19,7 @@ import com.github.alexnijjar.ad_astra.client.renderer.entity.vehicles.rockets.ti
 import com.github.alexnijjar.ad_astra.client.renderer.entity.vehicles.rockets.tier_3.RocketItemRendererTier3;
 import com.github.alexnijjar.ad_astra.client.renderer.entity.vehicles.rockets.tier_4.RocketItemRendererTier4;
 import com.github.alexnijjar.ad_astra.client.renderer.entity.vehicles.rover.RoverItemRenderer;
+import com.github.alexnijjar.ad_astra.client.renderer.spacesuit.NetheriteSpaceSuitModel;
 import com.github.alexnijjar.ad_astra.client.renderer.spacesuit.SpaceSuitModel;
 import com.github.alexnijjar.ad_astra.client.renderer.spacesuit.SpaceSuitRenderer;
 import com.github.alexnijjar.ad_astra.client.resourcepack.Galaxy;
@@ -47,11 +48,15 @@ import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
+import net.minecraft.block.entity.ChestBlockEntity;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.TexturedRenderLayers;
+import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
 import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.item.Item;
 import net.minecraft.screen.PlayerScreenHandler;
+import net.minecraft.util.math.BlockPos;
 
 public class AdAstraClient implements ClientModInitializer {
 
@@ -97,6 +102,16 @@ public class AdAstraClient implements ClientModInitializer {
 		BuiltinItemRendererRegistry.INSTANCE.register(ModItems.TIER_3_ROCKET, new RocketItemRendererTier3());
 		BuiltinItemRendererRegistry.INSTANCE.register(ModItems.TIER_4_ROCKET, new RocketItemRendererTier4());
 
+		BuiltinItemRendererRegistry.INSTANCE.register(ModBlocks.AERONOS_CHEST, (stack, mode, matrices, vertexConsumers, light, overlay) -> {
+			BlockEntityRenderDispatcher dispatcher = MinecraftClient.getInstance().getBlockEntityRenderDispatcher();
+			dispatcher.renderEntity(new ChestBlockEntity(BlockPos.ORIGIN, ModBlocks.AERONOS_CHEST.getDefaultState()), matrices, vertexConsumers, light, overlay);
+		});
+
+		BuiltinItemRendererRegistry.INSTANCE.register(ModBlocks.STROPHAR_CHEST, (stack, mode, matrices, vertexConsumers, light, overlay) -> {
+			BlockEntityRenderDispatcher dispatcher = MinecraftClient.getInstance().getBlockEntityRenderDispatcher();
+			dispatcher.renderEntity(new ChestBlockEntity(BlockPos.ORIGIN, ModBlocks.STROPHAR_CHEST.getDefaultState()), matrices, vertexConsumers, light, overlay);
+		});
+
 		// Rover item
 		BuiltinItemRendererRegistry.INSTANCE.register(ModItems.TIER_1_ROVER, new RoverItemRenderer());
 
@@ -136,6 +151,7 @@ public class AdAstraClient implements ClientModInitializer {
 
 		// Custom space suit rendering
 		EntityModelLayerRegistry.registerModelLayer(SpaceSuitModel.LAYER_LOCATION, SpaceSuitModel::getTexturedModelData);
+		EntityModelLayerRegistry.registerModelLayer(NetheriteSpaceSuitModel.LAYER_LOCATION, NetheriteSpaceSuitModel::getTexturedModelData);
 		SpaceSuitRenderer.register();
 
 		// Fluids
@@ -163,15 +179,26 @@ public class AdAstraClient implements ClientModInitializer {
 			registry.register(new ModIdentifier("block/fluid_oxygen_still"));
 		});
 
+		// Chest textures
+		ClientSpriteRegistryCallback.event(TexturedRenderLayers.CHEST_ATLAS_TEXTURE).register((atlasTexture, registry) -> {
+			registry.register(new ModIdentifier("entity/chest/aeronos_chest"));
+			registry.register(new ModIdentifier("entity/chest/aeronos_chest_right"));
+			registry.register(new ModIdentifier("entity/chest/aeronos_chest_left"));
+			registry.register(new ModIdentifier("entity/chest/strophar_chest"));
+			registry.register(new ModIdentifier("entity/chest/strophar_chest_right"));
+			registry.register(new ModIdentifier("entity/chest/strophar_chest_left"));
+		});
+
 		BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.FUEL_STILL, ModFluids.FLOWING_FUEL);
 		BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.CRYO_FUEL_STILL, ModFluids.FLOWING_CRYO_FUEL);
 		BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.OIL_STILL, ModFluids.FLOWING_OIL);
 		BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.OXYGEN_STILL);
 
-		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), ModBlocks.WATER_PUMP, ModBlocks.ENERGIZER, ModBlocks.STEEL_DOOR, ModBlocks.STEEL_TRAPDOOR, ModBlocks.GLACIAN_DOOR, ModBlocks.GLACIAN_TRAPDOOR, ModBlocks.COAL_TORCH,
-				ModBlocks.WALL_COAL_TORCH);
+		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), ModBlocks.WATER_PUMP, ModBlocks.ENERGIZER, ModBlocks.STEEL_DOOR, ModBlocks.STEEL_TRAPDOOR, ModBlocks.GLACIAN_DOOR, ModBlocks.GLACIAN_TRAPDOOR, ModBlocks.AERONOS_DOOR,
+				ModBlocks.AERONOS_TRAPDOOR, ModBlocks.STROPHAR_DOOR, ModBlocks.STROPHAR_TRAPDOOR, ModBlocks.COAL_TORCH, ModBlocks.WALL_COAL_TORCH);
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(), ModBlocks.COAL_LANTERN, ModBlocks.GLACIAN_LEAVES);
-		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), ModBlocks.NASA_WORKBENCH);
+		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), ModBlocks.NASA_WORKBENCH, ModBlocks.AERONOS_MUSHROOM, ModBlocks.STROPHAR_MUSHROOM, ModBlocks.AERONOS_LADDER, ModBlocks.STROPHAR_LADDER, ModBlocks.AERONOS_CHEST,
+				ModBlocks.STROPHAR_CHEST);
 
 		// Sign textures
 		TexturedRenderLayers.WOOD_TYPE_TEXTURES.put(ModBlocks.GLACIAN, new SpriteIdentifier(TexturedRenderLayers.SIGNS_ATLAS_TEXTURE, new ModIdentifier("entity/signs/" + ModBlocks.GLACIAN.getName())));

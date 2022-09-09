@@ -128,7 +128,7 @@
 						6,
 						6
 					],
-					"texture": "#missing"
+					"texture": "#0"
 				},
 				"down": {
 					"uv": [
@@ -137,7 +137,7 @@
 						6,
 						6
 					],
-					"texture": "#missing"
+					"texture": "#0"
 				}
 			}
 		},
@@ -205,7 +205,7 @@
 						8,
 						8
 					],
-					"texture": "#missing"
+					"texture": "#0"
 				}
 			}
 		}

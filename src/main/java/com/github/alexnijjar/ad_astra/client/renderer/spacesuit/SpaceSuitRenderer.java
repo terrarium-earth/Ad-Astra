@@ -22,8 +22,15 @@ public class SpaceSuitRenderer {
 		ArmorRenderer.register((matrices, vertexConsumers, stack, entity, slot, light, contextModel) -> {
 			EntityModelLoader modelLoader = MinecraftClient.getInstance().getEntityModelLoader();
 			ModelPart layer = modelLoader.getModelPart(SpaceSuitModel.LAYER_LOCATION);
-			AbstractSpaceSuitModel model = new AbstractSpaceSuitModel(layer, contextModel, slot, stack, SPACE_SUIT_TEXTURE);
+			SpaceSuitModel model = new SpaceSuitModel(layer, contextModel, slot, stack, SPACE_SUIT_TEXTURE);
 			ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, model, SPACE_SUIT_TEXTURE);
 		}, ModItems.SPACE_HELMET, ModItems.SPACE_SUIT, ModItems.SPACE_PANTS, ModItems.SPACE_BOOTS);
+
+		ArmorRenderer.register((matrices, vertexConsumers, stack, entity, slot, light, contextModel) -> {
+			EntityModelLoader modelLoader = MinecraftClient.getInstance().getEntityModelLoader();
+			ModelPart layer = modelLoader.getModelPart(NetheriteSpaceSuitModel.LAYER_LOCATION);
+			SpaceSuitModel model = new SpaceSuitModel(layer, contextModel, slot, stack, NETHERITE_SPACE_SUIT_TEXTURE);
+			ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, model, NETHERITE_SPACE_SUIT_TEXTURE);
+		}, ModItems.NETHERITE_SPACE_HELMET, ModItems.NETHERITE_SPACE_SUIT, ModItems.NETHERITE_SPACE_PANTS, ModItems.NETHERITE_SPACE_BOOTS);
 	}
 }

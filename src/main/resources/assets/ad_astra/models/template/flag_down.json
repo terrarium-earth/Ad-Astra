@@ -1,6 +1,5 @@
 {
   "credit": "Made with Blockbench",
-  "parent": "flag_down",
   "elements": [
     {
       "from": [
@@ -75,7 +74,7 @@
             1,
             1
           ],
-          "texture": "#missing"
+          "texture": "#0"
         }
       }
     },

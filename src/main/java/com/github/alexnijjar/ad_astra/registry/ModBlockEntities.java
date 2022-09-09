@@ -86,10 +86,17 @@ public class ModBlockEntities {
 
 		// Add custom signs to the sign block entity registry
 		BlockEntityTypeAccessor signRegistry = ((BlockEntityTypeAccessor) BlockEntityType.SIGN);
-		Set<Block> blocks = new HashSet<>(signRegistry.getBlocks());
-		blocks.add(ModBlocks.GLACIAN_SIGN);
-		blocks.add(ModBlocks.GLACIAN_WALL_SIGN);
-		signRegistry.setBlocks(blocks);
+		Set<Block> signBlocks = new HashSet<>(signRegistry.getBlocks());
+		signBlocks.add(ModBlocks.GLACIAN_SIGN);
+		signBlocks.add(ModBlocks.GLACIAN_WALL_SIGN);
+		signRegistry.setBlocks(signBlocks);
+
+		// Add custom chests to the chest block entity registry
+		BlockEntityTypeAccessor chestRegistry = ((BlockEntityTypeAccessor) BlockEntityType.CHEST);
+		Set<Block> chestBlocks = new HashSet<>(chestRegistry.getBlocks());
+		chestBlocks.add(ModBlocks.AERONOS_CHEST);
+		chestBlocks.add(ModBlocks.STROPHAR_CHEST);
+		chestRegistry.setBlocks(chestBlocks);
 
 		EnergyStorage.SIDED.registerForBlockEntities((blockEntity, direction) -> ((AbstractMachineBlockEntity) blockEntity).getSideEnergyStorage(direction), SOLAR_PANEL, COAL_GENERATOR, COMPRESSOR, FUEL_REFINERY, OXYGEN_LOADER, OXYGEN_DISTRIBUTOR,
 				WATER_PUMP, ENERGIZER, CRYO_FREEZER);
