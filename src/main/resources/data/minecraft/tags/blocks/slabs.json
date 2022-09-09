@@ -35,6 +35,8 @@
         "ad_astra:mercury_stone_slab",
         "ad_astra:glacio_cobblestone_slab",
         "ad_astra:glacio_stone_slab",
-        "ad_astra:glacian_slab"
+        "ad_astra:glacian_slab",
+        "ad_astra:aeronos_slab",
+        "ad_astra:strophar_slab"
     ]
 }

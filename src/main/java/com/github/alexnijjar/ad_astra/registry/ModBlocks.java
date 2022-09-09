@@ -30,14 +30,18 @@ import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.ChestBlock;
 import net.minecraft.block.DoorBlock;
 import net.minecraft.block.ExperienceDroppingBlock;
 import net.minecraft.block.FallingBlock;
 import net.minecraft.block.FenceBlock;
 import net.minecraft.block.FenceGateBlock;
+import net.minecraft.block.LadderBlock;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
+import net.minecraft.block.MushroomBlock;
+import net.minecraft.block.MushroomPlantBlock;
 import net.minecraft.block.PillarBlock;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.SignBlock;
@@ -48,14 +52,15 @@ import net.minecraft.block.TrapdoorBlock;
 import net.minecraft.block.WallBlock;
 import net.minecraft.block.WallSignBlock;
 import net.minecraft.block.WoodenButtonBlock;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.SignType;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.gen.feature.TreeConfiguredFeatures;
 
-public interface ModBlocks {
-
-	Set<Block> blocks = new HashSet<>();
+public class ModBlocks {
+	public static final Set<Block> blocks = new HashSet<>();
 
 	// Rocket Launch Pad
 	public static final Block ROCKET_LAUNCH_PAD = register("rocket_launch_pad", new RocketLaunchPad(FabricBlockSettings.copy(Blocks.CUT_COPPER)));
@@ -167,7 +172,7 @@ public interface ModBlocks {
 
 	public static final Block SKY_STONE = register("sky_stone", new Block(FabricBlockSettings.copy(Blocks.STONE)));
 
-	// Moon stones
+	// Moon Stones
 	public static final Block MOON_SAND = register("moon_sand", new FallingBlock(FabricBlockSettings.of(Material.AGGREGATE, MapColor.GRAY).sounds(BlockSoundGroup.SAND).strength(0.5f, 0.5f)));
 	public static final Block MOON_STONE = register("moon_stone", new Block(FabricBlockSettings.copy(Blocks.STONE)), true);
 	public static final Block MOON_STONE_STAIRS = register("moon_stone_stairs", new StairsBlock(MOON_STONE.getDefaultState(), FabricBlockSettings.copy(Blocks.STONE)));
@@ -187,6 +192,35 @@ public interface ModBlocks {
 	public static final Block POLISHED_MOON_STONE_SLAB = register("polished_moon_stone_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.POLISHED_DIORITE)));
 	public static final Block MOON_PILLAR = register("moon_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.STONE_BRICKS)));
 	public static final Block MOON_STONE_BRICK_WALL = register("moon_stone_brick_wall", new WallBlock(FabricBlockSettings.copy(Blocks.STONE_BRICK_WALL)));
+
+	// Mushrooms
+	// Aeronos
+	public static final Block AERONOS_MUSHROOM = register("aeronos_mushroom", new MushroomPlantBlock(FabricBlockSettings.copy(Blocks.RED_MUSHROOM).sounds(BlockSoundGroup.NETHER_STEM), () -> TreeConfiguredFeatures.HUGE_RED_MUSHROOM));
+	public static final Block AERONOS_CAP = register("aeronos_cap", new MushroomBlock(FabricBlockSettings.copy(Blocks.RED_MUSHROOM_BLOCK).sounds(BlockSoundGroup.NETHER_STEM)));
+	public static final Block AERONOS_DOOR = register("aeronos_door", new DoorBlock(FabricBlockSettings.copy(Blocks.CRIMSON_DOOR).sounds(BlockSoundGroup.NETHER_STEM)), true);
+	public static final Block AERONOS_TRAPDOOR = register("aeronos_trapdoor", new TrapdoorBlock(FabricBlockSettings.copy(Blocks.CRIMSON_TRAPDOOR).sounds(BlockSoundGroup.NETHER_STEM)));
+	public static final Block AERONOS_PLANKS = register("aeronos_planks", new Block(FabricBlockSettings.copy(Blocks.CRIMSON_PLANKS).sounds(BlockSoundGroup.NETHER_STEM)));
+	public static final Block AERONOS_FENCE = register("aeronos_fence", new FenceBlock(FabricBlockSettings.copy(Blocks.CRIMSON_FENCE).sounds(BlockSoundGroup.NETHER_STEM)));
+	public static final Block AERONOS_FENCE_GATE = register("aeronos_fence_gate", new FenceGateBlock(FabricBlockSettings.copy(Blocks.CRIMSON_FENCE_GATE).sounds(BlockSoundGroup.NETHER_STEM)));
+	public static final Block AERONOS_STAIRS = register("aeronos_stairs", new StairsBlock(AERONOS_PLANKS.getDefaultState(), FabricBlockSettings.copy(Blocks.CRIMSON_STAIRS).sounds(BlockSoundGroup.NETHER_STEM)));
+	public static final Block AERONOS_SLAB = register("aeronos_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.CRIMSON_SLAB).sounds(BlockSoundGroup.NETHER_STEM)));
+	public static final Block AERONOS_STEM = register("aeronos_stem", new MushroomBlock(FabricBlockSettings.copy(Blocks.MUSHROOM_STEM).sounds(BlockSoundGroup.NETHER_STEM)));
+	public static final Block AERONOS_CHEST = register("aeronos_chest", new ChestBlock(FabricBlockSettings.copy(Blocks.CHEST).sounds(BlockSoundGroup.NETHER_STEM), () -> BlockEntityType.CHEST));
+	public static final Block AERONOS_LADDER = register("aeronos_ladder", new LadderBlock(FabricBlockSettings.copy(Blocks.LADDER).sounds(BlockSoundGroup.NETHER_STEM)));
+
+	// Strophar
+	public static final Block STROPHAR_MUSHROOM = register("strophar_mushroom", new MushroomPlantBlock(FabricBlockSettings.copy(Blocks.RED_MUSHROOM).sounds(BlockSoundGroup.NETHER_STEM), () -> TreeConfiguredFeatures.HUGE_RED_MUSHROOM));
+	public static final Block STROPHAR_CAP = register("strophar_cap", new MushroomBlock(FabricBlockSettings.copy(Blocks.RED_MUSHROOM_BLOCK).sounds(BlockSoundGroup.NETHER_STEM)));
+	public static final Block STROPHAR_DOOR = register("strophar_door", new DoorBlock(FabricBlockSettings.copy(Blocks.CRIMSON_DOOR).sounds(BlockSoundGroup.NETHER_STEM)), true);
+	public static final Block STROPHAR_TRAPDOOR = register("strophar_trapdoor", new TrapdoorBlock(FabricBlockSettings.copy(Blocks.CRIMSON_TRAPDOOR).sounds(BlockSoundGroup.NETHER_STEM)));
+	public static final Block STROPHAR_PLANKS = register("strophar_planks", new Block(FabricBlockSettings.copy(Blocks.CRIMSON_PLANKS).sounds(BlockSoundGroup.NETHER_STEM)));
+	public static final Block STROPHAR_FENCE = register("strophar_fence", new FenceBlock(FabricBlockSettings.copy(Blocks.CRIMSON_FENCE).sounds(BlockSoundGroup.NETHER_STEM)));
+	public static final Block STROPHAR_FENCE_GATE = register("strophar_fence_gate", new FenceGateBlock(FabricBlockSettings.copy(Blocks.CRIMSON_FENCE_GATE).sounds(BlockSoundGroup.NETHER_STEM)));
+	public static final Block STROPHAR_STAIRS = register("strophar_stairs", new StairsBlock(STROPHAR_PLANKS.getDefaultState(), FabricBlockSettings.copy(Blocks.CRIMSON_STAIRS).sounds(BlockSoundGroup.NETHER_STEM)));
+	public static final Block STROPHAR_SLAB = register("strophar_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.CRIMSON_SLAB).sounds(BlockSoundGroup.NETHER_STEM)));
+	public static final Block STROPHAR_STEM = register("strophar_stem", new MushroomBlock(FabricBlockSettings.copy(Blocks.MUSHROOM_STEM).sounds(BlockSoundGroup.NETHER_STEM)));
+	public static final Block STROPHAR_CHEST = register("strophar_chest", new ChestBlock(FabricBlockSettings.copy(Blocks.CHEST).sounds(BlockSoundGroup.NETHER_STEM), () -> BlockEntityType.CHEST));
+	public static final Block STROPHAR_LADDER = register("strophar_ladder", new LadderBlock(FabricBlockSettings.copy(Blocks.LADDER).sounds(BlockSoundGroup.NETHER_STEM)));
 
 	// Mars stones
 	public static final Block MARS_SAND = register("mars_sand", new FallingBlock(FabricBlockSettings.of(Material.AGGREGATE, MapColor.TERRACOTTA_ORANGE).sounds(BlockSoundGroup.SAND).strength(0.5f, 0.5f)));

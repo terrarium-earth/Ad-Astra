@@ -14,6 +14,24 @@
     "ad_astra:glacian_button",
     "ad_astra:glacian_pressure_plate",
     "ad_astra:glacian_sign",
-    "ad_astra:glacian_wall_sign"
+    "ad_astra:glacian_wall_sign",
+    "ad_astra:strophar_door",
+    "ad_astra:strophar_trapdoor",
+    "ad_astra:strophar_planks",
+    "ad_astra:strophar_fence",
+    "ad_astra:strophar_fence_gate",
+    "ad_astra:strophar_stairs",
+    "ad_astra:strophar_slab",
+    "ad_astra:strophar_chest",
+    "ad_astra:strophar_ladder",
+    "ad_astra:aeronos_door",
+    "ad_astra:aeronos_trapdoor",
+    "ad_astra:aeronos_planks",
+    "ad_astra:aeronos_fence",
+    "ad_astra:aeronos_fence_gate",
+    "ad_astra:aeronos_stairs",
+    "ad_astra:aeronos_slab",
+    "ad_astra:aeronos_chest",
+    "ad_astra:aeronos_ladder"
   ]
 }
