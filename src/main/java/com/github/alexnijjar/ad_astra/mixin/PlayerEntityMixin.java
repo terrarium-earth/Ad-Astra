@@ -43,6 +43,9 @@ public abstract class PlayerEntityMixin {
 						}
 					} else {
 						jetSuit.isFallFlying = false;
+						if (!player.world.isClient) {
+							chest.getOrCreateNbt().putBoolean("spawn_particles", false);
+						}
 					}
 				}
 			}

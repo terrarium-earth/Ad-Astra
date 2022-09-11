@@ -19,17 +19,17 @@ public class ModTags {
 	public static final TagKey<Item> STROPHAR_CAPS = TagKey.of(Registry.ITEM_KEY, new ModIdentifier("strophar_caps"));
 
 	public static final TagKey<Fluid> FUELS = TagKey.of(Registry.FLUID_KEY, new ModIdentifier("fuels"));
+	public static final TagKey<Fluid> EFFICIENT_FUELS = TagKey.of(Registry.FLUID_KEY, new ModIdentifier("efficient_fuels"));
 
 	public static final TagKey<Item> CALORITE_INGOTS = TagKey.of(Registry.ITEM_KEY, new Identifier("c:calorite_ingots"));
 	public static final TagKey<Item> CALORITE_NUGGETS = TagKey.of(Registry.ITEM_KEY, new Identifier("c:calorite_nuggets"));
 	public static final TagKey<Item> CHEESES = TagKey.of(Registry.ITEM_KEY, new Identifier("c:cheeses"));
-	public static final TagKey<Item> COMPRESSED_CALORITE = TagKey.of(Registry.ITEM_KEY, new Identifier("c:compressed_calorite"));
-	public static final TagKey<Item> COMPRESSED_DESH = TagKey.of(Registry.ITEM_KEY, new Identifier("c:compressed_desh"));
-	public static final TagKey<Item> COMPRESSED_OSTRUM = TagKey.of(Registry.ITEM_KEY, new Identifier("c:compressed_ostrum"));
-	public static final TagKey<Item> COMPRESSED_STEEL = TagKey.of(Registry.ITEM_KEY, new Identifier("c:compressed_steel"));
+	public static final TagKey<Item> CALORITE_PLATES = TagKey.of(Registry.ITEM_KEY, new Identifier("c:calorite_plates"));
+	public static final TagKey<Item> DESH_PLATES = TagKey.of(Registry.ITEM_KEY, new Identifier("c:desh_plates"));
+	public static final TagKey<Item> OSTRUM_PLATES = TagKey.of(Registry.ITEM_KEY, new Identifier("c:ostrum_plates"));
+	public static final TagKey<Item> STEEL_PLATES = TagKey.of(Registry.ITEM_KEY, new Identifier("c:steel_plates"));
 	public static final TagKey<Item> DESH_INGOTS = TagKey.of(Registry.ITEM_KEY, new Identifier("c:desh_ingots"));
 	public static final TagKey<Item> DESH_NUGGETS = TagKey.of(Registry.ITEM_KEY, new Identifier("c:desh_nuggets"));
-	public static final TagKey<Item> DESH_PLATES = TagKey.of(Registry.ITEM_KEY, new Identifier("c:desh_plates"));
 	public static final TagKey<Item> IRON_PLATES = TagKey.of(Registry.ITEM_KEY, new Identifier("c:iron_plates"));
 	public static final TagKey<Item> IRON_RODS = TagKey.of(Registry.ITEM_KEY, new Identifier("c:iron_rods"));
 	public static final TagKey<Item> OSTRUM_INGOTS = TagKey.of(Registry.ITEM_KEY, new Identifier("c:ostrum_ingots"));

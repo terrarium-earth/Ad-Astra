@@ -3,7 +3,7 @@
   "group": "tanks",
   "key": {
     "#": {
-      "tag": "c:compressed_ostrum"
+      "tag": "c:ostrum_plates"
     },
     "U": {
       "item": "minecraft:bucket"

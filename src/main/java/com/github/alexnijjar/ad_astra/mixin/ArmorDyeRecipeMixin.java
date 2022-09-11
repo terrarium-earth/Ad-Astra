@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 public class ArmorDyeRecipeMixin {
 
     @Inject(method = "matches", at = @At("HEAD"), cancellable = true)
-    public void matches(CraftingInventory craftingInventory, World world, CallbackInfoReturnable<Boolean> ci) {
+    public void adastra_matches(CraftingInventory craftingInventory, World world, CallbackInfoReturnable<Boolean> ci) {
         for (int i = 0; i < craftingInventory.size(); i++) {
             Item item = craftingInventory.getStack(i).getItem();
             if (item instanceof SpaceSuit) {

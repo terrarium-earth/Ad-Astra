@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "#": {
-      "tag": "c:compressed_calorite"
+      "tag": "c:calorite_plates"
     },
     "N": {
       "item": "ad_astra:netherite_space_pants"

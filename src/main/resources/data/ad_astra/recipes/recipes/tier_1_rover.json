@@ -11,7 +11,7 @@
       "item": "ad_astra:desh_engine"
     },
     "P": {
-      "item": "ad_astra:desh_plate"
+      "tag": "c:desh_plates"
     },
     "S": {
       "tag": "c:steel_blocks"

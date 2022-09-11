@@ -1,7 +1,6 @@
 package com.github.alexnijjar.ad_astra.items.armour;
 
 import java.util.List;
-import java.util.stream.StreamSupport;
 
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.registry.ModItems;
@@ -10,13 +9,14 @@ import com.github.alexnijjar.ad_astra.util.ModUtils;
 
 import net.fabricmc.fabric.api.entity.event.v1.FabricElytraItem;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -42,7 +42,7 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
 		return this.isFallFlying;
 	}
 
-	// Display energy.
+	// Display energy
 	@Override
 	public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
 		super.appendTooltip(stack, world, tooltip, context);
@@ -53,16 +53,19 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
 	}
 
 	public void fly(PlayerEntity player, ItemStack stack) {
-		// Don't fly the Jet Suit in creative.
+		// Don't fly the Jet Suit in creative
 		if (player.getAbilities().flying) {
+			stack.getOrCreateNbt().putBoolean("spawn_particles", false);
 			return;
 		}
 
-		// Don't fly if the Jet Suit has no energy.
+		// Don't fly if the Jet Suit has no energy
 		if (this.getStoredEnergy(stack) <= 0) {
+			stack.getOrCreateNbt().putBoolean("spawn_particles", false);
 			return;
 		}
 
+		stack.getOrCreateNbt().putBoolean("spawn_particles", true);
 		if (ModKeyBindings.sprintKeyDown(player)) {
 			this.fallFly(player, stack);
 		} else {
@@ -78,9 +81,7 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
 				if (player.isFallFlying()) {
 					player.stopFallFlying();
 				}
-			}
-
-			this.spawnParticles(player, stack);
+			};
 		}
 	}
 
@@ -113,20 +114,32 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
 		player.setVelocity(velocity.add(rotationVector.getX() * 0.1 + (rotationVector.getX() * 1.5 - velocity.getX()) * 0.5, rotationVector.getY() * 0.1 + (rotationVector.getY() * 1.5 - velocity.getY()) * 0.5,
 				rotationVector.getZ() * 0.1 + (rotationVector.getZ() * 1.5 - velocity.getZ()) * 0.5));
 	}
+	public static void spawnParticles(World world, LivingEntity entity, BipedEntityModel<LivingEntity> model) {
 
-	public void spawnParticles(PlayerEntity player, ItemStack stack) {
-		if (!AdAstra.CONFIG.spaceSuit.spawnJetSuitParticles) {
-			return;
-		}
-		if (player.world instanceof ServerWorld serverWorld) {
-			Vec3d pos = player.getPos();
-
-			if (player.isFallFlying()) {
-				ModUtils.spawnForcedParticles(serverWorld, ParticleTypes.FLAME, pos.getX(), pos.getY(), pos.getZ(), 1, 0.0, 0.0, 0.0, 0);
-			} else {
-				ModUtils.spawnForcedParticles(serverWorld, ParticleTypes.FLAME, pos.getX(), pos.getY(), pos.getZ(), 1, 0.0, 0.0, 0.0, 0);
+		if (entity instanceof PlayerEntity player) {
+			ItemStack chest = player.getEquippedStack(EquipmentSlot.CHEST);
+			NbtCompound nbt = chest.getOrCreateNbt();
+			if (nbt.contains("spawn_particles")) {
+				if (!nbt.getBoolean("spawn_particles")) {
+					return;
+				}
 			}
 		}
+		spawnParticles(world, entity, model, model.rightArm.pitch + 0.05, entity.isFallFlying() ? 0.0 : 0.8, -0.45);
+		spawnParticles(world, entity, model, model.leftArm.pitch + 0.05, entity.isFallFlying() ? 0.0 : 0.8, 0.45);
+
+		spawnParticles(world, entity, model, model.rightLeg.pitch + 0.05, entity.isFallFlying() ? 0.1 : -0.0, -0.1);
+		spawnParticles(world, entity, model, model.leftLeg.pitch + 0.05, entity.isFallFlying() ? 0.1 : -0.0, 0.1);
+	}
+
+	private static void spawnParticles(World world, LivingEntity entity, BipedEntityModel<LivingEntity> model, double pitch, double yOffset, double zOffset) {
+		double yaw = entity.bodyYaw;
+		double xRotator = Math.cos(yaw * Math.PI / 180.0) * zOffset;
+		double zRotator = Math.sin(yaw * Math.PI / 180.0) * zOffset;
+		double xRotator1 = Math.cos((yaw - 90) * Math.PI / 180.0) * pitch;
+		double zRotator1 = Math.sin((yaw - 90) * Math.PI / 180.0) * pitch;
+
+		world.addParticle(ParticleTypes.SOUL_FIRE_FLAME, true, entity.getX() + xRotator + xRotator1, entity.getY() + yOffset, entity.getZ() + zRotator1 + zRotator, 0.0, 0.0, 0.0);
 	}
 
 	@Override
@@ -145,6 +158,11 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
 	}
 
 	public static boolean hasFullSet(LivingEntity entity) {
-		return StreamSupport.stream(entity.getArmorItems().spliterator(), false).allMatch(s -> s.getItem() instanceof JetSuit);
+		for (ItemStack stack : entity.getArmorItems()) {
+			if (!(stack.getItem() instanceof JetSuit)) {
+				return false;
+			}
+		}
+		return true;
 	}
 }

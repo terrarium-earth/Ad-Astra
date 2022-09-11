@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "#": {
-      "tag": "c:compressed_calorite"
+      "tag": "c:calorite_plates"
     },
     "G": {
       "item": "minecraft:orange_stained_glass"

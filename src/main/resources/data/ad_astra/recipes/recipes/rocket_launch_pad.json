@@ -3,7 +3,7 @@
   "group": "rocket_launch_pad",
   "key": {
     "#": {
-      "tag": "c:compressed_steel"
+      "tag": "c:steel_plates"
     },
     "|": {
       "tag": "c:iron_plates"

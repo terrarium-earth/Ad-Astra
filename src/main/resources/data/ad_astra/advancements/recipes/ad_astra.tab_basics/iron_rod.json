@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "ad_astra:iron_stick"
+        "recipe": "ad_astra:iron_rod"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "ad_astra:iron_stick"
+      "ad_astra:iron_rod"
     ]
   }
 }

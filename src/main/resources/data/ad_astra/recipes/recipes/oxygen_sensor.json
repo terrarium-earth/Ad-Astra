@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "#": {
-      "tag": "c:compressed_ostrum"
+      "tag": "c:ostrum_plates"
     },
     "F": {
       "item": "ad_astra:engine_fan"

@@ -7,16 +7,15 @@ import com.github.alexnijjar.ad_astra.blocks.pads.RocketLaunchPad;
 import com.github.alexnijjar.ad_astra.items.armour.NetheriteSpaceSuit;
 import com.github.alexnijjar.ad_astra.registry.ModCriteria;
 import com.github.alexnijjar.ad_astra.registry.ModDamageSource;
-import com.github.alexnijjar.ad_astra.registry.ModFluids;
 import com.github.alexnijjar.ad_astra.registry.ModParticleTypes;
 import com.github.alexnijjar.ad_astra.registry.ModSoundEvents;
+import com.github.alexnijjar.ad_astra.registry.ModTags;
 import com.github.alexnijjar.ad_astra.screen.PlanetSelectionScreenHandlerFactory;
 import com.github.alexnijjar.ad_astra.screen.handler.PlanetSelectionScreenHandler;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.github.alexnijjar.ad_astra.util.ModKeyBindings;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
 
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -241,8 +240,9 @@ public class RocketEntity extends VehicleEntity {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	private void travel() {
-		double multiplier = (this.inputTank.getResource().equals(FluidVariant.of(ModFluids.CRYO_FUEL_STILL)) ? 2.5 : 1.0);
+		double multiplier = (this.inputTank.getResource().getFluid().isIn(ModTags.EFFICIENT_FUELS) ? 2.5 : 1.0);
 		if (!this.hasNoGravity()) {
 			this.setVelocity(this.getVelocity().add(0.0, AdAstra.CONFIG.rocket.acceleration * multiplier, 0.0));
 		}
@@ -264,7 +264,7 @@ public class RocketEntity extends VehicleEntity {
 
 		this.setFlying(true);
 		this.setCountdownTicks(AdAstra.CONFIG.rocket.countDownTicks);
-		// For shaking.
+		// For shaking
 		this.setFrozenTicks(Integer.MAX_VALUE);
 		this.inputTank.amount -= getRequiredAmountForLaunch(this.inputTank.getResource());
 	}
@@ -380,11 +380,12 @@ public class RocketEntity extends VehicleEntity {
 		rider.networkHandler.sendPacket(stopSoundS2CPacket);
 	}
 
+	@SuppressWarnings("deprecation")
 	public static long getRequiredAmountForLaunch(FluidVariant variant) {
-		if (variant.isOf(ModFluids.CRYO_FUEL_STILL)) {
-			return FluidConstants.BUCKET;
+		if (variant.getFluid().isIn(ModTags.EFFICIENT_FUELS)) {
+			return AdAstra.CONFIG.rocket.efficientFuelLaunchCost;
 		} else {
-			return FluidConstants.BUCKET * 3;
+			return AdAstra.CONFIG.rocket.fuelLaunchCost;
 		}
 	}
 }

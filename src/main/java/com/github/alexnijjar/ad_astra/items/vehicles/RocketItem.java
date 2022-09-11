@@ -8,7 +8,7 @@ import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntityTier1;
 import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntityTier2;
 import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntityTier3;
 import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntityTier4;
-import com.github.alexnijjar.ad_astra.registry.ModFluids;
+import com.github.alexnijjar.ad_astra.registry.ModTags;
 
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.minecraft.block.BlockState;
@@ -25,6 +25,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 public class RocketItem<T extends RocketEntity> extends VehicleItem {
@@ -38,9 +39,10 @@ public class RocketItem<T extends RocketEntity> extends VehicleItem {
 		this.tier = tier;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public List<Fluid> getInputFluids() {
-		return List.of(ModFluids.FUEL_STILL, ModFluids.CRYO_FUEL_STILL);
+		return Registry.FLUID.getEntries().stream().filter(e -> e.getValue().isIn(ModTags.FUELS)).map(f -> f.getValue()).toList();
 	}
 
 	@Override

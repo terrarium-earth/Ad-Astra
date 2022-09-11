@@ -6,7 +6,7 @@
       "tag": "c:ostrum_blocks"
     },
     "C": {
-      "item": "ad_astra:compressed_ostrum"
+      "tag": "c:ostrum_plates"
     },
     "P": {
       "item": "minecraft:glass_pane"

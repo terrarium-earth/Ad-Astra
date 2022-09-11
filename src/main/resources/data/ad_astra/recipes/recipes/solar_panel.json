@@ -2,13 +2,13 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "#": {
-      "tag": "c:compressed_desh"
+      "tag": "c:desh_plates"
     },
     "G": {
       "item": "minecraft:blue_stained_glass"
     },
     "S": {
-      "item": "ad_astra:compressed_steel"
+      "tag": "c:steel_plates"
     }
   },
   "pattern": [

@@ -3,7 +3,7 @@
   "group": "tanks",
   "key": {
     "#": {
-      "tag": "c:compressed_steel"
+      "tag": "c:steel_plates"
     },
     "U": {
       "item": "minecraft:bucket"

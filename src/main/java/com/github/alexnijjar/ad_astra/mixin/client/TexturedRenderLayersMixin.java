@@ -25,16 +25,16 @@ public abstract class TexturedRenderLayersMixin {
     private static final SpriteIdentifier STROPHAR_CHEST_LEFT = new SpriteIdentifier(TexturedRenderLayers.CHEST_ATLAS_TEXTURE, new ModIdentifier("entity/chest/strophar_chest_left"));
 
     @Inject(method = "getChestTexture", at = @At("HEAD"), cancellable = true)
-    private static void getChestTexture(BlockEntity blockEntity, ChestType type, boolean christmas, CallbackInfoReturnable<SpriteIdentifier> ci) {
+    private static void adastra_getChestTexture(BlockEntity blockEntity, ChestType type, boolean christmas, CallbackInfoReturnable<SpriteIdentifier> ci) {
         if (blockEntity.getCachedState().getBlock().equals(ModBlocks.AERONOS_CHEST)) {
-            ci.setReturnValue(getCustomChestTexture(type, AERONOS_CHEST, AERONOS_CHEST_LEFT, AERONOS_CHEST_RIGHT));
+            ci.setReturnValue(adastra_getCustomChestTexture(type, AERONOS_CHEST, AERONOS_CHEST_LEFT, AERONOS_CHEST_RIGHT));
         } else if (blockEntity.getCachedState().getBlock().equals(ModBlocks.STROPHAR_CHEST)) {
-            ci.setReturnValue(getCustomChestTexture(type, STROPHAR_CHEST, STROPHAR_CHEST_LEFT, STROPHAR_CHEST_RIGHT));
+            ci.setReturnValue(adastra_getCustomChestTexture(type, STROPHAR_CHEST, STROPHAR_CHEST_LEFT, STROPHAR_CHEST_RIGHT));
         }
     }
 
     @Unique
-    private static SpriteIdentifier getCustomChestTexture(ChestType type, SpriteIdentifier single, SpriteIdentifier left, SpriteIdentifier right) {
+    private static SpriteIdentifier adastra_getCustomChestTexture(ChestType type, SpriteIdentifier single, SpriteIdentifier left, SpriteIdentifier right) {
         switch (type) {
         case LEFT:
             return left;

@@ -1,5 +1,6 @@
 package com.github.alexnijjar.ad_astra.client.renderer.spacesuit;
 
+import com.github.alexnijjar.ad_astra.items.armour.NetheriteSpaceSuit;
 import com.github.alexnijjar.ad_astra.items.armour.SpaceSuit;
 import com.github.alexnijjar.ad_astra.registry.ModItems;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
@@ -29,6 +30,8 @@ public class SpaceSuitModel extends BipedEntityModel<LivingEntity> {
 	public static final EntityModelLayer LAYER_LOCATION = new EntityModelLayer(new ModIdentifier("space_suit"), "main");
 
 	private final BipedEntityModel<LivingEntity> contextModel;
+	@SuppressWarnings("unused")
+	private final LivingEntity entity;
 	private final Identifier texture;
 	private final EquipmentSlot slot;
 	private final ItemStack stack;
@@ -37,10 +40,11 @@ public class SpaceSuitModel extends BipedEntityModel<LivingEntity> {
 	public final ModelPart rightBoot;
 	public final ModelPart leftBoot;
 
-	public SpaceSuitModel(ModelPart root, BipedEntityModel<LivingEntity> contextModel, EquipmentSlot slot, ItemStack stack, Identifier texture) {
+	public SpaceSuitModel(ModelPart root, BipedEntityModel<LivingEntity> contextModel, LivingEntity entity, EquipmentSlot slot, ItemStack stack, Identifier texture) {
 		super(root);
 
 		this.contextModel = contextModel;
+		this.entity = entity;
 		this.texture = texture;
 		this.slot = slot;
 		this.stack = stack;
@@ -83,15 +87,19 @@ public class SpaceSuitModel extends BipedEntityModel<LivingEntity> {
 		float g = (float) (decimal >> 8 & 0xFF) / 255.0f;
 		float b = (float) (decimal & 0xFF) / 255.0f;
 
-		
+		float a = 1.0f;
+		if (!(stack.getItem() instanceof NetheriteSpaceSuit)) {
+			a = decimal == 0xFFFFFF ? 0.3f : 1.0f;
+		}
+
 		MinecraftClient client = MinecraftClient.getInstance();
 		boolean hasEnchantments = client.player.getEquippedStack(EquipmentSlot.HEAD).hasEnchantments();
 		if (!this.stack.isOf(ModItems.SPACE_HELMET)) {
 			this.head.render(matrices, vertices, light, overlay, 1.0f, 1.0f, 1.0f, 1.0f);
-			this.visor.render(matrices, getVertex(RenderLayer.getEntityTranslucent(this.texture), hasEnchantments), light, overlay, r, g, b, 1.0f);
+			this.visor.render(matrices, getVertex(RenderLayer.getEntityTranslucent(this.texture), hasEnchantments), light, overlay, r, g, b, a);
 		} else {
 			this.head.render(matrices, vertices, light, overlay, r, g, b, 1.0f);
-			this.visor.render(matrices, getVertex(RenderLayer.getEntityTranslucent(this.texture), hasEnchantments), light, overlay, r, g, b, 1.0f);
+			this.visor.render(matrices, getVertex(RenderLayer.getEntityTranslucent(this.texture), hasEnchantments), light, overlay, r, g, b, a);
 		}
 
 		this.body.render(matrices, vertices, light, overlay, r, g, b, 1.0f);

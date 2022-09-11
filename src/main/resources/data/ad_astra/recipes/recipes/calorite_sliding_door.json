@@ -6,7 +6,7 @@
       "tag": "c:calorite_blocks"
     },
     "C": {
-      "item": "ad_astra:compressed_calorite"
+      "tag": "c:calorite_plates"
     },
     "P": {
       "item": "minecraft:glass_pane"

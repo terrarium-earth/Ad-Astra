@@ -5,25 +5,25 @@
 			"ingredient": {
 				"tag": "c:desh_ingots"
 			},
-			"count": 6
+			"count": 32
 		},
 		{
 			"ingredient": {
 				"tag": "c:steel_ingots"
 			},
-			"count": 16
+			"count": 32
 		},
 		{
 			"ingredient": {
 				"tag": "c:iron_plates"
 			},
-			"count": 12
+			"count": 64
 		},
 		{
 			"ingredient": {
 				"tag": "c:desh_plates"
 			},
-			"count": 4
+			"count": 32
 		}
 	]
 }

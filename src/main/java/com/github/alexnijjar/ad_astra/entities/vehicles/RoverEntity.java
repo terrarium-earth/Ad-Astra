@@ -160,12 +160,12 @@ public class RoverEntity extends VehicleEntity {
 
 		// Keep the passengers in their seats
 		if (passenger.equals(this.getFirstPassenger())) {
-			double xRotator = Math.cos((this.getYaw() - 50) * ((float) Math.PI / 180)) * 0.85f;
-			double zRotator = Math.sin((this.getYaw() - 50) * ((float) Math.PI / 180)) * 0.85f;
+			double xRotator = Math.cos((this.getYaw() - 50) * Math.PI / 180.0) * 0.85f;
+			double zRotator = Math.sin((this.getYaw() - 50) * Math.PI / 180.0) * 0.85f;
 			positionUpdater.accept(passenger, this.getX() + xRotator, d, this.getZ() + zRotator);
 		} else {
-			double xRotator = Math.cos((this.getYaw() + 50) * ((float) Math.PI / 180)) * -0.85f;
-			double zRotator = Math.sin((this.getYaw() + 50) * ((float) Math.PI / 180)) * -0.85f;
+			double xRotator = Math.cos((this.getYaw() + 50) * Math.PI / 180.0) * -0.85f;
+			double zRotator = Math.sin((this.getYaw() + 50) * Math.PI / 180.0) * -0.85f;
 			positionUpdater.accept(passenger, this.getX() + xRotator, d, this.getZ() + zRotator);
 		}
 	}
@@ -174,13 +174,13 @@ public class RoverEntity extends VehicleEntity {
 	public Vec3d updatePassengerForDismount(LivingEntity passenger) {
 		Vec3d pos = passenger.getPos();
 		if (this.getPassengerList().size() == 0) {
-			double xRotator = Math.cos(this.getYaw() * ((float) Math.PI / 180)) * 0.9f;
-			double zRotator = Math.sin(this.getYaw() * ((float) Math.PI / 180)) * 0.9f;
+			double xRotator = Math.cos(this.getYaw() * Math.PI / 180.0) * 0.9f;
+			double zRotator = Math.sin(this.getYaw() * Math.PI / 180.0) * 0.9f;
 			passenger.setVelocity(this.getVelocity());
 			return new Vec3d(pos.getX() + xRotator, pos.getY(), pos.getZ() + zRotator);
 		} else {
-			double xRotator = Math.cos(this.getYaw() * ((float) Math.PI / 180)) * -1.0f;
-			double zRotator = Math.sin(this.getYaw() * ((float) Math.PI / 180)) * -1.0f;
+			double xRotator = Math.cos(this.getYaw() * Math.PI / 180.0) * -1.0f;
+			double zRotator = Math.sin(this.getYaw() * Math.PI / 180.0) * -1.0f;
 			passenger.setVelocity(this.getVelocity());
 			return new Vec3d(pos.getX() + xRotator, pos.getY(), pos.getZ() + zRotator);
 		}
