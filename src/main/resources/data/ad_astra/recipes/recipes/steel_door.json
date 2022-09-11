@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "#": {
-      "item": "ad_astra:compressed_steel"
+      "tag": "c:steel_plates"
     }
   },
   "pattern": [

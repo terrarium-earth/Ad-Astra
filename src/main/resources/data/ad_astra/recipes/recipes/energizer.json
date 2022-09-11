@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "#": {
-      "tag": "c:compressed_ostrum"
+      "tag": "c:ostrum_plates"
     },
     "B": {
       "item": "ad_astra:ostrum_block"

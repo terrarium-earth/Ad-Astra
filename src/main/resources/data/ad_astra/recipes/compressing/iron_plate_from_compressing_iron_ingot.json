@@ -1,10 +1,10 @@
 {
   "type": "ad_astra:compressing",
   "input": {
-    "tag": "c:desh_ingots"
+    "item": "minecraft:iron_ingot"
   },
   "output": {
-    "item": "ad_astra:compressed_desh",
+    "item": "ad_astra:iron_plate",
     "count": 1
   },
   "cookTime": 200

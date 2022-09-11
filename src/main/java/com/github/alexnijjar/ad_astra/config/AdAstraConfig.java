@@ -105,6 +105,8 @@ public class AdAstraConfig implements ConfigData {
             @ConfigEntry.Gui.Tooltip(count = 1)
             public boolean entitiesBurnUnderRocket = true;
             public int tankBuckets = 3;
+            public long fuelLaunchCost = FluidConstants.BUCKET * 3;
+            public long efficientFuelLaunchCost = FluidConstants.BUCKET;
         }
 
         public static class RoverConfig {

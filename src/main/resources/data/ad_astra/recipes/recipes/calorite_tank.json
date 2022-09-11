@@ -3,7 +3,7 @@
   "group": "tanks",
   "key": {
     "#": {
-      "tag": "c:compressed_calorite"
+      "tag": "c:calorite_plates"
     },
     "U": {
       "item": "minecraft:bucket"

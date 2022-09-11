@@ -2,14 +2,14 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "#": {
-      "tag": "c:compressed_steel"
+      "tag": "c:steel_plates"
     },
     "|": {
-      "item": "minecraft:red_wool"
+      "item": "ad_astra:iron_rod"
     }
   },
   "pattern": [
-    "|| ",
+    "#| ",
     "## ",
     "## "
   ],

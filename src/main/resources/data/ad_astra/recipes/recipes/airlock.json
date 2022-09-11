@@ -6,7 +6,7 @@
       "tag": "c:steel_blocks"
     },
     "C": {
-      "item": "ad_astra:compressed_steel"
+      "tag": "c:steel_plates"
     }
   },
   "pattern": [

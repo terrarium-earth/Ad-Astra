@@ -55,8 +55,8 @@ public class SulfurCreeperEntityModel<T extends Entity> extends EntityModel<T> {
 
 	@Override
 	public void setAngles(Entity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
-		this.body.getChild("head").yaw = headYaw * ((float) Math.PI / 180);
-		this.body.getChild("head").pitch = headPitch * ((float) Math.PI / 180);
+		this.body.getChild("head").yaw = (float)(headYaw * Math.PI / 180.0);
+		this.body.getChild("head").pitch = (float)(headPitch * Math.PI / 180.0);
 		this.body.getChild("BackLeftLeg").pitch = MathHelper.cos(limbAngle * 0.6662f) * 1.4f * limbDistance;
 		this.body.getChild("BackRightLeg").pitch = MathHelper.cos(limbAngle * 0.6662f + (float) Math.PI) * 1.4f * limbDistance;
 		this.body.getChild("FrontLeftLeg").pitch = MathHelper.cos(limbAngle * 0.6662f + (float) Math.PI) * 1.4f * limbDistance;

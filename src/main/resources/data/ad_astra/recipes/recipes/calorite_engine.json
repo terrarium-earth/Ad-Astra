@@ -3,7 +3,7 @@
   "group": "engines",
   "key": {
     "#": {
-      "tag": "c:compressed_calorite"
+      "tag": "c:calorite_plates"
     },
     "E": {
       "item": "ad_astra:engine_frame"

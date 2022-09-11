@@ -68,10 +68,8 @@ public class ModItems {
 	public static final Item TIER_4_ROCKET = register("tier_4_rocket", new RocketItem<RocketEntityTier4>(ModEntityTypes.ROCKET_TIER_4, 4, new FabricItemSettings().group(ModItemGroups.ITEM_GROUP_NORMAL).maxCount(1).fireproof()));
 	public static final Item TIER_1_ROVER = register("tier_1_rover", new RoverItem(new FabricItemSettings().group(ModItemGroups.ITEM_GROUP_NORMAL).maxCount(1).fireproof()));
 
-	// Oxygen tank
 	public static final Item OXYGEN_TANK = register("oxygen_tank", new OxygenTankItem(new FabricItemSettings().group(ModItemGroups.ITEM_GROUP_NORMAL).maxCount(1)));
 
-	// Guide book
 	public static final Item ASTRODUX = register("astrodux", new AstroduxItem(new FabricItemSettings().group(ModItemGroups.ITEM_GROUP_NORMAL)));
 
 	public static final Item SPACE_PAINTING = register("space_painting", new SpacePaintingItem(ModEntityTypes.SPACE_PAINTING, new FabricItemSettings().group(ModItemGroups.ITEM_GROUP_NORMAL).rarity(Rarity.UNCOMMON)));
@@ -260,10 +258,9 @@ public class ModItems {
 	});
 
 	public static final Item WRENCH = register("wrench", new WrenchItem(new FabricItemSettings().group(ModItemGroups.ITEM_GROUP_MACHINES).maxCount(1)));
-
 	public static final Item HAMMER = register("hammer", new HammerItem(new FabricItemSettings().group(ModItemGroups.ITEM_GROUP_BASICS).maxCount(1).maxDamage(AdAstra.CONFIG.general.hammerDurability)));
 
-	public static final Item IRON_STICK = registerItem("iron_stick", ModItemGroups.ITEM_GROUP_BASICS);
+	public static final Item IRON_ROD = registerItem("iron_rod", ModItemGroups.ITEM_GROUP_BASICS);
 	public static final Item OXYGEN_GEAR = registerItem("oxygen_gear", ModItemGroups.ITEM_GROUP_BASICS);
 	public static final Item WHEEL = registerItem("wheel", ModItemGroups.ITEM_GROUP_BASICS);
 	public static final Item ENGINE_FRAME = registerItem("engine_frame", ModItemGroups.ITEM_GROUP_BASICS);
@@ -283,27 +280,24 @@ public class ModItems {
 	public static final Item COAL_TORCH = register("coal_torch", new WallStandingBlockItem(ModBlocks.COAL_TORCH, ModBlocks.WALL_COAL_TORCH, new FabricItemSettings().group(ModItemGroups.ITEM_GROUP_BASICS)));
 	public static final Item COAL_LANTERN = registerBlockItem(ModBlocks.COAL_LANTERN, ModItemGroups.ITEM_GROUP_BASICS);
 
-	
 	public static final Item STEEL_INGOT = registerItem("steel_ingot", ModItemGroups.ITEM_GROUP_MATERIALS);
 	public static final Item DESH_INGOT = registerItem("desh_ingot", ModItemGroups.ITEM_GROUP_MATERIALS);
 	public static final Item OSTRUM_INGOT = registerItem("ostrum_ingot", ModItemGroups.ITEM_GROUP_MATERIALS);
 	public static final Item CALORITE_INGOT = registerItem("calorite_ingot", ModItemGroups.ITEM_GROUP_MATERIALS);
 
 	public static final Item ICE_SHARD = registerItem("ice_shard", ModItemGroups.ITEM_GROUP_MATERIALS);
-	
-	public static final Item IRON_PLATE = registerItem("iron_plate", ModItemGroups.ITEM_GROUP_MATERIALS);
-	public static final Item DESH_PLATE = registerItem("desh_plate", ModItemGroups.ITEM_GROUP_MATERIALS);
 
-	public static final Item COMPRESSED_STEEL = registerItem("compressed_steel", ModItemGroups.ITEM_GROUP_MATERIALS);
-	public static final Item COMPRESSED_DESH = registerItem("compressed_desh", ModItemGroups.ITEM_GROUP_MATERIALS);
-	public static final Item COMPRESSED_OSTRUM = registerItem("compressed_ostrum", ModItemGroups.ITEM_GROUP_MATERIALS);
-	public static final Item COMPRESSED_CALORITE = registerItem("compressed_calorite", ModItemGroups.ITEM_GROUP_MATERIALS);
+	public static final Item IRON_PLATE = registerItem("iron_plate", ModItemGroups.ITEM_GROUP_MATERIALS);
+	public static final Item STEEL_PLATE = registerItem("steel_plate", ModItemGroups.ITEM_GROUP_MATERIALS);
+	public static final Item DESH_PLATE = registerItem("desh_plate", ModItemGroups.ITEM_GROUP_MATERIALS);
+	public static final Item OSTRUM_PLATE = registerItem("ostrum_plate", ModItemGroups.ITEM_GROUP_MATERIALS);
+	public static final Item CALORITE_PLATE = registerItem("calorite_plate", ModItemGroups.ITEM_GROUP_MATERIALS);
 
 	public static final Item STEEL_NUGGET = registerItem("steel_nugget", ModItemGroups.ITEM_GROUP_MATERIALS);
 	public static final Item DESH_NUGGET = registerItem("desh_nugget", ModItemGroups.ITEM_GROUP_MATERIALS);
 	public static final Item OSTRUM_NUGGET = registerItem("ostrum_nugget", ModItemGroups.ITEM_GROUP_MATERIALS);
 	public static final Item CALORITE_NUGGET = registerItem("calorite_nugget", ModItemGroups.ITEM_GROUP_MATERIALS);
-	
+
 	public static final Item RAW_DESH = registerItem("raw_desh", ModItemGroups.ITEM_GROUP_MATERIALS);
 	public static final Item RAW_OSTRUM = registerItem("raw_ostrum", ModItemGroups.ITEM_GROUP_MATERIALS);
 	public static final Item RAW_CALORITE = registerItem("raw_calorite", ModItemGroups.ITEM_GROUP_MATERIALS);
@@ -354,7 +348,7 @@ public class ModItems {
 	public static final BlockItem IRON_PLATING_PRESSURE_PLATE = registerBlockItem(ModBlocks.IRON_PLATING_PRESSURE_PLATE);
 	public static final BlockItem MARKED_IRON_PILLAR = registerBlockItem(ModBlocks.MARKED_IRON_PILLAR);
 	public static final BlockItem BLUE_IRON_PILLAR = registerBlockItem(ModBlocks.BLUE_IRON_PILLAR);
-	
+
 	// Steel
 	public static final BlockItem STEEL_BLOCK = registerBlockItem(ModBlocks.STEEL_BLOCK);
 	public static final BlockItem STEEL_PLATING = registerBlockItem(ModBlocks.STEEL_PLATING);
@@ -368,7 +362,7 @@ public class ModItems {
 	public static final BlockItem STEEL_PILLAR = registerBlockItem(ModBlocks.STEEL_PILLAR);
 	public static final BlockItem STEEL_PLATING_BUTTON = registerBlockItem(ModBlocks.STEEL_PLATING_BUTTON);
 	public static final BlockItem STEEL_PLATING_PRESSURE_PLATE = registerBlockItem(ModBlocks.STEEL_PLATING_PRESSURE_PLATE);
-	
+
 	// Moon
 	public static final BlockItem CHEESE_BLOCK = registerBlockItem(ModBlocks.CHEESE_BLOCK);
 	public static final BlockItem DESH_BLOCK = registerBlockItem(ModBlocks.DESH_BLOCK);
@@ -380,7 +374,7 @@ public class ModItems {
 	public static final BlockItem DESH_PILLAR = registerBlockItem(ModBlocks.DESH_PILLAR);
 	public static final BlockItem DESH_PLATING_BUTTON = registerBlockItem(ModBlocks.DESH_PLATING_BUTTON);
 	public static final BlockItem DESH_PLATING_PRESSURE_PLATE = registerBlockItem(ModBlocks.DESH_PLATING_PRESSURE_PLATE);
-	
+
 	// Mars
 	public static final BlockItem OSTRUM_BLOCK = registerBlockItem(ModBlocks.OSTRUM_BLOCK);
 	public static final BlockItem RAW_OSTRUM_BLOCK = registerBlockItem(ModBlocks.RAW_OSTRUM_BLOCK);
@@ -391,7 +385,7 @@ public class ModItems {
 	public static final BlockItem OSTRUM_PILLAR = registerBlockItem(ModBlocks.OSTRUM_PILLAR);
 	public static final BlockItem OSTRUM_PLATING_BUTTON = registerBlockItem(ModBlocks.OSTRUM_PLATING_BUTTON);
 	public static final BlockItem OSTRUM_PLATING_PRESSURE_PLATE = registerBlockItem(ModBlocks.OSTRUM_PLATING_PRESSURE_PLATE);
-	
+
 	// Venus
 	public static final BlockItem CALORITE_BLOCK = registerBlockItem(ModBlocks.CALORITE_BLOCK);
 	public static final BlockItem RAW_CALORITE_BLOCK = registerBlockItem(ModBlocks.RAW_CALORITE_BLOCK);

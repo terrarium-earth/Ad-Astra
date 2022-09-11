@@ -3,7 +3,7 @@
   "group": "engines",
   "key": {
     "#": {
-      "tag": "c:compressed_steel"
+      "tag": "c:steel_plates"
     },
     "E": {
       "item": "ad_astra:engine_frame"

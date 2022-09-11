@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "#": {
-      "tag": "c:compressed_desh"
+      "tag": "c:desh_plates"
     },
     "C": {
       "item": "minecraft:copper_ingot"

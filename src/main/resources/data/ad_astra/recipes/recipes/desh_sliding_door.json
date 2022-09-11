@@ -6,7 +6,7 @@
       "tag": "c:desh_blocks"
     },
     "C": {
-      "item": "ad_astra:desh_plate"
+      "tag": "c:desh_plates"
     },
     "P": {
       "item": "minecraft:glass_pane"

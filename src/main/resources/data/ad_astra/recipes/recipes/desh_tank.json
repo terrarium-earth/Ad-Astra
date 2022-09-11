@@ -3,7 +3,7 @@
   "group": "tanks",
   "key": {
     "#": {
-      "tag": "c:compressed_desh"
+      "tag": "c:desh_plates"
     },
     "U": {
       "item": "minecraft:bucket"
