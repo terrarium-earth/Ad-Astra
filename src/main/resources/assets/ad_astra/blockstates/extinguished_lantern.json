@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "ad_astra:block/extinguished_lantern"
+    },
+    "hanging=true": {
+      "model": "ad_astra:block/extinguished_lantern_hanging"
+    }
+  }
+}

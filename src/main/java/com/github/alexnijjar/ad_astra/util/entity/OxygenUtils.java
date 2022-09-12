@@ -118,7 +118,7 @@ public class OxygenUtils {
 	}
 
 	/**
-	 * Removes the oxygen from a set of blocks. For example, turns water into ice or air, converts torches into coal torches, puts out flames, kills plants etc.
+	 * Removes the oxygen from a set of blocks. For example, turns water into ice or air, converts torches into extinguished torches, puts out flames, kills plants etc.
 	 */
 	public static void deoxygenizeBlocks(ServerWorld world, Set<BlockPos> entries, BlockPos source) {
 		try {
@@ -149,12 +149,12 @@ public class OxygenUtils {
 
 				Block block = state.getBlock();
 				if (block instanceof WallTorchBlock && !block.equals(Blocks.SOUL_WALL_TORCH)) {
-					world.setBlockState(pos, ModBlocks.WALL_COAL_TORCH.getDefaultState().with(WallTorchBlock.FACING, state.get(WallTorchBlock.FACING)));
+					world.setBlockState(pos, ModBlocks.WALL_EXTINGUISHED_TORCH.getDefaultState().with(WallTorchBlock.FACING, state.get(WallTorchBlock.FACING)));
 					continue;
 				}
 
 				if (block instanceof TorchBlock && !block.equals(Blocks.SOUL_TORCH) && !block.equals(Blocks.SOUL_WALL_TORCH)) {
-					world.setBlockState(pos, ModBlocks.COAL_TORCH.getDefaultState());
+					world.setBlockState(pos, ModBlocks.EXTINGUISHED_TORCH.getDefaultState());
 					continue;
 				}
 

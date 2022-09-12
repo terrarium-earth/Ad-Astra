@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_coal_torch": {
+    "has_extinguished_torch": {
       "conditions": {
         "items": [
           {
             "items": [
-              "ad_astra:coal_torch"
+              "ad_astra:extinguished_torch"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_coal_torch",
+      "has_extinguished_torch",
       "has_the_recipe"
     ]
   ],

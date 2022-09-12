@@ -1,9 +1,3 @@
-<a href="https://discord.gg/K6EWQQ7Ntd">
-  <p align="center">
-      <img src="https://img.shields.io/discord/1005774345316073554?color=blue&logo=Discord?    color=blue&label=Discord&logo=discord&logoColor=ffffff&style=for-the-badge" alt="Discord" width="191"/> 
-  </p>
-</a>
-
 <a href="https://modrinth.com/mod/fabric-api">
     <p align="center">
         <img src="https://i.imgur.com/Ol1Tcf8.png" alt="Fabric API" width="250"/> 
@@ -17,6 +11,12 @@
 </a>
 
 ![Banner](https://media.discordapp.net/attachments/1005790947365376060/1007374451828084836/Ad_Astra_Banner.png?width=1440&height=691)
+
+<a href="https://discord.com/invite/K6EWQQ7Ntd">
+    <p align="left">
+        <img src="https://cdn.discordapp.com/attachments/1005798262273495041/1018731591314448495/discord.png" alt="Fabric API" width="400"/> 
+    </p>
+</a>
 
 <a>
     <p align="left">

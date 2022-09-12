@@ -277,8 +277,8 @@ public class ModItems {
 	public static final Item ROCKET_FIN = registerItem("rocket_fin", ModItemGroups.ITEM_GROUP_BASICS);
 
 	// Torch items
-	public static final Item COAL_TORCH = register("coal_torch", new WallStandingBlockItem(ModBlocks.COAL_TORCH, ModBlocks.WALL_COAL_TORCH, new FabricItemSettings().group(ModItemGroups.ITEM_GROUP_BASICS)));
-	public static final Item COAL_LANTERN = registerBlockItem(ModBlocks.COAL_LANTERN, ModItemGroups.ITEM_GROUP_BASICS);
+	public static final Item EXTINGUISHED_TORCH = register("extinguished_torch", new WallStandingBlockItem(ModBlocks.EXTINGUISHED_TORCH, ModBlocks.WALL_EXTINGUISHED_TORCH, new FabricItemSettings().group(ModItemGroups.ITEM_GROUP_BASICS)));
+	public static final Item EXTINGUISHED_LANTERN = registerBlockItem(ModBlocks.EXTINGUISHED_LANTERN, ModItemGroups.ITEM_GROUP_BASICS);
 
 	public static final Item STEEL_INGOT = registerItem("steel_ingot", ModItemGroups.ITEM_GROUP_MATERIALS);
 	public static final Item DESH_INGOT = registerItem("desh_ingot", ModItemGroups.ITEM_GROUP_MATERIALS);
