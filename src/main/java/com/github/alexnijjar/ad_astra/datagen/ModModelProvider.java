@@ -32,7 +32,7 @@ public class ModModelProvider extends FabricModelProvider {
 
 	@Override
 	public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
-		blockStateModelGenerator.registerTorch(ModBlocks.COAL_TORCH, ModBlocks.WALL_COAL_TORCH);
+		blockStateModelGenerator.registerTorch(ModBlocks.EXTINGUISHED_TORCH, ModBlocks.WALL_EXTINGUISHED_TORCH);
 		blockStateModelGenerator.registerDoor(ModBlocks.STEEL_DOOR);
 		blockStateModelGenerator.registerTrapdoor(ModBlocks.STEEL_TRAPDOOR);
 		blockStateModelGenerator.registerDoor(ModBlocks.GLACIAN_DOOR);

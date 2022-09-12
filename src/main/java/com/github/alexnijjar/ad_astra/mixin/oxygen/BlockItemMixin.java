@@ -50,21 +50,21 @@ public class BlockItemMixin {
 
 				// Wall Torch.
 				if (block instanceof WallTorchBlock && !block.equals(Blocks.SOUL_WALL_TORCH)) {
-					world.setBlockState(pos, ModBlocks.WALL_COAL_TORCH.getDefaultState().with(WallTorchBlock.FACING, blockstate.get(WallTorchBlock.FACING)), 3);
+					world.setBlockState(pos, ModBlocks.WALL_EXTINGUISHED_TORCH.getDefaultState().with(WallTorchBlock.FACING, blockstate.get(WallTorchBlock.FACING)), 3);
 					playSound = true;
 				}
 
 				// Torch.
 				else if (block instanceof TorchBlock && !block.equals(Blocks.SOUL_TORCH) && !block.equals(Blocks.SOUL_WALL_TORCH)) {
 					if (!block.equals(Blocks.REDSTONE_TORCH) && !block.equals(Blocks.REDSTONE_WALL_TORCH)) {
-						world.setBlockState(pos, ModBlocks.COAL_TORCH.getDefaultState(), 3);
+						world.setBlockState(pos, ModBlocks.EXTINGUISHED_TORCH.getDefaultState(), 3);
 						playSound = true;
 					}
 				}
 
 				// Lantern.
 				else if (block instanceof LanternBlock && !block.equals(Blocks.SOUL_LANTERN)) {
-					world.setBlockState(pos, ModBlocks.COAL_LANTERN.getDefaultState().with(LanternBlock.HANGING, blockstate.get(LanternBlock.HANGING)), 3);
+					world.setBlockState(pos, ModBlocks.EXTINGUISHED_LANTERN.getDefaultState().with(LanternBlock.HANGING, blockstate.get(LanternBlock.HANGING)), 3);
 					playSound = true;
 				}
 

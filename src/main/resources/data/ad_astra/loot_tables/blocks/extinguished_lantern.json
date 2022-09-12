@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "ad_astra:coal_lantern"
+          "name": "ad_astra:extinguished_lantern"
         }
       ],
       "rolls": 1.0

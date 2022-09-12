@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "ad_astra:coal_torch",
+    "ad_astra:extinguished_torch",
     "ad_astra:glacian_sign"
   ]
 }

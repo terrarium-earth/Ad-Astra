@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "ad_astra:coal_torch"
+          "name": "ad_astra:extinguished_torch"
         }
       ],
       "rolls": 1.0

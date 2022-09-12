@@ -197,8 +197,8 @@ public class AdAstraClient implements ClientModInitializer {
 		BlockRenderLayerMap.INSTANCE.putFluids(RenderLayer.getTranslucent(), ModFluids.OXYGEN_STILL);
 
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), ModBlocks.WATER_PUMP, ModBlocks.ENERGIZER, ModBlocks.STEEL_DOOR, ModBlocks.STEEL_TRAPDOOR, ModBlocks.GLACIAN_DOOR, ModBlocks.GLACIAN_TRAPDOOR, ModBlocks.AERONOS_DOOR,
-				ModBlocks.AERONOS_TRAPDOOR, ModBlocks.STROPHAR_DOOR, ModBlocks.STROPHAR_TRAPDOOR, ModBlocks.COAL_TORCH, ModBlocks.WALL_COAL_TORCH);
-		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(), ModBlocks.COAL_LANTERN, ModBlocks.GLACIAN_LEAVES);
+				ModBlocks.AERONOS_TRAPDOOR, ModBlocks.STROPHAR_DOOR, ModBlocks.STROPHAR_TRAPDOOR, ModBlocks.EXTINGUISHED_TORCH, ModBlocks.WALL_EXTINGUISHED_TORCH);
+		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(), ModBlocks.EXTINGUISHED_LANTERN, ModBlocks.GLACIAN_LEAVES);
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), ModBlocks.NASA_WORKBENCH, ModBlocks.AERONOS_MUSHROOM, ModBlocks.STROPHAR_MUSHROOM, ModBlocks.AERONOS_LADDER, ModBlocks.STROPHAR_LADDER, ModBlocks.AERONOS_CHEST,
 				ModBlocks.STROPHAR_CHEST);
 

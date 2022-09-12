@@ -139,7 +139,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 	public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
 
 		// For rotations
-		this.guiTime += 0.6f;
+		this.guiTime += delta;
 		this.renderBackground(matrices, mouseX, mouseY, delta);
 		super.render(matrices, mouseX, mouseY, delta);
 

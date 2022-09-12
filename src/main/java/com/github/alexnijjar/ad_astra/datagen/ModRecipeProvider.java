@@ -297,8 +297,8 @@ class ModRecipeProvider extends FabricRecipeProvider {
 		// Doors
 		ShapedRecipeJsonFactory.create(ModItems.IRON_SLIDING_DOOR).input(Character.valueOf('#'), Items.IRON_BLOCK).m_hadhiznl(Character.valueOf('C'), ModTags.IRON_PLATES).input(Character.valueOf('P'), Items.GLASS_PANE).pattern("CCC").pattern("P#P")
 				.pattern("CCC").group("sliding_door").criterion("has_item", conditionsFromItem(Items.IRON_BLOCK)).offerTo(exporter);
-		ShapedRecipeJsonFactory.create(ModItems.STEEL_SLIDING_DOOR).m_hadhiznl(Character.valueOf('#'), ModTags.STEEL_BLOCKS).m_hadhiznl(Character.valueOf('C'), ModTags.STEEL_PLATES).input(Character.valueOf('P'), Items.GLASS_PANE).pattern("CCC").pattern("P#P")
-				.pattern("CCC").group("sliding_door").criterion("has_item", method_10420(ModTags.STEEL_BLOCKS)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.STEEL_SLIDING_DOOR).m_hadhiznl(Character.valueOf('#'), ModTags.STEEL_BLOCKS).m_hadhiznl(Character.valueOf('C'), ModTags.STEEL_PLATES).input(Character.valueOf('P'), Items.GLASS_PANE).pattern("CCC")
+				.pattern("P#P").pattern("CCC").group("sliding_door").criterion("has_item", method_10420(ModTags.STEEL_BLOCKS)).offerTo(exporter);
 		ShapedRecipeJsonFactory.create(ModItems.DESH_SLIDING_DOOR).m_hadhiznl(Character.valueOf('#'), ModTags.DESH_BLOCKS).m_hadhiznl(Character.valueOf('C'), ModTags.DESH_PLATES).input(Character.valueOf('P'), Items.GLASS_PANE).pattern("CCC").pattern("P#P")
 				.pattern("CCC").group("sliding_door").criterion("has_item", method_10420(ModTags.DESH_BLOCKS)).offerTo(exporter);
 		ShapedRecipeJsonFactory.create(ModItems.OSTRUM_SLIDING_DOOR).m_hadhiznl(Character.valueOf('#'), ModTags.OSTRUM_BLOCKS).m_hadhiznl(Character.valueOf('C'), ModTags.OSTRUM_PLATES).input(Character.valueOf('P'), Items.GLASS_PANE).pattern("CCC")
@@ -456,8 +456,8 @@ class ModRecipeProvider extends FabricRecipeProvider {
 				.pattern(" N ").pattern("# #").pattern("B B").group(null).criterion("has_tag", method_10420(ModTags.CALORITE_PLATES)).offerTo(exporter);
 
 		// Soul Torch
-		ShapedRecipeJsonFactory.create(Items.SOUL_TORCH).input(Character.valueOf('#'), ModItems.COAL_TORCH).input(Character.valueOf('S'), Items.SOUL_SOIL).pattern("S").pattern("#")
-				.criterion(hasItem(ModItems.COAL_TORCH), conditionsFromItem(ModItems.COAL_TORCH)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(Items.SOUL_TORCH).input(Character.valueOf('#'), ModItems.EXTINGUISHED_TORCH).input(Character.valueOf('S'), Items.SOUL_SOIL).pattern("S").pattern("#")
+				.criterion(hasItem(ModItems.EXTINGUISHED_TORCH), conditionsFromItem(ModItems.EXTINGUISHED_TORCH)).offerTo(exporter);
 		// Hammer
 		ShapedRecipeJsonFactory.create(ModItems.HAMMER).input(Character.valueOf('#'), Items.IRON_INGOT).input(Character.valueOf('|'), Items.STICK).pattern(" # ").pattern(" |#").pattern("|  ").group(null)
 				.criterion(hasItem(Items.IRON_INGOT), conditionsFromItem(Items.IRON_INGOT)).offerTo(exporter);

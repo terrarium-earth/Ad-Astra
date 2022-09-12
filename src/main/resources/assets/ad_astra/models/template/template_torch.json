@@ -3,8 +3,8 @@
 	"parent": "template_torch",
 	"ambientocclusion": false,
 	"textures": {
-		"2": "ad_astra:block/coal_torch",
-		"particle": "ad_astra:block/coal_torch"
+		"2": "ad_astra:block/extinguished_torch",
+		"particle": "ad_astra:block/extinguished_torch"
 	},
 	"elements": [
 		{

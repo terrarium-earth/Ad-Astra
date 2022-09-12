@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "ad_astra:block/coal_torch"
+    "layer0": "ad_astra:item/extinguished_lantern"
   }
 }

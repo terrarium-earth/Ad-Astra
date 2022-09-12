@@ -26,9 +26,9 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 
 @SuppressWarnings("deprecation")
-public class CoalTorchBlock extends Block {
+public class ExtinguishedTorchBlock extends Block {
 
-	public CoalTorchBlock(Settings settings) {
+	public ExtinguishedTorchBlock(Settings settings) {
 		super(settings);
 	}
 
@@ -40,7 +40,7 @@ public class CoalTorchBlock extends Block {
 			if (OxygenUtils.posHasOxygen(world, pos)) {
 				if (itemstack.getItem() instanceof FlintAndSteelItem || itemstack.getItem() instanceof FireChargeItem) {
 
-					if (world.getBlockState(pos).getBlock().equals(ModBlocks.COAL_TORCH)) {
+					if (world.getBlockState(pos).getBlock().equals(ModBlocks.EXTINGUISHED_TORCH)) {
 						world.setBlockState(pos, Blocks.TORCH.getDefaultState(), 3);
 					} else {
 						world.setBlockState(pos, Blocks.WALL_TORCH.getStateWithProperties(state), 3);

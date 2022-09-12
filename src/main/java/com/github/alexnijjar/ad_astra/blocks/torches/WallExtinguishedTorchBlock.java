@@ -22,13 +22,13 @@ import net.minecraft.world.WorldView;
 
 import java.util.Map;
 
-public class WallCoalTorchBlock extends CoalTorchBlock {
+public class WallExtinguishedTorchBlock extends ExtinguishedTorchBlock {
 
 	public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
 	private static final Map<Direction, VoxelShape> BOUNDING_SHAPES = Maps.newEnumMap(ImmutableMap.of(Direction.NORTH, Block.createCuboidShape(5.5D, 3.0D, 11.0D, 10.5D, 13.0D, 16.0D), Direction.SOUTH,
 			Block.createCuboidShape(5.5D, 3.0D, 0.0D, 10.5D, 13.0D, 5.0D), Direction.WEST, Block.createCuboidShape(11.0D, 3.0D, 5.5D, 16.0D, 13.0D, 10.5D), Direction.EAST, Block.createCuboidShape(0.0D, 3.0D, 5.5D, 5.0D, 13.0D, 10.5D)));
 
-	public WallCoalTorchBlock(Settings settings) {
+	public WallExtinguishedTorchBlock(Settings settings) {
 		super(settings);
 		this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.NORTH));
 	}

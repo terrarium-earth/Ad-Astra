@@ -18,9 +18,9 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class CoalLanternBlock extends LanternBlock {
+public class ExtinguishedLanternBlock extends LanternBlock {
 
-	public CoalLanternBlock(Settings settings) {
+	public ExtinguishedLanternBlock(Settings settings) {
 		super(settings);
 	}
 

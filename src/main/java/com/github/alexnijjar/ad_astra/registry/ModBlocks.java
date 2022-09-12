@@ -20,9 +20,9 @@ import com.github.alexnijjar.ad_astra.blocks.machines.WaterPumpBlock;
 import com.github.alexnijjar.ad_astra.blocks.pads.RocketLaunchPad;
 import com.github.alexnijjar.ad_astra.blocks.pipes.CableBlock;
 import com.github.alexnijjar.ad_astra.blocks.pipes.FluidPipeBlock;
-import com.github.alexnijjar.ad_astra.blocks.torches.CoalLanternBlock;
-import com.github.alexnijjar.ad_astra.blocks.torches.CoalTorchBlock;
-import com.github.alexnijjar.ad_astra.blocks.torches.WallCoalTorchBlock;
+import com.github.alexnijjar.ad_astra.blocks.torches.ExtinguishedLanternBlock;
+import com.github.alexnijjar.ad_astra.blocks.torches.ExtinguishedTorchBlock;
+import com.github.alexnijjar.ad_astra.blocks.torches.WallExtinguishedTorchBlock;
 import com.github.alexnijjar.ad_astra.mixin.SignTypeInvoker;
 import com.github.alexnijjar.ad_astra.util.FluidUtils;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
@@ -90,9 +90,9 @@ public class ModBlocks {
 	public static final Block GLACIO_GLOBE = register("glacio_globe", new GlobeBlock(FabricBlockSettings.copy(EARTH_GLOBE)));
 
 	// Torch blocks
-	public static final Block COAL_TORCH = register("coal_torch", new CoalTorchBlock(FabricBlockSettings.of(Material.DECORATION).noCollision().breakInstantly().sounds(BlockSoundGroup.WOOD)));
-	public static final Block WALL_COAL_TORCH = register("wall_coal_torch", new WallCoalTorchBlock(FabricBlockSettings.of(Material.DECORATION).noCollision().breakInstantly().sounds(BlockSoundGroup.WOOD)), true);
-	public static final Block COAL_LANTERN = register("coal_lantern", new CoalLanternBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.LANTERN).strength(3.5f).nonOpaque()));
+	public static final Block EXTINGUISHED_TORCH = register("extinguished_torch", new ExtinguishedTorchBlock(FabricBlockSettings.of(Material.DECORATION).noCollision().breakInstantly().sounds(BlockSoundGroup.WOOD)));
+	public static final Block WALL_EXTINGUISHED_TORCH = register("wall_extinguished_torch", new WallExtinguishedTorchBlock(FabricBlockSettings.of(Material.DECORATION).noCollision().breakInstantly().sounds(BlockSoundGroup.WOOD)), true);
+	public static final Block EXTINGUISHED_LANTERN = register("extinguished_lantern", new ExtinguishedLanternBlock(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.LANTERN).strength(3.5f).nonOpaque()));
 
 	public static final Block STEEL_CABLE = register("steel_cable", new CableBlock(64, 2, 0.344, FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.NETHERITE).strength(1.0f, 1.0f)));
 	public static final Block DESH_CABLE = register("desh_cable", new CableBlock(256, 1, 0.312, FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.NETHERITE).strength(1.0f, 1.0f)));

@@ -23,7 +23,7 @@ class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
 			this.addDrop(block);
 		}
 
-		this.addDrop(ModBlocks.WALL_COAL_TORCH, ModItems.COAL_TORCH);
+		this.addDrop(ModBlocks.WALL_EXTINGUISHED_TORCH, ModItems.EXTINGUISHED_TORCH);
 		this.addDrop(ModBlocks.GLACIAN_WALL_SIGN, ModItems.GLACIAN_SIGN);
 		this.addDrop(ModBlocks.STEEL_DOOR, BlockLootTableGenerator::addDoorDrop);
 		this.addDrop(ModBlocks.GLACIAN_DOOR, BlockLootTableGenerator::addDoorDrop);
