@@ -1,9 +1,0 @@
-{
-  "parent": "ad_astra:template/flag_up",
-  "textures": {
-    "all": "ad_astra:block/flag_purple",
-    "particle": "ad_astra:block/flag_purple",
-    "0": "ad_astra:block/flag_purple",
-    "missing": "ad_astra:block/flag_purple"
-  }
-}

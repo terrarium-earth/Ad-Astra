@@ -66,20 +66,22 @@ public class ModBlocks {
 	public static final Block ROCKET_LAUNCH_PAD = register("rocket_launch_pad", new RocketLaunchPad(FabricBlockSettings.copy(Blocks.CUT_COPPER)));
 
 	// Flag Blocks
-	public static final Block FLAG = register("flag", new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1)));
-	public static final Block FLAG_BLUE = register("flag_blue", new FlagBlock(FabricBlockSettings.copy(FLAG)));
-	public static final Block FLAG_BROWN = register("flag_brown", new FlagBlock(FabricBlockSettings.copy(FLAG)));
-	public static final Block FLAG_CYAN = register("flag_cyan", new FlagBlock(FabricBlockSettings.copy(FLAG)));
-	public static final Block FLAG_GRAY = register("flag_gray", new FlagBlock(FabricBlockSettings.copy(FLAG)));
-	public static final Block FLAG_GREEN = register("flag_green", new FlagBlock(FabricBlockSettings.copy(FLAG)));
-	public static final Block FLAG_LIGHT_BLUE = register("flag_light_blue", new FlagBlock(FabricBlockSettings.copy(FLAG)));
-	public static final Block FLAG_LIME = register("flag_lime", new FlagBlock(FabricBlockSettings.copy(FLAG)));
-	public static final Block FLAG_MAGENTA = register("flag_magenta", new FlagBlock(FabricBlockSettings.copy(FLAG)));
-	public static final Block FLAG_ORANGE = register("flag_orange", new FlagBlock(FabricBlockSettings.copy(FLAG)));
-	public static final Block FLAG_PINK = register("flag_pink", new FlagBlock(FabricBlockSettings.copy(FLAG)));
-	public static final Block FLAG_PURPLE = register("flag_purple", new FlagBlock(FabricBlockSettings.copy(FLAG)));
-	public static final Block FLAG_RED = register("flag_red", new FlagBlock(FabricBlockSettings.copy(FLAG)));
-	public static final Block FLAG_YELLOW = register("flag_yellow", new FlagBlock(FabricBlockSettings.copy(FLAG)));
+	public static final Block WHITE_FLAG = register("white_flag", new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1)));
+	public static final Block BLACK_FLAG = register("black_flag", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+	public static final Block BLUE_FLAG = register("blue_flag", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+	public static final Block BROWN_FLAG = register("brown_flag", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+	public static final Block CYAN_FLAG = register("cyan_flag", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+	public static final Block GRAY_FLAG = register("gray_flag", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+	public static final Block GREEN_FLAG = register("green_flag", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+	public static final Block LIGHT_BLUE_FLAG = register("light_blue_flag", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+	public static final Block LIGHT_GRAY_FLAG = register("light_gray_flag", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+	public static final Block LIME_FLAG = register("lime_flag", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+	public static final Block MAGENTA_FLAG = register("magenta_flag", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+	public static final Block ORANGE_FLAG = register("orange_flag", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+	public static final Block PINK_FLAG = register("pink_flag", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+	public static final Block PURPLE_FLAG = register("purple_flag", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+	public static final Block RED_FLAG = register("red_flag", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+	public static final Block YELLOW_FLAG = register("yellow_flag", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
 
 	// Globes
 	public static final Block EARTH_GLOBE = register("earth_globe", new GlobeBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(3.5f).nonOpaque().requiresTool()));

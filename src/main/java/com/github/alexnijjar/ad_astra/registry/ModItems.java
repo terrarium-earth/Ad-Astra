@@ -306,20 +306,22 @@ public class ModItems {
 	public static final BlockItem AERONOS_MUSHROOM = registerBlockItem(ModBlocks.AERONOS_MUSHROOM, ModItemGroups.ITEM_GROUP_MATERIALS);
 
 	// Flags
-	public static final BlockItem FLAG = registerFlag(ModBlocks.FLAG);
-	public static final BlockItem FLAG_BLUE = registerFlag(ModBlocks.FLAG_BLUE);
-	public static final BlockItem FLAG_BROWN = registerFlag(ModBlocks.FLAG_BROWN);
-	public static final BlockItem FLAG_CYAN = registerFlag(ModBlocks.FLAG_CYAN);
-	public static final BlockItem FLAG_GRAY = registerFlag(ModBlocks.FLAG_GRAY);
-	public static final BlockItem FLAG_GREEN = registerFlag(ModBlocks.FLAG_GREEN);
-	public static final BlockItem FLAG_LIGHT_BLUE = registerFlag(ModBlocks.FLAG_LIGHT_BLUE);
-	public static final BlockItem FLAG_LIME = registerFlag(ModBlocks.FLAG_LIME);
-	public static final BlockItem FLAG_MAGENTA = registerFlag(ModBlocks.FLAG_MAGENTA);
-	public static final BlockItem FLAG_ORANGE = registerFlag(ModBlocks.FLAG_ORANGE);
-	public static final BlockItem FLAG_PINK = registerFlag(ModBlocks.FLAG_PINK);
-	public static final BlockItem FLAG_PURPLE = registerFlag(ModBlocks.FLAG_PURPLE);
-	public static final BlockItem FLAG_RED = registerFlag(ModBlocks.FLAG_RED);
-	public static final BlockItem FLAG_YELLOW = registerFlag(ModBlocks.FLAG_YELLOW);
+	public static final BlockItem WHITE_FLAG = registerFlag(ModBlocks.WHITE_FLAG);
+	public static final BlockItem BLACK_FLAG = registerFlag(ModBlocks.BLACK_FLAG);
+	public static final BlockItem BLUE_FLAG = registerFlag(ModBlocks.BLUE_FLAG);
+	public static final BlockItem BROWN_FLAG = registerFlag(ModBlocks.BROWN_FLAG);
+	public static final BlockItem CYAN_FLAG = registerFlag(ModBlocks.CYAN_FLAG);
+	public static final BlockItem GRAY_FLAG = registerFlag(ModBlocks.GRAY_FLAG);
+	public static final BlockItem GREEN_FLAG = registerFlag(ModBlocks.GREEN_FLAG);
+	public static final BlockItem LIGHT_BLUE_FLAG = registerFlag(ModBlocks.LIGHT_BLUE_FLAG);
+	public static final BlockItem LIGHT_GRAY_FLAG = registerFlag(ModBlocks.LIGHT_GRAY_FLAG);
+	public static final BlockItem LIME_FLAG = registerFlag(ModBlocks.LIME_FLAG);
+	public static final BlockItem MAGENTA_FLAG = registerFlag(ModBlocks.MAGENTA_FLAG);
+	public static final BlockItem ORANGE_FLAG = registerFlag(ModBlocks.ORANGE_FLAG);
+	public static final BlockItem PINK_FLAG = registerFlag(ModBlocks.PINK_FLAG);
+	public static final BlockItem PURPLE_FLAG = registerFlag(ModBlocks.PURPLE_FLAG);
+	public static final BlockItem RED_FLAG = registerFlag(ModBlocks.RED_FLAG);
+	public static final BlockItem YELLOW_FLAG = registerFlag(ModBlocks.YELLOW_FLAG);
 
 	// Globes
 	public static final BlockItem EARTH_GLOBE = registerGlobe(ModBlocks.EARTH_GLOBE);

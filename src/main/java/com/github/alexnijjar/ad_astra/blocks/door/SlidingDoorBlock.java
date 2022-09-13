@@ -1,7 +1,6 @@
 package com.github.alexnijjar.ad_astra.blocks.door;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.HorizontalFacingBlock;
@@ -233,11 +232,6 @@ public class SlidingDoorBlock extends BlockWithEntity {
                 door.tick();
             }
         };
-    }
-
-    @Override
-    public BlockRenderType getRenderType(BlockState state) {
-        return BlockRenderType.INVISIBLE;
     }
 
     public BlockPos getMainPos(BlockState state, BlockPos from) {

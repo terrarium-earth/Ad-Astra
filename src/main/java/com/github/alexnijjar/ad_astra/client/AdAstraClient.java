@@ -9,8 +9,9 @@ import com.github.alexnijjar.ad_astra.client.registry.ClientModParticles;
 import com.github.alexnijjar.ad_astra.client.registry.ClientModScreens;
 import com.github.alexnijjar.ad_astra.client.registry.ClientModSkies;
 import com.github.alexnijjar.ad_astra.client.renderer.block.EnergizerBlockEntityRenderer;
-import com.github.alexnijjar.ad_astra.client.renderer.block.FlagBlockEntityRenderer;
 import com.github.alexnijjar.ad_astra.client.renderer.block.SlidingDoorBlockEntityRenderer;
+import com.github.alexnijjar.ad_astra.client.renderer.block.flag.FlagBlockEntityRenderer;
+import com.github.alexnijjar.ad_astra.client.renderer.block.flag.FlagItemRenderer;
 import com.github.alexnijjar.ad_astra.client.renderer.block.globe.GlobeBlockEntityRenderer;
 import com.github.alexnijjar.ad_astra.client.renderer.block.globe.GlobeItemRenderer;
 import com.github.alexnijjar.ad_astra.client.renderer.block.globe.GlobeModel;
@@ -58,6 +59,7 @@ import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.item.Item;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.registry.Registry;
 
 public class AdAstraClient implements ClientModInitializer {
 
@@ -145,9 +147,18 @@ public class AdAstraClient implements ClientModInitializer {
 		ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> out.accept(SlidingDoorBlockEntityRenderer.AIRLOCK_MODEL_FLIPPED));
 		ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> out.accept(SlidingDoorBlockEntityRenderer.REINFORCED_DOOR_MODEL_FLIPPED));
 
+		ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> out.accept(SlidingDoorBlockEntityRenderer.REINFORCED_DOOR_MODEL_FLIPPED));
+
 		// Globe item rendering
 		for (Item item : new Item[] { ModItems.EARTH_GLOBE, ModItems.MOON_GLOBE, ModItems.MARS_GLOBE, ModItems.MERCURY_GLOBE, ModItems.VENUS_GLOBE, ModItems.GLACIO_GLOBE }) {
 			BuiltinItemRendererRegistry.INSTANCE.register(item, new GlobeItemRenderer());
+		}
+
+		// Flags
+		for (Item item : new Item[] { ModItems.WHITE_FLAG, ModItems.BLACK_FLAG, ModItems.BLUE_FLAG, ModItems.BROWN_FLAG, ModItems.CYAN_FLAG, ModItems.GRAY_FLAG, ModItems.GREEN_FLAG, ModItems.LIGHT_BLUE_FLAG, ModItems.LIGHT_GRAY_FLAG, ModItems.LIME_FLAG,
+				ModItems.MAGENTA_FLAG, ModItems.ORANGE_FLAG, ModItems.PINK_FLAG, ModItems.PURPLE_FLAG, ModItems.RED_FLAG, ModItems.YELLOW_FLAG }) {
+			BuiltinItemRendererRegistry.INSTANCE.register(item, new FlagItemRenderer());
+			ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> out.accept(new ModIdentifier("block/flag/" + Registry.ITEM.getId(item).getPath())));
 		}
 
 		// Custom space suit rendering
