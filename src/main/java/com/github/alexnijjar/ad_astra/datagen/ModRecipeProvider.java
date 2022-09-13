@@ -377,20 +377,22 @@ class ModRecipeProvider extends FabricRecipeProvider {
 				.criterion("has_tag", method_10420(ModTags.OSTRUM_PLATES)).offerTo(exporter);
 
 		// Flags
-		offerFlagRecipe(exporter, ModItems.FLAG, Blocks.WHITE_WOOL);
-		offerFlagRecipe(exporter, ModItems.FLAG_BLUE, Blocks.BLUE_WOOL);
-		offerFlagRecipe(exporter, ModItems.FLAG_BROWN, Blocks.BROWN_WOOL);
-		offerFlagRecipe(exporter, ModItems.FLAG_CYAN, Blocks.CYAN_WOOL);
-		offerFlagRecipe(exporter, ModItems.FLAG_GRAY, Blocks.GRAY_WOOL);
-		offerFlagRecipe(exporter, ModItems.FLAG_GREEN, Blocks.GREEN_WOOL);
-		offerFlagRecipe(exporter, ModItems.FLAG_LIGHT_BLUE, Blocks.LIGHT_BLUE_WOOL);
-		offerFlagRecipe(exporter, ModItems.FLAG_LIME, Blocks.LIME_WOOL);
-		offerFlagRecipe(exporter, ModItems.FLAG_MAGENTA, Blocks.MAGENTA_WOOL);
-		offerFlagRecipe(exporter, ModItems.FLAG_ORANGE, Blocks.ORANGE_WOOL);
-		offerFlagRecipe(exporter, ModItems.FLAG_PINK, Blocks.PINK_WOOL);
-		offerFlagRecipe(exporter, ModItems.FLAG_PURPLE, Blocks.PURPLE_WOOL);
-		offerFlagRecipe(exporter, ModItems.FLAG_RED, Blocks.RED_WOOL);
-		offerFlagRecipe(exporter, ModItems.FLAG_YELLOW, Blocks.YELLOW_WOOL);
+		offerFlagRecipe(exporter, ModItems.WHITE_FLAG, Blocks.WHITE_WOOL);
+		offerFlagRecipe(exporter, ModItems.BLACK_FLAG, Blocks.BLACK_WOOL);
+		offerFlagRecipe(exporter, ModItems.BLUE_FLAG, Blocks.BLUE_WOOL);
+		offerFlagRecipe(exporter, ModItems.BROWN_FLAG, Blocks.BROWN_WOOL);
+		offerFlagRecipe(exporter, ModItems.CYAN_FLAG, Blocks.CYAN_WOOL);
+		offerFlagRecipe(exporter, ModItems.GRAY_FLAG, Blocks.GRAY_WOOL);
+		offerFlagRecipe(exporter, ModItems.GREEN_FLAG, Blocks.GREEN_WOOL);
+		offerFlagRecipe(exporter, ModItems.LIGHT_BLUE_FLAG, Blocks.LIGHT_BLUE_WOOL);
+		offerFlagRecipe(exporter, ModItems.LIGHT_GRAY_FLAG, Blocks.LIGHT_GRAY_WOOL);
+		offerFlagRecipe(exporter, ModItems.LIME_FLAG, Blocks.LIME_WOOL);
+		offerFlagRecipe(exporter, ModItems.MAGENTA_FLAG, Blocks.MAGENTA_WOOL);
+		offerFlagRecipe(exporter, ModItems.ORANGE_FLAG, Blocks.ORANGE_WOOL);
+		offerFlagRecipe(exporter, ModItems.PINK_FLAG, Blocks.PINK_WOOL);
+		offerFlagRecipe(exporter, ModItems.PURPLE_FLAG, Blocks.PURPLE_WOOL);
+		offerFlagRecipe(exporter, ModItems.RED_FLAG, Blocks.RED_WOOL);
+		offerFlagRecipe(exporter, ModItems.YELLOW_FLAG, Blocks.YELLOW_WOOL);
 
 		// Items
 

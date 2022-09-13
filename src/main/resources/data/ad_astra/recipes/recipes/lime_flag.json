@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "flag",
+  "key": {
+    "#": {
+      "item": "minecraft:lime_wool"
+    },
+    "|": {
+      "tag": "c:iron_rods"
+    }
+  },
+  "pattern": [
+    "|##",
+    "|##",
+    "|  "
+  ],
+  "result": {
+    "item": "ad_astra:lime_flag"
+  }
+}

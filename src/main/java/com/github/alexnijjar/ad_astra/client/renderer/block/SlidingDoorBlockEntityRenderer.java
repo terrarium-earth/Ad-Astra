@@ -111,7 +111,7 @@ public class SlidingDoorBlockEntityRenderer implements BlockEntityRenderer<Slidi
                 matrices.translate(0.0f, 0.0f, offset);
             }
             matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(degrees.getOpposite().asRotation()));
-            renderDoor(entity, (degrees.equals(Direction.WEST) || degrees.equals(Direction.EAST)) ? doorModel : doorModelFlipped, tickDelta, matrices, vertexConsumers, light, overlay);
+            renderDoor((degrees.equals(Direction.WEST) || degrees.equals(Direction.EAST)) ? doorModel : doorModelFlipped, tickDelta, matrices, vertexConsumers, light, overlay);
             matrices.pop();
 
             matrices.push();
@@ -133,12 +133,12 @@ public class SlidingDoorBlockEntityRenderer implements BlockEntityRenderer<Slidi
                 matrices.translate(0.0f, 0.0f, offset);
             }
             matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(degrees.getOpposite().asRotation()));
-            renderDoor(entity, (degrees.equals(Direction.WEST) || degrees.equals(Direction.EAST)) ? doorModelFlipped : doorModel, tickDelta, matrices, vertexConsumers, light, overlay);
+            renderDoor((degrees.equals(Direction.WEST) || degrees.equals(Direction.EAST)) ? doorModelFlipped : doorModel, tickDelta, matrices, vertexConsumers, light, overlay);
             matrices.pop();
         }
     }
 
-    public void renderDoor(SlidingDoorBlockEntity entity, Identifier texture, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+    public void renderDoor(Identifier texture, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
 
         MinecraftClient client = MinecraftClient.getInstance();
         BakedModelManager manager = client.getBakedModelManager();
