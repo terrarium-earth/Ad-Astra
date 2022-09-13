@@ -4,6 +4,7 @@
   "package": "com.github.alexnijjar.ad_astra.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "ArmorDyeRecipeMixin",
     "AxeItemAccessor",
     "BlockEntityTypeAccessor",
     "BlockMixin",
@@ -38,12 +39,15 @@
   "client": [
     "client.BipedEntityModelMixin",
     "client.CameraMixin",
+    "client.ClientRecipeBookMixin",
     "client.ClientPlayerEntityMixin",
     "client.EntityRendererMixin",
     "client.GameRendererMixin",
     "client.HeldItemRendererMixin",
+    "client.ItemColorsMixin",
     "client.PlayerEntityRendererMixin",
     "client.SoundManagerMixin",
+    "client.TexturedRenderLayersMixin",
     "client.WorldRendererAccessor",
     "client.WorldRendererMixin"
   ],

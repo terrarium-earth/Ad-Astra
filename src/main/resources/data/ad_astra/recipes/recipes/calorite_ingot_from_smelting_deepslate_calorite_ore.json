@@ -1,9 +1,9 @@
 {
   "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 1.0,
   "ingredient": {
     "item": "ad_astra:deepslate_calorite_ore"
   },
-  "result": "ad_astra:calorite_ingot",
-  "experience": 1.0,
-  "cookingtime": 200
+  "result": "ad_astra:calorite_ingot"
 }

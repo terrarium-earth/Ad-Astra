@@ -2,7 +2,7 @@
   "parent": "minecraft:block/stairs",
   "textures": {
     "bottom": "ad_astra:block/polished_mercury_stone",
-    "top": "ad_astra:block/polished_mercury_stone",
-    "side": "ad_astra:block/polished_mercury_stone"
+    "side": "ad_astra:block/polished_mercury_stone",
+    "top": "ad_astra:block/polished_mercury_stone"
   }
 }

@@ -1,10 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "# #",
-    "TNT",
-    "BEB"
-  ],
   "key": {
     "#": {
       "tag": "c:compressed_calorite"
@@ -12,16 +7,21 @@
     "B": {
       "tag": "c:calorite_blocks"
     },
-    "N": {
-      "item": "ad_astra:netherite_space_suit"
-    },
     "E": {
       "item": "ad_astra:calorite_engine"
+    },
+    "N": {
+      "item": "ad_astra:netherite_space_suit"
     },
     "T": {
       "item": "ad_astra:calorite_tank"
     }
   },
+  "pattern": [
+    "# #",
+    "TNT",
+    "BEB"
+  ],
   "result": {
     "item": "ad_astra:jet_suit"
   }

@@ -18,9 +18,9 @@
         },
         {
             "type": "patchouli:spotlight",
-            "title": "Compressed Steel",
+            "title": "Steel Plate",
             "item": "ad_astra:compressed_steel",
-            "text": "Compressed steel is the main component in the tier one rocket and in many important machines. It's created by compressing steel ingots in a compressor, which can be powered by a coal generator. Be sure to collect lots of compressed steel, as you will need it throughout your space travels."
+            "text": "Steel Plates are the main component in the tier one rocket and in many important machines. It's created by compressing steel ingots in a compressor, which can be powered by a coal generator. Be sure to collect lots of steel plates, as you will need it throughout your space travels."
         },
         {
             "type": "patchouli:crafting",

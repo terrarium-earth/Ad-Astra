@@ -6,14 +6,14 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.github.alexnijjar.ad_astra.client.renderer.spacesuit.AbstractSpaceSuitModel;
 import com.github.alexnijjar.ad_astra.client.renderer.spacesuit.JetSuitModel;
+import com.github.alexnijjar.ad_astra.client.renderer.spacesuit.NetheriteSpaceSuitModel;
 import com.github.alexnijjar.ad_astra.client.renderer.spacesuit.SpaceSuitModel;
 import com.github.alexnijjar.ad_astra.client.renderer.spacesuit.SpaceSuitRenderer;
 import com.github.alexnijjar.ad_astra.items.armour.JetSuit;
-import com.github.alexnijjar.ad_astra.items.armour.NetheriteSpaceSuit;
 import com.github.alexnijjar.ad_astra.items.armour.SpaceSuit;
 import com.github.alexnijjar.ad_astra.items.vehicles.VehicleItem;
+import com.github.alexnijjar.ad_astra.registry.ModItems;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -22,9 +22,11 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
+import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLoader;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3f;
 
@@ -51,36 +53,48 @@ public class PlayerEntityRendererMixin {
 		}
 	}
 
-	// Render space suit arm in first person.
+	// Render space suit arm in first person
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+
 	@Unique
 	private void adastra_renderArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, boolean right) {
-		if (player.getEquippedStack(EquipmentSlot.CHEST).getItem() instanceof SpaceSuit spaceSuit) {
+		ItemStack stack = player.getEquippedStack(EquipmentSlot.CHEST);
+		if (stack.getItem() instanceof SpaceSuit spaceSuit) {
 
 			PlayerEntityRenderer renderer = (PlayerEntityRenderer) (Object) (this);
 
-			Identifier texture;
-			SpaceSuitModel model = null;
 			EntityModelLoader modelLoader = MinecraftClient.getInstance().getEntityModelLoader();
-			if (spaceSuit instanceof JetSuit) {
-				texture = SpaceSuitRenderer.JET_SUIT_CHEST_LOCATION;
-				model = new JetSuitModel(modelLoader.getModelPart(JetSuitModel.LAYER_LOCATION), renderer.getModel(), texture);
+			Identifier texture;
+			SpaceSuitModel model;
 
-			} else if (spaceSuit instanceof NetheriteSpaceSuit) {
-				texture = SpaceSuitRenderer.NETHERITE_SPACE_SUIT_CHEST_LOCATION;
-				model = new SpaceSuitModel(modelLoader.getModelPart(SpaceSuitModel.LAYER_LOCATION), renderer.getModel(), texture);
+			if (stack.isOf(ModItems.JET_SUIT)) {
+				texture = SpaceSuitRenderer.JET_SUIT_TEXTURE;
+				model = new SpaceSuitModel(modelLoader.getModelPart(JetSuitModel.LAYER_LOCATION), (BipedEntityModel) renderer.getModel(), player, EquipmentSlot.CHEST, stack, texture);
+			} else if (stack.isOf(ModItems.NETHERITE_SPACE_SUIT)) {
+				texture = SpaceSuitRenderer.NETHERITE_SPACE_SUIT_TEXTURE;
+				model = new SpaceSuitModel(modelLoader.getModelPart(NetheriteSpaceSuitModel.LAYER_LOCATION), (BipedEntityModel) renderer.getModel(), player, EquipmentSlot.CHEST, stack, texture);
 			} else {
-				texture = SpaceSuitRenderer.SPACE_SUIT_CHEST_LOCATION;
-				model = new SpaceSuitModel(modelLoader.getModelPart(SpaceSuitModel.LAYER_LOCATION), renderer.getModel(), texture);
+				texture = SpaceSuitRenderer.SPACE_SUIT_TEXTURE;
+				model = new SpaceSuitModel(modelLoader.getModelPart(SpaceSuitModel.LAYER_LOCATION), (BipedEntityModel) renderer.getModel(), player, EquipmentSlot.CHEST, stack, texture);
 			}
 
 			matrices.push();
 			matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(4));
 
-			VertexConsumer vertex = AbstractSpaceSuitModel.getVertex(RenderLayer.getEntityCutout(texture), player.getEquippedStack(EquipmentSlot.CHEST).hasEnchantments(), MinecraftClient.getInstance());
+			int decimal = ((SpaceSuit) stack.getItem()).getColor(stack);
+			float r = (float) (decimal >> 16 & 0xFF) / 255.0f;
+			float g = (float) (decimal >> 8 & 0xFF) / 255.0f;
+			float b = (float) (decimal & 0xFF) / 255.0f;
+
+			if (JetSuit.hasFullSet(player)) {
+				JetSuit.spawnParticles(player.world, player, model);
+			}
+			
+			VertexConsumer vertex = SpaceSuitModel.getVertex(RenderLayer.getEntityTranslucent(texture), player.getEquippedStack(EquipmentSlot.CHEST).hasEnchantments());
 			if (right) {
-				model.rightArm.render(matrices, vertex, light, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, 1.0f);
+				model.rightArm.render(matrices, vertex, light, OverlayTexture.DEFAULT_UV, r, g, b, 1.0f);
 			} else {
-				model.leftArm.render(matrices, vertex, light, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, 1.0f);
+				model.leftArm.render(matrices, vertex, light, OverlayTexture.DEFAULT_UV, r, g, b, 1.0f);
 			}
 			matrices.pop();
 		}

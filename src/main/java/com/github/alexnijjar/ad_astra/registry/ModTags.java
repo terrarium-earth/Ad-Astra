@@ -15,6 +15,8 @@ public class ModTags {
 	public static final TagKey<Item> HEAT_RESISTANT = TagKey.of(Registry.ITEM_KEY, new ModIdentifier("heat_resistant"));
 	public static final TagKey<Item> OXYGENATED_ARMOR = TagKey.of(Registry.ITEM_KEY, new ModIdentifier("oxygenated_armor"));
 	public static final TagKey<Item> GLACIAN_LOGS = TagKey.of(Registry.ITEM_KEY, new ModIdentifier("glacian_logs"));
+	public static final TagKey<Item> AERONOS_CAPS = TagKey.of(Registry.ITEM_KEY, new ModIdentifier("aeronos_caps"));
+	public static final TagKey<Item> STROPHAR_CAPS = TagKey.of(Registry.ITEM_KEY, new ModIdentifier("strophar_caps"));
 
 	public static final TagKey<Fluid> FUELS = TagKey.of(Registry.FLUID_KEY, new ModIdentifier("fuels"));
 
@@ -27,9 +29,8 @@ public class ModTags {
 	public static final TagKey<Item> COMPRESSED_STEEL = TagKey.of(Registry.ITEM_KEY, new Identifier("c:compressed_steel"));
 	public static final TagKey<Item> DESH_INGOTS = TagKey.of(Registry.ITEM_KEY, new Identifier("c:desh_ingots"));
 	public static final TagKey<Item> DESH_NUGGETS = TagKey.of(Registry.ITEM_KEY, new Identifier("c:desh_nuggets"));
-	public static final TagKey<Item> DESH_PLATES = TagKey.of(Registry.ITEM_KEY, new Identifier("c:desh_plates"));
 	public static final TagKey<Item> IRON_PLATES = TagKey.of(Registry.ITEM_KEY, new Identifier("c:iron_plates"));
-	public static final TagKey<Item> IRON_RODS = TagKey.of(Registry.ITEM_KEY, new Identifier("c:iron_rods"));
+	public static final TagKey<Item> IRON_STICKS = TagKey.of(Registry.ITEM_KEY, new Identifier("c:iron_sticks"));
 	public static final TagKey<Item> OSTRUM_INGOTS = TagKey.of(Registry.ITEM_KEY, new Identifier("c:ostrum_ingots"));
 	public static final TagKey<Item> OSTRUM_NUGGETS = TagKey.of(Registry.ITEM_KEY, new Identifier("c:ostrum_nuggets"));
 	public static final TagKey<Item> RAW_CALORITE_ORES = TagKey.of(Registry.ITEM_KEY, new Identifier("c:raw_calorite_ores"));

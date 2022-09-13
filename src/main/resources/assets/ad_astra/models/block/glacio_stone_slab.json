@@ -2,7 +2,7 @@
   "parent": "minecraft:block/slab",
   "textures": {
     "bottom": "ad_astra:block/glacio_stone",
-    "top": "ad_astra:block/glacio_stone",
-    "side": "ad_astra:block/glacio_stone"
+    "side": "ad_astra:block/glacio_stone",
+    "top": "ad_astra:block/glacio_stone"
   }
 }

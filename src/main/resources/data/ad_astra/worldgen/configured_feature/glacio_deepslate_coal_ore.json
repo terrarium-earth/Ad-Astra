@@ -7,10 +7,10 @@
       {
         "target": {
           "predicate_type": "minecraft:tag_match",
-          "tag": "minecraft:deepslate_ore_replaceables"
+          "tag": "ad_astra:glacio_ore_replaceables"
         },
         "state": {
-          "Name": "ad_astra:glacio_deepslate_coal_ore"
+          "Name": "ad_astra:glacio_copper_ore"
         }
       }
     ]

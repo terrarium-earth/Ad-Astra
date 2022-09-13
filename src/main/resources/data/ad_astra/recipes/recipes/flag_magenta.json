@@ -1,19 +1,19 @@
 {
   "type": "minecraft:crafting_shaped",
   "group": "flag",
-  "pattern": [
-    "|##",
-    "|##",
-    "|  "
-  ],
   "key": {
     "#": {
       "item": "minecraft:magenta_wool"
     },
     "|": {
-      "tag": "c:iron_rods"
+      "tag": "c:iron_sticks"
     }
   },
+  "pattern": [
+    "|##",
+    "|##",
+    "|  "
+  ],
   "result": {
     "item": "ad_astra:flag_magenta"
   }

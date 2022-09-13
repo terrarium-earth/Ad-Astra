@@ -30,13 +30,17 @@ import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.ChestBlock;
 import net.minecraft.block.DoorBlock;
 import net.minecraft.block.FallingBlock;
 import net.minecraft.block.FenceBlock;
 import net.minecraft.block.FenceGateBlock;
+import net.minecraft.block.LadderBlock;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
+import net.minecraft.block.MushroomBlock;
+import net.minecraft.block.MushroomPlantBlock;
 import net.minecraft.block.OreBlock;
 import net.minecraft.block.PillarBlock;
 import net.minecraft.block.PressurePlateBlock;
@@ -48,33 +52,36 @@ import net.minecraft.block.TrapdoorBlock;
 import net.minecraft.block.WallBlock;
 import net.minecraft.block.WallSignBlock;
 import net.minecraft.block.WoodenButtonBlock;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.SignType;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.gen.feature.TreeConfiguredFeatures;
 
-public interface ModBlocks {
-
-	Set<Block> blocks = new HashSet<>();
+public class ModBlocks {
+	public static final Set<Block> blocks = new HashSet<>();
 
 	// Rocket Launch Pad
 	public static final Block ROCKET_LAUNCH_PAD = register("rocket_launch_pad", new RocketLaunchPad(FabricBlockSettings.copy(Blocks.CUT_COPPER)));
 
 	// Flag Blocks
-	public static final Block FLAG = register("flag", new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1)));
-	public static final Block FLAG_BLUE = register("flag_blue", new FlagBlock(FabricBlockSettings.copy(FLAG)));
-	public static final Block FLAG_BROWN = register("flag_brown", new FlagBlock(FabricBlockSettings.copy(FLAG)));
-	public static final Block FLAG_CYAN = register("flag_cyan", new FlagBlock(FabricBlockSettings.copy(FLAG)));
-	public static final Block FLAG_GRAY = register("flag_gray", new FlagBlock(FabricBlockSettings.copy(FLAG)));
-	public static final Block FLAG_GREEN = register("flag_green", new FlagBlock(FabricBlockSettings.copy(FLAG)));
-	public static final Block FLAG_LIGHT_BLUE = register("flag_light_blue", new FlagBlock(FabricBlockSettings.copy(FLAG)));
-	public static final Block FLAG_LIME = register("flag_lime", new FlagBlock(FabricBlockSettings.copy(FLAG)));
-	public static final Block FLAG_MAGENTA = register("flag_magenta", new FlagBlock(FabricBlockSettings.copy(FLAG)));
-	public static final Block FLAG_ORANGE = register("flag_orange", new FlagBlock(FabricBlockSettings.copy(FLAG)));
-	public static final Block FLAG_PINK = register("flag_pink", new FlagBlock(FabricBlockSettings.copy(FLAG)));
-	public static final Block FLAG_PURPLE = register("flag_purple", new FlagBlock(FabricBlockSettings.copy(FLAG)));
-	public static final Block FLAG_RED = register("flag_red", new FlagBlock(FabricBlockSettings.copy(FLAG)));
-	public static final Block FLAG_YELLOW = register("flag_yellow", new FlagBlock(FabricBlockSettings.copy(FLAG)));
+	public static final Block WHITE_FLAG = register("flag", new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1)));
+	public static final Block BLACK_FLAG = register("flag_black", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+	public static final Block BLUE_FLAG = register("flag_blue", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+	public static final Block BROWN_FLAG = register("flag_brown", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+	public static final Block CYAN_FLAG = register("flag_cyan", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+	public static final Block GRAY_FLAG = register("flag_gray", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+	public static final Block GREEN_FLAG = register("flag_green", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+	public static final Block LIGHT_BLUE_FLAG = register("flag_light_blue", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+	public static final Block LIGHT_GRAY_FLAG = register("flag_light_gray", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+	public static final Block LIME_FLAG = register("flag_lime", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+	public static final Block MAGENTA_FLAG = register("flag_magenta", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+	public static final Block ORANGE_FLAG = register("flag_orange", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+	public static final Block PINK_FLAG = register("flag_pink", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+	public static final Block PURPLE_FLAG = register("flag_purple", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+	public static final Block RED_FLAG = register("flag_red", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
+	public static final Block YELLOW_FLAG = register("flag_yellow", new FlagBlock(FabricBlockSettings.copy(WHITE_FLAG)));
 
 	// Globes
 	public static final Block EARTH_GLOBE = register("earth_globe", new GlobeBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(3.5f).nonOpaque().requiresTool()));
@@ -167,7 +174,7 @@ public interface ModBlocks {
 
 	public static final Block SKY_STONE = register("sky_stone", new Block(FabricBlockSettings.copy(Blocks.STONE)));
 
-	// Moon stones
+	// Moon Stones
 	public static final Block MOON_SAND = register("moon_sand", new FallingBlock(FabricBlockSettings.of(Material.AGGREGATE, MapColor.GRAY).sounds(BlockSoundGroup.SAND).strength(0.5f, 0.5f)));
 	public static final Block MOON_STONE = register("moon_stone", new Block(FabricBlockSettings.copy(Blocks.STONE)), true);
 	public static final Block MOON_STONE_STAIRS = register("moon_stone_stairs", new StairsBlock(MOON_STONE.getDefaultState(), FabricBlockSettings.copy(Blocks.STONE)));
@@ -187,6 +194,35 @@ public interface ModBlocks {
 	public static final Block POLISHED_MOON_STONE_SLAB = register("polished_moon_stone_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.POLISHED_DIORITE)));
 	public static final Block MOON_PILLAR = register("moon_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.STONE_BRICKS)));
 	public static final Block MOON_STONE_BRICK_WALL = register("moon_stone_brick_wall", new WallBlock(FabricBlockSettings.copy(Blocks.STONE_BRICK_WALL)));
+
+	// Mushrooms
+	// Aeronos
+	public static final Block AERONOS_MUSHROOM = register("aeronos_mushroom", new MushroomPlantBlock(FabricBlockSettings.copy(Blocks.RED_MUSHROOM).sounds(BlockSoundGroup.NETHER_STEM), () -> TreeConfiguredFeatures.HUGE_RED_MUSHROOM));
+	public static final Block AERONOS_CAP = register("aeronos_cap", new MushroomBlock(FabricBlockSettings.copy(Blocks.RED_MUSHROOM_BLOCK).sounds(BlockSoundGroup.NETHER_STEM)));
+	public static final Block AERONOS_DOOR = register("aeronos_door", new DoorBlock(FabricBlockSettings.copy(Blocks.CRIMSON_DOOR).sounds(BlockSoundGroup.NETHER_STEM)), true);
+	public static final Block AERONOS_TRAPDOOR = register("aeronos_trapdoor", new TrapdoorBlock(FabricBlockSettings.copy(Blocks.CRIMSON_TRAPDOOR).sounds(BlockSoundGroup.NETHER_STEM)));
+	public static final Block AERONOS_PLANKS = register("aeronos_planks", new Block(FabricBlockSettings.copy(Blocks.CRIMSON_PLANKS).sounds(BlockSoundGroup.NETHER_STEM)));
+	public static final Block AERONOS_FENCE = register("aeronos_fence", new FenceBlock(FabricBlockSettings.copy(Blocks.CRIMSON_FENCE).sounds(BlockSoundGroup.NETHER_STEM)));
+	public static final Block AERONOS_FENCE_GATE = register("aeronos_fence_gate", new FenceGateBlock(FabricBlockSettings.copy(Blocks.CRIMSON_FENCE_GATE).sounds(BlockSoundGroup.NETHER_STEM)));
+	public static final Block AERONOS_STAIRS = register("aeronos_stairs", new StairsBlock(AERONOS_PLANKS.getDefaultState(), FabricBlockSettings.copy(Blocks.CRIMSON_STAIRS).sounds(BlockSoundGroup.NETHER_STEM)));
+	public static final Block AERONOS_SLAB = register("aeronos_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.CRIMSON_SLAB).sounds(BlockSoundGroup.NETHER_STEM)));
+	public static final Block AERONOS_STEM = register("aeronos_stem", new MushroomBlock(FabricBlockSettings.copy(Blocks.MUSHROOM_STEM).sounds(BlockSoundGroup.NETHER_STEM)));
+	public static final Block AERONOS_CHEST = register("aeronos_chest", new ChestBlock(FabricBlockSettings.copy(Blocks.CHEST).sounds(BlockSoundGroup.NETHER_STEM), () -> BlockEntityType.CHEST));
+	public static final Block AERONOS_LADDER = register("aeronos_ladder", new LadderBlock(FabricBlockSettings.copy(Blocks.LADDER).sounds(BlockSoundGroup.NETHER_STEM)));
+
+	// Strophar
+	public static final Block STROPHAR_MUSHROOM = register("strophar_mushroom", new MushroomPlantBlock(FabricBlockSettings.copy(Blocks.RED_MUSHROOM).sounds(BlockSoundGroup.NETHER_STEM), () -> TreeConfiguredFeatures.HUGE_RED_MUSHROOM));
+	public static final Block STROPHAR_CAP = register("strophar_cap", new MushroomBlock(FabricBlockSettings.copy(Blocks.RED_MUSHROOM_BLOCK).sounds(BlockSoundGroup.NETHER_STEM)));
+	public static final Block STROPHAR_DOOR = register("strophar_door", new DoorBlock(FabricBlockSettings.copy(Blocks.CRIMSON_DOOR).sounds(BlockSoundGroup.NETHER_STEM)), true);
+	public static final Block STROPHAR_TRAPDOOR = register("strophar_trapdoor", new TrapdoorBlock(FabricBlockSettings.copy(Blocks.CRIMSON_TRAPDOOR).sounds(BlockSoundGroup.NETHER_STEM)));
+	public static final Block STROPHAR_PLANKS = register("strophar_planks", new Block(FabricBlockSettings.copy(Blocks.CRIMSON_PLANKS).sounds(BlockSoundGroup.NETHER_STEM)));
+	public static final Block STROPHAR_FENCE = register("strophar_fence", new FenceBlock(FabricBlockSettings.copy(Blocks.CRIMSON_FENCE).sounds(BlockSoundGroup.NETHER_STEM)));
+	public static final Block STROPHAR_FENCE_GATE = register("strophar_fence_gate", new FenceGateBlock(FabricBlockSettings.copy(Blocks.CRIMSON_FENCE_GATE).sounds(BlockSoundGroup.NETHER_STEM)));
+	public static final Block STROPHAR_STAIRS = register("strophar_stairs", new StairsBlock(STROPHAR_PLANKS.getDefaultState(), FabricBlockSettings.copy(Blocks.CRIMSON_STAIRS).sounds(BlockSoundGroup.NETHER_STEM)));
+	public static final Block STROPHAR_SLAB = register("strophar_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.CRIMSON_SLAB).sounds(BlockSoundGroup.NETHER_STEM)));
+	public static final Block STROPHAR_STEM = register("strophar_stem", new MushroomBlock(FabricBlockSettings.copy(Blocks.MUSHROOM_STEM).sounds(BlockSoundGroup.NETHER_STEM)));
+	public static final Block STROPHAR_CHEST = register("strophar_chest", new ChestBlock(FabricBlockSettings.copy(Blocks.CHEST).sounds(BlockSoundGroup.NETHER_STEM), () -> BlockEntityType.CHEST));
+	public static final Block STROPHAR_LADDER = register("strophar_ladder", new LadderBlock(FabricBlockSettings.copy(Blocks.LADDER).sounds(BlockSoundGroup.NETHER_STEM)));
 
 	// Mars stones
 	public static final Block MARS_SAND = register("mars_sand", new FallingBlock(FabricBlockSettings.of(Material.AGGREGATE, MapColor.TERRACOTTA_ORANGE).sounds(BlockSoundGroup.SAND).strength(0.5f, 0.5f)));
@@ -301,18 +337,18 @@ public interface ModBlocks {
 	public static final SignType GLACIAN = SignTypeInvoker.adastra_invokeRegister(SignTypeInvoker.adastra_init("glacian"));
 
 	// Glacian Wood
-	public static final Block GLACIAN_LOG = register("glacian_log", new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_LOG).mapColor(MapColor.LIGHT_BLUE_GRAY)));
-	public static final Block STRIPPED_GLACIAN_LOG = register("stripped_glacian_log", new PillarBlock(FabricBlockSettings.copyOf(Blocks.STRIPPED_OAK_LOG).mapColor(MapColor.LIGHT_BLUE_GRAY)));
-	public static final Block GLACIAN_LEAVES = register("glacian_leaves", new LeavesBlock(FabricBlockSettings.copy(Blocks.OAK_LEAVES).nonOpaque()));
-	public static final Block GLACIAN_PLANKS = register("glacian_planks", new Block(FabricBlockSettings.copy(Blocks.OAK_PLANKS)));
-	public static final Block GLACIAN_STAIRS = register("glacian_stairs", new StairsBlock(GLACIAN_PLANKS.getDefaultState(), FabricBlockSettings.copy(Blocks.OAK_PLANKS)));
-	public static final Block GLACIAN_SLAB = register("glacian_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS)));
-	public static final Block GLACIAN_DOOR = register("glacian_door", new DoorBlock(FabricBlockSettings.copy(Blocks.OAK_DOOR)), true);
-	public static final Block GLACIAN_TRAPDOOR = register("glacian_trapdoor", new TrapdoorBlock(FabricBlockSettings.copy(Blocks.OAK_TRAPDOOR)));
-	public static final Block GLACIAN_FENCE = register("glacian_fence", new FenceBlock(FabricBlockSettings.copy(Blocks.OAK_FENCE)));
-	public static final Block GLACIAN_FENCE_GATE = register("glacian_fence_gate", new FenceGateBlock(FabricBlockSettings.copy(Blocks.OAK_FENCE_GATE)));
+	public static final Block GLACIAN_LOG = register("glacian_log", new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_LOG).mapColor(MapColor.LIGHT_BLUE_GRAY).slipperiness(0.5f)));
+	public static final Block STRIPPED_GLACIAN_LOG = register("stripped_glacian_log", new PillarBlock(FabricBlockSettings.copyOf(Blocks.STRIPPED_OAK_LOG).mapColor(MapColor.LIGHT_BLUE_GRAY).slipperiness(0.5f)));
+	public static final Block GLACIAN_LEAVES = register("glacian_leaves", new LeavesBlock(FabricBlockSettings.copy(Blocks.OAK_LEAVES).nonOpaque().slipperiness(0.5f)));
+	public static final Block GLACIAN_PLANKS = register("glacian_planks", new Block(FabricBlockSettings.copy(Blocks.OAK_PLANKS).slipperiness(0.5f).slipperiness(0.5f)));
+	public static final Block GLACIAN_STAIRS = register("glacian_stairs", new StairsBlock(GLACIAN_PLANKS.getDefaultState(), FabricBlockSettings.copy(Blocks.OAK_PLANKS).slipperiness(0.5f)));
+	public static final Block GLACIAN_SLAB = register("glacian_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.OAK_PLANKS).slipperiness(0.5f)));
+	public static final Block GLACIAN_DOOR = register("glacian_door", new DoorBlock(FabricBlockSettings.copy(Blocks.OAK_DOOR).slipperiness(0.5f)), true);
+	public static final Block GLACIAN_TRAPDOOR = register("glacian_trapdoor", new TrapdoorBlock(FabricBlockSettings.copy(Blocks.OAK_TRAPDOOR).slipperiness(0.5f)));
+	public static final Block GLACIAN_FENCE = register("glacian_fence", new FenceBlock(FabricBlockSettings.copy(Blocks.OAK_FENCE).slipperiness(0.5f).slipperiness(0.5f)));
+	public static final Block GLACIAN_FENCE_GATE = register("glacian_fence_gate", new FenceGateBlock(FabricBlockSettings.copy(Blocks.OAK_FENCE_GATE).slipperiness(0.5f)));
 	public static final Block GLACIAN_BUTTON = register("glacian_button", new WoodenButtonBlock(FabricBlockSettings.copy(Blocks.OAK_BUTTON)));
-	public static final Block GLACIAN_PRESSURE_PLATE = register("glacian_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, FabricBlockSettings.copy(Blocks.OAK_PRESSURE_PLATE)));
+	public static final Block GLACIAN_PRESSURE_PLATE = register("glacian_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.EVERYTHING, FabricBlockSettings.copy(Blocks.OAK_PRESSURE_PLATE).slipperiness(0.5f)));
 	public static final Block GLACIAN_SIGN = register("glacian_sign", new SignBlock(FabricBlockSettings.copy(Blocks.OAK_SIGN), GLACIAN));
 	public static final Block GLACIAN_WALL_SIGN = register("glacian_wall_sign", new WallSignBlock(FabricBlockSettings.copy(Blocks.OAK_WALL_SIGN).dropsLike(GLACIAN_SIGN), GLACIAN), true);
 	public static final Block GLACIAN_FUR = register("glacian_fur", new Block(FabricBlockSettings.copy(Blocks.WHITE_WOOL)));

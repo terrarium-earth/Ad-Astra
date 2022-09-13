@@ -23,7 +23,7 @@ import net.minecraft.data.client.model.TexturedModel;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-public class ModModelProvider extends FabricModelProvider implements ModBlocks {
+public class ModModelProvider extends FabricModelProvider {
 
 	public ModModelProvider(FabricDataGenerator dataGenerator) {
 		super(dataGenerator);
@@ -31,12 +31,20 @@ public class ModModelProvider extends FabricModelProvider implements ModBlocks {
 
 	@Override
 	public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
-		blockStateModelGenerator.registerTorch(COAL_TORCH, WALL_COAL_TORCH);
-		blockStateModelGenerator.registerDoor(STEEL_DOOR);
-		blockStateModelGenerator.registerTrapdoor(STEEL_TRAPDOOR);
-		blockStateModelGenerator.registerDoor(GLACIAN_DOOR);
-		blockStateModelGenerator.registerTrapdoor(GLACIAN_TRAPDOOR);
-		for (Block block : blocks) {
+		blockStateModelGenerator.registerTorch(ModBlocks.COAL_TORCH, ModBlocks.WALL_COAL_TORCH);
+		blockStateModelGenerator.registerDoor(ModBlocks.STEEL_DOOR);
+		blockStateModelGenerator.registerTrapdoor(ModBlocks.STEEL_TRAPDOOR);
+		blockStateModelGenerator.registerDoor(ModBlocks.GLACIAN_DOOR);
+		blockStateModelGenerator.registerTrapdoor(ModBlocks.GLACIAN_TRAPDOOR);
+
+		// blockStateModelGenerator.registerBuiltin(new ModIdentifier("block/aeronos_chest"), ModBlocks.AERONOS_PLANKS).includeWithoutItem(ModBlocks.AERONOS_CHEST);
+		// blockStateModelGenerator.registerBuiltin(new ModIdentifier("block/strophar_chest"), ModBlocks.STROPHAR_PLANKS).includeWithoutItem(ModBlocks.STROPHAR_CHEST);
+		blockStateModelGenerator.registerDoor(ModBlocks.AERONOS_DOOR);
+		blockStateModelGenerator.registerTrapdoor(ModBlocks.AERONOS_TRAPDOOR);
+		blockStateModelGenerator.registerDoor(ModBlocks.STROPHAR_DOOR);
+		blockStateModelGenerator.registerTrapdoor(ModBlocks.STROPHAR_TRAPDOOR);
+
+		for (Block block : ModBlocks.blocks) {
 			Identifier id = Registry.BLOCK.getId(block);
 			if (block instanceof StairsBlock stair) {
 				TexturedModel texturedModel = TexturedModel.CUBE_ALL.get(stair.baseBlock);
@@ -67,7 +75,7 @@ public class ModModelProvider extends FabricModelProvider implements ModBlocks {
 			}
 
 			else if (block instanceof PressurePlateBlock) {
-				if (block != GLACIAN_PRESSURE_PLATE) {
+				if (block != ModBlocks.GLACIAN_PRESSURE_PLATE) {
 					TexturedModel texturedModel = TexturedModel.CUBE_ALL.get(getReplacedPathBlock(id, "_pressure_plate", ""));
 					BlockTexturePool pool = blockStateModelGenerator.new BlockTexturePool(texturedModel.getTexture());
 					pool.pressurePlate(block);
@@ -90,40 +98,42 @@ public class ModModelProvider extends FabricModelProvider implements ModBlocks {
 				pool.fenceGate(block);
 			}
 		}
-		registerSlab(blockStateModelGenerator, IRON_PLATING_SLAB, IRON_PLATING);
-		registerSlab(blockStateModelGenerator, STEEL_PLATING_SLAB, STEEL_PLATING);
-		registerSlab(blockStateModelGenerator, DESH_PLATING_SLAB, DESH_PLATING);
-		registerSlab(blockStateModelGenerator, OSTRUM_PLATING_SLAB, OSTRUM_PLATING);
-		registerSlab(blockStateModelGenerator, CALORITE_PLATING_SLAB, CALORITE_PLATING);
-		registerSlab(blockStateModelGenerator, MOON_STONE_BRICK_SLAB, MOON_STONE_BRICKS);
-		registerSlab(blockStateModelGenerator, CHISELED_MOON_STONE_SLAB, CHISELED_MOON_STONE_BRICKS);
-		registerSlab(blockStateModelGenerator, POLISHED_MOON_STONE_SLAB, POLISHED_MOON_STONE);
-		registerSlab(blockStateModelGenerator, MARS_STONE_BRICK_SLAB, MARS_STONE_BRICKS);
-		registerSlab(blockStateModelGenerator, CHISELED_MARS_STONE_SLAB, CHISELED_MARS_STONE_BRICKS);
-		registerSlab(blockStateModelGenerator, POLISHED_MARS_STONE_SLAB, POLISHED_MARS_STONE);
-		registerSlab(blockStateModelGenerator, VENUS_STONE_BRICK_SLAB, VENUS_STONE_BRICKS);
-		registerSlab(blockStateModelGenerator, CHISELED_VENUS_STONE_SLAB, CHISELED_VENUS_STONE_BRICKS);
-		registerSlab(blockStateModelGenerator, POLISHED_VENUS_STONE_SLAB, POLISHED_VENUS_STONE);
-		registerSlab(blockStateModelGenerator, MERCURY_STONE_BRICK_SLAB, MERCURY_STONE_BRICKS);
-		registerSlab(blockStateModelGenerator, CHISELED_MERCURY_STONE_SLAB, CHISELED_MERCURY_STONE_BRICKS);
-		registerSlab(blockStateModelGenerator, POLISHED_MERCURY_STONE_SLAB, POLISHED_MERCURY_STONE);
-		registerSlab(blockStateModelGenerator, GLACIO_STONE_BRICK_SLAB, GLACIO_STONE_BRICKS);
-		registerSlab(blockStateModelGenerator, CHISELED_GLACIO_STONE_SLAB, CHISELED_GLACIO_STONE_BRICKS);
-		registerSlab(blockStateModelGenerator, POLISHED_GLACIO_STONE_SLAB, POLISHED_GLACIO_STONE);
-		registerSlab(blockStateModelGenerator, PERMAFROST_BRICK_SLAB, PERMAFROST_BRICKS);
-		registerSlab(blockStateModelGenerator, POLISHED_PERMAFROST_SLAB, POLISHED_PERMAFROST);
-		registerSlab(blockStateModelGenerator, CHISELED_PERMAFROST_BRICK_SLAB, CHISELED_PERMAFROST_BRICKS);
-		registerSlab(blockStateModelGenerator, MOON_COBBLESTONE_SLAB, MOON_COBBLESTONE);
-		registerSlab(blockStateModelGenerator, MOON_STONE_SLAB, MOON_STONE);
-		registerSlab(blockStateModelGenerator, MARS_COBBLESTONE_SLAB, MARS_COBBLESTONE);
-		registerSlab(blockStateModelGenerator, MARS_STONE_SLAB, MARS_STONE);
-		registerSlab(blockStateModelGenerator, VENUS_COBBLESTONE_SLAB, VENUS_COBBLESTONE);
-		registerSlab(blockStateModelGenerator, VENUS_STONE_SLAB, VENUS_STONE);
-		registerSlab(blockStateModelGenerator, MERCURY_COBBLESTONE_SLAB, MERCURY_COBBLESTONE);
-		registerSlab(blockStateModelGenerator, MERCURY_STONE_SLAB, MERCURY_STONE);
-		registerSlab(blockStateModelGenerator, GLACIO_COBBLESTONE_SLAB, GLACIO_COBBLESTONE);
-		registerSlab(blockStateModelGenerator, GLACIO_STONE_SLAB, GLACIO_STONE);
-		registerSlab(blockStateModelGenerator, GLACIAN_SLAB, GLACIAN_PLANKS);
+		registerSlab(blockStateModelGenerator, ModBlocks.IRON_PLATING_SLAB, ModBlocks.IRON_PLATING);
+		registerSlab(blockStateModelGenerator, ModBlocks.STEEL_PLATING_SLAB, ModBlocks.STEEL_PLATING);
+		registerSlab(blockStateModelGenerator, ModBlocks.DESH_PLATING_SLAB, ModBlocks.DESH_PLATING);
+		registerSlab(blockStateModelGenerator, ModBlocks.OSTRUM_PLATING_SLAB, ModBlocks.OSTRUM_PLATING);
+		registerSlab(blockStateModelGenerator, ModBlocks.CALORITE_PLATING_SLAB, ModBlocks.CALORITE_PLATING);
+		registerSlab(blockStateModelGenerator, ModBlocks.MOON_STONE_BRICK_SLAB, ModBlocks.MOON_STONE_BRICKS);
+		registerSlab(blockStateModelGenerator, ModBlocks.CHISELED_MOON_STONE_SLAB, ModBlocks.CHISELED_MOON_STONE_BRICKS);
+		registerSlab(blockStateModelGenerator, ModBlocks.POLISHED_MOON_STONE_SLAB, ModBlocks.POLISHED_MOON_STONE);
+		registerSlab(blockStateModelGenerator, ModBlocks.MARS_STONE_BRICK_SLAB, ModBlocks.MARS_STONE_BRICKS);
+		registerSlab(blockStateModelGenerator, ModBlocks.CHISELED_MARS_STONE_SLAB, ModBlocks.CHISELED_MARS_STONE_BRICKS);
+		registerSlab(blockStateModelGenerator, ModBlocks.POLISHED_MARS_STONE_SLAB, ModBlocks.POLISHED_MARS_STONE);
+		registerSlab(blockStateModelGenerator, ModBlocks.VENUS_STONE_BRICK_SLAB, ModBlocks.VENUS_STONE_BRICKS);
+		registerSlab(blockStateModelGenerator, ModBlocks.CHISELED_VENUS_STONE_SLAB, ModBlocks.CHISELED_VENUS_STONE_BRICKS);
+		registerSlab(blockStateModelGenerator, ModBlocks.POLISHED_VENUS_STONE_SLAB, ModBlocks.POLISHED_VENUS_STONE);
+		registerSlab(blockStateModelGenerator, ModBlocks.MERCURY_STONE_BRICK_SLAB, ModBlocks.MERCURY_STONE_BRICKS);
+		registerSlab(blockStateModelGenerator, ModBlocks.CHISELED_MERCURY_STONE_SLAB, ModBlocks.CHISELED_MERCURY_STONE_BRICKS);
+		registerSlab(blockStateModelGenerator, ModBlocks.POLISHED_MERCURY_STONE_SLAB, ModBlocks.POLISHED_MERCURY_STONE);
+		registerSlab(blockStateModelGenerator, ModBlocks.GLACIO_STONE_BRICK_SLAB, ModBlocks.GLACIO_STONE_BRICKS);
+		registerSlab(blockStateModelGenerator, ModBlocks.CHISELED_GLACIO_STONE_SLAB, ModBlocks.CHISELED_GLACIO_STONE_BRICKS);
+		registerSlab(blockStateModelGenerator, ModBlocks.POLISHED_GLACIO_STONE_SLAB, ModBlocks.POLISHED_GLACIO_STONE);
+		registerSlab(blockStateModelGenerator, ModBlocks.PERMAFROST_BRICK_SLAB, ModBlocks.PERMAFROST_BRICKS);
+		registerSlab(blockStateModelGenerator, ModBlocks.POLISHED_PERMAFROST_SLAB, ModBlocks.POLISHED_PERMAFROST);
+		registerSlab(blockStateModelGenerator, ModBlocks.CHISELED_PERMAFROST_BRICK_SLAB, ModBlocks.CHISELED_PERMAFROST_BRICKS);
+		registerSlab(blockStateModelGenerator, ModBlocks.MOON_COBBLESTONE_SLAB, ModBlocks.MOON_COBBLESTONE);
+		registerSlab(blockStateModelGenerator, ModBlocks.MOON_STONE_SLAB, ModBlocks.MOON_STONE);
+		registerSlab(blockStateModelGenerator, ModBlocks.MARS_COBBLESTONE_SLAB, ModBlocks.MARS_COBBLESTONE);
+		registerSlab(blockStateModelGenerator, ModBlocks.MARS_STONE_SLAB, ModBlocks.MARS_STONE);
+		registerSlab(blockStateModelGenerator, ModBlocks.VENUS_COBBLESTONE_SLAB, ModBlocks.VENUS_COBBLESTONE);
+		registerSlab(blockStateModelGenerator, ModBlocks.VENUS_STONE_SLAB, ModBlocks.VENUS_STONE);
+		registerSlab(blockStateModelGenerator, ModBlocks.MERCURY_COBBLESTONE_SLAB, ModBlocks.MERCURY_COBBLESTONE);
+		registerSlab(blockStateModelGenerator, ModBlocks.MERCURY_STONE_SLAB, ModBlocks.MERCURY_STONE);
+		registerSlab(blockStateModelGenerator, ModBlocks.GLACIO_COBBLESTONE_SLAB, ModBlocks.GLACIO_COBBLESTONE);
+		registerSlab(blockStateModelGenerator, ModBlocks.GLACIO_STONE_SLAB, ModBlocks.GLACIO_STONE);
+		registerSlab(blockStateModelGenerator, ModBlocks.GLACIAN_SLAB, ModBlocks.GLACIAN_PLANKS);
+		registerSlab(blockStateModelGenerator, ModBlocks.AERONOS_SLAB, ModBlocks.AERONOS_PLANKS);
+		registerSlab(blockStateModelGenerator, ModBlocks.STROPHAR_SLAB, ModBlocks.STROPHAR_PLANKS);
 	}
 
 	public static void registerSlab(BlockStateModelGenerator blockStateModelGenerator, Block slab, Block source) {

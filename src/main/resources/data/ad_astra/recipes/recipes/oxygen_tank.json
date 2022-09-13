@@ -1,18 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "|| ",
-    "## ",
-    "## "
-  ],
   "key": {
     "#": {
       "tag": "c:compressed_steel"
     },
     "|": {
-      "item": "minecraft:red_wool"
+      "item": "ad_astra:iron_stick"
     }
   },
+  "pattern": [
+    "#| ",
+    "## ",
+    "## "
+  ],
   "result": {
     "item": "ad_astra:oxygen_tank"
   }

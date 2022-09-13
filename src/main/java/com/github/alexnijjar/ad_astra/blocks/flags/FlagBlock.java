@@ -1,13 +1,10 @@
 package com.github.alexnijjar.ad_astra.blocks.flags;
 
-import java.util.stream.Stream;
-
 import org.jetbrains.annotations.Nullable;
 
 import com.mojang.authlib.GameProfile;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.HorizontalFacingBlock;
@@ -30,12 +27,10 @@ import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
-import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
@@ -56,24 +51,64 @@ public class FlagBlock extends BlockWithEntity implements Waterloggable {
 
 	@Override
 	public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-		Vec3d offset = state.getModelOffset(world, pos);
 
 		if (state.get(HALF).equals(DoubleBlockHalf.LOWER)) {
-			return switch (state.get(FACING)) {
-			case SOUTH -> Stream.of(boxSimple(14.5, 0, 9, 12.5, 1, 7), boxSimple(14, 1, 8.5, 13, 16, 7.5)).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get().offset(offset.getX(), offset.getY(), offset.getZ());
-			case NORTH -> Stream.of(boxSimple(1.5, 0, 7, 3.5, 1, 9), boxSimple(2, 1, 7.5, 3, 16, 8.5)).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get().offset(offset.getX(), offset.getY(), offset.getZ());
-			case EAST -> Stream.of(boxSimple(9, 0, 1.5, 7, 1, 3.5), boxSimple(8.5, 1, 2, 7.5, 16, 3)).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get().offset(offset.getX(), offset.getY(), offset.getZ());
-			case WEST -> Stream.of(boxSimple(7, 0, 14.5, 9, 1, 12.5), boxSimple(7.5, 1, 14, 8.5, 16, 13)).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get().offset(offset.getX(), offset.getY(), offset.getZ());
+			switch (state.get(FACING)) {
+			case NORTH -> {
+				VoxelShape shape = VoxelShapes.empty();
+				shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.375, 0, 0.375, 0.625, 0.5, 0.625));
+				shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.4375, 0, 0.4375, 0.5625, 1, 0.5625));
+				return shape;
+			}
+			case EAST -> {
+				VoxelShape shape = VoxelShapes.empty();
+				shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.375, -0.5, 0.375, 0.625, 0, 0.625));
+				shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.4375, -0.5, 0.4375, 0.5625, 0.5, 0.5625));
+				return shape;
+			}
+			case SOUTH -> {
+				VoxelShape shape = VoxelShapes.empty();
+				shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.375, 0, 0.375, 0.625, 0.5, 0.625));
+				shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.4375, 0, 0.4375, 0.5625, 1, 0.5625));
+				return shape;
+			}
+			case WEST -> {
+				VoxelShape shape = VoxelShapes.empty();
+				shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.375, 0, 0.375, 0.625, 0.5, 0.625));
+				shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.4375, 0, 0.4375, 0.5625, 1, 0.5625));
+				return shape;
+			}
 			default -> throw new IllegalStateException("Unexpected value: " + state.get(FACING));
-			};
+			}
+
 		} else {
-			return switch (state.get(FACING)) {
-			case SOUTH -> Stream.of(boxSimple(14, 0, 8.5, 13, 16, 7.5), boxSimple(14, 7, 8.5, 1, 15, 7.5)).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get().offset(offset.getX(), offset.getY(), offset.getZ());
-			case NORTH -> Stream.of(boxSimple(2, 0, 7.5, 3, 16, 8.5), boxSimple(2, 7, 7.5, 15, 15, 8.5)).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get().offset(offset.getX(), offset.getY(), offset.getZ());
-			case EAST -> Stream.of(boxSimple(8.5, 0, 2, 7.5, 16, 3), boxSimple(8.5, 7, 2, 7.5, 15, 15)).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get().offset(offset.getX(), offset.getY(), offset.getZ());
-			case WEST -> Stream.of(boxSimple(7.5, 0, 14, 8.5, 16, 13), boxSimple(7.5, 7, 14, 8.5, 15, 1)).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR)).get().offset(offset.getX(), offset.getY(), offset.getZ());
+			switch (state.get(FACING)) {
+			case NORTH -> {
+				VoxelShape shape = VoxelShapes.empty();
+				shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.4375, 0, 0.4375, 0.5625, 1.5, 0.5625));
+				shape = VoxelShapes.union(shape, VoxelShapes.cuboid(-0.9375, 0.4375, 0.46875, 0.4375, 1.4375, 0.53125));
+				return shape;
+			}
+			case EAST -> {
+				VoxelShape shape = VoxelShapes.empty();
+				shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.4375, 0, 0.4375, 0.5625, 1.5, 0.5625));
+				shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.46875, 0.4375, -0.9375, 0.53125, 1.4375, 0.4375));
+				return shape;
+			}
+			case SOUTH -> {
+				VoxelShape shape = VoxelShapes.empty();
+				shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.4375, 0, 0.4375, 0.5625, 1.5, 0.5625));
+				shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.5625, 0.4375, 0.46875, 1.9375, 1.4375, 0.53125));
+				return shape;
+			}
+			case WEST -> {
+				VoxelShape shape = VoxelShapes.empty();
+				shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.4375, 0, 0.4375, 0.5625, 1.5, 0.5625));
+				shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.46875, 0.4375, 0.5625, 0.53125, 1.4375, 1.9375));
+				return shape;
+			}
 			default -> throw new IllegalStateException("Unexpected value: " + state.get(FACING));
-			};
+			}
 		}
 	}
 
@@ -119,15 +154,7 @@ public class FlagBlock extends BlockWithEntity implements Waterloggable {
 
 	@Override
 	public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-		if (state.get(HALF).equals(DoubleBlockHalf.UPPER)) {
-			return new FlagBlockEntity(pos, state);
-		}
-		return null;
-	}
-
-	@Override
-	public BlockRenderType getRenderType(BlockState state) {
-		return BlockRenderType.MODEL;
+		return new FlagBlockEntity(pos, state);
 	}
 
 	@Override

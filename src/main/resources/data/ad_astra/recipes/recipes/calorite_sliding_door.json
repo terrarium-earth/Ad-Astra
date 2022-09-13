@@ -1,22 +1,22 @@
 {
   "type": "minecraft:crafting_shaped",
   "group": "sliding_door",
-  "pattern": [
-    "CCC",
-    "P#P",
-    "CCC"
-  ],
   "key": {
     "#": {
       "tag": "c:calorite_blocks"
     },
     "C": {
-      "item": "ad_astra:compressed_calorite"
+      "tag": "c:compressed_calorite"
     },
     "P": {
       "item": "minecraft:glass_pane"
     }
   },
+  "pattern": [
+    "CCC",
+    "P#P",
+    "CCC"
+  ],
   "result": {
     "item": "ad_astra:calorite_sliding_door"
   }

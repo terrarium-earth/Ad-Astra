@@ -4,9 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.github.alexnijjar.ad_astra.blocks.door.SlidingDoorBlockEntity;
-
-// import com.github.alexnijjar.ad_astra.blocks.cables.CableBlockEntity;
-
 import com.github.alexnijjar.ad_astra.blocks.flags.FlagBlockEntity;
 import com.github.alexnijjar.ad_astra.blocks.globes.GlobeBlockEntity;
 import com.github.alexnijjar.ad_astra.blocks.machines.entity.AbstractMachineBlockEntity;
@@ -61,8 +58,8 @@ public class ModBlockEntities {
 	public static BlockEntityType<FluidPipeBlockEntity> FLUID_PIPE;
 
 	public static void register() {
-		FLAG_BLOCK_ENTITY = register("flag_entity", FlagBlockEntity::new, ModBlocks.FLAG, ModBlocks.FLAG_BLUE, ModBlocks.FLAG_BROWN, ModBlocks.FLAG_CYAN, ModBlocks.FLAG_GRAY, ModBlocks.FLAG_GREEN, ModBlocks.FLAG_LIGHT_BLUE, ModBlocks.FLAG_LIME,
-				ModBlocks.FLAG_MAGENTA, ModBlocks.FLAG_ORANGE, ModBlocks.FLAG_PINK, ModBlocks.FLAG_PURPLE, ModBlocks.FLAG_RED, ModBlocks.FLAG_YELLOW);
+		FLAG_BLOCK_ENTITY = register("flag_entity", FlagBlockEntity::new, ModBlocks.WHITE_FLAG, ModBlocks.BLUE_FLAG, ModBlocks.BLACK_FLAG, ModBlocks.BROWN_FLAG, ModBlocks.CYAN_FLAG, ModBlocks.GRAY_FLAG, ModBlocks.GREEN_FLAG, ModBlocks.LIGHT_BLUE_FLAG,
+				ModBlocks.LIGHT_GRAY_FLAG, ModBlocks.LIME_FLAG, ModBlocks.MAGENTA_FLAG, ModBlocks.ORANGE_FLAG, ModBlocks.PINK_FLAG, ModBlocks.PURPLE_FLAG, ModBlocks.RED_FLAG, ModBlocks.YELLOW_FLAG);
 
 		GLOBE_BLOCK_ENTITY = register("globe_entity", GlobeBlockEntity::new, ModBlocks.EARTH_GLOBE, ModBlocks.MOON_GLOBE, ModBlocks.MARS_GLOBE, ModBlocks.MERCURY_GLOBE, ModBlocks.VENUS_GLOBE, ModBlocks.GLACIO_GLOBE);
 
@@ -86,10 +83,17 @@ public class ModBlockEntities {
 
 		// Add custom signs to the sign block entity registry
 		BlockEntityTypeAccessor signRegistry = ((BlockEntityTypeAccessor) BlockEntityType.SIGN);
-		Set<Block> blocks = new HashSet<>(signRegistry.getBlocks());
-		blocks.add(ModBlocks.GLACIAN_SIGN);
-		blocks.add(ModBlocks.GLACIAN_WALL_SIGN);
-		signRegistry.setBlocks(blocks);
+		Set<Block> signBlocks = new HashSet<>(signRegistry.getBlocks());
+		signBlocks.add(ModBlocks.GLACIAN_SIGN);
+		signBlocks.add(ModBlocks.GLACIAN_WALL_SIGN);
+		signRegistry.setBlocks(signBlocks);
+
+		// Add custom chests to the chest block entity registry
+		BlockEntityTypeAccessor chestRegistry = ((BlockEntityTypeAccessor) BlockEntityType.CHEST);
+		Set<Block> chestBlocks = new HashSet<>(chestRegistry.getBlocks());
+		chestBlocks.add(ModBlocks.AERONOS_CHEST);
+		chestBlocks.add(ModBlocks.STROPHAR_CHEST);
+		chestRegistry.setBlocks(chestBlocks);
 
 		EnergyStorage.SIDED.registerForBlockEntities((blockEntity, direction) -> ((AbstractMachineBlockEntity) blockEntity).getSideEnergyStorage(direction), SOLAR_PANEL, COAL_GENERATOR, COMPRESSOR, FUEL_REFINERY, OXYGEN_LOADER, OXYGEN_DISTRIBUTOR,
 				WATER_PUMP, ENERGIZER, CRYO_FREEZER);

@@ -1,27 +1,27 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "#F#",
-    "OVO",
-    "#L#"
-  ],
   "key": {
     "#": {
       "tag": "c:compressed_ostrum"
+    },
+    "F": {
+      "item": "ad_astra:engine_fan"
+    },
+    "L": {
+      "item": "minecraft:redstone_lamp"
     },
     "O": {
       "item": "ad_astra:ostrum_ingot"
     },
     "V": {
       "item": "minecraft:observer"
-    },
-    "L": {
-      "item": "minecraft:redstone_lamp"
-    },
-    "F": {
-      "item": "ad_astra:engine_fan"
     }
   },
+  "pattern": [
+    "#F#",
+    "OVO",
+    "#L#"
+  ],
   "result": {
     "item": "ad_astra:oxygen_sensor"
   }
