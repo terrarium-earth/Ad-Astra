@@ -140,7 +140,7 @@ public class ModBlocks {
 	public static final Block IRON_PLATING_BUTTON = register("iron_plating_button", new StoneButtonBlock(FabricBlockSettings.copy(Blocks.STONE_BUTTON)));
 	public static final Block IRON_PLATING_PRESSURE_PLATE = register("iron_plating_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(Blocks.STONE_PRESSURE_PLATE)));
 	public static final Block MARKED_IRON_PILLAR = register("marked_iron_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.CUT_COPPER)));
-	public static final Block BLUE_IRON_PILLAR = register("blue_iron_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.CUT_COPPER).luminance(state -> 15)));
+	public static final Block GLOWING_IRON_PILLAR = register("glowing_iron_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.CUT_COPPER).luminance(state -> 15)));
 
 	public static final Block STEEL_PLATING = register("steel_plating", new Block(FabricBlockSettings.copy(Blocks.CUT_COPPER)));
 	public static final Block STEEL_PLATING_STAIRS = register("steel_plating_stairs", new StairsBlock(STEEL_PLATING.getDefaultState(), FabricBlockSettings.copy(Blocks.CUT_COPPER)));
@@ -150,6 +150,7 @@ public class ModBlocks {
 	public static final Block STEEL_PLATING_PRESSURE_PLATE = register("steel_plating_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(Blocks.STONE_PRESSURE_PLATE)));
 	public static final Block STEEL_DOOR = register("steel_door", new DoorBlock(FabricBlockSettings.copy(Blocks.IRON_DOOR)), true);
 	public static final Block STEEL_TRAPDOOR = register("steel_trapdoor", new TrapdoorBlock(FabricBlockSettings.copy(Blocks.IRON_TRAPDOOR)));
+	public static final Block GLOWING_STEEL_PILLAR = register("glowing_steel_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.CUT_COPPER).luminance(state -> 15)));
 
 	public static final Block DESH_PLATING = register("desh_plating", new Block(FabricBlockSettings.copy(Blocks.CUT_COPPER)));
 	public static final Block DESH_PLATING_STAIRS = register("desh_plating_stairs", new StairsBlock(DESH_PLATING.getDefaultState(), FabricBlockSettings.copy(Blocks.CUT_COPPER)));
@@ -157,6 +158,7 @@ public class ModBlocks {
 	public static final Block DESH_PILLAR = register("desh_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.CUT_COPPER)));
 	public static final Block DESH_PLATING_BUTTON = register("desh_plating_button", new StoneButtonBlock(FabricBlockSettings.copy(Blocks.STONE_BUTTON)));
 	public static final Block DESH_PLATING_PRESSURE_PLATE = register("desh_plating_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(Blocks.STONE_PRESSURE_PLATE)));
+	public static final Block GLOWING_DESH_PILLAR = register("glowing_desh_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.CUT_COPPER).luminance(state -> 15)));
 
 	public static final Block OSTRUM_PLATING = register("ostrum_plating", new Block(FabricBlockSettings.copy(Blocks.CUT_COPPER)));
 	public static final Block OSTRUM_PLATING_STAIRS = register("ostrum_plating_stairs", new StairsBlock(OSTRUM_PLATING.getDefaultState(), FabricBlockSettings.copy(Blocks.CUT_COPPER)));
@@ -164,6 +166,7 @@ public class ModBlocks {
 	public static final Block OSTRUM_PILLAR = register("ostrum_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.CUT_COPPER)));
 	public static final Block OSTRUM_PLATING_BUTTON = register("ostrum_plating_button", new StoneButtonBlock(FabricBlockSettings.copy(Blocks.STONE_BUTTON)));
 	public static final Block OSTRUM_PLATING_PRESSURE_PLATE = register("ostrum_plating_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(Blocks.STONE_PRESSURE_PLATE)));
+	public static final Block GLOWING_OSTRUM_PILLAR = register("glowing_ostrum_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.CUT_COPPER).luminance(state -> 15)));
 
 	public static final Block CALORITE_PLATING = register("calorite_plating", new Block(FabricBlockSettings.copy(Blocks.CUT_COPPER)));
 	public static final Block CALORITE_PLATING_STAIRS = register("calorite_plating_stairs", new StairsBlock(CALORITE_PLATING.getDefaultState(), FabricBlockSettings.copy(Blocks.CUT_COPPER)));
@@ -171,6 +174,7 @@ public class ModBlocks {
 	public static final Block CALORITE_PILLAR = register("calorite_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.CUT_COPPER)));
 	public static final Block CALORITE_PLATING_BUTTON = register("calorite_plating_button", new StoneButtonBlock(FabricBlockSettings.copy(Blocks.STONE_BUTTON)));
 	public static final Block CALORITE_PLATING_PRESSURE_PLATE = register("calorite_plating_pressure_plate", new PressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(Blocks.STONE_PRESSURE_PLATE)));
+	public static final Block GLOWING_CALORITE_PILLAR = register("glowing_calorite_pillar", new PillarBlock(FabricBlockSettings.copy(Blocks.CUT_COPPER).luminance(state -> 15)));
 
 	public static final Block SKY_STONE = register("sky_stone", new Block(FabricBlockSettings.copy(Blocks.STONE)));
 
@@ -197,32 +201,32 @@ public class ModBlocks {
 
 	// Mushrooms
 	// Aeronos
-	public static final Block AERONOS_MUSHROOM = register("aeronos_mushroom", new MushroomPlantBlock(FabricBlockSettings.copy(Blocks.RED_MUSHROOM).sounds(BlockSoundGroup.NETHER_STEM), () -> TreeConfiguredFeatures.HUGE_RED_MUSHROOM));
-	public static final Block AERONOS_CAP = register("aeronos_cap", new MushroomBlock(FabricBlockSettings.copy(Blocks.RED_MUSHROOM_BLOCK).sounds(BlockSoundGroup.NETHER_STEM)));
-	public static final Block AERONOS_DOOR = register("aeronos_door", new DoorBlock(FabricBlockSettings.copy(Blocks.CRIMSON_DOOR).sounds(BlockSoundGroup.NETHER_STEM)), true);
-	public static final Block AERONOS_TRAPDOOR = register("aeronos_trapdoor", new TrapdoorBlock(FabricBlockSettings.copy(Blocks.CRIMSON_TRAPDOOR).sounds(BlockSoundGroup.NETHER_STEM)));
-	public static final Block AERONOS_PLANKS = register("aeronos_planks", new Block(FabricBlockSettings.copy(Blocks.CRIMSON_PLANKS).sounds(BlockSoundGroup.NETHER_STEM)));
-	public static final Block AERONOS_FENCE = register("aeronos_fence", new FenceBlock(FabricBlockSettings.copy(Blocks.CRIMSON_FENCE).sounds(BlockSoundGroup.NETHER_STEM)));
-	public static final Block AERONOS_FENCE_GATE = register("aeronos_fence_gate", new FenceGateBlock(FabricBlockSettings.copy(Blocks.CRIMSON_FENCE_GATE).sounds(BlockSoundGroup.NETHER_STEM)));
-	public static final Block AERONOS_STAIRS = register("aeronos_stairs", new StairsBlock(AERONOS_PLANKS.getDefaultState(), FabricBlockSettings.copy(Blocks.CRIMSON_STAIRS).sounds(BlockSoundGroup.NETHER_STEM)));
-	public static final Block AERONOS_SLAB = register("aeronos_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.CRIMSON_SLAB).sounds(BlockSoundGroup.NETHER_STEM)));
-	public static final Block AERONOS_STEM = register("aeronos_stem", new MushroomBlock(FabricBlockSettings.copy(Blocks.MUSHROOM_STEM).sounds(BlockSoundGroup.NETHER_STEM)));
-	public static final Block AERONOS_CHEST = register("aeronos_chest", new ChestBlock(FabricBlockSettings.copy(Blocks.CHEST).sounds(BlockSoundGroup.NETHER_STEM), () -> BlockEntityType.CHEST));
-	public static final Block AERONOS_LADDER = register("aeronos_ladder", new LadderBlock(FabricBlockSettings.copy(Blocks.LADDER).sounds(BlockSoundGroup.NETHER_STEM)));
+	public static final Block AERONOS_MUSHROOM = register("aeronos_mushroom", new MushroomPlantBlock(FabricBlockSettings.copy(Blocks.RED_MUSHROOM).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6), () -> TreeConfiguredFeatures.HUGE_RED_MUSHROOM));
+	public static final Block AERONOS_CAP = register("aeronos_cap", new MushroomBlock(FabricBlockSettings.copy(Blocks.RED_MUSHROOM_BLOCK).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6)));
+	public static final Block AERONOS_DOOR = register("aeronos_door", new DoorBlock(FabricBlockSettings.copy(Blocks.CRIMSON_DOOR).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6)), true);
+	public static final Block AERONOS_TRAPDOOR = register("aeronos_trapdoor", new TrapdoorBlock(FabricBlockSettings.copy(Blocks.CRIMSON_TRAPDOOR).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6)));
+	public static final Block AERONOS_PLANKS = register("aeronos_planks", new Block(FabricBlockSettings.copy(Blocks.CRIMSON_PLANKS).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6)));
+	public static final Block AERONOS_FENCE = register("aeronos_fence", new FenceBlock(FabricBlockSettings.copy(Blocks.CRIMSON_FENCE).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6)));
+	public static final Block AERONOS_FENCE_GATE = register("aeronos_fence_gate", new FenceGateBlock(FabricBlockSettings.copy(Blocks.CRIMSON_FENCE_GATE).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6)));
+	public static final Block AERONOS_STAIRS = register("aeronos_stairs", new StairsBlock(AERONOS_PLANKS.getDefaultState(), FabricBlockSettings.copy(Blocks.CRIMSON_STAIRS).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6)));
+	public static final Block AERONOS_SLAB = register("aeronos_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.CRIMSON_SLAB).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6)));
+	public static final Block AERONOS_STEM = register("aeronos_stem", new MushroomBlock(FabricBlockSettings.copy(Blocks.MUSHROOM_STEM).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6)));
+	public static final Block AERONOS_CHEST = register("aeronos_chest", new ChestBlock(FabricBlockSettings.copy(Blocks.CHEST).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6), () -> BlockEntityType.CHEST));
+	public static final Block AERONOS_LADDER = register("aeronos_ladder", new LadderBlock(FabricBlockSettings.copy(Blocks.LADDER).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6)));
 
 	// Strophar
-	public static final Block STROPHAR_MUSHROOM = register("strophar_mushroom", new MushroomPlantBlock(FabricBlockSettings.copy(Blocks.RED_MUSHROOM).sounds(BlockSoundGroup.NETHER_STEM), () -> TreeConfiguredFeatures.HUGE_RED_MUSHROOM));
-	public static final Block STROPHAR_CAP = register("strophar_cap", new MushroomBlock(FabricBlockSettings.copy(Blocks.RED_MUSHROOM_BLOCK).sounds(BlockSoundGroup.NETHER_STEM)));
-	public static final Block STROPHAR_DOOR = register("strophar_door", new DoorBlock(FabricBlockSettings.copy(Blocks.CRIMSON_DOOR).sounds(BlockSoundGroup.NETHER_STEM)), true);
-	public static final Block STROPHAR_TRAPDOOR = register("strophar_trapdoor", new TrapdoorBlock(FabricBlockSettings.copy(Blocks.CRIMSON_TRAPDOOR).sounds(BlockSoundGroup.NETHER_STEM)));
-	public static final Block STROPHAR_PLANKS = register("strophar_planks", new Block(FabricBlockSettings.copy(Blocks.CRIMSON_PLANKS).sounds(BlockSoundGroup.NETHER_STEM)));
-	public static final Block STROPHAR_FENCE = register("strophar_fence", new FenceBlock(FabricBlockSettings.copy(Blocks.CRIMSON_FENCE).sounds(BlockSoundGroup.NETHER_STEM)));
-	public static final Block STROPHAR_FENCE_GATE = register("strophar_fence_gate", new FenceGateBlock(FabricBlockSettings.copy(Blocks.CRIMSON_FENCE_GATE).sounds(BlockSoundGroup.NETHER_STEM)));
-	public static final Block STROPHAR_STAIRS = register("strophar_stairs", new StairsBlock(STROPHAR_PLANKS.getDefaultState(), FabricBlockSettings.copy(Blocks.CRIMSON_STAIRS).sounds(BlockSoundGroup.NETHER_STEM)));
-	public static final Block STROPHAR_SLAB = register("strophar_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.CRIMSON_SLAB).sounds(BlockSoundGroup.NETHER_STEM)));
-	public static final Block STROPHAR_STEM = register("strophar_stem", new MushroomBlock(FabricBlockSettings.copy(Blocks.MUSHROOM_STEM).sounds(BlockSoundGroup.NETHER_STEM)));
-	public static final Block STROPHAR_CHEST = register("strophar_chest", new ChestBlock(FabricBlockSettings.copy(Blocks.CHEST).sounds(BlockSoundGroup.NETHER_STEM), () -> BlockEntityType.CHEST));
-	public static final Block STROPHAR_LADDER = register("strophar_ladder", new LadderBlock(FabricBlockSettings.copy(Blocks.LADDER).sounds(BlockSoundGroup.NETHER_STEM)));
+	public static final Block STROPHAR_MUSHROOM = register("strophar_mushroom", new MushroomPlantBlock(FabricBlockSettings.copy(Blocks.RED_MUSHROOM).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6), () -> TreeConfiguredFeatures.HUGE_RED_MUSHROOM));
+	public static final Block STROPHAR_CAP = register("strophar_cap", new MushroomBlock(FabricBlockSettings.copy(Blocks.RED_MUSHROOM_BLOCK).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6)));
+	public static final Block STROPHAR_DOOR = register("strophar_door", new DoorBlock(FabricBlockSettings.copy(Blocks.CRIMSON_DOOR).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6)), true);
+	public static final Block STROPHAR_TRAPDOOR = register("strophar_trapdoor", new TrapdoorBlock(FabricBlockSettings.copy(Blocks.CRIMSON_TRAPDOOR).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6)));
+	public static final Block STROPHAR_PLANKS = register("strophar_planks", new Block(FabricBlockSettings.copy(Blocks.CRIMSON_PLANKS).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6)));
+	public static final Block STROPHAR_FENCE = register("strophar_fence", new FenceBlock(FabricBlockSettings.copy(Blocks.CRIMSON_FENCE).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6)));
+	public static final Block STROPHAR_FENCE_GATE = register("strophar_fence_gate", new FenceGateBlock(FabricBlockSettings.copy(Blocks.CRIMSON_FENCE_GATE).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6)));
+	public static final Block STROPHAR_STAIRS = register("strophar_stairs", new StairsBlock(STROPHAR_PLANKS.getDefaultState(), FabricBlockSettings.copy(Blocks.CRIMSON_STAIRS).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6)));
+	public static final Block STROPHAR_SLAB = register("strophar_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.CRIMSON_SLAB).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6)));
+	public static final Block STROPHAR_STEM = register("strophar_stem", new MushroomBlock(FabricBlockSettings.copy(Blocks.MUSHROOM_STEM).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6)));
+	public static final Block STROPHAR_CHEST = register("strophar_chest", new ChestBlock(FabricBlockSettings.copy(Blocks.CHEST).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6), () -> BlockEntityType.CHEST));
+	public static final Block STROPHAR_LADDER = register("strophar_ladder", new LadderBlock(FabricBlockSettings.copy(Blocks.LADDER).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6)));
 
 	// Mars stones
 	public static final Block MARS_SAND = register("mars_sand", new FallingBlock(FabricBlockSettings.of(Material.AGGREGATE, MapColor.TERRACOTTA_ORANGE).sounds(BlockSoundGroup.SAND).strength(0.5f, 0.5f)));
@@ -381,9 +385,9 @@ public class ModBlocks {
 		return register(id, block, false);
 	}
 
-	static Block register(String id, Block block, boolean exclude) {
+	static Block register(String id, Block block, boolean excludeFromLootTable) {
 		Registry.register(Registry.BLOCK, new ModIdentifier(id), block);
-		if (!exclude) {
+		if (!excludeFromLootTable) {
 			blocks.add(block);
 		}
 		return block;

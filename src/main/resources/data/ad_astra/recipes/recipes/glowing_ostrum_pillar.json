@@ -1,12 +1,12 @@
 {
   "type": "minecraft:crafting_shaped",
-  "group": "blue_iron_pillar",
+  "group": "glowing_ostrum_pillar",
   "key": {
     "#": {
-      "tag": "c:iron_plates"
+      "tag": "c:ostrum_plates"
     },
     "B": {
-      "item": "minecraft:blue_dye"
+      "item": "minecraft:lime_dye"
     },
     "G": {
       "item": "minecraft:glowstone"
@@ -19,6 +19,6 @@
   ],
   "result": {
     "count": 6,
-    "item": "ad_astra:blue_iron_pillar"
+    "item": "ad_astra:glowing_ostrum_pillar"
   }
 }

@@ -8,6 +8,7 @@ import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.entity.player.PlayerEntity;
@@ -223,6 +224,11 @@ public class SlidingDoorBlock extends BlockWithEntity {
             return new SlidingDoorBlockEntity(pos, state);
         }
         return null;
+    }
+
+    @Override
+    public PistonBehavior getPistonBehavior(BlockState state) {
+        return PistonBehavior.BLOCK;
     }
 
     @Override

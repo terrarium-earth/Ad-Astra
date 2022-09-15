@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "glowing_calorite_pillar",
+  "key": {
+    "#": {
+      "tag": "c:calorite_plates"
+    },
+    "B": {
+      "item": "minecraft:orange_dye"
+    },
+    "G": {
+      "item": "minecraft:glowstone"
+    }
+  },
+  "pattern": [
+    "#B#",
+    "#G#",
+    "#B#"
+  ],
+  "result": {
+    "count": 6,
+    "item": "ad_astra:glowing_calorite_pillar"
+  }
+}

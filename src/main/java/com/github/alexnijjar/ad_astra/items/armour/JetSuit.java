@@ -81,7 +81,8 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
 				if (player.isFallFlying()) {
 					player.stopFallFlying();
 				}
-			};
+			}
+			;
 		}
 	}
 
@@ -114,6 +115,7 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
 		player.setVelocity(velocity.add(rotationVector.getX() * 0.1 + (rotationVector.getX() * 1.5 - velocity.getX()) * 0.5, rotationVector.getY() * 0.1 + (rotationVector.getY() * 1.5 - velocity.getY()) * 0.5,
 				rotationVector.getZ() * 0.1 + (rotationVector.getZ() * 1.5 - velocity.getZ()) * 0.5));
 	}
+
 	public static void spawnParticles(World world, LivingEntity entity, BipedEntityModel<LivingEntity> model) {
 
 		if (entity instanceof PlayerEntity player) {
@@ -123,13 +125,15 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
 				if (!nbt.getBoolean("spawn_particles")) {
 					return;
 				}
+			} else {
+				return;
 			}
 		}
 		spawnParticles(world, entity, model, model.rightArm.pitch + 0.05, entity.isFallFlying() ? 0.0 : 0.8, -0.45);
 		spawnParticles(world, entity, model, model.leftArm.pitch + 0.05, entity.isFallFlying() ? 0.0 : 0.8, 0.45);
 
-		spawnParticles(world, entity, model, model.rightLeg.pitch + 0.05, entity.isFallFlying() ? 0.1 : -0.0, -0.1);
-		spawnParticles(world, entity, model, model.leftLeg.pitch + 0.05, entity.isFallFlying() ? 0.1 : -0.0, 0.1);
+		spawnParticles(world, entity, model, model.rightLeg.pitch + 0.05, entity.isFallFlying() ? 0.1 : 0.0, -0.1);
+		spawnParticles(world, entity, model, model.leftLeg.pitch + 0.05, entity.isFallFlying() ? 0.1 : 0.0, 0.1);
 	}
 
 	private static void spawnParticles(World world, LivingEntity entity, BipedEntityModel<LivingEntity> model, double pitch, double yOffset, double zOffset) {

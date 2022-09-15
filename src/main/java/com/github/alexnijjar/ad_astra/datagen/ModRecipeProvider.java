@@ -311,8 +311,16 @@ class ModRecipeProvider extends FabricRecipeProvider {
 		ShapedRecipeJsonFactory.create(ModItems.REINFORCED_DOOR).m_hadhiznl(Character.valueOf('#'), ModTags.STEEL_BLOCKS).input(Character.valueOf('O'), Blocks.OBSIDIAN).input(Character.valueOf('G'), Items.GLASS_PANE).pattern("O#O").pattern("G#G")
 				.pattern("O#O").group("sliding_door").criterion("has_tag", method_10420(ModTags.STEEL_BLOCKS)).offerTo(exporter);
 
-		ShapedRecipeJsonFactory.create(ModItems.BLUE_IRON_PILLAR, 6).m_hadhiznl(Character.valueOf('#'), ModTags.IRON_PLATES).input(Character.valueOf('G'), Blocks.GLOWSTONE).input(Character.valueOf('B'), Items.BLUE_DYE).pattern("#B#").pattern("#G#")
-				.pattern("#B#").group("blue_iron_pillar").criterion("has_tag", method_10420(ModTags.IRON_PLATES)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.GLOWING_IRON_PILLAR, 6).m_hadhiznl(Character.valueOf('#'), ModTags.IRON_PLATES).input(Character.valueOf('G'), Blocks.GLOWSTONE).input(Character.valueOf('B'), Items.LIGHT_BLUE_DYE).pattern("#B#")
+				.pattern("#G#").pattern("#B#").group("glowing_iron_pillar").criterion("has_tag", method_10420(ModTags.IRON_PLATES)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.GLOWING_STEEL_PILLAR, 6).m_hadhiznl(Character.valueOf('#'), ModTags.STEEL_PLATES).input(Character.valueOf('G'), Blocks.GLOWSTONE).input(Character.valueOf('B'), Items.PURPLE_DYE).pattern("#B#").pattern("#G#")
+				.pattern("#B#").group("glowing_steel_pillar").criterion("has_tag", method_10420(ModTags.STEEL_PLATES)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.GLOWING_DESH_PILLAR, 6).m_hadhiznl(Character.valueOf('#'), ModTags.DESH_PLATES).input(Character.valueOf('G'), Blocks.GLOWSTONE).input(Character.valueOf('B'), Items.RED_DYE).pattern("#B#").pattern("#G#")
+				.pattern("#B#").group("glowing_desh_pillar").criterion("has_tag", method_10420(ModTags.DESH_PLATES)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.GLOWING_OSTRUM_PILLAR, 6).m_hadhiznl(Character.valueOf('#'), ModTags.OSTRUM_PLATES).input(Character.valueOf('G'), Blocks.GLOWSTONE).input(Character.valueOf('B'), Items.LIME_DYE).pattern("#B#").pattern("#G#")
+				.pattern("#B#").group("glowing_ostrum_pillar").criterion("has_tag", method_10420(ModTags.OSTRUM_PLATES)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.GLOWING_CALORITE_PILLAR, 6).m_hadhiznl(Character.valueOf('#'), ModTags.CALORITE_PLATES).input(Character.valueOf('G'), Blocks.GLOWSTONE).input(Character.valueOf('B'), Items.ORANGE_DYE).pattern("#B#")
+				.pattern("#G#").pattern("#B#").group("glowing_calorite_pillar").criterion("has_tag", method_10420(ModTags.CALORITE_PLATES)).offerTo(exporter);
 
 		ShapedRecipeJsonFactory.create(ModItems.MARKED_IRON_PILLAR, 6).m_hadhiznl(Character.valueOf('#'), ModTags.IRON_PLATES).input(Character.valueOf('Y'), Items.YELLOW_DYE).input(Character.valueOf('B'), Items.BLACK_DYE).pattern("#Y#").pattern("#B#")
 				.pattern("#Y#").group(null).criterion("has_tag", method_10420(ModTags.IRON_PLATES)).offerTo(exporter);
