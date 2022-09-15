@@ -1,17 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
-  "key": {
-    "#": {
-      "tag": "c:compressed_steel"
-    }
-  },
   "pattern": [
     "##",
     "##",
     "##"
   ],
+  "key": {
+    "#": {
+      "tag": "c:compressed_steel"
+    }
+  },
   "result": {
-    "count": 3,
-    "item": "ad_astra:steel_door"
+    "item": "ad_astra:steel_door",
+    "count": 3
   }
 }

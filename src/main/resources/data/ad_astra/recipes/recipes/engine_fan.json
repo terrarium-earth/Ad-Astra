@@ -1,5 +1,10 @@
 {
   "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " | ",
+    "|#|",
+    " | "
+  ],
   "key": {
     "#": {
       "tag": "c:compressed_steel"
@@ -8,11 +13,6 @@
       "tag": "c:iron_sticks"
     }
   },
-  "pattern": [
-    " | ",
-    "|#|",
-    " | "
-  ],
   "result": {
     "item": "ad_astra:engine_fan"
   }

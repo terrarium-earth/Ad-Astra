@@ -1,15 +1,15 @@
 {
   "type": "minecraft:crafting_shaped",
-  "key": {
-    "#": {
-      "item": "ad_astra:desh_ingot"
-    }
-  },
   "pattern": [
     "###",
     "###",
     "###"
   ],
+  "key": {
+    "#": {
+      "item": "ad_astra:desh_ingot"
+    }
+  },
   "result": {
     "item": "ad_astra:desh_block"
   }

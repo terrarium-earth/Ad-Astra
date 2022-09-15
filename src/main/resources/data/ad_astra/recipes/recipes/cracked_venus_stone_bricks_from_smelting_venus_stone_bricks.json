@@ -1,9 +1,9 @@
 {
   "type": "minecraft:smelting",
-  "cookingtime": 200,
-  "experience": 0.2,
   "ingredient": {
     "item": "ad_astra:venus_stone_bricks"
   },
-  "result": "ad_astra:cracked_venus_stone_bricks"
+  "result": "ad_astra:cracked_venus_stone_bricks",
+  "experience": 0.2,
+  "cookingtime": 200
 }

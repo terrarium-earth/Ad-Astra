@@ -1,23 +1,23 @@
 {
   "type": "minecraft:crafting_shaped",
-  "key": {
-    "#": {
-      "tag": "c:iron_plates"
-    },
-    "B": {
-      "item": "minecraft:black_dye"
-    },
-    "Y": {
-      "item": "minecraft:yellow_dye"
-    }
-  },
   "pattern": [
     "#Y#",
     "#B#",
     "#Y#"
   ],
+  "key": {
+    "#": {
+      "tag": "c:iron_plates"
+    },
+    "Y": {
+      "item": "minecraft:yellow_dye"
+    },
+    "B": {
+      "item": "minecraft:black_dye"
+    }
+  },
   "result": {
-    "count": 6,
-    "item": "ad_astra:marked_iron_pillar"
+    "item": "ad_astra:marked_iron_pillar",
+    "count": 6
   }
 }

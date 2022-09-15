@@ -1,6 +1,11 @@
 {
   "type": "minecraft:crafting_shaped",
   "group": "sliding_door",
+  "pattern": [
+    "CCC",
+    "P#P",
+    "CCC"
+  ],
   "key": {
     "#": {
       "tag": "c:ostrum_blocks"
@@ -12,11 +17,6 @@
       "item": "minecraft:glass_pane"
     }
   },
-  "pattern": [
-    "CCC",
-    "P#P",
-    "CCC"
-  ],
   "result": {
     "item": "ad_astra:ostrum_sliding_door"
   }

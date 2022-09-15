@@ -1,5 +1,10 @@
 {
   "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "CCC",
+    "###"
+  ],
   "key": {
     "#": {
       "tag": "c:compressed_steel"
@@ -8,13 +13,8 @@
       "item": "minecraft:copper_ingot"
     }
   },
-  "pattern": [
-    "###",
-    "CCC",
-    "###"
-  ],
   "result": {
-    "count": 4,
-    "item": "ad_astra:steel_cable"
+    "item": "ad_astra:steel_cable",
+    "count": 4
   }
 }

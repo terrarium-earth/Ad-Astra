@@ -261,7 +261,7 @@ public class ModItems {
 	public static final Item WRENCH = register("wrench", new WrenchItem(new FabricItemSettings().group(ModItemGroups.ITEM_GROUP_MACHINES).maxCount(1)));
 	public static final Item HAMMER = register("hammer", new HammerItem(new FabricItemSettings().group(ModItemGroups.ITEM_GROUP_BASICS).maxCount(1).maxDamage(AdAstra.CONFIG.general.hammerDurability)));
 
-	public static final Item IRON_STICK = registerItem("iron_stick", ModItemGroups.ITEM_GROUP_BASICS);
+	public static final Item IRON_ROD = registerItem("iron_stick", ModItemGroups.ITEM_GROUP_BASICS);
 	public static final Item OXYGEN_GEAR = registerItem("oxygen_gear", ModItemGroups.ITEM_GROUP_BASICS);
 	public static final Item WHEEL = registerItem("wheel", ModItemGroups.ITEM_GROUP_BASICS);
 	public static final Item ENGINE_FRAME = registerItem("engine_frame", ModItemGroups.ITEM_GROUP_BASICS);
@@ -309,21 +309,21 @@ public class ModItems {
 
 	// Flags
 	public static final BlockItem WHITE_FLAG = registerFlag(ModBlocks.WHITE_FLAG);
-	public static final BlockItem BLACK_FLAG = registerFlag(ModBlocks.BLACK_FLAG);
+	public static final BlockItem ORANGE_FLAG = registerFlag(ModBlocks.ORANGE_FLAG);
+	public static final BlockItem MAGENTA_FLAG = registerFlag(ModBlocks.MAGENTA_FLAG);
+	public static final BlockItem LIGHT_BLUE_FLAG = registerFlag(ModBlocks.LIGHT_BLUE_FLAG);
+	public static final BlockItem YELLOW_FLAG = registerFlag(ModBlocks.YELLOW_FLAG);
+	public static final BlockItem LIME_FLAG = registerFlag(ModBlocks.LIME_FLAG);
+	public static final BlockItem PINK_FLAG = registerFlag(ModBlocks.PINK_FLAG);
+	public static final BlockItem GRAY_FLAG = registerFlag(ModBlocks.GRAY_FLAG);
+	public static final BlockItem LIGHT_GRAY_FLAG = registerFlag(ModBlocks.LIGHT_GRAY_FLAG);
+	public static final BlockItem CYAN_FLAG = registerFlag(ModBlocks.CYAN_FLAG);
+	public static final BlockItem PURPLE_FLAG = registerFlag(ModBlocks.PURPLE_FLAG);
 	public static final BlockItem BLUE_FLAG = registerFlag(ModBlocks.BLUE_FLAG);
 	public static final BlockItem BROWN_FLAG = registerFlag(ModBlocks.BROWN_FLAG);
-	public static final BlockItem CYAN_FLAG = registerFlag(ModBlocks.CYAN_FLAG);
-	public static final BlockItem GRAY_FLAG = registerFlag(ModBlocks.GRAY_FLAG);
 	public static final BlockItem GREEN_FLAG = registerFlag(ModBlocks.GREEN_FLAG);
-	public static final BlockItem LIGHT_BLUE_FLAG = registerFlag(ModBlocks.LIGHT_BLUE_FLAG);
-	public static final BlockItem LIGHT_GRAY_FLAG = registerFlag(ModBlocks.LIGHT_GRAY_FLAG);
-	public static final BlockItem LIME_FLAG = registerFlag(ModBlocks.LIME_FLAG);
-	public static final BlockItem MAGENTA_FLAG = registerFlag(ModBlocks.MAGENTA_FLAG);
-	public static final BlockItem ORANGE_FLAG = registerFlag(ModBlocks.ORANGE_FLAG);
-	public static final BlockItem PINK_FLAG = registerFlag(ModBlocks.PINK_FLAG);
-	public static final BlockItem PURPLE_FLAG = registerFlag(ModBlocks.PURPLE_FLAG);
 	public static final BlockItem RED_FLAG = registerFlag(ModBlocks.RED_FLAG);
-	public static final BlockItem YELLOW_FLAG = registerFlag(ModBlocks.YELLOW_FLAG);
+	public static final BlockItem BLACK_FLAG = registerFlag(ModBlocks.BLACK_FLAG);
 
 	// Globes
 	public static final BlockItem EARTH_GLOBE = registerGlobe(ModBlocks.EARTH_GLOBE);
@@ -351,7 +351,7 @@ public class ModItems {
 	public static final BlockItem IRON_PLATING_BUTTON = registerBlockItem(ModBlocks.IRON_PLATING_BUTTON);
 	public static final BlockItem IRON_PLATING_PRESSURE_PLATE = registerBlockItem(ModBlocks.IRON_PLATING_PRESSURE_PLATE);
 	public static final BlockItem MARKED_IRON_PILLAR = registerBlockItem(ModBlocks.MARKED_IRON_PILLAR);
-	public static final BlockItem BLUE_IRON_PILLAR = registerBlockItem(ModBlocks.BLUE_IRON_PILLAR);
+	public static final BlockItem GLOWING_IRON_PILLAR = registerBlockItem(ModBlocks.GLOWING_IRON_PILLAR);
 
 	// Steel
 	public static final BlockItem STEEL_BLOCK = registerBlockItem(ModBlocks.STEEL_BLOCK);
@@ -366,6 +366,7 @@ public class ModItems {
 	public static final BlockItem STEEL_PILLAR = registerBlockItem(ModBlocks.STEEL_PILLAR);
 	public static final BlockItem STEEL_PLATING_BUTTON = registerBlockItem(ModBlocks.STEEL_PLATING_BUTTON);
 	public static final BlockItem STEEL_PLATING_PRESSURE_PLATE = registerBlockItem(ModBlocks.STEEL_PLATING_PRESSURE_PLATE);
+	public static final BlockItem GLOWING_STEEL_PILLAR = registerBlockItem(ModBlocks.GLOWING_STEEL_PILLAR);
 
 	// Moon
 	public static final BlockItem CHEESE_BLOCK = registerBlockItem(ModBlocks.CHEESE_BLOCK);
@@ -378,6 +379,7 @@ public class ModItems {
 	public static final BlockItem DESH_PILLAR = registerBlockItem(ModBlocks.DESH_PILLAR);
 	public static final BlockItem DESH_PLATING_BUTTON = registerBlockItem(ModBlocks.DESH_PLATING_BUTTON);
 	public static final BlockItem DESH_PLATING_PRESSURE_PLATE = registerBlockItem(ModBlocks.DESH_PLATING_PRESSURE_PLATE);
+	public static final BlockItem GLOWING_DESH_PILLAR = registerBlockItem(ModBlocks.GLOWING_DESH_PILLAR);
 
 	// Mars
 	public static final BlockItem OSTRUM_BLOCK = registerBlockItem(ModBlocks.OSTRUM_BLOCK);
@@ -389,6 +391,7 @@ public class ModItems {
 	public static final BlockItem OSTRUM_PILLAR = registerBlockItem(ModBlocks.OSTRUM_PILLAR);
 	public static final BlockItem OSTRUM_PLATING_BUTTON = registerBlockItem(ModBlocks.OSTRUM_PLATING_BUTTON);
 	public static final BlockItem OSTRUM_PLATING_PRESSURE_PLATE = registerBlockItem(ModBlocks.OSTRUM_PLATING_PRESSURE_PLATE);
+	public static final BlockItem GLOWING_OSTRUM_PILLAR = registerBlockItem(ModBlocks.GLOWING_OSTRUM_PILLAR);
 
 	// Venus
 	public static final BlockItem CALORITE_BLOCK = registerBlockItem(ModBlocks.CALORITE_BLOCK);
@@ -400,6 +403,7 @@ public class ModItems {
 	public static final BlockItem CALORITE_PILLAR = registerBlockItem(ModBlocks.CALORITE_PILLAR);
 	public static final BlockItem CALORITE_PLATING_BUTTON = registerBlockItem(ModBlocks.CALORITE_PLATING_BUTTON);
 	public static final BlockItem CALORITE_PLATING_PRESSURE_PLATE = registerBlockItem(ModBlocks.CALORITE_PLATING_PRESSURE_PLATE);
+	public static final BlockItem GLOWING_CALORITE_PILLAR = registerBlockItem(ModBlocks.GLOWING_CALORITE_PILLAR);
 
 	// Earth blocks
 	public static final BlockItem SKY_STONE = registerBlockItem(ModBlocks.SKY_STONE);

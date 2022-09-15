@@ -1,8 +1,8 @@
 {
   "type": "minecraft:stonecutting",
-  "count": 1,
   "ingredient": {
     "item": "ad_astra:conglomerate"
   },
-  "result": "ad_astra:polished_conglomerate"
+  "result": "ad_astra:polished_conglomerate",
+  "count": 1
 }

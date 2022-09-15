@@ -1,9 +1,9 @@
 {
   "type": "minecraft:smelting",
-  "cookingtime": 200,
-  "experience": 1.0,
   "ingredient": {
     "item": "ad_astra:glacio_ice_shard_ore"
   },
-  "result": "ad_astra:ice_shard"
+  "result": "ad_astra:ice_shard",
+  "experience": 1.0,
+  "cookingtime": 200
 }

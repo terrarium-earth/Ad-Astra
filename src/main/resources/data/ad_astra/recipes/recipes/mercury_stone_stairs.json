@@ -1,17 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
-  "key": {
-    "#": {
-      "item": "ad_astra:mercury_stone"
-    }
-  },
   "pattern": [
     "#  ",
     "## ",
     "###"
   ],
+  "key": {
+    "#": {
+      "item": "ad_astra:mercury_stone"
+    }
+  },
   "result": {
-    "count": 4,
-    "item": "ad_astra:mercury_stone_stairs"
+    "item": "ad_astra:mercury_stone_stairs",
+    "count": 4
   }
 }

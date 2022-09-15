@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "glowing_steel_pillar",
+  "pattern": [
+    "#B#",
+    "#G#",
+    "#B#"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:compressed_steel"
+    },
+    "G": {
+      "item": "minecraft:glowstone"
+    },
+    "B": {
+      "item": "minecraft:purple_dye"
+    }
+  },
+  "result": {
+    "item": "ad_astra:glowing_steel_pillar",
+    "count": 6
+  }
+}

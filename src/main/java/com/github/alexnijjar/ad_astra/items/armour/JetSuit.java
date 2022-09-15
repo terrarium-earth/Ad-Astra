@@ -124,13 +124,15 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
 				if (!nbt.getBoolean("spawn_particles")) {
 					return;
 				}
+			} else {
+				return;
 			}
 		}
 		spawnParticles(world, entity, model, model.rightArm.pitch + 0.05, entity.isFallFlying() ? 0.0 : 0.8, -0.45);
 		spawnParticles(world, entity, model, model.leftArm.pitch + 0.05, entity.isFallFlying() ? 0.0 : 0.8, 0.45);
 
-		spawnParticles(world, entity, model, model.rightLeg.pitch + 0.05, entity.isFallFlying() ? 0.1 : -0.0, -0.1);
-		spawnParticles(world, entity, model, model.leftLeg.pitch + 0.05, entity.isFallFlying() ? 0.1 : -0.0, 0.1);
+		spawnParticles(world, entity, model, model.rightLeg.pitch + 0.05, entity.isFallFlying() ? 0.1 : 0.0, -0.1);
+		spawnParticles(world, entity, model, model.leftLeg.pitch + 0.05, entity.isFallFlying() ? 0.1 : 0.0, 0.1);
 	}
 
 	private static void spawnParticles(World world, LivingEntity entity, BipedEntityModel<LivingEntity> model, double pitch, double yOffset, double zOffset) {

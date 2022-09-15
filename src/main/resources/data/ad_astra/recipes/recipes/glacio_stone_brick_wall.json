@@ -1,16 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
   "key": {
     "#": {
       "item": "ad_astra:glacio_stone_bricks"
     }
   },
-  "pattern": [
-    "###",
-    "###"
-  ],
   "result": {
-    "count": 6,
-    "item": "ad_astra:glacio_stone_brick_wall"
+    "item": "ad_astra:glacio_stone_brick_wall",
+    "count": 6
   }
 }

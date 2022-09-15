@@ -1,17 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
-  "key": {
-    "#": {
-      "item": "ad_astra:strophar_planks"
-    }
-  },
   "pattern": [
     "##",
     "##",
     "##"
   ],
+  "key": {
+    "#": {
+      "item": "ad_astra:strophar_planks"
+    }
+  },
   "result": {
-    "count": 3,
-    "item": "ad_astra:strophar_door"
+    "item": "ad_astra:strophar_door",
+    "count": 3
   }
 }

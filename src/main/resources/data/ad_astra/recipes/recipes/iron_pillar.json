@@ -1,16 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "#"
+  ],
   "key": {
     "#": {
       "item": "ad_astra:iron_plating"
     }
   },
-  "pattern": [
-    "#",
-    "#"
-  ],
   "result": {
-    "count": 2,
-    "item": "ad_astra:iron_pillar"
+    "item": "ad_astra:iron_pillar",
+    "count": 2
   }
 }

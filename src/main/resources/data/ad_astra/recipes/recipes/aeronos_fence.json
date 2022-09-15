@@ -1,19 +1,19 @@
 {
   "type": "minecraft:crafting_shaped",
-  "key": {
-    "#": {
-      "item": "minecraft:stick"
-    },
-    "W": {
-      "item": "ad_astra:aeronos_planks"
-    }
-  },
   "pattern": [
     "W#W",
     "W#W"
   ],
+  "key": {
+    "W": {
+      "item": "ad_astra:aeronos_planks"
+    },
+    "#": {
+      "item": "minecraft:stick"
+    }
+  },
   "result": {
-    "count": 3,
-    "item": "ad_astra:aeronos_fence"
+    "item": "ad_astra:aeronos_fence",
+    "count": 3
   }
 }

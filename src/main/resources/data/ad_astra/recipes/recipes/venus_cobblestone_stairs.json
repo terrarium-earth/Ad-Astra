@@ -1,17 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
-  "key": {
-    "#": {
-      "item": "ad_astra:venus_cobblestone"
-    }
-  },
   "pattern": [
     "#  ",
     "## ",
     "###"
   ],
+  "key": {
+    "#": {
+      "item": "ad_astra:venus_cobblestone"
+    }
+  },
   "result": {
-    "count": 4,
-    "item": "ad_astra:venus_cobblestone_stairs"
+    "item": "ad_astra:venus_cobblestone_stairs",
+    "count": 4
   }
 }

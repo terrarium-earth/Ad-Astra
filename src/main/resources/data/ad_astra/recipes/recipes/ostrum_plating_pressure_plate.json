@@ -1,13 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##"
+  ],
   "key": {
     "#": {
       "item": "ad_astra:ostrum_plating"
     }
   },
-  "pattern": [
-    "##"
-  ],
   "result": {
     "item": "ad_astra:ostrum_plating_pressure_plate"
   }

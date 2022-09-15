@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "glowing_ostrum_pillar",
+  "pattern": [
+    "#B#",
+    "#G#",
+    "#B#"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:compressed_ostrum"
+    },
+    "G": {
+      "item": "minecraft:glowstone"
+    },
+    "B": {
+      "item": "minecraft:lime_dye"
+    }
+  },
+  "result": {
+    "item": "ad_astra:glowing_ostrum_pillar",
+    "count": 6
+  }
+}

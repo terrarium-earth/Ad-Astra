@@ -279,53 +279,61 @@ class ModRecipeProvider extends FabricRecipeProvider {
 		offerQuadRecipe(exporter, 1, Blocks.ICE, ModItems.ICE_SHARD);
 
 		// Rocket Launch Pad
-		ShapedRecipeJsonFactory.create(ModItems.ROCKET_LAUNCH_PAD, 9).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_STEEL).m_hadhiznl(Character.valueOf('|'), ModTags.IRON_PLATES).pattern("#|#").pattern("|#|").pattern("#|#")
-				.group("rocket_launch_pad").criterion("has_tag", method_10420(ModTags.COMPRESSED_STEEL)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.ROCKET_LAUNCH_PAD, 9).m_hadhiznl(Character.valueOf('#'), ModTags.STEEL_PLATES).m_hadhiznl(Character.valueOf('|'), ModTags.IRON_PLATES).pattern("#|#").pattern("|#|").pattern("#|#").group("rocket_launch_pad")
+				.criterion("has_tag", method_10420(ModTags.STEEL_PLATES)).offerTo(exporter);
 
 		// Metals
 
-		ShapedRecipeJsonFactory.create(ModItems.IRON_PLATING, 32).m_hadhiznl(Character.valueOf('#'), ModTags.IRON_PLATES).pattern("###").pattern("###").pattern("###").group("iron_plates").criterion("has_tag", method_10420(ModTags.COMPRESSED_STEEL))
+		ShapedRecipeJsonFactory.create(ModItems.IRON_PLATING, 32).m_hadhiznl(Character.valueOf('#'), ModTags.IRON_PLATES).pattern("###").pattern("###").pattern("###").group("iron_plates").criterion("has_tag", method_10420(ModTags.STEEL_PLATES))
 				.offerTo(exporter);
-		offerPlatingRecipe(exporter, ModItems.STEEL_PLATING, ModTags.COMPRESSED_STEEL);
-		offerPlatingRecipe(exporter, ModItems.DESH_PLATING, ModTags.COMPRESSED_DESH);
-		offerPlatingRecipe(exporter, ModItems.OSTRUM_PLATING, ModTags.COMPRESSED_OSTRUM);
-		offerPlatingRecipe(exporter, ModItems.CALORITE_PLATING, ModTags.COMPRESSED_CALORITE);
+		offerPlatingRecipe(exporter, ModItems.STEEL_PLATING, ModTags.STEEL_PLATES);
+		offerPlatingRecipe(exporter, ModItems.DESH_PLATING, ModTags.DESH_PLATES);
+		offerPlatingRecipe(exporter, ModItems.OSTRUM_PLATING, ModTags.OSTRUM_PLATES);
+		offerPlatingRecipe(exporter, ModItems.CALORITE_PLATING, ModTags.CALORITE_PLATES);
 
-		createDoorRecipe(ModItems.STEEL_DOOR, Ingredient.ofTag(ModTags.COMPRESSED_STEEL)).criterion("has_tag", method_10420(ModTags.COMPRESSED_STEEL)).offerTo(exporter);
-		createTrapdoorRecipe(ModItems.STEEL_TRAPDOOR, Ingredient.ofTag(ModTags.COMPRESSED_STEEL)).criterion("has_tag", method_10420(ModTags.COMPRESSED_STEEL)).offerTo(exporter);
+		createDoorRecipe(ModItems.STEEL_DOOR, Ingredient.ofTag(ModTags.STEEL_PLATES)).criterion("has_tag", method_10420(ModTags.STEEL_PLATES)).offerTo(exporter);
+		createTrapdoorRecipe(ModItems.STEEL_TRAPDOOR, Ingredient.ofTag(ModTags.STEEL_PLATES)).criterion("has_tag", method_10420(ModTags.STEEL_PLATES)).offerTo(exporter);
 
 		// Doors
 		ShapedRecipeJsonFactory.create(ModItems.IRON_SLIDING_DOOR).input(Character.valueOf('#'), Items.IRON_BLOCK).m_hadhiznl(Character.valueOf('C'), ModTags.IRON_PLATES).input(Character.valueOf('P'), Items.GLASS_PANE).pattern("CCC").pattern("P#P")
 				.pattern("CCC").group("sliding_door").criterion("has_item", conditionsFromItem(Items.IRON_BLOCK)).offerTo(exporter);
-		ShapedRecipeJsonFactory.create(ModItems.STEEL_SLIDING_DOOR).m_hadhiznl(Character.valueOf('#'), ModTags.STEEL_BLOCKS).m_hadhiznl(Character.valueOf('C'), ModTags.COMPRESSED_STEEL).input(Character.valueOf('P'), Items.GLASS_PANE).pattern("CCC")
+		ShapedRecipeJsonFactory.create(ModItems.STEEL_SLIDING_DOOR).m_hadhiznl(Character.valueOf('#'), ModTags.STEEL_BLOCKS).m_hadhiznl(Character.valueOf('C'), ModTags.STEEL_PLATES).input(Character.valueOf('P'), Items.GLASS_PANE).pattern("CCC")
 				.pattern("P#P").pattern("CCC").group("sliding_door").criterion("has_item", method_10420(ModTags.STEEL_BLOCKS)).offerTo(exporter);
-		ShapedRecipeJsonFactory.create(ModItems.DESH_SLIDING_DOOR).m_hadhiznl(Character.valueOf('#'), ModTags.DESH_BLOCKS).m_hadhiznl(Character.valueOf('C'), ModTags.COMPRESSED_DESH).input(Character.valueOf('P'), Items.GLASS_PANE).pattern("CCC")
-				.pattern("P#P").pattern("CCC").group("sliding_door").criterion("has_item", method_10420(ModTags.DESH_BLOCKS)).offerTo(exporter);
-		ShapedRecipeJsonFactory.create(ModItems.OSTRUM_SLIDING_DOOR).m_hadhiznl(Character.valueOf('#'), ModTags.OSTRUM_BLOCKS).m_hadhiznl(Character.valueOf('C'), ModTags.COMPRESSED_OSTRUM).input(Character.valueOf('P'), Items.GLASS_PANE).pattern("CCC")
+		ShapedRecipeJsonFactory.create(ModItems.DESH_SLIDING_DOOR).m_hadhiznl(Character.valueOf('#'), ModTags.DESH_BLOCKS).m_hadhiznl(Character.valueOf('C'), ModTags.DESH_PLATES).input(Character.valueOf('P'), Items.GLASS_PANE).pattern("CCC").pattern("P#P")
+				.pattern("CCC").group("sliding_door").criterion("has_item", method_10420(ModTags.DESH_BLOCKS)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.OSTRUM_SLIDING_DOOR).m_hadhiznl(Character.valueOf('#'), ModTags.OSTRUM_BLOCKS).m_hadhiznl(Character.valueOf('C'), ModTags.OSTRUM_PLATES).input(Character.valueOf('P'), Items.GLASS_PANE).pattern("CCC")
 				.pattern("P#P").pattern("CCC").group("sliding_door").criterion("has_item", method_10420(ModTags.OSTRUM_BLOCKS)).offerTo(exporter);
-		ShapedRecipeJsonFactory.create(ModItems.CALORITE_SLIDING_DOOR).m_hadhiznl(Character.valueOf('#'), ModTags.CALORITE_BLOCKS).m_hadhiznl(Character.valueOf('C'), ModTags.COMPRESSED_CALORITE).input(Character.valueOf('P'), Items.GLASS_PANE)
-				.pattern("CCC").pattern("P#P").pattern("CCC").group("sliding_door").criterion("has_item", method_10420(ModTags.CALORITE_BLOCKS)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.CALORITE_SLIDING_DOOR).m_hadhiznl(Character.valueOf('#'), ModTags.CALORITE_BLOCKS).m_hadhiznl(Character.valueOf('C'), ModTags.CALORITE_PLATES).input(Character.valueOf('P'), Items.GLASS_PANE).pattern("CCC")
+				.pattern("P#P").pattern("CCC").group("sliding_door").criterion("has_item", method_10420(ModTags.CALORITE_BLOCKS)).offerTo(exporter);
 
-		ShapedRecipeJsonFactory.create(ModItems.AIRLOCK).m_hadhiznl(Character.valueOf('#'), ModTags.STEEL_BLOCKS).m_hadhiznl(Character.valueOf('C'), ModTags.COMPRESSED_STEEL).pattern("CC#").pattern("CCC").pattern("#CC").group("sliding_door")
+		ShapedRecipeJsonFactory.create(ModItems.AIRLOCK).m_hadhiznl(Character.valueOf('#'), ModTags.STEEL_BLOCKS).m_hadhiznl(Character.valueOf('C'), ModTags.STEEL_PLATES).pattern("CC#").pattern("CCC").pattern("#CC").group("sliding_door")
 				.criterion("has_tag", method_10420(ModTags.STEEL_BLOCKS)).offerTo(exporter);
 		ShapedRecipeJsonFactory.create(ModItems.REINFORCED_DOOR).m_hadhiznl(Character.valueOf('#'), ModTags.STEEL_BLOCKS).input(Character.valueOf('O'), Blocks.OBSIDIAN).input(Character.valueOf('G'), Items.GLASS_PANE).pattern("O#O").pattern("G#G")
 				.pattern("O#O").group("sliding_door").criterion("has_tag", method_10420(ModTags.STEEL_BLOCKS)).offerTo(exporter);
 
-		ShapedRecipeJsonFactory.create(ModItems.BLUE_IRON_PILLAR, 6).m_hadhiznl(Character.valueOf('#'), ModTags.IRON_PLATES).input(Character.valueOf('G'), Blocks.GLOWSTONE).input(Character.valueOf('B'), Items.BLUE_DYE).pattern("#B#").pattern("#G#")
-				.pattern("#B#").group("blue_iron_pillar").criterion("has_tag", method_10420(ModTags.IRON_PLATES)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.GLOWING_IRON_PILLAR, 6).m_hadhiznl(Character.valueOf('#'), ModTags.IRON_PLATES).input(Character.valueOf('G'), Blocks.GLOWSTONE).input(Character.valueOf('B'), Items.LIGHT_BLUE_DYE).pattern("#B#")
+				.pattern("#G#").pattern("#B#").group("blue_iron_pillar").criterion("has_tag", method_10420(ModTags.IRON_PLATES)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.GLOWING_STEEL_PILLAR, 6).m_hadhiznl(Character.valueOf('#'), ModTags.STEEL_PLATES).input(Character.valueOf('G'), Blocks.GLOWSTONE).input(Character.valueOf('B'), Items.PURPLE_DYE).pattern("#B#").pattern("#G#")
+				.pattern("#B#").group("glowing_steel_pillar").criterion("has_tag", method_10420(ModTags.STEEL_PLATES)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.GLOWING_DESH_PILLAR, 6).m_hadhiznl(Character.valueOf('#'), ModTags.DESH_PLATES).input(Character.valueOf('G'), Blocks.GLOWSTONE).input(Character.valueOf('B'), Items.RED_DYE).pattern("#B#").pattern("#G#")
+				.pattern("#B#").group("glowing_desh_pillar").criterion("has_tag", method_10420(ModTags.DESH_PLATES)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.GLOWING_OSTRUM_PILLAR, 6).m_hadhiznl(Character.valueOf('#'), ModTags.OSTRUM_PLATES).input(Character.valueOf('G'), Blocks.GLOWSTONE).input(Character.valueOf('B'), Items.LIME_DYE).pattern("#B#").pattern("#G#")
+				.pattern("#B#").group("glowing_ostrum_pillar").criterion("has_tag", method_10420(ModTags.OSTRUM_PLATES)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.GLOWING_CALORITE_PILLAR, 6).m_hadhiznl(Character.valueOf('#'), ModTags.CALORITE_PLATES).input(Character.valueOf('G'), Blocks.GLOWSTONE).input(Character.valueOf('B'), Items.ORANGE_DYE).pattern("#B#")
+				.pattern("#G#").pattern("#B#").group("glowing_calorite_pillar").criterion("has_tag", method_10420(ModTags.CALORITE_PLATES)).offerTo(exporter);
 
 		ShapedRecipeJsonFactory.create(ModItems.MARKED_IRON_PILLAR, 6).m_hadhiznl(Character.valueOf('#'), ModTags.IRON_PLATES).input(Character.valueOf('Y'), Items.YELLOW_DYE).input(Character.valueOf('B'), Items.BLACK_DYE).pattern("#Y#").pattern("#B#")
 				.pattern("#Y#").group(null).criterion("has_tag", method_10420(ModTags.IRON_PLATES)).offerTo(exporter);
 
 		// Machines
 		// NASA Workbench
-		ShapedRecipeJsonFactory.create(ModItems.NASA_WORKBENCH).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_STEEL).input(Character.valueOf('C'), Blocks.CRAFTING_TABLE).m_hadhiznl(Character.valueOf('B'), ModTags.STEEL_BLOCKS)
+		ShapedRecipeJsonFactory.create(ModItems.NASA_WORKBENCH).m_hadhiznl(Character.valueOf('#'), ModTags.STEEL_PLATES).input(Character.valueOf('C'), Blocks.CRAFTING_TABLE).m_hadhiznl(Character.valueOf('B'), ModTags.STEEL_BLOCKS)
 				.input(Character.valueOf('R'), Blocks.REDSTONE_BLOCK).input(Character.valueOf('T'), Blocks.REDSTONE_TORCH).input(Character.valueOf('L'), Blocks.LEVER).pattern("TLT").pattern("#C#").pattern("RBR").group(null)
-				.criterion("has_tag", method_10420(ModTags.COMPRESSED_STEEL)).offerTo(exporter);
+				.criterion("has_tag", method_10420(ModTags.STEEL_PLATES)).offerTo(exporter);
 
 		// Solar Panel
-		ShapedRecipeJsonFactory.create(ModItems.SOLAR_PANEL).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_DESH).m_hadhiznl(Character.valueOf('S'), ModTags.COMPRESSED_STEEL).input(Character.valueOf('G'), Blocks.BLUE_STAINED_GLASS).pattern("GGG")
-				.pattern("S#S").pattern("###").group(null).criterion("has_tag", method_10420(ModTags.COMPRESSED_DESH)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.SOLAR_PANEL).m_hadhiznl(Character.valueOf('#'), ModTags.DESH_PLATES).m_hadhiznl(Character.valueOf('S'), ModTags.STEEL_PLATES).input(Character.valueOf('G'), Blocks.BLUE_STAINED_GLASS).pattern("GGG")
+				.pattern("S#S").pattern("###").group(null).criterion("has_tag", method_10420(ModTags.DESH_PLATES)).offerTo(exporter);
 
 		// Coal Generator
 		ShapedRecipeJsonFactory.create(ModItems.COAL_GENERATOR).m_hadhiznl(Character.valueOf('#'), ModTags.IRON_PLATES).input(Character.valueOf('I'), Items.IRON_INGOT).input(Character.valueOf('F'), Blocks.FURNACE).pattern("#I#").pattern("#F#")
@@ -336,46 +344,45 @@ class ModRecipeProvider extends FabricRecipeProvider {
 				.criterion("has_tag", method_10420(ModTags.IRON_PLATES)).offerTo(exporter);
 
 		// Fuel Refinery
-		ShapedRecipeJsonFactory.create(ModItems.FUEL_REFINERY).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_STEEL).input(Character.valueOf('F'), Blocks.FURNACE).input(Character.valueOf('B'), Items.BUCKET).pattern("###").pattern("BFB")
-				.pattern("###").group(null).criterion("has_tag", method_10420(ModTags.COMPRESSED_STEEL)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.FUEL_REFINERY).m_hadhiznl(Character.valueOf('#'), ModTags.STEEL_PLATES).input(Character.valueOf('F'), Blocks.FURNACE).input(Character.valueOf('B'), Items.BUCKET).pattern("###").pattern("BFB").pattern("###")
+				.group(null).criterion("has_tag", method_10420(ModTags.STEEL_PLATES)).offerTo(exporter);
 
 		// Oxygen Loader
-		ShapedRecipeJsonFactory.create(ModItems.OXYGEN_LOADER).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_STEEL).input(Character.valueOf('T'), ModItems.OXYGEN_TANK).input(Character.valueOf('L'), Blocks.LIGHTNING_ROD)
-				.input(Character.valueOf('R'), Blocks.REDSTONE_BLOCK).input(Character.valueOf('F'), ModItems.ENGINE_FAN).pattern("#F#").pattern("TLT").pattern("#R#").group(null).criterion("has_tag", method_10420(ModTags.COMPRESSED_STEEL))
-				.offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.OXYGEN_LOADER).m_hadhiznl(Character.valueOf('#'), ModTags.STEEL_PLATES).input(Character.valueOf('T'), ModItems.OXYGEN_TANK).input(Character.valueOf('L'), Blocks.LIGHTNING_ROD)
+				.input(Character.valueOf('R'), Blocks.REDSTONE_BLOCK).input(Character.valueOf('F'), ModItems.ENGINE_FAN).pattern("#F#").pattern("TLT").pattern("#R#").group(null).criterion("has_tag", method_10420(ModTags.STEEL_PLATES)).offerTo(exporter);
 
 		// Oxygen Distributor
-		ShapedRecipeJsonFactory.create(ModItems.OXYGEN_DISTRIBUTOR).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_DESH).input(Character.valueOf('T'), ModItems.OXYGEN_TANK).input(Character.valueOf('L'), ModItems.OXYGEN_LOADER)
-				.input(Character.valueOf('F'), ModItems.ENGINE_FAN).input(Character.valueOf('G'), ModItems.OXYGEN_GEAR).pattern("FFF").pattern("TLT").pattern("#G#").group(null).criterion("has_tag", method_10420(ModTags.COMPRESSED_DESH)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.OXYGEN_DISTRIBUTOR).m_hadhiznl(Character.valueOf('#'), ModTags.DESH_PLATES).input(Character.valueOf('T'), ModItems.OXYGEN_TANK).input(Character.valueOf('L'), ModItems.OXYGEN_LOADER)
+				.input(Character.valueOf('F'), ModItems.ENGINE_FAN).input(Character.valueOf('G'), ModItems.OXYGEN_GEAR).pattern("FFF").pattern("TLT").pattern("#G#").group(null).criterion("has_tag", method_10420(ModTags.DESH_PLATES)).offerTo(exporter);
 
 		// Water Pump
-		ShapedRecipeJsonFactory.create(ModItems.WATER_PUMP).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_DESH).input(Character.valueOf('H'), Blocks.HOPPER).input(Character.valueOf('D'), Blocks.DISPENSER).pattern(" D ").pattern(" #D")
-				.pattern(" H ").group(null).criterion("has_tag", method_10420(ModTags.COMPRESSED_DESH)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.WATER_PUMP).m_hadhiznl(Character.valueOf('#'), ModTags.DESH_PLATES).input(Character.valueOf('H'), Blocks.HOPPER).input(Character.valueOf('D'), Blocks.DISPENSER).pattern(" D ").pattern(" #D").pattern(" H ")
+				.group(null).criterion("has_tag", method_10420(ModTags.DESH_PLATES)).offerTo(exporter);
 
 		// Energizer
-		ShapedRecipeJsonFactory.create(ModItems.ENERGIZER).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_OSTRUM).input(Character.valueOf('D'), Blocks.DIAMOND_BLOCK).input(Character.valueOf('I'), Items.DIAMOND)
-				.input(Character.valueOf('B'), ModItems.OSTRUM_BLOCK).pattern("#I#").pattern("#D#").pattern("B#B").group(null).criterion("has_tag", method_10420(ModTags.COMPRESSED_OSTRUM)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.ENERGIZER).m_hadhiznl(Character.valueOf('#'), ModTags.OSTRUM_PLATES).input(Character.valueOf('D'), Blocks.DIAMOND_BLOCK).input(Character.valueOf('I'), Items.DIAMOND)
+				.input(Character.valueOf('B'), ModItems.OSTRUM_BLOCK).pattern("#I#").pattern("#D#").pattern("B#B").group(null).criterion("has_tag", method_10420(ModTags.OSTRUM_PLATES)).offerTo(exporter);
 
 		// Cryo Freezer
-		ShapedRecipeJsonFactory.create(ModItems.CRYO_FREEZER).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_OSTRUM).input(Character.valueOf('O'), ModItems.OSTRUM_INGOT).input(Character.valueOf('T'), ModItems.OSTRUM_TANK)
-				.input(Character.valueOf('B'), ModItems.OSTRUM_BLOCK).pattern("#O#").pattern("OTO").pattern("BOB").group(null).criterion("has_tag", method_10420(ModTags.COMPRESSED_OSTRUM)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.CRYO_FREEZER).m_hadhiznl(Character.valueOf('#'), ModTags.OSTRUM_PLATES).input(Character.valueOf('O'), ModItems.OSTRUM_INGOT).input(Character.valueOf('T'), ModItems.OSTRUM_TANK)
+				.input(Character.valueOf('B'), ModItems.OSTRUM_BLOCK).pattern("#O#").pattern("OTO").pattern("BOB").group(null).criterion("has_tag", method_10420(ModTags.OSTRUM_PLATES)).offerTo(exporter);
 
 		// Oxygen Sensor
-		ShapedRecipeJsonFactory.create(ModItems.OXYGEN_SENSOR).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_OSTRUM).input(Character.valueOf('O'), ModItems.OSTRUM_INGOT).input(Character.valueOf('V'), Items.OBSERVER)
-				.input(Character.valueOf('L'), Items.REDSTONE_LAMP).input(Character.valueOf('F'), ModItems.ENGINE_FAN).pattern("#F#").pattern("OVO").pattern("#L#").group(null).criterion("has_tag", method_10420(ModTags.COMPRESSED_OSTRUM)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.OXYGEN_SENSOR).m_hadhiznl(Character.valueOf('#'), ModTags.OSTRUM_PLATES).input(Character.valueOf('O'), ModItems.OSTRUM_INGOT).input(Character.valueOf('V'), Items.OBSERVER)
+				.input(Character.valueOf('L'), Items.REDSTONE_LAMP).input(Character.valueOf('F'), ModItems.ENGINE_FAN).pattern("#F#").pattern("OVO").pattern("#L#").group(null).criterion("has_tag", method_10420(ModTags.OSTRUM_PLATES)).offerTo(exporter);
 
 		// Cables
-		ShapedRecipeJsonFactory.create(ModItems.STEEL_CABLE, 4).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_STEEL).input(Character.valueOf('C'), Items.COPPER_INGOT).pattern("###").pattern("CCC").pattern("###").group(null)
-				.criterion("has_tag", method_10420(ModTags.COMPRESSED_STEEL)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.STEEL_CABLE, 4).m_hadhiznl(Character.valueOf('#'), ModTags.STEEL_PLATES).input(Character.valueOf('C'), Items.COPPER_INGOT).pattern("###").pattern("CCC").pattern("###").group(null)
+				.criterion("has_tag", method_10420(ModTags.STEEL_PLATES)).offerTo(exporter);
 
-		ShapedRecipeJsonFactory.create(ModItems.DESH_CABLE, 4).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_DESH).input(Character.valueOf('C'), Items.COPPER_INGOT).pattern("###").pattern("CCC").pattern("###").group(null)
-				.criterion("has_tag", method_10420(ModTags.COMPRESSED_DESH)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.DESH_CABLE, 4).m_hadhiznl(Character.valueOf('#'), ModTags.DESH_PLATES).input(Character.valueOf('C'), Items.COPPER_INGOT).pattern("###").pattern("CCC").pattern("###").group(null)
+				.criterion("has_tag", method_10420(ModTags.DESH_PLATES)).offerTo(exporter);
 
-		ShapedRecipeJsonFactory.create(ModItems.DESH_FLUID_PIPE, 4).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_DESH).input(Character.valueOf('C'), Items.GLASS).pattern("###").pattern("CCC").pattern("###").group(null)
-				.criterion("has_tag", method_10420(ModTags.COMPRESSED_DESH)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.DESH_FLUID_PIPE, 4).m_hadhiznl(Character.valueOf('#'), ModTags.DESH_PLATES).input(Character.valueOf('C'), Items.GLASS).pattern("###").pattern("CCC").pattern("###").group(null)
+				.criterion("has_tag", method_10420(ModTags.DESH_PLATES)).offerTo(exporter);
 
-		ShapedRecipeJsonFactory.create(ModItems.OSTRUM_FLUID_PIPE, 4).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_OSTRUM).input(Character.valueOf('C'), Items.GLASS).pattern("###").pattern("CCC").pattern("###").group(null)
-				.criterion("has_tag", method_10420(ModTags.COMPRESSED_OSTRUM)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.OSTRUM_FLUID_PIPE, 4).m_hadhiznl(Character.valueOf('#'), ModTags.OSTRUM_PLATES).input(Character.valueOf('C'), Items.GLASS).pattern("###").pattern("CCC").pattern("###").group(null)
+				.criterion("has_tag", method_10420(ModTags.OSTRUM_PLATES)).offerTo(exporter);
 
 		// Flags
 		offerFlagRecipe(exporter, ModItems.WHITE_FLAG, Blocks.WHITE_WOOL);
@@ -398,13 +405,13 @@ class ModRecipeProvider extends FabricRecipeProvider {
 		// Items
 
 		// Rover
-		ShapedRecipeJsonFactory.create(ModItems.TIER_1_ROVER).input(Character.valueOf('#'), ModItems.WHEEL).m_hadhiznl(Character.valueOf('S'), ModTags.STEEL_BLOCKS).m_hadhiznl(Character.valueOf('|'), ModTags.IRON_STICKS)
-				.m_hadhiznl(Character.valueOf('D'), ModTags.DESH_BLOCKS).m_hadhiznl(Character.valueOf('P'), ModTags.COMPRESSED_DESH).input(Character.valueOf('E'), ModItems.DESH_ENGINE).pattern("D |").pattern("SDE").pattern("#P#").group(null)
-				.criterion("has_tag", method_10420(ModTags.COMPRESSED_DESH)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.TIER_1_ROVER).input(Character.valueOf('#'), ModItems.WHEEL).m_hadhiznl(Character.valueOf('S'), ModTags.STEEL_BLOCKS).m_hadhiznl(Character.valueOf('|'), ModTags.IRON_RODS)
+				.m_hadhiznl(Character.valueOf('D'), ModTags.DESH_BLOCKS).m_hadhiznl(Character.valueOf('P'), ModTags.DESH_PLATES).input(Character.valueOf('E'), ModItems.DESH_ENGINE).pattern("D |").pattern("SDE").pattern("#P#").group(null)
+				.criterion("has_tag", method_10420(ModTags.DESH_PLATES)).offerTo(exporter);
 
 		// Oxygen Tank
-		ShapedRecipeJsonFactory.create(ModItems.OXYGEN_TANK).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_STEEL).input(Character.valueOf('|'), ModItems.IRON_STICK).pattern("#| ").pattern("## ").pattern("## ").group(null)
-				.criterion("has_tag", method_10420(ModTags.COMPRESSED_STEEL)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.OXYGEN_TANK).m_hadhiznl(Character.valueOf('#'), ModTags.STEEL_PLATES).input(Character.valueOf('|'), ModItems.IRON_ROD).pattern("#| ").pattern("## ").pattern("## ").group(null)
+				.criterion("has_tag", method_10420(ModTags.STEEL_PLATES)).offerTo(exporter);
 
 		// Guide Book
 		ShapedRecipeJsonFactory.create(ModItems.ASTRODUX).input(Character.valueOf('#'), Items.BOOK).input(Character.valueOf('S'), ModItems.STEEL_INGOT).pattern("SSS").pattern("S#S").pattern("SSS").group(null)
@@ -432,31 +439,31 @@ class ModRecipeProvider extends FabricRecipeProvider {
 				.criterion("has_tag", method_10420(ModTags.STEEL_INGOTS)).offerTo(exporter);
 
 		// Netherite
-		ShapedRecipeJsonFactory.create(ModItems.NETHERITE_SPACE_HELMET).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_OSTRUM).input(Character.valueOf('N'), Items.NETHERITE_HELMET).input(Character.valueOf('G'), Blocks.ORANGE_STAINED_GLASS_PANE)
-				.pattern("#N#").pattern("#G#").group(null).criterion("has_tag", method_10420(ModTags.COMPRESSED_OSTRUM)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.NETHERITE_SPACE_HELMET).m_hadhiznl(Character.valueOf('#'), ModTags.OSTRUM_PLATES).input(Character.valueOf('N'), Items.NETHERITE_HELMET).input(Character.valueOf('G'), Blocks.ORANGE_STAINED_GLASS_PANE)
+				.pattern("#N#").pattern("#G#").group(null).criterion("has_tag", method_10420(ModTags.OSTRUM_PLATES)).offerTo(exporter);
 
-		ShapedRecipeJsonFactory.create(ModItems.NETHERITE_SPACE_SUIT).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_OSTRUM).input(Character.valueOf('N'), Items.NETHERITE_CHESTPLATE).input(Character.valueOf('O'), ModItems.OXYGEN_GEAR)
-				.input(Character.valueOf('T'), ModItems.OXYGEN_TANK).pattern("# #").pattern("TOT").pattern("#N#").group(null).criterion("has_tag", method_10420(ModTags.COMPRESSED_OSTRUM)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.NETHERITE_SPACE_SUIT).m_hadhiznl(Character.valueOf('#'), ModTags.OSTRUM_PLATES).input(Character.valueOf('N'), Items.NETHERITE_CHESTPLATE).input(Character.valueOf('O'), ModItems.OXYGEN_GEAR)
+				.input(Character.valueOf('T'), ModItems.OXYGEN_TANK).pattern("# #").pattern("TOT").pattern("#N#").group(null).criterion("has_tag", method_10420(ModTags.OSTRUM_PLATES)).offerTo(exporter);
 
-		ShapedRecipeJsonFactory.create(ModItems.NETHERITE_SPACE_PANTS).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_OSTRUM).input(Character.valueOf('N'), Items.NETHERITE_LEGGINGS).m_hadhiznl(Character.valueOf('D'), ModTags.COMPRESSED_DESH)
-				.pattern("#N#").pattern("D D").pattern("# #").group(null).criterion("has_tag", method_10420(ModTags.COMPRESSED_OSTRUM)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.NETHERITE_SPACE_PANTS).m_hadhiznl(Character.valueOf('#'), ModTags.OSTRUM_PLATES).input(Character.valueOf('N'), Items.NETHERITE_LEGGINGS).m_hadhiznl(Character.valueOf('D'), ModTags.DESH_PLATES).pattern("#N#")
+				.pattern("D D").pattern("# #").group(null).criterion("has_tag", method_10420(ModTags.OSTRUM_PLATES)).offerTo(exporter);
 
-		ShapedRecipeJsonFactory.create(ModItems.NETHERITE_SPACE_BOOTS).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_OSTRUM).input(Character.valueOf('N'), Items.NETHERITE_BOOTS).m_hadhiznl(Character.valueOf('D'), ModTags.COMPRESSED_DESH)
-				.pattern(" N ").pattern("D D").pattern("# #").group(null).criterion("has_tag", method_10420(ModTags.COMPRESSED_OSTRUM)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.NETHERITE_SPACE_BOOTS).m_hadhiznl(Character.valueOf('#'), ModTags.OSTRUM_PLATES).input(Character.valueOf('N'), Items.NETHERITE_BOOTS).m_hadhiznl(Character.valueOf('D'), ModTags.DESH_PLATES).pattern(" N ")
+				.pattern("D D").pattern("# #").group(null).criterion("has_tag", method_10420(ModTags.OSTRUM_PLATES)).offerTo(exporter);
 
 		// Jet Suit
-		ShapedRecipeJsonFactory.create(ModItems.JET_SUIT_HELMET).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_CALORITE).input(Character.valueOf('N'), ModItems.NETHERITE_SPACE_HELMET).input(Character.valueOf('G'), Blocks.ORANGE_STAINED_GLASS)
-				.pattern("#N#").pattern("#G#").group(null).criterion("has_tag", method_10420(ModTags.COMPRESSED_CALORITE)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.JET_SUIT_HELMET).m_hadhiznl(Character.valueOf('#'), ModTags.CALORITE_PLATES).input(Character.valueOf('N'), ModItems.NETHERITE_SPACE_HELMET).input(Character.valueOf('G'), Blocks.ORANGE_STAINED_GLASS)
+				.pattern("#N#").pattern("#G#").group(null).criterion("has_tag", method_10420(ModTags.CALORITE_PLATES)).offerTo(exporter);
 
-		ShapedRecipeJsonFactory.create(ModItems.JET_SUIT).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_CALORITE).m_hadhiznl(Character.valueOf('B'), ModTags.CALORITE_BLOCKS).input(Character.valueOf('N'), ModItems.NETHERITE_SPACE_SUIT)
-				.input(Character.valueOf('E'), ModItems.CALORITE_ENGINE).input(Character.valueOf('T'), ModItems.CALORITE_TANK).pattern("# #").pattern("TNT").pattern("BEB").group(null).criterion("has_tag", method_10420(ModTags.COMPRESSED_CALORITE))
+		ShapedRecipeJsonFactory.create(ModItems.JET_SUIT).m_hadhiznl(Character.valueOf('#'), ModTags.CALORITE_PLATES).m_hadhiznl(Character.valueOf('B'), ModTags.CALORITE_BLOCKS).input(Character.valueOf('N'), ModItems.NETHERITE_SPACE_SUIT)
+				.input(Character.valueOf('E'), ModItems.CALORITE_ENGINE).input(Character.valueOf('T'), ModItems.CALORITE_TANK).pattern("# #").pattern("TNT").pattern("BEB").group(null).criterion("has_tag", method_10420(ModTags.CALORITE_PLATES))
 				.offerTo(exporter);
 
-		ShapedRecipeJsonFactory.create(ModItems.JET_SUIT_PANTS).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_CALORITE).input(Character.valueOf('N'), ModItems.NETHERITE_SPACE_PANTS).pattern("#N#").pattern("# #").pattern("# #").group(null)
-				.criterion("has_tag", method_10420(ModTags.COMPRESSED_CALORITE)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.JET_SUIT_PANTS).m_hadhiznl(Character.valueOf('#'), ModTags.CALORITE_PLATES).input(Character.valueOf('N'), ModItems.NETHERITE_SPACE_PANTS).pattern("#N#").pattern("# #").pattern("# #").group(null)
+				.criterion("has_tag", method_10420(ModTags.CALORITE_PLATES)).offerTo(exporter);
 
-		ShapedRecipeJsonFactory.create(ModItems.JET_SUIT_BOOTS).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_CALORITE).m_hadhiznl(Character.valueOf('B'), ModTags.CALORITE_BLOCKS).input(Character.valueOf('N'), ModItems.NETHERITE_SPACE_BOOTS)
-				.pattern(" N ").pattern("# #").pattern("B B").group(null).criterion("has_tag", method_10420(ModTags.COMPRESSED_CALORITE)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.JET_SUIT_BOOTS).m_hadhiznl(Character.valueOf('#'), ModTags.CALORITE_PLATES).m_hadhiznl(Character.valueOf('B'), ModTags.CALORITE_BLOCKS).input(Character.valueOf('N'), ModItems.NETHERITE_SPACE_BOOTS)
+				.pattern(" N ").pattern("# #").pattern("B B").group(null).criterion("has_tag", method_10420(ModTags.CALORITE_PLATES)).offerTo(exporter);
 
 		// Soul Torch
 		ShapedRecipeJsonFactory.create(Items.SOUL_TORCH).input(Character.valueOf('#'), ModItems.COAL_TORCH).input(Character.valueOf('S'), Items.SOUL_SOIL).pattern("S").pattern("#")
@@ -466,59 +473,58 @@ class ModRecipeProvider extends FabricRecipeProvider {
 				.criterion(hasItem(Items.IRON_INGOT), conditionsFromItem(Items.IRON_INGOT)).offerTo(exporter);
 
 		// Iron Rod
-		ShapedRecipeJsonFactory.create(ModItems.IRON_STICK, 4).m_hadhiznl(Character.valueOf('#'), ModTags.IRON_PLATES).pattern("#").pattern("#").group("iron_stick").criterion("has_tag", method_10420(ModTags.IRON_PLATES)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.IRON_ROD, 4).m_hadhiznl(Character.valueOf('#'), ModTags.IRON_PLATES).pattern("#").pattern("#").group("iron_stick").criterion("has_tag", method_10420(ModTags.IRON_PLATES)).offerTo(exporter);
 
 		// Oxygen Gear
-		ShapedRecipeJsonFactory.create(ModItems.OXYGEN_GEAR).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_STEEL).m_hadhiznl(Character.valueOf('|'), ModTags.IRON_STICKS).pattern(" | ").pattern("#|#").pattern("#|#").group(null)
-				.criterion("has_tag", method_10420(ModTags.COMPRESSED_STEEL)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.OXYGEN_GEAR).m_hadhiznl(Character.valueOf('#'), ModTags.STEEL_PLATES).m_hadhiznl(Character.valueOf('|'), ModTags.IRON_RODS).pattern(" | ").pattern("#|#").pattern("#|#").group(null)
+				.criterion("has_tag", method_10420(ModTags.STEEL_PLATES)).offerTo(exporter);
 
 		// Wheel
-		ShapedRecipeJsonFactory.create(ModItems.WHEEL).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_STEEL).input(Character.valueOf('B'), Items.BLACK_DYE).pattern(" B ").pattern("B#B").pattern(" B ").group(null)
-				.criterion("has_tag", method_10420(ModTags.COMPRESSED_STEEL)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.WHEEL).m_hadhiznl(Character.valueOf('#'), ModTags.STEEL_PLATES).input(Character.valueOf('B'), Items.BLACK_DYE).pattern(" B ").pattern("B#B").pattern(" B ").group(null)
+				.criterion("has_tag", method_10420(ModTags.STEEL_PLATES)).offerTo(exporter);
 
 		// Engine Frame
-		ShapedRecipeJsonFactory.create(ModItems.ENGINE_FRAME).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_STEEL).m_hadhiznl(Character.valueOf('|'), ModTags.IRON_STICKS).pattern("|||").pattern("|#|").pattern("|||").group(null)
-				.criterion("has_tag", method_10420(ModTags.COMPRESSED_STEEL)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.ENGINE_FRAME).m_hadhiznl(Character.valueOf('#'), ModTags.STEEL_PLATES).m_hadhiznl(Character.valueOf('|'), ModTags.IRON_RODS).pattern("|||").pattern("|#|").pattern("|||").group(null)
+				.criterion("has_tag", method_10420(ModTags.STEEL_PLATES)).offerTo(exporter);
 
 		// Engine Fan
-		ShapedRecipeJsonFactory.create(ModItems.ENGINE_FAN).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_STEEL).m_hadhiznl(Character.valueOf('|'), ModTags.IRON_STICKS).pattern(" | ").pattern("|#|").pattern(" | ").group(null)
-				.criterion("has_tag", method_10420(ModTags.COMPRESSED_STEEL)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.ENGINE_FAN).m_hadhiznl(Character.valueOf('#'), ModTags.STEEL_PLATES).m_hadhiznl(Character.valueOf('|'), ModTags.IRON_RODS).pattern(" | ").pattern("|#|").pattern(" | ").group(null)
+				.criterion("has_tag", method_10420(ModTags.STEEL_PLATES)).offerTo(exporter);
 
 		// Nose Cone
-		ShapedRecipeJsonFactory.create(ModItems.ROCKET_NOSE_CONE).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_STEEL).input(Character.valueOf('|'), Items.LIGHTNING_ROD).pattern(" | ").pattern(" # ").pattern("###").group(null)
-				.criterion("has_tag", method_10420(ModTags.COMPRESSED_STEEL)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.ROCKET_NOSE_CONE).m_hadhiznl(Character.valueOf('#'), ModTags.STEEL_PLATES).input(Character.valueOf('|'), Items.LIGHTNING_ROD).pattern(" | ").pattern(" # ").pattern("###").group(null)
+				.criterion("has_tag", method_10420(ModTags.STEEL_PLATES)).offerTo(exporter);
 
 		// Engines
-		ShapedRecipeJsonFactory.create(ModItems.STEEL_ENGINE).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_STEEL).input(Character.valueOf('E'), ModItems.ENGINE_FRAME).input(Character.valueOf('F'), ModItems.ENGINE_FAN).pattern("###").pattern(" E ")
-				.pattern(" F ").group("engines").criterion("has_tag", method_10420(ModTags.COMPRESSED_STEEL)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.STEEL_ENGINE).m_hadhiznl(Character.valueOf('#'), ModTags.STEEL_PLATES).input(Character.valueOf('E'), ModItems.ENGINE_FRAME).input(Character.valueOf('F'), ModItems.ENGINE_FAN).pattern("###").pattern(" E ")
+				.pattern(" F ").group("engines").criterion("has_tag", method_10420(ModTags.STEEL_PLATES)).offerTo(exporter);
 
-		ShapedRecipeJsonFactory.create(ModItems.DESH_ENGINE).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_DESH).input(Character.valueOf('E'), ModItems.ENGINE_FRAME).input(Character.valueOf('F'), ModItems.ENGINE_FAN).pattern("###").pattern(" E ")
-				.pattern(" F ").group("engines").criterion("has_tag", method_10420(ModTags.COMPRESSED_DESH)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.DESH_ENGINE).m_hadhiznl(Character.valueOf('#'), ModTags.DESH_PLATES).input(Character.valueOf('E'), ModItems.ENGINE_FRAME).input(Character.valueOf('F'), ModItems.ENGINE_FAN).pattern("###").pattern(" E ")
+				.pattern(" F ").group("engines").criterion("has_tag", method_10420(ModTags.DESH_PLATES)).offerTo(exporter);
 
-		ShapedRecipeJsonFactory.create(ModItems.OSTRUM_ENGINE).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_OSTRUM).input(Character.valueOf('E'), ModItems.ENGINE_FRAME).input(Character.valueOf('F'), ModItems.ENGINE_FAN).pattern("###")
-				.pattern(" E ").pattern(" F ").group("engines").criterion("has_tag", method_10420(ModTags.COMPRESSED_OSTRUM)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.OSTRUM_ENGINE).m_hadhiznl(Character.valueOf('#'), ModTags.OSTRUM_PLATES).input(Character.valueOf('E'), ModItems.ENGINE_FRAME).input(Character.valueOf('F'), ModItems.ENGINE_FAN).pattern("###").pattern(" E ")
+				.pattern(" F ").group("engines").criterion("has_tag", method_10420(ModTags.OSTRUM_PLATES)).offerTo(exporter);
 
-		ShapedRecipeJsonFactory.create(ModItems.CALORITE_ENGINE).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_CALORITE).input(Character.valueOf('E'), ModItems.ENGINE_FRAME).input(Character.valueOf('F'), ModItems.ENGINE_FAN).pattern("###")
-				.pattern(" E ").pattern(" F ").group("engines").criterion("has_tag", method_10420(ModTags.COMPRESSED_CALORITE)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.CALORITE_ENGINE).m_hadhiznl(Character.valueOf('#'), ModTags.CALORITE_PLATES).input(Character.valueOf('E'), ModItems.ENGINE_FRAME).input(Character.valueOf('F'), ModItems.ENGINE_FAN).pattern("###")
+				.pattern(" E ").pattern(" F ").group("engines").criterion("has_tag", method_10420(ModTags.CALORITE_PLATES)).offerTo(exporter);
 
 		// Tanks
-		ShapedRecipeJsonFactory.create(ModItems.STEEL_TANK).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_STEEL).m_hadhiznl(Character.valueOf('|'), ModTags.IRON_STICKS).input(Character.valueOf('U'), Items.BUCKET).pattern("## ").pattern("#U|")
-				.pattern("## ").group("tanks").criterion("has_tag", method_10420(ModTags.COMPRESSED_STEEL)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.STEEL_TANK).m_hadhiznl(Character.valueOf('#'), ModTags.STEEL_PLATES).m_hadhiznl(Character.valueOf('|'), ModTags.IRON_RODS).input(Character.valueOf('U'), Items.BUCKET).pattern("## ").pattern("#U|")
+				.pattern("## ").group("tanks").criterion("has_tag", method_10420(ModTags.STEEL_PLATES)).offerTo(exporter);
 
-		ShapedRecipeJsonFactory.create(ModItems.DESH_TANK).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_DESH).m_hadhiznl(Character.valueOf('|'), ModTags.IRON_STICKS).input(Character.valueOf('U'), Items.BUCKET).pattern("## ").pattern("#U|")
-				.pattern("## ").group("tanks").criterion("has_tag", method_10420(ModTags.COMPRESSED_DESH)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.DESH_TANK).m_hadhiznl(Character.valueOf('#'), ModTags.DESH_PLATES).m_hadhiznl(Character.valueOf('|'), ModTags.IRON_RODS).input(Character.valueOf('U'), Items.BUCKET).pattern("## ").pattern("#U|")
+				.pattern("## ").group("tanks").criterion("has_tag", method_10420(ModTags.DESH_PLATES)).offerTo(exporter);
 
-		ShapedRecipeJsonFactory.create(ModItems.OSTRUM_TANK).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_OSTRUM).m_hadhiznl(Character.valueOf('|'), ModTags.IRON_STICKS).input(Character.valueOf('U'), Items.BUCKET).pattern("## ").pattern("#U|")
-				.pattern("## ").group("tanks").criterion("has_tag", method_10420(ModTags.COMPRESSED_OSTRUM)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.OSTRUM_TANK).m_hadhiznl(Character.valueOf('#'), ModTags.OSTRUM_PLATES).m_hadhiznl(Character.valueOf('|'), ModTags.IRON_RODS).input(Character.valueOf('U'), Items.BUCKET).pattern("## ").pattern("#U|")
+				.pattern("## ").group("tanks").criterion("has_tag", method_10420(ModTags.OSTRUM_PLATES)).offerTo(exporter);
 
-		ShapedRecipeJsonFactory.create(ModItems.CALORITE_TANK).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_CALORITE).m_hadhiznl(Character.valueOf('|'), ModTags.IRON_STICKS).input(Character.valueOf('U'), Items.BUCKET).pattern("## ").pattern("#U|")
-				.pattern("## ").group("tanks").criterion("has_tag", method_10420(ModTags.COMPRESSED_CALORITE)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.CALORITE_TANK).m_hadhiznl(Character.valueOf('#'), ModTags.CALORITE_PLATES).m_hadhiznl(Character.valueOf('|'), ModTags.IRON_RODS).input(Character.valueOf('U'), Items.BUCKET).pattern("## ").pattern("#U|")
+				.pattern("## ").group("tanks").criterion("has_tag", method_10420(ModTags.CALORITE_PLATES)).offerTo(exporter);
 
-		ShapedRecipeJsonFactory.create(ModItems.WRENCH).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_DESH).pattern("# #").pattern(" # ").pattern(" # ").group(null).criterion("has_tag", method_10420(ModTags.COMPRESSED_DESH)).offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.WRENCH).m_hadhiznl(Character.valueOf('#'), ModTags.DESH_PLATES).pattern("# #").pattern(" # ").pattern(" # ").group(null).criterion("has_tag", method_10420(ModTags.DESH_PLATES)).offerTo(exporter);
 
 		// Fin
-		ShapedRecipeJsonFactory.create(ModItems.ROCKET_FIN, 4).m_hadhiznl(Character.valueOf('#'), ModTags.COMPRESSED_STEEL).pattern(" # ").pattern("###").pattern("# #").group(null).criterion("has_tag", method_10420(ModTags.COMPRESSED_STEEL))
-				.offerTo(exporter);
+		ShapedRecipeJsonFactory.create(ModItems.ROCKET_FIN, 4).m_hadhiznl(Character.valueOf('#'), ModTags.STEEL_PLATES).pattern(" # ").pattern("###").pattern("# #").group(null).criterion("has_tag", method_10420(ModTags.STEEL_PLATES)).offerTo(exporter);
 
 	}
 
@@ -572,7 +578,7 @@ class ModRecipeProvider extends FabricRecipeProvider {
 	}
 
 	public void offerFlagRecipe(Consumer<RecipeJsonProvider> exporter, ItemConvertible output, ItemConvertible input) {
-		ShapedRecipeJsonFactory.create(output).input(Character.valueOf('#'), input).m_hadhiznl(Character.valueOf('|'), ModTags.IRON_STICKS).pattern("|##").pattern("|##").pattern("|  ").group("flag").criterion(hasItem(input), conditionsFromItem(input))
+		ShapedRecipeJsonFactory.create(output).input(Character.valueOf('#'), input).m_hadhiznl(Character.valueOf('|'), ModTags.IRON_RODS).pattern("|##").pattern("|##").pattern("|  ").group("flag").criterion(hasItem(input), conditionsFromItem(input))
 				.offerTo(exporter);
 	}
 

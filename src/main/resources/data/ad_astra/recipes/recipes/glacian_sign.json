@@ -1,6 +1,11 @@
 {
   "type": "minecraft:crafting_shaped",
   "group": "sign",
+  "pattern": [
+    "###",
+    "###",
+    " X "
+  ],
   "key": {
     "#": {
       "item": "ad_astra:glacian_planks"
@@ -9,13 +14,8 @@
       "item": "minecraft:stick"
     }
   },
-  "pattern": [
-    "###",
-    "###",
-    " X "
-  ],
   "result": {
-    "count": 3,
-    "item": "ad_astra:glacian_sign"
+    "item": "ad_astra:glacian_sign",
+    "count": 3
   }
 }

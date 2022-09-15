@@ -1,30 +1,30 @@
 {
   "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "D |",
+    "SDE",
+    "#P#"
+  ],
   "key": {
     "#": {
       "item": "ad_astra:wheel"
-    },
-    "D": {
-      "tag": "c:desh_blocks"
-    },
-    "E": {
-      "item": "ad_astra:desh_engine"
-    },
-    "P": {
-      "tag": "c:compressed_desh"
     },
     "S": {
       "tag": "c:steel_blocks"
     },
     "|": {
       "tag": "c:iron_sticks"
+    },
+    "D": {
+      "tag": "c:desh_blocks"
+    },
+    "P": {
+      "tag": "c:compressed_desh"
+    },
+    "E": {
+      "item": "ad_astra:desh_engine"
     }
   },
-  "pattern": [
-    "D |",
-    "SDE",
-    "#P#"
-  ],
   "result": {
     "item": "ad_astra:tier_1_rover"
   }

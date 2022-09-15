@@ -1,7 +1,13 @@
 {
   "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "ad_astra:chiseled_mercury_stone_bricks"
+    ]
+  },
   "criteria": {
     "has_mercury_stone_brick_slab": {
+      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -10,14 +16,13 @@
             ]
           }
         ]
-      },
-      "trigger": "minecraft:inventory_changed"
+      }
     },
     "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
       "conditions": {
         "recipe": "ad_astra:chiseled_mercury_stone_bricks"
-      },
-      "trigger": "minecraft:recipe_unlocked"
+      }
     }
   },
   "requirements": [
@@ -25,10 +30,5 @@
       "has_mercury_stone_brick_slab",
       "has_the_recipe"
     ]
-  ],
-  "rewards": {
-    "recipes": [
-      "ad_astra:chiseled_mercury_stone_bricks"
-    ]
-  }
+  ]
 }

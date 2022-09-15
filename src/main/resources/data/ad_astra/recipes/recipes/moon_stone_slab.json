@@ -1,15 +1,15 @@
 {
   "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
   "key": {
     "#": {
       "item": "ad_astra:moon_stone"
     }
   },
-  "pattern": [
-    "###"
-  ],
   "result": {
-    "count": 6,
-    "item": "ad_astra:moon_stone_slab"
+    "item": "ad_astra:moon_stone_slab",
+    "count": 6
   }
 }

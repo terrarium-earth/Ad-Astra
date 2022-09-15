@@ -1,17 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
-  "key": {
-    "#": {
-      "tag": "c:compressed_steel"
-    }
-  },
   "pattern": [
     " # ",
     "###",
     "# #"
   ],
+  "key": {
+    "#": {
+      "tag": "c:compressed_steel"
+    }
+  },
   "result": {
-    "count": 4,
-    "item": "ad_astra:rocket_fin"
+    "item": "ad_astra:rocket_fin",
+    "count": 4
   }
 }

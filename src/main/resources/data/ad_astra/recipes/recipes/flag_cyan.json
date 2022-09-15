@@ -1,6 +1,11 @@
 {
   "type": "minecraft:crafting_shaped",
   "group": "flag",
+  "pattern": [
+    "|##",
+    "|##",
+    "|  "
+  ],
   "key": {
     "#": {
       "item": "minecraft:cyan_wool"
@@ -9,11 +14,6 @@
       "tag": "c:iron_sticks"
     }
   },
-  "pattern": [
-    "|##",
-    "|##",
-    "|  "
-  ],
   "result": {
     "item": "ad_astra:flag_cyan"
   }

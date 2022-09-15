@@ -220,6 +220,10 @@
     "ad_astra:ostrum_sliding_door",
     "ad_astra:calorite_sliding_door",
     "ad_astra:airlock",
-    "ad_astra:reinforced_door"
+    "ad_astra:reinforced_door",
+    "ad_astra:glowing_steel_pillar",
+    "ad_astra:glowing_desh_pillar",
+    "ad_astra:glowing_ostrum_pillar",
+    "ad_astra:glowing_calorite_pillar"
   ]
 }

@@ -102,7 +102,7 @@ public class LunarianTradeOffers {
 								new SellItemFactory(ModItems.BROWN_FLAG, 3, 1, 12, 25), new SellItemFactory(ModItems.YELLOW_FLAG, 3, 1, 12, 25), new SellItemFactory(ModItems.ORANGE_FLAG, 3, 1, 12, 25) },
 						5, new Factory[] { new SellItemFactory(ModItems.SPACE_PAINTING, 64, 1, 2, 50) })));
 		map.put(VillagerProfession.FLETCHER,
-				copyToFastUtilMap(ImmutableMap.of(1, new Factory[] { new BuyForOneEmeraldFactory(ModItems.IRON_STICK, 8, 16, 6), new SellItemFactory(Items.ARROW, 1, 16, 1), new ProcessItemFactory(Blocks.GRAVEL, 10, Items.FLINT, 10, 12, 1) }, 2,
+				copyToFastUtilMap(ImmutableMap.of(1, new Factory[] { new BuyForOneEmeraldFactory(ModItems.IRON_ROD, 8, 16, 6), new SellItemFactory(Items.ARROW, 1, 16, 1), new ProcessItemFactory(Blocks.GRAVEL, 10, Items.FLINT, 10, 12, 1) }, 2,
 						new Factory[] { new BuyForOneEmeraldFactory(Items.FLINT, 26, 12, 10), new SellItemFactory(Items.BOW, 2, 1, 5) }, 3,
 						new Factory[] { new BuyForOneEmeraldFactory(Items.STRING, 14, 16, 20), new SellItemFactory(Items.CROSSBOW, 3, 1, 10) }, 4,
 						new Factory[] { new BuyForOneEmeraldFactory(Items.FEATHER, 24, 16, 30), new SellEnchantedToolFactory(Items.BOW, 2, 3, 15) }, 5,

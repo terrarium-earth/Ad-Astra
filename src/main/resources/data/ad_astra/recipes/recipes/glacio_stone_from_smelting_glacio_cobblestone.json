@@ -1,9 +1,9 @@
 {
   "type": "minecraft:smelting",
-  "cookingtime": 200,
-  "experience": 0.2,
   "ingredient": {
     "item": "ad_astra:glacio_cobblestone"
   },
-  "result": "ad_astra:glacio_stone"
+  "result": "ad_astra:glacio_stone",
+  "experience": 0.2,
+  "cookingtime": 200
 }

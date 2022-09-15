@@ -1,5 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S",
+    "#"
+  ],
   "key": {
     "#": {
       "item": "ad_astra:coal_torch"
@@ -8,10 +12,6 @@
       "item": "minecraft:soul_soil"
     }
   },
-  "pattern": [
-    "S",
-    "#"
-  ],
   "result": {
     "item": "minecraft:soul_torch"
   }

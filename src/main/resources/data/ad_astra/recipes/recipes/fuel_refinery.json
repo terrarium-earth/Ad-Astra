@@ -1,21 +1,21 @@
 {
   "type": "minecraft:crafting_shaped",
-  "key": {
-    "#": {
-      "tag": "c:compressed_steel"
-    },
-    "B": {
-      "item": "minecraft:bucket"
-    },
-    "F": {
-      "item": "minecraft:furnace"
-    }
-  },
   "pattern": [
     "###",
     "BFB",
     "###"
   ],
+  "key": {
+    "#": {
+      "tag": "c:compressed_steel"
+    },
+    "F": {
+      "item": "minecraft:furnace"
+    },
+    "B": {
+      "item": "minecraft:bucket"
+    }
+  },
   "result": {
     "item": "ad_astra:fuel_refinery"
   }

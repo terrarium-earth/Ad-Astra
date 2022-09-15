@@ -1,6 +1,11 @@
 {
   "type": "minecraft:crafting_shaped",
   "group": "sliding_door",
+  "pattern": [
+    "CC#",
+    "CCC",
+    "#CC"
+  ],
   "key": {
     "#": {
       "tag": "c:steel_blocks"
@@ -9,11 +14,6 @@
       "tag": "c:compressed_steel"
     }
   },
-  "pattern": [
-    "CC#",
-    "CCC",
-    "#CC"
-  ],
   "result": {
     "item": "ad_astra:airlock"
   }

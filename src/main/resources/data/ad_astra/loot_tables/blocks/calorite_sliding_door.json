@@ -2,19 +2,15 @@
   "type": "minecraft:block",
   "pools": [
     {
+      "rolls": 1.0,
       "bonus_rolls": 0.0,
-      "conditions": [
-        {
-          "condition": "minecraft:survives_explosion"
-        }
-      ],
       "entries": [
         {
           "type": "minecraft:item",
           "conditions": [
             {
-              "block": "ad_astra:calorite_sliding_door",
               "condition": "minecraft:block_state_property",
+              "block": "ad_astra:calorite_sliding_door",
               "properties": {
                 "location": "bottom"
               }
@@ -23,7 +19,11 @@
           "name": "ad_astra:calorite_sliding_door"
         }
       ],
-      "rolls": 1.0
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
     }
   ]
 }

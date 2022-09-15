@@ -1,8 +1,8 @@
 {
   "type": "minecraft:stonecutting",
-  "count": 1,
   "ingredient": {
     "item": "ad_astra:desh_plating"
   },
-  "result": "ad_astra:desh_plating_stairs"
+  "result": "ad_astra:desh_plating_stairs",
+  "count": 1
 }

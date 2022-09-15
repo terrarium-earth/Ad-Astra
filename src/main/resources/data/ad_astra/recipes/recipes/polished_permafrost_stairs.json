@@ -1,17 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
-  "key": {
-    "#": {
-      "item": "ad_astra:polished_permafrost"
-    }
-  },
   "pattern": [
     "#  ",
     "## ",
     "###"
   ],
+  "key": {
+    "#": {
+      "item": "ad_astra:polished_permafrost"
+    }
+  },
   "result": {
-    "count": 4,
-    "item": "ad_astra:polished_permafrost_stairs"
+    "item": "ad_astra:polished_permafrost_stairs",
+    "count": 4
   }
 }
