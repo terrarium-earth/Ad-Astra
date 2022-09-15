@@ -34,7 +34,7 @@
     "ad_astra:ostrum_pillar",
     "ad_astra:calorite_plating",
     "ad_astra:calorite_pillar",
-    "ad_astra:blue_iron_pillar",
+    "ad_astra:glowing_iron_pillar",
     "ad_astra:marked_iron_pillar",
     "ad_astra:sky_stone",
     "ad_astra:mars_stone",
@@ -220,6 +220,10 @@
     "ad_astra:ostrum_sliding_door",
     "ad_astra:calorite_sliding_door",
     "ad_astra:airlock",
-    "ad_astra:reinforced_door"
+    "ad_astra:reinforced_door",
+    "ad_astra:glowing_steel_pillar",
+    "ad_astra:glowing_desh_pillar",
+    "ad_astra:glowing_ostrum_pillar",
+    "ad_astra:glowing_calorite_pillar"
   ]
 }

@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "ad_astra:blue_iron_pillar"
+          "name": "ad_astra:glowing_iron_pillar"
         }
       ],
       "rolls": 1.0

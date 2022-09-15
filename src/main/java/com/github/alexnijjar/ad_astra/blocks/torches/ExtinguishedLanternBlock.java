@@ -29,7 +29,7 @@ public class ExtinguishedLanternBlock extends LanternBlock {
 		if (!world.isClient) {
 			ItemStack itemstack = player.getStackInHand(hand);
 
-			if (OxygenUtils.worldHasOxygen(world)) {
+			if (OxygenUtils.posHasOxygen(world, pos)) {
 				if (itemstack.getItem() instanceof FlintAndSteelItem || itemstack.getItem() instanceof FireChargeItem) {
 
 					world.setBlockState(pos, Blocks.LANTERN.getStateWithProperties(state), 3);

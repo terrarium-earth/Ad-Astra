@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.client.AdAstraClient;
+import com.github.alexnijjar.ad_astra.client.registry.ClientModSkies;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -115,7 +116,7 @@ public class PlanetResources {
 				AdAstraClient.solarSystems = solarSystems;
 				AdAstraClient.planetRings = planetRings;
 				AdAstraClient.galaxies = galaxies;
-				AdAstraClient.postAssetRegister();
+				ClientModSkies.register();
 			}
 		});
 	}

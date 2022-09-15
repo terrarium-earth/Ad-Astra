@@ -14,11 +14,13 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ChunkTicketType;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.structure.Structure;
 import net.minecraft.structure.StructurePlacementData;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
@@ -54,17 +56,15 @@ public class ModC2SPackets {
 
 		// Teleport to a planet.
 		ServerPlayNetworking.registerGlobalReceiver(TELEPORT_TO_PLANET, (server, player, handler, buf, responseSender) -> {
-			RegistryKey<World> targetDimension = getWorld(buf.readIdentifier());
-
-			// Teleport has to be called on the server thread.
+			RegistryKey<World> targetWorld = getWorld(buf.readIdentifier());
 			server.execute(new Runnable() {
 
 				@Override
 				public void run() {
 					if (player.getVehicle() instanceof RocketEntity) {
-						ModUtils.teleportToWorld(targetDimension, player);
+						ModUtils.teleportToWorld(targetWorld, player);
 					} else {
-						ModUtils.teleportPlayer(targetDimension, player);
+						ModUtils.teleportPlayer(targetWorld, player);
 					}
 				}
 			});
@@ -81,22 +81,28 @@ public class ModC2SPackets {
 			});
 		});
 
-		// Spawn the Space Station in the world.
+		// Spawn the Space Station in the world
 		ServerPlayNetworking.registerGlobalReceiver(CREATE_SPACE_STATION, (server, player, handler, buf, responseSender) -> {
-			ServerWorld world = server.getWorld(RegistryKey.of(Registry.WORLD_KEY, buf.readIdentifier()));
-			// Create the Space Station from the nbt file.
-			Structure structure = world.getStructureTemplateManager().getStructureOrBlank(new ModIdentifier("space_station"));
-			BlockPos pos = new BlockPos(player.getX() - (structure.getSize().getX() / 2), 100, player.getZ() - (structure.getSize().getZ() / 2));
-			structure.place(world, pos, pos, new StructurePlacementData(), world.random, 2);
+			ServerWorld targetWorld = server.getWorld(RegistryKey.of(Registry.WORLD_KEY, buf.readIdentifier()));
+			server.execute(new Runnable() {
+				@Override
+				public void run() {
+					// Create the Space Station from the nbt file
+					Structure structure = targetWorld.getStructureTemplateManager().getStructureOrBlank(new ModIdentifier("space_station"));
+					BlockPos pos = new BlockPos(player.getX() - (structure.getSize().getX() / 2), 100, player.getZ() - (structure.getSize().getZ() / 2));
+					targetWorld.getChunkManager().addTicket(ChunkTicketType.PORTAL, new ChunkPos(pos), 1, pos);
+					structure.place(targetWorld, pos, pos, new StructurePlacementData(), targetWorld.random, 2);
+				}
+			});
 		});
 
-		// Space was pressed while the player was inside of a rocket.
+		// Space was pressed while the player was inside of a rocket
 		ServerPlayNetworking.registerGlobalReceiver(LAUNCH_ROCKET, (server, player, handler, buf, responseSender) -> {
 			if (player.getVehicle() instanceof RocketEntity rocket) {
 				if (!rocket.isFlying()) {
 					rocket.initiateLaunchSequenceFromServer();
 
-					// Tell all clients to start rendering the rocket launch.
+					// Tell all clients to start rendering the rocket launch
 					int id = buf.readInt();
 					for (ServerPlayerEntity serverPlayer : server.getPlayerManager().getPlayerList()) {
 						PacketByteBuf buffer = PacketByteBufs.create();
