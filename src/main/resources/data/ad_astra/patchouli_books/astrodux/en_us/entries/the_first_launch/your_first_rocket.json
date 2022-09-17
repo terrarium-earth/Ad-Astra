@@ -20,14 +20,13 @@
             "multiblock": {
                 "pattern": [
                     [
-                        "PPP",
-                        "P0P",
-                        "PPP"
+                        "   ",
+                        " 0 ",
+                        "   "
                     ]
                 ],
                 "mapping": {
-                    "P": "ad_astra:rocket_launch_pad",
-                    "0": "ad_astra:rocket_launch_pad"
+                    "0": "ad_astra:launch_pad"
                 },
                 "symmetrical": true
             },
@@ -36,7 +35,7 @@
         {
             "type": "patchouli:crafting",
             "title": "Launchpad",
-            "recipe": "ad_astra:recipes/rocket_launch_pad",
+            "recipe": "ad_astra:recipes/launch_pad",
             "text": "After the launch pad has been built, place the rocket on the raised center pad."
         }
     ]

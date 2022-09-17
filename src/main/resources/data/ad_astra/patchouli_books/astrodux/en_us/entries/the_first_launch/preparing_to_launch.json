@@ -6,7 +6,7 @@
     "pages": [
         {
             "type": "patchouli:text",
-            "text": "$(#ff0000)Follow these steps very carefully! $()Missing even one thing here could make your life tough, or worse, cause you to be stranded on the moon!$(br2)In order to return to earth from the moon, you need two basic things: nine rocket launch pads and three buckets of fuel."
+            "text": "$(#ff0000)Follow these steps very carefully! $()Missing even one thing here could make your life tough, or worse, cause you to be stranded on the moon!$(br2)In order to return to earth from the moon, you need two basic things: a launch pad and three buckets of fuel."
         },
         {
             "type": "patchouli:text",

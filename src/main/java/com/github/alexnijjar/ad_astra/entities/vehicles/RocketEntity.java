@@ -3,7 +3,8 @@ package com.github.alexnijjar.ad_astra.entities.vehicles;
 import java.util.List;
 
 import com.github.alexnijjar.ad_astra.AdAstra;
-import com.github.alexnijjar.ad_astra.blocks.pads.RocketLaunchPad;
+import com.github.alexnijjar.ad_astra.blocks.door.LocationState;
+import com.github.alexnijjar.ad_astra.blocks.launchpad.LaunchPad;
 import com.github.alexnijjar.ad_astra.items.armour.NetheriteSpaceSuit;
 import com.github.alexnijjar.ad_astra.registry.ModCriteria;
 import com.github.alexnijjar.ad_astra.registry.ModDamageSource;
@@ -140,10 +141,10 @@ public class RocketEntity extends VehicleEntity {
 		if (!this.isFlying()) {
 			if (this.hasLaunchPad()) {
 				BlockState below = world.getBlockState(this.getBlockPos());
-				if (!(below.getBlock() instanceof RocketLaunchPad)) {
+				if (!(below.getBlock() instanceof LaunchPad)) {
 					this.drop();
-				} else if (below.getBlock() instanceof RocketLaunchPad pad) {
-					if (!below.get(RocketLaunchPad.STAGE)) {
+				} else if (below.getBlock() instanceof LaunchPad pad) {
+					if (!below.get(LaunchPad.LOCATION).equals(LocationState.CENTER)) {
 						this.drop();
 					}
 				}
@@ -337,7 +338,7 @@ public class RocketEntity extends VehicleEntity {
 	public void doGravity() {
 		BlockState belowBlock = this.world.getBlockState(this.getBlockPos());
 
-		if (belowBlock.getBlock() instanceof RocketLaunchPad && belowBlock.get(RocketLaunchPad.STAGE).equals(true)) {
+		if (belowBlock.getBlock() instanceof LaunchPad && belowBlock.get(LaunchPad.LOCATION).equals(LocationState.CENTER)) {
 			return;
 		}
 

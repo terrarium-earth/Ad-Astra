@@ -1,6 +1,6 @@
 package com.github.alexnijjar.ad_astra.datagen;
 
-import com.github.alexnijjar.ad_astra.blocks.door.DoorState;
+import com.github.alexnijjar.ad_astra.blocks.door.LocationState;
 import com.github.alexnijjar.ad_astra.blocks.door.SlidingDoorBlock;
 import com.github.alexnijjar.ad_astra.registry.ModBlocks;
 import com.github.alexnijjar.ad_astra.registry.ModItems;
@@ -28,13 +28,15 @@ class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
 		this.addDrop(ModBlocks.STEEL_DOOR, BlockLootTableGenerator::addDoorDrop);
 		this.addDrop(ModBlocks.GLACIAN_DOOR, BlockLootTableGenerator::addDoorDrop);
 
-		this.addDrop(ModBlocks.IRON_SLIDING_DOOR, BlockLootTableGenerator.dropsWithProperty(ModBlocks.IRON_SLIDING_DOOR, SlidingDoorBlock.LOCATION, DoorState.BOTTOM));
-		this.addDrop(ModBlocks.STEEL_SLIDING_DOOR, BlockLootTableGenerator.dropsWithProperty(ModBlocks.STEEL_SLIDING_DOOR, SlidingDoorBlock.LOCATION, DoorState.BOTTOM));
-		this.addDrop(ModBlocks.DESH_SLIDING_DOOR, BlockLootTableGenerator.dropsWithProperty(ModBlocks.DESH_SLIDING_DOOR, SlidingDoorBlock.LOCATION, DoorState.BOTTOM));
-		this.addDrop(ModBlocks.OSTRUM_SLIDING_DOOR, BlockLootTableGenerator.dropsWithProperty(ModBlocks.OSTRUM_SLIDING_DOOR, SlidingDoorBlock.LOCATION, DoorState.BOTTOM));
-		this.addDrop(ModBlocks.CALORITE_SLIDING_DOOR, BlockLootTableGenerator.dropsWithProperty(ModBlocks.CALORITE_SLIDING_DOOR, SlidingDoorBlock.LOCATION, DoorState.BOTTOM));
-		this.addDrop(ModBlocks.AIRLOCK, BlockLootTableGenerator.dropsWithProperty(ModBlocks.AIRLOCK, SlidingDoorBlock.LOCATION, DoorState.BOTTOM));
-		this.addDrop(ModBlocks.REINFORCED_DOOR, BlockLootTableGenerator.dropsWithProperty(ModBlocks.REINFORCED_DOOR, SlidingDoorBlock.LOCATION, DoorState.BOTTOM));
+		this.addDrop(ModBlocks.LAUNCH_PAD, BlockLootTableGenerator.dropsWithProperty(ModBlocks.LAUNCH_PAD, SlidingDoorBlock.LOCATION, LocationState.CENTER));
+
+		this.addDrop(ModBlocks.IRON_SLIDING_DOOR, BlockLootTableGenerator.dropsWithProperty(ModBlocks.IRON_SLIDING_DOOR, SlidingDoorBlock.LOCATION, LocationState.BOTTOM));
+		this.addDrop(ModBlocks.STEEL_SLIDING_DOOR, BlockLootTableGenerator.dropsWithProperty(ModBlocks.STEEL_SLIDING_DOOR, SlidingDoorBlock.LOCATION, LocationState.BOTTOM));
+		this.addDrop(ModBlocks.DESH_SLIDING_DOOR, BlockLootTableGenerator.dropsWithProperty(ModBlocks.DESH_SLIDING_DOOR, SlidingDoorBlock.LOCATION, LocationState.BOTTOM));
+		this.addDrop(ModBlocks.OSTRUM_SLIDING_DOOR, BlockLootTableGenerator.dropsWithProperty(ModBlocks.OSTRUM_SLIDING_DOOR, SlidingDoorBlock.LOCATION, LocationState.BOTTOM));
+		this.addDrop(ModBlocks.CALORITE_SLIDING_DOOR, BlockLootTableGenerator.dropsWithProperty(ModBlocks.CALORITE_SLIDING_DOOR, SlidingDoorBlock.LOCATION, LocationState.BOTTOM));
+		this.addDrop(ModBlocks.AIRLOCK, BlockLootTableGenerator.dropsWithProperty(ModBlocks.AIRLOCK, SlidingDoorBlock.LOCATION, LocationState.BOTTOM));
+		this.addDrop(ModBlocks.REINFORCED_DOOR, BlockLootTableGenerator.dropsWithProperty(ModBlocks.REINFORCED_DOOR, SlidingDoorBlock.LOCATION, LocationState.BOTTOM));
 
 		this.addDrop(ModBlocks.MOON_STONE, block -> BlockLootTableGenerator.drops(block, ModBlocks.MOON_COBBLESTONE));
 		this.addDrop(ModBlocks.MARS_STONE, block -> BlockLootTableGenerator.drops(block, ModBlocks.MARS_COBBLESTONE));

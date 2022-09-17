@@ -1,5 +1,6 @@
 package com.github.alexnijjar.ad_astra.client.registry;
 
+import com.github.alexnijjar.ad_astra.client.renderer.block.globe.GlobeModel;
 import com.github.alexnijjar.ad_astra.client.renderer.entity.mobs.CorruptedLunarianEntityRenderer;
 import com.github.alexnijjar.ad_astra.client.renderer.entity.mobs.GlacianRamEntityRenderer;
 import com.github.alexnijjar.ad_astra.client.renderer.entity.mobs.LunarianEntityRenderer;
@@ -30,6 +31,9 @@ import com.github.alexnijjar.ad_astra.client.renderer.entity.vehicles.rockets.ti
 import com.github.alexnijjar.ad_astra.client.renderer.entity.vehicles.rockets.tier_4.RocketEntityRendererTier4;
 import com.github.alexnijjar.ad_astra.client.renderer.entity.vehicles.rover.RoverEntityModel;
 import com.github.alexnijjar.ad_astra.client.renderer.entity.vehicles.rover.RoverEntityRenderer;
+import com.github.alexnijjar.ad_astra.client.renderer.spacesuit.JetSuitModel;
+import com.github.alexnijjar.ad_astra.client.renderer.spacesuit.NetheriteSpaceSuitModel;
+import com.github.alexnijjar.ad_astra.client.renderer.spacesuit.SpaceSuitModel;
 import com.github.alexnijjar.ad_astra.registry.ModEntityTypes;
 
 import net.fabricmc.api.EnvType;
@@ -37,6 +41,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
+import net.minecraft.client.render.entity.PaintingEntityRenderer;
 
 @Environment(EnvType.CLIENT)
 public class ClientModEntities {
@@ -65,6 +70,9 @@ public class ClientModEntities {
 		EntityRendererRegistry.register(ModEntityTypes.ROVER_TIER_1, RoverEntityRenderer::new);
 		EntityRendererRegistry.register(ModEntityTypes.LANDER, LanderEntityRenderer::new);
 
+		// Painting
+		EntityRendererRegistry.register(ModEntityTypes.SPACE_PAINTING, PaintingEntityRenderer::new);
+
 		// Projectiles
 		EntityRendererRegistry.register(ModEntityTypes.ICE_SPIT_ENTITY, FlyingItemEntityRenderer::new);
 
@@ -78,6 +86,8 @@ public class ClientModEntities {
 		EntityModelLayerRegistry.registerModelLayer(SulfurCreeperEntityModel.LAYER_LOCATION, SulfurCreeperEntityModel::getTexturedModelData);
 		EntityModelLayerRegistry.registerModelLayer(GlacianRamEntityModel.LAYER_LOCATION, GlacianRamEntityModel::getTexturedModelData);
 
+		EntityModelLayerRegistry.registerModelLayer(GlobeModel.LAYER_LOCATION, GlobeModel::getTexturedModelData);
+
 		// Machine Layers
 		EntityModelLayerRegistry.registerModelLayer(RocketEntityModelTier1.LAYER_LOCATION, RocketEntityModelTier1::getTexturedModelData);
 		EntityModelLayerRegistry.registerModelLayer(RocketEntityModelTier2.LAYER_LOCATION, RocketEntityModelTier2::getTexturedModelData);
@@ -85,5 +95,10 @@ public class ClientModEntities {
 		EntityModelLayerRegistry.registerModelLayer(RocketEntityModelTier4.LAYER_LOCATION, RocketEntityModelTier4::getTexturedModelData);
 		EntityModelLayerRegistry.registerModelLayer(RoverEntityModel.LAYER_LOCATION, RoverEntityModel::getTexturedModelData);
 		EntityModelLayerRegistry.registerModelLayer(LanderEntityModel.LAYER_LOCATION, LanderEntityModel::getTexturedModelData);
+
+		// Armour Layers
+		EntityModelLayerRegistry.registerModelLayer(SpaceSuitModel.LAYER_LOCATION, SpaceSuitModel::getTexturedModelData);
+		EntityModelLayerRegistry.registerModelLayer(NetheriteSpaceSuitModel.LAYER_LOCATION, NetheriteSpaceSuitModel::getTexturedModelData);
+		EntityModelLayerRegistry.registerModelLayer(JetSuitModel.LAYER_LOCATION, JetSuitModel::getTexturedModelData);
 	}
 }

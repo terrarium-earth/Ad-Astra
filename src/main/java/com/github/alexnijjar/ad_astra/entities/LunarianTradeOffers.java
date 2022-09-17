@@ -199,7 +199,7 @@ public class LunarianTradeOffers {
 					new SellItemFactory(Items.COAL, 1, 5, 4, 1), new SellItemFactory(ModItems.OXYGEN_BUCKET, 10, 1, 2, 2), new SellItemFactory(Items.COPPER_INGOT, 1, 4, 12, 1), new SellItemFactory(Items.WATER_BUCKET, 5, 1, 4, 1),
 					new SellItemFactory(Items.LAVA_BUCKET, 3, 1, 4, 1), new BuyForOneEmeraldFactory(ModItems.DESH_INGOT, 4, 20, 1), new BuyForOneEmeraldFactory(ModItems.OSTRUM_INGOT, 4, 20, 1),
 					new BuyForOneEmeraldFactory(ModItems.CALORITE_INGOT, 4, 20, 1) },
-			2, new Factory[] { new SellItemFactory(OxygenTankItem.createOxygenatedTank(), 16, 1, 3, 2), new SellItemFactory(ModItems.ROCKET_LAUNCH_PAD, 3, 9, 3, 1), new SellItemFactory(ModItems.ROCKET_LAUNCH_PAD, 3, 9, 3, 1),
+			2, new Factory[] { new SellItemFactory(OxygenTankItem.createOxygenatedTank(), 16, 1, 3, 2), new SellItemFactory(ModItems.LAUNCH_PAD, 3, 9, 3, 1), new SellItemFactory(ModItems.LAUNCH_PAD, 3, 9, 3, 1),
 					new SellItemFactory(ModItems.FUEL_BUCKET, 4, 1, 6, 1) }));
 
 	private static Int2ObjectMap<Factory[]> copyToFastUtilMap(ImmutableMap<Integer, Factory[]> map) {

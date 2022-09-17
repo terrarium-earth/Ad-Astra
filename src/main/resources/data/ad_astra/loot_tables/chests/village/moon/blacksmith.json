@@ -17,7 +17,7 @@
                             "function": "minecraft:set_count"
                         }
                     ],
-                    "name": "ad_astra:rocket_launch_pad",
+                    "name": "ad_astra:launch_pad",
                     "weight": 10
                 },
                 {

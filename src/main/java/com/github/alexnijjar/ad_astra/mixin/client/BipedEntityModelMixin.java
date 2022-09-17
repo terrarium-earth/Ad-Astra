@@ -1,16 +1,18 @@
 package com.github.alexnijjar.ad_astra.mixin.client;
 
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
 import com.github.alexnijjar.ad_astra.entities.vehicles.VehicleEntity;
-import com.github.alexnijjar.ad_astra.items.vehicles.VehicleItem;
+import com.github.alexnijjar.ad_astra.items.HoldableOverHead;
+
 import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(BipedEntityModel.class)
 @SuppressWarnings("unchecked")
@@ -32,20 +34,17 @@ public abstract class BipedEntityModelMixin {
 			return;
 		}
 
-		BipedEntityModel<PlayerEntity> model = ((BipedEntityModel<PlayerEntity>) (Object) this);
+		BipedEntityModel<LivingEntity> model = ((BipedEntityModel<LivingEntity>) (Object) this);
 		Item mainHandItem = livingEntity.getMainHandStack().getItem();
 		Item offhandItem = livingEntity.getOffHandStack().getItem();
 
-
 		// Move the arms so that it looks like the player is holding the vehicle in the air with both arms.
-		if (mainHandItem instanceof VehicleItem) {
+		if (mainHandItem instanceof HoldableOverHead) {
 			model.rightArm.pitch = -2.8f;
 			model.leftArm.pitch = model.rightArm.pitch;
-		} else if (offhandItem instanceof VehicleItem) {
+		} else if (offhandItem instanceof HoldableOverHead) {
 			model.leftArm.pitch = -2.8f;
 			model.rightArm.pitch = model.leftArm.pitch;
 		}
-
-
 	}
 }

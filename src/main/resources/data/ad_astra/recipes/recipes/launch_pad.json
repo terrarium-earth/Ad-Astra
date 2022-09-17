@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "group": "rocket_launch_pad",
+  "group": "launch_pad",
   "pattern": [
     "#|#",
     "|#|",
@@ -15,7 +15,6 @@
     }
   },
   "result": {
-    "item": "ad_astra:rocket_launch_pad",
-    "count": 9
+    "item": "ad_astra:launch_pad"
   }
 }

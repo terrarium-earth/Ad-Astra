@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "ad_astra:rocket_launch_pad"
+      "ad_astra:launch_pad"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "ad_astra:rocket_launch_pad"
+        "recipe": "ad_astra:launch_pad"
       }
     }
   },

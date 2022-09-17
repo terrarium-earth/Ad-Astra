@@ -90,7 +90,7 @@ public class ModItemGroups {
 		stacks.set(36, ModItems.ASTRODUX.getDefaultStack());
 		stacks.set(37, ModItems.SPACE_PAINTING.getDefaultStack());
 		stacks.set(38, ModItems.CHEESE.getDefaultStack());
-		stacks.set(39, ModItems.ROCKET_LAUNCH_PAD.getDefaultStack());
+		stacks.set(39, ModItems.LAUNCH_PAD.getDefaultStack());
 
 		stacks.set(45, ModItems.OIL_BUCKET.getDefaultStack());
 		stacks.set(46, ModItems.FUEL_BUCKET.getDefaultStack());
