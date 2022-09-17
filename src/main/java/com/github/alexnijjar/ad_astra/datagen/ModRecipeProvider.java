@@ -278,8 +278,8 @@ class ModRecipeProvider extends FabricRecipeProvider {
 		// Ice
 		offerQuadRecipe(exporter, 1, Blocks.ICE, ModItems.ICE_SHARD);
 
-		// Rocket Launch Pad
-		ShapedRecipeJsonFactory.create(ModItems.ROCKET_LAUNCH_PAD, 9).m_hadhiznl(Character.valueOf('#'), ModTags.STEEL_PLATES).m_hadhiznl(Character.valueOf('|'), ModTags.IRON_PLATES).pattern("#|#").pattern("|#|").pattern("#|#").group("rocket_launch_pad")
+		// Launch Pad
+		ShapedRecipeJsonFactory.create(ModItems.LAUNCH_PAD).m_hadhiznl(Character.valueOf('#'), ModTags.STEEL_PLATES).m_hadhiznl(Character.valueOf('|'), ModTags.IRON_PLATES).pattern("#|#").pattern("|#|").pattern("#|#").group("launch_pad")
 				.criterion("has_tag", method_10420(ModTags.STEEL_PLATES)).offerTo(exporter);
 
 		// Metals

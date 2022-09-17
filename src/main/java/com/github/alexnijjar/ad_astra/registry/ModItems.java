@@ -16,6 +16,7 @@ import com.github.alexnijjar.ad_astra.items.AstroduxItem;
 import com.github.alexnijjar.ad_astra.items.EnergizerBlockItem;
 import com.github.alexnijjar.ad_astra.items.FluidContainingItem.TankStorage;
 import com.github.alexnijjar.ad_astra.items.HammerItem;
+import com.github.alexnijjar.ad_astra.items.HoldableOverHeadBlockItem;
 import com.github.alexnijjar.ad_astra.items.MachineBlockItem;
 import com.github.alexnijjar.ad_astra.items.OxygenTankItem;
 import com.github.alexnijjar.ad_astra.items.SolarPanelBlockItem;
@@ -76,8 +77,7 @@ public class ModItems {
 
 	public static final Item CHEESE = register("cheese", new Item(new FabricItemSettings().group(ModItemGroups.ITEM_GROUP_NORMAL).food(new FoodComponent.Builder().hunger(4).saturationModifier(1.0f).build())));
 
-	// Launch pad
-	public static final BlockItem ROCKET_LAUNCH_PAD = registerBlockItem(ModBlocks.ROCKET_LAUNCH_PAD, ModItemGroups.ITEM_GROUP_NORMAL);
+	public static final BlockItem LAUNCH_PAD = register("launch_pad", new HoldableOverHeadBlockItem(ModBlocks.LAUNCH_PAD, new FabricItemSettings().group(ModItemGroups.ITEM_GROUP_MACHINES)));
 
 	// Buckets
 	public static final Item OIL_BUCKET = register("oil_bucket", new BucketItem(ModFluids.OIL_STILL, new FabricItemSettings().group(ModItemGroups.ITEM_GROUP_NORMAL).recipeRemainder(Items.BUCKET).maxCount(1)));
@@ -343,65 +343,65 @@ public class ModItems {
 	// Iron
 	public static final BlockItem IRON_PLATING = registerBlockItem(ModBlocks.IRON_PLATING);
 	public static final BlockItem IRON_PLATING_STAIRS = registerBlockItem(ModBlocks.IRON_PLATING_STAIRS);
-	public static final BlockItem IRON_SLIDING_DOOR = registerBlockItem(ModBlocks.IRON_SLIDING_DOOR);
 	public static final BlockItem IRON_PLATING_SLAB = registerBlockItem(ModBlocks.IRON_PLATING_SLAB);
 	public static final BlockItem IRON_PILLAR = registerBlockItem(ModBlocks.IRON_PILLAR);
 	public static final BlockItem IRON_PLATING_BUTTON = registerBlockItem(ModBlocks.IRON_PLATING_BUTTON);
 	public static final BlockItem IRON_PLATING_PRESSURE_PLATE = registerBlockItem(ModBlocks.IRON_PLATING_PRESSURE_PLATE);
 	public static final BlockItem MARKED_IRON_PILLAR = registerBlockItem(ModBlocks.MARKED_IRON_PILLAR);
 	public static final BlockItem GLOWING_IRON_PILLAR = registerBlockItem(ModBlocks.GLOWING_IRON_PILLAR);
+	public static final BlockItem IRON_SLIDING_DOOR = registerBlockItem(ModBlocks.IRON_SLIDING_DOOR);
 
 	// Steel
 	public static final BlockItem STEEL_BLOCK = registerBlockItem(ModBlocks.STEEL_BLOCK);
 	public static final BlockItem STEEL_PLATING = registerBlockItem(ModBlocks.STEEL_PLATING);
-	public static final BlockItem STEEL_SLIDING_DOOR = registerBlockItem(ModBlocks.STEEL_SLIDING_DOOR);
-	public static final BlockItem AIRLOCK = registerBlockItem(ModBlocks.AIRLOCK);
-	public static final BlockItem REINFORCED_DOOR = registerBlockItem(ModBlocks.REINFORCED_DOOR);
-	public static final BlockItem STEEL_DOOR = registerBlockItem(ModBlocks.STEEL_DOOR);
-	public static final BlockItem STEEL_TRAPDOOR = registerBlockItem(ModBlocks.STEEL_TRAPDOOR);
 	public static final BlockItem STEEL_PLATING_STAIRS = registerBlockItem(ModBlocks.STEEL_PLATING_STAIRS);
 	public static final BlockItem STEEL_PLATING_SLAB = registerBlockItem(ModBlocks.STEEL_PLATING_SLAB);
 	public static final BlockItem STEEL_PILLAR = registerBlockItem(ModBlocks.STEEL_PILLAR);
 	public static final BlockItem STEEL_PLATING_BUTTON = registerBlockItem(ModBlocks.STEEL_PLATING_BUTTON);
 	public static final BlockItem STEEL_PLATING_PRESSURE_PLATE = registerBlockItem(ModBlocks.STEEL_PLATING_PRESSURE_PLATE);
 	public static final BlockItem GLOWING_STEEL_PILLAR = registerBlockItem(ModBlocks.GLOWING_STEEL_PILLAR);
+	public static final BlockItem STEEL_SLIDING_DOOR = registerBlockItem(ModBlocks.STEEL_SLIDING_DOOR);
+	public static final BlockItem AIRLOCK = registerBlockItem(ModBlocks.AIRLOCK);
+	public static final BlockItem REINFORCED_DOOR = registerBlockItem(ModBlocks.REINFORCED_DOOR);
+	public static final BlockItem STEEL_DOOR = registerBlockItem(ModBlocks.STEEL_DOOR);
+	public static final BlockItem STEEL_TRAPDOOR = registerBlockItem(ModBlocks.STEEL_TRAPDOOR);
 
 	// Moon
 	public static final BlockItem CHEESE_BLOCK = registerBlockItem(ModBlocks.CHEESE_BLOCK);
 	public static final BlockItem DESH_BLOCK = registerBlockItem(ModBlocks.DESH_BLOCK);
 	public static final BlockItem RAW_DESH_BLOCK = registerBlockItem(ModBlocks.RAW_DESH_BLOCK);
 	public static final BlockItem DESH_PLATING = registerBlockItem(ModBlocks.DESH_PLATING);
-	public static final BlockItem DESH_SLIDING_DOOR = registerBlockItem(ModBlocks.DESH_SLIDING_DOOR);
 	public static final BlockItem DESH_PLATING_STAIRS = registerBlockItem(ModBlocks.DESH_PLATING_STAIRS);
 	public static final BlockItem DESH_PLATING_SLAB = registerBlockItem(ModBlocks.DESH_PLATING_SLAB);
 	public static final BlockItem DESH_PILLAR = registerBlockItem(ModBlocks.DESH_PILLAR);
 	public static final BlockItem DESH_PLATING_BUTTON = registerBlockItem(ModBlocks.DESH_PLATING_BUTTON);
 	public static final BlockItem DESH_PLATING_PRESSURE_PLATE = registerBlockItem(ModBlocks.DESH_PLATING_PRESSURE_PLATE);
 	public static final BlockItem GLOWING_DESH_PILLAR = registerBlockItem(ModBlocks.GLOWING_DESH_PILLAR);
+	public static final BlockItem DESH_SLIDING_DOOR = registerBlockItem(ModBlocks.DESH_SLIDING_DOOR);
 
 	// Mars
 	public static final BlockItem OSTRUM_BLOCK = registerBlockItem(ModBlocks.OSTRUM_BLOCK);
 	public static final BlockItem RAW_OSTRUM_BLOCK = registerBlockItem(ModBlocks.RAW_OSTRUM_BLOCK);
 	public static final BlockItem OSTRUM_PLATING = registerBlockItem(ModBlocks.OSTRUM_PLATING);
-	public static final BlockItem OSTRUM_SLIDING_DOOR = registerBlockItem(ModBlocks.OSTRUM_SLIDING_DOOR);
 	public static final BlockItem OSTRUM_PLATING_STAIRS = registerBlockItem(ModBlocks.OSTRUM_PLATING_STAIRS);
 	public static final BlockItem OSTRUM_PLATING_SLAB = registerBlockItem(ModBlocks.OSTRUM_PLATING_SLAB);
 	public static final BlockItem OSTRUM_PILLAR = registerBlockItem(ModBlocks.OSTRUM_PILLAR);
 	public static final BlockItem OSTRUM_PLATING_BUTTON = registerBlockItem(ModBlocks.OSTRUM_PLATING_BUTTON);
 	public static final BlockItem OSTRUM_PLATING_PRESSURE_PLATE = registerBlockItem(ModBlocks.OSTRUM_PLATING_PRESSURE_PLATE);
 	public static final BlockItem GLOWING_OSTRUM_PILLAR = registerBlockItem(ModBlocks.GLOWING_OSTRUM_PILLAR);
+	public static final BlockItem OSTRUM_SLIDING_DOOR = registerBlockItem(ModBlocks.OSTRUM_SLIDING_DOOR);
 
 	// Venus
 	public static final BlockItem CALORITE_BLOCK = registerBlockItem(ModBlocks.CALORITE_BLOCK);
 	public static final BlockItem RAW_CALORITE_BLOCK = registerBlockItem(ModBlocks.RAW_CALORITE_BLOCK);
 	public static final BlockItem CALORITE_PLATING = registerBlockItem(ModBlocks.CALORITE_PLATING);
-	public static final BlockItem CALORITE_SLIDING_DOOR = registerBlockItem(ModBlocks.CALORITE_SLIDING_DOOR);
 	public static final BlockItem CALORITE_PLATING_STAIRS = registerBlockItem(ModBlocks.CALORITE_PLATING_STAIRS);
 	public static final BlockItem CALORITE_PLATING_SLAB = registerBlockItem(ModBlocks.CALORITE_PLATING_SLAB);
 	public static final BlockItem CALORITE_PILLAR = registerBlockItem(ModBlocks.CALORITE_PILLAR);
 	public static final BlockItem CALORITE_PLATING_BUTTON = registerBlockItem(ModBlocks.CALORITE_PLATING_BUTTON);
 	public static final BlockItem CALORITE_PLATING_PRESSURE_PLATE = registerBlockItem(ModBlocks.CALORITE_PLATING_PRESSURE_PLATE);
 	public static final BlockItem GLOWING_CALORITE_PILLAR = registerBlockItem(ModBlocks.GLOWING_CALORITE_PILLAR);
+	public static final BlockItem CALORITE_SLIDING_DOOR = registerBlockItem(ModBlocks.CALORITE_SLIDING_DOOR);
 
 	// Earth blocks
 	public static final BlockItem SKY_STONE = registerBlockItem(ModBlocks.SKY_STONE);

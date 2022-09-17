@@ -6,6 +6,7 @@ import java.util.Set;
 import com.github.alexnijjar.ad_astra.blocks.door.SlidingDoorBlock;
 import com.github.alexnijjar.ad_astra.blocks.flags.FlagBlock;
 import com.github.alexnijjar.ad_astra.blocks.globes.GlobeBlock;
+import com.github.alexnijjar.ad_astra.blocks.launchpad.LaunchPad;
 import com.github.alexnijjar.ad_astra.blocks.machines.CoalGeneratorBlock;
 import com.github.alexnijjar.ad_astra.blocks.machines.CompressorBlock;
 import com.github.alexnijjar.ad_astra.blocks.machines.CryoFreezerBlock;
@@ -17,7 +18,6 @@ import com.github.alexnijjar.ad_astra.blocks.machines.OxygenLoaderBlock;
 import com.github.alexnijjar.ad_astra.blocks.machines.OxygenSensorBlock;
 import com.github.alexnijjar.ad_astra.blocks.machines.SolarPanelBlock;
 import com.github.alexnijjar.ad_astra.blocks.machines.WaterPumpBlock;
-import com.github.alexnijjar.ad_astra.blocks.pads.RocketLaunchPad;
 import com.github.alexnijjar.ad_astra.blocks.pipes.CableBlock;
 import com.github.alexnijjar.ad_astra.blocks.pipes.FluidPipeBlock;
 import com.github.alexnijjar.ad_astra.blocks.torches.ExtinguishedLanternBlock;
@@ -62,8 +62,7 @@ import net.minecraft.world.gen.feature.TreeConfiguredFeatures;
 public class ModBlocks {
 	public static final Set<Block> blocks = new HashSet<>();
 
-	// Rocket Launch Pad
-	public static final Block ROCKET_LAUNCH_PAD = register("rocket_launch_pad", new RocketLaunchPad(FabricBlockSettings.copy(Blocks.CUT_COPPER)));
+	public static final Block LAUNCH_PAD = register("launch_pad", new LaunchPad(FabricBlockSettings.copy(Blocks.CUT_COPPER)), true);
 
 	// Flag Blocks
 	public static final Block WHITE_FLAG = register("white_flag", new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1)));
@@ -215,7 +214,8 @@ public class ModBlocks {
 	public static final Block AERONOS_LADDER = register("aeronos_ladder", new LadderBlock(FabricBlockSettings.copy(Blocks.LADDER).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6)));
 
 	// Strophar
-	public static final Block STROPHAR_MUSHROOM = register("strophar_mushroom", new MushroomPlantBlock(FabricBlockSettings.copy(Blocks.RED_MUSHROOM).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6), () -> TreeConfiguredFeatures.HUGE_RED_MUSHROOM));
+	public static final Block STROPHAR_MUSHROOM = register("strophar_mushroom",
+			new MushroomPlantBlock(FabricBlockSettings.copy(Blocks.RED_MUSHROOM).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6), () -> TreeConfiguredFeatures.HUGE_RED_MUSHROOM));
 	public static final Block STROPHAR_CAP = register("strophar_cap", new MushroomBlock(FabricBlockSettings.copy(Blocks.RED_MUSHROOM_BLOCK).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6)));
 	public static final Block STROPHAR_DOOR = register("strophar_door", new DoorBlock(FabricBlockSettings.copy(Blocks.CRIMSON_DOOR).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6)), true);
 	public static final Block STROPHAR_TRAPDOOR = register("strophar_trapdoor", new TrapdoorBlock(FabricBlockSettings.copy(Blocks.CRIMSON_TRAPDOOR).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6)));

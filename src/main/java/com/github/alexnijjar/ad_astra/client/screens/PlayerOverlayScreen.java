@@ -79,7 +79,7 @@ public class PlayerOverlayScreen {
 			GuiUtil.drawVerticalReverse(matrices, x, y, textureWidth, textureHeight, OXYGEN_TANK_EMPTY_TEXTURE, oxygenRatio);
 			GuiUtil.drawVertical(matrices, x, y, textureWidth, textureHeight, OXYGEN_TANK_FULL_TEXTURE, oxygenRatio);
 
-			// Oxygen text.
+			// Oxygen text
 			double oxygen = Math.round(oxygenRatio * 1000) / 10.0;
 			Text text = Text.of((oxygen) + "%");
 			int textWidth = client.textRenderer.getWidth(text);
@@ -159,19 +159,19 @@ public class PlayerOverlayScreen {
 			RenderSystem.enableBlend();
 			RenderSystem.setShader(GameRenderer::getPositionTexShader);
 
-			// Flashing.
+			// Flashing
 			float sine = (float) Math.sin((client.world.getTime() + client.getTickDelta()) / 2.0f);
 
 			sine = MathHelper.clamp(sine, 0.0f, 1.0f);
 			RenderSystem.setShaderColor(sine, sine, sine, sine);
 
-			// Warning image.
+			// Warning image
 			RenderSystem.setShaderTexture(0, WARNING_TEXTURE);
 			DrawableHelper.drawTexture(matrices, screenX / 2 - 58, 50, 0, 0, 116, 21, 116, 21);
 
 			RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
 
-			// Speed text.
+			// Speed text
 			Text text = Text.translatable("message." + AdAstra.MOD_ID + ".speed", Math.round(speed * 10.0) / 10.0);
 			client.textRenderer.drawWithShadow(matrices, text, screenX / 2 - 29, 80, -3407872);
 

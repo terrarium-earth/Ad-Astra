@@ -37,7 +37,7 @@ public class SlidingDoorBlock extends BlockWithEntity {
     public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
     public static final BooleanProperty OPEN = Properties.OPEN;
     public static final BooleanProperty POWERED = Properties.POWERED;
-    public static final EnumProperty<DoorState> LOCATION = EnumProperty.of("location", DoorState.class);
+    public static final EnumProperty<LocationState> LOCATION = EnumProperty.of("location", LocationState.class);
 
     protected static final VoxelShape NORTH_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 16.0, 3.0);
     protected static final VoxelShape SOUTH_SHAPE = Block.createCuboidShape(0.0, 0.0, 13.0, 16.0, 16.0, 16.0);
@@ -46,7 +46,7 @@ public class SlidingDoorBlock extends BlockWithEntity {
 
     public SlidingDoorBlock(Settings settings) {
         super(settings);
-        this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH).with(OPEN, false).with(POWERED, false).with(LOCATION, DoorState.BOTTOM));
+        this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH).with(OPEN, false).with(POWERED, false).with(LOCATION, LocationState.BOTTOM));
     }
 
     @Override
@@ -61,23 +61,23 @@ public class SlidingDoorBlock extends BlockWithEntity {
             Direction offset = direction.rotateYClockwise();
 
             // Bottom
-            world.setBlockState(pos, getDefaultState().with(LOCATION, DoorState.BOTTOM).with(FACING, direction), 3);
+            world.setBlockState(pos, getDefaultState().with(LOCATION, LocationState.BOTTOM).with(FACING, direction), 3);
             // Bottom Left
-            world.setBlockState(pos.offset(offset), getDefaultState().with(LOCATION, DoorState.BOTTOM_LEFT).with(FACING, direction), 3);
+            world.setBlockState(pos.offset(offset), getDefaultState().with(LOCATION, LocationState.BOTTOM_LEFT).with(FACING, direction), 3);
             // Bottom Right
-            world.setBlockState(pos.offset(offset.getOpposite()), getDefaultState().with(LOCATION, DoorState.BOTTOM_RIGHT).with(FACING, direction), 3);
+            world.setBlockState(pos.offset(offset.getOpposite()), getDefaultState().with(LOCATION, LocationState.BOTTOM_RIGHT).with(FACING, direction), 3);
             // Center
-            world.setBlockState(pos.up(), getDefaultState().with(LOCATION, DoorState.CENTER).with(FACING, direction), 3);
+            world.setBlockState(pos.up(), getDefaultState().with(LOCATION, LocationState.CENTER).with(FACING, direction), 3);
             // Left
-            world.setBlockState(pos.up().offset(offset), getDefaultState().with(LOCATION, DoorState.LEFT).with(FACING, direction), 3);
+            world.setBlockState(pos.up().offset(offset), getDefaultState().with(LOCATION, LocationState.LEFT).with(FACING, direction), 3);
             // Right
-            world.setBlockState(pos.up().offset(offset.getOpposite()), getDefaultState().with(LOCATION, DoorState.RIGHT).with(FACING, direction), 3);
+            world.setBlockState(pos.up().offset(offset.getOpposite()), getDefaultState().with(LOCATION, LocationState.RIGHT).with(FACING, direction), 3);
             // Top
-            world.setBlockState(pos.up().up(), getDefaultState().with(LOCATION, DoorState.TOP).with(FACING, direction), 3);
+            world.setBlockState(pos.up().up(), getDefaultState().with(LOCATION, LocationState.TOP).with(FACING, direction), 3);
             // Top Left
-            world.setBlockState(pos.up().up().offset(offset), getDefaultState().with(LOCATION, DoorState.TOP_LEFT).with(FACING, direction), 3);
+            world.setBlockState(pos.up().up().offset(offset), getDefaultState().with(LOCATION, LocationState.TOP_LEFT).with(FACING, direction), 3);
             // Top Right
-            world.setBlockState(pos.up().up().offset(offset.getOpposite()), getDefaultState().with(LOCATION, DoorState.TOP_RIGHT).with(FACING, direction), 3);
+            world.setBlockState(pos.up().up().offset(offset.getOpposite()), getDefaultState().with(LOCATION, LocationState.TOP_RIGHT).with(FACING, direction), 3);
         }
     }
 
@@ -103,8 +103,7 @@ public class SlidingDoorBlock extends BlockWithEntity {
     public void breakDoor(World world, BlockState state, BlockPos pos, boolean drop) {
         if (!world.isClient && state.getBlock().equals(this)) {
             BlockPos mainPos = this.getMainPos(state, pos);
-            BlockState main = world.getBlockState(this.getMainPos(state, pos));
-            if (main.getBlock().equals(this)) {
+            if (world.getBlockState(mainPos).getBlock().equals(this)) {
                 Direction direction = state.get(FACING).rotateYCounterclockwise();
 
                 // Bottom
@@ -143,8 +142,14 @@ public class SlidingDoorBlock extends BlockWithEntity {
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
             BlockPos main = this.getMainPos(state, pos);
+            if (world.getBlockEntity(this.getMainPos(state, pos)) instanceof SlidingDoorBlockEntity entity) {
+                if (entity.getSlideTicks() > 0 && entity.getSlideTicks() < 100) {
+                    return ActionResult.PASS;
+                } else {
+                    world.setBlockState(main, world.getBlockState(main).cycle(OPEN), 10);
+                }
+            }
 
-            world.setBlockState(main, world.getBlockState(main).cycle(OPEN), 10);
         }
         return ActionResult.success(world.isClient);
     }
@@ -220,7 +225,7 @@ public class SlidingDoorBlock extends BlockWithEntity {
 
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        if (state.get(LOCATION).equals(DoorState.BOTTOM)) {
+        if (state.get(LOCATION).equals(LocationState.BOTTOM)) {
             return new SlidingDoorBlockEntity(pos, state);
         }
         return null;
@@ -241,27 +246,25 @@ public class SlidingDoorBlock extends BlockWithEntity {
     }
 
     public BlockPos getMainPos(BlockState state, BlockPos from) {
-        BlockPos target = from;
+		BlockPos target = from;
         Direction facing = state.get(FACING).rotateYCounterclockwise();
-        if (state.get(LOCATION).equals(DoorState.TOP_LEFT)) {
+        if (state.get(LOCATION).equals(LocationState.TOP_LEFT)) {
             target = from.down().down().offset(facing);
-        } else if (state.get(LOCATION).equals(DoorState.TOP)) {
+        } else if (state.get(LOCATION).equals(LocationState.TOP)) {
             target = from.down().down();
-        } else if (state.get(LOCATION).equals(DoorState.TOP_RIGHT)) {
+        } else if (state.get(LOCATION).equals(LocationState.TOP_RIGHT)) {
             target = from.down().down().offset(facing.getOpposite());
-        } else if (state.get(LOCATION).equals(DoorState.RIGHT)) {
+        } else if (state.get(LOCATION).equals(LocationState.RIGHT)) {
             target = from.down().offset(facing.getOpposite());
-        } else if (state.get(LOCATION).equals(DoorState.CENTER)) {
+        } else if (state.get(LOCATION).equals(LocationState.CENTER)) {
             target = from.down();
-        } else if (state.get(LOCATION).equals(DoorState.LEFT)) {
+        } else if (state.get(LOCATION).equals(LocationState.LEFT)) {
             target = from.down().offset(facing);
-        } else if (state.get(LOCATION).equals(DoorState.BOTTOM_LEFT)) {
+        } else if (state.get(LOCATION).equals(LocationState.BOTTOM_LEFT)) {
             target = from.offset(facing);
-        } else if (state.get(LOCATION).equals(DoorState.BOTTOM_RIGHT)) {
+        } else if (state.get(LOCATION).equals(LocationState.BOTTOM_RIGHT)) {
             target = from.offset(facing.getOpposite());
         }
-
-        return target;
-    }
-
+		return target;
+	}
 }

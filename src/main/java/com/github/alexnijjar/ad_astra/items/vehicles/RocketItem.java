@@ -2,7 +2,8 @@ package com.github.alexnijjar.ad_astra.items.vehicles;
 
 import java.util.List;
 
-import com.github.alexnijjar.ad_astra.blocks.pads.RocketLaunchPad;
+import com.github.alexnijjar.ad_astra.blocks.door.LocationState;
+import com.github.alexnijjar.ad_astra.blocks.launchpad.LaunchPad;
 import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntity;
 import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntityTier1;
 import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntityTier2;
@@ -66,8 +67,8 @@ public class RocketItem<T extends RocketEntity> extends VehicleItem {
 				}
 			}
 
-			if (state.getBlock() instanceof RocketLaunchPad pad) {
-				if (state.get(RocketLaunchPad.STAGE).equals(true)) {
+			if (state.getBlock() instanceof LaunchPad pad) {
+				if (state.get(LaunchPad.LOCATION).equals(LocationState.CENTER)) {
 					ItemStack rocketStack = player.getStackInHand(context.getHand());
 					if (rocketStack.getItem() instanceof RocketItem<?> rocket) {
 
@@ -75,18 +76,18 @@ public class RocketItem<T extends RocketEntity> extends VehicleItem {
 
 						int tier = rocket.getTier();
 						switch (tier) {
-							case 1 -> {
-								rocketEntity = new RocketEntityTier1(rocket.getRocketEntity(), world);
-							}
-							case 2 -> {
-								rocketEntity = new RocketEntityTier2(rocket.getRocketEntity(), world);
-							}
-							case 3 -> {
-								rocketEntity = new RocketEntityTier3(rocket.getRocketEntity(), world);
-							}
-							case 4 -> {
-								rocketEntity = new RocketEntityTier4(rocket.getRocketEntity(), world);
-							}
+						case 1 -> {
+							rocketEntity = new RocketEntityTier1(rocket.getRocketEntity(), world);
+						}
+						case 2 -> {
+							rocketEntity = new RocketEntityTier2(rocket.getRocketEntity(), world);
+						}
+						case 3 -> {
+							rocketEntity = new RocketEntityTier3(rocket.getRocketEntity(), world);
+						}
+						case 4 -> {
+							rocketEntity = new RocketEntityTier4(rocket.getRocketEntity(), world);
+						}
 						}
 
 						if (rocketEntity != null) {
@@ -112,7 +113,7 @@ public class RocketItem<T extends RocketEntity> extends VehicleItem {
 							rocketStack.decrement(1);
 							world.playSound(null, pos, SoundEvents.BLOCK_NETHERITE_BLOCK_PLACE, SoundCategory.BLOCKS, 1, 1);
 
-							rocketEntity.setPosition(pos.getX() + 0.5, pos.getY() + 0.23, pos.getZ() + 0.5);
+							rocketEntity.setPosition(pos.getX() + 0.5, pos.getY() + 0.1, pos.getZ() + 0.5);
 							rocketEntity.setYaw(Math.round((player.getYaw() + 180) / 90) * 90);
 							world.spawnEntity(rocketEntity);
 

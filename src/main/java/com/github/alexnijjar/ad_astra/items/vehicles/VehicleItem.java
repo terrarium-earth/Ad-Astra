@@ -3,6 +3,7 @@ package com.github.alexnijjar.ad_astra.items.vehicles;
 import java.util.List;
 
 import com.github.alexnijjar.ad_astra.items.FluidContainingItem;
+import com.github.alexnijjar.ad_astra.items.HoldableOverHead;
 import com.github.alexnijjar.ad_astra.util.FluidUtils;
 
 import net.minecraft.client.item.TooltipContext;
@@ -13,7 +14,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 
-public abstract class VehicleItem extends Item implements FluidContainingItem {
+public abstract class VehicleItem extends Item implements FluidContainingItem, HoldableOverHead {
 
 	public VehicleItem(Settings settings) {
 		super(settings);
