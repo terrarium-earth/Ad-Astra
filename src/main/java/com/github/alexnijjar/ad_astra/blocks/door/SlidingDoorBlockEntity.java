@@ -48,7 +48,7 @@ public class SlidingDoorBlockEntity extends BlockEntity {
     }
 
     public void tick() {
-        if (this.getCachedState().get(SlidingDoorBlock.LOCATION).equals(DoorState.BOTTOM)) {
+        if (this.getCachedState().get(SlidingDoorBlock.LOCATION).equals(LocationState.BOTTOM)) {
             boolean open = this.getCachedState().get(SlidingDoorBlock.OPEN) || this.getCachedState().get(SlidingDoorBlock.POWERED);
             this.previousSlideTicks = this.slideTicks;
 

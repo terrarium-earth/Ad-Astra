@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.github.alexnijjar.ad_astra.entities.vehicles.VehicleEntity;
-import com.github.alexnijjar.ad_astra.items.vehicles.VehicleItem;
+import com.github.alexnijjar.ad_astra.items.HoldableOverHead;
 
 import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.entity.EntityPose;
@@ -39,10 +39,10 @@ public abstract class BipedEntityModelMixin {
 		Item offhandItem = livingEntity.getOffHandStack().getItem();
 
 		// Move the arms so that it looks like the player is holding the vehicle in the air with both arms.
-		if (mainHandItem instanceof VehicleItem) {
+		if (mainHandItem instanceof HoldableOverHead) {
 			model.rightArm.pitch = -2.8f;
 			model.leftArm.pitch = model.rightArm.pitch;
-		} else if (offhandItem instanceof VehicleItem) {
+		} else if (offhandItem instanceof HoldableOverHead) {
 			model.leftArm.pitch = -2.8f;
 			model.rightArm.pitch = model.leftArm.pitch;
 		}

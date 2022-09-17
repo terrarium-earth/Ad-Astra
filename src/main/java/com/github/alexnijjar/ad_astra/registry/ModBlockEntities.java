@@ -6,6 +6,7 @@ import java.util.Set;
 import com.github.alexnijjar.ad_astra.blocks.door.SlidingDoorBlockEntity;
 import com.github.alexnijjar.ad_astra.blocks.flags.FlagBlockEntity;
 import com.github.alexnijjar.ad_astra.blocks.globes.GlobeBlockEntity;
+import com.github.alexnijjar.ad_astra.blocks.launchpad.LaunchPadBlockEntity;
 import com.github.alexnijjar.ad_astra.blocks.machines.entity.AbstractMachineBlockEntity;
 import com.github.alexnijjar.ad_astra.blocks.machines.entity.CoalGeneratorBlockEntity;
 import com.github.alexnijjar.ad_astra.blocks.machines.entity.CompressorBlockEntity;
@@ -53,6 +54,7 @@ public class ModBlockEntities {
 	public static BlockEntityType<CryoFreezerBlockEntity> CRYO_FREEZER;
 	public static BlockEntityType<OxygenSensorBlockEntity> OXYGEN_SENSOR;
 	public static BlockEntityType<SlidingDoorBlockEntity> SLIDING_DOOR;
+	public static BlockEntityType<LaunchPadBlockEntity> LAUNCH_PAD;
 
 	public static BlockEntityType<CableBlockEntity> CABLE;
 	public static BlockEntityType<FluidPipeBlockEntity> FLUID_PIPE;
@@ -77,6 +79,7 @@ public class ModBlockEntities {
 		OXYGEN_SENSOR = register("oxygen_sensor", OxygenSensorBlockEntity::new, ModBlocks.OXYGEN_SENSOR);
 		SLIDING_DOOR = register("sliding_door", SlidingDoorBlockEntity::new, ModBlocks.IRON_SLIDING_DOOR, ModBlocks.STEEL_SLIDING_DOOR, ModBlocks.DESH_SLIDING_DOOR, ModBlocks.OSTRUM_SLIDING_DOOR, ModBlocks.CALORITE_SLIDING_DOOR, ModBlocks.AIRLOCK,
 				ModBlocks.REINFORCED_DOOR);
+		LAUNCH_PAD = register("launch_pad", LaunchPadBlockEntity::new, ModBlocks.LAUNCH_PAD);
 
 		CABLE = register("cable", CableBlockEntity::new, ModBlocks.STEEL_CABLE, ModBlocks.DESH_CABLE);
 		FLUID_PIPE = register("fluid_pipe", FluidPipeBlockEntity::new, ModBlocks.DESH_FLUID_PIPE, ModBlocks.OSTRUM_FLUID_PIPE);

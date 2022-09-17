@@ -82,7 +82,6 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
 					player.stopFallFlying();
 				}
 			}
-			;
 		}
 	}
 
@@ -136,6 +135,7 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
 		spawnParticles(world, entity, model, model.leftLeg.pitch + 0.05, entity.isFallFlying() ? 0.1 : 0.0, 0.1);
 	}
 
+	// Spawns particles at the limbs of the player
 	private static void spawnParticles(World world, LivingEntity entity, BipedEntityModel<LivingEntity> model, double pitch, double yOffset, double zOffset) {
 		double yaw = entity.bodyYaw;
 		double xRotator = Math.cos(yaw * Math.PI / 180.0) * zOffset;

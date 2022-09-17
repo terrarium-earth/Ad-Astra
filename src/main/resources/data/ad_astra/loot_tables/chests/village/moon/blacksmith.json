@@ -6,19 +6,8 @@
             "entries": [
                 {
                     "type": "minecraft:item",
-                    "functions": [
-                        {
-                            "add": false,
-                            "count": {
-                                "type": "minecraft:uniform",
-                                "max": 3.0,
-                                "min": 1.0
-                            },
-                            "function": "minecraft:set_count"
-                        }
-                    ],
-                    "name": "ad_astra:rocket_launch_pad",
-                    "weight": 10
+                    "name": "ad_astra:launch_pad",
+                    "weight": 3
                 },
                 {
                     "type": "minecraft:item",

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "ad_astra:rocket_launch_pad"
+        "recipe": "ad_astra:launch_pad"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "ad_astra:rocket_launch_pad"
+      "ad_astra:launch_pad"
     ]
   }
 }
