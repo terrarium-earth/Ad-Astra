@@ -11,15 +11,13 @@ dependencies {
     // Do NOT use other classes from fabric loader
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
     // Remove the next line if you don't want to depend on the API
-    modApi "dev.architectury:architectury:${rootProject.architectury_version}"
     modImplementation "earth.terrarium:botarium-common-${rootProject.minecraft_version}:${rootProject.botarium_version}"
-
+    modImplementation "com.teamresourceful.resourcefullib:resourcefullib-common-$rootProject.resourcefullib_version"
     modApi("me.shedaniel.cloth:cloth-config:${project.cloth_config_version}") {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
 
 	// REI
-	modCompileOnly("dev.architectury:architectury:${project.architectury_version}")
 	modCompileOnly("me.shedaniel:RoughlyEnoughItems-api:$project.rei_version")
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin:$project.rei_version")
 }

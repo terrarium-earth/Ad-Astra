@@ -1,6 +1,7 @@
 plugins {
     id "architectury-plugin" version "3.4-SNAPSHOT"
     id "dev.architectury.loom" version "0.12.0-SNAPSHOT" apply false
+    id 'org.quiltmc.quilt-mappings-on-loom' version '4.+' apply false
 }
 
 architectury {
@@ -9,6 +10,7 @@ architectury {
 
 subprojects {
     apply plugin: "dev.architectury.loom"
+    apply plugin: "org.quiltmc.quilt-mappings-on-loom"
 
     loom {
         silentMojangMappingsLicense()
@@ -19,7 +21,9 @@ subprojects {
         // The following line declares the mojmap mappings, you may use other mappings as well
         // mappings loom.officialMojangMappings()
         // The following line declares the yarn mappings you may select this one as well.
-        mappings "net.fabricmc:yarn:1.19+build.4:v2"
+        mappings loom.layered {
+            addLayer(quiltMappings.mappings("org.quiltmc:quilt-mappings:${project.minecraft_version}+build.${project.quilt_mappings}:v2"))
+        }
     }
 }
 
@@ -35,7 +39,6 @@ allprojects {
     repositories {
         maven { url "https://maven.shedaniel.me/" }
 	    maven { url "https://maven.terraformersmc.com" }
-	    maven { url 'https://maven.blamejared.com' }
         maven { url "https://nexus.resourcefulbees.com/repository/maven-public/" }
     }
 

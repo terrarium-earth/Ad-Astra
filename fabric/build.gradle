@@ -28,19 +28,19 @@ dependencies {
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
     modImplementation "earth.terrarium:botarium-fabric-${rootProject.minecraft_version}:${rootProject.botarium_version}"
+    modImplementation "com.teamresourceful.resourcefullib:resourcefullib-fabric-$rootProject.resourcefullib_version"
 
     modApi("com.terraformersmc:modmenu:${project.modmenu_version}")
 
 	modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
-	modImplementation "vazkii.patchouli:Patchouli:${project.patchouli_version}"
+	//modImplementation "vazkii.patchouli:Patchouli:${project.patchouli_version}"
 
 	// EMI
 	modImplementation "dev.emi:emi:${emi_version}"
 
 	// REI
-	modCompileOnly("dev.architectury:architectury-fabric:${project.architectury_version}")
 	modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:$project.rei_version")
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:$project.rei_version")
 }
