@@ -48,7 +48,7 @@ public class PlanetWeatherSoundPlayer implements ClientPlayerTickable {
         private final ClientPlayerEntity player;
 
         public MusicLoop(ClientPlayerEntity player, SoundEvent soundEvent) {
-            super(soundEvent, SoundCategory.WEATHER, SoundInstance.createRandom());
+            super(soundEvent, SoundCategory.WEATHER, SoundInstance.method_43221());
             this.player = player;
             this.repeat = true;
             this.repeatDelay = 0;
@@ -77,7 +77,7 @@ public class PlanetWeatherSoundPlayer implements ClientPlayerTickable {
             }
             float volume = (float) MathHelper.clamp((this.player.getY() - 80) / height, 0.0f, max);
 
-            if (client.currentScreen != null && client.currentScreen.shouldPause()) {
+            if (client.currentScreen != null && client.currentScreen.isPauseScreen()) {
                 volume = 0.0f;
                 return;
             }

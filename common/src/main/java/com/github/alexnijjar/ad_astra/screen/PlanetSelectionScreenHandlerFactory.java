@@ -2,13 +2,20 @@ package com.github.alexnijjar.ad_astra.screen;
 
 import com.github.alexnijjar.ad_astra.screen.handler.PlanetSelectionScreenHandler;
 
+import earth.terrarium.botarium.api.menu.ExtraDataMenuProvider;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 
-public record PlanetSelectionScreenHandlerFactory(int tier) implements NamedScreenHandlerFactory {
+public record PlanetSelectionScreenHandlerFactory(int tier) implements ExtraDataMenuProvider {
+
+	@Override
+	public void writeExtraData(ServerPlayerEntity player, PacketByteBuf buf) {
+		buf.writeInt(tier);
+	}
 
 	@Override
 	public ScreenHandler createMenu(int syncId, PlayerInventory inventory, PlayerEntity player) {

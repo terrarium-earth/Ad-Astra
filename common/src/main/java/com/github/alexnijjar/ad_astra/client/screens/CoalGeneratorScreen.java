@@ -38,7 +38,7 @@ public class CoalGeneratorScreen extends AbstractMachineScreen<CoalGeneratorScre
 		CoalGeneratorBlockEntity entity = (CoalGeneratorBlockEntity) blockEntity;
 
 		GuiUtil.drawFire(matrices, this.x + FIRE_LEFT, this.y + FIRE_TOP, entity.getCookTime(), entity.getCookTimeTotal());
-		GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration());
+		GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.blockEntity.getEnergyStorage().getStoredEnergy(), this.blockEntity.getMaxGeneration());
 	}
 
 	@Override

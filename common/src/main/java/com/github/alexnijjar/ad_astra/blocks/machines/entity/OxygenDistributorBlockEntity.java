@@ -209,7 +209,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 				return;
 			}
 		} else {
-			if (this.outputTank.amount <= 0 && this.energyStorage.amount <= 0) {
+			if (this.outputTank.amount <= 0 && this.getEnergyStorage().getStoredEnergy() <= 0) {
 				return;
 			}
 		}

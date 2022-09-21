@@ -26,7 +26,7 @@ public class MachineBlockItem extends BlockItem {
 				NbtCompound nbt = stack.getOrCreateNbt();
 				Inventories.readNbt(nbt, machineBlock.getItems());
 				if (nbt.contains("energy")) {
-					machineBlock.energyStorage.amount = nbt.getLong("energy");
+					machineBlock.getEnergyStorage().setEnergy(nbt.getLong("energy"));
 				}
 
 				if (machineBlock instanceof FluidMachineBlockEntity fluidMachine) {

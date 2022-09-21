@@ -5,6 +5,10 @@ import org.jetbrains.annotations.Nullable;
 import com.github.alexnijjar.ad_astra.blocks.machines.AbstractMachineBlock;
 import com.github.alexnijjar.ad_astra.util.ModInventory;
 
+import earth.terrarium.botarium.api.energy.EnergyBlock;
+import earth.terrarium.botarium.api.energy.SimpleUpdatingEnergyContainer;
+import earth.terrarium.botarium.api.energy.StatefulEnergyContainer;
+import earth.terrarium.botarium.api.menu.ExtraDataMenuProvider;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
@@ -18,7 +22,6 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
-import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -26,11 +29,8 @@ import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import team.reborn.energy.api.EnergyStorage;
-import team.reborn.energy.api.EnergyStorageUtil;
-import team.reborn.energy.api.base.SimpleSidedEnergyContainer;
 
-public abstract class AbstractMachineBlockEntity extends BlockEntity implements NamedScreenHandlerFactory, ModInventory, SidedInventory {
+public abstract class AbstractMachineBlockEntity extends BlockEntity implements EnergyBlock, ExtraDataMenuProvider, ModInventory, SidedInventory {
 
 	private final DefaultedList<ItemStack> inventory;
 
@@ -41,33 +41,10 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
 
 	public abstract void tick();
 
-	@Nullable
 	@Override
 	public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
 		return null;
 	}
-
-	public final SimpleSidedEnergyContainer energyStorage = new SimpleSidedEnergyContainer() {
-		@Override
-		public long getCapacity() {
-			return getMaxGeneration();
-		}
-
-		@Override
-		public long getMaxInsert(@Nullable Direction side) {
-			return getMaxEnergyInsert();
-		}
-
-		@Override
-		public long getMaxExtract(@Nullable Direction side) {
-			return getMaxEnergyExtract();
-		}
-
-		@Override
-		protected void onFinalCommit() {
-			markDirty();
-		}
-	};
 
 	public boolean usesEnergy() {
 		return false;
@@ -100,11 +77,7 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
 	}
 
 	public void cumulateEnergy() {
-		if (this.energyStorage.amount < this.getMaxGeneration()) {
-			this.energyStorage.amount += this.getEnergyPerTick();
-		} else if (this.energyStorage.amount > this.getMaxGeneration()) {
-			this.energyStorage.amount = this.getMaxGeneration();
-		}
+		this.getEnergyStorage().insertEnergy(this.getEnergyPerTick(), false);
 		this.markDirty();
 	}
 
@@ -114,12 +87,12 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
 
 	public boolean drainEnergy(long amount) {
 		if (!this.world.isClient) {
-			if (this.energyStorage.amount - amount > 0) {
-				this.energyStorage.amount -= amount;
+			if (this.getEnergy() - amount > 0) {
+				this.getEnergyStorage().extractEnergy(amount, false);
 				this.markDirty();
 				return true;
 			} else {
-				this.energyStorage.amount = 0;
+				this.getEnergyStorage().setEnergy(0);
 				this.markDirty();
 				return false;
 			}
@@ -132,28 +105,26 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
 	}
 
 	public boolean canDrainEnergy(long amount) {
-		return this.energyStorage.amount - amount > 0;
+		return this.getEnergy() - amount > 0;
 	}
 
 	// Send energy to surrounding machines.
 	public void energyOut() {
 		if (usesEnergy() && !this.getCachedState().get(AbstractMachineBlock.POWERED)) {
 			for (Direction direction : Direction.values()) {
-				EnergyStorageUtil.move(getSideEnergyStorage(direction), EnergyStorage.SIDED.find(world, pos.offset(direction), direction.getOpposite()), Long.MAX_VALUE, null);
+				// TODO: Sided energy storage transfer
+				// this.getEnergyStorage().insertEnergy(this.getEnergyStorage().extractEnergy(Long.MAX_VALUE, false), false);
+				// EnergyStorageUtil.move(getSideEnergyStorage(direction), EnergyStorage.SIDED.find(world, pos.offset(direction), direction.getOpposite()), Long.MAX_VALUE, null);
 			}
 		}
 	}
 
-	public EnergyStorage getSideEnergyStorage(@Nullable Direction side) {
-		return this.energyStorage.getSideStorage(side);
-	}
-
 	public long getEnergy() {
-		return this.energyStorage.amount;
+		return this.getEnergy();
 	}
 
 	public boolean hasEnergy() {
-		return this.usesEnergy() && this.energyStorage.amount > this.getEnergyPerTick();
+		return this.usesEnergy() && this.getEnergy() > this.getEnergyPerTick();
 	}
 
 	@Override
@@ -162,7 +133,7 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
 	}
 
 	@Override
-	public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
+	public void writeExtraData(ServerPlayerEntity player, PacketByteBuf buf) {
 		buf.writeBlockPos(this.getPos());
 	}
 
@@ -173,7 +144,7 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
 			Inventories.readNbt(nbt, this.inventory);
 		}
 		if (usesEnergy()) {
-			this.energyStorage.amount = nbt.getLong("energy");
+			this.getEnergyStorage().setEnergy(nbt.getLong("energy"));
 		}
 	}
 
@@ -184,7 +155,7 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
 			Inventories.writeNbt(nbt, this.inventory);
 		}
 		if (usesEnergy()) {
-			nbt.putLong("energy", energyStorage.amount);
+			nbt.putLong("energy", this.getEnergy());
 		}
 	}
 
@@ -227,11 +198,21 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
 	@Nullable
 	@Override
 	public Packet<ClientPlayPacketListener> toUpdatePacket() {
-		return BlockEntityUpdateS2CPacket.create(this);
+		return BlockEntityUpdateS2CPacket.of(this);
 	}
 
 	@Override
 	public NbtCompound toInitialChunkDataNbt() {
-		return this.createNbt();
+		return this.toNbt();
+	}
+
+	@Override
+	public StatefulEnergyContainer getEnergyStorage() {
+		return new SimpleUpdatingEnergyContainer(this, (int) this.getMaxGeneration());
+	}
+	
+	@Override
+	public void update() {
+		this.markDirty();
 	}
 }

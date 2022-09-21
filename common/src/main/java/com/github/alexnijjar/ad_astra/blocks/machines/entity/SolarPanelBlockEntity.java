@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 public class SolarPanelBlockEntity extends AbstractMachineBlockEntity {
 
 	public SolarPanelBlockEntity(BlockPos blockPos, BlockState blockState) {
-		super(ModBlockEntities.SOLAR_PANEL, blockPos, blockState);
+		super(ModBlockEntities.SOLAR_PANEL.get(), blockPos, blockState);
 	}
 
 	@Nullable

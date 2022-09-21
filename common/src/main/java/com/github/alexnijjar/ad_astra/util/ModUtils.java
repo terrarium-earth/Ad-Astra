@@ -154,7 +154,7 @@ public class ModUtils {
 	 * @return A spawned lander entity at the same position as the rocket and with the same inventory
 	 */
 	public static LanderEntity createLander(RocketEntity rocket, ServerWorld targetWorld, Vec3d target) {
-		LanderEntity lander = new LanderEntity(ModEntityTypes.LANDER, targetWorld);
+		LanderEntity lander = new LanderEntity(ModEntityTypes.LANDER.get(), targetWorld);
 		lander.setPosition(target);
 
 		for (int i = 0; i < rocket.getInventorySize(); i++) {
