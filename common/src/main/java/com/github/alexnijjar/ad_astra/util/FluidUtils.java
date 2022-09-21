@@ -10,7 +10,7 @@ import com.github.alexnijjar.ad_astra.items.FluidContainingItem;
 import com.github.alexnijjar.ad_astra.recipes.ConversionRecipe;
 
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidHooks;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage;
@@ -53,7 +53,7 @@ public class FluidUtils {
 
 			@Override
 			protected long getCapacity(FluidVariant variant) {
-				return tankSize * FluidConstants.BUCKET;
+				return tankSize * FluidHooks.BUCKET;
 			}
 
 			@Override
@@ -84,7 +84,7 @@ public class FluidUtils {
 
 			@Override
 			protected long getCapacity(FluidVariant variant) {
-				return tankSize * FluidConstants.BUCKET;
+				return tankSize * FluidHooks.BUCKET;
 			}
 		};
 	}
@@ -111,8 +111,7 @@ public class FluidUtils {
 	}
 
 	/**
-	 * Inserts fluid from an input item, such as a bucket, into the input tank. The item is then emptied and placed into the output
-	 * slot.
+	 * Inserts fluid from an input item, such as a bucket, into the input tank. The item is then emptied and placed into the output slot.
 	 */
 	public static void insertFluidIntoTank(Inventory inventory, Storage<FluidVariant> inputTank, int insertSlot, int extractSlot, Predicate<FluidVariant> filter) {
 		ItemStack original = inventory.getStack(insertSlot).copy();
@@ -197,16 +196,13 @@ public class FluidUtils {
 	 *
 	 * @param from            The source storage. May be null.
 	 * @param to              The target storage. May be null.
-	 * @param filter          The filter for transferred resources. Only resources for which this filter returns {@code true} will
-	 *                        be transferred. This filter will never be tested with a blank resource, and filters are encouraged to
-	 *                        throw an exception if this guarantee is violated.
+	 * @param filter          The filter for transferred resources. Only resources for which this filter returns {@code true} will be transferred. This filter will never be tested with a blank resource,
+	 *                        and filters are encouraged to throw an exception if this guarantee is violated.
 	 * @param maxAmount       The maximum amount that will be transferred.
-	 * @param transaction     The transaction this transfer is part of, or {@code null} if a transaction should be opened just for
-	 *                        this transfer.
+	 * @param transaction     The transaction this transfer is part of, or {@code null} if a transaction should be opened just for this transfer.
 	 * @param <T>             The type of resources to move.
 	 * @param outputFluid     The fluid to output as the result.
-	 * @param conversionRatio A ratio of the input to output fluid. For example, if 100 millibuckets are put in and the conversion
-	 *                        ratio is 0.5, then 25 millibuckets will be output.
+	 * @param conversionRatio A ratio of the input to output fluid. For example, if 100 millibuckets are put in and the conversion ratio is 0.5, then 25 millibuckets will be output.
 	 * @return The total amount of resources that was successfully transferred.
 	 * @throws IllegalStateException If no transaction is passed and a transaction is already active on the current thread.
 	 * @see {@link StorageUtil#move(Storage, Storage, Predicate, long, Transaction)}

@@ -1,10 +1,11 @@
 package com.github.alexnijjar.ad_astra.client.renderer.entity.vehicles;
 
 import com.github.alexnijjar.ad_astra.entities.vehicles.VehicleEntity;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.ModelPart;
-import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;

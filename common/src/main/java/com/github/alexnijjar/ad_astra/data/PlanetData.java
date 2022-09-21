@@ -36,7 +36,7 @@ public class PlanetData {
 				for (Identifier id : manager.findResources("planet_data/planets", path -> path.getPath().endsWith(".json")).keySet()) {
 					try {
 						for (Resource resource : manager.getAllResources(id)) {
-							InputStreamReader reader = new InputStreamReader(resource.getInputStream());
+							InputStreamReader reader = new InputStreamReader(resource.open());
 							JsonObject jsonObject = JsonHelper.deserialize(GSON, reader, JsonObject.class);
 
 							if (jsonObject != null) {

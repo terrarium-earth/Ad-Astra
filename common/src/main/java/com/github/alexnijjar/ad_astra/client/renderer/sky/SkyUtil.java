@@ -9,20 +9,21 @@ import com.github.alexnijjar.ad_astra.util.ColourHolder;
 import com.github.alexnijjar.ad_astra.world.WorldSeed;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.BufferRenderer;
+import com.mojang.blaze3d.vertex.VertexBuffer;
+import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.blaze3d.vertex.VertexFormats;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gl.VertexBuffer;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.BackgroundRenderer;
-import net.minecraft.client.render.BufferBuilder;
-import net.minecraft.client.render.BufferRenderer;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.CameraSubmersionType;
 import net.minecraft.client.render.GameRenderer;
-import net.minecraft.client.render.VertexFormat;
-import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.effect.StatusEffects;
@@ -50,16 +51,16 @@ public class SkyUtil {
 		float f = (float) vec3d.getX();
 		float g = (float) vec3d.getY();
 		float h = (float) vec3d.getZ();
-		BackgroundRenderer.setFogBlack();
+		BackgroundRenderer.setShaderFogColor();
 		RenderSystem.depthMask(false);
 
 		RenderSystem.setShaderColor(f, g, h, 1.0f);
-		((WorldRendererAccessor) context.worldRenderer()).getLightSkyBuffer().draw(context.matrixStack().peek().getPositionMatrix(), context.projectionMatrix(), RenderSystem.getShader());
+		((WorldRendererAccessor) context.worldRenderer()).getLightSkyBuffer().setShader(context.matrixStack().peek().getModel(), context.projectionMatrix(), RenderSystem.getShader());
 
 		RenderSystem.enableBlend();
 		RenderSystem.defaultBlendFunc();
 		renderColouring(colourType, bufferBuilder, matrices, world, tickDelta, context.world().getSkyAngle(tickDelta), sunsetAngle);
-		RenderSystem.blendFuncSeparate(GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE, GlStateManager.SrcFactor.ONE, GlStateManager.DstFactor.ZERO);
+		RenderSystem.blendFuncSeparate(GlStateManager.class_4535.SRC_ALPHA, GlStateManager.class_4534.ONE, GlStateManager.class_4535.ONE, GlStateManager.class_4534.ZERO);
 		RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
 		RenderSystem.enableTexture();
 	}
@@ -73,7 +74,7 @@ public class SkyUtil {
 
 		RenderSystem.setShaderColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-		if (world.getDimensionEffects().isAlternateSkyColor()) {
+		if (world.getSkyProperties().isAlternateSkyColor()) {
 			RenderSystem.setShaderColor(f * 0.2f + 0.04f, g * 0.2f + 0.04f, h * 0.6f + 0.1f, 1.0f);
 		} else {
 			RenderSystem.setShaderColor(f, g, h, 1.0f);
@@ -121,13 +122,13 @@ public class SkyUtil {
 			RenderSystem.disableBlend();
 		}
 
-		Matrix4f positionMatrix = context.matrixStack().peek().getPositionMatrix();
+		Matrix4f positionMatrix = context.matrixStack().peek().getModel();
 		RenderSystem.setShaderTexture(0, texture);
 		bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR_TEXTURE);
-		bufferBuilder.vertex(positionMatrix, -scale, 100.0f, -scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).texture(1.0f, 0.0f).next();
-		bufferBuilder.vertex(positionMatrix, scale, 100.0f, -scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).texture(0.0f, 0.0f).next();
-		bufferBuilder.vertex(positionMatrix, scale, 100.0f, scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).texture(0.0f, 1.0f).next();
-		bufferBuilder.vertex(positionMatrix, -scale, 100.0f, scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).texture(1.0f, 1.0f).next();
+		bufferBuilder.vertex(positionMatrix, -scale, 100.0f, -scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).uv(1.0f, 0.0f).next();
+		bufferBuilder.vertex(positionMatrix, scale, 100.0f, -scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).uv(0.0f, 0.0f).next();
+		bufferBuilder.vertex(positionMatrix, scale, 100.0f, scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).uv(0.0f, 1.0f).next();
+		bufferBuilder.vertex(positionMatrix, -scale, 100.0f, scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).uv(1.0f, 1.0f).next();
 		BufferRenderer.drawWithShader(bufferBuilder.end());
 
 		endRendering(context.matrixStack());
@@ -144,7 +145,7 @@ public class SkyUtil {
 		}
 
 		starsBuffer = new VertexBuffer();
-		BufferBuilder.BuiltBuffer renderedBuffer = SkyUtil.renderStars(bufferBuilder, stars, starsRenderer.colouredStars());
+		BufferBuilder.RenderedBuffer renderedBuffer = SkyUtil.renderStars(bufferBuilder, stars, starsRenderer.colouredStars());
 		starsBuffer.bind();
 		starsBuffer.upload(renderedBuffer);
 		VertexBuffer.unbind();
@@ -158,14 +159,14 @@ public class SkyUtil {
 
         BackgroundRenderer.clearFog();
         starsBuffer.bind();
-        starsBuffer.draw(context.matrixStack().peek().getPositionMatrix(), RenderSystem.getProjectionMatrix(), GameRenderer.getPositionColorShader());
+        starsBuffer.setShader(context.matrixStack().peek().getModel(), RenderSystem.getProjectionMatrix(), GameRenderer.getPositionColorShader());
         VertexBuffer.unbind();
 
         context.matrixStack().pop();
         return starsBuffer;
     }
 
-    private static BufferBuilder.BuiltBuffer renderStars(BufferBuilder buffer, int stars, boolean colouredStars) {
+    private static BufferBuilder.RenderedBuffer renderStars(BufferBuilder buffer, int stars, boolean colouredStars) {
 		RenderSystem.setShader(GameRenderer::getPositionColorShader);
 		Random random = new Random(WorldSeed.getSeed());
 		buffer.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR);
@@ -238,7 +239,7 @@ public class SkyUtil {
     public static void renderColouring(SkyRenderer.SunsetColour type, BufferBuilder bufferBuilder, MatrixStack matrices, ClientWorld world, float tickDelta, float skyAngle, int sunsetAngle) {
 
 		float[] fogColours = switch (type) {
-		case VANILLA -> world.getDimensionEffects().getFogColorOverride(world.getSkyAngle(tickDelta), tickDelta);
+		case VANILLA -> world.getSkyProperties().getFogColorOverride(world.getSkyAngle(tickDelta), tickDelta);
 		case MARS -> ModSky.getMarsColour(skyAngle);
 		};
 		if (fogColours != null) {
@@ -251,7 +252,7 @@ public class SkyUtil {
 			matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(sine));
 			matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(90.0f));
 
-			Matrix4f matrix4f = matrices.peek().getPositionMatrix();
+			Matrix4f matrix4f = matrices.peek().getModel();
 			bufferBuilder.begin(VertexFormat.DrawMode.TRIANGLE_FAN, VertexFormats.POSITION_COLOR);
 			bufferBuilder.vertex(matrix4f, 0.0f, 100.0f, 0.0f).color(fogColours[0], fogColours[1], fogColours[2], fogColours[3]).next();
 
@@ -261,7 +262,7 @@ public class SkyUtil {
 				bufferBuilder.vertex(matrix4f, MathHelper.sin(o) * 120.0f, cosine * 120.0f, -cosine * 40.0f * fogColours[3]).color(fogColours[0], fogColours[1], fogColours[2], 0.0f).next();
 			}
 
-			BufferRenderer.drawWithoutShader(bufferBuilder.end());
+			BufferRenderer.draw(bufferBuilder.end());
 			matrices.pop();
 		}
 	}

@@ -49,7 +49,6 @@ public class AdAstra {
 		// Registry
 		ModFluids.register();
 		ModItems.register();
-		ModArmour.register();
 		ModBlockEntities.register();
 		ModRecipes.register();
 		ModEntityTypes.register();

@@ -1,20 +1,21 @@
 package com.github.alexnijjar.ad_astra.commands;
 
+import static net.minecraft.server.command.CommandManager.argument;
+
+import java.util.Collection;
+import java.util.List;
+
 import com.github.alexnijjar.ad_astra.screen.PlanetSelectionScreenHandlerFactory;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
-
-import java.util.Collection;
-import java.util.List;
-
-import static net.minecraft.server.command.CommandManager.argument;
 
 // command: /planetgui @e 4
 public class PlanetGuiCommand {
@@ -25,7 +26,7 @@ public class PlanetGuiCommand {
 	}
 
 	private static int executeSimple(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
-		return execute(List.of(context.getSource().getPlayerOrThrow()), 4);
+		return execute(List.of(context.getSource().getPlayer()), 4);
 	}
 
 	private static int executePartial(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {

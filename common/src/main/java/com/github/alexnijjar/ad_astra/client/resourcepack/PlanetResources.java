@@ -42,7 +42,7 @@ public class PlanetResources {
 				for (Identifier id : manager.findResources("planet_resources/sky_renderers", path -> path.getPath().endsWith(".json")).keySet()) {
 					try {
 						for (Resource resource : manager.getAllResources(id)) {
-							InputStreamReader reader = new InputStreamReader(resource.getInputStream());
+							InputStreamReader reader = new InputStreamReader(resource.open());
 							JsonObject jsonObject = JsonHelper.deserialize(GSON, reader, JsonObject.class);
 
 							if (jsonObject != null) {
@@ -59,7 +59,7 @@ public class PlanetResources {
 				for (Identifier id : manager.findResources("planet_resources/solar_systems", path -> path.getPath().endsWith(".json")).keySet()) {
 					try {
 						for (Resource resource : manager.getAllResources(id)) {
-							InputStreamReader reader = new InputStreamReader(resource.getInputStream());
+							InputStreamReader reader = new InputStreamReader(resource.open());
 							JsonObject jsonObject = JsonHelper.deserialize(GSON, reader, JsonObject.class);
 
 							if (jsonObject != null) {
@@ -75,7 +75,7 @@ public class PlanetResources {
 				for (Identifier id : manager.findResources("planet_resources/planet_rings", path -> path.getPath().endsWith(".json")).keySet()) {
 					try {
 						for (Resource resource : manager.getAllResources(id)) {
-							InputStreamReader reader = new InputStreamReader(resource.getInputStream());
+							InputStreamReader reader = new InputStreamReader(resource.open());
 							JsonObject jsonObject = JsonHelper.deserialize(GSON, reader, JsonObject.class);
 
 							if (jsonObject != null) {
@@ -91,7 +91,7 @@ public class PlanetResources {
 				for (Identifier id : manager.findResources("planet_resources/galaxy", path -> path.getPath().endsWith(".json")).keySet()) {
 					try {
 						for (Resource resource : manager.getAllResources(id)) {
-							InputStreamReader reader = new InputStreamReader(resource.getInputStream());
+							InputStreamReader reader = new InputStreamReader(resource.open());
 							JsonObject jsonObject = JsonHelper.deserialize(GSON, reader, JsonObject.class);
 
 							if (jsonObject != null) {

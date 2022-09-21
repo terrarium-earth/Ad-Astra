@@ -1,13 +1,13 @@
 package com.github.alexnijjar.ad_astra.mixin.client;
 
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.VertexBuffer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.gen.Invoker;
-import net.minecraft.client.gl.VertexBuffer;
+
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.VertexBuffer;
+
 import net.minecraft.client.option.CloudRenderMode;
-import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.util.math.Vec3d;
 
@@ -72,5 +72,5 @@ public interface WorldRendererAccessor {
 	float[] getRainSizeZ();
 
 	@Invoker("renderClouds")
-	public BufferBuilder.BuiltBuffer invokeRenderClouds(BufferBuilder builder, double x, double y, double z, Vec3d color);
+	public BufferBuilder.RenderedBuffer invokeRenderClouds(BufferBuilder builder, double x, double y, double z, Vec3d color);
 }

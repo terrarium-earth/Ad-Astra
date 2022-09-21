@@ -2,14 +2,14 @@ package com.github.alexnijjar.ad_astra.client.renderer.sky.dimension_effects;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.render.DimensionEffects;
+import net.minecraft.client.render.SkyProperties;
 import net.minecraft.util.math.Vec3d;
 
 @Environment(EnvType.CLIENT)
-public class ModDimensionEffects extends DimensionEffects {
+public class ModDimensionEffects extends SkyProperties {
 
 	public ModDimensionEffects() {
-		super(192, true, DimensionEffects.SkyType.NORMAL, false, false);
+		super(192, true, SkyProperties.SkyType.NORMAL, false, false);
 	}
 
 	@Override

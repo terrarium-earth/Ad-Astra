@@ -27,7 +27,7 @@ import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.random.Random;
+import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.WorldEvents;
@@ -65,11 +65,11 @@ public abstract class WorldRendererMixin {
 	public void adastra_tickRainSplashing(Camera camera, CallbackInfo info) {
 		float f = this.client.world.getRainGradient(1.0F) / (MinecraftClient.isFancyGraphicsOrBetter() ? 1.0F : 2.0F);
 		if (!(f <= 0.0F)) {
-			Random randomGenerator = Random.create((long) this.ticks * 312987231L);
+			RandomGenerator randomGenerator = RandomGenerator.createLegacy((long) this.ticks * 312987231L);
 			WorldView worldView = this.client.world;
 			BlockPos blockPos = new BlockPos(camera.getPos());
 			BlockPos blockPos2 = null;
-			int i = (int) (100.0F * f * f) / (this.client.options.getParticles().getValue() == ParticlesMode.DECREASED ? 2 : 1);
+			int i = (int) (100.0F * f * f) / (this.client.options.getParticles().get() == ParticlesMode.DECREASED ? 2 : 1);
 
 			for (int j = 0; j < i; ++j) {
 				int k = randomGenerator.nextInt(21) - 10;
@@ -78,7 +78,7 @@ public abstract class WorldRendererMixin {
 				Biome biome = worldView.getBiome(blockPos3).value();
 				if (blockPos3.getY() > worldView.getBottomY() && blockPos3.getY() <= blockPos.getY() + 10 && blockPos3.getY() >= blockPos.getY() - 10 && biome.getPrecipitation() == Biome.Precipitation.RAIN && biome.doesNotSnow(blockPos3)) {
 					blockPos2 = blockPos3.down();
-					if (this.client.options.getParticles().getValue() == ParticlesMode.MINIMAL) {
+					if (this.client.options.getParticles().get() == ParticlesMode.MINIMAL) {
 						break;
 					}
 

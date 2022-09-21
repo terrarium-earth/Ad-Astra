@@ -16,12 +16,12 @@ import net.minecraft.entity.decoration.painting.PaintingVariant;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.util.Holder;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 
@@ -39,7 +39,7 @@ public class SpacePaintingEntity extends PaintingEntity {
 	public static Optional<SpacePaintingEntity> placeSpacePainting(World world, BlockPos pos, Direction facing) {
 		SpacePaintingEntity paintingEntity = new SpacePaintingEntity(world, pos);
 
-		List<RegistryEntry<PaintingVariant>> spacePaintings = getSpacePaintings();
+		List<Holder<PaintingVariant>> spacePaintings = getSpacePaintings();
 
 		if (spacePaintings.isEmpty()) {
 			return Optional.empty();
@@ -57,7 +57,7 @@ public class SpacePaintingEntity extends PaintingEntity {
 
 		int i = spacePaintings.stream().mapToInt(SpacePaintingEntity::getSize).max().orElse(0);
 		spacePaintings.removeIf(variant -> SpacePaintingEntity.getSize(variant) < i);
-		Optional<RegistryEntry<PaintingVariant>> optional = Util.getRandomOrEmpty(spacePaintings, paintingEntity.random);
+		Optional<Holder<PaintingVariant>> optional = Util.getRandomOrEmpty(spacePaintings, paintingEntity.random);
 
 		if (optional.isEmpty()) {
 			return Optional.empty();
@@ -68,15 +68,15 @@ public class SpacePaintingEntity extends PaintingEntity {
 		return Optional.of(paintingEntity);
 	}
 
-	protected static int getSize(RegistryEntry<PaintingVariant> variant) {
+	protected static int getSize(Holder<PaintingVariant> variant) {
 		return variant.value().getWidth() * variant.value().getHeight();
 	}
 
-	public static List<RegistryEntry<PaintingVariant>> getSpacePaintings() {
-		List<RegistryEntry<PaintingVariant>> paintings = new ArrayList<>();
+	public static List<Holder<PaintingVariant>> getSpacePaintings() {
+		List<Holder<PaintingVariant>> paintings = new ArrayList<>();
 		Registry.PAINTING_VARIANT.forEach(painting -> {
 			if (Registry.PAINTING_VARIANT.getId(painting).getNamespace().equals(AdAstra.MOD_ID)) {
-				paintings.add(RegistryEntry.of(painting));
+				paintings.add(Holder.createDirect(painting));
 			}
 		});
 
@@ -88,7 +88,7 @@ public class SpacePaintingEntity extends PaintingEntity {
 
 		super.readCustomDataFromNbt(nbt);
 		RegistryKey<PaintingVariant> registryKey = RegistryKey.of(Registry.PAINTING_VARIANT_KEY, new Identifier(nbt.getString("variant")));
-		((PaintingEntityInvoker) this).adastra_invokeSetVariant(Registry.PAINTING_VARIANT.getEntry(registryKey).get());
+		((PaintingEntityInvoker) this).adastra_invokeSetVariant(Registry.PAINTING_VARIANT.getHolder(registryKey).get());
 		this.facing = Direction.fromHorizontal(nbt.getByte("facing"));
 		this.setFacing(this.facing);
 	}
@@ -102,11 +102,11 @@ public class SpacePaintingEntity extends PaintingEntity {
 
 	@Override
 	public ItemEntity dropItem(ItemConvertible item) {
-		return super.dropItem(ModItems.SPACE_PAINTING);
+		return super.dropItem(ModItems.SPACE_PAINTING.get());
 	}
 
 	@Override
 	public ItemStack getPickBlockStack() {
-		return new ItemStack(ModItems.SPACE_PAINTING);
+		return new ItemStack(ModItems.SPACE_PAINTING.get());
 	}
 }

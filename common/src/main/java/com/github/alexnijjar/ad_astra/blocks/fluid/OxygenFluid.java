@@ -12,7 +12,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
 
-// This fluid is not mean to be placable.
+// This fluid is not meant to be placable
 public abstract class OxygenFluid extends ModFluid {
 	@Override
 	public Fluid getFlowing() {
@@ -41,7 +41,7 @@ public abstract class OxygenFluid extends ModFluid {
 		}
 
 		@Override
-		public boolean isStill(FluidState fluidState) {
+		public boolean isSource(FluidState fluidState) {
 			return true;
 		}
 	}

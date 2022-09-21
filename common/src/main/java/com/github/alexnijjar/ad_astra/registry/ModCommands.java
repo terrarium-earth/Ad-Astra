@@ -8,7 +8,7 @@ public class ModCommands {
 
     public static void register() {
 
-        CommandRegistrationEvent.EVENT.register((dispatcher, registry, environment) -> {
+        CommandRegistrationEvent.EVENT.register((dispatcher, selection) -> {
             PlanetGuiCommand.register(dispatcher);
         });
     }

@@ -43,7 +43,7 @@ import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
 import net.minecraft.block.MushroomBlock;
 import net.minecraft.block.MushroomPlantBlock;
-import net.minecraft.block.OreBlock;
+import net.minecraft.block.ExperienceDroppingBlock;
 import net.minecraft.block.PillarBlock;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.SignBlock;
@@ -217,8 +217,7 @@ public class ModBlocks {
 	public static final Supplier<Block> AERONOS_LADDER = register("aeronos_ladder", new LadderBlock(AbstractBlock.Settings.copy(Blocks.LADDER).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6)));
 
 	// Strophar
-	public static final Supplier<Block> STROPHAR_MUSHROOM = register("strophar_mushroom",
-			new MushroomPlantBlock(AbstractBlock.Settings.copy(Blocks.RED_MUSHROOM).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6), () -> TreeConfiguredFeatures.HUGE_RED_MUSHROOM));
+	public static final Supplier<Block> STROPHAR_MUSHROOM = register("strophar_mushroom", new MushroomPlantBlock(AbstractBlock.Settings.copy(Blocks.RED_MUSHROOM).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6), () -> TreeConfiguredFeatures.HUGE_RED_MUSHROOM));
 	public static final Supplier<Block> STROPHAR_CAP = register("strophar_cap", new MushroomBlock(AbstractBlock.Settings.copy(Blocks.RED_MUSHROOM_BLOCK).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6)));
 	public static final Supplier<Block> STROPHAR_DOOR = register("strophar_door", new DoorBlock(AbstractBlock.Settings.copy(Blocks.CRIMSON_DOOR).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6)), true);
 	public static final Supplier<Block> STROPHAR_TRAPDOOR = register("strophar_trapdoor", new TrapdoorBlock(AbstractBlock.Settings.copy(Blocks.CRIMSON_TRAPDOOR).sounds(BlockSoundGroup.NETHER_STEM).luminance(state -> 6)));
@@ -277,8 +276,7 @@ public class ModBlocks {
 	// Venus stones
 	public static final Supplier<Block> VENUS_SAND = register("venus_sand", new FallingBlock(AbstractBlock.Settings.of(Material.AGGREGATE, MapColor.TERRACOTTA_ORANGE).sounds(BlockSoundGroup.SAND).strength(0.5f, 0.5f)));
 	public static final Supplier<Block> VENUS_STONE = register("venus_stone", new Block(AbstractBlock.Settings.of(Material.STONE, MapColor.TERRACOTTA_ORANGE).sounds(BlockSoundGroup.STONE).strength(1.5f, 1.0f).requiresTool()), true);
-	public static final Supplier<Block> VENUS_STONE_STAIRS = register("venus_stone_stairs",
-			new StairsBlock(VENUS_STONE.get().getDefaultState(), AbstractBlock.Settings.of(Material.STONE, MapColor.TERRACOTTA_ORANGE).sounds(BlockSoundGroup.STONE).strength(1.5f, 1.0f).requiresTool()));
+	public static final Supplier<Block> VENUS_STONE_STAIRS = register("venus_stone_stairs", new StairsBlock(VENUS_STONE.get().getDefaultState(), AbstractBlock.Settings.of(Material.STONE, MapColor.TERRACOTTA_ORANGE).sounds(BlockSoundGroup.STONE).strength(1.5f, 1.0f).requiresTool()));
 	public static final Supplier<Block> VENUS_STONE_SLAB = register("venus_stone_slab", new SlabBlock(AbstractBlock.Settings.of(Material.STONE, MapColor.TERRACOTTA_ORANGE).sounds(BlockSoundGroup.STONE).strength(1.5f, 1.0f).requiresTool()));
 	public static final Supplier<Block> VENUS_COBBLESTONE = register("venus_cobblestone", new Block(AbstractBlock.Settings.copy(Blocks.COBBLESTONE)));
 	public static final Supplier<Block> VENUS_COBBLESTONE_STAIRS = register("venus_cobblestone_stairs", new StairsBlock(VENUS_COBBLESTONE.get().getDefaultState(), AbstractBlock.Settings.copy(Blocks.COBBLESTONE)));
@@ -306,8 +304,7 @@ public class ModBlocks {
 
 	// Glacio stones
 	public static final Supplier<Block> GLACIO_STONE = register("glacio_stone", new Block(AbstractBlock.Settings.of(Material.STONE, MapColor.TERRACOTTA_ORANGE).sounds(BlockSoundGroup.STONE).strength(1.5f, 1.0f).requiresTool()), true);
-	public static final Supplier<Block> GLACIO_STONE_STAIRS = register("glacio_stone_stairs",
-			new StairsBlock(GLACIO_STONE.get().getDefaultState(), AbstractBlock.Settings.of(Material.STONE, MapColor.TERRACOTTA_ORANGE).sounds(BlockSoundGroup.STONE).strength(1.5f, 1.0f).requiresTool()));
+	public static final Supplier<Block> GLACIO_STONE_STAIRS = register("glacio_stone_stairs", new StairsBlock(GLACIO_STONE.get().getDefaultState(), AbstractBlock.Settings.of(Material.STONE, MapColor.TERRACOTTA_ORANGE).sounds(BlockSoundGroup.STONE).strength(1.5f, 1.0f).requiresTool()));
 	public static final Supplier<Block> GLACIO_STONE_SLAB = register("glacio_stone_slab", new SlabBlock(AbstractBlock.Settings.of(Material.STONE, MapColor.TERRACOTTA_ORANGE).sounds(BlockSoundGroup.STONE).strength(1.5f, 1.0f).requiresTool()));
 	public static final Supplier<Block> GLACIO_COBBLESTONE = register("glacio_cobblestone", new Block(AbstractBlock.Settings.copy(Blocks.COBBLESTONE)));
 	public static final Supplier<Block> GLACIO_COBBLESTONE_STAIRS = register("glacio_cobblestone_stairs", new StairsBlock(GLACIO_COBBLESTONE.get().getDefaultState(), AbstractBlock.Settings.copy(Blocks.COBBLESTONE)));
@@ -361,28 +358,28 @@ public class ModBlocks {
 	public static final Supplier<Block> GLACIAN_FUR = register("glacian_fur", new Block(AbstractBlock.Settings.copy(Blocks.WHITE_WOOL)));
 
 	// Ores
-	public static final Supplier<Block> MOON_CHEESE_ORE = register("moon_cheese_ore", new OreBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE), UniformIntProvider.create(0, 2)), true);
-	public static final Supplier<Block> MOON_DESH_ORE = register("moon_desh_ore", new OreBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE)), true);
-	public static final Supplier<Block> MOON_IRON_ORE = register("moon_iron_ore", new OreBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE)), true);
-	public static final Supplier<Block> MOON_ICE_SHARD_ORE = register("moon_ice_shard_ore", new OreBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE), UniformIntProvider.create(2, 5)), true);
-	public static final Supplier<Block> MARS_IRON_ORE = register("mars_iron_ore", new OreBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE)), true);
-	public static final Supplier<Block> MARS_DIAMOND_ORE = register("mars_diamond_ore", new OreBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE), UniformIntProvider.create(3, 7)), true);
-	public static final Supplier<Block> MARS_OSTRUM_ORE = register("mars_ostrum_ore", new OreBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE)), true);
-	public static final Supplier<Block> MARS_ICE_SHARD_ORE = register("mars_ice_shard_ore", new OreBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE), UniformIntProvider.create(2, 5)), true);
-	public static final Supplier<Block> MERCURY_IRON_ORE = register("mercury_iron_ore", new OreBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE)), true);
-	public static final Supplier<Block> VENUS_COAL_ORE = register("venus_coal_ore", new OreBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE), UniformIntProvider.create(0, 2)), true);
-	public static final Supplier<Block> VENUS_GOLD_ORE = register("venus_gold_ore", new OreBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE)), true);
-	public static final Supplier<Block> VENUS_DIAMOND_ORE = register("venus_diamond_ore", new OreBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE), UniformIntProvider.create(3, 7)), true);
-	public static final Supplier<Block> VENUS_CALORITE_ORE = register("venus_calorite_ore", new OreBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE)), true);
-	public static final Supplier<Block> GLACIO_ICE_SHARD_ORE = register("glacio_ice_shard_ore", new OreBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE), UniformIntProvider.create(2, 5)), true);
-	public static final Supplier<Block> GLACIO_COAL_ORE = register("glacio_coal_ore", new OreBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE), UniformIntProvider.create(0, 2)), true);
-	public static final Supplier<Block> GLACIO_COPPER_ORE = register("glacio_copper_ore", new OreBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE)), true);
-	public static final Supplier<Block> GLACIO_IRON_ORE = register("glacio_iron_ore", new OreBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE)), true);
-	public static final Supplier<Block> GLACIO_LAPIS_ORE = register("glacio_lapis_ore", new OreBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE), UniformIntProvider.create(2, 5)), true);
-	public static final Supplier<Block> DEEPSLATE_ICE_SHARD_ORE = register("deepslate_ice_shard_ore", new OreBlock(AbstractBlock.Settings.copy(Blocks.DEEPSLATE_IRON_ORE), UniformIntProvider.create(3, 6)), true);
-	public static final Supplier<Block> DEEPSLATE_DESH_ORE = register("deepslate_desh_ore", new OreBlock(AbstractBlock.Settings.copy(Blocks.DEEPSLATE_IRON_ORE)), true);
-	public static final Supplier<Block> DEEPSLATE_OSTRUM_ORE = register("deepslate_ostrum_ore", new OreBlock(AbstractBlock.Settings.copy(Blocks.DEEPSLATE_IRON_ORE)), true);
-	public static final Supplier<Block> DEEPSLATE_CALORITE_ORE = register("deepslate_calorite_ore", new OreBlock(AbstractBlock.Settings.copy(Blocks.DEEPSLATE_IRON_ORE)), true);
+	public static final Supplier<Block> MOON_CHEESE_ORE = register("moon_cheese_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE), UniformIntProvider.create(0, 2)), true);
+	public static final Supplier<Block> MOON_DESH_ORE = register("moon_desh_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE)), true);
+	public static final Supplier<Block> MOON_IRON_ORE = register("moon_iron_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE)), true);
+	public static final Supplier<Block> MOON_ICE_SHARD_ORE = register("moon_ice_shard_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE), UniformIntProvider.create(2, 5)), true);
+	public static final Supplier<Block> MARS_IRON_ORE = register("mars_iron_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE)), true);
+	public static final Supplier<Block> MARS_DIAMOND_ORE = register("mars_diamond_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE), UniformIntProvider.create(3, 7)), true);
+	public static final Supplier<Block> MARS_OSTRUM_ORE = register("mars_ostrum_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE)), true);
+	public static final Supplier<Block> MARS_ICE_SHARD_ORE = register("mars_ice_shard_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE), UniformIntProvider.create(2, 5)), true);
+	public static final Supplier<Block> MERCURY_IRON_ORE = register("mercury_iron_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE)), true);
+	public static final Supplier<Block> VENUS_COAL_ORE = register("venus_coal_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE), UniformIntProvider.create(0, 2)), true);
+	public static final Supplier<Block> VENUS_GOLD_ORE = register("venus_gold_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE)), true);
+	public static final Supplier<Block> VENUS_DIAMOND_ORE = register("venus_diamond_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE), UniformIntProvider.create(3, 7)), true);
+	public static final Supplier<Block> VENUS_CALORITE_ORE = register("venus_calorite_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE)), true);
+	public static final Supplier<Block> GLACIO_ICE_SHARD_ORE = register("glacio_ice_shard_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE), UniformIntProvider.create(2, 5)), true);
+	public static final Supplier<Block> GLACIO_COAL_ORE = register("glacio_coal_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE), UniformIntProvider.create(0, 2)), true);
+	public static final Supplier<Block> GLACIO_COPPER_ORE = register("glacio_copper_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE)), true);
+	public static final Supplier<Block> GLACIO_IRON_ORE = register("glacio_iron_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE)), true);
+	public static final Supplier<Block> GLACIO_LAPIS_ORE = register("glacio_lapis_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.IRON_ORE), UniformIntProvider.create(2, 5)), true);
+	public static final Supplier<Block> DEEPSLATE_ICE_SHARD_ORE = register("deepslate_ice_shard_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.DEEPSLATE_IRON_ORE), UniformIntProvider.create(3, 6)), true);
+	public static final Supplier<Block> DEEPSLATE_DESH_ORE = register("deepslate_desh_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.DEEPSLATE_IRON_ORE)), true);
+	public static final Supplier<Block> DEEPSLATE_OSTRUM_ORE = register("deepslate_ostrum_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.DEEPSLATE_IRON_ORE)), true);
+	public static final Supplier<Block> DEEPSLATE_CALORITE_ORE = register("deepslate_calorite_ore", new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.DEEPSLATE_IRON_ORE)), true);
 
 	static Supplier<Block> register(String id, Block block) {
 		return BLOCKS.register(id, () -> block);

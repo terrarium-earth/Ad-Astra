@@ -4,10 +4,10 @@ import com.github.alexnijjar.ad_astra.config.AdAstraConfig.VehiclesConfig.Lander
 import com.github.alexnijjar.ad_astra.config.AdAstraConfig.VehiclesConfig.RocketConfig;
 import com.github.alexnijjar.ad_astra.config.AdAstraConfig.VehiclesConfig.RoverConfig;
 
+import earth.terrarium.botarium.api.fluid.FluidHooks;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 
 @Config(name = "ad_astra")
 @Config.Gui.Background("ad_astra:textures/block/machine_down.png")
@@ -58,7 +58,7 @@ public class AdAstraConfig implements ConfigData {
         public boolean doOxygen = true;
         @ConfigEntry.Gui.Tooltip(count = 2)
         public boolean doSpaceMuffler = true;
-        public long oxygenTankSize = FluidConstants.BUCKET / 2;
+        public long oxygenTankSize = FluidHooks.BUCKET / 2;
         public int hammerDurability = 64;
         public float orbitGravity = 3.26f;
         public boolean giveAstroduxAtSpawn = false;
@@ -69,15 +69,15 @@ public class AdAstraConfig implements ConfigData {
     }
 
     public static class SpaceSuitConfig {
-        public long spaceSuitTankSize = FluidConstants.BUCKET;
-        public long netheriteSpaceSuitTankSize = FluidConstants.BUCKET * 2;
+        public long spaceSuitTankSize = FluidHooks.BUCKET;
+        public long netheriteSpaceSuitTankSize = FluidHooks.BUCKET * 2;
         public boolean netheriteSpaceSuitHasFireResistance = true;
         @ConfigEntry.Gui.Tooltip(count = 1)
         public double jetSuitSpeed = 0.8;
         @ConfigEntry.Gui.Tooltip(count = 1)
         public double jetSuitUpwardsSpeed = 0.5;
         public long jetSuitEnergyPerTick = 60;
-        public long jetSuitTankSize = FluidConstants.BUCKET * 4;
+        public long jetSuitTankSize = FluidHooks.BUCKET * 4;
         public long jetSuitMaxEnergy = 1000000L;
         public boolean spawnJetSuitParticles = true;
         public boolean enableJetSuitFlight = true;
@@ -105,13 +105,13 @@ public class AdAstraConfig implements ConfigData {
             @ConfigEntry.Gui.Tooltip(count = 1)
             public boolean entitiesBurnUnderRocket = true;
             public int tankBuckets = 3;
-            public long fuelLaunchCost = FluidConstants.BUCKET * 3;
-            public long efficientFuelLaunchCost = FluidConstants.BUCKET;
+            public long fuelLaunchCost = FluidHooks.BUCKET * 3;
+            public long efficientFuelLaunchCost = FluidHooks.BUCKET;
         }
 
         public static class RoverConfig {
             public boolean explodeRoverInLava = true;
-            public long fuelPerTick = FluidConstants.BUCKET / 3000;
+            public long fuelPerTick = FluidHooks.BUCKET / 3000;
             public float turnSpeed = 3.0f;
             public float maxTurnSpeed = 6.0f;
             public float deceleration = 0.9f;
@@ -174,7 +174,7 @@ public class AdAstraConfig implements ConfigData {
         public long maxEnergy = 9000L;
         public long energyPerTick = 10L;
         public int tankBuckets = 6;
-        public long transferPerTick = FluidConstants.BLOCK / 100;
+        public long transferPerTick = FluidHooks.BLOCK / 100;
         public boolean deleteWaterBelowWaterPump = true;
     }
 
