@@ -30,7 +30,7 @@ public class StarCrawlerEntity extends HostileEntity {
 		this.goalSelector.add(2, new WanderAroundGoal(this, 0.6));
 		this.goalSelector.add(3, new RevengeGoal(this));
 		this.goalSelector.add(4, new LookAroundGoal(this));
-		this.targetSelector.add(5, new ActiveTargetGoal<>(this, PlayerEntity.class, false));
+		this.targetSelector.add(5, new TargetGoal<>(this, PlayerEntity.class, false));
 	}
 
 	@Override

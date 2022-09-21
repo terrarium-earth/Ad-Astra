@@ -290,7 +290,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 	}
 
 	@Override
-	public boolean shouldPause() {
+	public boolean isPauseScreen() {
 		return true;
 	}
 
@@ -513,10 +513,10 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 
 	// Do not close unless in creative mode
 	@Override
-	public void close() {
+	public void closeScreen() {
 		MinecraftClient client = MinecraftClient.getInstance();
 		if (client.player.isCreative() || client.player.isSpectator()) {
-			super.close();
+			super.closeScreen();
 		}
 	}
 

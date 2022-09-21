@@ -5,16 +5,17 @@ import java.util.Random;
 import com.github.alexnijjar.ad_astra.mixin.client.WorldRendererAccessor;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.Tessellator;
+import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.blaze3d.vertex.VertexFormats;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.GameRenderer;
-import net.minecraft.client.render.Tessellator;
-import net.minecraft.client.render.VertexFormat;
-import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
@@ -56,7 +57,7 @@ public class ModWeatherRenderer implements DimensionRenderingRegistry.WeatherRen
 			int j = MathHelper.floor(cameraPosY);
 			int k = MathHelper.floor(cameraPosZ);
 			Tessellator tessellator = Tessellator.getInstance();
-			BufferBuilder bufferBuilder = tessellator.getBuffer();
+			BufferBuilder bufferBuilder = tessellator.getBufferBuilder();
 			RenderSystem.disableCull();
 			RenderSystem.enableBlend();
 			RenderSystem.defaultBlendFunc();
@@ -114,10 +115,10 @@ public class ModWeatherRenderer implements DimensionRenderingRegistry.WeatherRen
 								ac = ((1.0f - ab * ab) * 0.5f + 0.5f) * h;
 								mutable.set(p, w, o);
 								int ad = WorldRenderer.getLightmapCoordinates(world, mutable);
-								bufferBuilder.vertex((double) p - cameraPosX - r + 0.5, (double) v - cameraPosY, (double) o - cameraPosZ - s + 0.5).texture(0.0f, (float) u * 0.25f + y).color(1.0f, 1.0f, 1.0f, ac).light(ad).next();
-								bufferBuilder.vertex((double) p - cameraPosX + r + 0.5, (double) v - cameraPosY, (double) o - cameraPosZ + s + 0.5).texture(1.0f, (float) u * 0.25f + y).color(1.0f, 1.0f, 1.0f, ac).light(ad).next();
-								bufferBuilder.vertex((double) p - cameraPosX + r + 0.5, (double) u - cameraPosY, (double) o - cameraPosZ + s + 0.5).texture(1.0f, (float) v * 0.25f + y).color(1.0f, 1.0f, 1.0f, ac).light(ad).next();
-								bufferBuilder.vertex((double) p - cameraPosX - r + 0.5, (double) u - cameraPosY, (double) o - cameraPosZ - s + 0.5).texture(0.0f, (float) v * 0.25f + y).color(1.0f, 1.0f, 1.0f, ac).light(ad).next();
+								bufferBuilder.vertex((double) p - cameraPosX - r + 0.5, (double) v - cameraPosY, (double) o - cameraPosZ - s + 0.5).uv(0.0f, (float) u * 0.25f + y).color(1.0f, 1.0f, 1.0f, ac).light(ad).next();
+								bufferBuilder.vertex((double) p - cameraPosX + r + 0.5, (double) v - cameraPosY, (double) o - cameraPosZ + s + 0.5).uv(1.0f, (float) u * 0.25f + y).color(1.0f, 1.0f, 1.0f, ac).light(ad).next();
+								bufferBuilder.vertex((double) p - cameraPosX + r + 0.5, (double) u - cameraPosY, (double) o - cameraPosZ + s + 0.5).uv(1.0f, (float) v * 0.25f + y).color(1.0f, 1.0f, 1.0f, ac).light(ad).next();
+								bufferBuilder.vertex((double) p - cameraPosX - r + 0.5, (double) u - cameraPosY, (double) o - cameraPosZ - s + 0.5).uv(0.0f, (float) v * 0.25f + y).color(1.0f, 1.0f, 1.0f, ac).light(ad).next();
 							}
 						}
 					}

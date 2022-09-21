@@ -11,7 +11,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
+import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.BasaltColumnsFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
@@ -75,11 +75,11 @@ public class InfernalSpireColumn extends Feature<BasaltColumnsFeatureConfig> {
 	}
 
 	@Override
-	public boolean generate(FeatureContext<BasaltColumnsFeatureConfig> context) {
+	public boolean place(FeatureContext<BasaltColumnsFeatureConfig> context) {
 
 		int seaLevel = context.getGenerator().getSeaLevel();
 		BlockPos blockpos = context.getOrigin();
-		Random random = context.getRandom();
+		RandomGenerator random = context.getRandom();
 		BasaltColumnsFeatureConfig config = context.getConfig();
 		if (!canPlaceAt(context.getWorld(), seaLevel, blockpos.mutableCopy())) {
 			return false;

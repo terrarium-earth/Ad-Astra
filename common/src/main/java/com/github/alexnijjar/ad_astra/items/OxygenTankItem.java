@@ -58,7 +58,7 @@ public class OxygenTankItem extends Item implements FluidContainingItem {
 		ItemStack tank = user.getStackInHand(hand);
 		if (!world.isClient) {
 			ItemStack chest = user.getEquippedStack(EquipmentSlot.CHEST);
-			if (chest.isOf(ModItems.SPACE_SUIT) || chest.isOf(ModItems.NETHERITE_SPACE_SUIT) || chest.isOf(ModItems.JET_SUIT)) {
+			if (chest.isOf(ModItems.SPACE_SUIT.get()) || chest.isOf(ModItems.NETHERITE_SPACE_SUIT.get()) || chest.isOf(ModItems.JET_SUIT.get())) {
 
 				PlayerInventoryStorage playerWrapper = PlayerInventoryStorage.of(user);
 				Storage<FluidVariant> from = ContainerItemContext.ofPlayerHand(user, hand).find(FluidStorage.ITEM);
@@ -74,7 +74,7 @@ public class OxygenTankItem extends Item implements FluidContainingItem {
 	}
 
 	public static ItemStack createOxygenatedTank() {
-		ItemStack oxygenTank = ModItems.OXYGEN_TANK.getDefaultStack();
+		ItemStack oxygenTank = ModItems.OXYGEN_TANK.get().getDefaultStack();
 		((OxygenTankItem) oxygenTank.getItem()).setAmount(oxygenTank, ((OxygenTankItem) oxygenTank.getItem()).getTankSize());
 		((OxygenTankItem) oxygenTank.getItem()).setFluid(oxygenTank, FluidVariant.of(ModFluids.OXYGEN_STILL));
 		return oxygenTank;

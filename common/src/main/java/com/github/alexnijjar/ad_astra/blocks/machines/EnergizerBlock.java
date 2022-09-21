@@ -1,7 +1,10 @@
 package com.github.alexnijjar.ad_astra.blocks.machines;
 
+import java.util.List;
+
 import com.github.alexnijjar.ad_astra.blocks.machines.entity.EnergizerBlockEntity;
 import com.github.alexnijjar.ad_astra.registry.ModItems;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -15,8 +18,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import java.util.List;
 
 public class EnergizerBlock extends AbstractMachineBlock {
 

@@ -6,7 +6,7 @@ import com.github.alexnijjar.ad_astra.entities.vehicles.RoverEntity;
 import com.github.alexnijjar.ad_astra.registry.ModEntityTypes;
 import com.github.alexnijjar.ad_astra.registry.ModFluids;
 
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidHooks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.fluid.Fluid;
@@ -81,6 +81,6 @@ public class RoverItem extends VehicleItem {
 
 	@Override
 	public long getTankSize() {
-		return 3 * FluidConstants.BUCKET;
+		return 3 * FluidHooks.BUCKET;
 	}
 }

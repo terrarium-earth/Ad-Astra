@@ -218,8 +218,8 @@ public class RocketEntity extends VehicleEntity {
 		if (this.world instanceof ServerWorld serverWorld) {
 			Vec3d pos = this.getPos();
 
-			ModUtils.spawnForcedParticles(serverWorld, ModParticleTypes.LARGE_FLAME, pos.getX(), pos.getY(), pos.getZ(), 20, 0.1, 0.1, 0.1, 0.001);
-			ModUtils.spawnForcedParticles(serverWorld, ModParticleTypes.LARGE_SMOKE, pos.getX(), pos.getY(), pos.getZ(), 10, 0.1, 0.1, 0.1, 0.001);
+			ModUtils.spawnForcedParticles(serverWorld, ModParticleTypes.LARGE_FLAME.get(), pos.getX(), pos.getY(), pos.getZ(), 20, 0.1, 0.1, 0.1, 0.001);
+			ModUtils.spawnForcedParticles(serverWorld, ModParticleTypes.LARGE_SMOKE.get(), pos.getX(), pos.getY(), pos.getZ(), 10, 0.1, 0.1, 0.1, 0.001);
 		}
 	}
 

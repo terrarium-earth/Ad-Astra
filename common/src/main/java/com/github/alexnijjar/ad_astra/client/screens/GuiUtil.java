@@ -6,6 +6,12 @@ import com.github.alexnijjar.ad_astra.blocks.machines.entity.AbstractMachineBloc
 import com.github.alexnijjar.ad_astra.util.FluidUtils;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.BufferRenderer;
+import com.mojang.blaze3d.vertex.Tessellator;
+import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.blaze3d.vertex.VertexFormats;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.transfer.v1.client.fluid.FluidVariantRendering;
@@ -14,12 +20,7 @@ import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.render.BufferBuilder;
-import net.minecraft.client.render.BufferRenderer;
 import net.minecraft.client.render.GameRenderer;
-import net.minecraft.client.render.Tessellator;
-import net.minecraft.client.render.VertexFormat;
-import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.fluid.Fluid;
@@ -223,18 +224,18 @@ public class GuiUtil {
 		}
 
 		private static void drawTexture(MatrixStack matrices, float x0, float x1, float y0, float y1, int z, int regionWidth, int regionHeight, float u, float v, int textureWidth, int textureHeight) {
-			FloatDrawableHelper.drawTexturedQuad(matrices.peek().getPositionMatrix(), x0, x1, y0, y1, z, (u + 0.0f) / (float) textureWidth, (u + (float) regionWidth) / (float) textureWidth, (v + 0.0f) / (float) textureHeight,
+			FloatDrawableHelper.drawTexturedQuad(matrices.peek().getModel(), x0, x1, y0, y1, z, (u + 0.0f) / (float) textureWidth, (u + (float) regionWidth) / (float) textureWidth, (v + 0.0f) / (float) textureHeight,
 					(v + (float) regionHeight) / (float) textureHeight);
 		}
 
 		private static void drawTexturedQuad(Matrix4f matrix, float x0, float x1, float y0, float y1, int z, float u0, float u1, float v0, float v1) {
 			RenderSystem.setShader(GameRenderer::getPositionTexShader);
-			BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
+			BufferBuilder bufferBuilder = Tessellator.getInstance().getBufferBuilder();
 			bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE);
-			bufferBuilder.vertex(matrix, x0, y1, z).texture(u0, v1).next();
-			bufferBuilder.vertex(matrix, x1, y1, z).texture(u1, v1).next();
-			bufferBuilder.vertex(matrix, x1, y0, z).texture(u1, v0).next();
-			bufferBuilder.vertex(matrix, x0, y0, z).texture(u0, v0).next();
+			bufferBuilder.vertex(matrix, x0, y1, z).uv(u0, v1).next();
+			bufferBuilder.vertex(matrix, x1, y1, z).uv(u1, v1).next();
+			bufferBuilder.vertex(matrix, x1, y0, z).uv(u1, v0).next();
+			bufferBuilder.vertex(matrix, x0, y0, z).uv(u0, v0).next();
 			BufferRenderer.drawWithShader(bufferBuilder.end());
 		}
 	}

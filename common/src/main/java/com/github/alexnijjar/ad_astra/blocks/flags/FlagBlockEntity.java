@@ -62,11 +62,11 @@ public class FlagBlockEntity extends BlockEntity {
 	@Nullable
 	@Override
 	public Packet<ClientPlayPacketListener> toUpdatePacket() {
-		return BlockEntityUpdateS2CPacket.create(this);
+		return BlockEntityUpdateS2CPacket.of(this);
 	}
 
 	@Override
 	public NbtCompound toInitialChunkDataNbt() {
-		return this.createNbt();
+		return this.toNbt();
 	}
 }

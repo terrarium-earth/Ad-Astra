@@ -6,7 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.goal.ActiveTargetGoal;
+import net.minecraft.entity.ai.goal.TargetGoal;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.ai.goal.PounceAtTargetGoal;
@@ -42,7 +42,7 @@ public class MartianRaptorEntity extends HostileEntity {
 		this.goalSelector.add(3, new WanderAroundGoal(this, 0.8));
 		this.goalSelector.add(4, new LookAroundGoal(this));
 		this.goalSelector.add(5, new PounceAtTargetGoal(this, 0.2f));
-		this.targetSelector.add(6, new ActiveTargetGoal<PlayerEntity>(this, PlayerEntity.class, false));
+		this.targetSelector.add(6, new TargetGoal<PlayerEntity>(this, PlayerEntity.class, false));
 		this.goalSelector.add(7, new WanderAroundFarGoal(this, 1.0));
 	}
 

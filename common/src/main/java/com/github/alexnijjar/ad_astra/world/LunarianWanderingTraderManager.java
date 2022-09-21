@@ -22,10 +22,10 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.SpawnHelper;
 import net.minecraft.world.WorldView;
+import net.minecraft.world.gen.Spawner;
 import net.minecraft.world.level.ServerWorldProperties;
 import net.minecraft.world.poi.PointOfInterestStorage;
 import net.minecraft.world.poi.PointOfInterestTypes;
-import net.minecraft.world.spawner.Spawner;
 
 public class LunarianWanderingTraderManager implements Spawner {
 
@@ -102,7 +102,7 @@ public class LunarianWanderingTraderManager implements Spawner {
 
 		BlockPos blockPos = playerEntity.getBlockPos();
 		PointOfInterestStorage pointOfInterestStorage = world.getPointOfInterestStorage();
-		Optional<BlockPos> optional = pointOfInterestStorage.getPosition(holder -> holder.matchesKey(PointOfInterestTypes.MEETING), pos -> true, blockPos, 48, PointOfInterestStorage.OccupationStatus.ANY);
+		Optional<BlockPos> optional = pointOfInterestStorage.getPosition(holder -> holder.isRegistryKey(PointOfInterestTypes.MEETING), pos -> true, blockPos, 48, PointOfInterestStorage.OccupationStatus.ANY);
 		BlockPos blockPos2 = (BlockPos) optional.orElse(blockPos);
 		BlockPos blockPos3 = this.getNearbySpawnPos(world, blockPos2, 48);
 		if (blockPos3 != null && this.doesNotSuffocateAt(world, blockPos3)) {

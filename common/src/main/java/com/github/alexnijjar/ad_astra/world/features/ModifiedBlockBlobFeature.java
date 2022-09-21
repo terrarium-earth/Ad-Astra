@@ -5,7 +5,7 @@ import com.mojang.serialization.Codec;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.random.Random;
+import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.SingleStateFeatureConfig;
@@ -18,10 +18,10 @@ public class ModifiedBlockBlobFeature extends Feature<SingleStateFeatureConfig> 
 	}
 
 	@Override
-	public boolean generate(FeatureContext<SingleStateFeatureConfig> context) {
+	public boolean place(FeatureContext<SingleStateFeatureConfig> context) {
 		BlockPos pos = context.getOrigin();
 		StructureWorldAccess world = context.getWorld();
-		Random random = context.getRandom();
+		RandomGenerator random = context.getRandom();
 
 		SingleStateFeatureConfig config;
 		for (config = context.getConfig(); pos.getY() > world.getBottomY() + 3; pos = pos.down()) {

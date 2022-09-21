@@ -17,7 +17,7 @@ import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.random.Random;
+import net.minecraft.util.random.RandomGenerator;
 
 public class EntityTemperatureSystem {
     public static void temperatureTick(LivingEntity entity, ServerWorld world) {
@@ -61,7 +61,7 @@ public class EntityTemperatureSystem {
     private static void freezeEntity(LivingEntity entity, ServerWorld world) {
         entity.damage(DamageSource.FREEZE, 1);
         entity.setFrozenTicks(Math.min(entity.getMinFreezeDamageTicks() + 20, entity.getFrozenTicks() + 5 * 10));
-        Random random = entity.world.getRandom();
+        RandomGenerator random = entity.world.getRandom();
         ModUtils.spawnForcedParticles((world), ParticleTypes.SNOWFLAKE, entity.getX(), entity.getY() + 1, entity.getZ(), 1, MathHelper.nextBetween(random, -1.0f, 1.0f) * 0.083333336f, 0.05,
                 (double) MathHelper.nextBetween(random, -1.0f, 1.0f) * 0.083333336, 0);
 

@@ -9,7 +9,7 @@ import com.github.alexnijjar.ad_astra.registry.ModParticleTypes;
 import com.github.alexnijjar.ad_astra.screen.handler.WaterPumpScreenHandler;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
 
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidHooks;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
@@ -109,7 +109,7 @@ public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
 
 					if (AdAstra.CONFIG.waterPump.deleteWaterBelowWaterPump) {
 						// Delete the water block after it has been fully extracted.
-						if (waterExtracted >= FluidConstants.BLOCK) {
+						if (waterExtracted >= FluidHooks.BLOCK) {
 							waterExtracted = 0;
 							world.setBlockState(this.getPos().down(), Blocks.AIR.getDefaultState());
 						}
