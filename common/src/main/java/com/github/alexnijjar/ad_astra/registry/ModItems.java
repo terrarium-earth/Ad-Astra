@@ -1,28 +1,13 @@
 package com.github.alexnijjar.ad_astra.registry;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.function.Supplier;
-
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.blocks.machines.entity.SolarPanelBlockEntity;
 import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntityTier1;
 import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntityTier2;
 import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntityTier3;
 import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntityTier4;
-import com.github.alexnijjar.ad_astra.items.AstroduxItem;
-import com.github.alexnijjar.ad_astra.items.EnergizerBlockItem;
+import com.github.alexnijjar.ad_astra.items.*;
 import com.github.alexnijjar.ad_astra.items.FluidContainingItem.TankStorage;
-import com.github.alexnijjar.ad_astra.items.HammerItem;
-import com.github.alexnijjar.ad_astra.items.HoldableOverHeadBlockItem;
-import com.github.alexnijjar.ad_astra.items.MachineBlockItem;
-import com.github.alexnijjar.ad_astra.items.OxygenTankItem;
-import com.github.alexnijjar.ad_astra.items.SolarPanelBlockItem;
-import com.github.alexnijjar.ad_astra.items.SpacePaintingItem;
-import com.github.alexnijjar.ad_astra.items.WrenchItem;
 import com.github.alexnijjar.ad_astra.items.armour.JetSuit;
 import com.github.alexnijjar.ad_astra.items.armour.NetheriteSpaceSuit;
 import com.github.alexnijjar.ad_astra.items.armour.SpaceSuit;
@@ -31,38 +16,24 @@ import com.github.alexnijjar.ad_astra.items.vehicles.RoverItem;
 import com.github.alexnijjar.ad_astra.mixin.AxeItemAccessor;
 import com.github.alexnijjar.ad_astra.util.FluidUtils;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
-
-import dev.architectury.registry.registries.DeferredRegister;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
+import earth.terrarium.botarium.api.registry.RegistryHolder;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.BucketItem;
-import net.minecraft.item.FoodComponent;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.SignItem;
-import net.minecraft.item.SpawnEggItem;
-import net.minecraft.item.TallBlockItem;
-import net.minecraft.item.WallStandingBlockItem;
+import net.minecraft.item.*;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.Rarity;
-import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.*;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
+import java.util.*;
+import java.util.function.Supplier;
+
 public class ModItems {
-	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(AdAstra.MOD_ID, Registry.ITEM_KEY);
+	public static final RegistryHolder<Item> ITEMS = new RegistryHolder<>(Registry.ITEM, AdAstra.MOD_ID);
 	public static final Set<Item> items = new HashSet<>();
 
 	// Vehicles Items
@@ -624,15 +595,9 @@ public class ModItems {
 	public static final Supplier<Item> LUNARIAN_WANDERING_TRADER_SPAWN_EGG = register("lunarian_wandering_trader_spawn_egg", new SpawnEggItem(ModEntityTypes.LUNARIAN_WANDERING_TRADER.get(), 5993415, 8537301, new Item.Settings().group(ModItemGroups.ITEM_GROUP_SPAWN_EGGS)));
 
 	public static void register() {
-		registerTank(TIER_1_ROCKET);
-		registerTank(TIER_2_ROCKET);
-		registerTank(TIER_3_ROCKET);
-		registerTank(TIER_4_ROCKET);
-		registerTank(TIER_1_ROVER);
-		registerTank(OXYGEN_TANK);
 
 		Map<Block, Block> strippedBlocks = new HashMap<>(AxeItemAccessor.adastra_getStrippedBlocks());
-		strippedBlocks.put(ModBlocks.GLACIAN_LOG, ModBlocks.STRIPPED_GLACIAN_LOG.get());
+		strippedBlocks.put(ModBlocks.GLACIAN_LOG.get(), ModBlocks.STRIPPED_GLACIAN_LOG.get());
 		AxeItemAccessor.adastra_setStrippedBlocks(strippedBlocks);
 	}
 
@@ -668,9 +633,5 @@ public class ModItems {
 		Supplier<T> registered = ITEMS.register(id.getPath(), () -> item);
 		items.add(item);
 		return registered;
-	}
-
-	public static void registerTank(Supplier<Item> tank) {
-		FluidStorage.ITEM.registerForItems(TankStorage::new, tank);
 	}
 }

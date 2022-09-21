@@ -1,13 +1,10 @@
 package com.github.alexnijjar.ad_astra.items.armour;
 
-import java.util.List;
-
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.registry.ModItems;
 import com.github.alexnijjar.ad_astra.util.ModKeyBindings;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
-
-import net.fabricmc.fabric.api.entity.event.v1.FabricElytraItem;
+import earth.terrarium.botarium.api.energy.*;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.entity.EquipmentSlot;
@@ -22,9 +19,12 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import team.reborn.energy.api.base.SimpleBatteryItem;
 
-public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, FabricElytraItem {
+import java.util.List;
+
+public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
+
+	//Todo Make specific class on fabric/forge for this
 
 	public boolean isFallFlying;
 
@@ -37,7 +37,7 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
 		return AdAstra.CONFIG.spaceSuit.jetSuitTankSize;
 	}
 
-	@Override
+	//TODO Use for cusotm impl of elytra
 	public boolean useCustomElytra(LivingEntity entity, ItemStack chestStack, boolean tickElytra) {
 		return this.isFallFlying;
 	}
@@ -46,8 +46,8 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
 	@Override
 	public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
 		super.appendTooltip(stack, world, tooltip, context);
-		if (stack.isOf(ModItems.JET_SUIT)) {
-			long energy = this.getStoredEnergy(stack);
+		if (stack.isOf(ModItems.JET_SUIT.get())) {
+			long energy = EnergyHooks.getItemHandler(stack).getStoredEnergy();
 			tooltip.add(Text.translatable("gauge_text.ad_astra.storage", energy, AdAstra.CONFIG.spaceSuit.jetSuitMaxEnergy).setStyle(Style.EMPTY.withColor(energy > 0 ? Formatting.GREEN : Formatting.RED)));
 		}
 	}
@@ -60,7 +60,7 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
 		}
 
 		// Don't fly if the Jet Suit has no energy
-		if (this.getStoredEnergy(stack) <= 0) {
+		if (EnergyHooks.getItemHandler(stack).getStoredEnergy() <= 0) {
 			stack.getOrCreateNbt().putBoolean("spawn_particles", false);
 			return;
 		}
@@ -86,16 +86,21 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
 	}
 
 	public void hover(PlayerEntity player, ItemStack stack) {
-		player.fallDistance /= 2;
-		if (!player.isCreative() && !this.tryUseEnergy(stack, AdAstra.CONFIG.spaceSuit.jetSuitEnergyPerTick)) {
-			this.setStoredEnergy(stack, 0);
-		}
-		isFallFlying = false;
+		if (EnergyHooks.isEnergyItem(stack)) {
+			player.fallDistance /= 2;
 
-		double speed = AdAstra.CONFIG.spaceSuit.jetSuitUpwardsSpeed;
-		player.setVelocity(player.getVelocity().add(0.0, speed, 0.0));
-		if (player.getVelocity().getY() > speed) {
-			player.setVelocity(player.getVelocity().getX(), speed, player.getVelocity().getZ());
+			PlatformEnergyManager energy = EnergyHooks.getItemHandler(stack);
+			long tickEnergy = AdAstra.CONFIG.spaceSuit.jetSuitEnergyPerTick;
+			if (!player.isCreative() && energy.extract(tickEnergy, false) < tickEnergy) {
+				//return;
+			}
+			isFallFlying = false;
+
+			double speed = AdAstra.CONFIG.spaceSuit.jetSuitUpwardsSpeed;
+			player.setVelocity(player.getVelocity().add(0.0, speed, 0.0));
+			if (player.getVelocity().getY() > speed) {
+				player.setVelocity(player.getVelocity().getX(), speed, player.getVelocity().getZ());
+			}
 		}
 	}
 
@@ -103,8 +108,10 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
 		if (player.isOnGround()) {
 			player.fallDistance /= 2;
 		}
-		if (!player.isCreative() && !this.tryUseEnergy(stack, AdAstra.CONFIG.spaceSuit.jetSuitEnergyPerTick * 2)) {
-			this.setStoredEnergy(stack, 0);
+		PlatformEnergyManager energy = EnergyHooks.getItemHandler(stack);
+		long tickEnergy = AdAstra.CONFIG.spaceSuit.jetSuitEnergyPerTick;
+		if (!player.isCreative() && energy.extract(tickEnergy, false) < tickEnergy) {
+			//return;
 		}
 		isFallFlying = true;
 
@@ -146,21 +153,6 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
 		world.addParticle(ParticleTypes.SOUL_FIRE_FLAME, true, entity.getX() + xRotator + xRotator1, entity.getY() + yOffset, entity.getZ() + zRotator1 + zRotator, 0.0, 0.0, 0.0);
 	}
 
-	@Override
-	public long getEnergyCapacity() {
-		return AdAstra.CONFIG.spaceSuit.jetSuitMaxEnergy;
-	}
-
-	@Override
-	public long getEnergyMaxInput() {
-		return 512;
-	}
-
-	@Override
-	public long getEnergyMaxOutput() {
-		return 256;
-	}
-
 	public static boolean hasFullSet(LivingEntity entity) {
 		for (ItemStack stack : entity.getArmorItems()) {
 			if (!(stack.getItem() instanceof JetSuit)) {
@@ -168,5 +160,20 @@ public class JetSuit extends NetheriteSpaceSuit implements SimpleBatteryItem, Fa
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public EnergyContainer getEnergyStorage(ItemStack itemStack) {
+		return new ItemEnergyContainer(AdAstra.CONFIG.spaceSuit.jetSuitMaxEnergy) {
+			@Override
+			public long maxInsert() {
+				return 512;
+			}
+
+			@Override
+			public long maxExtract() {
+				return 256;
+			}
+		};
 	}
 }
