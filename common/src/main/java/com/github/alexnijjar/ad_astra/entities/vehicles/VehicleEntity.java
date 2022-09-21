@@ -10,6 +10,7 @@ import com.github.alexnijjar.ad_astra.util.CustomInventory;
 import com.github.alexnijjar.ad_astra.util.FluidUtils;
 import com.github.alexnijjar.ad_astra.util.entity.OxygenUtils;
 
+import earth.terrarium.botarium.api.menu.ExtraDataMenuProvider;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
@@ -27,7 +28,6 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.network.Packet;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
-import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
@@ -225,7 +225,7 @@ public abstract class VehicleEntity extends Entity {
 		openInventory(player, new VehicleScreenHandlerFactory(this));
 	}
 
-	public void openInventory(PlayerEntity player, NamedScreenHandlerFactory handler) {
+	public void openInventory(PlayerEntity player, ExtraDataMenuProvider handler) {
 		if (!player.world.isClient) {
 			if (player.isSneaking()) {
 				player.openHandledScreen(handler);

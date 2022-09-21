@@ -56,7 +56,7 @@ public class PlanetSoundPlayer implements ClientPlayerTickable {
         private final ClientPlayerEntity player;
 
         public SpaceSound(ClientPlayerEntity player, SoundEvent soundEvent) {
-            super(soundEvent, SoundCategory.AMBIENT, SoundInstance.createRandom());
+            super(soundEvent, SoundCategory.AMBIENT, SoundInstance.method_43221());
             this.player = player;
             this.repeat = false;
             this.repeatDelay = 0;

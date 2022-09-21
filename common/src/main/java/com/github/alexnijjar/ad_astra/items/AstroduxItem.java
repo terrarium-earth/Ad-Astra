@@ -28,7 +28,8 @@ public class AstroduxItem extends Item {
 	public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
 		if (user instanceof ServerPlayerEntity player) {
 			if (ModUtils.modLoaded("patchouli")) {
-				PatchouliAPI.get().openBookGUI(player, new ModIdentifier("astrodux"));
+				// TODO: Patchouli
+				// PatchouliAPI.get().openBookGUI(player, new ModIdentifier("astrodux"));
 				return TypedActionResult.success(user.getStackInHand(hand));
 			} else {
 				user.sendMessage(Text.translatable("info.ad_astra.install_patchouli"), true);

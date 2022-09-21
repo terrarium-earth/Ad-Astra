@@ -81,7 +81,7 @@ public class EnergizerBlock extends AbstractMachineBlock {
 	public List<ItemStack> getDroppedStacks(BlockState state, net.minecraft.loot.context.LootContext.Builder builder) {
 		BlockEntity blockEntity = builder.getNullable(LootContextParameters.BLOCK_ENTITY);
 		ItemStack stack = ModItems.ENERGIZER.get().getDefaultStack();
-		stack.getOrCreateNbt().putLong("energy", ((EnergizerBlockEntity) blockEntity).energyStorage.amount);
+		stack.getOrCreateNbt().putLong("energy", ((EnergizerBlockEntity) blockEntity).getEnergyStorage().getStoredEnergy());
 		return List.of(stack);
 	}
 }

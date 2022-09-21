@@ -187,7 +187,7 @@ public abstract class AbstractMachineBlock extends BlockWithEntity {
 		if (world.getBlockEntity(pos) instanceof AbstractMachineBlockEntity machineBlock) {
 			NbtCompound nbt = stack.getOrCreateNbt();
 			Inventories.writeNbt(nbt, machineBlock.getItems());
-			nbt.putLong("energy", machineBlock.energyStorage.amount);
+			nbt.putLong("energy", machineBlock.getEnergyStorage().getStoredEnergy());
 
 			if (machineBlock instanceof FluidMachineBlockEntity fluidMachine) {
 				nbt.put("inputFluid", fluidMachine.inputTank.variant.toNbt());

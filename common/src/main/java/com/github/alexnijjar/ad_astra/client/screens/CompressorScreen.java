@@ -37,7 +37,7 @@ public class CompressorScreen extends AbstractMachineScreen<CompressorScreenHand
 		CompressorBlockEntity entity = (CompressorBlockEntity) blockEntity;
 
 		GuiUtil.drawHammer(matrices, this.x + HAMMER_LEFT, this.y + HAMMER_TOP, entity.getCookTime(), entity.getCookTimeTotal());
-		GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration());
+		GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.blockEntity.getEnergyStorage().getStoredEnergy(), this.blockEntity.getMaxGeneration());
 	}
 
 	@Override

@@ -65,7 +65,7 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
 
 		FluidMachineBlockEntity entity = (FluidMachineBlockEntity) blockEntity;
 
-		GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.blockEntity.getEnergy(), this.blockEntity.getMaxGeneration());
+		GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.blockEntity.getEnergyStorage().getStoredEnergy(), this.blockEntity.getMaxGeneration());
 		GuiUtil.drawFluidTank(matrices, this.x + INPUT_TANK_LEFT, this.y + INPUT_TANK_TOP, entity.inputTank.getAmount(), entity.inputTank.getCapacity(), entity.inputTank.getResource());
 		GuiUtil.drawFluidTank(matrices, this.x + OUTPUT_TANK_LEFT, this.y + OUTPUT_TANK_TOP, entity.outputTank.getAmount(), entity.outputTank.getCapacity(), entity.outputTank.getResource());
 
@@ -103,15 +103,13 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
 		boolean oxygenLeak = OxygenUtils.getOxygenBlocksCount(this.blockEntity.getWorld(), this.blockEntity.getPos()) >= AdAstra.CONFIG.oxygenDistributor.maxBlockChecks;
 		if (oxygenLeak) {
 			if (GuiUtil.isHovering(getOxygenLeakWarningSignBounds(), mouseX, mouseY)) {
-				this.renderTooltip(matrices, Arrays.asList(Text.translatable("gauge_text.ad_astra.oxygen_leak_warning[0]"), Text.translatable("gauge_text.ad_astra.oxygen_leak_warning[1]"), Text.translatable("gauge_text.ad_astra.oxygen_leak_warning[2]"),
-						Text.translatable("gauge_text.ad_astra.oxygen_leak_warning[3]"), Text.translatable("gauge_text.ad_astra.oxygen_leak_warning[4]")), mouseX, mouseY);
+				this.renderTooltip(matrices, Arrays.asList(Text.translatable("gauge_text.ad_astra.oxygen_leak_warning[0]"), Text.translatable("gauge_text.ad_astra.oxygen_leak_warning[1]"), Text.translatable("gauge_text.ad_astra.oxygen_leak_warning[2]"), Text.translatable("gauge_text.ad_astra.oxygen_leak_warning[3]"), Text.translatable("gauge_text.ad_astra.oxygen_leak_warning[4]")), mouseX, mouseY);
 			}
 		}
 
 		if (oxygenBlocksCount <= 0 && entity.hasEnergy() && entity.outputTank.amount > 0) {
 			if (GuiUtil.isHovering(getBlockedWarningSignBounds(), mouseX, mouseY)) {
-				this.renderTooltip(matrices, Arrays.asList(Text.translatable("gauge_text.ad_astra.blocked_warning[0]"), Text.translatable("gauge_text.ad_astra.blocked_warning[1]"), Text.translatable("gauge_text.ad_astra.blocked_warning[2]")), mouseX,
-						mouseY);
+				this.renderTooltip(matrices, Arrays.asList(Text.translatable("gauge_text.ad_astra.blocked_warning[0]"), Text.translatable("gauge_text.ad_astra.blocked_warning[1]"), Text.translatable("gauge_text.ad_astra.blocked_warning[2]")), mouseX, mouseY);
 			}
 		}
 	}

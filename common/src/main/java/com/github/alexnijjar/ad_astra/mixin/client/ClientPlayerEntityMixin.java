@@ -68,7 +68,7 @@ public class ClientPlayerEntityMixin {
 			if (chest.getItem() instanceof JetSuit suit) {
 
 				// Render battery info
-				double ratio = (double) suit.getStoredEnergy(chest) / (double) suit.getEnergyCapacity();
+				double ratio = (double) suit.getEnergyStorage(chest).getStoredEnergy() / (double) suit.getEnergyStorage(chest).getMaxCapacity();
 				PlayerOverlayScreen.batteryRatio = ratio;
 			}
 		} else {
