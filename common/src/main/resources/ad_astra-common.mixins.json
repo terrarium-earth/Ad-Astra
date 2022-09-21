@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "com.github.ad_astra.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "MixinTitleScreen"
+  ],
+  "mixins": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
