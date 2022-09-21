@@ -1,0 +1,108 @@
+plugins {
+    id "com.github.johnrengelman.shadow" version "7.1.2"
+}
+
+repositories {
+    maven { url "https://maven.quiltmc.org/repository/release/" }
+}
+
+architectury {
+    platformSetupLoomIde()
+    loader("quilt")
+}
+
+loom {
+    accessWidenerPath = project(":common").loom.accessWidenerPath
+}
+
+configurations {
+    common
+    shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
+    compileClasspath.extendsFrom common
+    runtimeClasspath.extendsFrom common
+    developmentQuilt.extendsFrom common
+}
+
+dependencies {
+    modImplementation "org.quiltmc:quilt-loader:${rootProject.quilt_loader_version}"
+    modApi "org.quiltmc.quilted-fabric-api:quilted-fabric-api:${rootProject.quilt_fabric_api_version}"
+    // Remove the next few lines if you don't want to depend on the API
+    modApi("dev.architectury:architectury-fabric:${rootProject.architectury_version}") {
+        // We must not pull Fabric Loader from Architectury Fabric
+        exclude group: "net.fabricmc"
+        exclude group: "net.fabricmc.fabric-api"
+    }
+
+    common(project(path: ":common", configuration: "namedElements")) { transitive false }
+    shadowCommon(project(path: ":common", configuration: "transformProductionQuilt")) { transitive false }
+    modImplementation "earth.terrarium:botarium-fabric-${rootProject.minecraft_version}:${rootProject.botarium_version}"
+
+    modApi("com.terraformersmc:modmenu:${project.modmenu_version}")
+
+	modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
+	modImplementation "vazkii.patchouli:Patchouli:${project.patchouli_version}"
+
+	// EMI
+	modImplementation "dev.emi:emi:${emi_version}"
+
+	// REI
+	modCompileOnly("dev.architectury:architectury-fabric:${project.architectury_version}")
+	modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:$project.rei_version")
+    modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:$project.rei_version")
+}
+
+processResources {
+    inputs.property "group", rootProject.maven_group
+    inputs.property "version", project.version
+
+    filesMatching("quilt.mod.json") {
+        expand "group": rootProject.maven_group,
+                "version": project.version
+    }
+}
+
+shadowJar {
+    exclude "architectury.common.json"
+
+    configurations = [project.configurations.shadowCommon]
+    classifier "dev-shadow"
+}
+
+remapJar {
+    injectAccessWidener = true
+    input.set shadowJar.archiveFile
+    dependsOn shadowJar
+    classifier null
+}
+
+jar {
+    classifier "dev"
+}
+
+sourcesJar {
+    def commonSources = project(":common").sourcesJar
+    dependsOn commonSources
+    from commonSources.archiveFile.map { zipTree(it) }
+}
+
+components.java {
+    withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
+        skip()
+    }
+}
+
+publishing {
+    publications {
+        mavenQuilt(MavenPublication) {
+            artifactId = rootProject.archives_base_name + "-" + project.name
+            from components.java
+        }
+    }
+
+    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
+    repositories {
+        // Add repositories to publish to here.
+    }
+}

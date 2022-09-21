@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "ad_astra",
+  "version": "${version}",
+  "name": "Ad Astra!",
+  "description": "Live long and prosper, Ad Astra!",
+  "authors": [
+    "Alex Nijjar",
+    "Barracuda",
+    "Bunny",
+    "Checheno",
+    "CodexAdrian",
+    "Facu",
+    "Fizz",
+    "OliviaTheVampire",
+    "SpaceStar"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/ad-astra",
+    "sources": "https://github.com/AlexNijjar/Ad-Astra-Fabric"
+  },
+  "license": "MIT",
+  "icon": "assets/ad_astra/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.github.ad_astra.fabric.AdAstraFabric"
+    ]
+  },
+  "depends": {
+    "fabric": "*",
+    "minecraft": ">=1.19",
+    "architectury": ">=5.12.42"
+  }
+}

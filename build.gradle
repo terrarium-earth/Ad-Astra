@@ -1,112 +1,50 @@
 plugins {
-	id 'fabric-loom' version '1.0-SNAPSHOT'
-	id 'org.quiltmc.quilt-mappings-on-loom' version '4.2.0'
-	id 'io.github.juuxel.loom-quiltflower' version '1.7.+'
-	id 'maven-publish'
+    id "architectury-plugin" version "3.4-SNAPSHOT"
+    id "dev.architectury.loom" version "0.12.0-SNAPSHOT" apply false
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
-
-archivesBaseName = project.archives_base_name
-version = project.version
-group = project.maven_group
-
-repositories { 
-	maven { url "https://maven.shedaniel.me/" }
-	maven { url "https://maven.terraformersmc.com" }
-	maven { url 'https://maven.blamejared.com' }
+architectury {
+    minecraft = rootProject.minecraft_version
 }
 
-dependencies {
-	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings(loom.layered {
-		addLayer(quiltMappings.mappings("org.quiltmc:quilt-mappings:${project.minecraft_version}+build.${project.quilt_mappings}:v2"))
-	})
-	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+subprojects {
+    apply plugin: "dev.architectury.loom"
 
-	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	
-	modApi("com.terraformersmc:modmenu:${project.modmenu_version}")
+    loom {
+        silentMojangMappingsLicense()
+    }
 
-	modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
-		exclude(group: "net.fabricmc.fabric-api")
-	}
-
-	// EMI
-	modImplementation "dev.emi:emi:${emi_version}"
-
-	// REI
-	modCompileOnly("dev.architectury:architectury-fabric:${project.architectury_version}")
-	modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:$project.rei_version")
-    modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:$project.rei_version")
-
-	include modApi("teamreborn:energy:${project.techreborn_energy_version}") {
-		exclude(group: "net.fabricmc.fabric-api")
-	}
-
-	modRuntimeOnly 'RebornCore:RebornCore-1.19:+'
-	modRuntimeOnly 'TechReborn:TechReborn-1.19:+'
-
-	modImplementation "vazkii.patchouli:Patchouli:${project.patchouli_version}"
+    dependencies {
+        minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
+        // The following line declares the mojmap mappings, you may use other mappings as well
+        // mappings loom.officialMojangMappings()
+        // The following line declares the yarn mappings you may select this one as well.
+        mappings "net.fabricmc:yarn:1.19+build.4:v2"
+    }
 }
 
-sourceSets {
-		main {
-			compileClasspath += main.compileClasspath
-			runtimeClasspath += main.runtimeClasspath
-		}
-	}
+allprojects {
+    apply plugin: "java"
+    apply plugin: "architectury-plugin"
+    apply plugin: "maven-publish"
 
-loom {
-	accessWidenerPath = file("src/main/resources/ad_astra.accesswidener")
-	runs {
-		datagen {
-			server()
+    archivesBaseName = rootProject.archives_base_name
+    version = rootProject.mod_version
+    group = rootProject.maven_group
 
-			runDir = "build/datagen"
+    repositories {
+        maven { url "https://maven.shedaniel.me/" }
+	    maven { url "https://maven.terraformersmc.com" }
+	    maven { url 'https://maven.blamejared.com' }
+        maven { url "https://nexus.resourcefulbees.com/repository/maven-public/" }
+    }
 
-			vmArg("-Dfabric-api.datagen")
-			vmArg("-Dfabric-api.datagen.output-dir=${file("src/main/generated")}")
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+        options.release = 17
+    }
 
-			ideConfigGenerated project.rootProject == project
-			name = "Datagen"
-			source sourceSets.main
-		}
-	}
-}
-
-processResources {
-	inputs.property "version", version
-
-	filesMatching('fabric.mod.json') {
-		expand "version": version
-	}
-}
-
-tasks.withType(JavaCompile).configureEach {
-	it.options.encoding = "UTF-8"
-	it.options.release = 17
-}
-
-java {
-	sourceCompatibility = JavaVersion.VERSION_17
-	targetCompatibility = JavaVersion.VERSION_17
-}
-
-jar {
-	from("LICENSE") {
-		rename { "${it}_${archivesBaseName}" }
-	}
-}
-
-publishing {
-	publications {
-		mavenJava(MavenPublication) {
-			from components.java
-		}
-	}
-
-	repositories {
-	}
+    java {
+        withSourcesJar()
+    }
 }
