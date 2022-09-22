@@ -11,6 +11,7 @@ import com.github.alexnijjar.ad_astra.util.FluidUtils;
 import com.github.alexnijjar.ad_astra.util.entity.OxygenUtils;
 
 import earth.terrarium.botarium.api.fluid.FluidHolder;
+import earth.terrarium.botarium.api.fluid.FluidHooks;
 import earth.terrarium.botarium.api.menu.ExtraDataMenuProvider;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
@@ -56,7 +57,7 @@ public abstract class VehicleEntity extends Entity {
 
 	public float previousYaw;
 
-	public final SingleVariantStorage<FluidHolder> inputTank = FluidUtils.createTank(this.getTankSize());
+	public final FluidHolder inputTank = FluidUtils.createTank(this.getTankSize());
 	private final CustomInventory inventory = new CustomInventory(this.getInventorySize());
 
 	protected static final TrackedData<Float> SPEED = DataTracker.registerData(VehicleEntity.class, TrackedDataHandlerRegistry.FLOAT);
@@ -77,7 +78,7 @@ public abstract class VehicleEntity extends Entity {
 	@Override
 	protected void readCustomDataFromNbt(NbtCompound nbt) {
 		this.inventory.readNbtList(nbt.getList("inventory", NbtElement.COMPOUND_TYPE));
-		inputTank.variant = FluidHolder.fromNbt(nbt.getCompound("inputFluid"));
+		inputTank.variant = FluidHooks.fluidFromCompound(nbt.getCompound("inputFluid"));
 		inputTank.amount = nbt.getLong("inputAmount");
 	}
 

@@ -17,10 +17,12 @@ import com.github.alexnijjar.ad_astra.util.ModUtils;
 import com.github.alexnijjar.ad_astra.util.algorithms.OxygenFillerAlgorithm;
 import com.github.alexnijjar.ad_astra.util.entity.OxygenUtils;
 
+import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.ScreenHandler;
@@ -59,12 +61,12 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 
 	@Override
 	public long getInputSize() {
-		return AdAstra.CONFIG.oxygenDistributor.tankBuckets;
+		return FluidHooks.buckets(AdAstra.CONFIG.oxygenDistributor.tankBuckets);
 	}
 
 	@Override
 	public long getOutputSize() {
-		return AdAstra.CONFIG.oxygenDistributor.tankBuckets * 2;
+		return FluidHooks.buckets(AdAstra.CONFIG.oxygenDistributor.tankBuckets * 2);
 	}
 
 	@Override
@@ -143,23 +145,23 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 		}
 
 		if (this.drainEnergy(amountOfEnergyToConsume)) {
-			ModUtils.spawnForcedParticles((ServerWorld) this.world, ModParticleTypes.OXYGEN_BUBBLE, this.getPos().getX() + 0.5, this.getPos().getY() + 0.5, this.getPos().getZ() + 0.5, 1, 0.0, 0.0, 0.0, 0.03);
+			ModUtils.spawnForcedParticles((ServerWorld) this.world, ModParticleTypes.OXYGEN_BUBBLE.get(), this.getPos().getX() + 0.5, this.getPos().getY() + 0.5, this.getPos().getZ() + 0.5, 1, 0.0, 0.0, 0.0, 0.03);
 		}
 	}
 
 	public boolean canDistribute(int oxygenBlocks) {
 		long amountOfFluidToExtract = this.getFluidToExtract(oxygenBlocks, false);
 		long amountOfEnergyToConsume = this.getEnergyToConsume(oxygenBlocks, false);
-		if (this.outputTank.isResourceBlank()) {
+		if (tanks.getFluids().get(1).isEmpty()) {
 			return false;
 		} else if (this.getCachedState().get(AbstractMachineBlock.POWERED)) {
 			return false;
 		} else if (!this.canDrainEnergy(amountOfEnergyToConsume)) {
 			return false;
-		} else if (this.outputTank.variant.isBlank()) {
+		} else if (tanks.getFluids().get(1).getFluid().equals(Fluids.EMPTY)) {
 			return false;
 		} else
-			return this.outputTank.simulateExtract(this.outputTank.getResource(), amountOfFluidToExtract, null) == amountOfFluidToExtract;
+			return tanks.getFluids().get(1).simulateExtract(tanks.getFluids().get(1).getFluid(), amountOfFluidToExtract, null) == amountOfFluidToExtract;
 	}
 
 	@Override
@@ -173,7 +175,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 		if (!this.world.isClient) {
 			if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxCount()) {
 				ModRecipes.OXYGEN_CONVERSION_RECIPE.getRecipes(this.world);
-				FluidUtils.insertFluidIntoTank(this, this.inputTank, 0, 1, f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.getRecipes(this.world).stream().anyMatch(r -> r.getFluidInput().equals(f.getFluid())));
+				FluidUtils.insertFluidIntoTank(this, tanks.getFluids().get(1), 0, 1, f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.getRecipes(this.world).stream().anyMatch(r -> r.getFluidInput().equals(f.getFluid())));
 			}
 
 			if (this.canDrainEnergy()) {
@@ -209,7 +211,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 				return;
 			}
 		} else {
-			if (this.outputTank.amount <= 0 && this.getEnergyStorage().getStoredEnergy() <= 0) {
+			if (tanks.getFluids().get(1).getFluidAmount() <= 0 && this.getEnergyStorage().getStoredEnergy() <= 0) {
 				return;
 			}
 		}
@@ -232,7 +234,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 	public void spawnParticles(Set<BlockPos> positions) {
 		if (!world.isClient && this.getCachedState().get(AbstractMachineBlock.LIT)) {
 			for (BlockPos pos : positions) {
-				ModUtils.spawnForcedParticles((ServerWorld) this.getWorld(), ModParticleTypes.OXYGEN_BUBBLE, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 1, 0.0, 0.0, 0.0, 0.0);
+				ModUtils.spawnForcedParticles((ServerWorld) this.getWorld(), ModParticleTypes.OXYGEN_BUBBLE.get(), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 1, 0.0, 0.0, 0.0, 0.0);
 			}
 		}
 	}

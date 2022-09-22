@@ -11,6 +11,7 @@ import com.github.alexnijjar.ad_astra.registry.ModRecipes;
 import com.github.alexnijjar.ad_astra.screen.handler.ConversionScreenHandler;
 import com.github.alexnijjar.ad_astra.util.FluidUtils;
 
+import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -27,12 +28,12 @@ public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
 
 	@Override
 	public long getInputSize() {
-		return AdAstra.CONFIG.oxygenLoader.tankBuckets;
+		return FluidHooks.buckets(AdAstra.CONFIG.oxygenLoader.tankBuckets);
 	}
 
 	@Override
 	public long getOutputSize() {
-		return AdAstra.CONFIG.oxygenLoader.tankBuckets;
+		return FluidHooks.buckets(AdAstra.CONFIG.oxygenLoader.tankBuckets);
 	}
 
 	@Override
@@ -87,11 +88,11 @@ public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
 
 			if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxCount()) {
 				ModRecipes.OXYGEN_CONVERSION_RECIPE.getRecipes(this.world);
-				FluidUtils.insertFluidIntoTank(this, this.inputTank, 0, 1, f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.getRecipes(this.world).stream().anyMatch(r -> r.getFluidInput().equals(f.getFluid())));
+				FluidUtils.insertFluidIntoTank(this, tanks.getFluids().get(0), 0, 1, f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.getRecipes(this.world).stream().anyMatch(r -> r.getFluidInput().equals(f.getFluid())));
 			}
 
 			if (!outputInsertSlot.isEmpty() && outputExtractSlot.getCount() < outputExtractSlot.getMaxCount()) {
-				FluidUtils.extractFluidFromTank(this, this.outputTank, 2, 3);
+				FluidUtils.extractFluidFromTank(this, tanks.getFluids().get(1), 2, 3);
 			}
 
 			if (this.hasEnergy()) {

@@ -3,6 +3,7 @@ package com.github.alexnijjar.ad_astra.items;
 import java.util.List;
 
 import earth.terrarium.botarium.api.fluid.FluidHolder;
+import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
@@ -17,7 +18,7 @@ public interface FluidContainingItem {
 
 	long getTankSize();
 
-	default boolean insertIntoTank(Storage<FluidHolder> storage, ItemStack stack) {
+	default boolean insertIntoTank(FluidHolder storage, ItemStack stack) {
 		try (Transaction transaction = Transaction.openOuter()) {
 			if (storage.insert(this.getFluid(stack), this.getAmount(stack), transaction) == this.getAmount(stack)) {
 				transaction.commit();
@@ -29,14 +30,14 @@ public interface FluidContainingItem {
 
 	List<Fluid> getInputFluids();
 
-	default long transferFluid(Storage<FluidHolder> from, Storage<FluidHolder> to) {
+	default long transferFluid(FluidHolder from, FluidHolder to) {
 		return StorageUtil.move(from, to, f -> true, Long.MAX_VALUE, null);
 	}
 
 	default FluidHolder getFluid(ItemStack stack) {
 		NbtCompound nbt = stack.getOrCreateNbt();
 		if (nbt.contains("fluid")) {
-			return FluidHolder.fromNbt(nbt.getCompound("fluid"));
+			return FluidHooks.fluidFromCompound(nbt.getCompound("fluid"));
 		} else {
 			return FluidHolder.blank();
 		}
@@ -61,7 +62,7 @@ public interface FluidContainingItem {
 		nbt.putLong("amount", amount);
 	}
 
-	class TankStorage extends SingleVariantItemStorage<FluidHolder> {
+	class TankStorage extends SimpleUpdatingFluidContainer {
 
 		private final FluidContainingItem item;
 

@@ -47,7 +47,7 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
 	public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
 		super.appendTooltip(stack, world, tooltip, context);
 		if (stack.isOf(ModItems.JET_SUIT.get())) {
-			long energy = EnergyHooks.getItemHandler(stack).getStoredEnergy();
+			long energy = EnergyHooks.getItemEnergyManager(stack).getStoredEnergy();
 			tooltip.add(Text.translatable("gauge_text.ad_astra.storage", energy, AdAstra.CONFIG.spaceSuit.jetSuitMaxEnergy).setStyle(Style.EMPTY.withColor(energy > 0 ? Formatting.GREEN : Formatting.RED)));
 		}
 	}
@@ -60,7 +60,7 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
 		}
 
 		// Don't fly if the Jet Suit has no energy
-		if (EnergyHooks.getItemHandler(stack).getStoredEnergy() <= 0) {
+		if (EnergyHooks.getItemEnergyManager(stack).getStoredEnergy() <= 0) {
 			stack.getOrCreateNbt().putBoolean("spawn_particles", false);
 			return;
 		}
@@ -89,7 +89,7 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
 		if (EnergyHooks.isEnergyItem(stack)) {
 			player.fallDistance /= 2;
 
-			PlatformEnergyManager energy = EnergyHooks.getItemHandler(stack);
+			PlatformEnergyManager energy = EnergyHooks.getItemEnergyManager(stack);
 			long tickEnergy = AdAstra.CONFIG.spaceSuit.jetSuitEnergyPerTick;
 			if (!player.isCreative() && energy.extract(tickEnergy, false) < tickEnergy) {
 				// return;
@@ -108,7 +108,7 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
 		if (player.isOnGround()) {
 			player.fallDistance /= 2;
 		}
-		PlatformEnergyManager energy = EnergyHooks.getItemHandler(stack);
+		PlatformEnergyManager energy = EnergyHooks.getItemEnergyManager(stack);
 		long tickEnergy = AdAstra.CONFIG.spaceSuit.jetSuitEnergyPerTick;
 		if (!player.isCreative() && energy.extract(tickEnergy, false) < tickEnergy) {
 			// return;

@@ -11,6 +11,7 @@ import com.github.alexnijjar.ad_astra.screen.handler.CryoFreezerScreenHandler;
 import com.github.alexnijjar.ad_astra.util.FluidUtils;
 
 import earth.terrarium.botarium.api.fluid.FluidHolder;
+import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -83,7 +84,7 @@ public class CryoFreezerBlockEntity extends FluidMachineBlockEntity {
 
 	@Override
 	public long getInputSize() {
-		return AdAstra.CONFIG.cryoFreezer.tankBuckets;
+		return FluidHooks.buckets(AdAstra.CONFIG.cryoFreezer.tankBuckets);
 	}
 
 	@Override
@@ -165,11 +166,11 @@ public class CryoFreezerBlockEntity extends FluidMachineBlockEntity {
 			ItemStack outputExtractSlot = this.getStack(2);
 
 			if (!outputInsertSlot.isEmpty() && outputExtractSlot.getCount() < outputExtractSlot.getMaxCount()) {
-				FluidUtils.extractFluidFromTank(this, this.inputTank, 1, 2);
+				FluidUtils.extractFluidFromTank(this, tanks.getFluids().get(0), 1, 2);
 			}
 
 			if (this.hasEnergy()) {
-				if ((!input.isEmpty() && (input.getItem().equals(this.inputItem) || this.inputItem == null)) && this.inputTank.getAmount() < this.inputTank.getCapacity()) {
+				if ((!input.isEmpty() && (input.getItem().equals(this.inputItem) || this.inputItem == null)) && tanks.getFluids().get(0).getFluidAmount() < this.getInputSize()) {
 					this.setActive(true);
 					if (this.cookTime < this.cookTimeTotal) {
 						this.cookTime++;

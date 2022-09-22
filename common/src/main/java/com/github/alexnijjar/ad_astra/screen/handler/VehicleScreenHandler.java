@@ -32,8 +32,8 @@ public class VehicleScreenHandler extends AbstractVehicleScreenHandler {
 						if (!super.canInsert(stack)) {
 							return false;
 						}
-						Storage<FluidHolder> context = ContainerItemContext.withInitial(stack).find(FluidStorage.ITEM);
-						return context instanceof CombinedStorage || context instanceof FullItemFluidStorage || context instanceof SingleVariantItemStorage<FluidHolder>;
+						FluidHolder context = ContainerItemContext.withInitial(stack).find(FluidStorage.ITEM);
+						return context instanceof CombinedStorage || context instanceof ItemFluidContainer || context instanceof SimpleUpdatingFluidContainer;
 					}
 				},
 				// Left output slot.

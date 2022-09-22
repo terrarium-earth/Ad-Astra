@@ -62,8 +62,8 @@ public class OxygenTankItem extends Item implements FluidHoldingItem {
 			if (chest.isOf(ModItems.SPACE_SUIT.get()) || chest.isOf(ModItems.NETHERITE_SPACE_SUIT.get()) || chest.isOf(ModItems.JET_SUIT.get())) {
 
 				PlayerInventoryStorage playerWrapper = PlayerInventoryStorage.of(user);
-				Storage<FluidHolder> from = ContainerItemContext.ofPlayerHand(user, hand).find(FluidStorage.ITEM);
-				Storage<FluidHolder> to = new PlayerContainerItemContext(user, playerWrapper.getSlot(38)).find(FluidStorage.ITEM);
+				FluidHolder from = ContainerItemContext.ofPlayerHand(user, hand).find(FluidStorage.ITEM);
+				FluidHolder to = new PlayerContainerItemContext(user, playerWrapper.getSlot(38)).find(FluidStorage.ITEM);
 
 				if (StorageUtil.move(from, to, f -> true, Long.MAX_VALUE, null) > 0) {
 					world.playSound(null, user.getBlockPos(), SoundEvents.ENTITY_GENERIC_DRINK, SoundCategory.PLAYERS, 1, 1);

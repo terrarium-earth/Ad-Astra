@@ -10,15 +10,14 @@ import com.github.alexnijjar.ad_astra.items.FluidContainingItem;
 import com.github.alexnijjar.ad_astra.recipes.ConversionRecipe;
 
 import earth.terrarium.botarium.api.fluid.FluidHolder;
-import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageView;
-import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.collection.LinkedBlockPosHashSet.Storage;
@@ -42,67 +41,19 @@ public class FluidUtils {
 	}
 
 	/**
-	 * Creates a fluid tank for a block entity. Every time the tank is modified, the block entity is marked dirty.
-	 */
-	public static <T extends ConversionRecipe> SingleVariantStorage<FluidHolder> createTank(FluidMachineBlockEntity blockEntity, long tankSize, boolean insert, boolean extract) {
-		return new SingleVariantStorage<>() {
-			@Override
-			protected FluidHolder getBlankVariant() {
-				return FluidHolder.blank();
-			}
-
-			@Override
-			protected long getCapacity(FluidHolder variant) {
-				return tankSize * FluidHooks.BUCKET;
-			}
-
-			@Override
-			protected void onFinalCommit() {
-				blockEntity.markDirty();
-			}
-
-			protected boolean canInsert(FluidHolder variant) {
-				return insert;
-			}
-
-			@Override
-			protected boolean canExtract(FluidHolder variant) {
-				return extract;
-			}
-		};
-	}
-
-	/**
-	 * Creates a fluid tank that does not do anything on the final commit.
-	 */
-	public static <T extends ConversionRecipe> SingleVariantStorage<FluidHolder> createTank(long tankSize) {
-		return new SingleVariantStorage<>() {
-			@Override
-			protected FluidHolder getBlankVariant() {
-				return FluidHolder.blank();
-			}
-
-			@Override
-			protected long getCapacity(FluidHolder variant) {
-				return tankSize * FluidHooks.BUCKET;
-			}
-		};
-	}
-
-	/**
 	 * Transfers and converts a fluid from the input tank to the output tank.
 	 */
 	public static <T extends ConversionRecipe> boolean convertFluid(FluidMachineBlockEntity inventory, List<T> recipes, int transferPerTick) {
 		if (recipes == null) {
 			return false;
 		}
-		FluidHolder inputTankFluid = inventory.inputTank.variant;
+		FluidHolder inputTankFluid = inventory.tanks.getFluids().get(0);
 		for (T recipe : recipes) {
 			double conversionRatio = recipe.getConversionRatio();
-			FluidHolder recipeInputVariant = FluidHolder.of(recipe.getFluidInput());
-			FluidHolder recipeOutputVariant = FluidHolder.of(recipe.getFluidOutput());
-			if (inputTankFluid.equals(recipeInputVariant)) {
-				if (convertAndMove(inventory.inputTank, inventory.outputTank, f -> true, millibucketsToDroplets(transferPerTick), null, recipeOutputVariant, conversionRatio) > 0) {
+			Fluid recipeInputVariant = recipe.getFluidInput();
+			Fluid recipeOutputVariant = recipe.getFluidOutput();
+			if (inputTankFluid.getFluid().equals(recipeInputVariant)) {
+				if (convertAndMove(inventory.tanks.getFluids().get(0), inventory.tanks.getFluids().get(1), f -> true, millibucketsToDroplets(transferPerTick), null, recipeOutputVariant, conversionRatio) > 0) {
 					return true;
 				}
 			}
@@ -113,11 +64,11 @@ public class FluidUtils {
 	/**
 	 * Inserts fluid from an input item, such as a bucket, into the input tank. The item is then emptied and placed into the output slot.
 	 */
-	public static void insertFluidIntoTank(Inventory inventory, Storage<FluidHolder> inputTank, int insertSlot, int extractSlot, Predicate<FluidHolder> filter) {
+	public static void insertFluidIntoTank(Inventory inventory, FluidHolder inputTank, int insertSlot, int extractSlot, Predicate<FluidHolder> filter) {
 		ItemStack original = inventory.getStack(insertSlot).copy();
 		inventory.getStack(insertSlot).setCount(1);
 		ContainerItemContext context = ContainerItemContext.ofSingleSlot(InventoryStorage.of(inventory, null).getSlots().get(insertSlot));
-		Storage<FluidHolder> storage = context.find(FluidStorage.ITEM);
+		FluidHolder storage = context.find(FluidStorage.ITEM);
 
 		try (Transaction transaction = Transaction.openOuter()) {
 			if (StorageUtil.move(storage, inputTank, filter, Long.MAX_VALUE, transaction) > 0) {
@@ -157,11 +108,11 @@ public class FluidUtils {
 	/**
 	 * Extracts fluid from an output, and inserts it into a fluid-holding item. The item is then moved to the output slot.
 	 */
-	public static void extractFluidFromTank(Inventory inventory, Storage<FluidHolder> outputTank, int insertSlot, int extractSlot) {
+	public static void extractFluidFromTank(Inventory inventory, FluidHolder outputTank, int insertSlot, int extractSlot) {
 		ItemStack original = inventory.getStack(insertSlot).copy();
 		inventory.getStack(insertSlot).setCount(1);
 		ContainerItemContext context = ContainerItemContext.ofSingleSlot(InventoryStorage.of(inventory, null).getSlots().get(insertSlot));
-		Storage<FluidHolder> storage = context.find(FluidStorage.ITEM);
+		FluidHolder storage = context.find(FluidStorage.ITEM);
 
 		try (Transaction transaction = Transaction.openOuter()) {
 			if (StorageUtil.move(outputTank, storage, f -> true, Long.MAX_VALUE, transaction) > 0) {
@@ -207,7 +158,7 @@ public class FluidUtils {
 	 * @throws IllegalStateException If no transaction is passed and a transaction is already active on the current thread.
 	 * @see {@link StorageUtil#move(Storage, Storage, Predicate, long, Transaction)}
 	 */
-	public static long convertAndMove(@Nullable Storage<FluidHolder> from, @Nullable Storage<FluidHolder> to, Predicate<FluidHolder> filter, long maxAmount, @Nullable TransactionContext transaction, FluidHolder outputFluid, double conversionRatio) {
+	public static long convertAndMove(@Nullable FluidHolder from, @Nullable FluidHolder to, Predicate<FluidHolder> filter, long maxAmount, @Nullable TransactionContext transaction, FluidHolder outputFluid, double conversionRatio) {
 		if (from == null || to == null)
 			return 0;
 

@@ -199,11 +199,11 @@ public abstract class AbstractMachineBlock extends BlockWithEntity {
 			nbt.putLong("energy", machineBlock.getEnergyStorage().getStoredEnergy());
 
 			if (machineBlock instanceof FluidMachineBlockEntity fluidMachine) {
-				nbt.put("inputFluid", fluidMachine.inputTank.variant.toNbt());
-				nbt.putLong("inputAmount", fluidMachine.inputTank.amount);
+				nbt.put("inputFluid", fluidMachine.tanks.getFluids().get(0).getCompound());
+				nbt.putLong("inputAmount", fluidMachine.tanks.getFluids().get(0).getFluidAmount());
 
-				nbt.put("outputFluid", fluidMachine.outputTank.variant.toNbt());
-				nbt.putLong("outputAmount", fluidMachine.outputTank.amount);
+				nbt.put("outputFluid", fluidMachine.tanks.getFluids().get(1).getCompound());
+				nbt.putLong("outputAmount", fluidMachine.tanks.getFluids().get(1).getFluidAmount());
 
 				if (machineBlock instanceof OxygenDistributorBlockEntity oxygenDistributorMachine) {
 					nbt.putBoolean("showOxygen", oxygenDistributorMachine.shouldShowOxygen());

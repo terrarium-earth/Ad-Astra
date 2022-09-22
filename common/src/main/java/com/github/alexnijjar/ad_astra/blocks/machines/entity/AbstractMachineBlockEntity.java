@@ -6,6 +6,7 @@ import com.github.alexnijjar.ad_astra.blocks.machines.AbstractMachineBlock;
 import com.github.alexnijjar.ad_astra.util.ModInventory;
 
 import earth.terrarium.botarium.api.energy.EnergyBlock;
+import earth.terrarium.botarium.api.energy.EnergyHooks;
 import earth.terrarium.botarium.api.energy.SimpleUpdatingEnergyContainer;
 import earth.terrarium.botarium.api.energy.StatefulEnergyContainer;
 import earth.terrarium.botarium.api.menu.ExtraDataMenuProvider;
@@ -114,8 +115,7 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
 		if (usesEnergy() && !this.getCachedState().get(AbstractMachineBlock.POWERED)) {
 			for (Direction direction : Direction.values()) {
 				// TODO: Sided energy storage transfer
-				// this.getEnergyStorage().insertEnergy(this.getEnergyStorage().extractEnergy(Long.MAX_VALUE, false), false);
-				// EnergyStorageUtil.move(getSideEnergyStorage(direction), EnergyStorage.SIDED.find(world, pos.offset(direction), direction.getOpposite()), Long.MAX_VALUE, null);
+				EnergyHooks.safeMoveEnergy(this.energyContainer, getSideEnergyStorage(direction), Long.MAX_VALUE);
 			}
 		}
 	}

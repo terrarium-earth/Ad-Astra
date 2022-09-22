@@ -4,7 +4,7 @@ import com.github.alexnijjar.ad_astra.blocks.machines.entity.AbstractMachineBloc
 import com.github.alexnijjar.ad_astra.blocks.machines.entity.FluidMachineBlockEntity;
 import com.github.alexnijjar.ad_astra.blocks.machines.entity.OxygenDistributorBlockEntity;
 
-import earth.terrarium.botarium.api.fluid.FluidHolder;
+import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -32,12 +32,12 @@ public class MachineBlockItem extends BlockItem {
 
 				if (machineBlock instanceof FluidMachineBlockEntity fluidMachine) {
 					if (nbt.contains("inputFluid")) {
-						fluidMachine.inputTank.variant = FluidHolder.fromNbt(nbt.getCompound("inputFluid"));
+						fluidMachine.inputTank.variant = FluidHooks.fluidFromCompound(nbt.getCompound("inputFluid"));
 						fluidMachine.inputTank.amount = nbt.getLong("inputAmount");
 					}
 
 					if (nbt.contains("outputFluid")) {
-						fluidMachine.outputTank.variant = FluidHolder.fromNbt(nbt.getCompound("outputFluid"));
+						fluidMachine.outputTank.variant = FluidHooks.fluidFromCompound(nbt.getCompound("outputFluid"));
 						fluidMachine.outputTank.amount = nbt.getLong("outputAmount");
 					}
 
