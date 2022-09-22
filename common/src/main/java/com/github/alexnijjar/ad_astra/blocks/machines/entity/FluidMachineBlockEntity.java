@@ -27,27 +27,6 @@ public abstract class FluidMachineBlockEntity extends AbstractMachineBlockEntity
 	public abstract long getOutputSize();
 
 	@Override
-	public void readNbt(NbtCompound nbt) {
-		super.readNbt(nbt);
-
-		tanks.getFluids().get(0).setFluid((FluidHooks.fluidFromCompound(nbt.getCompound("inputFluid"))).getFluid());
-		tanks.getFluids().get(0).setAmount(nbt.getLong("inputAmount"));
-
-		tanks.getFluids().get(1).setFluid((FluidHooks.fluidFromCompound(nbt.getCompound("outputAmount"))).getFluid());
-		tanks.getFluids().get(1).setAmount(nbt.getLong("outputAmount"));
-	}
-
-	@Override
-	public void writeNbt(NbtCompound nbt) {
-		nbt.put("inputFluid", tanks.getFluids().get(0).getCompound());
-		nbt.putLong("inputAmount", tanks.getFluids().get(0).getFluidAmount());
-
-		nbt.put("outputFluid", tanks.getFluids().get(1).getCompound());
-		nbt.putLong("outputAmount", tanks.getFluids().get(1).getFluidAmount());
-		super.writeNbt(nbt);
-	}
-
-	@Override
 	public void tick() {
 		// Ensure that the tanks don't have a variant when there is no fluid in them.
 		if (tanks.getFluids().get(0).getFluidAmount() == 0) {

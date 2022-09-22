@@ -144,9 +144,6 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
 		if (getInventorySize() > 0) {
 			Inventories.readNbt(nbt, this.inventory);
 		}
-		if (usesEnergy()) {
-			this.getEnergyStorage().setEnergy(nbt.getLong("energy"));
-		}
 	}
 
 	@Override
@@ -154,9 +151,6 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
 		super.writeNbt(nbt);
 		if (getInventorySize() > 0) {
 			Inventories.writeNbt(nbt, this.inventory);
-		}
-		if (usesEnergy()) {
-			nbt.putLong("energy", this.getEnergy());
 		}
 	}
 
