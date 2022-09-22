@@ -25,7 +25,7 @@ public class NasaWorkbenchScreenHandler extends AbstractMachineScreenHandler {
 	}
 
 	public NasaWorkbenchScreenHandler(int syncId, PlayerInventory inventory, NasaWorkbenchBlockEntity entity) {
-		super(ModScreenHandlers.NASA_WORKBENCH_SCREEN_HANDLER, syncId, inventory, entity, new Slot[]{
+		super(ModScreenHandlers.NASA_WORKBENCH_SCREEN_HANDLER.get(), syncId, inventory, entity, new Slot[] {
 
 				// Nose
 				new Slot(entity, 0, 56, 20),
@@ -63,7 +63,7 @@ public class NasaWorkbenchScreenHandler extends AbstractMachineScreenHandler {
 					public boolean canInsert(ItemStack stack) {
 						return false;
 					}
-				}});
+				} });
 		this.updateContent();
 	}
 

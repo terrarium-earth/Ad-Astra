@@ -2,6 +2,7 @@ package com.github.alexnijjar.ad_astra.items.armour;
 
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.registry.ModItems;
+
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.recipe.Ingredient;
@@ -10,8 +11,8 @@ import net.minecraft.sound.SoundEvents;
 
 public class JetSuitMaterial implements ArmorMaterial {
 
-	private static final int[] BASE_DURABILITY = new int[]{15, 17, 18, 13};
-	private static final int[] PROTECTION_VALUES = new int[]{4, 7, 9, 4};
+	private static final int[] BASE_DURABILITY = new int[] { 15, 17, 18, 13 };
+	private static final int[] PROTECTION_VALUES = new int[] { 4, 7, 9, 4 };
 
 	@Override
 	public int getDurability(EquipmentSlot slot) {

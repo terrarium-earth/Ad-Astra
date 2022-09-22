@@ -1,6 +1,7 @@
 package com.github.alexnijjar.ad_astra.blocks.machines;
 
 import com.github.alexnijjar.ad_astra.blocks.machines.entity.NasaWorkbenchBlockEntity;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;

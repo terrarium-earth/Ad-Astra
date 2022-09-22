@@ -62,8 +62,7 @@ public class EntityTemperatureSystem {
         entity.damage(DamageSource.FREEZE, 1);
         entity.setFrozenTicks(Math.min(entity.getMinFreezeDamageTicks() + 20, entity.getFrozenTicks() + 5 * 10));
         RandomGenerator random = entity.world.getRandom();
-        ModUtils.spawnForcedParticles((world), ParticleTypes.SNOWFLAKE, entity.getX(), entity.getY() + 1, entity.getZ(), 1, MathHelper.nextBetween(random, -1.0f, 1.0f) * 0.083333336f, 0.05,
-                (double) MathHelper.nextBetween(random, -1.0f, 1.0f) * 0.083333336, 0);
+        ModUtils.spawnForcedParticles((world), ParticleTypes.SNOWFLAKE, entity.getX(), entity.getY() + 1, entity.getZ(), 1, MathHelper.nextBetween(random, -1.0f, 1.0f) * 0.083333336f, 0.05, (double) MathHelper.nextBetween(random, -1.0f, 1.0f) * 0.083333336, 0);
 
         // Turn skeletons into strays
         if (entity instanceof SkeletonEntity skeleton) {

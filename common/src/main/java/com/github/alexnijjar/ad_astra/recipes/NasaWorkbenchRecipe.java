@@ -1,7 +1,11 @@
 package com.github.alexnijjar.ad_astra.recipes;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import com.github.alexnijjar.ad_astra.registry.ModRecipes;
 import com.google.gson.JsonObject;
+
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
@@ -10,9 +14,6 @@ import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-
-import java.util.LinkedList;
-import java.util.List;
 
 public class NasaWorkbenchRecipe extends CookingRecipe {
 

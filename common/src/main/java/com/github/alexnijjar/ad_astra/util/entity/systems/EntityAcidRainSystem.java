@@ -30,7 +30,7 @@ public class EntityAcidRainSystem {
             return;
         }
 
-       causeDamage(entity, world);
+        causeDamage(entity, world);
     }
 
     private static void causeDamage(LivingEntity entity, ServerWorld world) {

@@ -1,6 +1,7 @@
 package com.github.alexnijjar.ad_astra.blocks.machines;
 
 import com.github.alexnijjar.ad_astra.blocks.machines.entity.CryoFreezerBlockEntity;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 

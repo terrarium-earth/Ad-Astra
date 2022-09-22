@@ -65,8 +65,7 @@ public class ModCloudRenderer implements DimensionRenderingRegistry.CloudRendere
 			int o = (int) Math.floor(i);
 			int p = (int) Math.floor(j / 4.0);
 			int q = (int) Math.floor(k);
-			if (o != renderer.getLastCloudsBlockX() || p != renderer.getLastCloudsBlockY() || q != renderer.getLastCloudsBlockZ() || client.options.getCloudRenderMode() != renderer.getLastCloudsRenderMode()
-					|| renderer.getLastCloudsColor().squaredDistanceTo(colour) > 2.0E-4) {
+			if (o != renderer.getLastCloudsBlockX() || p != renderer.getLastCloudsBlockY() || q != renderer.getLastCloudsBlockZ() || client.options.getCloudRenderMode() != renderer.getLastCloudsRenderMode() || renderer.getLastCloudsColor().squaredDistanceTo(colour) > 2.0E-4) {
 				renderer.setLastCloudsBlockX(o);
 				renderer.setLastCloudsBlockY(p);
 				renderer.setLastCloudsBlockZ(q);

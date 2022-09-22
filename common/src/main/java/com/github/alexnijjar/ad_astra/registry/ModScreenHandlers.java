@@ -15,12 +15,9 @@ import com.github.alexnijjar.ad_astra.screen.handler.PlanetSelectionScreenHandle
 import com.github.alexnijjar.ad_astra.screen.handler.SolarPanelScreenHandler;
 import com.github.alexnijjar.ad_astra.screen.handler.VehicleScreenHandler;
 import com.github.alexnijjar.ad_astra.screen.handler.WaterPumpScreenHandler;
-import com.github.alexnijjar.ad_astra.util.ModIdentifier;
-import net.minecraft.screen.NamedScreenHandlerFactory;
 
 import dev.architectury.registry.registries.DeferredRegister;
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
-import net.minecraft.screen.ScreenHandler;
+import earth.terrarium.botarium.api.registry.RegistryHelpers;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.registry.Registry;
 
@@ -28,43 +25,38 @@ public class ModScreenHandlers {
 	public static final DeferredRegister<ScreenHandlerType<?>> SCREEN_HANDLERS = DeferredRegister.create(AdAstra.MOD_ID, Registry.MENU_KEY);
 
 	public static Supplier<ScreenHandlerType<SolarPanelScreenHandler>> SOLAR_PANEL_SCREEN_HANDLER;
-	public static ScreenHandlerType<CoalGeneratorScreenHandler> COAL_GENERATOR_SCREEN_HANDLER;
-	public static ScreenHandlerType<CompressorScreenHandler> COMPRESSOR_SCREEN_HANDLER;
-	public static ScreenHandlerType<NasaWorkbenchScreenHandler> NASA_WORKBENCH_SCREEN_HANDLER;
-	public static ScreenHandlerType<ConversionScreenHandler> CONVERSION_SCREEN_HANDLER;
-	public static ScreenHandlerType<WaterPumpScreenHandler> WATER_PUMP_SCREEN_HANDLER;
-	public static ScreenHandlerType<OxygenDistributorScreenHandler> OXYGEN_DISTRIBUTOR_SCREEN_HANDLER;
-	public static ScreenHandlerType<CryoFreezerScreenHandler> CRYO_FREEZER_SCREEN_HANDLER;
+	public static Supplier<ScreenHandlerType<CoalGeneratorScreenHandler>> COAL_GENERATOR_SCREEN_HANDLER;
+	public static Supplier<ScreenHandlerType<CompressorScreenHandler>> COMPRESSOR_SCREEN_HANDLER;
+	public static Supplier<ScreenHandlerType<NasaWorkbenchScreenHandler>> NASA_WORKBENCH_SCREEN_HANDLER;
+	public static Supplier<ScreenHandlerType<ConversionScreenHandler>> CONVERSION_SCREEN_HANDLER;
+	public static Supplier<ScreenHandlerType<WaterPumpScreenHandler>> WATER_PUMP_SCREEN_HANDLER;
+	public static Supplier<ScreenHandlerType<OxygenDistributorScreenHandler>> OXYGEN_DISTRIBUTOR_SCREEN_HANDLER;
+	public static Supplier<ScreenHandlerType<CryoFreezerScreenHandler>> CRYO_FREEZER_SCREEN_HANDLER;
 
-	public static ScreenHandlerType<VehicleScreenHandler> VEHICLE_SCREEN_HANDLER;
-	public static ScreenHandlerType<LargeVehicleScreenHandler> LARGE_VEHICLE_SCREEN_HANDLER;
-	public static ScreenHandlerType<LanderScreenHandler> LANDER_SCREEN_HANDLER;
+	public static Supplier<ScreenHandlerType<VehicleScreenHandler>> VEHICLE_SCREEN_HANDLER;
+	public static Supplier<ScreenHandlerType<LargeVehicleScreenHandler>> LARGE_VEHICLE_SCREEN_HANDLER;
+	public static Supplier<ScreenHandlerType<LanderScreenHandler>> LANDER_SCREEN_HANDLER;
 
-	public static ScreenHandlerType<PlanetSelectionScreenHandler> PLANET_SELECTION_SCREEN_HANDLER;
+	public static Supplier<ScreenHandlerType<PlanetSelectionScreenHandler>> PLANET_SELECTION_SCREEN_HANDLER;
 
 	public static void register() {
 
-		SOLAR_PANEL_SCREEN_HANDLER = SCREEN_HANDLERS.register("solar_panel_screen_handler", () -> new NamedScreenHandlerFactory(SolarPanelScreenHandler::new));
-		
-		COAL_GENERATOR_SCREEN_HANDLER = register("coal_generator_screen_handler", CoalGeneratorScreenHandler::new);
-		COMPRESSOR_SCREEN_HANDLER = register("compressor_screen_handler", CompressorScreenHandler::new);
-		NASA_WORKBENCH_SCREEN_HANDLER = register("nasa_workbench_screen_handler", NasaWorkbenchScreenHandler::new);
-		CONVERSION_SCREEN_HANDLER = register("conversion_screen_handler", ConversionScreenHandler::new);
-		WATER_PUMP_SCREEN_HANDLER = register("water_pump_screen_handler", WaterPumpScreenHandler::new);
-		CRYO_FREEZER_SCREEN_HANDLER = register("cryo_freezer_screen_handler", CryoFreezerScreenHandler::new);
+		SOLAR_PANEL_SCREEN_HANDLER = SCREEN_HANDLERS.register("solar_panel_screen_handler", () -> RegistryHelpers.createMenuType(SolarPanelScreenHandler::new));
+		COAL_GENERATOR_SCREEN_HANDLER = SCREEN_HANDLERS.register("coal_generator_screen_handler", () -> RegistryHelpers.createMenuType(CoalGeneratorScreenHandler::new));
+		COMPRESSOR_SCREEN_HANDLER = SCREEN_HANDLERS.register("compressor_screen_handler", () -> RegistryHelpers.createMenuType(CompressorScreenHandler::new));
+		NASA_WORKBENCH_SCREEN_HANDLER = SCREEN_HANDLERS.register("nasa_workbench_screen_handler", () -> RegistryHelpers.createMenuType(NasaWorkbenchScreenHandler::new));
+		CONVERSION_SCREEN_HANDLER = SCREEN_HANDLERS.register("conversion_screen_handler", () -> RegistryHelpers.createMenuType(ConversionScreenHandler::new));
+		WATER_PUMP_SCREEN_HANDLER = SCREEN_HANDLERS.register("water_pump_screen_handler", () -> RegistryHelpers.createMenuType(WaterPumpScreenHandler::new));
+		OXYGEN_DISTRIBUTOR_SCREEN_HANDLER = SCREEN_HANDLERS.register("oxygen_distributor_screen_handler", () -> RegistryHelpers.createMenuType(OxygenDistributorScreenHandler::new));
+		CRYO_FREEZER_SCREEN_HANDLER = SCREEN_HANDLERS.register("cryo_freezer_screen_handler", () -> RegistryHelpers.createMenuType(CryoFreezerScreenHandler::new));
 
-		VEHICLE_SCREEN_HANDLER = register("vehicle_screen_handler", VehicleScreenHandler::new);
-		LARGE_VEHICLE_SCREEN_HANDLER = register("large_vehicle_screen_handler", LargeVehicleScreenHandler::new);
-		LANDER_SCREEN_HANDLER = register("lander_screen_handler", LanderScreenHandler::new);
-		OXYGEN_DISTRIBUTOR_SCREEN_HANDLER = register("oxygen_distributor_screen_handler", OxygenDistributorScreenHandler::new);
+		VEHICLE_SCREEN_HANDLER = SCREEN_HANDLERS.register("vehicle_screen_handler", () -> RegistryHelpers.createMenuType(VehicleScreenHandler::new));
+		LARGE_VEHICLE_SCREEN_HANDLER = SCREEN_HANDLERS.register("large_vehicle_screen_handler", () -> RegistryHelpers.createMenuType(LargeVehicleScreenHandler::new));
+		LANDER_SCREEN_HANDLER = SCREEN_HANDLERS.register("lander_screen_handler", () -> RegistryHelpers.createMenuType(LanderScreenHandler::new));
 
-		PLANET_SELECTION_SCREEN_HANDLER = register("planet_selection_screen_handler", (syncId, playerInventory, buf) -> new PlanetSelectionScreenHandler(syncId, playerInventory.player, buf));
-
+		PLANET_SELECTION_SCREEN_HANDLER = SCREEN_HANDLERS.register("planet_selection_screen_handler", () -> RegistryHelpers.createMenuType(PlanetSelectionScreenHandler::new));
 
 		SCREEN_HANDLERS.register();
 	}
 
-	public static <T extends ScreenHandler> ScreenHandlerType<T> register(String id, ExtendedScreenHandlerType.ExtendedFactory<T> screenHandler) {
-		return Registry.register(Registry.SCREEN_HANDLER, new ModIdentifier(id), new ExtendedScreenHandlerType<>(screenHandler));
-	}
 }

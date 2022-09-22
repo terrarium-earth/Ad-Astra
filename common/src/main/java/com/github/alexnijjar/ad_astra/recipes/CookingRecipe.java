@@ -1,10 +1,10 @@
 package com.github.alexnijjar.ad_astra.recipes;
 
+import java.util.List;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.util.Identifier;
-
-import java.util.List;
 
 public abstract class CookingRecipe extends ModRecipe {
 

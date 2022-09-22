@@ -6,7 +6,7 @@ import java.util.List;
 import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
 
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidHolder;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
 import net.minecraft.block.BlockState;
@@ -15,9 +15,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
-public class FluidPipeBlockEntity extends BlockEntity implements InteractablePipe<Storage<FluidVariant>> {
-    private List<Node<Storage<FluidVariant>>> consumers = new ArrayList<>();
-    private Node<Storage<FluidVariant>> source;
+public class FluidPipeBlockEntity extends BlockEntity implements InteractablePipe<Storage<FluidHolder>> {
+    private List<Node<Storage<FluidHolder>>> consumers = new ArrayList<>();
+    private Node<Storage<FluidHolder>> source;
 
     public FluidPipeBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.FLUID_PIPE.get(), pos, state);
@@ -29,12 +29,12 @@ public class FluidPipeBlockEntity extends BlockEntity implements InteractablePip
     }
 
     @Override
-    public boolean canTakeFrom(Storage<FluidVariant> source) {
+    public boolean canTakeFrom(Storage<FluidHolder> source) {
         return source.supportsExtraction();
     }
 
     @Override
-    public boolean canInsertInto(Storage<FluidVariant> consumer) {
+    public boolean canInsertInto(Storage<FluidHolder> consumer) {
         return consumer.supportsInsertion();
     }
 
@@ -45,7 +45,7 @@ public class FluidPipeBlockEntity extends BlockEntity implements InteractablePip
 
     @Override
     @SuppressWarnings("UnstableApiUsage")
-    public void insertInto(Storage<FluidVariant> consumer, Direction direction, BlockPos pos) {
+    public void insertInto(Storage<FluidHolder> consumer, Direction direction, BlockPos pos) {
 
         BlockState state = this.getCachedState();
         BlockState state2 = world.getBlockState(pos);
@@ -57,8 +57,8 @@ public class FluidPipeBlockEntity extends BlockEntity implements InteractablePip
         PipeState pipeState = state.get(FluidPipeBlock.DIRECTIONS.get(this.getSource().direction()));
         PipeState pipeState2 = state2.get(FluidPipeBlock.DIRECTIONS.get(direction));
 
-        Storage<FluidVariant> input;
-        Storage<FluidVariant> output;
+        Storage<FluidHolder> input;
+        Storage<FluidHolder> output;
 
         if (pipeState.equals(PipeState.INSERT) && pipeState2.equals(PipeState.INSERT)) {
             return;
@@ -88,17 +88,17 @@ public class FluidPipeBlockEntity extends BlockEntity implements InteractablePip
     }
 
     @Override
-    public Storage<FluidVariant> getInteraction(World world, BlockPos pos, Direction direction) {
+    public Storage<FluidHolder> getInteraction(World world, BlockPos pos, Direction direction) {
         return FluidStorage.SIDED.find(world, pos, direction);
     }
 
     @Override
-    public Node<Storage<FluidVariant>> getSource() {
+    public Node<Storage<FluidHolder>> getSource() {
         return source;
     }
 
     @Override
-    public void setSource(Node<Storage<FluidVariant>> source) {
+    public void setSource(Node<Storage<FluidHolder>> source) {
         this.source = source;
     }
 
@@ -108,7 +108,7 @@ public class FluidPipeBlockEntity extends BlockEntity implements InteractablePip
     }
 
     @Override
-    public List<Node<Storage<FluidVariant>>> getConsumers() {
+    public List<Node<Storage<FluidHolder>>> getConsumers() {
         return this.consumers;
     }
 

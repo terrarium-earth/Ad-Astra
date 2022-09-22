@@ -3,6 +3,7 @@ package com.github.alexnijjar.ad_astra.registry;
 import com.github.alexnijjar.ad_astra.items.armour.JetSuitMaterial;
 import com.github.alexnijjar.ad_astra.items.armour.NetheriteSpaceSuitMaterial;
 import com.github.alexnijjar.ad_astra.items.armour.SpaceSuitMaterial;
+
 import net.minecraft.item.ArmorMaterial;
 
 public class ModArmour {

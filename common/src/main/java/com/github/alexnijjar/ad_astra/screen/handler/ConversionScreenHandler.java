@@ -14,7 +14,7 @@ public class ConversionScreenHandler extends AbstractMachineScreenHandler {
 	}
 
 	public ConversionScreenHandler(int syncId, PlayerInventory inventory, FluidMachineBlockEntity entity) {
-		super(ModScreenHandlers.CONVERSION_SCREEN_HANDLER, syncId, inventory, entity, new Slot[]{
+		super(ModScreenHandlers.CONVERSION_SCREEN_HANDLER.get(), syncId, inventory, entity, new Slot[] {
 
 				// Left Insert.
 				new Slot(entity, 0, 12, 22),
@@ -33,7 +33,7 @@ public class ConversionScreenHandler extends AbstractMachineScreenHandler {
 					public boolean canInsert(ItemStack stack) {
 						return false;
 					}
-				}});
+				} });
 	}
 
 	@Override

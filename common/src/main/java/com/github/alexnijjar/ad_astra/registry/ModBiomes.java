@@ -1,6 +1,7 @@
 package com.github.alexnijjar.ad_astra.registry;
 
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
+
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;

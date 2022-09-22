@@ -29,11 +29,11 @@ public class WaterPumpBlock extends AbstractMachineBlock {
 	@Override
 	public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
 		return switch (state.get(FACING)) {
-			case NORTH -> NORTH_SHAPE;
-			case SOUTH -> SOUTH_SHAPE;
-			case EAST -> EAST_SHAPE;
-			case WEST -> WEST_SHAPE;
-			default -> throw new IllegalStateException("Unexpected value: " + state.get(FACING));
+		case NORTH -> NORTH_SHAPE;
+		case SOUTH -> SOUTH_SHAPE;
+		case EAST -> EAST_SHAPE;
+		case WEST -> WEST_SHAPE;
+		default -> throw new IllegalStateException("Unexpected value: " + state.get(FACING));
 		};
 	}
 

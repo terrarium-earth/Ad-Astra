@@ -7,6 +7,5 @@ import net.fabricmc.api.Environment;
 import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
-public record SolarSystem(Identifier galaxy, Identifier solarSystem, Identifier sun, int sunScale,
-						  ButtonColour buttonColour, ColourHolder ringColour) {
+public record SolarSystem(Identifier galaxy, Identifier solarSystem, Identifier sun, int sunScale, ButtonColour buttonColour, ColourHolder ringColour) {
 }

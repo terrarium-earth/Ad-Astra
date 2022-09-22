@@ -1,15 +1,16 @@
 package com.github.alexnijjar.ad_astra.recipes;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import com.github.alexnijjar.ad_astra.registry.ModRecipes;
 import com.google.gson.JsonObject;
+
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.util.Identifier;
-
-import java.util.LinkedList;
-import java.util.List;
 
 public class SpaceStationRecipe extends ModRecipe {
 

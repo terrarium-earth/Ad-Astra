@@ -1,14 +1,16 @@
 package com.github.alexnijjar.ad_astra.blocks.machines.entity;
 
+import org.jetbrains.annotations.Nullable;
+
 import com.github.alexnijjar.ad_astra.recipes.CookingRecipe;
 import com.github.alexnijjar.ad_astra.recipes.ModRecipeType;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
-import org.jetbrains.annotations.Nullable;
 
 public abstract class ProcessingMachineBlockEntity extends AbstractMachineBlockEntity {
 

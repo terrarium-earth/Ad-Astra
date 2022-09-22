@@ -21,8 +21,7 @@ import net.minecraft.server.command.ServerCommandSource;
 public class PlanetGuiCommand {
 
 	public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
-		dispatcher.register(CommandManager.literal("planetgui").requires(source -> source.hasPermissionLevel(2)).executes(PlanetGuiCommand::executeSimple)
-				.then(argument("target", EntityArgumentType.entities()).executes(PlanetGuiCommand::executePartial).then(argument("tier", IntegerArgumentType.integer()).executes(PlanetGuiCommand::executeFull))));
+		dispatcher.register(CommandManager.literal("planetgui").requires(source -> source.hasPermissionLevel(2)).executes(PlanetGuiCommand::executeSimple).then(argument("target", EntityArgumentType.entities()).executes(PlanetGuiCommand::executePartial).then(argument("tier", IntegerArgumentType.integer()).executes(PlanetGuiCommand::executeFull))));
 	}
 
 	private static int executeSimple(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {

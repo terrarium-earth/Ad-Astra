@@ -2,6 +2,7 @@ package com.github.alexnijjar.ad_astra.client.resourcepack;
 
 import com.github.alexnijjar.ad_astra.data.ButtonColour;
 import com.google.gson.JsonObject;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.util.Identifier;

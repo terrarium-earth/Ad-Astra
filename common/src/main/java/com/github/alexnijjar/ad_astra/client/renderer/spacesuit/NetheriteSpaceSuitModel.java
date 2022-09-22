@@ -32,13 +32,11 @@ public class NetheriteSpaceSuitModel {
 
 		ModelPartData right_arm = modelPartData.addChild("right_arm", ModelPartBuilder.create(), ModelTransform.pivot(-5.0f, 1.0f, 0.0f));
 
-		ModelPartData cube_r1 = right_arm.addChild("cube_r1", ModelPartBuilder.create().uv(28, 45).cuboid(-2.5f, -6.0f, -2.0f, 4.0f, 12.0f, 4.0f, new Dilation(0.9f))
-		.uv(0, 16).cuboid(-2.5f, -6.0f, -2.0f, 4.0f, 12.0f, 4.0f, new Dilation(0.6f)), ModelTransform.of(-1.0f, 4.0f, 0.0f, 0.0f, 0.0f, 0.0f));
+		ModelPartData cube_r1 = right_arm.addChild("cube_r1", ModelPartBuilder.create().uv(28, 45).cuboid(-2.5f, -6.0f, -2.0f, 4.0f, 12.0f, 4.0f, new Dilation(0.9f)).uv(0, 16).cuboid(-2.5f, -6.0f, -2.0f, 4.0f, 12.0f, 4.0f, new Dilation(0.6f)), ModelTransform.of(-1.0f, 4.0f, 0.0f, 0.0f, 0.0f, 0.0f));
 
 		ModelPartData left_arm = modelPartData.addChild("left_arm", ModelPartBuilder.create(), ModelTransform.pivot(5.0f, 1.0f, 0.0f));
 
-		ModelPartData cube_r2 = left_arm.addChild("cube_r2", ModelPartBuilder.create().uv(44, 45).cuboid(-1.5f, -6.0f, -2.0f, 4.0f, 12.0f, 4.0f, new Dilation(1.0f))
-		.uv(16, 16).cuboid(-1.5f, -6.0f, -2.0f, 4.0f, 12.0f, 4.0f, new Dilation(0.6f)), ModelTransform.of(1.0f, 4.0f, 0.0f, 0.0f, 0.0f, 0.0f));
+		ModelPartData cube_r2 = left_arm.addChild("cube_r2", ModelPartBuilder.create().uv(44, 45).cuboid(-1.5f, -6.0f, -2.0f, 4.0f, 12.0f, 4.0f, new Dilation(1.0f)).uv(16, 16).cuboid(-1.5f, -6.0f, -2.0f, 4.0f, 12.0f, 4.0f, new Dilation(0.6f)), ModelTransform.of(1.0f, 4.0f, 0.0f, 0.0f, 0.0f, 0.0f));
 
 		ModelPartData right_leg = modelPartData.addChild("right_leg", ModelPartBuilder.create().uv(0, 32).cuboid(-2.0f, 0.6667f, -2.0f, 4.0f, 9.0f, 4.0f, new Dilation(0.7f)), ModelTransform.pivot(-2.0f, 10.3333f, 0.0f));
 

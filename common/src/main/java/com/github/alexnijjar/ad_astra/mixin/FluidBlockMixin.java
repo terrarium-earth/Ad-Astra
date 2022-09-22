@@ -1,5 +1,11 @@
 package com.github.alexnijjar.ad_astra.mixin;
 
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
 import com.github.alexnijjar.ad_astra.registry.ModFluids;
 import com.github.alexnijjar.ad_astra.util.entity.OxygenUtils;
 
@@ -10,11 +16,6 @@ import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(FluidBlock.class)
 public class FluidBlockMixin {
@@ -36,7 +37,7 @@ public class FluidBlockMixin {
 	public void adastra_receiveNeighborFluids(World world, BlockPos pos, BlockState state, CallbackInfoReturnable<Boolean> ci) {
 		FluidBlock block = (FluidBlock) (Object) this;
 		if (block.equals(Blocks.WATER)) {
-			for (Direction direction : new Direction[]{Direction.DOWN, Direction.SOUTH, Direction.NORTH, Direction.EAST, Direction.WEST}) {
+			for (Direction direction : new Direction[] { Direction.DOWN, Direction.SOUTH, Direction.NORTH, Direction.EAST, Direction.WEST }) {
 				BlockPos blockPos = pos.offset(direction.getOpposite());
 				if (world.getFluidState(blockPos).getBlockState().getBlock().equals(ModFluids.CRYO_FUEL_BLOCK)) {
 					world.setBlockState(pos, Blocks.ICE.getDefaultState());

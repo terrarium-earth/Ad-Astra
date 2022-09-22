@@ -1,16 +1,23 @@
 package com.github.alexnijjar.ad_astra.util.algorithms;
 
-import net.minecraft.block.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
-
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 import com.github.alexnijjar.ad_astra.blocks.door.SlidingDoorBlock;
+
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.DoorBlock;
+import net.minecraft.block.GrassBlock;
+import net.minecraft.block.HorizontalConnectingBlock;
+import net.minecraft.block.IceBlock;
+import net.minecraft.block.LadderBlock;
+import net.minecraft.block.TrapdoorBlock;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import net.minecraft.world.World;
 
 /**
  * A 3D flood fill algorithm that will fill an entire structure with oxygen.
@@ -30,8 +37,7 @@ public class OxygenFillerAlgorithm {
 		Set<BlockPos> positions = new HashSet<>();
 		Set<BlockPos> queue = new LinkedHashSet<>();
 		queue.add(start);
-		main:
-		while (!queue.isEmpty()) {
+		main: while (!queue.isEmpty()) {
 
 			// Cancel if the the amount of oxygen exceeds the limit. This is the case if there was an oxygen leak or the room was too
 			// large to support the oxygen

@@ -11,7 +11,7 @@ import net.minecraft.util.math.Direction;
 
 public class OxygenSensorBlockEntity extends AbstractMachineBlockEntity {
 
-	public static final Direction[] CHECK_DIRECTIONS = new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST, Direction.UP};
+	public static final Direction[] CHECK_DIRECTIONS = new Direction[] { Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST, Direction.UP };
 
 	public OxygenSensorBlockEntity(BlockPos blockPos, BlockState blockState) {
 		super(ModBlockEntities.OXYGEN_SENSOR.get(), blockPos, blockState);

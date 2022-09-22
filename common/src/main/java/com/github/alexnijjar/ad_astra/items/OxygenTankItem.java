@@ -7,11 +7,11 @@ import com.github.alexnijjar.ad_astra.registry.ModFluids;
 import com.github.alexnijjar.ad_astra.registry.ModItems;
 import com.github.alexnijjar.ad_astra.util.FluidUtils;
 
+import earth.terrarium.botarium.api.fluid.FluidHolder;
+import earth.terrarium.botarium.api.fluid.FluidHoldingItem;
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.item.PlayerInventoryStorage;
-import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
 import net.fabricmc.fabric.impl.transfer.context.PlayerContainerItemContext;
 import net.minecraft.client.item.TooltipContext;
@@ -27,9 +27,10 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.collection.LinkedBlockPosHashSet.Storage;
 import net.minecraft.world.World;
 
-public class OxygenTankItem extends Item implements FluidContainingItem {
+public class OxygenTankItem extends Item implements FluidHoldingItem {
 
 	public OxygenTankItem(Settings settings) {
 		super(settings);
@@ -61,8 +62,8 @@ public class OxygenTankItem extends Item implements FluidContainingItem {
 			if (chest.isOf(ModItems.SPACE_SUIT.get()) || chest.isOf(ModItems.NETHERITE_SPACE_SUIT.get()) || chest.isOf(ModItems.JET_SUIT.get())) {
 
 				PlayerInventoryStorage playerWrapper = PlayerInventoryStorage.of(user);
-				Storage<FluidVariant> from = ContainerItemContext.ofPlayerHand(user, hand).find(FluidStorage.ITEM);
-				Storage<FluidVariant> to = new PlayerContainerItemContext(user, playerWrapper.getSlot(38)).find(FluidStorage.ITEM);
+				Storage<FluidHolder> from = ContainerItemContext.ofPlayerHand(user, hand).find(FluidStorage.ITEM);
+				Storage<FluidHolder> to = new PlayerContainerItemContext(user, playerWrapper.getSlot(38)).find(FluidStorage.ITEM);
 
 				if (StorageUtil.move(from, to, f -> true, Long.MAX_VALUE, null) > 0) {
 					world.playSound(null, user.getBlockPos(), SoundEvents.ENTITY_GENERIC_DRINK, SoundCategory.PLAYERS, 1, 1);
@@ -76,7 +77,7 @@ public class OxygenTankItem extends Item implements FluidContainingItem {
 	public static ItemStack createOxygenatedTank() {
 		ItemStack oxygenTank = ModItems.OXYGEN_TANK.get().getDefaultStack();
 		((OxygenTankItem) oxygenTank.getItem()).setAmount(oxygenTank, ((OxygenTankItem) oxygenTank.getItem()).getTankSize());
-		((OxygenTankItem) oxygenTank.getItem()).setFluid(oxygenTank, FluidVariant.of(ModFluids.OXYGEN_STILL));
+		((OxygenTankItem) oxygenTank.getItem()).setFluid(oxygenTank, FluidHolder.of(ModFluids.OXYGEN_STILL));
 		return oxygenTank;
 	}
 }

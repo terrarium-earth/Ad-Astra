@@ -3,6 +3,7 @@ package com.github.alexnijjar.ad_astra.client.renderer.entity.mobs;
 import com.github.alexnijjar.ad_astra.client.renderer.entity.mobs.models.CorruptedLunarianEntityModel;
 import com.github.alexnijjar.ad_astra.entities.mobs.CorruptedLunarianEntity;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.entity.EntityRendererFactory;

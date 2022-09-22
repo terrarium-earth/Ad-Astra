@@ -210,7 +210,7 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
 	public StatefulEnergyContainer getEnergyStorage() {
 		return new SimpleUpdatingEnergyContainer(this, (int) this.getMaxGeneration());
 	}
-	
+
 	@Override
 	public void update() {
 		this.markDirty();

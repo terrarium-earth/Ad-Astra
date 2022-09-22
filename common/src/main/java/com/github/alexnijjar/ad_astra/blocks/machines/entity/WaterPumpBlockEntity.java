@@ -9,10 +9,9 @@ import com.github.alexnijjar.ad_astra.registry.ModParticleTypes;
 import com.github.alexnijjar.ad_astra.screen.handler.WaterPumpScreenHandler;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
 
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidHooks;
+import earth.terrarium.botarium.api.fluid.FluidHolder;
+import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
-import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -23,6 +22,7 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.collection.LinkedBlockPosHashSet.Storage;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 
@@ -88,7 +88,7 @@ public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
 	public void tick() {
 		super.tick();
 		if (!this.world.isClient) {
-			FluidVariant waterFluid = FluidVariant.of(Fluids.WATER);
+			FluidHolder waterFluid = FluidHolder.of(Fluids.WATER);
 			BlockState water = this.world.getBlockState(this.getPos().down());
 			if (this.inputTank.getAmount() < this.inputTank.getCapacity()) {
 				if (water.isOf(Blocks.WATER) && water.get(FluidBlock.LEVEL) == 0) {
@@ -125,7 +125,7 @@ public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
 				}
 				// Insert the fluid into nearby tanks.
 				for (Direction direction : new Direction[] { Direction.UP, this.getCachedState().get(AbstractMachineBlock.FACING) }) {
-					Storage<FluidVariant> storage = FluidStorage.SIDED.find(this.world, this.getPos().offset(direction), direction);
+					Storage<FluidHolder> storage = FluidStorage.SIDED.find(this.world, this.getPos().offset(direction), direction);
 					if (storage != null) {
 						try (Transaction transaction = Transaction.openOuter()) {
 							long transferPerTick = AdAstra.CONFIG.waterPump.transferPerTick;

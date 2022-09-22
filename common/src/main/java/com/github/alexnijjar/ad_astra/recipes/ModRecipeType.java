@@ -1,15 +1,15 @@
 package com.github.alexnijjar.ad_astra.recipes;
 
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
+
 import net.minecraft.inventory.Inventory;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeManager;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
-
-import java.util.List;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 public class ModRecipeType<T extends Recipe<Inventory>> implements RecipeType<T> {
 	private final Identifier id;

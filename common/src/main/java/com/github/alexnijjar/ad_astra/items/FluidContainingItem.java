@@ -1,23 +1,23 @@
 package com.github.alexnijjar.ad_astra.items;
 
+import java.util.List;
+
+import earth.terrarium.botarium.api.fluid.FluidHolder;
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
-import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantItemStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-
-import java.util.List;
+import net.minecraft.util.collection.LinkedBlockPosHashSet.Storage;
 
 public interface FluidContainingItem {
 
 	long getTankSize();
 
-	default boolean insertIntoTank(Storage<FluidVariant> storage, ItemStack stack) {
+	default boolean insertIntoTank(Storage<FluidHolder> storage, ItemStack stack) {
 		try (Transaction transaction = Transaction.openOuter()) {
 			if (storage.insert(this.getFluid(stack), this.getAmount(stack), transaction) == this.getAmount(stack)) {
 				transaction.commit();
@@ -29,20 +29,20 @@ public interface FluidContainingItem {
 
 	List<Fluid> getInputFluids();
 
-	default long transferFluid(Storage<FluidVariant> from, Storage<FluidVariant> to) {
+	default long transferFluid(Storage<FluidHolder> from, Storage<FluidHolder> to) {
 		return StorageUtil.move(from, to, f -> true, Long.MAX_VALUE, null);
 	}
 
-	default FluidVariant getFluid(ItemStack stack) {
+	default FluidHolder getFluid(ItemStack stack) {
 		NbtCompound nbt = stack.getOrCreateNbt();
 		if (nbt.contains("fluid")) {
-			return FluidVariant.fromNbt(nbt.getCompound("fluid"));
+			return FluidHolder.fromNbt(nbt.getCompound("fluid"));
 		} else {
-			return FluidVariant.blank();
+			return FluidHolder.blank();
 		}
 	}
 
-	default void setFluid(ItemStack stack, FluidVariant variant) {
+	default void setFluid(ItemStack stack, FluidHolder variant) {
 		NbtCompound nbt = stack.getOrCreateNbt();
 		nbt.put("fluid", variant.toNbt());
 	}
@@ -61,7 +61,7 @@ public interface FluidContainingItem {
 		nbt.putLong("amount", amount);
 	}
 
-	class TankStorage extends SingleVariantItemStorage<FluidVariant> {
+	class TankStorage extends SingleVariantItemStorage<FluidHolder> {
 
 		private final FluidContainingItem item;
 
@@ -71,17 +71,17 @@ public interface FluidContainingItem {
 		}
 
 		@Override
-		protected boolean canInsert(FluidVariant resource) {
+		protected boolean canInsert(FluidHolder resource) {
 			return item.getInputFluids().contains(resource.getFluid());
 		}
 
 		@Override
-		protected FluidVariant getBlankResource() {
-			return FluidVariant.blank();
+		protected FluidHolder getBlankResource() {
+			return FluidHolder.blank();
 		}
 
 		@Override
-		protected FluidVariant getResource(ItemVariant currentVariant) {
+		protected FluidHolder getResource(ItemVariant currentVariant) {
 			return item.getFluid(currentVariant.toStack());
 		}
 
@@ -91,12 +91,12 @@ public interface FluidContainingItem {
 		}
 
 		@Override
-		protected long getCapacity(FluidVariant variant) {
+		protected long getCapacity(FluidHolder variant) {
 			return item.getTankSize();
 		}
 
 		@Override
-		protected ItemVariant getUpdatedVariant(ItemVariant currentVariant, FluidVariant newResource, long newAmount) {
+		protected ItemVariant getUpdatedVariant(ItemVariant currentVariant, FluidHolder newResource, long newAmount) {
 			ItemStack stack = new ItemStack(currentVariant.getItem());
 			NbtCompound nbt = currentVariant.copyNbt();
 

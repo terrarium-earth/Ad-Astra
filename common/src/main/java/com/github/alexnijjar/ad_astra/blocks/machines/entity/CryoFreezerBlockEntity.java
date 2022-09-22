@@ -10,7 +10,7 @@ import com.github.alexnijjar.ad_astra.registry.ModRecipes;
 import com.github.alexnijjar.ad_astra.screen.handler.CryoFreezerScreenHandler;
 import com.github.alexnijjar.ad_astra.util.FluidUtils;
 
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import earth.terrarium.botarium.api.fluid.FluidHolder;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -64,7 +64,7 @@ public class CryoFreezerBlockEntity extends FluidMachineBlockEntity {
 			CryoFuelConversionRecipe recipe = this.createRecipe(ModRecipes.CRYO_FUEL_CONVERSION_RECIPE, this.getStack(0), false);
 			if (recipe != null) {
 				try (Transaction transaction = Transaction.openOuter()) {
-					if (this.inputTank.insert(FluidVariant.of(recipe.getFluidOutput()), FluidUtils.millibucketsToDroplets((long) (1000 * recipe.getConversionRatio())), transaction) > 0) {
+					if (this.inputTank.insert(FluidHolder.of(recipe.getFluidOutput()), FluidUtils.millibucketsToDroplets((long) (1000 * recipe.getConversionRatio())), transaction) > 0) {
 						transaction.commit();
 					}
 				}

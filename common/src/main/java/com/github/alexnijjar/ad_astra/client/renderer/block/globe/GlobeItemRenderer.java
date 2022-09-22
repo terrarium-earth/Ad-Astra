@@ -16,11 +16,12 @@ import net.minecraft.util.registry.Registry;
 public class GlobeItemRenderer implements BuiltinItemRendererRegistry.DynamicItemRenderer {
 
 	private long prevWorldTime;
+
 	@Override
 	public void render(ItemStack stack, ModelTransformation.Mode mode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
 
 		GlobeModel model = GlobeModel.getModel();
-		
+
 		// Constant spin
 		MinecraftClient client = MinecraftClient.getInstance();
 		float tickDelta = client.getTickDelta();

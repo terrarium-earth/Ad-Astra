@@ -1,14 +1,15 @@
 package com.github.alexnijjar.ad_astra.client.screens;
 
+import java.awt.Rectangle;
+
 import com.github.alexnijjar.ad_astra.blocks.machines.entity.CryoFreezerBlockEntity;
 import com.github.alexnijjar.ad_astra.screen.handler.CryoFreezerScreenHandler;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
+
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-
-import java.awt.*;
 
 public class CryoFreezerScreen extends AbstractMachineScreen<CryoFreezerScreenHandler> {
 

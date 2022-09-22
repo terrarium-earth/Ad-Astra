@@ -1,6 +1,7 @@
 package com.github.alexnijjar.ad_astra.items;
 
 import com.github.alexnijjar.ad_astra.registry.ModBlocks;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.util.ActionResult;

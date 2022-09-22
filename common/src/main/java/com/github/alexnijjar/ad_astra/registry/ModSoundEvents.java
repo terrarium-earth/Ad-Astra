@@ -44,7 +44,7 @@ public class ModSoundEvents {
 		PASSING_SPACESHIP = register(new ModIdentifier("passing_spaceship"));
 		SPACE_LASER = register(new ModIdentifier("space_laser"));
 		WORMHOLE = register(new ModIdentifier("wormhole"));
-		
+
 		LARGE_DOOR_OPEN = register(new ModIdentifier("large_door_open"));
 		LARGE_DOOR_CLOSE = register(new ModIdentifier("large_door_close"));
 		SMALL_DOOR_OPEN = register(new ModIdentifier("small_door_open"));

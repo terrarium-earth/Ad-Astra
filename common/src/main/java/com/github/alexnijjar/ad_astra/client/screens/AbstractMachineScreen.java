@@ -3,6 +3,7 @@ package com.github.alexnijjar.ad_astra.client.screens;
 import com.github.alexnijjar.ad_astra.blocks.machines.entity.AbstractMachineBlockEntity;
 import com.github.alexnijjar.ad_astra.screen.handler.AbstractMachineScreenHandler;
 import com.mojang.blaze3d.systems.RenderSystem;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawableHelper;

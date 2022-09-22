@@ -1,6 +1,7 @@
 package com.github.alexnijjar.ad_astra.blocks.globes;
 
 import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;

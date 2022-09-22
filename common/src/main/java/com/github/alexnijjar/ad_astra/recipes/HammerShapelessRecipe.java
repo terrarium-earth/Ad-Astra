@@ -4,6 +4,7 @@ import com.github.alexnijjar.ad_astra.items.HammerItem;
 import com.github.alexnijjar.ad_astra.registry.ModItems;
 import com.github.alexnijjar.ad_astra.registry.ModRecipes;
 import com.google.gson.JsonObject;
+
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

@@ -1,6 +1,7 @@
 package com.github.alexnijjar.ad_astra.screen.handler;
 
 import com.github.alexnijjar.ad_astra.blocks.machines.entity.AbstractMachineBlockEntity;
+
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
@@ -16,7 +17,7 @@ public abstract class AbstractMachineScreenHandler extends ScreenHandler {
 	protected final World world;
 
 	public AbstractMachineScreenHandler(ScreenHandlerType<?> type, int syncId, PlayerInventory inventory, AbstractMachineBlockEntity entity) {
-		this(type, syncId, inventory, entity, new Slot[]{});
+		this(type, syncId, inventory, entity, new Slot[] {});
 	}
 
 	// Add additional slots.

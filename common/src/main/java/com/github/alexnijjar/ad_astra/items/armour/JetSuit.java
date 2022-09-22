@@ -24,7 +24,7 @@ import java.util.List;
 
 public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
 
-	//Todo Make specific class on fabric/forge for this
+	// Todo Make specific class on fabric/forge for this
 
 	public boolean isFallFlying;
 
@@ -37,7 +37,7 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
 		return AdAstra.CONFIG.spaceSuit.jetSuitTankSize;
 	}
 
-	//TODO Use for cusotm impl of elytra
+	// TODO Use for cusotm impl of elytra
 	public boolean useCustomElytra(LivingEntity entity, ItemStack chestStack, boolean tickElytra) {
 		return this.isFallFlying;
 	}
@@ -92,7 +92,7 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
 			PlatformEnergyManager energy = EnergyHooks.getItemHandler(stack);
 			long tickEnergy = AdAstra.CONFIG.spaceSuit.jetSuitEnergyPerTick;
 			if (!player.isCreative() && energy.extract(tickEnergy, false) < tickEnergy) {
-				//return;
+				// return;
 			}
 			isFallFlying = false;
 
@@ -111,15 +111,14 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
 		PlatformEnergyManager energy = EnergyHooks.getItemHandler(stack);
 		long tickEnergy = AdAstra.CONFIG.spaceSuit.jetSuitEnergyPerTick;
 		if (!player.isCreative() && energy.extract(tickEnergy, false) < tickEnergy) {
-			//return;
+			// return;
 		}
 		isFallFlying = true;
 
 		double speed = AdAstra.CONFIG.spaceSuit.jetSuitSpeed - (ModUtils.getPlanetGravity(player.world) * 0.25);
 		Vec3d rotationVector = player.getRotationVector().multiply(speed);
 		Vec3d velocity = player.getVelocity();
-		player.setVelocity(velocity.add(rotationVector.getX() * 0.1 + (rotationVector.getX() * 1.5 - velocity.getX()) * 0.5, rotationVector.getY() * 0.1 + (rotationVector.getY() * 1.5 - velocity.getY()) * 0.5,
-				rotationVector.getZ() * 0.1 + (rotationVector.getZ() * 1.5 - velocity.getZ()) * 0.5));
+		player.setVelocity(velocity.add(rotationVector.getX() * 0.1 + (rotationVector.getX() * 1.5 - velocity.getX()) * 0.5, rotationVector.getY() * 0.1 + (rotationVector.getY() * 1.5 - velocity.getY()) * 0.5, rotationVector.getZ() * 0.1 + (rotationVector.getZ() * 1.5 - velocity.getZ()) * 0.5));
 	}
 
 	public static void spawnParticles(World world, LivingEntity entity, BipedEntityModel<LivingEntity> model) {

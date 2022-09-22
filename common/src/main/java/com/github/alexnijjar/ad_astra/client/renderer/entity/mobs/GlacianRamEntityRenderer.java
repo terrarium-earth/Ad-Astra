@@ -6,7 +6,6 @@ import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
-
 import net.minecraft.util.Identifier;
 
 public class GlacianRamEntityRenderer extends MobEntityRenderer<GlacianRamEntity, GlacianRamEntityModel<GlacianRamEntity>> {

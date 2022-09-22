@@ -2,6 +2,7 @@ package com.github.alexnijjar.ad_astra.screen.handler;
 
 import com.github.alexnijjar.ad_astra.blocks.machines.entity.SolarPanelBlockEntity;
 import com.github.alexnijjar.ad_astra.registry.ModScreenHandlers;
+
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.PacketByteBuf;
 

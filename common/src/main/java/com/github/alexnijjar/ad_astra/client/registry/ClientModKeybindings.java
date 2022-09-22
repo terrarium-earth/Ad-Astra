@@ -6,7 +6,6 @@ import com.github.alexnijjar.ad_astra.networking.ModC2SPackets;
 import dev.architectury.event.events.client.ClientTickEvent;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.MinecraftClient;
@@ -46,7 +45,7 @@ public class ClientModKeybindings {
 					if (client.options.jumpKey.isPressed()) {
 						if (client.player.getVehicle() instanceof RocketEntity rocket) {
 							if (!rocket.isFlying()) {
-								if (rocket.getFluidAmount() >= RocketEntity.getRequiredAmountForLaunch(rocket.getFluidVariant())) {
+								if (rocket.getFluidAmount() >= RocketEntity.getRequiredAmountForLaunch(rocket.getFluidHolder())) {
 									PacketByteBuf buf = PacketByteBufs.create();
 									buf.writeInt(rocket.getId());
 									ClientPlayNetworking.send(ModC2SPackets.LAUNCH_ROCKET, buf);

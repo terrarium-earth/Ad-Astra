@@ -2,6 +2,7 @@ package com.github.alexnijjar.ad_astra.client.renderer.entity.feature;
 
 import com.github.alexnijjar.ad_astra.client.renderer.entity.mobs.models.SulfurCreeperEntityModel;
 import com.github.alexnijjar.ad_astra.entities.mobs.SulfurCreeperEntity;
+
 import net.minecraft.client.render.entity.feature.EnergySwirlOverlayFeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.EntityModel;

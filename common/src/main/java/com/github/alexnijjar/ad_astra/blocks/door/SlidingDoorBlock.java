@@ -246,7 +246,7 @@ public class SlidingDoorBlock extends BlockWithEntity {
     }
 
     public BlockPos getMainPos(BlockState state, BlockPos from) {
-		BlockPos target = from;
+        BlockPos target = from;
         Direction facing = state.get(FACING).rotateYCounterclockwise();
         if (state.get(LOCATION).equals(LocationState.TOP_LEFT)) {
             target = from.down().down().offset(facing);
@@ -265,6 +265,6 @@ public class SlidingDoorBlock extends BlockWithEntity {
         } else if (state.get(LOCATION).equals(LocationState.BOTTOM_RIGHT)) {
             target = from.offset(facing.getOpposite());
         }
-		return target;
-	}
+        return target;
+    }
 }

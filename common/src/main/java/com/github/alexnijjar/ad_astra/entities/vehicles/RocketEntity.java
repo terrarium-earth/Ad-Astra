@@ -17,7 +17,7 @@ import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.github.alexnijjar.ad_astra.util.ModKeyBindings;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
 
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import earth.terrarium.botarium.api.fluid.FluidHolder;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
@@ -382,7 +382,7 @@ public class RocketEntity extends VehicleEntity {
 	}
 
 	@SuppressWarnings("deprecation")
-	public static long getRequiredAmountForLaunch(FluidVariant variant) {
+	public static long getRequiredAmountForLaunch(FluidHolder variant) {
 		if (variant.getFluid().isIn(ModTags.EFFICIENT_FUELS)) {
 			return AdAstra.CONFIG.rocket.efficientFuelLaunchCost;
 		} else {

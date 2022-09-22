@@ -98,10 +98,10 @@ public class CustomButton extends ButtonWidget {
 
 			RenderSystem.setShaderColor((over ? lightColour.r() : color.r()), (over ? lightColour.g() : color.g()), (over ? lightColour.b() : color.b()), color.a());
 			RenderSystem.setShaderTexture(0, switch (this.buttonSize) {
-				case LARGE -> LARGE_BUTTON_TEXTURE;
-				case NORMAL -> BUTTON_TEXTURE;
-				case SMALL -> SMALL_BUTTON_TEXTURE;
-				case STEEL -> STEEL_BUTTON_TEXTURE;
+			case LARGE -> LARGE_BUTTON_TEXTURE;
+			case NORMAL -> BUTTON_TEXTURE;
+			case SMALL -> SMALL_BUTTON_TEXTURE;
+			case STEEL -> STEEL_BUTTON_TEXTURE;
 			});
 
 			drawTexture(matrices, (this.buttonSize.equals(ButtonType.LARGE) ? this.x - 2 : this.x), this.y, 0, 0, this.width, this.height, buttonSize.getWidth(), buttonSize.getHeight());
@@ -141,52 +141,51 @@ public class CustomButton extends ButtonWidget {
 		List<Text> textEntries = new LinkedList<>();
 
 		switch (tooltip) {
-			case NONE -> {
+		case NONE -> {
 
-			}
-			case GALAXY -> {
-				textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.CATEGORY_TEXT.getString() + ": \u00A7b" + label.getString()));
-				textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.TYPE_TEXT.getString() + ": \u00A75" + PlanetSelectionScreen.GALAXY_TEXT.getString()));
-			}
-			case SOLAR_SYSTEM -> {
-				textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.CATEGORY_TEXT.getString() + ": \u00A7b" + label.getString()));
-				textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.TYPE_TEXT.getString() + ": \u00A73" + PlanetSelectionScreen.SOLAR_SYSTEM_TEXT.getString()));
-			}
-			case CATEGORY -> {
-				textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.CATEGORY_TEXT.getString() + ": \u00A7a" + label.getString()));
-				textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.PROVIDED_TEXT.getString() + ": \u00A7b" + "Tier " + planetInfo.rocketTier() + " Rocket"));
-			}
-			case PLANET -> {
-				textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.TYPE_TEXT.getString() + ": \u00A73" + (planetInfo.parentWorld() == null ? PlanetSelectionScreen.PLANET_TEXT.getString() : PlanetSelectionScreen.MOON_TEXT.getString())));
-				textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.GRAVITY_TEXT.getString() + ": \u00A73" + planetInfo.gravity() + " m/s"));
-				textEntries
-						.add(Text.of("\u00A79" + PlanetSelectionScreen.OXYGEN_TEXT.getString() + ": \u00A7" + (planetInfo.hasOxygen() ? ('a' + PlanetSelectionScreen.OXYGEN_TRUE_TEXT.getString()) : ('c' + PlanetSelectionScreen.OXYGEN_FALSE_TEXT.getString()))));
-				String temperatureColour = "\u00A7a";
+		}
+		case GALAXY -> {
+			textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.CATEGORY_TEXT.getString() + ": \u00A7b" + label.getString()));
+			textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.TYPE_TEXT.getString() + ": \u00A75" + PlanetSelectionScreen.GALAXY_TEXT.getString()));
+		}
+		case SOLAR_SYSTEM -> {
+			textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.CATEGORY_TEXT.getString() + ": \u00A7b" + label.getString()));
+			textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.TYPE_TEXT.getString() + ": \u00A73" + PlanetSelectionScreen.SOLAR_SYSTEM_TEXT.getString()));
+		}
+		case CATEGORY -> {
+			textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.CATEGORY_TEXT.getString() + ": \u00A7a" + label.getString()));
+			textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.PROVIDED_TEXT.getString() + ": \u00A7b" + "Tier " + planetInfo.rocketTier() + " Rocket"));
+		}
+		case PLANET -> {
+			textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.TYPE_TEXT.getString() + ": \u00A73" + (planetInfo.parentWorld() == null ? PlanetSelectionScreen.PLANET_TEXT.getString() : PlanetSelectionScreen.MOON_TEXT.getString())));
+			textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.GRAVITY_TEXT.getString() + ": \u00A73" + planetInfo.gravity() + " m/s"));
+			textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.OXYGEN_TEXT.getString() + ": \u00A7" + (planetInfo.hasOxygen() ? ('a' + PlanetSelectionScreen.OXYGEN_TRUE_TEXT.getString()) : ('c' + PlanetSelectionScreen.OXYGEN_FALSE_TEXT.getString()))));
+			String temperatureColour = "\u00A7a";
 
-				// Make the temperature text look orange when the temperature is hot and blue when the temperature is cold.
-				if (planetInfo.temperature() > 50) {
-					// Hot.
-					temperatureColour = "\u00A76";
-				} else if (planetInfo.temperature() < -20) {
-					// Cold.
-					temperatureColour = "\u00A71";
-				}
-
-				textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.TEMPERATURE_TEXT.getString() + ": " + temperatureColour + " " + planetInfo.temperature() + " °C"));
+			// Make the temperature text look orange when the temperature is hot and blue when the temperature is cold.
+			if (planetInfo.temperature() > 50) {
+				// Hot.
+				temperatureColour = "\u00A76";
+			} else if (planetInfo.temperature() < -20) {
+				// Cold.
+				temperatureColour = "\u00A71";
 			}
-			case SPACE_STATION -> {
-				PlanetSelectionScreen currentScreen = (PlanetSelectionScreen) client.currentScreen;
-				textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.ITEM_REQUIREMENT_TEXT.getString()));
 
-				currentScreen.ingredients.forEach(ingredient -> {
-					boolean isEnough = ingredient.first.getCount() >= ingredient.second;
-					textEntries.add(Text.of("\u00A7" + (isEnough ? "a" : "c") + ingredient.first.getCount() + "/" + ingredient.second + " \u00A73" + ingredient.first.getName().getString()));
-				});
-				textEntries.add(Text.of("\u00A7c----------------"));
-			}
-			default -> {
+			textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.TEMPERATURE_TEXT.getString() + ": " + temperatureColour + " " + planetInfo.temperature() + " °C"));
+		}
+		case SPACE_STATION -> {
+			PlanetSelectionScreen currentScreen = (PlanetSelectionScreen) client.currentScreen;
+			textEntries.add(Text.of("\u00A79" + PlanetSelectionScreen.ITEM_REQUIREMENT_TEXT.getString()));
 
-			}
+			currentScreen.ingredients.forEach(ingredient -> {
+				boolean isEnough = ingredient.first.getCount() >= ingredient.second;
+				textEntries.add(Text.of("\u00A7" + (isEnough ? "a" : "c") + ingredient.first.getCount() + "/" + ingredient.second + " \u00A73" + ingredient.first.getName().getString()));
+			});
+			textEntries.add(Text.of("\u00A7c----------------"));
+		}
+		default -> {
+
+		}
 		}
 
 		if (tooltip.equals(TooltipType.ORBIT) || tooltip.equals(TooltipType.SPACE_STATION)) {

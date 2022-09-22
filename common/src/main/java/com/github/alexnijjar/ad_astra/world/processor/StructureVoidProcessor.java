@@ -1,7 +1,10 @@
 package com.github.alexnijjar.ad_astra.world.processor;
 
+import org.jetbrains.annotations.Nullable;
+
 import com.github.alexnijjar.ad_astra.registry.ModStructures;
 import com.mojang.serialization.Codec;
+
 import net.minecraft.block.Blocks;
 import net.minecraft.structure.Structure;
 import net.minecraft.structure.StructurePlacementData;
@@ -9,7 +12,6 @@ import net.minecraft.structure.processor.StructureProcessor;
 import net.minecraft.structure.processor.StructureProcessorType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldView;
-import org.jetbrains.annotations.Nullable;
 
 public class StructureVoidProcessor extends StructureProcessor {
 

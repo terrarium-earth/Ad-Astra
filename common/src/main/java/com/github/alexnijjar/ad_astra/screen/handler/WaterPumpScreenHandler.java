@@ -13,7 +13,7 @@ public class WaterPumpScreenHandler extends AbstractMachineScreenHandler {
 	}
 
 	public WaterPumpScreenHandler(int syncId, PlayerInventory inventory, FluidMachineBlockEntity entity) {
-		super(ModScreenHandlers.WATER_PUMP_SCREEN_HANDLER, syncId, inventory, entity, new Slot[]{});
+		super(ModScreenHandlers.WATER_PUMP_SCREEN_HANDLER.get(), syncId, inventory, entity, new Slot[] {});
 	}
 
 	@Override

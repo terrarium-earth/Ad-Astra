@@ -2,6 +2,7 @@ package com.github.alexnijjar.ad_astra.recipes;
 
 import com.github.alexnijjar.ad_astra.registry.ModRecipes;
 import com.google.gson.JsonObject;
+
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
