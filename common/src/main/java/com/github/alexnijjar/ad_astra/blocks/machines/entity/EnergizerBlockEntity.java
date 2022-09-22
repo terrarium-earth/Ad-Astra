@@ -5,16 +5,13 @@ import com.github.alexnijjar.ad_astra.blocks.machines.AbstractMachineBlock;
 import com.github.alexnijjar.ad_astra.blocks.machines.EnergizerBlock;
 import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
-import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
-import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage;
+import earth.terrarium.botarium.api.energy.EnergyHooks;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import team.reborn.energy.api.EnergyStorage;
-import team.reborn.energy.api.EnergyStorageUtil;
 
 public class EnergizerBlockEntity extends AbstractMachineBlockEntity {
 
@@ -71,7 +68,7 @@ public class EnergizerBlockEntity extends AbstractMachineBlockEntity {
 				this.setActive(true);
 				if (!stack.isEmpty()) {
 					if (this.hasEnergy()) {
-						long moved = EnergyStorageUtil.move(this.getSideEnergyStorage(null), ContainerItemContext.ofSingleSlot(InventoryStorage.of(this, null).getSlots().get(0)).find(EnergyStorage.ITEM), this.getEnergyPerTick(), null);
+						long moved = EnergyHooks.moveBlockToItemEnergy(this, null, stack, this.getEnergyPerTick());
 						if (moved > 0) {
 							if (this.world instanceof ServerWorld serverWorld) {
 								BlockPos pos = this.getPos();

@@ -33,6 +33,7 @@ import net.minecraft.util.math.Direction;
 public abstract class AbstractMachineBlockEntity extends BlockEntity implements EnergyBlock, ExtraDataMenuProvider, ModInventory, SidedInventory {
 
 	private final DefaultedList<ItemStack> inventory;
+	private SimpleUpdatingEnergyContainer energyContainer;
 
 	public AbstractMachineBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
 		super(blockEntityType, blockPos, blockState);
@@ -208,7 +209,7 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
 
 	@Override
 	public StatefulEnergyContainer getEnergyStorage() {
-		return new SimpleUpdatingEnergyContainer(this, (int) this.getMaxGeneration());
+		return energyContainer == null ? energyContainer = new SimpleUpdatingEnergyContainer(this, this.getMaxGeneration()) : energyContainer;
 	}
 
 	@Override
