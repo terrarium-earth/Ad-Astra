@@ -38,7 +38,7 @@ public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
 
 	@Override
 	public long getInputSize() {
-		return AdAstra.CONFIG.waterPump.tankBuckets;
+		return FluidHooks.buckets(AdAstra.CONFIG.waterPump.tankBuckets);
 	}
 
 	@Override
@@ -90,13 +90,13 @@ public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
 		if (!this.world.isClient) {
 			FluidHolder waterFluid = FluidHolder.of(Fluids.WATER);
 			BlockState water = this.world.getBlockState(this.getPos().down());
-			if (this.inputTank.getAmount() < this.inputTank.getCapacity()) {
+			if (tanks.getFluids().get(0).getFluidAmount() < this.getInputSize()) {
 				if (water.isOf(Blocks.WATER) && water.get(FluidBlock.LEVEL) == 0) {
 
 					// Drain the water block and add it to the tank.
 					if (!this.getCachedState().get(AbstractMachineBlock.POWERED) && this.hasEnergy()) {
 						this.setActive(true);
-						ModUtils.spawnForcedParticles((ServerWorld) this.world, ModParticleTypes.OXYGEN_BUBBLE, this.getPos().getX() + 0.5, this.getPos().getY() - 0.5, this.getPos().getZ() + 0.5, 1, 0.0, 0.0, 0.0, 0.01);
+						ModUtils.spawnForcedParticles((ServerWorld) this.world, ModParticleTypes.OXYGEN_BUBBLE.get(), this.getPos().getX() + 0.5, this.getPos().getY() - 0.5, this.getPos().getZ() + 0.5, 1, 0.0, 0.0, 0.0, 0.01);
 						this.drainEnergy();
 						waterExtracted += AdAstra.CONFIG.waterPump.transferPerTick;
 						try (Transaction transaction = Transaction.openOuter()) {
@@ -120,12 +120,12 @@ public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
 			}
 
 			if (this.hasEnergy()) {
-				if (this.outputTank.amount < this.outputTank.getCapacity()) {
+				if (tanks.getFluids().get(1).getFluidAmount() < this.getOutputSize()) {
 					this.drainEnergy();
 				}
 				// Insert the fluid into nearby tanks.
 				for (Direction direction : new Direction[] { Direction.UP, this.getCachedState().get(AbstractMachineBlock.FACING) }) {
-					Storage<FluidHolder> storage = FluidStorage.SIDED.find(this.world, this.getPos().offset(direction), direction);
+					FluidHolder storage = FluidStorage.SIDED.find(this.world, this.getPos().offset(direction), direction);
 					if (storage != null) {
 						try (Transaction transaction = Transaction.openOuter()) {
 							long transferPerTick = AdAstra.CONFIG.waterPump.transferPerTick;

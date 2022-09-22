@@ -12,11 +12,10 @@ import com.mojang.blaze3d.vertex.Tessellator;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormats;
 
+import earth.terrarium.botarium.api.fluid.FluidHolder;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.transfer.v1.client.fluid.FluidVariantRendering;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidHolder;
-import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
@@ -205,7 +204,7 @@ public class GuiUtil {
 		screen.renderTooltip(matrices, Text.translatable("gauge_text.ad_astra.storage", MathHelper.clamp(machine.getEnergy(), 0, machine.getMaxGeneration()), machine.getMaxGeneration()).setStyle(Style.EMPTY.withColor(Formatting.GOLD)), mouseX, mouseY);
 	}
 
-	public static void drawTankTooltip(Screen screen, MatrixStack matrices, SingleVariantStorage<FluidHolder> tank, int mouseX, int mouseY) {
+	public static void drawTankTooltip(Screen screen, MatrixStack matrices, FluidHolder tank, int mouseX, int mouseY) {
 		drawTankTooltip(screen, matrices, tank.getAmount(), tank.getCapacity(), tank.getResource(), mouseX, mouseY);
 	}
 

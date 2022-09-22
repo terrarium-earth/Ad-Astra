@@ -35,7 +35,6 @@ public class VehicleScreen extends AbstractVehicleScreen<VehicleScreenHandler> {
 		GuiUtil.drawFluidTank(matrices, this.x + INPUT_TANK_LEFT, this.y + INPUT_TANK_TOP, this.vehicle.getFluidAmount(), this.vehicle.inputTank.getCapacity(), this.vehicle.getFluidHolder());
 	}
 
-	bstr
 	public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
 		super.render(matrices, mouseX, mouseY, delta);
 

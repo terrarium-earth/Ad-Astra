@@ -31,7 +31,7 @@ public class ClientModKeybindings {
 	private static boolean sentRightPacket;
 
 	public static void register() {
-		ClientTickEvent.CLIENT_LEVEL_POST.register(client -> {
+		ClientTickEvent.CLIENT_PRE.register(client -> {
 
 			clickingJump = client.options.jumpKey.isPressed();
 			clickingSprint = client.options.sprintKey.isPressed();

@@ -1,11 +1,9 @@
 package com.github.alexnijjar.ad_astra.blocks.machines.entity;
 
-import com.github.alexnijjar.ad_astra.util.FluidUtils;
-
-import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHoldingBlock;
+import earth.terrarium.botarium.api.fluid.FluidHooks;
+import earth.terrarium.botarium.api.fluid.SimpleUpdatingFluidContainer;
 import earth.terrarium.botarium.api.fluid.UpdatingFluidContainer;
-import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.fluid.Fluids;
@@ -14,8 +12,11 @@ import net.minecraft.util.math.BlockPos;
 
 public abstract class FluidMachineBlockEntity extends AbstractMachineBlockEntity implements FluidHoldingBlock {
 
-	public final SingleVariantStorage<FluidHolder> inputTank = FluidUtils.createTank(this, getInputSize(), true, true);
-	public final SingleVariantStorage<FluidHolder> outputTank = FluidUtils.createTank(this, getOutputSize(), true, true);
+	public final SimpleUpdatingFluidContainer tanks = new SimpleUpdatingFluidContainer(this, integer -> switch (integer) {
+	case 0 -> getInputSize();
+	case 1 -> getOutputSize();
+	default -> getInputSize();
+	}, 2, (amount, fluid) -> true);
 
 	public FluidMachineBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
 		super(blockEntityType, blockPos, blockState);
@@ -28,36 +29,38 @@ public abstract class FluidMachineBlockEntity extends AbstractMachineBlockEntity
 	@Override
 	public void readNbt(NbtCompound nbt) {
 		super.readNbt(nbt);
-		inputTank.variant = FluidHolder.fromNbt(nbt.getCompound("inputFluid"));
-		inputTank.amount = nbt.getLong("inputAmount");
 
-		outputTank.variant = FluidHolder.fromNbt(nbt.getCompound("outputFluid"));
-		outputTank.amount = nbt.getLong("outputAmount");
+		tanks.getFluids().get(0).setFluid((FluidHooks.fluidFromCompound(nbt.getCompound("inputFluid"))).getFluid());
+		tanks.getFluids().get(0).setAmount(nbt.getLong("inputAmount"));
+
+		tanks.getFluids().get(1).setFluid((FluidHooks.fluidFromCompound(nbt.getCompound("outputAmount"))).getFluid());
+		tanks.getFluids().get(1).setAmount(nbt.getLong("outputAmount"));
 	}
 
 	@Override
 	public void writeNbt(NbtCompound nbt) {
-		nbt.put("inputFluid", inputTank.variant.toNbt());
-		nbt.putLong("inputAmount", inputTank.amount);
+		nbt.put("inputFluid", tanks.getFluids().get(0).getCompound());
+		nbt.putLong("inputAmount", tanks.getFluids().get(0).getFluidAmount());
 
-		nbt.put("outputFluid", outputTank.variant.toNbt());
-		nbt.putLong("outputAmount", outputTank.amount);
+		nbt.put("outputFluid", tanks.getFluids().get(1).getCompound());
+		nbt.putLong("outputAmount", tanks.getFluids().get(1).getFluidAmount());
 		super.writeNbt(nbt);
 	}
 
 	@Override
 	public void tick() {
 		// Ensure that the tanks don't have a variant when there is no fluid in them.
-		if (this.inputTank.amount == 0) {
-			this.inputTank.variant = FluidHolder.of(Fluids.EMPTY);
+		if (tanks.getFluids().get(0).getFluidAmount() == 0) {
+			tanks.getFluids().get(0).setFluid(Fluids.EMPTY);
 		}
-		if (this.outputTank.amount == 0) {
-			this.outputTank.variant = FluidHolder.of(Fluids.EMPTY);
+		if (tanks.getFluids().get(1).getFluidAmount() == 0) {
+			tanks.getFluids().get(0).setFluid(Fluids.EMPTY);
 		}
 	}
 
 	@Override
 	public UpdatingFluidContainer getFluidContainer() {
-		return new FluidContainer
+		// TODO
+		return new FluidContainer();
 	}
 }
