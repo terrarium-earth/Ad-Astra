@@ -1,16 +1,17 @@
 package com.github.alexnijjar.ad_astra.client.screens;
 
+import java.awt.Rectangle;
+
 import com.github.alexnijjar.ad_astra.blocks.machines.entity.FluidMachineBlockEntity;
 import com.github.alexnijjar.ad_astra.screen.handler.WaterPumpScreenHandler;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-
-import java.awt.*;
 
 @Environment(EnvType.CLIENT)
 public class WaterPumpScreen extends AbstractMachineScreen<WaterPumpScreenHandler> {

@@ -15,7 +15,7 @@ import com.mojang.blaze3d.vertex.VertexFormats;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.transfer.v1.client.fluid.FluidVariantRendering;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidHolder;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
@@ -90,16 +90,16 @@ public class GuiUtil {
 		drawVertical(matrixStack, x, y, ENERGY_WIDTH, ENERGY_HEIGHT, ENERGY_TEXTURE, ratio);
 	}
 
-	public static void drawFluidTank(MatrixStack matrices, int x, int y, long fluidAmount, long fluidCapacity, FluidVariant fluid) {
+	public static void drawFluidTank(MatrixStack matrices, int x, int y, long fluidAmount, long fluidCapacity, FluidHolder fluid) {
 		double ratio = fluidCapacity > 0 ? createRatio(fluidAmount, fluidCapacity) : 0;
 		drawFluidTank(matrices, x, y, ratio, fluid);
 	}
 
-	public static void drawAccentingFluidTank(MatrixStack matrices, int x, int y, double ratio, FluidVariant fluid) {
+	public static void drawAccentingFluidTank(MatrixStack matrices, int x, int y, double ratio, FluidHolder fluid) {
 		drawFluidTank(matrices, x, y, 1.0 - ratio, fluid);
 	}
 
-	public static void drawFluidTank(MatrixStack matrices, int x, int y, double ratio, FluidVariant fluid) {
+	public static void drawFluidTank(MatrixStack matrices, int x, int y, double ratio, FluidHolder fluid) {
 		// Draw the fluid
 		drawFluid(matrices, x, y, ratio, fluid);
 		// Draw the fluid tank
@@ -108,7 +108,7 @@ public class GuiUtil {
 		RenderSystem.disableBlend();
 	}
 
-	private static void drawFluid(MatrixStack matrices, int x, int y, double ratio, FluidVariant fluid) {
+	private static void drawFluid(MatrixStack matrices, int x, int y, double ratio, FluidHolder fluid) {
 
 		if (fluid.isBlank()) {
 			return;
@@ -205,13 +205,12 @@ public class GuiUtil {
 		screen.renderTooltip(matrices, Text.translatable("gauge_text.ad_astra.storage", MathHelper.clamp(machine.getEnergy(), 0, machine.getMaxGeneration()), machine.getMaxGeneration()).setStyle(Style.EMPTY.withColor(Formatting.GOLD)), mouseX, mouseY);
 	}
 
-	public static void drawTankTooltip(Screen screen, MatrixStack matrices, SingleVariantStorage<FluidVariant> tank, int mouseX, int mouseY) {
+	public static void drawTankTooltip(Screen screen, MatrixStack matrices, SingleVariantStorage<FluidHolder> tank, int mouseX, int mouseY) {
 		drawTankTooltip(screen, matrices, tank.getAmount(), tank.getCapacity(), tank.getResource(), mouseX, mouseY);
 	}
 
-	public static void drawTankTooltip(Screen screen, MatrixStack matrices, long amount, long capacity, FluidVariant variant, int mouseX, int mouseY) {
-		screen.renderTooltip(matrices, Text.translatable("gauge_text.ad_astra.liquid_storage", FluidUtils.dropletsToMillibuckets(amount), FluidUtils.dropletsToMillibuckets(capacity)).setStyle(Style.EMPTY.withColor(Formatting.GOLD)).append(Text.of(", "))
-				.append(GuiUtil.getFluidTranslation(variant.getFluid())), mouseX, mouseY);
+	public static void drawTankTooltip(Screen screen, MatrixStack matrices, long amount, long capacity, FluidHolder variant, int mouseX, int mouseY) {
+		screen.renderTooltip(matrices, Text.translatable("gauge_text.ad_astra.liquid_storage", FluidUtils.dropletsToMillibuckets(amount), FluidUtils.dropletsToMillibuckets(capacity)).setStyle(Style.EMPTY.withColor(Formatting.GOLD)).append(Text.of(", ")).append(GuiUtil.getFluidTranslation(variant.getFluid())), mouseX, mouseY);
 	}
 
 	public static class FloatDrawableHelper {
@@ -224,8 +223,7 @@ public class GuiUtil {
 		}
 
 		private static void drawTexture(MatrixStack matrices, float x0, float x1, float y0, float y1, int z, int regionWidth, int regionHeight, float u, float v, int textureWidth, int textureHeight) {
-			FloatDrawableHelper.drawTexturedQuad(matrices.peek().getModel(), x0, x1, y0, y1, z, (u + 0.0f) / (float) textureWidth, (u + (float) regionWidth) / (float) textureWidth, (v + 0.0f) / (float) textureHeight,
-					(v + (float) regionHeight) / (float) textureHeight);
+			FloatDrawableHelper.drawTexturedQuad(matrices.peek().getModel(), x0, x1, y0, y1, z, (u + 0.0f) / (float) textureWidth, (u + (float) regionWidth) / (float) textureWidth, (v + 0.0f) / (float) textureHeight, (v + (float) regionHeight) / (float) textureHeight);
 		}
 
 		private static void drawTexturedQuad(Matrix4f matrix, float x0, float x1, float y0, float y1, int z, float u0, float u1, float v0, float v1) {

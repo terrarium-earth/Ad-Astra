@@ -89,7 +89,7 @@ public class PlayerEntityRendererMixin {
 			if (JetSuit.hasFullSet(player)) {
 				JetSuit.spawnParticles(player.world, player, model);
 			}
-			
+
 			VertexConsumer vertex = SpaceSuitModel.getVertex(RenderLayer.getEntityTranslucent(texture), player.getEquippedStack(EquipmentSlot.CHEST).hasEnchantments());
 			if (right) {
 				model.rightArm.render(matrices, vertex, light, OverlayTexture.DEFAULT_UV, r, g, b, 1.0f);

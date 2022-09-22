@@ -3,6 +3,7 @@ package com.github.alexnijjar.ad_astra.entities.vehicles;
 import com.github.alexnijjar.ad_astra.registry.ModItems;
 import com.github.alexnijjar.ad_astra.registry.ModParticleTypes;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
+
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;

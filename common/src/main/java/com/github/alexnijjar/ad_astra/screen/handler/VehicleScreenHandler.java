@@ -4,9 +4,9 @@ import com.github.alexnijjar.ad_astra.entities.vehicles.VehicleEntity;
 import com.github.alexnijjar.ad_astra.registry.ModScreenHandlers;
 import com.github.alexnijjar.ad_astra.screen.NoInventorySlot;
 
+import earth.terrarium.botarium.api.fluid.FluidHolder;
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.fluid.base.FullItemFluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.CombinedStorage;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantItemStorage;
@@ -23,7 +23,7 @@ public class VehicleScreenHandler extends AbstractVehicleScreenHandler {
 	}
 
 	public VehicleScreenHandler(int syncId, PlayerInventory inventory, VehicleEntity entity) {
-		super(ModScreenHandlers.VEHICLE_SCREEN_HANDLER, syncId, inventory, entity, new Slot[]{
+		super(ModScreenHandlers.VEHICLE_SCREEN_HANDLER.get(), syncId, inventory, entity, new Slot[] {
 
 				// Left input slot.
 				new NoInventorySlot(entity.getInventory(), 0, 20, 24) {
@@ -32,8 +32,8 @@ public class VehicleScreenHandler extends AbstractVehicleScreenHandler {
 						if (!super.canInsert(stack)) {
 							return false;
 						}
-						Storage<FluidVariant> context = ContainerItemContext.withInitial(stack).find(FluidStorage.ITEM);
-						return context instanceof CombinedStorage || context instanceof FullItemFluidStorage || context instanceof SingleVariantItemStorage<FluidVariant>;
+						Storage<FluidHolder> context = ContainerItemContext.withInitial(stack).find(FluidStorage.ITEM);
+						return context instanceof CombinedStorage || context instanceof FullItemFluidStorage || context instanceof SingleVariantItemStorage<FluidHolder>;
 					}
 				},
 				// Left output slot.
@@ -59,7 +59,7 @@ public class VehicleScreenHandler extends AbstractVehicleScreenHandler {
 				//
 				new NoInventorySlot(entity.getInventory(), 8, 86 + 18 * 2, 49),
 				//
-				new NoInventorySlot(entity.getInventory(), 9, 86 + 18 * 3, 49)});
+				new NoInventorySlot(entity.getInventory(), 9, 86 + 18 * 3, 49) });
 	}
 
 	@Override

@@ -59,16 +59,15 @@ public class ModSky implements DimensionRenderingRegistry.SkyRenderer {
 			float scale = skyObject.scale();
 			Vec3f rotation = skyObject.rotation();
 			switch (skyObject.renderType()) {
-				case STATIC -> {
-					// Do not modify the scale or rotation
-				}
-				case DYNAMIC ->
-						rotation = new Vec3f(skyAngle * 360.0f + rotation.getX(), rotation.getY(), rotation.getZ());
-				case SCALING -> scale *= SkyUtil.getScale();
-				case DEBUG -> {
-					// Test things without restarting Minecraft
-					rotation = new Vec3f(60, 0, 0);
-				}
+			case STATIC -> {
+				// Do not modify the scale or rotation
+			}
+			case DYNAMIC -> rotation = new Vec3f(skyAngle * 360.0f + rotation.getX(), rotation.getY(), rotation.getZ());
+			case SCALING -> scale *= SkyUtil.getScale();
+			case DEBUG -> {
+				// Test things without restarting Minecraft
+				rotation = new Vec3f(60, 0, 0);
+			}
 			}
 			SkyUtil.render(context, bufferBuilder, skyObject.texture(), skyObject.colour(), rotation, scale, skyObject.blending());
 		}

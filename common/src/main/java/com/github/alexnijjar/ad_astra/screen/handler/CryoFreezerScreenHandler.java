@@ -14,7 +14,7 @@ public class CryoFreezerScreenHandler extends AbstractMachineScreenHandler {
 	}
 
 	public CryoFreezerScreenHandler(int syncId, PlayerInventory inventory, FluidMachineBlockEntity entity) {
-		super(ModScreenHandlers.CRYO_FREEZER_SCREEN_HANDLER, syncId, inventory, entity, new Slot[]{
+		super(ModScreenHandlers.CRYO_FREEZER_SCREEN_HANDLER.get(), syncId, inventory, entity, new Slot[] {
 
 				// Left Insert.
 				new Slot(entity, 0, 26, 70),
@@ -27,7 +27,7 @@ public class CryoFreezerScreenHandler extends AbstractMachineScreenHandler {
 					public boolean canInsert(ItemStack stack) {
 						return false;
 					}
-				}});
+				} });
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import com.github.alexnijjar.ad_astra.client.renderer.sky.dimension_effects.ModD
 import com.github.alexnijjar.ad_astra.client.renderer.sky.weather_renderer.ModWeatherRenderer;
 import com.github.alexnijjar.ad_astra.client.resourcepack.SkyRenderer;
 import com.github.alexnijjar.ad_astra.util.ColourHolder;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry;
@@ -31,63 +32,55 @@ public class ClientModSkies {
 
 			// Dimension Effects
 			switch (skyRenderer.effects().type()) {
-				case SIMPLE ->
-						DimensionRenderingRegistry.registerDimensionEffects(skyRenderer.dimension().getValue(), new ModDimensionEffects());
-				case NONE ->
-						DimensionRenderingRegistry.registerDimensionEffects(skyRenderer.dimension().getValue(), new ModDimensionEffects() {
-							public float[] getFogColorOverride(float skyAngle, float tickDelta) {
-								return null;
-							}
-						});
-				case FOGGY_REVERSED ->
-						DimensionRenderingRegistry.registerDimensionEffects(skyRenderer.dimension().getValue(), new ModDimensionEffects() {
-							@Override
-							public boolean useThickFog(int camX, int camY) {
-								return true;
-							}
+			case SIMPLE -> DimensionRenderingRegistry.registerDimensionEffects(skyRenderer.dimension().getValue(), new ModDimensionEffects());
+			case NONE -> DimensionRenderingRegistry.registerDimensionEffects(skyRenderer.dimension().getValue(), new ModDimensionEffects() {
+				public float[] getFogColorOverride(float skyAngle, float tickDelta) {
+					return null;
+				}
+			});
+			case FOGGY_REVERSED -> DimensionRenderingRegistry.registerDimensionEffects(skyRenderer.dimension().getValue(), new ModDimensionEffects() {
+				@Override
+				public boolean useThickFog(int camX, int camY) {
+					return true;
+				}
 
-							@Override
-							public float[] getFogColorOverride(float skyAngle, float tickDelta) {
-								return null;
-							}
+				@Override
+				public float[] getFogColorOverride(float skyAngle, float tickDelta) {
+					return null;
+				}
 
-						});
-				case FOGGY ->
-						DimensionRenderingRegistry.registerDimensionEffects(skyRenderer.dimension().getValue(), new ModDimensionEffects() {
-							@Override
-							public boolean useThickFog(int camX, int camY) {
-								return true;
-							}
-						});
-				case COLORED_HORIZON ->
-						DimensionRenderingRegistry.registerDimensionEffects(skyRenderer.dimension().getValue(), new ModDimensionEffects() {
-							@Override
-							public Vec3d adjustFogColor(Vec3d color, float sunHeight) {
-								return ColourHolder.toVector(skyRenderer.effects().colour());
-							}
-						});
+			});
+			case FOGGY -> DimensionRenderingRegistry.registerDimensionEffects(skyRenderer.dimension().getValue(), new ModDimensionEffects() {
+				@Override
+				public boolean useThickFog(int camX, int camY) {
+					return true;
+				}
+			});
+			case COLORED_HORIZON -> DimensionRenderingRegistry.registerDimensionEffects(skyRenderer.dimension().getValue(), new ModDimensionEffects() {
+				@Override
+				public Vec3d adjustFogColor(Vec3d color, float sunHeight) {
+					return ColourHolder.toVector(skyRenderer.effects().colour());
+				}
+			});
 			}
 
 			// Cloud renderer
 			switch (skyRenderer.cloudEffects()) {
-				case NONE ->
-						DimensionRenderingRegistry.registerCloudRenderer(skyRenderer.dimension(), new CloudRenderer() {
-							@Override
-							public void render(WorldRenderContext context) {
-							}
-						});
-				case VANILLA -> {
+			case NONE -> DimensionRenderingRegistry.registerCloudRenderer(skyRenderer.dimension(), new CloudRenderer() {
+				@Override
+				public void render(WorldRenderContext context) {
 				}
-				case VENUS ->
-						DimensionRenderingRegistry.registerCloudRenderer(skyRenderer.dimension(), new ModCloudRenderer().withVenus());
+			});
+			case VANILLA -> {
+			}
+			case VENUS -> DimensionRenderingRegistry.registerCloudRenderer(skyRenderer.dimension(), new ModCloudRenderer().withVenus());
 			}
 
 			// Weather renderer
 			switch (skyRenderer.weatherEffects()) {
-				case NONE -> {
-				}
-				case VENUS ->
-						DimensionRenderingRegistry.registerWeatherRenderer(skyRenderer.dimension(), new ModWeatherRenderer().withVenus());
+			case NONE -> {
+			}
+			case VENUS -> DimensionRenderingRegistry.registerWeatherRenderer(skyRenderer.dimension(), new ModWeatherRenderer().withVenus());
 			}
 		}
 	}

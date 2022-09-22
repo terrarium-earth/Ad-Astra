@@ -2,6 +2,7 @@ package com.github.alexnijjar.ad_astra.client.renderer.block.globe;
 
 import com.github.alexnijjar.ad_astra.blocks.globes.GlobeBlock;
 import com.github.alexnijjar.ad_astra.blocks.globes.GlobeBlockEntity;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;

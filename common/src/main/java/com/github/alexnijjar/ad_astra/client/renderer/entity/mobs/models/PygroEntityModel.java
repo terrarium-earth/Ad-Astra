@@ -1,9 +1,16 @@
 package com.github.alexnijjar.ad_astra.client.renderer.entity.mobs.models;
 
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.model.*;
+import net.minecraft.client.model.Dilation;
+import net.minecraft.client.model.ModelData;
+import net.minecraft.client.model.ModelPart;
+import net.minecraft.client.model.ModelPartBuilder;
+import net.minecraft.client.model.ModelPartData;
+import net.minecraft.client.model.ModelTransform;
+import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.render.entity.model.PiglinEntityModel;
 import net.minecraft.entity.mob.AbstractPiglinEntity;
@@ -20,8 +27,7 @@ public class PygroEntityModel<T extends AbstractPiglinEntity> extends PiglinEnti
 		ModelData modelData = PygroEntityModel.getModelData(Dilation.NONE);
 		ModelPartData modelPartData = modelData.getRoot();
 
-		ModelPartData modelPartData1 = modelPartData.addChild("head", ModelPartBuilder.create().uv(0, 0).cuboid(-5.0f, -8.0f, -4.0f, 10.0f, 8.0f, 8.0f, Dilation.NONE).uv(31, 1).cuboid(-2.0f, -4.0f, -5.0f, 4.0f, 4.0f, 1.0f, Dilation.NONE).uv(2, 4)
-				.cuboid(2.0f, -2.0f, -5.0f, 1.0f, 2.0f, 1.0f, Dilation.NONE).uv(2, 0).cuboid(-3.0f, -2.0f, -5.0f, 1.0f, 2.0f, 1.0f, Dilation.NONE), ModelTransform.NONE);
+		ModelPartData modelPartData1 = modelPartData.addChild("head", ModelPartBuilder.create().uv(0, 0).cuboid(-5.0f, -8.0f, -4.0f, 10.0f, 8.0f, 8.0f, Dilation.NONE).uv(31, 1).cuboid(-2.0f, -4.0f, -5.0f, 4.0f, 4.0f, 1.0f, Dilation.NONE).uv(2, 4).cuboid(2.0f, -2.0f, -5.0f, 1.0f, 2.0f, 1.0f, Dilation.NONE).uv(2, 0).cuboid(-3.0f, -2.0f, -5.0f, 1.0f, 2.0f, 1.0f, Dilation.NONE), ModelTransform.NONE);
 
 		// Left Ear.
 		modelPartData1.addChild("left_ear", ModelPartBuilder.create().uv(39, 6).cuboid(0.0f, 0.0f, -2.0f, 1.0f, 5.0f, 4.0f, Dilation.NONE), ModelTransform.of(4.5f, -6.0f, 0.0f, 0.0f, 0.0f, (-(float) Math.PI / 6f)));

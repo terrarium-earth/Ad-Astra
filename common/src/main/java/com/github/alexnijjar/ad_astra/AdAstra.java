@@ -10,7 +10,6 @@ import com.github.alexnijjar.ad_astra.config.AdAstraConfig;
 import com.github.alexnijjar.ad_astra.data.Planet;
 import com.github.alexnijjar.ad_astra.data.PlanetData;
 import com.github.alexnijjar.ad_astra.networking.ModC2SPackets;
-import com.github.alexnijjar.ad_astra.registry.ModArmour;
 import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
 import com.github.alexnijjar.ad_astra.registry.ModCommands;
 import com.github.alexnijjar.ad_astra.registry.ModCriteria;
@@ -31,18 +30,18 @@ import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 
 public class AdAstra {
-    public static final String MOD_ID = "ad_astra";
-    public static final Logger LOGGER = LoggerFactory.getLogger("Ad Astra");
-    public static AdAstraConfig CONFIG;
+	public static final String MOD_ID = "ad_astra";
+	public static final Logger LOGGER = LoggerFactory.getLogger("Ad Astra");
+	public static AdAstraConfig CONFIG;
 
-    public static Set<Planet> planets = new HashSet<>();
+	public static Set<Planet> planets = new HashSet<>();
 	public static Set<RegistryKey<World>> adAstraWorlds = new HashSet<>();
 	public static Set<RegistryKey<World>> orbitWorlds = new HashSet<>();
 	public static Set<RegistryKey<World>> planetWorlds = new HashSet<>();
-    public static Set<RegistryKey<World>> worldsWithOxygen = new HashSet<>();
+	public static Set<RegistryKey<World>> worldsWithOxygen = new HashSet<>();
 
-    public static void init() {
-        // Register config
+	public static void init() {
+		// Register config
 		AutoConfig.register(AdAstraConfig.class, Toml4jConfigSerializer::new);
 		CONFIG = AutoConfig.getConfigHolder(AdAstraConfig.class).getConfig();
 
@@ -71,5 +70,5 @@ public class AdAstra {
 		ModCriteria.register();
 
 		AdAstra.LOGGER.info("Ad Astra Initialized! 🚀");
-    }
+	}
 }

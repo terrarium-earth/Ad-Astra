@@ -3,9 +3,16 @@ package com.github.alexnijjar.ad_astra.client.renderer.entity.vehicles.rockets.t
 import com.github.alexnijjar.ad_astra.client.renderer.entity.vehicles.VehicleEntityModel;
 import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntityTier3;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.model.*;
+import net.minecraft.client.model.Dilation;
+import net.minecraft.client.model.ModelData;
+import net.minecraft.client.model.ModelPart;
+import net.minecraft.client.model.ModelPartBuilder;
+import net.minecraft.client.model.ModelPartData;
+import net.minecraft.client.model.ModelTransform;
+import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 
 @Environment(EnvType.CLIENT)
@@ -24,20 +31,9 @@ public class RocketEntityModelTier3 extends VehicleEntityModel<RocketEntityTier3
 		ModelPartData rocket3 = modelPartData.addChild("rocket", ModelPartBuilder.create(), ModelTransform.pivot(0.0f, 25.0f, 0.0f));
 
 		ModelPartData body = rocket3.addChild("body",
-				ModelPartBuilder.create().uv(36, -18).cuboid(9.0f, -51.0f, -9.0f, 0.0f, 52.0f, 18.0f, new Dilation(0.0f)).uv(0, 0).cuboid(-9.0f, -51.0f, -9.0f, 18.0f, 52.0f, 0.0f, new Dilation(0.0f)).uv(80, 74)
-						.cuboid(-9.0f, -51.0f, -9.0f, 2.0f, 52.0f, 2.0f, new Dilation(0.0f)).uv(36, 0).cuboid(-9.0f, -51.0f, 9.0f, 18.0f, 52.0f, 0.0f, new Dilation(0.0f)).uv(36, -18)
-						.cuboid(-9.0f, -51.0f, -9.0f, 0.0f, 52.0f, 18.0f, new Dilation(0.0f)).uv(-18, 99).cuboid(-9.0f, 1.0f, -9.0f, 18.0f, 0.0f, 18.0f, new Dilation(0.0f)).uv(-18, 99)
-						.cuboid(-9.0f, -51.0f, -9.0f, 18.0f, 0.0f, 18.0f, new Dilation(0.0f)).uv(0, 52).cuboid(-10.0f, -11.0f, -10.0f, 20.0f, 11.0f, 0.0f, new Dilation(0.0f)).uv(0, 32)
-						.cuboid(10.0f, -11.0f, -10.0f, 0.0f, 11.0f, 20.0f, new Dilation(0.0f)).uv(0, 52).cuboid(-10.0f, -11.0f, 10.0f, 20.0f, 11.0f, 0.0f, new Dilation(0.0f)).uv(0, 32)
-						.cuboid(-10.0f, -11.0f, -10.0f, 0.0f, 11.0f, 20.0f, new Dilation(0.0f)).uv(0, 65).cuboid(-10.0f, -26.0f, -10.0f, 20.0f, 2.0f, 0.0f, new Dilation(0.0f)).uv(0, 65)
-						.cuboid(-10.0f, -32.0f, -10.0f, 20.0f, 2.0f, 0.0f, new Dilation(0.0f)).uv(0, 43).cuboid(-10.0f, -26.0f, -10.0f, 0.0f, 2.0f, 20.0f, new Dilation(0.0f)).uv(0, 43)
-						.cuboid(-10.0f, -32.0f, -10.0f, 0.0f, 2.0f, 20.0f, new Dilation(0.0f)).uv(88, 83).cuboid(-10.0f, -44.0f, -10.0f, 20.0f, 7.0f, 0.0f, new Dilation(0.0f)).uv(88, 63)
-						.cuboid(-10.0f, -44.0f, -10.0f, 0.0f, 7.0f, 20.0f, new Dilation(0.0f)).uv(40, 52).cuboid(-6.0f, -34.0f, -10.0f, 12.0f, 12.0f, 1.0f, new Dilation(0.0f)).uv(0, 43)
-						.cuboid(10.0f, -32.0f, -10.0f, 0.0f, 2.0f, 20.0f, new Dilation(0.0f)).uv(0, 43).cuboid(10.0f, -26.0f, -10.0f, 0.0f, 2.0f, 20.0f, new Dilation(0.0f)).uv(88, 63)
-						.cuboid(10.0f, -44.0f, -10.0f, 0.0f, 7.0f, 20.0f, new Dilation(0.0f)).uv(88, 83).cuboid(-10.0f, -44.0f, 10.0f, 20.0f, 7.0f, 0.0f, new Dilation(0.0f)).uv(0, 63)
-						.cuboid(-10.0f, -32.0f, 10.0f, 20.0f, 2.0f, 0.0f, new Dilation(0.0f)).uv(0, 63).cuboid(-10.0f, -26.0f, 10.0f, 20.0f, 2.0f, 0.0f, new Dilation(0.0f)).uv(39, 65)
-						.cuboid(-4.0f, -24.0f, -10.0f, 8.0f, 0.0f, 1.0f, new Dilation(0.0f)).uv(66, 51).cuboid(-4.0f, -32.0f, -10.0f, 0.0f, 8.0f, 1.0f, new Dilation(0.0f)).uv(39, 65)
-						.cuboid(-4.0f, -32.0f, -10.0f, 8.0f, 0.0f, 1.0f, new Dilation(0.0f)).uv(66, 51).cuboid(4.0f, -32.0f, -10.0f, 0.0f, 8.0f, 1.0f, new Dilation(0.0f)),
+				ModelPartBuilder.create().uv(36, -18).cuboid(9.0f, -51.0f, -9.0f, 0.0f, 52.0f, 18.0f, new Dilation(0.0f)).uv(0, 0).cuboid(-9.0f, -51.0f, -9.0f, 18.0f, 52.0f, 0.0f, new Dilation(0.0f)).uv(80, 74).cuboid(-9.0f, -51.0f, -9.0f, 2.0f, 52.0f, 2.0f, new Dilation(0.0f)).uv(36, 0).cuboid(-9.0f, -51.0f, 9.0f, 18.0f, 52.0f, 0.0f, new Dilation(0.0f)).uv(36, -18).cuboid(-9.0f, -51.0f, -9.0f, 0.0f, 52.0f, 18.0f, new Dilation(0.0f)).uv(-18, 99).cuboid(-9.0f, 1.0f, -9.0f, 18.0f, 0.0f, 18.0f, new Dilation(0.0f)).uv(-18, 99).cuboid(-9.0f, -51.0f, -9.0f, 18.0f, 0.0f, 18.0f, new Dilation(0.0f)).uv(0, 52).cuboid(-10.0f, -11.0f, -10.0f, 20.0f, 11.0f, 0.0f, new Dilation(0.0f)).uv(0, 32).cuboid(10.0f, -11.0f, -10.0f, 0.0f, 11.0f, 20.0f, new Dilation(0.0f)).uv(0, 52).cuboid(-10.0f, -11.0f, 10.0f, 20.0f, 11.0f, 0.0f, new Dilation(0.0f)).uv(0, 32).cuboid(-10.0f, -11.0f, -10.0f, 0.0f, 11.0f, 20.0f, new Dilation(0.0f)).uv(0, 65).cuboid(-10.0f, -26.0f, -10.0f, 20.0f, 2.0f, 0.0f, new Dilation(0.0f)).uv(0, 65)
+						.cuboid(-10.0f, -32.0f, -10.0f, 20.0f, 2.0f, 0.0f, new Dilation(0.0f)).uv(0, 43).cuboid(-10.0f, -26.0f, -10.0f, 0.0f, 2.0f, 20.0f, new Dilation(0.0f)).uv(0, 43).cuboid(-10.0f, -32.0f, -10.0f, 0.0f, 2.0f, 20.0f, new Dilation(0.0f)).uv(88, 83).cuboid(-10.0f, -44.0f, -10.0f, 20.0f, 7.0f, 0.0f, new Dilation(0.0f)).uv(88, 63).cuboid(-10.0f, -44.0f, -10.0f, 0.0f, 7.0f, 20.0f, new Dilation(0.0f)).uv(40, 52).cuboid(-6.0f, -34.0f, -10.0f, 12.0f, 12.0f, 1.0f, new Dilation(0.0f)).uv(0, 43).cuboid(10.0f, -32.0f, -10.0f, 0.0f, 2.0f, 20.0f, new Dilation(0.0f)).uv(0, 43).cuboid(10.0f, -26.0f, -10.0f, 0.0f, 2.0f, 20.0f, new Dilation(0.0f)).uv(88, 63).cuboid(10.0f, -44.0f, -10.0f, 0.0f, 7.0f, 20.0f, new Dilation(0.0f)).uv(88, 83).cuboid(-10.0f, -44.0f, 10.0f, 20.0f, 7.0f, 0.0f, new Dilation(0.0f)).uv(0, 63).cuboid(-10.0f, -32.0f, 10.0f, 20.0f, 2.0f, 0.0f, new Dilation(0.0f)).uv(0, 63).cuboid(-10.0f, -26.0f, 10.0f, 20.0f, 2.0f, 0.0f, new Dilation(0.0f)).uv(39, 65)
+						.cuboid(-4.0f, -24.0f, -10.0f, 8.0f, 0.0f, 1.0f, new Dilation(0.0f)).uv(66, 51).cuboid(-4.0f, -32.0f, -10.0f, 0.0f, 8.0f, 1.0f, new Dilation(0.0f)).uv(39, 65).cuboid(-4.0f, -32.0f, -10.0f, 8.0f, 0.0f, 1.0f, new Dilation(0.0f)).uv(66, 51).cuboid(4.0f, -32.0f, -10.0f, 0.0f, 8.0f, 1.0f, new Dilation(0.0f)),
 				ModelTransform.pivot(0.0f, -9.0f, 0.0f));
 
 		ModelPartData cube_r1 = body.addChild("cube_r1", ModelPartBuilder.create().uv(96, 9).cuboid(-15.0f, -7.0f, -4.0f, 6.0f, 14.0f, 8.0f, new Dilation(0.0f)), ModelTransform.of(0.0f, -3.0f, 0.0f, 0.0f, 1.5708f, 0.0f));
@@ -50,21 +46,9 @@ public class RocketEntityModelTier3 extends VehicleEntityModel<RocketEntityTier3
 
 		ModelPartData body_r3 = body.addChild("body_r3", ModelPartBuilder.create().uv(80, 74).cuboid(-1.0f, -26.0f, -1.0f, 2.0f, 52.0f, 2.0f, new Dilation(0.0f)), ModelTransform.of(8.0f, -25.0f, -8.0f, 0.0f, -1.5708f, 0.0f));
 
-		ModelPartData bottom = rocket3.addChild("bottom",
-				ModelPartBuilder.create().uv(0, 117).cuboid(-7.0f, -12.0f, -7.0f, 14.0f, 3.0f, 0.0f, new Dilation(0.0f)).uv(0, 103).cuboid(-7.0f, -12.0f, -7.0f, 0.0f, 3.0f, 14.0f, new Dilation(0.0f)).uv(0, 117)
-						.cuboid(-7.0f, -12.0f, 7.0f, 14.0f, 3.0f, 0.0f, new Dilation(0.0f)).uv(0, 103).cuboid(7.0f, -12.0f, -7.0f, 0.0f, 3.0f, 14.0f, new Dilation(0.0f)).uv(18, 92)
-						.cuboid(-9.0f, -9.0f, -9.0f, 18.0f, 0.0f, 18.0f, new Dilation(0.0f)).uv(0, 120).cuboid(-9.0f, -9.0f, -9.0f, 18.0f, 4.0f, 0.0f, new Dilation(0.0f)).uv(0, 102)
-						.cuboid(9.0f, -9.0f, -9.0f, 0.0f, 4.0f, 18.0f, new Dilation(0.0f)).uv(0, 102).cuboid(-9.0f, -9.0f, -9.0f, 0.0f, 4.0f, 18.0f, new Dilation(0.0f)).uv(0, 120)
-						.cuboid(-9.0f, -9.0f, 9.0f, 18.0f, 4.0f, 0.0f, new Dilation(0.0f)).uv(18, 110).cuboid(-9.0f, -5.0f, -9.0f, 18.0f, 0.0f, 18.0f, new Dilation(0.0f)),
-				ModelTransform.pivot(0.0f, 4.0f, 0.0f));
+		ModelPartData bottom = rocket3.addChild("bottom", ModelPartBuilder.create().uv(0, 117).cuboid(-7.0f, -12.0f, -7.0f, 14.0f, 3.0f, 0.0f, new Dilation(0.0f)).uv(0, 103).cuboid(-7.0f, -12.0f, -7.0f, 0.0f, 3.0f, 14.0f, new Dilation(0.0f)).uv(0, 117).cuboid(-7.0f, -12.0f, 7.0f, 14.0f, 3.0f, 0.0f, new Dilation(0.0f)).uv(0, 103).cuboid(7.0f, -12.0f, -7.0f, 0.0f, 3.0f, 14.0f, new Dilation(0.0f)).uv(18, 92).cuboid(-9.0f, -9.0f, -9.0f, 18.0f, 0.0f, 18.0f, new Dilation(0.0f)).uv(0, 120).cuboid(-9.0f, -9.0f, -9.0f, 18.0f, 4.0f, 0.0f, new Dilation(0.0f)).uv(0, 102).cuboid(9.0f, -9.0f, -9.0f, 0.0f, 4.0f, 18.0f, new Dilation(0.0f)).uv(0, 102).cuboid(-9.0f, -9.0f, -9.0f, 0.0f, 4.0f, 18.0f, new Dilation(0.0f)).uv(0, 120).cuboid(-9.0f, -9.0f, 9.0f, 18.0f, 4.0f, 0.0f, new Dilation(0.0f)).uv(18, 110).cuboid(-9.0f, -5.0f, -9.0f, 18.0f, 0.0f, 18.0f, new Dilation(0.0f)), ModelTransform.pivot(0.0f, 4.0f, 0.0f));
 
-		ModelPartData top = rocket3.addChild("top",
-				ModelPartBuilder.create().uv(72, 18).cuboid(-1.0f, -1.5f, -1.0f, 2.0f, 14.0f, 2.0f, new Dilation(0.0f)).uv(16, 87).cuboid(-2.0f, -5.5f, -2.0f, 4.0f, 4.0f, 4.0f, new Dilation(0.0f)).uv(0, 43)
-						.cuboid(10.0f, 41.0f, -10.0f, 0.0f, 2.0f, 20.0f, new Dilation(0.0f)).uv(0, 63).cuboid(-10.0f, 41.0f, -10.0f, 20.0f, 2.0f, 0.0f, new Dilation(0.0f)).uv(0, 63)
-						.cuboid(-10.0f, 41.0f, 10.0f, 20.0f, 2.0f, 0.0f, new Dilation(0.0f)).uv(0, 43).cuboid(-10.0f, 41.0f, -10.0f, 0.0f, 2.0f, 20.0f, new Dilation(0.0f)).uv(52, 67)
-						.cuboid(-5.0f, 26.0f, 6.0f, 10.0f, 9.0f, 0.0f, new Dilation(0.0f)).uv(52, 57).cuboid(-6.0f, 26.0f, -5.0f, 0.0f, 9.0f, 10.0f, new Dilation(0.0f)).uv(52, 67)
-						.cuboid(-5.0f, 26.0f, -6.0f, 10.0f, 9.0f, 0.0f, new Dilation(0.0f)).uv(52, 57).cuboid(6.0f, 26.0f, -5.0f, 0.0f, 9.0f, 10.0f, new Dilation(0.0f)),
-				ModelTransform.pivot(0.0f, -102.5f, 0.0f));
+		ModelPartData top = rocket3.addChild("top", ModelPartBuilder.create().uv(72, 18).cuboid(-1.0f, -1.5f, -1.0f, 2.0f, 14.0f, 2.0f, new Dilation(0.0f)).uv(16, 87).cuboid(-2.0f, -5.5f, -2.0f, 4.0f, 4.0f, 4.0f, new Dilation(0.0f)).uv(0, 43).cuboid(10.0f, 41.0f, -10.0f, 0.0f, 2.0f, 20.0f, new Dilation(0.0f)).uv(0, 63).cuboid(-10.0f, 41.0f, -10.0f, 20.0f, 2.0f, 0.0f, new Dilation(0.0f)).uv(0, 63).cuboid(-10.0f, 41.0f, 10.0f, 20.0f, 2.0f, 0.0f, new Dilation(0.0f)).uv(0, 43).cuboid(-10.0f, 41.0f, -10.0f, 0.0f, 2.0f, 20.0f, new Dilation(0.0f)).uv(52, 67).cuboid(-5.0f, 26.0f, 6.0f, 10.0f, 9.0f, 0.0f, new Dilation(0.0f)).uv(52, 57).cuboid(-6.0f, 26.0f, -5.0f, 0.0f, 9.0f, 10.0f, new Dilation(0.0f)).uv(52, 67).cuboid(-5.0f, 26.0f, -6.0f, 10.0f, 9.0f, 0.0f, new Dilation(0.0f)).uv(52, 57).cuboid(6.0f, 26.0f, -5.0f, 0.0f, 9.0f, 10.0f, new Dilation(0.0f)), ModelTransform.pivot(0.0f, -102.5f, 0.0f));
 
 		ModelPartData cube_r3 = top.addChild("cube_r3", ModelPartBuilder.create().uv(16, 67).cuboid(0.0f, -10.0f, -5.0f, 0.0f, 10.0f, 10.0f, new Dilation(0.0f)), ModelTransform.of(-6.0f, 26.0f, 0.0f, 0.0f, 0.0f, 0.3491f));
 
@@ -104,8 +88,7 @@ public class RocketEntityModelTier3 extends VehicleEntityModel<RocketEntityTier3
 
 		ModelPartData body_r18 = top.addChild("body_r18", ModelPartBuilder.create().uv(68, 54).cuboid(-1.0f, -10.0f, -1.0f, 2.0f, 9.0f, 2.0f, new Dilation(0.0f)), ModelTransform.of(-9.0f, 42.5f, 9.0f, 0.4326f, 0.678f, 0.6346f));
 
-		ModelPartData cube_r7 = top.addChild("cube_r7", ModelPartBuilder.create().uv(80, 17).cuboid(-2.0f, -6.5f, -2.0f, 4.0f, 2.0f, 4.0f, new Dilation(0.0f)).uv(80, 0).cuboid(-3.0f, -1.5f, -3.0f, 6.0f, 11.0f, 6.0f, new Dilation(0.0f)).uv(80, 17)
-				.cuboid(-2.0f, -3.5f, -2.0f, 4.0f, 2.0f, 4.0f, new Dilation(0.0f)), ModelTransform.of(0.0f, 12.0f, 0.0f, 0.0f, -0.7854f, 0.0f));
+		ModelPartData cube_r7 = top.addChild("cube_r7", ModelPartBuilder.create().uv(80, 17).cuboid(-2.0f, -6.5f, -2.0f, 4.0f, 2.0f, 4.0f, new Dilation(0.0f)).uv(80, 0).cuboid(-3.0f, -1.5f, -3.0f, 6.0f, 11.0f, 6.0f, new Dilation(0.0f)).uv(80, 17).cuboid(-2.0f, -3.5f, -2.0f, 4.0f, 2.0f, 4.0f, new Dilation(0.0f)), ModelTransform.of(0.0f, 12.0f, 0.0f, 0.0f, -0.7854f, 0.0f));
 
 		ModelPartData body_r19 = top.addChild("body_r19", ModelPartBuilder.create().uv(68, 54).cuboid(-1.0f, -10.0f, -1.0f, 2.0f, 9.0f, 2.0f, new Dilation(0.0f)), ModelTransform.of(9.0f, 42.5f, 9.0f, 0.48f, 0.7854f, 0.0f));
 
@@ -151,14 +134,8 @@ public class RocketEntityModelTier3 extends VehicleEntityModel<RocketEntityTier3
 
 		ModelPartData cube_r27 = fins.addChild("cube_r27", ModelPartBuilder.create().uv(72, 0).cuboid(-1.0f, 10.4167f, 0.3117f, 2.0f, 15.0f, 2.0f, new Dilation(0.0f)), ModelTransform.of(1.0f, -23.0f, 1.0f, 1.0472f, 0.7854f, 0.0f));
 
-		ModelPartData boosters = rocket3.addChild("boosters",
-				ModelPartBuilder.create().uv(104, 90).cuboid(-19.0f, -39.0f, -3.0f, 6.0f, 6.0f, 6.0f, new Dilation(0.0f)).uv(96, 49).mirrored().cuboid(-20.0f, -33.0f, -4.0f, 8.0f, 26.0f, 8.0f, new Dilation(0.0f)).mirrored(false).uv(32, 79)
-						.mirrored().cuboid(-20.0f, -5.0f, -4.0f, 8.0f, 5.0f, 8.0f, new Dilation(0.0f)).mirrored(false).uv(72, 64).mirrored().cuboid(-19.0f, -7.0f, -3.0f, 6.0f, 2.0f, 6.0f, new Dilation(0.0f)).mirrored(false)
-						.uv(110, 32).cuboid(-12.0f, -17.0f, -2.0f, 2.0f, 4.0f, 4.0f, new Dilation(0.0f)).uv(110, 32).cuboid(-12.0f, -27.0f, -2.0f, 2.0f, 4.0f, 4.0f, new Dilation(0.0f)).uv(104, 90)
-						.cuboid(11.0f, -39.0f, -3.0f, 6.0f, 6.0f, 6.0f, new Dilation(0.0f)).uv(96, 49).cuboid(10.0f, -33.0f, -4.0f, 8.0f, 26.0f, 8.0f, new Dilation(0.0f)).uv(72, 64)
-						.cuboid(11.0f, -7.0f, -3.0f, 6.0f, 2.0f, 6.0f, new Dilation(0.0f)).uv(32, 79).cuboid(10.0f, -5.0f, -4.0f, 8.0f, 5.0f, 8.0f, new Dilation(0.0f)).uv(110, 32)
-						.cuboid(8.0f, -27.0f, -2.0f, 2.0f, 4.0f, 4.0f, new Dilation(0.0f)).uv(110, 32).cuboid(8.0f, -17.0f, -2.0f, 2.0f, 4.0f, 4.0f, new Dilation(0.0f)),
-				ModelTransform.pivot(1.0f, -3.0f, 0.0f));
+		ModelPartData boosters = rocket3.addChild("boosters", ModelPartBuilder.create().uv(104, 90).cuboid(-19.0f, -39.0f, -3.0f, 6.0f, 6.0f, 6.0f, new Dilation(0.0f)).uv(96, 49).mirrored().cuboid(-20.0f, -33.0f, -4.0f, 8.0f, 26.0f, 8.0f, new Dilation(0.0f)).mirrored(false).uv(32, 79).mirrored().cuboid(-20.0f, -5.0f, -4.0f, 8.0f, 5.0f, 8.0f, new Dilation(0.0f)).mirrored(false).uv(72, 64).mirrored().cuboid(-19.0f, -7.0f, -3.0f, 6.0f, 2.0f, 6.0f, new Dilation(0.0f)).mirrored(false).uv(110, 32).cuboid(-12.0f, -17.0f, -2.0f, 2.0f, 4.0f, 4.0f, new Dilation(0.0f)).uv(110, 32).cuboid(-12.0f, -27.0f, -2.0f, 2.0f, 4.0f, 4.0f, new Dilation(0.0f)).uv(104, 90).cuboid(11.0f, -39.0f, -3.0f, 6.0f, 6.0f, 6.0f, new Dilation(0.0f)).uv(96, 49).cuboid(10.0f, -33.0f, -4.0f, 8.0f, 26.0f, 8.0f, new Dilation(0.0f)).uv(72, 64).cuboid(11.0f, -7.0f, -3.0f, 6.0f, 2.0f, 6.0f, new Dilation(0.0f)).uv(32, 79).cuboid(10.0f, -5.0f, -4.0f, 8.0f, 5.0f, 8.0f, new Dilation(0.0f)).uv(110, 32)
+				.cuboid(8.0f, -27.0f, -2.0f, 2.0f, 4.0f, 4.0f, new Dilation(0.0f)).uv(110, 32).cuboid(8.0f, -17.0f, -2.0f, 2.0f, 4.0f, 4.0f, new Dilation(0.0f)), ModelTransform.pivot(1.0f, -3.0f, 0.0f));
 		return TexturedModelData.of(modelData, 128, 128);
 	}
 }

@@ -5,6 +5,5 @@ import net.fabricmc.api.Environment;
 import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
-public record PlanetRing(Identifier galaxy, Identifier solarSystem, Identifier texture, int speed, int scale,
-						 double radius) {
+public record PlanetRing(Identifier galaxy, Identifier solarSystem, Identifier texture, int speed, int scale, double radius) {
 }

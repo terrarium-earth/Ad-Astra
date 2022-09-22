@@ -1,10 +1,13 @@
 package com.github.alexnijjar.ad_astra.blocks.machines.entity;
 
+import org.jetbrains.annotations.Nullable;
+
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.recipes.CookingRecipe;
 import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
 import com.github.alexnijjar.ad_astra.registry.ModRecipes;
 import com.github.alexnijjar.ad_astra.screen.handler.CompressorScreenHandler;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -12,7 +15,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import org.jetbrains.annotations.Nullable;
 
 public class CompressorBlockEntity extends ProcessingMachineBlockEntity {
 

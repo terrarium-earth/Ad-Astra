@@ -18,7 +18,7 @@ public abstract class AbstractVehicleScreenHandler extends ScreenHandler {
 	protected final CustomInventory inventory;
 
 	public AbstractVehicleScreenHandler(ScreenHandlerType<?> type, int syncId, PlayerInventory inventory, VehicleEntity entity) {
-		this(type, syncId, inventory, entity, new Slot[]{});
+		this(type, syncId, inventory, entity, new Slot[] {});
 	}
 
 	// Add additional slots.

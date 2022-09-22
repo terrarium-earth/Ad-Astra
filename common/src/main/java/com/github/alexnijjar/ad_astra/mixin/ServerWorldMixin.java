@@ -34,8 +34,7 @@ public abstract class ServerWorldMixin {
 	public List<Spawner> spawners;
 
 	@Inject(at = @At(value = "TAIL"), method = "<init>")
-	public void adastra_ServerWorld(MinecraftServer minecraftServer, Executor executor, LevelStorage.Session session, ServerWorldProperties serverWorldProperties, RegistryKey<World> registryKey, DimensionOptions dimensionOptions,
-			WorldGenerationProgressListener worldGenerationProgressListener, boolean debugWorld, long seed, List<Spawner> spawners, boolean shouldTickTime, CallbackInfo ci) {
+	public void adastra_ServerWorld(MinecraftServer minecraftServer, Executor executor, LevelStorage.Session session, ServerWorldProperties serverWorldProperties, RegistryKey<World> registryKey, DimensionOptions dimensionOptions, WorldGenerationProgressListener worldGenerationProgressListener, boolean debugWorld, long seed, List<Spawner> spawners, boolean shouldTickTime, CallbackInfo ci) {
 
 		List<Spawner> serverSpawners = new ArrayList<>(this.spawners);
 		if (!shouldTickTime) {

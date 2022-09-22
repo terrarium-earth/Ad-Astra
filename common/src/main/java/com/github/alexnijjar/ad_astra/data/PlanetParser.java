@@ -28,6 +28,6 @@ public class PlanetParser {
 		boolean hasOxygen = jsonObject.get("has_oxygen").getAsBoolean();
 		ButtonColour buttonColour = ButtonColour.stringToColour(jsonObject.get("button_color").getAsString());
 
-		return new Planet(translation, galaxy, solarSystem, dimension, orbitDimension, parentWorld, rocketTier, gravity, hasAtmosphere, daysInYear, temperature,solarPower, orbitSolarPower, hasOxygen, buttonColour);
+		return new Planet(translation, galaxy, solarSystem, dimension, orbitDimension, parentWorld, rocketTier, gravity, hasAtmosphere, daysInYear, temperature, solarPower, orbitSolarPower, hasOxygen, buttonColour);
 	}
 }

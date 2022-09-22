@@ -1,18 +1,20 @@
 package com.github.alexnijjar.ad_astra.mixin;
 
-import com.github.alexnijjar.ad_astra.AdAstra;
-import com.github.alexnijjar.ad_astra.items.armour.JetSuit;
-import com.github.alexnijjar.ad_astra.items.armour.NetheriteSpaceSuit;
-import com.github.alexnijjar.ad_astra.util.ModKeyBindings;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import com.github.alexnijjar.ad_astra.AdAstra;
+import com.github.alexnijjar.ad_astra.items.armour.JetSuit;
+import com.github.alexnijjar.ad_astra.items.armour.NetheriteSpaceSuit;
+import com.github.alexnijjar.ad_astra.util.ModKeyBindings;
+
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin {

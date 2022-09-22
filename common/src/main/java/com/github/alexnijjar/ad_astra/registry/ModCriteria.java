@@ -2,6 +2,7 @@ package com.github.alexnijjar.ad_astra.registry;
 
 import com.github.alexnijjar.ad_astra.advancement.FoodCookedInAtmosphereCriterion;
 import com.github.alexnijjar.ad_astra.advancement.RocketDestroyedCriterion;
+
 import net.minecraft.advancement.criterion.Criteria;
 
 public class ModCriteria {

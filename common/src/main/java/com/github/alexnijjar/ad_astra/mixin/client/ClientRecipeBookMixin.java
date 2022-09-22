@@ -13,7 +13,7 @@ import net.minecraft.recipe.Recipe;
 
 @Mixin(ClientRecipeBook.class)
 public class ClientRecipeBookMixin {
-    
+
     // Hides the annoying "Unknown recipe category" warning
     @Inject(at = @At(value = "HEAD"), method = "getGroupForRecipe", cancellable = true)
     private static void adastra_getGroupForRecipe(Recipe<?> recipe, CallbackInfoReturnable<RecipeBookGroup> ci) {

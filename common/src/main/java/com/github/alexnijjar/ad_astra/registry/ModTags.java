@@ -1,6 +1,7 @@
 package com.github.alexnijjar.ad_astra.registry;
 
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
+
 import net.minecraft.entity.EntityType;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;

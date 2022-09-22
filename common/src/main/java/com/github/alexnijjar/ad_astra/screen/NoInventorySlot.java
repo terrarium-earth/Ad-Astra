@@ -9,8 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.slot.Slot;
 
 /**
- * A slot that prevents placing items with an inventory. For example, a rocket with an inventory or a shulker box. This is to
- * prevent cheating with infinite slots.
+ * A slot that prevents placing items with an inventory. For example, a rocket with an inventory or a shulker box. This is to prevent cheating with infinite slots.
  */
 public class NoInventorySlot extends Slot {
 

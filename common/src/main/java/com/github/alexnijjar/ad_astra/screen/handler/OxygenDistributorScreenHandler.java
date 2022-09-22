@@ -14,7 +14,7 @@ public class OxygenDistributorScreenHandler extends AbstractMachineScreenHandler
 	}
 
 	public OxygenDistributorScreenHandler(int syncId, PlayerInventory inventory, OxygenDistributorBlockEntity entity) {
-		super(ModScreenHandlers.OXYGEN_DISTRIBUTOR_SCREEN_HANDLER, syncId, inventory, entity, new Slot[]{
+		super(ModScreenHandlers.OXYGEN_DISTRIBUTOR_SCREEN_HANDLER.get(), syncId, inventory, entity, new Slot[] {
 
 				// Left Insert.
 				new Slot(entity, 0, 17, 82),
@@ -24,7 +24,7 @@ public class OxygenDistributorScreenHandler extends AbstractMachineScreenHandler
 					public boolean canInsert(ItemStack stack) {
 						return false;
 					}
-				}});
+				} });
 	}
 
 	@Override

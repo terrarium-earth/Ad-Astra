@@ -14,7 +14,7 @@ import net.minecraft.entity.TntEntity;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.util.math.Vec3d;
 
-@Mixin(value = {AbstractMinecartEntity.class, ItemEntity.class, TntEntity.class})
+@Mixin(value = { AbstractMinecartEntity.class, ItemEntity.class, TntEntity.class })
 public abstract class CommonGravityEntityMixin {
 
 	@Unique

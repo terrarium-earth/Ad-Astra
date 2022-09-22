@@ -1,6 +1,7 @@
 package com.github.alexnijjar.ad_astra.entities.projectiles;
 
 import com.github.alexnijjar.ad_astra.registry.ModItems;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;

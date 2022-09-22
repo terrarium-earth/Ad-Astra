@@ -1,6 +1,11 @@
 package com.github.alexnijjar.ad_astra.recipes;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
+
 import com.github.alexnijjar.ad_astra.util.ModInventory;
+
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
@@ -8,10 +13,6 @@ import net.minecraft.recipe.Recipe;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Predicate;
 
 public abstract class ModRecipe implements Recipe<Inventory>, Predicate<ItemStack> {
 

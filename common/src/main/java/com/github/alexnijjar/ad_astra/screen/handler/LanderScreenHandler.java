@@ -3,17 +3,18 @@ package com.github.alexnijjar.ad_astra.screen.handler;
 import com.github.alexnijjar.ad_astra.entities.vehicles.VehicleEntity;
 import com.github.alexnijjar.ad_astra.registry.ModScreenHandlers;
 import com.github.alexnijjar.ad_astra.screen.NoInventorySlot;
+
+import earth.terrarium.botarium.api.fluid.FluidHolder;
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.fluid.base.FullItemFluidStorage;
-import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.CombinedStorage;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantItemStorage;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.util.collection.LinkedBlockPosHashSet.Storage;
 
 public class LanderScreenHandler extends AbstractVehicleScreenHandler {
 
@@ -22,7 +23,7 @@ public class LanderScreenHandler extends AbstractVehicleScreenHandler {
 	}
 
 	public LanderScreenHandler(int syncId, PlayerInventory inventory, VehicleEntity entity) {
-		super(ModScreenHandlers.LANDER_SCREEN_HANDLER, syncId, inventory, entity, new Slot[]{
+		super(ModScreenHandlers.LANDER_SCREEN_HANDLER.get(), syncId, inventory, entity, new Slot[] {
 
 				// Left input slot
 				new NoInventorySlot(entity.getInventory(), 0, 19, 58) {
@@ -31,8 +32,8 @@ public class LanderScreenHandler extends AbstractVehicleScreenHandler {
 						if (!super.canInsert(stack)) {
 							return false;
 						}
-						Storage<FluidVariant> context = ContainerItemContext.withInitial(stack).find(FluidStorage.ITEM);
-						return context instanceof CombinedStorage || context instanceof FullItemFluidStorage || context instanceof SingleVariantItemStorage<FluidVariant>;
+						Storage<FluidHolder> context = ContainerItemContext.withInitial(stack).find(FluidStorage.ITEM);
+						return context instanceof CombinedStorage || context instanceof FullItemFluidStorage || context instanceof SingleVariantItemStorage<FluidHolder>;
 					}
 				},
 				// Left output slot
@@ -66,7 +67,7 @@ public class LanderScreenHandler extends AbstractVehicleScreenHandler {
 					public boolean canInsert(ItemStack stack) {
 						return false;
 					}
-				},});
+				}, });
 	}
 
 	@Override

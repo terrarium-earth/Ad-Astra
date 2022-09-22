@@ -12,12 +12,12 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 
 public record LanderScreenHandlerFactory(VehicleEntity vehicle) implements ExtraDataMenuProvider {
-	
+
 	@Override
 	public void writeExtraData(ServerPlayerEntity player, PacketByteBuf buf) {
 		buf.writeInt(vehicle.getId());
 	}
-	
+
 	@Override
 	public ScreenHandler createMenu(int syncId, PlayerInventory inventory, PlayerEntity player) {
 		return new LanderScreenHandler(syncId, inventory, vehicle);

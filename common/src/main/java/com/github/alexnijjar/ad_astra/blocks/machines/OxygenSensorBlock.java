@@ -1,6 +1,7 @@
 package com.github.alexnijjar.ad_astra.blocks.machines;
 
 import com.github.alexnijjar.ad_astra.blocks.machines.entity.OxygenSensorBlockEntity;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ActionResult;

@@ -17,7 +17,7 @@ public class PlanetSelectionScreenHandler extends ScreenHandler {
 	}
 
 	public PlanetSelectionScreenHandler(int syncId, PlayerEntity player, int tier) {
-		super(ModScreenHandlers.PLANET_SELECTION_SCREEN_HANDLER, syncId);
+		super(ModScreenHandlers.PLANET_SELECTION_SCREEN_HANDLER.get(), syncId);
 		this.tier = tier;
 		this.player = player;
 	}

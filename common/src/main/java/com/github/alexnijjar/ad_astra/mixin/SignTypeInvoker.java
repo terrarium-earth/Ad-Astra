@@ -7,7 +7,7 @@ import net.minecraft.util.SignType;
 
 @Mixin(SignType.class)
 public interface SignTypeInvoker {
-    
+
     @Invoker("<init>")
     static SignType adastra_init(String name) {
         throw new UnsupportedOperationException();

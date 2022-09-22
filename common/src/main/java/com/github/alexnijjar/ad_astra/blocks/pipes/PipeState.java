@@ -3,10 +3,7 @@ package com.github.alexnijjar.ad_astra.blocks.pipes;
 import net.minecraft.util.StringIdentifiable;
 
 public enum PipeState implements StringIdentifiable {
-    NONE("none"),
-    NORMAL("normal"),
-    INSERT("insert"),
-    EXTRACT("extract");
+    NONE("none"), NORMAL("normal"), INSERT("insert"), EXTRACT("extract");
 
     private final String name;
 

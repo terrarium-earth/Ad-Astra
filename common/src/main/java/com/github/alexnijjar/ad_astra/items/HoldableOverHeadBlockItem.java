@@ -7,5 +7,5 @@ public class HoldableOverHeadBlockItem extends BlockItem implements HoldableOver
 
     public HoldableOverHeadBlockItem(Block block, Settings settings) {
         super(block, settings);
-    } 
+    }
 }

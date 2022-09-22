@@ -11,16 +11,12 @@ import net.minecraft.world.World;
 import java.util.List;
 
 @Environment(EnvType.CLIENT)
-public record SkyRenderer(RegistryKey<World> dimension, SkyRenderer.StarsRenderer starsRenderer,
-						  SkyRenderer.SunsetColour sunsetColour, SkyRenderer.DimensionEffects effects,
-						  SkyRenderer.CloudEffects cloudEffects, SkyRenderer.WeatherEffects weatherEffects,
-						  int horizonAngle, List<SkyRenderer.SkyObject> skyObjects) {
+public record SkyRenderer(RegistryKey<World> dimension, SkyRenderer.StarsRenderer starsRenderer, SkyRenderer.SunsetColour sunsetColour, SkyRenderer.DimensionEffects effects, SkyRenderer.CloudEffects cloudEffects, SkyRenderer.WeatherEffects weatherEffects, int horizonAngle, List<SkyRenderer.SkyObject> skyObjects) {
 
 	public record StarsRenderer(int fancyStars, int fastStars, boolean colouredStars, boolean daylightVisible) {
 	}
 
-	public record SkyObject(Identifier texture, boolean blending, RenderType renderType, float scale,
-							ColourHolder colour, Vec3f rotation) {
+	public record SkyObject(Identifier texture, boolean blending, RenderType renderType, float scale, ColourHolder colour, Vec3f rotation) {
 
 	}
 

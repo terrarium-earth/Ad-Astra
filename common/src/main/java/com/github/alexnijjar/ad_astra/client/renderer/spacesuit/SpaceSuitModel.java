@@ -171,11 +171,9 @@ public class SpaceSuitModel extends BipedEntityModel<LivingEntity> {
 
 		ModelPartData left_leg = modelPartData.addChild("left_leg", ModelPartBuilder.create().uv(16, 32).cuboid(-2.0f, 0.6667f, -2.0f, 4.0f, 8.0f, 4.0f, new Dilation(0.7f)), ModelTransform.pivot(2.0f, 11.3333f, 0.0f));
 
-		ModelPartData right_boot = modelPartData.addChild("right_boot", ModelPartBuilder.create().uv(32, 32).cuboid(-2.0f, 6.6667f, -2.0f, 4.0f, 6.0f, 4.0f, new Dilation(1.0f)).uv(0, 45).cuboid(-2.0f, 6.6667f, -2.0f, 4.0f, 6.0f, 4.0f, new Dilation(0.6f)),
-				ModelTransform.pivot(-2.0f, 11.3333f, 0.0f));
+		ModelPartData right_boot = modelPartData.addChild("right_boot", ModelPartBuilder.create().uv(32, 32).cuboid(-2.0f, 6.6667f, -2.0f, 4.0f, 6.0f, 4.0f, new Dilation(1.0f)).uv(0, 45).cuboid(-2.0f, 6.6667f, -2.0f, 4.0f, 6.0f, 4.0f, new Dilation(0.6f)), ModelTransform.pivot(-2.0f, 11.3333f, 0.0f));
 
-		ModelPartData left_boot = modelPartData.addChild("left_boot", ModelPartBuilder.create().uv(48, 32).cuboid(-2.0f, 6.6667f, -2.0f, 4.0f, 6.0f, 4.0f, new Dilation(1.0f)).uv(16, 45).cuboid(-2.0f, 6.6667f, -2.0f, 4.0f, 6.0f, 4.0f, new Dilation(0.6f)),
-				ModelTransform.pivot(2.0f, 11.3333f, 0.0f));
+		ModelPartData left_boot = modelPartData.addChild("left_boot", ModelPartBuilder.create().uv(48, 32).cuboid(-2.0f, 6.6667f, -2.0f, 4.0f, 6.0f, 4.0f, new Dilation(1.0f)).uv(16, 45).cuboid(-2.0f, 6.6667f, -2.0f, 4.0f, 6.0f, 4.0f, new Dilation(0.6f)), ModelTransform.pivot(2.0f, 11.3333f, 0.0f));
 		return TexturedModelData.of(modelData, 64, 64);
 	}
 }

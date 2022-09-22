@@ -88,12 +88,12 @@ public class GlacianRamEntity extends AnimalEntity implements Shearable {
     }
 
     @Override
-	public void onEatingGrass() {
-		this.setSheared(false);
-		if (this.isBaby()) {
-			this.growUp(60);
-		}
-	}
+    public void onEatingGrass() {
+        this.setSheared(false);
+        if (this.isBaby()) {
+            this.growUp(60);
+        }
+    }
 
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {

@@ -3,6 +3,7 @@ package com.github.alexnijjar.ad_astra.advancement;
 import com.github.alexnijjar.ad_astra.advancement.RocketDestroyedCriterion.Conditions;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.google.gson.JsonObject;
+
 import net.minecraft.advancement.criterion.AbstractCriterion;
 import net.minecraft.advancement.criterion.AbstractCriterionConditions;
 import net.minecraft.block.Block;
