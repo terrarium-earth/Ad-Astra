@@ -16,7 +16,9 @@ import com.github.alexnijjar.ad_astra.client.resourcepack.PlanetRing;
 import com.github.alexnijjar.ad_astra.client.resourcepack.SolarSystem;
 import com.github.alexnijjar.ad_astra.data.ButtonColour;
 import com.github.alexnijjar.ad_astra.data.Planet;
-import com.github.alexnijjar.ad_astra.networking.ModC2SPackets;
+import com.github.alexnijjar.ad_astra.networking.NetworkHandling;
+import com.github.alexnijjar.ad_astra.networking.packets.client.CreateSpaceStationPacket;
+import com.github.alexnijjar.ad_astra.networking.packets.client.TeleportToPlanetPacket;
 import com.github.alexnijjar.ad_astra.registry.ModRecipes;
 import com.github.alexnijjar.ad_astra.screen.handler.PlanetSelectionScreenHandler;
 import com.github.alexnijjar.ad_astra.util.MathUtil;
@@ -24,7 +26,6 @@ import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.ibm.icu.impl.Pair;
 import com.mojang.blaze3d.systems.RenderSystem;
 
-import io.netty.buffer.Unpooled;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -36,7 +37,6 @@ import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
@@ -328,12 +328,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 				}
 			}
 			this.client.player.closeHandledScreen();
-			// Consume the required items to build the Space Station.
-			ClientPlayNetworking.send(ModC2SPackets.DELETE_SPACE_STATION_ITEMS, PacketByteBufs.empty());
-			PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-			buf.writeIdentifier(world.getValue());
-			// Create the space station.
-			ClientPlayNetworking.send(ModC2SPackets.CREATE_SPACE_STATION, buf);
+			NetworkHandling.CHANNEL.sendToServer(new CreateSpaceStationPacket(world.getValue()));
 			teleportPlayer(world);
 		});
 	}
@@ -361,10 +356,8 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 
 	public void teleportPlayer(RegistryKey<World> world) {
 		this.client.player.closeHandledScreen();
-		PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-		buf.writeIdentifier(world.getValue());
 		// Tell the server to teleport the player after the button has been pressed.
-		ClientPlayNetworking.send(ModC2SPackets.TELEPORT_TO_PLANET, buf);
+		NetworkHandling.CHANNEL.sendToServer(new TeleportToPlanetPacket(world.getValue()));
 	}
 
 	public CustomButton createButton(Text label, Category category, ButtonType size, ButtonColour colour, TooltipType tooltip, Planet planetInfo, Consumer<ButtonWidget> onClick) {

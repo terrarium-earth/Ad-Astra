@@ -4,7 +4,6 @@
     "solar_system": "ad_astra:solar_system",
     "world": "ad_astra:venus",
     "orbit_world": "ad_astra:venus_orbit",
-    "parent_world": null,
     "rocket_tier": 3,
     "gravity": 8.87,
     "has_atmosphere": true,

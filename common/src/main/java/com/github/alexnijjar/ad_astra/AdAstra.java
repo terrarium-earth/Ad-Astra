@@ -3,13 +3,13 @@ package com.github.alexnijjar.ad_astra;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.github.alexnijjar.ad_astra.networking.NetworkHandling;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.github.alexnijjar.ad_astra.config.AdAstraConfig;
 import com.github.alexnijjar.ad_astra.data.Planet;
 import com.github.alexnijjar.ad_astra.data.PlanetData;
-import com.github.alexnijjar.ad_astra.networking.ModC2SPackets;
 import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
 import com.github.alexnijjar.ad_astra.registry.ModCommands;
 import com.github.alexnijjar.ad_astra.registry.ModCriteria;
@@ -65,7 +65,7 @@ public class AdAstra {
 		ModStructures.register();
 
 		// Packets
-		ModC2SPackets.register();
+		NetworkHandling.register();
 
 		ModCriteria.register();
 
