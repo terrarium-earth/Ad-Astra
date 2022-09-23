@@ -9,10 +9,12 @@ import earth.terrarium.botarium.api.energy.EnergyBlock;
 import earth.terrarium.botarium.api.energy.EnergyHooks;
 import earth.terrarium.botarium.api.energy.SimpleUpdatingEnergyContainer;
 import earth.terrarium.botarium.api.energy.StatefulEnergyContainer;
+import earth.terrarium.botarium.api.fluid.FluidHooks;
 import earth.terrarium.botarium.api.menu.ExtraDataMenuProvider;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.ai.goal.WolfBegGoal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
@@ -88,18 +90,8 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
 	}
 
 	public boolean drainEnergy(long amount) {
-		if (!this.world.isClient) {
-			if (this.getEnergy() - amount > 0) {
-				this.getEnergyStorage().extractEnergy(amount, false);
-				this.markDirty();
-				return true;
-			} else {
-				this.getEnergyStorage().setEnergy(0);
-				this.markDirty();
-				return false;
-			}
-		}
-		return false;
+		this.markDirty();
+		return this.getEnergyStorage().extractEnergy(amount, false) > 0;
 	}
 
 	public boolean canDrainEnergy() {
@@ -115,7 +107,7 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
 		if (usesEnergy() && !this.getCachedState().get(AbstractMachineBlock.POWERED)) {
 			for (Direction direction : Direction.values()) {
 				// TODO: Sided energy storage transfer
-				EnergyHooks.safeMoveEnergy(this.energyContainer, getSideEnergyStorage(direction), Long.MAX_VALUE);
+				EnergyHooks.moveEnergy(EnergyHooks.getBlockEnergyManager(this, direction.getOpposite()), EnergyHooks.getBlockEnergyManager(world.getBlockEntity(pos.offset(direction)), direction), Long.MAX_VALUE);
 			}
 		}
 	}

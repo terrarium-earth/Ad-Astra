@@ -4,7 +4,7 @@
     "tag": "c:ostrum_ingots"
   },
   "output": {
-    "item": "ad_astra:ostrum_plate",
+    "id": "ad_astra:ostrum_plate",
     "count": 1
   },
   "cookTime": 200

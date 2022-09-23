@@ -40,9 +40,6 @@ import dev.architectury.registry.client.rendering.RenderTypeRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.model.BakedModelManagerHelper;
-import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
@@ -141,7 +138,7 @@ public class AdAstraClient implements ClientModInitializer {
 		MatrixStack.Entry entry1 = matrices.peek();
 
 		for (BakedQuad quad : quads1) {
-			vertexConsumer1.quad(entry1, quad, 1, 1, 1, light, overlay);
+			vertexConsumer1.bakedQuad(entry1, quad, 1, 1, 1, light, overlay);
 		}
 	}
 }

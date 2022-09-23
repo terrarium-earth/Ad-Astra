@@ -74,7 +74,7 @@ public class RoverEntity extends VehicleEntity {
 
 	@Override
 	public ItemStack getDropStack() {
-		return ModItems.TIER_1_ROVER.getDefaultStack();
+		return ModItems.TIER_1_ROVER.get().getDefaultStack();
 	}
 
 	@Override
@@ -97,7 +97,7 @@ public class RoverEntity extends VehicleEntity {
 		this.previousYaw = this.getYaw();
 
 		if (this.getFirstPassenger() instanceof PlayerEntity player) {
-			if (this.inputTank.amount > 0) {
+			if (getTank().getFluidAmount() > 0) {
 				boolean shouldConsumeFuel = false;
 
 				// Player is clicking 'w' to move forward.

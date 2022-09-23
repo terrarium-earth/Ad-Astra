@@ -1,42 +1,39 @@
 package com.github.alexnijjar.ad_astra.recipes;
 
 import com.github.alexnijjar.ad_astra.registry.ModRecipes;
+
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.teamresourceful.resourcefullib.common.codecs.recipes.IngredientCodec;
+import com.teamresourceful.resourcefullib.common.codecs.tags.HolderSetCodec;
 import net.minecraft.fluid.Fluid;
-import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
+import net.minecraft.util.HolderSet;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-public class CryoFuelConversionRecipe extends ConversionRecipe {
+public class FluidConversionRecipe extends ConversionRecipe {
 
-	public CryoFuelConversionRecipe(Identifier id, Ingredient input, Fluid output, double conversionRatio) {
+	public FluidConversionRecipe(Identifier id, HolderSet<Fluid> input, Fluid output, double conversionRatio) {
 		super(id, input, output, conversionRatio);
 	}
 
-	public static Codec<CryoFuelConversionRecipe> codec(Identifier id) {
+	public static Codec<FluidConversionRecipe> codec(Identifier id) {
 		return RecordCodecBuilder.create(instance -> instance.group(
 				RecordCodecBuilder.point(id),
-				IngredientCodec.CODEC.fieldOf("input").forGetter(CryoFuelConversionRecipe::getInput),
+				HolderSetCodec.of(Registry.FLUID).fieldOf("input").forGetter(ConversionRecipe::getFluidInput),
 				Registry.FLUID.getCodec().fieldOf("output").forGetter(ConversionRecipe::getFluidOutput),
 				Codec.DOUBLE.fieldOf("conversion_ratio").orElse(1.0).forGetter(ConversionRecipe::getConversionRatio)
-			).apply(instance, CryoFuelConversionRecipe::new));
-	}
-
-	private Ingredient getInput() {
-		return getIngredients().get(0);
+		).apply(instance, FluidConversionRecipe::new));
 	}
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return ModRecipes.CRYO_FUEL_CONVERSION_SERIALIZER;
+		return ModRecipes.FUEL_CONVERSION_SERIALIZER;
 	}
 
 	@Override
 	public RecipeType<?> getType() {
-		return ModRecipes.CRYO_FUEL_CONVERSION_RECIPE;
+		return ModRecipes.FUEL_CONVERSION_RECIPE;
 	}
 }

@@ -9,7 +9,6 @@ import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import dev.architectury.registry.client.particle.ParticleProviderRegistry;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.minecraft.client.particle.WaterSplashParticle;
 import net.minecraft.screen.PlayerScreenHandler;
 

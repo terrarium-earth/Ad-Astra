@@ -15,7 +15,6 @@ import com.mojang.blaze3d.vertex.VertexFormats;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.transfer.v1.client.fluid.FluidVariantRendering;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
@@ -204,12 +203,12 @@ public class GuiUtil {
 		screen.renderTooltip(matrices, Text.translatable("gauge_text.ad_astra.storage", MathHelper.clamp(machine.getEnergy(), 0, machine.getMaxGeneration()), machine.getMaxGeneration()).setStyle(Style.EMPTY.withColor(Formatting.GOLD)), mouseX, mouseY);
 	}
 
-	public static void drawTankTooltip(Screen screen, MatrixStack matrices, FluidHolder tank, int mouseX, int mouseY) {
-		drawTankTooltip(screen, matrices, tank.getAmount(), tank.getCapacity(), tank.getResource(), mouseX, mouseY);
+	public static void drawTankTooltip(Screen screen, MatrixStack matrices, FluidHolder tank, long capacity, int mouseX, int mouseY) {
+		drawTankTooltip(screen, matrices, tank.getFluidAmount(), capacity, tank.getFluid(), mouseX, mouseY);
 	}
 
-	public static void drawTankTooltip(Screen screen, MatrixStack matrices, long amount, long capacity, FluidHolder variant, int mouseX, int mouseY) {
-		screen.renderTooltip(matrices, Text.translatable("gauge_text.ad_astra.liquid_storage", FluidUtils.dropletsToMillibuckets(amount), FluidUtils.dropletsToMillibuckets(capacity)).setStyle(Style.EMPTY.withColor(Formatting.GOLD)).append(Text.of(", ")).append(GuiUtil.getFluidTranslation(variant.getFluid())), mouseX, mouseY);
+	public static void drawTankTooltip(Screen screen, MatrixStack matrices, long amount, long capacity, Fluid fluid, int mouseX, int mouseY) {
+		screen.renderTooltip(matrices, Text.translatable("gauge_text.ad_astra.liquid_storage", FluidUtils.dropletsToMillibuckets(amount), FluidUtils.dropletsToMillibuckets(capacity)).setStyle(Style.EMPTY.withColor(Formatting.GOLD)).append(Text.of(", ")).append(GuiUtil.getFluidTranslation(fluid)), mouseX, mouseY);
 	}
 
 	public static class FloatDrawableHelper {

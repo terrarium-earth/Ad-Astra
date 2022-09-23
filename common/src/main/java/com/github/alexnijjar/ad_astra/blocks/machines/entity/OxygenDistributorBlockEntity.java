@@ -7,7 +7,6 @@ import org.jetbrains.annotations.Nullable;
 
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.blocks.machines.AbstractMachineBlock;
-import com.github.alexnijjar.ad_astra.recipes.OxygenConversionRecipe;
 import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
 import com.github.alexnijjar.ad_astra.registry.ModParticleTypes;
 import com.github.alexnijjar.ad_astra.registry.ModRecipes;
@@ -18,7 +17,6 @@ import com.github.alexnijjar.ad_astra.util.algorithms.OxygenFillerAlgorithm;
 import com.github.alexnijjar.ad_astra.util.entity.OxygenUtils;
 
 import earth.terrarium.botarium.api.fluid.FluidHooks;
-import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -152,16 +150,16 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 	public boolean canDistribute(int oxygenBlocks) {
 		long amountOfFluidToExtract = this.getFluidToExtract(oxygenBlocks, false);
 		long amountOfEnergyToConsume = this.getEnergyToConsume(oxygenBlocks, false);
-		if (tanks.getFluids().get(1).isEmpty()) {
+		if (getOutputTank().isEmpty()) {
 			return false;
 		} else if (this.getCachedState().get(AbstractMachineBlock.POWERED)) {
 			return false;
 		} else if (!this.canDrainEnergy(amountOfEnergyToConsume)) {
 			return false;
-		} else if (tanks.getFluids().get(1).getFluid().equals(Fluids.EMPTY)) {
+		} else if (getOutputTank().getFluid().equals(Fluids.EMPTY)) {
 			return false;
 		} else
-			return tanks.getFluids().get(1).simulateExtract(tanks.getFluids().get(1).getFluid(), amountOfFluidToExtract, null) == amountOfFluidToExtract;
+			return getOutputTank().simulateExtract(getOutputTank().getFluid(), amountOfFluidToExtract, null) == amountOfFluidToExtract;
 	}
 
 	@Override
@@ -175,7 +173,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 		if (!this.world.isClient) {
 			if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxCount()) {
 				ModRecipes.OXYGEN_CONVERSION_RECIPE.getRecipes(this.world);
-				FluidUtils.insertFluidIntoTank(this, tanks.getFluids().get(1), 0, 1, f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.getRecipes(this.world).stream().anyMatch(r -> r.getFluidInput().equals(f.getFluid())));
+				FluidUtils.insertFluidIntoTank(this, getOutputTank(), 0, 1, f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.getRecipes(this.world).stream().anyMatch(r -> r.matches(f.getFluid())));
 			}
 
 			if (this.canDrainEnergy()) {
@@ -211,7 +209,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 				return;
 			}
 		} else {
-			if (tanks.getFluids().get(1).getFluidAmount() <= 0 && this.getEnergyStorage().getStoredEnergy() <= 0) {
+			if (getOutputTank().getFluidAmount() <= 0 && this.getEnergyStorage().getStoredEnergy() <= 0) {
 				return;
 			}
 		}

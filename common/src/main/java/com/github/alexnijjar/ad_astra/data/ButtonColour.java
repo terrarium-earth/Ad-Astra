@@ -2,6 +2,7 @@ package com.github.alexnijjar.ad_astra.data;
 
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.util.ColourHolder;
+import com.mojang.serialization.Codec;
 
 public enum ButtonColour {
 	WHITE(255, 255, 255, 255), //
@@ -18,6 +19,8 @@ public enum ButtonColour {
 	BLUE(0, 184, 230), //
 	DARK_BLUE(0, 51, 153), //
 	PURPLE(153, 51, 255);
+
+	public static final Codec<ButtonColour> CODEC = Codec.STRING.xmap(ButtonColour::stringToColour, ButtonColour::toString);
 
 	private final ColourHolder colour;
 	public static final short ALPHA = 154;

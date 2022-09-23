@@ -38,7 +38,7 @@ public class WaterPumpScreen extends AbstractMachineScreen<WaterPumpScreenHandle
 		FluidMachineBlockEntity entity = (FluidMachineBlockEntity) blockEntity;
 
 		GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.blockEntity.getEnergyStorage().getStoredEnergy(), this.blockEntity.getMaxGeneration());
-		GuiUtil.drawFluidTank(matrices, this.x + INPUT_TANK_LEFT, this.y + INPUT_TANK_TOP, entity.tanks.getFluids().get(0).getFluidAmount(), entity.getInputSize(), entity.tanks.getFluids().get(0));
+		GuiUtil.drawFluidTank(matrices, this.x + INPUT_TANK_LEFT, this.y + INPUT_TANK_TOP, entity.getInputTank().getFluidAmount(), entity.getInputSize(), entity.getInputTank());
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class WaterPumpScreen extends AbstractMachineScreen<WaterPumpScreenHandle
 		}
 
 		if (GuiUtil.isHovering(this.getInputTankBounds(), mouseX, mouseY)) {
-			GuiUtil.drawTankTooltip(this, matrices, entity.tanks.getFluids().get(0), mouseX, mouseY);
+			GuiUtil.drawTankTooltip(this, matrices, entity.getInputTank(), mouseX, mouseY);
 		}
 	}
 

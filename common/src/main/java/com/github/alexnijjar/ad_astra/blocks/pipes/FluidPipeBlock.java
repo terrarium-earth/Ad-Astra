@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.github.alexnijjar.ad_astra.registry.ModSoundEvents;
 
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;

@@ -4,7 +4,7 @@
     "item": "minecraft:iron_ingot"
   },
   "output": {
-    "item": "ad_astra:iron_plate",
+    "id": "ad_astra:iron_plate",
     "count": 1
   },
   "cookTime": 200
