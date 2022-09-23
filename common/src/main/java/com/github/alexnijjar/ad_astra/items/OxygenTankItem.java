@@ -9,11 +9,6 @@ import com.github.alexnijjar.ad_astra.util.FluidUtils;
 
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHoldingItem;
-import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
-import net.fabricmc.fabric.api.transfer.v1.item.PlayerInventoryStorage;
-import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
-import net.fabricmc.fabric.impl.transfer.context.PlayerContainerItemContext;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;

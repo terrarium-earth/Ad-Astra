@@ -10,11 +10,11 @@ import com.github.alexnijjar.ad_astra.util.CustomInventory;
 import com.github.alexnijjar.ad_astra.util.FluidUtils;
 import com.github.alexnijjar.ad_astra.util.entity.OxygenUtils;
 
+import earth.terrarium.botarium.api.Updatable;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
+import earth.terrarium.botarium.api.fluid.SimpleUpdatingFluidContainer;
 import earth.terrarium.botarium.api.menu.ExtraDataMenuProvider;
-import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
-import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
@@ -42,7 +42,7 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
 
-public abstract class VehicleEntity extends Entity {
+public abstract class VehicleEntity extends Entity implements Updatable {
 
 	protected double clientX;
 	protected double clientY;
@@ -57,7 +57,7 @@ public abstract class VehicleEntity extends Entity {
 
 	public float previousYaw;
 
-	public final FluidHolder inputTank = FluidUtils.createTank(this.getTankSize());
+	public final SimpleUpdatingFluidContainer tank = new SimpleUpdatingFluidContainer(this, FluidHooks.buckets(getTankSize()), 1, (amount, fluid) -> true);
 	private final CustomInventory inventory = new CustomInventory(this.getInventorySize());
 
 	protected static final TrackedData<Float> SPEED = DataTracker.registerData(VehicleEntity.class, TrackedDataHandlerRegistry.FLOAT);
@@ -78,15 +78,15 @@ public abstract class VehicleEntity extends Entity {
 	@Override
 	protected void readCustomDataFromNbt(NbtCompound nbt) {
 		this.inventory.readNbtList(nbt.getList("inventory", NbtElement.COMPOUND_TYPE));
-		inputTank.variant = FluidHooks.fluidFromCompound(nbt.getCompound("inputFluid"));
-		inputTank.amount = nbt.getLong("inputAmount");
+		getTank().setFluid(FluidHooks.fluidFromCompound(nbt.getCompound("inputFluid")).getFluid());
+		getTank().setAmount(nbt.getLong("inputAmount"));
 	}
 
 	@Override
 	protected void writeCustomDataToNbt(NbtCompound nbt) {
 		nbt.put("inventory", this.inventory.toNbtList());
-		nbt.put("inputFluid", inputTank.variant.toNbt());
-		nbt.putLong("inputAmount", inputTank.amount);
+		nbt.put("inputFluid", getTank().serialize());
+		nbt.putLong("inputAmount", getTank().getFluidAmount());
 	}
 
 	@Override
@@ -103,7 +103,7 @@ public abstract class VehicleEntity extends Entity {
 	private void updatePositionAndRotation() {
 		if (this.isLogicalSideForUpdatingMovement()) {
 			this.clientInterpolationSteps = 0;
-			this.updateTrackedPosition(this.getX(), this.getY(), this.getZ());
+			this.syncPacketPositionCodec(this.getX(), this.getY(), this.getZ());
 		}
 		if (this.clientInterpolationSteps <= 0) {
 			return;
@@ -141,8 +141,8 @@ public abstract class VehicleEntity extends Entity {
 
 		this.tryInsertingIntoTank();
 		if (!this.world.isClient) {
-			this.dataTracker.set(FLUID_AMOUNT, (int) this.inputTank.amount);
-			this.dataTracker.set(FLUID_VARIANT, Registry.FLUID.getId(this.inputTank.variant.getFluid()).toString());
+			this.dataTracker.set(FLUID_AMOUNT, (int) getTank().getFluidAmount());
+			this.dataTracker.set(FLUID_VARIANT, Registry.FLUID.getId(getTank().getFluid()).toString());
 		}
 	}
 
@@ -253,8 +253,8 @@ public abstract class VehicleEntity extends Entity {
 			ItemStack dropStack = this.getDropStack();
 
 			// Set the fluid and fluid variant in the dropped item.
-			((VehicleItem) dropStack.getItem()).setAmount(dropStack, this.inputTank.amount);
-			((VehicleItem) dropStack.getItem()).setFluid(dropStack, this.inputTank.variant);
+			((VehicleItem) dropStack.getItem()).setAmount(dropStack, getTank().getFluidAmount());
+			((VehicleItem) dropStack.getItem()).setFluid(dropStack, getTank());
 			NbtCompound nbt = dropStack.getOrCreateNbt();
 			// Set the inventory in the dropped item.
 			nbt.put("inventory", this.inventory.toNbtList());
@@ -336,7 +336,7 @@ public abstract class VehicleEntity extends Entity {
 	}
 
 	@Override
-	public boolean canHit() {
+	public boolean collides() {
 		return true;
 	}
 
@@ -368,7 +368,7 @@ public abstract class VehicleEntity extends Entity {
 	public void tryInsertingIntoTank() {
 		if (this.getInventorySize() > 1) {
 			if (!this.world.isClient) {
-				FluidUtils.insertFluidIntoTank(this.getInventory(), this.inputTank, 0, 1, f -> f.getFluid().isIn(ModTags.FUELS));
+				FluidUtils.insertFluidIntoTank(this.getInventory(), getTank(), 0, 1, f -> f.getFluid().isIn(ModTags.FUELS));
 			}
 		}
 	}
@@ -378,7 +378,7 @@ public abstract class VehicleEntity extends Entity {
 	}
 
 	public FluidHolder getFluidHolder() {
-		return FluidHolder.of(Registry.FLUID.get(new Identifier(this.dataTracker.get(FLUID_VARIANT))));
+		return FluidHooks.newFluidHolder(Registry.FLUID.get(new Identifier(this.dataTracker.get(FLUID_VARIANT))), 0, null);
 	}
 
 	public void consumeFuel() {
@@ -389,5 +389,15 @@ public abstract class VehicleEntity extends Entity {
 				}
 			}
 		}
+	}
+
+	public FluidHolder getTank() {
+		return this.tank.getFluids().get(0);
+	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
 	}
 }

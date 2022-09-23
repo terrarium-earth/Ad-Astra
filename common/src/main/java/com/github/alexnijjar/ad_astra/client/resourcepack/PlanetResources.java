@@ -10,6 +10,7 @@ import com.github.alexnijjar.ad_astra.client.registry.ClientModSkies;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import com.mojang.serialization.JsonOps;
 
 import dev.architectury.registry.ReloadListenerRegistry;
 import net.fabricmc.api.EnvType;
@@ -95,7 +96,7 @@ public class PlanetResources {
 							JsonObject jsonObject = JsonHelper.deserialize(GSON, reader, JsonObject.class);
 
 							if (jsonObject != null) {
-								galaxies.add(GalaxyParser.parse(jsonObject));
+								galaxies.add(Galaxy.CODEC.parse(JsonOps.INSTANCE, jsonObject).getOrThrow(false, AdAstra.LOGGER::error));
 							}
 						}
 					} catch (Exception e) {

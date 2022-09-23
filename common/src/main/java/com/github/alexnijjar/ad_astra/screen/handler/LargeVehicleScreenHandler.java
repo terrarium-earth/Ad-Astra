@@ -4,12 +4,7 @@ import com.github.alexnijjar.ad_astra.entities.vehicles.VehicleEntity;
 import com.github.alexnijjar.ad_astra.registry.ModScreenHandlers;
 import com.github.alexnijjar.ad_astra.screen.NoInventorySlot;
 
-import earth.terrarium.botarium.api.fluid.FluidHolder;
-import earth.terrarium.botarium.api.fluid.SimpleUpdatingFluidContainer;
-import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
-import net.fabricmc.fabric.api.transfer.v1.fluid.base.FullItemFluidStorage;
-import net.fabricmc.fabric.api.transfer.v1.storage.base.CombinedStorage;
+import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
@@ -31,8 +26,7 @@ public class LargeVehicleScreenHandler extends AbstractVehicleScreenHandler {
 						if (!super.canInsert(stack)) {
 							return false;
 						}
-						FluidHolder context = ContainerItemContext.withInitial(stack).find(FluidStorage.ITEM);
-						return context instanceof CombinedStorage || context instanceof ItemFluidContainer || context instanceof SimpleUpdatingFluidContainer;
+						return !FluidHooks.isFluidContainingItem(stack);
 					}
 				},
 				// Left output slot.

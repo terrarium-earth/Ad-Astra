@@ -17,7 +17,6 @@ import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.github.alexnijjar.ad_astra.util.ModKeyBindings;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
 
-import earth.terrarium.botarium.api.fluid.FluidHolder;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
@@ -28,6 +27,7 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.network.packet.s2c.play.StopSoundS2CPacket;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -243,7 +243,7 @@ public class RocketEntity extends VehicleEntity {
 
 	@SuppressWarnings("deprecation")
 	private void travel() {
-		double multiplier = (this.inputTank.getResource().getFluid().isIn(ModTags.EFFICIENT_FUELS) ? 2.5 : 1.0);
+		double multiplier = (getTank().getFluid().isIn(ModTags.EFFICIENT_FUELS) ? 2.5 : 1.0);
 		if (!this.hasNoGravity()) {
 			this.setVelocity(this.getVelocity().add(0.0, AdAstra.CONFIG.rocket.acceleration * multiplier, 0.0));
 		}
@@ -267,7 +267,7 @@ public class RocketEntity extends VehicleEntity {
 		this.setCountdownTicks(AdAstra.CONFIG.rocket.countDownTicks);
 		// For shaking
 		this.setFrozenTicks(Integer.MAX_VALUE);
-		this.inputTank.amount -= getRequiredAmountForLaunch(this.inputTank.getResource());
+		getTank().setAmount(getRequiredAmountForLaunch(getTank().getFluid()));
 	}
 
 	public boolean hasLaunchPad() {
@@ -382,8 +382,8 @@ public class RocketEntity extends VehicleEntity {
 	}
 
 	@SuppressWarnings("deprecation")
-	public static long getRequiredAmountForLaunch(FluidHolder variant) {
-		if (variant.getFluid().isIn(ModTags.EFFICIENT_FUELS)) {
+	public static long getRequiredAmountForLaunch(Fluid fluid) {
+		if (fluid.isIn(ModTags.EFFICIENT_FUELS)) {
 			return AdAstra.CONFIG.rocket.efficientFuelLaunchCost;
 		} else {
 			return AdAstra.CONFIG.rocket.fuelLaunchCost;

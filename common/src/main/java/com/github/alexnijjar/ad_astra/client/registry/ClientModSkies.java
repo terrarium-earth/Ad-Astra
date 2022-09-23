@@ -10,9 +10,6 @@ import com.github.alexnijjar.ad_astra.util.ColourHolder;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry.CloudRenderer;
-import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.minecraft.util.math.Vec3d;
 
 @Environment(EnvType.CLIENT)

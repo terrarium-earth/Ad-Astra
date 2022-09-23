@@ -7,17 +7,18 @@ import com.github.alexnijjar.ad_astra.registry.ModRecipes;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.github.alexnijjar.ad_astra.util.ModKeyBindings;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
+import com.teamresourceful.resourcefullib.common.networking.NetworkChannel;
 
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import dev.architectury.event.events.common.PlayerEvent;
+import dev.architectury.networking.NetworkManager;
+import io.netty.buffer.Unpooled;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.server.Main;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ChunkTicketType;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.structure.StructurePlacementData;
-import net.minecraft.structure.StructureTemplate;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -45,14 +46,16 @@ public class ModC2SPackets {
 	public static void register() {
 
 		// Send planets packet.
-		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
+		PlayerEvent.PLAYER_JOIN.register(player -> {
 			try {
-				sender.sendPacket(ModS2CPackets.DATAPACK_PLANETS, createPlanetsDatapackBuf());
+				NetworkManager.sendToPlayer(player, ModS2CPackets.DATAPACK_PLANETS, createPlanetsDatapackBuf());
 			} catch (Exception e) {
 				AdAstra.LOGGER.error("Failed to send datapack values to client: " + e);
 				e.printStackTrace();
 			}
 		});
+
+		
 
 		// Teleport to a planet.
 		ServerPlayNetworking.registerGlobalReceiver(TELEPORT_TO_PLANET, (server, player, handler, buf, responseSender) -> {
@@ -105,7 +108,7 @@ public class ModC2SPackets {
 					// Tell all clients to start rendering the rocket launch
 					int id = buf.readInt();
 					for (ServerPlayerEntity serverPlayer : server.getPlayerManager().getPlayerList()) {
-						PacketByteBuf buffer = PacketByteBufs.create();
+						PacketByteBuf buffer = new PacketByteBuf(Unpooled.buffer());
 						buffer.writeInt(id);
 						serverPlayer.networkHandler.sendPacket(responseSender.createPacket(ModS2CPackets.START_ROCKET, buffer));
 					}
@@ -162,7 +165,7 @@ public class ModC2SPackets {
 	}
 
 	private static PacketByteBuf createPlanetsDatapackBuf() {
-		PacketByteBuf mainBuf = PacketByteBufs.create();
+		PacketByteBuf mainBuf = new PacketByteBuf(Unpooled.buffer());
 		mainBuf.writeCollection(AdAstra.planets, (buf, planet) -> {
 			buf.writeString(planet.translation());
 			buf.writeIdentifier(planet.galaxy());

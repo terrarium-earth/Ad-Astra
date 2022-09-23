@@ -13,11 +13,9 @@ import net.minecraft.world.World;
 
 public class ModRecipeType<T extends Recipe<Inventory>> implements RecipeType<T> {
 	private final Identifier id;
-	private List<T> cached;
 
 	public ModRecipeType(Identifier id) {
 		this.id = id;
-		this.cached = null;
 	}
 
 	public Identifier getId() {
@@ -33,10 +31,7 @@ public class ModRecipeType<T extends Recipe<Inventory>> implements RecipeType<T>
 	}
 
 	public List<T> getRecipes(World world) {
-		this.cached = null;
 		RecipeManager recipeManager = world.getRecipeManager();
-		this.cached = recipeManager.listAllOfType(this);
-
-		return this.cached;
+		return recipeManager.listAllOfType(this);
 	}
 }

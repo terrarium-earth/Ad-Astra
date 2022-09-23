@@ -10,7 +10,6 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.model.BakedModelManagerHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;

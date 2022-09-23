@@ -1,13 +1,12 @@
 package com.github.alexnijjar.ad_astra.blocks.machines.entity;
 
+import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHoldingBlock;
-import earth.terrarium.botarium.api.fluid.FluidHooks;
 import earth.terrarium.botarium.api.fluid.SimpleUpdatingFluidContainer;
 import earth.terrarium.botarium.api.fluid.UpdatingFluidContainer;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
 
 public abstract class FluidMachineBlockEntity extends AbstractMachineBlockEntity implements FluidHoldingBlock {
@@ -15,7 +14,7 @@ public abstract class FluidMachineBlockEntity extends AbstractMachineBlockEntity
 	public final SimpleUpdatingFluidContainer tanks = new SimpleUpdatingFluidContainer(this, integer -> switch (integer) {
 	case 0 -> getInputSize();
 	case 1 -> getOutputSize();
-	default -> getInputSize();
+	default -> 0L;
 	}, 2, (amount, fluid) -> true);
 
 	public FluidMachineBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
@@ -29,12 +28,20 @@ public abstract class FluidMachineBlockEntity extends AbstractMachineBlockEntity
 	@Override
 	public void tick() {
 		// Ensure that the tanks don't have a variant when there is no fluid in them.
-		if (tanks.getFluids().get(0).getFluidAmount() == 0) {
-			tanks.getFluids().get(0).setFluid(Fluids.EMPTY);
+		if (getInputTank().getFluidAmount() == 0) {
+			getInputTank().setFluid(Fluids.EMPTY);
 		}
-		if (tanks.getFluids().get(1).getFluidAmount() == 0) {
-			tanks.getFluids().get(0).setFluid(Fluids.EMPTY);
+		if (getOutputTank().getFluidAmount() == 0) {
+			getInputTank().setFluid(Fluids.EMPTY);
 		}
+	}
+
+	public FluidHolder getInputTank() {
+		return tanks.getFluids().get(0);
+	}
+
+	public FluidHolder getOutputTank() {
+		return getOutputTank();
 	}
 
 	@Override

@@ -4,15 +4,10 @@ import java.util.List;
 
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
-import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
-import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
-import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
-import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantItemStorage;
-import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.util.collection.LinkedBlockPosHashSet.Storage;
+
 
 public interface FluidContainingItem {
 
@@ -39,13 +34,13 @@ public interface FluidContainingItem {
 		if (nbt.contains("fluid")) {
 			return FluidHooks.fluidFromCompound(nbt.getCompound("fluid"));
 		} else {
-			return FluidHolder.blank();
+			return FluidHooks.emptyFluid();
 		}
 	}
 
 	default void setFluid(ItemStack stack, FluidHolder variant) {
 		NbtCompound nbt = stack.getOrCreateNbt();
-		nbt.put("fluid", variant.toNbt());
+		nbt.put("fluid", variant.serialize());
 	}
 
 	default long getAmount(ItemStack stack) {

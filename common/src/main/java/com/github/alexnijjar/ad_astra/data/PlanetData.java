@@ -11,6 +11,7 @@ import com.github.alexnijjar.ad_astra.AdAstra;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import com.mojang.serialization.JsonOps;
 
 import dev.architectury.registry.ReloadListenerRegistry;
 import net.minecraft.resource.Resource;
@@ -40,7 +41,7 @@ public class PlanetData {
 							JsonObject jsonObject = JsonHelper.deserialize(GSON, reader, JsonObject.class);
 
 							if (jsonObject != null) {
-								planets.add(PlanetParser.parse(jsonObject));
+								planets.add(Planet.CODEC.parse(JsonOps.INSTANCE, jsonObject).getOrThrow(false, AdAstra.LOGGER::error));
 							}
 						}
 					} catch (Exception e) {

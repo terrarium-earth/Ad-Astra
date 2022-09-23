@@ -5,7 +5,6 @@ import java.util.List;
 import org.jetbrains.annotations.Nullable;
 
 import com.github.alexnijjar.ad_astra.AdAstra;
-import com.github.alexnijjar.ad_astra.recipes.OxygenConversionRecipe;
 import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
 import com.github.alexnijjar.ad_astra.registry.ModRecipes;
 import com.github.alexnijjar.ad_astra.screen.handler.ConversionScreenHandler;
@@ -88,11 +87,11 @@ public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
 
 			if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxCount()) {
 				ModRecipes.OXYGEN_CONVERSION_RECIPE.getRecipes(this.world);
-				FluidUtils.insertFluidIntoTank(this, tanks.getFluids().get(0), 0, 1, f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.getRecipes(this.world).stream().anyMatch(r -> r.getFluidInput().equals(f.getFluid())));
+				FluidUtils.insertFluidIntoTank(this, getInputTank(), 0, 1, f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.getRecipes(this.world).stream().anyMatch(r -> r.matches(f.getFluid())));
 			}
 
 			if (!outputInsertSlot.isEmpty() && outputExtractSlot.getCount() < outputExtractSlot.getMaxCount()) {
-				FluidUtils.extractFluidFromTank(this, tanks.getFluids().get(1), 2, 3);
+				FluidUtils.extractFluidFromTank(this, getOutputTank(), 2, 3);
 			}
 
 			if (this.hasEnergy()) {

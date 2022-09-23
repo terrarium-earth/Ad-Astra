@@ -24,10 +24,9 @@ import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.ibm.icu.impl.Pair;
 import com.mojang.blaze3d.systems.RenderSystem;
 
+import io.netty.buffer.Unpooled;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
@@ -331,7 +330,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 			this.client.player.closeHandledScreen();
 			// Consume the required items to build the Space Station.
 			ClientPlayNetworking.send(ModC2SPackets.DELETE_SPACE_STATION_ITEMS, PacketByteBufs.empty());
-			PacketByteBuf buf = PacketByteBufs.create();
+			PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
 			buf.writeIdentifier(world.getValue());
 			// Create the space station.
 			ClientPlayNetworking.send(ModC2SPackets.CREATE_SPACE_STATION, buf);
@@ -362,7 +361,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 
 	public void teleportPlayer(RegistryKey<World> world) {
 		this.client.player.closeHandledScreen();
-		PacketByteBuf buf = PacketByteBufs.create();
+		PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
 		buf.writeIdentifier(world.getValue());
 		// Tell the server to teleport the player after the button has been pressed.
 		ClientPlayNetworking.send(ModC2SPackets.TELEPORT_TO_PLANET, buf);

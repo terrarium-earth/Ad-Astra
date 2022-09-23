@@ -10,17 +10,9 @@ import com.github.alexnijjar.ad_astra.items.FluidContainingItem;
 import com.github.alexnijjar.ad_astra.recipes.ConversionRecipe;
 
 import earth.terrarium.botarium.api.fluid.FluidHolder;
-import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
-import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage;
-import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
-import net.fabricmc.fabric.api.transfer.v1.storage.StorageView;
-import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
-import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.collection.LinkedBlockPosHashSet.Storage;
 
 public class FluidUtils {
 
@@ -47,13 +39,12 @@ public class FluidUtils {
 		if (recipes == null) {
 			return false;
 		}
-		FluidHolder inputTankFluid = inventory.tanks.getFluids().get(0);
+		FluidHolder inputTankFluid = inventory.getInputTank();
 		for (T recipe : recipes) {
 			double conversionRatio = recipe.getConversionRatio();
-			Fluid recipeInputVariant = recipe.getFluidInput();
 			Fluid recipeOutputVariant = recipe.getFluidOutput();
-			if (inputTankFluid.getFluid().equals(recipeInputVariant)) {
-				if (convertAndMove(inventory.tanks.getFluids().get(0), inventory.tanks.getFluids().get(1), f -> true, millibucketsToDroplets(transferPerTick), null, recipeOutputVariant, conversionRatio) > 0) {
+			if (recipe.matches(inputTankFluid.getFluid())) {
+				if (convertAndMove(inventory.getInputTank(), inventory.getOutputTank(), f -> true, millibucketsToDroplets(transferPerTick), null, recipeOutputVariant, conversionRatio) > 0) {
 					return true;
 				}
 			}

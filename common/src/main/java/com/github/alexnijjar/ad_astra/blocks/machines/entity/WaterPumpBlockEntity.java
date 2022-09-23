@@ -11,8 +11,6 @@ import com.github.alexnijjar.ad_astra.util.ModUtils;
 
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
-import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FluidBlock;
@@ -22,7 +20,6 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.collection.LinkedBlockPosHashSet.Storage;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 
@@ -90,7 +87,7 @@ public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
 		if (!this.world.isClient) {
 			FluidHolder waterFluid = FluidHolder.of(Fluids.WATER);
 			BlockState water = this.world.getBlockState(this.getPos().down());
-			if (tanks.getFluids().get(0).getFluidAmount() < this.getInputSize()) {
+			if (getInputTank().getFluidAmount() < this.getInputSize()) {
 				if (water.isOf(Blocks.WATER) && water.get(FluidBlock.LEVEL) == 0) {
 
 					// Drain the water block and add it to the tank.
@@ -120,7 +117,7 @@ public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
 			}
 
 			if (this.hasEnergy()) {
-				if (tanks.getFluids().get(1).getFluidAmount() < this.getOutputSize()) {
+				if (getOutputTank().getFluidAmount() < this.getOutputSize()) {
 					this.drainEnergy();
 				}
 				// Insert the fluid into nearby tanks.

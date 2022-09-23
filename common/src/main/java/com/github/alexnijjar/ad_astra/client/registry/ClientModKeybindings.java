@@ -4,10 +4,9 @@ import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntity;
 import com.github.alexnijjar.ad_astra.networking.ModC2SPackets;
 
 import dev.architectury.event.events.client.ClientTickEvent;
+import io.netty.buffer.Unpooled;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
@@ -31,7 +30,7 @@ public class ClientModKeybindings {
 	private static boolean sentRightPacket;
 
 	public static void register() {
-		ClientTickEvent.CLIENT_PRE.register(client -> {
+		ClientTickEvent.CLIENT_POST.register(client -> {
 
 			clickingJump = client.options.jumpKey.isPressed();
 			clickingSprint = client.options.sprintKey.isPressed();
@@ -46,7 +45,7 @@ public class ClientModKeybindings {
 						if (client.player.getVehicle() instanceof RocketEntity rocket) {
 							if (!rocket.isFlying()) {
 								if (rocket.getFluidAmount() >= RocketEntity.getRequiredAmountForLaunch(rocket.getFluidHolder())) {
-									PacketByteBuf buf = PacketByteBufs.create();
+									PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
 									buf.writeInt(rocket.getId());
 									ClientPlayNetworking.send(ModC2SPackets.LAUNCH_ROCKET, buf);
 								} else if (sentJumpPacket) {
@@ -121,7 +120,7 @@ public class ClientModKeybindings {
 	}
 
 	private static PacketByteBuf createKeyDownBuf() {
-		PacketByteBuf buf = PacketByteBufs.create();
+		PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
 		MinecraftClient client = MinecraftClient.getInstance();
 		buf.writeUuid(client.player.getUuid());
 		buf.writeBoolean(true);
@@ -129,7 +128,7 @@ public class ClientModKeybindings {
 	}
 
 	private static PacketByteBuf createKeyUpBuf() {
-		PacketByteBuf buf = PacketByteBufs.create();
+		PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
 		MinecraftClient client = MinecraftClient.getInstance();
 		buf.writeUuid(client.player.getUuid());
 		buf.writeBoolean(false);

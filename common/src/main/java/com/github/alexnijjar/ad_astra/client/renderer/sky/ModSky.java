@@ -11,8 +11,6 @@ import com.mojang.blaze3d.vertex.VertexBuffer;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.GraphicsMode;
 import net.minecraft.util.math.MathHelper;
