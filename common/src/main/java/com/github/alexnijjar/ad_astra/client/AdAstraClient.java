@@ -28,7 +28,6 @@ import com.github.alexnijjar.ad_astra.client.resourcepack.SkyRenderer;
 import com.github.alexnijjar.ad_astra.client.resourcepack.SolarSystem;
 import com.github.alexnijjar.ad_astra.client.screens.PlayerOverlayScreen;
 import com.github.alexnijjar.ad_astra.data.Planet;
-import com.github.alexnijjar.ad_astra.networking.ModS2CPackets;
 import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
 import com.github.alexnijjar.ad_astra.registry.ModBlocks;
 import com.github.alexnijjar.ad_astra.registry.ModItems;

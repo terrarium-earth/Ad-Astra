@@ -11,18 +11,17 @@ import com.github.alexnijjar.ad_astra.client.screens.utils.CustomButton;
 import com.github.alexnijjar.ad_astra.client.screens.utils.PlanetSelectionScreen.TooltipType;
 import com.github.alexnijjar.ad_astra.client.screens.utils.ScreenUtils;
 import com.github.alexnijjar.ad_astra.data.ButtonColour;
-import com.github.alexnijjar.ad_astra.networking.ModC2SPackets;
+import com.github.alexnijjar.ad_astra.networking.NetworkHandling;
+import com.github.alexnijjar.ad_astra.networking.packets.client.ToggleDistributorPacket;
 import com.github.alexnijjar.ad_astra.screen.handler.OxygenDistributorScreenHandler;
 import com.github.alexnijjar.ad_astra.util.FluidUtils;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.github.alexnijjar.ad_astra.util.entity.OxygenUtils;
 
-import io.netty.buffer.Unpooled;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
@@ -155,10 +154,7 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
 		super.init();
 		OxygenDistributorBlockEntity oxygenDistributor = ((OxygenDistributorBlockEntity) this.blockEntity);
 		visibleButton = new CustomButton(this.width / 2 + 10, this.height / 2 - 83, oxygenDistributor.shouldShowOxygen() ? HIDE_TEXT : SHOW_TEXT, ButtonType.STEEL, ButtonColour.WHITE, TooltipType.NONE, null, pressed -> {
-			PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-			buf.writeIdentifier(this.blockEntity.getWorld().getRegistryKey().getValue());
-			buf.writeBlockPos(this.blockEntity.getPos());
-			ClientPlayNetworking.send(ModC2SPackets.TOGGLE_SHOW_DISTRIBUTOR, buf);
+			NetworkHandling.CHANNEL.sendToServer(new ToggleDistributorPacket(this.blockEntity.getPos()));
 			((OxygenDistributorBlockEntity) this.blockEntity).setShowOxygen(!oxygenDistributor.shouldShowOxygen());
 		});
 		visibleButton.doMask = false;

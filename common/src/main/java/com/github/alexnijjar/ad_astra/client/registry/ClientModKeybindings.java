@@ -1,8 +1,11 @@
 package com.github.alexnijjar.ad_astra.client.registry;
 
 import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntity;
-import com.github.alexnijjar.ad_astra.networking.ModC2SPackets;
 
+import com.github.alexnijjar.ad_astra.networking.NetworkHandling;
+import com.github.alexnijjar.ad_astra.networking.packets.client.KeybindPacket;
+import com.github.alexnijjar.ad_astra.networking.packets.client.LaunchRocketPacket;
+import com.github.alexnijjar.ad_astra.networking.packets.server.StartRocketPacket;
 import dev.architectury.event.events.client.ClientTickEvent;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.api.EnvType;
@@ -20,7 +23,6 @@ public class ClientModKeybindings {
 	public static boolean clickingBack;
 	public static boolean clickingLeft;
 	public static boolean clickingRight;
-	public static boolean clickingShift;
 
 	private static boolean sentJumpPacket;
 	private static boolean sentSprintPacket;
@@ -45,9 +47,7 @@ public class ClientModKeybindings {
 						if (client.player.getVehicle() instanceof RocketEntity rocket) {
 							if (!rocket.isFlying()) {
 								if (rocket.getFluidAmount() >= RocketEntity.getRequiredAmountForLaunch(rocket.getFluidHolder())) {
-									PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-									buf.writeInt(rocket.getId());
-									ClientPlayNetworking.send(ModC2SPackets.LAUNCH_ROCKET, buf);
+									NetworkHandling.CHANNEL.sendToServer(new LaunchRocketPacket());
 								} else if (sentJumpPacket) {
 									client.player.sendMessage(Text.translatable("message.ad_astra.no_fuel"), false);
 								}
@@ -57,62 +57,62 @@ public class ClientModKeybindings {
 				}
 
 				if (clickingJump && sentJumpPacket) {
-					ClientPlayNetworking.send(ModC2SPackets.JUMP_KEY_CHANGED, createKeyDownBuf());
+					NetworkHandling.CHANNEL.sendToServer(new KeybindPacket(KeybindPacket.Keybind.JUMP, true));
 					sentJumpPacket = false;
 				}
 
 				if (clickingSprint && sentSprintPacket) {
-					ClientPlayNetworking.send(ModC2SPackets.SPRINT_KEY_CHANGED, createKeyDownBuf());
+					NetworkHandling.CHANNEL.sendToServer(new KeybindPacket(KeybindPacket.Keybind.SPRINT, true));
 					sentSprintPacket = false;
 				}
 
 				if (clickingForward && sentForwardPacket) {
-					ClientPlayNetworking.send(ModC2SPackets.FORWARD_KEY_CHANGED, createKeyDownBuf());
+					NetworkHandling.CHANNEL.sendToServer(new KeybindPacket(KeybindPacket.Keybind.FORWARD, true));
 					sentForwardPacket = false;
 				}
 
 				if (clickingBack && sentBackPacket) {
-					ClientPlayNetworking.send(ModC2SPackets.BACK_KEY_CHANGED, createKeyDownBuf());
+					NetworkHandling.CHANNEL.sendToServer(new KeybindPacket(KeybindPacket.Keybind.BACK, true));
 					sentBackPacket = false;
 				}
 
 				if (clickingLeft && sentLeftPacket) {
-					ClientPlayNetworking.send(ModC2SPackets.LEFT_KEY_CHANGED, createKeyDownBuf());
+					NetworkHandling.CHANNEL.sendToServer(new KeybindPacket(KeybindPacket.Keybind.LEFT, true));
 					sentLeftPacket = false;
 				}
 
 				if (clickingRight && sentRightPacket) {
-					ClientPlayNetworking.send(ModC2SPackets.RIGHT_KEY_CHANGED, createKeyDownBuf());
+					NetworkHandling.CHANNEL.sendToServer(new KeybindPacket(KeybindPacket.Keybind.RIGHT, true));
 					sentRightPacket = false;
 				}
 
 				if (!clickingJump && !sentJumpPacket) {
-					ClientPlayNetworking.send(ModC2SPackets.JUMP_KEY_CHANGED, createKeyUpBuf());
+					NetworkHandling.CHANNEL.sendToServer(new KeybindPacket(KeybindPacket.Keybind.JUMP, false));
 					sentJumpPacket = true;
 				}
 
 				if (!clickingSprint && !sentSprintPacket) {
-					ClientPlayNetworking.send(ModC2SPackets.SPRINT_KEY_CHANGED, createKeyUpBuf());
+					NetworkHandling.CHANNEL.sendToServer(new KeybindPacket(KeybindPacket.Keybind.SPRINT, false));
 					sentSprintPacket = true;
 				}
 
 				if (!clickingForward && !sentForwardPacket) {
-					ClientPlayNetworking.send(ModC2SPackets.FORWARD_KEY_CHANGED, createKeyUpBuf());
+					NetworkHandling.CHANNEL.sendToServer(new KeybindPacket(KeybindPacket.Keybind.FORWARD, false));
 					sentForwardPacket = true;
 				}
 
 				if (!clickingBack && !sentBackPacket) {
-					ClientPlayNetworking.send(ModC2SPackets.BACK_KEY_CHANGED, createKeyUpBuf());
+					NetworkHandling.CHANNEL.sendToServer(new KeybindPacket(KeybindPacket.Keybind.BACK, false));
 					sentBackPacket = true;
 				}
 
 				if (!clickingLeft && !sentLeftPacket) {
-					ClientPlayNetworking.send(ModC2SPackets.LEFT_KEY_CHANGED, createKeyUpBuf());
+					NetworkHandling.CHANNEL.sendToServer(new KeybindPacket(KeybindPacket.Keybind.LEFT, false));
 					sentLeftPacket = true;
 				}
 
 				if (!clickingRight && !sentRightPacket) {
-					ClientPlayNetworking.send(ModC2SPackets.RIGHT_KEY_CHANGED, createKeyUpBuf());
+					NetworkHandling.CHANNEL.sendToServer(new KeybindPacket(KeybindPacket.Keybind.RIGHT, false));
 					sentRightPacket = true;
 				}
 			}

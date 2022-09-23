@@ -4,7 +4,6 @@
     "solar_system": "ad_astra:solar_system",
     "world": "ad_astra:mars",
     "orbit_world": "ad_astra:mars_orbit",
-    "parent_world": null,
     "rocket_tier": 2,
     "gravity": 3.72076,
     "has_atmosphere": true,

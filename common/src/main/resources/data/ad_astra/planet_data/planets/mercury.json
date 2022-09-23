@@ -4,7 +4,6 @@
     "solar_system": "ad_astra:solar_system",
     "world": "ad_astra:mercury",
     "orbit_world": "ad_astra:mercury_orbit",
-    "parent_world": null,
     "rocket_tier": 3,
     "gravity": 3.7,
     "has_atmosphere": false,
