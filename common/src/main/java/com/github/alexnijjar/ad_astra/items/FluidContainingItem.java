@@ -3,114 +3,49 @@ package com.github.alexnijjar.ad_astra.items;
 import java.util.List;
 
 import earth.terrarium.botarium.api.fluid.FluidHolder;
-import earth.terrarium.botarium.api.fluid.FluidHooks;
+import earth.terrarium.botarium.api.fluid.FluidHoldingItem;
+import earth.terrarium.botarium.api.fluid.ItemFilteredFluidContainer;
+import earth.terrarium.botarium.api.fluid.ItemFluidContainer;
+import earth.terrarium.botarium.api.fluid.SimpleUpdatingFluidContainer;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
 
+public interface FluidContainingItem extends FluidHoldingItem {
 
-public interface FluidContainingItem {
-
-	long getTankSize();
-
-	default boolean insertIntoTank(FluidHolder storage, ItemStack stack) {
-		try (Transaction transaction = Transaction.openOuter()) {
-			if (storage.insert(this.getFluid(stack), this.getAmount(stack), transaction) == this.getAmount(stack)) {
-				transaction.commit();
-				return true;
-			}
+	default boolean insertIntoTank(SimpleUpdatingFluidContainer tank, ItemStack stack) {
+		if (tank.insertFluid(getTank(stack), false) == this.getAmount(stack)) {
+			return true;
 		}
+
 		return false;
 	}
 
+	long getTankSize();
+
 	List<Fluid> getInputFluids();
 
-	default long transferFluid(FluidHolder from, FluidHolder to) {
-		return StorageUtil.move(from, to, f -> true, Long.MAX_VALUE, null);
+	default FluidHolder getTank(ItemStack stack) {
+		return this.getFluidContainer(stack).getFluids().get(0);
 	}
 
-	default FluidHolder getFluid(ItemStack stack) {
-		NbtCompound nbt = stack.getOrCreateNbt();
-		if (nbt.contains("fluid")) {
-			return FluidHooks.fluidFromCompound(nbt.getCompound("fluid"));
-		} else {
-			return FluidHooks.emptyFluid();
-		}
-	}
-
-	default void setFluid(ItemStack stack, FluidHolder variant) {
-		NbtCompound nbt = stack.getOrCreateNbt();
-		nbt.put("fluid", variant.serialize());
+	@Override
+	default ItemFluidContainer getFluidContainer(ItemStack stack) {
+		return new ItemFilteredFluidContainer(this.getTankSize(), 1, stack, (amount, fluid) -> true);
 	}
 
 	default long getAmount(ItemStack stack) {
-		NbtCompound nbt = stack.getOrCreateNbt();
-		if (nbt.contains("amount")) {
-			return nbt.getLong("amount");
-		} else {
-			return 0;
-		}
+		return this.getTank(stack).getFluidAmount();
 	}
 
 	default void setAmount(ItemStack stack, long amount) {
-		NbtCompound nbt = stack.getOrCreateNbt();
-		nbt.putLong("amount", amount);
+		this.getTank(stack).setAmount(amount);
 	}
 
-	class TankStorage extends SimpleUpdatingFluidContainer {
+	default Fluid getFluid(ItemStack stack) {
+		return this.getTank(stack).getFluid();
+	}
 
-		private final FluidContainingItem item;
-
-		public TankStorage(ItemStack stack, ContainerItemContext context) {
-			super(context);
-			item = (FluidContainingItem) stack.getItem();
-		}
-
-		@Override
-		protected boolean canInsert(FluidHolder resource) {
-			return item.getInputFluids().contains(resource.getFluid());
-		}
-
-		@Override
-		protected FluidHolder getBlankResource() {
-			return FluidHolder.blank();
-		}
-
-		@Override
-		protected FluidHolder getResource(ItemVariant currentVariant) {
-			return item.getFluid(currentVariant.toStack());
-		}
-
-		@Override
-		protected long getAmount(ItemVariant currentVariant) {
-			return item.getAmount(currentVariant.toStack());
-		}
-
-		@Override
-		protected long getCapacity(FluidHolder variant) {
-			return item.getTankSize();
-		}
-
-		@Override
-		protected ItemVariant getUpdatedVariant(ItemVariant currentVariant, FluidHolder newResource, long newAmount) {
-			ItemStack stack = new ItemStack(currentVariant.getItem());
-			NbtCompound nbt = currentVariant.copyNbt();
-
-			if (nbt != null && !nbt.isEmpty()) {
-				if (nbt.contains("fluid")) {
-					nbt.remove("fluid");
-				}
-				if (nbt.contains("amount")) {
-					nbt.remove("amount");
-				}
-				stack.setNbt(nbt);
-			}
-
-			if (!newResource.isBlank() && newAmount > 0) {
-				item.setFluid(stack, newResource);
-				item.setAmount(stack, newAmount);
-			}
-			return ItemVariant.of(stack);
-		}
+	default void setFluid(ItemStack stack, Fluid fluid) {
+		this.getTank(stack).setFluid(fluid);
 	}
 }

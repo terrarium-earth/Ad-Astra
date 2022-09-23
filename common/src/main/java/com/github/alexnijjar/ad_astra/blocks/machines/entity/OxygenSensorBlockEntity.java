@@ -2,7 +2,7 @@ package com.github.alexnijjar.ad_astra.blocks.machines.entity;
 
 import com.github.alexnijjar.ad_astra.blocks.machines.OxygenSensorBlock;
 import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
-import com.github.alexnijjar.ad_astra.util.entity.OxygenUtils;
+import com.github.alexnijjar.ad_astra.util.OxygenUtils;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.server.world.ServerWorld;

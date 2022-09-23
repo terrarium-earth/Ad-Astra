@@ -1,7 +1,7 @@
 package com.github.alexnijjar.ad_astra.mixin.oxygen;
 
 import com.github.alexnijjar.ad_astra.AdAstra;
-import com.github.alexnijjar.ad_astra.util.entity.OxygenUtils;
+import com.github.alexnijjar.ad_astra.util.OxygenUtils;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CampfireBlock;

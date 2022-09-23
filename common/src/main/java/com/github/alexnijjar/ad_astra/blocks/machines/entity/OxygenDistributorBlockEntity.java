@@ -13,8 +13,8 @@ import com.github.alexnijjar.ad_astra.registry.ModRecipes;
 import com.github.alexnijjar.ad_astra.screen.handler.OxygenDistributorScreenHandler;
 import com.github.alexnijjar.ad_astra.util.FluidUtils;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
+import com.github.alexnijjar.ad_astra.util.OxygenUtils;
 import com.github.alexnijjar.ad_astra.util.algorithms.OxygenFillerAlgorithm;
-import com.github.alexnijjar.ad_astra.util.entity.OxygenUtils;
 
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.minecraft.block.BlockState;
@@ -58,12 +58,12 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 	}
 
 	@Override
-	public long getInputSize() {
+	public long getInputTankCapacity() {
 		return FluidHooks.buckets(AdAstra.CONFIG.oxygenDistributor.tankBuckets);
 	}
 
 	@Override
-	public long getOutputSize() {
+	public long getOutputTankCapacity() {
 		return FluidHooks.buckets(AdAstra.CONFIG.oxygenDistributor.tankBuckets * 2);
 	}
 
@@ -172,12 +172,12 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 		// Convert the input fluid into oxygen
 		if (!this.world.isClient) {
 			if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxCount()) {
-				ModRecipes.OXYGEN_CONVERSION_RECIPE.getRecipes(this.world);
-				FluidUtils.insertFluidIntoTank(this, getOutputTank(), 0, 1, f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.getRecipes(this.world).stream().anyMatch(r -> r.matches(f.getFluid())));
+				ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.world);
+				FluidUtils.insertFluidIntoTank(this, getOutputTank(), 0, 1, f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.world).stream().anyMatch(r -> r.matches(f.getFluid())));
 			}
 
 			if (this.canDrainEnergy()) {
-				List<OxygenConversionRecipe> recipes = ModRecipes.OXYGEN_CONVERSION_RECIPE.getRecipes(this.world);
+				List<OxygenConversionRecipe> recipes = ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.world);
 				if (FluidUtils.convertFluid(this, recipes, 50)) {
 					this.drainEnergy();
 				}

@@ -32,11 +32,11 @@ public class CryoFuelConversionRecipe extends ConversionRecipe {
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return ModRecipes.CRYO_FUEL_CONVERSION_SERIALIZER;
+		return ModRecipes.CRYO_FUEL_CONVERSION_SERIALIZER.get();
 	}
 
 	@Override
 	public RecipeType<?> getType() {
-		return ModRecipes.CRYO_FUEL_CONVERSION_RECIPE;
+		return ModRecipes.CRYO_FUEL_CONVERSION_RECIPE.get();
 	}
 }

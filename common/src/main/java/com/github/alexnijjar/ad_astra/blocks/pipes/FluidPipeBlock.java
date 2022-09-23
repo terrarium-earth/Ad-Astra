@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.github.alexnijjar.ad_astra.registry.ModSoundEvents;
 
+import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -57,7 +58,7 @@ public class FluidPipeBlock extends AbstractPipeBlock {
     public void updateShape(World world, BlockPos pos, BlockState state, Direction direction) {
         if (!world.isClient) {
             BlockPos offset = pos.offset(direction);
-            boolean connect = world.getBlockState(offset).getBlock() instanceof FluidPipeBlock || FluidStorage.SIDED.find(world, offset, direction) != null;
+            boolean connect = world.getBlockState(offset).getBlock() instanceof FluidPipeBlock || FluidHooks.safeGetBlockFluidManager(world.getBlockEntity(pos.offset(direction)), direction).orElse(null) != null;
 
             if (connect) {
                 if (world.getBlockState(pos).get(DIRECTIONS.get(direction)).equals(PipeState.NONE)) {

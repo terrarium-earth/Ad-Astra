@@ -46,12 +46,12 @@ public class SpaceStationRecipe extends ModRecipe {
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return ModRecipes.SPACE_STATION_SERIALIZER;
+		return ModRecipes.SPACE_STATION_SERIALIZER.get();
 	}
 
 	@Override
 	public RecipeType<?> getType() {
-		return ModRecipes.SPACE_STATION_RECIPE;
+		return ModRecipes.SPACE_STATION_RECIPE.get();
 	}
 
 }

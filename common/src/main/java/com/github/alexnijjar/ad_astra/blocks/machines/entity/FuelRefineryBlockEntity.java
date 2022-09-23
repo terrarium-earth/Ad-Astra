@@ -27,12 +27,12 @@ public class FuelRefineryBlockEntity extends FluidMachineBlockEntity {
 	}
 
 	@Override
-	public long getInputSize() {
+	public long getInputTankCapacity() {
 		return FluidHooks.buckets(AdAstra.CONFIG.fuelRefinery.tankBuckets);
 	}
 
 	@Override
-	public long getOutputSize() {
+	public long getOutputTankCapacity() {
 		return FluidHooks.buckets(AdAstra.CONFIG.fuelRefinery.tankBuckets);
 	}
 
@@ -87,7 +87,7 @@ public class FuelRefineryBlockEntity extends FluidMachineBlockEntity {
 			ItemStack outputExtractSlot = this.getItems().get(3);
 
 			if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxCount()) {
-				FluidUtils.insertFluidIntoTank(this, getInputTank(), 0, 1, f -> ModRecipes.FUEL_CONVERSION_RECIPE.getRecipes(this.world).stream().anyMatch(r -> r.matches(f.getFluid())));
+				FluidUtils.insertFluidIntoTank(this, getInputTank(), 0, 1, f -> ModRecipes.FUEL_CONVERSION_RECIPE.get().getRecipes(this.world).stream().anyMatch(r -> r.matches(f.getFluid())));
 			}
 
 			if (!outputInsertSlot.isEmpty() && outputExtractSlot.getCount() < outputExtractSlot.getMaxCount()) {
@@ -95,7 +95,7 @@ public class FuelRefineryBlockEntity extends FluidMachineBlockEntity {
 			}
 
 			if (this.hasEnergy()) {
-				List<FluidConversionRecipe> recipes = ModRecipes.FUEL_CONVERSION_RECIPE.getRecipes(this.world);
+				List<FluidConversionRecipe> recipes = ModRecipes.FUEL_CONVERSION_RECIPE.get().getRecipes(this.world);
 				if (FluidUtils.convertFluid(this, recipes, 10)) {
 					this.drainEnergy();
 					this.setActive(true);

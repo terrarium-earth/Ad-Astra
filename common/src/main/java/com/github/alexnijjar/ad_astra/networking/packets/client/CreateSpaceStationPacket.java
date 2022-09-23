@@ -1,20 +1,17 @@
 package com.github.alexnijjar.ad_astra.networking.packets.client;
 
-import com.github.alexnijjar.ad_astra.blocks.machines.entity.OxygenDistributorBlockEntity;
 import com.github.alexnijjar.ad_astra.recipes.SpaceStationRecipe;
 import com.github.alexnijjar.ad_astra.registry.ModRecipes;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
-import com.ibm.icu.impl.Pair;
 import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
-import dev.architectury.event.events.common.TickEvent;
+
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.Ingredient;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ChunkTicketType;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.structure.Structure;
@@ -55,7 +52,7 @@ public record CreateSpaceStationPacket(Identifier targetWorld) implements Packet
         public PacketContext handle(CreateSpaceStationPacket message) {
             return (player, world) -> {
                 if (!player.isCreative() && !player.isSpectator()) {
-                    for (SpaceStationRecipe recipe : ModRecipes.SPACE_STATION_RECIPE.getRecipes(player.world)) {
+                    for (SpaceStationRecipe recipe : ModRecipes.SPACE_STATION_RECIPE.get().getRecipes(player.world)) {
                         for (int i = 0; i < recipe.getIngredients().size(); i++) {
                             if (!hasItem(player, recipe.getIngredients().get(i), recipe.getStackCounts().get(i))) {
                                 return;
@@ -63,7 +60,7 @@ public record CreateSpaceStationPacket(Identifier targetWorld) implements Packet
                         }
                     }
                     PlayerInventory inventory = player.getInventory();
-                    ModRecipes.SPACE_STATION_RECIPE.getRecipes(player.world).forEach(recipe -> {
+                    ModRecipes.SPACE_STATION_RECIPE.get().getRecipes(player.world).forEach(recipe -> {
                         for (int i = 0; i < recipe.getIngredients().size(); i++) {
                             inventory.remove(recipe.getIngredients().get(i), recipe.getStackCounts().get(i), inventory);
                         }

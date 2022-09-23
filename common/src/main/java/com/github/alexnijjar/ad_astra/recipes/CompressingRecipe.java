@@ -29,11 +29,11 @@ public class CompressingRecipe extends CookingRecipe {
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return ModRecipes.COMPRESSING_SERIALIZER;
+		return ModRecipes.COMPRESSING_SERIALIZER.get();
 	}
 
 	@Override
 	public RecipeType<?> getType() {
-		return ModRecipes.COMPRESSING_RECIPE;
+		return ModRecipes.COMPRESSING_RECIPE.get();
 	}
 }

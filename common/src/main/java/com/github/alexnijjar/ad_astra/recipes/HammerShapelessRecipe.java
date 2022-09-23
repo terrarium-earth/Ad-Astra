@@ -29,7 +29,7 @@ public class HammerShapelessRecipe extends ShapelessRecipe {
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return ModRecipes.HAMMER_SERIALIZER;
+		return ModRecipes.HAMMER_SERIALIZER.get();
 	}
 
 	@Override

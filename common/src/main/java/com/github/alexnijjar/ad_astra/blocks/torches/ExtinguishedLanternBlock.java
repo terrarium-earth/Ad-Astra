@@ -1,6 +1,6 @@
 package com.github.alexnijjar.ad_astra.blocks.torches;
 
-import com.github.alexnijjar.ad_astra.util.entity.OxygenUtils;
+import com.github.alexnijjar.ad_astra.util.OxygenUtils;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

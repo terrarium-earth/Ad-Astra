@@ -108,7 +108,7 @@ public class GuiUtil {
 
 	private static void drawFluid(MatrixStack matrices, int x, int y, double ratio, FluidHolder fluid) {
 
-		if (fluid.isBlank()) {
+		if (fluid.isEmpty()) {
 			return;
 		}
 

@@ -28,11 +28,11 @@ public class OxygenConversionRecipe extends FluidConversionRecipe {
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return ModRecipes.OXYGEN_CONVERSION_SERIALIZER;
+		return ModRecipes.OXYGEN_CONVERSION_SERIALIZER.get();
 	}
 
 	@Override
 	public RecipeType<?> getType() {
-		return ModRecipes.OXYGEN_CONVERSION_RECIPE;
+		return ModRecipes.OXYGEN_CONVERSION_RECIPE.get();
 	}
 }

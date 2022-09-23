@@ -8,8 +8,6 @@ import com.teamresourceful.resourcefullib.common.networking.NetworkChannel;
 import com.teamresourceful.resourcefullib.common.networking.base.NetworkDirection;
 import dev.architectury.event.events.common.PlayerEvent;
 
-import javax.xml.crypto.Data;
-
 public class NetworkHandling {
     public static final NetworkChannel CHANNEL = new NetworkChannel(AdAstra.MOD_ID, 0, "main");
 

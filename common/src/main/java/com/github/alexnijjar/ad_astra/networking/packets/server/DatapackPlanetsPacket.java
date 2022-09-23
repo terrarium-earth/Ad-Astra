@@ -1,20 +1,19 @@
 package com.github.alexnijjar.ad_astra.networking.packets.server;
 
-import com.github.alexnijjar.ad_astra.AdAstra;
-import com.github.alexnijjar.ad_astra.data.Planet;
-import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntity;
-import com.github.alexnijjar.ad_astra.util.ModIdentifier;
-import com.teamresourceful.resourcefullib.common.networking.base.Packet;
-import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
-import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.util.Identifier;
-
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import com.github.alexnijjar.ad_astra.AdAstra;
+import com.github.alexnijjar.ad_astra.data.Planet;
+import com.github.alexnijjar.ad_astra.util.ModIdentifier;
+import com.teamresourceful.resourcefullib.common.networking.base.Packet;
+import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
+import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
+
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.util.Identifier;
 
 public record DatapackPlanetsPacket(Collection<Planet> planets) implements Packet<DatapackPlanetsPacket> {
 
@@ -31,6 +30,7 @@ public record DatapackPlanetsPacket(Collection<Planet> planets) implements Packe
         return HANDLER;
     }
 
+    @SuppressWarnings("deprecation")
     private static class Handler implements PacketHandler<DatapackPlanetsPacket> {
         @Override
         public void encode(DatapackPlanetsPacket keybindPacket, PacketByteBuf buf) {

@@ -17,6 +17,7 @@ import net.minecraft.block.FluidBlock;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.nbt.NbtCompound;
@@ -43,7 +44,7 @@ public class RocketItem<T extends RocketEntity> extends VehicleItem {
 	@SuppressWarnings("deprecation")
 	@Override
 	public List<Fluid> getInputFluids() {
-		return Registry.FLUID.getEntrySet().stream().filter(e -> e.getValue().isIn(ModTags.FUELS)).map(f -> f.getValue()).toList();
+		return Registry.FLUID.getEntries().stream().filter(e -> e.getValue().isIn(ModTags.FUELS)).map(f -> f.getValue()).toList();
 	}
 
 	@Override
@@ -101,8 +102,8 @@ public class RocketItem<T extends RocketEntity> extends VehicleItem {
 
 							NbtCompound nbt = rocketStack.getOrCreateNbt();
 							if (nbt.contains("fluid")) {
-								if (!this.getFluid(rocketStack).isBlank()) {
-									this.insertIntoTank(rocketEntity.inputTank, rocketStack);
+								if (!this.getFluid(rocketStack).equals(Fluids.EMPTY)) {
+									this.insertIntoTank(rocketEntity.tank, rocketStack);
 								}
 							}
 							if (nbt.contains("inventory")) {

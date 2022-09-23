@@ -75,7 +75,7 @@ public class CompressorBlockEntity extends ProcessingMachineBlockEntity {
 						this.finishCooking();
 
 					} else {
-						CookingRecipe recipe = this.createRecipe(ModRecipes.COMPRESSING_RECIPE, input, true);
+						CookingRecipe recipe = this.createRecipe(ModRecipes.COMPRESSING_RECIPE.get(), input, true);
 						if (recipe != null) {
 							this.cookTimeTotal = recipe.getCookTime();
 							this.cookTime = 0;

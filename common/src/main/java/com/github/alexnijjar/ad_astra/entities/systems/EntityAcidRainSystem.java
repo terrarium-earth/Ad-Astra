@@ -1,4 +1,4 @@
-package com.github.alexnijjar.ad_astra.util.entity.systems;
+package com.github.alexnijjar.ad_astra.entities.systems;
 
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.entities.vehicles.VehicleEntity;
