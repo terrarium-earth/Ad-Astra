@@ -70,7 +70,6 @@ public class AdAstraClient implements ClientModInitializer {
 	public void onInitializeClient() {
 
 		PlanetResources.register();
-		ModS2CPackets.register();
 		ClientModScreens.register();
 		ClientModEntities.register();
 		ClientModParticles.register();
@@ -114,7 +113,7 @@ public class AdAstraClient implements ClientModInitializer {
 		}
 
 		ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> out.accept(LaunchPadBlockEntityRenderer.LAUNCH_PAD_MODEL));
-		BuiltinItemRendererRegistry.INSTANCE.register(ModItems.LAUNCH_PAD, new LaunchPadBlockEntityRenderer());
+		BuiltinItemRendererRegistry.INSTANCE.register(ModItems.LAUNCH_PAD.get(), new LaunchPadBlockEntityRenderer());
 
 		SpaceSuitRenderer.register();
 

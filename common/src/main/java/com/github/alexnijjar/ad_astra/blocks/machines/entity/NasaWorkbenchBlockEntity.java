@@ -88,7 +88,7 @@ public class NasaWorkbenchBlockEntity extends AbstractMachineBlockEntity {
 		if (!this.world.isClient) {
 			for (ItemStack input : this.getItems()) {
 				if (!input.isEmpty()) {
-					NasaWorkbenchRecipe recipe = ModRecipes.NASA_WORKBENCH_RECIPE.findFirst(world, f -> f.test(input));
+					NasaWorkbenchRecipe recipe = ModRecipes.NASA_WORKBENCH_RECIPE.get().findFirst(world, f -> f.test(input));
 					if (recipe != null) {
 						this.spawnWorkingParticles();
 						this.setActive(true);

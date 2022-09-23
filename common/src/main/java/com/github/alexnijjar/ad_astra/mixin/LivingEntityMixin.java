@@ -6,12 +6,12 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import com.github.alexnijjar.ad_astra.entities.systems.EntityAcidRainSystem;
+import com.github.alexnijjar.ad_astra.entities.systems.EntityOxygenSystem;
+import com.github.alexnijjar.ad_astra.entities.systems.EntityTemperatureSystem;
 import com.github.alexnijjar.ad_astra.entities.vehicles.VehicleEntity;
 import com.github.alexnijjar.ad_astra.registry.ModTags;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
-import com.github.alexnijjar.ad_astra.util.entity.systems.EntityAcidRainSystem;
-import com.github.alexnijjar.ad_astra.util.entity.systems.EntityOxygenSystem;
-import com.github.alexnijjar.ad_astra.util.entity.systems.EntityTemperatureSystem;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;

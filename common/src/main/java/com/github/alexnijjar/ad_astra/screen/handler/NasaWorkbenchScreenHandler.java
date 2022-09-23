@@ -94,7 +94,7 @@ public class NasaWorkbenchScreenHandler extends AbstractMachineScreenHandler {
 
 	public void updateContent() {
 
-		NasaWorkbenchRecipe recipe = ModRecipes.NASA_WORKBENCH_RECIPE.findFirst(world, f -> f.test(this.blockEntity));
+		NasaWorkbenchRecipe recipe = ModRecipes.NASA_WORKBENCH_RECIPE.get().findFirst(world, f -> f.test(this.blockEntity));
 
 		ItemStack output = ItemStack.EMPTY;
 		if (recipe != null) {

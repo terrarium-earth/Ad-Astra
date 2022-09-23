@@ -12,8 +12,8 @@ import net.minecraft.util.math.BlockPos;
 public abstract class FluidMachineBlockEntity extends AbstractMachineBlockEntity implements FluidHoldingBlock {
 
 	public final SimpleUpdatingFluidContainer tanks = new SimpleUpdatingFluidContainer(this, integer -> switch (integer) {
-	case 0 -> getInputSize();
-	case 1 -> getOutputSize();
+	case 0 -> getInputTankCapacity();
+	case 1 -> getOutputTankCapacity();
 	default -> 0L;
 	}, 2, (amount, fluid) -> true);
 
@@ -21,9 +21,9 @@ public abstract class FluidMachineBlockEntity extends AbstractMachineBlockEntity
 		super(blockEntityType, blockPos, blockState);
 	}
 
-	public abstract long getInputSize();
+	public abstract long getInputTankCapacity();
 
-	public abstract long getOutputSize();
+	public abstract long getOutputTankCapacity();
 
 	@Override
 	public void tick() {
@@ -46,7 +46,6 @@ public abstract class FluidMachineBlockEntity extends AbstractMachineBlockEntity
 
 	@Override
 	public UpdatingFluidContainer getFluidContainer() {
-		// TODO
-		return new FluidContainer();
+		return tanks;
 	}
 }

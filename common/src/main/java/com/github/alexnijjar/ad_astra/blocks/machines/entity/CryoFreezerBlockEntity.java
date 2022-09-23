@@ -67,7 +67,6 @@ public class CryoFreezerBlockEntity extends FluidMachineBlockEntity {
 					if (this.inputTank.insert(FluidHolder.of(recipe.getFluidOutput()), FluidUtils.millibucketsToDroplets((long) (1000 * recipe.getConversionRatio())), transaction) > 0) {
 						transaction.commit();
 					}
-					getInputTank().
 				}
 			}
 		}
@@ -181,7 +180,7 @@ public class CryoFreezerBlockEntity extends FluidMachineBlockEntity {
 						input.decrement(1);
 
 					} else {
-						CryoFuelConversionRecipe recipe = this.createRecipe(ModRecipes.CRYO_FUEL_CONVERSION_RECIPE, input, false);
+						CryoFuelConversionRecipe recipe = this.createRecipe(ModRecipes.CRYO_FUEL_CONVERSION_RECIPE.get(), input, false);
 						if (recipe != null) {
 							this.cookTimeTotal = 25;
 							this.cookTime = 0;

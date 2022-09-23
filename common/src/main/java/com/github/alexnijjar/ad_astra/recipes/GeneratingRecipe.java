@@ -1,14 +1,11 @@
 package com.github.alexnijjar.ad_astra.recipes;
 
 import com.github.alexnijjar.ad_astra.registry.ModRecipes;
-import com.google.gson.JsonObject;
-
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamresourceful.resourcefullib.common.codecs.recipes.IngredientCodec;
-import com.teamresourceful.resourcefullib.common.codecs.recipes.ItemStackCodec;
+
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
@@ -29,12 +26,12 @@ public class GeneratingRecipe extends CookingRecipe {
 	}
 
 	public RecipeSerializer<?> getSerializer() {
-		return ModRecipes.GENERATING_SERIALIZER;
+		return ModRecipes.GENERATING_SERIALIZER.get();
 	}
 
 	@Override
 	public RecipeType<?> getType() {
-		return ModRecipes.GENERATING_RECIPE;
+		return ModRecipes.GENERATING_RECIPE.get();
 	}
 
 }

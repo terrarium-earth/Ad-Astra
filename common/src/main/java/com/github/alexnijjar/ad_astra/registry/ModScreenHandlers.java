@@ -54,7 +54,7 @@ public class ModScreenHandlers {
 		LARGE_VEHICLE_SCREEN_HANDLER = SCREEN_HANDLERS.register("large_vehicle_screen_handler", () -> RegistryHelpers.createMenuType(LargeVehicleScreenHandler::new));
 		LANDER_SCREEN_HANDLER = SCREEN_HANDLERS.register("lander_screen_handler", () -> RegistryHelpers.createMenuType(LanderScreenHandler::new));
 
-		PLANET_SELECTION_SCREEN_HANDLER = SCREEN_HANDLERS.register("planet_selection_screen_handler", () -> RegistryHelpers.createMenuType(PlanetSelectionScreenHandler::new));
+		PLANET_SELECTION_SCREEN_HANDLER = SCREEN_HANDLERS.register("planet_selection_screen_handler", () -> RegistryHelpers.createMenuType((syncId, playerInventory, buf) -> new PlanetSelectionScreenHandler(syncId, playerInventory.player, buf)));
 
 		SCREEN_HANDLERS.register();
 	}

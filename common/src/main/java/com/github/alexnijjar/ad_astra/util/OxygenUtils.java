@@ -1,4 +1,4 @@
-package com.github.alexnijjar.ad_astra.util.entity;
+package com.github.alexnijjar.ad_astra.util;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -10,7 +10,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.registry.ModBlocks;
 import com.github.alexnijjar.ad_astra.registry.ModFluids;
-import com.github.alexnijjar.ad_astra.util.ModUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

@@ -110,7 +110,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 		guiTime = handler.getPlayer().world.getRandom().nextFloat() * 100000.0f;
 
 		// Get recipe.
-		ModRecipes.SPACE_STATION_RECIPE.getRecipes(handler.getPlayer().world).forEach(recipe -> {
+		ModRecipes.SPACE_STATION_RECIPE.get().getRecipes(handler.getPlayer().world).forEach(recipe -> {
 			if (recipe != null) {
 
 				for (int i = 0; i < recipe.getIngredients().size(); i++) {

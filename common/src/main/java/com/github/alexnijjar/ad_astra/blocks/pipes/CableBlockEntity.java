@@ -5,17 +5,17 @@ import java.util.List;
 
 import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
 
+import earth.terrarium.botarium.api.energy.EnergyHooks;
+import earth.terrarium.botarium.api.energy.PlatformEnergyManager;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-import team.reborn.energy.api.EnergyStorage;
-import team.reborn.energy.api.EnergyStorageUtil;
 
-public class CableBlockEntity extends BlockEntity implements InteractablePipe<EnergyStorage> {
-    private List<Node<EnergyStorage>> consumers = new ArrayList<>();
-    private Node<EnergyStorage> source;
+public class CableBlockEntity extends BlockEntity implements InteractablePipe<PlatformEnergyManager> {
+    private List<Node<PlatformEnergyManager>> consumers = new ArrayList<>();
+    private Node<PlatformEnergyManager> source;
 
     public CableBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.CABLE.get(), pos, state);
@@ -27,12 +27,12 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<En
     }
 
     @Override
-    public boolean canTakeFrom(EnergyStorage source) {
+    public boolean canTakeFrom(PlatformEnergyManager source) {
         return source.supportsExtraction();
     }
 
     @Override
-    public boolean canInsertInto(EnergyStorage consumer) {
+    public boolean canInsertInto(PlatformEnergyManager consumer) {
         return consumer.supportsInsertion();
     }
 
@@ -43,7 +43,7 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<En
 
     @Override
     @SuppressWarnings("UnstableApiUsage")
-    public void insertInto(EnergyStorage consumer, Direction direction, BlockPos pos) {
+    public void insertInto(PlatformEnergyManager consumer, Direction direction, BlockPos pos) {
         BlockState state = this.getCachedState();
         BlockState state2 = world.getBlockState(pos);
 
@@ -60,23 +60,23 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<En
         }
 
         if (getSource().storage() != null && getConsumers().size() > 0) {
-            EnergyStorageUtil.move(getSource().storage(), consumer, Math.max(0, this.getTransferAmount() / getConsumers().size()), null);
+            EnergyHooks.moveEnergy(getSource().storage(), consumer, Math.max(0, this.getTransferAmount() / getConsumers().size()));
         }
 
     }
 
     @Override
-    public EnergyStorage getInteraction(World world, BlockPos pos, Direction direction) {
-        return EnergyStorage.SIDED.find(world, pos, direction);
+    public PlatformEnergyManager getInteraction(World world, BlockPos pos, Direction direction) {
+        return EnergyHooks.safeGetBlockEnergyManager(world.getBlockEntity(pos.offset(direction)), direction).orElse(null);
     }
 
     @Override
-    public Node<EnergyStorage> getSource() {
+    public Node<PlatformEnergyManager> getSource() {
         return source;
     }
 
     @Override
-    public void setSource(Node<EnergyStorage> source) {
+    public void setSource(Node<PlatformEnergyManager> source) {
         this.source = source;
     }
 
@@ -86,7 +86,7 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<En
     }
 
     @Override
-    public List<Node<EnergyStorage>> getConsumers() {
+    public List<Node<PlatformEnergyManager>> getConsumers() {
         return this.consumers;
     }
 

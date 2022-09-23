@@ -11,6 +11,7 @@ import com.github.alexnijjar.ad_astra.util.ModUtils;
 
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
+import earth.terrarium.botarium.api.fluid.PlatformFluidHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FluidBlock;
@@ -34,12 +35,12 @@ public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
 	}
 
 	@Override
-	public long getInputSize() {
+	public long getInputTankCapacity() {
 		return FluidHooks.buckets(AdAstra.CONFIG.waterPump.tankBuckets);
 	}
 
 	@Override
-	public long getOutputSize() {
+	public long getOutputTankCapacity() {
 		return 0;
 	}
 
@@ -87,7 +88,7 @@ public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
 		if (!this.world.isClient) {
 			FluidHolder waterFluid = FluidHolder.of(Fluids.WATER);
 			BlockState water = this.world.getBlockState(this.getPos().down());
-			if (getInputTank().getFluidAmount() < this.getInputSize()) {
+			if (getInputTank().getFluidAmount() < this.getInputTankCapacity()) {
 				if (water.isOf(Blocks.WATER) && water.get(FluidBlock.LEVEL) == 0) {
 
 					// Drain the water block and add it to the tank.
@@ -117,12 +118,12 @@ public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
 			}
 
 			if (this.hasEnergy()) {
-				if (getOutputTank().getFluidAmount() < this.getOutputSize()) {
+				if (getOutputTank().getFluidAmount() < this.getOutputTankCapacity()) {
 					this.drainEnergy();
 				}
 				// Insert the fluid into nearby tanks.
 				for (Direction direction : new Direction[] { Direction.UP, this.getCachedState().get(AbstractMachineBlock.FACING) }) {
-					FluidHolder storage = FluidStorage.SIDED.find(this.world, this.getPos().offset(direction), direction);
+					PlatformFluidHandler storage = FluidHooks.getBlockFluidManager(world.getBlockEntity(this.pos.offset(direction)), direction);
 					if (storage != null) {
 						try (Transaction transaction = Transaction.openOuter()) {
 							long transferPerTick = AdAstra.CONFIG.waterPump.transferPerTick;

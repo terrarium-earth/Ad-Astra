@@ -48,11 +48,11 @@ public class NasaWorkbenchRecipe extends CookingRecipe {
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return ModRecipes.NASA_WORKBENCH_SERIALIZER;
+		return ModRecipes.NASA_WORKBENCH_SERIALIZER.get();
 	}
 
 	@Override
 	public RecipeType<?> getType() {
-		return ModRecipes.NASA_WORKBENCH_RECIPE;
+		return ModRecipes.NASA_WORKBENCH_RECIPE.get();
 	}
 }

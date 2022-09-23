@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.github.alexnijjar.ad_astra.AdAstra;
-import com.github.alexnijjar.ad_astra.util.entity.OxygenUtils;
+import com.github.alexnijjar.ad_astra.util.OxygenUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

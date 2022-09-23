@@ -8,7 +8,7 @@ import com.github.alexnijjar.ad_astra.registry.ModTags;
 import com.github.alexnijjar.ad_astra.screen.VehicleScreenHandlerFactory;
 import com.github.alexnijjar.ad_astra.util.CustomInventory;
 import com.github.alexnijjar.ad_astra.util.FluidUtils;
-import com.github.alexnijjar.ad_astra.util.entity.OxygenUtils;
+import com.github.alexnijjar.ad_astra.util.OxygenUtils;
 
 import earth.terrarium.botarium.api.Updatable;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
@@ -57,7 +57,7 @@ public abstract class VehicleEntity extends Entity implements Updatable {
 
 	public float previousYaw;
 
-	public final SimpleUpdatingFluidContainer tank = new SimpleUpdatingFluidContainer(this, FluidHooks.buckets(getTankSize()), 1, (amount, fluid) -> true);
+	public final SimpleUpdatingFluidContainer tank = new SimpleUpdatingFluidContainer(this, FluidHooks.buckets((int) getTankSize()), 1, (amount, fluid) -> true);
 	private final CustomInventory inventory = new CustomInventory(this.getInventorySize());
 
 	protected static final TrackedData<Float> SPEED = DataTracker.registerData(VehicleEntity.class, TrackedDataHandlerRegistry.FLOAT);
@@ -254,7 +254,7 @@ public abstract class VehicleEntity extends Entity implements Updatable {
 
 			// Set the fluid and fluid variant in the dropped item.
 			((VehicleItem) dropStack.getItem()).setAmount(dropStack, getTank().getFluidAmount());
-			((VehicleItem) dropStack.getItem()).setFluid(dropStack, getTank());
+			((VehicleItem) dropStack.getItem()).setFluid(dropStack, getTank().getFluid());
 			NbtCompound nbt = dropStack.getOrCreateNbt();
 			// Set the inventory in the dropped item.
 			nbt.put("inventory", this.inventory.toNbtList());
@@ -382,13 +382,7 @@ public abstract class VehicleEntity extends Entity implements Updatable {
 	}
 
 	public void consumeFuel() {
-		if (!this.world.isClient) {
-			try (Transaction transaction = Transaction.openOuter()) {
-				if (this.inputTank.extract(this.inputTank.getResource(), this.getFuelPerTick(), transaction) > 0) {
-					transaction.commit();
-				}
-			}
-		}
+		this.tank.extractFluid(this.getTank(), false);
 	}
 
 	public FluidHolder getTank() {
@@ -398,6 +392,6 @@ public abstract class VehicleEntity extends Entity implements Updatable {
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

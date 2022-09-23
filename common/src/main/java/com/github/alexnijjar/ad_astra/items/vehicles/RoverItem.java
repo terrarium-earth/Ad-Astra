@@ -10,6 +10,7 @@ import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.nbt.NbtCompound;
@@ -52,7 +53,7 @@ public class RoverItem extends VehicleItem {
 			}
 
 			ItemStack roverStack = context.getPlayer().getStackInHand(context.getHand());
-			RoverEntity rover = new RoverEntity(ModEntityTypes.TIER_1_ROVER, world);
+			RoverEntity rover = new RoverEntity(ModEntityTypes.TIER_1_ROVER.get(), world);
 
 			// Prevent placing rovers in rovers
 			Box scanAbove = new Box(pos.getX() - 2, pos.getY() - 2, pos.getZ() - 2, pos.getX() + 2, pos.getY() + 2, pos.getZ() + 2);
@@ -63,8 +64,8 @@ public class RoverItem extends VehicleItem {
 
 			NbtCompound nbt = roverStack.getOrCreateNbt();
 			if (nbt.contains("fluid")) {
-				if (!this.getFluid(roverStack).isBlank()) {
-					this.insertIntoTank(rover.inputTank, roverStack);
+				if (!this.getFluid(roverStack).equals(Fluids.EMPTY)) {
+					this.insertIntoTank(rover.tank, roverStack);
 				}
 			}
 			if (nbt.contains("inventory")) {

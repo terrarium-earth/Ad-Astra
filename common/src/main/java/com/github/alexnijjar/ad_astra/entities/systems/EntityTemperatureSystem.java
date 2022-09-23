@@ -1,4 +1,4 @@
-package com.github.alexnijjar.ad_astra.util.entity.systems;
+package com.github.alexnijjar.ad_astra.entities.systems;
 
 import org.apache.commons.lang3.Range;
 
@@ -7,7 +7,7 @@ import com.github.alexnijjar.ad_astra.items.armour.NetheriteSpaceSuit;
 import com.github.alexnijjar.ad_astra.items.armour.SpaceSuit;
 import com.github.alexnijjar.ad_astra.registry.ModTags;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
-import com.github.alexnijjar.ad_astra.util.entity.OxygenUtils;
+import com.github.alexnijjar.ad_astra.util.OxygenUtils;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;

@@ -16,7 +16,7 @@ import com.github.alexnijjar.ad_astra.networking.packets.client.ToggleDistributo
 import com.github.alexnijjar.ad_astra.screen.handler.OxygenDistributorScreenHandler;
 import com.github.alexnijjar.ad_astra.util.FluidUtils;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
-import com.github.alexnijjar.ad_astra.util.entity.OxygenUtils;
+import com.github.alexnijjar.ad_astra.util.OxygenUtils;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -64,8 +64,8 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
 		FluidMachineBlockEntity entity = (FluidMachineBlockEntity) blockEntity;
 
 		GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.blockEntity.getEnergyStorage().getStoredEnergy(), this.blockEntity.getMaxGeneration());
-		GuiUtil.drawFluidTank(matrices, this.x + INPUT_TANK_LEFT, this.y + INPUT_TANK_TOP, entity.getInputTank().getFluidAmount(), entity.getInputSize(), entity.getInputTank());
-		GuiUtil.drawFluidTank(matrices, this.x + OUTPUT_TANK_LEFT, this.y + OUTPUT_TANK_TOP, entity.getOutputTank().getFluidAmount(), entity.getOutputSize(), entity.getOutputTank());
+		GuiUtil.drawFluidTank(matrices, this.x + INPUT_TANK_LEFT, this.y + INPUT_TANK_TOP, entity.getInputTank().getFluidAmount(), entity.getInputTankCapacity(), entity.getInputTank());
+		GuiUtil.drawFluidTank(matrices, this.x + OUTPUT_TANK_LEFT, this.y + OUTPUT_TANK_TOP, entity.getOutputTank().getFluidAmount(), entity.getOutputTankCapacity(), entity.getOutputTank());
 
 		visibleButton.setMessage(((OxygenDistributorBlockEntity) this.blockEntity).shouldShowOxygen() ? HIDE_TEXT : SHOW_TEXT);
 
@@ -90,11 +90,11 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
 		}
 
 		if (GuiUtil.isHovering(this.getInputTankBounds(), mouseX, mouseY)) {
-			GuiUtil.drawTankTooltip(this, matrices, entity.getInputTank(), entity.getInputSize(), mouseX, mouseY);
+			GuiUtil.drawTankTooltip(this, matrices, entity.getInputTank(), entity.getInputTankCapacity(), mouseX, mouseY);
 		}
 
 		if (GuiUtil.isHovering(this.getOutputTankBounds(), mouseX, mouseY)) {
-			GuiUtil.drawTankTooltip(this, matrices, entity.getOutputTank(), entity.getInputSize(), mouseX, mouseY);
+			GuiUtil.drawTankTooltip(this, matrices, entity.getOutputTank(), entity.getInputTankCapacity(), mouseX, mouseY);
 		}
 
 		int oxygenBlocksCount = OxygenUtils.getOxygenBlocksCount(this.blockEntity.getWorld(), this.blockEntity.getPos());
@@ -132,7 +132,7 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
 		if (displayConversionEnergyCost) {
 			energyUsagePerTick += entity.getEnergyPerTick();
 			this.displayConversionEnergyCost = false;
-		} else if (entity.getInputTank().getFluidAmount() > 0 && entity.getOutputTank().getFluidAmount() < entity.getOutputSize()) {
+		} else if (entity.getInputTank().getFluidAmount() > 0 && entity.getOutputTank().getFluidAmount() < entity.getOutputTankCapacity()) {
 			energyUsagePerTick += entity.getEnergyPerTick();
 			displayConversionEnergyCost = true;
 		}

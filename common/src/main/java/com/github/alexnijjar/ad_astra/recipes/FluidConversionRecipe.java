@@ -29,11 +29,11 @@ public class FluidConversionRecipe extends ConversionRecipe {
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return ModRecipes.FUEL_CONVERSION_SERIALIZER;
+		return ModRecipes.FUEL_CONVERSION_SERIALIZER.get();
 	}
 
 	@Override
 	public RecipeType<?> getType() {
-		return ModRecipes.FUEL_CONVERSION_RECIPE;
+		return ModRecipes.FUEL_CONVERSION_RECIPE.get();
 	}
 }

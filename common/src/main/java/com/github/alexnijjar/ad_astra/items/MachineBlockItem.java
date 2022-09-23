@@ -32,13 +32,13 @@ public class MachineBlockItem extends BlockItem {
 
 				if (machineBlock instanceof FluidMachineBlockEntity fluidMachine) {
 					if (nbt.contains("inputFluid")) {
-						fluidMachine.inputTank.variant = FluidHooks.fluidFromCompound(nbt.getCompound("inputFluid"));
-						fluidMachine.inputTank.amount = nbt.getLong("inputAmount");
+						fluidMachine.getInputTank().setFluid(FluidHooks.fluidFromCompound(nbt.getCompound("inputFluid")).getFluid());
+						fluidMachine.getInputTank().setAmount(nbt.getLong("inputAmount"));
 					}
 
 					if (nbt.contains("outputFluid")) {
-						fluidMachine.outputTank.variant = FluidHooks.fluidFromCompound(nbt.getCompound("outputFluid"));
-						fluidMachine.outputTank.amount = nbt.getLong("outputAmount");
+						fluidMachine.getOutputTank().setFluid(FluidHooks.fluidFromCompound(nbt.getCompound("outputFluid")).getFluid());
+						fluidMachine.getOutputTank().setAmount(nbt.getLong("outputAmount"));
 					}
 
 					if (machineBlock instanceof OxygenDistributorBlockEntity oxygenDistributorMachine) {

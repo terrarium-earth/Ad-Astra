@@ -1,8 +1,19 @@
 package com.github.alexnijjar.ad_astra.client.registry;
 
-import com.github.alexnijjar.ad_astra.client.screens.*;
+import com.github.alexnijjar.ad_astra.client.screens.CoalGeneratorScreen;
+import com.github.alexnijjar.ad_astra.client.screens.CompressorScreen;
+import com.github.alexnijjar.ad_astra.client.screens.ConversionScreen;
+import com.github.alexnijjar.ad_astra.client.screens.CryoFreezerScreen;
+import com.github.alexnijjar.ad_astra.client.screens.LanderScreen;
+import com.github.alexnijjar.ad_astra.client.screens.LargeVehicleScreen;
+import com.github.alexnijjar.ad_astra.client.screens.NasaWorkbenchScreen;
+import com.github.alexnijjar.ad_astra.client.screens.OxygenDistributorScreen;
+import com.github.alexnijjar.ad_astra.client.screens.SolarPanelScreen;
+import com.github.alexnijjar.ad_astra.client.screens.VehicleScreen;
+import com.github.alexnijjar.ad_astra.client.screens.WaterPumpScreen;
 import com.github.alexnijjar.ad_astra.client.screens.utils.PlanetSelectionScreen;
 import com.github.alexnijjar.ad_astra.registry.ModScreenHandlers;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;

@@ -1,17 +1,13 @@
 package com.github.alexnijjar.ad_astra.client.registry;
 
 import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntity;
-
 import com.github.alexnijjar.ad_astra.networking.NetworkHandling;
 import com.github.alexnijjar.ad_astra.networking.packets.client.KeybindPacket;
 import com.github.alexnijjar.ad_astra.networking.packets.client.LaunchRocketPacket;
-import com.github.alexnijjar.ad_astra.networking.packets.server.StartRocketPacket;
+
 import dev.architectury.event.events.client.ClientTickEvent;
-import io.netty.buffer.Unpooled;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.Text;
 
 @Environment(EnvType.CLIENT)
@@ -46,7 +42,7 @@ public class ClientModKeybindings {
 					if (client.options.jumpKey.isPressed()) {
 						if (client.player.getVehicle() instanceof RocketEntity rocket) {
 							if (!rocket.isFlying()) {
-								if (rocket.getFluidAmount() >= RocketEntity.getRequiredAmountForLaunch(rocket.getFluidHolder())) {
+								if (rocket.getFluidAmount() >= RocketEntity.getRequiredAmountForLaunch(rocket.getFluidHolder().getFluid())) {
 									NetworkHandling.CHANNEL.sendToServer(new LaunchRocketPacket());
 								} else if (sentJumpPacket) {
 									client.player.sendMessage(Text.translatable("message.ad_astra.no_fuel"), false);
@@ -117,21 +113,5 @@ public class ClientModKeybindings {
 				}
 			}
 		});
-	}
-
-	private static PacketByteBuf createKeyDownBuf() {
-		PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-		MinecraftClient client = MinecraftClient.getInstance();
-		buf.writeUuid(client.player.getUuid());
-		buf.writeBoolean(true);
-		return buf;
-	}
-
-	private static PacketByteBuf createKeyUpBuf() {
-		PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-		MinecraftClient client = MinecraftClient.getInstance();
-		buf.writeUuid(client.player.getUuid());
-		buf.writeBoolean(false);
-		return buf;
 	}
 }

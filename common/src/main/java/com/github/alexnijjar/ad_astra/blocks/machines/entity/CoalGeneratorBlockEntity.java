@@ -77,7 +77,7 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity {
 						ticksToTurnOff = 7;
 						// Check if the input is a valid fuel
 					} else if (!input.isEmpty()) {
-						CookingRecipe recipe = this.createRecipe(ModRecipes.GENERATING_RECIPE, input, false);
+						CookingRecipe recipe = this.createRecipe(ModRecipes.GENERATING_RECIPE.get(), input, false);
 						if (recipe != null) {
 							input.decrement(1);
 							this.cookTimeTotal = recipe.getCookTime();

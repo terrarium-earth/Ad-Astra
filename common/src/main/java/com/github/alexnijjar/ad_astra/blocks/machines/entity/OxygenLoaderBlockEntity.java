@@ -5,6 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.Nullable;
 
 import com.github.alexnijjar.ad_astra.AdAstra;
+import com.github.alexnijjar.ad_astra.recipes.OxygenConversionRecipe;
 import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
 import com.github.alexnijjar.ad_astra.registry.ModRecipes;
 import com.github.alexnijjar.ad_astra.screen.handler.ConversionScreenHandler;
@@ -26,12 +27,12 @@ public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
 	}
 
 	@Override
-	public long getInputSize() {
+	public long getInputTankCapacity() {
 		return FluidHooks.buckets(AdAstra.CONFIG.oxygenLoader.tankBuckets);
 	}
 
 	@Override
-	public long getOutputSize() {
+	public long getOutputTankCapacity() {
 		return FluidHooks.buckets(AdAstra.CONFIG.oxygenLoader.tankBuckets);
 	}
 
@@ -86,8 +87,8 @@ public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
 			ItemStack outputExtractSlot = this.getItems().get(3);
 
 			if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxCount()) {
-				ModRecipes.OXYGEN_CONVERSION_RECIPE.getRecipes(this.world);
-				FluidUtils.insertFluidIntoTank(this, getInputTank(), 0, 1, f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.getRecipes(this.world).stream().anyMatch(r -> r.matches(f.getFluid())));
+				ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.world);
+				FluidUtils.insertFluidIntoTank(this, getInputTank(), 0, 1, f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.world).stream().anyMatch(r -> r.matches(f.getFluid())));
 			}
 
 			if (!outputInsertSlot.isEmpty() && outputExtractSlot.getCount() < outputExtractSlot.getMaxCount()) {
@@ -95,7 +96,7 @@ public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
 			}
 
 			if (this.hasEnergy()) {
-				List<OxygenConversionRecipe> recipes = ModRecipes.OXYGEN_CONVERSION_RECIPE.getRecipes(this.world);
+				List<OxygenConversionRecipe> recipes = ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.world);
 				if (FluidUtils.convertFluid(this, recipes, 10)) {
 					this.drainEnergy();
 					this.setActive(true);

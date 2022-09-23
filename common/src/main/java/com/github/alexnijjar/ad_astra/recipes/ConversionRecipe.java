@@ -1,7 +1,6 @@
 package com.github.alexnijjar.ad_astra.recipes;
 
 import net.minecraft.fluid.Fluid;
-import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.util.HolderSet;
 import net.minecraft.util.Identifier;
@@ -26,6 +25,7 @@ public abstract class ConversionRecipe extends ModRecipe {
 		this.conversionRatio = conversionRatio;
 	}
 
+	@SuppressWarnings("deprecation")
 	public boolean matches(Fluid input) {
 		return this.input.contains(input.getBuiltInRegistryHolder());
 	}

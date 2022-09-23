@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.github.alexnijjar.ad_astra.registry.ModSoundEvents;
 
+import earth.terrarium.botarium.api.energy.EnergyHooks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -19,7 +20,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.World;
-import team.reborn.energy.api.EnergyStorage;
 
 public class CableBlock extends AbstractPipeBlock {
 
@@ -59,7 +59,7 @@ public class CableBlock extends AbstractPipeBlock {
     public void updateShape(World world, BlockPos pos, BlockState state, Direction direction) {
         if (!world.isClient) {
             BlockPos offset = pos.offset(direction);
-            boolean connect = world.getBlockState(offset).getBlock() instanceof CableBlock || EnergyStorage.SIDED.find(world, offset, direction) != null;
+            boolean connect = world.getBlockState(offset).getBlock() instanceof CableBlock || EnergyHooks.safeGetBlockEnergyManager(world.getBlockEntity(pos.offset(direction)), direction).orElse(null) != null;
 
             if (connect) {
                 world.setBlockState(pos, world.getBlockState(pos).with(DIRECTIONS.get(direction), true), Block.NOTIFY_ALL);
