@@ -4,7 +4,6 @@ accessible field net/minecraft/inventory/SimpleInventory stacks Lnet/minecraft/u
 extendable method net/minecraft/entity/mob/HoglinEntity zombify (Lnet/minecraft/server/world/ServerWorld;)V
 extendable method net/minecraft/entity/mob/ZoglinEntity shouldAttack (Lnet/minecraft/entity/LivingEntity;)Z
 extendable method net/minecraft/entity/mob/CreeperEntity explode ()V
-accessible field net/minecraft/item/BucketItem fluid Lnet/minecraft/fluid/Fluid;
 accessible field net/minecraft/client/sound/SoundManager soundSystem Lnet/minecraft/client/sound/SoundSystem;
 accessible field net/minecraft/block/StairsBlock baseBlock Lnet/minecraft/block/Block;
 accessible method net/minecraft/entity/SpawnRestriction register (Lnet/minecraft/entity/EntityType;Lnet/minecraft/entity/SpawnRestriction$Location;Lnet/minecraft/world/Heightmap$Type;Lnet/minecraft/entity/SpawnRestriction$SpawnPredicate;)V

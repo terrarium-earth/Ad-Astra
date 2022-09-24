@@ -7,6 +7,7 @@ import org.jetbrains.annotations.Nullable;
 
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.blocks.machines.AbstractMachineBlock;
+import com.github.alexnijjar.ad_astra.recipes.OxygenConversionRecipe;
 import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
 import com.github.alexnijjar.ad_astra.registry.ModParticleTypes;
 import com.github.alexnijjar.ad_astra.registry.ModRecipes;
@@ -141,6 +142,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 				transaction.commit();
 			}
 		}
+		this.tanks.extractFromSlot()
 
 		if (this.drainEnergy(amountOfEnergyToConsume)) {
 			ModUtils.spawnForcedParticles((ServerWorld) this.world, ModParticleTypes.OXYGEN_BUBBLE.get(), this.getPos().getX() + 0.5, this.getPos().getY() + 0.5, this.getPos().getZ() + 0.5, 1, 0.0, 0.0, 0.0, 0.03);
@@ -172,6 +174,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 		// Convert the input fluid into oxygen
 		if (!this.world.isClient) {
 			if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxCount()) {
+
 				ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.world);
 				FluidUtils.insertFluidIntoTank(this, getOutputTank(), 0, 1, f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.world).stream().anyMatch(r -> r.matches(f.getFluid())));
 			}

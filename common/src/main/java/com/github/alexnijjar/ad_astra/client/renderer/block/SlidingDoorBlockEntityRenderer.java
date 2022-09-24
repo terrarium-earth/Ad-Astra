@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.github.alexnijjar.ad_astra.blocks.door.SlidingDoorBlock;
 import com.github.alexnijjar.ad_astra.blocks.door.SlidingDoorBlockEntity;
+import com.github.alexnijjar.ad_astra.client.ClientUtils;
 import com.github.alexnijjar.ad_astra.registry.ModBlocks;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -138,14 +139,14 @@ public class SlidingDoorBlockEntityRenderer implements BlockEntityRenderer<Slidi
 
         MinecraftClient client = MinecraftClient.getInstance();
         BakedModelManager manager = client.getBakedModelManager();
-        BakedModel model = BakedModelManagerHelper.getModel(manager, texture);
+        BakedModel model = ClientUtils.getModel(manager, texture);
 
         VertexConsumer vertexConsumer1 = vertexConsumers.getBuffer(RenderLayer.getEntityCutout(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE));
         List<BakedQuad> quads1 = model.getQuads(null, null, client.world.random);
         MatrixStack.Entry entry1 = matrices.peek();
 
         for (BakedQuad quad : quads1) {
-            vertexConsumer1.quad(entry1, quad, 1, 1, 1, light, overlay);
+            vertexConsumer1.bakedQuad(entry1, quad, 1, 1, 1, light, overlay);
         }
     }
 }

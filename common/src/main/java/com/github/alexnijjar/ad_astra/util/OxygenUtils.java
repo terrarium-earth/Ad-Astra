@@ -9,7 +9,6 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.registry.ModBlocks;
-import com.github.alexnijjar.ad_astra.registry.ModFluids;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -193,7 +192,7 @@ public class OxygenUtils {
 				}
 
 				if (state.getFluidState().isIn(FluidTags.WATER)) {
-					if (!block.equals(ModFluids.CRYO_FUEL_BLOCK)) {
+					if (!block.equals(ModBlocks.CRYO_FUEL_BLOCK.get())) {
 						if (ModUtils.getWorldTemperature(world) < 0) {
 							world.setBlockState(pos, Blocks.ICE.getDefaultState());
 						} else {
