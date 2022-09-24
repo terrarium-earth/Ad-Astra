@@ -3,9 +3,9 @@ package com.github.alexnijjar.ad_astra.util;
 import java.util.HashMap;
 import java.util.UUID;
 
-import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.client.registry.ClientModKeybindings;
 
+import com.github.alexnijjar.ad_astra.networking.packets.client.KeybindPacket;
 import dev.architectury.event.events.common.PlayerEvent;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -27,103 +27,84 @@ public class ModKeyBindings {
 	private boolean clickingRight;
 
 	public static boolean jumpKeyDown(PlayerEntity player) {
-		return player.world.isClient ? getClientKeyPressed(player, "jump") : getServerKeyPressed(player, "jump");
+		return player.world.isClient ? getClientKeyPressed(player, KeybindPacket.Keybind.JUMP) : getServerKeyPressed(player, KeybindPacket.Keybind.JUMP);
 	}
 
 	public static boolean sprintKeyDown(PlayerEntity player) {
-		return player.world.isClient ? getClientKeyPressed(player, "sprint") : getServerKeyPressed(player, "sprint");
+		return player.world.isClient ? getClientKeyPressed(player, KeybindPacket.Keybind.SPRINT) : getServerKeyPressed(player, KeybindPacket.Keybind.SPRINT);
 	}
 
 	public static boolean forwardKeyDown(PlayerEntity player) {
-		return player.world.isClient ? getClientKeyPressed(player, "forward") : getServerKeyPressed(player, "forward");
+		return player.world.isClient ? getClientKeyPressed(player, KeybindPacket.Keybind.FORWARD) : getServerKeyPressed(player, KeybindPacket.Keybind.FORWARD);
 	}
 
 	public static boolean backKeyDown(PlayerEntity player) {
-		return player.world.isClient ? getClientKeyPressed(player, "back") : getServerKeyPressed(player, "back");
+		return player.world.isClient ? getClientKeyPressed(player, KeybindPacket.Keybind.BACK) : getServerKeyPressed(player, KeybindPacket.Keybind.BACK);
 	}
 
 	public static boolean leftKeyDown(PlayerEntity player) {
-		return player.world.isClient ? getClientKeyPressed(player, "left") : getServerKeyPressed(player, "left");
+		return player.world.isClient ? getClientKeyPressed(player, KeybindPacket.Keybind.LEFT) : getServerKeyPressed(player, KeybindPacket.Keybind.LEFT);
 	}
 
 	public static boolean rightKeyDown(PlayerEntity player) {
-		return player.world.isClient ? getClientKeyPressed(player, "right") : getServerKeyPressed(player, "right");
+		return player.world.isClient ? getClientKeyPressed(player, KeybindPacket.Keybind.RIGHT) : getServerKeyPressed(player, KeybindPacket.Keybind.RIGHT);
 	}
 
-	private static boolean getServerKeyPressed(PlayerEntity player, String key) {
+	private static boolean getServerKeyPressed(PlayerEntity player, KeybindPacket.Keybind key) {
 		PLAYER_KEYS.putIfAbsent(player.getUuid(), new ModKeyBindings());
-		switch (key) {
-		case "jump" -> {
-			return PLAYER_KEYS.get(player.getUuid()).clickingJump;
-		}
-		case "sprint" -> {
-			return PLAYER_KEYS.get(player.getUuid()).clickingSprint;
-		}
-		case "forward" -> {
-			return PLAYER_KEYS.get(player.getUuid()).clickingForward;
-		}
-		case "back" -> {
-			return PLAYER_KEYS.get(player.getUuid()).clickingBack;
-		}
-		case "left" -> {
-			return PLAYER_KEYS.get(player.getUuid()).clickingLeft;
-		}
-		case "right" -> {
-			return PLAYER_KEYS.get(player.getUuid()).clickingRight;
-		}
-		}
-		AdAstra.LOGGER.warn("Invalid Keypress on server: " + key);
-		return false;
+		return switch (key) {
+			case JUMP -> PLAYER_KEYS.get(player.getUuid()).clickingJump;
+
+			case SPRINT -> PLAYER_KEYS.get(player.getUuid()).clickingSprint;
+
+			case FORWARD -> PLAYER_KEYS.get(player.getUuid()).clickingForward;
+
+			case BACK -> PLAYER_KEYS.get(player.getUuid()).clickingBack;
+
+			case LEFT -> PLAYER_KEYS.get(player.getUuid()).clickingLeft;
+
+			case RIGHT -> PLAYER_KEYS.get(player.getUuid()).clickingRight;
+		};
 	}
 
 	@Environment(EnvType.CLIENT)
-	private static boolean getClientKeyPressed(PlayerEntity player, String key) {
+	private static boolean getClientKeyPressed(PlayerEntity player, KeybindPacket.Keybind key) {
 
 		MinecraftClient client = MinecraftClient.getInstance();
 		if (!player.getUuid().equals(client.player.getUuid())) {
 			return false;
 		}
 
-		switch (key) {
-		case "jump" -> {
-			return ClientModKeybindings.clickingJump;
-		}
-		case "sprint" -> {
-			return ClientModKeybindings.clickingSprint;
-		}
-		case "forward" -> {
-			return ClientModKeybindings.clickingForward;
-		}
-		case "back" -> {
-			return ClientModKeybindings.clickingBack;
-		}
-		case "left" -> {
-			return ClientModKeybindings.clickingLeft;
-		}
-		case "right" -> {
-			return ClientModKeybindings.clickingRight;
-		}
-		}
+		return switch (key) {
+			case JUMP -> ClientModKeybindings.clickingJump;
 
-		AdAstra.LOGGER.warn("Invalid Keypress on client: " + key);
-		return false;
+			case SPRINT -> ClientModKeybindings.clickingSprint;
+
+			case FORWARD -> ClientModKeybindings.clickingForward;
+
+			case BACK -> ClientModKeybindings.clickingBack;
+
+			case LEFT -> ClientModKeybindings.clickingLeft;
+
+			case RIGHT -> ClientModKeybindings.clickingRight;
+		};
 	}
 
-	public static void pressedKeyOnServer(UUID uuid, String key, boolean keyDown) {
+	public static void pressedKeyOnServer(UUID uuid, KeybindPacket.Keybind key, boolean keyDown) {
 		PLAYER_KEYS.putIfAbsent(uuid, new ModKeyBindings());
+
 		switch (key) {
-		case "jump" -> PLAYER_KEYS.get(uuid).clickingJump = keyDown;
+			case JUMP -> PLAYER_KEYS.get(uuid).clickingJump = keyDown;
 
-		case "sprint" -> PLAYER_KEYS.get(uuid).clickingSprint = keyDown;
+			case SPRINT -> PLAYER_KEYS.get(uuid).clickingSprint = keyDown;
 
-		case "forward" -> PLAYER_KEYS.get(uuid).clickingForward = keyDown;
+			case FORWARD -> PLAYER_KEYS.get(uuid).clickingForward = keyDown;
 
-		case "back" -> PLAYER_KEYS.get(uuid).clickingBack = keyDown;
+			case BACK -> PLAYER_KEYS.get(uuid).clickingBack = keyDown;
 
-		case "left" -> PLAYER_KEYS.get(uuid).clickingLeft = keyDown;
+			case LEFT -> PLAYER_KEYS.get(uuid).clickingLeft = keyDown;
 
-		case "right" -> PLAYER_KEYS.get(uuid).clickingRight = keyDown;
-		default -> AdAstra.LOGGER.warn("Invalid Keypress on server packet: " + key);
+			case RIGHT -> PLAYER_KEYS.get(uuid).clickingRight = keyDown;
 		}
 	}
 

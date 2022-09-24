@@ -46,7 +46,7 @@ public class AdAstra {
 		CONFIG = AutoConfig.getConfigHolder(AdAstraConfig.class).getConfig();
 
 		// Registry
-		ModFluids.register();
+		ModFluids.FLUIDS.register();
 		ModItems.register();
 		ModBlockEntities.register();
 		ModRecipes.register();

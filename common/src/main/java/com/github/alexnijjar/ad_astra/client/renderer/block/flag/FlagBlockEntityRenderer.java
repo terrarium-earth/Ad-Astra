@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.github.alexnijjar.ad_astra.blocks.flags.FlagBlock;
 import com.github.alexnijjar.ad_astra.blocks.flags.FlagBlockEntity;
+import com.github.alexnijjar.ad_astra.client.ClientUtils;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
@@ -31,7 +32,7 @@ import net.minecraft.client.util.DefaultSkinHelper;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.dynamic.DynamicSerializableUuid;
+import net.minecraft.util.UuidUtil;
 import net.minecraft.util.math.Vec3f;
 import net.minecraft.util.registry.Registry;
 
@@ -47,25 +48,30 @@ public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEnt
 			Identifier model = new ModIdentifier("block/flag/" + Registry.BLOCK.getId(entity.getCachedState().getBlock()).getPath());
 			matrices.push();
 
-			switch (entity.getCachedState().get(FlagBlock.FACING)) {
-			case NORTH -> {
-				matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(0));
-				matrices.translate(0.0f, 0.5f, 0.0f);
-			}
-			case EAST -> {
-				matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(270));
-				matrices.translate(0.0f, 0.5f, -1.0f);
-			}
-			case SOUTH -> {
-				matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(180));
-				matrices.translate(-1.0f, 0.5f, -1.0f);
-			}
-			case WEST -> {
-				matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(90));
-				matrices.translate(-1.0f, 0.5f, 0.0f);
-			}
-			default -> throw new IllegalArgumentException("Unexpected value: " + entity.getCachedState().get(FlagBlock.FACING));
-			}
+//			switch (entity.getCachedState().get(FlagBlock.FACING)) {
+//			case NORTH -> {
+//				matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(0));
+//				matrices.translate(0.0f, 0.5f, 0.0f);
+//			}
+//			case EAST -> {
+//				matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(270));
+//				matrices.translate(0.0f, 0.5f, -1.0f);
+//			}
+//			case SOUTH -> {
+//				matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(180));
+//				matrices.translate(-1.0f, 0.5f, -1.0f);
+//			}
+//			case WEST -> {
+//				matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(90));
+//				matrices.translate(-1.0f, 0.5f, 0.0f);
+//			}
+//			default -> throw new IllegalArgumentException("Unexpected value: " + entity.getCachedState().get(FlagBlock.FACING));
+//			}
+
+			matrices.translate(0.5D, 1D, 0.5D);
+			// TODO: Chech if this works
+			matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(-entity.getCachedState().get(FlagBlock.FACING).asRotation()));
+			matrices.translate(-0.5D, -1D, -0.5D);
 
 			renderFlag(model, tickDelta, matrices, vertexConsumers, light, overlay);
 
@@ -83,6 +89,7 @@ public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEnt
 			// Front image of player head
 			matrices.push();
 			switch (entity.getCachedState().get(FlagBlock.FACING)) {
+				// TODO: Check if this works
 			case NORTH -> {
 				matrices.translate(-0.78f, 0.3f, 0.0f);
 				headModel.setTransform(ModelTransform.of(13, pivotY, 8, 0, 0, flip));
@@ -149,21 +156,21 @@ public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEnt
 		if (map.containsKey(MinecraftProfileTexture.Type.SKIN)) {
 			return RenderLayer.getEntityTranslucent(minecraftClient.getSkinProvider().loadSkin(map.get(MinecraftProfileTexture.Type.SKIN), MinecraftProfileTexture.Type.SKIN));
 		}
-		return RenderLayer.getEntityCutoutNoCull(DefaultSkinHelper.getTexture(DynamicSerializableUuid.getUuidFromProfile(profile)));
+		return RenderLayer.getEntityCutoutNoCull(DefaultSkinHelper.getTexture(UuidUtil.getProfileUuid(profile)));
 	}
 
 	public static void renderFlag(Identifier texture, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
 
 		MinecraftClient client = MinecraftClient.getInstance();
 		BakedModelManager manager = client.getBakedModelManager();
-		BakedModel model = BakedModelManagerHelper.getModel(manager, texture);
+		BakedModel model = ClientUtils.getModel(manager, texture);
 
 		VertexConsumer vertexConsumer1 = vertexConsumers.getBuffer(RenderLayer.getEntityCutout(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE));
 		List<BakedQuad> quads1 = model.getQuads(null, null, client.world.random);
 		MatrixStack.Entry entry1 = matrices.peek();
 
 		for (BakedQuad quad : quads1) {
-			vertexConsumer1.quad(entry1, quad, 1, 1, 1, light, overlay);
+			vertexConsumer1.bakedQuad(entry1, quad, 1, 1, 1, light, overlay);
 		}
 	}
 }

@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import com.github.alexnijjar.ad_astra.screen.handler.VehicleScreenHandler;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 
+import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.util.math.MatrixStack;
@@ -32,14 +33,14 @@ public class VehicleScreen extends AbstractVehicleScreen<VehicleScreenHandler> {
 
 		super.drawBackground(matrices, delta, mouseX, mouseY);
 
-		GuiUtil.drawFluidTank(matrices, this.x + INPUT_TANK_LEFT, this.y + INPUT_TANK_TOP, this.vehicle.getFluidAmount(), this.vehicle.inputTank.getCapacity(), this.vehicle.getFluidHolder());
+		GuiUtil.drawFluidTank(matrices, this.x + INPUT_TANK_LEFT, this.y + INPUT_TANK_TOP, this.vehicle.getFluidAmount(), FluidHooks.buckets((int) this.vehicle.getTankSize()), this.vehicle.getFluidHolder());
 	}
 
 	public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
 		super.render(matrices, mouseX, mouseY, delta);
 
 		if (GuiUtil.isHovering(this.getInputTankBounds(), mouseX, mouseY)) {
-			GuiUtil.drawTankTooltip(this, matrices, this.vehicle.getFluidAmount(), this.vehicle.inputTank.getCapacity(), this.vehicle.getFluidHolder(), mouseX, mouseY);
+			GuiUtil.drawTankTooltip(this, matrices, this.vehicle.getFluidAmount(), FluidHooks.buckets((int) this.vehicle.getTankSize()), this.vehicle.getFluidHolder().getFluid(), mouseX, mouseY);
 		}
 	}
 

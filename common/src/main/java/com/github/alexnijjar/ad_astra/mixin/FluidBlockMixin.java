@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import com.github.alexnijjar.ad_astra.registry.ModFluids;
+import com.github.alexnijjar.ad_astra.registry.ModBlocks;
 import com.github.alexnijjar.ad_astra.util.OxygenUtils;
 
 import net.minecraft.block.BlockState;
@@ -24,7 +24,7 @@ public class FluidBlockMixin {
 	public void adastra_onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify, CallbackInfo ci) {
 		if (!world.isClient) {
 			FluidBlock block = (FluidBlock) (Object) this;
-			if (block.getFluidState(state).isIn(FluidTags.WATER) && !block.equals(ModFluids.CRYO_FUEL_BLOCK)) {
+			if (block.getFluidState(state).isIn(FluidTags.WATER) && !block.equals(ModBlocks.CRYO_FUEL_BLOCK.get())) {
 				if (!OxygenUtils.posHasOxygen(world, pos)) {
 					world.setBlockState(pos, Blocks.AIR.getDefaultState());
 				}
@@ -39,7 +39,7 @@ public class FluidBlockMixin {
 		if (block.equals(Blocks.WATER)) {
 			for (Direction direction : new Direction[] { Direction.DOWN, Direction.SOUTH, Direction.NORTH, Direction.EAST, Direction.WEST }) {
 				BlockPos blockPos = pos.offset(direction.getOpposite());
-				if (world.getFluidState(blockPos).getBlockState().getBlock().equals(ModFluids.CRYO_FUEL_BLOCK)) {
+				if (world.getFluidState(blockPos).getBlockState().getBlock().equals(ModBlocks.CRYO_FUEL_BLOCK.get())) {
 					world.setBlockState(pos, Blocks.ICE.getDefaultState());
 					ci.setReturnValue(false);
 				}

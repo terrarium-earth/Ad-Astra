@@ -108,7 +108,7 @@ public class ModUtils {
 			for (Entity entityToTeleport : entitiesToTeleport) {
 
 				TeleportTarget target = new TeleportTarget(targetPos, entityToTeleport.getVelocity(), entityToTeleport.getYaw(), entityToTeleport.getPitch());
-				teleportedEntities.add(FabricDimensions.teleport(entityToTeleport, world, target));
+				teleportedEntities.add(PlatformUtils.teleportToDimension(entityToTeleport, world, target));
 			}
 
 			Entity first = teleportedEntities.poll();
@@ -141,7 +141,7 @@ public class ModUtils {
 		ChunkPos chunkPos = new ChunkPos(new BlockPos(targetPos.getX(), targetPos.getY(), targetPos.getZ()));
 		world.getChunkManager().addTicket(ChunkTicketType.POST_TELEPORT, chunkPos, 1, player.getId());
 		TeleportTarget target = new TeleportTarget(targetPos, player.getVelocity(), player.getYaw(), player.getPitch());
-		player = FabricDimensions.teleport(player, world, target);
+		PlatformUtils.teleportToDimension(player, world, target);
 	}
 
 	/**
