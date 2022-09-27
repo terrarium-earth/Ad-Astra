@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.registry.ModParticleTypes;
+import com.github.alexnijjar.ad_astra.util.ModUtils;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -63,6 +64,9 @@ public abstract class WorldRendererMixin {
 	// Venus rain.
 	@Inject(method = "tickRainSplashing", at = @At("HEAD"), cancellable = true)
 	public void adastra_tickRainSplashing(Camera camera, CallbackInfo info) {
+		if(!ModUtils.isPlanet(this.client.world)) {
+			info.cancel();
+		}
 		float f = this.client.world.getRainGradient(1.0F) / (MinecraftClient.isFancyGraphicsOrBetter() ? 1.0F : 2.0F);
 		if (!(f <= 0.0F)) {
 			RandomGenerator randomGenerator = RandomGenerator.createLegacy((long) this.ticks * 312987231L);
