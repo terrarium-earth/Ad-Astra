@@ -5,6 +5,7 @@ import com.github.alexnijjar.ad_astra.client.AdAstraClient;
 import com.github.alexnijjar.ad_astra.client.resourcepack.SkyRenderer;
 import com.github.alexnijjar.ad_astra.client.resourcepack.SkyRenderer.WeatherEffects;
 import com.github.alexnijjar.ad_astra.registry.ModParticleTypes;
+import com.github.alexnijjar.ad_astra.util.ModUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CampfireBlock;
@@ -31,7 +32,9 @@ import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEvents;
 import net.minecraft.world.biome.Biome;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -40,6 +43,10 @@ import java.util.Random;
 
 @Mixin(WorldRenderer.class)
 public abstract class WorldRendererMixin {
+
+	@Shadow
+	@Final
+	private MinecraftClient client;
 
 	// Cancel the portal sound when the player falls out of orbit.
 	@Inject(method = "processWorldEvent", at = @At("HEAD"), cancellable = true)
@@ -57,7 +64,12 @@ public abstract class WorldRendererMixin {
 	// Venus rain.
 	@Inject(method = "tickRainSplashing", at = @At("HEAD"), cancellable = true)
 	public void adastra_tickRainSplashing(Camera camera, CallbackInfo info) {
+		if(!ModUtils.isPlanet(this.client.world)) {
+			info.cancel();
+		}
 		WorldRendererAccessor worldRenderer = (WorldRendererAccessor) (Object) this;
+
+
 
 		MinecraftClient client = MinecraftClient.getInstance();
 		RegistryKey<World> world = client.world.getRegistryKey();

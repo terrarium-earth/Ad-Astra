@@ -2,7 +2,7 @@
   "type": "ad_astra:moon",
   "generator": {
     "type": "ad_astra:planet_noise",
-    "seed": 9,
+    "seed": 0,
     "settings": {
       "sea_level": 63,
       "disable_mob_generation": true,

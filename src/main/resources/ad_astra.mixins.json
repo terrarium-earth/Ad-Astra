@@ -34,7 +34,11 @@
     "gravity.ThrownEntityMixin",
     "ServerPlayNetworkHandlerMixin",
     "ServerWorldMixin",
-    "SignTypeInvoker"
+    "SignTypeInvoker",
+    "seedfix.NoiseBasedChunkGeneratorAccessor",
+    "seedfix.NoiseBasedChunkGeneratorMixin",
+    "seedfix.TheEndBiomeSourceAccessor",
+    "seedfix.TheEndBiomeSourceMixin"
   ],
   "client": [
     "client.BipedEntityModelMixin",

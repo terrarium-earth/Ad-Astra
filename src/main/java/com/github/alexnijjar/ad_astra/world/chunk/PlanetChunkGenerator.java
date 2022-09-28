@@ -2,9 +2,9 @@ package com.github.alexnijjar.ad_astra.world.chunk;
 
 import com.github.alexnijjar.ad_astra.mixin.ChunkGeneratorAccessor;
 import com.github.alexnijjar.ad_astra.mixin.NoiseChunkGeneratorAccessor;
-import com.github.alexnijjar.ad_astra.world.WorldSeed;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Holder;
 import net.minecraft.util.math.BlockPos;
@@ -15,7 +15,6 @@ import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.StructureAccessor;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.ChunkGeneratorSettings;
 import net.minecraft.world.gen.chunk.NoiseChunkGenerator;
 import net.minecraft.world.gen.structure.StructureSet;
@@ -29,14 +28,7 @@ public class PlanetChunkGenerator extends NoiseChunkGenerator {
 			.apply(instance, instance.stable(PlanetChunkGenerator::new)));
 
 	public PlanetChunkGenerator(Registry<StructureSet> noiseRegistry, Registry<DoublePerlinNoiseSampler.NoiseParameters> structuresRegistry, BiomeSource biomeSource, long seed, Holder<ChunkGeneratorSettings> settings) {
-		super(noiseRegistry, structuresRegistry, biomeSource, WorldSeed.getSeed() + seed, settings);
-	}
-
-	@Override
-	public ChunkGenerator withSeed(long seed) {
-		NoiseChunkGeneratorAccessor noiseAccessor = (NoiseChunkGeneratorAccessor) this;
-		ChunkGeneratorAccessor chunkAccessor = (ChunkGeneratorAccessor) this;
-		return new PlanetChunkGenerator(chunkAccessor.getStructureSet(), noiseAccessor.getNoiseRegistry(), this.biomeSource.withSeed(seed), seed, this.settings);
+		super(noiseRegistry, structuresRegistry, biomeSource, seed, settings);
 	}
 
 	@Override
