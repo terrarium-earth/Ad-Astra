@@ -31,9 +31,9 @@ import com.github.alexnijjar.ad_astra.client.renderer.entity.vehicles.rockets.ti
 import com.github.alexnijjar.ad_astra.client.renderer.entity.vehicles.rockets.tier_4.RocketEntityRendererTier4;
 import com.github.alexnijjar.ad_astra.client.renderer.entity.vehicles.rover.RoverEntityModel;
 import com.github.alexnijjar.ad_astra.client.renderer.entity.vehicles.rover.RoverEntityRenderer;
-import com.github.alexnijjar.ad_astra.client.renderer.spacesuit.JetSuitModel;
-import com.github.alexnijjar.ad_astra.client.renderer.spacesuit.NetheriteSpaceSuitModel;
-import com.github.alexnijjar.ad_astra.client.renderer.spacesuit.SpaceSuitModel;
+import com.github.alexnijjar.ad_astra.client.renderer.armour.JetSuitModel;
+import com.github.alexnijjar.ad_astra.client.renderer.armour.NetheriteSpaceSuitModel;
+import com.github.alexnijjar.ad_astra.client.renderer.armour.SpaceSuitModel;
 import com.github.alexnijjar.ad_astra.registry.ModEntityTypes;
 
 import dev.architectury.registry.client.level.entity.EntityModelLayerRegistry;

@@ -16,7 +16,7 @@ import java.util.List;
 @Environment(EnvType.CLIENT)
 public class SkyRendererParser {
 
-	public static SkyRenderer parse(JsonObject jsonObject) {
+	public static PlanetSkyRenderer parse(JsonObject jsonObject) {
 
 		RegistryKey<World> dimension = RegistryKey.of(Registry.WORLD_KEY, new Identifier(jsonObject.get("world").getAsString()));
 
@@ -25,26 +25,26 @@ public class SkyRendererParser {
 		int fastStars = starsObject.get("fast_count").getAsInt();
 		boolean colouredStars = starsObject.get("colored_stars").getAsBoolean();
 		boolean daylightVisible = starsObject.get("daylight_visible").getAsBoolean();
-		SkyRenderer.StarsRenderer starsRenderer = new SkyRenderer.StarsRenderer(fancyStars, fastStars, colouredStars, daylightVisible);
+		PlanetSkyRenderer.StarsRenderer starsRenderer = new PlanetSkyRenderer.StarsRenderer(fancyStars, fastStars, colouredStars, daylightVisible);
 
-		SkyRenderer.SunsetColour sunsetColour = SkyRenderer.SunsetColour.valueOf(jsonObject.get("sunset_color").getAsString().toUpperCase());
+		PlanetSkyRenderer.SunsetColour sunsetColour = PlanetSkyRenderer.SunsetColour.valueOf(jsonObject.get("sunset_color").getAsString().toUpperCase());
 
 		JsonObject dimensionEffectsObject = jsonObject.get("dimension_effects").getAsJsonObject();
-		SkyRenderer.DimensionEffectType dimensionEffectType = SkyRenderer.DimensionEffectType.valueOf(dimensionEffectsObject.get("type").getAsString().toUpperCase());
+		PlanetSkyRenderer.DimensionEffectType dimensionEffectType = PlanetSkyRenderer.DimensionEffectType.valueOf(dimensionEffectsObject.get("type").getAsString().toUpperCase());
 		int starR = dimensionEffectsObject.has("r") ? dimensionEffectsObject.get("r").getAsInt() : 255;
 		int starG = dimensionEffectsObject.has("g") ? dimensionEffectsObject.get("g").getAsInt() : 255;
 		int starB = dimensionEffectsObject.has("b") ? dimensionEffectsObject.get("b").getAsInt() : 255;
-		SkyRenderer.DimensionEffects effects = new SkyRenderer.DimensionEffects(dimensionEffectType, new ColourHolder(starR / 255.0f, starG / 255.0f, starB / 255.0f, 1.0f));
+		PlanetSkyRenderer.DimensionEffects effects = new PlanetSkyRenderer.DimensionEffects(dimensionEffectType, new ColourHolder(starR / 255.0f, starG / 255.0f, starB / 255.0f, 1.0f));
 
-		SkyRenderer.CloudEffects cloudEffects = SkyRenderer.CloudEffects.valueOf(jsonObject.get("cloud_effects").getAsString().toUpperCase());
-		SkyRenderer.WeatherEffects weatherEffects = SkyRenderer.WeatherEffects.valueOf(jsonObject.get("weather_effects").getAsString().toUpperCase());
+		PlanetSkyRenderer.CloudEffects cloudEffects = PlanetSkyRenderer.CloudEffects.valueOf(jsonObject.get("cloud_effects").getAsString().toUpperCase());
+		PlanetSkyRenderer.WeatherEffects weatherEffects = PlanetSkyRenderer.WeatherEffects.valueOf(jsonObject.get("weather_effects").getAsString().toUpperCase());
 
 		int horizonAngle = jsonObject.get("horizon_angle").getAsInt();
-		List<SkyRenderer.SkyObject> skyObjects = new LinkedList<>();
+		List<PlanetSkyRenderer.SkyObject> skyObjects = new LinkedList<>();
 		jsonObject.get("sky_objects").getAsJsonArray().forEach(skyElement -> {
 			JsonObject skyObject = skyElement.getAsJsonObject();
 			Identifier texture = new Identifier(skyObject.get("texture").getAsString());
-			SkyRenderer.RenderType renderType = SkyRenderer.RenderType.valueOf(skyObject.get("render_type").getAsString().toUpperCase());
+			PlanetSkyRenderer.RenderType renderType = PlanetSkyRenderer.RenderType.valueOf(skyObject.get("render_type").getAsString().toUpperCase());
 			boolean blending = skyObject.get("blending").getAsBoolean();
 			float scale = skyObject.get("scale").getAsFloat();
 
@@ -65,9 +65,9 @@ public class SkyRendererParser {
 			float z = rotationObject.get("z").getAsFloat();
 			Vec3f rotation = new Vec3f(x, y, z);
 
-			skyObjects.add(new SkyRenderer.SkyObject(texture, blending, renderType, scale, colour, rotation));
+			skyObjects.add(new PlanetSkyRenderer.SkyObject(texture, blending, renderType, scale, colour, rotation));
 		});
 
-		return new SkyRenderer(dimension, starsRenderer, sunsetColour, effects, cloudEffects, weatherEffects, horizonAngle, skyObjects);
+		return new PlanetSkyRenderer(dimension, starsRenderer, sunsetColour, effects, cloudEffects, weatherEffects, horizonAngle, skyObjects);
 	}
 }

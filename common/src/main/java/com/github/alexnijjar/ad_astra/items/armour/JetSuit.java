@@ -2,6 +2,7 @@ package com.github.alexnijjar.ad_astra.items.armour;
 
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.registry.ModItems;
+import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.github.alexnijjar.ad_astra.util.ModKeyBindings;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
 import earth.terrarium.botarium.api.energy.*;
@@ -19,6 +20,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -174,5 +176,16 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
 				return 256;
 			}
 		};
+	}
+
+	@Override
+	public @Nullable String getArmorTexture(ItemStack stack, LivingEntity entity, EquipmentSlot slot, String type) {
+		if (slot.equals(EquipmentSlot.CHEST)) {
+			if (stack.getItem() instanceof JetSuit suit) {
+				var energyStorage = suit.getEnergyStorage(stack);
+				return new ModIdentifier("textures/entity/armour/jet_suit/jet_suit_" + (energyStorage.getStoredEnergy() == 0 ? 0 : ((int) Math.min((energyStorage.getStoredEnergy() * 5 / energyStorage.getMaxCapacity()) + 1, 5))) + ".png").toString();
+			}
+		}
+		return AdAstra.MOD_ID + ":textures/entity/armour/jet_suit/jet_suit_5.png";
 	}
 }

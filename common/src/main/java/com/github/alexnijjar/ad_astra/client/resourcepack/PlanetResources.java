@@ -34,7 +34,7 @@ public class PlanetResources {
 			@Override
 			public void reload(ResourceManager manager) {
 
-				List<SkyRenderer> skyRenderers = new ArrayList<>();
+				List<PlanetSkyRenderer> skyRenderers = new ArrayList<>();
 				List<SolarSystem> solarSystems = new ArrayList<>();
 				List<PlanetRing> planetRings = new ArrayList<>();
 				List<Galaxy> galaxies = new ArrayList<>();

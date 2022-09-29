@@ -1,4 +1,4 @@
-package com.github.alexnijjar.ad_astra.client.renderer.spacesuit;
+package com.github.alexnijjar.ad_astra.client.renderer.armour;
 
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 

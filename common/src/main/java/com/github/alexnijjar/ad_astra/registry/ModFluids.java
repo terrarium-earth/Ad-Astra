@@ -1,20 +1,11 @@
 package com.github.alexnijjar.ad_astra.registry;
 
-import java.util.function.Supplier;
-
 import com.github.alexnijjar.ad_astra.AdAstra;
-import com.github.alexnijjar.ad_astra.blocks.fluid.*;
-import com.github.alexnijjar.ad_astra.util.ModIdentifier;
+import com.github.alexnijjar.ad_astra.blocks.fluid.ModFluidAttributes;
 
 import dev.architectury.core.fluid.ArchitecturyFlowingFluid;
-import dev.architectury.core.fluid.ArchitecturyFluidAttributes;
-import dev.architectury.core.fluid.SimpleArchitecturyFluidAttributes;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.FluidBlock;
 import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.util.registry.Registry;

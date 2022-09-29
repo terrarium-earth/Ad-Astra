@@ -2,8 +2,8 @@ package com.github.alexnijjar.ad_astra.client.renderer.sky;
 
 import java.util.Random;
 
-import com.github.alexnijjar.ad_astra.client.resourcepack.SkyRenderer;
-import com.github.alexnijjar.ad_astra.client.resourcepack.SkyRenderer.StarsRenderer;
+import com.github.alexnijjar.ad_astra.client.resourcepack.PlanetSkyRenderer;
+import com.github.alexnijjar.ad_astra.client.resourcepack.PlanetSkyRenderer.StarsRenderer;
 import com.github.alexnijjar.ad_astra.mixin.client.WorldRendererAccessor;
 import com.github.alexnijjar.ad_astra.util.ColourHolder;
 import com.github.alexnijjar.ad_astra.world.WorldSeed;
@@ -42,7 +42,7 @@ public class SkyUtil {
 		return Math.max(scale, 0.5f);
 	}
 
-	public static void preRender(WorldRenderContext context, BufferBuilder bufferBuilder, SkyRenderer.SunsetColour colourType, int sunsetAngle, MatrixStack matrices, ClientWorld world, float tickDelta) {
+	public static void preRender(WorldRenderContext context, BufferBuilder bufferBuilder, PlanetSkyRenderer.SunsetColour colourType, int sunsetAngle, MatrixStack matrices, ClientWorld world, float tickDelta) {
 
 		// Render colours.
 		RenderSystem.disableTexture();
@@ -234,7 +234,7 @@ public class SkyUtil {
 		return buffer.end();
 	}
 
-	public static void renderColouring(SkyRenderer.SunsetColour type, BufferBuilder bufferBuilder, MatrixStack matrices, ClientWorld world, float tickDelta, float skyAngle, int sunsetAngle) {
+	public static void renderColouring(PlanetSkyRenderer.SunsetColour type, BufferBuilder bufferBuilder, MatrixStack matrices, ClientWorld world, float tickDelta, float skyAngle, int sunsetAngle) {
 
 		float[] fogColours = switch (type) {
 		case VANILLA -> world.getSkyProperties().getFogColorOverride(world.getSkyAngle(tickDelta), tickDelta);

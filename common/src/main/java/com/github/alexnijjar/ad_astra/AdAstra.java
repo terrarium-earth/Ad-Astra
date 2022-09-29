@@ -51,7 +51,7 @@ public class AdAstra {
 		ModBlockEntities.register();
 		ModRecipes.register();
 		ModEntityTypes.register();
-		ModScreenHandlers.register();
+		ModScreenHandlers.SCREEN_HANDLERS.register();
 		ModCommands.register();
 		ModSoundEvents.register();
 		ModParticleTypes.register();

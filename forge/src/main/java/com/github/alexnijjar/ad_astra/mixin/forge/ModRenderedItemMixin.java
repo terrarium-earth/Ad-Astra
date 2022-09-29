@@ -1,14 +1,16 @@
 package com.github.alexnijjar.ad_astra.mixin.forge;
 
+import java.util.function.Consumer;
+
+import org.spongepowered.asm.mixin.Mixin;
+
 import com.github.alexnijjar.ad_astra.client.forge.AdAstraClientForge;
 import com.github.alexnijjar.ad_astra.items.ModRenderedBlockItem;
 import com.github.alexnijjar.ad_astra.items.ModRenderedItem;
+
 import net.minecraft.client.render.item.BuiltinModelItemRenderer;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import org.spongepowered.asm.mixin.Mixin;
-
-import java.util.function.Consumer;
 
 @Mixin({ModRenderedItem.class, ModRenderedBlockItem.class})
 public abstract class ModRenderedItemMixin extends Item {

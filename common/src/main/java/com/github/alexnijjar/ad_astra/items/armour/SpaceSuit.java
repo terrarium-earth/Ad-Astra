@@ -23,8 +23,9 @@ import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
-public class SpaceSuit extends DyeableArmorItem implements FluidContainingItem {
+public class SpaceSuit extends DyeableArmorItem implements FluidContainingItem, ModArmourItem {
 
 	public SpaceSuit(ArmorMaterial material, EquipmentSlot slot, Item.Settings settings) {
 		super(material, slot, settings);
@@ -32,7 +33,7 @@ public class SpaceSuit extends DyeableArmorItem implements FluidContainingItem {
 
 	@Override
 	public List<Fluid> getInputFluids() {
-		return List.of(ModFluids.OXYGEN_STILL);
+		return List.of(ModFluids.OXYGEN_STILL.get());
 	}
 
 	@Override
@@ -82,5 +83,10 @@ public class SpaceSuit extends DyeableArmorItem implements FluidContainingItem {
 	public int getColor(ItemStack stack) {
 		int colour = super.getColor(stack);
 		return colour == 10511680 ? 0xFFFFFF : colour;
+	}
+
+	@Override
+	public @Nullable String getArmorTexture(ItemStack stack, LivingEntity entity, EquipmentSlot slot, String type) {
+		return AdAstra.MOD_ID + ":textures/entity/armour/space_suit.png";
 	}
 }

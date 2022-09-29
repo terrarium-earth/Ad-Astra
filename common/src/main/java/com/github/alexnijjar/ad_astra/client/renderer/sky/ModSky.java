@@ -2,9 +2,10 @@ package com.github.alexnijjar.ad_astra.client.renderer.sky;
 
 import java.util.List;
 
-import com.github.alexnijjar.ad_astra.client.resourcepack.SkyRenderer.SkyObject;
-import com.github.alexnijjar.ad_astra.client.resourcepack.SkyRenderer.StarsRenderer;
-import com.github.alexnijjar.ad_astra.client.resourcepack.SkyRenderer.SunsetColour;
+import com.github.alexnijjar.ad_astra.client.registry.ClientModSkies;
+import com.github.alexnijjar.ad_astra.client.resourcepack.PlanetSkyRenderer.SkyObject;
+import com.github.alexnijjar.ad_astra.client.resourcepack.PlanetSkyRenderer.StarsRenderer;
+import com.github.alexnijjar.ad_astra.client.resourcepack.PlanetSkyRenderer.SunsetColour;
 import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.Tessellator;
 import com.mojang.blaze3d.vertex.VertexBuffer;
@@ -17,7 +18,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3f;
 
 @Environment(EnvType.CLIENT)
-public class ModSky implements DimensionRenderingRegistry.SkyRenderer {
+public class ModSky implements ClientModSkies.SkyRenderer {
 
 	protected VertexBuffer starsBuffer;
 	protected float skyAngle;

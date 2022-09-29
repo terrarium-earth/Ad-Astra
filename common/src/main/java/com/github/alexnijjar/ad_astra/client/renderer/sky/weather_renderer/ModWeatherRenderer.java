@@ -2,6 +2,8 @@ package com.github.alexnijjar.ad_astra.client.renderer.sky.weather_renderer;
 
 import java.util.Random;
 
+import com.github.alexnijjar.ad_astra.client.registry.ClientModSkies;
+import com.github.alexnijjar.ad_astra.client.renderer.sky.WorldRenderContext;
 import com.github.alexnijjar.ad_astra.mixin.client.WorldRendererAccessor;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -24,7 +26,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
 @Environment(EnvType.CLIENT)
-public class ModWeatherRenderer implements DimensionRenderingRegistry.WeatherRenderer {
+public class ModWeatherRenderer implements ClientModSkies.WeatherRenderer {
 
 	private static final Identifier VENUS_RAIN_TEXTURE = new ModIdentifier("textures/sky/venus/rain.png");
 

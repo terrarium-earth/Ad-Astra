@@ -30,7 +30,7 @@ public class RoverItem extends VehicleItem {
 
 	@Override
 	public List<Fluid> getInputFluids() {
-		return List.of(ModFluids.FUEL_STILL, ModFluids.CRYO_FUEL_STILL);
+		return List.of(ModFluids.FUEL_STILL.get(), ModFluids.CRYO_FUEL_STILL.get());
 	}
 
 	@Override

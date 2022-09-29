@@ -47,7 +47,6 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
-@SuppressWarnings("unused")
 public class ModItems {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(AdAstra.MOD_ID, Registry.ITEM_KEY);
 	public static final Set<Item> items = new HashSet<>();

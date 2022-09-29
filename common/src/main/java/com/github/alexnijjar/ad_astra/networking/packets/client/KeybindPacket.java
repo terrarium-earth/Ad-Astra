@@ -5,10 +5,9 @@ import com.github.alexnijjar.ad_astra.util.ModKeyBindings;
 import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
+
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.Identifier;
-
-import java.util.Locale;
 
 public record KeybindPacket(Keybind keybind, boolean pressed) implements Packet<KeybindPacket> {
 
@@ -40,17 +39,12 @@ public record KeybindPacket(Keybind keybind, boolean pressed) implements Packet<
         @Override
         public PacketContext handle(KeybindPacket message) {
             return (player, world) -> {
-                ModKeyBindings.pressedKeyOnServer(player.getUuid(), message.keybind.name().toLowerCase(Locale.ROOT), message.pressed());
+                ModKeyBindings.pressedKeyOnServer(player.getUuid(), message.keybind, message.pressed());
             };
         }
     }
 
     public enum Keybind {
-        JUMP,
-        SPRINT,
-        FORWARD,
-        BACK,
-        LEFT,
-        RIGHT
+        JUMP, SPRINT, FORWARD, BACK, LEFT, RIGHT
     }
 }

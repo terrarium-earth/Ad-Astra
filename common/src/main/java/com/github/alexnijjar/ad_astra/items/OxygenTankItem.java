@@ -32,7 +32,7 @@ public class OxygenTankItem extends Item implements FluidContainingItem {
 
 	@Override
 	public List<Fluid> getInputFluids() {
-		return List.of(ModFluids.OXYGEN_STILL);
+		return List.of(ModFluids.OXYGEN_STILL.get());
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class OxygenTankItem extends Item implements FluidContainingItem {
 	public static ItemStack createOxygenatedTank() {
 		ItemStack oxygenTank = ModItems.OXYGEN_TANK.get().getDefaultStack();
 		((OxygenTankItem) oxygenTank.getItem()).setAmount(oxygenTank, AdAstra.CONFIG.general.oxygenTankSize);
-		((OxygenTankItem) oxygenTank.getItem()).setFluid(oxygenTank, ModFluids.OXYGEN_STILL);
+		((OxygenTankItem) oxygenTank.getItem()).setFluid(oxygenTank, ModFluids.OXYGEN_STILL.get());
 		
 		return oxygenTank;
 	}
