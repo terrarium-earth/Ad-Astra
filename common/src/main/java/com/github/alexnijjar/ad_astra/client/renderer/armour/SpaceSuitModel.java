@@ -1,5 +1,6 @@
-package com.github.alexnijjar.ad_astra.client.renderer.spacesuit;
+package com.github.alexnijjar.ad_astra.client.renderer.armour;
 
+import com.github.alexnijjar.ad_astra.items.armour.ModArmourItem;
 import com.github.alexnijjar.ad_astra.items.armour.NetheriteSpaceSuit;
 import com.github.alexnijjar.ad_astra.items.armour.SpaceSuit;
 import com.github.alexnijjar.ad_astra.registry.ModItems;
@@ -19,6 +20,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 
+import java.util.Objects;
+
 public class SpaceSuitModel extends BipedEntityModel<LivingEntity> {
 	public static final EntityModelLayer LAYER_LOCATION = new EntityModelLayer(new ModIdentifier("space_suit"), "main");
 
@@ -33,12 +36,17 @@ public class SpaceSuitModel extends BipedEntityModel<LivingEntity> {
 	public final ModelPart rightBoot;
 	public final ModelPart leftBoot;
 
-	public SpaceSuitModel(ModelPart root, BipedEntityModel<LivingEntity> contextModel, LivingEntity entity, EquipmentSlot slot, ItemStack stack, Identifier texture) {
+	public SpaceSuitModel(ModelPart root, BipedEntityModel<LivingEntity> contextModel, LivingEntity entity, EquipmentSlot slot, ItemStack stack) {
 		super(root);
 
 		this.contextModel = contextModel;
 		this.entity = entity;
-		this.texture = texture;
+		if (stack.getItem() instanceof ModArmourItem item) {
+			String armourTexture = item.getArmorTexture(stack, entity, slot, null);
+			this.texture = new Identifier(Objects.requireNonNullElse(armourTexture, ""));
+		} else {
+			this.texture = new Identifier("");
+		}
 		this.slot = slot;
 		this.stack = stack;
 
@@ -175,5 +183,9 @@ public class SpaceSuitModel extends BipedEntityModel<LivingEntity> {
 
 		ModelPartData left_boot = modelPartData.addChild("left_boot", ModelPartBuilder.create().uv(48, 32).cuboid(-2.0f, 6.6667f, -2.0f, 4.0f, 6.0f, 4.0f, new Dilation(1.0f)).uv(16, 45).cuboid(-2.0f, 6.6667f, -2.0f, 4.0f, 6.0f, 4.0f, new Dilation(0.6f)), ModelTransform.pivot(2.0f, 11.3333f, 0.0f));
 		return TexturedModelData.of(modelData, 64, 64);
+	}
+
+	public Identifier getTexture() {
+		return this.texture;
 	}
 }

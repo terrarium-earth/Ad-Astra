@@ -17,26 +17,28 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
-public class LaunchPadBlockEntityRenderer extends BuiltinModelItemRenderer, BlockEntityRenderer<LaunchPadBlockEntity> {
-	public static final Identifier LAUNCH_PAD_MODEL = new ModIdentifier("block/launch_pad");
+public class LaunchPadBlockEntityRenderer extends BuiltinModelItemRenderer implements BlockEntityRenderer<LaunchPadBlockEntity> {
 
 	public LaunchPadBlockEntityRenderer() {
+		super(MinecraftClient.getInstance().getBlockEntityRenderDispatcher(), MinecraftClient.getInstance().getEntityModelLoader());
+	}
+	public LaunchPadBlockEntityRenderer(BlockEntityRendererFactory.Context ctx) {
+		this();
 	}
 
-	public LaunchPadBlockEntityRenderer(BlockEntityRendererFactory.Context ctx) {
-	}
+	public static final Identifier LAUNCH_PAD_MODEL = new ModIdentifier("block/launch_pad");
 
 	@Override
 	public void render(ItemStack stack, ModelTransformation.Mode mode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
 		matrices.push();
-		AdAstraClient.renderBlock(LAUNCH_PAD_MODEL, MinecraftClient.getInstance().getTickDelta(), matrices, vertexConsumers, light, overlay);
+		AdAstraClient.renderBlock(LAUNCH_PAD_MODEL, matrices, vertexConsumers, light, overlay);
 		matrices.pop();
 	}
 
 	@Override
 	public void render(LaunchPadBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
 		matrices.push();
-		AdAstraClient.renderBlock(LAUNCH_PAD_MODEL, MinecraftClient.getInstance().getTickDelta(), matrices, vertexConsumers, light, overlay);
+		AdAstraClient.renderBlock(LAUNCH_PAD_MODEL, matrices, vertexConsumers, light, overlay);
 		matrices.pop();
 
 	}

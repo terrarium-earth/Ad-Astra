@@ -53,7 +53,7 @@ public abstract class BucketItemMixin {
 
 		if (this.fluid.isIn(FluidTags.WATER)) {
 
-			if (!OxygenUtils.posHasOxygen(world, pos) && !this.fluid.equals(ModFluids.CRYO_FUEL_STILL)) {
+			if (!OxygenUtils.posHasOxygen(world, pos) && !this.fluid.equals(ModFluids.CRYO_FUEL_STILL.get())) {
 				int i = pos.getX();
 				int j = pos.getY();
 				int k = pos.getZ();

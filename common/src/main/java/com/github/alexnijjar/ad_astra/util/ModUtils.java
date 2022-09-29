@@ -160,7 +160,7 @@ public class ModUtils {
 			lander.getInventory().setStack(i, rocket.getInventory().getStack(i));
 		}
 		ItemStack stack = rocket.getDropStack();
-		((VehicleItem) stack.getItem()).setFluid(stack, rocket.getFluidHolder());
+		((VehicleItem) stack.getItem()).setFluid(stack, rocket.getFluidHolder().getFluid());
 		((VehicleItem) stack.getItem()).setAmount(stack, rocket.getFluidAmount());
 		lander.getInventory().setStack(10, stack);
 

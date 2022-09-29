@@ -388,11 +388,11 @@ public class ModBlocks {
 	public static final RegistrySupplier<FluidBlock> CRYO_FUEL_BLOCK = ModBlocks.register("cryo_fuel", new CryoFuelBlock(ModFluids.CRYO_FUEL_STILL.get(), AbstractBlock.Settings.copy(Blocks.WATER).strength(100.0f).dropsNothing()));
 	public static final RegistrySupplier<FluidBlock> OXYGEN_BLOCK = ModBlocks.register("oxygen", new FluidBlock(ModFluids.OXYGEN_STILL.get(), AbstractBlock.Settings.copy(Blocks.WATER).strength(100.0f).dropsNothing()));
 
-	static <T extends Block> RegistrySupplier<T> register(String id, T block) {
+	private static <T extends Block> RegistrySupplier<T> register(String id, T block) {
 		return BLOCKS.register(id, () -> block);
 	}
 
-	static <T extends Block> RegistrySupplier<T> register(String id, T block, boolean excludeFromLootTable) {
+	private static <T extends Block> RegistrySupplier<T> register(String id, T block, boolean excludeFromLootTable) {
 		RegistrySupplier<T> registered = BLOCKS.register(id, () -> block);
 		if (!excludeFromLootTable) {
 			blocks.add(block);

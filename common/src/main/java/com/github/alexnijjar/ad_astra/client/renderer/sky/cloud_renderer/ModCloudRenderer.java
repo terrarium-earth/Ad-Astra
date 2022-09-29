@@ -1,5 +1,7 @@
 package com.github.alexnijjar.ad_astra.client.renderer.sky.cloud_renderer;
 
+import com.github.alexnijjar.ad_astra.client.registry.ClientModSkies;
+import com.github.alexnijjar.ad_astra.client.renderer.sky.WorldRenderContext;
 import com.github.alexnijjar.ad_astra.mixin.client.WorldRendererAccessor;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.mojang.blaze3d.platform.GlStateManager;
@@ -21,7 +23,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
 @Environment(EnvType.CLIENT)
-public class ModCloudRenderer implements DimensionRenderingRegistry.CloudRenderer {
+public class ModCloudRenderer implements ClientModSkies.CloudRenderer {
 	private static final Identifier VENUS_CLOUD_TEXTURE = new ModIdentifier("textures/sky/venus/clouds.png");
 	private Identifier texture;
 
@@ -50,14 +52,14 @@ public class ModCloudRenderer implements DimensionRenderingRegistry.CloudRendere
 			RenderSystem.enableDepthTest();
 			RenderSystem.blendFuncSeparate(GlStateManager.class_4535.SRC_ALPHA, GlStateManager.class_4534.ONE_MINUS_SRC_ALPHA, GlStateManager.class_4535.ONE, GlStateManager.class_4534.ONE_MINUS_SRC_ALPHA);
 			RenderSystem.depthMask(true);
-			double e = (double) (((float) renderer.getTicks() + tickDelta) * 0.03F);
+			double e = (double) (((float) renderer.getTicks() + tickDelta) * 0.03f);
 			double i = (cameraPosX + e) / 12.0;
-			double j = (double) (f - (float) cameraPosY + 0.33F);
-			double k = cameraPosZ / 12.0 + 0.33F;
+			double j = (double) (f - (float) cameraPosY + 0.33f);
+			double k = cameraPosZ / 12.0 + 0.33f;
 			i -= (double) (MathHelper.floor(i / 2048.0) * 2048);
 			k -= (double) (MathHelper.floor(k / 2048.0) * 2048);
 			float l = (float) (i - (double) MathHelper.floor(i));
-			float m = (float) (j / 4.0 - (double) MathHelper.floor(j / 4.0)) * 4.0F;
+			float m = (float) (j / 4.0 - (double) MathHelper.floor(j / 4.0)) * 4.0f;
 			float n = (float) (k - (double) MathHelper.floor(k));
 			Vec3d colour = context.world().getCloudsColor(tickDelta);
 			int o = (int) Math.floor(i);
@@ -90,7 +92,7 @@ public class ModCloudRenderer implements DimensionRenderingRegistry.CloudRendere
 			RenderSystem.setShaderTexture(0, texture);
 			BackgroundRenderer.setShaderFogColor();
 			matrices.push();
-			matrices.scale(12.0F, 1.0F, 12.0F);
+			matrices.scale(12.0f, 1.0f, 12.0f);
 			matrices.translate((double) (-l), (double) m, (double) (-n));
 			if (renderer.getCloudsBuffer() != null) {
 				renderer.getCloudsBuffer().bind();
@@ -111,7 +113,7 @@ public class ModCloudRenderer implements DimensionRenderingRegistry.CloudRendere
 			}
 
 			matrices.pop();
-			RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+			RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
 			RenderSystem.enableCull();
 			RenderSystem.disableBlend();
 		}

@@ -25,4 +25,9 @@ public record AdAstraTeleporter(TeleportTarget target) implements ITeleporter {
     public boolean playTeleportSound(ServerPlayerEntity player, ServerWorld sourceWorld, ServerWorld destWorld) {
         return false;
     }
+
+    @Override
+    public Entity placeEntity(Entity entity, ServerWorld currentWorld, ServerWorld destWorld, float yaw, Function<Boolean, Entity> repositionEntity) {
+        return repositionEntity.apply(false);
+    }
 }

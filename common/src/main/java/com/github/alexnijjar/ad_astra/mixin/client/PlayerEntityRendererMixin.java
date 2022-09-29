@@ -6,10 +6,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.github.alexnijjar.ad_astra.client.renderer.spacesuit.JetSuitModel;
-import com.github.alexnijjar.ad_astra.client.renderer.spacesuit.NetheriteSpaceSuitModel;
-import com.github.alexnijjar.ad_astra.client.renderer.spacesuit.SpaceSuitModel;
-import com.github.alexnijjar.ad_astra.client.renderer.spacesuit.SpaceSuitRenderer;
+import com.github.alexnijjar.ad_astra.client.renderer.armour.JetSuitModel;
+import com.github.alexnijjar.ad_astra.client.renderer.armour.NetheriteSpaceSuitModel;
+import com.github.alexnijjar.ad_astra.client.renderer.armour.SpaceSuitModel;
 import com.github.alexnijjar.ad_astra.items.armour.JetSuit;
 import com.github.alexnijjar.ad_astra.items.armour.SpaceSuit;
 import com.github.alexnijjar.ad_astra.items.vehicles.VehicleItem;
@@ -27,7 +26,6 @@ import net.minecraft.client.render.entity.model.EntityModelLoader;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3f;
 
 @Mixin(PlayerEntityRenderer.class)
@@ -64,18 +62,14 @@ public class PlayerEntityRendererMixin {
 			PlayerEntityRenderer renderer = (PlayerEntityRenderer) (Object) (this);
 
 			EntityModelLoader modelLoader = MinecraftClient.getInstance().getEntityModelLoader();
-			Identifier texture;
 			SpaceSuitModel model;
 
 			if (stack.isOf(ModItems.JET_SUIT.get())) {
-				texture = SpaceSuitRenderer.JET_SUIT_TEXTURE;
-				model = new SpaceSuitModel(modelLoader.getModelPart(JetSuitModel.LAYER_LOCATION), (BipedEntityModel) renderer.getModel(), player, EquipmentSlot.CHEST, stack, texture);
+				model = new SpaceSuitModel(modelLoader.getModelPart(JetSuitModel.LAYER_LOCATION), (BipedEntityModel) renderer.getModel(), player, EquipmentSlot.CHEST, stack);
 			} else if (stack.isOf(ModItems.NETHERITE_SPACE_SUIT.get())) {
-				texture = SpaceSuitRenderer.NETHERITE_SPACE_SUIT_TEXTURE;
-				model = new SpaceSuitModel(modelLoader.getModelPart(NetheriteSpaceSuitModel.LAYER_LOCATION), (BipedEntityModel) renderer.getModel(), player, EquipmentSlot.CHEST, stack, texture);
+				model = new SpaceSuitModel(modelLoader.getModelPart(NetheriteSpaceSuitModel.LAYER_LOCATION), (BipedEntityModel) renderer.getModel(), player, EquipmentSlot.CHEST, stack);
 			} else {
-				texture = SpaceSuitRenderer.SPACE_SUIT_TEXTURE;
-				model = new SpaceSuitModel(modelLoader.getModelPart(SpaceSuitModel.LAYER_LOCATION), (BipedEntityModel) renderer.getModel(), player, EquipmentSlot.CHEST, stack, texture);
+				model = new SpaceSuitModel(modelLoader.getModelPart(SpaceSuitModel.LAYER_LOCATION), (BipedEntityModel) renderer.getModel(), player, EquipmentSlot.CHEST, stack);
 			}
 
 			matrices.push();
@@ -90,7 +84,7 @@ public class PlayerEntityRendererMixin {
 				JetSuit.spawnParticles(player.world, player, model);
 			}
 
-			VertexConsumer vertex = SpaceSuitModel.getVertex(RenderLayer.getEntityTranslucent(texture), player.getEquippedStack(EquipmentSlot.CHEST).hasEnchantments());
+			VertexConsumer vertex = SpaceSuitModel.getVertex(RenderLayer.getEntityTranslucent(model.getTexture()), player.getEquippedStack(EquipmentSlot.CHEST).hasEnchantments());
 			if (right) {
 				model.rightArm.render(matrices, vertex, light, OverlayTexture.DEFAULT_UV, r, g, b, 1.0f);
 			} else {
