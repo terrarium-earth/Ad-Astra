@@ -1,13 +1,12 @@
 package com.github.alexnijjar.ad_astra.client.screens.utils;
 
 import com.github.alexnijjar.ad_astra.AdAstra;
-import com.github.alexnijjar.ad_astra.util.ColourHolder;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.Tessellator;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormats;
-
+import com.teamresourceful.resourcefullib.common.color.Color;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -56,7 +55,7 @@ public class ScreenUtils {
 		matrices.pop();
 	}
 
-	public static void drawCircle(double x, double y, double radius, int sides, ColourHolder ringColour) {
+	public static void drawCircle(double x, double y, double radius, int sides, Color ringColour) {
 
 		Tessellator tessellator = Tessellator.getInstance();
 		BufferBuilder bufferBuilder = tessellator.getBufferBuilder();
@@ -70,7 +69,9 @@ public class ScreenUtils {
 			bufferBuilder.begin(VertexFormat.DrawMode.DEBUG_LINE_STRIP, VertexFormats.POSITION_COLOR);
 			for (int j = 0; j <= sides; j++) {
 				double angle = (Math.PI * 2 * j / sides) + Math.toRadians(180);
-				bufferBuilder.vertex(x + Math.sin(angle) * i, y + Math.cos(angle) * i, 0).color((int) ringColour.r(), (int) ringColour.g(), (int) ringColour.b(), (int) ringColour.a()).next();
+				bufferBuilder.vertex(x + Math.sin(angle) * i, y + Math.cos(angle) * i, 0)
+						.color(ringColour.getIntRed(), ringColour.getIntGreen(), ringColour.getIntBlue(), ringColour.getIntAlpha())
+						.next();
 			}
 			tessellator.draw();
 		}

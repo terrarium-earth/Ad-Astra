@@ -3,10 +3,11 @@ package com.github.alexnijjar.ad_astra.client.screens.utils;
 import com.github.alexnijjar.ad_astra.client.screens.utils.PlanetSelectionScreen.TooltipType;
 import com.github.alexnijjar.ad_astra.data.ButtonColour;
 import com.github.alexnijjar.ad_astra.data.Planet;
-import com.github.alexnijjar.ad_astra.util.ColourHolder;
+import com.github.alexnijjar.ad_astra.util.ColourUtils;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.teamresourceful.resourcefullib.common.color.Color;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -35,8 +36,8 @@ public class CustomButton extends ButtonWidget {
 	private final int startY;
 	private final Text label;
 	private final ButtonType buttonSize;
-	private final ColourHolder buttonColourLightened;
-	private final ColourHolder buttonColour;
+	private final Color buttonColourLightened;
+	private final Color buttonColour;
 	private final Planet planetInfo;
 
 	private final PlanetSelectionScreen.TooltipType tooltip;
@@ -49,9 +50,9 @@ public class CustomButton extends ButtonWidget {
 		this.startY = y;
 		this.label = label;
 		this.buttonSize = size;
-		ColourHolder colour = buttonColour.getColour();
+		Color colour = buttonColour.getColour();
 		// The button becomes lightened when the mouse hovers over the button.
-		this.buttonColourLightened = new ColourHolder(colour.r() + 0.1f, colour.g() + 0.1f, colour.b() + 0.1f, colour.a());
+		this.buttonColourLightened = ColourUtils.lighten(colour, 0.1f);
 		// This is the normal colour when the button is not being hovered over.
 		this.buttonColour = colour;
 		this.tooltip = tooltip;
@@ -83,9 +84,8 @@ public class CustomButton extends ButtonWidget {
 			int screenHeight = client.getWindow().getScaledHeight();
 			int scissorY = (int) (((screenHeight / 2) - 83) * scale);
 
-			ColourHolder lightColour = this.buttonColourLightened;
-			ColourHolder color = this.buttonColour;
 			boolean over = this.isMouseOver(mouseX, mouseY);
+			Color color = over ? this.buttonColourLightened : this.buttonColour;
 
 			RenderSystem.enableBlend();
 			RenderSystem.setShader(GameRenderer::getPositionTexShader);
@@ -96,7 +96,7 @@ public class CustomButton extends ButtonWidget {
 				RenderSystem.enableScissor(0, scissorY, (int) (215 * scale), (int) (127 * scale));
 			}
 
-			RenderSystem.setShaderColor((over ? lightColour.r() : color.r()), (over ? lightColour.g() : color.g()), (over ? lightColour.b() : color.b()), color.a());
+			RenderSystem.setShaderColor(color.getFloatRed(), color.getFloatGreen(), color.getFloatBlue(), this.buttonColour.getFloatAlpha());
 			RenderSystem.setShaderTexture(0, switch (this.buttonSize) {
 			case LARGE -> LARGE_BUTTON_TEXTURE;
 			case NORMAL -> BUTTON_TEXTURE;

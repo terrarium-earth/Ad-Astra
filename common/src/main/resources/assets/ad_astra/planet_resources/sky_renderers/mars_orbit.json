@@ -19,22 +19,14 @@
             "blending": true,
             "render_type": "dynamic",
             "scale": 30.0,
-            "rotation": {
-                "x": 0.0,
-                "y": -90.0,
-                "z": 0.0
-            }
+            "rotation": [0.0, -90.0, 0.0]
         },
         {
             "texture": "ad_astra:textures/sky/mars.png",
             "blending": false,
             "render_type": "scaling",
             "scale": 1.0,
-            "rotation": {
-                "x": 180.0,
-                "y": 180.0,
-                "z": 0.0
-            }
+            "rotation": [180.0, 180.0, 0.0]
         },
         {
             "texture": "ad_astra:textures/sky/light.png",
@@ -46,11 +38,7 @@
                 "g": 153,
                 "b": 204
             },
-            "rotation": {
-                "x": 180.0,
-                "y": 180.0,
-                "z": 0.0
-            }
+            "rotation": [180.0, 180.0, 0.0]
         }
     ]
 }
