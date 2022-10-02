@@ -19,22 +19,14 @@
             "blending": true,
             "render_type": "dynamic",
             "scale": 30.0,
-            "rotation": {
-                "x": 0.0,
-                "y": 90.0,
-                "z": 0.0
-            }
+            "rotation": [0.0, 90.0, 0.0]
         },
         {
             "texture": "ad_astra:textures/sky/earth.png",
             "blending": true,
             "render_type": "dynamic",
             "scale": 1.0,
-            "rotation": {
-                "x": 10.0,
-                "y": -94.0,
-                "z": 192.0
-            }
+            "rotation": [10.0, -94.0, 192.0]
         },
         {
             "texture": "ad_astra:textures/sky/light.png",
@@ -46,22 +38,14 @@
                 "g": 191,
                 "b": 255
             },
-            "rotation": {
-                "x": 10.0,
-                "y": -94.0,
-                "z": 192.0
-            }
+            "rotation": [10.0, -94.0, 192.0]
         },
         {
             "texture": "ad_astra:textures/sky/mercury.png",
             "blending": true,
             "render_type": "dynamic",
             "scale": 1.0,
-            "rotation": {
-                "x": 10.0,
-                "y": 120.0,
-                "z": 10.0
-            }
+            "rotation": [10.0, 120.0, 10.0]
         },
         {
             "texture": "ad_astra:textures/sky/light.png",
@@ -73,11 +57,7 @@
                 "g": 204,
                 "b": 255
             },
-            "rotation": {
-                "x": 10.0,
-                "y": 120.0,
-                "z": 10.0
-            }
+            "rotation": [10.0, 120.0, 10.0]
         }
     ]
 }

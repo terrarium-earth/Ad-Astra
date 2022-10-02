@@ -1,12 +1,6 @@
 package com.github.alexnijjar.ad_astra.client.screens.utils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Consumer;
 
 import com.github.alexnijjar.ad_astra.AdAstra;
@@ -175,10 +169,9 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 		}
 
 		if (currentPage == 1) {
-			Galaxy galaxy = AdAstraClient.galaxies.stream().filter(g -> g.galaxy().equals(this.currentCategory.id())).findFirst().orElse(null);
-			if (galaxy != null) {
-				ScreenUtils.addRotatingTexture(this, matrices, -125, -125, galaxy.scale(), galaxy.scale(), galaxy.texture(), 0.6f);
-			}
+			AdAstraClient.galaxies.stream().filter(g -> g.galaxy().equals(this.currentCategory.id()))
+				.findFirst()
+				.ifPresent(galaxy -> ScreenUtils.addRotatingTexture(this, matrices, -125, -125, galaxy.scale(), galaxy.scale(), galaxy.texture(), 0.6f));
 		}
 		// Render the Solar System when inside the Solar System category
 		else {
@@ -188,7 +181,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 				ScreenUtils.addTexture(matrices, (this.width - solarSystem.sunScale()) / 2, (this.height - solarSystem.sunScale()) / 2, solarSystem.sunScale(), solarSystem.sunScale(), solarSystem.sun());
 
 				for (PlanetRing ring : planetRings) {
-					ScreenUtils.drawCircle(this.width / 2, this.height / 2, ring.radius() * 24, 75, solarSystem.ringColour());
+					ScreenUtils.drawCircle(this.width / 2f, this.height / 2f, ring.radius() * 24, 75, solarSystem.ringColour());
 				}
 
 				for (PlanetRing ring : planetRings) {
@@ -243,7 +236,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 
 		// All buttons are data-driven; they are created from files in the /planet_data/planets directory.
 		List<Planet> planets = new ArrayList<>(AdAstra.planets);
-		planets.sort((g1, g2) -> g1.translation().substring(Math.abs(g1.translation().indexOf(".text"))).compareTo(g2.translation().substring(Math.abs(g2.translation().indexOf(".text")))));
+		planets.sort(Comparator.comparing(g -> g.translation().substring(Math.abs(g.translation().indexOf(".text")))));
 		planets.forEach(planet -> {
 
 			if (this.handler.getTier() >= planet.rocketTier()) {
@@ -266,8 +259,8 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 			}
 		});
 
-		this.galaxyCategories.forEach((category -> this.createGalaxyButton(category)));
-		this.solarSystemsCategories.forEach((category -> this.createSolarSystemButton(category)));
+		this.galaxyCategories.forEach((this::createGalaxyButton));
+		this.solarSystemsCategories.forEach((this::createSolarSystemButton));
 
 		// Scroll bar
 		this.scrollBar = new ButtonWidget(SCROLL_BAR_X, minScrollY, 4, 8, Text.of(""), pressed -> {
@@ -318,8 +311,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 	public void createSpaceStationTeleportButton(int row, Text label, Category category, ButtonType size, ButtonColour colour, RegistryKey<World> world) {
 		createTeleportButton(row, label, category, size, colour, TooltipType.SPACE_STATION, null, world, press -> {
 			if (!handler.getPlayer().isCreative() && !handler.getPlayer().isSpectator()) {
-				for (int i = 0; i < this.ingredients.size(); i++) {
-					Pair<ItemStack, Integer> ingredient = this.ingredients.get(i);
+				for (Pair<ItemStack, Integer> ingredient : this.ingredients) {
 					boolean isEnough = ingredient.first.getCount() >= ingredient.second;
 					if (!isEnough) {
 						// Don't do anything if the player does not have the necessary materials.
@@ -374,7 +366,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 
 		LinkedList<CustomButton> buttons = this.categoryButtons.getOrDefault(category, new LinkedList<>());
 
-		CustomButton button = new CustomButton(row, column, label, size, colour, tooltip, planetInfo, pressed -> onClick.accept(pressed));
+		CustomButton button = new CustomButton(row, column, label, size, colour, tooltip, planetInfo, onClick::accept);
 		this.addDrawableChild(button);
 
 		buttons.add(button);
@@ -420,13 +412,12 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 
 					// Move all buttons based on the scroll.
 					for (CustomButton button2 : buttons) {
-						CustomButton button = button2;
-						button.y += sensitivity;
+						button2.y += sensitivity;
 
 						if (referencePoint >= minThreshold) {
-							button.y -= referencePoint - minThreshold;
+							button2.y -= referencePoint - minThreshold;
 						} else if (referencePoint <= maxThreshold) {
-							button.y -= referencePoint - maxThreshold;
+							button2.y -= referencePoint - maxThreshold;
 						}
 					}
 

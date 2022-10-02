@@ -19,22 +19,14 @@
             "blending": true,
             "render_type": "dynamic",
             "scale": 30.0,
-            "rotation": {
-                "x": 0.0,
-                "y": -90.0,
-                "z": 0.0
-            }
+            "rotation": [0.0, -90.0, 0.0]
         },
         {
             "texture": "ad_astra:textures/sky/vicinus.png",
             "blending": false,
             "render_type": "static",
             "scale": 40.0,
-            "rotation": {
-                "x": 60.0,
-                "y": 0.0,
-                "z": 0.0
-            }
+            "rotation": [60.0, 0.0, 0.0]
         },
         {
             "texture": "ad_astra:textures/sky/light.png",
@@ -46,11 +38,7 @@
                 "g": 153,
                 "b": 255
             },
-            "rotation": {
-                "x": 60.0,
-                "y": 0.0,
-                "z": 0.0
-            }
+            "rotation": [60.0, 0.0, 0.0]
         }
     ]
 }

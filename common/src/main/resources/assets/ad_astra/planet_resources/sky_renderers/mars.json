@@ -19,22 +19,14 @@
             "blending": true,
             "render_type": "dynamic",
             "scale": 30.0,
-            "rotation": {
-                "x": 0.0,
-                "y": -90.0,
-                "z": 0.0
-            }
+            "rotation": [0.0, -90.0, 0.0]
         },
         {
             "texture": "ad_astra:textures/sky/earth.png",
             "blending": true,
             "render_type": "dynamic",
             "scale": 1.0,
-            "rotation": {
-                "x": -20.0,
-                "y": -40.0,
-                "z": 0.0
-            }
+            "rotation": [-20.0, -40.0, 0.0]
         },
         {
             "texture": "ad_astra:textures/sky/light.png",
@@ -46,22 +38,14 @@
                 "g": 191,
                 "b": 255
             },
-            "rotation": {
-                "x": -20.0,
-                "y": -40.0,
-                "z": 0.0
-            }
+            "rotation": [-20.0, -40.0, 0.0]
         },
         {
             "texture": "ad_astra:textures/sky/phobos.png",
             "blending": true,
             "render_type": "dynamic",
             "scale": 3.0,
-            "rotation": {
-                "x": -10.0,
-                "y": 20.0,
-                "z": 200.0
-            }
+            "rotation": [-10.0, 20.0, 200.0]
         },
         {
             "texture": "ad_astra:textures/sky/light.png",
@@ -73,22 +57,14 @@
                 "g": 217,
                 "b": 179
             },
-            "rotation": {
-                "x": -10.0,
-                "y": 20.0,
-                "z": 200.0
-            }
+            "rotation": [-10.0, 20.0, 200.0]
         },
         {
             "texture": "ad_astra:textures/sky/deimos.png",
             "blending": true,
             "render_type": "dynamic",
             "scale": 4.0,
-            "rotation": {
-                "x": 10.0,
-                "y": -5.0,
-                "z": 165.0
-            }
+            "rotation": [10.0, -5.0, 165.0]
         },
         {
             "texture": "ad_astra:textures/sky/light.png",
@@ -100,11 +76,7 @@
                 "g": 255,
                 "b": 204
             },
-            "rotation": {
-                "x": 10.0,
-                "y": -5.0,
-                "z": 165.0
-            }
+            "rotation": [10.0, -5.0, 165.0]
         }
     ]
 }

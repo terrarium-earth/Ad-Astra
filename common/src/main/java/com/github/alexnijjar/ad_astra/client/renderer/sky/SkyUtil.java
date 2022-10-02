@@ -1,20 +1,13 @@
 package com.github.alexnijjar.ad_astra.client.renderer.sky;
 
-import java.util.Random;
-
 import com.github.alexnijjar.ad_astra.client.resourcepack.PlanetSkyRenderer;
 import com.github.alexnijjar.ad_astra.client.resourcepack.PlanetSkyRenderer.StarsRenderer;
 import com.github.alexnijjar.ad_astra.mixin.client.WorldRendererAccessor;
-import com.github.alexnijjar.ad_astra.util.ColourHolder;
 import com.github.alexnijjar.ad_astra.world.WorldSeed;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.BufferRenderer;
-import com.mojang.blaze3d.vertex.VertexBuffer;
-import com.mojang.blaze3d.vertex.VertexFormat;
-import com.mojang.blaze3d.vertex.VertexFormats;
-
+import com.mojang.blaze3d.vertex.*;
+import com.teamresourceful.resourcefullib.common.color.Color;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -31,6 +24,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Matrix4f;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3f;
+
+import java.util.Random;
 
 @Environment(EnvType.CLIENT)
 public class SkyUtil {
@@ -108,7 +103,7 @@ public class SkyUtil {
 	}
 
 	// For rendering textures in the sky
-	public static void render(WorldRenderContext context, BufferBuilder bufferBuilder, Identifier texture, ColourHolder colour, Vec3f rotation, float scale, boolean blending) {
+	public static void render(WorldRenderContext context, BufferBuilder bufferBuilder, Identifier texture, Color colour, Vec3f rotation, float scale, boolean blending) {
 
 		startRendering(context.matrixStack(), rotation);
 		RenderSystem.setShader(GameRenderer::getPositionColorTexShader);
@@ -124,10 +119,10 @@ public class SkyUtil {
 		Matrix4f positionMatrix = context.matrixStack().peek().getModel();
 		RenderSystem.setShaderTexture(0, texture);
 		bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR_TEXTURE);
-		bufferBuilder.vertex(positionMatrix, -scale, 100.0f, -scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).uv(1.0f, 0.0f).next();
-		bufferBuilder.vertex(positionMatrix, scale, 100.0f, -scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).uv(0.0f, 0.0f).next();
-		bufferBuilder.vertex(positionMatrix, scale, 100.0f, scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).uv(0.0f, 1.0f).next();
-		bufferBuilder.vertex(positionMatrix, -scale, 100.0f, scale).color((int) colour.r(), (int) colour.g(), (int) colour.b(), 255).uv(1.0f, 1.0f).next();
+		bufferBuilder.vertex(positionMatrix, -scale, 100.0f, -scale).color(colour.getIntRed(), colour.getIntGreen(), colour.getIntBlue(), 255).uv(1.0f, 0.0f).next();
+		bufferBuilder.vertex(positionMatrix, scale, 100.0f, -scale).color(colour.getIntRed(), colour.getIntGreen(), colour.getIntBlue(), 255).uv(0.0f, 0.0f).next();
+		bufferBuilder.vertex(positionMatrix, scale, 100.0f, scale).color(colour.getIntRed(), colour.getIntGreen(), colour.getIntBlue(), 255).uv(0.0f, 1.0f).next();
+		bufferBuilder.vertex(positionMatrix, -scale, 100.0f, scale).color(colour.getIntRed(), colour.getIntGreen(), colour.getIntBlue(), 255).uv(1.0f, 1.0f).next();
 		BufferRenderer.drawWithShader(bufferBuilder.end());
 
 		endRendering(context.matrixStack());

@@ -1,8 +1,5 @@
 package com.github.alexnijjar.ad_astra.client.registry;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.github.alexnijjar.ad_astra.client.AdAstraClient;
 import com.github.alexnijjar.ad_astra.client.renderer.sky.ModSky;
 import com.github.alexnijjar.ad_astra.client.renderer.sky.WorldRenderContext;
@@ -10,14 +7,16 @@ import com.github.alexnijjar.ad_astra.client.renderer.sky.cloud_renderer.ModClou
 import com.github.alexnijjar.ad_astra.client.renderer.sky.dimension_effects.ModDimensionEffects;
 import com.github.alexnijjar.ad_astra.client.renderer.sky.weather_renderer.ModWeatherRenderer;
 import com.github.alexnijjar.ad_astra.client.resourcepack.PlanetSkyRenderer;
-import com.github.alexnijjar.ad_astra.util.ColourHolder;
-
+import com.github.alexnijjar.ad_astra.util.ColourUtils;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.SkyProperties;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Environment(EnvType.CLIENT)
 public class ClientModSkies {
@@ -40,55 +39,49 @@ public class ClientModSkies {
 
 			// Dimension Effects
 			switch (skyRenderer.effects().type()) {
-			case SIMPLE -> EFFECTS.put(skyRenderer.dimension(), new ModDimensionEffects());
-			case NONE -> EFFECTS.put(skyRenderer.dimension(), new ModDimensionEffects() {
-				public float[] getFogColorOverride(float skyAngle, float tickDelta) {
-					return null;
-				}
-			});
-			case FOGGY_REVERSED -> EFFECTS.put(skyRenderer.dimension(), new ModDimensionEffects() {
-				@Override
-				public boolean useThickFog(int camX, int camY) {
-					return true;
-				}
+				case SIMPLE -> EFFECTS.put(skyRenderer.dimension(), new ModDimensionEffects());
+				case NONE -> EFFECTS.put(skyRenderer.dimension(), new ModDimensionEffects() {
+					public float[] getFogColorOverride(float skyAngle, float tickDelta) {
+						return null;
+					}
+				});
+				case FOGGY_REVERSED -> EFFECTS.put(skyRenderer.dimension(), new ModDimensionEffects() {
+					@Override
+					public boolean useThickFog(int camX, int camY) {
+						return true;
+					}
 
-				@Override
-				public float[] getFogColorOverride(float skyAngle, float tickDelta) {
-					return null;
-				}
+					@Override
+					public float[] getFogColorOverride(float skyAngle, float tickDelta) {
+						return null;
+					}
 
-			});
-			case FOGGY -> EFFECTS.put(skyRenderer.dimension(), new ModDimensionEffects() {
-				@Override
-				public boolean useThickFog(int camX, int camY) {
-					return true;
-				}
-			});
-			case COLORED_HORIZON -> EFFECTS.put(skyRenderer.dimension(), new ModDimensionEffects() {
-				@Override
-				public Vec3d adjustFogColor(Vec3d color, float sunHeight) {
-					return ColourHolder.toVector(skyRenderer.effects().colour());
-				}
-			});
+				});
+				case FOGGY -> EFFECTS.put(skyRenderer.dimension(), new ModDimensionEffects() {
+					@Override
+					public boolean useThickFog(int camX, int camY) {
+						return true;
+					}
+				});
+				case COLORED_HORIZON -> EFFECTS.put(skyRenderer.dimension(), new ModDimensionEffects() {
+					@Override
+					public Vec3d adjustFogColor(Vec3d color, float sunHeight) {
+						return ColourUtils.toVector(skyRenderer.effects().colour());
+					}
+				});
 			}
 
 			// Cloud renderer
 			switch (skyRenderer.cloudEffects()) {
-			case NONE -> CLOUD_RENDERERS.put(skyRenderer.dimension(), new CloudRenderer() {
-				@Override
-				public void render(WorldRenderContext context) {
-				}
-			});
-			case VANILLA -> {
-			}
-			case VENUS -> CLOUD_RENDERERS.put(skyRenderer.dimension(), new ModCloudRenderer().withVenus());
+				case NONE -> CLOUD_RENDERERS.put(skyRenderer.dimension(), context -> {});
+				case VANILLA -> {}
+				case VENUS -> CLOUD_RENDERERS.put(skyRenderer.dimension(), new ModCloudRenderer().withVenus());
 			}
 
 			// Weather renderer
 			switch (skyRenderer.weatherEffects()) {
-			case NONE -> {
-			}
-			case VENUS -> WEATHER_RENDERERS.put(skyRenderer.dimension(), new ModWeatherRenderer().withVenus());
+				case NONE -> {}
+				case VENUS -> WEATHER_RENDERERS.put(skyRenderer.dimension(), new ModWeatherRenderer().withVenus());
 			}
 		}
 	}
