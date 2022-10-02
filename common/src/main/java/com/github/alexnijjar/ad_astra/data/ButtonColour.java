@@ -1,8 +1,10 @@
 package com.github.alexnijjar.ad_astra.data;
 
 import com.github.alexnijjar.ad_astra.AdAstra;
-import com.github.alexnijjar.ad_astra.util.ColourHolder;
 import com.mojang.serialization.Codec;
+import com.teamresourceful.resourcefullib.common.color.Color;
+
+import java.util.Arrays;
 
 public enum ButtonColour {
 	WHITE(255, 255, 255, 255), //
@@ -22,7 +24,7 @@ public enum ButtonColour {
 
 	public static final Codec<ButtonColour> CODEC = Codec.STRING.xmap(ButtonColour::stringToColour, ButtonColour::toString);
 
-	private final ColourHolder colour;
+	private final Color colour;
 	public static final short ALPHA = 154;
 
 	ButtonColour(int r, int g, int b) {
@@ -30,10 +32,10 @@ public enum ButtonColour {
 	}
 
 	ButtonColour(int r, int g, int b, int a) {
-		this.colour = new ColourHolder(r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f);
+		this.colour = new Color(r, g, b, a);
 	}
 
-	public ColourHolder getColour() {
+	public Color getColour() {
 		return this.colour;
 	}
 
@@ -41,7 +43,7 @@ public enum ButtonColour {
 		try {
 			return ButtonColour.valueOf(string.toUpperCase());
 		} catch (IllegalArgumentException e) {
-			AdAstra.LOGGER.error('\"' + string + "\" is not a valid colour! Please choose one of the following colours: " + ButtonColour.values(), e);
+			AdAstra.LOGGER.error('\"' + string + "\" is not a valid colour! Please choose one of the following colours: " + Arrays.toString(ButtonColour.values()), e);
 			e.printStackTrace();
 			return ButtonColour.WHITE;
 		}

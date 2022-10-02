@@ -2,6 +2,7 @@ package com.github.alexnijjar.ad_astra.util;
 
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
+import java.util.Locale;
 import java.util.Set;
 import java.util.stream.StreamSupport;
 
@@ -16,6 +17,7 @@ import com.github.alexnijjar.ad_astra.registry.ModEntityTypes;
 import com.github.alexnijjar.ad_astra.registry.ModTags;
 import com.github.alexnijjar.ad_astra.util.algorithms.LandFinder;
 
+import com.mojang.serialization.Codec;
 import dev.architectury.platform.Platform;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -309,5 +311,9 @@ public class ModUtils {
 		} else {
 			return 15L;
 		}
+	}
+
+	public static <T extends Enum<T>> Codec<T> createEnumCodec(Class<T> enumClass) {
+		return Codec.STRING.xmap(s -> Enum.valueOf(enumClass, s.toUpperCase(Locale.ROOT)), Enum::name);
 	}
 }

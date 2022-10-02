@@ -9,9 +9,11 @@
     "sunset_color": "vanilla",
     "dimension_effects": {
         "type": "colored_horizon",
-        "r": 146,
-        "g": 21,
-        "b": 21
+        "color": {
+            "r": 146,
+            "g": 21,
+            "b": 21
+        }
     },
     "cloud_effects": "none",
     "weather_effects": "none",
@@ -22,11 +24,7 @@
             "blending": true,
             "render_type": "dynamic",
             "scale": 90.0,
-            "rotation": {
-                "x": 0.0,
-                "y": -90.0,
-                "z": 0.0
-            }
+            "rotation": [0.0, -90.0, 0.0]
         }
     ]
 }
