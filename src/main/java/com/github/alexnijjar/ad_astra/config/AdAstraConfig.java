@@ -50,9 +50,9 @@ public class AdAstraConfig implements ConfigData {
         public boolean spawnMoglers = true;
         public boolean spawnSulfurCreepers = true;
         public boolean spawnLunarianWanderingTrader = true;
-        @ConfigEntry.Gui.Tooltip(count = 1)
+        @ConfigEntry.Gui.Tooltip()
         public boolean doEntityGravity = true;
-        @ConfigEntry.Gui.Tooltip(count = 1)
+        @ConfigEntry.Gui.Tooltip()
         public boolean doLivingEntityGravity = true;
         public boolean acidRainBurns = true;
         public boolean doOxygen = true;
@@ -60,12 +60,15 @@ public class AdAstraConfig implements ConfigData {
         public boolean doSpaceMuffler = true;
         public long oxygenTankSize = FluidConstants.BUCKET / 2;
         public int hammerDurability = 64;
-        public float orbitGravity = 3.26f;
+        public float orbitGravity = 3.0f;
         public boolean giveAstroduxAtSpawn = false;
         public int oxygenBarXOffset = 0;
         public int oxygenBarYOffset = 0;
         public int energyBarXOffset = 0;
         public int energyBarYOffset = 0;
+        public int oxygenDamage = 1;
+        public int freezeDamage = 1;
+        public int heatDamage = 2;
     }
 
     public static class SpaceSuitConfig {

@@ -52,6 +52,9 @@ public class LunarianWanderingTraderManager implements Spawner {
 
 	@Override
 	public int spawn(ServerWorld world, boolean spawnMonsters, boolean spawnAnimals) {
+		if (!AdAstra.CONFIG.general.spawnLunarianWanderingTrader) {
+			return 0;
+		}
 		if (!world.getGameRules().getBoolean(GameRules.DO_TRADER_SPAWNING)) {
 			return 0;
 		}

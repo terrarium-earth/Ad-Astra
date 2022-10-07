@@ -47,19 +47,19 @@ public class EntityTemperatureSystem {
         }
 
         if (temperature > temperatureResistance.getMaximum() && !entity.isFireImmune() && !entity.hasStatusEffect(StatusEffects.FIRE_RESISTANCE) && !NetheriteSpaceSuit.hasFullSet(entity) && !ModUtils.armourIsHeatResistant(entity)) {
-            burnEntity(entity, world);
+            burnEntity(entity);
         } else if (temperature < temperatureResistance.getMinimum() && !ModUtils.armourIsFreezeResistant(entity)) {
             freezeEntity(entity, world);
         }
     }
 
-    private static void burnEntity(LivingEntity entity, ServerWorld world) {
-        entity.damage(DamageSource.ON_FIRE, 2);
+    private static void burnEntity(LivingEntity entity) {
+        entity.damage(DamageSource.ON_FIRE, AdAstra.CONFIG.general.heatDamage);
         entity.setOnFireFor(10);
     }
 
     private static void freezeEntity(LivingEntity entity, ServerWorld world) {
-        entity.damage(DamageSource.FREEZE, 1);
+        entity.damage(DamageSource.FREEZE, AdAstra.CONFIG.general.freezeDamage);
         entity.setFrozenTicks(Math.min(entity.getMinFreezeDamageTicks() + 20, entity.getFrozenTicks() + 5 * 10));
         RandomGenerator random = entity.world.getRandom();
         ModUtils.spawnForcedParticles((world), ParticleTypes.SNOWFLAKE, entity.getX(), entity.getY() + 1, entity.getZ(), 1, MathHelper.nextBetween(random, -1.0f, 1.0f) * 0.083333336f, 0.05,

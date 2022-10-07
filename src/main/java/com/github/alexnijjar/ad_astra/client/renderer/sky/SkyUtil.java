@@ -51,7 +51,7 @@ public class SkyUtil {
 		float f = (float) vec3d.getX();
 		float g = (float) vec3d.getY();
 		float h = (float) vec3d.getZ();
-		BackgroundRenderer.setShaderFogColor();
+		BackgroundRenderer.clearFog();
 		RenderSystem.depthMask(false);
 
 		RenderSystem.setShaderColor(f, g, h, 1.0f);

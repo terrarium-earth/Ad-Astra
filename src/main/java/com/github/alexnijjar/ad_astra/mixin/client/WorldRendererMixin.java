@@ -38,77 +38,74 @@ import net.minecraft.world.biome.Biome;
 @Mixin(WorldRenderer.class)
 public abstract class WorldRendererMixin {
 
-	@Shadow
-	@Final
-	private MinecraftClient client;
+    @Shadow
+    @Final
+    private MinecraftClient client;
 
-	@Shadow
-	private int ticks;
+    @Shadow
+    private int ticks;
 
-	@Shadow
-	private int rainSoundTicks;
+    @Shadow
+    private int rainSoundTicks;
 
-	// Cancel the portal sound when the player falls out of orbit.
-	@Inject(method = "processWorldEvent", at = @At("HEAD"), cancellable = true)
-	public void adastra_processWorldEvent(int eventId, BlockPos pos, int data, CallbackInfo ci) {
-		if (eventId == WorldEvents.TRAVEL_THROUGH_PORTAL) {
-			MinecraftClient client = MinecraftClient.getInstance();
-			ClientPlayerEntity player = client.player;
-			// Don't player the portal sound if the player teleported to the new world.
-			if (((int) player.getPos().getY()) == AdAstra.CONFIG.rocket.atmosphereLeave) {
-				ci.cancel();
-			}
-		}
-	}
+    // Cancel the portal sound when the player falls out of orbit.
+    @Inject(method = "processWorldEvent", at = @At("HEAD"), cancellable = true)
+    public void adastra_processWorldEvent(int eventId, BlockPos pos, int data, CallbackInfo ci) {
+        if (eventId == WorldEvents.TRAVEL_THROUGH_PORTAL) {
+            MinecraftClient client = MinecraftClient.getInstance();
+            ClientPlayerEntity player = client.player;
+            // Don't player the portal sound if the player teleported to the new world.
+            if (((int) player.getPos().getY()) == AdAstra.CONFIG.rocket.atmosphereLeave) {
+                ci.cancel();
+            }
+        }
+    }
 
-	// Venus rain.
-	@Inject(method = "tickRainSplashing", at = @At("HEAD"), cancellable = true)
-	public void adastra_tickRainSplashing(Camera camera, CallbackInfo info) {
-		if(!ModUtils.isPlanet(this.client.world)) {
-			info.cancel();
-		}
-		float f = this.client.world.getRainGradient(1.0F) / (MinecraftClient.isFancyGraphicsOrBetter() ? 1.0F : 2.0F);
-		if (!(f <= 0.0F)) {
-			RandomGenerator randomGenerator = RandomGenerator.createLegacy((long) this.ticks * 312987231L);
-			WorldView worldView = this.client.world;
-			BlockPos blockPos = new BlockPos(camera.getPos());
-			BlockPos blockPos2 = null;
-			int i = (int) (100.0F * f * f) / (this.client.options.getParticles().get() == ParticlesMode.DECREASED ? 2 : 1);
+    // Venus rain.
+    @Inject(method = "tickRainSplashing", at = @At("HEAD"))
+    public void adastra_tickRainSplashing(Camera camera, CallbackInfo info) {
+        if (ModUtils.isPlanet(this.client.world)) {
+            float f = this.client.world.getRainGradient(1.0F) / (MinecraftClient.isFancyGraphicsOrBetter() ? 1.0F : 2.0F);
+            if (!(f <= 0.0F)) {
+                RandomGenerator randomGenerator = RandomGenerator.createLegacy((long) this.ticks * 312987231L);
+                WorldView worldView = this.client.world;
+                BlockPos blockPos = new BlockPos(camera.getPos());
+                BlockPos blockPos2 = null;
+                int i = (int) (100.0F * f * f) / (this.client.options.getParticles().get() == ParticlesMode.DECREASED ? 2 : 1);
 
-			for (int j = 0; j < i; ++j) {
-				int k = randomGenerator.nextInt(21) - 10;
-				int l = randomGenerator.nextInt(21) - 10;
-				BlockPos blockPos3 = worldView.getTopPosition(Heightmap.Type.MOTION_BLOCKING, blockPos.add(k, 0, l));
-				Biome biome = worldView.getBiome(blockPos3).value();
-				if (blockPos3.getY() > worldView.getBottomY() && blockPos3.getY() <= blockPos.getY() + 10 && blockPos3.getY() >= blockPos.getY() - 10 && biome.getPrecipitation() == Biome.Precipitation.RAIN && biome.doesNotSnow(blockPos3)) {
-					blockPos2 = blockPos3.down();
-					if (this.client.options.getParticles().get() == ParticlesMode.MINIMAL) {
-						break;
-					}
+                for (int j = 0; j < i; ++j) {
+                    int k = randomGenerator.nextInt(21) - 10;
+                    int l = randomGenerator.nextInt(21) - 10;
+                    BlockPos blockPos3 = worldView.getTopPosition(Heightmap.Type.MOTION_BLOCKING, blockPos.add(k, 0, l));
+                    Biome biome = worldView.getBiome(blockPos3).value();
+                    if (blockPos3.getY() > worldView.getBottomY() && blockPos3.getY() <= blockPos.getY() + 10 && blockPos3.getY() >= blockPos.getY() - 10 && biome.getPrecipitation() == Biome.Precipitation.RAIN && biome.doesNotSnow(blockPos3)) {
+                        blockPos2 = blockPos3.down();
+                        if (this.client.options.getParticles().get() == ParticlesMode.MINIMAL) {
+                            break;
+                        }
 
-					double d = randomGenerator.nextDouble();
-					double e = randomGenerator.nextDouble();
-					BlockState blockState = worldView.getBlockState(blockPos2);
-					FluidState fluidState = worldView.getFluidState(blockPos2);
-					VoxelShape voxelShape = blockState.getCollisionShape(worldView, blockPos2);
-					double g = voxelShape.getEndingCoord(Direction.Axis.Y, d, e);
-					double h = (double) fluidState.getHeight(worldView, blockPos2);
-					double m = Math.max(g, h);
-					ParticleEffect particleEffect = !fluidState.isIn(FluidTags.LAVA) && !blockState.isOf(Blocks.MAGMA_BLOCK) && !CampfireBlock.isLitCampfire(blockState) ? ParticleTypes.SMOKE : ModParticleTypes.VENUS_RAIN;
-					this.client.world.addParticle(particleEffect, (double) blockPos2.getX() + d, (double) blockPos2.getY() + m, (double) blockPos2.getZ() + e, 0.0, 0.0, 0.0);
-				}
-			}
+                        double d = randomGenerator.nextDouble();
+                        double e = randomGenerator.nextDouble();
+                        BlockState blockState = worldView.getBlockState(blockPos2);
+                        FluidState fluidState = worldView.getFluidState(blockPos2);
+                        VoxelShape voxelShape = blockState.getCollisionShape(worldView, blockPos2);
+                        double g = voxelShape.getEndingCoord(Direction.Axis.Y, d, e);
+                        double h = fluidState.getHeight(worldView, blockPos2);
+                        double m = Math.max(g, h);
+                        ParticleEffect particleEffect = !fluidState.isIn(FluidTags.LAVA) && !blockState.isOf(Blocks.MAGMA_BLOCK) && !CampfireBlock.isLitCampfire(blockState) ? ParticleTypes.SMOKE : ModParticleTypes.VENUS_RAIN;
+                        this.client.world.addParticle(particleEffect, (double) blockPos2.getX() + d, (double) blockPos2.getY() + m, (double) blockPos2.getZ() + e, 0.0, 0.0, 0.0);
+                    }
+                }
 
-			if (blockPos2 != null && randomGenerator.nextInt(3) < this.rainSoundTicks++) {
-				this.rainSoundTicks = 0;
-				if (blockPos2.getY() > blockPos.getY() + 1 && worldView.getTopPosition(Heightmap.Type.MOTION_BLOCKING, blockPos).getY() > MathHelper.floor((float) blockPos.getY())) {
-					this.client.world.playSound(blockPos2, SoundEvents.WEATHER_RAIN_ABOVE, SoundCategory.WEATHER, 0.1F, 0.5F, false);
-				} else {
-					this.client.world.playSound(blockPos2, SoundEvents.WEATHER_RAIN, SoundCategory.WEATHER, 0.2F, 1.0F, false);
-				}
-			}
-
-		}
-		return;
-	}
+                if (blockPos2 != null && randomGenerator.nextInt(3) < this.rainSoundTicks++) {
+                    this.rainSoundTicks = 0;
+                    if (blockPos2.getY() > blockPos.getY() + 1 && worldView.getTopPosition(Heightmap.Type.MOTION_BLOCKING, blockPos).getY() > MathHelper.floor((float) blockPos.getY())) {
+                        this.client.world.playSound(blockPos2, SoundEvents.WEATHER_RAIN_ABOVE, SoundCategory.WEATHER, 0.1F, 0.5F, false);
+                    } else {
+                        this.client.world.playSound(blockPos2, SoundEvents.WEATHER_RAIN, SoundCategory.WEATHER, 0.2F, 1.0F, false);
+                    }
+                }
+            }
+        }
+    }
 }

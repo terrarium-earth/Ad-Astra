@@ -131,7 +131,7 @@ public class ModUtils {
 	}
 
 	/**
-	 * A simplified version of {@link #teleportToWorld(RegistryKey, World)} for teleporting players.
+	 * A simplified version of {@link #teleportToWorld(RegistryKey, Entity)} for teleporting players.
 	 *
 	 * @param targetWorld The world to teleport the player at
 	 * @param player      The player to teleport
@@ -142,7 +142,7 @@ public class ModUtils {
 		ChunkPos chunkPos = new ChunkPos(new BlockPos(targetPos.getX(), targetPos.getY(), targetPos.getZ()));
 		world.getChunkManager().addTicket(ChunkTicketType.POST_TELEPORT, chunkPos, 1, player.getId());
 		TeleportTarget target = new TeleportTarget(targetPos, player.getVelocity(), player.getYaw(), player.getPitch());
-		player = FabricDimensions.teleport(player, world, target);
+		FabricDimensions.teleport(player, world, target);
 	}
 
 	/**
@@ -150,7 +150,6 @@ public class ModUtils {
 	 *
 	 * @param rocket         The rocket to create a lander from
 	 * @param targetWorld    The world to spawn the lander in
-	 * @param targetPosition The position to spawn the lander at
 	 * @return A spawned lander entity at the same position as the rocket and with the same inventory
 	 */
 	public static LanderEntity createLander(RocketEntity rocket, ServerWorld targetWorld, Vec3d target) {
@@ -216,7 +215,7 @@ public class ModUtils {
 		}
 
 		if (isOrbitWorld(world)) {
-			return 3.0f / VANILLA_GRAVITY;
+			return AdAstra.CONFIG.general.orbitGravity / VANILLA_GRAVITY;
 		}
 		return AdAstra.planets.stream().filter(p -> p.world().equals(world.getRegistryKey())).map(Planet::gravity).findFirst().orElse(VANILLA_GRAVITY) / VANILLA_GRAVITY;
 	}
@@ -230,7 +229,7 @@ public class ModUtils {
 	 *
 	 * @return The temperature of the world, or 20° for dimensions without a defined temperature
 	 */
-	public static final float getWorldTemperature(World world) {
+	public static float getWorldTemperature(World world) {
 		if (isOrbitWorld(world)) {
 			return ORBIT_TEMPERATURE;
 		}
