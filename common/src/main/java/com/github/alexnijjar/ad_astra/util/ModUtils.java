@@ -131,12 +131,6 @@ public class ModUtils {
 		}
 	}
 
-	/**
-	 * A simplified version of {@link #teleportToWorld(RegistryKey, World)} for teleporting players.
-	 *
-	 * @param targetWorld The world to teleport the player at
-	 * @param player      The player to teleport
-	 */
 	public static void teleportPlayer(RegistryKey<World> targetWorld, ServerPlayerEntity player) {
 		ServerWorld world = player.getServer().getWorld(targetWorld);
 		Vec3d targetPos = new Vec3d(player.getBlockPos().getX(), AdAstra.CONFIG.rocket.atmosphereLeave, player.getBlockPos().getZ());
@@ -151,7 +145,7 @@ public class ModUtils {
 	 *
 	 * @param rocket         The rocket to create a lander from
 	 * @param targetWorld    The world to spawn the lander in
-	 * @param targetPosition The position to spawn the lander at
+	 * @param target The position to spawn the lander at
 	 * @return A spawned lander entity at the same position as the rocket and with the same inventory
 	 */
 	public static LanderEntity createLander(RocketEntity rocket, ServerWorld targetWorld, Vec3d target) {

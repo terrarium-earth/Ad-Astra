@@ -26,6 +26,7 @@ import com.github.alexnijjar.ad_astra.entities.vehicles.RoverEntity;
 
 import dev.architectury.registry.level.entity.EntityAttributeRegistry;
 import dev.architectury.registry.registries.DeferredRegister;
+import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.SpawnRestriction;
@@ -36,22 +37,22 @@ public class ModEntityTypes {
 	public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(AdAstra.MOD_ID, Registry.ENTITY_TYPE_KEY);
 
 	// Mobs
-	public static final Supplier<EntityType<LunarianEntity>> LUNARIAN = ENTITY_TYPES.register("lunarian", () -> EntityType.Builder.create(LunarianEntity::new, SpawnGroup.CREATURE).setDimensions(0.75f, 2.5f).build("lunarian"));
-	public static final Supplier<EntityType<CorruptedLunarianEntity>> CORRUPTED_LUNARIAN = ENTITY_TYPES.register("corrupted_lunarian", () -> EntityType.Builder.create(CorruptedLunarianEntity::new, SpawnGroup.MONSTER).setDimensions(0.6f, 2.4f).build("corrputed_lunarian"));
+	public static final RegistrySupplier<EntityType<LunarianEntity>> LUNARIAN = ENTITY_TYPES.register("lunarian", () -> EntityType.Builder.create(LunarianEntity::new, SpawnGroup.CREATURE).setDimensions(0.75f, 2.5f).build("lunarian"));
+	public static final RegistrySupplier<EntityType<CorruptedLunarianEntity>> CORRUPTED_LUNARIAN = ENTITY_TYPES.register("corrupted_lunarian", () -> EntityType.Builder.create(CorruptedLunarianEntity::new, SpawnGroup.MONSTER).setDimensions(0.6f, 2.4f).build("corrputed_lunarian"));
 
-	public static final Supplier<EntityType<StarCrawlerEntity>> STAR_CRAWLER = ENTITY_TYPES.register("star_crawler", () -> EntityType.Builder.create(StarCrawlerEntity::new, SpawnGroup.MONSTER).setDimensions(1.3f, 1.0f).build("star_crawler"));
-	public static final Supplier<EntityType<MartianRaptorEntity>> MARTIAN_RAPTOR = ENTITY_TYPES.register("martian_raptor", () -> EntityType.Builder.create(MartianRaptorEntity::new, SpawnGroup.MONSTER).setDimensions(0.75f, 2.0f).build("martian_raptor"));
+	public static final RegistrySupplier<EntityType<StarCrawlerEntity>> STAR_CRAWLER = ENTITY_TYPES.register("star_crawler", () -> EntityType.Builder.create(StarCrawlerEntity::new, SpawnGroup.MONSTER).setDimensions(1.3f, 1.0f).build("star_crawler"));
+	public static final RegistrySupplier<EntityType<MartianRaptorEntity>> MARTIAN_RAPTOR = ENTITY_TYPES.register("martian_raptor", () -> EntityType.Builder.create(MartianRaptorEntity::new, SpawnGroup.MONSTER).setDimensions(0.75f, 2.0f).build("martian_raptor"));
 
-	public static final Supplier<EntityType<PygroEntity>> PYGRO = ENTITY_TYPES.register("pygro", () -> EntityType.Builder.create(PygroEntity::new, SpawnGroup.MONSTER).setDimensions(0.6f, 1.8f).build("pygro"));
-	public static final Supplier<EntityType<ZombifiedPygroEntity>> ZOMBIFIED_PYGRO = ENTITY_TYPES.register("zombified_pygro", () -> EntityType.Builder.create(ZombifiedPygroEntity::new, SpawnGroup.MONSTER).setDimensions(0.6f, 1.8f).makeFireImmune().build("zombified_pygro"));
-	public static final Supplier<EntityType<PygroBruteEntity>> PYGRO_BRUTE = ENTITY_TYPES.register("pygro_brute", () -> EntityType.Builder.create(PygroBruteEntity::new, SpawnGroup.MONSTER).setDimensions(0.6f, 1.8f).makeFireImmune().build("pygro_brute"));
-	public static final Supplier<EntityType<MoglerEntity>> MOGLER = ENTITY_TYPES.register("mogler", () -> EntityType.Builder.create(MoglerEntity::new, SpawnGroup.MONSTER).setDimensions(1.4f, 1.4f).makeFireImmune().build("mogler"));
-	public static final Supplier<EntityType<ZombifiedMoglerEntity>> ZOMBIFIED_MOGLER = ENTITY_TYPES.register("zombified_mogler", () -> EntityType.Builder.create(ZombifiedMoglerEntity::new, SpawnGroup.MONSTER).setDimensions(1.4f, 1.4f).makeFireImmune().build("zombified_mogler"));
+	public static final RegistrySupplier<EntityType<PygroEntity>> PYGRO = ENTITY_TYPES.register("pygro", () -> EntityType.Builder.create(PygroEntity::new, SpawnGroup.MONSTER).setDimensions(0.6f, 1.8f).build("pygro"));
+	public static final RegistrySupplier<EntityType<ZombifiedPygroEntity>> ZOMBIFIED_PYGRO = ENTITY_TYPES.register("zombified_pygro", () -> EntityType.Builder.create(ZombifiedPygroEntity::new, SpawnGroup.MONSTER).setDimensions(0.6f, 1.8f).makeFireImmune().build("zombified_pygro"));
+	public static final RegistrySupplier<EntityType<PygroBruteEntity>> PYGRO_BRUTE = ENTITY_TYPES.register("pygro_brute", () -> EntityType.Builder.create(PygroBruteEntity::new, SpawnGroup.MONSTER).setDimensions(0.6f, 1.8f).makeFireImmune().build("pygro_brute"));
+	public static final RegistrySupplier<EntityType<MoglerEntity>> MOGLER = ENTITY_TYPES.register("mogler", () -> EntityType.Builder.create(MoglerEntity::new, SpawnGroup.MONSTER).setDimensions(1.4f, 1.4f).makeFireImmune().build("mogler"));
+	public static final RegistrySupplier<EntityType<ZombifiedMoglerEntity>> ZOMBIFIED_MOGLER = ENTITY_TYPES.register("zombified_mogler", () -> EntityType.Builder.create(ZombifiedMoglerEntity::new, SpawnGroup.MONSTER).setDimensions(1.4f, 1.4f).makeFireImmune().build("zombified_mogler"));
 
-	public static final Supplier<EntityType<LunarianWanderingTraderEntity>> LUNARIAN_WANDERING_TRADER = ENTITY_TYPES.register("lunarian_wandering_trader", () -> EntityType.Builder.create(LunarianWanderingTraderEntity::new, SpawnGroup.CREATURE).setDimensions(0.6f, 1.95f).makeFireImmune().build("lunarian_wandering_trader"));
+	public static final RegistrySupplier<EntityType<LunarianWanderingTraderEntity>> LUNARIAN_WANDERING_TRADER = ENTITY_TYPES.register("lunarian_wandering_trader", () -> EntityType.Builder.create(LunarianWanderingTraderEntity::new, SpawnGroup.CREATURE).setDimensions(0.6f, 1.95f).makeFireImmune().build("lunarian_wandering_trader"));
 
-	public static final Supplier<EntityType<SulfurCreeperEntity>> SULFUR_CREEPER = ENTITY_TYPES.register("sulfur_creeper", () -> EntityType.Builder.create(SulfurCreeperEntity::new, SpawnGroup.MONSTER).setDimensions(0.6f, 1.7f).maxTrackingRange(8).makeFireImmune().build("sulfur_creeper"));
-	public static final Supplier<EntityType<GlacianRamEntity>> GLACIAN_RAM = ENTITY_TYPES.register("glacian_ram", () -> EntityType.Builder.create(GlacianRamEntity::new, SpawnGroup.CREATURE).setDimensions(0.9f, 1.3f).maxTrackingRange(10).build("glacian_ram"));
+	public static final RegistrySupplier<EntityType<SulfurCreeperEntity>> SULFUR_CREEPER = ENTITY_TYPES.register("sulfur_creeper", () -> EntityType.Builder.create(SulfurCreeperEntity::new, SpawnGroup.MONSTER).setDimensions(0.6f, 1.7f).maxTrackingRange(8).makeFireImmune().build("sulfur_creeper"));
+	public static final RegistrySupplier<EntityType<GlacianRamEntity>> GLACIAN_RAM = ENTITY_TYPES.register("glacian_ram", () -> EntityType.Builder.create(GlacianRamEntity::new, SpawnGroup.CREATURE).setDimensions(0.9f, 1.3f).maxTrackingRange(10).build("glacian_ram"));
 
 	// Machines
 	public static final Supplier<EntityType<RocketEntityTier1>> TIER_1_ROCKET = ENTITY_TYPES.register("tier_1_rocket", () -> EntityType.Builder.create(RocketEntityTier1::new, SpawnGroup.MISC).setDimensions(1.1f, 4.6f).makeFireImmune().build("tier_1_rocket"));

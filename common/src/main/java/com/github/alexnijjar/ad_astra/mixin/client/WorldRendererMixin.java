@@ -1,16 +1,7 @@
 package com.github.alexnijjar.ad_astra.mixin.client;
 
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
 import com.github.alexnijjar.ad_astra.AdAstra;
-import com.github.alexnijjar.ad_astra.client.registry.ClientModSkies;
 import com.github.alexnijjar.ad_astra.registry.ModParticleTypes;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CampfireBlock;
@@ -18,9 +9,8 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.option.ParticlesMode;
 import net.minecraft.client.render.Camera;
-import net.minecraft.client.render.LightmapTextureManager;
 import net.minecraft.client.render.WorldRenderer;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
@@ -30,13 +20,18 @@ import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Matrix4f;
 import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.WorldEvents;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.biome.Biome;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(WorldRenderer.class)
 public abstract class WorldRendererMixin {
@@ -51,9 +46,12 @@ public abstract class WorldRendererMixin {
 	@Shadow
 	private int rainSoundTicks;
 
+	@Shadow
+	private ClientWorld world;
+
 	// Cancel the portal sound when the player falls out of orbit.
 	@Inject(method = "processWorldEvent", at = @At("HEAD"), cancellable = true)
-	public void adastra_processWorldEvent(int eventId, BlockPos pos, int data, CallbackInfo ci) {
+	public void processWorldEvent(int eventId, BlockPos pos, int data, CallbackInfo ci) {
 		if (eventId == WorldEvents.TRAVEL_THROUGH_PORTAL) {
 			MinecraftClient client = MinecraftClient.getInstance();
 			ClientPlayerEntity player = client.player;
@@ -66,7 +64,7 @@ public abstract class WorldRendererMixin {
 
 	// Venus rain.
 	@Inject(method = "tickRainSplashing", at = @At("HEAD"), cancellable = true)
-	public void adastra_tickRainSplashing(Camera camera, CallbackInfo info) {
+	public void tickRainSplashing(Camera camera, CallbackInfo info) {
 		float f = this.client.world.getRainGradient(1.0F) / (MinecraftClient.isFancyGraphicsOrBetter() ? 1.0F : 2.0F);
 		if (!(f <= 0.0F)) {
 			RandomGenerator randomGenerator = RandomGenerator.createLegacy((long) this.ticks * 312987231L);
@@ -113,39 +111,39 @@ public abstract class WorldRendererMixin {
 	}
 
 
-	@Inject(at = @At("HEAD"), method = "renderWeather", cancellable = true)
-	private void renderWeather(LightmapTextureManager manager, float tickDelta, double x, double y, double z, CallbackInfo info) {
-		if (this.client.world != null) {
-			ClientModSkies.WeatherRenderer renderer = ClientModSkies.WEATHER_RENDERERS.put(world.getRegistryKey());
-
-			if (renderer != null) {
-				renderer.render(context);
-				info.cancel();
-			}
-		}
-	}
-
-	@Inject(at = @At("HEAD"), method = "renderClouds(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/util/math/Matrix4f;FDDD)V", cancellable = true)
-	private void renderCloud(MatrixStack matrices, Matrix4f matrix4f, float tickDelta, double cameraX, double cameraY, double cameraZ, CallbackInfo info) {
-		if (this.client.world != null) {
-			ClientModSkies.CloudRenderer renderer = ClientModSkies.CLOUD_RENDERERS.put(world.getRegistryKey());
-
-			if (renderer != null) {
-				renderer.render(context);
-				info.cancel();
-			}
-		}
-	}
-
-	@Inject(at = @At(value = "INVOKE", target = "Ljava/lang/Runnable;run()V", shift = At.Shift.AFTER, ordinal = 0), method = "renderSky(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/util/math/Matrix4f;FLnet/minecraft/client/render/Camera;ZLjava/lang/Runnable;)V", cancellable = true)
-	private void renderSky(MatrixStack matrices, Matrix4f matrix4f, float tickDelta, Camera camera, boolean bl, Runnable runnable, CallbackInfo info) {
-		if (this.client.world != null) {
-			ClientModSkies.SkyRenderer renderer = ClientModSkies.SKY_RENDERERS.put(world.getRegistryKey());
-
-			if (renderer != null) {
-				renderer.render(context);
-				info.cancel();
-			}
-		}
-	}
+//	@Inject(at = @At("HEAD"), method = "renderWeather", cancellable = true)
+//	private void renderWeather(LightmapTextureManager manager, float tickDelta, double x, double y, double z, CallbackInfo info) {
+//		if (this.client.world != null) {
+//			ClientModSkies.WeatherRenderer renderer = ClientModSkies.WEATHER_RENDERERS.put(world.getRegistryKey());
+//
+//			if (renderer != null) {
+//				renderer.render(context);
+//				info.cancel();
+//			}
+//		}
+//	}
+//
+//	@Inject(at = @At("HEAD"), method = "renderClouds(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/util/math/Matrix4f;FDDD)V", cancellable = true)
+//	private void renderCloud(MatrixStack matrices, Matrix4f matrix4f, float tickDelta, double cameraX, double cameraY, double cameraZ, CallbackInfo info) {
+//		if (this.client.world != null) {
+//			ClientModSkies.CloudRenderer renderer = ClientModSkies.CLOUD_RENDERERS.put(world.getRegistryKey());
+//
+//			if (renderer != null) {
+//				renderer.render(context);
+//				info.cancel();
+//			}
+//		}
+//	}
+//
+//	@Inject(at = @At(value = "INVOKE", target = "Ljava/lang/Runnable;run()V", shift = At.Shift.AFTER, ordinal = 0), method = "renderSky(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/util/math/Matrix4f;FLnet/minecraft/client/render/Camera;ZLjava/lang/Runnable;)V", cancellable = true)
+//	private void renderSky(MatrixStack matrices, Matrix4f matrix4f, float tickDelta, Camera camera, boolean bl, Runnable runnable, CallbackInfo info) {
+//		if (this.client.world != null) {
+//			ClientModSkies.SkyRenderer renderer = ClientModSkies.SKY_RENDERERS.put(world.getRegistryKey());
+//
+//			if (renderer != null) {
+//				renderer.render(context);
+//				info.cancel();
+//			}
+//		}
+//	}
 }

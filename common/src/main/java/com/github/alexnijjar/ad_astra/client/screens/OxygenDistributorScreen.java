@@ -1,8 +1,5 @@
 package com.github.alexnijjar.ad_astra.client.screens;
 
-import java.awt.Rectangle;
-import java.util.Arrays;
-
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.blocks.machines.entity.FluidMachineBlockEntity;
 import com.github.alexnijjar.ad_astra.blocks.machines.entity.OxygenDistributorBlockEntity;
@@ -14,16 +11,18 @@ import com.github.alexnijjar.ad_astra.data.ButtonColour;
 import com.github.alexnijjar.ad_astra.networking.NetworkHandling;
 import com.github.alexnijjar.ad_astra.networking.packets.client.ToggleDistributorPacket;
 import com.github.alexnijjar.ad_astra.screen.handler.OxygenDistributorScreenHandler;
-import com.github.alexnijjar.ad_astra.util.FluidUtils;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.github.alexnijjar.ad_astra.util.OxygenUtils;
-
+import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+
+import java.awt.*;
+import java.util.Arrays;
 
 @Environment(EnvType.CLIENT)
 public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistributorScreenHandler> {
@@ -139,7 +138,7 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
 
 		long oxygenUsagePerTick = entity.getFluidToExtract(oxygenBlocksCount, true);
 
-		float oxygenUsageRounded = FluidUtils.dropletsToMillibucketsFloat(oxygenUsagePerTick);
+		float oxygenUsageRounded = FluidHooks.toMillibuckets(oxygenUsagePerTick);
 		oxygenUsageRounded = (float) (Math.round(oxygenUsageRounded * 1000.0) / 1000.0);
 
 		// Energy per tick text

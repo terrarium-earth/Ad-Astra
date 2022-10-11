@@ -28,12 +28,12 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<Pl
 
     @Override
     public boolean canTakeFrom(PlatformEnergyManager source) {
-        return source.supportsExtraction();
+        return source.extract(1, true) == 1;
     }
 
     @Override
     public boolean canInsertInto(PlatformEnergyManager consumer) {
-        return consumer.supportsInsertion();
+        return consumer.insert(1, true) == 1;
     }
 
     @Override

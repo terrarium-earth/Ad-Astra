@@ -79,20 +79,18 @@ public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
 
 	@Override
 	public void tick() {
-		super.tick();
 		if (!this.world.isClient) {
 			ItemStack insertSlot = this.getItems().get(0);
 			ItemStack extractSlot = this.getItems().get(1);
 			ItemStack outputInsertSlot = this.getItems().get(2);
 			ItemStack outputExtractSlot = this.getItems().get(3);
 
-			if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxCount()) {
-				ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.world);
-				FluidUtils.insertFluidIntoTank(this, getInputTank(), 0, 1, f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.world).stream().anyMatch(r -> r.matches(f.getFluid())));
+			if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxCount() && FluidHooks.isFluidContainingItem(insertSlot)) {
+				FluidUtils.insertFluidFromItem(insertSlot, 0, this, f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.world).stream().anyMatch(r -> r.matches(f.getFluid())));
 			}
 
 			if (!outputInsertSlot.isEmpty() && outputExtractSlot.getCount() < outputExtractSlot.getMaxCount()) {
-				FluidUtils.extractFluidFromTank(this, getOutputTank(), 2, 3);
+				FluidUtils.extractFluidFromItem(outputExtractSlot, 0, this, f -> true);
 			}
 
 			if (this.hasEnergy()) {

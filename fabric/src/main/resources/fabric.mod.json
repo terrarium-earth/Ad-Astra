@@ -24,9 +24,20 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.github.ad_astra.fabric.AdAstraFabric"
+      "com.github.alexnijjar.ad_astra.fabric.AdAstraFabric"
+    ],
+    "client": [
+      "com.github.alexnijjar.ad_astra.client.fabric.AdAstraClientFabric",
+      "com.github.alexnijjar.ad_astra.AdAstra::postInit"
+    ],
+    "server": [
+      "com.github.alexnijjar.ad_astra.AdAstra::postInit"
     ]
   },
+  "mixins": [
+    "ad_astra.mixins.json",
+    "ad_astra-common.mixins.json"
+  ],
   "depends": {
     "fabric": "*",
     "minecraft": ">=1.19",

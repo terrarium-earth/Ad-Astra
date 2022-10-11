@@ -39,7 +39,7 @@ public class CryoFreezerScreen extends AbstractMachineScreen<CryoFreezerScreenHa
 		CryoFreezerBlockEntity entity = (CryoFreezerBlockEntity) blockEntity;
 
 		GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.blockEntity.getEnergyStorage().getStoredEnergy(), this.blockEntity.getMaxGeneration());
-		GuiUtil.drawFluidTank(matrices, this.x + INPUT_TANK_LEFT, this.y + INPUT_TANK_TOP, entity.getInputTank().getFluidAmount(), entity.getInputTankCapacity(), entity.getInputTank());
+		GuiUtil.drawFluidTank(matrices, this.x + INPUT_TANK_LEFT, this.y + INPUT_TANK_TOP, entity.tank.getFluids().get(0).getFluidAmount(), entity.tank.getTankCapacity(0), entity.tank.getFluids().get(0));
 		GuiUtil.drawSnowflake(matrices, this.x + SNOWFLAKE_LEFT, this.y + SNOWFLAKE_TOP, entity.getCookTime(), entity.getCookTimeTotal());
 	}
 
@@ -54,7 +54,7 @@ public class CryoFreezerScreen extends AbstractMachineScreen<CryoFreezerScreenHa
 		}
 
 		if (GuiUtil.isHovering(this.getOutputTankBounds(), mouseX, mouseY)) {
-			GuiUtil.drawTankTooltip(this, matrices, entity.getInputTank(), entity.getInputTankCapacity(), mouseX, mouseY);
+			GuiUtil.drawTankTooltip(this, matrices, entity.tank.getFluids().get(0), entity.tank.getTankCapacity(0), mouseX, mouseY);
 		}
 	}
 

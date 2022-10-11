@@ -1,33 +1,22 @@
 package com.github.alexnijjar.ad_astra;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import com.github.alexnijjar.ad_astra.networking.NetworkHandling;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.github.alexnijjar.ad_astra.config.AdAstraConfig;
 import com.github.alexnijjar.ad_astra.data.Planet;
 import com.github.alexnijjar.ad_astra.data.PlanetData;
-import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
-import com.github.alexnijjar.ad_astra.registry.ModCommands;
-import com.github.alexnijjar.ad_astra.registry.ModCriteria;
-import com.github.alexnijjar.ad_astra.registry.ModEntityTypes;
-import com.github.alexnijjar.ad_astra.registry.ModFeatures;
-import com.github.alexnijjar.ad_astra.registry.ModFluids;
-import com.github.alexnijjar.ad_astra.registry.ModItems;
-import com.github.alexnijjar.ad_astra.registry.ModPaintings;
-import com.github.alexnijjar.ad_astra.registry.ModParticleTypes;
-import com.github.alexnijjar.ad_astra.registry.ModRecipes;
-import com.github.alexnijjar.ad_astra.registry.ModScreenHandlers;
-import com.github.alexnijjar.ad_astra.registry.ModSoundEvents;
-import com.github.alexnijjar.ad_astra.registry.ModStructures;
-
+import com.github.alexnijjar.ad_astra.networking.NetworkHandling;
+import com.github.alexnijjar.ad_astra.registry.*;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
+import net.minecraft.item.AxeItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ToolMaterials;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class AdAstra {
 	public static final String MOD_ID = "ad_astra";
@@ -46,12 +35,13 @@ public class AdAstra {
 		CONFIG = AutoConfig.getConfigHolder(AdAstraConfig.class).getConfig();
 
 		// Registry
-		ModFluids.FLUIDS.register();
+		ModFluids.register();
+		ModBlocks.register();
 		ModItems.register();
 		ModBlockEntities.register();
 		ModRecipes.register();
 		ModEntityTypes.register();
-		ModScreenHandlers.SCREEN_HANDLERS.register();
+		ModScreenHandlers.register();
 		ModCommands.register();
 		ModSoundEvents.register();
 		ModParticleTypes.register();
@@ -68,7 +58,13 @@ public class AdAstra {
 		NetworkHandling.register();
 
 		ModCriteria.register();
+	}
 
-		AdAstra.LOGGER.info("Ad Astra Initialized! 🚀");
+	public static void postInit() {
+		new AxeItem(ToolMaterials.GOLD, 0, 0, new Item.Settings()) {
+			static {
+				STRIPPED_BLOCKS.put(ModBlocks.GLACIAN_LOG.get(), ModBlocks.STRIPPED_GLACIAN_LOG.get());
+			}
+		};
 	}
 }
