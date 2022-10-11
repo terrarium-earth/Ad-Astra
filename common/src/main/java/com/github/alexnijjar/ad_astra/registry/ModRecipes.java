@@ -48,10 +48,11 @@ public class ModRecipes {
 		GENERATING_RECIPE = RECIPE_TYPES.register("generating", () -> new ModRecipeType<>(new ModIdentifier("generating")));
 		COMPRESSING_RECIPE = RECIPE_TYPES.register("compressing", () -> new ModRecipeType<>(new ModIdentifier("compressing")));
 		SPACE_STATION_RECIPE = RECIPE_TYPES.register("space_station", () -> new ModRecipeType<>(new ModIdentifier("space_station")));
-		FUEL_CONVERSION_RECIPE = RECIPE_TYPES.register("nasa_workbench", () -> new ModRecipeType<>(new ModIdentifier("nasa_workbench")));
-		GENERATING_RECIPE = RECIPE_TYPES.register("fuel_conversion", () -> new ModRecipeType<>(new ModIdentifier("generating")));
+		NASA_WORKBENCH_RECIPE = RECIPE_TYPES.register("nasa_workbench", () -> new ModRecipeType<>(new ModIdentifier("nasa_workbench")));
+		FUEL_CONVERSION_RECIPE = RECIPE_TYPES.register("fuel_conversion", () -> new ModRecipeType<>(new ModIdentifier("nasa_workbench")));
 		OXYGEN_CONVERSION_RECIPE = RECIPE_TYPES.register("oxygen_conversion", () -> new ModRecipeType<>(new ModIdentifier("fuel_conversion")));
 		CRYO_FUEL_CONVERSION_RECIPE = RECIPE_TYPES.register("cryo_fuel_conversion", () -> new ModRecipeType<>(new ModIdentifier("cryo_fuel_conversion")));
+		RECIPE_TYPES.register();
 
 		// Recipe Serializers
 		HAMMER_SERIALIZER = RECIPE_SERIALIZERS.register("hammering", () -> new HammerShapelessRecipe.Serializer());
@@ -62,8 +63,6 @@ public class ModRecipes {
 		FUEL_CONVERSION_SERIALIZER = RECIPE_SERIALIZERS.register("fuel_conversion", () -> new CodecRecipeSerializer<>(FUEL_CONVERSION_RECIPE.get(), FluidConversionRecipe::codec));
 		OXYGEN_CONVERSION_SERIALIZER = RECIPE_SERIALIZERS.register("oxygen_conversion", () -> new CodecRecipeSerializer<>(OXYGEN_CONVERSION_RECIPE.get(), OxygenConversionRecipe::oxygenCodec));
 		CRYO_FUEL_CONVERSION_SERIALIZER = RECIPE_SERIALIZERS.register("cryo_fuel_conversion", () -> new CodecRecipeSerializer<>(CRYO_FUEL_CONVERSION_RECIPE.get(), CryoFuelConversionRecipe::codec));
-
-		RECIPE_TYPES.register();
 		RECIPE_SERIALIZERS.register();
 	}
 }

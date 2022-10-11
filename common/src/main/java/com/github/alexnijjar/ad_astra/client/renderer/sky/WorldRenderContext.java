@@ -16,25 +16,19 @@
 
 package com.github.alexnijjar.ad_astra.client.renderer.sky;
 
-import org.jetbrains.annotations.Nullable;
-
 import com.mojang.blaze3d.vertex.VertexConsumer;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.render.Camera;
-import net.minecraft.client.render.Frustum;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.render.LightmapTextureManager;
-import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Matrix4f;
-import net.minecraft.util.profiler.Profiler;
 
 /**
  * Except as noted below, the properties exposed here match the parameters passed to
@@ -53,10 +47,6 @@ public interface WorldRenderContext {
 
 	float tickDelta();
 
-	long limitTime();
-
-	boolean blockOutlines();
-
 	Camera camera();
 
 	GameRenderer gameRenderer();
@@ -73,13 +63,6 @@ public interface WorldRenderContext {
 	ClientWorld world();
 
 	/**
-	 * Convenient access to game performance profiler.
-	 *
-	 * @return the active profiler
-	 */
-	Profiler profiler();
-
-	/**
 	 * Test to know if "fabulous" graphics mode is enabled.
 	 *
 	 * <p>Use this for renders that need to render on top of all translucency to activate or deactivate different
@@ -93,47 +76,15 @@ public interface WorldRenderContext {
 	boolean advancedTranslucency();
 
 	/**
-	 * The {@code VertexConsumerProvider} instance being used by the world renderer for most non-terrain renders.
-	 * Generally this will be better for most use cases because quads for the same layer can be buffered
-	 * incrementally and then drawn all at once by the world renderer.
-	 *
-	 * <p>IMPORTANT - all vertex coordinates sent to consumers should be relative to the camera to
-	 * be consistent with other quads emitted by the world renderer and other mods.  If this isn't
-	 * possible, caller should use a separate "immediate" instance.
-	 *
-	 * <p>This property is {@code null} before {@link WorldRenderEvents#BEFORE_ENTITIES} and after
-	 * {@link WorldRenderEvents#BEFORE_DEBUG_RENDER} because the consumer buffers are not available before or
-	 * drawn after that in vanilla world rendering.  Renders that cannot draw in one of the supported events
-	 * must be drawn directly to the frame buffer, preferably in {@link WorldRenderEvents#LAST} to avoid being
-	 * overdrawn or cleared.
-	 */
-	@Nullable VertexConsumerProvider consumers();
-
-	/**
-	 * View frustum, after it is initialized. Will be {@code null} during
-	 * {@link WorldRenderEvents#START}.
-	 */
-	@Nullable Frustum frustum();
-
-	/**
 	 * Used in {@code BLOCK_OUTLINE} to convey the parameters normally sent to
 	 * {@code WorldRenderer.drawBlockOutline}.
 	 */
 	@Environment(EnvType.CLIENT)
 	interface BlockOutlineContext {
-		/**
-		 * @deprecated Use {@link #consumers()} directly.
-		 */
 		@Deprecated
 		VertexConsumer vertexConsumer();
 
 		Entity entity();
-
-		double cameraX();
-
-		double cameraY();
-
-		double cameraZ();
 
 		BlockPos blockPos();
 

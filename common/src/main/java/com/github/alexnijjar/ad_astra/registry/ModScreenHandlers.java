@@ -39,4 +39,8 @@ public class ModScreenHandlers {
 	public static final Supplier<ScreenHandlerType<LanderScreenHandler>> LANDER_SCREEN_HANDLER = SCREEN_HANDLERS.register("lander_screen_handler", () -> RegistryHelpers.createMenuType(LanderScreenHandler::new));
 
 	public static final Supplier<ScreenHandlerType<PlanetSelectionScreenHandler>> PLANET_SELECTION_SCREEN_HANDLER = SCREEN_HANDLERS.register("planet_selection_screen_handler", () -> RegistryHelpers.createMenuType((syncId, playerInventory, buf) -> new PlanetSelectionScreenHandler(syncId, playerInventory.player, buf)));
+
+	public static void register() {
+		SCREEN_HANDLERS.register();
+	}
 }

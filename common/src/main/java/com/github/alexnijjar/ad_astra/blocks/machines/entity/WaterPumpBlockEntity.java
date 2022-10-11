@@ -1,5 +1,8 @@
 package com.github.alexnijjar.ad_astra.blocks.machines.entity;
 
+import com.github.alexnijjar.ad_astra.container.ExportingFluidTank;
+import earth.terrarium.botarium.api.fluid.*;
+import net.minecraft.fluid.FluidState;
 import org.jetbrains.annotations.Nullable;
 
 import com.github.alexnijjar.ad_astra.AdAstra;
@@ -9,9 +12,6 @@ import com.github.alexnijjar.ad_astra.registry.ModParticleTypes;
 import com.github.alexnijjar.ad_astra.screen.handler.WaterPumpScreenHandler;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
 
-import earth.terrarium.botarium.api.fluid.FluidHolder;
-import earth.terrarium.botarium.api.fluid.FluidHooks;
-import earth.terrarium.botarium.api.fluid.PlatformFluidHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FluidBlock;
@@ -24,24 +24,14 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 
-public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
+public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements FluidHoldingBlock {
 
-	public static final Direction[] INSERT_DIRECTIONS = { Direction.UP, Direction.SOUTH };
+	public final ExportingFluidTank tank = new ExportingFluidTank(this, AdAstra.CONFIG.waterPump.tankBuckets, 1, (amount, fluid) -> true);
 
 	private long waterExtracted;
 
 	public WaterPumpBlockEntity(BlockPos blockPos, BlockState blockState) {
 		super(ModBlockEntities.WATER_PUMP.get(), blockPos, blockState);
-	}
-
-	@Override
-	public long getInputTankCapacity() {
-		return FluidHooks.buckets(AdAstra.CONFIG.waterPump.tankBuckets);
-	}
-
-	@Override
-	public long getOutputTankCapacity() {
-		return 0;
 	}
 
 	@Override
@@ -84,12 +74,11 @@ public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
 
 	@Override
 	public void tick() {
-		super.tick();
-		if (!this.world.isClient) {
-			FluidHolder waterFluid = FluidHolder.of(Fluids.WATER);
-			BlockState water = this.world.getBlockState(this.getPos().down());
-			if (getInputTank().getFluidAmount() < this.getInputTankCapacity()) {
-				if (water.isOf(Blocks.WATER) && water.get(FluidBlock.LEVEL) == 0) {
+		if (!this.getWorld().isClient) {
+			FluidHolder waterFluid = FluidHooks.newFluidHolder(Fluids.WATER, AdAstra.CONFIG.waterPump.transferPerTick, null);
+			FluidState water = this.world.getFluidState(this.getPos().down());
+			if (tank.getFluids().get(0).getFluidAmount() < tank.getTankCapacity(0)) {
+				if (water.isOf(Fluids.WATER) && water.get(FluidBlock.LEVEL) == 0) {
 
 					// Drain the water block and add it to the tank.
 					if (!this.getCachedState().get(AbstractMachineBlock.POWERED) && this.hasEnergy()) {
@@ -97,10 +86,7 @@ public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
 						ModUtils.spawnForcedParticles((ServerWorld) this.world, ModParticleTypes.OXYGEN_BUBBLE.get(), this.getPos().getX() + 0.5, this.getPos().getY() - 0.5, this.getPos().getZ() + 0.5, 1, 0.0, 0.0, 0.0, 0.01);
 						this.drainEnergy();
 						waterExtracted += AdAstra.CONFIG.waterPump.transferPerTick;
-						try (Transaction transaction = Transaction.openOuter()) {
-							this.inputTank.insert(waterFluid, AdAstra.CONFIG.waterPump.transferPerTick, transaction);
-							transaction.commit();
-						}
+						tank.insertFluid(waterFluid, false);
 					} else {
 						this.setActive(false);
 					}
@@ -118,22 +104,20 @@ public class WaterPumpBlockEntity extends FluidMachineBlockEntity {
 			}
 
 			if (this.hasEnergy()) {
-				if (getOutputTank().getFluidAmount() < this.getOutputTankCapacity()) {
-					this.drainEnergy();
-				}
 				// Insert the fluid into nearby tanks.
 				for (Direction direction : new Direction[] { Direction.UP, this.getCachedState().get(AbstractMachineBlock.FACING) }) {
-					PlatformFluidHandler storage = FluidHooks.getBlockFluidManager(world.getBlockEntity(this.pos.offset(direction)), direction);
-					if (storage != null) {
-						try (Transaction transaction = Transaction.openOuter()) {
-							long transferPerTick = AdAstra.CONFIG.waterPump.transferPerTick;
-							if (this.inputTank.extract(waterFluid, transferPerTick, transaction) == transferPerTick && storage.insert(waterFluid, transferPerTick, transaction) == transferPerTick) {
-								transaction.commit();
-							}
-						}
+					FluidHolder fluid = FluidHooks.newFluidHolder(tank.getFluids().get(0).getFluid(), AdAstra.CONFIG.waterPump.transferPerTick, tank.getFluids().get(0).getCompound());
+					this.drainEnergy();
+					if (FluidHooks.moveBlockToBlockFluid(this, direction.getOpposite(), world.getBlockEntity(pos.offset(direction)), direction, fluid) > 0) {
+						break;
 					}
 				}
 			}
 		}
+	}
+
+	@Override
+	public UpdatingFluidContainer getFluidContainer() {
+		return tank;
 	}
 }

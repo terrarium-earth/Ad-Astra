@@ -1,17 +1,17 @@
 package com.github.alexnijjar.ad_astra.blocks.machines.entity;
 
-import org.jetbrains.annotations.Nullable;
-
 import com.github.alexnijjar.ad_astra.AdAstra;
+import com.github.alexnijjar.ad_astra.container.ExportingFluidTank;
 import com.github.alexnijjar.ad_astra.recipes.CryoFuelConversionRecipe;
 import com.github.alexnijjar.ad_astra.recipes.ModRecipeType;
 import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
 import com.github.alexnijjar.ad_astra.registry.ModRecipes;
 import com.github.alexnijjar.ad_astra.screen.handler.CryoFreezerScreenHandler;
 import com.github.alexnijjar.ad_astra.util.FluidUtils;
-
 import earth.terrarium.botarium.api.fluid.FluidHolder;
+import earth.terrarium.botarium.api.fluid.FluidHoldingBlock;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
+import earth.terrarium.botarium.api.fluid.UpdatingFluidContainer;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -22,8 +22,11 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import org.jetbrains.annotations.Nullable;
 
-public class CryoFreezerBlockEntity extends FluidMachineBlockEntity {
+public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implements FluidHoldingBlock {
+
+	public final ExportingFluidTank tank = new ExportingFluidTank(this, AdAstra.CONFIG.cryoFreezer.tankBuckets, 1, (amount, fluid) -> true);
 
 	protected short cookTime;
 	protected short cookTimeTotal;
@@ -63,11 +66,9 @@ public class CryoFreezerBlockEntity extends FluidMachineBlockEntity {
 		if (this.outputFluid != null) {
 			CryoFuelConversionRecipe recipe = this.createRecipe(ModRecipes.CRYO_FUEL_CONVERSION_RECIPE.get(), this.getStack(0), false);
 			if (recipe != null) {
-				try (Transaction transaction = Transaction.openOuter()) {
-					if (this.inputTank.insert(FluidHolder.of(recipe.getFluidOutput()), FluidUtils.millibucketsToDroplets((long) (1000 * recipe.getConversionRatio())), transaction) > 0) {
-						transaction.commit();
-					}
-				}
+				// TODO: change to platform fluid amount
+				FluidHolder outputFluid = FluidHooks.newFluidHolder(recipe.getFluidOutput(), (long) (1000L * recipe.getConversionRatio()), null);
+				tank.insertFluid(outputFluid, false);
 			}
 		}
 		this.stopCooking();
@@ -79,16 +80,6 @@ public class CryoFreezerBlockEntity extends FluidMachineBlockEntity {
 		this.outputFluid = null;
 		this.inputItem = null;
 		this.markDirty();
-	}
-
-	@Override
-	public long getInputSize() {
-		return FluidHooks.buckets(AdAstra.CONFIG.cryoFreezer.tankBuckets);
-	}
-
-	@Override
-	public long getOutputSize() {
-		return 0;
 	}
 
 	@Override
@@ -157,19 +148,18 @@ public class CryoFreezerBlockEntity extends FluidMachineBlockEntity {
 
 	@Override
 	public void tick() {
-		super.tick();
-		if (!this.world.isClient) {
+		if (!this.getWorld().isClient) {
 
 			ItemStack input = this.getStack(0);
 			ItemStack outputInsertSlot = this.getStack(1);
 			ItemStack outputExtractSlot = this.getStack(2);
 
 			if (!outputInsertSlot.isEmpty() && outputExtractSlot.getCount() < outputExtractSlot.getMaxCount()) {
-				FluidUtils.extractFluidFromTank(this, getInputTank(), 1, 2);
+				FluidUtils.extractFluidFromItem(outputExtractSlot, 0, this, f -> true);
 			}
 
 			if (this.hasEnergy()) {
-				if ((!input.isEmpty() && (input.getItem().equals(this.inputItem) || this.inputItem == null)) && getInputTank().getFluidAmount() < this.getInputSize()) {
+				if ((!input.isEmpty() && (input.getItem().equals(this.inputItem) || this.inputItem == null)) && tank.getFluids().get(0).getFluidAmount() < tank.getTankCapacity(0)) {
 					this.setActive(true);
 					if (this.cookTime < this.cookTimeTotal) {
 						this.cookTime++;
@@ -196,12 +186,7 @@ public class CryoFreezerBlockEntity extends FluidMachineBlockEntity {
 	}
 
 	@Override
-	public long getInputTankCapacity() {
-		return 0;
-	}
-
-	@Override
-	public long getOutputTankCapacity() {
-		return 0;
+	public UpdatingFluidContainer getFluidContainer() {
+		return tank;
 	}
 }

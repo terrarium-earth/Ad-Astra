@@ -99,7 +99,7 @@ public interface InteractablePipe<T> {
         }
     }
 
-    public static record Node<T> (T storage, Direction direction, BlockPos pos) {
+    record Node<T> (T storage, Direction direction, BlockPos pos) {
 
     }
 }

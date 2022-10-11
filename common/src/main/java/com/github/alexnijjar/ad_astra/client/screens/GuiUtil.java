@@ -1,18 +1,12 @@
 package com.github.alexnijjar.ad_astra.client.screens;
 
-import java.awt.Rectangle;
-
 import com.github.alexnijjar.ad_astra.blocks.machines.entity.AbstractMachineBlockEntity;
-import com.github.alexnijjar.ad_astra.util.FluidUtils;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.BufferRenderer;
-import com.mojang.blaze3d.vertex.Tessellator;
-import com.mojang.blaze3d.vertex.VertexFormat;
-import com.mojang.blaze3d.vertex.VertexFormats;
-
+import com.mojang.blaze3d.vertex.*;
+import dev.architectury.injectables.annotations.ExpectPlatform;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
+import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -30,6 +24,9 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Matrix4f;
+import org.apache.commons.lang3.NotImplementedException;
+
+import java.awt.*;
 
 @Environment(EnvType.CLIENT)
 public class GuiUtil {
@@ -42,12 +39,8 @@ public class GuiUtil {
 	public static final int SUN_HEIGHT = 21;
 	public static final int HAMMER_WIDTH = 13;
 	public static final int HAMMER_HEIGHT = 13;
-	public static final int OXYGEN_TANK_WIDTH = 14;
-	public static final int OXYGEN_TANK_HEIGHT = 48;
 	public static final int ENERGY_WIDTH = 13;
 	public static final int ENERGY_HEIGHT = 46;
-	public static final int FUEL_WIDTH = 48;
-	public static final int FUEL_HEIGHT = 48;
 	public static final int FLUID_TANK_WIDTH = 14;
 	public static final int FLUID_TANK_HEIGHT = 48;
 
@@ -55,7 +48,6 @@ public class GuiUtil {
 	public static final Identifier SNOWFLAKE_TEXTURE = new ModIdentifier("textures/gui/snowflake.png");
 	public static final Identifier SUN_TEXTURE = new ModIdentifier("textures/gui/sun.png");
 	public static final Identifier HAMMER_TEXTURE = new ModIdentifier("textures/gui/hammer.png");
-	public static final Identifier OXYGEN_CONTENT_TEXTURE = new ModIdentifier("textures/gui/oxygen.png");
 	public static final Identifier ENERGY_TEXTURE = new ModIdentifier("textures/gui/energy_full.png");
 	public static final Identifier FLUID_TANK_TEXTURE = new ModIdentifier("textures/gui/fluid_tank.png");
 
@@ -93,10 +85,6 @@ public class GuiUtil {
 		drawFluidTank(matrices, x, y, ratio, fluid);
 	}
 
-	public static void drawAccentingFluidTank(MatrixStack matrices, int x, int y, double ratio, FluidHolder fluid) {
-		drawFluidTank(matrices, x, y, 1.0 - ratio, fluid);
-	}
-
 	public static void drawFluidTank(MatrixStack matrices, int x, int y, double ratio, FluidHolder fluid) {
 		// Draw the fluid
 		drawFluid(matrices, x, y, ratio, fluid);
@@ -112,8 +100,8 @@ public class GuiUtil {
 			return;
 		}
 
-		Sprite sprite = FluidVariantRendering.getSprite(fluid);
-		int colour = FluidVariantRendering.getColor(fluid);
+		Sprite sprite = getFluidSprite(fluid.getFluid());
+		int colour = getFluidColor(fluid.getFluid());
 		int spriteHeight = sprite.getHeight();
 
 		RenderSystem.setShaderColor((colour >> 16 & 255) / 255.0f, (float) (colour >> 8 & 255) / 255.0f, (float) (colour & 255) / 255.0f, 1.0f);
@@ -165,11 +153,6 @@ public class GuiUtil {
 		DrawableHelper.drawTexture(matrixStack, x, y + remainHeight, 0, remainHeight, width, ratioHeight, width, height);
 	}
 
-	public static void drawAccentingVertical(MatrixStack matrixStack, int x, int y, int width, int height, Identifier resource, double ratio) {
-		ratio = 1.0 - ratio;
-		drawVertical(matrixStack, x, y, width, height, resource, ratio);
-	}
-
 	public static void drawVerticalReverse(MatrixStack matrixStack, int x, int y, int width, int height, Identifier resource, double ratio) {
 		int ratioHeight = (int) Math.ceil(height * ratio);
 		int remainHeight = height - ratioHeight;
@@ -208,7 +191,7 @@ public class GuiUtil {
 	}
 
 	public static void drawTankTooltip(Screen screen, MatrixStack matrices, long amount, long capacity, Fluid fluid, int mouseX, int mouseY) {
-		screen.renderTooltip(matrices, Text.translatable("gauge_text.ad_astra.liquid_storage", FluidUtils.dropletsToMillibuckets(amount), FluidUtils.dropletsToMillibuckets(capacity)).setStyle(Style.EMPTY.withColor(Formatting.GOLD)).append(Text.of(", ")).append(GuiUtil.getFluidTranslation(fluid)), mouseX, mouseY);
+		screen.renderTooltip(matrices, Text.translatable("gauge_text.ad_astra.liquid_storage", FluidHooks.toMillibuckets(amount), FluidHooks.toMillibuckets(capacity)).setStyle(Style.EMPTY.withColor(Formatting.GOLD)).append(Text.of(", ")).append(GuiUtil.getFluidTranslation(fluid)), mouseX, mouseY);
 	}
 
 	public static class FloatDrawableHelper {
@@ -234,5 +217,15 @@ public class GuiUtil {
 			bufferBuilder.vertex(matrix, x0, y0, z).uv(u0, v0).next();
 			BufferRenderer.drawWithShader(bufferBuilder.end());
 		}
+	}
+
+	@ExpectPlatform
+	public static Sprite getFluidSprite(Fluid fluid) {
+		throw new NotImplementedException();
+	}
+
+	@ExpectPlatform
+	public static int getFluidColor(Fluid fluid) {
+		throw new NotImplementedException();
 	}
 }

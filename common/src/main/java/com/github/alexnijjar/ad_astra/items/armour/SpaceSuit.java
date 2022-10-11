@@ -3,6 +3,7 @@ package com.github.alexnijjar.ad_astra.items.armour;
 import java.util.List;
 import java.util.stream.StreamSupport;
 
+import earth.terrarium.botarium.api.fluid.FluidHooks;
 import org.apache.commons.lang3.Range;
 
 import com.github.alexnijjar.ad_astra.AdAstra;
@@ -39,8 +40,8 @@ public class SpaceSuit extends DyeableArmorItem implements FluidContainingItem, 
 	@Override
 	public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
 		if (stack.isOf(ModItems.SPACE_SUIT.get()) || stack.isOf(ModItems.NETHERITE_SPACE_SUIT.get()) || stack.isOf(ModItems.JET_SUIT.get())) {
-			long oxygen = FluidUtils.dropletsToMillibuckets(this.getAmount(stack));
-			tooltip.add(Text.translatable("tooltip.ad_astra.space_suit", oxygen, FluidUtils.dropletsToMillibuckets(getTankSize())).setStyle(Style.EMPTY.withColor(oxygen > 0 ? Formatting.GREEN : Formatting.RED)));
+			long oxygen = FluidHooks.toMillibuckets(this.getAmount(stack));
+			tooltip.add(Text.translatable("tooltip.ad_astra.space_suit", oxygen, FluidHooks.toMillibuckets(getTankSize())).setStyle(Style.EMPTY.withColor(oxygen > 0 ? Formatting.GREEN : Formatting.RED)));
 		}
 	}
 

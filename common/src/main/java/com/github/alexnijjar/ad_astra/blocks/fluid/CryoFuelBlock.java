@@ -1,9 +1,9 @@
 package com.github.alexnijjar.ad_astra.blocks.fluid;
 
 import com.github.alexnijjar.ad_astra.registry.ModDamageSource;
-
+import dev.architectury.core.block.ArchitecturyLiquidBlock;
+import dev.architectury.core.fluid.ArchitecturyFlowingFluid;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.FluidBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.fluid.FlowableFluid;
@@ -14,9 +14,11 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.world.World;
 
-public class CryoFuelBlock extends FluidBlock {
+import java.util.function.Supplier;
 
-	public CryoFuelBlock(FlowableFluid fluid, Settings settings) {
+public class CryoFuelBlock extends ArchitecturyLiquidBlock {
+
+	public CryoFuelBlock(Supplier<ArchitecturyFlowingFluid> fluid, Settings settings) {
 		super(fluid, settings);
 	}
 

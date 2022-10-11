@@ -1,21 +1,16 @@
 package com.github.alexnijjar.ad_astra.blocks.machines.entity;
 
+import com.github.alexnijjar.ad_astra.container.DoubleFluidTank;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHoldingBlock;
-import earth.terrarium.botarium.api.fluid.SimpleUpdatingFluidContainer;
 import earth.terrarium.botarium.api.fluid.UpdatingFluidContainer;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.util.math.BlockPos;
 
 public abstract class FluidMachineBlockEntity extends AbstractMachineBlockEntity implements FluidHoldingBlock {
 
-	public final SimpleUpdatingFluidContainer tanks = new SimpleUpdatingFluidContainer(this, integer -> switch (integer) {
-	case 0 -> getInputTankCapacity();
-	case 1 -> getOutputTankCapacity();
-	default -> 0L;
-	}, 2, (amount, fluid) -> true);
+	public final DoubleFluidTank tanks = new DoubleFluidTank(this, getInputTankCapacity(), getOutputTankCapacity(), this::canInsertFluid, this::canExtractFluid);
 
 	public FluidMachineBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
 		super(blockEntityType, blockPos, blockState);
@@ -25,15 +20,12 @@ public abstract class FluidMachineBlockEntity extends AbstractMachineBlockEntity
 
 	public abstract long getOutputTankCapacity();
 
-	@Override
-	public void tick() {
-		// Ensure that the tanks don't have a variant when there is no fluid in them.
-		if (getInputTank().getFluidAmount() == 0) {
-			getInputTank().setFluid(Fluids.EMPTY);
-		}
-		if (getOutputTank().getFluidAmount() == 0) {
-			getInputTank().setFluid(Fluids.EMPTY);
-		}
+	protected boolean canInsertFluid(FluidHolder fluid) {
+		return true;
+	}
+
+	protected boolean canExtractFluid(FluidHolder fluid) {
+		return true;
 	}
 
 	public FluidHolder getInputTank() {
@@ -41,7 +33,7 @@ public abstract class FluidMachineBlockEntity extends AbstractMachineBlockEntity
 	}
 
 	public FluidHolder getOutputTank() {
-		return getOutputTank();
+		return tanks.getFluids().get(1);
 	}
 
 	@Override

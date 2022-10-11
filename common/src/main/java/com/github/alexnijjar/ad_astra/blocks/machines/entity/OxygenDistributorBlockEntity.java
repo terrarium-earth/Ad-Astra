@@ -3,6 +3,7 @@ package com.github.alexnijjar.ad_astra.blocks.machines.entity;
 import java.util.List;
 import java.util.Set;
 
+import com.github.alexnijjar.ad_astra.registry.ModFluids;
 import org.jetbrains.annotations.Nullable;
 
 import com.github.alexnijjar.ad_astra.AdAstra;
@@ -134,18 +135,10 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 		long amountOfFluidToExtract = this.getFluidToExtract(oxygenBlocks, false);
 		long amountOfEnergyToConsume = this.getEnergyToConsume(oxygenBlocks, false);
 
-		try (Transaction transaction = Transaction.openOuter()) {
-			if (!this.outputTank.variant.isBlank()) {
-				if (this.outputTank.extract(this.outputTank.getResource(), amountOfFluidToExtract, transaction) != amountOfFluidToExtract) {
-					this.outputTank.amount = 0;
-				}
-				transaction.commit();
-			}
-		}
-		this.tanks.extractFromSlot()
+		this.getFluidContainer().extractFluid(FluidHooks.newFluidHolder(ModFluids.OXYGEN_STILL.get(), amountOfFluidToExtract, null), false);
 
 		if (this.drainEnergy(amountOfEnergyToConsume)) {
-			ModUtils.spawnForcedParticles((ServerWorld) this.world, ModParticleTypes.OXYGEN_BUBBLE.get(), this.getPos().getX() + 0.5, this.getPos().getY() + 0.5, this.getPos().getZ() + 0.5, 1, 0.0, 0.0, 0.0, 0.03);
+			ModUtils.spawnForcedParticles((ServerWorld) this.getWorld(), ModParticleTypes.OXYGEN_BUBBLE.get(), this.getPos().getX() + 0.5, this.getPos().getY() + 0.5, this.getPos().getZ() + 0.5, 1, 0.0, 0.0, 0.0, 0.03);
 		}
 	}
 
@@ -161,22 +154,19 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 		} else if (getOutputTank().getFluid().equals(Fluids.EMPTY)) {
 			return false;
 		} else
-			return getOutputTank().simulateExtract(getOutputTank().getFluid(), amountOfFluidToExtract, null) == amountOfFluidToExtract;
+			return getOutputTank().getFluidAmount() >= amountOfFluidToExtract;
 	}
 
 	@Override
 	public void tick() {
-		super.tick();
 
 		ItemStack insertSlot = this.getItems().get(0);
 		ItemStack extractSlot = this.getItems().get(1);
 
 		// Convert the input fluid into oxygen
 		if (!this.world.isClient) {
-			if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxCount()) {
-
-				ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.world);
-				FluidUtils.insertFluidIntoTank(this, getOutputTank(), 0, 1, f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.world).stream().anyMatch(r -> r.matches(f.getFluid())));
+			if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxCount() && FluidHooks.isFluidContainingItem(insertSlot)) {
+				FluidUtils.insertFluidFromItem(insertSlot, 0, this, f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.world).stream().anyMatch(r -> r.matches(f.getFluid())));
 			}
 
 			if (this.canDrainEnergy()) {
