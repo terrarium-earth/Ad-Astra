@@ -27,7 +27,8 @@
       "com.github.alexnijjar.ad_astra.fabric.AdAstraFabric"
     ],
     "client": [
-      "com.github.alexnijjar.ad_astra.client.fabric.AdAstraClientFabric::initializeClient"
+      "com.github.alexnijjar.ad_astra.client.fabric.AdAstraClientFabric::initializeClient",
+      "com.github.alexnijjar.ad_astra.client.AdAstraClient::initializeClient"
     ],
     "server": [
 

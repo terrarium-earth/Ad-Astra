@@ -5,11 +5,13 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import earth.terrarium.botarium.api.menu.MenuHooks;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.server.network.ServerPlayerEntity;
 
 import java.util.Collection;
 import java.util.List;
@@ -48,7 +50,7 @@ public class PlanetGuiCommand {
         entities.forEach((entity) -> {
             if (entity instanceof PlayerEntity player) {
                 player.playerScreenHandler.close(player);
-                player.openHandledScreen(new PlanetSelectionScreenHandlerFactory(tier));
+                MenuHooks.openMenu((ServerPlayerEntity) player, new PlanetSelectionScreenHandlerFactory(tier));
             }
         });
 

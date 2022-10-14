@@ -17,6 +17,7 @@ import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.github.alexnijjar.ad_astra.util.ModKeyBindings;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
 
+import earth.terrarium.botarium.api.menu.MenuHooks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
@@ -195,9 +196,8 @@ public class RocketEntity extends VehicleEntity {
 		this.getPassengerList().forEach(passenger -> {
 			if (passenger instanceof PlayerEntity player) {
 				if (!(player.currentScreenHandler instanceof PlanetSelectionScreenHandler)) {
-					player.openHandledScreen(new PlanetSelectionScreenHandlerFactory(this.getTier()));
-
-					if (this.world instanceof ServerWorld serverWorld) {
+					if (!this.world.isClient) {
+						MenuHooks.openMenu((ServerPlayerEntity) player, new PlanetSelectionScreenHandlerFactory(this.getTier()));
 						stopRocketSoundForRider((ServerPlayerEntity) player);
 					}
 				}
