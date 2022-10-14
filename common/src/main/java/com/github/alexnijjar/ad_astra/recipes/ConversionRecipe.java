@@ -7,11 +7,11 @@ import net.minecraft.util.Identifier;
 
 public abstract class ConversionRecipe extends ModRecipe {
 
-	private HolderSet<Fluid> input;
+	private Fluid input;
 	private final Fluid output;
 	private final double conversionRatio;
 
-	public ConversionRecipe(Identifier id, HolderSet<Fluid> input, Fluid output, double conversionRatio) {
+	public ConversionRecipe(Identifier id, Fluid input, Fluid output, double conversionRatio) {
 		super(id);
 		this.input = input;
 		this.output = output;
@@ -25,12 +25,11 @@ public abstract class ConversionRecipe extends ModRecipe {
 		this.conversionRatio = conversionRatio;
 	}
 
-	@SuppressWarnings("deprecation")
 	public boolean matches(Fluid input) {
-		return this.input.contains(input.getBuiltInRegistryHolder());
+		return this.input.equals(input);
 	}
 
-	public HolderSet<Fluid> getFluidInput() {
+	public Fluid getFluidInput() {
 		return this.input;
 	}
 

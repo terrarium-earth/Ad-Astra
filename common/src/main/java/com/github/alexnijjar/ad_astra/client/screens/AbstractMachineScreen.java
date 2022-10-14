@@ -17,8 +17,8 @@ import net.minecraft.util.Identifier;
 @Environment(EnvType.CLIENT)
 public abstract class AbstractMachineScreen<T extends AbstractMachineScreenHandler> extends HandledScreen<T> {
 
-	AbstractMachineBlockEntity blockEntity;
-	Identifier texture;
+	final AbstractMachineBlockEntity blockEntity;
+	final Identifier texture;
 
 	public AbstractMachineScreen(T handler, PlayerInventory inventory, Text title, Identifier texture) {
 		super(handler, inventory, title);

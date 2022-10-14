@@ -30,7 +30,7 @@ public class SoundManagerMixin {
 
 	@Shadow
 	@Final
-	private SoundSystem soundSystem;
+	public SoundSystem soundSystem;
 
 	@Inject(method = "Lnet/minecraft/client/sound/SoundManager;play(Lnet/minecraft/client/sound/SoundInstance;)V", at = @At("HEAD"), cancellable = true)
 	public void adastra_play(SoundInstance sound, CallbackInfo ci) {

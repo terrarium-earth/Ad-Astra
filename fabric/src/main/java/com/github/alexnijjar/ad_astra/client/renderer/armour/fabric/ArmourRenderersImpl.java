@@ -18,9 +18,7 @@ public class ArmourRenderersImpl {
     private static final Map<String, Identifier> ARMOUR_ITEM_MODELS = new HashMap<>();
 
     public static void registerArmour(ArmourModelSupplier modelSupplier, Item... items) {
-        ArmorRenderer.register((matrices, vertexConsumers, stack, entity, slot, light, model) -> {
-            ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, modelSupplier.getArmorModel(entity, stack, slot, model), getArmorResource(entity, stack, slot, null));
-        }, items);
+        ArmorRenderer.register((matrices, vertexConsumers, stack, entity, slot, light, model) -> ArmorRenderer.renderPart(matrices, vertexConsumers, light, stack, modelSupplier.getArmorModel(entity, stack, slot, model), getArmorResource(entity, stack, slot, null)), items);
     }
 
     public static Identifier getArmorResource(LivingEntity entity, ItemStack stack, EquipmentSlot slot, @Nullable String type) {

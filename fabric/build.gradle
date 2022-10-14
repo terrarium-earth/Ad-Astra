@@ -9,6 +9,26 @@ architectury {
 
 loom {
     accessWidenerPath = project(":common").loom.accessWidenerPath
+    runs {
+        // This adds a new gradle task that runs the datagen API: "gradlew runDatagenClient"
+        datagenClient {
+            inherit client
+            name "Data Generation"
+            vmArg "-Dfabric-api.datagen"
+            vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated")}"
+
+            runDir "build/datagen"
+        }
+    }
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDirs += 'src/main/generated'
+            exclude '.cache'
+        }
+    }
 }
 
 configurations {

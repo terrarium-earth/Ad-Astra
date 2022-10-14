@@ -33,7 +33,7 @@ public class BlockItemMixin {
 		world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1, 1);
 	}
 
-	@Inject(method = "place", at = @At(value = "TAIL"))
+	@Inject(method = "place*", at = @At(value = "TAIL"))
 	public void adastra_place(ItemPlacementContext context, CallbackInfoReturnable<ActionResult> info) {
 		if (!AdAstra.CONFIG.general.doOxygen) {
 			return;

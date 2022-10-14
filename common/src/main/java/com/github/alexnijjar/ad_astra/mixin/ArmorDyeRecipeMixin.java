@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 @Mixin(ArmorDyeRecipe.class)
 public class ArmorDyeRecipeMixin {
 
-    @Inject(method = "matches", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "matches*", at = @At("HEAD"), cancellable = true)
     public void adastra_matches(CraftingInventory craftingInventory, World world, CallbackInfoReturnable<Boolean> ci) {
         for (int i = 0; i < craftingInventory.size(); i++) {
             Item item = craftingInventory.getStack(i).getItem();

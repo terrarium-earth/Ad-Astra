@@ -16,8 +16,8 @@ import net.minecraft.sound.SoundEvent;
 @Environment(EnvType.CLIENT)
 public class PlanetSoundPlayer implements ClientPlayerTickable {
 
-    private ClientPlayerEntity player;
-    private SoundManager soundManager;
+    private final ClientPlayerEntity player;
+    private final SoundManager soundManager;
     private int ticksUntilPlay = 0;
 
     public PlanetSoundPlayer(ClientPlayerEntity player, SoundManager soundManager) {
@@ -68,7 +68,6 @@ public class PlanetSoundPlayer implements ClientPlayerTickable {
         public void tick() {
             if (this.player.isRemoved()) {
                 this.setDone();
-                return;
             }
         }
     }

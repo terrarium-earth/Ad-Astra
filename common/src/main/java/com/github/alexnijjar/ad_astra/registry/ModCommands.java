@@ -5,11 +5,8 @@ import com.github.alexnijjar.ad_astra.commands.PlanetGuiCommand;
 import dev.architectury.event.events.common.CommandRegistrationEvent;
 
 public class ModCommands {
-
     public static void register() {
-
-        CommandRegistrationEvent.EVENT.register((dispatcher, selection) -> {
-            PlanetGuiCommand.register(dispatcher);
-        });
+        // TODO: VERY BROKEN AND WEIRD
+//        CommandRegistrationEvent.EVENT.register((dispatcher, selection) -> PlanetGuiCommand.register(dispatcher));
     }
 }

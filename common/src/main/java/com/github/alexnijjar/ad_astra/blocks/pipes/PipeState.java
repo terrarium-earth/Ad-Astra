@@ -7,7 +7,7 @@ public enum PipeState implements StringIdentifiable {
 
     private final String name;
 
-    private PipeState(String name) {
+    PipeState(String name) {
         this.name = name;
     }
 

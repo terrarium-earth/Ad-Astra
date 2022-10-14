@@ -56,9 +56,7 @@ public class LargeJigsawStructure extends StructureFeature {
         ChunkPos chunkPos = context.chunkPos();
         BlockPos blockPos = new BlockPos(chunkPos.getStartX(), startY, chunkPos.getStartZ());
 
-        Optional<GenerationStub> structurePiecesGenerator = StructurePoolBasedGenerator.m_drsiegyr(context, this.startPool, this.startJigsawName, this.size, blockPos, false, this.projectStartToHeightmap, this.maxDistanceFromCenter);
-
-        return structurePiecesGenerator;
+        return StructurePoolBasedGenerator.m_drsiegyr(context, this.startPool, this.startJigsawName, this.size, blockPos, false, this.projectStartToHeightmap, this.maxDistanceFromCenter);
     }
 
     @Override

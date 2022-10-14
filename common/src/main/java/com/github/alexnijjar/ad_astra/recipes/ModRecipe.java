@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 
 public abstract class ModRecipe implements Recipe<Inventory>, Predicate<ItemStack> {
 
-	protected Identifier id;
+	protected final Identifier id;
 	protected final List<Ingredient> inputs = new ArrayList<>();
 	protected List<Integer> stackCounts;
 

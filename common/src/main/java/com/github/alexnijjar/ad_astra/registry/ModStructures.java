@@ -17,7 +17,7 @@ public class ModStructures {
     public static final StructureType<LargeJigsawStructure> LARGE_JIGSAW_STRUCTURE = () -> LargeJigsawStructure.CODEC;
 
     public static void register() {
-        STRUCTURE_TYPES.register("structure_void_processor", () -> LARGE_JIGSAW_STRUCTURE);
+        STRUCTURE_TYPES.register("large_jigsaw_structure", () -> LARGE_JIGSAW_STRUCTURE);
         STRUCTURE_PROCESSOR_TYPES.register("structure_void_processor", () -> STRUCTURE_VOID_PROCESSOR);
         STRUCTURE_PROCESSOR_TYPES.register();
         STRUCTURE_TYPES.register();

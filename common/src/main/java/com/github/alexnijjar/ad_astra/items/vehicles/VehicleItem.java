@@ -3,7 +3,6 @@ package com.github.alexnijjar.ad_astra.items.vehicles;
 import com.github.alexnijjar.ad_astra.items.FluidContainingItem;
 import com.github.alexnijjar.ad_astra.items.HoldableOverHead;
 import com.github.alexnijjar.ad_astra.items.ModRenderedItem;
-import com.github.alexnijjar.ad_astra.util.FluidUtils;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemStack;

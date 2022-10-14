@@ -136,15 +136,15 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
 				return;
 			}
 		}
-		spawnParticles(world, entity, model, model.rightArm.pitch + 0.05, entity.isFallFlying() ? 0.0 : 0.8, -0.45);
-		spawnParticles(world, entity, model, model.leftArm.pitch + 0.05, entity.isFallFlying() ? 0.0 : 0.8, 0.45);
+		spawnParticles(world, entity, model.rightArm.pitch + 0.05, entity.isFallFlying() ? 0.0 : 0.8, -0.45);
+		spawnParticles(world, entity, model.leftArm.pitch + 0.05, entity.isFallFlying() ? 0.0 : 0.8, 0.45);
 
-		spawnParticles(world, entity, model, model.rightLeg.pitch + 0.05, entity.isFallFlying() ? 0.1 : 0.0, -0.1);
-		spawnParticles(world, entity, model, model.leftLeg.pitch + 0.05, entity.isFallFlying() ? 0.1 : 0.0, 0.1);
+		spawnParticles(world, entity, model.rightLeg.pitch + 0.05, entity.isFallFlying() ? 0.1 : 0.0, -0.1);
+		spawnParticles(world, entity, model.leftLeg.pitch + 0.05, entity.isFallFlying() ? 0.1 : 0.0, 0.1);
 	}
 
 	// Spawns particles at the limbs of the player
-	private static void spawnParticles(World world, LivingEntity entity, BipedEntityModel<LivingEntity> model, double pitch, double yOffset, double zOffset) {
+	private static void spawnParticles(World world, LivingEntity entity, double pitch, double yOffset, double zOffset) {
 		double yaw = entity.bodyYaw;
 		double xRotator = Math.cos(yaw * Math.PI / 180.0) * zOffset;
 		double zRotator = Math.sin(yaw * Math.PI / 180.0) * zOffset;

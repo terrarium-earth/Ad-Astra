@@ -60,7 +60,7 @@ public class ModEntityTypes {
 	public static final Supplier<EntityType<RocketEntityTier3>> TIER_3_ROCKET = ENTITY_TYPES.register("tier_3_rocket", () -> EntityType.Builder.create(RocketEntityTier3::new, SpawnGroup.MISC).setDimensions(1.1f, 5.5f).makeFireImmune().build("tier_3_rocket"));
 	public static final Supplier<EntityType<RocketEntityTier4>> TIER_4_ROCKET = ENTITY_TYPES.register("tier_4_rocket", () -> EntityType.Builder.create(RocketEntityTier4::new, SpawnGroup.MISC).setDimensions(1.1f, 7.0f).makeFireImmune().build("tier_4_rocket"));
 
-	public static final Supplier<EntityType<RoverEntity>> TIER_1_ROVER = ENTITY_TYPES.register("tier_4_rocket", () -> EntityType.Builder.create(RoverEntity::new, SpawnGroup.MISC).setDimensions(1.8f, 1.5f).makeFireImmune().build("tier_1_rover"));
+	public static final Supplier<EntityType<RoverEntity>> TIER_1_ROVER = ENTITY_TYPES.register("tier_4_rover", () -> EntityType.Builder.create(RoverEntity::new, SpawnGroup.MISC).setDimensions(1.8f, 1.5f).makeFireImmune().build("tier_1_rover"));
 	public static final Supplier<EntityType<LanderEntity>> LANDER = ENTITY_TYPES.register("lander", () -> EntityType.Builder.create(LanderEntity::new, SpawnGroup.MISC).setDimensions(1.2f, 2.0f).makeFireImmune().build("lander"));
 
 	public static final Supplier<EntityType<SpacePaintingEntity>> SPACE_PAINTING = ENTITY_TYPES.register("space_painting", () -> EntityType.Builder.create(SpacePaintingEntity::new, SpawnGroup.MISC).setDimensions(0.5f, 0.5f).maxTrackingRange(10).trackingTickInterval(Integer.MAX_VALUE).build("space_painting"));
@@ -69,19 +69,21 @@ public class ModEntityTypes {
 	public static final Supplier<EntityType<IceSpitEntity>> ICE_SPIT = ENTITY_TYPES.register("ice_spit", () -> EntityType.Builder.<IceSpitEntity>create(IceSpitEntity::new, SpawnGroup.MISC).setDimensions(0.5f, 0.5f).build("ice_spit"));
 
 	public static void register() {
+		ENTITY_TYPES.register();
+
 		// Mob Attributes
-		EntityAttributeRegistry.register(LUNARIAN, () -> LunarianEntity.createMobAttributes());
-		EntityAttributeRegistry.register(CORRUPTED_LUNARIAN, () -> CorruptedLunarianEntity.createMobAttributes());
-		EntityAttributeRegistry.register(STAR_CRAWLER, () -> StarCrawlerEntity.createMobAttributes());
-		EntityAttributeRegistry.register(MARTIAN_RAPTOR, () -> MartianRaptorEntity.createMobAttributes());
-		EntityAttributeRegistry.register(PYGRO, () -> PygroEntity.createMobAttributes());
-		EntityAttributeRegistry.register(ZOMBIFIED_PYGRO, () -> ZombifiedPygroEntity.createMobAttributes());
-		EntityAttributeRegistry.register(PYGRO_BRUTE, () -> PygroBruteEntity.createMobAttributes());
-		EntityAttributeRegistry.register(MOGLER, () -> MoglerEntity.createMobAttributes());
-		EntityAttributeRegistry.register(ZOMBIFIED_MOGLER, () -> ZombifiedMoglerEntity.createMobAttributes());
-		EntityAttributeRegistry.register(LUNARIAN_WANDERING_TRADER, () -> LunarianEntity.createMobAttributes());
-		EntityAttributeRegistry.register(SULFUR_CREEPER, () -> SulfurCreeperEntity.createMobAttributes());
-		EntityAttributeRegistry.register(GLACIAN_RAM, () -> GlacianRamEntity.createMobAttributes());
+		EntityAttributeRegistry.register(LUNARIAN, LunarianEntity::createMobAttributes);
+		EntityAttributeRegistry.register(CORRUPTED_LUNARIAN, CorruptedLunarianEntity::createMobAttributes);
+		EntityAttributeRegistry.register(STAR_CRAWLER, StarCrawlerEntity::createMobAttributes);
+		EntityAttributeRegistry.register(MARTIAN_RAPTOR, MartianRaptorEntity::createMobAttributes);
+		EntityAttributeRegistry.register(PYGRO, PygroEntity::createMobAttributes);
+		EntityAttributeRegistry.register(ZOMBIFIED_PYGRO, ZombifiedPygroEntity::createMobAttributes);
+		EntityAttributeRegistry.register(PYGRO_BRUTE, PygroBruteEntity::createMobAttributes);
+		EntityAttributeRegistry.register(MOGLER, MoglerEntity::createMobAttributes);
+		EntityAttributeRegistry.register(ZOMBIFIED_MOGLER, ZombifiedMoglerEntity::createMobAttributes);
+		EntityAttributeRegistry.register(LUNARIAN_WANDERING_TRADER, LunarianEntity::createMobAttributes);
+		EntityAttributeRegistry.register(SULFUR_CREEPER, SulfurCreeperEntity::createMobAttributes);
+		EntityAttributeRegistry.register(GLACIAN_RAM, GlacianRamEntity::createMobAttributes);
 
 		SpawnRestriction.register(LUNARIAN.get(), SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, LunarianEntity::canMobSpawn);
 		SpawnRestriction.register(CORRUPTED_LUNARIAN.get(), SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, CorruptedLunarianEntity::canSpawnInDark);
@@ -95,7 +97,5 @@ public class ModEntityTypes {
 		SpawnRestriction.register(LUNARIAN_WANDERING_TRADER.get(), SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, LunarianEntity::canMobSpawn);
 		SpawnRestriction.register(SULFUR_CREEPER.get(), SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, SulfurCreeperEntity::canSpawnInDark);
 		SpawnRestriction.register(GLACIAN_RAM.get(), SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, GlacianRamEntity::canMobSpawn);
-
-		ENTITY_TYPES.register();
 	}
 }

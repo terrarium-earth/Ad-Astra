@@ -40,8 +40,8 @@ public class MartianRaptorEntityModel extends EntityModel<MartianRaptorEntity> {
 		this.body.getChild("head").getChild("bone2").getChild("mouth1").roll = MathHelper.lerp(f, 0.0f, -1.14906584f);
 		this.body.getChild("head").getChild("bone2").getChild("mouth2").roll = -MathHelper.lerp(f, 0.0f, -1.14906584f);
 
-		this.leg1.pitch = MathHelper.cos(limbAngle * 1.0f) * -1.0f * limbDistance;
-		this.leg2.pitch = MathHelper.cos(limbAngle * 1.0f) * 1.0f * limbDistance;
+		this.leg1.pitch = MathHelper.cos(limbAngle) * -1.0f * limbDistance;
+		this.leg2.pitch = MathHelper.cos(limbAngle) * 1.0f * limbDistance;
 
 		this.body.getChild("head").yaw = headYaw / (180f / (float) Math.PI);
 		this.body.getChild("head").pitch = headPitch / (180f / (float) Math.PI);

@@ -55,7 +55,7 @@ public class ModRecipes {
 		RECIPE_TYPES.register();
 
 		// Recipe Serializers
-		HAMMER_SERIALIZER = RECIPE_SERIALIZERS.register("hammering", () -> new HammerShapelessRecipe.Serializer());
+		HAMMER_SERIALIZER = RECIPE_SERIALIZERS.register("hammering", HammerShapelessRecipe.Serializer::new);
 		GENERATING_SERIALIZER = RECIPE_SERIALIZERS.register("generating", () -> new CodecRecipeSerializer<>(GENERATING_RECIPE.get(), GeneratingRecipe::codec));
 		COMPRESSING_SERIALIZER = RECIPE_SERIALIZERS.register("compressing", () -> new CodecRecipeSerializer<>(COMPRESSING_RECIPE.get(), CompressingRecipe::codec));
 		SPACE_STATION_SERIALIZER = RECIPE_SERIALIZERS.register("space_station", () -> new CodecRecipeSerializer<>(SPACE_STATION_RECIPE.get(), SpaceStationRecipe::codec));

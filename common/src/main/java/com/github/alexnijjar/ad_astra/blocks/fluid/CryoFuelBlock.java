@@ -2,7 +2,6 @@ package com.github.alexnijjar.ad_astra.blocks.fluid;
 
 import com.github.alexnijjar.ad_astra.registry.ModDamageSource;
 import dev.architectury.core.block.ArchitecturyLiquidBlock;
-import dev.architectury.core.fluid.ArchitecturyFlowingFluid;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -18,7 +17,7 @@ import java.util.function.Supplier;
 
 public class CryoFuelBlock extends ArchitecturyLiquidBlock {
 
-	public CryoFuelBlock(Supplier<ArchitecturyFlowingFluid> fluid, Settings settings) {
+	public CryoFuelBlock(Supplier<FlowableFluid> fluid, Settings settings) {
 		super(fluid, settings);
 	}
 

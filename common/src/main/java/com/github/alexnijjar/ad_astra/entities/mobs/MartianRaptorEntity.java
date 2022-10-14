@@ -42,7 +42,7 @@ public class MartianRaptorEntity extends HostileEntity {
 		this.goalSelector.add(3, new WanderAroundGoal(this, 0.8));
 		this.goalSelector.add(4, new LookAroundGoal(this));
 		this.goalSelector.add(5, new PounceAtTargetGoal(this, 0.2f));
-		this.targetSelector.add(6, new TargetGoal<PlayerEntity>(this, PlayerEntity.class, false));
+		this.targetSelector.add(6, new TargetGoal<>(this, PlayerEntity.class, false));
 		this.goalSelector.add(7, new WanderAroundFarGoal(this, 1.0));
 	}
 

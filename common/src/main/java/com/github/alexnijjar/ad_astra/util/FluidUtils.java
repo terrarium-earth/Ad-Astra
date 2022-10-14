@@ -39,7 +39,7 @@ public class FluidUtils {
                 }
             }
         }
-        return false;
+        return true;
     }
 
     // TODO: convert to different slot

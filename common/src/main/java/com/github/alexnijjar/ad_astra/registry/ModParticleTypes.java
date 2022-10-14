@@ -20,15 +20,15 @@ public class ModParticleTypes {
 
 	public static final RegistrySupplier<DefaultParticleType> VENUS_RAIN = PARTICLE_TYPES.register("venus_rain", () -> new DefaultParticleType(true) {
 	});
-	public static final RegistrySupplier<DefaultParticleType> LARGE_FLAME = PARTICLE_TYPES.register("venus_rain", () -> new DefaultParticleType(true) {
+	public static final RegistrySupplier<DefaultParticleType> LARGE_FLAME = PARTICLE_TYPES.register("large_flame", () -> new DefaultParticleType(true) {
 	});
-	public static final RegistrySupplier<DefaultParticleType> LARGE_SMOKE = PARTICLE_TYPES.register("venus_rain", () -> new DefaultParticleType(true) {
+	public static final RegistrySupplier<DefaultParticleType> LARGE_SMOKE = PARTICLE_TYPES.register("large_smoke", () -> new DefaultParticleType(true) {
 	});
-	public static final RegistrySupplier<DefaultParticleType> SMALL_FLAME = PARTICLE_TYPES.register("venus_rain", () -> new DefaultParticleType(true) {
+	public static final RegistrySupplier<DefaultParticleType> SMALL_FLAME = PARTICLE_TYPES.register("small_flame", () -> new DefaultParticleType(true) {
 	});
-	public static final RegistrySupplier<DefaultParticleType> SMALL_SMOKE = PARTICLE_TYPES.register("venus_rain", () -> new DefaultParticleType(true) {
+	public static final RegistrySupplier<DefaultParticleType> SMALL_SMOKE = PARTICLE_TYPES.register("small_smoke", () -> new DefaultParticleType(true) {
 	});
-	public static final RegistrySupplier<DefaultParticleType> OXYGEN_BUBBLE = PARTICLE_TYPES.register("venus_rain", () -> new DefaultParticleType(true) {
+	public static final RegistrySupplier<DefaultParticleType> OXYGEN_BUBBLE = PARTICLE_TYPES.register("oxygen_bubble", () -> new DefaultParticleType(true) {
 	});
 
 	public static void register() {

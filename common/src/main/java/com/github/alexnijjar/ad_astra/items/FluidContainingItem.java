@@ -13,11 +13,7 @@ import net.minecraft.item.ItemStack;
 public interface FluidContainingItem extends FluidHoldingItem {
 
 	default boolean insertIntoTank(SimpleUpdatingFluidContainer tank, ItemStack stack) {
-		if (tank.insertFluid(getTank(stack), false) == this.getAmount(stack)) {
-			return true;
-		}
-
-		return false;
+		return tank.insertFluid(getTank(stack), false) == this.getAmount(stack);
 	}
 
 	long getTankSize();

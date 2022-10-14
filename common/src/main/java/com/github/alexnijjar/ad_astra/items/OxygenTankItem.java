@@ -1,12 +1,8 @@
 package com.github.alexnijjar.ad_astra.items;
 
-import java.util.List;
-
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.registry.ModFluids;
 import com.github.alexnijjar.ad_astra.registry.ModItems;
-import com.github.alexnijjar.ad_astra.util.FluidUtils;
-
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import earth.terrarium.botarium.api.fluid.PlatformFluidHandler;
 import net.minecraft.client.item.TooltipContext;
@@ -23,6 +19,8 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class OxygenTankItem extends Item implements FluidContainingItem {
 

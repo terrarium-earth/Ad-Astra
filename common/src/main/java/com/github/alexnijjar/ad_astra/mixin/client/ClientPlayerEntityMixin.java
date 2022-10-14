@@ -55,8 +55,7 @@ public class ClientPlayerEntityMixin {
 				long oxygen = suit.getAmount(chest);
 
 				// Render oxygen info
-				double ratio = oxygen / (double) suit.getTankSize();
-				PlayerOverlayScreen.oxygenRatio = ratio;
+				PlayerOverlayScreen.oxygenRatio = oxygen / (double) suit.getTankSize();
 				PlayerOverlayScreen.doesNotNeedOxygen = OxygenUtils.entityHasOxygen(player.world, player) && !player.isSubmergedInWater();
 			}
 		} else {
@@ -68,8 +67,7 @@ public class ClientPlayerEntityMixin {
 			if (chest.getItem() instanceof JetSuit suit) {
 
 				// Render battery info
-				double ratio = (double) suit.getEnergyStorage(chest).getStoredEnergy() / (double) suit.getEnergyStorage(chest).getMaxCapacity();
-				PlayerOverlayScreen.batteryRatio = ratio;
+				PlayerOverlayScreen.batteryRatio = (double) suit.getEnergyStorage(chest).getStoredEnergy() / (double) suit.getEnergyStorage(chest).getMaxCapacity();
 			}
 		} else {
 			PlayerOverlayScreen.shouldRenderBattery = false;

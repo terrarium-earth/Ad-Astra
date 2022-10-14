@@ -17,8 +17,8 @@ import net.minecraft.util.Identifier;
 @Environment(EnvType.CLIENT)
 public abstract class AbstractVehicleScreen<T extends AbstractVehicleScreenHandler> extends HandledScreen<T> {
 
-	VehicleEntity vehicle;
-	Identifier texture;
+	final VehicleEntity vehicle;
+	final Identifier texture;
 
 	public AbstractVehicleScreen(T handler, PlayerInventory inventory, Text title, Identifier texture) {
 		super(handler, inventory, title);

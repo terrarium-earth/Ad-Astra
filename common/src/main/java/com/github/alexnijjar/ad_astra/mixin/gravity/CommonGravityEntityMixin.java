@@ -20,7 +20,7 @@ public abstract class CommonGravityEntityMixin {
 	@Unique
 	private static final double CONSTANT = -0.04;
 
-	@Inject(method = "tick", at = @At("TAIL"), cancellable = true)
+	@Inject(method = "tick", at = @At("TAIL"))
 	public void adastra_tick(CallbackInfo ci) {
 		Entity entity = (Entity) (Object) this;
 		if (!entity.hasNoGravity()) {

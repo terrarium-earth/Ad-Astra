@@ -84,9 +84,9 @@ public class PlayerOverlayScreen {
 			Text text = Text.of((oxygen) + "%");
 			int textWidth = client.textRenderer.getWidth(text);
 			if (doesNotNeedOxygen) {
-				client.textRenderer.drawWithShadow(matrices, text, (x + (textureWidth - textWidth) / 2), y + textureHeight + 3, 0x7FFF00);
+				client.textRenderer.drawWithShadow(matrices, text, (x + (textureWidth - textWidth) / 2.0f), y + textureHeight + 3, 0x7FFF00);
 			} else {
-				client.textRenderer.drawWithShadow(matrices, text, (x + (textureWidth - textWidth) / 2), y + textureHeight + 3, oxygen <= 0.0f ? 0xDC143C : 0xFFFFFF);
+				client.textRenderer.drawWithShadow(matrices, text, (x + (textureWidth - textWidth) / 2.0f), y + textureHeight + 3, oxygen <= 0.0f ? 0xDC143C : 0xFFFFFF);
 			}
 		}
 
@@ -104,7 +104,7 @@ public class PlayerOverlayScreen {
 			double energy = Math.round(batteryRatio * 1000) / 10.0;
 			Text text = Text.of((energy) + "%");
 			int textWidth = client.textRenderer.getWidth(text);
-			client.textRenderer.drawWithShadow(matrices, text, (x + (textureWidth - textWidth) / 2), y + textureHeight + 3, 0x6082B6);
+			client.textRenderer.drawWithShadow(matrices, text, (x + (textureWidth - textWidth) / 2.0f), y + textureHeight + 3, 0x6082B6);
 		}
 
 		// Timer
@@ -149,7 +149,7 @@ public class PlayerOverlayScreen {
 
 			// Draw rocket indicator
 			RenderSystem.setShaderTexture(0, ROCKET_PLANET_BAR_TEXTURE);
-			FloatDrawableHelper.drawTexture(matrices, 4.0f, (screenY / 2) + (103 / 2) - rocketHeight, 0, 0, 8, 11, 8, 11);
+			FloatDrawableHelper.drawTexture(matrices, 4.0f, (screenY / 2.0f) + (103 / 2.0f) - rocketHeight, 0, 0, 8, 11, 8, 11);
 		}
 
 		// Warning screen
@@ -173,7 +173,7 @@ public class PlayerOverlayScreen {
 
 			// Speed text
 			Text text = Text.translatable("message." + AdAstra.MOD_ID + ".speed", Math.round(speed * 10.0) / 10.0);
-			client.textRenderer.drawWithShadow(matrices, text, screenX / 2 - 29, 80, -3407872);
+			client.textRenderer.drawWithShadow(matrices, text, screenX / 2.0f - 29, 80, -3407872);
 
 			RenderSystem.disableBlend();
 			matrices.pop();

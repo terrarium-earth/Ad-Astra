@@ -349,10 +349,10 @@ public class ModBlocks {
 	public static final RegistrySupplier<Block> DEEPSLATE_OSTRUM_ORE = register("deepslate_ostrum_ore", () -> new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.DEEPSLATE_IRON_ORE)), true);
 	public static final RegistrySupplier<Block> DEEPSLATE_CALORITE_ORE = register("deepslate_calorite_ore", () -> new ExperienceDroppingBlock(AbstractBlock.Settings.copy(Blocks.DEEPSLATE_IRON_ORE)), true);
 
-	public static final RegistrySupplier<FluidBlock> OIL_BLOCK = ModBlocks.register("oil", () -> new ArchitecturyLiquidBlock(ModFluids.OIL_STILL, AbstractBlock.Settings.copy(Blocks.WATER).strength(100.0f).dropsNothing()));
-	public static final RegistrySupplier<FluidBlock> FUEL_BLOCK = ModBlocks.register("fuel", () -> new ArchitecturyLiquidBlock(ModFluids.FUEL_STILL, AbstractBlock.Settings.copy(Blocks.WATER).strength(100.0f).dropsNothing()));
-	public static final RegistrySupplier<FluidBlock> CRYO_FUEL_BLOCK = ModBlocks.register("cryo_fuel", () -> new CryoFuelBlock(ModFluids.CRYO_FUEL_STILL, AbstractBlock.Settings.copy(Blocks.WATER).strength(100.0f).dropsNothing()));
-	public static final RegistrySupplier<FluidBlock> OXYGEN_BLOCK = ModBlocks.register("oxygen", () -> new ArchitecturyLiquidBlock(ModFluids.OXYGEN_STILL, AbstractBlock.Settings.copy(Blocks.WATER).strength(100.0f).dropsNothing()));
+	public static final RegistrySupplier<FluidBlock> OIL_BLOCK = ModBlocks.register("oil", () -> new ArchitecturyLiquidBlock(ModFluids.OIL_STILL, AbstractBlock.Settings.copy(Blocks.WATER)));
+	public static final RegistrySupplier<FluidBlock> FUEL_BLOCK = ModBlocks.register("fuel", () -> new ArchitecturyLiquidBlock(ModFluids.FUEL_STILL, AbstractBlock.Settings.copy(Blocks.WATER)));
+	public static final RegistrySupplier<FluidBlock> CRYO_FUEL_BLOCK = ModBlocks.register("cryo_fuel", () -> new CryoFuelBlock(ModFluids.CRYO_FUEL_STILL, AbstractBlock.Settings.copy(Blocks.WATER)));
+	public static final RegistrySupplier<FluidBlock> OXYGEN_BLOCK = ModBlocks.register("oxygen", () -> new ArchitecturyLiquidBlock(ModFluids.OXYGEN_STILL, AbstractBlock.Settings.copy(Blocks.WATER)));
 
 	public static void register() {
 		BLOCKS.register();

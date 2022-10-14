@@ -44,8 +44,7 @@ public class FoodCookedInAtmosphereCriterion extends AbstractCriterion<Condition
 
 		@Override
 		public JsonObject toJson(AdvancementEntityPredicateSerializer predicateSerializer) {
-			JsonObject jsonObject = super.toJson(predicateSerializer);
-			return jsonObject;
+			return super.toJson(predicateSerializer);
 		}
 	}
 }

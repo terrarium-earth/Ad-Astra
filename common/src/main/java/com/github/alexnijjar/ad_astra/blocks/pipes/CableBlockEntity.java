@@ -14,7 +14,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
 public class CableBlockEntity extends BlockEntity implements InteractablePipe<PlatformEnergyManager> {
-    private List<Node<PlatformEnergyManager>> consumers = new ArrayList<>();
+    private final List<Node<PlatformEnergyManager>> consumers = new ArrayList<>();
     private Node<PlatformEnergyManager> source;
 
     public CableBlockEntity(BlockPos pos, BlockState state) {

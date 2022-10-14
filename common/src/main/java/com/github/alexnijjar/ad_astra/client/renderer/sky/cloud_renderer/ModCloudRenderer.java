@@ -52,12 +52,12 @@ public class ModCloudRenderer implements ClientModSkies.CloudRenderer {
 			RenderSystem.enableDepthTest();
 			RenderSystem.blendFuncSeparate(GlStateManager.class_4535.SRC_ALPHA, GlStateManager.class_4534.ONE_MINUS_SRC_ALPHA, GlStateManager.class_4535.ONE, GlStateManager.class_4534.ONE_MINUS_SRC_ALPHA);
 			RenderSystem.depthMask(true);
-			double e = (double) (((float) renderer.getTicks() + tickDelta) * 0.03f);
+			double e = ((float) renderer.getTicks() + tickDelta) * 0.03f;
 			double i = (cameraPosX + e) / 12.0;
-			double j = (double) (f - (float) cameraPosY + 0.33f);
+			double j = f - (float) cameraPosY + 0.33f;
 			double k = cameraPosZ / 12.0 + 0.33f;
-			i -= (double) (MathHelper.floor(i / 2048.0) * 2048);
-			k -= (double) (MathHelper.floor(k / 2048.0) * 2048);
+			i -= MathHelper.floor(i / 2048.0) * 2048;
+			k -= MathHelper.floor(k / 2048.0) * 2048;
 			float l = (float) (i - (double) MathHelper.floor(i));
 			float m = (float) (j / 4.0 - (double) MathHelper.floor(j / 4.0)) * 4.0f;
 			float n = (float) (k - (double) MathHelper.floor(k));
@@ -93,7 +93,7 @@ public class ModCloudRenderer implements ClientModSkies.CloudRenderer {
 			BackgroundRenderer.setShaderFogColor();
 			matrices.push();
 			matrices.scale(12.0f, 1.0f, 12.0f);
-			matrices.translate((double) (-l), (double) m, (double) (-n));
+			matrices.translate(-l, m, -n);
 			if (renderer.getCloudsBuffer() != null) {
 				renderer.getCloudsBuffer().bind();
 				int r = renderer.getLastCloudsRenderMode().equals(CloudRenderMode.FANCY) ? 0 : 1;

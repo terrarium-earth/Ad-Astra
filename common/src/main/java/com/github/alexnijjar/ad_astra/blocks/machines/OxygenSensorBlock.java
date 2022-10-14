@@ -30,12 +30,12 @@ public class OxygenSensorBlock extends AbstractMachineBlock {
 
 	@Override
 	public int getWeakRedstonePower(BlockState state, BlockView world, BlockPos pos, Direction direction) {
-		return state.get(POWERED) == true ? 15 : 0;
+		return state.get(POWERED) ? 15 : 0;
 	}
 
 	@Override
 	public int getStrongRedstonePower(BlockState state, BlockView world, BlockPos pos, Direction direction) {
-		return state.get(POWERED) == true ? 15 : 0;
+		return state.get(POWERED) ? 15 : 0;
 	}
 
 	@Override

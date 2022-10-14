@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Supplier;
 
+@SuppressWarnings("unused")
 public class ModItems {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(AdAstra.MOD_ID, Registry.ITEM_KEY);
 	public static final Set<Item> items = new HashSet<>();
@@ -593,6 +594,7 @@ public class ModItems {
 	public static final RegistrySupplier<Item> LUNARIAN_WANDERING_TRADER_SPAWN_EGG = register("lunarian_wandering_trader_spawn_egg", () -> new ArchitecturySpawnEggItem(ModEntityTypes.LUNARIAN_WANDERING_TRADER, 5993415, 8537301, new Item.Settings().group(ModItemGroups.ITEM_GROUP_SPAWN_EGGS)));
 
 	public static void register() {
+		ITEMS.register();
 	}
 
 	public static RegistrySupplier<Item> registerFlag(String id, Supplier<Block> flag) {
@@ -623,8 +625,7 @@ public class ModItems {
 	}
 
 	public static <T extends Item> RegistrySupplier<T> register(Identifier id, Supplier<T> item) {
-		RegistrySupplier<T> registered = ITEMS.register(id.getPath(), item);
-//		items.add(item);
-		return registered;
+		//		items.add(item);
+		return ITEMS.register(id.getPath(), item);
 	}
 }

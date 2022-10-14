@@ -72,5 +72,5 @@ public interface WorldRendererAccessor {
 	float[] getRainSizeZ();
 
 	@Invoker("renderClouds")
-	public BufferBuilder.RenderedBuffer invokeRenderClouds(BufferBuilder builder, double x, double y, double z, Vec3d color);
+	BufferBuilder.RenderedBuffer invokeRenderClouds(BufferBuilder builder, double x, double y, double z, Vec3d color);
 }

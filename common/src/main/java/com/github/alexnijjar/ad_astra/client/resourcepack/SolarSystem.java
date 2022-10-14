@@ -11,7 +11,7 @@ import net.minecraft.util.Identifier;
 @Environment(EnvType.CLIENT)
 public record SolarSystem(Identifier galaxy, Identifier solarSystem, Identifier sun, int sunScale, ButtonColour buttonColour, Color ringColour) {
 
-    public static Codec<SolarSystem> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    public static final Codec<SolarSystem> CODEC = RecordCodecBuilder.create(instance -> instance.group(
         Identifier.CODEC.fieldOf("galaxy").forGetter(SolarSystem::galaxy),
         Identifier.CODEC.fieldOf("solar_system").forGetter(SolarSystem::solarSystem),
         Identifier.CODEC.fieldOf("sun").forGetter(SolarSystem::sun),
