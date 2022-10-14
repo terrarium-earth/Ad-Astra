@@ -37,12 +37,12 @@ public class PlanetSoundPlayer implements ClientPlayerTickable {
                 this.ticksUntilPlay = 5000;
 
                 if (ModUtils.isOrbitWorld(this.player.world)) {
-                    randomSpaceSound = ModSoundEvents.SPACE_SOUNDS[this.player.world.random.nextInt(ModSoundEvents.SPACE_SOUNDS.length)];
+                    randomSpaceSound = ModSoundEvents.SPACE_SOUNDS.get(this.player.world.random.nextInt(ModSoundEvents.SPACE_SOUNDS.size())).get();
                 } else if (ModUtils.isPlanet(this.player.world)) {
                     if (this.player.getY() > 80) {
                         return;
                     }
-                    randomSpaceSound = ModSoundEvents.PLANET_SOUNDS[this.player.world.random.nextInt(ModSoundEvents.PLANET_SOUNDS.length)];
+                    randomSpaceSound = ModSoundEvents.PLANET_SOUNDS.get(this.player.world.random.nextInt(ModSoundEvents.PLANET_SOUNDS.size())).get();
                 } else {
                     return;
                 }

@@ -28,10 +28,11 @@
     ],
     "client": [
       "com.github.alexnijjar.ad_astra.client.fabric.AdAstraClientFabric::initializeClient",
-      "com.github.alexnijjar.ad_astra.client.AdAstraClient::initializeClient"
+      "com.github.alexnijjar.ad_astra.client.AdAstraClient::initializeClient",
+      "com.github.alexnijjar.ad_astra.AdAstra::postInit"
     ],
     "server": [
-
+      "com.github.alexnijjar.ad_astra.AdAstra::postInit"
     ],
     "modmenu": [
       "com.github.alexnijjar.ad_astra.config.ModMenuConfig"

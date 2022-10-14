@@ -81,20 +81,6 @@ public class ModBlockEntities {
 		CABLE = BLOCK_ENTITY_TYPES.register("cable", () -> RegistryHelpers.createBlockEntityType(CableBlockEntity::new, ModBlocks.STEEL_CABLE.get(), ModBlocks.DESH_CABLE.get()));
 		FLUID_PIPE = BLOCK_ENTITY_TYPES.register("fluid_pipe", () -> RegistryHelpers.createBlockEntityType(FluidPipeBlockEntity::new, ModBlocks.DESH_FLUID_PIPE.get(), ModBlocks.OSTRUM_FLUID_PIPE.get()));
 
-		// Add custom signs to the sign block entity registry
-		BlockEntityTypeAccessor signRegistry = ((BlockEntityTypeAccessor) BlockEntityType.SIGN);
-		Set<Block> signBlocks = new HashSet<>(signRegistry.getBlocks());
-		signBlocks.add(ModBlocks.GLACIAN_SIGN.get());
-		signBlocks.add(ModBlocks.GLACIAN_WALL_SIGN.get());
-		signRegistry.setBlocks(signBlocks);
-
-		// Add custom chests to the chest block entity registry
-		BlockEntityTypeAccessor chestRegistry = ((BlockEntityTypeAccessor) BlockEntityType.CHEST);
-		Set<Block> chestBlocks = new HashSet<>(chestRegistry.getBlocks());
-		chestBlocks.add(ModBlocks.AERONOS_CHEST.get());
-		chestBlocks.add(ModBlocks.STROPHAR_CHEST.get());
-		chestRegistry.setBlocks(chestBlocks);
-
 		BLOCK_ENTITY_TYPES.register();
 	}
 }

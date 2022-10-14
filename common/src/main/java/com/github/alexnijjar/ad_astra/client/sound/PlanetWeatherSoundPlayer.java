@@ -36,7 +36,7 @@ public class PlanetWeatherSoundPlayer implements ClientPlayerTickable {
         this.soundLoops.removeIf(MovingSoundInstance::isDone);
         if (soundLoops.isEmpty()) {
             if (ModUtils.isPlanet(this.player.world) && ModUtils.planetHasAtmosphere(this.player.world)) {
-                MusicLoop loop = new MusicLoop(this.player, ModSoundEvents.WINDY);
+                MusicLoop loop = new MusicLoop(this.player, ModSoundEvents.WINDY.get());
                 soundLoops.add(loop);
                 this.soundManager.play(loop);
             }

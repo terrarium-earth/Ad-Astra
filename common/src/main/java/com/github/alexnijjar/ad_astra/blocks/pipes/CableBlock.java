@@ -109,7 +109,7 @@ public class CableBlock extends AbstractPipeBlock {
                 property = DIRECTIONS.get(Direction.UP);
             }
             world.setBlockState(pos, state.with(property, !state.get(property)), Block.NOTIFY_ALL, 0);
-            world.playSound(null, pos, ModSoundEvents.WRENCH, SoundCategory.BLOCKS, 1, 1);
+            world.playSound(null, pos, ModSoundEvents.WRENCH.get(), SoundCategory.BLOCKS, 1, 1);
         }
     }
 }
