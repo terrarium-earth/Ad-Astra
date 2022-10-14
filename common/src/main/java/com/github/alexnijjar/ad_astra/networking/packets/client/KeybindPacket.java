@@ -38,9 +38,7 @@ public record KeybindPacket(Keybind keybind, boolean pressed) implements Packet<
 
         @Override
         public PacketContext handle(KeybindPacket message) {
-            return (player, world) -> {
-                ModKeyBindings.pressedKeyOnServer(player.getUuid(), message.keybind, message.pressed());
-            };
+            return (player, world) -> ModKeyBindings.pressedKeyOnServer(player.getUuid(), message.keybind, message.pressed());
         }
     }
 

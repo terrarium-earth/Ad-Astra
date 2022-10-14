@@ -43,10 +43,7 @@ public class OxygenUtils {
 	public static boolean worldHasOxygen(World world) {
 		if (!AdAstra.worldsWithOxygen.contains(world.getRegistryKey())) {
 			// Ensure all non-Ad Astra dimensions have oxygen by default
-			if (!ModUtils.isSpaceWorld(world)) {
-				return true;
-			}
-			return false;
+			return !ModUtils.isSpaceWorld(world);
 		}
 		return true;
 	}

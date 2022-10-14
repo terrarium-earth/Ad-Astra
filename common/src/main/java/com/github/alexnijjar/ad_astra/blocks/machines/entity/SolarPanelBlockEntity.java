@@ -42,11 +42,6 @@ public class SolarPanelBlockEntity extends AbstractMachineBlockEntity {
 	}
 
 	@Override
-	public long getMaxEnergyExtract() {
-		return (long) (AdAstra.CONFIG.solarPanel.energyMultiplier * 15.0);
-	}
-
-	@Override
 	public void tick() {
 		if (!this.world.isClient) {
 			// Check solar panel conditions.

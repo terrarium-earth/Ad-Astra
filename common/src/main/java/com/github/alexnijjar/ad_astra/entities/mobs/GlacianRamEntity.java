@@ -153,7 +153,7 @@ public class GlacianRamEntity extends AnimalEntity implements Shearable {
         for (int j = 0; j < i; ++j) {
             ItemEntity itemEntity = this.dropItem((ItemConvertible) ModBlocks.GLACIAN_FUR);
             if (itemEntity != null) {
-                itemEntity.setVelocity(itemEntity.getVelocity().add((double) ((this.random.nextFloat() - this.random.nextFloat()) * 0.1F), (double) (this.random.nextFloat() * 0.05F), (double) ((this.random.nextFloat() - this.random.nextFloat()) * 0.1F)));
+                itemEntity.setVelocity(itemEntity.getVelocity().add((this.random.nextFloat() - this.random.nextFloat()) * 0.1F, this.random.nextFloat() * 0.05F, (this.random.nextFloat() - this.random.nextFloat()) * 0.1F));
             }
         }
 
@@ -178,8 +178,7 @@ public class GlacianRamEntity extends AnimalEntity implements Shearable {
 
     @Override
     public GlacianRamEntity createChild(ServerWorld serverWorld, PassiveEntity passiveEntity) {
-        GlacianRamEntity glacianRamEntity = ModEntityTypes.GLACIAN_RAM.get().create(serverWorld);
-        return glacianRamEntity;
+        return ModEntityTypes.GLACIAN_RAM.get().create(serverWorld);
     }
 
     @Override
@@ -207,7 +206,7 @@ public class GlacianRamEntity extends AnimalEntity implements Shearable {
         this.playSound(SoundEvents.ENTITY_GOAT_STEP, 0.15F, 1.0F);
     }
 
-    protected SoundEvent getMilkingSound() {
+    public SoundEvent getMilkingSound() {
         return SoundEvents.ENTITY_GOAT_MILK;
     }
 

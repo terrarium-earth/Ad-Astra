@@ -20,7 +20,7 @@ public class LivingEntityGravityMixin {
 	@Unique
 	private static final double CONSTANT = 0.08;
 
-	@Inject(method = "travel", at = @At("TAIL"), cancellable = true)
+	@Inject(method = "travel", at = @At("TAIL"))
 	public void adastra_travel(CallbackInfo ci) {
 		if (AdAstra.CONFIG.general.doLivingEntityGravity) {
 			LivingEntity entity = (LivingEntity) (Object) this;
@@ -35,7 +35,7 @@ public class LivingEntityGravityMixin {
 	}
 
 	// Make fall damage gravity-dependant
-	@ModifyVariable(method = "handleFallDamage", at = @At("HEAD"), ordinal = 1)
+	@ModifyVariable(method = "handleFallDamage", at = @At("HEAD"), ordinal = 1, argsOnly = true)
 	private float adastra_handleFallDamage(float damageMultiplier) {
 		LivingEntity entity = ((LivingEntity) (Object) this);
 		return damageMultiplier * ModUtils.getPlanetGravity(entity.world);

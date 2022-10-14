@@ -62,8 +62,8 @@ public class CorruptedLunarianEntityModel extends EntityModel<CorruptedLunarianE
 
 		this.head.yaw = headYaw / (180f / (float) Math.PI);
 		this.head.pitch = headPitch / (180f / (float) Math.PI);
-		this.leg0.pitch = MathHelper.cos(limbAngle * 1.0f) * -1.0f * limbDistance;
-		this.leg1.pitch = MathHelper.cos(limbAngle * 1.0f) * 1.0f * limbDistance;
+		this.leg0.pitch = MathHelper.cos(limbAngle) * -1.0f * limbDistance;
+		this.leg1.pitch = MathHelper.cos(limbAngle) * 1.0f * limbDistance;
 		this.monsterarm1.yaw = MathHelper.cos(limbAngle * 0.3662f + (float) Math.PI) * limbDistance / 2;
 		this.monsterarm4.yaw = MathHelper.cos(limbAngle * 0.3662f + (float) Math.PI) * limbDistance / 2;
 		this.monsterarm3.yaw = MathHelper.cos(limbAngle * 0.3662f + (float) Math.PI) * limbDistance / 2;

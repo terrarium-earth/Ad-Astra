@@ -26,8 +26,7 @@ public class SpaceSuitModel extends BipedEntityModel<LivingEntity> {
 	public static final EntityModelLayer LAYER_LOCATION = new EntityModelLayer(new ModIdentifier("space_suit"), "main");
 
 	private final BipedEntityModel<LivingEntity> contextModel;
-	@SuppressWarnings("unused")
-	private final LivingEntity entity;
+
 	private final Identifier texture;
 	private final EquipmentSlot slot;
 	private final ItemStack stack;
@@ -40,7 +39,6 @@ public class SpaceSuitModel extends BipedEntityModel<LivingEntity> {
 		super(root);
 
 		this.contextModel = contextModel;
-		this.entity = entity;
 		if (stack.getItem() instanceof ModArmourItem item) {
 			String armourTexture = item.getArmorTexture(stack, entity, slot, null);
 			this.texture = new Identifier(Objects.requireNonNullElse(armourTexture, ""));

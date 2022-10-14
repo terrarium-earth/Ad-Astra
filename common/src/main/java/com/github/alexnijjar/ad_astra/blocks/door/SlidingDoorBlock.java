@@ -134,7 +134,6 @@ public class SlidingDoorBlock extends BlockWithEntity {
         case LAND -> state.get(OPEN);
         case WATER -> false;
         case AIR -> state.get(OPEN);
-        default -> false;
         };
     }
 

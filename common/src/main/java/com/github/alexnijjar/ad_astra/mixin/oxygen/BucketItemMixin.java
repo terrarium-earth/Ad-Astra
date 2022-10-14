@@ -1,5 +1,6 @@
 package com.github.alexnijjar.ad_astra.mixin.oxygen;
 
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -35,6 +36,7 @@ import net.minecraft.world.event.GameEvent;
 @SuppressWarnings("deprecation")
 public abstract class BucketItemMixin {
 
+	@Final
 	@Shadow
 	private Fluid fluid;
 

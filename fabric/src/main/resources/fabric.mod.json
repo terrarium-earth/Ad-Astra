@@ -27,11 +27,16 @@
       "com.github.alexnijjar.ad_astra.fabric.AdAstraFabric"
     ],
     "client": [
-      "com.github.alexnijjar.ad_astra.client.fabric.AdAstraClientFabric",
-      "com.github.alexnijjar.ad_astra.AdAstra::postInit"
+      "com.github.alexnijjar.ad_astra.client.fabric.AdAstraClientFabric::initializeClient"
     ],
     "server": [
-      "com.github.alexnijjar.ad_astra.AdAstra::postInit"
+
+    ],
+    "modmenu": [
+      "com.github.alexnijjar.ad_astra.config.ModMenuConfig"
+    ],
+    "fabric-datagen": [
+      "com.github.alexnijjar.ad_astra.datagen.AdAstraDataGenEntrypoint"
     ]
   },
   "mixins": [

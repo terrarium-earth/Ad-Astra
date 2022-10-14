@@ -86,10 +86,10 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 
 	private ButtonWidget scrollBar;
 
-	Set<Category> solarSystemsCategories = new HashSet<>();
-	Set<Category> galaxyCategories = new HashSet<>();
+	final Set<Category> solarSystemsCategories = new HashSet<>();
+	final Set<Category> galaxyCategories = new HashSet<>();
 
-	public List<Pair<ItemStack, Integer>> ingredients = new ArrayList<>();
+	public final List<Pair<ItemStack, Integer>> ingredients = new ArrayList<>();
 
 	public PlanetSelectionScreen(PlanetSelectionScreenHandler handler, PlayerInventory inventory, Text title) {
 		super(title);
@@ -326,9 +326,7 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 	}
 
 	public void createTeleportButton(int row, Text label, Category category, ButtonType size, ButtonColour colour, TooltipType tooltip, Planet planetInfo, RegistryKey<World> world) {
-		createTeleportButton(row, label, category, size, colour, tooltip, planetInfo, world, press -> {
-			teleportPlayer(world);
-		});
+		createTeleportButton(row, label, category, size, colour, tooltip, planetInfo, world, press -> teleportPlayer(world));
 	}
 
 	public void createTeleportButton(int row, Text label, Category category, ButtonType size, ButtonColour colour, TooltipType tooltip, Planet planetInfo, RegistryKey<World> world, Consumer<ButtonWidget> onClick) {
@@ -438,12 +436,9 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 	}
 
 	public void resetButtonScroll() {
-		categoryButtons.values().forEach(list -> {
-			list.forEach(button -> {
-				button.y = button.getStartY();
-			});
-		});
-
+		categoryButtons.values().forEach(list -> list.forEach(button -> {
+			button.y = button.getStartY();
+		}));
 	}
 
 	private int getPage() {

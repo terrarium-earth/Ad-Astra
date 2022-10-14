@@ -72,8 +72,5 @@
 			}
 		}
 	],
-	"output": {
-		"item": "ad_astra:tier_3_rocket",
-		"count": 1
-	}
+	"output": "ad_astra:tier_3_rocket"
 }

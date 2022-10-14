@@ -28,7 +28,7 @@ public abstract class VehicleEntityRenderer<T extends VehicleEntity, M extends E
 		this.shadowRadius = shadowRadius;
 	}
 
-	protected M model;
+	protected final M model;
 
 	@Override
 	public M getModel() {

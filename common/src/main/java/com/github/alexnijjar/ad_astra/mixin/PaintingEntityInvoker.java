@@ -10,5 +10,5 @@ import net.minecraft.util.Holder;
 @Mixin(PaintingEntity.class)
 public interface PaintingEntityInvoker {
     @Invoker("setVariant")
-    public void adastra_invokeSetVariant(Holder<PaintingVariant> variant);
+    void adastra_invokeSetVariant(Holder<PaintingVariant> variant);
 }

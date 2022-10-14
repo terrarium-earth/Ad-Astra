@@ -1,6 +1,7 @@
 package com.github.alexnijjar.ad_astra.items.vehicles;
 
 import java.util.List;
+import java.util.Map;
 
 import com.github.alexnijjar.ad_astra.blocks.door.LocationState;
 import com.github.alexnijjar.ad_astra.blocks.launchpad.LaunchPad;
@@ -44,7 +45,7 @@ public class RocketItem<T extends RocketEntity> extends VehicleItem {
 	@SuppressWarnings("deprecation")
 	@Override
 	public List<Fluid> getInputFluids() {
-		return Registry.FLUID.getEntries().stream().filter(e -> e.getValue().isIn(ModTags.FUELS)).map(f -> f.getValue()).toList();
+		return Registry.FLUID.getEntries().stream().filter(e -> e.getValue().isIn(ModTags.FUELS)).map(Map.Entry::getValue).toList();
 	}
 
 	@Override
@@ -77,18 +78,10 @@ public class RocketItem<T extends RocketEntity> extends VehicleItem {
 
 						int tier = rocket.getTier();
 						switch (tier) {
-						case 1 -> {
-							rocketEntity = new RocketEntityTier1(rocket.getRocketEntity(), world);
-						}
-						case 2 -> {
-							rocketEntity = new RocketEntityTier2(rocket.getRocketEntity(), world);
-						}
-						case 3 -> {
-							rocketEntity = new RocketEntityTier3(rocket.getRocketEntity(), world);
-						}
-						case 4 -> {
-							rocketEntity = new RocketEntityTier4(rocket.getRocketEntity(), world);
-						}
+						case 1 -> rocketEntity = new RocketEntityTier1(rocket.getRocketEntity(), world);
+						case 2 -> rocketEntity = new RocketEntityTier2(rocket.getRocketEntity(), world);
+						case 3 -> rocketEntity = new RocketEntityTier3(rocket.getRocketEntity(), world);
+						case 4 -> rocketEntity = new RocketEntityTier4(rocket.getRocketEntity(), world);
 						}
 
 						if (rocketEntity != null) {

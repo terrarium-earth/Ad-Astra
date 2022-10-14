@@ -21,7 +21,7 @@ import net.minecraft.world.World;
 @Mixin(IceBlock.class)
 public class IceBlockMixin {
 
-	@Inject(method = "afterBreak", at = @At("TAIL"), cancellable = true)
+	@Inject(method = "afterBreak", at = @At("TAIL"))
 	public void adastra_afterBreak(World world, PlayerEntity player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack, CallbackInfo ci) {
 		if (!OxygenUtils.posHasOxygen(world, pos) && ModUtils.getWorldTemperature(world) < 0) {
 			world.setBlockState(pos, Blocks.AIR.getDefaultState());

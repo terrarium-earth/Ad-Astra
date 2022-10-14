@@ -14,7 +14,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
 public class FluidPipeBlockEntity extends BlockEntity implements InteractablePipe<PlatformFluidHandler> {
-    private List<Node<PlatformFluidHandler>> consumers = new ArrayList<>();
+    private final List<Node<PlatformFluidHandler>> consumers = new ArrayList<>();
     private Node<PlatformFluidHandler> source;
 
     public FluidPipeBlockEntity(BlockPos pos, BlockState state) {

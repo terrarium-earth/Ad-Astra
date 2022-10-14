@@ -225,7 +225,7 @@ public class ModUtils {
 	 *
 	 * @return The temperature of the world, or 20° for dimensions without a defined temperature
 	 */
-	public static final float getWorldTemperature(World world) {
+	public static float getWorldTemperature(World world) {
 		if (isOrbitWorld(world)) {
 			return ORBIT_TEMPERATURE;
 		}

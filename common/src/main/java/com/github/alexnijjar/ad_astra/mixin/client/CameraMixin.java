@@ -16,7 +16,7 @@ import net.minecraft.world.BlockView;
 @Mixin(Camera.class)
 public abstract class CameraMixin {
 
-	@Inject(method = "update", at = @At("TAIL"), cancellable = true)
+	@Inject(method = "update", at = @At("TAIL"))
 	public void adastra_update(BlockView area, Entity focusedEntity, boolean thirdPerson, boolean inverseView, float tickDelta, CallbackInfo ci) {
 		if (AdAstra.CONFIG.vehicles.moveCameraInVehicle) {
 			if (thirdPerson && focusedEntity.getVehicle() instanceof VehicleEntity vehicle) {
@@ -28,8 +28,8 @@ public abstract class CameraMixin {
 	}
 
 	@Shadow
-	public abstract void moveBy(double x, double y, double z);
+	protected abstract void moveBy(double x, double y, double z);
 
 	@Shadow
-	public abstract double clipToSpace(double desiredCameraDistance);
+	protected abstract double clipToSpace(double desiredCameraDistance);
 }

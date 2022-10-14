@@ -34,9 +34,7 @@ public record DatapackPlanetsPacket(Collection<Planet> planets) implements Packe
     private static class Handler implements PacketHandler<DatapackPlanetsPacket> {
         @Override
         public void encode(DatapackPlanetsPacket keybindPacket, PacketByteBuf buf) {
-            buf.writeCollection(keybindPacket.planets, (buf2, planet) -> {
-                buf2.encode(Planet.CODEC, planet);
-            });
+            buf.writeCollection(keybindPacket.planets, (buf2, planet) -> buf2.encode(Planet.CODEC, planet));
         }
 
         @Override

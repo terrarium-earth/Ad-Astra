@@ -18,7 +18,7 @@ import net.minecraft.item.Item;
 @SuppressWarnings("unchecked")
 public abstract class BipedEntityModelMixin {
 
-	@Inject(method = "setAngles", at = @At("HEAD"))
+	@Inject(method = "setAngles*", at = @At("HEAD"))
 	public void adastra_setAnglesHead(LivingEntity livingEntity, float f, float g, float h, float i, float j, CallbackInfo ci) {
 		BipedEntityModel<PlayerEntity> model = ((BipedEntityModel<PlayerEntity>) (Object) this);
 		if (livingEntity.getVehicle() instanceof VehicleEntity vehicle) {
@@ -28,7 +28,7 @@ public abstract class BipedEntityModelMixin {
 	}
 
 	// Make it look like the player is holding the vehicle above their head
-	@Inject(method = "setAngles", at = @At("TAIL"))
+	@Inject(method = "setAngles*", at = @At("TAIL"))
 	public void adastra_setAnglesTail(LivingEntity livingEntity, float f, float g, float h, float i, float j, CallbackInfo ci) {
 		if (livingEntity.getPose().equals(EntityPose.SWIMMING)) {
 			return;

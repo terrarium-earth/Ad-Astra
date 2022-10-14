@@ -1,15 +1,7 @@
 package com.github.alexnijjar.ad_astra.blocks.flags;
 
-import org.jetbrains.annotations.Nullable;
-
 import com.mojang.authlib.GameProfile;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.BlockWithEntity;
-import net.minecraft.block.HorizontalFacingBlock;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.block.Waterloggable;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.block.piston.PistonBehavior;
@@ -28,7 +20,6 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.BlockMirror;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.shape.VoxelShape;
@@ -37,6 +28,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
+import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("deprecation")
 public class FlagBlock extends BlockWithEntity implements Waterloggable {
@@ -122,11 +114,6 @@ public class FlagBlock extends BlockWithEntity implements Waterloggable {
 				world.breakBlock(pos, false);
 			}
 		}
-	}
-
-	public static VoxelShape boxSimple(double x1, double y1, double z1, double x2, double y2, double z2) {
-		Box box = new Box(x1, y1, z1, x2, y2, z2);
-		return VoxelShapes.cuboid(box.minX / 16.0d, box.minY / 16.0d, box.minZ / 16.0d, box.maxX / 16.0d, box.maxY / 16.0d, box.maxZ / 16.0d);
 	}
 
 	@Override

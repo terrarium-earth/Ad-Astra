@@ -19,7 +19,7 @@ public abstract class PersistentProjectileEntityMixin {
 	@Unique
 	private static final double CONSTANT = 0.05;
 
-	@Inject(method = "tick", at = @At("TAIL"), cancellable = true)
+	@Inject(method = "tick", at = @At("TAIL"))
 	public void adastra_tick(CallbackInfo ci) {
 		if (AdAstra.CONFIG.general.doEntityGravity) {
 			Entity entity = (Entity) (Object) this;

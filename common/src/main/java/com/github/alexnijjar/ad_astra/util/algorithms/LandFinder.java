@@ -46,7 +46,7 @@ public class LandFinder {
             for (int y = world.getBottomY(); y < world.getTopY(); y++) {
                 if (!world.getBlockState(new BlockPos(pos.getX(), y, pos.getZ())).isAir()) {
                     if (!world.isClient) {
-                        AdAstra.LOGGER.info("Moved the lander from: " + center + " To: " + pos.toString());
+                        AdAstra.LOGGER.info("Moved the lander from: " + center + " To: " + pos);
                     }
                     // return the pos where the land was found
                     return pos;

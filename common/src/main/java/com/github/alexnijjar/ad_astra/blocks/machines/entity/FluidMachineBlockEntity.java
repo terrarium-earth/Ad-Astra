@@ -10,34 +10,27 @@ import net.minecraft.util.math.BlockPos;
 
 public abstract class FluidMachineBlockEntity extends AbstractMachineBlockEntity implements FluidHoldingBlock {
 
-	public final DoubleFluidTank tanks = new DoubleFluidTank(this, getInputTankCapacity(), getOutputTankCapacity(), this::canInsertFluid, this::canExtractFluid);
+    public final DoubleFluidTank tanks = new DoubleFluidTank(this, getInputTankCapacity(), getOutputTankCapacity(), f -> true, f -> true);
 
-	public FluidMachineBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
-		super(blockEntityType, blockPos, blockState);
-	}
+    public FluidMachineBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
+        super(blockEntityType, blockPos, blockState);
+    }
 
-	public abstract long getInputTankCapacity();
+    public abstract long getInputTankCapacity();
 
-	public abstract long getOutputTankCapacity();
+    public abstract long getOutputTankCapacity();
 
-	protected boolean canInsertFluid(FluidHolder fluid) {
-		return true;
-	}
 
-	protected boolean canExtractFluid(FluidHolder fluid) {
-		return true;
-	}
+    public FluidHolder getInputTank() {
+        return tanks.getFluids().get(0);
+    }
 
-	public FluidHolder getInputTank() {
-		return tanks.getFluids().get(0);
-	}
+    public FluidHolder getOutputTank() {
+        return tanks.getFluids().get(1);
+    }
 
-	public FluidHolder getOutputTank() {
-		return tanks.getFluids().get(1);
-	}
-
-	@Override
-	public UpdatingFluidContainer getFluidContainer() {
-		return tanks;
-	}
+    @Override
+    public UpdatingFluidContainer getFluidContainer() {
+        return tanks;
+    }
 }

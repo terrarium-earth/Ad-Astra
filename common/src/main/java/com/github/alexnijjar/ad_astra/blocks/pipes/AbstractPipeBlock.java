@@ -27,8 +27,8 @@ public abstract class AbstractPipeBlock extends BlockWithEntity implements Water
 
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
-    protected long transferRate;
-    protected int decay;
+    protected final long transferRate;
+    protected final int decay;
     protected double size;
 
     protected AbstractPipeBlock(long transferRate, int decay, double size, Settings settings) {
@@ -49,10 +49,6 @@ public abstract class AbstractPipeBlock extends BlockWithEntity implements Water
 
     public long getTransferRate() {
         return this.transferRate;
-    }
-
-    public int getDecay() {
-        return this.decay;
     }
 
     @Override

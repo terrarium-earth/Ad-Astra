@@ -7,7 +7,7 @@ public enum LocationState implements StringIdentifiable {
 
     private final String name;
 
-    private LocationState(String name) {
+    LocationState(String name) {
         this.name = name;
     }
 

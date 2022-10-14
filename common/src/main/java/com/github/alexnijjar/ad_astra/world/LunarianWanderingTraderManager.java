@@ -103,7 +103,7 @@ public class LunarianWanderingTraderManager implements Spawner {
 		BlockPos blockPos = playerEntity.getBlockPos();
 		PointOfInterestStorage pointOfInterestStorage = world.getPointOfInterestStorage();
 		Optional<BlockPos> optional = pointOfInterestStorage.getPosition(holder -> holder.isRegistryKey(PointOfInterestTypes.MEETING), pos -> true, blockPos, 48, PointOfInterestStorage.OccupationStatus.ANY);
-		BlockPos blockPos2 = (BlockPos) optional.orElse(blockPos);
+		BlockPos blockPos2 = optional.orElse(blockPos);
 		BlockPos blockPos3 = this.getNearbySpawnPos(world, blockPos2, 48);
 		if (blockPos3 != null && this.doesNotSuffocateAt(world, blockPos3)) {
 			if (world.getBiome(blockPos3).isIn((BiomeTags.WITHOUT_WANDERING_TRADER_SPAWNS))) {

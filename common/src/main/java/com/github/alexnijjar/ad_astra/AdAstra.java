@@ -36,11 +36,11 @@ public class AdAstra {
 
 		// Registry
 		ModFluids.register();
+		ModEntityTypes.register();
 		ModBlocks.register();
 		ModItems.register();
 		ModBlockEntities.register();
 		ModRecipes.register();
-		ModEntityTypes.register();
 		ModScreenHandlers.register();
 		ModCommands.register();
 		ModSoundEvents.register();

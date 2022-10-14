@@ -3,7 +3,6 @@ package com.github.alexnijjar.ad_astra.entities;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -89,7 +88,7 @@ public class LunarianTradeOffers {
 			new SellItemFactory(Items.WATER_BUCKET, 5, 1, 4, 1), new SellItemFactory(Items.LAVA_BUCKET, 3, 1, 4, 1), new BuyForOneEmeraldFactory(ModItems.DESH_INGOT.get(), 4, 20, 1), new BuyForOneEmeraldFactory(ModItems.OSTRUM_INGOT.get(), 4, 20, 1), new BuyForOneEmeraldFactory(ModItems.CALORITE_INGOT.get(), 4, 20, 1) }, 2, new Factory[] { new SellItemFactory(OxygenTankItem.createOxygenatedTank(), 16, 1, 3, 2), new SellItemFactory(ModItems.LAUNCH_PAD.get(), 3, 9, 3, 1), new SellItemFactory(ModItems.LAUNCH_PAD.get(), 3, 9, 3, 1), new SellItemFactory(ModItems.FUEL_BUCKET.get(), 4, 1, 6, 1) }));
 
 	private static Int2ObjectMap<Factory[]> copyToFastUtilMap(ImmutableMap<Integer, Factory[]> map) {
-		return new Int2ObjectOpenHashMap<Factory[]>(map);
+		return new Int2ObjectOpenHashMap<>(map);
 	}
 
 	static class BuyForOneEmeraldFactory implements Factory {
@@ -289,7 +288,7 @@ public class LunarianTradeOffers {
 		@Override
 		public TradeOffer create(Entity entity, RandomGenerator random) {
 			ItemStack itemStack = new ItemStack(Items.EMERALD, this.price);
-			List<Potion> list = Registry.POTION.stream().filter(potion -> !potion.getEffects().isEmpty() && BrewingRecipeRegistry.isBrewable(potion)).collect(Collectors.toList());
+			List<Potion> list = Registry.POTION.stream().filter(potion -> !potion.getEffects().isEmpty() && BrewingRecipeRegistry.isBrewable(potion)).toList();
 			Potion potion2 = list.get(random.nextInt(list.size()));
 			ItemStack itemStack2 = PotionUtil.setPotion(new ItemStack(this.sell.getItem(), this.sellCount), potion2);
 			return new TradeOffer(itemStack, new ItemStack(this.secondBuy, this.secondCount), itemStack2, this.maxUses, this.experience, this.priceMultiplier);
@@ -305,7 +304,7 @@ public class LunarianTradeOffers {
 
 		@Override
 		public TradeOffer create(Entity entity, RandomGenerator random) {
-			List<Enchantment> list = Registry.ENCHANTMENT.stream().filter(Enchantment::isAvailableForEnchantedBookOffer).collect(Collectors.toList());
+			List<Enchantment> list = Registry.ENCHANTMENT.stream().filter(Enchantment::isAvailableForEnchantedBookOffer).toList();
 			Enchantment enchantment = list.get(random.nextInt(list.size()));
 			int i = MathHelper.nextInt(random, enchantment.getMinLevel(), enchantment.getMaxLevel());
 			ItemStack itemStack = EnchantedBookItem.forEnchantment(new EnchantmentLevelEntry(enchantment, i));

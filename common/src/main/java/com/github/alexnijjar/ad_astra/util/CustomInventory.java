@@ -6,7 +6,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 
 /**
- * A custom simple inventory that remembers the order the items were placed in. Source: https://discord.com/channels/507304429255393322/807617284129423370/957830913226575902
+ * A custom simple inventory that remembers the order the items were placed in. Source: <a href="https://discord.com/channels/507304429255393322/807617284129423370/957830913226575902">...</a>
  */
 public class CustomInventory extends SimpleInventory {
 

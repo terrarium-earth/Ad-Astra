@@ -10,7 +10,6 @@ import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.items.FluidContainingItem;
 import com.github.alexnijjar.ad_astra.registry.ModFluids;
 import com.github.alexnijjar.ad_astra.registry.ModItems;
-import com.github.alexnijjar.ad_astra.util.FluidUtils;
 
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;

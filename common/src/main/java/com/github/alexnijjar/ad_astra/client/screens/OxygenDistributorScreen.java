@@ -30,8 +30,8 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
 	private static final Identifier TEXTURE = new ModIdentifier("textures/gui/screens/oxygen_distributor.png");
 	private static final Identifier WARNING_SIGN = new ModIdentifier("textures/gui/overlay/warning_sign.png");
 
-	Text SHOW_TEXT = ScreenUtils.createText("show");
-	Text HIDE_TEXT = ScreenUtils.createText("hide");
+	final Text SHOW_TEXT = ScreenUtils.createText("show");
+	final Text HIDE_TEXT = ScreenUtils.createText("hide");
 
 	public static final int INPUT_TANK_LEFT = 50;
 	public static final int INPUT_TANK_TOP = 80;
@@ -142,9 +142,9 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
 		oxygenUsageRounded = (float) (Math.round(oxygenUsageRounded * 1000.0) / 1000.0);
 
 		// Energy per tick text
-		this.textRenderer.draw(matrices, Text.translatable("gauge_text.ad_astra.energy_per_tick", energyUsagePerTick), 11, offset + -17, 0x68d975);
+		this.textRenderer.draw(matrices, Text.translatable("gauge_text.ad_astra.energy_per_tick", energyUsagePerTick), 11, offset - 17, 0x68d975);
 		// Oxygen usage per tick text
-		this.textRenderer.draw(matrices, Text.translatable("gauge_text.ad_astra.fluid_per_tick", oxygenUsageRounded), 11, offset + -5, 0x68d975);
+		this.textRenderer.draw(matrices, Text.translatable("gauge_text.ad_astra.fluid_per_tick", oxygenUsageRounded), 11, offset - 5, 0x68d975);
 		matrices.pop();
 	}
 

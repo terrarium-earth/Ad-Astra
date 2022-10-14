@@ -22,9 +22,9 @@ import net.minecraft.util.math.MathHelper;
 @Environment(EnvType.CLIENT)
 public class PlanetWeatherSoundPlayer implements ClientPlayerTickable {
 
-    private ClientPlayerEntity player;
-    private SoundManager soundManager;
-    private List<MusicLoop> soundLoops = new LinkedList<>();
+    private final ClientPlayerEntity player;
+    private final SoundManager soundManager;
+    private final List<MusicLoop> soundLoops = new LinkedList<>();
 
     public PlanetWeatherSoundPlayer(ClientPlayerEntity player, SoundManager soundManager) {
         this.player = player;

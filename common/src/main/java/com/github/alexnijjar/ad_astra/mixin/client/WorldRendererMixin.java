@@ -63,7 +63,7 @@ public abstract class WorldRendererMixin {
 	}
 
 	// Venus rain.
-	@Inject(method = "tickRainSplashing", at = @At("HEAD"), cancellable = true)
+	@Inject(method = "tickRainSplashing", at = @At("HEAD"))
 	public void tickRainSplashing(Camera camera, CallbackInfo info) {
 		float f = this.client.world.getRainGradient(1.0F) / (MinecraftClient.isFancyGraphicsOrBetter() ? 1.0F : 2.0F);
 		if (!(f <= 0.0F)) {
@@ -90,7 +90,7 @@ public abstract class WorldRendererMixin {
 					FluidState fluidState = worldView.getFluidState(blockPos2);
 					VoxelShape voxelShape = blockState.getCollisionShape(worldView, blockPos2);
 					double g = voxelShape.getEndingCoord(Direction.Axis.Y, d, e);
-					double h = (double) fluidState.getHeight(worldView, blockPos2);
+					double h = fluidState.getHeight(worldView, blockPos2);
 					double m = Math.max(g, h);
 					ParticleEffect particleEffect = !fluidState.isIn(FluidTags.LAVA) && !blockState.isOf(Blocks.MAGMA_BLOCK) && !CampfireBlock.isLitCampfire(blockState) ? ParticleTypes.SMOKE : ModParticleTypes.VENUS_RAIN.get();
 					this.client.world.addParticle(particleEffect, (double) blockPos2.getX() + d, (double) blockPos2.getY() + m, (double) blockPos2.getZ() + e, 0.0, 0.0, 0.0);
@@ -107,7 +107,6 @@ public abstract class WorldRendererMixin {
 			}
 
 		}
-		return;
 	}
 
 
