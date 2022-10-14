@@ -1,11 +1,15 @@
 package com.github.alexnijjar.ad_astra.registry;
 
-import com.github.alexnijjar.ad_astra.util.ModIdentifier;
-
+import com.github.alexnijjar.ad_astra.AdAstra;
+import dev.architectury.registry.registries.DeferredRegister;
 import net.minecraft.entity.decoration.painting.PaintingVariant;
 import net.minecraft.util.registry.Registry;
 
+import java.util.function.Supplier;
+
 public class ModPaintings {
+
+	public static final DeferredRegister<PaintingVariant> PAINTINGS = DeferredRegister.create(AdAstra.MOD_ID, Registry.PAINTING_VARIANT_KEY);
 
 	public static void register() {
 		register("mercury", 16, 16);
@@ -22,9 +26,10 @@ public class ModPaintings {
 		register("the_milky_way", 64, 48);
 		register("alpha_centaury_c", 64, 64);
 		register("sun", 80, 80);
+		PAINTINGS.register();
 	}
 
-	private static PaintingVariant register(String name, int width, int height) {
-		return Registry.register(Registry.PAINTING_VARIANT, new ModIdentifier(name), new PaintingVariant(width, height));
+	private static Supplier<PaintingVariant> register(String id, int width, int height) {
+		return PAINTINGS.register(id, () -> new PaintingVariant(width, height));
 	}
 }

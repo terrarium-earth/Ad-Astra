@@ -84,18 +84,5 @@ public class ModEntityTypes {
 		EntityAttributeRegistry.register(LUNARIAN_WANDERING_TRADER, LunarianEntity::createMobAttributes);
 		EntityAttributeRegistry.register(SULFUR_CREEPER, SulfurCreeperEntity::createMobAttributes);
 		EntityAttributeRegistry.register(GLACIAN_RAM, GlacianRamEntity::createMobAttributes);
-
-		SpawnRestriction.register(LUNARIAN.get(), SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, LunarianEntity::canMobSpawn);
-		SpawnRestriction.register(CORRUPTED_LUNARIAN.get(), SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, CorruptedLunarianEntity::canSpawnInDark);
-		SpawnRestriction.register(STAR_CRAWLER.get(), SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, StarCrawlerEntity::canSpawnInDark);
-		SpawnRestriction.register(MARTIAN_RAPTOR.get(), SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MartianRaptorEntity::canSpawnInDark);
-		SpawnRestriction.register(PYGRO.get(), SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, PygroEntity::canSpawnInDark);
-		SpawnRestriction.register(ZOMBIFIED_PYGRO.get(), SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ZombifiedPygroEntity::canSpawnInDark);
-		SpawnRestriction.register(PYGRO_BRUTE.get(), SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, PygroBruteEntity::canSpawnInDark);
-		SpawnRestriction.register(MOGLER.get(), SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MoglerEntity::canMobSpawn);
-		SpawnRestriction.register(ZOMBIFIED_MOGLER.get(), SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ZombifiedMoglerEntity::canSpawnInDark);
-		SpawnRestriction.register(LUNARIAN_WANDERING_TRADER.get(), SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, LunarianEntity::canMobSpawn);
-		SpawnRestriction.register(SULFUR_CREEPER.get(), SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, SulfurCreeperEntity::canSpawnInDark);
-		SpawnRestriction.register(GLACIAN_RAM.get(), SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, GlacianRamEntity::canMobSpawn);
 	}
 }

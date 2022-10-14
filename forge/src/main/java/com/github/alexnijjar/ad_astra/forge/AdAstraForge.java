@@ -2,6 +2,7 @@ package com.github.alexnijjar.ad_astra.forge;
 
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.client.AdAstraClient;
+import com.github.alexnijjar.ad_astra.client.forge.AdAstraClientForge;
 import dev.architectury.platform.forge.EventBuses;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -25,5 +26,6 @@ public class AdAstraForge {
 
     public static void onClientSetup(FMLClientSetupEvent event) {
         AdAstraClient.initializeClient();
+        AdAstraClientForge.init();
     }
 }

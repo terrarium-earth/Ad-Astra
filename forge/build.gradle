@@ -36,6 +36,11 @@ dependencies {
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
+
+    modApi("me.shedaniel.cloth:cloth-config-forge:${project.cloth_config_version}")
+
+    // REI
+    modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-forge:$project.rei_version"
 }
 
 processResources {

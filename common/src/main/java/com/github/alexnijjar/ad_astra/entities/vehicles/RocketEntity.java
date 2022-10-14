@@ -257,7 +257,7 @@ public class RocketEntity extends VehicleEntity {
 
 	public void initiateLaunchSequenceFromServer() {
 		initiateLaunchSequence();
-		world.playSound(null, this.getBlockPos(), ModSoundEvents.ROCKET_LAUNCH_SOUND_EVENT, SoundCategory.AMBIENT, 1, 1);
+		world.playSound(null, this.getBlockPos(), ModSoundEvents.ROCKET_LAUNCH_SOUND_EVENT.get(), SoundCategory.AMBIENT, 1, 1);
 	}
 
 	// Synonymous on client and server.

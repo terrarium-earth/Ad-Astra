@@ -1,10 +1,7 @@
 package com.github.alexnijjar.ad_astra.client.forge;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.github.alexnijjar.ad_astra.client.AdAstraClient;
-
+import com.github.alexnijjar.ad_astra.forge.AdAstraForge;
 import net.minecraft.client.render.TexturedRenderLayers;
 import net.minecraft.client.render.item.BuiltinModelItemRenderer;
 import net.minecraft.item.Item;
@@ -12,7 +9,11 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class AdAstraClientForge {
 
@@ -44,8 +45,11 @@ public class AdAstraClientForge {
     }
 
     public static void init() {
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(AdAstraClientForge::modelLoading);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(AdAstraClientForge::chestSpriteLoading);
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        modEventBus.addListener(AdAstraClientForge::modelLoading);
+        modEventBus.addListener(AdAstraClientForge::spriteLoading);
+        modEventBus.addListener(AdAstraClientForge::chestSpriteLoading);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(AdAstraForge::commonSetup);
 
         AdAstraClient.onRegisterItemRenderers(AdAstraClientForge::registerItemRenderer);
     }

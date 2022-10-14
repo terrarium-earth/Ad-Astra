@@ -68,7 +68,6 @@ public class AdAstraClient {
     public static List<Galaxy> galaxies = new ArrayList<>();
 
     public static void initializeClient() {
-
         PlanetResources.register();
         ClientModScreens.register();
         ClientModEntities.register();
@@ -84,7 +83,7 @@ public class AdAstraClient {
 
         ArmourRenderers.register();
 
-        RenderTypeRegistry.register(RenderLayer.getCutout(), ModBlocks.WATER_PUMP.get(), ModBlocks.ENERGIZER.get(), ModBlocks.STEEL_DOOR.get(), ModBlocks.GLACIAN_DOOR.get(), ModBlocks.GLACIAN_TRAPDOOR.get(), ModBlocks.AERONOS_DOOR.get(), ModBlocks.AERONOS_TRAPDOOR.get(), ModBlocks.STROPHAR_DOOR.get(), ModBlocks.STROPHAR_TRAPDOOR.get(), ModBlocks.EXTINGUISHED_TORCH.get(), ModBlocks.WALL_EXTINGUISHED_TORCH.get());
+        RenderTypeRegistry.register(RenderLayer.getCutout(), ModBlocks.WATER_PUMP.get(), ModBlocks.ENERGIZER.get(), ModBlocks.STEEL_DOOR.get(), ModBlocks.GLACIAN_DOOR.get(), ModBlocks.GLACIAN_TRAPDOOR.get(), ModBlocks.AERONOS_DOOR.get(), ModBlocks.AERONOS_TRAPDOOR.get(), ModBlocks.STROPHAR_DOOR.get(), ModBlocks.STROPHAR_TRAPDOOR.get(), ModBlocks.EXTINGUISHED_TORCH.get(), ModBlocks.WALL_EXTINGUISHED_TORCH.get(), ModBlocks.STEEL_TRAPDOOR.get());
         RenderTypeRegistry.register(RenderLayer.getTranslucent(), ModBlocks.EXTINGUISHED_LANTERN.get(), ModBlocks.GLACIAN_LEAVES.get());
         RenderTypeRegistry.register(RenderLayer.getCutout(), ModBlocks.NASA_WORKBENCH.get(), ModBlocks.AERONOS_MUSHROOM.get(), ModBlocks.STROPHAR_MUSHROOM.get(), ModBlocks.AERONOS_LADDER.get(), ModBlocks.STROPHAR_LADDER.get(), ModBlocks.AERONOS_CHEST.get(), ModBlocks.STROPHAR_CHEST.get());
 
