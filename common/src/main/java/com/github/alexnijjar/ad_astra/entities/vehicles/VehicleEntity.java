@@ -1,5 +1,7 @@
 package com.github.alexnijjar.ad_astra.entities.vehicles;
 
+import earth.terrarium.botarium.api.menu.MenuHooks;
+import net.minecraft.server.network.ServerPlayerEntity;
 import org.jetbrains.annotations.Nullable;
 
 import com.github.alexnijjar.ad_astra.AdAstra;
@@ -229,7 +231,7 @@ public abstract class VehicleEntity extends Entity implements Updatable {
 	public void openInventory(PlayerEntity player, ExtraDataMenuProvider handler) {
 		if (!player.world.isClient) {
 			if (player.isSneaking()) {
-				player.openHandledScreen(handler);
+				MenuHooks.openMenu((ServerPlayerEntity) player, handler);
 			}
 		}
 	}

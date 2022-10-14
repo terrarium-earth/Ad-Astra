@@ -105,13 +105,13 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
 		if (usesEnergy() && !this.getCachedState().get(AbstractMachineBlock.POWERED)) {
 			for (Direction direction : Direction.values()) {
 				// TODO: Sided energy storage transfer
-				EnergyHooks.moveEnergy(EnergyHooks.getBlockEnergyManager(this, direction.getOpposite()), EnergyHooks.getBlockEnergyManager(world.getBlockEntity(pos.offset(direction)), direction), Long.MAX_VALUE);
+//				EnergyHooks.moveEnergy(EnergyHooks.getBlockEnergyManager(this, direction.getOpposite()), EnergyHooks.getBlockEnergyManager(world.getBlockEntity(pos.offset(direction)), direction), Long.MAX_VALUE);
 			}
 		}
 	}
 
 	public long getEnergy() {
-		return this.getEnergy();
+		return this.energyContainer.getStoredEnergy();
 	}
 
 	public boolean hasEnergy() {

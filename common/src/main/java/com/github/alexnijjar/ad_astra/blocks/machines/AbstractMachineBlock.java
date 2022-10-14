@@ -6,6 +6,7 @@ import com.github.alexnijjar.ad_astra.blocks.machines.entity.AbstractMachineBloc
 import com.github.alexnijjar.ad_astra.blocks.machines.entity.FluidMachineBlockEntity;
 import com.github.alexnijjar.ad_astra.blocks.machines.entity.OxygenDistributorBlockEntity;
 
+import earth.terrarium.botarium.api.menu.MenuHooks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -21,6 +22,7 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
@@ -83,7 +85,7 @@ public abstract class AbstractMachineBlock extends BlockWithEntity {
 	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
 		if (!world.isClient) {
 			if (world.getBlockEntity(pos) instanceof AbstractMachineBlockEntity machineBlock) {
-				player.openHandledScreen(machineBlock);
+				MenuHooks.openMenu((ServerPlayerEntity) player, machineBlock);
 			}
 		}
 		return ActionResult.SUCCESS;
