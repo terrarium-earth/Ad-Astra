@@ -5,6 +5,7 @@ import com.github.alexnijjar.ad_astra.recipes.CookingRecipe;
 import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
 import com.github.alexnijjar.ad_astra.registry.ModRecipes;
 import com.github.alexnijjar.ad_astra.screen.handler.CoalGeneratorScreenHandler;
+import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -75,11 +76,11 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity {
 						ticksToTurnOff = 7;
 						// Check if the input is a valid fuel
 					} else if (!input.isEmpty()) {
-						CookingRecipe recipe = this.createRecipe(ModRecipes.GENERATING_RECIPE, input, false);
-						if (recipe != null) {
+						Integer burnTime = FuelRegistry.INSTANCE.get(input.getItem());
+						if (burnTime != null) {
 							input.decrement(1);
-							this.cookTimeTotal = recipe.getCookTime();
-							this.cookTime = recipe.getCookTime();
+							this.cookTimeTotal = burnTime.shortValue();
+							this.cookTime = burnTime.shortValue();
 						}
 					} else {
 						this.setActive(false);

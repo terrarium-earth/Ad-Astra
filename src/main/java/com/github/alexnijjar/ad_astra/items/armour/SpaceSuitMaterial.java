@@ -1,6 +1,7 @@
 package com.github.alexnijjar.ad_astra.items.armour;
 
 import com.github.alexnijjar.ad_astra.registry.ModItems;
+import com.github.alexnijjar.ad_astra.registry.ModTags;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.recipe.Ingredient;
@@ -34,7 +35,7 @@ public class SpaceSuitMaterial implements ArmorMaterial {
 
 	@Override
 	public Ingredient getRepairIngredient() {
-		return Ingredient.ofItems(ModItems.STEEL_INGOT);
+		return Ingredient.ofTag(ModTags.STEEL_INGOTS);
 	}
 
 	@Override

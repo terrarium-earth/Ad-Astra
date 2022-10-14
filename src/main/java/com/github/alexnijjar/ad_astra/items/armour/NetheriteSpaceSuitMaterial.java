@@ -1,5 +1,7 @@
 package com.github.alexnijjar.ad_astra.items.armour;
 
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.tag.convention.v1.ConventionalItemTags;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Items;
@@ -34,7 +36,7 @@ public class NetheriteSpaceSuitMaterial implements ArmorMaterial {
 
 	@Override
 	public Ingredient getRepairIngredient() {
-		return Ingredient.ofItems(Items.NETHERITE_INGOT);
+		return Ingredient.ofTag(ConventionalItemTags.NETHERITE_INGOTS);
 	}
 
 	@Override
