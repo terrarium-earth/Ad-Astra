@@ -17,6 +17,7 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.World;
@@ -103,35 +104,22 @@ public class FluidPipeBlock extends AbstractPipeBlock {
     }
 
     @Override
-    public void handleWrench(World world, BlockPos pos, BlockState state, Direction side, PlayerEntity user) {
+    public void handleWrench(World world, BlockPos pos, BlockState state, Direction side, PlayerEntity user, Vec3d hitPos) {
         if (!world.isClient) {
-            EnumProperty<PipeState> property = DIRECTIONS.get(user.isSneaking() ? user.getMovementDirection() : side);
-            int pitch = (int) user.getPitch();
-            if (pitch > 60) {
-                property = DIRECTIONS.get(Direction.DOWN);
-            } else if (pitch < -60) {
-                property = DIRECTIONS.get(Direction.UP);
-            }
-            world.setBlockState(pos, state.with(property, this.togglePipeState(state.get(property), user)), Block.NOTIFY_ALL, 0);
+            EnumProperty<PipeState> property = DIRECTIONS.get(getDirectionByVec(hitPos, pos).orElse(user.isSneaking() ? side.getOpposite() : side));
+            world.setBlockState(pos, togglePipeState(state, property, user), Block.NOTIFY_ALL, 0);
             world.playSound(null, pos, ModSoundEvents.WRENCH, SoundCategory.BLOCKS, 1, 1);
         }
     }
 
-    public PipeState togglePipeState(PipeState state, PlayerEntity user) {
-        if (state.equals(PipeState.NONE)) {
-            user.sendMessage(new TranslatableText("info.ad_astra.normal"), true);
-            return PipeState.NORMAL;
-        } else if (state.equals(PipeState.NORMAL)) {
-            user.sendMessage(new TranslatableText("info.ad_astra.insert"), true);
-            return PipeState.INSERT;
-        } else if (state.equals(PipeState.INSERT)) {
-            user.sendMessage(new TranslatableText("info.ad_astra.extract"), true);
-            return PipeState.EXTRACT;
-        } else if (state.equals(PipeState.EXTRACT)) {
-            user.sendMessage(new TranslatableText("info.ad_astra.none"), true);
-            return PipeState.NONE;
-        } else {
-            return PipeState.NONE;
+    public BlockState togglePipeState(BlockState state, EnumProperty<PipeState> property, PlayerEntity user) {
+        state = state.cycle(property);
+        switch (state.get(property)) {
+            case NORMAL -> user.sendMessage(new TranslatableText("info.ad_astra.normal"), true);
+            case INSERT -> user.sendMessage(new TranslatableText("info.ad_astra.insert"), true);
+            case EXTRACT -> user.sendMessage(new TranslatableText("info.ad_astra.extract"), true);
+            case NONE -> user.sendMessage(new TranslatableText("info.ad_astra.none"), true);
         }
+        return state;
     }
 }
