@@ -17,10 +17,13 @@ import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
+
+import java.util.Optional;
 
 @SuppressWarnings("deprecation")
 public abstract class AbstractPipeBlock extends BlockWithEntity implements Waterloggable, Wrenchable {
@@ -105,4 +108,15 @@ public abstract class AbstractPipeBlock extends BlockWithEntity implements Water
 
     // Expand the voxel shape to match the model.
     public abstract VoxelShape updateOutlineShape(BlockState state);
+
+    public static Optional<Direction> getDirectionByVec(Vec3d hit, BlockPos pos) {
+        var relativePos = hit.add(-pos.getX(), -pos.getY(), -pos.getZ());
+        if (relativePos.x < (2f/16f)) return Optional.of(Direction.WEST);
+        else if (relativePos.x > (14f/16f)) return Optional.of(Direction.EAST);
+        else if (relativePos.z < (2f/16f)) return Optional.of(Direction.NORTH);
+        else if (relativePos.z > (14f/16f)) return Optional.of(Direction.SOUTH);
+        else if (relativePos.y < (2f/16f)) return Optional.of(Direction.DOWN);
+        else if (relativePos.y > (14f/16f)) return Optional.of(Direction.UP);
+        return Optional.empty();
+    }
 }

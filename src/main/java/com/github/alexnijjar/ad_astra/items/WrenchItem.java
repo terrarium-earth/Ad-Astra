@@ -17,7 +17,7 @@ public class WrenchItem extends Item {
     public ActionResult useOnBlock(ItemUsageContext context) {
         World world = context.getWorld();
         if (world.getBlockState(context.getBlockPos()).getBlock() instanceof Wrenchable block) {
-            block.handleWrench(world, context.getBlockPos(), world.getBlockState(context.getBlockPos()), context.getSide(), context.getPlayer());
+            block.handleWrench(world, context.getBlockPos(), world.getBlockState(context.getBlockPos()), context.getSide(), context.getPlayer(), context.getHitPos());
             return ActionResult.SUCCESS;
         }
         return super.useOnBlock(context);
