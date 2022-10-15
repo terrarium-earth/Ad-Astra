@@ -8,6 +8,7 @@ import com.github.alexnijjar.ad_astra.util.ModUtils;
 import earth.terrarium.botarium.api.energy.*;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -179,7 +180,7 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
 	}
 
 	@Override
-	public @Nullable String getArmorTexture(ItemStack stack, LivingEntity entity, EquipmentSlot slot, String type) {
+	public @Nullable String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
 		if (slot.equals(EquipmentSlot.CHEST)) {
 			if (stack.getItem() instanceof JetSuit suit) {
 				var energyStorage = suit.getEnergyStorage(stack);

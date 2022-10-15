@@ -40,7 +40,6 @@
     "client.EntityRendererMixin",
     "client.GameRendererMixin",
     "client.HeldItemRendererMixin",
-    "client.ItemColorsMixin",
     "client.PlayerEntityRendererMixin",
     "client.SoundManagerMixin",
     "client.TexturedRenderLayersMixin",

@@ -4,12 +4,10 @@ import java.util.List;
 
 import com.github.alexnijjar.ad_astra.entities.vehicles.RoverEntity;
 import com.github.alexnijjar.ad_astra.registry.ModEntityTypes;
-import com.github.alexnijjar.ad_astra.registry.ModFluids;
 
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FluidBlock;
-import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
@@ -28,12 +26,7 @@ public class RoverItem extends VehicleItem {
 		super(settings);
 	}
 
-	@Override
-	public List<Fluid> getInputFluids() {
-		return List.of(ModFluids.FUEL_STILL.get(), ModFluids.CRYO_FUEL_STILL.get());
-	}
-
-	@Override
+    @Override
 	public ActionResult useOnBlock(ItemUsageContext context) {
 		World world = context.getWorld();
 		if (!world.isClient) {

@@ -7,6 +7,12 @@
             ]
         }
     ],
+    "conditions": [
+        {
+            "condition": "forge:mod_loaded",
+            "mod_id": "create"
+        }
+    ],
     "type": "create:crushing",
     "ingredients": [
         {

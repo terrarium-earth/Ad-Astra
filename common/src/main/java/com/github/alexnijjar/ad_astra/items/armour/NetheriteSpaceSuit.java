@@ -2,6 +2,7 @@ package com.github.alexnijjar.ad_astra.items.armour;
 
 import java.util.stream.StreamSupport;
 
+import net.minecraft.entity.Entity;
 import org.apache.commons.lang3.Range;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,7 +34,7 @@ public class NetheriteSpaceSuit extends SpaceSuit {
 	}
 
 	@Override
-	public @Nullable String getArmorTexture(ItemStack stack, LivingEntity entity, EquipmentSlot slot, String type) {
-		return AdAstra.MOD_ID + ":textures/entity/armour/netherite_space_suit.png";
+	public @Nullable String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
+		return AdAstra.MOD_ID + (slot != EquipmentSlot.HEAD || "overlay".equals(type) ? ":textures/entity/armour/netherite_space_suit_overlay.png" : ":textures/entity/armour/netherite_space_suit.png");
 	}
 }
