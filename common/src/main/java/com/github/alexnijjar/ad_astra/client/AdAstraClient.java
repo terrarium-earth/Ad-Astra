@@ -1,44 +1,29 @@
 package com.github.alexnijjar.ad_astra.client;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-
 import com.github.alexnijjar.ad_astra.client.registry.ClientModEntities;
 import com.github.alexnijjar.ad_astra.client.registry.ClientModKeybindings;
 import com.github.alexnijjar.ad_astra.client.registry.ClientModParticles;
 import com.github.alexnijjar.ad_astra.client.registry.ClientModScreens;
+import com.github.alexnijjar.ad_astra.client.renderer.armour.ArmourRenderers;
 import com.github.alexnijjar.ad_astra.client.renderer.block.ChestItemRenderer;
-import com.github.alexnijjar.ad_astra.client.renderer.block.EnergizerBlockEntityRenderer;
 import com.github.alexnijjar.ad_astra.client.renderer.block.LaunchPadBlockEntityRenderer;
 import com.github.alexnijjar.ad_astra.client.renderer.block.SlidingDoorBlockEntityRenderer;
-import com.github.alexnijjar.ad_astra.client.renderer.block.flag.FlagBlockEntityRenderer;
 import com.github.alexnijjar.ad_astra.client.renderer.block.flag.FlagItemRenderer;
-import com.github.alexnijjar.ad_astra.client.renderer.block.globe.GlobeBlockEntityRenderer;
 import com.github.alexnijjar.ad_astra.client.renderer.block.globe.GlobeItemRenderer;
 import com.github.alexnijjar.ad_astra.client.renderer.entity.vehicles.rockets.tier_1.RocketItemRendererTier1;
 import com.github.alexnijjar.ad_astra.client.renderer.entity.vehicles.rockets.tier_2.RocketItemRendererTier2;
 import com.github.alexnijjar.ad_astra.client.renderer.entity.vehicles.rockets.tier_3.RocketItemRendererTier3;
 import com.github.alexnijjar.ad_astra.client.renderer.entity.vehicles.rockets.tier_4.RocketItemRendererTier4;
 import com.github.alexnijjar.ad_astra.client.renderer.entity.vehicles.rover.RoverItemRenderer;
-import com.github.alexnijjar.ad_astra.client.renderer.armour.ArmourRenderers;
-import com.github.alexnijjar.ad_astra.client.resourcepack.Galaxy;
-import com.github.alexnijjar.ad_astra.client.resourcepack.PlanetResources;
-import com.github.alexnijjar.ad_astra.client.resourcepack.PlanetRing;
-import com.github.alexnijjar.ad_astra.client.resourcepack.PlanetSkyRenderer;
-import com.github.alexnijjar.ad_astra.client.resourcepack.SolarSystem;
+import com.github.alexnijjar.ad_astra.client.resourcepack.*;
 import com.github.alexnijjar.ad_astra.client.screens.PlayerOverlayScreen;
 import com.github.alexnijjar.ad_astra.data.Planet;
-import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
 import com.github.alexnijjar.ad_astra.registry.ModBlocks;
 import com.github.alexnijjar.ad_astra.registry.ModFluids;
 import com.github.alexnijjar.ad_astra.registry.ModItems;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-
 import dev.architectury.event.events.client.ClientGuiEvent;
-import dev.architectury.registry.client.rendering.BlockEntityRendererRegistry;
 import dev.architectury.registry.client.rendering.RenderTypeRegistry;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -58,6 +43,11 @@ import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+
 @Environment(EnvType.CLIENT)
 public class AdAstraClient {
 
@@ -70,16 +60,11 @@ public class AdAstraClient {
     public static void initializeClient() {
         PlanetResources.register();
         ClientModScreens.register();
-        ClientModEntities.register();
         ClientModParticles.register();
         ClientModKeybindings.register();
         ClientGuiEvent.RENDER_HUD.register(PlayerOverlayScreen::render);
 
-        BlockEntityRendererRegistry.register(ModBlockEntities.FLAG_BLOCK_ENTITY.get(), FlagBlockEntityRenderer::new);
-        BlockEntityRendererRegistry.register(ModBlockEntities.LAUNCH_PAD.get(), LaunchPadBlockEntityRenderer::new);
-        BlockEntityRendererRegistry.register(ModBlockEntities.GLOBE_BLOCK_ENTITY.get(), GlobeBlockEntityRenderer::new);
-        BlockEntityRendererRegistry.register(ModBlockEntities.ENERGIZER.get(), EnergizerBlockEntityRenderer::new);
-        BlockEntityRendererRegistry.register(ModBlockEntities.SLIDING_DOOR.get(), SlidingDoorBlockEntityRenderer::new);
+
 
         ArmourRenderers.register();
 

@@ -4,17 +4,16 @@ import java.util.List;
 import java.util.stream.StreamSupport;
 
 import earth.terrarium.botarium.api.fluid.FluidHooks;
+import net.minecraft.entity.Entity;
 import org.apache.commons.lang3.Range;
 
 import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.items.FluidContainingItem;
-import com.github.alexnijjar.ad_astra.registry.ModFluids;
 import com.github.alexnijjar.ad_astra.registry.ModItems;
 
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.DyeableArmorItem;
 import net.minecraft.item.Item;
@@ -29,11 +28,6 @@ public class SpaceSuit extends DyeableArmorItem implements FluidContainingItem, 
 
 	public SpaceSuit(ArmorMaterial material, EquipmentSlot slot, Item.Settings settings) {
 		super(material, slot, settings);
-	}
-
-	@Override
-	public List<Fluid> getInputFluids() {
-		return List.of(ModFluids.OXYGEN_STILL.get());
 	}
 
 	@Override
@@ -86,7 +80,7 @@ public class SpaceSuit extends DyeableArmorItem implements FluidContainingItem, 
 	}
 
 	@Override
-	public @Nullable String getArmorTexture(ItemStack stack, LivingEntity entity, EquipmentSlot slot, String type) {
-		return AdAstra.MOD_ID + ":textures/entity/armour/space_suit.png";
+	public @Nullable String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
+		return AdAstra.MOD_ID + ("overlay".equals(type) ? ":textures/entity/armour/space_suit_overlay.png" : ":textures/entity/armour/space_suit.png");
 	}
 }

@@ -254,9 +254,8 @@ public abstract class VehicleEntity extends Entity implements Updatable {
 			BlockPos pos = this.getBlockPos();
 			ItemStack dropStack = this.getDropStack();
 
-			// Set the fluid and fluid variant in the dropped item.
-			((VehicleItem) dropStack.getItem()).setAmount(dropStack, getTank().getFluidAmount());
-			((VehicleItem) dropStack.getItem()).setFluid(dropStack, getTank().getFluid());
+			// Set the fluid and fluid type in the dropped item.
+			((VehicleItem) dropStack.getItem()).setFluid(dropStack, getTank());
 			NbtCompound nbt = dropStack.getOrCreateNbt();
 			// Set the inventory in the dropped item.
 			nbt.put("inventory", this.inventory.toNbtList());
@@ -380,7 +379,7 @@ public abstract class VehicleEntity extends Entity implements Updatable {
 	}
 
 	public FluidHolder getFluidHolder() {
-		return FluidHooks.newFluidHolder(Registry.FLUID.get(new Identifier(this.dataTracker.get(FLUID_VARIANT))), 0, null);
+		return FluidHooks.newFluidHolder(Registry.FLUID.get(new Identifier(this.dataTracker.get(FLUID_VARIANT))), this.dataTracker.get(FLUID_AMOUNT), null);
 	}
 
 	public void consumeFuel() {

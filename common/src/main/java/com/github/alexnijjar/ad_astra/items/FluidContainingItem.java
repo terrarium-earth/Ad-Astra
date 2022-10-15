@@ -2,11 +2,7 @@ package com.github.alexnijjar.ad_astra.items;
 
 import java.util.List;
 
-import earth.terrarium.botarium.api.fluid.FluidHolder;
-import earth.terrarium.botarium.api.fluid.FluidHoldingItem;
-import earth.terrarium.botarium.api.fluid.ItemFilteredFluidContainer;
-import earth.terrarium.botarium.api.fluid.ItemFluidContainer;
-import earth.terrarium.botarium.api.fluid.SimpleUpdatingFluidContainer;
+import earth.terrarium.botarium.api.fluid.*;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
 
@@ -17,8 +13,6 @@ public interface FluidContainingItem extends FluidHoldingItem {
 	}
 
 	long getTankSize();
-
-	List<Fluid> getInputFluids();
 
 	default FluidHolder getTank(ItemStack stack) {
 		return this.getFluidContainer(stack).getFluids().get(0);
@@ -34,14 +28,18 @@ public interface FluidContainingItem extends FluidHoldingItem {
 	}
 
 	default void setAmount(ItemStack stack, long amount) {
-		this.getTank(stack).setAmount(amount);
+		FluidHolder tank = getTank(stack);
+		if (!tank.isEmpty()) {
+			tank.setAmount(amount);
+			getFluidContainer(stack).setFluid(0, tank);
+		}
 	}
 
 	default Fluid getFluid(ItemStack stack) {
 		return this.getTank(stack).getFluid();
 	}
 
-	default void setFluid(ItemStack stack, Fluid fluid) {
-		this.getTank(stack).setFluid(fluid);
+	default void setFluid(ItemStack stack, FluidHolder fluid) {
+		getFluidContainer(stack).setFluid(0, fluid);
 	}
 }

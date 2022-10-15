@@ -1,7 +1,6 @@
 package com.github.alexnijjar.ad_astra.items.vehicles;
 
 import java.util.List;
-import java.util.Map;
 
 import com.github.alexnijjar.ad_astra.blocks.door.LocationState;
 import com.github.alexnijjar.ad_astra.blocks.launchpad.LaunchPad;
@@ -10,14 +9,12 @@ import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntityTier1;
 import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntityTier2;
 import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntityTier3;
 import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntityTier4;
-import com.github.alexnijjar.ad_astra.registry.ModTags;
 
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
@@ -28,7 +25,6 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 public class RocketItem<T extends RocketEntity> extends VehicleItem {
@@ -42,13 +38,7 @@ public class RocketItem<T extends RocketEntity> extends VehicleItem {
 		this.tier = tier;
 	}
 
-	@SuppressWarnings("deprecation")
-	@Override
-	public List<Fluid> getInputFluids() {
-		return Registry.FLUID.getEntries().stream().filter(e -> e.getValue().isIn(ModTags.FUELS)).map(Map.Entry::getValue).toList();
-	}
-
-	@Override
+    @Override
 	public ActionResult useOnBlock(ItemUsageContext context) {
 		World world = context.getWorld();
 		if (!world.isClient) {

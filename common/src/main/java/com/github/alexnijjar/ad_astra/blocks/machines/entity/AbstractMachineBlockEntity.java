@@ -138,6 +138,7 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
 
 	@Override
 	public void writeNbt(NbtCompound nbt) {
+		// TODO: crashes
 		super.writeNbt(nbt);
 		if (getInventorySize() > 0) {
 			Inventories.writeNbt(nbt, this.inventory);

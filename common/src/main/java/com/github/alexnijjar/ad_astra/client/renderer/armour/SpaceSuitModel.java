@@ -57,7 +57,6 @@ public class SpaceSuitModel extends BipedEntityModel<LivingEntity> {
 
 	@Override
 	public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
-
 		this.handSwingProgress = this.contextModel.handSwingProgress;
 		this.riding = this.contextModel.riding;
 		this.child = this.contextModel.child;
@@ -92,13 +91,13 @@ public class SpaceSuitModel extends BipedEntityModel<LivingEntity> {
 		}
 
 		MinecraftClient client = MinecraftClient.getInstance();
-		boolean hasEnchantments = client.player.getEquippedStack(EquipmentSlot.HEAD).hasEnchantments();
+		VertexConsumerProvider provider = client.getBufferBuilders().getEntityVertexConsumers();
 		if (!this.stack.isOf(ModItems.SPACE_HELMET.get())) {
 			this.head.render(matrices, vertices, light, overlay, 1.0f, 1.0f, 1.0f, 1.0f);
-			this.visor.render(matrices, getVertex(RenderLayer.getEntityTranslucent(this.texture), hasEnchantments), light, overlay, r, g, b, a);
+			this.visor.render(matrices,  provider.getBuffer(RenderLayer.getEntityTranslucent(this.texture)), light, overlay, r, g, b, a);
 		} else {
 			this.head.render(matrices, vertices, light, overlay, r, g, b, 1.0f);
-			this.visor.render(matrices, getVertex(RenderLayer.getEntityTranslucent(this.texture), hasEnchantments), light, overlay, r, g, b, a);
+			this.visor.render(matrices, provider.getBuffer(RenderLayer.getEntityTranslucent(this.texture)), light, overlay, r, g, b, a);
 		}
 
 		this.body.render(matrices, vertices, light, overlay, r, g, b, 1.0f);

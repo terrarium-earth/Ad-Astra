@@ -4,7 +4,9 @@ import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.client.AdAstraClient;
 import com.github.alexnijjar.ad_astra.client.forge.AdAstraClientForge;
 import dev.architectury.platform.forge.EventBuses;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -18,6 +20,7 @@ public class AdAstraForge {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(AdAstraForge::onClientSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(AdAstraForge::commonSetup);
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> AdAstraClientForge::init);
     }
 
     public static void commonSetup(FMLCommonSetupEvent event) {
@@ -26,6 +29,6 @@ public class AdAstraForge {
 
     public static void onClientSetup(FMLClientSetupEvent event) {
         AdAstraClient.initializeClient();
-        AdAstraClientForge.init();
+        AdAstraClientForge.postInit();
     }
 }

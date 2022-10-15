@@ -8,7 +8,6 @@ import earth.terrarium.botarium.api.fluid.PlatformFluidHandler;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
@@ -26,11 +25,6 @@ public class OxygenTankItem extends Item implements FluidContainingItem {
 
 	public OxygenTankItem(Settings settings) {
 		super(settings);
-	}
-
-	@Override
-	public List<Fluid> getInputFluids() {
-		return List.of(ModFluids.OXYGEN_STILL.get());
 	}
 
 	@Override
@@ -64,8 +58,7 @@ public class OxygenTankItem extends Item implements FluidContainingItem {
 
 	public static ItemStack createOxygenatedTank() {
 		ItemStack oxygenTank = ModItems.OXYGEN_TANK.get().getDefaultStack();
-		((OxygenTankItem) oxygenTank.getItem()).setAmount(oxygenTank, AdAstra.CONFIG.general.oxygenTankSize);
-		((OxygenTankItem) oxygenTank.getItem()).setFluid(oxygenTank, ModFluids.OXYGEN_STILL.get());
+		((OxygenTankItem) oxygenTank.getItem()).setFluid(oxygenTank, FluidHooks.newFluidHolder(ModFluids.OXYGEN_STILL.get(), AdAstra.CONFIG.general.oxygenTankSize, null));
 		
 		return oxygenTank;
 	}
