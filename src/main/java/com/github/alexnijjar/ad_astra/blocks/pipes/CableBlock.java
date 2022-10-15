@@ -16,6 +16,7 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.World;
@@ -99,16 +100,10 @@ public class CableBlock extends AbstractPipeBlock {
     }
 
     @Override
-    public void handleWrench(World world, BlockPos pos, BlockState state, Direction side, PlayerEntity user) {
+    public void handleWrench(World world, BlockPos pos, BlockState state, Direction side, PlayerEntity user, Vec3d hitPos) {
         if (!world.isClient) {
-            BooleanProperty property = DIRECTIONS.get(user.isSneaking() ? user.getMovementDirection() : side);
-            int pitch = (int) user.getPitch();
-            if (pitch > 60) {
-                property = DIRECTIONS.get(Direction.DOWN);
-            } else if (pitch < -60) {
-                property = DIRECTIONS.get(Direction.UP);
-            }
-            world.setBlockState(pos, state.with(property, !state.get(property)), Block.NOTIFY_ALL, 0);
+            BooleanProperty property = DIRECTIONS.get(getDirectionByVec(hitPos, pos).orElse(user.isSneaking() ? side.getOpposite() : side));
+            world.setBlockState(pos, state.cycle(property), Block.NOTIFY_ALL, 0);
             world.playSound(null, pos, ModSoundEvents.WRENCH, SoundCategory.BLOCKS, 1, 1);
         }
     }
