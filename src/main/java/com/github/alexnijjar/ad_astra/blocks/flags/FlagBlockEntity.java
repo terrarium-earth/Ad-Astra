@@ -6,6 +6,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.SkullBlockEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.network.Packet;
 import net.minecraft.network.listener.ClientPlayPacketListener;
@@ -17,6 +18,8 @@ public class FlagBlockEntity extends BlockEntity {
 
 	@Nullable
 	private GameProfile owner;
+	@Nullable
+	private String id;
 
 	public FlagBlockEntity(BlockPos pos, BlockState state) {
 		super(ModBlockEntities.FLAG_BLOCK_ENTITY, pos, state);
@@ -30,6 +33,9 @@ public class FlagBlockEntity extends BlockEntity {
 			NbtHelper.writeGameProfile(compound, this.owner);
 			nbt.put("flagOwner", compound);
 		}
+		if (this.id != null) {
+			nbt.putString("flagUrl", this.id);
+		}
 	}
 
 	@Override
@@ -37,6 +43,9 @@ public class FlagBlockEntity extends BlockEntity {
 		super.readNbt(nbt);
 		if (nbt.contains("flagOwner", 10)) {
 			this.setOwner(NbtHelper.toGameProfile(nbt.getCompound("flagOwner")));
+		}
+		if (nbt.contains("flagUrl", NbtElement.STRING_TYPE)) {
+			this.setId(nbt.getString("flagUrl"));
 		}
 	}
 
@@ -57,6 +66,18 @@ public class FlagBlockEntity extends BlockEntity {
 			this.owner = owner;
 			this.markDirty();
 		});
+	}
+
+	@Nullable
+	public String getUrl() {
+		if (this.id == null) {
+			return null;
+		}
+		return "https://i.imgur.com/" + this.id + ".png";
+	}
+
+	public void setId(@Nullable String id) {
+		this.id = id;
 	}
 
 	@Nullable

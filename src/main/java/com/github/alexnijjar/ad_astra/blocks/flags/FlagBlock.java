@@ -40,7 +40,8 @@ import net.minecraft.world.WorldView;
 
 @SuppressWarnings("deprecation")
 public class FlagBlock extends BlockWithEntity implements Waterloggable {
-	public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
+
+	public static final EightDirectionProperty FACING = new EightDirectionProperty();
 	public static final EnumProperty<DoubleBlockHalf> HALF = Properties.DOUBLE_BLOCK_HALF;
 	public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
@@ -53,62 +54,12 @@ public class FlagBlock extends BlockWithEntity implements Waterloggable {
 	public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
 
 		if (state.get(HALF).equals(DoubleBlockHalf.LOWER)) {
-			switch (state.get(FACING)) {
-			case NORTH -> {
-				VoxelShape shape = VoxelShapes.empty();
-				shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.375, 0, 0.375, 0.625, 0.5, 0.625));
-				shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.4375, 0, 0.4375, 0.5625, 1, 0.5625));
-				return shape;
-			}
-			case EAST -> {
-				VoxelShape shape = VoxelShapes.empty();
-				shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.375, -0.5, 0.375, 0.625, 0, 0.625));
-				shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.4375, -0.5, 0.4375, 0.5625, 0.5, 0.5625));
-				return shape;
-			}
-			case SOUTH -> {
-				VoxelShape shape = VoxelShapes.empty();
-				shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.375, 0, 0.375, 0.625, 0.5, 0.625));
-				shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.4375, 0, 0.4375, 0.5625, 1, 0.5625));
-				return shape;
-			}
-			case WEST -> {
-				VoxelShape shape = VoxelShapes.empty();
-				shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.375, 0, 0.375, 0.625, 0.5, 0.625));
-				shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.4375, 0, 0.4375, 0.5625, 1, 0.5625));
-				return shape;
-			}
-			default -> throw new IllegalStateException("Unexpected value: " + state.get(FACING));
-			}
-
+			return VoxelShapes.union(
+					VoxelShapes.cuboid(0.375, 0, 0.375, 0.625, 0.5, 0.625),
+					VoxelShapes.cuboid(0.4375, 0, 0.4375, 0.5625, 1, 0.5625)
+			);
 		} else {
-			switch (state.get(FACING)) {
-			case NORTH -> {
-				VoxelShape shape = VoxelShapes.empty();
-				shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.4375, 0, 0.4375, 0.5625, 1.5, 0.5625));
-				shape = VoxelShapes.union(shape, VoxelShapes.cuboid(-0.9375, 0.4375, 0.46875, 0.4375, 1.4375, 0.53125));
-				return shape;
-			}
-			case EAST -> {
-				VoxelShape shape = VoxelShapes.empty();
-				shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.4375, 0, 0.4375, 0.5625, 1.5, 0.5625));
-				shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.46875, 0.4375, -0.9375, 0.53125, 1.4375, 0.4375));
-				return shape;
-			}
-			case SOUTH -> {
-				VoxelShape shape = VoxelShapes.empty();
-				shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.4375, 0, 0.4375, 0.5625, 1.5, 0.5625));
-				shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.5625, 0.4375, 0.46875, 1.9375, 1.4375, 0.53125));
-				return shape;
-			}
-			case WEST -> {
-				VoxelShape shape = VoxelShapes.empty();
-				shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.4375, 0, 0.4375, 0.5625, 1.5, 0.5625));
-				shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.46875, 0.4375, 0.5625, 0.53125, 1.4375, 1.9375));
-				return shape;
-			}
-			default -> throw new IllegalStateException("Unexpected value: " + state.get(FACING));
-			}
+			return VoxelShapes.cuboid(0.4375, 0, 0.4375, 0.5625, 1.5, 0.5625);
 		}
 	}
 
@@ -122,11 +73,6 @@ public class FlagBlock extends BlockWithEntity implements Waterloggable {
 				world.breakBlock(pos, false);
 			}
 		}
-	}
-
-	public static VoxelShape boxSimple(double x1, double y1, double z1, double x2, double y2, double z2) {
-		Box box = new Box(x1, y1, z1, x2, y2, z2);
-		return VoxelShapes.cuboid(box.minX / 16.0d, box.minY / 16.0d, box.minZ / 16.0d, box.maxX / 16.0d, box.maxY / 16.0d, box.maxZ / 16.0d);
 	}
 
 	@Override
@@ -172,12 +118,12 @@ public class FlagBlock extends BlockWithEntity implements Waterloggable {
 
 	@Override
 	public BlockState rotate(BlockState state, BlockRotation rotation) {
-		return state.with(FACING, rotation.rotate(state.get(FACING)));
+		return state.with(FACING, state.get(FACING).rotate(rotation));
 	}
 
 	@Override
 	public BlockState mirror(BlockState state, BlockMirror mirror) {
-		return state.rotate(mirror.getRotation(state.get(FACING)));
+		return state.with(FACING, state.get(FACING).mirror(mirror));
 	}
 
 	@Override
@@ -206,6 +152,7 @@ public class FlagBlock extends BlockWithEntity implements Waterloggable {
 	@Override
 	public BlockState getPlacementState(ItemPlacementContext ctx) {
 		FluidState fluidState = ctx.getWorld().getFluidState(ctx.getBlockPos());
-		return this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite()).with(WATERLOGGED, fluidState.getFluid().equals(Fluids.WATER));
+		var value = EightDirectionProperty.Direction.VALUES[MathHelper.floor((double) (ctx.getPlayerYaw() * 8.0F / 360.0F) + 0.5D) & 7];
+		return this.getDefaultState().with(FACING, value.mirror(BlockMirror.FRONT_BACK)).with(WATERLOGGED, fluidState.getFluid().equals(Fluids.WATER));
 	}
 }
