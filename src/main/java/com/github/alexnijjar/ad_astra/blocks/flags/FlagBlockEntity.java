@@ -34,7 +34,7 @@ public class FlagBlockEntity extends BlockEntity {
 			nbt.put("flagOwner", compound);
 		}
 		if (this.id != null) {
-			nbt.putString("flagUrl", this.id);
+			nbt.putString("FlagUrl", this.id);
 		}
 	}
 
@@ -44,8 +44,8 @@ public class FlagBlockEntity extends BlockEntity {
 		if (nbt.contains("flagOwner", 10)) {
 			this.setOwner(NbtHelper.toGameProfile(nbt.getCompound("flagOwner")));
 		}
-		if (nbt.contains("flagUrl", NbtElement.STRING_TYPE)) {
-			this.setId(nbt.getString("flagUrl"));
+		if (nbt.contains("FlagUrl", NbtElement.STRING_TYPE)) {
+			this.setId(nbt.getString("FlagUrl"));
 		}
 	}
 

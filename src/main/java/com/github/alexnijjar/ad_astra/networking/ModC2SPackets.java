@@ -1,6 +1,7 @@
 package com.github.alexnijjar.ad_astra.networking;
 
 import com.github.alexnijjar.ad_astra.AdAstra;
+import com.github.alexnijjar.ad_astra.blocks.flags.FlagBlockEntity;
 import com.github.alexnijjar.ad_astra.blocks.machines.entity.OxygenDistributorBlockEntity;
 import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntity;
 import com.github.alexnijjar.ad_astra.registry.ModRecipes;
@@ -10,6 +11,8 @@ import com.github.alexnijjar.ad_astra.util.ModUtils;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -38,6 +41,8 @@ public class ModC2SPackets {
 	public static final Identifier RIGHT_KEY_CHANGED = new ModIdentifier("right_key_changed");
 
 	public static final Identifier TOGGLE_SHOW_DISTRIBUTOR = new ModIdentifier("toggle_show_distributor");
+
+	public static final Identifier FLAG_URL = new ModIdentifier("flag_url");
 
 	public static void register() {
 
@@ -148,6 +153,21 @@ public class ModC2SPackets {
 				}
 			});
 		});
+
+		ServerPlayNetworking.registerGlobalReceiver(FLAG_URL, (server, player, handler, buf, responseSender) -> {
+			BlockPos pos = buf.readBlockPos();
+			String url = buf.readString();
+
+			server.execute(() -> {
+				if (AdAstra.CONFIG.general.allowFlagImages && player.world.getBlockEntity(pos) instanceof FlagBlockEntity flag && flag.getOwner() != null && player.getUuid().equals(flag.getOwner().getId())) {
+					flag.setId(url);
+					var blockState = player.world.getBlockState(pos);
+					player.world.updateListeners(pos, blockState, blockState, Block.NOTIFY_ALL);
+				}
+			});
+
+		});
+
 	}
 
 	private static RegistryKey<World> getWorld(Identifier id) {

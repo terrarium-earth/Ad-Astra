@@ -66,6 +66,7 @@ public class AdAstraConfig implements ConfigData {
         public int oxygenBarYOffset = 0;
         public int energyBarXOffset = 0;
         public int energyBarYOffset = 0;
+        public boolean allowFlagImages = true;
     }
 
     public static class SpaceSuitConfig {
