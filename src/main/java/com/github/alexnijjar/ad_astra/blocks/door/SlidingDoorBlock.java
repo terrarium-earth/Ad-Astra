@@ -39,10 +39,11 @@ public class SlidingDoorBlock extends BlockWithEntity {
     public static final BooleanProperty POWERED = Properties.POWERED;
     public static final EnumProperty<LocationState> LOCATION = EnumProperty.of("location", LocationState.class);
 
-    protected static final VoxelShape NORTH_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 16.0, 3.0);
-    protected static final VoxelShape SOUTH_SHAPE = Block.createCuboidShape(0.0, 0.0, 13.0, 16.0, 16.0, 16.0);
-    protected static final VoxelShape EAST_SHAPE = Block.createCuboidShape(13.0, 0.0, 0.0, 16.0, 16.0, 16.0);
-    protected static final VoxelShape WEST_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 3.0, 16.0, 16.0);
+    protected static final VoxelShape X_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 16.0, 3.0);
+    protected static final VoxelShape Z_SHAPE = Block.createCuboidShape(13.0, 0.0, 0.0, 16.0, 16.0, 16.0);
+
+    protected static final VoxelShape GIANT_X_SHAPE = Block.createCuboidShape(-16, -16, 0.0, 32.0, 32.0, 3.0);
+    protected static final VoxelShape GIANT_Z_SHAPE = Block.createCuboidShape(0.0, -16, -16, 3.0, 32.0, 32.0);
 
     public SlidingDoorBlock(Settings settings) {
         super(settings);
@@ -131,10 +132,9 @@ public class SlidingDoorBlock extends BlockWithEntity {
     @Override
     public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
         return switch (type) {
-        case LAND -> state.get(OPEN);
-        case WATER -> false;
-        case AIR -> state.get(OPEN);
-        default -> false;
+            case LAND -> state.get(OPEN);
+            case WATER -> false;
+            case AIR -> state.get(OPEN);
         };
     }
 
@@ -156,13 +156,28 @@ public class SlidingDoorBlock extends BlockWithEntity {
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        Direction direction = state.get(FACING);
-        return switch (direction) {
-        case NORTH -> NORTH_SHAPE.offset(0, 0, 0.42);
-        case EAST -> WEST_SHAPE.offset(0.38, 0, 0);
-        case SOUTH -> NORTH_SHAPE.offset(0, 0, 0.38);
-        case WEST -> EAST_SHAPE.offset(-0.44, 0, 0);
-        default -> VoxelShapes.empty();
+        LocationState location = state.get(LOCATION);
+        return switch (location) {
+            case TOP -> getFacingOutlineShape(state, -1);
+            case CENTER -> getFacingOutlineShape(state, 0);
+            case BOTTOM -> getFacingOutlineShape(state, 1);
+            default -> switch (state.get(FACING)) {
+                case NORTH -> X_SHAPE.offset(0, 0, 0.42);
+                case EAST -> Z_SHAPE.offset(0.38, 0, 0);
+                case SOUTH -> X_SHAPE.offset(0, 0, 0.38);
+                case WEST -> Z_SHAPE.offset(-0.44, 0, 0);
+                default -> VoxelShapes.empty();
+            };
+        };
+    }
+
+    private VoxelShape getFacingOutlineShape(BlockState state, double offset) {
+        return switch (state.get(FACING)) {
+            case NORTH -> GIANT_X_SHAPE.offset(0, offset, 0.42);
+            case EAST -> GIANT_Z_SHAPE.offset(0.38, offset, 0);
+            case SOUTH -> GIANT_X_SHAPE.offset(0, offset, 0.38);
+            case WEST -> GIANT_Z_SHAPE.offset(-0.44, offset, 0);
+            default -> VoxelShapes.empty();
         };
     }
 
@@ -212,10 +227,10 @@ public class SlidingDoorBlock extends BlockWithEntity {
         if (main.contains(OPEN) && (!main.get(OPEN) && !main.get(POWERED))) {
             Direction direction = state.get(FACING);
             return switch (direction) {
-            case NORTH -> NORTH_SHAPE.offset(0, 0, 0.42);
-            case EAST -> WEST_SHAPE.offset(0.38, 0, 0);
-            case SOUTH -> NORTH_SHAPE.offset(0, 0, 0.38);
-            case WEST -> EAST_SHAPE.offset(-0.44, 0, 0);
+            case NORTH -> X_SHAPE.offset(0, 0, 0.42);
+            case EAST -> Z_SHAPE.offset(0.38, 0, 0);
+            case SOUTH -> X_SHAPE.offset(0, 0, 0.38);
+            case WEST -> Z_SHAPE.offset(-0.44, 0, 0);
             default -> VoxelShapes.empty();
             };
         } else {

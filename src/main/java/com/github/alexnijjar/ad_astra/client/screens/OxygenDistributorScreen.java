@@ -160,7 +160,6 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
 		OxygenDistributorBlockEntity oxygenDistributor = ((OxygenDistributorBlockEntity) this.blockEntity);
 		visibleButton = new CustomButton(this.width / 2 + 10, this.height / 2 - 83, oxygenDistributor.shouldShowOxygen() ? HIDE_TEXT : SHOW_TEXT, ButtonType.STEEL, ButtonColour.WHITE, TooltipType.NONE, null, pressed -> {
 			PacketByteBuf buf = PacketByteBufs.create();
-			buf.writeIdentifier(this.blockEntity.getWorld().getRegistryKey().getValue());
 			buf.writeBlockPos(this.blockEntity.getPos());
 			ClientPlayNetworking.send(ModC2SPackets.TOGGLE_SHOW_DISTRIBUTOR, buf);
 			((OxygenDistributorBlockEntity) this.blockEntity).setShowOxygen(!oxygenDistributor.shouldShowOxygen());

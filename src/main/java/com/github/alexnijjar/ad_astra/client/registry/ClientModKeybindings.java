@@ -2,12 +2,12 @@ package com.github.alexnijjar.ad_astra.client.registry;
 
 import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntity;
 import com.github.alexnijjar.ad_astra.networking.ModC2SPackets;
+import com.github.alexnijjar.ad_astra.util.ModKeyBindings;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.TranslatableText;
 
@@ -20,7 +20,6 @@ public class ClientModKeybindings {
 	public static boolean clickingBack;
 	public static boolean clickingLeft;
 	public static boolean clickingRight;
-	public static boolean clickingShift;
 
 	private static boolean sentJumpPacket;
 	private static boolean sentSprintPacket;
@@ -57,80 +56,78 @@ public class ClientModKeybindings {
 				}
 
 				if (clickingJump && sentJumpPacket) {
-					ClientPlayNetworking.send(ModC2SPackets.JUMP_KEY_CHANGED, createKeyDownBuf());
+					ClientPlayNetworking.send(ModC2SPackets.KEY_CHANGED, createKeyDownBuf(ModKeyBindings.Key.JUMP));
 					sentJumpPacket = false;
 				}
 
 				if (clickingSprint && sentSprintPacket) {
-					ClientPlayNetworking.send(ModC2SPackets.SPRINT_KEY_CHANGED, createKeyDownBuf());
+					ClientPlayNetworking.send(ModC2SPackets.KEY_CHANGED, createKeyDownBuf(ModKeyBindings.Key.SPRINT));
 					sentSprintPacket = false;
 				}
 
 				if (clickingForward && sentForwardPacket) {
-					ClientPlayNetworking.send(ModC2SPackets.FORWARD_KEY_CHANGED, createKeyDownBuf());
+					ClientPlayNetworking.send(ModC2SPackets.KEY_CHANGED, createKeyDownBuf(ModKeyBindings.Key.FORWARD));
 					sentForwardPacket = false;
 				}
 
 				if (clickingBack && sentBackPacket) {
-					ClientPlayNetworking.send(ModC2SPackets.BACK_KEY_CHANGED, createKeyDownBuf());
+					ClientPlayNetworking.send(ModC2SPackets.KEY_CHANGED, createKeyDownBuf(ModKeyBindings.Key.BACK));
 					sentBackPacket = false;
 				}
 
 				if (clickingLeft && sentLeftPacket) {
-					ClientPlayNetworking.send(ModC2SPackets.LEFT_KEY_CHANGED, createKeyDownBuf());
+					ClientPlayNetworking.send(ModC2SPackets.KEY_CHANGED, createKeyDownBuf(ModKeyBindings.Key.LEFT));
 					sentLeftPacket = false;
 				}
 
 				if (clickingRight && sentRightPacket) {
-					ClientPlayNetworking.send(ModC2SPackets.RIGHT_KEY_CHANGED, createKeyDownBuf());
+					ClientPlayNetworking.send(ModC2SPackets.KEY_CHANGED, createKeyDownBuf(ModKeyBindings.Key.RIGHT));
 					sentRightPacket = false;
 				}
 
 				if (!clickingJump && !sentJumpPacket) {
-					ClientPlayNetworking.send(ModC2SPackets.JUMP_KEY_CHANGED, createKeyUpBuf());
+					ClientPlayNetworking.send(ModC2SPackets.KEY_CHANGED, createKeyUpBuf(ModKeyBindings.Key.JUMP));
 					sentJumpPacket = true;
 				}
 
 				if (!clickingSprint && !sentSprintPacket) {
-					ClientPlayNetworking.send(ModC2SPackets.SPRINT_KEY_CHANGED, createKeyUpBuf());
+					ClientPlayNetworking.send(ModC2SPackets.KEY_CHANGED, createKeyUpBuf(ModKeyBindings.Key.SPRINT));
 					sentSprintPacket = true;
 				}
 
 				if (!clickingForward && !sentForwardPacket) {
-					ClientPlayNetworking.send(ModC2SPackets.FORWARD_KEY_CHANGED, createKeyUpBuf());
+					ClientPlayNetworking.send(ModC2SPackets.KEY_CHANGED, createKeyUpBuf(ModKeyBindings.Key.FORWARD));
 					sentForwardPacket = true;
 				}
 
 				if (!clickingBack && !sentBackPacket) {
-					ClientPlayNetworking.send(ModC2SPackets.BACK_KEY_CHANGED, createKeyUpBuf());
+					ClientPlayNetworking.send(ModC2SPackets.KEY_CHANGED, createKeyUpBuf(ModKeyBindings.Key.BACK));
 					sentBackPacket = true;
 				}
 
 				if (!clickingLeft && !sentLeftPacket) {
-					ClientPlayNetworking.send(ModC2SPackets.LEFT_KEY_CHANGED, createKeyUpBuf());
+					ClientPlayNetworking.send(ModC2SPackets.KEY_CHANGED, createKeyUpBuf(ModKeyBindings.Key.LEFT));
 					sentLeftPacket = true;
 				}
 
 				if (!clickingRight && !sentRightPacket) {
-					ClientPlayNetworking.send(ModC2SPackets.RIGHT_KEY_CHANGED, createKeyUpBuf());
+					ClientPlayNetworking.send(ModC2SPackets.KEY_CHANGED, createKeyUpBuf(ModKeyBindings.Key.RIGHT));
 					sentRightPacket = true;
 				}
 			}
 		});
 	}
 
-	private static PacketByteBuf createKeyDownBuf() {
+	private static PacketByteBuf createKeyDownBuf(ModKeyBindings.Key key) {
 		PacketByteBuf buf = PacketByteBufs.create();
-		MinecraftClient client = MinecraftClient.getInstance();
-		buf.writeUuid(client.player.getUuid());
+		buf.writeEnumConstant(key);
 		buf.writeBoolean(true);
 		return buf;
 	}
 
-	private static PacketByteBuf createKeyUpBuf() {
+	private static PacketByteBuf createKeyUpBuf(ModKeyBindings.Key key) {
 		PacketByteBuf buf = PacketByteBufs.create();
-		MinecraftClient client = MinecraftClient.getInstance();
-		buf.writeUuid(client.player.getUuid());
+		buf.writeEnumConstant(key);
 		buf.writeBoolean(false);
 		return buf;
 	}

@@ -1,30 +1,13 @@
 package com.github.alexnijjar.ad_astra.registry;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import com.github.alexnijjar.ad_astra.blocks.door.SlidingDoorBlockEntity;
 import com.github.alexnijjar.ad_astra.blocks.flags.FlagBlockEntity;
 import com.github.alexnijjar.ad_astra.blocks.globes.GlobeBlockEntity;
-import com.github.alexnijjar.ad_astra.blocks.launchpad.LaunchPadBlockEntity;
-import com.github.alexnijjar.ad_astra.blocks.machines.entity.AbstractMachineBlockEntity;
-import com.github.alexnijjar.ad_astra.blocks.machines.entity.CoalGeneratorBlockEntity;
-import com.github.alexnijjar.ad_astra.blocks.machines.entity.CompressorBlockEntity;
-import com.github.alexnijjar.ad_astra.blocks.machines.entity.CryoFreezerBlockEntity;
-import com.github.alexnijjar.ad_astra.blocks.machines.entity.EnergizerBlockEntity;
-import com.github.alexnijjar.ad_astra.blocks.machines.entity.FluidMachineBlockEntity;
-import com.github.alexnijjar.ad_astra.blocks.machines.entity.FuelRefineryBlockEntity;
-import com.github.alexnijjar.ad_astra.blocks.machines.entity.NasaWorkbenchBlockEntity;
-import com.github.alexnijjar.ad_astra.blocks.machines.entity.OxygenDistributorBlockEntity;
-import com.github.alexnijjar.ad_astra.blocks.machines.entity.OxygenLoaderBlockEntity;
-import com.github.alexnijjar.ad_astra.blocks.machines.entity.OxygenSensorBlockEntity;
-import com.github.alexnijjar.ad_astra.blocks.machines.entity.SolarPanelBlockEntity;
-import com.github.alexnijjar.ad_astra.blocks.machines.entity.WaterPumpBlockEntity;
+import com.github.alexnijjar.ad_astra.blocks.machines.entity.*;
 import com.github.alexnijjar.ad_astra.blocks.pipes.CableBlockEntity;
 import com.github.alexnijjar.ad_astra.blocks.pipes.FluidPipeBlockEntity;
 import com.github.alexnijjar.ad_astra.mixin.BlockEntityTypeAccessor;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
-
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.minecraft.block.Block;
@@ -32,6 +15,9 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.util.registry.Registry;
 import team.reborn.energy.api.EnergyStorage;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class ModBlockEntities {
 
@@ -54,7 +40,6 @@ public class ModBlockEntities {
 	public static BlockEntityType<CryoFreezerBlockEntity> CRYO_FREEZER;
 	public static BlockEntityType<OxygenSensorBlockEntity> OXYGEN_SENSOR;
 	public static BlockEntityType<SlidingDoorBlockEntity> SLIDING_DOOR;
-	public static BlockEntityType<LaunchPadBlockEntity> LAUNCH_PAD;
 
 	public static BlockEntityType<CableBlockEntity> CABLE;
 	public static BlockEntityType<FluidPipeBlockEntity> FLUID_PIPE;
@@ -79,7 +64,6 @@ public class ModBlockEntities {
 		OXYGEN_SENSOR = register("oxygen_sensor", OxygenSensorBlockEntity::new, ModBlocks.OXYGEN_SENSOR);
 		SLIDING_DOOR = register("sliding_door", SlidingDoorBlockEntity::new, ModBlocks.IRON_SLIDING_DOOR, ModBlocks.STEEL_SLIDING_DOOR, ModBlocks.DESH_SLIDING_DOOR, ModBlocks.OSTRUM_SLIDING_DOOR, ModBlocks.CALORITE_SLIDING_DOOR, ModBlocks.AIRLOCK,
 				ModBlocks.REINFORCED_DOOR);
-		LAUNCH_PAD = register("launch_pad", LaunchPadBlockEntity::new, ModBlocks.LAUNCH_PAD);
 
 		CABLE = register("cable", CableBlockEntity::new, ModBlocks.STEEL_CABLE, ModBlocks.DESH_CABLE);
 		FLUID_PIPE = register("fluid_pipe", FluidPipeBlockEntity::new, ModBlocks.DESH_FLUID_PIPE, ModBlocks.OSTRUM_FLUID_PIPE);
