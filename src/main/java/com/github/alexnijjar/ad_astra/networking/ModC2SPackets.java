@@ -4,7 +4,7 @@ import com.github.alexnijjar.ad_astra.AdAstra;
 import com.github.alexnijjar.ad_astra.blocks.flags.FlagBlockEntity;
 import com.github.alexnijjar.ad_astra.blocks.machines.entity.OxygenDistributorBlockEntity;
 import com.github.alexnijjar.ad_astra.entities.vehicles.RocketEntity;
-import com.github.alexnijjar.ad_astra.registry.ModRecipes;
+import com.github.alexnijjar.ad_astra.networking.packets.CreateSpaceStationPacket;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
 import com.github.alexnijjar.ad_astra.util.ModKeyBindings;
 import com.github.alexnijjar.ad_astra.util.ModUtils;
@@ -12,13 +12,9 @@ import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.structure.Structure;
-import net.minecraft.structure.StructurePlacementData;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
@@ -28,20 +24,10 @@ import net.minecraft.world.World;
 public class ModC2SPackets {
 
 	public static final Identifier TELEPORT_TO_PLANET = new ModIdentifier("teleport_to_planet");
-	public static final Identifier DELETE_SPACE_STATION_ITEMS = new ModIdentifier("delete_space_station_item");
 	public static final Identifier CREATE_SPACE_STATION = new ModIdentifier("create_space_station");
-
 	public static final Identifier LAUNCH_ROCKET = new ModIdentifier("launch_rocket");
-
-	public static final Identifier JUMP_KEY_CHANGED = new ModIdentifier("jump_key_changed");
-	public static final Identifier SPRINT_KEY_CHANGED = new ModIdentifier("sprint_key_changed");
-	public static final Identifier FORWARD_KEY_CHANGED = new ModIdentifier("forward_key_changed");
-	public static final Identifier BACK_KEY_CHANGED = new ModIdentifier("back_key_changed");
-	public static final Identifier LEFT_KEY_CHANGED = new ModIdentifier("left_key_changed");
-	public static final Identifier RIGHT_KEY_CHANGED = new ModIdentifier("right_key_changed");
-
+	public static final Identifier KEY_CHANGED = new ModIdentifier("key_changed");
 	public static final Identifier TOGGLE_SHOW_DISTRIBUTOR = new ModIdentifier("toggle_show_distributor");
-
 	public static final Identifier FLAG_URL = new ModIdentifier("flag_url");
 
 	public static void register() {
@@ -61,43 +47,17 @@ public class ModC2SPackets {
 			RegistryKey<World> targetDimension = getWorld(buf.readIdentifier());
 
 			// Teleport has to be called on the server thread.
-			server.execute(new Runnable() {
-
-				@Override
-				public void run() {
-					if (player.getVehicle() instanceof RocketEntity) {
-						ModUtils.teleportToWorld(targetDimension, player);
-					} else {
-						ModUtils.teleportPlayer(targetDimension, player);
-					}
-				}
-			});
-		});
-
-		// Delete Space Station items.
-		ServerPlayNetworking.registerGlobalReceiver(DELETE_SPACE_STATION_ITEMS, (server, player, handler, buf, responseSender) -> {
-			PlayerInventory inventory = player.getInventory();
-
-			ModRecipes.SPACE_STATION_RECIPE.getRecipes(player.world).forEach(recipe -> {
-				for (int i = 0; i < recipe.getIngredients().size(); i++) {
-					inventory.remove(recipe.getIngredients().get(i)::test, recipe.getStackCounts().get(i), inventory);
+			server.execute(() -> {
+				if (player.getVehicle() instanceof RocketEntity) {
+					ModUtils.teleportToWorld(targetDimension, player);
+				} else {
+					ModUtils.teleportPlayer(targetDimension, player);
 				}
 			});
 		});
 
 		// Spawn the Space Station in the world.
-		ServerPlayNetworking.registerGlobalReceiver(CREATE_SPACE_STATION, (server, player, handler, buf, responseSender) -> {
-			ServerWorld targetWorld = server.getWorld(RegistryKey.of(Registry.WORLD_KEY, buf.readIdentifier()));
-			server.execute(new Runnable() {
-				@Override
-				public void run() {
-					// Create the Space Station from the nbt file.
-					Structure structure = targetWorld.getStructureManager().getStructureOrBlank(new ModIdentifier("space_station"));
-					BlockPos pos = new BlockPos(player.getX() - (structure.getSize().getX() / 2), 100, player.getZ() - (structure.getSize().getZ() / 2));
-					structure.place(targetWorld, pos, pos, new StructurePlacementData(), targetWorld.random, 2);
-				}
-			});
-		});
+		ServerPlayNetworking.registerGlobalReceiver(CREATE_SPACE_STATION, new CreateSpaceStationPacket());
 
 		// Space was pressed while the player was inside of a rocket.
 		ServerPlayNetworking.registerGlobalReceiver(LAUNCH_ROCKET, (server, player, handler, buf, responseSender) -> {
@@ -116,56 +76,29 @@ public class ModC2SPackets {
 			}
 		});
 
-		ServerPlayNetworking.registerGlobalReceiver(JUMP_KEY_CHANGED, (server, player, handler, buf, responseSender) -> {
-			ModKeyBindings.pressedKeyOnServer(buf.readUuid(), "jump", buf.readBoolean());
-		});
+		ServerPlayNetworking.registerGlobalReceiver(KEY_CHANGED, (server, player, handler, buf, responseSender) ->
+				ModKeyBindings.pressedKeyOnServer(player.getUuid(), buf.readEnumConstant(ModKeyBindings.Key.class), buf.readBoolean())
+		);
 
-		ServerPlayNetworking.registerGlobalReceiver(SPRINT_KEY_CHANGED, (server, player, handler, buf, responseSender) -> {
-			ModKeyBindings.pressedKeyOnServer(buf.readUuid(), "sprint", buf.readBoolean());
-		});
-
-		ServerPlayNetworking.registerGlobalReceiver(FORWARD_KEY_CHANGED, (server, player, handler, buf, responseSender) -> {
-			ModKeyBindings.pressedKeyOnServer(buf.readUuid(), "forward", buf.readBoolean());
-		});
-
-		ServerPlayNetworking.registerGlobalReceiver(BACK_KEY_CHANGED, (server, player, handler, buf, responseSender) -> {
-			ModKeyBindings.pressedKeyOnServer(buf.readUuid(), "back", buf.readBoolean());
-		});
-
-		ServerPlayNetworking.registerGlobalReceiver(LEFT_KEY_CHANGED, (server, player, handler, buf, responseSender) -> {
-			ModKeyBindings.pressedKeyOnServer(buf.readUuid(), "left", buf.readBoolean());
-		});
-
-		ServerPlayNetworking.registerGlobalReceiver(RIGHT_KEY_CHANGED, (server, player, handler, buf, responseSender) -> {
-			ModKeyBindings.pressedKeyOnServer(buf.readUuid(), "right", buf.readBoolean());
-		});
-
-		ServerPlayNetworking.registerGlobalReceiver(TOGGLE_SHOW_DISTRIBUTOR, (server, player, handler, buf, responseSender) -> {
-			ServerWorld world = server.getWorld(RegistryKey.of(Registry.WORLD_KEY, buf.readIdentifier()));
-			BlockPos pos = buf.readBlockPos();
-
-			server.execute(new Runnable() {
-				@Override
-				public void run() {
-					if (world.getBlockEntity(pos) instanceof OxygenDistributorBlockEntity oxygenDistributor) {
-						oxygenDistributor.setShowOxygen(!oxygenDistributor.shouldShowOxygen());
-					}
-				}
-			});
-		});
+		ServerPlayNetworking.registerGlobalReceiver(TOGGLE_SHOW_DISTRIBUTOR, (server, player, handler, buf, responseSender) -> server.execute(() -> {
+			if (player.world.getBlockEntity(buf.readBlockPos()) instanceof OxygenDistributorBlockEntity oxygenDistributor) {
+				oxygenDistributor.setShowOxygen(!oxygenDistributor.shouldShowOxygen());
+			}
+		}));
 
 		ServerPlayNetworking.registerGlobalReceiver(FLAG_URL, (server, player, handler, buf, responseSender) -> {
 			BlockPos pos = buf.readBlockPos();
 			String url = buf.readString();
 
-			server.execute(() -> {
-				if (AdAstra.CONFIG.general.allowFlagImages && player.world.getBlockEntity(pos) instanceof FlagBlockEntity flag && flag.getOwner() != null && player.getUuid().equals(flag.getOwner().getId())) {
-					flag.setId(url);
-					var blockState = player.world.getBlockState(pos);
-					player.world.updateListeners(pos, blockState, blockState, Block.NOTIFY_ALL);
-				}
-			});
-
+			if ((AdAstra.CONFIG.general.allowFlagImages || player.isCreativeLevelTwoOp())) {
+				server.execute(() -> {
+					if (player.world.getBlockEntity(pos) instanceof FlagBlockEntity flag && flag.getOwner() != null && player.getUuid().equals(flag.getOwner().getId())) {
+						flag.setId(url);
+						var blockState = player.world.getBlockState(pos);
+						player.world.updateListeners(pos, blockState, blockState, Block.NOTIFY_ALL);
+					}
+				});
+			}
 		});
 
 	}

@@ -330,8 +330,6 @@ public class PlanetSelectionScreen extends Screen implements ScreenHandlerProvid
 				}
 			}
 			this.client.player.closeHandledScreen();
-			// Consume the required items to build the Space Station.
-			ClientPlayNetworking.send(ModC2SPackets.DELETE_SPACE_STATION_ITEMS, PacketByteBufs.empty());
 			PacketByteBuf buf = PacketByteBufs.create();
 			buf.writeIdentifier(world.getValue());
 			// Create the space station.

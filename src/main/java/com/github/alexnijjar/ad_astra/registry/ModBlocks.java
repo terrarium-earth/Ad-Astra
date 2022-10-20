@@ -62,7 +62,7 @@ import net.minecraft.world.gen.feature.TreeConfiguredFeatures;
 public class ModBlocks {
 	public static final Set<Block> blocks = new HashSet<>();
 
-	public static final Block LAUNCH_PAD = register("launch_pad", new LaunchPad(FabricBlockSettings.copy(Blocks.CUT_COPPER)), true);
+	public static final Block LAUNCH_PAD = register("launch_pad", new LaunchPad(FabricBlockSettings.copy(Blocks.CUT_COPPER).nonOpaque()), true);
 
 	// Flag Blocks
 	public static final Block WHITE_FLAG = register("flag", new FlagBlock(FabricBlockSettings.of(Material.STONE).sounds(BlockSoundGroup.STONE).strength(1.0f, 1.0f).luminance(1)));

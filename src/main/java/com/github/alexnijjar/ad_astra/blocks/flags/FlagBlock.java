@@ -39,8 +39,6 @@ import org.jetbrains.annotations.Nullable;
 @SuppressWarnings("deprecation")
 public class FlagBlock extends BlockWithEntity implements Waterloggable {
 
-	private static final VoxelShape VALID_SHAPE = Block.createCuboidShape(7, 0, 7, 11, 16, 11);
-
 	public static final EightDirectionProperty FACING = new EightDirectionProperty();
 	public static final EnumProperty<DoubleBlockHalf> HALF = Properties.DOUBLE_BLOCK_HALF;
 	public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
@@ -52,7 +50,7 @@ public class FlagBlock extends BlockWithEntity implements Waterloggable {
 
 	@Override
 	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-		if (world.isClient && AdAstra.CONFIG.general.allowFlagImages) {
+		if (world.isClient && (AdAstra.CONFIG.general.allowFlagImages || player.isCreativeLevelTwoOp())) {
 			if (state.get(HALF) == DoubleBlockHalf.LOWER) {
 				return action(world, pos.up(), player);
 			} else {
@@ -76,15 +74,11 @@ public class FlagBlock extends BlockWithEntity implements Waterloggable {
 
 	@Override
 	public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-
+		VoxelShape pole = VoxelShapes.cuboid(0.4375, 0, 0.4375, 0.5625, 1.5, 0.5625);
 		if (state.get(HALF).equals(DoubleBlockHalf.LOWER)) {
-			return VoxelShapes.union(
-					VoxelShapes.cuboid(0.375, 0, 0.375, 0.625, 0.5, 0.625),
-					VoxelShapes.cuboid(0.4375, 0, 0.4375, 0.5625, 1, 0.5625)
-			);
-		} else {
-			return VoxelShapes.cuboid(0.4375, 0, 0.4375, 0.5625, 1.5, 0.5625);
+			return VoxelShapes.union(VoxelShapes.cuboid(0.375, 0, 0.375, 0.625, 0.5, 0.625), pole);
 		}
+		return pole;
 	}
 
 	@Override
@@ -173,6 +167,6 @@ public class FlagBlock extends BlockWithEntity implements Waterloggable {
 	public BlockState getPlacementState(ItemPlacementContext ctx) {
 		FluidState fluidState = ctx.getWorld().getFluidState(ctx.getBlockPos());
 		var value = EightDirectionProperty.Direction.VALUES[MathHelper.floor((double) (ctx.getPlayerYaw() * 8.0F / 360.0F) + 0.5D) & 7];
-		return this.getDefaultState().with(FACING, value.mirror(BlockMirror.FRONT_BACK)).with(WATERLOGGED, fluidState.getFluid().equals(Fluids.WATER));
+		return this.getDefaultState().with(FACING, value).with(WATERLOGGED, fluidState.getFluid().equals(Fluids.WATER));
 	}
 }

@@ -1,15 +1,7 @@
 package com.github.alexnijjar.ad_astra.client;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.github.alexnijjar.ad_astra.client.registry.ClientModEntities;
-import com.github.alexnijjar.ad_astra.client.registry.ClientModFluids;
-import com.github.alexnijjar.ad_astra.client.registry.ClientModKeybindings;
-import com.github.alexnijjar.ad_astra.client.registry.ClientModParticles;
-import com.github.alexnijjar.ad_astra.client.registry.ClientModScreens;
+import com.github.alexnijjar.ad_astra.client.registry.*;
 import com.github.alexnijjar.ad_astra.client.renderer.block.EnergizerBlockEntityRenderer;
-import com.github.alexnijjar.ad_astra.client.renderer.block.LaunchPadBlockEntityRenderer;
 import com.github.alexnijjar.ad_astra.client.renderer.block.SlidingDoorBlockEntityRenderer;
 import com.github.alexnijjar.ad_astra.client.renderer.block.flag.FlagBlockEntityRenderer;
 import com.github.alexnijjar.ad_astra.client.renderer.block.flag.FlagItemRenderer;
@@ -21,11 +13,7 @@ import com.github.alexnijjar.ad_astra.client.renderer.entity.vehicles.rockets.ti
 import com.github.alexnijjar.ad_astra.client.renderer.entity.vehicles.rockets.tier_4.RocketItemRendererTier4;
 import com.github.alexnijjar.ad_astra.client.renderer.entity.vehicles.rover.RoverItemRenderer;
 import com.github.alexnijjar.ad_astra.client.renderer.spacesuit.SpaceSuitRenderer;
-import com.github.alexnijjar.ad_astra.client.resourcepack.Galaxy;
-import com.github.alexnijjar.ad_astra.client.resourcepack.PlanetResources;
-import com.github.alexnijjar.ad_astra.client.resourcepack.PlanetRing;
-import com.github.alexnijjar.ad_astra.client.resourcepack.SkyRenderer;
-import com.github.alexnijjar.ad_astra.client.resourcepack.SolarSystem;
+import com.github.alexnijjar.ad_astra.client.resourcepack.*;
 import com.github.alexnijjar.ad_astra.client.screens.PlayerOverlayScreen;
 import com.github.alexnijjar.ad_astra.data.Planet;
 import com.github.alexnijjar.ad_astra.networking.ModS2CPackets;
@@ -33,12 +21,10 @@ import com.github.alexnijjar.ad_astra.registry.ModBlockEntities;
 import com.github.alexnijjar.ad_astra.registry.ModBlocks;
 import com.github.alexnijjar.ad_astra.registry.ModItems;
 import com.github.alexnijjar.ad_astra.util.ModIdentifier;
-
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.model.BakedModelManagerHelper;
 import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
@@ -47,19 +33,15 @@ import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.TexturedRenderLayers;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
-import net.minecraft.client.render.model.BakedModel;
-import net.minecraft.client.render.model.BakedModelManager;
-import net.minecraft.client.render.model.BakedQuad;
 import net.minecraft.client.util.SpriteIdentifier;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.Item;
-import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Environment(EnvType.CLIENT)
 public class AdAstraClient implements ClientModInitializer {
@@ -99,7 +81,6 @@ public class AdAstraClient implements ClientModInitializer {
 		});
 
 		BlockEntityRendererRegistry.register(ModBlockEntities.FLAG_BLOCK_ENTITY, FlagBlockEntityRenderer::new);
-		BlockEntityRendererRegistry.register(ModBlockEntities.LAUNCH_PAD, LaunchPadBlockEntityRenderer::new);
 		BlockEntityRendererRegistry.register(ModBlockEntities.GLOBE_BLOCK_ENTITY, GlobeBlockEntityRenderer::new);
 		BlockEntityRendererRegistry.register(ModBlockEntities.ENERGIZER, EnergizerBlockEntityRenderer::new);
 		BlockEntityRendererRegistry.register(ModBlockEntities.SLIDING_DOOR, SlidingDoorBlockEntityRenderer::new);
@@ -122,9 +103,6 @@ public class AdAstraClient implements ClientModInitializer {
 			ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> out.accept(id));
 		}
 
-		ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> out.accept(LaunchPadBlockEntityRenderer.LAUNCH_PAD_MODEL));
-		BuiltinItemRendererRegistry.INSTANCE.register(ModItems.LAUNCH_PAD, new LaunchPadBlockEntityRenderer());
-
 		SpaceSuitRenderer.register();
 
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), ModBlocks.WATER_PUMP, ModBlocks.ENERGIZER, ModBlocks.STEEL_DOOR, ModBlocks.STEEL_TRAPDOOR, ModBlocks.GLACIAN_DOOR, ModBlocks.GLACIAN_TRAPDOOR, ModBlocks.AERONOS_DOOR,
@@ -135,20 +113,5 @@ public class AdAstraClient implements ClientModInitializer {
 
 		// Sign textures
 		TexturedRenderLayers.WOOD_TYPE_TEXTURES.put(ModBlocks.GLACIAN, new SpriteIdentifier(TexturedRenderLayers.SIGNS_ATLAS_TEXTURE, new ModIdentifier("entity/signs/" + ModBlocks.GLACIAN.getName())));
-	}
-
-	public static void renderBlock(Identifier texture, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
-
-		MinecraftClient client = MinecraftClient.getInstance();
-		BakedModelManager manager = client.getBakedModelManager();
-		BakedModel model = BakedModelManagerHelper.getModel(manager, texture);
-
-		VertexConsumer vertexConsumer1 = vertexConsumers.getBuffer(RenderLayer.getEntityCutout(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE));
-		List<BakedQuad> quads1 = model.getQuads(null, null, client.world.random);
-		MatrixStack.Entry entry1 = matrices.peek();
-
-		for (BakedQuad quad : quads1) {
-			vertexConsumer1.quad(entry1, quad, 1, 1, 1, light, overlay);
-		}
 	}
 }

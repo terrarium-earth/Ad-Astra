@@ -1,15 +1,7 @@
 package com.github.alexnijjar.ad_astra.blocks.launchpad;
 
 import com.github.alexnijjar.ad_astra.blocks.door.LocationState;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.BlockWithEntity;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.block.Waterloggable;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityTicker;
-import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.block.*;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -20,19 +12,18 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.*;
 import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.explosion.Explosion;
 
+import java.util.List;
+
 @SuppressWarnings("deprecation")
-public class LaunchPad extends BlockWithEntity implements Waterloggable {
+public class LaunchPad extends Block implements Waterloggable {
 
 	public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 	public static final EnumProperty<LocationState> LOCATION = EnumProperty.of("location", LocationState.class);
@@ -45,7 +36,7 @@ public class LaunchPad extends BlockWithEntity implements Waterloggable {
 	@Override
 	public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
 		Vec3d offset = state.getModelOffset(world, pos);
-		return VoxelShapes.union(Block.createCuboidShape(0, 0, 0, 16, 2, 16)).offset(offset.getX(), offset.getY(), offset.getZ());
+		return Block.createCuboidShape(0, 0, 0, 16, 2, 16).offset(offset.getX(), offset.getY(), offset.getZ());
 	}
 
 	@Override
@@ -63,10 +54,7 @@ public class LaunchPad extends BlockWithEntity implements Waterloggable {
 
 	@Override
 	public FluidState getFluidState(BlockState state) {
-		if (state.get(WATERLOGGED)) {
-			return Fluids.WATER.getStill(false);
-		}
-		return super.getFluidState(state);
+		return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
 	}
 
 	@Override
@@ -97,7 +85,7 @@ public class LaunchPad extends BlockWithEntity implements Waterloggable {
 	@Override
 	public void onDestroyedByExplosion(World world, BlockPos pos, Explosion explosion) {
 		if (!world.isClient) {
-			for (Direction direction : new Direction[] { Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST }) {
+			for (Direction direction : Direction.Type.HORIZONTAL) {
 				BlockPos offset = pos.offset(direction);
 				BlockState state = world.getBlockState(offset);
 				if (state.getBlock().equals(this)) {
@@ -112,83 +100,37 @@ public class LaunchPad extends BlockWithEntity implements Waterloggable {
 	public void breakPad(World world, BlockState state, BlockPos pos, boolean drop) {
 		if (!world.isClient && state.getBlock().equals(this)) {
 			BlockPos mainPos = this.getMainPos(state, pos);
-
-			// Bottom
 			world.breakBlock(mainPos, drop);
-			// Bottom Left
-			world.breakBlock(mainPos.north(), false);
-			// Bottom Right
-			world.breakBlock(mainPos.east(), false);
-			// Center
-			world.breakBlock(mainPos.south(), false);
-			// Left
-			world.breakBlock(mainPos.west(), false);
-			// Right
-			world.breakBlock(mainPos.north().east(), false);
-			// Top
-			world.breakBlock(mainPos.north().west(), false);
-			// Top Left
-			world.breakBlock(mainPos.south().east(), false);
-			// Top Right
-			world.breakBlock(mainPos.south().west(), false);
+			getBlockPosAround(mainPos).forEach(blockPos -> world.breakBlock(blockPos, false));
 		}
 	}
 
 	@Override
 	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
 		BlockPos mainPos = this.getMainPos(state, pos);
+		if (world.getBlockState(pos.down()).getBlock() instanceof LaunchPad) return false;
+		return canReplace(world, mainPos) && getBlockPosAround(mainPos).stream().allMatch(blockPos -> canReplace(world, blockPos));
+	}
 
-		return !(world.getBlockState(pos.down()).getBlock() instanceof LaunchPad) && world.getBlockState(mainPos).isAir() &&
-		//
-				world.getBlockState(mainPos.north()).isAir() &&
-				//
-				world.getBlockState(mainPos.east()).isAir() &&
-				//
-				world.getBlockState(mainPos.south()).isAir() &&
-				//
-				world.getBlockState(mainPos.west()).isAir() &&
-				//
-				world.getBlockState(mainPos.north().east()).isAir() &&
-				//
-				world.getBlockState(mainPos.north().west()).isAir() &&
-				//
-				world.getBlockState(mainPos.south().east()).isAir() &&
-				//
-				world.getBlockState(mainPos.south().west()).isAir();
+	private boolean canReplace(BlockView world, BlockPos pos) {
+		return world.getBlockState(pos).getMaterial().isReplaceable();
+	}
 
+	public List<BlockPos> getBlockPosAround(BlockPos pos) {
+		return List.of(pos, pos.north(), pos.east(), pos.south(), pos.west(), pos.north().east(), pos.north().west(), pos.south().east(), pos.south().west());
 	}
 
 	public BlockPos getMainPos(BlockState state, BlockPos from) {
-		BlockPos target = from;
-
-		switch (state.get(LOCATION)) {
-		case TOP_LEFT -> target = from.south().east();
-		case TOP -> target = from.south();
-		case TOP_RIGHT -> target = from.south().west();
-		case RIGHT -> target = from.west();
-		case CENTER -> target = from;
-		case LEFT -> target = from.east();
-		case BOTTOM -> target = from.north();
-		case BOTTOM_LEFT -> target = from.north().east();
-		case BOTTOM_RIGHT -> target = from.north().west();
-		}
-		return target;
-	}
-
-	@Override
-	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-		return (entityWorld, pos, entityState, blockEntity) -> {
-			if (blockEntity instanceof LaunchPadBlockEntity pad) {
-				pad.tick();
-			}
+		return switch (state.get(LOCATION)) {
+			case TOP_LEFT -> from.south().east();
+			case TOP -> from.south();
+			case TOP_RIGHT -> from.south().west();
+			case LEFT -> from.east();
+			case CENTER -> from;
+			case RIGHT -> from.west();
+			case BOTTOM_LEFT -> from.north().east();
+			case BOTTOM -> from.north();
+			case BOTTOM_RIGHT -> from.north().west();
 		};
-	}
-
-	@Override
-	public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-		if (state.get(LOCATION).equals(LocationState.CENTER)) {
-			return new LaunchPadBlockEntity(pos, state);
-		}
-		return null;
 	}
 }

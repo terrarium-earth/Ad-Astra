@@ -38,25 +38,16 @@ public class EightDirectionProperty extends EnumProperty<EightDirectionProperty.
         public Direction mirror(BlockMirror mirror) {
             return switch (mirror) {
                 case NONE -> this;
-                case FRONT_BACK -> switch (this) {
+                case FRONT_BACK -> rotate(BlockRotation.CLOCKWISE_180);
+                case LEFT_RIGHT -> switch (this) {
                     case NORTH -> SOUTH;
                     case SOUTH -> NORTH;
-                    case WEST -> EAST;
-                    case EAST -> WEST;
+                    case WEST -> WEST;
+                    case EAST -> EAST;
                     case NORTH_EAST -> SOUTH_EAST;
                     case SOUTH_EAST -> NORTH_EAST;
                     case SOUTH_WEST -> NORTH_WEST;
                     case NORTH_WEST -> SOUTH_WEST;
-                };
-                case LEFT_RIGHT -> switch (this) {
-                    case NORTH -> NORTH;
-                    case SOUTH -> SOUTH;
-                    case WEST -> WEST;
-                    case EAST -> EAST;
-                    case NORTH_EAST -> NORTH_WEST;
-                    case SOUTH_EAST -> SOUTH_WEST;
-                    case SOUTH_WEST -> SOUTH_EAST;
-                    case NORTH_WEST -> NORTH_EAST;
                 };
             };
         }
@@ -74,16 +65,6 @@ public class EightDirectionProperty extends EnumProperty<EightDirectionProperty.
                     case SOUTH_EAST -> NORTH_WEST;
                 };
                 case COUNTERCLOCKWISE_90 -> switch (this) {
-                    case NORTH -> NORTH_WEST;
-                    case SOUTH -> SOUTH_EAST;
-                    case EAST -> NORTH_EAST;
-                    case WEST -> SOUTH_WEST;
-                    case NORTH_EAST -> NORTH;
-                    case SOUTH_WEST -> SOUTH;
-                    case NORTH_WEST -> WEST;
-                    case SOUTH_EAST -> EAST;
-                };
-                case CLOCKWISE_90 -> switch (this) {
                     case NORTH -> NORTH_EAST;
                     case SOUTH -> SOUTH_WEST;
                     case EAST -> SOUTH_EAST;
@@ -92,6 +73,16 @@ public class EightDirectionProperty extends EnumProperty<EightDirectionProperty.
                     case SOUTH_WEST -> WEST;
                     case NORTH_WEST -> NORTH;
                     case SOUTH_EAST -> SOUTH;
+                };
+                case CLOCKWISE_90 -> switch (this) {
+                    case NORTH -> NORTH_WEST;
+                    case SOUTH -> SOUTH_EAST;
+                    case EAST -> NORTH_EAST;
+                    case WEST -> SOUTH_WEST;
+                    case NORTH_EAST -> NORTH;
+                    case SOUTH_WEST -> SOUTH;
+                    case NORTH_WEST -> WEST;
+                    case SOUTH_EAST -> EAST;
                 };
                 default -> this;
             };

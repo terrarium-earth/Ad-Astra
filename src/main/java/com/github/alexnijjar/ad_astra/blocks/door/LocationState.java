@@ -3,11 +3,19 @@ package com.github.alexnijjar.ad_astra.blocks.door;
 import net.minecraft.util.StringIdentifiable;
 
 public enum LocationState implements StringIdentifiable {
-    TOP_LEFT("top_left"), TOP("top"), TOP_RIGHT("top_right"), LEFT("left"), CENTER("center"), RIGHT("right"), BOTTOM_LEFT("bottom_left"), BOTTOM("bottom"), BOTTOM_RIGHT("bottom_right");
+    TOP_LEFT("top_left"),
+    TOP("top"),
+    TOP_RIGHT("top_right"),
+    LEFT("left"),
+    CENTER("center"),
+    RIGHT("right"),
+    BOTTOM_LEFT("bottom_left"),
+    BOTTOM("bottom"),
+    BOTTOM_RIGHT("bottom_right");
 
     private final String name;
 
-    private LocationState(String name) {
+    LocationState(String name) {
         this.name = name;
     }
 
