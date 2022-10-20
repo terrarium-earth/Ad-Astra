@@ -17,28 +17,28 @@
   ],
   "contact": {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/ad-astra",
-    "sources": "https://github.com/AlexNijjar/Ad-Astra-Fabric"
+    "sources": "https://github.com/terrarium-earth/Ad-Astra"
   },
   "license": "MIT",
   "icon": "assets/ad_astra/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.github.alexnijjar.ad_astra.fabric.AdAstraFabric"
+      "earth.terrarium.ad_astra.fabric.AdAstraFabric"
     ],
     "client": [
-      "com.github.alexnijjar.ad_astra.client.fabric.AdAstraClientFabric::initializeClient",
-      "com.github.alexnijjar.ad_astra.client.AdAstraClient::initializeClient",
-      "com.github.alexnijjar.ad_astra.AdAstra::postInit"
+      "earth.terrarium.ad_astra.client.fabric.AdAstraClientFabric::initializeClient",
+      "earth.terrarium.ad_astra.client.AdAstraClient::initializeClient",
+      "earth.terrarium.ad_astra.AdAstra::postInit"
     ],
     "server": [
-      "com.github.alexnijjar.ad_astra.AdAstra::postInit"
+      "earth.terrarium.ad_astra.AdAstra::postInit"
     ],
     "modmenu": [
-      "com.github.alexnijjar.ad_astra.config.ModMenuConfig"
+      "earth.terrarium.ad_astra.config.ModMenuConfig"
     ],
     "fabric-datagen": [
-      "com.github.alexnijjar.ad_astra.datagen.AdAstraDataGenEntrypoint"
+      "earth.terrarium.ad_astra.datagen.AdAstraDataGenEntrypoint"
     ]
   },
   "mixins": [
