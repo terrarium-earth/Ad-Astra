@@ -1,5 +1,16 @@
 package earth.terrarium.ad_astra.data;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.mojang.serialization.JsonOps;
+import earth.terrarium.ad_astra.AdAstra;
+import net.minecraft.resource.Resource;
+import net.minecraft.resource.ResourceManager;
+import net.minecraft.resource.SynchronousResourceReloader;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.JsonHelper;
+
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -7,51 +18,35 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import earth.terrarium.ad_astra.AdAstra;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.mojang.serialization.JsonOps;
-
-import dev.architectury.registry.ReloadListenerRegistry;
-import net.minecraft.resource.Resource;
-import net.minecraft.resource.ResourceManager;
-import net.minecraft.resource.ResourceType;
-import net.minecraft.resource.SynchronousResourceReloader;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.JsonHelper;
-
-public class PlanetData {
+public class PlanetData implements SynchronousResourceReloader {
 
 	public static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
-	public static void register() {
+	@Override
+	public void reload(ResourceManager manager) {
+		List<Planet> planets = new ArrayList<>();
 
-		ReloadListenerRegistry.register(ResourceType.SERVER_DATA, (SynchronousResourceReloader) manager -> {
-			List<Planet> planets = new ArrayList<>();
+		// Planets.
+		for (Identifier id : manager.findResources("planet_data/planets", path -> path.getPath().endsWith(".json")).keySet()) {
+			try {
+				for (Resource resource : manager.getAllResources(id)) {
+					InputStreamReader reader = new InputStreamReader(resource.open());
+					JsonObject jsonObject = JsonHelper.deserialize(GSON, reader, JsonObject.class);
 
-			// Planets.
-			for (Identifier id : manager.findResources("planet_data/planets", path -> path.getPath().endsWith(".json")).keySet()) {
-				try {
-					for (Resource resource : manager.getAllResources(id)) {
-						InputStreamReader reader = new InputStreamReader(resource.open());
-						JsonObject jsonObject = JsonHelper.deserialize(GSON, reader, JsonObject.class);
-
-						if (jsonObject != null) {
-							planets.add(Planet.CODEC.parse(JsonOps.INSTANCE, jsonObject).getOrThrow(false, AdAstra.LOGGER::error));
-						}
+					if (jsonObject != null) {
+						planets.add(Planet.CODEC.parse(JsonOps.INSTANCE, jsonObject).getOrThrow(false, AdAstra.LOGGER::error));
 					}
-				} catch (Exception e) {
-					AdAstra.LOGGER.error("Failed to load Ad Astra planet data from: \"" + id.toString() + "\"", e);
-					e.printStackTrace();
 				}
+			} catch (Exception e) {
+				AdAstra.LOGGER.error("Failed to load Ad Astra planet data from: \"" + id.toString() + "\"", e);
+				e.printStackTrace();
 			}
+		}
 
-			AdAstra.planets = new HashSet<>(planets);
-			AdAstra.planetWorlds = AdAstra.planets.stream().map(Planet::world).collect(Collectors.toSet());
-			AdAstra.orbitWorlds = AdAstra.planets.stream().map(Planet::orbitWorld).collect(Collectors.toSet());
-			AdAstra.adAstraWorlds = Stream.concat(AdAstra.planetWorlds.stream(), AdAstra.orbitWorlds.stream()).collect(Collectors.toSet());
-			AdAstra.worldsWithOxygen = AdAstra.planets.stream().filter(Planet::hasOxygen).map(Planet::world).collect(Collectors.toSet());
-		});
+		AdAstra.planets = new HashSet<>(planets);
+		AdAstra.planetWorlds = AdAstra.planets.stream().map(Planet::world).collect(Collectors.toSet());
+		AdAstra.orbitWorlds = AdAstra.planets.stream().map(Planet::orbitWorld).collect(Collectors.toSet());
+		AdAstra.adAstraWorlds = Stream.concat(AdAstra.planetWorlds.stream(), AdAstra.orbitWorlds.stream()).collect(Collectors.toSet());
+		AdAstra.worldsWithOxygen = AdAstra.planets.stream().filter(Planet::hasOxygen).map(Planet::world).collect(Collectors.toSet());
 	}
 }

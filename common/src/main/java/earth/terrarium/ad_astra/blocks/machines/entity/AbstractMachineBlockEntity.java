@@ -1,5 +1,6 @@
 package earth.terrarium.ad_astra.blocks.machines.entity;
 
+import net.minecraft.block.Block;
 import org.jetbrains.annotations.Nullable;
 
 import earth.terrarium.ad_astra.blocks.machines.AbstractMachineBlock;
@@ -33,172 +34,183 @@ import net.minecraft.util.math.Direction;
 
 public abstract class AbstractMachineBlockEntity extends BlockEntity implements EnergyBlock, ExtraDataMenuProvider, ModInventory, SidedInventory {
 
-	private final DefaultedList<ItemStack> inventory;
-	private SimpleUpdatingEnergyContainer energyContainer;
+    private final DefaultedList<ItemStack> inventory;
+    private SimpleUpdatingEnergyContainer energyContainer;
 
-	public AbstractMachineBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
-		super(blockEntityType, blockPos, blockState);
-		inventory = DefaultedList.ofSize(getInventorySize(), ItemStack.EMPTY);
-	}
+    public AbstractMachineBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
+        super(blockEntityType, blockPos, blockState);
+        inventory = DefaultedList.ofSize(getInventorySize(), ItemStack.EMPTY);
+    }
 
-	public abstract void tick();
+    public abstract void tick();
 
-	@Override
-	public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
-		return null;
-	}
+    @Override
+    public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
+        return null;
+    }
 
-	public boolean usesEnergy() {
-		return false;
-	}
+    public boolean usesEnergy() {
+        return false;
+    }
 
-	public long getMaxGeneration() {
-		return 0;
-	}
+    public long getCapacity() {
+        return 0;
+    }
 
-	public long getEnergyPerTick() {
-		return 0;
-	}
+    public long getEnergyPerTick() {
+        return 0;
+    }
 
-	public long getMaxEnergyInsert() {
-		return 0;
-	}
+    public boolean canInsertEnergy() {
+        return false;
+    }
 
-	public long getMaxEnergyExtract() {
-		return 0;
-	}
+    public boolean canExtractEnergy() {
+        return false;
+    }
 
-	public int getInventorySize() {
-		return 0;
-	}
+    public int getInventorySize() {
+        return 0;
+    }
 
-	public void setActive(boolean active) {
-		if (this.getCachedState().contains(AbstractMachineBlock.LIT)) {
-			this.world.setBlockState(this.getPos(), this.getCachedState().with(AbstractMachineBlock.LIT, active));
-		}
-	}
+    public void setActive(boolean active) {
+        if (this.getCachedState().contains(AbstractMachineBlock.LIT)) {
+            this.world.setBlockState(this.getPos(), this.getCachedState().with(AbstractMachineBlock.LIT, active));
+        }
+    }
 
-	public void cumulateEnergy() {
-		this.getEnergyStorage().insertEnergy(this.getEnergyPerTick(), false);
-		this.markDirty();
-	}
+    public void cumulateEnergy() {
+        this.getEnergyStorage().insertEnergy(this.getEnergyPerTick(), false);
+        this.markDirty();
+    }
 
-	public boolean drainEnergy() {
-		return this.drainEnergy(this.getEnergyPerTick());
-	}
+    public boolean drainEnergy() {
+        return this.drainEnergy(this.getEnergyPerTick());
+    }
 
-	public boolean drainEnergy(long amount) {
-		this.markDirty();
-		return this.getEnergyStorage().extractEnergy(amount, false) > 0;
-	}
+    public boolean drainEnergy(long amount) {
+        this.markDirty();
+        return this.getEnergyStorage().extractEnergy(amount, false) > 0;
+    }
 
-	public boolean canDrainEnergy() {
-		return this.canDrainEnergy(this.getEnergyPerTick());
-	}
+    public boolean canDrainEnergy() {
+        return this.canDrainEnergy(this.getEnergyPerTick());
+    }
 
-	public boolean canDrainEnergy(long amount) {
-		return this.getEnergy() - amount > 0;
-	}
+    public boolean canDrainEnergy(long amount) {
+        return this.getEnergy() - amount > 0;
+    }
 
-	// Send energy to surrounding machines.
-	public void energyOut() {
-		if (usesEnergy() && !this.getCachedState().get(AbstractMachineBlock.POWERED)) {
-			for (Direction direction : Direction.values()) {
-				// TODO: Sided energy storage transfer
-//				EnergyHooks.moveEnergy(EnergyHooks.getBlockEnergyManager(this, direction.getOpposite()), EnergyHooks.getBlockEnergyManager(world.getBlockEntity(pos.offset(direction)), direction), Long.MAX_VALUE);
-			}
-		}
-	}
+    // Send energy to surrounding machines.
+    public void energyOut() {
+        if (usesEnergy() && !this.getCachedState().get(AbstractMachineBlock.POWERED)) {
+            for (Direction direction : Direction.values()) {
+                BlockEntity entity = world.getBlockEntity(pos.offset(direction));
+                if (entity != null) {
+                    EnergyHooks.moveBlockToBlockEnergy(this, direction.getOpposite(), entity, direction, Long.MAX_VALUE);
+                }
+            }
+        }
+    }
 
-	public long getEnergy() {
-		return this.energyContainer.getStoredEnergy();
-	}
+    public long getEnergy() {
+        return this.energyContainer.getStoredEnergy();
+    }
 
-	public boolean hasEnergy() {
-		return this.usesEnergy() && this.getEnergy() > this.getEnergyPerTick();
-	}
+    public boolean hasEnergy() {
+        return this.usesEnergy() && this.getEnergy() > this.getEnergyPerTick();
+    }
 
-	@Override
-	public Text getDisplayName() {
-		return Text.translatable(getCachedState().getBlock().getTranslationKey());
-	}
+    @Override
+    public Text getDisplayName() {
+        return Text.translatable(getCachedState().getBlock().getTranslationKey());
+    }
 
-	@Override
-	public void writeExtraData(ServerPlayerEntity player, PacketByteBuf buf) {
-		buf.writeBlockPos(this.getPos());
-	}
+    @Override
+    public void writeExtraData(ServerPlayerEntity player, PacketByteBuf buf) {
+        buf.writeBlockPos(this.getPos());
+    }
 
-	@Override
-	public void readNbt(NbtCompound nbt) {
-		super.readNbt(nbt);
-		if (getInventorySize() > 0) {
-			Inventories.readNbt(nbt, this.inventory);
-		}
-	}
+    @Override
+    public void readNbt(NbtCompound nbt) {
+        super.readNbt(nbt);
+        if (getInventorySize() > 0) {
+            Inventories.readNbt(nbt, this.inventory);
+        }
+    }
 
-	@Override
-	public void writeNbt(NbtCompound nbt) {
-		// TODO: crashes
-		super.writeNbt(nbt);
-		if (getInventorySize() > 0) {
-			Inventories.writeNbt(nbt, this.inventory);
-		}
-	}
+    @Override
+    public void writeNbt(NbtCompound nbt) {
+        super.writeNbt(nbt);
+        if (getInventorySize() > 0) {
+            Inventories.writeNbt(nbt, this.inventory);
+        }
+    }
 
-	// Updates the chunk every time the energy is changed. Important for updating
-	// the screen to show the latest energy value.
-	@Override
-	public void markDirty() {
-		super.markDirty();
+    // Updates the chunk every time the energy is changed. Important for updating
+    // the screen to show the latest energy value.
+    @Override
+    public void markDirty() {
+        super.markDirty();
 
-		if (this.world instanceof ServerWorld world) {
-			world.getChunkManager().markForUpdate(this.pos);
-		}
-	}
+        if (this.world instanceof ServerWorld world) {
+            world.getChunkManager().markForUpdate(this.pos);
+        }
+    }
 
-	@Override
-	public int[] getAvailableSlots(Direction side) {
-		int[] result = new int[getItems().size()];
-		for (int i = 0; i < result.length; i++) {
-			result[i] = i;
-		}
-		return result;
-	}
+    @Override
+    public int[] getAvailableSlots(Direction side) {
+        int[] result = new int[getItems().size()];
+        for (int i = 0; i < result.length; i++) {
+            result[i] = i;
+        }
+        return result;
+    }
 
-	@Override
-	public boolean canInsert(int slot, ItemStack stack, Direction dir) {
-		ItemStack slotStack = this.getStack(slot);
-		return slotStack.isEmpty() || (slotStack.isOf(stack.getItem()) && slotStack.getCount() <= slotStack.getMaxCount());
-	}
+    @Override
+    public boolean canInsert(int slot, ItemStack stack, Direction dir) {
+        ItemStack slotStack = this.getStack(slot);
+        return slotStack.isEmpty() || (slotStack.isOf(stack.getItem()) && slotStack.getCount() <= slotStack.getMaxCount());
+    }
 
-	@Override
-	public boolean canExtract(int slot, ItemStack stack, Direction dir) {
-		return true;
-	}
+    @Override
+    public boolean canExtract(int slot, ItemStack stack, Direction dir) {
+        return true;
+    }
 
-	@Override
-	public DefaultedList<ItemStack> getItems() {
-		return inventory;
-	}
+    @Override
+    public DefaultedList<ItemStack> getItems() {
+        return inventory;
+    }
 
-	@Nullable
-	@Override
-	public Packet<ClientPlayPacketListener> toUpdatePacket() {
-		return BlockEntityUpdateS2CPacket.of(this);
-	}
+    @Nullable
+    @Override
+    public Packet<ClientPlayPacketListener> toUpdatePacket() {
+        return BlockEntityUpdateS2CPacket.of(this);
+    }
 
-	@Override
-	public NbtCompound toInitialChunkDataNbt() {
-		return this.toNbt();
-	}
+    @Override
+    public NbtCompound toInitialChunkDataNbt() {
+        return this.toNbt();
+    }
 
-	@Override
-	public StatefulEnergyContainer getEnergyStorage() {
-		return energyContainer == null ? energyContainer = new SimpleUpdatingEnergyContainer(this, this.getMaxGeneration()) : energyContainer;
-	}
+    @Override
+    public StatefulEnergyContainer getEnergyStorage() {
+        return energyContainer == null ? energyContainer = new SimpleUpdatingEnergyContainer(this, this.getCapacity()) {
+            @Override
+            public boolean allowsInsertion() {
+                return false;
+            }
+            @Override
+            public boolean allowsExtraction() {
+                return false;
+            }
+        } : energyContainer;
+    }
 
-	@Override
-	public void update() {
-		this.markDirty();
-	}
+    @Override
+    public void update() {
+        this.markDirty();
+        this.getWorld().updateListeners(this.getPos(), this.getCachedState(), this.getCachedState(), Block.NOTIFY_ALL);
+    }
 }

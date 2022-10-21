@@ -32,7 +32,7 @@ public abstract class ProcessingMachineBlockEntity extends AbstractMachineBlockE
 	}
 
 	@Override
-	public abstract long getMaxGeneration();
+	public abstract long getCapacity();
 
 	@Override
 	public abstract long getEnergyPerTick();

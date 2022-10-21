@@ -183,7 +183,7 @@ public class GuiUtil {
 	}
 
 	public static void drawEnergyTooltip(Screen screen, MatrixStack matrices, AbstractMachineBlockEntity machine, int mouseX, int mouseY) {
-		screen.renderTooltip(matrices, Text.translatable("gauge_text.ad_astra.storage", MathHelper.clamp(machine.getEnergy(), 0, machine.getMaxGeneration()), machine.getMaxGeneration()).setStyle(Style.EMPTY.withColor(Formatting.GOLD)), mouseX, mouseY);
+		screen.renderTooltip(matrices, Text.translatable("gauge_text.ad_astra.storage", MathHelper.clamp(machine.getEnergy(), 0, machine.getCapacity()), machine.getCapacity()).setStyle(Style.EMPTY.withColor(Formatting.GOLD)), mouseX, mouseY);
 	}
 
 	public static void drawTankTooltip(Screen screen, MatrixStack matrices, FluidHolder tank, long capacity, int mouseX, int mouseY) {

@@ -42,7 +42,7 @@ public class FuelRefineryBlockEntity extends FluidMachineBlockEntity {
     }
 
     @Override
-    public long getMaxGeneration() {
+    public long getCapacity() {
         return AdAstra.CONFIG.fuelRefinery.maxEnergy;
     }
 
@@ -52,8 +52,8 @@ public class FuelRefineryBlockEntity extends FluidMachineBlockEntity {
     }
 
     @Override
-    public long getMaxEnergyInsert() {
-        return AdAstra.CONFIG.fuelRefinery.energyPerTick * 32;
+    public boolean canInsertEnergy() {
+        return true;
     }
 
     @Override

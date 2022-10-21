@@ -42,7 +42,7 @@ public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
 	}
 
 	@Override
-	public long getMaxGeneration() {
+	public long getCapacity() {
 		return AdAstra.CONFIG.oxygenLoader.maxEnergy;
 	}
 
@@ -52,8 +52,8 @@ public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
 	}
 
 	@Override
-	public long getMaxEnergyInsert() {
-		return AdAstra.CONFIG.oxygenLoader.energyPerTick * 32;
+	public boolean canInsertEnergy() {
+		return true;
 	}
 
 	@Override

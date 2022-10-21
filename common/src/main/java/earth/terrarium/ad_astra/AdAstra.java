@@ -1,5 +1,6 @@
 package earth.terrarium.ad_astra;
 
+import earth.terrarium.ad_astra.client.resourcepack.PlanetResources;
 import earth.terrarium.ad_astra.config.AdAstraConfig;
 import earth.terrarium.ad_astra.data.Planet;
 import earth.terrarium.ad_astra.data.PlanetData;
@@ -7,12 +8,15 @@ import earth.terrarium.ad_astra.entities.mobs.*;
 import earth.terrarium.ad_astra.mixin.BlockEntityTypeAccessor;
 import earth.terrarium.ad_astra.networking.NetworkHandling;
 import earth.terrarium.ad_astra.registry.*;
+import earth.terrarium.ad_astra.util.ModIdentifier;
 import earth.terrarium.ad_astra.util.PlatformUtils;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.SpawnRestriction;
+import net.minecraft.resource.ResourceReloader;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
@@ -21,6 +25,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 public class AdAstra {
 	public static final String MOD_ID = "ad_astra";
@@ -51,9 +57,6 @@ public class AdAstra {
 		ModParticleTypes.register();
 		ModPaintings.register();
 
-		// Data
-		PlanetData.register();
-
 		// Worldgen
 		ModFeatures.register();
 		ModStructures.register();
@@ -62,6 +65,10 @@ public class AdAstra {
 		NetworkHandling.register();
 
 		ModCriteria.register();
+	}
+
+	public static void onRegisterReloadListeners(BiConsumer<Identifier, ResourceReloader> registry) {
+		registry.accept(new ModIdentifier("planet_data"), new PlanetData());
 	}
 
 	public static void postInit() {

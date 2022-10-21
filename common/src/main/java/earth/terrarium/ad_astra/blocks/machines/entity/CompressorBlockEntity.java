@@ -29,7 +29,7 @@ public class CompressorBlockEntity extends ProcessingMachineBlockEntity {
 	}
 
 	@Override
-	public long getMaxGeneration() {
+	public long getCapacity() {
 		return AdAstra.CONFIG.compressor.maxEnergy;
 	}
 
@@ -39,8 +39,8 @@ public class CompressorBlockEntity extends ProcessingMachineBlockEntity {
 	}
 
 	@Override
-	public long getMaxEnergyInsert() {
-		return AdAstra.CONFIG.compressor.energyPerTick * 32;
+	public boolean canInsertEnergy() {
+		return true;
 	}
 
 	// Input and output.

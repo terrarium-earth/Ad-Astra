@@ -1,37 +1,20 @@
 package earth.terrarium.ad_astra.registry;
 
-import java.util.function.Supplier;
-
-import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.ad_astra.entities.SpacePaintingEntity;
-import earth.terrarium.ad_astra.entities.mobs.CorruptedLunarianEntity;
-import earth.terrarium.ad_astra.entities.mobs.GlacianRamEntity;
-import earth.terrarium.ad_astra.entities.mobs.LunarianEntity;
-import earth.terrarium.ad_astra.entities.mobs.LunarianWanderingTraderEntity;
-import earth.terrarium.ad_astra.entities.mobs.MartianRaptorEntity;
-import earth.terrarium.ad_astra.entities.mobs.MoglerEntity;
-import earth.terrarium.ad_astra.entities.mobs.PygroBruteEntity;
-import earth.terrarium.ad_astra.entities.mobs.PygroEntity;
-import earth.terrarium.ad_astra.entities.mobs.StarCrawlerEntity;
-import earth.terrarium.ad_astra.entities.mobs.SulfurCreeperEntity;
-import earth.terrarium.ad_astra.entities.mobs.ZombifiedMoglerEntity;
-import earth.terrarium.ad_astra.entities.mobs.ZombifiedPygroEntity;
-import earth.terrarium.ad_astra.entities.projectiles.IceSpitEntity;
-import earth.terrarium.ad_astra.entities.vehicles.LanderEntity;
-import earth.terrarium.ad_astra.entities.vehicles.RocketEntityTier1;
-import earth.terrarium.ad_astra.entities.vehicles.RocketEntityTier2;
-import earth.terrarium.ad_astra.entities.vehicles.RocketEntityTier3;
-import earth.terrarium.ad_astra.entities.vehicles.RocketEntityTier4;
-import earth.terrarium.ad_astra.entities.vehicles.RoverEntity;
-
 import dev.architectury.registry.level.entity.EntityAttributeRegistry;
 import dev.architectury.registry.registries.DeferredRegister;
+import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.entities.SpacePaintingEntity;
+import earth.terrarium.ad_astra.entities.mobs.*;
+import earth.terrarium.ad_astra.entities.projectiles.IceSpitEntity;
+import earth.terrarium.ad_astra.entities.vehicles.*;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
-import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.Heightmap;
 
+import java.util.function.Supplier;
+
+// \.build\(".*"\)
+// .build(null)
 public class ModEntityTypes {
 	public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(AdAstra.MOD_ID, Registry.ENTITY_TYPE_KEY);
 
@@ -59,7 +42,7 @@ public class ModEntityTypes {
 	public static final Supplier<EntityType<RocketEntityTier3>> TIER_3_ROCKET = ENTITY_TYPES.register("tier_3_rocket", () -> EntityType.Builder.create(RocketEntityTier3::new, SpawnGroup.MISC).setDimensions(1.1f, 5.5f).makeFireImmune().build("tier_3_rocket"));
 	public static final Supplier<EntityType<RocketEntityTier4>> TIER_4_ROCKET = ENTITY_TYPES.register("tier_4_rocket", () -> EntityType.Builder.create(RocketEntityTier4::new, SpawnGroup.MISC).setDimensions(1.1f, 7.0f).makeFireImmune().build("tier_4_rocket"));
 
-	public static final Supplier<EntityType<RoverEntity>> TIER_1_ROVER = ENTITY_TYPES.register("tier_4_rover", () -> EntityType.Builder.create(RoverEntity::new, SpawnGroup.MISC).setDimensions(1.8f, 1.5f).makeFireImmune().build("tier_1_rover"));
+	public static final Supplier<EntityType<RoverEntity>> TIER_1_ROVER = ENTITY_TYPES.register("tier_1_rover", () -> EntityType.Builder.create(RoverEntity::new, SpawnGroup.MISC).setDimensions(1.8f, 1.5f).makeFireImmune().build("tier_1_rover"));
 	public static final Supplier<EntityType<LanderEntity>> LANDER = ENTITY_TYPES.register("lander", () -> EntityType.Builder.create(LanderEntity::new, SpawnGroup.MISC).setDimensions(1.2f, 2.0f).makeFireImmune().build("lander"));
 
 	public static final Supplier<EntityType<SpacePaintingEntity>> SPACE_PAINTING = ENTITY_TYPES.register("space_painting", () -> EntityType.Builder.create(SpacePaintingEntity::new, SpawnGroup.MISC).setDimensions(0.5f, 0.5f).maxTrackingRange(10).trackingTickInterval(Integer.MAX_VALUE).build("space_painting"));

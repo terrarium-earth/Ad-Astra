@@ -31,7 +31,7 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity {
 	}
 
 	@Override
-	public long getMaxGeneration() {
+	public long getCapacity() {
 		return AdAstra.CONFIG.coalGenerator.maxEnergy;
 	}
 
@@ -41,8 +41,8 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity {
 	}
 
 	@Override
-	public long getMaxEnergyExtract() {
-		return AdAstra.CONFIG.coalGenerator.energyPerTick * 2;
+	public boolean canExtractEnergy() {
+		return true;
 	}
 
 	// Only input.
@@ -67,7 +67,7 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity {
 			if (this.usesEnergy()) {
 				ItemStack input = this.getItems().get(0);
 
-				if (this.getEnergy() < this.getMaxGeneration()) {
+				if (this.getEnergy() < this.getCapacity()) {
 
 					// Consume the fuel
 					if (this.cookTime > 0) {

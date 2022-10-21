@@ -1,6 +1,7 @@
 package earth.terrarium.ad_astra.screen.handler;
 
 import earth.terrarium.ad_astra.entities.vehicles.VehicleEntity;
+import earth.terrarium.ad_astra.items.FluidContainingItem;
 import earth.terrarium.ad_astra.registry.ModScreenHandlers;
 import earth.terrarium.ad_astra.screen.NoInventorySlot;
 
@@ -26,7 +27,7 @@ public class LargeVehicleScreenHandler extends AbstractVehicleScreenHandler {
 						if (!super.canInsert(stack)) {
 							return false;
 						}
-						return !FluidHooks.isFluidContainingItem(stack);
+						return FluidHooks.isFluidContainingItem(stack);
 					}
 				},
 				// Left output slot.

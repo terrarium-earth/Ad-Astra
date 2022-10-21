@@ -18,6 +18,7 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.ModelEvent;
+import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -29,6 +30,7 @@ import java.util.function.Supplier;
 public class AdAstraClientForge {
 
     private static final Map<Item, BuiltinModelItemRenderer> ITEM_RENDERERS = new HashMap<>();
+    private static boolean hasInitializedRenderers = false;
 
     public static BuiltinModelItemRenderer getItemRenderer(ItemConvertible item) {
         return ITEM_RENDERERS.get(item.asItem());
@@ -62,10 +64,16 @@ public class AdAstraClientForge {
         modEventBus.addListener(AdAstraClientForge::chestSpriteLoading);
         modEventBus.addListener(AdAstraClientForge::onRegisterRenderers);
         modEventBus.addListener(AdAstraClientForge::onRegisterLayerDefinitions);
+        modEventBus.addListener(AdAstraClientForge::onClientReloadListeners);
+    }
+
+    public static void onClientReloadListeners(RegisterClientReloadListenersEvent event) {
+        AdAstraClient.onRegisterReloadListeners((id, listener) -> event.registerReloadListener(listener));
     }
 
     public static void postInit() {
         AdAstraClient.onRegisterItemRenderers(AdAstraClientForge::registerItemRenderer);
+        hasInitializedRenderers = true;
     }
 
     public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
@@ -90,5 +98,9 @@ public class AdAstraClientForge {
                 event.registerLayerDefinition(location, definition);
             }
         });
+    }
+
+    public static boolean hasInitializedRenderers() {
+        return hasInitializedRenderers;
     }
 }

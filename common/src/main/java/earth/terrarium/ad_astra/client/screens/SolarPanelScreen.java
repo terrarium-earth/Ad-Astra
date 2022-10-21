@@ -36,7 +36,7 @@ public class SolarPanelScreen extends AbstractMachineScreen<SolarPanelScreenHand
 	protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
 		super.drawBackground(matrices, delta, mouseX, mouseY);
 
-		GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.blockEntity.getEnergyStorage().getStoredEnergy(), this.blockEntity.getMaxGeneration());
+		GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.blockEntity.getEnergyStorage().getStoredEnergy(), this.blockEntity.getCapacity());
 		if (this.blockEntity.getCachedState().get(AbstractMachineBlock.LIT)) {
 			GuiUtil.drawSun(matrices, this.x + SUN_LEFT, this.y + SUN_TOP);
 		}

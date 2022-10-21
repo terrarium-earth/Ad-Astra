@@ -32,7 +32,7 @@ public class SolarPanelBlockEntity extends AbstractMachineBlockEntity {
 	}
 
 	@Override
-	public long getMaxGeneration() {
+	public long getCapacity() {
 		return AdAstra.CONFIG.solarPanel.maxEnergy;
 	}
 

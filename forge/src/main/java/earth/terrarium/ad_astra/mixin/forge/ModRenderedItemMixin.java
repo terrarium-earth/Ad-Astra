@@ -24,10 +24,15 @@ public abstract class ModRenderedItemMixin extends Item {
         Item item = this;
 
         consumer.accept(new IClientItemExtensions() {
-            private final BuiltinModelItemRenderer renderer = AdAstraClientForge.getItemRenderer(item);
+            private BuiltinModelItemRenderer renderer = null;
+            private boolean hasCheckedSinceInit = false;
 
             @Override
             public BuiltinModelItemRenderer getCustomRenderer() {
+                if (AdAstraClientForge.hasInitializedRenderers() && !hasCheckedSinceInit) {
+                    renderer = AdAstraClientForge.getItemRenderer(item);
+                    hasCheckedSinceInit = true;
+                }
                 return renderer == null ? IClientItemExtensions.super.getCustomRenderer() : renderer;
             }
         });

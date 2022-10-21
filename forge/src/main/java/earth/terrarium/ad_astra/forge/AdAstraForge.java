@@ -5,6 +5,8 @@ import earth.terrarium.ad_astra.client.AdAstraClient;
 import earth.terrarium.ad_astra.client.forge.AdAstraClientForge;
 import dev.architectury.platform.forge.EventBuses;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
@@ -21,6 +23,11 @@ public class AdAstraForge {
         modEventBus.addListener(AdAstraForge::onClientSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(AdAstraForge::commonSetup);
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> AdAstraClientForge::init);
+        MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onServerReloadListeners);
+    }
+
+    public static void onServerReloadListeners(AddReloadListenerEvent event) {
+        AdAstra.onRegisterReloadListeners((id, listener) -> event.addListener(listener));
     }
 
     public static void commonSetup(FMLCommonSetupEvent event) {

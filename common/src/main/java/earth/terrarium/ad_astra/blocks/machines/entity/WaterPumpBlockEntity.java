@@ -40,7 +40,7 @@ public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements 
 	}
 
 	@Override
-	public long getMaxGeneration() {
+	public long getCapacity() {
 		return AdAstra.CONFIG.waterPump.maxEnergy;
 	}
 
@@ -50,8 +50,8 @@ public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements 
 	}
 
 	@Override
-	public long getMaxEnergyInsert() {
-		return AdAstra.CONFIG.waterPump.energyPerTick * 32;
+	public boolean canInsertEnergy() {
+		return true;
 	}
 
 	@Nullable
