@@ -26,7 +26,7 @@ public class VehicleScreenHandler extends AbstractVehicleScreenHandler {
 						if (!super.canInsert(stack)) {
 							return false;
 						}
-						return !FluidHooks.isFluidContainingItem(stack);
+						return FluidHooks.isFluidContainingItem(stack);
 					}
 				},
 				// Left output slot.

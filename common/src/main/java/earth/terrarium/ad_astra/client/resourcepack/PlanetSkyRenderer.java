@@ -84,8 +84,9 @@ public record PlanetSkyRenderer(RegistryKey<World> dimension, PlanetSkyRenderer.
 		public static final Codec<CloudEffects> CODEC = ModUtils.createEnumCodec(CloudEffects.class);
 	}
 
-	public enum WeatherEffects {
-		NONE, VENUS;
+	public enum
+	WeatherEffects {
+		NONE, VANILLA, VENUS;
 
 		public static final Codec<WeatherEffects> CODEC = ModUtils.createEnumCodec(WeatherEffects.class);
 	}
@@ -94,5 +95,9 @@ public record PlanetSkyRenderer(RegistryKey<World> dimension, PlanetSkyRenderer.
 		SIMPLE, NONE, FOGGY_REVERSED, FOGGY, COLORED_HORIZON;
 
 		public static final Codec<DimensionEffectType> CODEC = ModUtils.createEnumCodec(DimensionEffectType.class);
+
+		public boolean isFoggy() {
+			return this == FOGGY || this == FOGGY_REVERSED;
+		}
 	}
 }

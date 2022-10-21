@@ -6,6 +6,7 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.stream.StreamSupport;
 
+import dev.architectury.injectables.targets.ArchitecturyTarget;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.data.Planet;
 import earth.terrarium.ad_astra.entities.vehicles.LanderEntity;
@@ -79,6 +80,7 @@ public class ModUtils {
 
 			if (entity instanceof ServerPlayerEntity player) {
 				if (player.getVehicle() instanceof RocketEntity rocket) {
+					rocket.removeAllPassengers();
 					player.sendMessage(Text.translatable("message." + AdAstra.MOD_ID + ".hold_space"), false);
 					entity = createLander(rocket, world, targetPos);
 					rocket.discard();
@@ -108,7 +110,6 @@ public class ModUtils {
 
 			LinkedList<Entity> teleportedEntities = new LinkedList<>();
 			for (Entity entityToTeleport : entitiesToTeleport) {
-
 				TeleportTarget target = new TeleportTarget(targetPos, entityToTeleport.getVelocity(), entityToTeleport.getYaw(), entityToTeleport.getPitch());
 				teleportedEntities.add(PlatformUtils.teleportToDimension(entityToTeleport, world, target));
 			}
@@ -159,7 +160,10 @@ public class ModUtils {
 		((VehicleItem) stack.getItem()).setFluid(stack, rocket.getFluidHolder());
 		lander.getInventory().setStack(10, stack);
 
-		targetWorld.spawnEntity(lander);
+		// On Fabric, this is required for some reason as it does not teleport the entity.
+		if (ArchitecturyTarget.getCurrentTarget().equals("fabric")) {
+			targetWorld.spawnEntity(lander);
+		}
 		return lander;
 	}
 

@@ -88,7 +88,7 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
 	}
 
 	@Override
-	public long getMaxGeneration() {
+	public long getCapacity() {
 		return AdAstra.CONFIG.cryoFreezer.maxEnergy;
 	}
 
@@ -98,8 +98,8 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
 	}
 
 	@Override
-	public long getMaxEnergyInsert() {
-		return AdAstra.CONFIG.cryoFreezer.energyPerTick * 32;
+	public boolean canInsertEnergy() {
+		return true;
 	}
 
 	@Override

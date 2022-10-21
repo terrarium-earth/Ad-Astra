@@ -38,7 +38,7 @@ public class CryoFreezerScreen extends AbstractMachineScreen<CryoFreezerScreenHa
 
 		CryoFreezerBlockEntity entity = (CryoFreezerBlockEntity) blockEntity;
 
-		GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.blockEntity.getEnergyStorage().getStoredEnergy(), this.blockEntity.getMaxGeneration());
+		GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.blockEntity.getEnergyStorage().getStoredEnergy(), this.blockEntity.getCapacity());
 		GuiUtil.drawFluidTank(matrices, this.x + INPUT_TANK_LEFT, this.y + INPUT_TANK_TOP, entity.tank.getFluids().get(0).getFluidAmount(), entity.tank.getTankCapacity(0), entity.tank.getFluids().get(0));
 		GuiUtil.drawSnowflake(matrices, this.x + SNOWFLAKE_LEFT, this.y + SNOWFLAKE_TOP, entity.getCookTime(), entity.getCookTimeTotal());
 	}

@@ -146,9 +146,9 @@ public class SpaceSuitModel extends BipedEntityModel<LivingEntity> {
 	@Override
 	public void setVisible(boolean visible) {
 		super.setVisible(visible);
-		this.visor.visible = false;
-		this.rightBoot.visible = false;
-		this.leftBoot.visible = false;
+		this.visor.visible = visible;
+		this.rightBoot.visible = visible;
+		this.leftBoot.visible = visible;
 	}
 
 	@SuppressWarnings("unused")

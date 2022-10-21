@@ -53,7 +53,7 @@ public class ModItems {
 
 	public static final Supplier<Item> CHEESE = register("cheese", () -> new Item(new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL).food(new FoodComponent.Builder().hunger(4).saturationModifier(1.0f).build())));
 
-	public static final Supplier<Item> LAUNCH_PAD = register("launch_pad", () -> new ModRenderedBlockItem(ModBlocks.LAUNCH_PAD.get(), new Item.Settings().group(ModItemGroups.ITEM_GROUP_BLOCKS)));
+	public static final Supplier<Item> LAUNCH_PAD = register("launch_pad", () -> new HoldableOverHeadBlockItem(ModBlocks.LAUNCH_PAD.get(), new Item.Settings().group(ModItemGroups.ITEM_GROUP_BLOCKS)));
 
 	// Buckets
 	public static final RegistrySupplier<Item> OIL_BUCKET = register("oil_bucket", () -> new ArchitecturyBucketItem(ModFluids.OIL_STILL, new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL).recipeRemainder(Items.BUCKET).maxCount(1)));
@@ -601,12 +601,12 @@ public class ModItems {
 	}
 
 	public static Supplier<Item> registerFlag(String id, Supplier<Block> flag) {
-		Supplier<Item> item = () -> new TallBlockItem(flag.get(), new Item.Settings().group(ModItemGroups.ITEM_GROUP_FLAGS));
+		Supplier<Item> item = () -> new FlagBlockItem(flag.get(), new Item.Settings().group(ModItemGroups.ITEM_GROUP_FLAGS));
 		return register(id, item);
 	}
 
 	public static Supplier<Item> registerGlobe(String id, Supplier<Block> globe) {
-		Supplier<Item> item = () -> new BlockItem(globe.get(), new Item.Settings().group(ModItemGroups.ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.RARE));
+		Supplier<Item> item = () -> new ModRenderedBlockItem(globe.get(), new Item.Settings().group(ModItemGroups.ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.RARE));
 		return register(id, item);
 	}
 

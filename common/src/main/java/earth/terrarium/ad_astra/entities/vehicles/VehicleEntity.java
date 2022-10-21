@@ -80,15 +80,13 @@ public abstract class VehicleEntity extends Entity implements Updatable {
 	@Override
 	protected void readCustomDataFromNbt(NbtCompound nbt) {
 		this.inventory.readNbtList(nbt.getList("inventory", NbtElement.COMPOUND_TYPE));
-		getTank().setFluid(FluidHooks.fluidFromCompound(nbt.getCompound("inputFluid")).getFluid());
-		getTank().setAmount(nbt.getLong("inputAmount"));
+		getTank().deserialize(nbt.getCompound("inputFluid"));
 	}
 
 	@Override
 	protected void writeCustomDataToNbt(NbtCompound nbt) {
 		nbt.put("inventory", this.inventory.toNbtList());
 		nbt.put("inputFluid", getTank().serialize());
-		nbt.putLong("inputAmount", getTank().getFluidAmount());
 	}
 
 	@Override
@@ -392,7 +390,5 @@ public abstract class VehicleEntity extends Entity implements Updatable {
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-
 	}
 }

@@ -67,7 +67,11 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<Pl
 
     @Override
     public PlatformEnergyManager getInteraction(World world, BlockPos pos, Direction direction) {
-        return EnergyHooks.safeGetBlockEnergyManager(world.getBlockEntity(pos.offset(direction)), direction).orElse(null);
+        BlockEntity blockEntity = world.getBlockEntity(pos.offset(direction));
+        if (blockEntity != null) {
+            return EnergyHooks.safeGetBlockEnergyManager(blockEntity, direction).orElse(null);
+        }
+        return null;
     }
 
     @Override

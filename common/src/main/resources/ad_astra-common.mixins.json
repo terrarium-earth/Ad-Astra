@@ -2,6 +2,7 @@
   "required": true,
   "package": "earth.terrarium.ad_astra.mixin",
   "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8.5",
   "mixins": [
     "ArmorDyeRecipeMixin",
     "BlockEntityTypeAccessor",

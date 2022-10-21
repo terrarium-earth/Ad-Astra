@@ -7,7 +7,6 @@ import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import earth.terrarium.botarium.api.fluid.PlatformFluidHandler;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.Entity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
 
@@ -44,6 +43,9 @@ public class FluidUtils {
 
     // TODO: convert to different slot
     public static boolean insertFluidFromItem(ItemStack stack, int tank, BlockEntity blockEntity, Predicate<FluidHolder> filter) {
+        if (stack.isEmpty()) {
+            return false;
+        }
         Optional<PlatformFluidHandler> itemHandler = FluidHooks.safeGetItemFluidManager(stack);
         if (itemHandler.isPresent()) {
             PlatformFluidHandler itemFluidHandler = itemHandler.get();
@@ -60,6 +62,9 @@ public class FluidUtils {
     }
 
     public static boolean extractFluidFromItem(ItemStack stack, int tank, BlockEntity blockEntity, Predicate<FluidHolder> filter) {
+        if (stack.isEmpty()) {
+            return false;
+        }
         Optional<PlatformFluidHandler> itemHandler = FluidHooks.safeGetItemFluidManager(stack);
         if (itemHandler.isPresent()) {
             PlatformFluidHandler itemFluidHandler = itemHandler.get();
@@ -77,6 +82,9 @@ public class FluidUtils {
     }
 
     public static boolean insertFluidToContainerFromItem(ItemStack stack, int tank, FluidContainer container, Predicate<FluidHolder> filter) {
+        if (stack.isEmpty()) {
+            return false;
+        }
         Optional<PlatformFluidHandler> itemHandler = FluidHooks.safeGetItemFluidManager(stack);
         if (itemHandler.isPresent()) {
             PlatformFluidHandler itemFluidHandler = itemHandler.get();
