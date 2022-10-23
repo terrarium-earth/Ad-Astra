@@ -61,7 +61,7 @@ dependencies {
 	modCompileOnly "dev.emi:emi:${emi_version}"
 
 	// REI
-    modImplementation("me.shedaniel:RoughlyEnoughItems-api-fabric:$project.rei_version")
+    modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:$project.rei_version")
 }
 
 processResources {

@@ -1,6 +1,6 @@
 {
    "type": "ad_astra:fuel_conversion",
-   "input": "c:oil",
+   "input": "#c:oil",
    "output": "ad_astra:fuel",
    "conversion_ratio": 1.0
 }

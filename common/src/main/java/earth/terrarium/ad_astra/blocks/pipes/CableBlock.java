@@ -1,10 +1,6 @@
 package earth.terrarium.ad_astra.blocks.pipes;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import earth.terrarium.ad_astra.registry.ModSoundEvents;
-
 import earth.terrarium.botarium.api.energy.EnergyHooks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -20,6 +16,9 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.World;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class CableBlock extends AbstractPipeBlock {
 
@@ -59,9 +58,8 @@ public class CableBlock extends AbstractPipeBlock {
     public void updateShape(World world, BlockPos pos, BlockState state, Direction direction) {
         if (!world.isClient) {
             BlockPos offset = pos.offset(direction);
-            boolean connect = world.getBlockState(offset).getBlock() instanceof CableBlock || EnergyHooks.safeGetBlockEnergyManager(world.getBlockEntity(pos.offset(direction)), direction).orElse(null) != null;
-
-            if (connect) {
+            BlockEntity entity = world.getBlockEntity(offset);
+            if (entity != null && (world.getBlockState(offset).getBlock() instanceof CableBlock || EnergyHooks.safeGetBlockEnergyManager(entity, direction).orElse(null) != null)) {
                 world.setBlockState(pos, world.getBlockState(pos).with(DIRECTIONS.get(direction), true), Block.NOTIFY_ALL);
                 if (world.getBlockState(offset).getBlock().equals(this)) {
                     world.setBlockState(offset, world.getBlockState(offset).with(DIRECTIONS.get(direction.getOpposite()), true), Block.NOTIFY_ALL);
