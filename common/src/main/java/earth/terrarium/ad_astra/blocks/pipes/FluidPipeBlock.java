@@ -58,9 +58,8 @@ public class FluidPipeBlock extends AbstractPipeBlock {
     public void updateShape(World world, BlockPos pos, BlockState state, Direction direction) {
         if (!world.isClient) {
             BlockPos offset = pos.offset(direction);
-            boolean connect = world.getBlockState(offset).getBlock() instanceof FluidPipeBlock || FluidHooks.safeGetBlockFluidManager(world.getBlockEntity(pos.offset(direction)), direction).orElse(null) != null;
-
-            if (connect) {
+            BlockEntity entity = world.getBlockEntity(offset);
+            if (entity != null && (world.getBlockState(offset).getBlock() instanceof FluidPipeBlock || FluidHooks.safeGetBlockFluidManager(entity, direction).orElse(null) != null)) {
                 if (world.getBlockState(pos).get(DIRECTIONS.get(direction)).equals(PipeState.NONE)) {
                     world.setBlockState(pos, world.getBlockState(pos).with(DIRECTIONS.get(direction), PipeState.NORMAL), Block.NOTIFY_ALL);
                 }

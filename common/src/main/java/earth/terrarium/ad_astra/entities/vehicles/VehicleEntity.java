@@ -1,9 +1,5 @@
 package earth.terrarium.ad_astra.entities.vehicles;
 
-import earth.terrarium.botarium.api.menu.MenuHooks;
-import net.minecraft.server.network.ServerPlayerEntity;
-import org.jetbrains.annotations.Nullable;
-
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.items.vehicles.VehicleItem;
 import earth.terrarium.ad_astra.registry.ModTags;
@@ -11,12 +7,12 @@ import earth.terrarium.ad_astra.screen.VehicleScreenHandlerFactory;
 import earth.terrarium.ad_astra.util.CustomInventory;
 import earth.terrarium.ad_astra.util.FluidUtils;
 import earth.terrarium.ad_astra.util.OxygenUtils;
-
 import earth.terrarium.botarium.api.Updatable;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import earth.terrarium.botarium.api.fluid.SimpleUpdatingFluidContainer;
 import earth.terrarium.botarium.api.menu.ExtraDataMenuProvider;
+import earth.terrarium.botarium.api.menu.MenuHooks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
@@ -31,6 +27,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.network.Packet;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
@@ -43,6 +40,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class VehicleEntity extends Entity implements Updatable {
 
@@ -367,7 +365,7 @@ public abstract class VehicleEntity extends Entity implements Updatable {
 	public void tryInsertingIntoTank() {
 		if (this.getInventorySize() > 1) {
 			if (!this.world.isClient) {
-				FluidUtils.insertFluidToContainerFromItem(this.getInventory().getStack(0), 0, this.tank, f -> f.getFluid().isIn(ModTags.FUELS));
+				FluidUtils.insertFluidToContainerFromItem(this.getInventory().getStack(0), 0, this.tank, f -> f.isIn(ModTags.FUELS));
 			}
 		}
 	}

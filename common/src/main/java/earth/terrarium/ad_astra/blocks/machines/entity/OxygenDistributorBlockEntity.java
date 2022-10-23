@@ -1,15 +1,10 @@
 package earth.terrarium.ad_astra.blocks.machines.entity;
 
-import java.util.List;
-import java.util.Set;
-
-import earth.terrarium.ad_astra.registry.ModFluids;
-import org.jetbrains.annotations.Nullable;
-
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.blocks.machines.AbstractMachineBlock;
 import earth.terrarium.ad_astra.recipes.OxygenConversionRecipe;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
+import earth.terrarium.ad_astra.registry.ModFluids;
 import earth.terrarium.ad_astra.registry.ModParticleTypes;
 import earth.terrarium.ad_astra.registry.ModRecipes;
 import earth.terrarium.ad_astra.screen.handler.OxygenDistributorScreenHandler;
@@ -17,7 +12,6 @@ import earth.terrarium.ad_astra.util.FluidUtils;
 import earth.terrarium.ad_astra.util.ModUtils;
 import earth.terrarium.ad_astra.util.OxygenUtils;
 import earth.terrarium.ad_astra.util.algorithms.OxygenFillerAlgorithm;
-
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -29,6 +23,10 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
+import java.util.Set;
 
 public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 
@@ -166,7 +164,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 		// Convert the input fluid into oxygen
 		if (!this.world.isClient) {
 			if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxCount() && FluidHooks.isFluidContainingItem(insertSlot)) {
-				FluidUtils.insertFluidFromItem(insertSlot, 0, this, f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.world).stream().anyMatch(r -> r.matches(f.getFluid())));
+				FluidUtils.insertFluidToContainerFromItem(insertSlot, 0, this.getFluidContainer(), f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.world).stream().anyMatch(r -> r.matches(f)));
 			}
 
 			if (this.canDrainEnergy()) {

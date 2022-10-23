@@ -26,6 +26,7 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<Pl
         return true;
     }
 
+    // For Botarium: Add a method to check insertion and extraction
     @Override
     public boolean canTakeFrom(PlatformEnergyManager source) {
         return source.extract(1, true) == 1;
@@ -42,7 +43,6 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<Pl
     }
 
     @Override
-    @SuppressWarnings("UnstableApiUsage")
     public void insertInto(PlatformEnergyManager consumer, Direction direction, BlockPos pos) {
         BlockState state = this.getCachedState();
         BlockState state2 = world.getBlockState(pos);
@@ -67,7 +67,7 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<Pl
 
     @Override
     public PlatformEnergyManager getInteraction(World world, BlockPos pos, Direction direction) {
-        BlockEntity blockEntity = world.getBlockEntity(pos.offset(direction));
+        BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity != null) {
             return EnergyHooks.safeGetBlockEnergyManager(blockEntity, direction).orElse(null);
         }

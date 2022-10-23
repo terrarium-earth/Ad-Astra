@@ -1,17 +1,17 @@
 package earth.terrarium.ad_astra.blocks.pipes;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
-
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import earth.terrarium.botarium.api.fluid.PlatformFluidHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FluidPipeBlockEntity extends BlockEntity implements InteractablePipe<PlatformFluidHandler> {
     private final List<Node<PlatformFluidHandler>> consumers = new ArrayList<>();
@@ -29,12 +29,12 @@ public class FluidPipeBlockEntity extends BlockEntity implements InteractablePip
     // TODO: Adrian needs to add insertion and extraction booleans on handlers
     @Override
     public boolean canTakeFrom(PlatformFluidHandler source) {
-        return source != null;
+        return true;
     }
 
     @Override
     public boolean canInsertInto(PlatformFluidHandler consumer) {
-        return consumer != null;
+        return true;
     }
 
     @Override
@@ -43,7 +43,6 @@ public class FluidPipeBlockEntity extends BlockEntity implements InteractablePip
     }
 
     @Override
-    @SuppressWarnings("UnstableApiUsage")
     public void insertInto(PlatformFluidHandler consumer, Direction direction, BlockPos pos) {
 
         BlockState state = this.getCachedState();
@@ -59,22 +58,22 @@ public class FluidPipeBlockEntity extends BlockEntity implements InteractablePip
         PlatformFluidHandler input;
         PlatformFluidHandler output;
 
-        if (pipeState.equals(PipeState.INSERT) && pipeState2.equals(PipeState.INSERT)) {
+        if (pipeState == PipeState.INSERT && pipeState2 == PipeState.INSERT) {
             return;
-        } else if (pipeState.equals(PipeState.EXTRACT) && pipeState2.equals(PipeState.EXTRACT)) {
+        } else if (pipeState == PipeState.EXTRACT && pipeState2 == PipeState.EXTRACT) {
             return;
-        } else if (pipeState.equals(PipeState.NONE) || pipeState2.equals(PipeState.NONE)) {
+        } else if (pipeState == PipeState.NONE || pipeState2 == PipeState.NONE) {
             return;
-        } else if (pipeState2.equals(PipeState.INSERT) && !pipeState2.equals(PipeState.NONE)) {
+        } else if (pipeState2 == PipeState.INSERT) {
             input = source.storage();
             output = consumer;
-        } else if (pipeState2.equals(PipeState.EXTRACT) && !pipeState2.equals(PipeState.NONE)) {
+        } else if (pipeState2 == PipeState.EXTRACT) {
             input = consumer;
             output = source.storage();
-        } else if (pipeState.equals(PipeState.INSERT) && !pipeState.equals(PipeState.NONE)) {
+        } else if (pipeState == PipeState.INSERT) {
             input = consumer;
             output = source.storage();
-        } else if (pipeState.equals(PipeState.EXTRACT) && !pipeState.equals(PipeState.NONE)) {
+        } else if (pipeState == PipeState.EXTRACT) {
             input = source.storage();
             output = consumer;
         } else {
@@ -82,13 +81,19 @@ public class FluidPipeBlockEntity extends BlockEntity implements InteractablePip
         }
 
         if (getSource() != null && getConsumers().size() > 0) {
-            FluidHooks.moveFluid(input, output, input.getFluidInTank(0));
+            if (!input.getFluidInTank(0).getFluid().equals(Fluids.EMPTY)) {
+                FluidHooks.moveFluid(input, output, input.getFluidInTank(0));
+            }
         }
     }
 
     @Override
     public PlatformFluidHandler getInteraction(World world, BlockPos pos, Direction direction) {
-        return FluidHooks.safeGetBlockFluidManager(world.getBlockEntity(pos.offset(direction)), direction).orElse(null);
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (blockEntity != null) {
+            return FluidHooks.safeGetBlockFluidManager(blockEntity, direction).orElse(null);
+        }
+        return null;
     }
 
     @Override

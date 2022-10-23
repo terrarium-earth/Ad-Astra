@@ -1,16 +1,13 @@
 package earth.terrarium.ad_astra.blocks.machines.entity;
 
-import net.minecraft.block.Block;
-import org.jetbrains.annotations.Nullable;
-
 import earth.terrarium.ad_astra.blocks.machines.AbstractMachineBlock;
 import earth.terrarium.ad_astra.util.ModInventory;
-
 import earth.terrarium.botarium.api.energy.EnergyBlock;
 import earth.terrarium.botarium.api.energy.EnergyHooks;
 import earth.terrarium.botarium.api.energy.SimpleUpdatingEnergyContainer;
 import earth.terrarium.botarium.api.energy.StatefulEnergyContainer;
 import earth.terrarium.botarium.api.menu.ExtraDataMenuProvider;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
@@ -31,6 +28,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class AbstractMachineBlockEntity extends BlockEntity implements EnergyBlock, ExtraDataMenuProvider, ModInventory, SidedInventory {
 
@@ -114,11 +112,11 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
     }
 
     public long getEnergy() {
-        return this.energyContainer.getStoredEnergy();
+        return this.getEnergyStorage().getStoredEnergy();
     }
 
     public boolean hasEnergy() {
-        return this.usesEnergy() && this.getEnergy() > this.getEnergyPerTick();
+        return this.usesEnergy() && this.getEnergy() > 0;
     }
 
     @Override
@@ -199,13 +197,14 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
         return energyContainer == null ? energyContainer = new SimpleUpdatingEnergyContainer(this, this.getCapacity()) {
             @Override
             public boolean allowsInsertion() {
-                return false;
+                return canInsertEnergy();
             }
+
             @Override
             public boolean allowsExtraction() {
-                return false;
+                return canExtractEnergy();
             }
-        } : energyContainer;
+        } : this.energyContainer;
     }
 
     @Override

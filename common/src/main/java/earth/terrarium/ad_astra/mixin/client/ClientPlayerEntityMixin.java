@@ -2,6 +2,7 @@ package earth.terrarium.ad_astra.mixin.client;
 
 import java.util.List;
 
+import net.minecraft.util.math.MathHelper;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -55,7 +56,7 @@ public class ClientPlayerEntityMixin {
 				long oxygen = suit.getAmount(chest);
 
 				// Render oxygen info
-				PlayerOverlayScreen.oxygenRatio = oxygen / (double) suit.getTankSize();
+				PlayerOverlayScreen.oxygenRatio = MathHelper.clamp(oxygen / (double) suit.getTankSize(), 0.0, 1.0);
 				PlayerOverlayScreen.doesNotNeedOxygen = OxygenUtils.entityHasOxygen(player.world, player) && !player.isSubmergedInWater();
 			}
 		} else {

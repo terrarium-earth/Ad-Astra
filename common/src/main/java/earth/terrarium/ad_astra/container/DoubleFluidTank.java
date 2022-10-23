@@ -1,10 +1,7 @@
 package earth.terrarium.ad_astra.container;
 
 import earth.terrarium.botarium.api.Updatable;
-import earth.terrarium.botarium.api.fluid.FluidContainer;
-import earth.terrarium.botarium.api.fluid.FluidHolder;
-import earth.terrarium.botarium.api.fluid.FluidSnapshot;
-import earth.terrarium.botarium.api.fluid.UpdatingFluidContainer;
+import earth.terrarium.botarium.api.fluid.*;
 import net.minecraft.nbt.NbtCompound;
 
 import java.util.List;
@@ -30,11 +27,13 @@ public class DoubleFluidTank implements UpdatingFluidContainer {
 
     @Override
     public long insertFluid(FluidHolder fluid, boolean simulate) {
+        if (fluid.isEmpty()) return 0;
         return input.insertFluid(fluid, simulate);
     }
 
     @Override
     public FluidHolder extractFluid(FluidHolder fluid, boolean simulate) {
+        if (fluid.isEmpty()) return FluidHooks.emptyFluid();
         return output.extractFluid(fluid, simulate);
     }
 
