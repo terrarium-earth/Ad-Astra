@@ -59,6 +59,7 @@ import net.minecraft.util.Rarity;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 public class ModItems {
 	public static final Set<Item> items = new HashSet<>();
@@ -641,7 +642,12 @@ public class ModItems {
 	}
 
 	public static BlockItem registerFlag(Block flag) {
-		TallBlockItem item = new TallBlockItem(flag, new FabricItemSettings().group(ModItemGroups.ITEM_GROUP_FLAGS));
+		TallBlockItem item = new TallBlockItem(flag, new FabricItemSettings().group(ModItemGroups.ITEM_GROUP_FLAGS)) {
+			@Override
+			public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+				tooltip.add((new TranslatableText("item.ad_astra.flag.tooltip").setStyle(Style.EMPTY.withColor(Formatting.AQUA))));
+			}
+		};
 		register(Registry.BLOCK.getId(flag), item);
 		return item;
 	}

@@ -441,6 +441,7 @@
     "item.ad_astra.calorite_tank": "Calorite Tank",
     "item.ad_astra.cheese": "Cheese",
     "item.ad_astra.coal_generator.tooltip": "Burns coal into energy.",
+    "item.ad_astra.flag.tooltip": "Right-click the block to set an image URL",
     "item.ad_astra.compressed_calorite": "Calorite Plate",
     "item.ad_astra.compressed_desh": "Desh Plate",
     "item.ad_astra.compressed_ostrum": "Ostrum Plate",
