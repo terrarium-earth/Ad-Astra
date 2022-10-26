@@ -5,6 +5,7 @@ import earth.terrarium.ad_astra.networking.NetworkHandling;
 import earth.terrarium.ad_astra.networking.packets.server.MachineInfoPacket;
 import earth.terrarium.ad_astra.util.CustomInventory;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
+import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
@@ -98,7 +99,7 @@ public abstract class AbstractVehicleScreenHandler extends ScreenHandler {
 	}
 
 	public List<FluidHolder> getFluids() {
-		return fluids;
+		return fluids == null ? List.of(FluidHooks.emptyFluid(), FluidHooks.emptyFluid()) : fluids;
 	}
 
 	public void setFluids(List<FluidHolder> fluids) {

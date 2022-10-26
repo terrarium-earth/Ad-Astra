@@ -57,7 +57,7 @@ public class RoverItem extends VehicleItem {
 			NbtCompound nbt = roverStack.getOrCreateNbt();
 			if (nbt.contains("fluid")) {
 				if (!this.getFluid(roverStack).equals(Fluids.EMPTY)) {
-					this.insertIntoTank(rover.getTank(), roverStack);
+					this.insert(roverStack, rover.getTankHolder());
 				}
 			}
 			if (nbt.contains("inventory")) {

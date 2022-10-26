@@ -21,7 +21,7 @@ public abstract class VehicleItem extends ModRenderedItem implements FluidContai
 
 	@Override
 	public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-		long fuel = FluidHooks.toMillibuckets(this.getAmount(stack));
-		tooltip.add(Text.translatable("tooltip.ad_astra.vehicle_fuel", FluidHooks.toMillibuckets(fuel), this.getTankSize()).setStyle(Style.EMPTY.withColor(fuel > 0 ? Formatting.GREEN : Formatting.RED)));
+		long fuel = FluidHooks.toMillibuckets(this.getFluidAmount(stack));
+		tooltip.add(Text.translatable("tooltip.ad_astra.vehicle_fuel", FluidHooks.toMillibuckets(fuel), FluidHooks.toMillibuckets(this.getTankSize())).setStyle(Style.EMPTY.withColor(fuel > 0 ? Formatting.GREEN : Formatting.RED)));
 	}
 }

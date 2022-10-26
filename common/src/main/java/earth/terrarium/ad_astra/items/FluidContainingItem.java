@@ -1,43 +1,42 @@
 package earth.terrarium.ad_astra.items;
 
-import earth.terrarium.botarium.api.fluid.*;
+import earth.terrarium.botarium.api.fluid.FluidHolder;
+import earth.terrarium.botarium.api.fluid.FluidHoldingItem;
+import earth.terrarium.botarium.api.fluid.ItemFilteredFluidContainer;
+import earth.terrarium.botarium.api.fluid.ItemFluidContainer;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
 
 public interface FluidContainingItem extends FluidHoldingItem {
 
-	default boolean insertIntoTank(SimpleUpdatingFluidContainer tank, ItemStack stack) {
-		return tank.insertFluid(getTank(stack), false) == this.getAmount(stack);
-	}
+    long getTankSize();
 
-	long getTankSize();
+    default FluidHolder getTank(ItemStack stack) {
+        return this.getFluidContainer(stack).getFluids().get(0);
+    }
 
-	default FluidHolder getTank(ItemStack stack) {
-		return this.getFluidContainer(stack).getFluids().get(0);
-	}
+    default long getFluidAmount(ItemStack stack) {
+        return getTank(stack).getFluidAmount();
+    }
 
-	@Override
-	default ItemFluidContainer getFluidContainer(ItemStack stack) {
-		return new ItemFilteredFluidContainer(this.getTankSize(), 1, stack, (amount, fluid) -> true);
-	}
+    default void setFluidAmount(ItemStack stack, long amount) {
+        getTank(stack).setAmount(amount);
+    }
 
-	default long getAmount(ItemStack stack) {
-		return this.getTank(stack).getFluidAmount();
-	}
+    default Fluid getFluid(ItemStack stack) {
+        return getTank(stack).getFluid();
+    }
 
-	default void setAmount(ItemStack stack, long amount) {
-		FluidHolder tank = getTank(stack);
-		if (!tank.isEmpty()) {
-			tank.setAmount(amount);
-			getFluidContainer(stack).setFluid(0, tank);
-		}
-	}
+    default void setFluid(ItemStack stack, Fluid fluid) {
+        getTank(stack).setFluid(fluid);
+    }
 
-	default Fluid getFluid(ItemStack stack) {
-		return this.getTank(stack).getFluid();
-	}
+    default void insert(ItemStack stack, FluidHolder fluid) {
+        getFluidContainer(stack).insertFluid(fluid, false);
+    }
 
-	default void setFluid(ItemStack stack, FluidHolder fluid) {
-		getFluidContainer(stack).setFluid(0, fluid);
-	}
+    @Override
+    default ItemFluidContainer getFluidContainer(ItemStack stack) {
+        return new ItemFilteredFluidContainer(this.getTankSize(), 1, stack, (amount, fluid) -> true);
+    }
 }

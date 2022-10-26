@@ -23,48 +23,48 @@ import java.util.List;
 
 public class OxygenTankItem extends Item implements FluidContainingItem {
 
-	public OxygenTankItem(Settings settings) {
-		super(settings);
-	}
+    public OxygenTankItem(Settings settings) {
+        super(settings);
+    }
 
-	@Override
-	public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-		long oxygen = FluidHooks.toMillibuckets(this.getFluidContainer(stack).getFluids().get(0).getFluidAmount());
-		tooltip.add(Text.translatable("tooltip.ad_astra.consumable"));
-		tooltip.add(Text.translatable("tooltip.ad_astra.space_suit", oxygen, getTankSize()).setStyle(Style.EMPTY.withColor(oxygen > 0 ? Formatting.GREEN : Formatting.RED)));
-	}
-
-
-	// Consume the tank and give the player oxygen.
-	@Override
-	public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-		if (!world.isClient) {
-			ItemStack tank = user.getStackInHand(hand);
-			ItemStack chest = user.getEquippedStack(EquipmentSlot.CHEST);
-			if (chest.isOf(ModItems.SPACE_SUIT.get()) || chest.isOf(ModItems.NETHERITE_SPACE_SUIT.get()) || chest.isOf(ModItems.JET_SUIT.get())) {
+    @Override
+    public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
+        long oxygen = FluidHooks.toMillibuckets(this.getFluidContainer(stack).getFluids().get(0).getFluidAmount());
+        tooltip.add(Text.translatable("tooltip.ad_astra.consumable"));
+        tooltip.add(Text.translatable("tooltip.ad_astra.space_suit", oxygen, FluidHooks.toMillibuckets(getTankSize())).setStyle(Style.EMPTY.withColor(oxygen > 0 ? Formatting.GREEN : Formatting.RED)));
+    }
 
 
-				PlatformFluidHandler from = FluidHooks.getItemFluidManager(tank);
-				ItemStack to = user.getInventory().getArmorStack(2);
+    // Consume the tank and give the player oxygen.
+    @Override
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        if (!world.isClient) {
+            ItemStack tank = user.getStackInHand(hand);
+            ItemStack chest = user.getEquippedStack(EquipmentSlot.CHEST);
+            if (chest.isOf(ModItems.SPACE_SUIT.get()) || chest.isOf(ModItems.NETHERITE_SPACE_SUIT.get()) || chest.isOf(ModItems.JET_SUIT.get())) {
 
-				if (FluidHooks.moveItemToItemFluid(tank, to, from.getFluidInTank(0)) > 0) {
-					world.playSound(null, user.getBlockPos(), SoundEvents.ENTITY_GENERIC_DRINK, SoundCategory.PLAYERS, 1, 1);
-					return TypedActionResult.consume(tank);
-				}
-			}
-		}
-		return super.use(world, user, hand);
-	}
 
-	public static ItemStack createOxygenatedTank() {
-		ItemStack oxygenTank = ModItems.OXYGEN_TANK.get().getDefaultStack();
-		((OxygenTankItem) oxygenTank.getItem()).setFluid(oxygenTank, FluidHooks.newFluidHolder(ModFluids.OXYGEN_STILL.get(), AdAstra.CONFIG.general.oxygenTankSize, null));
-		
-		return oxygenTank;
-	}
+                PlatformFluidHandler from = FluidHooks.getItemFluidManager(tank);
+                ItemStack to = user.getInventory().getArmorStack(2);
 
-	@Override
-	public long getTankSize() {
-		return AdAstra.CONFIG.general.oxygenTankSize;
-	}
+                if (FluidHooks.moveItemToItemFluid(tank, to, from.getFluidInTank(0)) > 0) {
+                    world.playSound(null, user.getBlockPos(), SoundEvents.ENTITY_GENERIC_DRINK, SoundCategory.PLAYERS, 1, 1);
+                    return TypedActionResult.consume(tank);
+                }
+            }
+        }
+        return super.use(world, user, hand);
+    }
+
+    public static ItemStack createOxygenatedTank() {
+        ItemStack oxygenTank = ModItems.OXYGEN_TANK.get().getDefaultStack();
+        ((OxygenTankItem) oxygenTank.getItem()).insert(oxygenTank, FluidHooks.newFluidHolder(ModFluids.OXYGEN_STILL.get(), AdAstra.CONFIG.general.oxygenTankSize, null));
+
+        return oxygenTank;
+    }
+
+    @Override
+    public long getTankSize() {
+        return AdAstra.CONFIG.general.oxygenTankSize;
+    }
 }

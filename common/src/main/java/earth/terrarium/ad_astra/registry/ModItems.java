@@ -13,6 +13,7 @@ import dev.architectury.core.item.ArchitecturyBucketItem;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
+import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.item.TooltipContext;
@@ -178,11 +179,11 @@ public class ModItems {
 	public static final Supplier<Item> WATER_PUMP = register("water_pump", () -> new MachineBlockItem(ModBlocks.WATER_PUMP.get(), new Item.Settings().group(ModItemGroups.ITEM_GROUP_MACHINES)) {
 		@Override
 		public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-			tooltip.add((Text.translatable("item.ad_astra.fluid_transfer_rate.tooltip", AdAstra.CONFIG.waterPump.transferPerTick)).setStyle(Style.EMPTY.withColor(Formatting.BLUE)));
+			tooltip.add((Text.translatable("item.ad_astra.fluid_transfer_rate.tooltip", FluidHooks.toMillibuckets(AdAstra.CONFIG.waterPump.transferPerTick))).setStyle(Style.EMPTY.withColor(Formatting.BLUE)));
 			if (world != null && world.isClient) {
 				if (Screen.hasShiftDown()) {
-					tooltip.add((Text.translatable("item.ad_astra.water_pump.tooltip[0]", AdAstra.CONFIG.waterPump.transferPerTick)).setStyle(Style.EMPTY.withColor(Formatting.GREEN)));
-					tooltip.add((Text.translatable("item.ad_astra.water_pump.tooltip[1]", AdAstra.CONFIG.waterPump.transferPerTick)).setStyle(Style.EMPTY.withColor(Formatting.GREEN)));
+					tooltip.add((Text.translatable("item.ad_astra.water_pump.tooltip[0]")).setStyle(Style.EMPTY.withColor(Formatting.GREEN)));
+					tooltip.add((Text.translatable("item.ad_astra.water_pump.tooltip[1]")).setStyle(Style.EMPTY.withColor(Formatting.GREEN)));
 				} else {
 					tooltip.add((Text.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
 				}
