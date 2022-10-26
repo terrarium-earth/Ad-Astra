@@ -27,8 +27,8 @@ public record ToggleDistributorPacket(BlockPos pos) implements Packet<ToggleDist
 
     private static class Handler implements PacketHandler<ToggleDistributorPacket> {
         @Override
-        public void encode(ToggleDistributorPacket keybindPacket, PacketByteBuf buf) {
-            buf.writeBlockPos(keybindPacket.pos());
+        public void encode(ToggleDistributorPacket packet, PacketByteBuf buf) {
+            buf.writeBlockPos(packet.pos());
         }
 
         @Override

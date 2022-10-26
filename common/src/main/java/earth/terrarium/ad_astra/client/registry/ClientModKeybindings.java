@@ -43,7 +43,7 @@ public class ClientModKeybindings {
                         if (client.player.getVehicle() instanceof RocketEntity rocket) {
                             if (!rocket.isFlying()) {
                                 // TODO: vulnerable.
-                                if (rocket.getFluidAmount() >= RocketEntity.getRequiredAmountForLaunch(rocket.getFluidHolder().getFluid())) {
+                                if (rocket.getTankAmount() >= RocketEntity.getRequiredAmountForLaunch(rocket.getTankFluid())) {
                                     NetworkHandling.CHANNEL.sendToServer(new LaunchRocketPacket());
                                 } else if (sentJumpPacket) {
                                     client.player.sendMessage(Text.translatable("message.ad_astra.no_fuel"), false);

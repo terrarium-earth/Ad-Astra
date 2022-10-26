@@ -1,12 +1,13 @@
 package earth.terrarium.ad_astra.networking;
 
-import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.ad_astra.networking.packets.client.*;
-import earth.terrarium.ad_astra.networking.packets.server.DatapackPlanetsPacket;
-import earth.terrarium.ad_astra.networking.packets.server.StartRocketPacket;
 import com.teamresourceful.resourcefullib.common.networking.NetworkChannel;
 import com.teamresourceful.resourcefullib.common.networking.base.NetworkDirection;
 import dev.architectury.event.events.common.PlayerEvent;
+import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.networking.packets.client.*;
+import earth.terrarium.ad_astra.networking.packets.server.DatapackPlanetsPacket;
+import earth.terrarium.ad_astra.networking.packets.server.MachineInfoPacket;
+import earth.terrarium.ad_astra.networking.packets.server.StartRocketPacket;
 
 public class NetworkHandling {
     public static final NetworkChannel CHANNEL = new NetworkChannel(AdAstra.MOD_ID, 0, "main");
@@ -20,6 +21,7 @@ public class NetworkHandling {
 
         CHANNEL.registerPacket(NetworkDirection.SERVER_TO_CLIENT, StartRocketPacket.ID, StartRocketPacket.HANDLER, StartRocketPacket.class);
         CHANNEL.registerPacket(NetworkDirection.SERVER_TO_CLIENT, DatapackPlanetsPacket.ID, DatapackPlanetsPacket.HANDLER, DatapackPlanetsPacket.class);
+        CHANNEL.registerPacket(NetworkDirection.SERVER_TO_CLIENT, MachineInfoPacket.ID, MachineInfoPacket.HANDLER, MachineInfoPacket.class);
 
         PlayerEvent.PLAYER_JOIN.register(player -> {
             try {

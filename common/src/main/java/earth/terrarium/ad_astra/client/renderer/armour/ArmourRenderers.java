@@ -1,5 +1,7 @@
 package earth.terrarium.ad_astra.client.renderer.armour;
 
+import earth.terrarium.ad_astra.items.armour.JetSuit;
+import net.minecraft.entity.EquipmentSlot;
 import org.apache.commons.lang3.NotImplementedException;
 
 import earth.terrarium.ad_astra.registry.ModItems;
@@ -31,6 +33,13 @@ public class ArmourRenderers {
 		ArmourRenderers.registerArmour((entity, stack, slot, original) -> {
 			EntityModelLoader modelLoader = MinecraftClient.getInstance().getEntityModelLoader();
 			ModelPart layer = modelLoader.getModelPart(JetSuitModel.LAYER_LOCATION);
+
+			if (slot.equals(EquipmentSlot.CHEST)) {
+				if (JetSuit.hasFullSet(entity)) {
+					JetSuit.spawnParticles(entity.world, entity, original);
+				}
+			}
+
 			return new SpaceSuitModel(layer, original, entity, slot, stack);
 		}, ModItems.JET_SUIT_HELMET.get(), ModItems.JET_SUIT.get(), ModItems.JET_SUIT_PANTS.get(), ModItems.JET_SUIT_BOOTS.get());
 	}

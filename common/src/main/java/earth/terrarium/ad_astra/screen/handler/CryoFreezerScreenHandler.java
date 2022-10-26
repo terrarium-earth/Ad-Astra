@@ -1,6 +1,8 @@
 package earth.terrarium.ad_astra.screen.handler;
 
 import earth.terrarium.ad_astra.blocks.machines.entity.CryoFreezerBlockEntity;
+import earth.terrarium.ad_astra.networking.NetworkHandling;
+import earth.terrarium.ad_astra.networking.packets.server.MachineInfoPacket;
 import earth.terrarium.ad_astra.registry.ModScreenHandlers;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
@@ -33,5 +35,10 @@ public class CryoFreezerScreenHandler extends AbstractMachineScreenHandler {
 	@Override
 	public int getPlayerInventoryOffset() {
 		return 15;
+	}
+
+	@Override
+	public void syncClientScreen() {
+		NetworkHandling.CHANNEL.sendToPlayer(new MachineInfoPacket(blockEntity.getEnergy(), ((CryoFreezerBlockEntity)blockEntity).getFluidContainer().getFluids()), this.player);
 	}
 }

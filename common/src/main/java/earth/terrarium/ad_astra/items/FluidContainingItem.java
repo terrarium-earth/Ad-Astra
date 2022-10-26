@@ -1,7 +1,5 @@
 package earth.terrarium.ad_astra.items;
 
-import java.util.List;
-
 import earth.terrarium.botarium.api.fluid.*;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;

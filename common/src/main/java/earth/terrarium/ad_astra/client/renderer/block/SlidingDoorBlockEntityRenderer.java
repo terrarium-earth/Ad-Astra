@@ -4,6 +4,7 @@ import java.util.List;
 
 import earth.terrarium.ad_astra.blocks.door.SlidingDoorBlock;
 import earth.terrarium.ad_astra.blocks.door.SlidingDoorBlockEntity;
+import earth.terrarium.ad_astra.client.AdAstraClient;
 import earth.terrarium.ad_astra.client.ClientUtils;
 import earth.terrarium.ad_astra.registry.ModBlocks;
 import earth.terrarium.ad_astra.util.ModIdentifier;
@@ -109,7 +110,7 @@ public class SlidingDoorBlockEntityRenderer implements BlockEntityRenderer<Slidi
             matrices.translate(0.0f, 0.0f, offset);
         }
         matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(degrees.getOpposite().asRotation()));
-        renderDoor((degrees.equals(Direction.WEST) || degrees.equals(Direction.EAST)) ? doorModel : doorModelFlipped, tickDelta, matrices, vertexConsumers, light, overlay);
+        AdAstraClient.renderBlock(((degrees.equals(Direction.WEST) || degrees.equals(Direction.EAST)) ? doorModel : doorModelFlipped), matrices, vertexConsumers, light, overlay);
         matrices.pop();
 
         matrices.push();
@@ -131,22 +132,7 @@ public class SlidingDoorBlockEntityRenderer implements BlockEntityRenderer<Slidi
             matrices.translate(0.0f, 0.0f, offset);
         }
         matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(degrees.getOpposite().asRotation()));
-        renderDoor((degrees.equals(Direction.WEST) || degrees.equals(Direction.EAST)) ? doorModelFlipped : doorModel, tickDelta, matrices, vertexConsumers, light, overlay);
+        AdAstraClient.renderBlock((degrees.equals(Direction.WEST) || degrees.equals(Direction.EAST)) ? doorModelFlipped : doorModel, matrices, vertexConsumers, light, overlay);
         matrices.pop();
-    }
-
-    public void renderDoor(Identifier texture, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
-
-        MinecraftClient client = MinecraftClient.getInstance();
-        BakedModelManager manager = client.getBakedModelManager();
-        BakedModel model = ClientUtils.getModel(manager, texture);
-
-        VertexConsumer vertexConsumer1 = vertexConsumers.getBuffer(RenderLayer.getEntityCutout(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE));
-        List<BakedQuad> quads1 = model.getQuads(null, null, client.world.random);
-        MatrixStack.Entry entry1 = matrices.peek();
-
-        for (BakedQuad quad : quads1) {
-            vertexConsumer1.bakedQuad(entry1, quad, 1, 1, 1, light, overlay);
-        }
     }
 }

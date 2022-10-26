@@ -34,20 +34,20 @@ public class CompressorScreen extends AbstractMachineScreen<CompressorScreenHand
 	protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
 		super.drawBackground(matrices, delta, mouseX, mouseY);
 
-		CompressorBlockEntity entity = (CompressorBlockEntity) blockEntity;
+		CompressorBlockEntity entity = (CompressorBlockEntity) this.entity;
 
 		GuiUtil.drawHammer(matrices, this.x + HAMMER_LEFT, this.y + HAMMER_TOP, entity.getCookTime(), entity.getCookTimeTotal());
-		GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.blockEntity.getEnergyStorage().getStoredEnergy(), this.blockEntity.getCapacity());
+		GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.handler.getEnergyAmount(), this.entity.getCapacity());
 	}
 
 	@Override
 	public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
 		super.render(matrices, mouseX, mouseY, delta);
 
-		CompressorBlockEntity entity = (CompressorBlockEntity) blockEntity;
+		CompressorBlockEntity entity = (CompressorBlockEntity) this.entity;
 
 		if (GuiUtil.isHovering(this.getEnergyBounds(), mouseX, mouseY)) {
-			GuiUtil.drawEnergyTooltip(this, matrices, entity, mouseX, mouseY);
+			GuiUtil.drawEnergyTooltip(this, matrices, this.handler.getEnergyAmount(), entity.getCapacity(), mouseX, mouseY);
 		}
 
 		// Burn time tooltip.

@@ -2,6 +2,8 @@ package earth.terrarium.ad_astra.mixin.client;
 
 import java.util.List;
 
+import earth.terrarium.botarium.api.energy.EnergyHooks;
+import earth.terrarium.botarium.api.energy.PlatformEnergyManager;
 import net.minecraft.util.math.MathHelper;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -33,72 +35,70 @@ import net.minecraft.stat.StatHandler;
 @Mixin(ClientPlayerEntity.class)
 public class ClientPlayerEntityMixin {
 
-	@Shadow
-	@Final
-	private List<ClientPlayerTickable> tickables;
+    @Shadow
+    @Final
+    private List<ClientPlayerTickable> tickables;
 
-	@Inject(at = @At(value = "TAIL"), method = "<init>")
-	public void adastra_ClientPlayerEntity(MinecraftClient client, ClientWorld world, ClientPlayNetworkHandler networkHandler, StatHandler stats, ClientRecipeBook recipeBook, boolean lastSneaking, boolean lastSprinting, CallbackInfo ci) {
-		this.tickables.add(new PlanetWeatherSoundPlayer((ClientPlayerEntity) (Object) (this), client.getSoundManager()));
-		this.tickables.add(new PlanetSoundPlayer((ClientPlayerEntity) (Object) (this), client.getSoundManager()));
+    @Inject(at = @At(value = "TAIL"), method = "<init>")
+    public void adastra_ClientPlayerEntity(MinecraftClient client, ClientWorld world, ClientPlayNetworkHandler networkHandler, StatHandler stats, ClientRecipeBook recipeBook, boolean lastSneaking, boolean lastSprinting, CallbackInfo ci) {
+        this.tickables.add(new PlanetWeatherSoundPlayer((ClientPlayerEntity) (Object) (this), client.getSoundManager()));
+        this.tickables.add(new PlanetSoundPlayer((ClientPlayerEntity) (Object) (this), client.getSoundManager()));
 
-	}
+    }
 
-	@Inject(method = "tick", at = @At("TAIL"))
-	public void adastra_tick(CallbackInfo ci) {
+    @Inject(method = "tick", at = @At("TAIL"))
+    public void adastra_tick(CallbackInfo ci) {
 
-		ClientPlayerEntity player = ((ClientPlayerEntity) (Object) this);
-		ItemStack chest = player.getEquippedStack(EquipmentSlot.CHEST);
+        ClientPlayerEntity player = ((ClientPlayerEntity) (Object) this);
+        ItemStack chest = player.getEquippedStack(EquipmentSlot.CHEST);
 
-		if (SpaceSuit.hasFullSet(player)) {
-			PlayerOverlayScreen.shouldRenderOxygen = true;
-			if (chest.getItem() instanceof SpaceSuit suit) {
-				long oxygen = suit.getAmount(chest);
+        if (SpaceSuit.hasFullSet(player)) {
+            PlayerOverlayScreen.shouldRenderOxygen = true;
+            if (chest.getItem() instanceof SpaceSuit suit) {
+                long oxygen = suit.getAmount(chest);
 
-				// Render oxygen info
-				PlayerOverlayScreen.oxygenRatio = MathHelper.clamp(oxygen / (double) suit.getTankSize(), 0.0, 1.0);
-				PlayerOverlayScreen.doesNotNeedOxygen = OxygenUtils.entityHasOxygen(player.world, player) && !player.isSubmergedInWater();
-			}
-		} else {
-			PlayerOverlayScreen.shouldRenderOxygen = false;
-		}
+                // Render oxygen info
+                PlayerOverlayScreen.oxygenRatio = MathHelper.clamp(oxygen / (double) suit.getTankSize(), 0.0, 1.0);
+                PlayerOverlayScreen.doesNotNeedOxygen = OxygenUtils.entityHasOxygen(player.world, player) && !player.isSubmergedInWater();
+            }
+        } else {
+            PlayerOverlayScreen.shouldRenderOxygen = false;
+        }
 
-		if (JetSuit.hasFullSet(player)) {
-			PlayerOverlayScreen.shouldRenderBattery = true;
-			if (chest.getItem() instanceof JetSuit suit) {
+        if (JetSuit.hasFullSet(player)) {
+            PlayerOverlayScreen.shouldRenderBattery = true;
+            if (chest.getItem() instanceof JetSuit) {
+                JetSuit.updateBatteryOverlay(chest);
+            }
+        } else {
+            PlayerOverlayScreen.shouldRenderBattery = false;
+        }
 
-				// Render battery info
-				PlayerOverlayScreen.batteryRatio = (double) suit.getEnergyStorage(chest).getStoredEnergy() / (double) suit.getEnergyStorage(chest).getMaxCapacity();
-			}
-		} else {
-			PlayerOverlayScreen.shouldRenderBattery = false;
-		}
+        if (player.getVehicle() instanceof VehicleEntity vehicle) {
+            // Rocket
+            if (vehicle.renderPlanetBar()) {
+                PlayerOverlayScreen.shouldRenderBar = true;
+                if (vehicle instanceof RocketEntity rocket) {
+                    if (rocket.isFlying()) {
+                        PlayerOverlayScreen.countdownSeconds = rocket.getCountdownSeconds();
+                    }
+                }
+            }
 
-		if (player.getVehicle() instanceof VehicleEntity vehicle) {
-			// Rocket
-			if (vehicle.renderPlanetBar()) {
-				PlayerOverlayScreen.shouldRenderBar = true;
-				if (vehicle instanceof RocketEntity rocket) {
-					if (rocket.isFlying()) {
-						PlayerOverlayScreen.countdownSeconds = rocket.getCountdownSeconds();
-					}
-				}
-			}
+            // Show the warning screen when falling in a lander
+            if (vehicle instanceof LanderEntity lander) {
 
-			// Show the warning screen when falling in a lander
-			if (vehicle instanceof LanderEntity lander) {
+                double speed = lander.getVelocity().getY();
+                if (speed != 0.0) {
+                    PlayerOverlayScreen.shouldRenderWarning = true;
+                    PlayerOverlayScreen.speed = speed * 55;
+                } else {
+                    PlayerOverlayScreen.disableAllVehicleOverlays();
+                }
+            }
 
-				double speed = lander.getVelocity().getY();
-				if (speed != 0.0) {
-					PlayerOverlayScreen.shouldRenderWarning = true;
-					PlayerOverlayScreen.speed = speed * 55;
-				} else {
-					PlayerOverlayScreen.disableAllVehicleOverlays();
-				}
-			}
-
-		} else {
-			PlayerOverlayScreen.disableAllVehicleOverlays();
-		}
-	}
+        } else {
+            PlayerOverlayScreen.disableAllVehicleOverlays();
+        }
+    }
 }

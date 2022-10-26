@@ -1,12 +1,8 @@
 package earth.terrarium.ad_astra.util;
 
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.Locale;
-import java.util.Set;
-import java.util.stream.StreamSupport;
-
+import com.mojang.serialization.Codec;
 import dev.architectury.injectables.targets.ArchitecturyTarget;
+import dev.architectury.platform.Platform;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.data.Planet;
 import earth.terrarium.ad_astra.entities.vehicles.LanderEntity;
@@ -17,9 +13,6 @@ import earth.terrarium.ad_astra.registry.ModCriteria;
 import earth.terrarium.ad_astra.registry.ModEntityTypes;
 import earth.terrarium.ad_astra.registry.ModTags;
 import earth.terrarium.ad_astra.util.algorithms.LandFinder;
-
-import com.mojang.serialization.Codec;
-import dev.architectury.platform.Platform;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
@@ -42,6 +35,12 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.TeleportTarget;
 import net.minecraft.world.World;
+
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.Locale;
+import java.util.Set;
+import java.util.stream.StreamSupport;
 
 public class ModUtils {
 
@@ -157,7 +156,7 @@ public class ModUtils {
 			lander.getInventory().setStack(i, rocket.getInventory().getStack(i));
 		}
 		ItemStack stack = rocket.getDropStack();
-		((VehicleItem) stack.getItem()).setFluid(stack, rocket.getFluidHolder());
+		((VehicleItem) stack.getItem()).setFluid(stack, rocket.getTankHolder());
 		lander.getInventory().setStack(10, stack);
 
 		// On Fabric, this is required for some reason as it does not teleport the entity.

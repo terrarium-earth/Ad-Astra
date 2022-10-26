@@ -22,10 +22,9 @@ import org.jetbrains.annotations.Nullable;
 
 public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implements FluidHoldingBlock {
 
-    public final SimpleUpdatingFluidContainer tank = new SimpleUpdatingFluidContainer(this, FluidHooks.buckets(AdAstra.CONFIG.cryoFreezer.tankBuckets), 1, (amount, fluid) -> true);
-
     protected short cookTime;
     protected short cookTimeTotal;
+    private SimpleUpdatingFluidContainer tank;
 
     @Nullable
     protected Item inputItem;
@@ -64,7 +63,8 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
             if (recipe != null) {
                 // TODO: change to platform fluid amount
                 FluidHolder outputFluid = FluidHooks.newFluidHolder(recipe.getFluidOutput(), (long) (1000L * recipe.getConversionRatio()), null);
-                tank.insertFluid(outputFluid, false);
+                getFluidContainer().insertFluid(outputFluid, false);
+                markDirty();
             }
         }
         this.stopCooking();
@@ -145,7 +145,6 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
     @Override
     public void tick() {
         if (!this.getWorld().isClient) {
-
             ItemStack input = this.getStack(0);
             ItemStack outputInsertSlot = this.getStack(1);
             ItemStack outputExtractSlot = this.getStack(2);
@@ -155,7 +154,7 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
             }
 
             if (this.hasEnergy()) {
-                if ((!input.isEmpty() && (input.getItem().equals(this.inputItem) || this.inputItem == null)) && tank.getFluids().get(0).getFluidAmount() < tank.getTankCapacity(0)) {
+                if ((!input.isEmpty() && (input.getItem().equals(this.inputItem) || this.inputItem == null)) && getFluidContainer().getFluids().get(0).getFluidAmount() < getFluidContainer().getTankCapacity(0)) {
                     this.setActive(true);
                     if (this.cookTime < this.cookTimeTotal) {
                         this.cookTime++;
@@ -183,6 +182,6 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
 
     @Override
     public UpdatingFluidContainer getFluidContainer() {
-        return tank;
+        return tank == null ? tank = new SimpleUpdatingFluidContainer(this, FluidHooks.buckets(AdAstra.CONFIG.cryoFreezer.tankBuckets), 1, (amount, fluid) -> true) : this.tank;
     }
 }

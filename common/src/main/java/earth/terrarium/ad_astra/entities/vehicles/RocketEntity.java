@@ -243,7 +243,7 @@ public class RocketEntity extends VehicleEntity {
 
 	@SuppressWarnings("deprecation")
 	private void travel() {
-		double multiplier = (getTank().getFluid().isIn(ModTags.EFFICIENT_FUELS) ? 2.5 : 1.0);
+		double multiplier = (getTankHolder().getFluid().isIn(ModTags.EFFICIENT_FUELS) ? 2.5 : 1.0);
 		if (!this.hasNoGravity()) {
 			this.setVelocity(this.getVelocity().add(0.0, AdAstra.CONFIG.rocket.acceleration * multiplier, 0.0));
 		}
@@ -267,7 +267,7 @@ public class RocketEntity extends VehicleEntity {
 		this.setCountdownTicks(AdAstra.CONFIG.rocket.countDownTicks);
 		// For shaking
 		this.setFrozenTicks(Integer.MAX_VALUE);
-		getTank().setAmount(getRequiredAmountForLaunch(getTank().getFluid()));
+		getTankHolder().setAmount(getRequiredAmountForLaunch(getTankHolder().getFluid()));
 	}
 
 	public boolean hasLaunchPad() {

@@ -25,8 +25,8 @@ public record StartRocketPacket(int entityId) implements Packet<StartRocketPacke
 
     private static class Handler implements PacketHandler<StartRocketPacket> {
         @Override
-        public void encode(StartRocketPacket keybindPacket, PacketByteBuf buf) {
-            buf.writeVarInt(keybindPacket.entityId);
+        public void encode(StartRocketPacket packet, PacketByteBuf buf) {
+            buf.writeVarInt(packet.entityId);
         }
 
         @Override

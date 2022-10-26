@@ -1,34 +1,30 @@
 package earth.terrarium.ad_astra.blocks.machines.entity;
 
-import earth.terrarium.ad_astra.container.ExportingFluidTank;
-import earth.terrarium.botarium.api.fluid.*;
-import net.minecraft.fluid.FluidState;
-import org.jetbrains.annotations.Nullable;
-
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.blocks.machines.AbstractMachineBlock;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
 import earth.terrarium.ad_astra.registry.ModParticleTypes;
 import earth.terrarium.ad_astra.screen.handler.WaterPumpScreenHandler;
 import earth.terrarium.ad_astra.util.ModUtils;
-
+import earth.terrarium.botarium.api.fluid.*;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import org.jetbrains.annotations.Nullable;
 
 public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements FluidHoldingBlock {
 
-	public final ExportingFluidTank tank = new ExportingFluidTank(this, AdAstra.CONFIG.waterPump.tankBuckets, 1, (amount, fluid) -> true);
-
 	private long waterExtracted;
+	private SimpleUpdatingFluidContainer tank;
 
 	public WaterPumpBlockEntity(BlockPos blockPos, BlockState blockState) {
 		super(ModBlockEntities.WATER_PUMP.get(), blockPos, blockState);
@@ -77,7 +73,7 @@ public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements 
 		if (!this.getWorld().isClient) {
 			FluidHolder waterFluid = FluidHooks.newFluidHolder(Fluids.WATER, AdAstra.CONFIG.waterPump.transferPerTick, null);
 			FluidState water = this.world.getFluidState(this.getPos().down());
-			if (tank.getFluids().get(0).getFluidAmount() < tank.getTankCapacity(0)) {
+			if (getFluidContainer().getFluids().get(0).getFluidAmount() < getFluidContainer().getTankCapacity(0)) {
 				if (water.isOf(Fluids.WATER) && water.get(FluidBlock.LEVEL) == 0) {
 
 					// Drain the water block and add it to the tank.
@@ -86,7 +82,7 @@ public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements 
 						ModUtils.spawnForcedParticles((ServerWorld) this.world, ModParticleTypes.OXYGEN_BUBBLE.get(), this.getPos().getX() + 0.5, this.getPos().getY() - 0.5, this.getPos().getZ() + 0.5, 1, 0.0, 0.0, 0.0, 0.01);
 						this.drainEnergy();
 						waterExtracted += AdAstra.CONFIG.waterPump.transferPerTick;
-						tank.insertFluid(waterFluid, false);
+						getFluidContainer().insertFluid(waterFluid, false);
 					} else {
 						this.setActive(false);
 					}
@@ -106,7 +102,7 @@ public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements 
 			if (this.hasEnergy()) {
 				// Insert the fluid into nearby tanks.
 				for (Direction direction : new Direction[] { Direction.UP, this.getCachedState().get(AbstractMachineBlock.FACING) }) {
-					FluidHolder fluid = FluidHooks.newFluidHolder(tank.getFluids().get(0).getFluid(), AdAstra.CONFIG.waterPump.transferPerTick, tank.getFluids().get(0).getCompound());
+					FluidHolder fluid = FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(0).getFluid(), AdAstra.CONFIG.waterPump.transferPerTick, getFluidContainer().getFluids().get(0).getCompound());
 					this.drainEnergy();
 					if (FluidHooks.moveBlockToBlockFluid(this, direction.getOpposite(), world.getBlockEntity(pos.offset(direction)), direction, fluid) > 0) {
 						break;
@@ -118,6 +114,6 @@ public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements 
 
 	@Override
 	public UpdatingFluidContainer getFluidContainer() {
-		return tank;
+		return tank == null ? tank = new SimpleUpdatingFluidContainer(this, AdAstra.CONFIG.waterPump.tankBuckets, 1, (amount, fluid) -> true) : this.tank;
 	}
 }

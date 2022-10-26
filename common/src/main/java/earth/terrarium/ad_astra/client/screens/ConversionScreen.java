@@ -39,10 +39,10 @@ public class ConversionScreen extends AbstractMachineScreen<ConversionScreenHand
 
 		super.drawBackground(matrices, delta, mouseX, mouseY);
 
-		FluidMachineBlockEntity entity = (FluidMachineBlockEntity) blockEntity;
+		FluidMachineBlockEntity entity = (FluidMachineBlockEntity) this.entity;
 
-		GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.blockEntity.getEnergyStorage().getStoredEnergy(), this.blockEntity.getCapacity());
-		GuiUtil.drawFluidTank(matrices, this.x + INPUT_TANK_LEFT, this.y + INPUT_TANK_TOP, entity.getInputTank().getFluidAmount(), entity.getInputTankCapacity(), entity.getInputTank());
+		GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.handler.getEnergyAmount(), this.entity.getCapacity());
+		GuiUtil.drawFluidTank(matrices, this.x + INPUT_TANK_LEFT, this.y + INPUT_TANK_TOP, this.handler.getFluids().get(0).getFluidAmount(), entity.getInputTankCapacity(), entity.getInputTank());
 		GuiUtil.drawFluidTank(matrices, this.x + OUTPUT_TANK_LEFT, this.y + OUTPUT_TANK_TOP, entity.getOutputTank().getFluidAmount(), entity.getOutputTankCapacity(), entity.getOutputTank());
 	}
 
@@ -50,10 +50,10 @@ public class ConversionScreen extends AbstractMachineScreen<ConversionScreenHand
 	public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
 		super.render(matrices, mouseX, mouseY, delta);
 
-		FluidMachineBlockEntity entity = (FluidMachineBlockEntity) blockEntity;
+		FluidMachineBlockEntity entity = (FluidMachineBlockEntity) this.entity;
 
 		if (GuiUtil.isHovering(this.getEnergyBounds(), mouseX, mouseY)) {
-			GuiUtil.drawEnergyTooltip(this, matrices, entity, mouseX, mouseY);
+			GuiUtil.drawEnergyTooltip(this, matrices, this.handler.getEnergyAmount(), entity.getCapacity(), mouseX, mouseY);
 		}
 
 		if (GuiUtil.isHovering(this.getInputTankBounds(), mouseX, mouseY)) {

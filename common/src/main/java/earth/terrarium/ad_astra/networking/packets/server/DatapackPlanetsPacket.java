@@ -33,8 +33,8 @@ public record DatapackPlanetsPacket(Collection<Planet> planets) implements Packe
     @SuppressWarnings("deprecation")
     private static class Handler implements PacketHandler<DatapackPlanetsPacket> {
         @Override
-        public void encode(DatapackPlanetsPacket keybindPacket, PacketByteBuf buf) {
-            buf.writeCollection(keybindPacket.planets, (buf2, planet) -> buf2.encode(Planet.CODEC, planet));
+        public void encode(DatapackPlanetsPacket packet, PacketByteBuf buf) {
+            buf.writeCollection(packet.planets, (buf2, planet) -> buf2.encode(Planet.CODEC, planet));
         }
 
         @Override

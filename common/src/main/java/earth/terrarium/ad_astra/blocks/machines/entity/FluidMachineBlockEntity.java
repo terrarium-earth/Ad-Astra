@@ -10,7 +10,7 @@ import net.minecraft.util.math.BlockPos;
 
 public abstract class FluidMachineBlockEntity extends AbstractMachineBlockEntity implements FluidHoldingBlock {
 
-    public final DoubleFluidTank tanks = new DoubleFluidTank(this, getInputTankCapacity(), getOutputTankCapacity(), f -> true, f -> true);
+    private DoubleFluidTank tanks;
 
     public FluidMachineBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
         super(blockEntityType, blockPos, blockState);
@@ -22,15 +22,15 @@ public abstract class FluidMachineBlockEntity extends AbstractMachineBlockEntity
 
 
     public FluidHolder getInputTank() {
-        return tanks.getFluids().get(0);
+        return getFluidContainer().getFluids().get(0);
     }
 
     public FluidHolder getOutputTank() {
-        return tanks.getFluids().get(1);
+        return getFluidContainer().getFluids().get(1);
     }
 
     @Override
     public UpdatingFluidContainer getFluidContainer() {
-        return tanks;
+        return tanks == null ? tanks = new DoubleFluidTank(this, getInputTankCapacity(), getOutputTankCapacity(), f -> true, f -> true) : this.tanks;
     }
 }

@@ -1,7 +1,10 @@
 package earth.terrarium.ad_astra.screen.handler;
 
 import earth.terrarium.ad_astra.blocks.machines.entity.AbstractMachineBlockEntity;
-
+import earth.terrarium.ad_astra.networking.NetworkHandling;
+import earth.terrarium.ad_astra.networking.packets.server.MachineInfoPacket;
+import earth.terrarium.botarium.api.fluid.FluidHolder;
+import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
@@ -11,10 +14,15 @@ import net.minecraft.screen.slot.Slot;
 import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.world.World;
 
+import java.util.List;
+
 public abstract class AbstractMachineScreenHandler extends ScreenHandler {
 
 	protected final AbstractMachineBlockEntity blockEntity;
 	protected final World world;
+	protected long energyAmount;
+	protected List<FluidHolder> fluids;
+	protected final PlayerEntity player;
 
 	public AbstractMachineScreenHandler(ScreenHandlerType<?> type, int syncId, PlayerInventory inventory, AbstractMachineBlockEntity entity) {
 		this(type, syncId, inventory, entity, new Slot[] {});
@@ -25,6 +33,7 @@ public abstract class AbstractMachineScreenHandler extends ScreenHandler {
 		super(type, syncId);
 		this.blockEntity = entity;
 		this.world = entity.getWorld();
+		this.player = inventory.player;
 
 		checkSize(inventory, this.blockEntity.getInventorySize());
 
@@ -89,10 +98,36 @@ public abstract class AbstractMachineScreenHandler extends ScreenHandler {
 		return newStack;
 	}
 
+	public long getEnergyAmount() {
+		return energyAmount;
+	}
+
+	public void setEnergyAmount(long energyAmount) {
+		this.energyAmount = energyAmount;
+	}
+
+	public List<FluidHolder> getFluids() {
+		return fluids == null ? List.of(FluidHooks.emptyFluid(), FluidHooks.emptyFluid()) : fluids;
+	}
+
+	public void setFluids(List<FluidHolder> fluids) {
+		this.fluids = fluids;
+	}
+
 	// Fixes a client sync issue.
 	@Override
 	public void onSlotClick(int slotIndex, int button, SlotActionType actionType, PlayerEntity player) {
 		super.onSlotClick(slotIndex, button, actionType, player);
 		this.updateToClient();
+	}
+
+	@Override
+	public void sendContentUpdates() {
+		super.sendContentUpdates();
+		syncClientScreen();
+	}
+
+	public void syncClientScreen() {
+		NetworkHandling.CHANNEL.sendToPlayer(new MachineInfoPacket(blockEntity.getEnergy(), List.of()), this.player);
 	}
 }

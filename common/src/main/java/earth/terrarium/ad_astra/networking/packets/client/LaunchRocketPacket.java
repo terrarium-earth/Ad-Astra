@@ -27,7 +27,7 @@ public record LaunchRocketPacket() implements Packet<LaunchRocketPacket> {
 
     private static class Handler implements PacketHandler<LaunchRocketPacket> {
         @Override
-        public void encode(LaunchRocketPacket keybindPacket, PacketByteBuf buf) {
+        public void encode(LaunchRocketPacket packet, PacketByteBuf buf) {
         }
 
         @Override

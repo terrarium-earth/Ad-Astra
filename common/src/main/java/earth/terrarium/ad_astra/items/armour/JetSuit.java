@@ -1,6 +1,7 @@
 package earth.terrarium.ad_astra.items.armour;
 
 import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.client.screens.PlayerOverlayScreen;
 import earth.terrarium.ad_astra.registry.ModItems;
 import earth.terrarium.ad_astra.util.ModIdentifier;
 import earth.terrarium.ad_astra.util.ModKeyBindings;
@@ -27,8 +28,6 @@ import java.util.List;
 
 public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
 
-	// Todo Make specific class on fabric/forge for this
-
 	public boolean isFallFlying;
 
 	public JetSuit(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
@@ -38,11 +37,6 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
 	@Override
 	public long getTankSize() {
 		return AdAstra.CONFIG.spaceSuit.jetSuitTankSize;
-	}
-
-	// TODO Use for cusotm impl of elytra
-	public boolean useCustomElytra(LivingEntity entity, ItemStack chestStack, boolean tickElytra) {
-		return this.isFallFlying;
 	}
 
 	// Display energy
@@ -94,8 +88,8 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
 
 			PlatformEnergyManager energy = EnergyHooks.getItemEnergyManager(stack);
 			long tickEnergy = AdAstra.CONFIG.spaceSuit.jetSuitEnergyPerTick;
-			if (!player.isCreative() && energy.extract(tickEnergy, false) < tickEnergy) {
-				// return;
+			if (!player.isCreative()) {
+				energy.extract(tickEnergy, false);
 			}
 			isFallFlying = false;
 
@@ -113,8 +107,8 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
 		}
 		PlatformEnergyManager energy = EnergyHooks.getItemEnergyManager(stack);
 		long tickEnergy = AdAstra.CONFIG.spaceSuit.jetSuitEnergyPerTick;
-		if (!player.isCreative() && energy.extract(tickEnergy, false) < tickEnergy) {
-			// return;
+		if (!player.isCreative()) {
+			energy.extract(tickEnergy, false);
 		}
 		isFallFlying = true;
 
@@ -179,12 +173,17 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
 		};
 	}
 
+	public static void updateBatteryOverlay(ItemStack suit) {
+		PlatformEnergyManager energy = EnergyHooks.getItemEnergyManager(suit);
+		PlayerOverlayScreen.batteryRatio = energy.getStoredEnergy() / (double) energy.getCapacity();
+	}
+
 	@Override
 	public @Nullable String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
 		if (slot.equals(EquipmentSlot.CHEST)) {
-			if (stack.getItem() instanceof JetSuit suit) {
-				var energyStorage = suit.getEnergyStorage(stack);
-				return new ModIdentifier("textures/entity/armour/jet_suit/jet_suit_" + (energyStorage.getStoredEnergy() == 0 ? 0 : ((int) Math.min((energyStorage.getStoredEnergy() * 5 / energyStorage.getMaxCapacity()) + 1, 5))) + ".png").toString();
+			if (stack.getItem() instanceof JetSuit) {
+				PlatformEnergyManager energy = EnergyHooks.getItemEnergyManager(stack);
+				return new ModIdentifier("textures/entity/armour/jet_suit/jet_suit_" + (energy.getStoredEnergy() == 0 ? 0 : ((int) Math.min((energy.getStoredEnergy() * 5 / energy.getCapacity()) + 1, 5))) + ".png").toString();
 			}
 		}
 		return AdAstra.MOD_ID + ":textures/entity/armour/jet_suit/jet_suit_5.png";

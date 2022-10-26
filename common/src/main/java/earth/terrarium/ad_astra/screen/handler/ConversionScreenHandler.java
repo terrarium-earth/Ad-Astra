@@ -1,6 +1,8 @@
 package earth.terrarium.ad_astra.screen.handler;
 
 import earth.terrarium.ad_astra.blocks.machines.entity.FluidMachineBlockEntity;
+import earth.terrarium.ad_astra.networking.NetworkHandling;
+import earth.terrarium.ad_astra.networking.packets.server.MachineInfoPacket;
 import earth.terrarium.ad_astra.registry.ModScreenHandlers;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
@@ -39,5 +41,10 @@ public class ConversionScreenHandler extends AbstractMachineScreenHandler {
 	@Override
 	public int getPlayerInventoryOffset() {
 		return 18;
+	}
+
+	@Override
+	public void syncClientScreen() {
+		NetworkHandling.CHANNEL.sendToPlayer(new MachineInfoPacket(blockEntity.getEnergy(), ((FluidMachineBlockEntity)blockEntity).getFluidContainer().getFluids()), this.player);
 	}
 }
