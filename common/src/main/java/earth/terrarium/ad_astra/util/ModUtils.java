@@ -156,7 +156,7 @@ public class ModUtils {
 			lander.getInventory().setStack(i, rocket.getInventory().getStack(i));
 		}
 		ItemStack stack = rocket.getDropStack();
-		((VehicleItem) stack.getItem()).setFluid(stack, rocket.getTankHolder());
+		((VehicleItem) stack.getItem()).setFluid(stack, rocket.getTankFluid());
 		lander.getInventory().setStack(10, stack);
 
 		// On Fabric, this is required for some reason as it does not teleport the entity.

@@ -2,8 +2,6 @@ package earth.terrarium.ad_astra.mixin.client;
 
 import java.util.List;
 
-import earth.terrarium.botarium.api.energy.EnergyHooks;
-import earth.terrarium.botarium.api.energy.PlatformEnergyManager;
 import net.minecraft.util.math.MathHelper;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -55,7 +53,7 @@ public class ClientPlayerEntityMixin {
         if (SpaceSuit.hasFullSet(player)) {
             PlayerOverlayScreen.shouldRenderOxygen = true;
             if (chest.getItem() instanceof SpaceSuit suit) {
-                long oxygen = suit.getAmount(chest);
+                long oxygen = suit.getFluidAmount(chest);
 
                 // Render oxygen info
                 PlayerOverlayScreen.oxygenRatio = MathHelper.clamp(oxygen / (double) suit.getTankSize(), 0.0, 1.0);

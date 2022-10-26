@@ -242,7 +242,7 @@ public abstract class VehicleEntity extends Entity implements Updatable {
 			ItemStack dropStack = this.getDropStack();
 
 			// Set the fluid and fluid type in the dropped item.
-			((VehicleItem) dropStack.getItem()).setFluid(dropStack, getTankHolder());
+			((VehicleItem) dropStack.getItem()).setFluid(dropStack, getTankFluid());
 			NbtCompound nbt = dropStack.getOrCreateNbt();
 			// Set the inventory in the dropped item.
 			nbt.put("inventory", this.inventory.toNbtList());

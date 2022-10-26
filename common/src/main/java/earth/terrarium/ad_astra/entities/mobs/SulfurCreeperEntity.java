@@ -43,13 +43,13 @@ public class SulfurCreeperEntity extends CreeperEntity {
 			for (PlayerEntity player : explosion.getAffectedPlayers().keySet()) {
 				ItemStack chest = player.getEquippedStack(EquipmentSlot.CHEST);
 				if (chest.getItem() instanceof SpaceSuit suit) {
-					long oxygen = suit.getAmount(chest);
+					long oxygen = suit.getFluidAmount(chest);
 
 					if (oxygen > 0) {
 						if (!OxygenUtils.entityHasOxygen(world, player)) {
-							suit.setAmount(chest, oxygen - FluidHooks.buckets(3));
-							if ((suit.getAmount(chest) <= 0)) {
-								suit.setAmount(chest, 0);
+							suit.setFluidAmount(chest, oxygen - FluidHooks.buckets(3));
+							if ((suit.getFluidAmount(chest) <= 0)) {
+								suit.setFluidAmount(chest, 0);
 							}
 						}
 					}

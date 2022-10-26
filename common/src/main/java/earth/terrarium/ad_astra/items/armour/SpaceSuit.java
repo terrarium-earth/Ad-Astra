@@ -33,7 +33,7 @@ public class SpaceSuit extends DyeableArmorItem implements FluidContainingItem, 
 	@Override
 	public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
 		if (stack.isOf(ModItems.SPACE_SUIT.get()) || stack.isOf(ModItems.NETHERITE_SPACE_SUIT.get()) || stack.isOf(ModItems.JET_SUIT.get())) {
-			long oxygen = FluidHooks.toMillibuckets(this.getAmount(stack));
+			long oxygen = FluidHooks.toMillibuckets(this.getFluidAmount(stack));
 			tooltip.add(Text.translatable("tooltip.ad_astra.space_suit", oxygen, FluidHooks.toMillibuckets(getTankSize())).setStyle(Style.EMPTY.withColor(oxygen > 0 ? Formatting.GREEN : Formatting.RED)));
 		}
 	}
@@ -60,7 +60,7 @@ public class SpaceSuit extends DyeableArmorItem implements FluidContainingItem, 
 	public static boolean hasOxygenatedSpaceSuit(LivingEntity entity) {
 		ItemStack chest = entity.getEquippedStack(EquipmentSlot.CHEST);
 		if (chest.getItem() instanceof SpaceSuit suit) {
-			return suit.getAmount(chest) > 0;
+			return suit.getFluidAmount(chest) > 0;
 		}
 
 		return false;
@@ -69,7 +69,7 @@ public class SpaceSuit extends DyeableArmorItem implements FluidContainingItem, 
 	public static void consumeSpaceSuitOxygen(LivingEntity entity, long amount) {
 		ItemStack chest = entity.getEquippedStack(EquipmentSlot.CHEST);
 		if (chest.getItem() instanceof SpaceSuit suit) {
-			suit.setAmount(chest, suit.getAmount(chest) - amount);
+			suit.setFluidAmount(chest, suit.getFluidAmount(chest) - amount);
 		}
 	}
 

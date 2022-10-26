@@ -194,9 +194,6 @@ public class GuiUtil {
 	}
 
 	public static void drawTankTooltip(Screen screen, MatrixStack matrices, long amount, long capacity, Fluid fluid, int mouseX, int mouseY) {
-		if (ArchitecturyTarget.getCurrentTarget().equals("fabric")) {
-			amount *= 81L;
-		}
 		screen.renderTooltip(matrices, Text.translatable("gauge_text.ad_astra.liquid_storage", FluidHooks.toMillibuckets(amount), FluidHooks.toMillibuckets(capacity)).setStyle(Style.EMPTY.withColor(Formatting.GOLD)).append(Text.of(", ")).append(GuiUtil.getFluidTranslation(fluid)), mouseX, mouseY);
 	}
 
