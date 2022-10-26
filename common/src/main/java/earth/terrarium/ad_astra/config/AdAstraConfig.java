@@ -58,7 +58,7 @@ public class AdAstraConfig implements ConfigData {
         public final boolean doOxygen = true;
         @ConfigEntry.Gui.Tooltip(count = 2)
         public final boolean doSpaceMuffler = true;
-        public final long oxygenTankSize = FluidHooks.BUCKET / 2;
+        public final long oxygenTankSize = FluidHooks.toMillibuckets(500);
         public final int hammerDurability = 64;
         public float orbitGravity = 3.26f;
         public final boolean giveAstroduxAtSpawn = false;
@@ -69,15 +69,15 @@ public class AdAstraConfig implements ConfigData {
     }
 
     public static class SpaceSuitConfig {
-        public final long spaceSuitTankSize = FluidHooks.BUCKET;
-        public final long netheriteSpaceSuitTankSize = FluidHooks.BUCKET * 2;
+        public final long spaceSuitTankSize = FluidHooks.buckets(1);
+        public final long netheriteSpaceSuitTankSize = FluidHooks.buckets(2);
         public final boolean netheriteSpaceSuitHasFireResistance = true;
         @ConfigEntry.Gui.Tooltip()
         public final double jetSuitSpeed = 0.8;
         @ConfigEntry.Gui.Tooltip()
         public final double jetSuitUpwardsSpeed = 0.5;
         public final long jetSuitEnergyPerTick = 60;
-        public final long jetSuitTankSize = FluidHooks.BUCKET * 4;
+        public final long jetSuitTankSize = FluidHooks.buckets(4);
         public final long jetSuitMaxEnergy = 1000000L;
         public boolean spawnJetSuitParticles = true;
         public final boolean enableJetSuitFlight = true;
@@ -104,20 +104,20 @@ public class AdAstraConfig implements ConfigData {
             public final double maxSpeed = 0.5;
             @ConfigEntry.Gui.Tooltip()
             public final boolean entitiesBurnUnderRocket = true;
-            public final int tankBuckets = 3;
-            public final long fuelLaunchCost = FluidHooks.BUCKET * 3;
-            public final long efficientFuelLaunchCost = FluidHooks.BUCKET;
+            public final long tankSize = FluidHooks.buckets(3);
+            public final long fuelLaunchCost = FluidHooks.buckets(3);
+            public final long efficientFuelLaunchCost = FluidHooks.buckets(1);
         }
 
         public static class RoverConfig {
             public final boolean explodeRoverInLava = true;
-            public final long fuelPerTick = FluidHooks.BUCKET / 3000;
+            public final long fuelPerTick = FluidHooks.toMillibuckets(1);
             public final float turnSpeed = 3.0f;
             public final float maxTurnSpeed = 6.0f;
             public final float deceleration = 0.9f;
             public final float minSpeed = -0.2f;
             public final float maxSpeed = 0.3f;
-            public final int tankBuckets = 3;
+            public final long tankSize = FluidHooks.buckets(3); // TODO: rover consumes way too much fuel
         }
 
         public static class LanderConfig {
@@ -140,19 +140,19 @@ public class AdAstraConfig implements ConfigData {
     public static class FuelRefineryConfig {
         public final long maxEnergy = 9000L;
         public final long energyPerTick = 30L;
-        public final int tankBuckets = 3;
+        public final long tankSize = FluidHooks.buckets(3);
     }
 
     public static class OxygenLoaderConfig {
         public final long maxEnergy = 9000L;
         public final long energyPerTick = 10L;
-        public final int tankBuckets = 3;
+        public final long tankSize = FluidHooks.buckets(3);
     }
 
     public static class OxygenDistributorConfig {
         public final long maxEnergy = 20000L;
         public final long fluidConversionEnergyPerTick = 5L;
-        public final int tankBuckets = 3;
+        public final long tankSize = FluidHooks.buckets(3);
         @ConfigEntry.Gui.Tooltip(count = 5)
         @ConfigEntry.BoundedDiscrete(min = 1, max = 50000)
         public final int maxBlockChecks = 2000;
@@ -173,7 +173,7 @@ public class AdAstraConfig implements ConfigData {
     public static class WaterPumpConfig {
         public final long maxEnergy = 9000L;
         public final long energyPerTick = 10L;
-        public final int tankBuckets = 6;
+        public final long tankSize = FluidHooks.buckets(6);
         public final long transferPerTick = FluidHooks.BLOCK / 100;
         public final boolean deleteWaterBelowWaterPump = true;
     }
@@ -186,6 +186,6 @@ public class AdAstraConfig implements ConfigData {
     public static class CryoFreezerConfig {
         public final long maxEnergy = 30000L;
         public final long energyPerTick = 24L;
-        public final int tankBuckets = 3;
+        public final long tankSize = FluidHooks.buckets(3);
     }
 }

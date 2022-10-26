@@ -37,10 +37,11 @@ public class FluidUtils {
                     long outputAmount = (long) (inputAmount * conversionRatio);
                     FluidHolder outputFluid = FluidHooks.newFluidHolder(recipeOutputFluid, outputAmount, null);
                     machine.getFluidContainer().insertFluid(outputFluid, false);
+                    return true;
                 }
             }
         }
-        return true;
+        return false;
     }
 
     // TODO: convert to different slot
@@ -53,7 +54,7 @@ public class FluidUtils {
             PlatformFluidHandler itemFluidHandler = itemHandler.get();
             FluidHolder fluidHolder = itemFluidHandler.getFluidInTank(tank);
             if (filter.test(fluidHolder.getFluid())) {
-                return container.insertFluid(FluidHooks.newFluidHolder(ModFluids.FUEL_STILL.get(), 1000, null), false) > 0;
+                return container.insertFluid(FluidHooks.newFluidHolder(fluidHolder.getFluid(), FluidHooks.buckets(1), null), false) > 0;
             }
         }
         return false;

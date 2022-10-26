@@ -6,14 +6,14 @@
   "description": "Live long and prosper, Ad Astra!",
   "authors": [
     "Alex Nijjar",
-    "Barracuda",
     "Bunny",
     "Checheno",
     "CodexAdrian",
     "Facu",
     "Fizz",
     "OliviaTheVampire",
-    "SpaceStar"
+    "SpaceStar",
+    "ThatGravyBoat"
   ],
   "contact": {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/ad-astra",
@@ -35,7 +35,7 @@
       "earth.terrarium.ad_astra.AdAstra::postInit"
     ],
     "modmenu": [
-      "earth.terrarium.ad_astra.config.ModMenuConfig"
+      "earth.terrarium.ad_astra.config.fabric.ModMenuConfig"
     ],
     "fabric-datagen": [
       "earth.terrarium.ad_astra.datagen.AdAstraDataGenEntrypoint"

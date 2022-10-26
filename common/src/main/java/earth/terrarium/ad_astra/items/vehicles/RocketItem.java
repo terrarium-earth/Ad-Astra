@@ -120,6 +120,6 @@ public class RocketItem<T extends RocketEntity> extends VehicleItem {
 
 	@Override
 	public long getTankSize() {
-		return 3 * FluidHooks.BUCKET;
+		return FluidHooks.buckets(3);
 	}
 }

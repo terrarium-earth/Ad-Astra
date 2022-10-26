@@ -56,7 +56,7 @@ public abstract class VehicleEntity extends Entity implements Updatable {
 
 	public float previousYaw;
 
-	private final SimpleUpdatingFluidContainer tank = new SimpleUpdatingFluidContainer(this, FluidHooks.buckets((int) getTankSize()), 1, (amount, fluid) -> true);
+	private final SimpleUpdatingFluidContainer tank = new SimpleUpdatingFluidContainer(this, getTankSize(), 1, (amount, fluid) -> true);
 	private final CustomInventory inventory = new CustomInventory(this.getInventorySize());
 
 	protected static final TrackedData<Float> SPEED = DataTracker.registerData(VehicleEntity.class, TrackedDataHandlerRegistry.FLOAT);
@@ -378,7 +378,7 @@ public abstract class VehicleEntity extends Entity implements Updatable {
 	}
 
 	public void consumeFuel() {
-		this.tank.extractFluid(this.getTankHolder(), false);
+		getTank().extractFluid(FluidHooks.newFluidHolder(getTankFluid(), this.getFuelPerTick(), null), false);
 	}
 
 	@Override

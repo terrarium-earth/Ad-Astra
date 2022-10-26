@@ -1,14 +1,12 @@
 package earth.terrarium.ad_astra.client.registry;
 
+import dev.architectury.event.events.client.ClientTickEvent;
 import earth.terrarium.ad_astra.entities.vehicles.RocketEntity;
 import earth.terrarium.ad_astra.networking.NetworkHandling;
 import earth.terrarium.ad_astra.networking.packets.client.KeybindPacket;
 import earth.terrarium.ad_astra.networking.packets.client.LaunchRocketPacket;
-
-import dev.architectury.event.events.client.ClientTickEvent;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.text.Text;
 
 @Environment(EnvType.CLIENT)
 public class ClientModKeybindings {
@@ -39,15 +37,10 @@ public class ClientModKeybindings {
 
             if (client.world != null) {
                 if (client.player != null) {
-                    if (client.options.jumpKey.isPressed()) {
+                    if (client.options.jumpKey.wasPressed()) {
                         if (client.player.getVehicle() instanceof RocketEntity rocket) {
                             if (!rocket.isFlying()) {
-                                // TODO: vulnerable.
-                                if (rocket.getTankAmount() >= RocketEntity.getRequiredAmountForLaunch(rocket.getTankFluid())) {
-                                    NetworkHandling.CHANNEL.sendToServer(new LaunchRocketPacket());
-                                } else if (sentJumpPacket) {
-                                    client.player.sendMessage(Text.translatable("message.ad_astra.no_fuel"), false);
-                                }
+                                NetworkHandling.CHANNEL.sendToServer(new LaunchRocketPacket());
                             }
                         }
                     }

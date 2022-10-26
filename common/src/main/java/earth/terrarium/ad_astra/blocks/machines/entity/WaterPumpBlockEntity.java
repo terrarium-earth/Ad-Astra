@@ -114,6 +114,6 @@ public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements 
 
 	@Override
 	public UpdatingFluidContainer getFluidContainer() {
-		return tank == null ? tank = new SimpleUpdatingFluidContainer(this, AdAstra.CONFIG.waterPump.tankBuckets, 1, (amount, fluid) -> true) : this.tank;
+		return tank == null ? tank = new SimpleUpdatingFluidContainer(this, AdAstra.CONFIG.waterPump.tankSize, 1, (amount, fluid) -> true) : this.tank;
 	}
 }

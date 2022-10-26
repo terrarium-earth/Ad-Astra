@@ -182,6 +182,6 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
 
     @Override
     public UpdatingFluidContainer getFluidContainer() {
-        return tank == null ? tank = new SimpleUpdatingFluidContainer(this, FluidHooks.buckets(AdAstra.CONFIG.cryoFreezer.tankBuckets), 1, (amount, fluid) -> true) : this.tank;
+        return tank == null ? tank = new SimpleUpdatingFluidContainer(this, AdAstra.CONFIG.cryoFreezer.tankSize, 1, (amount, fluid) -> true) : this.tank;
     }
 }
