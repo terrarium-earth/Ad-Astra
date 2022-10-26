@@ -22,6 +22,7 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
@@ -32,11 +33,9 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
@@ -57,12 +56,10 @@ public abstract class VehicleEntity extends Entity implements Updatable {
 
 	public float previousYaw;
 
-	public final SimpleUpdatingFluidContainer tank = new SimpleUpdatingFluidContainer(this, FluidHooks.buckets((int) getTankSize()), 1, (amount, fluid) -> true);
+	private final SimpleUpdatingFluidContainer tank = new SimpleUpdatingFluidContainer(this, FluidHooks.buckets((int) getTankSize()), 1, (amount, fluid) -> true);
 	private final CustomInventory inventory = new CustomInventory(this.getInventorySize());
 
 	protected static final TrackedData<Float> SPEED = DataTracker.registerData(VehicleEntity.class, TrackedDataHandlerRegistry.FLOAT);
-	public static final TrackedData<Integer> FLUID_AMOUNT = DataTracker.registerData(VehicleEntity.class, TrackedDataHandlerRegistry.INTEGER);
-	public static final TrackedData<String> FLUID_VARIANT = DataTracker.registerData(VehicleEntity.class, TrackedDataHandlerRegistry.STRING);
 
 	public VehicleEntity(EntityType<?> type, World world) {
 		super(type, world);
@@ -71,20 +68,18 @@ public abstract class VehicleEntity extends Entity implements Updatable {
 	@Override
 	protected void initDataTracker() {
 		this.dataTracker.startTracking(SPEED, 0.0f);
-		this.dataTracker.startTracking(FLUID_AMOUNT, 0);
-		this.dataTracker.startTracking(FLUID_VARIANT, "ad_astra:fuel");
 	}
 
 	@Override
 	protected void readCustomDataFromNbt(NbtCompound nbt) {
 		this.inventory.readNbtList(nbt.getList("inventory", NbtElement.COMPOUND_TYPE));
-		getTank().deserialize(nbt.getCompound("inputFluid"));
+		getTankHolder().deserialize(nbt.getCompound("inputFluid"));
 	}
 
 	@Override
 	protected void writeCustomDataToNbt(NbtCompound nbt) {
 		nbt.put("inventory", this.inventory.toNbtList());
-		nbt.put("inputFluid", getTank().serialize());
+		nbt.put("inputFluid", getTankHolder().serialize());
 	}
 
 	@Override
@@ -138,10 +133,6 @@ public abstract class VehicleEntity extends Entity implements Updatable {
 		this.checkBlockCollision();
 
 		this.tryInsertingIntoTank();
-		if (!this.world.isClient) {
-			this.dataTracker.set(FLUID_AMOUNT, (int) getTank().getFluidAmount());
-			this.dataTracker.set(FLUID_VARIANT, Registry.FLUID.getId(getTank().getFluid()).toString());
-		}
 	}
 
 	// Sets the velocity based on the current speed and the current direction
@@ -251,7 +242,7 @@ public abstract class VehicleEntity extends Entity implements Updatable {
 			ItemStack dropStack = this.getDropStack();
 
 			// Set the fluid and fluid type in the dropped item.
-			((VehicleItem) dropStack.getItem()).setFluid(dropStack, getTank());
+			((VehicleItem) dropStack.getItem()).setFluid(dropStack, getTankHolder());
 			NbtCompound nbt = dropStack.getOrCreateNbt();
 			// Set the inventory in the dropped item.
 			nbt.put("inventory", this.inventory.toNbtList());
@@ -370,20 +361,24 @@ public abstract class VehicleEntity extends Entity implements Updatable {
 		}
 	}
 
-	public int getFluidAmount() {
-		return this.dataTracker.get(FLUID_AMOUNT);
+	public SimpleUpdatingFluidContainer getTank() {
+		return this.tank;
 	}
 
-	public FluidHolder getFluidHolder() {
-		return FluidHooks.newFluidHolder(Registry.FLUID.get(new Identifier(this.dataTracker.get(FLUID_VARIANT))), this.dataTracker.get(FLUID_AMOUNT), null);
+	public FluidHolder getTankHolder() {
+		return tank.getFluids().get(0);
+	}
+
+	public long getTankAmount() {
+		return getTankHolder().getFluidAmount();
+	}
+
+	public Fluid getTankFluid() {
+		return getTankHolder().getFluid();
 	}
 
 	public void consumeFuel() {
-		this.tank.extractFluid(this.getTank(), false);
-	}
-
-	public FluidHolder getTank() {
-		return this.tank.getFluids().get(0);
+		this.tank.extractFluid(this.getTankHolder(), false);
 	}
 
 	@Override

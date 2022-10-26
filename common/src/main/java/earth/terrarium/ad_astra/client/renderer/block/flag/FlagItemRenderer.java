@@ -1,5 +1,6 @@
 package earth.terrarium.ad_astra.client.renderer.block.flag;
 
+import earth.terrarium.ad_astra.client.AdAstraClient;
 import earth.terrarium.ad_astra.util.ModIdentifier;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -22,6 +23,6 @@ public class FlagItemRenderer extends BuiltinModelItemRenderer {
 	@Override
 	public void render(ItemStack stack, ModelTransformation.Mode mode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
 		Identifier model = new ModIdentifier("block/flag/" + Registry.ITEM.getId(stack.getItem()).getPath());
-		FlagBlockEntityRenderer.renderFlag(model, MinecraftClient.getInstance().getTickDelta(), matrices, vertexConsumers, light, overlay);
+		AdAstraClient.renderBlock(model, matrices, vertexConsumers, light, overlay);
 	}
 }

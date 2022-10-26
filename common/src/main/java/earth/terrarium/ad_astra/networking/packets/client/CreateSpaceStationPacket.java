@@ -39,8 +39,8 @@ public record CreateSpaceStationPacket(Identifier targetWorld) implements Packet
 
     private static class Handler implements PacketHandler<CreateSpaceStationPacket> {
         @Override
-        public void encode(CreateSpaceStationPacket keybindPacket, PacketByteBuf buf) {
-            buf.writeIdentifier(keybindPacket.targetWorld());
+        public void encode(CreateSpaceStationPacket packet, PacketByteBuf buf) {
+            buf.writeIdentifier(packet.targetWorld());
         }
 
         @Override

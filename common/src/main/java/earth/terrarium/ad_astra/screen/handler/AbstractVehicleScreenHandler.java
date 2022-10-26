@@ -1,7 +1,10 @@
 package earth.terrarium.ad_astra.screen.handler;
 
 import earth.terrarium.ad_astra.entities.vehicles.VehicleEntity;
+import earth.terrarium.ad_astra.networking.NetworkHandling;
+import earth.terrarium.ad_astra.networking.packets.server.MachineInfoPacket;
 import earth.terrarium.ad_astra.util.CustomInventory;
+import earth.terrarium.botarium.api.fluid.FluidHolder;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
@@ -11,11 +14,15 @@ import net.minecraft.screen.slot.Slot;
 import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.world.World;
 
+import java.util.List;
+
 public abstract class AbstractVehicleScreenHandler extends ScreenHandler {
 
 	protected final VehicleEntity vehicle;
 	protected final World world;
 	protected final CustomInventory inventory;
+	protected List<FluidHolder> fluids;
+	protected final PlayerEntity player;
 
 	public AbstractVehicleScreenHandler(ScreenHandlerType<?> type, int syncId, PlayerInventory inventory, VehicleEntity entity) {
 		this(type, syncId, inventory, entity, new Slot[] {});
@@ -27,6 +34,7 @@ public abstract class AbstractVehicleScreenHandler extends ScreenHandler {
 		this.vehicle = entity;
 		this.inventory = entity.getInventory();
 		this.world = entity.getWorld();
+		this.player = inventory.player;
 
 		checkSize(inventory, this.vehicle.getInventorySize());
 
@@ -89,10 +97,28 @@ public abstract class AbstractVehicleScreenHandler extends ScreenHandler {
 		return newStack;
 	}
 
+	public List<FluidHolder> getFluids() {
+		return fluids;
+	}
+
+	public void setFluids(List<FluidHolder> fluids) {
+		this.fluids = fluids;
+	}
+
 	// Fixes a client sync issue.
 	@Override
 	public void onSlotClick(int slotIndex, int button, SlotActionType actionType, PlayerEntity player) {
 		super.onSlotClick(slotIndex, button, actionType, player);
 		this.updateToClient();
+	}
+
+	@Override
+	public void sendContentUpdates() {
+		super.sendContentUpdates();
+		syncClientScreen();
+	}
+
+	public void syncClientScreen() {
+		NetworkHandling.CHANNEL.sendToPlayer(new MachineInfoPacket(0, vehicle.getTank().getFluids()), this.player);
 	}
 }

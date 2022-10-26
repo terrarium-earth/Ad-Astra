@@ -36,8 +36,8 @@ public class SolarPanelScreen extends AbstractMachineScreen<SolarPanelScreenHand
 	protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
 		super.drawBackground(matrices, delta, mouseX, mouseY);
 
-		GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.blockEntity.getEnergyStorage().getStoredEnergy(), this.blockEntity.getCapacity());
-		if (this.blockEntity.getCachedState().get(AbstractMachineBlock.LIT)) {
+		GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.handler.getEnergyAmount(), this.entity.getCapacity());
+		if (this.entity.getCachedState().get(AbstractMachineBlock.LIT)) {
 			GuiUtil.drawSun(matrices, this.x + SUN_LEFT, this.y + SUN_TOP);
 		}
 	}
@@ -47,7 +47,7 @@ public class SolarPanelScreen extends AbstractMachineScreen<SolarPanelScreenHand
 		super.drawForeground(matrices, mouseX, mouseY);
 
 		this.textRenderer.draw(matrices, Text.translatable("gauge_text.ad_astra.max_generation"), this.titleY - 20, 8, 0x68d975);
-		this.textRenderer.draw(matrices, Text.translatable("gauge_text.ad_astra.energy_per_tick", this.blockEntity.getEnergyPerTick()), this.titleY - 21, 18, 0x68d975);
+		this.textRenderer.draw(matrices, Text.translatable("gauge_text.ad_astra.energy_per_tick", this.entity.getEnergyPerTick()), this.titleY - 21, 18, 0x68d975);
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class SolarPanelScreen extends AbstractMachineScreen<SolarPanelScreenHand
 		super.render(matrices, mouseX, mouseY, delta);
 
 		if (GuiUtil.isHovering(this.getEnergyBounds(), mouseX, mouseY)) {
-			GuiUtil.drawEnergyTooltip(this, matrices, this.blockEntity, mouseX, mouseY);
+			GuiUtil.drawEnergyTooltip(this, matrices, this.handler.getEnergyAmount(), entity.getCapacity(), mouseX, mouseY);
 		}
 	}
 

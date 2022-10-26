@@ -26,9 +26,9 @@ public record KeybindPacket(Keybind keybind, boolean pressed) implements Packet<
 
     private static class Handler implements PacketHandler<KeybindPacket> {
         @Override
-        public void encode(KeybindPacket keybindPacket, PacketByteBuf buf) {
-            buf.writeEnumConstant(keybindPacket.keybind);
-            buf.writeBoolean(keybindPacket.pressed);
+        public void encode(KeybindPacket packet, PacketByteBuf buf) {
+            buf.writeEnumConstant(packet.keybind);
+            buf.writeBoolean(packet.pressed);
         }
 
         @Override

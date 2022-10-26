@@ -97,7 +97,7 @@ public class RoverEntity extends VehicleEntity {
 		this.previousYaw = this.getYaw();
 
 		if (this.getFirstPassenger() instanceof PlayerEntity player) {
-			if (getTank().getFluidAmount() > 0) {
+			if (getTankHolder().getFluidAmount() > 0) {
 				boolean shouldConsumeFuel = false;
 
 				// Player is clicking 'w' to move forward.

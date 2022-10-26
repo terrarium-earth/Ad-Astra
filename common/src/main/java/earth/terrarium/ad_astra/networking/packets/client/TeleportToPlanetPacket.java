@@ -31,8 +31,8 @@ public record TeleportToPlanetPacket(Identifier id) implements Packet<TeleportTo
 
     private static class Handler implements PacketHandler<TeleportToPlanetPacket> {
         @Override
-        public void encode(TeleportToPlanetPacket keybindPacket, PacketByteBuf buf) {
-            buf.writeIdentifier(keybindPacket.id);
+        public void encode(TeleportToPlanetPacket packet, PacketByteBuf buf) {
+            buf.writeIdentifier(packet.id);
         }
 
         @Override

@@ -1,40 +1,29 @@
 package earth.terrarium.ad_astra.client.renderer.block.flag;
 
-import java.util.List;
-import java.util.Map;
-
-import earth.terrarium.ad_astra.blocks.flags.FlagBlock;
-import earth.terrarium.ad_astra.blocks.flags.FlagBlockEntity;
-import earth.terrarium.ad_astra.client.ClientUtils;
-import earth.terrarium.ad_astra.util.ModIdentifier;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-
+import earth.terrarium.ad_astra.blocks.flags.FlagBlock;
+import earth.terrarium.ad_astra.blocks.flags.FlagBlockEntity;
+import earth.terrarium.ad_astra.client.AdAstraClient;
+import earth.terrarium.ad_astra.util.ModIdentifier;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.model.ModelData;
-import net.minecraft.client.model.ModelPart;
-import net.minecraft.client.model.ModelPartBuilder;
-import net.minecraft.client.model.ModelPartData;
-import net.minecraft.client.model.ModelTransform;
-import net.minecraft.client.model.TexturedModelData;
+import net.minecraft.client.model.*;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
-import net.minecraft.client.render.model.BakedModel;
-import net.minecraft.client.render.model.BakedModelManager;
-import net.minecraft.client.render.model.BakedQuad;
 import net.minecraft.client.util.DefaultSkinHelper;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.UuidUtil;
 import net.minecraft.util.math.Vec3f;
 import net.minecraft.util.registry.Registry;
+
+import java.util.Map;
 
 @Environment(EnvType.CLIENT)
 public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEntity> {
@@ -45,7 +34,7 @@ public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEnt
 	@Override
 	public void render(FlagBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
 		if (entity.getCachedState().get(FlagBlock.HALF).equals(DoubleBlockHalf.LOWER)) {
-			Identifier model = new ModIdentifier("block/flag/" + Registry.BLOCK.getId(entity.getCachedState().getBlock()).getPath());
+			Identifier flagTexture = new ModIdentifier("block/flag/" + Registry.BLOCK.getId(entity.getCachedState().getBlock()).getPath());
 			matrices.push();
 
 //			switch (entity.getCachedState().get(FlagBlock.FACING)) {
@@ -73,7 +62,7 @@ public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEnt
 			matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(-entity.getCachedState().get(FlagBlock.FACING).asRotation()));
 			matrices.translate(-0.5D, -1D, -0.5D);
 
-			renderFlag(model, tickDelta, matrices, vertexConsumers, light, overlay);
+			AdAstraClient.renderBlock(flagTexture, matrices, vertexConsumers, light, overlay);
 
 			matrices.pop();
 		} else {
@@ -157,20 +146,5 @@ public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEnt
 			return RenderLayer.getEntityTranslucent(minecraftClient.getSkinProvider().loadSkin(map.get(MinecraftProfileTexture.Type.SKIN), MinecraftProfileTexture.Type.SKIN));
 		}
 		return RenderLayer.getEntityCutoutNoCull(DefaultSkinHelper.getTexture(UuidUtil.getProfileUuid(profile)));
-	}
-
-	public static void renderFlag(Identifier texture, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
-
-		MinecraftClient client = MinecraftClient.getInstance();
-		BakedModelManager manager = client.getBakedModelManager();
-		BakedModel model = ClientUtils.getModel(manager, texture);
-
-		VertexConsumer vertexConsumer1 = vertexConsumers.getBuffer(RenderLayer.getEntityCutout(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE));
-		List<BakedQuad> quads1 = model.getQuads(null, null, client.world.random);
-		MatrixStack.Entry entry1 = matrices.peek();
-
-		for (BakedQuad quad : quads1) {
-			vertexConsumer1.bakedQuad(entry1, quad, 1, 1, 1, light, overlay);
-		}
 	}
 }

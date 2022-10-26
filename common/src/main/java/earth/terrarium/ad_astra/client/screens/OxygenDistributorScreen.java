@@ -60,20 +60,20 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
 
 		super.drawBackground(matrices, delta, mouseX, mouseY);
 
-		FluidMachineBlockEntity entity = (FluidMachineBlockEntity) blockEntity;
+		FluidMachineBlockEntity entity = (FluidMachineBlockEntity) this.entity;
 
-		GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.blockEntity.getEnergyStorage().getStoredEnergy(), this.blockEntity.getCapacity());
-		GuiUtil.drawFluidTank(matrices, this.x + INPUT_TANK_LEFT, this.y + INPUT_TANK_TOP, entity.getInputTank().getFluidAmount(), entity.getInputTankCapacity(), entity.getInputTank());
+		GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.handler.getEnergyAmount(), this.entity.getCapacity());
+		GuiUtil.drawFluidTank(matrices, this.x + INPUT_TANK_LEFT, this.y + INPUT_TANK_TOP, this.handler.getFluids().get(0).getFluidAmount(), entity.getInputTankCapacity(), entity.getInputTank());
 		GuiUtil.drawFluidTank(matrices, this.x + OUTPUT_TANK_LEFT, this.y + OUTPUT_TANK_TOP, entity.getOutputTank().getFluidAmount(), entity.getOutputTankCapacity(), entity.getOutputTank());
 
-		visibleButton.setMessage(((OxygenDistributorBlockEntity) this.blockEntity).shouldShowOxygen() ? HIDE_TEXT : SHOW_TEXT);
+		visibleButton.setMessage(((OxygenDistributorBlockEntity) this.entity).shouldShowOxygen() ? HIDE_TEXT : SHOW_TEXT);
 
 		// Render a warning sign if there is an oxygen leak detected.
-		boolean oxygenLeak = OxygenUtils.getOxygenBlocksCount(this.blockEntity.getWorld(), this.blockEntity.getPos()) >= AdAstra.CONFIG.oxygenDistributor.maxBlockChecks;
+		boolean oxygenLeak = OxygenUtils.getOxygenBlocksCount(this.entity.getWorld(), this.entity.getPos()) >= AdAstra.CONFIG.oxygenDistributor.maxBlockChecks;
 		if (oxygenLeak) {
 			ScreenUtils.addTexture(matrices, this.width / 2 - 85, this.height / 2 - 137, 14, 15, WARNING_SIGN);
 		}
-		if (OxygenUtils.getOxygenBlocksCount(this.blockEntity.getWorld(), this.blockEntity.getPos()) <= 0 && entity.hasEnergy() && entity.getOutputTank().getFluidAmount() > 0) {
+		if (OxygenUtils.getOxygenBlocksCount(this.entity.getWorld(), this.entity.getPos()) <= 0 && entity.hasEnergy() && entity.getOutputTank().getFluidAmount() > 0) {
 			ScreenUtils.addTexture(matrices, this.width / 2 - 67, this.height / 2 - 137, 14, 15, WARNING_SIGN);
 		}
 	}
@@ -82,10 +82,10 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
 	public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
 		super.render(matrices, mouseX, mouseY, delta);
 
-		FluidMachineBlockEntity entity = (FluidMachineBlockEntity) blockEntity;
+		FluidMachineBlockEntity entity = (FluidMachineBlockEntity) this.entity;
 
 		if (GuiUtil.isHovering(this.getEnergyBounds(), mouseX, mouseY)) {
-			GuiUtil.drawEnergyTooltip(this, matrices, entity, mouseX, mouseY);
+			GuiUtil.drawEnergyTooltip(this, matrices, this.handler.getEnergyAmount(), entity.getCapacity(), mouseX, mouseY);
 		}
 
 		if (GuiUtil.isHovering(this.getInputTankBounds(), mouseX, mouseY)) {
@@ -96,8 +96,8 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
 			GuiUtil.drawTankTooltip(this, matrices, entity.getOutputTank(), entity.getInputTankCapacity(), mouseX, mouseY);
 		}
 
-		int oxygenBlocksCount = OxygenUtils.getOxygenBlocksCount(this.blockEntity.getWorld(), this.blockEntity.getPos());
-		boolean oxygenLeak = OxygenUtils.getOxygenBlocksCount(this.blockEntity.getWorld(), this.blockEntity.getPos()) >= AdAstra.CONFIG.oxygenDistributor.maxBlockChecks;
+		int oxygenBlocksCount = OxygenUtils.getOxygenBlocksCount(this.entity.getWorld(), this.entity.getPos());
+		boolean oxygenLeak = OxygenUtils.getOxygenBlocksCount(this.entity.getWorld(), this.entity.getPos()) >= AdAstra.CONFIG.oxygenDistributor.maxBlockChecks;
 		if (oxygenLeak) {
 			if (GuiUtil.isHovering(getOxygenLeakWarningSignBounds(), mouseX, mouseY)) {
 				this.renderTooltip(matrices, Arrays.asList(Text.translatable("gauge_text.ad_astra.oxygen_leak_warning[0]"), Text.translatable("gauge_text.ad_astra.oxygen_leak_warning[1]"), Text.translatable("gauge_text.ad_astra.oxygen_leak_warning[2]"), Text.translatable("gauge_text.ad_astra.oxygen_leak_warning[3]"), Text.translatable("gauge_text.ad_astra.oxygen_leak_warning[4]")), mouseX, mouseY);
@@ -114,7 +114,7 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
 	@Override
 	protected void drawForeground(MatrixStack matrices, int mouseX, int mouseY) {
 		super.drawForeground(matrices, mouseX, mouseY);
-		long oxygenBlocksCount = OxygenUtils.getOxygenBlocksCount(this.blockEntity.getWorld(), this.blockEntity.getPos());
+		long oxygenBlocksCount = OxygenUtils.getOxygenBlocksCount(this.entity.getWorld(), this.entity.getPos());
 		matrices.push();
 		matrices.scale(0.9f, 0.9f, 0.9f);
 		Text oxygenBlockText = Text.translatable("gauge_text.ad_astra.oxygen_blocks");
@@ -124,14 +124,14 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
 		this.textRenderer.draw(matrices, oxygenBlockText, 11, offset + 11, 0x68d975);
 		this.textRenderer.draw(matrices, oxygenBlockAmount, 11, offset + 24, 0x68d975);
 
-		OxygenDistributorBlockEntity entity = (OxygenDistributorBlockEntity) this.blockEntity;
+		OxygenDistributorBlockEntity entity = (OxygenDistributorBlockEntity) this.entity;
 
 		long energyUsagePerTick = entity.getEnergyToConsume(oxygenBlocksCount, true);
 
 		if (displayConversionEnergyCost) {
 			energyUsagePerTick += entity.getEnergyPerTick();
 			this.displayConversionEnergyCost = false;
-		} else if (entity.getInputTank().getFluidAmount() > 0 && entity.getOutputTank().getFluidAmount() < entity.getOutputTankCapacity()) {
+		} else if (this.handler.getFluids().get(0).getFluidAmount() > 0 && entity.getOutputTank().getFluidAmount() < entity.getOutputTankCapacity()) {
 			energyUsagePerTick += entity.getEnergyPerTick();
 			displayConversionEnergyCost = true;
 		}
@@ -151,10 +151,10 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
 	@Override
 	protected void init() {
 		super.init();
-		OxygenDistributorBlockEntity oxygenDistributor = ((OxygenDistributorBlockEntity) this.blockEntity);
+		OxygenDistributorBlockEntity oxygenDistributor = ((OxygenDistributorBlockEntity) this.entity);
 		visibleButton = new CustomButton(this.width / 2 + 10, this.height / 2 - 83, oxygenDistributor.shouldShowOxygen() ? HIDE_TEXT : SHOW_TEXT, ButtonType.STEEL, ButtonColour.WHITE, TooltipType.NONE, null, pressed -> {
-			NetworkHandling.CHANNEL.sendToServer(new ToggleDistributorPacket(this.blockEntity.getPos()));
-			((OxygenDistributorBlockEntity) this.blockEntity).setShowOxygen(!oxygenDistributor.shouldShowOxygen());
+			NetworkHandling.CHANNEL.sendToServer(new ToggleDistributorPacket(this.entity.getPos()));
+			((OxygenDistributorBlockEntity) this.entity).setShowOxygen(!oxygenDistributor.shouldShowOxygen());
 		});
 		visibleButton.doMask = false;
 		this.addDrawableChild(visibleButton);

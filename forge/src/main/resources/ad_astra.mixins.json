@@ -6,7 +6,8 @@
   "client": [
     "ModRenderedItemMixin",
     "SpaceSuitMixin",
-    "SkyPropertiesMixin"
+    "SkyPropertiesMixin",
+    "JetSuitMixin"
   ],
   "mixins": [],
   "injectors": {

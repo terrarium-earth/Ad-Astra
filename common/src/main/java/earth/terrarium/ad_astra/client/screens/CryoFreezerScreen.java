@@ -36,10 +36,10 @@ public class CryoFreezerScreen extends AbstractMachineScreen<CryoFreezerScreenHa
 
 		super.drawBackground(matrices, delta, mouseX, mouseY);
 
-		CryoFreezerBlockEntity entity = (CryoFreezerBlockEntity) blockEntity;
+		CryoFreezerBlockEntity entity = (CryoFreezerBlockEntity) this.entity;
 
-		GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.blockEntity.getEnergyStorage().getStoredEnergy(), this.blockEntity.getCapacity());
-		GuiUtil.drawFluidTank(matrices, this.x + INPUT_TANK_LEFT, this.y + INPUT_TANK_TOP, entity.tank.getFluids().get(0).getFluidAmount(), entity.tank.getTankCapacity(0), entity.tank.getFluids().get(0));
+		GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.handler.getEnergyAmount(), this.entity.getCapacity());
+		GuiUtil.drawFluidTank(matrices, this.x + INPUT_TANK_LEFT, this.y + INPUT_TANK_TOP, this.handler.getFluids().get(0).getFluidAmount(), entity.getFluidContainer().getTankCapacity(0), this.handler.getFluids().get(0));
 		GuiUtil.drawSnowflake(matrices, this.x + SNOWFLAKE_LEFT, this.y + SNOWFLAKE_TOP, entity.getCookTime(), entity.getCookTimeTotal());
 	}
 
@@ -47,14 +47,14 @@ public class CryoFreezerScreen extends AbstractMachineScreen<CryoFreezerScreenHa
 	public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
 		super.render(matrices, mouseX, mouseY, delta);
 
-		CryoFreezerBlockEntity entity = (CryoFreezerBlockEntity) blockEntity;
+		CryoFreezerBlockEntity entity = (CryoFreezerBlockEntity) this.entity;
 
 		if (GuiUtil.isHovering(this.getEnergyBounds(), mouseX, mouseY)) {
-			GuiUtil.drawEnergyTooltip(this, matrices, entity, mouseX, mouseY);
+			GuiUtil.drawEnergyTooltip(this, matrices, this.handler.getEnergyAmount(), entity.getCapacity(), mouseX, mouseY);
 		}
 
 		if (GuiUtil.isHovering(this.getOutputTankBounds(), mouseX, mouseY)) {
-			GuiUtil.drawTankTooltip(this, matrices, entity.tank.getFluids().get(0), entity.tank.getTankCapacity(0), mouseX, mouseY);
+			GuiUtil.drawTankTooltip(this, matrices, this.handler.getFluids().get(0), entity.getFluidContainer().getTankCapacity(0), mouseX, mouseY);
 		}
 	}
 
