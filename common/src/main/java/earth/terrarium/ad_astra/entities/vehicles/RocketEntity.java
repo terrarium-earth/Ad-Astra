@@ -64,7 +64,7 @@ public class RocketEntity extends VehicleEntity {
 
 	@Override
 	public long getTankSize() {
-		return AdAstra.CONFIG.rocket.tankBuckets;
+		return AdAstra.CONFIG.rocket.tankSize;
 	}
 
 	@Override

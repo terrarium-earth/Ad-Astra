@@ -3,6 +3,7 @@ package earth.terrarium.ad_astra.client.forge;
 import earth.terrarium.ad_astra.client.AdAstraClient;
 import earth.terrarium.ad_astra.client.registry.ClientModBlockRenderers;
 import earth.terrarium.ad_astra.client.registry.ClientModEntities;
+import earth.terrarium.ad_astra.config.forge.ForgeMenuConfig;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.client.model.TexturedModelData;
@@ -65,6 +66,7 @@ public class AdAstraClientForge {
         modEventBus.addListener(AdAstraClientForge::onRegisterRenderers);
         modEventBus.addListener(AdAstraClientForge::onRegisterLayerDefinitions);
         modEventBus.addListener(AdAstraClientForge::onClientReloadListeners);
+        ForgeMenuConfig.register();
     }
 
     public static void onClientReloadListeners(RegisterClientReloadListenersEvent event) {

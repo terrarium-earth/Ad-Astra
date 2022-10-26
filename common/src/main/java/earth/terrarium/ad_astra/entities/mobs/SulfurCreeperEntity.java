@@ -47,7 +47,7 @@ public class SulfurCreeperEntity extends CreeperEntity {
 
 					if (oxygen > 0) {
 						if (!OxygenUtils.entityHasOxygen(world, player)) {
-							suit.setAmount(chest, oxygen - FluidHooks.BUCKET / 3);
+							suit.setAmount(chest, oxygen - FluidHooks.buckets(3));
 							if ((suit.getAmount(chest) <= 0)) {
 								suit.setAmount(chest, 0);
 							}

@@ -213,7 +213,7 @@ public class ModUtils {
 		}
 
 		if (isOrbitWorld(world)) {
-			return 3.0f / VANILLA_GRAVITY;
+			return AdAstra.CONFIG.general.orbitGravity / VANILLA_GRAVITY;
 		}
 		return AdAstra.planets.stream().filter(p -> p.world().equals(world.getRegistryKey())).map(Planet::gravity).findFirst().orElse(VANILLA_GRAVITY) / VANILLA_GRAVITY;
 	}

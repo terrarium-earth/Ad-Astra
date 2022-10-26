@@ -28,12 +28,12 @@ public class FuelRefineryBlockEntity extends FluidMachineBlockEntity {
 
     @Override
     public long getInputTankCapacity() {
-        return FluidHooks.buckets(AdAstra.CONFIG.fuelRefinery.tankBuckets);
+        return AdAstra.CONFIG.fuelRefinery.tankSize;
     }
 
     @Override
     public long getOutputTankCapacity() {
-        return FluidHooks.buckets(AdAstra.CONFIG.fuelRefinery.tankBuckets);
+        return AdAstra.CONFIG.fuelRefinery.tankSize;
     }
 
     @Override

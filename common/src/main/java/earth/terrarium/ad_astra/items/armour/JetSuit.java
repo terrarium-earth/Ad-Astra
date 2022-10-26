@@ -119,6 +119,9 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
 	}
 
 	public static void spawnParticles(World world, LivingEntity entity, BipedEntityModel<LivingEntity> model) {
+		if (!AdAstra.CONFIG.spaceSuit.spawnJetSuitParticles) {
+			return;
+		}
 
 		if (entity instanceof PlayerEntity player) {
 			ItemStack chest = player.getEquippedStack(EquipmentSlot.CHEST);

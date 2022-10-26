@@ -8,6 +8,7 @@ import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public record LaunchRocketPacket() implements Packet<LaunchRocketPacket> {
@@ -40,9 +41,13 @@ public record LaunchRocketPacket() implements Packet<LaunchRocketPacket> {
             return (player, world) -> {
                 if (player.getVehicle() instanceof RocketEntity rocket) {
                     if (!rocket.isFlying()) {
-                        rocket.initiateLaunchSequenceFromServer();
-                        // Tell all clients to start rendering the rocket launch
-                        NetworkHandling.CHANNEL.sendToAllLoaded(new StartRocketPacket(rocket.getId()), world, rocket.getBlockPos());
+                        if (rocket.getTankAmount() >= RocketEntity.getRequiredAmountForLaunch(rocket.getTankFluid())) {
+                            rocket.initiateLaunchSequenceFromServer();
+                            // Tell all clients to start rendering the rocket launch
+                            NetworkHandling.CHANNEL.sendToAllLoaded(new StartRocketPacket(rocket.getId()), world, rocket.getBlockPos());
+                        } else {
+                            player.sendMessage(Text.translatable("message.ad_astra.no_fuel"), false);
+                        }
                     }
                 }
             };

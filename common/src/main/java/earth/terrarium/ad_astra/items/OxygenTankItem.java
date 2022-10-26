@@ -31,7 +31,7 @@ public class OxygenTankItem extends Item implements FluidContainingItem {
 	public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
 		long oxygen = FluidHooks.toMillibuckets(this.getFluidContainer(stack).getFluids().get(0).getFluidAmount());
 		tooltip.add(Text.translatable("tooltip.ad_astra.consumable"));
-		tooltip.add(Text.translatable("tooltip.ad_astra.space_suit", oxygen, FluidHooks.toMillibuckets(getTankSize())).setStyle(Style.EMPTY.withColor(oxygen > 0 ? Formatting.GREEN : Formatting.RED)));
+		tooltip.add(Text.translatable("tooltip.ad_astra.space_suit", oxygen, getTankSize()).setStyle(Style.EMPTY.withColor(oxygen > 0 ? Formatting.GREEN : Formatting.RED)));
 	}
 
 

@@ -59,12 +59,12 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 
 	@Override
 	public long getInputTankCapacity() {
-		return FluidHooks.buckets(AdAstra.CONFIG.oxygenDistributor.tankBuckets);
+		return AdAstra.CONFIG.oxygenDistributor.tankSize;
 	}
 
 	@Override
 	public long getOutputTankCapacity() {
-		return FluidHooks.buckets(AdAstra.CONFIG.oxygenDistributor.tankBuckets * 2);
+		return AdAstra.CONFIG.oxygenDistributor.tankSize * 2;
 	}
 
 	@Override
