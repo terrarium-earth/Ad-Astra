@@ -6,7 +6,6 @@ import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.recipes.CompressingRecipe;
 import earth.terrarium.ad_astra.recipes.CryoFuelConversionRecipe;
 import earth.terrarium.ad_astra.recipes.FluidConversionRecipe;
-import earth.terrarium.ad_astra.recipes.GeneratingRecipe;
 import earth.terrarium.ad_astra.recipes.HammerShapelessRecipe;
 import earth.terrarium.ad_astra.recipes.ModRecipeType;
 import earth.terrarium.ad_astra.recipes.NasaWorkbenchRecipe;
@@ -25,7 +24,6 @@ public class ModRecipes {
 	public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(AdAstra.MOD_ID, Registry.RECIPE_TYPE_KEY);
 	public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(AdAstra.MOD_ID, Registry.RECIPE_SERIALIZER_KEY);
 
-	public static Supplier<ModRecipeType<GeneratingRecipe>> GENERATING_RECIPE;
 	public static Supplier<ModRecipeType<CompressingRecipe>> COMPRESSING_RECIPE;
 	public static Supplier<ModRecipeType<SpaceStationRecipe>> SPACE_STATION_RECIPE;
 	public static Supplier<ModRecipeType<NasaWorkbenchRecipe>> NASA_WORKBENCH_RECIPE;
@@ -34,7 +32,6 @@ public class ModRecipes {
 	public static Supplier<ModRecipeType<CryoFuelConversionRecipe>> CRYO_FUEL_CONVERSION_RECIPE;
 
 	public static Supplier<RecipeSerializer<ShapelessRecipe>> HAMMER_SERIALIZER;
-	public static Supplier<RecipeSerializer<GeneratingRecipe>> GENERATING_SERIALIZER;
 	public static Supplier<RecipeSerializer<CompressingRecipe>> COMPRESSING_SERIALIZER;
 	public static Supplier<RecipeSerializer<SpaceStationRecipe>> SPACE_STATION_SERIALIZER;
 	public static Supplier<RecipeSerializer<NasaWorkbenchRecipe>> NASA_WORKBENCH_SERIALIZER;
@@ -45,7 +42,6 @@ public class ModRecipes {
 	public static void register() {
 
 		// Recipe Types
-		GENERATING_RECIPE = RECIPE_TYPES.register("generating", () -> new ModRecipeType<>(new ModIdentifier("generating")));
 		COMPRESSING_RECIPE = RECIPE_TYPES.register("compressing", () -> new ModRecipeType<>(new ModIdentifier("compressing")));
 		SPACE_STATION_RECIPE = RECIPE_TYPES.register("space_station", () -> new ModRecipeType<>(new ModIdentifier("space_station")));
 		NASA_WORKBENCH_RECIPE = RECIPE_TYPES.register("nasa_workbench", () -> new ModRecipeType<>(new ModIdentifier("nasa_workbench")));
@@ -56,7 +52,6 @@ public class ModRecipes {
 
 		// Recipe Serializers
 		HAMMER_SERIALIZER = RECIPE_SERIALIZERS.register("hammering", HammerShapelessRecipe.Serializer::new);
-		GENERATING_SERIALIZER = RECIPE_SERIALIZERS.register("generating", () -> new CodecRecipeSerializer<>(GENERATING_RECIPE.get(), GeneratingRecipe::codec));
 		COMPRESSING_SERIALIZER = RECIPE_SERIALIZERS.register("compressing", () -> new CodecRecipeSerializer<>(COMPRESSING_RECIPE.get(), CompressingRecipe::codec));
 		SPACE_STATION_SERIALIZER = RECIPE_SERIALIZERS.register("space_station", () -> new CodecRecipeSerializer<>(SPACE_STATION_RECIPE.get(), SpaceStationRecipe::codec));
 		NASA_WORKBENCH_SERIALIZER = RECIPE_SERIALIZERS.register("nasa_workbench", () -> new CodecRecipeSerializer<>(NASA_WORKBENCH_RECIPE.get(), NasaWorkbenchRecipe::codec));

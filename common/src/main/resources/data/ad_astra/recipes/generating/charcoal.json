@@ -1,7 +1,0 @@
-{
-  "type": "ad_astra:generating",
-  "input": {
-    "item": "minecraft:charcoal"
-  },
-  "burnTime": 400
-}

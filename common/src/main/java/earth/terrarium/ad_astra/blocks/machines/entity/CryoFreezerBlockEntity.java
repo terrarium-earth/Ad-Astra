@@ -61,10 +61,8 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
         if (this.outputFluid != null) {
             CryoFuelConversionRecipe recipe = this.createRecipe(ModRecipes.CRYO_FUEL_CONVERSION_RECIPE.get(), this.getStack(0), false);
             if (recipe != null) {
-                // TODO: change to platform fluid amount
-                FluidHolder outputFluid = FluidHooks.newFluidHolder(recipe.getFluidOutput(), (long) (1000L * recipe.getConversionRatio()), null);
+                FluidHolder outputFluid = FluidHooks.newFluidHolder(recipe.getFluidOutput(), (long) (FluidHooks.buckets(1) * recipe.getConversionRatio()), null);
                 getFluidContainer().insertFluid(outputFluid, false);
-                markDirty();
             }
         }
         this.stopCooking();
@@ -150,7 +148,7 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
             ItemStack outputExtractSlot = this.getStack(2);
 
             if (!outputInsertSlot.isEmpty() && outputExtractSlot.getCount() < outputExtractSlot.getMaxCount()) {
-                FluidUtils.extractFluidFromItem(outputExtractSlot, 0, this, f -> true);
+                FluidUtils.extractFluidFromItem(this, 1, 2, 0, this, f -> true);
             }
 
             if (this.hasEnergy()) {

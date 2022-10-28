@@ -111,13 +111,13 @@ public class AdAstraConfig implements ConfigData {
 
         public static class RoverConfig {
             public final boolean explodeRoverInLava = true;
-            public final long fuelPerTick = FluidHooks.toMillibuckets(1);
+            public final long fuelPerSecond = FluidHooks.toMillibuckets(10);
             public final float turnSpeed = 3.0f;
             public final float maxTurnSpeed = 6.0f;
             public final float deceleration = 0.9f;
             public final float minSpeed = -0.2f;
             public final float maxSpeed = 0.3f;
-            public final long tankSize = FluidHooks.buckets(3); // TODO: rover consumes way too much fuel
+            public final long tankSize = FluidHooks.buckets(3);
         }
 
         public static class LanderConfig {

@@ -67,7 +67,7 @@ public class EnergizerBlockEntity extends AbstractMachineBlockEntity {
                 this.setActive(true);
                 if (!stack.isEmpty()) {
                     if (this.hasEnergy()) {
-                        // TODO: This doesn't transfer anything. "moved" is always 0.
+                        // TODO: This doesn't transfer anything. "moved" is always 0 on fabric.
                         long moved = EnergyHooks.moveBlockToItemEnergy(this, null, stack, this.getEnergyPerTick());
                         if (moved > 0) {
                             BlockPos pos = this.getPos();

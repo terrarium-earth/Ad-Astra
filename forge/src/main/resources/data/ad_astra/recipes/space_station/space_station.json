@@ -1,0 +1,29 @@
+{
+	"type": "ad_astra:space_station",
+	"ingredients": [
+		{
+			"ingredient": {
+				"tag": "forge:desh_ingots"
+			},
+			"count": 32
+		},
+		{
+			"ingredient": {
+				"tag": "forge:steel_ingots"
+			},
+			"count": 32
+		},
+		{
+			"ingredient": {
+				"tag": "forge:iron_plates"
+			},
+			"count": 64
+		},
+		{
+			"ingredient": {
+				"tag": "forge:desh_plates"
+			},
+			"count": 32
+		}
+	]
+}

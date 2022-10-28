@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "button",
+  "ingredients": [
+    {
+      "item": "ad_astra:desh_plating"
+    }
+  ],
+  "result": {
+    "item": "ad_astra:desh_plating_button"
+  }
+}

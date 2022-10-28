@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "ad_astra:strophar_caps"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "item": "ad_astra:strophar_planks"
+  }
+}

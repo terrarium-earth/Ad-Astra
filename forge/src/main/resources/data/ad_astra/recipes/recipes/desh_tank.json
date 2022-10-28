@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "tanks",
+  "key": {
+    "#": {
+      "tag": "forge:desh_plates"
+    },
+    "U": {
+      "item": "minecraft:bucket"
+    },
+    "|": {
+      "tag": "forge:iron_rods"
+    }
+  },
+  "pattern": [
+    "## ",
+    "#U|",
+    "## "
+  ],
+  "result": {
+    "item": "ad_astra:desh_tank"
+  }
+}

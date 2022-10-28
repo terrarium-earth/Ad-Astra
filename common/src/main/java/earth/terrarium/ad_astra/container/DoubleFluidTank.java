@@ -12,8 +12,8 @@ public class DoubleFluidTank implements UpdatingFluidContainer {
     private final FluidContainer output;
 
     public DoubleFluidTank(Updatable updatable, long inputCapacity, long outputCapacity, Predicate<FluidHolder> inputFilter, Predicate<FluidHolder> outputFilter) {
-        this.input = new ImportingFluidTank(updatable, i -> inputCapacity, 1, (i, f) -> inputFilter.test(f));
-        this.output = new ExportingFluidTank(updatable, i -> outputCapacity, 1, (i, f) -> outputFilter.test(f));
+        this.input = new SimpleUpdatingFluidContainer(updatable, i -> inputCapacity, 1, (i, f) -> inputFilter.test(f));
+        this.output = new SimpleUpdatingFluidContainer(updatable, i -> outputCapacity, 1, (i, f) -> outputFilter.test(f));
     }
 
     protected DoubleFluidTank(FluidContainer input, FluidContainer output) {
@@ -116,5 +116,13 @@ public class DoubleFluidTank implements UpdatingFluidContainer {
                 output.loadSnapshot(doubleFluidTank.output);
             }
         }
+    }
+
+    public FluidContainer getInput() {
+        return input;
+    }
+
+    public FluidContainer getOutput() {
+        return output;
     }
 }

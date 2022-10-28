@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "tag": "forge:steel_plates"
+    },
+    "|": {
+      "tag": "forge:iron_rods"
+    }
+  },
+  "pattern": [
+    " | ",
+    "#|#",
+    "#|#"
+  ],
+  "result": {
+    "item": "ad_astra:oxygen_gear"
+  }
+}

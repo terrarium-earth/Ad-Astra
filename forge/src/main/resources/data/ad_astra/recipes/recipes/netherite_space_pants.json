@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "tag": "forge:ostrum_plates"
+    },
+    "D": {
+      "tag": "forge:desh_plates"
+    },
+    "N": {
+      "item": "minecraft:netherite_leggings"
+    }
+  },
+  "pattern": [
+    "#N#",
+    "D D",
+    "# #"
+  ],
+  "result": {
+    "item": "ad_astra:netherite_space_pants"
+  }
+}

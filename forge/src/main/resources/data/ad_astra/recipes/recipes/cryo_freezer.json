@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "tag": "forge:ostrum_plates"
+    },
+    "B": {
+      "item": "ad_astra:ostrum_block"
+    },
+    "O": {
+      "item": "ad_astra:ostrum_ingot"
+    },
+    "T": {
+      "item": "ad_astra:ostrum_tank"
+    }
+  },
+  "pattern": [
+    "#O#",
+    "OTO",
+    "BOB"
+  ],
+  "result": {
+    "item": "ad_astra:cryo_freezer"
+  }
+}

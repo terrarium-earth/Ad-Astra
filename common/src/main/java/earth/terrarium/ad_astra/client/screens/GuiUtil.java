@@ -80,11 +80,11 @@ public class GuiUtil {
 		drawVertical(matrixStack, x, y, ENERGY_WIDTH, ENERGY_HEIGHT, ENERGY_TEXTURE, ratio);
 	}
 
-	public static void drawFluidTank(MatrixStack matrices, int x, int y, long fluidAmount, long fluidCapacity, FluidHolder fluid) {
+	public static void drawFluidTank(MatrixStack matrices, int x, int y, long fluidCapacity, FluidHolder fluid) {
 		if (ArchitecturyTarget.getCurrentTarget().equals("fabric")) {
 			fluidCapacity /= 81L;
 		}
-		double ratio = fluidCapacity > 0 ? createRatio(fluidAmount, fluidCapacity) : 0;
+		double ratio = fluidCapacity > 0 ? createRatio(fluid.getFluidAmount(), fluidCapacity) : 0;
 		drawFluidTank(matrices, x, y, ratio, fluid);
 	}
 
