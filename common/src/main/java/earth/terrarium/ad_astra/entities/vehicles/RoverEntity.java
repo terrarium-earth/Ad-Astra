@@ -50,7 +50,7 @@ public class RoverEntity extends VehicleEntity {
 
 	@Override
 	public long getFuelPerTick() {
-		return AdAstra.CONFIG.rover.fuelPerTick;
+		return AdAstra.CONFIG.rover.fuelPerSecond;
 	}
 
 	@Override

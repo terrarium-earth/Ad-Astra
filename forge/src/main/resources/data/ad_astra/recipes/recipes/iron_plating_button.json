@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "button",
+  "ingredients": [
+    {
+      "item": "ad_astra:iron_plating"
+    }
+  ],
+  "result": {
+    "item": "ad_astra:iron_plating_button"
+  }
+}

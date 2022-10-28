@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "flag",
+  "key": {
+    "#": {
+      "item": "minecraft:blue_wool"
+    },
+    "|": {
+      "tag": "forge:iron_rods"
+    }
+  },
+  "pattern": [
+    "|##",
+    "|##",
+    "|  "
+  ],
+  "result": {
+    "item": "ad_astra:blue_flag"
+  }
+}

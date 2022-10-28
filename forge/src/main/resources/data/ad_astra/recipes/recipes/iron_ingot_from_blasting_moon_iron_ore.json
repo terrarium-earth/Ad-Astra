@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "cookingtime": 100,
+  "experience": 1.0,
+  "ingredient": {
+    "item": "ad_astra:moon_iron_ore"
+  },
+  "result": "minecraft:iron_ingot"
+}

@@ -1,6 +1,7 @@
 package earth.terrarium.ad_astra.blocks.machines.entity;
 
 import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.container.DoubleFluidTank;
 import earth.terrarium.ad_astra.recipes.OxygenConversionRecipe;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
 import earth.terrarium.ad_astra.registry.ModRecipes;
@@ -84,16 +85,16 @@ public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
             ItemStack outputExtractSlot = this.getItems().get(3);
 
             if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxCount() && FluidHooks.isFluidContainingItem(insertSlot)) {
-                FluidUtils.insertFluidToContainerFromItem(insertSlot, 0, this.getFluidContainer(), f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.world).stream().anyMatch(r -> r.matches(f)));
+                FluidUtils.insertFluidToContainerFromItem(this, 0, 1, 0, this.getFluidContainer(), f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.world).stream().anyMatch(r -> r.matches(f)));
             }
 
             if (!outputInsertSlot.isEmpty() && outputExtractSlot.getCount() < outputExtractSlot.getMaxCount()) {
-                FluidUtils.extractFluidFromItem(outputExtractSlot, 0, this, f -> true);
+                FluidUtils.extractFluidFromItem(this, 2, 3, 0, this, f -> true);
             }
 
             if (this.hasEnergy()) {
                 List<OxygenConversionRecipe> recipes = ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.world);
-                if (FluidUtils.convertFluid(this, recipes, 10)) {
+                if (FluidUtils.convertFluid((DoubleFluidTank) this.getFluidContainer(), recipes, 50)) {
                     this.drainEnergy();
                     this.setActive(true);
                 } else {

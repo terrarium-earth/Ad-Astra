@@ -42,8 +42,8 @@ public class ConversionScreen extends AbstractMachineScreen<ConversionScreenHand
 		FluidMachineBlockEntity entity = (FluidMachineBlockEntity) this.entity;
 
 		GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.handler.getEnergyAmount(), this.entity.getCapacity());
-		GuiUtil.drawFluidTank(matrices, this.x + INPUT_TANK_LEFT, this.y + INPUT_TANK_TOP, this.handler.getFluids().get(0).getFluidAmount(), entity.getInputTankCapacity(), entity.getInputTank());
-		GuiUtil.drawFluidTank(matrices, this.x + OUTPUT_TANK_LEFT, this.y + OUTPUT_TANK_TOP, entity.getOutputTank().getFluidAmount(), entity.getOutputTankCapacity(), entity.getOutputTank());
+		GuiUtil.drawFluidTank(matrices, this.x + INPUT_TANK_LEFT, this.y + INPUT_TANK_TOP, entity.getInputTankCapacity(), this.handler.getFluids().get(0));
+		GuiUtil.drawFluidTank(matrices, this.x + OUTPUT_TANK_LEFT, this.y + OUTPUT_TANK_TOP, entity.getOutputTankCapacity(), this.handler.getFluids().get(1));
 	}
 
 	@Override
@@ -57,11 +57,11 @@ public class ConversionScreen extends AbstractMachineScreen<ConversionScreenHand
 		}
 
 		if (GuiUtil.isHovering(this.getInputTankBounds(), mouseX, mouseY)) {
-			GuiUtil.drawTankTooltip(this, matrices, entity.getInputTank(), entity.getInputTankCapacity(), mouseX, mouseY);
+			GuiUtil.drawTankTooltip(this, matrices, this.handler.getFluids().get(0), entity.getInputTankCapacity(), mouseX, mouseY);
 		}
 
 		if (GuiUtil.isHovering(this.getOutputTankBounds(), mouseX, mouseY)) {
-			GuiUtil.drawTankTooltip(this, matrices, entity.getOutputTank(), entity.getOutputTankCapacity(), mouseX, mouseY);
+			GuiUtil.drawTankTooltip(this, matrices, this.handler.getFluids().get(1), entity.getOutputTankCapacity(), mouseX, mouseY);
 		}
 	}
 

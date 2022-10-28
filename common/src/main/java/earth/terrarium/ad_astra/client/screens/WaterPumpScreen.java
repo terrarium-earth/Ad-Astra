@@ -39,7 +39,7 @@ public class WaterPumpScreen extends AbstractMachineScreen<WaterPumpScreenHandle
 		WaterPumpBlockEntity entity = (WaterPumpBlockEntity) this.entity;
 
 		GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.handler.getEnergyAmount(), this.entity.getCapacity());
-		GuiUtil.drawFluidTank(matrices, this.x + INPUT_TANK_LEFT, this.y + INPUT_TANK_TOP, this.handler.getFluids().get(0).getFluidAmount(), entity.getFluidContainer().getTankCapacity(0), this.handler.getFluids().get(0));
+		GuiUtil.drawFluidTank(matrices, this.x + INPUT_TANK_LEFT, this.y + INPUT_TANK_TOP, entity.getFluidContainer().getTankCapacity(0), this.handler.getFluids().get(0));
 	}
 
 	@Override

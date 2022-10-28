@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "ostrum_ingot",
+  "key": {
+    "#": {
+      "item": "ad_astra:ostrum_nugget"
+    }
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "item": "ad_astra:ostrum_ingot"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "tag": "forge:ostrum_plates"
+    },
+    "G": {
+      "item": "minecraft:orange_stained_glass_pane"
+    },
+    "N": {
+      "item": "minecraft:netherite_helmet"
+    }
+  },
+  "pattern": [
+    "#N#",
+    "#G#"
+  ],
+  "result": {
+    "item": "ad_astra:netherite_space_helmet"
+  }
+}

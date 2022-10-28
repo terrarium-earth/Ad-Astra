@@ -2,6 +2,7 @@ package earth.terrarium.ad_astra.blocks.machines.entity;
 
 import java.util.List;
 
+import earth.terrarium.ad_astra.container.DoubleFluidTank;
 import org.jetbrains.annotations.Nullable;
 
 import earth.terrarium.ad_astra.AdAstra;
@@ -86,16 +87,16 @@ public class FuelRefineryBlockEntity extends FluidMachineBlockEntity {
             ItemStack outputExtractSlot = this.getItems().get(3);
 
             if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxCount() && FluidHooks.isFluidContainingItem(insertSlot)) {
-                FluidUtils.insertFluidToContainerFromItem(insertSlot, 0, this.getFluidContainer(), f -> ModRecipes.FUEL_CONVERSION_RECIPE.get().getRecipes(this.world).stream().anyMatch(r -> r.matches(f)));
+                FluidUtils.insertFluidToContainerFromItem(this, 0, 1, 0, this.getFluidContainer(), f -> ModRecipes.FUEL_CONVERSION_RECIPE.get().getRecipes(this.world).stream().anyMatch(r -> r.matches(f)));
             }
 
             if (!outputInsertSlot.isEmpty() && outputExtractSlot.getCount() < outputExtractSlot.getMaxCount()) {
-                FluidUtils.extractFluidFromItem(outputExtractSlot, 0, this, f -> true);
+                FluidUtils.extractFluidFromItem(this, 2, 3, 0, this, f -> true);
             }
 
             if (this.hasEnergy()) {
                 List<FluidConversionRecipe> recipes = ModRecipes.FUEL_CONVERSION_RECIPE.get().getRecipes(this.world);
-                if (FluidUtils.convertFluid(this, recipes, 10)) {
+                if (FluidUtils.convertFluid((DoubleFluidTank) this.getFluidContainer(), recipes, 10)) {
                     this.drainEnergy();
                     this.setActive(true);
                 } else {

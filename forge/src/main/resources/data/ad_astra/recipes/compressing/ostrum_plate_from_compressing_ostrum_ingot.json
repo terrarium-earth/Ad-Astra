@@ -1,0 +1,11 @@
+{
+  "type": "ad_astra:compressing",
+  "input": {
+    "tag": "forge:ostrum_ingots"
+  },
+  "output": {
+    "id": "ad_astra:ostrum_plate",
+    "count": 1
+  },
+  "cookTime": 200
+}

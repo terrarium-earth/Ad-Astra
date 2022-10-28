@@ -3,6 +3,7 @@ package earth.terrarium.ad_astra.items.armour;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.registry.ModItems;
 
+import earth.terrarium.ad_astra.registry.ModTags;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.recipe.Ingredient;
@@ -36,7 +37,7 @@ public class JetSuitMaterial implements ArmorMaterial {
 
 	@Override
 	public Ingredient getRepairIngredient() {
-		return Ingredient.ofItems(ModItems.CALORITE_INGOT.get());
+		return Ingredient.ofTag(ModTags.CALORITE_INGOTS);
 	}
 
 	@Override

@@ -32,7 +32,7 @@ public class LargeVehicleScreen extends AbstractVehicleScreen<LargeVehicleScreen
 
 		super.drawBackground(matrices, delta, mouseX, mouseY);
 
-		GuiUtil.drawFluidTank(matrices, this.x + INPUT_TANK_LEFT, this.y + INPUT_TANK_TOP, this.handler.getFluids().get(0).getFluidAmount(), this.vehicle.getTankSize(), this.handler.getFluids().get(0));
+		GuiUtil.drawFluidTank(matrices, this.x + INPUT_TANK_LEFT, this.y + INPUT_TANK_TOP, this.vehicle.getTankSize(), this.handler.getFluids().get(0));
 	}
 
 	@Override

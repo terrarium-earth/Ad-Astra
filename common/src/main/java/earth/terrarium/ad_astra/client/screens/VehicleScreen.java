@@ -1,17 +1,15 @@
 package earth.terrarium.ad_astra.client.screens;
 
-import java.awt.Rectangle;
-
 import earth.terrarium.ad_astra.screen.handler.VehicleScreenHandler;
 import earth.terrarium.ad_astra.util.ModIdentifier;
-
-import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+
+import java.awt.*;
 
 @Environment(EnvType.CLIENT)
 public class VehicleScreen extends AbstractVehicleScreen<VehicleScreenHandler> {
@@ -33,7 +31,7 @@ public class VehicleScreen extends AbstractVehicleScreen<VehicleScreenHandler> {
 
 		super.drawBackground(matrices, delta, mouseX, mouseY);
 
-		GuiUtil.drawFluidTank(matrices, this.x + INPUT_TANK_LEFT, this.y + INPUT_TANK_TOP, this.handler.getFluids().get(0).getFluidAmount(), this.vehicle.getTankSize(), this.handler.getFluids().get(0));
+		GuiUtil.drawFluidTank(matrices, this.x + INPUT_TANK_LEFT, this.y + INPUT_TANK_TOP, this.vehicle.getTankSize(), this.handler.getFluids().get(0));
 	}
 
 	public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {

@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.items.armour;
 
-import earth.terrarium.ad_astra.registry.ModItems;
+import earth.terrarium.ad_astra.registry.ModTags;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.recipe.Ingredient;
@@ -34,7 +34,7 @@ public class SpaceSuitMaterial implements ArmorMaterial {
 
 	@Override
 	public Ingredient getRepairIngredient() {
-		return Ingredient.ofItems(ModItems.STEEL_INGOT.get());
+		return Ingredient.ofTag(ModTags.STEEL_INGOTS);
 	}
 
 	@Override

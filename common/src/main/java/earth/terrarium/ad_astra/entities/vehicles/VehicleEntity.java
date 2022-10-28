@@ -356,7 +356,7 @@ public abstract class VehicleEntity extends Entity implements Updatable {
 	public void tryInsertingIntoTank() {
 		if (this.getInventorySize() > 1) {
 			if (!this.world.isClient) {
-				FluidUtils.insertFluidToContainerFromItem(this.getInventory().getStack(0), 0, this.tank, f -> f.isIn(ModTags.FUELS));
+				FluidUtils.insertFluidToContainerFromItem(this.getInventory(), 0, 1, 0, this.tank, f -> f.isIn(ModTags.FUELS));
 			}
 		}
 	}
@@ -378,7 +378,9 @@ public abstract class VehicleEntity extends Entity implements Updatable {
 	}
 
 	public void consumeFuel() {
-		getTank().extractFluid(FluidHooks.newFluidHolder(getTankFluid(), this.getFuelPerTick(), null), false);
+		if (this.world.getTime() % 20 == 0) {
+			getTank().extractFluid(FluidHooks.newFluidHolder(getTankFluid(), this.getFuelPerTick(), null), false);
+		}
 	}
 
 	@Override
