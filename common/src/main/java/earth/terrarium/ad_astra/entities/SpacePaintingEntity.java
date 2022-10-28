@@ -1,14 +1,9 @@
 package earth.terrarium.ad_astra.entities;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.mixin.PaintingEntityInvoker;
 import earth.terrarium.ad_astra.registry.ModEntityTypes;
 import earth.terrarium.ad_astra.registry.ModItems;
-
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.decoration.painting.PaintingEntity;
@@ -25,88 +20,92 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 public class SpacePaintingEntity extends PaintingEntity {
 
-	public SpacePaintingEntity(EntityType<? extends PaintingEntity> entityType, World world) {
-		super(entityType, world);
-	}
+    public SpacePaintingEntity(EntityType<? extends PaintingEntity> entityType, World world) {
+        super(entityType, world);
+    }
 
-	protected SpacePaintingEntity(World world, BlockPos pos) {
-		this(ModEntityTypes.SPACE_PAINTING.get(), world);
-		this.attachmentPos = pos;
-	}
+    protected SpacePaintingEntity(World world, BlockPos pos) {
+        this(ModEntityTypes.SPACE_PAINTING.get(), world);
+        this.attachmentPos = pos;
+    }
 
-	public static Optional<SpacePaintingEntity> placeSpacePainting(World world, BlockPos pos, Direction facing) {
-		SpacePaintingEntity paintingEntity = new SpacePaintingEntity(world, pos);
+    public static Optional<SpacePaintingEntity> placeSpacePainting(World world, BlockPos pos, Direction facing) {
+        SpacePaintingEntity paintingEntity = new SpacePaintingEntity(world, pos);
 
-		List<Holder<PaintingVariant>> spacePaintings = getSpacePaintings();
+        List<Holder<PaintingVariant>> spacePaintings = getSpacePaintings();
 
-		if (spacePaintings.isEmpty()) {
-			return Optional.empty();
-		}
+        if (spacePaintings.isEmpty()) {
+            return Optional.empty();
+        }
 
-		paintingEntity.setFacing(facing);
-		spacePaintings.removeIf(variant -> {
-			((PaintingEntityInvoker) paintingEntity).adastra_invokeSetVariant(variant);
-			return !paintingEntity.canStayAttached();
-		});
+        paintingEntity.setFacing(facing);
+        spacePaintings.removeIf(variant -> {
+            ((PaintingEntityInvoker) paintingEntity).adastra_invokeSetVariant(variant);
+            return !paintingEntity.canStayAttached();
+        });
 
-		if (spacePaintings.isEmpty()) {
-			return Optional.empty();
-		}
+        if (spacePaintings.isEmpty()) {
+            return Optional.empty();
+        }
 
-		int i = spacePaintings.stream().mapToInt(SpacePaintingEntity::getSize).max().orElse(0);
-		spacePaintings.removeIf(variant -> SpacePaintingEntity.getSize(variant) < i);
-		Optional<Holder<PaintingVariant>> optional = Util.getRandomOrEmpty(spacePaintings, paintingEntity.random);
+        int i = spacePaintings.stream().mapToInt(SpacePaintingEntity::getSize).max().orElse(0);
+        spacePaintings.removeIf(variant -> SpacePaintingEntity.getSize(variant) < i);
+        Optional<Holder<PaintingVariant>> optional = Util.getRandomOrEmpty(spacePaintings, paintingEntity.random);
 
-		if (optional.isEmpty()) {
-			return Optional.empty();
-		}
+        if (optional.isEmpty()) {
+            return Optional.empty();
+        }
 
-		((PaintingEntityInvoker) paintingEntity).adastra_invokeSetVariant(optional.get());
-		paintingEntity.setFacing(facing);
-		return Optional.of(paintingEntity);
-	}
+        ((PaintingEntityInvoker) paintingEntity).adastra_invokeSetVariant(optional.get());
+        paintingEntity.setFacing(facing);
+        return Optional.of(paintingEntity);
+    }
 
-	protected static int getSize(Holder<PaintingVariant> variant) {
-		return variant.value().getWidth() * variant.value().getHeight();
-	}
+    protected static int getSize(Holder<PaintingVariant> variant) {
+        return variant.value().getWidth() * variant.value().getHeight();
+    }
 
-	public static List<Holder<PaintingVariant>> getSpacePaintings() {
-		List<Holder<PaintingVariant>> paintings = new ArrayList<>();
-		Registry.PAINTING_VARIANT.forEach(painting -> {
-			if (Registry.PAINTING_VARIANT.getId(painting).getNamespace().equals(AdAstra.MOD_ID)) {
-				paintings.add(Holder.createDirect(painting));
-			}
-		});
+    public static List<Holder<PaintingVariant>> getSpacePaintings() {
+        List<Holder<PaintingVariant>> paintings = new ArrayList<>();
+        Registry.PAINTING_VARIANT.forEach(painting -> {
+            if (Registry.PAINTING_VARIANT.getId(painting).getNamespace().equals(AdAstra.MOD_ID)) {
+                paintings.add(Holder.createDirect(painting));
+            }
+        });
 
-		return paintings;
-	}
+        return paintings;
+    }
 
-	@Override
-	public void readCustomDataFromNbt(NbtCompound nbt) {
+    @Override
+    public void readCustomDataFromNbt(NbtCompound nbt) {
 
-		super.readCustomDataFromNbt(nbt);
-		RegistryKey<PaintingVariant> registryKey = RegistryKey.of(Registry.PAINTING_VARIANT_KEY, new Identifier(nbt.getString("variant")));
-		((PaintingEntityInvoker) this).adastra_invokeSetVariant(Registry.PAINTING_VARIANT.getHolder(registryKey).get());
-		this.facing = Direction.fromHorizontal(nbt.getByte("facing"));
-		this.setFacing(this.facing);
-	}
+        super.readCustomDataFromNbt(nbt);
+        RegistryKey<PaintingVariant> registryKey = RegistryKey.of(Registry.PAINTING_VARIANT_KEY, new Identifier(nbt.getString("variant")));
+        ((PaintingEntityInvoker) this).adastra_invokeSetVariant(Registry.PAINTING_VARIANT.getHolder(registryKey).get());
+        this.facing = Direction.fromHorizontal(nbt.getByte("facing"));
+        this.setFacing(this.facing);
+    }
 
-	@Override
-	public void writeCustomDataToNbt(NbtCompound nbt) {
-		super.writeCustomDataToNbt(nbt);
-		nbt.putString("variant", Registry.PAINTING_VARIANT.getId(this.getVariant().value()).toString());
-		nbt.putByte("facing", (byte) this.facing.getHorizontal());
-	}
+    @Override
+    public void writeCustomDataToNbt(NbtCompound nbt) {
+        super.writeCustomDataToNbt(nbt);
+        nbt.putString("variant", Registry.PAINTING_VARIANT.getId(this.getVariant().value()).toString());
+        nbt.putByte("facing", (byte) this.facing.getHorizontal());
+    }
 
-	@Override
-	public ItemEntity dropItem(ItemConvertible item) {
-		return super.dropItem(ModItems.SPACE_PAINTING.get());
-	}
+    @Override
+    public ItemEntity dropItem(ItemConvertible item) {
+        return super.dropItem(ModItems.SPACE_PAINTING.get());
+    }
 
-	@Override
-	public ItemStack getPickBlockStack() {
-		return new ItemStack(ModItems.SPACE_PAINTING.get());
-	}
+    @Override
+    public ItemStack getPickBlockStack() {
+        return new ItemStack(ModItems.SPACE_PAINTING.get());
+    }
 }

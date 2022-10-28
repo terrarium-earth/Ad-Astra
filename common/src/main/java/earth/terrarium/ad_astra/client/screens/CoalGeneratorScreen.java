@@ -1,11 +1,8 @@
 package earth.terrarium.ad_astra.client.screens;
 
-import java.awt.Rectangle;
-
 import earth.terrarium.ad_astra.blocks.machines.entity.CoalGeneratorBlockEntity;
 import earth.terrarium.ad_astra.screen.handler.CoalGeneratorScreenHandler;
 import earth.terrarium.ad_astra.util.ModIdentifier;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.util.math.MatrixStack;
@@ -13,55 +10,55 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
+import java.awt.*;
+
 @Environment(EnvType.CLIENT)
 public class CoalGeneratorScreen extends AbstractMachineScreen<CoalGeneratorScreenHandler> {
 
-	private static final Identifier TEXTURE = new ModIdentifier("textures/gui/screens/coal_generator.png");
+    public static final int FIRE_LEFT = 81;
+    public static final int FIRE_TOP = 57;
+    public static final int ENERGY_LEFT = 146;
+    public static final int ENERGY_TOP = 28;
+    private static final Identifier TEXTURE = new ModIdentifier("textures/gui/screens/coal_generator.png");
 
-	public static final int FIRE_LEFT = 81;
-	public static final int FIRE_TOP = 57;
+    public CoalGeneratorScreen(CoalGeneratorScreenHandler handler, PlayerInventory inventory, Text title) {
+        super(handler, inventory, title, TEXTURE);
+        this.backgroundWidth = 176;
+        this.backgroundHeight = 177;
+        this.playerInventoryTitleY = this.backgroundHeight - 93;
+    }
 
-	public static final int ENERGY_LEFT = 146;
-	public static final int ENERGY_TOP = 28;
+    @Override
+    protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
+        super.drawBackground(matrices, delta, mouseX, mouseY);
 
-	public CoalGeneratorScreen(CoalGeneratorScreenHandler handler, PlayerInventory inventory, Text title) {
-		super(handler, inventory, title, TEXTURE);
-		this.backgroundWidth = 176;
-		this.backgroundHeight = 177;
-		this.playerInventoryTitleY = this.backgroundHeight - 93;
-	}
+        CoalGeneratorBlockEntity entity = (CoalGeneratorBlockEntity) this.entity;
 
-	@Override
-	protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
-		super.drawBackground(matrices, delta, mouseX, mouseY);
+        GuiUtil.drawFire(matrices, this.x + FIRE_LEFT, this.y + FIRE_TOP, entity.getCookTime(), entity.getCookTimeTotal());
+        GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.handler.getEnergyAmount(), this.entity.getCapacity());
+    }
 
-		CoalGeneratorBlockEntity entity = (CoalGeneratorBlockEntity) this.entity;
+    @Override
+    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+        super.render(matrices, mouseX, mouseY, delta);
 
-		GuiUtil.drawFire(matrices, this.x + FIRE_LEFT, this.y + FIRE_TOP, entity.getCookTime(), entity.getCookTimeTotal());
-		GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.handler.getEnergyAmount(), this.entity.getCapacity());
-	}
+        CoalGeneratorBlockEntity entity = (CoalGeneratorBlockEntity) this.entity;
 
-	@Override
-	public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-		super.render(matrices, mouseX, mouseY, delta);
+        if (GuiUtil.isHovering(this.getEnergyBounds(), mouseX, mouseY)) {
+            GuiUtil.drawEnergyTooltip(this, matrices, this.handler.getEnergyAmount(), entity.getCapacity(), mouseX, mouseY);
+        }
 
-		CoalGeneratorBlockEntity entity = (CoalGeneratorBlockEntity) this.entity;
+        // Burn time tooltip.
+        if (GuiUtil.isHovering(this.getFireBounds(), mouseX, mouseY)) {
+            this.renderTooltip(matrices, Text.translatable("gauge.ad_astra.burn_time", entity.getCookTime(), entity.getCookTimeTotal()), mouseX, mouseY);
+        }
+    }
 
-		if (GuiUtil.isHovering(this.getEnergyBounds(), mouseX, mouseY)) {
-			GuiUtil.drawEnergyTooltip(this, matrices, this.handler.getEnergyAmount(), entity.getCapacity(), mouseX, mouseY);
-		}
+    public Rectangle getEnergyBounds() {
+        return GuiUtil.getEnergyBounds(this.x + ENERGY_LEFT, this.y + ENERGY_TOP);
+    }
 
-		// Burn time tooltip.
-		if (GuiUtil.isHovering(this.getFireBounds(), mouseX, mouseY)) {
-			this.renderTooltip(matrices, Text.translatable("gauge.ad_astra.burn_time", entity.getCookTime(), entity.getCookTimeTotal()), mouseX, mouseY);
-		}
-	}
-
-	public Rectangle getEnergyBounds() {
-		return GuiUtil.getEnergyBounds(this.x + ENERGY_LEFT, this.y + ENERGY_TOP);
-	}
-
-	public Rectangle getFireBounds() {
-		return GuiUtil.getFireBounds(this.x + FIRE_LEFT, this.y + FIRE_TOP);
-	}
+    public Rectangle getFireBounds() {
+        return GuiUtil.getFireBounds(this.x + FIRE_LEFT, this.y + FIRE_TOP);
+    }
 }

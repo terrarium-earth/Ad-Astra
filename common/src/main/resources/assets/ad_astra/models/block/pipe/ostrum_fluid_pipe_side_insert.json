@@ -1,6 +1,6 @@
 {
-    "parent": "ad_astra:template/pipe/thick_pipe_side",
-    "textures": {
-        "pipe": "ad_astra:block/pipe/ostrum_fluid_pipe_insert"
-    }
+  "parent": "ad_astra:template/pipe/thick_pipe_side",
+  "textures": {
+    "pipe": "ad_astra:block/pipe/ostrum_fluid_pipe_insert"
+  }
 }

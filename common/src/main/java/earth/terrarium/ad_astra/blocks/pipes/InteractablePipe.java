@@ -1,14 +1,14 @@
 package earth.terrarium.ad_astra.blocks.pipes;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public interface InteractablePipe<T> {
 
@@ -99,7 +99,7 @@ public interface InteractablePipe<T> {
         }
     }
 
-    record Node<T> (T storage, Direction direction, BlockPos pos) {
+    record Node<T>(T storage, Direction direction, BlockPos pos) {
 
     }
 }

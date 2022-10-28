@@ -6,7 +6,6 @@ import earth.terrarium.ad_astra.client.renderer.block.SlidingDoorBlockEntityRend
 import earth.terrarium.ad_astra.client.renderer.block.flag.FlagBlockEntityRenderer;
 import earth.terrarium.ad_astra.client.renderer.block.globe.GlobeBlockEntityRenderer;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
-import dev.architectury.registry.client.rendering.BlockEntityRendererRegistry;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;

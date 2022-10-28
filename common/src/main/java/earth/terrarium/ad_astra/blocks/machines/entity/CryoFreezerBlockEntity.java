@@ -24,12 +24,11 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
 
     protected short cookTime;
     protected short cookTimeTotal;
-    private SimpleUpdatingFluidContainer tank;
-
     @Nullable
     protected Item inputItem;
     @Nullable
     protected Fluid outputFluid;
+    private SimpleUpdatingFluidContainer tank;
 
     public CryoFreezerBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.CRYO_FREEZER.get(), blockPos, blockState);

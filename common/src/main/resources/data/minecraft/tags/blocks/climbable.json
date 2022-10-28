@@ -1,7 +1,7 @@
 {
-    "replace": false,
-    "values": [
-        "ad_astra:aeronos_ladder",
-        "ad_astra:strophar_ladder"
-    ]
+  "replace": false,
+  "values": [
+    "ad_astra:aeronos_ladder",
+    "ad_astra:strophar_ladder"
+  ]
 }

@@ -9,77 +9,77 @@ import net.minecraft.util.collection.DefaultedList;
 // From tutorial.
 public interface ModInventory extends Inventory {
 
-	static ModInventory of(DefaultedList<ItemStack> items) {
-		return () -> items;
-	}
+    static ModInventory of(DefaultedList<ItemStack> items) {
+        return () -> items;
+    }
 
-	DefaultedList<ItemStack> getItems();
+    static ModInventory create(int slots) {
+        return new ModInventory() {
+            private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(slots, ItemStack.EMPTY);
 
-	@Override
-	default int size() {
-		return getItems().size();
-	}
+            @Override
+            public DefaultedList<ItemStack> getItems() {
+                return this.inventory;
+            }
+        };
+    }
 
-	@Override
-	default boolean isEmpty() {
-		for (int i = 0; i < size(); i++) {
-			ItemStack stack = getStack(i);
-			if (!stack.isEmpty()) {
-				return false;
-			}
-		}
-		return true;
-	}
+    DefaultedList<ItemStack> getItems();
 
-	@Override
-	default ItemStack getStack(int slot) {
-		return getItems().get(slot);
-	}
+    @Override
+    default int size() {
+        return getItems().size();
+    }
 
-	@Override
-	default ItemStack removeStack(int slot, int count) {
-		ItemStack result = Inventories.splitStack(getItems(), slot, count);
-		if (!result.isEmpty()) {
-			markDirty();
-		}
-		return result;
-	}
+    @Override
+    default boolean isEmpty() {
+        for (int i = 0; i < size(); i++) {
+            ItemStack stack = getStack(i);
+            if (!stack.isEmpty()) {
+                return false;
+            }
+        }
+        return true;
+    }
 
-	@Override
-	default ItemStack removeStack(int slot) {
-		return Inventories.removeStack(getItems(), slot);
-	}
+    @Override
+    default ItemStack getStack(int slot) {
+        return getItems().get(slot);
+    }
 
-	@Override
-	default void setStack(int slot, ItemStack stack) {
-		getItems().set(slot, stack);
-		if (stack.getCount() > getMaxCountPerStack()) {
-			stack.setCount(getMaxCountPerStack());
-		}
-	}
+    @Override
+    default ItemStack removeStack(int slot, int count) {
+        ItemStack result = Inventories.splitStack(getItems(), slot, count);
+        if (!result.isEmpty()) {
+            markDirty();
+        }
+        return result;
+    }
 
-	@Override
-	default void clear() {
-		getItems().clear();
-	}
+    @Override
+    default ItemStack removeStack(int slot) {
+        return Inventories.removeStack(getItems(), slot);
+    }
 
-	@Override
-	default void markDirty() {
-	}
+    @Override
+    default void setStack(int slot, ItemStack stack) {
+        getItems().set(slot, stack);
+        if (stack.getCount() > getMaxCountPerStack()) {
+            stack.setCount(getMaxCountPerStack());
+        }
+    }
 
-	@Override
-	default boolean canPlayerUse(PlayerEntity player) {
-		return true;
-	}
+    @Override
+    default void clear() {
+        getItems().clear();
+    }
 
-	static ModInventory create(int slots) {
-		return new ModInventory() {
-			private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(slots, ItemStack.EMPTY);
+    @Override
+    default void markDirty() {
+    }
 
-			@Override
-			public DefaultedList<ItemStack> getItems() {
-				return this.inventory;
-			}
-		};
-	}
+    @Override
+    default boolean canPlayerUse(PlayerEntity player) {
+        return true;
+    }
 }

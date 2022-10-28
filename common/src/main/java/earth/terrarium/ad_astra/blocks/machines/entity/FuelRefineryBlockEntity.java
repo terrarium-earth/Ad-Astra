@@ -1,17 +1,12 @@
 package earth.terrarium.ad_astra.blocks.machines.entity;
 
-import java.util.List;
-
-import earth.terrarium.ad_astra.container.DoubleFluidTank;
-import org.jetbrains.annotations.Nullable;
-
 import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.container.DoubleFluidTank;
 import earth.terrarium.ad_astra.recipes.FluidConversionRecipe;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
 import earth.terrarium.ad_astra.registry.ModRecipes;
 import earth.terrarium.ad_astra.screen.handler.ConversionScreenHandler;
 import earth.terrarium.ad_astra.util.FluidUtils;
-
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -20,6 +15,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class FuelRefineryBlockEntity extends FluidMachineBlockEntity {
 

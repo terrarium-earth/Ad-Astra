@@ -43,347 +43,343 @@ import org.jetbrains.annotations.Nullable;
 
 public abstract class VehicleEntity extends Entity implements Updatable {
 
-	protected double clientX;
-	protected double clientY;
-	protected double clientZ;
-	public double clientYaw;
-	public double clientPitch;
-	private int clientInterpolationSteps;
+    protected static final TrackedData<Float> SPEED = DataTracker.registerData(VehicleEntity.class, TrackedDataHandlerRegistry.FLOAT);
+    private final SimpleUpdatingFluidContainer tank = new SimpleUpdatingFluidContainer(this, getTankSize(), 1, (amount, fluid) -> true);
+    private final CustomInventory inventory = new CustomInventory(this.getInventorySize());
+    public double clientYaw;
+    public double clientPitch;
+    public float previousYaw;
+    protected double clientX;
+    protected double clientY;
+    protected double clientZ;
+    protected double clientXVelocity;
+    protected double clientYVelocity;
+    protected double clientZVelocity;
+    private int clientInterpolationSteps;
 
-	protected double clientXVelocity;
-	protected double clientYVelocity;
-	protected double clientZVelocity;
+    public VehicleEntity(EntityType<?> type, World world) {
+        super(type, world);
+    }
 
-	public float previousYaw;
+    @Override
+    protected void initDataTracker() {
+        this.dataTracker.startTracking(SPEED, 0.0f);
+    }
 
-	private final SimpleUpdatingFluidContainer tank = new SimpleUpdatingFluidContainer(this, getTankSize(), 1, (amount, fluid) -> true);
-	private final CustomInventory inventory = new CustomInventory(this.getInventorySize());
+    @Override
+    protected void readCustomDataFromNbt(NbtCompound nbt) {
+        this.inventory.readNbtList(nbt.getList("inventory", NbtElement.COMPOUND_TYPE));
+        getTankHolder().deserialize(nbt.getCompound("inputFluid"));
+    }
 
-	protected static final TrackedData<Float> SPEED = DataTracker.registerData(VehicleEntity.class, TrackedDataHandlerRegistry.FLOAT);
+    @Override
+    protected void writeCustomDataToNbt(NbtCompound nbt) {
+        nbt.put("inventory", this.inventory.toNbtList());
+        nbt.put("inputFluid", getTankHolder().serialize());
+    }
 
-	public VehicleEntity(EntityType<?> type, World world) {
-		super(type, world);
-	}
+    @Override
+    public void updateTrackedPositionAndAngles(double x, double y, double z, float yaw, float pitch, int interpolationSteps, boolean interpolate) {
+        this.clientX = x;
+        this.clientY = y;
+        this.clientZ = z;
+        this.clientYaw = yaw;
+        this.clientPitch = pitch;
+        this.clientInterpolationSteps = 10;
+        this.setVelocity(this.clientXVelocity, this.clientYVelocity, this.clientZVelocity);
+    }
 
-	@Override
-	protected void initDataTracker() {
-		this.dataTracker.startTracking(SPEED, 0.0f);
-	}
+    private void updatePositionAndRotation() {
+        if (this.isLogicalSideForUpdatingMovement()) {
+            this.clientInterpolationSteps = 0;
+            this.syncPacketPositionCodec(this.getX(), this.getY(), this.getZ());
+        }
+        if (this.clientInterpolationSteps <= 0) {
+            return;
+        }
+        double d = this.getX() + (this.clientX - this.getX()) / (double) this.clientInterpolationSteps;
+        double e = this.getY() + (this.clientY - this.getY()) / (double) this.clientInterpolationSteps;
+        double f = this.getZ() + (this.clientZ - this.getZ()) / (double) this.clientInterpolationSteps;
+        double g = MathHelper.wrapDegrees(this.clientYaw - (double) this.getYaw());
+        this.setYaw(this.getYaw() + (float) g / (float) this.clientInterpolationSteps);
+        this.setPitch(this.getPitch() + (float) (this.clientPitch - (double) this.getPitch()) / (float) this.clientInterpolationSteps);
+        --this.clientInterpolationSteps;
+        this.setPosition(d, e, f);
+        this.setRotation(this.getYaw(), this.getPitch());
+    }
 
-	@Override
-	protected void readCustomDataFromNbt(NbtCompound nbt) {
-		this.inventory.readNbtList(nbt.getList("inventory", NbtElement.COMPOUND_TYPE));
-		getTankHolder().deserialize(nbt.getCompound("inputFluid"));
-	}
+    @Override
+    public void setVelocityClient(double x, double y, double z) {
+        this.clientXVelocity = x;
+        this.clientYVelocity = y;
+        this.clientZVelocity = z;
+        this.setVelocity(this.clientXVelocity, this.clientYVelocity, this.clientZVelocity);
+    }
 
-	@Override
-	protected void writeCustomDataToNbt(NbtCompound nbt) {
-		nbt.put("inventory", this.inventory.toNbtList());
-		nbt.put("inputFluid", getTankHolder().serialize());
-	}
+    @Override
+    public void tick() {
+        this.previousYaw = this.getYaw();
 
-	@Override
-	public void updateTrackedPositionAndAngles(double x, double y, double z, float yaw, float pitch, int interpolationSteps, boolean interpolate) {
-		this.clientX = x;
-		this.clientY = y;
-		this.clientZ = z;
-		this.clientYaw = yaw;
-		this.clientPitch = pitch;
-		this.clientInterpolationSteps = 10;
-		this.setVelocity(this.clientXVelocity, this.clientYVelocity, this.clientZVelocity);
-	}
+        super.tick();
+        this.updatePositionAndRotation();
+        this.doMovement();
+        this.slowDown();
+        this.doGravity();
+        this.move(MovementType.SELF, this.getVelocity());
+        this.checkBlockCollision();
 
-	private void updatePositionAndRotation() {
-		if (this.isLogicalSideForUpdatingMovement()) {
-			this.clientInterpolationSteps = 0;
-			this.syncPacketPositionCodec(this.getX(), this.getY(), this.getZ());
-		}
-		if (this.clientInterpolationSteps <= 0) {
-			return;
-		}
-		double d = this.getX() + (this.clientX - this.getX()) / (double) this.clientInterpolationSteps;
-		double e = this.getY() + (this.clientY - this.getY()) / (double) this.clientInterpolationSteps;
-		double f = this.getZ() + (this.clientZ - this.getZ()) / (double) this.clientInterpolationSteps;
-		double g = MathHelper.wrapDegrees(this.clientYaw - (double) this.getYaw());
-		this.setYaw(this.getYaw() + (float) g / (float) this.clientInterpolationSteps);
-		this.setPitch(this.getPitch() + (float) (this.clientPitch - (double) this.getPitch()) / (float) this.clientInterpolationSteps);
-		--this.clientInterpolationSteps;
-		this.setPosition(d, e, f);
-		this.setRotation(this.getYaw(), this.getPitch());
-	}
+        this.tryInsertingIntoTank();
+    }
 
-	@Override
-	public void setVelocityClient(double x, double y, double z) {
-		this.clientXVelocity = x;
-		this.clientYVelocity = y;
-		this.clientZVelocity = z;
-		this.setVelocity(this.clientXVelocity, this.clientYVelocity, this.clientZVelocity);
-	}
+    // Sets the velocity based on the current speed and the current direction
+    public void doMovement() {
+        this.setPitch(0);
+        Vec3d movement = this.getRotationVector(this.getPitch(), this.getYaw());
 
-	@Override
-	public void tick() {
-		this.previousYaw = this.getYaw();
+        // Save the current y velocity so we can use it later
+        double yVelocity = this.getVelocity().getY();
 
-		super.tick();
-		this.updatePositionAndRotation();
-		this.doMovement();
-		this.slowDown();
-		this.doGravity();
-		this.move(MovementType.SELF, this.getVelocity());
-		this.checkBlockCollision();
+        this.setVelocity(this.getVelocity().add(movement.getX(), 0.0, movement.getZ()).multiply(this.getSpeed()));
 
-		this.tryInsertingIntoTank();
-	}
+        // Set the y velocity back to the original value, as it was modified by the movement
+        this.setVelocity(new Vec3d(this.getVelocity().getX(), yVelocity, this.getVelocity().getZ()));
+    }
 
-	// Sets the velocity based on the current speed and the current direction
-	public void doMovement() {
-		this.setPitch(0);
-		Vec3d movement = this.getRotationVector(this.getPitch(), this.getYaw());
+    // Slow down the vehicle until a full stop is reached
+    public void slowDown() {
+        this.setSpeed(this.getSpeed() / 1.05f);
+        if (this.getSpeed() < 0.001 && this.getSpeed() > -0.001) {
+            this.setSpeed(0.0f);
+        }
+        this.setSpeed(MathHelper.clamp(this.getSpeed(), this.getMinSpeed(), this.getMaxSpeed()));
+    }
 
-		// Save the current y velocity so we can use it later
-		double yVelocity = this.getVelocity().getY();
+    public float getMinSpeed() {
+        return -0.2f;
+    }
 
-		this.setVelocity(this.getVelocity().add(movement.getX(), 0.0, movement.getZ()).multiply(this.getSpeed()));
+    public float getMaxSpeed() {
+        return 0.4f;
+    }
 
-		// Set the y velocity back to the original value, as it was modified by the movement
-		this.setVelocity(new Vec3d(this.getVelocity().getX(), yVelocity, this.getVelocity().getZ()));
-	}
+    // Apply gravity to the vehicle.
+    @SuppressWarnings("deprecation")
+    public void doGravity() {
 
-	// Slow down the vehicle until a full stop is reached
-	public void slowDown() {
-		this.setSpeed(this.getSpeed() / 1.05f);
-		if (this.getSpeed() < 0.001 && this.getSpeed() > -0.001) {
-			this.setSpeed(0.0f);
-		}
-		this.setSpeed(MathHelper.clamp(this.getSpeed(), this.getMinSpeed(), this.getMaxSpeed()));
-	}
+        if (!world.isChunkLoaded(this.getBlockPos())) {
+            return;
+        }
 
-	public float getMinSpeed() {
-		return -0.2f;
-	}
+        if (!this.hasNoGravity()) {
+            // Slow down the gravity while in water
+            if (this.isTouchingWater()) {
+                this.setVelocity(this.getVelocity().add(0, -0.0001, 0));
+            } else {
+                this.setVelocity(this.getVelocity().add(0, -0.03, 0));
+            }
+            if (this.getVelocity().getY() < AdAstra.CONFIG.vehicles.gravity) {
+                this.setVelocity(new Vec3d(this.getVelocity().getX(), AdAstra.CONFIG.vehicles.gravity, this.getVelocity().getZ()));
+            }
+        }
+    }
 
-	public float getMaxSpeed() {
-		return 0.4f;
-	}
+    public float getSpeed() {
+        return this.dataTracker.get(SPEED);
+    }
 
-	// Apply gravity to the vehicle.
-	@SuppressWarnings("deprecation")
-	public void doGravity() {
+    public void setSpeed(float value) {
+        this.dataTracker.set(SPEED, value);
+    }
 
-		if (!world.isChunkLoaded(this.getBlockPos())) {
-			return;
-		}
+    @Override
+    public ActionResult interact(PlayerEntity player, Hand hand) {
+        if (player.shouldCancelInteraction()) {
+            return ActionResult.PASS;
+        }
+        if (!this.world.isClient) {
+            if (this.getPassengerList().size() > this.getMaxPassengers()) {
+                return ActionResult.PASS;
+            }
+            player.setYaw(this.getYaw());
+            player.setPitch(this.getPitch());
+            return player.startRiding(this) ? ActionResult.CONSUME : ActionResult.PASS;
+        }
+        return ActionResult.SUCCESS;
+    }
 
-		if (!this.hasNoGravity()) {
-			// Slow down the gravity while in water
-			if (this.isTouchingWater()) {
-				this.setVelocity(this.getVelocity().add(0, -0.0001, 0));
-			} else {
-				this.setVelocity(this.getVelocity().add(0, -0.03, 0));
-			}
-			if (this.getVelocity().getY() < AdAstra.CONFIG.vehicles.gravity) {
-				this.setVelocity(new Vec3d(this.getVelocity().getX(), AdAstra.CONFIG.vehicles.gravity, this.getVelocity().getZ()));
-			}
-		}
-	}
+    public void openInventory(PlayerEntity player) {
+        openInventory(player, new VehicleScreenHandlerFactory(this));
+    }
 
-	public float getSpeed() {
-		return this.dataTracker.get(SPEED);
-	}
+    public void openInventory(PlayerEntity player, ExtraDataMenuProvider handler) {
+        if (!player.world.isClient) {
+            if (player.isSneaking()) {
+                MenuHooks.openMenu((ServerPlayerEntity) player, handler);
+            }
+        }
+    }
 
-	public void setSpeed(float value) {
-		this.dataTracker.set(SPEED, value);
-	}
+    @Override
+    public boolean damage(DamageSource source, float amount) {
+        if (amount > 0) {
+            if (source.getAttacker() instanceof PlayerEntity player) {
+                if (!(player.getVehicle() instanceof VehicleEntity)) {
+                    this.drop();
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public ActionResult interact(PlayerEntity player, Hand hand) {
-		if (player.shouldCancelInteraction()) {
-			return ActionResult.PASS;
-		}
-		if (!this.world.isClient) {
-			if (this.getPassengerList().size() > this.getMaxPassengers()) {
-				return ActionResult.PASS;
-			}
-			player.setYaw(this.getYaw());
-			player.setPitch(this.getPitch());
-			return player.startRiding(this) ? ActionResult.CONSUME : ActionResult.PASS;
-		}
-		return ActionResult.SUCCESS;
-	}
+    public void drop() {
+        if (getDropStack() != null && this.world.getGameRules().getBoolean(GameRules.DO_TILE_DROPS)) {
+            BlockPos pos = this.getBlockPos();
+            ItemStack dropStack = this.getDropStack();
 
-	public void openInventory(PlayerEntity player) {
-		openInventory(player, new VehicleScreenHandlerFactory(this));
-	}
+            // Set the fluid and fluid type in the dropped item.
+            ((VehicleItem) dropStack.getItem()).setFluid(dropStack, getTankFluid());
+            NbtCompound nbt = dropStack.getOrCreateNbt();
+            // Set the inventory in the dropped item.
+            nbt.put("inventory", this.inventory.toNbtList());
 
-	public void openInventory(PlayerEntity player, ExtraDataMenuProvider handler) {
-		if (!player.world.isClient) {
-			if (player.isSneaking()) {
-				MenuHooks.openMenu((ServerPlayerEntity) player, handler);
-			}
-		}
-	}
+            world.playSound(null, pos, SoundEvents.BLOCK_NETHERITE_BLOCK_BREAK, SoundCategory.BLOCKS, 1, 1);
+            this.world.spawnEntity(new ItemEntity(this.world, pos.getX(), pos.getY() + 0.5f, pos.getZ(), dropStack));
+        }
 
-	@Override
-	public boolean damage(DamageSource source, float amount) {
-		if (amount > 0) {
-			if (source.getAttacker() instanceof PlayerEntity player) {
-				if (!(player.getVehicle() instanceof VehicleEntity)) {
-					this.drop();
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+        if (!this.world.isClient) {
+            this.discard();
+        }
+    }
 
-	public void drop() {
-		if (getDropStack() != null && this.world.getGameRules().getBoolean(GameRules.DO_TILE_DROPS)) {
-			BlockPos pos = this.getBlockPos();
-			ItemStack dropStack = this.getDropStack();
+    public void explode(float powerMultiplier) {
+        if (!this.world.isClient) {
+            world.createExplosion(this, this.getX(), this.getY() + 0.5, this.getZ(), 7.0f * powerMultiplier, OxygenUtils.worldHasOxygen(this.world), Explosion.DestructionType.DESTROY);
+        }
+        this.discard();
+    }
 
-			// Set the fluid and fluid type in the dropped item.
-			((VehicleItem) dropStack.getItem()).setFluid(dropStack, getTankFluid());
-			NbtCompound nbt = dropStack.getOrCreateNbt();
-			// Set the inventory in the dropped item.
-			nbt.put("inventory", this.inventory.toNbtList());
+    @Override
+    public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
+        if (this.getVelocity().getY() < AdAstra.CONFIG.vehicles.fallingExplosionThreshold) {
+            if (this.isOnGround()) {
+                this.explode(AdAstra.CONFIG.vehicles.fallingExplosionMultiplier);
+                return true;
+            }
+        }
+        return false;
+    }
 
-			world.playSound(null, pos, SoundEvents.BLOCK_NETHERITE_BLOCK_BREAK, SoundCategory.BLOCKS, 1, 1);
-			this.world.spawnEntity(new ItemEntity(this.world, pos.getX(), pos.getY() + 0.5f, pos.getZ(), dropStack));
-		}
+    public ItemStack getDropStack() {
+        return null;
+    }
 
-		if (!this.world.isClient) {
-			this.discard();
-		}
-	}
+    @Override
+    @Nullable
+    public Entity getPrimaryPassenger() {
+        return this.getFirstPassenger();
+    }
 
-	public void explode(float powerMultiplier) {
-		if (!this.world.isClient) {
-			world.createExplosion(this, this.getX(), this.getY() + 0.5, this.getZ(), 7.0f * powerMultiplier, OxygenUtils.worldHasOxygen(this.world), Explosion.DestructionType.DESTROY);
-		}
-		this.discard();
-	}
+    @Override
+    protected boolean canAddPassenger(Entity passenger) {
+        return this.getPassengerList().size() < this.getMaxPassengers();
+    }
 
-	@Override
-	public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
-		if (this.getVelocity().getY() < AdAstra.CONFIG.vehicles.fallingExplosionThreshold) {
-			if (this.isOnGround()) {
-				this.explode(AdAstra.CONFIG.vehicles.fallingExplosionMultiplier);
-				return true;
-			}
-		}
-		return false;
-	}
+    public int getMaxPassengers() {
+        return 1;
+    }
 
-	public ItemStack getDropStack() {
-		return null;
-	}
+    @Override
+    public double getMountedHeightOffset() {
+        return 0.0;
+    }
 
-	@Override
-	@Nullable
-	public Entity getPrimaryPassenger() {
-		return this.getFirstPassenger();
-	}
+    public boolean shouldSit() {
+        return true;
+    }
 
-	@Override
-	protected boolean canAddPassenger(Entity passenger) {
-		return this.getPassengerList().size() < this.getMaxPassengers();
-	}
+    public boolean shouldRenderPlayer() {
+        return true;
+    }
 
-	public int getMaxPassengers() {
-		return 1;
-	}
+    public boolean doHighFov() {
+        return false;
+    }
 
-	@Override
-	public double getMountedHeightOffset() {
-		return 0.0;
-	}
+    // Is the rider exposed to the outside air? If so, the rider becomes affected by acid rain.
+    public boolean fullyConcealsRider() {
+        return false;
+    }
 
-	public boolean shouldSit() {
-		return true;
-	}
+    public boolean canRiderTakeFallDamage() {
+        return true;
+    }
 
-	public boolean shouldRenderPlayer() {
-		return true;
-	}
+    public boolean renderPlanetBar() {
+        return false;
+    }
 
-	public boolean doHighFov() {
-		return false;
-	}
+    @Override
+    public boolean collides() {
+        return true;
+    }
 
-	// Is the rider exposed to the outside air? If so, the rider becomes affected by acid rain.
-	public boolean fullyConcealsRider() {
-		return false;
-	}
+    @Override
+    public boolean isCollidable() {
+        return true;
+    }
 
-	public boolean canRiderTakeFallDamage() {
-		return true;
-	}
+    public long getTankSize() {
+        return 0;
+    }
 
-	public boolean renderPlanetBar() {
-		return false;
-	}
+    public long getFuelPerTick() {
+        return 0;
+    }
 
-	@Override
-	public boolean collides() {
-		return true;
-	}
+    public CustomInventory getInventory() {
+        return this.inventory;
+    }
 
-	@Override
-	public boolean isCollidable() {
-		return true;
-	}
+    public abstract int getInventorySize();
 
-	public long getTankSize() {
-		return 0;
-	}
+    @Override
+    public Packet<?> createSpawnPacket() {
+        return new EntitySpawnS2CPacket(this);
+    }
 
-	public long getFuelPerTick() {
-		return 0;
-	}
+    @SuppressWarnings("deprecation")
+    public void tryInsertingIntoTank() {
+        if (this.getInventorySize() > 1) {
+            if (!this.world.isClient) {
+                FluidUtils.insertFluidToContainerFromItem(this.getInventory(), 0, 1, 0, this.tank, f -> f.isIn(ModTags.FUELS));
+            }
+        }
+    }
 
-	public CustomInventory getInventory() {
-		return this.inventory;
-	}
+    public SimpleUpdatingFluidContainer getTank() {
+        return this.tank;
+    }
 
-	public abstract int getInventorySize();
+    public FluidHolder getTankHolder() {
+        return tank.getFluids().get(0);
+    }
 
-	@Override
-	public Packet<?> createSpawnPacket() {
-		return new EntitySpawnS2CPacket(this);
-	}
+    public long getTankAmount() {
+        return getTankHolder().getFluidAmount();
+    }
 
-	@SuppressWarnings("deprecation")
-	public void tryInsertingIntoTank() {
-		if (this.getInventorySize() > 1) {
-			if (!this.world.isClient) {
-				FluidUtils.insertFluidToContainerFromItem(this.getInventory(), 0, 1, 0, this.tank, f -> f.isIn(ModTags.FUELS));
-			}
-		}
-	}
+    public Fluid getTankFluid() {
+        return getTankHolder().getFluid();
+    }
 
-	public SimpleUpdatingFluidContainer getTank() {
-		return this.tank;
-	}
+    public void consumeFuel() {
+        if (this.world.getTime() % 20 == 0) {
+            getTank().extractFluid(FluidHooks.newFluidHolder(getTankFluid(), this.getFuelPerTick(), null), false);
+        }
+    }
 
-	public FluidHolder getTankHolder() {
-		return tank.getFluids().get(0);
-	}
-
-	public long getTankAmount() {
-		return getTankHolder().getFluidAmount();
-	}
-
-	public Fluid getTankFluid() {
-		return getTankHolder().getFluid();
-	}
-
-	public void consumeFuel() {
-		if (this.world.getTime() % 20 == 0) {
-			getTank().extractFluid(FluidHooks.newFluidHolder(getTankFluid(), this.getFuelPerTick(), null), false);
-		}
-	}
-
-	@Override
-	public void update() {
-	}
+    @Override
+    public void update() {
+    }
 }

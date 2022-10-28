@@ -52,15 +52,15 @@ dependencies {
 
     modApi("com.terraformersmc:modmenu:${project.modmenu_version}")
 
-	modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
-		exclude(group: "net.fabricmc.fabric-api")
-	}
-	//modImplementation "vazkii.patchouli:Patchouli:${project.patchouli_version}"
+    modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
+        exclude(group: "net.fabricmc.fabric-api")
+    }
+    //modImplementation "vazkii.patchouli:Patchouli:${project.patchouli_version}"
 
-	// EMI
-	modCompileOnly "dev.emi:emi:${emi_version}"
+    // EMI
+    modCompileOnly "dev.emi:emi:${emi_version}"
 
-	// REI
+    // REI
     modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:$project.rei_version")
 }
 

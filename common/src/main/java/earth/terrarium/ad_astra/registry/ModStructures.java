@@ -1,10 +1,9 @@
 package earth.terrarium.ad_astra.registry;
 
+import dev.architectury.registry.registries.DeferredRegister;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.world.processor.StructureVoidProcessor;
 import earth.terrarium.ad_astra.world.structures.LargeJigsawStructure;
-
-import dev.architectury.registry.registries.DeferredRegister;
 import net.minecraft.structure.StructureType;
 import net.minecraft.structure.processor.StructureProcessorType;
 import net.minecraft.util.registry.Registry;

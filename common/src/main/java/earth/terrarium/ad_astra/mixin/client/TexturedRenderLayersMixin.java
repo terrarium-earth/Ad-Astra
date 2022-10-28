@@ -1,18 +1,16 @@
 package earth.terrarium.ad_astra.mixin.client;
 
+import earth.terrarium.ad_astra.registry.ModBlocks;
+import earth.terrarium.ad_astra.util.ModIdentifier;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.enums.ChestType;
+import net.minecraft.client.render.TexturedRenderLayers;
+import net.minecraft.client.util.SpriteIdentifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import earth.terrarium.ad_astra.registry.ModBlocks;
-import earth.terrarium.ad_astra.util.ModIdentifier;
-
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.enums.ChestType;
-import net.minecraft.client.render.TexturedRenderLayers;
-import net.minecraft.client.util.SpriteIdentifier;
 
 @Mixin(TexturedRenderLayers.class)
 public abstract class TexturedRenderLayersMixin {

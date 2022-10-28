@@ -13,12 +13,12 @@ import net.minecraft.item.ItemStack;
 @Environment(EnvType.CLIENT)
 public class RocketItemRendererTier2 extends BuiltinModelItemRenderer {
 
-	public RocketItemRendererTier2() {
-		super(MinecraftClient.getInstance().getBlockEntityRenderDispatcher(), MinecraftClient.getInstance().getEntityModelLoader());
-	}
+    public RocketItemRendererTier2() {
+        super(MinecraftClient.getInstance().getBlockEntityRenderDispatcher(), MinecraftClient.getInstance().getEntityModelLoader());
+    }
 
-	@Override
-	public void render(ItemStack stack, Mode mode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
-		VehicleEntityRenderer.renderRocketItem(RocketEntityRendererTier2.TEXTURE, RocketEntityModelTier2.LAYER_LOCATION, matrices, vertexConsumers, light, overlay);
-	}
+    @Override
+    public void render(ItemStack stack, Mode mode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+        VehicleEntityRenderer.renderRocketItem(RocketEntityRendererTier2.TEXTURE, RocketEntityModelTier2.LAYER_LOCATION, matrices, vertexConsumers, light, overlay);
+    }
 }

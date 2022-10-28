@@ -1,11 +1,7 @@
 package earth.terrarium.ad_astra.client.sound;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import earth.terrarium.ad_astra.registry.ModSoundEvents;
 import earth.terrarium.ad_astra.util.ModUtils;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -18,6 +14,9 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.MathHelper;
+
+import java.util.LinkedList;
+import java.util.List;
 
 @Environment(EnvType.CLIENT)
 public class PlanetWeatherSoundPlayer implements ClientPlayerTickable {

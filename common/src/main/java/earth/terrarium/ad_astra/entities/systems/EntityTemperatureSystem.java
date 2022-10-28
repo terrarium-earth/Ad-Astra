@@ -1,14 +1,11 @@
 package earth.terrarium.ad_astra.entities.systems;
 
-import org.apache.commons.lang3.Range;
-
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.items.armour.NetheriteSpaceSuit;
 import earth.terrarium.ad_astra.items.armour.SpaceSuit;
 import earth.terrarium.ad_astra.registry.ModTags;
 import earth.terrarium.ad_astra.util.ModUtils;
 import earth.terrarium.ad_astra.util.OxygenUtils;
-
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -18,6 +15,7 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.random.RandomGenerator;
+import org.apache.commons.lang3.Range;
 
 public class EntityTemperatureSystem {
     public static void temperatureTick(LivingEntity entity, ServerWorld world) {

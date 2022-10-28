@@ -1,39 +1,39 @@
 {
-    "fabric:load_conditions": [
-        {
-            "condition": "fabric:all_mods_loaded",
-            "values": [
-                "create"
-            ]
-        }
-    ],
-    "conditions": [
-        {
-            "condition": "forge:mod_loaded",
-            "mod_id": "create"
-        }
-    ],
-    "type": "create:crushing",
-    "ingredients": [
-        {
-            "item": "ad_astra:glacio_ice_shard_ore"
-        }
-    ],
-    "results": [
-        {
-            "item": "ad_astra:ice_shard",
-            "count": 1
-        },
-        {
-            "item": "ad_astra:ice_shard",
-            "count": 1,
-            "chance": 0.25
-        },
-        {
-            "item": "ad_astra:glacio_stone",
-            "count": 1,
-            "chance": 0.125
-        }
-    ],
-    "processingTime": 300
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "create"
+      ]
+    }
+  ],
+  "conditions": [
+    {
+      "condition": "forge:mod_loaded",
+      "mod_id": "create"
+    }
+  ],
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "ad_astra:glacio_ice_shard_ore"
+    }
+  ],
+  "results": [
+    {
+      "item": "ad_astra:ice_shard",
+      "count": 1
+    },
+    {
+      "item": "ad_astra:ice_shard",
+      "count": 1,
+      "chance": 0.25
+    },
+    {
+      "item": "ad_astra:glacio_stone",
+      "count": 1,
+      "chance": 0.125
+    }
+  ],
+  "processingTime": 300
 }

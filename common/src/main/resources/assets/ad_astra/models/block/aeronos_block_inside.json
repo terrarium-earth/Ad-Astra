@@ -1,7 +1,7 @@
 {
-    "parent": "block/template_single_face",
-    "ambientocclusion": false,
-    "textures": {
-        "texture": "ad_astra:block/aeronos_stem_inside"
-    }
+  "parent": "block/template_single_face",
+  "ambientocclusion": false,
+  "textures": {
+    "texture": "ad_astra:block/aeronos_stem_inside"
+  }
 }

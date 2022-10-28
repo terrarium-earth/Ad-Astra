@@ -7,37 +7,37 @@ import net.minecraft.util.Identifier;
 
 public abstract class ConversionRecipe extends ModRecipe {
 
-	private HolderSet<Fluid> input;
-	private final Fluid output;
-	private final double conversionRatio;
+    private final Fluid output;
+    private final double conversionRatio;
+    private HolderSet<Fluid> input;
 
-	public ConversionRecipe(Identifier id, HolderSet<Fluid> input, Fluid output, double conversionRatio) {
-		super(id);
-		this.input = input;
-		this.output = output;
-		this.conversionRatio = conversionRatio;
-	}
+    public ConversionRecipe(Identifier id, HolderSet<Fluid> input, Fluid output, double conversionRatio) {
+        super(id);
+        this.input = input;
+        this.output = output;
+        this.conversionRatio = conversionRatio;
+    }
 
-	public ConversionRecipe(Identifier id, Ingredient input, Fluid output, double conversionRatio) {
-		super(id);
-		this.inputs.add(input);
-		this.output = output;
-		this.conversionRatio = conversionRatio;
-	}
+    public ConversionRecipe(Identifier id, Ingredient input, Fluid output, double conversionRatio) {
+        super(id);
+        this.inputs.add(input);
+        this.output = output;
+        this.conversionRatio = conversionRatio;
+    }
 
-	public boolean matches(Fluid input) {
-		return this.input.contains(input.getBuiltInRegistryHolder());
-	}
+    public boolean matches(Fluid input) {
+        return this.input.contains(input.getBuiltInRegistryHolder());
+    }
 
-	public HolderSet<Fluid> getFluidInput() {
-		return this.input;
-	}
+    public HolderSet<Fluid> getFluidInput() {
+        return this.input;
+    }
 
-	public Fluid getFluidOutput() {
-		return this.output;
-	}
+    public Fluid getFluidOutput() {
+        return this.output;
+    }
 
-	public double getConversionRatio() {
-		return this.conversionRatio;
-	}
+    public double getConversionRatio() {
+        return this.conversionRatio;
+    }
 }

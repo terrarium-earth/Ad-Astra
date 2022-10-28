@@ -27,13 +27,19 @@ public class OxygenTankItem extends Item implements FluidContainingItem {
         super(settings);
     }
 
+    public static ItemStack createOxygenatedTank() {
+        ItemStack oxygenTank = ModItems.OXYGEN_TANK.get().getDefaultStack();
+        ((OxygenTankItem) oxygenTank.getItem()).insert(oxygenTank, FluidHooks.newFluidHolder(ModFluids.OXYGEN_STILL.get(), AdAstra.CONFIG.general.oxygenTankSize, null));
+
+        return oxygenTank;
+    }
+
     @Override
     public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
         long oxygen = FluidHooks.toMillibuckets(this.getFluidContainer(stack).getFluids().get(0).getFluidAmount());
         tooltip.add(Text.translatable("tooltip.ad_astra.consumable"));
         tooltip.add(Text.translatable("tooltip.ad_astra.space_suit", oxygen, FluidHooks.toMillibuckets(getTankSize())).setStyle(Style.EMPTY.withColor(oxygen > 0 ? Formatting.GREEN : Formatting.RED)));
     }
-
 
     // Consume the tank and give the player oxygen.
     @Override
@@ -54,13 +60,6 @@ public class OxygenTankItem extends Item implements FluidContainingItem {
             }
         }
         return super.use(world, user, hand);
-    }
-
-    public static ItemStack createOxygenatedTank() {
-        ItemStack oxygenTank = ModItems.OXYGEN_TANK.get().getDefaultStack();
-        ((OxygenTankItem) oxygenTank.getItem()).insert(oxygenTank, FluidHooks.newFluidHolder(ModFluids.OXYGEN_STILL.get(), AdAstra.CONFIG.general.oxygenTankSize, null));
-
-        return oxygenTank;
     }
 
     @Override

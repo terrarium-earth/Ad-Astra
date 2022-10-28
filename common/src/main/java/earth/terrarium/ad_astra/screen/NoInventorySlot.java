@@ -13,13 +13,13 @@ import net.minecraft.screen.slot.Slot;
  */
 public class NoInventorySlot extends Slot {
 
-	public NoInventorySlot(Inventory inventory, int index, int x, int y) {
-		super(inventory, index, x, y);
-	}
+    public NoInventorySlot(Inventory inventory, int index, int x, int y) {
+        super(inventory, index, x, y);
+    }
 
-	@Override
-	public boolean canInsert(ItemStack stack) {
-		Item item = stack.getItem();
-		return !(item instanceof VehicleItem) && !stack.getOrCreateNbt().contains("Items") && !(item instanceof BlockItem && ((BlockItem) item).getBlock() instanceof ShulkerBoxBlock);
-	}
+    @Override
+    public boolean canInsert(ItemStack stack) {
+        Item item = stack.getItem();
+        return !(item instanceof VehicleItem) && !stack.getOrCreateNbt().contains("Items") && !(item instanceof BlockItem && ((BlockItem) item).getBlock() instanceof ShulkerBoxBlock);
+    }
 }

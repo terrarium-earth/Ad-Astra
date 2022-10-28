@@ -14,24 +14,24 @@ import net.minecraft.world.World;
 
 public class PygroEntity extends PiglinEntity {
 
-	public static DefaultAttributeContainer.Builder createMobAttributes() {
-		return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.45).add(EntityAttributes.GENERIC_MAX_HEALTH, 24).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 6);
-	}
+    public PygroEntity(EntityType<? extends AbstractPiglinEntity> entityType, World world) {
+        super(entityType, world);
+    }
 
-	public PygroEntity(EntityType<? extends AbstractPiglinEntity> entityType, World world) {
-		super(entityType, world);
-	}
+    public static DefaultAttributeContainer.Builder createMobAttributes() {
+        return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.45).add(EntityAttributes.GENERIC_MAX_HEALTH, 24).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 6);
+    }
 
-	@Override
-	public boolean canImmediatelyDespawn(double distanceSquared) {
-		return false;
-	}
+    @Override
+    public boolean canImmediatelyDespawn(double distanceSquared) {
+        return false;
+    }
 
-	@Override
-	protected void zombify(ServerWorld world) {
-		ZombifiedPygroEntity zombifiedPygroEntity = this.convertTo(ModEntityTypes.ZOMBIFIED_PYGRO.get(), true);
-		if (zombifiedPygroEntity != null) {
-			zombifiedPygroEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 200, 0));
-		}
-	}
+    @Override
+    protected void zombify(ServerWorld world) {
+        ZombifiedPygroEntity zombifiedPygroEntity = this.convertTo(ModEntityTypes.ZOMBIFIED_PYGRO.get(), true);
+        if (zombifiedPygroEntity != null) {
+            zombifiedPygroEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 200, 0));
+        }
+    }
 }

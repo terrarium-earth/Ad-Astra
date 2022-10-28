@@ -13,14 +13,14 @@ import org.apache.commons.lang3.NotImplementedException;
 @Environment(EnvType.CLIENT)
 public class ClientModSkies {
 
-	public static void register() {
-		for (PlanetSkyRenderer skyRenderer : AdAstraClient.skyRenderers) {
-			registerDimensionEffects(skyRenderer.dimension(), new DimensionEffects(skyRenderer));
-		}
-	}
+    public static void register() {
+        for (PlanetSkyRenderer skyRenderer : AdAstraClient.skyRenderers) {
+            registerDimensionEffects(skyRenderer.dimension(), new DimensionEffects(skyRenderer));
+        }
+    }
 
-	@ExpectPlatform
-	public static void registerDimensionEffects(RegistryKey<World> id, DimensionEffects effects) {
-		throw new NotImplementedException();
-	}
+    @ExpectPlatform
+    public static void registerDimensionEffects(RegistryKey<World> id, DimensionEffects effects) {
+        throw new NotImplementedException();
+    }
 }

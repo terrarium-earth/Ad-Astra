@@ -44,7 +44,7 @@ public class AdAstraClientForge {
     public static void modelLoading(ModelEvent.RegisterAdditional event) {
         AdAstraClient.onRegisterModels(event::register);
     }
-    
+
 
     public static void chestSpriteLoading(TextureStitchEvent.Pre event) {
         if (event.getAtlas().getId().equals(TexturedRenderLayers.CHEST_ATLAS_TEXTURE)) {

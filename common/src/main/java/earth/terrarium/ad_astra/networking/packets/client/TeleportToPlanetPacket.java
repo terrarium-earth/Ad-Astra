@@ -1,12 +1,11 @@
 package earth.terrarium.ad_astra.networking.packets.client;
 
-import earth.terrarium.ad_astra.entities.vehicles.RocketEntity;
-import earth.terrarium.ad_astra.util.ModIdentifier;
-import earth.terrarium.ad_astra.util.ModUtils;
 import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
-
+import earth.terrarium.ad_astra.entities.vehicles.RocketEntity;
+import earth.terrarium.ad_astra.util.ModIdentifier;
+import earth.terrarium.ad_astra.util.ModUtils;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
@@ -18,6 +17,15 @@ public record TeleportToPlanetPacket(Identifier id) implements Packet<TeleportTo
 
     public static final Identifier ID = new ModIdentifier("teleport_to_planet");
     public static final Handler HANDLER = new Handler();
+
+    private static RegistryKey<World> getWorld(Identifier id) {
+        RegistryKey<World> targetDimension = RegistryKey.of(Registry.WORLD_KEY, id);
+        // Change the "earth" registry key to the "overworld" registry key.
+        if (targetDimension.getValue().equals(new ModIdentifier("earth"))) {
+            targetDimension = World.OVERWORLD;
+        }
+        return targetDimension;
+    }
 
     @Override
     public Identifier getID() {
@@ -50,14 +58,5 @@ public record TeleportToPlanetPacket(Identifier id) implements Packet<TeleportTo
                 }
             };
         }
-    }
-
-    private static RegistryKey<World> getWorld(Identifier id) {
-        RegistryKey<World> targetDimension = RegistryKey.of(Registry.WORLD_KEY, id);
-        // Change the "earth" registry key to the "overworld" registry key.
-        if (targetDimension.getValue().equals(new ModIdentifier("earth"))) {
-            targetDimension = World.OVERWORLD;
-        }
-        return targetDimension;
     }
 }

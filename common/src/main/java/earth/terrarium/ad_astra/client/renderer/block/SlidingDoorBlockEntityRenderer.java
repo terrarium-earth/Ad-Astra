@@ -1,28 +1,17 @@
 package earth.terrarium.ad_astra.client.renderer.block;
 
-import java.util.List;
-
 import earth.terrarium.ad_astra.blocks.door.SlidingDoorBlock;
 import earth.terrarium.ad_astra.blocks.door.SlidingDoorBlockEntity;
 import earth.terrarium.ad_astra.client.AdAstraClient;
-import earth.terrarium.ad_astra.client.ClientUtils;
 import earth.terrarium.ad_astra.registry.ModBlocks;
 import earth.terrarium.ad_astra.util.ModIdentifier;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
-import net.minecraft.client.render.model.BakedModel;
-import net.minecraft.client.render.model.BakedModelManager;
-import net.minecraft.client.render.model.BakedQuad;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;

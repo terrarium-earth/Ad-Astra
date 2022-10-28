@@ -6,7 +6,6 @@ import earth.terrarium.ad_astra.mixin.EntityInvoker;
 import earth.terrarium.ad_astra.registry.ModDamageSource;
 import earth.terrarium.ad_astra.registry.ModTags;
 import earth.terrarium.ad_astra.util.ModUtils;
-
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.server.world.ServerWorld;
 

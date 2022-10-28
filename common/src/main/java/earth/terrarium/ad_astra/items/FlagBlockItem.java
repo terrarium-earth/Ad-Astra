@@ -7,7 +7,7 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class FlagBlockItem extends ModRenderedBlockItem{
+public class FlagBlockItem extends ModRenderedBlockItem {
     public FlagBlockItem(Block block, Settings settings) {
         super(block, settings);
     }

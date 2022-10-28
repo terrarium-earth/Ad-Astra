@@ -1,42 +1,42 @@
 {
-    "name": "Your First Rocket",
-    "icon": "ad_astra:nasa_workbench",
-    "sortnum": 0,
-    "category": "ad_astra:the_first_launch",
-    "pages": [
-        {
-            "type": "patchouli:spotlight",
-            "title": "NASA Workbench",
-            "item": "ad_astra:nasa_workbench",
-            "text": "In order to build a rocket, you must first collect all of the parts: cone, plates, fins, tanks and engine. You can then make the rocket in a NASA workbench, a specially designed workbench just for rockets."
+  "name": "Your First Rocket",
+  "icon": "ad_astra:nasa_workbench",
+  "sortnum": 0,
+  "category": "ad_astra:the_first_launch",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "NASA Workbench",
+      "item": "ad_astra:nasa_workbench",
+      "text": "In order to build a rocket, you must first collect all of the parts: cone, plates, fins, tanks and engine. You can then make the rocket in a NASA workbench, a specially designed workbench just for rockets."
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "NASA Workbench",
+      "recipe": "ad_astra:recipes/nasa_workbench"
+    },
+    {
+      "type": "multiblock",
+      "multiblock": {
+        "pattern": [
+          [
+            "   ",
+            " 0 ",
+            "   "
+          ]
+        ],
+        "mapping": {
+          "0": "ad_astra:launch_pad"
         },
-        {
-            "type": "patchouli:crafting",
-            "title": "NASA Workbench",
-            "recipe": "ad_astra:recipes/nasa_workbench"
-        },
-        {
-            "type": "multiblock",
-            "multiblock": {
-                "pattern": [
-                    [
-                        "   ",
-                        " 0 ",
-                        "   "
-                    ]
-                ],
-                "mapping": {
-                    "0": "ad_astra:launch_pad"
-                },
-                "symmetrical": true
-            },
-            "text": "To place your newly-created rocket, you must build a launchpad."
-        },
-        {
-            "type": "patchouli:crafting",
-            "title": "Launchpad",
-            "recipe": "ad_astra:recipes/launch_pad",
-            "text": "After the launch pad has been built, place the rocket in the center."
-        }
-    ]
+        "symmetrical": true
+      },
+      "text": "To place your newly-created rocket, you must build a launchpad."
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Launchpad",
+      "recipe": "ad_astra:recipes/launch_pad",
+      "text": "After the launch pad has been built, place the rocket in the center."
+    }
+  ]
 }

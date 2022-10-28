@@ -1,10 +1,6 @@
 package earth.terrarium.ad_astra.blocks.door;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.BlockWithEntity;
-import net.minecraft.block.HorizontalFacingBlock;
-import net.minecraft.block.ShapeContext;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
@@ -131,9 +127,9 @@ public class SlidingDoorBlock extends BlockWithEntity {
     @Override
     public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
         return switch (type) {
-        case LAND -> state.get(OPEN);
-        case WATER -> false;
-        case AIR -> state.get(OPEN);
+            case LAND -> state.get(OPEN);
+            case WATER -> false;
+            case AIR -> state.get(OPEN);
         };
     }
 
@@ -157,11 +153,11 @@ public class SlidingDoorBlock extends BlockWithEntity {
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         Direction direction = state.get(FACING);
         return switch (direction) {
-        case NORTH -> NORTH_SHAPE.offset(0, 0, 0.42);
-        case EAST -> WEST_SHAPE.offset(0.38, 0, 0);
-        case SOUTH -> NORTH_SHAPE.offset(0, 0, 0.38);
-        case WEST -> EAST_SHAPE.offset(-0.44, 0, 0);
-        default -> VoxelShapes.empty();
+            case NORTH -> NORTH_SHAPE.offset(0, 0, 0.42);
+            case EAST -> WEST_SHAPE.offset(0.38, 0, 0);
+            case SOUTH -> NORTH_SHAPE.offset(0, 0, 0.38);
+            case WEST -> EAST_SHAPE.offset(-0.44, 0, 0);
+            default -> VoxelShapes.empty();
         };
     }
 
@@ -172,7 +168,7 @@ public class SlidingDoorBlock extends BlockWithEntity {
 
         // Bottom
         return world.getBlockState(mainPos).isAir() &&
-        // Bottom Left
+                // Bottom Left
                 world.getBlockState(mainPos.offset(direction)).isAir() &&
                 // Bottom Right
                 world.getBlockState(mainPos.offset(direction.getOpposite())).isAir() &&
@@ -211,11 +207,11 @@ public class SlidingDoorBlock extends BlockWithEntity {
         if (main.contains(OPEN) && (!main.get(OPEN) && !main.get(POWERED))) {
             Direction direction = state.get(FACING);
             return switch (direction) {
-            case NORTH -> NORTH_SHAPE.offset(0, 0, 0.42);
-            case EAST -> WEST_SHAPE.offset(0.38, 0, 0);
-            case SOUTH -> NORTH_SHAPE.offset(0, 0, 0.38);
-            case WEST -> EAST_SHAPE.offset(-0.44, 0, 0);
-            default -> VoxelShapes.empty();
+                case NORTH -> NORTH_SHAPE.offset(0, 0, 0.42);
+                case EAST -> WEST_SHAPE.offset(0.38, 0, 0);
+                case SOUTH -> NORTH_SHAPE.offset(0, 0, 0.38);
+                case WEST -> EAST_SHAPE.offset(-0.44, 0, 0);
+                default -> VoxelShapes.empty();
             };
         } else {
             return VoxelShapes.empty();

@@ -1,11 +1,8 @@
 package earth.terrarium.ad_astra.world.structures;
 
-import java.util.Optional;
-
-import earth.terrarium.ad_astra.registry.ModStructures;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-
+import earth.terrarium.ad_astra.registry.ModStructures;
 import net.minecraft.structure.StructureType;
 import net.minecraft.structure.pool.StructurePool;
 import net.minecraft.structure.pool.StructurePoolBasedGenerator;
@@ -17,6 +14,8 @@ import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.HeightContext;
 import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraft.world.gen.heightprovider.HeightProvider;
+
+import java.util.Optional;
 
 public class LargeJigsawStructure extends StructureFeature {
 

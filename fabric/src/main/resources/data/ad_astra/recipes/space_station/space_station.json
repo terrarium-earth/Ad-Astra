@@ -1,29 +1,29 @@
 {
-	"type": "ad_astra:space_station",
-	"ingredients": [
-		{
-			"ingredient": {
-				"tag": "c:desh_ingots"
-			},
-			"count": 32
-		},
-		{
-			"ingredient": {
-				"tag": "c:steel_ingots"
-			},
-			"count": 32
-		},
-		{
-			"ingredient": {
-				"tag": "c:iron_plates"
-			},
-			"count": 64
-		},
-		{
-			"ingredient": {
-				"tag": "c:desh_plates"
-			},
-			"count": 32
-		}
-	]
+  "type": "ad_astra:space_station",
+  "ingredients": [
+    {
+      "ingredient": {
+        "tag": "c:desh_ingots"
+      },
+      "count": 32
+    },
+    {
+      "ingredient": {
+        "tag": "c:steel_ingots"
+      },
+      "count": 32
+    },
+    {
+      "ingredient": {
+        "tag": "c:iron_plates"
+      },
+      "count": 64
+    },
+    {
+      "ingredient": {
+        "tag": "c:desh_plates"
+      },
+      "count": 32
+    }
+  ]
 }
