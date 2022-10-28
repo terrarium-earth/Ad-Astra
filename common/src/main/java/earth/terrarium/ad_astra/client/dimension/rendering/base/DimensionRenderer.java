@@ -9,10 +9,14 @@ import net.minecraft.util.math.Matrix4f;
 public interface DimensionRenderer {
 
     boolean renderClouds(ClientWorld world, int ticks, float tickDelta, MatrixStack matrices, double cameraX, double cameraY, double cameraZ, Matrix4f projectionMatrix);
+
     boolean renderSky(ClientWorld world, int ticks, float tickDelta, MatrixStack matrices, Camera camera, Matrix4f projectionMatrix, boolean foggy, Runnable setupFog);
+
     boolean renderSnowAndRain(ClientWorld world, int ticks, float tickDelta, LightmapTextureManager manager, double cameraX, double cameraY, double cameraZ);
 
     boolean shouldRenderClouds();
+
     boolean shouldRenderSky();
+
     boolean shouldRenderSnowAndRain();
 }

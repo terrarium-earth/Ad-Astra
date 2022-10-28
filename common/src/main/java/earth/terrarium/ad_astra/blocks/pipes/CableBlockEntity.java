@@ -1,10 +1,6 @@
 package earth.terrarium.ad_astra.blocks.pipes;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
-
 import earth.terrarium.botarium.api.energy.EnergyHooks;
 import earth.terrarium.botarium.api.energy.PlatformEnergyManager;
 import net.minecraft.block.BlockState;
@@ -12,6 +8,9 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CableBlockEntity extends BlockEntity implements InteractablePipe<PlatformEnergyManager> {
     private final List<Node<PlatformEnergyManager>> consumers = new ArrayList<>();

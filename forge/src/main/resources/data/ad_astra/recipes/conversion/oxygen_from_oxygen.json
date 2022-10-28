@@ -1,6 +1,6 @@
 {
-   "type": "ad_astra:oxygen_conversion",
-   "input": "#forge:oxygen",
-   "output": "ad_astra:oxygen",
-   "conversion_ratio": 1.0
+  "type": "ad_astra:oxygen_conversion",
+  "input": "#forge:oxygen",
+  "output": "ad_astra:oxygen",
+  "conversion_ratio": 1.0
 }

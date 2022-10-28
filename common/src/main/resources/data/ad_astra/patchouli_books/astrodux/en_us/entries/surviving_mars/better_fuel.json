@@ -1,28 +1,28 @@
 {
-    "name": "Better Fuel",
-    "icon": "ad_astra:cryo_freezer",
-    "sortnum": 3,
-    "category": "ad_astra:surviving_mars",
-    "pages": [
-        {
-            "type": "patchouli:spotlight",
-            "title": "Cryo Freezer",
-            "item": "ad_astra:cryo_freezer",
-            "text": "Fuel is hard to get; it requires venturing out to the ocean, looking for oil spouts. The Cryo Freezer introduces a new way to obtain a better fuel - Cryo Fuel. Cryo Fuel is much more efficient than refined fuel, allowing you to launch a rocket with just one bucket."
-        },
-        {
-            "type": "patchouli:text",
-            "text": "It's created by collecting ice shards, which are found as an ore underground on cold planets. The ice shard then needs to be inserted into a Cryo Freezer, and it will convert to 25 mB of Cryo Fuel. Alternatively, you can convert ice, packed ice and blue ice to fuel. Once you've made at least two buckets (one for a launch and the other for a return trip), place the buckets in the rocket fuel slot."
-        },
-        {
-            "type": "patchouli:crafting",
-            "recipe": "ad_astra:recipes/cryo_freezer"
-        },
-        {
-            "type": "patchouli:spotlight",
-            "title": "Cryo Fuel",
-            "item": "ad_astra:cryo_fuel_bucket",
-            "text": "In addition to being an excellent fuel, cryo fuel has some other features. When placed, it will damage anything inside, similar to lava. It can be placed in space and the nether without evaporating. Lastly, it freezes water, allowing for an infinite ice source."
-        }
-    ]
+  "name": "Better Fuel",
+  "icon": "ad_astra:cryo_freezer",
+  "sortnum": 3,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Cryo Freezer",
+      "item": "ad_astra:cryo_freezer",
+      "text": "Fuel is hard to get; it requires venturing out to the ocean, looking for oil spouts. The Cryo Freezer introduces a new way to obtain a better fuel - Cryo Fuel. Cryo Fuel is much more efficient than refined fuel, allowing you to launch a rocket with just one bucket."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "It's created by collecting ice shards, which are found as an ore underground on cold planets. The ice shard then needs to be inserted into a Cryo Freezer, and it will convert to 25 mB of Cryo Fuel. Alternatively, you can convert ice, packed ice and blue ice to fuel. Once you've made at least two buckets (one for a launch and the other for a return trip), place the buckets in the rocket fuel slot."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:recipes/cryo_freezer"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Cryo Fuel",
+      "item": "ad_astra:cryo_fuel_bucket",
+      "text": "In addition to being an excellent fuel, cryo fuel has some other features. When placed, it will damage anything inside, similar to lava. It can be placed in space and the nether without evaporating. Lastly, it freezes water, allowing for an infinite ice source."
+    }
+  ]
 }

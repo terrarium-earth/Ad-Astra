@@ -1,12 +1,12 @@
 {
-    "replace": false,
-    "values": [
-        "ad_astra:cheese_block",
-        "ad_astra:aeronos_mushroom",
-        "ad_astra:aeronos_stem",
-        "ad_astra:aeronos_cap",
-        "ad_astra:strophar_mushroom",
-        "ad_astra:strophar_cap",
-        "ad_astra:strophar_stem"
-    ]
+  "replace": false,
+  "values": [
+    "ad_astra:cheese_block",
+    "ad_astra:aeronos_mushroom",
+    "ad_astra:aeronos_stem",
+    "ad_astra:aeronos_cap",
+    "ad_astra:strophar_mushroom",
+    "ad_astra:strophar_cap",
+    "ad_astra:strophar_stem"
+  ]
 }

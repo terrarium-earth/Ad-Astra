@@ -2,7 +2,6 @@ package earth.terrarium.ad_astra.util;
 
 import earth.terrarium.ad_astra.container.DoubleFluidTank;
 import earth.terrarium.ad_astra.recipes.ConversionRecipe;
-import earth.terrarium.ad_astra.registry.ModFluids;
 import earth.terrarium.botarium.api.fluid.FluidContainer;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;

@@ -9,7 +9,7 @@ import net.minecraft.world.TeleportTarget;
 public class PlatformUtilsImpl {
     @SuppressWarnings("unchecked")
     public static <T extends Entity> T teleportToDimension(T entity, ServerWorld world, TeleportTarget target) {
-        return (T)entity.changeDimension(world, new AdAstraTeleporter(target));
+        return (T) entity.changeDimension(world, new AdAstraTeleporter(target));
     }
 
     public static void registerStrippedLog(Block log, Block strippedLog) {

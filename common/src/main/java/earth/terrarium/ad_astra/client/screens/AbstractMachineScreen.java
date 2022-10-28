@@ -1,9 +1,8 @@
 package earth.terrarium.ad_astra.client.screens;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import earth.terrarium.ad_astra.blocks.machines.entity.AbstractMachineBlockEntity;
 import earth.terrarium.ad_astra.screen.handler.AbstractMachineScreenHandler;
-import com.mojang.blaze3d.systems.RenderSystem;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawableHelper;
@@ -17,38 +16,38 @@ import net.minecraft.util.Identifier;
 @Environment(EnvType.CLIENT)
 public abstract class AbstractMachineScreen<T extends AbstractMachineScreenHandler> extends HandledScreen<T> {
 
-	final AbstractMachineBlockEntity entity;
-	final Identifier texture;
+    final AbstractMachineBlockEntity entity;
+    final Identifier texture;
 
-	public AbstractMachineScreen(T handler, PlayerInventory inventory, Text title, Identifier texture) {
-		super(handler, inventory, title);
-		this.texture = texture;
-		this.playerInventoryTitleY = this.backgroundHeight - 92;
-		entity = this.getScreenHandler().getBlockEntity();
-	}
+    public AbstractMachineScreen(T handler, PlayerInventory inventory, Text title, Identifier texture) {
+        super(handler, inventory, title);
+        this.texture = texture;
+        this.playerInventoryTitleY = this.backgroundHeight - 92;
+        entity = this.getScreenHandler().getBlockEntity();
+    }
 
-	@Override
-	protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
-		RenderSystem.setShader(GameRenderer::getPositionTexShader);
-		RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-		RenderSystem.setShaderTexture(0, texture);
-		DrawableHelper.drawTexture(matrices, this.x, this.y, 0, 0, this.backgroundWidth, this.backgroundHeight, this.backgroundWidth, this.backgroundHeight);
-	}
+    @Override
+    protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
+        RenderSystem.setShaderTexture(0, texture);
+        DrawableHelper.drawTexture(matrices, this.x, this.y, 0, 0, this.backgroundWidth, this.backgroundHeight, this.backgroundWidth, this.backgroundHeight);
+    }
 
-	@Override
-	public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-		renderBackground(matrices);
-		super.render(matrices, mouseX, mouseY, delta);
-		drawMouseoverTooltip(matrices, mouseX, mouseY);
-	}
+    @Override
+    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+        renderBackground(matrices);
+        super.render(matrices, mouseX, mouseY, delta);
+        drawMouseoverTooltip(matrices, mouseX, mouseY);
+    }
 
-	public int getTextColour() {
-		return 0x404040;
-	}
+    public int getTextColour() {
+        return 0x404040;
+    }
 
-	@Override
-	protected void drawForeground(MatrixStack matrices, int mouseX, int mouseY) {
-		this.textRenderer.draw(matrices, this.title, (float) this.titleX, (float) this.titleY, this.getTextColour());
-		this.textRenderer.draw(matrices, this.playerInventoryTitle, (float) this.playerInventoryTitleX, (float) this.playerInventoryTitleY, this.getTextColour());
-	}
+    @Override
+    protected void drawForeground(MatrixStack matrices, int mouseX, int mouseY) {
+        this.textRenderer.draw(matrices, this.title, (float) this.titleX, (float) this.titleY, this.getTextColour());
+        this.textRenderer.draw(matrices, this.playerInventoryTitle, (float) this.playerInventoryTitleX, (float) this.playerInventoryTitleY, this.getTextColour());
+    }
 }

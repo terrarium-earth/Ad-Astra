@@ -15,23 +15,23 @@ import net.minecraft.util.registry.Registry;
 @Environment(EnvType.CLIENT)
 public class GlobeItemRenderer extends BuiltinModelItemRenderer {
 
-	private long prevWorldTime;
+    private long prevWorldTime;
 
-	public GlobeItemRenderer() {
-		super(MinecraftClient.getInstance().getBlockEntityRenderDispatcher(), MinecraftClient.getInstance().getEntityModelLoader());
-	}
+    public GlobeItemRenderer() {
+        super(MinecraftClient.getInstance().getBlockEntityRenderDispatcher(), MinecraftClient.getInstance().getEntityModelLoader());
+    }
 
-	@Override
-	public void render(ItemStack stack, ModelTransformation.Mode mode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+    @Override
+    public void render(ItemStack stack, ModelTransformation.Mode mode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
 
-		GlobeModel model = GlobeModel.getModel();
+        GlobeModel model = GlobeModel.getModel();
 
-		// Constant spin
-		MinecraftClient client = MinecraftClient.getInstance();
-		float tickDelta = client.getTickDelta();
-		model.setYaw(MathHelper.lerp(tickDelta, prevWorldTime, client.world.getTime()) / -20.0f);
-		prevWorldTime = client.world.getTime();
+        // Constant spin
+        MinecraftClient client = MinecraftClient.getInstance();
+        float tickDelta = client.getTickDelta();
+        model.setYaw(MathHelper.lerp(tickDelta, prevWorldTime, client.world.getTime()) / -20.0f);
+        prevWorldTime = client.world.getTime();
 
-		GlobeRenderer.render(Registry.ITEM.getId(stack.getItem()), model, Direction.NORTH, matrices, vertexConsumers, light, overlay);
-	}
+        GlobeRenderer.render(Registry.ITEM.getId(stack.getItem()), model, Direction.NORTH, matrices, vertexConsumers, light, overlay);
+    }
 }

@@ -1,15 +1,5 @@
 package earth.terrarium.ad_astra.mixin.client;
 
-import java.util.List;
-
-import net.minecraft.util.math.MathHelper;
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
 import earth.terrarium.ad_astra.client.screens.PlayerOverlayScreen;
 import earth.terrarium.ad_astra.client.sound.PlanetSoundPlayer;
 import earth.terrarium.ad_astra.client.sound.PlanetWeatherSoundPlayer;
@@ -19,7 +9,6 @@ import earth.terrarium.ad_astra.entities.vehicles.VehicleEntity;
 import earth.terrarium.ad_astra.items.armour.JetSuit;
 import earth.terrarium.ad_astra.items.armour.SpaceSuit;
 import earth.terrarium.ad_astra.util.OxygenUtils;
-
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -29,6 +18,15 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stat.StatHandler;
+import net.minecraft.util.math.MathHelper;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.List;
 
 @Mixin(ClientPlayerEntity.class)
 public class ClientPlayerEntityMixin {

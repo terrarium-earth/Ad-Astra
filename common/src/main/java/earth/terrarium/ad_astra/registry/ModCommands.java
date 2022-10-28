@@ -1,7 +1,6 @@
 package earth.terrarium.ad_astra.registry;
 
 import com.mojang.brigadier.CommandDispatcher;
-import dev.architectury.event.events.common.CommandRegistrationEvent;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import earth.terrarium.ad_astra.commands.PlanetGuiCommand;
 import net.minecraft.server.command.ServerCommandSource;

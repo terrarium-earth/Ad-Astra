@@ -1,12 +1,12 @@
 package earth.terrarium.ad_astra.client.screens.utils;
 
-import earth.terrarium.ad_astra.AdAstra;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.Tessellator;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormats;
 import com.teamresourceful.resourcefullib.common.color.Color;
+import earth.terrarium.ad_astra.AdAstra;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -20,60 +20,60 @@ import net.minecraft.util.math.Vec3f;
 @Environment(EnvType.CLIENT)
 public class ScreenUtils {
 
-	public static Text createText(String text) {
-		return Text.translatable("gui." + AdAstra.MOD_ID + ".text." + text);
-	}
+    public static Text createText(String text) {
+        return Text.translatable("gui." + AdAstra.MOD_ID + ".text." + text);
+    }
 
-	public static Text createText(Identifier text) {
-		return Text.translatable("gui." + text.getNamespace() + ".text." + text.getPath());
-	}
+    public static Text createText(Identifier text) {
+        return Text.translatable("gui." + text.getNamespace() + ".text." + text.getPath());
+    }
 
-	public static void addTexture(MatrixStack matrices, int x, int y, int width, int height, Identifier texture) {
-		RenderSystem.setShaderTexture(0, texture);
-		DrawableHelper.drawTexture(matrices, x, y, 0, 0, width, height, width, height);
-	}
+    public static void addTexture(MatrixStack matrices, int x, int y, int width, int height, Identifier texture) {
+        RenderSystem.setShaderTexture(0, texture);
+        DrawableHelper.drawTexture(matrices, x, y, 0, 0, width, height, width, height);
+    }
 
-	public static void addRotatingTexture(PlanetSelectionScreen screen, MatrixStack matrices, int x, int y, int width, int height, Identifier texture, float speed) {
+    public static void addRotatingTexture(PlanetSelectionScreen screen, MatrixStack matrices, int x, int y, int width, int height, Identifier texture, float speed) {
 
-		double scale = MinecraftClient.getInstance().getWindow().getScaledHeight() / 400.0;
+        double scale = MinecraftClient.getInstance().getWindow().getScaledHeight() / 400.0;
 
-		x *= scale;
-		y *= scale;
-		x += 1;
-		y += 1;
+        x *= scale;
+        y *= scale;
+        x += 1;
+        y += 1;
 
-		width *= scale;
-		height *= scale;
+        width *= scale;
+        height *= scale;
 
-		matrices.push();
+        matrices.push();
 
-		matrices.translate(screen.width / 2.0f, screen.height / 2.0f, 0);
-		matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(screen.getGuiTime() * (speed / 3.0f)));
+        matrices.translate(screen.width / 2.0f, screen.height / 2.0f, 0);
+        matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(screen.getGuiTime() * (speed / 3.0f)));
 
-		addTexture(matrices, x, y, width, height, texture);
+        addTexture(matrices, x, y, width, height, texture);
 
-		matrices.pop();
-	}
+        matrices.pop();
+    }
 
-	public static void drawCircle(double x, double y, double radius, int sides, Color ringColour) {
+    public static void drawCircle(double x, double y, double radius, int sides, Color ringColour) {
 
-		Tessellator tessellator = Tessellator.getInstance();
-		BufferBuilder bufferBuilder = tessellator.getBufferBuilder();
-		RenderSystem.setShader(GameRenderer::getPositionColorShader);
+        Tessellator tessellator = Tessellator.getInstance();
+        BufferBuilder bufferBuilder = tessellator.getBufferBuilder();
+        RenderSystem.setShader(GameRenderer::getPositionColorShader);
 
-		double scale = MinecraftClient.getInstance().getWindow().getScaledHeight() / 400.0;
-		radius *= scale;
+        double scale = MinecraftClient.getInstance().getWindow().getScaledHeight() / 400.0;
+        radius *= scale;
 
-		double width = radius - 0.6;
-		for (double i = width; i < radius - 0.5 + 1; i += 0.1) {
-			bufferBuilder.begin(VertexFormat.DrawMode.DEBUG_LINE_STRIP, VertexFormats.POSITION_COLOR);
-			for (int j = 0; j <= sides; j++) {
-				double angle = (Math.PI * 2 * j / sides) + Math.toRadians(180);
-				bufferBuilder.vertex(x + Math.sin(angle) * i, y + Math.cos(angle) * i, 0)
-						.color(ringColour.getIntRed(), ringColour.getIntGreen(), ringColour.getIntBlue(), ringColour.getIntAlpha())
-						.next();
-			}
-			tessellator.draw();
-		}
-	}
+        double width = radius - 0.6;
+        for (double i = width; i < radius - 0.5 + 1; i += 0.1) {
+            bufferBuilder.begin(VertexFormat.DrawMode.DEBUG_LINE_STRIP, VertexFormats.POSITION_COLOR);
+            for (int j = 0; j <= sides; j++) {
+                double angle = (Math.PI * 2 * j / sides) + Math.toRadians(180);
+                bufferBuilder.vertex(x + Math.sin(angle) * i, y + Math.cos(angle) * i, 0)
+                        .color(ringColour.getIntRed(), ringColour.getIntGreen(), ringColour.getIntBlue(), ringColour.getIntAlpha())
+                        .next();
+            }
+            tessellator.draw();
+        }
+    }
 }

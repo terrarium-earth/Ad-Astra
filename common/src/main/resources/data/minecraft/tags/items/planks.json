@@ -1,8 +1,8 @@
 {
-	"replace": false,
-	"values": [
-		"ad_astra:glacian_planks",
-        "ad_astra:aeronos_planks",
-        "ad_astra:strophar_planks"
-	]
+  "replace": false,
+  "values": [
+    "ad_astra:glacian_planks",
+    "ad_astra:aeronos_planks",
+    "ad_astra:strophar_planks"
+  ]
 }

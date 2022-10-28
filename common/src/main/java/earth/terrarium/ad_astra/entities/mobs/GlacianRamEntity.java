@@ -4,19 +4,11 @@ import earth.terrarium.ad_astra.entities.mobs.goal.EatPermafrostGoal;
 import earth.terrarium.ad_astra.registry.ModBlocks;
 import earth.terrarium.ad_astra.registry.ModEntityTypes;
 import earth.terrarium.ad_astra.registry.ModItems;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.Shearable;
-import net.minecraft.entity.ai.goal.AnimalMateGoal;
-import net.minecraft.entity.ai.goal.EscapeDangerGoal;
-import net.minecraft.entity.ai.goal.FollowParentGoal;
-import net.minecraft.entity.ai.goal.LookAroundGoal;
-import net.minecraft.entity.ai.goal.LookAtEntityGoal;
-import net.minecraft.entity.ai.goal.SwimGoal;
-import net.minecraft.entity.ai.goal.TemptGoal;
-import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
+import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -51,15 +43,15 @@ public class GlacianRamEntity extends AnimalEntity implements Shearable {
     private int eatPermafrostTimer;
     private EatPermafrostGoal eatPermafrostGoal;
 
-    public static DefaultAttributeContainer.Builder createMobAttributes() {
-        return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 16.0).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.20f);
-    }
-
     public GlacianRamEntity(EntityType<? extends GlacianRamEntity> entityType, World world) {
         super(entityType, world);
         this.getNavigation().setCanSwim(true);
         this.setPathfindingPenalty(PathNodeType.POWDER_SNOW, -1.0f);
         this.setPathfindingPenalty(PathNodeType.DANGER_POWDER_SNOW, -1.0f);
+    }
+
+    public static DefaultAttributeContainer.Builder createMobAttributes() {
+        return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 16.0).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.20f);
     }
 
     @Override

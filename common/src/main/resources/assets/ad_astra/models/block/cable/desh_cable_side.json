@@ -1,6 +1,6 @@
 {
-    "parent": "ad_astra:template/cable/thick_cable_side",
-    "textures": {
-        "cable": "ad_astra:block/cable/desh_cable"
-    }
+  "parent": "ad_astra:template/cable/thick_cable_side",
+  "textures": {
+    "cable": "ad_astra:block/cable/desh_cable"
+  }
 }

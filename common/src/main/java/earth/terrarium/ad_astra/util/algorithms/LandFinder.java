@@ -1,18 +1,16 @@
 package earth.terrarium.ad_astra.util.algorithms;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.util.ModUtils;
-
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Searches for land (aka. a chunk with blocks in in it).
- * 
  */
 
 public class LandFinder {

@@ -1,12 +1,11 @@
 package earth.terrarium.ad_astra.networking.packets.client;
 
-import earth.terrarium.ad_astra.recipes.SpaceStationRecipe;
-import earth.terrarium.ad_astra.registry.ModRecipes;
-import earth.terrarium.ad_astra.util.ModIdentifier;
 import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
-
+import earth.terrarium.ad_astra.recipes.SpaceStationRecipe;
+import earth.terrarium.ad_astra.registry.ModRecipes;
+import earth.terrarium.ad_astra.util.ModIdentifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
@@ -38,6 +37,16 @@ public record CreateSpaceStationPacket(Identifier targetWorld) implements Packet
     }
 
     private static class Handler implements PacketHandler<CreateSpaceStationPacket> {
+        private static boolean hasItem(PlayerEntity player, Ingredient ingredient, int count) {
+            int found = 0;
+            for (ItemStack stack : player.getInventory().main) {
+                if (ingredient.test(stack)) {
+                    found += stack.getCount();
+                }
+            }
+            return found >= count;
+        }
+
         @Override
         public void encode(CreateSpaceStationPacket packet, PacketByteBuf buf) {
             buf.writeIdentifier(packet.targetWorld());
@@ -81,16 +90,6 @@ public record CreateSpaceStationPacket(Identifier targetWorld) implements Packet
                     structure.place(targetWorld, pos, pos, new StructurePlacementData(), targetWorld.random, 2);
                 }
             };
-        }
-
-        private static boolean hasItem(PlayerEntity player, Ingredient ingredient, int count) {
-            int found = 0;
-            for (ItemStack stack : player.getInventory().main) {
-                if (ingredient.test(stack)) {
-                    found += stack.getCount();
-                }
-            }
-            return found >= count;
         }
     }
 }

@@ -16,13 +16,13 @@ import net.minecraft.util.registry.Registry;
 @Environment(EnvType.CLIENT)
 public class FlagItemRenderer extends BuiltinModelItemRenderer {
 
-	public FlagItemRenderer() {
-		super(MinecraftClient.getInstance().getBlockEntityRenderDispatcher(), MinecraftClient.getInstance().getEntityModelLoader());
-	}
+    public FlagItemRenderer() {
+        super(MinecraftClient.getInstance().getBlockEntityRenderDispatcher(), MinecraftClient.getInstance().getEntityModelLoader());
+    }
 
-	@Override
-	public void render(ItemStack stack, ModelTransformation.Mode mode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
-		Identifier model = new ModIdentifier("block/flag/" + Registry.ITEM.getId(stack.getItem()).getPath());
-		AdAstraClient.renderBlock(model, matrices, vertexConsumers, light, overlay);
-	}
+    @Override
+    public void render(ItemStack stack, ModelTransformation.Mode mode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+        Identifier model = new ModIdentifier("block/flag/" + Registry.ITEM.getId(stack.getItem()).getPath());
+        AdAstraClient.renderBlock(model, matrices, vertexConsumers, light, overlay);
+    }
 }

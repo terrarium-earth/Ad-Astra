@@ -107,6 +107,14 @@ public class DoubleFluidTank implements UpdatingFluidContainer {
         return nbtCompound;
     }
 
+    public FluidContainer getInput() {
+        return input;
+    }
+
+    public FluidContainer getOutput() {
+        return output;
+    }
+
     private record DoubleTankSnapshot(FluidSnapshot input, FluidSnapshot output) implements FluidSnapshot {
 
         @Override
@@ -116,13 +124,5 @@ public class DoubleFluidTank implements UpdatingFluidContainer {
                 output.loadSnapshot(doubleFluidTank.output);
             }
         }
-    }
-
-    public FluidContainer getInput() {
-        return input;
-    }
-
-    public FluidContainer getOutput() {
-        return output;
     }
 }

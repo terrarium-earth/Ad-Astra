@@ -2,7 +2,6 @@ package earth.terrarium.ad_astra.client;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import dev.architectury.event.events.client.ClientGuiEvent;
-import dev.architectury.event.events.client.ClientTickEvent;
 import dev.architectury.registry.client.rendering.RenderTypeRegistry;
 import earth.terrarium.ad_astra.client.registry.ClientModKeybindings;
 import earth.terrarium.ad_astra.client.registry.ClientModParticles;
@@ -19,8 +18,6 @@ import earth.terrarium.ad_astra.client.renderer.entity.vehicles.rockets.tier_3.R
 import earth.terrarium.ad_astra.client.renderer.entity.vehicles.rockets.tier_4.RocketItemRendererTier4;
 import earth.terrarium.ad_astra.client.renderer.entity.vehicles.rover.RoverItemRenderer;
 import earth.terrarium.ad_astra.client.resourcepack.*;
-import earth.terrarium.ad_astra.client.screens.AbstractMachineScreen;
-import earth.terrarium.ad_astra.client.screens.AbstractVehicleScreen;
 import earth.terrarium.ad_astra.client.screens.PlayerOverlayScreen;
 import earth.terrarium.ad_astra.data.Planet;
 import earth.terrarium.ad_astra.registry.ModBlocks;

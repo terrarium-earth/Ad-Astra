@@ -1,11 +1,10 @@
 package earth.terrarium.ad_astra.networking.packets.client;
 
-import earth.terrarium.ad_astra.util.ModIdentifier;
-import earth.terrarium.ad_astra.util.ModKeyBindings;
 import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
-
+import earth.terrarium.ad_astra.util.ModIdentifier;
+import earth.terrarium.ad_astra.util.ModKeyBindings;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.Identifier;
 
@@ -24,6 +23,10 @@ public record KeybindPacket(Keybind keybind, boolean pressed) implements Packet<
         return HANDLER;
     }
 
+    public enum Keybind {
+        JUMP, SPRINT, FORWARD, BACK, LEFT, RIGHT
+    }
+
     private static class Handler implements PacketHandler<KeybindPacket> {
         @Override
         public void encode(KeybindPacket packet, PacketByteBuf buf) {
@@ -40,9 +43,5 @@ public record KeybindPacket(Keybind keybind, boolean pressed) implements Packet<
         public PacketContext handle(KeybindPacket message) {
             return (player, world) -> ModKeyBindings.pressedKeyOnServer(player.getUuid(), message.keybind, message.pressed());
         }
-    }
-
-    public enum Keybind {
-        JUMP, SPRINT, FORWARD, BACK, LEFT, RIGHT
     }
 }

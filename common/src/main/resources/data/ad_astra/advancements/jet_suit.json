@@ -1,50 +1,50 @@
 {
-    "display": {
-        "icon": {
-            "item": "ad_astra:jet_suit_helmet"
-        },
-        "title": {
-            "translate": "advancements.ad_astra.jet_suit.title"
-        },
-        "description": {
-            "translate": "advancements.ad_astra.jet_suit.description"
-        },
-        "frame": "challenge",
-        "show_toast": true,
-        "announce_to_chat": true,
-        "hidden": false
+  "display": {
+    "icon": {
+      "item": "ad_astra:jet_suit_helmet"
     },
-    "criteria": {
-        "jet_suit": {
-            "conditions": {
-                "items": [
-                    {
-                        "items": [
-                            "ad_astra:jet_suit_helmet"
-                        ]
-                    },
-                    {
-                        "items": [
-                            "ad_astra:jet_suit"
-                        ]
-                    },
-                    {
-                        "items": [
-                            "ad_astra:jet_suit_pants"
-                        ]
-                    },
-                    {
-                        "items": [
-                            "ad_astra:jet_suit_boots"
-                        ]
-                    }
-                ]
-            },
-            "trigger": "minecraft:inventory_changed"
-        }
+    "title": {
+      "translate": "advancements.ad_astra.jet_suit.title"
     },
-    "rewards": {
-        "experience": 250
+    "description": {
+      "translate": "advancements.ad_astra.jet_suit.description"
     },
-    "parent": "ad_astra:venus"
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "jet_suit": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "ad_astra:jet_suit_helmet"
+            ]
+          },
+          {
+            "items": [
+              "ad_astra:jet_suit"
+            ]
+          },
+          {
+            "items": [
+              "ad_astra:jet_suit_pants"
+            ]
+          },
+          {
+            "items": [
+              "ad_astra:jet_suit_boots"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "rewards": {
+    "experience": 250
+  },
+  "parent": "ad_astra:venus"
 }

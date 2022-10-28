@@ -1,9 +1,9 @@
 {
-    "replace": false,
-    "values": [
-        "ad_astra:moon_iron_ore",
-        "ad_astra:mars_iron_ore",
-        "ad_astra:mercury_iron_ore",
-        "ad_astra:glacio_iron_ore"
-    ]
+  "replace": false,
+  "values": [
+    "ad_astra:moon_iron_ore",
+    "ad_astra:mars_iron_ore",
+    "ad_astra:mercury_iron_ore",
+    "ad_astra:glacio_iron_ore"
+  ]
 }

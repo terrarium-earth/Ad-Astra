@@ -1,10 +1,10 @@
 {
-    "replace": false,
-    "values": [
-      "ad_astra:moon_cobblestone",
-      "ad_astra:mars_cobblestone",
-      "ad_astra:venus_cobblestone",
-      "ad_astra:mercury_cobblestone",
-      "ad_astra:glacio_cobblestone"
-    ]
-  }
+  "replace": false,
+  "values": [
+    "ad_astra:moon_cobblestone",
+    "ad_astra:mars_cobblestone",
+    "ad_astra:venus_cobblestone",
+    "ad_astra:mercury_cobblestone",
+    "ad_astra:glacio_cobblestone"
+  ]
+}

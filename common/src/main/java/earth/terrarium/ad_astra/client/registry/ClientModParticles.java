@@ -6,7 +6,7 @@ import net.fabricmc.api.Environment;
 @Environment(EnvType.CLIENT)
 public class ClientModParticles {
 
-	public static void register() {
+    public static void register() {
 
-	}
+    }
 }

@@ -1,7 +1,7 @@
 {
-    "replace": false,
-    "values": [
-        "ad_astra:strophar_cap",
-        "ad_astra:strophar_stem"
-    ]
+  "replace": false,
+  "values": [
+    "ad_astra:strophar_cap",
+    "ad_astra:strophar_stem"
+  ]
 }

@@ -1,15 +1,15 @@
 {
-    "name": "ad_astra:dungeon/moon/entrance",
-    "fallback": "minecraft:empty",
-    "elements": [
-      {
-        "weight": 100,
-        "element": {
-          "location": "ad_astra:dungeon/moon/entrance",
-          "processors": "minecraft:empty",
-          "projection": "rigid",
-          "element_type": "minecraft:single_pool_element"
-        }
+  "name": "ad_astra:dungeon/moon/entrance",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 100,
+      "element": {
+        "location": "ad_astra:dungeon/moon/entrance",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
       }
-    ]
-  }
+    }
+  ]
+}

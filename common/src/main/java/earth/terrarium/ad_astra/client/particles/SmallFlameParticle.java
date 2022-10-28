@@ -12,29 +12,29 @@ import net.minecraft.particle.DefaultParticleType;
 @Environment(EnvType.CLIENT)
 public class SmallFlameParticle extends ExplosionSmokeParticle {
 
-	protected SmallFlameParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
-		super(world, x, y, z, velocityX, velocityY, velocityZ, spriteProvider);
-		this.gravityStrength = 2.5f;
-		this.scale(0.5f);
-	}
+    protected SmallFlameParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
+        super(world, x, y, z, velocityX, velocityY, velocityZ, spriteProvider);
+        this.gravityStrength = 2.5f;
+        this.scale(0.5f);
+    }
 
-	@Override
-	public void tick() {
-		super.tick();
-		this.velocityY -= 0.004 + 0.04 * this.gravityStrength;
-	}
+    @Override
+    public void tick() {
+        super.tick();
+        this.velocityY -= 0.004 + 0.04 * this.gravityStrength;
+    }
 
-	@Environment(value = EnvType.CLIENT)
-	public static class Factory implements ParticleFactory<DefaultParticleType> {
-		private final SpriteProvider spriteProvider;
+    @Environment(value = EnvType.CLIENT)
+    public static class Factory implements ParticleFactory<DefaultParticleType> {
+        private final SpriteProvider spriteProvider;
 
-		public Factory(SpriteProvider spriteProvider) {
-			this.spriteProvider = spriteProvider;
-		}
+        public Factory(SpriteProvider spriteProvider) {
+            this.spriteProvider = spriteProvider;
+        }
 
-		@Override
-		public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-			return new SmallFlameParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
-		}
-	}
+        @Override
+        public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
+            return new SmallFlameParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
+        }
+    }
 }

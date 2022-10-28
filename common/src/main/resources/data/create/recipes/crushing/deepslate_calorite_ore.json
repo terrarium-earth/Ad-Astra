@@ -1,39 +1,39 @@
 {
-    "fabric:load_conditions": [
-        {
-            "condition": "fabric:all_mods_loaded",
-            "values": [
-                "create"
-            ]
-        }
-    ],
-    "conditions": [
-        {
-            "condition": "forge:mod_loaded",
-            "mod_id": "create"
-        }
-    ],
-    "type": "create:crushing",
-    "ingredients": [
-        {
-            "item": "ad_astra:deepslate_calorite_ore"
-        }
-    ],
-    "results": [
-        {
-            "item": "ad_astra:raw_calorite",
-            "count": 2
-        },
-        {
-            "item": "ad_astra:raw_calorite",
-            "count": 1,
-            "chance": 0.25
-        },
-        {
-            "item": "minecraft:deepslate",
-            "count": 1,
-            "chance": 0.125
-        }
-    ],
-    "processingTime": 300
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "create"
+      ]
+    }
+  ],
+  "conditions": [
+    {
+      "condition": "forge:mod_loaded",
+      "mod_id": "create"
+    }
+  ],
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "ad_astra:deepslate_calorite_ore"
+    }
+  ],
+  "results": [
+    {
+      "item": "ad_astra:raw_calorite",
+      "count": 2
+    },
+    {
+      "item": "ad_astra:raw_calorite",
+      "count": 1,
+      "chance": 0.25
+    },
+    {
+      "item": "minecraft:deepslate",
+      "count": 1,
+      "chance": 0.125
+    }
+  ],
+  "processingTime": 300
 }

@@ -1,10 +1,10 @@
 package earth.terrarium.ad_astra.commands;
 
-import earth.terrarium.ad_astra.screen.PlanetSelectionScreenHandlerFactory;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import earth.terrarium.ad_astra.screen.PlanetSelectionScreenHandlerFactory;
 import earth.terrarium.botarium.api.menu.MenuHooks;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.Entity;

@@ -1,36 +1,36 @@
 {
-    "name": "Lunarians",
-    "icon": "ad_astra:moon_stone_bricks",
-    "sortnum": 5,
-    "category": "ad_astra:the_moon",
-    "pages": [
-        {
-            "type": "patchouli:spotlight",
-            "title": "Lunarian",
-            "item": "ad_astra:moon_stone_bricks",
-            "text": "Throughout the moon, There are large, inhabited underground villages. These villages contain an alien form of the earth villager, who call themselves Lunarians. Unlike their earth counterpart, Lunarian don't need oxygen and can survive the chilling environment of the moon."
-        },
-        {
-            "type": "patchouli:entity",
-            "entity": "ad_astra:lunarian",
-            "default_rotation": 45
-        },
-        {
-            "type": "patchouli:text",
-            "text": "Lunarian have different trades than earth villagers, featuring planet-specific materials, space suits and oxygen gear."
-        },
-        {
-            "type": "patchouli:spotlight",
-            "title": "Wandering Trader",
-            "item": "ad_astra:lunarian_wandering_trader_spawn_egg",
-            "text": "Lunarian Wandering Traders appear on every moon and planet. They have many rocket-related trades that may save your life, including launch pads, oxygen, fuel, soul torches and water. They accept emeralds, which are commonly found in the various structures on the moon and planets."
-        },
-        {
-            "type": "patchouli:entity",
-            "name": "Wandering Trader",
-            "entity": "ad_astra:lunarian_wandering_trader",
-            "default_rotation": 45,
-            "scale": 0.8
-        }
-    ]
+  "name": "Lunarians",
+  "icon": "ad_astra:moon_stone_bricks",
+  "sortnum": 5,
+  "category": "ad_astra:the_moon",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Lunarian",
+      "item": "ad_astra:moon_stone_bricks",
+      "text": "Throughout the moon, There are large, inhabited underground villages. These villages contain an alien form of the earth villager, who call themselves Lunarians. Unlike their earth counterpart, Lunarian don't need oxygen and can survive the chilling environment of the moon."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "ad_astra:lunarian",
+      "default_rotation": 45
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Lunarian have different trades than earth villagers, featuring planet-specific materials, space suits and oxygen gear."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Wandering Trader",
+      "item": "ad_astra:lunarian_wandering_trader_spawn_egg",
+      "text": "Lunarian Wandering Traders appear on every moon and planet. They have many rocket-related trades that may save your life, including launch pads, oxygen, fuel, soul torches and water. They accept emeralds, which are commonly found in the various structures on the moon and planets."
+    },
+    {
+      "type": "patchouli:entity",
+      "name": "Wandering Trader",
+      "entity": "ad_astra:lunarian_wandering_trader",
+      "default_rotation": 45,
+      "scale": 0.8
+    }
+  ]
 }

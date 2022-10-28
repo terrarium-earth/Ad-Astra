@@ -10,21 +10,21 @@ import net.minecraft.world.World;
 
 public class ZombifiedMoglerEntity extends ZoglinEntity {
 
-	public static DefaultAttributeContainer.Builder createMobAttributes() {
-		return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 40.0).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3f).add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 0.6f).add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 1.0).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 6.0);
-	}
+    public ZombifiedMoglerEntity(EntityType<? extends ZoglinEntity> entityType, World world) {
+        super(entityType, world);
+    }
 
-	public ZombifiedMoglerEntity(EntityType<? extends ZoglinEntity> entityType, World world) {
-		super(entityType, world);
-	}
+    public static DefaultAttributeContainer.Builder createMobAttributes() {
+        return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 40.0).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3f).add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 0.6f).add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 1.0).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 6.0);
+    }
 
-	@Override
-	public boolean canImmediatelyDespawn(double distanceSquared) {
-		return false;
-	}
+    @Override
+    public boolean canImmediatelyDespawn(double distanceSquared) {
+        return false;
+    }
 
-	@Override
-	public boolean shouldAttack(LivingEntity entity) {
-		return super.shouldAttack(entity) && !(entity instanceof ZombifiedMoglerEntity);
-	}
+    @Override
+    public boolean shouldAttack(LivingEntity entity) {
+        return super.shouldAttack(entity) && !(entity instanceof ZombifiedMoglerEntity);
+    }
 }

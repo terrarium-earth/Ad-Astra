@@ -1,14 +1,14 @@
 {
-    "structures": [
-      {
-        "structure": "ad_astra:mars_temple",
-        "weight": 1
-      }
-    ],
-    "placement": {
-      "salt": 486424619,
-      "spacing": 40,
-      "separation": 27,
-      "type": "minecraft:random_spread"
+  "structures": [
+    {
+      "structure": "ad_astra:mars_temple",
+      "weight": 1
     }
+  ],
+  "placement": {
+    "salt": 486424619,
+    "spacing": 40,
+    "separation": 27,
+    "type": "minecraft:random_spread"
   }
+}

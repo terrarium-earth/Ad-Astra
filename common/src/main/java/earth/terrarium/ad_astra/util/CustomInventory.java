@@ -10,29 +10,29 @@ import net.minecraft.nbt.NbtList;
  */
 public class CustomInventory extends SimpleInventory {
 
-	public CustomInventory(ItemStack... items) {
-		super(items);
-	}
+    public CustomInventory(ItemStack... items) {
+        super(items);
+    }
 
-	public CustomInventory(int size) {
-		super(size);
-	}
+    public CustomInventory(int size) {
+        super(size);
+    }
 
-	@Override
-	public void readNbtList(NbtList nbtList) {
-		for (int slot = 0; slot < nbtList.size(); ++slot) {
-			ItemStack stack = ItemStack.fromNbt(nbtList.getCompound(slot));
-			this.setStack(slot, stack);
-		}
-	}
+    @Override
+    public void readNbtList(NbtList nbtList) {
+        for (int slot = 0; slot < nbtList.size(); ++slot) {
+            ItemStack stack = ItemStack.fromNbt(nbtList.getCompound(slot));
+            this.setStack(slot, stack);
+        }
+    }
 
-	@Override
-	public NbtList toNbtList() {
-		NbtList nbtList = new NbtList();
-		for (int slot = 0; slot < this.size(); ++slot) {
-			ItemStack stack = this.getStack(slot);
-			nbtList.add(stack.writeNbt(new NbtCompound()));
-		}
-		return nbtList;
-	}
+    @Override
+    public NbtList toNbtList() {
+        NbtList nbtList = new NbtList();
+        for (int slot = 0; slot < this.size(); ++slot) {
+            ItemStack stack = this.getStack(slot);
+            nbtList.add(stack.writeNbt(new NbtCompound()));
+        }
+        return nbtList;
+    }
 }

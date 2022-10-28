@@ -1,17 +1,11 @@
 package earth.terrarium.ad_astra.items.armour;
 
-import java.util.List;
-import java.util.stream.StreamSupport;
-
-import earth.terrarium.botarium.api.fluid.FluidHooks;
-import net.minecraft.entity.Entity;
-import org.apache.commons.lang3.Range;
-
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.items.FluidContainingItem;
 import earth.terrarium.ad_astra.registry.ModItems;
-
+import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ArmorMaterial;
@@ -22,65 +16,69 @@ import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
+import org.apache.commons.lang3.Range;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
+import java.util.stream.StreamSupport;
 
 public class SpaceSuit extends DyeableArmorItem implements FluidContainingItem, ModArmourItem {
 
-	public SpaceSuit(ArmorMaterial material, EquipmentSlot slot, Item.Settings settings) {
-		super(material, slot, settings);
-	}
+    public SpaceSuit(ArmorMaterial material, EquipmentSlot slot, Item.Settings settings) {
+        super(material, slot, settings);
+    }
 
-	@Override
-	public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-		if (stack.isOf(ModItems.SPACE_SUIT.get()) || stack.isOf(ModItems.NETHERITE_SPACE_SUIT.get()) || stack.isOf(ModItems.JET_SUIT.get())) {
-			long oxygen = FluidHooks.toMillibuckets(this.getFluidAmount(stack));
-			tooltip.add(Text.translatable("tooltip.ad_astra.space_suit", oxygen, FluidHooks.toMillibuckets(getTankSize())).setStyle(Style.EMPTY.withColor(oxygen > 0 ? Formatting.GREEN : Formatting.RED)));
-		}
-	}
+    public static boolean hasFullSet(LivingEntity entity) {
+        return StreamSupport.stream(entity.getArmorItems().spliterator(), false).allMatch(s -> s.getItem() instanceof SpaceSuit);
+    }
 
-	@Override
-	public long getTankSize() {
-		return AdAstra.CONFIG.spaceSuit.spaceSuitTankSize;
-	}
+    /**
+     * Checks if the entity is wearing a space suit and if that space suit has oxygen.
+     *
+     * @param entity The entity wearing the space suit
+     * @return Whether the entity has oxygen or not
+     */
+    public static boolean hasOxygenatedSpaceSuit(LivingEntity entity) {
+        ItemStack chest = entity.getEquippedStack(EquipmentSlot.CHEST);
+        if (chest.getItem() instanceof SpaceSuit suit) {
+            return suit.getFluidAmount(chest) > 0;
+        }
 
-	public Range<Integer> getTemperatureThreshold() {
-		return Range.between(-300, 60);
-	}
+        return false;
+    }
 
-	public static boolean hasFullSet(LivingEntity entity) {
-		return StreamSupport.stream(entity.getArmorItems().spliterator(), false).allMatch(s -> s.getItem() instanceof SpaceSuit);
-	}
+    public static void consumeSpaceSuitOxygen(LivingEntity entity, long amount) {
+        ItemStack chest = entity.getEquippedStack(EquipmentSlot.CHEST);
+        if (chest.getItem() instanceof SpaceSuit suit) {
+            suit.setFluidAmount(chest, suit.getFluidAmount(chest) - amount);
+        }
+    }
 
-	/**
-	 * Checks if the entity is wearing a space suit and if that space suit has oxygen.
-	 *
-	 * @param entity The entity wearing the space suit
-	 * @return Whether the entity has oxygen or not
-	 */
-	public static boolean hasOxygenatedSpaceSuit(LivingEntity entity) {
-		ItemStack chest = entity.getEquippedStack(EquipmentSlot.CHEST);
-		if (chest.getItem() instanceof SpaceSuit suit) {
-			return suit.getFluidAmount(chest) > 0;
-		}
+    @Override
+    public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
+        if (stack.isOf(ModItems.SPACE_SUIT.get()) || stack.isOf(ModItems.NETHERITE_SPACE_SUIT.get()) || stack.isOf(ModItems.JET_SUIT.get())) {
+            long oxygen = FluidHooks.toMillibuckets(this.getFluidAmount(stack));
+            tooltip.add(Text.translatable("tooltip.ad_astra.space_suit", oxygen, FluidHooks.toMillibuckets(getTankSize())).setStyle(Style.EMPTY.withColor(oxygen > 0 ? Formatting.GREEN : Formatting.RED)));
+        }
+    }
 
-		return false;
-	}
+    @Override
+    public long getTankSize() {
+        return AdAstra.CONFIG.spaceSuit.spaceSuitTankSize;
+    }
 
-	public static void consumeSpaceSuitOxygen(LivingEntity entity, long amount) {
-		ItemStack chest = entity.getEquippedStack(EquipmentSlot.CHEST);
-		if (chest.getItem() instanceof SpaceSuit suit) {
-			suit.setFluidAmount(chest, suit.getFluidAmount(chest) - amount);
-		}
-	}
+    public Range<Integer> getTemperatureThreshold() {
+        return Range.between(-300, 60);
+    }
 
-	@Override
-	public int getColor(ItemStack stack) {
-		int colour = super.getColor(stack);
-		return colour == 10511680 ? 0xFFFFFF : colour;
-	}
+    @Override
+    public int getColor(ItemStack stack) {
+        int colour = super.getColor(stack);
+        return colour == 10511680 ? 0xFFFFFF : colour;
+    }
 
-	@Override
-	public @Nullable String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
-		return AdAstra.MOD_ID + ("overlay".equals(type) ? ":textures/entity/armour/space_suit_overlay.png" : ":textures/entity/armour/space_suit.png");
-	}
+    @Override
+    public @Nullable String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
+        return AdAstra.MOD_ID + ("overlay".equals(type) ? ":textures/entity/armour/space_suit_overlay.png" : ":textures/entity/armour/space_suit.png");
+    }
 }

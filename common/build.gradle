@@ -14,11 +14,11 @@ dependencies {
     modImplementation "earth.terrarium:botarium-common-${rootProject.minecraft_version}:${rootProject.botarium_version}"
     modImplementation "com.teamresourceful.resourcefullib:resourcefullib-common-$rootProject.resourcefullib_version"
     modApi("me.shedaniel.cloth:cloth-config:${project.cloth_config_version}") {
-		exclude(group: "net.fabricmc.fabric-api")
-	}
+        exclude(group: "net.fabricmc.fabric-api")
+    }
 
-	// REI
-	modCompileOnly("me.shedaniel:RoughlyEnoughItems-api:$project.rei_version")
+    // REI
+    modCompileOnly("me.shedaniel:RoughlyEnoughItems-api:$project.rei_version")
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin:$project.rei_version")
 }
 

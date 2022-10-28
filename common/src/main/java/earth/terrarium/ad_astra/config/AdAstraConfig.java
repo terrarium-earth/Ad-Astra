@@ -3,7 +3,6 @@ package earth.terrarium.ad_astra.config;
 import earth.terrarium.ad_astra.config.AdAstraConfig.VehiclesConfig.LanderConfig;
 import earth.terrarium.ad_astra.config.AdAstraConfig.VehiclesConfig.RocketConfig;
 import earth.terrarium.ad_astra.config.AdAstraConfig.VehiclesConfig.RoverConfig;
-
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
@@ -49,7 +48,6 @@ public class AdAstraConfig implements ConfigData {
         public final boolean spawnMartianRaptors = true;
         public final boolean spawnMoglers = true;
         public final boolean spawnSulfurCreepers = true;
-        public boolean spawnLunarianWanderingTrader = true;
         @ConfigEntry.Gui.Tooltip()
         public final boolean doEntityGravity = true;
         @ConfigEntry.Gui.Tooltip()
@@ -60,12 +58,13 @@ public class AdAstraConfig implements ConfigData {
         public final boolean doSpaceMuffler = true;
         public final long oxygenTankSize = FluidHooks.toMillibuckets(500);
         public final int hammerDurability = 64;
-        public float orbitGravity = 3.26f;
         public final boolean giveAstroduxAtSpawn = false;
         public final int oxygenBarXOffset = 0;
         public final int oxygenBarYOffset = 0;
         public final int energyBarXOffset = 0;
         public final int energyBarYOffset = 0;
+        public boolean spawnLunarianWanderingTrader = true;
+        public float orbitGravity = 3.26f;
     }
 
     public static class SpaceSuitConfig {
@@ -79,10 +78,10 @@ public class AdAstraConfig implements ConfigData {
         public final long jetSuitEnergyPerTick = 60;
         public final long jetSuitTankSize = FluidHooks.buckets(4);
         public final long jetSuitMaxEnergy = 1000000L;
-        public boolean spawnJetSuitParticles = true;
         public final boolean enableJetSuitFlight = true;
         public final int jetSuitProtectionMultiplier = 1;
         public final int jetSuitArmorToughness = 5;
+        public boolean spawnJetSuitParticles = true;
     }
 
     public static class VehiclesConfig {
@@ -121,9 +120,9 @@ public class AdAstraConfig implements ConfigData {
         }
 
         public static class LanderConfig {
-            public double boosterSpeed = 0.1;
             @ConfigEntry.Gui.Tooltip(count = 2)
             public final double boosterThreshold = -0.1;
+            public double boosterSpeed = 0.1;
         }
     }
 

@@ -2,7 +2,6 @@ package earth.terrarium.ad_astra.blocks.machines;
 
 import earth.terrarium.ad_astra.blocks.machines.entity.OxygenDistributorBlockEntity;
 import earth.terrarium.ad_astra.util.OxygenUtils;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.player.PlayerEntity;
@@ -13,45 +12,45 @@ import net.minecraft.world.explosion.Explosion;
 
 public class OxygenDistributorBlock extends AbstractMachineBlock {
 
-	public OxygenDistributorBlock(Settings settings) {
-		super(settings);
-	}
+    public OxygenDistributorBlock(Settings settings) {
+        super(settings);
+    }
 
-	@Override
-	protected boolean useFacing() {
-		return true;
-	}
+    public static void removeOxygen(World world, BlockPos pos) {
+        if (world instanceof ServerWorld serverWorld) {
+            OxygenUtils.removeEntry(serverWorld, pos);
+        }
+    }
 
-	@Override
-	protected boolean useLit() {
-		return true;
-	}
+    @Override
+    protected boolean useFacing() {
+        return true;
+    }
 
-	@Override
-	public OxygenDistributorBlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-		return new OxygenDistributorBlockEntity(pos, state);
-	}
+    @Override
+    protected boolean useLit() {
+        return true;
+    }
 
-	@Override
-	public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-		removeOxygen(world, pos);
-		super.onBreak(world, pos, state, player);
-	}
+    @Override
+    public OxygenDistributorBlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        return new OxygenDistributorBlockEntity(pos, state);
+    }
 
-	@Override
-	public void onDestroyedByExplosion(World world, BlockPos pos, Explosion explosion) {
-		removeOxygen(world, pos);
-		super.onDestroyedByExplosion(world, pos, explosion);
-	}
+    @Override
+    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+        removeOxygen(world, pos);
+        super.onBreak(world, pos, state, player);
+    }
 
-	@Override
-	public PistonBehavior getPistonBehavior(BlockState state) {
-		return PistonBehavior.BLOCK;
-	}
+    @Override
+    public void onDestroyedByExplosion(World world, BlockPos pos, Explosion explosion) {
+        removeOxygen(world, pos);
+        super.onDestroyedByExplosion(world, pos, explosion);
+    }
 
-	public static void removeOxygen(World world, BlockPos pos) {
-		if (world instanceof ServerWorld serverWorld) {
-			OxygenUtils.removeEntry(serverWorld, pos);
-		}
-	}
+    @Override
+    public PistonBehavior getPistonBehavior(BlockState state) {
+        return PistonBehavior.BLOCK;
+    }
 }

@@ -1,76 +1,76 @@
 {
-	"type": "ad_astra:nasa_workbench",
-	"ingredients": [
-		{
-			"ingredient": {
-				"item": "ad_astra:rocket_nose_cone"
-			}
-		},
-		{
-			"ingredient": {
-				"tag": "c:desh_blocks"
-			}
-		},
-		{
-			"ingredient": {
-				"tag": "c:desh_blocks"
-			}
-		},
-		{
-			"ingredient": {
-				"tag": "c:desh_blocks"
-			}
-		},
-		{
-			"ingredient": {
-				"tag": "c:desh_blocks"
-			}
-		},
-		{
-			"ingredient": {
-				"tag": "c:desh_blocks"
-			}
-		},
-		{
-			"ingredient": {
-				"tag": "c:desh_blocks"
-			}
-		},
-		{
-			"ingredient": {
-				"item": "ad_astra:rocket_fin"
-			}
-		},
-		{
-			"ingredient": {
-				"item": "ad_astra:desh_tank"
-			}
-		},
-		{
-			"ingredient": {
-				"item": "ad_astra:desh_tank"
-			}
-		},
-		{
-			"ingredient": {
-				"item": "ad_astra:rocket_fin"
-			}
-		},
-		{
-			"ingredient": {
-				"item": "ad_astra:rocket_fin"
-			}
-		},
-		{
-			"ingredient": {
-				"item": "ad_astra:desh_engine"
-			}
-		},
-		{
-			"ingredient": {
-				"item": "ad_astra:rocket_fin"
-			}
-		}
-	],
-	"output": "ad_astra:tier_2_rocket"
+  "type": "ad_astra:nasa_workbench",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "ad_astra:rocket_nose_cone"
+      }
+    },
+    {
+      "ingredient": {
+        "tag": "c:desh_blocks"
+      }
+    },
+    {
+      "ingredient": {
+        "tag": "c:desh_blocks"
+      }
+    },
+    {
+      "ingredient": {
+        "tag": "c:desh_blocks"
+      }
+    },
+    {
+      "ingredient": {
+        "tag": "c:desh_blocks"
+      }
+    },
+    {
+      "ingredient": {
+        "tag": "c:desh_blocks"
+      }
+    },
+    {
+      "ingredient": {
+        "tag": "c:desh_blocks"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "ad_astra:rocket_fin"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "ad_astra:desh_tank"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "ad_astra:desh_tank"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "ad_astra:rocket_fin"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "ad_astra:rocket_fin"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "ad_astra:desh_engine"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "ad_astra:rocket_fin"
+      }
+    }
+  ],
+  "output": "ad_astra:tier_2_rocket"
 }

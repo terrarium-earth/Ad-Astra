@@ -1,15 +1,13 @@
 package earth.terrarium.ad_astra.mixin.client;
 
+import earth.terrarium.ad_astra.recipes.ModRecipeType;
+import net.minecraft.client.recipebook.ClientRecipeBook;
+import net.minecraft.client.recipebook.RecipeBookGroup;
+import net.minecraft.recipe.Recipe;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import earth.terrarium.ad_astra.recipes.ModRecipeType;
-
-import net.minecraft.client.recipebook.ClientRecipeBook;
-import net.minecraft.client.recipebook.RecipeBookGroup;
-import net.minecraft.recipe.Recipe;
 
 @Mixin(ClientRecipeBook.class)
 public class ClientRecipeBookMixin {

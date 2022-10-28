@@ -10,21 +10,21 @@ import net.minecraft.screen.slot.Slot;
 
 public class WaterPumpScreenHandler extends AbstractMachineScreenHandler {
 
-	public WaterPumpScreenHandler(int syncId, PlayerInventory inventory, PacketByteBuf buf) {
-		this(syncId, inventory, (WaterPumpBlockEntity) inventory.player.world.getBlockEntity(buf.readBlockPos()));
-	}
+    public WaterPumpScreenHandler(int syncId, PlayerInventory inventory, PacketByteBuf buf) {
+        this(syncId, inventory, (WaterPumpBlockEntity) inventory.player.world.getBlockEntity(buf.readBlockPos()));
+    }
 
-	public WaterPumpScreenHandler(int syncId, PlayerInventory inventory, WaterPumpBlockEntity entity) {
-		super(ModScreenHandlers.WATER_PUMP_SCREEN_HANDLER.get(), syncId, inventory, entity, new Slot[] {});
-	}
+    public WaterPumpScreenHandler(int syncId, PlayerInventory inventory, WaterPumpBlockEntity entity) {
+        super(ModScreenHandlers.WATER_PUMP_SCREEN_HANDLER.get(), syncId, inventory, entity, new Slot[]{});
+    }
 
-	@Override
-	public int getPlayerInventoryOffset() {
-		return 14;
-	}
+    @Override
+    public int getPlayerInventoryOffset() {
+        return 14;
+    }
 
-	@Override
-	public void syncClientScreen() {
-		NetworkHandling.CHANNEL.sendToPlayer(new MachineInfoPacket(blockEntity.getEnergy(), ((WaterPumpBlockEntity)blockEntity).getFluidContainer().getFluids()), this.player);
-	}
+    @Override
+    public void syncClientScreen() {
+        NetworkHandling.CHANNEL.sendToPlayer(new MachineInfoPacket(blockEntity.getEnergy(), ((WaterPumpBlockEntity) blockEntity).getFluidContainer().getFluids()), this.player);
+    }
 }

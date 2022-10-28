@@ -1,23 +1,23 @@
 {
-    "name": "Cables",
-    "icon": "ad_astra:desh_cable",
-    "sortnum": 4,
-    "category": "ad_astra:the_moon",
-    "pages": [
-        {
-            "type": "patchouli:spotlight",
-            "title": "Cables",
-            "item": "ad_astra:desh_cable",
-            "text": "Cables allow for long-range energy transfer. There are two variants: steel and desh – desh, having a higher transfer rate. When used with a wrench, cables can be configured to extend in directions or to disconnect from nodes in the network."
-        },
-        {
-            "type": "patchouli:crafting",
-            "recipe": "ad_astra:recipes/steel_cable",
-            "recipe2": "ad_astra:recipes/desh_cable"
-        },
-        {
-            "type": "patchouli:crafting",
-            "recipe": "ad_astra:recipes/wrench"
-        }
-    ]
+  "name": "Cables",
+  "icon": "ad_astra:desh_cable",
+  "sortnum": 4,
+  "category": "ad_astra:the_moon",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Cables",
+      "item": "ad_astra:desh_cable",
+      "text": "Cables allow for long-range energy transfer. There are two variants: steel and desh – desh, having a higher transfer rate. When used with a wrench, cables can be configured to extend in directions or to disconnect from nodes in the network."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:recipes/steel_cable",
+      "recipe2": "ad_astra:recipes/desh_cable"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:recipes/wrench"
+    }
+  ]
 }

@@ -1,76 +1,76 @@
 {
-	"type": "ad_astra:nasa_workbench",
-	"ingredients": [
-		{
-			"ingredient": {
-				"item": "ad_astra:rocket_nose_cone"
-			}
-		},
-		{
-			"ingredient": {
-				"tag": "forge:calorite_blocks"
-			}
-		},
-		{
-			"ingredient": {
-				"tag": "forge:calorite_blocks"
-			}
-		},
-		{
-			"ingredient": {
-				"tag": "forge:calorite_blocks"
-			}
-		},
-		{
-			"ingredient": {
-				"tag": "forge:calorite_blocks"
-			}
-		},
-		{
-			"ingredient": {
-				"tag": "forge:calorite_blocks"
-			}
-		},
-		{
-			"ingredient": {
-				"tag": "forge:calorite_blocks"
-			}
-		},
-		{
-			"ingredient": {
-				"item": "ad_astra:rocket_fin"
-			}
-		},
-		{
-			"ingredient": {
-				"item": "ad_astra:calorite_tank"
-			}
-		},
-		{
-			"ingredient": {
-				"item": "ad_astra:calorite_tank"
-			}
-		},
-		{
-			"ingredient": {
-				"item": "ad_astra:rocket_fin"
-			}
-		},
-		{
-			"ingredient": {
-				"item": "ad_astra:rocket_fin"
-			}
-		},
-		{
-			"ingredient": {
-				"item": "ad_astra:calorite_engine"
-			}
-		},
-		{
-			"ingredient": {
-				"item": "ad_astra:rocket_fin"
-			}
-		}
-	],
-	"output": "ad_astra:tier_4_rocket"
+  "type": "ad_astra:nasa_workbench",
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "ad_astra:rocket_nose_cone"
+      }
+    },
+    {
+      "ingredient": {
+        "tag": "forge:calorite_blocks"
+      }
+    },
+    {
+      "ingredient": {
+        "tag": "forge:calorite_blocks"
+      }
+    },
+    {
+      "ingredient": {
+        "tag": "forge:calorite_blocks"
+      }
+    },
+    {
+      "ingredient": {
+        "tag": "forge:calorite_blocks"
+      }
+    },
+    {
+      "ingredient": {
+        "tag": "forge:calorite_blocks"
+      }
+    },
+    {
+      "ingredient": {
+        "tag": "forge:calorite_blocks"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "ad_astra:rocket_fin"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "ad_astra:calorite_tank"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "ad_astra:calorite_tank"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "ad_astra:rocket_fin"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "ad_astra:rocket_fin"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "ad_astra:calorite_engine"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "ad_astra:rocket_fin"
+      }
+    }
+  ],
+  "output": "ad_astra:tier_4_rocket"
 }

@@ -7,7 +7,6 @@ import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 
@@ -15,6 +14,10 @@ public class ModArmourExtension implements IClientItemExtensions {
 
     private ArmourModelSupplier renderer;
 
+    @SuppressWarnings("unchecked")
+    private static <T extends LivingEntity> void uncheckedCopyTo(BipedEntityModel<T> from, BipedEntityModel<?> to) {
+        from.copyStateTo((BipedEntityModel<T>) to);
+    }
 
     @Override
     @SuppressWarnings("unchecked")
@@ -37,10 +40,5 @@ public class ModArmourExtension implements IClientItemExtensions {
         } else {
             return original;
         }
-    }
-
-    @SuppressWarnings("unchecked")
-    private static <T extends LivingEntity> void uncheckedCopyTo(BipedEntityModel<T> from, BipedEntityModel<?> to) {
-        from.copyStateTo((BipedEntityModel<T>)to);
     }
 }
