@@ -1,6 +1,8 @@
 package earth.terrarium.ad_astra.screen.handler;
 
 import earth.terrarium.ad_astra.blocks.machines.entity.NasaWorkbenchBlockEntity;
+import earth.terrarium.ad_astra.networking.NetworkHandling;
+import earth.terrarium.ad_astra.networking.packets.server.MachineInfoPacket;
 import earth.terrarium.ad_astra.recipes.NasaWorkbenchRecipe;
 import earth.terrarium.ad_astra.registry.ModRecipes;
 import earth.terrarium.ad_astra.registry.ModScreenHandlers;
@@ -15,7 +17,7 @@ import net.minecraft.screen.slot.SlotActionType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NasaWorkbenchScreenHandler extends AbstractMachineScreenHandler {
+public class NasaWorkbenchScreenHandler extends AbstractMachineScreenHandler<NasaWorkbenchBlockEntity> {
 
     private ItemStack output = ItemStack.EMPTY;
     private List<Integer> stackCounts = new ArrayList<>();
@@ -74,12 +76,11 @@ public class NasaWorkbenchScreenHandler extends AbstractMachineScreenHandler {
 
     @Override
     public void onSlotClick(int slotIndex, int button, SlotActionType actionType, PlayerEntity player) {
-        NasaWorkbenchBlockEntity entity = (NasaWorkbenchBlockEntity) blockEntity;
 
         if (slotIndex == 14) {
-            if (!entity.getItems().get(14).isEmpty()) {
-                entity.spawnResultParticles();
-                entity.spawnOutputAndClearInput(this.stackCounts, this.output);
+            if (!machine.getItems().get(14).isEmpty()) {
+                machine.spawnResultParticles();
+                machine.spawnOutputAndClearInput(this.stackCounts, this.output);
             }
         } else {
             super.onSlotClick(slotIndex, button, actionType, player);
@@ -94,7 +95,7 @@ public class NasaWorkbenchScreenHandler extends AbstractMachineScreenHandler {
 
     public void updateContent() {
 
-        NasaWorkbenchRecipe recipe = ModRecipes.NASA_WORKBENCH_RECIPE.get().findFirst(world, f -> f.test(this.blockEntity));
+        NasaWorkbenchRecipe recipe = ModRecipes.NASA_WORKBENCH_RECIPE.get().findFirst(world, f -> f.test(this.machine));
 
         ItemStack output = ItemStack.EMPTY;
         if (recipe != null) {
@@ -102,7 +103,12 @@ public class NasaWorkbenchScreenHandler extends AbstractMachineScreenHandler {
             this.stackCounts = recipe.getStackCounts();
         }
         this.output = output;
-        this.blockEntity.setStack(14, output);
+        this.machine.setStack(14, output);
         this.updateToClient();
+    }
+
+    @Override
+    public void syncClientScreen() {
+        NetworkHandling.CHANNEL.sendToPlayer(new MachineInfoPacket(0L, List.of()), this.player);
     }
 }

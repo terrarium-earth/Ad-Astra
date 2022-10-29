@@ -29,8 +29,8 @@ public class ModFluidAttributes {
             .overlayTexture(new ModIdentifier("block/fuel_overlay"));
 
     public static final ArchitecturyFluidAttributes CRYO_FUEL_FLUID_ATTRIBUTES = SimpleArchitecturyFluidAttributes.of(ModFluids.FLOWING_CRYO_FUEL, ModFluids.CRYO_FUEL_STILL)
-            .block(ModBlocks.FUEL_BLOCK)
-            .bucketItem(ModItems.FUEL_BUCKET)
+            .block(ModBlocks.CRYO_FUEL_BLOCK)
+            .bucketItem(ModItems.CRYO_FUEL_BUCKET)
             .density(71)
             .viscosity(71)
             .sourceTexture(new ModIdentifier("block/fluid_cryo_fuel_still"))

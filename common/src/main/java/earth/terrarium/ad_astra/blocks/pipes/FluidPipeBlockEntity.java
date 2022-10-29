@@ -26,15 +26,14 @@ public class FluidPipeBlockEntity extends BlockEntity implements InteractablePip
         return true;
     }
 
-    // TODO: Adrian needs to add insertion and extraction booleans on handlers
     @Override
     public boolean canTakeFrom(PlatformFluidHandler source) {
-        return true;
+        return source.supportsExtraction();
     }
 
     @Override
     public boolean canInsertInto(PlatformFluidHandler consumer) {
-        return true;
+        return consumer.supportsInsertion();
     }
 
     @Override

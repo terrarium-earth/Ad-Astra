@@ -16,28 +16,28 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public abstract class AbstractMachineScreenHandler extends ScreenHandler {
+public abstract class AbstractMachineScreenHandler<T extends AbstractMachineBlockEntity> extends ScreenHandler {
 
-    protected final AbstractMachineBlockEntity blockEntity;
+    protected final T machine;
     protected final World world;
     protected final PlayerEntity player;
     protected long energyAmount;
     protected List<FluidHolder> fluids;
 
-    public AbstractMachineScreenHandler(ScreenHandlerType<?> type, int syncId, PlayerInventory inventory, AbstractMachineBlockEntity entity) {
+    public AbstractMachineScreenHandler(ScreenHandlerType<?> type, int syncId, PlayerInventory inventory, T entity) {
         this(type, syncId, inventory, entity, new Slot[]{});
     }
 
     // Add additional slots.
-    public AbstractMachineScreenHandler(ScreenHandlerType<?> type, int syncId, PlayerInventory inventory, AbstractMachineBlockEntity entity, Slot[] slots) {
+    public AbstractMachineScreenHandler(ScreenHandlerType<?> type, int syncId, PlayerInventory inventory, T entity, Slot[] slots) {
         super(type, syncId);
-        this.blockEntity = entity;
+        this.machine = entity;
         this.world = entity.getWorld();
         this.player = inventory.player;
 
-        checkSize(inventory, this.blockEntity.getInventorySize());
+        checkSize(inventory, this.machine.getInventorySize());
 
-        this.blockEntity.onOpen(inventory.player);
+        this.machine.onOpen(inventory.player);
 
         for (Slot slot : slots) {
             this.addSlot(slot);
@@ -46,13 +46,13 @@ public abstract class AbstractMachineScreenHandler extends ScreenHandler {
         this.setPlayerInventory(inventory);
     }
 
-    public AbstractMachineBlockEntity getBlockEntity() {
-        return this.blockEntity;
+    public T getMachine() {
+        return this.machine;
     }
 
     @Override
     public boolean canUse(PlayerEntity player) {
-        return this.blockEntity.canPlayerUse(player);
+        return this.machine.canPlayerUse(player);
     }
 
     protected void setPlayerInventory(PlayerInventory inventory) {
@@ -81,11 +81,11 @@ public abstract class AbstractMachineScreenHandler extends ScreenHandler {
         if (slot.hasStack()) {
             ItemStack originalStack = slot.getStack();
             newStack = originalStack.copy();
-            if (index < this.blockEntity.size()) {
-                if (!this.insertItem(originalStack, this.blockEntity.size(), this.slots.size(), true)) {
+            if (index < this.machine.size()) {
+                if (!this.insertItem(originalStack, this.machine.size(), this.slots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.insertItem(originalStack, 0, this.blockEntity.size(), false)) {
+            } else if (!this.insertItem(originalStack, 0, this.machine.size(), false)) {
                 return ItemStack.EMPTY;
             }
 
@@ -127,7 +127,5 @@ public abstract class AbstractMachineScreenHandler extends ScreenHandler {
         syncClientScreen();
     }
 
-    public void syncClientScreen() {
-        NetworkHandling.CHANNEL.sendToPlayer(new MachineInfoPacket(blockEntity.getEnergy(), List.of()), this.player);
-    }
+    public abstract void syncClientScreen();
 }

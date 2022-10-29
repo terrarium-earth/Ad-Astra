@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.slot.Slot;
 
-public class CryoFreezerScreenHandler extends AbstractMachineScreenHandler {
+public class CryoFreezerScreenHandler extends AbstractMachineScreenHandler<CryoFreezerBlockEntity> {
 
     public CryoFreezerScreenHandler(int syncId, PlayerInventory inventory, PacketByteBuf buf) {
         this(syncId, inventory, (CryoFreezerBlockEntity) inventory.player.world.getBlockEntity(buf.readBlockPos()));
@@ -39,6 +39,6 @@ public class CryoFreezerScreenHandler extends AbstractMachineScreenHandler {
 
     @Override
     public void syncClientScreen() {
-        NetworkHandling.CHANNEL.sendToPlayer(new MachineInfoPacket(blockEntity.getEnergy(), ((CryoFreezerBlockEntity) blockEntity).getFluidContainer().getFluids()), this.player);
+        NetworkHandling.CHANNEL.sendToPlayer(new MachineInfoPacket(machine.getEnergyStorage().getStoredEnergy(), machine.getFluidContainer().getFluids()), this.player);
     }
 }

@@ -7,7 +7,10 @@ import earth.terrarium.ad_astra.registry.ModBlockEntities;
 import earth.terrarium.ad_astra.registry.ModRecipes;
 import earth.terrarium.ad_astra.screen.handler.CryoFreezerScreenHandler;
 import earth.terrarium.ad_astra.util.FluidUtils;
+import earth.terrarium.botarium.api.energy.EnergyBlock;
+import earth.terrarium.botarium.api.energy.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.api.fluid.*;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -20,7 +23,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 
-public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implements FluidHoldingBlock {
+public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implements FluidHoldingBlock, EnergyBlock {
+    private InsertOnlyEnergyContainer energyContainer;
 
     protected short cookTime;
     protected short cookTimeTotal;
@@ -76,26 +80,6 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
     }
 
     @Override
-    public boolean usesEnergy() {
-        return true;
-    }
-
-    @Override
-    public long getCapacity() {
-        return AdAstra.CONFIG.cryoFreezer.maxEnergy;
-    }
-
-    @Override
-    public long getEnergyPerTick() {
-        return AdAstra.CONFIG.cryoFreezer.energyPerTick;
-    }
-
-    @Override
-    public boolean canInsertEnergy() {
-        return true;
-    }
-
-    @Override
     public int getInventorySize() {
         return 3;
     }
@@ -147,15 +131,15 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
             ItemStack outputExtractSlot = this.getStack(2);
 
             if (!outputInsertSlot.isEmpty() && outputExtractSlot.getCount() < outputExtractSlot.getMaxCount()) {
-                FluidUtils.extractFluidFromItem(this, 1, 2, 0, this, f -> true);
+                FluidUtils.extractTankFluidToItem(this.getFluidContainer(), this, 1, 2, 0, f -> true);
             }
 
-            if (this.hasEnergy()) {
+            if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0) {
                 if ((!input.isEmpty() && (input.getItem().equals(this.inputItem) || this.inputItem == null)) && getFluidContainer().getFluids().get(0).getFluidAmount() < getFluidContainer().getTankCapacity(0)) {
                     this.setActive(true);
                     if (this.cookTime < this.cookTimeTotal) {
                         this.cookTime++;
-                        this.drainEnergy();
+                        this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
 
                     } else if (this.outputFluid != null) {
                         this.finishCooking();
@@ -180,5 +164,24 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
     @Override
     public UpdatingFluidContainer getFluidContainer() {
         return tank == null ? tank = new SimpleUpdatingFluidContainer(this, AdAstra.CONFIG.cryoFreezer.tankSize, 1, (amount, fluid) -> true) : this.tank;
+    }
+
+    public long getEnergyPerTick() {
+        return AdAstra.CONFIG.cryoFreezer.energyPerTick;
+    }
+
+    public long getMaxCapacity() {
+        return this.getEnergyStorage().getMaxCapacity();
+    }
+
+    @Override
+    public InsertOnlyEnergyContainer getEnergyStorage() {
+        return energyContainer == null ? energyContainer = new InsertOnlyEnergyContainer(this, (int) AdAstra.CONFIG.cryoFreezer.maxEnergy) : this.energyContainer;
+    }
+
+    @Override
+    public void update() {
+        this.markDirty();
+        this.getWorld().updateListeners(this.getPos(), this.getCachedState(), this.getCachedState(), Block.NOTIFY_ALL);
     }
 }

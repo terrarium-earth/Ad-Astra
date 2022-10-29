@@ -3,6 +3,8 @@ package earth.terrarium.ad_astra.items;
 import earth.terrarium.ad_astra.blocks.machines.entity.AbstractMachineBlockEntity;
 import earth.terrarium.ad_astra.blocks.machines.entity.FluidMachineBlockEntity;
 import earth.terrarium.ad_astra.blocks.machines.entity.OxygenDistributorBlockEntity;
+import earth.terrarium.botarium.api.energy.EnergyHooks;
+import earth.terrarium.botarium.api.energy.PlatformEnergyManager;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -13,6 +15,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import java.util.Optional;
 
 public class MachineBlockItem extends BlockItem {
     public MachineBlockItem(Block block, Settings settings) {
@@ -26,7 +30,8 @@ public class MachineBlockItem extends BlockItem {
                 NbtCompound nbt = stack.getOrCreateNbt();
                 Inventories.readNbt(nbt, machineBlock.getItems());
                 if (nbt.contains("energy")) {
-                    machineBlock.getEnergyStorage().setEnergy(nbt.getLong("energy"));
+                    Optional<PlatformEnergyManager> energyBlock = EnergyHooks.safeGetBlockEnergyManager(machineBlock, null);
+                    energyBlock.ifPresent(platformEnergyManager -> platformEnergyManager.insert(nbt.getLong("energy"), false));
                 }
 
                 if (machineBlock instanceof FluidMachineBlockEntity fluidMachine) {

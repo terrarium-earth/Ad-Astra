@@ -25,15 +25,14 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<Pl
         return true;
     }
 
-    // For Botarium: Add a method to check insertion and extraction
     @Override
     public boolean canTakeFrom(PlatformEnergyManager source) {
-        return source.extract(1, true) == 1;
+        return source.supportsExtraction();
     }
 
     @Override
     public boolean canInsertInto(PlatformEnergyManager consumer) {
-        return consumer.insert(1, true) == 1;
+        return consumer.supportsInsertion();
     }
 
     @Override

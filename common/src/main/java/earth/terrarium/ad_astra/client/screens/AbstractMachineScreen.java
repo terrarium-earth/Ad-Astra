@@ -14,16 +14,16 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
-public abstract class AbstractMachineScreen<T extends AbstractMachineScreenHandler> extends HandledScreen<T> {
+public abstract class AbstractMachineScreen<M extends AbstractMachineBlockEntity, H extends AbstractMachineScreenHandler<M>> extends HandledScreen<H> {
 
-    final AbstractMachineBlockEntity entity;
+    final M machine;
     final Identifier texture;
 
-    public AbstractMachineScreen(T handler, PlayerInventory inventory, Text title, Identifier texture) {
+    public AbstractMachineScreen(H handler, PlayerInventory inventory, Text title, Identifier texture) {
         super(handler, inventory, title);
         this.texture = texture;
         this.playerInventoryTitleY = this.backgroundHeight - 92;
-        entity = this.getScreenHandler().getBlockEntity();
+        machine = this.getScreenHandler().getMachine();
     }
 
     @Override

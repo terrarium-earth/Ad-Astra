@@ -8,7 +8,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.slot.Slot;
 
-public class WaterPumpScreenHandler extends AbstractMachineScreenHandler {
+public class WaterPumpScreenHandler extends AbstractMachineScreenHandler<WaterPumpBlockEntity> {
 
     public WaterPumpScreenHandler(int syncId, PlayerInventory inventory, PacketByteBuf buf) {
         this(syncId, inventory, (WaterPumpBlockEntity) inventory.player.world.getBlockEntity(buf.readBlockPos()));
@@ -25,6 +25,6 @@ public class WaterPumpScreenHandler extends AbstractMachineScreenHandler {
 
     @Override
     public void syncClientScreen() {
-        NetworkHandling.CHANNEL.sendToPlayer(new MachineInfoPacket(blockEntity.getEnergy(), ((WaterPumpBlockEntity) blockEntity).getFluidContainer().getFluids()), this.player);
+        NetworkHandling.CHANNEL.sendToPlayer(new MachineInfoPacket(machine.getEnergyStorage().getStoredEnergy(), machine.getFluidContainer().getFluids()), this.player);
     }
 }

@@ -3,6 +3,8 @@ package earth.terrarium.ad_astra.blocks.machines;
 import earth.terrarium.ad_astra.blocks.machines.entity.AbstractMachineBlockEntity;
 import earth.terrarium.ad_astra.blocks.machines.entity.FluidMachineBlockEntity;
 import earth.terrarium.ad_astra.blocks.machines.entity.OxygenDistributorBlockEntity;
+import earth.terrarium.botarium.api.energy.EnergyHooks;
+import earth.terrarium.botarium.api.energy.PlatformEnergyManager;
 import earth.terrarium.botarium.api.menu.MenuHooks;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -27,6 +29,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
+import java.util.Optional;
 import java.util.function.ToIntFunction;
 
 @SuppressWarnings("deprecation")
@@ -189,7 +192,8 @@ public abstract class AbstractMachineBlock extends BlockWithEntity {
         if (world.getBlockEntity(pos) instanceof AbstractMachineBlockEntity machineBlock) {
             NbtCompound nbt = stack.getOrCreateNbt();
             Inventories.writeNbt(nbt, machineBlock.getItems());
-            nbt.putLong("energy", machineBlock.getEnergyStorage().getStoredEnergy());
+            Optional<PlatformEnergyManager> energyBlock = EnergyHooks.safeGetBlockEnergyManager(machineBlock, null);
+            energyBlock.ifPresent(platformEnergyManager -> nbt.putLong("energy", platformEnergyManager.getStoredEnergy()));
 
             if (machineBlock instanceof FluidMachineBlockEntity fluidMachine) {
                 if (fluidMachine.getInputTank().getCompound() != null) {

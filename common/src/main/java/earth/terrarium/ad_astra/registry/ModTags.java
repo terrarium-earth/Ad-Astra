@@ -20,6 +20,7 @@ public class ModTags {
 
     public static final TagKey<Fluid> FUELS = TagKey.of(Registry.FLUID_KEY, new ModIdentifier("fuel"));
     public static final TagKey<Fluid> EFFICIENT_FUELS = TagKey.of(Registry.FLUID_KEY, new ModIdentifier("efficient_fuel"));
+    public static final TagKey<Fluid> OXYGEN = TagKey.of(Registry.FLUID_KEY, new ModIdentifier("oxygen"));
 
     public static final TagKey<Item> CALORITE_INGOTS = TagKey.of(Registry.ITEM_KEY, new Identifier("c:calorite_ingots"));
     public static final TagKey<Item> CALORITE_NUGGETS = TagKey.of(Registry.ITEM_KEY, new Identifier("c:calorite_nuggets"));

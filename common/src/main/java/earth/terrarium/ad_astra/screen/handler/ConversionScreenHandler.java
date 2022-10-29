@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.slot.Slot;
 
-public class ConversionScreenHandler extends AbstractMachineScreenHandler {
+public class ConversionScreenHandler extends AbstractMachineScreenHandler<FluidMachineBlockEntity> {
 
     public ConversionScreenHandler(int syncId, PlayerInventory inventory, PacketByteBuf buf) {
         this(syncId, inventory, (FluidMachineBlockEntity) inventory.player.world.getBlockEntity(buf.readBlockPos()));
@@ -45,6 +45,6 @@ public class ConversionScreenHandler extends AbstractMachineScreenHandler {
 
     @Override
     public void syncClientScreen() {
-        NetworkHandling.CHANNEL.sendToPlayer(new MachineInfoPacket(blockEntity.getEnergy(), ((FluidMachineBlockEntity) blockEntity).getFluidContainer().getFluids()), this.player);
+        NetworkHandling.CHANNEL.sendToPlayer(new MachineInfoPacket(machine.getEnergyStorage().getStoredEnergy(), machine.getFluidContainer().getFluids()), this.player);
     }
 }

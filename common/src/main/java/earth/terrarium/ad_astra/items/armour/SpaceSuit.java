@@ -3,6 +3,8 @@ package earth.terrarium.ad_astra.items.armour;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.items.FluidContainingItem;
 import earth.terrarium.ad_astra.registry.ModItems;
+import earth.terrarium.ad_astra.registry.ModTags;
+import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
@@ -20,6 +22,7 @@ import org.apache.commons.lang3.Range;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.function.BiPredicate;
 import java.util.stream.StreamSupport;
 
 public class SpaceSuit extends DyeableArmorItem implements FluidContainingItem, ModArmourItem {
@@ -57,7 +60,7 @@ public class SpaceSuit extends DyeableArmorItem implements FluidContainingItem, 
     @Override
     public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
         if (stack.isOf(ModItems.SPACE_SUIT.get()) || stack.isOf(ModItems.NETHERITE_SPACE_SUIT.get()) || stack.isOf(ModItems.JET_SUIT.get())) {
-            long oxygen = FluidHooks.toMillibuckets(this.getFluidAmount(stack));
+            long oxygen = FluidHooks.toMillibuckets(FluidHooks.getItemFluidManager(stack).getFluidInTank(0).getFluidAmount());
             tooltip.add(Text.translatable("tooltip.ad_astra.space_suit", oxygen, FluidHooks.toMillibuckets(getTankSize())).setStyle(Style.EMPTY.withColor(oxygen > 0 ? Formatting.GREEN : Formatting.RED)));
         }
     }
@@ -65,6 +68,11 @@ public class SpaceSuit extends DyeableArmorItem implements FluidContainingItem, 
     @Override
     public long getTankSize() {
         return AdAstra.CONFIG.spaceSuit.spaceSuitTankSize;
+    }
+
+    @Override
+    public BiPredicate<Integer, FluidHolder> getFilter() {
+        return (i, f) -> f.getFluid().isIn(ModTags.OXYGEN);
     }
 
     public Range<Integer> getTemperatureThreshold() {

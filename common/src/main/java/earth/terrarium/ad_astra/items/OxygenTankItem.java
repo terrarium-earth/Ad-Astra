@@ -3,6 +3,8 @@ package earth.terrarium.ad_astra.items;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.registry.ModFluids;
 import earth.terrarium.ad_astra.registry.ModItems;
+import earth.terrarium.ad_astra.registry.ModTags;
+import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import earth.terrarium.botarium.api.fluid.PlatformFluidHandler;
 import net.minecraft.client.item.TooltipContext;
@@ -20,6 +22,7 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
 import java.util.List;
+import java.util.function.BiPredicate;
 
 public class OxygenTankItem extends Item implements FluidContainingItem {
 
@@ -36,7 +39,7 @@ public class OxygenTankItem extends Item implements FluidContainingItem {
 
     @Override
     public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-        long oxygen = FluidHooks.toMillibuckets(this.getFluidContainer(stack).getFluids().get(0).getFluidAmount());
+        long oxygen = FluidHooks.toMillibuckets(FluidHooks.getItemFluidManager(stack).getFluidInTank(0).getFluidAmount());
         tooltip.add(Text.translatable("tooltip.ad_astra.consumable"));
         tooltip.add(Text.translatable("tooltip.ad_astra.space_suit", oxygen, FluidHooks.toMillibuckets(getTankSize())).setStyle(Style.EMPTY.withColor(oxygen > 0 ? Formatting.GREEN : Formatting.RED)));
     }
@@ -60,6 +63,11 @@ public class OxygenTankItem extends Item implements FluidContainingItem {
             }
         }
         return super.use(world, user, hand);
+    }
+
+    @Override
+    public BiPredicate<Integer, FluidHolder> getFilter() {
+        return (i, f) -> f.getFluid().isIn(ModTags.OXYGEN);
     }
 
     @Override

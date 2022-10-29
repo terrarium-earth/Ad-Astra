@@ -47,7 +47,7 @@ public record MachineInfoPacket(long energy, List<FluidHolder> fluidHolders) imp
         @Override
         public PacketContext handle(MachineInfoPacket packet) {
             return (player, world) -> {
-                if (player.currentScreenHandler instanceof AbstractMachineScreenHandler handler) {
+                if (player.currentScreenHandler instanceof AbstractMachineScreenHandler<?> handler) {
                     handler.setEnergyAmount(packet.energy());
                     handler.setFluids(packet.fluidHolders);
                 } else if (player.currentScreenHandler instanceof AbstractVehicleScreenHandler handler) {

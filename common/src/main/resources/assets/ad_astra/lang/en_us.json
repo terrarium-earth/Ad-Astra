@@ -381,6 +381,7 @@
   "fluid.ad_astra.cryo_fuel": "Cryo Fuel",
   "fluid.ad_astra.fuel": "Fuel",
   "fluid.ad_astra.oil": "Oil",
+  "fluid.ad_astra.oxygen": "Oxygen",
   "gauge.ad_astra.burn_time": "Burn Time: %s / %d",
   "gauge.ad_astra.cook_time": "Cook Time: %s / %d",
   "gauge.ad_astra.cooktime": "Cook Time",
