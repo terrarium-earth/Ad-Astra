@@ -7,6 +7,8 @@ import earth.terrarium.ad_astra.registry.ModBlockEntities;
 import earth.terrarium.ad_astra.registry.ModRecipes;
 import earth.terrarium.ad_astra.screen.handler.ConversionScreenHandler;
 import earth.terrarium.ad_astra.util.FluidUtils;
+import earth.terrarium.botarium.api.energy.EnergyBlock;
+import earth.terrarium.botarium.api.energy.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -19,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class FuelRefineryBlockEntity extends FluidMachineBlockEntity {
+public class FuelRefineryBlockEntity extends FluidMachineBlockEntity implements EnergyBlock {
 
     public FuelRefineryBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.FUEL_REFINERY.get(), blockPos, blockState);
@@ -33,26 +35,6 @@ public class FuelRefineryBlockEntity extends FluidMachineBlockEntity {
     @Override
     public long getOutputTankCapacity() {
         return AdAstra.CONFIG.fuelRefinery.tankSize;
-    }
-
-    @Override
-    public boolean usesEnergy() {
-        return true;
-    }
-
-    @Override
-    public long getCapacity() {
-        return AdAstra.CONFIG.fuelRefinery.maxEnergy;
-    }
-
-    @Override
-    public long getEnergyPerTick() {
-        return AdAstra.CONFIG.fuelRefinery.energyPerTick;
-    }
-
-    @Override
-    public boolean canInsertEnergy() {
-        return true;
     }
 
     @Override
@@ -78,24 +60,24 @@ public class FuelRefineryBlockEntity extends FluidMachineBlockEntity {
 
     @Override
     public void tick() {
-        if (!this.world.isClient) {
+        if (!this.world.isClient()) {
             ItemStack insertSlot = this.getItems().get(0);
             ItemStack extractSlot = this.getItems().get(1);
             ItemStack outputInsertSlot = this.getItems().get(2);
             ItemStack outputExtractSlot = this.getItems().get(3);
 
             if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxCount() && FluidHooks.isFluidContainingItem(insertSlot)) {
-                FluidUtils.insertFluidToContainerFromItem(this, 0, 1, 0, this.getFluidContainer(), f -> ModRecipes.FUEL_CONVERSION_RECIPE.get().getRecipes(this.world).stream().anyMatch(r -> r.matches(f)));
+                FluidUtils.insertItemFluidToTank(this.getTanks().getInput(), this, 0, 1, 0, f -> ModRecipes.FUEL_CONVERSION_RECIPE.get().getRecipes(this.world).stream().anyMatch(r -> r.matches(f)));
             }
 
             if (!outputInsertSlot.isEmpty() && outputExtractSlot.getCount() < outputExtractSlot.getMaxCount()) {
-                FluidUtils.extractFluidFromItem(this, 2, 3, 0, this, f -> true);
+                FluidUtils.extractTankFluidToItem(this.getTanks().getOutput(), this, 2, 3, 0, f -> true);
             }
 
-            if (this.hasEnergy()) {
+            if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0) {
                 List<FluidConversionRecipe> recipes = ModRecipes.FUEL_CONVERSION_RECIPE.get().getRecipes(this.world);
                 if (FluidUtils.convertFluid((DoubleFluidTank) this.getFluidContainer(), recipes, 10)) {
-                    this.drainEnergy();
+                    this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
                     this.setActive(true);
                 } else {
                     this.setActive(false);
@@ -104,5 +86,15 @@ public class FuelRefineryBlockEntity extends FluidMachineBlockEntity {
                 this.setActive(false);
             }
         }
+    }
+
+    @Override
+    public long getEnergyPerTick() {
+        return AdAstra.CONFIG.fuelRefinery.energyPerTick;
+    }
+
+    @Override
+    public InsertOnlyEnergyContainer getEnergyStorage() {
+        return this.energyContainer == null ? this.energyContainer = new InsertOnlyEnergyContainer(this, (int) AdAstra.CONFIG.fuelRefinery.maxEnergy) : this.energyContainer;
     }
 }

@@ -7,6 +7,7 @@ import earth.terrarium.ad_astra.registry.ModBlockEntities;
 import earth.terrarium.ad_astra.registry.ModRecipes;
 import earth.terrarium.ad_astra.screen.handler.ConversionScreenHandler;
 import earth.terrarium.ad_astra.util.FluidUtils;
+import earth.terrarium.botarium.api.energy.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -33,26 +34,6 @@ public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
     @Override
     public long getOutputTankCapacity() {
         return AdAstra.CONFIG.oxygenLoader.tankSize;
-    }
-
-    @Override
-    public boolean usesEnergy() {
-        return true;
-    }
-
-    @Override
-    public long getCapacity() {
-        return AdAstra.CONFIG.oxygenLoader.maxEnergy;
-    }
-
-    @Override
-    public long getEnergyPerTick() {
-        return AdAstra.CONFIG.oxygenLoader.energyPerTick;
-    }
-
-    @Override
-    public boolean canInsertEnergy() {
-        return true;
     }
 
     @Override
@@ -85,17 +66,17 @@ public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
             ItemStack outputExtractSlot = this.getItems().get(3);
 
             if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxCount() && FluidHooks.isFluidContainingItem(insertSlot)) {
-                FluidUtils.insertFluidToContainerFromItem(this, 0, 1, 0, this.getFluidContainer(), f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.world).stream().anyMatch(r -> r.matches(f)));
+                FluidUtils.insertItemFluidToTank(this.getFluidContainer(), this, 0, 1, 0, f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.world).stream().anyMatch(r -> r.matches(f)));
             }
 
             if (!outputInsertSlot.isEmpty() && outputExtractSlot.getCount() < outputExtractSlot.getMaxCount()) {
-                FluidUtils.extractFluidFromItem(this, 2, 3, 0, this, f -> true);
+                FluidUtils.extractTankFluidToItem(this.getTanks().getOutput(), this, 2, 3, 0, f -> true);
             }
 
-            if (this.hasEnergy()) {
+            if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0) {
                 List<OxygenConversionRecipe> recipes = ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.world);
                 if (FluidUtils.convertFluid((DoubleFluidTank) this.getFluidContainer(), recipes, 50)) {
-                    this.drainEnergy();
+                    this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
                     this.setActive(true);
                 } else {
                     this.setActive(false);
@@ -104,5 +85,15 @@ public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
                 this.setActive(false);
             }
         }
+    }
+
+    @Override
+    public long getEnergyPerTick() {
+        return AdAstra.CONFIG.oxygenLoader.energyPerTick;
+    }
+
+    @Override
+    public InsertOnlyEnergyContainer getEnergyStorage() {
+        return this.energyContainer == null ? this.energyContainer = new InsertOnlyEnergyContainer(this, (int) AdAstra.CONFIG.oxygenLoader.maxEnergy) : this.energyContainer;
     }
 }

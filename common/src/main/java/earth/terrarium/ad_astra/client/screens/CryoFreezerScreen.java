@@ -10,7 +10,7 @@ import net.minecraft.util.Identifier;
 
 import java.awt.*;
 
-public class CryoFreezerScreen extends AbstractMachineScreen<CryoFreezerScreenHandler> {
+public class CryoFreezerScreen extends AbstractMachineScreen<CryoFreezerBlockEntity, CryoFreezerScreenHandler> {
 
     public static final int SNOWFLAKE_LEFT = 54;
     public static final int SNOWFLAKE_TOP = 71;
@@ -32,25 +32,21 @@ public class CryoFreezerScreen extends AbstractMachineScreen<CryoFreezerScreenHa
 
         super.drawBackground(matrices, delta, mouseX, mouseY);
 
-        CryoFreezerBlockEntity entity = (CryoFreezerBlockEntity) this.entity;
-
-        GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.handler.getEnergyAmount(), this.entity.getCapacity());
-        GuiUtil.drawFluidTank(matrices, this.x + INPUT_TANK_LEFT, this.y + INPUT_TANK_TOP, entity.getFluidContainer().getTankCapacity(0), this.handler.getFluids().get(0));
-        GuiUtil.drawSnowflake(matrices, this.x + SNOWFLAKE_LEFT, this.y + SNOWFLAKE_TOP, entity.getCookTime(), entity.getCookTimeTotal());
+        GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.handler.getEnergyAmount(), this.machine.getMaxCapacity());
+        GuiUtil.drawFluidTank(matrices, this.x + INPUT_TANK_LEFT, this.y + INPUT_TANK_TOP, this.machine.getFluidContainer().getTankCapacity(0), this.handler.getFluids().get(0));
+        GuiUtil.drawSnowflake(matrices, this.x + SNOWFLAKE_LEFT, this.y + SNOWFLAKE_TOP, this.machine.getCookTime(), this.machine.getCookTimeTotal());
     }
 
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         super.render(matrices, mouseX, mouseY, delta);
 
-        CryoFreezerBlockEntity entity = (CryoFreezerBlockEntity) this.entity;
-
         if (GuiUtil.isHovering(this.getEnergyBounds(), mouseX, mouseY)) {
-            GuiUtil.drawEnergyTooltip(this, matrices, this.handler.getEnergyAmount(), entity.getCapacity(), mouseX, mouseY);
+            GuiUtil.drawEnergyTooltip(this, matrices, this.handler.getEnergyAmount(), this.machine.getMaxCapacity(), mouseX, mouseY);
         }
 
         if (GuiUtil.isHovering(this.getOutputTankBounds(), mouseX, mouseY)) {
-            GuiUtil.drawTankTooltip(this, matrices, this.handler.getFluids().get(0), entity.getFluidContainer().getTankCapacity(0), mouseX, mouseY);
+            GuiUtil.drawTankTooltip(this, matrices, this.handler.getFluids().get(0), this.machine.getFluidContainer().getTankCapacity(0), mouseX, mouseY);
         }
     }
 

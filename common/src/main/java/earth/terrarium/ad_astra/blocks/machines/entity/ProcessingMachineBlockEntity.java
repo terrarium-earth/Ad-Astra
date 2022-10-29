@@ -25,20 +25,6 @@ public abstract class ProcessingMachineBlockEntity extends AbstractMachineBlockE
     }
 
     @Override
-    public boolean usesEnergy() {
-        return true;
-    }
-
-    @Override
-    public abstract long getCapacity();
-
-    @Override
-    public abstract long getEnergyPerTick();
-
-    @Override
-    public abstract int getInventorySize();
-
-    @Override
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
         this.cookTime = nbt.getShort("cookTime");

@@ -58,10 +58,6 @@ public class NasaWorkbenchBlockEntity extends AbstractMachineBlockEntity {
         }
     }
 
-    public List<NasaWorkbenchRecipe> getAcceptedInputs() {
-        return this.acceptedInputs;
-    }
-
     public void spawnResultParticles() {
         if (this.world instanceof ServerWorld serverWorld) {
             BlockPos pos = this.getPos();

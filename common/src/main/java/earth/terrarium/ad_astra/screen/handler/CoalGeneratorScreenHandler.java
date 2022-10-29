@@ -1,12 +1,16 @@
 package earth.terrarium.ad_astra.screen.handler;
 
 import earth.terrarium.ad_astra.blocks.machines.entity.CoalGeneratorBlockEntity;
+import earth.terrarium.ad_astra.networking.NetworkHandling;
+import earth.terrarium.ad_astra.networking.packets.server.MachineInfoPacket;
 import earth.terrarium.ad_astra.registry.ModScreenHandlers;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.slot.Slot;
 
-public class CoalGeneratorScreenHandler extends AbstractMachineScreenHandler {
+import java.util.List;
+
+public class CoalGeneratorScreenHandler extends AbstractMachineScreenHandler<CoalGeneratorBlockEntity> {
 
     public CoalGeneratorScreenHandler(int syncId, PlayerInventory inventory, PacketByteBuf buf) {
         this(syncId, inventory, (CoalGeneratorBlockEntity) inventory.player.world.getBlockEntity(buf.readBlockPos()));
@@ -20,5 +24,10 @@ public class CoalGeneratorScreenHandler extends AbstractMachineScreenHandler {
     @Override
     public int getPlayerInventoryOffset() {
         return 11;
+    }
+
+    @Override
+    public void syncClientScreen() {
+        NetworkHandling.CHANNEL.sendToPlayer(new MachineInfoPacket(machine.getEnergyStorage().getStoredEnergy(), List.of()), this.player);
     }
 }

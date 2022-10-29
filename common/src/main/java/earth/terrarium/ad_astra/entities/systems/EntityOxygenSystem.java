@@ -30,13 +30,13 @@ public class EntityOxygenSystem {
         boolean hasOxygenatedSpaceSuit = SpaceSuit.hasOxygenatedSpaceSuit(entity) && SpaceSuit.hasFullSet(entity);
 
         if (entityHasOxygen && hasOxygenatedSpaceSuit && entity.isSubmergedInWater() && !entity.canBreatheInWater()) {
-            consumeOxygen(entity, world);
+            consumeOxygen(entity);
             return;
         }
 
         if (!entityHasOxygen) {
             if (hasOxygenatedSpaceSuit) {
-                consumeOxygen(entity, world);
+                consumeOxygen(entity);
             } else if (!ModUtils.armourIsOxygenated(entity)) {
                 entity.damage(ModDamageSource.OXYGEN, 1);
                 entity.setAir(-40);
@@ -44,7 +44,7 @@ public class EntityOxygenSystem {
         }
     }
 
-    private static void consumeOxygen(LivingEntity entity, ServerWorld world) {
+    private static void consumeOxygen(LivingEntity entity) {
         entity.setAir(Math.min(entity.getMaxAir(), entity.getAir() + 4 * 10));
         SpaceSuit.consumeSpaceSuitOxygen(entity, 3 * 10);
     }

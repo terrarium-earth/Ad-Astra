@@ -173,7 +173,7 @@ public class AdAstraConfig implements ConfigData {
         public final long maxEnergy = 9000L;
         public final long energyPerTick = 10L;
         public final long tankSize = FluidHooks.buckets(6);
-        public final long transferPerTick = FluidHooks.BLOCK / 100;
+        public final long transferPerTick = FluidHooks.toMillibuckets(10);
         public final boolean deleteWaterBelowWaterPump = true;
     }
 

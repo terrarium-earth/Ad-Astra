@@ -1,6 +1,5 @@
 package earth.terrarium.ad_astra.screen.handler;
 
-import earth.terrarium.ad_astra.blocks.machines.entity.FluidMachineBlockEntity;
 import earth.terrarium.ad_astra.blocks.machines.entity.OxygenDistributorBlockEntity;
 import earth.terrarium.ad_astra.networking.NetworkHandling;
 import earth.terrarium.ad_astra.networking.packets.server.MachineInfoPacket;
@@ -10,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.slot.Slot;
 
-public class OxygenDistributorScreenHandler extends AbstractMachineScreenHandler {
+public class OxygenDistributorScreenHandler extends AbstractMachineScreenHandler<OxygenDistributorBlockEntity> {
 
     public OxygenDistributorScreenHandler(int syncId, PlayerInventory inventory, PacketByteBuf buf) {
         this(syncId, inventory, (OxygenDistributorBlockEntity) inventory.player.world.getBlockEntity(buf.readBlockPos()));
@@ -37,6 +36,6 @@ public class OxygenDistributorScreenHandler extends AbstractMachineScreenHandler
 
     @Override
     public void syncClientScreen() {
-        NetworkHandling.CHANNEL.sendToPlayer(new MachineInfoPacket(blockEntity.getEnergy(), ((FluidMachineBlockEntity) blockEntity).getFluidContainer().getFluids()), this.player);
+        NetworkHandling.CHANNEL.sendToPlayer(new MachineInfoPacket(machine.getEnergyStorage().getStoredEnergy(), machine.getFluidContainer().getFluids()), this.player);
     }
 }

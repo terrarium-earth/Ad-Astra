@@ -2,9 +2,9 @@ package earth.terrarium.ad_astra.client.screens;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
-import dev.architectury.injectables.annotations.ExpectPlatform;
 import dev.architectury.injectables.targets.ArchitecturyTarget;
 import earth.terrarium.ad_astra.util.ModIdentifier;
+import earth.terrarium.botarium.api.fluid.ClientFluidHooks;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.fabricmc.api.EnvType;
@@ -24,7 +24,6 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Matrix4f;
-import org.apache.commons.lang3.NotImplementedException;
 
 import java.awt.*;
 
@@ -103,8 +102,8 @@ public class GuiUtil {
             return;
         }
 
-        Sprite sprite = getFluidSprite(fluid.getFluid());
-        int colour = getFluidColor(fluid.getFluid());
+        Sprite sprite = ClientFluidHooks.getFluidSprite(fluid);
+        int colour = ClientFluidHooks.getFluidColor(fluid);
         int spriteHeight = sprite.getHeight();
 
         RenderSystem.setShaderColor((colour >> 16 & 255) / 255.0f, (float) (colour >> 8 & 255) / 255.0f, (float) (colour & 255) / 255.0f, 1.0f);
@@ -195,16 +194,6 @@ public class GuiUtil {
 
     public static void drawTankTooltip(Screen screen, MatrixStack matrices, long amount, long capacity, Fluid fluid, int mouseX, int mouseY) {
         screen.renderTooltip(matrices, Text.translatable("gauge_text.ad_astra.liquid_storage", FluidHooks.toMillibuckets(amount), FluidHooks.toMillibuckets(capacity)).setStyle(Style.EMPTY.withColor(Formatting.GOLD)).append(Text.of(", ")).append(GuiUtil.getFluidTranslation(fluid)), mouseX, mouseY);
-    }
-
-    @ExpectPlatform
-    public static Sprite getFluidSprite(Fluid fluid) {
-        throw new NotImplementedException();
-    }
-
-    @ExpectPlatform
-    public static int getFluidColor(Fluid fluid) {
-        throw new NotImplementedException();
     }
 
     public static class FloatDrawableHelper {

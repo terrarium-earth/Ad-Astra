@@ -2,12 +2,7 @@ package earth.terrarium.ad_astra.blocks.machines.entity;
 
 import earth.terrarium.ad_astra.blocks.machines.AbstractMachineBlock;
 import earth.terrarium.ad_astra.util.ModInventory;
-import earth.terrarium.botarium.api.energy.EnergyBlock;
-import earth.terrarium.botarium.api.energy.EnergyHooks;
-import earth.terrarium.botarium.api.energy.SimpleUpdatingEnergyContainer;
-import earth.terrarium.botarium.api.energy.StatefulEnergyContainer;
 import earth.terrarium.botarium.api.menu.ExtraDataMenuProvider;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
@@ -30,10 +25,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class AbstractMachineBlockEntity extends BlockEntity implements EnergyBlock, ExtraDataMenuProvider, ModInventory, SidedInventory {
+public abstract class AbstractMachineBlockEntity extends BlockEntity implements ExtraDataMenuProvider, ModInventory, SidedInventory {
 
     private final DefaultedList<ItemStack> inventory;
-    private SimpleUpdatingEnergyContainer energyContainer;
 
     public AbstractMachineBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
         super(blockEntityType, blockPos, blockState);
@@ -47,76 +41,16 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
         return null;
     }
 
-    public boolean usesEnergy() {
-        return false;
-    }
-
-    public long getCapacity() {
-        return 0;
-    }
-
-    public long getEnergyPerTick() {
-        return 0;
-    }
-
-    public boolean canInsertEnergy() {
-        return false;
-    }
-
-    public boolean canExtractEnergy() {
-        return false;
-    }
-
     public int getInventorySize() {
         return 0;
     }
 
     public void setActive(boolean active) {
         if (this.getCachedState().contains(AbstractMachineBlock.LIT)) {
-            this.world.setBlockState(this.getPos(), this.getCachedState().with(AbstractMachineBlock.LIT, active));
-        }
-    }
-
-    public void cumulateEnergy() {
-        this.getEnergyStorage().insertEnergy(this.getEnergyPerTick(), false);
-        this.markDirty();
-    }
-
-    public boolean drainEnergy() {
-        return this.drainEnergy(this.getEnergyPerTick());
-    }
-
-    public boolean drainEnergy(long amount) {
-        this.markDirty();
-        return this.getEnergyStorage().extractEnergy(amount, false) > 0;
-    }
-
-    public boolean canDrainEnergy() {
-        return this.canDrainEnergy(this.getEnergyPerTick());
-    }
-
-    public boolean canDrainEnergy(long amount) {
-        return this.getEnergy() - amount > 0;
-    }
-
-    // Send energy to surrounding machines.
-    public void energyOut() {
-        if (usesEnergy() && !this.getCachedState().get(AbstractMachineBlock.POWERED)) {
-            for (Direction direction : Direction.values()) {
-                BlockEntity entity = world.getBlockEntity(pos.offset(direction));
-                if (entity != null) {
-                    EnergyHooks.moveBlockToBlockEnergy(this, direction.getOpposite(), entity, direction, Long.MAX_VALUE);
-                }
+            if (this.getWorld() != null) {
+                this.getWorld().setBlockState(this.getPos(), this.getCachedState().with(AbstractMachineBlock.LIT, active));
             }
         }
-    }
-
-    public long getEnergy() {
-        return this.getEnergyStorage().getStoredEnergy();
-    }
-
-    public boolean hasEnergy() {
-        return this.usesEnergy() && this.getEnergy() > 0;
     }
 
     @Override
@@ -151,8 +85,8 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
     public void markDirty() {
         super.markDirty();
 
-        if (this.world instanceof ServerWorld world) {
-            world.getChunkManager().markForUpdate(this.pos);
+        if (this.world instanceof ServerWorld serverWorld) {
+            serverWorld.getChunkManager().markForUpdate(this.pos);
         }
     }
 
@@ -190,26 +124,5 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
     @Override
     public NbtCompound toInitialChunkDataNbt() {
         return this.toNbt();
-    }
-
-    @Override
-    public StatefulEnergyContainer getEnergyStorage() {
-        return energyContainer == null ? energyContainer = new SimpleUpdatingEnergyContainer(this, this.getCapacity()) {
-            @Override
-            public boolean allowsInsertion() {
-                return canInsertEnergy();
-            }
-
-            @Override
-            public boolean allowsExtraction() {
-                return canExtractEnergy();
-            }
-        } : this.energyContainer;
-    }
-
-    @Override
-    public void update() {
-        this.markDirty();
-        this.getWorld().updateListeners(this.getPos(), this.getCachedState(), this.getCachedState(), Block.NOTIFY_ALL);
     }
 }

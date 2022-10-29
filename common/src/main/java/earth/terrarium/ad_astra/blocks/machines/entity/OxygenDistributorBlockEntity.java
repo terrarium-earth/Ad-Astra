@@ -12,7 +12,10 @@ import earth.terrarium.ad_astra.util.FluidUtils;
 import earth.terrarium.ad_astra.util.ModUtils;
 import earth.terrarium.ad_astra.util.OxygenUtils;
 import earth.terrarium.ad_astra.util.algorithms.OxygenFillerAlgorithm;
+import earth.terrarium.botarium.api.energy.EnergyBlock;
+import earth.terrarium.botarium.api.energy.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -28,7 +31,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Set;
 
-public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
+public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implements EnergyBlock {
+    private InsertOnlyEnergyContainer energyContainer;
 
     private int oxygenFillCheckTicks = AdAstra.CONFIG.oxygenDistributor.refreshTicks;
     private boolean showOxygen = false;
@@ -65,26 +69,6 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
     @Override
     public long getOutputTankCapacity() {
         return AdAstra.CONFIG.oxygenDistributor.tankSize * 2;
-    }
-
-    @Override
-    public boolean usesEnergy() {
-        return true;
-    }
-
-    @Override
-    public long getCapacity() {
-        return AdAstra.CONFIG.oxygenDistributor.maxEnergy;
-    }
-
-    @Override
-    public long getEnergyPerTick() {
-        return AdAstra.CONFIG.oxygenDistributor.fluidConversionEnergyPerTick;
-    }
-
-    @Override
-    public boolean canInsertEnergy() {
-        return true;
     }
 
     @Override
@@ -137,7 +121,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
             this.getFluidContainer().extractFluid(FluidHooks.newFluidHolder(this.getOutputTank().getFluid(), amountOfFluidToExtract, null), false);
         }
 
-        if (this.drainEnergy(amountOfEnergyToConsume)) {
+        if (this.getEnergyStorage().internalExtract(amountOfEnergyToConsume, false) > 0) {
             ModUtils.spawnForcedParticles((ServerWorld) this.getWorld(), ModParticleTypes.OXYGEN_BUBBLE.get(), this.getPos().getX() + 0.5, this.getPos().getY() + 0.5, this.getPos().getZ() + 0.5, 1, 0.0, 0.0, 0.0, 0.03);
         }
     }
@@ -149,7 +133,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
             return false;
         } else if (this.getCachedState().get(AbstractMachineBlock.POWERED)) {
             return false;
-        } else if (!this.canDrainEnergy(amountOfEnergyToConsume)) {
+        } else if (this.getEnergyStorage().internalExtract(amountOfEnergyToConsume, true) == 0) {
             return false;
         } else if (getOutputTank().getFluid().equals(Fluids.EMPTY)) {
             return false;
@@ -166,13 +150,13 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
         // Convert the input fluid into oxygen
         if (!this.world.isClient) {
             if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxCount() && FluidHooks.isFluidContainingItem(insertSlot)) {
-                FluidUtils.insertFluidToContainerFromItem(this, 0, 1, 0, this.getFluidContainer(), f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.world).stream().anyMatch(r -> r.matches(f)));
+                FluidUtils.insertItemFluidToTank(this.getFluidContainer(), this, 0, 1, 0, f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.world).stream().anyMatch(r -> r.matches(f)));
             }
 
-            if (this.canDrainEnergy()) {
+            if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0) {
                 List<OxygenConversionRecipe> recipes = ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.world);
                 if (FluidUtils.convertFluid((DoubleFluidTank) this.getFluidContainer(), recipes, 20)) {
-                    this.drainEnergy();
+                    this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
                 }
             }
         }
@@ -197,7 +181,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
     }
 
     public void runAlgorithm() {
-        if (this.world.isClient) {
+        if (this.world.isClient()) {
             if (!this.getCachedState().get(AbstractMachineBlock.LIT)) {
                 return;
             }
@@ -212,7 +196,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 
         if (this.canDistribute(positions.size())) {
             OxygenUtils.setEntry(this.world, pos, positions);
-        } else if (!world.isClient) {
+        } else if (!world.isClient()) {
             OxygenUtils.removeEntry(this.world, this.getPos());
         }
 
@@ -223,10 +207,29 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 
     // Spawn the bubble particles in each oxygenated position. The "show" button must be clicked in the oxygen distributor GUI in order to work.
     public void spawnParticles(Set<BlockPos> positions) {
-        if (!world.isClient && this.getCachedState().get(AbstractMachineBlock.LIT)) {
+        if (!world.isClient() && this.getCachedState().get(AbstractMachineBlock.LIT)) {
             for (BlockPos pos : positions) {
                 ModUtils.spawnForcedParticles((ServerWorld) this.getWorld(), ModParticleTypes.OXYGEN_BUBBLE.get(), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 1, 0.0, 0.0, 0.0, 0.0);
             }
         }
+    }
+
+    public long getEnergyPerTick() {
+        return AdAstra.CONFIG.oxygenDistributor.fluidConversionEnergyPerTick;
+    }
+
+    public long getMaxCapacity() {
+        return this.getEnergyStorage().getMaxCapacity();
+    }
+
+    @Override
+    public InsertOnlyEnergyContainer getEnergyStorage() {
+        return energyContainer == null ? energyContainer = new InsertOnlyEnergyContainer(this, (int) AdAstra.CONFIG.oxygenDistributor.maxEnergy) : this.energyContainer;
+    }
+
+    @Override
+    public void update() {
+        this.markDirty();
+        this.getWorld().updateListeners(this.getPos(), this.getCachedState(), this.getCachedState(), Block.NOTIFY_ALL);
     }
 }

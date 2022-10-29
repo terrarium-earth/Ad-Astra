@@ -7,6 +7,8 @@ import earth.terrarium.botarium.api.fluid.ItemFluidContainer;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
 
+import java.util.function.BiPredicate;
+
 public interface FluidContainingItem extends FluidHoldingItem {
 
     long getTankSize();
@@ -35,8 +37,10 @@ public interface FluidContainingItem extends FluidHoldingItem {
         getFluidContainer(stack).insertFluid(fluid, false);
     }
 
+    BiPredicate<Integer, FluidHolder> getFilter();
+
     @Override
     default ItemFluidContainer getFluidContainer(ItemStack stack) {
-        return new ItemFilteredFluidContainer(this.getTankSize(), 1, stack, (amount, fluid) -> true);
+        return new ItemFilteredFluidContainer(this.getTankSize(), 1, stack, getFilter());
     }
 }

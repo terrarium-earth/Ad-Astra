@@ -13,7 +13,7 @@ import net.minecraft.util.Identifier;
 import java.awt.*;
 
 @Environment(EnvType.CLIENT)
-public class CompressorScreen extends AbstractMachineScreen<CompressorScreenHandler> {
+public class CompressorScreen extends AbstractMachineScreen<CompressorBlockEntity, CompressorScreenHandler> {
 
     public static final int ENERGY_LEFT = 147;
     public static final int ENERGY_TOP = 30;
@@ -32,25 +32,22 @@ public class CompressorScreen extends AbstractMachineScreen<CompressorScreenHand
     protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
         super.drawBackground(matrices, delta, mouseX, mouseY);
 
-        CompressorBlockEntity entity = (CompressorBlockEntity) this.entity;
 
-        GuiUtil.drawHammer(matrices, this.x + HAMMER_LEFT, this.y + HAMMER_TOP, entity.getCookTime(), entity.getCookTimeTotal());
-        GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.handler.getEnergyAmount(), this.entity.getCapacity());
+        GuiUtil.drawHammer(matrices, this.x + HAMMER_LEFT, this.y + HAMMER_TOP, this.machine.getCookTime(), this.machine.getCookTimeTotal());
+        GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.handler.getEnergyAmount(), this.machine.getMaxCapacity());
     }
 
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         super.render(matrices, mouseX, mouseY, delta);
 
-        CompressorBlockEntity entity = (CompressorBlockEntity) this.entity;
-
         if (GuiUtil.isHovering(this.getEnergyBounds(), mouseX, mouseY)) {
-            GuiUtil.drawEnergyTooltip(this, matrices, this.handler.getEnergyAmount(), entity.getCapacity(), mouseX, mouseY);
+            GuiUtil.drawEnergyTooltip(this, matrices, this.handler.getEnergyAmount(), this.machine.getMaxCapacity(), mouseX, mouseY);
         }
 
         // Burn time tooltip.
         if (GuiUtil.isHovering(this.getHammerBounds(), mouseX, mouseY)) {
-            this.renderTooltip(matrices, Text.translatable("gauge.ad_astra.cook_time", entity.getCookTime(), entity.getCookTimeTotal()), mouseX, mouseY);
+            this.renderTooltip(matrices, Text.translatable("gauge.ad_astra.cook_time", this.machine.getCookTime(), this.machine.getCookTimeTotal()), mouseX, mouseY);
         }
     }
 
