@@ -33,6 +33,7 @@ public class ModFluidAttributes {
             .bucketItem(ModItems.CRYO_FUEL_BUCKET)
             .density(71)
             .viscosity(71)
+            .temperature(-10000000)
             .sourceTexture(new ModIdentifier("block/fluid_cryo_fuel_still"))
             .flowingTexture(new ModIdentifier("block/fluid_cryo_fuel_flow"))
             .overlayTexture(new ModIdentifier("block/cryo_fuel_overlay"));

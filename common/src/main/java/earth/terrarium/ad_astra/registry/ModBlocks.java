@@ -17,6 +17,7 @@ import earth.terrarium.ad_astra.blocks.torches.ExtinguishedLanternBlock;
 import earth.terrarium.ad_astra.blocks.torches.ExtinguishedTorchBlock;
 import earth.terrarium.ad_astra.blocks.torches.WallExtinguishedTorchBlock;
 import earth.terrarium.ad_astra.mixin.SignTypeInvoker;
+import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.sound.BlockSoundGroup;
@@ -68,8 +69,8 @@ public class ModBlocks {
     public static final RegistrySupplier<Block> STEEL_CABLE = register("steel_cable", () -> new CableBlock(256, 2, 0.344, AbstractBlock.Settings.of(Material.METAL).sounds(BlockSoundGroup.NETHERITE).strength(1.0f, 1.0f)));
     public static final RegistrySupplier<Block> DESH_CABLE = register("desh_cable", () -> new CableBlock(1024, 1, 0.312, AbstractBlock.Settings.of(Material.METAL).sounds(BlockSoundGroup.NETHERITE).strength(1.0f, 1.0f)));
 
-    public static final RegistrySupplier<Block> DESH_FLUID_PIPE = register("desh_fluid_pipe", () -> new FluidPipeBlock(100, 1, 0.312, AbstractBlock.Settings.of(Material.METAL).sounds(BlockSoundGroup.NETHERITE).strength(1.0f, 1.0f)));
-    public static final RegistrySupplier<Block> OSTRUM_FLUID_PIPE = register("ostrum_fluid_pipe", () -> new FluidPipeBlock(200, 1, 0.312, AbstractBlock.Settings.of(Material.METAL).sounds(BlockSoundGroup.NETHERITE).strength(1.0f, 1.0f)));
+    public static final RegistrySupplier<Block> DESH_FLUID_PIPE = register("desh_fluid_pipe", () -> new FluidPipeBlock(FluidHooks.buckets(1) / 10, 1, 0.312, AbstractBlock.Settings.of(Material.METAL).sounds(BlockSoundGroup.NETHERITE).strength(1.0f, 1.0f)));
+    public static final RegistrySupplier<Block> OSTRUM_FLUID_PIPE = register("ostrum_fluid_pipe", () -> new FluidPipeBlock(FluidHooks.buckets(1) / 5, 1, 0.312, AbstractBlock.Settings.of(Material.METAL).sounds(BlockSoundGroup.NETHERITE).strength(1.0f, 1.0f)));
 
     // Machines
     public static final AbstractBlock.Settings MACHINE_PROPERTIES = AbstractBlock.Settings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(5.0f, 1.0f).requiresTool();

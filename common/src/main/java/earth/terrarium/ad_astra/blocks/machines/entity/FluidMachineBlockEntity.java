@@ -11,6 +11,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.util.math.BlockPos;
 
+import java.util.function.Predicate;
+
 public abstract class FluidMachineBlockEntity extends AbstractMachineBlockEntity implements FluidHoldingBlock, EnergyBlock {
     protected InsertOnlyEnergyContainer energyContainer;
 
@@ -33,9 +35,11 @@ public abstract class FluidMachineBlockEntity extends AbstractMachineBlockEntity
         return getFluidContainer().getFluids().get(1);
     }
 
+    public abstract Predicate<FluidHolder> getInputFilter();
+
     @Override
     public UpdatingFluidContainer getFluidContainer() {
-        return tanks == null ? tanks = new DoubleFluidTank(this, getInputTankCapacity(), getOutputTankCapacity(), f -> true, f -> true) : this.tanks;
+        return tanks == null ? tanks = new DoubleFluidTank(this, getInputTankCapacity(), getOutputTankCapacity(), getInputFilter(), f -> true) : this.tanks;
     }
 
     public DoubleFluidTank getTanks() {

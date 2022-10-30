@@ -14,6 +14,7 @@ import earth.terrarium.ad_astra.util.OxygenUtils;
 import earth.terrarium.ad_astra.util.algorithms.OxygenFillerAlgorithm;
 import earth.terrarium.botarium.api.energy.EnergyBlock;
 import earth.terrarium.botarium.api.energy.InsertOnlyEnergyContainer;
+import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -30,6 +31,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 
 public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implements EnergyBlock {
     private InsertOnlyEnergyContainer energyContainer;
@@ -69,6 +71,11 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
     @Override
     public long getOutputTankCapacity() {
         return AdAstra.CONFIG.oxygenDistributor.tankSize * 2;
+    }
+
+    @Override
+    public Predicate<FluidHolder> getInputFilter() {
+        return f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.getWorld()).stream().anyMatch(r -> r.matches(f.getFluid()));
     }
 
     @Override

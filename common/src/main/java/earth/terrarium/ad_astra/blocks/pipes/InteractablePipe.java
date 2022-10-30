@@ -14,10 +14,6 @@ public interface InteractablePipe<T> {
 
     boolean supportsAutoExtract();
 
-    boolean canTakeFrom(T source);
-
-    boolean canInsertInto(T consumer);
-
     boolean canConnectTo(BlockEntity next, Direction direction, BlockPos pos);
 
     void insertInto(T consumer, Direction direction, BlockPos pos);
@@ -56,7 +52,7 @@ public interface InteractablePipe<T> {
                     for (Direction direction : Direction.values()) {
                         BlockPos offset = this.getPipePos().offset(direction);
                         T potentialSource = getInteraction(getPipeWorld(), offset, direction);
-                        if (potentialSource != null && canTakeFrom(potentialSource)) {
+                        if (potentialSource != null) {
                             this.setSource(new Node<>(potentialSource, direction, offset));
                             break;
                         }
@@ -74,13 +70,13 @@ public interface InteractablePipe<T> {
                                 BlockPos offset = node.offset(direction);
                                 BlockEntity entity = getPipeWorld().getBlockEntity(offset);
                                 if (!visitedNodes.contains(offset) && entity instanceof InteractablePipe<?> pipe) {
-                                    // Additional if statement to optimize performance; If it's a pipe but cant connect, it shouldn't check if it is a consumer (because it's already a pipe)
+                                    // Additional if statement to optimize performance; if it's a pipe but can't connect, it shouldn't check if it is a consumer (because it's already a pipe)
                                     if (pipe.canConnectTo(current, direction, offset)) {
                                         temporaryOpenNodes.add(offset);
                                     }
                                 } else {
                                     T potentialConsumer = getInteraction(getPipeWorld(), offset, direction);
-                                    if (potentialConsumer != null && this.canInsertInto(potentialConsumer)) {
+                                    if (potentialConsumer != null) {
                                         this.getConsumers().add(new Node<>(potentialConsumer, direction, node));
                                     }
                                 }
