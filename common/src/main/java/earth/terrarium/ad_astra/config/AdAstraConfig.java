@@ -56,7 +56,7 @@ public class AdAstraConfig implements ConfigData {
         public final boolean doOxygen = true;
         @ConfigEntry.Gui.Tooltip(count = 2)
         public final boolean doSpaceMuffler = true;
-        public final long oxygenTankSize = FluidHooks.toMillibuckets(500);
+        public final long oxygenTankSize = FluidHooks.buckets(1) / 2;
         public final int hammerDurability = 64;
         public final boolean giveAstroduxAtSpawn = false;
         public final int oxygenBarXOffset = 0;
@@ -110,7 +110,7 @@ public class AdAstraConfig implements ConfigData {
 
         public static class RoverConfig {
             public final boolean explodeRoverInLava = true;
-            public final long fuelPerSecond = FluidHooks.toMillibuckets(10);
+            public final long fuelPerSecond = FluidHooks.buckets(1) / 100;
             public final float turnSpeed = 3.0f;
             public final float maxTurnSpeed = 6.0f;
             public final float deceleration = 0.9f;
@@ -173,7 +173,7 @@ public class AdAstraConfig implements ConfigData {
         public final long maxEnergy = 9000L;
         public final long energyPerTick = 10L;
         public final long tankSize = FluidHooks.buckets(6);
-        public final long transferPerTick = FluidHooks.toMillibuckets(10);
+        public final long transferPerTick = FluidHooks.buckets(1) / 100;
         public final boolean deleteWaterBelowWaterPump = true;
     }
 

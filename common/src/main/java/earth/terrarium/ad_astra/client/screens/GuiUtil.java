@@ -80,9 +80,6 @@ public class GuiUtil {
     }
 
     public static void drawFluidTank(MatrixStack matrices, int x, int y, long fluidCapacity, FluidHolder fluid) {
-        if (ArchitecturyTarget.getCurrentTarget().equals("fabric")) {
-            fluidCapacity /= 81L;
-        }
         double ratio = fluidCapacity > 0 ? createRatio(fluid.getFluidAmount(), fluidCapacity) : 0;
         drawFluidTank(matrices, x, y, ratio, fluid);
     }

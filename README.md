@@ -1,6 +1,6 @@
-<a href="https://modrinth.com/mod/fabric-api">
+<a href="https://www.curseforge.com/minecraft/mc-mods/resourceful-lib">
     <p align="center">
-        <img src="https://i.imgur.com/Ol1Tcf8.png" alt="Fabric API" width="250"/> 
+        <img src="https://cdn.discordapp.com/attachments/835258604939640913/1010937521233997884/uses_resourcefullib_badge.png" alt="Fabric API" width="250"/> 
     </p>
 </a>
 

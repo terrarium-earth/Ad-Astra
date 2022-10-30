@@ -75,7 +75,7 @@ public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
 
             if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0) {
                 List<OxygenConversionRecipe> recipes = ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.world);
-                if (FluidUtils.convertFluid((DoubleFluidTank) this.getFluidContainer(), recipes, 50)) {
+                if (FluidUtils.convertFluid((DoubleFluidTank) this.getFluidContainer(), recipes,  FluidHooks.getNuggetAmount())) {
                     this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
                     this.setActive(true);
                 } else {

@@ -70,7 +70,7 @@ public class AdAstraClient {
         RenderTypeRegistry.register(RenderLayer.getCutout(), ModBlocks.NASA_WORKBENCH.get(), ModBlocks.AERONOS_MUSHROOM.get(), ModBlocks.STROPHAR_MUSHROOM.get(), ModBlocks.AERONOS_LADDER.get(), ModBlocks.STROPHAR_LADDER.get(), ModBlocks.AERONOS_CHEST.get(), ModBlocks.STROPHAR_CHEST.get());
 
         // Sign textures
-        TexturedRenderLayers.WOOD_TYPE_TEXTURES.put(ModBlocks.GLACIAN, new SpriteIdentifier(TexturedRenderLayers.SIGNS_ATLAS_TEXTURE, new ModIdentifier("entity/signs/" + ModBlocks.GLACIAN.getName())));
+        TexturedRenderLayers.WOOD_TYPE_TEXTURES.put(ModBlocks.GLACIAN, new SpriteIdentifier(TexturedRenderLayers.SIGNS_ATLAS_TEXTURE, new ModIdentifier("entity/signs/glacian")));
 
         // Fluids
         RenderTypeRegistry.register(RenderLayer.getTranslucent(), ModFluids.FUEL_STILL.get(), ModFluids.FLOWING_FUEL.get());

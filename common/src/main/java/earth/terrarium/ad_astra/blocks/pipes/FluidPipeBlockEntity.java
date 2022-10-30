@@ -28,11 +28,17 @@ public class FluidPipeBlockEntity extends BlockEntity implements InteractablePip
 
     @Override
     public boolean canTakeFrom(PlatformFluidHandler source) {
+        if (source.getFluidInTank(0).isEmpty()) {
+            return false;
+        }
         return source.supportsExtraction();
     }
 
     @Override
     public boolean canInsertInto(PlatformFluidHandler consumer) {
+        if (consumer.getFluidInTank(0).isEmpty()) {
+            return false;
+        }
         return consumer.supportsInsertion();
     }
 
