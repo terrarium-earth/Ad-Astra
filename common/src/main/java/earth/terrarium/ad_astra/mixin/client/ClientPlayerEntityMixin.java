@@ -9,6 +9,8 @@ import earth.terrarium.ad_astra.entities.vehicles.VehicleEntity;
 import earth.terrarium.ad_astra.items.armour.JetSuit;
 import earth.terrarium.ad_astra.items.armour.SpaceSuit;
 import earth.terrarium.ad_astra.util.OxygenUtils;
+import earth.terrarium.botarium.api.fluid.FluidHooks;
+import earth.terrarium.botarium.api.fluid.PlatformFluidItemHandler;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -51,10 +53,10 @@ public class ClientPlayerEntityMixin {
         if (SpaceSuit.hasFullSet(player)) {
             PlayerOverlayScreen.shouldRenderOxygen = true;
             if (chest.getItem() instanceof SpaceSuit suit) {
-                long oxygen = suit.getFluidAmount(chest);
+                PlatformFluidItemHandler oxygen = FluidHooks.getItemFluidManager(chest);
 
                 // Render oxygen info
-                PlayerOverlayScreen.oxygenRatio = MathHelper.clamp(oxygen / (double) suit.getTankSize(), 0.0, 1.0);
+                PlayerOverlayScreen.oxygenRatio = MathHelper.clamp(oxygen.getFluidInTank(0).getFluidAmount() / (double) suit.getTankSize(), 0.0, 1.0);
                 PlayerOverlayScreen.doesNotNeedOxygen = OxygenUtils.entityHasOxygen(player.world, player) && !player.isSubmergedInWater();
             }
         } else {

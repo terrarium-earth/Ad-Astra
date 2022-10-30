@@ -54,7 +54,7 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity imple
             // Consume the fuel
             if (this.cookTime > 0) {
                 this.cookTime--;
-                this.getEnergyStorage().insertEnergy(this.getEnergyPerTick(), false);
+                this.getEnergyStorage().internalInsert(this.getEnergyPerTick(), false);
                 this.setActive(true);
                 ticksToTurnOff = 7;
                 // Check if the input is a valid fuel
