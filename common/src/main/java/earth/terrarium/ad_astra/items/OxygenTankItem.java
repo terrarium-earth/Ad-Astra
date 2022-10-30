@@ -7,6 +7,8 @@ import earth.terrarium.ad_astra.registry.ModTags;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import earth.terrarium.botarium.api.fluid.PlatformFluidHandler;
+import earth.terrarium.botarium.api.fluid.PlatformFluidItemHandler;
+import earth.terrarium.botarium.api.item.ItemStackHolder;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
@@ -52,11 +54,10 @@ public class OxygenTankItem extends Item implements FluidContainingItem {
             ItemStack chest = user.getEquippedStack(EquipmentSlot.CHEST);
             if (chest.isOf(ModItems.SPACE_SUIT.get()) || chest.isOf(ModItems.NETHERITE_SPACE_SUIT.get()) || chest.isOf(ModItems.JET_SUIT.get())) {
 
-
-                PlatformFluidHandler from = FluidHooks.getItemFluidManager(tank);
+                PlatformFluidItemHandler from = FluidHooks.getItemFluidManager(tank);
                 ItemStack to = user.getInventory().getArmorStack(2);
 
-                if (FluidHooks.moveItemToItemFluid(tank, to, from.getFluidInTank(0)) > 0) {
+                if (FluidHooks.moveItemToItemFluid(new ItemStackHolder(tank), new ItemStackHolder(to), from.getFluidInTank(0)) > 0) {
                     world.playSound(null, user.getBlockPos(), SoundEvents.ENTITY_GENERIC_DRINK, SoundCategory.PLAYERS, 1, 1);
                     return TypedActionResult.consume(tank);
                 }

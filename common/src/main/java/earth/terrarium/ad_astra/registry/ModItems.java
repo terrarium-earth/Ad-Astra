@@ -21,6 +21,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.*;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
@@ -57,16 +58,10 @@ public class ModItems {
     public static final Supplier<Item> LAUNCH_PAD = register("launch_pad", () -> new HoldableOverHeadBlockItem(ModBlocks.LAUNCH_PAD.get(), new Item.Settings().group(ModItemGroups.ITEM_GROUP_BLOCKS)));
 
     // Buckets
-    public static final RegistrySupplier<Item> OIL_BUCKET = register("oil_bucket", () -> new ArchitecturyBucketItem(ModFluids.OIL_STILL, new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL).recipeRemainder(Items.BUCKET).maxCount(1)));
-    public static final RegistrySupplier<Item> FUEL_BUCKET = register("fuel_bucket", () -> new ArchitecturyBucketItem(ModFluids.FUEL_STILL, new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL).recipeRemainder(Items.BUCKET).maxCount(1)));
-    public static final RegistrySupplier<Item> CRYO_FUEL_BUCKET = register("cryo_fuel_bucket", () -> new ArchitecturyBucketItem(ModFluids.CRYO_FUEL_STILL, new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL).recipeRemainder(Items.BUCKET).maxCount(1)));
-    public static final RegistrySupplier<Item> OXYGEN_BUCKET = register("oxygen_bucket", () -> new ArchitecturyBucketItem(ModFluids.OXYGEN_STILL, new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL).recipeRemainder(Items.BUCKET).maxCount(1)) {
-        @Override
-        public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-            ItemStack itemStack = user.getStackInHand(hand);
-            return TypedActionResult.fail(itemStack);
-        }
-    });
+    public static final RegistrySupplier<Item> OIL_BUCKET = register("oil_bucket", createBucketItem(ModFluids.OIL_STILL, new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL).recipeRemainder(Items.BUCKET).maxCount(1)));
+    public static final RegistrySupplier<Item> FUEL_BUCKET = register("fuel_bucket", createBucketItem(ModFluids.FUEL_STILL, new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL).recipeRemainder(Items.BUCKET).maxCount(1)));
+    public static final RegistrySupplier<Item> CRYO_FUEL_BUCKET = register("cryo_fuel_bucket", createBucketItem(ModFluids.CRYO_FUEL_STILL, new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL).recipeRemainder(Items.BUCKET).maxCount(1)));
+    public static final RegistrySupplier<Item> OXYGEN_BUCKET = register("oxygen_bucket", createBucketItem(ModFluids.OXYGEN_STILL, new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL).recipeRemainder(Items.BUCKET).maxCount(1)));
 
     // Spacesuit
     public static final Supplier<SpaceSuit> SPACE_HELMET = register("space_helmet", () -> new SpaceSuit(ModArmour.SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL)));
@@ -635,6 +630,11 @@ public class ModItems {
 
     @ExpectPlatform
     public static Supplier<SpawnEggItem> createSpawnEggItem(Supplier<? extends EntityType<? extends MobEntity>> type, int primaryColor, int secondaryColor, Item.Settings settings) {
+        throw new NotImplementedException();
+    }
+    
+    @ExpectPlatform
+    public static Supplier<Item> createBucketItem(Supplier<? extends Fluid> fluid, Item.Settings settings) {
         throw new NotImplementedException();
     }
 }
