@@ -33,10 +33,12 @@ public class FluidUtils {
                     // Then check if the output tank can insert fluid.
                     long outputAmount = (long) (extracted * conversionRatio);
                     FluidHolder convertedFluid = FluidHooks.newFluidHolder(recipeOutputFluid, outputAmount, null);
-                    if (tanks.getOutput().insertFluid(convertedFluid, true) > 0) {
-                        tanks.getInput().extractFluid(fluidToTransfer, false);
-                        tanks.getOutput().insertFluid(convertedFluid, false);
-                        return true;
+                    if (!convertedFluid.isEmpty() && !fluidToTransfer.isEmpty()) {
+                        if (tanks.getOutput().insertFluid(convertedFluid, true) > 0) {
+                            tanks.getInput().extractFluid(fluidToTransfer, false);
+                            tanks.getOutput().insertFluid(convertedFluid, false);
+                            return true;
+                        }
                     }
                 }
             }

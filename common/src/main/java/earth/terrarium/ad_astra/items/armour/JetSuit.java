@@ -7,6 +7,7 @@ import earth.terrarium.ad_astra.util.ModIdentifier;
 import earth.terrarium.ad_astra.util.ModKeyBindings;
 import earth.terrarium.ad_astra.util.ModUtils;
 import earth.terrarium.botarium.api.energy.*;
+import earth.terrarium.botarium.api.item.ItemStackHolder;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
 import net.minecraft.entity.Entity;
@@ -78,7 +79,7 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
     }
 
     public static void updateBatteryOverlay(ItemStack suit) {
-        PlatformEnergyManager energy = EnergyHooks.getItemEnergyManager(suit);
+        var energy = EnergyHooks.getItemEnergyManager(suit);
         PlayerOverlayScreen.batteryRatio = energy.getStoredEnergy() / (double) energy.getCapacity();
     }
 
@@ -134,10 +135,10 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
         if (EnergyHooks.isEnergyItem(stack)) {
             player.fallDistance /= 2;
 
-            PlatformEnergyManager energy = EnergyHooks.getItemEnergyManager(stack);
+            var energy = EnergyHooks.getItemEnergyManager(stack);
             long tickEnergy = AdAstra.CONFIG.spaceSuit.jetSuitEnergyPerTick;
             if (!player.isCreative()) {
-                energy.extract(tickEnergy, false);
+                energy.extract(new ItemStackHolder(stack), tickEnergy, false);
             }
             isFallFlying = false;
 
@@ -153,10 +154,10 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
         if (player.isOnGround()) {
             player.fallDistance /= 2;
         }
-        PlatformEnergyManager energy = EnergyHooks.getItemEnergyManager(stack);
+        var energy = EnergyHooks.getItemEnergyManager(stack);
         long tickEnergy = AdAstra.CONFIG.spaceSuit.jetSuitEnergyPerTick;
         if (!player.isCreative()) {
-            energy.extract(tickEnergy, false);
+            energy.extract(new ItemStackHolder(stack), tickEnergy, false);
         }
         isFallFlying = true;
 
@@ -185,7 +186,7 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
     public @Nullable String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
         if (slot.equals(EquipmentSlot.CHEST)) {
             if (stack.getItem() instanceof JetSuit) {
-                PlatformEnergyManager energy = EnergyHooks.getItemEnergyManager(stack);
+                var energy = EnergyHooks.getItemEnergyManager(stack);
                 return new ModIdentifier("textures/entity/armour/jet_suit/jet_suit_" + (energy.getStoredEnergy() == 0 ? 0 : ((int) Math.min((energy.getStoredEnergy() * 5 / energy.getCapacity()) + 1, 5))) + ".png").toString();
             }
         }

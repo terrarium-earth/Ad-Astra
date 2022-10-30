@@ -8,6 +8,7 @@ import earth.terrarium.ad_astra.util.ModUtils;
 import earth.terrarium.botarium.api.energy.EnergyBlock;
 import earth.terrarium.botarium.api.energy.EnergyHooks;
 import earth.terrarium.botarium.api.energy.SimpleUpdatingEnergyContainer;
+import earth.terrarium.botarium.api.item.ItemStackHolder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
@@ -42,13 +43,15 @@ public class EnergizerBlockEntity extends AbstractMachineBlockEntity implements 
     public void tick() {
         if (!this.getWorld().isClient()) {
             if (!this.getCachedState().get(AbstractMachineBlock.POWERED)) {
-                ItemStack stack = this.getStack(0);
+                ItemStackHolder stack = new ItemStackHolder(this.getStack(0));
                 this.setActive(true);
-                if (!stack.isEmpty()) {
+                if (!stack.getStack().isEmpty()) {
                     if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0) {
-                        // TODO: This doesn't transfer anything. "moved" is always 0 on fabric.
-                        long moved = EnergyHooks.moveBlockToItemEnergy(this, null, stack, this.getEnergyPerTick());
+                        long moved = EnergyHooks.safeMoveBlockToItemEnergy(this, null, stack, this.getEnergyPerTick());
                         if (moved > 0) {
+                            if (stack.isDirty()) {
+                                this.setStack(0, stack.getStack());
+                            }
                             BlockPos pos = this.getPos();
                             ModUtils.spawnForcedParticles((ServerWorld) world, ParticleTypes.ELECTRIC_SPARK, pos.getX() + 0.5, pos.getY() + 1.8, pos.getZ() + 0.5, 2, 0.1, 0.1, 0.1, 0.1);
                         }

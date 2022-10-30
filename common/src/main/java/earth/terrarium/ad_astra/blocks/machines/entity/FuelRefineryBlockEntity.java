@@ -5,10 +5,12 @@ import earth.terrarium.ad_astra.container.DoubleFluidTank;
 import earth.terrarium.ad_astra.recipes.FluidConversionRecipe;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
 import earth.terrarium.ad_astra.registry.ModRecipes;
+import earth.terrarium.ad_astra.registry.ModTags;
 import earth.terrarium.ad_astra.screen.handler.ConversionScreenHandler;
 import earth.terrarium.ad_astra.util.FluidUtils;
 import earth.terrarium.botarium.api.energy.EnergyBlock;
 import earth.terrarium.botarium.api.energy.InsertOnlyEnergyContainer;
+import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -20,6 +22,7 @@ import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 public class FuelRefineryBlockEntity extends FluidMachineBlockEntity implements EnergyBlock {
 
@@ -35,6 +38,11 @@ public class FuelRefineryBlockEntity extends FluidMachineBlockEntity implements 
     @Override
     public long getOutputTankCapacity() {
         return AdAstra.CONFIG.fuelRefinery.tankSize;
+    }
+
+    @Override
+    public Predicate<FluidHolder> getInputFilter() {
+        return f -> ModRecipes.FUEL_CONVERSION_RECIPE.get().getRecipes(this.getWorld()).stream().anyMatch(r -> r.matches(f.getFluid()));
     }
 
     @Override
@@ -76,7 +84,7 @@ public class FuelRefineryBlockEntity extends FluidMachineBlockEntity implements 
 
             if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0) {
                 List<FluidConversionRecipe> recipes = ModRecipes.FUEL_CONVERSION_RECIPE.get().getRecipes(this.world);
-                if (FluidUtils.convertFluid((DoubleFluidTank) this.getFluidContainer(), recipes, FluidHooks.getNuggetAmount())) {
+                if (FluidUtils.convertFluid((DoubleFluidTank) this.getFluidContainer(), recipes, FluidHooks.buckets(1) / 50)) {
                     this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
                     this.setActive(true);
                 } else {

@@ -1,11 +1,11 @@
 package earth.terrarium.ad_astra.blocks.pipes;
 
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
+import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import earth.terrarium.botarium.api.fluid.PlatformFluidHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
@@ -24,22 +24,6 @@ public class FluidPipeBlockEntity extends BlockEntity implements InteractablePip
     @Override
     public boolean supportsAutoExtract() {
         return true;
-    }
-
-    @Override
-    public boolean canTakeFrom(PlatformFluidHandler source) {
-        if (source.getFluidInTank(0).isEmpty()) {
-            return false;
-        }
-        return source.supportsExtraction();
-    }
-
-    @Override
-    public boolean canInsertInto(PlatformFluidHandler consumer) {
-        if (consumer.getFluidInTank(0).isEmpty()) {
-            return false;
-        }
-        return consumer.supportsInsertion();
     }
 
     @Override
@@ -69,25 +53,22 @@ public class FluidPipeBlockEntity extends BlockEntity implements InteractablePip
             return;
         } else if (pipeState == PipeState.NONE || pipeState2 == PipeState.NONE) {
             return;
-        } else if (pipeState2 == PipeState.INSERT) {
+        } else if (pipeState2 == PipeState.INSERT || pipeState == PipeState.EXTRACT) {
             input = source.storage();
             output = consumer;
-        } else if (pipeState2 == PipeState.EXTRACT) {
+        } else if (pipeState2 == PipeState.EXTRACT || pipeState == PipeState.INSERT) {
             input = consumer;
             output = source.storage();
-        } else if (pipeState == PipeState.INSERT) {
-            input = consumer;
-            output = source.storage();
-        } else if (pipeState == PipeState.EXTRACT) {
-            input = source.storage();
-            output = consumer;
         } else {
             return;
         }
 
         if (getSource() != null && getConsumers().size() > 0) {
-            if (!input.getFluidInTank(0).getFluid().equals(Fluids.EMPTY)) {
-                FluidHooks.moveFluid(input, output, input.getFluidInTank(0));
+            for (FluidHolder fluid : input.getFluidTanks()) {
+                if (!fluid.isEmpty()) {
+                    FluidHolder transfer = FluidHooks.newFluidHolder(fluid.getFluid(), ((FluidPipeBlock) this.getCachedState().getBlock()).getTransferRate(), fluid.getCompound());
+                    FluidHooks.moveFluid(input, output, transfer);
+                }
             }
         }
     }
