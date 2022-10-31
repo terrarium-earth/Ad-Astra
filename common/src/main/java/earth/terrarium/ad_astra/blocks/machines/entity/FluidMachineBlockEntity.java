@@ -5,7 +5,6 @@ import earth.terrarium.botarium.api.energy.EnergyBlock;
 import earth.terrarium.botarium.api.energy.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHoldingBlock;
-import earth.terrarium.botarium.api.fluid.UpdatingFluidContainer;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntityType;
@@ -38,12 +37,8 @@ public abstract class FluidMachineBlockEntity extends AbstractMachineBlockEntity
     public abstract Predicate<FluidHolder> getInputFilter();
 
     @Override
-    public UpdatingFluidContainer getFluidContainer() {
+    public DoubleFluidTank getFluidContainer() {
         return tanks == null ? tanks = new DoubleFluidTank(this, getInputTankCapacity(), getOutputTankCapacity(), getInputFilter(), f -> true) : this.tanks;
-    }
-
-    public DoubleFluidTank getTanks() {
-        return (DoubleFluidTank) getFluidContainer();
     }
 
     public abstract long getEnergyPerTick();

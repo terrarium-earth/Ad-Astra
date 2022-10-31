@@ -1,11 +1,9 @@
 package earth.terrarium.ad_astra.blocks.machines.entity;
 
 import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.ad_astra.container.DoubleFluidTank;
 import earth.terrarium.ad_astra.recipes.FluidConversionRecipe;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
 import earth.terrarium.ad_astra.registry.ModRecipes;
-import earth.terrarium.ad_astra.registry.ModTags;
 import earth.terrarium.ad_astra.screen.handler.ConversionScreenHandler;
 import earth.terrarium.ad_astra.util.FluidUtils;
 import earth.terrarium.botarium.api.energy.EnergyBlock;
@@ -75,16 +73,16 @@ public class FuelRefineryBlockEntity extends FluidMachineBlockEntity implements 
             ItemStack outputExtractSlot = this.getItems().get(3);
 
             if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxCount() && FluidHooks.isFluidContainingItem(insertSlot)) {
-                FluidUtils.insertItemFluidToTank(this.getTanks().getInput(), this, 0, 1, 0, f -> ModRecipes.FUEL_CONVERSION_RECIPE.get().getRecipes(this.world).stream().anyMatch(r -> r.matches(f)));
+                FluidUtils.insertItemFluidToTank(this.getFluidContainer().getInput(), this, 0, 1, 0, f -> ModRecipes.FUEL_CONVERSION_RECIPE.get().getRecipes(this.world).stream().anyMatch(r -> r.matches(f)));
             }
 
             if (!outputInsertSlot.isEmpty() && outputExtractSlot.getCount() < outputExtractSlot.getMaxCount()) {
-                FluidUtils.extractTankFluidToItem(this.getTanks().getOutput(), this, 2, 3, 0, f -> true);
+                FluidUtils.extractTankFluidToItem(this.getFluidContainer().getOutput(), this, 2, 3, 0, f -> true);
             }
 
             if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0) {
                 List<FluidConversionRecipe> recipes = ModRecipes.FUEL_CONVERSION_RECIPE.get().getRecipes(this.world);
-                if (FluidUtils.convertFluid((DoubleFluidTank) this.getFluidContainer(), recipes, FluidHooks.buckets(1) / 50)) {
+                if (FluidUtils.convertFluid(this.getFluidContainer(), recipes, FluidHooks.buckets(1) / 50)) {
                     this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
                     this.setActive(true);
                 } else {

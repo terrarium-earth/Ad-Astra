@@ -1,7 +1,6 @@
 package earth.terrarium.ad_astra.blocks.machines.entity;
 
 import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.ad_astra.container.DoubleFluidTank;
 import earth.terrarium.ad_astra.recipes.OxygenConversionRecipe;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
 import earth.terrarium.ad_astra.registry.ModRecipes;
@@ -77,12 +76,12 @@ public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
             }
 
             if (!outputInsertSlot.isEmpty() && outputExtractSlot.getCount() < outputExtractSlot.getMaxCount()) {
-                FluidUtils.extractTankFluidToItem(this.getTanks().getOutput(), this, 2, 3, 0, f -> true);
+                FluidUtils.extractTankFluidToItem(this.getFluidContainer().getOutput(), this, 2, 3, 0, f -> true);
             }
 
             if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0) {
                 List<OxygenConversionRecipe> recipes = ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.world);
-                if (FluidUtils.convertFluid((DoubleFluidTank) this.getFluidContainer(), recipes,  FluidHooks.buckets(1) / 50)) {
+                if (FluidUtils.convertFluid(this.getFluidContainer(), recipes, FluidHooks.buckets(1) / 50)) {
                     this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
                     this.setActive(true);
                 } else {

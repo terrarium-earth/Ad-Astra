@@ -8,15 +8,15 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class DoubleFluidTank implements UpdatingFluidContainer {
-    private final FluidContainer input;
-    private final FluidContainer output;
+    private final SimpleUpdatingFluidContainer input;
+    private final SimpleUpdatingFluidContainer output;
 
     public DoubleFluidTank(Updatable updatable, long inputCapacity, long outputCapacity, Predicate<FluidHolder> inputFilter, Predicate<FluidHolder> outputFilter) {
         this.input = new SimpleUpdatingFluidContainer(updatable, i -> inputCapacity, 1, (i, f) -> inputFilter.test(f));
         this.output = new SimpleUpdatingFluidContainer(updatable, i -> outputCapacity, 1, (i, f) -> outputFilter.test(f));
     }
 
-    protected DoubleFluidTank(FluidContainer input, FluidContainer output) {
+    protected DoubleFluidTank(SimpleUpdatingFluidContainer input, SimpleUpdatingFluidContainer output) {
         this.input = input;
         this.output = output;
     }
