@@ -16,22 +16,22 @@ import earth.terrarium.botarium.api.energy.EnergyBlock;
 import earth.terrarium.botarium.api.energy.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluids;
 
 public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implements EnergyBlock {
     private InsertOnlyEnergyContainer energyContainer;
@@ -44,14 +44,14 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
     }
 
     @Override
-    public void readNbt(NbtCompound nbt) {
-        super.readNbt(nbt);
+    public void load(CompoundTag nbt) {
+        super.load(nbt);
         showOxygen = nbt.getBoolean("showOxygen");
     }
 
     @Override
-    public void writeNbt(NbtCompound nbt) {
-        super.writeNbt(nbt);
+    public void saveAdditional(CompoundTag nbt) {
+        super.saveAdditional(nbt);
         nbt.putBoolean("showOxygen", showOxygen);
     }
 
@@ -75,7 +75,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
 
     @Override
     public Predicate<FluidHolder> getInputFilter() {
-        return f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.getWorld()).stream().anyMatch(r -> r.matches(f.getFluid()));
+        return f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.getLevel()).stream().anyMatch(r -> r.matches(f.getFluid()));
     }
 
     @Override
@@ -85,17 +85,17 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
 
     @Nullable
     @Override
-    public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
+    public AbstractContainerMenu createMenu(int syncId, Inventory inv, Player player) {
         return new OxygenDistributorScreenHandler(syncId, inv, this);
     }
 
     @Override
-    public boolean canInsert(int slot, ItemStack stack, Direction dir) {
+    public boolean canPlaceItemThroughFace(int slot, ItemStack stack, Direction dir) {
         return slot == 0;
     }
 
     @Override
-    public boolean canExtract(int slot, ItemStack stack, Direction dir) {
+    public boolean canTakeItemThroughFace(int slot, ItemStack stack, Direction dir) {
         return slot == 1;
     }
 
@@ -120,16 +120,16 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
     }
 
     public void extractResources() {
-        long oxygenBlocks = OxygenUtils.getOxygenBlocksCount(this.world, this.getPos());
+        long oxygenBlocks = OxygenUtils.getOxygenBlocksCount(this.level, this.getBlockPos());
         long amountOfFluidToExtract = this.getFluidToExtract(oxygenBlocks, false);
         long amountOfEnergyToConsume = this.getEnergyToConsume(oxygenBlocks, false);
 
-        if (world.getTime() % 20 == 0) {
+        if (level.getGameTime() % 20 == 0) {
             this.getFluidContainer().extractFluid(FluidHooks.newFluidHolder(this.getOutputTank().getFluid(), amountOfFluidToExtract, null), false);
         }
 
         if (this.getEnergyStorage().internalExtract(amountOfEnergyToConsume, false) > 0) {
-            ModUtils.spawnForcedParticles((ServerWorld) this.getWorld(), ModParticleTypes.OXYGEN_BUBBLE.get(), this.getPos().getX() + 0.5, this.getPos().getY() + 0.5, this.getPos().getZ() + 0.5, 1, 0.0, 0.0, 0.0, 0.03);
+            ModUtils.spawnForcedParticles((ServerLevel) this.getLevel(), ModParticleTypes.OXYGEN_BUBBLE.get(), this.getBlockPos().getX() + 0.5, this.getBlockPos().getY() + 0.5, this.getBlockPos().getZ() + 0.5, 1, 0.0, 0.0, 0.0, 0.03);
         }
     }
 
@@ -138,7 +138,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
         long amountOfEnergyToConsume = this.getEnergyToConsume(oxygenBlocks, false);
         if (getOutputTank().isEmpty()) {
             return false;
-        } else if (this.getCachedState().get(AbstractMachineBlock.POWERED)) {
+        } else if (this.getBlockState().getValue(AbstractMachineBlock.POWERED)) {
             return false;
         } else if (this.getEnergyStorage().internalExtract(amountOfEnergyToConsume, true) == 0) {
             return false;
@@ -155,13 +155,13 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
         ItemStack extractSlot = this.getItems().get(1);
 
         // Convert the input fluid into oxygen
-        if (!this.world.isClient) {
-            if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxCount() && FluidHooks.isFluidContainingItem(insertSlot)) {
-                FluidUtils.insertItemFluidToTank(this.getFluidContainer(), this, 0, 1, 0, f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.world).stream().anyMatch(r -> r.matches(f)));
+        if (!this.level.isClientSide) {
+            if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxStackSize() && FluidHooks.isFluidContainingItem(insertSlot)) {
+                FluidUtils.insertItemFluidToTank(this.getFluidContainer(), this, 0, 1, 0, f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.level).stream().anyMatch(r -> r.matches(f)));
             }
 
             if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0) {
-                List<OxygenConversionRecipe> recipes = ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.world);
+                List<OxygenConversionRecipe> recipes = ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.level);
                 if (FluidUtils.convertFluid((DoubleFluidTank) this.getFluidContainer(), recipes, 20)) {
                     this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
                 }
@@ -176,8 +176,8 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
             oxygenFillCheckTicks++;
         }
 
-        if (!world.isClient) {
-            boolean active = OxygenUtils.getOxygenBlocksCount(this.world, this.getPos()) > 0;
+        if (!level.isClientSide) {
+            boolean active = OxygenUtils.getOxygenBlocksCount(this.level, this.getBlockPos()) > 0;
             this.setActive(active);
 
             if (active) {
@@ -188,8 +188,8 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
     }
 
     public void runAlgorithm() {
-        if (this.world.isClient()) {
-            if (!this.getCachedState().get(AbstractMachineBlock.LIT)) {
+        if (this.level.isClientSide()) {
+            if (!this.getBlockState().getValue(AbstractMachineBlock.LIT)) {
                 return;
             }
         } else {
@@ -198,13 +198,13 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
             }
         }
 
-        OxygenFillerAlgorithm floodFiller = new OxygenFillerAlgorithm(this.world, this.getMaxBlockChecks());
-        Set<BlockPos> positions = floodFiller.runAlgorithm(pos.up());
+        OxygenFillerAlgorithm floodFiller = new OxygenFillerAlgorithm(this.level, this.getMaxBlockChecks());
+        Set<BlockPos> positions = floodFiller.runAlgorithm(worldPosition.above());
 
         if (this.canDistribute(positions.size())) {
-            OxygenUtils.setEntry(this.world, pos, positions);
-        } else if (!world.isClient()) {
-            OxygenUtils.removeEntry(this.world, this.getPos());
+            OxygenUtils.setEntry(this.level, worldPosition, positions);
+        } else if (!level.isClientSide()) {
+            OxygenUtils.removeEntry(this.level, this.getBlockPos());
         }
 
         if (this.shouldShowOxygen()) {
@@ -214,9 +214,9 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
 
     // Spawn the bubble particles in each oxygenated position. The "show" button must be clicked in the oxygen distributor GUI in order to work.
     public void spawnParticles(Set<BlockPos> positions) {
-        if (!world.isClient() && this.getCachedState().get(AbstractMachineBlock.LIT)) {
+        if (!level.isClientSide() && this.getBlockState().getValue(AbstractMachineBlock.LIT)) {
             for (BlockPos pos : positions) {
-                ModUtils.spawnForcedParticles((ServerWorld) this.getWorld(), ModParticleTypes.OXYGEN_BUBBLE.get(), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 1, 0.0, 0.0, 0.0, 0.0);
+                ModUtils.spawnForcedParticles((ServerLevel) this.getLevel(), ModParticleTypes.OXYGEN_BUBBLE.get(), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 1, 0.0, 0.0, 0.0, 0.0);
             }
         }
     }
@@ -236,7 +236,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
 
     @Override
     public void update() {
-        this.markDirty();
-        this.getWorld().updateListeners(this.getPos(), this.getCachedState(), this.getCachedState(), Block.NOTIFY_ALL);
+        this.setChanged();
+        this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
     }
 }

@@ -1,19 +1,19 @@
 package earth.terrarium.ad_astra.blocks.machines;
 
 import earth.terrarium.ad_astra.blocks.machines.entity.NasaWorkbenchBlockEntity;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class NasaWorkbenchBlock extends AbstractMachineBlock {
 
-    public NasaWorkbenchBlock(Settings settings) {
+    public NasaWorkbenchBlock(Properties settings) {
         super(settings);
     }
 
@@ -23,7 +23,7 @@ public class NasaWorkbenchBlock extends AbstractMachineBlock {
     }
 
     @Override
-    public boolean isSideInvisible(BlockState state, BlockState stateFrom, Direction direction) {
+    public boolean skipRendering(BlockState state, BlockState stateFrom, Direction direction) {
         return true;
     }
 
@@ -33,13 +33,13 @@ public class NasaWorkbenchBlock extends AbstractMachineBlock {
     }
 
     @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        Vec3d offset = state.getModelOffset(world, pos);
-        return VoxelShapes.union(Block.createCuboidShape(0, 0, 0, 16, 19.2, 16)).offset(offset.getX(), offset.getY(), offset.getZ());
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        Vec3 offset = state.getOffset(level, pos);
+        return Shapes.or(Block.box(0, 0, 0, 16, 19.2, 16)).move(offset.x(), offset.y(), offset.z());
     }
 
     @Override
-    public NasaWorkbenchBlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+    public NasaWorkbenchBlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new NasaWorkbenchBlockEntity(pos, state);
     }
 }

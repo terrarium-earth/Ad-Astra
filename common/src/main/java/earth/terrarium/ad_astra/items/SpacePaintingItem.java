@@ -1,58 +1,57 @@
 package earth.terrarium.ad_astra.items;
 
 import earth.terrarium.ad_astra.entities.SpacePaintingEntity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.DecorationItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsageContext;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
-import net.minecraft.world.event.GameEvent;
-
 import java.util.Optional;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.HangingEntityItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.gameevent.GameEvent;
 
-public class SpacePaintingItem extends DecorationItem {
+public class SpacePaintingItem extends HangingEntityItem {
 
-    public SpacePaintingItem(EntityType<? extends SpacePaintingEntity> type, Settings settings) {
+    public SpacePaintingItem(EntityType<? extends SpacePaintingEntity> type, Properties settings) {
         super(type, settings);
     }
 
     @Override
-    public ActionResult useOnBlock(ItemUsageContext context) {
+    public InteractionResult useOn(UseOnContext context) {
         SpacePaintingEntity spacePainting;
-        BlockPos blockPos = context.getBlockPos();
-        Direction direction = context.getSide();
-        BlockPos blockPos2 = blockPos.offset(direction);
-        PlayerEntity playerEntity = context.getPlayer();
-        ItemStack itemStack = context.getStack();
-        if (playerEntity != null && !this.canPlaceOn(playerEntity, direction, itemStack, blockPos2)) {
-            return ActionResult.FAIL;
+        BlockPos blockPos = context.getClickedPos();
+        Direction direction = context.getClickedFace();
+        BlockPos blockPos2 = blockPos.relative(direction);
+        Player playerEntity = context.getPlayer();
+        ItemStack itemStack = context.getItemInHand();
+        if (playerEntity != null && !this.mayPlace(playerEntity, direction, itemStack, blockPos2)) {
+            return InteractionResult.FAIL;
         }
-        World world = context.getWorld();
+        Level level = context.getLevel();
 
-        Optional<SpacePaintingEntity> optional = SpacePaintingEntity.placeSpacePainting(world, blockPos2, direction);
+        Optional<SpacePaintingEntity> optional = SpacePaintingEntity.placeSpacePainting(level, blockPos2, direction);
         if (optional.isEmpty()) {
-            return ActionResult.CONSUME;
+            return InteractionResult.CONSUME;
         }
         spacePainting = optional.get();
 
-        NbtCompound nbtCompound = itemStack.getNbt();
+        CompoundTag nbtCompound = itemStack.getTag();
         if (nbtCompound != null) {
-            EntityType.loadFromEntityNbt(world, playerEntity, spacePainting, nbtCompound);
+            EntityType.updateCustomEntityTag(level, playerEntity, spacePainting, nbtCompound);
         }
-        if (spacePainting.canStayAttached()) {
-            if (!world.isClient) {
-                spacePainting.onPlace();
-                world.emitGameEvent(playerEntity, GameEvent.ENTITY_PLACE, spacePainting.getBlockPos());
-                world.spawnEntity(spacePainting);
+        if (spacePainting.survives()) {
+            if (!level.isClientSide) {
+                spacePainting.playPlacementSound();
+                level.gameEvent(playerEntity, GameEvent.ENTITY_PLACE, spacePainting.blockPosition());
+                level.addFreshEntity(spacePainting);
             }
-            itemStack.decrement(1);
-            return ActionResult.success(world.isClient);
+            itemStack.shrink(1);
+            return InteractionResult.sidedSuccess(level.isClientSide);
         }
-        return ActionResult.CONSUME;
+        return InteractionResult.CONSUME;
     }
 }

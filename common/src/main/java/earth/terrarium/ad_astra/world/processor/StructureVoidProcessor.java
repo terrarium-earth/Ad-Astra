@@ -2,13 +2,13 @@ package earth.terrarium.ad_astra.world.processor;
 
 import com.mojang.serialization.Codec;
 import earth.terrarium.ad_astra.registry.ModStructures;
-import net.minecraft.block.Blocks;
-import net.minecraft.structure.Structure;
-import net.minecraft.structure.StructurePlacementData;
-import net.minecraft.structure.processor.StructureProcessor;
-import net.minecraft.structure.processor.StructureProcessorType;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.WorldView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import org.jetbrains.annotations.Nullable;
 
 public class StructureVoidProcessor extends StructureProcessor {
@@ -21,11 +21,11 @@ public class StructureVoidProcessor extends StructureProcessor {
 
     @Nullable
     @Override
-    public Structure.StructureBlockInfo process(WorldView world, BlockPos pos, BlockPos pivot, Structure.StructureBlockInfo structureBlockInfo, Structure.StructureBlockInfo structureBlockInfo2, StructurePlacementData data) {
+    public StructureTemplate.StructureBlockInfo processBlock(LevelReader level, BlockPos pos, BlockPos pivot, StructureTemplate.StructureBlockInfo structureBlockInfo, StructureTemplate.StructureBlockInfo structureBlockInfo2, StructurePlaceSettings data) {
         if (structureBlockInfo2.state.getBlock().equals(Blocks.STRUCTURE_VOID)) {
             return null;
         }
-        if (world.getBlockState(structureBlockInfo2.pos).isAir()) {
+        if (level.getBlockState(structureBlockInfo2.pos).isAir()) {
             return null;
         }
 

@@ -1,11 +1,7 @@
 accessWidener   v2  named
-extendable class net/minecraft/world/gen/chunk/NoiseChunkGenerator
-accessible field net/minecraft/inventory/SimpleInventory stacks Lnet/minecraft/util/collection/DefaultedList;
-extendable method net/minecraft/entity/mob/HoglinEntity zombify (Lnet/minecraft/server/world/ServerWorld;)V
-extendable method net/minecraft/entity/mob/ZoglinEntity shouldAttack (Lnet/minecraft/entity/LivingEntity;)Z
-extendable method net/minecraft/entity/mob/CreeperEntity explode ()V
-accessible field net/minecraft/client/sound/SoundManager soundSystem Lnet/minecraft/client/sound/SoundSystem;
-accessible field net/minecraft/block/StairsBlock baseBlock Lnet/minecraft/block/Block;
-accessible method net/minecraft/entity/SpawnRestriction register (Lnet/minecraft/entity/EntityType;Lnet/minecraft/entity/SpawnRestriction$Location;Lnet/minecraft/world/Heightmap$Type;Lnet/minecraft/entity/SpawnRestriction$SpawnPredicate;)V
-accessible method net/minecraft/client/gui/screen/ingame/HandledScreens register (Lnet/minecraft/screen/ScreenHandlerType;Lnet/minecraft/client/gui/screen/ingame/HandledScreens$Provider;)V
-accessible class net/minecraft/client/gui/screen/ingame/HandledScreens$Provider
+accessible class net/minecraft/client/gui/screens/MenuScreens$ScreenConstructor
+accessible field net/minecraft/world/level/block/StairBlock base Lnet/minecraft/world/level/block/Block;
+accessible method net/minecraft/world/entity/SpawnPlacements register (Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/SpawnPlacements$Type;Lnet/minecraft/world/level/levelgen/Heightmap$Types;Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;)V
+extendable method net/minecraft/world/entity/monster/hoglin/Hoglin finishConversion (Lnet/minecraft/server/level/ServerLevel;)V
+extendable method net/minecraft/world/entity/monster/Zoglin isTargetable (Lnet/minecraft/world/entity/LivingEntity;)Z
+extendable method net/minecraft/world/entity/monster/Creeper explodeCreeper ()V

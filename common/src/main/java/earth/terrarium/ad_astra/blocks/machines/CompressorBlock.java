@@ -1,12 +1,12 @@
 package earth.terrarium.ad_astra.blocks.machines;
 
 import earth.terrarium.ad_astra.blocks.machines.entity.CompressorBlockEntity;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class CompressorBlock extends AbstractMachineBlock {
 
-    public CompressorBlock(Settings settings) {
+    public CompressorBlock(Properties settings) {
         super(settings);
     }
 
@@ -21,7 +21,7 @@ public class CompressorBlock extends AbstractMachineBlock {
     }
 
     @Override
-    public CompressorBlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+    public CompressorBlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new CompressorBlockEntity(pos, state);
     }
 }

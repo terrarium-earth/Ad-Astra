@@ -1,28 +1,28 @@
 package earth.terrarium.ad_astra.entities.projectiles;
 
 import earth.terrarium.ad_astra.registry.ModItems;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
-import net.minecraft.item.Item;
-import net.minecraft.network.Packet;
-import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 
-public class IceSpitEntity extends ThrownItemEntity {
+public class IceSpitEntity extends ThrowableItemProjectile {
 
-    public IceSpitEntity(EntityType<? extends ThrownItemEntity> entityType, World world) {
-        super(entityType, world);
+    public IceSpitEntity(EntityType<? extends ThrowableItemProjectile> entityType, Level level) {
+        super(entityType, level);
     }
 
-    public IceSpitEntity(EntityType<? extends ThrownItemEntity> entityType, LivingEntity livingEntity, World world) {
-        super(entityType, livingEntity, world);
+    public IceSpitEntity(EntityType<? extends ThrowableItemProjectile> entityType, LivingEntity livingEntity, Level level) {
+        super(entityType, livingEntity, level);
     }
 
     @Override
@@ -31,8 +31,8 @@ public class IceSpitEntity extends ThrownItemEntity {
     }
 
     @Override
-    public Packet<?> createSpawnPacket() {
-        return new EntitySpawnS2CPacket(this);
+    public Packet<?> getAddEntityPacket() {
+        return new ClientboundAddEntityPacket(this);
     }
 
     @Override
@@ -41,24 +41,24 @@ public class IceSpitEntity extends ThrownItemEntity {
         double x = this.getX();
         double y = this.getY();
         double z = this.getZ();
-        Vec3d vec = this.getVelocity();
+        Vec3 vec = this.getDeltaMovement();
 
-        this.world.addParticle(ParticleTypes.SPIT, x - vec.getX(), y - vec.getY(), z - vec.getZ(), 0, 0.001, 0);
-        this.world.addParticle(ParticleTypes.ITEM_SNOWBALL, x - vec.getX(), y - vec.getY(), z - vec.getZ(), 0, 0.001, 0);
+        this.level.addParticle(ParticleTypes.SPIT, x - vec.x(), y - vec.y(), z - vec.z(), 0, 0.001, 0);
+        this.level.addParticle(ParticleTypes.ITEM_SNOWBALL, x - vec.x(), y - vec.y(), z - vec.z(), 0, 0.001, 0);
     }
 
     @Override
-    protected void onEntityHit(EntityHitResult entityHitResult) {
-        super.onEntityHit(entityHitResult);
+    protected void onHitEntity(EntityHitResult entityHitResult) {
+        super.onHitEntity(entityHitResult);
         Entity entity = entityHitResult.getEntity();
-        entity.damage(DamageSource.thrownProjectile(this, null), 4);
+        entity.hurt(DamageSource.thrown(this, null), 4);
     }
 
     @Override
-    protected void onCollision(HitResult hitResult) {
-        super.onCollision(hitResult);
-        if (!this.world.isClient) {
-            this.world.sendEntityStatus(this, (byte) 3);
+    protected void onHit(HitResult hitResult) {
+        super.onHit(hitResult);
+        if (!this.level.isClientSide) {
+            this.level.broadcastEntityEvent(this, (byte) 3);
             this.discard();
         }
     }

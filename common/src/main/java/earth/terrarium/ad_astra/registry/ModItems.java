@@ -1,6 +1,5 @@
 package earth.terrarium.ad_astra.registry;
 
-import dev.architectury.core.item.ArchitecturyBucketItem;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
@@ -12,22 +11,22 @@ import earth.terrarium.ad_astra.items.armour.NetheriteSpaceSuit;
 import earth.terrarium.ad_astra.items.armour.SpaceSuit;
 import earth.terrarium.ad_astra.items.vehicles.RocketItem;
 import earth.terrarium.ad_astra.items.vehicles.RoverItem;
-import earth.terrarium.ad_astra.util.ModIdentifier;
+import earth.terrarium.ad_astra.util.ModResourceLocation;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
-import net.minecraft.block.Block;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.item.*;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.util.*;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.World;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.core.Registry;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.*;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Fluid;
 import org.apache.commons.lang3.NotImplementedException;
 
 import java.util.HashSet;
@@ -37,196 +36,196 @@ import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
 public class ModItems {
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(AdAstra.MOD_ID, Registry.ITEM_KEY);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(AdAstra.MOD_ID, Registry.ITEM_REGISTRY);
     public static final Set<Item> items = new HashSet<>();
 
     // Vehicles Items
-    public static final Supplier<Item> TIER_1_ROCKET = register("tier_1_rocket", () -> new RocketItem<>(ModEntityTypes.TIER_1_ROCKET.get(), 1, new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL).maxCount(1).fireproof()));
-    public static final Supplier<Item> TIER_2_ROCKET = register("tier_2_rocket", () -> new RocketItem<>(ModEntityTypes.TIER_2_ROCKET.get(), 2, new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL).maxCount(1).fireproof()));
-    public static final Supplier<Item> TIER_3_ROCKET = register("tier_3_rocket", () -> new RocketItem<>(ModEntityTypes.TIER_3_ROCKET.get(), 3, new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL).maxCount(1).fireproof()));
-    public static final Supplier<Item> TIER_4_ROCKET = register("tier_4_rocket", () -> new RocketItem<>(ModEntityTypes.TIER_4_ROCKET.get(), 4, new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL).maxCount(1).fireproof()));
-    public static final Supplier<Item> TIER_1_ROVER = register("tier_1_rover", () -> new RoverItem(new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL).maxCount(1).fireproof()));
+    public static final Supplier<Item> TIER_1_ROCKET = register("tier_1_rocket", () -> new RocketItem<>(ModEntityTypes.TIER_1_ROCKET.get(), 1, new Item.Properties().tab(ModItemGroups.ITEM_GROUP_NORMAL).stacksTo(1).fireResistant()));
+    public static final Supplier<Item> TIER_2_ROCKET = register("tier_2_rocket", () -> new RocketItem<>(ModEntityTypes.TIER_2_ROCKET.get(), 2, new Item.Properties().tab(ModItemGroups.ITEM_GROUP_NORMAL).stacksTo(1).fireResistant()));
+    public static final Supplier<Item> TIER_3_ROCKET = register("tier_3_rocket", () -> new RocketItem<>(ModEntityTypes.TIER_3_ROCKET.get(), 3, new Item.Properties().tab(ModItemGroups.ITEM_GROUP_NORMAL).stacksTo(1).fireResistant()));
+    public static final Supplier<Item> TIER_4_ROCKET = register("tier_4_rocket", () -> new RocketItem<>(ModEntityTypes.TIER_4_ROCKET.get(), 4, new Item.Properties().tab(ModItemGroups.ITEM_GROUP_NORMAL).stacksTo(1).fireResistant()));
+    public static final Supplier<Item> TIER_1_ROVER = register("tier_1_rover", () -> new RoverItem(new Item.Properties().tab(ModItemGroups.ITEM_GROUP_NORMAL).stacksTo(1).fireResistant()));
 
-    public static final Supplier<Item> OXYGEN_TANK = register("oxygen_tank", () -> new OxygenTankItem(new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL).maxCount(1)));
+    public static final Supplier<Item> OXYGEN_TANK = register("oxygen_tank", () -> new OxygenTankItem(new Item.Properties().tab(ModItemGroups.ITEM_GROUP_NORMAL).stacksTo(1)));
 
-    public static final Supplier<Item> ASTRODUX = register("astrodux", () -> new AstroduxItem(new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL)));
+    public static final Supplier<Item> ASTRODUX = register("astrodux", () -> new AstroduxItem(new Item.Properties().tab(ModItemGroups.ITEM_GROUP_NORMAL)));
 
-    public static final Supplier<Item> SPACE_PAINTING = register("space_painting", () -> new SpacePaintingItem(ModEntityTypes.SPACE_PAINTING.get(), new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL).rarity(Rarity.UNCOMMON)));
+    public static final Supplier<Item> SPACE_PAINTING = register("space_painting", () -> new SpacePaintingItem(ModEntityTypes.SPACE_PAINTING.get(), new Item.Properties().tab(ModItemGroups.ITEM_GROUP_NORMAL).rarity(Rarity.UNCOMMON)));
 
-    public static final Supplier<Item> CHEESE = register("cheese", () -> new Item(new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL).food(new FoodComponent.Builder().hunger(4).saturationModifier(1.0f).build())));
+    public static final Supplier<Item> CHEESE = register("cheese", () -> new Item(new Item.Properties().tab(ModItemGroups.ITEM_GROUP_NORMAL).food(new FoodProperties.Builder().nutrition(4).saturationMod(1.0f).build())));
 
-    public static final Supplier<Item> LAUNCH_PAD = register("launch_pad", () -> new HoldableOverHeadBlockItem(ModBlocks.LAUNCH_PAD.get(), new Item.Settings().group(ModItemGroups.ITEM_GROUP_BLOCKS)));
+    public static final Supplier<Item> LAUNCH_PAD = register("launch_pad", () -> new HoldableOverHeadBlockItem(ModBlocks.LAUNCH_PAD.get(), new Item.Properties().tab(ModItemGroups.ITEM_GROUP_BLOCKS)));
 
     // Buckets
-    public static final RegistrySupplier<Item> OIL_BUCKET = register("oil_bucket", createBucketItem(ModFluids.OIL_STILL, new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL).recipeRemainder(Items.BUCKET).maxCount(1)));
-    public static final RegistrySupplier<Item> FUEL_BUCKET = register("fuel_bucket", createBucketItem(ModFluids.FUEL_STILL, new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL).recipeRemainder(Items.BUCKET).maxCount(1)));
-    public static final RegistrySupplier<Item> CRYO_FUEL_BUCKET = register("cryo_fuel_bucket", createBucketItem(ModFluids.CRYO_FUEL_STILL, new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL).recipeRemainder(Items.BUCKET).maxCount(1)));
-    public static final RegistrySupplier<Item> OXYGEN_BUCKET = register("oxygen_bucket", createBucketItem(ModFluids.OXYGEN_STILL, new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL).recipeRemainder(Items.BUCKET).maxCount(1)));
+    public static final RegistrySupplier<Item> OIL_BUCKET = register("oil_bucket", createBucketItem(ModFluids.OIL_STILL, new Item.Properties().tab(ModItemGroups.ITEM_GROUP_NORMAL).craftRemainder(Items.BUCKET).stacksTo(1)));
+    public static final RegistrySupplier<Item> FUEL_BUCKET = register("fuel_bucket", createBucketItem(ModFluids.FUEL_STILL, new Item.Properties().tab(ModItemGroups.ITEM_GROUP_NORMAL).craftRemainder(Items.BUCKET).stacksTo(1)));
+    public static final RegistrySupplier<Item> CRYO_FUEL_BUCKET = register("cryo_fuel_bucket", createBucketItem(ModFluids.CRYO_FUEL_STILL, new Item.Properties().tab(ModItemGroups.ITEM_GROUP_NORMAL).craftRemainder(Items.BUCKET).stacksTo(1)));
+    public static final RegistrySupplier<Item> OXYGEN_BUCKET = register("oxygen_bucket", createBucketItem(ModFluids.OXYGEN_STILL, new Item.Properties().tab(ModItemGroups.ITEM_GROUP_NORMAL).craftRemainder(Items.BUCKET).stacksTo(1)));
 
     // Spacesuit
-    public static final Supplier<SpaceSuit> SPACE_HELMET = register("space_helmet", () -> new SpaceSuit(ModArmour.SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL)));
-    public static final Supplier<SpaceSuit> SPACE_SUIT = register("space_suit", () -> new SpaceSuit(ModArmour.SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL)));
-    public static final Supplier<SpaceSuit> SPACE_PANTS = register("space_pants", () -> new SpaceSuit(ModArmour.SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL)));
-    public static final Supplier<SpaceSuit> SPACE_BOOTS = register("space_boots", () -> new SpaceSuit(ModArmour.SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL)));
+    public static final Supplier<SpaceSuit> SPACE_HELMET = register("space_helmet", () -> new SpaceSuit(ModArmour.SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.HEAD, new Item.Properties().tab(ModItemGroups.ITEM_GROUP_NORMAL)));
+    public static final Supplier<SpaceSuit> SPACE_SUIT = register("space_suit", () -> new SpaceSuit(ModArmour.SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.CHEST, new Item.Properties().tab(ModItemGroups.ITEM_GROUP_NORMAL)));
+    public static final Supplier<SpaceSuit> SPACE_PANTS = register("space_pants", () -> new SpaceSuit(ModArmour.SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.LEGS, new Item.Properties().tab(ModItemGroups.ITEM_GROUP_NORMAL)));
+    public static final Supplier<SpaceSuit> SPACE_BOOTS = register("space_boots", () -> new SpaceSuit(ModArmour.SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.FEET, new Item.Properties().tab(ModItemGroups.ITEM_GROUP_NORMAL)));
 
     // Netherite Spacesuit
-    public static final Supplier<NetheriteSpaceSuit> NETHERITE_SPACE_HELMET = register("netherite_space_helmet", () -> new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL).fireproof()));
-    public static final Supplier<NetheriteSpaceSuit> NETHERITE_SPACE_SUIT = register("netherite_space_suit", () -> new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL).fireproof()));
-    public static final Supplier<NetheriteSpaceSuit> NETHERITE_SPACE_PANTS = register("netherite_space_pants", () -> new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL).fireproof()));
-    public static final Supplier<NetheriteSpaceSuit> NETHERITE_SPACE_BOOTS = register("netherite_space_boots", () -> new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL).fireproof()));
+    public static final Supplier<NetheriteSpaceSuit> NETHERITE_SPACE_HELMET = register("netherite_space_helmet", () -> new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.HEAD, new Item.Properties().tab(ModItemGroups.ITEM_GROUP_NORMAL).fireResistant()));
+    public static final Supplier<NetheriteSpaceSuit> NETHERITE_SPACE_SUIT = register("netherite_space_suit", () -> new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.CHEST, new Item.Properties().tab(ModItemGroups.ITEM_GROUP_NORMAL).fireResistant()));
+    public static final Supplier<NetheriteSpaceSuit> NETHERITE_SPACE_PANTS = register("netherite_space_pants", () -> new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.LEGS, new Item.Properties().tab(ModItemGroups.ITEM_GROUP_NORMAL).fireResistant()));
+    public static final Supplier<NetheriteSpaceSuit> NETHERITE_SPACE_BOOTS = register("netherite_space_boots", () -> new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.FEET, new Item.Properties().tab(ModItemGroups.ITEM_GROUP_NORMAL).fireResistant()));
 
     // Jet Suit
-    public static final Supplier<JetSuit> JET_SUIT_HELMET = register("jet_suit_helmet", () -> new JetSuit(ModArmour.JET_SUIT_ARMOUR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL).fireproof()));
-    public static final Supplier<JetSuit> JET_SUIT = register("jet_suit", () -> new JetSuit(ModArmour.JET_SUIT_ARMOUR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL).fireproof()));
-    public static final Supplier<JetSuit> JET_SUIT_PANTS = register("jet_suit_pants", () -> new JetSuit(ModArmour.JET_SUIT_ARMOUR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL).fireproof()));
-    public static final Supplier<JetSuit> JET_SUIT_BOOTS = register("jet_suit_boots", () -> new JetSuit(ModArmour.JET_SUIT_ARMOUR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(ModItemGroups.ITEM_GROUP_NORMAL).fireproof()));
+    public static final Supplier<JetSuit> JET_SUIT_HELMET = register("jet_suit_helmet", () -> new JetSuit(ModArmour.JET_SUIT_ARMOUR_MATERIAL, EquipmentSlot.HEAD, new Item.Properties().tab(ModItemGroups.ITEM_GROUP_NORMAL).fireResistant()));
+    public static final Supplier<JetSuit> JET_SUIT = register("jet_suit", () -> new JetSuit(ModArmour.JET_SUIT_ARMOUR_MATERIAL, EquipmentSlot.CHEST, new Item.Properties().tab(ModItemGroups.ITEM_GROUP_NORMAL).fireResistant()));
+    public static final Supplier<JetSuit> JET_SUIT_PANTS = register("jet_suit_pants", () -> new JetSuit(ModArmour.JET_SUIT_ARMOUR_MATERIAL, EquipmentSlot.LEGS, new Item.Properties().tab(ModItemGroups.ITEM_GROUP_NORMAL).fireResistant()));
+    public static final Supplier<JetSuit> JET_SUIT_BOOTS = register("jet_suit_boots", () -> new JetSuit(ModArmour.JET_SUIT_ARMOUR_MATERIAL, EquipmentSlot.FEET, new Item.Properties().tab(ModItemGroups.ITEM_GROUP_NORMAL).fireResistant()));
 
     // Machines
-    public static final Supplier<Item> COAL_GENERATOR = register("coal_generator", () -> new MachineBlockItem(ModBlocks.COAL_GENERATOR.get(), new Item.Settings().group(ModItemGroups.ITEM_GROUP_MACHINES)) {
+    public static final Supplier<Item> COAL_GENERATOR = register("coal_generator", () -> new MachineBlockItem(ModBlocks.COAL_GENERATOR.get(), new Item.Properties().tab(ModItemGroups.ITEM_GROUP_MACHINES)) {
         @Override
-        public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-            tooltip.add((Text.translatable("item.ad_astra.generator_energy.tooltip", AdAstra.CONFIG.coalGenerator.energyPerTick).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
-            if (world != null && world.isClient) {
+        public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag context) {
+            tooltip.add((Component.translatable("item.ad_astra.generator_energy.tooltip", AdAstra.CONFIG.coalGenerator.energyPerTick).setStyle(Style.EMPTY.withColor(ChatFormatting.BLUE))));
+            if (level != null && level.isClientSide) {
                 if (Screen.hasShiftDown()) {
-                    tooltip.add((Text.translatable("item.ad_astra.coal_generator.tooltip").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+                    tooltip.add((Component.translatable("item.ad_astra.coal_generator.tooltip").setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN))));
                 } else {
-                    tooltip.add((Text.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
+                    tooltip.add((Component.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY))));
                 }
             }
         }
     });
-    public static final Supplier<Item> COMPRESSOR = register("compressor", () -> new MachineBlockItem(ModBlocks.COMPRESSOR.get(), new Item.Settings().group(ModItemGroups.ITEM_GROUP_MACHINES)) {
+    public static final Supplier<Item> COMPRESSOR = register("compressor", () -> new MachineBlockItem(ModBlocks.COMPRESSOR.get(), new Item.Properties().tab(ModItemGroups.ITEM_GROUP_MACHINES)) {
         @Override
-        public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-            if (world != null && world.isClient) {
+        public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag context) {
+            if (level != null && level.isClientSide) {
                 if (Screen.hasShiftDown()) {
-                    tooltip.add((Text.translatable("item.ad_astra.compressor.tooltip").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+                    tooltip.add((Component.translatable("item.ad_astra.compressor.tooltip").setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN))));
                 } else {
-                    tooltip.add((Text.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
+                    tooltip.add((Component.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY))));
                 }
             }
         }
     });
-    public static final Supplier<Item> NASA_WORKBENCH = register("nasa_workbench", () -> new MachineBlockItem(ModBlocks.NASA_WORKBENCH.get(), new Item.Settings().group(ModItemGroups.ITEM_GROUP_MACHINES)) {
+    public static final Supplier<Item> NASA_WORKBENCH = register("nasa_workbench", () -> new MachineBlockItem(ModBlocks.NASA_WORKBENCH.get(), new Item.Properties().tab(ModItemGroups.ITEM_GROUP_MACHINES)) {
         @Override
-        public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-            if (world != null && world.isClient) {
+        public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag context) {
+            if (level != null && level.isClientSide) {
                 if (Screen.hasShiftDown()) {
-                    tooltip.add((Text.translatable("item.ad_astra.nasa_workbench.tooltip").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+                    tooltip.add((Component.translatable("item.ad_astra.nasa_workbench.tooltip").setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN))));
                 } else {
-                    tooltip.add((Text.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
+                    tooltip.add((Component.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY))));
                 }
             }
         }
     });
-    public static final Supplier<Item> FUEL_REFINERY = register("fuel_refinery", () -> new MachineBlockItem(ModBlocks.FUEL_REFINERY.get(), new Item.Settings().group(ModItemGroups.ITEM_GROUP_MACHINES)) {
+    public static final Supplier<Item> FUEL_REFINERY = register("fuel_refinery", () -> new MachineBlockItem(ModBlocks.FUEL_REFINERY.get(), new Item.Properties().tab(ModItemGroups.ITEM_GROUP_MACHINES)) {
         @Override
-        public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-            if (world != null && world.isClient) {
+        public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag context) {
+            if (level != null && level.isClientSide) {
                 if (Screen.hasShiftDown()) {
-                    tooltip.add((Text.translatable("item.ad_astra.fuel_refinery.tooltip").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+                    tooltip.add((Component.translatable("item.ad_astra.fuel_refinery.tooltip").setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN))));
                 } else {
-                    tooltip.add((Text.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
+                    tooltip.add((Component.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY))));
                 }
             }
         }
     });
-    public static final Supplier<Item> OXYGEN_LOADER = register("oxygen_loader", () -> new MachineBlockItem(ModBlocks.OXYGEN_LOADER.get(), new Item.Settings().group(ModItemGroups.ITEM_GROUP_MACHINES)) {
+    public static final Supplier<Item> OXYGEN_LOADER = register("oxygen_loader", () -> new MachineBlockItem(ModBlocks.OXYGEN_LOADER.get(), new Item.Properties().tab(ModItemGroups.ITEM_GROUP_MACHINES)) {
         @Override
-        public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-            if (world != null && world.isClient) {
+        public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag context) {
+            if (level != null && level.isClientSide) {
                 if (Screen.hasShiftDown()) {
-                    tooltip.add((Text.translatable("item.ad_astra.oxygen_loader.tooltip[0]").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
-                    tooltip.add((Text.translatable("item.ad_astra.oxygen_loader.tooltip[1]").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+                    tooltip.add((Component.translatable("item.ad_astra.oxygen_loader.tooltip[0]").setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN))));
+                    tooltip.add((Component.translatable("item.ad_astra.oxygen_loader.tooltip[1]").setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN))));
                 } else {
-                    tooltip.add((Text.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
+                    tooltip.add((Component.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY))));
                 }
             }
         }
     });
-    public static final Supplier<Item> SOLAR_PANEL = register("solar_panel", () -> new SolarPanelBlockItem(ModBlocks.SOLAR_PANEL.get(), new Item.Settings().group(ModItemGroups.ITEM_GROUP_MACHINES)) {
+    public static final Supplier<Item> SOLAR_PANEL = register("solar_panel", () -> new SolarPanelBlockItem(ModBlocks.SOLAR_PANEL.get(), new Item.Properties().tab(ModItemGroups.ITEM_GROUP_MACHINES)) {
         @Override
-        public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-            tooltip.add((Text.translatable("item.ad_astra.generator_energy.tooltip", SolarPanelBlockEntity.getEnergyForDimension(world)).setStyle(Style.EMPTY.withColor(Formatting.BLUE))));
-            if (world != null && world.isClient) {
+        public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag context) {
+            tooltip.add((Component.translatable("item.ad_astra.generator_energy.tooltip", SolarPanelBlockEntity.getEnergyForDimension(level)).setStyle(Style.EMPTY.withColor(ChatFormatting.BLUE))));
+            if (level != null && level.isClientSide) {
                 if (Screen.hasShiftDown()) {
-                    tooltip.add((Text.translatable("item.ad_astra.solar_panel.tooltip[0]").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
-                    tooltip.add((Text.translatable("item.ad_astra.solar_panel.tooltip[1]").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+                    tooltip.add((Component.translatable("item.ad_astra.solar_panel.tooltip[0]").setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN))));
+                    tooltip.add((Component.translatable("item.ad_astra.solar_panel.tooltip[1]").setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN))));
                 } else {
-                    tooltip.add((Text.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
+                    tooltip.add((Component.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY))));
                 }
             }
         }
     });
-    public static final Supplier<Item> OXYGEN_DISTRIBUTOR = register("oxygen_distributor", () -> new MachineBlockItem(ModBlocks.OXYGEN_DISTRIBUTOR.get(), new Item.Settings().group(ModItemGroups.ITEM_GROUP_MACHINES)) {
+    public static final Supplier<Item> OXYGEN_DISTRIBUTOR = register("oxygen_distributor", () -> new MachineBlockItem(ModBlocks.OXYGEN_DISTRIBUTOR.get(), new Item.Properties().tab(ModItemGroups.ITEM_GROUP_MACHINES)) {
         @Override
-        public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-            if (world != null && world.isClient) {
+        public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag context) {
+            if (level != null && level.isClientSide) {
                 if (Screen.hasShiftDown()) {
-                    tooltip.add((Text.translatable("item.ad_astra.oxygen_distributor.tooltip[0]").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
-                    tooltip.add((Text.translatable("item.ad_astra.oxygen_distributor.tooltip[1]").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+                    tooltip.add((Component.translatable("item.ad_astra.oxygen_distributor.tooltip[0]").setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN))));
+                    tooltip.add((Component.translatable("item.ad_astra.oxygen_distributor.tooltip[1]").setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN))));
                 } else {
-                    tooltip.add((Text.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
+                    tooltip.add((Component.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY))));
                 }
             }
         }
     });
-    public static final Supplier<Item> WATER_PUMP = register("water_pump", () -> new MachineBlockItem(ModBlocks.WATER_PUMP.get(), new Item.Settings().group(ModItemGroups.ITEM_GROUP_MACHINES)) {
+    public static final Supplier<Item> WATER_PUMP = register("water_pump", () -> new MachineBlockItem(ModBlocks.WATER_PUMP.get(), new Item.Properties().tab(ModItemGroups.ITEM_GROUP_MACHINES)) {
         @Override
-        public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-            tooltip.add((Text.translatable("item.ad_astra.fluid_transfer_rate.tooltip", FluidHooks.toMillibuckets(AdAstra.CONFIG.waterPump.transferPerTick))).setStyle(Style.EMPTY.withColor(Formatting.BLUE)));
-            if (world != null && world.isClient) {
+        public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag context) {
+            tooltip.add((Component.translatable("item.ad_astra.fluid_transfer_rate.tooltip", FluidHooks.toMillibuckets(AdAstra.CONFIG.waterPump.transferPerTick))).setStyle(Style.EMPTY.withColor(ChatFormatting.BLUE)));
+            if (level != null && level.isClientSide) {
                 if (Screen.hasShiftDown()) {
-                    tooltip.add((Text.translatable("item.ad_astra.water_pump.tooltip[0]")).setStyle(Style.EMPTY.withColor(Formatting.GREEN)));
-                    tooltip.add((Text.translatable("item.ad_astra.water_pump.tooltip[1]")).setStyle(Style.EMPTY.withColor(Formatting.GREEN)));
+                    tooltip.add((Component.translatable("item.ad_astra.water_pump.tooltip[0]")).setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN)));
+                    tooltip.add((Component.translatable("item.ad_astra.water_pump.tooltip[1]")).setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN)));
                 } else {
-                    tooltip.add((Text.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
+                    tooltip.add((Component.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY))));
                 }
             }
         }
     });
-    public static final Supplier<Item> ENERGIZER = register("energizer", () -> new EnergizerBlockItem(ModBlocks.ENERGIZER.get(), new Item.Settings().group(ModItemGroups.ITEM_GROUP_MACHINES).maxCount(1)) {
+    public static final Supplier<Item> ENERGIZER = register("energizer", () -> new EnergizerBlockItem(ModBlocks.ENERGIZER.get(), new Item.Properties().tab(ModItemGroups.ITEM_GROUP_MACHINES).stacksTo(1)) {
         @Override
-        public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-            super.appendTooltip(stack, world, tooltip, context);
-            if (world != null && world.isClient) {
+        public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag context) {
+            super.appendHoverText(stack, level, tooltip, context);
+            if (level != null && level.isClientSide) {
                 if (Screen.hasShiftDown()) {
-                    tooltip.add((Text.translatable("item.ad_astra.energizer.tooltip[0]").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
-                    tooltip.add((Text.translatable("item.ad_astra.energizer.tooltip[1]").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+                    tooltip.add((Component.translatable("item.ad_astra.energizer.tooltip[0]").setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN))));
+                    tooltip.add((Component.translatable("item.ad_astra.energizer.tooltip[1]").setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN))));
                 } else {
-                    tooltip.add((Text.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
+                    tooltip.add((Component.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY))));
                 }
             }
         }
     });
-    public static final Supplier<Item> CRYO_FREEZER = register("cryo_freezer", () -> new MachineBlockItem(ModBlocks.CRYO_FREEZER.get(), new Item.Settings().group(ModItemGroups.ITEM_GROUP_MACHINES).maxCount(1)) {
+    public static final Supplier<Item> CRYO_FREEZER = register("cryo_freezer", () -> new MachineBlockItem(ModBlocks.CRYO_FREEZER.get(), new Item.Properties().tab(ModItemGroups.ITEM_GROUP_MACHINES).stacksTo(1)) {
         @Override
-        public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-            if (world != null && world.isClient) {
+        public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag context) {
+            if (level != null && level.isClientSide) {
                 if (Screen.hasShiftDown()) {
-                    tooltip.add((Text.translatable("item.ad_astra.cryo_freezer.tooltip").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+                    tooltip.add((Component.translatable("item.ad_astra.cryo_freezer.tooltip").setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN))));
                 } else {
-                    tooltip.add((Text.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
+                    tooltip.add((Component.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY))));
                 }
             }
         }
     });
-    public static final Supplier<Item> OXYGEN_SENSOR = register("oxygen_sensor", () -> new MachineBlockItem(ModBlocks.OXYGEN_SENSOR.get(), new Item.Settings().group(ModItemGroups.ITEM_GROUP_MACHINES).maxCount(1)) {
+    public static final Supplier<Item> OXYGEN_SENSOR = register("oxygen_sensor", () -> new MachineBlockItem(ModBlocks.OXYGEN_SENSOR.get(), new Item.Properties().tab(ModItemGroups.ITEM_GROUP_MACHINES).stacksTo(1)) {
         @Override
-        public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-            if (world != null && world.isClient) {
+        public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag context) {
+            if (level != null && level.isClientSide) {
                 if (Screen.hasShiftDown()) {
-                    tooltip.add((Text.translatable("item.ad_astra.oxygen_sensor.tooltip[0]").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
-                    tooltip.add((Text.translatable("item.ad_astra.oxygen_sensor.tooltip[1]").setStyle(Style.EMPTY.withColor(Formatting.GREEN))));
+                    tooltip.add((Component.translatable("item.ad_astra.oxygen_sensor.tooltip[0]").setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN))));
+                    tooltip.add((Component.translatable("item.ad_astra.oxygen_sensor.tooltip[1]").setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN))));
                 } else {
-                    tooltip.add((Text.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
+                    tooltip.add((Component.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY))));
                 }
             }
         }
     });
 
-    public static final Supplier<Item> WRENCH = register("wrench", () -> new WrenchItem(new Item.Settings().group(ModItemGroups.ITEM_GROUP_MACHINES).maxCount(1)));
-    public static final Supplier<Item> HAMMER = register("hammer", () -> new HammerItem(new Item.Settings().group(ModItemGroups.ITEM_GROUP_BASICS).maxCount(1).maxDamage(AdAstra.CONFIG.general.hammerDurability)));
+    public static final Supplier<Item> WRENCH = register("wrench", () -> new WrenchItem(new Item.Properties().tab(ModItemGroups.ITEM_GROUP_MACHINES).stacksTo(1)));
+    public static final Supplier<Item> HAMMER = register("hammer", () -> new HammerItem(new Item.Properties().tab(ModItemGroups.ITEM_GROUP_BASICS).stacksTo(1).durability(AdAstra.CONFIG.general.hammerDurability)));
 
     public static final Supplier<Item> IRON_ROD = registerItem("iron_rod", ModItemGroups.ITEM_GROUP_BASICS);
     public static final Supplier<Item> OXYGEN_GEAR = registerItem("oxygen_gear", ModItemGroups.ITEM_GROUP_BASICS);
@@ -245,7 +244,7 @@ public class ModItems {
     public static final Supplier<Item> ROCKET_FIN = registerItem("rocket_fin", ModItemGroups.ITEM_GROUP_BASICS);
 
     // Torch items
-    public static final Supplier<Item> EXTINGUISHED_TORCH = register("extinguished_torch", () -> new WallStandingBlockItem(ModBlocks.EXTINGUISHED_TORCH.get(), ModBlocks.WALL_EXTINGUISHED_TORCH.get(), new Item.Settings().group(ModItemGroups.ITEM_GROUP_BASICS)));
+    public static final Supplier<Item> EXTINGUISHED_TORCH = register("extinguished_torch", () -> new StandingAndWallBlockItem(ModBlocks.EXTINGUISHED_TORCH.get(), ModBlocks.WALL_EXTINGUISHED_TORCH.get(), new Item.Properties().tab(ModItemGroups.ITEM_GROUP_BASICS)));
     public static final Supplier<Item> EXTINGUISHED_LANTERN = registerBlockItem("extinguished_lantern", ModBlocks.EXTINGUISHED_LANTERN, ModItemGroups.ITEM_GROUP_BASICS);
 
     public static final Supplier<Item> STEEL_INGOT = registerItem("steel_ingot", ModItemGroups.ITEM_GROUP_MATERIALS);
@@ -300,12 +299,12 @@ public class ModItems {
     public static final Supplier<Item> GLACIO_GLOBE = registerGlobe("glacio_globe", ModBlocks.GLACIO_GLOBE);
 
     // Cables
-    public static final Supplier<Item> STEEL_CABLE = register("steel_cable", () -> new BlockItem(ModBlocks.STEEL_CABLE.get(), new Item.Settings().group(ModItemGroups.ITEM_GROUP_MACHINES)));
-    public static final Supplier<Item> DESH_CABLE = register("desh_cable", () -> new BlockItem(ModBlocks.DESH_CABLE.get(), new Item.Settings().group(ModItemGroups.ITEM_GROUP_MACHINES)));
+    public static final Supplier<Item> STEEL_CABLE = register("steel_cable", () -> new BlockItem(ModBlocks.STEEL_CABLE.get(), new Item.Properties().tab(ModItemGroups.ITEM_GROUP_MACHINES)));
+    public static final Supplier<Item> DESH_CABLE = register("desh_cable", () -> new BlockItem(ModBlocks.DESH_CABLE.get(), new Item.Properties().tab(ModItemGroups.ITEM_GROUP_MACHINES)));
 
     // Fluid pipes
-    public static final Supplier<Item> DESH_FLUID_PIPE = register("desh_fluid_pipe", () -> new BlockItem(ModBlocks.DESH_FLUID_PIPE.get(), new Item.Settings().group(ModItemGroups.ITEM_GROUP_MACHINES)));
-    public static final Supplier<Item> OSTRUM_FLUID_PIPE = register("ostrum_fluid_pipe", () -> new BlockItem(ModBlocks.OSTRUM_FLUID_PIPE.get(), new Item.Settings().group(ModItemGroups.ITEM_GROUP_MACHINES)));
+    public static final Supplier<Item> DESH_FLUID_PIPE = register("desh_fluid_pipe", () -> new BlockItem(ModBlocks.DESH_FLUID_PIPE.get(), new Item.Properties().tab(ModItemGroups.ITEM_GROUP_MACHINES)));
+    public static final Supplier<Item> OSTRUM_FLUID_PIPE = register("ostrum_fluid_pipe", () -> new BlockItem(ModBlocks.OSTRUM_FLUID_PIPE.get(), new Item.Properties().tab(ModItemGroups.ITEM_GROUP_MACHINES)));
 
     // Blocks
     // Iron
@@ -410,7 +409,7 @@ public class ModItems {
     public static final Supplier<Item> STROPHAR_FENCE = registerBlockItem("strophar_fence", ModBlocks.STROPHAR_FENCE);
     public static final Supplier<Item> STROPHAR_FENCE_GATE = registerBlockItem("strophar_fence_gate", ModBlocks.STROPHAR_FENCE_GATE);
     public static final Supplier<Item> STROPHAR_STEM = registerBlockItem("strophar_stem", ModBlocks.STROPHAR_STEM);
-    public static final Supplier<Item> STROPHAR_CHEST = register("strophar_chest", () -> new ModRenderedBlockItem(ModBlocks.STROPHAR_CHEST.get(), new Item.Settings().group(ModItemGroups.ITEM_GROUP_BLOCKS)));
+    public static final Supplier<Item> STROPHAR_CHEST = register("strophar_chest", () -> new ModRenderedBlockItem(ModBlocks.STROPHAR_CHEST.get(), new Item.Properties().tab(ModItemGroups.ITEM_GROUP_BLOCKS)));
     public static final Supplier<Item> STROPHAR_LADDER = registerBlockItem("strophar_ladder", ModBlocks.STROPHAR_LADDER);
 
     public static final Supplier<Item> AERONOS_CAP = registerBlockItem("aeronos_cap", ModBlocks.AERONOS_CAP);
@@ -422,7 +421,7 @@ public class ModItems {
     public static final Supplier<Item> AERONOS_FENCE = registerBlockItem("aeronos_fence", ModBlocks.AERONOS_FENCE);
     public static final Supplier<Item> AERONOS_FENCE_GATE = registerBlockItem("aeronos_fence_gate", ModBlocks.AERONOS_FENCE_GATE);
     public static final Supplier<Item> AERONOS_STEM = registerBlockItem("aeronos_stem", ModBlocks.AERONOS_STEM);
-    public static final Supplier<Item> AERONOS_CHEST = register("aeronos_chest", () -> new ModRenderedBlockItem(ModBlocks.AERONOS_CHEST.get(), new Item.Settings().group(ModItemGroups.ITEM_GROUP_BLOCKS)));
+    public static final Supplier<Item> AERONOS_CHEST = register("aeronos_chest", () -> new ModRenderedBlockItem(ModBlocks.AERONOS_CHEST.get(), new Item.Properties().tab(ModItemGroups.ITEM_GROUP_BLOCKS)));
     public static final Supplier<Item> AERONOS_LADDER = registerBlockItem("aeronos_ladder", ModBlocks.AERONOS_LADDER);
 
     // Mars blocks
@@ -566,43 +565,43 @@ public class ModItems {
     public static final Supplier<Item> GLACIAN_FENCE_GATE = registerBlockItem("glacian_fence_gate", ModBlocks.GLACIAN_FENCE_GATE);
     public static final Supplier<Item> GLACIAN_BUTTON = registerBlockItem("glacian_button", ModBlocks.GLACIAN_BUTTON);
     public static final Supplier<Item> GLACIAN_PRESSURE_PLATE = registerBlockItem("glacian_pressure_plate", ModBlocks.GLACIAN_PRESSURE_PLATE);
-    public static final Supplier<Item> GLACIAN_SIGN = register("glacian_sign", () -> new SignItem(new Item.Settings().group(ModItemGroups.ITEM_GROUP_BLOCKS).maxCount(16), ModBlocks.GLACIAN_SIGN.get(), ModBlocks.GLACIAN_WALL_SIGN.get()));
+    public static final Supplier<Item> GLACIAN_SIGN = register("glacian_sign", () -> new SignItem(new Item.Properties().tab(ModItemGroups.ITEM_GROUP_BLOCKS).stacksTo(16), ModBlocks.GLACIAN_SIGN.get(), ModBlocks.GLACIAN_WALL_SIGN.get()));
     public static final Supplier<Item> GLACIAN_FUR = registerBlockItem("glacian_fur", ModBlocks.GLACIAN_FUR);
 
     // Spawn eggs
     // Moon
-    public static final Supplier<SpawnEggItem> LUNARIAN_SPAWN_EGG = register("lunarian_spawn_egg", createSpawnEggItem(ModEntityTypes.LUNARIAN, -13382401, -11650781, new Item.Settings().group(ModItemGroups.ITEM_GROUP_SPAWN_EGGS)));
-    public static final Supplier<SpawnEggItem> CORRUPTED_LUNARIAN_SPAWN_EGG = register("corrupted_lunarian_spawn_egg", createSpawnEggItem(ModEntityTypes.CORRUPTED_LUNARIAN, -14804199, -16740159, new Item.Settings().group(ModItemGroups.ITEM_GROUP_SPAWN_EGGS)));
-    public static final Supplier<SpawnEggItem> STAR_CRAWLER_SPAWN_EGG = register("star_crawler_spawn_egg", createSpawnEggItem(ModEntityTypes.STAR_CRAWLER, -13421773, -16724788, new Item.Settings().group(ModItemGroups.ITEM_GROUP_SPAWN_EGGS)));
+    public static final Supplier<SpawnEggItem> LUNARIAN_SPAWN_EGG = register("lunarian_spawn_egg", createSpawnEggItem(ModEntityTypes.LUNARIAN, -13382401, -11650781, new Item.Properties().tab(ModItemGroups.ITEM_GROUP_SPAWN_EGGS)));
+    public static final Supplier<SpawnEggItem> CORRUPTED_LUNARIAN_SPAWN_EGG = register("corrupted_lunarian_spawn_egg", createSpawnEggItem(ModEntityTypes.CORRUPTED_LUNARIAN, -14804199, -16740159, new Item.Properties().tab(ModItemGroups.ITEM_GROUP_SPAWN_EGGS)));
+    public static final Supplier<SpawnEggItem> STAR_CRAWLER_SPAWN_EGG = register("star_crawler_spawn_egg", createSpawnEggItem(ModEntityTypes.STAR_CRAWLER, -13421773, -16724788, new Item.Properties().tab(ModItemGroups.ITEM_GROUP_SPAWN_EGGS)));
 
     // Mars
-    public static final Supplier<SpawnEggItem> MARTIAN_RAPTOR_SPAWN_EGG = register("martian_raptor_spawn_egg", createSpawnEggItem(ModEntityTypes.MARTIAN_RAPTOR, 5349438, -13312, new Item.Settings().group(ModItemGroups.ITEM_GROUP_SPAWN_EGGS)));
+    public static final Supplier<SpawnEggItem> MARTIAN_RAPTOR_SPAWN_EGG = register("martian_raptor_spawn_egg", createSpawnEggItem(ModEntityTypes.MARTIAN_RAPTOR, 5349438, -13312, new Item.Properties().tab(ModItemGroups.ITEM_GROUP_SPAWN_EGGS)));
 
     // Venus
-    public static final Supplier<SpawnEggItem> PYGRO_SPAWN_EGG = register("pygro_spawn_egg", createSpawnEggItem(ModEntityTypes.PYGRO, -3381760, -6750208, new Item.Settings().group(ModItemGroups.ITEM_GROUP_SPAWN_EGGS)));
-    public static final Supplier<SpawnEggItem> ZOMBIFIED_PYGRO_SPAWN_EGG = register("zombified_pygro_spawn_egg", createSpawnEggItem(ModEntityTypes.ZOMBIFIED_PYGRO, 8473125, 6131271, new Item.Settings().group(ModItemGroups.ITEM_GROUP_SPAWN_EGGS)));
-    public static final Supplier<SpawnEggItem> PYGRO_BRUTE_SPAWN_EGG = register("pygro_brute_spawn_egg", createSpawnEggItem(ModEntityTypes.PYGRO_BRUTE, -3381760, -67208, new Item.Settings().group(ModItemGroups.ITEM_GROUP_SPAWN_EGGS)));
-    public static final Supplier<SpawnEggItem> MOGLER_SPAWN_EGG = register("mogler_spawn_egg", createSpawnEggItem(ModEntityTypes.MOGLER, -13312, -3407872, new Item.Settings().group(ModItemGroups.ITEM_GROUP_SPAWN_EGGS)));
-    public static final Supplier<SpawnEggItem> ZOMBIFIED_MOGLER_SPAWN_EGG = register("zombified_mogler_spawn_egg", createSpawnEggItem(ModEntityTypes.ZOMBIFIED_MOGLER, 12537409, 7988821, new Item.Settings().group(ModItemGroups.ITEM_GROUP_SPAWN_EGGS)));
-    public static final Supplier<SpawnEggItem> SULFUR_CREEPER_SPAWN_EGG = register("sulfur_creeper_spawn_egg", createSpawnEggItem(ModEntityTypes.SULFUR_CREEPER, 13930288, 11303196, new Item.Settings().group(ModItemGroups.ITEM_GROUP_SPAWN_EGGS)));
+    public static final Supplier<SpawnEggItem> PYGRO_SPAWN_EGG = register("pygro_spawn_egg", createSpawnEggItem(ModEntityTypes.PYGRO, -3381760, -6750208, new Item.Properties().tab(ModItemGroups.ITEM_GROUP_SPAWN_EGGS)));
+    public static final Supplier<SpawnEggItem> ZOMBIFIED_PYGRO_SPAWN_EGG = register("zombified_pygro_spawn_egg", createSpawnEggItem(ModEntityTypes.ZOMBIFIED_PYGRO, 8473125, 6131271, new Item.Properties().tab(ModItemGroups.ITEM_GROUP_SPAWN_EGGS)));
+    public static final Supplier<SpawnEggItem> PYGRO_BRUTE_SPAWN_EGG = register("pygro_brute_spawn_egg", createSpawnEggItem(ModEntityTypes.PYGRO_BRUTE, -3381760, -67208, new Item.Properties().tab(ModItemGroups.ITEM_GROUP_SPAWN_EGGS)));
+    public static final Supplier<SpawnEggItem> MOGLER_SPAWN_EGG = register("mogler_spawn_egg", createSpawnEggItem(ModEntityTypes.MOGLER, -13312, -3407872, new Item.Properties().tab(ModItemGroups.ITEM_GROUP_SPAWN_EGGS)));
+    public static final Supplier<SpawnEggItem> ZOMBIFIED_MOGLER_SPAWN_EGG = register("zombified_mogler_spawn_egg", createSpawnEggItem(ModEntityTypes.ZOMBIFIED_MOGLER, 12537409, 7988821, new Item.Properties().tab(ModItemGroups.ITEM_GROUP_SPAWN_EGGS)));
+    public static final Supplier<SpawnEggItem> SULFUR_CREEPER_SPAWN_EGG = register("sulfur_creeper_spawn_egg", createSpawnEggItem(ModEntityTypes.SULFUR_CREEPER, 13930288, 11303196, new Item.Properties().tab(ModItemGroups.ITEM_GROUP_SPAWN_EGGS)));
 
     // Glacio
-    public static final Supplier<SpawnEggItem> GLACIAN_RAM_SPAWN_EGG = register("glacian_ram_spawn_egg", createSpawnEggItem(ModEntityTypes.GLACIAN_RAM, 16770815, 4406589, new Item.Settings().group(ModItemGroups.ITEM_GROUP_SPAWN_EGGS)));
+    public static final Supplier<SpawnEggItem> GLACIAN_RAM_SPAWN_EGG = register("glacian_ram_spawn_egg", createSpawnEggItem(ModEntityTypes.GLACIAN_RAM, 16770815, 4406589, new Item.Properties().tab(ModItemGroups.ITEM_GROUP_SPAWN_EGGS)));
 
     // Other
-    public static final Supplier<SpawnEggItem> LUNARIAN_WANDERING_TRADER_SPAWN_EGG = register("lunarian_wandering_trader_spawn_egg", createSpawnEggItem(ModEntityTypes.LUNARIAN_WANDERING_TRADER, 5993415, 8537301, new Item.Settings().group(ModItemGroups.ITEM_GROUP_SPAWN_EGGS)));
+    public static final Supplier<SpawnEggItem> LUNARIAN_WANDERING_TRADER_SPAWN_EGG = register("lunarian_wandering_trader_spawn_egg", createSpawnEggItem(ModEntityTypes.LUNARIAN_WANDERING_TRADER, 5993415, 8537301, new Item.Properties().tab(ModItemGroups.ITEM_GROUP_SPAWN_EGGS)));
 
     public static void register() {
         ITEMS.register();
     }
 
     public static Supplier<Item> registerFlag(String id, Supplier<Block> flag) {
-        Supplier<Item> item = () -> new FlagBlockItem(flag.get(), new Item.Settings().group(ModItemGroups.ITEM_GROUP_FLAGS));
+        Supplier<Item> item = () -> new FlagBlockItem(flag.get(), new Item.Properties().tab(ModItemGroups.ITEM_GROUP_FLAGS));
         return register(id, item);
     }
 
     public static Supplier<Item> registerGlobe(String id, Supplier<Block> globe) {
-        Supplier<Item> item = () -> new ModRenderedBlockItem(globe.get(), new Item.Settings().group(ModItemGroups.ITEM_GROUP_GLOBES).maxCount(1).rarity(Rarity.RARE));
+        Supplier<Item> item = () -> new ModRenderedBlockItem(globe.get(), new Item.Properties().tab(ModItemGroups.ITEM_GROUP_GLOBES).stacksTo(1).rarity(Rarity.RARE));
         return register(id, item);
     }
 
@@ -610,31 +609,31 @@ public class ModItems {
         return registerBlockItem(id, block, ModItemGroups.ITEM_GROUP_BLOCKS);
     }
 
-    public static Supplier<Item> registerBlockItem(String id, Supplier<Block> block, ItemGroup group) {
-        Supplier<Item> item = () -> new BlockItem(block.get(), new Item.Settings().group(group));
+    public static Supplier<Item> registerBlockItem(String id, Supplier<Block> block, CreativeModeTab group) {
+        Supplier<Item> item = () -> new BlockItem(block.get(), new Item.Properties().tab(group));
         return register(id, item);
     }
 
-    public static Supplier<Item> registerItem(String id, ItemGroup group) {
-        return register(id, () -> new Item(new Item.Settings().group(group)));
+    public static Supplier<Item> registerItem(String id, CreativeModeTab group) {
+        return register(id, () -> new Item(new Item.Properties().tab(group)));
     }
 
     public static <T extends Item> RegistrySupplier<T> register(String id, Supplier<T> item) {
-        return register(new ModIdentifier(id), item);
+        return register(new ModResourceLocation(id), item);
     }
 
-    public static <T extends Item> RegistrySupplier<T> register(Identifier id, Supplier<T> item) {
+    public static <T extends Item> RegistrySupplier<T> register(ResourceLocation id, Supplier<T> item) {
         //		items.add(item);
         return ITEMS.register(id.getPath(), item);
     }
 
     @ExpectPlatform
-    public static Supplier<SpawnEggItem> createSpawnEggItem(Supplier<? extends EntityType<? extends MobEntity>> type, int primaryColor, int secondaryColor, Item.Settings settings) {
+    public static Supplier<SpawnEggItem> createSpawnEggItem(Supplier<? extends EntityType<? extends Mob>> type, int primaryColor, int secondaryColor, Item.Properties settings) {
         throw new NotImplementedException();
     }
     
     @ExpectPlatform
-    public static Supplier<Item> createBucketItem(Supplier<? extends Fluid> fluid, Item.Settings settings) {
+    public static Supplier<Item> createBucketItem(Supplier<? extends Fluid> fluid, Item.Properties settings) {
         throw new NotImplementedException();
     }
 }

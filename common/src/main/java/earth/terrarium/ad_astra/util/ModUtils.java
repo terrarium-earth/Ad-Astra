@@ -13,48 +13,47 @@ import earth.terrarium.ad_astra.registry.ModCriteria;
 import earth.terrarium.ad_astra.registry.ModEntityTypes;
 import earth.terrarium.ad_astra.registry.ModTags;
 import earth.terrarium.ad_astra.util.algorithms.LandFinder;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.particle.ParticleEffect;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.RecipeType;
-import net.minecraft.recipe.SmokingRecipe;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ChunkTicketType;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.tag.TagKey;
-import net.minecraft.text.Text;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.world.TeleportTarget;
-import net.minecraft.world.World;
-
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.Locale;
 import java.util.Set;
 import java.util.stream.StreamSupport;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.TicketType;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SmokingRecipe;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.portal.PortalInfo;
+import net.minecraft.world.phys.Vec3;
 
 public class ModUtils {
 
-    public static final RegistryKey<World> EARTH_ORBIT_KEY = RegistryKey.of(Registry.WORLD_KEY, new ModIdentifier("earth_orbit"));
-    public static final RegistryKey<World> MOON_KEY = RegistryKey.of(Registry.WORLD_KEY, new ModIdentifier("moon"));
-    public static final RegistryKey<World> MOON_ORBIT_KEY = RegistryKey.of(Registry.WORLD_KEY, new ModIdentifier("moon_orbit"));
-    public static final RegistryKey<World> MARS_KEY = RegistryKey.of(Registry.WORLD_KEY, new ModIdentifier("mars"));
-    public static final RegistryKey<World> MARS_ORBIT_KEY = RegistryKey.of(Registry.WORLD_KEY, new ModIdentifier("mars_orbit"));
-    public static final RegistryKey<World> VENUS_KEY = RegistryKey.of(Registry.WORLD_KEY, new ModIdentifier("venus"));
-    public static final RegistryKey<World> VENUS_ORBIT_KEY = RegistryKey.of(Registry.WORLD_KEY, new ModIdentifier("venus_orbit"));
-    public static final RegistryKey<World> MERCURY_KEY = RegistryKey.of(Registry.WORLD_KEY, new ModIdentifier("mercury"));
-    public static final RegistryKey<World> MERCURY_ORBIT_KEY = RegistryKey.of(Registry.WORLD_KEY, new ModIdentifier("mercury_orbit"));
-    public static final RegistryKey<World> GLACIO_KEY = RegistryKey.of(Registry.WORLD_KEY, new ModIdentifier("glacio"));
-    public static final RegistryKey<World> GLACIO_ORBIT_KEY = RegistryKey.of(Registry.WORLD_KEY, new ModIdentifier("glacio_orbit"));
+    public static final ResourceKey<Level> EARTH_ORBIT_KEY = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ModResourceLocation("earth_orbit"));
+    public static final ResourceKey<Level> MOON_KEY = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ModResourceLocation("moon"));
+    public static final ResourceKey<Level> MOON_ORBIT_KEY = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ModResourceLocation("moon_orbit"));
+    public static final ResourceKey<Level> MARS_KEY = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ModResourceLocation("mars"));
+    public static final ResourceKey<Level> MARS_ORBIT_KEY = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ModResourceLocation("mars_orbit"));
+    public static final ResourceKey<Level> VENUS_KEY = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ModResourceLocation("venus"));
+    public static final ResourceKey<Level> VENUS_ORBIT_KEY = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ModResourceLocation("venus_orbit"));
+    public static final ResourceKey<Level> MERCURY_KEY = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ModResourceLocation("mercury"));
+    public static final ResourceKey<Level> MERCURY_ORBIT_KEY = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ModResourceLocation("mercury_orbit"));
+    public static final ResourceKey<Level> GLACIO_KEY = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ModResourceLocation("glacio"));
+    public static final ResourceKey<Level> GLACIO_ORBIT_KEY = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ModResourceLocation("glacio_orbit"));
 
     public static final float VANILLA_GRAVITY = 9.806f;
     public static final float ORBIT_TEMPERATURE = -270.0f;
@@ -66,27 +65,27 @@ public class ModUtils {
     /**
      * Teleports an entity to a different dimension. If the entity is a player in a rocket, the player will teleport with a lander. If the entity is raw food, the food will be cooked.
      *
-     * @param targetWorld The world to the entity teleport to
+     * @param targetWorld The level to the entity teleport to
      * @param entity      The entity to teleport
-     * @see #teleportPlayer(RegistryKey, ServerPlayerEntity)
+     * @see #teleportPlayer(ResourceKey, ServerPlayer)
      */
-    public static void teleportToWorld(RegistryKey<World> targetWorld, Entity entity) {
-        if (entity.getWorld() instanceof ServerWorld oldWorld) {
-            ServerWorld world = oldWorld.getServer().getWorld(targetWorld);
+    public static void teleportTolevel(ResourceKey<Level> targetWorld, Entity entity) {
+        if (entity.getLevel() instanceof ServerLevel oldWorld) {
+            ServerLevel level = oldWorld.getServer().getLevel(targetWorld);
             Set<Entity> entitiesToTeleport = new LinkedHashSet<>();
 
-            Vec3d targetPos = new Vec3d(entity.getX(), AdAstra.CONFIG.rocket.atmosphereLeave, entity.getZ());
+            Vec3 targetPos = new Vec3(entity.getX(), AdAstra.CONFIG.rocket.atmosphereLeave, entity.getZ());
 
-            if (entity instanceof ServerPlayerEntity player) {
+            if (entity instanceof ServerPlayer player) {
                 if (player.getVehicle() instanceof RocketEntity rocket) {
-                    rocket.removeAllPassengers();
-                    player.sendMessage(Text.translatable("message." + AdAstra.MOD_ID + ".hold_space"), false);
-                    entity = createLander(rocket, world, targetPos);
+                    rocket.ejectPassengers();
+                    player.displayClientMessage(Component.translatable("message." + AdAstra.MOD_ID + ".hold_space"), false);
+                    entity = createLander(rocket, level, targetPos);
                     rocket.discard();
                     entitiesToTeleport.add(entity);
                     entitiesToTeleport.add(player);
 
-                } else if (!(player.getVehicle() != null && player.getVehicle().getPassengerList().size() > 0)) {
+                } else if (!(player.getVehicle() != null && player.getVehicle().getPassengers().size() > 0)) {
                     entitiesToTeleport.add(entity);
                 }
             } else {
@@ -97,71 +96,71 @@ public class ModUtils {
                 cookFood(itemEntity);
             }
 
-            entitiesToTeleport.addAll(entity.getPassengerList());
+            entitiesToTeleport.addAll(entity.getPassengers());
 
             for (Entity entityToTeleport : entitiesToTeleport) {
-                if (entityToTeleport instanceof ServerPlayerEntity) {
-                    ChunkPos chunkPos = new ChunkPos(new BlockPos(targetPos.getX(), targetPos.getY(), targetPos.getZ()));
-                    world.getChunkManager().addTicket(ChunkTicketType.POST_TELEPORT, chunkPos, 1, entityToTeleport.getId());
+                if (entityToTeleport instanceof ServerPlayer) {
+                    ChunkPos chunkPos = new ChunkPos(new BlockPos(targetPos.x(), targetPos.y(), targetPos.z()));
+                    level.getChunkSource().addRegionTicket(TicketType.POST_TELEPORT, chunkPos, 1, entityToTeleport.getId());
                     break;
                 }
             }
 
             LinkedList<Entity> teleportedEntities = new LinkedList<>();
             for (Entity entityToTeleport : entitiesToTeleport) {
-                TeleportTarget target = new TeleportTarget(targetPos, entityToTeleport.getVelocity(), entityToTeleport.getYaw(), entityToTeleport.getPitch());
-                teleportedEntities.add(PlatformUtils.teleportToDimension(entityToTeleport, world, target));
+                PortalInfo target = new PortalInfo(targetPos, entityToTeleport.getDeltaMovement(), entityToTeleport.getYRot(), entityToTeleport.getXRot());
+                teleportedEntities.add(PlatformUtils.teleportToDimension(entityToTeleport, level, target));
             }
 
             Entity first = teleportedEntities.poll();
 
             // Move the lander to the closest land
             if (first instanceof LanderEntity) {
-                Vec3d nearestLand = LandFinder.findNearestLand(first.getWorld(), new Vec3d(first.getX(), AdAstra.CONFIG.rocket.atmosphereLeave, first.getZ()), 70);
-                first.refreshPositionAndAngles(nearestLand.getX(), nearestLand.getY(), nearestLand.getZ(), first.getYaw(), first.getPitch());
+                Vec3 nearestLand = LandFinder.findNearestLand(first.getLevel(), new Vec3(first.getX(), AdAstra.CONFIG.rocket.atmosphereLeave, first.getZ()), 70);
+                first.moveTo(nearestLand.x(), nearestLand.y(), nearestLand.z(), first.getYRot(), first.getXRot());
             }
 
             for (Entity teleportedEntity : teleportedEntities) {
                 if (first instanceof LanderEntity) {
-                    Vec3d nearestLand = LandFinder.findNearestLand(teleportedEntity.getWorld(), new Vec3d(teleportedEntity.getX(), AdAstra.CONFIG.rocket.atmosphereLeave, teleportedEntity.getZ()), 70);
-                    teleportedEntity.refreshPositionAndAngles(nearestLand.getX(), nearestLand.getY(), nearestLand.getZ(), teleportedEntity.getYaw(), teleportedEntity.getPitch());
+                    Vec3 nearestLand = LandFinder.findNearestLand(teleportedEntity.getLevel(), new Vec3(teleportedEntity.getX(), AdAstra.CONFIG.rocket.atmosphereLeave, teleportedEntity.getZ()), 70);
+                    teleportedEntity.moveTo(nearestLand.x(), nearestLand.y(), nearestLand.z(), teleportedEntity.getYRot(), teleportedEntity.getXRot());
                 }
                 teleportedEntity.startRiding(first, true);
             }
         }
     }
 
-    public static void teleportPlayer(RegistryKey<World> targetWorld, ServerPlayerEntity player) {
-        ServerWorld world = player.getServer().getWorld(targetWorld);
-        Vec3d targetPos = new Vec3d(player.getBlockPos().getX(), AdAstra.CONFIG.rocket.atmosphereLeave, player.getBlockPos().getZ());
-        ChunkPos chunkPos = new ChunkPos(new BlockPos(targetPos.getX(), targetPos.getY(), targetPos.getZ()));
-        world.getChunkManager().addTicket(ChunkTicketType.POST_TELEPORT, chunkPos, 1, player.getId());
-        TeleportTarget target = new TeleportTarget(targetPos, player.getVelocity(), player.getYaw(), player.getPitch());
-        PlatformUtils.teleportToDimension(player, world, target);
+    public static void teleportPlayer(ResourceKey<Level> targetWorld, ServerPlayer player) {
+        ServerLevel level = player.getServer().getLevel(targetWorld);
+        Vec3 targetPos = new Vec3(player.blockPosition().getX(), AdAstra.CONFIG.rocket.atmosphereLeave, player.blockPosition().getZ());
+        ChunkPos chunkPos = new ChunkPos(new BlockPos(targetPos.x(), targetPos.y(), targetPos.z()));
+        level.getChunkSource().addRegionTicket(TicketType.POST_TELEPORT, chunkPos, 1, player.getId());
+        PortalInfo target = new PortalInfo(targetPos, player.getDeltaMovement(), player.getYRot(), player.getXRot());
+        PlatformUtils.teleportToDimension(player, level, target);
     }
 
     /**
-     * Spawns a lander in a target world and position.
+     * Spawns a lander in a target level and position.
      *
      * @param rocket      The rocket to create a lander from
-     * @param targetWorld The world to spawn the lander in
+     * @param targetWorld The level to spawn the lander in
      * @param target      The position to spawn the lander at
      * @return A spawned lander entity at the same position as the rocket and with the same inventory
      */
-    public static LanderEntity createLander(RocketEntity rocket, ServerWorld targetWorld, Vec3d target) {
+    public static LanderEntity createLander(RocketEntity rocket, ServerLevel targetWorld, Vec3 target) {
         LanderEntity lander = new LanderEntity(ModEntityTypes.LANDER.get(), targetWorld);
-        lander.setPosition(target);
+        lander.setPos(target);
 
         for (int i = 0; i < rocket.getInventorySize(); i++) {
-            lander.getInventory().setStack(i, rocket.getInventory().getStack(i));
+            lander.getInventory().setItem(i, rocket.getInventory().getItem(i));
         }
         ItemStack stack = rocket.getDropStack();
         ((VehicleItem) stack.getItem()).setFluid(stack, rocket.getTankFluid());
-        lander.getInventory().setStack(10, stack);
+        lander.getInventory().setItem(10, stack);
 
         // On Fabric, this is required for some reason as it does not teleport the entity.
         if (ArchitecturyTarget.getCurrentTarget().equals("fabric")) {
-            targetWorld.spawnEntity(lander);
+            targetWorld.addFreshEntity(lander);
         }
         return lander;
     }
@@ -172,20 +171,20 @@ public class ModUtils {
      * @param itemEntity The item to try to convert into cooked food
      */
     public static void cookFood(ItemEntity itemEntity) {
-        ItemStack stack = itemEntity.getStack();
+        ItemStack stack = itemEntity.getItem();
         ItemStack foodOutput = null;
 
-        for (SmokingRecipe recipe : itemEntity.getWorld().getRecipeManager().listAllOfType(RecipeType.SMOKING)) {
+        for (SmokingRecipe recipe : itemEntity.getLevel().getRecipeManager().getAllRecipesFor(RecipeType.SMOKING)) {
             for (Ingredient ingredient : recipe.getIngredients()) {
                 if (ingredient.test(stack)) {
-                    foodOutput = recipe.getOutput();
+                    foodOutput = recipe.getResultItem();
                 }
             }
         }
 
         if (foodOutput != null) {
-            itemEntity.setStack(new ItemStack(foodOutput.getItem(), stack.getCount()));
-            ServerPlayerEntity playerEntity = (ServerPlayerEntity) itemEntity.world.getPlayerByUuid(itemEntity.getThrower());
+            itemEntity.setItem(new ItemStack(foodOutput.getItem(), stack.getCount()));
+            ServerPlayer playerEntity = (ServerPlayer) itemEntity.level.getPlayerByUUID(itemEntity.getThrower());
             if (playerEntity != null) {
                 ModCriteria.FOOD_COOKED_IN_ATMOSPHERE.trigger(playerEntity);
             }
@@ -193,77 +192,77 @@ public class ModUtils {
     }
 
     /**
-     * Gets the world's orbit dimension. The orbit dimension is where the planet's space station spawns and where the lander drops.
+     * Gets the level's orbit dimension. The orbit dimension is where the planet's space station spawns and where the lander drops.
      *
-     * @return The world's orbit dimension, or the overworld if no orbit is defined
+     * @return The level's orbit dimension, or the overlevel if no orbit is defined
      */
-    public static RegistryKey<World> getPlanetOrbit(World world) {
-        return AdAstra.planets.stream().filter(p -> p.orbitWorld().equals(world.getRegistryKey())).map(Planet::world).findFirst().orElse(World.OVERWORLD);
+    public static ResourceKey<Level> getPlanetOrbit(Level level) {
+        return AdAstra.planets.stream().filter(p -> p.orbitWorld().equals(level.dimension())).map(Planet::level).findFirst().orElse(Level.OVERWORLD);
     }
 
     /**
-     * Gets the gravity of the world, in ratio to earth gravity. So a gravity of 1.0 is equivalent to earth gravity, while 0.5 would be half of earth's gravity and 2.0 would be twice the earth's gravity.
+     * Gets the gravity of the level, in ratio to earth gravity. So a gravity of 1.0 is equivalent to earth gravity, while 0.5 would be half of earth's gravity and 2.0 would be twice the earth's gravity.
      *
-     * @return The gravity of the world or earth gravity if the world does not have a defined gravity
+     * @return The gravity of the level or earth gravity if the level does not have a defined gravity
      */
-    public static float getPlanetGravity(World world) {
+    public static float getPlanetGravity(Level level) {
         // Do not affect gravity for non-Ad Astra dimensions
-        if (!ModUtils.isSpaceWorld(world)) {
+        if (!ModUtils.isSpacelevel(level)) {
             return 1.0f;
         }
 
-        if (isOrbitWorld(world)) {
+        if (isOrbitlevel(level)) {
             return AdAstra.CONFIG.general.orbitGravity / VANILLA_GRAVITY;
         }
-        return AdAstra.planets.stream().filter(p -> p.world().equals(world.getRegistryKey())).map(Planet::gravity).findFirst().orElse(VANILLA_GRAVITY) / VANILLA_GRAVITY;
+        return AdAstra.planets.stream().filter(p -> p.level().equals(level.dimension())).map(Planet::gravity).findFirst().orElse(VANILLA_GRAVITY) / VANILLA_GRAVITY;
     }
 
-    public static boolean planetHasAtmosphere(World world) {
-        return AdAstra.planets.stream().filter(p -> p.world().equals(world.getRegistryKey())).map(Planet::hasAtmosphere).findFirst().orElse(false);
+    public static boolean planetHasAtmosphere(Level level) {
+        return AdAstra.planets.stream().filter(p -> p.level().equals(level.dimension())).map(Planet::hasAtmosphere).findFirst().orElse(false);
     }
 
     /**
-     * Gets the temperature of the world in celsius.
+     * Gets the temperature of the level in celsius.
      *
-     * @return The temperature of the world, or 20° for dimensions without a defined temperature
+     * @return The temperature of the level, or 20° for dimensions without a defined temperature
      */
-    public static float getWorldTemperature(World world) {
-        if (isOrbitWorld(world)) {
+    public static float getWorldTemperature(Level level) {
+        if (isOrbitlevel(level)) {
             return ORBIT_TEMPERATURE;
         }
-        return AdAstra.planets.stream().filter(p -> p.world().equals(world.getRegistryKey())).map(Planet::temperature).findFirst().orElse(20.0f);
+        return AdAstra.planets.stream().filter(p -> p.level().equals(level.dimension())).map(Planet::temperature).findFirst().orElse(20.0f);
     }
 
     /**
-     * Checks if the world is either a planet or an orbit world.
+     * Checks if the level is either a planet or an orbit level.
      */
-    public static boolean isSpaceWorld(World world) {
-        return isPlanet(world) || isOrbitWorld(world);
+    public static boolean isSpacelevel(Level level) {
+        return isPlanet(level) || isOrbitlevel(level);
     }
 
     /**
-     * Check if the world is labeled as a planet dimension.
+     * Check if the level is labeled as a planet dimension.
      */
-    public static boolean isPlanet(World world) {
-        if (World.OVERWORLD.equals(world.getRegistryKey())) {
+    public static boolean isPlanet(Level level) {
+        if (Level.OVERWORLD.equals(level.dimension())) {
             return false;
         }
-        return AdAstra.planetWorlds.contains(world.getRegistryKey());
+        return AdAstra.planetWorlds.contains(level.dimension());
     }
 
     /**
-     * Checks if the world is labeled as an orbit dimension.
+     * Checks if the level is labeled as an orbit dimension.
      */
-    public static boolean isOrbitWorld(World world) {
-        return AdAstra.orbitWorlds.contains(world.getRegistryKey());
+    public static boolean isOrbitlevel(Level level) {
+        return AdAstra.orbitWorlds.contains(level.dimension());
     }
 
     /**
      * Spawns a server-side particle that renders regardless of the distance away from the player. This is important as normal particles are only rendered at up to 32 blocks away.
      */
-    public static <T extends ParticleEffect> void spawnForcedParticles(ServerWorld world, T particle, double x, double y, double z, int count, double deltaX, double deltaY, double deltaZ, double speed) {
-        for (ServerPlayerEntity player : world.getPlayers()) {
-            world.spawnParticles(player, particle, true, x, y, z, count, deltaX, deltaY, deltaZ, speed);
+    public static <T extends ParticleOptions> void spawnForcedParticles(ServerLevel level, T particle, double x, double y, double z, int count, double deltaX, double deltaY, double deltaZ, double speed) {
+        for (ServerPlayer player : level.players()) {
+            level.sendParticles(player, particle, true, x, y, z, count, deltaX, deltaY, deltaZ, speed);
         }
     }
 
@@ -274,36 +273,36 @@ public class ModUtils {
      * @param newYaw  The new yaw to apply to the vehicle
      */
     public static void rotateVehicleYaw(VehicleEntity vehicle, float newYaw) {
-        vehicle.setYaw(newYaw);
-        vehicle.setBodyYaw(newYaw);
-        vehicle.prevYaw = newYaw;
+        vehicle.setYRot(newYaw);
+        vehicle.setYBodyRot(newYaw);
+        vehicle.yRotO = newYaw;
     }
 
     public static boolean checkTag(Entity entity, TagKey<EntityType<?>> tag) {
-        return entity.getType().isIn(tag);
+        return entity.getType().is(tag);
     }
 
     public static boolean checkTag(ItemStack stack, TagKey<Item> tag) {
-        return stack.isIn(tag);
+        return stack.is(tag);
     }
 
     public static boolean armourIsFreezeResistant(LivingEntity entity) {
-        return StreamSupport.stream(entity.getArmorItems().spliterator(), false).allMatch(s -> s.isIn(ModTags.FREEZE_RESISTANT));
+        return StreamSupport.stream(entity.getArmorSlots().spliterator(), false).allMatch(s -> s.is(ModTags.FREEZE_RESISTANT));
     }
 
     public static boolean armourIsHeatResistant(LivingEntity entity) {
-        return StreamSupport.stream(entity.getArmorItems().spliterator(), false).allMatch(s -> s.isIn(ModTags.HEAT_RESISTANT));
+        return StreamSupport.stream(entity.getArmorSlots().spliterator(), false).allMatch(s -> s.is(ModTags.HEAT_RESISTANT));
     }
 
     public static boolean armourIsOxygenated(LivingEntity entity) {
-        return StreamSupport.stream(entity.getArmorItems().spliterator(), false).allMatch(s -> s.isIn(ModTags.OXYGENATED_ARMOR));
+        return StreamSupport.stream(entity.getArmorSlots().spliterator(), false).allMatch(s -> s.is(ModTags.OXYGENATED_ARMOR));
     }
 
-    public static long getSolarEnergy(World world) {
-        if (isOrbitWorld(world)) {
-            return AdAstra.planets.stream().filter(p -> p.orbitWorld().equals(world.getRegistryKey())).map(Planet::orbitSolarPower).findFirst().orElse(15L);
-        } else if (isPlanet(world)) {
-            return AdAstra.planets.stream().filter(p -> p.world().equals(world.getRegistryKey())).map(Planet::solarPower).findFirst().orElse(15L);
+    public static long getSolarEnergy(Level level) {
+        if (isOrbitlevel(level)) {
+            return AdAstra.planets.stream().filter(p -> p.orbitWorld().equals(level.dimension())).map(Planet::orbitSolarPower).findFirst().orElse(15L);
+        } else if (isPlanet(level)) {
+            return AdAstra.planets.stream().filter(p -> p.level().equals(level.dimension())).map(Planet::solarPower).findFirst().orElse(15L);
         } else {
             return 15L;
         }

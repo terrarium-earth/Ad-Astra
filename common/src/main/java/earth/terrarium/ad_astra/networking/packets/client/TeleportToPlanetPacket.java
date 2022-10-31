@@ -4,31 +4,31 @@ import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
 import earth.terrarium.ad_astra.entities.vehicles.RocketEntity;
-import earth.terrarium.ad_astra.util.ModIdentifier;
+import earth.terrarium.ad_astra.util.ModResourceLocation;
 import earth.terrarium.ad_astra.util.ModUtils;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.world.World;
+import net.minecraft.core.Registry;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.Level;
 
-public record TeleportToPlanetPacket(Identifier id) implements Packet<TeleportToPlanetPacket> {
+public record TeleportToPlanetPacket(ResourceLocation id) implements Packet<TeleportToPlanetPacket> {
 
-    public static final Identifier ID = new ModIdentifier("teleport_to_planet");
+    public static final ResourceLocation ID = new ModResourceLocation("teleport_to_planet");
     public static final Handler HANDLER = new Handler();
 
-    private static RegistryKey<World> getWorld(Identifier id) {
-        RegistryKey<World> targetDimension = RegistryKey.of(Registry.WORLD_KEY, id);
+    private static ResourceKey<Level> getlevel(ResourceLocation id) {
+        ResourceKey<Level> targetDimension = ResourceKey.create(Registry.DIMENSION_REGISTRY, id);
         // Change the "earth" registry key to the "overworld" registry key.
-        if (targetDimension.getValue().equals(new ModIdentifier("earth"))) {
-            targetDimension = World.OVERWORLD;
+        if (targetDimension.location().equals(new ModResourceLocation("earth"))) {
+            targetDimension = Level.OVERWORLD;
         }
         return targetDimension;
     }
 
     @Override
-    public Identifier getID() {
+    public ResourceLocation getID() {
         return ID;
     }
 
@@ -39,22 +39,22 @@ public record TeleportToPlanetPacket(Identifier id) implements Packet<TeleportTo
 
     private static class Handler implements PacketHandler<TeleportToPlanetPacket> {
         @Override
-        public void encode(TeleportToPlanetPacket packet, PacketByteBuf buf) {
-            buf.writeIdentifier(packet.id);
+        public void encode(TeleportToPlanetPacket packet, FriendlyByteBuf buf) {
+            buf.writeResourceLocation(packet.id);
         }
 
         @Override
-        public TeleportToPlanetPacket decode(PacketByteBuf buf) {
-            return new TeleportToPlanetPacket(buf.readIdentifier());
+        public TeleportToPlanetPacket decode(FriendlyByteBuf buf) {
+            return new TeleportToPlanetPacket(buf.readResourceLocation());
         }
 
         @Override
         public PacketContext handle(TeleportToPlanetPacket message) {
-            return (player, world) -> {
+            return (player, level) -> {
                 if (player.getVehicle() instanceof RocketEntity) {
-                    ModUtils.teleportToWorld(getWorld(message.id()), player);
-                } else if (player.isCreativeLevelTwoOp()) {
-                    ModUtils.teleportPlayer(getWorld(message.id()), (ServerPlayerEntity) player);
+                    ModUtils.teleportTolevel(getlevel(message.id()), player);
+                } else if (player.canUseGameMasterBlocks()) {
+                    ModUtils.teleportPlayer(getlevel(message.id()), (ServerPlayer) player);
                 }
             };
         }

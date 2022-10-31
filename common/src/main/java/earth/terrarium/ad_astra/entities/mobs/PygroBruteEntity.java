@@ -1,36 +1,36 @@
 package earth.terrarium.ad_astra.entities.mobs;
 
 import earth.terrarium.ad_astra.registry.ModEntityTypes;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.PiglinBruteEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.world.World;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.piglin.PiglinBrute;
+import net.minecraft.world.level.Level;
 
-public class PygroBruteEntity extends PiglinBruteEntity {
+public class PygroBruteEntity extends PiglinBrute {
 
-    public PygroBruteEntity(EntityType<? extends PiglinBruteEntity> entityType, World world) {
-        super(entityType, world);
+    public PygroBruteEntity(EntityType<? extends PiglinBrute> entityType, Level level) {
+        super(entityType, level);
     }
 
-    public static DefaultAttributeContainer.Builder createMobAttributes() {
-        return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.45).add(EntityAttributes.GENERIC_MAX_HEALTH, 60).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 9);
+    public static AttributeSupplier.Builder createMobAttributes() {
+        return Monster.createMonsterAttributes().add(Attributes.MOVEMENT_SPEED, 0.45).add(Attributes.MAX_HEALTH, 60).add(Attributes.ATTACK_DAMAGE, 9);
     }
 
     @Override
-    public boolean canImmediatelyDespawn(double distanceSquared) {
+    public boolean removeWhenFarAway(double distanceSquared) {
         return false;
     }
 
     @Override
-    protected void zombify(ServerWorld world) {
+    protected void finishConversion(ServerLevel level) {
         ZombifiedPygroEntity zombifiedPygroEntity = this.convertTo(ModEntityTypes.ZOMBIFIED_PYGRO.get(), true);
         if (zombifiedPygroEntity != null) {
-            zombifiedPygroEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 200, 0));
+            zombifiedPygroEntity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0));
         }
     }
 }

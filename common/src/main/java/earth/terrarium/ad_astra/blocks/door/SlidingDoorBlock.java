@@ -1,238 +1,242 @@
 package earth.terrarium.ad_astra.blocks.door;
 
-import net.minecraft.block.*;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityTicker;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.block.piston.PistonBehavior;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.pathing.NavigationType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.state.StateManager.Builder;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.state.property.EnumProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldView;
-import net.minecraft.world.explosion.Explosion;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition.Builder;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 @SuppressWarnings("deprecation")
-public class SlidingDoorBlock extends BlockWithEntity {
+public class SlidingDoorBlock extends BaseEntityBlock {
 
-    public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
-    public static final BooleanProperty OPEN = Properties.OPEN;
-    public static final BooleanProperty POWERED = Properties.POWERED;
-    public static final EnumProperty<LocationState> LOCATION = EnumProperty.of("location", LocationState.class);
+    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
+    public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
+    public static final EnumProperty<LocationState> LOCATION = EnumProperty.create("location", LocationState.class);
 
-    protected static final VoxelShape NORTH_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 16.0, 3.0);
-    protected static final VoxelShape SOUTH_SHAPE = Block.createCuboidShape(0.0, 0.0, 13.0, 16.0, 16.0, 16.0);
-    protected static final VoxelShape EAST_SHAPE = Block.createCuboidShape(13.0, 0.0, 0.0, 16.0, 16.0, 16.0);
-    protected static final VoxelShape WEST_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 3.0, 16.0, 16.0);
+    protected static final VoxelShape NORTH_SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 3.0);
+    protected static final VoxelShape SOUTH_SHAPE = Block.box(0.0, 0.0, 13.0, 16.0, 16.0, 16.0);
+    protected static final VoxelShape EAST_SHAPE = Block.box(13.0, 0.0, 0.0, 16.0, 16.0, 16.0);
+    protected static final VoxelShape WEST_SHAPE = Block.box(0.0, 0.0, 0.0, 3.0, 16.0, 16.0);
 
-    public SlidingDoorBlock(Settings settings) {
+    public SlidingDoorBlock(Properties settings) {
         super(settings);
-        this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH).with(OPEN, false).with(POWERED, false).with(LOCATION, LocationState.BOTTOM));
+        this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.NORTH).setValue(OPEN, false).setValue(POWERED, false).setValue(LOCATION, LocationState.BOTTOM));
     }
 
     @Override
-    protected void appendProperties(Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
         builder.add(FACING, OPEN, POWERED, LOCATION);
     }
 
     @Override
-    public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
-        if (!world.isClient) {
-            Direction direction = state.get(FACING);
-            Direction offset = direction.rotateYClockwise();
+    public void setPlacedBy(Level level, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
+        if (!level.isClientSide) {
+            Direction direction = state.getValue(FACING);
+            Direction offset = direction.getClockWise();
 
             // Bottom
-            world.setBlockState(pos, getDefaultState().with(LOCATION, LocationState.BOTTOM).with(FACING, direction), 3);
+            level.setBlock(pos, defaultBlockState().setValue(LOCATION, LocationState.BOTTOM).setValue(FACING, direction), 3);
             // Bottom Left
-            world.setBlockState(pos.offset(offset), getDefaultState().with(LOCATION, LocationState.BOTTOM_LEFT).with(FACING, direction), 3);
+            level.setBlock(pos.relative(offset), defaultBlockState().setValue(LOCATION, LocationState.BOTTOM_LEFT).setValue(FACING, direction), 3);
             // Bottom Right
-            world.setBlockState(pos.offset(offset.getOpposite()), getDefaultState().with(LOCATION, LocationState.BOTTOM_RIGHT).with(FACING, direction), 3);
+            level.setBlock(pos.relative(offset.getOpposite()), defaultBlockState().setValue(LOCATION, LocationState.BOTTOM_RIGHT).setValue(FACING, direction), 3);
             // Center
-            world.setBlockState(pos.up(), getDefaultState().with(LOCATION, LocationState.CENTER).with(FACING, direction), 3);
+            level.setBlock(pos.above(), defaultBlockState().setValue(LOCATION, LocationState.CENTER).setValue(FACING, direction), 3);
             // Left
-            world.setBlockState(pos.up().offset(offset), getDefaultState().with(LOCATION, LocationState.LEFT).with(FACING, direction), 3);
+            level.setBlock(pos.above().relative(offset), defaultBlockState().setValue(LOCATION, LocationState.LEFT).setValue(FACING, direction), 3);
             // Right
-            world.setBlockState(pos.up().offset(offset.getOpposite()), getDefaultState().with(LOCATION, LocationState.RIGHT).with(FACING, direction), 3);
+            level.setBlock(pos.above().relative(offset.getOpposite()), defaultBlockState().setValue(LOCATION, LocationState.RIGHT).setValue(FACING, direction), 3);
             // Top
-            world.setBlockState(pos.up().up(), getDefaultState().with(LOCATION, LocationState.TOP).with(FACING, direction), 3);
+            level.setBlock(pos.above().above(), defaultBlockState().setValue(LOCATION, LocationState.TOP).setValue(FACING, direction), 3);
             // Top Left
-            world.setBlockState(pos.up().up().offset(offset), getDefaultState().with(LOCATION, LocationState.TOP_LEFT).with(FACING, direction), 3);
+            level.setBlock(pos.above().above().relative(offset), defaultBlockState().setValue(LOCATION, LocationState.TOP_LEFT).setValue(FACING, direction), 3);
             // Top Right
-            world.setBlockState(pos.up().up().offset(offset.getOpposite()), getDefaultState().with(LOCATION, LocationState.TOP_RIGHT).with(FACING, direction), 3);
+            level.setBlock(pos.above().above().relative(offset.getOpposite()), defaultBlockState().setValue(LOCATION, LocationState.TOP_RIGHT).setValue(FACING, direction), 3);
         }
     }
 
     @Override
-    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-        super.onBreak(world, pos, state, player);
-        breakDoor(world, world.getBlockState(pos), pos, !player.isCreative());
+    public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        super.playerWillDestroy(level, pos, state, player);
+        breakDoor(level, level.getBlockState(pos), pos, !player.isCreative());
     }
 
     @Override
-    public void onDestroyedByExplosion(World world, BlockPos pos, Explosion explosion) {
+    public void wasExploded(Level level, BlockPos pos, Explosion explosion) {
         for (Direction direction : Direction.values()) {
-            BlockPos offset = pos.offset(direction);
-            BlockState state = world.getBlockState(offset);
+            BlockPos offset = pos.relative(direction);
+            BlockState state = level.getBlockState(offset);
             if (state.getBlock().equals(this)) {
-                breakDoor(world, state, offset, true);
+                breakDoor(level, state, offset, true);
                 break;
             }
         }
-        super.onDestroyedByExplosion(world, pos, explosion);
+        super.wasExploded(level, pos, explosion);
     }
 
-    public void breakDoor(World world, BlockState state, BlockPos pos, boolean drop) {
-        if (!world.isClient && state.getBlock().equals(this)) {
+    public void breakDoor(Level level, BlockState state, BlockPos pos, boolean drop) {
+        if (!level.isClientSide && state.getBlock().equals(this)) {
             BlockPos mainPos = this.getMainPos(state, pos);
-            if (world.getBlockState(mainPos).getBlock().equals(this)) {
-                Direction direction = state.get(FACING).rotateYCounterclockwise();
+            if (level.getBlockState(mainPos).getBlock().equals(this)) {
+                Direction direction = state.getValue(FACING).getCounterClockWise();
 
                 // Bottom
-                world.breakBlock(mainPos, drop);
+                level.destroyBlock(mainPos, drop);
                 // Bottom Left
-                world.breakBlock(mainPos.offset(direction), false);
+                level.destroyBlock(mainPos.relative(direction), false);
                 // Bottom Right
-                world.breakBlock(mainPos.offset(direction.getOpposite()), false);
+                level.destroyBlock(mainPos.relative(direction.getOpposite()), false);
                 // Center
-                world.breakBlock(mainPos.up(), false);
+                level.destroyBlock(mainPos.above(), false);
                 // Left
-                world.breakBlock(mainPos.up().offset(direction), false);
+                level.destroyBlock(mainPos.above().relative(direction), false);
                 // Right
-                world.breakBlock(mainPos.up().offset(direction.getOpposite()), false);
+                level.destroyBlock(mainPos.above().relative(direction.getOpposite()), false);
                 // Top
-                world.breakBlock(mainPos.up().up(), false);
+                level.destroyBlock(mainPos.above().above(), false);
                 // Top Left
-                world.breakBlock(mainPos.up().up().offset(direction), false);
+                level.destroyBlock(mainPos.above().above().relative(direction), false);
                 // Top Right
-                world.breakBlock(mainPos.up().up().offset(direction.getOpposite()), false);
+                level.destroyBlock(mainPos.above().above().relative(direction.getOpposite()), false);
             }
         }
     }
 
     @Override
-    public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
+    public boolean isPathfindable(BlockState state, BlockGetter level, BlockPos pos, PathComputationType type) {
         return switch (type) {
-            case LAND -> state.get(OPEN);
+            case LAND -> state.getValue(OPEN);
             case WATER -> false;
-            case AIR -> state.get(OPEN);
+            case AIR -> state.getValue(OPEN);
         };
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (!world.isClient) {
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (!level.isClientSide) {
             BlockPos main = this.getMainPos(state, pos);
-            if (world.getBlockEntity(this.getMainPos(state, pos)) instanceof SlidingDoorBlockEntity entity) {
+            if (level.getBlockEntity(this.getMainPos(state, pos)) instanceof SlidingDoorBlockEntity entity) {
                 if (entity.getSlideTicks() > 0 && entity.getSlideTicks() < 100) {
-                    return ActionResult.PASS;
+                    return InteractionResult.PASS;
                 } else {
-                    world.setBlockState(main, world.getBlockState(main).cycle(OPEN), 10);
+                    level.setBlock(main, level.getBlockState(main).cycle(OPEN), 10);
                 }
             }
 
         }
-        return ActionResult.success(world.isClient);
+        return InteractionResult.sidedSuccess(level.isClientSide);
     }
 
     @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        Direction direction = state.get(FACING);
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        Direction direction = state.getValue(FACING);
         return switch (direction) {
-            case NORTH -> NORTH_SHAPE.offset(0, 0, 0.42);
-            case EAST -> WEST_SHAPE.offset(0.38, 0, 0);
-            case SOUTH -> NORTH_SHAPE.offset(0, 0, 0.38);
-            case WEST -> EAST_SHAPE.offset(-0.44, 0, 0);
-            default -> VoxelShapes.empty();
+            case NORTH -> NORTH_SHAPE.move(0, 0, 0.42);
+            case EAST -> WEST_SHAPE.move(0.38, 0, 0);
+            case SOUTH -> NORTH_SHAPE.move(0, 0, 0.38);
+            case WEST -> EAST_SHAPE.move(-0.44, 0, 0);
+            default -> Shapes.empty();
         };
     }
 
     @Override
-    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+    public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         BlockPos mainPos = this.getMainPos(state, pos);
-        Direction direction = state.get(FACING).rotateYClockwise();
+        Direction direction = state.getValue(FACING).getClockWise();
 
         // Bottom
-        return world.getBlockState(mainPos).isAir() &&
+        return level.getBlockState(mainPos).isAir() &&
                 // Bottom Left
-                world.getBlockState(mainPos.offset(direction)).isAir() &&
+                level.getBlockState(mainPos.relative(direction)).isAir() &&
                 // Bottom Right
-                world.getBlockState(mainPos.offset(direction.getOpposite())).isAir() &&
+                level.getBlockState(mainPos.relative(direction.getOpposite())).isAir() &&
                 // Center
-                world.getBlockState(mainPos.up()).isAir() &&
+                level.getBlockState(mainPos.above()).isAir() &&
                 // Left
-                world.getBlockState(mainPos.up().offset(direction)).isAir() &&
+                level.getBlockState(mainPos.above().relative(direction)).isAir() &&
                 // Right
-                world.getBlockState(mainPos.up().offset(direction.getOpposite())).isAir() &&
+                level.getBlockState(mainPos.above().relative(direction.getOpposite())).isAir() &&
                 // Top
-                world.getBlockState(mainPos.up().up()).isAir() &&
+                level.getBlockState(mainPos.above().above()).isAir() &&
                 // Top Left
-                world.getBlockState(mainPos.up().up().offset(direction)).isAir() &&
+                level.getBlockState(mainPos.above().above().relative(direction)).isAir() &&
                 // Top Right
-                world.getBlockState(mainPos.up().up().offset(direction.getOpposite())).isAir();
+                level.getBlockState(mainPos.above().above().relative(direction.getOpposite())).isAir();
 
     }
 
     @Override
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return this.getDefaultState().with(POWERED, ctx.getWorld().isReceivingRedstonePower(ctx.getBlockPos())).with(FACING, ctx.getPlayerFacing().getOpposite());
+    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+        return this.defaultBlockState().setValue(POWERED, ctx.getLevel().hasNeighborSignal(ctx.getClickedPos())).setValue(FACING, ctx.getHorizontalDirection().getOpposite());
     }
 
     @Override
-    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
-        super.neighborUpdate(state, world, pos, block, fromPos, notify);
+    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
+        super.neighborChanged(state, level, pos, block, fromPos, notify);
 
-        if (!world.isClient) {
-            world.setBlockState(pos, state.with(POWERED, world.isReceivingRedstonePower(pos)));
+        if (!level.isClientSide) {
+            level.setBlockAndUpdate(pos, state.setValue(POWERED, level.hasNeighborSignal(pos)));
         }
     }
 
     @Override
-    public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        BlockState main = world.getBlockState(this.getMainPos(state, pos));
-        if (main.contains(OPEN) && (!main.get(OPEN) && !main.get(POWERED))) {
-            Direction direction = state.get(FACING);
+    public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        BlockState main = level.getBlockState(this.getMainPos(state, pos));
+        if (main.hasProperty(OPEN) && (!main.getValue(OPEN) && !main.getValue(POWERED))) {
+            Direction direction = state.getValue(FACING);
             return switch (direction) {
-                case NORTH -> NORTH_SHAPE.offset(0, 0, 0.42);
-                case EAST -> WEST_SHAPE.offset(0.38, 0, 0);
-                case SOUTH -> NORTH_SHAPE.offset(0, 0, 0.38);
-                case WEST -> EAST_SHAPE.offset(-0.44, 0, 0);
-                default -> VoxelShapes.empty();
+                case NORTH -> NORTH_SHAPE.move(0, 0, 0.42);
+                case EAST -> WEST_SHAPE.move(0.38, 0, 0);
+                case SOUTH -> NORTH_SHAPE.move(0, 0, 0.38);
+                case WEST -> EAST_SHAPE.move(-0.44, 0, 0);
+                default -> Shapes.empty();
             };
         } else {
-            return VoxelShapes.empty();
+            return Shapes.empty();
         }
     }
 
     @Override
-    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        if (state.get(LOCATION).equals(LocationState.BOTTOM)) {
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        if (state.getValue(LOCATION).equals(LocationState.BOTTOM)) {
             return new SlidingDoorBlockEntity(pos, state);
         }
         return null;
     }
 
     @Override
-    public PistonBehavior getPistonBehavior(BlockState state) {
-        return PistonBehavior.BLOCK;
+    public PushReaction getPistonPushReaction(BlockState state) {
+        return PushReaction.BLOCK;
     }
 
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         return (entityWorld, pos, entityState, blockEntity) -> {
             if (blockEntity instanceof SlidingDoorBlockEntity door) {
                 door.tick();
@@ -242,23 +246,23 @@ public class SlidingDoorBlock extends BlockWithEntity {
 
     public BlockPos getMainPos(BlockState state, BlockPos from) {
         BlockPos target = from;
-        Direction facing = state.get(FACING).rotateYCounterclockwise();
-        if (state.get(LOCATION).equals(LocationState.TOP_LEFT)) {
-            target = from.down().down().offset(facing);
-        } else if (state.get(LOCATION).equals(LocationState.TOP)) {
-            target = from.down().down();
-        } else if (state.get(LOCATION).equals(LocationState.TOP_RIGHT)) {
-            target = from.down().down().offset(facing.getOpposite());
-        } else if (state.get(LOCATION).equals(LocationState.RIGHT)) {
-            target = from.down().offset(facing.getOpposite());
-        } else if (state.get(LOCATION).equals(LocationState.CENTER)) {
-            target = from.down();
-        } else if (state.get(LOCATION).equals(LocationState.LEFT)) {
-            target = from.down().offset(facing);
-        } else if (state.get(LOCATION).equals(LocationState.BOTTOM_LEFT)) {
-            target = from.offset(facing);
-        } else if (state.get(LOCATION).equals(LocationState.BOTTOM_RIGHT)) {
-            target = from.offset(facing.getOpposite());
+        Direction facing = state.getValue(FACING).getCounterClockWise();
+        if (state.getValue(LOCATION).equals(LocationState.TOP_LEFT)) {
+            target = from.below().below().relative(facing);
+        } else if (state.getValue(LOCATION).equals(LocationState.TOP)) {
+            target = from.below().below();
+        } else if (state.getValue(LOCATION).equals(LocationState.TOP_RIGHT)) {
+            target = from.below().below().relative(facing.getOpposite());
+        } else if (state.getValue(LOCATION).equals(LocationState.RIGHT)) {
+            target = from.below().relative(facing.getOpposite());
+        } else if (state.getValue(LOCATION).equals(LocationState.CENTER)) {
+            target = from.below();
+        } else if (state.getValue(LOCATION).equals(LocationState.LEFT)) {
+            target = from.below().relative(facing);
+        } else if (state.getValue(LOCATION).equals(LocationState.BOTTOM_LEFT)) {
+            target = from.relative(facing);
+        } else if (state.getValue(LOCATION).equals(LocationState.BOTTOM_RIGHT)) {
+            target = from.relative(facing.getOpposite());
         }
         return target;
     }

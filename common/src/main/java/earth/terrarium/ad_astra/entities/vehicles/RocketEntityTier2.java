@@ -1,19 +1,19 @@
 package earth.terrarium.ad_astra.entities.vehicles;
 
 import earth.terrarium.ad_astra.registry.ModItems;
-import net.minecraft.entity.EntityType;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 public class RocketEntityTier2 extends RocketEntity {
 
-    public RocketEntityTier2(EntityType<?> type, World world) {
-        super(type, world, 2);
+    public RocketEntityTier2(EntityType<?> type, Level level) {
+        super(type, level, 2);
     }
 
     @Override
-    public double getMountedHeightOffset() {
-        return super.getMountedHeightOffset() + 1.0f;
+    public double getPassengersRidingOffset() {
+        return super.getPassengersRidingOffset() + 1.0f;
     }
 
     @Override
@@ -23,6 +23,6 @@ public class RocketEntityTier2 extends RocketEntity {
 
     @Override
     public ItemStack getDropStack() {
-        return ModItems.TIER_2_ROCKET.get().getDefaultStack();
+        return ModItems.TIER_2_ROCKET.get().getDefaultInstance();
     }
 }

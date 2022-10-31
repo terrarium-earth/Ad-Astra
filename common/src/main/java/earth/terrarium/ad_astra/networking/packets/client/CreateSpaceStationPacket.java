@@ -5,29 +5,29 @@ import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
 import earth.terrarium.ad_astra.recipes.SpaceStationRecipe;
 import earth.terrarium.ad_astra.registry.ModRecipes;
-import earth.terrarium.ad_astra.util.ModIdentifier;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.server.world.ChunkTicketType;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.structure.Structure;
-import net.minecraft.structure.StructurePlacementData;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
+import earth.terrarium.ad_astra.util.ModResourceLocation;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.TicketType;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
-public record CreateSpaceStationPacket(Identifier targetWorld) implements Packet<CreateSpaceStationPacket> {
+public record CreateSpaceStationPacket(ResourceLocation targetWorld) implements Packet<CreateSpaceStationPacket> {
 
-    public static final Identifier ID = new ModIdentifier("toggle_distributor");
+    public static final ResourceLocation ID = new ModResourceLocation("toggle_distributor");
     public static final Handler HANDLER = new Handler();
 
     @Override
-    public Identifier getID() {
+    public ResourceLocation getID() {
         return ID;
     }
 
@@ -37,9 +37,9 @@ public record CreateSpaceStationPacket(Identifier targetWorld) implements Packet
     }
 
     private static class Handler implements PacketHandler<CreateSpaceStationPacket> {
-        private static boolean hasItem(PlayerEntity player, Ingredient ingredient, int count) {
+        private static boolean hasItem(Player player, Ingredient ingredient, int count) {
             int found = 0;
-            for (ItemStack stack : player.getInventory().main) {
+            for (ItemStack stack : player.getInventory().items) {
                 if (ingredient.test(stack)) {
                     found += stack.getCount();
                 }
@@ -48,46 +48,46 @@ public record CreateSpaceStationPacket(Identifier targetWorld) implements Packet
         }
 
         @Override
-        public void encode(CreateSpaceStationPacket packet, PacketByteBuf buf) {
-            buf.writeIdentifier(packet.targetWorld());
+        public void encode(CreateSpaceStationPacket packet, FriendlyByteBuf buf) {
+            buf.writeResourceLocation(packet.targetWorld());
         }
 
         @Override
-        public CreateSpaceStationPacket decode(PacketByteBuf buf) {
-            return new CreateSpaceStationPacket(buf.readIdentifier());
+        public CreateSpaceStationPacket decode(FriendlyByteBuf buf) {
+            return new CreateSpaceStationPacket(buf.readResourceLocation());
         }
 
         @Override
         public PacketContext handle(CreateSpaceStationPacket message) {
-            return (player, world) -> {
+            return (player, level) -> {
                 if (!player.isCreative() && !player.isSpectator()) {
-                    for (SpaceStationRecipe recipe : ModRecipes.SPACE_STATION_RECIPE.get().getRecipes(player.world)) {
+                    for (SpaceStationRecipe recipe : ModRecipes.SPACE_STATION_RECIPE.get().getRecipes(player.level)) {
                         for (int i = 0; i < recipe.getIngredients().size(); i++) {
                             if (!hasItem(player, recipe.getIngredients().get(i), recipe.getStackCounts().get(i))) {
                                 return;
                             }
                         }
                     }
-                    PlayerInventory inventory = player.getInventory();
-                    ModRecipes.SPACE_STATION_RECIPE.get().getRecipes(player.world).forEach(recipe -> {
+                    Inventory inventory = player.getInventory();
+                    ModRecipes.SPACE_STATION_RECIPE.get().getRecipes(player.level).forEach(recipe -> {
                         for (int i = 0; i < recipe.getIngredients().size(); i++) {
-                            inventory.remove(recipe.getIngredients().get(i), recipe.getStackCounts().get(i), inventory);
+                            inventory.clearOrCountMatchingItems(recipe.getIngredients().get(i), recipe.getStackCounts().get(i), inventory);
                         }
                     });
                 }
 
-                if (world instanceof ServerWorld serverWorld) {
-                    ServerWorld targetWorld = serverWorld.getServer().getWorld(RegistryKey.of(Registry.WORLD_KEY, message.targetWorld));
+                if (level instanceof ServerLevel serverWorld) {
+                    ServerLevel targetWorld = serverWorld.getServer().getLevel(ResourceKey.create(Registry.DIMENSION_REGISTRY, message.targetWorld));
 
                     if (targetWorld == null) {
                         return;
                     }
 
                     // Create the Space Station from the nbt file
-                    Structure structure = targetWorld.getStructureTemplateManager().getStructureOrBlank(new ModIdentifier("space_station"));
+                    StructureTemplate structure = targetWorld.getStructureManager().getOrCreate(new ModResourceLocation("space_station"));
                     BlockPos pos = new BlockPos(player.getX() - (structure.getSize().getX() / 2.0f), 100, player.getZ() - (structure.getSize().getZ() / 2.0f));
-                    targetWorld.getChunkManager().addTicket(ChunkTicketType.PORTAL, new ChunkPos(pos), 1, pos);
-                    structure.place(targetWorld, pos, pos, new StructurePlacementData(), targetWorld.random, 2);
+                    targetWorld.getChunkSource().addRegionTicket(TicketType.PORTAL, new ChunkPos(pos), 1, pos);
+                    structure.placeInWorld(targetWorld, pos, pos, new StructurePlaceSettings(), targetWorld.random, 2);
                 }
             };
         }

@@ -1,71 +1,70 @@
 package earth.terrarium.ad_astra.recipes;
 
 import earth.terrarium.ad_astra.util.ModInventory;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.Recipe;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.collection.DefaultedList;
-import net.minecraft.world.World;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
+import net.minecraft.core.NonNullList;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.level.Level;
 
-public abstract class ModRecipe implements Recipe<Inventory>, Predicate<ItemStack> {
+public abstract class ModRecipe implements Recipe<Container>, Predicate<ItemStack> {
 
-    protected final Identifier id;
+    protected final ResourceLocation id;
     protected final List<Ingredient> inputs = new ArrayList<>();
     protected List<Integer> stackCounts;
 
-    public ModRecipe(Identifier id) {
+    public ModRecipe(ResourceLocation id) {
         this.id = id;
     }
 
-    public ModRecipe(Identifier id, Ingredient input) {
+    public ModRecipe(ResourceLocation id, Ingredient input) {
         this.id = id;
         this.inputs.add(input);
     }
 
-    public ModRecipe(Identifier id, List<Ingredient> input, List<Integer> stackCounts) {
+    public ModRecipe(ResourceLocation id, List<Ingredient> input, List<Integer> stackCounts) {
         this.id = id;
         this.inputs.addAll(input);
         this.stackCounts = stackCounts;
     }
 
     @Override
-    public boolean matches(Inventory inventory, World world) {
+    public boolean matches(Container inventory, Level level) {
         // Unused.
         return true;
     }
 
     @Override
-    public ItemStack craft(Inventory inventory) {
+    public ItemStack assemble(Container inventory) {
         // Unused.
         return ItemStack.EMPTY;
     }
 
     @Override
-    public ItemStack getOutput() {
+    public ItemStack getResultItem() {
         // Unused.
         return ItemStack.EMPTY;
     }
 
     @Override
-    public boolean fits(int width, int height) {
+    public boolean canCraftInDimensions(int width, int height) {
         // Unused.
         return true;
     }
 
     @Override
-    public Identifier getId() {
+    public ResourceLocation getId() {
         return this.id;
     }
 
     @Override
-    public DefaultedList<Ingredient> getIngredients() {
-        DefaultedList<Ingredient> defaultedList = DefaultedList.of();
+    public NonNullList<Ingredient> getIngredients() {
+        NonNullList<Ingredient> defaultedList = NonNullList.create();
         defaultedList.addAll(this.inputs);
         return defaultedList;
     }

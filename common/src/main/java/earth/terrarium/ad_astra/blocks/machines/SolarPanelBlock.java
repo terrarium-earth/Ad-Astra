@@ -1,12 +1,12 @@
 package earth.terrarium.ad_astra.blocks.machines;
 
 import earth.terrarium.ad_astra.blocks.machines.entity.SolarPanelBlockEntity;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class SolarPanelBlock extends AbstractMachineBlock {
 
-    public SolarPanelBlock(Settings settings) {
+    public SolarPanelBlock(Properties settings) {
         super(settings);
     }
 
@@ -26,7 +26,7 @@ public class SolarPanelBlock extends AbstractMachineBlock {
     }
 
     @Override
-    public SolarPanelBlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+    public SolarPanelBlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new SolarPanelBlockEntity(pos, state);
     }
 }

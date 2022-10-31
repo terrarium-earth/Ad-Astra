@@ -2,29 +2,29 @@ package earth.terrarium.ad_astra.mixin.gravity;
 
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.util.ModUtils;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.vehicle.BoatEntity;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.vehicle.Boat;
+import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(BoatEntity.class)
+@Mixin(Boat.class)
 public abstract class BoatEntityMixin {
 
     @Unique
     private static final double CONSTANT = -0.04;
 
-    @Inject(method = "updateVelocity", at = @At("TAIL"))
+    @Inject(method = "floatBoat", at = @At("TAIL"))
     public void adastra_updateVelocity(CallbackInfo ci) {
         if (AdAstra.CONFIG.general.doEntityGravity) {
             Entity entity = (Entity) (Object) this;
-            if (!entity.hasNoGravity()) {
-                Vec3d velocity = entity.getVelocity();
-                double newGravity = CONSTANT * ModUtils.getPlanetGravity(entity.world);
-                entity.setVelocity(velocity.getX(), velocity.getY() - CONSTANT + newGravity, velocity.getZ());
+            if (!entity.isNoGravity()) {
+                Vec3 velocity = entity.getDeltaMovement();
+                double newGravity = CONSTANT * ModUtils.getPlanetGravity(entity.level);
+                entity.setDeltaMovement(velocity.x(), velocity.y() - CONSTANT + newGravity, velocity.z());
             }
         }
     }

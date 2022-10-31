@@ -1,12 +1,12 @@
 package earth.terrarium.ad_astra.blocks.machines;
 
 import earth.terrarium.ad_astra.blocks.machines.entity.CryoFreezerBlockEntity;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class CryoFreezerBlock extends AbstractMachineBlock {
 
-    public CryoFreezerBlock(Settings settings) {
+    public CryoFreezerBlock(Properties settings) {
         super(settings);
     }
 
@@ -21,7 +21,7 @@ public class CryoFreezerBlock extends AbstractMachineBlock {
     }
 
     @Override
-    public CryoFreezerBlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+    public CryoFreezerBlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new CryoFreezerBlockEntity(pos, state);
     }
 }

@@ -1,12 +1,12 @@
 package earth.terrarium.ad_astra.blocks.machines;
 
 import earth.terrarium.ad_astra.blocks.machines.entity.OxygenLoaderBlockEntity;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class OxygenLoaderBlock extends AbstractMachineBlock {
 
-    public OxygenLoaderBlock(Settings settings) {
+    public OxygenLoaderBlock(Properties settings) {
         super(settings);
     }
 
@@ -21,7 +21,7 @@ public class OxygenLoaderBlock extends AbstractMachineBlock {
     }
 
     @Override
-    public OxygenLoaderBlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+    public OxygenLoaderBlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new OxygenLoaderBlockEntity(pos, state);
     }
 }

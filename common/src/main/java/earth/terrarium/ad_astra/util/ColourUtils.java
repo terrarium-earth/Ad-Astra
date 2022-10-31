@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.util;
 
 import com.teamresourceful.resourcefullib.common.color.Color;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.phys.Vec3;
 
 public final class ColourUtils {
 
@@ -12,7 +12,7 @@ public final class ColourUtils {
                 colour.getIntAlpha());
     }
 
-    public static Vec3d toVector(Color colour) {
-        return new Vec3d(colour.getIntRed() / 255.0f, colour.getIntGreen() / 255.0f, colour.getIntBlue() / 255.0f);
+    public static Vec3 toVector(Color colour) {
+        return new Vec3(colour.getIntRed() / 255.0f, colour.getIntGreen() / 255.0f, colour.getIntBlue() / 255.0f);
     }
 }

@@ -10,14 +10,13 @@ import earth.terrarium.ad_astra.blocks.machines.entity.*;
 import earth.terrarium.ad_astra.blocks.pipes.CableBlockEntity;
 import earth.terrarium.ad_astra.blocks.pipes.FluidPipeBlockEntity;
 import earth.terrarium.botarium.api.registry.RegistryHelpers;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.util.registry.Registry;
-
 import java.util.function.Supplier;
+import net.minecraft.core.Registry;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 
 public class ModBlockEntities {
 
-    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(AdAstra.MOD_ID, Registry.BLOCK_ENTITY_TYPE_KEY);
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(AdAstra.MOD_ID, Registry.BLOCK_ENTITY_TYPE_REGISTRY);
     // Flag Block Entity
     public static Supplier<BlockEntityType<FlagBlockEntity>> FLAG_BLOCK_ENTITY;
     // Globe Block Entity

@@ -5,11 +5,11 @@ import earth.terrarium.ad_astra.items.armour.JetSuit;
 import earth.terrarium.ad_astra.registry.ModItems;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.model.ModelPart;
-import net.minecraft.client.render.entity.model.EntityModelLoader;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.Item;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.geom.EntityModelSet;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.Item;
 import org.apache.commons.lang3.NotImplementedException;
 
 @Environment(EnvType.CLIENT)
@@ -17,24 +17,24 @@ public class ArmourRenderers {
 
     public static void register() {
         ArmourRenderers.registerArmour((entity, stack, slot, original) -> {
-            EntityModelLoader modelLoader = MinecraftClient.getInstance().getEntityModelLoader();
-            ModelPart layer = modelLoader.getModelPart(SpaceSuitModel.LAYER_LOCATION);
+            EntityModelSet modelLoader = Minecraft.getInstance().getEntityModels();
+            ModelPart layer = modelLoader.bakeLayer(SpaceSuitModel.LAYER_LOCATION);
             return new SpaceSuitModel(layer, original, entity, slot, stack);
         }, ModItems.SPACE_HELMET.get(), ModItems.SPACE_SUIT.get(), ModItems.SPACE_PANTS.get(), ModItems.SPACE_BOOTS.get());
 
         ArmourRenderers.registerArmour((entity, stack, slot, original) -> {
-            EntityModelLoader modelLoader = MinecraftClient.getInstance().getEntityModelLoader();
-            ModelPart layer = modelLoader.getModelPart(NetheriteSpaceSuitModel.LAYER_LOCATION);
+            EntityModelSet modelLoader = Minecraft.getInstance().getEntityModels();
+            ModelPart layer = modelLoader.bakeLayer(NetheriteSpaceSuitModel.LAYER_LOCATION);
             return new SpaceSuitModel(layer, original, entity, slot, stack);
         }, ModItems.NETHERITE_SPACE_HELMET.get(), ModItems.NETHERITE_SPACE_SUIT.get(), ModItems.NETHERITE_SPACE_PANTS.get(), ModItems.NETHERITE_SPACE_BOOTS.get());
 
         ArmourRenderers.registerArmour((entity, stack, slot, original) -> {
-            EntityModelLoader modelLoader = MinecraftClient.getInstance().getEntityModelLoader();
-            ModelPart layer = modelLoader.getModelPart(JetSuitModel.LAYER_LOCATION);
+            EntityModelSet modelLoader = Minecraft.getInstance().getEntityModels();
+            ModelPart layer = modelLoader.bakeLayer(JetSuitModel.LAYER_LOCATION);
 
             if (slot.equals(EquipmentSlot.CHEST)) {
                 if (JetSuit.hasFullSet(entity)) {
-                    JetSuit.spawnParticles(entity.world, entity, original);
+                    JetSuit.spawnParticles(entity.level, entity, original);
                 }
             }
 

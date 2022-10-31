@@ -6,17 +6,17 @@ import earth.terrarium.ad_astra.mixin.EntityInvoker;
 import earth.terrarium.ad_astra.registry.ModDamageSource;
 import earth.terrarium.ad_astra.registry.ModTags;
 import earth.terrarium.ad_astra.util.ModUtils;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.server.world.ServerWorld;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.LivingEntity;
 
 public class EntityAcidRainSystem {
 
-    public static void acidRainTick(LivingEntity entity, ServerWorld world) {
+    public static void acidRainTick(LivingEntity entity, ServerLevel level) {
         if (!AdAstra.CONFIG.general.acidRainBurns) {
             return;
         }
 
-        if (!entity.world.getRegistryKey().equals(ModUtils.VENUS_KEY)) {
+        if (!entity.level.dimension().equals(ModUtils.VENUS_KEY)) {
             return;
         }
 
@@ -29,15 +29,15 @@ public class EntityAcidRainSystem {
             return;
         }
 
-        causeDamage(entity, world);
+        causeDamage(entity, level);
     }
 
-    private static void causeDamage(LivingEntity entity, ServerWorld world) {
-        if (((EntityInvoker) entity).invokeIsBeingRainedOn()) {
-            entity.damage(ModDamageSource.ACID_RAIN, 3);
+    private static void causeDamage(LivingEntity entity, ServerLevel level) {
+        if (((EntityInvoker) entity).invokeIsInRain()) {
+            entity.hurt(ModDamageSource.ACID_RAIN, 3);
             // Infrequently set the entity on fire
-            if (world.random.nextInt(8) == 0) {
-                entity.setOnFireFor(1);
+            if (level.random.nextInt(8) == 0) {
+                entity.setSecondsOnFire(1);
             }
         }
     }

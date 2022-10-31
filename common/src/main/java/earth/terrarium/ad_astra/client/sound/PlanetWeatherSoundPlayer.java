@@ -4,37 +4,36 @@ import earth.terrarium.ad_astra.registry.ModSoundEvents;
 import earth.terrarium.ad_astra.util.ModUtils;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.sound.MovingSoundInstance;
-import net.minecraft.client.sound.SoundInstance;
-import net.minecraft.client.sound.SoundManager;
-import net.minecraft.client.util.ClientPlayerTickable;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.math.MathHelper;
-
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
+import net.minecraft.client.resources.sounds.AmbientSoundHandler;
+import net.minecraft.client.resources.sounds.SoundInstance;
+import net.minecraft.client.sounds.SoundManager;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import java.util.LinkedList;
 import java.util.List;
 
 @Environment(EnvType.CLIENT)
-public class PlanetWeatherSoundPlayer implements ClientPlayerTickable {
+public class PlanetWeatherSoundPlayer implements AmbientSoundHandler {
 
-    private final ClientPlayerEntity player;
+    private final LocalPlayer player;
     private final SoundManager soundManager;
     private final List<MusicLoop> soundLoops = new LinkedList<>();
 
-    public PlanetWeatherSoundPlayer(ClientPlayerEntity player, SoundManager soundManager) {
+    public PlanetWeatherSoundPlayer(LocalPlayer player, SoundManager soundManager) {
         this.player = player;
         this.soundManager = soundManager;
     }
 
     @Override
     public void tick() {
-        this.soundLoops.removeIf(MovingSoundInstance::isDone);
+        this.soundLoops.removeIf(AbstractTickableSoundInstance::isStopped);
         if (soundLoops.isEmpty()) {
-            if (ModUtils.isPlanet(this.player.world) && ModUtils.planetHasAtmosphere(this.player.world)) {
+            if (ModUtils.isPlanet(this.player.level) && ModUtils.planetHasAtmosphere(this.player.level)) {
                 MusicLoop loop = new MusicLoop(this.player, ModSoundEvents.WINDY.get());
                 soundLoops.add(loop);
                 this.soundManager.play(loop);
@@ -43,14 +42,14 @@ public class PlanetWeatherSoundPlayer implements ClientPlayerTickable {
     }
 
     @Environment(value = EnvType.CLIENT)
-    public static class MusicLoop extends MovingSoundInstance {
-        private final ClientPlayerEntity player;
+    public static class MusicLoop extends AbstractTickableSoundInstance {
+        private final LocalPlayer player;
 
-        public MusicLoop(ClientPlayerEntity player, SoundEvent soundEvent) {
-            super(soundEvent, SoundCategory.WEATHER, SoundInstance.method_43221());
+        public MusicLoop(LocalPlayer player, SoundEvent soundEvent) {
+            super(soundEvent, SoundSource.WEATHER, SoundInstance.createUnseededRandom());
             this.player = player;
-            this.repeat = true;
-            this.repeatDelay = 0;
+            this.looping = true;
+            this.delay = 0;
             this.volume = 1.0f;
             this.relative = true;
         }
@@ -58,34 +57,34 @@ public class PlanetWeatherSoundPlayer implements ClientPlayerTickable {
         @Override
         public void tick() {
             if (this.player.isRemoved()) {
-                this.setDone();
+                this.stop();
                 return;
             }
-            ClientWorld world = (ClientWorld) player.getWorld();
-            MinecraftClient client = MinecraftClient.getInstance();
+            ClientLevel level = (ClientLevel) player.getLevel();
+            Minecraft client = Minecraft.getInstance();
 
             double height = 80.0;
             double max = 0.2;
-            if (world.isRaining()) {
+            if (level.isRaining()) {
                 height -= 10.0;
                 max += 0.1;
             }
-            if (world.isThundering()) {
+            if (level.isThundering()) {
                 height -= 50.0;
                 max += 0.2;
             }
-            float volume = (float) MathHelper.clamp((this.player.getY() - 80) / height, 0.0f, max);
+            float volume = (float) Mth.clamp((this.player.getY() - 80) / height, 0.0f, max);
 
-            if (client.currentScreen != null && client.currentScreen.isPauseScreen()) {
+            if (client.screen != null && client.screen.isPauseScreen()) {
                 volume = 0.0f;
                 return;
             }
 
-            if (!ModUtils.isPlanet(world)) {
+            if (!ModUtils.isPlanet(level)) {
                 volume = 0.0f;
                 return;
             }
-            this.volume = MathHelper.clamp(volume, 0.0f, 1.0f);
+            this.volume = Mth.clamp(volume, 0.0f, 1.0f);
         }
     }
 }

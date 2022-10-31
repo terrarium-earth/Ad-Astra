@@ -6,8 +6,8 @@ import earth.terrarium.ad_astra.client.dimension.rendering.DimensionEffects;
 import earth.terrarium.ad_astra.client.resourcepack.PlanetSkyRenderer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.world.World;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.Level;
 import org.apache.commons.lang3.NotImplementedException;
 
 @Environment(EnvType.CLIENT)
@@ -20,7 +20,7 @@ public class ClientModSkies {
     }
 
     @ExpectPlatform
-    public static void registerDimensionEffects(RegistryKey<World> id, DimensionEffects effects) {
+    public static void registerDimensionEffects(ResourceKey<Level> id, DimensionEffects effects) {
         throw new NotImplementedException();
     }
 }

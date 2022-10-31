@@ -7,59 +7,59 @@ import earth.terrarium.ad_astra.items.armour.NetheriteSpaceSuit;
 import earth.terrarium.ad_astra.registry.*;
 import earth.terrarium.ad_astra.screen.PlanetSelectionScreenHandlerFactory;
 import earth.terrarium.ad_astra.screen.handler.PlanetSelectionScreenHandler;
-import earth.terrarium.ad_astra.util.ModIdentifier;
 import earth.terrarium.ad_astra.util.ModKeyBindings;
+import earth.terrarium.ad_astra.util.ModResourceLocation;
 import earth.terrarium.ad_astra.util.ModUtils;
 import earth.terrarium.botarium.api.menu.MenuHooks;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MovementType;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.entity.data.TrackedData;
-import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.network.packet.s2c.play.StopSoundS2CPacket;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.tag.FluidTags;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.protocol.game.ClientboundStopSoundPacket;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.List;
 
 public class RocketEntity extends VehicleEntity {
 
-    protected static final TrackedData<Boolean> HAS_LAUNCH_PAD = DataTracker.registerData(RocketEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-    protected static final TrackedData<Boolean> FLYING = DataTracker.registerData(RocketEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-    protected static final TrackedData<Integer> COUNTDOWN_TICKS = DataTracker.registerData(RocketEntity.class, TrackedDataHandlerRegistry.INTEGER);
-    protected static final TrackedData<Integer> TIER = DataTracker.registerData(RocketEntity.class, TrackedDataHandlerRegistry.INTEGER);
-    protected static final TrackedData<Integer> PHASE = DataTracker.registerData(RocketEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    protected static final EntityDataAccessor<Boolean> HAS_LAUNCH_PAD = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.BOOLEAN);
+    protected static final EntityDataAccessor<Boolean> FLYING = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.BOOLEAN);
+    protected static final EntityDataAccessor<Integer> COUNTDOWN_TICKS = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.INT);
+    protected static final EntityDataAccessor<Integer> TIER = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.INT);
+    protected static final EntityDataAccessor<Integer> PHASE = SynchedEntityData.defineId(RocketEntity.class, EntityDataSerializers.INT);
 
-    private PlayerEntity lastRider;
+    private Player lastRider;
 
-    public RocketEntity(EntityType<?> type, World world, int tier) {
-        super(type, world);
+    public RocketEntity(EntityType<?> type, Level level, int tier) {
+        super(type, level);
         this.setTier(tier);
     }
 
-    public static void stopRocketSoundForRider(ServerPlayerEntity rider) {
-        StopSoundS2CPacket stopSoundS2CPacket = new StopSoundS2CPacket(new ModIdentifier("rocket_fly"), SoundCategory.AMBIENT);
-        rider.networkHandler.sendPacket(stopSoundS2CPacket);
+    public static void stopRocketSoundForRider(ServerPlayer rider) {
+        ClientboundStopSoundPacket stopSoundS2CPacket = new ClientboundStopSoundPacket(new ModResourceLocation("rocket_fly"), SoundSource.AMBIENT);
+        rider.connection.send(stopSoundS2CPacket);
     }
 
     @SuppressWarnings("deprecation")
     public static long getRequiredAmountForLaunch(Fluid fluid) {
-        if (fluid.isIn(ModTags.EFFICIENT_FUELS)) {
+        if (fluid.is(ModTags.EFFICIENT_FUELS)) {
             return AdAstra.CONFIG.rocket.efficientFuelLaunchCost;
         } else {
             return AdAstra.CONFIG.rocket.fuelLaunchCost;
@@ -77,52 +77,52 @@ public class RocketEntity extends VehicleEntity {
     }
 
     @Override
-    public ActionResult interact(PlayerEntity player, Hand hand) {
+    public InteractionResult interact(Player player, InteractionHand hand) {
         super.interact(player, hand);
         this.openInventory(player);
-        return ActionResult.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(HAS_LAUNCH_PAD, false);
-        this.dataTracker.startTracking(FLYING, false);
-        this.dataTracker.startTracking(COUNTDOWN_TICKS, 0);
-        this.dataTracker.startTracking(TIER, 0);
-        this.dataTracker.startTracking(PHASE, 0);
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(HAS_LAUNCH_PAD, false);
+        this.entityData.define(FLYING, false);
+        this.entityData.define(COUNTDOWN_TICKS, 0);
+        this.entityData.define(TIER, 0);
+        this.entityData.define(PHASE, 0);
     }
 
     @Override
-    public Vec3d updatePassengerForDismount(LivingEntity passenger) {
-        super.updatePassengerForDismount(passenger);
-        int exitDirection = Math.round(passenger.getYaw() / 90) * 90;
-        Vec3d pos = passenger.getPos();
+    public Vec3 getDismountLocationForPassenger(LivingEntity passenger) {
+        super.getDismountLocationForPassenger(passenger);
+        int exitDirection = Math.round(passenger.getYRot() / 90) * 90;
+        Vec3 pos = passenger.position();
 
         // Set the position to teleport out of the rocket
-        Vec3d exitPos = switch (exitDirection) {
-            case 0, 360 -> new Vec3d(pos.getX(), pos.getY(), pos.getZ() + 1.5f);
-            case 90 -> new Vec3d(pos.getX() - 1.5f, pos.getY(), pos.getZ());
-            case -90 -> new Vec3d(pos.getX() + 1.5f, pos.getY(), pos.getZ());
-            case -180, 180 -> new Vec3d(pos.getX(), pos.getY(), pos.getZ() - 1.5f);
+        Vec3 exitPos = switch (exitDirection) {
+            case 0, 360 -> new Vec3(pos.x(), pos.y(), pos.z() + 1.5f);
+            case 90 -> new Vec3(pos.x() - 1.5f, pos.y(), pos.z());
+            case -90 -> new Vec3(pos.x() + 1.5f, pos.y(), pos.z());
+            case -180, 180 -> new Vec3(pos.x(), pos.y(), pos.z() - 1.5f);
             default -> throw new IllegalArgumentException("Unexpected value: " + exitDirection);
         };
 
         // Place the rider up to 3 blocks below the rocket
         int checks = 3;
         BlockPos exitBlockPos = new BlockPos(exitPos);
-        while (!this.world.getBlockState(exitBlockPos).isSolidBlock(this.world, exitBlockPos) && checks > 0) {
-            exitBlockPos = exitBlockPos.down();
+        while (!this.level.getBlockState(exitBlockPos).isRedstoneConductor(this.level, exitBlockPos) && checks > 0) {
+            exitBlockPos = exitBlockPos.below();
             checks--;
         }
 
-        BlockState exitBlockState = this.world.getBlockState(exitBlockPos.up());
-        VoxelShape collisionShape = exitBlockState.getCollisionShape(this.world, exitBlockPos);
+        BlockState exitBlockState = this.level.getBlockState(exitBlockPos.above());
+        VoxelShape collisionShape = exitBlockState.getCollisionShape(this.level, exitBlockPos);
         double yOffset = 0.0;
         if (!collisionShape.isEmpty()) {
-            yOffset = exitBlockState.getCollisionShape(this.world, exitBlockPos).getBoundingBox().getYLength();
+            yOffset = exitBlockState.getCollisionShape(this.level, exitBlockPos).bounds().getYsize();
         }
-        return new Vec3d(exitBlockPos.getX(), exitBlockPos.up().getY() + yOffset, exitBlockPos.getZ());
+        return new Vec3(exitBlockPos.getX(), exitBlockPos.above().getY() + yOffset, exitBlockPos.getZ());
     }
 
     public void assignLaunchPad(boolean value) {
@@ -134,7 +134,7 @@ public class RocketEntity extends VehicleEntity {
         super.tick();
 
         // Rotate the rocket when the player strafes left or right.
-        if (this.getFirstPassenger() instanceof PlayerEntity player) {
+        if (this.getFirstPassenger() instanceof Player player) {
             this.lastRider = player;
             if (ModKeyBindings.leftKeyDown(player)) {
                 this.rotateRocketAndPassengers(-1.0f);
@@ -144,16 +144,16 @@ public class RocketEntity extends VehicleEntity {
             }
         }
 
-        if (this.getY() >= AdAstra.CONFIG.rocket.atmosphereLeave || this.getFrozenTicks() > 1000) {
+        if (this.getY() >= AdAstra.CONFIG.rocket.atmosphereLeave || this.getTicksFrozen() > 1000) {
             this.setFlying(true);
         }
         if (!this.isFlying()) {
             if (this.hasLaunchPad()) {
-                BlockState below = world.getBlockState(this.getBlockPos());
+                BlockState below = level.getBlockState(this.blockPosition());
                 if (!(below.getBlock() instanceof LaunchPad)) {
                     this.drop();
                 } else if (below.getBlock() instanceof LaunchPad pad) {
-                    if (!below.get(LaunchPad.LOCATION).equals(LocationState.CENTER)) {
+                    if (!below.getValue(LaunchPad.LOCATION).equals(LocationState.CENTER)) {
                         this.drop();
                     }
                 }
@@ -180,7 +180,7 @@ public class RocketEntity extends VehicleEntity {
                 this.setPhase(3);
             }
         }
-        if (this.isSubmergedIn(FluidTags.LAVA)) {
+        if (this.isEyeInFluid(FluidTags.LAVA)) {
             this.explode(0.45f);
         }
     }
@@ -193,21 +193,21 @@ public class RocketEntity extends VehicleEntity {
     }
 
     public void openPlanetSelectionGui() {
-        if (!this.hasPassengers()) {
-            if (!this.world.isClient) {
+        if (!this.isVehicle()) {
+            if (!this.level.isClientSide) {
                 if (this.lastRider != null) {
-                    ModCriteria.ROCKET_DESTROYED.trigger((ServerPlayerEntity) this.lastRider);
+                    ModCriteria.ROCKET_DESTROYED.trigger((ServerPlayer) this.lastRider);
                 }
             }
             this.explode();
             return;
         }
-        this.getPassengerList().forEach(passenger -> {
-            if (passenger instanceof PlayerEntity player) {
-                if (!(player.currentScreenHandler instanceof PlanetSelectionScreenHandler)) {
-                    if (!this.world.isClient) {
-                        MenuHooks.openMenu((ServerPlayerEntity) player, new PlanetSelectionScreenHandlerFactory(this.getTier()));
-                        stopRocketSoundForRider((ServerPlayerEntity) player);
+        this.getPassengers().forEach(passenger -> {
+            if (passenger instanceof Player player) {
+                if (!(player.containerMenu instanceof PlanetSelectionScreenHandler)) {
+                    if (!this.level.isClientSide) {
+                        MenuHooks.openMenu((ServerPlayer) player, new PlanetSelectionScreenHandlerFactory(this.getTier()));
+                        stopRocketSoundForRider((ServerPlayer) player);
                     }
                 }
             }
@@ -216,35 +216,35 @@ public class RocketEntity extends VehicleEntity {
 
     // When the countdown is in progress and the rocket engine is warming up, releasing smoke.
     public void spawnSmokeParticles() {
-        if (this.world instanceof ServerWorld serverWorld) {
-            Vec3d pos = this.getPos();
-            ModUtils.spawnForcedParticles(serverWorld, ParticleTypes.CAMPFIRE_COSY_SMOKE, pos.getX(), pos.getY(), pos.getZ(), 6, 0.1, 0.1, 0.1, 0.023);
+        if (this.level instanceof ServerLevel serverWorld) {
+            Vec3 pos = this.position();
+            ModUtils.spawnForcedParticles(serverWorld, ParticleTypes.CAMPFIRE_COSY_SMOKE, pos.x(), pos.y(), pos.z(), 6, 0.1, 0.1, 0.1, 0.023);
         }
     }
 
     // When the rocket launches and is burning fuel.
     public void spawnAfterburnerParticles() {
-        if (this.world instanceof ServerWorld serverWorld) {
-            Vec3d pos = this.getPos();
+        if (this.level instanceof ServerLevel serverWorld) {
+            Vec3 pos = this.position();
 
-            ModUtils.spawnForcedParticles(serverWorld, ModParticleTypes.LARGE_FLAME.get(), pos.getX(), pos.getY(), pos.getZ(), 20, 0.1, 0.1, 0.1, 0.001);
-            ModUtils.spawnForcedParticles(serverWorld, ModParticleTypes.LARGE_SMOKE.get(), pos.getX(), pos.getY(), pos.getZ(), 10, 0.1, 0.1, 0.1, 0.001);
+            ModUtils.spawnForcedParticles(serverWorld, ModParticleTypes.LARGE_FLAME.get(), pos.x(), pos.y(), pos.z(), 20, 0.1, 0.1, 0.1, 0.001);
+            ModUtils.spawnForcedParticles(serverWorld, ModParticleTypes.LARGE_SMOKE.get(), pos.x(), pos.y(), pos.z(), 10, 0.1, 0.1, 0.1, 0.001);
         }
     }
 
     // Burn entities under the rocket flames.
     private void burnEntitiesUnderRocket() {
-        List<LivingEntity> entities = world.getEntitiesByClass(LivingEntity.class, this.getBoundingBox().expand(2, 30, 2).offset(0, -37, 0), entity -> true);
+        List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(2, 30, 2).move(0, -37, 0), entity -> true);
         for (LivingEntity entity : entities) {
             if (NetheriteSpaceSuit.hasFullSet(entity) || (entity.getVehicle() != null && entity.getVehicle().equals(this))) {
                 continue;
             }
-            if (AdAstra.CONFIG.rocket.entitiesBurnUnderRocket && !entity.isFireImmune()) {
-                entity.setOnFireFor(10);
-                entity.damage(ModDamageSource.ROCKET_FLAMES, 10);
-                BlockState belowBlock = this.world.getBlockState(entity.getBlockPos().down());
-                if (belowBlock.isFullCube(world, entity.getBlockPos().down()) && belowBlock.isAir()) {
-                    this.world.setBlockState(entity.getBlockPos(), Blocks.FIRE.getDefaultState());
+            if (AdAstra.CONFIG.rocket.entitiesBurnUnderRocket && !entity.fireImmune()) {
+                entity.setSecondsOnFire(10);
+                entity.hurt(ModDamageSource.ROCKET_FLAMES, 10);
+                BlockState belowBlock = this.level.getBlockState(entity.blockPosition().below());
+                if (belowBlock.isCollisionShapeFullBlock(level, entity.blockPosition().below()) && belowBlock.isAir()) {
+                    this.level.setBlockAndUpdate(entity.blockPosition(), Blocks.FIRE.defaultBlockState());
                 }
             }
         }
@@ -252,21 +252,21 @@ public class RocketEntity extends VehicleEntity {
 
     @SuppressWarnings("deprecation")
     private void travel() {
-        double multiplier = (getTankHolder().getFluid().isIn(ModTags.EFFICIENT_FUELS) ? 2.5 : 1.0);
-        if (!this.hasNoGravity()) {
-            this.setVelocity(this.getVelocity().add(0.0, AdAstra.CONFIG.rocket.acceleration * multiplier, 0.0));
+        double multiplier = (getTankHolder().getFluid().is(ModTags.EFFICIENT_FUELS) ? 2.5 : 1.0);
+        if (!this.isNoGravity()) {
+            this.setDeltaMovement(this.getDeltaMovement().add(0.0, AdAstra.CONFIG.rocket.acceleration * multiplier, 0.0));
         }
 
-        if (this.getVelocity().getY() > AdAstra.CONFIG.rocket.maxSpeed * multiplier) {
-            this.setVelocity(0.0, AdAstra.CONFIG.rocket.maxSpeed, 0.0);
+        if (this.getDeltaMovement().y() > AdAstra.CONFIG.rocket.maxSpeed * multiplier) {
+            this.setDeltaMovement(0.0, AdAstra.CONFIG.rocket.maxSpeed, 0.0);
         }
 
-        this.move(MovementType.SELF, this.getVelocity());
+        this.move(MoverType.SELF, this.getDeltaMovement());
     }
 
     public void initiateLaunchSequenceFromServer() {
         initiateLaunchSequence();
-        world.playSound(null, this.getBlockPos(), ModSoundEvents.ROCKET_LAUNCH_SOUND_EVENT.get(), SoundCategory.AMBIENT, 1, 1);
+        level.playSound(null, this.blockPosition(), ModSoundEvents.ROCKET_LAUNCH_SOUND_EVENT.get(), SoundSource.AMBIENT, 1, 1);
     }
 
     // Synonymous on client and server.
@@ -275,48 +275,48 @@ public class RocketEntity extends VehicleEntity {
         this.setFlying(true);
         this.setCountdownTicks(AdAstra.CONFIG.rocket.countDownTicks);
         // For shaking
-        this.setFrozenTicks(Integer.MAX_VALUE);
+        this.setTicksFrozen(Integer.MAX_VALUE);
         getTankHolder().setAmount(getRequiredAmountForLaunch(getTankHolder().getFluid()));
     }
 
     public boolean hasLaunchPad() {
-        return this.dataTracker.get(HAS_LAUNCH_PAD);
+        return this.entityData.get(HAS_LAUNCH_PAD);
     }
 
     public void setLaunchPad(boolean value) {
-        this.dataTracker.set(HAS_LAUNCH_PAD, value);
+        this.entityData.set(HAS_LAUNCH_PAD, value);
     }
 
     public boolean isFlying() {
-        return this.dataTracker.get(FLYING);
+        return this.entityData.get(FLYING);
     }
 
     public void setFlying(boolean value) {
-        this.dataTracker.set(FLYING, value);
+        this.entityData.set(FLYING, value);
     }
 
     public int getCountdownTicks() {
-        return this.dataTracker.get(COUNTDOWN_TICKS);
+        return this.entityData.get(COUNTDOWN_TICKS);
     }
 
     public void setCountdownTicks(int value) {
-        this.dataTracker.set(COUNTDOWN_TICKS, value);
+        this.entityData.set(COUNTDOWN_TICKS, value);
     }
 
     public int getPhase() {
-        return this.dataTracker.get(PHASE);
+        return this.entityData.get(PHASE);
     }
 
     public void setPhase(int value) {
-        this.dataTracker.set(PHASE, value);
+        this.entityData.set(PHASE, value);
     }
 
     public int getTier() {
-        return this.dataTracker.get(TIER);
+        return this.entityData.get(TIER);
     }
 
     public void setTier(int value) {
-        this.dataTracker.set(TIER, value);
+        this.entityData.set(TIER, value);
     }
 
     public int getCountdownSeconds() {
@@ -345,9 +345,9 @@ public class RocketEntity extends VehicleEntity {
 
     @Override
     public void doGravity() {
-        BlockState belowBlock = this.world.getBlockState(this.getBlockPos());
+        BlockState belowBlock = this.level.getBlockState(this.blockPosition());
 
-        if (belowBlock.getBlock() instanceof LaunchPad && belowBlock.get(LaunchPad.LOCATION).equals(LocationState.CENTER)) {
+        if (belowBlock.getBlock() instanceof LaunchPad && belowBlock.getValue(LaunchPad.LOCATION).equals(LocationState.CENTER)) {
             return;
         }
 
@@ -358,30 +358,30 @@ public class RocketEntity extends VehicleEntity {
 
     // Explode on block collision.
     private void explodeIfStopped() {
-        if (this.getVelocity().getY() < 0.05 && this.getVelocity().getY() > -0.000001) {
+        if (this.getDeltaMovement().y() < 0.05 && this.getDeltaMovement().y() > -0.000001) {
             this.explode();
         }
     }
 
     public void explode() {
-        if (this.world instanceof ServerWorld serverWorld) {
+        if (this.level instanceof ServerLevel serverWorld) {
             // Increase explosion power the higher the tier.
             float tierMultiplier = 1 + this.getTier() * 0.25f;
-            if (this.getVelocity().getY() > 4) {
+            if (this.getDeltaMovement().y() > 4) {
                 // Increase explosion power at a high speed.
                 tierMultiplier *= 1.25f;
             }
             if (this.getY() <= AdAstra.CONFIG.rocket.atmosphereLeave) {
-                serverWorld.getPlayers().forEach(RocketEntity::stopRocketSoundForRider);
+                serverWorld.players().forEach(RocketEntity::stopRocketSoundForRider);
             }
             this.explode(tierMultiplier);
         }
     }
 
     public void rotateRocketAndPassengers(float rotation) {
-        ModUtils.rotateVehicleYaw(this, this.getYaw() + rotation);
-        for (Entity passenger : this.getPassengerList()) {
-            passenger.setYaw(passenger.getYaw() + rotation);
+        ModUtils.rotateVehicleYaw(this, this.getYRot() + rotation);
+        for (Entity passenger : this.getPassengers()) {
+            passenger.setYRot(passenger.getYRot() + rotation);
         }
     }
 }

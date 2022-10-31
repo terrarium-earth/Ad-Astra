@@ -3,22 +3,21 @@ package earth.terrarium.ad_astra.recipes;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.ad_astra.registry.ModRecipes;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.RecipeSerializer;
-import net.minecraft.recipe.RecipeType;
-import net.minecraft.util.Identifier;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 
 public class SpaceStationRecipe extends ModRecipe {
 
-    public SpaceStationRecipe(Identifier id, List<Ingredient> input, List<Integer> stackCounts) {
+    public SpaceStationRecipe(ResourceLocation id, List<Ingredient> input, List<Integer> stackCounts) {
         super(id, input, stackCounts);
     }
 
-    public static Codec<SpaceStationRecipe> codec(Identifier id) {
+    public static Codec<SpaceStationRecipe> codec(ResourceLocation id) {
         return RecordCodecBuilder.create(instance -> instance.group(
                 RecordCodecBuilder.point(id),
                 IngredientHolder.CODEC.listOf().fieldOf("ingredients").forGetter(SpaceStationRecipe::getHolders)
@@ -26,7 +25,7 @@ public class SpaceStationRecipe extends ModRecipe {
     }
 
 
-    private static SpaceStationRecipe of(Identifier id, List<IngredientHolder> ingredients) {
+    private static SpaceStationRecipe of(ResourceLocation id, List<IngredientHolder> ingredients) {
         List<Ingredient> input = new ArrayList<>();
         List<Integer> count = new ArrayList<>();
         for (IngredientHolder ingredient : ingredients) {

@@ -1,8 +1,8 @@
 package earth.terrarium.ad_astra.blocks.door;
 
-import net.minecraft.util.StringIdentifiable;
+import net.minecraft.util.StringRepresentable;
 
-public enum LocationState implements StringIdentifiable {
+public enum LocationState implements StringRepresentable {
     TOP_LEFT("top_left"), TOP("top"), TOP_RIGHT("top_right"), LEFT("left"), CENTER("center"), RIGHT("right"), BOTTOM_LEFT("bottom_left"), BOTTOM("bottom"), BOTTOM_RIGHT("bottom_right");
 
     private final String name;
@@ -16,7 +16,7 @@ public enum LocationState implements StringIdentifiable {
     }
 
     @Override
-    public String asString() {
+    public String getSerializedName() {
         return this.name;
     }
 }

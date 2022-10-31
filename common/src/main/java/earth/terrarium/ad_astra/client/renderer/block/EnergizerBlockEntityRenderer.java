@@ -1,49 +1,49 @@
 package earth.terrarium.ad_astra.client.renderer.block;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Vector3f;
 import earth.terrarium.ad_astra.blocks.machines.AbstractMachineBlock;
 import earth.terrarium.ad_astra.blocks.machines.entity.EnergizerBlockEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.WorldRenderer;
-import net.minecraft.client.render.block.entity.BlockEntityRenderer;
-import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
-import net.minecraft.client.render.model.json.ModelTransformation;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.Vec3f;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.LevelRenderer;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.world.item.ItemStack;
 
 @Environment(EnvType.CLIENT)
 public class EnergizerBlockEntityRenderer implements BlockEntityRenderer<EnergizerBlockEntity> {
 
-    public EnergizerBlockEntityRenderer(BlockEntityRendererFactory.Context ctx) {
+    public EnergizerBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {
     }
 
     @Override
-    public void render(EnergizerBlockEntity blockEntity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
-        ItemStack stack = blockEntity.getStack(0);
+    public void render(EnergizerBlockEntity blockEntity, float tickDelta, PoseStack matrices, MultiBufferSource vertexConsumers, int light, int overlay) {
+        ItemStack stack = blockEntity.getItem(0);
 
         if (stack.isEmpty()) {
             return;
         }
 
-        if (!blockEntity.getCachedState().get(AbstractMachineBlock.LIT)) {
+        if (!blockEntity.getBlockState().getValue(AbstractMachineBlock.LIT)) {
             return;
         }
 
-        matrices.push();
+        matrices.pushPose();
 
         // Calculate the current offset in the y value
-        double offset = Math.sin((blockEntity.getWorld().getTime() + tickDelta) / 8.0) / 8.0;
+        double offset = Math.sin((blockEntity.getLevel().getGameTime() + tickDelta) / 8.0) / 8.0;
         // Move the item
         matrices.translate(0.5, 1.6 + offset, 0.5);
 
         // Rotate the item
-        matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion((blockEntity.getWorld().getTime() + tickDelta) * 4));
+        matrices.mulPose(Vector3f.YP.rotationDegrees((blockEntity.getLevel().getGameTime() + tickDelta) * 4));
 
-        int lightAbove = WorldRenderer.getLightmapCoordinates(blockEntity.getWorld(), blockEntity.getPos().up());
-        MinecraftClient.getInstance().getItemRenderer().renderItem(stack, ModelTransformation.Mode.GROUND, lightAbove, overlay, matrices, vertexConsumers, 0);
-        matrices.pop();
+        int lightAbove = LevelRenderer.getLightColor(blockEntity.getLevel(), blockEntity.getBlockPos().above());
+        Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemTransforms.TransformType.GROUND, lightAbove, overlay, matrices, vertexConsumers, 0);
+        matrices.popPose();
     }
 }

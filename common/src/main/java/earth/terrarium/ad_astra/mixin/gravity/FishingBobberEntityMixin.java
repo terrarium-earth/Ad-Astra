@@ -1,16 +1,16 @@
 package earth.terrarium.ad_astra.mixin.gravity;
 
 import earth.terrarium.ad_astra.util.ModUtils;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.projectile.FishingBobberEntity;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.projectile.FishingHook;
+import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(FishingBobberEntity.class)
+@Mixin(FishingHook.class)
 public abstract class FishingBobberEntityMixin {
 
     @Unique
@@ -19,10 +19,10 @@ public abstract class FishingBobberEntityMixin {
     @Inject(method = "tick", at = @At("TAIL"))
     public void adastra_tick(CallbackInfo ci) {
         Entity entity = (Entity) (Object) this;
-        if (!entity.hasNoGravity()) {
-            Vec3d velocity = entity.getVelocity();
-            double newGravity = CONSTANT * ModUtils.getPlanetGravity(entity.world);
-            entity.setVelocity(velocity.getX(), velocity.getY() - CONSTANT + newGravity, velocity.getZ());
+        if (!entity.isNoGravity()) {
+            Vec3 velocity = entity.getDeltaMovement();
+            double newGravity = CONSTANT * ModUtils.getPlanetGravity(entity.level);
+            entity.setDeltaMovement(velocity.x(), velocity.y() - CONSTANT + newGravity, velocity.z());
         }
     }
 }

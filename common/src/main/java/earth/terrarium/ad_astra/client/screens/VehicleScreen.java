@@ -1,14 +1,13 @@
 package earth.terrarium.ad_astra.client.screens;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.screen.handler.VehicleScreenHandler;
-import earth.terrarium.ad_astra.util.ModIdentifier;
+import earth.terrarium.ad_astra.util.ModResourceLocation;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
-
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Inventory;
 import java.awt.*;
 
 @Environment(EnvType.CLIENT)
@@ -16,33 +15,33 @@ public class VehicleScreen extends AbstractVehicleScreen<VehicleScreenHandler> {
 
     public static final int INPUT_TANK_LEFT = 50;
     public static final int INPUT_TANK_TOP = 23;
-    private static final Identifier TEXTURE = new ModIdentifier("textures/gui/screens/vehicle_small.png");
+    private static final ResourceLocation TEXTURE = new ModResourceLocation("textures/gui/screens/vehicle_small.png");
 
-    public VehicleScreen(VehicleScreenHandler handler, PlayerInventory inventory, Text title) {
+    public VehicleScreen(VehicleScreenHandler handler, Inventory inventory, Component title) {
         super(handler, inventory, title, TEXTURE);
-        this.backgroundWidth = 177;
-        this.backgroundHeight = 174;
-        this.playerInventoryTitleY = this.backgroundHeight - 93;
+        this.imageWidth = 177;
+        this.imageHeight = 174;
+        this.inventoryLabelY = this.imageHeight - 93;
     }
 
     @Override
-    protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
+    protected void renderBg(PoseStack matrices, float delta, int mouseX, int mouseY) {
 
-        super.drawBackground(matrices, delta, mouseX, mouseY);
+        super.renderBg(matrices, delta, mouseX, mouseY);
 
-        GuiUtil.drawFluidTank(matrices, this.x + INPUT_TANK_LEFT, this.y + INPUT_TANK_TOP, this.vehicle.getTankSize(), this.handler.getFluids().get(0));
+        GuiUtil.drawFluidTank(matrices, this.leftPos + INPUT_TANK_LEFT, this.topPos + INPUT_TANK_TOP, this.vehicle.getTankSize(), this.menu.getFluids().get(0));
     }
 
-    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+    public void render(PoseStack matrices, int mouseX, int mouseY, float delta) {
         super.render(matrices, mouseX, mouseY, delta);
 
         if (GuiUtil.isHovering(this.getInputTankBounds(), mouseX, mouseY)) {
-            GuiUtil.drawTankTooltip(this, matrices, this.handler.getFluids().get(0).getFluidAmount(), this.vehicle.getTankSize(), this.handler.getFluids().get(0).getFluid(), mouseX, mouseY);
+            GuiUtil.drawTankTooltip(this, matrices, this.menu.getFluids().get(0).getFluidAmount(), this.vehicle.getTankSize(), this.menu.getFluids().get(0).getFluid(), mouseX, mouseY);
         }
     }
 
     public Rectangle getInputTankBounds() {
-        return GuiUtil.getFluidTankBounds(this.x + INPUT_TANK_LEFT, this.y + INPUT_TANK_TOP);
+        return GuiUtil.getFluidTankBounds(this.leftPos + INPUT_TANK_LEFT, this.topPos + INPUT_TANK_TOP);
     }
 
     @Override

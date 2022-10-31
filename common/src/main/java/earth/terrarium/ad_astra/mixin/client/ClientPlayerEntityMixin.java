@@ -11,16 +11,16 @@ import earth.terrarium.ad_astra.items.armour.SpaceSuit;
 import earth.terrarium.ad_astra.util.OxygenUtils;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import earth.terrarium.botarium.api.fluid.PlatformFluidItemHandler;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayNetworkHandler;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.recipebook.ClientRecipeBook;
-import net.minecraft.client.util.ClientPlayerTickable;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.stat.StatHandler;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.ClientRecipeBook;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.multiplayer.ClientPacketListener;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.resources.sounds.AmbientSoundHandler;
+import net.minecraft.stats.StatsCounter;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -30,25 +30,25 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 
-@Mixin(ClientPlayerEntity.class)
+@Mixin(LocalPlayer.class)
 public class ClientPlayerEntityMixin {
 
     @Shadow
     @Final
-    private List<ClientPlayerTickable> tickables;
+    private List<AmbientSoundHandler> ambientSoundHandlers;
 
     @Inject(at = @At(value = "TAIL"), method = "<init>")
-    public void adastra_ClientPlayerEntity(MinecraftClient client, ClientWorld world, ClientPlayNetworkHandler networkHandler, StatHandler stats, ClientRecipeBook recipeBook, boolean lastSneaking, boolean lastSprinting, CallbackInfo ci) {
-        this.tickables.add(new PlanetWeatherSoundPlayer((ClientPlayerEntity) (Object) (this), client.getSoundManager()));
-        this.tickables.add(new PlanetSoundPlayer((ClientPlayerEntity) (Object) (this), client.getSoundManager()));
+    public void adastra_ClientPlayerEntity(Minecraft client, ClientLevel level, ClientPacketListener networkHandler, StatsCounter stats, ClientRecipeBook recipeBook, boolean lastSneaking, boolean lastSprinting, CallbackInfo ci) {
+        this.ambientSoundHandlers.add(new PlanetWeatherSoundPlayer((LocalPlayer) (Object) (this), client.getSoundManager()));
+        this.ambientSoundHandlers.add(new PlanetSoundPlayer((LocalPlayer) (Object) (this), client.getSoundManager()));
 
     }
 
     @Inject(method = "tick", at = @At("TAIL"))
     public void adastra_tick(CallbackInfo ci) {
 
-        ClientPlayerEntity player = ((ClientPlayerEntity) (Object) this);
-        ItemStack chest = player.getEquippedStack(EquipmentSlot.CHEST);
+        LocalPlayer player = ((LocalPlayer) (Object) this);
+        ItemStack chest = player.getItemBySlot(EquipmentSlot.CHEST);
 
         if (SpaceSuit.hasFullSet(player)) {
             PlayerOverlayScreen.shouldRenderOxygen = true;
@@ -56,8 +56,8 @@ public class ClientPlayerEntityMixin {
                 PlatformFluidItemHandler oxygen = FluidHooks.getItemFluidManager(chest);
 
                 // Render oxygen info
-                PlayerOverlayScreen.oxygenRatio = MathHelper.clamp(oxygen.getFluidInTank(0).getFluidAmount() / (double) suit.getTankSize(), 0.0, 1.0);
-                PlayerOverlayScreen.doesNotNeedOxygen = OxygenUtils.entityHasOxygen(player.world, player) && !player.isSubmergedInWater();
+                PlayerOverlayScreen.oxygenRatio = Mth.clamp(oxygen.getFluidInTank(0).getFluidAmount() / (double) suit.getTankSize(), 0.0, 1.0);
+                PlayerOverlayScreen.doesNotNeedOxygen = OxygenUtils.entityHasOxygen(player.level, player) && !player.isUnderWater();
             }
         } else {
             PlayerOverlayScreen.shouldRenderOxygen = false;
@@ -86,7 +86,7 @@ public class ClientPlayerEntityMixin {
             // Show the warning screen when falling in a lander
             if (vehicle instanceof LanderEntity lander) {
 
-                double speed = lander.getVelocity().getY();
+                double speed = lander.getDeltaMovement().y();
                 if (speed != 0.0) {
                     PlayerOverlayScreen.shouldRenderWarning = true;
                     PlayerOverlayScreen.speed = speed * 55;

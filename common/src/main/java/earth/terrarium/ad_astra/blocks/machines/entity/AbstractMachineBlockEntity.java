@@ -3,41 +3,41 @@ package earth.terrarium.ad_astra.blocks.machines.entity;
 import earth.terrarium.ad_astra.blocks.machines.AbstractMachineBlock;
 import earth.terrarium.ad_astra.util.ModInventory;
 import earth.terrarium.botarium.api.menu.ExtraDataMenuProvider;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.Inventories;
-import net.minecraft.inventory.SidedInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.Packet;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.network.listener.ClientPlayPacketListener;
-import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.text.Text;
-import net.minecraft.util.collection.DefaultedList;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.WorldlyContainer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class AbstractMachineBlockEntity extends BlockEntity implements ExtraDataMenuProvider, ModInventory, SidedInventory {
+public abstract class AbstractMachineBlockEntity extends BlockEntity implements ExtraDataMenuProvider, ModInventory, WorldlyContainer {
 
-    private final DefaultedList<ItemStack> inventory;
+    private final NonNullList<ItemStack> inventory;
 
     public AbstractMachineBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
         super(blockEntityType, blockPos, blockState);
-        inventory = DefaultedList.ofSize(getInventorySize(), ItemStack.EMPTY);
+        inventory = NonNullList.withSize(getInventorySize(), ItemStack.EMPTY);
     }
 
     public abstract void tick();
 
     @Override
-    public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
+    public AbstractContainerMenu createMenu(int syncId, Inventory inv, Player player) {
         return null;
     }
 
@@ -46,52 +46,52 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
     }
 
     public void setActive(boolean active) {
-        if (this.getCachedState().contains(AbstractMachineBlock.LIT)) {
-            if (this.getWorld() != null) {
-                this.getWorld().setBlockState(this.getPos(), this.getCachedState().with(AbstractMachineBlock.LIT, active));
+        if (this.getBlockState().hasProperty(AbstractMachineBlock.LIT)) {
+            if (this.getLevel() != null) {
+                this.getLevel().setBlockAndUpdate(this.getBlockPos(), this.getBlockState().setValue(AbstractMachineBlock.LIT, active));
             }
         }
     }
 
     @Override
-    public Text getDisplayName() {
-        return Text.translatable(getCachedState().getBlock().getTranslationKey());
+    public Component getDisplayName() {
+        return Component.translatable(getBlockState().getBlock().getDescriptionId());
     }
 
     @Override
-    public void writeExtraData(ServerPlayerEntity player, PacketByteBuf buf) {
-        buf.writeBlockPos(this.getPos());
+    public void writeExtraData(ServerPlayer player, FriendlyByteBuf buf) {
+        buf.writeBlockPos(this.getBlockPos());
     }
 
     @Override
-    public void readNbt(NbtCompound nbt) {
-        super.readNbt(nbt);
+    public void load(CompoundTag nbt) {
+        super.load(nbt);
         if (getInventorySize() > 0) {
-            Inventories.readNbt(nbt, this.inventory);
+            ContainerHelper.loadAllItems(nbt, this.inventory);
         }
     }
 
     @Override
-    public void writeNbt(NbtCompound nbt) {
-        super.writeNbt(nbt);
+    public void saveAdditional(CompoundTag nbt) {
+        super.saveAdditional(nbt);
         if (getInventorySize() > 0) {
-            Inventories.writeNbt(nbt, this.inventory);
+            ContainerHelper.saveAllItems(nbt, this.inventory);
         }
     }
 
     // Updates the chunk every time the energy is changed. Important for updating
     // the screen to show the latest energy value.
     @Override
-    public void markDirty() {
-        super.markDirty();
+    public void setChanged() {
+        super.setChanged();
 
-        if (this.world instanceof ServerWorld serverWorld) {
-            serverWorld.getChunkManager().markForUpdate(this.pos);
+        if (this.level instanceof ServerLevel serverWorld) {
+            serverWorld.getChunkSource().blockChanged(this.worldPosition);
         }
     }
 
     @Override
-    public int[] getAvailableSlots(Direction side) {
+    public int[] getSlotsForFace(Direction side) {
         int[] result = new int[getItems().size()];
         for (int i = 0; i < result.length; i++) {
             result[i] = i;
@@ -100,29 +100,29 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
     }
 
     @Override
-    public boolean canInsert(int slot, ItemStack stack, Direction dir) {
-        ItemStack slotStack = this.getStack(slot);
-        return slotStack.isEmpty() || (slotStack.isOf(stack.getItem()) && slotStack.getCount() <= slotStack.getMaxCount());
+    public boolean canPlaceItemThroughFace(int slot, ItemStack stack, Direction dir) {
+        ItemStack slotStack = this.getItem(slot);
+        return slotStack.isEmpty() || (slotStack.is(stack.getItem()) && slotStack.getCount() <= slotStack.getMaxStackSize());
     }
 
     @Override
-    public boolean canExtract(int slot, ItemStack stack, Direction dir) {
+    public boolean canTakeItemThroughFace(int slot, ItemStack stack, Direction dir) {
         return true;
     }
 
     @Override
-    public DefaultedList<ItemStack> getItems() {
+    public NonNullList<ItemStack> getItems() {
         return inventory;
     }
 
     @Nullable
     @Override
-    public Packet<ClientPlayPacketListener> toUpdatePacket() {
-        return BlockEntityUpdateS2CPacket.of(this);
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
     }
 
     @Override
-    public NbtCompound toInitialChunkDataNbt() {
-        return this.toNbt();
+    public CompoundTag getUpdateTag() {
+        return this.saveWithoutMetadata();
     }
 }

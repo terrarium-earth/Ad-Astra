@@ -1,49 +1,49 @@
 package earth.terrarium.ad_astra.blocks.machines;
 
 import earth.terrarium.ad_astra.blocks.machines.entity.WaterPumpBlockEntity;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.util.function.BooleanBiFunction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class WaterPumpBlock extends AbstractMachineBlock {
 
-    public static VoxelShape SOUTH_SHAPE = VoxelShapes.empty();
-    public static VoxelShape NORTH_SHAPE = VoxelShapes.empty();
-    public static VoxelShape EAST_SHAPE = VoxelShapes.empty();
-    public static VoxelShape WEST_SHAPE = VoxelShapes.empty();
+    public static VoxelShape SOUTH_SHAPE = Shapes.empty();
+    public static VoxelShape NORTH_SHAPE = Shapes.empty();
+    public static VoxelShape EAST_SHAPE = Shapes.empty();
+    public static VoxelShape WEST_SHAPE = Shapes.empty();
 
     static {
-        NORTH_SHAPE = VoxelShapes.combine(NORTH_SHAPE, VoxelShapes.cuboid(0.34375, 0, 0.34375, 0.65625, 0.0625, 0.65625), BooleanBiFunction.OR);
-        NORTH_SHAPE = VoxelShapes.combine(NORTH_SHAPE, VoxelShapes.cuboid(0.343749, 0.34375, 0, 0.65625, 0.65625, 0.0625), BooleanBiFunction.OR);
-        NORTH_SHAPE = VoxelShapes.combine(NORTH_SHAPE, VoxelShapes.cuboid(0.375, 0.375, 0.0625, 0.625, 0.625, 0.375), BooleanBiFunction.OR);
-        NORTH_SHAPE = VoxelShapes.combine(NORTH_SHAPE, VoxelShapes.cuboid(0.34375, 0.8125, 0.34375, 0.65625, 1, 0.65625), BooleanBiFunction.OR);
-        NORTH_SHAPE = VoxelShapes.combine(NORTH_SHAPE, VoxelShapes.cuboid(0.375, 0.0625, 0.375, 0.625, 0.8125, 0.625), BooleanBiFunction.OR);
+        NORTH_SHAPE = Shapes.joinUnoptimized(NORTH_SHAPE, Shapes.box(0.34375, 0, 0.34375, 0.65625, 0.0625, 0.65625), BooleanOp.OR);
+        NORTH_SHAPE = Shapes.joinUnoptimized(NORTH_SHAPE, Shapes.box(0.343749, 0.34375, 0, 0.65625, 0.65625, 0.0625), BooleanOp.OR);
+        NORTH_SHAPE = Shapes.joinUnoptimized(NORTH_SHAPE, Shapes.box(0.375, 0.375, 0.0625, 0.625, 0.625, 0.375), BooleanOp.OR);
+        NORTH_SHAPE = Shapes.joinUnoptimized(NORTH_SHAPE, Shapes.box(0.34375, 0.8125, 0.34375, 0.65625, 1, 0.65625), BooleanOp.OR);
+        NORTH_SHAPE = Shapes.joinUnoptimized(NORTH_SHAPE, Shapes.box(0.375, 0.0625, 0.375, 0.625, 0.8125, 0.625), BooleanOp.OR);
 
-        SOUTH_SHAPE = VoxelShapes.combine(SOUTH_SHAPE, VoxelShapes.cuboid(0.34375, 0, 0.34375, 0.65625, 0.0625, 0.65625), BooleanBiFunction.OR);
-        SOUTH_SHAPE = VoxelShapes.combine(SOUTH_SHAPE, VoxelShapes.cuboid(0.343749, 0.34375, 0.9375, 0.65625, 0.65625, 1), BooleanBiFunction.OR);
-        SOUTH_SHAPE = VoxelShapes.combine(SOUTH_SHAPE, VoxelShapes.cuboid(0.375, 0.375, 0.625, 0.625, 0.625, 0.9375), BooleanBiFunction.OR);
-        SOUTH_SHAPE = VoxelShapes.combine(SOUTH_SHAPE, VoxelShapes.cuboid(0.34375, 0.8125, 0.34375, 0.65625, 1, 0.65625), BooleanBiFunction.OR);
-        SOUTH_SHAPE = VoxelShapes.combine(SOUTH_SHAPE, VoxelShapes.cuboid(0.375, 0.0625, 0.375, 0.625, 0.8125, 0.625), BooleanBiFunction.OR);
+        SOUTH_SHAPE = Shapes.joinUnoptimized(SOUTH_SHAPE, Shapes.box(0.34375, 0, 0.34375, 0.65625, 0.0625, 0.65625), BooleanOp.OR);
+        SOUTH_SHAPE = Shapes.joinUnoptimized(SOUTH_SHAPE, Shapes.box(0.343749, 0.34375, 0.9375, 0.65625, 0.65625, 1), BooleanOp.OR);
+        SOUTH_SHAPE = Shapes.joinUnoptimized(SOUTH_SHAPE, Shapes.box(0.375, 0.375, 0.625, 0.625, 0.625, 0.9375), BooleanOp.OR);
+        SOUTH_SHAPE = Shapes.joinUnoptimized(SOUTH_SHAPE, Shapes.box(0.34375, 0.8125, 0.34375, 0.65625, 1, 0.65625), BooleanOp.OR);
+        SOUTH_SHAPE = Shapes.joinUnoptimized(SOUTH_SHAPE, Shapes.box(0.375, 0.0625, 0.375, 0.625, 0.8125, 0.625), BooleanOp.OR);
 
-        EAST_SHAPE = VoxelShapes.combine(EAST_SHAPE, VoxelShapes.cuboid(0.34375, 0, 0.34375, 0.65625, 0.0625, 0.65625), BooleanBiFunction.OR);
-        EAST_SHAPE = VoxelShapes.combine(EAST_SHAPE, VoxelShapes.cuboid(0.9375, 0.34375, 0.343749, 1, 0.65625, 0.65625), BooleanBiFunction.OR);
-        EAST_SHAPE = VoxelShapes.combine(EAST_SHAPE, VoxelShapes.cuboid(0.625, 0.375, 0.375, 0.9375, 0.625, 0.625), BooleanBiFunction.OR);
-        EAST_SHAPE = VoxelShapes.combine(EAST_SHAPE, VoxelShapes.cuboid(0.34375, 0.8125, 0.34375, 0.65625, 1, 0.65625), BooleanBiFunction.OR);
-        EAST_SHAPE = VoxelShapes.combine(EAST_SHAPE, VoxelShapes.cuboid(0.375, 0.0625, 0.375, 0.625, 0.8125, 0.625), BooleanBiFunction.OR);
+        EAST_SHAPE = Shapes.joinUnoptimized(EAST_SHAPE, Shapes.box(0.34375, 0, 0.34375, 0.65625, 0.0625, 0.65625), BooleanOp.OR);
+        EAST_SHAPE = Shapes.joinUnoptimized(EAST_SHAPE, Shapes.box(0.9375, 0.34375, 0.343749, 1, 0.65625, 0.65625), BooleanOp.OR);
+        EAST_SHAPE = Shapes.joinUnoptimized(EAST_SHAPE, Shapes.box(0.625, 0.375, 0.375, 0.9375, 0.625, 0.625), BooleanOp.OR);
+        EAST_SHAPE = Shapes.joinUnoptimized(EAST_SHAPE, Shapes.box(0.34375, 0.8125, 0.34375, 0.65625, 1, 0.65625), BooleanOp.OR);
+        EAST_SHAPE = Shapes.joinUnoptimized(EAST_SHAPE, Shapes.box(0.375, 0.0625, 0.375, 0.625, 0.8125, 0.625), BooleanOp.OR);
 
-        WEST_SHAPE = VoxelShapes.combine(WEST_SHAPE, VoxelShapes.cuboid(0.34375, 0, 0.34375, 0.65625, 0.0625, 0.65625), BooleanBiFunction.OR);
-        WEST_SHAPE = VoxelShapes.combine(WEST_SHAPE, VoxelShapes.cuboid(0, 0.34375, 0.343749, 0.0625, 0.65625, 0.65625), BooleanBiFunction.OR);
-        WEST_SHAPE = VoxelShapes.combine(WEST_SHAPE, VoxelShapes.cuboid(0.0625, 0.375, 0.375, 0.375, 0.625, 0.625), BooleanBiFunction.OR);
-        WEST_SHAPE = VoxelShapes.combine(WEST_SHAPE, VoxelShapes.cuboid(0.34375, 0.8125, 0.34375, 0.65625, 1, 0.65625), BooleanBiFunction.OR);
-        WEST_SHAPE = VoxelShapes.combine(WEST_SHAPE, VoxelShapes.cuboid(0.375, 0.0625, 0.375, 0.625, 0.8125, 0.625), BooleanBiFunction.OR);
+        WEST_SHAPE = Shapes.joinUnoptimized(WEST_SHAPE, Shapes.box(0.34375, 0, 0.34375, 0.65625, 0.0625, 0.65625), BooleanOp.OR);
+        WEST_SHAPE = Shapes.joinUnoptimized(WEST_SHAPE, Shapes.box(0, 0.34375, 0.343749, 0.0625, 0.65625, 0.65625), BooleanOp.OR);
+        WEST_SHAPE = Shapes.joinUnoptimized(WEST_SHAPE, Shapes.box(0.0625, 0.375, 0.375, 0.375, 0.625, 0.625), BooleanOp.OR);
+        WEST_SHAPE = Shapes.joinUnoptimized(WEST_SHAPE, Shapes.box(0.34375, 0.8125, 0.34375, 0.65625, 1, 0.65625), BooleanOp.OR);
+        WEST_SHAPE = Shapes.joinUnoptimized(WEST_SHAPE, Shapes.box(0.375, 0.0625, 0.375, 0.625, 0.8125, 0.625), BooleanOp.OR);
     }
 
-    public WaterPumpBlock(Settings settings) {
+    public WaterPumpBlock(Properties settings) {
         super(settings);
     }
 
@@ -53,24 +53,24 @@ public class WaterPumpBlock extends AbstractMachineBlock {
     }
 
     @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return switch (state.get(FACING)) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return switch (state.getValue(FACING)) {
             case NORTH -> NORTH_SHAPE;
             case SOUTH -> SOUTH_SHAPE;
             case EAST -> EAST_SHAPE;
             case WEST -> WEST_SHAPE;
-            default -> throw new IllegalStateException("Unexpected value: " + state.get(FACING));
+            default -> throw new IllegalStateException("Unexpected value: " + state.getValue(FACING));
         };
     }
 
     @Override
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        BlockState state = this.getDefaultState().with(POWERED, false);
-        return this.useFacing() ? state.with(FACING, ctx.getPlayerFacing()) : state;
+    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+        BlockState state = this.defaultBlockState().setValue(POWERED, false);
+        return this.useFacing() ? state.setValue(FACING, ctx.getHorizontalDirection()) : state;
     }
 
     @Override
-    public WaterPumpBlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+    public WaterPumpBlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new WaterPumpBlockEntity(pos, state);
     }
 }

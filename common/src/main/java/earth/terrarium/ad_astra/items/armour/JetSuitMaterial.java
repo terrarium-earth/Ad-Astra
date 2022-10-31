@@ -2,11 +2,11 @@ package earth.terrarium.ad_astra.items.armour;
 
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.registry.ModTags;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.ArmorMaterial;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.crafting.Ingredient;
 
 public class JetSuitMaterial implements ArmorMaterial {
 
@@ -14,28 +14,28 @@ public class JetSuitMaterial implements ArmorMaterial {
     private static final int[] PROTECTION_VALUES = new int[]{4, 7, 9, 4};
 
     @Override
-    public int getDurability(EquipmentSlot slot) {
-        return BASE_DURABILITY[slot.getEntitySlotId()] * 37;
+    public int getDurabilityForSlot(EquipmentSlot slot) {
+        return BASE_DURABILITY[slot.getIndex()] * 37;
     }
 
     @Override
-    public int getProtectionAmount(EquipmentSlot slot) {
-        return PROTECTION_VALUES[slot.getEntitySlotId()] * AdAstra.CONFIG.spaceSuit.jetSuitProtectionMultiplier;
+    public int getDefenseForSlot(EquipmentSlot slot) {
+        return PROTECTION_VALUES[slot.getIndex()] * AdAstra.CONFIG.spaceSuit.jetSuitProtectionMultiplier;
     }
 
     @Override
-    public int getEnchantability() {
+    public int getEnchantmentValue() {
         return 15;
     }
 
     @Override
     public SoundEvent getEquipSound() {
-        return SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE;
+        return SoundEvents.ARMOR_EQUIP_NETHERITE;
     }
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.ofTag(ModTags.CALORITE_INGOTS);
+        return Ingredient.of(ModTags.CALORITE_INGOTS);
     }
 
     @Override

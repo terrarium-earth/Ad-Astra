@@ -4,101 +4,101 @@ import earth.terrarium.ad_astra.entities.mobs.goal.EatPermafrostGoal;
 import earth.terrarium.ad_astra.registry.ModBlocks;
 import earth.terrarium.ad_astra.registry.ModEntityTypes;
 import earth.terrarium.ad_astra.registry.ModItems;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.Shearable;
-import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.ai.pathing.PathNodeType;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.entity.data.TrackedData;
-import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.PassiveEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsage;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
-import net.minecraft.world.event.GameEvent;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.Shearable;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.pathfinder.BlockPathTypes;
 
-public class GlacianRamEntity extends AnimalEntity implements Shearable {
+public class GlacianRamEntity extends Animal implements Shearable {
 
-    private static final TrackedData<Boolean> SHEARED = DataTracker.registerData(GlacianRamEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> SHEARED = SynchedEntityData.defineId(GlacianRamEntity.class, EntityDataSerializers.BOOLEAN);
     private int eatPermafrostTimer;
     private EatPermafrostGoal eatPermafrostGoal;
 
-    public GlacianRamEntity(EntityType<? extends GlacianRamEntity> entityType, World world) {
-        super(entityType, world);
-        this.getNavigation().setCanSwim(true);
-        this.setPathfindingPenalty(PathNodeType.POWDER_SNOW, -1.0f);
-        this.setPathfindingPenalty(PathNodeType.DANGER_POWDER_SNOW, -1.0f);
+    public GlacianRamEntity(EntityType<? extends GlacianRamEntity> entityType, Level level) {
+        super(entityType, level);
+        this.getNavigation().setCanFloat(true);
+        this.setPathfindingMalus(BlockPathTypes.POWDER_SNOW, -1.0f);
+        this.setPathfindingMalus(BlockPathTypes.DANGER_POWDER_SNOW, -1.0f);
     }
 
-    public static DefaultAttributeContainer.Builder createMobAttributes() {
-        return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 16.0).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.20f);
+    public static AttributeSupplier.Builder createMobAttributes() {
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 16.0).add(Attributes.MOVEMENT_SPEED, 0.20f);
     }
 
     @Override
-    protected void initGoals() {
+    protected void registerGoals() {
         this.eatPermafrostGoal = new EatPermafrostGoal(this);
-        this.goalSelector.add(0, new SwimGoal(this));
-        this.goalSelector.add(1, new EscapeDangerGoal(this, 1.25));
-        this.goalSelector.add(2, new AnimalMateGoal(this, 1.0));
-        this.goalSelector.add(3, new TemptGoal(this, 1.1, Ingredient.ofItems(ModItems.ICE_SHARD.get()), false));
-        this.goalSelector.add(4, new FollowParentGoal(this, 1.1));
-        this.goalSelector.add(5, this.eatPermafrostGoal);
-        this.goalSelector.add(6, new WanderAroundFarGoal(this, 1.0));
-        this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
-        this.goalSelector.add(8, new LookAroundGoal(this));
+        this.goalSelector.addGoal(0, new FloatGoal(this));
+        this.goalSelector.addGoal(1, new PanicGoal(this, 1.25));
+        this.goalSelector.addGoal(2, new BreedGoal(this, 1.0));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 1.1, Ingredient.of(ModItems.ICE_SHARD.get()), false));
+        this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1));
+        this.goalSelector.addGoal(5, this.eatPermafrostGoal);
+        this.goalSelector.addGoal(6, new WaterAvoidingRandomStrollGoal(this, 1.0));
+        this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(SHEARED, false);
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(SHEARED, false);
     }
 
     @Override
-    public boolean isBreedingItem(ItemStack stack) {
-        return stack.isOf(ModItems.ICE_SHARD.get());
+    public boolean isFood(ItemStack stack) {
+        return stack.is(ModItems.ICE_SHARD.get());
     }
 
     @Override
-    public void onEatingGrass() {
+    public void ate() {
         this.setSheared(false);
         if (this.isBaby()) {
-            this.growUp(60);
+            this.ageUp(60);
         }
     }
 
     @Override
-    public ActionResult interactMob(PlayerEntity player, Hand hand) {
-        ItemStack itemStack = player.getStackInHand(hand);
-        if (itemStack.isOf(Items.BUCKET) && !this.isBaby()) {
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        ItemStack itemStack = player.getItemInHand(hand);
+        if (itemStack.is(Items.BUCKET) && !this.isBaby()) {
             player.playSound(this.getMilkingSound(), 1.0f, 1.0f);
-            ItemStack itemStack2 = ItemUsage.exchangeStack(itemStack, player, Items.MILK_BUCKET.getDefaultStack());
-            player.setStackInHand(hand, itemStack2);
-            return ActionResult.success(this.world.isClient);
+            ItemStack itemStack2 = ItemUtils.createFilledResult(itemStack, player, Items.MILK_BUCKET.getDefaultInstance());
+            player.setItemInHand(hand, itemStack2);
+            return InteractionResult.sidedSuccess(this.level.isClientSide);
         } else {
-            ActionResult actionResult = super.interactMob(player, hand);
-            if (actionResult.isAccepted() && this.isBreedingItem(itemStack)) {
-                this.world.playSoundFromEntity(null, this, this.getEatSound(itemStack), SoundCategory.NEUTRAL, 1.0f, MathHelper.nextBetween(this.world.random, 0.8f, 1.2f));
+            InteractionResult actionResult = super.mobInteract(player, hand);
+            if (actionResult.consumesAction() && this.isFood(itemStack)) {
+                this.level.playSound(null, this, this.getEatingSound(itemStack), SoundSource.NEUTRAL, 1.0f, Mth.randomBetween(this.level.random, 0.8f, 1.2f));
             }
 
             return this.shear(player, hand);
@@ -106,116 +106,116 @@ public class GlacianRamEntity extends AnimalEntity implements Shearable {
     }
 
     @Override
-    protected void mobTick() {
+    protected void customServerAiStep() {
         this.eatPermafrostTimer = this.eatPermafrostGoal.getTimer();
-        super.mobTick();
+        super.customServerAiStep();
     }
 
     @Override
-    public void tickMovement() {
-        if (this.world.isClient) {
+    public void aiStep() {
+        if (this.level.isClientSide) {
             this.eatPermafrostTimer = Math.max(0, this.eatPermafrostTimer - 1);
         }
 
-        super.tickMovement();
+        super.aiStep();
     }
 
-    public ActionResult shear(PlayerEntity player, Hand hand) {
-        ItemStack itemStack = player.getStackInHand(hand);
-        if (itemStack.isOf(Items.SHEARS)) {
-            if (!this.world.isClient && this.isShearable()) {
-                this.sheared(SoundCategory.PLAYERS);
-                this.emitGameEvent(GameEvent.SHEAR, player);
-                itemStack.damage(1, player, playerx -> playerx.sendToolBreakStatus(hand));
-                return ActionResult.SUCCESS;
+    public InteractionResult shear(Player player, InteractionHand hand) {
+        ItemStack itemStack = player.getItemInHand(hand);
+        if (itemStack.is(Items.SHEARS)) {
+            if (!this.level.isClientSide && this.readyForShearing()) {
+                this.shear(SoundSource.PLAYERS);
+                this.gameEvent(GameEvent.SHEAR, player);
+                itemStack.hurtAndBreak(1, player, playerx -> playerx.broadcastBreakEvent(hand));
+                return InteractionResult.SUCCESS;
             } else {
-                return ActionResult.CONSUME;
+                return InteractionResult.CONSUME;
             }
         } else {
-            return super.interactMob(player, hand);
+            return super.mobInteract(player, hand);
         }
     }
 
     @Override
-    public void sheared(SoundCategory shearedSoundCategory) {
-        this.world.playSoundFromEntity(null, this, SoundEvents.ENTITY_SHEEP_SHEAR, shearedSoundCategory, 1.0F, 1.0F);
+    public void shear(SoundSource shearedSoundCategory) {
+        this.level.playSound(null, this, SoundEvents.SHEEP_SHEAR, shearedSoundCategory, 1.0F, 1.0F);
         this.setSheared(true);
         int i = 1 + this.random.nextInt(3);
 
         for (int j = 0; j < i; ++j) {
-            ItemEntity itemEntity = this.dropItem((ItemConvertible) ModBlocks.GLACIAN_FUR);
+            ItemEntity itemEntity = this.spawnAtLocation((ItemLike) ModBlocks.GLACIAN_FUR);
             if (itemEntity != null) {
-                itemEntity.setVelocity(itemEntity.getVelocity().add((this.random.nextFloat() - this.random.nextFloat()) * 0.1F, this.random.nextFloat() * 0.05F, (this.random.nextFloat() - this.random.nextFloat()) * 0.1F));
+                itemEntity.setDeltaMovement(itemEntity.getDeltaMovement().add((this.random.nextFloat() - this.random.nextFloat()) * 0.1F, this.random.nextFloat() * 0.05F, (this.random.nextFloat() - this.random.nextFloat()) * 0.1F));
             }
         }
 
     }
 
     @Override
-    public boolean isShearable() {
+    public boolean readyForShearing() {
         return this.isAlive() && !this.isSheared() && !this.isBaby();
     }
 
     @Override
-    public void writeCustomDataToNbt(NbtCompound nbt) {
-        super.writeCustomDataToNbt(nbt);
+    public void addAdditionalSaveData(CompoundTag nbt) {
+        super.addAdditionalSaveData(nbt);
         nbt.putBoolean("Sheared", this.isSheared());
     }
 
     @Override
-    public void readCustomDataFromNbt(NbtCompound nbt) {
-        super.readCustomDataFromNbt(nbt);
+    public void readAdditionalSaveData(CompoundTag nbt) {
+        super.readAdditionalSaveData(nbt);
         this.setSheared(nbt.getBoolean("Sheared"));
     }
 
     @Override
-    public GlacianRamEntity createChild(ServerWorld serverWorld, PassiveEntity passiveEntity) {
+    public GlacianRamEntity getBreedOffspring(ServerLevel serverWorld, AgeableMob passiveEntity) {
         return ModEntityTypes.GLACIAN_RAM.get().create(serverWorld);
     }
 
     @Override
-    public SoundEvent getEatSound(ItemStack stack) {
-        return SoundEvents.ENTITY_GOAT_EAT;
+    public SoundEvent getEatingSound(ItemStack stack) {
+        return SoundEvents.GOAT_EAT;
     }
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.ENTITY_GOAT_AMBIENT;
+        return SoundEvents.GOAT_AMBIENT;
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.ENTITY_GOAT_HURT;
+        return SoundEvents.GOAT_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_GOAT_DEATH;
+        return SoundEvents.GOAT_DEATH;
     }
 
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
-        this.playSound(SoundEvents.ENTITY_GOAT_STEP, 0.15F, 1.0F);
+        this.playSound(SoundEvents.GOAT_STEP, 0.15F, 1.0F);
     }
 
     public SoundEvent getMilkingSound() {
-        return SoundEvents.ENTITY_GOAT_MILK;
+        return SoundEvents.GOAT_MILK;
     }
 
     public boolean isSheared() {
-        return this.dataTracker.get(SHEARED);
+        return this.entityData.get(SHEARED);
     }
 
     public void setSheared(boolean shear) {
-        this.dataTracker.set(SHEARED, shear);
+        this.entityData.set(SHEARED, shear);
     }
 
     @Override
-    public void handleStatus(byte status) {
+    public void handleEntityEvent(byte status) {
         if (status == 10) {
             this.eatPermafrostTimer = 40;
         } else {
-            super.handleStatus(status);
+            super.handleEntityEvent(status);
         }
 
     }
@@ -233,9 +233,9 @@ public class GlacianRamEntity extends AnimalEntity implements Shearable {
     public float getHeadAngle(float delta) {
         if (this.eatPermafrostTimer > 4 && this.eatPermafrostTimer <= 36) {
             float f = ((float) (this.eatPermafrostTimer - 4) - delta) / 32.0F;
-            return (float) (Math.PI / 5) + 0.21991149F * MathHelper.sin(f * 28.7F);
+            return (float) (Math.PI / 5) + 0.21991149F * Mth.sin(f * 28.7F);
         } else {
-            return this.eatPermafrostTimer > 0 ? (float) (Math.PI / 5) : this.getPitch() * (float) (Math.PI / 180.0);
+            return this.eatPermafrostTimer > 0 ? (float) (Math.PI / 5) : this.getXRot() * (float) (Math.PI / 180.0);
         }
     }
 }

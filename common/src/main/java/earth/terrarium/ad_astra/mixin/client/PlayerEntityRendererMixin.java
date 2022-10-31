@@ -1,6 +1,8 @@
 package earth.terrarium.ad_astra.mixin.client;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Vector3f;
 import earth.terrarium.ad_astra.client.renderer.armour.JetSuitModel;
 import earth.terrarium.ad_astra.client.renderer.armour.NetheriteSpaceSuitModel;
 import earth.terrarium.ad_astra.client.renderer.armour.SpaceSuitModel;
@@ -8,42 +10,40 @@ import earth.terrarium.ad_astra.items.armour.JetSuit;
 import earth.terrarium.ad_astra.items.armour.SpaceSuit;
 import earth.terrarium.ad_astra.items.vehicles.VehicleItem;
 import earth.terrarium.ad_astra.registry.ModItems;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.AbstractClientPlayerEntity;
-import net.minecraft.client.render.OverlayTexture;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.entity.PlayerEntityRenderer;
-import net.minecraft.client.render.entity.model.BipedEntityModel;
-import net.minecraft.client.render.entity.model.EntityModelLoader;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.Vec3f;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.EntityModelSet;
+import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.player.PlayerRenderer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(PlayerEntityRenderer.class)
+@Mixin(PlayerRenderer.class)
 public class PlayerEntityRendererMixin {
 
-    @Inject(method = "renderRightArm", at = @At("HEAD"), cancellable = true)
-    public void adastra_renderRightArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, CallbackInfo ci) {
-        if (player.getOffHandStack().getItem() instanceof VehicleItem) {
+    @Inject(method = "renderRightHand", at = @At("HEAD"), cancellable = true)
+    public void adastra_renderRightHand(PoseStack matrices, MultiBufferSource vertexConsumers, int light, AbstractClientPlayer player, CallbackInfo ci) {
+        if (player.getOffhandItem().getItem() instanceof VehicleItem) {
             ci.cancel();
             return;
         }
-        if (player.getEquippedStack(EquipmentSlot.CHEST).getItem() instanceof SpaceSuit spaceSuit) {
+        if (player.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof SpaceSuit spaceSuit) {
             ci.cancel();
             this.adastra_renderArm(matrices, vertexConsumers, light, player, true);
         }
     }
 
-    @Inject(method = "renderLeftArm", at = @At("HEAD"), cancellable = true)
-    public void adastra_renderLeftArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, CallbackInfo ci) {
-        if (player.getEquippedStack(EquipmentSlot.CHEST).getItem() instanceof SpaceSuit spaceSuit) {
+    @Inject(method = "renderLeftHand", at = @At("HEAD"), cancellable = true)
+    public void adastra_renderLeftHand(PoseStack matrices, MultiBufferSource vertexConsumers, int light, AbstractClientPlayer player, CallbackInfo ci) {
+        if (player.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof SpaceSuit spaceSuit) {
             ci.cancel();
             this.adastra_renderArm(matrices, vertexConsumers, light, player, false);
         }
@@ -53,25 +53,25 @@ public class PlayerEntityRendererMixin {
     @SuppressWarnings({"unchecked", "rawtypes"})
 
     @Unique
-    private void adastra_renderArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, boolean right) {
-        ItemStack stack = player.getEquippedStack(EquipmentSlot.CHEST);
-        if (stack.getItem() instanceof SpaceSuit spaceSuit) {
+    private void adastra_renderArm(PoseStack matrices, MultiBufferSource vertexConsumers, int light, AbstractClientPlayer player, boolean right) {
+        ItemStack stack = player.getItemBySlot(EquipmentSlot.CHEST);
+        if (stack.getItem() instanceof SpaceSuit) {
 
-            PlayerEntityRenderer renderer = (PlayerEntityRenderer) (Object) (this);
+            PlayerRenderer renderer = (PlayerRenderer) (Object) (this);
 
-            EntityModelLoader modelLoader = MinecraftClient.getInstance().getEntityModelLoader();
+            EntityModelSet modelLoader = Minecraft.getInstance().getEntityModels();
             SpaceSuitModel model;
 
-            if (stack.isOf(ModItems.JET_SUIT.get())) {
-                model = new SpaceSuitModel(modelLoader.getModelPart(JetSuitModel.LAYER_LOCATION), (BipedEntityModel) renderer.getModel(), player, EquipmentSlot.CHEST, stack);
-            } else if (stack.isOf(ModItems.NETHERITE_SPACE_SUIT.get())) {
-                model = new SpaceSuitModel(modelLoader.getModelPart(NetheriteSpaceSuitModel.LAYER_LOCATION), (BipedEntityModel) renderer.getModel(), player, EquipmentSlot.CHEST, stack);
+            if (stack.is(ModItems.JET_SUIT.get())) {
+                model = new SpaceSuitModel(modelLoader.bakeLayer(JetSuitModel.LAYER_LOCATION), (HumanoidModel) renderer.getModel(), player, EquipmentSlot.CHEST, stack);
+            } else if (stack.is(ModItems.NETHERITE_SPACE_SUIT.get())) {
+                model = new SpaceSuitModel(modelLoader.bakeLayer(NetheriteSpaceSuitModel.LAYER_LOCATION), (HumanoidModel) renderer.getModel(), player, EquipmentSlot.CHEST, stack);
             } else {
-                model = new SpaceSuitModel(modelLoader.getModelPart(SpaceSuitModel.LAYER_LOCATION), (BipedEntityModel) renderer.getModel(), player, EquipmentSlot.CHEST, stack);
+                model = new SpaceSuitModel(modelLoader.bakeLayer(SpaceSuitModel.LAYER_LOCATION), (HumanoidModel) renderer.getModel(), player, EquipmentSlot.CHEST, stack);
             }
 
-            matrices.push();
-            matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(4));
+            matrices.pushPose();
+            matrices.mulPose(Vector3f.ZP.rotationDegrees(4));
 
             int decimal = ((SpaceSuit) stack.getItem()).getColor(stack);
             float r = (float) (decimal >> 16 & 0xFF) / 255.0f;
@@ -79,16 +79,16 @@ public class PlayerEntityRendererMixin {
             float b = (float) (decimal & 0xFF) / 255.0f;
 
             if (JetSuit.hasFullSet(player)) {
-                JetSuit.spawnParticles(player.world, player, model);
+                JetSuit.spawnParticles(player.level, player, model);
             }
 
-            VertexConsumer vertex = SpaceSuitModel.getVertex(RenderLayer.getEntityTranslucent(model.getTexture()), player.getEquippedStack(EquipmentSlot.CHEST).hasEnchantments());
+            VertexConsumer vertex = SpaceSuitModel.getVertex(RenderType.entityTranslucent(model.getTextureLocation()), player.getItemBySlot(EquipmentSlot.CHEST).isEnchanted());
             if (right) {
-                model.rightArm.render(matrices, vertex, light, OverlayTexture.DEFAULT_UV, r, g, b, 1.0f);
+                model.rightArm.render(matrices, vertex, light, OverlayTexture.NO_OVERLAY, r, g, b, 1.0f);
             } else {
-                model.leftArm.render(matrices, vertex, light, OverlayTexture.DEFAULT_UV, r, g, b, 1.0f);
+                model.leftArm.render(matrices, vertex, light, OverlayTexture.NO_OVERLAY, r, g, b, 1.0f);
             }
-            matrices.pop();
+            matrices.popPose();
         }
     }
 }

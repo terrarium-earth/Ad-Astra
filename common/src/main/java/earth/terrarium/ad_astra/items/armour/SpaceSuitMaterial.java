@@ -1,11 +1,11 @@
 package earth.terrarium.ad_astra.items.armour;
 
 import earth.terrarium.ad_astra.registry.ModTags;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.ArmorMaterial;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.crafting.Ingredient;
 
 public class SpaceSuitMaterial implements ArmorMaterial {
 
@@ -13,28 +13,28 @@ public class SpaceSuitMaterial implements ArmorMaterial {
     private static final int[] PROTECTION_VALUES = new int[]{2, 5, 6, 2};
 
     @Override
-    public int getDurability(EquipmentSlot slot) {
-        return BASE_DURABILITY[slot.getEntitySlotId()] * 15;
+    public int getDurabilityForSlot(EquipmentSlot slot) {
+        return BASE_DURABILITY[slot.getIndex()] * 15;
     }
 
     @Override
-    public int getProtectionAmount(EquipmentSlot slot) {
-        return PROTECTION_VALUES[slot.getEntitySlotId()];
+    public int getDefenseForSlot(EquipmentSlot slot) {
+        return PROTECTION_VALUES[slot.getIndex()];
     }
 
     @Override
-    public int getEnchantability() {
+    public int getEnchantmentValue() {
         return 14;
     }
 
     @Override
     public SoundEvent getEquipSound() {
-        return SoundEvents.ITEM_ARMOR_EQUIP_LEATHER;
+        return SoundEvents.ARMOR_EQUIP_LEATHER;
     }
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.ofTag(ModTags.STEEL_INGOTS);
+        return Ingredient.of(ModTags.STEEL_INGOTS);
     }
 
     @Override

@@ -4,14 +4,13 @@ import earth.terrarium.ad_astra.registry.ModBlockEntities;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import earth.terrarium.botarium.api.fluid.PlatformFluidHandler;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
-
 import java.util.ArrayList;
 import java.util.List;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class FluidPipeBlockEntity extends BlockEntity implements InteractablePipe<PlatformFluidHandler> {
     private final List<Node<PlatformFluidHandler>> consumers = new ArrayList<>();
@@ -34,15 +33,15 @@ public class FluidPipeBlockEntity extends BlockEntity implements InteractablePip
     @Override
     public void insertInto(PlatformFluidHandler consumer, Direction direction, BlockPos pos) {
 
-        BlockState state = this.getCachedState();
-        BlockState state2 = world.getBlockState(pos);
+        BlockState state = this.getBlockState();
+        BlockState state2 = level.getBlockState(pos);
 
         if (!(state.getBlock() instanceof FluidPipeBlock) || !(state2.getBlock() instanceof FluidPipeBlock)) {
             return;
         }
 
-        PipeState pipeState = state.get(FluidPipeBlock.DIRECTIONS.get(this.getSource().direction()));
-        PipeState pipeState2 = state2.get(FluidPipeBlock.DIRECTIONS.get(direction));
+        PipeState pipeState = state.getValue(FluidPipeBlock.DIRECTIONS.get(this.getSource().direction()));
+        PipeState pipeState2 = state2.getValue(FluidPipeBlock.DIRECTIONS.get(direction));
 
         PlatformFluidHandler input;
         PlatformFluidHandler output;
@@ -66,7 +65,7 @@ public class FluidPipeBlockEntity extends BlockEntity implements InteractablePip
         if (getSource() != null && getConsumers().size() > 0) {
             for (FluidHolder fluid : input.getFluidTanks()) {
                 if (!fluid.isEmpty()) {
-                    FluidHolder transfer = FluidHooks.newFluidHolder(fluid.getFluid(), ((FluidPipeBlock) this.getCachedState().getBlock()).getTransferRate(), fluid.getCompound());
+                    FluidHolder transfer = FluidHooks.newFluidHolder(fluid.getFluid(), ((FluidPipeBlock) this.getBlockState().getBlock()).getTransferRate(), fluid.getCompound());
                     FluidHooks.moveFluid(input, output, transfer);
                 }
             }
@@ -74,8 +73,8 @@ public class FluidPipeBlockEntity extends BlockEntity implements InteractablePip
     }
 
     @Override
-    public PlatformFluidHandler getInteraction(World world, BlockPos pos, Direction direction) {
-        BlockEntity blockEntity = world.getBlockEntity(pos);
+    public PlatformFluidHandler getInteraction(Level level, BlockPos pos, Direction direction) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity != null) {
             return FluidHooks.safeGetBlockFluidManager(blockEntity, direction).orElse(null);
         }
@@ -108,13 +107,13 @@ public class FluidPipeBlockEntity extends BlockEntity implements InteractablePip
     }
 
     @Override
-    public World getPipeWorld() {
-        return this.world;
+    public Level getPipelevel() {
+        return this.level;
     }
 
     @Override
     public long getTransferAmount() {
-        if (this.getCachedState().getBlock() instanceof FluidPipeBlock fluidPipe) {
+        if (this.getBlockState().getBlock() instanceof FluidPipeBlock fluidPipe) {
             return fluidPipe.getTransferRate();
         }
         return 0;
@@ -122,6 +121,6 @@ public class FluidPipeBlockEntity extends BlockEntity implements InteractablePip
 
     @Override
     public BlockPos getPipePos() {
-        return this.getPos();
+        return this.getBlockPos();
     }
 }

@@ -1,29 +1,28 @@
 package earth.terrarium.ad_astra.recipes;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.util.Identifier;
-
 import java.util.List;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 
 public abstract class CookingRecipe extends ModRecipe {
 
     private final ItemStack output;
     private short cookTime;
 
-    public CookingRecipe(Identifier id, Ingredient input, ItemStack output, short cookTime) {
+    public CookingRecipe(ResourceLocation id, Ingredient input, ItemStack output, short cookTime) {
         super(id, input);
         this.output = output;
         this.cookTime = cookTime;
     }
 
-    public CookingRecipe(Identifier id, List<Ingredient> input, List<Integer> stackCounts, ItemStack output) {
+    public CookingRecipe(ResourceLocation id, List<Ingredient> input, List<Integer> stackCounts, ItemStack output) {
         super(id, input, stackCounts);
         this.output = output;
     }
 
     @Override
-    public ItemStack getOutput() {
+    public ItemStack getResultItem() {
         return this.output.copy();
     }
 

@@ -1,21 +1,21 @@
 package earth.terrarium.ad_astra.screen.handler;
 
 import earth.terrarium.ad_astra.registry.ModScreenHandlers;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.screen.ScreenHandler;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
 
-public class PlanetSelectionScreenHandler extends ScreenHandler {
+public class PlanetSelectionScreenHandler extends AbstractContainerMenu {
 
-    private final PlayerEntity player;
+    private final Player player;
     private final int tier;
 
-    public PlanetSelectionScreenHandler(int syncId, PlayerEntity player, PacketByteBuf buf) {
+    public PlanetSelectionScreenHandler(int syncId, Player player, FriendlyByteBuf buf) {
         this(syncId, player, buf.readInt());
     }
 
-    public PlanetSelectionScreenHandler(int syncId, PlayerEntity player, int tier) {
+    public PlanetSelectionScreenHandler(int syncId, Player player, int tier) {
         super(ModScreenHandlers.PLANET_SELECTION_SCREEN_HANDLER.get(), syncId);
         this.tier = tier;
         this.player = player;
@@ -25,17 +25,17 @@ public class PlanetSelectionScreenHandler extends ScreenHandler {
         return tier;
     }
 
-    public PlayerEntity getPlayer() {
+    public Player getPlayer() {
         return player;
     }
 
     @Override
-    public boolean canUse(PlayerEntity player) {
-        return !player.isDead();
+    public boolean stillValid(Player player) {
+        return !player.isDeadOrDying();
     }
 
     @Override
-    public ItemStack quickTransfer(PlayerEntity player, int index) {
+    public ItemStack quickMoveStack(Player player, int index) {
         return null;
     }
 }

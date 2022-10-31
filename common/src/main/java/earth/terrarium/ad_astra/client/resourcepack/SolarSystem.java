@@ -6,16 +6,16 @@ import com.teamresourceful.resourcefullib.common.color.Color;
 import earth.terrarium.ad_astra.data.ButtonColour;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
 @Environment(EnvType.CLIENT)
-public record SolarSystem(Identifier galaxy, Identifier solarSystem, Identifier sun, int sunScale,
+public record SolarSystem(ResourceLocation galaxy, ResourceLocation solarSystem, ResourceLocation sun, int sunScale,
                           ButtonColour buttonColour, Color ringColour) {
 
     public static final Codec<SolarSystem> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            Identifier.CODEC.fieldOf("galaxy").forGetter(SolarSystem::galaxy),
-            Identifier.CODEC.fieldOf("solar_system").forGetter(SolarSystem::solarSystem),
-            Identifier.CODEC.fieldOf("sun").forGetter(SolarSystem::sun),
+            ResourceLocation.CODEC.fieldOf("galaxy").forGetter(SolarSystem::galaxy),
+            ResourceLocation.CODEC.fieldOf("solar_system").forGetter(SolarSystem::solarSystem),
+            ResourceLocation.CODEC.fieldOf("sun").forGetter(SolarSystem::sun),
             Codec.INT.fieldOf("sun_scale").forGetter(SolarSystem::sunScale),
             ButtonColour.CODEC.fieldOf("button_color").forGetter(SolarSystem::buttonColour),
             Color.CODEC.fieldOf("ring_color").forGetter(SolarSystem::ringColour)

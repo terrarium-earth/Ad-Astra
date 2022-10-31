@@ -4,18 +4,18 @@ import earth.terrarium.ad_astra.blocks.machines.entity.OxygenDistributorBlockEnt
 import earth.terrarium.ad_astra.networking.NetworkHandling;
 import earth.terrarium.ad_astra.networking.packets.server.MachineInfoPacket;
 import earth.terrarium.ad_astra.registry.ModScreenHandlers;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.screen.slot.Slot;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 
 public class OxygenDistributorScreenHandler extends AbstractMachineScreenHandler<OxygenDistributorBlockEntity> {
 
-    public OxygenDistributorScreenHandler(int syncId, PlayerInventory inventory, PacketByteBuf buf) {
-        this(syncId, inventory, (OxygenDistributorBlockEntity) inventory.player.world.getBlockEntity(buf.readBlockPos()));
+    public OxygenDistributorScreenHandler(int syncId, Inventory inventory, FriendlyByteBuf buf) {
+        this(syncId, inventory, (OxygenDistributorBlockEntity) inventory.player.level.getBlockEntity(buf.readBlockPos()));
     }
 
-    public OxygenDistributorScreenHandler(int syncId, PlayerInventory inventory, OxygenDistributorBlockEntity entity) {
+    public OxygenDistributorScreenHandler(int syncId, Inventory inventory, OxygenDistributorBlockEntity entity) {
         super(ModScreenHandlers.OXYGEN_DISTRIBUTOR_SCREEN_HANDLER.get(), syncId, inventory, entity, new Slot[]{
 
                 // Left Insert.
@@ -23,7 +23,7 @@ public class OxygenDistributorScreenHandler extends AbstractMachineScreenHandler
                 // Left Extract.
                 new Slot(entity, 1, 17, 112) {
                     @Override
-                    public boolean canInsert(ItemStack stack) {
+                    public boolean mayPlace(ItemStack stack) {
                         return false;
                     }
                 }});

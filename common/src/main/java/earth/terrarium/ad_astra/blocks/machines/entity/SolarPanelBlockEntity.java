@@ -7,13 +7,13 @@ import earth.terrarium.ad_astra.util.ModUtils;
 import earth.terrarium.botarium.api.energy.EnergyBlock;
 import earth.terrarium.botarium.api.energy.EnergyHooks;
 import earth.terrarium.botarium.api.energy.ExtractOnlyEnergyContainer;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 public class SolarPanelBlockEntity extends AbstractMachineBlockEntity implements EnergyBlock {
@@ -23,9 +23,9 @@ public class SolarPanelBlockEntity extends AbstractMachineBlockEntity implements
         super(ModBlockEntities.SOLAR_PANEL.get(), blockPos, blockState);
     }
 
-    public static long getEnergyForDimension(World world) {
-        if (world != null) {
-            return (long) (ModUtils.getSolarEnergy(world) * AdAstra.CONFIG.solarPanel.energyMultiplier);
+    public static long getEnergyForDimension(Level level) {
+        if (level != null) {
+            return (long) (ModUtils.getSolarEnergy(level) * AdAstra.CONFIG.solarPanel.energyMultiplier);
         } else {
             return 0;
         }
@@ -33,15 +33,15 @@ public class SolarPanelBlockEntity extends AbstractMachineBlockEntity implements
 
     @Nullable
     @Override
-    public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
+    public AbstractContainerMenu createMenu(int syncId, Inventory inv, Player player) {
         return new SolarPanelScreenHandler(syncId, inv, this);
     }
 
     @Override
     public void tick() {
-        if (!this.world.isClient()) {
+        if (!this.level.isClientSide()) {
             // Check solar panel conditions.
-            if (world.isDay() && (!this.world.getRegistryKey().equals(World.OVERWORLD) || !this.world.isRaining() && !this.world.isThundering()) && world.isSkyVisible(this.getPos().up())) {
+            if (level.isDay() && (!this.level.dimension().equals(Level.OVERWORLD) || !this.level.isRaining() && !this.level.isThundering()) && level.canSeeSky(this.getBlockPos().above())) {
                 this.getEnergyStorage().internalInsert(this.getEnergyPerTick(), false);
                 this.setActive(true);
             } else {
@@ -53,7 +53,7 @@ public class SolarPanelBlockEntity extends AbstractMachineBlockEntity implements
     }
 
     public long getEnergyPerTick() {
-        return getEnergyForDimension(this.getWorld());
+        return getEnergyForDimension(this.getLevel());
     }
 
     public long getMaxCapacity() {
@@ -67,7 +67,7 @@ public class SolarPanelBlockEntity extends AbstractMachineBlockEntity implements
 
     @Override
     public void update() {
-        this.markDirty();
-        this.getWorld().updateListeners(this.getPos(), this.getCachedState(), this.getCachedState(), Block.NOTIFY_ALL);
+        this.setChanged();
+        this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
     }
 }

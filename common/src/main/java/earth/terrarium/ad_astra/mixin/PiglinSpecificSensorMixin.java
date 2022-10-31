@@ -2,11 +2,6 @@ package earth.terrarium.ad_astra.mixin;
 
 import earth.terrarium.ad_astra.entities.mobs.PygroBruteEntity;
 import earth.terrarium.ad_astra.entities.mobs.PygroEntity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.brain.MemoryModuleType;
-import net.minecraft.entity.ai.brain.sensor.PiglinSpecificSensor;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -14,23 +9,28 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Optional;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.minecraft.world.entity.ai.sensing.PiglinSpecificSensor;
 
 @Mixin(PiglinSpecificSensor.class)
 public class PiglinSpecificSensorMixin {
 
     // Disable Pygros running away from soul blocks.
-    @Inject(method = "findPiglinRepellent", at = @At("HEAD"), cancellable = true)
-    private static void adastra_findPiglinRepellent(ServerWorld world, LivingEntity entity, CallbackInfoReturnable<Optional<BlockPos>> ci) {
+    @Inject(method = "findNearestRepellent", at = @At("HEAD"), cancellable = true)
+    private static void adastra_findPiglinRepellent(ServerLevel level, LivingEntity entity, CallbackInfoReturnable<Optional<BlockPos>> ci) {
         if (entity instanceof PygroEntity || entity instanceof PygroBruteEntity) {
-            ci.setReturnValue(BlockPos.findClosest(entity.getBlockPos(), 8, 4, pos -> false));
+            ci.setReturnValue(BlockPos.findClosestMatch(entity.blockPosition(), 8, 4, pos -> false));
         }
     }
 
     // Disable Pygros attacking players without gold.
-    @Inject(method = "sense", at = @At("TAIL"))
-    public void adastra_sense(ServerWorld world, LivingEntity entity, CallbackInfo ci) {
+    @Inject(method = "doTick", at = @At("TAIL"))
+    public void adastra_sense(ServerLevel level, LivingEntity entity, CallbackInfo ci) {
         if (entity instanceof PygroEntity || entity instanceof PygroBruteEntity) {
-            entity.getBrain().forget(MemoryModuleType.NEAREST_TARGETABLE_PLAYER_NOT_WEARING_GOLD);
+            entity.getBrain().eraseMemory(MemoryModuleType.NEAREST_TARGETABLE_PLAYER_NOT_WEARING_GOLD);
         }
     }
 }

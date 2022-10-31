@@ -1,8 +1,8 @@
 package earth.terrarium.ad_astra.blocks.pipes;
 
-import net.minecraft.util.StringIdentifiable;
+import net.minecraft.util.StringRepresentable;
 
-public enum PipeState implements StringIdentifiable {
+public enum PipeState implements StringRepresentable {
     NONE("none"), NORMAL("normal"), INSERT("insert"), EXTRACT("extract");
 
     private final String name;
@@ -16,7 +16,7 @@ public enum PipeState implements StringIdentifiable {
     }
 
     @Override
-    public String asString() {
+    public String getSerializedName() {
         return this.name;
     }
 }

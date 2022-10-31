@@ -4,10 +4,9 @@ import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHoldingItem;
 import earth.terrarium.botarium.api.fluid.ItemFilteredFluidContainer;
 import earth.terrarium.botarium.api.fluid.ItemFluidContainer;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.item.ItemStack;
-
 import java.util.function.BiPredicate;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.material.Fluid;
 
 public interface FluidContainingItem extends FluidHoldingItem {
 

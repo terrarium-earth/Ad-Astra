@@ -3,10 +3,10 @@ package earth.terrarium.ad_astra.registry;
 import com.mojang.brigadier.CommandDispatcher;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import earth.terrarium.ad_astra.commands.PlanetGuiCommand;
-import net.minecraft.server.command.ServerCommandSource;
 import org.apache.commons.lang3.NotImplementedException;
 
 import java.util.function.Consumer;
+import net.minecraft.commands.CommandSourceStack;
 
 public class ModCommands {
     public static void register() {
@@ -14,7 +14,7 @@ public class ModCommands {
     }
 
     @ExpectPlatform
-    public static void registerCommand(Consumer<CommandDispatcher<ServerCommandSource>> command) {
+    public static void registerCommand(Consumer<CommandDispatcher<CommandSourceStack>> command) {
         throw new NotImplementedException();
     }
 }

@@ -1,198 +1,194 @@
 package earth.terrarium.ad_astra.blocks.flags;
 
 import com.mojang.authlib.GameProfile;
-import net.minecraft.block.*;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.enums.DoubleBlockHalf;
-import net.minecraft.block.piston.PistonBehavior;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.pathing.NavigationType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.state.property.EnumProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.BlockMirror;
-import net.minecraft.util.BlockRotation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.*;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("deprecation")
-public class FlagBlock extends BlockWithEntity implements Waterloggable {
-    public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
-    public static final EnumProperty<DoubleBlockHalf> HALF = Properties.DOUBLE_BLOCK_HALF;
-    public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
+public class FlagBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
+    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-    public FlagBlock(Settings settings) {
+    public FlagBlock(Properties settings) {
         super(settings);
-        this.setDefaultState(this.stateManager.getDefaultState().with(WATERLOGGED, false).with(HALF, DoubleBlockHalf.LOWER));
+        this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false).setValue(HALF, DoubleBlockHalf.LOWER));
     }
 
     @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 
-        if (state.get(HALF).equals(DoubleBlockHalf.LOWER)) {
-            switch (state.get(FACING)) {
+        if (state.getValue(HALF).equals(DoubleBlockHalf.LOWER)) {
+            switch (state.getValue(FACING)) {
                 case NORTH -> {
-                    VoxelShape shape = VoxelShapes.empty();
-                    shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.375, 0, 0.375, 0.625, 0.5, 0.625));
-                    shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.4375, 0, 0.4375, 0.5625, 1, 0.5625));
+                    VoxelShape shape = Shapes.empty();
+                    shape = Shapes.or(shape, Shapes.box(0.375, 0, 0.375, 0.625, 0.5, 0.625));
+                    shape = Shapes.or(shape, Shapes.box(0.4375, 0, 0.4375, 0.5625, 1, 0.5625));
                     return shape;
                 }
                 case EAST -> {
-                    VoxelShape shape = VoxelShapes.empty();
-                    shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.375, -0.5, 0.375, 0.625, 0, 0.625));
-                    shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.4375, -0.5, 0.4375, 0.5625, 0.5, 0.5625));
+                    VoxelShape shape = Shapes.empty();
+                    shape = Shapes.or(shape, Shapes.box(0.375, -0.5, 0.375, 0.625, 0, 0.625));
+                    shape = Shapes.or(shape, Shapes.box(0.4375, -0.5, 0.4375, 0.5625, 0.5, 0.5625));
                     return shape;
                 }
                 case SOUTH -> {
-                    VoxelShape shape = VoxelShapes.empty();
-                    shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.375, 0, 0.375, 0.625, 0.5, 0.625));
-                    shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.4375, 0, 0.4375, 0.5625, 1, 0.5625));
+                    VoxelShape shape = Shapes.empty();
+                    shape = Shapes.or(shape, Shapes.box(0.375, 0, 0.375, 0.625, 0.5, 0.625));
+                    shape = Shapes.or(shape, Shapes.box(0.4375, 0, 0.4375, 0.5625, 1, 0.5625));
                     return shape;
                 }
                 case WEST -> {
-                    VoxelShape shape = VoxelShapes.empty();
-                    shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.375, 0, 0.375, 0.625, 0.5, 0.625));
-                    shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.4375, 0, 0.4375, 0.5625, 1, 0.5625));
+                    VoxelShape shape = Shapes.empty();
+                    shape = Shapes.or(shape, Shapes.box(0.375, 0, 0.375, 0.625, 0.5, 0.625));
+                    shape = Shapes.or(shape, Shapes.box(0.4375, 0, 0.4375, 0.5625, 1, 0.5625));
                     return shape;
                 }
-                default -> throw new IllegalStateException("Unexpected value: " + state.get(FACING));
+                default -> throw new IllegalStateException("Unexpected value: " + state.getValue(FACING));
             }
 
         } else {
-            switch (state.get(FACING)) {
+            switch (state.getValue(FACING)) {
                 case NORTH -> {
-                    VoxelShape shape = VoxelShapes.empty();
-                    shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.4375, 0, 0.4375, 0.5625, 1.5, 0.5625));
-                    shape = VoxelShapes.union(shape, VoxelShapes.cuboid(-0.9375, 0.4375, 0.46875, 0.4375, 1.4375, 0.53125));
+                    VoxelShape shape = Shapes.empty();
+                    shape = Shapes.or(shape, Shapes.box(0.4375, 0, 0.4375, 0.5625, 1.5, 0.5625));
+                    shape = Shapes.or(shape, Shapes.box(-0.9375, 0.4375, 0.46875, 0.4375, 1.4375, 0.53125));
                     return shape;
                 }
                 case EAST -> {
-                    VoxelShape shape = VoxelShapes.empty();
-                    shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.4375, 0, 0.4375, 0.5625, 1.5, 0.5625));
-                    shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.46875, 0.4375, -0.9375, 0.53125, 1.4375, 0.4375));
+                    VoxelShape shape = Shapes.empty();
+                    shape = Shapes.or(shape, Shapes.box(0.4375, 0, 0.4375, 0.5625, 1.5, 0.5625));
+                    shape = Shapes.or(shape, Shapes.box(0.46875, 0.4375, -0.9375, 0.53125, 1.4375, 0.4375));
                     return shape;
                 }
                 case SOUTH -> {
-                    VoxelShape shape = VoxelShapes.empty();
-                    shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.4375, 0, 0.4375, 0.5625, 1.5, 0.5625));
-                    shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.5625, 0.4375, 0.46875, 1.9375, 1.4375, 0.53125));
+                    VoxelShape shape = Shapes.empty();
+                    shape = Shapes.or(shape, Shapes.box(0.4375, 0, 0.4375, 0.5625, 1.5, 0.5625));
+                    shape = Shapes.or(shape, Shapes.box(0.5625, 0.4375, 0.46875, 1.9375, 1.4375, 0.53125));
                     return shape;
                 }
                 case WEST -> {
-                    VoxelShape shape = VoxelShapes.empty();
-                    shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.4375, 0, 0.4375, 0.5625, 1.5, 0.5625));
-                    shape = VoxelShapes.union(shape, VoxelShapes.cuboid(0.46875, 0.4375, 0.5625, 0.53125, 1.4375, 1.9375));
+                    VoxelShape shape = Shapes.empty();
+                    shape = Shapes.or(shape, Shapes.box(0.4375, 0, 0.4375, 0.5625, 1.5, 0.5625));
+                    shape = Shapes.or(shape, Shapes.box(0.46875, 0.4375, 0.5625, 0.53125, 1.4375, 1.9375));
                     return shape;
                 }
-                default -> throw new IllegalStateException("Unexpected value: " + state.get(FACING));
+                default -> throw new IllegalStateException("Unexpected value: " + state.getValue(FACING));
             }
         }
     }
 
     @Override
-    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
-        super.neighborUpdate(state, world, pos, block, fromPos, notify);
-        if (!world.isClient) {
-            if (world.getBlockState(pos).get(HALF).equals(DoubleBlockHalf.LOWER) && world.getBlockState(pos.up()).isAir()) {
-                world.breakBlock(pos, false);
-            } else if (world.getBlockState(pos).get(HALF).equals(DoubleBlockHalf.UPPER) && world.getBlockState(pos.down()).isAir()) {
-                world.breakBlock(pos, false);
+    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
+        super.neighborChanged(state, level, pos, block, fromPos, notify);
+        if (!level.isClientSide) {
+            if (level.getBlockState(pos).getValue(HALF).equals(DoubleBlockHalf.LOWER) && level.getBlockState(pos.above()).isAir()) {
+                level.destroyBlock(pos, false);
+            } else if (level.getBlockState(pos).getValue(HALF).equals(DoubleBlockHalf.UPPER) && level.getBlockState(pos.below()).isAir()) {
+                level.destroyBlock(pos, false);
             }
         }
     }
 
     @Override
-    public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
+    public boolean isPathfindable(BlockState state, BlockGetter level, BlockPos pos, PathComputationType type) {
         return false;
     }
 
     @Override
-    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
-        super.onPlaced(world, pos, state, placer, itemStack);
+    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        super.setPlacedBy(level, pos, state, placer, itemStack);
 
-        boolean waterAbove = world.getFluidState(pos.up()).isOf(Fluids.WATER);
-        world.setBlockState(pos.up(), state.with(HALF, DoubleBlockHalf.UPPER).with(WATERLOGGED, waterAbove), 3);
+        boolean waterAbove = level.getFluidState(pos.above()).is(Fluids.WATER);
+        level.setBlock(pos.above(), state.setValue(HALF, DoubleBlockHalf.UPPER).setValue(WATERLOGGED, waterAbove), 3);
 
-        BlockEntity blockEntity = world.getBlockEntity(pos.up());
+        BlockEntity blockEntity = level.getBlockEntity(pos.above());
 
-        if (placer instanceof PlayerEntity player) {
+        if (placer instanceof Player player) {
             if (blockEntity instanceof FlagBlockEntity flagEntity) {
                 GameProfile profile = player.getGameProfile();
                 flagEntity.setOwner(profile);
-                flagEntity.toNbt();
+                flagEntity.saveWithoutMetadata();
             }
         }
     }
 
     @Override
-    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new FlagBlockEntity(pos, state);
     }
 
     @Override
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-        if (state.get(WATERLOGGED)) {
-            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+        if (state.getValue(WATERLOGGED)) {
+            level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
-        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+        return super.updateShape(state, direction, neighborState, level, pos, neighborPos);
     }
 
     @Override
-    public PistonBehavior getPistonBehavior(BlockState state) {
-        return PistonBehavior.DESTROY;
+    public PushReaction getPistonPushReaction(BlockState state) {
+        return PushReaction.DESTROY;
     }
 
     @Override
-    public BlockState rotate(BlockState state, BlockRotation rotation) {
-        return state.with(FACING, rotation.rotate(state.get(FACING)));
+    public BlockState rotate(BlockState state, Rotation rotation) {
+        return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
     }
 
     @Override
-    public BlockState mirror(BlockState state, BlockMirror mirror) {
-        return state.rotate(mirror.getRotation(state.get(FACING)));
+    public BlockState mirror(BlockState state, Mirror mirror) {
+        return state.rotate(mirror.getRotation(state.getValue(FACING)));
     }
 
     @Override
-    public long getRenderingSeed(BlockState state, BlockPos pos) {
-        return MathHelper.hashCode(pos.getX(), pos.down(state.get(HALF).equals(DoubleBlockHalf.LOWER) ? 0 : 1).getY(), pos.getZ());
+    public long getSeed(BlockState state, BlockPos pos) {
+        return Mth.getSeed(pos.getX(), pos.below(state.getValue(HALF).equals(DoubleBlockHalf.LOWER) ? 0 : 1).getY(), pos.getZ());
     }
 
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING, WATERLOGGED, HALF);
     }
 
     @Override
-    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        return Block.hasTopRim(world, pos.down());
+    public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+        return Block.canSupportRigidBlock(level, pos.below());
     }
 
     @Override
     public FluidState getFluidState(BlockState state) {
-        if (state.get(WATERLOGGED)) {
-            return Fluids.WATER.getStill(false);
+        if (state.getValue(WATERLOGGED)) {
+            return Fluids.WATER.getSource(false);
         }
         return super.getFluidState(state);
     }
 
     @Override
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        FluidState fluidState = ctx.getWorld().getFluidState(ctx.getBlockPos());
-        return this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite()).with(WATERLOGGED, fluidState.getFluid().equals(Fluids.WATER));
+    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+        FluidState fluidState = ctx.getLevel().getFluidState(ctx.getClickedPos());
+        return this.defaultBlockState().setValue(FACING, ctx.getHorizontalDirection().getOpposite()).setValue(WATERLOGGED, fluidState.getType().equals(Fluids.WATER));
     }
 }

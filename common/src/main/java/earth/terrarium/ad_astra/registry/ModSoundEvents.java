@@ -2,16 +2,16 @@ package earth.terrarium.ad_astra.registry;
 
 import dev.architectury.registry.registries.DeferredRegister;
 import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.ad_astra.util.ModIdentifier;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.registry.Registry;
-
+import earth.terrarium.ad_astra.util.ModResourceLocation;
 import java.util.List;
 import java.util.function.Supplier;
 
+import net.minecraft.core.Registry;
+import net.minecraft.sounds.SoundEvent;
+
 public class ModSoundEvents {
 
-    public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(AdAstra.MOD_ID, Registry.SOUND_EVENT_KEY);
+    public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(AdAstra.MOD_ID, Registry.SOUND_EVENT_REGISTRY);
 
     public static final Supplier<SoundEvent> ROCKET_LAUNCH_SOUND_EVENT = register("rocket_fly");
     public static final Supplier<SoundEvent> WRENCH = register("wrench");
@@ -32,7 +32,7 @@ public class ModSoundEvents {
     public static final Supplier<SoundEvent> SMALL_DOOR_OPEN = register("small_door_open");
 
     private static Supplier<SoundEvent> register(String id) {
-        return SOUND_EVENTS.register(id, () -> new SoundEvent(new ModIdentifier(id)));
+        return SOUND_EVENTS.register(id, () -> new SoundEvent(new ModResourceLocation(id)));
     }
 
     public static void register() {

@@ -2,23 +2,23 @@ package earth.terrarium.ad_astra.client.renderer.entity.mobs;
 
 import earth.terrarium.ad_astra.client.renderer.entity.mobs.models.CorruptedLunarianEntityModel;
 import earth.terrarium.ad_astra.entities.mobs.CorruptedLunarianEntity;
-import earth.terrarium.ad_astra.util.ModIdentifier;
+import earth.terrarium.ad_astra.util.ModResourceLocation;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.MobEntityRenderer;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.resources.ResourceLocation;
 
 @Environment(EnvType.CLIENT)
-public class CorruptedLunarianEntityRenderer extends MobEntityRenderer<CorruptedLunarianEntity, CorruptedLunarianEntityModel> {
-    public static final Identifier TEXTURE = new ModIdentifier("textures/entity/lunarian/corrupted_lunarian.png");
+public class CorruptedLunarianEntityRenderer extends MobRenderer<CorruptedLunarianEntity, CorruptedLunarianEntityModel> {
+    public static final ResourceLocation TEXTURE = new ModResourceLocation("textures/entity/lunarian/corrupted_lunarian.png");
 
-    public CorruptedLunarianEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, new CorruptedLunarianEntityModel(context.getPart(CorruptedLunarianEntityModel.LAYER_LOCATION)), 0.5f);
+    public CorruptedLunarianEntityRenderer(EntityRendererProvider.Context context) {
+        super(context, new CorruptedLunarianEntityModel(context.bakeLayer(CorruptedLunarianEntityModel.LAYER_LOCATION)), 0.5f);
     }
 
     @Override
-    public Identifier getTexture(CorruptedLunarianEntity entity) {
+    public ResourceLocation getTextureLocation(CorruptedLunarianEntity entity) {
         return TEXTURE;
     }
 }

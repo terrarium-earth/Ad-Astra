@@ -1,9 +1,9 @@
 package earth.terrarium.ad_astra.blocks.pipes;
 
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -18,7 +18,7 @@ public interface InteractablePipe<T> {
 
     void insertInto(T consumer, Direction direction, BlockPos pos);
 
-    T getInteraction(World world, BlockPos pos, Direction direction);
+    T getInteraction(Level level, BlockPos pos, Direction direction);
 
     Node<T> getSource();
 
@@ -28,7 +28,7 @@ public interface InteractablePipe<T> {
 
     List<Node<T>> getConsumers();
 
-    World getPipeWorld();
+    Level getPipelevel();
 
     BlockPos getPipePos();
 
@@ -41,8 +41,8 @@ public interface InteractablePipe<T> {
     }
 
     default void pipeTick() {
-        if (!getPipeWorld().isClient()) {
-            if (getPipeWorld().getTime() % getWorkTime() == 0) {
+        if (!getPipelevel().isClientSide()) {
+            if (getPipelevel().getGameTime() % getWorkTime() == 0) {
                 clearSource();
                 this.getConsumers().clear();
                 Set<BlockPos> visitedNodes = new HashSet<>();
@@ -50,8 +50,8 @@ public interface InteractablePipe<T> {
                 if (supportsAutoExtract()) {
                     availableNodes.add(this.getPipePos());
                     for (Direction direction : Direction.values()) {
-                        BlockPos offset = this.getPipePos().offset(direction);
-                        T potentialSource = getInteraction(getPipeWorld(), offset, direction);
+                        BlockPos offset = this.getPipePos().relative(direction);
+                        T potentialSource = getInteraction(getPipelevel(), offset, direction);
                         if (potentialSource != null) {
                             this.setSource(new Node<>(potentialSource, direction, offset));
                             break;
@@ -65,17 +65,17 @@ public interface InteractablePipe<T> {
                         List<BlockPos> temporaryOpenNodes = new ArrayList<>();
 
                         for (BlockPos node : availableNodes) {
-                            BlockEntity current = getPipeWorld().getBlockEntity(node);
+                            BlockEntity current = getPipelevel().getBlockEntity(node);
                             for (Direction direction : Direction.values()) {
-                                BlockPos offset = node.offset(direction);
-                                BlockEntity entity = getPipeWorld().getBlockEntity(offset);
+                                BlockPos offset = node.relative(direction);
+                                BlockEntity entity = getPipelevel().getBlockEntity(offset);
                                 if (!visitedNodes.contains(offset) && entity instanceof InteractablePipe<?> pipe) {
                                     // Additional if statement to optimize performance; if it's a pipe but can't connect, it shouldn't check if it is a consumer (because it's already a pipe)
                                     if (pipe.canConnectTo(current, direction, offset)) {
                                         temporaryOpenNodes.add(offset);
                                     }
                                 } else {
-                                    T potentialConsumer = getInteraction(getPipeWorld(), offset, direction);
+                                    T potentialConsumer = getInteraction(getPipelevel(), offset, direction);
                                     if (potentialConsumer != null) {
                                         this.getConsumers().add(new Node<>(potentialConsumer, direction, node));
                                     }
