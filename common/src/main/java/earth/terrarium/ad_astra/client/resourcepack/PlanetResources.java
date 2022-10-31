@@ -9,35 +9,34 @@ import earth.terrarium.ad_astra.client.AdAstraClient;
 import earth.terrarium.ad_astra.client.dimension.ClientModSkies;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.resource.Resource;
-import net.minecraft.resource.ResourceManager;
-import net.minecraft.resource.SynchronousResourceReloader;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.JsonHelper;
-
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.Resource;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
+import net.minecraft.util.GsonHelper;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 @Environment(EnvType.CLIENT)
-public class PlanetResources implements SynchronousResourceReloader {
+public class PlanetResources implements ResourceManagerReloadListener {
 
     public static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
     @Override
-    public void reload(ResourceManager manager) {
+    public void onResourceManagerReload(ResourceManager manager) {
         List<PlanetSkyRenderer> skyRenderers = new ArrayList<>();
         List<SolarSystem> solarSystems = new ArrayList<>();
         List<PlanetRing> planetRings = new ArrayList<>();
         List<Galaxy> galaxies = new ArrayList<>();
 
         // Sky Renderers
-        for (Identifier id : manager.findResources("planet_resources/sky_renderers", path -> path.getPath().endsWith(".json")).keySet()) {
+        for (ResourceLocation id : manager.listResources("planet_resources/sky_renderers", path -> path.getPath().endsWith(".json")).keySet()) {
             try {
-                for (Resource resource : manager.getAllResources(id)) {
+                for (Resource resource : manager.getResourceStack(id)) {
                     InputStreamReader reader = new InputStreamReader(resource.open());
-                    JsonObject jsonObject = JsonHelper.deserialize(GSON, reader, JsonObject.class);
+                    JsonObject jsonObject = GsonHelper.fromJson(GSON, reader, JsonObject.class);
 
                     if (jsonObject != null) {
                         skyRenderers.add(PlanetSkyRenderer.CODEC.parse(JsonOps.INSTANCE, jsonObject).getOrThrow(false, AdAstra.LOGGER::error));
@@ -50,11 +49,11 @@ public class PlanetResources implements SynchronousResourceReloader {
         }
 
         // Solar Systems
-        for (Identifier id : manager.findResources("planet_resources/solar_systems", path -> path.getPath().endsWith(".json")).keySet()) {
+        for (ResourceLocation id : manager.listResources("planet_resources/solar_systems", path -> path.getPath().endsWith(".json")).keySet()) {
             try {
-                for (Resource resource : manager.getAllResources(id)) {
+                for (Resource resource : manager.getResourceStack(id)) {
                     InputStreamReader reader = new InputStreamReader(resource.open());
-                    JsonObject jsonObject = JsonHelper.deserialize(GSON, reader, JsonObject.class);
+                    JsonObject jsonObject = GsonHelper.fromJson(GSON, reader, JsonObject.class);
 
                     if (jsonObject != null) {
                         solarSystems.add(SolarSystem.CODEC.parse(JsonOps.INSTANCE, jsonObject).getOrThrow(false, AdAstra.LOGGER::error));
@@ -66,11 +65,11 @@ public class PlanetResources implements SynchronousResourceReloader {
             }
         }
 
-        for (Identifier id : manager.findResources("planet_resources/planet_rings", path -> path.getPath().endsWith(".json")).keySet()) {
+        for (ResourceLocation id : manager.listResources("planet_resources/planet_rings", path -> path.getPath().endsWith(".json")).keySet()) {
             try {
-                for (Resource resource : manager.getAllResources(id)) {
+                for (Resource resource : manager.getResourceStack(id)) {
                     InputStreamReader reader = new InputStreamReader(resource.open());
-                    JsonObject jsonObject = JsonHelper.deserialize(GSON, reader, JsonObject.class);
+                    JsonObject jsonObject = GsonHelper.fromJson(GSON, reader, JsonObject.class);
 
                     if (jsonObject != null) {
                         planetRings.add(PlanetRing.CODEC.parse(JsonOps.INSTANCE, jsonObject).getOrThrow(false, AdAstra.LOGGER::error));
@@ -82,11 +81,11 @@ public class PlanetResources implements SynchronousResourceReloader {
             }
         }
 
-        for (Identifier id : manager.findResources("planet_resources/galaxy", path -> path.getPath().endsWith(".json")).keySet()) {
+        for (ResourceLocation id : manager.listResources("planet_resources/galaxy", path -> path.getPath().endsWith(".json")).keySet()) {
             try {
-                for (Resource resource : manager.getAllResources(id)) {
+                for (Resource resource : manager.getResourceStack(id)) {
                     InputStreamReader reader = new InputStreamReader(resource.open());
-                    JsonObject jsonObject = JsonHelper.deserialize(GSON, reader, JsonObject.class);
+                    JsonObject jsonObject = GsonHelper.fromJson(GSON, reader, JsonObject.class);
 
                     if (jsonObject != null) {
                         galaxies.add(Galaxy.CODEC.parse(JsonOps.INSTANCE, jsonObject).getOrThrow(false, AdAstra.LOGGER::error));

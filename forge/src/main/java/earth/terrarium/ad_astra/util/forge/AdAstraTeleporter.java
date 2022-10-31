@@ -1,9 +1,5 @@
 package earth.terrarium.ad_astra.util.forge;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.world.TeleportTarget;
 import net.minecraftforge.common.util.ITeleporter;
 import org.jetbrains.annotations.Nullable;
 

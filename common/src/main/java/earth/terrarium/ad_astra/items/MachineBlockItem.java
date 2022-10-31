@@ -6,29 +6,28 @@ import earth.terrarium.ad_astra.blocks.machines.entity.OxygenDistributorBlockEnt
 import earth.terrarium.botarium.api.energy.EnergyHooks;
 import earth.terrarium.botarium.api.energy.PlatformEnergyManager;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.Inventories;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-
 import java.util.Optional;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class MachineBlockItem extends BlockItem {
-    public MachineBlockItem(Block block, Settings settings) {
+    public MachineBlockItem(Block block, Properties settings) {
         super(block, settings);
     }
 
     @Override
-    protected boolean postPlacement(BlockPos pos, World world, PlayerEntity player, ItemStack stack, BlockState state) {
-        if (!world.isClient) {
-            if (world.getBlockEntity(pos) instanceof AbstractMachineBlockEntity machineBlock) {
-                NbtCompound nbt = stack.getOrCreateNbt();
-                Inventories.readNbt(nbt, machineBlock.getItems());
+    protected boolean updateCustomBlockEntityTag(BlockPos pos, Level level, Player player, ItemStack stack, BlockState state) {
+        if (!level.isClientSide) {
+            if (level.getBlockEntity(pos) instanceof AbstractMachineBlockEntity machineBlock) {
+                CompoundTag nbt = stack.getOrCreateTag();
+                ContainerHelper.loadAllItems(nbt, machineBlock.getItems());
                 if (nbt.contains("energy")) {
                     Optional<PlatformEnergyManager> energyBlock = EnergyHooks.safeGetBlockEnergyManager(machineBlock, null);
                     energyBlock.ifPresent(platformEnergyManager -> platformEnergyManager.insert(nbt.getLong("energy"), false));
@@ -53,6 +52,6 @@ public class MachineBlockItem extends BlockItem {
                 }
             }
         }
-        return super.postPlacement(pos, world, player, stack, state);
+        return super.updateCustomBlockEntityTag(pos, level, player, stack, state);
     }
 }

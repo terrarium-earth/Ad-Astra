@@ -5,7 +5,7 @@ import dev.architectury.platform.forge.EventBuses;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.AdAstraClient;
 import earth.terrarium.ad_astra.client.forge.AdAstraClientForge;
-import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.commands.CommandSourceStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
@@ -23,7 +23,7 @@ import java.util.function.Consumer;
 
 @Mod(AdAstra.MOD_ID)
 public class AdAstraForge {
-    public static final List<Consumer<CommandDispatcher<ServerCommandSource>>> COMMANDS = new ArrayList<>();
+    public static final List<Consumer<CommandDispatcher<CommandSourceStack>>> COMMANDS = new ArrayList<>();
 
     public AdAstraForge() {
         EventBuses.registerModEventBus(AdAstra.MOD_ID, FMLJavaModLoadingContext.get().getModEventBus());

@@ -12,19 +12,19 @@ import earth.terrarium.botarium.api.energy.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHoldingBlock;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.fluid.WaterFluid;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.material.WaterFluid;
 import org.jetbrains.annotations.Nullable;
 
 public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements FluidHoldingBlock, EnergyBlock {
@@ -38,33 +38,33 @@ public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements 
 
     @Nullable
     @Override
-    public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
+    public AbstractContainerMenu createMenu(int syncId, Inventory inv, Player player) {
         return new WaterPumpScreenHandler(syncId, inv, this);
     }
 
     @Override
-    public void readNbt(NbtCompound nbt) {
-        super.readNbt(nbt);
+    public void load(CompoundTag nbt) {
+        super.load(nbt);
         this.waterExtracted = nbt.getLong("waterExtracted");
     }
 
     @Override
-    public void writeNbt(NbtCompound nbt) {
-        super.writeNbt(nbt);
+    public void saveAdditional(CompoundTag nbt) {
+        super.saveAdditional(nbt);
         nbt.putLong("waterExtracted", this.waterExtracted);
     }
 
     @Override
     public void tick() {
-        if (!this.getWorld().isClient()) {
-            FluidState water = this.world.getFluidState(this.getPos().down());
+        if (!this.getLevel().isClientSide()) {
+            FluidState water = this.level.getFluidState(this.getBlockPos().below());
             if (getFluidContainer().getFluids().get(0).getFluidAmount() < getFluidContainer().getTankCapacity(0)) {
-                if (water.getFluid() instanceof WaterFluid.Still) {
+                if (water.getType() instanceof WaterFluid.Source) {
 
                     // Drain the water block and add it to the tank.
-                    if (!this.getCachedState().get(AbstractMachineBlock.POWERED) && this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0) {
+                    if (!this.getBlockState().getValue(AbstractMachineBlock.POWERED) && this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0) {
                         this.setActive(true);
-                        ModUtils.spawnForcedParticles((ServerWorld) this.world, ModParticleTypes.OXYGEN_BUBBLE.get(), this.getPos().getX() + 0.5, this.getPos().getY() - 0.5, this.getPos().getZ() + 0.5, 1, 0.0, 0.0, 0.0, 0.01);
+                        ModUtils.spawnForcedParticles((ServerLevel) this.level, ModParticleTypes.OXYGEN_BUBBLE.get(), this.getBlockPos().getX() + 0.5, this.getBlockPos().getY() - 0.5, this.getBlockPos().getZ() + 0.5, 1, 0.0, 0.0, 0.0, 0.01);
                         this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
                         waterExtracted += AdAstra.CONFIG.waterPump.transferPerTick;
                         FluidHolder waterFluid = FluidHooks.newFluidHolder(Fluids.WATER, AdAstra.CONFIG.waterPump.transferPerTick, null);
@@ -77,7 +77,7 @@ public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements 
                         // Delete the water block after it has been fully extracted.
                         if (waterExtracted >= FluidHooks.buckets(1)) {
                             waterExtracted = 0;
-                            world.setBlockState(this.getPos().down(), Blocks.AIR.getDefaultState());
+                            level.setBlockAndUpdate(this.getBlockPos().below(), Blocks.AIR.defaultBlockState());
                         }
                     }
                 }
@@ -87,10 +87,10 @@ public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements 
 
             // Insert the fluid into nearby tanks.
             if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0 && !getFluidContainer().isEmpty()) {
-                for (Direction direction : new Direction[]{Direction.UP, this.getCachedState().get(AbstractMachineBlock.FACING)}) {
+                for (Direction direction : new Direction[]{Direction.UP, this.getBlockState().getValue(AbstractMachineBlock.FACING)}) {
                     FluidHolder fluid = FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(0).getFluid(), AdAstra.CONFIG.waterPump.transferPerTick * 2, getFluidContainer().getFluids().get(0).getCompound());
                     this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
-                    if (FluidHooks.moveBlockToBlockFluid(this, direction.getOpposite(), world.getBlockEntity(pos.offset(direction)), direction, fluid) > 0) {
+                    if (FluidHooks.moveBlockToBlockFluid(this, direction.getOpposite(), level.getBlockEntity(worldPosition.relative(direction)), direction, fluid) > 0) {
                         break;
                     }
                 }
@@ -118,7 +118,7 @@ public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements 
 
     @Override
     public void update() {
-        this.markDirty();
-        this.getWorld().updateListeners(this.getPos(), this.getCachedState(), this.getCachedState(), Block.NOTIFY_ALL);
+        this.setChanged();
+        this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
     }
 }

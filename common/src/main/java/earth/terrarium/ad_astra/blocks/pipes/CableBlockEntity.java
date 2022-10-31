@@ -3,11 +3,11 @@ package earth.terrarium.ad_astra.blocks.pipes;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
 import earth.terrarium.botarium.api.energy.EnergyHooks;
 import earth.terrarium.botarium.api.energy.PlatformEnergyManager;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,18 +32,18 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<Pl
 
     @Override
     public void insertInto(PlatformEnergyManager consumer, Direction direction, BlockPos pos) {
-        BlockState state = this.getCachedState();
-        BlockState state2 = world.getBlockState(pos);
+        BlockState state = this.getBlockState();
+        BlockState state2 = level.getBlockState(pos);
 
         if (!(state.getBlock() instanceof CableBlock) || !(state2.getBlock() instanceof CableBlock)) {
             return;
         }
 
-        if (!state.get(CableBlock.DIRECTIONS.get(this.getSource().direction()))) {
+        if (!state.getValue(CableBlock.DIRECTIONS.get(this.getSource().direction()))) {
             return;
         }
 
-        if (!state2.get(CableBlock.DIRECTIONS.get(direction))) {
+        if (!state2.getValue(CableBlock.DIRECTIONS.get(direction))) {
             return;
         }
 
@@ -54,8 +54,8 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<Pl
     }
 
     @Override
-    public PlatformEnergyManager getInteraction(World world, BlockPos pos, Direction direction) {
-        BlockEntity blockEntity = world.getBlockEntity(pos);
+    public PlatformEnergyManager getInteraction(Level level, BlockPos pos, Direction direction) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity != null) {
             return EnergyHooks.safeGetBlockEnergyManager(blockEntity, direction).orElse(null);
         }
@@ -88,13 +88,13 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<Pl
     }
 
     @Override
-    public World getPipeWorld() {
-        return this.world;
+    public Level getPipelevel() {
+        return this.level;
     }
 
     @Override
     public long getTransferAmount() {
-        if (this.getCachedState().getBlock() instanceof CableBlock cableBlock) {
+        if (this.getBlockState().getBlock() instanceof CableBlock cableBlock) {
             return cableBlock.getTransferRate();
         }
         return 0;
@@ -102,6 +102,6 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<Pl
 
     @Override
     public BlockPos getPipePos() {
-        return this.getPos();
+        return this.getBlockPos();
     }
 }

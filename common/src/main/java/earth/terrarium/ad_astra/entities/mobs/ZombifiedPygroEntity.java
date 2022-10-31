@@ -1,24 +1,24 @@
 package earth.terrarium.ad_astra.entities.mobs;
 
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.mob.ZombieEntity;
-import net.minecraft.entity.mob.ZombifiedPiglinEntity;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.entity.monster.ZombifiedPiglin;
+import net.minecraft.world.level.Level;
 
-public class ZombifiedPygroEntity extends ZombifiedPiglinEntity {
+public class ZombifiedPygroEntity extends ZombifiedPiglin {
 
-    public ZombifiedPygroEntity(EntityType<? extends ZombifiedPiglinEntity> entityType, World world) {
-        super(entityType, world);
+    public ZombifiedPygroEntity(EntityType<? extends ZombifiedPiglin> entityType, Level level) {
+        super(entityType, level);
     }
 
-    public static DefaultAttributeContainer.Builder createMobAttributes() {
-        return ZombieEntity.createZombieAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 28.0).add(EntityAttributes.ZOMBIE_SPAWN_REINFORCEMENTS, 0.0).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.26f).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 8.0);
+    public static AttributeSupplier.Builder createMobAttributes() {
+        return Zombie.createAttributes().add(Attributes.MAX_HEALTH, 28.0).add(Attributes.SPAWN_REINFORCEMENTS_CHANCE, 0.0).add(Attributes.MOVEMENT_SPEED, 0.26f).add(Attributes.ATTACK_DAMAGE, 8.0);
     }
 
     @Override
-    public boolean canImmediatelyDespawn(double distanceSquared) {
+    public boolean removeWhenFarAway(double distanceSquared) {
         return false;
     }
 }

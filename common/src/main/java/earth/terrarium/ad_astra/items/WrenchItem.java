@@ -1,25 +1,25 @@
 package earth.terrarium.ad_astra.items;
 
 import earth.terrarium.ad_astra.blocks.pipes.Wrenchable;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemUsageContext;
-import net.minecraft.util.ActionResult;
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
 
 public class WrenchItem extends Item {
 
-    public WrenchItem(Settings settings) {
+    public WrenchItem(Properties settings) {
         super(settings);
     }
 
     @Override
-    public ActionResult useOnBlock(ItemUsageContext context) {
-        World world = context.getWorld();
-        if (world.getBlockState(context.getBlockPos()).getBlock() instanceof Wrenchable block) {
-            block.handleWrench(world, context.getBlockPos(), world.getBlockState(context.getBlockPos()), context.getSide(), context.getPlayer());
-            return ActionResult.SUCCESS;
+    public InteractionResult useOn(UseOnContext context) {
+        Level level = context.getLevel();
+        if (level.getBlockState(context.getClickedPos()).getBlock() instanceof Wrenchable block) {
+            block.handleWrench(level, context.getClickedPos(), level.getBlockState(context.getClickedPos()), context.getClickedFace(), context.getPlayer());
+            return InteractionResult.SUCCESS;
         }
-        return super.useOnBlock(context);
+        return super.useOn(context);
     }
 
 }

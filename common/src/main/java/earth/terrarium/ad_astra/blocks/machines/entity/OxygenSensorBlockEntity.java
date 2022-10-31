@@ -3,10 +3,10 @@ package earth.terrarium.ad_astra.blocks.machines.entity;
 import earth.terrarium.ad_astra.blocks.machines.OxygenSensorBlock;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
 import earth.terrarium.ad_astra.util.OxygenUtils;
-import net.minecraft.block.BlockState;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class OxygenSensorBlockEntity extends AbstractMachineBlockEntity {
 
@@ -18,15 +18,15 @@ public class OxygenSensorBlockEntity extends AbstractMachineBlockEntity {
 
     @Override
     public void tick() {
-        if (this.world instanceof ServerWorld serverWorld) {
+        if (this.level instanceof ServerLevel serverWorld) {
             boolean hasOxygen = false;
             for (Direction dir : CHECK_DIRECTIONS) {
-                if (OxygenUtils.posHasOxygen(serverWorld, this.pos.offset(dir))) {
+                if (OxygenUtils.posHasOxygen(serverWorld, this.worldPosition.relative(dir))) {
                     hasOxygen = true;
                     break;
                 }
             }
-            serverWorld.setBlockState(this.getPos(), this.getCachedState().with(OxygenSensorBlock.POWERED, hasOxygen));
+            serverWorld.setBlockAndUpdate(this.getBlockPos(), this.getBlockState().setValue(OxygenSensorBlock.POWERED, hasOxygen));
         }
     }
 }

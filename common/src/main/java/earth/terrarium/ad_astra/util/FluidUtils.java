@@ -7,13 +7,12 @@ import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import earth.terrarium.botarium.api.fluid.PlatformFluidItemHandler;
 import earth.terrarium.botarium.api.item.ItemStackHolder;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ItemStack;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.material.Fluid;
 
 public class FluidUtils {
 
@@ -46,8 +45,8 @@ public class FluidUtils {
         return false;
     }
 
-    public static boolean insertItemFluidToTank(FluidContainer tank, Inventory inventory, int inputSlot, int outputSlot, int container, Predicate<Fluid> filter) {
-        ItemStack stack = inventory.getStack(inputSlot);
+    public static boolean insertItemFluidToTank(FluidContainer tank, Container inventory, int inputSlot, int outputSlot, int container, Predicate<Fluid> filter) {
+        ItemStack stack = inventory.getItem(inputSlot);
         Optional<PlatformFluidItemHandler> possibleItemFluidContainer = FluidHooks.safeGetItemFluidManager(stack);
         if (possibleItemFluidContainer.isPresent()) {
             PlatformFluidItemHandler itemFluidHandler = possibleItemFluidContainer.get();
@@ -66,11 +65,11 @@ public class FluidUtils {
 
                         if (item.isDirty()) {
                             ItemStack copy = item.getStack().copy();
-                            ItemStack stack1 = inventory.getStack(outputSlot);
-                            if (stack1.isEmpty() || ItemStack.areNbtEqual(copy, stack1) && ItemStack.areItemsEqual(copy, stack1) && copy.getCount() + stack1.getCount() <= copy.getMaxCount()) {
+                            ItemStack stack1 = inventory.getItem(outputSlot);
+                            if (stack1.isEmpty() || ItemStack.tagMatches(copy, stack1) && ItemStack.isSameIgnoreDurability(copy, stack1) && copy.getCount() + stack1.getCount() <= copy.getMaxStackSize()) {
                                 copy.setCount(copy.getCount() + stack1.getCount());
-                                inventory.setStack(outputSlot, copy);
-                                stack.decrement(1);
+                                inventory.setItem(outputSlot, copy);
+                                stack.shrink(1);
                             } else {
                                 itemFluidHandler.insertFluid(item, fluidToTransfer, false);
                                 tank.extractFluid(fluidToTransfer, false);
@@ -85,8 +84,8 @@ public class FluidUtils {
         return false;
     }
 
-    public static boolean extractTankFluidToItem(FluidContainer tank, Inventory inventory, int inputSlot, int outputSlot, int container, Predicate<Fluid> filter) {
-        ItemStack stack = inventory.getStack(inputSlot);
+    public static boolean extractTankFluidToItem(FluidContainer tank, Container inventory, int inputSlot, int outputSlot, int container, Predicate<Fluid> filter) {
+        ItemStack stack = inventory.getItem(inputSlot);
         Optional<PlatformFluidItemHandler> possibleItemFluidContainer = FluidHooks.safeGetItemFluidManager(stack);
         if (possibleItemFluidContainer.isPresent()) {
             PlatformFluidItemHandler itemFluidHandler = possibleItemFluidContainer.get();
@@ -105,11 +104,11 @@ public class FluidUtils {
 
                         if (item.isDirty()) {
                             ItemStack copy = item.getStack().copy();
-                            ItemStack stack1 = inventory.getStack(outputSlot);
-                            if (stack1.isEmpty() || ItemStack.areNbtEqual(copy, stack1) && ItemStack.areItemsEqual(copy, stack1) && copy.getCount() + stack1.getCount() <= copy.getMaxCount()) {
+                            ItemStack stack1 = inventory.getItem(outputSlot);
+                            if (stack1.isEmpty() || ItemStack.tagMatches(copy, stack1) && ItemStack.isSameIgnoreDurability(copy, stack1) && copy.getCount() + stack1.getCount() <= copy.getMaxStackSize()) {
                                 copy.setCount(copy.getCount() + stack1.getCount());
-                                inventory.setStack(outputSlot, copy);
-                                stack.decrement(1);
+                                inventory.setItem(outputSlot, copy);
+                                stack.shrink(1);
                             } else {
                                 itemFluidHandler.extractFluid(item, fluidToTransfer, false);
                                 tank.insertFluid(fluidToTransfer, false);

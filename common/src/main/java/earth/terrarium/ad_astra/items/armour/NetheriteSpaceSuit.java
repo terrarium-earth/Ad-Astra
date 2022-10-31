@@ -1,24 +1,24 @@
 package earth.terrarium.ad_astra.items.armour;
 
 import earth.terrarium.ad_astra.AdAstra;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ArmorMaterial;
-import net.minecraft.item.ItemStack;
 import org.apache.commons.lang3.Range;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.stream.StreamSupport;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.ItemStack;
 
 public class NetheriteSpaceSuit extends SpaceSuit {
 
-    public NetheriteSpaceSuit(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
+    public NetheriteSpaceSuit(ArmorMaterial material, EquipmentSlot slot, Properties settings) {
         super(material, slot, settings);
     }
 
     public static boolean hasFullSet(LivingEntity entity) {
-        return StreamSupport.stream(entity.getArmorItems().spliterator(), false).allMatch(s -> s.getItem() instanceof NetheriteSpaceSuit);
+        return StreamSupport.stream(entity.getArmorSlots().spliterator(), false).allMatch(s -> s.getItem() instanceof NetheriteSpaceSuit);
     }
 
     @Override

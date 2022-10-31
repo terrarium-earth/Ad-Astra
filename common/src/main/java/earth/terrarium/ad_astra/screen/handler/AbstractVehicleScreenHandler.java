@@ -6,38 +6,37 @@ import earth.terrarium.ad_astra.networking.packets.server.MachineInfoPacket;
 import earth.terrarium.ad_astra.util.CustomInventory;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.screen.ScreenHandlerType;
-import net.minecraft.screen.slot.Slot;
-import net.minecraft.screen.slot.SlotActionType;
-import net.minecraft.world.World;
-
 import java.util.List;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ClickType;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
-public abstract class AbstractVehicleScreenHandler extends ScreenHandler {
+public abstract class AbstractVehicleScreenHandler extends AbstractContainerMenu {
 
     protected final VehicleEntity vehicle;
-    protected final World world;
+    protected final Level level;
     protected final CustomInventory inventory;
-    protected final PlayerEntity player;
+    protected final Player player;
     protected List<FluidHolder> fluids;
 
-    public AbstractVehicleScreenHandler(ScreenHandlerType<?> type, int syncId, PlayerInventory inventory, VehicleEntity entity) {
+    public AbstractVehicleScreenHandler(MenuType<?> type, int syncId, Inventory inventory, VehicleEntity entity) {
         this(type, syncId, inventory, entity, new Slot[]{});
     }
 
     // Add additional slots.
-    public AbstractVehicleScreenHandler(ScreenHandlerType<?> type, int syncId, PlayerInventory inventory, VehicleEntity entity, Slot[] slots) {
+    public AbstractVehicleScreenHandler(MenuType<?> type, int syncId, Inventory inventory, VehicleEntity entity, Slot[] slots) {
         super(type, syncId);
         this.vehicle = entity;
         this.inventory = entity.getInventory();
-        this.world = entity.getWorld();
+        this.level = entity.getLevel();
         this.player = inventory.player;
 
-        checkSize(inventory, this.vehicle.getInventorySize());
+        checkContainerSize(inventory, this.vehicle.getInventorySize());
 
         for (Slot slot : slots) {
             this.addSlot(slot);
@@ -51,11 +50,11 @@ public abstract class AbstractVehicleScreenHandler extends ScreenHandler {
     }
 
     @Override
-    public boolean canUse(PlayerEntity player) {
-        return this.inventory.canPlayerUse(player) && this.vehicle.isAlive() && this.vehicle.distanceTo(player) < 8.0f;
+    public boolean stillValid(Player player) {
+        return this.inventory.stillValid(player) && this.vehicle.isAlive() && this.vehicle.distanceTo(player) < 8.0f;
     }
 
-    protected void setPlayerInventory(PlayerInventory inventory) {
+    protected void setPlayerInventory(Inventory inventory) {
         int m;
         int l;
 
@@ -75,24 +74,24 @@ public abstract class AbstractVehicleScreenHandler extends ScreenHandler {
     }
 
     @Override
-    public ItemStack quickTransfer(PlayerEntity player, int index) {
+    public ItemStack quickMoveStack(Player player, int index) {
         ItemStack newStack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
-        if (slot.hasStack()) {
-            ItemStack originalStack = slot.getStack();
+        if (slot.hasItem()) {
+            ItemStack originalStack = slot.getItem();
             newStack = originalStack.copy();
-            if (index < this.inventory.size()) {
-                if (!this.insertItem(originalStack, this.inventory.size(), this.slots.size(), true)) {
+            if (index < this.inventory.getContainerSize()) {
+                if (!this.moveItemStackTo(originalStack, this.inventory.getContainerSize(), this.slots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.insertItem(originalStack, 0, this.inventory.size(), false)) {
+            } else if (!this.moveItemStackTo(originalStack, 0, this.inventory.getContainerSize(), false)) {
                 return ItemStack.EMPTY;
             }
 
             if (originalStack.isEmpty()) {
-                slot.setStack(ItemStack.EMPTY);
+                slot.set(ItemStack.EMPTY);
             } else {
-                slot.markDirty();
+                slot.setChanged();
             }
         }
         return newStack;
@@ -108,14 +107,14 @@ public abstract class AbstractVehicleScreenHandler extends ScreenHandler {
 
     // Fixes a client sync issue.
     @Override
-    public void onSlotClick(int slotIndex, int button, SlotActionType actionType, PlayerEntity player) {
-        super.onSlotClick(slotIndex, button, actionType, player);
-        this.updateToClient();
+    public void clicked(int slotIndex, int button, ClickType actionType, Player player) {
+        super.clicked(slotIndex, button, actionType, player);
+        this.broadcastFullState();
     }
 
     @Override
-    public void sendContentUpdates() {
-        super.sendContentUpdates();
+    public void broadcastChanges() {
+        super.broadcastChanges();
         syncClientScreen();
     }
 

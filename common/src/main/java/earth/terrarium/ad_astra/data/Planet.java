@@ -2,24 +2,24 @@ package earth.terrarium.ad_astra.data;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.world.World;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.Level;
 
 import java.util.Optional;
 
-public record Planet(String translation, Identifier galaxy, Identifier solarSystem, RegistryKey<World> world,
-                     RegistryKey<World> orbitWorld, RegistryKey<World> parentWorld, int rocketTier, float gravity,
+public record Planet(String translation, ResourceLocation galaxy, ResourceLocation solarSystem, ResourceKey<Level> level,
+                     ResourceKey<Level> orbitWorld, ResourceKey<Level> parentWorld, int rocketTier, float gravity,
                      boolean hasAtmosphere, int daysInYear, float temperature, long solarPower, long orbitSolarPower,
                      boolean hasOxygen, ButtonColour buttonColour) {
     public static final Codec<Planet> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.STRING.fieldOf("translation").forGetter(Planet::translation),
-            Identifier.CODEC.fieldOf("galaxy").forGetter(Planet::galaxy),
-            Identifier.CODEC.fieldOf("solar_system").forGetter(Planet::solarSystem),
-            RegistryKey.codec(Registry.WORLD_KEY).fieldOf("world").forGetter(Planet::world),
-            RegistryKey.codec(Registry.WORLD_KEY).fieldOf("orbit_world").forGetter(Planet::orbitWorld),
-            RegistryKey.codec(Registry.WORLD_KEY).optionalFieldOf("parent_world").forGetter(Planet::getParentWorld),
+            ResourceLocation.CODEC.fieldOf("galaxy").forGetter(Planet::galaxy),
+            ResourceLocation.CODEC.fieldOf("solar_system").forGetter(Planet::solarSystem),
+            ResourceKey.codec(Registry.DIMENSION_REGISTRY).fieldOf("world").forGetter(Planet::level),
+            ResourceKey.codec(Registry.DIMENSION_REGISTRY).fieldOf("orbit_world").forGetter(Planet::orbitWorld),
+            ResourceKey.codec(Registry.DIMENSION_REGISTRY).optionalFieldOf("parent_world").forGetter(Planet::getParentlevel),
             Codec.INT.fieldOf("rocket_tier").forGetter(Planet::rocketTier),
             Codec.FLOAT.fieldOf("gravity").forGetter(Planet::gravity),
             Codec.BOOL.fieldOf("has_atmosphere").forGetter(Planet::hasAtmosphere),
@@ -31,11 +31,11 @@ public record Planet(String translation, Identifier galaxy, Identifier solarSyst
             ButtonColour.CODEC.fieldOf("button_color").forGetter(Planet::buttonColour)
     ).apply(instance, Planet::new));
 
-    public Planet(String translation, Identifier galaxy, Identifier solarSystem, RegistryKey<World> world, RegistryKey<World> orbitWorld, Optional<RegistryKey<World>> parentWorld, int rocketTier, float gravity, boolean hasAtmosphere, int daysInYear, float temperature, long solarPower, long orbitSolarPower, boolean hasOxygen, ButtonColour buttonColour) {
-        this(translation, galaxy, solarSystem, world, orbitWorld, parentWorld.orElse(null), rocketTier, gravity, hasAtmosphere, daysInYear, temperature, solarPower, orbitSolarPower, hasOxygen, buttonColour);
+    public Planet(String translation, ResourceLocation galaxy, ResourceLocation solarSystem, ResourceKey<Level> level, ResourceKey<Level> orbitWorld, Optional<ResourceKey<Level>> parentWorld, int rocketTier, float gravity, boolean hasAtmosphere, int daysInYear, float temperature, long solarPower, long orbitSolarPower, boolean hasOxygen, ButtonColour buttonColour) {
+        this(translation, galaxy, solarSystem, level, orbitWorld, parentWorld.orElse(null), rocketTier, gravity, hasAtmosphere, daysInYear, temperature, solarPower, orbitSolarPower, hasOxygen, buttonColour);
     }
 
-    private Optional<RegistryKey<World>> getParentWorld() {
+    private Optional<ResourceKey<Level>> getParentlevel() {
         return Optional.ofNullable(parentWorld);
     }
 }

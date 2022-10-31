@@ -4,19 +4,19 @@ import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.screen.LanderScreenHandlerFactory;
 import earth.terrarium.ad_astra.util.ModKeyBindings;
 import earth.terrarium.ad_astra.util.ModUtils;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ItemScatterer;
-import net.minecraft.world.World;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 
 public class LanderEntity extends VehicleEntity {
 
-    public LanderEntity(EntityType<?> type, World world) {
-        super(type, world);
+    public LanderEntity(EntityType<?> type, Level level) {
+        super(type, level);
     }
 
     @Override
@@ -25,21 +25,21 @@ public class LanderEntity extends VehicleEntity {
     }
 
     @Override
-    public ActionResult interact(PlayerEntity player, Hand hand) {
+    public InteractionResult interact(Player player, InteractionHand hand) {
         super.interact(player, hand);
         this.openInventory(player, new LanderScreenHandlerFactory(this));
-        return ActionResult.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
     @Override
-    public double getMountedHeightOffset() {
-        return super.getMountedHeightOffset() + 1.6f;
+    public double getPassengersRidingOffset() {
+        return super.getPassengersRidingOffset() + 1.6f;
     }
 
     // Drop inventory contents instead of dropping itself.
     @Override
     public void drop() {
-        ItemScatterer.spawn(this.world, this.getBlockPos(), this.getInventory());
+        Containers.dropContents(this.level, this.blockPosition(), this.getInventory());
         super.drop();
     }
 
@@ -73,7 +73,7 @@ public class LanderEntity extends VehicleEntity {
         super.tick();
 
         // Player is clicking 'space' to move upward.
-        if (this.getFirstPassenger() instanceof PlayerEntity player) {
+        if (this.getFirstPassenger() instanceof Player player) {
             if (!this.isOnGround()) {
                 if (ModKeyBindings.jumpKeyDown(player)) {
                     this.applyBoosters();
@@ -83,15 +83,15 @@ public class LanderEntity extends VehicleEntity {
     }
 
     public void applyBoosters() {
-        this.setVelocity(this.getVelocity().add(0.0, 0.1, 0.0));
+        this.setDeltaMovement(this.getDeltaMovement().add(0.0, 0.1, 0.0));
 
-        if (this.getVelocity().getY() > AdAstra.CONFIG.lander.boosterThreshold) {
-            this.setVelocity(0.0, AdAstra.CONFIG.lander.boosterThreshold, 0.0);
+        if (this.getDeltaMovement().y() > AdAstra.CONFIG.lander.boosterThreshold) {
+            this.setDeltaMovement(0.0, AdAstra.CONFIG.lander.boosterThreshold, 0.0);
         }
 
         // Particles
-        if (!this.world.isClient) {
-            ModUtils.spawnForcedParticles((ServerWorld) this.getWorld(), ParticleTypes.SPIT, this.getX(), this.getY() - 0.3, this.getZ(), 3, 0.1, 0.1, 0.1, 0.001);
+        if (!this.level.isClientSide) {
+            ModUtils.spawnForcedParticles((ServerLevel) this.getLevel(), ParticleTypes.SPIT, this.getX(), this.getY() - 0.3, this.getZ(), 3, 0.1, 0.1, 0.1, 0.001);
         }
     }
 }

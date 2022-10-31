@@ -1,10 +1,11 @@
 package earth.terrarium.ad_astra.util.algorithms;
 
 import earth.terrarium.ad_astra.blocks.door.SlidingDoorBlock;
-import net.minecraft.block.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -16,11 +17,11 @@ import java.util.Set;
  */
 public class OxygenFillerAlgorithm {
 
-    private final World world;
+    private final Level level;
     private final int maxBlockChecks;
 
-    public OxygenFillerAlgorithm(World world, int maxBlockChecks) {
-        this.world = world;
+    public OxygenFillerAlgorithm(Level level, int maxBlockChecks) {
+        this.level = level;
         this.maxBlockChecks = maxBlockChecks;
     }
 
@@ -42,15 +43,15 @@ public class OxygenFillerAlgorithm {
             BlockPos pos = iterator.next();
             iterator.remove();
 
-            // Don't have oxygen above the world height limit
-            if (pos.getY() > this.world.getHeight()) {
+            // Don't have oxygen above the level height limit
+            if (pos.getY() > this.level.getHeight()) {
                 break;
             }
 
-            BlockState state = this.world.getBlockState(pos);
+            BlockState state = this.level.getBlockState(pos);
 
             // Cancel for solid blocks but still let things like slabs, torches and ladders through
-            if (state.isFullCube(this.world, pos)) {
+            if (state.isCollisionShapeFullBlock(this.level, pos)) {
                 if (!(state.getBlock() instanceof IceBlock) && !(state.getBlock() instanceof GrassBlock)) {
                     continue;
                 }
@@ -59,22 +60,22 @@ public class OxygenFillerAlgorithm {
             positions.add(pos);
 
             // Prevent oxygen from escaping from glass panes
-            if (state.getBlock() instanceof HorizontalConnectingBlock) {
-                if (!state.isOpaque() && !state.getBlock().equals(Blocks.IRON_BARS)) {
+            if (state.getBlock() instanceof CrossCollisionBlock) {
+                if (!state.canOcclude() && !state.getBlock().equals(Blocks.IRON_BARS)) {
                     continue;
                 }
             }
 
             // Make airlocks work
             if (state.getBlock() instanceof SlidingDoorBlock door) {
-                BlockState mainState = world.getBlockState(door.getMainPos(state, pos));
-                if (mainState.contains(SlidingDoorBlock.OPEN) && !mainState.get(SlidingDoorBlock.OPEN)) {
+                BlockState mainState = level.getBlockState(door.getMainPos(state, pos));
+                if (mainState.hasProperty(SlidingDoorBlock.OPEN) && !mainState.getValue(SlidingDoorBlock.OPEN)) {
                     continue;
                 }
             }
 
             for (Direction dir : Direction.values()) {
-                if (state.isSideSolidFullSquare(world, pos, dir)) {
+                if (state.isFaceSturdy(level, pos, dir)) {
 
                     if (state.getBlock() instanceof LadderBlock) {
                         continue;
@@ -90,7 +91,7 @@ public class OxygenFillerAlgorithm {
             }
 
             for (Direction dir : Direction.values()) {
-                BlockPos offsetPos = pos.offset(dir);
+                BlockPos offsetPos = pos.relative(dir);
                 if (!positions.contains(offsetPos)) {
                     queue.add(offsetPos);
                 }
@@ -101,6 +102,6 @@ public class OxygenFillerAlgorithm {
 
     // Lets oxygen pass through doors when they are open
     private boolean checkDoor(BlockState state) {
-        return state.contains(DoorBlock.OPEN) && state.get(DoorBlock.OPEN) || state.contains(TrapdoorBlock.OPEN) && state.get(TrapdoorBlock.OPEN);
+        return state.hasProperty(DoorBlock.OPEN) && state.getValue(DoorBlock.OPEN) || state.hasProperty(TrapDoorBlock.OPEN) && state.getValue(TrapDoorBlock.OPEN);
     }
 }

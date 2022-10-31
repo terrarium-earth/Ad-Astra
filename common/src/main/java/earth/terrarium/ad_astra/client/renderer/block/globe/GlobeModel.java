@@ -1,50 +1,57 @@
 package earth.terrarium.ad_astra.client.renderer.block.globe;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import earth.terrarium.ad_astra.util.ModIdentifier;
+import earth.terrarium.ad_astra.util.ModResourceLocation;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.*;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.entity.model.EntityModelLayer;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.client.renderer.RenderType;
 
 @Environment(EnvType.CLIENT)
 public class GlobeModel extends Model {
 
-    public static final EntityModelLayer LAYER_LOCATION = new EntityModelLayer(new ModIdentifier("globe"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ModResourceLocation("globe"), "main");
     private final ModelPart globe;
 
     public GlobeModel(ModelPart root) {
-        super(RenderLayer::getEntityCutout);
+        super(RenderType::entityCutout);
         globe = root.getChild("globe");
     }
 
-    public static TexturedModelData getTexturedModelData() {
-        ModelData modelData = new ModelData();
-        ModelPartData modelPartData = modelData.getRoot();
+    public static LayerDefinition getTexturedModelData() {
+        MeshDefinition modelData = new MeshDefinition();
+        PartDefinition modelPartData = modelData.getRoot();
 
-        ModelPartData globe = modelPartData.addChild("globe", ModelPartBuilder.create().uv(0, 16).cuboid(-7.0f, -16.0f, 1.0f, 8.0f, 12.0f, 0.0f, new Dilation(0.0f)).uv(0, 28).cuboid(-4.0f, -1.0f, -2.0f, 6.0f, 1.0f, 6.0f, new Dilation(0.0f)).uv(0, 35).cuboid(-3.0f, -5.0f, -1.0f, 4.0f, 1.0f, 4.0f, new Dilation(0.0f)).uv(0, 0).cuboid(-2.0f, -4.0f, 0.0f, 2.0f, 3.0f, 2.0f, new Dilation(0.0f)), ModelTransform.pivot(1.0f, 24.0f, -1.0f));
+        PartDefinition globe = modelPartData.addOrReplaceChild("globe", CubeListBuilder.create().texOffs(0, 16).addBox(-7.0f, -16.0f, 1.0f, 8.0f, 12.0f, 0.0f, new CubeDeformation(0.0f)).texOffs(0, 28).addBox(-4.0f, -1.0f, -2.0f, 6.0f, 1.0f, 6.0f, new CubeDeformation(0.0f)).texOffs(0, 35).addBox(-3.0f, -5.0f, -1.0f, 4.0f, 1.0f, 4.0f, new CubeDeformation(0.0f)).texOffs(0, 0).addBox(-2.0f, -4.0f, 0.0f, 2.0f, 3.0f, 2.0f, new CubeDeformation(0.0f)), PartPose.offset(1.0f, 24.0f, -1.0f));
 
-        ModelPartData planet = globe.addChild("planet", ModelPartBuilder.create(), ModelTransform.pivot(-1.0f, -10.0f, 1.0f));
+        PartDefinition planet = globe.addOrReplaceChild("planet", CubeListBuilder.create(), PartPose.offset(-1.0f, -10.0f, 1.0f));
 
-        planet.addChild("cube_r1", ModelPartBuilder.create().uv(0, 0).cuboid(-4.0f, -4.0f, -4.0f, 8.0f, 8.0f, 8.0f, new Dilation(0.0f)), ModelTransform.of(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f));
+        planet.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0f, -4.0f, -4.0f, 8.0f, 8.0f, 8.0f, new CubeDeformation(0.0f)), PartPose.offsetAndRotation(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f));
 
-        return TexturedModelData.of(modelData, 64, 64);
+        return LayerDefinition.create(modelData, 64, 64);
     }
 
     // Get model from client.
     public static GlobeModel getModel() {
-        return new GlobeModel(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(GlobeModel.LAYER_LOCATION));
+        return new GlobeModel(Minecraft.getInstance().getEntityModels().bakeLayer(GlobeModel.LAYER_LOCATION));
     }
 
     @Override
-    public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
+    public void renderToBuffer(PoseStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
         globe.render(matrices, vertices, light, overlay);
     }
 
     public void setYaw(float yaw) {
-        this.globe.getChild("planet").yaw = yaw;
+        this.globe.getChild("planet").yRot = yaw;
     }
 }

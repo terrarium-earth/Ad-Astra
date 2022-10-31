@@ -1,15 +1,19 @@
 package earth.terrarium.ad_astra.mixin.client;
 
 import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.ad_astra.util.ModIdentifier;
+import earth.terrarium.ad_astra.util.ModResourceLocation;
 import earth.terrarium.ad_astra.util.ModUtils;
 import earth.terrarium.ad_astra.util.OxygenUtils;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.sound.*;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.sounds.Sound;
+import net.minecraft.client.resources.sounds.SoundInstance;
+import net.minecraft.client.sounds.SoundEngine;
+import net.minecraft.client.sounds.SoundManager;
+import net.minecraft.client.sounds.WeighedSoundEvents;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -24,20 +28,20 @@ public class SoundManagerMixin {
 
     @Shadow
     @Final
-    public SoundSystem soundSystem;
+    public SoundEngine soundEngine;
 
     @Unique
     private static SoundInstance getSpaceSoundInstance(SoundInstance sound, float volume, float pitch) {
         return new SoundInstance() {
 
             @Override
-            public Identifier getId() {
-                return sound.getId();
+            public ResourceLocation getLocation() {
+                return sound.getLocation();
             }
 
             @Override
-            public WeightedSoundSet getSoundSet(SoundManager manager) {
-                return sound.getSoundSet(manager);
+            public WeighedSoundEvents resolve(SoundManager manager) {
+                return sound.resolve(manager);
             }
 
             @Override
@@ -46,13 +50,13 @@ public class SoundManagerMixin {
             }
 
             @Override
-            public SoundCategory getCategory() {
-                return sound.getCategory();
+            public SoundSource getSource() {
+                return sound.getSource();
             }
 
             @Override
-            public boolean isRepeatable() {
-                return sound.isRepeatable();
+            public boolean isLooping() {
+                return sound.isLooping();
             }
 
             @Override
@@ -61,8 +65,8 @@ public class SoundManagerMixin {
             }
 
             @Override
-            public int getRepeatDelay() {
-                return sound.getRepeatDelay();
+            public int getDelay() {
+                return sound.getDelay();
             }
 
             @Override
@@ -91,36 +95,36 @@ public class SoundManagerMixin {
             }
 
             @Override
-            public AttenuationType getAttenuationType() {
-                return sound.getAttenuationType();
+            public Attenuation getAttenuation() {
+                return sound.getAttenuation();
             }
         };
     }
 
-    @Inject(method = "Lnet/minecraft/client/sound/SoundManager;play(Lnet/minecraft/client/sound/SoundInstance;)V", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "play(Lnet/minecraft/client/resources/sounds/SoundInstance;)V", at = @At("HEAD"), cancellable = true)
     public void adastra_play(SoundInstance sound, CallbackInfo ci) {
         this.adastra_modifySound(sound, 0, ci);
     }
 
-    @Inject(method = "Lnet/minecraft/client/sound/SoundManager;play(Lnet/minecraft/client/sound/SoundInstance;I)V", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "playDelayed(Lnet/minecraft/client/resources/sounds/SoundInstance;I)V", at = @At("HEAD"), cancellable = true)
     public void adastra_play(SoundInstance sound, int delay, CallbackInfo ci) {
         this.adastra_modifySound(sound, delay, ci);
     }
 
     @Unique
     private void adastra_modifySound(SoundInstance sound, int delay, CallbackInfo ci) {
-        if (sound.getCategory().equals(SoundCategory.MASTER)) {
+        if (sound.getSource().equals(SoundSource.MASTER)) {
             return;
         }
 
         if (!AdAstra.CONFIG.general.doSpaceMuffler) {
             return;
         }
-        if (sound.getId().equals(new ModIdentifier("rocket_fly"))) {
+        if (sound.getLocation().equals(new ModResourceLocation("rocket_fly"))) {
             return;
         }
 
-        if (sound.getId().equals(SoundEvents.ITEM_ELYTRA_FLYING.getId())) {
+        if (sound.getLocation().equals(SoundEvents.ELYTRA_FLYING.getLocation())) {
             return;
         }
 
@@ -128,17 +132,17 @@ public class SoundManagerMixin {
             return;
         }
 
-        MinecraftClient client = MinecraftClient.getInstance();
-        if (client.world == null) {
+        Minecraft client = Minecraft.getInstance();
+        if (client.level == null) {
             return;
         }
 
-        if (ModUtils.isOrbitWorld(client.world)) {
-            boolean noOxygen = !OxygenUtils.posHasOxygen(client.world, new BlockPos(sound.getX(), sound.getY(), sound.getZ()));
-            if (client.world != null && noOxygen || sound.getCategory().equals(SoundCategory.MUSIC) || sound.getCategory().equals(SoundCategory.RECORDS) || sound.getCategory().equals(SoundCategory.AMBIENT)) {
+        if (ModUtils.isOrbitlevel(client.level)) {
+            boolean noOxygen = !OxygenUtils.posHasOxygen(client.level, new BlockPos(sound.getX(), sound.getY(), sound.getZ()));
+            if (client.level != null && noOxygen || sound.getSource().equals(SoundSource.MUSIC) || sound.getSource().equals(SoundSource.RECORDS) || sound.getSource().equals(SoundSource.AMBIENT)) {
                 ci.cancel();
-                SoundInstance newSound = getSpaceSoundInstance(sound, ((sound.getCategory().equals(SoundCategory.MUSIC) || sound.getCategory().equals(SoundCategory.RECORDS) || sound.getCategory().equals(SoundCategory.AMBIENT)) ? 1.0f : 0.1f), 0.1f);
-                this.soundSystem.play(newSound);
+                SoundInstance newSound = getSpaceSoundInstance(sound, ((sound.getSource().equals(SoundSource.MUSIC) || sound.getSource().equals(SoundSource.RECORDS) || sound.getSource().equals(SoundSource.AMBIENT)) ? 1.0f : 0.1f), 0.1f);
+                this.soundEngine.play(newSound);
             }
         }
     }

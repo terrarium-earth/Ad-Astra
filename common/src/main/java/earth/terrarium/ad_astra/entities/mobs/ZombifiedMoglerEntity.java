@@ -1,30 +1,30 @@
 package earth.terrarium.ad_astra.entities.mobs;
 
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.ZoglinEntity;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.Zoglin;
+import net.minecraft.world.level.Level;
 
-public class ZombifiedMoglerEntity extends ZoglinEntity {
+public class ZombifiedMoglerEntity extends Zoglin {
 
-    public ZombifiedMoglerEntity(EntityType<? extends ZoglinEntity> entityType, World world) {
-        super(entityType, world);
+    public ZombifiedMoglerEntity(EntityType<? extends Zoglin> entityType, Level level) {
+        super(entityType, level);
     }
 
-    public static DefaultAttributeContainer.Builder createMobAttributes() {
-        return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 40.0).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3f).add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 0.6f).add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 1.0).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 6.0);
+    public static AttributeSupplier.Builder createMobAttributes() {
+        return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 40.0).add(Attributes.MOVEMENT_SPEED, 0.3f).add(Attributes.KNOCKBACK_RESISTANCE, 0.6f).add(Attributes.ATTACK_KNOCKBACK, 1.0).add(Attributes.ATTACK_DAMAGE, 6.0);
     }
 
     @Override
-    public boolean canImmediatelyDespawn(double distanceSquared) {
+    public boolean removeWhenFarAway(double distanceSquared) {
         return false;
     }
 
     @Override
-    public boolean shouldAttack(LivingEntity entity) {
-        return super.shouldAttack(entity) && !(entity instanceof ZombifiedMoglerEntity);
+    public boolean isTargetable(LivingEntity entity) {
+        return super.isTargetable(entity) && !(entity instanceof ZombifiedMoglerEntity);
     }
 }

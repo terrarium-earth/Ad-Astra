@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.mixin;
 
 import earth.terrarium.ad_astra.util.ModUtils;
-import net.minecraft.entity.Entity;
+import net.minecraft.world.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -15,8 +15,8 @@ public abstract class EntityMixin {
         Entity entity = ((Entity) (Object) this);
 
         // Teleport the entity to the planet when they fall in the void while in an orbit dimension
-        if (entity.getY() < entity.world.getBottomY() && ModUtils.isOrbitWorld(entity.world)) {
-            ModUtils.teleportToWorld(ModUtils.getPlanetOrbit(entity.world), entity);
+        if (entity.getY() < entity.level.getMinBuildHeight() && ModUtils.isOrbitlevel(entity.level)) {
+            ModUtils.teleportTolevel(ModUtils.getPlanetOrbit(entity.level), entity);
         }
     }
 }

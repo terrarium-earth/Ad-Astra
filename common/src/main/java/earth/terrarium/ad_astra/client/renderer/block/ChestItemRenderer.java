@@ -1,27 +1,27 @@
 package earth.terrarium.ad_astra.client.renderer.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.entity.ChestBlockEntity;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.item.BuiltinModelItemRenderer;
-import net.minecraft.client.render.model.json.ModelTransformation;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
 
-public class ChestItemRenderer extends BuiltinModelItemRenderer {
+public class ChestItemRenderer extends BlockEntityWithoutLevelRenderer {
 
     private final ChestBlockEntity chest;
 
     public ChestItemRenderer(Block block) {
-        super(MinecraftClient.getInstance().getBlockEntityRenderDispatcher(), MinecraftClient.getInstance().getEntityModelLoader());
-        this.chest = new ChestBlockEntity(BlockPos.ORIGIN, block.getDefaultState());
+        super(Minecraft.getInstance().getBlockEntityRenderDispatcher(), Minecraft.getInstance().getEntityModels());
+        this.chest = new ChestBlockEntity(BlockPos.ZERO, block.defaultBlockState());
 
     }
 
     @Override
-    public void render(ItemStack stack, ModelTransformation.Mode mode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
-        MinecraftClient.getInstance().getBlockEntityRenderDispatcher().renderEntity(this.chest, matrices, vertexConsumers, light, overlay);
+    public void renderByItem(ItemStack stack, ItemTransforms.TransformType mode, PoseStack matrices, MultiBufferSource vertexConsumers, int light, int overlay) {
+        Minecraft.getInstance().getBlockEntityRenderDispatcher().renderItem(this.chest, matrices, vertexConsumers, light, overlay);
     }
 }

@@ -4,24 +4,24 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamresourceful.resourcefullib.common.codecs.recipes.IngredientCodec;
 import earth.terrarium.ad_astra.registry.ModRecipes;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.RecipeSerializer;
-import net.minecraft.recipe.RecipeType;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.material.Fluid;
 
 public class CryoFuelConversionRecipe extends ConversionRecipe {
 
-    public CryoFuelConversionRecipe(Identifier id, Ingredient input, Fluid output, double conversionRatio) {
+    public CryoFuelConversionRecipe(ResourceLocation id, Ingredient input, Fluid output, double conversionRatio) {
         super(id, input, output, conversionRatio);
     }
 
-    public static Codec<CryoFuelConversionRecipe> codec(Identifier id) {
+    public static Codec<CryoFuelConversionRecipe> codec(ResourceLocation id) {
         return RecordCodecBuilder.create(instance -> instance.group(
                 RecordCodecBuilder.point(id),
                 IngredientCodec.CODEC.fieldOf("input").forGetter(CryoFuelConversionRecipe::getInput),
-                Registry.FLUID.getCodec().fieldOf("output").forGetter(ConversionRecipe::getFluidOutput),
+                Registry.FLUID.byNameCodec().fieldOf("output").forGetter(ConversionRecipe::getFluidOutput),
                 Codec.DOUBLE.fieldOf("conversion_ratio").orElse(1.0).forGetter(ConversionRecipe::getConversionRatio)
         ).apply(instance, CryoFuelConversionRecipe::new));
     }

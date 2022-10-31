@@ -13,37 +13,37 @@ import earth.terrarium.botarium.api.fluid.FluidHooks;
 import earth.terrarium.botarium.api.fluid.SimpleUpdatingFluidContainer;
 import earth.terrarium.botarium.api.menu.ExtraDataMenuProvider;
 import earth.terrarium.botarium.api.menu.MenuHooks;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.MovementType;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.entity.data.TrackedData;
-import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
-import net.minecraft.network.Packet;
-import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.GameRules;
-import net.minecraft.world.World;
-import net.minecraft.world.explosion.Explosion;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class VehicleEntity extends Entity implements Updatable {
 
-    protected static final TrackedData<Float> SPEED = DataTracker.registerData(VehicleEntity.class, TrackedDataHandlerRegistry.FLOAT);
+    protected static final EntityDataAccessor<Float> SPEED = SynchedEntityData.defineId(VehicleEntity.class, EntityDataSerializers.FLOAT);
     private final SimpleUpdatingFluidContainer tank = new SimpleUpdatingFluidContainer(this, getTankSize(), 1, (amount, fluid) -> true);
     private final CustomInventory inventory = new CustomInventory(this.getInventorySize());
     public double clientYaw;
@@ -57,40 +57,40 @@ public abstract class VehicleEntity extends Entity implements Updatable {
     protected double clientZVelocity;
     private int clientInterpolationSteps;
 
-    public VehicleEntity(EntityType<?> type, World world) {
-        super(type, world);
+    public VehicleEntity(EntityType<?> type, Level level) {
+        super(type, level);
     }
 
     @Override
-    protected void initDataTracker() {
-        this.dataTracker.startTracking(SPEED, 0.0f);
+    protected void defineSynchedData() {
+        this.entityData.define(SPEED, 0.0f);
     }
 
     @Override
-    protected void readCustomDataFromNbt(NbtCompound nbt) {
-        this.inventory.readNbtList(nbt.getList("inventory", NbtElement.COMPOUND_TYPE));
+    protected void readAdditionalSaveData(CompoundTag nbt) {
+        this.inventory.fromTag(nbt.getList("inventory", Tag.TAG_COMPOUND));
         getTankHolder().deserialize(nbt.getCompound("inputFluid"));
     }
 
     @Override
-    protected void writeCustomDataToNbt(NbtCompound nbt) {
-        nbt.put("inventory", this.inventory.toNbtList());
+    protected void addAdditionalSaveData(CompoundTag nbt) {
+        nbt.put("inventory", this.inventory.createTag());
         nbt.put("inputFluid", getTankHolder().serialize());
     }
 
     @Override
-    public void updateTrackedPositionAndAngles(double x, double y, double z, float yaw, float pitch, int interpolationSteps, boolean interpolate) {
+    public void lerpTo(double x, double y, double z, float yaw, float pitch, int interpolationSteps, boolean interpolate) {
         this.clientX = x;
         this.clientY = y;
         this.clientZ = z;
         this.clientYaw = yaw;
         this.clientPitch = pitch;
         this.clientInterpolationSteps = 10;
-        this.setVelocity(this.clientXVelocity, this.clientYVelocity, this.clientZVelocity);
+        this.setDeltaMovement(this.clientXVelocity, this.clientYVelocity, this.clientZVelocity);
     }
 
     private void updatePositionAndRotation() {
-        if (this.isLogicalSideForUpdatingMovement()) {
+        if (this.isControlledByLocalInstance()) {
             this.clientInterpolationSteps = 0;
             this.syncPacketPositionCodec(this.getX(), this.getY(), this.getZ());
         }
@@ -100,49 +100,49 @@ public abstract class VehicleEntity extends Entity implements Updatable {
         double d = this.getX() + (this.clientX - this.getX()) / (double) this.clientInterpolationSteps;
         double e = this.getY() + (this.clientY - this.getY()) / (double) this.clientInterpolationSteps;
         double f = this.getZ() + (this.clientZ - this.getZ()) / (double) this.clientInterpolationSteps;
-        double g = MathHelper.wrapDegrees(this.clientYaw - (double) this.getYaw());
-        this.setYaw(this.getYaw() + (float) g / (float) this.clientInterpolationSteps);
-        this.setPitch(this.getPitch() + (float) (this.clientPitch - (double) this.getPitch()) / (float) this.clientInterpolationSteps);
+        double g = Mth.wrapDegrees(this.clientYaw - (double) this.getYRot());
+        this.setYRot(this.getYRot() + (float) g / (float) this.clientInterpolationSteps);
+        this.setXRot(this.getXRot() + (float) (this.clientPitch - (double) this.getXRot()) / (float) this.clientInterpolationSteps);
         --this.clientInterpolationSteps;
-        this.setPosition(d, e, f);
-        this.setRotation(this.getYaw(), this.getPitch());
+        this.setPos(d, e, f);
+        this.setRot(this.getYRot(), this.getXRot());
     }
 
     @Override
-    public void setVelocityClient(double x, double y, double z) {
+    public void lerpMotion(double x, double y, double z) {
         this.clientXVelocity = x;
         this.clientYVelocity = y;
         this.clientZVelocity = z;
-        this.setVelocity(this.clientXVelocity, this.clientYVelocity, this.clientZVelocity);
+        this.setDeltaMovement(this.clientXVelocity, this.clientYVelocity, this.clientZVelocity);
     }
 
     @Override
     public void tick() {
-        this.previousYaw = this.getYaw();
+        this.previousYaw = this.getYRot();
 
         super.tick();
         this.updatePositionAndRotation();
         this.doMovement();
         this.slowDown();
         this.doGravity();
-        this.move(MovementType.SELF, this.getVelocity());
-        this.checkBlockCollision();
+        this.move(MoverType.SELF, this.getDeltaMovement());
+        this.checkInsideBlocks();
 
         this.tryInsertingIntoTank();
     }
 
     // Sets the velocity based on the current speed and the current direction
     public void doMovement() {
-        this.setPitch(0);
-        Vec3d movement = this.getRotationVector(this.getPitch(), this.getYaw());
+        this.setXRot(0);
+        Vec3 movement = this.calculateViewVector(this.getXRot(), this.getYRot());
 
         // Save the current y velocity so we can use it later
-        double yVelocity = this.getVelocity().getY();
+        double yVelocity = this.getDeltaMovement().y();
 
-        this.setVelocity(this.getVelocity().add(movement.getX(), 0.0, movement.getZ()).multiply(this.getSpeed()));
+        this.setDeltaMovement(this.getDeltaMovement().add(movement.x(), 0.0, movement.z()).scale(this.getSpeed()));
 
         // Set the y velocity back to the original value, as it was modified by the movement
-        this.setVelocity(new Vec3d(this.getVelocity().getX(), yVelocity, this.getVelocity().getZ()));
+        this.setDeltaMovement(new Vec3(this.getDeltaMovement().x(), yVelocity, this.getDeltaMovement().z()));
     }
 
     // Slow down the vehicle until a full stop is reached
@@ -151,7 +151,7 @@ public abstract class VehicleEntity extends Entity implements Updatable {
         if (this.getSpeed() < 0.001 && this.getSpeed() > -0.001) {
             this.setSpeed(0.0f);
         }
-        this.setSpeed(MathHelper.clamp(this.getSpeed(), this.getMinSpeed(), this.getMaxSpeed()));
+        this.setSpeed(Mth.clamp(this.getSpeed(), this.getMinSpeed(), this.getMaxSpeed()));
     }
 
     public float getMinSpeed() {
@@ -166,63 +166,63 @@ public abstract class VehicleEntity extends Entity implements Updatable {
     @SuppressWarnings("deprecation")
     public void doGravity() {
 
-        if (!world.isChunkLoaded(this.getBlockPos())) {
+        if (!level.hasChunkAt(this.blockPosition())) {
             return;
         }
 
-        if (!this.hasNoGravity()) {
+        if (!this.isNoGravity()) {
             // Slow down the gravity while in water
-            if (this.isTouchingWater()) {
-                this.setVelocity(this.getVelocity().add(0, -0.0001, 0));
+            if (this.isInWater()) {
+                this.setDeltaMovement(this.getDeltaMovement().add(0, -0.0001, 0));
             } else {
-                this.setVelocity(this.getVelocity().add(0, -0.03, 0));
+                this.setDeltaMovement(this.getDeltaMovement().add(0, -0.03, 0));
             }
-            if (this.getVelocity().getY() < AdAstra.CONFIG.vehicles.gravity) {
-                this.setVelocity(new Vec3d(this.getVelocity().getX(), AdAstra.CONFIG.vehicles.gravity, this.getVelocity().getZ()));
+            if (this.getDeltaMovement().y() < AdAstra.CONFIG.vehicles.gravity) {
+                this.setDeltaMovement(new Vec3(this.getDeltaMovement().x(), AdAstra.CONFIG.vehicles.gravity, this.getDeltaMovement().z()));
             }
         }
     }
 
     public float getSpeed() {
-        return this.dataTracker.get(SPEED);
+        return this.entityData.get(SPEED);
     }
 
     public void setSpeed(float value) {
-        this.dataTracker.set(SPEED, value);
+        this.entityData.set(SPEED, value);
     }
 
     @Override
-    public ActionResult interact(PlayerEntity player, Hand hand) {
-        if (player.shouldCancelInteraction()) {
-            return ActionResult.PASS;
+    public InteractionResult interact(Player player, InteractionHand hand) {
+        if (player.isSecondaryUseActive()) {
+            return InteractionResult.PASS;
         }
-        if (!this.world.isClient) {
-            if (this.getPassengerList().size() > this.getMaxPassengers()) {
-                return ActionResult.PASS;
+        if (!this.level.isClientSide) {
+            if (this.getPassengers().size() > this.getMaxPassengers()) {
+                return InteractionResult.PASS;
             }
-            player.setYaw(this.getYaw());
-            player.setPitch(this.getPitch());
-            return player.startRiding(this) ? ActionResult.CONSUME : ActionResult.PASS;
+            player.setYRot(this.getYRot());
+            player.setXRot(this.getXRot());
+            return player.startRiding(this) ? InteractionResult.CONSUME : InteractionResult.PASS;
         }
-        return ActionResult.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
-    public void openInventory(PlayerEntity player) {
+    public void openInventory(Player player) {
         openInventory(player, new VehicleScreenHandlerFactory(this));
     }
 
-    public void openInventory(PlayerEntity player, ExtraDataMenuProvider handler) {
-        if (!player.world.isClient) {
-            if (player.isSneaking()) {
-                MenuHooks.openMenu((ServerPlayerEntity) player, handler);
+    public void openInventory(Player player, ExtraDataMenuProvider handler) {
+        if (!player.level.isClientSide) {
+            if (player.isShiftKeyDown()) {
+                MenuHooks.openMenu((ServerPlayer) player, handler);
             }
         }
     }
 
     @Override
-    public boolean damage(DamageSource source, float amount) {
+    public boolean hurt(DamageSource source, float amount) {
         if (amount > 0) {
-            if (source.getAttacker() instanceof PlayerEntity player) {
+            if (source.getEntity() instanceof Player player) {
                 if (!(player.getVehicle() instanceof VehicleEntity)) {
                     this.drop();
                     return true;
@@ -233,35 +233,35 @@ public abstract class VehicleEntity extends Entity implements Updatable {
     }
 
     public void drop() {
-        if (getDropStack() != null && this.world.getGameRules().getBoolean(GameRules.DO_TILE_DROPS)) {
-            BlockPos pos = this.getBlockPos();
+        if (getDropStack() != null && this.level.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS)) {
+            BlockPos pos = this.blockPosition();
             ItemStack dropStack = this.getDropStack();
 
             // Set the fluid and fluid type in the dropped item.
             ((VehicleItem) dropStack.getItem()).setFluid(dropStack, getTankFluid());
-            NbtCompound nbt = dropStack.getOrCreateNbt();
+            CompoundTag nbt = dropStack.getOrCreateTag();
             // Set the inventory in the dropped item.
-            nbt.put("inventory", this.inventory.toNbtList());
+            nbt.put("inventory", this.inventory.createTag());
 
-            world.playSound(null, pos, SoundEvents.BLOCK_NETHERITE_BLOCK_BREAK, SoundCategory.BLOCKS, 1, 1);
-            this.world.spawnEntity(new ItemEntity(this.world, pos.getX(), pos.getY() + 0.5f, pos.getZ(), dropStack));
+            level.playSound(null, pos, SoundEvents.NETHERITE_BLOCK_BREAK, SoundSource.BLOCKS, 1, 1);
+            this.level.addFreshEntity(new ItemEntity(this.level, pos.getX(), pos.getY() + 0.5f, pos.getZ(), dropStack));
         }
 
-        if (!this.world.isClient) {
+        if (!this.level.isClientSide) {
             this.discard();
         }
     }
 
     public void explode(float powerMultiplier) {
-        if (!this.world.isClient) {
-            world.createExplosion(this, this.getX(), this.getY() + 0.5, this.getZ(), 7.0f * powerMultiplier, OxygenUtils.worldHasOxygen(this.world), Explosion.DestructionType.DESTROY);
+        if (!this.level.isClientSide) {
+            level.explode(this, this.getX(), this.getY() + 0.5, this.getZ(), 7.0f * powerMultiplier, OxygenUtils.levelHasOxygen(this.level), Explosion.BlockInteraction.DESTROY);
         }
         this.discard();
     }
 
     @Override
-    public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
-        if (this.getVelocity().getY() < AdAstra.CONFIG.vehicles.fallingExplosionThreshold) {
+    public boolean causeFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
+        if (this.getDeltaMovement().y() < AdAstra.CONFIG.vehicles.fallingExplosionThreshold) {
             if (this.isOnGround()) {
                 this.explode(AdAstra.CONFIG.vehicles.fallingExplosionMultiplier);
                 return true;
@@ -276,13 +276,13 @@ public abstract class VehicleEntity extends Entity implements Updatable {
 
     @Override
     @Nullable
-    public Entity getPrimaryPassenger() {
+    public Entity getControllingPassenger() {
         return this.getFirstPassenger();
     }
 
     @Override
     protected boolean canAddPassenger(Entity passenger) {
-        return this.getPassengerList().size() < this.getMaxPassengers();
+        return this.getPassengers().size() < this.getMaxPassengers();
     }
 
     public int getMaxPassengers() {
@@ -290,7 +290,7 @@ public abstract class VehicleEntity extends Entity implements Updatable {
     }
 
     @Override
-    public double getMountedHeightOffset() {
+    public double getPassengersRidingOffset() {
         return 0.0;
     }
 
@@ -320,12 +320,12 @@ public abstract class VehicleEntity extends Entity implements Updatable {
     }
 
     @Override
-    public boolean collides() {
+    public boolean isPickable() {
         return true;
     }
 
     @Override
-    public boolean isCollidable() {
+    public boolean canBeCollidedWith() {
         return true;
     }
 
@@ -344,15 +344,15 @@ public abstract class VehicleEntity extends Entity implements Updatable {
     public abstract int getInventorySize();
 
     @Override
-    public Packet<?> createSpawnPacket() {
-        return new EntitySpawnS2CPacket(this);
+    public Packet<?> getAddEntityPacket() {
+        return new ClientboundAddEntityPacket(this);
     }
 
     @SuppressWarnings("deprecation")
     public void tryInsertingIntoTank() {
-        if (this.getInventorySize() > 1 && !this.getInventory().getStack(0).isEmpty()) {
-            if (!this.world.isClient) {
-                FluidUtils.insertItemFluidToTank(this.tank, this.getInventory(), 0, 1, 0, f -> f.isIn(ModTags.FUELS));
+        if (this.getInventorySize() > 1 && !this.getInventory().getItem(0).isEmpty()) {
+            if (!this.level.isClientSide) {
+                FluidUtils.insertItemFluidToTank(this.tank, this.getInventory(), 0, 1, 0, f -> f.is(ModTags.FUELS));
             }
         }
     }
@@ -374,7 +374,7 @@ public abstract class VehicleEntity extends Entity implements Updatable {
     }
 
     public void consumeFuel() {
-        if (this.world.getTime() % 20 == 0) {
+        if (this.level.getGameTime() % 20 == 0) {
             getTank().extractFluid(FluidHooks.newFluidHolder(getTankFluid(), this.getFuelPerTick(), null), false);
         }
     }

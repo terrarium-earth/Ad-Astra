@@ -1,52 +1,52 @@
 package earth.terrarium.ad_astra.client.renderer.block;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Vector3f;
 import earth.terrarium.ad_astra.blocks.door.SlidingDoorBlock;
 import earth.terrarium.ad_astra.blocks.door.SlidingDoorBlockEntity;
 import earth.terrarium.ad_astra.client.AdAstraClient;
 import earth.terrarium.ad_astra.registry.ModBlocks;
-import earth.terrarium.ad_astra.util.ModIdentifier;
+import earth.terrarium.ad_astra.util.ModResourceLocation;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.Block;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.block.entity.BlockEntityRenderer;
-import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3f;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.block.Block;
 
 @Environment(EnvType.CLIENT)
 public class SlidingDoorBlockEntityRenderer implements BlockEntityRenderer<SlidingDoorBlockEntity> {
 
-    public static final Identifier IRON_SLIDING_DOOR_MODEL = new ModIdentifier("block/door/iron_sliding_door");
-    public static final Identifier STEEL_SLIDING_DOOR_MODEL = new ModIdentifier("block/door/steel_sliding_door");
-    public static final Identifier DESH_SLIDING_DOOR_MODEL = new ModIdentifier("block/door/desh_sliding_door");
-    public static final Identifier OSTRUM_SLIDING_DOOR_MODEL = new ModIdentifier("block/door/ostrum_sliding_door");
-    public static final Identifier CALORITE_SLIDING_DOOR_MODEL = new ModIdentifier("block/door/calorite_sliding_door");
-    public static final Identifier AIRLOCK_MODEL = new ModIdentifier("block/door/airlock");
-    public static final Identifier REINFORCED_DOOR_MODEL = new ModIdentifier("block/door/reinforced_door");
+    public static final ResourceLocation IRON_SLIDING_DOOR_MODEL = new ModResourceLocation("block/door/iron_sliding_door");
+    public static final ResourceLocation STEEL_SLIDING_DOOR_MODEL = new ModResourceLocation("block/door/steel_sliding_door");
+    public static final ResourceLocation DESH_SLIDING_DOOR_MODEL = new ModResourceLocation("block/door/desh_sliding_door");
+    public static final ResourceLocation OSTRUM_SLIDING_DOOR_MODEL = new ModResourceLocation("block/door/ostrum_sliding_door");
+    public static final ResourceLocation CALORITE_SLIDING_DOOR_MODEL = new ModResourceLocation("block/door/calorite_sliding_door");
+    public static final ResourceLocation AIRLOCK_MODEL = new ModResourceLocation("block/door/airlock");
+    public static final ResourceLocation REINFORCED_DOOR_MODEL = new ModResourceLocation("block/door/reinforced_door");
 
-    public static final Identifier IRON_SLIDING_DOOR_MODEL_FLIPPED = new ModIdentifier("block/door/iron_sliding_door_flipped");
-    public static final Identifier STEEL_SLIDING_DOOR_MODEL_FLIPPED = new ModIdentifier("block/door/steel_sliding_door_flipped");
-    public static final Identifier DESH_SLIDING_DOOR_MODEL_FLIPPED = new ModIdentifier("block/door/desh_sliding_door_flipped");
-    public static final Identifier OSTRUM_SLIDING_DOOR_MODEL_FLIPPED = new ModIdentifier("block/door/ostrum_sliding_door_flipped");
-    public static final Identifier CALORITE_SLIDING_MODEL_FLIPPED = new ModIdentifier("block/door/calorite_sliding_door_flipped");
-    public static final Identifier AIRLOCK_MODEL_FLIPPED = new ModIdentifier("block/door/airlock_flipped");
-    public static final Identifier REINFORCED_DOOR_MODEL_FLIPPED = new ModIdentifier("block/door/reinforced_door_flipped");
+    public static final ResourceLocation IRON_SLIDING_DOOR_MODEL_FLIPPED = new ModResourceLocation("block/door/iron_sliding_door_flipped");
+    public static final ResourceLocation STEEL_SLIDING_DOOR_MODEL_FLIPPED = new ModResourceLocation("block/door/steel_sliding_door_flipped");
+    public static final ResourceLocation DESH_SLIDING_DOOR_MODEL_FLIPPED = new ModResourceLocation("block/door/desh_sliding_door_flipped");
+    public static final ResourceLocation OSTRUM_SLIDING_DOOR_MODEL_FLIPPED = new ModResourceLocation("block/door/ostrum_sliding_door_flipped");
+    public static final ResourceLocation CALORITE_SLIDING_MODEL_FLIPPED = new ModResourceLocation("block/door/calorite_sliding_door_flipped");
+    public static final ResourceLocation AIRLOCK_MODEL_FLIPPED = new ModResourceLocation("block/door/airlock_flipped");
+    public static final ResourceLocation REINFORCED_DOOR_MODEL_FLIPPED = new ModResourceLocation("block/door/reinforced_door_flipped");
 
-    public SlidingDoorBlockEntityRenderer(BlockEntityRendererFactory.Context ctx) {
+    public SlidingDoorBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {
     }
 
     @Override
-    public void render(SlidingDoorBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+    public void render(SlidingDoorBlockEntity entity, float tickDelta, PoseStack matrices, MultiBufferSource vertexConsumers, int light, int overlay) {
 
-        float slide = MathHelper.lerp(tickDelta, entity.getPreviousSlideTicks(), entity.getSlideTicks()) / 81.0f;
+        float slide = Mth.lerp(tickDelta, entity.getPreviousSlideTicks(), entity.getSlideTicks()) / 81.0f;
 
-        Identifier doorModelFlipped;
-        Identifier doorModel;
-        Block type = entity.getCachedState().getBlock();
+        ResourceLocation doorModelFlipped;
+        ResourceLocation doorModel;
+        Block type = entity.getBlockState().getBlock();
 
         float offset = 0;
         if (type.equals(ModBlocks.IRON_SLIDING_DOOR.get())) {
@@ -78,9 +78,9 @@ public class SlidingDoorBlockEntityRenderer implements BlockEntityRenderer<Slidi
             return;
         }
 
-        Direction degrees = entity.getCachedState().get(SlidingDoorBlock.FACING);
+        Direction degrees = entity.getBlockState().getValue(SlidingDoorBlock.FACING);
 
-        matrices.push();
+        matrices.pushPose();
         if (degrees.equals(Direction.NORTH)) {
             matrices.translate(-1.5f, 1.0f, 0.42f);
             matrices.translate(-slide, 0.0f, 0.0);
@@ -98,11 +98,11 @@ public class SlidingDoorBlockEntityRenderer implements BlockEntityRenderer<Slidi
             matrices.translate(0.0f, 0.0f, slide);
             matrices.translate(0.0f, 0.0f, offset);
         }
-        matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(degrees.getOpposite().asRotation()));
+        matrices.mulPose(Vector3f.YP.rotationDegrees(degrees.getOpposite().toYRot()));
         AdAstraClient.renderBlock(((degrees.equals(Direction.WEST) || degrees.equals(Direction.EAST)) ? doorModel : doorModelFlipped), matrices, vertexConsumers, light, overlay);
-        matrices.pop();
+        matrices.popPose();
 
-        matrices.push();
+        matrices.pushPose();
         if (degrees.equals(Direction.NORTH)) {
             matrices.translate(0.0f, 1.0f, 0.42f);
             matrices.translate(slide, 0.0f, 0.0);
@@ -120,8 +120,8 @@ public class SlidingDoorBlockEntityRenderer implements BlockEntityRenderer<Slidi
             matrices.translate(0.0f, 0.0f, -slide);
             matrices.translate(0.0f, 0.0f, offset);
         }
-        matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(degrees.getOpposite().asRotation()));
+        matrices.mulPose(Vector3f.YP.rotationDegrees(degrees.getOpposite().toYRot()));
         AdAstraClient.renderBlock((degrees.equals(Direction.WEST) || degrees.equals(Direction.EAST)) ? doorModelFlipped : doorModel, matrices, vertexConsumers, light, overlay);
-        matrices.pop();
+        matrices.popPose();
     }
 }

@@ -2,12 +2,12 @@ package earth.terrarium.ad_astra.blocks.door;
 
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
 import earth.terrarium.ad_astra.registry.ModSoundEvents;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class SlidingDoorBlockEntity extends BlockEntity {
 
@@ -21,12 +21,12 @@ public class SlidingDoorBlockEntity extends BlockEntity {
     }
 
     @Override
-    public void readNbt(NbtCompound nbt) {
+    public void load(CompoundTag nbt) {
         this.slideTicks = nbt.getInt("slideTicks");
     }
 
     @Override
-    protected void writeNbt(NbtCompound nbt) {
+    protected void saveAdditional(CompoundTag nbt) {
         nbt.putInt("slideTicks", this.slideTicks);
     }
 
@@ -47,8 +47,8 @@ public class SlidingDoorBlockEntity extends BlockEntity {
     }
 
     public void tick() {
-        if (this.getCachedState().get(SlidingDoorBlock.LOCATION).equals(LocationState.BOTTOM)) {
-            boolean open = this.getCachedState().get(SlidingDoorBlock.OPEN) || this.getCachedState().get(SlidingDoorBlock.POWERED);
+        if (this.getBlockState().getValue(SlidingDoorBlock.LOCATION).equals(LocationState.BOTTOM)) {
+            boolean open = this.getBlockState().getValue(SlidingDoorBlock.OPEN) || this.getBlockState().getValue(SlidingDoorBlock.POWERED);
             this.previousSlideTicks = this.slideTicks;
 
             if (open) {
@@ -57,14 +57,14 @@ public class SlidingDoorBlockEntity extends BlockEntity {
                 slideTicks -= 3;
             }
 
-            if (!world.isClient) {
+            if (!level.isClientSide) {
                 if (!open && slideTicks == 94) {
-                    world.playSound(null, pos, ModSoundEvents.LARGE_DOOR_CLOSE.get(), SoundCategory.BLOCKS, 0.3f, 1);
+                    level.playSound(null, worldPosition, ModSoundEvents.LARGE_DOOR_CLOSE.get(), SoundSource.BLOCKS, 0.25f, 1);
                 } else if (open && slideTicks == 6) {
-                    world.playSound(null, pos, ModSoundEvents.LARGE_DOOR_OPEN.get(), SoundCategory.BLOCKS, 0.3f, 1);
+                    level.playSound(null, worldPosition, ModSoundEvents.LARGE_DOOR_OPEN.get(), SoundSource.BLOCKS, 0.25f, 1);
                 }
             }
-            slideTicks = MathHelper.clamp(slideTicks, 0, 100);
+            slideTicks = Mth.clamp(slideTicks, 0, 100);
         }
     }
 }

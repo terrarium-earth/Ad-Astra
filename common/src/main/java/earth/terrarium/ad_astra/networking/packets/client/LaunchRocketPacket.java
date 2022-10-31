@@ -6,18 +6,18 @@ import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
 import earth.terrarium.ad_astra.entities.vehicles.RocketEntity;
 import earth.terrarium.ad_astra.networking.NetworkHandling;
 import earth.terrarium.ad_astra.networking.packets.server.StartRocketPacket;
-import earth.terrarium.ad_astra.util.ModIdentifier;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
+import earth.terrarium.ad_astra.util.ModResourceLocation;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 
 public record LaunchRocketPacket() implements Packet<LaunchRocketPacket> {
 
-    public static final Identifier ID = new ModIdentifier("launch_rocket");
+    public static final ResourceLocation ID = new ModResourceLocation("launch_rocket");
     public static final Handler HANDLER = new Handler();
 
     @Override
-    public Identifier getID() {
+    public ResourceLocation getID() {
         return ID;
     }
 
@@ -28,25 +28,25 @@ public record LaunchRocketPacket() implements Packet<LaunchRocketPacket> {
 
     private static class Handler implements PacketHandler<LaunchRocketPacket> {
         @Override
-        public void encode(LaunchRocketPacket packet, PacketByteBuf buf) {
+        public void encode(LaunchRocketPacket packet, FriendlyByteBuf buf) {
         }
 
         @Override
-        public LaunchRocketPacket decode(PacketByteBuf buf) {
+        public LaunchRocketPacket decode(FriendlyByteBuf buf) {
             return new LaunchRocketPacket();
         }
 
         @Override
         public PacketContext handle(LaunchRocketPacket message) {
-            return (player, world) -> {
+            return (player, level) -> {
                 if (player.getVehicle() instanceof RocketEntity rocket) {
                     if (!rocket.isFlying()) {
                         if (rocket.getTankAmount() >= RocketEntity.getRequiredAmountForLaunch(rocket.getTankFluid())) {
                             rocket.initiateLaunchSequenceFromServer();
                             // Tell all clients to start rendering the rocket launch
-                            NetworkHandling.CHANNEL.sendToAllLoaded(new StartRocketPacket(rocket.getId()), world, rocket.getBlockPos());
+                            NetworkHandling.CHANNEL.sendToAllLoaded(new StartRocketPacket(rocket.getId()), level, rocket.getOnPos());
                         } else {
-                            player.sendMessage(Text.translatable("message.ad_astra.no_fuel"), false);
+                            player.displayClientMessage(Component.translatable("message.ad_astra.no_fuel"), false);
                         }
                     }
                 }

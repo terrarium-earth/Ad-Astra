@@ -4,31 +4,30 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamresourceful.resourcefullib.common.codecs.recipes.ItemStackCodec;
 import earth.terrarium.ad_astra.registry.ModRecipes;
-import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.RecipeSerializer;
-import net.minecraft.recipe.RecipeType;
-import net.minecraft.util.Identifier;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 
 public class NasaWorkbenchRecipe extends CookingRecipe {
 
-    public NasaWorkbenchRecipe(Identifier id, List<Ingredient> input, List<Integer> stackCounts, ItemStack output) {
+    public NasaWorkbenchRecipe(ResourceLocation id, List<Ingredient> input, List<Integer> stackCounts, ItemStack output) {
         super(id, input, stackCounts, output);
     }
 
-    public static Codec<NasaWorkbenchRecipe> codec(Identifier id) {
+    public static Codec<NasaWorkbenchRecipe> codec(ResourceLocation id) {
         return RecordCodecBuilder.create(instance -> instance.group(
                 RecordCodecBuilder.point(id),
                 IngredientHolder.CODEC.listOf().fieldOf("ingredients").forGetter(NasaWorkbenchRecipe::getHolders),
-                ItemStackCodec.CODEC.fieldOf("output").forGetter(NasaWorkbenchRecipe::getOutput)
+                ItemStackCodec.CODEC.fieldOf("output").forGetter(NasaWorkbenchRecipe::getResultItem)
         ).apply(instance, NasaWorkbenchRecipe::of));
     }
 
-    private static NasaWorkbenchRecipe of(Identifier id, List<IngredientHolder> ingredients, ItemStack output) {
+    private static NasaWorkbenchRecipe of(ResourceLocation id, List<IngredientHolder> ingredients, ItemStack output) {
         List<Ingredient> input = new ArrayList<>();
         List<Integer> count = new ArrayList<>();
         for (IngredientHolder ingredient : ingredients) {

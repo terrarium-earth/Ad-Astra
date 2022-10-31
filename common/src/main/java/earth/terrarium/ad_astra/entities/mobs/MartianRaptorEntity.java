@@ -1,78 +1,80 @@
 package earth.terrarium.ad_astra.entities.mobs;
 
 import earth.terrarium.ad_astra.AdAstra;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityGroup;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.MobType;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 
-public class MartianRaptorEntity extends HostileEntity {
+public class MartianRaptorEntity extends Monster {
 
     private int movementCooldownTicks;
 
-    public MartianRaptorEntity(EntityType<? extends HostileEntity> entityType, World world) {
-        super(entityType, world);
+    public MartianRaptorEntity(EntityType<? extends Monster> entityType, Level level) {
+        super(entityType, level);
     }
 
-    public static DefaultAttributeContainer.Builder createMobAttributes() {
-        return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3).add(EntityAttributes.GENERIC_MAX_HEALTH, 26).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 8);
-    }
-
-    @Override
-    protected void initGoals() {
-        this.goalSelector.add(1, new MeleeAttackGoal(this, 1.2, false));
-        this.goalSelector.add(2, new RevengeGoal(this));
-        this.goalSelector.add(3, new WanderAroundGoal(this, 0.8));
-        this.goalSelector.add(4, new LookAroundGoal(this));
-        this.goalSelector.add(5, new PounceAtTargetGoal(this, 0.2f));
-        this.targetSelector.add(6, new TargetGoal<>(this, PlayerEntity.class, false));
-        this.goalSelector.add(7, new WanderAroundFarGoal(this, 1.0));
+    public static AttributeSupplier.Builder createMobAttributes() {
+        return Monster.createMonsterAttributes().add(Attributes.MOVEMENT_SPEED, 0.3).add(Attributes.MAX_HEALTH, 26).add(Attributes.ATTACK_DAMAGE, 8);
     }
 
     @Override
-    public EntityGroup getGroup() {
-        return EntityGroup.UNDEAD;
+    protected void registerGoals() {
+        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.2, false));
+        this.goalSelector.addGoal(2, new HurtByTargetGoal(this));
+        this.goalSelector.addGoal(3, new RandomStrollGoal(this, 0.8));
+        this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(5, new LeapAtTargetGoal(this, 0.2f));
+        this.targetSelector.addGoal(6, new NearestAttackableTargetGoal<>(this, Player.class, false));
+        this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0));
+    }
+
+    @Override
+    public MobType getMobType() {
+        return MobType.UNDEAD;
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.ENTITY_STRIDER_HURT;
+        return SoundEvents.STRIDER_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_STRIDER_DEATH;
+        return SoundEvents.STRIDER_DEATH;
     }
 
     @Override
-    public boolean tryAttack(Entity target) {
+    public boolean doHurtTarget(Entity target) {
         this.movementCooldownTicks = 10;
-        this.world.sendEntityStatus(this, (byte) 4);
-        return super.tryAttack(target);
+        this.level.broadcastEntityEvent(this, (byte) 4);
+        return super.doHurtTarget(target);
     }
 
     @Override
-    public void handleStatus(byte status) {
+    public void handleEntityEvent(byte status) {
         if (status == 4) {
             this.movementCooldownTicks = 10;
         } else {
-            super.handleStatus(status);
+            super.handleEntityEvent(status);
         }
     }
 
     @Override
-    public void tickMovement() {
-        super.tickMovement();
+    public void aiStep() {
+        super.aiStep();
         if (movementCooldownTicks > 0) {
             movementCooldownTicks--;
         }
@@ -83,10 +85,10 @@ public class MartianRaptorEntity extends HostileEntity {
     }
 
     @Override
-    public boolean canSpawn(WorldAccess world, SpawnReason spawnReason) {
+    public boolean checkSpawnRules(LevelAccessor level, MobSpawnType spawnReason) {
         if (!AdAstra.CONFIG.general.spawnMartianRaptors) {
             return false;
         }
-        return super.canSpawn(world, spawnReason);
+        return super.checkSpawnRules(level, spawnReason);
     }
 }

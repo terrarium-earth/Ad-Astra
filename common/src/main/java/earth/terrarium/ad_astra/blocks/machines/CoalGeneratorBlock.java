@@ -1,12 +1,12 @@
 package earth.terrarium.ad_astra.blocks.machines;
 
 import earth.terrarium.ad_astra.blocks.machines.entity.CoalGeneratorBlockEntity;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class CoalGeneratorBlock extends AbstractMachineBlock {
 
-    public CoalGeneratorBlock(Settings settings) {
+    public CoalGeneratorBlock(Properties settings) {
         super(settings);
     }
 
@@ -21,7 +21,7 @@ public class CoalGeneratorBlock extends AbstractMachineBlock {
     }
 
     @Override
-    public CoalGeneratorBlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+    public CoalGeneratorBlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new CoalGeneratorBlockEntity(pos, state);
     }
 }

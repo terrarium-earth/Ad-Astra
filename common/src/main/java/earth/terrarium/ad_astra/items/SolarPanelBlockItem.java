@@ -1,23 +1,23 @@
 package earth.terrarium.ad_astra.items;
 
 import earth.terrarium.ad_astra.registry.ModBlocks;
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.math.Direction;
+import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.block.Block;
 
 public class SolarPanelBlockItem extends MachineBlockItem {
 
-    public SolarPanelBlockItem(Block block, Settings settings) {
+    public SolarPanelBlockItem(Block block, Properties settings) {
         super(block, settings);
     }
 
     // Prevents the player from placing solar panels directly adjacent to other solar panels.
     @Override
-    public ActionResult place(ItemPlacementContext context) {
+    public InteractionResult place(BlockPlaceContext context) {
         for (Direction dir : Direction.values()) {
-            if (context.getWorld().getBlockState(context.getBlockPos().offset(dir)).isOf(ModBlocks.SOLAR_PANEL.get())) {
-                return ActionResult.PASS;
+            if (context.getLevel().getBlockState(context.getClickedPos().relative(dir)).is(ModBlocks.SOLAR_PANEL.get())) {
+                return InteractionResult.PASS;
             }
         }
         return super.place(context);

@@ -2,58 +2,57 @@ package earth.terrarium.ad_astra.client.dimension.rendering;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.Tessellator;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexFormat;
-import com.mojang.blaze3d.vertex.VertexFormats;
 import earth.terrarium.ad_astra.mixin.client.WorldRendererAccessor;
-import earth.terrarium.ad_astra.util.ModIdentifier;
+import earth.terrarium.ad_astra.util.ModResourceLocation;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.GameRenderer;
-import net.minecraft.client.render.LightmapTextureManager;
-import net.minecraft.client.render.WorldRenderer;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.Heightmap;
-import net.minecraft.world.biome.Biome;
-
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.LevelRenderer;
+import net.minecraft.client.renderer.LightTexture;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.levelgen.Heightmap;
 import java.util.Random;
 
 @Environment(EnvType.CLIENT)
 public class ModWeatherRenderer {
 
-    private static final Identifier VENUS_RAIN_TEXTURE = new ModIdentifier("textures/sky/venus/rain.png");
+    private static final ResourceLocation VENUS_RAIN_TEXTURE = new ModResourceLocation("textures/sky/venus/rain.png");
 
-    public static void render(ClientWorld world, int ticks, float tickDelta, LightmapTextureManager manager, double cameraX, double cameraY, double cameraZ) {
+    public static void render(ClientLevel level, int ticks, float tickDelta, LightTexture manager, double cameraX, double cameraY, double cameraZ) {
 
-        MinecraftClient client = MinecraftClient.getInstance();
-        WorldRendererAccessor renderer = (WorldRendererAccessor) client.worldRenderer;
+        Minecraft client = Minecraft.getInstance();
+        WorldRendererAccessor renderer = (WorldRendererAccessor) client.levelRenderer;
 
-        float h = client.world.getRainGradient(tickDelta);
+        float h = client.level.getRainLevel(tickDelta);
         if (!(h <= 0.0f)) {
-            manager.enable();
-            int i = MathHelper.floor(cameraX);
-            int j = MathHelper.floor(cameraY);
-            int k = MathHelper.floor(cameraZ);
-            Tessellator tessellator = Tessellator.getInstance();
-            BufferBuilder bufferBuilder = tessellator.getBufferBuilder();
+            manager.turnOnLightLayer();
+            int i = Mth.floor(cameraX);
+            int j = Mth.floor(cameraY);
+            int k = Mth.floor(cameraZ);
+            Tesselator tessellator = Tesselator.getInstance();
+            BufferBuilder bufferBuilder = tessellator.getBuilder();
             RenderSystem.disableCull();
             RenderSystem.enableBlend();
             RenderSystem.defaultBlendFunc();
             RenderSystem.enableDepthTest();
             int l = 5;
-            if (MinecraftClient.isFancyGraphicsOrBetter()) {
+            if (Minecraft.useFancyGraphics()) {
                 l = 10;
             }
 
-            RenderSystem.depthMask(MinecraftClient.isFabulousGraphicsOrBetter());
+            RenderSystem.depthMask(Minecraft.useShaderTransparency());
             int m = -1;
             RenderSystem.setShader(GameRenderer::getParticleShader);
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-            BlockPos.Mutable mutable = new BlockPos.Mutable();
+            BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
 
             for (int o = k - l; o <= k + l; ++o) {
                 for (int p = i - l; p <= i + l; ++p) {
@@ -61,9 +60,9 @@ public class ModWeatherRenderer {
                     double r = (double) renderer.getRainSizeX()[q] * 0.5;
                     double s = (double) renderer.getRainSizeZ()[q] * 0.5;
                     mutable.set(p, cameraY, o);
-                    Biome biome = world.getBiome(mutable).value();
+                    Biome biome = level.getBiome(mutable).value();
                     if (biome.getPrecipitation() != Biome.Precipitation.NONE) {
-                        int t = world.getTopY(Heightmap.Type.MOTION_BLOCKING, p, o);
+                        int t = level.getHeight(Heightmap.Types.MOTION_BLOCKING, p, o);
                         int u = j - l;
                         int v = j + l;
                         if (u < t) {
@@ -81,12 +80,12 @@ public class ModWeatherRenderer {
                             mutable.set(p, u, o);
                             float y;
                             float ac;
-                            if (biome.doesNotSnow(mutable)) {
+                            if (biome.warmEnoughToRain(mutable)) {
                                 if (m != 0) {
 
                                     m = 0;
                                     RenderSystem.setShaderTexture(0, VENUS_RAIN_TEXTURE);
-                                    bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR_LIGHT);
+                                    bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
                                 }
 
                                 int x = renderer.getTicks() + p * p * 3121 + p * 45238971 + o * o * 418711 + o * 13761 & 31;
@@ -96,11 +95,11 @@ public class ModWeatherRenderer {
                                 float ab = (float) Math.sqrt(z * z + aa * aa) / (float) l;
                                 ac = ((1.0f - ab * ab) * 0.5f + 0.5f) * h;
                                 mutable.set(p, w, o);
-                                int ad = WorldRenderer.getLightmapCoordinates(world, mutable);
-                                bufferBuilder.vertex((double) p - cameraX - r + 0.5, (double) v - cameraY, (double) o - cameraZ - s + 0.5).uv(0.0f, (float) u * 0.25f + y).color(1.0f, 1.0f, 1.0f, ac).light(ad).next();
-                                bufferBuilder.vertex((double) p - cameraX + r + 0.5, (double) v - cameraY, (double) o - cameraZ + s + 0.5).uv(1.0f, (float) u * 0.25f + y).color(1.0f, 1.0f, 1.0f, ac).light(ad).next();
-                                bufferBuilder.vertex((double) p - cameraX + r + 0.5, (double) u - cameraY, (double) o - cameraZ + s + 0.5).uv(1.0f, (float) v * 0.25f + y).color(1.0f, 1.0f, 1.0f, ac).light(ad).next();
-                                bufferBuilder.vertex((double) p - cameraX - r + 0.5, (double) u - cameraY, (double) o - cameraZ - s + 0.5).uv(0.0f, (float) v * 0.25f + y).color(1.0f, 1.0f, 1.0f, ac).light(ad).next();
+                                int ad = LevelRenderer.getLightColor(level, mutable);
+                                bufferBuilder.vertex((double) p - cameraX - r + 0.5, (double) v - cameraY, (double) o - cameraZ - s + 0.5).uv(0.0f, (float) u * 0.25f + y).color(1.0f, 1.0f, 1.0f, ac).uv2(ad).endVertex();
+                                bufferBuilder.vertex((double) p - cameraX + r + 0.5, (double) v - cameraY, (double) o - cameraZ + s + 0.5).uv(1.0f, (float) u * 0.25f + y).color(1.0f, 1.0f, 1.0f, ac).uv2(ad).endVertex();
+                                bufferBuilder.vertex((double) p - cameraX + r + 0.5, (double) u - cameraY, (double) o - cameraZ + s + 0.5).uv(1.0f, (float) v * 0.25f + y).color(1.0f, 1.0f, 1.0f, ac).uv2(ad).endVertex();
+                                bufferBuilder.vertex((double) p - cameraX - r + 0.5, (double) u - cameraY, (double) o - cameraZ - s + 0.5).uv(0.0f, (float) v * 0.25f + y).color(1.0f, 1.0f, 1.0f, ac).uv2(ad).endVertex();
                             }
                         }
                     }
@@ -108,12 +107,12 @@ public class ModWeatherRenderer {
             }
 
             if (m >= 0) {
-                tessellator.draw();
+                tessellator.end();
             }
 
             RenderSystem.enableCull();
             RenderSystem.disableBlend();
-            manager.disable();
+            manager.turnOffLightLayer();
         }
     }
 }

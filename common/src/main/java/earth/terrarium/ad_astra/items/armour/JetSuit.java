@@ -3,46 +3,46 @@ package earth.terrarium.ad_astra.items.armour;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.screens.PlayerOverlayScreen;
 import earth.terrarium.ad_astra.registry.ModItems;
-import earth.terrarium.ad_astra.util.ModIdentifier;
+import earth.terrarium.ad_astra.util.ModResourceLocation;
 import earth.terrarium.ad_astra.util.ModKeyBindings;
 import earth.terrarium.ad_astra.util.ModUtils;
 import earth.terrarium.botarium.api.energy.*;
 import earth.terrarium.botarium.api.item.ItemStackHolder;
-import net.minecraft.client.item.TooltipContext;
-import net.minecraft.client.render.entity.model.BipedEntityModel;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ArmorMaterial;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
 
     public boolean isFallFlying;
 
-    public JetSuit(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
+    public JetSuit(ArmorMaterial material, EquipmentSlot slot, Properties settings) {
         super(material, slot, settings);
     }
 
-    public static void spawnParticles(World world, LivingEntity entity, BipedEntityModel<LivingEntity> model) {
+    public static void spawnParticles(Level level, LivingEntity entity, HumanoidModel<LivingEntity> model) {
         if (!AdAstra.CONFIG.spaceSuit.spawnJetSuitParticles) {
             return;
         }
 
-        if (entity instanceof PlayerEntity player) {
-            ItemStack chest = player.getEquippedStack(EquipmentSlot.CHEST);
-            NbtCompound nbt = chest.getOrCreateNbt();
+        if (entity instanceof Player player) {
+            ItemStack chest = player.getItemBySlot(EquipmentSlot.CHEST);
+            CompoundTag nbt = chest.getOrCreateTag();
             if (nbt.contains("spawn_particles")) {
                 if (!nbt.getBoolean("spawn_particles")) {
                     return;
@@ -51,26 +51,26 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
                 return;
             }
         }
-        spawnParticles(world, entity, model.rightArm.pitch + 0.05, entity.isFallFlying() ? 0.0 : 0.8, -0.45);
-        spawnParticles(world, entity, model.leftArm.pitch + 0.05, entity.isFallFlying() ? 0.0 : 0.8, 0.45);
+        spawnParticles(level, entity, model.rightArm.xRot + 0.05, entity.isFallFlying() ? 0.0 : 0.8, -0.45);
+        spawnParticles(level, entity, model.leftArm.xRot + 0.05, entity.isFallFlying() ? 0.0 : 0.8, 0.45);
 
-        spawnParticles(world, entity, model.rightLeg.pitch + 0.05, entity.isFallFlying() ? 0.1 : 0.0, -0.1);
-        spawnParticles(world, entity, model.leftLeg.pitch + 0.05, entity.isFallFlying() ? 0.1 : 0.0, 0.1);
+        spawnParticles(level, entity, model.rightLeg.xRot + 0.05, entity.isFallFlying() ? 0.1 : 0.0, -0.1);
+        spawnParticles(level, entity, model.leftLeg.xRot + 0.05, entity.isFallFlying() ? 0.1 : 0.0, 0.1);
     }
 
     // Spawns particles at the limbs of the player
-    private static void spawnParticles(World world, LivingEntity entity, double pitch, double yOffset, double zOffset) {
-        double yaw = entity.bodyYaw;
+    private static void spawnParticles(Level level, LivingEntity entity, double pitch, double yOffset, double zOffset) {
+        double yaw = entity.yBodyRot;
         double xRotator = Math.cos(yaw * Math.PI / 180.0) * zOffset;
         double zRotator = Math.sin(yaw * Math.PI / 180.0) * zOffset;
         double xRotator1 = Math.cos((yaw - 90) * Math.PI / 180.0) * pitch;
         double zRotator1 = Math.sin((yaw - 90) * Math.PI / 180.0) * pitch;
 
-        world.addParticle(ParticleTypes.SOUL_FIRE_FLAME, true, entity.getX() + xRotator + xRotator1, entity.getY() + yOffset, entity.getZ() + zRotator1 + zRotator, 0.0, 0.0, 0.0);
+        level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, true, entity.getX() + xRotator + xRotator1, entity.getY() + yOffset, entity.getZ() + zRotator1 + zRotator, 0.0, 0.0, 0.0);
     }
 
     public static boolean hasFullSet(LivingEntity entity) {
-        for (ItemStack stack : entity.getArmorItems()) {
+        for (ItemStack stack : entity.getArmorSlots()) {
             if (!(stack.getItem() instanceof JetSuit)) {
                 return false;
             }
@@ -90,35 +90,35 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
 
     // Display energy
     @Override
-    public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-        super.appendTooltip(stack, world, tooltip, context);
-        if (stack.isOf(ModItems.JET_SUIT.get())) {
+    public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag context) {
+        super.appendHoverText(stack, level, tooltip, context);
+        if (stack.is(ModItems.JET_SUIT.get())) {
             long energy = EnergyHooks.getItemEnergyManager(stack).getStoredEnergy();
-            tooltip.add(Text.translatable("gauge_text.ad_astra.storage", energy, AdAstra.CONFIG.spaceSuit.jetSuitMaxEnergy).setStyle(Style.EMPTY.withColor(energy > 0 ? Formatting.GREEN : Formatting.RED)));
+            tooltip.add(Component.translatable("gauge_text.ad_astra.storage", energy, AdAstra.CONFIG.spaceSuit.jetSuitMaxEnergy).setStyle(Style.EMPTY.withColor(energy > 0 ? ChatFormatting.GREEN : ChatFormatting.RED)));
         }
     }
 
-    public void fly(PlayerEntity player, ItemStack stack) {
+    public void fly(Player player, ItemStack stack) {
         // Don't fly the Jet Suit in creative
         if (player.getAbilities().flying) {
-            stack.getOrCreateNbt().putBoolean("spawn_particles", false);
+            stack.getOrCreateTag().putBoolean("spawn_particles", false);
             return;
         }
 
         // Don't fly if the Jet Suit has no energy
         if (EnergyHooks.getItemEnergyManager(stack).getStoredEnergy() <= 0) {
-            stack.getOrCreateNbt().putBoolean("spawn_particles", false);
+            stack.getOrCreateTag().putBoolean("spawn_particles", false);
             return;
         }
 
-        stack.getOrCreateNbt().putBoolean("spawn_particles", true);
+        stack.getOrCreateTag().putBoolean("spawn_particles", true);
         if (ModKeyBindings.sprintKeyDown(player)) {
             this.fallFly(player, stack);
         } else {
             this.hover(player, stack);
         }
 
-        if (!player.world.isClient) {
+        if (!player.level.isClientSide) {
             if (isFallFlying) {
                 if (!player.isFallFlying()) {
                     player.startFallFlying();
@@ -131,7 +131,7 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
         }
     }
 
-    public void hover(PlayerEntity player, ItemStack stack) {
+    public void hover(Player player, ItemStack stack) {
         if (EnergyHooks.isEnergyItem(stack)) {
             player.fallDistance /= 2;
 
@@ -143,14 +143,14 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
             isFallFlying = false;
 
             double speed = AdAstra.CONFIG.spaceSuit.jetSuitUpwardsSpeed;
-            player.setVelocity(player.getVelocity().add(0.0, speed, 0.0));
-            if (player.getVelocity().getY() > speed) {
-                player.setVelocity(player.getVelocity().getX(), speed, player.getVelocity().getZ());
+            player.setDeltaMovement(player.getDeltaMovement().add(0.0, speed, 0.0));
+            if (player.getDeltaMovement().y() > speed) {
+                player.setDeltaMovement(player.getDeltaMovement().x(), speed, player.getDeltaMovement().z());
             }
         }
     }
 
-    public void fallFly(PlayerEntity player, ItemStack stack) {
+    public void fallFly(Player player, ItemStack stack) {
         if (player.isOnGround()) {
             player.fallDistance /= 2;
         }
@@ -161,10 +161,10 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
         }
         isFallFlying = true;
 
-        double speed = AdAstra.CONFIG.spaceSuit.jetSuitSpeed - (ModUtils.getPlanetGravity(player.world) * 0.25);
-        Vec3d rotationVector = player.getRotationVector().multiply(speed);
-        Vec3d velocity = player.getVelocity();
-        player.setVelocity(velocity.add(rotationVector.getX() * 0.1 + (rotationVector.getX() * 1.5 - velocity.getX()) * 0.5, rotationVector.getY() * 0.1 + (rotationVector.getY() * 1.5 - velocity.getY()) * 0.5, rotationVector.getZ() * 0.1 + (rotationVector.getZ() * 1.5 - velocity.getZ()) * 0.5));
+        double speed = AdAstra.CONFIG.spaceSuit.jetSuitSpeed - (ModUtils.getPlanetGravity(player.level) * 0.25);
+        Vec3 rotationVector = player.getLookAngle().scale(speed);
+        Vec3 velocity = player.getDeltaMovement();
+        player.setDeltaMovement(velocity.add(rotationVector.x() * 0.1 + (rotationVector.x() * 1.5 - velocity.x()) * 0.5, rotationVector.y() * 0.1 + (rotationVector.y() * 1.5 - velocity.y()) * 0.5, rotationVector.z() * 0.1 + (rotationVector.z() * 1.5 - velocity.z()) * 0.5));
     }
 
     @Override
@@ -187,7 +187,7 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
         if (slot.equals(EquipmentSlot.CHEST)) {
             if (stack.getItem() instanceof JetSuit) {
                 var energy = EnergyHooks.getItemEnergyManager(stack);
-                return new ModIdentifier("textures/entity/armour/jet_suit/jet_suit_" + (energy.getStoredEnergy() == 0 ? 0 : ((int) Math.min((energy.getStoredEnergy() * 5 / energy.getCapacity()) + 1, 5))) + ".png").toString();
+                return new ModResourceLocation("textures/entity/armour/jet_suit/jet_suit_" + (energy.getStoredEnergy() == 0 ? 0 : ((int) Math.min((energy.getStoredEnergy() * 5 / energy.getCapacity()) + 1, 5))) + ".png").toString();
             }
         }
         return AdAstra.MOD_ID + ":textures/entity/armour/jet_suit/jet_suit_5.png";

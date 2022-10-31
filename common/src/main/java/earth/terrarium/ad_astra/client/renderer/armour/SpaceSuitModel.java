@@ -1,46 +1,51 @@
 package earth.terrarium.ad_astra.client.renderer.armour;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.blaze3d.vertex.VertexConsumers;
+import com.mojang.blaze3d.vertex.VertexMultiConsumer;
 import earth.terrarium.ad_astra.items.armour.ModArmourItem;
 import earth.terrarium.ad_astra.items.armour.NetheriteSpaceSuit;
 import earth.terrarium.ad_astra.items.armour.SpaceSuit;
 import earth.terrarium.ad_astra.registry.ModItems;
-import earth.terrarium.ad_astra.util.ModIdentifier;
-import net.minecraft.client.MinecraftClient;
+import earth.terrarium.ad_astra.util.ModResourceLocation;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.*;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.entity.model.BipedEntityModel;
-import net.minecraft.client.render.entity.model.EntityModelLayer;
-import net.minecraft.client.render.entity.model.EntityModelPartNames;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Identifier;
-
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartNames;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import java.util.Objects;
 
-public class SpaceSuitModel extends BipedEntityModel<LivingEntity> {
-    public static final EntityModelLayer LAYER_LOCATION = new EntityModelLayer(new ModIdentifier("space_suit"), "main");
+public class SpaceSuitModel extends HumanoidModel<LivingEntity> {
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ModResourceLocation("space_suit"), "main");
     public final ModelPart visor;
     public final ModelPart rightBoot;
     public final ModelPart leftBoot;
-    private final BipedEntityModel<LivingEntity> contextModel;
-    private final Identifier texture;
+    private final HumanoidModel<LivingEntity> contextModel;
+    private final ResourceLocation texture;
     private final EquipmentSlot slot;
     private final ItemStack stack;
 
-    public SpaceSuitModel(ModelPart root, BipedEntityModel<LivingEntity> contextModel, LivingEntity entity, EquipmentSlot slot, ItemStack stack) {
+    public SpaceSuitModel(ModelPart root, HumanoidModel<LivingEntity> contextModel, LivingEntity entity, EquipmentSlot slot, ItemStack stack) {
         super(root);
 
         this.contextModel = contextModel;
         if (stack.getItem() instanceof ModArmourItem item) {
             String armourTexture = item.getArmorTexture(stack, entity, slot, null);
-            this.texture = new Identifier(Objects.requireNonNullElse(armourTexture, ""));
+            this.texture = new ResourceLocation(Objects.requireNonNullElse(armourTexture, ""));
         } else {
-            this.texture = new Identifier("");
+            this.texture = new ResourceLocation("");
         }
         this.slot = slot;
         this.stack = stack;
@@ -52,63 +57,63 @@ public class SpaceSuitModel extends BipedEntityModel<LivingEntity> {
 
     }
 
-    public static VertexConsumer getVertex(RenderLayer renderLayer, boolean hasEnchantments) {
-        VertexConsumerProvider vertexConsumerProvider = MinecraftClient.getInstance().getBufferBuilders().getEntityVertexConsumers();
-        return hasEnchantments ? VertexConsumers.union(vertexConsumerProvider.getBuffer(RenderLayer.getEntityGlint()), vertexConsumerProvider.getBuffer(renderLayer)) : vertexConsumerProvider.getBuffer(renderLayer);
+    public static VertexConsumer getVertex(RenderType renderLayer, boolean hasEnchantments) {
+        MultiBufferSource vertexConsumerProvider = Minecraft.getInstance().renderBuffers().bufferSource();
+        return hasEnchantments ? VertexMultiConsumer.create(vertexConsumerProvider.getBuffer(RenderType.entityGlint()), vertexConsumerProvider.getBuffer(renderLayer)) : vertexConsumerProvider.getBuffer(renderLayer);
     }
 
     @SuppressWarnings("unused")
-    public static TexturedModelData getTexturedModelData() {
-        ModelData modelData = new ModelData();
-        ModelPartData modelPartData = modelData.getRoot();
-        ModelPartData visor = modelPartData.addChild("visor", ModelPartBuilder.create().uv(32, 0).cuboid(-4.0f, -8.0f, -4.0f, 8.0f, 8.0f, 8.0f, new Dilation(1.0f)), ModelTransform.pivot(0.0f, 0.0f, 0.0f));
+    public static LayerDefinition getTexturedModelData() {
+        MeshDefinition modelData = new MeshDefinition();
+        PartDefinition modelPartData = modelData.getRoot();
+        PartDefinition visor = modelPartData.addOrReplaceChild("visor", CubeListBuilder.create().texOffs(32, 0).addBox(-4.0f, -8.0f, -4.0f, 8.0f, 8.0f, 8.0f, new CubeDeformation(1.0f)), PartPose.offset(0.0f, 0.0f, 0.0f));
 
-        ModelPartData head = modelPartData.addChild("head", ModelPartBuilder.create().uv(0, 0).cuboid(-4.0f, -8.0f, -4.0f, 8.0f, 8.0f, 8.0f, new Dilation(0.6f)), ModelTransform.pivot(0.0f, 0.0f, 0.0f));
-        ModelPartData hat = modelPartData.addChild(EntityModelPartNames.HAT, ModelPartBuilder.create().uv(0, 0), ModelTransform.NONE);
+        PartDefinition head = modelPartData.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0f, -8.0f, -4.0f, 8.0f, 8.0f, 8.0f, new CubeDeformation(0.6f)), PartPose.offset(0.0f, 0.0f, 0.0f));
+        PartDefinition hat = modelPartData.addOrReplaceChild(PartNames.HAT, CubeListBuilder.create().texOffs(0, 0), PartPose.ZERO);
 
-        ModelPartData body = modelPartData.addChild("body", ModelPartBuilder.create().uv(32, 16).cuboid(-4.0f, 0.0f, -2.0f, 8.0f, 12.0f, 4.0f, new Dilation(0.6f)), ModelTransform.pivot(0.0f, 0.5f, 0.0f));
+        PartDefinition body = modelPartData.addOrReplaceChild("body", CubeListBuilder.create().texOffs(32, 16).addBox(-4.0f, 0.0f, -2.0f, 8.0f, 12.0f, 4.0f, new CubeDeformation(0.6f)), PartPose.offset(0.0f, 0.5f, 0.0f));
 
-        ModelPartData backpack = body.addChild("backpack", ModelPartBuilder.create().uv(32, 44).cuboid(-6.0f, -8.0f, -2.0f, 12.0f, 16.0f, 4.0f, new Dilation(0.6f)), ModelTransform.pivot(0.0f, 5.0f, 5.0f));
+        PartDefinition backpack = body.addOrReplaceChild("backpack", CubeListBuilder.create().texOffs(32, 44).addBox(-6.0f, -8.0f, -2.0f, 12.0f, 16.0f, 4.0f, new CubeDeformation(0.6f)), PartPose.offset(0.0f, 5.0f, 5.0f));
 
-        ModelPartData right_arm = modelPartData.addChild("right_arm", ModelPartBuilder.create(), ModelTransform.pivot(-5.0f, 2.0f, 0.0f));
+        PartDefinition right_arm = modelPartData.addOrReplaceChild("right_arm", CubeListBuilder.create(), PartPose.offset(-5.0f, 2.0f, 0.0f));
 
-        ModelPartData cube_r1 = right_arm.addChild("cube_r1", ModelPartBuilder.create().uv(0, 16).cuboid(-2.0f, -6.0f, -2.0f, 4.0f, 12.0f, 4.0f, new Dilation(0.6f)), ModelTransform.of(-1.0f, 4.0f, 0.0f, 0.0f, 0.0f, 0.0f));
+        PartDefinition cube_r1 = right_arm.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(0, 16).addBox(-2.0f, -6.0f, -2.0f, 4.0f, 12.0f, 4.0f, new CubeDeformation(0.6f)), PartPose.offsetAndRotation(-1.0f, 4.0f, 0.0f, 0.0f, 0.0f, 0.0f));
 
-        ModelPartData left_arm = modelPartData.addChild("left_arm", ModelPartBuilder.create(), ModelTransform.pivot(5.0f, 2.0f, 0.0f));
+        PartDefinition left_arm = modelPartData.addOrReplaceChild("left_arm", CubeListBuilder.create(), PartPose.offset(5.0f, 2.0f, 0.0f));
 
-        ModelPartData cube_r2 = left_arm.addChild("cube_r2", ModelPartBuilder.create().uv(16, 16).cuboid(-2.0f, -6.0f, -2.0f, 4.0f, 12.0f, 4.0f, new Dilation(0.6f)), ModelTransform.of(1.0f, 4.0f, 0.0f, 0.0f, 0.0f, 0.0f));
+        PartDefinition cube_r2 = left_arm.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(16, 16).addBox(-2.0f, -6.0f, -2.0f, 4.0f, 12.0f, 4.0f, new CubeDeformation(0.6f)), PartPose.offsetAndRotation(1.0f, 4.0f, 0.0f, 0.0f, 0.0f, 0.0f));
 
-        ModelPartData right_leg = modelPartData.addChild("right_leg", ModelPartBuilder.create().uv(0, 32).cuboid(-2.0f, 0.6667f, -2.0f, 4.0f, 8.0f, 4.0f, new Dilation(0.7f)), ModelTransform.pivot(-2.0f, 11.3333f, 0.0f));
+        PartDefinition right_leg = modelPartData.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(0, 32).addBox(-2.0f, 0.6667f, -2.0f, 4.0f, 8.0f, 4.0f, new CubeDeformation(0.7f)), PartPose.offset(-2.0f, 11.3333f, 0.0f));
 
-        ModelPartData left_leg = modelPartData.addChild("left_leg", ModelPartBuilder.create().uv(16, 32).cuboid(-2.0f, 0.6667f, -2.0f, 4.0f, 8.0f, 4.0f, new Dilation(0.7f)), ModelTransform.pivot(2.0f, 11.3333f, 0.0f));
+        PartDefinition left_leg = modelPartData.addOrReplaceChild("left_leg", CubeListBuilder.create().texOffs(16, 32).addBox(-2.0f, 0.6667f, -2.0f, 4.0f, 8.0f, 4.0f, new CubeDeformation(0.7f)), PartPose.offset(2.0f, 11.3333f, 0.0f));
 
-        ModelPartData right_boot = modelPartData.addChild("right_boot", ModelPartBuilder.create().uv(32, 32).cuboid(-2.0f, 6.6667f, -2.0f, 4.0f, 6.0f, 4.0f, new Dilation(1.0f)).uv(0, 45).cuboid(-2.0f, 6.6667f, -2.0f, 4.0f, 6.0f, 4.0f, new Dilation(0.6f)), ModelTransform.pivot(-2.0f, 11.3333f, 0.0f));
+        PartDefinition right_boot = modelPartData.addOrReplaceChild("right_boot", CubeListBuilder.create().texOffs(32, 32).addBox(-2.0f, 6.6667f, -2.0f, 4.0f, 6.0f, 4.0f, new CubeDeformation(1.0f)).texOffs(0, 45).addBox(-2.0f, 6.6667f, -2.0f, 4.0f, 6.0f, 4.0f, new CubeDeformation(0.6f)), PartPose.offset(-2.0f, 11.3333f, 0.0f));
 
-        ModelPartData left_boot = modelPartData.addChild("left_boot", ModelPartBuilder.create().uv(48, 32).cuboid(-2.0f, 6.6667f, -2.0f, 4.0f, 6.0f, 4.0f, new Dilation(1.0f)).uv(16, 45).cuboid(-2.0f, 6.6667f, -2.0f, 4.0f, 6.0f, 4.0f, new Dilation(0.6f)), ModelTransform.pivot(2.0f, 11.3333f, 0.0f));
-        return TexturedModelData.of(modelData, 64, 64);
+        PartDefinition left_boot = modelPartData.addOrReplaceChild("left_boot", CubeListBuilder.create().texOffs(48, 32).addBox(-2.0f, 6.6667f, -2.0f, 4.0f, 6.0f, 4.0f, new CubeDeformation(1.0f)).texOffs(16, 45).addBox(-2.0f, 6.6667f, -2.0f, 4.0f, 6.0f, 4.0f, new CubeDeformation(0.6f)), PartPose.offset(2.0f, 11.3333f, 0.0f));
+        return LayerDefinition.create(modelData, 64, 64);
     }
 
     @Override
-    public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
-        this.handSwingProgress = this.contextModel.handSwingProgress;
+    public void renderToBuffer(PoseStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
+        this.attackTime = this.contextModel.attackTime;
         this.riding = this.contextModel.riding;
-        this.child = this.contextModel.child;
+        this.young = this.contextModel.young;
         this.leftArmPose = this.contextModel.leftArmPose;
         this.rightArmPose = this.contextModel.rightArmPose;
-        this.sneaking = this.contextModel.sneaking;
+        this.crouching = this.contextModel.crouching;
 
-        this.head.copyTransform(this.contextModel.head);
-        this.visor.copyTransform(this.contextModel.head);
-        this.body.copyTransform(this.contextModel.body);
-        this.rightArm.copyTransform(this.contextModel.rightArm);
-        this.leftArm.copyTransform(this.contextModel.leftArm);
-        this.leftLeg.copyTransform(this.contextModel.leftLeg);
-        this.rightLeg.copyTransform(this.contextModel.rightLeg);
-        this.rightBoot.copyTransform(this.contextModel.rightLeg);
-        this.leftBoot.copyTransform(this.contextModel.leftLeg);
+        this.head.copyFrom(this.contextModel.head);
+        this.visor.copyFrom(this.contextModel.head);
+        this.body.copyFrom(this.contextModel.body);
+        this.rightArm.copyFrom(this.contextModel.rightArm);
+        this.leftArm.copyFrom(this.contextModel.leftArm);
+        this.leftLeg.copyFrom(this.contextModel.leftLeg);
+        this.rightLeg.copyFrom(this.contextModel.rightLeg);
+        this.rightBoot.copyFrom(this.contextModel.rightLeg);
+        this.leftBoot.copyFrom(this.contextModel.leftLeg);
 
-        matrices.push();
-        if (this.child) {
+        matrices.pushPose();
+        if (this.young) {
             matrices.scale(0.5f, 0.5f, 0.5f);
             matrices.translate(0, 1.5f, 0);
         }
@@ -123,14 +128,14 @@ public class SpaceSuitModel extends BipedEntityModel<LivingEntity> {
             a = decimal == 0xFFFFFF ? 0.3f : 1.0f;
         }
 
-        MinecraftClient client = MinecraftClient.getInstance();
-        VertexConsumerProvider provider = client.getBufferBuilders().getEntityVertexConsumers();
-        if (!this.stack.isOf(ModItems.SPACE_HELMET.get())) {
+        Minecraft client = Minecraft.getInstance();
+        MultiBufferSource provider = client.renderBuffers().bufferSource();
+        if (!this.stack.is(ModItems.SPACE_HELMET.get())) {
             this.head.render(matrices, vertices, light, overlay, 1.0f, 1.0f, 1.0f, 1.0f);
-            this.visor.render(matrices, provider.getBuffer(RenderLayer.getEntityTranslucent(this.texture)), light, overlay, r, g, b, a);
+            this.visor.render(matrices, provider.getBuffer(RenderType.entityTranslucent(this.texture)), light, overlay, r, g, b, a);
         } else {
             this.head.render(matrices, vertices, light, overlay, r, g, b, 1.0f);
-            this.visor.render(matrices, provider.getBuffer(RenderLayer.getEntityTranslucent(this.texture)), light, overlay, r, g, b, a);
+            this.visor.render(matrices, provider.getBuffer(RenderType.entityTranslucent(this.texture)), light, overlay, r, g, b, a);
         }
 
         this.body.render(matrices, vertices, light, overlay, r, g, b, 1.0f);
@@ -143,11 +148,11 @@ public class SpaceSuitModel extends BipedEntityModel<LivingEntity> {
         this.rightBoot.render(matrices, vertices, light, overlay, r, g, b, 1.0f);
         this.leftBoot.render(matrices, vertices, light, overlay, r, g, b, 1.0f);
 
-        matrices.pop();
+        matrices.popPose();
     }
 
     private void setVisible() {
-        this.setVisible(false);
+        this.setAllVisible(false);
         switch (this.slot) {
             case HEAD -> {
                 this.head.visible = true;
@@ -172,14 +177,14 @@ public class SpaceSuitModel extends BipedEntityModel<LivingEntity> {
     }
 
     @Override
-    public void setVisible(boolean visible) {
-        super.setVisible(visible);
+    public void setAllVisible(boolean visible) {
+        super.setAllVisible(visible);
         this.visor.visible = visible;
         this.rightBoot.visible = visible;
         this.leftBoot.visible = visible;
     }
 
-    public Identifier getTexture() {
+    public ResourceLocation getTextureLocation() {
         return this.texture;
     }
 }

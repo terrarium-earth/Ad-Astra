@@ -4,18 +4,18 @@ import earth.terrarium.ad_astra.blocks.machines.entity.FluidMachineBlockEntity;
 import earth.terrarium.ad_astra.networking.NetworkHandling;
 import earth.terrarium.ad_astra.networking.packets.server.MachineInfoPacket;
 import earth.terrarium.ad_astra.registry.ModScreenHandlers;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.screen.slot.Slot;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 
 public class ConversionScreenHandler extends AbstractMachineScreenHandler<FluidMachineBlockEntity> {
 
-    public ConversionScreenHandler(int syncId, PlayerInventory inventory, PacketByteBuf buf) {
-        this(syncId, inventory, (FluidMachineBlockEntity) inventory.player.world.getBlockEntity(buf.readBlockPos()));
+    public ConversionScreenHandler(int syncId, Inventory inventory, FriendlyByteBuf buf) {
+        this(syncId, inventory, (FluidMachineBlockEntity) inventory.player.level.getBlockEntity(buf.readBlockPos()));
     }
 
-    public ConversionScreenHandler(int syncId, PlayerInventory inventory, FluidMachineBlockEntity entity) {
+    public ConversionScreenHandler(int syncId, Inventory inventory, FluidMachineBlockEntity entity) {
         super(ModScreenHandlers.CONVERSION_SCREEN_HANDLER.get(), syncId, inventory, entity, new Slot[]{
 
                 // Left Insert.
@@ -23,7 +23,7 @@ public class ConversionScreenHandler extends AbstractMachineScreenHandler<FluidM
                 // Left Extract.
                 new Slot(entity, 1, 12, 52) {
                     @Override
-                    public boolean canInsert(ItemStack stack) {
+                    public boolean mayPlace(ItemStack stack) {
                         return false;
                     }
                 },
@@ -32,7 +32,7 @@ public class ConversionScreenHandler extends AbstractMachineScreenHandler<FluidM
                 // Right Extract.
                 new Slot(entity, 3, 127, 52) {
                     @Override
-                    public boolean canInsert(ItemStack stack) {
+                    public boolean mayPlace(ItemStack stack) {
                         return false;
                     }
                 }});

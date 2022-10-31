@@ -2,12 +2,12 @@ package earth.terrarium.ad_astra.blocks.machines.entity;
 
 import earth.terrarium.ad_astra.recipes.CookingRecipe;
 import earth.terrarium.ad_astra.recipes.ModRecipeType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class ProcessingMachineBlockEntity extends AbstractMachineBlockEntity {
@@ -25,15 +25,15 @@ public abstract class ProcessingMachineBlockEntity extends AbstractMachineBlockE
     }
 
     @Override
-    public void readNbt(NbtCompound nbt) {
-        super.readNbt(nbt);
+    public void load(CompoundTag nbt) {
+        super.load(nbt);
         this.cookTime = nbt.getShort("cookTime");
         this.cookTimeTotal = nbt.getShort("cookTimeTotal");
     }
 
     @Override
-    public void writeNbt(NbtCompound nbt) {
-        super.writeNbt(nbt);
+    public void saveAdditional(CompoundTag nbt) {
+        super.saveAdditional(nbt);
         nbt.putShort("cookTime", this.cookTime);
         nbt.putShort("cookTimeTotal", this.cookTimeTotal);
     }
@@ -48,8 +48,8 @@ public abstract class ProcessingMachineBlockEntity extends AbstractMachineBlockE
 
     public void finishCooking() {
         if (this.outputStack != null) {
-            int size = this.outputStack.getCount() + this.getStack(1).getCount();
-            this.setStack(1, new ItemStack(this.outputStack.getItem(), size));
+            int size = this.outputStack.getCount() + this.getItem(1).getCount();
+            this.setItem(1, new ItemStack(this.outputStack.getItem(), size));
         }
         this.stopCooking();
     }
@@ -59,26 +59,26 @@ public abstract class ProcessingMachineBlockEntity extends AbstractMachineBlockE
         this.cookTimeTotal = 0;
         this.outputStack = null;
         this.inputItem = null;
-        this.markDirty();
+        this.setChanged();
     }
 
     public <T extends CookingRecipe> CookingRecipe createRecipe(ModRecipeType<T> type, ItemStack testStack, boolean checkOutput) {
         stopCooking();
 
-        CookingRecipe recipe = type.findFirst(this.world, f -> f.test(testStack));
+        CookingRecipe recipe = type.findFirst(this.level, f -> f.test(testStack));
 
         if (recipe != null) {
 
             // Stop if something is already in the output.
             if (checkOutput) {
-                ItemStack outputSlot = this.getStack(1);
-                ItemStack output = recipe.getOutput();
-                if (!outputSlot.isEmpty() && !outputSlot.getItem().equals(recipe.getOutput().getItem()) || outputSlot.getCount() + output.getCount() > outputSlot.getMaxCount()) {
+                ItemStack outputSlot = this.getItem(1);
+                ItemStack output = recipe.getResultItem();
+                if (!outputSlot.isEmpty() && !outputSlot.getItem().equals(recipe.getResultItem().getItem()) || outputSlot.getCount() + output.getCount() > outputSlot.getMaxStackSize()) {
                     return null;
                 }
             }
 
-            this.outputStack = recipe.getOutput();
+            this.outputStack = recipe.getResultItem();
             this.inputItem = testStack.getItem();
         }
 

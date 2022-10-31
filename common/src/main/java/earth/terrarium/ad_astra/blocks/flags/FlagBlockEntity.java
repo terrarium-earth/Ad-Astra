@@ -2,15 +2,15 @@ package earth.terrarium.ad_astra.blocks.flags;
 
 import com.mojang.authlib.GameProfile;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.SkullBlockEntity;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtHelper;
-import net.minecraft.network.Packet;
-import net.minecraft.network.listener.ClientPlayPacketListener;
-import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.SkullBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 public class FlagBlockEntity extends BlockEntity {
@@ -23,20 +23,20 @@ public class FlagBlockEntity extends BlockEntity {
     }
 
     @Override
-    public void writeNbt(NbtCompound nbt) {
-        super.writeNbt(nbt);
+    public void saveAdditional(CompoundTag nbt) {
+        super.saveAdditional(nbt);
         if (this.owner != null) {
-            NbtCompound compound = new NbtCompound();
-            NbtHelper.writeGameProfile(compound, this.owner);
+            CompoundTag compound = new CompoundTag();
+            NbtUtils.writeGameProfile(compound, this.owner);
             nbt.put("flagOwner", compound);
         }
     }
 
     @Override
-    public void readNbt(NbtCompound nbt) {
-        super.readNbt(nbt);
+    public void load(CompoundTag nbt) {
+        super.load(nbt);
         if (nbt.contains("flagOwner", 10)) {
-            this.setOwner(NbtHelper.toGameProfile(nbt.getCompound("flagOwner")));
+            this.setOwner(NbtUtils.readGameProfile(nbt.getCompound("flagOwner")));
         }
     }
 
@@ -53,20 +53,20 @@ public class FlagBlockEntity extends BlockEntity {
     }
 
     private void loadOwnerProperties() {
-        SkullBlockEntity.loadProperties(this.owner, (owner) -> {
+        SkullBlockEntity.updateGameprofile(this.owner, (owner) -> {
             this.owner = owner;
-            this.markDirty();
+            this.setChanged();
         });
     }
 
     @Nullable
     @Override
-    public Packet<ClientPlayPacketListener> toUpdatePacket() {
-        return BlockEntityUpdateS2CPacket.of(this);
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
     }
 
     @Override
-    public NbtCompound toInitialChunkDataNbt() {
-        return this.toNbt();
+    public CompoundTag getUpdateTag() {
+        return this.saveWithoutMetadata();
     }
 }

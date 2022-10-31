@@ -6,27 +6,26 @@ import earth.terrarium.ad_astra.networking.packets.server.MachineInfoPacket;
 import earth.terrarium.ad_astra.recipes.NasaWorkbenchRecipe;
 import earth.terrarium.ad_astra.registry.ModRecipes;
 import earth.terrarium.ad_astra.registry.ModScreenHandlers;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.screen.slot.Slot;
-import net.minecraft.screen.slot.SlotActionType;
-
 import java.util.ArrayList;
 import java.util.List;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.Container;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ClickType;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 
 public class NasaWorkbenchScreenHandler extends AbstractMachineScreenHandler<NasaWorkbenchBlockEntity> {
 
     private ItemStack output = ItemStack.EMPTY;
     private List<Integer> stackCounts = new ArrayList<>();
 
-    public NasaWorkbenchScreenHandler(int syncId, PlayerInventory inventory, PacketByteBuf buf) {
-        this(syncId, inventory, (NasaWorkbenchBlockEntity) inventory.player.world.getBlockEntity(buf.readBlockPos()));
+    public NasaWorkbenchScreenHandler(int syncId, Inventory inventory, FriendlyByteBuf buf) {
+        this(syncId, inventory, (NasaWorkbenchBlockEntity) inventory.player.level.getBlockEntity(buf.readBlockPos()));
     }
 
-    public NasaWorkbenchScreenHandler(int syncId, PlayerInventory inventory, NasaWorkbenchBlockEntity entity) {
+    public NasaWorkbenchScreenHandler(int syncId, Inventory inventory, NasaWorkbenchBlockEntity entity) {
         super(ModScreenHandlers.NASA_WORKBENCH_SCREEN_HANDLER.get(), syncId, inventory, entity, new Slot[]{
 
                 // Nose
@@ -62,7 +61,7 @@ public class NasaWorkbenchScreenHandler extends AbstractMachineScreenHandler<Nas
                 // Output
                 new Slot(entity, 14, 129, 56) {
                     @Override
-                    public boolean canInsert(ItemStack stack) {
+                    public boolean mayPlace(ItemStack stack) {
                         return false;
                     }
                 }});
@@ -75,7 +74,7 @@ public class NasaWorkbenchScreenHandler extends AbstractMachineScreenHandler<Nas
     }
 
     @Override
-    public void onSlotClick(int slotIndex, int button, SlotActionType actionType, PlayerEntity player) {
+    public void clicked(int slotIndex, int button, ClickType actionType, Player player) {
 
         if (slotIndex == 14) {
             if (!machine.getItems().get(14).isEmpty()) {
@@ -83,28 +82,28 @@ public class NasaWorkbenchScreenHandler extends AbstractMachineScreenHandler<Nas
                 machine.spawnOutputAndClearInput(this.stackCounts, this.output);
             }
         } else {
-            super.onSlotClick(slotIndex, button, actionType, player);
+            super.clicked(slotIndex, button, actionType, player);
         }
         this.updateContent();
     }
 
     @Override
-    public void onContentChanged(Inventory inventory) {
+    public void slotsChanged(Container inventory) {
         this.updateContent();
     }
 
     public void updateContent() {
 
-        NasaWorkbenchRecipe recipe = ModRecipes.NASA_WORKBENCH_RECIPE.get().findFirst(world, f -> f.test(this.machine));
+        NasaWorkbenchRecipe recipe = ModRecipes.NASA_WORKBENCH_RECIPE.get().findFirst(level, f -> f.test(this.machine));
 
         ItemStack output = ItemStack.EMPTY;
         if (recipe != null) {
-            output = recipe.getOutput();
+            output = recipe.getResultItem();
             this.stackCounts = recipe.getStackCounts();
         }
         this.output = output;
-        this.machine.setStack(14, output);
-        this.updateToClient();
+        this.machine.setItem(14, output);
+        this.broadcastFullState();
     }
 
     @Override

@@ -3,8 +3,8 @@ package earth.terrarium.ad_astra.mixin.forge;
 import earth.terrarium.ad_astra.client.forge.AdAstraClientForge;
 import earth.terrarium.ad_astra.items.ModRenderedBlockItem;
 import earth.terrarium.ad_astra.items.ModRenderedItem;
-import net.minecraft.client.render.item.BuiltinModelItemRenderer;
-import net.minecraft.item.Item;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.spongepowered.asm.mixin.Mixin;
 
@@ -13,7 +13,7 @@ import java.util.function.Consumer;
 @Mixin({ModRenderedItem.class, ModRenderedBlockItem.class})
 public abstract class ModRenderedItemMixin extends Item {
 
-    public ModRenderedItemMixin(Settings settings) {
+    public ModRenderedItemMixin(Properties settings) {
         super(settings);
     }
 
@@ -22,11 +22,11 @@ public abstract class ModRenderedItemMixin extends Item {
         Item item = this;
 
         consumer.accept(new IClientItemExtensions() {
-            private BuiltinModelItemRenderer renderer = null;
+            private BlockEntityWithoutLevelRenderer renderer = null;
             private boolean hasCheckedSinceInit = false;
 
             @Override
-            public BuiltinModelItemRenderer getCustomRenderer() {
+            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 if (AdAstraClientForge.hasInitializedRenderers() && !hasCheckedSinceInit) {
                     renderer = AdAstraClientForge.getItemRenderer(item);
                     hasCheckedSinceInit = true;

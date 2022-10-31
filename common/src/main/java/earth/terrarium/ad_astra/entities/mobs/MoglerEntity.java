@@ -2,58 +2,58 @@ package earth.terrarium.ad_astra.entities.mobs;
 
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.registry.ModEntityTypes;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.mob.HoglinEntity;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.passive.PassiveEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.hoglin.Hoglin;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import org.jetbrains.annotations.Nullable;
 
-public class MoglerEntity extends HoglinEntity {
+public class MoglerEntity extends Hoglin {
 
-    public MoglerEntity(EntityType<? extends HoglinEntity> entityType, World world) {
-        super(entityType, world);
+    public MoglerEntity(EntityType<? extends Hoglin> entityType, Level level) {
+        super(entityType, level);
     }
 
-    public static DefaultAttributeContainer.Builder createMobAttributes() {
-        return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 50.0).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.4f).add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 0.6f).add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 1.0).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 8.0);
+    public static AttributeSupplier.Builder createMobAttributes() {
+        return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 50.0).add(Attributes.MOVEMENT_SPEED, 0.4f).add(Attributes.KNOCKBACK_RESISTANCE, 0.6f).add(Attributes.ATTACK_KNOCKBACK, 1.0).add(Attributes.ATTACK_DAMAGE, 8.0);
     }
 
     @Override
-    public boolean canImmediatelyDespawn(double distanceSquared) {
+    public boolean removeWhenFarAway(double distanceSquared) {
         return false;
     }
 
     @Override
     @Nullable
-    public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
-        MoglerEntity moglerEntity = ModEntityTypes.MOGLER.get().create(world);
+    public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob entity) {
+        MoglerEntity moglerEntity = ModEntityTypes.MOGLER.get().create(level);
         if (moglerEntity != null) {
-            moglerEntity.setPersistent();
+            moglerEntity.setPersistenceRequired();
         }
         return moglerEntity;
     }
 
     @Override
-    protected void zombify(ServerWorld world) {
+    public void finishConversion(ServerLevel level) {
         ZombifiedMoglerEntity zombifiedMoglerEntity = this.convertTo(ModEntityTypes.ZOMBIFIED_MOGLER.get(), true);
         if (zombifiedMoglerEntity != null) {
-            zombifiedMoglerEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 200, 0));
+            zombifiedMoglerEntity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0));
         }
     }
 
     @Override
-    public boolean canSpawn(WorldAccess world, SpawnReason spawnReason) {
+    public boolean checkSpawnRules(LevelAccessor level, MobSpawnType spawnReason) {
         if (!AdAstra.CONFIG.general.spawnMoglers) {
             return false;
         }
-        return super.canSpawn(world, spawnReason);
+        return super.checkSpawnRules(level, spawnReason);
     }
 }

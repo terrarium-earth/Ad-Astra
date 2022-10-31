@@ -7,14 +7,14 @@ import earth.terrarium.ad_astra.screen.handler.CoalGeneratorScreenHandler;
 import earth.terrarium.botarium.api.energy.EnergyBlock;
 import earth.terrarium.botarium.api.energy.EnergyHooks;
 import earth.terrarium.botarium.api.energy.ExtractOnlyEnergyContainer;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity implements EnergyBlock {
@@ -27,7 +27,7 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity imple
 
     @Nullable
     @Override
-    public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
+    public AbstractContainerMenu createMenu(int syncId, Inventory inv, Player player) {
         return new CoalGeneratorScreenHandler(syncId, inv, this);
     }
 
@@ -38,18 +38,18 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity imple
     }
 
     @Override
-    public boolean canInsert(int slot, ItemStack stack, Direction dir) {
+    public boolean canPlaceItemThroughFace(int slot, ItemStack stack, Direction dir) {
         return slot == 0;
     }
 
     @Override
-    public boolean canExtract(int slot, ItemStack stack, Direction dir) {
+    public boolean canTakeItemThroughFace(int slot, ItemStack stack, Direction dir) {
         return false;
     }
 
     @Override
     public void tick() {
-        if (!this.world.isClient()) {
+        if (!this.level.isClientSide()) {
             ItemStack input = this.getItems().get(0);
             // Consume the fuel
             if (this.cookTime > 0) {
@@ -60,7 +60,7 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity imple
                 // Check if the input is a valid fuel
             } else if (!input.isEmpty()) {
                 short burnTime = (short) FuelRegistry.get(input);
-                input.decrement(1);
+                input.shrink(1);
                 this.cookTimeTotal = burnTime;
                 this.cookTime = burnTime;
             } else {
@@ -91,7 +91,7 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity imple
 
     @Override
     public void update() {
-        this.markDirty();
-        this.getWorld().updateListeners(this.getPos(), this.getCachedState(), this.getCachedState(), Block.NOTIFY_ALL);
+        this.setChanged();
+        this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
     }
 }

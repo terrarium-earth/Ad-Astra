@@ -1,5 +1,6 @@
 package earth.terrarium.ad_astra.client.resourcepack;
 
+import com.mojang.math.Vector3f;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamresourceful.resourcefullib.common.color.Color;
@@ -7,23 +8,22 @@ import com.teamresourceful.resourcefullib.common.color.ConstantColors;
 import earth.terrarium.ad_astra.util.ModUtils;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Vec3f;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.world.World;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.Level;
 
 import java.util.List;
 
 @Environment(EnvType.CLIENT)
-public record PlanetSkyRenderer(RegistryKey<World> dimension, PlanetSkyRenderer.StarsRenderer starsRenderer,
+public record PlanetSkyRenderer(ResourceKey<Level> dimension, PlanetSkyRenderer.StarsRenderer starsRenderer,
                                 PlanetSkyRenderer.SunsetColour sunsetColour, PlanetSkyRenderer.DimensionEffects effects,
                                 PlanetSkyRenderer.CloudEffects cloudEffects,
                                 PlanetSkyRenderer.WeatherEffects weatherEffects, int horizonAngle,
                                 List<PlanetSkyRenderer.SkyObject> skyObjects) {
 
     public static final Codec<PlanetSkyRenderer> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            RegistryKey.codec(Registry.WORLD_KEY).fieldOf("world").forGetter(PlanetSkyRenderer::dimension),
+            ResourceKey.codec(Registry.DIMENSION_REGISTRY).fieldOf("world").forGetter(PlanetSkyRenderer::dimension),
             StarsRenderer.CODEC.fieldOf("stars").forGetter(PlanetSkyRenderer::starsRenderer),
             SunsetColour.CODEC.fieldOf("sunset_color").forGetter(PlanetSkyRenderer::sunsetColour),
             DimensionEffects.CODEC.fieldOf("dimension_effects").forGetter(PlanetSkyRenderer::effects),
@@ -85,16 +85,16 @@ public record PlanetSkyRenderer(RegistryKey<World> dimension, PlanetSkyRenderer.
         ).apply(instance, StarsRenderer::new));
     }
 
-    public record SkyObject(Identifier texture, boolean blending, RenderType renderType, float scale, Color colour,
-                            Vec3f rotation) {
+    public record SkyObject(ResourceLocation texture, boolean blending, RenderType renderType, float scale, Color colour,
+                            Vector3f rotation) {
 
         public static final Codec<SkyObject> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                Identifier.CODEC.fieldOf("texture").forGetter(SkyObject::texture),
+                ResourceLocation.CODEC.fieldOf("texture").forGetter(SkyObject::texture),
                 Codec.BOOL.fieldOf("blending").forGetter(SkyObject::blending),
                 RenderType.CODEC.fieldOf("render_type").forGetter(SkyObject::renderType),
                 Codec.FLOAT.fieldOf("scale").forGetter(SkyObject::scale),
                 Color.CODEC.fieldOf("color").orElse(ConstantColors.white).forGetter(SkyObject::colour),
-                Vec3f.CODEC.fieldOf("rotation").forGetter(SkyObject::rotation)
+                Vector3f.CODEC.fieldOf("rotation").forGetter(SkyObject::rotation)
         ).apply(instance, SkyObject::new));
     }
 

@@ -4,19 +4,19 @@ import earth.terrarium.ad_astra.client.AdAstraClient;
 import earth.terrarium.ad_astra.client.registry.ClientModBlockRenderers;
 import earth.terrarium.ad_astra.client.registry.ClientModEntities;
 import earth.terrarium.ad_astra.config.forge.ForgeMenuConfig;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.client.model.TexturedModelData;
-import net.minecraft.client.render.TexturedRenderLayers;
-import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
-import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.model.EntityModelLayer;
-import net.minecraft.client.render.item.BuiltinModelItemRenderer;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.screen.PlayerScreenHandler;
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
@@ -30,14 +30,14 @@ import java.util.function.Supplier;
 
 public class AdAstraClientForge {
 
-    private static final Map<Item, BuiltinModelItemRenderer> ITEM_RENDERERS = new HashMap<>();
+    private static final Map<Item, BlockEntityWithoutLevelRenderer> ITEM_RENDERERS = new HashMap<>();
     private static boolean hasInitializedRenderers = false;
 
-    public static BuiltinModelItemRenderer getItemRenderer(ItemConvertible item) {
+    public static BlockEntityWithoutLevelRenderer getItemRenderer(ItemLike item) {
         return ITEM_RENDERERS.get(item.asItem());
     }
 
-    private static void registerItemRenderer(ItemConvertible item, BuiltinModelItemRenderer renderer) {
+    private static void registerItemRenderer(ItemLike item, BlockEntityWithoutLevelRenderer renderer) {
         ITEM_RENDERERS.put(item.asItem(), renderer);
     }
 
@@ -47,13 +47,13 @@ public class AdAstraClientForge {
 
 
     public static void chestSpriteLoading(TextureStitchEvent.Pre event) {
-        if (event.getAtlas().getId().equals(TexturedRenderLayers.CHEST_ATLAS_TEXTURE)) {
+        if (event.getAtlas().location().equals(Sheets.CHEST_SHEET)) {
             AdAstraClient.onRegisterChestSprites(event::addSprite);
         }
     }
 
     public static void spriteLoading(TextureStitchEvent.Pre event) {
-        if (event.getAtlas().getId().equals(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE)) {
+        if (event.getAtlas().location().equals(InventoryMenu.BLOCK_ATLAS)) {
             AdAstraClient.onRegisterSprites(event::addSprite);
         }
     }
@@ -81,13 +81,13 @@ public class AdAstraClientForge {
     public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
         ClientModEntities.registerEntityRenderers(new ClientModEntities.EntityRendererRegistry() {
             @Override
-            protected <T extends Entity> void register(Supplier<? extends EntityType<? extends T>> type, EntityRendererFactory<T> factory) {
+            protected <T extends Entity> void register(Supplier<? extends EntityType<? extends T>> type, EntityRendererProvider<T> factory) {
                 event.registerEntityRenderer(type.get(), factory);
             }
         });
         ClientModBlockRenderers.registerBlockRenderers(new ClientModBlockRenderers.BlockRendererRegistry() {
             @Override
-            public <T extends BlockEntity> void register(Supplier<? extends BlockEntityType<? extends T>> type, BlockEntityRendererFactory<T> factory) {
+            public <T extends BlockEntity> void register(Supplier<? extends BlockEntityType<? extends T>> type, BlockEntityRendererProvider<T> factory) {
                 event.registerBlockEntityRenderer(type.get(), factory);
             }
         });
@@ -96,7 +96,7 @@ public class AdAstraClientForge {
     public static void onRegisterLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
         ClientModEntities.registerEntityLayers(new ClientModEntities.LayerDefinitionRegistry() {
             @Override
-            public void register(EntityModelLayer location, Supplier<TexturedModelData> definition) {
+            public void register(ModelLayerLocation location, Supplier<LayerDefinition> definition) {
                 event.registerLayerDefinition(location, definition);
             }
         });

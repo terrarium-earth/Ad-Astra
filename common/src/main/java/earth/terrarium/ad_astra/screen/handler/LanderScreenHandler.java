@@ -4,25 +4,25 @@ import earth.terrarium.ad_astra.entities.vehicles.VehicleEntity;
 import earth.terrarium.ad_astra.registry.ModScreenHandlers;
 import earth.terrarium.ad_astra.screen.NoInventorySlot;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.screen.slot.Slot;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 
 public class LanderScreenHandler extends AbstractVehicleScreenHandler {
 
-    public LanderScreenHandler(int syncId, PlayerInventory inventory, PacketByteBuf buf) {
-        this(syncId, inventory, (VehicleEntity) inventory.player.world.getEntityById(buf.readInt()));
+    public LanderScreenHandler(int syncId, Inventory inventory, FriendlyByteBuf buf) {
+        this(syncId, inventory, (VehicleEntity) inventory.player.level.getEntity(buf.readInt()));
     }
 
-    public LanderScreenHandler(int syncId, PlayerInventory inventory, VehicleEntity entity) {
+    public LanderScreenHandler(int syncId, Inventory inventory, VehicleEntity entity) {
         super(ModScreenHandlers.LANDER_SCREEN_HANDLER.get(), syncId, inventory, entity, new Slot[]{
 
                 // Left input slot
                 new NoInventorySlot(entity.getInventory(), 0, 19, 58) {
                     @Override
-                    public boolean canInsert(ItemStack stack) {
-                        if (!super.canInsert(stack)) {
+                    public boolean mayPlace(ItemStack stack) {
+                        if (!super.mayPlace(stack)) {
                             return false;
                         }
                         return FluidHooks.isFluidContainingItem(stack);
@@ -31,7 +31,7 @@ public class LanderScreenHandler extends AbstractVehicleScreenHandler {
                 // Left output slot
                 new NoInventorySlot(entity.getInventory(), 1, 48, 58) {
                     @Override
-                    public boolean canInsert(ItemStack stack) {
+                    public boolean mayPlace(ItemStack stack) {
                         return false;
                     }
                 },
@@ -56,7 +56,7 @@ public class LanderScreenHandler extends AbstractVehicleScreenHandler {
                 // Rocket slot.
                 new Slot(entity.getInventory(), 10, 34, 27) {
                     @Override
-                    public boolean canInsert(ItemStack stack) {
+                    public boolean mayPlace(ItemStack stack) {
                         return false;
                     }
                 },});

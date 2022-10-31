@@ -1,11 +1,11 @@
 package earth.terrarium.ad_astra.items;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
 public class HammerItem extends Item {
 
-    public HammerItem(Settings settings) {
+    public HammerItem(Properties settings) {
         super(settings);
     }
 

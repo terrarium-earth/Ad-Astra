@@ -2,27 +2,28 @@ package earth.terrarium.ad_astra.screen;
 
 import earth.terrarium.ad_astra.screen.handler.PlanetSelectionScreenHandler;
 import earth.terrarium.botarium.api.menu.ExtraDataMenuProvider;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Text;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import org.jetbrains.annotations.NotNull;
 
 public record PlanetSelectionScreenHandlerFactory(int tier) implements ExtraDataMenuProvider {
 
     @Override
-    public void writeExtraData(ServerPlayerEntity player, PacketByteBuf buf) {
+    public void writeExtraData(ServerPlayer player, FriendlyByteBuf buf) {
         buf.writeInt(tier);
     }
 
     @Override
-    public ScreenHandler createMenu(int syncId, PlayerInventory inventory, PlayerEntity player) {
+    public AbstractContainerMenu createMenu(int syncId, @NotNull Inventory inventory, @NotNull Player player) {
         return new PlanetSelectionScreenHandler(syncId, player, tier);
     }
 
     @Override
-    public Text getDisplayName() {
-        return Text.translatable("gui.ad_astra.planet_selection.name");
+    public Component getDisplayName() {
+        return Component.translatable("gui.ad_astra.planet_selection.name");
     }
 }

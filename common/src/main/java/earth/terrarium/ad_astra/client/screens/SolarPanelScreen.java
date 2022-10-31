@@ -1,16 +1,15 @@
 package earth.terrarium.ad_astra.client.screens;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.blocks.machines.AbstractMachineBlock;
 import earth.terrarium.ad_astra.blocks.machines.entity.SolarPanelBlockEntity;
 import earth.terrarium.ad_astra.screen.handler.SolarPanelScreenHandler;
-import earth.terrarium.ad_astra.util.ModIdentifier;
+import earth.terrarium.ad_astra.util.ModResourceLocation;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
-
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Inventory;
 import java.awt.*;
 
 @Environment(EnvType.CLIENT)
@@ -20,45 +19,45 @@ public class SolarPanelScreen extends AbstractMachineScreen<SolarPanelBlockEntit
     public static final int SUN_TOP = 59;
     public static final int ENERGY_LEFT = 108;
     public static final int ENERGY_TOP = 69;
-    private static final Identifier TEXTURE = new ModIdentifier("textures/gui/screens/solar_panel.png");
+    private static final ResourceLocation TEXTURE = new ModResourceLocation("textures/gui/screens/solar_panel.png");
 
-    public SolarPanelScreen(SolarPanelScreenHandler handler, PlayerInventory inventory, Text title) {
+    public SolarPanelScreen(SolarPanelScreenHandler handler, Inventory inventory, Component title) {
         super(handler, inventory, title, TEXTURE);
-        this.backgroundWidth = 177;
-        this.backgroundHeight = 228;
-        this.titleY = 46;
-        this.playerInventoryTitleY = this.backgroundHeight - 93;
+        this.imageWidth = 177;
+        this.imageHeight = 228;
+        this.titleLabelY = 46;
+        this.inventoryLabelY = this.imageHeight - 93;
     }
 
     @Override
-    protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
-        super.drawBackground(matrices, delta, mouseX, mouseY);
+    protected void renderBg(PoseStack matrices, float delta, int mouseX, int mouseY) {
+        super.renderBg(matrices, delta, mouseX, mouseY);
 
-        GuiUtil.drawEnergy(matrices, this.x + ENERGY_LEFT, this.y + ENERGY_TOP, this.handler.getEnergyAmount(), this.machine.getMaxCapacity());
-        if (this.machine.getCachedState().get(AbstractMachineBlock.LIT)) {
-            GuiUtil.drawSun(matrices, this.x + SUN_LEFT, this.y + SUN_TOP);
+        GuiUtil.drawEnergy(matrices, this.leftPos + ENERGY_LEFT, this.topPos + ENERGY_TOP, this.menu.getEnergyAmount(), this.machine.getMaxCapacity());
+        if (this.machine.getBlockState().getValue(AbstractMachineBlock.LIT)) {
+            GuiUtil.drawSun(matrices, this.leftPos + SUN_LEFT, this.topPos + SUN_TOP);
         }
     }
 
     @Override
-    protected void drawForeground(MatrixStack matrices, int mouseX, int mouseY) {
-        super.drawForeground(matrices, mouseX, mouseY);
+    protected void renderLabels(PoseStack matrices, int mouseX, int mouseY) {
+        super.renderLabels(matrices, mouseX, mouseY);
 
-        this.textRenderer.draw(matrices, Text.translatable("gauge_text.ad_astra.max_generation"), this.titleY - 20, 8, 0x68d975);
-        this.textRenderer.draw(matrices, Text.translatable("gauge_text.ad_astra.energy_per_tick", this.machine.getEnergyPerTick()), this.titleY - 21, 18, 0x68d975);
+        this.font.draw(matrices, Component.translatable("gauge_text.ad_astra.max_generation"), this.titleLabelY - 20, 8, 0x68d975);
+        this.font.draw(matrices, Component.translatable("gauge_text.ad_astra.energy_per_tick", this.machine.getEnergyPerTick()), this.titleLabelY - 21, 18, 0x68d975);
     }
 
     @Override
-    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+    public void render(PoseStack matrices, int mouseX, int mouseY, float delta) {
         super.render(matrices, mouseX, mouseY, delta);
 
         if (GuiUtil.isHovering(this.getEnergyBounds(), mouseX, mouseY)) {
-            GuiUtil.drawEnergyTooltip(this, matrices, this.handler.getEnergyAmount(), machine.getMaxCapacity(), mouseX, mouseY);
+            GuiUtil.drawEnergyTooltip(this, matrices, this.menu.getEnergyAmount(), machine.getMaxCapacity(), mouseX, mouseY);
         }
     }
 
     public Rectangle getEnergyBounds() {
-        return GuiUtil.getEnergyBounds(this.x + ENERGY_LEFT, this.y + ENERGY_TOP);
+        return GuiUtil.getEnergyBounds(this.leftPos + ENERGY_LEFT, this.topPos + ENERGY_TOP);
     }
 
     @Override

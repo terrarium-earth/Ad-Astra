@@ -1,28 +1,27 @@
 package earth.terrarium.ad_astra.items;
 
 import earth.terrarium.ad_astra.AdAstra;
-import net.minecraft.block.Block;
-import net.minecraft.client.item.TooltipContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import net.minecraft.world.World;
-
 import java.util.List;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 
 public class EnergizerBlockItem extends MachineBlockItem {
-    public EnergizerBlockItem(Block block, Settings settings) {
+    public EnergizerBlockItem(Block block, Properties settings) {
         super(block, settings);
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
+    public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag context) {
         long energy = 0;
-        if (stack.hasNbt() && stack.getNbt().contains("energy")) {
-            energy = stack.getNbt().getLong("energy");
+        if (stack.hasTag() && stack.getTag().contains("energy")) {
+            energy = stack.getTag().getLong("energy");
         }
-        tooltip.add(Text.translatable("gauge_text.ad_astra.storage", energy, AdAstra.CONFIG.energizer.maxEnergy).setStyle(Style.EMPTY.withColor(energy > 0 ? Formatting.GREEN : Formatting.RED)));
-        super.appendTooltip(stack, world, tooltip, context);
+        tooltip.add(Component.translatable("gauge_text.ad_astra.storage", energy, AdAstra.CONFIG.energizer.maxEnergy).setStyle(Style.EMPTY.withColor(energy > 0 ? ChatFormatting.GREEN : ChatFormatting.RED)));
+        super.appendHoverText(stack, level, tooltip, context);
     }
 }

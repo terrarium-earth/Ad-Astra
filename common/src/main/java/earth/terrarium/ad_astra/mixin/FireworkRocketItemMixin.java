@@ -1,12 +1,12 @@
 package earth.terrarium.ad_astra.mixin;
 
 import earth.terrarium.ad_astra.items.armour.JetSuit;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.FireworkRocketItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.FireworkRocketItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -17,9 +17,9 @@ public class FireworkRocketItemMixin {
 
     // Cancel firework boost with jet suit
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
-    public void adastra_use(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> ci) {
+    public void adastra_use(Level level, Player user, InteractionHand hand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> ci) {
         if (JetSuit.hasFullSet(user)) {
-            ci.setReturnValue(TypedActionResult.pass(user.getStackInHand(hand)));
+            ci.setReturnValue(InteractionResultHolder.pass(user.getItemInHand(hand)));
         }
     }
 }

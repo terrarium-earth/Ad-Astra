@@ -4,24 +4,24 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamresourceful.resourcefullib.common.codecs.tags.HolderSetCodec;
 import earth.terrarium.ad_astra.registry.ModRecipes;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.recipe.RecipeSerializer;
-import net.minecraft.recipe.RecipeType;
-import net.minecraft.util.HolderSet;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.core.HolderSet;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.material.Fluid;
 
 public class OxygenConversionRecipe extends FluidConversionRecipe {
 
-    public OxygenConversionRecipe(Identifier id, HolderSet<Fluid> input, Fluid output, double conversionRatio) {
+    public OxygenConversionRecipe(ResourceLocation id, HolderSet<Fluid> input, Fluid output, double conversionRatio) {
         super(id, input, output, conversionRatio);
     }
 
-    public static Codec<OxygenConversionRecipe> oxygenCodec(Identifier id) {
+    public static Codec<OxygenConversionRecipe> oxygenCodec(ResourceLocation id) {
         return RecordCodecBuilder.create(instance -> instance.group(
                 RecordCodecBuilder.point(id),
                 HolderSetCodec.of(Registry.FLUID).fieldOf("input").forGetter(ConversionRecipe::getFluidInput),
-                Registry.FLUID.getCodec().fieldOf("output").forGetter(ConversionRecipe::getFluidOutput),
+                Registry.FLUID.byNameCodec().fieldOf("output").forGetter(ConversionRecipe::getFluidOutput),
                 Codec.DOUBLE.fieldOf("conversion_ratio").orElse(1.0).forGetter(ConversionRecipe::getConversionRatio)
         ).apply(instance, OxygenConversionRecipe::new));
     }

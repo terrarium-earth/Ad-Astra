@@ -2,9 +2,9 @@ package earth.terrarium.ad_astra.mixin.client;
 
 import earth.terrarium.ad_astra.entities.vehicles.RocketEntity;
 import earth.terrarium.ad_astra.entities.vehicles.VehicleEntity;
-import net.minecraft.client.render.Frustum;
-import net.minecraft.client.render.entity.EntityRenderer;
-import net.minecraft.entity.Entity;
+import net.minecraft.client.renderer.culling.Frustum;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.world.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

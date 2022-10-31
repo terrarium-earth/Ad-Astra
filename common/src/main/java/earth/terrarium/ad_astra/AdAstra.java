@@ -7,18 +7,18 @@ import earth.terrarium.ad_astra.entities.mobs.*;
 import earth.terrarium.ad_astra.mixin.BlockEntityTypeAccessor;
 import earth.terrarium.ad_astra.networking.NetworkHandling;
 import earth.terrarium.ad_astra.registry.*;
-import earth.terrarium.ad_astra.util.ModIdentifier;
+import earth.terrarium.ad_astra.util.ModResourceLocation;
 import earth.terrarium.ad_astra.util.PlatformUtils;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
-import net.minecraft.block.Block;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.entity.SpawnRestriction;
-import net.minecraft.resource.ResourceReloader;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.world.Heightmap;
-import net.minecraft.world.World;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.PreparableReloadListener;
+import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.levelgen.Heightmap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,10 +32,10 @@ public class AdAstra {
     public static AdAstraConfig CONFIG;
 
     public static Set<Planet> planets = new HashSet<>();
-    public static Set<RegistryKey<World>> adAstraWorlds = new HashSet<>();
-    public static Set<RegistryKey<World>> orbitWorlds = new HashSet<>();
-    public static Set<RegistryKey<World>> planetWorlds = new HashSet<>();
-    public static Set<RegistryKey<World>> worldsWithOxygen = new HashSet<>();
+    public static Set<ResourceKey<Level>> adAstraWorlds = new HashSet<>();
+    public static Set<ResourceKey<Level>> orbitWorlds = new HashSet<>();
+    public static Set<ResourceKey<Level>> planetWorlds = new HashSet<>();
+    public static Set<ResourceKey<Level>> levelsWithOxygen = new HashSet<>();
 
     public static void init() {
         // Register config
@@ -65,8 +65,8 @@ public class AdAstra {
         ModCriteria.register();
     }
 
-    public static void onRegisterReloadListeners(BiConsumer<Identifier, ResourceReloader> registry) {
-        registry.accept(new ModIdentifier("planet_data"), new PlanetData());
+    public static void onRegisterReloadListeners(BiConsumer<ResourceLocation, PreparableReloadListener> registry) {
+        registry.accept(new ModResourceLocation("planet_data"), new PlanetData());
     }
 
     public static void postInit() {
@@ -74,29 +74,29 @@ public class AdAstra {
 
         // Add custom signs to the sign block entity registry
         BlockEntityTypeAccessor signRegistry = ((BlockEntityTypeAccessor) BlockEntityType.SIGN);
-        Set<Block> signBlocks = new HashSet<>(signRegistry.getBlocks());
+        Set<Block> signBlocks = new HashSet<>(signRegistry.getValidBlocks());
         signBlocks.add(ModBlocks.GLACIAN_SIGN.get());
         signBlocks.add(ModBlocks.GLACIAN_WALL_SIGN.get());
-        signRegistry.setBlocks(signBlocks);
+        signRegistry.setValidBlocks(signBlocks);
 
         // Add custom chests to the chest block entity registry
         BlockEntityTypeAccessor chestRegistry = ((BlockEntityTypeAccessor) BlockEntityType.CHEST);
-        Set<Block> chestBlocks = new HashSet<>(chestRegistry.getBlocks());
+        Set<Block> chestBlocks = new HashSet<>(chestRegistry.getValidBlocks());
         chestBlocks.add(ModBlocks.AERONOS_CHEST.get());
         chestBlocks.add(ModBlocks.STROPHAR_CHEST.get());
-        chestRegistry.setBlocks(chestBlocks);
+        chestRegistry.setValidBlocks(chestBlocks);
 
-        SpawnRestriction.register(ModEntityTypes.LUNARIAN.get(), SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, LunarianEntity::canMobSpawn);
-        SpawnRestriction.register(ModEntityTypes.CORRUPTED_LUNARIAN.get(), SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, CorruptedLunarianEntity::canSpawnInDark);
-        SpawnRestriction.register(ModEntityTypes.STAR_CRAWLER.get(), SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, StarCrawlerEntity::canSpawnInDark);
-        SpawnRestriction.register(ModEntityTypes.MARTIAN_RAPTOR.get(), SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MartianRaptorEntity::canSpawnInDark);
-        SpawnRestriction.register(ModEntityTypes.PYGRO.get(), SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, PygroEntity::canSpawnInDark);
-        SpawnRestriction.register(ModEntityTypes.ZOMBIFIED_PYGRO.get(), SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ZombifiedPygroEntity::canSpawnInDark);
-        SpawnRestriction.register(ModEntityTypes.PYGRO_BRUTE.get(), SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, PygroBruteEntity::canSpawnInDark);
-        SpawnRestriction.register(ModEntityTypes.MOGLER.get(), SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MoglerEntity::canMobSpawn);
-        SpawnRestriction.register(ModEntityTypes.ZOMBIFIED_MOGLER.get(), SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ZombifiedMoglerEntity::canSpawnInDark);
-        SpawnRestriction.register(ModEntityTypes.LUNARIAN_WANDERING_TRADER.get(), SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, LunarianEntity::canMobSpawn);
-        SpawnRestriction.register(ModEntityTypes.SULFUR_CREEPER.get(), SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, SulfurCreeperEntity::canSpawnInDark);
-        SpawnRestriction.register(ModEntityTypes.GLACIAN_RAM.get(), SpawnRestriction.Location.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, GlacianRamEntity::canMobSpawn);
+        SpawnPlacements.register(ModEntityTypes.LUNARIAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, LunarianEntity::checkMobSpawnRules);
+        SpawnPlacements.register(ModEntityTypes.CORRUPTED_LUNARIAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CorruptedLunarianEntity::checkMonsterSpawnRules);
+        SpawnPlacements.register(ModEntityTypes.STAR_CRAWLER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, StarCrawlerEntity::checkMonsterSpawnRules);
+        SpawnPlacements.register(ModEntityTypes.MARTIAN_RAPTOR.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, MartianRaptorEntity::checkMonsterSpawnRules);
+        SpawnPlacements.register(ModEntityTypes.PYGRO.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, PygroEntity::checkMonsterSpawnRules);
+        SpawnPlacements.register(ModEntityTypes.ZOMBIFIED_PYGRO.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ZombifiedPygroEntity::checkMonsterSpawnRules);
+        SpawnPlacements.register(ModEntityTypes.PYGRO_BRUTE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, PygroBruteEntity::checkMonsterSpawnRules);
+        SpawnPlacements.register(ModEntityTypes.MOGLER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, MoglerEntity::checkMobSpawnRules);
+        SpawnPlacements.register(ModEntityTypes.ZOMBIFIED_MOGLER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ZombifiedMoglerEntity::checkMonsterSpawnRules);
+        SpawnPlacements.register(ModEntityTypes.LUNARIAN_WANDERING_TRADER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, LunarianEntity::checkMobSpawnRules);
+        SpawnPlacements.register(ModEntityTypes.SULFUR_CREEPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SulfurCreeperEntity::checkMonsterSpawnRules);
+        SpawnPlacements.register(ModEntityTypes.GLACIAN_RAM.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, GlacianRamEntity::checkMobSpawnRules);
     }
 }

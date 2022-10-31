@@ -4,15 +4,15 @@ import dev.architectury.event.events.common.PlayerEvent;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.registry.ModItems;
 import earth.terrarium.ad_astra.util.ModUtils;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.stat.Stats;
-import net.minecraft.text.Text;
-import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
-import net.minecraft.world.World;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.stats.Stats;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 public class AstroduxItem extends Item {
 
@@ -20,28 +20,28 @@ public class AstroduxItem extends Item {
     static {
         PlayerEvent.PLAYER_JOIN.register((player) -> {
             if (AdAstra.CONFIG.general.giveAstroduxAtSpawn) {
-                if (player.getStatHandler().getStat(Stats.CUSTOM.getOrCreateStat(Stats.TOTAL_WORLD_TIME)) <= 0) {
-                    player.giveItemStack(ModItems.ASTRODUX.get().getDefaultStack());
+                if (player.getStats().getValue(Stats.CUSTOM.get(Stats.TOTAL_WORLD_TIME)) <= 0) {
+                    player.addItem(ModItems.ASTRODUX.get().getDefaultInstance());
                 }
             }
         });
     }
 
-    public AstroduxItem(Settings settings) {
+    public AstroduxItem(Properties settings) {
         super(settings);
     }
 
     @Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        if (user instanceof ServerPlayerEntity player) {
+    public InteractionResultHolder<ItemStack> use(Level level, Player user, InteractionHand hand) {
+        if (user instanceof ServerPlayer player) {
             if (ModUtils.modLoaded("patchouli")) {
                 // TODO: Patchouli
                 // PatchouliAPI.get().openBookGUI(player, new ModIdentifier("astrodux"));
-                return TypedActionResult.success(user.getStackInHand(hand));
+                return InteractionResultHolder.success(user.getItemInHand(hand));
             } else {
-                user.sendMessage(Text.translatable("info.ad_astra.install_patchouli"), true);
+                user.displayClientMessage(Component.translatable("info.ad_astra.install_patchouli"), true);
             }
         }
-        return TypedActionResult.fail(user.getStackInHand(hand));
+        return InteractionResultHolder.fail(user.getItemInHand(hand));
     }
 }

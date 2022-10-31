@@ -2,20 +2,20 @@ package earth.terrarium.ad_astra.client.renderer.entity.mobs;
 
 import earth.terrarium.ad_astra.client.renderer.entity.mobs.models.GlacianRamEntityModel;
 import earth.terrarium.ad_astra.entities.mobs.GlacianRamEntity;
-import earth.terrarium.ad_astra.util.ModIdentifier;
-import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.MobEntityRenderer;
-import net.minecraft.util.Identifier;
+import earth.terrarium.ad_astra.util.ModResourceLocation;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.resources.ResourceLocation;
 
-public class GlacianRamEntityRenderer extends MobEntityRenderer<GlacianRamEntity, GlacianRamEntityModel<GlacianRamEntity>> {
-    private static final Identifier TEXTURE = new ModIdentifier("textures/entity/glacian_ram/glacian_ram.png");
-    private static final Identifier SHEARED_TEXTURE = new ModIdentifier("textures/entity/glacian_ram/sheared_glacian_ram.png");
+public class GlacianRamEntityRenderer extends MobRenderer<GlacianRamEntity, GlacianRamEntityModel<GlacianRamEntity>> {
+    private static final ResourceLocation TEXTURE = new ModResourceLocation("textures/entity/glacian_ram/glacian_ram.png");
+    private static final ResourceLocation SHEARED_TEXTURE = new ModResourceLocation("textures/entity/glacian_ram/sheared_glacian_ram.png");
 
-    public GlacianRamEntityRenderer(EntityRendererFactory.Context context) {
-        super(context, new GlacianRamEntityModel<>(context.getPart(GlacianRamEntityModel.LAYER_LOCATION)), 0.7f);
+    public GlacianRamEntityRenderer(EntityRendererProvider.Context context) {
+        super(context, new GlacianRamEntityModel<>(context.bakeLayer(GlacianRamEntityModel.LAYER_LOCATION)), 0.7f);
     }
 
-    public Identifier getTexture(GlacianRamEntity entity) {
+    public ResourceLocation getTextureLocation(GlacianRamEntity entity) {
         return entity.isSheared() ? SHEARED_TEXTURE : TEXTURE;
     }
 }

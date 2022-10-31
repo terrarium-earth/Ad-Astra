@@ -1,37 +1,36 @@
 package earth.terrarium.ad_astra.recipes;
 
-import net.minecraft.inventory.Inventory;
-import net.minecraft.recipe.Recipe;
-import net.minecraft.recipe.RecipeManager;
-import net.minecraft.recipe.RecipeType;
-import net.minecraft.util.Identifier;
-import net.minecraft.world.World;
-
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
 
-public class ModRecipeType<T extends Recipe<Inventory>> implements RecipeType<T> {
-    private final Identifier id;
+public class ModRecipeType<T extends Recipe<Container>> implements RecipeType<T> {
+    private final ResourceLocation id;
 
-    public ModRecipeType(Identifier id) {
+    public ModRecipeType(ResourceLocation id) {
         this.id = id;
     }
 
-    public Identifier getId() {
+    public ResourceLocation getId() {
         return this.id;
     }
 
-    public Stream<T> filter(World world, Predicate<T> filter) {
-        return this.getRecipes(world).stream().filter(filter);
+    public Stream<T> filter(Level level, Predicate<T> filter) {
+        return this.getRecipes(level).stream().filter(filter);
     }
 
-    public T findFirst(World world, Predicate<T> filter) {
-        return this.filter(world, filter).findFirst().orElse(null);
+    public T findFirst(Level level, Predicate<T> filter) {
+        return this.filter(level, filter).findFirst().orElse(null);
     }
 
-    public List<T> getRecipes(World world) {
-        RecipeManager recipeManager = world.getRecipeManager();
-        return recipeManager.listAllOfType(this);
+    public List<T> getRecipes(Level level) {
+        RecipeManager recipeManager = level.getRecipeManager();
+        return recipeManager.getAllRecipesFor(this);
     }
 }

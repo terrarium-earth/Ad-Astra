@@ -6,7 +6,7 @@ import dev.architectury.core.fluid.SimpleArchitecturyFluidAttributes;
 import earth.terrarium.ad_astra.registry.ModBlocks;
 import earth.terrarium.ad_astra.registry.ModFluids;
 import earth.terrarium.ad_astra.registry.ModItems;
-import earth.terrarium.ad_astra.util.ModIdentifier;
+import earth.terrarium.ad_astra.util.ModResourceLocation;
 
 public class ModFluidAttributes {
     public static final ArchitecturyFluidAttributes OIL_FLUID_ATTRIBUTES = SimpleArchitecturyFluidAttributes.of(ModFluids.FLOWING_OIL, ModFluids.OIL_STILL)
@@ -14,9 +14,9 @@ public class ModFluidAttributes {
             .bucketItem(ModItems.OIL_BUCKET)
             .density(2000)
             .viscosity(2000)
-            .sourceTexture(new ModIdentifier("block/fluid_oil_still"))
-            .flowingTexture(new ModIdentifier("block/fluid_oil_flow"))
-            .overlayTexture(new ModIdentifier("block/oil_overlay"));
+            .sourceTexture(new ModResourceLocation("block/fluid_oil_still"))
+            .flowingTexture(new ModResourceLocation("block/fluid_oil_flow"))
+            .overlayTexture(new ModResourceLocation("block/oil_overlay"));
 
 
     public static final ArchitecturyFluidAttributes FUEL_FLUID_ATTRIBUTES = SimpleArchitecturyFluidAttributes.of(ModFluids.FLOWING_FUEL, ModFluids.FUEL_STILL)
@@ -24,9 +24,9 @@ public class ModFluidAttributes {
             .bucketItem(ModItems.FUEL_BUCKET)
             .density(1500)
             .viscosity(1500)
-            .sourceTexture(new ModIdentifier("block/fluid_fuel_still"))
-            .flowingTexture(new ModIdentifier("block/fluid_fuel_flow"))
-            .overlayTexture(new ModIdentifier("block/fuel_overlay"));
+            .sourceTexture(new ModResourceLocation("block/fluid_fuel_still"))
+            .flowingTexture(new ModResourceLocation("block/fluid_fuel_flow"))
+            .overlayTexture(new ModResourceLocation("block/fuel_overlay"));
 
     public static final ArchitecturyFluidAttributes CRYO_FUEL_FLUID_ATTRIBUTES = SimpleArchitecturyFluidAttributes.of(ModFluids.FLOWING_CRYO_FUEL, ModFluids.CRYO_FUEL_STILL)
             .block(ModBlocks.CRYO_FUEL_BLOCK)
@@ -34,16 +34,16 @@ public class ModFluidAttributes {
             .density(71)
             .viscosity(71)
             .temperature(-10000000)
-            .sourceTexture(new ModIdentifier("block/fluid_cryo_fuel_still"))
-            .flowingTexture(new ModIdentifier("block/fluid_cryo_fuel_flow"))
-            .overlayTexture(new ModIdentifier("block/cryo_fuel_overlay"));
+            .sourceTexture(new ModResourceLocation("block/fluid_cryo_fuel_still"))
+            .flowingTexture(new ModResourceLocation("block/fluid_cryo_fuel_flow"))
+            .overlayTexture(new ModResourceLocation("block/cryo_fuel_overlay"));
 
     public static final ArchitecturyFluidAttributes OXYGEN_FLUID_ATTRIBUTES = SimpleArchitecturyFluidAttributes.of(ModFluids.FLOWING_CRYO_FUEL, ModFluids.OXYGEN_STILL)
             .block(ModBlocks.OXYGEN_BLOCK)
             .bucketItem(ModItems.OXYGEN_BUCKET)
             .density(-1)
             .viscosity(0)
-            .sourceTexture(new ModIdentifier("block/fluid_oxygen_still"))
-            .flowingTexture(new ModIdentifier("block/fluid_oxygen_still"))
-            .overlayTexture(new ModIdentifier("block/fluid_oxygen_still"));
+            .sourceTexture(new ModResourceLocation("block/fluid_oxygen_still"))
+            .flowingTexture(new ModResourceLocation("block/fluid_oxygen_still"))
+            .overlayTexture(new ModResourceLocation("block/fluid_oxygen_still"));
 }

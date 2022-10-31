@@ -3,31 +3,31 @@ package earth.terrarium.ad_astra.world.features;
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import earth.terrarium.ad_astra.registry.ModBlocks;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.random.RandomGenerator;
-import net.minecraft.world.StructureWorldAccess;
-import net.minecraft.world.gen.feature.BasaltColumnsFeatureConfig;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.util.FeatureContext;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.levelgen.feature.configurations.ColumnFeatureConfiguration;
 import org.jetbrains.annotations.Nullable;
 
-public class InfernalSpireColumn extends Feature<BasaltColumnsFeatureConfig> {
+public class InfernalSpireColumn extends Feature<ColumnFeatureConfiguration> {
 
     private static final ImmutableList<Block> CANNOT_PLACE_ON = ImmutableList.of(Blocks.LAVA, Blocks.BEDROCK, Blocks.MAGMA_BLOCK, Blocks.SOUL_SAND, Blocks.NETHER_BRICKS, Blocks.NETHER_BRICK_FENCE, Blocks.NETHER_BRICK_STAIRS, Blocks.NETHER_WART, Blocks.CHEST, Blocks.SPAWNER);
 
-    public InfernalSpireColumn(Codec<BasaltColumnsFeatureConfig> configCodec) {
+    public InfernalSpireColumn(Codec<ColumnFeatureConfiguration> configCodec) {
         super(configCodec);
     }
 
     @Nullable
-    private static BlockPos findSurface(StructureWorldAccess world, int seaLevel, BlockPos.Mutable pos, int calculatedDistance) {
-        while (pos.getY() > world.getBottomY() + 1 && calculatedDistance > 0) {
+    private static BlockPos findSurface(WorldGenLevel level, int seaLevel, BlockPos.MutableBlockPos pos, int calculatedDistance) {
+        while (pos.getY() > level.getMinBuildHeight() + 1 && calculatedDistance > 0) {
             --calculatedDistance;
-            if (canPlaceAt(world, seaLevel, pos)) {
+            if (canPlaceAt(level, seaLevel, pos)) {
                 return pos;
             }
 
@@ -37,21 +37,21 @@ public class InfernalSpireColumn extends Feature<BasaltColumnsFeatureConfig> {
         return null;
     }
 
-    private static boolean canPlaceAt(StructureWorldAccess world, int seaLevel, BlockPos.Mutable pos) {
-        if (!isAirOrLavaOcean(world, seaLevel, pos)) {
+    private static boolean canPlaceAt(WorldGenLevel level, int seaLevel, BlockPos.MutableBlockPos pos) {
+        if (!isAirOrLavaOcean(level, seaLevel, pos)) {
             return false;
         } else {
-            BlockState blockstate = world.getBlockState(pos.move(Direction.DOWN));
+            BlockState blockstate = level.getBlockState(pos.move(Direction.DOWN));
             pos.move(Direction.UP);
             return !blockstate.isAir() && !CANNOT_PLACE_ON.contains(blockstate.getBlock());
         }
     }
 
     @Nullable
-    private static BlockPos findAir(StructureWorldAccess world, BlockPos.Mutable pos, int i) {
-        while (pos.getY() < world.getTopY() && i > 0) {
+    private static BlockPos findAir(WorldGenLevel level, BlockPos.MutableBlockPos pos, int i) {
+        while (pos.getY() < level.getMaxBuildHeight() && i > 0) {
             --i;
-            BlockState blockstate = world.getBlockState(pos);
+            BlockState blockstate = level.getBlockState(pos);
             if (CANNOT_PLACE_ON.contains(blockstate.getBlock())) {
                 return null;
             }
@@ -66,31 +66,31 @@ public class InfernalSpireColumn extends Feature<BasaltColumnsFeatureConfig> {
         return null;
     }
 
-    private static boolean isAirOrLavaOcean(StructureWorldAccess world, int seaLevel, BlockPos pos) {
-        BlockState blockstate = world.getBlockState(pos);
-        return blockstate.isAir() || blockstate.isOf(Blocks.LAVA) && pos.getY() <= seaLevel;
+    private static boolean isAirOrLavaOcean(WorldGenLevel level, int seaLevel, BlockPos pos) {
+        BlockState blockstate = level.getBlockState(pos);
+        return blockstate.isAir() || blockstate.is(Blocks.LAVA) && pos.getY() <= seaLevel;
     }
 
     @Override
-    public boolean place(FeatureContext<BasaltColumnsFeatureConfig> context) {
+    public boolean place(FeaturePlaceContext<ColumnFeatureConfiguration> context) {
 
-        int seaLevel = context.getGenerator().getSeaLevel();
-        BlockPos blockpos = context.getOrigin();
-        RandomGenerator random = context.getRandom();
-        BasaltColumnsFeatureConfig config = context.getConfig();
-        if (!canPlaceAt(context.getWorld(), seaLevel, blockpos.mutableCopy())) {
+        int seaLevel = context.chunkGenerator().getSeaLevel();
+        BlockPos blockpos = context.origin();
+        RandomSource random = context.random();
+        ColumnFeatureConfiguration config = context.config();
+        if (!canPlaceAt(context.level(), seaLevel, blockpos.mutable())) {
             return false;
         } else {
-            int height = config.getHeight().get(random);
+            int height = config.height().sample(random);
             boolean flag = random.nextFloat() < 0.9f;
             int k = Math.min(height, flag ? 5 : 8);
             int l = flag ? 50 : 15;
             boolean flag1 = false;
 
-            for (BlockPos randomPos : BlockPos.iterateRandomly(random, l, blockpos.getX() - k, blockpos.getY(), blockpos.getZ() - k, blockpos.getX() + k, blockpos.getY(), blockpos.getZ() + k)) {
-                int calculatedDistance = height - randomPos.getManhattanDistance(blockpos);
+            for (BlockPos randomPos : BlockPos.randomBetweenClosed(random, l, blockpos.getX() - k, blockpos.getY(), blockpos.getZ() - k, blockpos.getX() + k, blockpos.getY(), blockpos.getZ() + k)) {
+                int calculatedDistance = height - randomPos.distManhattan(blockpos);
                 if (calculatedDistance >= 0) {
-                    flag1 |= this.placeColumn(context.getWorld(), seaLevel, randomPos, calculatedDistance, config.getReach().get(random));
+                    flag1 |= this.placeColumn(context.level(), seaLevel, randomPos, calculatedDistance, config.reach().sample(random));
                 }
             }
 
@@ -98,26 +98,26 @@ public class InfernalSpireColumn extends Feature<BasaltColumnsFeatureConfig> {
         }
     }
 
-    private boolean placeColumn(StructureWorldAccess world, int seaLevel, BlockPos randomPos, int calculatedDistance, int reach) {
+    private boolean placeColumn(WorldGenLevel level, int seaLevel, BlockPos randomPos, int calculatedDistance, int reach) {
         boolean flag = false;
 
-        for (BlockPos blockpos : BlockPos.iterate(randomPos.getX() - reach, randomPos.getY(), randomPos.getZ() - reach, randomPos.getX() + reach, randomPos.getY(), randomPos.getZ() + reach)) {
-            int calculatedDistance2 = blockpos.getManhattanDistance(randomPos);
-            BlockPos blockpos1 = isAirOrLavaOcean(world, seaLevel, blockpos) ? findSurface(world, seaLevel, blockpos.mutableCopy(), calculatedDistance2) : findAir(world, blockpos.mutableCopy(), calculatedDistance2);
+        for (BlockPos blockpos : BlockPos.betweenClosed(randomPos.getX() - reach, randomPos.getY(), randomPos.getZ() - reach, randomPos.getX() + reach, randomPos.getY(), randomPos.getZ() + reach)) {
+            int calculatedDistance2 = blockpos.distManhattan(randomPos);
+            BlockPos blockpos1 = isAirOrLavaOcean(level, seaLevel, blockpos) ? findSurface(level, seaLevel, blockpos.mutable(), calculatedDistance2) : findAir(level, blockpos.mutable(), calculatedDistance2);
             if (blockpos1 != null) {
                 int j = calculatedDistance - calculatedDistance2 / 2;
 
-                for (BlockPos.Mutable pos = blockpos1.mutableCopy(); j >= 0; --j) {
-                    if (isAirOrLavaOcean(world, seaLevel, pos)) {
-                        this.setBlockState(world, pos, ModBlocks.INFERNAL_SPIRE_BLOCK.get().getDefaultState());
+                for (BlockPos.MutableBlockPos pos = blockpos1.mutable(); j >= 0; --j) {
+                    if (isAirOrLavaOcean(level, seaLevel, pos)) {
+                        this.setBlock(level, pos, ModBlocks.INFERNAL_SPIRE_BLOCK.get().defaultBlockState());
                         pos.move(Direction.UP);
                         flag = true;
                     } else {
-                        if (!world.getBlockState(pos).isOf(ModBlocks.INFERNAL_SPIRE_BLOCK.get())) {
+                        if (!level.getBlockState(pos).is(ModBlocks.INFERNAL_SPIRE_BLOCK.get())) {
                             break;
                         }
 
-                        pos.up();
+                        pos.above();
                     }
                 }
             }

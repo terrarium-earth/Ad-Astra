@@ -3,12 +3,11 @@ package earth.terrarium.ad_astra.container;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.botarium.api.Updatable;
 import earth.terrarium.botarium.api.fluid.*;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.util.math.MathHelper;
-
 import java.util.List;
 import java.util.Objects;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.material.Fluids;
 
 public class WaterPumpFluidTank implements UpdatingFluidContainer {
     private FluidHolder tank;
@@ -36,7 +35,7 @@ public class WaterPumpFluidTank implements UpdatingFluidContainer {
     public long insertInternal(FluidHolder fluid, boolean simulate) {
         if (fluid.isEmpty()) return 0;
         if (tank.isEmpty()) {
-            NbtCompound compound = fluid.getCompound() != null ? fluid.getCompound().copy() : null;
+            CompoundTag compound = fluid.getCompound() != null ? fluid.getCompound().copy() : null;
             FluidHolder fluidHolder = FluidHooks.newFluidHolder(fluid.getFluid(), Math.min(this.getTankCapacity(0), fluid.getFluidAmount()), compound);
             if (!simulate) tank = fluidHolder;
             return fluidHolder.getFluidAmount();
@@ -56,7 +55,7 @@ public class WaterPumpFluidTank implements UpdatingFluidContainer {
         if (!Objects.equals(fluid.getCompound(), tank.getCompound())) return FluidHooks.emptyFluid();
         long amount = Math.min(tank.getFluidAmount(), fluid.getFluidAmount());
         if (!simulate) tank.setAmount(tank.getFluidAmount() - amount);
-        NbtCompound compound = fluid.getCompound() != null ? fluid.getCompound().copy() : null;
+        CompoundTag compound = fluid.getCompound() != null ? fluid.getCompound().copy() : null;
         return FluidHooks.newFluidHolder(fluid.getFluid(), amount, compound);
     }
 
@@ -99,8 +98,8 @@ public class WaterPumpFluidTank implements UpdatingFluidContainer {
 
     @Override
     public long extractFromSlot(FluidHolder fluidHolder, FluidHolder toInsert, Runnable snapshot) {
-        if (Objects.equals(fluidHolder.getCompound(), toInsert.getCompound()) && fluidHolder.getFluid().matchesType(toInsert.getFluid())) {
-            long amount = MathHelper.clamp(toInsert.getFluidAmount(), 0, fluidHolder.getFluidAmount());
+        if (Objects.equals(fluidHolder.getCompound(), toInsert.getCompound()) && fluidHolder.getFluid().isSame(toInsert.getFluid())) {
+            long amount = Mth.clamp(toInsert.getFluidAmount(), 0, fluidHolder.getFluidAmount());
             snapshot.run();
             fluidHolder.setAmount(fluidHolder.getFluidAmount() - amount);
             if (fluidHolder.getFluidAmount() == 0) {
@@ -127,12 +126,12 @@ public class WaterPumpFluidTank implements UpdatingFluidContainer {
     }
 
     @Override
-    public void deserialize(NbtCompound nbtCompound) {
+    public void deserialize(CompoundTag nbtCompound) {
         this.tank = FluidHooks.fluidFromCompound(nbtCompound.getCompound("Tank"));
     }
 
     @Override
-    public NbtCompound serialize(NbtCompound nbtCompound) {
+    public CompoundTag serialize(CompoundTag nbtCompound) {
         nbtCompound.put("Tank", this.tank.serialize());
         return nbtCompound;
     }

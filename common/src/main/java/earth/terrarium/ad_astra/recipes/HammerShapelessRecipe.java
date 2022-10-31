@@ -4,26 +4,26 @@ import com.google.gson.JsonObject;
 import earth.terrarium.ad_astra.items.HammerItem;
 import earth.terrarium.ad_astra.registry.ModItems;
 import earth.terrarium.ad_astra.registry.ModRecipes;
-import net.minecraft.inventory.CraftingInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.RecipeSerializer;
-import net.minecraft.recipe.ShapelessRecipe;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.JsonHelper;
-import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.core.NonNullList;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.inventory.CraftingContainer;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.ShapelessRecipe;
 
 public class HammerShapelessRecipe extends ShapelessRecipe {
 
-    public HammerShapelessRecipe(Identifier id, String group, ItemStack output, DefaultedList<Ingredient> input) {
+    public HammerShapelessRecipe(ResourceLocation id, String group, ItemStack output, NonNullList<Ingredient> input) {
         super(id, group, output, input);
     }
 
     @Override
-    public ItemStack craft(CraftingInventory craftingInventory) {
-        return getOutput().copy();
+    public ItemStack assemble(CraftingContainer craftingInventory) {
+        return getResultItem().copy();
     }
 
     @Override
@@ -32,18 +32,18 @@ public class HammerShapelessRecipe extends ShapelessRecipe {
     }
 
     @Override
-    public DefaultedList<ItemStack> getRemainder(CraftingInventory inventory) {
+    public NonNullList<ItemStack> getRemainingItems(CraftingContainer inventory) {
 
-        DefaultedList<ItemStack> defaultedList = DefaultedList.ofSize(inventory.size(), ItemStack.EMPTY);
+        NonNullList<ItemStack> defaultedList = NonNullList.withSize(inventory.getContainerSize(), ItemStack.EMPTY);
 
         // Damage the hammer in the recipe.
-        for (int i = 0; i < inventory.size(); i++) {
-            ItemStack stack = inventory.getStack(i);
+        for (int i = 0; i < inventory.getContainerSize(); i++) {
+            ItemStack stack = inventory.getItem(i);
             Item item = stack.getItem();
             if (item instanceof HammerItem) {
                 ItemStack hammer = new ItemStack(ModItems.HAMMER.get(), 1);
-                hammer.setDamage(stack.getDamage() + 1);
-                if (hammer.getDamage() >= hammer.getMaxDamage())
+                hammer.setDamageValue(stack.getDamageValue() + 1);
+                if (hammer.getDamageValue() >= hammer.getMaxDamage())
                     continue;
                 defaultedList.set(i, hammer);
             }
@@ -54,16 +54,16 @@ public class HammerShapelessRecipe extends ShapelessRecipe {
     public static class Serializer extends ShapelessRecipe.Serializer {
 
         @Override
-        public HammerShapelessRecipe read(Identifier id, JsonObject json) {
-            ShapelessRecipe shapelessRecipe = super.read(id, json);
-            String group = JsonHelper.getString(json, "group", "");
-            return new HammerShapelessRecipe(shapelessRecipe.getId(), group, shapelessRecipe.getOutput(), shapelessRecipe.getIngredients());
+        public HammerShapelessRecipe fromJson(ResourceLocation id, JsonObject json) {
+            ShapelessRecipe shapelessRecipe = super.fromJson(id, json);
+            String group = GsonHelper.getAsString(json, "group", "");
+            return new HammerShapelessRecipe(shapelessRecipe.getId(), group, shapelessRecipe.getResultItem(), shapelessRecipe.getIngredients());
         }
 
         @Override
-        public HammerShapelessRecipe read(Identifier id, PacketByteBuf buf) {
-            ShapelessRecipe shapelessRecipe = super.read(id, buf);
-            return new HammerShapelessRecipe(shapelessRecipe.getId(), shapelessRecipe.getGroup(), shapelessRecipe.getOutput(), shapelessRecipe.getIngredients());
+        public HammerShapelessRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
+            ShapelessRecipe shapelessRecipe = super.fromNetwork(id, buf);
+            return new HammerShapelessRecipe(shapelessRecipe.getId(), shapelessRecipe.getGroup(), shapelessRecipe.getResultItem(), shapelessRecipe.getIngredients());
         }
     }
 }

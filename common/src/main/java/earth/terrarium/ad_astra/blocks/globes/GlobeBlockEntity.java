@@ -1,14 +1,14 @@
 package earth.terrarium.ad_astra.blocks.globes;
 
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.Packet;
-import net.minecraft.network.listener.ClientPlayPacketListener;
-import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class GlobeBlockEntity extends BlockEntity {
 
@@ -24,7 +24,7 @@ public class GlobeBlockEntity extends BlockEntity {
     }
 
     public void tick() {
-        if (this.getCachedState().get(GlobeBlock.POWERED) && this.getAngularVelocity() <= 0.05f) {
+        if (this.getBlockState().getValue(GlobeBlock.POWERED) && this.getAngularVelocity() <= 0.05f) {
             this.setAngularVelocity(0.05f);
         }
 
@@ -41,39 +41,39 @@ public class GlobeBlockEntity extends BlockEntity {
     }
 
     @Override
-    public void markDirty() {
-        super.markDirty();
+    public void setChanged() {
+        super.setChanged();
 
         // Update renderer.
-        if (this.world instanceof ServerWorld serverWorld) {
-            serverWorld.getChunkManager().markForUpdate(this.pos);
+        if (this.level instanceof ServerLevel serverWorld) {
+            serverWorld.getChunkSource().blockChanged(this.worldPosition);
         }
     }
 
     @Override
-    public void readNbt(NbtCompound nbt) {
-        super.readNbt(nbt);
+    public void load(CompoundTag nbt) {
+        super.load(nbt);
         this.angularVelocity = nbt.getFloat("angularVelocity");
         this.yaw = nbt.getFloat("yaw");
         this.cachedYaw = nbt.getFloat("cachedYaw");
     }
 
     @Override
-    public void writeNbt(NbtCompound nbt) {
-        super.writeNbt(nbt);
+    public void saveAdditional(CompoundTag nbt) {
+        super.saveAdditional(nbt);
         nbt.putFloat("angularVelocity", this.angularVelocity);
         nbt.putFloat("yaw", this.yaw);
         nbt.putFloat("cachedYaw", this.cachedYaw);
     }
 
     @Override
-    public Packet<ClientPlayPacketListener> toUpdatePacket() {
-        return BlockEntityUpdateS2CPacket.of(this);
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
     }
 
     @Override
-    public NbtCompound toInitialChunkDataNbt() {
-        return this.toNbt();
+    public CompoundTag getUpdateTag() {
+        return this.saveWithoutMetadata();
     }
 
     public float getAngularVelocity() {

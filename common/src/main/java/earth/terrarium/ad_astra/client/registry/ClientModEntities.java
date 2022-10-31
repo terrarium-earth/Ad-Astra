@@ -21,14 +21,13 @@ import earth.terrarium.ad_astra.client.renderer.entity.vehicles.rover.RoverEntit
 import earth.terrarium.ad_astra.registry.ModEntityTypes;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.model.TexturedModelData;
-import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
-import net.minecraft.client.render.entity.PaintingEntityRenderer;
-import net.minecraft.client.render.entity.model.EntityModelLayer;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.PaintingRenderer;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import java.util.function.Supplier;
 
 @Environment(EnvType.CLIENT)
@@ -53,8 +52,8 @@ public class ClientModEntities {
         registry.register(ModEntityTypes.TIER_4_ROCKET, RocketEntityRendererTier4::new);
         registry.register(ModEntityTypes.TIER_1_ROVER, RoverEntityRenderer::new);
         registry.register(ModEntityTypes.LANDER, LanderEntityRenderer::new);
-        registry.register(ModEntityTypes.SPACE_PAINTING, PaintingEntityRenderer::new);
-        registry.register(ModEntityTypes.ICE_SPIT, FlyingItemEntityRenderer::new);
+        registry.register(ModEntityTypes.SPACE_PAINTING, PaintingRenderer::new);
+        registry.register(ModEntityTypes.ICE_SPIT, ThrownItemRenderer::new);
     }
 
     public static void registerEntityLayers(LayerDefinitionRegistry registry) {
@@ -85,11 +84,11 @@ public class ClientModEntities {
     }
 
     public static abstract class EntityRendererRegistry {
-        protected abstract <T extends Entity> void register(Supplier<? extends EntityType<? extends T>> type, EntityRendererFactory<T> factory);
+        protected abstract <T extends Entity> void register(Supplier<? extends EntityType<? extends T>> type, EntityRendererProvider<T> factory);
     }
 
     public static abstract class LayerDefinitionRegistry {
-        public abstract void register(EntityModelLayer location, Supplier<TexturedModelData> definition);
+        public abstract void register(ModelLayerLocation location, Supplier<LayerDefinition> definition);
     }
 
 

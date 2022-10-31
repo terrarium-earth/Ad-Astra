@@ -1,19 +1,19 @@
 package earth.terrarium.ad_astra.blocks.machines;
 
 import earth.terrarium.ad_astra.blocks.machines.entity.OxygenSensorBlockEntity;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 
 public class OxygenSensorBlock extends AbstractMachineBlock {
 
-    public OxygenSensorBlock(Settings settings) {
+    public OxygenSensorBlock(Properties settings) {
         super(settings);
     }
 
@@ -28,27 +28,27 @@ public class OxygenSensorBlock extends AbstractMachineBlock {
     }
 
     @Override
-    public int getWeakRedstonePower(BlockState state, BlockView world, BlockPos pos, Direction direction) {
-        return state.get(POWERED) ? 15 : 0;
+    public int getSignal(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+        return state.getValue(POWERED) ? 15 : 0;
     }
 
     @Override
-    public int getStrongRedstonePower(BlockState state, BlockView world, BlockPos pos, Direction direction) {
-        return state.get(POWERED) ? 15 : 0;
+    public int getDirectSignal(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+        return state.getValue(POWERED) ? 15 : 0;
     }
 
     @Override
-    public boolean emitsRedstonePower(BlockState state) {
+    public boolean isSignalSource(BlockState state) {
         return true;
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        return ActionResult.PASS;
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        return InteractionResult.PASS;
     }
 
     @Override
-    public OxygenSensorBlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+    public OxygenSensorBlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new OxygenSensorBlockEntity(pos, state);
     }
 }

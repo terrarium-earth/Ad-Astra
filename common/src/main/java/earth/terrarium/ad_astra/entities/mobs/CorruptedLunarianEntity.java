@@ -3,85 +3,90 @@ package earth.terrarium.ad_astra.entities.mobs;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.entities.projectiles.IceSpitEntity;
 import earth.terrarium.ad_astra.registry.ModEntityTypes;
-import net.minecraft.entity.EntityGroup;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.RangedAttackMob;
-import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.passive.GolemEntity;
-import net.minecraft.entity.passive.VillagerEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.MobType;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.animal.AbstractGolem;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.RangedAttackMob;
+import net.minecraft.world.entity.npc.Villager;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 
-public class CorruptedLunarianEntity extends HostileEntity implements RangedAttackMob {
+public class CorruptedLunarianEntity extends Monster implements RangedAttackMob {
 
-    public CorruptedLunarianEntity(EntityType<? extends HostileEntity> entityType, World world) {
-        super(entityType, world);
+    public CorruptedLunarianEntity(EntityType<? extends Monster> entityType, Level level) {
+        super(entityType, level);
     }
 
-    public static DefaultAttributeContainer.Builder createMobAttributes() {
-        return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3).add(EntityAttributes.GENERIC_MAX_HEALTH, 20).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3);
+    public static AttributeSupplier.Builder createMobAttributes() {
+        return Monster.createMonsterAttributes().add(Attributes.MOVEMENT_SPEED, 0.3).add(Attributes.MAX_HEALTH, 20).add(Attributes.ATTACK_DAMAGE, 3);
     }
 
     @Override
-    protected void initGoals() {
-        this.goalSelector.add(1, new MeleeAttackGoal(this, 1.2, false));
-        this.goalSelector.add(2, new RevengeGoal(this));
-        this.goalSelector.add(3, new WanderAroundGoal(this, 0.8));
-        this.goalSelector.add(4, new LookAroundGoal(this));
-        this.targetSelector.add(5, new TargetGoal<>(this, PlayerEntity.class, false));
-        this.targetSelector.add(7, new TargetGoal<>(this, VillagerEntity.class, false));
-        this.targetSelector.add(8, new TargetGoal<>(this, LunarianWanderingTraderEntity.class, false));
-        this.targetSelector.add(9, new TargetGoal<>(this, GolemEntity.class, false));
-        this.goalSelector.add(1, new ProjectileAttackGoal(this, 1.25f, 20, 15) {
+    protected void registerGoals() {
+        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.2, false));
+        this.goalSelector.addGoal(2, new HurtByTargetGoal(this));
+        this.goalSelector.addGoal(3, new RandomStrollGoal(this, 0.8));
+        this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
+        this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, Player.class, false));
+        this.targetSelector.addGoal(7, new NearestAttackableTargetGoal<>(this, Villager.class, false));
+        this.targetSelector.addGoal(8, new NearestAttackableTargetGoal<>(this, LunarianWanderingTraderEntity.class, false));
+        this.targetSelector.addGoal(9, new NearestAttackableTargetGoal<>(this, AbstractGolem.class, false));
+        this.goalSelector.addGoal(1, new RangedAttackGoal(this, 1.25f, 20, 15) {
             @Override
-            public boolean shouldContinue() {
-                return this.canStart();
+            public boolean canContinueToUse() {
+                return this.canUse();
             }
         });
     }
 
     @Override
-    public EntityGroup getGroup() {
-        return EntityGroup.UNDEAD;
+    public MobType getMobType() {
+        return MobType.UNDEAD;
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.ENTITY_PILLAGER_HURT;
+        return SoundEvents.PILLAGER_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_PILLAGER_DEATH;
+        return SoundEvents.PILLAGER_DEATH;
     }
 
     @Override
-    public void attack(LivingEntity target, float pullProgress) {
-        IceSpitEntity projectile = new IceSpitEntity(ModEntityTypes.ICE_SPIT.get(), this, this.world);
+    public void performRangedAttack(LivingEntity target, float pullProgress) {
+        IceSpitEntity projectile = new IceSpitEntity(ModEntityTypes.ICE_SPIT.get(), this, this.level);
 
         double targetX = target.getX() - this.getX();
-        double targetY = target.getBodyY(0.3333333333333333) - projectile.getY() - 1.1f;
+        double targetY = target.getY(0.3333333333333333) - projectile.getY() - 1.1f;
         double targetZ = target.getZ() - this.getZ();
         double calculated = Math.sqrt(targetX * targetX + targetZ * targetZ);
-        projectile.setVelocity(targetX, targetY + calculated * (double) 0.2f, targetZ, 1.6f, 14 - this.world.getDifficulty().getId() * 4);
+        projectile.shoot(targetX, targetY + calculated * (double) 0.2f, targetZ, 1.6f, 14 - this.level.getDifficulty().getId() * 4);
 
         projectile.setSilent(true);
-        this.world.spawnEntity(projectile);
-        this.world.playSound(null, this.getBlockPos(), SoundEvents.ENTITY_BLAZE_SHOOT, SoundCategory.PLAYERS, 1, 1);
+        this.level.addFreshEntity(projectile);
+        this.level.playSound(null, this.blockPosition(), SoundEvents.BLAZE_SHOOT, SoundSource.PLAYERS, 1, 1);
     }
 
     @Override
-    public boolean canSpawn(WorldAccess world, SpawnReason spawnReason) {
+    public boolean checkSpawnRules(LevelAccessor level, MobSpawnType spawnReason) {
         return AdAstra.CONFIG.general.spawnCorruptedLunarians;
     }
 }

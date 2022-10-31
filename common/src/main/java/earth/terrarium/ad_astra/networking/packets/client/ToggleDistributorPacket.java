@@ -4,18 +4,18 @@ import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
 import earth.terrarium.ad_astra.blocks.machines.entity.OxygenDistributorBlockEntity;
-import earth.terrarium.ad_astra.util.ModIdentifier;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
+import earth.terrarium.ad_astra.util.ModResourceLocation;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 
 public record ToggleDistributorPacket(BlockPos pos) implements Packet<ToggleDistributorPacket> {
 
-    public static final Identifier ID = new ModIdentifier("toggle_distributor");
+    public static final ResourceLocation ID = new ModResourceLocation("toggle_distributor");
     public static final Handler HANDLER = new Handler();
 
     @Override
-    public Identifier getID() {
+    public ResourceLocation getID() {
         return ID;
     }
 
@@ -26,19 +26,19 @@ public record ToggleDistributorPacket(BlockPos pos) implements Packet<ToggleDist
 
     private static class Handler implements PacketHandler<ToggleDistributorPacket> {
         @Override
-        public void encode(ToggleDistributorPacket packet, PacketByteBuf buf) {
+        public void encode(ToggleDistributorPacket packet, FriendlyByteBuf buf) {
             buf.writeBlockPos(packet.pos());
         }
 
         @Override
-        public ToggleDistributorPacket decode(PacketByteBuf buf) {
+        public ToggleDistributorPacket decode(FriendlyByteBuf buf) {
             return new ToggleDistributorPacket(buf.readBlockPos());
         }
 
         @Override
         public PacketContext handle(ToggleDistributorPacket message) {
-            return (player, world) -> {
-                if (world.getBlockEntity(message.pos()) instanceof OxygenDistributorBlockEntity oxygenDistributor) {
+            return (player, level) -> {
+                if (level.getBlockEntity(message.pos()) instanceof OxygenDistributorBlockEntity oxygenDistributor) {
                     oxygenDistributor.setShowOxygen(!oxygenDistributor.shouldShowOxygen());
                 }
             };

@@ -4,17 +4,16 @@ import com.teamresourceful.resourcefullib.common.recipe.CodecRecipeSerializer;
 import dev.architectury.registry.registries.DeferredRegister;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.recipes.*;
-import earth.terrarium.ad_astra.util.ModIdentifier;
-import net.minecraft.recipe.RecipeSerializer;
-import net.minecraft.recipe.RecipeType;
-import net.minecraft.recipe.ShapelessRecipe;
-import net.minecraft.util.registry.Registry;
-
+import earth.terrarium.ad_astra.util.ModResourceLocation;
 import java.util.function.Supplier;
+import net.minecraft.core.Registry;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.ShapelessRecipe;
 
 public class ModRecipes {
-    public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(AdAstra.MOD_ID, Registry.RECIPE_TYPE_KEY);
-    public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(AdAstra.MOD_ID, Registry.RECIPE_SERIALIZER_KEY);
+    public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(AdAstra.MOD_ID, Registry.RECIPE_TYPE_REGISTRY);
+    public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(AdAstra.MOD_ID, Registry.RECIPE_SERIALIZER_REGISTRY);
 
     public static Supplier<ModRecipeType<CompressingRecipe>> COMPRESSING_RECIPE;
     public static Supplier<ModRecipeType<SpaceStationRecipe>> SPACE_STATION_RECIPE;
@@ -34,12 +33,12 @@ public class ModRecipes {
     public static void register() {
 
         // Recipe Types
-        COMPRESSING_RECIPE = RECIPE_TYPES.register("compressing", () -> new ModRecipeType<>(new ModIdentifier("compressing")));
-        SPACE_STATION_RECIPE = RECIPE_TYPES.register("space_station", () -> new ModRecipeType<>(new ModIdentifier("space_station")));
-        NASA_WORKBENCH_RECIPE = RECIPE_TYPES.register("nasa_workbench", () -> new ModRecipeType<>(new ModIdentifier("nasa_workbench")));
-        FUEL_CONVERSION_RECIPE = RECIPE_TYPES.register("fuel_conversion", () -> new ModRecipeType<>(new ModIdentifier("nasa_workbench")));
-        OXYGEN_CONVERSION_RECIPE = RECIPE_TYPES.register("oxygen_conversion", () -> new ModRecipeType<>(new ModIdentifier("fuel_conversion")));
-        CRYO_FUEL_CONVERSION_RECIPE = RECIPE_TYPES.register("cryo_fuel_conversion", () -> new ModRecipeType<>(new ModIdentifier("cryo_fuel_conversion")));
+        COMPRESSING_RECIPE = RECIPE_TYPES.register("compressing", () -> new ModRecipeType<>(new ModResourceLocation("compressing")));
+        SPACE_STATION_RECIPE = RECIPE_TYPES.register("space_station", () -> new ModRecipeType<>(new ModResourceLocation("space_station")));
+        NASA_WORKBENCH_RECIPE = RECIPE_TYPES.register("nasa_workbench", () -> new ModRecipeType<>(new ModResourceLocation("nasa_workbench")));
+        FUEL_CONVERSION_RECIPE = RECIPE_TYPES.register("fuel_conversion", () -> new ModRecipeType<>(new ModResourceLocation("nasa_workbench")));
+        OXYGEN_CONVERSION_RECIPE = RECIPE_TYPES.register("oxygen_conversion", () -> new ModRecipeType<>(new ModResourceLocation("fuel_conversion")));
+        CRYO_FUEL_CONVERSION_RECIPE = RECIPE_TYPES.register("cryo_fuel_conversion", () -> new ModRecipeType<>(new ModResourceLocation("cryo_fuel_conversion")));
         RECIPE_TYPES.register();
 
         // Recipe Serializers

@@ -2,14 +2,15 @@ package earth.terrarium.ad_astra.util;
 
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.registry.ModBlocks;
-import net.minecraft.block.*;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.state.property.Properties;
-import net.minecraft.tag.FluidTags;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.HashMap;
@@ -20,15 +21,15 @@ import java.util.Set;
 public class OxygenUtils {
 
     // Contains every pos in all dimensions with oxygen.
-    public static final Map<Pair<RegistryKey<World>, BlockPos>, Set<BlockPos>> OXYGEN_LOCATIONS = new HashMap<>();
+    public static final Map<Pair<ResourceKey<Level>, BlockPos>, Set<BlockPos>> OXYGEN_LOCATIONS = new HashMap<>();
 
     /**
-     * Checks if a world has oxygen, regardless of position.
+     * Checks if a level has oxygen, regardless of position.
      */
-    public static boolean worldHasOxygen(World world) {
-        if (!AdAstra.worldsWithOxygen.contains(world.getRegistryKey())) {
+    public static boolean levelHasOxygen(Level level) {
+        if (!AdAstra.levelsWithOxygen.contains(level.dimension())) {
             // Ensure all non-Ad Astra dimensions have oxygen by default
-            return !ModUtils.isSpaceWorld(world);
+            return !ModUtils.isSpacelevel(level);
         }
         return true;
     }
@@ -36,30 +37,30 @@ public class OxygenUtils {
     /**
      * Checks if an entity has oxygen.
      */
-    public static boolean entityHasOxygen(World world, LivingEntity entity) {
-        return posHasOxygen(world, new BlockPos(entity.getEyePos()));
+    public static boolean entityHasOxygen(Level level, LivingEntity entity) {
+        return posHasOxygen(level, new BlockPos(entity.getEyePosition()));
     }
 
     /**
      * Checks if there is oxygen in a specific block in a specific dimension.
      */
     @SuppressWarnings("deprecation")
-    public static boolean posHasOxygen(World world, BlockPos pos) {
+    public static boolean posHasOxygen(Level level, BlockPos pos) {
 
-        if (!world.isChunkLoaded(pos)) {
+        if (!level.hasChunkAt(pos)) {
             return true;
         }
 
-        if (worldHasOxygen(world)) {
+        if (levelHasOxygen(level)) {
             return true;
         }
 
-        return inDistributorBubble(world, pos);
+        return inDistributorBubble(level, pos);
     }
 
-    public static boolean inDistributorBubble(World world, BlockPos pos) {
-        for (Map.Entry<Pair<RegistryKey<World>, BlockPos>, Set<BlockPos>> entry : OXYGEN_LOCATIONS.entrySet()) {
-            if (world.getRegistryKey().equals(entry.getKey().getLeft())) {
+    public static boolean inDistributorBubble(Level level, BlockPos pos) {
+        for (Map.Entry<Pair<ResourceKey<Level>, BlockPos>, Set<BlockPos>> entry : OXYGEN_LOCATIONS.entrySet()) {
+            if (level.dimension().equals(entry.getKey().getLeft())) {
                 if (entry.getValue().contains(pos)) {
                     return true;
                 }
@@ -71,36 +72,36 @@ public class OxygenUtils {
     /**
      * Gets the amount of blocks that an oxygen distributor is distributing.
      *
-     * @param world  The world to check for oxygen in
+     * @param level  The level to check for oxygen in
      * @param source The oxygen distributor position
      * @return The amount of blocks that an oxygen distributor is distributing oxygen to
      */
-    public static int getOxygenBlocksCount(World world, BlockPos source) {
-        return OXYGEN_LOCATIONS.getOrDefault(getOxygenSource(world, source), Set.of()).size();
+    public static int getOxygenBlocksCount(Level level, BlockPos source) {
+        return OXYGEN_LOCATIONS.getOrDefault(getOxygenSource(level, source), Set.of()).size();
     }
 
-    public static void setEntry(World world, BlockPos source, Set<BlockPos> entries) {
+    public static void setEntry(Level level, BlockPos source, Set<BlockPos> entries) {
         // Get all the entries that have changed. If they are have been removed, deoxygenate their pos.
-        if (!world.isClient) {
-            if (OXYGEN_LOCATIONS.containsKey(getOxygenSource(world, source))) {
-                Set<BlockPos> changedPositions = new HashSet<>(OXYGEN_LOCATIONS.get(getOxygenSource(world, source)));
+        if (!level.isClientSide) {
+            if (OXYGEN_LOCATIONS.containsKey(getOxygenSource(level, source))) {
+                Set<BlockPos> changedPositions = new HashSet<>(OXYGEN_LOCATIONS.get(getOxygenSource(level, source)));
                 if (changedPositions != null && !changedPositions.isEmpty()) {
                     changedPositions.removeAll(entries);
-                    deoxygenizeBlocks((ServerWorld) world, changedPositions, source);
+                    deoxygenizeBlocks((ServerLevel) level, changedPositions, source);
                 }
             }
         }
-        OXYGEN_LOCATIONS.put(getOxygenSource(world, source), entries);
+        OXYGEN_LOCATIONS.put(getOxygenSource(level, source), entries);
     }
 
-    public static void removeEntry(World world, BlockPos source) {
-        OxygenUtils.setEntry(world, source, Set.of());
+    public static void removeEntry(Level level, BlockPos source) {
+        OxygenUtils.setEntry(level, source, Set.of());
     }
 
     /**
      * Removes the oxygen from a set of blocks. For example, turns water into ice or air, converts torches into extinguished torches, puts out flames, kills plants etc.
      */
-    public static void deoxygenizeBlocks(ServerWorld world, Set<BlockPos> entries, BlockPos source) {
+    public static void deoxygenizeBlocks(ServerLevel level, Set<BlockPos> entries, BlockPos source) {
         try {
             if (entries == null) {
                 return;
@@ -109,17 +110,17 @@ public class OxygenUtils {
                 return;
             }
 
-            if (worldHasOxygen(world)) {
-                OXYGEN_LOCATIONS.remove(getOxygenSource(world, source));
+            if (levelHasOxygen(level)) {
+                OXYGEN_LOCATIONS.remove(getOxygenSource(level, source));
                 return;
             }
 
             for (BlockPos pos : new HashSet<>(entries)) {
 
-                BlockState state = world.getBlockState(pos);
+                BlockState state = level.getBlockState(pos);
 
-                OXYGEN_LOCATIONS.get(getOxygenSource(world, source)).remove(pos);
-                if (posHasOxygen(world, pos)) {
+                OXYGEN_LOCATIONS.get(getOxygenSource(level, source)).remove(pos);
+                if (posHasOxygen(level, pos)) {
                     continue;
                 }
 
@@ -129,59 +130,59 @@ public class OxygenUtils {
 
                 Block block = state.getBlock();
                 if (block instanceof WallTorchBlock && !block.equals(Blocks.SOUL_WALL_TORCH)) {
-                    world.setBlockState(pos, ModBlocks.WALL_EXTINGUISHED_TORCH.get().getDefaultState().with(WallTorchBlock.FACING, state.get(WallTorchBlock.FACING)));
+                    level.setBlockAndUpdate(pos, ModBlocks.WALL_EXTINGUISHED_TORCH.get().defaultBlockState().setValue(WallTorchBlock.FACING, state.getValue(WallTorchBlock.FACING)));
                     continue;
                 }
 
                 if (block instanceof TorchBlock && !block.equals(Blocks.SOUL_TORCH) && !block.equals(Blocks.SOUL_WALL_TORCH)) {
-                    world.setBlockState(pos, ModBlocks.EXTINGUISHED_TORCH.get().getDefaultState());
+                    level.setBlockAndUpdate(pos, ModBlocks.EXTINGUISHED_TORCH.get().defaultBlockState());
                     continue;
                 }
 
                 if (block instanceof CandleCakeBlock) {
-                    world.setBlockState(pos, block.getDefaultState().with(CandleCakeBlock.LIT, false));
+                    level.setBlockAndUpdate(pos, block.defaultBlockState().setValue(CandleCakeBlock.LIT, false));
                     continue;
                 }
 
                 if (block instanceof CandleBlock) {
-                    world.setBlockState(pos, block.getDefaultState().with(CandleBlock.CANDLES, state.get(CandleBlock.CANDLES)).with(CandleBlock.LIT, false));
+                    level.setBlockAndUpdate(pos, block.defaultBlockState().setValue(CandleBlock.CANDLES, state.getValue(CandleBlock.CANDLES)).setValue(CandleBlock.LIT, false));
                     continue;
                 }
 
                 if (block instanceof FireBlock) {
-                    world.removeBlock(pos, false);
+                    level.removeBlock(pos, false);
                     continue;
                 }
 
                 if (block instanceof CampfireBlock) {
-                    world.setBlockState(pos, state.with(CampfireBlock.LIT, false).with(CampfireBlock.FACING, state.get(CampfireBlock.FACING)));
+                    level.setBlockAndUpdate(pos, state.setValue(CampfireBlock.LIT, false).setValue(CampfireBlock.FACING, state.getValue(CampfireBlock.FACING)));
                     continue;
                 }
 
                 if (block instanceof GrassBlock) {
-                    world.setBlockState(pos, Blocks.DIRT.getDefaultState());
+                    level.setBlockAndUpdate(pos, Blocks.DIRT.defaultBlockState());
                     continue;
                 }
 
-                if (block instanceof PlantBlock || block instanceof CactusBlock || block instanceof VineBlock) {
-                    world.removeBlock(pos, true);
+                if (block instanceof BushBlock || block instanceof CactusBlock || block instanceof VineBlock) {
+                    level.removeBlock(pos, true);
                     continue;
                 }
 
-                if (block instanceof FarmlandBlock) {
-                    world.setBlockState(pos, state.with(FarmlandBlock.MOISTURE, 0));
+                if (block instanceof FarmBlock) {
+                    level.setBlockAndUpdate(pos, state.setValue(FarmBlock.MOISTURE, 0));
                     continue;
                 }
 
-                if (state.getFluidState().isIn(FluidTags.WATER)) {
+                if (state.getFluidState().is(FluidTags.WATER)) {
                     if (!block.equals(ModBlocks.CRYO_FUEL_BLOCK.get())) {
-                        if (ModUtils.getWorldTemperature(world) < 0) {
-                            world.setBlockState(pos, Blocks.ICE.getDefaultState());
+                        if (ModUtils.getWorldTemperature(level) < 0) {
+                            level.setBlockAndUpdate(pos, Blocks.ICE.defaultBlockState());
                         } else {
-                            world.setBlockState(pos, Blocks.AIR.getDefaultState());
+                            level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
                         }
-                    } else if (state.contains(Properties.WATERLOGGED)) {
-                        world.setBlockState(pos, state.with(Properties.WATERLOGGED, false));
+                    } else if (state.hasProperty(BlockStateProperties.WATERLOGGED)) {
+                        level.setBlockAndUpdate(pos, state.setValue(BlockStateProperties.WATERLOGGED, false));
                     }
                 }
             }
@@ -191,7 +192,7 @@ public class OxygenUtils {
         }
     }
 
-    private static Pair<RegistryKey<World>, BlockPos> getOxygenSource(World world, BlockPos source) {
-        return Pair.of(world.getRegistryKey(), source);
+    private static Pair<ResourceKey<Level>, BlockPos> getOxygenSource(Level level, BlockPos source) {
+        return Pair.of(level.dimension(), source);
     }
 }

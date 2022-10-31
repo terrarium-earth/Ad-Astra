@@ -3,18 +3,18 @@ package earth.terrarium.ad_astra.client.dimension.fabric;
 import earth.terrarium.ad_astra.client.dimension.rendering.DimensionEffects;
 import earth.terrarium.ad_astra.mixin.client.WorldRendererAccessor;
 import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.world.World;
+import net.minecraft.client.Minecraft;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 public class ClientModSkiesImpl {
-    public static void registerDimensionEffects(RegistryKey<World> id, DimensionEffects effects) {
-        DimensionRenderingRegistry.registerDimensionEffects(id.getValue(), effects);
+    public static void registerDimensionEffects(ResourceKey<Level> id, DimensionEffects effects) {
+        DimensionRenderingRegistry.registerDimensionEffects(id.location(), effects);
         if (effects.shouldRenderClouds()) {
 
             DimensionRenderingRegistry.registerCloudRenderer(id, context -> {
-                Vec3d cameraPos = context.camera().getPos();
+                Vec3 cameraPos = context.camera().getPosition();
                 effects.renderClouds(context.world(), getTicks(), context.tickDelta(), context.matrixStack(), cameraPos.x, cameraPos.y, cameraPos.z, context.projectionMatrix());
             });
         }
@@ -26,13 +26,13 @@ public class ClientModSkiesImpl {
 
         if (effects.shouldRenderSnowAndRain()) {
             DimensionRenderingRegistry.registerWeatherRenderer(id, context -> {
-                Vec3d cameraPos = context.camera().getPos();
+                Vec3 cameraPos = context.camera().getPosition();
                 effects.renderSnowAndRain(context.world(), getTicks(), context.tickDelta(), context.lightmapTextureManager(), cameraPos.x, cameraPos.y, cameraPos.z);
             });
         }
     }
 
     private static int getTicks() {
-        return ((WorldRendererAccessor) MinecraftClient.getInstance().worldRenderer).getTicks();
+        return ((WorldRendererAccessor) Minecraft.getInstance().levelRenderer).getTicks();
     }
 }

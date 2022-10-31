@@ -2,9 +2,9 @@ package earth.terrarium.ad_astra.mixin.gravity;
 
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.util.ModUtils;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -23,19 +23,19 @@ public class LivingEntityGravityMixin {
         if (AdAstra.CONFIG.general.doLivingEntityGravity) {
             LivingEntity entity = (LivingEntity) (Object) this;
 
-            Vec3d velocity = entity.getVelocity();
+            Vec3 velocity = entity.getDeltaMovement();
 
-            if (!entity.hasNoGravity() && !entity.isTouchingWater() && !entity.isInLava() && !entity.isFallFlying() && !entity.hasStatusEffect(StatusEffects.SLOW_FALLING)) {
-                double newGravity = CONSTANT * ModUtils.getPlanetGravity(entity.world);
-                entity.setVelocity(velocity.getX(), velocity.getY() + CONSTANT - newGravity, velocity.getZ());
+            if (!entity.isNoGravity() && !entity.isInWater() && !entity.isInLava() && !entity.isFallFlying() && !entity.hasEffect(MobEffects.SLOW_FALLING)) {
+                double newGravity = CONSTANT * ModUtils.getPlanetGravity(entity.level);
+                entity.setDeltaMovement(velocity.x(), velocity.y() + CONSTANT - newGravity, velocity.z());
             }
         }
     }
 
     // Make fall damage gravity-dependant
-    @ModifyVariable(method = "handleFallDamage", at = @At("HEAD"), ordinal = 1, argsOnly = true)
-    private float adastra_handleFallDamage(float damageMultiplier) {
+    @ModifyVariable(method = "causeFallDamage", at = @At("HEAD"), ordinal = 1, argsOnly = true)
+    private float adastra_causeFallDamage(float damageMultiplier) {
         LivingEntity entity = ((LivingEntity) (Object) this);
-        return damageMultiplier * ModUtils.getPlanetGravity(entity.world);
+        return damageMultiplier * ModUtils.getPlanetGravity(entity.level);
     }
 }

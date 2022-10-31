@@ -4,25 +4,25 @@ import earth.terrarium.ad_astra.entities.vehicles.VehicleEntity;
 import earth.terrarium.ad_astra.registry.ModScreenHandlers;
 import earth.terrarium.ad_astra.screen.NoInventorySlot;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.screen.slot.Slot;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 
 public class LargeVehicleScreenHandler extends AbstractVehicleScreenHandler {
 
-    public LargeVehicleScreenHandler(int syncId, PlayerInventory inventory, PacketByteBuf buf) {
-        this(syncId, inventory, (VehicleEntity) inventory.player.world.getEntityById(buf.readInt()));
+    public LargeVehicleScreenHandler(int syncId, Inventory inventory, FriendlyByteBuf buf) {
+        this(syncId, inventory, (VehicleEntity) inventory.player.level.getEntity(buf.readInt()));
     }
 
-    public LargeVehicleScreenHandler(int syncId, PlayerInventory inventory, VehicleEntity entity) {
+    public LargeVehicleScreenHandler(int syncId, Inventory inventory, VehicleEntity entity) {
         super(ModScreenHandlers.LARGE_VEHICLE_SCREEN_HANDLER.get(), syncId, inventory, entity, new Slot[]{
 
                 // Left input slot.
                 new NoInventorySlot(entity.getInventory(), 0, 20, 26) {
                     @Override
-                    public boolean canInsert(ItemStack stack) {
-                        if (!super.canInsert(stack)) {
+                    public boolean mayPlace(ItemStack stack) {
+                        if (!super.mayPlace(stack)) {
                             return false;
                         }
                         return FluidHooks.isFluidContainingItem(stack);
@@ -31,7 +31,7 @@ public class LargeVehicleScreenHandler extends AbstractVehicleScreenHandler {
                 // Left output slot.
                 new NoInventorySlot(entity.getInventory(), 1, 20, 56) {
                     @Override
-                    public boolean canInsert(ItemStack stack) {
+                    public boolean mayPlace(ItemStack stack) {
                         return false;
                     }
                 },

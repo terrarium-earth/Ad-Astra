@@ -6,15 +6,15 @@ import earth.terrarium.ad_astra.registry.ModDamageSource;
 import earth.terrarium.ad_astra.registry.ModTags;
 import earth.terrarium.ad_astra.util.ModUtils;
 import earth.terrarium.ad_astra.util.OxygenUtils;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.server.world.ServerWorld;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.LivingEntity;
 
 public class EntityOxygenSystem {
-    public static void oxygenTick(LivingEntity entity, ServerWorld world) {
+    public static void oxygenTick(LivingEntity entity, ServerLevel level) {
         if (!AdAstra.CONFIG.general.doOxygen) {
             return;
         }
-        if (entity.isUndead()) {
+        if (entity.isInvertedHealAndHarm()) {
             return;
         }
 
@@ -22,14 +22,14 @@ public class EntityOxygenSystem {
             return;
         }
 
-        if (OxygenUtils.worldHasOxygen(world) && !entity.isSubmergedInWater()) {
+        if (OxygenUtils.levelHasOxygen(level) && !entity.isUnderWater()) {
             return;
         }
 
-        boolean entityHasOxygen = OxygenUtils.entityHasOxygen(world, entity);
+        boolean entityHasOxygen = OxygenUtils.entityHasOxygen(level, entity);
         boolean hasOxygenatedSpaceSuit = SpaceSuit.hasOxygenatedSpaceSuit(entity) && SpaceSuit.hasFullSet(entity);
 
-        if (entityHasOxygen && hasOxygenatedSpaceSuit && entity.isSubmergedInWater() && !entity.canBreatheInWater()) {
+        if (entityHasOxygen && hasOxygenatedSpaceSuit && entity.isUnderWater() && !entity.canBreatheUnderwater()) {
             consumeOxygen(entity);
             return;
         }
@@ -38,14 +38,14 @@ public class EntityOxygenSystem {
             if (hasOxygenatedSpaceSuit) {
                 consumeOxygen(entity);
             } else if (!ModUtils.armourIsOxygenated(entity)) {
-                entity.damage(ModDamageSource.OXYGEN, 1);
-                entity.setAir(-40);
+                entity.hurt(ModDamageSource.OXYGEN, 1);
+                entity.setAirSupply(-40);
             }
         }
     }
 
     private static void consumeOxygen(LivingEntity entity) {
-        entity.setAir(Math.min(entity.getMaxAir(), entity.getAir() + 4 * 10));
+        entity.setAirSupply(Math.min(entity.getMaxAirSupply(), entity.getAirSupply() + 4 * 10));
         SpaceSuit.consumeSpaceSuitOxygen(entity, 3 * 10);
     }
 }

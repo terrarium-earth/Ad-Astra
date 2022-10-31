@@ -3,18 +3,18 @@ package earth.terrarium.ad_astra.networking.packets.client;
 import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
-import earth.terrarium.ad_astra.util.ModIdentifier;
 import earth.terrarium.ad_astra.util.ModKeyBindings;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.util.Identifier;
+import earth.terrarium.ad_astra.util.ModResourceLocation;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 
 public record KeybindPacket(Keybind keybind, boolean pressed) implements Packet<KeybindPacket> {
 
-    public static final Identifier ID = new ModIdentifier("key_changed");
+    public static final ResourceLocation ID = new ModResourceLocation("key_changed");
     public static final Handler HANDLER = new Handler();
 
     @Override
-    public Identifier getID() {
+    public ResourceLocation getID() {
         return ID;
     }
 
@@ -29,19 +29,19 @@ public record KeybindPacket(Keybind keybind, boolean pressed) implements Packet<
 
     private static class Handler implements PacketHandler<KeybindPacket> {
         @Override
-        public void encode(KeybindPacket packet, PacketByteBuf buf) {
-            buf.writeEnumConstant(packet.keybind);
+        public void encode(KeybindPacket packet, FriendlyByteBuf buf) {
+            buf.writeEnum(packet.keybind);
             buf.writeBoolean(packet.pressed);
         }
 
         @Override
-        public KeybindPacket decode(PacketByteBuf buf) {
-            return new KeybindPacket(buf.readEnumConstant(Keybind.class), buf.readBoolean());
+        public KeybindPacket decode(FriendlyByteBuf buf) {
+            return new KeybindPacket(buf.readEnum(Keybind.class), buf.readBoolean());
         }
 
         @Override
         public PacketContext handle(KeybindPacket message) {
-            return (player, world) -> ModKeyBindings.pressedKeyOnServer(player.getUuid(), message.keybind, message.pressed());
+            return (player, level) -> ModKeyBindings.pressedKeyOnServer(player.getUUID(), message.keybind, message.pressed());
         }
     }
 }

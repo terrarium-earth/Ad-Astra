@@ -1,12 +1,11 @@
 package earth.terrarium.ad_astra.client.dimension.rendering;
 
+import com.mojang.math.Vector3f;
 import com.teamresourceful.resourcefullib.common.caches.CacheableBiFunction;
 import com.teamresourceful.resourcefullib.common.color.Color;
 import com.teamresourceful.resourcefullib.common.color.ConstantColors;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3f;
-
 import java.util.Random;
+import net.minecraft.util.Mth;
 
 public class StarInformation {
     public static final Color[] STAR_COLOURS = new Color[]{
@@ -17,13 +16,13 @@ public class StarInformation {
             new Color(255, 204, 102, 255)
     };
     public static final CacheableBiFunction<Long, Integer, StarInformation> STAR_CACHE = new CacheableBiFunction<>(StarInformation::new);
-    private final Vec3f[] param1;
+    private final Vector3f[] param1;
     private final float[] multiplier;
     private final float[] randomPi;
     private final Color[][] colour;
 
     public StarInformation(long seed, int stars) {
-        param1 = new Vec3f[stars];
+        param1 = new Vector3f[stars];
         multiplier = new float[stars];
         randomPi = new float[stars];
         colour = new Color[stars][4];
@@ -33,16 +32,16 @@ public class StarInformation {
             float d = random.nextFloat() * 2.0f - 1.0f;
             float e = random.nextFloat() * 2.0f - 1.0f;
             float f = random.nextFloat() * 2.0f - 1.0f;
-            param1[i] = new Vec3f(d, e, f);
+            param1[i] = new Vector3f(d, e, f);
             multiplier[i] = 0.15f + random.nextFloat() * 0.01f;
-            randomPi[i] = random.nextFloat() * MathHelper.TAU;
+            randomPi[i] = random.nextFloat() * Mth.TWO_PI;
             for (int j = 0; j < 4; j++) {
                 colour[i][j] = STAR_COLOURS[random.nextInt(STAR_COLOURS.length)];
             }
         }
     }
 
-    public Vec3f getParam1(int i) {
+    public Vector3f getParam1(int i) {
         return param1[i];
     }
 

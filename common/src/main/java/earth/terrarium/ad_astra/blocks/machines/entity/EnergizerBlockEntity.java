@@ -9,13 +9,13 @@ import earth.terrarium.botarium.api.energy.EnergyBlock;
 import earth.terrarium.botarium.api.energy.EnergyHooks;
 import earth.terrarium.botarium.api.energy.SimpleUpdatingEnergyContainer;
 import earth.terrarium.botarium.api.item.ItemStackHolder;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.ItemStack;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class EnergizerBlockEntity extends AbstractMachineBlockEntity implements EnergyBlock {
     private SimpleUpdatingEnergyContainer energyContainer;
@@ -30,30 +30,30 @@ public class EnergizerBlockEntity extends AbstractMachineBlockEntity implements 
     }
 
     @Override
-    public boolean canInsert(int slot, ItemStack stack, Direction dir) {
+    public boolean canPlaceItemThroughFace(int slot, ItemStack stack, Direction dir) {
         return slot == 0;
     }
 
     @Override
-    public boolean canExtract(int slot, ItemStack stack, Direction dir) {
+    public boolean canTakeItemThroughFace(int slot, ItemStack stack, Direction dir) {
         return slot == 0;
     }
 
     @Override
     public void tick() {
-        if (!this.getWorld().isClient()) {
-            if (!this.getCachedState().get(AbstractMachineBlock.POWERED)) {
-                ItemStackHolder stack = new ItemStackHolder(this.getStack(0));
+        if (!this.getLevel().isClientSide()) {
+            if (!this.getBlockState().getValue(AbstractMachineBlock.POWERED)) {
+                ItemStackHolder stack = new ItemStackHolder(this.getItem(0));
                 this.setActive(true);
                 if (!stack.getStack().isEmpty()) {
                     if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0) {
                         long moved = EnergyHooks.safeMoveBlockToItemEnergy(this, null, stack, this.getEnergyPerTick());
                         if (moved > 0) {
                             if (stack.isDirty()) {
-                                this.setStack(0, stack.getStack());
+                                this.setItem(0, stack.getStack());
                             }
-                            BlockPos pos = this.getPos();
-                            ModUtils.spawnForcedParticles((ServerWorld) world, ParticleTypes.ELECTRIC_SPARK, pos.getX() + 0.5, pos.getY() + 1.8, pos.getZ() + 0.5, 2, 0.1, 0.1, 0.1, 0.1);
+                            BlockPos pos = this.getBlockPos();
+                            ModUtils.spawnForcedParticles((ServerLevel) level, ParticleTypes.ELECTRIC_SPARK, pos.getX() + 0.5, pos.getY() + 1.8, pos.getZ() + 0.5, 2, 0.1, 0.1, 0.1, 0.1);
                         }
                     }
                 } else {
@@ -68,7 +68,7 @@ public class EnergizerBlockEntity extends AbstractMachineBlockEntity implements 
                 level++;
             }
             // Set the block state to the correct level
-            this.world.setBlockState(this.getPos(), this.getCachedState().with(EnergizerBlock.POWER, level));
+            this.level.setBlockAndUpdate(this.getBlockPos(), this.getBlockState().setValue(EnergizerBlock.POWER, level));
             EnergyHooks.distributeEnergyNearby(this, this.getEnergyPerTick());
         }
     }
@@ -88,7 +88,7 @@ public class EnergizerBlockEntity extends AbstractMachineBlockEntity implements 
 
     @Override
     public void update() {
-        this.markDirty();
-        this.getWorld().updateListeners(this.getPos(), this.getCachedState(), this.getCachedState(), Block.NOTIFY_ALL);
+        this.setChanged();
+        this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
     }
 }

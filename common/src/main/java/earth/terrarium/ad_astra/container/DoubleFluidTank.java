@@ -2,10 +2,9 @@ package earth.terrarium.ad_astra.container;
 
 import earth.terrarium.botarium.api.Updatable;
 import earth.terrarium.botarium.api.fluid.*;
-import net.minecraft.nbt.NbtCompound;
-
 import java.util.List;
 import java.util.function.Predicate;
+import net.minecraft.nbt.CompoundTag;
 
 public class DoubleFluidTank implements UpdatingFluidContainer {
     private final SimpleUpdatingFluidContainer input;
@@ -95,15 +94,15 @@ public class DoubleFluidTank implements UpdatingFluidContainer {
     }
 
     @Override
-    public void deserialize(NbtCompound nbtCompound) {
+    public void deserialize(CompoundTag nbtCompound) {
         input.deserialize(nbtCompound.getCompound("Input"));
         output.deserialize(nbtCompound.getCompound("Output"));
     }
 
     @Override
-    public NbtCompound serialize(NbtCompound nbtCompound) {
-        nbtCompound.put("Input", input.serialize(new NbtCompound()));
-        nbtCompound.put("Output", output.serialize(new NbtCompound()));
+    public CompoundTag serialize(CompoundTag nbtCompound) {
+        nbtCompound.put("Input", input.serialize(new CompoundTag()));
+        nbtCompound.put("Output", output.serialize(new CompoundTag()));
         return nbtCompound;
     }
 

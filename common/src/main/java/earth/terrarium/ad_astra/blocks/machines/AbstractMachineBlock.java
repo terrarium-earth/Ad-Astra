@@ -6,50 +6,53 @@ import earth.terrarium.ad_astra.blocks.machines.entity.OxygenDistributorBlockEnt
 import earth.terrarium.botarium.api.energy.EnergyHooks;
 import earth.terrarium.botarium.api.energy.PlatformEnergyManager;
 import earth.terrarium.botarium.api.menu.MenuHooks;
-import net.minecraft.block.*;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityTicker;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.block.piston.PistonBehavior;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.Inventories;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.*;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.phys.BlockHitResult;
 
 import java.util.Optional;
 import java.util.function.ToIntFunction;
 
 @SuppressWarnings("deprecation")
-public abstract class AbstractMachineBlock extends BlockWithEntity {
+public abstract class AbstractMachineBlock extends BaseEntityBlock {
 
-    public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
-    public static final BooleanProperty LIT = Properties.LIT;
-    public static final BooleanProperty POWERED = Properties.POWERED;
+    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    public static final BooleanProperty LIT = BlockStateProperties.LIT;
+    public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
-    public AbstractMachineBlock(Settings settings) {
-        super(settings.luminance(getLuminance()));
-        this.setDefaultState(this.buildDefaultState());
+    public AbstractMachineBlock(Properties settings) {
+        super(settings.lightLevel(getLuminance()));
+        this.registerDefaultState(this.buildDefaultState());
     }
 
     private static ToIntFunction<BlockState> getLuminance() {
-        return (blockState) -> blockState.contains(LIT) ? (blockState.get(LIT) ? ((AbstractMachineBlock) blockState.getBlock()).getBrightness() : 0) : 0;
+        return (blockState) -> blockState.hasProperty(LIT) ? (blockState.getValue(LIT) ? ((AbstractMachineBlock) blockState.getBlock()).getBrightness() : 0) : 0;
     }
 
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         return (entityWorld, pos, entityState, blockEntity) -> {
             if (blockEntity instanceof AbstractMachineBlockEntity machine) {
                 machine.tick();
@@ -58,14 +61,14 @@ public abstract class AbstractMachineBlock extends BlockWithEntity {
     }
 
     protected BlockState buildDefaultState() {
-        BlockState state = this.stateManager.getDefaultState();
+        BlockState state = this.stateDefinition.any();
 
-        state = state.with(POWERED, false);
+        state = state.setValue(POWERED, false);
         if (this.useFacing()) {
-            state = state.with(FACING, Direction.NORTH);
+            state = state.setValue(FACING, Direction.NORTH);
         }
         if (this.useLit()) {
-            state = state.with(LIT, false);
+            state = state.setValue(LIT, false);
         }
 
         return state;
@@ -80,24 +83,24 @@ public abstract class AbstractMachineBlock extends BlockWithEntity {
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (!world.isClient) {
-            if (world.getBlockEntity(pos) instanceof AbstractMachineBlockEntity machineBlock) {
-                MenuHooks.openMenu((ServerPlayerEntity) player, machineBlock);
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (!level.isClientSide) {
+            if (level.getBlockEntity(pos) instanceof AbstractMachineBlockEntity machineBlock) {
+                MenuHooks.openMenu((ServerPlayer) player, machineBlock);
             }
         }
-        return ActionResult.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
     @Override
-    public BlockRenderType getRenderType(BlockState state) {
-        return BlockRenderType.MODEL;
+    public RenderShape getRenderShape(BlockState state) {
+        return RenderShape.MODEL;
     }
 
     @Override
-    public BlockState rotate(BlockState state, BlockRotation rotation) {
+    public BlockState rotate(BlockState state, Rotation rotation) {
         if (this.useFacing()) {
-            return state.with(FACING, rotation.rotate(state.get(FACING)));
+            return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
         } else {
             return state;
         }
@@ -108,19 +111,19 @@ public abstract class AbstractMachineBlock extends BlockWithEntity {
     }
 
     @Override
-    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean moved) {
         if (state.getBlock() != newState.getBlock()) {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
+            BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof AbstractMachineBlockEntity machineBlock) {
                 if (machineBlock.getInventorySize() > 0) {
                     if (this.removeOutput()) {
-                        machineBlock.removeStack(machineBlock.getInventorySize() - 1);
+                        machineBlock.removeItemNoUpdate(machineBlock.getInventorySize() - 1);
                     }
-                    ItemScatterer.spawn(world, pos, machineBlock);
-                    world.updateComparators(pos, this);
+                    Containers.dropContents(level, pos, machineBlock);
+                    level.updateNeighbourForOutputSignal(pos, this);
                 }
             }
-            super.onStateReplaced(state, world, pos, newState, moved);
+            super.onRemove(state, level, pos, newState, moved);
         }
     }
 
@@ -129,17 +132,17 @@ public abstract class AbstractMachineBlock extends BlockWithEntity {
     }
 
     @Override
-    public BlockState mirror(BlockState state, BlockMirror mirror) {
-        return state.rotate(mirror.getRotation(state.get(FACING)));
+    public BlockState mirror(BlockState state, Mirror mirror) {
+        return state.rotate(mirror.getRotation(state.getValue(FACING)));
     }
 
     @Override
-    public PistonBehavior getPistonBehavior(BlockState state) {
-        return PistonBehavior.BLOCK;
+    public PushReaction getPistonPushReaction(BlockState state) {
+        return PushReaction.BLOCK;
     }
 
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 
         if (this.useFacing()) {
             builder.add(FACING);
@@ -153,13 +156,13 @@ public abstract class AbstractMachineBlock extends BlockWithEntity {
     }
 
     @Override
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        BlockState state = this.getDefaultState().with(POWERED, false);
-        return this.useFacing() ? state.with(FACING, ctx.getPlayerFacing().getOpposite()) : state;
+    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+        BlockState state = this.defaultBlockState().setValue(POWERED, false);
+        return this.useFacing() ? state.setValue(FACING, ctx.getHorizontalDirection().getOpposite()) : state;
     }
 
     @Override
-    public boolean hasComparatorOutput(BlockState state) {
+    public boolean hasAnalogOutputSignal(BlockState state) {
         return true;
     }
 
@@ -168,30 +171,30 @@ public abstract class AbstractMachineBlock extends BlockWithEntity {
     }
 
     @Override
-    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
-        super.neighborUpdate(state, world, pos, block, fromPos, notify);
+    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
+        super.neighborChanged(state, level, pos, block, fromPos, notify);
 
         if (this.doRedstoneCheck()) {
-            if (!world.isClient) {
-                world.setBlockState(pos, state.with(POWERED, world.isReceivingRedstonePower(pos)));
+            if (!level.isClientSide) {
+                level.setBlockAndUpdate(pos, state.setValue(POWERED, level.hasNeighborSignal(pos)));
             }
         }
     }
 
     @Override
-    public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
-        BlockEntity blockEntity = world.getBlockEntity(pos);
+    public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
 
-        return blockEntity instanceof AbstractMachineBlockEntity ? ScreenHandler.calculateComparatorOutput(blockEntity) : 0;
+        return blockEntity instanceof AbstractMachineBlockEntity ? AbstractContainerMenu.getRedstoneSignalFromBlockEntity(blockEntity) : 0;
     }
 
     // Get nbt in stack when picking block
     @Override
-    public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
-        ItemStack stack = super.getPickStack(world, pos, state);
-        if (world.getBlockEntity(pos) instanceof AbstractMachineBlockEntity machineBlock) {
-            NbtCompound nbt = stack.getOrCreateNbt();
-            Inventories.writeNbt(nbt, machineBlock.getItems());
+    public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
+        ItemStack stack = super.getCloneItemStack(level, pos, state);
+        if (level.getBlockEntity(pos) instanceof AbstractMachineBlockEntity machineBlock) {
+            CompoundTag nbt = stack.getOrCreateTag();
+            ContainerHelper.saveAllItems(nbt, machineBlock.getItems());
             Optional<PlatformEnergyManager> energyBlock = EnergyHooks.safeGetBlockEnergyManager(machineBlock, null);
             energyBlock.ifPresent(platformEnergyManager -> nbt.putLong("energy", platformEnergyManager.getStoredEnergy()));
 

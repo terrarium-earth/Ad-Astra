@@ -28,16 +28,16 @@ public class ClientModKeybindings {
     public static void register() {
         ClientTickEvent.CLIENT_POST.register(client -> {
 
-            clickingJump = client.options.jumpKey.isPressed();
-            clickingSprint = client.options.sprintKey.isPressed();
-            clickingForward = client.options.forwardKey.isPressed();
-            clickingBack = client.options.backKey.isPressed();
-            clickingLeft = client.options.leftKey.isPressed();
-            clickingRight = client.options.rightKey.isPressed();
+            clickingJump = client.options.keyJump.isDown();
+            clickingSprint = client.options.keySprint.isDown();
+            clickingForward = client.options.keyUp.isDown();
+            clickingBack = client.options.keyDown.isDown();
+            clickingLeft = client.options.keyLeft.isDown();
+            clickingRight = client.options.keyRight.isDown();
 
-            if (client.world != null) {
+            if (client.level != null) {
                 if (client.player != null) {
-                    if (client.options.jumpKey.wasPressed()) {
+                    if (client.options.keyJump.consumeClick()) {
                         if (client.player.getVehicle() instanceof RocketEntity rocket) {
                             if (!rocket.isFlying()) {
                                 NetworkHandling.CHANNEL.sendToServer(new LaunchRocketPacket());

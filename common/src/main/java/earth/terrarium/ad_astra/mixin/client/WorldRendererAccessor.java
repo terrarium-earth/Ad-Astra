@@ -2,73 +2,70 @@ package earth.terrarium.ad_astra.mixin.client;
 
 import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.VertexBuffer;
-import net.minecraft.client.option.CloudRenderMode;
-import net.minecraft.client.render.WorldRenderer;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.client.CloudStatus;
+import net.minecraft.client.renderer.LevelRenderer;
+import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
-@Mixin(WorldRenderer.class)
+@Mixin(LevelRenderer.class)
 public interface WorldRendererAccessor {
 
-    @Accessor("lightSkyBuffer")
-    VertexBuffer getLightSkyBuffer();
+    @Accessor
+    VertexBuffer getSkyBuffer();
 
-    @Accessor("darkSkyBuffer")
-    VertexBuffer getDarkSkyBuffer();
+    @Accessor
+    boolean getGenerateClouds();
 
-    @Accessor("cloudsDirty")
-    boolean getCloudsDirty();
+    @Accessor
+    void setGenerateClouds(boolean value);
 
-    @Accessor("cloudsDirty")
-    void setCloudsDirty(boolean value);
+    @Accessor
+    VertexBuffer getCloudBuffer();
 
-    @Accessor("cloudsBuffer")
-    VertexBuffer getCloudsBuffer();
+    @Accessor
+    void setCloudBuffer(VertexBuffer value);
 
-    @Accessor("cloudsBuffer")
-    void setCloudsBuffer(VertexBuffer value);
+    @Accessor
+    CloudStatus getPrevCloudsType();
 
-    @Accessor("lastCloudsRenderMode")
-    CloudRenderMode getLastCloudsRenderMode();
+    @Accessor
+    void setPrevCloudsType(CloudStatus value);
 
-    @Accessor("lastCloudsRenderMode")
-    void setLastCloudsRenderMode(CloudRenderMode value);
+    @Accessor
+    Vec3 getPrevCloudColor();
 
-    @Accessor("lastCloudsColor")
-    Vec3d getLastCloudsColor();
+    @Accessor
+    void setPrevCloudColor(Vec3 value);
 
-    @Accessor("lastCloudsColor")
-    void setLastCloudsColor(Vec3d value);
-
-    @Accessor("ticks")
+    @Accessor
     int getTicks();
 
-    @Accessor("lastCloudsBlockX")
-    int getLastCloudsBlockX();
+    @Accessor
+    int getPrevCloudX();
 
-    @Accessor("lastCloudsBlockX")
-    void setLastCloudsBlockX(int value);
+    @Accessor
+    void setPrevCloudX(int value);
 
-    @Accessor("lastCloudsBlockY")
-    int getLastCloudsBlockY();
+    @Accessor
+    int getPrevCloudY();
 
-    @Accessor("lastCloudsBlockY")
-    void setLastCloudsBlockY(int value);
+    @Accessor
+    void setPrevCloudY(int value);
 
-    @Accessor("lastCloudsBlockZ")
-    int getLastCloudsBlockZ();
+    @Accessor
+    int getPrevCloudZ();
 
-    @Accessor("lastCloudsBlockZ")
-    void setLastCloudsBlockZ(int value);
+    @Accessor
+    void setPrevCloudZ(int value);
 
-    @Accessor("rainSizeX")
+    @Accessor
     float[] getRainSizeX();
 
-    @Accessor("rainSizeZ")
+    @Accessor
     float[] getRainSizeZ();
 
-    @Invoker("renderClouds")
-    BufferBuilder.RenderedBuffer invokeRenderClouds(BufferBuilder builder, double x, double y, double z, Vec3d color);
+    @Invoker
+    BufferBuilder.RenderedBuffer invokeBuildClouds(BufferBuilder builder, double x, double y, double z, Vec3 color);
 }

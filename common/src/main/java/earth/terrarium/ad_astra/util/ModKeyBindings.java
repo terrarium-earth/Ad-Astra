@@ -5,8 +5,8 @@ import earth.terrarium.ad_astra.client.registry.ClientModKeybindings;
 import earth.terrarium.ad_astra.networking.packets.client.KeybindPacket;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.player.Player;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -19,7 +19,7 @@ public class ModKeyBindings {
     public static final HashMap<UUID, ModKeyBindings> PLAYER_KEYS = new HashMap<>();
 
     static {
-        PlayerEvent.PLAYER_QUIT.register(player -> PLAYER_KEYS.remove(player.getUuid()));
+        PlayerEvent.PLAYER_QUIT.register(player -> PLAYER_KEYS.remove(player.getUUID()));
     }
 
     private boolean clickingJump;
@@ -29,52 +29,52 @@ public class ModKeyBindings {
     private boolean clickingLeft;
     private boolean clickingRight;
 
-    public static boolean jumpKeyDown(PlayerEntity player) {
-        return player.world.isClient ? getClientKeyPressed(player, KeybindPacket.Keybind.JUMP) : getServerKeyPressed(player, KeybindPacket.Keybind.JUMP);
+    public static boolean jumpKeyDown(Player player) {
+        return player.level.isClientSide ? getClientKeyPressed(player, KeybindPacket.Keybind.JUMP) : getServerKeyPressed(player, KeybindPacket.Keybind.JUMP);
     }
 
-    public static boolean sprintKeyDown(PlayerEntity player) {
-        return player.world.isClient ? getClientKeyPressed(player, KeybindPacket.Keybind.SPRINT) : getServerKeyPressed(player, KeybindPacket.Keybind.SPRINT);
+    public static boolean sprintKeyDown(Player player) {
+        return player.level.isClientSide ? getClientKeyPressed(player, KeybindPacket.Keybind.SPRINT) : getServerKeyPressed(player, KeybindPacket.Keybind.SPRINT);
     }
 
-    public static boolean forwardKeyDown(PlayerEntity player) {
-        return player.world.isClient ? getClientKeyPressed(player, KeybindPacket.Keybind.FORWARD) : getServerKeyPressed(player, KeybindPacket.Keybind.FORWARD);
+    public static boolean forwardKeyDown(Player player) {
+        return player.level.isClientSide ? getClientKeyPressed(player, KeybindPacket.Keybind.FORWARD) : getServerKeyPressed(player, KeybindPacket.Keybind.FORWARD);
     }
 
-    public static boolean backKeyDown(PlayerEntity player) {
-        return player.world.isClient ? getClientKeyPressed(player, KeybindPacket.Keybind.BACK) : getServerKeyPressed(player, KeybindPacket.Keybind.BACK);
+    public static boolean backKeyDown(Player player) {
+        return player.level.isClientSide ? getClientKeyPressed(player, KeybindPacket.Keybind.BACK) : getServerKeyPressed(player, KeybindPacket.Keybind.BACK);
     }
 
-    public static boolean leftKeyDown(PlayerEntity player) {
-        return player.world.isClient ? getClientKeyPressed(player, KeybindPacket.Keybind.LEFT) : getServerKeyPressed(player, KeybindPacket.Keybind.LEFT);
+    public static boolean leftKeyDown(Player player) {
+        return player.level.isClientSide ? getClientKeyPressed(player, KeybindPacket.Keybind.LEFT) : getServerKeyPressed(player, KeybindPacket.Keybind.LEFT);
     }
 
-    public static boolean rightKeyDown(PlayerEntity player) {
-        return player.world.isClient ? getClientKeyPressed(player, KeybindPacket.Keybind.RIGHT) : getServerKeyPressed(player, KeybindPacket.Keybind.RIGHT);
+    public static boolean rightKeyDown(Player player) {
+        return player.level.isClientSide ? getClientKeyPressed(player, KeybindPacket.Keybind.RIGHT) : getServerKeyPressed(player, KeybindPacket.Keybind.RIGHT);
     }
 
-    private static boolean getServerKeyPressed(PlayerEntity player, KeybindPacket.Keybind key) {
-        PLAYER_KEYS.putIfAbsent(player.getUuid(), new ModKeyBindings());
+    private static boolean getServerKeyPressed(Player player, KeybindPacket.Keybind key) {
+        PLAYER_KEYS.putIfAbsent(player.getUUID(), new ModKeyBindings());
         return switch (key) {
-            case JUMP -> PLAYER_KEYS.get(player.getUuid()).clickingJump;
+            case JUMP -> PLAYER_KEYS.get(player.getUUID()).clickingJump;
 
-            case SPRINT -> PLAYER_KEYS.get(player.getUuid()).clickingSprint;
+            case SPRINT -> PLAYER_KEYS.get(player.getUUID()).clickingSprint;
 
-            case FORWARD -> PLAYER_KEYS.get(player.getUuid()).clickingForward;
+            case FORWARD -> PLAYER_KEYS.get(player.getUUID()).clickingForward;
 
-            case BACK -> PLAYER_KEYS.get(player.getUuid()).clickingBack;
+            case BACK -> PLAYER_KEYS.get(player.getUUID()).clickingBack;
 
-            case LEFT -> PLAYER_KEYS.get(player.getUuid()).clickingLeft;
+            case LEFT -> PLAYER_KEYS.get(player.getUUID()).clickingLeft;
 
-            case RIGHT -> PLAYER_KEYS.get(player.getUuid()).clickingRight;
+            case RIGHT -> PLAYER_KEYS.get(player.getUUID()).clickingRight;
         };
     }
 
     @Environment(EnvType.CLIENT)
-    private static boolean getClientKeyPressed(PlayerEntity player, KeybindPacket.Keybind key) {
+    private static boolean getClientKeyPressed(Player player, KeybindPacket.Keybind key) {
 
-        MinecraftClient client = MinecraftClient.getInstance();
-        if (!player.getUuid().equals(client.player.getUuid())) {
+        Minecraft client = Minecraft.getInstance();
+        if (!player.getUUID().equals(client.player.getUUID())) {
             return false;
         }
 

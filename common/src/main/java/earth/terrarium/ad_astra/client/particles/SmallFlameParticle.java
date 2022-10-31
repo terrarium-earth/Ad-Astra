@@ -2,38 +2,38 @@ package earth.terrarium.ad_astra.client.particles;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.particle.ExplosionSmokeParticle;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.particle.ExplodeParticle;
 import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleFactory;
-import net.minecraft.client.particle.SpriteProvider;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.SpriteSet;
+import net.minecraft.core.particles.SimpleParticleType;
 
 @Environment(EnvType.CLIENT)
-public class SmallFlameParticle extends ExplosionSmokeParticle {
+public class SmallFlameParticle extends ExplodeParticle {
 
-    protected SmallFlameParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
-        super(world, x, y, z, velocityX, velocityY, velocityZ, spriteProvider);
-        this.gravityStrength = 2.5f;
+    protected SmallFlameParticle(ClientLevel level, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteSet spriteProvider) {
+        super(level, x, y, z, velocityX, velocityY, velocityZ, spriteProvider);
+        this.gravity = 2.5f;
         this.scale(0.5f);
     }
 
     @Override
     public void tick() {
         super.tick();
-        this.velocityY -= 0.004 + 0.04 * this.gravityStrength;
+        this.yd -= 0.004 + 0.04 * this.gravity;
     }
 
     @Environment(value = EnvType.CLIENT)
-    public static class Factory implements ParticleFactory<DefaultParticleType> {
-        private final SpriteProvider spriteProvider;
+    public static class Provider implements ParticleProvider<SimpleParticleType> {
+        private final SpriteSet spriteProvider;
 
-        public Factory(SpriteProvider spriteProvider) {
+        public Provider(SpriteSet spriteProvider) {
             this.spriteProvider = spriteProvider;
         }
 
         @Override
-        public Particle createParticle(DefaultParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
+        public Particle createParticle(SimpleParticleType defaultParticleType, ClientLevel clientWorld, double d, double e, double f, double g, double h, double i) {
             return new SmallFlameParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
         }
     }

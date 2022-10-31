@@ -2,84 +2,84 @@ package earth.terrarium.ad_astra.blocks.torches;
 
 import earth.terrarium.ad_astra.registry.ModBlocks;
 import earth.terrarium.ad_astra.util.OxygenUtils;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.FireChargeItem;
-import net.minecraft.item.FlintAndSteelItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.FireChargeItem;
+import net.minecraft.world.item.FlintAndSteelItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 @SuppressWarnings("deprecation")
 public class ExtinguishedTorchBlock extends Block {
 
-    public ExtinguishedTorchBlock(Settings settings) {
+    public ExtinguishedTorchBlock(Properties settings) {
         super(settings);
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (!world.isClient) {
-            ItemStack itemstack = player.getStackInHand(hand);
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (!level.isClientSide) {
+            ItemStack itemstack = player.getItemInHand(hand);
 
-            if (OxygenUtils.posHasOxygen(world, pos)) {
+            if (OxygenUtils.posHasOxygen(level, pos)) {
                 if (itemstack.getItem() instanceof FlintAndSteelItem || itemstack.getItem() instanceof FireChargeItem) {
 
-                    if (world.getBlockState(pos).getBlock().equals(ModBlocks.EXTINGUISHED_TORCH.get())) {
-                        world.setBlockState(pos, Blocks.TORCH.getDefaultState(), 3);
+                    if (level.getBlockState(pos).getBlock().equals(ModBlocks.EXTINGUISHED_TORCH.get())) {
+                        level.setBlock(pos, Blocks.TORCH.defaultBlockState(), 3);
                     } else {
-                        world.setBlockState(pos, Blocks.WALL_TORCH.getStateWithProperties(state), 3);
+                        level.setBlock(pos, Blocks.WALL_TORCH.withPropertiesOf(state), 3);
                     }
 
-                    itemstack.getItem().use(world, player, hand);
+                    itemstack.getItem().use(level, player, hand);
 
                     boolean hasFlint = itemstack.getItem() instanceof FlintAndSteelItem;
 
                     if (hasFlint) {
-                        world.playSound(null, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1, 1);
+                        level.playSound(null, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1, 1);
                     } else {
-                        world.playSound(null, pos, SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.BLOCKS, 1, 1);
+                        level.playSound(null, pos, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 1, 1);
                     }
 
                     if (!player.isCreative()) {
                         if (hasFlint) {
-                            itemstack.damage(1, world.random, (ServerPlayerEntity) player);
+                            itemstack.hurt(1, level.random, (ServerPlayer) player);
                         } else {
-                            itemstack.decrement(1);
+                            itemstack.shrink(1);
                         }
                     }
                 }
             }
         }
-        return ActionResult.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
     @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return Blocks.TORCH.getOutlineShape(state, world, pos, context);
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return Blocks.TORCH.getShape(state, level, pos, context);
     }
 
     @Override
-    public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-        return direction.equals(Direction.DOWN) && !this.canPlaceAt(state, world, pos) ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+        return direction.equals(Direction.DOWN) && !this.canSurvive(state, level, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, neighborState, level, pos, neighborPos);
     }
 
     @Override
-    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-        return sideCoversSmallSquare(world, pos.down(), Direction.UP);
+    public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+        return canSupportCenter(level, pos.below(), Direction.UP);
     }
 }

@@ -9,17 +9,17 @@ import earth.terrarium.ad_astra.util.FluidUtils;
 import earth.terrarium.botarium.api.energy.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.Predicate;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
 
@@ -39,7 +39,7 @@ public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
 
     @Override
     public Predicate<FluidHolder> getInputFilter() {
-        return f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.getWorld()).stream().anyMatch(r -> r.matches(f.getFluid()));
+        return f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.getLevel()).stream().anyMatch(r -> r.matches(f.getFluid()));
     }
 
     @Override
@@ -48,39 +48,39 @@ public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
     }
 
     @Override
-    public boolean canInsert(int slot, ItemStack stack, Direction dir) {
+    public boolean canPlaceItemThroughFace(int slot, ItemStack stack, Direction dir) {
         return slot == 0;
     }
 
     @Override
-    public boolean canExtract(int slot, ItemStack stack, Direction dir) {
+    public boolean canTakeItemThroughFace(int slot, ItemStack stack, Direction dir) {
         return slot == 1 || slot == 3;
     }
 
     @Nullable
     @Override
-    public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
+    public AbstractContainerMenu createMenu(int syncId, Inventory inv, Player player) {
         return new ConversionScreenHandler(syncId, inv, this);
     }
 
     @Override
     public void tick() {
-        if (!this.world.isClient) {
+        if (!this.level.isClientSide) {
             ItemStack insertSlot = this.getItems().get(0);
             ItemStack extractSlot = this.getItems().get(1);
             ItemStack outputInsertSlot = this.getItems().get(2);
             ItemStack outputExtractSlot = this.getItems().get(3);
 
-            if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxCount() && FluidHooks.isFluidContainingItem(insertSlot)) {
-                FluidUtils.insertItemFluidToTank(this.getFluidContainer(), this, 0, 1, 0, f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.world).stream().anyMatch(r -> r.matches(f)));
+            if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxStackSize() && FluidHooks.isFluidContainingItem(insertSlot)) {
+                FluidUtils.insertItemFluidToTank(this.getFluidContainer(), this, 0, 1, 0, f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.level).stream().anyMatch(r -> r.matches(f)));
             }
 
-            if (!outputInsertSlot.isEmpty() && outputExtractSlot.getCount() < outputExtractSlot.getMaxCount()) {
+            if (!outputInsertSlot.isEmpty() && outputExtractSlot.getCount() < outputExtractSlot.getMaxStackSize()) {
                 FluidUtils.extractTankFluidToItem(this.getFluidContainer().getOutput(), this, 2, 3, 0, f -> true);
             }
 
             if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0) {
-                List<OxygenConversionRecipe> recipes = ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.world);
+                List<OxygenConversionRecipe> recipes = ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.level);
                 if (FluidUtils.convertFluid(this.getFluidContainer(), recipes, FluidHooks.buckets(1) / 50)) {
                     this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
                     this.setActive(true);

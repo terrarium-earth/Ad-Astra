@@ -2,14 +2,13 @@ package earth.terrarium.ad_astra.registry;
 
 import dev.architectury.registry.registries.DeferredRegister;
 import earth.terrarium.ad_astra.AdAstra;
-import net.minecraft.entity.decoration.painting.PaintingVariant;
-import net.minecraft.util.registry.Registry;
-
 import java.util.function.Supplier;
+import net.minecraft.core.Registry;
+import net.minecraft.world.entity.decoration.PaintingVariant;
 
 public class ModPaintings {
 
-    public static final DeferredRegister<PaintingVariant> PAINTINGS = DeferredRegister.create(AdAstra.MOD_ID, Registry.PAINTING_VARIANT_KEY);
+    public static final DeferredRegister<PaintingVariant> PAINTINGS = DeferredRegister.create(AdAstra.MOD_ID, Registry.PAINTING_VARIANT_REGISTRY);
 
     public static void register() {
         register("mercury", 16, 16);

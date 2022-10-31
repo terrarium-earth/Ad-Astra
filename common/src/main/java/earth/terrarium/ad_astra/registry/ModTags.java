@@ -1,52 +1,52 @@
 package earth.terrarium.ad_astra.registry;
 
 import dev.architectury.injectables.targets.ArchitecturyTarget;
-import earth.terrarium.ad_astra.util.ModIdentifier;
-import net.minecraft.entity.EntityType;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.item.Item;
-import net.minecraft.tag.TagKey;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import earth.terrarium.ad_astra.util.ModResourceLocation;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.material.Fluid;
 
 public class ModTags {
-    public static final TagKey<EntityType<?>> FIRE_IMMUNE = TagKey.of(Registry.ENTITY_TYPE_KEY, new ModIdentifier("entities/fire_immune"));
-    public static final TagKey<EntityType<?>> LIVES_WITHOUT_OXYGEN = TagKey.of(Registry.ENTITY_TYPE_KEY, new ModIdentifier("entities/lives_without_oxygen"));
-    public static final TagKey<Item> FREEZE_RESISTANT = TagKey.of(Registry.ITEM_KEY, new ModIdentifier("freeze_resistant"));
-    public static final TagKey<Item> HEAT_RESISTANT = TagKey.of(Registry.ITEM_KEY, new ModIdentifier("heat_resistant"));
-    public static final TagKey<Item> OXYGENATED_ARMOR = TagKey.of(Registry.ITEM_KEY, new ModIdentifier("oxygenated_armor"));
-    public static final TagKey<Item> GLACIAN_LOGS = TagKey.of(Registry.ITEM_KEY, new ModIdentifier("glacian_logs"));
-    public static final TagKey<Item> AERONOS_CAPS = TagKey.of(Registry.ITEM_KEY, new ModIdentifier("aeronos_caps"));
-    public static final TagKey<Item> STROPHAR_CAPS = TagKey.of(Registry.ITEM_KEY, new ModIdentifier("strophar_caps"));
+    public static final TagKey<EntityType<?>> FIRE_IMMUNE = TagKey.create(Registry.ENTITY_TYPE_REGISTRY, new ModResourceLocation("entities/fire_immune"));
+    public static final TagKey<EntityType<?>> LIVES_WITHOUT_OXYGEN = TagKey.create(Registry.ENTITY_TYPE_REGISTRY, new ModResourceLocation("entities/lives_without_oxygen"));
+    public static final TagKey<Item> FREEZE_RESISTANT = TagKey.create(Registry.ITEM_REGISTRY, new ModResourceLocation("freeze_resistant"));
+    public static final TagKey<Item> HEAT_RESISTANT = TagKey.create(Registry.ITEM_REGISTRY, new ModResourceLocation("heat_resistant"));
+    public static final TagKey<Item> OXYGENATED_ARMOR = TagKey.create(Registry.ITEM_REGISTRY, new ModResourceLocation("oxygenated_armor"));
+    public static final TagKey<Item> GLACIAN_LOGS = TagKey.create(Registry.ITEM_REGISTRY, new ModResourceLocation("glacian_logs"));
+    public static final TagKey<Item> AERONOS_CAPS = TagKey.create(Registry.ITEM_REGISTRY, new ModResourceLocation("aeronos_caps"));
+    public static final TagKey<Item> STROPHAR_CAPS = TagKey.create(Registry.ITEM_REGISTRY, new ModResourceLocation("strophar_caps"));
 
-    public static final TagKey<Fluid> FUELS = TagKey.of(Registry.FLUID_KEY, new Identifier(getCommonNamespace() + ":fuel"));
-    public static final TagKey<Fluid> EFFICIENT_FUELS = TagKey.of(Registry.FLUID_KEY, new ModIdentifier("efficient_fuel"));
-    public static final TagKey<Fluid> OXYGEN = TagKey.of(Registry.FLUID_KEY, new Identifier(getCommonNamespace() + ":oxygen"));
-    public static final TagKey<Fluid> OIL = TagKey.of(Registry.FLUID_KEY, new Identifier(getCommonNamespace() + ":oil"));
+    public static final TagKey<Fluid> FUELS = TagKey.create(Registry.FLUID_REGISTRY, new ResourceLocation(getCommonNamespace() + ":fuel"));
+    public static final TagKey<Fluid> EFFICIENT_FUELS = TagKey.create(Registry.FLUID_REGISTRY, new ModResourceLocation("efficient_fuel"));
+    public static final TagKey<Fluid> OXYGEN = TagKey.create(Registry.FLUID_REGISTRY, new ResourceLocation(getCommonNamespace() + ":oxygen"));
+    public static final TagKey<Fluid> OIL = TagKey.create(Registry.FLUID_REGISTRY, new ResourceLocation(getCommonNamespace() + ":oil"));
 
-    public static final TagKey<Item> CALORITE_INGOTS = TagKey.of(Registry.ITEM_KEY, new Identifier(getCommonNamespace() + ":calorite_ingots"));
-    public static final TagKey<Item> CALORITE_NUGGETS = TagKey.of(Registry.ITEM_KEY, new Identifier(getCommonNamespace() + ":calorite_nuggets"));
-    public static final TagKey<Item> CHEESES = TagKey.of(Registry.ITEM_KEY, new Identifier(getCommonNamespace() + ":cheeses"));
-    public static final TagKey<Item> CALORITE_PLATES = TagKey.of(Registry.ITEM_KEY, new Identifier(getCommonNamespace() + ":calorite_plates"));
-    public static final TagKey<Item> DESH_PLATES = TagKey.of(Registry.ITEM_KEY, new Identifier(getCommonNamespace() + ":desh_plates"));
-    public static final TagKey<Item> OSTRUM_PLATES = TagKey.of(Registry.ITEM_KEY, new Identifier(getCommonNamespace() + ":ostrum_plates"));
-    public static final TagKey<Item> STEEL_PLATES = TagKey.of(Registry.ITEM_KEY, new Identifier(getCommonNamespace() + ":steel_plates"));
-    public static final TagKey<Item> DESH_INGOTS = TagKey.of(Registry.ITEM_KEY, new Identifier(getCommonNamespace() + ":desh_ingots"));
-    public static final TagKey<Item> DESH_NUGGETS = TagKey.of(Registry.ITEM_KEY, new Identifier(getCommonNamespace() + ":desh_nuggets"));
-    public static final TagKey<Item> IRON_PLATES = TagKey.of(Registry.ITEM_KEY, new Identifier(getCommonNamespace() + ":iron_plates"));
-    public static final TagKey<Item> IRON_RODS = TagKey.of(Registry.ITEM_KEY, new Identifier(getCommonNamespace() + ":iron_rods"));
-    public static final TagKey<Item> OSTRUM_INGOTS = TagKey.of(Registry.ITEM_KEY, new Identifier(getCommonNamespace() + ":ostrum_ingots"));
-    public static final TagKey<Item> OSTRUM_NUGGETS = TagKey.of(Registry.ITEM_KEY, new Identifier(getCommonNamespace() + ":ostrum_nuggets"));
-    public static final TagKey<Item> RAW_CALORITE_ORES = TagKey.of(Registry.ITEM_KEY, new Identifier(getCommonNamespace() + ":raw_calorite_ores"));
-    public static final TagKey<Item> RAW_DESH_ORES = TagKey.of(Registry.ITEM_KEY, new Identifier(getCommonNamespace() + ":raw_desh_ores"));
-    public static final TagKey<Item> RAW_OSTRUM_ORES = TagKey.of(Registry.ITEM_KEY, new Identifier(getCommonNamespace() + ":raw_ostrum_ores"));
-    public static final TagKey<Item> STEEL_INGOTS = TagKey.of(Registry.ITEM_KEY, new Identifier(getCommonNamespace() + ":steel_ingots"));
-    public static final TagKey<Item> STEEL_NUGGETS = TagKey.of(Registry.ITEM_KEY, new Identifier(getCommonNamespace() + ":steel_nuggets"));
+    public static final TagKey<Item> CALORITE_INGOTS = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(getCommonNamespace() + ":calorite_ingots"));
+    public static final TagKey<Item> CALORITE_NUGGETS = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(getCommonNamespace() + ":calorite_nuggets"));
+    public static final TagKey<Item> CHEESES = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(getCommonNamespace() + ":cheeses"));
+    public static final TagKey<Item> CALORITE_PLATES = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(getCommonNamespace() + ":calorite_plates"));
+    public static final TagKey<Item> DESH_PLATES = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(getCommonNamespace() + ":desh_plates"));
+    public static final TagKey<Item> OSTRUM_PLATES = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(getCommonNamespace() + ":ostrum_plates"));
+    public static final TagKey<Item> STEEL_PLATES = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(getCommonNamespace() + ":steel_plates"));
+    public static final TagKey<Item> DESH_INGOTS = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(getCommonNamespace() + ":desh_ingots"));
+    public static final TagKey<Item> DESH_NUGGETS = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(getCommonNamespace() + ":desh_nuggets"));
+    public static final TagKey<Item> IRON_PLATES = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(getCommonNamespace() + ":iron_plates"));
+    public static final TagKey<Item> IRON_RODS = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(getCommonNamespace() + ":iron_rods"));
+    public static final TagKey<Item> OSTRUM_INGOTS = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(getCommonNamespace() + ":ostrum_ingots"));
+    public static final TagKey<Item> OSTRUM_NUGGETS = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(getCommonNamespace() + ":ostrum_nuggets"));
+    public static final TagKey<Item> RAW_CALORITE_ORES = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(getCommonNamespace() + ":raw_calorite_ores"));
+    public static final TagKey<Item> RAW_DESH_ORES = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(getCommonNamespace() + ":raw_desh_ores"));
+    public static final TagKey<Item> RAW_OSTRUM_ORES = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(getCommonNamespace() + ":raw_ostrum_ores"));
+    public static final TagKey<Item> STEEL_INGOTS = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(getCommonNamespace() + ":steel_ingots"));
+    public static final TagKey<Item> STEEL_NUGGETS = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(getCommonNamespace() + ":steel_nuggets"));
 
-    public static final TagKey<Item> STEEL_BLOCKS = TagKey.of(Registry.ITEM_KEY, new Identifier(getCommonNamespace() + ":steel_blocks"));
-    public static final TagKey<Item> DESH_BLOCKS = TagKey.of(Registry.ITEM_KEY, new Identifier(getCommonNamespace() + ":desh_blocks"));
-    public static final TagKey<Item> OSTRUM_BLOCKS = TagKey.of(Registry.ITEM_KEY, new Identifier(getCommonNamespace() + ":ostrum_blocks"));
-    public static final TagKey<Item> CALORITE_BLOCKS = TagKey.of(Registry.ITEM_KEY, new Identifier(getCommonNamespace() + ":calorite_blocks"));
+    public static final TagKey<Item> STEEL_BLOCKS = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(getCommonNamespace() + ":steel_blocks"));
+    public static final TagKey<Item> DESH_BLOCKS = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(getCommonNamespace() + ":desh_blocks"));
+    public static final TagKey<Item> OSTRUM_BLOCKS = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(getCommonNamespace() + ":ostrum_blocks"));
+    public static final TagKey<Item> CALORITE_BLOCKS = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(getCommonNamespace() + ":calorite_blocks"));
 
     private static String getCommonNamespace() {
         return ArchitecturyTarget.getCurrentTarget().equals("fabric") ? "c" : "forge";

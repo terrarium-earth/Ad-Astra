@@ -6,11 +6,11 @@ import earth.terrarium.ad_astra.entities.systems.EntityTemperatureSystem;
 import earth.terrarium.ad_astra.entities.vehicles.VehicleEntity;
 import earth.terrarium.ad_astra.registry.ModTags;
 import earth.terrarium.ad_astra.util.ModUtils;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.world.World;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
 
-    @Inject(method = "handleFallDamage", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "causeFallDamage", at = @At("HEAD"), cancellable = true)
     public void adastra_handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource, CallbackInfoReturnable<Boolean> ci) {
 
         LivingEntity entity = ((LivingEntity) (Object) this);
@@ -31,12 +31,12 @@ public abstract class LivingEntityMixin {
             }
         }
 
-        if (fallDistance <= 3 / ModUtils.getPlanetGravity(entity.world)) {
+        if (fallDistance <= 3 / ModUtils.getPlanetGravity(entity.level)) {
             ci.setReturnValue(false);
         }
     }
 
-    @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "hurt", at = @At("HEAD"), cancellable = true)
     public void adastra_damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> ci) {
         LivingEntity entity = ((LivingEntity) (Object) this);
 
@@ -53,21 +53,21 @@ public abstract class LivingEntityMixin {
     public void adastra_tick(CallbackInfo ci) {
 
         LivingEntity entity = ((LivingEntity) (Object) this);
-        World world = entity.world;
-        if (!world.isClient) {
-            if (world.getTime() % 10 == 0) {
-                if (entity instanceof PlayerEntity player && (player.isCreative() || player.isSpectator())) {
+        Level level = entity.level;
+        if (!level.isClientSide) {
+            if (level.getGameTime() % 10 == 0) {
+                if (entity instanceof Player player && (player.isCreative() || player.isSpectator())) {
                     return;
                 }
 
-                EntityOxygenSystem.oxygenTick(entity, (ServerWorld) world);
+                EntityOxygenSystem.oxygenTick(entity, (ServerLevel) level);
 
-                if (!ModUtils.isSpaceWorld(world)) {
+                if (!ModUtils.isSpacelevel(level)) {
                     return;
                 }
 
-                EntityTemperatureSystem.temperatureTick(entity, (ServerWorld) world);
-                EntityAcidRainSystem.acidRainTick(entity, (ServerWorld) world);
+                EntityTemperatureSystem.temperatureTick(entity, (ServerLevel) level);
+                EntityAcidRainSystem.acidRainTick(entity, (ServerLevel) level);
             }
         }
     }
