@@ -353,6 +353,7 @@ public abstract class VehicleEntity extends Entity implements Updatable {
         if (this.getInventorySize() > 1 && !this.getInventory().getItem(0).isEmpty()) {
             if (!this.level.isClientSide) {
                 FluidUtils.insertItemFluidToTank(this.tank, this.getInventory(), 0, 1, 0, f -> f.is(ModTags.FUELS));
+                FluidUtils.extractTankFluidToItem(this.tank, this.getInventory(), 0, 1, 0, f -> true);
             }
         }
     }
