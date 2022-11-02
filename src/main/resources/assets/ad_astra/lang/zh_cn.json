@@ -1,0 +1,930 @@
+{	
+	"advancements.ad_astra.ad_astra.title"      : "Ad Astra",
+	"advancements.ad_astra.ad_astra.description": "§b建造一个NASA工作台，开启你的星际探索之旅！",
+
+	"advancements.ad_astra.astro_cuisine.title"      : "§b转基因食品",
+	"advancements.ad_astra.astro_cuisine.description": "§b将生食物扔到近地轨道的太空中，使其煮熟。",
+	
+	"advancements.ad_astra.challenger.title"      : "挑战者",
+	"advancements.ad_astra.challenger.description": "§b收集所有星球仪",
+	
+	"advancements.ad_astra.glacio_dungeon.title"      : "海底两万里",
+	"advancements.ad_astra.glacio_dungeon.description": "§b找到一个坚冰要塞",
+	
+	"advancements.ad_astra.interstellar.title"      : "星际穿越",
+	"advancements.ad_astra.interstellar.description": "§b进入一个全新的星系",
+	
+	"advancements.ad_astra.jet_suit.title"      : "正式升级！",
+	"advancements.ad_astra.jet_suit.description": "§b穿上喷气式宇航服，体验超乎想象的飞行能力！",
+	
+	"advancements.ad_astra.mars.title"      : "红色星球",
+	"advancements.ad_astra.mars.description": "§b登陆火星",
+	
+	"advancements.ad_astra.mars_dungeon.title"      : "尘封遗迹",
+	"advancements.ad_astra.mars_dungeon.description": "§b找到一个深红要塞",
+	
+	"advancements.ad_astra.mercury.title"      : "晒得挺黑",
+	"advancements.ad_astra.mercury.description": "§b登陆水星",
+	
+	"advancements.ad_astra.mercury_dungeon.title"      : "回到未来",
+	"advancements.ad_astra.mercury_dungeon.description": "§b找到一个旱海要塞",
+	
+	"advancements.ad_astra.moon.title"      : "一小步",
+	"advancements.ad_astra.moon.description": "§b登陆月球",
+	
+	"advancements.ad_astra.moon_dungeon.title"      : "深埋的秘密",
+	"advancements.ad_astra.moon_dungeon.description": "§b找到一个月球要塞",
+	
+	"advancements.ad_astra.netherite_space_suit.title"      : "打败高温",
+	"advancements.ad_astra.netherite_space_suit.description": "§b穿上太空合金宇航服，在最酷热的地方行动！",
+
+	"advancements.ad_astra.rocket_destroyed.title"      : "§b追上旅行者一号...了吗...",
+	"advancements.ad_astra.rocket_destroyed.description": "§b发射一枚没有宇航员的火箭，使其在近地轨道爆炸。",
+
+	"advancements.ad_astra.space_suit.title"      : "宇航员",
+	"advancements.ad_astra.space_suit.description": "§b穿上宇航服！",
+
+	"advancements.ad_astra.tier_1_rocket.title"      : "卑微开端",
+	"advancements.ad_astra.tier_1_rocket.description": "§b建造一枚初级火箭",
+
+	"advancements.ad_astra.tier_2_rocket.title"      : "向着红色星球",
+	"advancements.ad_astra.tier_2_rocket.description": "§b建造一枚二级火箭",
+
+	"advancements.ad_astra.tier_3_rocket.title"      : "面对危机",
+	"advancements.ad_astra.tier_3_rocket.description": "§b建造一枚三级火箭",
+
+	"advancements.ad_astra.tier_4_rocket.title"      : "太空即为极限",
+	"advancements.ad_astra.tier_4_rocket.description": "§b建造一枚四级火箭",
+
+	"advancements.ad_astra.venus.title"      : "地狱咫尺",
+	"advancements.ad_astra.venus.description": "§b登陆金星",
+
+	"advancements.ad_astra.venus_dungeon.title"      : "撒旦的宝藏",
+	"advancements.ad_astra.venus_dungeon.description": "§b找到一个锃金要塞",
+
+
+
+	"biome.ad_astra.glacio_ice_peaks"      : "霜原冰脊",
+	"biome.ad_astra.glacio_snowy_barrens"  : "霜原雪层",
+	"biome.ad_astra.infernal_venus_barrens": "焰金荒原",
+	"biome.ad_astra.martian_wastelands"    : "深红荒原",
+	"biome.ad_astra.martian_polar_caps"    : "火星冰盖",
+	"biome.ad_astra.martian_canyon_creek"  : "深红峡港",
+	"biome.ad_astra.mercury_deltas"        : "旱海三角洲",
+	"biome.ad_astra.lunar_wastelands"      : "月球荒地",
+	"biome.ad_astra.orbit"                 : "近地轨道",
+	"biome.ad_astra.venus_wastelands"      : "锃金荒地",
+
+
+
+	"block.ad_astra.aeronos_cap"       : "空果伞盖",
+	"block.ad_astra.aeronos_chest"     : "空果木箱子",
+	"block.ad_astra.aeronos_door"      : "空果木门",
+	"block.ad_astra.aeronos_fence"     : "空果木栅栏",
+	"block.ad_astra.aeronos_fence_gate": "空果木栅栏门",
+	"block.ad_astra.aeronos_ladder"    : "空果木梯子",
+	"block.ad_astra.aeronos_mushroom"  : "空果",
+	"block.ad_astra.aeronos_planks"    : "空果木板",
+	"block.ad_astra.aeronos_slab"      : "空果木台阶",
+	"block.ad_astra.aeronos_stairs"    : "空果木楼梯",
+	"block.ad_astra.aeronos_stem"      : "空果柄",
+	"block.ad_astra.aeronos_trapdoor"  : "空果木活板门",
+
+	"block.ad_astra.airlock": "气密舱门",
+
+	"block.ad_astra.calorite_block"                 : "耐热合金块",
+	"block.ad_astra.calorite_pillar"                : "耐热合金柱",
+	"block.ad_astra.calorite_plating"               : "耐热合金板材",
+	"block.ad_astra.calorite_plating_button"        : "耐热合金板材按钮",
+	"block.ad_astra.calorite_plating_pressure_plate": "耐热合金板材压力板",
+	"block.ad_astra.calorite_plating_slab"          : "耐热合金板材台阶",
+	"block.ad_astra.calorite_plating_stairs"        : "耐热合金板材楼梯",
+	"block.ad_astra.calorite_sliding_door": "耐热合金重型舱门",
+
+	"block.ad_astra.cheese_block": "奶酪",
+
+	"block.ad_astra.chiseled_glacio_stone_bricks": "錾制坚冰石砖",
+	"block.ad_astra.chiseled_glacio_stone_slab"  : "錾制坚冰石台阶",
+	"block.ad_astra.chiseled_glacio_stone_stairs": "錾制坚冰石楼梯",
+
+	"block.ad_astra.chiseled_mars_stone_bricks": "錾制深红石砖",
+	"block.ad_astra.chiseled_mars_stone_slab"  : "錾制深红石台阶",
+	"block.ad_astra.chiseled_mars_stone_stairs": "錾制深红石楼梯",
+
+	"block.ad_astra.chiseled_mercury_stone_bricks": "錾制旱海石砖",
+	"block.ad_astra.chiseled_mercury_stone_slab"  : "錾制旱海石台阶",
+	"block.ad_astra.chiseled_mercury_stone_stairs": "錾制旱海石楼梯",
+
+	"block.ad_astra.chiseled_moon_stone_bricks": "錾制月岩砖",
+	"block.ad_astra.chiseled_moon_stone_slab"  : "錾制月岩台阶",
+	"block.ad_astra.chiseled_moon_stone_stairs": "錾制月岩楼梯",
+	
+	"block.ad_astra.chiseled_permafrost_brick_slab"  : "錾制冻土砖台阶",
+	"block.ad_astra.chiseled_permafrost_brick_stairs": "錾制冻土砖楼梯",
+	"block.ad_astra.chiseled_permafrost_brick_wall"  : "錾制冻土砖墙",
+	"block.ad_astra.chiseled_permafrost_bricks"      : "錾制冻土砖",
+
+	"block.ad_astra.chiseled_venus_stone_bricks": "錾制锃金砖",
+	"block.ad_astra.chiseled_venus_stone_slab"  : "錾制锃金台阶",
+	"block.ad_astra.chiseled_venus_stone_stairs": "錾制锃金楼梯",
+
+	"block.ad_astra.coal_generator": "火力发电机",
+	"block.ad_astra.compressor"    : "压缩机",
+	"block.ad_astra.conglomerate"  : "砾岩",
+
+	"block.ad_astra.cracked_glacio_stone_bricks"   : "裂纹坚冰石砖",
+	"block.ad_astra.cracked_mars_stone_bricks"     : "裂纹深红石砖",
+	"block.ad_astra.cracked_mercury_stone_bricks"  : "裂纹旱海石砖",
+	"block.ad_astra.cracked_moon_stone_bricks"     : "裂纹月岩砖",
+	"block.ad_astra.cracked_permafrost_bricks"     : "裂纹冻土砖",
+	"block.ad_astra.cracked_venus_sandstone_bricks": "裂纹锃金砂岩砖",
+	"block.ad_astra.cracked_venus_stone_bricks"    : "裂纹锃金石砖",
+	"block.ad_astra.cryo_freezer"                  : "深低温冷冻器",
+	"block.ad_astra.cryo_fuel"                     : "深低温燃油",
+
+	"block.ad_astra.deepslate_calorite_ore" : "深层耐热金属矿石",
+	"block.ad_astra.deepslate_desh_ore"     : "深层戴斯矿石",
+	"block.ad_astra.deepslate_ice_shard_ore": "深层冰晶矿石",
+	"block.ad_astra.deepslate_ostrum_ore"   : "深层紫金矿石",
+
+	"block.ad_astra.desh_block"                 : "戴斯块",
+	"block.ad_astra.desh_cable"                 : "戴斯线缆",
+	"block.ad_astra.desh_fluid_pipe"            : "戴斯流体管道",
+	"block.ad_astra.desh_pillar"                : "戴斯柱",
+	"block.ad_astra.desh_plating"               : "戴斯板材",
+	"block.ad_astra.desh_plating_button"        : "戴斯板材按钮",
+	"block.ad_astra.desh_plating_pressure_plate": "戴斯板材压力板",
+	"block.ad_astra.desh_plating_slab"          : "戴斯板材台阶",
+	"block.ad_astra.desh_plating_stairs"        : "戴斯板材楼梯",
+	"block.ad_astra.desh_plating_wall"          : "戴斯板材墙",
+	"block.ad_astra.desh_sliding_door"          : "戴斯重型舱门",
+
+	"block.ad_astra.earth_globe": "地球仪",
+
+	"block.ad_astra.energizer": "能源站",
+
+	"block.ad_astra.extinguished_lantern": "熄灭的灯笼",
+	"block.ad_astra.extinguished_torch"  : "熄灭的火把",
+
+	"block.ad_astra.white_flag"     : "浅色基地旗帜",
+	"block.ad_astra.blue_flag"      : "蓝色基地旗帜",
+	"block.ad_astra.brown_flag"     : "棕色基地旗帜",
+	"block.ad_astra.cyan_flag"      : "青色基地旗帜",
+	"block.ad_astra.gray_flag"      : "深色基地旗帜",
+	"block.ad_astra.green_flag"     : "绿色基地旗帜",
+	"block.ad_astra.light_blue_flag": "浅蓝色基地旗帜",
+	"block.ad_astra.lime_flag"      : "黄绿色基地旗帜",
+	"block.ad_astra.magenta_flag"   : "品红色基地旗帜",
+	"block.ad_astra.orange_flag"    : "橙色基地旗帜",
+	"block.ad_astra.pink_flag"      : "粉色基地旗帜",
+	"block.ad_astra.purple_flag"    : "紫色基地旗帜",
+	"block.ad_astra.red_flag"       : "红色基地旗帜",
+	"block.ad_astra.yellow_flag"    : "黄色基地旗帜",
+	"block.ad_astra.light_gray_flag": "浅灰色基地旗帜",
+	"block.ad_astra.black_flag"     : "深色基地旗帜",
+
+	"block.ad_astra.fuel"         : "燃油",
+	"block.ad_astra.fuel_refinery": "燃油精炼厂",
+
+	"block.ad_astra.glacian_button"        : "融冰木按钮",
+	"block.ad_astra.glacian_door"          : "融冰木门",
+	"block.ad_astra.glacian_fence"         : "融冰木栅栏",
+	"block.ad_astra.glacian_fence_gate"    : "融冰木栅栏门",
+	"block.ad_astra.glacian_fur"           : "融冰仿生羊毛毯",
+	"block.ad_astra.glacian_leaves"        : "融冰树叶",
+	"block.ad_astra.glacian_log"           : "融冰原木",
+	"block.ad_astra.glacian_planks"        : "融冰木板",
+	"block.ad_astra.glacian_pressure_plate": "融冰木压力板",
+	"block.ad_astra.glacian_sign"          : "融冰木告示牌",
+	"block.ad_astra.glacian_slab"          : "融冰木台阶",
+	"block.ad_astra.glacian_stairs"        : "融冰木楼梯",
+	"block.ad_astra.glacian_trapdoor"      : "融冰木活板门",
+	"block.ad_astra.glacian_wall_sign"     : "融冰木告示牌",
+
+	"block.ad_astra.glacio_coal_ore"          : "坚冰煤矿石",
+	"block.ad_astra.glacio_cobblestone"       : "坚冰圆石",
+	"block.ad_astra.glacio_cobblestone_slab"  : "坚冰圆石台阶",
+	"block.ad_astra.glacio_cobblestone_stairs": "坚冰圆石楼梯",
+	"block.ad_astra.glacio_copper_ore"        : "坚冰铜矿石",
+	"block.ad_astra.glacio_globe"             : "霜原星仪",
+	"block.ad_astra.glacio_ice_shard_ore"     : "坚冰冰晶矿石",
+	"block.ad_astra.glacio_iron_ore"          : "坚冰铁矿石",
+	"block.ad_astra.glacio_lapis_ore"         : "坚冰青金石矿石",
+	"block.ad_astra.glacio_pillar"            : "坚冰装饰柱",
+	"block.ad_astra.glacio_stone"             : "坚冰岩",
+	"block.ad_astra.glacio_stone_brick_slab"  : "坚冰石砖台阶",
+	"block.ad_astra.glacio_stone_brick_stairs": "坚冰石砖楼梯",
+	"block.ad_astra.glacio_stone_brick_wall"  : "坚冰石砖墙",
+	"block.ad_astra.glacio_stone_bricks"      : "坚冰石砖",
+	"block.ad_astra.glacio_stone_slab"        : "坚冰岩台阶",
+	"block.ad_astra.glacio_stone_stairs"      : "坚冰岩楼梯",
+
+	"block.ad_astra.glowing_calorite_pillar": "上漆耐热金属柱",
+	"block.ad_astra.glowing_desh_pillar"    : "上漆戴斯柱",
+	"block.ad_astra.glowing_iron_pillar"    : "上漆铁柱",
+	"block.ad_astra.glowing_ostrum_pillar"  : "上漆紫金柱",
+	"block.ad_astra.glowing_steel_pillar"   : "上漆钢柱",
+
+	"block.ad_astra.infernal_spire_block": "烈焰脊刺",
+
+	"block.ad_astra.iron_pillar"                : "铁柱",
+	"block.ad_astra.iron_plating"               : "铁板材",
+	"block.ad_astra.iron_plating_button"        : "铁板材按钮",
+	"block.ad_astra.iron_plating_pressure_plate": "铁板材压力板",
+	"block.ad_astra.iron_plating_slab"          : "铁板材台阶",
+	"block.ad_astra.iron_plating_stairs"        : "铁板材楼梯",
+	"block.ad_astra.iron_sliding_door"          : "铁制重型舱门",
+
+	"block.ad_astra.launch_pad": "火箭发射基座",
+
+	"block.ad_astra.marked_iron_pillar": "铁警示柱",
+
+	"block.ad_astra.mars_cobblestone"       : "深红圆石",
+	"block.ad_astra.mars_cobblestone_slab"  : "深红圆石台阶",
+	"block.ad_astra.mars_cobblestone_stairs": "深红圆石楼梯",
+	"block.ad_astra.mars_diamond_ore"       : "深红钻石矿石",
+	"block.ad_astra.mars_globe"             : "火星仪",
+	"block.ad_astra.mars_ice_shard_ore"     : "火星冰晶矿石",
+	"block.ad_astra.mars_iron_ore"          : "深红铁矿石",
+	"block.ad_astra.mars_ostrum_ore"        : "深红紫金矿石",
+	"block.ad_astra.mars_pillar"            : "深红装饰柱",
+	"block.ad_astra.mars_sand"              : "深红沙",
+	"block.ad_astra.mars_stone"             : "深红岩",
+	"block.ad_astra.mars_stone_brick_slab"  : "深红石砖台阶",
+	"block.ad_astra.mars_stone_brick_stairs": "深红石砖楼梯",
+	"block.ad_astra.mars_stone_brick_wall"  : "深红石砖墙",
+	"block.ad_astra.mars_stone_bricks"      : "深红石砖",
+	"block.ad_astra.mars_stone_slab"        : "深红岩台阶",
+	"block.ad_astra.mars_stone_stairs"      : "深红岩楼梯",
+
+	"block.ad_astra.mercury_cobblestone"       : "旱海圆石",
+	"block.ad_astra.mercury_cobblestone_slab"  : "旱海圆石台阶",
+	"block.ad_astra.mercury_cobblestone_stairs": "旱海圆石楼梯",
+	"block.ad_astra.mercury_globe"             : "水星仪",
+	"block.ad_astra.mercury_iron_ore"          : "旱海铁矿石",
+	"block.ad_astra.mercury_pillar"            : "旱海装饰柱",
+	"block.ad_astra.mercury_stone"             : "旱海岩",
+	"block.ad_astra.mercury_stone_brick_slab"  : "旱海石砖台阶",
+	"block.ad_astra.mercury_stone_brick_stairs": "旱海石砖楼梯",
+	"block.ad_astra.mercury_stone_brick_wall"  : "旱海石砖墙",
+	"block.ad_astra.mercury_stone_bricks"      : "旱海石砖",
+	"block.ad_astra.mercury_stone_slab"        : "旱海岩台阶",
+	"block.ad_astra.mercury_stone_stairs"      : "旱海岩楼梯",
+
+	"block.ad_astra.molten_calorite_fluid": "熔融耐热金属",
+	"block.ad_astra.molten_desh_fluid"    : "熔融戴斯",
+	"block.ad_astra.molten_ostrum_fluid"  : "熔融紫金",
+
+	"block.ad_astra.moon_cheese_ore"        : "月岩层奶酪矿石",
+	"block.ad_astra.moon_cobblestone"       : "月岩层圆石",
+	"block.ad_astra.moon_cobblestone_slab"  : "月岩层圆石台阶",
+	"block.ad_astra.moon_cobblestone_stairs": "月岩层圆石楼梯",
+	"block.ad_astra.moon_desh_ore"          : "月岩层戴斯矿石",
+	"block.ad_astra.moon_globe"             : "月球仪",
+	"block.ad_astra.moon_ice_shard_ore"     : "月岩层冰晶矿石",
+	"block.ad_astra.moon_iron_ore"          : "月岩层铁矿石",
+	"block.ad_astra.moon_pillar"            : "月岩装饰柱",
+	"block.ad_astra.moon_sand"              : "月壤",
+	"block.ad_astra.moon_stone"             : "月岩",
+	"block.ad_astra.moon_stone_brick_slab"  : "月岩砖台阶",
+	"block.ad_astra.moon_stone_brick_stairs": "月岩砖楼梯",
+	"block.ad_astra.moon_stone_brick_wall"  : "月岩砖墙",
+	"block.ad_astra.moon_stone_bricks"      : "月岩砖",
+	"block.ad_astra.moon_stone_slab"        : "月岩台阶",
+	"block.ad_astra.moon_stone_stairs"      : "月岩楼梯",
+
+	"block.ad_astra.nasa_workbench": "NASA工程装配台",
+
+	"block.ad_astra.oil": "原油",
+
+	"block.ad_astra.ostrum_block"                 : "紫金块",
+	"block.ad_astra.ostrum_fluid_pipe"            : "紫金流体管道",
+	"block.ad_astra.ostrum_pillar"                : "紫金装饰柱",
+	"block.ad_astra.ostrum_plating"               : "紫金板材",
+	"block.ad_astra.ostrum_plating_button"        : "紫金板材按钮",
+	"block.ad_astra.ostrum_plating_pressure_plate": "紫金板材压力板",
+	"block.ad_astra.ostrum_plating_slab"          : "紫金板材台阶",
+	"block.ad_astra.ostrum_plating_stairs"        : "紫金板材楼梯",
+	"block.ad_astra.ostrum_sliding_door"          : "紫金重型舱门",
+
+	"block.ad_astra.oxygen"            : "氧气",
+	"block.ad_astra.oxygen_distributor": "供氧仪",
+	"block.ad_astra.oxygen_loader"     : "氧气装载器",
+	"block.ad_astra.oxygen_sensor"     : "氧气检测仪",
+
+	"block.ad_astra.permafrost"             : "冻土",
+	"block.ad_astra.permafrost_brick_slab"  : "冻土石砖台阶",
+	"block.ad_astra.permafrost_brick_stairs": "冻土石砖楼梯",
+	"block.ad_astra.permafrost_brick_wall"  : "冻土石砖墙",
+	"block.ad_astra.permafrost_bricks"      : "冻土石砖",
+	"block.ad_astra.permafrost_pillar"      : "冻土装饰柱",
+	"block.ad_astra.permafrost_tiles"       : "冻土地砖",
+
+	"block.ad_astra.polished_conglomerate"        : "磨制砾岩",
+	"block.ad_astra.polished_glacio_stone"        : "磨制坚冰岩",
+	"block.ad_astra.polished_glacio_stone_slab"   : "磨制坚冰岩台阶",
+	"block.ad_astra.polished_glacio_stone_stairs" : "磨制坚冰岩楼梯",
+	"block.ad_astra.polished_mars_stone"          : "磨制深红岩",
+	"block.ad_astra.polished_mars_stone_slab"     : "磨制深红岩台阶",
+	"block.ad_astra.polished_mars_stone_stairs"   : "磨制深红岩楼梯",
+	"block.ad_astra.polished_mercury_stone"       : "磨制旱海岩",
+	"block.ad_astra.polished_mercury_stone_slab"  : "磨制旱海岩台阶",
+	"block.ad_astra.polished_mercury_stone_stairs": "磨制旱海岩楼梯",
+	"block.ad_astra.polished_moon_stone"          : "磨制月岩",
+	"block.ad_astra.polished_moon_stone_slab"     : "磨制月岩台阶",
+	"block.ad_astra.polished_moon_stone_stairs"   : "磨制月岩楼梯",
+	"block.ad_astra.polished_permafrost"          : "磨制冻土",
+	"block.ad_astra.polished_permafrost_slab"     : "磨制冻土石砖台阶",
+	"block.ad_astra.polished_permafrost_stairs"   : "磨制冻土石砖楼梯",
+	"block.ad_astra.polished_venus_stone"         : "磨制锃金岩",
+	"block.ad_astra.polished_venus_stone_slab"    : "磨制锃金岩台阶",
+	"block.ad_astra.polished_venus_stone_stairs"  : "磨制锃金岩楼梯",
+
+	"block.ad_astra.raw_calorite_block": "粗耐热金属块",
+	"block.ad_astra.raw_desh_block"    : "粗戴斯块",
+	"block.ad_astra.raw_ostrum_block"  : "粗紫金块",
+
+	"block.ad_astra.reinforced_door": "重型舱门",
+
+	"block.ad_astra.sky_stone": "陨石",
+
+	"block.ad_astra.solar_panel": "太阳能板",
+
+	"block.ad_astra.steel_block"                 : "钢块",
+	"block.ad_astra.steel_cable"                 : "钢线缆",
+	"block.ad_astra.steel_door"                  : "钢门",
+	"block.ad_astra.steel_pillar"                : "钢柱",
+	"block.ad_astra.steel_plating"               : "钢板材",
+	"block.ad_astra.steel_plating_button"        : "钢板材按钮",
+	"block.ad_astra.steel_plating_pressure_plate": "钢板材压力板",
+	"block.ad_astra.steel_plating_slab"          : "钢板材台阶",
+	"block.ad_astra.steel_plating_stairs"        : "钢板材楼梯",
+	"block.ad_astra.steel_sliding_door"          : "钢制重型舱门",
+	"block.ad_astra.steel_trapdoor"              : "钢活板门",
+
+	"block.ad_astra.stripped_glacian_log": "去皮融冰原木",
+
+	"block.ad_astra.strophar_cap"       : "孑节伞盖",
+	"block.ad_astra.strophar_chest"     : "孑节木箱子",
+	"block.ad_astra.strophar_door"      : "孑节木门",
+	"block.ad_astra.strophar_fence"     : "孑节木栅栏",
+	"block.ad_astra.strophar_fence_gate": "孑节木栅栏门",
+	"block.ad_astra.strophar_ladder"    : "孑节木梯子",
+	"block.ad_astra.strophar_mushroom"  : "孑节",
+	"block.ad_astra.strophar_planks"    : "孑节木板",
+	"block.ad_astra.strophar_slab"      : "孑节木台阶",
+	"block.ad_astra.strophar_stairs"    : "孑节木楼梯",
+	"block.ad_astra.strophar_stem"      : "孑节柄",
+	"block.ad_astra.strophar_trapdoor"  : "孑节木活板门",
+
+	"block.ad_astra.venus_calorite_ore"          : "锃金耐热金属矿石",
+	"block.ad_astra.venus_coal_ore"              : "锃金煤矿石",
+	"block.ad_astra.venus_cobblestone"           : "锃金圆石",
+	"block.ad_astra.venus_cobblestone_slab"      : "锃金圆石台阶",
+	"block.ad_astra.venus_cobblestone_stairs"    : "锃金圆石楼梯",
+	"block.ad_astra.venus_diamond_ore"           : "锃金钻石矿石",
+	"block.ad_astra.venus_globe"                 : "金星仪",
+	"block.ad_astra.venus_gold_ore"              : "锃金金矿石",
+	"block.ad_astra.venus_pillar"                : "锃金装饰柱",
+	"block.ad_astra.venus_sand"                  : "锃金沙",
+	"block.ad_astra.venus_sandstone"             : "锃金圆石",
+	"block.ad_astra.venus_sandstone_brick_slab"  : "锃金砂岩砖台阶",
+	"block.ad_astra.venus_sandstone_brick_stairs": "锃金砂岩砖楼梯",
+	"block.ad_astra.venus_sandstone_bricks"      : "锃金砂岩砖",
+	"block.ad_astra.venus_stone"                 : "锃金岩",
+	"block.ad_astra.venus_stone_brick_slab"      : "锃金石砖台阶",
+	"block.ad_astra.venus_stone_brick_stairs"    : "锃金石砖楼梯",
+	"block.ad_astra.venus_stone_brick_wall"      : "锃金石砖墙",
+	"block.ad_astra.venus_stone_bricks"          : "锃金石砖",
+	"block.ad_astra.venus_stone_slab"            : "锃金岩台阶",
+	"block.ad_astra.venus_stone_stairs"          : "锃金岩楼梯",
+
+	"block.ad_astra.wall_extinguished_torch": "熄灭的火把",
+
+	"block.ad_astra.water_pump": "水泵",
+
+
+
+	"death.attack.acid_rain"           : "%1$s被酸死了",
+	"death.attack.cryo_fuel"           : "%1$s冻成了冰",
+	"death.attack.oxygen"              : "%1$s再也无法呼吸",
+	"death.attack.oxygen.player"       : "%1$s再也无法呼吸",
+	"death.attack.rocket_flames"       : "%1$s成为了火箭引擎的燃料",
+	"death.attack.rocket_flames.player": "%1$s成为了火箭引擎的燃料",
+
+
+
+	"emi.category.ad_astra.coal_generator"         : "火力发电机",
+	"emi.category.ad_astra.compressor"             : "压缩机",
+	"emi.category.ad_astra.cryo_freezer_conversion": "深低温冷冻转换",
+	"emi.category.ad_astra.fuel_conversion"        : "燃油转换",
+	"emi.category.ad_astra.nasa_workbench"         : "NASA工程装配台",
+	"emi.category.ad_astra.oxygen_conversion"      : "氧气转换",
+	"emi.category.ad_astra.space_station"          : "太空站",
+
+
+
+	"entity.ad_astra.corrupted_lunarian": "堕落的月球原住民",
+	"entity.ad_astra.glacian_ram"       : "融冰仿生羊",
+	"entity.ad_astra.ice_spit"          : "冰刺",
+
+	"entity.ad_astra.lander": "着陆舱",
+
+	"entity.ad_astra.lunarian"                 : "月球原住民",
+	"entity.ad_astra.lunarian.armorer"         : "月球盔甲匠",
+	"entity.ad_astra.lunarian.butcher"         : "月球屠夫",
+	"entity.ad_astra.lunarian.cartographer"    : "月球制图师",
+	"entity.ad_astra.lunarian.cleric"          : "月球牧师",
+	"entity.ad_astra.lunarian.farmer"          : "月球农民",
+	"entity.ad_astra.lunarian.fisherman"       : "月球渔夫",
+	"entity.ad_astra.lunarian.fletcher"        : "月球制箭师",
+	"entity.ad_astra.lunarian.leatherworker"   : "月球皮匠",
+	"entity.ad_astra.lunarian.librarian"       : "月球图书管理员",
+	"entity.ad_astra.lunarian.mason"           : "月球石匠",
+	"entity.ad_astra.lunarian.none"            : "月球原住民",
+	"entity.ad_astra.lunarian.shepherd"        : "月球牧羊人",
+	"entity.ad_astra.lunarian.toolsmith"       : "月球工具匠",
+	"entity.ad_astra.lunarian.weaponsmith"     : "月球武器匠",
+	"entity.ad_astra.lunarian_wandering_trader": "月球流浪商人",
+
+	"entity.ad_astra.martian_raptor": "深红掠食者",
+	"entity.ad_astra.mogler"        : "虬虫",
+	"entity.ad_astra.pygro"         : "犴豸",
+	"entity.ad_astra.pygro_brute"   : "犴豸蛮兵",
+
+	"entity.ad_astra.space_painting": "空间艺术画",
+	"entity.ad_astra.star_crawler"  : "沙虫幼虫",
+	"entity.ad_astra.sulfur_creeper": "硫力怕",
+
+	"entity.ad_astra.tier_1_rocket": "初级火箭",
+	"entity.ad_astra.tier_1_rover" : "星球车",
+	"entity.ad_astra.tier_2_rocket": "二级火箭",
+	"entity.ad_astra.tier_3_rocket": "三级火箭",
+	"entity.ad_astra.tier_4_rocket": "四级火箭",
+
+	"entity.ad_astra.zombified_mogler": "僵尸虬虫",
+	"entity.ad_astra.zombified_pygro" : "僵尸犴豸",
+
+
+
+	"fluid.ad_astra.cryo_fuel": "深低温燃油",
+	"fluid.ad_astra.fuel"     : "燃油",
+	"fluid.ad_astra.oil"      : "原油",
+	"fluid.ad_astra.oxygen"   : "氧气",
+
+
+
+	"gauge.ad_astra.burn_time": "燃烧时间：%s / %d",
+	"gauge.ad_astra.cook_time": "烹饪时间：%s / %d",
+	"gauge.ad_astra.cooktime" : "烹饪时间",
+	"gauge.ad_astra.energy"   : "能量",
+	"gauge.ad_astra.fluid"    : "流体",
+	"gauge.ad_astra.fuel"     : "燃油",
+	"gauge.ad_astra.oxygen"   : "氧气",
+
+	"gauge_text.ad_astra.blocked_warning[0]": "§4无法供应氧气！",
+	"gauge_text.ad_astra.blocked_warning[1]": "确保供氧仪上方无方块遮挡，并且",
+	"gauge_text.ad_astra.blocked_warning[2]": "有足够的氧气和能量供应。",
+
+	"gauge_text.ad_astra.energy_per_tick": "每刻 %s ⚡ 能量",
+	"gauge_text.ad_astra.fluid_per_tick" : "每刻 %s 🪣 流体",
+	"gauge_text.ad_astra.liquid_storage" : "%s 🪣 / %d 🪣 流体",
+	"gauge_text.ad_astra.max_generation" : "最大能量供应",
+
+	"gauge_text.ad_astra.oxygen_blocks"         : "供氧空间：",
+	"gauge_text.ad_astra.oxygen_leak_warning[0]": "§4氧气泄漏！",
+	"gauge_text.ad_astra.oxygen_leak_warning[1]": "§f这意味着供氧仪所在",
+	"gauge_text.ad_astra.oxygen_leak_warning[2]": "结构并未完全密闭，或",
+	"gauge_text.ad_astra.oxygen_leak_warning[3]": "密闭空间体积超过供氧",
+	"gauge_text.ad_astra.oxygen_leak_warning[4]": "仪处理上限。",
+
+	"gauge_text.ad_astra.storage": "§e%s ⚡ / %d ⚡ 能量",
+
+
+
+	"gui.ad_astra.text.back"    : "返回",
+	"gui.ad_astra.text.catalog" : "目录",
+	"gui.ad_astra.text.hide"    : "隐藏",
+	"gui.ad_astra.text.show"    : "显示",
+	"gui.ad_astra.text.category": "名称",
+	"gui.ad_astra.text.type"    : "类别",
+
+	"gui.ad_astra.text.name"       : "目标行星",
+	"gui.ad_astra.text.gravity"    : "重力",
+	"gui.ad_astra.text.no_gravity" : "微重力",
+	"gui.ad_astra.text.oxygen"     : "氧气",
+	"gui.ad_astra.text.temperature": "温度",
+	"gui.ad_astra.text.orbit"      : "近地轨道",
+
+	"gui.ad_astra.text.planet" : "行星",
+	"gui.ad_astra.text.mercury": "水星",
+	"gui.ad_astra.text.venus"  : "金星",
+	"gui.ad_astra.text.earth"  : "地球",
+	"gui.ad_astra.text.moon"   : "月球",
+	"gui.ad_astra.text.mars"   : "火星",
+	"gui.ad_astra.text.glacio" : "霜原星",
+
+	"gui.ad_astra.text.galaxy"          : "星系",
+	"gui.ad_astra.text.milky_way"       : "银河系",
+	"gui.ad_astra.text.solar_system"    : "太阳系",
+	"gui.ad_astra.text.proxima_centauri": "比邻星",
+
+	"gui.ad_astra.text.provided"        : "需要",
+	"gui.ad_astra.text.oxygen.true"     : "有",
+	"gui.ad_astra.text.oxygen.false"    : "无",
+	"gui.ad_astra.text.space_station"   : "空间站",
+	"gui.ad_astra.text.item_requirement": "需要材料",
+
+
+
+	"info.ad_astra.extract": "提取",
+	"info.ad_astra.insert" : "插入",
+	"info.ad_astra.none"   : "无",
+	"info.ad_astra.normal" : "正常",
+
+	"info.ad_astra.install_patchouli": "下载帕秋莉手册！",
+
+
+
+	"item.ad_astra.astrodux": "§9银河系漫游指南",
+
+	"item.ad_astra.calorite_engine": "耐热金属火箭引擎",
+	"item.ad_astra.calorite_ingot" : "耐热金属锭",
+	"item.ad_astra.calorite_nugget": "耐热金属粒",
+	"item.ad_astra.calorite_plate" : "耐热金属板",
+	"item.ad_astra.calorite_tank"  : "耐热金属燃料储罐",
+
+	"item.ad_astra.cheese": "奶酪",
+
+	"item.ad_astra.coal_generator.tooltip": "燃烧煤炭，产生能量。",
+
+	"item.ad_astra.compressor.tooltip": "将金属锭压缩成压缩板材。",
+
+	"item.ad_astra.corrupted_lunarian_spawn_egg": "堕落的月球原住民刷怪蛋",
+
+	"item.ad_astra.cryo_freezer.tooltip": "将冰晶转化为深低温燃油。",
+	"item.ad_astra.cryo_fuel_bucket"    : "深低温燃油桶",
+
+	"item.ad_astra.desh_engine": "戴斯火箭引擎",
+	"item.ad_astra.desh_ingot" : "戴斯锭",
+	"item.ad_astra.desh_nugget": "戴斯粒",
+	"item.ad_astra.desh_plate" : "戴斯板",
+	"item.ad_astra.desh_tank"  : "戴斯燃料储罐",
+
+	"item.ad_astra.empty_tank": "空",
+
+	"item.ad_astra.energizer.tooltip[0]": "存储大量的能量，并供给",
+	"item.ad_astra.energizer.tooltip[1]": "附近的机器运行。",
+
+	"item.ad_astra.engine_fan"  : "引擎涡轮",
+	"item.ad_astra.engine_frame": "引擎框架",
+
+	"item.ad_astra.fluid_transfer_rate.tooltip": "每刻转化 %s 🪣 流体",
+
+	"item.ad_astra.fuel_bucket"          : "燃油桶",
+	"item.ad_astra.fuel_refinery.tooltip": "将原油转化为燃油。",
+
+	"item.ad_astra.generator_energy.tooltip": "每刻产生 %s ⚡️ 能量",
+
+	"item.ad_astra.glacian_ram_spawn_egg": "融冰仿生羊刷怪蛋",
+
+	"item.ad_astra.hammer": "工程锤",
+
+	"item.ad_astra.ice_shard": "冰晶",
+
+	"item.ad_astra.iron_plate": "铁板",
+	"item.ad_astra.iron_rod"  : "铁棍",
+
+	"item.ad_astra.jet_suit"       : "喷气式宇航服",
+	"item.ad_astra.jet_suit_boots" : "喷气式重靴",
+	"item.ad_astra.jet_suit_helmet": "喷气式宇航盔",
+	"item.ad_astra.jet_suit_pants" : "喷气式宇航裤",
+
+	"item.ad_astra.lunarian_spawn_egg"                 : "月球原住民刷怪蛋",
+	"item.ad_astra.lunarian_wandering_trader_spawn_egg": "月球流浪商人刷怪蛋",
+
+	"item.ad_astra.martian_raptor_spawn_egg": "深红掠食者刷怪蛋",
+
+	"item.ad_astra.mogler_spawn_egg": "虬虫刷怪蛋",
+
+	"item.ad_astra.molten_calorite_bucket": "熔融耐热金属桶",
+	"item.ad_astra.molten_desh_bucket"    : "熔融戴斯桶",
+	"item.ad_astra.molten_ostrum_bucket"  : "熔融紫金桶",
+
+	"item.ad_astra.nasa_workbench.tooltip": "用来组装火箭的工程装配台。",
+
+	"item.ad_astra.netherite_space_boots" : "合金重靴",
+	"item.ad_astra.netherite_space_helmet": "合金宇航盔",
+	"item.ad_astra.netherite_space_pants" : "合金宇航裤",
+	"item.ad_astra.netherite_space_suit"  : "合金宇航服",
+
+	"item.ad_astra.oil_bucket": "原油桶",
+
+	"item.ad_astra.ostrum_engine": "紫金火箭引擎",
+	"item.ad_astra.ostrum_ingot" : "紫金锭",
+	"item.ad_astra.ostrum_nugget": "紫金粒",
+	"item.ad_astra.ostrum_plate" : "紫金板",
+	"item.ad_astra.ostrum_tank"  : "紫金燃料储罐",
+
+	"item.ad_astra.oxygen_bucket"                : "氧气桶",
+	"item.ad_astra.oxygen_distributor.tooltip[0]": "将氧气扩散进",
+	"item.ad_astra.oxygen_distributor.tooltip[1]": "环境大气中。",
+	"item.ad_astra.oxygen_gear"                  : "氧气处理器",
+	"item.ad_astra.oxygen_loader.tooltip[0]"     : "从水中提取氧气，并输入",
+	"item.ad_astra.oxygen_loader.tooltip[1]"     : "储罐或宇航服中。",
+	"item.ad_astra.oxygen_sensor.tooltip[0]"     : "当环境大气中的氧气被检",
+	"item.ad_astra.oxygen_sensor.tooltip[1]"     : "测到时，产生红石信号。",
+	"item.ad_astra.oxygen_tank"                  : "氧气储罐",
+
+	"item.ad_astra.pygro_brute_spawn_egg": "犴豸蛮兵刷怪蛋",
+	"item.ad_astra.pygro_spawn_egg"      : "犴豸刷怪蛋",
+
+	"item.ad_astra.raw_calorite"    : "粗耐热金属",
+	"item.ad_astra.raw_desh"        : "粗戴斯",
+	"item.ad_astra.raw_desh_block"  : "粗戴斯块",
+	"item.ad_astra.raw_ostrum"      : "粗紫金",
+	"item.ad_astra.raw_ostrum_block": "粗紫金块",
+
+	"item.ad_astra.rocket_fin"      : "火箭鳍片",
+	"item.ad_astra.rocket_nose_cone": "火箭头锥",
+
+	"item.ad_astra.solar_panel.tooltip[0]": "当直接暴露在阳光下",
+	"item.ad_astra.solar_panel.tooltip[1]": "时，不断产生能量。",
+
+	"item.ad_astra.space_boots"   : "宇航重靴",
+	"item.ad_astra.space_helmet"  : "宇航盔",
+	"item.ad_astra.space_painting": "空间艺术画",
+	"item.ad_astra.space_pants"   : "宇航裤",
+	"item.ad_astra.space_suit"    : "宇航服",
+
+	"item.ad_astra.star_crawler_spawn_egg": "沙虫幼虫刷怪蛋",
+
+	"item.ad_astra.steel_engine": "钢火箭引擎",
+	"item.ad_astra.steel_ingot" : "钢锭",
+	"item.ad_astra.steel_nugget": "钢粒",
+	"item.ad_astra.steel_plate" : "钢板",
+	"item.ad_astra.steel_tank"  : "钢燃料储罐",
+
+	"item.ad_astra.sulfur_creeper_spawn_egg": "硫力怕刷怪蛋",
+
+	"item.ad_astra.tier_1_rocket"             : "初级火箭",
+	"item.ad_astra.tier_1_rover"              : "星球车",
+	"item.ad_astra.tier_2_rocket"             : "二级火箭",
+	"item.ad_astra.tier_3_rocket"             : "三级火箭",
+	"item.ad_astra.tier_4_rocket"             : "四级火箭",
+	"item.ad_astra.water_pump"                : "水泵",
+	"item.ad_astra.water_pump.tooltip[0]"     : "从水源泵水，并输入",
+	"item.ad_astra.water_pump.tooltip[1]"     : "到附近的机器中。",
+	"item.ad_astra.wheel"                     : "宇航胎",
+	"item.ad_astra.wrench"                    : "扳手",
+	"item.ad_astra.zombified_mogler_spawn_egg": "僵尸虬虫刷怪蛋",
+	"item.ad_astra.zombified_pygro_spawn_egg" : "僵尸犴豸刷怪蛋",
+
+
+
+	"itemGroup.ad_astra.tab_basics"    : "Ad Astra｜基础物品",
+	"itemGroup.ad_astra.tab_blocks"    : "Ad Astra｜建筑方块",
+	"itemGroup.ad_astra.tab_flags"     : "Ad Astra｜基地旗帜",
+	"itemGroup.ad_astra.tab_globes"    : "Ad Astra｜星球仪",
+	"itemGroup.ad_astra.tab_machines"  : "Ad Astra｜机器构件",
+	"itemGroup.ad_astra.tab_materials" : "Ad Astra｜材料",
+	"itemGroup.ad_astra.tab_normal"    : "Ad Astra",
+	"itemGroup.ad_astra.tab_spawn_eggs": "Ad Astra｜生物",
+
+
+
+	"message.ad_astra.hold_space": "§7按住§c空格",
+	"message.ad_astra.no_fuel"   : "§c燃料耗尽！§7请向火箭内填充§c燃油§7。§6（潜行时右击）",
+	"message.ad_astra.speed"     : "%s 米每秒",
+
+
+
+	"rei.category.ad_astra.space_station": "空间站",
+	
+	"rei.text.ad_astra.amount": "总量：%s 🪣",
+
+	"rei.text.ad_astra.conversion_ratio": "转化比： %s%%",
+	"rei.text.ad_astra.generates"       : "产生 %s ⚡️",
+
+	"rei.text.ad_astra.oil.body" : "原油涌泉可以在海面上方找到。",
+	"rei.text.ad_astra.oil.title": "寻找原油涌泉",
+
+	"rei.text.ad_astra.seconds": "%s 秒",
+
+	"rei.tooltip.ad_astra.energy_generating": "每刻产生 %s ⚡️ 能量",
+	"rei.tooltip.ad_astra.energy_using"     : "每刻消耗 %s ⚡️ 能量",
+
+
+
+	"subtitles.ad_astra.alien_watcher"     : "你逃不出外星人的视线",
+	"subtitles.ad_astra.drone_fly_by"      : "无人机掠过",
+	"subtitles.ad_astra.flying_saucer"     : "飞行茶碟",
+	"subtitles.ad_astra.imminent_doom"     : "在劫难逃",
+	"subtitles.ad_astra.large_door_close"  : "舱门关闭",
+	"subtitles.ad_astra.large_door_open"   : "舱门开启",
+	"subtitles.ad_astra.light_speed_travel": "曲率飞船",
+	"subtitles.ad_astra.passing_spaceship" : "飞船掠过",
+	"subtitles.ad_astra.rocket_fly"        : "火箭飞行",
+	"subtitles.ad_astra.small_door_open"   : "玻璃门开启",
+	"subtitles.ad_astra.space_laser"       : "空间激光",
+	"subtitles.ad_astra.wormhole"          : "虫洞",
+	"subtitles.ad_astra.wrench"            : "板手转动",
+
+
+
+	"tag.c.calorite_blocks"    : "耐热金属块",
+	"tag.c.calorite_ingots"    : "耐热金属锭",
+	"tag.c.calorite_nuggets"   : "耐热金属粒",
+	"tag.c.calorite_ores"      : "耐热金属矿石",
+	"tag.c.calorite_plate"     : "耐热金属板",
+	"tag.c.calorite_plates"    : "耐热金属板材",
+	"tag.c.cheese_ores"        : "奶酪矿石",
+	"tag.c.cheeses"            : "奶酪",
+	"tag.c.desh_blocks"        : "戴斯块",
+	"tag.c.desh_ingots"        : "戴斯锭",
+	"tag.c.desh_nuggets"       : "戴斯粒",
+	"tag.c.desh_ores"          : "戴斯矿石",
+	"tag.c.ice_shard_ores"     : "冰晶矿石",
+	"tag.c.iron_plates"        : "铁板",
+	"tag.c.iron_rods"          : "铁棒",
+	"tag.c.ostrum_blocks"      : "紫金块",
+	"tag.c.ostrum_ingots"      : "紫金锭",
+	"tag.c.ostrum_nuggets"     : "紫金粒",
+	"tag.c.ostrum_ores"        : "紫金矿石",
+	"tag.c.ostrum_plate"       : "紫金板",
+	"tag.c.ostrum_plates"      : "紫金板材",
+	"tag.c.raw_calorite_ores"  : "粗耐热金属矿石",
+	"tag.c.raw_desh_ores"      : "粗戴斯矿石",
+	"tag.c.desh_plate"         : "戴斯板",
+	"tag.c.desh_plates"        : "戴斯板材",
+	"tag.c.raw_ostrum_ores"    : "粗紫金矿石",
+	"tag.c.steel_blocks"       : "钢块",
+	"tag.c.steel_ingots"       : "钢锭",
+	"tag.c.steel_nuggets"      : "钢粒",
+	"tag.c.steel_plate"        : "钢板",
+	"tag.c.steel_plates"       : "钢板材",
+
+
+
+	"text.autoconfig.ad_astra.category.Main": "设置",
+
+	"text.autoconfig.ad_astra.option.coalGenerator": "火力发电机设置",
+
+	"text.autoconfig.ad_astra.option.coalGenerator.energyPerTick": "能量每刻",
+	"text.autoconfig.ad_astra.option.coalGenerator.maxEnergy"    : "最大能量",
+
+	"text.autoconfig.ad_astra.option.compressor": "压缩机设置",
+
+	"text.autoconfig.ad_astra.option.compressor.energyPerTick": "能量每刻",
+	"text.autoconfig.ad_astra.option.compressor.maxEnergy"    : "最大能量",
+
+	"text.autoconfig.ad_astra.option.cryoFreezer": "深低温冷冻器设置",
+
+	"text.autoconfig.ad_astra.option.cryoFreezer.energyPerTick": "能量每刻",
+	"text.autoconfig.ad_astra.option.cryoFreezer.maxEnergy"    : "最大能量",
+	"text.autoconfig.ad_astra.option.cryoFreezer.tankSize"     : "储罐容量",
+
+	"text.autoconfig.ad_astra.option.energizer": "能源站设置",
+
+	"text.autoconfig.ad_astra.option.energizer.energyPerTick": "能量每刻",
+	"text.autoconfig.ad_astra.option.energizer.maxEnergy"    : "最大能量",
+
+	"text.autoconfig.ad_astra.option.fuelRefinery": "燃油精炼厂设置",
+
+	"text.autoconfig.ad_astra.option.fuelRefinery.energyPerTick": "能量每刻",
+	"text.autoconfig.ad_astra.option.fuelRefinery.maxEnergy"    : "最大能量",
+	"text.autoconfig.ad_astra.option.fuelRefinery.tankSize"     : "储罐容量",
+
+	"text.autoconfig.ad_astra.option.general": "常规设置",
+
+	"text.autoconfig.ad_astra.option.general.acidRainBurns"                 : "酸雨烧伤",
+	"text.autoconfig.ad_astra.option.general.doEntityGravity"               : "开启实体重力效应",
+	"text.autoconfig.ad_astra.option.general.doEntityGravity.@Tooltip"      : "决定物品、船和箭等实体是否受重力影响。",
+	"text.autoconfig.ad_astra.option.general.doLivingEntityGravity"         : "是否开启活体重力效应",
+	"text.autoconfig.ad_astra.option.general.doLivingEntityGravity.@Tooltip": "决定玩家、生物等活体是否受重力影响。",
+	"text.autoconfig.ad_astra.option.general.doOxygen"                      : "允许氧气",
+	"text.autoconfig.ad_astra.option.general.doSpaceMuffler"                : "开启宇宙空间声音压制",
+	"text.autoconfig.ad_astra.option.general.doSpaceMuffler.@Tooltip[0]"    : "决定玩家身处宇宙空间时，听到的声音是否经过",
+	"text.autoconfig.ad_astra.option.general.doSpaceMuffler.@Tooltip[1]"    : "压制。如果听起来不舒服，请及时调整此选项。",
+	"text.autoconfig.ad_astra.option.general.energyBarXOffset"              : "能量显示条X轴预设",
+	"text.autoconfig.ad_astra.option.general.energyBarYOffset"              : "能量显示条Y轴预设",
+	"text.autoconfig.ad_astra.option.general.giveAstroduxAtSpawn"           : "在玩家出生时给予指导手册",
+	"text.autoconfig.ad_astra.option.general.hammerDurability"              : "工程锤耐久",
+	"text.autoconfig.ad_astra.option.general.orbitGravity"                  : "近地轨道重力大小",
+	"text.autoconfig.ad_astra.option.general.oxygenBarXOffset"              : "氧气显示条X轴预设",
+	"text.autoconfig.ad_astra.option.general.oxygenBarYOffset"              : "氧气显示条Y轴预设",
+	"text.autoconfig.ad_astra.option.general.oxygenTankSize"                : "氧气储罐容量",
+	"text.autoconfig.ad_astra.option.general.spawnCorruptedLunarians"       : "生成堕落的月球原住民",
+	"text.autoconfig.ad_astra.option.general.spawnLunarianWanderingTrader"  : "生成月球流浪商人",
+	"text.autoconfig.ad_astra.option.general.spawnMartianRaptors"           : "生成深红掠食者",
+	"text.autoconfig.ad_astra.option.general.spawnMoglers"                  : "生成虬虫",
+	"text.autoconfig.ad_astra.option.general.spawnStarCrawlers"             : "生成沙虫幼虫",
+	"text.autoconfig.ad_astra.option.general.spawnSulfurCreepers"           : "生成硫力怕",
+
+	"text.autoconfig.ad_astra.option.lander": "着陆舱设置",
+
+	"text.autoconfig.ad_astra.option.lander.boosterSpeed"                : "坠落速度",
+	"text.autoconfig.ad_astra.option.lander.boosterThreshold"            : "坠落速度阈值",
+	"text.autoconfig.ad_astra.option.lander.boosterThreshold.@Tooltip[0]": "着陆舱下降时可以达到的最大速度。",
+	"text.autoconfig.ad_astra.option.lander.boosterThreshold.@Tooltip[1]": "如果数值是正整数，那么着陆舱会向上飞。",
+
+	"text.autoconfig.ad_astra.option.oxygenDistributor": "供氧仪设置",
+
+	"text.autoconfig.ad_astra.option.oxygenDistributor.energyMultiplier"            : "能量倍乘器",
+	"text.autoconfig.ad_astra.option.oxygenDistributor.energyMultiplier.@Tooltip"   : "当供氧仪需要为更大的空间供氧时，增加能量消耗。",
+	"text.autoconfig.ad_astra.option.oxygenDistributor.fluidConversionEnergyPerTick": "能量每刻",
+	"text.autoconfig.ad_astra.option.oxygenDistributor.maxBlockChecks"              : "最大检测范围",
+	"text.autoconfig.ad_astra.option.oxygenDistributor.maxBlockChecks.@Tooltip[0]"  : "决定供氧仪最多可以为多少格内的环境大气供氧。不要",
+	"text.autoconfig.ad_astra.option.oxygenDistributor.maxBlockChecks.@Tooltip[1]"  : "盲目增加这个数值，因为它可能会大幅影响服务端性能。",
+	"text.autoconfig.ad_astra.option.oxygenDistributor.maxBlockChecks.@Tooltip[2]"  : "如果你必须要设置一个很大的值，请考虑同时调大“供氧",
+	"text.autoconfig.ad_astra.option.oxygenDistributor.maxBlockChecks.@Tooltip[3]"  : "仪刷新频率”，以保证服务端不会每时每刻地检查几千个",
+	"text.autoconfig.ad_astra.option.oxygenDistributor.maxBlockChecks.@Tooltip[4]"  : "需要被供氧的方块。",
+	"text.autoconfig.ad_astra.option.oxygenDistributor.maxEnergy"                   : "最大能量",
+	"text.autoconfig.ad_astra.option.oxygenDistributor.oxygenMultiplier"            : "氧气倍乘器",
+	"text.autoconfig.ad_astra.option.oxygenDistributor.oxygenMultiplier.@Tooltip"   : "当供氧仪需要为更大的空间供氧时，增加氧气消耗。",
+	"text.autoconfig.ad_astra.option.oxygenDistributor.refreshTicks"                : "刷新频率",
+	"text.autoconfig.ad_astra.option.oxygenDistributor.refreshTicks.@Tooltip[0]"    : "决定供氧仪每隔多少刻检查一次环境大气的密闭性。把这个数值",
+	"text.autoconfig.ad_astra.option.oxygenDistributor.refreshTicks.@Tooltip[1]"    : "调得太小（刷新频率过快）会影响服务端TPS，请保持谨慎。",
+	"text.autoconfig.ad_astra.option.oxygenDistributor.tankSize"                    : "储罐容量",
+
+	"text.autoconfig.ad_astra.option.oxygenLoader": "氧气装载器设置",
+
+	"text.autoconfig.ad_astra.option.oxygenLoader.energyPerTick": "能量每刻",
+	"text.autoconfig.ad_astra.option.oxygenLoader.maxEnergy"    : "最大能量",
+	"text.autoconfig.ad_astra.option.oxygenLoader.tankSize"     : "储罐容量",
+
+	"text.autoconfig.ad_astra.option.rocket": "火箭设置",
+
+	"text.autoconfig.ad_astra.option.rocket.acceleration"                    : "加速度",
+	"text.autoconfig.ad_astra.option.rocket.atmosphereLeave"                 : "大气层厚度",
+	"text.autoconfig.ad_astra.option.rocket.atmosphereLeave.@Tooltip"        : "决定火箭何时离开大气层并显示星图。",
+	"text.autoconfig.ad_astra.option.rocket.countDownTicks"                  : "火箭发射倒计时（刻）",
+	"text.autoconfig.ad_astra.option.rocket.countDownTicks.@Tooltip"         : "默认时间为200刻（10秒）。",
+	"text.autoconfig.ad_astra.option.rocket.efficientFuelLaunchCost"         : "有效燃油发射消耗",
+	"text.autoconfig.ad_astra.option.rocket.fuelLaunchCost"                  : "燃油发射消耗",
+	"text.autoconfig.ad_astra.option.rocket.entitiesBurnUnderRocket"         : "开启火箭引擎烧伤",
+	"text.autoconfig.ad_astra.option.rocket.entitiesBurnUnderRocket.@Tooltip": "决定站在火箭引擎下的实体是否受到伤害。",
+	"text.autoconfig.ad_astra.option.rocket.maxSpeed"                        : "最大速度",
+	"text.autoconfig.ad_astra.option.rocket.tankSize"                        : "储罐容量",
+
+	"text.autoconfig.ad_astra.option.rover": "星球车设置",
+
+	"text.autoconfig.ad_astra.option.rover.deceleration"      : "减速度",
+	"text.autoconfig.ad_astra.option.rover.explodeRoverInLava": "驶入熔岩时爆炸",
+	"text.autoconfig.ad_astra.option.rover.fuelPerSecond"     : "燃油每秒",
+	"text.autoconfig.ad_astra.option.rover.maxSpeed"          : "最大速度",
+	"text.autoconfig.ad_astra.option.rover.maxTurnSpeed"      : "最大转向速度",
+	"text.autoconfig.ad_astra.option.rover.minSpeed"          : "最小速度",
+	"text.autoconfig.ad_astra.option.rover.tankSize"          : "储罐容量",
+	"text.autoconfig.ad_astra.option.rover.turnSpeed"         : "转向速度",
+
+	"text.autoconfig.ad_astra.option.solarPanel": "太阳能板设置",
+	
+	"text.autoconfig.ad_astra.option.solarPanel.energyMultiplier": "能量倍乘器",
+	"text.autoconfig.ad_astra.option.solarPanel.maxEnergy"       : "最大能量",
+
+	"text.autoconfig.ad_astra.option.spaceSuit": "宇航服设置",
+
+	"text.autoconfig.ad_astra.option.spaceSuit.enableJetSuitFlight"                : "允许喷气式宇航服飞行功能",
+	"text.autoconfig.ad_astra.option.spaceSuit.jetSuitArmorToughness"              : "喷气式宇航服硬度",
+	"text.autoconfig.ad_astra.option.spaceSuit.jetSuitEnergyPerTick"               : "喷气式宇航服能量每刻",
+	"text.autoconfig.ad_astra.option.spaceSuit.jetSuitMaxEnergy"                   : "喷气式宇航服最大能量",
+	"text.autoconfig.ad_astra.option.spaceSuit.jetSuitProtectionMultiplier"        : "喷气式宇航服护甲值倍乘器",
+	"text.autoconfig.ad_astra.option.spaceSuit.jetSuitSpeed"                       : "喷气式宇航服速度",
+	"text.autoconfig.ad_astra.option.spaceSuit.jetSuitSpeed.@Tooltip"              : "喷气式宇航服喷气飞行时的前进速度。",
+	"text.autoconfig.ad_astra.option.spaceSuit.jetSuitTankSize"                    : "喷气式宇航服储罐容量",
+	"text.autoconfig.ad_astra.option.spaceSuit.jetSuitUpwardsSpeed"                : "喷气式宇航服上升速度",
+	"text.autoconfig.ad_astra.option.spaceSuit.jetSuitUpwardsSpeed.@Tooltip"       : "喷气式宇航服怠速飞行时的上升速度。",
+	"text.autoconfig.ad_astra.option.spaceSuit.netheriteSpaceSuitHasFireResistance": "合金宇航服是否具有火焰抗性",
+	"text.autoconfig.ad_astra.option.spaceSuit.netheriteSpaceSuitTankSize"         : "合金宇航服储罐容量",
+	"text.autoconfig.ad_astra.option.spaceSuit.spaceSuitTankSize"                  : "宇航服储罐容量",
+	"text.autoconfig.ad_astra.option.spaceSuit.spawnJetSuitParticles"              : "显示喷气式宇航服粒子效果",
+
+	"text.autoconfig.ad_astra.option.vehicles": "载具设置",
+
+	"text.autoconfig.ad_astra.option.vehicles.fallingExplosionMultiplier"         : "坠落爆炸伤害倍乘器",
+	"text.autoconfig.ad_astra.option.vehicles.fallingExplosionMultiplier.@Tooltip": "决定载具坠落并爆炸时造成的伤害大小。",
+	"text.autoconfig.ad_astra.option.vehicles.fallingExplosionThreshold"          : "坠落爆炸力度阈值",
+	"text.autoconfig.ad_astra.option.vehicles.fallingExplosionThreshold.@Tooltip" : "决定载具坠落时爆炸所需的力度大小。",
+	"text.autoconfig.ad_astra.option.vehicles.gravity"                            : "重力",
+	"text.autoconfig.ad_astra.option.vehicles.moveCameraInVehicle"                : "跟随载具移动视角",
+	"text.autoconfig.ad_astra.option.vehicles.moveCameraInVehicle.@Tooltip[0]"    : "决定在乘坐火箭和着陆舱时是否自动切换为",
+	"text.autoconfig.ad_astra.option.vehicles.moveCameraInVehicle.@Tooltip[1]"    : "第三人称视角显示以获得更佳视野。",
+
+	"text.autoconfig.ad_astra.option.waterPump": "水泵设置",
+
+	"text.autoconfig.ad_astra.option.waterPump.deleteWaterBelowWaterPump": "允许抽干水泵下方的水",
+	"text.autoconfig.ad_astra.option.waterPump.energyPerTick"            : "能量每刻",
+	"text.autoconfig.ad_astra.option.waterPump.maxEnergy"                : "最大能量",
+	"text.autoconfig.ad_astra.option.waterPump.tankSize"                 : "储罐容量",
+	"text.autoconfig.ad_astra.option.waterPump.transferPerTick"          : "每秒转化",
+
+	"text.autoconfig.ad_astra.title": "Ad Astra设置",
+
+
+
+	"tooltip.ad_astra.consumable"  : "§2消耗品",
+	"tooltip.ad_astra.hold_shift"  : "§8按住 [§7Shift§8] 查看详情",
+	"tooltip.ad_astra.space_suit"  : "§b§%s/%d 🪣 氧气",
+	"tooltip.ad_astra.vehicle_fuel": "§b§%s/%d 🪣 燃油"
+}
