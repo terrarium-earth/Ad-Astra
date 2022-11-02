@@ -28,25 +28,25 @@ public class MachineBlockItem extends BlockItem {
             if (level.getBlockEntity(pos) instanceof AbstractMachineBlockEntity machineBlock) {
                 CompoundTag nbt = stack.getOrCreateTag();
                 ContainerHelper.loadAllItems(nbt, machineBlock.getItems());
-                if (nbt.contains("energy")) {
+                if (nbt.contains("Energy")) {
                     Optional<PlatformEnergyManager> energyBlock = EnergyHooks.safeGetBlockEnergyManager(machineBlock, null);
-                    energyBlock.ifPresent(platformEnergyManager -> platformEnergyManager.insert(nbt.getLong("energy"), false));
+                    energyBlock.ifPresent(platformEnergyManager -> platformEnergyManager.insert(nbt.getLong("Energy"), false));
                 }
 
                 if (machineBlock instanceof FluidMachineBlockEntity fluidMachine) {
-                    if (nbt.contains("inputFluid")) {
-                        fluidMachine.getInputTank().setFluid(FluidHooks.fluidFromCompound(nbt.getCompound("inputFluid")).getFluid());
-                        fluidMachine.getInputTank().setAmount(nbt.getLong("inputAmount"));
+                    if (nbt.contains("InputFluid")) {
+                        fluidMachine.getInputTank().setFluid(FluidHooks.fluidFromCompound(nbt.getCompound("InputFluid")).getFluid());
+                        fluidMachine.getInputTank().setAmount(nbt.getLong("InputAmount"));
                     }
 
-                    if (nbt.contains("outputFluid")) {
-                        fluidMachine.getOutputTank().setFluid(FluidHooks.fluidFromCompound(nbt.getCompound("outputFluid")).getFluid());
-                        fluidMachine.getOutputTank().setAmount(nbt.getLong("outputAmount"));
+                    if (nbt.contains("OutputFluid")) {
+                        fluidMachine.getOutputTank().setFluid(FluidHooks.fluidFromCompound(nbt.getCompound("OutputFluid")).getFluid());
+                        fluidMachine.getOutputTank().setAmount(nbt.getLong("OutputAmount"));
                     }
 
                     if (machineBlock instanceof OxygenDistributorBlockEntity oxygenDistributorMachine) {
-                        if (nbt.contains("showOxygen")) {
-                            oxygenDistributorMachine.setShowOxygen(nbt.getBoolean("showOxygen"));
+                        if (nbt.contains("ShowOxygen")) {
+                            oxygenDistributorMachine.setShowOxygen(nbt.getBoolean("ShowOxygen"));
                         }
                     }
                 }

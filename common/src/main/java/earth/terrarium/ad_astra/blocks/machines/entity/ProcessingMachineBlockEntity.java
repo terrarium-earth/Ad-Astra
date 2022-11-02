@@ -27,15 +27,15 @@ public abstract class ProcessingMachineBlockEntity extends AbstractMachineBlockE
     @Override
     public void load(CompoundTag nbt) {
         super.load(nbt);
-        this.cookTime = nbt.getShort("cookTime");
-        this.cookTimeTotal = nbt.getShort("cookTimeTotal");
+        this.cookTime = nbt.getShort("CookTime");
+        this.cookTimeTotal = nbt.getShort("CookTimeTotal");
     }
 
     @Override
     public void saveAdditional(CompoundTag nbt) {
         super.saveAdditional(nbt);
-        nbt.putShort("cookTime", this.cookTime);
-        nbt.putShort("cookTimeTotal", this.cookTimeTotal);
+        nbt.putShort("CookTime", this.cookTime);
+        nbt.putShort("CookTimeTotal", this.cookTimeTotal);
     }
 
     public short getCookTime() {

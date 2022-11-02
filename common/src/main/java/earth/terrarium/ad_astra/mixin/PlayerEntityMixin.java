@@ -44,7 +44,7 @@ public abstract class PlayerEntityMixin {
                     } else {
                         jetSuit.isFallFlying = false;
                         if (!player.level.isClientSide) {
-                            chest.getOrCreateTag().putBoolean("spawn_particles", false);
+                            chest.getOrCreateTag().putBoolean("SpawnParticles", false);
                         }
                     }
                 }

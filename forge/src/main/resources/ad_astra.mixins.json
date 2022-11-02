@@ -4,9 +4,9 @@
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8.5",
   "client": [
+    "DimensionSpecialEffectsMixin",
     "JetSuitMixin",
     "ModRenderedItemMixin",
-    "SkyPropertiesMixin",
     "SpaceSuitMixin"
   ],
   "mixins": [],

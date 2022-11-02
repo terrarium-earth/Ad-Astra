@@ -32,9 +32,11 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Optional;
 import java.util.function.ToIntFunction;
 
+@ParametersAreNonnullByDefault
 @SuppressWarnings("deprecation")
 public abstract class AbstractMachineBlock extends BaseEntityBlock {
 
@@ -196,21 +198,21 @@ public abstract class AbstractMachineBlock extends BaseEntityBlock {
             CompoundTag nbt = stack.getOrCreateTag();
             ContainerHelper.saveAllItems(nbt, machineBlock.getItems());
             Optional<PlatformEnergyManager> energyBlock = EnergyHooks.safeGetBlockEnergyManager(machineBlock, null);
-            energyBlock.ifPresent(platformEnergyManager -> nbt.putLong("energy", platformEnergyManager.getStoredEnergy()));
+            energyBlock.ifPresent(platformEnergyManager -> nbt.putLong("Energy", platformEnergyManager.getStoredEnergy()));
 
             if (machineBlock instanceof FluidMachineBlockEntity fluidMachine) {
                 if (fluidMachine.getInputTank().getCompound() != null) {
-                    nbt.put("inputFluid", fluidMachine.getInputTank().getCompound());
-                    nbt.putLong("inputAmount", fluidMachine.getInputTank().getFluidAmount());
+                    nbt.put("InputFluid", fluidMachine.getInputTank().getCompound());
+                    nbt.putLong("InputAmount", fluidMachine.getInputTank().getFluidAmount());
                 }
 
                 if (fluidMachine.getOutputTank().getCompound() != null) {
-                    nbt.put("outputFluid", fluidMachine.getOutputTank().getCompound());
-                    nbt.putLong("outputAmount", fluidMachine.getOutputTank().getFluidAmount());
+                    nbt.put("OutputFluid", fluidMachine.getOutputTank().getCompound());
+                    nbt.putLong("OutputAmount", fluidMachine.getOutputTank().getFluidAmount());
                 }
 
                 if (machineBlock instanceof OxygenDistributorBlockEntity oxygenDistributorMachine) {
-                    nbt.putBoolean("showOxygen", oxygenDistributorMachine.shouldShowOxygen());
+                    nbt.putBoolean("ShowOxygen", oxygenDistributorMachine.shouldShowOxygen());
                 }
             }
         }

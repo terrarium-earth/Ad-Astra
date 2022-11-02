@@ -11,6 +11,7 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class FlagBlockEntity extends BlockEntity {
@@ -23,20 +24,20 @@ public class FlagBlockEntity extends BlockEntity {
     }
 
     @Override
-    public void saveAdditional(CompoundTag nbt) {
+    public void saveAdditional(@NotNull CompoundTag nbt) {
         super.saveAdditional(nbt);
         if (this.owner != null) {
             CompoundTag compound = new CompoundTag();
             NbtUtils.writeGameProfile(compound, this.owner);
-            nbt.put("flagOwner", compound);
+            nbt.put("FlagOwner", compound);
         }
     }
 
     @Override
-    public void load(CompoundTag nbt) {
+    public void load(@NotNull CompoundTag nbt) {
         super.load(nbt);
-        if (nbt.contains("flagOwner", 10)) {
-            this.setOwner(NbtUtils.readGameProfile(nbt.getCompound("flagOwner")));
+        if (nbt.contains("FlagOwner", 10)) {
+            this.setOwner(NbtUtils.readGameProfile(nbt.getCompound("FlagOwner")));
         }
     }
 

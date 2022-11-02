@@ -9,9 +9,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 
 public class ClientModSkiesImpl {
-    public static final Map<ResourceLocation, DimensionSpecialEffects> SKY_PROPERTIES = new HashMap<>();
+    public static final Map<ResourceLocation, DimensionSpecialEffects> DIMENSION_SPECIAL_EFFECTS = new HashMap<>();
 
     public static void registerDimensionEffects(ResourceKey<Level> id, DimensionEffects effects) {
-        SKY_PROPERTIES.put(id.location(), effects);
+        DIMENSION_SPECIAL_EFFECTS.put(id.location(), effects);
     }
 }

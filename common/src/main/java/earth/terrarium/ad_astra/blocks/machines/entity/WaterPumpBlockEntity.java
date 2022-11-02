@@ -45,13 +45,13 @@ public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements 
     @Override
     public void load(CompoundTag nbt) {
         super.load(nbt);
-        this.waterExtracted = nbt.getLong("waterExtracted");
+        this.waterExtracted = nbt.getLong("WaterExtracted");
     }
 
     @Override
     public void saveAdditional(CompoundTag nbt) {
         super.saveAdditional(nbt);
-        nbt.putLong("waterExtracted", this.waterExtracted);
+        nbt.putLong("WaterExtracted", this.waterExtracted);
     }
 
     @Override
