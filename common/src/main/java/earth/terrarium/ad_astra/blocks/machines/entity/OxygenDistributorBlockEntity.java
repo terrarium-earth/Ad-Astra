@@ -2,7 +2,6 @@ package earth.terrarium.ad_astra.blocks.machines.entity;
 
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.blocks.machines.AbstractMachineBlock;
-import earth.terrarium.ad_astra.container.DoubleFluidTank;
 import earth.terrarium.ad_astra.recipes.OxygenConversionRecipe;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
 import earth.terrarium.ad_astra.registry.ModParticleTypes;
@@ -158,11 +157,12 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
         if (!this.level.isClientSide) {
             if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxStackSize() && FluidHooks.isFluidContainingItem(insertSlot)) {
                 FluidUtils.insertItemFluidToTank(this.getFluidContainer(), this, 0, 1, 0, f -> ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.level).stream().anyMatch(r -> r.matches(f)));
+                FluidUtils.extractTankFluidToItem(this.getFluidContainer().getInput(), this, 0, 1, 0, f -> true);
             }
 
             if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0) {
                 List<OxygenConversionRecipe> recipes = ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.level);
-                if (FluidUtils.convertFluid((DoubleFluidTank) this.getFluidContainer(), recipes, 20)) {
+                if (FluidUtils.convertFluid(this.getFluidContainer(), recipes, 20)) {
                     this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
                 }
             }

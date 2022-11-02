@@ -74,6 +74,7 @@ public class FuelRefineryBlockEntity extends FluidMachineBlockEntity implements 
 
             if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxStackSize() && FluidHooks.isFluidContainingItem(insertSlot)) {
                 FluidUtils.insertItemFluidToTank(this.getFluidContainer().getInput(), this, 0, 1, 0, f -> ModRecipes.FUEL_CONVERSION_RECIPE.get().getRecipes(this.level).stream().anyMatch(r -> r.matches(f)));
+                FluidUtils.extractTankFluidToItem(this.getFluidContainer().getInput(), this, 0, 1, 0, f -> true);
             }
 
             if (!outputInsertSlot.isEmpty() && outputExtractSlot.getCount() < outputExtractSlot.getMaxStackSize()) {

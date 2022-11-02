@@ -7,12 +7,13 @@ import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import earth.terrarium.botarium.api.fluid.PlatformFluidItemHandler;
 import earth.terrarium.botarium.api.item.ItemStackHolder;
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Predicate;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;
 
 public class FluidUtils {
 
@@ -46,7 +47,9 @@ public class FluidUtils {
     }
 
     public static boolean insertItemFluidToTank(FluidContainer tank, Container inventory, int inputSlot, int outputSlot, int container, Predicate<Fluid> filter) {
-        ItemStack stack = inventory.getItem(inputSlot);
+        ItemStack stack = inventory.getItem(inputSlot).copy();
+        int originalCount = stack.getCount();
+        stack.setCount(1);
         Optional<PlatformFluidItemHandler> possibleItemFluidContainer = FluidHooks.safeGetItemFluidManager(stack);
         if (possibleItemFluidContainer.isPresent()) {
             PlatformFluidItemHandler itemFluidHandler = possibleItemFluidContainer.get();
@@ -54,26 +57,26 @@ public class FluidUtils {
             if (filter.test(itemHolder.getFluid())) {
 
                 FluidHolder fluidToTransfer = FluidHooks.newFluidHolder(itemHolder.getFluid(), itemHolder.getFluidAmount(), null);
+                if (fluidToTransfer.isEmpty()) return false;
                 ItemStackHolder item = new ItemStackHolder(stack);
                 FluidHolder extracted = itemFluidHandler.extractFluid(item, fluidToTransfer, true);
-                if (!extracted.isEmpty()) {
-                    long l = tank.insertFluid(extracted, true);
-                    if (l > 0) {
-                        fluidToTransfer.setAmount(l);
-                        itemFluidHandler.extractFluid(item, fluidToTransfer, false);
-                        tank.insertFluid(fluidToTransfer, false);
+                if (extracted.isEmpty()) return false;
+                long l = tank.insertFluid(extracted, true);
+                if (l > 0) {
+                    fluidToTransfer.setAmount(l);
+                    itemFluidHandler.extractFluid(item, fluidToTransfer, false);
+                    tank.insertFluid(fluidToTransfer, false);
 
-                        if (item.isDirty()) {
-                            ItemStack copy = item.getStack().copy();
-                            ItemStack stack1 = inventory.getItem(outputSlot);
-                            if (stack1.isEmpty() || ItemStack.tagMatches(copy, stack1) && ItemStack.isSameIgnoreDurability(copy, stack1) && copy.getCount() + stack1.getCount() <= copy.getMaxStackSize()) {
-                                copy.setCount(copy.getCount() + stack1.getCount());
-                                inventory.setItem(outputSlot, copy);
-                                stack.shrink(1);
-                            } else {
-                                itemFluidHandler.insertFluid(item, fluidToTransfer, false);
-                                tank.extractFluid(fluidToTransfer, false);
-                            }
+                    if (item.isDirty()) {
+                        ItemStack copy = item.getStack().copy();
+                        ItemStack stack1 = inventory.getItem(outputSlot);
+                        if ((stack1.isEmpty() && (!copy.hasTag() || !ItemStack.tagMatches(copy, inventory.getItem(inputSlot)))) || ItemStack.tagMatches(copy, stack1) && ItemStack.isSameIgnoreDurability(copy, stack1) && copy.getCount() + stack1.getCount() <= copy.getMaxStackSize()) {
+                            copy.setCount(copy.getCount() + stack1.getCount());
+                            inventory.setItem(outputSlot, copy);
+                            inventory.getItem(inputSlot).setCount(originalCount - 1);
+                        } else {
+                            itemFluidHandler.insertFluid(item, fluidToTransfer, false);
+                            tank.extractFluid(fluidToTransfer, false);
                         }
                         return true;
                     }
@@ -85,7 +88,9 @@ public class FluidUtils {
     }
 
     public static boolean extractTankFluidToItem(FluidContainer tank, Container inventory, int inputSlot, int outputSlot, int container, Predicate<Fluid> filter) {
-        ItemStack stack = inventory.getItem(inputSlot);
+        ItemStack stack = inventory.getItem(inputSlot).copy();
+        int originalCount = stack.getCount();
+        stack.setCount(1);
         Optional<PlatformFluidItemHandler> possibleItemFluidContainer = FluidHooks.safeGetItemFluidManager(stack);
         if (possibleItemFluidContainer.isPresent()) {
             PlatformFluidItemHandler itemFluidHandler = possibleItemFluidContainer.get();
@@ -93,26 +98,26 @@ public class FluidUtils {
             if (filter.test(tankHolder.getFluid())) {
 
                 FluidHolder fluidToTransfer = FluidHooks.newFluidHolder(tankHolder.getFluid(), tankHolder.getFluidAmount(), null);
+                if (fluidToTransfer.isEmpty()) return false;
                 ItemStackHolder item = new ItemStackHolder(stack);
                 FluidHolder extracted = tank.extractFluid(fluidToTransfer, true);
-                if (!extracted.isEmpty()) {
-                    long l = itemFluidHandler.insertFluid(item, extracted, true);
-                    if (l > 0) {
-                        fluidToTransfer.setAmount(l);
-                        tank.extractFluid(fluidToTransfer, false);
-                        itemFluidHandler.insertFluid(item, fluidToTransfer, false);
+                if (extracted.isEmpty()) return false;
+                long l = itemFluidHandler.insertFluid(item, extracted, true);
+                if (l > 0) {
+                    fluidToTransfer.setAmount(l);
+                    tank.extractFluid(fluidToTransfer, false);
+                    itemFluidHandler.insertFluid(item, fluidToTransfer, false);
 
-                        if (item.isDirty()) {
-                            ItemStack copy = item.getStack().copy();
-                            ItemStack stack1 = inventory.getItem(outputSlot);
-                            if (stack1.isEmpty() || ItemStack.tagMatches(copy, stack1) && ItemStack.isSameIgnoreDurability(copy, stack1) && copy.getCount() + stack1.getCount() <= copy.getMaxStackSize()) {
-                                copy.setCount(copy.getCount() + stack1.getCount());
-                                inventory.setItem(outputSlot, copy);
-                                stack.shrink(1);
-                            } else {
-                                itemFluidHandler.extractFluid(item, fluidToTransfer, false);
-                                tank.insertFluid(fluidToTransfer, false);
-                            }
+                    if (item.isDirty()) {
+                        ItemStack copy = item.getStack().copy();
+                        ItemStack stack1 = inventory.getItem(outputSlot);
+                        if ((stack1.isEmpty() && (!copy.hasTag() || !ItemStack.tagMatches(copy, inventory.getItem(inputSlot)))) || ItemStack.tagMatches(copy, stack1) && ItemStack.isSameIgnoreDurability(copy, stack1) && copy.getCount() + stack1.getCount() <= copy.getMaxStackSize()) {
+                            copy.setCount(copy.getCount() + stack1.getCount());
+                            inventory.setItem(outputSlot, copy);
+                            inventory.getItem(inputSlot).setCount(originalCount - 1);
+                        } else {
+                            itemFluidHandler.extractFluid(item, fluidToTransfer, false);
+                            tank.insertFluid(fluidToTransfer, false);
                         }
                         return true;
                     }
