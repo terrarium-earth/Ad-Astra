@@ -53,17 +53,17 @@ public class GlobeBlockEntity extends BlockEntity {
     @Override
     public void load(CompoundTag nbt) {
         super.load(nbt);
-        this.angularVelocity = nbt.getFloat("angularVelocity");
-        this.yaw = nbt.getFloat("yaw");
-        this.cachedYaw = nbt.getFloat("cachedYaw");
+        this.angularVelocity = nbt.getFloat("AngularVelocity");
+        this.yaw = nbt.getFloat("Yaw");
+        this.cachedYaw = nbt.getFloat("CachedYaw");
     }
 
     @Override
     public void saveAdditional(CompoundTag nbt) {
         super.saveAdditional(nbt);
-        nbt.putFloat("angularVelocity", this.angularVelocity);
-        nbt.putFloat("yaw", this.yaw);
-        nbt.putFloat("cachedYaw", this.cachedYaw);
+        nbt.putFloat("AngularVelocity", this.angularVelocity);
+        nbt.putFloat("Yaw", this.yaw);
+        nbt.putFloat("CachedYaw", this.cachedYaw);
     }
 
     @Override

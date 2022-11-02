@@ -16,11 +16,6 @@ import earth.terrarium.botarium.api.energy.EnergyBlock;
 import earth.terrarium.botarium.api.energy.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
-import java.util.Set;
-import java.util.function.Predicate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -32,6 +27,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
+import java.util.Set;
+import java.util.function.Predicate;
 
 public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implements EnergyBlock {
     private InsertOnlyEnergyContainer energyContainer;
@@ -46,13 +46,13 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
     @Override
     public void load(CompoundTag nbt) {
         super.load(nbt);
-        showOxygen = nbt.getBoolean("showOxygen");
+        showOxygen = nbt.getBoolean("ShowOxygen");
     }
 
     @Override
     public void saveAdditional(CompoundTag nbt) {
         super.saveAdditional(nbt);
-        nbt.putBoolean("showOxygen", showOxygen);
+        nbt.putBoolean("ShowOxygen", showOxygen);
     }
 
     public boolean shouldShowOxygen() {

@@ -85,17 +85,17 @@ public class SpacePaintingEntity extends Painting {
     public void readAdditionalSaveData(CompoundTag nbt) {
 
         super.readAdditionalSaveData(nbt);
-        ResourceKey<PaintingVariant> registryKey = ResourceKey.create(Registry.PAINTING_VARIANT_REGISTRY, new ResourceLocation(nbt.getString("variant")));
+        ResourceKey<PaintingVariant> registryKey = ResourceKey.create(Registry.PAINTING_VARIANT_REGISTRY, new ResourceLocation(nbt.getString("Variant")));
         ((PaintingEntityInvoker) this).adastra_invokeSetVariant(Registry.PAINTING_VARIANT.getHolder(registryKey).get());
-        this.direction = Direction.from2DDataValue(nbt.getByte("facing"));
+        this.direction = Direction.from2DDataValue(nbt.getByte("Facing"));
         this.setDirection(this.direction);
     }
 
     @Override
     public void addAdditionalSaveData(CompoundTag nbt) {
         super.addAdditionalSaveData(nbt);
-        nbt.putString("variant", Registry.PAINTING_VARIANT.getKey(this.getVariant().value()).toString());
-        nbt.putByte("facing", (byte) this.direction.get2DDataValue());
+        nbt.putString("Variant", Registry.PAINTING_VARIANT.getKey(this.getVariant().value()).toString());
+        nbt.putByte("Facing", (byte) this.direction.get2DDataValue());
     }
 
     @Override

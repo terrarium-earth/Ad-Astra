@@ -78,13 +78,13 @@ public class RocketItem<T extends RocketEntity> extends VehicleItem {
                             }
 
                             CompoundTag nbt = rocketStack.getOrCreateTag();
-                            if (nbt.contains("fluid")) {
+                            if (nbt.contains("Fluid")) {
                                 if (!this.getFluid(rocketStack).equals(Fluids.EMPTY)) {
                                     this.insert(rocketStack, rocketEntity.getTankHolder());
                                 }
                             }
-                            if (nbt.contains("inventory")) {
-                                rocketEntity.getInventory().fromTag(nbt.getList("inventory", Tag.TAG_COMPOUND));
+                            if (nbt.contains("Inventory")) {
+                                rocketEntity.getInventory().fromTag(nbt.getList("Inventory", Tag.TAG_COMPOUND));
                             }
 
                             rocketEntity.assignLaunchPad(true);

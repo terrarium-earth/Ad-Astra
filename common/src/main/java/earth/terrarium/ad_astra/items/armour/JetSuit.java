@@ -43,8 +43,8 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
         if (entity instanceof Player player) {
             ItemStack chest = player.getItemBySlot(EquipmentSlot.CHEST);
             CompoundTag nbt = chest.getOrCreateTag();
-            if (nbt.contains("spawn_particles")) {
-                if (!nbt.getBoolean("spawn_particles")) {
+            if (nbt.contains("SpawnParticles")) {
+                if (!nbt.getBoolean("SpawnParticles")) {
                     return;
                 }
             } else {
@@ -101,17 +101,17 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
     public void fly(Player player, ItemStack stack) {
         // Don't fly the Jet Suit in creative
         if (player.getAbilities().flying) {
-            stack.getOrCreateTag().putBoolean("spawn_particles", false);
+            stack.getOrCreateTag().putBoolean("SpawnParticles", false);
             return;
         }
 
         // Don't fly if the Jet Suit has no energy
         if (EnergyHooks.getItemEnergyManager(stack).getStoredEnergy() <= 0) {
-            stack.getOrCreateTag().putBoolean("spawn_particles", false);
+            stack.getOrCreateTag().putBoolean("SpawnParticles", false);
             return;
         }
 
-        stack.getOrCreateTag().putBoolean("spawn_particles", true);
+        stack.getOrCreateTag().putBoolean("SpawnParticles", true);
         if (ModKeyBindings.sprintKeyDown(player)) {
             this.fallFly(player, stack);
         } else {

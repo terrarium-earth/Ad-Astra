@@ -38,7 +38,7 @@ public class ModFluidAttributes {
             .flowingTexture(new ModResourceLocation("block/fluid_cryo_fuel_flow"))
             .overlayTexture(new ModResourceLocation("block/cryo_fuel_overlay"));
 
-    public static final ArchitecturyFluidAttributes OXYGEN_FLUID_ATTRIBUTES = SimpleArchitecturyFluidAttributes.of(ModFluids.FLOWING_CRYO_FUEL, ModFluids.OXYGEN_STILL)
+    public static final ArchitecturyFluidAttributes OXYGEN_FLUID_ATTRIBUTES = SimpleArchitecturyFluidAttributes.of(ModFluids.FLOWING_OXYGEN, ModFluids.OXYGEN_STILL)
             .block(ModBlocks.OXYGEN_BLOCK)
             .bucketItem(ModItems.OXYGEN_BUCKET)
             .density(-1)

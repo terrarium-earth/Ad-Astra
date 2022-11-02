@@ -22,12 +22,12 @@ public class SlidingDoorBlockEntity extends BlockEntity {
 
     @Override
     public void load(CompoundTag nbt) {
-        this.slideTicks = nbt.getInt("slideTicks");
+        this.slideTicks = nbt.getInt("SlideTicks");
     }
 
     @Override
     protected void saveAdditional(CompoundTag nbt) {
-        nbt.putInt("slideTicks", this.slideTicks);
+        nbt.putInt("SlideTicks", this.slideTicks);
     }
 
     public int getSlideTicks() {

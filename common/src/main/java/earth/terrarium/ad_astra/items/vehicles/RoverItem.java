@@ -54,13 +54,13 @@ public class RoverItem extends VehicleItem {
             }
 
             CompoundTag nbt = roverStack.getOrCreateTag();
-            if (nbt.contains("fluid")) {
+            if (nbt.contains("Fluid")) {
                 if (!this.getFluid(roverStack).equals(Fluids.EMPTY)) {
                     this.insert(roverStack, rover.getTankHolder());
                 }
             }
-            if (nbt.contains("inventory")) {
-                rover.getInventory().fromTag(nbt.getList("inventory", Tag.TAG_COMPOUND));
+            if (nbt.contains("Inventory")) {
+                rover.getInventory().fromTag(nbt.getList("Inventory", Tag.TAG_COMPOUND));
             }
             rover.setYRot(context.getPlayer().getYRot());
             rover.setPos(context.getClickLocation().add(0, 0, 1));

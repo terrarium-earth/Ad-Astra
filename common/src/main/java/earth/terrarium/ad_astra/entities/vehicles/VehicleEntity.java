@@ -68,14 +68,14 @@ public abstract class VehicleEntity extends Entity implements Updatable {
 
     @Override
     protected void readAdditionalSaveData(CompoundTag nbt) {
-        this.inventory.fromTag(nbt.getList("inventory", Tag.TAG_COMPOUND));
-        getTankHolder().deserialize(nbt.getCompound("inputFluid"));
+        this.inventory.fromTag(nbt.getList("Inventory", Tag.TAG_COMPOUND));
+        getTankHolder().deserialize(nbt.getCompound("InputFluid"));
     }
 
     @Override
     protected void addAdditionalSaveData(CompoundTag nbt) {
-        nbt.put("inventory", this.inventory.createTag());
-        nbt.put("inputFluid", getTankHolder().serialize());
+        nbt.put("Inventory", this.inventory.createTag());
+        nbt.put("InputFluid", getTankHolder().serialize());
     }
 
     @Override
@@ -241,7 +241,7 @@ public abstract class VehicleEntity extends Entity implements Updatable {
             ((VehicleItem) dropStack.getItem()).setFluid(dropStack, getTankFluid());
             CompoundTag nbt = dropStack.getOrCreateTag();
             // Set the inventory in the dropped item.
-            nbt.put("inventory", this.inventory.createTag());
+            nbt.put("Inventory", this.inventory.createTag());
 
             level.playSound(null, pos, SoundEvents.NETHERITE_BLOCK_BREAK, SoundSource.BLOCKS, 1, 1);
             this.level.addFreshEntity(new ItemEntity(this.level, pos.getX(), pos.getY() + 0.5f, pos.getZ(), dropStack));
