@@ -99,7 +99,7 @@
 	"block.ad_astra.calorite_plating_pressure_plate": "耐热合金板材压力板",
 	"block.ad_astra.calorite_plating_slab"          : "耐热合金板材台阶",
 	"block.ad_astra.calorite_plating_stairs"        : "耐热合金板材楼梯",
-	"block.ad_astra.calorite_sliding_door": "耐热合金重型舱门",
+	"block.ad_astra.calorite_sliding_door"          : "耐热合金重型舱门",
 
 	"block.ad_astra.cheese_block": "奶酪",
 
@@ -163,25 +163,25 @@
 
 	"block.ad_astra.energizer": "能源站",
 
-	"block.ad_astra.extinguished_lantern": "熄灭的灯笼",
-	"block.ad_astra.extinguished_torch"  : "熄灭的火把",
+	"block.ad_astra.coal_lantern": "熄灭的灯笼",
+	"block.ad_astra.coal_torch"  : "熄灭的火把",
 
-	"block.ad_astra.white_flag"     : "浅色基地旗帜",
-	"block.ad_astra.blue_flag"      : "蓝色基地旗帜",
-	"block.ad_astra.brown_flag"     : "棕色基地旗帜",
-	"block.ad_astra.cyan_flag"      : "青色基地旗帜",
-	"block.ad_astra.gray_flag"      : "深色基地旗帜",
-	"block.ad_astra.green_flag"     : "绿色基地旗帜",
-	"block.ad_astra.light_blue_flag": "浅蓝色基地旗帜",
-	"block.ad_astra.lime_flag"      : "黄绿色基地旗帜",
-	"block.ad_astra.magenta_flag"   : "品红色基地旗帜",
-	"block.ad_astra.orange_flag"    : "橙色基地旗帜",
-	"block.ad_astra.pink_flag"      : "粉色基地旗帜",
-	"block.ad_astra.purple_flag"    : "紫色基地旗帜",
-	"block.ad_astra.red_flag"       : "红色基地旗帜",
-	"block.ad_astra.yellow_flag"    : "黄色基地旗帜",
-	"block.ad_astra.light_gray_flag": "浅灰色基地旗帜",
-	"block.ad_astra.black_flag"     : "深色基地旗帜",
+	"block.ad_astra.flag"           : "浅色基地旗帜",
+	"block.ad_astra.flag_blue"      : "蓝色基地旗帜",
+	"block.ad_astra.flag_brown"     : "棕色基地旗帜",
+	"block.ad_astra.flag_cyan"      : "青色基地旗帜",
+	"block.ad_astra.flag_gray"      : "深色基地旗帜",
+	"block.ad_astra.flag_green"     : "绿色基地旗帜",
+	"block.ad_astra.flag_light_blue": "浅蓝色基地旗帜",
+	"block.ad_astra.flag_lime"      : "黄绿色基地旗帜",
+	"block.ad_astra.flag_magenta"   : "品红色基地旗帜",
+	"block.ad_astra.flag_orange"    : "橙色基地旗帜",
+	"block.ad_astra.flag_pink"      : "粉色基地旗帜",
+	"block.ad_astra.flag_purple"    : "紫色基地旗帜",
+	"block.ad_astra.flag_red"       : "红色基地旗帜",
+	"block.ad_astra.flag_yellow"    : "黄色基地旗帜",
+	"block.ad_astra.flag_light_gray": "浅灰色基地旗帜",
+	"block.ad_astra.flag_black"     : "深色基地旗帜",
 
 	"block.ad_astra.fuel"         : "燃油",
 	"block.ad_astra.fuel_refinery": "燃油精炼厂",
@@ -221,7 +221,7 @@
 
 	"block.ad_astra.glowing_calorite_pillar": "上漆耐热金属柱",
 	"block.ad_astra.glowing_desh_pillar"    : "上漆戴斯柱",
-	"block.ad_astra.glowing_iron_pillar"    : "上漆铁柱",
+	"block.ad_astra.blue_iron_pillar"       : "上漆铁柱",
 	"block.ad_astra.glowing_ostrum_pillar"  : "上漆紫金柱",
 	"block.ad_astra.glowing_steel_pillar"   : "上漆钢柱",
 
@@ -399,7 +399,7 @@
 	"block.ad_astra.venus_stone_slab"            : "锃金岩台阶",
 	"block.ad_astra.venus_stone_stairs"          : "锃金岩楼梯",
 
-	"block.ad_astra.wall_extinguished_torch": "熄灭的火把",
+	"block.ad_astra.wall_coal_torch": "熄灭的火把",
 
 	"block.ad_astra.water_pump": "水泵",
 
@@ -426,7 +426,7 @@
 
 	"entity.ad_astra.corrupted_lunarian": "堕落的月球原住民",
 	"entity.ad_astra.glacian_ram"       : "融冰仿生羊",
-	"entity.ad_astra.ice_spit"          : "冰刺",
+	"entity.ad_astra.ice_spit_entity"   : "冰刺",
 
 	"entity.ad_astra.lander": "着陆舱",
 
@@ -464,13 +464,6 @@
 
 	"entity.ad_astra.zombified_mogler": "僵尸虬虫",
 	"entity.ad_astra.zombified_pygro" : "僵尸犴豸",
-
-
-
-	"fluid.ad_astra.cryo_fuel": "深低温燃油",
-	"fluid.ad_astra.fuel"     : "燃油",
-	"fluid.ad_astra.oil"      : "原油",
-	"fluid.ad_astra.oxygen"   : "氧气",
 
 
 
@@ -535,6 +528,9 @@
 	"gui.ad_astra.text.space_station"   : "空间站",
 	"gui.ad_astra.text.item_requirement": "需要材料",
 
+    "gui.ad_astra.text.confirm" : "确认选择",
+    "gui.ad_astra.text.flag_url": "图片链接（https://i.imgur.com/urURL.png）",
+
 
 
 	"info.ad_astra.extract": "提取",
@@ -548,11 +544,11 @@
 
 	"item.ad_astra.astrodux": "§9银河系漫游指南",
 
-	"item.ad_astra.calorite_engine": "耐热金属火箭引擎",
-	"item.ad_astra.calorite_ingot" : "耐热金属锭",
-	"item.ad_astra.calorite_nugget": "耐热金属粒",
-	"item.ad_astra.calorite_plate" : "耐热金属板",
-	"item.ad_astra.calorite_tank"  : "耐热金属燃料储罐",
+	"item.ad_astra.calorite_engine"    : "耐热金属火箭引擎",
+	"item.ad_astra.calorite_ingot"     : "耐热金属锭",
+	"item.ad_astra.calorite_nugget"    : "耐热金属粒",
+	"item.ad_astra.compressed_calorite": "耐热金属板",
+	"item.ad_astra.calorite_tank"      : "耐热金属燃料储罐",
 
 	"item.ad_astra.cheese": "奶酪",
 
@@ -565,11 +561,11 @@
 	"item.ad_astra.cryo_freezer.tooltip": "将冰晶转化为深低温燃油。",
 	"item.ad_astra.cryo_fuel_bucket"    : "深低温燃油桶",
 
-	"item.ad_astra.desh_engine": "戴斯火箭引擎",
-	"item.ad_astra.desh_ingot" : "戴斯锭",
-	"item.ad_astra.desh_nugget": "戴斯粒",
-	"item.ad_astra.desh_plate" : "戴斯板",
-	"item.ad_astra.desh_tank"  : "戴斯燃料储罐",
+	"item.ad_astra.desh_engine"    : "戴斯火箭引擎",
+	"item.ad_astra.desh_ingot"     : "戴斯锭",
+	"item.ad_astra.desh_nugget"    : "戴斯粒",
+	"item.ad_astra.compressed_desh": "戴斯板",
+	"item.ad_astra.desh_tank"      : "戴斯燃料储罐",
 
 	"item.ad_astra.empty_tank": "空",
 
@@ -593,7 +589,7 @@
 	"item.ad_astra.ice_shard": "冰晶",
 
 	"item.ad_astra.iron_plate": "铁板",
-	"item.ad_astra.iron_rod"  : "铁棍",
+	"item.ad_astra.iron_stick": "铁棍",
 
 	"item.ad_astra.jet_suit"       : "喷气式宇航服",
 	"item.ad_astra.jet_suit_boots" : "喷气式重靴",
@@ -620,11 +616,11 @@
 
 	"item.ad_astra.oil_bucket": "原油桶",
 
-	"item.ad_astra.ostrum_engine": "紫金火箭引擎",
-	"item.ad_astra.ostrum_ingot" : "紫金锭",
-	"item.ad_astra.ostrum_nugget": "紫金粒",
-	"item.ad_astra.ostrum_plate" : "紫金板",
-	"item.ad_astra.ostrum_tank"  : "紫金燃料储罐",
+	"item.ad_astra.ostrum_engine"    : "紫金火箭引擎",
+	"item.ad_astra.ostrum_ingot"     : "紫金锭",
+	"item.ad_astra.ostrum_nugget"    : "紫金粒",
+	"item.ad_astra.compressed_ostrum": "紫金板",
+	"item.ad_astra.ostrum_tank"      : "紫金燃料储罐",
 
 	"item.ad_astra.oxygen_bucket"                : "氧气桶",
 	"item.ad_astra.oxygen_distributor.tooltip[0]": "将氧气扩散进",
@@ -659,11 +655,11 @@
 
 	"item.ad_astra.star_crawler_spawn_egg": "沙虫幼虫刷怪蛋",
 
-	"item.ad_astra.steel_engine": "钢火箭引擎",
-	"item.ad_astra.steel_ingot" : "钢锭",
-	"item.ad_astra.steel_nugget": "钢粒",
-	"item.ad_astra.steel_plate" : "钢板",
-	"item.ad_astra.steel_tank"  : "钢燃料储罐",
+	"item.ad_astra.steel_engine"    : "钢火箭引擎",
+	"item.ad_astra.steel_ingot"     : "钢锭",
+	"item.ad_astra.steel_nugget"    : "钢粒",
+	"item.ad_astra.compressed_steel": "钢板",
+	"item.ad_astra.steel_tank"      : "钢燃料储罐",
 
 	"item.ad_astra.sulfur_creeper_spawn_egg": "硫力怕刷怪蛋",
 
@@ -680,6 +676,8 @@
 	"item.ad_astra.zombified_mogler_spawn_egg": "僵尸虬虫刷怪蛋",
 	"item.ad_astra.zombified_pygro_spawn_egg" : "僵尸犴豸刷怪蛋",
 
+    "item.ad_astra.flag.tooltip": "右击基地旗帜以设置自定义图片链接",
+
 
 
 	"itemGroup.ad_astra.tab_basics"    : "Ad Astra｜基础物品",
@@ -693,9 +691,10 @@
 
 
 
-	"message.ad_astra.hold_space": "§7按住§c空格",
-	"message.ad_astra.no_fuel"   : "§c燃料耗尽！§7请向火箭内填充§c燃油§7。§6（潜行时右击）",
-	"message.ad_astra.speed"     : "%s 米每秒",
+    "message.ad_astra.flag.not_owner": "§c这不是你的旗帜！",
+    "message.ad_astra.hold_space"    : "§7按住§c空格",
+    "message.ad_astra.no_fuel"       : "§c燃料耗尽！§7请向火箭内填充§c燃油§7。§6（潜行时右击）",
+    "message.ad_astra.speed"         : "%s 米每秒",
 
 
 
@@ -736,33 +735,29 @@
 	"tag.c.calorite_ingots"    : "耐热金属锭",
 	"tag.c.calorite_nuggets"   : "耐热金属粒",
 	"tag.c.calorite_ores"      : "耐热金属矿石",
-	"tag.c.calorite_plate"     : "耐热金属板",
-	"tag.c.calorite_plates"    : "耐热金属板材",
+	"tag.c.compressed_calorite": "耐热金属板",
 	"tag.c.cheese_ores"        : "奶酪矿石",
 	"tag.c.cheeses"            : "奶酪",
 	"tag.c.desh_blocks"        : "戴斯块",
 	"tag.c.desh_ingots"        : "戴斯锭",
 	"tag.c.desh_nuggets"       : "戴斯粒",
 	"tag.c.desh_ores"          : "戴斯矿石",
+	"tag.c.compressed_desh"    : "戴斯板",
 	"tag.c.ice_shard_ores"     : "冰晶矿石",
 	"tag.c.iron_plates"        : "铁板",
-	"tag.c.iron_rods"          : "铁棒",
+	"tag.c.iron_sticks"        : "铁棒",
 	"tag.c.ostrum_blocks"      : "紫金块",
 	"tag.c.ostrum_ingots"      : "紫金锭",
 	"tag.c.ostrum_nuggets"     : "紫金粒",
 	"tag.c.ostrum_ores"        : "紫金矿石",
-	"tag.c.ostrum_plate"       : "紫金板",
-	"tag.c.ostrum_plates"      : "紫金板材",
+	"tag.c.compressed_ostrum"  : "紫金板",
 	"tag.c.raw_calorite_ores"  : "粗耐热金属矿石",
 	"tag.c.raw_desh_ores"      : "粗戴斯矿石",
-	"tag.c.desh_plate"         : "戴斯板",
-	"tag.c.desh_plates"        : "戴斯板材",
 	"tag.c.raw_ostrum_ores"    : "粗紫金矿石",
 	"tag.c.steel_blocks"       : "钢块",
 	"tag.c.steel_ingots"       : "钢锭",
 	"tag.c.steel_nuggets"      : "钢粒",
-	"tag.c.steel_plate"        : "钢板",
-	"tag.c.steel_plates"       : "钢板材",
+	"tag.c.compressed_steels"  : "钢板",
 
 
 
@@ -782,7 +777,7 @@
 
 	"text.autoconfig.ad_astra.option.cryoFreezer.energyPerTick": "能量每刻",
 	"text.autoconfig.ad_astra.option.cryoFreezer.maxEnergy"    : "最大能量",
-	"text.autoconfig.ad_astra.option.cryoFreezer.tankSize"     : "储罐容量",
+	"text.autoconfig.ad_astra.option.cryoFreezer.tankBuckets"  : "储罐容量",
 
 	"text.autoconfig.ad_astra.option.energizer": "能源站设置",
 
@@ -793,11 +788,12 @@
 
 	"text.autoconfig.ad_astra.option.fuelRefinery.energyPerTick": "能量每刻",
 	"text.autoconfig.ad_astra.option.fuelRefinery.maxEnergy"    : "最大能量",
-	"text.autoconfig.ad_astra.option.fuelRefinery.tankSize"     : "储罐容量",
+	"text.autoconfig.ad_astra.option.fuelRefinery.tankBuckets"  : "储罐容量",
 
 	"text.autoconfig.ad_astra.option.general": "常规设置",
 
 	"text.autoconfig.ad_astra.option.general.acidRainBurns"                 : "酸雨烧伤",
+	"text.autoconfig.ad_astra.option.general.allowFlagImages"               : "允许基地旗帜显示自定义图片",
 	"text.autoconfig.ad_astra.option.general.doEntityGravity"               : "开启实体重力效应",
 	"text.autoconfig.ad_astra.option.general.doEntityGravity.@Tooltip"      : "决定物品、船和箭等实体是否受重力影响。",
 	"text.autoconfig.ad_astra.option.general.doLivingEntityGravity"         : "是否开启活体重力效应",
@@ -845,13 +841,13 @@
 	"text.autoconfig.ad_astra.option.oxygenDistributor.refreshTicks"                : "刷新频率",
 	"text.autoconfig.ad_astra.option.oxygenDistributor.refreshTicks.@Tooltip[0]"    : "决定供氧仪每隔多少刻检查一次环境大气的密闭性。把这个数值",
 	"text.autoconfig.ad_astra.option.oxygenDistributor.refreshTicks.@Tooltip[1]"    : "调得太小（刷新频率过快）会影响服务端TPS，请保持谨慎。",
-	"text.autoconfig.ad_astra.option.oxygenDistributor.tankSize"                    : "储罐容量",
+	"text.autoconfig.ad_astra.option.oxygenDistributor.tankBuckets"                 : "储罐容量",
 
 	"text.autoconfig.ad_astra.option.oxygenLoader": "氧气装载器设置",
 
 	"text.autoconfig.ad_astra.option.oxygenLoader.energyPerTick": "能量每刻",
 	"text.autoconfig.ad_astra.option.oxygenLoader.maxEnergy"    : "最大能量",
-	"text.autoconfig.ad_astra.option.oxygenLoader.tankSize"     : "储罐容量",
+	"text.autoconfig.ad_astra.option.oxygenLoader.tankBuckets"  : "储罐容量",
 
 	"text.autoconfig.ad_astra.option.rocket": "火箭设置",
 
@@ -865,17 +861,17 @@
 	"text.autoconfig.ad_astra.option.rocket.entitiesBurnUnderRocket"         : "开启火箭引擎烧伤",
 	"text.autoconfig.ad_astra.option.rocket.entitiesBurnUnderRocket.@Tooltip": "决定站在火箭引擎下的实体是否受到伤害。",
 	"text.autoconfig.ad_astra.option.rocket.maxSpeed"                        : "最大速度",
-	"text.autoconfig.ad_astra.option.rocket.tankSize"                        : "储罐容量",
+	"text.autoconfig.ad_astra.option.rocket.tankBuckets"                     : "储罐容量",
 
 	"text.autoconfig.ad_astra.option.rover": "星球车设置",
 
 	"text.autoconfig.ad_astra.option.rover.deceleration"      : "减速度",
 	"text.autoconfig.ad_astra.option.rover.explodeRoverInLava": "驶入熔岩时爆炸",
-	"text.autoconfig.ad_astra.option.rover.fuelPerSecond"     : "燃油每秒",
+	"text.autoconfig.ad_astra.option.rover.fuelPerTick"       : "燃油每刻",
 	"text.autoconfig.ad_astra.option.rover.maxSpeed"          : "最大速度",
 	"text.autoconfig.ad_astra.option.rover.maxTurnSpeed"      : "最大转向速度",
 	"text.autoconfig.ad_astra.option.rover.minSpeed"          : "最小速度",
-	"text.autoconfig.ad_astra.option.rover.tankSize"          : "储罐容量",
+	"text.autoconfig.ad_astra.option.rover.tankBuckets"       : "储罐容量",
 	"text.autoconfig.ad_astra.option.rover.turnSpeed"         : "转向速度",
 
 	"text.autoconfig.ad_astra.option.solarPanel": "太阳能板设置",
@@ -916,7 +912,7 @@
 	"text.autoconfig.ad_astra.option.waterPump.deleteWaterBelowWaterPump": "允许抽干水泵下方的水",
 	"text.autoconfig.ad_astra.option.waterPump.energyPerTick"            : "能量每刻",
 	"text.autoconfig.ad_astra.option.waterPump.maxEnergy"                : "最大能量",
-	"text.autoconfig.ad_astra.option.waterPump.tankSize"                 : "储罐容量",
+	"text.autoconfig.ad_astra.option.waterPump.tankBuckets"              : "储罐容量",
 	"text.autoconfig.ad_astra.option.waterPump.transferPerTick"          : "每秒转化",
 
 	"text.autoconfig.ad_astra.title": "Ad Astra设置",
