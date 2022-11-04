@@ -18,7 +18,7 @@ public class RocketItemRendererTier1 extends BlockEntityWithoutLevelRenderer {
     }
 
     @Override
-    public void renderByItem(ItemStack stack, TransformType mode, PoseStack matrices, MultiBufferSource vertexConsumers, int light, int overlay) {
-        VehicleEntityRenderer.renderRocketItem(RocketEntityRendererTier1.TEXTURE, RocketEntityModelTier1.LAYER_LOCATION, matrices, vertexConsumers, light, overlay);
+    public void renderByItem(ItemStack stack, TransformType mode, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
+        VehicleEntityRenderer.renderRocketItem(RocketEntityRendererTier1.TEXTURE, RocketEntityModelTier1.LAYER_LOCATION, poseStack, buffer, packedLight, packedOverlay);
     }
 }

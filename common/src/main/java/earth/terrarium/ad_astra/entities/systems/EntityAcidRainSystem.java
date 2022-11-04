@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.entities.systems;
 
 import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.ad_astra.entities.vehicles.VehicleEntity;
+import earth.terrarium.ad_astra.entities.vehicles.Vehicle;
 import earth.terrarium.ad_astra.mixin.EntityInvoker;
 import earth.terrarium.ad_astra.registry.ModDamageSource;
 import earth.terrarium.ad_astra.registry.ModTags;
@@ -25,7 +25,7 @@ public class EntityAcidRainSystem {
         }
 
         // Let the entity survive in a fully sealed vehicle
-        if (entity.getVehicle() instanceof VehicleEntity vehicle && !vehicle.fullyConcealsRider()) {
+        if (entity.getVehicle() instanceof Vehicle vehicle && !vehicle.fullyConcealsRider()) {
             return;
         }
 

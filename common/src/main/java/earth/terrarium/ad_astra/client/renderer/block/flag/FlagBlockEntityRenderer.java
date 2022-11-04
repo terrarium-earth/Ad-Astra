@@ -27,15 +27,19 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Map;
 
+@ParametersAreNonnullByDefault
 @Environment(EnvType.CLIENT)
 public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEntity> {
 
     public FlagBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {
     }
 
-    public static RenderType getRenderLayer(GameProfile profile) {
+    public static RenderType getRenderLayer(@Nullable GameProfile profile) {
         if (profile == null) {
             // Default zombie head texture on the flag if the player head can not be found.
             return RenderType.entityCutoutNoCullZOffset(new ResourceLocation("textures/entity/zombie/zombie.png"));
@@ -49,99 +53,99 @@ public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEnt
     }
 
     @Override
-    public void render(FlagBlockEntity entity, float tickDelta, PoseStack matrices, MultiBufferSource vertexConsumers, int light, int overlay) {
+    public void render(FlagBlockEntity entity, float tickDelta, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
         if (entity.getBlockState().getValue(FlagBlock.HALF).equals(DoubleBlockHalf.LOWER)) {
             ResourceLocation flagTexture = new ModResourceLocation("block/flag/" + Registry.BLOCK.getKey(entity.getBlockState().getBlock()).getPath());
-            matrices.pushPose();
+            poseStack.pushPose();
 
 //			switch (entity.getCachedState().get(FlagBlock.FACING)) {
 //			case NORTH -> {
-//				matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(0));
-//				matrices.translate(0.0f, 0.5f, 0.0f);
+//				poseStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(0));
+//				poseStack.translate(0.0f, 0.5f, 0.0f);
 //			}
 //			case EAST -> {
-//				matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(270));
-//				matrices.translate(0.0f, 0.5f, -1.0f);
+//				poseStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(270));
+//				poseStack.translate(0.0f, 0.5f, -1.0f);
 //			}
 //			case SOUTH -> {
-//				matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(180));
-//				matrices.translate(-1.0f, 0.5f, -1.0f);
+//				poseStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(180));
+//				poseStack.translate(-1.0f, 0.5f, -1.0f);
 //			}
 //			case WEST -> {
-//				matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(90));
-//				matrices.translate(-1.0f, 0.5f, 0.0f);
+//				poseStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(90));
+//				poseStack.translate(-1.0f, 0.5f, 0.0f);
 //			}
 //			default -> throw new IllegalArgumentException("Unexpected value: " + entity.getCachedState().get(FlagBlock.FACING));
 //			}
 
-            matrices.translate(0.5D, 1D, 0.5D);
+            poseStack.translate(0.5D, 1D, 0.5D);
             // TODO: Chech if this works
-            matrices.mulPose(Vector3f.YP.rotationDegrees(-entity.getBlockState().getValue(FlagBlock.FACING).toYRot()));
-            matrices.translate(-0.5D, -1D, -0.5D);
+            poseStack.mulPose(Vector3f.YP.rotationDegrees(-entity.getBlockState().getValue(FlagBlock.FACING).toYRot()));
+            poseStack.translate(-0.5D, -1D, -0.5D);
 
-            AdAstraClient.renderBlock(flagTexture, matrices, vertexConsumers, light, overlay);
+            AdAstraClient.renderBlock(flagTexture, poseStack, buffer, packedLight, packedOverlay);
 
-            matrices.popPose();
+            poseStack.popPose();
         } else {
             ModelPart headModel = createHeadModel();
             ModelPart secondHeadModel = createHeadModel();
 
-            VertexConsumer vertexConsumer = vertexConsumers.getBuffer(getRenderLayer(entity.getOwner()));
+            VertexConsumer vertexConsumer = buffer.getBuffer(getRenderLayer(entity.getOwner()));
 
             int pivotY = 15;
             float flip = (float) Math.toRadians(180);
             float quarterTurn = (float) Math.toRadians(90);
 
             // Front image of player head
-            matrices.pushPose();
+            poseStack.pushPose();
             switch (entity.getBlockState().getValue(FlagBlock.FACING)) {
                 // TODO: Check if this works
                 case NORTH -> {
-                    matrices.translate(-0.78f, 0.3f, 0.0f);
+                    poseStack.translate(-0.78f, 0.3f, 0.0f);
                     headModel.loadPose(PartPose.offsetAndRotation(13, pivotY, 8, 0, 0, flip));
                 }
                 case EAST -> {
-                    matrices.translate(0.0f, 0.3f, -0.78f);
+                    poseStack.translate(0.0f, 0.3f, -0.78f);
                     headModel.loadPose(PartPose.offsetAndRotation(8, pivotY, 13, 0, quarterTurn, flip));
                 }
                 case SOUTH -> {
-                    matrices.translate(0.78f, 0.3f, 0.0f);
+                    poseStack.translate(0.78f, 0.3f, 0.0f);
                     headModel.loadPose(PartPose.offsetAndRotation(11, pivotY, 8, 0, 0, flip));
                 }
                 case WEST -> {
-                    matrices.translate(0.0f, 0.3f, 0.78f);
+                    poseStack.translate(0.0f, 0.3f, 0.78f);
                     headModel.loadPose(PartPose.offsetAndRotation(8, pivotY, 11, 0, quarterTurn, flip));
                 }
                 default ->
                         throw new IllegalArgumentException("Unexpected value: " + entity.getBlockState().getValue(FlagBlock.FACING));
             }
-            headModel.render(matrices, vertexConsumer, light, overlay);
-            matrices.popPose();
+            headModel.render(poseStack, vertexConsumer, packedLight, packedOverlay);
+            poseStack.popPose();
 
-            matrices.pushPose();
+            poseStack.pushPose();
             // Back image of player head
             switch (entity.getBlockState().getValue(FlagBlock.FACING)) {
                 case NORTH -> {
-                    matrices.translate(-0.78f, 0.3f, 0.0f);
+                    poseStack.translate(-0.78f, 0.3f, 0.0f);
                     secondHeadModel.loadPose(PartPose.offsetAndRotation(5, pivotY, 7.999f, 0, flip, flip));
                 }
                 case EAST -> {
-                    matrices.translate(0.0f, 0.3f, -0.78f);
+                    poseStack.translate(0.0f, 0.3f, -0.78f);
                     secondHeadModel.loadPose(PartPose.offsetAndRotation(8.001f, pivotY, 5, 0, -quarterTurn, flip));
                 }
                 case SOUTH -> {
-                    matrices.translate(0.78f, 0.3f, 0.0f);
+                    poseStack.translate(0.78f, 0.3f, 0.0f);
                     secondHeadModel.loadPose(PartPose.offsetAndRotation(3, pivotY, 7.999f, 0, flip, flip));
                 }
                 case WEST -> {
-                    matrices.translate(0.0f, 0.3f, 0.78f);
+                    poseStack.translate(0.0f, 0.3f, 0.78f);
                     secondHeadModel.loadPose(PartPose.offsetAndRotation(8.001f, pivotY, 3, 0, -quarterTurn, flip));
                 }
                 default ->
                         throw new IllegalArgumentException("Unexpected value: " + entity.getBlockState().getValue(FlagBlock.FACING));
             }
-            secondHeadModel.render(matrices, vertexConsumer, light, overlay);
-            matrices.popPose();
+            secondHeadModel.render(poseStack, vertexConsumer, packedLight, packedOverlay);
+            poseStack.popPose();
         }
     }
 

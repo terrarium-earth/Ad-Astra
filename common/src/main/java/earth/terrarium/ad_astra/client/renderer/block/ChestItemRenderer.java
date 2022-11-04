@@ -21,7 +21,7 @@ public class ChestItemRenderer extends BlockEntityWithoutLevelRenderer {
     }
 
     @Override
-    public void renderByItem(ItemStack stack, ItemTransforms.TransformType mode, PoseStack matrices, MultiBufferSource vertexConsumers, int light, int overlay) {
-        Minecraft.getInstance().getBlockEntityRenderDispatcher().renderItem(this.chest, matrices, vertexConsumers, light, overlay);
+    public void renderByItem(ItemStack stack, ItemTransforms.TransformType mode, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
+        Minecraft.getInstance().getBlockEntityRenderDispatcher().renderItem(this.chest, poseStack, buffer, packedLight, packedOverlay);
     }
 }

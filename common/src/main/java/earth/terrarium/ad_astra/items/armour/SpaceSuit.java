@@ -7,6 +7,7 @@ import earth.terrarium.ad_astra.registry.ModTags;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import org.apache.commons.lang3.Range;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -58,7 +59,7 @@ public class SpaceSuit extends DyeableArmorItem implements FluidContainingItem, 
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag context) {
+    public void appendHoverText(ItemStack stack, Level level, @NotNull List<Component> tooltip, @NotNull TooltipFlag context) {
         if (stack.is(ModItems.SPACE_SUIT.get()) || stack.is(ModItems.NETHERITE_SPACE_SUIT.get()) || stack.is(ModItems.JET_SUIT.get())) {
             long oxygen = FluidHooks.toMillibuckets(FluidHooks.getItemFluidManager(stack).getFluidInTank(0).getFluidAmount());
             tooltip.add(Component.translatable("tooltip.ad_astra.space_suit", oxygen, FluidHooks.toMillibuckets(getTankSize())).setStyle(Style.EMPTY.withColor(oxygen > 0 ? ChatFormatting.GREEN : ChatFormatting.RED)));
@@ -80,7 +81,7 @@ public class SpaceSuit extends DyeableArmorItem implements FluidContainingItem, 
     }
 
     @Override
-    public int getColor(ItemStack stack) {
+    public int getColor(@NotNull ItemStack stack) {
         int colour = super.getColor(stack);
         return colour == 10511680 ? 0xFFFFFF : colour;
     }

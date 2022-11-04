@@ -28,12 +28,12 @@ public class ScreenUtils {
         return Component.translatable("gui." + text.getNamespace() + ".text." + text.getPath());
     }
 
-    public static void addTexture(PoseStack matrices, int x, int y, int width, int height, ResourceLocation texture) {
+    public static void addTexture(PoseStack poseStack, int x, int y, int width, int height, ResourceLocation texture) {
         RenderSystem.setShaderTexture(0, texture);
-        GuiComponent.blit(matrices, x, y, 0, 0, width, height, width, height);
+        GuiComponent.blit(poseStack, x, y, 0, 0, width, height, width, height);
     }
 
-    public static void addRotatingTexture(PlanetSelectionScreen screen, PoseStack matrices, int x, int y, int width, int height, ResourceLocation texture, float speed) {
+    public static void addRotatingTexture(PlanetSelectionScreen screen, PoseStack poseStack, int x, int y, int width, int height, ResourceLocation texture, float speed) {
 
         double scale = Minecraft.getInstance().getWindow().getGuiScaledHeight() / 400.0;
 
@@ -45,14 +45,14 @@ public class ScreenUtils {
         width *= scale;
         height *= scale;
 
-        matrices.pushPose();
+        poseStack.pushPose();
 
-        matrices.translate(screen.width / 2.0f, screen.height / 2.0f, 0);
-        matrices.mulPose(Vector3f.ZP.rotationDegrees(screen.getGuiTime() * (speed / 3.0f)));
+        poseStack.translate(screen.width / 2.0f, screen.height / 2.0f, 0);
+        poseStack.mulPose(Vector3f.ZP.rotationDegrees(screen.getGuiTime() * (speed / 3.0f)));
 
-        addTexture(matrices, x, y, width, height, texture);
+        addTexture(poseStack, x, y, width, height, texture);
 
-        matrices.popPose();
+        poseStack.popPose();
     }
 
     public static void drawCircle(double x, double y, double radius, int sides, Color ringColour) {

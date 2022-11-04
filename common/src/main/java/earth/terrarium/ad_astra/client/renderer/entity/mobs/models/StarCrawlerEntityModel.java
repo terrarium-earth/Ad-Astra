@@ -2,7 +2,7 @@ package earth.terrarium.ad_astra.client.renderer.entity.mobs.models;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import earth.terrarium.ad_astra.entities.mobs.StarCrawlerEntity;
+import earth.terrarium.ad_astra.entities.mobs.StarCrawler;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -18,7 +18,7 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
 
 @Environment(EnvType.CLIENT)
-public class StarCrawlerEntityModel extends EntityModel<StarCrawlerEntity> {
+public class StarCrawlerEntityModel extends EntityModel<StarCrawler> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ModResourceLocation("star_crawler"), "main");
 
     private final ModelPart body;
@@ -150,7 +150,7 @@ public class StarCrawlerEntityModel extends EntityModel<StarCrawlerEntity> {
     }
 
     @Override
-   public void setupAnim(StarCrawlerEntity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
+   public void setupAnim(StarCrawler entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
         // arm1.
         this.arm1g.getChild("Hand1").yRot = Mth.cos(limbAngle * 0.6662f) * limbDistance;
         this.arm2g.getChild("Hand2").yRot = Mth.cos(limbAngle * 0.6662f) * limbDistance;
@@ -164,11 +164,11 @@ public class StarCrawlerEntityModel extends EntityModel<StarCrawlerEntity> {
     }
 
     @Override
-    public void renderToBuffer(PoseStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
-        body.render(matrices, vertices, light, overlay);
-        arm1g.render(matrices, vertices, light, overlay);
-        arm2g.render(matrices, vertices, light, overlay);
-        arm3g.render(matrices, vertices, light, overlay);
-        arm4g.render(matrices, vertices, light, overlay);
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertices, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        body.render(poseStack, vertices, packedLight, packedOverlay);
+        arm1g.render(poseStack, vertices, packedLight, packedOverlay);
+        arm2g.render(poseStack, vertices, packedLight, packedOverlay);
+        arm3g.render(poseStack, vertices, packedLight, packedOverlay);
+        arm4g.render(poseStack, vertices, packedLight, packedOverlay);
     }
 }

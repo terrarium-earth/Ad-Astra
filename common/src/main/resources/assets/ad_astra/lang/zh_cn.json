@@ -682,14 +682,7 @@
 
 
 
-	"itemGroup.ad_astra.tab_basics"    : "Ad Astra｜基础物品",
-	"itemGroup.ad_astra.tab_blocks"    : "Ad Astra｜建筑方块",
-	"itemGroup.ad_astra.tab_flags"     : "Ad Astra｜基地旗帜",
-	"itemGroup.ad_astra.tab_globes"    : "Ad Astra｜星球仪",
-	"itemGroup.ad_astra.tab_machines"  : "Ad Astra｜机器构件",
-	"itemGroup.ad_astra.tab_materials" : "Ad Astra｜材料",
-	"itemGroup.ad_astra.tab_normal"    : "Ad Astra",
-	"itemGroup.ad_astra.tab_spawn_eggs": "Ad Astra｜生物",
+	"itemGroup.ad_astra.main"    : "Ad Astra",
 
 
 

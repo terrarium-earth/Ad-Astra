@@ -3,7 +3,7 @@ package earth.terrarium.ad_astra.networking.packets.client;
 import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
-import earth.terrarium.ad_astra.entities.vehicles.RocketEntity;
+import earth.terrarium.ad_astra.entities.vehicles.Rocket;
 import earth.terrarium.ad_astra.networking.NetworkHandling;
 import earth.terrarium.ad_astra.networking.packets.server.StartRocketPacket;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
@@ -39,9 +39,9 @@ public record LaunchRocketPacket() implements Packet<LaunchRocketPacket> {
         @Override
         public PacketContext handle(LaunchRocketPacket message) {
             return (player, level) -> {
-                if (player.getVehicle() instanceof RocketEntity rocket) {
+                if (player.getVehicle() instanceof Rocket rocket) {
                     if (!rocket.isFlying()) {
-                        if (rocket.getTankAmount() >= RocketEntity.getRequiredAmountForLaunch(rocket.getTankFluid())) {
+                        if (rocket.getTankAmount() >= Rocket.getRequiredAmountForLaunch(rocket.getTankFluid())) {
                             rocket.initiateLaunchSequenceFromServer();
                             // Tell all clients to start rendering the rocket launch
                             NetworkHandling.CHANNEL.sendToAllLoaded(new StartRocketPacket(rocket.getId()), level, rocket.getOnPos());

@@ -2,7 +2,7 @@ package earth.terrarium.ad_astra.client.renderer.entity.mobs.models;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import earth.terrarium.ad_astra.entities.mobs.CorruptedLunarianEntity;
+import earth.terrarium.ad_astra.entities.mobs.CorruptedLunarian;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -18,7 +18,7 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
 
 @Environment(EnvType.CLIENT)
-public class CorruptedLunarianEntityModel extends EntityModel<CorruptedLunarianEntity> {
+public class CorruptedLunarianEntityModel extends EntityModel<CorruptedLunarian> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ModResourceLocation("corrupted_lunarian"), "main");
 
     private final ModelPart head;
@@ -115,7 +115,7 @@ public class CorruptedLunarianEntityModel extends EntityModel<CorruptedLunarianE
     }
 
     @Override
-   public void setupAnim(CorruptedLunarianEntity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
+   public void setupAnim(CorruptedLunarian entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
         this.arm2.yRot = 0.0f;
         this.arm1.yRot = 0.0f;
         this.arm2.zRot = 0.0f;
@@ -144,16 +144,16 @@ public class CorruptedLunarianEntityModel extends EntityModel<CorruptedLunarianE
     }
 
     @Override
-    public void renderToBuffer(PoseStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
-        head.render(matrices, vertices, light, overlay);
-        body.render(matrices, vertices, light, overlay);
-        leg0.render(matrices, vertices, light, overlay);
-        leg1.render(matrices, vertices, light, overlay);
-        arm1.render(matrices, vertices, light, overlay);
-        arm2.render(matrices, vertices, light, overlay);
-        monsterarm1.render(matrices, vertices, light, overlay);
-        monsterarm2.render(matrices, vertices, light, overlay);
-        monsterarm3.render(matrices, vertices, light, overlay);
-        monsterarm4.render(matrices, vertices, light, overlay);
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertices, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        head.render(poseStack, vertices, packedLight, packedOverlay);
+        body.render(poseStack, vertices, packedLight, packedOverlay);
+        leg0.render(poseStack, vertices, packedLight, packedOverlay);
+        leg1.render(poseStack, vertices, packedLight, packedOverlay);
+        arm1.render(poseStack, vertices, packedLight, packedOverlay);
+        arm2.render(poseStack, vertices, packedLight, packedOverlay);
+        monsterarm1.render(poseStack, vertices, packedLight, packedOverlay);
+        monsterarm2.render(poseStack, vertices, packedLight, packedOverlay);
+        monsterarm3.render(poseStack, vertices, packedLight, packedOverlay);
+        monsterarm4.render(poseStack, vertices, packedLight, packedOverlay);
     }
 }

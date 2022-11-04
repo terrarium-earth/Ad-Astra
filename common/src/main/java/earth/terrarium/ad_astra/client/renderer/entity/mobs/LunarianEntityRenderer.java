@@ -2,7 +2,7 @@ package earth.terrarium.ad_astra.client.renderer.entity.mobs;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.client.renderer.entity.mobs.models.LunarianEntityModel;
-import earth.terrarium.ad_astra.entities.mobs.LunarianEntity;
+import earth.terrarium.ad_astra.entities.mobs.Lunarian;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.entity.layers.CustomHeadLayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.npc.VillagerProfession;
 
-public class LunarianEntityRenderer extends MobRenderer<LunarianEntity, LunarianEntityModel<LunarianEntity>> {
+public class LunarianEntityRenderer extends MobRenderer<Lunarian, LunarianEntityModel<Lunarian>> {
     public static final ResourceLocation TEXTURE = new ModResourceLocation("textures/entity/lunarian/lunarian.png");
     public static final ResourceLocation FARMER_TEXTURE = new ModResourceLocation("textures/entity/lunarian/farmer_lunarian.png");
     public static final ResourceLocation FISHERMAN_TEXTURE = new ModResourceLocation("textures/entity/lunarian/fisherman_lunarian.png");
@@ -34,7 +34,7 @@ public class LunarianEntityRenderer extends MobRenderer<LunarianEntity, Lunarian
     }
 
     @Override
-    public ResourceLocation getTextureLocation(LunarianEntity entity) {
+    public ResourceLocation getTextureLocation(Lunarian entity) {
 
         VillagerProfession profession = entity.getVillagerData().getProfession();
         if (profession.equals(VillagerProfession.ARMORER)) {
@@ -68,7 +68,7 @@ public class LunarianEntityRenderer extends MobRenderer<LunarianEntity, Lunarian
         }
     }
 
-    protected void scale(LunarianEntity villagerEntity, PoseStack poseStack, float f) {
+    protected void scale(Lunarian villagerEntity, PoseStack poseStack, float f) {
         float g = 0.9375f;
         if (villagerEntity.isBaby()) {
             g *= 0.5f;

@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.client.renderer.entity.vehicles.rover;
 
 import earth.terrarium.ad_astra.client.renderer.entity.vehicles.VehicleEntityModel;
-import earth.terrarium.ad_astra.entities.vehicles.RoverEntity;
+import earth.terrarium.ad_astra.entities.vehicles.Rover;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -16,7 +16,7 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
 
 @Environment(EnvType.CLIENT)
-public class RoverEntityModel extends VehicleEntityModel<RoverEntity> {
+public class RoverEntityModel extends VehicleEntityModel<Rover> {
 
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ModResourceLocation("tier_1_rover"), "main");
 
@@ -96,7 +96,7 @@ public class RoverEntityModel extends VehicleEntityModel<RoverEntity> {
     }
 
     @Override
-   public void setupAnim(RoverEntity entity, float tickDelta, float limbDistance, float animationProgress, float headYaw, float headPitch) {
+   public void setupAnim(Rover entity, float tickDelta, float limbDistance, float animationProgress, float headYaw, float headPitch) {
         super.setupAnim(entity, tickDelta, limbDistance, animationProgress, headYaw, headPitch);
         this.frame.x = 0.0f;
         this.frame.y = 24.0f;

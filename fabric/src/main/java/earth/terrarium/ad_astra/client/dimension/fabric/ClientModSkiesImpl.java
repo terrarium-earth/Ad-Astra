@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.client.dimension.fabric;
 
 import earth.terrarium.ad_astra.client.dimension.rendering.DimensionEffects;
-import earth.terrarium.ad_astra.mixin.client.WorldRendererAccessor;
+import earth.terrarium.ad_astra.mixin.client.LevelRendererAccessor;
 import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceKey;
@@ -33,6 +33,6 @@ public class ClientModSkiesImpl {
     }
 
     private static int getTicks() {
-        return ((WorldRendererAccessor) Minecraft.getInstance().levelRenderer).getTicks();
+        return ((LevelRendererAccessor) Minecraft.getInstance().levelRenderer).getTicks();
     }
 }

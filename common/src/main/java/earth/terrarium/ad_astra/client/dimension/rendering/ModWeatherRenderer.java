@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexFormat;
-import earth.terrarium.ad_astra.mixin.client.WorldRendererAccessor;
+import earth.terrarium.ad_astra.mixin.client.LevelRendererAccessor;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -29,7 +29,7 @@ public class ModWeatherRenderer {
     public static void render(ClientLevel level, int ticks, float tickDelta, LightTexture manager, double cameraX, double cameraY, double cameraZ) {
 
         Minecraft client = Minecraft.getInstance();
-        WorldRendererAccessor renderer = (WorldRendererAccessor) client.levelRenderer;
+        LevelRendererAccessor renderer = (LevelRendererAccessor) client.levelRenderer;
 
         float h = client.level.getRainLevel(tickDelta);
         if (!(h <= 0.0f)) {

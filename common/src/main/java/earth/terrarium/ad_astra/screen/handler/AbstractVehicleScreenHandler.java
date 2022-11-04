@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.screen.handler;
 
-import earth.terrarium.ad_astra.entities.vehicles.VehicleEntity;
+import earth.terrarium.ad_astra.entities.vehicles.Vehicle;
 import earth.terrarium.ad_astra.networking.NetworkHandling;
 import earth.terrarium.ad_astra.networking.packets.server.MachineInfoPacket;
 import earth.terrarium.ad_astra.util.CustomInventory;
@@ -18,18 +18,18 @@ import net.minecraft.world.level.Level;
 
 public abstract class AbstractVehicleScreenHandler extends AbstractContainerMenu {
 
-    protected final VehicleEntity vehicle;
+    protected final Vehicle vehicle;
     protected final Level level;
     protected final CustomInventory inventory;
     protected final Player player;
     protected List<FluidHolder> fluids;
 
-    public AbstractVehicleScreenHandler(MenuType<?> type, int syncId, Inventory inventory, VehicleEntity entity) {
+    public AbstractVehicleScreenHandler(MenuType<?> type, int syncId, Inventory inventory, Vehicle entity) {
         this(type, syncId, inventory, entity, new Slot[]{});
     }
 
     // Add additional slots.
-    public AbstractVehicleScreenHandler(MenuType<?> type, int syncId, Inventory inventory, VehicleEntity entity, Slot[] slots) {
+    public AbstractVehicleScreenHandler(MenuType<?> type, int syncId, Inventory inventory, Vehicle entity, Slot[] slots) {
         super(type, syncId);
         this.vehicle = entity;
         this.inventory = entity.getInventory();
@@ -45,7 +45,7 @@ public abstract class AbstractVehicleScreenHandler extends AbstractContainerMenu
         this.setPlayerInventory(inventory);
     }
 
-    public VehicleEntity getVehicleEntity() {
+    public Vehicle getVehicleEntity() {
         return this.vehicle;
     }
 

@@ -16,7 +16,7 @@ import earth.terrarium.ad_astra.blocks.pipes.FluidPipeBlock;
 import earth.terrarium.ad_astra.blocks.torches.ExtinguishedLanternBlock;
 import earth.terrarium.ad_astra.blocks.torches.ExtinguishedTorchBlock;
 import earth.terrarium.ad_astra.blocks.torches.WallExtinguishedTorchBlock;
-import earth.terrarium.ad_astra.mixin.SignTypeInvoker;
+import earth.terrarium.ad_astra.mixin.WoodTypeInvoker;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.minecraft.core.Registry;
 import net.minecraft.data.worldgen.features.TreeFeatures;
@@ -310,7 +310,7 @@ public class ModBlocks {
     public static final RegistrySupplier<Block> PERMAFROST_BRICK_WALL = register("permafrost_brick_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICK_WALL)));
 
     // Sign
-    public static final WoodType GLACIAN = SignTypeInvoker.adastra_invokeRegister(SignTypeInvoker.adastra_init(ArchitecturyTarget.getCurrentTarget().equals("forge") ? "ad_astra:glacian" : "glacian"));
+    public static final WoodType GLACIAN = WoodTypeInvoker.adastra_invokeRegister(WoodTypeInvoker.adastra_init(ArchitecturyTarget.getCurrentTarget().equals("forge") ? "ad_astra:glacian" : "glacian"));
 
     // Glacian Wood
     public static final RegistrySupplier<Block> GLACIAN_LOG = register("glacian_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).color(MaterialColor.CLAY).friction(0.5f)));

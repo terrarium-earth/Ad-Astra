@@ -42,7 +42,7 @@ public abstract class BucketItemMixin {
 
     // Evaporate water in a no-oxygen environment. Water is not evaporated in a oxygen distributor.
     @Inject(method = "emptyContents", at = @At(value = "HEAD"), cancellable = true)
-    public void adastra_emptyContents(Player player, Level level, BlockPos pos, BlockHitResult hitResult, CallbackInfoReturnable<Boolean> ci) {
+    public void adastra_emptyContents(Player player, Level level, BlockPos pos, BlockHitResult hitResult, CallbackInfoReturnable<Boolean> cir) {
         if (!AdAstra.CONFIG.general.doOxygen) {
             return;
         }
@@ -68,13 +68,13 @@ public abstract class BucketItemMixin {
             for (int l = 0; l < 8; ++l) {
                 level.addParticle(ParticleTypes.LARGE_SMOKE, (double) i + Math.random(), (double) j + Math.random(), (double) k + Math.random(), 0.0, 0.0, 0.0);
             }
-            ci.setReturnValue(true);
+            cir.setReturnValue(true);
         } else if (level.dimensionType().ultraWarm()) {
-            ci.cancel();
+            cir.cancel();
 
             boolean bl2;
             if (!(this.content instanceof FlowingFluid)) {
-                ci.setReturnValue(false);
+                cir.setReturnValue(false);
             }
             BlockState blockState = level.getBlockState(pos);
             Block block = blockState.getBlock();
@@ -82,14 +82,14 @@ public abstract class BucketItemMixin {
             boolean bl = blockState.canBeReplaced(this.content);
             bl2 = blockState.isAir() || bl || block instanceof LiquidBlockContainer && ((LiquidBlockContainer) block).canPlaceLiquid(level, pos, blockState, this.content);
             if (!bl2) {
-                ci.setReturnValue(hitResult != null && bucketItem.emptyContents(player, level, hitResult.getBlockPos().relative(hitResult.getDirection()), null));
+                cir.setReturnValue(hitResult != null && bucketItem.emptyContents(player, level, hitResult.getBlockPos().relative(hitResult.getDirection()), null));
             }
             if (block instanceof LiquidBlockContainer && this.content.equals(Fluids.WATER)) {
                 ((LiquidBlockContainer) block).placeLiquid(level, pos, blockState, ((FlowingFluid) this.content).getSource(false));
                 SoundEvent soundEvent = this.content.is(FluidTags.LAVA) ? SoundEvents.BUCKET_EMPTY_LAVA : SoundEvents.BUCKET_EMPTY;
                 level.playSound(player, pos, soundEvent, SoundSource.BLOCKS, 1.0f, 1.0f);
                 level.gameEvent(player, GameEvent.FLUID_PLACE, pos);
-                ci.setReturnValue(true);
+                cir.setReturnValue(true);
             }
             if (!level.isClientSide && bl && !material.isLiquid()) {
                 level.destroyBlock(pos, true);
@@ -99,11 +99,11 @@ public abstract class BucketItemMixin {
                     SoundEvent soundEvent = this.content.is(FluidTags.LAVA) ? SoundEvents.BUCKET_EMPTY_LAVA : SoundEvents.BUCKET_EMPTY;
                     level.playSound(player, pos, soundEvent, SoundSource.BLOCKS, 1.0f, 1.0f);
                     level.gameEvent(player, GameEvent.FLUID_PLACE, pos);
-                    ci.setReturnValue(true);
+                    cir.setReturnValue(true);
                 }
             }
 
-            ci.setReturnValue(true);
+            cir.setReturnValue(true);
         }
     }
 }

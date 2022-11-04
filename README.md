@@ -4,12 +4,6 @@
     </p>
 </a>
 
-<a href="https://modrinth.com/mod/cloth-config">
-    <p align="center">
-        <img src="https://raw.githubusercontent.com/Jab125/Jab125/main/imgs/requiredClothConfig.png" alt="Fabric API" width="250"/> 
-    </p>
-</a>
-
 ![Banner](https://media.discordapp.net/attachments/1005790947365376060/1007374451828084836/Ad_Astra_Banner.png?width=1440&height=691)
 
 <a href="https://discord.com/invite/K6EWQQ7Ntd">

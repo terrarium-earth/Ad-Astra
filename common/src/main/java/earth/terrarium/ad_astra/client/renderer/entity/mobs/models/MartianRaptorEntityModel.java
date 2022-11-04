@@ -2,7 +2,7 @@ package earth.terrarium.ad_astra.client.renderer.entity.mobs.models;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import earth.terrarium.ad_astra.entities.mobs.MartianRaptorEntity;
+import earth.terrarium.ad_astra.entities.mobs.MartianRaptor;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -18,7 +18,7 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
 
 @Environment(EnvType.CLIENT)
-public class MartianRaptorEntityModel extends EntityModel<MartianRaptorEntity> {
+public class MartianRaptorEntityModel extends EntityModel<MartianRaptor> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ModResourceLocation("martian_raptor"), "main");
 
     private final ModelPart body;
@@ -102,7 +102,7 @@ public class MartianRaptorEntityModel extends EntityModel<MartianRaptorEntity> {
     }
 
     @Override
-   public void setupAnim(MartianRaptorEntity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
+   public void setupAnim(MartianRaptor entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
         float cooldown = entity.getMovementCooldownTicks();
         float f = 1.0f - Mth.abs(10 - 2 * cooldown) / 10.0f;
 
@@ -117,9 +117,9 @@ public class MartianRaptorEntityModel extends EntityModel<MartianRaptorEntity> {
     }
 
     @Override
-    public void renderToBuffer(PoseStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
-        body.render(matrices, vertices, light, overlay);
-        leg1.render(matrices, vertices, light, overlay);
-        leg2.render(matrices, vertices, light, overlay);
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertices, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        body.render(poseStack, vertices, packedLight, packedOverlay);
+        leg1.render(poseStack, vertices, packedLight, packedOverlay);
+        leg2.render(poseStack, vertices, packedLight, packedOverlay);
     }
 }

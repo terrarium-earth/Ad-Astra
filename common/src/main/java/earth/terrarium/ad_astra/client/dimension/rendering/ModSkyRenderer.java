@@ -41,7 +41,7 @@ public class ModSkyRenderer {
         this.shouldRenderWhileRaining = !skyRenderer.weatherEffects().equals(PlanetSkyRenderer.WeatherEffects.NONE);
     }
 
-    public void render(ClientLevel level, int ticks, float tickDelta, PoseStack matrices, Camera camera, Matrix4f projectionMatrix, boolean foggy) {
+    public void render(ClientLevel level, int ticks, float tickDelta, PoseStack poseStack, Camera camera, Matrix4f projectionMatrix, boolean foggy) {
 
         BufferBuilder bufferBuilder = Tesselator.getInstance().getBuilder();
         Minecraft client = Minecraft.getInstance();
@@ -54,12 +54,12 @@ public class ModSkyRenderer {
             return;
         }
 
-        SkyUtil.preRender(level, client.levelRenderer, camera, projectionMatrix, bufferBuilder, this.sunsetColour, horizonAngle, matrices, tickDelta);
+        SkyUtil.preRender(level, client.levelRenderer, camera, projectionMatrix, bufferBuilder, this.sunsetColour, horizonAngle, poseStack, tickDelta);
 
         // Stars
         if (this.starsRenderer.fastStars() > 0) {
             int stars = (!client.options.graphicsMode().get().equals(GraphicsStatus.FAST) ? this.starsRenderer.fancyStars() : this.starsRenderer.fastStars());
-            starsBuffer = renderStars(level, matrices, tickDelta, bufferBuilder, stars, this.starsRenderer);
+            starsBuffer = renderStars(level, poseStack, tickDelta, bufferBuilder, stars, this.starsRenderer);
         }
 
         // Render all sky objects
@@ -77,15 +77,15 @@ public class ModSkyRenderer {
                 case DEBUG -> // Test things without restarting Minecraft
                         rotation = new Vector3f(60, 0, 0);
             }
-            SkyUtil.render(matrices, bufferBuilder, skyObject.texture(), skyObject.colour(), rotation, scale, skyObject.blending());
+            SkyUtil.render(poseStack, bufferBuilder, skyObject.texture(), skyObject.colour(), rotation, scale, skyObject.blending());
         }
 
         SkyUtil.postRender(client.gameRenderer, level, tickDelta);
     }
 
-    private VertexBuffer renderStars(ClientLevel level, PoseStack matrices, float tickDelta, BufferBuilder bufferBuilder, int stars, StarsRenderer starsRenderer) {
+    private VertexBuffer renderStars(ClientLevel level, PoseStack poseStack, float tickDelta, BufferBuilder bufferBuilder, int stars, StarsRenderer starsRenderer) {
 
-        SkyUtil.startRendering(matrices, new Vector3f(-30.0f, 0.0f, level.getTimeOfDay(tickDelta) * 360.0f));
+        SkyUtil.startRendering(poseStack, new Vector3f(-30.0f, 0.0f, level.getTimeOfDay(tickDelta) * 360.0f));
         RenderSystem.setShader(GameRenderer::getPositionColorShader);
 
         if (starsBuffer != null) {
@@ -107,10 +107,10 @@ public class ModSkyRenderer {
 
         FogRenderer.setupNoFog();
         starsBuffer.bind();
-        starsBuffer.drawWithShader(matrices.last().pose(), RenderSystem.getProjectionMatrix(), GameRenderer.getPositionColorShader());
+        starsBuffer.drawWithShader(poseStack.last().pose(), RenderSystem.getProjectionMatrix(), GameRenderer.getPositionColorShader());
         VertexBuffer.unbind();
 
-        matrices.popPose();
+        poseStack.popPose();
         return starsBuffer;
     }
 }

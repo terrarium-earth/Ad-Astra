@@ -3,7 +3,7 @@ package earth.terrarium.ad_astra.networking.packets.client;
 import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
-import earth.terrarium.ad_astra.entities.vehicles.RocketEntity;
+import earth.terrarium.ad_astra.entities.vehicles.Rocket;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import earth.terrarium.ad_astra.util.ModUtils;
 import net.minecraft.core.Registry;
@@ -51,7 +51,7 @@ public record TeleportToPlanetPacket(ResourceLocation id) implements Packet<Tele
         @Override
         public PacketContext handle(TeleportToPlanetPacket message) {
             return (player, level) -> {
-                if (player.getVehicle() instanceof RocketEntity) {
+                if (player.getVehicle() instanceof Rocket) {
                     ModUtils.teleportTolevel(getlevel(message.id()), player);
                 } else if (player.canUseGameMasterBlocks()) {
                     ModUtils.teleportPlayer(getlevel(message.id()), (ServerPlayer) player);

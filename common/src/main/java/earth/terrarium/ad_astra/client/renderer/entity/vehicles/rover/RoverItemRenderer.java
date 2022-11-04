@@ -18,7 +18,7 @@ public class RoverItemRenderer extends BlockEntityWithoutLevelRenderer {
     }
 
     @Override
-    public void renderByItem(ItemStack stack, TransformType mode, PoseStack matrices, MultiBufferSource vertexConsumers, int light, int overlay) {
-        VehicleEntityRenderer.renderRoverItem(RoverEntityRenderer.TEXTURE, RoverEntityModel.LAYER_LOCATION, matrices, vertexConsumers, light, overlay);
+    public void renderByItem(ItemStack stack, TransformType mode, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
+        VehicleEntityRenderer.renderRoverItem(RoverEntityRenderer.TEXTURE, RoverEntityModel.LAYER_LOCATION, poseStack, buffer, packedLight, packedOverlay);
     }
 }

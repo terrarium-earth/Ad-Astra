@@ -20,7 +20,7 @@
     "sources": "https://github.com/terrarium-earth/Ad-Astra"
   },
   "license": "MIT",
-  "icon": "assets/ad_astra/icon.png",
+  "icon": "icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [

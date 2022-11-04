@@ -42,6 +42,7 @@ import net.minecraft.server.packs.resources.PreparableReloadListener;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
@@ -133,18 +134,18 @@ public class AdAstraClient {
         register.accept(LaunchPadBlockEntityRenderer.LAUNCH_PAD_MODEL);
     }
 
-    public static void renderBlock(ResourceLocation texture, PoseStack matrices, MultiBufferSource vertexConsumers, int light, int overlay) {
+    public static void renderBlock(ResourceLocation texture, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
 
         Minecraft client = Minecraft.getInstance();
         ModelManager manager = client.getModelManager();
         BakedModel model = ClientUtils.getModel(manager, texture);
 
-        VertexConsumer vertexConsumer1 = vertexConsumers.getBuffer(RenderType.entityCutout(InventoryMenu.BLOCK_ATLAS));
+        VertexConsumer vertexConsumer1 = buffer.getBuffer(RenderType.entityCutout(InventoryMenu.BLOCK_ATLAS));
         List<BakedQuad> quads1 = model.getQuads(null, null, client.level.random);
-        PoseStack.Pose entry1 = matrices.last();
+        PoseStack.Pose entry1 = poseStack.last();
 
         for (BakedQuad quad : quads1) {
-            vertexConsumer1.putBulkData(entry1, quad, 1, 1, 1, light, overlay);
+            vertexConsumer1.putBulkData(entry1, quad, 1, 1, 1, packedLight, packedOverlay);
         }
     }
 }

@@ -2,7 +2,7 @@ package earth.terrarium.ad_astra.client.renderer.entity.vehicles;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import earth.terrarium.ad_astra.entities.vehicles.VehicleEntity;
+import earth.terrarium.ad_astra.entities.vehicles.Vehicle;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.EntityModel;
@@ -10,7 +10,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.util.Mth;
 
 @Environment(EnvType.CLIENT)
-public class VehicleEntityModel<T extends VehicleEntity> extends EntityModel<T> {
+public class VehicleEntityModel<T extends Vehicle> extends EntityModel<T> {
 
     protected final ModelPart frame;
 
@@ -26,7 +26,7 @@ public class VehicleEntityModel<T extends VehicleEntity> extends EntityModel<T> 
     }
 
     @Override
-    public void renderToBuffer(PoseStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
-        frame.render(matrices, vertices, light, overlay);
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertices, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        frame.render(poseStack, vertices, packedLight, packedOverlay);
     }
 }

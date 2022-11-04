@@ -2,7 +2,7 @@ package earth.terrarium.ad_astra.client.renderer.entity.vehicles.lander;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import earth.terrarium.ad_astra.entities.vehicles.LanderEntity;
+import earth.terrarium.ad_astra.entities.vehicles.Lander;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -17,7 +17,7 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 
 @Environment(EnvType.CLIENT)
-public class LanderEntityModel extends EntityModel<LanderEntity> {
+public class LanderEntityModel extends EntityModel<Lander> {
 
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ModResourceLocation("lander"), "main");
     private final ModelPart leg1;
@@ -103,15 +103,15 @@ public class LanderEntityModel extends EntityModel<LanderEntity> {
     }
 
     @Override
-   public void setupAnim(LanderEntity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
+   public void setupAnim(Lander entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
     }
 
     @Override
-    public void renderToBuffer(PoseStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
-        leg1.render(matrices, vertices, light, overlay);
-        leg2.render(matrices, vertices, light, overlay);
-        leg3.render(matrices, vertices, light, overlay);
-        leg4.render(matrices, vertices, light, overlay);
-        bb_main.render(matrices, vertices, light, overlay);
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertices, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        leg1.render(poseStack, vertices, packedLight, packedOverlay);
+        leg2.render(poseStack, vertices, packedLight, packedOverlay);
+        leg3.render(poseStack, vertices, packedLight, packedOverlay);
+        leg4.render(poseStack, vertices, packedLight, packedOverlay);
+        bb_main.render(poseStack, vertices, packedLight, packedOverlay);
     }
 }

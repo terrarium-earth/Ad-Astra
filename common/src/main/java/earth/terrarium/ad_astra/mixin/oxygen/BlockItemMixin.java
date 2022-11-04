@@ -27,7 +27,7 @@ public class BlockItemMixin {
     }
 
     @Inject(method = "place*", at = @At(value = "TAIL"))
-    public void adastra_place(BlockPlaceContext context, CallbackInfoReturnable<InteractionResult> info) {
+    public void adastra_place(BlockPlaceContext context, CallbackInfoReturnable<InteractionResult> cir) {
         if (!AdAstra.CONFIG.general.doOxygen) {
             return;
         }

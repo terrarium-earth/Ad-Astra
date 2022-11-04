@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.client.registry;
 
 import dev.architectury.event.events.client.ClientTickEvent;
-import earth.terrarium.ad_astra.entities.vehicles.RocketEntity;
+import earth.terrarium.ad_astra.entities.vehicles.Rocket;
 import earth.terrarium.ad_astra.networking.NetworkHandling;
 import earth.terrarium.ad_astra.networking.packets.client.KeybindPacket;
 import earth.terrarium.ad_astra.networking.packets.client.LaunchRocketPacket;
@@ -38,7 +38,7 @@ public class ClientModKeybindings {
             if (client.level != null) {
                 if (client.player != null) {
                     if (client.options.keyJump.consumeClick()) {
-                        if (client.player.getVehicle() instanceof RocketEntity rocket) {
+                        if (client.player.getVehicle() instanceof Rocket rocket) {
                             if (!rocket.isFlying()) {
                                 NetworkHandling.CHANNEL.sendToServer(new LaunchRocketPacket());
                             }

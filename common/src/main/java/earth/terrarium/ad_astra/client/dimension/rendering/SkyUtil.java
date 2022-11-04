@@ -7,7 +7,7 @@ import com.mojang.math.Matrix4f;
 import com.mojang.math.Vector3f;
 import com.teamresourceful.resourcefullib.common.color.Color;
 import earth.terrarium.ad_astra.client.resourcepack.PlanetSkyRenderer;
-import earth.terrarium.ad_astra.mixin.client.WorldRendererAccessor;
+import earth.terrarium.ad_astra.mixin.client.LevelRendererAccessor;
 import earth.terrarium.ad_astra.world.WorldSeed;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -35,7 +35,7 @@ public class SkyUtil {
         return Math.max(scale, 0.5f);
     }
 
-    public static void preRender(ClientLevel level, LevelRenderer levelRenderer, Camera camera, Matrix4f projectionMatrix, BufferBuilder bufferBuilder, PlanetSkyRenderer.SunsetColour colourType, int sunsetAngle, PoseStack matrices, float tickDelta) {
+    public static void preRender(ClientLevel level, LevelRenderer levelRenderer, Camera camera, Matrix4f projectionMatrix, BufferBuilder bufferBuilder, PlanetSkyRenderer.SunsetColour colourType, int sunsetAngle, PoseStack poseStack, float tickDelta) {
 
         // Render colours.
         RenderSystem.disableTexture();
@@ -47,11 +47,11 @@ public class SkyUtil {
         RenderSystem.depthMask(false);
 
         RenderSystem.setShaderColor(f, g, h, 1.0f);
-        ((WorldRendererAccessor) levelRenderer).getSkyBuffer().drawWithShader(matrices.last().pose(), projectionMatrix, RenderSystem.getShader());
+        ((LevelRendererAccessor) levelRenderer).getSkyBuffer().drawWithShader(poseStack.last().pose(), projectionMatrix, RenderSystem.getShader());
 
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
-        renderColouring(colourType, bufferBuilder, matrices, level, tickDelta, level.getTimeOfDay(tickDelta), sunsetAngle);
+        renderColouring(colourType, bufferBuilder, poseStack, level, tickDelta, level.getTimeOfDay(tickDelta), sunsetAngle);
         RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
         RenderSystem.enableTexture();
@@ -83,27 +83,27 @@ public class SkyUtil {
         return cameraSubmersionType.equals(FogType.POWDER_SNOW) || cameraSubmersionType.equals(FogType.LAVA) || player.hasEffect(MobEffects.BLINDNESS);
     }
 
-    public static void startRendering(PoseStack matrices, Vector3f rotation) {
+    public static void startRendering(PoseStack poseStack, Vector3f rotation) {
 
-        matrices.pushPose();
+        poseStack.pushPose();
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
 
         // Rotation
-        matrices.mulPose(Vector3f.YP.rotationDegrees(rotation.y()));
-        matrices.mulPose(Vector3f.ZP.rotationDegrees(rotation.z()));
-        matrices.mulPose(Vector3f.XP.rotationDegrees(rotation.x()));
+        poseStack.mulPose(Vector3f.YP.rotationDegrees(rotation.y()));
+        poseStack.mulPose(Vector3f.ZP.rotationDegrees(rotation.z()));
+        poseStack.mulPose(Vector3f.XP.rotationDegrees(rotation.x()));
     }
 
-    private static void endRendering(PoseStack matrices) {
+    private static void endRendering(PoseStack poseStack) {
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
         RenderSystem.disableBlend();
-        matrices.popPose();
+        poseStack.popPose();
     }
 
     // For rendering textures in the sky
-    public static void render(PoseStack matrices, BufferBuilder bufferBuilder, ResourceLocation texture, Color colour, Vector3f rotation, float scale, boolean blending) {
+    public static void render(PoseStack poseStack, BufferBuilder bufferBuilder, ResourceLocation texture, Color colour, Vector3f rotation, float scale, boolean blending) {
 
-        startRendering(matrices, rotation);
+        startRendering(poseStack, rotation);
         RenderSystem.setShader(GameRenderer::getPositionColorTexShader);
 
         RenderSystem.disableTexture();
@@ -114,7 +114,7 @@ public class SkyUtil {
             RenderSystem.disableBlend();
         }
 
-        Matrix4f positionMatrix = matrices.last().pose();
+        Matrix4f positionMatrix = poseStack.last().pose();
         RenderSystem.setShaderTexture(0, texture);
         bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR_TEX);
         bufferBuilder.vertex(positionMatrix, -scale, 100.0f, -scale).color(colour.getIntRed(), colour.getIntGreen(), colour.getIntBlue(), 255).uv(1.0f, 0.0f).endVertex();
@@ -123,7 +123,7 @@ public class SkyUtil {
         bufferBuilder.vertex(positionMatrix, -scale, 100.0f, scale).color(colour.getIntRed(), colour.getIntGreen(), colour.getIntBlue(), 255).uv(1.0f, 1.0f).endVertex();
         BufferUploader.drawWithShader(bufferBuilder.end());
 
-        endRendering(matrices);
+        endRendering(poseStack);
     }
 
     public static BufferBuilder.RenderedBuffer renderStars(BufferBuilder buffer, int stars, boolean colouredStars) {
@@ -188,7 +188,7 @@ public class SkyUtil {
         }
     }
 
-    public static void renderColouring(PlanetSkyRenderer.SunsetColour type, BufferBuilder bufferBuilder, PoseStack matrices, ClientLevel level, float tickDelta, float skyAngle, int sunsetAngle) {
+    public static void renderColouring(PlanetSkyRenderer.SunsetColour type, BufferBuilder bufferBuilder, PoseStack poseStack, ClientLevel level, float tickDelta, float skyAngle, int sunsetAngle) {
 
         float[] fogColours = switch (type) {
             case VANILLA -> level.effects().getSunriseColor(level.getSunAngle(tickDelta), tickDelta);
@@ -198,13 +198,13 @@ public class SkyUtil {
             RenderSystem.setShader(GameRenderer::getPositionColorShader);
             RenderSystem.disableTexture();
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-            matrices.pushPose();
-            matrices.mulPose(Vector3f.XP.rotationDegrees(90.0f));
+            poseStack.pushPose();
+            poseStack.mulPose(Vector3f.XP.rotationDegrees(90.0f));
             float sine = Mth.sin(level.getSunAngle(tickDelta)) < 0.0f ? 180.0f : sunsetAngle;
-            matrices.mulPose(Vector3f.ZP.rotationDegrees(sine));
-            matrices.mulPose(Vector3f.ZP.rotationDegrees(90.0f));
+            poseStack.mulPose(Vector3f.ZP.rotationDegrees(sine));
+            poseStack.mulPose(Vector3f.ZP.rotationDegrees(90.0f));
 
-            Matrix4f matrix4f = matrices.last().pose();
+            Matrix4f matrix4f = poseStack.last().pose();
             bufferBuilder.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);
             bufferBuilder.vertex(matrix4f, 0.0f, 100.0f, 0.0f).color(fogColours[0], fogColours[1], fogColours[2], fogColours[3]).endVertex();
 
@@ -215,7 +215,7 @@ public class SkyUtil {
             }
 
             BufferUploader.draw(bufferBuilder.end());
-            matrices.popPose();
+            poseStack.popPose();
         }
     }
 }

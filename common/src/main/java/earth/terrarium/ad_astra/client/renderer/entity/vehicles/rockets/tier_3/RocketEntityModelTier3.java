@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.client.renderer.entity.vehicles.rockets.tier_3;
 
 import earth.terrarium.ad_astra.client.renderer.entity.vehicles.VehicleEntityModel;
-import earth.terrarium.ad_astra.entities.vehicles.RocketEntityTier3;
+import earth.terrarium.ad_astra.entities.vehicles.RocketTier3;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -15,7 +15,7 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 
 @Environment(EnvType.CLIENT)
-public class RocketEntityModelTier3 extends VehicleEntityModel<RocketEntityTier3> {
+public class RocketEntityModelTier3 extends VehicleEntityModel<RocketTier3> {
 
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ModResourceLocation("tier_3_rocket"), "main");
 

@@ -22,7 +22,7 @@ public class GlobeItemRenderer extends BlockEntityWithoutLevelRenderer {
     }
 
     @Override
-    public void renderByItem(ItemStack stack, ItemTransforms.TransformType mode, PoseStack matrices, MultiBufferSource vertexConsumers, int light, int overlay) {
+    public void renderByItem(ItemStack stack, ItemTransforms.TransformType mode, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
 
         GlobeModel model = GlobeModel.getModel();
 
@@ -32,6 +32,6 @@ public class GlobeItemRenderer extends BlockEntityWithoutLevelRenderer {
         model.setYaw(Mth.lerp(tickDelta, prevWorldTime, client.level.getGameTime()) / -20.0f);
         prevWorldTime = client.level.getGameTime();
 
-        GlobeRenderer.render(Registry.ITEM.getKey(stack.getItem()), model, Direction.NORTH, matrices, vertexConsumers, light, overlay);
+        GlobeRenderer.render(Registry.ITEM.getKey(stack.getItem()), model, Direction.NORTH, poseStack, buffer, packedLight, packedOverlay);
     }
 }

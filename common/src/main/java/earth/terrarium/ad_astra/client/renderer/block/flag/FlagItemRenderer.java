@@ -13,6 +13,9 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
+@ParametersAreNonnullByDefault
 @Environment(EnvType.CLIENT)
 public class FlagItemRenderer extends BlockEntityWithoutLevelRenderer {
 
@@ -21,8 +24,8 @@ public class FlagItemRenderer extends BlockEntityWithoutLevelRenderer {
     }
 
     @Override
-    public void renderByItem(ItemStack stack, ItemTransforms.TransformType mode, PoseStack matrices, MultiBufferSource vertexConsumers, int light, int overlay) {
+    public void renderByItem(ItemStack stack, ItemTransforms.TransformType mode, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
         ResourceLocation model = new ModResourceLocation("block/flag/" + Registry.ITEM.getKey(stack.getItem()).getPath());
-        AdAstraClient.renderBlock(model, matrices, vertexConsumers, light, overlay);
+        AdAstraClient.renderBlock(model, poseStack, buffer, packedLight, packedOverlay);
     }
 }

@@ -1,0 +1,20 @@
+{
+  "name": "Solar Panel",
+  "icon": "ad_astra:solar_panel",
+  "sortnum": 1,
+  "category": "ad_astra:the_moon",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Solar Panel",
+      "item": "ad_astra:solar_panel",
+      "text": "The solar panel is an upgraded version of the coal generator, producing more energy per tick while being self-reliant. Its power generation depends on the planet's distance from the sun and fog. Because of this, it is more efficient to place solar panels close to the sun. Solar panels also produce more energy in orbit, as there is no atmosphere blocking the light."
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Solar Panel",
+      "text": "Check the solar panel's tooltip or GUI to see how much energy is being produced in the current world.",
+      "recipe": "ad_astra:recipes/solar_panel"
+    }
+  ]
+}

@@ -21,7 +21,7 @@ public class EnergizerBlockEntityRenderer implements BlockEntityRenderer<Energiz
     }
 
     @Override
-    public void render(EnergizerBlockEntity blockEntity, float tickDelta, PoseStack matrices, MultiBufferSource vertexConsumers, int light, int overlay) {
+    public void render(EnergizerBlockEntity blockEntity, float tickDelta, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
         ItemStack stack = blockEntity.getItem(0);
 
         if (stack.isEmpty()) {
@@ -32,18 +32,18 @@ public class EnergizerBlockEntityRenderer implements BlockEntityRenderer<Energiz
             return;
         }
 
-        matrices.pushPose();
+        poseStack.pushPose();
 
         // Calculate the current offset in the y value
         double offset = Math.sin((blockEntity.getLevel().getGameTime() + tickDelta) / 8.0) / 8.0;
         // Move the item
-        matrices.translate(0.5, 1.6 + offset, 0.5);
+        poseStack.translate(0.5, 1.6 + offset, 0.5);
 
         // Rotate the item
-        matrices.mulPose(Vector3f.YP.rotationDegrees((blockEntity.getLevel().getGameTime() + tickDelta) * 4));
+        poseStack.mulPose(Vector3f.YP.rotationDegrees((blockEntity.getLevel().getGameTime() + tickDelta) * 4));
 
         int lightAbove = LevelRenderer.getLightColor(blockEntity.getLevel(), blockEntity.getBlockPos().above());
-        Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemTransforms.TransformType.GROUND, lightAbove, overlay, matrices, vertexConsumers, 0);
-        matrices.popPose();
+        Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemTransforms.TransformType.GROUND, lightAbove, packedOverlay, poseStack, buffer, 0);
+        poseStack.popPose();
     }
 }

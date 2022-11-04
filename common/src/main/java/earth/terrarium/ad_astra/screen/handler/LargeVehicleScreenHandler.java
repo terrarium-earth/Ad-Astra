@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.screen.handler;
 
-import earth.terrarium.ad_astra.entities.vehicles.VehicleEntity;
+import earth.terrarium.ad_astra.entities.vehicles.Vehicle;
 import earth.terrarium.ad_astra.registry.ModScreenHandlers;
 import earth.terrarium.ad_astra.screen.NoInventorySlot;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
@@ -12,10 +12,10 @@ import net.minecraft.world.item.ItemStack;
 public class LargeVehicleScreenHandler extends AbstractVehicleScreenHandler {
 
     public LargeVehicleScreenHandler(int syncId, Inventory inventory, FriendlyByteBuf buf) {
-        this(syncId, inventory, (VehicleEntity) inventory.player.level.getEntity(buf.readInt()));
+        this(syncId, inventory, (Vehicle) inventory.player.level.getEntity(buf.readInt()));
     }
 
-    public LargeVehicleScreenHandler(int syncId, Inventory inventory, VehicleEntity entity) {
+    public LargeVehicleScreenHandler(int syncId, Inventory inventory, Vehicle entity) {
         super(ModScreenHandlers.LARGE_VEHICLE_SCREEN_HANDLER.get(), syncId, inventory, entity, new Slot[]{
 
                 // Left input slot.

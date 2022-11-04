@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.mixin.client;
 
-import earth.terrarium.ad_astra.entities.vehicles.RocketEntity;
-import earth.terrarium.ad_astra.entities.vehicles.VehicleEntity;
+import earth.terrarium.ad_astra.entities.vehicles.Rocket;
+import earth.terrarium.ad_astra.entities.vehicles.Vehicle;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.world.entity.Entity;
@@ -14,24 +14,24 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class EntityRendererMixin {
 
     @Inject(method = "shouldRender", at = @At("HEAD"), cancellable = true)
-    public void adastra_shouldRender(Entity entity, Frustum frustum, double x, double y, double z, CallbackInfoReturnable<Boolean> ci) {
+    public void adastra_shouldRender(Entity entity, Frustum frustum, double x, double y, double z, CallbackInfoReturnable<Boolean> cir) {
 
         // Make rocket invisible.
-        if (entity instanceof RocketEntity rocket) {
+        if (entity instanceof Rocket rocket) {
             if (rocket.getPhase() == 3) {
-                ci.setReturnValue(false);
+                cir.setReturnValue(false);
             }
         }
 
-        if (entity.getVehicle() instanceof VehicleEntity vehicle) {
+        if (entity.getVehicle() instanceof Vehicle vehicle) {
             if (!vehicle.shouldRenderPlayer()) {
-                ci.setReturnValue(false);
+                cir.setReturnValue(false);
             }
 
             // Make player that is in the planet selection screen invisible.
-            if (entity.getVehicle() instanceof RocketEntity rocket) {
+            if (entity.getVehicle() instanceof Rocket rocket) {
                 if (rocket.getPhase() == 3) {
-                    ci.setReturnValue(false);
+                    cir.setReturnValue(false);
                 }
             }
         }

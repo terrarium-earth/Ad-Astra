@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.screen;
 
-import earth.terrarium.ad_astra.entities.vehicles.VehicleEntity;
+import earth.terrarium.ad_astra.entities.vehicles.Vehicle;
 import earth.terrarium.ad_astra.screen.handler.VehicleScreenHandler;
 import earth.terrarium.botarium.api.menu.ExtraDataMenuProvider;
 import net.minecraft.network.FriendlyByteBuf;
@@ -11,7 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import org.jetbrains.annotations.NotNull;
 
-public record VehicleScreenHandlerFactory(VehicleEntity vehicle) implements ExtraDataMenuProvider {
+public record VehicleScreenHandlerFactory(Vehicle vehicle) implements ExtraDataMenuProvider {
 
     @Override
     public void writeExtraData(ServerPlayer player, FriendlyByteBuf buf) {

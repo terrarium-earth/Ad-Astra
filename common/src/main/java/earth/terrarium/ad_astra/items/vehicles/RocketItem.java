@@ -21,7 +21,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.AABB;
 
-public class RocketItem<T extends RocketEntity> extends VehicleItem {
+public class RocketItem<T extends Rocket> extends VehicleItem {
 
     private final EntityType<T> rocketEntity;
     private final int tier;
@@ -58,21 +58,21 @@ public class RocketItem<T extends RocketEntity> extends VehicleItem {
                     ItemStack rocketStack = player.getItemInHand(context.getHand());
                     if (rocketStack.getItem() instanceof RocketItem<?> rocket) {
 
-                        RocketEntity rocketEntity = null;
+                        Rocket rocketEntity = null;
 
                         int tier = rocket.getTier();
                         switch (tier) {
-                            case 1 -> rocketEntity = new RocketEntityTier1(rocket.getRocketEntity(), level);
-                            case 2 -> rocketEntity = new RocketEntityTier2(rocket.getRocketEntity(), level);
-                            case 3 -> rocketEntity = new RocketEntityTier3(rocket.getRocketEntity(), level);
-                            case 4 -> rocketEntity = new RocketEntityTier4(rocket.getRocketEntity(), level);
+                            case 1 -> rocketEntity = new RocketTier1(rocket.getRocketEntity(), level);
+                            case 2 -> rocketEntity = new RocketTier2(rocket.getRocketEntity(), level);
+                            case 3 -> rocketEntity = new RocketTier3(rocket.getRocketEntity(), level);
+                            case 4 -> rocketEntity = new RocketTier4(rocket.getRocketEntity(), level);
                         }
 
                         if (rocketEntity != null) {
 
                             // Check if a rocket is already placed on the pad
                             AABB scanAbove = new AABB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
-                            List<RocketEntity> entities = level.getEntitiesOfClass(RocketEntity.class, scanAbove, entity -> true);
+                            List<Rocket> entities = level.getEntitiesOfClass(Rocket.class, scanAbove, entity -> true);
                             if (!entities.isEmpty()) {
                                 return InteractionResult.PASS;
                             }

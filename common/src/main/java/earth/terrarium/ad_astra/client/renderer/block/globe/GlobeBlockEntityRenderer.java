@@ -19,13 +19,13 @@ public class GlobeBlockEntityRenderer implements BlockEntityRenderer<GlobeBlockE
     }
 
     @Override
-    public void render(GlobeBlockEntity entity, float tickDelta, PoseStack matrices, MultiBufferSource vertexConsumers, int light, int overlay) {
+    public void render(GlobeBlockEntity entity, float tickDelta, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
 
         GlobeModel model = GlobeModel.getModel();
 
         model.setYaw(Mth.lerp(tickDelta, entity.getCachedYaw(), entity.getYaw()));
 
         BlockState state = entity.getBlockState();
-        GlobeRenderer.render(Registry.BLOCK.getKey(state.getBlock()), model, state.getValue(GlobeBlock.FACING), matrices, vertexConsumers, light, overlay);
+        GlobeRenderer.render(Registry.BLOCK.getKey(state.getBlock()), model, state.getValue(GlobeBlock.FACING), poseStack, buffer, packedLight, packedOverlay);
     }
 }

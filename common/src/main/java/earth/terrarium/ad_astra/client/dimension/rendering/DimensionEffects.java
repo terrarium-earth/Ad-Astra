@@ -44,12 +44,12 @@ public class DimensionEffects extends DimensionSpecialEffects implements Dimensi
     }
 
     @Override
-    public boolean renderClouds(ClientLevel level, int ticks, float tickDelta, PoseStack matrices, double cameraX, double cameraY, double cameraZ, Matrix4f projectionMatrix) {
+    public boolean renderClouds(ClientLevel level, int ticks, float tickDelta, PoseStack poseStack, double cameraX, double cameraY, double cameraZ, Matrix4f projectionMatrix) {
         return switch (renderer.cloudEffects()) {
             case NONE -> true;
             case VANILLA -> false;
             case VENUS -> {
-                VenusCloudRenderer.render(level, ticks, tickDelta, matrices, cameraX, cameraY, cameraZ, projectionMatrix);
+                VenusCloudRenderer.render(level, ticks, tickDelta, poseStack, cameraX, cameraY, cameraZ, projectionMatrix);
                 yield true;
             }
         };
@@ -61,9 +61,9 @@ public class DimensionEffects extends DimensionSpecialEffects implements Dimensi
     }
 
     @Override
-    public boolean renderSky(ClientLevel level, int ticks, float tickDelta, PoseStack matrices, Camera camera, Matrix4f projectionMatrix, boolean foggy, Runnable setupFog) {
+    public boolean renderSky(ClientLevel level, int ticks, float tickDelta, PoseStack poseStack, Camera camera, Matrix4f projectionMatrix, boolean foggy, Runnable setupFog) {
         setupFog.run();
-        skyRenderer.render(level, ticks, tickDelta, matrices, camera, projectionMatrix, foggy);
+        skyRenderer.render(level, ticks, tickDelta, poseStack, camera, projectionMatrix, foggy);
         return true;
     }
 

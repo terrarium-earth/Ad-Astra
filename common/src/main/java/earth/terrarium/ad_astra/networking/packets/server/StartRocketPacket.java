@@ -3,7 +3,7 @@ package earth.terrarium.ad_astra.networking.packets.server;
 import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
-import earth.terrarium.ad_astra.entities.vehicles.RocketEntity;
+import earth.terrarium.ad_astra.entities.vehicles.Rocket;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -37,7 +37,7 @@ public record StartRocketPacket(int entityId) implements Packet<StartRocketPacke
         @Override
         public PacketContext handle(StartRocketPacket message) {
             return (player, level) -> {
-                if (level.getEntity(message.entityId) instanceof RocketEntity rocket) {
+                if (level.getEntity(message.entityId) instanceof Rocket rocket) {
                     if (!rocket.isFlying()) {
                         rocket.initiateLaunchSequence();
                     }

@@ -56,7 +56,7 @@ public class PlayerOverlayScreen {
     public static boolean shouldRenderBattery;
     public static double batteryRatio;
 
-    public static void render(PoseStack matrices, float delta) {
+    public static void render(PoseStack poseStack, float delta) {
         Minecraft client = Minecraft.getInstance();
         int screenX = client.getWindow().getGuiScaledWidth();
         int screenY = client.getWindow().getGuiScaledHeight();
@@ -75,17 +75,17 @@ public class PlayerOverlayScreen {
             int textureWidth = 62;
             int textureHeight = 52;
 
-            GuiUtil.drawVerticalReverse(matrices, x, y, textureWidth, textureHeight, OXYGEN_TANK_EMPTY_TEXTURE, oxygenRatio);
-            GuiUtil.drawVertical(matrices, x, y, textureWidth, textureHeight, OXYGEN_TANK_FULL_TEXTURE, oxygenRatio);
+            GuiUtil.drawVerticalReverse(poseStack, x, y, textureWidth, textureHeight, OXYGEN_TANK_EMPTY_TEXTURE, oxygenRatio);
+            GuiUtil.drawVertical(poseStack, x, y, textureWidth, textureHeight, OXYGEN_TANK_FULL_TEXTURE, oxygenRatio);
 
             // Oxygen text
             double oxygen = Math.round(oxygenRatio * 1000) / 10.0;
             Component text = Component.nullToEmpty((oxygen) + "%");
             int textWidth = client.font.width(text);
             if (doesNotNeedOxygen) {
-                client.font.drawShadow(matrices, text, (x + (textureWidth - textWidth) / 2.0f), y + textureHeight + 3, 0x7FFF00);
+                client.font.drawShadow(poseStack, text, (x + (textureWidth - textWidth) / 2.0f), y + textureHeight + 3, 0x7FFF00);
             } else {
-                client.font.drawShadow(matrices, text, (x + (textureWidth - textWidth) / 2.0f), y + textureHeight + 3, oxygen <= 0.0f ? 0xDC143C : 0xFFFFFF);
+                client.font.drawShadow(poseStack, text, (x + (textureWidth - textWidth) / 2.0f), y + textureHeight + 3, oxygen <= 0.0f ? 0xDC143C : 0xFFFFFF);
             }
         }
 
@@ -97,13 +97,13 @@ public class PlayerOverlayScreen {
 
             int textureWidth = (int) (49 * 1.4);
             int textureHeight = (int) (27 * 1.4);
-            GuiUtil.drawHorizontal(matrices, x, y, textureWidth, textureHeight, BATTERY_EMPTY_TEXTURE, 1.0);
-            GuiUtil.drawHorizontal(matrices, x, y, textureWidth, textureHeight, BATTERY_TEXTURE, batteryRatio);
+            GuiUtil.drawHorizontal(poseStack, x, y, textureWidth, textureHeight, BATTERY_EMPTY_TEXTURE, 1.0);
+            GuiUtil.drawHorizontal(poseStack, x, y, textureWidth, textureHeight, BATTERY_TEXTURE, batteryRatio);
 
             double energy = Math.round(batteryRatio * 1000) / 10.0;
             Component text = Component.nullToEmpty((energy) + "%");
             int textWidth = client.font.width(text);
-            client.font.drawShadow(matrices, text, (x + (textureWidth - textWidth) / 2.0f), y + textureHeight + 3, 0x6082B6);
+            client.font.drawShadow(poseStack, text, (x + (textureWidth - textWidth) / 2.0f), y + textureHeight + 3, 0x6082B6);
         }
 
         // Timer
@@ -113,7 +113,7 @@ public class PlayerOverlayScreen {
             int y = screenY / 2 / 2;
 
             RenderSystem.setShaderTexture(0, getTimerTexture());
-            GuiComponent.blit(matrices, x, y, 0, 0, 60, 38, 60, 38);
+            GuiComponent.blit(poseStack, x, y, 0, 0, 60, 38, 60, 38);
         }
 
         // Planet bar
@@ -144,17 +144,17 @@ public class PlayerOverlayScreen {
 
             // Draw planet
             RenderSystem.setShaderTexture(0, planet);
-            GuiComponent.blit(matrices, x, y, 0, 0, 16, 128, 16, 128);
+            GuiComponent.blit(poseStack, x, y, 0, 0, 16, 128, 16, 128);
 
             // Draw rocket indicator
             RenderSystem.setShaderTexture(0, ROCKET_PLANET_BAR_TEXTURE);
-            FloatDrawableHelper.drawTexture(matrices, 4.0f, (screenY / 2.0f) + (103 / 2.0f) - rocketHeight, 0, 0, 8, 11, 8, 11);
+            FloatDrawableHelper.drawTexture(poseStack, 4.0f, (screenY / 2.0f) + (103 / 2.0f) - rocketHeight, 0, 0, 8, 11, 8, 11);
         }
 
         // Warning screen
         if (shouldRenderWarning) {
 
-            matrices.pushPose();
+            poseStack.pushPose();
             RenderSystem.enableBlend();
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
 
@@ -166,16 +166,16 @@ public class PlayerOverlayScreen {
 
             // Warning image
             RenderSystem.setShaderTexture(0, WARNING_TEXTURE);
-            GuiComponent.blit(matrices, screenX / 2 - 58, 50, 0, 0, 116, 21, 116, 21);
+            GuiComponent.blit(poseStack, screenX / 2 - 58, 50, 0, 0, 116, 21, 116, 21);
 
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
 
             // Speed text
             Component text = Component.translatable("message." + AdAstra.MOD_ID + ".speed", Math.round(speed * 10.0) / 10.0);
-            client.font.drawShadow(matrices, text, screenX / 2.0f - 29, 80, -3407872);
+            client.font.drawShadow(poseStack, text, screenX / 2.0f - 29, 80, -3407872);
 
             RenderSystem.disableBlend();
-            matrices.popPose();
+            poseStack.popPose();
         }
     }
 

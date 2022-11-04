@@ -25,35 +25,35 @@ public class GlobeRenderer {
     public static final ResourceLocation GLACIO_GLOBE = new ModResourceLocation("textures/block/globes/glacio_globe.png");
 
     // Render model
-    public static void render(ResourceLocation id, GlobeModel model, Direction direction, PoseStack matrices, MultiBufferSource vertexConsumers, int light, int overlay) {
+    public static void render(ResourceLocation id, GlobeModel model, Direction direction, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
 
         // Get the texture
         VertexConsumer vertexConsumer;
         if (id.equals(Registry.BLOCK.getKey(ModBlocks.EARTH_GLOBE.get()))) {
-            vertexConsumer = vertexConsumers.getBuffer(RenderType.entityCutoutNoCullZOffset(EARTH_GLOBE));
+            vertexConsumer = buffer.getBuffer(RenderType.entityCutoutNoCullZOffset(EARTH_GLOBE));
         } else if (id.equals(Registry.BLOCK.getKey(ModBlocks.MOON_GLOBE.get()))) {
-            vertexConsumer = vertexConsumers.getBuffer(RenderType.entityCutoutNoCullZOffset(MOON_GLOBE));
+            vertexConsumer = buffer.getBuffer(RenderType.entityCutoutNoCullZOffset(MOON_GLOBE));
         } else if (id.equals(Registry.BLOCK.getKey(ModBlocks.MARS_GLOBE.get()))) {
-            vertexConsumer = vertexConsumers.getBuffer(RenderType.entityCutoutNoCullZOffset(MARS_GLOBE));
+            vertexConsumer = buffer.getBuffer(RenderType.entityCutoutNoCullZOffset(MARS_GLOBE));
         } else if (id.equals(Registry.BLOCK.getKey(ModBlocks.MERCURY_GLOBE.get()))) {
-            vertexConsumer = vertexConsumers.getBuffer(RenderType.entityCutoutNoCullZOffset(MERCURY_GLOBE));
+            vertexConsumer = buffer.getBuffer(RenderType.entityCutoutNoCullZOffset(MERCURY_GLOBE));
         } else if (id.equals(Registry.BLOCK.getKey(ModBlocks.VENUS_GLOBE.get()))) {
-            vertexConsumer = vertexConsumers.getBuffer(RenderType.entityCutoutNoCullZOffset(VENUS_GLOBE));
+            vertexConsumer = buffer.getBuffer(RenderType.entityCutoutNoCullZOffset(VENUS_GLOBE));
         } else {
-            vertexConsumer = vertexConsumers.getBuffer(RenderType.entityCutoutNoCullZOffset(GLACIO_GLOBE));
+            vertexConsumer = buffer.getBuffer(RenderType.entityCutoutNoCullZOffset(GLACIO_GLOBE));
         }
 
-        matrices.pushPose();
+        poseStack.pushPose();
 
-        matrices.translate(0.5f, 1.5f, 0.5f);
-        matrices.scale(-1.0f, -1.0f, 1.0f);
-        matrices.mulPose(direction.getRotation());
+        poseStack.translate(0.5f, 1.5f, 0.5f);
+        poseStack.scale(-1.0f, -1.0f, 1.0f);
+        poseStack.mulPose(direction.getRotation());
 
         // Turn upright
-        matrices.mulPose(Vector3f.XN.rotationDegrees(90));
+        poseStack.mulPose(Vector3f.XN.rotationDegrees(90));
 
-        model.renderToBuffer(matrices, vertexConsumer, light, overlay, 1.0f, 1.0f, 1.0f, 1.0f);
+        model.renderToBuffer(poseStack, vertexConsumer, packedLight, packedOverlay, 1.0f, 1.0f, 1.0f, 1.0f);
 
-        matrices.popPose();
+        poseStack.popPose();
     }
 }

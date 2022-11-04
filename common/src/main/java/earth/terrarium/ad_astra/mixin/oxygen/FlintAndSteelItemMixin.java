@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(FlintAndSteelItem.class)
 public class FlintAndSteelItemMixin {
     @Inject(method = "useOn", at = @At(value = "HEAD"), cancellable = true)
-    public void adastra_useOnBlock(UseOnContext context, CallbackInfoReturnable<InteractionResult> ci) {
+    public void adastra_useOnBlock(UseOnContext context, CallbackInfoReturnable<InteractionResult> cir) {
         if (!AdAstra.CONFIG.general.doOxygen) {
             return;
         }
@@ -37,7 +37,7 @@ public class FlintAndSteelItemMixin {
                     if (player != null) {
                         context.getItemInHand().hurtAndBreak(1, player, p -> p.broadcastBreakEvent(context.getHand()));
                     }
-                    ci.setReturnValue(InteractionResult.SUCCESS);
+                    cir.setReturnValue(InteractionResult.SUCCESS);
                 }
             }
         }

@@ -14,9 +14,9 @@ public class ClientRecipeBookMixin {
 
     // Hides the annoying "Unknown recipe category" warning
     @Inject(at = @At(value = "HEAD"), method = "getCategory", cancellable = true)
-    private static void adastra_getCategory(Recipe<?> recipe, CallbackInfoReturnable<RecipeBookCategories> ci) {
+    private static void adastra_getCategory(Recipe<?> recipe, CallbackInfoReturnable<RecipeBookCategories> cir) {
         if (recipe.getType() instanceof ModRecipeType) {
-            ci.setReturnValue(RecipeBookCategories.UNKNOWN);
+            cir.setReturnValue(RecipeBookCategories.UNKNOWN);
         }
     }
 }

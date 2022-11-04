@@ -3,7 +3,7 @@ package earth.terrarium.ad_astra.client.renderer.entity.mobs.models;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector3f;
-import earth.terrarium.ad_astra.entities.mobs.GlacianRamEntity;
+import earth.terrarium.ad_astra.entities.mobs.GlacianRam;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import net.minecraft.client.model.*;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -15,7 +15,7 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 
-public class GlacianRamEntityModel<T extends GlacianRamEntity> extends QuadrupedModel<T> {
+public class GlacianRamEntityModel<T extends GlacianRam> extends QuadrupedModel<T> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ModResourceLocation("glacian_ram"), "main");
     private float headPitchModifier;
 
@@ -59,37 +59,37 @@ public class GlacianRamEntityModel<T extends GlacianRamEntity> extends Quadruped
     }
 
     @Override
-    public void renderToBuffer(PoseStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertices, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         if (this.young) {
-            matrices.pushPose();
+            poseStack.pushPose();
             float scale = 1.25f / 2.0f;
-            matrices.scale(scale, scale, scale);
-            matrices.mulPose(Vector3f.YP.rotationDegrees(180));
-            matrices.translate(0, 1.1, 0.25);
-            this.headParts().forEach(headPart -> headPart.render(matrices, vertices, light, overlay, red, green, blue, alpha));
-            matrices.popPose();
+            poseStack.scale(scale, scale, scale);
+            poseStack.mulPose(Vector3f.YP.rotationDegrees(180));
+            poseStack.translate(0, 1.1, 0.25);
+            this.headParts().forEach(headPart -> headPart.render(poseStack, vertices, packedLight, packedOverlay, red, green, blue, alpha));
+            poseStack.popPose();
 
-            matrices.pushPose();
+            poseStack.pushPose();
             float scale1 = 1.15f / 2.0f;
-            matrices.scale(scale1, scale1, scale1);
-            matrices.translate(0, 0.7, 0);
-            this.bodyParts().forEach(bodyPart -> bodyPart.render(matrices, vertices, light, overlay, red, green, blue, alpha));
-            matrices.popPose();
+            poseStack.scale(scale1, scale1, scale1);
+            poseStack.translate(0, 0.7, 0);
+            this.bodyParts().forEach(bodyPart -> bodyPart.render(poseStack, vertices, packedLight, packedOverlay, red, green, blue, alpha));
+            poseStack.popPose();
         } else {
-            matrices.pushPose();
+            poseStack.pushPose();
             float scale = 1.25f;
-            matrices.scale(scale, scale, scale);
-            matrices.mulPose(Vector3f.YP.rotationDegrees(180));
-            matrices.translate(0, 0.1, 0.25);
-            this.headParts().forEach(headPart -> headPart.render(matrices, vertices, light, overlay, red, green, blue, alpha));
-            matrices.popPose();
+            poseStack.scale(scale, scale, scale);
+            poseStack.mulPose(Vector3f.YP.rotationDegrees(180));
+            poseStack.translate(0, 0.1, 0.25);
+            this.headParts().forEach(headPart -> headPart.render(poseStack, vertices, packedLight, packedOverlay, red, green, blue, alpha));
+            poseStack.popPose();
 
-            matrices.pushPose();
+            poseStack.pushPose();
             float scale1 = 1.15f;
-            matrices.scale(scale1, scale1, scale1);
-            matrices.translate(0, -0.3, 0);
-            this.bodyParts().forEach(bodyPart -> bodyPart.render(matrices, vertices, light, overlay, red, green, blue, alpha));
-            matrices.popPose();
+            poseStack.scale(scale1, scale1, scale1);
+            poseStack.translate(0, -0.3, 0);
+            this.bodyParts().forEach(bodyPart -> bodyPart.render(poseStack, vertices, packedLight, packedOverlay, red, green, blue, alpha));
+            poseStack.popPose();
         }
     }
 }

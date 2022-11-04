@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.client.renderer.entity.mobs;
 
 import earth.terrarium.ad_astra.client.renderer.entity.mobs.models.StarCrawlerEntityModel;
-import earth.terrarium.ad_astra.entities.mobs.StarCrawlerEntity;
+import earth.terrarium.ad_astra.entities.mobs.StarCrawler;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
 @Environment(EnvType.CLIENT)
-public class StarCrawlerEntityRenderer extends MobRenderer<StarCrawlerEntity, StarCrawlerEntityModel> {
+public class StarCrawlerEntityRenderer extends MobRenderer<StarCrawler, StarCrawlerEntityModel> {
     public static final ResourceLocation TEXTURE = new ModResourceLocation("textures/entity/star_crawler.png");
 
     public StarCrawlerEntityRenderer(EntityRendererProvider.Context context) {
@@ -18,7 +18,7 @@ public class StarCrawlerEntityRenderer extends MobRenderer<StarCrawlerEntity, St
     }
 
     @Override
-    public ResourceLocation getTextureLocation(StarCrawlerEntity entity) {
+    public ResourceLocation getTextureLocation(StarCrawler entity) {
         return TEXTURE;
     }
 

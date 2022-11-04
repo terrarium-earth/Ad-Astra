@@ -8,6 +8,7 @@ import earth.terrarium.ad_astra.util.ModKeyBindings;
 import earth.terrarium.ad_astra.util.ModUtils;
 import earth.terrarium.botarium.api.energy.*;
 import earth.terrarium.botarium.api.item.ItemStackHolder;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -90,7 +91,7 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
 
     // Display energy
     @Override
-    public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag context) {
+    public void appendHoverText(ItemStack stack, Level level, @NotNull List<Component> tooltip, @NotNull TooltipFlag context) {
         super.appendHoverText(stack, level, tooltip, context);
         if (stack.is(ModItems.JET_SUIT.get())) {
             long energy = EnergyHooks.getItemEnergyManager(stack).getStoredEnergy();

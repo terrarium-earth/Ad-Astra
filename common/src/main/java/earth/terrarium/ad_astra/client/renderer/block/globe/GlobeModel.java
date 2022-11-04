@@ -47,8 +47,8 @@ public class GlobeModel extends Model {
     }
 
     @Override
-    public void renderToBuffer(PoseStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
-        globe.render(matrices, vertices, light, overlay);
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertices, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        globe.render(poseStack, vertices, packedLight, packedOverlay);
     }
 
     public void setYaw(float yaw) {

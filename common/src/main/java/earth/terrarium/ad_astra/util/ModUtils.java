@@ -5,9 +5,9 @@ import dev.architectury.injectables.targets.ArchitecturyTarget;
 import dev.architectury.platform.Platform;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.data.Planet;
-import earth.terrarium.ad_astra.entities.vehicles.LanderEntity;
-import earth.terrarium.ad_astra.entities.vehicles.RocketEntity;
-import earth.terrarium.ad_astra.entities.vehicles.VehicleEntity;
+import earth.terrarium.ad_astra.entities.vehicles.Lander;
+import earth.terrarium.ad_astra.entities.vehicles.Rocket;
+import earth.terrarium.ad_astra.entities.vehicles.Vehicle;
 import earth.terrarium.ad_astra.items.vehicles.VehicleItem;
 import earth.terrarium.ad_astra.registry.ModCriteria;
 import earth.terrarium.ad_astra.registry.ModEntityTypes;
@@ -77,7 +77,7 @@ public class ModUtils {
             Vec3 targetPos = new Vec3(entity.getX(), AdAstra.CONFIG.rocket.atmosphereLeave, entity.getZ());
 
             if (entity instanceof ServerPlayer player) {
-                if (player.getVehicle() instanceof RocketEntity rocket) {
+                if (player.getVehicle() instanceof Rocket rocket) {
                     rocket.ejectPassengers();
                     player.displayClientMessage(Component.translatable("message." + AdAstra.MOD_ID + ".hold_space"), false);
                     entity = createLander(rocket, level, targetPos);
@@ -115,13 +115,13 @@ public class ModUtils {
             Entity first = teleportedEntities.poll();
 
             // Move the lander to the closest land
-            if (first instanceof LanderEntity) {
+            if (first instanceof Lander) {
                 Vec3 nearestLand = LandFinder.findNearestLand(first.getLevel(), new Vec3(first.getX(), AdAstra.CONFIG.rocket.atmosphereLeave, first.getZ()), 70);
                 first.moveTo(nearestLand.x(), nearestLand.y(), nearestLand.z(), first.getYRot(), first.getXRot());
             }
 
             for (Entity teleportedEntity : teleportedEntities) {
-                if (first instanceof LanderEntity) {
+                if (first instanceof Lander) {
                     Vec3 nearestLand = LandFinder.findNearestLand(teleportedEntity.getLevel(), new Vec3(teleportedEntity.getX(), AdAstra.CONFIG.rocket.atmosphereLeave, teleportedEntity.getZ()), 70);
                     teleportedEntity.moveTo(nearestLand.x(), nearestLand.y(), nearestLand.z(), teleportedEntity.getYRot(), teleportedEntity.getXRot());
                 }
@@ -147,8 +147,8 @@ public class ModUtils {
      * @param target      The position to spawn the lander at
      * @return A spawned lander entity at the same position as the rocket and with the same inventory
      */
-    public static LanderEntity createLander(RocketEntity rocket, ServerLevel targetWorld, Vec3 target) {
-        LanderEntity lander = new LanderEntity(ModEntityTypes.LANDER.get(), targetWorld);
+    public static Lander createLander(Rocket rocket, ServerLevel targetWorld, Vec3 target) {
+        Lander lander = new Lander(ModEntityTypes.LANDER.get(), targetWorld);
         lander.setPos(target);
 
         for (int i = 0; i < rocket.getInventorySize(); i++) {
@@ -272,7 +272,7 @@ public class ModUtils {
      * @param vehicle The vehicle to apply the rotation
      * @param newYaw  The new yaw to apply to the vehicle
      */
-    public static void rotateVehicleYaw(VehicleEntity vehicle, float newYaw) {
+    public static void rotateVehicleYaw(Vehicle vehicle, float newYaw) {
         vehicle.setYRot(newYaw);
         vehicle.setYBodyRot(newYaw);
         vehicle.yRotO = newYaw;

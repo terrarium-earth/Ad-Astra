@@ -25,6 +25,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Objects;
 
 public class SpaceSuitModel extends HumanoidModel<LivingEntity> {
@@ -94,7 +96,7 @@ public class SpaceSuitModel extends HumanoidModel<LivingEntity> {
     }
 
     @Override
-    public void renderToBuffer(PoseStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
+    public void renderToBuffer(PoseStack poseStack, @NotNull VertexConsumer vertices, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         this.attackTime = this.contextModel.attackTime;
         this.riding = this.contextModel.riding;
         this.young = this.contextModel.young;
@@ -112,10 +114,10 @@ public class SpaceSuitModel extends HumanoidModel<LivingEntity> {
         this.rightBoot.copyFrom(this.contextModel.rightLeg);
         this.leftBoot.copyFrom(this.contextModel.leftLeg);
 
-        matrices.pushPose();
+        poseStack.pushPose();
         if (this.young) {
-            matrices.scale(0.5f, 0.5f, 0.5f);
-            matrices.translate(0, 1.5f, 0);
+            poseStack.scale(0.5f, 0.5f, 0.5f);
+            poseStack.translate(0, 1.5f, 0);
         }
 
         int decimal = ((SpaceSuit) this.stack.getItem()).getColor(stack);
@@ -131,24 +133,24 @@ public class SpaceSuitModel extends HumanoidModel<LivingEntity> {
         Minecraft client = Minecraft.getInstance();
         MultiBufferSource provider = client.renderBuffers().bufferSource();
         if (!this.stack.is(ModItems.SPACE_HELMET.get())) {
-            this.head.render(matrices, vertices, light, overlay, 1.0f, 1.0f, 1.0f, 1.0f);
-            this.visor.render(matrices, provider.getBuffer(RenderType.entityTranslucent(this.texture)), light, overlay, r, g, b, a);
+            this.head.render(poseStack, vertices, packedLight, packedOverlay, 1.0f, 1.0f, 1.0f, 1.0f);
+            this.visor.render(poseStack, provider.getBuffer(RenderType.entityTranslucent(this.texture)), packedLight, packedOverlay, r, g, b, a);
         } else {
-            this.head.render(matrices, vertices, light, overlay, r, g, b, 1.0f);
-            this.visor.render(matrices, provider.getBuffer(RenderType.entityTranslucent(this.texture)), light, overlay, r, g, b, a);
+            this.head.render(poseStack, vertices, packedLight, packedOverlay, r, g, b, 1.0f);
+            this.visor.render(poseStack, provider.getBuffer(RenderType.entityTranslucent(this.texture)), packedLight, packedOverlay, r, g, b, a);
         }
 
-        this.body.render(matrices, vertices, light, overlay, r, g, b, 1.0f);
-        this.rightArm.render(matrices, vertices, light, overlay, r, g, b, 1.0f);
-        this.leftArm.render(matrices, vertices, light, overlay, r, g, b, 1.0f);
+        this.body.render(poseStack, vertices, packedLight, packedOverlay, r, g, b, 1.0f);
+        this.rightArm.render(poseStack, vertices, packedLight, packedOverlay, r, g, b, 1.0f);
+        this.leftArm.render(poseStack, vertices, packedLight, packedOverlay, r, g, b, 1.0f);
 
-        this.rightLeg.render(matrices, vertices, light, overlay, r, g, b, 1.0f);
-        this.leftLeg.render(matrices, vertices, light, overlay, r, g, b, 1.0f);
+        this.rightLeg.render(poseStack, vertices, packedLight, packedOverlay, r, g, b, 1.0f);
+        this.leftLeg.render(poseStack, vertices, packedLight, packedOverlay, r, g, b, 1.0f);
 
-        this.rightBoot.render(matrices, vertices, light, overlay, r, g, b, 1.0f);
-        this.leftBoot.render(matrices, vertices, light, overlay, r, g, b, 1.0f);
+        this.rightBoot.render(poseStack, vertices, packedLight, packedOverlay, r, g, b, 1.0f);
+        this.leftBoot.render(poseStack, vertices, packedLight, packedOverlay, r, g, b, 1.0f);
 
-        matrices.popPose();
+        poseStack.popPose();
     }
 
     private void setVisible() {

@@ -3,7 +3,7 @@ package earth.terrarium.ad_astra.mixin;
 import earth.terrarium.ad_astra.entities.systems.EntityAcidRainSystem;
 import earth.terrarium.ad_astra.entities.systems.EntityOxygenSystem;
 import earth.terrarium.ad_astra.entities.systems.EntityTemperatureSystem;
-import earth.terrarium.ad_astra.entities.vehicles.VehicleEntity;
+import earth.terrarium.ad_astra.entities.vehicles.Vehicle;
 import earth.terrarium.ad_astra.registry.ModTags;
 import earth.terrarium.ad_astra.util.ModUtils;
 import net.minecraft.server.level.ServerLevel;
@@ -21,29 +21,29 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class LivingEntityMixin {
 
     @Inject(method = "causeFallDamage", at = @At("HEAD"), cancellable = true)
-    public void adastra_handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource, CallbackInfoReturnable<Boolean> ci) {
+    public void adastra_handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
 
         LivingEntity entity = ((LivingEntity) (Object) this);
 
-        if (entity.getVehicle() instanceof VehicleEntity vehicle) {
+        if (entity.getVehicle() instanceof Vehicle vehicle) {
             if (!vehicle.canRiderTakeFallDamage()) {
-                ci.setReturnValue(false);
+                cir.setReturnValue(false);
             }
         }
 
         if (fallDistance <= 3 / ModUtils.getPlanetGravity(entity.level)) {
-            ci.setReturnValue(false);
+            cir.setReturnValue(false);
         }
     }
 
     @Inject(method = "hurt", at = @At("HEAD"), cancellable = true)
-    public void adastra_damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> ci) {
+    public void adastra_damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         LivingEntity entity = ((LivingEntity) (Object) this);
 
         if (source.isFire() || source.equals(DamageSource.HOT_FLOOR)) {
             if ((entity.isOnFire() || source.equals(DamageSource.HOT_FLOOR))) {
                 if (ModUtils.checkTag(entity, ModTags.FIRE_IMMUNE)) {
-                    ci.setReturnValue(false);
+                    cir.setReturnValue(false);
                 }
             }
         }

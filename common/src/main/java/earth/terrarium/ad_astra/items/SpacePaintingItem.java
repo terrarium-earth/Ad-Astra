@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.items;
 
-import earth.terrarium.ad_astra.entities.SpacePaintingEntity;
+import earth.terrarium.ad_astra.entities.SpacePainting;
 import java.util.Optional;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -16,13 +16,13 @@ import net.minecraft.world.level.gameevent.GameEvent;
 
 public class SpacePaintingItem extends HangingEntityItem {
 
-    public SpacePaintingItem(EntityType<? extends SpacePaintingEntity> type, Properties settings) {
+    public SpacePaintingItem(EntityType<? extends SpacePainting> type, Properties settings) {
         super(type, settings);
     }
 
     @Override
     public InteractionResult useOn(UseOnContext context) {
-        SpacePaintingEntity spacePainting;
+        SpacePainting spacePainting;
         BlockPos blockPos = context.getClickedPos();
         Direction direction = context.getClickedFace();
         BlockPos blockPos2 = blockPos.relative(direction);
@@ -33,7 +33,7 @@ public class SpacePaintingItem extends HangingEntityItem {
         }
         Level level = context.getLevel();
 
-        Optional<SpacePaintingEntity> optional = SpacePaintingEntity.placeSpacePainting(level, blockPos2, direction);
+        Optional<SpacePainting> optional = SpacePainting.placeSpacePainting(level, blockPos2, direction);
         if (optional.isEmpty()) {
             return InteractionResult.CONSUME;
         }

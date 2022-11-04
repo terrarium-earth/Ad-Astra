@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.items.vehicles;
 
-import earth.terrarium.ad_astra.entities.vehicles.RoverEntity;
+import earth.terrarium.ad_astra.entities.vehicles.Rover;
 import earth.terrarium.ad_astra.registry.ModEntityTypes;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import java.util.List;
@@ -44,11 +44,11 @@ public class RoverItem extends VehicleItem {
             }
 
             ItemStack roverStack = context.getPlayer().getItemInHand(context.getHand());
-            RoverEntity rover = new RoverEntity(ModEntityTypes.TIER_1_ROVER.get(), level);
+            Rover rover = new Rover(ModEntityTypes.TIER_1_ROVER.get(), level);
 
             // Prevent placing rovers in rovers
             AABB scanAbove = new AABB(pos.getX() - 2, pos.getY() - 2, pos.getZ() - 2, pos.getX() + 2, pos.getY() + 2, pos.getZ() + 2);
-            List<RoverEntity> entities = level.getEntitiesOfClass(RoverEntity.class, scanAbove, entity -> true);
+            List<Rover> entities = level.getEntitiesOfClass(Rover.class, scanAbove, entity -> true);
             if (!entities.isEmpty()) {
                 return InteractionResult.PASS;
             }

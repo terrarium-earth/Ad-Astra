@@ -9,7 +9,6 @@ import java.util.function.Consumer;
 
 @Mixin(SpaceSuit.class)
 public abstract class SpaceSuitMixin {
-
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new ModArmourExtension());
     }

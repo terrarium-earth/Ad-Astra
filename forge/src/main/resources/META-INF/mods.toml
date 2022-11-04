@@ -1,6 +1,6 @@
 modLoader = "javafml"
-loaderVersion = "[41,)"
-#issueTrackerURL = ""
+loaderVersion = "[43,)"
+issueTrackerURL = "https://github.com/terrarium-earth/Ad-Astra/issues"
 license = "MIT"
 
 [[mods]]
@@ -8,15 +8,13 @@ modId = "ad_astra"
 version = "${version}"
 displayName = "Ad Astra!"
 authors = " Alex Nijjar, Bunny, Checheno, CodexAdrian, Facu, Fizz, OliviaTheVampire, SpaceStar, ThatGravyBoat"
-description = '''
-Live long and prosper, Ad Astra!
-'''
-#logoFile = ""
+description = "Live long and prosper, Ad Astra!"
+logoFile = "icon.png"
 
 [[dependencies.ad_astra]]
 modId = "forge"
 mandatory = true
-versionRange = "[41,)"
+versionRange = "[43,)"
 ordering = "NONE"
 side = "BOTH"
 
@@ -31,5 +29,12 @@ side = "BOTH"
 modId = "architectury"
 mandatory = true
 versionRange = "[5.12.42,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.ad_astra]]
+modId = "cloth_config"
+mandatory = true
+versionRange = "[8.2.88,)"
 ordering = "AFTER"
 side = "BOTH"

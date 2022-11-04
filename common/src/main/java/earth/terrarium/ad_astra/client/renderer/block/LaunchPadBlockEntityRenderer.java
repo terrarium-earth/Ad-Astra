@@ -29,17 +29,17 @@ public class LaunchPadBlockEntityRenderer extends BlockEntityWithoutLevelRendere
     }
 
     @Override
-    public void renderByItem(ItemStack stack, ItemTransforms.TransformType mode, PoseStack matrices, MultiBufferSource vertexConsumers, int light, int overlay) {
-        matrices.pushPose();
-        AdAstraClient.renderBlock(LAUNCH_PAD_MODEL, matrices, vertexConsumers, light, overlay);
-        matrices.popPose();
+    public void renderByItem(ItemStack stack, ItemTransforms.TransformType mode, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
+        poseStack.pushPose();
+        AdAstraClient.renderBlock(LAUNCH_PAD_MODEL, poseStack, buffer, packedLight, packedOverlay);
+        poseStack.popPose();
     }
 
     @Override
-    public void render(LaunchPadBlockEntity entity, float tickDelta, PoseStack matrices, MultiBufferSource vertexConsumers, int light, int overlay) {
-        matrices.pushPose();
-        AdAstraClient.renderBlock(LAUNCH_PAD_MODEL, matrices, vertexConsumers, light, overlay);
-        matrices.popPose();
+    public void render(LaunchPadBlockEntity entity, float tickDelta, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
+        poseStack.pushPose();
+        AdAstraClient.renderBlock(LAUNCH_PAD_MODEL, poseStack, buffer, packedLight, packedOverlay);
+        poseStack.popPose();
 
     }
 }

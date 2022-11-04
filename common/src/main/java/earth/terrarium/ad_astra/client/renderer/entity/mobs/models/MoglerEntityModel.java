@@ -126,17 +126,17 @@ public class MoglerEntityModel<T extends Entity> extends EntityModel<T> {
     }
 
     @Override
-    public void renderToBuffer(PoseStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertices, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         if (this.young) {
-            matrices.scale(0.5f, 0.5f, 0.5f);
-            matrices.translate(0, 1.5f, 0);
+            poseStack.scale(0.5f, 0.5f, 0.5f);
+            poseStack.translate(0, 1.5f, 0);
         }
 
-        body.render(matrices, vertices, light, overlay);
-        head.render(matrices, vertices, light, overlay);
-        leg1.render(matrices, vertices, light, overlay);
-        leg2.render(matrices, vertices, light, overlay);
-        leg3.render(matrices, vertices, light, overlay);
-        leg4.render(matrices, vertices, light, overlay);
+        body.render(poseStack, vertices, packedLight, packedOverlay);
+        head.render(poseStack, vertices, packedLight, packedOverlay);
+        leg1.render(poseStack, vertices, packedLight, packedOverlay);
+        leg2.render(poseStack, vertices, packedLight, packedOverlay);
+        leg3.render(poseStack, vertices, packedLight, packedOverlay);
+        leg4.render(poseStack, vertices, packedLight, packedOverlay);
     }
 }

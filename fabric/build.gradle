@@ -40,28 +40,28 @@ configurations {
 }
 
 dependencies {
-    modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
-    modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
-    // Remove the next line if you don't want to depend on the API
-    modApi "dev.architectury:architectury-fabric:${rootProject.architectury_version}"
+    modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
+    modApi "net.fabricmc.fabric-api:fabric-api:${fabric_api_version}"
+    common(project(path: ":common", configuration: "namedElements")) { transitive = false }
+    shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive = false }
 
-    common(project(path: ":common", configuration: "namedElements")) { transitive false }
-    shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
-    modImplementation "earth.terrarium:botarium-fabric-${rootProject.minecraft_version}:${rootProject.botarium_version}"
-    modImplementation "com.teamresourceful.resourcefullib:resourcefullib-fabric-$rootProject.resourcefullib_version"
+    modApi "dev.architectury:architectury-fabric:${architectury_version}" // TODO: REMOVE
 
-    modApi("com.terraformersmc:modmenu:${project.modmenu_version}")
+    include modApi ("earth.terrarium:botarium-fabric-${minecraft_version}:${botarium_version}"
+    )
+    include modApi ("com.teamresourceful.resourcefullib:resourcefullib-fabric-$resourcefullib_version")
 
-    modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
-        exclude(group: "net.fabricmc.fabric-api")
-    }
-    //modImplementation "vazkii.patchouli:Patchouli:${project.patchouli_version}"
+    modApi("com.terraformersmc:modmenu:${modmenu_version}")
 
-    // EMI
+    modApi("me.shedaniel.cloth:cloth-config-fabric:${cloth_config_version}") { exclude(group: "net.fabricmc.fabric-api") }
+    modImplementation "vazkii.patchouli:Patchouli:${patchouli_version}-FABRIC"
+
     modCompileOnly "dev.emi:emi:${emi_version}"
 
-    // REI
-    modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:$project.rei_version")
+    modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:$rei_version")
+
+//    modCompileOnly "mezz.jei:jei-${minecraft_version}-fabric-api:${project.jei_version}"
+//    modLocalRuntime ("mezz.jei:jei-${minecraft_version}-fabric:${project.jei_version}") { transitive = false }
 }
 
 processResources {
