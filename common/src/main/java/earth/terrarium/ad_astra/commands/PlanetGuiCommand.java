@@ -4,16 +4,17 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import earth.terrarium.ad_astra.screen.PlanetSelectionScreenHandlerFactory;
+import earth.terrarium.ad_astra.screen.PlanetSelectionMenuProvider;
 import earth.terrarium.botarium.api.menu.MenuHooks;
-import java.util.Collection;
-import java.util.List;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+
+import java.util.Collection;
+import java.util.List;
 
 import static net.minecraft.commands.Commands.argument;
 
@@ -49,7 +50,7 @@ public class PlanetGuiCommand {
         entities.forEach((entity) -> {
             if (entity instanceof Player player) {
                 player.inventoryMenu.removed(player);
-                MenuHooks.openMenu((ServerPlayer) player, new PlanetSelectionScreenHandlerFactory(tier));
+                MenuHooks.openMenu((ServerPlayer) player, new PlanetSelectionMenuProvider(tier));
             }
         });
 

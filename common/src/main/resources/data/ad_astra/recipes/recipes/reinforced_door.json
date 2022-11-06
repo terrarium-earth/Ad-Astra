@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "sliding_door",
+  "key": {
+    "#": {
+      "tag": "ad_astra_platform:steel_blocks"
+    },
+    "G": {
+      "item": "minecraft:glass_pane"
+    },
+    "O": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "pattern": [
+    "O#O",
+    "G#G",
+    "O#O"
+  ],
+  "result": {
+    "item": "ad_astra:reinforced_door"
+  }
+}

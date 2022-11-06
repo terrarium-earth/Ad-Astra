@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "required": false,
+      "id": "#c:desh_plates"
+    },
+    {
+      "required": false,
+      "id": "#forge:desh_plates"
+    }
+  ]
+}

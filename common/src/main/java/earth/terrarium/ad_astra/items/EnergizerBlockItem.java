@@ -1,7 +1,6 @@
 package earth.terrarium.ad_astra.items;
 
 import earth.terrarium.ad_astra.AdAstra;
-import java.util.List;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -9,6 +8,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+
+import java.util.List;
 
 public class EnergizerBlockItem extends MachineBlockItem {
     public EnergizerBlockItem(Block block, Properties settings) {

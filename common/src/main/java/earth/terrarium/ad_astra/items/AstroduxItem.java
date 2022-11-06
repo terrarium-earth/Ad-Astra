@@ -16,9 +16,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import vazkii.patchouli.api.PatchouliAPI;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
-@ParametersAreNonnullByDefault
 public class AstroduxItem extends Item {
 
     // Give guidebook at spawn

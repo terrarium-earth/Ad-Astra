@@ -1,7 +1,12 @@
 package earth.terrarium.ad_astra.mixin;
 
-import earth.terrarium.ad_astra.entities.mobs.PygroBrute;
 import earth.terrarium.ad_astra.entities.mobs.Pygro;
+import earth.terrarium.ad_astra.entities.mobs.PygroBrute;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.minecraft.world.entity.ai.sensing.PiglinSpecificSensor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -9,11 +14,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Optional;
-import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.memory.MemoryModuleType;
-import net.minecraft.world.entity.ai.sensing.PiglinSpecificSensor;
 
 @Mixin(PiglinSpecificSensor.class)
 public class PiglinSpecificSensorMixin {

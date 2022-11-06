@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "glowing_iron_pillar",
+  "key": {
+    "#": {
+      "tag": "ad_astra_platform:iron_plates"
+    },
+    "B": {
+      "item": "minecraft:light_blue_dye"
+    },
+    "G": {
+      "item": "minecraft:glowstone"
+    }
+  },
+  "pattern": [
+    "#B#",
+    "#G#",
+    "#B#"
+  ],
+  "result": {
+    "count": 6,
+    "item": "ad_astra:glowing_iron_pillar"
+  }
+}

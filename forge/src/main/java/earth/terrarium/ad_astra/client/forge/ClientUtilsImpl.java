@@ -1,5 +1,6 @@
 package earth.terrarium.ad_astra.client.forge;
 
+import earth.terrarium.ad_astra.client.ClientUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.MenuAccess;
@@ -14,7 +15,7 @@ public class ClientUtilsImpl {
         return dispatcher.getModel(id);
     }
 
-    public static <M extends AbstractContainerMenu, U extends Screen & MenuAccess<M>> void registerScreen(MenuType<? extends M> type, MenuScreens.ScreenConstructor<M, U> factory) {
-        MenuScreens.register(type, factory);
+    public static <M extends AbstractContainerMenu, U extends Screen & MenuAccess<M>> void registerScreen(MenuType<? extends M> type, ClientUtils.ScreenConstructor<M, U> factory) {
+        MenuScreens.register(type, factory::create);
     }
 }

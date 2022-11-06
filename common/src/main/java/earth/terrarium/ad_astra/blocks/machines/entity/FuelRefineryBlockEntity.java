@@ -4,16 +4,12 @@ import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.recipes.FluidConversionRecipe;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
 import earth.terrarium.ad_astra.registry.ModRecipes;
-import earth.terrarium.ad_astra.screen.handler.ConversionScreenHandler;
+import earth.terrarium.ad_astra.screen.menu.ConversionMenu;
 import earth.terrarium.ad_astra.util.FluidUtils;
 import earth.terrarium.botarium.api.energy.EnergyBlock;
 import earth.terrarium.botarium.api.energy.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
-import java.util.function.Predicate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Inventory;
@@ -21,6 +17,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
+import java.util.function.Predicate;
 
 public class FuelRefineryBlockEntity extends FluidMachineBlockEntity implements EnergyBlock {
 
@@ -61,7 +61,7 @@ public class FuelRefineryBlockEntity extends FluidMachineBlockEntity implements 
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int syncId, Inventory inv, Player player) {
-        return new ConversionScreenHandler(syncId, inv, this);
+        return new ConversionMenu(syncId, inv, this);
     }
 
     @Override

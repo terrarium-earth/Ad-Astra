@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.entities.vehicles;
 
 import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.ad_astra.screen.LanderScreenHandlerFactory;
+import earth.terrarium.ad_astra.screen.LanderMenuProvider;
 import earth.terrarium.ad_astra.util.ModKeyBindings;
 import earth.terrarium.ad_astra.util.ModUtils;
 import net.minecraft.core.particles.ParticleTypes;
@@ -27,7 +27,7 @@ public class Lander extends Vehicle {
     @Override
     public InteractionResult interact(Player player, InteractionHand hand) {
         super.interact(player, hand);
-        this.openInventory(player, new LanderScreenHandlerFactory(this));
+        this.openInventory(player, new LanderMenuProvider(this));
         return InteractionResult.SUCCESS;
     }
 

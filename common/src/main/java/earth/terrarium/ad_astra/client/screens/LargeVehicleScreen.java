@@ -1,23 +1,24 @@
 package earth.terrarium.ad_astra.client.screens;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import earth.terrarium.ad_astra.screen.handler.LargeVehicleScreenHandler;
+import earth.terrarium.ad_astra.screen.menu.LargeVehicleMenu;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+
 import java.awt.*;
 
 @Environment(EnvType.CLIENT)
-public class LargeVehicleScreen extends AbstractVehicleScreen<LargeVehicleScreenHandler> {
+public class LargeVehicleScreen extends AbstractVehicleScreen<LargeVehicleMenu> {
 
     public static final int INPUT_TANK_LEFT = 50;
     public static final int INPUT_TANK_TOP = 25;
     private static final ResourceLocation TEXTURE = new ModResourceLocation("textures/gui/screens/vehicle_large.png");
 
-    public LargeVehicleScreen(LargeVehicleScreenHandler handler, Inventory inventory, Component title) {
+    public LargeVehicleScreen(LargeVehicleMenu handler, Inventory inventory, Component title) {
         super(handler, inventory, title, TEXTURE);
         this.imageWidth = 177;
         this.imageHeight = 181;

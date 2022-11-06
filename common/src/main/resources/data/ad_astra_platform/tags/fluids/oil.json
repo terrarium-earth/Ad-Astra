@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "required": false,
+      "id": "#c:oil"
+    },
+    {
+      "required": false,
+      "id": "#forge:oil"
+    }
+  ]
+}

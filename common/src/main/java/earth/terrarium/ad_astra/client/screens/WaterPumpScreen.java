@@ -2,17 +2,18 @@ package earth.terrarium.ad_astra.client.screens;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.blocks.machines.entity.WaterPumpBlockEntity;
-import earth.terrarium.ad_astra.screen.handler.WaterPumpScreenHandler;
+import earth.terrarium.ad_astra.screen.menu.WaterPumpMenu;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+
 import java.awt.*;
 
 @Environment(EnvType.CLIENT)
-public class WaterPumpScreen extends AbstractMachineScreen<WaterPumpBlockEntity, WaterPumpScreenHandler> {
+public class WaterPumpScreen extends AbstractMachineScreen<WaterPumpBlockEntity, WaterPumpMenu> {
 
     public static final int INPUT_TANK_LEFT = 80;
     public static final int INPUT_TANK_TOP = 30;
@@ -20,7 +21,7 @@ public class WaterPumpScreen extends AbstractMachineScreen<WaterPumpBlockEntity,
     public static final int ENERGY_TOP = 30;
     private static final ResourceLocation TEXTURE = new ModResourceLocation("textures/gui/screens/water_pump.png");
 
-    public WaterPumpScreen(WaterPumpScreenHandler handler, Inventory inventory, Component title) {
+    public WaterPumpScreen(WaterPumpMenu handler, Inventory inventory, Component title) {
         super(handler, inventory, title, TEXTURE);
         this.imageWidth = 177;
         this.imageHeight = 180;

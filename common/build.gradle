@@ -4,24 +4,28 @@ architectury {
 
 loom {
     accessWidenerPath = file("src/main/resources/ad_astra.accesswidener")
+    enableTransitiveAccessWideners = true
+//    interfaceInjection {
+//        enableDependencyInterfaceInjection = true
+//    }
 }
 
 dependencies {
-    modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
+    modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
 
-    modApi "earth.terrarium:botarium-common-${minecraft_version}:${botarium_version}"
+    modApi "earth.terrarium:botarium-common-$rootProject.minecraft_version:$rootProject.botarium_version"
 
-    modApi "com.teamresourceful.resourcefullib:resourcefullib-common-$resourcefullib_version"
+    modApi "com.teamresourceful.resourcefullib:resourcefullib-common-$rootProject.resourcefullib_version"
 
-    modApi("me.shedaniel.cloth:cloth-config:${cloth_config_version}")
+    modApi("me.shedaniel.cloth:cloth-config:$rootProject.cloth_config_version")
 
-    modImplementation "vazkii.patchouli:Patchouli-xplat:${patchouli_version}"
+    modImplementation "vazkii.patchouli:Patchouli-xplat:$rootProject.patchouli_version"
 
-    modCompileOnly("me.shedaniel:RoughlyEnoughItems-api:$rei_version")
-    modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin:$rei_version")
+    modCompileOnly("me.shedaniel:RoughlyEnoughItems-api:$rootProject.rei_version")
+    modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin:$rootProject.rei_version")
 
-    modCompileOnly "mezz.jei:jei-${rootProject.minecraft_version}-common-api:${rootProject.jei_version}"
-    modRuntimeOnly "mezz.jei:jei-${rootProject.minecraft_version}-common:${rootProject.jei_version}"
+    modCompileOnly "mezz.jei:jei-$rootProject.minecraft_version-common-api:$rootProject.jei_version"
+    modRuntimeOnly "mezz.jei:jei-$rootProject.minecraft_version-common:$rootProject.jei_version"
 }
 
 publishing {

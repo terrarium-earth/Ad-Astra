@@ -1,16 +1,20 @@
 package earth.terrarium.ad_astra.registry;
 
-import dev.architectury.registry.level.entity.EntityAttributeRegistry;
+import dev.architectury.injectables.annotations.ExpectPlatform;
 import dev.architectury.registry.registries.DeferredRegister;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.entities.SpacePainting;
 import earth.terrarium.ad_astra.entities.mobs.*;
 import earth.terrarium.ad_astra.entities.projectiles.IceSpit;
 import earth.terrarium.ad_astra.entities.vehicles.*;
-import java.util.function.Supplier;
 import net.minecraft.core.Registry;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.level.levelgen.Heightmap;
+import org.apache.commons.lang3.NotImplementedException;
+
+import java.util.function.BiConsumer;
+import java.util.function.Supplier;
 
 // \.build\(".*"\)
 // .build(null)
@@ -51,19 +55,40 @@ public class ModEntityTypes {
 
     public static void register() {
         ENTITY_TYPES.register();
+    }
 
-        // Mob Attributes
-        EntityAttributeRegistry.register(LUNARIAN, Lunarian::createMobAttributes);
-        EntityAttributeRegistry.register(CORRUPTED_LUNARIAN, CorruptedLunarian::createMobAttributes);
-        EntityAttributeRegistry.register(STAR_CRAWLER, StarCrawler::createMobAttributes);
-        EntityAttributeRegistry.register(MARTIAN_RAPTOR, MartianRaptor::createMobAttributes);
-        EntityAttributeRegistry.register(PYGRO, Pygro::createMobAttributes);
-        EntityAttributeRegistry.register(ZOMBIFIED_PYGRO, ZombifiedPygro::createMobAttributes);
-        EntityAttributeRegistry.register(PYGRO_BRUTE, PygroBrute::createMobAttributes);
-        EntityAttributeRegistry.register(MOGLER, Mogler::createMobAttributes);
-        EntityAttributeRegistry.register(ZOMBIFIED_MOGLER, ZombifiedMogler::createMobAttributes);
-        EntityAttributeRegistry.register(LUNARIAN_WANDERING_TRADER, Lunarian::createMobAttributes);
-        EntityAttributeRegistry.register(SULFUR_CREEPER, SulfurCreeper::createMobAttributes);
-        EntityAttributeRegistry.register(GLACIAN_RAM, GlacianRam::createMobAttributes);
+    public static void registerSpawnPlacements() {
+        registerSpawnPlacement(ModEntityTypes.LUNARIAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Lunarian::checkMobSpawnRules);
+        registerSpawnPlacement(ModEntityTypes.CORRUPTED_LUNARIAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CorruptedLunarian::checkMonsterSpawnRules);
+        registerSpawnPlacement(ModEntityTypes.STAR_CRAWLER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, StarCrawler::checkMonsterSpawnRules);
+        registerSpawnPlacement(ModEntityTypes.MARTIAN_RAPTOR.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, MartianRaptor::checkMonsterSpawnRules);
+        registerSpawnPlacement(ModEntityTypes.PYGRO.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Pygro::checkMonsterSpawnRules);
+        registerSpawnPlacement(ModEntityTypes.ZOMBIFIED_PYGRO.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ZombifiedPygro::checkMonsterSpawnRules);
+        registerSpawnPlacement(ModEntityTypes.PYGRO_BRUTE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, PygroBrute::checkMonsterSpawnRules);
+        registerSpawnPlacement(ModEntityTypes.MOGLER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mogler::checkMobSpawnRules);
+        registerSpawnPlacement(ModEntityTypes.ZOMBIFIED_MOGLER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ZombifiedMogler::checkMonsterSpawnRules);
+        registerSpawnPlacement(ModEntityTypes.LUNARIAN_WANDERING_TRADER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Lunarian::checkMobSpawnRules);
+        registerSpawnPlacement(ModEntityTypes.SULFUR_CREEPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SulfurCreeper::checkMonsterSpawnRules);
+        registerSpawnPlacement(ModEntityTypes.GLACIAN_RAM.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, GlacianRam::checkMobSpawnRules);
+    }
+
+    public static void registerAttributes(BiConsumer<Supplier<? extends EntityType<? extends LivingEntity>>, Supplier<AttributeSupplier.Builder>> attributes) {
+        attributes.accept(LUNARIAN, Lunarian::createMobAttributes);
+        attributes.accept(CORRUPTED_LUNARIAN, CorruptedLunarian::createMobAttributes);
+        attributes.accept(STAR_CRAWLER, StarCrawler::createMobAttributes);
+        attributes.accept(MARTIAN_RAPTOR, MartianRaptor::createMobAttributes);
+        attributes.accept(PYGRO, Pygro::createMobAttributes);
+        attributes.accept(ZOMBIFIED_PYGRO, ZombifiedPygro::createMobAttributes);
+        attributes.accept(PYGRO_BRUTE, PygroBrute::createMobAttributes);
+        attributes.accept(MOGLER, Mogler::createMobAttributes);
+        attributes.accept(ZOMBIFIED_MOGLER, ZombifiedMogler::createMobAttributes);
+        attributes.accept(LUNARIAN_WANDERING_TRADER, Lunarian::createMobAttributes);
+        attributes.accept(SULFUR_CREEPER, SulfurCreeper::createMobAttributes);
+        attributes.accept(GLACIAN_RAM, GlacianRam::createMobAttributes);
+    }
+
+    @ExpectPlatform
+    public static <T extends Mob> void registerSpawnPlacement(EntityType<T> entityType, SpawnPlacements.Type decoratorType, Heightmap.Types heightMapType, SpawnPlacements.SpawnPredicate<T> decoratorPredicate) {
+        throw new NotImplementedException();
     }
 }

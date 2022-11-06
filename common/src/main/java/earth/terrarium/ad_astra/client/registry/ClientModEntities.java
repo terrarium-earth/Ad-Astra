@@ -28,6 +28,7 @@ import net.minecraft.client.renderer.entity.PaintingRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+
 import java.util.function.Supplier;
 
 @Environment(EnvType.CLIENT)

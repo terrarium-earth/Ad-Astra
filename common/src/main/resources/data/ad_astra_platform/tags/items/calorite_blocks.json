@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "required": false,
+      "id": "#c:calorite_blocks"
+    },
+    {
+      "required": false,
+      "id": "#forge:calorite_blocks"
+    }
+  ]
+}

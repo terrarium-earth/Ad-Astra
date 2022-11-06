@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "required": false,
+      "id": "#c:steel_ingots"
+    },
+    {
+      "required": false,
+      "id": "#forge:steel_ingots"
+    }
+  ]
+}

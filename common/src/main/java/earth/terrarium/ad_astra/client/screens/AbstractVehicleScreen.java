@@ -3,7 +3,7 @@ package earth.terrarium.ad_astra.client.screens;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.entities.vehicles.Vehicle;
-import earth.terrarium.ad_astra.screen.handler.AbstractVehicleScreenHandler;
+import earth.terrarium.ad_astra.screen.menu.AbstractVehicleMenu;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.GuiComponent;
@@ -14,7 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 @Environment(EnvType.CLIENT)
-public abstract class AbstractVehicleScreen<T extends AbstractVehicleScreenHandler> extends AbstractContainerScreen<T> {
+public abstract class AbstractVehicleScreen<T extends AbstractVehicleMenu> extends AbstractContainerScreen<T> {
 
     final Vehicle vehicle;
     final ResourceLocation texture;

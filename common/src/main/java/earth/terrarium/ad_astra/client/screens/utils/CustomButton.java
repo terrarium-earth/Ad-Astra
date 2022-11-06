@@ -19,6 +19,7 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+
 import java.util.LinkedList;
 import java.util.List;
 

@@ -5,11 +5,12 @@ import dev.architectury.registry.registries.DeferredRegister;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.recipes.*;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
-import java.util.function.Supplier;
 import net.minecraft.core.Registry;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
+
+import java.util.function.Supplier;
 
 public class ModRecipes {
     public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(AdAstra.MOD_ID, Registry.RECIPE_TYPE_REGISTRY);

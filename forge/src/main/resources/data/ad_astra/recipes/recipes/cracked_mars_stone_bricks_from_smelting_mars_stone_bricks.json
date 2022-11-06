@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "cookingtime": 200,
-  "experience": 0.2,
-  "ingredient": {
-    "item": "ad_astra:mars_stone_bricks"
-  },
-  "result": "ad_astra:cracked_mars_stone_bricks"
-}

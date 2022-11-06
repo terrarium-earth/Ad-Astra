@@ -4,7 +4,6 @@ import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.items.armour.SpaceSuit;
 import earth.terrarium.ad_astra.util.OxygenUtils;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
-import java.util.Collection;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.entity.EntityType;
@@ -20,6 +19,8 @@ import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+
+import java.util.Collection;
 
 public class SulfurCreeper extends Creeper {
 

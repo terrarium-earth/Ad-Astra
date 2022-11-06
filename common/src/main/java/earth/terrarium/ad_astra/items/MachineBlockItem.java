@@ -6,7 +6,6 @@ import earth.terrarium.ad_astra.blocks.machines.entity.OxygenDistributorBlockEnt
 import earth.terrarium.botarium.api.energy.EnergyHooks;
 import earth.terrarium.botarium.api.energy.PlatformEnergyManager;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
-import java.util.Optional;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.ContainerHelper;
@@ -16,6 +15,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+
+import java.util.Optional;
 
 public class MachineBlockItem extends BlockItem {
     public MachineBlockItem(Block block, Properties settings) {

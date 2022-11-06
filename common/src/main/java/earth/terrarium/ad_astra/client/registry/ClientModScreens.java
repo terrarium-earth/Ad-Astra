@@ -3,26 +3,26 @@ package earth.terrarium.ad_astra.client.registry;
 import earth.terrarium.ad_astra.client.ClientUtils;
 import earth.terrarium.ad_astra.client.screens.*;
 import earth.terrarium.ad_astra.client.screens.utils.PlanetSelectionScreen;
-import earth.terrarium.ad_astra.registry.ModScreenHandlers;
+import earth.terrarium.ad_astra.registry.ModMenus;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
 @Environment(EnvType.CLIENT)
 public class ClientModScreens {
     public static void register() {
-        ClientUtils.registerScreen(ModScreenHandlers.SOLAR_PANEL_SCREEN_HANDLER.get(), SolarPanelScreen::new);
-        ClientUtils.registerScreen(ModScreenHandlers.COAL_GENERATOR_SCREEN_HANDLER.get(), CoalGeneratorScreen::new);
-        ClientUtils.registerScreen(ModScreenHandlers.COMPRESSOR_SCREEN_HANDLER.get(), CompressorScreen::new);
-        ClientUtils.registerScreen(ModScreenHandlers.NASA_WORKBENCH_SCREEN_HANDLER.get(), NasaWorkbenchScreen::new);
-        ClientUtils.registerScreen(ModScreenHandlers.CONVERSION_SCREEN_HANDLER.get(), ConversionScreen::new);
-        ClientUtils.registerScreen(ModScreenHandlers.WATER_PUMP_SCREEN_HANDLER.get(), WaterPumpScreen::new);
-        ClientUtils.registerScreen(ModScreenHandlers.OXYGEN_DISTRIBUTOR_SCREEN_HANDLER.get(), OxygenDistributorScreen::new);
-        ClientUtils.registerScreen(ModScreenHandlers.CRYO_FREEZER_SCREEN_HANDLER.get(), CryoFreezerScreen::new);
+        ClientUtils.registerScreen(ModMenus.SOLAR_PANEL_SCREEN_HANDLER.get(), SolarPanelScreen::new);
+        ClientUtils.registerScreen(ModMenus.COAL_GENERATOR_MENU.get(), CoalGeneratorScreen::new);
+        ClientUtils.registerScreen(ModMenus.COMPRESSOR_MENU.get(), CompressorScreen::new);
+        ClientUtils.registerScreen(ModMenus.NASA_WORKBENCH_MENU.get(), NasaWorkbenchScreen::new);
+        ClientUtils.registerScreen(ModMenus.CONVERSION_MENU.get(), ConversionScreen::new);
+        ClientUtils.registerScreen(ModMenus.WATER_PUMP_MENU.get(), WaterPumpScreen::new);
+        ClientUtils.registerScreen(ModMenus.OXYGEN_DISTRIBUTOR_MENU.get(), OxygenDistributorScreen::new);
+        ClientUtils.registerScreen(ModMenus.CRYO_FREEZER_MENU.get(), CryoFreezerScreen::new);
 
-        ClientUtils.registerScreen(ModScreenHandlers.VEHICLE_SCREEN_HANDLER.get(), VehicleScreen::new);
-        ClientUtils.registerScreen(ModScreenHandlers.LARGE_VEHICLE_SCREEN_HANDLER.get(), LargeVehicleScreen::new);
-        ClientUtils.registerScreen(ModScreenHandlers.LANDER_SCREEN_HANDLER.get(), LanderScreen::new);
+        ClientUtils.registerScreen(ModMenus.VEHICLE_MENU.get(), VehicleScreen::new);
+        ClientUtils.registerScreen(ModMenus.LARGE_VEHICLE_MENU.get(), LargeVehicleScreen::new);
+        ClientUtils.registerScreen(ModMenus.LANDER_MENU.get(), LanderScreen::new);
 
-        ClientUtils.registerScreen(ModScreenHandlers.PLANET_SELECTION_SCREEN_HANDLER.get(), PlanetSelectionScreen::new);
+        ClientUtils.registerScreen(ModMenus.PLANET_SELECTION_SCREEN_HANDLER.get(), PlanetSelectionScreen::new);
     }
 }

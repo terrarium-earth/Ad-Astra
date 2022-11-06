@@ -2,11 +2,12 @@ package earth.terrarium.ad_astra.util.algorithms;
 
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.util.ModUtils;
-import java.util.LinkedList;
-import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Searches for land (aka. a chunk with blocks in in it).

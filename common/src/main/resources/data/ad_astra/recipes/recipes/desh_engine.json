@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "engines",
+  "key": {
+    "#": {
+      "tag": "ad_astra_platform:desh_plates"
+    },
+    "E": {
+      "item": "ad_astra:engine_frame"
+    },
+    "F": {
+      "item": "ad_astra:engine_fan"
+    }
+  },
+  "pattern": [
+    "###",
+    " E ",
+    " F "
+  ],
+  "result": {
+    "item": "ad_astra:desh_engine"
+  }
+}

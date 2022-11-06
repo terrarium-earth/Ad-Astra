@@ -1,7 +1,6 @@
 package earth.terrarium.ad_astra.items;
 
 import earth.terrarium.ad_astra.entities.SpacePainting;
-import java.util.Optional;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -13,6 +12,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
+
+import java.util.Optional;
 
 public class SpacePaintingItem extends HangingEntityItem {
 

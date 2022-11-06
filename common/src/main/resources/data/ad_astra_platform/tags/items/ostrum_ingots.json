@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "required": false,
+      "id": "#c:ostrum_ingots"
+    },
+    {
+      "required": false,
+      "id": "#forge:ostrum_ingots"
+    }
+  ]
+}

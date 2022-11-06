@@ -32,11 +32,9 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Optional;
 import java.util.function.ToIntFunction;
 
-@ParametersAreNonnullByDefault
 @SuppressWarnings("deprecation")
 public abstract class AbstractMachineBlock extends BaseEntityBlock {
 

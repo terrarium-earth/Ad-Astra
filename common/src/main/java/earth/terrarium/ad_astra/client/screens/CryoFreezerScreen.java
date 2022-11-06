@@ -2,14 +2,15 @@ package earth.terrarium.ad_astra.client.screens;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.blocks.machines.entity.CryoFreezerBlockEntity;
-import earth.terrarium.ad_astra.screen.handler.CryoFreezerScreenHandler;
+import earth.terrarium.ad_astra.screen.menu.CryoFreezerMenu;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
-import java.awt.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class CryoFreezerScreen extends AbstractMachineScreen<CryoFreezerBlockEntity, CryoFreezerScreenHandler> {
+import java.awt.*;
+
+public class CryoFreezerScreen extends AbstractMachineScreen<CryoFreezerBlockEntity, CryoFreezerMenu> {
 
     public static final int SNOWFLAKE_LEFT = 54;
     public static final int SNOWFLAKE_TOP = 71;
@@ -19,7 +20,7 @@ public class CryoFreezerScreen extends AbstractMachineScreen<CryoFreezerBlockEnt
     public static final int ENERGY_TOP = 27;
     private static final ResourceLocation TEXTURE = new ModResourceLocation("textures/gui/screens/cryo_freezer.png");
 
-    public CryoFreezerScreen(CryoFreezerScreenHandler handler, Inventory inventory, Component title) {
+    public CryoFreezerScreen(CryoFreezerMenu handler, Inventory inventory, Component title) {
         super(handler, inventory, title, TEXTURE);
         this.imageWidth = 177;
         this.imageHeight = 181;

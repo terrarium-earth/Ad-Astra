@@ -10,9 +10,10 @@ import earth.terrarium.ad_astra.blocks.machines.entity.*;
 import earth.terrarium.ad_astra.blocks.pipes.CableBlockEntity;
 import earth.terrarium.ad_astra.blocks.pipes.FluidPipeBlockEntity;
 import earth.terrarium.botarium.api.registry.RegistryHelpers;
-import java.util.function.Supplier;
 import net.minecraft.core.Registry;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+
+import java.util.function.Supplier;
 
 public class ModBlockEntities {
 

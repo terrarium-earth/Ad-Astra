@@ -3,13 +3,14 @@ package earth.terrarium.ad_astra.recipes;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.ad_astra.registry.ModRecipes;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class SpaceStationRecipe extends ModRecipe {
 

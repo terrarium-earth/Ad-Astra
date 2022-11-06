@@ -5,7 +5,8 @@
   "minVersion": "0.8.5",
   "client": [],
   "mixins": [
-    "JetSuitMixin"
+    "JetSuitMixin",
+    "StairBlockAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

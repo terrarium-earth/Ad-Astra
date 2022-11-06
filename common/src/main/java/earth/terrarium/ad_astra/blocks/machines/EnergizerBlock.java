@@ -2,7 +2,6 @@ package earth.terrarium.ad_astra.blocks.machines;
 
 import earth.terrarium.ad_astra.blocks.machines.entity.EnergizerBlockEntity;
 import earth.terrarium.ad_astra.registry.ModItems;
-import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -16,6 +15,8 @@ import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
+
+import java.util.List;
 
 public class EnergizerBlock extends AbstractMachineBlock {
 

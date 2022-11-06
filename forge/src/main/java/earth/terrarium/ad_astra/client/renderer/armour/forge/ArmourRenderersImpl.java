@@ -1,10 +1,11 @@
 package earth.terrarium.ad_astra.client.renderer.armour.forge;
 
 import earth.terrarium.ad_astra.client.renderer.armour.ArmourModelSupplier;
-import java.util.HashMap;
-import java.util.Map;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ArmourRenderersImpl {
     private static final Map<Item, ArmourModelSupplier> ARMOUR_ITEM_MODELS = new HashMap<>();

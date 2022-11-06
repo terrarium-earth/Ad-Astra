@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "ad_astra:wheel"
+    },
+    "D": {
+      "tag": "ad_astra_platform:desh_blocks"
+    },
+    "E": {
+      "item": "ad_astra:desh_engine"
+    },
+    "P": {
+      "tag": "ad_astra_platform:desh_plates"
+    },
+    "S": {
+      "tag": "ad_astra_platform:steel_blocks"
+    },
+    "|": {
+      "tag": "ad_astra_platform:iron_rods"
+    }
+  },
+  "pattern": [
+    "D |",
+    "SDE",
+    "#P#"
+  ],
+  "result": {
+    "item": "ad_astra:tier_1_rover"
+  }
+}

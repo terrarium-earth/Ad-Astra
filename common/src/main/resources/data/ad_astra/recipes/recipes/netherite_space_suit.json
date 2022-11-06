@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "tag": "ad_astra_platform:ostrum_plates"
+    },
+    "N": {
+      "item": "minecraft:netherite_chestplate"
+    },
+    "O": {
+      "item": "ad_astra:oxygen_gear"
+    },
+    "T": {
+      "item": "ad_astra:oxygen_tank"
+    }
+  },
+  "pattern": [
+    "# #",
+    "TOT",
+    "#N#"
+  ],
+  "result": {
+    "item": "ad_astra:netherite_space_suit"
+  }
+}

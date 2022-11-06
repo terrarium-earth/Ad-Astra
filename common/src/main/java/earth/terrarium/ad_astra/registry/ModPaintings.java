@@ -2,9 +2,10 @@ package earth.terrarium.ad_astra.registry;
 
 import dev.architectury.registry.registries.DeferredRegister;
 import earth.terrarium.ad_astra.AdAstra;
-import java.util.function.Supplier;
 import net.minecraft.core.Registry;
 import net.minecraft.world.entity.decoration.PaintingVariant;
+
+import java.util.function.Supplier;
 
 public class ModPaintings {
 

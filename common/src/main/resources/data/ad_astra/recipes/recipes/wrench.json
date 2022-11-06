@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "tag": "ad_astra_platform:desh_plates"
+    }
+  },
+  "pattern": [
+    "# #",
+    " # ",
+    " # "
+  ],
+  "result": {
+    "item": "ad_astra:wrench"
+  }
+}

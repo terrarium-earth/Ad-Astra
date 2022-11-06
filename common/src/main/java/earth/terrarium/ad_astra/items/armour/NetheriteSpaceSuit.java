@@ -1,15 +1,15 @@
 package earth.terrarium.ad_astra.items.armour;
 
 import earth.terrarium.ad_astra.AdAstra;
-import org.apache.commons.lang3.Range;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.stream.StreamSupport;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
+import org.apache.commons.lang3.Range;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.stream.StreamSupport;
 
 public class NetheriteSpaceSuit extends SpaceSuit {
 

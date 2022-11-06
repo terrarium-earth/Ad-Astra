@@ -1,11 +1,7 @@
 package earth.terrarium.ad_astra.client.screens.utils;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.Tesselator;
-import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Vector3f;
 import com.teamresourceful.resourcefullib.common.color.Color;
 import earth.terrarium.ad_astra.AdAstra;

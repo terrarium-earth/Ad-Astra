@@ -2,8 +2,6 @@ package earth.terrarium.ad_astra.blocks.pipes;
 
 import earth.terrarium.ad_astra.registry.ModSoundEvents;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
-import java.util.HashMap;
-import java.util.Map;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -18,6 +16,9 @@ import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class FluidPipeBlock extends AbstractPipeBlock {
 

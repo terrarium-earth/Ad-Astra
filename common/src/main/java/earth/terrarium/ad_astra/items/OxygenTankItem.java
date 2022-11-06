@@ -6,11 +6,8 @@ import earth.terrarium.ad_astra.registry.ModItems;
 import earth.terrarium.ad_astra.registry.ModTags;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
-import earth.terrarium.botarium.api.fluid.PlatformFluidHandler;
 import earth.terrarium.botarium.api.fluid.PlatformFluidItemHandler;
 import earth.terrarium.botarium.api.item.ItemStackHolder;
-import java.util.List;
-import java.util.function.BiPredicate;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -24,6 +21,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+
+import java.util.List;
+import java.util.function.BiPredicate;
 
 public class OxygenTankItem extends Item implements FluidContainingItem {
 

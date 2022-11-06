@@ -29,15 +29,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 import org.apache.commons.lang3.NotImplementedException;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Supplier;
 
-@ParametersAreNonnullByDefault
 @SuppressWarnings("unused")
 public class ModItems {
     public static final CreativeModeTab ITEM_GROUP = CreativeTabRegistry.create(new ModResourceLocation("main"), () -> new ItemStack(ModItems.TIER_1_ROCKET.get()));

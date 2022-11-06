@@ -1,6 +1,7 @@
 package earth.terrarium.ad_astra.datagen;
 
 import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.mixin.fabric.StairBlockAccessor;
 import earth.terrarium.ad_astra.registry.ModBlocks;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
@@ -52,8 +53,8 @@ public class ModModelProvider extends FabricModelProvider {
 
         ModBlocks.BLOCKS.iterator().forEachRemaining(block -> {
             ResourceLocation id = Registry.BLOCK.getKey(block.get());
-            if (block instanceof StairBlock stair) {
-                TexturedModel texturedModel = TexturedModel.CUBE.get(stair.base);
+            if (block instanceof StairBlockAccessor stair) {
+                TexturedModel texturedModel = TexturedModel.CUBE.get(stair.getBase());
                 BlockFamilyProvider pool = blockStateModelGenerator.new BlockFamilyProvider(texturedModel.getMapping());
                 pool.stairs(block.get());
             } else if (block instanceof RotatedPillarBlock) {

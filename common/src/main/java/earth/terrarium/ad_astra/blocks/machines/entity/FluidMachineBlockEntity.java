@@ -5,11 +5,12 @@ import earth.terrarium.botarium.api.energy.EnergyBlock;
 import earth.terrarium.botarium.api.energy.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHoldingBlock;
-import java.util.function.Predicate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+
+import java.util.function.Predicate;
 
 public abstract class FluidMachineBlockEntity extends AbstractMachineBlockEntity implements FluidHoldingBlock, EnergyBlock {
     protected InsertOnlyEnergyContainer energyContainer;

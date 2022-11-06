@@ -3,7 +3,7 @@ package earth.terrarium.ad_astra.client.screens;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.blocks.machines.entity.AbstractMachineBlockEntity;
-import earth.terrarium.ad_astra.screen.handler.AbstractMachineScreenHandler;
+import earth.terrarium.ad_astra.screen.menu.AbstractMachineMenu;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.GuiComponent;
@@ -14,7 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 @Environment(EnvType.CLIENT)
-public abstract class AbstractMachineScreen<M extends AbstractMachineBlockEntity, H extends AbstractMachineScreenHandler<M>> extends AbstractContainerScreen<H> {
+public abstract class AbstractMachineScreen<M extends AbstractMachineBlockEntity, H extends AbstractMachineMenu<M>> extends AbstractContainerScreen<H> {
 
     final M machine;
     final ResourceLocation texture;

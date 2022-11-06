@@ -4,8 +4,9 @@ import com.mojang.math.Vector3f;
 import com.teamresourceful.resourcefullib.common.caches.CacheableBiFunction;
 import com.teamresourceful.resourcefullib.common.color.Color;
 import com.teamresourceful.resourcefullib.common.color.ConstantColors;
-import java.util.Random;
 import net.minecraft.util.Mth;
+
+import java.util.Random;
 
 public class StarInformation {
     public static final Color[] STAR_COLOURS = new Color[]{

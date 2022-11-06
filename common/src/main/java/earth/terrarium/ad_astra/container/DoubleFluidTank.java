@@ -2,9 +2,10 @@ package earth.terrarium.ad_astra.container;
 
 import earth.terrarium.botarium.api.Updatable;
 import earth.terrarium.botarium.api.fluid.*;
+import net.minecraft.nbt.CompoundTag;
+
 import java.util.List;
 import java.util.function.Predicate;
-import net.minecraft.nbt.CompoundTag;
 
 public class DoubleFluidTank implements UpdatingFluidContainer {
     private final SimpleUpdatingFluidContainer input;

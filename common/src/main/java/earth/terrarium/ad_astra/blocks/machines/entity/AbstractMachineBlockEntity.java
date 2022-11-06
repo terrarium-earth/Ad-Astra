@@ -23,6 +23,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class AbstractMachineBlockEntity extends BlockEntity implements ExtraDataMenuProvider, ModInventory, WorldlyContainer {
@@ -37,7 +38,7 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
     public abstract void tick();
 
     @Override
-    public AbstractContainerMenu createMenu(int syncId, Inventory inv, Player player) {
+    public AbstractContainerMenu createMenu(int syncId, @NotNull Inventory inv, @NotNull Player player) {
         return null;
     }
 

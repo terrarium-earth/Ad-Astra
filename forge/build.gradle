@@ -28,21 +28,21 @@ configurations {
 }
 
 dependencies {
-    forge "net.minecraftforge:forge:${forge_version}"
+    forge "net.minecraftforge:forge:$rootProject.forge_version"
     common(project(path: ":common", configuration: "namedElements")) { transitive = false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
 
-    modApi "dev.architectury:architectury-forge:${architectury_version}" // TODO: REMOVE
+    modApi "dev.architectury:architectury-forge:$rootProject.architectury_version" // TODO: REMOVE
 
     include (modApi "com.teamresourceful.resourcefullib:resourcefullib-forge-$resourcefullib_version")
 
-    include (modApi "earth.terrarium:botarium-forge-${minecraft_version}:${botarium_version}")
-    modApi("me.shedaniel.cloth:cloth-config-forge:${cloth_config_version}")
+    include (modApi "earth.terrarium:botarium-forge-$rootProject.minecraft_version:$rootProject.botarium_version")
+    modApi("me.shedaniel.cloth:cloth-config-forge:$rootProject.cloth_config_version")
 
-    modImplementation "vazkii.patchouli:Patchouli:${patchouli_version}"
+    modImplementation "vazkii.patchouli:Patchouli:$rootProject.patchouli_version"
 
-    modCompileOnly("mezz.jei:jei-${rootProject.minecraft_version}-forge-api:${rootProject.jei_version}")
-    modLocalRuntime("mezz.jei:jei-${rootProject.minecraft_version}-forge:${rootProject.jei_version}") { transitive = false }
+    modCompileOnly("mezz.jei:jei-$rootProject.minecraft_version-forge-api:$rootProject.jei_version")
+    modLocalRuntime("mezz.jei:jei-$rootProject.minecraft_version-forge:$rootProject.jei_version") { transitive = false }
 
 //    modCompileOnly "me.shedaniel:RoughlyEnoughItems-forge:$project.rei_version"
 }

@@ -31,9 +31,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
-@ParametersAreNonnullByDefault
 @SuppressWarnings("deprecation")
 public class SlidingDoorBlock extends BaseEntityBlock {
 
@@ -162,7 +159,7 @@ public class SlidingDoorBlock extends BaseEntityBlock {
         return switch (direction) {
             case NORTH -> NORTH_SHAPE.move(0, 0, 0.42);
             case EAST -> WEST_SHAPE.move(0.38, 0, 0);
-            case SOUTH -> NORTH_SHAPE.move(0, 0, 0.38);
+            case SOUTH -> SOUTH_SHAPE.move(0, 0, 0.38);
             case WEST -> EAST_SHAPE.move(-0.44, 0, 0);
             default -> Shapes.empty();
         };

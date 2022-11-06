@@ -4,14 +4,15 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamresourceful.resourcefullib.common.codecs.recipes.ItemStackCodec;
 import earth.terrarium.ad_astra.registry.ModRecipes;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class NasaWorkbenchRecipe extends CookingRecipe {
 

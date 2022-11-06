@@ -1,8 +1,6 @@
 package earth.terrarium.ad_astra.entities.mobs.goal;
 
 import earth.terrarium.ad_astra.registry.ModBlocks;
-import java.util.EnumSet;
-import java.util.function.Predicate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -12,6 +10,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.predicate.BlockStatePredicate;
+
+import java.util.EnumSet;
+import java.util.function.Predicate;
 
 public class EatPermafrostGoal extends Goal {
     private static final Predicate<BlockState> PERMAFROST_PREDICATE = BlockStatePredicate.forBlock(ModBlocks.PERMAFROST.get());

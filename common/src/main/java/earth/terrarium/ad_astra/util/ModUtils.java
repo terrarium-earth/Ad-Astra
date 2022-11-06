@@ -13,11 +13,6 @@ import earth.terrarium.ad_astra.registry.ModCriteria;
 import earth.terrarium.ad_astra.registry.ModEntityTypes;
 import earth.terrarium.ad_astra.registry.ModTags;
 import earth.terrarium.ad_astra.util.algorithms.LandFinder;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.Locale;
-import java.util.Set;
-import java.util.stream.StreamSupport;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleOptions;
@@ -40,6 +35,12 @@ import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.portal.PortalInfo;
 import net.minecraft.world.phys.Vec3;
+
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.Locale;
+import java.util.Set;
+import java.util.stream.StreamSupport;
 
 public class ModUtils {
 

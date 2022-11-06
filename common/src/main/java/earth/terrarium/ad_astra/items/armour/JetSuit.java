@@ -3,15 +3,14 @@ package earth.terrarium.ad_astra.items.armour;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.screens.PlayerOverlayScreen;
 import earth.terrarium.ad_astra.registry.ModItems;
-import earth.terrarium.ad_astra.util.ModResourceLocation;
 import earth.terrarium.ad_astra.util.ModKeyBindings;
+import earth.terrarium.ad_astra.util.ModResourceLocation;
 import earth.terrarium.ad_astra.util.ModUtils;
-import earth.terrarium.botarium.api.energy.*;
+import earth.terrarium.botarium.api.energy.EnergyContainer;
+import earth.terrarium.botarium.api.energy.EnergyHooks;
+import earth.terrarium.botarium.api.energy.EnergyItem;
+import earth.terrarium.botarium.api.energy.ItemEnergyContainer;
 import earth.terrarium.botarium.api.item.ItemStackHolder;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.core.particles.ParticleTypes;
@@ -27,6 +26,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
 

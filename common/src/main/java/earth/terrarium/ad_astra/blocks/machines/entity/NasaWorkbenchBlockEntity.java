@@ -3,12 +3,8 @@ package earth.terrarium.ad_astra.blocks.machines.entity;
 import earth.terrarium.ad_astra.recipes.NasaWorkbenchRecipe;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
 import earth.terrarium.ad_astra.registry.ModRecipes;
-import earth.terrarium.ad_astra.screen.handler.NasaWorkbenchScreenHandler;
+import earth.terrarium.ad_astra.screen.menu.NasaWorkbenchMenu;
 import earth.terrarium.ad_astra.util.ModUtils;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
-import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -21,6 +17,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class NasaWorkbenchBlockEntity extends AbstractMachineBlockEntity {
 
@@ -33,7 +33,7 @@ public class NasaWorkbenchBlockEntity extends AbstractMachineBlockEntity {
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int syncId, Inventory inv, Player player) {
-        return new NasaWorkbenchScreenHandler(syncId, inv, this);
+        return new NasaWorkbenchMenu(syncId, inv, this);
     }
 
     @Override

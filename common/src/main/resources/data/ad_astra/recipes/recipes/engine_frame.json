@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "tag": "ad_astra_platform:steel_plates"
+    },
+    "|": {
+      "tag": "ad_astra_platform:iron_rods"
+    }
+  },
+  "pattern": [
+    "|||",
+    "|#|",
+    "|||"
+  ],
+  "result": {
+    "item": "ad_astra:engine_frame"
+  }
+}

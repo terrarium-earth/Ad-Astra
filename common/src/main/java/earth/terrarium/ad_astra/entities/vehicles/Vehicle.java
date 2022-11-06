@@ -3,7 +3,7 @@ package earth.terrarium.ad_astra.entities.vehicles;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.items.vehicles.VehicleItem;
 import earth.terrarium.ad_astra.registry.ModTags;
-import earth.terrarium.ad_astra.screen.VehicleScreenHandlerFactory;
+import earth.terrarium.ad_astra.screen.VehicleScreenMenuProvider;
 import earth.terrarium.ad_astra.util.CustomInventory;
 import earth.terrarium.ad_astra.util.FluidUtils;
 import earth.terrarium.ad_astra.util.OxygenUtils;
@@ -208,7 +208,7 @@ public abstract class Vehicle extends Entity implements Updatable {
     }
 
     public void openInventory(Player player) {
-        openInventory(player, new VehicleScreenHandlerFactory(this));
+        openInventory(player, new VehicleScreenMenuProvider(this));
     }
 
     public void openInventory(Player player, ExtraDataMenuProvider handler) {

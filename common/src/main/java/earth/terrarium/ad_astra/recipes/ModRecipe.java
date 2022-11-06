@@ -1,9 +1,6 @@
 package earth.terrarium.ad_astra.recipes;
 
 import earth.terrarium.ad_astra.util.ModInventory;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Predicate;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
@@ -11,6 +8,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
 
 public abstract class ModRecipe implements Recipe<Container>, Predicate<ItemStack> {
 

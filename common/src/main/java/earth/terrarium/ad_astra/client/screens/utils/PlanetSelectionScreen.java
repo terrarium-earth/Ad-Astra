@@ -14,7 +14,7 @@ import earth.terrarium.ad_astra.networking.NetworkHandling;
 import earth.terrarium.ad_astra.networking.packets.client.CreateSpaceStationPacket;
 import earth.terrarium.ad_astra.networking.packets.client.TeleportToPlanetPacket;
 import earth.terrarium.ad_astra.registry.ModRecipes;
-import earth.terrarium.ad_astra.screen.handler.PlanetSelectionScreenHandler;
+import earth.terrarium.ad_astra.screen.menu.PlanetSelectionScreenHandler;
 import earth.terrarium.ad_astra.util.MathUtil;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import net.fabricmc.api.EnvType;
@@ -95,6 +95,7 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
             if (recipe != null) {
 
                 for (int i = 0; i < recipe.getIngredients().size(); i++) {
+                    if (recipe.getIngredients().get(i).getItems().length == 0) return;
                     ItemStack stack = recipe.getIngredients().get(i).getItems()[0].copy();
                     // Sets the custom name to the item name to ensure that it always displays the item name and not "Air."
                     stack.setHoverName(stack.getHoverName());

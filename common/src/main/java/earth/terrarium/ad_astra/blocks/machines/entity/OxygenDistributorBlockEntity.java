@@ -6,7 +6,7 @@ import earth.terrarium.ad_astra.recipes.OxygenConversionRecipe;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
 import earth.terrarium.ad_astra.registry.ModParticleTypes;
 import earth.terrarium.ad_astra.registry.ModRecipes;
-import earth.terrarium.ad_astra.screen.handler.OxygenDistributorScreenHandler;
+import earth.terrarium.ad_astra.screen.menu.OxygenDistributorMenu;
 import earth.terrarium.ad_astra.util.FluidUtils;
 import earth.terrarium.ad_astra.util.ModUtils;
 import earth.terrarium.ad_astra.util.OxygenUtils;
@@ -85,7 +85,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int syncId, Inventory inv, Player player) {
-        return new OxygenDistributorScreenHandler(syncId, inv, this);
+        return new OxygenDistributorMenu(syncId, inv, this);
     }
 
     @Override
@@ -103,7 +103,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
     }
 
     public long getFluidToExtract(long oxygenBlocks, boolean client) {
-        long value = FluidHooks.toMillibuckets((long) ((oxygenBlocks * AdAstra.CONFIG.oxygenDistributor.oxygenMultiplier) / 45));
+        long value = FluidHooks.toMillibuckets((long) ((oxygenBlocks * AdAstra.CONFIG.oxygenDistributor.oxygenMultiplier) / 40));
         if (client) {
             return value;
         }
@@ -162,7 +162,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
 
             if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0) {
                 List<OxygenConversionRecipe> recipes = ModRecipes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.level);
-                if (FluidUtils.convertFluid(this.getFluidContainer(), recipes, 20)) {
+                if (FluidUtils.convertFluid(this.getFluidContainer(), recipes, 50)) {
                     this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
                 }
             }

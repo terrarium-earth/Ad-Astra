@@ -3,7 +3,7 @@ package earth.terrarium.ad_astra.blocks.machines.entity;
 import dev.architectury.registry.fuel.FuelRegistry;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
-import earth.terrarium.ad_astra.screen.handler.CoalGeneratorScreenHandler;
+import earth.terrarium.ad_astra.screen.menu.CoalGeneratorMenu;
 import earth.terrarium.botarium.api.energy.EnergyBlock;
 import earth.terrarium.botarium.api.energy.EnergyHooks;
 import earth.terrarium.botarium.api.energy.ExtractOnlyEnergyContainer;
@@ -28,7 +28,7 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity imple
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int syncId, Inventory inv, Player player) {
-        return new CoalGeneratorScreenHandler(syncId, inv, this);
+        return new CoalGeneratorMenu(syncId, inv, this);
     }
 
     // Only input.

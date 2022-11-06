@@ -1,5 +1,6 @@
 package earth.terrarium.ad_astra.client.fabric;
 
+import earth.terrarium.ad_astra.client.ClientUtils;
 import net.fabricmc.fabric.api.client.model.BakedModelManagerHelper;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.gui.screens.Screen;
@@ -15,7 +16,7 @@ public class ClientUtilsImpl {
         return BakedModelManagerHelper.getModel(dispatcher, id);
     }
 
-    public static <M extends AbstractContainerMenu, U extends Screen & MenuAccess<M>> void registerScreen(MenuType<? extends M> type, MenuScreens.ScreenConstructor<M, U> factory) {
-        MenuScreens.register(type, factory);
+    public static <M extends AbstractContainerMenu, U extends Screen & MenuAccess<M>> void registerScreen(MenuType<? extends M> type, ClientUtils.ScreenConstructor<M, U> factory) {
+        MenuScreens.register(type, factory::create);
     }
 }

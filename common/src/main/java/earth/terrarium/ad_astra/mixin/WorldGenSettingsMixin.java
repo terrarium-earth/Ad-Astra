@@ -1,15 +1,15 @@
 package earth.terrarium.ad_astra.mixin;
 
 import earth.terrarium.ad_astra.world.WorldSeed;
+import net.minecraft.core.Registry;
+import net.minecraft.world.level.dimension.LevelStem;
+import net.minecraft.world.level.levelgen.WorldGenSettings;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Optional;
-import net.minecraft.core.Registry;
-import net.minecraft.world.level.dimension.LevelStem;
-import net.minecraft.world.level.levelgen.WorldGenSettings;
 
 @Mixin(WorldGenSettings.class)
 public class WorldGenSettingsMixin {

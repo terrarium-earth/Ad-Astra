@@ -4,7 +4,7 @@ import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.recipes.CookingRecipe;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
 import earth.terrarium.ad_astra.registry.ModRecipes;
-import earth.terrarium.ad_astra.screen.handler.CompressorScreenHandler;
+import earth.terrarium.ad_astra.screen.menu.CompressorMenu;
 import earth.terrarium.botarium.api.energy.EnergyBlock;
 import earth.terrarium.botarium.api.energy.InsertOnlyEnergyContainer;
 import net.minecraft.core.BlockPos;
@@ -27,7 +27,7 @@ public class CompressorBlockEntity extends ProcessingMachineBlockEntity implemen
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int syncId, Inventory inv, Player player) {
-        return new CompressorScreenHandler(syncId, inv, this);
+        return new CompressorMenu(syncId, inv, this);
     }
 
     // Input and output.

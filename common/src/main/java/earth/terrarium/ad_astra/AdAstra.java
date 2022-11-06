@@ -3,7 +3,6 @@ package earth.terrarium.ad_astra;
 import earth.terrarium.ad_astra.config.AdAstraConfig;
 import earth.terrarium.ad_astra.data.Planet;
 import earth.terrarium.ad_astra.data.PlanetData;
-import earth.terrarium.ad_astra.entities.mobs.*;
 import earth.terrarium.ad_astra.mixin.BlockEntityTypeAccessor;
 import earth.terrarium.ad_astra.networking.NetworkHandling;
 import earth.terrarium.ad_astra.registry.*;
@@ -14,11 +13,9 @@ import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.PreparableReloadListener;
-import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.levelgen.Heightmap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,8 +46,7 @@ public class AdAstra {
         ModItems.register();
         ModBlockEntities.register();
         ModRecipes.register();
-        ModScreenHandlers.register();
-        ModCommands.register();
+        ModMenus.register();
         ModSoundEvents.register();
         ModParticleTypes.register();
         ModPaintings.register();
@@ -85,18 +81,6 @@ public class AdAstra {
         chestBlocks.add(ModBlocks.AERONOS_CHEST.get());
         chestBlocks.add(ModBlocks.STROPHAR_CHEST.get());
         chestRegistry.setValidBlocks(chestBlocks);
-
-        SpawnPlacements.register(ModEntityTypes.LUNARIAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Lunarian::checkMobSpawnRules);
-        SpawnPlacements.register(ModEntityTypes.CORRUPTED_LUNARIAN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CorruptedLunarian::checkMonsterSpawnRules);
-        SpawnPlacements.register(ModEntityTypes.STAR_CRAWLER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, StarCrawler::checkMonsterSpawnRules);
-        SpawnPlacements.register(ModEntityTypes.MARTIAN_RAPTOR.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, MartianRaptor::checkMonsterSpawnRules);
-        SpawnPlacements.register(ModEntityTypes.PYGRO.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Pygro::checkMonsterSpawnRules);
-        SpawnPlacements.register(ModEntityTypes.ZOMBIFIED_PYGRO.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ZombifiedPygro::checkMonsterSpawnRules);
-        SpawnPlacements.register(ModEntityTypes.PYGRO_BRUTE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, PygroBrute::checkMonsterSpawnRules);
-        SpawnPlacements.register(ModEntityTypes.MOGLER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mogler::checkMobSpawnRules);
-        SpawnPlacements.register(ModEntityTypes.ZOMBIFIED_MOGLER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ZombifiedMogler::checkMonsterSpawnRules);
-        SpawnPlacements.register(ModEntityTypes.LUNARIAN_WANDERING_TRADER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Lunarian::checkMobSpawnRules);
-        SpawnPlacements.register(ModEntityTypes.SULFUR_CREEPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SulfurCreeper::checkMonsterSpawnRules);
-        SpawnPlacements.register(ModEntityTypes.GLACIAN_RAM.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, GlacianRam::checkMobSpawnRules);
+        ModEntityTypes.registerSpawnPlacements();
     }
 }

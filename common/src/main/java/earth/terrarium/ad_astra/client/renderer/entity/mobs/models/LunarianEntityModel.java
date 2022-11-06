@@ -1,16 +1,12 @@
 package earth.terrarium.ad_astra.client.renderer.entity.mobs.models;
 
 import earth.terrarium.ad_astra.util.ModResourceLocation;
-import net.minecraft.client.model.*;
+import net.minecraft.client.model.VillagerModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartNames;
 import net.minecraft.client.model.geom.PartPose;
-import net.minecraft.client.model.geom.builders.CubeDeformation;
-import net.minecraft.client.model.geom.builders.CubeListBuilder;
-import net.minecraft.client.model.geom.builders.LayerDefinition;
-import net.minecraft.client.model.geom.builders.MeshDefinition;
-import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.world.entity.npc.AbstractVillager;
 
 public class LunarianEntityModel<T extends AbstractVillager> extends VillagerModel<T> {

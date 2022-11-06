@@ -3,8 +3,8 @@ package earth.terrarium.ad_astra.networking.packets.server;
 import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
-import earth.terrarium.ad_astra.screen.handler.AbstractMachineScreenHandler;
-import earth.terrarium.ad_astra.screen.handler.AbstractVehicleScreenHandler;
+import earth.terrarium.ad_astra.screen.menu.AbstractMachineMenu;
+import earth.terrarium.ad_astra.screen.menu.AbstractVehicleMenu;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
@@ -47,10 +47,10 @@ public record MachineInfoPacket(long energy, List<FluidHolder> fluidHolders) imp
         @Override
         public PacketContext handle(MachineInfoPacket packet) {
             return (player, level) -> {
-                if (player.containerMenu instanceof AbstractMachineScreenHandler<?> handler) {
+                if (player.containerMenu instanceof AbstractMachineMenu<?> handler) {
                     handler.setEnergyAmount(packet.energy());
                     handler.setFluids(packet.fluidHolders);
-                } else if (player.containerMenu instanceof AbstractVehicleScreenHandler handler) {
+                } else if (player.containerMenu instanceof AbstractVehicleMenu handler) {
                     handler.setFluids(packet.fluidHolders);
                 }
             };

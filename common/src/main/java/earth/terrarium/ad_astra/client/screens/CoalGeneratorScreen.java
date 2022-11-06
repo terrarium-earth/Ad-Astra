@@ -2,17 +2,18 @@ package earth.terrarium.ad_astra.client.screens;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.blocks.machines.entity.CoalGeneratorBlockEntity;
-import earth.terrarium.ad_astra.screen.handler.CoalGeneratorScreenHandler;
+import earth.terrarium.ad_astra.screen.menu.CoalGeneratorMenu;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+
 import java.awt.*;
 
 @Environment(EnvType.CLIENT)
-public class CoalGeneratorScreen extends AbstractMachineScreen<CoalGeneratorBlockEntity, CoalGeneratorScreenHandler> {
+public class CoalGeneratorScreen extends AbstractMachineScreen<CoalGeneratorBlockEntity, CoalGeneratorMenu> {
 
     public static final int FIRE_LEFT = 81;
     public static final int FIRE_TOP = 57;
@@ -20,7 +21,7 @@ public class CoalGeneratorScreen extends AbstractMachineScreen<CoalGeneratorBloc
     public static final int ENERGY_TOP = 28;
     private static final ResourceLocation TEXTURE = new ModResourceLocation("textures/gui/screens/coal_generator.png");
 
-    public CoalGeneratorScreen(CoalGeneratorScreenHandler handler, Inventory inventory, Component title) {
+    public CoalGeneratorScreen(CoalGeneratorMenu handler, Inventory inventory, Component title) {
         super(handler, inventory, title, TEXTURE);
         this.imageWidth = 176;
         this.imageHeight = 177;

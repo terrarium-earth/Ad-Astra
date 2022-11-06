@@ -5,7 +5,7 @@ import earth.terrarium.ad_astra.blocks.machines.AbstractMachineBlock;
 import earth.terrarium.ad_astra.container.WaterPumpFluidTank;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
 import earth.terrarium.ad_astra.registry.ModParticleTypes;
-import earth.terrarium.ad_astra.screen.handler.WaterPumpScreenHandler;
+import earth.terrarium.ad_astra.screen.menu.WaterPumpMenu;
 import earth.terrarium.ad_astra.util.ModUtils;
 import earth.terrarium.botarium.api.energy.EnergyBlock;
 import earth.terrarium.botarium.api.energy.InsertOnlyEnergyContainer;
@@ -39,7 +39,7 @@ public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements 
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int syncId, Inventory inv, Player player) {
-        return new WaterPumpScreenHandler(syncId, inv, this);
+        return new WaterPumpMenu(syncId, inv, this);
     }
 
     @Override

@@ -4,9 +4,6 @@ import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.mixin.PaintingInvoker;
 import earth.terrarium.ad_astra.registry.ModEntityTypes;
 import earth.terrarium.ad_astra.registry.ModItems;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -22,6 +19,10 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 public class SpacePainting extends Painting {
 

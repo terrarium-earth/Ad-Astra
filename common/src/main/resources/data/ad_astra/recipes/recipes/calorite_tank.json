@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "tanks",
+  "key": {
+    "#": {
+      "tag": "ad_astra_platform:calorite_plates"
+    },
+    "U": {
+      "item": "minecraft:bucket"
+    },
+    "|": {
+      "tag": "ad_astra_platform:iron_rods"
+    }
+  },
+  "pattern": [
+    "## ",
+    "#U|",
+    "## "
+  ],
+  "result": {
+    "item": "ad_astra:calorite_tank"
+  }
+}

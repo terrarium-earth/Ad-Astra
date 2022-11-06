@@ -3,11 +3,11 @@ package earth.terrarium.ad_astra.registry;
 import dev.architectury.registry.registries.DeferredRegister;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
-import java.util.List;
-import java.util.function.Supplier;
-
 import net.minecraft.core.Registry;
 import net.minecraft.sounds.SoundEvent;
+
+import java.util.List;
+import java.util.function.Supplier;
 
 public class ModSoundEvents {
 

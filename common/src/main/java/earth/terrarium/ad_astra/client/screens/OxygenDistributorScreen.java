@@ -10,7 +10,7 @@ import earth.terrarium.ad_astra.client.screens.utils.ScreenUtils;
 import earth.terrarium.ad_astra.data.ButtonColour;
 import earth.terrarium.ad_astra.networking.NetworkHandling;
 import earth.terrarium.ad_astra.networking.packets.client.ToggleDistributorPacket;
-import earth.terrarium.ad_astra.screen.handler.OxygenDistributorScreenHandler;
+import earth.terrarium.ad_astra.screen.menu.OxygenDistributorMenu;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import earth.terrarium.ad_astra.util.OxygenUtils;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
@@ -19,11 +19,12 @@ import net.fabricmc.api.Environment;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+
 import java.awt.*;
 import java.util.Arrays;
 
 @Environment(EnvType.CLIENT)
-public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistributorBlockEntity, OxygenDistributorScreenHandler> {
+public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistributorBlockEntity, OxygenDistributorMenu> {
 
     public static final int INPUT_TANK_LEFT = 50;
     public static final int INPUT_TANK_TOP = 80;
@@ -38,7 +39,7 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
     CustomButton visibleButton;
     private boolean displayConversionEnergyCost = false;
 
-    public OxygenDistributorScreen(OxygenDistributorScreenHandler handler, Inventory inventory, Component title) {
+    public OxygenDistributorScreen(OxygenDistributorMenu handler, Inventory inventory, Component title) {
         super(handler, inventory, title, TEXTURE);
         this.imageWidth = 177;
         this.imageHeight = 244;

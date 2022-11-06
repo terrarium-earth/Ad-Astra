@@ -14,6 +14,7 @@ import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.minecraft.util.GsonHelper;
+
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Comparator;

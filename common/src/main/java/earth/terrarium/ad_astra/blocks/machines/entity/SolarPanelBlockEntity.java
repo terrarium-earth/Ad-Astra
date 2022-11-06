@@ -2,7 +2,7 @@ package earth.terrarium.ad_astra.blocks.machines.entity;
 
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
-import earth.terrarium.ad_astra.screen.handler.SolarPanelScreenHandler;
+import earth.terrarium.ad_astra.screen.menu.SolarPanelMenu;
 import earth.terrarium.ad_astra.util.ModUtils;
 import earth.terrarium.botarium.api.energy.EnergyBlock;
 import earth.terrarium.botarium.api.energy.EnergyHooks;
@@ -34,7 +34,7 @@ public class SolarPanelBlockEntity extends AbstractMachineBlockEntity implements
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int syncId, Inventory inv, Player player) {
-        return new SolarPanelScreenHandler(syncId, inv, this);
+        return new SolarPanelMenu(syncId, inv, this);
     }
 
     @Override

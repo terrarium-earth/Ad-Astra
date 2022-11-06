@@ -2,17 +2,18 @@ package earth.terrarium.ad_astra.client.screens;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.blocks.machines.entity.FluidMachineBlockEntity;
-import earth.terrarium.ad_astra.screen.handler.ConversionScreenHandler;
+import earth.terrarium.ad_astra.screen.menu.ConversionMenu;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+
 import java.awt.*;
 
 @Environment(EnvType.CLIENT)
-public class ConversionScreen extends AbstractMachineScreen<FluidMachineBlockEntity, ConversionScreenHandler> {
+public class ConversionScreen extends AbstractMachineScreen<FluidMachineBlockEntity, ConversionMenu> {
 
     public static final int INPUT_TANK_LEFT = 42;
     public static final int INPUT_TANK_TOP = 21;
@@ -22,7 +23,7 @@ public class ConversionScreen extends AbstractMachineScreen<FluidMachineBlockEnt
     public static final int ENERGY_TOP = 22;
     private static final ResourceLocation TEXTURE = new ModResourceLocation("textures/gui/screens/conversion.png");
 
-    public ConversionScreen(ConversionScreenHandler handler, Inventory inventory, Component title) {
+    public ConversionScreen(ConversionMenu handler, Inventory inventory, Component title) {
         super(handler, inventory, title, TEXTURE);
         this.imageWidth = 177;
         this.imageHeight = 184;

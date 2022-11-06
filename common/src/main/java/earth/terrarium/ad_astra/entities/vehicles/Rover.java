@@ -2,7 +2,7 @@ package earth.terrarium.ad_astra.entities.vehicles;
 
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.registry.ModItems;
-import earth.terrarium.ad_astra.screen.LargeVehicleScreenHandlerFactory;
+import earth.terrarium.ad_astra.screen.LargeVehicleMenuProvider;
 import earth.terrarium.ad_astra.util.ModKeyBindings;
 import earth.terrarium.ad_astra.util.ModUtils;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -39,7 +39,7 @@ public class Rover extends Vehicle {
 
     @Override
     public void openInventory(Player player) {
-        openInventory(player, new LargeVehicleScreenHandlerFactory(this));
+        openInventory(player, new LargeVehicleMenuProvider(this));
     }
 
     @Override

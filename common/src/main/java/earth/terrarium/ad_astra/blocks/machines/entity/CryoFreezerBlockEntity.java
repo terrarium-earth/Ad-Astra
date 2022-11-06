@@ -5,7 +5,7 @@ import earth.terrarium.ad_astra.recipes.CryoFuelConversionRecipe;
 import earth.terrarium.ad_astra.recipes.ModRecipeType;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
 import earth.terrarium.ad_astra.registry.ModRecipes;
-import earth.terrarium.ad_astra.screen.handler.CryoFreezerScreenHandler;
+import earth.terrarium.ad_astra.screen.menu.CryoFreezerMenu;
 import earth.terrarium.ad_astra.util.FluidUtils;
 import earth.terrarium.botarium.api.energy.EnergyBlock;
 import earth.terrarium.botarium.api.energy.InsertOnlyEnergyContainer;
@@ -97,7 +97,7 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int syncId, Inventory inv, Player player) {
-        return new CryoFreezerScreenHandler(syncId, inv, this);
+        return new CryoFreezerMenu(syncId, inv, this);
     }
 
     public CryoFuelConversionRecipe createRecipe(ModRecipeType<CryoFuelConversionRecipe> type, ItemStack testStack, boolean checkOutput) {
