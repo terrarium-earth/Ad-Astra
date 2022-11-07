@@ -2,7 +2,7 @@ package earth.terrarium.ad_astra.blocks.machines.entity;
 
 import earth.terrarium.ad_astra.recipes.NasaWorkbenchRecipe;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
-import earth.terrarium.ad_astra.registry.ModRecipes;
+import earth.terrarium.ad_astra.registry.ModRecipeTypes;
 import earth.terrarium.ad_astra.screen.menu.NasaWorkbenchMenu;
 import earth.terrarium.ad_astra.util.ModUtils;
 import net.minecraft.core.BlockPos;
@@ -84,7 +84,7 @@ public class NasaWorkbenchBlockEntity extends AbstractMachineBlockEntity {
         if (!this.level.isClientSide) {
             for (ItemStack input : this.getItems()) {
                 if (!input.isEmpty()) {
-                    NasaWorkbenchRecipe recipe = ModRecipes.NASA_WORKBENCH_RECIPE.get().findFirst(level, f -> f.test(input));
+                    NasaWorkbenchRecipe recipe = ModRecipeTypes.NASA_WORKBENCH_RECIPE.get().findFirst(level, f -> f.test(input));
                     if (recipe != null) {
                         this.spawnWorkingParticles();
                         this.setActive(true);

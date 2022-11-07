@@ -6,6 +6,7 @@ import earth.terrarium.ad_astra.registry.ModItems;
 import earth.terrarium.ad_astra.registry.ModTags;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
+import earth.terrarium.botarium.api.item.ItemStackHolder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -48,9 +49,10 @@ public class SpaceSuit extends DyeableArmorItem implements FluidContainingItem, 
     }
 
     public static void consumeSpaceSuitOxygen(LivingEntity entity, long amount) {
-        ItemStack chest = entity.getItemBySlot(EquipmentSlot.CHEST);
-        if (chest.getItem() instanceof SpaceSuit suit) {
-            suit.setFluidAmount(chest, suit.getFluidAmount(chest) - amount);
+        ItemStackHolder chest = new ItemStackHolder(entity.getItemBySlot(EquipmentSlot.CHEST));
+        if (chest.getStack().getItem() instanceof SpaceSuit suit) {
+            suit.extract(chest, FluidHooks.newFluidHolder(suit.getFluid(chest.getStack()), amount, null));
+            if (chest.isDirty()) entity.setItemSlot(EquipmentSlot.CHEST, chest.getStack());
         }
     }
 

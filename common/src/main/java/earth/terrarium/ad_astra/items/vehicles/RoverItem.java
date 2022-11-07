@@ -3,13 +3,14 @@ package earth.terrarium.ad_astra.items.vehicles;
 import earth.terrarium.ad_astra.entities.vehicles.Rover;
 import earth.terrarium.ad_astra.registry.ModEntityTypes;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
+import earth.terrarium.botarium.api.item.ItemStackHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LiquidBlock;
@@ -30,6 +31,8 @@ public class RoverItem extends VehicleItem {
         Level level = context.getLevel();
         if (!level.isClientSide) {
             BlockPos pos = context.getClickedPos();
+            Player player = context.getPlayer();
+            if (player == null) return InteractionResult.FAIL;
 
             // Check if the block can be spawned in a 3x3x3 radius.
             for (int x = pos.getX() - 1; x < pos.getX() + 2; x++) {
@@ -44,7 +47,7 @@ public class RoverItem extends VehicleItem {
                 }
             }
 
-            ItemStack roverStack = context.getPlayer().getItemInHand(context.getHand());
+            ItemStackHolder roverStack = new ItemStackHolder(player.getItemInHand(context.getHand()));
             Rover rover = new Rover(ModEntityTypes.TIER_1_ROVER.get(), level);
 
             // Prevent placing rovers in rovers
@@ -54,20 +57,21 @@ public class RoverItem extends VehicleItem {
                 return InteractionResult.PASS;
             }
 
-            CompoundTag nbt = roverStack.getOrCreateTag();
+            CompoundTag nbt = roverStack.getStack().getOrCreateTag();
             if (nbt.contains("Fluid")) {
-                if (!this.getFluid(roverStack).equals(Fluids.EMPTY)) {
+                if (!this.getFluid(roverStack.getStack()).equals(Fluids.EMPTY)) {
                     this.insert(roverStack, rover.getTankHolder());
                 }
             }
             if (nbt.contains("Inventory")) {
                 rover.getInventory().fromTag(nbt.getList("Inventory", Tag.TAG_COMPOUND));
             }
-            rover.setYRot(context.getPlayer().getYRot());
+            rover.setYRot(player.getYRot());
             rover.setPos(context.getClickLocation().add(0, 0, 1));
             level.addFreshEntity(rover);
-            roverStack.shrink(1);
+            roverStack.getStack().shrink(1);
             level.playSound(null, pos, SoundEvents.LODESTONE_PLACE, SoundSource.BLOCKS, 1, 1);
+            if (roverStack.isDirty()) player.setItemInHand(context.getHand(), roverStack.getStack());
         }
         return InteractionResult.SUCCESS;
     }

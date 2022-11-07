@@ -34,7 +34,7 @@ public class EntityTemperatureSystem {
 
         float temperature = ModUtils.getWorldTemperature(level);
 
-        // Normal temperature when inside of an oxygen bubble. This should probably be changed so that a separate machine is required to manage temperature.
+        // Normal temperature when inside an oxygen bubble. This should probably be changed so that a separate machine is required to manage temperature.
         if (OxygenUtils.inDistributorBubble(level, entity.blockPosition())) {
             temperature = 20.0f;
         }
@@ -45,19 +45,19 @@ public class EntityTemperatureSystem {
         }
 
         if (temperature > temperatureResistance.getMaximum() && !entity.fireImmune() && !entity.hasEffect(MobEffects.FIRE_RESISTANCE) && !NetheriteSpaceSuit.hasFullSet(entity) && !ModUtils.armourIsHeatResistant(entity)) {
-            burnEntity(entity, level);
+            burnEntity(entity);
         } else if (temperature < temperatureResistance.getMinimum() && !ModUtils.armourIsFreezeResistant(entity)) {
             freezeEntity(entity, level);
         }
     }
 
-    private static void burnEntity(LivingEntity entity, ServerLevel level) {
-        entity.hurt(DamageSource.ON_FIRE, 2);
+    private static void burnEntity(LivingEntity entity) {
+        entity.hurt(DamageSource.ON_FIRE, AdAstra.CONFIG.general.heatDamage);
         entity.setSecondsOnFire(10);
     }
 
     private static void freezeEntity(LivingEntity entity, ServerLevel level) {
-        entity.hurt(DamageSource.FREEZE, 1);
+        entity.hurt(DamageSource.FREEZE, AdAstra.CONFIG.general.freezeDamage);
         entity.setTicksFrozen(Math.min(entity.getTicksRequiredToFreeze() + 20, entity.getTicksFrozen() + 5 * 10));
         RandomSource random = entity.level.getRandom();
         ModUtils.spawnForcedParticles((level), ParticleTypes.SNOWFLAKE, entity.getX(), entity.getY() + 1, entity.getZ(), 1, Mth.randomBetween(random, -1.0f, 1.0f) * 0.083333336f, 0.05, (double) Mth.randomBetween(random, -1.0f, 1.0f) * 0.083333336, 0);

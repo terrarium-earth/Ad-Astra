@@ -51,46 +51,48 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.createDoor(ModBlocks.STROPHAR_DOOR.get());
         blockStateModelGenerator.createTrapdoor(ModBlocks.STROPHAR_TRAPDOOR.get());
 
-        ModBlocks.BLOCKS.iterator().forEachRemaining(block -> {
-            ResourceLocation id = Registry.BLOCK.getKey(block.get());
-            if (block instanceof StairBlockAccessor stair) {
-                TexturedModel texturedModel = TexturedModel.CUBE.get(stair.getBase());
-                BlockFamilyProvider pool = blockStateModelGenerator.new BlockFamilyProvider(texturedModel.getMapping());
-                pool.stairs(block.get());
-            } else if (block instanceof RotatedPillarBlock) {
-                blockStateModelGenerator.createRotatedPillarWithHorizontalVariant(block.get(), TexturedModel.COLUMN_ALT, TexturedModel.COLUMN_HORIZONTAL_ALT);
-            } else if (block instanceof WallBlock) {
-                TexturedModel texturedModel = TexturedModel.CUBE.get(getReplacedPathBlock(id, "_wall", "s"));
-                BlockFamilyProvider pool = blockStateModelGenerator.new BlockFamilyProvider(texturedModel.getMapping());
-                pool.wall(block.get());
-            } else if (block instanceof StoneButtonBlock) {
-                TexturedModel texturedModel = TexturedModel.CUBE.get(getReplacedPathBlock(id, "_button", ""));
-                BlockFamilyProvider pool = blockStateModelGenerator.new BlockFamilyProvider(texturedModel.getMapping());
-                pool.button(block.get());
-            } else if (block instanceof WoodButtonBlock) {
-                TexturedModel texturedModel = TexturedModel.CUBE.get(getReplacedPathBlock(id, "_button", "_planks"));
-                BlockFamilyProvider pool = blockStateModelGenerator.new BlockFamilyProvider(texturedModel.getMapping());
-                pool.button(block.get());
-            } else if (block instanceof PressurePlateBlock) {
-                if (block != ModBlocks.GLACIAN_PRESSURE_PLATE) {
-                    TexturedModel texturedModel = TexturedModel.CUBE.get(getReplacedPathBlock(id, "_pressure_plate", ""));
+        for (Block block : Registry.BLOCK) {
+            if (AdAstra.MOD_ID.equals(Registry.BLOCK.getKey(block).getNamespace())) {
+                ResourceLocation id = Registry.BLOCK.getKey(block);
+                if (block instanceof StairBlockAccessor stair) {
+                    TexturedModel texturedModel = TexturedModel.CUBE.get(stair.getBase());
                     BlockFamilyProvider pool = blockStateModelGenerator.new BlockFamilyProvider(texturedModel.getMapping());
-                    pool.pressurePlate(block.get());
-                } else {
-                    TexturedModel texturedModel = TexturedModel.CUBE.get(getReplacedPathBlock(id, "_pressure_plate", "_planks"));
+                    pool.stairs(block);
+                } else if (block instanceof RotatedPillarBlock) {
+                    blockStateModelGenerator.createRotatedPillarWithHorizontalVariant(block, TexturedModel.COLUMN_ALT, TexturedModel.COLUMN_HORIZONTAL_ALT);
+                } else if (block instanceof WallBlock) {
+                    TexturedModel texturedModel = TexturedModel.CUBE.get(getReplacedPathBlock(id, "_wall", "s"));
                     BlockFamilyProvider pool = blockStateModelGenerator.new BlockFamilyProvider(texturedModel.getMapping());
-                    pool.pressurePlate(block.get());
+                    pool.wall(block);
+                } else if (block instanceof StoneButtonBlock) {
+                    TexturedModel texturedModel = TexturedModel.CUBE.get(getReplacedPathBlock(id, "_button", ""));
+                    BlockFamilyProvider pool = blockStateModelGenerator.new BlockFamilyProvider(texturedModel.getMapping());
+                    pool.button(block);
+                } else if (block instanceof WoodButtonBlock) {
+                    TexturedModel texturedModel = TexturedModel.CUBE.get(getReplacedPathBlock(id, "_button", "_planks"));
+                    BlockFamilyProvider pool = blockStateModelGenerator.new BlockFamilyProvider(texturedModel.getMapping());
+                    pool.button(block);
+                } else if (block instanceof PressurePlateBlock) {
+                    if (block != ModBlocks.GLACIAN_PRESSURE_PLATE) {
+                        TexturedModel texturedModel = TexturedModel.CUBE.get(getReplacedPathBlock(id, "_pressure_plate", ""));
+                        BlockFamilyProvider pool = blockStateModelGenerator.new BlockFamilyProvider(texturedModel.getMapping());
+                        pool.pressurePlate(block);
+                    } else {
+                        TexturedModel texturedModel = TexturedModel.CUBE.get(getReplacedPathBlock(id, "_pressure_plate", "_planks"));
+                        BlockFamilyProvider pool = blockStateModelGenerator.new BlockFamilyProvider(texturedModel.getMapping());
+                        pool.pressurePlate(block);
+                    }
+                } else if (block instanceof FenceBlock) {
+                    TexturedModel texturedModel = TexturedModel.CUBE.get(getReplacedPathBlock(id, "_fence", "_planks"));
+                    BlockFamilyProvider pool = blockStateModelGenerator.new BlockFamilyProvider(texturedModel.getMapping());
+                    pool.fence(block);
+                } else if (block instanceof FenceGateBlock) {
+                    TexturedModel texturedModel = TexturedModel.CUBE.get(getReplacedPathBlock(id, "_fence_gate", "_planks"));
+                    BlockFamilyProvider pool = blockStateModelGenerator.new BlockFamilyProvider(texturedModel.getMapping());
+                    pool.fenceGate(block);
                 }
-            } else if (block instanceof FenceBlock) {
-                TexturedModel texturedModel = TexturedModel.CUBE.get(getReplacedPathBlock(id, "_fence", "_planks"));
-                BlockFamilyProvider pool = blockStateModelGenerator.new BlockFamilyProvider(texturedModel.getMapping());
-                pool.fence(block.get());
-            } else if (block instanceof FenceGateBlock) {
-                TexturedModel texturedModel = TexturedModel.CUBE.get(getReplacedPathBlock(id, "_fence_gate", "_planks"));
-                BlockFamilyProvider pool = blockStateModelGenerator.new BlockFamilyProvider(texturedModel.getMapping());
-                pool.fenceGate(block.get());
             }
-        });
+        }
         registerSlab(blockStateModelGenerator, ModBlocks.IRON_PLATING_SLAB.get(), ModBlocks.IRON_PLATING.get());
         registerSlab(blockStateModelGenerator, ModBlocks.STEEL_PLATING_SLAB.get(), ModBlocks.STEEL_PLATING.get());
         registerSlab(blockStateModelGenerator, ModBlocks.DESH_PLATING_SLAB.get(), ModBlocks.DESH_PLATING.get());

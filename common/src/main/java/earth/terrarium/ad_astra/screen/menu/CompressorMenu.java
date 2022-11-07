@@ -3,7 +3,7 @@ package earth.terrarium.ad_astra.screen.menu;
 import earth.terrarium.ad_astra.blocks.machines.entity.CompressorBlockEntity;
 import earth.terrarium.ad_astra.networking.NetworkHandling;
 import earth.terrarium.ad_astra.networking.packets.server.MachineInfoPacket;
-import earth.terrarium.ad_astra.registry.ModMenus;
+import earth.terrarium.ad_astra.registry.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
@@ -19,7 +19,7 @@ public class CompressorMenu extends AbstractMachineMenu<CompressorBlockEntity> {
     }
 
     public CompressorMenu(int syncId, Inventory inventory, CompressorBlockEntity entity) {
-        super(ModMenus.COMPRESSOR_MENU.get(), syncId, inventory, entity, new Slot[]{new Slot(entity, 0, 40, 62), new Slot(entity, 1, 92, 62) {
+        super(ModMenuTypes.COMPRESSOR_MENU.get(), syncId, inventory, entity, new Slot[]{new Slot(entity, 0, 40, 62), new Slot(entity, 1, 92, 62) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return false;

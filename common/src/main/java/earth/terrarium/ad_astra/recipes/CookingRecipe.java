@@ -9,9 +9,9 @@ import java.util.List;
 public abstract class CookingRecipe extends ModRecipe {
 
     private final ItemStack output;
-    private short cookTime;
+    private int cookTime;
 
-    public CookingRecipe(ResourceLocation id, Ingredient input, ItemStack output, short cookTime) {
+    public CookingRecipe(ResourceLocation id, Ingredient input, ItemStack output, int cookTime) {
         super(id, input);
         this.output = output;
         this.cookTime = cookTime;
@@ -31,7 +31,7 @@ public abstract class CookingRecipe extends ModRecipe {
         return this.inputs.get(0);
     }
 
-    public short getCookTime() {
+    public int getCookTime() {
         return this.cookTime;
     }
 }

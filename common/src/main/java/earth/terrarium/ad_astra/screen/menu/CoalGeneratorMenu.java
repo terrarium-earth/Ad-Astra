@@ -3,7 +3,7 @@ package earth.terrarium.ad_astra.screen.menu;
 import earth.terrarium.ad_astra.blocks.machines.entity.CoalGeneratorBlockEntity;
 import earth.terrarium.ad_astra.networking.NetworkHandling;
 import earth.terrarium.ad_astra.networking.packets.server.MachineInfoPacket;
-import earth.terrarium.ad_astra.registry.ModMenus;
+import earth.terrarium.ad_astra.registry.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
@@ -18,7 +18,7 @@ public class CoalGeneratorMenu extends AbstractMachineMenu<CoalGeneratorBlockEnt
     }
 
     public CoalGeneratorMenu(int syncId, Inventory inventory, CoalGeneratorBlockEntity entity) {
-        super(ModMenus.COAL_GENERATOR_MENU.get(), syncId, inventory, entity, new Slot[]{new Slot(entity, 0, 80, 40)});
+        super(ModMenuTypes.COAL_GENERATOR_MENU.get(), syncId, inventory, entity, new Slot[]{new Slot(entity, 0, 80, 40)});
     }
 
     @Override

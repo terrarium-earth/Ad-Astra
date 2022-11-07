@@ -4,7 +4,7 @@ import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
 import earth.terrarium.ad_astra.recipes.SpaceStationRecipe;
-import earth.terrarium.ad_astra.registry.ModRecipes;
+import earth.terrarium.ad_astra.registry.ModRecipeTypes;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
@@ -61,7 +61,7 @@ public record CreateSpaceStationPacket(ResourceLocation targetWorld) implements 
         public PacketContext handle(CreateSpaceStationPacket message) {
             return (player, level) -> {
                 if (!player.isCreative() && !player.isSpectator()) {
-                    for (SpaceStationRecipe recipe : ModRecipes.SPACE_STATION_RECIPE.get().getRecipes(player.level)) {
+                    for (SpaceStationRecipe recipe : ModRecipeTypes.SPACE_STATION_RECIPE.get().getRecipes(player.level)) {
                         for (int i = 0; i < recipe.getIngredients().size(); i++) {
                             if (!hasItem(player, recipe.getIngredients().get(i), recipe.getStackCounts().get(i))) {
                                 return;
@@ -69,7 +69,7 @@ public record CreateSpaceStationPacket(ResourceLocation targetWorld) implements 
                         }
                     }
                     Inventory inventory = player.getInventory();
-                    ModRecipes.SPACE_STATION_RECIPE.get().getRecipes(player.level).forEach(recipe -> {
+                    ModRecipeTypes.SPACE_STATION_RECIPE.get().getRecipes(player.level).forEach(recipe -> {
                         for (int i = 0; i < recipe.getIngredients().size(); i++) {
                             inventory.clearOrCountMatchingItems(recipe.getIngredients().get(i), recipe.getStackCounts().get(i), inventory);
                         }

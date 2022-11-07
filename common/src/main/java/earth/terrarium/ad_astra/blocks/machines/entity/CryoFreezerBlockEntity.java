@@ -4,7 +4,7 @@ import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.recipes.CryoFuelConversionRecipe;
 import earth.terrarium.ad_astra.recipes.ModRecipeType;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
-import earth.terrarium.ad_astra.registry.ModRecipes;
+import earth.terrarium.ad_astra.registry.ModRecipeTypes;
 import earth.terrarium.ad_astra.screen.menu.CryoFreezerMenu;
 import earth.terrarium.ad_astra.util.FluidUtils;
 import earth.terrarium.botarium.api.energy.EnergyBlock;
@@ -26,8 +26,8 @@ import org.jetbrains.annotations.Nullable;
 public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implements FluidHoldingBlock, EnergyBlock {
     private InsertOnlyEnergyContainer energyContainer;
 
-    protected short cookTime;
-    protected short cookTimeTotal;
+    protected int cookTime;
+    protected int cookTimeTotal;
     @Nullable
     protected Item inputItem;
     @Nullable
@@ -41,28 +41,28 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
     @Override
     public void load(CompoundTag nbt) {
         super.load(nbt);
-        this.cookTime = nbt.getShort("CookTime");
-        this.cookTimeTotal = nbt.getShort("CookTimeTotal");
+        this.cookTime = nbt.getInt("CookTime");
+        this.cookTimeTotal = nbt.getInt("CookTimeTotal");
     }
 
     @Override
     public void saveAdditional(CompoundTag nbt) {
         super.saveAdditional(nbt);
-        nbt.putShort("CookTime", this.cookTime);
-        nbt.putShort("CookTimeTotal", this.cookTimeTotal);
+        nbt.putInt("CookTime", this.cookTime);
+        nbt.putInt("CookTimeTotal", this.cookTimeTotal);
     }
 
-    public short getCookTime() {
+    public int getCookTime() {
         return this.cookTime;
     }
 
-    public short getCookTimeTotal() {
+    public int getCookTimeTotal() {
         return this.cookTimeTotal;
     }
 
     public void finishCooking() {
         if (this.outputFluid != null) {
-            CryoFuelConversionRecipe recipe = this.createRecipe(ModRecipes.CRYO_FUEL_CONVERSION_RECIPE.get(), this.getItem(0), false);
+            CryoFuelConversionRecipe recipe = this.createRecipe(ModRecipeTypes.CRYO_FUEL_CONVERSION_RECIPE.get(), this.getItem(0), false);
             if (recipe != null) {
                 FluidHolder outputFluid = FluidHooks.newFluidHolder(recipe.getFluidOutput(), (long) (FluidHooks.buckets(1) * recipe.getConversionRatio()), null);
                 getFluidContainer().insertFluid(outputFluid, false);
@@ -146,7 +146,7 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
                         input.shrink(1);
 
                     } else {
-                        CryoFuelConversionRecipe recipe = this.createRecipe(ModRecipes.CRYO_FUEL_CONVERSION_RECIPE.get(), input, false);
+                        CryoFuelConversionRecipe recipe = this.createRecipe(ModRecipeTypes.CRYO_FUEL_CONVERSION_RECIPE.get(), input, false);
                         if (recipe != null) {
                             this.cookTimeTotal = 25;
                             this.cookTime = 0;

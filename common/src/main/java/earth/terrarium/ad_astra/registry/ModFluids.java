@@ -9,6 +9,8 @@ import net.minecraft.core.Registry;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 
+import java.util.function.Supplier;
+
 public class ModFluids {
 
     public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(AdAstra.MOD_ID, Registry.FLUID_REGISTRY);
@@ -25,7 +27,12 @@ public class ModFluids {
     public static final RegistrySupplier<FlowingFluid> OXYGEN_STILL = FLUIDS.register("oxygen", () -> new ArchitecturyFlowingFluid.Source(ModFluidAttributes.OXYGEN_FLUID_ATTRIBUTES));
     public static final RegistrySupplier<FlowingFluid> FLOWING_OXYGEN = FLUIDS.register("flowing_oxygen", () -> new ArchitecturyFlowingFluid.Flowing(ModFluidAttributes.OXYGEN_FLUID_ATTRIBUTES));
 
-    public static void register() {
+    // TODO: Use this instead of Arch
+    private static <T extends Fluid> Supplier<T> register(String id, Supplier<T> object) {
+        return ModRegistryHelpers.register(Registry.FLUID, id, object);
+    }
+
+    public static void init() {
         FLUIDS.register();
     }
 }

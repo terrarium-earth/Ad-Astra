@@ -2,6 +2,7 @@ package earth.terrarium.ad_astra.client.screens.utils;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.teamresourceful.resourcefullib.client.scissor.ScissorBox;
 import com.teamresourceful.resourcefullib.common.color.Color;
 import earth.terrarium.ad_astra.client.screens.utils.PlanetSelectionScreen.TooltipType;
 import earth.terrarium.ad_astra.data.ButtonColour;
@@ -30,8 +31,6 @@ public class CustomButton extends Button {
     public static final ResourceLocation BUTTON_TEXTURE = new ModResourceLocation("textures/gui/buttons/button.png");
     public static final ResourceLocation SMALL_BUTTON_TEXTURE = new ModResourceLocation("textures/gui/buttons/small_button.png");
     public static final ResourceLocation STEEL_BUTTON_TEXTURE = new ModResourceLocation("textures/gui/buttons/steel_button.png");
-
-    public static final ResourceLocation WHITE_TEXTURE = new ModResourceLocation("textures/white.png");
 
     private final int startY;
     private final Component label;
@@ -91,9 +90,10 @@ public class CustomButton extends Button {
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
             RenderSystem.enableDepthTest();
 
+            ScissorBox scissor = new ScissorBox(0, scissorY, (int) (215 * scale), (int) (127 * scale));
             if (this.doMask) {
                 // Render mask
-                RenderSystem.enableScissor(0, scissorY, (int) (215 * scale), (int) (127 * scale));
+                scissor.start();
             }
 
             RenderSystem.setShaderColor(color.getFloatRed(), color.getFloatGreen(), color.getFloatBlue(), this.buttonColour.getFloatAlpha());
@@ -108,7 +108,7 @@ public class CustomButton extends Button {
             drawText(poseStack, client);
 
             if (this.doMask) {
-                RenderSystem.disableScissor();
+                scissor.end();
             }
 
             if (this.isMouseOver(mouseX, mouseY)) {

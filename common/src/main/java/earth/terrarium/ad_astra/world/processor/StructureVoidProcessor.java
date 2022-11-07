@@ -16,7 +16,6 @@ public class StructureVoidProcessor extends StructureProcessor {
     public static final Codec<StructureVoidProcessor> CODEC = Codec.unit(StructureVoidProcessor::new);
 
     private StructureVoidProcessor() {
-
     }
 
     @Nullable
@@ -34,6 +33,6 @@ public class StructureVoidProcessor extends StructureProcessor {
 
     @Override
     protected StructureProcessorType<?> getType() {
-        return ModStructures.STRUCTURE_VOID_PROCESSOR;
+        return ModStructures.STRUCTURE_VOID_PROCESSOR.get();
     }
 }

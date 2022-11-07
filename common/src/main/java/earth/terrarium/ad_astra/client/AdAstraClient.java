@@ -2,10 +2,7 @@ package earth.terrarium.ad_astra.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import dev.architectury.event.events.client.ClientGuiEvent;
-import dev.architectury.registry.client.rendering.RenderTypeRegistry;
 import earth.terrarium.ad_astra.client.registry.ClientModKeybindings;
-import earth.terrarium.ad_astra.client.registry.ClientModParticles;
 import earth.terrarium.ad_astra.client.registry.ClientModScreens;
 import earth.terrarium.ad_astra.client.renderer.armour.ArmourRenderers;
 import earth.terrarium.ad_astra.client.renderer.block.ChestItemRenderer;
@@ -42,6 +39,9 @@ import net.minecraft.server.packs.resources.PreparableReloadListener;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Fluid;
+import org.apache.logging.log4j.util.TriConsumer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,24 +59,28 @@ public class AdAstraClient {
 
     public static void initializeClient() {
         ClientModScreens.register();
-        ClientModParticles.register();
         ClientModKeybindings.register();
-        ClientGuiEvent.RENDER_HUD.register(PlayerOverlayScreen::render);
-
         ArmourRenderers.register();
-
-        RenderTypeRegistry.register(RenderType.cutout(), ModBlocks.WATER_PUMP.get(), ModBlocks.ENERGIZER.get(), ModBlocks.STEEL_DOOR.get(), ModBlocks.GLACIAN_DOOR.get(), ModBlocks.GLACIAN_TRAPDOOR.get(), ModBlocks.AERONOS_DOOR.get(), ModBlocks.AERONOS_TRAPDOOR.get(), ModBlocks.STROPHAR_DOOR.get(), ModBlocks.STROPHAR_TRAPDOOR.get(), ModBlocks.EXTINGUISHED_TORCH.get(), ModBlocks.WALL_EXTINGUISHED_TORCH.get(), ModBlocks.STEEL_TRAPDOOR.get());
-        RenderTypeRegistry.register(RenderType.translucent(), ModBlocks.EXTINGUISHED_LANTERN.get(), ModBlocks.GLACIAN_LEAVES.get());
-        RenderTypeRegistry.register(RenderType.cutout(), ModBlocks.NASA_WORKBENCH.get(), ModBlocks.AERONOS_MUSHROOM.get(), ModBlocks.STROPHAR_MUSHROOM.get(), ModBlocks.AERONOS_LADDER.get(), ModBlocks.STROPHAR_LADDER.get(), ModBlocks.AERONOS_CHEST.get(), ModBlocks.STROPHAR_CHEST.get());
 
         // Sign textures
         Sheets.SIGN_MATERIALS.put(ModBlocks.GLACIAN, new Material(Sheets.SIGN_SHEET, new ModResourceLocation("entity/signs/glacian")));
+    }
 
-        // Fluids
-        RenderTypeRegistry.register(RenderType.translucent(), ModFluids.FUEL_STILL.get(), ModFluids.FLOWING_FUEL.get());
-        RenderTypeRegistry.register(RenderType.translucent(), ModFluids.CRYO_FUEL_STILL.get(), ModFluids.FLOWING_CRYO_FUEL.get());
-        RenderTypeRegistry.register(RenderType.translucent(), ModFluids.OIL_STILL.get(), ModFluids.FLOWING_OIL.get());
-        RenderTypeRegistry.register(RenderType.translucent(), ModFluids.OXYGEN_STILL.get());
+    public static void onRegisterHud(Consumer<RenderHud> register) {
+        register.accept(PlayerOverlayScreen::render);
+    }
+
+    public static void onRegisterBlockRenderTypes(BiConsumer<RenderType, List<Block>> register) {
+        register.accept(RenderType.cutout(), List.of(ModBlocks.WATER_PUMP.get(), ModBlocks.ENERGIZER.get(), ModBlocks.STEEL_DOOR.get(), ModBlocks.GLACIAN_DOOR.get(), ModBlocks.GLACIAN_TRAPDOOR.get(), ModBlocks.AERONOS_DOOR.get(), ModBlocks.AERONOS_TRAPDOOR.get(), ModBlocks.STROPHAR_DOOR.get(), ModBlocks.STROPHAR_TRAPDOOR.get(), ModBlocks.EXTINGUISHED_TORCH.get(), ModBlocks.WALL_EXTINGUISHED_TORCH.get(), ModBlocks.STEEL_TRAPDOOR.get()));
+        register.accept(RenderType.translucent(), List.of(ModBlocks.EXTINGUISHED_LANTERN.get(), ModBlocks.GLACIAN_LEAVES.get()));
+        register.accept(RenderType.cutout(), List.of(ModBlocks.AERONOS_MUSHROOM.get(), ModBlocks.STROPHAR_MUSHROOM.get(), ModBlocks.AERONOS_LADDER.get(), ModBlocks.STROPHAR_LADDER.get(), ModBlocks.AERONOS_CHEST.get(), ModBlocks.STROPHAR_CHEST.get()));
+    }
+
+    public static void onRegisterFluidRenderTypes(TriConsumer<RenderType, Fluid, Fluid> register) {
+        register.accept(RenderType.translucent(), ModFluids.FUEL_STILL.get(), ModFluids.FLOWING_FUEL.get());
+        register.accept(RenderType.translucent(), ModFluids.CRYO_FUEL_STILL.get(), ModFluids.FLOWING_CRYO_FUEL.get());
+        register.accept(RenderType.translucent(), ModFluids.OIL_STILL.get(), ModFluids.FLOWING_OIL.get());
+        register.accept(RenderType.translucent(), ModFluids.OXYGEN_STILL.get(), ModFluids.FLOWING_OXYGEN.get());
     }
 
     public static void onRegisterItemRenderers(BiConsumer<ItemLike, BlockEntityWithoutLevelRenderer> register) {
@@ -135,7 +139,6 @@ public class AdAstraClient {
     }
 
     public static void renderBlock(ResourceLocation texture, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
-
         Minecraft client = Minecraft.getInstance();
         ModelManager manager = client.getModelManager();
         BakedModel model = ClientUtils.getModel(manager, texture);
@@ -147,5 +150,10 @@ public class AdAstraClient {
         for (BakedQuad quad : quads1) {
             vertexConsumer1.putBulkData(entry1, quad, 1, 1, 1, packedLight, packedOverlay);
         }
+    }
+
+    @FunctionalInterface
+    public interface RenderHud {
+        void renderHud(PoseStack poseStack, float partialTick);
     }
 }

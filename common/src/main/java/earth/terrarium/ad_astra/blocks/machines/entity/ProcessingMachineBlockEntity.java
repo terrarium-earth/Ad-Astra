@@ -12,8 +12,8 @@ import org.jetbrains.annotations.Nullable;
 
 public abstract class ProcessingMachineBlockEntity extends AbstractMachineBlockEntity {
 
-    protected short cookTime;
-    protected short cookTimeTotal;
+    protected int cookTime;
+    protected int cookTimeTotal;
 
     @Nullable
     protected Item inputItem;
@@ -27,22 +27,22 @@ public abstract class ProcessingMachineBlockEntity extends AbstractMachineBlockE
     @Override
     public void load(CompoundTag nbt) {
         super.load(nbt);
-        this.cookTime = nbt.getShort("CookTime");
-        this.cookTimeTotal = nbt.getShort("CookTimeTotal");
+        this.cookTime = nbt.getInt("CookTime");
+        this.cookTimeTotal = nbt.getInt("CookTimeTotal");
     }
 
     @Override
     public void saveAdditional(CompoundTag nbt) {
         super.saveAdditional(nbt);
-        nbt.putShort("CookTime", this.cookTime);
-        nbt.putShort("CookTimeTotal", this.cookTimeTotal);
+        nbt.putInt("CookTime", this.cookTime);
+        nbt.putInt("CookTimeTotal", this.cookTimeTotal);
     }
 
-    public short getCookTime() {
+    public int getCookTime() {
         return this.cookTime;
     }
 
-    public short getCookTimeTotal() {
+    public int getCookTimeTotal() {
         return this.cookTimeTotal;
     }
 

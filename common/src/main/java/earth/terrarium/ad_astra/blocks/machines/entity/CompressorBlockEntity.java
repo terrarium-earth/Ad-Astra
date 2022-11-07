@@ -3,7 +3,7 @@ package earth.terrarium.ad_astra.blocks.machines.entity;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.recipes.CookingRecipe;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
-import earth.terrarium.ad_astra.registry.ModRecipes;
+import earth.terrarium.ad_astra.registry.ModRecipeTypes;
 import earth.terrarium.ad_astra.screen.menu.CompressorMenu;
 import earth.terrarium.botarium.api.energy.EnergyBlock;
 import earth.terrarium.botarium.api.energy.InsertOnlyEnergyContainer;
@@ -62,7 +62,7 @@ public class CompressorBlockEntity extends ProcessingMachineBlockEntity implemen
                         this.finishCooking();
 
                     } else {
-                        CookingRecipe recipe = this.createRecipe(ModRecipes.COMPRESSING_RECIPE.get(), input, true);
+                        CookingRecipe recipe = this.createRecipe(ModRecipeTypes.COMPRESSING_RECIPE.get(), input, true);
                         if (recipe != null) {
                             this.cookTimeTotal = recipe.getCookTime();
                             this.cookTime = 0;

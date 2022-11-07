@@ -6,7 +6,6 @@ import earth.terrarium.ad_astra.registry.ModItems;
 import earth.terrarium.ad_astra.registry.ModTags;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
-import earth.terrarium.botarium.api.fluid.PlatformFluidItemHandler;
 import earth.terrarium.botarium.api.item.ItemStackHolder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -32,10 +31,10 @@ public class OxygenTankItem extends Item implements FluidContainingItem {
     }
 
     public static ItemStack createOxygenatedTank() {
-        ItemStack oxygenTank = ModItems.OXYGEN_TANK.get().getDefaultInstance();
-        ((OxygenTankItem) oxygenTank.getItem()).insert(oxygenTank, FluidHooks.newFluidHolder(ModFluids.OXYGEN_STILL.get(), AdAstra.CONFIG.general.oxygenTankSize, null));
+        ItemStackHolder oxygenTank = new ItemStackHolder(ModItems.OXYGEN_TANK.get().getDefaultInstance());
+        ((OxygenTankItem) oxygenTank.getStack().getItem()).insert(oxygenTank, FluidHooks.newFluidHolder(ModFluids.OXYGEN_STILL.get(), AdAstra.CONFIG.general.oxygenTankSize, null));
 
-        return oxygenTank;
+        return oxygenTank.getStack();
     }
 
     @Override
@@ -53,10 +52,18 @@ public class OxygenTankItem extends Item implements FluidContainingItem {
             ItemStack chest = user.getItemBySlot(EquipmentSlot.CHEST);
             if (chest.is(ModItems.SPACE_SUIT.get()) || chest.is(ModItems.NETHERITE_SPACE_SUIT.get()) || chest.is(ModItems.JET_SUIT.get())) {
 
-                PlatformFluidItemHandler from = FluidHooks.getItemFluidManager(tank);
-                ItemStack to = user.getInventory().getArmor(2);
+                ItemStackHolder from = new ItemStackHolder(tank);
+                ItemStackHolder to = new ItemStackHolder(user.getInventory().getArmor(2));
 
-                if (FluidHooks.moveItemToItemFluid(new ItemStackHolder(tank), new ItemStackHolder(to), from.getFluidInTank(0)) > 0) {
+                var fromFluidHolder = FluidHooks.getItemFluidManager(from.getStack()).getFluidInTank(0);
+                var toFluidHolder = FluidHooks.getItemFluidManager(to.getStack());
+                // TODO: Botarium is still extracting, even when simulate is true.
+                long amountToExtract = toFluidHolder.insertFluid(to, FluidHooks.newFluidHolder(fromFluidHolder.getFluid(), fromFluidHolder.getFluidAmount(), fromFluidHolder.getCompound()), true);
+
+                FluidHooks.moveItemToItemFluid(from, to, FluidHooks.newFluidHolder(fromFluidHolder.getFluid(), amountToExtract, fromFluidHolder.getCompound()));
+                if (from.isDirty()) user.setItemInHand(hand, from.getStack());
+                if (to.isDirty()) {
+                    user.setItemSlot(EquipmentSlot.CHEST, to.getStack());
                     level.playSound(null, user.blockPosition(), SoundEvents.GENERIC_DRINK, SoundSource.PLAYERS, 1, 1);
                     return InteractionResultHolder.consume(tank);
                 }

@@ -16,9 +16,7 @@ class ModBlockLootTableProvider extends FabricBlockLootTableProvider {
 
     @Override
     protected void generateBlockLootTables() {
-
-        ModBlocks.BLOCKS.iterator().forEachRemaining(block -> this.dropSelf(block.get()));
-
+        ModBlocks.lootTableBlocks.forEach(block -> this.dropSelf(block.get()));
 
         this.dropOther(ModBlocks.WALL_EXTINGUISHED_TORCH.get(), ModItems.EXTINGUISHED_TORCH.get());
         this.dropOther(ModBlocks.GLACIAN_WALL_SIGN.get(), ModItems.GLACIAN_SIGN.get());

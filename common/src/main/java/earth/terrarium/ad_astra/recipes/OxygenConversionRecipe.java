@@ -3,7 +3,8 @@ package earth.terrarium.ad_astra.recipes;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamresourceful.resourcefullib.common.codecs.tags.HolderSetCodec;
-import earth.terrarium.ad_astra.registry.ModRecipes;
+import earth.terrarium.ad_astra.registry.ModRecipeSerializers;
+import earth.terrarium.ad_astra.registry.ModRecipeTypes;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -28,11 +29,11 @@ public class OxygenConversionRecipe extends FluidConversionRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return ModRecipes.OXYGEN_CONVERSION_SERIALIZER.get();
+        return ModRecipeSerializers.OXYGEN_CONVERSION_SERIALIZER.get();
     }
 
     @Override
     public RecipeType<?> getType() {
-        return ModRecipes.OXYGEN_CONVERSION_RECIPE.get();
+        return ModRecipeTypes.OXYGEN_CONVERSION_RECIPE.get();
     }
 }

@@ -3,7 +3,8 @@ package earth.terrarium.ad_astra.recipes;
 import com.google.gson.JsonObject;
 import earth.terrarium.ad_astra.items.HammerItem;
 import earth.terrarium.ad_astra.registry.ModItems;
-import earth.terrarium.ad_astra.registry.ModRecipes;
+import earth.terrarium.ad_astra.registry.ModRecipeSerializers;
+import earth.terrarium.ad_astra.registry.ModRecipeTypes;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -28,7 +29,7 @@ public class HammerShapelessRecipe extends ShapelessRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return ModRecipes.HAMMER_SERIALIZER.get();
+        return ModRecipeSerializers.HAMMER_SERIALIZER.get();
     }
 
     @Override

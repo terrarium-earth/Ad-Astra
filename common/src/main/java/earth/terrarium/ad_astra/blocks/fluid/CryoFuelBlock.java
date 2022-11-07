@@ -1,6 +1,5 @@
 package earth.terrarium.ad_astra.blocks.fluid;
 
-import dev.architectury.core.block.ArchitecturyLiquidBlock;
 import earth.terrarium.ad_astra.registry.ModDamageSource;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -9,15 +8,14 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.function.Supplier;
+public class CryoFuelBlock extends LiquidBlock {
 
-public class CryoFuelBlock extends ArchitecturyLiquidBlock {
-
-    public CryoFuelBlock(Supplier<FlowingFluid> fluid, Properties settings) {
+    public CryoFuelBlock(FlowingFluid fluid, Properties settings) {
         super(fluid, settings);
     }
 

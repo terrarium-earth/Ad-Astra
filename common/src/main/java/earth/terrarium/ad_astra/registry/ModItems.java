@@ -1,9 +1,6 @@
 package earth.terrarium.ad_astra.registry;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
-import dev.architectury.registry.CreativeTabRegistry;
-import dev.architectury.registry.registries.DeferredRegister;
-import dev.architectury.registry.registries.RegistrySupplier;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.blocks.machines.entity.SolarPanelBlockEntity;
 import earth.terrarium.ad_astra.items.*;
@@ -19,7 +16,6 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
@@ -38,8 +34,7 @@ import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
 public class ModItems {
-    public static final CreativeModeTab ITEM_GROUP = CreativeTabRegistry.create(new ModResourceLocation("main"), () -> new ItemStack(ModItems.TIER_1_ROCKET.get()));
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(AdAstra.MOD_ID, Registry.ITEM_REGISTRY);
+    public static final CreativeModeTab ITEM_GROUP = ModRegistryHelpers.createTab(new ModResourceLocation("main"), () -> new ItemStack(ModItems.TIER_1_ROCKET.get()));
     public static final Set<Item> items = new HashSet<>();
 
     // Vehicles Items
@@ -60,10 +55,10 @@ public class ModItems {
     public static final Supplier<Item> LAUNCH_PAD = register("launch_pad", () -> new HoldableOverHeadBlockItem(ModBlocks.LAUNCH_PAD.get(), new Item.Properties().tab(ITEM_GROUP)));
 
     // Buckets
-    public static final RegistrySupplier<Item> OIL_BUCKET = register("oil_bucket", createBucketItem(ModFluids.OIL_STILL, new Item.Properties().tab(ITEM_GROUP).craftRemainder(Items.BUCKET).stacksTo(1)));
-    public static final RegistrySupplier<Item> FUEL_BUCKET = register("fuel_bucket", createBucketItem(ModFluids.FUEL_STILL, new Item.Properties().tab(ITEM_GROUP).craftRemainder(Items.BUCKET).stacksTo(1)));
-    public static final RegistrySupplier<Item> CRYO_FUEL_BUCKET = register("cryo_fuel_bucket", createBucketItem(ModFluids.CRYO_FUEL_STILL, new Item.Properties().tab(ITEM_GROUP).craftRemainder(Items.BUCKET).stacksTo(1)));
-    public static final RegistrySupplier<Item> OXYGEN_BUCKET = register("oxygen_bucket", createBucketItem(ModFluids.OXYGEN_STILL, new Item.Properties().tab(ITEM_GROUP).craftRemainder(Items.BUCKET).stacksTo(1)));
+    public static final Supplier<Item> OIL_BUCKET = register("oil_bucket", createBucketItem(ModFluids.OIL_STILL, new Item.Properties().tab(ITEM_GROUP).craftRemainder(Items.BUCKET).stacksTo(1)));
+    public static final Supplier<Item> FUEL_BUCKET = register("fuel_bucket", createBucketItem(ModFluids.FUEL_STILL, new Item.Properties().tab(ITEM_GROUP).craftRemainder(Items.BUCKET).stacksTo(1)));
+    public static final Supplier<Item> CRYO_FUEL_BUCKET = register("cryo_fuel_bucket", createBucketItem(ModFluids.CRYO_FUEL_STILL, new Item.Properties().tab(ITEM_GROUP).craftRemainder(Items.BUCKET).stacksTo(1)));
+    public static final Supplier<Item> OXYGEN_BUCKET = register("oxygen_bucket", createBucketItem(ModFluids.OXYGEN_STILL, new Item.Properties().tab(ITEM_GROUP).craftRemainder(Items.BUCKET).stacksTo(1)));
 
     // Spacesuit
     public static final Supplier<SpaceSuit> SPACE_HELMET = register("space_helmet", () -> new SpaceSuit(ModArmour.SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.HEAD, new Item.Properties().tab(ITEM_GROUP)));
@@ -594,9 +589,6 @@ public class ModItems {
     // Other
     public static final Supplier<SpawnEggItem> LUNARIAN_WANDERING_TRADER_SPAWN_EGG = register("lunarian_wandering_trader_spawn_egg", createSpawnEggItem(ModEntityTypes.LUNARIAN_WANDERING_TRADER, 5993415, 8537301, new Item.Properties().tab(ITEM_GROUP)));
 
-    public static void register() {
-        ITEMS.register();
-    }
 
     public static Supplier<Item> registerFlag(String id, Supplier<Block> flag) {
         Supplier<Item> item = () -> new FlagBlockItem(flag.get(), new Item.Properties().tab(ITEM_GROUP));
@@ -617,13 +609,11 @@ public class ModItems {
         return register(id, () -> new Item(new Item.Properties().tab(ITEM_GROUP)));
     }
 
-    public static <T extends Item> RegistrySupplier<T> register(String id, Supplier<T> item) {
-        return register(new ModResourceLocation(id), item);
+    private static <T extends Item> Supplier<T> register(String id, Supplier<T> object) {
+        return ModRegistryHelpers.register(Registry.ITEM, id, object);
     }
 
-    public static <T extends Item> RegistrySupplier<T> register(ResourceLocation id, Supplier<T> item) {
-        //		items.add(item);
-        return ITEMS.register(id.getPath(), item);
+    public static void init() {
     }
 
     @ExpectPlatform

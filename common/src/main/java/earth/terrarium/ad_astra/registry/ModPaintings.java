@@ -1,35 +1,30 @@
 package earth.terrarium.ad_astra.registry;
 
-import dev.architectury.registry.registries.DeferredRegister;
-import earth.terrarium.ad_astra.AdAstra;
 import net.minecraft.core.Registry;
 import net.minecraft.world.entity.decoration.PaintingVariant;
 
 import java.util.function.Supplier;
 
 public class ModPaintings {
+    public static final Supplier<PaintingVariant> MERCURY = register("mercury", () -> new PaintingVariant(16, 16));
+    public static final Supplier<PaintingVariant> MOON = register("moon", () -> new PaintingVariant(16, 16));
+    public static final Supplier<PaintingVariant> PLUTO = register("pluto", () -> new PaintingVariant(16, 16));
+    public static final Supplier<PaintingVariant> EARTH = register("earth", () -> new PaintingVariant(32, 32));
+    public static final Supplier<PaintingVariant> GLACIO = register("glacio", () -> new PaintingVariant(32, 32));
+    public static final Supplier<PaintingVariant> MARS = register("mars", () -> new PaintingVariant(32, 32));
+    public static final Supplier<PaintingVariant> VENUS = register("venus", () -> new PaintingVariant(32, 32));
+    public static final Supplier<PaintingVariant> JUPITER = register("jupiter", () -> new PaintingVariant(48, 48));
+    public static final Supplier<PaintingVariant> NEPTUNE = register("neptune", () -> new PaintingVariant(48, 48));
+    public static final Supplier<PaintingVariant> URANUS = register("uranus", () -> new PaintingVariant(48, 48));
+    public static final Supplier<PaintingVariant> SATURN = register("saturn", () -> new PaintingVariant(64, 48));
+    public static final Supplier<PaintingVariant> THE_MILKY_WAY = register("the_milky_way", () -> new PaintingVariant(64, 48));
+    public static final Supplier<PaintingVariant> ALPHA_CENTAURI = register("alpha_centauri", () -> new PaintingVariant(64, 64));
+    public static final Supplier<PaintingVariant> SUN = register("sun", () -> new PaintingVariant(80, 80));
 
-    public static final DeferredRegister<PaintingVariant> PAINTINGS = DeferredRegister.create(AdAstra.MOD_ID, Registry.PAINTING_VARIANT_REGISTRY);
-
-    public static void register() {
-        register("mercury", 16, 16);
-        register("moon", 16, 16);
-        register("pluto", 16, 16);
-        register("earth", 32, 32);
-        register("glacio", 32, 32);
-        register("mars", 32, 32);
-        register("venus", 32, 32);
-        register("jupiter", 48, 48);
-        register("neptune", 48, 48);
-        register("uranus", 48, 48);
-        register("saturn", 64, 48);
-        register("the_milky_way", 64, 48);
-        register("alpha_centaury_c", 64, 64);
-        register("sun", 80, 80);
-        PAINTINGS.register();
+    private static <T extends PaintingVariant> Supplier<T> register(String id, Supplier<T> object) {
+        return ModRegistryHelpers.register(Registry.PAINTING_VARIANT, id, object);
     }
 
-    private static Supplier<PaintingVariant> register(String id, int width, int height) {
-        return PAINTINGS.register(id, () -> new PaintingVariant(width, height));
+    public static void init() {
     }
 }

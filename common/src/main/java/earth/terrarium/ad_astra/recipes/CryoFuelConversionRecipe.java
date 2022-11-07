@@ -3,7 +3,8 @@ package earth.terrarium.ad_astra.recipes;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamresourceful.resourcefullib.common.codecs.recipes.IngredientCodec;
-import earth.terrarium.ad_astra.registry.ModRecipes;
+import earth.terrarium.ad_astra.registry.ModRecipeSerializers;
+import earth.terrarium.ad_astra.registry.ModRecipeTypes;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -32,11 +33,11 @@ public class CryoFuelConversionRecipe extends ConversionRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return ModRecipes.CRYO_FUEL_CONVERSION_SERIALIZER.get();
+        return ModRecipeSerializers.CRYO_FUEL_CONVERSION_SERIALIZER.get();
     }
 
     @Override
     public RecipeType<?> getType() {
-        return ModRecipes.CRYO_FUEL_CONVERSION_RECIPE.get();
+        return ModRecipeTypes.CRYO_FUEL_CONVERSION_RECIPE.get();
     }
 }

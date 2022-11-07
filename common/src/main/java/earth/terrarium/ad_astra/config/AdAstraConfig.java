@@ -65,6 +65,10 @@ public class AdAstraConfig implements ConfigData {
         public final int energyBarYOffset = 0;
         public boolean spawnLunarianWanderingTrader = true;
         public float orbitGravity = 3.26f;
+        public int oxygenDamage = 1;
+        public int freezeDamage = 1;
+        public int heatDamage = 2;
+        public int acidRainDamage = 3;
     }
 
     public static class SpaceSuitConfig {

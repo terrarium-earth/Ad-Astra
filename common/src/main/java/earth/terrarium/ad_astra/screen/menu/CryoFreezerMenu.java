@@ -3,7 +3,7 @@ package earth.terrarium.ad_astra.screen.menu;
 import earth.terrarium.ad_astra.blocks.machines.entity.CryoFreezerBlockEntity;
 import earth.terrarium.ad_astra.networking.NetworkHandling;
 import earth.terrarium.ad_astra.networking.packets.server.MachineInfoPacket;
-import earth.terrarium.ad_astra.registry.ModMenus;
+import earth.terrarium.ad_astra.registry.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
@@ -16,7 +16,7 @@ public class CryoFreezerMenu extends AbstractMachineMenu<CryoFreezerBlockEntity>
     }
 
     public CryoFreezerMenu(int syncId, Inventory inventory, CryoFreezerBlockEntity entity) {
-        super(ModMenus.CRYO_FREEZER_MENU.get(), syncId, inventory, entity, new Slot[]{
+        super(ModMenuTypes.CRYO_FREEZER_MENU.get(), syncId, inventory, entity, new Slot[]{
 
                 // Left Insert.
                 new Slot(entity, 0, 26, 70),

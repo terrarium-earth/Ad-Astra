@@ -40,25 +40,22 @@ public class AdAstra {
         CONFIG = AutoConfig.getConfigHolder(AdAstraConfig.class).getConfig();
 
         // Registry
-        ModFluids.register();
-        ModEntityTypes.register();
-        ModBlocks.register();
-        ModItems.register();
-        ModBlockEntities.register();
-        ModRecipes.register();
-        ModMenus.register();
-        ModSoundEvents.register();
-        ModParticleTypes.register();
-        ModPaintings.register();
-
-        // Worldgen
-        ModFeatures.register();
-        ModStructures.register();
-
-        // Packets
-        NetworkHandling.register();
-
+        ModFluids.init();
+        ModEntityTypes.init();
+        ModBlocks.init();
+        ModItems.init();
+        ModBlockEntities.init();
+        ModRecipeTypes.init();
+        ModRecipeSerializers.init();
+        ModMenuTypes.init();
+        ModSoundEvents.init();
+        ModParticleTypes.init();
+        ModPaintings.init();
+        ModFeatures.init();
+        ModStructures.init();
         ModCriteria.register();
+
+        NetworkHandling.register();
     }
 
     public static void onRegisterReloadListeners(BiConsumer<ResourceLocation, PreparableReloadListener> registry) {

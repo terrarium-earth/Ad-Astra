@@ -37,6 +37,12 @@
     "modmenu": [
       "earth.terrarium.ad_astra.config.fabric.ModMenuConfig"
     ],
+    "emi": [
+      "earth.terrarium.ad_astra.compat.emi.AdAstraEmiPlugin"
+    ],
+    "rei_client": [
+      "earth.terrarium.ad_astra.compat.rei.AdAstraClientPlugin"
+    ],
     "fabric-datagen": [
       "earth.terrarium.ad_astra.datagen.AdAstraDataGenEntrypoint"
     ]

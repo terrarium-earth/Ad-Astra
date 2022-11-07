@@ -4,6 +4,7 @@ import earth.terrarium.ad_astra.blocks.door.LocationState;
 import earth.terrarium.ad_astra.blocks.launchpad.LaunchPad;
 import earth.terrarium.ad_astra.entities.vehicles.*;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
+import earth.terrarium.botarium.api.item.ItemStackHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -12,7 +13,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LiquidBlock;
@@ -40,6 +40,7 @@ public class RocketItem<T extends Rocket> extends VehicleItem {
             BlockPos pos = context.getClickedPos();
             BlockState state = level.getBlockState(pos);
             Player player = context.getPlayer();
+            if (player == null) return InteractionResult.FAIL;
 
             // Check if the block can be spawned in a 3x8x3 radius
             for (int x = pos.getX() - 1; x < pos.getX() + 2; x++) {
@@ -56,8 +57,8 @@ public class RocketItem<T extends Rocket> extends VehicleItem {
 
             if (state.getBlock() instanceof LaunchPad) {
                 if (state.getValue(LaunchPad.LOCATION).equals(LocationState.CENTER)) {
-                    ItemStack rocketStack = player.getItemInHand(context.getHand());
-                    if (rocketStack.getItem() instanceof RocketItem<?> rocket) {
+                    ItemStackHolder rocketStack = new ItemStackHolder(player.getItemInHand(context.getHand()));
+                    if (rocketStack.getStack().getItem() instanceof RocketItem<?> rocket) {
 
                         Rocket rocketEntity = null;
 
@@ -78,9 +79,9 @@ public class RocketItem<T extends Rocket> extends VehicleItem {
                                 return InteractionResult.PASS;
                             }
 
-                            CompoundTag nbt = rocketStack.getOrCreateTag();
+                            CompoundTag nbt = rocketStack.getStack().getOrCreateTag();
                             if (nbt.contains("Fluid")) {
-                                if (!this.getFluid(rocketStack).equals(Fluids.EMPTY)) {
+                                if (!this.getFluid(rocketStack.getStack()).equals(Fluids.EMPTY)) {
                                     this.insert(rocketStack, rocketEntity.getTankHolder());
                                 }
                             }
@@ -89,7 +90,7 @@ public class RocketItem<T extends Rocket> extends VehicleItem {
                             }
 
                             rocketEntity.assignLaunchPad(true);
-                            rocketStack.shrink(1);
+                            rocketStack.getStack().shrink(1);
                             level.playSound(null, pos, SoundEvents.NETHERITE_BLOCK_PLACE, SoundSource.BLOCKS, 1, 1);
 
                             rocketEntity.setPos(pos.getX() + 0.5, pos.getY() + 0.1, pos.getZ() + 0.5);
@@ -99,6 +100,7 @@ public class RocketItem<T extends Rocket> extends VehicleItem {
                             return InteractionResult.SUCCESS;
                         }
                     }
+                    if (rocketStack.isDirty()) player.setItemInHand(context.getHand(), rocketStack.getStack());
                 }
             }
         }

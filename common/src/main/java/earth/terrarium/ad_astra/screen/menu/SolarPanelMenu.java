@@ -3,7 +3,7 @@ package earth.terrarium.ad_astra.screen.menu;
 import earth.terrarium.ad_astra.blocks.machines.entity.SolarPanelBlockEntity;
 import earth.terrarium.ad_astra.networking.NetworkHandling;
 import earth.terrarium.ad_astra.networking.packets.server.MachineInfoPacket;
-import earth.terrarium.ad_astra.registry.ModMenus;
+import earth.terrarium.ad_astra.registry.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 
@@ -16,7 +16,7 @@ public class SolarPanelMenu extends AbstractMachineMenu<SolarPanelBlockEntity> {
     }
 
     public SolarPanelMenu(int syncId, Inventory inventory, SolarPanelBlockEntity entity) {
-        super(ModMenus.SOLAR_PANEL_SCREEN_HANDLER.get(), syncId, inventory, entity);
+        super(ModMenuTypes.SOLAR_PANEL_SCREEN_HANDLER.get(), syncId, inventory, entity);
     }
 
     @Override

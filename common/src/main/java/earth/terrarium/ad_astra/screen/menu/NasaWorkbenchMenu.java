@@ -4,8 +4,8 @@ import earth.terrarium.ad_astra.blocks.machines.entity.NasaWorkbenchBlockEntity;
 import earth.terrarium.ad_astra.networking.NetworkHandling;
 import earth.terrarium.ad_astra.networking.packets.server.MachineInfoPacket;
 import earth.terrarium.ad_astra.recipes.NasaWorkbenchRecipe;
-import earth.terrarium.ad_astra.registry.ModMenus;
-import earth.terrarium.ad_astra.registry.ModRecipes;
+import earth.terrarium.ad_astra.registry.ModMenuTypes;
+import earth.terrarium.ad_astra.registry.ModRecipeTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
@@ -28,7 +28,7 @@ public class NasaWorkbenchMenu extends AbstractMachineMenu<NasaWorkbenchBlockEnt
     }
 
     public NasaWorkbenchMenu(int syncId, Inventory inventory, NasaWorkbenchBlockEntity entity) {
-        super(ModMenus.NASA_WORKBENCH_MENU.get(), syncId, inventory, entity, new Slot[]{
+        super(ModMenuTypes.NASA_WORKBENCH_MENU.get(), syncId, inventory, entity, new Slot[]{
 
                 // Nose
                 new Slot(entity, 0, 56, 20),
@@ -96,7 +96,7 @@ public class NasaWorkbenchMenu extends AbstractMachineMenu<NasaWorkbenchBlockEnt
 
     public void updateContent() {
 
-        NasaWorkbenchRecipe recipe = ModRecipes.NASA_WORKBENCH_RECIPE.get().findFirst(level, f -> f.test(this.machine));
+        NasaWorkbenchRecipe recipe = ModRecipeTypes.NASA_WORKBENCH_RECIPE.get().findFirst(level, f -> f.test(this.machine));
 
         ItemStack output = ItemStack.EMPTY;
         if (recipe != null) {

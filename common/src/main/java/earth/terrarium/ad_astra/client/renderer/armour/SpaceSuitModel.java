@@ -123,7 +123,7 @@ public class SpaceSuitModel extends HumanoidModel<LivingEntity> {
 
         float a = 1.0f;
         if (!(stack.getItem() instanceof NetheriteSpaceSuit)) {
-            a = decimal == 0xFFFFFF ? 0.3f : 1.0f;
+            a = decimal == 0xFFFFFF ? 0.3f : 0.6f;
         }
 
         Minecraft client = Minecraft.getInstance();

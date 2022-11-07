@@ -60,6 +60,6 @@ public class LargeJigsawStructure extends Structure {
 
     @Override
     public StructureType<?> type() {
-        return ModStructures.LARGE_JIGSAW_STRUCTURE;
+        return ModStructures.LARGE_JIGSAW_STRUCTURE.get();
     }
 }

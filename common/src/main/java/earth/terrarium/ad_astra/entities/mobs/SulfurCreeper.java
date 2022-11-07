@@ -2,8 +2,8 @@ package earth.terrarium.ad_astra.entities.mobs;
 
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.items.armour.SpaceSuit;
-import earth.terrarium.ad_astra.util.OxygenUtils;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
+import earth.terrarium.botarium.api.item.ItemStackHolder;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.entity.EntityType;
@@ -14,7 +14,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
@@ -40,19 +39,12 @@ public class SulfurCreeper extends Creeper {
             this.dead = true;
             Explosion explosion = this.level.explode(this, this.getX(), this.getY(), this.getZ(), 2.5f * f, destructionType);
             for (Player player : explosion.getHitPlayers().keySet()) {
-                ItemStack chest = player.getItemBySlot(EquipmentSlot.CHEST);
-                if (chest.getItem() instanceof SpaceSuit suit) {
-                    long oxygen = suit.getFluidAmount(chest);
-
-                    if (oxygen > 0) {
-                        if (!OxygenUtils.entityHasOxygen(level, player)) {
-                            suit.setFluidAmount(chest, oxygen - FluidHooks.buckets(3));
-                            if ((suit.getFluidAmount(chest) <= 0)) {
-                                suit.setFluidAmount(chest, 0);
-                            }
-                        }
-                    }
+                ItemStackHolder chest = new ItemStackHolder(player.getItemBySlot(EquipmentSlot.CHEST));
+                if (chest.getStack().getItem() instanceof SpaceSuit suit) {
+                    if (explosion.getSourceMob() == null) return;
+                    suit.extract(chest, FluidHooks.newFluidHolder(suit.getFluid(chest.getStack()), Math.max(0, (long) ((7 - player.getPosition(0).distanceTo(explosion.getSourceMob().getPosition(0))) * (FluidHooks.buckets(1) / 8))), null));
                 }
+                if (chest.isDirty()) player.setItemSlot(EquipmentSlot.CHEST, chest.getStack());
             }
             this.discard();
             Collection<MobEffectInstance> collection = this.getActiveEffects();

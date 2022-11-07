@@ -104,6 +104,7 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
 
     public void fly(Player player, ItemStack stack) {
         // Don't fly the Jet Suit in creative
+        ItemStackHolder stackHolder = new ItemStackHolder(stack);
         if (player.getAbilities().flying) {
             stack.getOrCreateTag().putBoolean("SpawnParticles", false);
             return;
@@ -117,9 +118,9 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
 
         stack.getOrCreateTag().putBoolean("SpawnParticles", true);
         if (ModKeyBindings.sprintKeyDown(player)) {
-            this.fallFly(player, stack);
+            this.fallFly(player, stackHolder);
         } else {
-            this.hover(player, stack);
+            this.flyUpward(player, stackHolder);
         }
 
         if (!player.level.isClientSide) {
@@ -133,16 +134,17 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
                 }
             }
         }
+        if (stackHolder.isDirty()) player.setItemSlot(EquipmentSlot.CHEST, stackHolder.getStack());
     }
 
-    public void hover(Player player, ItemStack stack) {
-        if (EnergyHooks.isEnergyItem(stack)) {
+    public void flyUpward(Player player, ItemStackHolder stack) {
+        if (EnergyHooks.isEnergyItem(stack.getStack())) {
             player.fallDistance /= 2;
 
-            var energy = EnergyHooks.getItemEnergyManager(stack);
+            var energy = EnergyHooks.getItemEnergyManager(stack.getStack());
             long tickEnergy = AdAstra.CONFIG.spaceSuit.jetSuitEnergyPerTick;
             if (!player.isCreative()) {
-                energy.extract(new ItemStackHolder(stack), tickEnergy, false);
+                energy.extract(stack, tickEnergy, false);
             }
             isFallFlying = false;
 
@@ -154,14 +156,14 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
         }
     }
 
-    public void fallFly(Player player, ItemStack stack) {
+    public void fallFly(Player player, ItemStackHolder stack) {
         if (player.isOnGround()) {
             player.fallDistance /= 2;
         }
-        var energy = EnergyHooks.getItemEnergyManager(stack);
+        var energy = EnergyHooks.getItemEnergyManager(stack.getStack());
         long tickEnergy = AdAstra.CONFIG.spaceSuit.jetSuitEnergyPerTick;
         if (!player.isCreative()) {
-            energy.extract(new ItemStackHolder(stack), tickEnergy, false);
+            energy.extract(stack, tickEnergy, false);
         }
         isFallFlying = true;
 

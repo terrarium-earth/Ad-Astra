@@ -3,7 +3,7 @@ package earth.terrarium.ad_astra.screen.menu;
 import earth.terrarium.ad_astra.blocks.machines.entity.WaterPumpBlockEntity;
 import earth.terrarium.ad_astra.networking.NetworkHandling;
 import earth.terrarium.ad_astra.networking.packets.server.MachineInfoPacket;
-import earth.terrarium.ad_astra.registry.ModMenus;
+import earth.terrarium.ad_astra.registry.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;
@@ -15,7 +15,7 @@ public class WaterPumpMenu extends AbstractMachineMenu<WaterPumpBlockEntity> {
     }
 
     public WaterPumpMenu(int syncId, Inventory inventory, WaterPumpBlockEntity entity) {
-        super(ModMenus.WATER_PUMP_MENU.get(), syncId, inventory, entity, new Slot[]{});
+        super(ModMenuTypes.WATER_PUMP_MENU.get(), syncId, inventory, entity, new Slot[]{});
     }
 
     @Override

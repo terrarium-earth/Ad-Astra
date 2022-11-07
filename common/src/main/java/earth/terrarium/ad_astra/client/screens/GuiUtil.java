@@ -3,6 +3,7 @@ package earth.terrarium.ad_astra.client.screens;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Matrix4f;
+import com.teamresourceful.resourcefullib.client.scissor.ScissorBox;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import earth.terrarium.botarium.api.fluid.ClientFluidHooks;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
@@ -113,23 +114,21 @@ public class GuiUtil {
         int scissorWidth = (int) (FLUID_TANK_WIDTH * scale);
         int scissorHeight = (int) ((FLUID_TANK_HEIGHT - 1) * scale * ratio);
 
-        // First, the sprite is rendered in full, and then it is masked based on how full the fluid tank is.
-        RenderSystem.enableScissor(scissorX, scissorY, scissorWidth, scissorHeight);
-
+        ScissorBox scissor = new ScissorBox(scissorX, scissorY, scissorWidth, scissorHeight);
+        scissor.start();
         for (int i = 1; i < 4; i++) {
             GuiComponent.blit(poseStack, x + 1, FLUID_TANK_HEIGHT + y - (spriteHeight * i), 0, FLUID_TANK_WIDTH - 2, spriteHeight, sprite);
         }
-
-        RenderSystem.disableScissor();
+        scissor.end();
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
     }
 
-    public static void drawFire(PoseStack poseStack, int x, int y, short burnTime, short totalBurnTime) {
+    public static void drawFire(PoseStack poseStack, int x, int y, int burnTime, int totalBurnTime) {
         double ratio = totalBurnTime > 0 ? (burnTime / (float) totalBurnTime) : 0;
         drawVertical(poseStack, x, y, FIRE_WIDTH, FIRE_HEIGHT, FIRE_TEXTURE, ratio);
     }
 
-    public static void drawSnowflake(PoseStack poseStack, int x, int y, short burnTime, short totalBurnTime) {
+    public static void drawSnowflake(PoseStack poseStack, int x, int y, int burnTime, int totalBurnTime) {
         double ratio = totalBurnTime > 0 ? (burnTime / (float) totalBurnTime) : 0;
         drawHorizontal(poseStack, x, y, SNOWFLAKE_WIDTH, SNOWFLAKE_HEIGHT, SNOWFLAKE_TEXTURE, ratio);
     }
@@ -138,7 +137,7 @@ public class GuiUtil {
         drawHorizontal(poseStack, x, y, SUN_WIDTH, SUN_HEIGHT, SUN_TEXTURE, 1.0);
     }
 
-    public static void drawHammer(PoseStack poseStack, int x, int y, short burnTime, short totalBurnTime) {
+    public static void drawHammer(PoseStack poseStack, int x, int y, int burnTime, int totalBurnTime) {
         double ratio = totalBurnTime > 0 ? (burnTime / (float) totalBurnTime) : 0;
         drawHorizontal(poseStack, x, y, HAMMER_WIDTH, HAMMER_HEIGHT, HAMMER_TEXTURE, ratio);
     }

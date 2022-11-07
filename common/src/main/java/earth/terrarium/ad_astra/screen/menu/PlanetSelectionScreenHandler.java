@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.screen.menu;
 
-import earth.terrarium.ad_astra.registry.ModMenus;
+import earth.terrarium.ad_astra.registry.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -16,7 +16,7 @@ public class PlanetSelectionScreenHandler extends AbstractContainerMenu {
     }
 
     public PlanetSelectionScreenHandler(int syncId, Player player, int tier) {
-        super(ModMenus.PLANET_SELECTION_SCREEN_HANDLER.get(), syncId);
+        super(ModMenuTypes.PLANET_SELECTION_SCREEN_HANDLER.get(), syncId);
         this.tier = tier;
         this.player = player;
     }

@@ -3,10 +3,13 @@ package earth.terrarium.ad_astra.client.forge;
 import earth.terrarium.ad_astra.client.AdAstraClient;
 import earth.terrarium.ad_astra.client.registry.ClientModBlockRenderers;
 import earth.terrarium.ad_astra.client.registry.ClientModEntities;
+import earth.terrarium.ad_astra.client.registry.ClientModParticles;
 import earth.terrarium.ad_astra.config.forge.ForgeMenuConfig;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -15,16 +18,16 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.ModelEvent;
-import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
-import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraftforge.client.event.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
@@ -59,14 +62,38 @@ public class AdAstraClientForge {
     }
 
     public static void init() {
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        modEventBus.addListener(AdAstraClientForge::modelLoading);
-        modEventBus.addListener(AdAstraClientForge::spriteLoading);
-        modEventBus.addListener(AdAstraClientForge::chestSpriteLoading);
-        modEventBus.addListener(AdAstraClientForge::onRegisterRenderers);
-        modEventBus.addListener(AdAstraClientForge::onRegisterLayerDefinitions);
-        modEventBus.addListener(AdAstraClientForge::onClientReloadListeners);
+        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+        bus.addListener(AdAstraClientForge::modelLoading);
+        bus.addListener(AdAstraClientForge::spriteLoading);
+        bus.addListener(AdAstraClientForge::onRegisterParticles);
+        bus.addListener(AdAstraClientForge::onRegisterClientHud);
+        bus.addListener(AdAstraClientForge::chestSpriteLoading);
+        bus.addListener(AdAstraClientForge::onRegisterRenderers);
+        bus.addListener(AdAstraClientForge::onRegisterLayerDefinitions);
+        bus.addListener(AdAstraClientForge::onClientReloadListeners);
+        AdAstraClient.onRegisterBlockRenderTypes(AdAstraClientForge::onRegisterBlockRenderTypes);
+        AdAstraClient.onRegisterFluidRenderTypes(AdAstraClientForge::onRegisterFluidRenderTypes);
         ForgeMenuConfig.register();
+    }
+
+    private static void onRegisterClientHud(RenderGuiEvent.Post event) {
+        AdAstraClient.onRegisterHud(hud -> hud.renderHud(event.getPoseStack(), event.getPartialTick()));
+
+    }
+
+    private static void onRegisterParticles(RegisterParticleProvidersEvent event) {
+        ClientModParticles.onRegisterParticles((type, provider) -> event.register(type, provider::create));
+    }
+
+    private static void onRegisterBlockRenderTypes(RenderType type, List<Block> blocks) {
+        for (Block block : blocks) {
+            ItemBlockRenderTypes.setRenderLayer(block, type);
+        }
+    }
+
+    private static void onRegisterFluidRenderTypes(RenderType type, Fluid fluid1, Fluid fluid2) {
+        ItemBlockRenderTypes.setRenderLayer(fluid1, type);
+        ItemBlockRenderTypes.setRenderLayer(fluid2, type);
     }
 
     public static void onClientReloadListeners(RegisterClientReloadListenersEvent event) {

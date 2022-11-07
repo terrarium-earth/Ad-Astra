@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.screen.menu;
 
 import earth.terrarium.ad_astra.entities.vehicles.Vehicle;
-import earth.terrarium.ad_astra.registry.ModMenus;
+import earth.terrarium.ad_astra.registry.ModMenuTypes;
 import earth.terrarium.ad_astra.screen.NoInventorySlot;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.minecraft.network.FriendlyByteBuf;
@@ -16,7 +16,7 @@ public class VehicleMenu extends AbstractVehicleMenu {
     }
 
     public VehicleMenu(int syncId, Inventory inventory, Vehicle entity) {
-        super(ModMenus.VEHICLE_MENU.get(), syncId, inventory, entity, new Slot[]{
+        super(ModMenuTypes.VEHICLE_MENU.get(), syncId, inventory, entity, new Slot[]{
 
                 // Left input slot.
                 new NoInventorySlot(entity.getInventory(), 0, 20, 24) {

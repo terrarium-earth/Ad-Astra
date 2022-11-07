@@ -34,7 +34,7 @@ public class EntityAcidRainSystem {
 
     private static void causeDamage(LivingEntity entity, ServerLevel level) {
         if (((EntityInvoker) entity).invokeIsInRain()) {
-            entity.hurt(ModDamageSource.ACID_RAIN, 3);
+            entity.hurt(ModDamageSource.ACID_RAIN, AdAstra.CONFIG.general.acidRainDamage);
             // Infrequently set the entity on fire
             if (level.random.nextInt(8) == 0) {
                 entity.setSecondsOnFire(1);

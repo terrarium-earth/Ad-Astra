@@ -1,9 +1,9 @@
 package earth.terrarium.ad_astra.blocks.machines.entity;
 
-import dev.architectury.registry.fuel.FuelRegistry;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
 import earth.terrarium.ad_astra.screen.menu.CoalGeneratorMenu;
+import earth.terrarium.ad_astra.util.PlatformUtils;
 import earth.terrarium.botarium.api.energy.EnergyBlock;
 import earth.terrarium.botarium.api.energy.EnergyHooks;
 import earth.terrarium.botarium.api.energy.ExtractOnlyEnergyContainer;
@@ -13,8 +13,10 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity implements EnergyBlock {
@@ -27,7 +29,7 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity imple
 
     @Nullable
     @Override
-    public AbstractContainerMenu createMenu(int syncId, Inventory inv, Player player) {
+    public AbstractContainerMenu createMenu(int syncId, @NotNull Inventory inv, @NotNull Player player) {
         return new CoalGeneratorMenu(syncId, inv, this);
     }
 
@@ -58,8 +60,8 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity imple
                 this.setActive(true);
                 ticksToTurnOff = 7;
                 // Check if the input is a valid fuel
-            } else if (!input.isEmpty()) {
-                short burnTime = (short) FuelRegistry.get(input);
+            } else if (!input.isEmpty() && !input.getItem().equals(Items.LAVA_BUCKET)) {
+                int burnTime = Math.min(20000, PlatformUtils.getBurnTime(input));
                 input.shrink(1);
                 this.cookTimeTotal = burnTime;
                 this.cookTime = burnTime;

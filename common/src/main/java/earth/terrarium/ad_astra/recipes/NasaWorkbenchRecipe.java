@@ -3,7 +3,8 @@ package earth.terrarium.ad_astra.recipes;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamresourceful.resourcefullib.common.codecs.recipes.ItemStackCodec;
-import earth.terrarium.ad_astra.registry.ModRecipes;
+import earth.terrarium.ad_astra.registry.ModRecipeSerializers;
+import earth.terrarium.ad_astra.registry.ModRecipeTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -48,11 +49,11 @@ public class NasaWorkbenchRecipe extends CookingRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return ModRecipes.NASA_WORKBENCH_SERIALIZER.get();
+        return ModRecipeSerializers.NASA_WORKBENCH_SERIALIZER.get();
     }
 
     @Override
     public RecipeType<?> getType() {
-        return ModRecipes.NASA_WORKBENCH_RECIPE.get();
+        return ModRecipeTypes.NASA_WORKBENCH_RECIPE.get();
     }
 }
