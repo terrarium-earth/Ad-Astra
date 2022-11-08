@@ -69,7 +69,6 @@ public class RoverItem extends VehicleItem {
             rover.setYRot(player.getYRot());
             rover.setPos(context.getClickLocation().add(0, 0, 1));
             level.addFreshEntity(rover);
-            roverStack.getStack().shrink(1);
             level.playSound(null, pos, SoundEvents.LODESTONE_PLACE, SoundSource.BLOCKS, 1, 1);
             if (roverStack.isDirty()) player.setItemInHand(context.getHand(), roverStack.getStack());
         }

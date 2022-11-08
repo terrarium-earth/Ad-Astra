@@ -6,6 +6,7 @@ import earth.terrarium.ad_astra.client.AdAstraClient;
 import earth.terrarium.ad_astra.client.forge.AdAstraClientForge;
 import earth.terrarium.ad_astra.registry.ModCommands;
 import earth.terrarium.ad_astra.registry.ModEntityTypes;
+import earth.terrarium.ad_astra.registry.forge.ModRegistryHelpersImpl;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
@@ -30,6 +31,7 @@ public class AdAstraForge {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> AdAstraClientForge::init);
         MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onServerReloadListeners);
         MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onRegisterCommands);
+        ModRegistryHelpersImpl.REGISTRIES.values().forEach(deferredRegister -> deferredRegister.register(bus));
     }
 
     public static void onServerReloadListeners(AddReloadListenerEvent event) {

@@ -90,7 +90,6 @@ public class RocketItem<T extends Rocket> extends VehicleItem {
                             }
 
                             rocketEntity.assignLaunchPad(true);
-                            rocketStack.getStack().shrink(1);
                             level.playSound(null, pos, SoundEvents.NETHERITE_BLOCK_PLACE, SoundSource.BLOCKS, 1, 1);
 
                             rocketEntity.setPos(pos.getX() + 0.5, pos.getY() + 0.1, pos.getZ() + 0.5);

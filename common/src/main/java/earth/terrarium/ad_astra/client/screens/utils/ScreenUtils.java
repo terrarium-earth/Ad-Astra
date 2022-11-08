@@ -72,4 +72,15 @@ public class ScreenUtils {
             tessellator.end();
         }
     }
+
+    public static void drawLine(int x1, int x2, int y1, int y2, int colour) {
+        Tesselator tessellator = Tesselator.getInstance();
+        BufferBuilder bufferBuilder = tessellator.getBuilder();
+        RenderSystem.setShader(GameRenderer::getPositionColorShader);
+
+        bufferBuilder.begin(VertexFormat.Mode.DEBUG_LINE_STRIP, DefaultVertexFormat.POSITION_COLOR);
+        bufferBuilder.vertex(x1, y1, 0).color((colour >> 16 & 255) / 255.0f, (float) (colour >> 8 & 255) / 255.0f, (float) (colour & 255) / 255.0f, 1.0f).endVertex();
+        bufferBuilder.vertex(x2, y2, 0).color((colour >> 16 & 255) / 255.0f, (float) (colour >> 8 & 255) / 255.0f, (float) (colour & 255) / 255.0f, 1.0f).endVertex();
+        tessellator.end();
+    }
 }

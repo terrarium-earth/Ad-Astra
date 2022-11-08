@@ -12,6 +12,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -60,7 +61,7 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity imple
                 this.setActive(true);
                 ticksToTurnOff = 7;
                 // Check if the input is a valid fuel
-            } else if (!input.isEmpty() && !input.getItem().equals(Items.LAVA_BUCKET)) {
+            } else if (!input.isEmpty() && !(input.getItem() instanceof BucketItem)) {
                 int burnTime = Math.min(20000, PlatformUtils.getBurnTime(input));
                 input.shrink(1);
                 this.cookTimeTotal = burnTime;

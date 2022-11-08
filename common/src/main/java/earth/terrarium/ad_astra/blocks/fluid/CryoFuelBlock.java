@@ -8,19 +8,11 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.phys.Vec3;
 
-public class CryoFuelBlock extends LiquidBlock {
-
-    public CryoFuelBlock(FlowingFluid fluid, Properties settings) {
-        super(fluid, settings);
-    }
-
-    @Override
-    public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+public class CryoFuelBlock {
+    public static void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
         if (entity instanceof LivingEntity) {
             entity.makeStuckInBlock(state, new Vec3(0.9f, 1.5, 0.9f));
             if (level.isClientSide) {

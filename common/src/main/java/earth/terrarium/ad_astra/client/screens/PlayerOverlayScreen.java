@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 
@@ -37,7 +38,7 @@ public class PlayerOverlayScreen {
 
     private static final ResourceLocation ROCKET_PLANET_BAR_TEXTURE = new ModResourceLocation("textures/gui/planet_bar/rocket.png");
 
-    private static final ResourceLocation WARNING_TEXTURE = new ModResourceLocation("textures/gui/overlay/warning.png");
+    private static final Component WARNING_TEXT = Component.translatable("gui.ad_astra.text.warning");
 
     private static final ResourceLocation BATTERY_TEXTURE = new ModResourceLocation("textures/gui/overlay/battery.png");
     private static final ResourceLocation BATTERY_EMPTY_TEXTURE = new ModResourceLocation("textures/gui/overlay/battery_empty.png");
@@ -57,17 +58,17 @@ public class PlayerOverlayScreen {
     public static double batteryRatio;
 
     public static void render(PoseStack poseStack, float delta) {
-        Minecraft client = Minecraft.getInstance();
-        int screenX = client.getWindow().getGuiScaledWidth();
-        int screenY = client.getWindow().getGuiScaledHeight();
-        LocalPlayer player = client.player;
+        Minecraft minecraft = Minecraft.getInstance();
+        int screenWidth = minecraft.getWindow().getGuiScaledWidth();
+        int screenHeight = minecraft.getWindow().getGuiScaledHeight();
+        LocalPlayer player = minecraft.player;
 
         if (player.isSpectator()) {
             return;
         }
 
         // Oxygen
-        if (shouldRenderOxygen && !client.options.renderDebug) {
+        if (shouldRenderOxygen && !minecraft.options.renderDebug) {
 
             int x = 5 + AdAstra.CONFIG.general.oxygenBarXOffset;
             int y = 25 + AdAstra.CONFIG.general.oxygenBarYOffset;
@@ -81,18 +82,18 @@ public class PlayerOverlayScreen {
             // Oxygen text
             double oxygen = Math.round(oxygenRatio * 1000) / 10.0;
             Component text = Component.nullToEmpty((oxygen) + "%");
-            int textWidth = client.font.width(text);
+            int textWidth = minecraft.font.width(text);
             if (doesNotNeedOxygen) {
-                client.font.drawShadow(poseStack, text, (x + (textureWidth - textWidth) / 2.0f), y + textureHeight + 3, 0x7FFF00);
+                minecraft.font.drawShadow(poseStack, text, (x + (textureWidth - textWidth) / 2.0f), y + textureHeight + 3, 0x7FFF00);
             } else {
-                client.font.drawShadow(poseStack, text, (x + (textureWidth - textWidth) / 2.0f), y + textureHeight + 3, oxygen <= 0.0f ? 0xDC143C : 0xFFFFFF);
+                minecraft.font.drawShadow(poseStack, text, (x + (textureWidth - textWidth) / 2.0f), y + textureHeight + 3, oxygen <= 0.0f ? 0xDC143C : 0xFFFFFF);
             }
         }
 
         // Battery
-        if (shouldRenderBattery && !client.options.renderDebug) {
+        if (shouldRenderBattery && !minecraft.options.renderDebug) {
 
-            int x = screenX - 75 - AdAstra.CONFIG.general.energyBarXOffset;
+            int x = screenWidth - 75 - AdAstra.CONFIG.general.energyBarXOffset;
             int y = 25 + AdAstra.CONFIG.general.energyBarYOffset;
 
             int textureWidth = (int) (49 * 1.4);
@@ -102,27 +103,32 @@ public class PlayerOverlayScreen {
 
             double energy = Math.round(batteryRatio * 1000) / 10.0;
             Component text = Component.nullToEmpty((energy) + "%");
-            int textWidth = client.font.width(text);
-            client.font.drawShadow(poseStack, text, (x + (textureWidth - textWidth) / 2.0f), y + textureHeight + 3, 0x6082B6);
+            int textWidth = minecraft.font.width(text);
+            minecraft.font.drawShadow(poseStack, text, (x + (textureWidth - textWidth) / 2.0f), y + textureHeight + 3, 0x6082B6);
         }
 
         // Timer
         if (countdownSeconds > 0) {
-
-            int x = screenX / 2 - 31;
-            int y = screenY / 2 / 2;
-
-            RenderSystem.setShaderTexture(0, getTimerTexture());
-            GuiComponent.blit(poseStack, x, y, 0, 0, 60, 38, 60, 38);
+            poseStack.pushPose();
+            poseStack.translate(screenWidth / 2.0f, screenHeight / 2.0f, 0.0);
+            RenderSystem.enableBlend();
+            RenderSystem.defaultBlendFunc();
+            poseStack.pushPose();
+            poseStack.scale(4.0F, 4.0F, 4.0F);
+            var m = minecraft.font.width(countdownSeconds + "");
+            minecraft.font.drawShadow(poseStack, countdownSeconds + "", (float) (-m / 2), -10.0F, 0xe53253);
+            poseStack.popPose();
+            RenderSystem.disableBlend();
+            poseStack.popPose();
         }
 
         // Planet bar
-        if (shouldRenderBar && !client.options.renderDebug) {
+        if (shouldRenderBar && !minecraft.options.renderDebug) {
             float rocketHeight = (float) (player.getY() / (AdAstra.CONFIG.rocket.atmosphereLeave / 113.0f));
             rocketHeight = Mth.clamp(rocketHeight, 0, 113);
 
             int x = 0;
-            int y = screenY / 2 - 128 / 2;
+            int y = screenHeight / 2 - 128 / 2;
 
             ResourceLocation planet;
             ResourceKey<Level> currentWorld = player.getLevel().dimension();
@@ -148,7 +154,7 @@ public class PlayerOverlayScreen {
 
             // Draw rocket indicator
             RenderSystem.setShaderTexture(0, ROCKET_PLANET_BAR_TEXTURE);
-            FloatDrawableHelper.drawTexture(poseStack, 4.0f, (screenY / 2.0f) + (103 / 2.0f) - rocketHeight, 0, 0, 8, 11, 8, 11);
+            FloatDrawableHelper.drawTexture(poseStack, 4.0f, (screenHeight / 2.0f) + (103 / 2.0f) - rocketHeight, 0, 0, 8, 11, 8, 11);
         }
 
         // Warning screen
@@ -159,21 +165,20 @@ public class PlayerOverlayScreen {
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
 
             // Flashing
-            float sine = (float) Math.sin((client.level.getGameTime() + client.getFrameTime()) / 2.0f);
+            float sine = (float) Math.sin((minecraft.level.getGameTime() + (minecraft.isPaused() ? 0 : minecraft.getFrameTime())) / 5.0f);
 
             sine = Mth.clamp(sine, 0.0f, 1.0f);
             RenderSystem.setShaderColor(sine, sine, sine, sine);
 
-            // Warning image
-            RenderSystem.setShaderTexture(0, WARNING_TEXTURE);
-            GuiComponent.blit(poseStack, screenX / 2 - 58, 50, 0, 0, 116, 21, 116, 21);
-
-            RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-
-            // Speed text
-            Component text = Component.translatable("message." + AdAstra.MOD_ID + ".speed", Math.round(speed * 10.0) / 10.0);
-            client.font.drawShadow(poseStack, text, screenX / 2.0f - 29, 80, -3407872);
-
+            poseStack.pushPose();
+            poseStack.translate(screenWidth / 2.0f, screenHeight / 2.0f / 1.5f, 0.0);
+            RenderSystem.enableBlend();
+            RenderSystem.defaultBlendFunc();
+            poseStack.pushPose();
+            poseStack.scale(4.0F, 4.0F, 4.0F);
+            var m = minecraft.font.width(WARNING_TEXT);
+            minecraft.font.drawShadow(poseStack, WARNING_TEXT, (float) (-m / 2), -10.0F, FastColor.ARGB32.color((int) (sine * 255), (int) (sine * 255), (int) (sine * 255), (int) (sine * 255)));
+            poseStack.popPose();
             RenderSystem.disableBlend();
             poseStack.popPose();
         }
@@ -190,9 +195,5 @@ public class PlayerOverlayScreen {
         PlayerOverlayScreen.shouldRenderBar = false;
         PlayerOverlayScreen.countdownSeconds = 0;
         PlayerOverlayScreen.shouldRenderWarning = false;
-    }
-
-    public static ResourceLocation getTimerTexture() {
-        return new ModResourceLocation("textures/gui/countdown_numbers/" + countdownSeconds + ".png");
     }
 }

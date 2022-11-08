@@ -23,6 +23,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.client.event.*;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
@@ -66,14 +67,19 @@ public class AdAstraClientForge {
         bus.addListener(AdAstraClientForge::modelLoading);
         bus.addListener(AdAstraClientForge::spriteLoading);
         bus.addListener(AdAstraClientForge::onRegisterParticles);
-        bus.addListener(AdAstraClientForge::onRegisterClientHud);
         bus.addListener(AdAstraClientForge::chestSpriteLoading);
         bus.addListener(AdAstraClientForge::onRegisterRenderers);
         bus.addListener(AdAstraClientForge::onRegisterLayerDefinitions);
         bus.addListener(AdAstraClientForge::onClientReloadListeners);
-        AdAstraClient.onRegisterBlockRenderTypes(AdAstraClientForge::onRegisterBlockRenderTypes);
-        AdAstraClient.onRegisterFluidRenderTypes(AdAstraClientForge::onRegisterFluidRenderTypes);
+        MinecraftForge.EVENT_BUS.addListener(AdAstraClientForge::onRegisterClientHud);
         ForgeMenuConfig.register();
+    }
+
+    public static void postInit() {
+        AdAstraClient.onRegisterBlockRenderTypes(AdAstraClientForge::onRegisterBlockRenderTypes);
+        AdAstraClient.onRegisterItemRenderers(AdAstraClientForge::registerItemRenderer);
+        AdAstraClient.onRegisterFluidRenderTypes(AdAstraClientForge::onRegisterFluidRenderTypes);
+        hasInitializedRenderers = true;
     }
 
     private static void onRegisterClientHud(RenderGuiEvent.Post event) {
@@ -100,10 +106,6 @@ public class AdAstraClientForge {
         AdAstraClient.onRegisterReloadListeners((id, listener) -> event.registerReloadListener(listener));
     }
 
-    public static void postInit() {
-        AdAstraClient.onRegisterItemRenderers(AdAstraClientForge::registerItemRenderer);
-        hasInitializedRenderers = true;
-    }
 
     public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
         ClientModEntities.registerEntityRenderers(new ClientModEntities.EntityRendererRegistry() {

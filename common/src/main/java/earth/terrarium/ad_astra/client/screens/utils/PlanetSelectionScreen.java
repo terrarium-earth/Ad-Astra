@@ -39,9 +39,6 @@ import java.util.function.Consumer;
 @Environment(EnvType.CLIENT)
 public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSelectionScreenHandler> {
 
-    // Textures.
-    public static final ResourceLocation BACKGROUND_TEXTURE = new ModResourceLocation("textures/gui/screens/planet_selection.png");
-
     public static final ResourceLocation SMALL_MENU_LIST = new ModResourceLocation("textures/gui/selection_menu.png");
     public static final ResourceLocation LARGE_MENU_TEXTURE = new ModResourceLocation("textures/gui/selection_menu_large.png");
     public static final ResourceLocation SCROLL_BAR = new ModResourceLocation("textures/gui/scroll_bar.png");
@@ -125,7 +122,19 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
         super.render(poseStack, mouseX, mouseY, delta);
 
         // Catalog text.
-        this.font.draw(poseStack, CATALOG_TEXT, 24, (this.height / 2.0f) - 143.0f / 2.0f, -1);
+        this.font.draw(poseStack, CATALOG_TEXT, 29, (this.height / 2.0f) - 143.0f / 2.0f, -1);
+    }
+
+    private void drawBackground(PoseStack poseStack) {
+        GuiComponent.fill(poseStack, 0, 0, this.width, this.height, 0xff000419);
+        for (int i = 0; i < this.width / 24; i++) {
+            ScreenUtils.drawLine(i * 24, this.width + i * 24, 0, this.width, 0xff0f2559);
+            ScreenUtils.drawLine(0, this.width - i * 24, i * 24, this.width, 0xff0f2559);
+            ScreenUtils.drawLine(i * 24, 0, 0, i * 24, 0xff0f2559);
+            ScreenUtils.drawLine(this.width, i * 24, i * 24, this.width, 0xff0f2559);
+        }
+
+        RenderSystem.enableBlend();
     }
 
     private void renderBackground(PoseStack poseStack, int mouseX, int mouseY, float delta) {
@@ -137,7 +146,7 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
         RenderSystem.defaultBlendFunc();
 
         // Planet selection background
-        ScreenUtils.addTexture(poseStack, 0, 0, this.width, this.height, BACKGROUND_TEXTURE);
+        drawBackground(poseStack);
 
         int currentPage = this.getPage();
 

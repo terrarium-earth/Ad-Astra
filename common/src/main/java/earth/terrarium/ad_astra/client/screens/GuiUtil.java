@@ -3,7 +3,8 @@ package earth.terrarium.ad_astra.client.screens;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Matrix4f;
-import com.teamresourceful.resourcefullib.client.scissor.ScissorBox;
+import com.teamresourceful.resourcefullib.client.scissor.ClosingScissorBox;
+import com.teamresourceful.resourcefullib.client.utils.RenderUtils;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import earth.terrarium.botarium.api.fluid.ClientFluidHooks;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
@@ -105,21 +106,12 @@ public class GuiUtil {
         RenderSystem.setShaderColor((colour >> 16 & 255) / 255.0f, (float) (colour >> 8 & 255) / 255.0f, (float) (colour & 255) / 255.0f, 1.0f);
         RenderSystem.setShaderTexture(0, InventoryMenu.BLOCK_ATLAS);
 
-        Minecraft client = Minecraft.getInstance();
-        double scale = (int) client.getWindow().getGuiScale();
-        int screenHeight = client.getWindow().getGuiScaledHeight();
-
-        int scissorX = (int) (x * scale);
-        int scissorY = (int) (((screenHeight - y - FLUID_TANK_HEIGHT)) * scale);
-        int scissorWidth = (int) (FLUID_TANK_WIDTH * scale);
-        int scissorHeight = (int) ((FLUID_TANK_HEIGHT - 1) * scale * ratio);
-
-        ScissorBox scissor = new ScissorBox(scissorX, scissorY, scissorWidth, scissorHeight);
-        scissor.start();
+        int calcHeight =  (int)((FLUID_TANK_HEIGHT + 1) * ratio);
+        ClosingScissorBox scissor = RenderUtils.createScissorBox(Minecraft.getInstance(), poseStack, x, y + FLUID_TANK_HEIGHT - calcHeight, FLUID_TANK_WIDTH, calcHeight);
         for (int i = 1; i < 4; i++) {
             GuiComponent.blit(poseStack, x + 1, FLUID_TANK_HEIGHT + y - (spriteHeight * i), 0, FLUID_TANK_WIDTH - 2, spriteHeight, sprite);
         }
-        scissor.end();
+        scissor.close();
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
     }
 

@@ -2,7 +2,8 @@ package earth.terrarium.ad_astra.client.screens.utils;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.teamresourceful.resourcefullib.client.scissor.ScissorBox;
+import com.teamresourceful.resourcefullib.client.scissor.ClosingScissorBox;
+import com.teamresourceful.resourcefullib.client.utils.RenderUtils;
 import com.teamresourceful.resourcefullib.common.color.Color;
 import earth.terrarium.ad_astra.client.screens.utils.PlanetSelectionScreen.TooltipType;
 import earth.terrarium.ad_astra.data.ButtonColour;
@@ -79,21 +80,21 @@ public class CustomButton extends Button {
         if (this.visible) {
 
             Minecraft client = Minecraft.getInstance();
-            double scale = client.getWindow().getGuiScale();
-            int screenHeight = client.getWindow().getGuiScaledHeight();
-            int scissorY = (int) (((screenHeight / 2) - 83) * scale);
 
             boolean over = this.isMouseOver(mouseX, mouseY);
             Color color = over ? this.buttonColourLightened : this.buttonColour;
 
+            poseStack.pushPose();
+            poseStack.translate(5, 0, 0);
             RenderSystem.enableBlend();
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
             RenderSystem.enableDepthTest();
 
-            ScissorBox scissor = new ScissorBox(0, scissorY, (int) (215 * scale), (int) (127 * scale));
+            ClosingScissorBox scissor = null;
             if (this.doMask) {
                 // Render mask
-                scissor.start();
+//                System.out.println(RenderUtils.getTranslation(poseStack));
+                scissor = RenderUtils.createScissorBox(Minecraft.getInstance(), poseStack, x, y, 215, 127);
             }
 
             RenderSystem.setShaderColor(color.getFloatRed(), color.getFloatGreen(), color.getFloatBlue(), this.buttonColour.getFloatAlpha());
@@ -107,14 +108,14 @@ public class CustomButton extends Button {
             blit(poseStack, (this.buttonSize.equals(ButtonType.LARGE) ? this.x - 2 : this.x), this.y, 0, 0, this.width, this.height, buttonSize.getWidth(), buttonSize.getHeight());
             drawText(poseStack, client);
 
-            if (this.doMask) {
-                scissor.end();
+            if (scissor != null) {
+                scissor.close();
             }
 
             if (this.isMouseOver(mouseX, mouseY)) {
                 renderTooltips(poseStack, mouseX, mouseY, client);
             }
-
+            poseStack.popPose();
             RenderSystem.disableDepthTest();
         }
     }

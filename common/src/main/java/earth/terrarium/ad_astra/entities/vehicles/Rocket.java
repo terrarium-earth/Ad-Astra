@@ -152,7 +152,7 @@ public class Rocket extends Vehicle {
                 BlockState below = level.getBlockState(this.blockPosition());
                 if (!(below.getBlock() instanceof LaunchPad)) {
                     this.drop();
-                } else if (below.getBlock() instanceof LaunchPad pad) {
+                } else if (below.getBlock() instanceof LaunchPad) {
                     if (!below.getValue(LaunchPad.LOCATION).equals(LocationState.CENTER)) {
                         this.drop();
                     }

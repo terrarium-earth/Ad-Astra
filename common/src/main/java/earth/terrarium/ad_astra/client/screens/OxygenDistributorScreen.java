@@ -16,6 +16,7 @@ import earth.terrarium.ad_astra.util.OxygenUtils;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -33,7 +34,6 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
     public static final int ENERGY_LEFT = 147;
     public static final int ENERGY_TOP = 82;
     private static final ResourceLocation TEXTURE = new ModResourceLocation("textures/gui/screens/oxygen_distributor.png");
-    private static final ResourceLocation WARNING_SIGN = new ModResourceLocation("textures/gui/overlay/warning_sign.png");
     final Component SHOW_TEXT = ScreenUtils.createText("show");
     final Component HIDE_TEXT = ScreenUtils.createText("hide");
     CustomButton visibleButton;
@@ -62,10 +62,10 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
         // Render a warning sign if there is an oxygen leak detected.
         boolean oxygenLeak = OxygenUtils.getOxygenBlocksCount(this.machine.getLevel(), this.machine.getBlockPos()) >= AdAstra.CONFIG.oxygenDistributor.maxBlockChecks;
         if (oxygenLeak) {
-            ScreenUtils.addTexture(poseStack, this.width / 2 - 85, this.height / 2 - 137, 14, 15, WARNING_SIGN);
+            GuiComponent.drawCenteredString(poseStack, this.font, "⚠", this.width / 2 - 85 + 7, this.height / 2 - 137, Color.YELLOW.getRGB());
         }
         if (OxygenUtils.getOxygenBlocksCount(this.machine.getLevel(), this.machine.getBlockPos()) <= 0 && this.machine.getEnergyStorage().getStoredEnergy() > 0 && this.menu.getFluids().get(1).getFluidAmount() > 0) {
-            ScreenUtils.addTexture(poseStack, this.width / 2 - 67, this.height / 2 - 137, 14, 15, WARNING_SIGN);
+            GuiComponent.drawCenteredString(poseStack, this.font, "⚠", this.width / 2 - 67 + 7, this.height / 2 - 137, Color.YELLOW.getRGB());
         }
     }
 
