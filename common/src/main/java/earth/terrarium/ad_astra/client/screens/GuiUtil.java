@@ -175,17 +175,17 @@ public class GuiUtil {
         screen.renderTooltip(poseStack, Component.translatable("gauge_text.ad_astra.liquid_storage", FluidHooks.toMillibuckets(amount), FluidHooks.toMillibuckets(capacity)).setStyle(Style.EMPTY.withColor(ChatFormatting.GOLD)).append(Component.nullToEmpty(", ")).append(GuiUtil.getFluidTranslation(fluid)), mouseX, mouseY);
     }
 
-    public static class FloatDrawableHelper {
+    public static class FloatGuiComponent {
         public static void drawTexture(PoseStack poseStack, float x, float y, float u, float v, int width, int height, int textureWidth, int textureHeight) {
-            FloatDrawableHelper.drawTexture(poseStack, x, y, width, height, u, v, width, height, textureWidth, textureHeight);
+            FloatGuiComponent.drawTexture(poseStack, x, y, width, height, u, v, width, height, textureWidth, textureHeight);
         }
 
         public static void drawTexture(PoseStack poseStack, float x, float y, int width, int height, float u, float v, int regionWidth, int regionHeight, int textureWidth, int textureHeight) {
-            FloatDrawableHelper.drawTexture(poseStack, x, x + width, y, y + height, 0, regionWidth, regionHeight, u, v, textureWidth, textureHeight);
+            FloatGuiComponent.drawTexture(poseStack, x, x + width, y, y + height, 0, regionWidth, regionHeight, u, v, textureWidth, textureHeight);
         }
 
         private static void drawTexture(PoseStack poseStack, float x0, float x1, float y0, float y1, int z, int regionWidth, int regionHeight, float u, float v, int textureWidth, int textureHeight) {
-            FloatDrawableHelper.drawTexturedQuad(poseStack.last().pose(), x0, x1, y0, y1, z, (u + 0.0f) / (float) textureWidth, (u + (float) regionWidth) / (float) textureWidth, (v + 0.0f) / (float) textureHeight, (v + (float) regionHeight) / (float) textureHeight);
+            FloatGuiComponent.drawTexturedQuad(poseStack.last().pose(), x0, x1, y0, y1, z, (u + 0.0f) / (float) textureWidth, (u + (float) regionWidth) / (float) textureWidth, (v + 0.0f) / (float) textureHeight, (v + (float) regionHeight) / (float) textureHeight);
         }
 
         private static void drawTexturedQuad(Matrix4f matrix, float x0, float x1, float y0, float y1, int z, float u0, float u1, float v0, float v1) {

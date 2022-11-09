@@ -58,7 +58,7 @@ public class FluidUtils {
 
                 FluidHolder fluidToTransfer = FluidHooks.newFluidHolder(itemHolder.getFluid(), itemHolder.getFluidAmount(), null);
                 if (fluidToTransfer.isEmpty()) return false;
-                ItemStackHolder item = new ItemStackHolder(stack);
+                ItemStackHolder item = new ItemStackHolder(inventory.getItem(inputSlot).copy());
                 FluidHolder extracted = itemFluidHandler.extractFluid(item, fluidToTransfer, true);
                 if (extracted.isEmpty()) return false;
                 long l = tank.insertFluid(extracted, true);
@@ -99,7 +99,7 @@ public class FluidUtils {
 
                 FluidHolder fluidToTransfer = FluidHooks.newFluidHolder(tankHolder.getFluid(), tankHolder.getFluidAmount(), null);
                 if (fluidToTransfer.isEmpty()) return false;
-                ItemStackHolder item = new ItemStackHolder(stack);
+                ItemStackHolder item = new ItemStackHolder(inventory.getItem(inputSlot).copy());
                 FluidHolder extracted = tank.extractFluid(fluidToTransfer, true);
                 if (extracted.isEmpty()) return false;
                 long l = itemFluidHandler.insertFluid(item, extracted, true);

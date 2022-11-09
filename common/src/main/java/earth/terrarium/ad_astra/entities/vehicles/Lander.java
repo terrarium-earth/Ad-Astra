@@ -33,7 +33,7 @@ public class Lander extends Vehicle {
 
     @Override
     public double getPassengersRidingOffset() {
-        return super.getPassengersRidingOffset() + 1.6f;
+        return super.getPassengersRidingOffset() + 2.0f;
     }
 
     // Drop inventory contents instead of dropping itself.

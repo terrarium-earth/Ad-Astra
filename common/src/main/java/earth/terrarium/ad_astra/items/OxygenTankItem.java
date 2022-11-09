@@ -56,14 +56,10 @@ public class OxygenTankItem extends Item implements FluidContainingItem {
                 ItemStackHolder to = new ItemStackHolder(user.getInventory().getArmor(2));
 
                 var fromFluidHolder = FluidHooks.getItemFluidManager(from.getStack()).getFluidInTank(0);
-                var toFluidHolder = FluidHooks.getItemFluidManager(to.getStack());
-                // TODO: Botarium is still extracting, even when simulate is true.
-                long amountToExtract = toFluidHolder.insertFluid(to, FluidHooks.newFluidHolder(fromFluidHolder.getFluid(), fromFluidHolder.getFluidAmount(), fromFluidHolder.getCompound()), true);
 
-                FluidHooks.moveItemToItemFluid(from, to, FluidHooks.newFluidHolder(fromFluidHolder.getFluid(), amountToExtract, fromFluidHolder.getCompound()));
-                if (from.isDirty()) user.setItemInHand(hand, from.getStack());
-                if (to.isDirty()) {
-                    user.setItemSlot(EquipmentSlot.CHEST, to.getStack());
+                if (FluidHooks.moveItemToItemFluid(from, to, FluidHooks.newFluidHolder(fromFluidHolder.getFluid(), FluidHooks.buckets(1) / 1000, fromFluidHolder.getCompound())) > 0) {
+                    if (from.isDirty()) user.setItemInHand(hand, from.getStack());
+                    if (to.isDirty()) user.setItemSlot(EquipmentSlot.CHEST, to.getStack());
                     level.playSound(null, user.blockPosition(), SoundEvents.GENERIC_DRINK, SoundSource.PLAYERS, 1, 1);
                     return InteractionResultHolder.consume(tank);
                 }

@@ -24,7 +24,7 @@ public class GlobeModel extends Model {
         globe = root.getChild("globe");
     }
 
-    public static LayerDefinition getTexturedModelData() {
+    public static LayerDefinition createBodyLayer() {
         MeshDefinition modelData = new MeshDefinition();
         PartDefinition modelPartData = modelData.getRoot();
 

@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.client.renderer.entity.vehicles.rockets.tier_2;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import earth.terrarium.ad_astra.client.renderer.entity.vehicles.VehicleEntityRenderer;
+import earth.terrarium.ad_astra.client.renderer.entity.vehicles.VehicleRenderer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
@@ -19,6 +19,6 @@ public class RocketItemRendererTier2 extends BlockEntityWithoutLevelRenderer {
 
     @Override
     public void renderByItem(ItemStack stack, TransformType mode, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
-        VehicleEntityRenderer.renderRocketItem(RocketEntityRendererTier2.TEXTURE, RocketEntityModelTier2.LAYER_LOCATION, poseStack, buffer, packedLight, packedOverlay);
+        VehicleRenderer.renderRocketItem(RocketRendererTier2.TEXTURE, RocketModelTier2.LAYER_LOCATION, poseStack, buffer, packedLight, packedOverlay);
     }
 }

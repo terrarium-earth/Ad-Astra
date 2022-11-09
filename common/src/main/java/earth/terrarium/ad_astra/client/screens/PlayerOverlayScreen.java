@@ -3,7 +3,7 @@ package earth.terrarium.ad_astra.client.screens;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.ad_astra.client.screens.GuiUtil.FloatDrawableHelper;
+import earth.terrarium.ad_astra.client.screens.GuiUtil.FloatGuiComponent;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import earth.terrarium.ad_astra.util.ModUtils;
 import net.fabricmc.api.EnvType;
@@ -154,7 +154,7 @@ public class PlayerOverlayScreen {
 
             // Draw rocket indicator
             RenderSystem.setShaderTexture(0, ROCKET_PLANET_BAR_TEXTURE);
-            FloatDrawableHelper.drawTexture(poseStack, 4.0f, (screenHeight / 2.0f) + (103 / 2.0f) - rocketHeight, 0, 0, 8, 11, 8, 11);
+            FloatGuiComponent.drawTexture(poseStack, 4.0f, (screenHeight / 2.0f) + (103 / 2.0f) - rocketHeight, 0, 0, 8, 11, 8, 11);
         }
 
         // Warning screen
