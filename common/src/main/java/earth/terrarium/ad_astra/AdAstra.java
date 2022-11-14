@@ -1,9 +1,9 @@
 package earth.terrarium.ad_astra;
 
+import earth.terrarium.ad_astra.registry.ModFluidTypes;
 import earth.terrarium.ad_astra.config.AdAstraConfig;
 import earth.terrarium.ad_astra.data.Planet;
 import earth.terrarium.ad_astra.data.PlanetData;
-import earth.terrarium.ad_astra.mixin.BlockEntityTypeAccessor;
 import earth.terrarium.ad_astra.networking.NetworkHandling;
 import earth.terrarium.ad_astra.registry.*;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
@@ -14,8 +14,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.PreparableReloadListener;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,11 +33,13 @@ public class AdAstra {
     public static Set<ResourceKey<Level>> levelsWithOxygen = new HashSet<>();
 
     public static void init() {
+        // TODO: use a different config shedanial hates cloth config lol
         // Register config
         AutoConfig.register(AdAstraConfig.class, Toml4jConfigSerializer::new);
         CONFIG = AutoConfig.getConfigHolder(AdAstraConfig.class).getConfig();
 
         // Registry
+        ModFluidTypes.init();
         ModFluids.init();
         ModEntityTypes.init();
         ModBlocks.init();
@@ -64,20 +64,6 @@ public class AdAstra {
 
     public static void postInit() {
         PlatformUtils.registerStrippedLog(ModBlocks.GLACIAN_LOG.get(), ModBlocks.STRIPPED_GLACIAN_LOG.get());
-
-        // Add custom signs to the sign block entity registry
-        BlockEntityTypeAccessor signRegistry = ((BlockEntityTypeAccessor) BlockEntityType.SIGN);
-        Set<Block> signBlocks = new HashSet<>(signRegistry.getValidBlocks());
-        signBlocks.add(ModBlocks.GLACIAN_SIGN.get());
-        signBlocks.add(ModBlocks.GLACIAN_WALL_SIGN.get());
-        signRegistry.setValidBlocks(signBlocks);
-
-        // Add custom chests to the chest block entity registry
-        BlockEntityTypeAccessor chestRegistry = ((BlockEntityTypeAccessor) BlockEntityType.CHEST);
-        Set<Block> chestBlocks = new HashSet<>(chestRegistry.getValidBlocks());
-        chestBlocks.add(ModBlocks.AERONOS_CHEST.get());
-        chestBlocks.add(ModBlocks.STROPHAR_CHEST.get());
-        chestRegistry.setValidBlocks(chestBlocks);
-        ModEntityTypes.registerSpawnPlacements();
+        ModBlockEntities.postInit();
     }
 }

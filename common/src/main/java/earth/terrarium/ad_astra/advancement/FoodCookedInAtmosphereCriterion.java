@@ -6,7 +6,6 @@ import earth.terrarium.ad_astra.util.ModResourceLocation;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.level.block.Block;
 
 public class FoodCookedInAtmosphereCriterion extends SimpleCriterionTrigger<Conditions> {
     static final ResourceLocation ID = new ModResourceLocation("food_cooked_in_atmosphere");
@@ -29,10 +28,6 @@ public class FoodCookedInAtmosphereCriterion extends SimpleCriterionTrigger<Cond
 
         public Conditions(EntityPredicate.Composite player) {
             super(ID, player);
-        }
-
-        public static Conditions create(Block block, ItemPredicate.Builder itemPredicateBuilder, MinMaxBounds.Ints beeCountRange) {
-            return new Conditions(EntityPredicate.Composite.ANY);
         }
 
         @Override

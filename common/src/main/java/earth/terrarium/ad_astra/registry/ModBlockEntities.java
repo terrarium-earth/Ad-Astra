@@ -7,11 +7,15 @@ import earth.terrarium.ad_astra.blocks.launchpad.LaunchPadBlockEntity;
 import earth.terrarium.ad_astra.blocks.machines.entity.*;
 import earth.terrarium.ad_astra.blocks.pipes.CableBlockEntity;
 import earth.terrarium.ad_astra.blocks.pipes.FluidPipeBlockEntity;
+import earth.terrarium.ad_astra.mixin.BlockEntityTypeAccessor;
 import earth.terrarium.botarium.api.registry.RegistryHelpers;
 import net.minecraft.core.Registry;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Supplier;
 
 public class ModBlockEntities {
@@ -36,6 +40,23 @@ public class ModBlockEntities {
 
     private static <T extends BlockEntityType<B>, B extends BlockEntity> Supplier<T> register(String id, Supplier<T> object) {
         return ModRegistryHelpers.register(Registry.BLOCK_ENTITY_TYPE, id, object);
+    }
+
+    public static void postInit() {
+        // Add custom signs to the sign block entity registry
+        BlockEntityTypeAccessor signRegistry = ((BlockEntityTypeAccessor) BlockEntityType.SIGN);
+        Set<Block> signBlocks = new HashSet<>(signRegistry.getValidBlocks());
+        signBlocks.add(ModBlocks.GLACIAN_SIGN.get());
+        signBlocks.add(ModBlocks.GLACIAN_WALL_SIGN.get());
+        signRegistry.setValidBlocks(signBlocks);
+
+        // Add custom chests to the chest block entity registry
+        BlockEntityTypeAccessor chestRegistry = ((BlockEntityTypeAccessor) BlockEntityType.CHEST);
+        Set<Block> chestBlocks = new HashSet<>(chestRegistry.getValidBlocks());
+        chestBlocks.add(ModBlocks.AERONOS_CHEST.get());
+        chestBlocks.add(ModBlocks.STROPHAR_CHEST.get());
+        chestRegistry.setValidBlocks(chestBlocks);
+        ModEntityTypes.registerSpawnPlacements();
     }
 
     public static void init() {

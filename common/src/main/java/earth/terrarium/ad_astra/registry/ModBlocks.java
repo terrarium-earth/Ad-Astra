@@ -1,6 +1,5 @@
 package earth.terrarium.ad_astra.registry;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
 import dev.architectury.injectables.targets.ArchitecturyTarget;
 import earth.terrarium.ad_astra.blocks.door.SlidingDoorBlock;
 import earth.terrarium.ad_astra.blocks.flags.FlagBlock;
@@ -15,21 +14,16 @@ import earth.terrarium.ad_astra.blocks.torches.ExtinguishedTorchBlock;
 import earth.terrarium.ad_astra.blocks.torches.WallExtinguishedTorchBlock;
 import earth.terrarium.ad_astra.mixin.WoodTypeInvoker;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
-import net.minecraft.core.BlockPos;
+import earth.terrarium.botarium.api.registry.fluid.BotariumLiquidBlock;
 import net.minecraft.core.Registry;
 import net.minecraft.data.worldgen.features.TreeFeatures;
 import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.WoodType;
-import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
-import org.apache.commons.lang3.NotImplementedException;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -357,10 +351,10 @@ public class ModBlocks {
     public static final Supplier<Block> DEEPSLATE_OSTRUM_ORE = register("deepslate_ostrum_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)), true);
     public static final Supplier<Block> DEEPSLATE_CALORITE_ORE = register("deepslate_calorite_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)), true);
 
-    public static final Supplier<LiquidBlock> OIL_BLOCK = ModBlocks.register("oil", registerLiquid(ModFluids.OIL, BlockBehaviour.Properties.copy(Blocks.WATER)));
-    public static final Supplier<LiquidBlock> FUEL_BLOCK = ModBlocks.register("fuel", registerLiquid(ModFluids.FUEL, BlockBehaviour.Properties.copy(Blocks.WATER)));
-    public static final Supplier<LiquidBlock> CRYO_FUEL_BLOCK = ModBlocks.register("cryo_fuel", registerLiquid(ModFluids.CRYO_FUEL, BlockBehaviour.Properties.copy(Blocks.WATER), CryoFuelBlock::entityInside));
-    public static final Supplier<LiquidBlock> OXYGEN_BLOCK = ModBlocks.register("oxygen", registerLiquid(ModFluids.OXYGEN, BlockBehaviour.Properties.copy(Blocks.WATER)));
+    public static final Supplier<Block> OIL_BLOCK = ModBlocks.register("oil", () -> new BotariumLiquidBlock(ModFluidTypes.OIL_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
+    public static final Supplier<Block> FUEL_BLOCK = ModBlocks.register("fuel", () -> new BotariumLiquidBlock(ModFluidTypes.FUEL_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
+    public static final Supplier<Block> CRYO_FUEL_BLOCK = ModBlocks.register("cryo_fuel", () -> new CryoFuelBlock(ModFluidTypes.CRYO_FUEL_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
+    public static final Supplier<Block> OXYGEN_BLOCK = ModBlocks.register("oxygen", () -> new BotariumLiquidBlock(ModFluidTypes.OXYGEN_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
 
 
     private static <T extends Block> Supplier<T> register(String id, Supplier<T> object) {
@@ -376,19 +370,5 @@ public class ModBlocks {
             lootTableBlocks.add(block);
         }
         return block;
-    }
-
-    public static <T extends FlowingFluid> Supplier<LiquidBlock> registerLiquid(Supplier<T> fluid, BlockBehaviour.Properties properties) {
-        return registerLiquid(fluid, properties, (state, level, pos, entity) -> {});
-    }
-
-    @ExpectPlatform
-    public static <T extends FlowingFluid> Supplier<LiquidBlock> registerLiquid(Supplier<T> fluid, BlockBehaviour.Properties properties, InsideLiquid inside) {
-        throw new NotImplementedException();
-    }
-
-    @FunctionalInterface
-    public interface InsideLiquid {
-        void onEntityInside(BlockState state, Level level, BlockPos pos, Entity entity);
     }
 }

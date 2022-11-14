@@ -11,6 +11,7 @@ import earth.terrarium.ad_astra.items.vehicles.RocketItem;
 import earth.terrarium.ad_astra.items.vehicles.RoverItem;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
+import earth.terrarium.botarium.api.registry.fluid.FluidBucketItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.Registry;
@@ -23,7 +24,6 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.material.Fluid;
 import org.apache.commons.lang3.NotImplementedException;
 import org.jetbrains.annotations.Nullable;
 
@@ -55,10 +55,10 @@ public class ModItems {
     public static final Supplier<Item> LAUNCH_PAD = register("launch_pad", () -> new HoldableOverHeadBlockItem(ModBlocks.LAUNCH_PAD.get(), new Item.Properties().tab(ITEM_GROUP)));
 
     // Buckets
-    public static final Supplier<Item> OIL_BUCKET = register("oil_bucket", createBucketItem(ModFluids.OIL, new Item.Properties().tab(ITEM_GROUP).craftRemainder(Items.BUCKET).stacksTo(1)));
-    public static final Supplier<Item> FUEL_BUCKET = register("fuel_bucket", createBucketItem(ModFluids.FUEL, new Item.Properties().tab(ITEM_GROUP).craftRemainder(Items.BUCKET).stacksTo(1)));
-    public static final Supplier<Item> CRYO_FUEL_BUCKET = register("cryo_fuel_bucket", createBucketItem(ModFluids.CRYO_FUEL, new Item.Properties().tab(ITEM_GROUP).craftRemainder(Items.BUCKET).stacksTo(1)));
-    public static final Supplier<Item> OXYGEN_BUCKET = register("oxygen_bucket", createBucketItem(ModFluids.OXYGEN, new Item.Properties().tab(ITEM_GROUP).craftRemainder(Items.BUCKET).stacksTo(1)));
+    public static final Supplier<FluidBucketItem> OIL_BUCKET = register("oil_bucket", () -> new FluidBucketItem(ModFluidTypes.OIL_FLUID, new Item.Properties().tab(ITEM_GROUP).craftRemainder(Items.BUCKET).stacksTo(1)));
+    public static final Supplier<FluidBucketItem> FUEL_BUCKET = register("fuel_bucket", () -> new FluidBucketItem(ModFluidTypes.FUEL_FLUID, new Item.Properties().tab(ITEM_GROUP).craftRemainder(Items.BUCKET).stacksTo(1)));
+    public static final Supplier<FluidBucketItem> CRYO_FUEL_BUCKET = register("cryo_fuel_bucket", () -> new FluidBucketItem(ModFluidTypes.CRYO_FUEL_FLUID, new Item.Properties().tab(ITEM_GROUP).craftRemainder(Items.BUCKET).stacksTo(1)));
+    public static final Supplier<FluidBucketItem> OXYGEN_BUCKET = register("oxygen_bucket", () -> new FluidBucketItem(ModFluidTypes.OXYGEN_FLUID, new Item.Properties().tab(ITEM_GROUP).craftRemainder(Items.BUCKET).stacksTo(1)));
 
     // Spacesuit
     public static final Supplier<SpaceSuit> SPACE_HELMET = register("space_helmet", () -> new SpaceSuit(ModArmour.SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.HEAD, new Item.Properties().tab(ITEM_GROUP)));
@@ -618,11 +618,6 @@ public class ModItems {
 
     @ExpectPlatform
     public static Supplier<SpawnEggItem> createSpawnEggItem(Supplier<? extends EntityType<? extends Mob>> type, int primaryColor, int secondaryColor, Item.Properties settings) {
-        throw new NotImplementedException();
-    }
-
-    @ExpectPlatform
-    public static Supplier<Item> createBucketItem(Supplier<? extends Fluid> fluid, Item.Properties settings) {
         throw new NotImplementedException();
     }
 }

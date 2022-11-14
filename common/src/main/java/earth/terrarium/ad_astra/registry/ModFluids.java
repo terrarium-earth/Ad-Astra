@@ -1,9 +1,9 @@
 package earth.terrarium.ad_astra.registry;
 
-import dev.architectury.core.fluid.ArchitecturyFlowingFluid;
-import dev.architectury.registry.registries.DeferredRegister;
 import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.ad_astra.blocks.fluid.ModFluidAttributes;
+import earth.terrarium.botarium.api.registry.RegistryHolder;
+import earth.terrarium.botarium.api.registry.fluid.BotariumFlowingFluid;
+import earth.terrarium.botarium.api.registry.fluid.BotariumSourceFluid;
 import net.minecraft.core.Registry;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
@@ -11,27 +11,21 @@ import net.minecraft.world.level.material.Fluid;
 import java.util.function.Supplier;
 
 public class ModFluids {
+    public static final RegistryHolder<Fluid> FLUIDS = new RegistryHolder<>(Registry.FLUID, AdAstra.MOD_ID);
 
-    public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(AdAstra.MOD_ID, Registry.FLUID_REGISTRY);
+    public static final Supplier<FlowingFluid> OIL = FLUIDS.register("oil", () -> new BotariumSourceFluid(ModFluidTypes.OIL_FLUID));
+    public static final Supplier<FlowingFluid> FLOWING_OIL = FLUIDS.register("flowing_oil", () -> new BotariumFlowingFluid(ModFluidTypes.OIL_FLUID));
 
-    public static final Supplier<FlowingFluid> OIL = FLUIDS.register("oil", () -> new ArchitecturyFlowingFluid.Source(ModFluidAttributes.OIL_FLUID_ATTRIBUTES));
-    public static final Supplier<FlowingFluid> FLOWING_OIL = FLUIDS.register("flowing_oil", () -> new ArchitecturyFlowingFluid.Flowing(ModFluidAttributes.OIL_FLUID_ATTRIBUTES));
+    public static final Supplier<FlowingFluid> FUEL = FLUIDS.register("fuel", () -> new BotariumSourceFluid(ModFluidTypes.FUEL_FLUID));
+    public static final Supplier<FlowingFluid> FLOWING_FUEL = FLUIDS.register("flowing_fuel", () -> new BotariumFlowingFluid(ModFluidTypes.FUEL_FLUID));
 
-    public static final Supplier<FlowingFluid> FUEL = FLUIDS.register("fuel", ( ) -> new ArchitecturyFlowingFluid.Source(ModFluidAttributes.FUEL_FLUID_ATTRIBUTES));
-    public static final Supplier<FlowingFluid> FLOWING_FUEL = FLUIDS.register("flowing_fuel", () -> new ArchitecturyFlowingFluid.Flowing(ModFluidAttributes.FUEL_FLUID_ATTRIBUTES));
+    public static final Supplier<FlowingFluid> CRYO_FUEL = FLUIDS.register("cryo_fuel", () -> new BotariumSourceFluid(ModFluidTypes.CRYO_FUEL_FLUID));
+    public static final Supplier<FlowingFluid> FLOWING_CRYO_FUEL = FLUIDS.register("flowing_cryo_fuel", () -> new BotariumFlowingFluid(ModFluidTypes.CRYO_FUEL_FLUID));
 
-    public static final Supplier<FlowingFluid> CRYO_FUEL = FLUIDS.register("cryo_fuel", () -> new ArchitecturyFlowingFluid.Source(ModFluidAttributes.CRYO_FUEL_FLUID_ATTRIBUTES));
-    public static final Supplier<FlowingFluid> FLOWING_CRYO_FUEL = FLUIDS.register("flowing_cryo_fuel", () -> new ArchitecturyFlowingFluid.Flowing(ModFluidAttributes.CRYO_FUEL_FLUID_ATTRIBUTES));
-
-    public static final Supplier<FlowingFluid> OXYGEN = FLUIDS.register("oxygen", () -> new ArchitecturyFlowingFluid.Source(ModFluidAttributes.OXYGEN_FLUID_ATTRIBUTES));
-    public static final Supplier<FlowingFluid> FLOWING_OXYGEN = FLUIDS.register("flowing_oxygen", () -> new ArchitecturyFlowingFluid.Flowing(ModFluidAttributes.OXYGEN_FLUID_ATTRIBUTES));
-
-    // TODO: Use this instead of Arch
-    private static <T extends Fluid> Supplier<T> register(String id, Supplier<T> object) {
-        return ModRegistryHelpers.register(Registry.FLUID, id, object);
-    }
+    public static final Supplier<FlowingFluid> OXYGEN = FLUIDS.register("oxygen", () -> new BotariumSourceFluid(ModFluidTypes.OXYGEN_FLUID));
+    public static final Supplier<FlowingFluid> FLOWING_OXYGEN = FLUIDS.register("flowing_oxygen", () -> new BotariumFlowingFluid(ModFluidTypes.OXYGEN_FLUID));
 
     public static void init() {
-        FLUIDS.register();
+        FLUIDS.initialize();
     }
 }

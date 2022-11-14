@@ -1,6 +1,8 @@
 package earth.terrarium.ad_astra.blocks.fluid;
 
 import earth.terrarium.ad_astra.registry.ModDamageSource;
+import earth.terrarium.botarium.api.registry.fluid.BotariumLiquidBlock;
+import earth.terrarium.botarium.api.registry.fluid.FluidData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.Mth;
@@ -11,8 +13,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
-public class CryoFuelBlock {
-    public static void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+public class CryoFuelBlock extends BotariumLiquidBlock {
+
+    public CryoFuelBlock(FluidData data, Properties settings) {
+        super(data, settings);
+    }
+
+    @Override
+    public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
         if (entity instanceof LivingEntity) {
             entity.makeStuckInBlock(state, new Vec3(0.9f, 1.5, 0.9f));
             if (level.isClientSide) {
