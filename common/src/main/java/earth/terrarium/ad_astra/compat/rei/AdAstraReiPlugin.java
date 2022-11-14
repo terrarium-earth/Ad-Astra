@@ -27,7 +27,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 
 @Environment(EnvType.CLIENT)
-public class AdAstraClientPlugin implements REIClientPlugin {
+public class AdAstraReiPlugin implements REIClientPlugin {
 
 	@SuppressWarnings("removal")
 	@Override

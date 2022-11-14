@@ -357,10 +357,10 @@ public class ModBlocks {
     public static final Supplier<Block> DEEPSLATE_OSTRUM_ORE = register("deepslate_ostrum_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)), true);
     public static final Supplier<Block> DEEPSLATE_CALORITE_ORE = register("deepslate_calorite_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)), true);
 
-    public static final Supplier<LiquidBlock> OIL_BLOCK = ModBlocks.register("oil", registerLiquid(ModFluids.OIL_STILL, BlockBehaviour.Properties.copy(Blocks.WATER)));
-    public static final Supplier<LiquidBlock> FUEL_BLOCK = ModBlocks.register("fuel", registerLiquid(ModFluids.FUEL_STILL, BlockBehaviour.Properties.copy(Blocks.WATER)));
-    public static final Supplier<LiquidBlock> CRYO_FUEL_BLOCK = ModBlocks.register("cryo_fuel", registerLiquid(ModFluids.CRYO_FUEL_STILL, BlockBehaviour.Properties.copy(Blocks.WATER), CryoFuelBlock::entityInside));
-    public static final Supplier<LiquidBlock> OXYGEN_BLOCK = ModBlocks.register("oxygen", registerLiquid(ModFluids.OXYGEN_STILL, BlockBehaviour.Properties.copy(Blocks.WATER)));
+    public static final Supplier<LiquidBlock> OIL_BLOCK = ModBlocks.register("oil", registerLiquid(ModFluids.OIL, BlockBehaviour.Properties.copy(Blocks.WATER)));
+    public static final Supplier<LiquidBlock> FUEL_BLOCK = ModBlocks.register("fuel", registerLiquid(ModFluids.FUEL, BlockBehaviour.Properties.copy(Blocks.WATER)));
+    public static final Supplier<LiquidBlock> CRYO_FUEL_BLOCK = ModBlocks.register("cryo_fuel", registerLiquid(ModFluids.CRYO_FUEL, BlockBehaviour.Properties.copy(Blocks.WATER), CryoFuelBlock::entityInside));
+    public static final Supplier<LiquidBlock> OXYGEN_BLOCK = ModBlocks.register("oxygen", registerLiquid(ModFluids.OXYGEN, BlockBehaviour.Properties.copy(Blocks.WATER)));
 
 
     private static <T extends Block> Supplier<T> register(String id, Supplier<T> object) {

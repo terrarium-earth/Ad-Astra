@@ -24,7 +24,7 @@ public abstract class VehicleItem extends ModRenderedItem implements FluidContai
 
     @Override
     public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag context) {
-        long fuel = FluidHooks.toMillibuckets(FluidHooks.getItemFluidManager(stack).getFluidInTank(0).getFluidAmount());
+        long fuel = FluidHooks.getItemFluidManager(stack).getFluidInTank(0).getFluidAmount();
         tooltip.add(Component.translatable("tooltip.ad_astra.vehicle_fuel", FluidHooks.toMillibuckets(fuel), FluidHooks.toMillibuckets(this.getTankSize())).setStyle(Style.EMPTY.withColor(fuel > 0 ? ChatFormatting.GREEN : ChatFormatting.RED)));
     }
 

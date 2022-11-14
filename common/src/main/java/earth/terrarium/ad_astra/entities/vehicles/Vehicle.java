@@ -11,6 +11,7 @@ import earth.terrarium.botarium.api.Updatable;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import earth.terrarium.botarium.api.fluid.SimpleUpdatingFluidContainer;
+import earth.terrarium.botarium.api.item.ItemStackHolder;
 import earth.terrarium.botarium.api.menu.ExtraDataMenuProvider;
 import earth.terrarium.botarium.api.menu.MenuHooks;
 import net.minecraft.core.BlockPos;
@@ -235,16 +236,17 @@ public abstract class Vehicle extends Entity implements Updatable {
     public void drop() {
         if (getDropStack() != null && this.level.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS)) {
             BlockPos pos = this.blockPosition();
-            ItemStack dropStack = this.getDropStack();
+            ItemStackHolder dropStack = new ItemStackHolder(this.getDropStack());
 
             // Set the fluid and fluid type in the dropped item.
-            ((VehicleItem) dropStack.getItem()).setFluid(dropStack, getTankFluid());
-            CompoundTag nbt = dropStack.getOrCreateTag();
+
+            ((VehicleItem) dropStack.getStack().getItem()).insert(dropStack, this.getTankHolder());
+            CompoundTag nbt = dropStack.getStack().getOrCreateTag();
             // Set the inventory in the dropped item.
             nbt.put("Inventory", this.inventory.createTag());
 
             level.playSound(null, pos, SoundEvents.NETHERITE_BLOCK_BREAK, SoundSource.BLOCKS, 1, 1);
-            this.level.addFreshEntity(new ItemEntity(this.level, pos.getX(), pos.getY() + 0.5f, pos.getZ(), dropStack));
+            this.level.addFreshEntity(new ItemEntity(this.level, pos.getX(), pos.getY() + 0.5f, pos.getZ(), dropStack.getStack()));
         }
 
         if (!this.level.isClientSide) {

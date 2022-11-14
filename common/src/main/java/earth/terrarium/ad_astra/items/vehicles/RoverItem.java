@@ -3,6 +3,7 @@ package earth.terrarium.ad_astra.items.vehicles;
 import earth.terrarium.ad_astra.entities.vehicles.Rover;
 import earth.terrarium.ad_astra.registry.ModEntityTypes;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
+import earth.terrarium.botarium.api.fluid.PlatformFluidItemHandler;
 import earth.terrarium.botarium.api.item.ItemStackHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -57,12 +58,9 @@ public class RoverItem extends VehicleItem {
                 return InteractionResult.PASS;
             }
 
+            PlatformFluidItemHandler fluidItemHandler = FluidHooks.getItemFluidManager(roverStack.getStack());
+            rover.getTank().insertFluid(fluidItemHandler.extractFluid(roverStack, fluidItemHandler.getFluidInTank(0), false), false);
             CompoundTag nbt = roverStack.getStack().getOrCreateTag();
-            if (nbt.contains("Fluid")) {
-                if (!this.getFluid(roverStack.getStack()).equals(Fluids.EMPTY)) {
-                    this.insert(roverStack, rover.getTankHolder());
-                }
-            }
             if (nbt.contains("Inventory")) {
                 rover.getInventory().fromTag(nbt.getList("Inventory", Tag.TAG_COMPOUND));
             }

@@ -47,10 +47,13 @@ public class SkyUtil {
         RenderSystem.depthMask(false);
 
         RenderSystem.setShaderColor(f, g, h, 1.0f);
-        ((LevelRendererAccessor) levelRenderer).getSkyBuffer().drawWithShader(poseStack.last().pose(), projectionMatrix, RenderSystem.getShader());
-
+        VertexBuffer skyBuffer = ((LevelRendererAccessor) levelRenderer).getSkyBuffer();
+        skyBuffer.bind();
+        skyBuffer.drawWithShader(poseStack.last().pose(), projectionMatrix, RenderSystem.getShader());
+        VertexBuffer.unbind();
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
+
         renderColouring(colourType, bufferBuilder, poseStack, level, tickDelta, level.getTimeOfDay(tickDelta), sunsetAngle);
         RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);

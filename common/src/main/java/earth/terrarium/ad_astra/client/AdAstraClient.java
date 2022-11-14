@@ -77,10 +77,10 @@ public class AdAstraClient {
     }
 
     public static void onRegisterFluidRenderTypes(TriConsumer<RenderType, Fluid, Fluid> register) {
-        register.accept(RenderType.translucent(), ModFluids.FUEL_STILL.get(), ModFluids.FLOWING_FUEL.get());
-        register.accept(RenderType.translucent(), ModFluids.CRYO_FUEL_STILL.get(), ModFluids.FLOWING_CRYO_FUEL.get());
-        register.accept(RenderType.translucent(), ModFluids.OIL_STILL.get(), ModFluids.FLOWING_OIL.get());
-        register.accept(RenderType.translucent(), ModFluids.OXYGEN_STILL.get(), ModFluids.FLOWING_OXYGEN.get());
+        register.accept(RenderType.translucent(), ModFluids.FUEL.get(), ModFluids.FLOWING_FUEL.get());
+        register.accept(RenderType.translucent(), ModFluids.CRYO_FUEL.get(), ModFluids.FLOWING_CRYO_FUEL.get());
+        register.accept(RenderType.translucent(), ModFluids.OIL.get(), ModFluids.FLOWING_OIL.get());
+        register.accept(RenderType.translucent(), ModFluids.OXYGEN.get(), ModFluids.FLOWING_OXYGEN.get());
     }
 
     public static void onRegisterItemRenderers(BiConsumer<ItemLike, BlockEntityWithoutLevelRenderer> register) {

@@ -55,10 +55,10 @@ public class ModItems {
     public static final Supplier<Item> LAUNCH_PAD = register("launch_pad", () -> new HoldableOverHeadBlockItem(ModBlocks.LAUNCH_PAD.get(), new Item.Properties().tab(ITEM_GROUP)));
 
     // Buckets
-    public static final Supplier<Item> OIL_BUCKET = register("oil_bucket", createBucketItem(ModFluids.OIL_STILL, new Item.Properties().tab(ITEM_GROUP).craftRemainder(Items.BUCKET).stacksTo(1)));
-    public static final Supplier<Item> FUEL_BUCKET = register("fuel_bucket", createBucketItem(ModFluids.FUEL_STILL, new Item.Properties().tab(ITEM_GROUP).craftRemainder(Items.BUCKET).stacksTo(1)));
-    public static final Supplier<Item> CRYO_FUEL_BUCKET = register("cryo_fuel_bucket", createBucketItem(ModFluids.CRYO_FUEL_STILL, new Item.Properties().tab(ITEM_GROUP).craftRemainder(Items.BUCKET).stacksTo(1)));
-    public static final Supplier<Item> OXYGEN_BUCKET = register("oxygen_bucket", createBucketItem(ModFluids.OXYGEN_STILL, new Item.Properties().tab(ITEM_GROUP).craftRemainder(Items.BUCKET).stacksTo(1)));
+    public static final Supplier<Item> OIL_BUCKET = register("oil_bucket", createBucketItem(ModFluids.OIL, new Item.Properties().tab(ITEM_GROUP).craftRemainder(Items.BUCKET).stacksTo(1)));
+    public static final Supplier<Item> FUEL_BUCKET = register("fuel_bucket", createBucketItem(ModFluids.FUEL, new Item.Properties().tab(ITEM_GROUP).craftRemainder(Items.BUCKET).stacksTo(1)));
+    public static final Supplier<Item> CRYO_FUEL_BUCKET = register("cryo_fuel_bucket", createBucketItem(ModFluids.CRYO_FUEL, new Item.Properties().tab(ITEM_GROUP).craftRemainder(Items.BUCKET).stacksTo(1)));
+    public static final Supplier<Item> OXYGEN_BUCKET = register("oxygen_bucket", createBucketItem(ModFluids.OXYGEN, new Item.Properties().tab(ITEM_GROUP).craftRemainder(Items.BUCKET).stacksTo(1)));
 
     // Spacesuit
     public static final Supplier<SpaceSuit> SPACE_HELMET = register("space_helmet", () -> new SpaceSuit(ModArmour.SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.HEAD, new Item.Properties().tab(ITEM_GROUP)));

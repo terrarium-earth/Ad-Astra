@@ -32,7 +32,7 @@ public class OxygenTankItem extends Item implements FluidContainingItem {
 
     public static ItemStack createOxygenatedTank() {
         ItemStackHolder oxygenTank = new ItemStackHolder(ModItems.OXYGEN_TANK.get().getDefaultInstance());
-        ((OxygenTankItem) oxygenTank.getStack().getItem()).insert(oxygenTank, FluidHooks.newFluidHolder(ModFluids.OXYGEN_STILL.get(), AdAstra.CONFIG.general.oxygenTankSize, null));
+        ((OxygenTankItem) oxygenTank.getStack().getItem()).insert(oxygenTank, FluidHooks.newFluidHolder(ModFluids.OXYGEN.get(), Long.MAX_VALUE, null));
 
         return oxygenTank.getStack();
     }
@@ -57,7 +57,7 @@ public class OxygenTankItem extends Item implements FluidContainingItem {
 
                 var fromFluidHolder = FluidHooks.getItemFluidManager(from.getStack()).getFluidInTank(0);
 
-                if (FluidHooks.moveItemToItemFluid(from, to, FluidHooks.newFluidHolder(fromFluidHolder.getFluid(), FluidHooks.buckets(1) / 1000, fromFluidHolder.getCompound())) > 0) {
+                if (FluidHooks.moveItemToItemFluid(from, to, fromFluidHolder) > 0) {
                     if (from.isDirty()) user.setItemInHand(hand, from.getStack());
                     if (to.isDirty()) user.setItemSlot(EquipmentSlot.CHEST, to.getStack());
                     level.playSound(null, user.blockPosition(), SoundEvents.GENERIC_DRINK, SoundSource.PLAYERS, 1, 1);

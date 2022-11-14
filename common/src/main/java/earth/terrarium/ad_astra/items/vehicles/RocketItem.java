@@ -4,6 +4,7 @@ import earth.terrarium.ad_astra.blocks.door.LocationState;
 import earth.terrarium.ad_astra.blocks.launchpad.LaunchPad;
 import earth.terrarium.ad_astra.entities.vehicles.*;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
+import earth.terrarium.botarium.api.fluid.PlatformFluidItemHandler;
 import earth.terrarium.botarium.api.item.ItemStackHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -17,7 +18,6 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.AABB;
 
 import java.util.List;
@@ -79,12 +79,9 @@ public class RocketItem<T extends Rocket> extends VehicleItem {
                                 return InteractionResult.PASS;
                             }
 
+                            PlatformFluidItemHandler fluidItemHandler = FluidHooks.getItemFluidManager(rocketStack.getStack());
+                            rocketEntity.getTank().insertFluid(fluidItemHandler.extractFluid(rocketStack, fluidItemHandler.getFluidInTank(0), false), false);
                             CompoundTag nbt = rocketStack.getStack().getOrCreateTag();
-                            if (nbt.contains("Fluid")) {
-                                if (!this.getFluid(rocketStack.getStack()).equals(Fluids.EMPTY)) {
-                                    this.insert(rocketStack, rocketEntity.getTankHolder());
-                                }
-                            }
                             if (nbt.contains("Inventory")) {
                                 rocketEntity.getInventory().fromTag(nbt.getList("Inventory", Tag.TAG_COMPOUND));
                             }

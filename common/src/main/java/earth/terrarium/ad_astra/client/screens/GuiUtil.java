@@ -42,6 +42,8 @@ public class GuiUtil {
     public static final int ENERGY_HEIGHT = 46;
     public static final int FLUID_TANK_WIDTH = 14;
     public static final int FLUID_TANK_HEIGHT = 48;
+    public static final int ARROW_WIDTH = 24;
+    public static final int ARROW_HEIGHT = 17;
 
     public static final ResourceLocation FIRE_TEXTURE = new ModResourceLocation("textures/gui/fire_on.png");
     public static final ResourceLocation SNOWFLAKE_TEXTURE = new ModResourceLocation("textures/gui/snowflake.png");
@@ -49,6 +51,7 @@ public class GuiUtil {
     public static final ResourceLocation HAMMER_TEXTURE = new ModResourceLocation("textures/gui/hammer.png");
     public static final ResourceLocation ENERGY_TEXTURE = new ModResourceLocation("textures/gui/energy_full.png");
     public static final ResourceLocation FLUID_TANK_TEXTURE = new ModResourceLocation("textures/gui/fluid_tank.png");
+    public static final ResourceLocation ARROW_TEXTURE = new ModResourceLocation("textures/gui/arrow.png");
 
     public static boolean isHovering(Rectangle bounds, double x, double y) {
         double left = bounds.getX();
@@ -167,12 +170,9 @@ public class GuiUtil {
         screen.renderTooltip(poseStack, Component.translatable("gauge_text.ad_astra.storage", Mth.clamp(energy, 0, energyCapacity), energyCapacity).setStyle(Style.EMPTY.withColor(ChatFormatting.GOLD)), mouseX, mouseY);
     }
 
-    public static void drawTankTooltip(Screen screen, PoseStack poseStack, FluidHolder tank, long capacity, int mouseX, int mouseY) {
-        drawTankTooltip(screen, poseStack, tank.getFluidAmount(), capacity, tank.getFluid(), mouseX, mouseY);
-    }
 
-    public static void drawTankTooltip(Screen screen, PoseStack poseStack, long amount, long capacity, Fluid fluid, int mouseX, int mouseY) {
-        screen.renderTooltip(poseStack, Component.translatable("gauge_text.ad_astra.liquid_storage", FluidHooks.toMillibuckets(amount), FluidHooks.toMillibuckets(capacity)).setStyle(Style.EMPTY.withColor(ChatFormatting.GOLD)).append(Component.nullToEmpty(", ")).append(GuiUtil.getFluidTranslation(fluid)), mouseX, mouseY);
+    public static void drawTankTooltip(Screen screen, PoseStack poseStack, FluidHolder tank, long capacity, int mouseX, int mouseY) {
+        screen.renderTooltip(poseStack, Component.translatable("gauge_text.ad_astra.liquid_storage", FluidHooks.toMillibuckets(tank.getFluidAmount()), FluidHooks.toMillibuckets(capacity)).setStyle(Style.EMPTY.withColor(ChatFormatting.GOLD)).append(Component.nullToEmpty(", ")).append(GuiUtil.getFluidTranslation(tank.getFluid())), mouseX, mouseY);
     }
 
     public static class FloatGuiComponent {

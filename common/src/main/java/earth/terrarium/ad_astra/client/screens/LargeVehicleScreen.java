@@ -38,7 +38,7 @@ public class LargeVehicleScreen extends AbstractVehicleScreen<LargeVehicleMenu> 
         super.render(poseStack, mouseX, mouseY, delta);
 
         if (GuiUtil.isHovering(this.getInputTankBounds(), mouseX, mouseY)) {
-            GuiUtil.drawTankTooltip(this, poseStack, this.menu.getFluids().get(0).getFluidAmount(), this.vehicle.getTankSize(), this.menu.getFluids().get(0).getFluid(), mouseX, mouseY);
+            GuiUtil.drawTankTooltip(this, poseStack, this.menu.getFluids().get(0), this.vehicle.getTankSize(), mouseX, mouseY);
         }
     }
 

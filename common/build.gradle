@@ -4,7 +4,7 @@ architectury {
 
 loom {
     accessWidenerPath = file("src/main/resources/ad_astra.accesswidener")
-    enableTransitiveAccessWideners = true
+//    enableTransitiveAccessWideners = true
 //    interfaceInjection {
 //        enableDependencyInterfaceInjection = true
 //    }

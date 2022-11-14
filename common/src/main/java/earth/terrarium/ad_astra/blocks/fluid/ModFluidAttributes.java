@@ -7,7 +7,7 @@ import earth.terrarium.ad_astra.registry.ModFluids;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 
 public class ModFluidAttributes {
-    public static final ArchitecturyFluidAttributes OIL_FLUID_ATTRIBUTES = SimpleArchitecturyFluidAttributes.of(ModFluids.FLOWING_OIL, ModFluids.OIL_STILL)
+    public static final ArchitecturyFluidAttributes OIL_FLUID_ATTRIBUTES = SimpleArchitecturyFluidAttributes.of(ModFluids.FLOWING_OIL, ModFluids.OIL)
 //            .block(ModBlocks.OIL_BLOCK)
 //            .bucketItem(ModItems.OIL_BUCKET)
             .density(2000)
@@ -17,7 +17,7 @@ public class ModFluidAttributes {
             .overlayTexture(new ModResourceLocation("block/oil_overlay"));
 
 
-    public static final ArchitecturyFluidAttributes FUEL_FLUID_ATTRIBUTES = SimpleArchitecturyFluidAttributes.of(ModFluids.FLOWING_FUEL, ModFluids.FUEL_STILL)
+    public static final ArchitecturyFluidAttributes FUEL_FLUID_ATTRIBUTES = SimpleArchitecturyFluidAttributes.of(ModFluids.FLOWING_FUEL, ModFluids.FUEL)
 //            .block(ModBlocks.FUEL_BLOCK)
 //            .bucketItem(ModItems.FUEL_BUCKET)
             .density(1500)
@@ -26,7 +26,7 @@ public class ModFluidAttributes {
             .flowingTexture(new ModResourceLocation("block/fluid_fuel_flow"))
             .overlayTexture(new ModResourceLocation("block/fuel_overlay"));
 
-    public static final ArchitecturyFluidAttributes CRYO_FUEL_FLUID_ATTRIBUTES = SimpleArchitecturyFluidAttributes.of(ModFluids.FLOWING_CRYO_FUEL, ModFluids.CRYO_FUEL_STILL)
+    public static final ArchitecturyFluidAttributes CRYO_FUEL_FLUID_ATTRIBUTES = SimpleArchitecturyFluidAttributes.of(ModFluids.FLOWING_CRYO_FUEL, ModFluids.CRYO_FUEL)
 //            .block(ModBlocks.CRYO_FUEL_BLOCK)
 //            .bucketItem(ModItems.CRYO_FUEL_BUCKET)
             .density(71)
@@ -36,7 +36,7 @@ public class ModFluidAttributes {
             .flowingTexture(new ModResourceLocation("block/fluid_cryo_fuel_flow"))
             .overlayTexture(new ModResourceLocation("block/cryo_fuel_overlay"));
 
-    public static final ArchitecturyFluidAttributes OXYGEN_FLUID_ATTRIBUTES = SimpleArchitecturyFluidAttributes.of(ModFluids.FLOWING_OXYGEN, ModFluids.OXYGEN_STILL)
+    public static final ArchitecturyFluidAttributes OXYGEN_FLUID_ATTRIBUTES = SimpleArchitecturyFluidAttributes.of(ModFluids.FLOWING_OXYGEN, ModFluids.OXYGEN)
 //            .block(ModBlocks.OXYGEN_BLOCK)
 //            .bucketItem(ModItems.OXYGEN_BUCKET)
             .density(-1)
