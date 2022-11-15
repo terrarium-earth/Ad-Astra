@@ -7,7 +7,7 @@ import earth.terrarium.botarium.api.registry.fluid.FluidData;
 import earth.terrarium.botarium.api.registry.fluid.FluidProperties;
 import earth.terrarium.botarium.api.registry.fluid.FluidRegistry;
 
-public class ModFluidTypes {
+public class ModFluidProperties {
     public static final FluidRegistry FLUID_TYPES = new FluidRegistry(AdAstra.MOD_ID);
 
     public static final FluidData OIL_FLUID = FLUID_TYPES.register("oil", FluidProperties.create()
@@ -40,6 +40,7 @@ public class ModFluidTypes {
             .flowing(new ModResourceLocation("block/fluid_oxygen_still"))
             .overlay(new ModResourceLocation("block/fluid_oxygen_still"))
             .viscosity(0)
+            .disablePlacing()
             .density(-1)
     );
 

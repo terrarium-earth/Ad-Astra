@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra;
 
-import earth.terrarium.ad_astra.registry.ModFluidTypes;
+import earth.terrarium.ad_astra.registry.ModFluidProperties;
 import earth.terrarium.ad_astra.config.AdAstraConfig;
 import earth.terrarium.ad_astra.data.Planet;
 import earth.terrarium.ad_astra.data.PlanetData;
@@ -39,7 +39,7 @@ public class AdAstra {
         CONFIG = AutoConfig.getConfigHolder(AdAstraConfig.class).getConfig();
 
         // Registry
-        ModFluidTypes.init();
+        ModFluidProperties.init();
         ModFluids.init();
         ModEntityTypes.init();
         ModBlocks.init();

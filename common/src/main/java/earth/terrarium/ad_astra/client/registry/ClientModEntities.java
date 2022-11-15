@@ -19,6 +19,7 @@ import earth.terrarium.ad_astra.client.renderer.entity.vehicles.rockets.tier_4.R
 import earth.terrarium.ad_astra.client.renderer.entity.vehicles.rover.RoverModel;
 import earth.terrarium.ad_astra.client.renderer.entity.vehicles.rover.RoverRenderer;
 import earth.terrarium.ad_astra.registry.ModEntityTypes;
+import earth.terrarium.botarium.client.ClientHooks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -34,27 +35,27 @@ import java.util.function.Supplier;
 @Environment(EnvType.CLIENT)
 public class ClientModEntities {
 
-    public static void registerEntityRenderers(EntityRendererRegistry registry) {
-        registry.register(ModEntityTypes.LUNARIAN, LunarianRenderer::new);
-        registry.register(ModEntityTypes.CORRUPTED_LUNARIAN, CorruptedLunarianRenderer::new);
-        registry.register(ModEntityTypes.STAR_CRAWLER, StarCrawlerRenderer::new);
-        registry.register(ModEntityTypes.MARTIAN_RAPTOR, MartianRaptorRenderer::new);
-        registry.register(ModEntityTypes.PYGRO, PygroRenderer::new);
-        registry.register(ModEntityTypes.ZOMBIFIED_PYGRO, PygroRenderer::new);
-        registry.register(ModEntityTypes.PYGRO_BRUTE, PygroRenderer::new);
-        registry.register(ModEntityTypes.MOGLER, MoglerRenderer::new);
-        registry.register(ModEntityTypes.ZOMBIFIED_MOGLER, ZombifiedMoglerRenderer::new);
-        registry.register(ModEntityTypes.SULFUR_CREEPER, SulfurCreeperRenderer::new);
-        registry.register(ModEntityTypes.LUNARIAN_WANDERING_TRADER, LunarianWanderingTraderRenderer::new);
-        registry.register(ModEntityTypes.GLACIAN_RAM, GlacianRamRenderer::new);
-        registry.register(ModEntityTypes.TIER_1_ROCKET, RocketRendererTier1::new);
-        registry.register(ModEntityTypes.TIER_2_ROCKET, RocketRendererTier2::new);
-        registry.register(ModEntityTypes.TIER_3_ROCKET, RocketRendererTier3::new);
-        registry.register(ModEntityTypes.TIER_4_ROCKET, RocketRendererTier4::new);
-        registry.register(ModEntityTypes.TIER_1_ROVER, RoverRenderer::new);
-        registry.register(ModEntityTypes.LANDER, LanderRenderer::new);
-        registry.register(ModEntityTypes.SPACE_PAINTING, PaintingRenderer::new);
-        registry.register(ModEntityTypes.ICE_SPIT, ThrownItemRenderer::new);
+    public static void registerEntityRenderers() {
+        ClientHooks.registerEntityRenderer(ModEntityTypes.LUNARIAN, LunarianRenderer::new);
+        ClientHooks.registerEntityRenderer(ModEntityTypes.CORRUPTED_LUNARIAN, CorruptedLunarianRenderer::new);
+        ClientHooks.registerEntityRenderer(ModEntityTypes.STAR_CRAWLER, StarCrawlerRenderer::new);
+        ClientHooks.registerEntityRenderer(ModEntityTypes.MARTIAN_RAPTOR, MartianRaptorRenderer::new);
+        ClientHooks.registerEntityRenderer(ModEntityTypes.PYGRO, PygroRenderer::new);
+        ClientHooks.registerEntityRenderer(ModEntityTypes.ZOMBIFIED_PYGRO, PygroRenderer::new);
+        ClientHooks.registerEntityRenderer(ModEntityTypes.PYGRO_BRUTE, PygroBruteRenderer::new);
+        ClientHooks.registerEntityRenderer(ModEntityTypes.MOGLER, MoglerRenderer::new);
+        ClientHooks.registerEntityRenderer(ModEntityTypes.ZOMBIFIED_MOGLER, ZombifiedMoglerRenderer::new);
+        ClientHooks.registerEntityRenderer(ModEntityTypes.SULFUR_CREEPER, SulfurCreeperRenderer::new);
+        ClientHooks.registerEntityRenderer(ModEntityTypes.LUNARIAN_WANDERING_TRADER, LunarianWanderingTraderRenderer::new);
+        ClientHooks.registerEntityRenderer(ModEntityTypes.GLACIAN_RAM, GlacianRamRenderer::new);
+        ClientHooks.registerEntityRenderer(ModEntityTypes.TIER_1_ROCKET, RocketRendererTier1::new);
+        ClientHooks.registerEntityRenderer(ModEntityTypes.TIER_2_ROCKET, RocketRendererTier2::new);
+        ClientHooks.registerEntityRenderer(ModEntityTypes.TIER_3_ROCKET, RocketRendererTier3::new);
+        ClientHooks.registerEntityRenderer(ModEntityTypes.TIER_4_ROCKET, RocketRendererTier4::new);
+        ClientHooks.registerEntityRenderer(ModEntityTypes.TIER_1_ROVER, RoverRenderer::new);
+        ClientHooks.registerEntityRenderer(ModEntityTypes.LANDER, LanderRenderer::new);
+        ClientHooks.registerEntityRenderer(ModEntityTypes.SPACE_PAINTING, PaintingRenderer::new);
+        ClientHooks.registerEntityRenderer(ModEntityTypes.ICE_SPIT, ThrownItemRenderer::new);
     }
 
     public static void registerEntityLayers(LayerDefinitionRegistry registry) {
@@ -64,6 +65,7 @@ public class ClientModEntities {
         registry.register(StarCrawlerModel.LAYER_LOCATION, StarCrawlerModel::createBodyLayer);
         registry.register(MartianRaptorModel.LAYER_LOCATION, MartianRaptorModel::createBodyLayer);
         registry.register(PygroModel.LAYER_LOCATION, PygroModel::createBodyLayer);
+        registry.register(PygroBruteModel.LAYER_LOCATION, PygroBruteModel::createBodyLayer);
         registry.register(MoglerModel.LAYER_LOCATION, MoglerModel::createBodyLayer);
         registry.register(SulfurCreeperModel.LAYER_LOCATION, SulfurCreeperModel::createBodyLayer);
         registry.register(GlacianRamModel.LAYER_LOCATION, GlacianRamModel::createBodyLayer);

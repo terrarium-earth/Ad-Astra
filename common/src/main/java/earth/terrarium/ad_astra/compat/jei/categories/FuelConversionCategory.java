@@ -5,7 +5,6 @@ import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.screens.GuiUtil;
 import earth.terrarium.ad_astra.compat.jei.EnergyBarDrawable;
 import earth.terrarium.ad_astra.compat.jei.FluidBarDrawable;
-import earth.terrarium.ad_astra.recipes.CompressingRecipe;
 import earth.terrarium.ad_astra.recipes.FluidConversionRecipe;
 import earth.terrarium.ad_astra.registry.ModItems;
 import earth.terrarium.ad_astra.util.ModResourceLocation;

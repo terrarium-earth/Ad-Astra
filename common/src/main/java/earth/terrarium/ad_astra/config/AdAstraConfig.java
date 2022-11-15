@@ -155,7 +155,7 @@ public class AdAstraConfig implements ConfigData {
     public static class OxygenDistributorConfig {
         public final long maxEnergy = 20000L;
         public final long fluidConversionEnergyPerTick = 5L;
-        public final long tankSize = FluidHooks.buckets(3);
+        public final long tankSize = FluidHooks.buckets(6);
         @ConfigEntry.Gui.Tooltip(count = 5)
         @ConfigEntry.BoundedDiscrete(min = 1, max = 50000)
         public final int maxBlockChecks = 2000;

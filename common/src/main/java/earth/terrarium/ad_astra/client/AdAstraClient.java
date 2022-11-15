@@ -2,6 +2,7 @@ package earth.terrarium.ad_astra.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import earth.terrarium.ad_astra.client.registry.ClientModEntities;
 import earth.terrarium.ad_astra.client.registry.ClientModKeybindings;
 import earth.terrarium.ad_astra.client.registry.ClientModScreens;
 import earth.terrarium.ad_astra.client.renderer.armour.ArmourRenderers;
@@ -61,6 +62,7 @@ public class AdAstraClient {
         ClientModScreens.init();
         ClientModKeybindings.init();
         ArmourRenderers.init();
+        ClientModEntities.registerEntityRenderers();
 
         // Sign textures
         Sheets.SIGN_MATERIALS.put(ModBlocks.GLACIAN, new Material(Sheets.SIGN_SHEET, new ModResourceLocation("entity/signs/glacian")));

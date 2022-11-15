@@ -21,86 +21,63 @@ public class MoglerModel<T extends Entity> extends EntityModel<T> {
 
     private final ModelPart body;
     private final ModelPart head;
-    private final ModelPart leg1;
-    private final ModelPart leg2;
+    private final ModelPart right_front_leg;
+    private final ModelPart left_front_leg;
     private final ModelPart leg3;
-    private final ModelPart leg4;
+    private final ModelPart left_back_leg;
 
     public MoglerModel(ModelPart root) {
         this.body = root.getChild("body");
         this.head = root.getChild("head");
-        this.leg1 = root.getChild("leg1");
-        this.leg2 = root.getChild("leg2");
-        this.leg3 = root.getChild("leg3");
-        this.leg4 = root.getChild("leg4");
+        this.right_front_leg = root.getChild("right_front_leg");
+        this.left_front_leg = root.getChild("left_front_leg");
+        this.leg3 = root.getChild("right_back_leg");
+        this.left_back_leg = root.getChild("left_back_leg");
     }
 
+    @SuppressWarnings("unused")
     public static LayerDefinition createBodyLayer() {
-        MeshDefinition modelData = new MeshDefinition();
-        PartDefinition modelPartData = modelData.getRoot();
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
 
-        PartDefinition body = modelPartData.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 0).addBox(-8.0f, -15.0f, -13.0f, 16.0f, 9.0f, 32.0f, new CubeDeformation(0.0f)), PartPose.offset(0.0f, 24.0f, 0.0f));
+        PartDefinition head = partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(97, 68).addBox(-9.0F, -7.3501F, -12.2827F, 18.0F, 6.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 10.1899F, -17.7795F));
 
-        // cube_r1.
-        body.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(85, 30).addBox(-9.0f, -20.0f, 12.0f, 18.0f, 9.0f, 11.0f, new CubeDeformation(0.0f)), PartPose.offsetAndRotation(0.0f, 0.0f, 0.0f, -0.2182f, 0.0f, 0.0f));
+        PartDefinition cube_r1 = head.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(57, 46).addBox(-9.0F, -25.0F, -8.0F, 18.0F, 11.0F, 11.0F, new CubeDeformation(0.0F))
+                .texOffs(59, 106).addBox(-8.0F, -14.0F, 2.0F, 16.0F, 6.0F, 4.0F, new CubeDeformation(0.0F))
+                .texOffs(56, 68).addBox(-8.0F, -14.0F, -7.0F, 16.0F, 6.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 10.8101F, -11.2205F, -0.5236F, 0.0F, 0.0F));
 
-        // cube_r2.
-        body.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(0, 41).addBox(-10.0f, -18.0f, 5.0f, 20.0f, 9.0f, 16.0f, new CubeDeformation(0.0f)), PartPose.offsetAndRotation(0.0f, 0.0f, 0.0f, 0.1309f, 0.0f, 0.0f));
+        PartDefinition cube_r2 = head.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(0, 102).mirror().addBox(-2.0F, -2.5F, -2.5F, 7.0F, 5.0F, 9.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(4.4912F, 4.0149F, -10.184F, -0.4164F, -0.3272F, -0.6284F));
 
-        // cube_r3.
-        body.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(58, 52).addBox(-11.0f, -18.0f, 2.0f, 22.0f, 9.0f, 14.0f, new CubeDeformation(0.0f)), PartPose.offsetAndRotation(0.0f, 0.0f, 0.0f, 0.3927f, 0.0f, 0.0f));
+        PartDefinition cube_r3 = head.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(0, 102).addBox(-5.0F, -2.5F, -2.5F, 7.0F, 5.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-4.4912F, 4.0149F, -10.184F, -0.4164F, 0.3272F, 0.6284F));
 
-        // cube_r4.
-        body.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(64, 0).addBox(-12.0f, -22.0f, -4.0f, 24.0f, 11.0f, 11.0f, new CubeDeformation(0.0f)), PartPose.offsetAndRotation(0.0f, 0.0f, 0.0f, 0.5236f, 0.0f, 0.0f));
+        PartDefinition body = partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 0).addBox(-5.0F, -0.4541F, -13.2739F, 10.0F, 6.0F, 28.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 11.4541F, -6.7261F));
 
-        PartDefinition head = modelPartData.addOrReplaceChild("head", CubeListBuilder.create(), PartPose.offset(0.0f, 24.0f, 0.0f));
+        PartDefinition cube_r4 = body.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(0, 34).addBox(-11.0F, 0.5F, -13.0F, 22.0F, 11.0F, 12.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -1.1781F, 0.0F, 0.0F));
 
-        // cube_r5.
-        head.addOrReplaceChild("cube_r5", CubeListBuilder.create().texOffs(0, 66).addBox(-10.0f, -26.0f, -3.0f, 20.0f, 11.0f, 11.0f, new CubeDeformation(0.0f)), PartPose.offsetAndRotation(0.0f, 0.0f, 0.0f, 0.829f, 0.0f, 0.0f));
+        PartDefinition cube_r5 = body.addOrReplaceChild("cube_r5", CubeListBuilder.create().texOffs(48, 0).addBox(-10.0F, -7.5F, -10.875F, 20.0F, 13.0F, 12.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -1.3963F, 0.0F, 0.0F));
 
-        // cube_r6.
-        head.addOrReplaceChild("cube_r6", CubeListBuilder.create().texOffs(0, 22).addBox(-7.5f, -8.5f, -1.75f, 15.0f, 8.0f, 0.0f, new CubeDeformation(0.0f)), PartPose.offsetAndRotation(0.0f, -11.5f, -20.0f, 0.0f, 0.0f, 0.0f));
+        PartDefinition cube_r6 = body.addOrReplaceChild("cube_r6", CubeListBuilder.create().texOffs(0, 57).addBox(-9.0F, -15.5F, -8.0F, 18.0F, 14.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -1.4835F, 0.0F, 0.0F));
 
-        // cube_r7.
-        head.addOrReplaceChild("cube_r7", CubeListBuilder.create().texOffs(62, 75).addBox(-9.0f, -8.5f, -1.75f, 18.0f, 13.0f, 11.0f, new CubeDeformation(0.0f)), PartPose.offsetAndRotation(0.0f, -11.5f, -20.0f, -0.6545f, 0.0f, 0.0f));
+        PartDefinition cube_r7 = body.addOrReplaceChild("cube_r7", CubeListBuilder.create().texOffs(66, 25).addBox(-8.0F, -20.5F, -8.0F, 16.0F, 10.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -1.8326F, 0.0F, 0.0F));
 
-        PartDefinition jaw2 = head.addOrReplaceChild("jaw2", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0f, -11.5f, -20.0f, -0.6545f, 0.0f, 0.0f));
+        PartDefinition right_back_leg = partdefinition.addOrReplaceChild("right_back_leg", CubeListBuilder.create().texOffs(36, 83).addBox(-4.5F, -1.0F, -4.5F, 9.0F, 12.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offset(-7.5F, 13.0F, 2.5F));
 
-        // cube_r8.
-        jaw2.addOrReplaceChild("cube_r8", CubeListBuilder.create().texOffs(96, 99).addBox(5.25f, -1.5f, -0.75f, 5.0f, 8.0f, 9.0f, new CubeDeformation(0.0f)), PartPose.offsetAndRotation(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.5672f));
+        PartDefinition right_front_leg = partdefinition.addOrReplaceChild("right_front_leg", CubeListBuilder.create().texOffs(99, 95).addBox(-4.5F, -1.0F, -4.5F, 9.0F, 12.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offset(-7.5F, 13.0F, -16.5F));
 
-        PartDefinition jaw1 = head.addOrReplaceChild("jaw1", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0f, -11.5f, -20.0f, -0.6545f, 0.0f, 0.0f));
+        PartDefinition left_back_leg = partdefinition.addOrReplaceChild("left_back_leg", CubeListBuilder.create().texOffs(0, 81).addBox(-4.5F, -1.0F, -4.5F, 9.0F, 12.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offset(7.5F, 13.0F, 2.5F));
 
-        // cube_r9.
-        jaw1.addOrReplaceChild("cube_r9", CubeListBuilder.create().texOffs(0, 110).addBox(-10.25f, -1.5f, -0.75f, 5.0f, 8.0f, 9.0f, new CubeDeformation(0.0f)), PartPose.offsetAndRotation(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, -0.5672f));
+        PartDefinition left_front_leg = partdefinition.addOrReplaceChild("left_front_leg", CubeListBuilder.create().texOffs(72, 83).addBox(-4.5F, -1.0F, -4.5F, 9.0F, 12.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offset(7.5F, 13.0F, -16.5F));
 
-        // leg1.
-        modelPartData.addOrReplaceChild("leg1", CubeListBuilder.create().texOffs(64, 99).addBox(-3.5f, -3.5f, -4.5f, 7.0f, 13.0f, 9.0f, new CubeDeformation(0.0f)), PartPose.offset(-9.5f, 14.5f, -6.5f));
-
-        // leg2.
-        modelPartData.addOrReplaceChild("leg2", CubeListBuilder.create().texOffs(32, 90).addBox(-3.5f, -3.5f, -4.5f, 7.0f, 13.0f, 9.0f, new CubeDeformation(0.0f)), PartPose.offset(9.5f, 14.5f, -6.5f));
-
-        // leg3.
-        modelPartData.addOrReplaceChild("leg3", CubeListBuilder.create().texOffs(0, 88).addBox(-3.5f, -3.5f, -4.5f, 7.0f, 13.0f, 9.0f, new CubeDeformation(0.0f)), PartPose.offset(9.5f, 14.5f, 12.5f));
-
-        // leg4.
-        modelPartData.addOrReplaceChild("leg4", CubeListBuilder.create().texOffs(0, 0).addBox(-3.5f, -3.5f, -4.5f, 7.0f, 13.0f, 9.0f, new CubeDeformation(0.0f)), PartPose.offset(-9.5f, 14.5f, 12.5f));
-
-        return LayerDefinition.create(modelData, 256, 256);
+        return LayerDefinition.create(meshdefinition, 256, 256);
     }
 
     @Override
     public void setupAnim(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
 
         Hoglin hoglin = null;
-        Zoglin zoglin = null;
 
         if (entity instanceof Hoglin hog) {
             hoglin = hog;
-        }
-
-        if (entity instanceof Zoglin zog) {
-            zoglin = zog;
         }
 
         if (entity instanceof Hoglin || entity instanceof Zoglin) {
@@ -108,16 +85,14 @@ public class MoglerModel<T extends Entity> extends EntityModel<T> {
             int i = 0;
             if (hoglin != null) {
                 i = hoglin.getAttackAnimationRemainingTicks();
-            } else if (zoglin != null) {
-                i = zoglin.getAttackAnimationRemainingTicks();
             }
             float f = 1.0f - (float) Mth.abs(10 - 2 * i) / 10.0f;
             this.head.xRot = Mth.lerp(f, 0.0f, -1.14906584f);
 
-            this.leg1.xRot = Mth.cos(limbAngle) * 1.2f * limbDistance;
-            this.leg2.xRot = Mth.cos(limbAngle + (float) Math.PI) * 1.2f * limbDistance;
-            this.leg3.xRot = this.leg1.xRot;
-            this.leg4.xRot = this.leg2.xRot;
+            this.right_front_leg.xRot = Mth.cos(limbAngle) * 1.2f * limbDistance;
+            this.left_front_leg.xRot = Mth.cos(limbAngle + (float) Math.PI) * 1.2f * limbDistance;
+            this.leg3.xRot = this.right_front_leg.xRot;
+            this.left_back_leg.xRot = this.left_front_leg.xRot;
         }
     }
 
@@ -130,9 +105,9 @@ public class MoglerModel<T extends Entity> extends EntityModel<T> {
 
         body.render(poseStack, vertices, packedLight, packedOverlay);
         head.render(poseStack, vertices, packedLight, packedOverlay);
-        leg1.render(poseStack, vertices, packedLight, packedOverlay);
-        leg2.render(poseStack, vertices, packedLight, packedOverlay);
+        right_front_leg.render(poseStack, vertices, packedLight, packedOverlay);
+        left_front_leg.render(poseStack, vertices, packedLight, packedOverlay);
         leg3.render(poseStack, vertices, packedLight, packedOverlay);
-        leg4.render(poseStack, vertices, packedLight, packedOverlay);
+        left_back_leg.render(poseStack, vertices, packedLight, packedOverlay);
     }
 }

@@ -97,12 +97,6 @@ public class AdAstraClientFabric {
                 EntityModelLayerRegistry.registerModelLayer(location, definition::get);
             }
         });
-        ClientModEntities.registerEntityRenderers(new ClientModEntities.EntityRendererRegistry() {
-            @Override
-            protected <T extends Entity> void register(Supplier<? extends EntityType<? extends T>> type, EntityRendererProvider<T> factory) {
-                EntityRendererRegistry.register(type.get(), factory);
-            }
-        });
         ClientModBlockRenderers.registerBlockRenderers(new ClientModBlockRenderers.BlockRendererRegistry() {
             @Override
             public <T extends BlockEntity> void register(Supplier<? extends BlockEntityType<? extends T>> type, BlockEntityRendererProvider<T> factory) {

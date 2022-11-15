@@ -31,3 +31,17 @@ mandatory = true
 versionRange = "[8.2.88,)"
 ordering = "AFTER"
 side = "BOTH"
+
+[[dependencies.ad_astra]]
+modId = "botarium"
+mandatory = true
+versionRange = "[1.7.0,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.ad_astra]]
+modId = "resourcefullib"
+mandatory = true
+versionRange = "[1.1.15,)"
+ordering = "NONE"
+side = "BOTH"

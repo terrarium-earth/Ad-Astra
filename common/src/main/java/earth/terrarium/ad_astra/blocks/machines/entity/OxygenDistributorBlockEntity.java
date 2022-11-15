@@ -69,7 +69,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
 
     @Override
     public long getOutputTankCapacity() {
-        return AdAstra.CONFIG.oxygenDistributor.tankSize * 2;
+        return AdAstra.CONFIG.oxygenDistributor.tankSize;
     }
 
     @Override
@@ -103,7 +103,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
     }
 
     public long getFluidToExtract(long oxygenBlocks, boolean client) {
-        long value = FluidHooks.toMillibuckets((long) ((oxygenBlocks * AdAstra.CONFIG.oxygenDistributor.oxygenMultiplier) / 40));
+        long value = (FluidHooks.buckets(1) / 1000) * oxygenBlocks / 44;
         if (client) {
             return value;
         }
@@ -162,7 +162,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
 
             if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0) {
                 List<OxygenConversionRecipe> recipes = ModRecipeTypes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.level);
-                if (FluidUtils.convertFluid(this.getFluidContainer(), recipes, 50)) {
+                if (FluidUtils.convertFluid(this.getFluidContainer(), recipes, FluidHooks.buckets(1) / 20)) {
                     this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
                 }
             }

@@ -404,6 +404,7 @@
   "gauge_text.ad_astra.oxygen_leak_warning[4]": "completely sealed.",
   "gauge_text.ad_astra.storage": "§eEnergy: %s ⚡ / %d ⚡",
   "gui.ad_astra.text.back": "Back",
+  "gui.ad_astra.text.warning": " §e⚠ §cWarning §e⚠",
   "gui.ad_astra.text.catalog": "CATALOG",
   "gui.ad_astra.text.category": "Category",
   "gui.ad_astra.text.earth": "Earth",

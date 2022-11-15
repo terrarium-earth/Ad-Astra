@@ -82,7 +82,7 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
         }
 
         if (GuiUtil.isHovering(this.getOutputTankBounds(), mouseX, mouseY)) {
-            GuiUtil.drawTankTooltip(this, poseStack, this.menu.getFluids().get(1), this.machine.getInputTankCapacity(), mouseX, mouseY);
+            GuiUtil.drawTankTooltip(this, poseStack, this.menu.getFluids().get(1), this.machine.getOutputTankCapacity(), mouseX, mouseY);
         }
 
         int oxygenBlocksCount = OxygenUtils.getOxygenBlocksCount(this.machine.getLevel(), this.machine.getBlockPos());

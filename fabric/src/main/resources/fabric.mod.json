@@ -57,6 +57,9 @@
   ],
   "depends": {
     "fabric": "*",
-    "minecraft": ">=1.19"
+    "minecraft": ">=1.19",
+    "cloth-config": ">=8.2.88",
+    "botarium": ">=1.7.0",
+    "resourcefullib": ">=1.1.15"
   }
 }

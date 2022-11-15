@@ -118,12 +118,6 @@ public class AdAstraClientForge {
 
 
     public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        ClientModEntities.registerEntityRenderers(new ClientModEntities.EntityRendererRegistry() {
-            @Override
-            protected <T extends Entity> void register(Supplier<? extends EntityType<? extends T>> type, EntityRendererProvider<T> factory) {
-                event.registerEntityRenderer(type.get(), factory);
-            }
-        });
         ClientModBlockRenderers.registerBlockRenderers(new ClientModBlockRenderers.BlockRendererRegistry() {
             @Override
             public <T extends BlockEntity> void register(Supplier<? extends BlockEntityType<? extends T>> type, BlockEntityRendererProvider<T> factory) {

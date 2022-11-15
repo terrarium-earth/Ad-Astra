@@ -441,16 +441,16 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
     private int getPage() {
         Category category = this.currentCategory;
         if (category.parent() == null) {
-            // Galaxy screen
+            // Galaxy menu
             return 0;
         } else if (category.parent().parent() == null) {
-            // Solar system screen
+            // Solar system menu
             return 1;
         } else if (category.parent().parent().parent() == null) {
-            // Planet screen
+            // Planet menu
             return 2;
         } else if (category.parent().parent().parent().parent() == null) {
-            // Planet screen
+            // Planet menu
             return 3;
         }
         // Should never be called

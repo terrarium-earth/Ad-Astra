@@ -351,10 +351,10 @@ public class ModBlocks {
     public static final Supplier<Block> DEEPSLATE_OSTRUM_ORE = register("deepslate_ostrum_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)), true);
     public static final Supplier<Block> DEEPSLATE_CALORITE_ORE = register("deepslate_calorite_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)), true);
 
-    public static final Supplier<Block> OIL_BLOCK = ModBlocks.register("oil", () -> new BotariumLiquidBlock(ModFluidTypes.OIL_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
-    public static final Supplier<Block> FUEL_BLOCK = ModBlocks.register("fuel", () -> new BotariumLiquidBlock(ModFluidTypes.FUEL_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
-    public static final Supplier<Block> CRYO_FUEL_BLOCK = ModBlocks.register("cryo_fuel", () -> new CryoFuelBlock(ModFluidTypes.CRYO_FUEL_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
-    public static final Supplier<Block> OXYGEN_BLOCK = ModBlocks.register("oxygen", () -> new BotariumLiquidBlock(ModFluidTypes.OXYGEN_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
+    public static final Supplier<Block> OIL_BLOCK = ModBlocks.register("oil", () -> new BotariumLiquidBlock(ModFluidProperties.OIL_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
+    public static final Supplier<Block> FUEL_BLOCK = ModBlocks.register("fuel", () -> new BotariumLiquidBlock(ModFluidProperties.FUEL_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
+    public static final Supplier<Block> CRYO_FUEL_BLOCK = ModBlocks.register("cryo_fuel", () -> new CryoFuelBlock(ModFluidProperties.CRYO_FUEL_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
+    public static final Supplier<Block> OXYGEN_BLOCK = ModBlocks.register("oxygen", () -> new BotariumLiquidBlock(ModFluidProperties.OXYGEN_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
 
 
     private static <T extends Block> Supplier<T> register(String id, Supplier<T> object) {
