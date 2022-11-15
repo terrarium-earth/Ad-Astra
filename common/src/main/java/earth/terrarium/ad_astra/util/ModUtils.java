@@ -2,7 +2,6 @@ package earth.terrarium.ad_astra.util;
 
 import com.mojang.serialization.Codec;
 import dev.architectury.injectables.targets.ArchitecturyTarget;
-import dev.architectury.platform.Platform;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.data.Planet;
 import earth.terrarium.ad_astra.entities.vehicles.Lander;
@@ -13,6 +12,7 @@ import earth.terrarium.ad_astra.registry.ModCriteria;
 import earth.terrarium.ad_astra.registry.ModEntityTypes;
 import earth.terrarium.ad_astra.registry.ModTags;
 import earth.terrarium.ad_astra.util.algorithms.LandFinder;
+import earth.terrarium.botarium.util.CommonHooks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleOptions;
@@ -58,10 +58,6 @@ public class ModUtils {
 
     public static final float VANILLA_GRAVITY = 9.806f;
     public static final float ORBIT_TEMPERATURE = -270.0f;
-
-    public static boolean modLoaded(String modId) {
-        return Platform.isModLoaded(modId);
-    }
 
     /**
      * Teleports an entity to a different dimension. If the entity is a player in a rocket, the player will teleport with a lander. If the entity is raw food, the food will be cooked.

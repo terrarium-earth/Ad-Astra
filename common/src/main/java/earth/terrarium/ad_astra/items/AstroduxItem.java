@@ -4,6 +4,7 @@ import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.registry.ModItems;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import earth.terrarium.ad_astra.util.ModUtils;
+import earth.terrarium.botarium.util.CommonHooks;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
@@ -34,7 +35,7 @@ public class AstroduxItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player user, InteractionHand hand) {
         if (user instanceof ServerPlayer player) {
-            if (ModUtils.modLoaded("patchouli")) {
+            if (CommonHooks.isModLoaded("patchouli")) {
                 PatchouliAPI.get().openBookGUI(player, new ModResourceLocation("astrodux"));
                 return InteractionResultHolder.success(user.getItemInHand(hand));
             } else {
