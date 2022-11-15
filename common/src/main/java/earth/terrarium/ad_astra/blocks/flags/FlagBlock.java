@@ -1,9 +1,14 @@
 package earth.terrarium.ad_astra.blocks.flags;
 
-import com.mojang.authlib.GameProfile;
+
+import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.client.screens.FlagUrlScreen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -16,11 +21,15 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.*;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -28,7 +37,8 @@ import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("deprecation")
 public class FlagBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
-    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+
+    public static final EightDirectionProperty FACING = new EightDirectionProperty();
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
@@ -38,66 +48,36 @@ public class FlagBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-
-        if (state.getValue(HALF).equals(DoubleBlockHalf.LOWER)) {
-            switch (state.getValue(FACING)) {
-                case NORTH -> {
-                    VoxelShape shape = Shapes.empty();
-                    shape = Shapes.or(shape, Shapes.box(0.375, 0, 0.375, 0.625, 0.5, 0.625));
-                    shape = Shapes.or(shape, Shapes.box(0.4375, 0, 0.4375, 0.5625, 1, 0.5625));
-                    return shape;
-                }
-                case EAST -> {
-                    VoxelShape shape = Shapes.empty();
-                    shape = Shapes.or(shape, Shapes.box(0.375, -0.5, 0.375, 0.625, 0, 0.625));
-                    shape = Shapes.or(shape, Shapes.box(0.4375, -0.5, 0.4375, 0.5625, 0.5, 0.5625));
-                    return shape;
-                }
-                case SOUTH -> {
-                    VoxelShape shape = Shapes.empty();
-                    shape = Shapes.or(shape, Shapes.box(0.375, 0, 0.375, 0.625, 0.5, 0.625));
-                    shape = Shapes.or(shape, Shapes.box(0.4375, 0, 0.4375, 0.5625, 1, 0.5625));
-                    return shape;
-                }
-                case WEST -> {
-                    VoxelShape shape = Shapes.empty();
-                    shape = Shapes.or(shape, Shapes.box(0.375, 0, 0.375, 0.625, 0.5, 0.625));
-                    shape = Shapes.or(shape, Shapes.box(0.4375, 0, 0.4375, 0.5625, 1, 0.5625));
-                    return shape;
-                }
-                default -> throw new IllegalStateException("Unexpected value: " + state.getValue(FACING));
-            }
-
-        } else {
-            switch (state.getValue(FACING)) {
-                case NORTH -> {
-                    VoxelShape shape = Shapes.empty();
-                    shape = Shapes.or(shape, Shapes.box(0.4375, 0, 0.4375, 0.5625, 1.5, 0.5625));
-                    shape = Shapes.or(shape, Shapes.box(-0.9375, 0.4375, 0.46875, 0.4375, 1.4375, 0.53125));
-                    return shape;
-                }
-                case EAST -> {
-                    VoxelShape shape = Shapes.empty();
-                    shape = Shapes.or(shape, Shapes.box(0.4375, 0, 0.4375, 0.5625, 1.5, 0.5625));
-                    shape = Shapes.or(shape, Shapes.box(0.46875, 0.4375, -0.9375, 0.53125, 1.4375, 0.4375));
-                    return shape;
-                }
-                case SOUTH -> {
-                    VoxelShape shape = Shapes.empty();
-                    shape = Shapes.or(shape, Shapes.box(0.4375, 0, 0.4375, 0.5625, 1.5, 0.5625));
-                    shape = Shapes.or(shape, Shapes.box(0.5625, 0.4375, 0.46875, 1.9375, 1.4375, 0.53125));
-                    return shape;
-                }
-                case WEST -> {
-                    VoxelShape shape = Shapes.empty();
-                    shape = Shapes.or(shape, Shapes.box(0.4375, 0, 0.4375, 0.5625, 1.5, 0.5625));
-                    shape = Shapes.or(shape, Shapes.box(0.46875, 0.4375, 0.5625, 0.53125, 1.4375, 1.9375));
-                    return shape;
-                }
-                default -> throw new IllegalStateException("Unexpected value: " + state.getValue(FACING));
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (level.isClientSide && (AdAstra.CONFIG.general.allowFlagImages || player.canUseGameMasterBlocks())) {
+            if (state.getValue(HALF) == DoubleBlockHalf.LOWER) {
+                return action(level, pos.above(), player);
+            } else {
+                return action(level, pos, player);
             }
         }
+        return InteractionResult.sidedSuccess(level.isClientSide);
+    }
+
+    private InteractionResult action(Level level, BlockPos pos, Player player) {
+        if (level.getBlockEntity(pos) instanceof FlagBlockEntity flagBlock) {
+            if (flagBlock.getOwner() != null && player.getUUID().equals(flagBlock.getOwner().getId())) {
+                FlagUrlScreen.open(pos);
+            } else {
+                player.displayClientMessage(Component.translatable("message.ad_astra.flag.not_owner"), true);
+            }
+            return InteractionResult.SUCCESS;
+        }
+        return InteractionResult.PASS;
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        VoxelShape pole = Shapes.box(0.4375, 0, 0.4375, 0.5625, 1.5, 0.5625);
+        if (state.getValue(HALF).equals(DoubleBlockHalf.LOWER)) {
+            return Shapes.or(Shapes.box(0.375, 0, 0.375, 0.625, 0.5, 0.625), pole);
+        }
+        return pole;
     }
 
     @Override
@@ -126,12 +106,8 @@ public class FlagBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 
         BlockEntity blockEntity = level.getBlockEntity(pos.above());
 
-        if (placer instanceof Player player) {
-            if (blockEntity instanceof FlagBlockEntity flagEntity) {
-                GameProfile profile = player.getGameProfile();
-                flagEntity.setOwner(profile);
-                flagEntity.saveWithoutMetadata();
-            }
+        if (placer instanceof Player player && blockEntity instanceof FlagBlockEntity flagEntity) {
+            flagEntity.setOwner(player.getGameProfile());
         }
     }
 
@@ -155,12 +131,12 @@ public class FlagBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 
     @Override
     public BlockState rotate(BlockState state, Rotation rotation) {
-        return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
+        return state.setValue(FACING, state.getValue(FACING).rotate(rotation));
     }
 
     @Override
     public BlockState mirror(BlockState state, Mirror mirror) {
-        return state.rotate(mirror.getRotation(state.getValue(FACING)));
+        return state.setValue(FACING, state.getValue(FACING).mirror(mirror));
     }
 
     @Override
@@ -189,6 +165,7 @@ public class FlagBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         FluidState fluidState = ctx.getLevel().getFluidState(ctx.getClickedPos());
-        return this.defaultBlockState().setValue(FACING, ctx.getHorizontalDirection().getOpposite()).setValue(WATERLOGGED, fluidState.getType().equals(Fluids.WATER));
+        var value = EightDirectionProperty.Direction.VALUES[Mth.floor((double) (ctx.getRotation() * 8.0F / 360.0F) + 0.5D) & 7];
+        return this.defaultBlockState().setValue(FACING, value).setValue(WATERLOGGED, fluidState.getType().equals(Fluids.WATER));
     }
 }

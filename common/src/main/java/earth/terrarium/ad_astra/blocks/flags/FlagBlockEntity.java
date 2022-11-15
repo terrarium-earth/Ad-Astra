@@ -5,39 +5,47 @@ import earth.terrarium.ad_astra.registry.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class FlagBlockEntity extends BlockEntity {
 
     @Nullable
     private GameProfile owner;
+    @Nullable
+    private String id;
 
     public FlagBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.FLAG_BLOCK_ENTITY.get(), pos, state);
     }
 
     @Override
-    public void saveAdditional(@NotNull CompoundTag nbt) {
-        super.saveAdditional(nbt);
+    public void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
         if (this.owner != null) {
             CompoundTag compound = new CompoundTag();
             NbtUtils.writeGameProfile(compound, this.owner);
-            nbt.put("FlagOwner", compound);
+            tag.put("flagOwner", compound);
+        }
+        if (this.id != null) {
+            tag.putString("FlagUrl", this.id);
         }
     }
 
     @Override
-    public void load(@NotNull CompoundTag nbt) {
-        super.load(nbt);
-        if (nbt.contains("FlagOwner", 10)) {
-            this.setOwner(NbtUtils.readGameProfile(nbt.getCompound("FlagOwner")));
+    public void load(CompoundTag tag) {
+        super.load(tag);
+        if (tag.contains("flagOwner", 10)) {
+            this.setOwner(NbtUtils.readGameProfile(tag.getCompound("flagOwner")));
+        }
+        if (tag.contains("FlagUrl", Tag.TAG_STRING)) {
+            this.setId(tag.getString("FlagUrl"));
         }
     }
 
@@ -58,6 +66,18 @@ public class FlagBlockEntity extends BlockEntity {
             this.owner = owner;
             this.setChanged();
         });
+    }
+
+    @Nullable
+    public String getUrl() {
+        if (this.id == null) {
+            return null;
+        }
+        return "https://i.imgur.com/" + this.id + ".png";
+    }
+
+    public void setId(@Nullable String id) {
+        this.id = id;
     }
 
     @Nullable

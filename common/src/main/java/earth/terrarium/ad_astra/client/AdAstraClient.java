@@ -7,7 +7,6 @@ import earth.terrarium.ad_astra.client.registry.ClientModKeybindings;
 import earth.terrarium.ad_astra.client.registry.ClientModScreens;
 import earth.terrarium.ad_astra.client.renderer.armour.ArmourRenderers;
 import earth.terrarium.ad_astra.client.renderer.block.ChestItemRenderer;
-import earth.terrarium.ad_astra.client.renderer.block.LaunchPadBlockEntityRenderer;
 import earth.terrarium.ad_astra.client.renderer.block.SlidingDoorBlockEntityRenderer;
 import earth.terrarium.ad_astra.client.renderer.block.flag.FlagItemRenderer;
 import earth.terrarium.ad_astra.client.renderer.block.globe.GlobeItemRenderer;
@@ -102,8 +101,6 @@ public class AdAstraClient {
         for (Item item : new Item[]{ModItems.WHITE_FLAG.get(), ModItems.BLACK_FLAG.get(), ModItems.BLUE_FLAG.get(), ModItems.BROWN_FLAG.get(), ModItems.CYAN_FLAG.get(), ModItems.GRAY_FLAG.get(), ModItems.GREEN_FLAG.get(), ModItems.LIGHT_BLUE_FLAG.get(), ModItems.LIGHT_GRAY_FLAG.get(), ModItems.LIME_FLAG.get(), ModItems.MAGENTA_FLAG.get(), ModItems.ORANGE_FLAG.get(), ModItems.PINK_FLAG.get(), ModItems.PURPLE_FLAG.get(), ModItems.RED_FLAG.get(), ModItems.YELLOW_FLAG.get()}) {
             register.accept(item, new FlagItemRenderer());
         }
-
-        register.accept(ModItems.LAUNCH_PAD.get(), new LaunchPadBlockEntityRenderer());
     }
 
     public static void onRegisterReloadListeners(BiConsumer<ResourceLocation, PreparableReloadListener> registry) {
@@ -137,7 +134,6 @@ public class AdAstraClient {
         for (ResourceLocation id : new ResourceLocation[]{SlidingDoorBlockEntityRenderer.IRON_SLIDING_DOOR_MODEL, SlidingDoorBlockEntityRenderer.STEEL_SLIDING_DOOR_MODEL, SlidingDoorBlockEntityRenderer.DESH_SLIDING_DOOR_MODEL, SlidingDoorBlockEntityRenderer.OSTRUM_SLIDING_DOOR_MODEL, SlidingDoorBlockEntityRenderer.CALORITE_SLIDING_DOOR_MODEL, SlidingDoorBlockEntityRenderer.AIRLOCK_MODEL, SlidingDoorBlockEntityRenderer.REINFORCED_DOOR_MODEL, SlidingDoorBlockEntityRenderer.IRON_SLIDING_DOOR_MODEL_FLIPPED, SlidingDoorBlockEntityRenderer.STEEL_SLIDING_DOOR_MODEL_FLIPPED, SlidingDoorBlockEntityRenderer.DESH_SLIDING_DOOR_MODEL_FLIPPED, SlidingDoorBlockEntityRenderer.OSTRUM_SLIDING_DOOR_MODEL_FLIPPED, SlidingDoorBlockEntityRenderer.CALORITE_SLIDING_MODEL_FLIPPED, SlidingDoorBlockEntityRenderer.AIRLOCK_MODEL_FLIPPED, SlidingDoorBlockEntityRenderer.REINFORCED_DOOR_MODEL_FLIPPED}) {
             register.accept(id);
         }
-        register.accept(LaunchPadBlockEntityRenderer.LAUNCH_PAD_MODEL);
     }
 
     public static void renderBlock(ResourceLocation texture, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {

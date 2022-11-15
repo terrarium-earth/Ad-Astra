@@ -69,6 +69,7 @@ public class AdAstraConfig implements ConfigData {
         public int freezeDamage = 1;
         public int heatDamage = 2;
         public int acidRainDamage = 3;
+        public boolean allowFlagImages = true;
     }
 
     public static class SpaceSuitConfig {

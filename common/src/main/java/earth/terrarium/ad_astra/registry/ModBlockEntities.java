@@ -3,7 +3,6 @@ package earth.terrarium.ad_astra.registry;
 import earth.terrarium.ad_astra.blocks.door.SlidingDoorBlockEntity;
 import earth.terrarium.ad_astra.blocks.flags.FlagBlockEntity;
 import earth.terrarium.ad_astra.blocks.globes.GlobeBlockEntity;
-import earth.terrarium.ad_astra.blocks.launchpad.LaunchPadBlockEntity;
 import earth.terrarium.ad_astra.blocks.machines.entity.*;
 import earth.terrarium.ad_astra.blocks.pipes.CableBlockEntity;
 import earth.terrarium.ad_astra.blocks.pipes.FluidPipeBlockEntity;
@@ -34,7 +33,6 @@ public class ModBlockEntities {
     public static final Supplier<BlockEntityType<CryoFreezerBlockEntity>>CRYO_FREEZER = register("cryo_freezer", () -> RegistryHelpers.createBlockEntityType(CryoFreezerBlockEntity::new, ModBlocks.CRYO_FREEZER.get()));
     public static final Supplier<BlockEntityType<OxygenSensorBlockEntity>>OXYGEN_SENSOR = register("oxygen_sensor", () -> RegistryHelpers.createBlockEntityType(OxygenSensorBlockEntity::new, ModBlocks.OXYGEN_SENSOR.get()));
     public static final Supplier<BlockEntityType<SlidingDoorBlockEntity>>SLIDING_DOOR = register("sliding_door", () -> RegistryHelpers.createBlockEntityType(SlidingDoorBlockEntity::new, ModBlocks.STEEL_SLIDING_DOOR.get(), ModBlocks.DESH_SLIDING_DOOR.get(), ModBlocks.OSTRUM_SLIDING_DOOR.get(), ModBlocks.CALORITE_SLIDING_DOOR.get(), ModBlocks.AIRLOCK.get(), ModBlocks.REINFORCED_DOOR.get()));
-    public static final Supplier<BlockEntityType<LaunchPadBlockEntity>>LAUNCH_PAD = register("launch_pad", () -> RegistryHelpers.createBlockEntityType(LaunchPadBlockEntity::new, ModBlocks.LAUNCH_PAD.get()));
     public static final Supplier<BlockEntityType<CableBlockEntity>>CABLE = register("cable", () -> RegistryHelpers.createBlockEntityType(CableBlockEntity::new, ModBlocks.STEEL_CABLE.get(), ModBlocks.DESH_CABLE.get()));
     public static final Supplier<BlockEntityType<FluidPipeBlockEntity>>FLUID_PIPE = register("fluid_pipe", () -> RegistryHelpers.createBlockEntityType(FluidPipeBlockEntity::new, ModBlocks.DESH_FLUID_PIPE.get(), ModBlocks.OSTRUM_FLUID_PIPE.get()));
 

@@ -1,6 +1,6 @@
 {
-  "parent": "ad_astra:template/flag",
-  "textures": {
-    "flag": "ad_astra:block/flag/gray_flag"
-  }
+    "parent": "ad_astra:template/flag",
+    "textures": {
+        "flag": "ad_astra:block/flag/gray_flag"
+    }
 }
