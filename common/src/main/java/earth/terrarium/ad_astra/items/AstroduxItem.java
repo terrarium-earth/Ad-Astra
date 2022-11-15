@@ -1,6 +1,5 @@
 package earth.terrarium.ad_astra.items;
 
-import dev.architectury.event.events.common.PlayerEvent;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.registry.ModItems;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
@@ -19,14 +18,13 @@ import vazkii.patchouli.api.PatchouliAPI;
 public class AstroduxItem extends Item {
 
     // Give guidebook at spawn
-    static {
-        PlayerEvent.PLAYER_JOIN.register((player) -> {
-            if (AdAstra.CONFIG.general.giveAstroduxAtSpawn) {
-                if (player.getStats().getValue(Stats.CUSTOM.get(Stats.TOTAL_WORLD_TIME)) <= 0) {
-                    player.addItem(ModItems.ASTRODUX.get().getDefaultInstance());
-                }
+    public static void onPlayerJoin(Player player) {
+        if (player.level.isClientSide) return;
+        if (AdAstra.CONFIG.general.giveAstroduxAtSpawn) {
+            if (((ServerPlayer) player).getStats().getValue(Stats.CUSTOM.get(Stats.TOTAL_WORLD_TIME)) <= 0) {
+                player.addItem(ModItems.ASTRODUX.get().getDefaultInstance());
             }
-        });
+        }
     }
 
     public AstroduxItem(Properties settings) {

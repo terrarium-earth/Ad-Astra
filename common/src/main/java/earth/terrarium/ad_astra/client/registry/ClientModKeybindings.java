@@ -1,12 +1,12 @@
 package earth.terrarium.ad_astra.client.registry;
 
-import dev.architectury.event.events.client.ClientTickEvent;
 import earth.terrarium.ad_astra.entities.vehicles.Rocket;
 import earth.terrarium.ad_astra.networking.NetworkHandling;
 import earth.terrarium.ad_astra.networking.packets.client.KeybindPacket;
 import earth.terrarium.ad_astra.networking.packets.client.LaunchRocketPacket;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.Minecraft;
 
 @Environment(EnvType.CLIENT)
 public class ClientModKeybindings {
@@ -25,20 +25,19 @@ public class ClientModKeybindings {
     private static boolean sentLeftPacket;
     private static boolean sentRightPacket;
 
-    public static void register() {
-        ClientTickEvent.CLIENT_POST.register(client -> {
+    public static void onEndTick(Minecraft minecraft) {
 
-            clickingJump = client.options.keyJump.isDown();
-            clickingSprint = client.options.keySprint.isDown();
-            clickingForward = client.options.keyUp.isDown();
-            clickingBack = client.options.keyDown.isDown();
-            clickingLeft = client.options.keyLeft.isDown();
-            clickingRight = client.options.keyRight.isDown();
+            clickingJump = minecraft.options.keyJump.isDown();
+            clickingSprint = minecraft.options.keySprint.isDown();
+            clickingForward = minecraft.options.keyUp.isDown();
+            clickingBack = minecraft.options.keyDown.isDown();
+            clickingLeft = minecraft.options.keyLeft.isDown();
+            clickingRight = minecraft.options.keyRight.isDown();
 
-            if (client.level != null) {
-                if (client.player != null) {
-                    if (client.options.keyJump.consumeClick()) {
-                        if (client.player.getVehicle() instanceof Rocket rocket) {
+            if (minecraft.level != null) {
+                if (minecraft.player != null) {
+                    if (minecraft.options.keyJump.consumeClick()) {
+                        if (minecraft.player.getVehicle() instanceof Rocket rocket) {
                             if (!rocket.isFlying()) {
                                 NetworkHandling.CHANNEL.sendToServer(new LaunchRocketPacket());
                             }
@@ -106,6 +105,9 @@ public class ClientModKeybindings {
                     sentRightPacket = true;
                 }
             }
-        });
+
+    }
+
+    public static void init() {
     }
 }

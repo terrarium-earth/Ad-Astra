@@ -80,7 +80,9 @@ public class RocketItem<T extends Rocket> extends VehicleItem {
                             }
 
                             PlatformFluidItemHandler fluidItemHandler = FluidHooks.getItemFluidManager(rocketStack.getStack());
-                            rocketEntity.getTank().insertFluid(fluidItemHandler.extractFluid(rocketStack, fluidItemHandler.getFluidInTank(0), false), false);
+                            if (fluidItemHandler.extractFluid(rocketStack, fluidItemHandler.getFluidInTank(0), true).getFluidAmount() > 0) {
+                                rocketEntity.getTank().insertFluid(fluidItemHandler.extractFluid(rocketStack, fluidItemHandler.getFluidInTank(0), false), false);
+                            }
                             CompoundTag nbt = rocketStack.getStack().getOrCreateTag();
                             if (nbt.contains("Inventory")) {
                                 rocketEntity.getInventory().fromTag(nbt.getList("Inventory", Tag.TAG_COMPOUND));

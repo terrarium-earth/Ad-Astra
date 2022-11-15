@@ -17,7 +17,7 @@ dependencies {
 
     modApi "com.teamresourceful.resourcefullib:resourcefullib-common-$rootProject.resourcefullib_version"
 
-    modApi("me.shedaniel.cloth:cloth-config:$rootProject.cloth_config_version")
+    modApi("me.shedaniel.cloth:cloth-config:$rootProject.cloth_config_version") // TODO: Remove
 
     modImplementation "vazkii.patchouli:Patchouli-xplat:$rootProject.patchouli_version"
 

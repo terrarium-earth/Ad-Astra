@@ -9,7 +9,7 @@ import net.fabricmc.api.Environment;
 
 @Environment(EnvType.CLIENT)
 public class ClientModScreens {
-    public static void register() {
+    public static void init() {
         ClientUtils.registerScreen(ModMenuTypes.SOLAR_PANEL_SCREEN_HANDLER.get(), SolarPanelScreen::new);
         ClientUtils.registerScreen(ModMenuTypes.COAL_GENERATOR_MENU.get(), CoalGeneratorScreen::new);
         ClientUtils.registerScreen(ModMenuTypes.COMPRESSOR_MENU.get(), CompressorScreen::new);

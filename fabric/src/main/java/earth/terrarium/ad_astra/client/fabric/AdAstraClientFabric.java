@@ -3,8 +3,10 @@ package earth.terrarium.ad_astra.client.fabric;
 import earth.terrarium.ad_astra.client.AdAstraClient;
 import earth.terrarium.ad_astra.client.registry.ClientModBlockRenderers;
 import earth.terrarium.ad_astra.client.registry.ClientModEntities;
+import earth.terrarium.ad_astra.client.registry.ClientModKeybindings;
 import earth.terrarium.ad_astra.client.registry.ClientModParticles;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
@@ -50,6 +52,7 @@ public class AdAstraClientFabric {
         AdAstraClient.onRegisterItemRenderers(AdAstraClientFabric::registerItemRenderer);
         ClientModParticles.onRegisterParticles(AdAstraClientFabric::registerParticles);
         registerRenderers();
+        initEvents();
         AdAstraClient.onRegisterReloadListeners((id, listener) -> ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(new IdentifiableResourceReloadListener() {
             @Override
             public ResourceLocation getFabricId() {
@@ -61,6 +64,10 @@ public class AdAstraClientFabric {
                 return listener.reload(synchronizer, manager, prepareProfiler, applyProfiler, prepareExecutor, applyExecutor);
             }
         }));
+    }
+
+    public static void initEvents() {
+        ClientTickEvents.END_CLIENT_TICK.register(ClientModKeybindings::onEndTick);
     }
 
     private static void registerHud(AdAstraClient.RenderHud overlay) {

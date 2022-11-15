@@ -1,10 +1,14 @@
 package earth.terrarium.ad_astra.fabric;
 
 import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.items.AstroduxItem;
+import earth.terrarium.ad_astra.networking.NetworkHandling;
 import earth.terrarium.ad_astra.registry.ModCommands;
 import earth.terrarium.ad_astra.registry.ModEntityTypes;
+import earth.terrarium.ad_astra.util.ModKeyBindings;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
@@ -22,6 +26,7 @@ public class AdAstraFabric implements ModInitializer {
         AdAstra.init();
         ModEntityTypes.registerAttributes((type, builder) -> FabricDefaultAttributeRegistry.register(type.get(), builder.get()));
         CommandRegistrationCallback.EVENT.register((dispatcher, registry, selection) -> ModCommands.registerCommands(command -> command.accept(dispatcher)));
+        initEvents();
         AdAstra.onRegisterReloadListeners((id, listener) -> ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new IdentifiableResourceReloadListener() {
             @Override
             public ResourceLocation getFabricId() {
@@ -33,5 +38,15 @@ public class AdAstraFabric implements ModInitializer {
                 return listener.reload(synchronizer, manager, prepareProfiler, applyProfiler, prepareExecutor, applyExecutor);
             }
         }));
+    }
+
+    public static void initEvents() {
+        ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
+            AstroduxItem.onPlayerJoin(handler.getPlayer());
+            NetworkHandling.onPlayerJoin(handler.getPlayer());
+        });
+        ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> {
+            ModKeyBindings.onPlayerQuit(handler.getPlayer());
+        });
     }
 }

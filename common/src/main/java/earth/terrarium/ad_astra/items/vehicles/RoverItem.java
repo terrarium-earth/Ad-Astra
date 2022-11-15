@@ -59,7 +59,9 @@ public class RoverItem extends VehicleItem {
             }
 
             PlatformFluidItemHandler fluidItemHandler = FluidHooks.getItemFluidManager(roverStack.getStack());
-            rover.getTank().insertFluid(fluidItemHandler.extractFluid(roverStack, fluidItemHandler.getFluidInTank(0), false), false);
+            if (fluidItemHandler.extractFluid(roverStack, fluidItemHandler.getFluidInTank(0), true).getFluidAmount() > 0) {
+                rover.getTank().insertFluid(fluidItemHandler.extractFluid(roverStack, fluidItemHandler.getFluidInTank(0), false), false);
+            }
             CompoundTag nbt = roverStack.getStack().getOrCreateTag();
             if (nbt.contains("Inventory")) {
                 rover.getInventory().fromTag(nbt.getList("Inventory", Tag.TAG_COMPOUND));

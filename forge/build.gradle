@@ -32,8 +32,6 @@ dependencies {
     common(project(path: ":common", configuration: "namedElements")) { transitive = false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
 
-    modApi "dev.architectury:architectury-forge:$rootProject.architectury_version" // TODO: REMOVE
-
     include (modApi "com.teamresourceful.resourcefullib:resourcefullib-forge-$resourcefullib_version")
 
     include (modApi "earth.terrarium:botarium-forge-$rootProject.minecraft_version:$rootProject.botarium_version")

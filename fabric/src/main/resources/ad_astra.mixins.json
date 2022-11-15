@@ -5,6 +5,7 @@
   "minVersion": "0.8.5",
   "client": [],
   "mixins": [
+    "EntityTypeMixin",
     "JetSuitMixin",
     "StairBlockAccessor"
   ],

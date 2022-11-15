@@ -15,7 +15,7 @@ import org.apache.commons.lang3.NotImplementedException;
 @Environment(EnvType.CLIENT)
 public class ArmourRenderers {
 
-    public static void register() {
+    public static void init() {
         ArmourRenderers.registerArmour((entity, stack, slot, original) -> {
             EntityModelSet modelLoader = Minecraft.getInstance().getEntityModels();
             ModelPart layer = modelLoader.bakeLayer(SpaceSuitModel.LAYER_LOCATION);

@@ -1,6 +1,5 @@
 package earth.terrarium.ad_astra.util;
 
-import dev.architectury.event.events.common.PlayerEvent;
 import earth.terrarium.ad_astra.client.registry.ClientModKeybindings;
 import earth.terrarium.ad_astra.networking.packets.client.KeybindPacket;
 import net.fabricmc.api.EnvType;
@@ -17,10 +16,6 @@ import java.util.UUID;
  */
 public class ModKeyBindings {
     public static final HashMap<UUID, ModKeyBindings> PLAYER_KEYS = new HashMap<>();
-
-    static {
-        PlayerEvent.PLAYER_QUIT.register(player -> PLAYER_KEYS.remove(player.getUUID()));
-    }
 
     private boolean clickingJump;
     private boolean clickingSprint;
@@ -109,5 +104,9 @@ public class ModKeyBindings {
 
             case RIGHT -> PLAYER_KEYS.get(uuid).clickingRight = keyDown;
         }
+    }
+
+    public static void onPlayerQuit(Player player) {
+        PLAYER_KEYS.remove(player.getUUID());
     }
 }

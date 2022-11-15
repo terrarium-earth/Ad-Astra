@@ -45,8 +45,6 @@ dependencies {
     common(project(path: ":common", configuration: "namedElements")) { transitive = false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive = false }
 
-    modApi "dev.architectury:architectury-fabric:$rootProject.architectury_version" // TODO: REMOVE
-
     include modApi ("earth.terrarium:botarium-fabric-$rootProject.minecraft_version:$rootProject.botarium_version")
     include modApi ("com.teamresourceful.resourcefullib:resourcefullib-fabric-$rootProject.resourcefullib_version")
 

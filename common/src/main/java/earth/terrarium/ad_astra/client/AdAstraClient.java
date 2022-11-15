@@ -58,9 +58,9 @@ public class AdAstraClient {
     public static List<Galaxy> galaxies = new ArrayList<>();
 
     public static void initializeClient() {
-        ClientModScreens.register();
-        ClientModKeybindings.register();
-        ArmourRenderers.register();
+        ClientModScreens.init();
+        ClientModKeybindings.init();
+        ArmourRenderers.init();
 
         // Sign textures
         Sheets.SIGN_MATERIALS.put(ModBlocks.GLACIAN, new Material(Sheets.SIGN_SHEET, new ModResourceLocation("entity/signs/glacian")));

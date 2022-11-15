@@ -1,17 +1,20 @@
 package earth.terrarium.ad_astra.forge;
 
-import dev.architectury.platform.forge.EventBuses;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.AdAstraClient;
 import earth.terrarium.ad_astra.client.forge.AdAstraClientForge;
+import earth.terrarium.ad_astra.items.AstroduxItem;
+import earth.terrarium.ad_astra.networking.NetworkHandling;
 import earth.terrarium.ad_astra.registry.ModCommands;
 import earth.terrarium.ad_astra.registry.ModEntityTypes;
 import earth.terrarium.ad_astra.registry.forge.ModRegistryHelpersImpl;
+import earth.terrarium.ad_astra.util.ModKeyBindings;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
@@ -22,7 +25,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 @Mod(AdAstra.MOD_ID)
 public class AdAstraForge {
     public AdAstraForge() {
-        EventBuses.registerModEventBus(AdAstra.MOD_ID, FMLJavaModLoadingContext.get().getModEventBus());
         AdAstra.init();
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         bus.addListener(AdAstraForge::onClientSetup);
@@ -31,6 +33,8 @@ public class AdAstraForge {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> AdAstraClientForge::init);
         MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onServerReloadListeners);
         MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onRegisterCommands);
+        MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onPlayerLogIn);
+        MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onPlayerLogOut);
         ModRegistryHelpersImpl.REGISTRIES.values().forEach(deferredRegister -> deferredRegister.register(bus));
     }
 
@@ -53,5 +57,14 @@ public class AdAstraForge {
 
     public static void onAttributes(EntityAttributeCreationEvent event) {
         ModEntityTypes.registerAttributes((entityType, attribute) -> event.put(entityType.get(), attribute.get().build()));
+    }
+
+    public static void onPlayerLogIn(PlayerEvent.PlayerLoggedInEvent event) {
+        AstroduxItem.onPlayerJoin(event.getEntity());
+        NetworkHandling.onPlayerJoin(event.getEntity());
+    }
+
+    public static void onPlayerLogOut(PlayerEvent.PlayerLoggedOutEvent event) {
+        ModKeyBindings.onPlayerQuit(event.getEntity());
     }
 }

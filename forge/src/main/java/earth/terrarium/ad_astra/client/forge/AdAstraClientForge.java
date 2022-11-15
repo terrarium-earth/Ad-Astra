@@ -3,8 +3,10 @@ package earth.terrarium.ad_astra.client.forge;
 import earth.terrarium.ad_astra.client.AdAstraClient;
 import earth.terrarium.ad_astra.client.registry.ClientModBlockRenderers;
 import earth.terrarium.ad_astra.client.registry.ClientModEntities;
+import earth.terrarium.ad_astra.client.registry.ClientModKeybindings;
 import earth.terrarium.ad_astra.client.registry.ClientModParticles;
 import earth.terrarium.ad_astra.config.forge.ForgeMenuConfig;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -24,6 +26,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
@@ -72,6 +75,7 @@ public class AdAstraClientForge {
         bus.addListener(AdAstraClientForge::onRegisterLayerDefinitions);
         bus.addListener(AdAstraClientForge::onClientReloadListeners);
         MinecraftForge.EVENT_BUS.addListener(AdAstraClientForge::onRegisterClientHud);
+        MinecraftForge.EVENT_BUS.addListener(AdAstraClientForge::onClientTick);
         ForgeMenuConfig.register();
     }
 
@@ -80,6 +84,12 @@ public class AdAstraClientForge {
         AdAstraClient.onRegisterItemRenderers(AdAstraClientForge::registerItemRenderer);
         AdAstraClient.onRegisterFluidRenderTypes(AdAstraClientForge::onRegisterFluidRenderTypes);
         hasInitializedRenderers = true;
+    }
+
+    public static void onClientTick(TickEvent.ClientTickEvent event) {
+        if (event.phase.equals(TickEvent.Phase.END)) {
+            ClientModKeybindings.onEndTick(Minecraft.getInstance());
+        }
     }
 
     private static void onRegisterClientHud(RenderGuiEvent.Post event) {
