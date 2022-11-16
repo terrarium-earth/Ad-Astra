@@ -69,8 +69,8 @@ public class ModBlocks {
     public static final Supplier<Block> STEEL_CABLE = register("steel_cable", () -> new CableBlock(256, 2, 0.344, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(1.0f, 1.0f)));
     public static final Supplier<Block> DESH_CABLE = register("desh_cable", () -> new CableBlock(1024, 1, 0.312, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(1.0f, 1.0f)));
 
-    public static final Supplier<Block> DESH_FLUID_PIPE = register("desh_fluid_pipe", () -> new FluidPipeBlock(FluidHooks.buckets(1) / 10, 1, 0.312, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(1.0f, 1.0f)));
-    public static final Supplier<Block> OSTRUM_FLUID_PIPE = register("ostrum_fluid_pipe", () -> new FluidPipeBlock(FluidHooks.buckets(1) / 5, 1, 0.312, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(1.0f, 1.0f)));
+    public static final Supplier<Block> DESH_FLUID_PIPE = register("desh_fluid_pipe", () -> new FluidPipeBlock(FluidHooks.buckets(1) / 10, 1, 0.185, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(1.0f, 1.0f)));
+    public static final Supplier<Block> OSTRUM_FLUID_PIPE = register("ostrum_fluid_pipe", () -> new FluidPipeBlock(FluidHooks.buckets(1) / 5, 1, 0.185, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(1.0f, 1.0f)));
 
     // Machines
     public static final BlockBehaviour.Properties MACHINE_PROPERTIES = BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.METAL).strength(5.0f, 1.0f).requiresCorrectToolForDrops();

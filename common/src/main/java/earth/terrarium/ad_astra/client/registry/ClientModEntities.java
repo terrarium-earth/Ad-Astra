@@ -41,7 +41,7 @@ public class ClientModEntities {
         ClientHooks.registerEntityRenderer(ModEntityTypes.STAR_CRAWLER, StarCrawlerRenderer::new);
         ClientHooks.registerEntityRenderer(ModEntityTypes.MARTIAN_RAPTOR, MartianRaptorRenderer::new);
         ClientHooks.registerEntityRenderer(ModEntityTypes.PYGRO, PygroRenderer::new);
-        ClientHooks.registerEntityRenderer(ModEntityTypes.ZOMBIFIED_PYGRO, PygroRenderer::new);
+        ClientHooks.registerEntityRenderer(ModEntityTypes.ZOMBIFIED_PYGRO, ZombifiedPygroRenderer::new);
         ClientHooks.registerEntityRenderer(ModEntityTypes.PYGRO_BRUTE, PygroBruteRenderer::new);
         ClientHooks.registerEntityRenderer(ModEntityTypes.MOGLER, MoglerRenderer::new);
         ClientHooks.registerEntityRenderer(ModEntityTypes.ZOMBIFIED_MOGLER, ZombifiedMoglerRenderer::new);
@@ -66,6 +66,7 @@ public class ClientModEntities {
         registry.register(MartianRaptorModel.LAYER_LOCATION, MartianRaptorModel::createBodyLayer);
         registry.register(PygroModel.LAYER_LOCATION, PygroModel::createBodyLayer);
         registry.register(PygroBruteModel.LAYER_LOCATION, PygroBruteModel::createBodyLayer);
+        registry.register(ZombifiedPygroModel.LAYER_LOCATION, ZombifiedPygroModel::createBodyLayer);
         registry.register(MoglerModel.LAYER_LOCATION, MoglerModel::createBodyLayer);
         registry.register(SulfurCreeperModel.LAYER_LOCATION, SulfurCreeperModel::createBodyLayer);
         registry.register(GlacianRamModel.LAYER_LOCATION, GlacianRamModel::createBodyLayer);

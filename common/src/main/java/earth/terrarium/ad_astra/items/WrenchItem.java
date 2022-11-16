@@ -16,7 +16,7 @@ public class WrenchItem extends Item {
     public InteractionResult useOn(UseOnContext context) {
         Level level = context.getLevel();
         if (level.getBlockState(context.getClickedPos()).getBlock() instanceof Wrenchable block) {
-            block.handleWrench(level, context.getClickedPos(), level.getBlockState(context.getClickedPos()), context.getClickedFace(), context.getPlayer());
+            block.handleWrench(level, context.getClickedPos(), level.getBlockState(context.getClickedPos()), context.getClickedFace(), context.getPlayer(), context.getClickLocation());
             return InteractionResult.SUCCESS;
         }
         return super.useOn(context);

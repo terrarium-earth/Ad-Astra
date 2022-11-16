@@ -40,7 +40,8 @@ public class MoglerModel<T extends Entity> extends EntityModel<T> {
         MeshDefinition meshdefinition = new MeshDefinition();
         PartDefinition partdefinition = meshdefinition.getRoot();
 
-        PartDefinition head = partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(97, 68).addBox(-9.0F, -7.3501F, -12.2827F, 18.0F, 6.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 10.1899F, -17.7795F));
+        PartDefinition head = partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(33, 127).addBox(-8.0F, 4.3819F, -6.3545F, 16.0F, 6.0F, 0.0F, new CubeDeformation(0.0F))
+                .texOffs(97, 68).addBox(-9.0F, -7.3501F, -12.2827F, 18.0F, 6.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 10.1899F, -17.7795F));
 
         PartDefinition cube_r1 = head.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(57, 46).addBox(-9.0F, -25.0F, -8.0F, 18.0F, 11.0F, 11.0F, new CubeDeformation(0.0F))
                 .texOffs(59, 106).addBox(-8.0F, -14.0F, 2.0F, 16.0F, 6.0F, 4.0F, new CubeDeformation(0.0F))

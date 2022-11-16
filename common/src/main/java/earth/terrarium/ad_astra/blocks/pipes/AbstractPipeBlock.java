@@ -19,8 +19,11 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+
+import java.util.Optional;
 
 @SuppressWarnings("deprecation")
 public abstract class AbstractPipeBlock extends BaseEntityBlock implements SimpleWaterloggedBlock, Wrenchable {
@@ -31,7 +34,7 @@ public abstract class AbstractPipeBlock extends BaseEntityBlock implements Simpl
     protected final int decay;
     protected double size;
 
-    protected AbstractPipeBlock(long transferRate, int decay, double size, Properties settings) {
+    public AbstractPipeBlock(long transferRate, int decay, double size, Properties settings) {
         super(settings);
         this.transferRate = transferRate;
         this.decay = decay;
@@ -101,4 +104,15 @@ public abstract class AbstractPipeBlock extends BaseEntityBlock implements Simpl
 
     // Expand the voxel shape to match the model.
     public abstract VoxelShape updateOutlineShape(BlockState state);
+
+    public static Optional<Direction> getDirectionByVec(Vec3 hit, BlockPos pos) {
+        var relativePos = hit.add(-pos.getX(), -pos.getY(), -pos.getZ());
+        if (relativePos.x < (2f / 16f)) return Optional.of(Direction.WEST);
+        else if (relativePos.x > (14f / 16f)) return Optional.of(Direction.EAST);
+        else if (relativePos.z < (2f / 16f)) return Optional.of(Direction.NORTH);
+        else if (relativePos.z > (14f / 16f)) return Optional.of(Direction.SOUTH);
+        else if (relativePos.y < (2f / 16f)) return Optional.of(Direction.DOWN);
+        else if (relativePos.y > (14f / 16f)) return Optional.of(Direction.UP);
+        return Optional.empty();
+    }
 }

@@ -87,7 +87,7 @@ public class LocalPlayerMixin {
             if (vehicle instanceof Lander lander) {
 
                 double speed = lander.getDeltaMovement().y();
-                if (speed != 0.0) {
+                if (speed != 0.0 && lander.level.getBlockState(lander.getOnPos().below()).isAir()) {
                     PlayerOverlayScreen.shouldRenderWarning = true;
                     PlayerOverlayScreen.speed = speed * 55;
                 } else {

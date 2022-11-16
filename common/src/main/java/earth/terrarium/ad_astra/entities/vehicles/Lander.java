@@ -12,6 +12,8 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.phys.Vec3;
 
 public class Lander extends Vehicle {
 
@@ -66,6 +68,16 @@ public class Lander extends Vehicle {
     @Override
     public boolean renderPlanetBar() {
         return true;
+    }
+
+    @Override
+    public void doGravity() {
+        if (!(this.level.getBlockState(this.getOnPos()).getBlock() instanceof LiquidBlock)) {
+            super.doGravity();
+        } else {
+            Vec3 velocity = this.getDeltaMovement();
+            this.setDeltaMovement(velocity.x(), Math.max(0.1, velocity.y() + 0.03), velocity.z());
+        }
     }
 
     @Override

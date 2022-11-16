@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -39,9 +40,12 @@ public class CableBlock extends AbstractPipeBlock {
         map.put(Direction.WEST, WEST);
     });
 
+    private final Map<BlockState, VoxelShape> shapes = new HashMap<>();
+
     public CableBlock(long transferRate, int decay, double size, Properties settings) {
         super(transferRate, decay, size, settings);
         this.registerDefaultState(defaultBlockState().setValue(UP, false).setValue(DOWN, false).setValue(NORTH, false).setValue(EAST, false).setValue(SOUTH, false).setValue(WEST, false).setValue(WATERLOGGED, false));
+        this.stateDefinition.getPossibleStates().forEach(state -> shapes.put(state, this.createShape(state)));
     }
 
     @Override
@@ -72,6 +76,10 @@ public class CableBlock extends AbstractPipeBlock {
 
     @Override
     public VoxelShape updateOutlineShape(BlockState state) {
+        return shapes.getOrDefault(state, Shapes.block());
+    }
+
+    public VoxelShape createShape(BlockState state) {
         VoxelShape shape = Shapes.box(size, size, size, 1 - size, 1 - size, 1 - size);
 
         if (state.getValue(UP)) {
@@ -97,16 +105,10 @@ public class CableBlock extends AbstractPipeBlock {
     }
 
     @Override
-    public void handleWrench(Level level, BlockPos pos, BlockState state, Direction side, Player user) {
+    public void handleWrench(Level level, BlockPos pos, BlockState state, Direction side, Player user, Vec3 hitPos) {
         if (!level.isClientSide) {
-            BooleanProperty property = DIRECTIONS.get(user.isShiftKeyDown() ? user.getMotionDirection() : side);
-            int pitch = (int) user.getXRot();
-            if (pitch > 60) {
-                property = DIRECTIONS.get(Direction.DOWN);
-            } else if (pitch < -60) {
-                property = DIRECTIONS.get(Direction.UP);
-            }
-            level.setBlock(pos, state.setValue(property, !state.getValue(property)), Block.UPDATE_ALL, 0);
+            BooleanProperty property = DIRECTIONS.get(getDirectionByVec(hitPos, pos).orElse(user.isShiftKeyDown() ? side.getOpposite() : side));
+            level.setBlock(pos, state.cycle(property), Block.UPDATE_ALL, 0);
             level.playSound(null, pos, ModSoundEvents.WRENCH.get(), SoundSource.BLOCKS, 1, 1);
         }
     }

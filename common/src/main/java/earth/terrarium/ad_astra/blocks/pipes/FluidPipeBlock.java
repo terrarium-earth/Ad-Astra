@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -38,9 +39,12 @@ public class FluidPipeBlock extends AbstractPipeBlock {
         map.put(Direction.WEST, WEST);
     });
 
+    private final Map<BlockState, VoxelShape> shapes = new HashMap<>();
+
     public FluidPipeBlock(long transferRate, int decay, double size, Properties settings) {
         super(transferRate, decay, size, settings);
         this.registerDefaultState(defaultBlockState().setValue(UP, PipeState.NONE).setValue(DOWN, PipeState.NONE).setValue(NORTH, PipeState.NONE).setValue(EAST, PipeState.NONE).setValue(SOUTH, PipeState.NONE).setValue(WEST, PipeState.NONE).setValue(WATERLOGGED, false));
+        this.stateDefinition.getPossibleStates().forEach(state -> shapes.put(state, this.createShape(state)));
     }
 
     @Override
@@ -75,7 +79,10 @@ public class FluidPipeBlock extends AbstractPipeBlock {
 
     @Override
     public VoxelShape updateOutlineShape(BlockState state) {
-        size = 0.185;
+        return shapes.getOrDefault(state, Shapes.block());
+    }
+
+    public VoxelShape createShape(BlockState state) {
         VoxelShape shape = Shapes.box(size, size, size, 1 - size, 1 - size, 1 - size);
 
         if (state.getValue(UP) != PipeState.NONE) {
@@ -101,35 +108,22 @@ public class FluidPipeBlock extends AbstractPipeBlock {
     }
 
     @Override
-    public void handleWrench(Level level, BlockPos pos, BlockState state, Direction side, Player user) {
+    public void handleWrench(Level level, BlockPos pos, BlockState state, Direction side, Player user, Vec3 hitPos) {
         if (!level.isClientSide) {
-            EnumProperty<PipeState> property = DIRECTIONS.get(user.isShiftKeyDown() ? user.getMotionDirection() : side);
-            int pitch = (int) user.getXRot();
-            if (pitch > 60) {
-                property = DIRECTIONS.get(Direction.DOWN);
-            } else if (pitch < -60) {
-                property = DIRECTIONS.get(Direction.UP);
-            }
-            level.setBlock(pos, state.setValue(property, this.togglePipeState(state.getValue(property), user)), Block.UPDATE_ALL, 0);
+            EnumProperty<PipeState> property = DIRECTIONS.get(getDirectionByVec(hitPos, pos).orElse(user.isShiftKeyDown() ? side.getOpposite() : side));
+            level.setBlock(pos, togglePipeState(state, property, user), Block.UPDATE_ALL, 0);
             level.playSound(null, pos, ModSoundEvents.WRENCH.get(), SoundSource.BLOCKS, 1, 1);
         }
     }
 
-    public PipeState togglePipeState(PipeState state, Player user) {
-        if (state.equals(PipeState.NONE)) {
-            user.displayClientMessage(Component.translatable("info.ad_astra.normal"), true);
-            return PipeState.NORMAL;
-        } else if (state.equals(PipeState.NORMAL)) {
-            user.displayClientMessage(Component.translatable("info.ad_astra.insert"), true);
-            return PipeState.INSERT;
-        } else if (state.equals(PipeState.INSERT)) {
-            user.displayClientMessage(Component.translatable("info.ad_astra.extract"), true);
-            return PipeState.EXTRACT;
-        } else if (state.equals(PipeState.EXTRACT)) {
-            user.displayClientMessage(Component.translatable("info.ad_astra.none"), true);
-            return PipeState.NONE;
-        } else {
-            return PipeState.NONE;
+    public BlockState togglePipeState(BlockState state, EnumProperty<PipeState> property, Player user) {
+        state = state.cycle(property);
+        switch (state.getValue(property)) {
+            case NORMAL -> user.displayClientMessage(Component.translatable("info.ad_astra.normal"), true);
+            case INSERT -> user.displayClientMessage(Component.translatable("info.ad_astra.insert"), true);
+            case EXTRACT -> user.displayClientMessage(Component.translatable("info.ad_astra.extract"), true);
+            case NONE -> user.displayClientMessage(Component.translatable("info.ad_astra.none"), true);
         }
+        return state;
     }
 }
