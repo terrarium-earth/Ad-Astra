@@ -1,6 +1,6 @@
 <a href="https://github.com/Team-Resourceful/ResourcefulLib">
     <p align="center">
-        <img src="https://cdn.discordapp.com/attachments/835258604939640913/1010937521233997884/uses_resourcefullib_badge.png" alt="ResourcefulLib" width="250"/> 
+        <img src="https://media.discordapp.net/attachments/1023678603289972797/1042445198183120946/BH_NU_BADGE.png" alt="ResourcefulLib" width="400"/> 
     </p>
 </a>
 

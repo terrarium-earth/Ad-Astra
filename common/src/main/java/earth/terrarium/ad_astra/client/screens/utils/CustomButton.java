@@ -44,7 +44,6 @@ public class CustomButton extends Button {
     public boolean doMask = true;
 
     public CustomButton(int x, int y, Component label, ButtonType size, ButtonColour buttonColour, PlanetSelectionScreen.TooltipType tooltip, Planet planetInfo, OnPress onPress) {
-
         super(x, y, size.getWidth(), size.getHeight(), adjustText(label), onPress);
 
         this.startY = y;
@@ -91,12 +90,9 @@ public class CustomButton extends Button {
             RenderSystem.enableDepthTest();
 
             ClosingScissorBox scissor = null;
-            if (this.doMask) {
-                // Render mask
-//                System.out.println(RenderUtils.getTranslation(poseStack));
-                scissor = RenderUtils.createScissorBox(Minecraft.getInstance(), poseStack, x, y, 215, 127);
+            if (doMask) {
+                scissor = RenderUtils.createScissorBox(Minecraft.getInstance(), poseStack, 10, 176, 200, 130);
             }
-
             RenderSystem.setShaderColor(color.getFloatRed(), color.getFloatGreen(), color.getFloatBlue(), this.buttonColour.getFloatAlpha());
             RenderSystem.setShaderTexture(0, switch (this.buttonSize) {
                 case LARGE -> LARGE_BUTTON_TEXTURE;
@@ -107,7 +103,6 @@ public class CustomButton extends Button {
 
             blit(poseStack, (this.buttonSize.equals(ButtonType.LARGE) ? this.x - 2 : this.x), this.y, 0, 0, this.width, this.height, buttonSize.getWidth(), buttonSize.getHeight());
             drawText(poseStack, client);
-
             if (scissor != null) {
                 scissor.close();
             }

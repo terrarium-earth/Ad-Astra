@@ -34,7 +34,13 @@ public class PlanetData implements ResourceManagerReloadListener {
                     JsonObject jsonObject = GsonHelper.fromJson(GSON, reader, JsonObject.class);
 
                     if (jsonObject != null) {
-                        planets.add(Planet.CODEC.parse(JsonOps.INSTANCE, jsonObject).getOrThrow(false, AdAstra.LOGGER::error));
+                        var parsed = Planet.CODEC.parse(JsonOps.INSTANCE, jsonObject).getOrThrow(false, AdAstra.LOGGER::error);
+                        if (planets.stream().map(Planet::level).noneMatch(parsed.level()::equals)) {
+                            planets.add(parsed);
+                        } else {
+                            // replace the planets with the same level.
+                            planets = Stream.concat(planets.stream().filter(planet -> !planet.level().equals(parsed.level())), Stream.of(parsed)).collect(Collectors.toList());
+                        }
                     }
                 }
             } catch (Exception e) {

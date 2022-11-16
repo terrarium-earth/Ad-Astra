@@ -3,6 +3,8 @@ package earth.terrarium.ad_astra.client.screens.utils;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Pair;
+import com.teamresourceful.resourcefullib.client.scissor.ClosingScissorBox;
+import com.teamresourceful.resourcefullib.client.utils.RenderUtils;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.AdAstraClient;
 import earth.terrarium.ad_astra.client.resourcepack.Galaxy;

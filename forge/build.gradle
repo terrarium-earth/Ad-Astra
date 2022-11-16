@@ -36,13 +36,11 @@ dependencies {
     modApi "com.teamresourceful.resourcefullib:resourcefullib-forge-$resourcefullib_version"
 
     modApi("me.shedaniel.cloth:cloth-config-forge:$rootProject.cloth_config_version")
-
     modImplementation "vazkii.patchouli:Patchouli:$rootProject.patchouli_version"
 
+    modCompileOnly "me.shedaniel:RoughlyEnoughItems-forge:$project.rei_version"
     modCompileOnly("mezz.jei:jei-$rootProject.minecraft_version-forge-api:$rootProject.jei_version")
     modLocalRuntime("mezz.jei:jei-$rootProject.minecraft_version-forge:$rootProject.jei_version") { transitive = false }
-
-    modCompileOnly "me.shedaniel:RoughlyEnoughItems-forge:$project.rei_version"
 }
 
 processResources {
