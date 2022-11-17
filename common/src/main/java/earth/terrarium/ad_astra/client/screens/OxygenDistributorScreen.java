@@ -143,7 +143,7 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
             NetworkHandling.CHANNEL.sendToServer(new ToggleDistributorPacket(this.machine.getBlockPos()));
             this.machine.setShowOxygen(!oxygenDistributor.shouldShowOxygen());
         });
-        visibleButton.doMask = false;
+        visibleButton.doScissor = false;
         this.addRenderableWidget(visibleButton);
     }
 

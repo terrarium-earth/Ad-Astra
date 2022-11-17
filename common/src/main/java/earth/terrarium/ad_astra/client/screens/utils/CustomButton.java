@@ -2,8 +2,6 @@ package earth.terrarium.ad_astra.client.screens.utils;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.teamresourceful.resourcefullib.client.scissor.ClosingScissorBox;
-import com.teamresourceful.resourcefullib.client.utils.RenderUtils;
 import com.teamresourceful.resourcefullib.common.color.Color;
 import earth.terrarium.ad_astra.client.screens.utils.PlanetSelectionScreen.TooltipType;
 import earth.terrarium.ad_astra.data.ButtonColour;
@@ -41,9 +39,10 @@ public class CustomButton extends Button {
     private final Planet planetInfo;
 
     private final PlanetSelectionScreen.TooltipType tooltip;
-    public boolean doMask = true;
+    public boolean doScissor = true;
 
     public CustomButton(int x, int y, Component label, ButtonType size, ButtonColour buttonColour, PlanetSelectionScreen.TooltipType tooltip, Planet planetInfo, OnPress onPress) {
+
         super(x, y, size.getWidth(), size.getHeight(), adjustText(label), onPress);
 
         this.startY = y;
@@ -77,8 +76,10 @@ public class CustomButton extends Button {
     @Override
     public void render(PoseStack poseStack, int mouseX, int mouseY, float delta) {
         if (this.visible) {
-
             Minecraft client = Minecraft.getInstance();
+            double scale = client.getWindow().getGuiScale();
+            int screenHeight = client.getWindow().getGuiScaledHeight();
+            int scissorY = (int) (((screenHeight / 2) - 83) * scale);
 
             boolean over = this.isMouseOver(mouseX, mouseY);
             Color color = over ? this.buttonColourLightened : this.buttonColour;
@@ -89,10 +90,10 @@ public class CustomButton extends Button {
             RenderSystem.setShader(GameRenderer::getPositionTexShader);
             RenderSystem.enableDepthTest();
 
-            ClosingScissorBox scissor = null;
-            if (doMask) {
-                scissor = RenderUtils.createScissorBox(Minecraft.getInstance(), poseStack, 10, 176, 200, 130);
+            if (this.doScissor) {
+                RenderSystem.enableScissor(0, scissorY, (int) (215 * scale), (int) (127 * scale));
             }
+
             RenderSystem.setShaderColor(color.getFloatRed(), color.getFloatGreen(), color.getFloatBlue(), this.buttonColour.getFloatAlpha());
             RenderSystem.setShaderTexture(0, switch (this.buttonSize) {
                 case LARGE -> LARGE_BUTTON_TEXTURE;
@@ -103,13 +104,15 @@ public class CustomButton extends Button {
 
             blit(poseStack, (this.buttonSize.equals(ButtonType.LARGE) ? this.x - 2 : this.x), this.y, 0, 0, this.width, this.height, buttonSize.getWidth(), buttonSize.getHeight());
             drawText(poseStack, client);
-            if (scissor != null) {
-                scissor.close();
+
+            if (this.doScissor) {
+                RenderSystem.disableScissor();
             }
 
             if (this.isMouseOver(mouseX, mouseY)) {
                 renderTooltips(poseStack, mouseX, mouseY, client);
             }
+
             poseStack.popPose();
             RenderSystem.disableDepthTest();
         }
