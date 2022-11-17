@@ -16,7 +16,6 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.AABB;
 
 import java.util.List;
@@ -70,7 +69,10 @@ public class RoverItem extends VehicleItem {
             rover.setPos(context.getClickLocation().add(0, 0, 1));
             level.addFreshEntity(rover);
             level.playSound(null, pos, SoundEvents.LODESTONE_PLACE, SoundSource.BLOCKS, 1, 1);
-            if (roverStack.isDirty()) player.setItemInHand(context.getHand(), roverStack.getStack());
+            if (roverStack.isDirty()) {
+                player.setItemInHand(context.getHand(), roverStack.getStack());
+            }
+            player.getItemInHand(context.getHand()).shrink(1);
         }
         return InteractionResult.SUCCESS;
     }

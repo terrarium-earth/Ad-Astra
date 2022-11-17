@@ -94,11 +94,14 @@ public class RocketItem<T extends Rocket> extends VehicleItem {
                             rocketEntity.setPos(pos.getX() + 0.5, pos.getY() + 0.1, pos.getZ() + 0.5);
                             rocketEntity.setYRot(Math.round((player.getYRot() + 180) / 90) * 90);
                             level.addFreshEntity(rocketEntity);
+                            if (rocketStack.isDirty()) {
+                                player.setItemInHand(context.getHand(), rocketStack.getStack());
+                            }
+                            player.getItemInHand(context.getHand()).shrink(1);
 
                             return InteractionResult.SUCCESS;
                         }
                     }
-                    if (rocketStack.isDirty()) player.setItemInHand(context.getHand(), rocketStack.getStack());
                 }
             }
         }
