@@ -20,7 +20,7 @@ public abstract class ConversionRecipe extends ModRecipe {
 
     public ConversionRecipe(ResourceLocation id, Ingredient input, Fluid output, double conversionRatio) {
         super(id);
-        this.inputs.add(input);
+        this.inputs.add(IngredientHolder.of(input));
         this.output = output;
         this.conversionRatio = conversionRatio;
     }

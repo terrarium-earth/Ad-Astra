@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Optional;
 
 @Mixin(PiglinSpecificSensor.class)
-public class PiglinSpecificSensorMixin {
+public abstract class PiglinSpecificSensorMixin {
 
     // Disable Pygros running away from soul blocks.
     @Inject(method = "findNearestRepellent", at = @At("HEAD"), cancellable = true)

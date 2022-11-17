@@ -6,6 +6,7 @@ import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
 import earth.terrarium.ad_astra.compat.emi.EmiCategories;
+import earth.terrarium.ad_astra.recipes.IngredientHolder;
 import earth.terrarium.ad_astra.recipes.SpaceStationRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -23,11 +24,8 @@ public class EmiSpaceStationRecipe implements EmiRecipe {
 		this.id = recipe.getId();
 		this.recipe = recipe;
 
-		List<Integer> stackCounts = recipe.getStackCounts();
-		List<Ingredient> ingredients = recipe.getIngredients();
-
-		for (int i = 0; i < ingredients.size(); i++) {
-			this.input.add(EmiIngredient.of(ingredients.get(i), stackCounts.get(i)));
+		for (IngredientHolder holder : recipe.getHolders()) {
+			this.input.add(EmiIngredient.of(holder.ingredient(), holder.count()));
 		}
 	}
 

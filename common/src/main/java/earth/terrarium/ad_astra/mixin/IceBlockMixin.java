@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(IceBlock.class)
-public class IceBlockMixin {
+public abstract class IceBlockMixin {
 
     @Inject(method = "playerDestroy", at = @At("TAIL"))
     public void adastra_playerDestroy(Level level, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack, CallbackInfo ci) {

@@ -26,65 +26,65 @@ import java.util.List;
 @Environment(EnvType.CLIENT)
 public class SpaceStationCategory implements DisplayCategory<SpaceStationDisplay> {
 
-	public static final ResourceLocation ICON = new ModResourceLocation("textures/gui/space_station_icon.png");
+    public static final ResourceLocation ICON = new ModResourceLocation("textures/gui/space_station_icon.png");
 
-	@Override
-	public Renderer getIcon() {
-		return new Renderer() {
+    @Override
+    public Renderer getIcon() {
+        return new Renderer() {
 
-			@Override
-			public void render(PoseStack poseStack, Rectangle bounds, int mouseX, int mouseY, float delta) {
-				ScreenUtils.addTexture(poseStack, bounds.x, bounds.y, 16, 16, ICON);
-			}
+            @Override
+            public void render(PoseStack poseStack, Rectangle bounds, int mouseX, int mouseY, float delta) {
+                ScreenUtils.addTexture(poseStack, bounds.x, bounds.y, 16, 16, ICON);
+            }
 
-			@Override
-			public int getZ() {
-				return 0;
-			}
+            @Override
+            public int getZ() {
+                return 0;
+            }
 
-			@Override
-			public void setZ(int z) {
-			}
-		};
-	}
+            @Override
+            public void setZ(int z) {
+            }
+        };
+    }
 
-	@Override
-	public Component getTitle() {
-		return Component.translatable("rei.category.ad_astra.space_station");
-	}
+    @Override
+    public Component getTitle() {
+        return Component.translatable("rei.category.ad_astra.space_station");
+    }
 
-	@Override
-	public int getDisplayWidth(SpaceStationDisplay display) {
-		return 150;
-	}
+    @Override
+    public int getDisplayWidth(SpaceStationDisplay display) {
+        return 150;
+    }
 
-	@Override
-	public int getDisplayHeight() {
-		return 51;
-	}
+    @Override
+    public int getDisplayHeight() {
+        return 51;
+    }
 
-	@Override
-	public CategoryIdentifier<? extends SpaceStationDisplay> getCategoryIdentifier() {
-		return REICategories.SPACE_STATION_CATEGORY;
-	}
+    @Override
+    public CategoryIdentifier<? extends SpaceStationDisplay> getCategoryIdentifier() {
+        return REICategories.SPACE_STATION_CATEGORY;
+    }
 
-	@Override
-	public List<Widget> setupDisplay(SpaceStationDisplay display, Rectangle bounds) {
-		Point startPoint = new Point(bounds.getCenterX() - 71, bounds.getCenterY() - 20);
+    @Override
+    public List<Widget> setupDisplay(SpaceStationDisplay display, Rectangle bounds) {
+        Point startPoint = new Point(bounds.getCenterX() - 71, bounds.getCenterY() - 20);
 
-		List<Widget> widgets = new ArrayList<>();
-		List<EntryIngredient> inputs = display.getInputEntries();
+        List<Widget> widgets = new ArrayList<>();
+        List<EntryIngredient> inputs = display.getInputEntries();
 
-		widgets.add(Widgets.createRecipeBase(bounds));
-		for (int i = 0; i < 8; i++) {
-			if (i < inputs.size()) {
-				Item item = ((ItemStack) inputs.get(i).get(0).getValue()).getItem();
-				widgets.add(Widgets.createSlot(new Point(startPoint.x + 18 * i, startPoint.y)).markInput().entries(List.of(EntryStacks.of(new ItemStack(item, display.recipe().getStackCounts().get(i))))));
-			} else {
-				widgets.add(Widgets.createSlot(new Point(startPoint.x + 18 * i, startPoint.y)));
-			}
-		}
+        widgets.add(Widgets.createRecipeBase(bounds));
+        for (int i = 0; i < 8; i++) {
+            if (i < inputs.size()) {
+                Item item = ((ItemStack) inputs.get(i).get(0).getValue()).getItem();
+                widgets.add(Widgets.createSlot(new Point(startPoint.x + 18 * i, startPoint.y)).markInput().entries(List.of(EntryStacks.of(new ItemStack(item, display.recipe().getHolders().get(i).count())))));
+            } else {
+                widgets.add(Widgets.createSlot(new Point(startPoint.x + 18 * i, startPoint.y)));
+            }
+        }
 
-		return widgets;
-	}
+        return widgets;
+    }
 }

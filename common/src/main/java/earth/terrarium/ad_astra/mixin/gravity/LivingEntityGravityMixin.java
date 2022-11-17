@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LivingEntity.class)
-public class LivingEntityGravityMixin {
+public abstract class LivingEntityGravityMixin {
 
     @Unique
     private static final double CONSTANT = 0.08;

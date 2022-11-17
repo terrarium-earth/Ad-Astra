@@ -15,13 +15,10 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class NasaWorkbenchMenu extends AbstractMachineMenu<NasaWorkbenchBlockEntity> {
-
-    private ItemStack output = ItemStack.EMPTY;
-    private List<Integer> stackCounts = new ArrayList<>();
+    private NasaWorkbenchRecipe recipe;
 
     public NasaWorkbenchMenu(int syncId, Inventory inventory, FriendlyByteBuf buf) {
         this(syncId, inventory, (NasaWorkbenchBlockEntity) inventory.player.level.getBlockEntity(buf.readBlockPos()));
@@ -78,10 +75,11 @@ public class NasaWorkbenchMenu extends AbstractMachineMenu<NasaWorkbenchBlockEnt
     @Override
     public void clicked(int slotIndex, int button, @NotNull ClickType actionType, @NotNull Player player) {
 
+        if (player.level.isClientSide) return;
         if (slotIndex == 14) {
             if (!machine.getItems().get(14).isEmpty()) {
                 machine.spawnResultParticles();
-                machine.spawnOutputAndClearInput(this.stackCounts, this.output);
+                machine.spawnOutputAndClearInput(this.recipe);
             }
         } else {
             super.clicked(slotIndex, button, actionType, player);
@@ -95,16 +93,9 @@ public class NasaWorkbenchMenu extends AbstractMachineMenu<NasaWorkbenchBlockEnt
     }
 
     public void updateContent() {
-
         NasaWorkbenchRecipe recipe = ModRecipeTypes.NASA_WORKBENCH_RECIPE.get().findFirst(level, f -> f.test(this.machine));
-
-        ItemStack output = ItemStack.EMPTY;
-        if (recipe != null) {
-            output = recipe.getResultItem();
-            this.stackCounts = recipe.getStackCounts();
-        }
-        this.output = output;
-        this.machine.setItem(14, output);
+        this.recipe = recipe;
+        this.machine.setItem(14, recipe == null ? ItemStack.EMPTY : recipe.getResultItem());
         this.broadcastFullState();
     }
 

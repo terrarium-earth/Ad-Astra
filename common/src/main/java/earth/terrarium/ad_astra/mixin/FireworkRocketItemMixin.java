@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(FireworkRocketItem.class)
-public class FireworkRocketItemMixin {
+public abstract class FireworkRocketItemMixin {
 
     // Cancel firework boost with jet suit
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)

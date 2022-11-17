@@ -6,7 +6,7 @@
     },
     {
       "required": false,
-      "id": "#forge:steel_ingots"
+      "id": "#forge:ingots/steel"
     }
   ]
 }

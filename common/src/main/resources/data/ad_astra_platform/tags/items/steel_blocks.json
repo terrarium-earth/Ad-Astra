@@ -6,7 +6,7 @@
     },
     {
       "required": false,
-      "id": "#forge:steel_blocks"
+      "id": "#forge:storage_blocks/steel"
     }
   ]
 }

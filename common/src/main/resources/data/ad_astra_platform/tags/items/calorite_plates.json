@@ -6,7 +6,7 @@
     },
     {
       "required": false,
-      "id": "#forge:calorite_plates"
+      "id": "#forge:plates/calorite"
     }
   ]
 }

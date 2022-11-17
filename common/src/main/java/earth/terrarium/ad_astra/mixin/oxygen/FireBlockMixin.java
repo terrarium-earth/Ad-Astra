@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(FireBlock.class)
-public class FireBlockMixin {
+public abstract class FireBlockMixin {
 
     @Inject(method = "onPlace", at = @At(value = "HEAD"))
     public void adastra_onBlockAdded(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean notify, CallbackInfo ci) {

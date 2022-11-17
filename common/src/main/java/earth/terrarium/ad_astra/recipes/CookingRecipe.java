@@ -11,14 +11,14 @@ public abstract class CookingRecipe extends ModRecipe {
     private final ItemStack output;
     private int cookTime;
 
-    public CookingRecipe(ResourceLocation id, Ingredient input, ItemStack output, int cookTime) {
+    public CookingRecipe(ResourceLocation id, IngredientHolder input, ItemStack output, int cookTime) {
         super(id, input);
         this.output = output;
         this.cookTime = cookTime;
     }
 
-    public CookingRecipe(ResourceLocation id, List<Ingredient> input, List<Integer> stackCounts, ItemStack output) {
-        super(id, input, stackCounts);
+    public CookingRecipe(ResourceLocation id, List<IngredientHolder> input, ItemStack output) {
+        super(id, input);
         this.output = output;
     }
 
@@ -28,7 +28,7 @@ public abstract class CookingRecipe extends ModRecipe {
     }
 
     public Ingredient getInputIngredient() {
-        return this.inputs.get(0);
+        return this.inputs.get(0).ingredient();
     }
 
     public int getCookTime() {

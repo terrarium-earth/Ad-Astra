@@ -15,7 +15,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 public class CompressingRecipe extends CookingRecipe {
 
     public CompressingRecipe(ResourceLocation id, Ingredient input, ItemStack output, int cookTime) {
-        super(id, input, output, cookTime);
+        super(id, IngredientHolder.of(input), output, cookTime);
     }
 
     public static Codec<CompressingRecipe> codec(ResourceLocation id) {

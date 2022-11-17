@@ -7,18 +7,15 @@ import earth.terrarium.ad_astra.registry.ModRecipeSerializers;
 import earth.terrarium.ad_astra.registry.ModRecipeTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class NasaWorkbenchRecipe extends CookingRecipe {
 
-    public NasaWorkbenchRecipe(ResourceLocation id, List<Ingredient> input, List<Integer> stackCounts, ItemStack output) {
-        super(id, input, stackCounts, output);
+    public NasaWorkbenchRecipe(ResourceLocation id, List<IngredientHolder> input, ItemStack output) {
+        super(id, input, output);
     }
 
     public static Codec<NasaWorkbenchRecipe> codec(ResourceLocation id) {
@@ -26,25 +23,7 @@ public class NasaWorkbenchRecipe extends CookingRecipe {
                 RecordCodecBuilder.point(id),
                 IngredientHolder.CODEC.listOf().fieldOf("ingredients").forGetter(NasaWorkbenchRecipe::getHolders),
                 ItemStackCodec.CODEC.fieldOf("output").forGetter(NasaWorkbenchRecipe::getResultItem)
-        ).apply(instance, NasaWorkbenchRecipe::of));
-    }
-
-    private static NasaWorkbenchRecipe of(ResourceLocation id, List<IngredientHolder> ingredients, ItemStack output) {
-        List<Ingredient> input = new ArrayList<>();
-        List<Integer> count = new ArrayList<>();
-        for (IngredientHolder ingredient : ingredients) {
-            input.add(ingredient.ingredient());
-            count.add(ingredient.count());
-        }
-        return new NasaWorkbenchRecipe(id, input, count, output);
-    }
-
-    public List<IngredientHolder> getHolders() {
-        List<IngredientHolder> holders = new LinkedList<>();
-        for (int i = 0; i < getIngredients().size(); i++) {
-            holders.add(new IngredientHolder(getIngredients().get(i), stackCounts.get(i)));
-        }
-        return holders;
+        ).apply(instance, NasaWorkbenchRecipe::new));
     }
 
     @Override

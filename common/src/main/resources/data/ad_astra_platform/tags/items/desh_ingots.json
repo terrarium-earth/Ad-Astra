@@ -6,7 +6,7 @@
     },
     {
       "required": false,
-      "id": "#forge:desh_ingots"
+      "id": "#forge:ingots/desh"
     }
   ]
 }

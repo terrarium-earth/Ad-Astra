@@ -6,7 +6,7 @@
     },
     {
       "required": false,
-      "id": "#forge:ostrum_plates"
+      "id": "#forge:plates/ostrum"
     }
   ]
 }

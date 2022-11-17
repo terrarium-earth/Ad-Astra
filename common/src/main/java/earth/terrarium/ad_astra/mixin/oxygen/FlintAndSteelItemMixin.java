@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(FlintAndSteelItem.class)
-public class FlintAndSteelItemMixin {
+public abstract class FlintAndSteelItemMixin {
     @Inject(method = "useOn", at = @At(value = "HEAD"), cancellable = true)
     public void adastra_useOnBlock(UseOnContext context, CallbackInfoReturnable<InteractionResult> cir) {
         if (!AdAstra.CONFIG.general.doOxygen) {

@@ -6,7 +6,7 @@
     },
     {
       "required": false,
-      "id": "#forge:calorite_ingots"
+      "id": "#forge:ingots/calorite"
     }
   ]
 }

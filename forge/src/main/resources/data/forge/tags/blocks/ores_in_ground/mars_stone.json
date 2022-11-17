@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "ad_astra:mars_iron_ore",
+    "ad_astra:mars_diamond_ore",
+    "ad_astra:mars_ostrum_ore",
+    "ad_astra:mars_ice_shard_ore"
+  ]
+}

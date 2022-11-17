@@ -35,7 +35,6 @@
   ],
   "client": [
     "client.CameraMixin",
-    "client.ClientRecipeBookMixin",
     "client.EntityRendererMixin",
     "client.GameRendererMixin",
     "client.HumanoidModelMixin",

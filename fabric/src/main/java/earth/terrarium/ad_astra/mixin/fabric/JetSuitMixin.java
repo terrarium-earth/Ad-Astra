@@ -8,8 +8,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(JetSuit.class)
-public class JetSuitMixin implements FabricElytraItem {
-    @Shadow
+public abstract class JetSuitMixin implements FabricElytraItem {
+    @Shadow(remap = false)
     private boolean isFallFlying;
 
     @Override

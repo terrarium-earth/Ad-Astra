@@ -16,28 +16,30 @@ import java.util.function.Predicate;
 public abstract class ModRecipe implements Recipe<Container>, Predicate<ItemStack> {
 
     protected final ResourceLocation id;
-    protected final List<Ingredient> inputs = new ArrayList<>();
-    protected List<Integer> stackCounts;
+    protected final List<IngredientHolder> inputs = new ArrayList<>();
 
     public ModRecipe(ResourceLocation id) {
         this.id = id;
     }
 
-    public ModRecipe(ResourceLocation id, Ingredient input) {
+    public ModRecipe(ResourceLocation id, IngredientHolder input) {
         this.id = id;
         this.inputs.add(input);
     }
 
-    public ModRecipe(ResourceLocation id, List<Ingredient> input, List<Integer> stackCounts) {
+    public ModRecipe(ResourceLocation id, List<IngredientHolder> input) {
         this.id = id;
         this.inputs.addAll(input);
-        this.stackCounts = stackCounts;
+    }
+
+    public List<IngredientHolder> getHolders() {
+        return this.inputs;
     }
 
     @Override
     public boolean matches(Container inventory, Level level) {
         // Unused.
-        return true;
+        return false;
     }
 
     @Override
@@ -59,6 +61,11 @@ public abstract class ModRecipe implements Recipe<Container>, Predicate<ItemStac
     }
 
     @Override
+    public boolean isSpecial() {
+        return true;
+    }
+
+    @Override
     public ResourceLocation getId() {
         return this.id;
     }
@@ -66,19 +73,15 @@ public abstract class ModRecipe implements Recipe<Container>, Predicate<ItemStac
     @Override
     public NonNullList<Ingredient> getIngredients() {
         NonNullList<Ingredient> defaultedList = NonNullList.create();
-        defaultedList.addAll(this.inputs);
+        this.inputs.stream().map(IngredientHolder::ingredient).forEach(defaultedList::add);
         return defaultedList;
-    }
-
-    public List<Integer> getStackCounts() {
-        return this.stackCounts;
     }
 
     // Checks if the stack matches the recipe inputs.
     @Override
     public boolean test(ItemStack itemStack) {
-        for (Ingredient input : this.inputs) {
-            if (input.test(itemStack)) {
+        for (IngredientHolder input : this.inputs) {
+            if (input.ingredient().test(itemStack)) {
                 return true;
             }
         }
@@ -87,9 +90,8 @@ public abstract class ModRecipe implements Recipe<Container>, Predicate<ItemStac
 
     // Tests if everything in the inventory matches the recipe in the correct order.
     public boolean test(ModInventory inventory) {
-
         for (int i = 0; i < this.inputs.size(); i++) {
-            if (!inputs.get(i).test(inventory.getItems().get(i))) {
+            if (!inputs.get(i).ingredient().test(inventory.getItems().get(i))) {
                 return false;
             }
         }

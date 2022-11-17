@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BlockItem.class)
-public class BlockItemMixin {
+public abstract class BlockItemMixin {
 
     @Unique
     private static void adastra_playFireExtinguish(BlockPos pos, Level level) {

@@ -10,4 +10,8 @@ public record IngredientHolder(Ingredient ingredient, int count) {
             IngredientCodec.CODEC.fieldOf("ingredient").forGetter(IngredientHolder::ingredient),
             Codec.INT.fieldOf("count").orElse(1).forGetter(IngredientHolder::count)
     ).apply(instance, IngredientHolder::new));
+
+    public static IngredientHolder of(Ingredient ingredient) {
+        return new IngredientHolder(ingredient, 1);
+    }
 }

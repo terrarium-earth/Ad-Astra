@@ -10,8 +10,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(JetSuit.class)
-public class JetSuitMixin extends Item {
-    @Shadow
+public abstract class JetSuitMixin extends Item {
+    @Shadow(remap = false)
     private boolean isFallFlying;
 
     public JetSuitMixin(Properties settings) {

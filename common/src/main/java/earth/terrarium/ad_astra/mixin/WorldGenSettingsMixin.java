@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.Optional;
 
 @Mixin(WorldGenSettings.class)
-public class WorldGenSettingsMixin {
+public abstract class WorldGenSettingsMixin {
 
     // Gets the level seed
     @Inject(at = @At(value = "TAIL"), method = "<init>(JZZLnet/minecraft/core/Registry;Ljava/util/Optional;)V")

@@ -4,9 +4,7 @@ import earth.terrarium.ad_astra.registry.ModBlocks;
 import earth.terrarium.ad_astra.util.OxygenUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
@@ -18,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LiquidBlock.class)
-public class LiquidBlockMixin {
+public abstract class LiquidBlockMixin {
 
     @Inject(method = "onPlace", at = @At("HEAD"))
     public void adastra_onBlockAdded(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean notify, CallbackInfo ci) {

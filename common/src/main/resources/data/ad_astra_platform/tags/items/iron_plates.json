@@ -6,7 +6,7 @@
     },
     {
       "required": false,
-      "id": "#forge:iron_plates"
+      "id": "#forge:plates/iron"
     }
   ]
 }

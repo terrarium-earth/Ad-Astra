@@ -66,15 +66,15 @@ public class NasaWorkbenchBlockEntity extends AbstractMachineBlockEntity {
         }
     }
 
-    public void spawnOutputAndClearInput(List<Integer> stackCounts, ItemStack output) {
+    public void spawnOutputAndClearInput(NasaWorkbenchRecipe recipe) {
         BlockPos pos = this.getBlockPos();
-        ItemEntity itemEntity = new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 2.5, pos.getZ() + 0.5, output.copy());
+        ItemEntity itemEntity = new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 2.5, pos.getZ() + 0.5, recipe.getResultItem().copy());
         itemEntity.setDeltaMovement(itemEntity.getDeltaMovement().scale(0.5));
         this.level.addFreshEntity(itemEntity);
         itemEntity.setDefaultPickUpDelay();
 
-        for (int i = 0; i < this.getItems().size() - 1; i++) {
-            this.getItems().get(i).shrink(stackCounts.get(i));
+        for (int i = 0; i < this.getItems().size() - 1 && i < recipe.getHolders().size(); i++) {
+            this.getItems().get(i).shrink(recipe.getHolders().get(i).count());
         }
         this.setChanged();
     }

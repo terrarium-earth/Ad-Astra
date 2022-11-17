@@ -6,7 +6,7 @@
     },
     {
       "required": false,
-      "id": "#forge:desh_plates"
+      "id": "#forge:plates/desh"
     }
   ]
 }

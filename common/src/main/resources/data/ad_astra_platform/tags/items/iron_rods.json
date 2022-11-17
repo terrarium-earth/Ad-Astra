@@ -6,7 +6,7 @@
     },
     {
       "required": false,
-      "id": "#forge:iron_rods"
+      "id": "#forge:rods/iron"
     }
   ]
 }

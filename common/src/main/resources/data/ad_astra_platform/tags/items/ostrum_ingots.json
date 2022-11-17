@@ -6,7 +6,7 @@
     },
     {
       "required": false,
-      "id": "#forge:ostrum_ingots"
+      "id": "#forge:ingots/ostrum"
     }
   ]
 }

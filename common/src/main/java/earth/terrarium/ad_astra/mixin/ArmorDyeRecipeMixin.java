@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ArmorDyeRecipe.class)
-public class ArmorDyeRecipeMixin {
+public abstract class ArmorDyeRecipeMixin {
 
     @Inject(method = "matches*", at = @At("HEAD"), cancellable = true)
     public void adastra_matches(CraftingContainer craftingInventory, Level level, CallbackInfoReturnable<Boolean> cir) {
