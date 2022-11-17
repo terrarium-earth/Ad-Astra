@@ -5,11 +5,11 @@
   "minVersion": "0.8.5",
   "client": [
     "ModRenderedItemMixin",
+    "DimensionSpecialEffectsMixin",
     "SpaceSuitMixin"
   ],
   "mixins": [
     "AxeItemAccessor",
-    "DimensionSpecialEffectsMixin",
     "JetSuitMixin"
   ],
   "injectors": {

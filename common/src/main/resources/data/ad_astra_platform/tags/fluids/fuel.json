@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "required": false,
+      "id": "#c:fuel"
+    },
+    {
+      "required": false,
+      "id": "#forge:fuel"
+    }
+  ]
+}

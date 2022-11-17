@@ -31,3 +31,4 @@ bin/
 hs_err_pid*
 
 /fabric/src/main/generated/
+.architectury-transformer/

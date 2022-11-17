@@ -103,7 +103,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
     }
 
     public long getFluidToExtract(long oxygenBlocks, boolean client) {
-        long value = (FluidHooks.buckets(1) / 1000) * oxygenBlocks / 44;
+        long value = (long) (((FluidHooks.buckets(1) / 1000) * oxygenBlocks / 44) * AdAstra.CONFIG.oxygenDistributor.oxygenMultiplier);
         if (client) {
             return value;
         }

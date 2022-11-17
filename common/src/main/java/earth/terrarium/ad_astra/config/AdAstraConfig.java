@@ -168,7 +168,7 @@ public class AdAstraConfig implements ConfigData {
         @ConfigEntry.BoundedDiscrete(min = 0, max = 500)
         public final int refreshTicks = 60;
         @ConfigEntry.Gui.Tooltip()
-        public final double oxygenMultiplier = 0.8;
+        public final double oxygenMultiplier = 1.0;
         @ConfigEntry.Gui.Tooltip()
         public final double energyMultiplier = 3.0;
     }
