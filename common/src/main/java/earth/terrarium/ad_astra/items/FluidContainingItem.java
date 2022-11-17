@@ -19,10 +19,6 @@ public interface FluidContainingItem extends FluidHoldingItem {
         return getTank(stack).getFluidAmount();
     }
 
-    default void setFluidAmount(ItemStack stack, long amount) {
-        getTank(stack).setAmount(amount);
-    }
-
     default Fluid getFluid(ItemStack stack) {
         return getTank(stack).getFluid();
     }

@@ -6,6 +6,7 @@ import earth.terrarium.ad_astra.registry.ModItems;
 import earth.terrarium.ad_astra.registry.ModTags;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
+import earth.terrarium.botarium.api.fluid.PlatformFluidItemHandler;
 import earth.terrarium.botarium.api.item.ItemStackHolder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -59,7 +60,8 @@ public class SpaceSuit extends DyeableArmorItem implements FluidContainingItem, 
     @Override
     public void appendHoverText(ItemStack stack, Level level, @NotNull List<Component> tooltip, @NotNull TooltipFlag context) {
         if (stack.is(ModItems.SPACE_SUIT.get()) || stack.is(ModItems.NETHERITE_SPACE_SUIT.get()) || stack.is(ModItems.JET_SUIT.get())) {
-            long oxygen = FluidHooks.toMillibuckets(FluidHooks.getItemFluidManager(stack).getFluidInTank(0).getFluidAmount());
+            PlatformFluidItemHandler itemFluidManager = FluidHooks.getItemFluidManager(stack);
+            long oxygen = FluidHooks.toMillibuckets(itemFluidManager.getFluidInTank(0).getFluidAmount());
             tooltip.add(Component.translatable("tooltip.ad_astra.space_suit", oxygen, FluidHooks.toMillibuckets(getTankSize())).setStyle(Style.EMPTY.withColor(oxygen > 0 ? ChatFormatting.GREEN : ChatFormatting.RED)));
         }
     }

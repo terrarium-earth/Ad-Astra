@@ -22,7 +22,6 @@ import org.jetbrains.annotations.Nullable;
 
 public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity implements EnergyBlock {
     private ExtractOnlyEnergyContainer energyContainer;
-    int ticksToTurnOff = 0;
 
     public CoalGeneratorBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.COAL_GENERATOR.get(), blockPos, blockState);
@@ -59,7 +58,6 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity imple
                 this.cookTime--;
                 this.getEnergyStorage().internalInsert(this.getEnergyPerTick(), false);
                 this.setActive(true);
-                ticksToTurnOff = 7;
                 // Check if the input is a valid fuel
             } else if (!input.isEmpty() && !(input.getItem() instanceof BucketItem)) {
                 int burnTime = Math.min(20000, PlatformUtils.getBurnTime(input));
@@ -69,12 +67,6 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity imple
             } else {
                 this.setActive(false);
             }
-        } else {
-            ticksToTurnOff--;
-            if (ticksToTurnOff <= 0) {
-                this.setActive(false);
-            }
-
             EnergyHooks.distributeEnergyNearby(this, this.getEnergyPerTick());
         }
     }
