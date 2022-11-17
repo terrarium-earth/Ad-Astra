@@ -8,6 +8,9 @@ import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Config(name = "ad_astra")
 @Config.Gui.Background("ad_astra:textures/block/machine_down.png")
 public class AdAstraConfig implements ConfigData {
@@ -70,6 +73,7 @@ public class AdAstraConfig implements ConfigData {
         public int heatDamage = 2;
         public int acidRainDamage = 3;
         public boolean allowFlagImages = true;
+        public List<String> disabledPlanets = new ArrayList<>();
     }
 
     public static class SpaceSuitConfig {

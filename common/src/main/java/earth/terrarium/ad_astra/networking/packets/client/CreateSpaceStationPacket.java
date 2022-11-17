@@ -58,7 +58,7 @@ public record CreateSpaceStationPacket(ResourceLocation targetWorld) implements 
         }
 
         @Override
-        public PacketContext handle(CreateSpaceStationPacket message) {
+        public PacketContext handle(CreateSpaceStationPacket packet) {
             return (player, level) -> {
                 if (!player.isCreative() && !player.isSpectator()) {
                     for (SpaceStationRecipe recipe : ModRecipeTypes.SPACE_STATION_RECIPE.get().getRecipes(player.level)) {
@@ -77,7 +77,7 @@ public record CreateSpaceStationPacket(ResourceLocation targetWorld) implements 
                 }
 
                 if (level instanceof ServerLevel serverWorld) {
-                    ServerLevel targetWorld = serverWorld.getServer().getLevel(ResourceKey.create(Registry.DIMENSION_REGISTRY, message.targetWorld));
+                    ServerLevel targetWorld = serverWorld.getServer().getLevel(ResourceKey.create(Registry.DIMENSION_REGISTRY, packet.targetWorld));
 
                     if (targetWorld == null) {
                         return;

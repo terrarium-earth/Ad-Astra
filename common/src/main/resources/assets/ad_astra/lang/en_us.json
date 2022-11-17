@@ -617,6 +617,7 @@
   "text.autoconfig.ad_astra.option.general.acidRainBurns": "Acid Rain Burns",
   "text.autoconfig.ad_astra.option.general.acidRainDamage": "Acid Rain Damage",
   "text.autoconfig.ad_astra.option.general.allowFlagImages": "Allow Images on Flags",
+  "text.autoconfig.ad_astra.option.general.disabledPlanets": "Disabled Planets",
   "text.autoconfig.ad_astra.option.general.doEntityGravity": "Do Entity Gravity",
   "text.autoconfig.ad_astra.option.general.doEntityGravity.@Tooltip": "Do gravity for items, boats, arrows etc.",
   "text.autoconfig.ad_astra.option.general.doLivingEntityGravity": "Do Living Entity Gravity",

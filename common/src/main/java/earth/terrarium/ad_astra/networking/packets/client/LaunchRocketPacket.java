@@ -37,7 +37,7 @@ public record LaunchRocketPacket() implements Packet<LaunchRocketPacket> {
         }
 
         @Override
-        public PacketContext handle(LaunchRocketPacket message) {
+        public PacketContext handle(LaunchRocketPacket packet) {
             return (player, level) -> {
                 if (player.getVehicle() instanceof Rocket rocket) {
                     if (!rocket.isFlying()) {
