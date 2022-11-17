@@ -246,7 +246,7 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
                 this.galaxyCategories.add(galaxyCategory);
                 this.solarSystemsCategories.add(solarSystemCategory);
 
-                if (planet.parentWorld() == null) {
+                if (planet.parentWorld() == null && !AdAstra.CONFIG.general.disabledPlanets.contains(planet.level().location().toString())) {
                     createNavigationButton(label, solarSystemCategory, ButtonType.NORMAL, planet.buttonColour(), TooltipType.CATEGORY, planet, planetCategory);
                 }
 

@@ -36,9 +36,9 @@ public record ToggleDistributorPacket(BlockPos pos) implements Packet<ToggleDist
         }
 
         @Override
-        public PacketContext handle(ToggleDistributorPacket message) {
+        public PacketContext handle(ToggleDistributorPacket packet) {
             return (player, level) -> {
-                if (level.getBlockEntity(message.pos()) instanceof OxygenDistributorBlockEntity oxygenDistributor) {
+                if (level.getBlockEntity(packet.pos()) instanceof OxygenDistributorBlockEntity oxygenDistributor) {
                     oxygenDistributor.setShowOxygen(!oxygenDistributor.shouldShowOxygen());
                 }
             };

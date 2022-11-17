@@ -41,9 +41,9 @@ public record DatapackPlanetsPacket(Collection<Planet> planets) implements Packe
         }
 
         @Override
-        public PacketContext handle(DatapackPlanetsPacket message) {
+        public PacketContext handle(DatapackPlanetsPacket packet) {
             return (player, level) -> {
-                AdAstra.planets = new HashSet<>(message.planets);
+                AdAstra.planets = new HashSet<>(packet.planets);
                 AdAstra.planetWorlds = AdAstra.planets.stream().map(Planet::level).collect(Collectors.toSet());
                 AdAstra.orbitWorlds = AdAstra.planets.stream().map(Planet::orbitWorld).collect(Collectors.toSet());
                 AdAstra.adAstraWorlds = Stream.concat(AdAstra.planetWorlds.stream(), AdAstra.orbitWorlds.stream()).collect(Collectors.toSet());

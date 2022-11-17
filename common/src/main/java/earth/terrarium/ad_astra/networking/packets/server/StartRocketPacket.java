@@ -35,9 +35,9 @@ public record StartRocketPacket(int entityId) implements Packet<StartRocketPacke
         }
 
         @Override
-        public PacketContext handle(StartRocketPacket message) {
+        public PacketContext handle(StartRocketPacket packet) {
             return (player, level) -> {
-                if (level.getEntity(message.entityId) instanceof Rocket rocket) {
+                if (level.getEntity(packet.entityId) instanceof Rocket rocket) {
                     if (!rocket.isFlying()) {
                         rocket.initiateLaunchSequence();
                     }
