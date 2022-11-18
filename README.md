@@ -1,3 +1,4 @@
+
 <a href="https://github.com/Team-Resourceful/ResourcefulLib">
     <p align="center">
         <img src="https://media.discordapp.net/attachments/1023678603289972797/1042445198183120946/BH_NU_BADGE.png" alt="ResourcefulLib" width="400"/> 
@@ -6,7 +7,7 @@
 
 Also uses [Botarium](https://github.com/terrarium-earth/Botarium)
 
-![Banner](https://media.discordapp.net/attachments/1005790947365376060/1007374451828084836/Ad_Astra_Banner.png?width=1440&height=691)
+![Banner](https://cdn.discordapp.com/attachments/1023678603289972797/1043017562885197835/Ad_Astra_Banner.png?width=1440&height=691)
 
 <a>
     <p align="left">
@@ -20,8 +21,8 @@ everything you need to become an astronaut: rockets, space suits, space stations
 the Moon? Build a self-sustaining bunker on Mars? Go mining on Venus? The entire Solar System, better yet, Milky Way, is
 at your disposal!
 
-Consider downloading REI, JEI, or EMI for recipe viewing. Ad Astra! also has an in-game Patchouli guidebook called the "
-Astrodux," which will guide you through progression.
+Consider downloading REI, JEI, or EMI for recipe viewing. Ad Astra! also has an in-game Patchouli guidebook called the "Astrodux," 
+which will guide you through progression.
 
 <a>
     <p align="left">
