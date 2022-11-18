@@ -1,0 +1,38 @@
+name: Release
+on: [
+  workflow_dispatch
+]
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+      - run: chmod +x ./gradlew
+
+      - name: Release
+        run: ./gradlew :fabric:modrinth :forge:modrinth :fabric:curseforge :forge:curseforge
+        env:
+          CURSE_TOKEN: ${{ secrets.CURSE_TOKEN }}
+          CURSE_PROJECT: ${{ secrets.CURSE_PROJECT }}
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+          MODRINTH_PROJECT: ${{ secrets.MODRINTH_PROJECT }}
+
+      - run: ./gradlew generateDiscordEmbed
+        env:
+          MODRINTH_PROJECT_URL: ${{ secrets.MODRINTH_PROJECT_URL }}
+          CURSE_PROJECT_URL: ${{ secrets.CURSE_PROJECT_URL }}
+          EMBED_COLOR: ${{ secrets.EMBED_COLOR }}
+          WEBHOOK_THUMBNAIL: ${{ secrets.WEBHOOK_THUMBNAIL }}
+          WEBHOOK_USERNAME: ${{ secrets.WEBHOOK_USERNAME }}
+          WEBHOOK_AVATAR: ${{ secrets.WEBHOOK_AVATAR }}
+
+      - name: Trigger Discord Webhook
+        uses: tsickert/discord-webhook@v5.3.0
+        with:
+          webhook-url: ${{ secrets.WEBHOOK_URL }}
+          raw-data: embed.json
