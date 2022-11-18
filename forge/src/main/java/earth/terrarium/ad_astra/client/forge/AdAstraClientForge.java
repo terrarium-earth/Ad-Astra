@@ -80,7 +80,6 @@ public class AdAstraClientForge {
     }
 
     public static void postInit() {
-        AdAstraClient.onRegisterBlockRenderTypes(AdAstraClientForge::onRegisterBlockRenderTypes);
         AdAstraClient.onRegisterItemRenderers(AdAstraClientForge::registerItemRenderer);
         AdAstraClient.onRegisterFluidRenderTypes(AdAstraClientForge::onRegisterFluidRenderTypes);
         hasInitializedRenderers = true;
@@ -99,12 +98,6 @@ public class AdAstraClientForge {
 
     private static void onRegisterParticles(RegisterParticleProvidersEvent event) {
         ClientModParticles.onRegisterParticles((type, provider) -> event.register(type, provider::create));
-    }
-
-    private static void onRegisterBlockRenderTypes(RenderType type, List<Block> blocks) {
-        for (Block block : blocks) {
-            ItemBlockRenderTypes.setRenderLayer(block, type);
-        }
     }
 
     private static void onRegisterFluidRenderTypes(RenderType type, Fluid fluid1, Fluid fluid2) {

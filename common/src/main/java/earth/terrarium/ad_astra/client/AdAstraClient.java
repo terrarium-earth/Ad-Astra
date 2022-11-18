@@ -71,12 +71,6 @@ public class AdAstraClient {
         register.accept(PlayerOverlayScreen::render);
     }
 
-    public static void onRegisterBlockRenderTypes(BiConsumer<RenderType, List<Block>> register) {
-        register.accept(RenderType.cutout(), List.of(ModBlocks.WATER_PUMP.get(), ModBlocks.ENERGIZER.get(), ModBlocks.STEEL_DOOR.get(), ModBlocks.GLACIAN_DOOR.get(), ModBlocks.GLACIAN_TRAPDOOR.get(), ModBlocks.AERONOS_DOOR.get(), ModBlocks.AERONOS_TRAPDOOR.get(), ModBlocks.STROPHAR_DOOR.get(), ModBlocks.STROPHAR_TRAPDOOR.get(), ModBlocks.EXTINGUISHED_TORCH.get(), ModBlocks.WALL_EXTINGUISHED_TORCH.get(), ModBlocks.STEEL_TRAPDOOR.get()));
-        register.accept(RenderType.translucent(), List.of(ModBlocks.EXTINGUISHED_LANTERN.get(), ModBlocks.GLACIAN_LEAVES.get()));
-        register.accept(RenderType.cutout(), List.of(ModBlocks.AERONOS_MUSHROOM.get(), ModBlocks.STROPHAR_MUSHROOM.get(), ModBlocks.AERONOS_LADDER.get(), ModBlocks.STROPHAR_LADDER.get(), ModBlocks.AERONOS_CHEST.get(), ModBlocks.STROPHAR_CHEST.get()));
-    }
-
     public static void onRegisterFluidRenderTypes(TriConsumer<RenderType, Fluid, Fluid> register) {
         register.accept(RenderType.translucent(), ModFluids.FUEL.get(), ModFluids.FLOWING_FUEL.get());
         register.accept(RenderType.translucent(), ModFluids.CRYO_FUEL.get(), ModFluids.FLOWING_CRYO_FUEL.get());

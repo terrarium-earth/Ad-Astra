@@ -47,7 +47,6 @@ public class AdAstraClientFabric {
         ClientSpriteRegistryCallback.event(InventoryMenu.BLOCK_ATLAS).register((spriteAtlasTexture, registry) -> AdAstraClient.onRegisterSprites(registry::register));
         ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> AdAstraClient.onRegisterModels(out));
         AdAstraClient.onRegisterHud(AdAstraClientFabric::registerHud);
-        AdAstraClient.onRegisterBlockRenderTypes(AdAstraClientFabric::registerBlockRenderTypes);
         AdAstraClient.onRegisterFluidRenderTypes(AdAstraClientFabric::registerFluidRenderTypes);
         AdAstraClient.onRegisterItemRenderers(AdAstraClientFabric::registerItemRenderer);
         ClientModParticles.onRegisterParticles(AdAstraClientFabric::registerParticles);
@@ -80,10 +79,6 @@ public class AdAstraClientFabric {
 
     private static void registerItemRenderer(ItemLike item, BlockEntityWithoutLevelRenderer renderer) {
         BuiltinItemRendererRegistry.INSTANCE.register(item.asItem(), renderer::renderByItem);
-    }
-
-    private static void registerBlockRenderTypes(RenderType type, List<Block> blocks) {
-        BlockRenderLayerMap.INSTANCE.putBlocks(type, blocks.toArray(new Block[0]));
     }
 
     private static void registerFluidRenderTypes(RenderType type, Fluid fluid1, Fluid fluid2) {
