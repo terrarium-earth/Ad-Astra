@@ -3,11 +3,12 @@ package earth.terrarium.ad_astra.container;
 import earth.terrarium.botarium.api.Updatable;
 import earth.terrarium.botarium.api.fluid.*;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
 import java.util.List;
 import java.util.function.Predicate;
 
-public class DoubleFluidTank implements UpdatingFluidContainer {
+public class DoubleFluidTank implements UpdatingFluidContainer<BlockEntity> {
     private final SimpleUpdatingFluidContainer input;
     private final SimpleUpdatingFluidContainer output;
 
@@ -19,10 +20,6 @@ public class DoubleFluidTank implements UpdatingFluidContainer {
     protected DoubleFluidTank(SimpleUpdatingFluidContainer input, SimpleUpdatingFluidContainer output) {
         this.input = input;
         this.output = output;
-    }
-
-    @Override
-    public void update() {
     }
 
     @Override
@@ -113,6 +110,10 @@ public class DoubleFluidTank implements UpdatingFluidContainer {
 
     public FluidContainer getOutput() {
         return output;
+    }
+
+    @Override
+    public void update(BlockEntity updatable) {
     }
 
     private record DoubleTankSnapshot(FluidSnapshot input, FluidSnapshot output) implements FluidSnapshot {

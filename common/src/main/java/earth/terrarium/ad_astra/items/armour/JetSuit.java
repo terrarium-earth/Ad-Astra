@@ -174,8 +174,8 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
     }
 
     @Override
-    public EnergyContainer getEnergyStorage(ItemStack itemStack) {
-        return new ItemEnergyContainer(AdAstra.CONFIG.spaceSuit.jetSuitMaxEnergy) {
+    public ItemEnergyContainer getEnergyStorage(ItemStack itemStack) {
+        return new ItemEnergyContainer(itemStack, AdAstra.CONFIG.spaceSuit.jetSuitMaxEnergy) {
             @Override
             public long maxInsert() {
                 return 512;

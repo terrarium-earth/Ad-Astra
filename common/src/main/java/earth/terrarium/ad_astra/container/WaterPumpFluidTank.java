@@ -5,12 +5,13 @@ import earth.terrarium.botarium.api.Updatable;
 import earth.terrarium.botarium.api.fluid.*;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.material.Fluids;
 
 import java.util.List;
 import java.util.Objects;
 
-public class WaterPumpFluidTank implements UpdatingFluidContainer {
+public class WaterPumpFluidTank implements UpdatingFluidContainer<BlockEntity> {
     private FluidHolder tank;
     private final Updatable updatable;
 
@@ -21,11 +22,6 @@ public class WaterPumpFluidTank implements UpdatingFluidContainer {
 
     public WaterPumpFluidTank(Updatable updatable) {
         this(FluidHooks.emptyFluid(), updatable);
-    }
-
-    @Override
-    public void update() {
-        updatable.update();
     }
 
     @Override
@@ -135,6 +131,11 @@ public class WaterPumpFluidTank implements UpdatingFluidContainer {
     public CompoundTag serialize(CompoundTag nbtCompound) {
         nbtCompound.put("Tank", this.tank.serialize());
         return nbtCompound;
+    }
+
+    @Override
+    public void update(BlockEntity block) {
+        updatable.update();
     }
 
     private static class WaterPumpSnapshot implements FluidSnapshot {
