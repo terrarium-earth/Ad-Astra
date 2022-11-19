@@ -163,9 +163,9 @@ public class SlidingDoorBlock extends BaseEntityBlock {
             case BOTTOM -> getFacingOutlineShape(state, 1);
             default -> switch (state.getValue(FACING)) {
                 case NORTH -> X_SHAPE.move(0, 0, 0.42);
-                case EAST -> Z_SHAPE.move(0.38, 0, 0);
+                case EAST -> Z_SHAPE.move(-0.38, 0, 0);
                 case SOUTH -> X_SHAPE.move(0, 0, 0.38);
-                case WEST -> Z_SHAPE.move(-0.44, 0, 0);
+                case WEST -> Z_SHAPE.move(-0.42, 0, 0);
                 default -> Shapes.empty();
             };
         };
@@ -176,7 +176,7 @@ public class SlidingDoorBlock extends BaseEntityBlock {
             case NORTH -> GIANT_X_SHAPE.move(0, offset, 0.42);
             case EAST -> GIANT_Z_SHAPE.move(0.38, offset, 0);
             case SOUTH -> GIANT_X_SHAPE.move(0, offset, 0.38);
-            case WEST -> GIANT_Z_SHAPE.move(-0.44, offset, 0);
+            case WEST -> GIANT_Z_SHAPE.move(0.42, offset, 0);
             default -> Shapes.empty();
         };
     }
@@ -228,9 +228,9 @@ public class SlidingDoorBlock extends BaseEntityBlock {
             Direction direction = state.getValue(FACING);
             return switch (direction) {
                 case NORTH -> X_SHAPE.move(0, 0, 0.42);
-                case EAST -> Z_SHAPE.move(0.38, 0, 0);
+                case EAST -> Z_SHAPE.move(-0.38, 0, 0);
                 case SOUTH -> X_SHAPE.move(0, 0, 0.38);
-                case WEST -> Z_SHAPE.move(-0.44, 0, 0);
+                case WEST -> Z_SHAPE.move(-0.42, 0, 0);
                 default -> Shapes.empty();
             };
         } else {
@@ -253,6 +253,7 @@ public class SlidingDoorBlock extends BaseEntityBlock {
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+        if (!(state.getValue(SlidingDoorBlock.LOCATION) == LocationState.BOTTOM)) return null;
         return (entityWorld, pos, entityState, blockEntity) -> {
             if (blockEntity instanceof SlidingDoorBlockEntity door) {
                 door.tick();
