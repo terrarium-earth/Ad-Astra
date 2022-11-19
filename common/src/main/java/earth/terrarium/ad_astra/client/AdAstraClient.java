@@ -39,7 +39,6 @@ import net.minecraft.server.packs.resources.PreparableReloadListener;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 import org.apache.logging.log4j.util.TriConsumer;
 
