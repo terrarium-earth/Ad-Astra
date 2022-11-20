@@ -4,8 +4,8 @@
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8.5",
   "client": [
-    "ModRenderedItemMixin",
     "DimensionSpecialEffectsMixin",
+    "ModRenderedItemMixin",
     "SpaceSuitMixin"
   ],
   "mixins": [

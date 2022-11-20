@@ -63,7 +63,7 @@ public class FluidUtils {
                 if (extracted.isEmpty()) return false;
                 long l = tank.insertFluid(extracted, true);
                 extracted.setAmount(l);
-                if (tank.insertFluid(extracted, true) == itemFluidHandler.extractFluid(item, fluidToTransfer, true).getFluidAmount()) {
+                if (l == itemFluidHandler.extractFluid(item, fluidToTransfer, true).getFluidAmount()) {
                     fluidToTransfer.setAmount(l);
                     itemFluidHandler.extractFluid(item, fluidToTransfer, false);
                     tank.insertFluid(fluidToTransfer, false);

@@ -53,7 +53,7 @@ public abstract class BucketItemMixin {
 
         BucketItem bucketItem = (BucketItem) (Object) this;
 
-        if (!OxygenUtils.posHasOxygen(level, pos) && !this.content.equals(ModFluids.CRYO_FUEL.get())) {
+        if (!OxygenUtils.posHasOxygen(level, pos) && !ModFluids.CRYO_FUEL.get().equals(this.content)) {
             int i = pos.getX();
             int j = pos.getY();
             int k = pos.getZ();
@@ -84,7 +84,7 @@ public abstract class BucketItemMixin {
             if (!bl2) {
                 cir.setReturnValue(hitResult != null && bucketItem.emptyContents(player, level, hitResult.getBlockPos().relative(hitResult.getDirection()), null));
             }
-            if (block instanceof LiquidBlockContainer && this.content.equals(Fluids.WATER)) {
+            if (block instanceof LiquidBlockContainer && Fluids.WATER.equals(this.content)) {
                 ((LiquidBlockContainer) block).placeLiquid(level, pos, blockState, ((FlowingFluid) this.content).getSource(false));
                 SoundEvent soundEvent = this.content.is(FluidTags.LAVA) ? SoundEvents.BUCKET_EMPTY_LAVA : SoundEvents.BUCKET_EMPTY;
                 level.playSound(player, pos, soundEvent, SoundSource.BLOCKS, 1.0f, 1.0f);

@@ -6,7 +6,6 @@ import earth.terrarium.ad_astra.registry.ModItems;
 import earth.terrarium.ad_astra.util.ModKeyBindings;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import earth.terrarium.ad_astra.util.ModUtils;
-import earth.terrarium.botarium.api.energy.EnergyContainer;
 import earth.terrarium.botarium.api.energy.EnergyHooks;
 import earth.terrarium.botarium.api.energy.EnergyItem;
 import earth.terrarium.botarium.api.energy.ItemEnergyContainer;

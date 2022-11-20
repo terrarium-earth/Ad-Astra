@@ -4,7 +4,6 @@ import com.google.gson.JsonObject;
 import earth.terrarium.ad_astra.items.HammerItem;
 import earth.terrarium.ad_astra.registry.ModItems;
 import earth.terrarium.ad_astra.registry.ModRecipeSerializers;
-import earth.terrarium.ad_astra.registry.ModRecipeTypes;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;

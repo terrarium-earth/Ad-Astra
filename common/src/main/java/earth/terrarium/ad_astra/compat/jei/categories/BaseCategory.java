@@ -1,8 +1,6 @@
 package earth.terrarium.ad_astra.compat.jei.categories;
 
-import earth.terrarium.ad_astra.recipes.CookingRecipe;
 import mezz.jei.api.gui.drawable.IDrawable;
-import mezz.jei.api.gui.drawable.IDrawableAnimated;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;

@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 
 public class ModTags {
@@ -18,6 +19,7 @@ public class ModTags {
     public static final TagKey<Item> GLACIAN_LOGS = TagKey.create(Registry.ITEM_REGISTRY, new ModResourceLocation("glacian_logs"));
     public static final TagKey<Item> AERONOS_CAPS = TagKey.create(Registry.ITEM_REGISTRY, new ModResourceLocation("aeronos_caps"));
     public static final TagKey<Item> STROPHAR_CAPS = TagKey.create(Registry.ITEM_REGISTRY, new ModResourceLocation("strophar_caps"));
+    public static final TagKey<Block> BURNS_OUT = TagKey.create(Registry.BLOCK_REGISTRY, new ModResourceLocation("burns_out"));
 
     public static final TagKey<Fluid> FUELS = TagKey.create(Registry.FLUID_REGISTRY, new ResourceLocation(getCommonNamespace() + ":fuel"));
     public static final TagKey<Fluid> EFFICIENT_FUELS = TagKey.create(Registry.FLUID_REGISTRY, new ModResourceLocation("efficient_fuel"));

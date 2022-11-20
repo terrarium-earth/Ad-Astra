@@ -101,11 +101,19 @@ subprojects {
                         required.project "fabric-api"
                         required.project "cloth-config"
                         required.project "resourceful-lib"
+                        required.project "botarium"
+                        optional.project "modmenu"
+                        optional.project "patchouli"
+                        optional.project "roughly-enough-items"
+                        optional.project "emi"
                     }
                 } else {
                     dependencies {
                         required.project "cloth-config"
                         required.project "resourceful-lib"
+                        required.project "botarium"
+                        optional.project "patchouli"
+                        optional.project "roughly-enough-items"
                     }
                 }
             }
@@ -128,11 +136,20 @@ subprojects {
                             requiredDependency "fabric-api"
                             requiredDependency "cloth-config"
                             requiredDependency "resourceful-lib"
+                            requiredDependency "botarium"
+                            optionalDependency "modmenu"
+                            optionalDependency "patchouli"
+                            optionalDependency "jei"
+                            optionalDependency "roughly-enough-items"
+                            optionalDependency "emi"
                         }
                     } else {
                         relations {
                             requiredDependency "cloth-config"
                             requiredDependency "resourceful-lib"
+                            requiredDependency "botarium"
+                            optionalDependency "jei"
+                            optionalDependency "roughly-enough-items"
                         }
                     }
                 }

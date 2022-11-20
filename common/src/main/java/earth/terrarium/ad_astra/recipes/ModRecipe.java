@@ -38,25 +38,25 @@ public abstract class ModRecipe implements Recipe<Container>, Predicate<ItemStac
 
     @Override
     public boolean matches(Container inventory, Level level) {
-        // Unused.
+        // Unused
         return false;
     }
 
     @Override
     public ItemStack assemble(Container inventory) {
-        // Unused.
+        // Unused
         return ItemStack.EMPTY;
     }
 
     @Override
     public ItemStack getResultItem() {
-        // Unused.
+        // Unused
         return ItemStack.EMPTY;
     }
 
     @Override
     public boolean canCraftInDimensions(int width, int height) {
-        // Unused.
+        // Unused
         return true;
     }
 

@@ -15,16 +15,16 @@ import java.awt.*;
 @Environment(EnvType.CLIENT)
 public class CoalGeneratorScreen extends AbstractMachineScreen<CoalGeneratorBlockEntity, CoalGeneratorMenu> {
 
-    public static final int FIRE_LEFT = 81;
-    public static final int FIRE_TOP = 57;
+    public static final int FIRE_LEFT = 78;
+    public static final int FIRE_TOP = 53;
     public static final int ENERGY_LEFT = 146;
-    public static final int ENERGY_TOP = 28;
+    public static final int ENERGY_TOP = 32;
     private static final ResourceLocation TEXTURE = new ModResourceLocation("textures/gui/screens/coal_generator.png");
 
     public CoalGeneratorScreen(CoalGeneratorMenu handler, Inventory inventory, Component title) {
         super(handler, inventory, title, TEXTURE);
         this.imageWidth = 176;
-        this.imageHeight = 177;
+        this.imageHeight = 189;
         this.inventoryLabelY = this.imageHeight - 93;
     }
 

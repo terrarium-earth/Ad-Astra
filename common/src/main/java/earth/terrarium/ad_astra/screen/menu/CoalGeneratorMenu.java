@@ -18,12 +18,14 @@ public class CoalGeneratorMenu extends AbstractMachineMenu<CoalGeneratorBlockEnt
     }
 
     public CoalGeneratorMenu(int syncId, Inventory inventory, CoalGeneratorBlockEntity entity) {
-        super(ModMenuTypes.COAL_GENERATOR_MENU.get(), syncId, inventory, entity, new Slot[]{new Slot(entity, 0, 80, 40)});
+        super(ModMenuTypes.COAL_GENERATOR_MENU.get(), syncId, inventory, entity,
+                new Slot[]{new Slot(entity, 0, 77, 71)
+                });
     }
 
     @Override
     public int getPlayerInventoryOffset() {
-        return 11;
+        return 23;
     }
 
     @Override

@@ -17,8 +17,8 @@ public class CompressorScreen extends AbstractMachineScreen<CompressorBlockEntit
 
     public static final int ENERGY_LEFT = 147;
     public static final int ENERGY_TOP = 30;
-    public static final int HAMMER_LEFT = 67;
-    public static final int HAMMER_TOP = 63;
+    public static final int HAMMER_LEFT = 78;
+    public static final int HAMMER_TOP = 57;
     private static final ResourceLocation TEXTURE = new ModResourceLocation("textures/gui/screens/compressor.png");
 
     public CompressorScreen(CompressorMenu handler, Inventory inventory, Component title) {

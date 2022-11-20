@@ -12,7 +12,7 @@ import earth.terrarium.ad_astra.registry.ModCriteria;
 import earth.terrarium.ad_astra.registry.ModEntityTypes;
 import earth.terrarium.ad_astra.registry.ModTags;
 import earth.terrarium.ad_astra.util.algorithms.LandFinder;
-import earth.terrarium.botarium.util.CommonHooks;
+import earth.terrarium.botarium.api.item.ItemStackHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleOptions;
@@ -151,9 +151,9 @@ public class ModUtils {
         for (int i = 0; i < rocket.getInventorySize(); i++) {
             lander.getInventory().setItem(i, rocket.getInventory().getItem(i));
         }
-        ItemStack stack = rocket.getDropStack();
-        ((VehicleItem) stack.getItem()).setFluid(stack, rocket.getTankFluid());
-        lander.getInventory().setItem(10, stack);
+        ItemStackHolder stack = new ItemStackHolder(rocket.getDropStack());
+        ((VehicleItem) stack.getStack().getItem()).insert(stack, rocket.getTankHolder());
+        lander.getInventory().setItem(10, stack.getStack());
 
         // On Fabric, this is required for some reason as it does not teleport the entity.
         if (ArchitecturyTarget.getCurrentTarget().equals("fabric")) {

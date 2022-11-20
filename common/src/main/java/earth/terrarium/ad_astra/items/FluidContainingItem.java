@@ -23,10 +23,6 @@ public interface FluidContainingItem extends FluidHoldingItem {
         return getTank(stack).getFluid();
     }
 
-    default void setFluid(ItemStack stack, Fluid fluid) {
-        getTank(stack).setFluid(fluid);
-    }
-
     default void insert(ItemStackHolder stack, FluidHolder fluid) {
         FluidHooks.getItemFluidManager(stack.getStack()).insertFluid(stack, fluid, false);
     }

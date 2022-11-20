@@ -10,6 +10,7 @@ import earth.terrarium.ad_astra.screen.menu.PlanetSelectionScreenHandler;
 import earth.terrarium.ad_astra.util.ModKeyBindings;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import earth.terrarium.ad_astra.util.ModUtils;
+import earth.terrarium.botarium.api.fluid.FluidHooks;
 import earth.terrarium.botarium.api.menu.MenuHooks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -276,7 +277,7 @@ public class Rocket extends Vehicle {
         this.setCountdownTicks(AdAstra.CONFIG.rocket.countDownTicks);
         // For shaking
         this.setTicksFrozen(Integer.MAX_VALUE);
-        getTankHolder().setAmount(getRequiredAmountForLaunch(getTankHolder().getFluid()));
+        this.getTank().extractFluid(FluidHooks.newFluidHolder(getTankHolder().getFluid(), getRequiredAmountForLaunch(getTankHolder().getFluid()), getTankHolder().getCompound()), false);
     }
 
     public boolean hasLaunchPad() {

@@ -10,7 +10,6 @@ import earth.terrarium.ad_astra.recipes.IngredientHolder;
 import earth.terrarium.ad_astra.recipes.SpaceStationRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.ArrayList;
 import java.util.List;

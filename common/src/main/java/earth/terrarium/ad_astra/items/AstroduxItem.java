@@ -3,7 +3,6 @@ package earth.terrarium.ad_astra.items;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.registry.ModItems;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
-import earth.terrarium.ad_astra.util.ModUtils;
 import earth.terrarium.botarium.util.CommonHooks;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;

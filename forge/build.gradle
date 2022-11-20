@@ -32,7 +32,7 @@ dependencies {
     common(project(path: ":common", configuration: "namedElements")) { transitive = false }
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
 
-    include (modApi "earth.terrarium:botarium-forge-$rootProject.minecraft_version:$rootProject.botarium_version")
+    modApi "earth.terrarium:botarium-forge-$rootProject.minecraft_version:$rootProject.botarium_version"
     modApi "com.teamresourceful.resourcefullib:resourcefullib-forge-$resourcefullib_version"
 
     modApi("me.shedaniel.cloth:cloth-config-forge:$rootProject.cloth_config_version")

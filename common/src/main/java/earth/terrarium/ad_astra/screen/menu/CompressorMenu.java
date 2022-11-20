@@ -19,12 +19,15 @@ public class CompressorMenu extends AbstractMachineMenu<CompressorBlockEntity> {
     }
 
     public CompressorMenu(int syncId, Inventory inventory, CompressorBlockEntity entity) {
-        super(ModMenuTypes.COMPRESSOR_MENU.get(), syncId, inventory, entity, new Slot[]{new Slot(entity, 0, 40, 62), new Slot(entity, 1, 92, 62) {
-            @Override
-            public boolean mayPlace(ItemStack stack) {
-                return false;
-            }
-        }});
+        super(ModMenuTypes.COMPRESSOR_MENU.get(), syncId, inventory, entity,
+                new Slot[]{
+                        new Slot(entity, 0, 53, 56),
+                        new Slot(entity, 1, 100, 56) {
+                            @Override
+                            public boolean mayPlace(ItemStack stack) {
+                                return false;
+                            }
+                        }});
     }
 
     @Override
