@@ -138,7 +138,7 @@ subprojects {
                             requiredDependency "resourceful-lib"
                             requiredDependency "botarium"
                             optionalDependency "modmenu"
-                            optionalDependency "patchouli"
+                            optionalDependency "patchouli-fabric"
                             optionalDependency "jei"
                             optionalDependency "roughly-enough-items"
                             optionalDependency "emi"
@@ -148,6 +148,7 @@ subprojects {
                             requiredDependency "cloth-config"
                             requiredDependency "resourceful-lib"
                             requiredDependency "botarium"
+                            optionalDependency "patchouli"
                             optionalDependency "jei"
                             optionalDependency "roughly-enough-items"
                         }
