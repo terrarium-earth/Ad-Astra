@@ -1,3 +1,3 @@
-**1.11.5**
-> Fixed like a million more bugs
-> Made Botarium a required dependency
+**1.11.6**
+Fixed an issue with the fabric burnable registry and the coal generator.
+Fixed blocks missing a cutout shader

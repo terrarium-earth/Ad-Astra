@@ -35,13 +35,13 @@ side = "BOTH"
 [[dependencies.ad_astra]]
 modId = "botarium"
 mandatory = true
-versionRange = "[1.7.8,)"
+versionRange = "[1.7.10,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.ad_astra]]
 modId = "resourcefullib"
 mandatory = true
-versionRange = "[1.1.15,)"
+versionRange = "[1.1.16,)"
 ordering = "NONE"
 side = "BOTH"

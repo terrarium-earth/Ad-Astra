@@ -35,7 +35,8 @@ public class ItemInHandRendererMixin {
 
                 // Only render the main hand stack if the player is holding a vehicle in both the main hand and offhand
                 Item mainStack = livingEntity.getMainHandItem().getItem();
-                if (leftHand && itemStack.getItem().equals(livingEntity.getOffhandItem().getItem()) && mainStack instanceof VehicleItem) {
+                ItemStack offhandStack = livingEntity.getOffhandItem();
+                if (!offhandStack.isEmpty() && leftHand && itemStack.getItem().equals(offhandStack.getItem()) && mainStack instanceof VehicleItem) {
                     ci.cancel();
                 }
             }

@@ -6,7 +6,7 @@ import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -33,16 +33,17 @@ public abstract class HumanoidModelMixin {
         }
 
         HumanoidModel<LivingEntity> model = ((HumanoidModel<LivingEntity>) (Object) this);
-        Item mainHandItem = livingEntity.getMainHandItem().getItem();
-        Item offhandItem = livingEntity.getOffhandItem().getItem();
-
-        // Move the arms so that it looks like the player is holding the vehicle in the air with both arms.
-        if (mainHandItem instanceof HoldableOverHead) {
-            model.rightArm.xRot = -2.8f;
-            model.leftArm.xRot = model.rightArm.xRot;
-        } else if (offhandItem instanceof HoldableOverHead) {
-            model.leftArm.xRot = -2.8f;
-            model.rightArm.xRot = model.leftArm.xRot;
+        ItemStack mainHandItem = livingEntity.getMainHandItem();
+        ItemStack offhandItem = livingEntity.getOffhandItem();
+        if (!mainHandItem.isEmpty() && !offhandItem.isEmpty()) {
+            // Move the arms so that it looks like the player is holding the vehicle in the air with both arms.
+            if (mainHandItem.getItem() instanceof HoldableOverHead) {
+                model.rightArm.xRot = -2.8f;
+                model.leftArm.xRot = model.rightArm.xRot;
+            } else if (offhandItem.getItem() instanceof HoldableOverHead) {
+                model.leftArm.xRot = -2.8f;
+                model.rightArm.xRot = model.leftArm.xRot;
+            }
         }
     }
 }

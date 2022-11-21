@@ -3,10 +3,10 @@ package earth.terrarium.ad_astra.blocks.machines.entity;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
 import earth.terrarium.ad_astra.screen.menu.CoalGeneratorMenu;
-import earth.terrarium.ad_astra.util.PlatformUtils;
 import earth.terrarium.botarium.api.energy.EnergyBlock;
 import earth.terrarium.botarium.api.energy.EnergyHooks;
 import earth.terrarium.botarium.api.energy.ExtractOnlyEnergyContainer;
+import earth.terrarium.botarium.util.CommonHooks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Inventory;
@@ -59,10 +59,12 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity imple
                 this.setActive(true);
                 // Check if the input is a valid fuel
             } else if (!input.isEmpty() && !(input.getItem() instanceof BucketItem)) {
-                int burnTime = Math.min(20000, PlatformUtils.getBurnTime(input));
-                input.shrink(1);
-                this.cookTimeTotal = burnTime;
-                this.cookTime = burnTime;
+                int burnTime = Math.min(20000, CommonHooks.getBurnTime(input));
+                if (burnTime > 0) {
+                    input.shrink(1);
+                    this.cookTimeTotal = burnTime;
+                    this.cookTime = burnTime;
+                }
             } else {
                 this.setActive(false);
             }

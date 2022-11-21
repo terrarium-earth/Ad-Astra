@@ -52,7 +52,7 @@ public class LocalPlayerMixin {
 
         if (SpaceSuit.hasFullSet(player)) {
             PlayerOverlayScreen.shouldRenderOxygen = true;
-            if (chest.getItem() instanceof SpaceSuit suit) {
+            if (!chest.isEmpty() && chest.getItem() instanceof SpaceSuit suit) {
                 PlatformFluidItemHandler oxygen = FluidHooks.getItemFluidManager(chest);
 
                 // Render oxygen info
@@ -65,7 +65,7 @@ public class LocalPlayerMixin {
 
         if (JetSuit.hasFullSet(player)) {
             PlayerOverlayScreen.shouldRenderBattery = true;
-            if (chest.getItem() instanceof JetSuit) {
+            if (!chest.isEmpty() && chest.getItem() instanceof JetSuit) {
                 JetSuit.updateBatteryOverlay(chest);
             }
         } else {
@@ -94,7 +94,6 @@ public class LocalPlayerMixin {
                     PlayerOverlayScreen.disableAllVehicleOverlays();
                 }
             }
-
         } else {
             PlayerOverlayScreen.disableAllVehicleOverlays();
         }

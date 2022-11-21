@@ -30,10 +30,12 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.material.Fluid;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.function.Supplier;
@@ -46,6 +48,7 @@ public class AdAstraClientFabric {
         ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> AdAstraClient.onRegisterModels(out));
         AdAstraClient.onRegisterHud(AdAstraClientFabric::registerHud);
         AdAstraClient.onRegisterFluidRenderTypes(AdAstraClientFabric::registerFluidRenderTypes);
+        AdAstraClient.onRegisterBlockRenderTypes(AdAstraClientFabric::registerBlockRenderTypes);
         AdAstraClient.onRegisterItemRenderers(AdAstraClientFabric::registerItemRenderer);
         ClientModParticles.onRegisterParticles(AdAstraClientFabric::registerParticles);
         registerRenderers();
@@ -81,6 +84,10 @@ public class AdAstraClientFabric {
 
     private static void registerFluidRenderTypes(RenderType type, Fluid fluid1, Fluid fluid2) {
         BlockRenderLayerMap.INSTANCE.putFluids(type, fluid1, fluid2);
+    }
+
+    private static void registerBlockRenderTypes(RenderType type, List<Block> blocks) {
+        BlockRenderLayerMap.INSTANCE.putBlocks(type, blocks.toArray(new Block[0]));
     }
 
     private static void registerRenderers() {

@@ -31,21 +31,27 @@ public class PlayerRendererMixin {
 
     @Inject(method = "renderRightHand", at = @At("HEAD"), cancellable = true)
     public void adastra_renderRightHand(PoseStack poseStack, MultiBufferSource buffer, int packedLight, AbstractClientPlayer player, CallbackInfo ci) {
-        if (player.getOffhandItem().getItem() instanceof VehicleItem) {
-            ci.cancel();
-            return;
-        }
-        if (player.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof SpaceSuit) {
-            ci.cancel();
-            this.adastra_renderArm(poseStack, packedLight, player, true);
+        ItemStack offhandStack = player.getOffhandItem();
+        if (!offhandStack.isEmpty()) {
+            if (offhandStack.getItem() instanceof VehicleItem) {
+                ci.cancel();
+                return;
+            }
+            if (player.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof SpaceSuit) {
+                ci.cancel();
+                this.adastra_renderArm(poseStack, packedLight, player, true);
+            }
         }
     }
 
     @Inject(method = "renderLeftHand", at = @At("HEAD"), cancellable = true)
     public void adastra_renderLeftHand(PoseStack poseStack, MultiBufferSource buffer, int packedLight, AbstractClientPlayer player, CallbackInfo ci) {
-        if (player.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof SpaceSuit) {
-            ci.cancel();
-            this.adastra_renderArm(poseStack, packedLight, player, false);
+        ItemStack chest = player.getItemBySlot(EquipmentSlot.CHEST);
+        if (!chest.isEmpty()) {
+            if (player.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof SpaceSuit) {
+                ci.cancel();
+                this.adastra_renderArm(poseStack, packedLight, player, false);
+            }
         }
     }
 
@@ -55,40 +61,42 @@ public class PlayerRendererMixin {
     @Unique
     private void adastra_renderArm(PoseStack poseStack, int packedLight, AbstractClientPlayer player, boolean right) {
         ItemStack stack = player.getItemBySlot(EquipmentSlot.CHEST);
-        if (stack.getItem() instanceof SpaceSuit) {
+        if (!stack.isEmpty()) {
+            if (stack.getItem() instanceof SpaceSuit) {
 
-            PlayerRenderer renderer = (PlayerRenderer) (Object) (this);
+                PlayerRenderer renderer = (PlayerRenderer) (Object) (this);
 
-            EntityModelSet modelLoader = Minecraft.getInstance().getEntityModels();
-            SpaceSuitModel model;
+                EntityModelSet modelLoader = Minecraft.getInstance().getEntityModels();
+                SpaceSuitModel model;
 
-            if (stack.is(ModItems.JET_SUIT.get())) {
-                model = new SpaceSuitModel(modelLoader.bakeLayer(JetSuitModel.LAYER_LOCATION), (HumanoidModel) renderer.getModel(), player, EquipmentSlot.CHEST, stack);
-            } else if (stack.is(ModItems.NETHERITE_SPACE_SUIT.get())) {
-                model = new SpaceSuitModel(modelLoader.bakeLayer(NetheriteSpaceSuitModel.LAYER_LOCATION), (HumanoidModel) renderer.getModel(), player, EquipmentSlot.CHEST, stack);
-            } else {
-                model = new SpaceSuitModel(modelLoader.bakeLayer(SpaceSuitModel.LAYER_LOCATION), (HumanoidModel) renderer.getModel(), player, EquipmentSlot.CHEST, stack);
+                if (stack.is(ModItems.JET_SUIT.get())) {
+                    model = new SpaceSuitModel(modelLoader.bakeLayer(JetSuitModel.LAYER_LOCATION), (HumanoidModel) renderer.getModel(), player, EquipmentSlot.CHEST, stack);
+                } else if (stack.is(ModItems.NETHERITE_SPACE_SUIT.get())) {
+                    model = new SpaceSuitModel(modelLoader.bakeLayer(NetheriteSpaceSuitModel.LAYER_LOCATION), (HumanoidModel) renderer.getModel(), player, EquipmentSlot.CHEST, stack);
+                } else {
+                    model = new SpaceSuitModel(modelLoader.bakeLayer(SpaceSuitModel.LAYER_LOCATION), (HumanoidModel) renderer.getModel(), player, EquipmentSlot.CHEST, stack);
+                }
+
+                poseStack.pushPose();
+                poseStack.mulPose(Vector3f.ZP.rotationDegrees(4));
+
+                int decimal = ((SpaceSuit) stack.getItem()).getColor(stack);
+                float r = (float) (decimal >> 16 & 0xFF) / 255.0f;
+                float g = (float) (decimal >> 8 & 0xFF) / 255.0f;
+                float b = (float) (decimal & 0xFF) / 255.0f;
+
+                if (JetSuit.hasFullSet(player)) {
+                    JetSuit.spawnParticles(player.level, player, model);
+                }
+
+                VertexConsumer vertex = SpaceSuitModel.getVertex(RenderType.entityTranslucent(model.getTextureLocation()), player.getItemBySlot(EquipmentSlot.CHEST).isEnchanted());
+                if (right) {
+                    model.rightArm.render(poseStack, vertex, packedLight, OverlayTexture.NO_OVERLAY, r, g, b, 1.0f);
+                } else {
+                    model.leftArm.render(poseStack, vertex, packedLight, OverlayTexture.NO_OVERLAY, r, g, b, 1.0f);
+                }
+                poseStack.popPose();
             }
-
-            poseStack.pushPose();
-            poseStack.mulPose(Vector3f.ZP.rotationDegrees(4));
-
-            int decimal = ((SpaceSuit) stack.getItem()).getColor(stack);
-            float r = (float) (decimal >> 16 & 0xFF) / 255.0f;
-            float g = (float) (decimal >> 8 & 0xFF) / 255.0f;
-            float b = (float) (decimal & 0xFF) / 255.0f;
-
-            if (JetSuit.hasFullSet(player)) {
-                JetSuit.spawnParticles(player.level, player, model);
-            }
-
-            VertexConsumer vertex = SpaceSuitModel.getVertex(RenderType.entityTranslucent(model.getTextureLocation()), player.getItemBySlot(EquipmentSlot.CHEST).isEnchanted());
-            if (right) {
-                model.rightArm.render(poseStack, vertex, packedLight, OverlayTexture.NO_OVERLAY, r, g, b, 1.0f);
-            } else {
-                model.leftArm.render(poseStack, vertex, packedLight, OverlayTexture.NO_OVERLAY, r, g, b, 1.0f);
-            }
-            poseStack.popPose();
         }
     }
 }

@@ -4,7 +4,7 @@
       "item": "minecraft:cooked_beef"
     },
     "title": {
-      "translate": "advancements.astro_cuisine.title"
+      "translate": "advancements.ad_astra.astro_cuisine.title"
     },
     "description": {
       "translate": "advancements.ad_astra.astro_cuisine.description"

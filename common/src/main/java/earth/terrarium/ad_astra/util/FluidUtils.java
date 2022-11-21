@@ -48,6 +48,7 @@ public class FluidUtils {
 
     public static boolean insertItemFluidToTank(FluidContainer tank, Container inventory, int inputSlot, int outputSlot, int container, Predicate<Fluid> filter) {
         ItemStack stack = inventory.getItem(inputSlot).copy();
+        if (stack.isEmpty()) return false;
         int originalCount = stack.getCount();
         stack.setCount(1);
         Optional<PlatformFluidItemHandler> possibleItemFluidContainer = FluidHooks.safeGetItemFluidManager(stack);
@@ -90,6 +91,7 @@ public class FluidUtils {
 
     public static boolean extractTankFluidToItem(FluidContainer tank, Container inventory, int inputSlot, int outputSlot, int container, Predicate<Fluid> filter) {
         ItemStack stack = inventory.getItem(inputSlot).copy();
+        if (stack.isEmpty()) return false;
         int originalCount = stack.getCount();
         stack.setCount(1);
         Optional<PlatformFluidItemHandler> possibleItemFluidContainer = FluidHooks.safeGetItemFluidManager(stack);
