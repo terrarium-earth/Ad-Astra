@@ -16,7 +16,7 @@ import java.util.List;
 
 public record MachineInfoPacket(long energy, List<FluidHolder> fluidHolders) implements Packet<MachineInfoPacket> {
 
-    public static final ResourceLocation ID = new ModResourceLocation("machine_info");
+    public static final ResourceLocation ID = new ModResourceLocation("machine_info_packet");
     public static final Handler HANDLER = new Handler();
 
     @Override

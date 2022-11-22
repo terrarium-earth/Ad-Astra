@@ -31,7 +31,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -143,7 +142,7 @@ public class GlacianRam extends Animal implements Shearable {
         int i = 1 + this.random.nextInt(3);
 
         for (int j = 0; j < i; ++j) {
-            ItemEntity itemEntity = this.spawnAtLocation((ItemLike) ModBlocks.GLACIAN_FUR);
+            ItemEntity itemEntity = this.spawnAtLocation(ModBlocks.GLACIAN_FUR.get());
             if (itemEntity != null) {
                 itemEntity.setDeltaMovement(itemEntity.getDeltaMovement().add((this.random.nextFloat() - this.random.nextFloat()) * 0.1F, this.random.nextFloat() * 0.05F, (this.random.nextFloat() - this.random.nextFloat()) * 0.1F));
             }

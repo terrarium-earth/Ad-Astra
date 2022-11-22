@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.screen;
 
-import earth.terrarium.ad_astra.screen.menu.PlanetSelectionScreenHandler;
+import earth.terrarium.ad_astra.screen.menu.PlanetSelectionMenu;
 import earth.terrarium.botarium.api.menu.ExtraDataMenuProvider;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -19,7 +19,7 @@ public record PlanetSelectionMenuProvider(int tier) implements ExtraDataMenuProv
 
     @Override
     public AbstractContainerMenu createMenu(int syncId, @NotNull Inventory inventory, @NotNull Player player) {
-        return new PlanetSelectionScreenHandler(syncId, player, tier);
+        return new PlanetSelectionMenu(syncId, player, tier);
     }
 
     @Override

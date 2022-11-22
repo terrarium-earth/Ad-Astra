@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.Block;
 
 public record FlagUrlPacket(BlockPos pos, String url) implements Packet<FlagUrlPacket> {
 
-    public static final ResourceLocation ID = new ModResourceLocation("machine_info");
+    public static final ResourceLocation ID = new ModResourceLocation("flag_url_packet");
     public static final Handler HANDLER = new Handler();
 
     @Override

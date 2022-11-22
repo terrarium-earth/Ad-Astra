@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 
 public record DatapackPlanetsPacket(Collection<Planet> planets) implements Packet<DatapackPlanetsPacket> {
 
-    public static final ResourceLocation ID = new ModResourceLocation("datapack_planets");
+    public static final ResourceLocation ID = new ModResourceLocation("datapack_planets_packet");
     public static final Handler HANDLER = new Handler();
 
     @Override

@@ -14,7 +14,7 @@ import earth.terrarium.ad_astra.networking.NetworkHandling;
 import earth.terrarium.ad_astra.networking.packets.client.CreateSpaceStationPacket;
 import earth.terrarium.ad_astra.networking.packets.client.TeleportToPlanetPacket;
 import earth.terrarium.ad_astra.registry.ModRecipeTypes;
-import earth.terrarium.ad_astra.screen.menu.PlanetSelectionScreenHandler;
+import earth.terrarium.ad_astra.screen.menu.PlanetSelectionMenu;
 import earth.terrarium.ad_astra.util.MathUtil;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import net.fabricmc.api.EnvType;
@@ -37,7 +37,7 @@ import java.util.*;
 import java.util.function.Consumer;
 
 @Environment(EnvType.CLIENT)
-public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSelectionScreenHandler> {
+public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSelectionMenu> {
 
     public static final ResourceLocation SMALL_MENU_LIST = new ModResourceLocation("textures/gui/selection_menu.png");
     public static final ResourceLocation LARGE_MENU_TEXTURE = new ModResourceLocation("textures/gui/selection_menu_large.png");
@@ -67,7 +67,7 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
     public final List<Pair<ItemStack, Integer>> ingredients = new ArrayList<>();
     final Set<Category> solarSystemsCategories = new HashSet<>();
     final Set<Category> galaxyCategories = new HashSet<>();
-    private final PlanetSelectionScreenHandler handler;
+    private final PlanetSelectionMenu handler;
     private final Map<Category, LinkedList<CustomButton>> categoryButtons = new HashMap<>();
     public int minScrollY = 177;
     public int maxScrollY = 274;
@@ -75,7 +75,7 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
     private float guiTime;
     private Button scrollBar;
 
-    public PlanetSelectionScreen(PlanetSelectionScreenHandler handler, Inventory inventory, Component title) {
+    public PlanetSelectionScreen(PlanetSelectionMenu handler, Inventory inventory, Component title) {
         super(title);
         this.handler = handler;
 
@@ -90,7 +90,6 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
         // Get recipe.
         ModRecipeTypes.SPACE_STATION_RECIPE.get().getRecipes(handler.getPlayer().level).forEach(recipe -> {
             if (recipe != null) {
-
                 for (int i = 0; i < recipe.getIngredients().size(); i++) {
                     if (recipe.getIngredients().get(i).getItems().length == 0) return;
                     ItemStack stack = recipe.getIngredients().get(i).getItems()[0].copy();
@@ -99,10 +98,9 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
                     stack.setCount(0);
 
                     for (ItemStack slot : inventory.items) {
-                        if (slot != null) {
+                        if (slot != null && !slot.isEmpty()) {
                             if (recipe.getIngredients().get(i).test(slot)) {
                                 stack.setCount(inventory.countItem(slot.getItem()));
-                                break;
                             }
                         }
                     }
@@ -474,7 +472,7 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
     }
 
     @Override
-    public PlanetSelectionScreenHandler getMenu() {
+    public PlanetSelectionMenu getMenu() {
         return this.handler;
     }
 

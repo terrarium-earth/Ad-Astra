@@ -9,10 +9,12 @@ import net.minecraft.world.level.Level;
 
 import java.util.Optional;
 
-public record Planet(String translation, ResourceLocation galaxy, ResourceLocation solarSystem, ResourceKey<Level> level,
+public record Planet(String translation, ResourceLocation galaxy, ResourceLocation solarSystem,
+                     ResourceKey<Level> level,
                      ResourceKey<Level> orbitWorld, ResourceKey<Level> parentWorld, int rocketTier, float gravity,
                      boolean hasAtmosphere, int daysInYear, float temperature, long solarPower, long orbitSolarPower,
                      boolean hasOxygen, ButtonColour buttonColour) {
+
     public static final Codec<Planet> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.STRING.fieldOf("translation").forGetter(Planet::translation),
             ResourceLocation.CODEC.fieldOf("galaxy").forGetter(Planet::galaxy),

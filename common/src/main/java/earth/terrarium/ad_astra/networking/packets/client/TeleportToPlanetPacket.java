@@ -16,7 +16,7 @@ import net.minecraft.world.level.Level;
 
 public record TeleportToPlanetPacket(ResourceLocation id) implements Packet<TeleportToPlanetPacket> {
 
-    public static final ResourceLocation ID = new ModResourceLocation("teleport_to_planet");
+    public static final ResourceLocation ID = new ModResourceLocation("teleport_to_planet_packet");
     public static final Handler HANDLER = new Handler();
 
     private static ResourceKey<Level> getlevel(ResourceLocation id) {

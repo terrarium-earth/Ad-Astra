@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public record StartRocketPacket(int entityId) implements Packet<StartRocketPacket> {
 
-    public static final ResourceLocation ID = new ModResourceLocation("start_rocket");
+    public static final ResourceLocation ID = new ModResourceLocation("start_rocket_packet");
     public static final Handler HANDLER = new Handler();
 
     @Override

@@ -153,7 +153,7 @@ public class CustomButton extends Button {
             }
             case CATEGORY -> {
                 textEntries.add(Component.nullToEmpty("\u00A79" + PlanetSelectionScreen.CATEGORY_TEXT.getString() + ": \u00A7a" + label.getString()));
-                textEntries.add(Component.nullToEmpty("\u00A79" + PlanetSelectionScreen.PROVIDED_TEXT.getString() + ": \u00A7b" + "Tier " + planetInfo.rocketTier() + " Rocket"));
+                textEntries.add(Component.nullToEmpty("\u00A79" + PlanetSelectionScreen.PROVIDED_TEXT.getString() + ": \u00A7b" + Component.translatable("item.ad_astra.tier_" + planetInfo.rocketTier() + "_rocket").getString()));
             }
             case PLANET -> {
                 textEntries.add(Component.nullToEmpty("\u00A79" + PlanetSelectionScreen.TYPE_TEXT.getString() + ": \u00A73" + (planetInfo.parentWorld() == null ? PlanetSelectionScreen.PLANET_TEXT.getString() : PlanetSelectionScreen.MOON_TEXT.getString())));

@@ -51,7 +51,6 @@ import java.util.function.Consumer;
 @Environment(EnvType.CLIENT)
 public class AdAstraClient {
 
-    public static List<Planet> planets = new ArrayList<>();
     public static List<SolarSystem> solarSystems = new ArrayList<>();
     public static List<PlanetSkyRenderer> skyRenderers = new ArrayList<>();
     public static List<PlanetRing> planetRings = new ArrayList<>();

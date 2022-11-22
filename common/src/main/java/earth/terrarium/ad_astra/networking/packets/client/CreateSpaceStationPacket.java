@@ -23,7 +23,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 
 public record CreateSpaceStationPacket(ResourceLocation targetWorld) implements Packet<CreateSpaceStationPacket> {
 
-    public static final ResourceLocation ID = new ModResourceLocation("toggle_distributor");
+    public static final ResourceLocation ID = new ModResourceLocation("create_space_station_packet");
     public static final Handler HANDLER = new Handler();
 
     @Override
@@ -79,9 +79,7 @@ public record CreateSpaceStationPacket(ResourceLocation targetWorld) implements 
                 if (level instanceof ServerLevel serverWorld) {
                     ServerLevel targetWorld = serverWorld.getServer().getLevel(ResourceKey.create(Registry.DIMENSION_REGISTRY, packet.targetWorld));
 
-                    if (targetWorld == null) {
-                        return;
-                    }
+                    if (targetWorld == null) return;
 
                     // Create the Space Station from the nbt file
                     StructureTemplate structure = targetWorld.getStructureManager().getOrCreate(new ModResourceLocation("space_station"));

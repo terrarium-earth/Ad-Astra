@@ -6,7 +6,7 @@ import earth.terrarium.ad_astra.blocks.launchpad.LaunchPad;
 import earth.terrarium.ad_astra.items.armour.NetheriteSpaceSuit;
 import earth.terrarium.ad_astra.registry.*;
 import earth.terrarium.ad_astra.screen.PlanetSelectionMenuProvider;
-import earth.terrarium.ad_astra.screen.menu.PlanetSelectionScreenHandler;
+import earth.terrarium.ad_astra.screen.menu.PlanetSelectionMenu;
 import earth.terrarium.ad_astra.util.ModKeyBindings;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import earth.terrarium.ad_astra.util.ModUtils;
@@ -205,7 +205,7 @@ public class Rocket extends Vehicle {
         }
         this.getPassengers().forEach(passenger -> {
             if (passenger instanceof Player player) {
-                if (!(player.containerMenu instanceof PlanetSelectionScreenHandler)) {
+                if (!(player.containerMenu instanceof PlanetSelectionMenu)) {
                     if (!this.level.isClientSide) {
                         MenuHooks.openMenu((ServerPlayer) player, new PlanetSelectionMenuProvider(this.getTier()));
                         stopRocketSoundForRider((ServerPlayer) player);

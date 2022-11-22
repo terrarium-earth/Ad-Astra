@@ -13,7 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public record LaunchRocketPacket() implements Packet<LaunchRocketPacket> {
 
-    public static final ResourceLocation ID = new ModResourceLocation("launch_rocket");
+    public static final ResourceLocation ID = new ModResourceLocation("launch_rocket_packet");
     public static final Handler HANDLER = new Handler();
 
     @Override

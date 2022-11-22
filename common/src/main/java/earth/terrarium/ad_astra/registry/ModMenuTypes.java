@@ -9,7 +9,7 @@ import net.minecraft.world.inventory.MenuType;
 import java.util.function.Supplier;
 
 public class ModMenuTypes {
-    public static final Supplier<MenuType<PlanetSelectionScreenHandler>> PLANET_SELECTION_SCREEN_HANDLER = register("planet_selection_menu", () -> RegistryHelpers.createMenuType((syncId, playerInventory, buf) -> new PlanetSelectionScreenHandler(syncId, playerInventory.player, buf)));
+    public static final Supplier<MenuType<PlanetSelectionMenu>> PLANET_SELECTION_SCREEN_HANDLER = register("planet_selection_menu", () -> RegistryHelpers.createMenuType((syncId, playerInventory, buf) -> new PlanetSelectionMenu(syncId, playerInventory.player, buf)));
     public static final Supplier<MenuType<SolarPanelMenu>> SOLAR_PANEL_SCREEN_HANDLER = register("solar_panel_menu", () -> RegistryHelpers.createMenuType(SolarPanelMenu::new));
     public static final Supplier<MenuType<CoalGeneratorMenu>> COAL_GENERATOR_MENU = register("coal_generator_menu", () -> RegistryHelpers.createMenuType(CoalGeneratorMenu::new));
     public static final Supplier<MenuType<CompressorMenu>> COMPRESSOR_MENU = register("compressor_menu", () -> RegistryHelpers.createMenuType(CompressorMenu::new));

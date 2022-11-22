@@ -6,16 +6,16 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 
-public class PlanetSelectionScreenHandler extends AbstractContainerMenu {
+public class PlanetSelectionMenu extends AbstractContainerMenu {
 
     private final Player player;
     private final int tier;
 
-    public PlanetSelectionScreenHandler(int syncId, Player player, FriendlyByteBuf buf) {
+    public PlanetSelectionMenu(int syncId, Player player, FriendlyByteBuf buf) {
         this(syncId, player, buf.readInt());
     }
 
-    public PlanetSelectionScreenHandler(int syncId, Player player, int tier) {
+    public PlanetSelectionMenu(int syncId, Player player, int tier) {
         super(ModMenuTypes.PLANET_SELECTION_SCREEN_HANDLER.get(), syncId);
         this.tier = tier;
         this.player = player;

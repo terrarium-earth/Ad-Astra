@@ -11,7 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public record ToggleDistributorPacket(BlockPos pos) implements Packet<ToggleDistributorPacket> {
 
-    public static final ResourceLocation ID = new ModResourceLocation("toggle_distributor");
+    public static final ResourceLocation ID = new ModResourceLocation("toggle_distributor_packet");
     public static final Handler HANDLER = new Handler();
 
     @Override

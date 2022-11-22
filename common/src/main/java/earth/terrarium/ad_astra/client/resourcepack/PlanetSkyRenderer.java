@@ -4,7 +4,7 @@ import com.mojang.math.Vector3f;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamresourceful.resourcefullib.common.color.Color;
-import com.teamresourceful.resourcefullib.common.color.ConstantColors;
+import earth.terrarium.ad_astra.client.dimension.rendering.StarInformation;
 import earth.terrarium.ad_astra.util.ModUtils;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -93,7 +93,7 @@ public record PlanetSkyRenderer(ResourceKey<Level> dimension, PlanetSkyRenderer.
                 Codec.BOOL.fieldOf("blending").forGetter(SkyObject::blending),
                 RenderType.CODEC.fieldOf("render_type").forGetter(SkyObject::renderType),
                 Codec.FLOAT.fieldOf("scale").forGetter(SkyObject::scale),
-                Color.CODEC.fieldOf("color").orElse(ConstantColors.white).forGetter(SkyObject::colour),
+                Color.CODEC.fieldOf("color").orElse(StarInformation.BASE_COLOUR).forGetter(SkyObject::colour),
                 Vector3f.CODEC.fieldOf("rotation").forGetter(SkyObject::rotation)
         ).apply(instance, SkyObject::new));
     }
@@ -102,7 +102,7 @@ public record PlanetSkyRenderer(ResourceKey<Level> dimension, PlanetSkyRenderer.
 
         public static final Codec<DimensionEffects> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 DimensionEffectType.CODEC.fieldOf("type").forGetter(DimensionEffects::type),
-                Color.CODEC.fieldOf("color").orElse(ConstantColors.white).forGetter(DimensionEffects::colour)
+                Color.CODEC.fieldOf("color").orElse(StarInformation.BASE_COLOUR).forGetter(DimensionEffects::colour)
         ).apply(instance, DimensionEffects::new));
     }
 }

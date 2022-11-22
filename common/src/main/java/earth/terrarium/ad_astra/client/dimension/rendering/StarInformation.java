@@ -3,14 +3,14 @@ package earth.terrarium.ad_astra.client.dimension.rendering;
 import com.mojang.math.Vector3f;
 import com.teamresourceful.resourcefullib.common.caches.CacheableBiFunction;
 import com.teamresourceful.resourcefullib.common.color.Color;
-import com.teamresourceful.resourcefullib.common.color.ConstantColors;
 import net.minecraft.util.Mth;
 
 import java.util.Random;
 
 public class StarInformation {
+    public static final Color BASE_COLOUR = new Color(255, 255, 255, 255);
     public static final Color[] STAR_COLOURS = new Color[]{
-            ConstantColors.white,
+            BASE_COLOUR,
             new Color(204, 238, 255, 255),
             new Color(204, 153, 255, 255),
             new Color(255, 255, 153, 255),
@@ -55,6 +55,6 @@ public class StarInformation {
     }
 
     public Color getColour(int i, int j, boolean coloured) {
-        return coloured ? colour[i][j] : ConstantColors.white;
+        return coloured ? colour[i][j] : BASE_COLOUR;
     }
 }

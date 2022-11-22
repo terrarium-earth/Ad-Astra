@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public record KeybindPacket(Keybind keybind, boolean pressed) implements Packet<KeybindPacket> {
 
-    public static final ResourceLocation ID = new ModResourceLocation("key_changed");
+    public static final ResourceLocation ID = new ModResourceLocation("keybind_packet");
     public static final Handler HANDLER = new Handler();
 
     @Override
