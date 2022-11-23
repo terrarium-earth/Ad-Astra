@@ -1,7 +1,1 @@
-**1.11.7**
-- Fixed space stations never spawning
-- Fixed glacian rams not dropping anything when sheared
-- Fixed glacian ram model
-- Fixed no rocket tier lang translation in the planet selection screen
-- Fixed missing stars on a few planets
-- Now allows jpeg urls on flags
+**1.11.8**
