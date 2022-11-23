@@ -1,0 +1,25 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "techreborn"
+      ]
+    }
+  ],
+  "type": "techreborn:compressor",
+  "power": 2,
+  "time": 400,
+  "ingredients": [
+    {
+      "tag": "c:desh_blocks",
+      "count": 1
+    }
+  ],
+  "results": [
+    {
+      "item": "ad_astra:desh_plate",
+      "count": 9
+    }
+  ]
+}
