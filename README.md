@@ -39,7 +39,7 @@ which will guide you through progression.
   station deco and metal plating.
 - An in-game guidebook, explaining everything you need to progress and prosper in Ad Astra!
 
-<a href="https://discord.gg/terrarium">
+<a href="http://terrarium.earth/discord">
     <p align="left">
         <img src="https://cdn.discordapp.com/attachments/1005798262273495041/1018731591314448495/discord.png" alt="Discord" width="400"/> 
     </p>
