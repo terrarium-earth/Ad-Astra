@@ -1,0 +1,25 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "modern_industrialization"
+      ]
+    }
+  ],
+  "type": "modern_industrialization:compressor",
+  "duration": 200,
+  "eu": 2,
+  "item_inputs": [
+    {
+      "amount": 1,
+      "tag": "c:calorite_ingots"
+    }
+  ],
+  "item_outputs": [
+    {
+      "amount": 1,
+      "item": "ad_astra:calorite_plate"
+    }
+  ]
+}
