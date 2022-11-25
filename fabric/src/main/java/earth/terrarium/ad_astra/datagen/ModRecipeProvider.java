@@ -1,5 +1,6 @@
 package earth.terrarium.ad_astra.datagen;
 
+import earth.terrarium.ad_astra.recipes.SpaceSuitShapedRecipe;
 import earth.terrarium.ad_astra.registry.ModBlocks;
 import earth.terrarium.ad_astra.registry.ModItems;
 import earth.terrarium.ad_astra.registry.ModTags;
@@ -451,44 +452,46 @@ class ModRecipeProvider extends FabricRecipeProvider {
         ShapelessRecipeBuilder.shapeless(Items.FLINT_AND_STEEL).requires(ModTags.STEEL_INGOTS).requires(Items.FLINT).unlockedBy("has_flint", has(Items.FLINT)).unlockedBy("has_obsidian", has(Blocks.OBSIDIAN)).save(exporter);
 
         // Armour
+        Consumer<FinishedRecipe> spaceSuitExporter = SpaceSuitShapedRecipe.wrap(exporter);
         ShapedRecipeBuilder.shaped(ModItems.SPACE_HELMET.get()).define('#', ModTags.STEEL_INGOTS).define('G', Blocks.ORANGE_STAINED_GLASS_PANE).pattern("###").pattern("#G#").group(null)
-                .unlockedBy("has_tag", has(ModTags.STEEL_INGOTS)).save(exporter);
+                .unlockedBy("has_tag", has(ModTags.STEEL_INGOTS)).save(spaceSuitExporter);
 
         ShapedRecipeBuilder.shaped(ModItems.SPACE_SUIT.get()).define('#', ModTags.STEEL_INGOTS).define('W', Blocks.WHITE_WOOL).define('O', ModItems.OXYGEN_GEAR.get())
-                .define('T', ModItems.OXYGEN_TANK.get()).pattern("# #").pattern("TOT").pattern("#W#").group(null).unlockedBy(getHasName(ModItems.STEEL_INGOT.get()), has(ModItems.STEEL_INGOT.get())).save(exporter);
+                .define('T', ModItems.OXYGEN_TANK.get()).pattern("# #").pattern("TOT").pattern("#W#").group(null)
+                .unlockedBy(getHasName(ModItems.STEEL_INGOT.get()), has(ModItems.STEEL_INGOT.get())).save(spaceSuitExporter);
 
         ShapedRecipeBuilder.shaped(ModItems.SPACE_PANTS.get()).define('#', ModTags.STEEL_INGOTS).define('W', Blocks.WHITE_WOOL).pattern("###").pattern("W W").pattern("# #").group(null)
-                .unlockedBy("has_tag", has(ModTags.STEEL_INGOTS)).save(exporter);
+                .unlockedBy("has_tag", has(ModTags.STEEL_INGOTS)).save(spaceSuitExporter);
 
         ShapedRecipeBuilder.shaped(ModItems.SPACE_BOOTS.get()).define('#', ModTags.STEEL_INGOTS).define('W', Blocks.WHITE_WOOL).pattern("W W").pattern("# #").group(null)
-                .unlockedBy("has_tag", has(ModTags.STEEL_INGOTS)).save(exporter);
+                .unlockedBy("has_tag", has(ModTags.STEEL_INGOTS)).save(spaceSuitExporter);
 
         // Netherite
         ShapedRecipeBuilder.shaped(ModItems.NETHERITE_SPACE_HELMET.get()).define('#', ModTags.OSTRUM_PLATES).define('N', Items.NETHERITE_HELMET).define('G', Blocks.ORANGE_STAINED_GLASS_PANE)
-                .pattern("#N#").pattern("#G#").group(null).unlockedBy("has_tag", has(ModTags.OSTRUM_PLATES)).save(exporter);
+                .pattern("#N#").pattern("#G#").group(null).unlockedBy("has_tag", has(ModTags.OSTRUM_PLATES)).save(spaceSuitExporter);
 
         ShapedRecipeBuilder.shaped(ModItems.NETHERITE_SPACE_SUIT.get()).define('#', ModTags.OSTRUM_PLATES).define('N', Items.NETHERITE_CHESTPLATE).define('O', ModItems.OXYGEN_GEAR.get())
-                .define('T', ModItems.OXYGEN_TANK.get()).pattern("# #").pattern("TOT").pattern("#N#").group(null).unlockedBy("has_tag", has(ModTags.OSTRUM_PLATES)).save(exporter);
+                .define('T', ModItems.OXYGEN_TANK.get()).pattern("# #").pattern("TOT").pattern("#N#").group(null).unlockedBy("has_tag", has(ModTags.OSTRUM_PLATES)).save(spaceSuitExporter);
 
         ShapedRecipeBuilder.shaped(ModItems.NETHERITE_SPACE_PANTS.get()).define('#', ModTags.OSTRUM_PLATES).define('N', Items.NETHERITE_LEGGINGS).define('D', ModTags.DESH_PLATES).pattern("#N#")
-                .pattern("D D").pattern("# #").group(null).unlockedBy("has_tag", has(ModTags.OSTRUM_PLATES)).save(exporter);
+                .pattern("D D").pattern("# #").group(null).unlockedBy("has_tag", has(ModTags.OSTRUM_PLATES)).save(spaceSuitExporter);
 
         ShapedRecipeBuilder.shaped(ModItems.NETHERITE_SPACE_BOOTS.get()).define('#', ModTags.OSTRUM_PLATES).define('N', Items.NETHERITE_BOOTS).define('D', ModTags.DESH_PLATES).pattern(" N ")
-                .pattern("D D").pattern("# #").group(null).unlockedBy("has_tag", has(ModTags.OSTRUM_PLATES)).save(exporter);
+                .pattern("D D").pattern("# #").group(null).unlockedBy("has_tag", has(ModTags.OSTRUM_PLATES)).save(spaceSuitExporter);
 
         // Jet Suit
         ShapedRecipeBuilder.shaped(ModItems.JET_SUIT_HELMET.get()).define('#', ModTags.CALORITE_PLATES).define('N', ModItems.NETHERITE_SPACE_HELMET.get()).define('G', Blocks.ORANGE_STAINED_GLASS)
-                .pattern("#N#").pattern("#G#").group(null).unlockedBy("has_tag", has(ModTags.CALORITE_PLATES)).save(exporter);
+                .pattern("#N#").pattern("#G#").group(null).unlockedBy("has_tag", has(ModTags.CALORITE_PLATES)).save(spaceSuitExporter);
 
         ShapedRecipeBuilder.shaped(ModItems.JET_SUIT.get()).define('#', ModTags.CALORITE_PLATES).define('B', ModTags.CALORITE_BLOCKS).define('N', ModItems.NETHERITE_SPACE_SUIT.get())
-                .define('E', ModItems.CALORITE_ENGINE.get()).define('T', ModItems.CALORITE_TANK.get()).pattern("# #").pattern("TNT").pattern("BEB").group(null).unlockedBy("has_tag", has(ModTags.CALORITE_PLATES))
-                .save(exporter);
+                .define('E', ModItems.CALORITE_ENGINE.get()).define('T', ModItems.CALORITE_TANK.get()).pattern("# #").pattern("TNT").pattern("BEB").group(null)
+                .unlockedBy("has_tag", has(ModTags.CALORITE_PLATES)).save(spaceSuitExporter);
 
         ShapedRecipeBuilder.shaped(ModItems.JET_SUIT_PANTS.get()).define('#', ModTags.CALORITE_PLATES).define('N', ModItems.NETHERITE_SPACE_PANTS.get()).pattern("#N#").pattern("# #").pattern("# #").group(null)
-                .unlockedBy("has_tag", has(ModTags.CALORITE_PLATES)).save(exporter);
+                .unlockedBy("has_tag", has(ModTags.CALORITE_PLATES)).save(spaceSuitExporter);
 
         ShapedRecipeBuilder.shaped(ModItems.JET_SUIT_BOOTS.get()).define('#', ModTags.CALORITE_PLATES).define('B', ModTags.CALORITE_BLOCKS).define('N', ModItems.NETHERITE_SPACE_BOOTS.get())
-                .pattern(" N ").pattern("# #").pattern("B B").group(null).unlockedBy("has_tag", has(ModTags.CALORITE_PLATES)).save(exporter);
+                .pattern(" N ").pattern("# #").pattern("B B").group(null).unlockedBy("has_tag", has(ModTags.CALORITE_PLATES)).save(spaceSuitExporter);
 
         // Soul Torch
         ShapedRecipeBuilder.shaped(Items.SOUL_TORCH).define('#', ModItems.EXTINGUISHED_TORCH.get()).define('S', Items.SOUL_SOIL).pattern("S").pattern("#")
