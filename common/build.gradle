@@ -9,10 +9,10 @@ loom {
 dependencies {
     modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
 
+    modApi "com.teamresourceful.resourcefulconfig:resourcefulconfig-common-$rootProject.resourcefulconfig_version"
     modApi "earth.terrarium:botarium-common-$rootProject.minecraft_version:$rootProject.botarium_version"
     modApi "com.teamresourceful.resourcefullib:resourcefullib-common-$rootProject.resourcefullib_version"
 
-    modApi("me.shedaniel.cloth:cloth-config:$rootProject.cloth_config_version")
     modImplementation "vazkii.patchouli:Patchouli-xplat:$rootProject.patchouli_version"
 
     modCompileOnly("me.shedaniel:RoughlyEnoughItems-api:$rootProject.rei_version")

@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.entities.vehicles;
 
-import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.VehiclesConfig;
 import earth.terrarium.ad_astra.items.vehicles.VehicleItem;
 import earth.terrarium.ad_astra.registry.ModTags;
 import earth.terrarium.ad_astra.screen.VehicleScreenMenuProvider;
@@ -178,8 +178,8 @@ public abstract class Vehicle extends Entity implements Updatable {
             } else {
                 this.setDeltaMovement(this.getDeltaMovement().add(0, -0.03, 0));
             }
-            if (this.getDeltaMovement().y() < AdAstra.CONFIG.vehicles.gravity) {
-                this.setDeltaMovement(new Vec3(this.getDeltaMovement().x(), AdAstra.CONFIG.vehicles.gravity, this.getDeltaMovement().z()));
+            if (this.getDeltaMovement().y() < VehiclesConfig.gravity) {
+                this.setDeltaMovement(new Vec3(this.getDeltaMovement().x(), VehiclesConfig.gravity, this.getDeltaMovement().z()));
             }
         }
     }
@@ -263,9 +263,9 @@ public abstract class Vehicle extends Entity implements Updatable {
 
     @Override
     public boolean causeFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
-        if (this.getDeltaMovement().y() < AdAstra.CONFIG.vehicles.fallingExplosionThreshold) {
+        if (this.getDeltaMovement().y() < VehiclesConfig.fallingExplosionThreshold) {
             if (this.isOnGround()) {
-                this.explode(AdAstra.CONFIG.vehicles.fallingExplosionMultiplier);
+                this.explode(VehiclesConfig.fallingExplosionMultiplier);
                 return true;
             }
         }

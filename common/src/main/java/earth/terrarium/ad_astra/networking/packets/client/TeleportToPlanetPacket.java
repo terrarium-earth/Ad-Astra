@@ -3,7 +3,7 @@ package earth.terrarium.ad_astra.networking.packets.client;
 import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
-import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.AdAstraConfig;
 import earth.terrarium.ad_astra.entities.vehicles.Rocket;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import earth.terrarium.ad_astra.util.ModUtils;
@@ -13,6 +13,8 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
+
+import java.util.List;
 
 public record TeleportToPlanetPacket(ResourceLocation id) implements Packet<TeleportToPlanetPacket> {
 
@@ -52,7 +54,9 @@ public record TeleportToPlanetPacket(ResourceLocation id) implements Packet<Tele
         @Override
         public PacketContext handle(TeleportToPlanetPacket packet) {
             return (player, level) -> {
-                if (!AdAstra.CONFIG.general.disabledPlanets.contains(packet.id().toString())) {
+                List<String> disabledPlanets = List.of(AdAstraConfig.disabledPlanets.split(","));
+
+                if (!disabledPlanets.contains(packet.id().toString())) {
                     if (player.getVehicle() instanceof Rocket) {
                         ModUtils.teleportTolevel(getlevel(packet.id()), player);
                     } else if (player.canUseGameMasterBlocks()) {

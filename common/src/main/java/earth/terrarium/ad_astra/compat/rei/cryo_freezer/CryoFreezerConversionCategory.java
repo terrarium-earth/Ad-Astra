@@ -1,10 +1,10 @@
 package earth.terrarium.ad_astra.compat.rei.cryo_freezer;
 
 import dev.architectury.fluid.FluidStack;
-import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.compat.rei.REICategories;
 import earth.terrarium.ad_astra.compat.rei.widgets.EnergyBarWidget;
 import earth.terrarium.ad_astra.compat.rei.widgets.FluidBarWidget;
+import earth.terrarium.ad_astra.config.CryoFreezerConfig;
 import earth.terrarium.ad_astra.registry.ModBlocks;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import me.shedaniel.math.Point;
@@ -74,7 +74,7 @@ public class CryoFreezerConversionCategory implements DisplayCategory<CryoFreeze
 
 		Widget widget = new EnergyBarWidget(new Point(startPoint.x + 110, startPoint.y + 2), false).animationDurationTicks(150);
 		widgets.add(widget);
-		widgets.add(Widgets.withTooltip(Widgets.withBounds(widget, bounds), Component.translatable("rei.tooltip.ad_astra.energy_using", AdAstra.CONFIG.cryoFreezer.energyPerTick)));
+		widgets.add(Widgets.withTooltip(Widgets.withBounds(widget, bounds), Component.translatable("rei.tooltip.ad_astra.energy_using", CryoFreezerConfig.energyPerTick)));
 
 		return widgets;
 	}

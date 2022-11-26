@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.entities.mobs;
 
-import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.SpawnConfig;
 import earth.terrarium.ad_astra.entities.projectiles.IceSpit;
 import earth.terrarium.ad_astra.registry.ModEntityTypes;
 import net.minecraft.sounds.SoundEvent;
@@ -87,6 +87,6 @@ public class CorruptedLunarian extends Monster implements RangedAttackMob {
 
     @Override
     public boolean checkSpawnRules(LevelAccessor level, MobSpawnType spawnReason) {
-        return AdAstra.CONFIG.general.spawnCorruptedLunarians;
+        return SpawnConfig.spawnCorruptedLunarians;
     }
 }

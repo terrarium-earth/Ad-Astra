@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.blocks.machines.entity;
 
-import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.CoalGeneratorConfig;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
 import earth.terrarium.ad_astra.screen.menu.CoalGeneratorMenu;
 import earth.terrarium.botarium.api.energy.EnergyBlock;
@@ -73,7 +73,7 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity imple
     }
 
     public long getEnergyPerTick() {
-        return AdAstra.CONFIG.coalGenerator.energyPerTick;
+        return CoalGeneratorConfig.energyPerTick;
     }
 
     public long getMaxCapacity() {
@@ -82,7 +82,7 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity imple
 
     @Override
     public ExtractOnlyEnergyContainer getEnergyStorage() {
-        return energyContainer == null ? energyContainer = new ExtractOnlyEnergyContainer(this, (int) AdAstra.CONFIG.coalGenerator.maxEnergy) : this.energyContainer;
+        return energyContainer == null ? energyContainer = new ExtractOnlyEnergyContainer(this, (int) CoalGeneratorConfig.maxEnergy) : this.energyContainer;
     }
 
     @Override

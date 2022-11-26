@@ -1,10 +1,10 @@
 package earth.terrarium.ad_astra.compat.jei.categories;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.screens.GuiUtil;
 import earth.terrarium.ad_astra.compat.jei.EnergyBarDrawable;
 import earth.terrarium.ad_astra.compat.jei.FluidBarDrawable;
+import earth.terrarium.ad_astra.config.CryoFreezerConfig;
 import earth.terrarium.ad_astra.recipes.CryoFuelConversionRecipe;
 import earth.terrarium.ad_astra.registry.ModItems;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
@@ -66,7 +66,7 @@ public class CryoFuelConversionCategory extends BaseCategory<CryoFuelConversionR
     public List<Component> getTooltipStrings(CryoFuelConversionRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
         List<Component> tooltips = new ArrayList<>();
         if (mouseX > 118 && mouseY > 13 && mouseX < 118 + GuiUtil.ENERGY_WIDTH && mouseY < 13 + GuiUtil.ENERGY_HEIGHT) {
-            tooltips.add(Component.translatable("rei.tooltip.ad_astra.energy_using", AdAstra.CONFIG.cryoFreezer.energyPerTick));
+            tooltips.add(Component.translatable("rei.tooltip.ad_astra.energy_using", CryoFreezerConfig.energyPerTick));
         }
         if (mouseX > 80 && mouseY > 13 && mouseX < 80 + GuiUtil.FLUID_TANK_WIDTH && mouseY < 13 + GuiUtil.FLUID_TANK_HEIGHT) {
             tooltips.add(GuiUtil.getFluidTranslation(recipe.getFluidOutput()));

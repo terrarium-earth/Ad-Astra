@@ -33,9 +33,9 @@ dependencies {
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
 
     modApi "earth.terrarium:botarium-forge-$rootProject.minecraft_version:$rootProject.botarium_version"
+    modApi "com.teamresourceful.resourcefulconfig:resourcefulconfig-forge-$resourcefulconfig_version"
     modApi "com.teamresourceful.resourcefullib:resourcefullib-forge-$resourcefullib_version"
 
-    modApi("me.shedaniel.cloth:cloth-config-forge:$rootProject.cloth_config_version")
     modImplementation "vazkii.patchouli:Patchouli:$rootProject.patchouli_version"
 
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-forge:$project.rei_version"

@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.items;
 
-import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.AdAstraConfig;
 import earth.terrarium.ad_astra.registry.ModFluids;
 import earth.terrarium.ad_astra.registry.ModItems;
 import earth.terrarium.ad_astra.registry.ModTags;
@@ -75,6 +75,6 @@ public class OxygenTankItem extends Item implements FluidContainingItem {
 
     @Override
     public long getTankSize() {
-        return AdAstra.CONFIG.general.oxygenTankSize;
+        return AdAstraConfig.oxygenTankSize;
     }
 }

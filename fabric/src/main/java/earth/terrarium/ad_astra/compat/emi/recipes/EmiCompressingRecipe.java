@@ -6,9 +6,9 @@ import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
-import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.compat.emi.EmiCategories;
 import earth.terrarium.ad_astra.compat.emi.EmiTextures;
+import earth.terrarium.ad_astra.config.CompressorConfig;
 import earth.terrarium.ad_astra.recipes.CompressingRecipe;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -68,6 +68,6 @@ public class EmiCompressingRecipe implements EmiRecipe {
 		widgets.addSlot(this.input, xOffset, yOffset);
 		widgets.addSlot(this.output, 58 + xOffset, yOffset).recipeContext(this);
 
-		EmiTextures.createEnergyWidget(widgets, 100 + xOffset, -20 + yOffset, (int) AdAstra.CONFIG.compressor.energyPerTick, false);
+		EmiTextures.createEnergyWidget(widgets, 100 + xOffset, -20 + yOffset, (int) CompressorConfig.energyPerTick, false);
 	}
 }

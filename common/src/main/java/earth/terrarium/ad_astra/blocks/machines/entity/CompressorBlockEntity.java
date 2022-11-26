@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.blocks.machines.entity;
 
-import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.CompressorConfig;
 import earth.terrarium.ad_astra.recipes.CookingRecipe;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
 import earth.terrarium.ad_astra.registry.ModRecipeTypes;
@@ -79,7 +79,7 @@ public class CompressorBlockEntity extends ProcessingMachineBlockEntity implemen
     }
 
     public long getEnergyPerTick() {
-        return AdAstra.CONFIG.compressor.energyPerTick;
+        return CompressorConfig.energyPerTick;
     }
 
     public long getMaxCapacity() {
@@ -88,7 +88,7 @@ public class CompressorBlockEntity extends ProcessingMachineBlockEntity implemen
 
     @Override
     public InsertOnlyEnergyContainer getEnergyStorage() {
-        return energyContainer == null ? energyContainer = new InsertOnlyEnergyContainer(this, (int) AdAstra.CONFIG.compressor.maxEnergy) : this.energyContainer;
+        return energyContainer == null ? energyContainer = new InsertOnlyEnergyContainer(this, (int) CompressorConfig.maxEnergy) : this.energyContainer;
     }
 
     @Override

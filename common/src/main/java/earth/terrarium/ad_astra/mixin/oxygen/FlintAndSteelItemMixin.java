@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.mixin.oxygen;
 
-import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.AdAstraConfig;
 import earth.terrarium.ad_astra.util.OxygenUtils;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -23,7 +23,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class FlintAndSteelItemMixin {
     @Inject(method = "useOn", at = @At(value = "HEAD"), cancellable = true)
     public void adastra_useOnBlock(UseOnContext context, CallbackInfoReturnable<InteractionResult> cir) {
-        if (!AdAstra.CONFIG.general.doOxygen) {
+        if (!AdAstraConfig.doOxygen) {
             return;
         }
         Player player = context.getPlayer();

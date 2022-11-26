@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.entities.vehicles;
 
-import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.VehiclesConfig;
 import earth.terrarium.ad_astra.registry.ModItems;
 import earth.terrarium.ad_astra.screen.LargeVehicleMenuProvider;
 import earth.terrarium.ad_astra.util.ModKeyBindings;
@@ -44,12 +44,12 @@ public class Rover extends Vehicle {
 
     @Override
     public long getTankSize() {
-        return AdAstra.CONFIG.rover.tankSize;
+        return VehiclesConfig.RoverConfig.tankSize;
     }
 
     @Override
     public long getFuelPerTick() {
-        return AdAstra.CONFIG.rover.fuelPerSecond;
+        return VehiclesConfig.RoverConfig.fuelPerSecond;
     }
 
     @Override
@@ -80,7 +80,7 @@ public class Rover extends Vehicle {
     public void tick() {
         super.tick();
         this.travel();
-        if (AdAstra.CONFIG.rover.explodeRoverInLava && this.isEyeInFluid(FluidTags.LAVA)) {
+        if (VehiclesConfig.RoverConfig.explodeRoverInLava && this.isEyeInFluid(FluidTags.LAVA)) {
             this.explode(0.35f);
         }
     }
@@ -112,13 +112,13 @@ public class Rover extends Vehicle {
 
                 // Player is clicking 'a' to move left.
                 if (ModKeyBindings.leftKeyDown(player)) {
-                    this.setTurnSpeed(this.getTurnSpeed() - AdAstra.CONFIG.rover.turnSpeed * this.getSpeed());
+                    this.setTurnSpeed(this.getTurnSpeed() - VehiclesConfig.RoverConfig.turnSpeed * this.getSpeed());
                     // Slow down for better turns.
                     this.setDeltaMovement(new Vec3(this.getDeltaMovement().x() / 1.1, this.getDeltaMovement().y(), this.getDeltaMovement().z() / 1.1));
                 }
                 // Player is clicking 'd' to move right.
                 if (ModKeyBindings.rightKeyDown(player)) {
-                    this.setTurnSpeed(this.getTurnSpeed() + AdAstra.CONFIG.rover.turnSpeed * this.getSpeed());
+                    this.setTurnSpeed(this.getTurnSpeed() + VehiclesConfig.RoverConfig.turnSpeed * this.getSpeed());
                     // Slow down for better turns.
                     this.setDeltaMovement(new Vec3(this.getDeltaMovement().x() / 1.1, this.getDeltaMovement().y(), this.getDeltaMovement().z() / 1.1));
                 }
@@ -129,8 +129,8 @@ public class Rover extends Vehicle {
             }
         }
 
-        this.setTurnSpeed(Mth.clamp(this.getTurnSpeed(), -AdAstra.CONFIG.rover.maxTurnSpeed, AdAstra.CONFIG.rover.maxTurnSpeed));
-        this.setTurnSpeed(this.getTurnSpeed() * AdAstra.CONFIG.rover.deceleration);
+        this.setTurnSpeed(Mth.clamp(this.getTurnSpeed(), -VehiclesConfig.RoverConfig.maxTurnSpeed, VehiclesConfig.RoverConfig.maxTurnSpeed));
+        this.setTurnSpeed(this.getTurnSpeed() * VehiclesConfig.RoverConfig.deceleration);
         if (this.getTurnSpeed() < 0.1 && this.getTurnSpeed() > -0.1) {
             this.setTurnSpeed(0.0f);
         }
@@ -192,12 +192,12 @@ public class Rover extends Vehicle {
 
     @Override
     public float getMinSpeed() {
-        return AdAstra.CONFIG.rover.minSpeed;
+        return VehiclesConfig.RoverConfig.minSpeed;
     }
 
     @Override
     public float getMaxSpeed() {
-        return AdAstra.CONFIG.rover.maxSpeed;
+        return VehiclesConfig.RoverConfig.maxSpeed;
     }
 
     public float getTurnSpeed() {

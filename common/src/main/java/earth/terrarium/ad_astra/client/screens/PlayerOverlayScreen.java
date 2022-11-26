@@ -2,8 +2,9 @@ package earth.terrarium.ad_astra.client.screens;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.screens.GuiUtil.FloatGuiComponent;
+import earth.terrarium.ad_astra.config.AdAstraConfig;
+import earth.terrarium.ad_astra.config.VehiclesConfig;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import earth.terrarium.ad_astra.util.ModUtils;
 import net.fabricmc.api.EnvType;
@@ -70,8 +71,8 @@ public class PlayerOverlayScreen {
         // Oxygen
         if (shouldRenderOxygen && !minecraft.options.renderDebug) {
 
-            int x = 5 + AdAstra.CONFIG.general.oxygenBarXOffset;
-            int y = 25 + AdAstra.CONFIG.general.oxygenBarYOffset;
+            int x = 5 + AdAstraConfig.oxygenBarXOffset;
+            int y = 25 + AdAstraConfig.oxygenBarYOffset;
 
             int textureWidth = 62;
             int textureHeight = 52;
@@ -93,8 +94,8 @@ public class PlayerOverlayScreen {
         // Battery
         if (shouldRenderBattery && !minecraft.options.renderDebug) {
 
-            int x = screenWidth - 75 - AdAstra.CONFIG.general.energyBarXOffset;
-            int y = 25 + AdAstra.CONFIG.general.energyBarYOffset;
+            int x = screenWidth - 75 - AdAstraConfig.energyBarXOffset;
+            int y = 25 + AdAstraConfig.energyBarYOffset;
 
             int textureWidth = (int) (49 * 1.4);
             int textureHeight = (int) (27 * 1.4);
@@ -124,7 +125,7 @@ public class PlayerOverlayScreen {
 
         // Planet bar
         if (shouldRenderBar && !minecraft.options.renderDebug) {
-            float rocketHeight = (float) (player.getY() / (AdAstra.CONFIG.rocket.atmosphereLeave / 113.0f));
+            float rocketHeight = (float) (player.getY() / (VehiclesConfig.RocketConfig.atmosphereLeave / 113.0f));
             rocketHeight = Mth.clamp(rocketHeight, 0, 113);
 
             int x = 0;

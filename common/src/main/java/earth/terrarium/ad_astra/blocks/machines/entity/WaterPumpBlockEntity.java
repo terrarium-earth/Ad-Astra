@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.blocks.machines.entity;
 
-import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.blocks.machines.AbstractMachineBlock;
+import earth.terrarium.ad_astra.config.WaterPumpConfig;
 import earth.terrarium.ad_astra.container.WaterPumpFluidTank;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
 import earth.terrarium.ad_astra.registry.ModParticleTypes;
@@ -67,14 +67,14 @@ public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements 
                         this.setActive(true);
                         ModUtils.spawnForcedParticles((ServerLevel) this.level, ModParticleTypes.OXYGEN_BUBBLE.get(), this.getBlockPos().getX() + 0.5, this.getBlockPos().getY() - 0.5, this.getBlockPos().getZ() + 0.5, 1, 0.0, 0.0, 0.0, 0.01);
                         this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
-                        waterExtracted += AdAstra.CONFIG.waterPump.transferPerTick;
-                        FluidHolder waterFluid = FluidHooks.newFluidHolder(Fluids.WATER, AdAstra.CONFIG.waterPump.transferPerTick, null);
+                        waterExtracted += WaterPumpConfig.transferPerTick;
+                        FluidHolder waterFluid = FluidHooks.newFluidHolder(Fluids.WATER, WaterPumpConfig.transferPerTick, null);
                         getFluidContainer().insertInternal(waterFluid, false);
                     } else {
                         this.setActive(false);
                     }
 
-                    if (AdAstra.CONFIG.waterPump.deleteWaterBelowWaterPump) {
+                    if (WaterPumpConfig.deleteWaterBelowWaterPump) {
                         // Delete the water block after it has been fully extracted.
                         if (waterExtracted >= FluidHooks.buckets(1)) {
                             waterExtracted = 0;
@@ -89,7 +89,7 @@ public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements 
             // Insert the fluid into nearby tanks.
             if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0 && !getFluidContainer().isEmpty()) {
                 for (Direction direction : new Direction[]{Direction.UP, this.getBlockState().getValue(AbstractMachineBlock.FACING)}) {
-                    FluidHolder fluid = FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(0).getFluid(), AdAstra.CONFIG.waterPump.transferPerTick * 2, getFluidContainer().getFluids().get(0).getCompound());
+                    FluidHolder fluid = FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(0).getFluid(), WaterPumpConfig.transferPerTick * 2, getFluidContainer().getFluids().get(0).getCompound());
                     this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
                     if (FluidHooks.moveBlockToBlockFluid(this, direction.getOpposite(), level.getBlockEntity(worldPosition.relative(direction)), direction, fluid) > 0) {
                         break;
@@ -105,7 +105,7 @@ public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements 
     }
 
     public long getEnergyPerTick() {
-        return AdAstra.CONFIG.waterPump.energyPerTick;
+        return WaterPumpConfig.energyPerTick;
     }
 
     public long getMaxCapacity() {
@@ -114,7 +114,7 @@ public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements 
 
     @Override
     public InsertOnlyEnergyContainer getEnergyStorage() {
-        return energyContainer == null ? energyContainer = new InsertOnlyEnergyContainer(this, (int) AdAstra.CONFIG.waterPump.maxEnergy) : this.energyContainer;
+        return energyContainer == null ? energyContainer = new InsertOnlyEnergyContainer(this, (int) WaterPumpConfig.maxEnergy) : this.energyContainer;
     }
 
     @Override

@@ -1,12 +1,12 @@
 package earth.terrarium.ad_astra.client.screens;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.blocks.machines.entity.OxygenDistributorBlockEntity;
 import earth.terrarium.ad_astra.client.screens.utils.ButtonType;
 import earth.terrarium.ad_astra.client.screens.utils.CustomButton;
 import earth.terrarium.ad_astra.client.screens.utils.PlanetSelectionScreen.TooltipType;
 import earth.terrarium.ad_astra.client.screens.utils.ScreenUtils;
+import earth.terrarium.ad_astra.config.OxygenDistributorConfig;
 import earth.terrarium.ad_astra.data.ButtonColour;
 import earth.terrarium.ad_astra.networking.NetworkHandling;
 import earth.terrarium.ad_astra.networking.packets.client.ToggleDistributorPacket;
@@ -60,7 +60,7 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
         visibleButton.setMessage(this.machine.shouldShowOxygen() ? HIDE_TEXT : SHOW_TEXT);
 
         // Render a warning sign if there is an oxygen leak detected.
-        boolean oxygenLeak = OxygenUtils.getOxygenBlocksCount(this.machine.getLevel(), this.machine.getBlockPos()) >= AdAstra.CONFIG.oxygenDistributor.maxBlockChecks;
+        boolean oxygenLeak = OxygenUtils.getOxygenBlocksCount(this.machine.getLevel(), this.machine.getBlockPos()) >= OxygenDistributorConfig.maxBlockChecks;
         if (oxygenLeak) {
             GuiComponent.drawCenteredString(poseStack, this.font, "⚠", this.width / 2 - 85 + 7, this.height / 2 - 137, Color.YELLOW.getRGB());
         }
@@ -86,7 +86,7 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
         }
 
         int oxygenBlocksCount = OxygenUtils.getOxygenBlocksCount(this.machine.getLevel(), this.machine.getBlockPos());
-        boolean oxygenLeak = OxygenUtils.getOxygenBlocksCount(this.machine.getLevel(), this.machine.getBlockPos()) >= AdAstra.CONFIG.oxygenDistributor.maxBlockChecks;
+        boolean oxygenLeak = OxygenUtils.getOxygenBlocksCount(this.machine.getLevel(), this.machine.getBlockPos()) >= OxygenDistributorConfig.maxBlockChecks;
         if (oxygenLeak) {
             if (GuiUtil.isHovering(getOxygenLeakWarningSignBounds(), mouseX, mouseY)) {
                 this.renderComponentTooltip(poseStack, Arrays.asList(Component.translatable("gauge_text.ad_astra.oxygen_leak_warning[0]"), Component.translatable("gauge_text.ad_astra.oxygen_leak_warning[1]"), Component.translatable("gauge_text.ad_astra.oxygen_leak_warning[2]"), Component.translatable("gauge_text.ad_astra.oxygen_leak_warning[3]"), Component.translatable("gauge_text.ad_astra.oxygen_leak_warning[4]")), mouseX, mouseY);
@@ -107,7 +107,7 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
         poseStack.pushPose();
         poseStack.scale(0.9f, 0.9f, 0.9f);
         Component oxygenBlockText = Component.translatable("gauge_text.ad_astra.oxygen_blocks");
-        Component oxygenBlockAmount = Component.nullToEmpty(oxygenBlocksCount + " / " + AdAstra.CONFIG.oxygenDistributor.maxBlockChecks);
+        Component oxygenBlockAmount = Component.nullToEmpty(oxygenBlocksCount + " / " + OxygenDistributorConfig.maxBlockChecks);
 
         int offset = 25;
         this.font.draw(poseStack, oxygenBlockText, 11, offset + 11, 0x68d975);

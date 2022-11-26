@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.entities.vehicles;
 
-import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.VehiclesConfig;
 import earth.terrarium.ad_astra.screen.LanderMenuProvider;
 import earth.terrarium.ad_astra.util.ModKeyBindings;
 import earth.terrarium.ad_astra.util.ModUtils;
@@ -97,8 +97,8 @@ public class Lander extends Vehicle {
     public void applyBoosters() {
         this.setDeltaMovement(this.getDeltaMovement().add(0.0, 0.1, 0.0));
 
-        if (this.getDeltaMovement().y() > AdAstra.CONFIG.lander.boosterThreshold) {
-            this.setDeltaMovement(0.0, AdAstra.CONFIG.lander.boosterThreshold, 0.0);
+        if (this.getDeltaMovement().y() > VehiclesConfig.LanderConfig.boosterThreshold) {
+            this.setDeltaMovement(0.0, VehiclesConfig.LanderConfig.boosterThreshold, 0.0);
         }
 
         // Particles

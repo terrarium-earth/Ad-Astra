@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.entities.mobs;
 
-import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.SpawnConfig;
 import earth.terrarium.ad_astra.items.armour.SpaceSuit;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import earth.terrarium.botarium.api.item.ItemStackHolder;
@@ -65,7 +65,7 @@ public class SulfurCreeper extends Creeper {
 
     @Override
     public boolean checkSpawnRules(LevelAccessor level, MobSpawnType spawnReason) {
-        if (!AdAstra.CONFIG.general.spawnSulfurCreepers) {
+        if (!SpawnConfig.spawnSulfurCreepers) {
             return false;
         }
         return super.checkSpawnRules(level, spawnReason);

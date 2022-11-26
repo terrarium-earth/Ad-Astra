@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.entities.mobs;
 
-import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.SpawnConfig;
 import earth.terrarium.ad_astra.registry.ModEntityTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -51,7 +51,7 @@ public class Mogler extends Hoglin {
 
     @Override
     public boolean checkSpawnRules(LevelAccessor level, MobSpawnType spawnReason) {
-        if (!AdAstra.CONFIG.general.spawnMoglers) {
+        if (!SpawnConfig.spawnMoglers) {
             return false;
         }
         return super.checkSpawnRules(level, spawnReason);

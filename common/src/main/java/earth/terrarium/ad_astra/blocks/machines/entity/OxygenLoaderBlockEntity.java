@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.blocks.machines.entity;
 
-import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.OxygenLoaderConfig;
 import earth.terrarium.ad_astra.recipes.OxygenConversionRecipe;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
 import earth.terrarium.ad_astra.registry.ModRecipeTypes;
@@ -30,12 +30,12 @@ public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
 
     @Override
     public long getInputTankCapacity() {
-        return AdAstra.CONFIG.oxygenLoader.tankSize;
+        return OxygenLoaderConfig.tankSize;
     }
 
     @Override
     public long getOutputTankCapacity() {
-        return AdAstra.CONFIG.oxygenLoader.tankSize;
+        return OxygenLoaderConfig.tankSize;
     }
 
     @Override
@@ -97,11 +97,11 @@ public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
 
     @Override
     public long getEnergyPerTick() {
-        return AdAstra.CONFIG.oxygenLoader.energyPerTick;
+        return OxygenLoaderConfig.energyPerTick;
     }
 
     @Override
     public InsertOnlyEnergyContainer getEnergyStorage() {
-        return this.energyContainer == null ? this.energyContainer = new InsertOnlyEnergyContainer(this, (int) AdAstra.CONFIG.oxygenLoader.maxEnergy) : this.energyContainer;
+        return this.energyContainer == null ? this.energyContainer = new InsertOnlyEnergyContainer(this, (int) OxygenLoaderConfig.maxEnergy) : this.energyContainer;
     }
 }

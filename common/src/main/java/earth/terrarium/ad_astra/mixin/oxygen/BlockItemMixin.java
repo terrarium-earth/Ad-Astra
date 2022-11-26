@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.mixin.oxygen;
 
-import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.AdAstraConfig;
 import earth.terrarium.ad_astra.registry.ModBlocks;
 import earth.terrarium.ad_astra.registry.ModTags;
 import earth.terrarium.ad_astra.util.OxygenUtils;
@@ -30,7 +30,7 @@ public abstract class BlockItemMixin {
 
     @Inject(method = "place*", at = @At(value = "TAIL"))
     public void adastra_place(BlockPlaceContext context, CallbackInfoReturnable<InteractionResult> cir) {
-        if (!AdAstra.CONFIG.general.doOxygen) {
+        if (!AdAstraConfig.doOxygen) {
             return;
         }
         // Extinguish fire items in dimensions with no oxygen.

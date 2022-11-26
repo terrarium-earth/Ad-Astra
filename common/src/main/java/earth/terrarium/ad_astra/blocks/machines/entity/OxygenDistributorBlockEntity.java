@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.blocks.machines.entity;
 
-import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.blocks.machines.AbstractMachineBlock;
+import earth.terrarium.ad_astra.config.OxygenDistributorConfig;
 import earth.terrarium.ad_astra.recipes.OxygenConversionRecipe;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
 import earth.terrarium.ad_astra.registry.ModParticleTypes;
@@ -36,7 +36,7 @@ import java.util.function.Predicate;
 public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implements EnergyBlock {
     private InsertOnlyEnergyContainer energyContainer;
 
-    private int oxygenFillCheckTicks = AdAstra.CONFIG.oxygenDistributor.refreshTicks;
+    private int oxygenFillCheckTicks = OxygenDistributorConfig.refreshTicks;
     private boolean showOxygen = false;
 
     public OxygenDistributorBlockEntity(BlockPos blockPos, BlockState blockState) {
@@ -65,12 +65,12 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
 
     @Override
     public long getInputTankCapacity() {
-        return AdAstra.CONFIG.oxygenDistributor.tankSize;
+        return OxygenDistributorConfig.tankSize;
     }
 
     @Override
     public long getOutputTankCapacity() {
-        return AdAstra.CONFIG.oxygenDistributor.tankSize;
+        return OxygenDistributorConfig.tankSize;
     }
 
     @Override
@@ -100,11 +100,11 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
     }
 
     public int getMaxBlockChecks() {
-        return AdAstra.CONFIG.oxygenDistributor.maxBlockChecks;
+        return OxygenDistributorConfig.maxBlockChecks;
     }
 
     public long getFluidToExtract(long oxygenBlocks, boolean client) {
-        long value = (long) (((FluidHooks.buckets(1) / 1000) * oxygenBlocks / 44) * AdAstra.CONFIG.oxygenDistributor.oxygenMultiplier);
+        long value = (long) (((FluidHooks.buckets(1) / 1000) * oxygenBlocks / 44) * OxygenDistributorConfig.oxygenMultiplier);
         if (client) {
             return value;
         }
@@ -112,7 +112,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
     }
 
     public long getEnergyToConsume(long oxygenBlocks, boolean client) {
-        long value = (long) ((oxygenBlocks * AdAstra.CONFIG.oxygenDistributor.energyMultiplier) / 75);
+        long value = (long) ((oxygenBlocks * OxygenDistributorConfig.energyMultiplier) / 75);
         if (client) {
             return value;
         }
@@ -170,7 +170,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
         }
 
         // Distribute the oxygen every certain amount of ticks. The algorithm is then run to determine how much oxygen to distribute.
-        if (oxygenFillCheckTicks >= AdAstra.CONFIG.oxygenDistributor.refreshTicks) {
+        if (oxygenFillCheckTicks >= OxygenDistributorConfig.refreshTicks) {
             this.runAlgorithm();
             oxygenFillCheckTicks = 0;
         } else {
@@ -223,7 +223,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
     }
 
     public long getEnergyPerTick() {
-        return AdAstra.CONFIG.oxygenDistributor.fluidConversionEnergyPerTick;
+        return OxygenDistributorConfig.fluidConversionEnergyPerTick;
     }
 
     public long getMaxCapacity() {
@@ -232,7 +232,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
 
     @Override
     public InsertOnlyEnergyContainer getEnergyStorage() {
-        return energyContainer == null ? energyContainer = new InsertOnlyEnergyContainer(this, (int) AdAstra.CONFIG.oxygenDistributor.maxEnergy) : this.energyContainer;
+        return energyContainer == null ? energyContainer = new InsertOnlyEnergyContainer(this, (int) OxygenDistributorConfig.maxEnergy) : this.energyContainer;
     }
 
     @Override

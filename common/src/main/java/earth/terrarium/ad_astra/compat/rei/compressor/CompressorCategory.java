@@ -1,8 +1,8 @@
 package earth.terrarium.ad_astra.compat.rei.compressor;
 
-import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.compat.rei.REICategories;
 import earth.terrarium.ad_astra.compat.rei.widgets.EnergyBarWidget;
+import earth.terrarium.ad_astra.config.CompressorConfig;
 import earth.terrarium.ad_astra.registry.ModBlocks;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
@@ -65,7 +65,7 @@ public class CompressorCategory implements DisplayCategory<CompressorDisplay> {
 
 		Widget widget = new EnergyBarWidget(new Point(startPoint.x + 110, startPoint.y - 13), false).animationDurationTicks(150);
 		widgets.add(widget);
-		widgets.add(Widgets.withTooltip(Widgets.withBounds(widget, bounds), Component.translatable("rei.tooltip.ad_astra.energy_using", AdAstra.CONFIG.compressor.energyPerTick)));
+		widgets.add(Widgets.withTooltip(Widgets.withBounds(widget, bounds), Component.translatable("rei.tooltip.ad_astra.energy_using", CompressorConfig.energyPerTick)));
 
 		Component ratioText = Component.translatable("rei.text.ad_astra.seconds", display.recipe().getCookTime() / 20);
 		widgets.add(Widgets.createLabel(new Point(startPoint.x + 60, startPoint.y + 45), ratioText).centered().noShadow().color(0xFF404040, 0xFFBBBBBB));

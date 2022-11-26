@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.world;
 
-import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.SpawnConfig;
 import earth.terrarium.ad_astra.registry.ModEntityTypes;
 import earth.terrarium.ad_astra.util.ModUtils;
 import net.minecraft.core.BlockPos;
@@ -46,7 +46,7 @@ public class LunarianWanderingTraderManager implements CustomSpawner {
 
     @Override
     public int tick(ServerLevel level, boolean spawnMonsters, boolean spawnAnimals) {
-        if (!AdAstra.CONFIG.general.spawnLunarianWanderingTrader) {
+        if (!SpawnConfig.spawnLunarianWanderingTrader) {
             return 0;
         }
         if (!level.getGameRules().getBoolean(GameRules.RULE_DO_TRADER_SPAWNING)) {
@@ -88,7 +88,7 @@ public class LunarianWanderingTraderManager implements CustomSpawner {
             return false;
         }
 
-        if (!AdAstra.CONFIG.general.spawnCorruptedLunarians) {
+        if (!SpawnConfig.spawnCorruptedLunarians) {
             return false;
         }
 
