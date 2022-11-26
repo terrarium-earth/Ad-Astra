@@ -1,5 +1,8 @@
 package earth.terrarium.ad_astra.entities.mobs;
 
+import java.util.ArrayList;
+import java.util.List;
+import org.jetbrains.annotations.Nullable;
 import earth.terrarium.ad_astra.entities.mobs.goal.EatPermafrostGoal;
 import earth.terrarium.ad_astra.registry.ModBlocks;
 import earth.terrarium.ad_astra.registry.ModEntityTypes;
@@ -123,8 +126,7 @@ public class GlacianRam extends Animal implements Shearable {
         ItemStack itemStack = player.getItemInHand(hand);
         if (itemStack.is(Items.SHEARS)) {
             if (!this.level.isClientSide && this.readyForShearing()) {
-                this.shear(SoundSource.PLAYERS);
-                this.gameEvent(GameEvent.SHEAR, player);
+                this.shear(player, SoundSource.PLAYERS);
                 itemStack.hurtAndBreak(1, player, playerx -> playerx.broadcastBreakEvent(hand));
                 return InteractionResult.SUCCESS;
             } else {
@@ -137,17 +139,28 @@ public class GlacianRam extends Animal implements Shearable {
 
     @Override
     public void shear(SoundSource shearedSoundCategory) {
-        this.level.playSound(null, this, SoundEvents.SHEEP_SHEAR, shearedSoundCategory, 1.0F, 1.0F);
-        this.setSheared(true);
-        int i = 1 + this.random.nextInt(3);
+        this.shear(null, shearedSoundCategory);
+    }
 
-        for (int j = 0; j < i; ++j) {
-            ItemEntity itemEntity = this.spawnAtLocation(ModBlocks.GLACIAN_FUR.get());
+    public void shear(@Nullable Player player, SoundSource shearedSoundCategory) {
+        for (ItemStack item : this.onSheared(player, shearedSoundCategory)) {
+            ItemEntity itemEntity = this.spawnAtLocation(item);
             if (itemEntity != null) {
                 itemEntity.setDeltaMovement(itemEntity.getDeltaMovement().add((this.random.nextFloat() - this.random.nextFloat()) * 0.1F, this.random.nextFloat() * 0.05F, (this.random.nextFloat() - this.random.nextFloat()) * 0.1F));
             }
         }
+    }
 
+    public List<ItemStack> onSheared(@Nullable Player player, SoundSource shearedSoundCategory) {
+        this.level.playSound(null, this, SoundEvents.SHEEP_SHEAR, shearedSoundCategory, 1.0F, 1.0F);
+        if (player != null) this.gameEvent(GameEvent.SHEAR, player);
+        this.setSheared(true);
+        int i = 1 + this.random.nextInt(3);
+        List<ItemStack> items = new ArrayList<>();
+        for (int j = 0; j < i; ++j) {
+            items.add(new ItemStack(ModBlocks.GLACIAN_FUR.get()));
+        }
+        return items;
     }
 
     @Override
