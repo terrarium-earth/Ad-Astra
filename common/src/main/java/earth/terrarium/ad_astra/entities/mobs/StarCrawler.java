@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.entities.mobs;
 
-import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.SpawnConfig;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
@@ -49,7 +49,7 @@ public class StarCrawler extends Monster {
 
     @Override
     public boolean checkSpawnRules(LevelAccessor level, MobSpawnType spawnReason) {
-        if (!AdAstra.CONFIG.general.spawnStarCrawlers) {
+        if (!SpawnConfig.spawnStarCrawlers) {
             return false;
         }
         return super.checkSpawnRules(level, spawnReason);

@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.mixin.gravity;
 
-import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.AdAstraConfig;
 import earth.terrarium.ad_astra.util.ModUtils;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.vehicle.Boat;
@@ -19,7 +19,7 @@ public abstract class BoatMixin {
 
     @Inject(method = "floatBoat", at = @At("TAIL"))
     public void adastra_updateVelocity(CallbackInfo ci) {
-        if (AdAstra.CONFIG.general.doEntityGravity) {
+        if (AdAstraConfig.doEntityGravity) {
             Entity entity = (Entity) (Object) this;
             if (!entity.isNoGravity()) {
                 Vec3 velocity = entity.getDeltaMovement();

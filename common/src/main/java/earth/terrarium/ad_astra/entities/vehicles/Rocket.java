@@ -1,8 +1,8 @@
 package earth.terrarium.ad_astra.entities.vehicles;
 
-import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.blocks.door.LocationState;
 import earth.terrarium.ad_astra.blocks.launchpad.LaunchPad;
+import earth.terrarium.ad_astra.config.VehiclesConfig;
 import earth.terrarium.ad_astra.items.armour.NetheriteSpaceSuit;
 import earth.terrarium.ad_astra.registry.*;
 import earth.terrarium.ad_astra.screen.PlanetSelectionMenuProvider;
@@ -61,9 +61,9 @@ public class Rocket extends Vehicle {
     @SuppressWarnings("deprecation")
     public static long getRequiredAmountForLaunch(Fluid fluid) {
         if (fluid.is(ModTags.EFFICIENT_FUELS)) {
-            return AdAstra.CONFIG.rocket.efficientFuelLaunchCost;
+            return VehiclesConfig.RocketConfig.efficientFuelLaunchCost;
         } else {
-            return AdAstra.CONFIG.rocket.fuelLaunchCost;
+            return VehiclesConfig.RocketConfig.fuelLaunchCost;
         }
     }
 
@@ -74,7 +74,7 @@ public class Rocket extends Vehicle {
 
     @Override
     public long getTankSize() {
-        return AdAstra.CONFIG.rocket.tankSize;
+        return VehiclesConfig.RocketConfig.tankSize;
     }
 
     @Override
@@ -145,7 +145,7 @@ public class Rocket extends Vehicle {
             }
         }
 
-        if (this.getY() >= AdAstra.CONFIG.rocket.atmosphereLeave || this.getTicksFrozen() > 1000) {
+        if (this.getY() >= VehiclesConfig.RocketConfig.atmosphereLeave || this.getTicksFrozen() > 1000) {
             this.setFlying(true);
         }
         if (!this.isFlying()) {
@@ -167,7 +167,7 @@ public class Rocket extends Vehicle {
                 this.spawnSmokeParticles();
                 this.setPhase(1);
                 // Phase two: the rocket has launched.
-            } else if (this.getY() < AdAstra.CONFIG.rocket.atmosphereLeave) {
+            } else if (this.getY() < VehiclesConfig.RocketConfig.atmosphereLeave) {
                 this.spawnAfterburnerParticles();
                 this.burnEntitiesUnderRocket();
                 this.travel();
@@ -176,7 +176,7 @@ public class Rocket extends Vehicle {
                 }
                 this.setPhase(2);
                 // Phase three: the rocket has reached the required height.
-            } else if (this.getY() >= AdAstra.CONFIG.rocket.atmosphereLeave) {
+            } else if (this.getY() >= VehiclesConfig.RocketConfig.atmosphereLeave) {
                 openPlanetSelectionGui();
                 this.setPhase(3);
             }
@@ -240,7 +240,7 @@ public class Rocket extends Vehicle {
             if (NetheriteSpaceSuit.hasFullSet(entity) || (entity.getVehicle() != null && entity.getVehicle().equals(this))) {
                 continue;
             }
-            if (AdAstra.CONFIG.rocket.entitiesBurnUnderRocket && !entity.fireImmune()) {
+            if (VehiclesConfig.RocketConfig.entitiesBurnUnderRocket && !entity.fireImmune()) {
                 entity.setSecondsOnFire(10);
                 entity.hurt(ModDamageSource.ROCKET_FLAMES, 10);
                 BlockState belowBlock = this.level.getBlockState(entity.blockPosition().below());
@@ -255,11 +255,11 @@ public class Rocket extends Vehicle {
     private void travel() {
         double multiplier = (getTankHolder().getFluid().is(ModTags.EFFICIENT_FUELS) ? 2.5 : 1.0);
         if (!this.isNoGravity()) {
-            this.setDeltaMovement(this.getDeltaMovement().add(0.0, AdAstra.CONFIG.rocket.acceleration * multiplier, 0.0));
+            this.setDeltaMovement(this.getDeltaMovement().add(0.0, VehiclesConfig.RocketConfig.acceleration * multiplier, 0.0));
         }
 
-        if (this.getDeltaMovement().y() > AdAstra.CONFIG.rocket.maxSpeed * multiplier) {
-            this.setDeltaMovement(0.0, AdAstra.CONFIG.rocket.maxSpeed, 0.0);
+        if (this.getDeltaMovement().y() > VehiclesConfig.RocketConfig.maxSpeed * multiplier) {
+            this.setDeltaMovement(0.0, VehiclesConfig.RocketConfig.maxSpeed, 0.0);
         }
 
         this.move(MoverType.SELF, this.getDeltaMovement());
@@ -274,7 +274,7 @@ public class Rocket extends Vehicle {
     public void initiateLaunchSequence() {
 
         this.setFlying(true);
-        this.setCountdownTicks(AdAstra.CONFIG.rocket.countDownTicks);
+        this.setCountdownTicks(VehiclesConfig.RocketConfig.countDownTicks);
         // For shaking
         this.setTicksFrozen(Integer.MAX_VALUE);
         this.getTank().extractFluid(FluidHooks.newFluidHolder(getTankHolder().getFluid(), getRequiredAmountForLaunch(getTankHolder().getFluid()), getTankHolder().getCompound()), false);
@@ -372,7 +372,7 @@ public class Rocket extends Vehicle {
                 // Increase explosion power at a high speed.
                 tierMultiplier *= 1.25f;
             }
-            if (this.getY() <= AdAstra.CONFIG.rocket.atmosphereLeave) {
+            if (this.getY() <= VehiclesConfig.RocketConfig.atmosphereLeave) {
                 serverWorld.players().forEach(Rocket::stopRocketSoundForRider);
             }
             this.explode(tierMultiplier);

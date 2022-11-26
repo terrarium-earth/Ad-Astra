@@ -1,8 +1,10 @@
 package earth.terrarium.ad_astra.registry;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
-import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.blocks.machines.entity.SolarPanelBlockEntity;
+import earth.terrarium.ad_astra.config.AdAstraConfig;
+import earth.terrarium.ad_astra.config.CoalGeneratorConfig;
+import earth.terrarium.ad_astra.config.WaterPumpConfig;
 import earth.terrarium.ad_astra.items.*;
 import earth.terrarium.ad_astra.items.armour.JetSuit;
 import earth.terrarium.ad_astra.items.armour.NetheriteSpaceSuit;
@@ -82,7 +84,7 @@ public class ModItems {
     public static final Supplier<Item> COAL_GENERATOR = register("coal_generator", () -> new MachineBlockItem(ModBlocks.COAL_GENERATOR.get(), new Item.Properties().tab(ITEM_GROUP)) {
         @Override
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag context) {
-            tooltip.add((Component.translatable("item.ad_astra.generator_energy.tooltip", AdAstra.CONFIG.coalGenerator.energyPerTick).setStyle(Style.EMPTY.withColor(ChatFormatting.BLUE))));
+            tooltip.add((Component.translatable("item.ad_astra.generator_energy.tooltip", CoalGeneratorConfig.energyPerTick).setStyle(Style.EMPTY.withColor(ChatFormatting.BLUE))));
             if (level != null && level.isClientSide) {
                 if (Screen.hasShiftDown()) {
                     tooltip.add((Component.translatable("item.ad_astra.coal_generator.tooltip").setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN))));
@@ -171,7 +173,7 @@ public class ModItems {
     public static final Supplier<Item> WATER_PUMP = register("water_pump", () -> new MachineBlockItem(ModBlocks.WATER_PUMP.get(), new Item.Properties().tab(ITEM_GROUP)) {
         @Override
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag context) {
-            tooltip.add((Component.translatable("item.ad_astra.fluid_transfer_rate.tooltip", FluidHooks.toMillibuckets(AdAstra.CONFIG.waterPump.transferPerTick))).setStyle(Style.EMPTY.withColor(ChatFormatting.BLUE)));
+            tooltip.add((Component.translatable("item.ad_astra.fluid_transfer_rate.tooltip", FluidHooks.toMillibuckets(WaterPumpConfig.transferPerTick))).setStyle(Style.EMPTY.withColor(ChatFormatting.BLUE)));
             if (level != null && level.isClientSide) {
                 if (Screen.hasShiftDown()) {
                     tooltip.add((Component.translatable("item.ad_astra.water_pump.tooltip[0]")).setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN)));
@@ -223,7 +225,7 @@ public class ModItems {
     });
 
     public static final Supplier<Item> WRENCH = register("wrench", () -> new WrenchItem(new Item.Properties().tab(ITEM_GROUP).stacksTo(1)));
-    public static final Supplier<Item> HAMMER = register("hammer", () -> new HammerItem(new Item.Properties().tab(ITEM_GROUP).stacksTo(1).durability(AdAstra.CONFIG.general.hammerDurability)));
+    public static final Supplier<Item> HAMMER = register("hammer", () -> new HammerItem(new Item.Properties().tab(ITEM_GROUP).stacksTo(1).durability(AdAstraConfig.hammerDurability)));
 
     public static final Supplier<Item> IRON_ROD = registerItem("iron_rod");
     public static final Supplier<Item> OXYGEN_GEAR = registerItem("oxygen_gear");

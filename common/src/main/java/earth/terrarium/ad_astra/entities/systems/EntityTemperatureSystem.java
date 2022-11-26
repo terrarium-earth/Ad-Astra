@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.entities.systems;
 
-import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.AdAstraConfig;
 import earth.terrarium.ad_astra.items.armour.NetheriteSpaceSuit;
 import earth.terrarium.ad_astra.items.armour.SpaceSuit;
 import earth.terrarium.ad_astra.registry.ModTags;
@@ -19,7 +19,7 @@ import org.apache.commons.lang3.Range;
 
 public class EntityTemperatureSystem {
     public static void temperatureTick(LivingEntity entity, ServerLevel level) {
-        if (!AdAstra.CONFIG.general.doOxygen) {
+        if (!AdAstraConfig.doOxygen) {
             return;
         }
         if (!entity.getType().equals(EntityType.SKELETON)) {
@@ -52,12 +52,12 @@ public class EntityTemperatureSystem {
     }
 
     private static void burnEntity(LivingEntity entity) {
-        entity.hurt(DamageSource.ON_FIRE, AdAstra.CONFIG.general.heatDamage);
+        entity.hurt(DamageSource.ON_FIRE, AdAstraConfig.heatDamage);
         entity.setSecondsOnFire(10);
     }
 
     private static void freezeEntity(LivingEntity entity, ServerLevel level) {
-        entity.hurt(DamageSource.FREEZE, AdAstra.CONFIG.general.freezeDamage);
+        entity.hurt(DamageSource.FREEZE, AdAstraConfig.freezeDamage);
         entity.setTicksFrozen(Math.min(entity.getTicksRequiredToFreeze() + 20, entity.getTicksFrozen() + 5 * 10));
         RandomSource random = entity.level.getRandom();
         ModUtils.spawnForcedParticles((level), ParticleTypes.SNOWFLAKE, entity.getX(), entity.getY() + 1, entity.getZ(), 1, Mth.randomBetween(random, -1.0f, 1.0f) * 0.083333336f, 0.05, (double) Mth.randomBetween(random, -1.0f, 1.0f) * 0.083333336, 0);

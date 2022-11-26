@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.container;
 
-import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.WaterPumpConfig;
 import earth.terrarium.botarium.api.Updatable;
 import earth.terrarium.botarium.api.fluid.*;
 import net.minecraft.nbt.CompoundTag;
@@ -85,7 +85,7 @@ public class WaterPumpFluidTank implements UpdatingFluidContainer<BlockEntity> {
 
     @Override
     public long getTankCapacity(int tankSlot) {
-        return AdAstra.CONFIG.waterPump.tankSize;
+        return WaterPumpConfig.tankSize;
     }
 
     @Override

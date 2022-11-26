@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.items;
 
-import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.EnergizerConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -19,10 +19,10 @@ public class EnergizerBlockItem extends MachineBlockItem {
     @Override
     public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag context) {
         long energy = 0;
-        if (stack.hasTag() && stack.getTag().contains("energy")) {
-            energy = stack.getTag().getLong("energy");
+        if (stack.hasTag() && stack.getOrCreateTag().contains("energy")) {
+            energy = stack.getOrCreateTag().getLong("energy");
         }
-        tooltip.add(Component.translatable("gauge_text.ad_astra.storage", energy, AdAstra.CONFIG.energizer.maxEnergy).setStyle(Style.EMPTY.withColor(energy > 0 ? ChatFormatting.GREEN : ChatFormatting.RED)));
+        tooltip.add(Component.translatable("gauge_text.ad_astra.storage", energy, EnergizerConfig.maxEnergy).setStyle(Style.EMPTY.withColor(energy > 0 ? ChatFormatting.GREEN : ChatFormatting.RED)));
         super.appendHoverText(stack, level, tooltip, context);
     }
 }

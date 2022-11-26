@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.blocks.machines.entity;
 
-import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.SolarPanelConfig;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
 import earth.terrarium.ad_astra.screen.menu.SolarPanelMenu;
 import earth.terrarium.ad_astra.util.ModUtils;
@@ -26,7 +26,7 @@ public class SolarPanelBlockEntity extends AbstractMachineBlockEntity implements
 
     public static long getEnergyForDimension(Level level) {
         if (level != null) {
-            return (long) (ModUtils.getSolarEnergy(level) * AdAstra.CONFIG.solarPanel.energyMultiplier);
+            return (long) (ModUtils.getSolarEnergy(level) * SolarPanelConfig.energyMultiplier);
         } else {
             return 0;
         }
@@ -63,7 +63,7 @@ public class SolarPanelBlockEntity extends AbstractMachineBlockEntity implements
 
     @Override
     public ExtractOnlyEnergyContainer getEnergyStorage() {
-        return energyContainer == null ? energyContainer = new ExtractOnlyEnergyContainer(this, (int) AdAstra.CONFIG.solarPanel.maxEnergy) : this.energyContainer;
+        return energyContainer == null ? energyContainer = new ExtractOnlyEnergyContainer(this, (int) SolarPanelConfig.maxEnergy) : this.energyContainer;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.blocks.machines.entity;
 
-import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.CryoFreezerConfig;
 import earth.terrarium.ad_astra.recipes.CryoFuelConversionRecipe;
 import earth.terrarium.ad_astra.recipes.ModRecipeType;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
@@ -167,11 +167,11 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
 
     @Override
     public ExtractOnlyUpdatingFluidContainer getFluidContainer() {
-        return tank == null ? tank = new ExtractOnlyUpdatingFluidContainer(this, i -> AdAstra.CONFIG.cryoFreezer.tankSize, 1, (amount, fluid) -> true) : this.tank;
+        return tank == null ? tank = new ExtractOnlyUpdatingFluidContainer(this, i -> CryoFreezerConfig.tankSize, 1, (amount, fluid) -> true) : this.tank;
     }
 
     public long getEnergyPerTick() {
-        return AdAstra.CONFIG.cryoFreezer.energyPerTick;
+        return CryoFreezerConfig.energyPerTick;
     }
 
     public long getMaxCapacity() {
@@ -180,7 +180,7 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
 
     @Override
     public InsertOnlyEnergyContainer getEnergyStorage() {
-        return energyContainer == null ? energyContainer = new InsertOnlyEnergyContainer(this, (int) AdAstra.CONFIG.cryoFreezer.maxEnergy) : this.energyContainer;
+        return energyContainer == null ? energyContainer = new InsertOnlyEnergyContainer(this, (int) CryoFreezerConfig.maxEnergy) : this.energyContainer;
     }
 
     @Override

@@ -1,8 +1,8 @@
 package earth.terrarium.ad_astra.blocks.machines.entity;
 
-import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.blocks.machines.AbstractMachineBlock;
 import earth.terrarium.ad_astra.blocks.machines.EnergizerBlock;
+import earth.terrarium.ad_astra.config.EnergizerConfig;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
 import earth.terrarium.ad_astra.util.ModUtils;
 import earth.terrarium.botarium.api.energy.EnergyBlock;
@@ -74,7 +74,7 @@ public class EnergizerBlockEntity extends AbstractMachineBlockEntity implements 
     }
 
     public long getEnergyPerTick() {
-        return AdAstra.CONFIG.energizer.energyPerTick;
+        return EnergizerConfig.energyPerTick;
     }
 
     public long getMaxCapacity() {
@@ -83,7 +83,7 @@ public class EnergizerBlockEntity extends AbstractMachineBlockEntity implements 
 
     @Override
     public SimpleUpdatingEnergyContainer getEnergyStorage() {
-        return energyContainer == null ? energyContainer = new SimpleUpdatingEnergyContainer(this, (int) AdAstra.CONFIG.energizer.maxEnergy) : this.energyContainer;
+        return energyContainer == null ? energyContainer = new SimpleUpdatingEnergyContainer(this, (int) EnergizerConfig.maxEnergy) : this.energyContainer;
     }
 
     @Override

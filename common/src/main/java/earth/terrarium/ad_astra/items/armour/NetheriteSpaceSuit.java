@@ -1,6 +1,7 @@
 package earth.terrarium.ad_astra.items.armour;
 
 import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.SpaceSuitConfig;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -23,7 +24,7 @@ public class NetheriteSpaceSuit extends SpaceSuit {
 
     @Override
     public long getTankSize() {
-        return AdAstra.CONFIG.spaceSuit.netheriteSpaceSuitTankSize;
+        return SpaceSuitConfig.netheriteSpaceSuitTankSize;
     }
 
     @Override

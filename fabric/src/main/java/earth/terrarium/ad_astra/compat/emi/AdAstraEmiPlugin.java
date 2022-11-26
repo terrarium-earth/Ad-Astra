@@ -3,8 +3,8 @@ package earth.terrarium.ad_astra.compat.emi;
 import dev.emi.emi.api.EmiPlugin;
 import dev.emi.emi.api.EmiRegistry;
 import dev.emi.emi.api.stack.EmiStack;
-import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.compat.emi.recipes.*;
+import earth.terrarium.ad_astra.config.EnergizerConfig;
 import earth.terrarium.ad_astra.items.OxygenTankItem;
 import earth.terrarium.ad_astra.items.armour.JetSuit;
 import earth.terrarium.ad_astra.items.armour.NetheriteSpaceSuit;
@@ -92,10 +92,10 @@ public class AdAstraEmiPlugin implements EmiPlugin {
 
         ItemStackHolder jetSuit = new ItemStackHolder(ModItems.JET_SUIT.get().getDefaultInstance());
         ((JetSuit) jetSuit.getStack().getItem()).insert(jetSuit, FluidHooks.newFluidHolder(ModFluids.OXYGEN.get(), Long.MAX_VALUE, null));
-        EnergyHooks.getItemEnergyManager(jetSuit.getStack()).insert(jetSuit, AdAstra.CONFIG.energizer.maxEnergy, false);
+        EnergyHooks.getItemEnergyManager(jetSuit.getStack()).insert(jetSuit, EnergizerConfig.maxEnergy, false);
 
         ItemStackHolder energizer = new ItemStackHolder(ModItems.ENERGIZER.get().getDefaultInstance());
-        energizer.getStack().getOrCreateTag().putLong("energy", AdAstra.CONFIG.energizer.maxEnergy);
+        energizer.getStack().getOrCreateTag().putLong("energy", EnergizerConfig.maxEnergy);
 
         registry.addEmiStackAfter(EmiStack.of(tier1Rocket.getStack()), EmiStack.of(ModItems.TIER_1_ROCKET.get()));
         registry.addEmiStackAfter(EmiStack.of(tier2Rocket.getStack()), EmiStack.of(ModItems.TIER_2_ROCKET.get()));

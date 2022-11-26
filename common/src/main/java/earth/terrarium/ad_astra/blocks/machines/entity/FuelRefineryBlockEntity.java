@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.blocks.machines.entity;
 
-import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.FuelRefineryConfig;
 import earth.terrarium.ad_astra.recipes.FluidConversionRecipe;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
 import earth.terrarium.ad_astra.registry.ModRecipeTypes;
@@ -31,12 +31,12 @@ public class FuelRefineryBlockEntity extends FluidMachineBlockEntity implements 
 
     @Override
     public long getInputTankCapacity() {
-        return AdAstra.CONFIG.fuelRefinery.tankSize;
+        return FuelRefineryConfig.tankSize;
     }
 
     @Override
     public long getOutputTankCapacity() {
-        return AdAstra.CONFIG.fuelRefinery.tankSize;
+        return FuelRefineryConfig.tankSize;
     }
 
     @Override
@@ -98,11 +98,11 @@ public class FuelRefineryBlockEntity extends FluidMachineBlockEntity implements 
 
     @Override
     public long getEnergyPerTick() {
-        return AdAstra.CONFIG.fuelRefinery.energyPerTick;
+        return FuelRefineryConfig.energyPerTick;
     }
 
     @Override
     public InsertOnlyEnergyContainer getEnergyStorage() {
-        return this.energyContainer == null ? this.energyContainer = new InsertOnlyEnergyContainer(this, (int) AdAstra.CONFIG.fuelRefinery.maxEnergy) : this.energyContainer;
+        return this.energyContainer == null ? this.energyContainer = new InsertOnlyEnergyContainer(this, (int) FuelRefineryConfig.maxEnergy) : this.energyContainer;
     }
 }

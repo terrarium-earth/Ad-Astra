@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.items.armour;
 
-import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.SpaceSuitConfig;
 import earth.terrarium.ad_astra.registry.ModTags;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -20,7 +20,7 @@ public class JetSuitMaterial implements ArmorMaterial {
 
     @Override
     public int getDefenseForSlot(EquipmentSlot slot) {
-        return PROTECTION_VALUES[slot.getIndex()] * AdAstra.CONFIG.spaceSuit.jetSuitProtectionMultiplier;
+        return PROTECTION_VALUES[slot.getIndex()] * SpaceSuitConfig.jetSuitProtectionMultiplier;
     }
 
     @Override
@@ -45,7 +45,7 @@ public class JetSuitMaterial implements ArmorMaterial {
 
     @Override
     public float getToughness() {
-        return AdAstra.CONFIG.spaceSuit.jetSuitArmorToughness;
+        return SpaceSuitConfig.jetSuitArmorToughness;
     }
 
     @Override

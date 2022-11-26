@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.mixin.gravity;
 
-import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.AdAstraConfig;
 import earth.terrarium.ad_astra.util.ModUtils;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -20,7 +20,7 @@ public abstract class LivingEntityGravityMixin {
 
     @Inject(method = "travel", at = @At("TAIL"))
     public void adastra_travel(CallbackInfo ci) {
-        if (AdAstra.CONFIG.general.doLivingEntityGravity) {
+        if (AdAstraConfig.doLivingEntityGravity) {
             LivingEntity entity = (LivingEntity) (Object) this;
 
             Vec3 velocity = entity.getDeltaMovement();

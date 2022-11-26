@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.mixin;
 
-import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.SpaceSuitConfig;
 import earth.terrarium.ad_astra.items.armour.JetSuit;
 import earth.terrarium.ad_astra.items.armour.NetheriteSpaceSuit;
 import earth.terrarium.ad_astra.util.ModKeyBindings;
@@ -19,7 +19,7 @@ public abstract class PlayerMixin {
 
     @Inject(method = "hurt", at = @At("HEAD"), cancellable = true)
     public void adastra_damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-        if (AdAstra.CONFIG.spaceSuit.netheriteSpaceSuitHasFireResistance) {
+        if (SpaceSuitConfig.netheriteSpaceSuitHasFireResistance) {
             Player player = ((Player) (Object) this);
             if (source.isFire() || source.equals(DamageSource.HOT_FLOOR)) {
                 if (NetheriteSpaceSuit.hasFullSet(player)) {
@@ -32,7 +32,7 @@ public abstract class PlayerMixin {
 
     @Inject(method = "tick", at = @At("TAIL"))
     public void adastra_tick(CallbackInfo ci) {
-        if (AdAstra.CONFIG.spaceSuit.enableJetSuitFlight) {
+        if (SpaceSuitConfig.enableJetSuitFlight) {
             Player player = ((Player) (Object) this);
             if (!player.isPassenger()) {
                 ItemStack chest = player.getItemBySlot(EquipmentSlot.CHEST);

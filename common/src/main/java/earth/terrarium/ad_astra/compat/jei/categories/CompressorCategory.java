@@ -1,9 +1,9 @@
 package earth.terrarium.ad_astra.compat.jei.categories;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.screens.GuiUtil;
 import earth.terrarium.ad_astra.compat.jei.EnergyBarDrawable;
+import earth.terrarium.ad_astra.config.CompressorConfig;
 import earth.terrarium.ad_astra.recipes.CompressingRecipe;
 import earth.terrarium.ad_astra.registry.ModItems;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
@@ -58,7 +58,7 @@ public class CompressorCategory extends BaseCategory<CompressingRecipe> {
     public List<Component> getTooltipStrings(CompressingRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
         List<Component> tooltips = new ArrayList<>();
         if (mouseX > 118 && mouseY > 13 && mouseX < 118 + GuiUtil.ENERGY_WIDTH && mouseY < 13 + GuiUtil.ENERGY_HEIGHT) {
-            tooltips.add(Component.translatable("rei.tooltip.ad_astra.energy_using", AdAstra.CONFIG.compressor.energyPerTick));
+            tooltips.add(Component.translatable("rei.tooltip.ad_astra.energy_using", CompressorConfig.energyPerTick));
         }
         return tooltips;
     }

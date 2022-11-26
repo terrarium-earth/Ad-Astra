@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.items;
 
-import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.AdAstraConfig;
 import earth.terrarium.ad_astra.registry.ModItems;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import earth.terrarium.botarium.util.CommonHooks;
@@ -20,7 +20,7 @@ public class AstroduxItem extends Item {
     // Give guidebook at spawn
     public static void onPlayerJoin(Player player) {
         if (player.level.isClientSide) return;
-        if (AdAstra.CONFIG.general.giveAstroduxAtSpawn) {
+        if (AdAstraConfig.giveAstroduxAtSpawn) {
             if (((ServerPlayer) player).getStats().getValue(Stats.CUSTOM.get(Stats.TOTAL_WORLD_TIME)) <= 0) {
                 player.addItem(ModItems.ASTRODUX.get().getDefaultInstance());
             }

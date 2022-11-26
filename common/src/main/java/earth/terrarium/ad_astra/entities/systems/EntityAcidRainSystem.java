@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.entities.systems;
 
-import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.AdAstraConfig;
 import earth.terrarium.ad_astra.entities.vehicles.Vehicle;
 import earth.terrarium.ad_astra.mixin.EntityInvoker;
 import earth.terrarium.ad_astra.registry.ModDamageSource;
@@ -12,7 +12,7 @@ import net.minecraft.world.entity.LivingEntity;
 public class EntityAcidRainSystem {
 
     public static void acidRainTick(LivingEntity entity, ServerLevel level) {
-        if (!AdAstra.CONFIG.general.acidRainBurns) {
+        if (!AdAstraConfig.acidRainBurns) {
             return;
         }
 
@@ -34,7 +34,7 @@ public class EntityAcidRainSystem {
 
     private static void causeDamage(LivingEntity entity, ServerLevel level) {
         if (((EntityInvoker) entity).invokeIsInRain()) {
-            entity.hurt(ModDamageSource.ACID_RAIN, AdAstra.CONFIG.general.acidRainDamage);
+            entity.hurt(ModDamageSource.ACID_RAIN, AdAstraConfig.acidRainDamage);
             // Infrequently set the entity on fire
             if (level.random.nextInt(8) == 0) {
                 entity.setSecondsOnFire(1);

@@ -1,6 +1,7 @@
 package earth.terrarium.ad_astra.items.armour;
 
 import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.SpaceSuitConfig;
 import earth.terrarium.ad_astra.items.FluidContainingItem;
 import earth.terrarium.ad_astra.registry.ModItems;
 import earth.terrarium.ad_astra.registry.ModTags;
@@ -66,7 +67,7 @@ public class SpaceSuit extends DyeableArmorItem implements FluidContainingItem, 
 
     @Override
     public long getTankSize() {
-        return AdAstra.CONFIG.spaceSuit.spaceSuitTankSize;
+        return SpaceSuitConfig.spaceSuitTankSize;
     }
 
     @Override

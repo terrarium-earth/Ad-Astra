@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.mixin.oxygen;
 
-import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.AdAstraConfig;
 import earth.terrarium.ad_astra.registry.ModFluids;
 import earth.terrarium.ad_astra.util.ModUtils;
 import earth.terrarium.ad_astra.util.OxygenUtils;
@@ -43,7 +43,7 @@ public abstract class BucketItemMixin {
     // Evaporate water in a no-oxygen environment. Water is not evaporated in a oxygen distributor.
     @Inject(method = "emptyContents", at = @At(value = "HEAD"), cancellable = true)
     public void adastra_emptyContents(Player player, Level level, BlockPos pos, BlockHitResult hitResult, CallbackInfoReturnable<Boolean> cir) {
-        if (!AdAstra.CONFIG.general.doOxygen) {
+        if (!AdAstraConfig.doOxygen) {
             return;
         }
 

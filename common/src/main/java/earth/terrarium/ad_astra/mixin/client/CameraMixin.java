@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.mixin.client;
 
-import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.VehiclesConfig;
 import earth.terrarium.ad_astra.entities.vehicles.Vehicle;
 import net.minecraft.client.Camera;
 import net.minecraft.world.entity.Entity;
@@ -16,7 +16,7 @@ public abstract class CameraMixin {
 
     @Inject(method = "setup", at = @At("TAIL"))
     public void adastra_update(BlockGetter area, Entity focusedEntity, boolean thirdPerson, boolean inverseView, float tickDelta, CallbackInfo ci) {
-        if (AdAstra.CONFIG.vehicles.moveCameraInVehicle) {
+        if (VehiclesConfig.moveCameraInVehicle) {
             if (thirdPerson && focusedEntity.getVehicle() instanceof Vehicle vehicle) {
                 if (vehicle.doHighFov()) {
                     this.move(-this.getMaxZoom(12.0), 0.0, 0.0);

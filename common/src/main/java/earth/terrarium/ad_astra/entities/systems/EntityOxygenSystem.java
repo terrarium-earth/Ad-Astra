@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.entities.systems;
 
-import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.AdAstraConfig;
 import earth.terrarium.ad_astra.items.armour.SpaceSuit;
 import earth.terrarium.ad_astra.registry.ModDamageSource;
 import earth.terrarium.ad_astra.registry.ModTags;
@@ -12,7 +12,7 @@ import net.minecraft.world.entity.LivingEntity;
 
 public class EntityOxygenSystem {
     public static void oxygenTick(LivingEntity entity, ServerLevel level) {
-        if (!AdAstra.CONFIG.general.doOxygen) {
+        if (!AdAstraConfig.doOxygen) {
             return;
         }
         if (entity.isInvertedHealAndHarm()) {
@@ -39,7 +39,7 @@ public class EntityOxygenSystem {
             if (hasOxygenatedSpaceSuit) {
                 consumeOxygen(entity);
             } else if (!ModUtils.armourIsOxygenated(entity)) {
-                entity.hurt(ModDamageSource.OXYGEN, AdAstra.CONFIG.general.oxygenDamage);
+                entity.hurt(ModDamageSource.OXYGEN, AdAstraConfig.oxygenDamage);
                 entity.setAirSupply(-40);
             }
         }

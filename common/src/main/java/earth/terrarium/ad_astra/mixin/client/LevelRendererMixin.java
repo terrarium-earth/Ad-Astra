@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.mixin.client;
 
-import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.VehiclesConfig;
 import earth.terrarium.ad_astra.registry.ModParticleTypes;
 import earth.terrarium.ad_astra.util.ModUtils;
 import net.minecraft.client.Camera;
@@ -53,7 +53,7 @@ public abstract class LevelRendererMixin {
             Minecraft client = Minecraft.getInstance();
             LocalPlayer player = client.player;
             // Don't player the portal sound if the player teleported to the new level.
-            if (((int) player.position().y()) == AdAstra.CONFIG.rocket.atmosphereLeave) {
+            if (((int) player.position().y()) == VehiclesConfig.RocketConfig.atmosphereLeave) {
                 ci.cancel();
             }
         }

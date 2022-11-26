@@ -6,9 +6,9 @@ import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.stack.FluidEmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
-import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.compat.emi.EmiCategories;
 import earth.terrarium.ad_astra.compat.emi.EmiTextures;
+import earth.terrarium.ad_astra.config.FuelRefineryConfig;
 import earth.terrarium.ad_astra.recipes.FluidConversionRecipe;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
@@ -72,6 +72,6 @@ public class EmiFluidConversionRecipe implements EmiRecipe {
         EmiTextures.createFluidWidget(widgets, -10 + xOffset, -17 + yOffset, FluidVariant.of((Fluid) this.input.getKey()), 150 * 50, false);
         EmiTextures.createFluidWidget(widgets, 60 + xOffset, -17 + yOffset, FluidVariant.of((Fluid) this.output.getKey()), 150 * 50, true);
 
-        EmiTextures.createEnergyWidget(widgets, 100 + xOffset, -20 + yOffset, (int) AdAstra.CONFIG.fuelRefinery.energyPerTick, false);
+        EmiTextures.createEnergyWidget(widgets, 100 + xOffset, -20 + yOffset, (int) FuelRefineryConfig.energyPerTick, false);
     }
 }
