@@ -67,7 +67,7 @@ public class AdAstraClientFabric {
     }
 
     public static void initEvents() {
-        ClientTickEvents.END_CLIENT_TICK.register(ClientModKeybindings::onEndTick);
+        ClientTickEvents.START_CLIENT_TICK.register(ClientModKeybindings::onStartTick);
     }
 
     private static void registerHud(AdAstraClient.RenderHud overlay) {

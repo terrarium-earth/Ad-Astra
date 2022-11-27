@@ -32,15 +32,13 @@ public class PlayerRendererMixin {
     @Inject(method = "renderRightHand", at = @At("HEAD"), cancellable = true)
     public void adastra_renderRightHand(PoseStack poseStack, MultiBufferSource buffer, int packedLight, AbstractClientPlayer player, CallbackInfo ci) {
         ItemStack offhandStack = player.getOffhandItem();
-        if (!offhandStack.isEmpty()) {
-            if (offhandStack.getItem() instanceof VehicleItem) {
-                ci.cancel();
-                return;
-            }
-            if (player.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof SpaceSuit) {
-                ci.cancel();
-                this.adastra_renderArm(poseStack, packedLight, player, true);
-            }
+        if (offhandStack.getItem() instanceof VehicleItem) {
+            ci.cancel();
+            return;
+        }
+        if (player.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof SpaceSuit) {
+            ci.cancel();
+            this.adastra_renderArm(poseStack, packedLight, player, true);
         }
     }
 

@@ -9,8 +9,13 @@ import earth.terrarium.ad_astra.registry.ModRecipeTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
+
+import java.util.List;
+import java.util.function.Predicate;
 
 public class CompressingRecipe extends CookingRecipe {
 
@@ -35,5 +40,13 @@ public class CompressingRecipe extends CookingRecipe {
     @Override
     public RecipeType<?> getType() {
         return ModRecipeTypes.COMPRESSING_RECIPE.get();
+    }
+
+    public static CompressingRecipe findFirst(Level level, Predicate<CompressingRecipe> filter) {
+        return getRecipes(level).stream().filter(filter).findFirst().orElse(null);
+    }
+
+    public static List<CompressingRecipe> getRecipes(Level level) {
+        return level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.COMPRESSING_RECIPE.get());
     }
 }

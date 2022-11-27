@@ -14,7 +14,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
 @Environment(EnvType.CLIENT)
-public class FlagItemRenderer extends BlockEntityWithoutLevelRenderer {
+public class
+
+FlagItemRenderer extends BlockEntityWithoutLevelRenderer {
 
     public FlagItemRenderer() {
         super(Minecraft.getInstance().getBlockEntityRenderDispatcher(), Minecraft.getInstance().getEntityModels());

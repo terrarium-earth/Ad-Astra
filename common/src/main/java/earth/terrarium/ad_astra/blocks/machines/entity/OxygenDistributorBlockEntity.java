@@ -5,7 +5,6 @@ import earth.terrarium.ad_astra.config.OxygenDistributorConfig;
 import earth.terrarium.ad_astra.recipes.OxygenConversionRecipe;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
 import earth.terrarium.ad_astra.registry.ModParticleTypes;
-import earth.terrarium.ad_astra.registry.ModRecipeTypes;
 import earth.terrarium.ad_astra.screen.menu.OxygenDistributorMenu;
 import earth.terrarium.ad_astra.util.FluidUtils;
 import earth.terrarium.ad_astra.util.ModUtils;
@@ -75,7 +74,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
 
     @Override
     public Predicate<FluidHolder> getInputFilter() {
-        return f -> ModRecipeTypes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.getLevel()).stream().anyMatch(r -> r.matches(f.getFluid()));
+        return f -> OxygenConversionRecipe.getRecipes(this.getLevel()).stream().anyMatch(r -> r.matches(f.getFluid()));
     }
 
     @Override
@@ -144,8 +143,8 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
             return false;
         } else if (getOutputTank().getFluid().equals(Fluids.EMPTY)) {
             return false;
-        } else
-            return getOutputTank().getFluidAmount() >= amountOfFluidToExtract;
+        }
+        return getOutputTank().getFluidAmount() >= amountOfFluidToExtract;
     }
 
     @Override
@@ -157,12 +156,12 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
         // Convert the input fluid into oxygen
         if (!this.level.isClientSide) {
             if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxStackSize() && FluidHooks.isFluidContainingItem(insertSlot)) {
-                FluidUtils.insertItemFluidToTank(this.getFluidContainer(), this, 0, 1, 0, f -> ModRecipeTypes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.level).stream().anyMatch(r -> r.matches(f)));
+                FluidUtils.insertItemFluidToTank(this.getFluidContainer(), this, 0, 1, 0, f -> OxygenConversionRecipe.getRecipes(this.level).stream().anyMatch(r -> r.matches(f)));
                 FluidUtils.extractTankFluidToItem(this.getFluidContainer().getInput(), this, 0, 1, 0, f -> true);
             }
 
             if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0) {
-                List<OxygenConversionRecipe> recipes = ModRecipeTypes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.level);
+                List<OxygenConversionRecipe> recipes = OxygenConversionRecipe.getRecipes(this.level);
                 if (FluidUtils.convertFluid(this.getFluidContainer(), recipes, FluidHooks.buckets(1) / 20)) {
                     this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
                 }

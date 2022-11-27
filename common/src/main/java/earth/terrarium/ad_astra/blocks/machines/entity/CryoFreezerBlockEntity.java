@@ -2,9 +2,7 @@ package earth.terrarium.ad_astra.blocks.machines.entity;
 
 import earth.terrarium.ad_astra.config.CryoFreezerConfig;
 import earth.terrarium.ad_astra.recipes.CryoFuelConversionRecipe;
-import earth.terrarium.ad_astra.recipes.ModRecipeType;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
-import earth.terrarium.ad_astra.registry.ModRecipeTypes;
 import earth.terrarium.ad_astra.screen.menu.CryoFreezerMenu;
 import earth.terrarium.ad_astra.util.FluidUtils;
 import earth.terrarium.botarium.api.energy.EnergyBlock;
@@ -66,7 +64,7 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
 
     public void finishCooking() {
         if (this.outputFluid != null) {
-            CryoFuelConversionRecipe recipe = this.createRecipe(ModRecipeTypes.CRYO_FUEL_CONVERSION_RECIPE.get(), this.getItem(0), false);
+            CryoFuelConversionRecipe recipe = this.createRecipe(this.getItem(0), false);
             if (recipe != null) {
                 FluidHolder outputFluid = FluidHooks.newFluidHolder(recipe.getFluidOutput(), (long) (FluidHooks.buckets(1) * recipe.getConversionRatio()), null);
                 getFluidContainer().internalInsert(outputFluid, false);
@@ -104,10 +102,10 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
         return new CryoFreezerMenu(syncId, inv, this);
     }
 
-    public CryoFuelConversionRecipe createRecipe(ModRecipeType<CryoFuelConversionRecipe> type, ItemStack testStack, boolean checkOutput) {
+    public CryoFuelConversionRecipe createRecipe(ItemStack testStack, boolean checkOutput) {
         stopCooking();
 
-        CryoFuelConversionRecipe recipe = type.findFirst(this.level, f -> f.test(testStack));
+        CryoFuelConversionRecipe recipe = CryoFuelConversionRecipe.findFirst(this.level, f -> f.test(testStack));
 
         if (recipe != null) {
 
@@ -149,7 +147,7 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
                         this.finishCooking();
                         input.shrink(1);
                     } else {
-                        CryoFuelConversionRecipe recipe = this.createRecipe(ModRecipeTypes.CRYO_FUEL_CONVERSION_RECIPE.get(), input, false);
+                        CryoFuelConversionRecipe recipe = this.createRecipe(input, false);
                         if (recipe != null) {
                             this.cookTimeTotal = 25;
                             this.cookTime = 0;

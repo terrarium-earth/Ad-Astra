@@ -10,21 +10,25 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
 
-public class FluidConversionRecipe extends ConversionRecipe {
+import java.util.List;
+import java.util.function.Predicate;
 
-    public FluidConversionRecipe(ResourceLocation id, HolderSet<Fluid> input, Fluid output, double conversionRatio) {
+public class FuelConversionRecipe extends ConversionRecipe {
+
+    public FuelConversionRecipe(ResourceLocation id, HolderSet<Fluid> input, Fluid output, double conversionRatio) {
         super(id, input, output, conversionRatio);
     }
 
-    public static Codec<FluidConversionRecipe> codec(ResourceLocation id) {
+    public static Codec<FuelConversionRecipe> codec(ResourceLocation id) {
         return RecordCodecBuilder.create(instance -> instance.group(
                 RecordCodecBuilder.point(id),
                 HolderSetCodec.of(Registry.FLUID).fieldOf("input").forGetter(ConversionRecipe::getFluidInput),
                 Registry.FLUID.byNameCodec().fieldOf("output").forGetter(ConversionRecipe::getFluidOutput),
                 Codec.DOUBLE.fieldOf("conversion_ratio").orElse(1.0).forGetter(ConversionRecipe::getConversionRatio)
-        ).apply(instance, FluidConversionRecipe::new));
+        ).apply(instance, FuelConversionRecipe::new));
     }
 
     @Override
@@ -35,5 +39,13 @@ public class FluidConversionRecipe extends ConversionRecipe {
     @Override
     public RecipeType<?> getType() {
         return ModRecipeTypes.FUEL_CONVERSION_RECIPE.get();
+    }
+
+    public static FuelConversionRecipe findFirst(Level level, Predicate<FuelConversionRecipe> filter) {
+        return getRecipes(level).stream().filter(filter).findFirst().orElse(null);
+    }
+
+    public static List<FuelConversionRecipe> getRecipes(Level level) {
+        return level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.FUEL_CONVERSION_RECIPE.get());
     }
 }

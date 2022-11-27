@@ -9,8 +9,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 public class NasaWorkbenchRecipe extends CookingRecipe {
 
@@ -34,5 +36,13 @@ public class NasaWorkbenchRecipe extends CookingRecipe {
     @Override
     public RecipeType<?> getType() {
         return ModRecipeTypes.NASA_WORKBENCH_RECIPE.get();
+    }
+
+    public static NasaWorkbenchRecipe findFirst(Level level, Predicate<NasaWorkbenchRecipe> filter) {
+        return getRecipes(level).stream().filter(filter).findFirst().orElse(null);
+    }
+
+    public static List<NasaWorkbenchRecipe> getRecipes(Level level) {
+        return level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.NASA_WORKBENCH_RECIPE.get());
     }
 }

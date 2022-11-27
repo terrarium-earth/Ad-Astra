@@ -1,7 +1,5 @@
 package earth.terrarium.ad_astra.blocks.machines.entity;
 
-import earth.terrarium.ad_astra.recipes.CookingRecipe;
-import earth.terrarium.ad_astra.recipes.ModRecipeType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.Item;
@@ -42,6 +40,10 @@ public abstract class ProcessingMachineBlockEntity extends AbstractMachineBlockE
         return this.cookTime;
     }
 
+    public void setCookTime(int cookTime) {
+        this.cookTime = cookTime;
+    }
+
     public int getCookTimeTotal() {
         return this.cookTimeTotal;
     }
@@ -60,28 +62,5 @@ public abstract class ProcessingMachineBlockEntity extends AbstractMachineBlockE
         this.outputStack = null;
         this.inputItem = null;
         this.setChanged();
-    }
-
-    public <T extends CookingRecipe> CookingRecipe createRecipe(ModRecipeType<T> type, ItemStack testStack, boolean checkOutput) {
-        stopCooking();
-
-        CookingRecipe recipe = type.findFirst(this.level, f -> f.test(testStack));
-
-        if (recipe != null) {
-
-            // Stop if something is already in the output.
-            if (checkOutput) {
-                ItemStack outputSlot = this.getItem(1);
-                ItemStack output = recipe.getResultItem();
-                if (!outputSlot.isEmpty() && !outputSlot.getItem().equals(recipe.getResultItem().getItem()) || outputSlot.getCount() + output.getCount() > outputSlot.getMaxStackSize()) {
-                    return null;
-                }
-            }
-
-            this.outputStack = recipe.getResultItem();
-            this.inputItem = testStack.getItem();
-        }
-
-        return recipe;
     }
 }

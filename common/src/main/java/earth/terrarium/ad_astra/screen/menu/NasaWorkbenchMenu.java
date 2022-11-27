@@ -93,7 +93,7 @@ public class NasaWorkbenchMenu extends AbstractMachineMenu<NasaWorkbenchBlockEnt
     }
 
     public void updateContent() {
-        NasaWorkbenchRecipe recipe = ModRecipeTypes.NASA_WORKBENCH_RECIPE.get().findFirst(level, f -> f.test(this.machine));
+        NasaWorkbenchRecipe recipe = NasaWorkbenchRecipe.findFirst(level, f -> f.test(this.machine));
         this.recipe = recipe;
         this.machine.setItem(14, recipe == null ? ItemStack.EMPTY : recipe.getResultItem());
         this.broadcastFullState();

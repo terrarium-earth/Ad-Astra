@@ -5,27 +5,27 @@ import com.teamresourceful.resourcefulconfig.common.annotations.ConfigEntry;
 import com.teamresourceful.resourcefulconfig.common.config.EntryType;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 
-@Category(id = "cryoFreezer", translation = "text.autoconfig.ad_astra.option.cryoFreezer")
+@Category(id = "cryoFreezer", translation = "text.resourcefulconfig.ad_astra.option.cryoFreezer")
 public final class CryoFreezerConfig {
 
     @ConfigEntry(
         id = "maxEnergy",
         type = EntryType.LONG,
-        translation = "text.autoconfig.ad_astra.option.cryoFreezer.energyPerTick"
+        translation = "text.resourcefulconfig.ad_astra.option.cryoFreezer.energyPerTick"
     )
     public static long maxEnergy = 30000L;
 
     @ConfigEntry(
         id = "energyPerTick",
         type = EntryType.LONG,
-        translation = "text.autoconfig.ad_astra.option.cryoFreezer.energyPerTick"
+        translation = "text.resourcefulconfig.ad_astra.option.cryoFreezer.energyPerTick"
     )
     public static long energyPerTick = 24L;
 
     @ConfigEntry(
         id = "energyPerTick",
         type = EntryType.LONG,
-        translation = "text.autoconfig.ad_astra.option.cryoFreezer.tankSize"
+        translation = "text.resourcefulconfig.ad_astra.option.cryoFreezer.tankSize"
     )
     public static long tankSize = FluidHooks.buckets(3);
 }

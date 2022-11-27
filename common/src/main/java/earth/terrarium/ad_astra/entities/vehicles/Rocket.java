@@ -134,7 +134,7 @@ public class Rocket extends Vehicle {
     public void tick() {
         super.tick();
 
-        // Rotate the rocket when the player strafes left or right.
+        // Rotate the rocket when the player strafes left or right
         if (this.getFirstPassenger() instanceof Player player) {
             this.lastRider = player;
             if (ModKeyBindings.leftKeyDown(player)) {
@@ -154,7 +154,7 @@ public class Rocket extends Vehicle {
                 if (!(below.getBlock() instanceof LaunchPad)) {
                     this.drop();
                 } else if (below.getBlock() instanceof LaunchPad) {
-                    if (!below.getValue(LaunchPad.LOCATION).equals(LocationState.CENTER)) {
+                    if (!(below.getValue(LaunchPad.LOCATION) == LocationState.CENTER)) {
                         this.drop();
                     }
                 }
@@ -162,11 +162,11 @@ public class Rocket extends Vehicle {
         } else {
             this.setCountdownTicks(this.getCountdownTicks() - 1);
 
-            // Phase one: the rocket is counting down, about to launch.
+            // Phase one: the rocket is counting down, about to launch
             if (this.getCountdownTicks() > 0) {
                 this.spawnSmokeParticles();
                 this.setPhase(1);
-                // Phase two: the rocket has launched.
+                // Phase two: the rocket has launched
             } else if (this.getY() < VehiclesConfig.RocketConfig.atmosphereLeave) {
                 this.spawnAfterburnerParticles();
                 this.burnEntitiesUnderRocket();
@@ -175,7 +175,7 @@ public class Rocket extends Vehicle {
                     this.explodeIfStopped();
                 }
                 this.setPhase(2);
-                // Phase three: the rocket has reached the required height.
+                // Phase three: the rocket has reached the required height
             } else if (this.getY() >= VehiclesConfig.RocketConfig.atmosphereLeave) {
                 openPlanetSelectionGui();
                 this.setPhase(3);
@@ -206,6 +206,7 @@ public class Rocket extends Vehicle {
         this.getPassengers().forEach(passenger -> {
             if (passenger instanceof Player player) {
                 if (!(player.containerMenu instanceof PlanetSelectionMenu)) {
+                    player.closeContainer();
                     if (!this.level.isClientSide) {
                         MenuHooks.openMenu((ServerPlayer) player, new PlanetSelectionMenuProvider(this.getTier()));
                         stopRocketSoundForRider((ServerPlayer) player);

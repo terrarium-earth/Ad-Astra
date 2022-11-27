@@ -10,7 +10,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
+
+import java.util.List;
+import java.util.function.Predicate;
 
 public class CryoFuelConversionRecipe extends ConversionRecipe {
 
@@ -39,5 +43,13 @@ public class CryoFuelConversionRecipe extends ConversionRecipe {
     @Override
     public RecipeType<?> getType() {
         return ModRecipeTypes.CRYO_FUEL_CONVERSION_RECIPE.get();
+    }
+
+    public static CryoFuelConversionRecipe findFirst(Level level, Predicate<CryoFuelConversionRecipe> filter) {
+        return getRecipes(level).stream().filter(filter).findFirst().orElse(null);
+    }
+
+    public static List<CryoFuelConversionRecipe> getRecipes(Level level) {
+        return level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.CRYO_FUEL_CONVERSION_RECIPE.get());
     }
 }

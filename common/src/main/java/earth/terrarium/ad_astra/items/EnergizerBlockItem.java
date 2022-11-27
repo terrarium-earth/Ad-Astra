@@ -19,8 +19,8 @@ public class EnergizerBlockItem extends MachineBlockItem {
     @Override
     public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag context) {
         long energy = 0;
-        if (stack.hasTag() && stack.getOrCreateTag().contains("energy")) {
-            energy = stack.getOrCreateTag().getLong("energy");
+        if (stack.hasTag() && stack.getOrCreateTag().contains("Energy")) {
+            energy = stack.getOrCreateTag().getLong("Energy");
         }
         tooltip.add(Component.translatable("gauge_text.ad_astra.storage", energy, EnergizerConfig.maxEnergy).setStyle(Style.EMPTY.withColor(energy > 0 ? ChatFormatting.GREEN : ChatFormatting.RED)));
         super.appendHoverText(stack, level, tooltip, context);

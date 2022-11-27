@@ -9,7 +9,7 @@ import dev.emi.emi.api.widget.WidgetHolder;
 import earth.terrarium.ad_astra.compat.emi.EmiCategories;
 import earth.terrarium.ad_astra.compat.emi.EmiTextures;
 import earth.terrarium.ad_astra.config.FuelRefineryConfig;
-import earth.terrarium.ad_astra.recipes.FluidConversionRecipe;
+import earth.terrarium.ad_astra.recipes.FuelConversionRecipe;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.minecraft.core.Holder;
@@ -21,11 +21,11 @@ import java.util.stream.Collectors;
 
 public class EmiFluidConversionRecipe implements EmiRecipe {
     private final ResourceLocation id;
-    FluidConversionRecipe recipe;
+    FuelConversionRecipe recipe;
     private final FluidEmiStack input;
     private final FluidEmiStack output;
 
-    public EmiFluidConversionRecipe(FluidConversionRecipe recipe) {
+    public EmiFluidConversionRecipe(FuelConversionRecipe recipe) {
         this.id = recipe.getId();
         this.recipe = recipe;
         this.input = new FluidEmiStack(recipe.getFluidInput().stream().map(Holder::value).filter(f -> f.isSource(f.defaultFluidState())).map(FluidVariant::of).collect(Collectors.toList()).get(0), FluidConstants.BUCKET);

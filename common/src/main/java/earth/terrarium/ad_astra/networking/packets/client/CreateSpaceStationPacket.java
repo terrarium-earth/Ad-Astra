@@ -61,7 +61,7 @@ public record CreateSpaceStationPacket(ResourceLocation targetWorld) implements 
         public PacketContext handle(CreateSpaceStationPacket packet) {
             return (player, level) -> {
                 if (!player.isCreative() && !player.isSpectator()) {
-                    for (SpaceStationRecipe recipe : ModRecipeTypes.SPACE_STATION_RECIPE.get().getRecipes(player.level)) {
+                    for (SpaceStationRecipe recipe : SpaceStationRecipe.getRecipes(player.level)) {
                         for (int i = 0; i < recipe.getIngredients().size(); i++) {
                             if (!hasItem(player, recipe.getIngredients().get(i), recipe.getHolders().get(i).count())) {
                                 return;
@@ -69,7 +69,7 @@ public record CreateSpaceStationPacket(ResourceLocation targetWorld) implements 
                         }
                     }
                     Inventory inventory = player.getInventory();
-                    ModRecipeTypes.SPACE_STATION_RECIPE.get().getRecipes(player.level).forEach(recipe -> {
+                    SpaceStationRecipe.getRecipes(player.level).forEach(recipe -> {
                         for (int i = 0; i < recipe.getIngredients().size(); i++) {
                             inventory.clearOrCountMatchingItems(recipe.getIngredients().get(i), recipe.getHolders().get(i).count(), inventory);
                         }

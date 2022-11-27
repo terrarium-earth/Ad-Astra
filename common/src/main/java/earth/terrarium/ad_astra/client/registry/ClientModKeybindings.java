@@ -25,7 +25,7 @@ public class ClientModKeybindings {
     private static boolean sentLeftPacket;
     private static boolean sentRightPacket;
 
-    public static void onEndTick(Minecraft minecraft) {
+    public static void onStartTick(Minecraft minecraft) {
 
         clickingJump = minecraft.options.keyJump.isDown();
         clickingSprint = minecraft.options.keySprint.isDown();
@@ -35,15 +35,6 @@ public class ClientModKeybindings {
         clickingRight = minecraft.options.keyRight.isDown();
 
         if (minecraft.level != null) {
-            if (minecraft.player != null) {
-                if (minecraft.options.keyJump.consumeClick()) {
-                    if (minecraft.player.getVehicle() instanceof Rocket rocket) {
-                        if (!rocket.isFlying()) {
-                            NetworkHandling.CHANNEL.sendToServer(new LaunchRocketPacket());
-                        }
-                    }
-                }
-            }
 
             if (clickingJump && sentJumpPacket) {
                 NetworkHandling.CHANNEL.sendToServer(new KeybindPacket(KeybindPacket.Keybind.JUMP, true));
@@ -103,6 +94,15 @@ public class ClientModKeybindings {
             if (!clickingRight && !sentRightPacket) {
                 NetworkHandling.CHANNEL.sendToServer(new KeybindPacket(KeybindPacket.Keybind.RIGHT, false));
                 sentRightPacket = true;
+            }
+        }
+    }
+
+    public static void launchRocket() {
+        Minecraft minecraft = Minecraft.getInstance();
+        if (minecraft.level != null && minecraft.player != null) {
+            if (minecraft.player.getVehicle() instanceof Rocket rocket && !rocket.isFlying()) {
+                NetworkHandling.CHANNEL.sendToServer(new LaunchRocketPacket());
             }
         }
     }

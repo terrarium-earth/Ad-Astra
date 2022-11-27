@@ -84,8 +84,8 @@ public class AdAstraClientForge {
     }
 
     public static void onClientTick(TickEvent.ClientTickEvent event) {
-        if (event.phase.equals(TickEvent.Phase.END)) {
-            ClientModKeybindings.onEndTick(Minecraft.getInstance());
+        if (event.phase.equals(TickEvent.Phase.START)) {
+            ClientModKeybindings.onStartTick(Minecraft.getInstance());
         }
     }
 

@@ -99,8 +99,8 @@ subprojects {
                 if (modLoader == "fabric") {
                     dependencies {
                         required.project "fabric-api"
-                        required.project "cloth-config"
                         required.project "resourceful-lib"
+                        required.project "resourceful-config"
                         required.project "botarium"
                         optional.project "modmenu"
                         optional.project "patchouli"
@@ -111,6 +111,7 @@ subprojects {
                     dependencies {
                         required.project "cloth-config"
                         required.project "resourceful-lib"
+                        required.project "resourceful-config"
                         required.project "botarium"
                         optional.project "patchouli"
                         optional.project "roughly-enough-items"
@@ -136,6 +137,7 @@ subprojects {
                             requiredDependency "fabric-api"
                             requiredDependency "cloth-config"
                             requiredDependency "resourceful-lib"
+                            requiredDependency "resourceful-config"
                             requiredDependency "botarium"
                             optionalDependency "modmenu"
                             optionalDependency "patchouli-fabric"
@@ -147,6 +149,7 @@ subprojects {
                         relations {
                             requiredDependency "cloth-config"
                             requiredDependency "resourceful-lib"
+                            requiredDependency "resourceful-config"
                             requiredDependency "botarium"
                             optionalDependency "patchouli"
                             optionalDependency "jei"

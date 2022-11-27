@@ -10,9 +10,13 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
 
-public class OxygenConversionRecipe extends FluidConversionRecipe {
+import java.util.List;
+import java.util.function.Predicate;
+
+public class OxygenConversionRecipe extends ConversionRecipe {
 
     public OxygenConversionRecipe(ResourceLocation id, HolderSet<Fluid> input, Fluid output, double conversionRatio) {
         super(id, input, output, conversionRatio);
@@ -35,5 +39,13 @@ public class OxygenConversionRecipe extends FluidConversionRecipe {
     @Override
     public RecipeType<?> getType() {
         return ModRecipeTypes.OXYGEN_CONVERSION_RECIPE.get();
+    }
+
+    public static OxygenConversionRecipe findFirst(Level level, Predicate<OxygenConversionRecipe> filter) {
+        return getRecipes(level).stream().filter(filter).findFirst().orElse(null);
+    }
+
+    public static List<OxygenConversionRecipe> getRecipes(Level level) {
+        return level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.OXYGEN_CONVERSION_RECIPE.get());
     }
 }

@@ -6,34 +6,34 @@ import com.teamresourceful.resourcefulconfig.common.annotations.IntRange;
 import com.teamresourceful.resourcefulconfig.common.config.EntryType;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 
-@Category(id = "oxygenDistributor", translation = "text.autoconfig.ad_astra.option.oxygenDistributor")
+@Category(id = "oxygenDistributor", translation = "text.resourcefulconfig.ad_astra.option.oxygenDistributor")
 public final class OxygenDistributorConfig {
 
     @ConfigEntry(
         id = "maxEnergy",
         type = EntryType.LONG,
-        translation = "text.autoconfig.ad_astra.option.oxygenDistributor.maxEnergy"
+        translation = "text.resourcefulconfig.ad_astra.option.oxygenDistributor.maxEnergy"
     )
     public static long maxEnergy = 20000L;
 
     @ConfigEntry(
         id = "fluidConversionEnergyPerTick",
         type = EntryType.LONG,
-        translation = "text.autoconfig.ad_astra.option.oxygenDistributor.fluidConversionEnergyPerTick"
+        translation = "text.resourcefulconfig.ad_astra.option.oxygenDistributor.fluidConversionEnergyPerTick"
     )
     public static long fluidConversionEnergyPerTick = 5L;
 
     @ConfigEntry(
         id = "tankSize",
         type = EntryType.LONG,
-        translation = "text.autoconfig.ad_astra.option.oxygenDistributor.tankSize"
+        translation = "text.resourcefulconfig.ad_astra.option.oxygenDistributor.tankSize"
     )
     public static long tankSize = FluidHooks.buckets(6);
 
     @ConfigEntry(
         id = "maxBlockChecks",
         type = EntryType.INTEGER,
-        translation = "text.autoconfig.ad_astra.option.oxygenDistributor.maxBlockChecks"
+        translation = "text.resourcefulconfig.ad_astra.option.oxygenDistributor.maxBlockChecks"
     )
     @IntRange(min = 1, max = 50000)
     public static int maxBlockChecks = 2000;
@@ -41,7 +41,7 @@ public final class OxygenDistributorConfig {
     @ConfigEntry(
         id = "refreshTicks",
         type = EntryType.INTEGER,
-        translation = "text.autoconfig.ad_astra.option.oxygenDistributor.refreshTicks"
+        translation = "text.resourcefulconfig.ad_astra.option.oxygenDistributor.refreshTicks"
     )
     @IntRange(min = 0, max = 500)
     public static int refreshTicks = 60;
@@ -49,14 +49,14 @@ public final class OxygenDistributorConfig {
     @ConfigEntry(
         id = "oxygenMultiplier",
         type = EntryType.DOUBLE,
-        translation = "text.autoconfig.ad_astra.option.oxygenDistributor.oxygenMultiplier"
+        translation = "text.resourcefulconfig.ad_astra.option.oxygenDistributor.oxygenMultiplier"
     )
     public static double oxygenMultiplier = 1.0;
 
     @ConfigEntry(
         id = "energyMultiplier",
         type = EntryType.DOUBLE,
-        translation = "text.autoconfig.ad_astra.option.oxygenDistributor.energyMultiplier"
+        translation = "text.resourcefulconfig.ad_astra.option.oxygenDistributor.energyMultiplier"
     )
     public static double energyMultiplier = 3.0;
 }

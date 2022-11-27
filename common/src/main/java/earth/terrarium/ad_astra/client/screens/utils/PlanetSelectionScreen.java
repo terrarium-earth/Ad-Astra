@@ -15,6 +15,7 @@ import earth.terrarium.ad_astra.data.PlanetData;
 import earth.terrarium.ad_astra.networking.NetworkHandling;
 import earth.terrarium.ad_astra.networking.packets.client.CreateSpaceStationPacket;
 import earth.terrarium.ad_astra.networking.packets.client.TeleportToPlanetPacket;
+import earth.terrarium.ad_astra.recipes.SpaceStationRecipe;
 import earth.terrarium.ad_astra.registry.ModRecipeTypes;
 import earth.terrarium.ad_astra.screen.menu.PlanetSelectionMenu;
 import earth.terrarium.ad_astra.util.MathUtil;
@@ -90,7 +91,7 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
         guiTime = handler.getPlayer().level.getRandom().nextFloat() * 100000.0f;
 
         // Get recipe.
-        ModRecipeTypes.SPACE_STATION_RECIPE.get().getRecipes(handler.getPlayer().level).forEach(recipe -> {
+        SpaceStationRecipe.getRecipes(handler.getPlayer().level).forEach(recipe -> {
             if (recipe != null) {
                 for (int i = 0; i < recipe.getIngredients().size(); i++) {
                     if (recipe.getIngredients().get(i).getItems().length == 0) return;

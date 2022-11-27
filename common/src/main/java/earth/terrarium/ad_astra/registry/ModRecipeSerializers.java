@@ -14,10 +14,10 @@ public class ModRecipeSerializers {
     public static final Supplier<RecipeSerializer<CompressingRecipe>> COMPRESSING_SERIALIZER = register("compressing", () -> new CodecRecipeSerializer<>(ModRecipeTypes.COMPRESSING_RECIPE.get(), CompressingRecipe::codec));
     public static final Supplier<RecipeSerializer<SpaceStationRecipe>> SPACE_STATION_SERIALIZER = register("space_station", () -> new CodecRecipeSerializer<>(ModRecipeTypes.SPACE_STATION_RECIPE.get(), SpaceStationRecipe::codec));
     public static final Supplier<RecipeSerializer<NasaWorkbenchRecipe>> NASA_WORKBENCH_SERIALIZER = register("nasa_workbench", () -> new CodecRecipeSerializer<>(ModRecipeTypes.NASA_WORKBENCH_RECIPE.get(), NasaWorkbenchRecipe::codec));
-    public static final Supplier<RecipeSerializer<FluidConversionRecipe>> FUEL_CONVERSION_SERIALIZER = register("fuel_conversion", () -> new CodecRecipeSerializer<>(ModRecipeTypes.FUEL_CONVERSION_RECIPE.get(), FluidConversionRecipe::codec));
+    public static final Supplier<RecipeSerializer<FuelConversionRecipe>> FUEL_CONVERSION_SERIALIZER = register("fuel_conversion", () -> new CodecRecipeSerializer<>(ModRecipeTypes.FUEL_CONVERSION_RECIPE.get(), FuelConversionRecipe::codec));
     public static final Supplier<RecipeSerializer<OxygenConversionRecipe>> OXYGEN_CONVERSION_SERIALIZER = register("oxygen_conversion", () -> new CodecRecipeSerializer<>(ModRecipeTypes.OXYGEN_CONVERSION_RECIPE.get(), OxygenConversionRecipe::oxygenCodec));
     public static final Supplier<RecipeSerializer<CryoFuelConversionRecipe>> CRYO_FUEL_CONVERSION_SERIALIZER = register("cryo_fuel_conversion", () -> new CodecRecipeSerializer<>(ModRecipeTypes.CRYO_FUEL_CONVERSION_RECIPE.get(), CryoFuelConversionRecipe::codec));
-    public static final Supplier<SpaceSuitShapedRecipe.Serializer> SPACE_SUIT_CRAFTING_SERIALIZER = register("crafting_shaped_space_suit", () -> new SpaceSuitShapedRecipe.Serializer());
+    public static final Supplier<SpaceSuitShapedRecipe.Serializer> SPACE_SUIT_CRAFTING_SERIALIZER = register("crafting_shaped_space_suit", SpaceSuitShapedRecipe.Serializer::new);
 
     private static <T extends RecipeSerializer<E>, E extends Recipe<?>> Supplier<T> register(String id, Supplier<T> object) {
         return ModRegistryHelpers.register(Registry.RECIPE_SERIALIZER, id, object);

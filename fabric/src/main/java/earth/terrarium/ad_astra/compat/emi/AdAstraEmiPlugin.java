@@ -46,7 +46,7 @@ public class AdAstraEmiPlugin implements EmiPlugin {
             registry.addRecipe(new EmiCompressingRecipe(recipe));
         }
 
-        for (FluidConversionRecipe recipe : manager.getAllRecipesFor(ModRecipeTypes.FUEL_CONVERSION_RECIPE.get())) {
+        for (FuelConversionRecipe recipe : manager.getAllRecipesFor(ModRecipeTypes.FUEL_CONVERSION_RECIPE.get())) {
             registry.addRecipe(new EmiFluidConversionRecipe(recipe));
         }
 
@@ -95,7 +95,7 @@ public class AdAstraEmiPlugin implements EmiPlugin {
         EnergyHooks.getItemEnergyManager(jetSuit.getStack()).insert(jetSuit, EnergizerConfig.maxEnergy, false);
 
         ItemStackHolder energizer = new ItemStackHolder(ModItems.ENERGIZER.get().getDefaultInstance());
-        energizer.getStack().getOrCreateTag().putLong("energy", EnergizerConfig.maxEnergy);
+        energizer.getStack().getOrCreateTag().putLong("Energy", EnergizerConfig.maxEnergy);
 
         registry.addEmiStackAfter(EmiStack.of(tier1Rocket.getStack()), EmiStack.of(ModItems.TIER_1_ROCKET.get()));
         registry.addEmiStackAfter(EmiStack.of(tier2Rocket.getStack()), EmiStack.of(ModItems.TIER_2_ROCKET.get()));

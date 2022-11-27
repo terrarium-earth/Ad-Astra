@@ -1,1 +1,8 @@
-**1.11.8**
+- Now uses resourceful config instead of cloth config.
+- Performance improvements due to caching planet data.
+- A lot of compatability improvements
+- Now copies the nbt in space suit crafting
+- Updated korean translations
+- Fixed holding a few items like rockets wrongly.
+- Fixed the rocket launch keybind not working when another mod adds a jump keybind
+- fixy buggies

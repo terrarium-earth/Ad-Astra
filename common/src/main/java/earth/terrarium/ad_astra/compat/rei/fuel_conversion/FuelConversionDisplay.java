@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.compat.rei.fuel_conversion;
 
 import earth.terrarium.ad_astra.compat.rei.REICategories;
-import earth.terrarium.ad_astra.recipes.FluidConversionRecipe;
+import earth.terrarium.ad_astra.recipes.FuelConversionRecipe;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.Display;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Environment(EnvType.CLIENT)
-public record FuelConversionDisplay(FluidConversionRecipe recipe) implements Display {
+public record FuelConversionDisplay(FuelConversionRecipe recipe) implements Display {
 
 	@Override
 	public List<EntryIngredient> getInputEntries() {

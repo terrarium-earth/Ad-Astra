@@ -98,5 +98,4 @@ public class PlanetData extends SimpleJsonResourceReloadListener {
     public static boolean isOxygenated(ResourceKey<Level> level) {
         return OXIGNATED_LEVELS.contains(level);
     }
-
 }

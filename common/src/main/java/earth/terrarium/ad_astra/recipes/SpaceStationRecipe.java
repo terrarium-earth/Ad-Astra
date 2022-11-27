@@ -7,8 +7,10 @@ import earth.terrarium.ad_astra.registry.ModRecipeTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 public class SpaceStationRecipe extends ModRecipe {
 
@@ -33,4 +35,11 @@ public class SpaceStationRecipe extends ModRecipe {
         return ModRecipeTypes.SPACE_STATION_RECIPE.get();
     }
 
+    public static SpaceStationRecipe findFirst(Level level, Predicate<SpaceStationRecipe> filter) {
+        return getRecipes(level).stream().filter(filter).findFirst().orElse(null);
+    }
+
+    public static List<SpaceStationRecipe> getRecipes(Level level) {
+        return level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.SPACE_STATION_RECIPE.get());
+    }
 }

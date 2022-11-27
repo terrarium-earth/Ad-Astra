@@ -7,7 +7,7 @@ license = "MIT"
 modId = "ad_astra"
 version = "${version}"
 displayName = "Ad Astra!"
-authors = " Alex Nijjar, Bunny, Checheno, CodexAdrian, Facu, Fizz, Kekie6, OliviaTheVampire, Shrimp, SpaceStar, Squishy, ThatGravyBoat"
+authors = " Alex Nijjar, CodexAdrian, Facu, Fizz, Kekie6, Shrimp, SpaceStar, Squishy, ThatGravyBoat"
 description = "Live long and prosper, Ad Astra!"
 logoFile = "icon.png"
 

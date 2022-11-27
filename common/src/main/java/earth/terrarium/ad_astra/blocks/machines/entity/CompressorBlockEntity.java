@@ -1,9 +1,10 @@
 package earth.terrarium.ad_astra.blocks.machines.entity;
 
+import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.config.CompressorConfig;
+import earth.terrarium.ad_astra.recipes.CompressingRecipe;
 import earth.terrarium.ad_astra.recipes.CookingRecipe;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
-import earth.terrarium.ad_astra.registry.ModRecipeTypes;
 import earth.terrarium.ad_astra.screen.menu.CompressorMenu;
 import earth.terrarium.botarium.api.energy.EnergyBlock;
 import earth.terrarium.botarium.api.energy.InsertOnlyEnergyContainer;
@@ -63,7 +64,7 @@ public class CompressorBlockEntity extends ProcessingMachineBlockEntity implemen
                         this.finishCooking();
 
                     } else {
-                        CookingRecipe recipe = this.createRecipe(ModRecipeTypes.COMPRESSING_RECIPE.get(), input, true);
+                        CookingRecipe recipe = this.createRecipe(input, true);
                         if (recipe != null) {
                             this.cookTimeTotal = recipe.getCookTime();
                             this.cookTime = 0;
@@ -78,6 +79,29 @@ public class CompressorBlockEntity extends ProcessingMachineBlockEntity implemen
         }
     }
 
+    public CompressingRecipe createRecipe(ItemStack testStack, boolean checkOutput) {
+        stopCooking();
+
+        CompressingRecipe recipe = CompressingRecipe.findFirst(this.level, f -> f.test(testStack));
+
+        if (recipe != null) {
+
+            // Stop if something is already in the output.
+            if (checkOutput) {
+                ItemStack outputSlot = this.getItem(1);
+                ItemStack output = recipe.getResultItem();
+                if (!outputSlot.isEmpty() && !outputSlot.getItem().equals(recipe.getResultItem().getItem()) || outputSlot.getCount() + output.getCount() > outputSlot.getMaxStackSize()) {
+                    return null;
+                }
+            }
+
+            this.outputStack = recipe.getResultItem();
+            this.inputItem = testStack.getItem();
+        }
+
+        return recipe;
+    }
+
     public long getEnergyPerTick() {
         return CompressorConfig.energyPerTick;
     }
@@ -88,7 +112,7 @@ public class CompressorBlockEntity extends ProcessingMachineBlockEntity implemen
 
     @Override
     public InsertOnlyEnergyContainer getEnergyStorage() {
-        return energyContainer == null ? energyContainer = new InsertOnlyEnergyContainer(this, (int) CompressorConfig.maxEnergy) : this.energyContainer;
+        return energyContainer == null ? energyContainer = new InsertOnlyEnergyContainer(this, CompressorConfig.maxEnergy) : this.energyContainer;
     }
 
     @Override

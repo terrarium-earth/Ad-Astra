@@ -3,7 +3,6 @@ package earth.terrarium.ad_astra.blocks.machines.entity;
 import earth.terrarium.ad_astra.config.OxygenLoaderConfig;
 import earth.terrarium.ad_astra.recipes.OxygenConversionRecipe;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
-import earth.terrarium.ad_astra.registry.ModRecipeTypes;
 import earth.terrarium.ad_astra.screen.menu.ConversionMenu;
 import earth.terrarium.ad_astra.util.FluidUtils;
 import earth.terrarium.botarium.api.energy.InsertOnlyEnergyContainer;
@@ -40,7 +39,7 @@ public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
 
     @Override
     public Predicate<FluidHolder> getInputFilter() {
-        return f -> ModRecipeTypes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.getLevel()).stream().anyMatch(r -> r.matches(f.getFluid()));
+        return f -> OxygenConversionRecipe.getRecipes(this.getLevel()).stream().anyMatch(r -> r.matches(f.getFluid()));
     }
 
     @Override
@@ -73,7 +72,7 @@ public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
             ItemStack outputExtractSlot = this.getItems().get(3);
 
             if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxStackSize() && FluidHooks.isFluidContainingItem(insertSlot)) {
-                FluidUtils.insertItemFluidToTank(this.getFluidContainer().getInput(), this, 0, 1, 0, f -> ModRecipeTypes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.level).stream().anyMatch(r -> r.matches(f)));
+                FluidUtils.insertItemFluidToTank(this.getFluidContainer().getInput(), this, 0, 1, 0, f -> OxygenConversionRecipe.getRecipes(this.level).stream().anyMatch(r -> r.matches(f)));
                 FluidUtils.extractTankFluidToItem(this.getFluidContainer().getInput(), this, 0, 1, 0, f -> true);
             }
 
@@ -82,7 +81,7 @@ public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
             }
 
             if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0) {
-                List<OxygenConversionRecipe> recipes = ModRecipeTypes.OXYGEN_CONVERSION_RECIPE.get().getRecipes(this.level);
+                List<OxygenConversionRecipe> recipes = OxygenConversionRecipe.getRecipes(this.level);
                 if (FluidUtils.convertFluid(this.getFluidContainer(), recipes, FluidHooks.buckets(1) / 50)) {
                     this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
                     this.setActive(true);

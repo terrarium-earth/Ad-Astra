@@ -1,11 +1,12 @@
 package earth.terrarium.ad_astra.compat.jei.categories;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.screens.GuiUtil;
 import earth.terrarium.ad_astra.compat.jei.EnergyBarDrawable;
 import earth.terrarium.ad_astra.compat.jei.FluidBarDrawable;
 import earth.terrarium.ad_astra.config.FuelRefineryConfig;
-import earth.terrarium.ad_astra.recipes.FluidConversionRecipe;
+import earth.terrarium.ad_astra.recipes.FuelConversionRecipe;
 import earth.terrarium.ad_astra.registry.ModItems;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
@@ -23,9 +24,9 @@ import net.minecraft.world.item.crafting.Ingredient;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FuelConversionCategory extends BaseCategory<FluidConversionRecipe> {
+public class FuelConversionCategory extends BaseCategory<FuelConversionRecipe> {
     public static final ResourceLocation ID = new ModResourceLocation("fuel_conversion");
-    public static final RecipeType<FluidConversionRecipe> RECIPE = new RecipeType<>(ID, FluidConversionRecipe.class);
+    public static final RecipeType<FuelConversionRecipe> RECIPE = new RecipeType<>(ID, FuelConversionRecipe.class);
     private final IDrawableAnimated arrow;
 
     public FuelConversionCategory(IGuiHelper guiHelper) {
@@ -39,14 +40,14 @@ public class FuelConversionCategory extends BaseCategory<FluidConversionRecipe> 
     }
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, FluidConversionRecipe recipe, IFocusGroup focuses) {
+    public void setRecipe(IRecipeLayoutBuilder builder, FuelConversionRecipe recipe, IFocusGroup focuses) {
         builder.addInvisibleIngredients(RecipeIngredientRole.CATALYST).addIngredients(Ingredient.of(ModItems.FUEL_REFINERY.get()));
         builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addFluidStack(recipe.getFluidInput().get(0).value(), FluidHooks.buckets(1));
         builder.addInvisibleIngredients(RecipeIngredientRole.OUTPUT).addFluidStack(recipe.getFluidOutput(), FluidHooks.buckets(1));
     }
 
     @Override
-    public void draw(FluidConversionRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack poseStack, double mouseX, double mouseY) {
+    public void draw(FuelConversionRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack poseStack, double mouseX, double mouseY) {
         new FluidBarDrawable(FluidHooks.newFluidHolder(recipe.getFluidInput().get(0).value(), FluidHooks.buckets(1), null), false, 5000).draw(poseStack, 15, 15);
         new FluidBarDrawable(FluidHooks.newFluidHolder(recipe.getFluidOutput(), FluidHooks.buckets(1), null), true, 5000).draw(poseStack, 80, 15);
         new EnergyBarDrawable(false, 10000).draw(poseStack, 120, 15);
@@ -54,7 +55,7 @@ public class FuelConversionCategory extends BaseCategory<FluidConversionRecipe> 
     }
 
     @Override
-    public List<Component> getTooltipStrings(FluidConversionRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
+    public List<Component> getTooltipStrings(FuelConversionRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
         List<Component> tooltips = new ArrayList<>();
         if (mouseX > 118 && mouseY > 13 && mouseX < 118 + GuiUtil.ENERGY_WIDTH && mouseY < 13 + GuiUtil.ENERGY_HEIGHT) {
             tooltips.add(Component.translatable("rei.tooltip.ad_astra.energy_using", FuelRefineryConfig.energyPerTick));

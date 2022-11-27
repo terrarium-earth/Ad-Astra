@@ -54,7 +54,7 @@ public class AdAstraReiPlugin implements REIClientPlugin {
 	public void registerDisplays(DisplayRegistry registry) {
 
 		registry.registerRecipeFiller(CompressingRecipe.class, ModRecipeTypes.COMPRESSING_RECIPE.get(), CompressorDisplay::new);
-		registry.registerRecipeFiller(FluidConversionRecipe.class, ModRecipeTypes.FUEL_CONVERSION_RECIPE.get(), FuelConversionDisplay::new);
+		registry.registerRecipeFiller(FuelConversionRecipe.class, ModRecipeTypes.FUEL_CONVERSION_RECIPE.get(), FuelConversionDisplay::new);
 		registry.registerRecipeFiller(OxygenConversionRecipe.class, ModRecipeTypes.OXYGEN_CONVERSION_RECIPE.get(), OxygenConversionDisplay::new);
 		registry.registerRecipeFiller(CryoFuelConversionRecipe.class, ModRecipeTypes.CRYO_FUEL_CONVERSION_RECIPE.get(), CryoFreezerConversionDisplay::new);
 		registry.registerRecipeFiller(NasaWorkbenchRecipe.class, ModRecipeTypes.NASA_WORKBENCH_RECIPE.get(), NasaWorkbenchDisplay::new);

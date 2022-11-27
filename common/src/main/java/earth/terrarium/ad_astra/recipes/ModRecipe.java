@@ -1,19 +1,20 @@
 package earth.terrarium.ad_astra.recipes;
 
+import com.teamresourceful.resourcefullib.common.recipe.CodecRecipe;
 import earth.terrarium.ad_astra.util.ModInventory;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-public abstract class ModRecipe implements Recipe<Container>, Predicate<ItemStack> {
+public abstract class ModRecipe implements CodecRecipe<Container>, Predicate<ItemStack> {
 
     protected final ResourceLocation id;
     protected final List<IngredientHolder> inputs = new ArrayList<>();
@@ -43,30 +44,7 @@ public abstract class ModRecipe implements Recipe<Container>, Predicate<ItemStac
     }
 
     @Override
-    public ItemStack assemble(Container inventory) {
-        // Unused
-        return ItemStack.EMPTY;
-    }
-
-    @Override
-    public ItemStack getResultItem() {
-        // Unused
-        return ItemStack.EMPTY;
-    }
-
-    @Override
-    public boolean canCraftInDimensions(int width, int height) {
-        // Unused
-        return true;
-    }
-
-    @Override
-    public boolean isSpecial() {
-        return true;
-    }
-
-    @Override
-    public ResourceLocation getId() {
+    public @NotNull ResourceLocation id() {
         return this.id;
     }
 

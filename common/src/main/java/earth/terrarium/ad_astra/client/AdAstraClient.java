@@ -139,13 +139,13 @@ public class AdAstraClient {
         }
     }
 
-    public static void renderBlock(ResourceLocation texture, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
-        Minecraft client = Minecraft.getInstance();
-        ModelManager manager = client.getModelManager();
-        BakedModel model = ClientUtils.getModel(manager, texture);
+    public static void renderBlock(ResourceLocation model, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
+        Minecraft minecraft = Minecraft.getInstance();
+        ModelManager manager = minecraft.getModelManager();
+        BakedModel baked = ClientUtils.getModel(manager, model);
 
         VertexConsumer vertexConsumer1 = buffer.getBuffer(RenderType.entityCutout(InventoryMenu.BLOCK_ATLAS));
-        List<BakedQuad> quads1 = model.getQuads(null, null, client.level.random);
+        List<BakedQuad> quads1 = baked.getQuads(null, null, minecraft.level.random);
         PoseStack.Pose entry1 = poseStack.last();
 
         for (BakedQuad quad : quads1) {

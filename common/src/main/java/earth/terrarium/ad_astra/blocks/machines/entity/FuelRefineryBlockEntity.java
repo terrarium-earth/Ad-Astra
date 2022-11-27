@@ -1,9 +1,8 @@
 package earth.terrarium.ad_astra.blocks.machines.entity;
 
 import earth.terrarium.ad_astra.config.FuelRefineryConfig;
-import earth.terrarium.ad_astra.recipes.FluidConversionRecipe;
+import earth.terrarium.ad_astra.recipes.FuelConversionRecipe;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
-import earth.terrarium.ad_astra.registry.ModRecipeTypes;
 import earth.terrarium.ad_astra.screen.menu.ConversionMenu;
 import earth.terrarium.ad_astra.util.FluidUtils;
 import earth.terrarium.botarium.api.energy.EnergyBlock;
@@ -41,7 +40,7 @@ public class FuelRefineryBlockEntity extends FluidMachineBlockEntity implements 
 
     @Override
     public Predicate<FluidHolder> getInputFilter() {
-        return f -> ModRecipeTypes.FUEL_CONVERSION_RECIPE.get().getRecipes(this.getLevel()).stream().anyMatch(r -> r.matches(f.getFluid()));
+        return f -> FuelConversionRecipe.getRecipes(this.getLevel()).stream().anyMatch(r -> r.matches(f.getFluid()));
     }
 
     @Override
@@ -74,7 +73,7 @@ public class FuelRefineryBlockEntity extends FluidMachineBlockEntity implements 
             ItemStack outputExtractSlot = this.getItems().get(3);
 
             if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxStackSize() && FluidHooks.isFluidContainingItem(insertSlot)) {
-                FluidUtils.insertItemFluidToTank(this.getFluidContainer().getInput(), this, 0, 1, 0, f -> ModRecipeTypes.FUEL_CONVERSION_RECIPE.get().getRecipes(this.level).stream().anyMatch(r -> r.matches(f)));
+                FluidUtils.insertItemFluidToTank(this.getFluidContainer().getInput(), this, 0, 1, 0, f -> FuelConversionRecipe.getRecipes(this.level).stream().anyMatch(r -> r.matches(f)));
                 FluidUtils.extractTankFluidToItem(this.getFluidContainer().getInput(), this, 0, 1, 0, f -> true);
             }
 
@@ -83,7 +82,7 @@ public class FuelRefineryBlockEntity extends FluidMachineBlockEntity implements 
             }
 
             if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0) {
-                List<FluidConversionRecipe> recipes = ModRecipeTypes.FUEL_CONVERSION_RECIPE.get().getRecipes(this.level);
+                List<FuelConversionRecipe> recipes = FuelConversionRecipe.getRecipes(this.level);
                 if (FluidUtils.convertFluid(this.getFluidContainer(), recipes, FluidHooks.buckets(1) / 50)) {
                     this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
                     this.setActive(true);

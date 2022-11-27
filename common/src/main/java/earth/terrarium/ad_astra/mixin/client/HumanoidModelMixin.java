@@ -35,15 +35,13 @@ public abstract class HumanoidModelMixin {
         HumanoidModel<LivingEntity> model = ((HumanoidModel<LivingEntity>) (Object) this);
         ItemStack mainHandItem = livingEntity.getMainHandItem();
         ItemStack offhandItem = livingEntity.getOffhandItem();
-        if (!mainHandItem.isEmpty() && !offhandItem.isEmpty()) {
-            // Move the arms so that it looks like the player is holding the vehicle in the air with both arms.
-            if (mainHandItem.getItem() instanceof HoldableOverHead) {
-                model.rightArm.xRot = -2.8f;
-                model.leftArm.xRot = model.rightArm.xRot;
-            } else if (offhandItem.getItem() instanceof HoldableOverHead) {
-                model.leftArm.xRot = -2.8f;
-                model.rightArm.xRot = model.leftArm.xRot;
-            }
+        // Move the arms so that it looks like the player is holding the vehicle in the air with both arms.
+        if (!mainHandItem.isEmpty() && mainHandItem.getItem() instanceof HoldableOverHead) {
+            model.rightArm.xRot = -2.8f;
+            model.leftArm.xRot = model.rightArm.xRot;
+        } else if (!offhandItem.isEmpty() && offhandItem.getItem() instanceof HoldableOverHead) {
+            model.leftArm.xRot = -2.8f;
+            model.rightArm.xRot = model.leftArm.xRot;
         }
     }
 }
