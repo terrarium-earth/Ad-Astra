@@ -1,0 +1,18 @@
+{
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "mekanism"
+		}
+	],
+	"type": "mekanism:enriching",
+	"input": {
+		"ingredient": {
+			"tag": "forge:ores/ice_shard"
+		}
+	},
+	"output": {
+		"count": 4,
+		"item": "ad_astra:ice_shard"
+	}
+}
