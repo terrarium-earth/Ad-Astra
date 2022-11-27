@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "ad_astra:crafting_shaped_space_suit",
   "key": {
     "#": {
       "tag": "ad_astra_platform:steel_ingots"
