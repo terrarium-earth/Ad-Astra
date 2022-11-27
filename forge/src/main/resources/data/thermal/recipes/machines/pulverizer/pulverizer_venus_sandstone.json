@@ -1,0 +1,30 @@
+{
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "thermal"
+		}
+	],
+	"type": "thermal:pulverizer",
+	"ingredient": {
+		"value": [
+			{
+				"tag": "ad_astra:venus_sandstone"
+			},
+			{
+				"item": "ad_astra:venus_sandstone_brick_stairs"
+			}
+		]
+	},
+	"result": [
+		{
+			"item": "ad_astra:venus_sand",
+			"count": 2
+		},
+		{
+			"item": "thermal:niter",
+			"chance": 0.3
+		}
+	],
+	"experience": 0.1
+}

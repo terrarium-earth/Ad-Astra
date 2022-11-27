@@ -1,0 +1,24 @@
+{
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "thermal"
+		}
+	],
+	"type": "thermal:press",
+	"ingredients": [
+		{
+			"item": "ad_astra:venus_sand",
+			"count": 4
+		},
+		{
+			"item": "thermal:press_packing_2x2_die"
+		}
+	],
+	"result": [
+		{
+			"item": "ad_astra:venus_sandstone"
+		}
+	],
+	"energy": 400
+}
