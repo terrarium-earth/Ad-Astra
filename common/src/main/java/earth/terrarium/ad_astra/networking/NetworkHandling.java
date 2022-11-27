@@ -3,6 +3,7 @@ package earth.terrarium.ad_astra.networking;
 import com.teamresourceful.resourcefullib.common.networking.NetworkChannel;
 import com.teamresourceful.resourcefullib.common.networking.base.NetworkDirection;
 import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.data.PlanetData;
 import earth.terrarium.ad_astra.networking.packets.client.*;
 import earth.terrarium.ad_astra.networking.packets.server.DatapackPlanetsPacket;
 import earth.terrarium.ad_astra.networking.packets.server.MachineInfoPacket;
@@ -26,6 +27,6 @@ public class NetworkHandling {
     }
 
     public static void onPlayerJoin(Player player) {
-        NetworkHandling.CHANNEL.sendToPlayer(new DatapackPlanetsPacket(AdAstra.planets), player);
+        NetworkHandling.CHANNEL.sendToPlayer(new DatapackPlanetsPacket(PlanetData.planets()), player);
     }
 }
