@@ -1,6 +1,7 @@
 package earth.terrarium.ad_astra.util;
 
 import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.data.PlanetData;
 import earth.terrarium.ad_astra.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
@@ -27,7 +28,7 @@ public class OxygenUtils {
      * Checks if a level has oxygen, regardless of position.
      */
     public static boolean levelHasOxygen(Level level) {
-        if (!AdAstra.levelsWithOxygen.contains(level.dimension())) {
+        if (!PlanetData.isOxygenated(level.dimension())) {
             // Ensure all non-Ad Astra dimensions have oxygen by default
             return !ModUtils.isSpacelevel(level);
         }

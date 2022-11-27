@@ -3,16 +3,13 @@ package earth.terrarium.ad_astra.networking.packets.server;
 import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
-import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.data.Planet;
+import earth.terrarium.ad_astra.data.PlanetData;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public record DatapackPlanetsPacket(Collection<Planet> planets) implements Packet<DatapackPlanetsPacket> {
 
@@ -42,13 +39,7 @@ public record DatapackPlanetsPacket(Collection<Planet> planets) implements Packe
 
         @Override
         public PacketContext handle(DatapackPlanetsPacket packet) {
-            return (player, level) -> {
-                AdAstra.planets = new HashSet<>(packet.planets);
-                AdAstra.planetWorlds = AdAstra.planets.stream().map(Planet::level).collect(Collectors.toSet());
-                AdAstra.orbitWorlds = AdAstra.planets.stream().map(Planet::orbitWorld).collect(Collectors.toSet());
-                AdAstra.adAstraWorlds = Stream.concat(AdAstra.planetWorlds.stream(), AdAstra.orbitWorlds.stream()).collect(Collectors.toSet());
-                AdAstra.levelsWithOxygen = AdAstra.planets.stream().filter(Planet::hasOxygen).map(Planet::level).collect(Collectors.toSet());
-            };
+            return (player, level) -> PlanetData.updatePlanets(packet.planets);
         }
     }
 }

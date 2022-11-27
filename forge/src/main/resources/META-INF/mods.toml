@@ -26,9 +26,9 @@ ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.ad_astra]]
-modId = "cloth_config"
+modId = "resourcefulconfig"
 mandatory = true
-versionRange = "[8.2.88,)"
+versionRange = "[1.0.5,)"
 ordering = "AFTER"
 side = "BOTH"
 

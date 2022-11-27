@@ -6,6 +6,7 @@ import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.config.AdAstraConfig;
 import earth.terrarium.ad_astra.config.VehiclesConfig;
 import earth.terrarium.ad_astra.data.Planet;
+import earth.terrarium.ad_astra.data.PlanetData;
 import earth.terrarium.ad_astra.entities.vehicles.Lander;
 import earth.terrarium.ad_astra.entities.vehicles.Rocket;
 import earth.terrarium.ad_astra.entities.vehicles.Vehicle;
@@ -196,7 +197,7 @@ public class ModUtils {
      * @return The level's orbit dimension, or the overlevel if no orbit is defined
      */
     public static ResourceKey<Level> getPlanetOrbit(Level level) {
-        return AdAstra.planets.stream().filter(p -> p.orbitWorld().equals(level.dimension())).map(Planet::level).findFirst().orElse(Level.OVERWORLD);
+        return PlanetData.getPlanetFromOrbit(level.dimension()).map(Planet::level).orElse(Level.OVERWORLD);
     }
 
     /**
@@ -213,11 +214,11 @@ public class ModUtils {
         if (isOrbitlevel(level)) {
             return AdAstraConfig.orbitGravity / VANILLA_GRAVITY;
         }
-        return AdAstra.planets.stream().filter(p -> p.level().equals(level.dimension())).map(Planet::gravity).findFirst().orElse(VANILLA_GRAVITY) / VANILLA_GRAVITY;
+        return PlanetData.getPlanetFromLevel(level.dimension()).map(Planet::gravity).orElse(VANILLA_GRAVITY) / VANILLA_GRAVITY;
     }
 
     public static boolean planetHasAtmosphere(Level level) {
-        return AdAstra.planets.stream().filter(p -> p.level().equals(level.dimension())).map(Planet::hasAtmosphere).findFirst().orElse(false);
+        return PlanetData.getPlanetFromLevel(level.dimension()).map(Planet::hasAtmosphere).orElse(false);
     }
 
     /**
@@ -229,7 +230,7 @@ public class ModUtils {
         if (isOrbitlevel(level)) {
             return ORBIT_TEMPERATURE;
         }
-        return AdAstra.planets.stream().filter(p -> p.level().equals(level.dimension())).map(Planet::temperature).findFirst().orElse(20.0f);
+        return PlanetData.getPlanetFromLevel(level.dimension()).map(Planet::temperature).orElse(20.0f);
     }
 
     /**
@@ -246,14 +247,14 @@ public class ModUtils {
         if (Level.OVERWORLD.equals(level.dimension())) {
             return false;
         }
-        return AdAstra.planetWorlds.contains(level.dimension());
+        return PlanetData.isPlanetLevel(level.dimension());
     }
 
     /**
      * Checks if the level is labeled as an orbit dimension.
      */
     public static boolean isOrbitlevel(Level level) {
-        return AdAstra.orbitWorlds.contains(level.dimension());
+        return PlanetData.isOrbitLevel(level.dimension());
     }
 
     /**
@@ -299,9 +300,9 @@ public class ModUtils {
 
     public static long getSolarEnergy(Level level) {
         if (isOrbitlevel(level)) {
-            return AdAstra.planets.stream().filter(p -> p.orbitWorld().equals(level.dimension())).map(Planet::orbitSolarPower).findFirst().orElse(15L);
+            return PlanetData.getPlanetFromOrbit(level.dimension()).map(Planet::orbitSolarPower).orElse(15L);
         } else if (isPlanet(level)) {
-            return AdAstra.planets.stream().filter(p -> p.level().equals(level.dimension())).map(Planet::solarPower).findFirst().orElse(15L);
+            return PlanetData.getPlanetFromLevel(level.dimension()).map(Planet::solarPower).orElse(15L);
         } else {
             return 15L;
         }

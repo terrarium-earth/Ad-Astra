@@ -11,6 +11,7 @@ import earth.terrarium.ad_astra.client.resourcepack.SolarSystem;
 import earth.terrarium.ad_astra.config.AdAstraConfig;
 import earth.terrarium.ad_astra.data.ButtonColour;
 import earth.terrarium.ad_astra.data.Planet;
+import earth.terrarium.ad_astra.data.PlanetData;
 import earth.terrarium.ad_astra.networking.NetworkHandling;
 import earth.terrarium.ad_astra.networking.packets.client.CreateSpaceStationPacket;
 import earth.terrarium.ad_astra.networking.packets.client.TeleportToPlanetPacket;
@@ -231,7 +232,7 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
         this.categoryButtons.put(Category.BACK, backButtonList);
 
         // All buttons are data-driven; they are created from files in the /planet_data/planets directory.
-        List<Planet> planets = new ArrayList<>(AdAstra.planets);
+        List<Planet> planets = new ArrayList<>(PlanetData.planets());
         planets.sort(Comparator.comparing(g -> g.translation().substring(Math.abs(g.translation().indexOf(".text")))));
         planets.forEach(planet -> {
 
