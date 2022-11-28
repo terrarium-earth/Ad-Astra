@@ -109,7 +109,6 @@ subprojects {
                     }
                 } else {
                     dependencies {
-                        required.project "cloth-config"
                         required.project "resourceful-lib"
                         required.project "resourceful-config"
                         required.project "botarium"
@@ -135,7 +134,6 @@ subprojects {
                     if (modLoader == "fabric") {
                         relations {
                             requiredDependency "fabric-api"
-                            requiredDependency "cloth-config"
                             requiredDependency "resourceful-lib"
                             requiredDependency "resourceful-config"
                             requiredDependency "botarium"
@@ -147,7 +145,6 @@ subprojects {
                         }
                     } else {
                         relations {
-                            requiredDependency "cloth-config"
                             requiredDependency "resourceful-lib"
                             requiredDependency "resourceful-config"
                             requiredDependency "botarium"
