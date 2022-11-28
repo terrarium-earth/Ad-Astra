@@ -103,10 +103,10 @@ public class Rocket extends Vehicle {
         // Set the position to teleport out of the rocket
         Vec3 exitPos = switch (exitDirection) {
             case 0, 360 -> new Vec3(pos.x(), pos.y(), pos.z() + 1.5f);
-            case 90 -> new Vec3(pos.x() - 1.5f, pos.y(), pos.z());
-            case -90 -> new Vec3(pos.x() + 1.5f, pos.y(), pos.z());
+            case 90, -270 -> new Vec3(pos.x() - 1.5f, pos.y(), pos.z());
+            case -90, 270 -> new Vec3(pos.x() + 1.5f, pos.y(), pos.z());
             case -180, 180 -> new Vec3(pos.x(), pos.y(), pos.z() - 1.5f);
-            default -> throw new IllegalArgumentException("Unexpected value: " + exitDirection);
+            default -> super.getDismountLocationForPassenger(passenger);
         };
 
         // Place the rider up to 3 blocks below the rocket
