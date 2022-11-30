@@ -169,6 +169,9 @@ public final class AdAstraConfig {
     public static OxygenLoaderConfig oxygenLoaderConfig;
 
     @InlineCategory
+    public static OxygenDistributorConfig oxygenDistributorConfig;
+
+    @InlineCategory
     public static SolarPanelConfig solarPanelConfig;
 
     @InlineCategory

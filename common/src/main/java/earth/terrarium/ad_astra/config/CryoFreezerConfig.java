@@ -23,7 +23,7 @@ public final class CryoFreezerConfig {
     public static long energyPerTick = 24L;
 
     @ConfigEntry(
-        id = "energyPerTick",
+        id = "tankSize",
         type = EntryType.LONG,
         translation = "text.resourcefulconfig.ad_astra.option.cryoFreezer.tankSize"
     )

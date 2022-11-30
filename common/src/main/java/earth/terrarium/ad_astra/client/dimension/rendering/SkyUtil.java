@@ -21,6 +21,7 @@ import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.material.FogType;
 import net.minecraft.world.phys.Vec3;
 
@@ -55,9 +56,9 @@ public class SkyUtil {
         RenderSystem.defaultBlendFunc();
 
         renderColouring(colourType, bufferBuilder, poseStack, level, tickDelta, level.getTimeOfDay(tickDelta), sunsetAngle);
+        RenderSystem.enableTexture();
         RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-        RenderSystem.enableTexture();
     }
 
     public static void postRender(GameRenderer renderer, ClientLevel level, float tickDelta) {
@@ -79,11 +80,14 @@ public class SkyUtil {
     }
 
     public static boolean isSubmerged(Camera camera) {
-        Minecraft client = Minecraft.getInstance();
-        LocalPlayer player = client.player;
-
         FogType cameraSubmersionType = camera.getFluidInCamera();
-        return cameraSubmersionType.equals(FogType.POWDER_SNOW) || cameraSubmersionType.equals(FogType.LAVA) || player.hasEffect(MobEffects.BLINDNESS);
+        if (cameraSubmersionType.equals(FogType.POWDER_SNOW) || cameraSubmersionType.equals(FogType.LAVA)) {
+            return true;
+        }
+        if (camera.getEntity() instanceof LivingEntity livingEntity) {
+            return livingEntity.hasEffect(MobEffects.BLINDNESS) || livingEntity.hasEffect(MobEffects.DARKNESS);
+        }
+        return false;
     }
 
     public static void startRendering(PoseStack poseStack, Vector3f rotation) {
@@ -191,11 +195,11 @@ public class SkyUtil {
         }
     }
 
-    public static void renderColouring(PlanetSkyRenderer.SunsetColour type, BufferBuilder bufferBuilder, PoseStack poseStack, ClientLevel level, float tickDelta, float skyAngle, int sunsetAngle) {
+    public static void renderColouring(PlanetSkyRenderer.SunsetColour type, BufferBuilder bufferBuilder, PoseStack poseStack, ClientLevel level, float tickDelta, float timeOfDay, int sunsetAngle) {
 
         float[] fogColours = switch (type) {
-            case VANILLA -> level.effects().getSunriseColor(level.getSunAngle(tickDelta), tickDelta);
-            case MARS -> getMarsColour(skyAngle);
+            case VANILLA -> level.effects().getSunriseColor(timeOfDay, tickDelta);
+            case MARS -> getMarsColour(timeOfDay);
         };
         if (fogColours != null) {
             RenderSystem.setShader(GameRenderer::getPositionColorShader);
@@ -203,7 +207,7 @@ public class SkyUtil {
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
             poseStack.pushPose();
             poseStack.mulPose(Vector3f.XP.rotationDegrees(90.0f));
-            float sine = Mth.sin(level.getSunAngle(tickDelta)) < 0.0f ? 180.0f : sunsetAngle;
+            float sine = Mth.sin(level.getSunAngle(tickDelta)) < 0f ? 180f : 0f;
             poseStack.mulPose(Vector3f.ZP.rotationDegrees(sine));
             poseStack.mulPose(Vector3f.ZP.rotationDegrees(90.0f));
 
@@ -212,7 +216,7 @@ public class SkyUtil {
             bufferBuilder.vertex(matrix4f, 0.0f, 100.0f, 0.0f).color(fogColours[0], fogColours[1], fogColours[2], fogColours[3]).endVertex();
 
             for (int i = 0; i <= 16; ++i) {
-                float o = (float) i * ((float) Math.PI * 2) / 16.0f;
+                float o = (float) i * Mth.TWO_PI / 16.0f;
                 float cosine = Mth.cos(o);
                 bufferBuilder.vertex(matrix4f, Mth.sin(o) * 120.0f, cosine * 120.0f, -cosine * 40.0f * fogColours[3]).color(fogColours[0], fogColours[1], fogColours[2], 0.0f).endVertex();
             }
