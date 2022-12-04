@@ -72,6 +72,7 @@ public class ModUtils {
     public static void teleportTolevel(ResourceKey<Level> targetWorld, Entity entity) {
         if (entity.getLevel() instanceof ServerLevel oldWorld) {
             ServerLevel level = oldWorld.getServer().getLevel(targetWorld);
+            if (level == null) return;
             Set<Entity> entitiesToTeleport = new LinkedHashSet<>();
 
             Vec3 targetPos = new Vec3(entity.getX(), VehiclesConfig.RocketConfig.atmosphereLeave, entity.getZ());

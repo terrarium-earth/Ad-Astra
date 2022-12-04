@@ -32,6 +32,7 @@ public class ModSkyRenderer {
     private final boolean shouldRenderWhileRaining;
 
     private VertexBuffer starsBuffer;
+    private int starsCount;
 
     public ModSkyRenderer(PlanetSkyRenderer skyRenderer) {
         this.starsRenderer = skyRenderer.starsRenderer();
@@ -59,7 +60,7 @@ public class ModSkyRenderer {
         // Stars
         if (this.starsRenderer.fastStars() > 0) {
             int stars = (!client.options.graphicsMode().get().equals(GraphicsStatus.FAST) ? this.starsRenderer.fancyStars() : this.starsRenderer.fastStars());
-            starsBuffer = renderStars(level, poseStack, tickDelta, bufferBuilder, stars, this.starsRenderer);
+            starsBuffer = renderStars(level, poseStack, tickDelta, bufferBuilder, stars, this.starsRenderer, projectionMatrix);
         }
 
         // Render all sky objects
@@ -79,20 +80,12 @@ public class ModSkyRenderer {
         SkyUtil.postRender(client.gameRenderer, level, tickDelta);
     }
 
-    private VertexBuffer renderStars(ClientLevel level, PoseStack poseStack, float tickDelta, BufferBuilder bufferBuilder, int stars, StarsRenderer starsRenderer) {
+    private VertexBuffer renderStars(ClientLevel level, PoseStack poseStack, float tickDelta, BufferBuilder bufferBuilder, int stars, StarsRenderer starsRenderer, Matrix4f projectionMatrix) {
 
         SkyUtil.startRendering(poseStack, new Vector3f(-30.0f, 0.0f, level.getTimeOfDay(tickDelta) * 360.0f));
         RenderSystem.setShader(GameRenderer::getPositionColorShader);
 
-        if (starsBuffer != null) {
-            starsBuffer.close();
-        }
-
-        starsBuffer = new VertexBuffer();
-        BufferBuilder.RenderedBuffer renderedBuffer = SkyUtil.renderStars(bufferBuilder, stars, starsRenderer.colouredStars());
-        starsBuffer.bind();
-        starsBuffer.upload(renderedBuffer);
-        VertexBuffer.unbind();
+        createStarBuffer(bufferBuilder, stars);
 
         if (!starsRenderer.daylightVisible()) {
             float rot = level.getStarBrightness(tickDelta);
@@ -103,10 +96,26 @@ public class ModSkyRenderer {
 
         FogRenderer.setupNoFog();
         starsBuffer.bind();
-        starsBuffer.drawWithShader(poseStack.last().pose(), RenderSystem.getProjectionMatrix(), GameRenderer.getPositionColorShader());
+        starsBuffer.drawWithShader(poseStack.last().pose(), projectionMatrix, GameRenderer.getPositionColorShader());
         VertexBuffer.unbind();
 
         poseStack.popPose();
         return starsBuffer;
+    }
+
+    private void createStarBuffer(BufferBuilder bufferBuilder, int stars) {
+        if (starsBuffer != null) {
+            if (starsCount == stars) {
+                return;
+            }
+            starsBuffer.close();
+        }
+
+        starsBuffer = new VertexBuffer();
+        starsCount = stars;
+        BufferBuilder.RenderedBuffer renderedBuffer = SkyUtil.renderStars(bufferBuilder, stars, starsRenderer.colouredStars());
+        starsBuffer.bind();
+        starsBuffer.upload(renderedBuffer);
+        VertexBuffer.unbind();
     }
 }

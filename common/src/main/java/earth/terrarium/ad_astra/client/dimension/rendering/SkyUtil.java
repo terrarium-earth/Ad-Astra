@@ -111,9 +111,9 @@ public class SkyUtil {
     public static void render(PoseStack poseStack, BufferBuilder bufferBuilder, ResourceLocation texture, Color colour, Vector3f rotation, float scale, boolean blending) {
 
         startRendering(poseStack, rotation);
-        RenderSystem.setShader(GameRenderer::getPositionColorTexShader);
+        RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
 
-        RenderSystem.disableTexture();
+        RenderSystem.setShaderColor(colour.getIntRed() / 255f, colour.getIntGreen() / 255f, colour.getIntBlue() / 255f, 1f);
 
         if (blending) {
             RenderSystem.enableBlend();
@@ -123,11 +123,11 @@ public class SkyUtil {
 
         Matrix4f positionMatrix = poseStack.last().pose();
         RenderSystem.setShaderTexture(0, texture);
-        bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR_TEX);
-        bufferBuilder.vertex(positionMatrix, -scale, 100.0f, -scale).color(colour.getIntRed(), colour.getIntGreen(), colour.getIntBlue(), 255).uv(1.0f, 0.0f).endVertex();
-        bufferBuilder.vertex(positionMatrix, scale, 100.0f, -scale).color(colour.getIntRed(), colour.getIntGreen(), colour.getIntBlue(), 255).uv(0.0f, 0.0f).endVertex();
-        bufferBuilder.vertex(positionMatrix, scale, 100.0f, scale).color(colour.getIntRed(), colour.getIntGreen(), colour.getIntBlue(), 255).uv(0.0f, 1.0f).endVertex();
-        bufferBuilder.vertex(positionMatrix, -scale, 100.0f, scale).color(colour.getIntRed(), colour.getIntGreen(), colour.getIntBlue(), 255).uv(1.0f, 1.0f).endVertex();
+        bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
+        bufferBuilder.vertex(positionMatrix, -scale, 100.0f, -scale).uv(1.0f, 0.0f).color(colour.getIntRed(), colour.getIntGreen(), colour.getIntBlue(), 255).endVertex();
+        bufferBuilder.vertex(positionMatrix, scale, 100.0f, -scale).uv(0.0f, 0.0f).color(colour.getIntRed(), colour.getIntGreen(), colour.getIntBlue(), 255).endVertex();
+        bufferBuilder.vertex(positionMatrix, scale, 100.0f, scale).uv(0.0f, 1.0f).color(colour.getIntRed(), colour.getIntGreen(), colour.getIntBlue(), 255).endVertex();
+        bufferBuilder.vertex(positionMatrix, -scale, 100.0f, scale).uv(1.0f, 1.0f).color(colour.getIntRed(), colour.getIntGreen(), colour.getIntBlue(), 255).endVertex();
         BufferUploader.drawWithShader(bufferBuilder.end());
 
         endRendering(poseStack);
@@ -221,7 +221,7 @@ public class SkyUtil {
                 bufferBuilder.vertex(matrix4f, Mth.sin(o) * 120.0f, cosine * 120.0f, -cosine * 40.0f * fogColours[3]).color(fogColours[0], fogColours[1], fogColours[2], 0.0f).endVertex();
             }
 
-            BufferUploader.draw(bufferBuilder.end());
+            BufferUploader.drawWithShader(bufferBuilder.end());
             poseStack.popPose();
         }
     }
