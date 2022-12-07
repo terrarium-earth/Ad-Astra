@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.mixin;
 
-import earth.terrarium.ad_astra.world.WorldSeed;
+import earth.terrarium.ad_astra.level.WorldSeed;
 import net.minecraft.core.Registry;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.WorldGenSettings;

@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.util;
 
 import earth.terrarium.ad_astra.client.registry.ClientModKeybindings;
-import earth.terrarium.ad_astra.networking.packets.client.KeybindPacket;
+import earth.terrarium.ad_astra.networking.packet.client.KeybindPacket;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;

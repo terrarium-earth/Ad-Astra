@@ -4,10 +4,10 @@ import com.teamresourceful.resourcefullib.common.networking.NetworkChannel;
 import com.teamresourceful.resourcefullib.common.networking.base.NetworkDirection;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.data.PlanetData;
-import earth.terrarium.ad_astra.networking.packets.client.*;
-import earth.terrarium.ad_astra.networking.packets.server.DatapackPlanetsPacket;
-import earth.terrarium.ad_astra.networking.packets.server.MachineInfoPacket;
-import earth.terrarium.ad_astra.networking.packets.server.StartRocketPacket;
+import earth.terrarium.ad_astra.networking.packet.client.*;
+import earth.terrarium.ad_astra.networking.packet.server.DatapackPlanetsPacket;
+import earth.terrarium.ad_astra.networking.packet.server.MachineInfoPacket;
+import earth.terrarium.ad_astra.networking.packet.server.StartRocketPacket;
 import net.minecraft.world.entity.player.Player;
 
 public class NetworkHandling {

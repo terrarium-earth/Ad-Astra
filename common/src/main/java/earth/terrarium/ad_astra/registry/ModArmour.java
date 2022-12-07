@@ -1,8 +1,8 @@
 package earth.terrarium.ad_astra.registry;
 
-import earth.terrarium.ad_astra.items.armour.JetSuitMaterial;
-import earth.terrarium.ad_astra.items.armour.NetheriteSpaceSuitMaterial;
-import earth.terrarium.ad_astra.items.armour.SpaceSuitMaterial;
+import earth.terrarium.ad_astra.item.armor.JetSuitMaterial;
+import earth.terrarium.ad_astra.item.armor.NetheriteSpaceSuitMaterial;
+import earth.terrarium.ad_astra.item.armor.SpaceSuitMaterial;
 import net.minecraft.world.item.ArmorMaterial;
 
 public class ModArmour {

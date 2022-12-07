@@ -10,7 +10,7 @@ import dev.emi.emi.api.widget.WidgetHolder;
 import earth.terrarium.ad_astra.compat.emi.EmiCategories;
 import earth.terrarium.ad_astra.compat.emi.EmiTextures;
 import earth.terrarium.ad_astra.config.FuelRefineryConfig;
-import earth.terrarium.ad_astra.recipes.CryoFuelConversionRecipe;
+import earth.terrarium.ad_astra.recipe.CryoFuelConversionRecipe;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.minecraft.resources.ResourceLocation;

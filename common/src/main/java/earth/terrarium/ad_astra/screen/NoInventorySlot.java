@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.screen;
 
-import earth.terrarium.ad_astra.items.vehicles.VehicleItem;
+import earth.terrarium.ad_astra.item.vehicle.VehicleItem;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.BlockItem;

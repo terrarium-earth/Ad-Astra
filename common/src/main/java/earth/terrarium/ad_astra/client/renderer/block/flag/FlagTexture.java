@@ -5,10 +5,11 @@ import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.platform.TextureUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.logging.LogUtils;
-import earth.terrarium.ad_astra.util.ModResourceLocation;
+import earth.terrarium.ad_astra.AdAstra;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.SimpleTexture;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -26,7 +27,7 @@ public class FlagTexture extends SimpleTexture {
     private static final HttpClient CLIENT = HttpClient.newBuilder().build();
 
     private static final Logger LOGGER = LogUtils.getLogger();
-    private static final ModResourceLocation DEFAULT_FLAG = new ModResourceLocation("textures/block/flag/warning_flag.png");
+    private static final ResourceLocation DEFAULT_FLAG = new ResourceLocation(AdAstra.MOD_ID, "textures/block/flag/warning_flag.png");
 
     private final HttpRequest request;
     private boolean loaded;
@@ -41,8 +42,8 @@ public class FlagTexture extends SimpleTexture {
     }
 
     @SuppressWarnings({"UnstableApiUsage", "deprecation"})
-    public static ModResourceLocation getTextureId(String url) {
-        return new ModResourceLocation("flagtextures/" + Hashing.sha1().hashUnencodedChars(url));
+    public static ResourceLocation getTextureId(String url) {
+        return new ResourceLocation(AdAstra.MOD_ID, "flagtextures/" + Hashing.sha1().hashUnencodedChars(url));
     }
 
     private void upload(NativeImage image) {

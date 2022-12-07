@@ -3,18 +3,20 @@
 ### 0. Definitions
 
 “Code” refers to:
-1. Any file found in the `.../resources/data/...`
+1. Any file found in the `.../resources/data/...` directory
 2. Shader files, which refers to
     1. Files ending in `.vsh`, `.fsh` and `.glsl`
 3. Build scripts, which refers to
     1. Files ending in `.gradle`, `.gradle.kts`, `.properties`, `.bat`, and `.gitignore`
 4. Source files, which refers to
-    1. Files ending in `.java`, `.kt`, `.py`, `.js`, `.ts`, `.dart`, `.html`, `.xml`, `.css` and `.cs`
-5. Documentation files, which refers to
+    1. Files ending in `.java`, `.kt`, `.dart`, `.html`, `.xml` and `.cs`
+5. Script files, which refers to
+    1. Files ending in `.js`, `.ts`, `.py`, `.kts` and `.css`
+6. Documentation files, which refers to
     1. Files ending in `.md`, `.txt`, `.pdf`, `.rtf`, `.doc`, `.docx` and `.csv`
-6. Configuration files, which refers to
+7. Configuration files, which refers to
     1. Files ending in `.yml`, `.toml`, and `.mcmeta`
-    2. Files named `fabric.mod.json` or `mods.toml`
+    2. Files named `fabric.mod.json` or `mods.toml` or `quilt.mod.json`
 
 ### 1. Code
   Per the definitions above, Code is licensed under the “MIT” License, found below

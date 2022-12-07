@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.datagen;
 
-import earth.terrarium.ad_astra.recipes.SpaceSuitShapedRecipe;
+import earth.terrarium.ad_astra.recipe.SpaceSuitShapedRecipe;
 import earth.terrarium.ad_astra.registry.ModBlocks;
 import earth.terrarium.ad_astra.registry.ModItems;
 import earth.terrarium.ad_astra.registry.ModTags;

@@ -1,8 +1,8 @@
 package earth.terrarium.ad_astra.mixin;
 
 import earth.terrarium.ad_astra.config.SpaceSuitConfig;
-import earth.terrarium.ad_astra.items.armour.JetSuit;
-import earth.terrarium.ad_astra.items.armour.NetheriteSpaceSuit;
+import earth.terrarium.ad_astra.item.armor.JetSuit;
+import earth.terrarium.ad_astra.item.armor.NetheriteSpaceSuit;
 import earth.terrarium.ad_astra.util.ModKeyBindings;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;

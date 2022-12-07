@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.client.renderer.entity.feature;
 
-import earth.terrarium.ad_astra.client.renderer.entity.mobs.models.SulfurCreeperModel;
-import earth.terrarium.ad_astra.entities.mobs.SulfurCreeper;
+import earth.terrarium.ad_astra.client.renderer.entity.mob.model.SulfurCreeperModel;
+import earth.terrarium.ad_astra.entity.mob.SulfurCreeper;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.entity.RenderLayerParent;

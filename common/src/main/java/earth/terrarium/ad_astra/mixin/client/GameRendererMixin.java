@@ -2,7 +2,7 @@ package earth.terrarium.ad_astra.mixin.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
-import earth.terrarium.ad_astra.entities.vehicles.Rocket;
+import earth.terrarium.ad_astra.entity.vehicle.Rocket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.GameRenderer;

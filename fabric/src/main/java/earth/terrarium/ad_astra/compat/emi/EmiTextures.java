@@ -3,7 +3,7 @@ package earth.terrarium.ad_astra.compat.emi;
 import dev.emi.emi.EmiPort;
 import dev.emi.emi.api.render.EmiTexture;
 import dev.emi.emi.api.widget.WidgetHolder;
-import earth.terrarium.ad_astra.util.ModResourceLocation;
+import earth.terrarium.ad_astra.AdAstra;
 import net.fabricmc.fabric.api.transfer.v1.client.fluid.FluidVariantRendering;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
@@ -13,10 +13,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class EmiTextures {
-	public static final ResourceLocation ENERGY_EMPTY = new ModResourceLocation("textures/gui/energy_bar_empty.png");
-	public static final ResourceLocation ENERGY_FULL = new ModResourceLocation("textures/gui/energy_full.png");
-	public static final ResourceLocation FLUID_TANK_BACK = new ModResourceLocation("textures/gui/fluid_tank_back.png");
-	public static final ResourceLocation FLUID_TANK_OVERLAY = new ModResourceLocation("textures/gui/fluid_tank.png");
+	public static final ResourceLocation ENERGY_EMPTY = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/energy_bar_empty.png");
+	public static final ResourceLocation ENERGY_FULL = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/energy_full.png");
+	public static final ResourceLocation FLUID_TANK_BACK = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/fluid_tank_back.png");
+	public static final ResourceLocation FLUID_TANK_OVERLAY = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/fluid_tank.png");
 
 	public static final EmiTexture EMPTY_ENERGY_TEXTURE = new EmiTexture(ENERGY_EMPTY, 0, 0, 19, 64, 19, 64, 19, 64);
 	public static final EmiTexture FULL_ENERGY_TEXTURE = new EmiTexture(ENERGY_FULL, 0, 0, 13, 46, 13, 46, 13, 46);

@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.compat.rei.compressor;
 
 import earth.terrarium.ad_astra.compat.rei.REICategories;
-import earth.terrarium.ad_astra.recipes.CompressingRecipe;
+import earth.terrarium.ad_astra.recipe.CompressingRecipe;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.Display;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;

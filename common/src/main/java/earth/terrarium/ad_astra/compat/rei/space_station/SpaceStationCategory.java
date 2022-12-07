@@ -1,9 +1,9 @@
 package earth.terrarium.ad_astra.compat.rei.space_station;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import earth.terrarium.ad_astra.client.screens.utils.ScreenUtils;
+import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.client.screen.util.ScreenUtils;
 import earth.terrarium.ad_astra.compat.rei.REICategories;
-import earth.terrarium.ad_astra.util.ModResourceLocation;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.Renderer;
@@ -26,7 +26,7 @@ import java.util.List;
 @Environment(EnvType.CLIENT)
 public class SpaceStationCategory implements DisplayCategory<SpaceStationDisplay> {
 
-    public static final ResourceLocation ICON = new ModResourceLocation("textures/gui/space_station_icon.png");
+    public static final ResourceLocation ICON = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/space_station_icon.png");
 
     @Override
     public Renderer getIcon() {

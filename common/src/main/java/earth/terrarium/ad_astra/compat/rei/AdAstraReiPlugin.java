@@ -12,7 +12,7 @@ import earth.terrarium.ad_astra.compat.rei.oxygen_conversion.OxygenConversionCat
 import earth.terrarium.ad_astra.compat.rei.oxygen_conversion.OxygenConversionDisplay;
 import earth.terrarium.ad_astra.compat.rei.space_station.SpaceStationCategory;
 import earth.terrarium.ad_astra.compat.rei.space_station.SpaceStationDisplay;
-import earth.terrarium.ad_astra.recipes.*;
+import earth.terrarium.ad_astra.recipe.*;
 import earth.terrarium.ad_astra.registry.ModBlocks;
 import earth.terrarium.ad_astra.registry.ModItems;
 import earth.terrarium.ad_astra.registry.ModRecipeTypes;

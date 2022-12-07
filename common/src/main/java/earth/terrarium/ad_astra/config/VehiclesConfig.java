@@ -3,7 +3,6 @@ package earth.terrarium.ad_astra.config;
 import com.teamresourceful.resourcefulconfig.common.annotations.Category;
 import com.teamresourceful.resourcefulconfig.common.annotations.Comment;
 import com.teamresourceful.resourcefulconfig.common.annotations.ConfigEntry;
-import com.teamresourceful.resourcefulconfig.common.annotations.IntRange;
 import com.teamresourceful.resourcefulconfig.common.config.EntryType;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 

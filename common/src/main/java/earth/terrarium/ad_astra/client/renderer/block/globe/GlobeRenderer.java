@@ -3,8 +3,8 @@ package earth.terrarium.ad_astra.client.renderer.block.globe;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector3f;
+import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.registry.ModBlocks;
-import earth.terrarium.ad_astra.util.ModResourceLocation;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -17,12 +17,12 @@ import net.minecraft.resources.ResourceLocation;
 public class GlobeRenderer {
 
     // Textures
-    public static final ResourceLocation EARTH_GLOBE = new ModResourceLocation("textures/block/globes/earth_globe.png");
-    public static final ResourceLocation MOON_GLOBE = new ModResourceLocation("textures/block/globes/moon_globe.png");
-    public static final ResourceLocation MARS_GLOBE = new ModResourceLocation("textures/block/globes/mars_globe.png");
-    public static final ResourceLocation MERCURY_GLOBE = new ModResourceLocation("textures/block/globes/mercury_globe.png");
-    public static final ResourceLocation VENUS_GLOBE = new ModResourceLocation("textures/block/globes/venus_globe.png");
-    public static final ResourceLocation GLACIO_GLOBE = new ModResourceLocation("textures/block/globes/glacio_globe.png");
+    public static final ResourceLocation EARTH_GLOBE = new ResourceLocation(AdAstra.MOD_ID, "textures/block/globes/earth_globe.png");
+    public static final ResourceLocation MOON_GLOBE = new ResourceLocation(AdAstra.MOD_ID, "textures/block/globes/moon_globe.png");
+    public static final ResourceLocation MARS_GLOBE = new ResourceLocation(AdAstra.MOD_ID, "textures/block/globes/mars_globe.png");
+    public static final ResourceLocation MERCURY_GLOBE = new ResourceLocation(AdAstra.MOD_ID, "textures/block/globes/mercury_globe.png");
+    public static final ResourceLocation VENUS_GLOBE = new ResourceLocation(AdAstra.MOD_ID, "textures/block/globes/venus_globe.png");
+    public static final ResourceLocation GLACIO_GLOBE = new ResourceLocation(AdAstra.MOD_ID, "textures/block/globes/glacio_globe.png");
 
     // Render model
     public static void render(ResourceLocation id, GlobeModel model, Direction direction, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {

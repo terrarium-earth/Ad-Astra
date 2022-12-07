@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.mixin.client;
 
+import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.config.AdAstraConfig;
-import earth.terrarium.ad_astra.util.ModResourceLocation;
 import earth.terrarium.ad_astra.util.ModUtils;
 import earth.terrarium.ad_astra.util.OxygenUtils;
 import net.minecraft.client.Minecraft;
@@ -120,7 +120,7 @@ public class SoundManagerMixin {
         if (!AdAstraConfig.doSpaceMuffler) {
             return;
         }
-        if (sound.getLocation().equals(new ModResourceLocation("rocket_fly"))) {
+        if (sound.getLocation().equals(new ResourceLocation(AdAstra.MOD_ID, "rocket_fly"))) {
             return;
         }
 

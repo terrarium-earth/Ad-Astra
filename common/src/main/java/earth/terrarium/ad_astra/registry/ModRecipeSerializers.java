@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.registry;
 
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipeSerializer;
-import earth.terrarium.ad_astra.recipes.*;
+import earth.terrarium.ad_astra.recipe.*;
 import net.minecraft.core.Registry;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;

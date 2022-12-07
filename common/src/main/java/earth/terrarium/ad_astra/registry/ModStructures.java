@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.registry;
 
-import earth.terrarium.ad_astra.world.processor.StructureVoidProcessor;
-import earth.terrarium.ad_astra.world.structures.LargeJigsawStructure;
+import earth.terrarium.ad_astra.level.processor.StructureVoidProcessor;
+import earth.terrarium.ad_astra.level.structure.LargeJigsawStructure;
 import net.minecraft.core.Registry;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureType;

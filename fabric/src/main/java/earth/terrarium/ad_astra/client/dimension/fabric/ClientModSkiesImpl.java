@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.client.dimension.fabric;
 
-import earth.terrarium.ad_astra.client.dimension.rendering.DimensionEffects;
+import earth.terrarium.ad_astra.client.dimension.renderer.DimensionEffects;
 import earth.terrarium.ad_astra.mixin.client.LevelRendererAccessor;
 import net.fabricmc.fabric.api.client.rendering.v1.DimensionRenderingRegistry;
 import net.minecraft.client.Minecraft;

@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.compat.rei.fuel_conversion;
 
 import earth.terrarium.ad_astra.compat.rei.REICategories;
-import earth.terrarium.ad_astra.recipes.FuelConversionRecipe;
+import earth.terrarium.ad_astra.recipe.FuelConversionRecipe;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.Display;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;

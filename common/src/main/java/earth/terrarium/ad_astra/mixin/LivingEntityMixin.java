@@ -1,9 +1,9 @@
 package earth.terrarium.ad_astra.mixin;
 
-import earth.terrarium.ad_astra.entities.systems.EntityAcidRainSystem;
-import earth.terrarium.ad_astra.entities.systems.EntityOxygenSystem;
-import earth.terrarium.ad_astra.entities.systems.EntityTemperatureSystem;
-import earth.terrarium.ad_astra.entities.vehicles.Vehicle;
+import earth.terrarium.ad_astra.entity.system.EntityAcidRainSystem;
+import earth.terrarium.ad_astra.entity.system.EntityOxygenSystem;
+import earth.terrarium.ad_astra.entity.system.EntityTemperatureSystem;
+import earth.terrarium.ad_astra.entity.vehicle.Vehicle;
 import earth.terrarium.ad_astra.registry.ModTags;
 import earth.terrarium.ad_astra.util.ModUtils;
 import net.minecraft.server.level.ServerLevel;

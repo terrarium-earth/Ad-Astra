@@ -1,8 +1,8 @@
 package earth.terrarium.ad_astra.screen.menu;
 
-import earth.terrarium.ad_astra.entities.vehicles.Vehicle;
+import earth.terrarium.ad_astra.entity.vehicle.Vehicle;
 import earth.terrarium.ad_astra.networking.NetworkHandling;
-import earth.terrarium.ad_astra.networking.packets.server.MachineInfoPacket;
+import earth.terrarium.ad_astra.networking.packet.server.MachineInfoPacket;
 import earth.terrarium.ad_astra.util.CustomInventory;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;

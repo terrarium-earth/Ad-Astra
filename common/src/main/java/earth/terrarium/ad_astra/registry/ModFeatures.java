@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.registry;
 
-import earth.terrarium.ad_astra.world.features.InfernalSpireColumn;
-import earth.terrarium.ad_astra.world.features.ModifiedBlockBlobFeature;
+import earth.terrarium.ad_astra.level.feature.InfernalSpireColumn;
+import earth.terrarium.ad_astra.level.feature.ModifiedBlockBlobFeature;
 import net.minecraft.core.Registry;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.BlockStateConfiguration;

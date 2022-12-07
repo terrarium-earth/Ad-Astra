@@ -1,11 +1,10 @@
 package earth.terrarium.ad_astra.screen.menu;
 
-import earth.terrarium.ad_astra.blocks.machines.entity.NasaWorkbenchBlockEntity;
+import earth.terrarium.ad_astra.block.machine.entity.NasaWorkbenchBlockEntity;
 import earth.terrarium.ad_astra.networking.NetworkHandling;
-import earth.terrarium.ad_astra.networking.packets.server.MachineInfoPacket;
-import earth.terrarium.ad_astra.recipes.NasaWorkbenchRecipe;
+import earth.terrarium.ad_astra.networking.packet.server.MachineInfoPacket;
+import earth.terrarium.ad_astra.recipe.NasaWorkbenchRecipe;
 import earth.terrarium.ad_astra.registry.ModMenuTypes;
-import earth.terrarium.ad_astra.registry.ModRecipeTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;

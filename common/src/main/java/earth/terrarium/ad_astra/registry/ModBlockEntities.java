@@ -1,11 +1,11 @@
 package earth.terrarium.ad_astra.registry;
 
-import earth.terrarium.ad_astra.blocks.door.SlidingDoorBlockEntity;
-import earth.terrarium.ad_astra.blocks.flags.FlagBlockEntity;
-import earth.terrarium.ad_astra.blocks.globes.GlobeBlockEntity;
-import earth.terrarium.ad_astra.blocks.machines.entity.*;
-import earth.terrarium.ad_astra.blocks.pipes.CableBlockEntity;
-import earth.terrarium.ad_astra.blocks.pipes.FluidPipeBlockEntity;
+import earth.terrarium.ad_astra.block.door.SlidingDoorBlockEntity;
+import earth.terrarium.ad_astra.block.flag.FlagBlockEntity;
+import earth.terrarium.ad_astra.block.globe.GlobeBlockEntity;
+import earth.terrarium.ad_astra.block.machine.entity.*;
+import earth.terrarium.ad_astra.block.pipe.CableBlockEntity;
+import earth.terrarium.ad_astra.block.pipe.FluidPipeBlockEntity;
 import earth.terrarium.ad_astra.mixin.BlockEntityTypeAccessor;
 import earth.terrarium.botarium.api.registry.RegistryHelpers;
 import net.minecraft.core.Registry;

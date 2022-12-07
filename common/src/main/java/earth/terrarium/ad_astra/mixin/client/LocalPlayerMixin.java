@@ -1,13 +1,13 @@
 package earth.terrarium.ad_astra.mixin.client;
 
-import earth.terrarium.ad_astra.client.screens.PlayerOverlayScreen;
+import earth.terrarium.ad_astra.client.screen.PlayerOverlayScreen;
 import earth.terrarium.ad_astra.client.sound.PlanetSoundPlayer;
 import earth.terrarium.ad_astra.client.sound.PlanetWeatherSoundPlayer;
-import earth.terrarium.ad_astra.entities.vehicles.Lander;
-import earth.terrarium.ad_astra.entities.vehicles.Rocket;
-import earth.terrarium.ad_astra.entities.vehicles.Vehicle;
-import earth.terrarium.ad_astra.items.armour.JetSuit;
-import earth.terrarium.ad_astra.items.armour.SpaceSuit;
+import earth.terrarium.ad_astra.entity.vehicle.Lander;
+import earth.terrarium.ad_astra.entity.vehicle.Rocket;
+import earth.terrarium.ad_astra.entity.vehicle.Vehicle;
+import earth.terrarium.ad_astra.item.armor.JetSuit;
+import earth.terrarium.ad_astra.item.armor.SpaceSuit;
 import earth.terrarium.ad_astra.util.OxygenUtils;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import earth.terrarium.botarium.api.fluid.PlatformFluidItemHandler;

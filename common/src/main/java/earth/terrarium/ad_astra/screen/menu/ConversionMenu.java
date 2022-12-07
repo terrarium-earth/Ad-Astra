@@ -1,8 +1,8 @@
 package earth.terrarium.ad_astra.screen.menu;
 
-import earth.terrarium.ad_astra.blocks.machines.entity.FluidMachineBlockEntity;
+import earth.terrarium.ad_astra.block.machine.entity.FluidMachineBlockEntity;
 import earth.terrarium.ad_astra.networking.NetworkHandling;
-import earth.terrarium.ad_astra.networking.packets.server.MachineInfoPacket;
+import earth.terrarium.ad_astra.networking.packet.server.MachineInfoPacket;
 import earth.terrarium.ad_astra.registry.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;

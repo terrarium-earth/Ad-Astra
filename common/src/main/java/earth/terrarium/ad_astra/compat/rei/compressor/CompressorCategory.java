@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.compat.rei.compressor;
 
 import earth.terrarium.ad_astra.compat.rei.REICategories;
-import earth.terrarium.ad_astra.compat.rei.widgets.EnergyBarWidget;
+import earth.terrarium.ad_astra.compat.rei.widget.EnergyBarWidget;
 import earth.terrarium.ad_astra.config.CompressorConfig;
 import earth.terrarium.ad_astra.registry.ModBlocks;
 import me.shedaniel.math.Point;

@@ -1,8 +1,8 @@
 package earth.terrarium.ad_astra.client.renderer.block.globe;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import earth.terrarium.ad_astra.blocks.globes.GlobeBlock;
-import earth.terrarium.ad_astra.blocks.globes.GlobeBlockEntity;
+import earth.terrarium.ad_astra.block.globe.GlobeBlock;
+import earth.terrarium.ad_astra.block.globe.GlobeBlockEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.MultiBufferSource;

@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.mixin.client;
 
-import earth.terrarium.ad_astra.entities.vehicles.Vehicle;
-import earth.terrarium.ad_astra.items.HoldableOverHead;
+import earth.terrarium.ad_astra.entity.vehicle.Vehicle;
+import earth.terrarium.ad_astra.item.HoldableOverHead;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;

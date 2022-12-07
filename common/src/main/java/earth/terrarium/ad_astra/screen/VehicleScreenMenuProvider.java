@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.screen;
 
-import earth.terrarium.ad_astra.entities.vehicles.Vehicle;
+import earth.terrarium.ad_astra.entity.vehicle.Vehicle;
 import earth.terrarium.ad_astra.screen.menu.VehicleMenu;
 import earth.terrarium.botarium.api.menu.ExtraDataMenuProvider;
 import net.minecraft.network.FriendlyByteBuf;

@@ -2,8 +2,8 @@ package earth.terrarium.ad_astra.compat.rei.cryo_freezer;
 
 import dev.architectury.fluid.FluidStack;
 import earth.terrarium.ad_astra.compat.rei.REICategories;
-import earth.terrarium.ad_astra.compat.rei.widgets.EnergyBarWidget;
-import earth.terrarium.ad_astra.compat.rei.widgets.FluidBarWidget;
+import earth.terrarium.ad_astra.compat.rei.widget.EnergyBarWidget;
+import earth.terrarium.ad_astra.compat.rei.widget.FluidBarWidget;
 import earth.terrarium.ad_astra.config.CryoFreezerConfig;
 import earth.terrarium.ad_astra.registry.ModBlocks;
 import earth.terrarium.botarium.api.fluid.FluidHooks;

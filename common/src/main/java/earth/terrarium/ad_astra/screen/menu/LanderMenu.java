@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.screen.menu;
 
-import earth.terrarium.ad_astra.entities.vehicles.Vehicle;
+import earth.terrarium.ad_astra.entity.vehicle.Vehicle;
 import earth.terrarium.ad_astra.registry.ModMenuTypes;
 import earth.terrarium.ad_astra.screen.NoInventorySlot;
 import earth.terrarium.botarium.api.fluid.FluidHooks;

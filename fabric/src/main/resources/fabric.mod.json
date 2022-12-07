@@ -19,7 +19,7 @@
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/ad-astra",
     "sources": "https://github.com/terrarium-earth/Ad-Astra"
   },
-  "license": "MIT",
+  "license": "Terrarium Licence",
   "icon": "icon.png",
   "environment": "*",
   "entrypoints": {
@@ -57,8 +57,8 @@
   "depends": {
     "fabric": "*",
     "minecraft": ">=1.19",
-    "resourcefulconfig": ">=1.0.7",
-    "botarium": ">=1.7.10",
+    "resourcefulconfig": ">=1.0.14",
+    "botarium": ">=1.7.12",
     "resourcefullib": ">=1.1.17"
   }
 }

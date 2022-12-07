@@ -1,17 +1,17 @@
 package earth.terrarium.ad_astra.registry;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
-import earth.terrarium.ad_astra.blocks.machines.entity.SolarPanelBlockEntity;
+import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.block.machine.entity.SolarPanelBlockEntity;
 import earth.terrarium.ad_astra.config.AdAstraConfig;
 import earth.terrarium.ad_astra.config.CoalGeneratorConfig;
 import earth.terrarium.ad_astra.config.WaterPumpConfig;
-import earth.terrarium.ad_astra.items.*;
-import earth.terrarium.ad_astra.items.armour.JetSuit;
-import earth.terrarium.ad_astra.items.armour.NetheriteSpaceSuit;
-import earth.terrarium.ad_astra.items.armour.SpaceSuit;
-import earth.terrarium.ad_astra.items.vehicles.RocketItem;
-import earth.terrarium.ad_astra.items.vehicles.RoverItem;
-import earth.terrarium.ad_astra.util.ModResourceLocation;
+import earth.terrarium.ad_astra.item.*;
+import earth.terrarium.ad_astra.item.armor.JetSuit;
+import earth.terrarium.ad_astra.item.armor.NetheriteSpaceSuit;
+import earth.terrarium.ad_astra.item.armor.SpaceSuit;
+import earth.terrarium.ad_astra.item.vehicle.RocketItem;
+import earth.terrarium.ad_astra.item.vehicle.RoverItem;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import earth.terrarium.botarium.api.registry.fluid.FluidBucketItem;
 import net.minecraft.ChatFormatting;
@@ -19,6 +19,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
@@ -36,7 +37,7 @@ import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
 public class ModItems {
-    public static final CreativeModeTab ITEM_GROUP = ModRegistryHelpers.createTab(new ModResourceLocation("main"), () -> new ItemStack(ModItems.TIER_1_ROCKET.get()));
+    public static final CreativeModeTab ITEM_GROUP = ModRegistryHelpers.createTab(new ResourceLocation(AdAstra.MOD_ID, "main"), () -> new ItemStack(ModItems.TIER_1_ROCKET.get()));
     public static final Set<Item> items = new HashSet<>();
 
     // Vehicles Items

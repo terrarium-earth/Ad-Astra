@@ -1,12 +1,6 @@
 package earth.terrarium.ad_astra.mixin.forge;
 
-import java.util.List;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.spongepowered.asm.mixin.Mixin;
-
-import earth.terrarium.ad_astra.entities.mobs.GlacianRam;
+import earth.terrarium.ad_astra.entity.mob.GlacianRam;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
@@ -15,6 +9,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.IForgeShearable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.spongepowered.asm.mixin.Mixin;
+
+import java.util.List;
 
 @Mixin(GlacianRam.class)
 public abstract class GlacianRamMixin extends Animal implements IForgeShearable {

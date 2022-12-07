@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.client.dimension.forge;
 
-import earth.terrarium.ad_astra.client.dimension.rendering.DimensionEffects;
+import earth.terrarium.ad_astra.client.dimension.renderer.DimensionEffects;
 import net.minecraft.client.renderer.DimensionSpecialEffects;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;

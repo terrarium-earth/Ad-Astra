@@ -1,7 +1,7 @@
 modLoader = "javafml"
 loaderVersion = "[43,)"
 issueTrackerURL = "https://github.com/terrarium-earth/Ad-Astra/issues"
-license = "MIT"
+license = "Terrarium Licence"
 
 [[mods]]
 modId = "ad_astra"
@@ -28,14 +28,14 @@ side = "BOTH"
 [[dependencies.ad_astra]]
 modId = "resourcefulconfig"
 mandatory = true
-versionRange = "[1.0.7,)"
+versionRange = "[1.0.14,)"
 ordering = "AFTER"
 side = "BOTH"
 
 [[dependencies.ad_astra]]
 modId = "botarium"
 mandatory = true
-versionRange = "[1.7.10,)"
+versionRange = "[1.7.12,)"
 ordering = "NONE"
 side = "BOTH"
 

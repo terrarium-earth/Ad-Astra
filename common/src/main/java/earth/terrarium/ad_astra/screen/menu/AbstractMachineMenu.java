@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.screen.menu;
 
-import earth.terrarium.ad_astra.blocks.machines.entity.AbstractMachineBlockEntity;
+import earth.terrarium.ad_astra.block.machine.entity.AbstractMachineBlockEntity;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.minecraft.world.entity.player.Inventory;

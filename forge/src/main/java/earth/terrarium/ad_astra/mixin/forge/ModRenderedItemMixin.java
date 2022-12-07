@@ -1,8 +1,8 @@
 package earth.terrarium.ad_astra.mixin.forge;
 
 import earth.terrarium.ad_astra.client.forge.AdAstraClientForge;
-import earth.terrarium.ad_astra.items.ModRenderedBlockItem;
-import earth.terrarium.ad_astra.items.ModRenderedItem;
+import earth.terrarium.ad_astra.item.ModRenderedBlockItem;
+import earth.terrarium.ad_astra.item.ModRenderedItem;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;

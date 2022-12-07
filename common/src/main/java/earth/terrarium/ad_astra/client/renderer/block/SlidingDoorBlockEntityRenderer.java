@@ -2,11 +2,11 @@ package earth.terrarium.ad_astra.client.renderer.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
-import earth.terrarium.ad_astra.blocks.door.SlidingDoorBlock;
-import earth.terrarium.ad_astra.blocks.door.SlidingDoorBlockEntity;
+import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.block.door.SlidingDoorBlock;
+import earth.terrarium.ad_astra.block.door.SlidingDoorBlockEntity;
 import earth.terrarium.ad_astra.client.AdAstraClient;
 import earth.terrarium.ad_astra.registry.ModBlocks;
-import earth.terrarium.ad_astra.util.ModResourceLocation;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -20,21 +20,21 @@ import net.minecraft.world.level.block.Block;
 @Environment(EnvType.CLIENT)
 public class SlidingDoorBlockEntityRenderer implements BlockEntityRenderer<SlidingDoorBlockEntity> {
 
-    public static final ResourceLocation IRON_SLIDING_DOOR_MODEL = new ModResourceLocation("block/door/iron_sliding_door");
-    public static final ResourceLocation STEEL_SLIDING_DOOR_MODEL = new ModResourceLocation("block/door/steel_sliding_door");
-    public static final ResourceLocation DESH_SLIDING_DOOR_MODEL = new ModResourceLocation("block/door/desh_sliding_door");
-    public static final ResourceLocation OSTRUM_SLIDING_DOOR_MODEL = new ModResourceLocation("block/door/ostrum_sliding_door");
-    public static final ResourceLocation CALORITE_SLIDING_DOOR_MODEL = new ModResourceLocation("block/door/calorite_sliding_door");
-    public static final ResourceLocation AIRLOCK_MODEL = new ModResourceLocation("block/door/airlock");
-    public static final ResourceLocation REINFORCED_DOOR_MODEL = new ModResourceLocation("block/door/reinforced_door");
+    public static final ResourceLocation IRON_SLIDING_DOOR_MODEL = new ResourceLocation(AdAstra.MOD_ID, "block/door/iron_sliding_door");
+    public static final ResourceLocation STEEL_SLIDING_DOOR_MODEL = new ResourceLocation(AdAstra.MOD_ID, "block/door/steel_sliding_door");
+    public static final ResourceLocation DESH_SLIDING_DOOR_MODEL = new ResourceLocation(AdAstra.MOD_ID, "block/door/desh_sliding_door");
+    public static final ResourceLocation OSTRUM_SLIDING_DOOR_MODEL = new ResourceLocation(AdAstra.MOD_ID, "block/door/ostrum_sliding_door");
+    public static final ResourceLocation CALORITE_SLIDING_DOOR_MODEL = new ResourceLocation(AdAstra.MOD_ID, "block/door/calorite_sliding_door");
+    public static final ResourceLocation AIRLOCK_MODEL = new ResourceLocation(AdAstra.MOD_ID, "block/door/airlock");
+    public static final ResourceLocation REINFORCED_DOOR_MODEL = new ResourceLocation(AdAstra.MOD_ID, "block/door/reinforced_door");
 
-    public static final ResourceLocation IRON_SLIDING_DOOR_MODEL_FLIPPED = new ModResourceLocation("block/door/iron_sliding_door_flipped");
-    public static final ResourceLocation STEEL_SLIDING_DOOR_MODEL_FLIPPED = new ModResourceLocation("block/door/steel_sliding_door_flipped");
-    public static final ResourceLocation DESH_SLIDING_DOOR_MODEL_FLIPPED = new ModResourceLocation("block/door/desh_sliding_door_flipped");
-    public static final ResourceLocation OSTRUM_SLIDING_DOOR_MODEL_FLIPPED = new ModResourceLocation("block/door/ostrum_sliding_door_flipped");
-    public static final ResourceLocation CALORITE_SLIDING_MODEL_FLIPPED = new ModResourceLocation("block/door/calorite_sliding_door_flipped");
-    public static final ResourceLocation AIRLOCK_MODEL_FLIPPED = new ModResourceLocation("block/door/airlock_flipped");
-    public static final ResourceLocation REINFORCED_DOOR_MODEL_FLIPPED = new ModResourceLocation("block/door/reinforced_door_flipped");
+    public static final ResourceLocation IRON_SLIDING_DOOR_MODEL_FLIPPED = new ResourceLocation(AdAstra.MOD_ID, "block/door/iron_sliding_door_flipped");
+    public static final ResourceLocation STEEL_SLIDING_DOOR_MODEL_FLIPPED = new ResourceLocation(AdAstra.MOD_ID, "block/door/steel_sliding_door_flipped");
+    public static final ResourceLocation DESH_SLIDING_DOOR_MODEL_FLIPPED = new ResourceLocation(AdAstra.MOD_ID, "block/door/desh_sliding_door_flipped");
+    public static final ResourceLocation OSTRUM_SLIDING_DOOR_MODEL_FLIPPED = new ResourceLocation(AdAstra.MOD_ID, "block/door/ostrum_sliding_door_flipped");
+    public static final ResourceLocation CALORITE_SLIDING_MODEL_FLIPPED = new ResourceLocation(AdAstra.MOD_ID, "block/door/calorite_sliding_door_flipped");
+    public static final ResourceLocation AIRLOCK_MODEL_FLIPPED = new ResourceLocation(AdAstra.MOD_ID, "block/door/airlock_flipped");
+    public static final ResourceLocation REINFORCED_DOOR_MODEL_FLIPPED = new ResourceLocation(AdAstra.MOD_ID, "block/door/reinforced_door_flipped");
 
     public SlidingDoorBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {
     }
@@ -99,7 +99,8 @@ public class SlidingDoorBlockEntityRenderer implements BlockEntityRenderer<Slidi
             poseStack.translate(0.0f, 0.0f, offset);
         }
         poseStack.mulPose(Vector3f.YP.rotationDegrees(degrees.getOpposite().toYRot()));
-        AdAstraClient.renderBlock(((degrees.equals(Direction.WEST) || degrees.equals(Direction.EAST)) ? doorModel : doorModelFlipped), poseStack, buffer, packedLight, packedOverlay);
+        boolean shouldNotFlip = degrees.equals(Direction.WEST) || degrees.equals(Direction.EAST);
+        AdAstraClient.renderBlock((shouldNotFlip ? doorModel : doorModelFlipped), poseStack, buffer, packedLight, packedOverlay);
         poseStack.popPose();
 
         poseStack.pushPose();
@@ -121,7 +122,7 @@ public class SlidingDoorBlockEntityRenderer implements BlockEntityRenderer<Slidi
             poseStack.translate(0.0f, 0.0f, offset);
         }
         poseStack.mulPose(Vector3f.YP.rotationDegrees(degrees.getOpposite().toYRot()));
-        AdAstraClient.renderBlock((degrees.equals(Direction.WEST) || degrees.equals(Direction.EAST)) ? doorModelFlipped : doorModel, poseStack, buffer, packedLight, packedOverlay);
+        AdAstraClient.renderBlock(shouldNotFlip ? doorModelFlipped : doorModel, poseStack, buffer, packedLight, packedOverlay);
         poseStack.popPose();
     }
 }

@@ -2,8 +2,8 @@ package earth.terrarium.ad_astra.client.renderer.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
-import earth.terrarium.ad_astra.blocks.machines.AbstractMachineBlock;
-import earth.terrarium.ad_astra.blocks.machines.entity.EnergizerBlockEntity;
+import earth.terrarium.ad_astra.block.machine.AbstractMachineBlock;
+import earth.terrarium.ad_astra.block.machine.entity.EnergizerBlockEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;

@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.fabric;
 
 import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.ad_astra.items.AstroduxItem;
+import earth.terrarium.ad_astra.item.AstroduxItem;
 import earth.terrarium.ad_astra.networking.NetworkHandling;
 import earth.terrarium.ad_astra.registry.ModCommands;
 import earth.terrarium.ad_astra.registry.ModEntityTypes;

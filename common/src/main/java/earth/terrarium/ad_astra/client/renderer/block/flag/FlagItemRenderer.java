@@ -1,8 +1,8 @@
 package earth.terrarium.ad_astra.client.renderer.block.flag;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.AdAstraClient;
-import earth.terrarium.ad_astra.util.ModResourceLocation;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
@@ -24,7 +24,7 @@ FlagItemRenderer extends BlockEntityWithoutLevelRenderer {
 
     @Override
     public void renderByItem(ItemStack stack, ItemTransforms.TransformType mode, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
-        ResourceLocation model = new ModResourceLocation("block/flag/" + Registry.ITEM.getKey(stack.getItem()).getPath());
+        ResourceLocation model = new ResourceLocation(AdAstra.MOD_ID, "block/flag/" + Registry.ITEM.getKey(stack.getItem()).getPath());
         AdAstraClient.renderBlock(model, poseStack, buffer, packedLight, packedOverlay);
     }
 }

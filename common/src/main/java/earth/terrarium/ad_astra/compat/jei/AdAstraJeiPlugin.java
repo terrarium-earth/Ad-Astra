@@ -1,9 +1,9 @@
 package earth.terrarium.ad_astra.compat.jei;
 
-import earth.terrarium.ad_astra.compat.jei.categories.*;
+import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.compat.jei.category.*;
 import earth.terrarium.ad_astra.registry.ModItems;
 import earth.terrarium.ad_astra.registry.ModRecipeTypes;
-import earth.terrarium.ad_astra.util.ModResourceLocation;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -19,7 +19,7 @@ import net.minecraft.world.level.Level;
 public class AdAstraJeiPlugin implements IModPlugin {
     @Override
     public ResourceLocation getPluginUid() {
-        return new ModResourceLocation("jei");
+        return new ResourceLocation(AdAstra.MOD_ID, "jei");
     }
 
     @Override

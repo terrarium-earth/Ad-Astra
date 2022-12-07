@@ -4,7 +4,7 @@ import com.mojang.math.Vector3f;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamresourceful.resourcefullib.common.color.Color;
-import earth.terrarium.ad_astra.client.dimension.rendering.StarInformation;
+import earth.terrarium.ad_astra.client.dimension.renderer.StarInformation;
 import earth.terrarium.ad_astra.util.ModUtils;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

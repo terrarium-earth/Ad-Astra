@@ -9,7 +9,7 @@ import dev.emi.emi.api.widget.WidgetHolder;
 import earth.terrarium.ad_astra.compat.emi.EmiCategories;
 import earth.terrarium.ad_astra.compat.emi.EmiTextures;
 import earth.terrarium.ad_astra.config.CompressorConfig;
-import earth.terrarium.ad_astra.recipes.CompressingRecipe;
+import earth.terrarium.ad_astra.recipe.CompressingRecipe;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.resources.ResourceLocation;
 

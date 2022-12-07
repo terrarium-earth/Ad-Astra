@@ -1,8 +1,8 @@
 package earth.terrarium.ad_astra.client.registry;
 
-import earth.terrarium.ad_astra.client.particles.LargeFlameParticle;
-import earth.terrarium.ad_astra.client.particles.OxygenBubbleParticle;
-import earth.terrarium.ad_astra.client.particles.SmallFlameParticle;
+import earth.terrarium.ad_astra.client.particle.LargeFlameParticle;
+import earth.terrarium.ad_astra.client.particle.OxygenBubbleParticle;
+import earth.terrarium.ad_astra.client.particle.SmallFlameParticle;
 import earth.terrarium.ad_astra.registry.ModParticleTypes;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

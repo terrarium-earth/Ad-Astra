@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.registry;
 
 import dev.architectury.injectables.targets.ArchitecturyTarget;
-import earth.terrarium.ad_astra.util.ModResourceLocation;
+import earth.terrarium.ad_astra.AdAstra;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -11,18 +11,18 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 
 public class ModTags {
-    public static final TagKey<EntityType<?>> FIRE_IMMUNE = TagKey.create(Registry.ENTITY_TYPE_REGISTRY, new ModResourceLocation("entities/fire_immune"));
-    public static final TagKey<EntityType<?>> LIVES_WITHOUT_OXYGEN = TagKey.create(Registry.ENTITY_TYPE_REGISTRY, new ModResourceLocation("entities/lives_without_oxygen"));
-    public static final TagKey<Item> FREEZE_RESISTANT = TagKey.create(Registry.ITEM_REGISTRY, new ModResourceLocation("freeze_resistant"));
-    public static final TagKey<Item> HEAT_RESISTANT = TagKey.create(Registry.ITEM_REGISTRY, new ModResourceLocation("heat_resistant"));
-    public static final TagKey<Item> OXYGENATED_ARMOR = TagKey.create(Registry.ITEM_REGISTRY, new ModResourceLocation("oxygenated_armor"));
-    public static final TagKey<Item> GLACIAN_LOGS = TagKey.create(Registry.ITEM_REGISTRY, new ModResourceLocation("glacian_logs"));
-    public static final TagKey<Item> AERONOS_CAPS = TagKey.create(Registry.ITEM_REGISTRY, new ModResourceLocation("aeronos_caps"));
-    public static final TagKey<Item> STROPHAR_CAPS = TagKey.create(Registry.ITEM_REGISTRY, new ModResourceLocation("strophar_caps"));
-    public static final TagKey<Block> BURNS_OUT = TagKey.create(Registry.BLOCK_REGISTRY, new ModResourceLocation("burns_out"));
+    public static final TagKey<EntityType<?>> FIRE_IMMUNE = TagKey.create(Registry.ENTITY_TYPE_REGISTRY, new ResourceLocation(AdAstra.MOD_ID, "entities/fire_immune"));
+    public static final TagKey<EntityType<?>> LIVES_WITHOUT_OXYGEN = TagKey.create(Registry.ENTITY_TYPE_REGISTRY, new ResourceLocation(AdAstra.MOD_ID, "entities/lives_without_oxygen"));
+    public static final TagKey<Item> FREEZE_RESISTANT = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(AdAstra.MOD_ID, "freeze_resistant"));
+    public static final TagKey<Item> HEAT_RESISTANT = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(AdAstra.MOD_ID, "heat_resistant"));
+    public static final TagKey<Item> OXYGENATED_ARMOR = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(AdAstra.MOD_ID, "oxygenated_armor"));
+    public static final TagKey<Item> GLACIAN_LOGS = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(AdAstra.MOD_ID, "glacian_logs"));
+    public static final TagKey<Item> AERONOS_CAPS = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(AdAstra.MOD_ID, "aeronos_caps"));
+    public static final TagKey<Item> STROPHAR_CAPS = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(AdAstra.MOD_ID, "strophar_caps"));
+    public static final TagKey<Block> BURNS_OUT = TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(AdAstra.MOD_ID, "burns_out"));
 
     public static final TagKey<Fluid> FUELS = TagKey.create(Registry.FLUID_REGISTRY, new ResourceLocation(getCommonNamespace() + ":fuel"));
-    public static final TagKey<Fluid> EFFICIENT_FUELS = TagKey.create(Registry.FLUID_REGISTRY, new ModResourceLocation("efficient_fuel"));
+    public static final TagKey<Fluid> EFFICIENT_FUELS = TagKey.create(Registry.FLUID_REGISTRY, new ResourceLocation(AdAstra.MOD_ID, "efficient_fuel"));
     public static final TagKey<Fluid> OXYGEN = TagKey.create(Registry.FLUID_REGISTRY, new ResourceLocation(getCommonNamespace() + ":oxygen"));
     public static final TagKey<Fluid> OIL = TagKey.create(Registry.FLUID_REGISTRY, new ResourceLocation(getCommonNamespace() + ":oil"));
 

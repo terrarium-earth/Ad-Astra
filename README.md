@@ -5,7 +5,8 @@
     </p>
 </a>
 
-Also uses [Botarium](https://github.com/terrarium-earth/Botarium)
+Also uses [Botarium](https://modrinth.com/mod/botarium)
+Also uses [Resourceful Config](https://modrinth.com/mod/resourceful-config)
 
 ![Banner](https://cdn.discordapp.com/attachments/1023678603289972797/1043017562885197835/Ad_Astra_Banner.png?width=1440&height=691)
 

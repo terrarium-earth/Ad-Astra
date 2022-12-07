@@ -5,7 +5,6 @@ import earth.terrarium.ad_astra.config.AdAstraConfig;
 import earth.terrarium.ad_astra.data.PlanetData;
 import earth.terrarium.ad_astra.networking.NetworkHandling;
 import earth.terrarium.ad_astra.registry.*;
-import earth.terrarium.ad_astra.util.ModResourceLocation;
 import earth.terrarium.ad_astra.util.PlatformUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.PreparableReloadListener;
@@ -44,7 +43,7 @@ public class AdAstra {
     }
 
     public static void onRegisterReloadListeners(BiConsumer<ResourceLocation, PreparableReloadListener> registry) {
-        registry.accept(new ModResourceLocation("planet_data"), new PlanetData());
+        registry.accept(new ResourceLocation(AdAstra.MOD_ID, "planet_data"), new PlanetData());
     }
 
     public static void postInit() {

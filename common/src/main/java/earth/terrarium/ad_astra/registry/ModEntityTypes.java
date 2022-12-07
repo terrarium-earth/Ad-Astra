@@ -2,10 +2,10 @@ package earth.terrarium.ad_astra.registry;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.ad_astra.entities.SpacePainting;
-import earth.terrarium.ad_astra.entities.mobs.*;
-import earth.terrarium.ad_astra.entities.projectiles.IceSpit;
-import earth.terrarium.ad_astra.entities.vehicles.*;
+import earth.terrarium.ad_astra.entity.SpacePainting;
+import earth.terrarium.ad_astra.entity.mob.*;
+import earth.terrarium.ad_astra.entity.projectile.IceSpit;
+import earth.terrarium.ad_astra.entity.vehicle.*;
 import net.minecraft.core.Registry;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;

@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.mixin.forge;
 
 import earth.terrarium.ad_astra.client.forge.ModArmourExtension;
-import earth.terrarium.ad_astra.items.armour.SpaceSuit;
+import earth.terrarium.ad_astra.item.armor.SpaceSuit;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.spongepowered.asm.mixin.Mixin;
 

@@ -3,7 +3,7 @@ package earth.terrarium.ad_astra.forge;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.AdAstraClient;
 import earth.terrarium.ad_astra.client.forge.AdAstraClientForge;
-import earth.terrarium.ad_astra.items.AstroduxItem;
+import earth.terrarium.ad_astra.item.AstroduxItem;
 import earth.terrarium.ad_astra.networking.NetworkHandling;
 import earth.terrarium.ad_astra.registry.ModCommands;
 import earth.terrarium.ad_astra.registry.ModEntityTypes;

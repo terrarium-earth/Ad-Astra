@@ -6,10 +6,10 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector3f;
 import com.mojang.math.Vector4f;
-import earth.terrarium.ad_astra.blocks.flags.FlagBlock;
-import earth.terrarium.ad_astra.blocks.flags.FlagBlockEntity;
+import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.block.flag.FlagBlock;
+import earth.terrarium.ad_astra.block.flag.FlagBlockEntity;
 import earth.terrarium.ad_astra.client.AdAstraClient;
-import earth.terrarium.ad_astra.util.ModResourceLocation;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
@@ -37,7 +37,7 @@ public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEnt
     @Override
     public void render(FlagBlockEntity entity, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
         if (entity.getBlockState().getValue(FlagBlock.HALF).equals(DoubleBlockHalf.LOWER)) {
-            ResourceLocation texture = new ModResourceLocation("block/flag/" + Registry.BLOCK.getKey(entity.getBlockState().getBlock()).getPath());
+            ResourceLocation texture = new ResourceLocation(AdAstra.MOD_ID, "block/flag/" + Registry.BLOCK.getKey(entity.getBlockState().getBlock()).getPath());
             poseStack.pushPose();
 
             poseStack.translate(0.5D, 0.5D, 0.5D);

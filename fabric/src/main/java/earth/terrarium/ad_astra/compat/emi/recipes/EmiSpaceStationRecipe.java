@@ -6,8 +6,8 @@ import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
 import earth.terrarium.ad_astra.compat.emi.EmiCategories;
-import earth.terrarium.ad_astra.recipes.IngredientHolder;
-import earth.terrarium.ad_astra.recipes.SpaceStationRecipe;
+import earth.terrarium.ad_astra.recipe.IngredientHolder;
+import earth.terrarium.ad_astra.recipe.SpaceStationRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 

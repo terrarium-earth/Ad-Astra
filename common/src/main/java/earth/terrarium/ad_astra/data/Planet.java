@@ -13,7 +13,7 @@ public record Planet(String translation, ResourceLocation galaxy, ResourceLocati
                      ResourceKey<Level> level,
                      ResourceKey<Level> orbitWorld, ResourceKey<Level> parentWorld, int rocketTier, float gravity,
                      boolean hasAtmosphere, int daysInYear, float temperature, long solarPower, long orbitSolarPower,
-                     boolean hasOxygen, ButtonColour buttonColour) {
+                     boolean hasOxygen, ButtonColor buttonColor) {
 
     public static final Codec<Planet> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.STRING.fieldOf("translation").forGetter(Planet::translation),
@@ -30,11 +30,11 @@ public record Planet(String translation, ResourceLocation galaxy, ResourceLocati
             Codec.LONG.fieldOf("solar_power").forGetter(Planet::solarPower),
             Codec.LONG.fieldOf("orbit_solar_power").forGetter(Planet::orbitSolarPower),
             Codec.BOOL.fieldOf("has_oxygen").forGetter(Planet::hasOxygen),
-            ButtonColour.CODEC.fieldOf("button_color").forGetter(Planet::buttonColour)
+            ButtonColor.CODEC.fieldOf("button_color").forGetter(Planet::buttonColor)
     ).apply(instance, Planet::new));
 
-    public Planet(String translation, ResourceLocation galaxy, ResourceLocation solarSystem, ResourceKey<Level> level, ResourceKey<Level> orbitWorld, Optional<ResourceKey<Level>> parentWorld, int rocketTier, float gravity, boolean hasAtmosphere, int daysInYear, float temperature, long solarPower, long orbitSolarPower, boolean hasOxygen, ButtonColour buttonColour) {
-        this(translation, galaxy, solarSystem, level, orbitWorld, parentWorld.orElse(null), rocketTier, gravity, hasAtmosphere, daysInYear, temperature, solarPower, orbitSolarPower, hasOxygen, buttonColour);
+    public Planet(String translation, ResourceLocation galaxy, ResourceLocation solarSystem, ResourceKey<Level> level, ResourceKey<Level> orbitWorld, Optional<ResourceKey<Level>> parentWorld, int rocketTier, float gravity, boolean hasAtmosphere, int daysInYear, float temperature, long solarPower, long orbitSolarPower, boolean hasOxygen, ButtonColor buttonColor) {
+        this(translation, galaxy, solarSystem, level, orbitWorld, parentWorld.orElse(null), rocketTier, gravity, hasAtmosphere, daysInYear, temperature, solarPower, orbitSolarPower, hasOxygen, buttonColor);
     }
 
     private Optional<ResourceKey<Level>> getParentlevel() {

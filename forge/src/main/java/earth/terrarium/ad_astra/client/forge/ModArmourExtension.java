@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.client.forge;
 
-import earth.terrarium.ad_astra.client.renderer.armour.ArmourModelSupplier;
-import earth.terrarium.ad_astra.client.renderer.armour.forge.ArmourRenderersImpl;
+import earth.terrarium.ad_astra.client.renderer.armor.ArmourModelSupplier;
+import earth.terrarium.ad_astra.client.renderer.armor.forge.ArmourRenderersImpl;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.Model;
 import net.minecraft.world.entity.EquipmentSlot;

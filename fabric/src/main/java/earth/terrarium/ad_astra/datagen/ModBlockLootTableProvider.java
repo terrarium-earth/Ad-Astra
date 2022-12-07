@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.datagen;
 
-import earth.terrarium.ad_astra.blocks.door.LocationState;
-import earth.terrarium.ad_astra.blocks.door.SlidingDoorBlock;
+import earth.terrarium.ad_astra.block.door.LocationState;
+import earth.terrarium.ad_astra.block.door.SlidingDoorBlock;
 import earth.terrarium.ad_astra.registry.ModBlocks;
 import earth.terrarium.ad_astra.registry.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;

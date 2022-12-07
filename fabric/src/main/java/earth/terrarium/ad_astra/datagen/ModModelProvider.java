@@ -3,7 +3,6 @@ package earth.terrarium.ad_astra.datagen;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.mixin.fabric.StairBlockAccessor;
 import earth.terrarium.ad_astra.registry.ModBlocks;
-import earth.terrarium.ad_astra.util.ModResourceLocation;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.core.Registry;
@@ -44,8 +43,8 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.createDoor(ModBlocks.GLACIAN_DOOR.get());
         blockStateModelGenerator.createTrapdoor(ModBlocks.GLACIAN_TRAPDOOR.get());
 
-        blockStateModelGenerator.blockEntityModels(new ModResourceLocation("block/aeronos_chest"), ModBlocks.AERONOS_PLANKS.get()).createWithoutBlockItem(ModBlocks.AERONOS_CHEST.get());
-        blockStateModelGenerator.blockEntityModels(new ModResourceLocation("block/strophar_chest"), ModBlocks.STROPHAR_PLANKS.get()).createWithoutBlockItem(ModBlocks.STROPHAR_CHEST.get());
+        blockStateModelGenerator.blockEntityModels(new ResourceLocation(AdAstra.MOD_ID, "block/aeronos_chest"), ModBlocks.AERONOS_PLANKS.get()).createWithoutBlockItem(ModBlocks.AERONOS_CHEST.get());
+        blockStateModelGenerator.blockEntityModels(new ResourceLocation(AdAstra.MOD_ID, "block/strophar_chest"), ModBlocks.STROPHAR_PLANKS.get()).createWithoutBlockItem(ModBlocks.STROPHAR_CHEST.get());
         blockStateModelGenerator.createDoor(ModBlocks.AERONOS_DOOR.get());
         blockStateModelGenerator.createTrapdoor(ModBlocks.AERONOS_TRAPDOOR.get());
         blockStateModelGenerator.createDoor(ModBlocks.STROPHAR_DOOR.get());

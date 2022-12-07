@@ -2,7 +2,7 @@ package earth.terrarium.ad_astra.client.dimension;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import earth.terrarium.ad_astra.client.AdAstraClient;
-import earth.terrarium.ad_astra.client.dimension.rendering.DimensionEffects;
+import earth.terrarium.ad_astra.client.dimension.renderer.DimensionEffects;
 import earth.terrarium.ad_astra.client.resourcepack.PlanetSkyRenderer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

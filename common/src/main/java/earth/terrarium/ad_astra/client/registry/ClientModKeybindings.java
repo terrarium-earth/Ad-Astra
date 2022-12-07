@@ -1,9 +1,9 @@
 package earth.terrarium.ad_astra.client.registry;
 
-import earth.terrarium.ad_astra.entities.vehicles.Rocket;
+import earth.terrarium.ad_astra.entity.vehicle.Rocket;
 import earth.terrarium.ad_astra.networking.NetworkHandling;
-import earth.terrarium.ad_astra.networking.packets.client.KeybindPacket;
-import earth.terrarium.ad_astra.networking.packets.client.LaunchRocketPacket;
+import earth.terrarium.ad_astra.networking.packet.client.KeybindPacket;
+import earth.terrarium.ad_astra.networking.packet.client.LaunchRocketPacket;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
