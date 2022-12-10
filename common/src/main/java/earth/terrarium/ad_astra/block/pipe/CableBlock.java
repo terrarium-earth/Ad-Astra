@@ -2,11 +2,17 @@ package earth.terrarium.ad_astra.block.pipe;
 
 import earth.terrarium.ad_astra.registry.ModSoundEvents;
 import earth.terrarium.botarium.api.energy.EnergyHooks;
+import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -20,6 +26,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CableBlock extends AbstractPipeBlock {
@@ -47,6 +54,12 @@ public class CableBlock extends AbstractPipeBlock {
         super(transferRate, decay, size, settings);
         this.registerDefaultState(defaultBlockState().setValue(UP, false).setValue(DOWN, false).setValue(NORTH, false).setValue(EAST, false).setValue(SOUTH, false).setValue(WEST, false).setValue(WATERLOGGED, false));
         this.stateDefinition.getPossibleStates().forEach(state -> shapes.put(state, this.createShape(state)));
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, BlockGetter level, List<Component> tooltip, TooltipFlag flag) {
+        super.appendHoverText(stack, level, tooltip, flag);
+        tooltip.add((Component.translatable("item.ad_astra.energy_transfer_rate.tooltip", this.getTransferRate()).setStyle(Style.EMPTY.withColor(ChatFormatting.BLUE))));
     }
 
     @Override
