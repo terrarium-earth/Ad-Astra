@@ -50,4 +50,12 @@ public abstract class AbstractMachineScreen<M extends AbstractMachineBlockEntity
         this.font.draw(poseStack, this.title, (float) this.titleLabelX, (float) this.titleLabelY, this.getTextColour());
         this.font.draw(poseStack, this.playerInventoryTitle, (float) this.inventoryLabelX, (float) this.inventoryLabelY, this.getTextColour());
     }
+
+    public int getLeftPos() {
+        return this.leftPos;
+    }
+
+    public int getTopPos() {
+        return this.topPos;
+    }
 }
