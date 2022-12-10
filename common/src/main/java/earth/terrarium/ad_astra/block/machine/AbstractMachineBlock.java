@@ -3,6 +3,7 @@ package earth.terrarium.ad_astra.block.machine;
 import earth.terrarium.ad_astra.block.machine.entity.AbstractMachineBlockEntity;
 import earth.terrarium.ad_astra.block.machine.entity.FluidMachineBlockEntity;
 import earth.terrarium.ad_astra.block.machine.entity.OxygenDistributorBlockEntity;
+import earth.terrarium.ad_astra.registry.ModTags;
 import earth.terrarium.botarium.api.energy.EnergyHooks;
 import earth.terrarium.botarium.api.energy.PlatformEnergyManager;
 import earth.terrarium.botarium.api.menu.MenuHooks;
@@ -86,6 +87,13 @@ public abstract class AbstractMachineBlock extends BaseEntityBlock {
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        ItemStack item = player.getItemInHand(hand);
+
+        if (item.is(ModTags.WRENCHES) && this.useFacing()) {
+            level.setBlock(pos, this.rotate(state, Rotation.CLOCKWISE_90), Block.UPDATE_ALL);
+            return InteractionResult.SUCCESS;
+        }
+
         if (!level.isClientSide) {
             if (level.getBlockEntity(pos) instanceof AbstractMachineBlockEntity machineBlock) {
                 MenuHooks.openMenu((ServerPlayer) player, machineBlock);
