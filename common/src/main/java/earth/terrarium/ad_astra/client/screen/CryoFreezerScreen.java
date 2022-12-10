@@ -50,6 +50,10 @@ public class CryoFreezerScreen extends AbstractMachineScreen<CryoFreezerBlockEnt
         }
     }
 
+    public Rectangle getSnowFlakeBounds() {
+        return new Rectangle(this.leftPos + SNOWFLAKE_LEFT, this.topPos + SNOWFLAKE_TOP, GuiUtil.SNOWFLAKE_WIDTH, GuiUtil.SNOWFLAKE_HEIGHT);
+    }
+
     public Rectangle getOutputTankBounds() {
         return GuiUtil.getFluidTankBounds(this.leftPos + INPUT_TANK_LEFT, this.topPos + INPUT_TANK_TOP);
     }

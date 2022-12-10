@@ -1,5 +1,7 @@
 package earth.terrarium.ad_astra.client.screen;
 
+import java.awt.Rectangle;
+
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.block.machine.entity.NasaWorkbenchBlockEntity;
 import earth.terrarium.ad_astra.screen.menu.NasaWorkbenchMenu;
@@ -19,6 +21,10 @@ public class NasaWorkbenchScreen extends AbstractMachineScreen<NasaWorkbenchBloc
         this.imageWidth = 177;
         this.imageHeight = 224;
         this.inventoryLabelY = this.imageHeight - 93;
+    }
+
+    public Rectangle getRecipeBounds() {
+        return new Rectangle(this.leftPos + 96, this.topPos + 56, 20, 16);
     }
 
     @Override
