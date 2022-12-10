@@ -3,7 +3,10 @@ package earth.terrarium.ad_astra.block.pipe;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -20,11 +23,14 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.Optional;
+
+import earth.terrarium.ad_astra.registry.ModTags;
 
 @SuppressWarnings("deprecation")
 @MethodsReturnNonnullByDefault
@@ -41,6 +47,18 @@ public abstract class AbstractPipeBlock extends BaseEntityBlock implements Simpl
         this.transferRate = transferRate;
         this.decay = decay;
         this.size = size;
+    }
+
+    @Override
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        ItemStack item = player.getItemInHand(hand);
+
+        if (item.is(ModTags.WRENCHES)) {
+            this.handleWrench(level, pos, state, hit.getDirection(), player, hit.getLocation());
+            return InteractionResult.SUCCESS;
+        }
+
+        return super.use(state, level, pos, player, hand, hit);
     }
 
     @Override
