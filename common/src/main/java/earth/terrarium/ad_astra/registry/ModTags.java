@@ -50,6 +50,8 @@ public class ModTags {
     public static final TagKey<Item> OSTRUM_BLOCKS = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(getCommonNamespace() + ":ostrum_blocks"));
     public static final TagKey<Item> CALORITE_BLOCKS = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(getCommonNamespace() + ":calorite_blocks"));
 
+    public static final TagKey<Item> WRENCHES = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(getCommonNamespace() + ":wrenches"));
+
     private static String getCommonNamespace() {
         return ArchitecturyTarget.getCurrentTarget().equals("fabric") ? "c" : "forge";
     }
