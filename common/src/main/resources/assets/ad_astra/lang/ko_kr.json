@@ -466,6 +466,7 @@
   "item.ad_astra.engine_fan": "엔진 날개",
   "item.ad_astra.engine_frame": "엔진 프레임",
   "item.ad_astra.flag.tooltip": "깃대를 우클릭해서 이미지를 보여주도록 설정할 수 있습니다",
+  "item.ad_astra.energy_transfer_rate.tooltip": "에너지 전송: %s ⚡/t",
   "item.ad_astra.fluid_transfer_rate.tooltip": "유체 전송: %s 🪣/틱",
   "item.ad_astra.fuel_bucket": "연료 양동이",
   "item.ad_astra.fuel_refinery.tooltip": "원유를 연료로 정제합니다.",
