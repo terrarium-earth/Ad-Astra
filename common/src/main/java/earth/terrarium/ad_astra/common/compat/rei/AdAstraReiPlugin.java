@@ -1,10 +1,6 @@
 package earth.terrarium.ad_astra.common.compat.rei;
 
-import earth.terrarium.ad_astra.client.screen.CompressorScreen;
-import earth.terrarium.ad_astra.client.screen.ConversionScreen;
-import earth.terrarium.ad_astra.client.screen.CryoFreezerScreen;
-import earth.terrarium.ad_astra.client.screen.NasaWorkbenchScreen;
-import earth.terrarium.ad_astra.client.screen.OxygenDistributorScreen;
+import earth.terrarium.ad_astra.client.screen.*;
 import earth.terrarium.ad_astra.common.compat.rei.compressor.CompressorCategory;
 import earth.terrarium.ad_astra.common.compat.rei.compressor.CompressorDisplay;
 import earth.terrarium.ad_astra.common.compat.rei.compressor.CompressorScreenClickArea;
@@ -23,12 +19,7 @@ import earth.terrarium.ad_astra.common.compat.rei.oxygen_conversion.OxygenConver
 import earth.terrarium.ad_astra.common.compat.rei.oxygen_conversion.OxygenDistributorScreenClickArea;
 import earth.terrarium.ad_astra.common.compat.rei.space_station.SpaceStationCategory;
 import earth.terrarium.ad_astra.common.compat.rei.space_station.SpaceStationDisplay;
-import earth.terrarium.ad_astra.common.recipe.CompressingRecipe;
-import earth.terrarium.ad_astra.common.recipe.CryoFuelConversionRecipe;
-import earth.terrarium.ad_astra.common.recipe.FuelConversionRecipe;
-import earth.terrarium.ad_astra.common.recipe.NasaWorkbenchRecipe;
-import earth.terrarium.ad_astra.common.recipe.OxygenConversionRecipe;
-import earth.terrarium.ad_astra.common.recipe.SpaceStationRecipe;
+import earth.terrarium.ad_astra.common.recipe.*;
 import earth.terrarium.ad_astra.common.registry.ModBlocks;
 import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.ad_astra.common.registry.ModRecipeTypes;

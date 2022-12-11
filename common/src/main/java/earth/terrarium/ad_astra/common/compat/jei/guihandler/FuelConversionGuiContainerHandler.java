@@ -1,10 +1,10 @@
-package earth.terrarium.ad_astra.compat.jei.guihandler;
+package earth.terrarium.ad_astra.common.compat.jei.guihandler;
 
 import java.awt.Rectangle;
 
-import earth.terrarium.ad_astra.block.machine.entity.FuelRefineryBlockEntity;
 import earth.terrarium.ad_astra.client.screen.ConversionScreen;
-import earth.terrarium.ad_astra.compat.jei.category.FuelConversionCategory;
+import earth.terrarium.ad_astra.common.block.machine.entity.FuelRefineryBlockEntity;
+import earth.terrarium.ad_astra.common.compat.jei.category.FuelConversionCategory;
 import mezz.jei.api.recipe.RecipeType;
 
 public class FuelConversionGuiContainerHandler extends BaseGuiContainerHandler<ConversionScreen> {
