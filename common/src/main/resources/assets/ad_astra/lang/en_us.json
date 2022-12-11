@@ -466,6 +466,7 @@
   "item.ad_astra.engine_fan": "Engine Fan",
   "item.ad_astra.engine_frame": "Engine Frame",
   "item.ad_astra.flag.tooltip": "Right-click the block to set an image URL",
+  "item.ad_astra.energy_transfer_rate.tooltip": "Energy Transfer: %s ⚡/t",
   "item.ad_astra.fluid_transfer_rate.tooltip": "Fluid Transfer: %s 🪣/t",
   "item.ad_astra.fuel_bucket": "Fuel Bucket",
   "item.ad_astra.fuel_refinery.tooltip": "Converts oil into fuel.",
