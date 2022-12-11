@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.mixin;
 
-import earth.terrarium.ad_astra.entity.mob.Pygro;
-import earth.terrarium.ad_astra.entity.mob.PygroBrute;
+import earth.terrarium.ad_astra.common.entity.mob.Pygro;
+import earth.terrarium.ad_astra.common.entity.mob.PygroBrute;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;

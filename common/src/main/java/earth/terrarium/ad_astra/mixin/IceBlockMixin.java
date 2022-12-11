@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.mixin;
 
-import earth.terrarium.ad_astra.util.ModUtils;
-import earth.terrarium.ad_astra.util.OxygenUtils;
+import earth.terrarium.ad_astra.common.util.ModUtils;
+import earth.terrarium.ad_astra.common.util.OxygenUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;

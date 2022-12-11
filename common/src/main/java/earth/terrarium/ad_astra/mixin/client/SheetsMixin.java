@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.mixin.client;
 
 import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.ad_astra.registry.ModBlocks;
+import earth.terrarium.ad_astra.common.registry.ModBlocks;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.resources.ResourceLocation;

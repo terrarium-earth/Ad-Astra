@@ -1,8 +1,8 @@
 package earth.terrarium.ad_astra.client.screen;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import earth.terrarium.ad_astra.networking.NetworkHandling;
-import earth.terrarium.ad_astra.networking.packet.client.FlagUrlPacket;
+import earth.terrarium.ad_astra.common.networking.NetworkHandling;
+import earth.terrarium.ad_astra.common.networking.packet.client.FlagUrlPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;

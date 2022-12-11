@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.mixin;
 
-import earth.terrarium.ad_astra.util.ModUtils;
+import earth.terrarium.ad_astra.common.util.ModUtils;
 import net.minecraft.world.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

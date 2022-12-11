@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.mixin.client;
 
-import earth.terrarium.ad_astra.config.VehiclesConfig;
-import earth.terrarium.ad_astra.entity.vehicle.Vehicle;
+import earth.terrarium.ad_astra.common.config.VehiclesConfig;
+import earth.terrarium.ad_astra.common.entity.vehicle.Vehicle;
 import net.minecraft.client.Camera;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.BlockGetter;

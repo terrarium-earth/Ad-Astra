@@ -2,7 +2,7 @@ package earth.terrarium.ad_astra.client.renderer.entity.mob;
 
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.renderer.entity.mob.model.GlacianRamModel;
-import earth.terrarium.ad_astra.entity.mob.GlacianRam;
+import earth.terrarium.ad_astra.common.entity.mob.GlacianRam;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;

@@ -20,7 +20,7 @@
     "ServerLevelMixin",
     "WoodTypeInvoker",
     "WorldGenSettingsMixin",
-    "client.KeyMappingMixin",
+    "client.KeyboardHandlerMixin",
     "gravity.AbstractArrowMixin",
     "gravity.BoatMixin",
     "gravity.CommonGravityEntityMixin",

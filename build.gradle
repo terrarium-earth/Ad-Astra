@@ -48,15 +48,15 @@ tasks.register("generateDiscordEmbed") {
         ])
 
         var json = JsonOutput.toJson([
-                content: null,
-                embeds: [[
-                                 title: archives_base_name,
-                                 color: Integer.parseInt(env.EMBED_COLOR, 16),
-                                 fields: fields,
-                                 thumbnail: [url: env.WEBHOOK_THUMBNAIL]
-                         ]],
-                username: env.WEBHOOK_USERNAME,
-                avatar_url: env.WEBHOOK_AVATAR,
+                content     : null,
+                embeds      : [[
+                                       title    : archives_base_name,
+                                       color    : Integer.parseInt(env.EMBED_COLOR, 16),
+                                       fields   : fields,
+                                       thumbnail: [url: env.WEBHOOK_THUMBNAIL]
+                               ]],
+                username    : env.WEBHOOK_USERNAME,
+                avatar_url  : env.WEBHOOK_AVATAR,
                 attatchments: []
         ])
 
@@ -81,77 +81,75 @@ subprojects {
         }
     }
 
-    if (name in platforms.split(",")) {
-        var env = System.getenv()
-        var modLoader = name
+    var env = System.getenv()
+    var modLoader = name
 
-        var changelogFile = rootProject.file("changelog.txt")
-        var changelogText = changelogFile.exists() ? changelogFile.text : ""
+    var changelogFile = rootProject.file("changelog.txt")
+    var changelogText = changelogFile.exists() ? changelogFile.text : ""
 
-        if (env.MODRINTH_TOKEN) {
-            modrinth {
-                projectId = env.MODRINTH_PROJECT
-                uploadFile = tasks.remapJar
-                gameVersions = [minecraft_version]
-                loaders = [modLoader]
-                changelog = changelogText
+    if (env.MODRINTH_TOKEN) {
+        modrinth {
+            projectId = env.MODRINTH_PROJECT
+            uploadFile = tasks.remapJar
+            gameVersions = [minecraft_version]
+            loaders = [modLoader]
+            changelog = changelogText
 
-                if (modLoader == "fabric") {
-                    dependencies {
-                        required.project "fabric-api"
-                        required.project "resourceful-lib"
-                        required.project "resourceful-config"
-                        required.project "botarium"
-                        optional.project "modmenu"
-                        optional.project "patchouli"
-                        optional.project "roughly-enough-items"
-                        optional.project "emi"
-                    }
-                } else {
-                    dependencies {
-                        required.project "resourceful-lib"
-                        required.project "resourceful-config"
-                        required.project "botarium"
-                        optional.project "patchouli"
-                        optional.project "roughly-enough-items"
-                    }
+            if (modLoader == "fabric") {
+                dependencies {
+                    required.project "fabric-api"
+                    required.project "resourceful-lib"
+                    required.project "resourceful-config"
+                    required.project "botarium"
+                    optional.project "modmenu"
+                    optional.project "patchouli"
+                    optional.project "roughly-enough-items"
+                    optional.project "emi"
+                }
+            } else {
+                dependencies {
+                    required.project "resourceful-lib"
+                    required.project "resourceful-config"
+                    required.project "botarium"
+                    optional.project "patchouli"
+                    optional.project "roughly-enough-items"
                 }
             }
         }
+    }
 
-        if (env.CURSE_TOKEN) {
-            curseforge {
-                apiKey = env.CURSE_TOKEN
-                project {
-                    id = env.CURSE_PROJECT
-                    changelog = changelogText
-                    releaseType = 'release'
-                    addGameVersion minecraft_version
-                    addGameVersion modLoader.capitalize()
+    if (env.CURSE_TOKEN) {
+        curseforge {
+            apiKey = env.CURSE_TOKEN
+            project {
+                id = env.CURSE_PROJECT
+                changelog = changelogText
+                releaseType = 'release'
+                addGameVersion minecraft_version
+                addGameVersion modLoader.capitalize()
 
-                    mainArtifact(tasks.remapJar)
+                mainArtifact(tasks.remapJar)
 
-                    if (modLoader == "fabric") {
-                        relations {
-                            requiredDependency "fabric-api"
-                            requiredDependency "resourceful-lib"
-                            requiredDependency "resourceful-config"
-                            requiredDependency "botarium"
-                            optionalDependency "modmenu"
-                            optionalDependency "patchouli-fabric"
-                            optionalDependency "jei"
-                            optionalDependency "roughly-enough-items"
-                            optionalDependency "emi"
-                        }
-                    } else {
-                        relations {
-                            requiredDependency "resourceful-lib"
-                            requiredDependency "resourceful-config"
-                            requiredDependency "botarium"
-                            optionalDependency "patchouli"
-                            optionalDependency "jei"
-                            optionalDependency "roughly-enough-items"
-                        }
+                if (modLoader == "fabric") {
+                    relations {
+                        requiredDependency "fabric-api"
+                        requiredDependency "resourceful-lib"
+                        requiredDependency "resourceful-config"
+                        requiredDependency "botarium"
+                        optionalDependency "modmenu"
+                        optionalDependency "patchouli-fabric"
+                        optionalDependency "jei"
+                        optionalDependency "roughly-enough-items"
+                        optionalDependency "emi"
+                    }
+                } else {
+                    relations {
+                        requiredDependency "resourceful-lib"
+                        requiredDependency "resourceful-config"
+                        requiredDependency "botarium"
+                        optionalDependency "patchouli"
+                        optionalDependency "jei"
+                        optionalDependency "roughly-enough-items"
                     }
                 }
             }

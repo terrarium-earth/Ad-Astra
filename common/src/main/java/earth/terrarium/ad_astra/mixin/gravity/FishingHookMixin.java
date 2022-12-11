@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.mixin.gravity;
 
-import earth.terrarium.ad_astra.util.ModUtils;
+import earth.terrarium.ad_astra.common.util.ModUtils;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.phys.Vec3;

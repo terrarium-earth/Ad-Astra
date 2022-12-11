@@ -3,7 +3,7 @@ package earth.terrarium.ad_astra.client.renderer.entity.vehicle.rover;
 import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.renderer.entity.vehicle.VehicleRenderer;
-import earth.terrarium.ad_astra.entity.vehicle.Rover;
+import earth.terrarium.ad_astra.common.entity.vehicle.Rover;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.MultiBufferSource;

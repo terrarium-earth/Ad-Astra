@@ -1,13 +1,5 @@
-architectury {
-    common(rootProject.platforms.split(","))
-}
-
-loom {
-    accessWidenerPath = file("src/main/resources/ad_astra.accesswidener")
-}
-
 dependencies {
-    modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
+    modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
 
     modApi "com.teamresourceful.resourcefulconfig:resourcefulconfig-common-$rootProject.resourcefulconfig_version"
     modApi "earth.terrarium:botarium-common-$rootProject.minecraft_version:$rootProject.botarium_version"
@@ -21,10 +13,18 @@ dependencies {
     modRuntimeOnly "mezz.jei:jei-$rootProject.minecraft_version-common:$rootProject.jei_version"
 }
 
+architectury {
+    common()
+}
+
+loom {
+    accessWidenerPath = file("src/main/resources/ad_astra.accesswidener")
+}
+
 publishing {
     publications {
         mavenCommon(MavenPublication) {
-            artifactId = rootProject.mod_id
+            artifactId = rootProject.archives_base_name
             from components.java
         }
     }

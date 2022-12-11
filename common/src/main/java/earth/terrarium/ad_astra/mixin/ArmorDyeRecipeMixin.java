@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.mixin;
 
-import earth.terrarium.ad_astra.item.armor.SpaceSuit;
-import earth.terrarium.ad_astra.registry.ModItems;
+import earth.terrarium.ad_astra.common.item.armor.SpaceSuit;
+import earth.terrarium.ad_astra.common.registry.ModItems;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.ArmorDyeRecipe;

@@ -1,9 +1,9 @@
 package earth.terrarium.ad_astra.mixin.client;
 
 import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.ad_astra.config.AdAstraConfig;
-import earth.terrarium.ad_astra.util.ModUtils;
-import earth.terrarium.ad_astra.util.OxygenUtils;
+import earth.terrarium.ad_astra.common.config.AdAstraConfig;
+import earth.terrarium.ad_astra.common.util.ModUtils;
+import earth.terrarium.ad_astra.common.util.OxygenUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.client.resources.sounds.SoundInstance;

@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Matrix4f;
 import earth.terrarium.ad_astra.client.dimension.renderer.base.DimensionRenderer;
 import earth.terrarium.ad_astra.client.resourcepack.PlanetSkyRenderer;
-import earth.terrarium.ad_astra.util.ColourUtils;
+import earth.terrarium.ad_astra.common.util.ColourUtils;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.DimensionSpecialEffects;

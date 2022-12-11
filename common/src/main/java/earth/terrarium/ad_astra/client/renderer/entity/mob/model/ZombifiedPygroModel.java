@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.client.renderer.entity.mob.model;
 
 import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.ad_astra.entity.mob.ZombifiedPygro;
+import earth.terrarium.ad_astra.common.entity.mob.ZombifiedPygro;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.HumanoidModel;

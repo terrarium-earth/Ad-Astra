@@ -3,7 +3,7 @@ package earth.terrarium.ad_astra.client.renderer.entity.mob;
 import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.renderer.entity.mob.model.LunarianModel;
-import earth.terrarium.ad_astra.entity.mob.Lunarian;
+import earth.terrarium.ad_astra.common.entity.mob.Lunarian;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.layers.CrossedArmsItemLayer;

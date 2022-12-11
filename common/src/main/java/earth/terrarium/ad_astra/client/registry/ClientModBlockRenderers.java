@@ -4,7 +4,7 @@ import earth.terrarium.ad_astra.client.renderer.block.EnergizerBlockEntityRender
 import earth.terrarium.ad_astra.client.renderer.block.SlidingDoorBlockEntityRenderer;
 import earth.terrarium.ad_astra.client.renderer.block.flag.FlagBlockEntityRenderer;
 import earth.terrarium.ad_astra.client.renderer.block.globe.GlobeBlockEntityRenderer;
-import earth.terrarium.ad_astra.registry.ModBlockEntities;
+import earth.terrarium.ad_astra.common.registry.ModBlockEntities;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;

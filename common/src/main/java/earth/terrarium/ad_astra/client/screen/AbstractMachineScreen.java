@@ -2,8 +2,8 @@ package earth.terrarium.ad_astra.client.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import earth.terrarium.ad_astra.block.machine.entity.AbstractMachineBlockEntity;
-import earth.terrarium.ad_astra.screen.menu.AbstractMachineMenu;
+import earth.terrarium.ad_astra.common.block.machine.entity.AbstractMachineBlockEntity;
+import earth.terrarium.ad_astra.common.screen.menu.AbstractMachineMenu;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.GuiComponent;

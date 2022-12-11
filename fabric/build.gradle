@@ -7,30 +7,6 @@ architectury {
     fabric()
 }
 
-loom {
-    accessWidenerPath = project(":common").loom.accessWidenerPath
-    runs {
-        // This adds a new gradle task that runs the datagen API: "gradlew runDatagenClient"
-        datagenClient {
-            inherit client
-            name "Data Generation"
-            vmArg "-Dfabric-api.datagen"
-            vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated")}"
-
-            runDir "build/datagen"
-        }
-    }
-}
-
-sourceSets {
-    main {
-        resources {
-            srcDirs += 'src/main/generated'
-            exclude '.cache'
-        }
-    }
-}
-
 configurations {
     common
     shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
@@ -45,7 +21,11 @@ dependencies {
     common(project(path: ":common", configuration: "namedElements")) { transitive = false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive = false }
 
-    modApi ("earth.terrarium:botarium-fabric-$rootProject.minecraft_version:$rootProject.botarium_version")
+    include modApi('teamreborn:energy:2.2.0') { // Temp TR energy until Botarium is fixed
+        exclude(group: "net.fabricmc.fabric-api")
+    }
+
+    modApi ("earth.terrarium:botarium-fabric-$rootProject.minecraft_version:$rootProject.botarium_version") { transitive = false } // Temp transitive until Botarium is fixed
     modApi ("com.teamresourceful.resourcefullib:resourcefullib-fabric-$rootProject.resourcefullib_version")
     modApi "com.teamresourceful.resourcefulconfig:resourcefulconfig-fabric-$resourcefulconfig_version"
 
@@ -67,14 +47,11 @@ processResources {
 }
 
 shadowJar {
-    exclude "architectury.common.json"
-
     configurations = [project.configurations.shadowCommon]
     classifier "dev-shadow"
 }
 
 remapJar {
-    injectAccessWidener = true
     input.set shadowJar.archiveFile
     dependsOn shadowJar
     classifier null
@@ -100,7 +77,7 @@ components.java {
 publishing {
     publications {
         mavenFabric(MavenPublication) {
-            artifactId = rootProject.mod_id + "-" + project.name
+            artifactId = rootProject.archives_base_name + "-" + project.name
             from components.java
         }
     }

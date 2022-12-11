@@ -18,9 +18,9 @@ import earth.terrarium.ad_astra.client.renderer.entity.vehicle.rocket.tier_4.Roc
 import earth.terrarium.ad_astra.client.renderer.entity.vehicle.rover.RoverItemRenderer;
 import earth.terrarium.ad_astra.client.resourcepack.*;
 import earth.terrarium.ad_astra.client.screen.PlayerOverlayScreen;
-import earth.terrarium.ad_astra.registry.ModBlocks;
-import earth.terrarium.ad_astra.registry.ModFluids;
-import earth.terrarium.ad_astra.registry.ModItems;
+import earth.terrarium.ad_astra.common.registry.ModBlocks;
+import earth.terrarium.ad_astra.common.registry.ModFluids;
+import earth.terrarium.ad_astra.common.registry.ModItems;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;

@@ -1,8 +1,8 @@
 package earth.terrarium.ad_astra.mixin.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import earth.terrarium.ad_astra.entity.vehicle.Vehicle;
-import earth.terrarium.ad_astra.item.vehicle.VehicleItem;
+import earth.terrarium.ad_astra.common.entity.vehicle.Vehicle;
+import earth.terrarium.ad_astra.common.item.vehicle.VehicleItem;
 import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
