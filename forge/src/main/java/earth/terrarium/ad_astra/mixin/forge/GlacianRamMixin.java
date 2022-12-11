@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.mixin.forge;
 
-import earth.terrarium.ad_astra.entity.mob.GlacianRam;
+import earth.terrarium.ad_astra.common.entity.mob.GlacianRam;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;

@@ -3,7 +3,7 @@ package earth.terrarium.ad_astra.client.renderer.entity.mob;
 import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.renderer.entity.mob.model.LunarianModel;
-import earth.terrarium.ad_astra.entity.mob.LunarianWanderingTrader;
+import earth.terrarium.ad_astra.common.entity.mob.LunarianWanderingTrader;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

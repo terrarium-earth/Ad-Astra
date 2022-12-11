@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.mixin.gravity;
 
-import earth.terrarium.ad_astra.config.AdAstraConfig;
-import earth.terrarium.ad_astra.util.ModUtils;
+import earth.terrarium.ad_astra.common.config.AdAstraConfig;
+import earth.terrarium.ad_astra.common.util.ModUtils;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;

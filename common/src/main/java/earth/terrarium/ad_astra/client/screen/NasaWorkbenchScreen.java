@@ -1,8 +1,8 @@
 package earth.terrarium.ad_astra.client.screen;
 
 import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.ad_astra.block.machine.entity.NasaWorkbenchBlockEntity;
-import earth.terrarium.ad_astra.screen.menu.NasaWorkbenchMenu;
+import earth.terrarium.ad_astra.common.block.machine.entity.NasaWorkbenchBlockEntity;
+import earth.terrarium.ad_astra.common.screen.menu.NasaWorkbenchMenu;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.network.chat.Component;

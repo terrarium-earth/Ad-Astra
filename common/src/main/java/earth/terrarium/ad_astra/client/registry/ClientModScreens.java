@@ -3,7 +3,7 @@ package earth.terrarium.ad_astra.client.registry;
 import earth.terrarium.ad_astra.client.ClientUtils;
 import earth.terrarium.ad_astra.client.screen.*;
 import earth.terrarium.ad_astra.client.screen.util.PlanetSelectionScreen;
-import earth.terrarium.ad_astra.registry.ModMenuTypes;
+import earth.terrarium.ad_astra.common.registry.ModMenuTypes;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 

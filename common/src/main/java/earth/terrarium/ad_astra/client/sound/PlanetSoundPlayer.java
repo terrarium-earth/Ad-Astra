@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.client.sound;
 
-import earth.terrarium.ad_astra.registry.ModSoundEvents;
-import earth.terrarium.ad_astra.util.ModUtils;
+import earth.terrarium.ad_astra.common.registry.ModSoundEvents;
+import earth.terrarium.ad_astra.common.util.ModUtils;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.player.LocalPlayer;

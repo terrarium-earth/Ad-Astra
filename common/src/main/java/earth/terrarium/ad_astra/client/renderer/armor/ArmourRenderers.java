@@ -1,8 +1,8 @@
 package earth.terrarium.ad_astra.client.renderer.armor;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
-import earth.terrarium.ad_astra.item.armor.JetSuit;
-import earth.terrarium.ad_astra.registry.ModItems;
+import earth.terrarium.ad_astra.common.item.armor.JetSuit;
+import earth.terrarium.ad_astra.common.registry.ModItems;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;

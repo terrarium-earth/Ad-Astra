@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector3f;
 import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.ad_astra.registry.ModBlocks;
+import earth.terrarium.ad_astra.common.registry.ModBlocks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.MultiBufferSource;

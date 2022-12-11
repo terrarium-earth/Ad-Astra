@@ -2,7 +2,7 @@ package earth.terrarium.ad_astra.client.renderer.entity.mob;
 
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.renderer.entity.mob.model.MoglerModel;
-import earth.terrarium.ad_astra.entity.mob.Mogler;
+import earth.terrarium.ad_astra.common.entity.mob.Mogler;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

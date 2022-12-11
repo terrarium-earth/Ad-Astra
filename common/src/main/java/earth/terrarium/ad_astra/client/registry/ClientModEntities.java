@@ -18,7 +18,7 @@ import earth.terrarium.ad_astra.client.renderer.entity.vehicle.rocket.tier_4.Roc
 import earth.terrarium.ad_astra.client.renderer.entity.vehicle.rocket.tier_4.RocketRendererTier4;
 import earth.terrarium.ad_astra.client.renderer.entity.vehicle.rover.RoverModel;
 import earth.terrarium.ad_astra.client.renderer.entity.vehicle.rover.RoverRenderer;
-import earth.terrarium.ad_astra.registry.ModEntityTypes;
+import earth.terrarium.ad_astra.common.registry.ModEntityTypes;
 import earth.terrarium.botarium.client.ClientHooks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

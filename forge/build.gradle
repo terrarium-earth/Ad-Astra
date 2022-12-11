@@ -1,7 +1,6 @@
 plugins {
     id "com.github.johnrengelman.shadow" version "7.1.2"
 }
-
 architectury {
     platformSetupLoomIde()
     forge()
@@ -53,7 +52,6 @@ processResources {
 
 shadowJar {
     exclude "fabric.mod.json"
-    exclude "architectury.common.json"
 
     configurations = [project.configurations.shadowCommon]
     classifier "dev-shadow"
@@ -85,7 +83,7 @@ components.java {
 publishing {
     publications {
         mavenForge(MavenPublication) {
-            artifactId = rootProject.mod_id + "-" + project.name
+            artifactId = rootProject.archives_base_name + "-" + project.name
             from components.java
         }
     }

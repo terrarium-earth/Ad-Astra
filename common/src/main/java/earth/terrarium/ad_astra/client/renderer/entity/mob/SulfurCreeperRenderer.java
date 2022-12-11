@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.renderer.entity.feature.SulfurCreeperChargeFeatureRenderer;
 import earth.terrarium.ad_astra.client.renderer.entity.mob.model.SulfurCreeperModel;
-import earth.terrarium.ad_astra.entity.mob.SulfurCreeper;
+import earth.terrarium.ad_astra.common.entity.mob.SulfurCreeper;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

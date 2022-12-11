@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.mixin.fabric;
 
-import earth.terrarium.ad_astra.item.armor.JetSuit;
+import earth.terrarium.ad_astra.common.item.armor.JetSuit;
 import net.fabricmc.fabric.api.entity.event.v1.FabricElytraItem;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;

@@ -1,11 +1,11 @@
 package earth.terrarium.ad_astra.fabric;
 
 import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.ad_astra.item.AstroduxItem;
-import earth.terrarium.ad_astra.networking.NetworkHandling;
-import earth.terrarium.ad_astra.registry.ModCommands;
-import earth.terrarium.ad_astra.registry.ModEntityTypes;
-import earth.terrarium.ad_astra.util.ModKeyBindings;
+import earth.terrarium.ad_astra.common.item.AstroduxItem;
+import earth.terrarium.ad_astra.common.networking.NetworkHandling;
+import earth.terrarium.ad_astra.common.registry.ModCommands;
+import earth.terrarium.ad_astra.common.registry.ModEntityTypes;
+import earth.terrarium.ad_astra.common.util.ModKeyBindings;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;

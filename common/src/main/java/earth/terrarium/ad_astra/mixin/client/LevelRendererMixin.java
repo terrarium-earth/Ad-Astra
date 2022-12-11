@@ -1,8 +1,8 @@
 package earth.terrarium.ad_astra.mixin.client;
 
-import earth.terrarium.ad_astra.config.VehiclesConfig;
-import earth.terrarium.ad_astra.registry.ModParticleTypes;
-import earth.terrarium.ad_astra.util.ModUtils;
+import earth.terrarium.ad_astra.common.config.VehiclesConfig;
+import earth.terrarium.ad_astra.common.registry.ModParticleTypes;
+import earth.terrarium.ad_astra.common.util.ModUtils;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.ParticleStatus;

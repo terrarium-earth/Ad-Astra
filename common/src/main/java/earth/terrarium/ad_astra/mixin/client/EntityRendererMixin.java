@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.mixin.client;
 
-import earth.terrarium.ad_astra.entity.vehicle.Rocket;
-import earth.terrarium.ad_astra.entity.vehicle.Vehicle;
+import earth.terrarium.ad_astra.common.entity.vehicle.Rocket;
+import earth.terrarium.ad_astra.common.entity.vehicle.Vehicle;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.world.entity.Entity;

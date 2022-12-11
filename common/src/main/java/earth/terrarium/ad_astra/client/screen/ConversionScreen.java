@@ -2,8 +2,8 @@ package earth.terrarium.ad_astra.client.screen;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.ad_astra.block.machine.entity.FluidMachineBlockEntity;
-import earth.terrarium.ad_astra.screen.menu.ConversionMenu;
+import earth.terrarium.ad_astra.common.block.machine.entity.FluidMachineBlockEntity;
+import earth.terrarium.ad_astra.common.screen.menu.ConversionMenu;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.network.chat.Component;

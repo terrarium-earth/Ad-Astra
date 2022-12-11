@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.mixin.forge;
 
-import earth.terrarium.ad_astra.item.armor.JetSuit;
+import earth.terrarium.ad_astra.common.item.armor.JetSuit;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;

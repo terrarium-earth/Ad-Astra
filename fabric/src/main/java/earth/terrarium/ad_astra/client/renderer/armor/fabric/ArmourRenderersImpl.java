@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.client.renderer.armor.fabric;
 
 import earth.terrarium.ad_astra.client.renderer.armor.ArmourModelSupplier;
-import earth.terrarium.ad_astra.item.armor.ModArmourItem;
+import earth.terrarium.ad_astra.common.item.armor.ModArmourItem;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;

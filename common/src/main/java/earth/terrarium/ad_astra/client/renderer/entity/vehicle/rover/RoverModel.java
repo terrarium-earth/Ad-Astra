@@ -2,7 +2,7 @@ package earth.terrarium.ad_astra.client.renderer.entity.vehicle.rover;
 
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.renderer.entity.vehicle.VehicleModel;
-import earth.terrarium.ad_astra.entity.vehicle.Rover;
+import earth.terrarium.ad_astra.common.entity.vehicle.Rover;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelLayerLocation;

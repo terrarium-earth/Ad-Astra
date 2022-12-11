@@ -3,7 +3,7 @@ package earth.terrarium.ad_astra.client.registry;
 import earth.terrarium.ad_astra.client.particle.LargeFlameParticle;
 import earth.terrarium.ad_astra.client.particle.OxygenBubbleParticle;
 import earth.terrarium.ad_astra.client.particle.SmallFlameParticle;
-import earth.terrarium.ad_astra.registry.ModParticleTypes;
+import earth.terrarium.ad_astra.common.registry.ModParticleTypes;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.particle.ParticleProvider;

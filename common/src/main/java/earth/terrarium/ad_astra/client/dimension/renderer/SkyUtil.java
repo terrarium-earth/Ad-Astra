@@ -8,7 +8,7 @@ import com.mojang.math.Vector3f;
 import com.teamresourceful.resourcefullib.common.color.Color;
 import earth.terrarium.ad_astra.client.resourcepack.PlanetSkyRenderer;
 import earth.terrarium.ad_astra.mixin.client.LevelRendererAccessor;
-import earth.terrarium.ad_astra.level.WorldSeed;
+import earth.terrarium.ad_astra.common.level.LevelSeed;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Camera;
@@ -135,7 +135,7 @@ public class SkyUtil {
     public static BufferBuilder.RenderedBuffer renderStars(BufferBuilder buffer, int stars, boolean colouredStars) {
         RenderSystem.setShader(GameRenderer::getPositionColorShader);
         buffer.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
-        StarInformation info = StarInformation.STAR_CACHE.apply(WorldSeed.getSeed(), stars);
+        StarInformation info = StarInformation.STAR_CACHE.apply(LevelSeed.getSeed(), stars);
         for (int i = 0; i < stars; ++i) {
             Vector3f vec3f = info.getParam1(i);
             float d = vec3f.x();

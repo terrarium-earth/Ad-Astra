@@ -3,7 +3,7 @@ package earth.terrarium.ad_astra.client.resourcepack;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamresourceful.resourcefullib.common.color.Color;
-import earth.terrarium.ad_astra.data.ButtonColor;
+import earth.terrarium.ad_astra.common.data.ButtonColor;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.resources.ResourceLocation;

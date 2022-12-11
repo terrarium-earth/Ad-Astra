@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.mixin;
 
-import earth.terrarium.ad_astra.item.armor.JetSuit;
+import earth.terrarium.ad_astra.common.item.armor.JetSuit;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;

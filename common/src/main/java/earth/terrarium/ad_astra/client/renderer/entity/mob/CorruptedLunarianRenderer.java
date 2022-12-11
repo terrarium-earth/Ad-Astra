@@ -2,7 +2,7 @@ package earth.terrarium.ad_astra.client.renderer.entity.mob;
 
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.renderer.entity.mob.model.CorruptedLunarianModel;
-import earth.terrarium.ad_astra.entity.mob.CorruptedLunarian;
+import earth.terrarium.ad_astra.common.entity.mob.CorruptedLunarian;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

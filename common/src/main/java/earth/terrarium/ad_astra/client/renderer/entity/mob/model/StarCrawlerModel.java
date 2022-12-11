@@ -3,7 +3,7 @@ package earth.terrarium.ad_astra.client.renderer.entity.mob.model;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.ad_astra.entity.mob.StarCrawler;
+import earth.terrarium.ad_astra.common.entity.mob.StarCrawler;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.EntityModel;
