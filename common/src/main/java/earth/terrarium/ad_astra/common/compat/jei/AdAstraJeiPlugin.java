@@ -4,16 +4,21 @@ import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.screen.*;
 import earth.terrarium.ad_astra.common.compat.jei.category.*;
 import earth.terrarium.ad_astra.common.compat.jei.guihandler.*;
+import earth.terrarium.ad_astra.common.compat.jei.transfer.*;
 import earth.terrarium.ad_astra.common.registry.ModItems;
+import earth.terrarium.ad_astra.common.registry.ModMenuTypes;
 import earth.terrarium.ad_astra.common.registry.ModRecipeTypes;
+import earth.terrarium.ad_astra.common.screen.menu.*;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.helpers.IGuiHelper;
+import mezz.jei.api.recipe.transfer.IRecipeTransferHandlerHelper;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IModIngredientRegistration;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.registration.IRecipeTransferRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
@@ -68,5 +73,18 @@ public class AdAstraJeiPlugin implements IModPlugin {
         registration.addGuiContainerHandler(ConversionScreen.class, new OxygenConversionGuiContainerHandler());
         registration.addGuiContainerHandler(OxygenDistributorScreen.class, new OxygenDistributorGuiContainerHandler());
         registration.addGuiContainerHandler(CryoFreezerScreen.class, new CryoFreezerGuiContainerHandler());
+    }
+
+    @Override
+    public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
+        IRecipeTransferHandlerHelper transferHelper = registration.getTransferHelper();
+        registration.addRecipeTransferHandler(new MachineTransferInfo<>(CompressorMenu.class, ModMenuTypes.COMPRESSOR_MENU.get(), CompressorCategory.RECIPE));
+        registration.addRecipeTransferHandler(new NotifyableTransferHandler<>(transferHelper.createUnregisteredRecipeTransferHandler(new MachineTransferInfo<>(NasaWorkbenchMenu.class, ModMenuTypes.NASA_WORKBENCH_MENU.get(), NasaWorkbenchCategory.RECIPE) {
+            @Override
+            protected int getInputSlotCount(NasaWorkbenchMenu menu) {
+                return 14;
+            }
+        })), NasaWorkbenchCategory.RECIPE);
+        registration.addRecipeTransferHandler(new MachineTransferInfo<>(CryoFreezerMenu.class, ModMenuTypes.CRYO_FREEZER_MENU.get(), CryoFuelConversionCategory.RECIPE));
     }
 }

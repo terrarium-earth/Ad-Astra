@@ -10,6 +10,7 @@ import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
@@ -124,6 +125,10 @@ public abstract class AbstractMachineMenu<T extends AbstractMachineBlockEntity> 
     public void broadcastChanges() {
         super.broadcastChanges();
         syncClientScreen();
+    }
+
+    public void onRecipeTransfer(Recipe<?> recipe) {
+
     }
 
     public abstract void syncClientScreen();
