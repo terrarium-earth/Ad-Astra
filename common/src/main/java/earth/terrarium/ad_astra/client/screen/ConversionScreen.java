@@ -57,6 +57,10 @@ public class ConversionScreen extends AbstractMachineScreen<FluidMachineBlockEnt
         }
     }
 
+    public Rectangle getRecipeBounds() {
+        return new Rectangle(this.leftPos + 64, this.topPos + 35, 26, 21);
+    }
+
     public Rectangle getInputTankBounds() {
         return GuiUtil.getFluidTankBounds(this.leftPos + INPUT_TANK_LEFT, this.topPos + INPUT_TANK_TOP);
     }

@@ -47,8 +47,12 @@ public class CompressorScreen extends AbstractMachineScreen<CompressorBlockEntit
 
         // Burn time tooltip.
         if (GuiUtil.isHovering(this.getHammerBounds(), mouseX, mouseY)) {
-            this.renderTooltip(poseStack, Component.translatable("gauge.ad_astra.cook_time", this.machine.getCookTime(), this.machine.getCookTimeTotal()), mouseX, mouseY);
+            this.renderTooltip(poseStack, this.getHammerTooltip(), mouseX, mouseY);
         }
+    }
+
+    public Component getHammerTooltip() {
+        return Component.translatable("gauge.ad_astra.cook_time", this.machine.getCookTime(), this.machine.getCookTimeTotal());
     }
 
     public Rectangle getEnergyBounds() {

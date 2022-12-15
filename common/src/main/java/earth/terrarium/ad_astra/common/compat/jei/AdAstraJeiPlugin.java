@@ -1,12 +1,15 @@
 package earth.terrarium.ad_astra.common.compat.jei;
 
 import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.client.screen.*;
 import earth.terrarium.ad_astra.common.compat.jei.category.*;
+import earth.terrarium.ad_astra.common.compat.jei.guihandler.*;
 import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.ad_astra.common.registry.ModRecipeTypes;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.helpers.IGuiHelper;
+import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IModIngredientRegistration;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
@@ -55,5 +58,15 @@ public class AdAstraJeiPlugin implements IModPlugin {
         registration.addRecipeCatalyst(ModItems.OXYGEN_LOADER.get().getDefaultInstance(), OxygenConversionCategory.RECIPE);
         registration.addRecipeCatalyst(ModItems.OXYGEN_DISTRIBUTOR.get().getDefaultInstance(), OxygenConversionCategory.RECIPE);
         registration.addRecipeCatalyst(ModItems.CRYO_FREEZER.get().getDefaultInstance(), CryoFuelConversionCategory.RECIPE);
+    }
+
+    @Override
+    public void registerGuiHandlers(IGuiHandlerRegistration registration) {
+        registration.addGuiContainerHandler(CompressorScreen.class, new CompressorGuiContainerHandler());
+        registration.addGuiContainerHandler(NasaWorkbenchScreen.class, new NasaWorkbenchGuiContainerHandler());
+        registration.addGuiContainerHandler(ConversionScreen.class, new FuelConversionGuiContainerHandler());
+        registration.addGuiContainerHandler(ConversionScreen.class, new OxygenConversionGuiContainerHandler());
+        registration.addGuiContainerHandler(OxygenDistributorScreen.class, new OxygenDistributorGuiContainerHandler());
+        registration.addGuiContainerHandler(CryoFreezerScreen.class, new CryoFreezerGuiContainerHandler());
     }
 }

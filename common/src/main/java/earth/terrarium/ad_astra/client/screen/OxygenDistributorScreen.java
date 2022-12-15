@@ -147,6 +147,10 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
         this.addRenderableWidget(visibleButton);
     }
 
+    public Rectangle getRecipeBounds() {
+        return new Rectangle(this.leftPos + 76, this.topPos + 95, 26, 21);
+    }
+
     public Rectangle getInputTankBounds() {
         return GuiUtil.getFluidTankBounds(this.leftPos + INPUT_TANK_LEFT, this.topPos + INPUT_TANK_TOP);
     }
