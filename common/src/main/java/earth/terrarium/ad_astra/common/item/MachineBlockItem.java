@@ -19,8 +19,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.Optional;
 
 public class MachineBlockItem extends BlockItem {
-    public MachineBlockItem(Block block, Properties settings) {
-        super(block, settings);
+    public MachineBlockItem(Block block, Properties properties) {
+        super(block, properties);
     }
 
     @Override

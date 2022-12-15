@@ -9,7 +9,7 @@ import net.minecraftforge.common.ForgeSpawnEggItem;
 import java.util.function.Supplier;
 
 public class ModItemsImpl {
-    public static Supplier<SpawnEggItem> createSpawnEggItem(Supplier<? extends EntityType<? extends Mob>> type, int primaryColor, int secondaryColor, Item.Properties settings) {
-        return () -> new ForgeSpawnEggItem(type, primaryColor, secondaryColor, settings);
+    public static Supplier<SpawnEggItem> createSpawnEggItem(Supplier<? extends EntityType<? extends Mob>> type, int primaryColor, int secondaryColor, Item.Properties properties) {
+        return () -> new ForgeSpawnEggItem(type, primaryColor, secondaryColor, properties);
     }
 }

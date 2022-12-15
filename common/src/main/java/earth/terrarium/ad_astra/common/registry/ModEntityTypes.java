@@ -15,8 +15,6 @@ import org.apache.commons.lang3.NotImplementedException;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
-// \.build\(".*"\)
-// .build(null)
 public class ModEntityTypes {
 
     // Mobs
@@ -38,10 +36,10 @@ public class ModEntityTypes {
     public static final Supplier<EntityType<GlacianRam>> GLACIAN_RAM = register("glacian_ram", () -> EntityType.Builder.of(GlacianRam::new, MobCategory.CREATURE).sized(0.9f, 1.3f).clientTrackingRange(10).build(AdAstra.MOD_ID));
 
     // Machines
-    public static final Supplier<EntityType<RocketTier1>> TIER_1_ROCKET = register("tier_1_rocket", () -> EntityType.Builder.of(RocketTier1::new, MobCategory.MISC).sized(1.1f, 4.6f).fireImmune().build(AdAstra.MOD_ID));
-    public static final Supplier<EntityType<RocketTier2>> TIER_2_ROCKET = register("tier_2_rocket", () -> EntityType.Builder.of(RocketTier2::new, MobCategory.MISC).sized(1.1f, 4.8f).fireImmune().build(AdAstra.MOD_ID));
-    public static final Supplier<EntityType<RocketTier3>> TIER_3_ROCKET = register("tier_3_rocket", () -> EntityType.Builder.of(RocketTier3::new, MobCategory.MISC).sized(1.1f, 5.5f).fireImmune().build(AdAstra.MOD_ID));
-    public static final Supplier<EntityType<RocketTier4>> TIER_4_ROCKET = register("tier_4_rocket", () -> EntityType.Builder.of(RocketTier4::new, MobCategory.MISC).sized(1.1f, 7.0f).fireImmune().build(AdAstra.MOD_ID));
+    public static final Supplier<EntityType<RocketTier1>> TIER_1_ROCKET = register("tier_1_rocket", () -> EntityType.Builder.<RocketTier1>of(RocketTier1::new, MobCategory.MISC).sized(1.1f, 4.6f).fireImmune().build(AdAstra.MOD_ID));
+    public static final Supplier<EntityType<RocketTier2>> TIER_2_ROCKET = register("tier_2_rocket", () -> EntityType.Builder.<RocketTier2>of(RocketTier2::new, MobCategory.MISC).sized(1.1f, 4.8f).fireImmune().build(AdAstra.MOD_ID));
+    public static final Supplier<EntityType<RocketTier3>> TIER_3_ROCKET = register("tier_3_rocket", () -> EntityType.Builder.<RocketTier3>of(RocketTier3::new, MobCategory.MISC).sized(1.1f, 5.5f).fireImmune().build(AdAstra.MOD_ID));
+    public static final Supplier<EntityType<RocketTier4>> TIER_4_ROCKET = register("tier_4_rocket", () -> EntityType.Builder.<RocketTier4>of(RocketTier4::new, MobCategory.MISC).sized(1.1f, 7.0f).fireImmune().build(AdAstra.MOD_ID));
 
     public static final Supplier<EntityType<Rover>> TIER_1_ROVER = register("tier_1_rover", () -> EntityType.Builder.of(Rover::new, MobCategory.MISC).sized(1.8f, 1.5f).fireImmune().build(AdAstra.MOD_ID));
     public static final Supplier<EntityType<Lander>> LANDER = register("lander", () -> EntityType.Builder.of(Lander::new, MobCategory.MISC).sized(1.2f, 2.0f).fireImmune().build(AdAstra.MOD_ID));

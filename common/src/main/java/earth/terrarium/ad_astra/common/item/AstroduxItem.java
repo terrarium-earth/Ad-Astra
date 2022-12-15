@@ -28,8 +28,8 @@ public class AstroduxItem extends Item {
         }
     }
 
-    public AstroduxItem(Properties settings) {
-        super(settings);
+    public AstroduxItem(Properties properties) {
+        super(properties);
     }
 
     @Override

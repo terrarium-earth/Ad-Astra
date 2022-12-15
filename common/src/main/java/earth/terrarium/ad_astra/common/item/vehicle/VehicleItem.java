@@ -18,8 +18,8 @@ import java.util.function.BiPredicate;
 
 public abstract class VehicleItem extends ModRenderedItem implements FluidContainingItem, HoldableOverHead {
 
-    public VehicleItem(Properties settings) {
-        super(settings);
+    public VehicleItem(Properties properties) {
+        super(properties);
     }
 
     @Override

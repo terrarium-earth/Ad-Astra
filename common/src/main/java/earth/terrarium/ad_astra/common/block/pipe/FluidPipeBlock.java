@@ -48,8 +48,8 @@ public class FluidPipeBlock extends AbstractPipeBlock {
 
     private final Map<BlockState, VoxelShape> shapes = new HashMap<>();
 
-    public FluidPipeBlock(long transferRate, int decay, double size, Properties settings) {
-        super(transferRate, decay, size, settings);
+    public FluidPipeBlock(long transferRate, int decay, double size, Properties properties) {
+        super(transferRate, decay, size, properties);
         this.registerDefaultState(defaultBlockState().setValue(UP, PipeState.NONE).setValue(DOWN, PipeState.NONE).setValue(NORTH, PipeState.NONE).setValue(EAST, PipeState.NONE).setValue(SOUTH, PipeState.NONE).setValue(WEST, PipeState.NONE).setValue(WATERLOGGED, false));
         this.stateDefinition.getPossibleStates().forEach(state -> shapes.put(state, this.createShape(state)));
     }

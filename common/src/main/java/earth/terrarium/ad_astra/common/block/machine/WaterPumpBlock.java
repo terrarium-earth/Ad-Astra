@@ -7,8 +7,8 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class WaterPumpBlock extends AbstractMachineBlock {
 
-    public WaterPumpBlock(Properties settings) {
-        super(settings);
+    public WaterPumpBlock(Properties properties) {
+        super(properties);
     }
 
     @Override

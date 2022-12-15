@@ -38,9 +38,9 @@ public class LocalPlayerMixin {
     private List<AmbientSoundHandler> ambientSoundHandlers;
 
     @Inject(at = @At(value = "TAIL"), method = "<init>")
-    public void adastra_ClientPlayerEntity(Minecraft client, ClientLevel level, ClientPacketListener networkHandler, StatsCounter stats, ClientRecipeBook recipeBook, boolean lastSneaking, boolean lastSprinting, CallbackInfo ci) {
-        this.ambientSoundHandlers.add(new PlanetWeatherSoundPlayer((LocalPlayer) (Object) (this), client.getSoundManager()));
-        this.ambientSoundHandlers.add(new PlanetSoundPlayer((LocalPlayer) (Object) (this), client.getSoundManager()));
+    public void adastra_LocalPlayer(Minecraft minecraft, ClientLevel level, ClientPacketListener networkHandler, StatsCounter stats, ClientRecipeBook recipeBook, boolean lastSneaking, boolean lastSprinting, CallbackInfo ci) {
+        this.ambientSoundHandlers.add(new PlanetWeatherSoundPlayer((LocalPlayer) (Object) (this), minecraft.getSoundManager()));
+        this.ambientSoundHandlers.add(new PlanetSoundPlayer((LocalPlayer) (Object) (this), minecraft.getSoundManager()));
 
     }
 

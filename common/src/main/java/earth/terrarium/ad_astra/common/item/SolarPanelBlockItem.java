@@ -8,8 +8,8 @@ import net.minecraft.world.level.block.Block;
 
 public class SolarPanelBlockItem extends MachineBlockItem {
 
-    public SolarPanelBlockItem(Block block, Properties settings) {
-        super(block, settings);
+    public SolarPanelBlockItem(Block block, Properties properties) {
+        super(block, properties);
     }
 
     // Prevents the player from placing solar panels directly adjacent to other solar panels.

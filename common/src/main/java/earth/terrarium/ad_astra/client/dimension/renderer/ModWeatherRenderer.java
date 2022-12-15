@@ -29,10 +29,10 @@ public class ModWeatherRenderer {
 
     public static void render(ClientLevel level, int ticks, float tickDelta, LightTexture manager, double cameraX, double cameraY, double cameraZ) {
 
-        Minecraft client = Minecraft.getInstance();
-        LevelRendererAccessor renderer = (LevelRendererAccessor) client.levelRenderer;
+        Minecraft minecraft = Minecraft.getInstance();
+        LevelRendererAccessor renderer = (LevelRendererAccessor) minecraft.levelRenderer;
 
-        float h = client.level.getRainLevel(tickDelta);
+        float h = minecraft.level.getRainLevel(tickDelta);
         if (!(h <= 0.0f)) {
             manager.turnOnLightLayer();
             int i = Mth.floor(cameraX);

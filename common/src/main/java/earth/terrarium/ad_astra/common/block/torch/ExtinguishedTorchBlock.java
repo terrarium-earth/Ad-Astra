@@ -30,8 +30,8 @@ import org.jetbrains.annotations.NotNull;
 @MethodsReturnNonnullByDefault
 public class ExtinguishedTorchBlock extends Block {
 
-    public ExtinguishedTorchBlock(Properties settings) {
-        super(settings);
+    public ExtinguishedTorchBlock(Properties properties) {
+        super(properties);
     }
 
     @Override

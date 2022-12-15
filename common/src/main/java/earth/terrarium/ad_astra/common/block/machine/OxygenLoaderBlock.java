@@ -6,8 +6,8 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class OxygenLoaderBlock extends AbstractMachineBlock {
 
-    public OxygenLoaderBlock(Properties settings) {
-        super(settings);
+    public OxygenLoaderBlock(Properties properties) {
+        super(properties);
     }
 
     @Override

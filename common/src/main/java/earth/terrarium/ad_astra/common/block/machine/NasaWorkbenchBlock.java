@@ -13,8 +13,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class NasaWorkbenchBlock extends AbstractMachineBlock {
 
-    public NasaWorkbenchBlock(Properties settings) {
-        super(settings);
+    public NasaWorkbenchBlock(Properties properties) {
+        super(properties);
     }
 
     @Override

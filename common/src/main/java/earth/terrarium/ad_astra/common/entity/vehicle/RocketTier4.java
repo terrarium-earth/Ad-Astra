@@ -1,5 +1,6 @@
 package earth.terrarium.ad_astra.common.entity.vehicle;
 
+import earth.terrarium.ad_astra.common.registry.ModEntityTypes;
 import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.ad_astra.common.registry.ModParticleTypes;
 import earth.terrarium.ad_astra.common.util.ModUtils;
@@ -11,6 +12,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
 public class RocketTier4 extends Rocket {
+
+    public RocketTier4(Level level) {
+        super(ModEntityTypes.TIER_4_ROCKET.get(), level, 4);
+    }
 
     public RocketTier4(EntityType<?> type, Level level) {
         super(type, level, 4);

@@ -32,8 +32,8 @@ public class LaunchPad extends Block implements SimpleWaterloggedBlock {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final EnumProperty<LocationState> LOCATION = EnumProperty.create("location", LocationState.class);
 
-    public LaunchPad(Properties settings) {
-        super(settings);
+    public LaunchPad(Properties properties) {
+        super(properties);
         this.registerDefaultState(defaultBlockState().setValue(WATERLOGGED, false).setValue(LOCATION, LocationState.CENTER));
     }
 

@@ -6,8 +6,8 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class FuelRefineryBlock extends AbstractMachineBlock {
 
-    public FuelRefineryBlock(Properties settings) {
-        super(settings);
+    public FuelRefineryBlock(Properties properties) {
+        super(properties);
     }
 
     @Override

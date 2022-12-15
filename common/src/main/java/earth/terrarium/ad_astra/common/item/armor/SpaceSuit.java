@@ -26,8 +26,8 @@ import java.util.stream.StreamSupport;
 
 public class SpaceSuit extends DyeableArmorItem implements FluidContainingItem, ModArmourItem {
 
-    public SpaceSuit(ArmorMaterial material, EquipmentSlot slot, Item.Properties settings) {
-        super(material, slot, settings);
+    public SpaceSuit(ArmorMaterial material, EquipmentSlot slot, Item.Properties properties) {
+        super(material, slot, properties);
     }
 
     public static boolean hasFullSet(LivingEntity entity) {

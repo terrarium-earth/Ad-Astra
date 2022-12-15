@@ -22,8 +22,8 @@ public class EnergizerBlock extends AbstractMachineBlock {
 
     public static final IntegerProperty POWER = IntegerProperty.create("power", 0, 5);
 
-    public EnergizerBlock(Properties settings) {
-        super(settings);
+    public EnergizerBlock(Properties properties) {
+        super(properties);
     }
 
     @Override

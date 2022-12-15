@@ -45,8 +45,8 @@ public abstract class AbstractMachineBlock extends BaseEntityBlock {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
-    public AbstractMachineBlock(Properties settings) {
-        super(settings.lightLevel(getLuminance()));
+    public AbstractMachineBlock(Properties properties) {
+        super(properties.lightLevel(getLuminance()));
         this.registerDefaultState(this.buildDefaultState());
     }
 

@@ -8,7 +8,7 @@ import net.minecraft.world.item.SpawnEggItem;
 import java.util.function.Supplier;
 
 public class ModItemsImpl {
-    public static Supplier<SpawnEggItem> createSpawnEggItem(Supplier<? extends EntityType<? extends Mob>> type, int primaryColor, int secondaryColor, Item.Properties settings) {
-        return () -> new SpawnEggItem(type.get(), primaryColor, secondaryColor, settings);
+    public static Supplier<SpawnEggItem> createSpawnEggItem(Supplier<? extends EntityType<? extends Mob>> type, int primaryColor, int secondaryColor, Item.Properties properties) {
+        return () -> new SpawnEggItem(type.get(), primaryColor, secondaryColor, properties);
     }
 }

@@ -14,8 +14,8 @@ public abstract class JetSuitMixin extends Item {
     @Shadow(remap = false)
     private boolean isFallFlying;
 
-    public JetSuitMixin(Properties settings) {
-        super(settings);
+    public JetSuitMixin(Properties properties) {
+        super(properties);
     }
 
     @Override

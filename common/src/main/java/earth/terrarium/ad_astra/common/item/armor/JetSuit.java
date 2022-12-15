@@ -35,8 +35,8 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
 
     public boolean isFallFlying;
 
-    public JetSuit(ArmorMaterial material, EquipmentSlot slot, Properties settings) {
-        super(material, slot, settings);
+    public JetSuit(ArmorMaterial material, EquipmentSlot slot, Properties properties) {
+        super(material, slot, properties);
     }
 
     public static void spawnParticles(Level level, LivingEntity entity, HumanoidModel<LivingEntity> model) {

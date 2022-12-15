@@ -6,8 +6,8 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class CryoFreezerBlock extends AbstractMachineBlock {
 
-    public CryoFreezerBlock(Properties settings) {
-        super(settings);
+    public CryoFreezerBlock(Properties properties) {
+        super(properties);
     }
 
     @Override

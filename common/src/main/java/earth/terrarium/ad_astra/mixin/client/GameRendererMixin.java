@@ -19,9 +19,9 @@ public abstract class GameRendererMixin {
     @Inject(at = @At(value = "HEAD"), method = "bobView", cancellable = true)
     public void adastra_bobView(PoseStack poseStack, float tickDelta, CallbackInfo ci) {
 
-        Minecraft client = Minecraft.getInstance();
+        Minecraft minecraft = Minecraft.getInstance();
 
-        if (client.getCameraEntity() instanceof LocalPlayer player) {
+        if (minecraft.getCameraEntity() instanceof LocalPlayer player) {
             if (player.getVehicle() instanceof Rocket entity) {
                 if (entity.getPhase() != 3) {
                     if (entity.isFlying()) {

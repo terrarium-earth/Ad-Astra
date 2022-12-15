@@ -50,8 +50,8 @@ public class CableBlock extends AbstractPipeBlock {
 
     private final Map<BlockState, VoxelShape> shapes = new HashMap<>();
 
-    public CableBlock(long transferRate, int decay, double size, Properties settings) {
-        super(transferRate, decay, size, settings);
+    public CableBlock(long transferRate, int decay, double size, Properties properties) {
+        super(transferRate, decay, size, properties);
         this.registerDefaultState(defaultBlockState().setValue(UP, false).setValue(DOWN, false).setValue(NORTH, false).setValue(EAST, false).setValue(SOUTH, false).setValue(WEST, false).setValue(WATERLOGGED, false));
         this.stateDefinition.getPossibleStates().forEach(state -> shapes.put(state, this.createShape(state)));
     }

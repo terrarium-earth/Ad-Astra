@@ -50,10 +50,10 @@ public abstract class LevelRendererMixin {
     @Inject(method = "levelEvent", at = @At("HEAD"), cancellable = true)
     public void adastra_processWorldEvent(int eventId, BlockPos pos, int data, CallbackInfo ci) {
         if (eventId == LevelEvent.SOUND_PORTAL_TRAVEL) {
-            Minecraft client = Minecraft.getInstance();
-            LocalPlayer player = client.player;
+            Minecraft minecraft = Minecraft.getInstance();
+            LocalPlayer player = minecraft.player;
             // Don't player the portal sound if the player teleported to the new level.
-            if (((int) player.position().y()) == VehiclesConfig.RocketConfig.atmosphereLeave) {
+            if (player != null && ((int) player.position().y()) == VehiclesConfig.RocketConfig.atmosphereLeave) {
                 ci.cancel();
             }
         }
@@ -62,7 +62,7 @@ public abstract class LevelRendererMixin {
     // Venus rain.
     @Inject(method = "tickRain", at = @At("HEAD"))
     public void adastra_tickRainSplashing(Camera camera, CallbackInfo info) {
-        if (ModUtils.isPlanet(this.minecraft.level)) {
+        if (this.minecraft.level != null && ModUtils.isPlanet(this.minecraft.level)) {
             float f = this.minecraft.level.getRainLevel(1.0F) / (Minecraft.useFancyGraphics() ? 1.0F : 2.0F);
             if (!(f <= 0.0F)) {
                 RandomSource randomGenerator = RandomSource.create((long) this.ticks * 312987231L);

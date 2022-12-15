@@ -67,9 +67,7 @@ public class ModKeyBindings {
 
     @Environment(EnvType.CLIENT)
     private static boolean getClientKeyPressed(Player player, KeybindPacket.Keybind key) {
-
-        Minecraft client = Minecraft.getInstance();
-        if (!player.getUUID().equals(client.player.getUUID())) {
+        if (!player.getUUID().equals(Minecraft.getInstance().player.getUUID())) {
             return false;
         }
 

@@ -22,8 +22,8 @@ import java.util.List;
 
 public class RoverItem extends VehicleItem {
 
-    public RoverItem(Properties settings) {
-        super(settings);
+    public RoverItem(Properties properties) {
+        super(properties);
     }
 
     @Override

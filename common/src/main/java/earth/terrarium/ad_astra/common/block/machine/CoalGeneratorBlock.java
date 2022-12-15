@@ -6,8 +6,8 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class CoalGeneratorBlock extends AbstractMachineBlock {
 
-    public CoalGeneratorBlock(Properties settings) {
-        super(settings);
+    public CoalGeneratorBlock(Properties properties) {
+        super(properties);
     }
 
     @Override

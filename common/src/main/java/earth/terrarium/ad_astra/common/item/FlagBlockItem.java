@@ -16,8 +16,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class FlagBlockItem extends ModRenderedBlockItem {
-    public FlagBlockItem(Block block, Properties settings) {
-        super(block, settings);
+    public FlagBlockItem(Block block, Properties properties) {
+        super(block, properties);
     }
 
     @Override

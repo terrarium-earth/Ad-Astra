@@ -41,8 +41,8 @@ public abstract class AbstractPipeBlock extends BaseEntityBlock implements Simpl
     protected final int decay;
     protected double size;
 
-    public AbstractPipeBlock(long transferRate, int decay, double size, Properties settings) {
-        super(settings);
+    public AbstractPipeBlock(long transferRate, int decay, double size, Properties properties) {
+        super(properties);
         this.transferRate = transferRate;
         this.decay = decay;
         this.size = size;

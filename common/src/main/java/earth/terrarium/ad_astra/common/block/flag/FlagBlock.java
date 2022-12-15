@@ -44,8 +44,8 @@ public class FlagBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-    public FlagBlock(Properties settings) {
-        super(settings);
+    public FlagBlock(Properties properties) {
+        super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false).setValue(HALF, DoubleBlockHalf.LOWER));
     }
 

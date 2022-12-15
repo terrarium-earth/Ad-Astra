@@ -26,8 +26,8 @@ import java.util.function.BiPredicate;
 
 public class OxygenTankItem extends Item implements FluidContainingItem {
 
-    public OxygenTankItem(Properties settings) {
-        super(settings);
+    public OxygenTankItem(Properties properties) {
+        super(properties);
     }
 
     public static ItemStack createOxygenatedTank() {

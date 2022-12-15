@@ -27,8 +27,8 @@ public class VenusCloudRenderer {
 
     public static void render(ClientLevel level, int ticks, float tickDelta, PoseStack poseStack, double cameraX, double cameraY, double cameraZ, Matrix4f projectionMatrix) {
 
-        Minecraft client = Minecraft.getInstance();
-        LevelRendererAccessor renderer = (LevelRendererAccessor) client.levelRenderer;
+        Minecraft minecraft = Minecraft.getInstance();
+        LevelRendererAccessor renderer = (LevelRendererAccessor) minecraft.levelRenderer;
 
         float f = level.effects().getCloudHeight();
         if (!Float.isNaN(f)) {
@@ -50,12 +50,12 @@ public class VenusCloudRenderer {
             int o = (int) Math.floor(i);
             int p = (int) Math.floor(j / 4.0);
             int q = (int) Math.floor(k);
-            if (o != renderer.getPrevCloudX() || p != renderer.getPrevCloudY() || q != renderer.getPrevCloudZ() || client.options.getCloudsType() != renderer.getPrevCloudsType() || renderer.getPrevCloudColor().distanceToSqr(colour) > 2.0E-4) {
+            if (o != renderer.getPrevCloudX() || p != renderer.getPrevCloudY() || q != renderer.getPrevCloudZ() || minecraft.options.getCloudsType() != renderer.getPrevCloudsType() || renderer.getPrevCloudColor().distanceToSqr(colour) > 2.0E-4) {
                 renderer.setPrevCloudX(o);
                 renderer.setPrevCloudY(p);
                 renderer.setPrevCloudZ(q);
                 renderer.setPrevCloudColor(colour);
-                renderer.setPrevCloudsType(client.options.getCloudsType());
+                renderer.setPrevCloudsType(minecraft.options.getCloudsType());
                 renderer.setGenerateClouds(true);
             }
 

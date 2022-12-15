@@ -47,8 +47,8 @@ public class SlidingDoorBlock extends BaseEntityBlock {
     protected static final VoxelShape GIANT_X_SHAPE = Block.box(-16, -16, 0.0, 32.0, 32.0, 3.0);
     protected static final VoxelShape GIANT_Z_SHAPE = Block.box(0.0, -16, -16, 3.0, 32.0, 32.0);
 
-    public SlidingDoorBlock(Properties settings) {
-        super(settings);
+    public SlidingDoorBlock(Properties properties) {
+        super(properties);
         this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.NORTH).setValue(OPEN, false).setValue(POWERED, false).setValue(LOCATION, LocationState.BOTTOM));
     }
 

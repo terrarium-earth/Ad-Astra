@@ -27,10 +27,10 @@ public class GlobeItemRenderer extends BlockEntityWithoutLevelRenderer {
         GlobeModel model = GlobeModel.getModel();
 
         // Constant spin
-        Minecraft client = Minecraft.getInstance();
-        float tickDelta = client.getFrameTime();
-        model.setYaw(Mth.lerp(tickDelta, prevWorldTime, client.level.getGameTime()) / -20.0f);
-        prevWorldTime = client.level.getGameTime();
+        Minecraft minecraft = Minecraft.getInstance();
+        float tickDelta = minecraft.getFrameTime();
+        model.setYaw(Mth.lerp(tickDelta, prevWorldTime, minecraft.level.getGameTime()) / -20.0f);
+        prevWorldTime = minecraft.level.getGameTime();
 
         GlobeRenderer.render(Registry.ITEM.getKey(stack.getItem()), model, Direction.NORTH, poseStack, buffer, packedLight, packedOverlay);
     }

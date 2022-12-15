@@ -62,7 +62,7 @@ public class PlanetWeatherSoundPlayer implements AmbientSoundHandler {
                 return;
             }
             ClientLevel level = (ClientLevel) player.getLevel();
-            Minecraft client = Minecraft.getInstance();
+            Minecraft minecraft = Minecraft.getInstance();
 
             double height = 80.0;
             double max = 0.2;
@@ -76,7 +76,7 @@ public class PlanetWeatherSoundPlayer implements AmbientSoundHandler {
             }
             float volume = (float) Mth.clamp((this.player.getY() - 80) / height, 0.0f, max);
 
-            if (client.screen != null && client.screen.isPauseScreen()) {
+            if (minecraft.screen != null && minecraft.screen.isPauseScreen()) {
                 volume = 0.0f;
                 return;
             }

@@ -14,8 +14,8 @@ import java.util.stream.StreamSupport;
 
 public class NetheriteSpaceSuit extends SpaceSuit {
 
-    public NetheriteSpaceSuit(ArmorMaterial material, EquipmentSlot slot, Properties settings) {
-        super(material, slot, settings);
+    public NetheriteSpaceSuit(ArmorMaterial material, EquipmentSlot slot, Properties properties) {
+        super(material, slot, properties);
     }
 
     public static boolean hasFullSet(LivingEntity entity) {

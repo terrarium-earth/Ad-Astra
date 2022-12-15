@@ -24,12 +24,10 @@ import java.util.List;
 
 public class RocketItem<T extends Rocket> extends VehicleItem {
 
-    private final EntityType<T> rocketEntity;
     private final int tier;
 
-    public RocketItem(EntityType<T> rocketEntity, int tier, Properties settings) {
-        super(settings);
-        this.rocketEntity = rocketEntity;
+    public RocketItem(EntityType<T> rocketEntity, int tier, Properties properties) {
+        super(properties);
         this.tier = tier;
     }
 
@@ -64,10 +62,10 @@ public class RocketItem<T extends Rocket> extends VehicleItem {
 
                         int tier = rocket.getTier();
                         switch (tier) {
-                            case 1 -> rocketEntity = new RocketTier1(rocket.getRocketEntity(), level);
-                            case 2 -> rocketEntity = new RocketTier2(rocket.getRocketEntity(), level);
-                            case 3 -> rocketEntity = new RocketTier3(rocket.getRocketEntity(), level);
-                            case 4 -> rocketEntity = new RocketTier4(rocket.getRocketEntity(), level);
+                            case 1 -> rocketEntity = new RocketTier1(level);
+                            case 2 -> rocketEntity = new RocketTier2(level);
+                            case 3 -> rocketEntity = new RocketTier3(level);
+                            case 4 -> rocketEntity = new RocketTier4(level);
                         }
 
                         if (rocketEntity != null) {
@@ -106,10 +104,6 @@ public class RocketItem<T extends Rocket> extends VehicleItem {
             }
         }
         return InteractionResult.PASS;
-    }
-
-    public EntityType<T> getRocketEntity() {
-        return this.rocketEntity;
     }
 
     public int getTier() {

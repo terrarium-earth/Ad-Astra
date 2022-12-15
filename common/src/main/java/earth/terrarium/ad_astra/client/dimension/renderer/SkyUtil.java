@@ -29,8 +29,8 @@ public class SkyUtil {
 
     // Scales the planet as you fall closer to it.
     public static float getScale() {
-        Minecraft client = Minecraft.getInstance();
-        float distance = (float) (-3000.0f + client.player.getY() * 4.5f);
+        Minecraft minecraft = Minecraft.getInstance();
+        float distance = (float) (-3000.0f + minecraft.player.getY() * 4.5f);
         float scale = 100 * (0.2f - distance / 10000.0f);
         return Math.max(scale, 0.5f);
     }

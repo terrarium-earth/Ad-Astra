@@ -12,8 +12,8 @@ import net.minecraft.world.level.material.PushReaction;
 
 public class OxygenDistributorBlock extends AbstractMachineBlock {
 
-    public OxygenDistributorBlock(Properties settings) {
-        super(settings);
+    public OxygenDistributorBlock(Properties properties) {
+        super(properties);
     }
 
     public static void removeOxygen(Level level, BlockPos pos) {

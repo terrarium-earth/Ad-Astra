@@ -76,9 +76,9 @@ public class CustomButton extends Button {
     @Override
     public void render(PoseStack poseStack, int mouseX, int mouseY, float delta) {
         if (this.visible) {
-            Minecraft client = Minecraft.getInstance();
-            double scale = client.getWindow().getGuiScale();
-            int screenHeight = client.getWindow().getGuiScaledHeight();
+            Minecraft minecraft = Minecraft.getInstance();
+            double scale = minecraft.getWindow().getGuiScale();
+            int screenHeight = minecraft.getWindow().getGuiScaledHeight();
             int scissorY = (int) (((screenHeight / 2) - 83) * scale);
 
             boolean over = this.isMouseOver(mouseX, mouseY);
@@ -103,14 +103,14 @@ public class CustomButton extends Button {
             });
 
             blit(poseStack, (this.buttonSize.equals(ButtonType.LARGE) ? this.x - 2 : this.x), this.y, 0, 0, this.width, this.height, buttonSize.getWidth(), buttonSize.getHeight());
-            drawText(poseStack, client);
+            drawText(poseStack, minecraft);
 
             if (this.doScissor) {
                 RenderSystem.disableScissor();
             }
 
             if (this.isMouseOver(mouseX, mouseY)) {
-                renderTooltips(poseStack, mouseX, mouseY, client);
+                renderTooltips(poseStack, mouseX, mouseY, minecraft);
             }
 
             poseStack.popPose();
@@ -118,8 +118,8 @@ public class CustomButton extends Button {
         }
     }
 
-    public void drawText(PoseStack poseStack, Minecraft client) {
-        Font textRenderer = client.font;
+    public void drawText(PoseStack poseStack, Minecraft minecraft) {
+        Font textRenderer = minecraft.font;
         int colour = this.active ? 16777215 : 10526880;
         poseStack.pushPose();
         float scale = 0.9f;
@@ -134,9 +134,9 @@ public class CustomButton extends Button {
         return this.startY;
     }
 
-    private void renderTooltips(PoseStack poseStack, int mouseX, int mouseY, Minecraft client) {
+    private void renderTooltips(PoseStack poseStack, int mouseX, int mouseY, Minecraft minecraft) {
 
-        Screen screen = client.screen;
+        Screen screen = minecraft.screen;
         List<Component> textEntries = new LinkedList<>();
 
         switch (tooltip) {
@@ -144,43 +144,43 @@ public class CustomButton extends Button {
 
             }
             case GALAXY -> {
-                textEntries.add(Component.nullToEmpty("\u00A79" + PlanetSelectionScreen.CATEGORY_TEXT.getString() + ": \u00A7b" + label.getString()));
-                textEntries.add(Component.nullToEmpty("\u00A79" + PlanetSelectionScreen.TYPE_TEXT.getString() + ": \u00A75" + PlanetSelectionScreen.GALAXY_TEXT.getString()));
+                textEntries.add(Component.nullToEmpty("§9" + PlanetSelectionScreen.CATEGORY_TEXT.getString() + ": §b" + label.getString()));
+                textEntries.add(Component.nullToEmpty("§9" + PlanetSelectionScreen.TYPE_TEXT.getString() + ": §5" + PlanetSelectionScreen.GALAXY_TEXT.getString()));
             }
             case SOLAR_SYSTEM -> {
-                textEntries.add(Component.nullToEmpty("\u00A79" + PlanetSelectionScreen.CATEGORY_TEXT.getString() + ": \u00A7b" + label.getString()));
-                textEntries.add(Component.nullToEmpty("\u00A79" + PlanetSelectionScreen.TYPE_TEXT.getString() + ": \u00A73" + PlanetSelectionScreen.SOLAR_SYSTEM_TEXT.getString()));
+                textEntries.add(Component.nullToEmpty("§9" + PlanetSelectionScreen.CATEGORY_TEXT.getString() + ": §b" + label.getString()));
+                textEntries.add(Component.nullToEmpty("§9" + PlanetSelectionScreen.TYPE_TEXT.getString() + ": §3" + PlanetSelectionScreen.SOLAR_SYSTEM_TEXT.getString()));
             }
             case CATEGORY -> {
-                textEntries.add(Component.nullToEmpty("\u00A79" + PlanetSelectionScreen.CATEGORY_TEXT.getString() + ": \u00A7a" + label.getString()));
-                textEntries.add(Component.nullToEmpty("\u00A79" + PlanetSelectionScreen.PROVIDED_TEXT.getString() + ": \u00A7b" + Component.translatable("item.ad_astra.tier_" + planetInfo.rocketTier() + "_rocket").getString()));
+                textEntries.add(Component.nullToEmpty("§9" + PlanetSelectionScreen.CATEGORY_TEXT.getString() + ": §a" + label.getString()));
+                textEntries.add(Component.nullToEmpty("§9" + PlanetSelectionScreen.PROVIDED_TEXT.getString() + ": §b" + Component.translatable("item.ad_astra.tier_" + planetInfo.rocketTier() + "_rocket").getString()));
             }
             case PLANET -> {
-                textEntries.add(Component.nullToEmpty("\u00A79" + PlanetSelectionScreen.TYPE_TEXT.getString() + ": \u00A73" + (planetInfo.parentWorld() == null ? PlanetSelectionScreen.PLANET_TEXT.getString() : PlanetSelectionScreen.MOON_TEXT.getString())));
-                textEntries.add(Component.nullToEmpty("\u00A79" + PlanetSelectionScreen.GRAVITY_TEXT.getString() + ": \u00A73" + planetInfo.gravity() + " m/s"));
-                textEntries.add(Component.nullToEmpty("\u00A79" + PlanetSelectionScreen.OXYGEN_TEXT.getString() + ": \u00A7" + (planetInfo.hasOxygen() ? ('a' + PlanetSelectionScreen.OXYGEN_TRUE_TEXT.getString()) : ('c' + PlanetSelectionScreen.OXYGEN_FALSE_TEXT.getString()))));
-                String temperatureColour = "\u00A7a";
+                textEntries.add(Component.nullToEmpty("§9" + PlanetSelectionScreen.TYPE_TEXT.getString() + ": §3" + (planetInfo.parentWorld() == null ? PlanetSelectionScreen.PLANET_TEXT.getString() : PlanetSelectionScreen.MOON_TEXT.getString())));
+                textEntries.add(Component.nullToEmpty("§9" + PlanetSelectionScreen.GRAVITY_TEXT.getString() + ": §3" + planetInfo.gravity() + " m/s"));
+                textEntries.add(Component.nullToEmpty("§9" + PlanetSelectionScreen.OXYGEN_TEXT.getString() + ": §" + (planetInfo.hasOxygen() ? ('a' + PlanetSelectionScreen.OXYGEN_TRUE_TEXT.getString()) : ('c' + PlanetSelectionScreen.OXYGEN_FALSE_TEXT.getString()))));
+                String temperatureColour = "§a";
 
                 // Make the temperature text look orange when the temperature is hot and blue when the temperature is cold.
                 if (planetInfo.temperature() > 50) {
                     // Hot.
-                    temperatureColour = "\u00A76";
+                    temperatureColour = "§6";
                 } else if (planetInfo.temperature() < -20) {
                     // Cold.
-                    temperatureColour = "\u00A71";
+                    temperatureColour = "§1";
                 }
 
-                textEntries.add(Component.nullToEmpty("\u00A79" + PlanetSelectionScreen.TEMPERATURE_TEXT.getString() + ": " + temperatureColour + " " + planetInfo.temperature() + " °C"));
+                textEntries.add(Component.nullToEmpty("§9" + PlanetSelectionScreen.TEMPERATURE_TEXT.getString() + ": " + temperatureColour + " " + planetInfo.temperature() + " °C"));
             }
             case SPACE_STATION -> {
-                PlanetSelectionScreen currentScreen = (PlanetSelectionScreen) client.screen;
-                textEntries.add(Component.nullToEmpty("\u00A79" + PlanetSelectionScreen.ITEM_REQUIREMENT_TEXT.getString()));
+                PlanetSelectionScreen currentScreen = (PlanetSelectionScreen) minecraft.screen;
+                textEntries.add(Component.nullToEmpty("§9" + PlanetSelectionScreen.ITEM_REQUIREMENT_TEXT.getString()));
 
                 currentScreen.ingredients.forEach(ingredient -> {
                     boolean isEnough = ingredient.getFirst().getCount() >= ingredient.getSecond();
-                    textEntries.add(Component.nullToEmpty("\u00A7" + (isEnough ? "a" : "c") + ingredient.getFirst().getCount() + "/" + ingredient.getSecond() + " \u00A73" + ingredient.getFirst().getHoverName().getString()));
+                    textEntries.add(Component.nullToEmpty("§" + (isEnough ? "a" : "c") + ingredient.getFirst().getCount() + "/" + ingredient.getSecond() + " §3" + ingredient.getFirst().getHoverName().getString()));
                 });
-                textEntries.add(Component.nullToEmpty("\u00A7c----------------"));
+                textEntries.add(Component.nullToEmpty("§c----------------"));
             }
             default -> {
 
@@ -188,10 +188,10 @@ public class CustomButton extends Button {
         }
 
         if (tooltip.equals(TooltipType.ORBIT) || tooltip.equals(TooltipType.SPACE_STATION)) {
-            textEntries.add(Component.nullToEmpty("\u00A79" + PlanetSelectionScreen.TYPE_TEXT.getString() + ": \u00A73" + PlanetSelectionScreen.ORBIT_TEXT.getString()));
-            textEntries.add(Component.nullToEmpty("\u00A79" + PlanetSelectionScreen.GRAVITY_TEXT.getString() + ": \u00A73" + PlanetSelectionScreen.NO_GRAVITY_TEXT.getString()));
-            textEntries.add(Component.nullToEmpty("\u00A79" + PlanetSelectionScreen.OXYGEN_TEXT.getString() + ": \u00A7c " + PlanetSelectionScreen.OXYGEN_FALSE_TEXT.getString()));
-            textEntries.add(Component.nullToEmpty("\u00A79" + PlanetSelectionScreen.TEMPERATURE_TEXT.getString() + ": \u00A71 " + ModUtils.ORBIT_TEMPERATURE + " °C"));
+            textEntries.add(Component.nullToEmpty("§9" + PlanetSelectionScreen.TYPE_TEXT.getString() + ": §3" + PlanetSelectionScreen.ORBIT_TEXT.getString()));
+            textEntries.add(Component.nullToEmpty("§9" + PlanetSelectionScreen.GRAVITY_TEXT.getString() + ": §3" + PlanetSelectionScreen.NO_GRAVITY_TEXT.getString()));
+            textEntries.add(Component.nullToEmpty("§9" + PlanetSelectionScreen.OXYGEN_TEXT.getString() + ": §c " + PlanetSelectionScreen.OXYGEN_FALSE_TEXT.getString()));
+            textEntries.add(Component.nullToEmpty("§9" + PlanetSelectionScreen.TEMPERATURE_TEXT.getString() + ": §1 " + ModUtils.ORBIT_TEMPERATURE + " °C"));
         }
 
         screen.renderComponentTooltip(poseStack, textEntries, mouseX, mouseY);

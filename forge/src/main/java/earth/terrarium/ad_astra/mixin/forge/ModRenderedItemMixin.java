@@ -13,8 +13,8 @@ import java.util.function.Consumer;
 @Mixin({ModRenderedItem.class, ModRenderedBlockItem.class})
 public abstract class ModRenderedItemMixin extends Item {
 
-    public ModRenderedItemMixin(Properties settings) {
-        super(settings);
+    public ModRenderedItemMixin(Properties properties) {
+        super(properties);
     }
 
     @Override

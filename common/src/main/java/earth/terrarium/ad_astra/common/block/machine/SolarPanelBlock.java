@@ -6,8 +6,8 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class SolarPanelBlock extends AbstractMachineBlock {
 
-    public SolarPanelBlock(Properties settings) {
-        super(settings);
+    public SolarPanelBlock(Properties properties) {
+        super(properties);
     }
 
     @Override

@@ -132,14 +132,14 @@ public class SoundManagerMixin {
             return;
         }
 
-        Minecraft client = Minecraft.getInstance();
-        if (client.level == null) {
+        Minecraft minecraft = Minecraft.getInstance();
+        if (minecraft.level == null) {
             return;
         }
 
-        if (ModUtils.isOrbitlevel(client.level)) {
-            boolean noOxygen = !OxygenUtils.posHasOxygen(client.level, new BlockPos(sound.getX(), sound.getY(), sound.getZ()));
-            if (client.level != null && noOxygen || sound.getSource().equals(SoundSource.MUSIC) || sound.getSource().equals(SoundSource.RECORDS) || sound.getSource().equals(SoundSource.AMBIENT)) {
+        if (ModUtils.isOrbitlevel(minecraft.level)) {
+            boolean noOxygen = !OxygenUtils.posHasOxygen(minecraft.level, new BlockPos(sound.getX(), sound.getY(), sound.getZ()));
+            if (minecraft.level != null && noOxygen || sound.getSource().equals(SoundSource.MUSIC) || sound.getSource().equals(SoundSource.RECORDS) || sound.getSource().equals(SoundSource.AMBIENT)) {
                 ci.cancel();
                 SoundInstance newSound = getSpaceSoundInstance(sound, ((sound.getSource().equals(SoundSource.MUSIC) || sound.getSource().equals(SoundSource.RECORDS) || sound.getSource().equals(SoundSource.AMBIENT)) ? 1.0f : 0.1f), 0.1f);
                 this.soundEngine.play(newSound);

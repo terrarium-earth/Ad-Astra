@@ -126,8 +126,8 @@ public class SpaceSuitModel extends HumanoidModel<LivingEntity> {
             a = decimal == 0xFFFFFF ? 0.3f : 0.6f;
         }
 
-        Minecraft client = Minecraft.getInstance();
-        MultiBufferSource provider = client.renderBuffers().bufferSource();
+        Minecraft minecraft = Minecraft.getInstance();
+        MultiBufferSource provider = minecraft.renderBuffers().bufferSource();
         if (!this.stack.is(ModItems.SPACE_HELMET.get())) {
             this.head.render(poseStack, vertices, packedLight, packedOverlay, 1.0f, 1.0f, 1.0f, 1.0f);
             this.visor.render(poseStack, provider.getBuffer(RenderType.entityTranslucent(this.texture)), packedLight, packedOverlay, r, g, b, a);

@@ -6,8 +6,8 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class CompressorBlock extends AbstractMachineBlock {
 
-    public CompressorBlock(Properties settings) {
-        super(settings);
+    public CompressorBlock(Properties properties) {
+        super(properties);
     }
 
     @Override

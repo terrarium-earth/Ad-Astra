@@ -13,8 +13,8 @@ import net.minecraft.world.phys.BlockHitResult;
 
 public class OxygenSensorBlock extends AbstractMachineBlock {
 
-    public OxygenSensorBlock(Properties settings) {
-        super(settings);
+    public OxygenSensorBlock(Properties properties) {
+        super(properties);
     }
 
     @Override

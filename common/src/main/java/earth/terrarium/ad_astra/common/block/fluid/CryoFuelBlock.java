@@ -16,8 +16,8 @@ import net.minecraft.world.phys.Vec3;
 @SuppressWarnings("deprecation")
 public class CryoFuelBlock extends BotariumLiquidBlock {
 
-    public CryoFuelBlock(FluidData data, Properties settings) {
-        super(data, settings);
+    public CryoFuelBlock(FluidData data, Properties properties) {
+        super(data, properties);
     }
 
     @Override

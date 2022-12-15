@@ -38,8 +38,8 @@ public class GlobeBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
-    public GlobeBlock(Properties settings) {
-        super(settings);
+    public GlobeBlock(Properties properties) {
+        super(properties);
         this.registerDefaultState(defaultBlockState().setValue(WATERLOGGED, false).setValue(POWERED, false));
     }
 

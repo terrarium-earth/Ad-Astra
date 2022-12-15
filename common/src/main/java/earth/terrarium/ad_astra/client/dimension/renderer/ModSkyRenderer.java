@@ -45,7 +45,7 @@ public class ModSkyRenderer {
     public void render(ClientLevel level, int ticks, float tickDelta, PoseStack poseStack, Camera camera, Matrix4f projectionMatrix, boolean foggy) {
 
         BufferBuilder bufferBuilder = Tesselator.getInstance().getBuilder();
-        Minecraft client = Minecraft.getInstance();
+        Minecraft minecraft = Minecraft.getInstance();
 
         if (shouldRenderWhileRaining && level.isRaining()) {
             return;
@@ -55,11 +55,11 @@ public class ModSkyRenderer {
             return;
         }
 
-        SkyUtil.preRender(level, client.levelRenderer, camera, projectionMatrix, bufferBuilder, this.sunsetColour, horizonAngle, poseStack, tickDelta);
+        SkyUtil.preRender(level, minecraft.levelRenderer, camera, projectionMatrix, bufferBuilder, this.sunsetColour, horizonAngle, poseStack, tickDelta);
 
         // Stars
         if (this.starsRenderer.fastStars() > 0) {
-            int stars = (!client.options.graphicsMode().get().equals(GraphicsStatus.FAST) ? this.starsRenderer.fancyStars() : this.starsRenderer.fastStars());
+            int stars = (!minecraft.options.graphicsMode().get().equals(GraphicsStatus.FAST) ? this.starsRenderer.fancyStars() : this.starsRenderer.fastStars());
             starsBuffer = renderStars(level, poseStack, tickDelta, bufferBuilder, stars, this.starsRenderer, projectionMatrix);
         }
 
@@ -77,7 +77,7 @@ public class ModSkyRenderer {
             SkyUtil.render(poseStack, bufferBuilder, skyObject.texture(), skyObject.colour(), rotation, scale, skyObject.blending());
         }
 
-        SkyUtil.postRender(client.gameRenderer, level, tickDelta);
+        SkyUtil.postRender(minecraft.gameRenderer, level, tickDelta);
     }
 
     private VertexBuffer renderStars(ClientLevel level, PoseStack poseStack, float tickDelta, BufferBuilder bufferBuilder, int stars, StarsRenderer starsRenderer, Matrix4f projectionMatrix) {

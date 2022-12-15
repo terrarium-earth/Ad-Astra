@@ -21,8 +21,8 @@ import org.jetbrains.annotations.NotNull;
 @SuppressWarnings("deprecation")
 public class ExtinguishedLanternBlock extends LanternBlock {
 
-    public ExtinguishedLanternBlock(Properties settings) {
-        super(settings);
+    public ExtinguishedLanternBlock(Properties properties) {
+        super(properties);
     }
 
     @Override

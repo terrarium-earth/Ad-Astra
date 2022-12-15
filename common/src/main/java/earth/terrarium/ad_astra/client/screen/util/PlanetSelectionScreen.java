@@ -20,6 +20,7 @@ import earth.terrarium.ad_astra.common.screen.menu.PlanetSelectionMenu;
 import earth.terrarium.ad_astra.common.util.MathUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.components.Button;
@@ -38,6 +39,7 @@ import java.util.*;
 import java.util.function.Consumer;
 
 @Environment(EnvType.CLIENT)
+@MethodsReturnNonnullByDefault
 public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSelectionMenu> {
 
     public static final ResourceLocation SMALL_MENU_LIST = new ResourceLocation(AdAstra.MOD_ID, "textures/gui/selection_menu.png");
@@ -317,9 +319,11 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
                     }
                 }
             }
-            this.minecraft.player.closeContainer();
-            NetworkHandling.CHANNEL.sendToServer(new CreateSpaceStationPacket(level.location()));
-            teleportPlayer(level);
+            if (minecraft != null && minecraft.player != null) {
+                this.minecraft.player.closeContainer();
+                NetworkHandling.CHANNEL.sendToServer(new CreateSpaceStationPacket(level.location()));
+                teleportPlayer(level);
+            }
         });
     }
 
@@ -486,18 +490,18 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
     // Do not close unless in creative mode
     @Override
     public void onClose() {
-        Minecraft client = Minecraft.getInstance();
-        if (client.player.isCreative() || client.player.isSpectator()) {
+        Minecraft minecraft = Minecraft.getInstance();
+        if (minecraft.player != null && (minecraft.player.isCreative() || minecraft.player.isSpectator())) {
             super.onClose();
         }
     }
 
     // Reset the buttons when the window size is changed
     @Override
-    public void resize(Minecraft client, int width, int height) {
+    public void resize(Minecraft minecraft, int width, int height) {
         this.categoryButtons.clear();
         this.resetButtonScroll();
-        super.resize(client, width, height);
+        super.resize(minecraft, width, height);
     }
 
     public enum TooltipType {
