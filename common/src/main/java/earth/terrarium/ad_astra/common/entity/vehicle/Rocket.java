@@ -205,12 +205,12 @@ public class Rocket extends Vehicle {
             return;
         }
         this.getPassengers().forEach(passenger -> {
-            if (passenger instanceof Player player) {
+            if (passenger instanceof ServerPlayer player) {
                 if (!(player.containerMenu instanceof PlanetSelectionMenu)) {
                     player.closeContainer();
                     if (!this.level.isClientSide) {
-                        MenuHooks.openMenu((ServerPlayer) player, new PlanetSelectionMenuProvider(this.getTier()));
-                        stopRocketSoundForRider((ServerPlayer) player);
+                        MenuHooks.openMenu(player, new PlanetSelectionMenuProvider(this.getTier()));
+                        stopRocketSoundForRider(player);
                     }
                 }
             }
