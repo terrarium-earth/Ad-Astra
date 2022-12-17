@@ -6,14 +6,11 @@ import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.Display;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.core.Holder;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Environment(EnvType.CLIENT)
 public record OxygenConversionDisplay(OxygenConversionRecipe recipe) implements Display {
 
     @Override
