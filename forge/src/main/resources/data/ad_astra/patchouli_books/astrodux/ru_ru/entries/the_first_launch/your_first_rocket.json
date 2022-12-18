@@ -1,7 +1,7 @@
 {
   "name": "Ваша Первая Ракета",
   "icon": "ad_astra:nasa_workbench",
-  "sortnum": 0,
+  "sortnum": 1,
   "category": "ad_astra:the_first_launch",
   "pages": [
     {

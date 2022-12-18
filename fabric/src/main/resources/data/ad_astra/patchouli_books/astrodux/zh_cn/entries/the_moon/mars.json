@@ -1,0 +1,19 @@
+{
+  "name": "火星",
+  "icon": "ad_astra:/textures/sky/mars.png",
+  "sortnum": 6,
+  "category": "ad_astra:the_moon",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "火星",
+      "text": "在你踏足了这颗灰色星球后，或许还想走得更远。天空中那颗耀眼的绯红色星球将会是你星际之旅的下一站。前往火星需要一枚二级火箭，它的建造工艺与初级火箭相同，不过你需要使用戴斯材料替代钢制品。构造出各种部件并在NASA工程装配台中组装你的火箭，注满燃油，走你的吧！"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "紫金",
+      "item": "ad_astra:ostrum_ingot",
+      "text": "紫金是那颗红色星球上独有的材料，可以用来制造更加强有力的太空装备、更多卓越的机器和能够承受极热的火箭，允许你深入太阳系炽热的腹地。"
+    }
+  ]
+}

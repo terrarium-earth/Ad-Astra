@@ -1,0 +1,34 @@
+{
+  "name": "氧气",
+  "icon": "ad_astra:oxygen_tank",
+  "sortnum": 3,
+  "category": "ad_astra:the_first_launch",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "在这历史性的一刻，你终于可以发射火箭了...等等，我们是不是忘了什么？不带些氧气就飞向月球简直就是找死。想要在月球和其它外星环境中生存，你需要准备一套宇航服和几罐氧气。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:recipes/space_helmet",
+      "recipe2": "ad_astra:recipes/space_suit"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:recipes/space_pants",
+      "recipe2": "ad_astra:recipes/space_boots"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "氧气",
+      "item": "ad_astra:oxygen_bucket",
+      "text": "现在的工业水平只允许你从水中获取氧气。要将水电解获得氧气并装载到储罐中，你需要一台氧气装载器。将水桶从左侧放入，通上电，氧气就会不断地被提取...重复多次，直到提取出足够的氧气。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "氧气装载器",
+      "recipe": "ad_astra:recipes/oxygen_loader",
+      "text": "你可以将氧气装进铁通和氧气储罐中，或是充入宇航服里。准备好了吗？这下，我们距离火箭发射只有一步之遥了！"
+    }
+  ]
+}

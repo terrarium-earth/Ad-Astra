@@ -1,0 +1,20 @@
+{
+  "name": "清洁能源",
+  "icon": "ad_astra:solar_panel",
+  "sortnum": 1,
+  "category": "ad_astra:the_moon",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "太阳能板",
+      "item": "ad_astra:solar_panel",
+      "text": "相比于火力发电机，太阳能板可以从大自然源源不断地获取能量，且发电速度更快。太阳能板的发电能力由所在天体与恒星之间的距离和大气通透度决定。正因如此，在靠近恒星的地方搭建太阳能板会获得更高的效益。在近地轨道上，因为没有了大气的遮挡，太阳能板也会变得更加高效。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "太阳能板",
+      "text": "你可以在太阳能板的物品提示和GUI中查看当前的太阳能板能量产出。",
+      "recipe": "ad_astra:recipes/solar_panel"
+    }
+  ]
+}
