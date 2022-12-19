@@ -1,0 +1,23 @@
+{
+  "name": "能量传输",
+  "icon": "ad_astra:desh_cable",
+  "sortnum": 4,
+  "category": "ad_astra:the_moon",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "线缆",
+      "item": "ad_astra:desh_cable",
+      "text": "线缆是进行长距离能量传输的首选工具。总共有两种线缆可供选择：钢线缆和戴斯线缆 - 相比于钢线缆，戴斯线缆有着更高的传输速率。手持扳手右击线缆可以调整延伸方向，并与网络中的节点断开连接。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:recipes/steel_cable",
+      "recipe2": "ad_astra:recipes/desh_cable"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:recipes/wrench"
+    }
+  ]
+}

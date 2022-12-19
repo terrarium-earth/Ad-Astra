@@ -13,7 +13,7 @@
     {
       "type": "patchouli:text",
       "title": "Returning Home",
-      "text": "To return back to earth, open your lander (shift + right-click) and collect the rocket, fuel and the launch pads. To remove the lander, punch it. Set up the launch pad, place the rocket down and fill it up with fuel. Press $(k:jump) and fly back to earth."
+      "text": "To return back to earth, open your lander (shift + right-click) and collect the rocket, fuel and the launch pad. To remove the lander, punch it. Set up the launch pad, place the rocket down and fill it up with fuel. Press $(k:jump) and fly back to earth."
     }
   ]
 }

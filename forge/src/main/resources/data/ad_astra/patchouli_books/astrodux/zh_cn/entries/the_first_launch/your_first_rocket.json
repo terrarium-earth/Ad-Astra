@@ -1,18 +1,18 @@
 {
-  "name": "Your First Rocket",
+  "name": "第一枚火箭",
   "icon": "ad_astra:nasa_workbench",
   "sortnum": 1,
   "category": "ad_astra:the_first_launch",
   "pages": [
     {
       "type": "patchouli:spotlight",
-      "title": "NASA Workbench",
+      "title": "NASA工程装配台",
       "item": "ad_astra:nasa_workbench",
-      "text": "In order to build a rocket, you must first collect all of the parts: cone, plates, fins, tanks and engine. You can then make the rocket in a NASA workbench, a specially designed workbench just for rockets."
+      "text": "想要制造火箭，首先要造出各种部件：头锥、板材、鳍片、燃料储罐和火箭引擎。随后，你就可以在专门为火箭制造而设计的一种装配台——NASA工程装配台中组装出一枚货真价实的火箭了。"
     },
     {
       "type": "patchouli:crafting",
-      "title": "NASA Workbench",
+      "title": "NASA工程装配台",
       "recipe": "ad_astra:recipes/nasa_workbench"
     },
     {
@@ -30,13 +30,13 @@
         },
         "symmetrical": true
       },
-      "text": "To place your newly-created rocket, you must build a launchpad."
+      "text": "想要发射你的火箭，你需要一块火箭发射基座。"
     },
     {
       "type": "patchouli:crafting",
-      "title": "Launchpad",
+      "title": "火箭发射基座",
       "recipe": "ad_astra:recipes/launch_pad",
-      "text": "After the launch pad has been built, place the rocket in the center."
+      "text": "火箭可以摆放在基座中心。"
     }
   ]
 }
