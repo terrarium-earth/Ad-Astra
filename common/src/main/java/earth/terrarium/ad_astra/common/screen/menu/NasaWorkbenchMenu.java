@@ -12,6 +12,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -62,6 +64,10 @@ public class NasaWorkbenchMenu extends AbstractMachineMenu<NasaWorkbenchBlockEnt
                     public boolean mayPlace(ItemStack stack) {
                         return false;
                     }
+                    @Override
+                    public boolean mayPickup(Player player) {
+                        return false;
+                    }
                 }});
         this.updateContent();
     }
@@ -91,8 +97,20 @@ public class NasaWorkbenchMenu extends AbstractMachineMenu<NasaWorkbenchBlockEnt
         this.updateContent();
     }
 
+    @Override
+    public void onRecipeTransfer(Recipe<?> recipe) {
+        super.onRecipeTransfer(recipe);
+        if (recipe instanceof NasaWorkbenchRecipe nasaWorkbenchRecipe) {
+            this.updateContent(nasaWorkbenchRecipe);
+        }
+    }
+
     public void updateContent() {
         NasaWorkbenchRecipe recipe = NasaWorkbenchRecipe.findFirst(level, f -> f.test(this.machine));
+        this.updateContent(recipe);
+    }
+
+    public void updateContent(NasaWorkbenchRecipe recipe) {
         this.recipe = recipe;
         this.machine.setItem(14, recipe == null ? ItemStack.EMPTY : recipe.getResultItem());
         this.broadcastFullState();
