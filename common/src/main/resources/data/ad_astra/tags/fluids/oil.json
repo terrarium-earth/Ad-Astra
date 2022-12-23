@@ -6,6 +6,14 @@
     {
       "required": false,
       "id": "techreborn:oil"
+    },
+    {
+      "required": false,
+      "id": "modern_industrialization:crude_oil"
+    },
+    {
+      "required": false,
+      "id": "#forge:crude_oil"
     }
   ]
 }
