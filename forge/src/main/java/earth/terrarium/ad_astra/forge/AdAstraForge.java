@@ -7,7 +7,6 @@ import earth.terrarium.ad_astra.common.item.AstroduxItem;
 import earth.terrarium.ad_astra.common.networking.NetworkHandling;
 import earth.terrarium.ad_astra.common.registry.ModCommands;
 import earth.terrarium.ad_astra.common.registry.ModEntityTypes;
-import earth.terrarium.ad_astra.common.registry.forge.ModRegistryHelpersImpl;
 import earth.terrarium.ad_astra.common.util.ModKeyBindings;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -35,7 +34,6 @@ public class AdAstraForge {
         MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onRegisterCommands);
         MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onPlayerLogIn);
         MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onPlayerLogOut);
-        ModRegistryHelpersImpl.REGISTRIES.values().forEach(deferredRegister -> deferredRegister.register(bus));
     }
 
     public static void onServerReloadListeners(AddReloadListenerEvent event) {

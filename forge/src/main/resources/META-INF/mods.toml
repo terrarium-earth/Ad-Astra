@@ -28,20 +28,20 @@ side = "BOTH"
 [[dependencies.ad_astra]]
 modId = "resourcefulconfig"
 mandatory = true
-versionRange = "[1.0.14,)"
+versionRange = "[1.0.15,)"
 ordering = "AFTER"
 side = "BOTH"
 
 [[dependencies.ad_astra]]
 modId = "botarium"
 mandatory = true
-versionRange = "[1.7.12,)"
+versionRange = "[1.8.0,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.ad_astra]]
 modId = "resourcefullib"
 mandatory = true
-versionRange = "[1.1.17,)"
+versionRange = "[1.1.18,)"
 ordering = "NONE"
 side = "BOTH"

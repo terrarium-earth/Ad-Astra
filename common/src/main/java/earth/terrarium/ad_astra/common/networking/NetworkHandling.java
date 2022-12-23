@@ -13,7 +13,7 @@ import net.minecraft.world.entity.player.Player;
 public class NetworkHandling {
     public static final NetworkChannel CHANNEL = new NetworkChannel(AdAstra.MOD_ID, 0, "main");
 
-    public static void register() {
+    public static void init() {
         CHANNEL.registerPacket(NetworkDirection.CLIENT_TO_SERVER, KeybindPacket.ID, KeybindPacket.HANDLER, KeybindPacket.class);
         CHANNEL.registerPacket(NetworkDirection.CLIENT_TO_SERVER, LaunchRocketPacket.ID, LaunchRocketPacket.HANDLER, LaunchRocketPacket.class);
         CHANNEL.registerPacket(NetworkDirection.CLIENT_TO_SERVER, ToggleDistributorPacket.ID, ToggleDistributorPacket.HANDLER, ToggleDistributorPacket.class);

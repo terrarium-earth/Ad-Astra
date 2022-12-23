@@ -24,8 +24,4 @@ public class ModFluids {
 
     public static final Supplier<FlowingFluid> OXYGEN = FLUIDS.register("oxygen", () -> new BotariumSourceFluid(ModFluidProperties.OXYGEN_FLUID));
     public static final Supplier<FlowingFluid> FLOWING_OXYGEN = FLUIDS.register("flowing_oxygen", () -> new BotariumFlowingFluid(ModFluidProperties.OXYGEN_FLUID));
-
-    public static void init() {
-        FLUIDS.initialize();
-    }
 }

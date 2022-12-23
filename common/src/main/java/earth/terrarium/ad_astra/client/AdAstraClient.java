@@ -82,7 +82,8 @@ public class AdAstraClient {
                 ModBlocks.GLACIAN_TRAPDOOR.get(), ModBlocks.AERONOS_DOOR.get(), ModBlocks.AERONOS_TRAPDOOR.get(), ModBlocks.STROPHAR_DOOR.get(), ModBlocks.STROPHAR_TRAPDOOR.get(),
                 ModBlocks.EXTINGUISHED_TORCH.get(), ModBlocks.WALL_EXTINGUISHED_TORCH.get(), ModBlocks.EXTINGUISHED_LANTERN.get(), ModBlocks.GLACIAN_LEAVES.get(),
                 ModBlocks.NASA_WORKBENCH.get(), ModBlocks.AERONOS_MUSHROOM.get(), ModBlocks.STROPHAR_MUSHROOM.get(), ModBlocks.AERONOS_LADDER.get(), ModBlocks.STROPHAR_LADDER.get(),
-                ModBlocks.AERONOS_CHEST.get(), ModBlocks.STROPHAR_CHEST.get()
+                ModBlocks.AERONOS_CHEST.get(), ModBlocks.STROPHAR_CHEST.get(),
+                ModBlocks.EARTH_GLOBE.get(), ModBlocks.MOON_GLOBE.get(), ModBlocks.MARS_GLOBE.get(), ModBlocks.VENUS_GLOBE.get(), ModBlocks.MERCURY_GLOBE.get(), ModBlocks.GLACIO_GLOBE.get()
         ));
     }
 

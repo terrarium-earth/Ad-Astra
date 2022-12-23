@@ -16,8 +16,7 @@ public class ModFluidProperties {
             .overlay(new ResourceLocation(AdAstra.MOD_ID, "block/oil_overlay"))
             .viscosity(2000)
             .density(2000)
-            .canConvertToSource(false)
-    );
+            .canConvertToSource(false));
 
     public static final FluidData FUEL_FLUID = FLUID_TYPES.register("fuel", FluidProperties.create()
             .still(new ResourceLocation(AdAstra.MOD_ID, "block/fluid_fuel_still"))
@@ -25,8 +24,7 @@ public class ModFluidProperties {
             .overlay(new ResourceLocation(AdAstra.MOD_ID, "block/fuel_overlay"))
             .viscosity(1500)
             .density(1500)
-            .canConvertToSource(false)
-    );
+            .canConvertToSource(false));
 
     public static final FluidData CRYO_FUEL_FLUID = FLUID_TYPES.register("cryo_fuel", FluidProperties.create()
             .still(new ResourceLocation(AdAstra.MOD_ID, "block/fluid_cryo_fuel_still"))
@@ -35,8 +33,7 @@ public class ModFluidProperties {
             .viscosity(71)
             .density(71)
             .temperature(-10000000)
-            .canConvertToSource(false)
-    );
+            .canConvertToSource(false));
 
     public static final FluidData OXYGEN_FLUID = FLUID_TYPES.register("oxygen", FluidProperties.create()
             .still(new ResourceLocation(AdAstra.MOD_ID, "block/fluid_oxygen_still"))
@@ -45,10 +42,5 @@ public class ModFluidProperties {
             .viscosity(0)
             .disablePlacing()
             .density(-1)
-            .canConvertToSource(false)
-    );
-
-    public static void init() {
-        FLUID_TYPES.initialize();
-    }
+            .canConvertToSource(false));
 }

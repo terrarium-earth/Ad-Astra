@@ -3,10 +3,12 @@ package earth.terrarium.ad_astra.common.advancement;
 import com.google.gson.JsonObject;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.advancement.FoodCookedInAtmosphereCriterion.Conditions;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 
+@MethodsReturnNonnullByDefault
 public class FoodCookedInAtmosphereCriterion extends SimpleCriterionTrigger<Conditions> {
     static final ResourceLocation ID = new ResourceLocation(AdAstra.MOD_ID, "food_cooked_in_atmosphere");
 

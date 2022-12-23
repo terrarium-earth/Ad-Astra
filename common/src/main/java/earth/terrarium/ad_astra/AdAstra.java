@@ -19,27 +19,24 @@ public class AdAstra {
     public static final Configurator CONFIGURATOR = new Configurator();
 
     public static void init() {
-        // Register config
         CONFIGURATOR.registerConfig(AdAstraConfig.class);
 
-        // Registry
-        ModFluidProperties.init();
-        ModFluids.init();
-        ModEntityTypes.init();
-        ModBlocks.init();
-        ModItems.init();
-        ModBlockEntities.init();
-        ModRecipeTypes.init();
-        ModRecipeSerializers.init();
-        ModMenuTypes.init();
-        ModSoundEvents.init();
-        ModParticleTypes.init();
-        ModPaintings.init();
-        ModFeatures.init();
-        ModStructures.init();
-        ModCriteria.register();
-
-        NetworkHandling.register();
+        ModFluidProperties.FLUID_TYPES.initialize();
+        ModFluids.FLUIDS.initialize();
+        ModEntityTypes.ENTITY_TYPES.initialize();
+        ModBlocks.BLOCKS.initialize();
+        ModItems.ITEMS.initialize();
+        ModBlockEntities.BLOCK_ENTITIES.initialize();
+        ModRecipeTypes.RECIPE_TYPES.initialize();
+        ModRecipeSerializers.RECIPE_SERIALIZERS.initialize();
+        ModMenuTypes.MENU_TYPES.initialize();
+        ModSoundEvents.SOUND_EVENTS.initialize();
+        ModParticleTypes.PARTICLE_TYPES.initialize();
+        ModPaintings.PAINTING_VARIENTS.initialize();
+        ModFeatures.FEATURES.initialize();
+        ModStructures.STRUCTURE_TYPES.initialize();
+        ModCriteria.init();
+        NetworkHandling.init();
     }
 
     public static void onRegisterReloadListeners(BiConsumer<ResourceLocation, PreparableReloadListener> registry) {

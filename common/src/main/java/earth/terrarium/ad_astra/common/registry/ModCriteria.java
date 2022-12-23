@@ -8,7 +8,7 @@ public class ModCriteria {
     public static RocketDestroyedCriterion ROCKET_DESTROYED;
     public static FoodCookedInAtmosphereCriterion FOOD_COOKED_IN_ATMOSPHERE;
 
-    public static void register() {
+    public static void init() {
         ROCKET_DESTROYED = CriteriaTriggers.register(new RocketDestroyedCriterion());
         FOOD_COOKED_IN_ATMOSPHERE = CriteriaTriggers.register(new FoodCookedInAtmosphereCriterion());
     }

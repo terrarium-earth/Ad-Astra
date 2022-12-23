@@ -1,2 +1,0 @@
-- Improved shader support. The planets in the sky should no longer have weird colours with shaders on, and it shouldn't crash anymore. They should now render normally or be invisible depending on the shader. (Tested with Complimentary and Complimentary Reimagined).
-- Fixed a keybind issue

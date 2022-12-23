@@ -24,7 +24,7 @@ public class ClientUtils {
 
     @ExpectPlatform
     public static <M extends AbstractContainerMenu, U extends Screen & MenuAccess<M>> void registerScreen(MenuType<? extends M> type, ScreenConstructor<M, U> factory) {
-        throw new AssertionError();
+        throw new NotImplementedException();
     }
 
     public interface ScreenConstructor<T extends AbstractContainerMenu, U extends Screen & MenuAccess<T>> {

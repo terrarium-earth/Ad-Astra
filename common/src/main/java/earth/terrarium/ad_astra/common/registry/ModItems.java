@@ -13,6 +13,7 @@ import earth.terrarium.ad_astra.common.item.armor.SpaceSuit;
 import earth.terrarium.ad_astra.common.item.vehicle.RocketItem;
 import earth.terrarium.ad_astra.common.item.vehicle.RoverItem;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
+import earth.terrarium.botarium.api.registry.RegistryHolder;
 import earth.terrarium.botarium.api.registry.fluid.FluidBucketItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
@@ -30,15 +31,13 @@ import net.minecraft.world.level.block.Block;
 import org.apache.commons.lang3.NotImplementedException;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
 public class ModItems {
     public static final CreativeModeTab ITEM_GROUP = ModRegistryHelpers.createTab(new ResourceLocation(AdAstra.MOD_ID, "main"), () -> new ItemStack(ModItems.TIER_1_ROCKET.get()));
-    public static final Set<Item> items = new HashSet<>();
+    public static final RegistryHolder<Item> ITEMS = new RegistryHolder<>(Registry.ITEM, AdAstra.MOD_ID);
 
     // Vehicles Items
     public static final Supplier<Item> TIER_1_ROCKET = register("tier_1_rocket", () -> new RocketItem<>(ModEntityTypes.TIER_1_ROCKET.get(), 1, new Item.Properties().tab(ITEM_GROUP).stacksTo(1).fireResistant()));
@@ -613,10 +612,7 @@ public class ModItems {
     }
 
     private static <T extends Item> Supplier<T> register(String id, Supplier<T> object) {
-        return ModRegistryHelpers.register(Registry.ITEM, id, object);
-    }
-
-    public static void init() {
+        return ITEMS.register(id, object);
     }
 
     @ExpectPlatform
