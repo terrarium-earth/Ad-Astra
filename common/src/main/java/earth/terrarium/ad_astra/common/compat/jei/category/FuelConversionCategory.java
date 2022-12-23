@@ -9,6 +9,7 @@ import earth.terrarium.ad_astra.common.compat.jei.FluidBarDrawable;
 import earth.terrarium.ad_astra.common.config.FuelRefineryConfig;
 import earth.terrarium.ad_astra.common.recipe.FuelConversionRecipe;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
+import mezz.jei.api.gui.builder.IIngredientAcceptor;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawableAnimated;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
@@ -41,7 +42,8 @@ public class FuelConversionCategory extends BaseCategory<FuelConversionRecipe> {
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, FuelConversionRecipe recipe, IFocusGroup focuses) {
         builder.addInvisibleIngredients(RecipeIngredientRole.CATALYST).addIngredients(Ingredient.of(ModItems.FUEL_REFINERY.get()));
-        builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addFluidStack(recipe.getFluidInput().get(0).value(), FluidHooks.buckets(1));
+        IIngredientAcceptor<?> input = builder.addInvisibleIngredients(RecipeIngredientRole.INPUT);
+        recipe.getFluidInput().stream().forEach(fluid -> input.addFluidStack(fluid.value(), FluidHooks.buckets(1)));
         builder.addInvisibleIngredients(RecipeIngredientRole.OUTPUT).addFluidStack(recipe.getFluidOutput(), FluidHooks.buckets(1));
     }
 
