@@ -12,8 +12,6 @@
 
 Also uses [Botarium](https://modrinth.com/mod/botarium)
 
-![Banner](https://cdn.discordapp.com/attachments/1023678603289972797/1043017562885197835/Ad_Astra_Banner.png?width=1440&height=691)
-
 <a>
     <p align="left">
         <img src="https://cdn.discordapp.com/attachments/1005798262273495041/1018343461642055690/Ad_Astra.png" alt="Ad Astra!" width="400"/> 

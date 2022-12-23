@@ -2,12 +2,11 @@ package earth.terrarium.ad_astra.common.recipe;
 
 import com.google.gson.JsonObject;
 import earth.terrarium.ad_astra.common.item.FluidContainingItem;
-import earth.terrarium.ad_astra.common.registry.ModRecipeSerializers;
 import earth.terrarium.ad_astra.common.registry.ModTags;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import earth.terrarium.botarium.api.item.ItemStackHolder;
-import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -21,18 +20,13 @@ import net.minecraft.world.level.material.Fluid;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
+@MethodsReturnNonnullByDefault
 public class SpaceSuitShapedRecipe extends ShapedRecipe {
 
     public SpaceSuitShapedRecipe(ShapedRecipe internal) {
         super(internal.getId(), internal.getGroup(), internal.getWidth(), internal.getHeight(),
                 internal.getIngredients(), internal.getResultItem());
-    }
-
-    public static Consumer<FinishedRecipe> wrap(Consumer<FinishedRecipe> exporter) {
-        return r -> exporter.accept(new WrappedFinishedRecipe(r));
     }
 
     @Override
@@ -44,7 +38,6 @@ public class SpaceSuitShapedRecipe extends ShapedRecipe {
         for (int i = 0; i < inv.getContainerSize(); i++) {
             ItemStack item = inv.getItem(i);
             if (item.isEmpty()) {
-                continue;
             } else if (item.getItem() instanceof ArmorItem) {
                 assemblingTag = item.getTag();
             } else {
@@ -61,8 +54,8 @@ public class SpaceSuitShapedRecipe extends ShapedRecipe {
         if (assemblingOxygens.size() > 0 && assemble.getItem() instanceof FluidContainingItem fluidContaining) {
             ItemStackHolder itemHolder = new ItemStackHolder(assemble);
 
-            Fluid primaryFluid = assemblingOxygens.entrySet().stream().max(this::compareAmount).map(e -> e.getKey()).orElse(null);
-            long totalOxygen = assemblingOxygens.values().stream().collect(Collectors.summingLong(e -> e.getFluidAmount()));
+            Fluid primaryFluid = assemblingOxygens.entrySet().stream().max(this::compareAmount).map(Entry::getKey).orElse(null);
+            long totalOxygen = assemblingOxygens.values().stream().mapToLong(FluidHolder::getFluidAmount).sum();
             fluidContaining.insert(itemHolder, FluidHooks.newFluidHolder(primaryFluid, totalOxygen, null));
 
             if (itemHolder.isDirty()) assemble = itemHolder.getStack();
@@ -82,44 +75,6 @@ public class SpaceSuitShapedRecipe extends ShapedRecipe {
 
     private int compareAmount(Entry<Fluid, FluidHolder> entry1, Entry<Fluid, FluidHolder> entry2) {
         return Long.compare(entry1.getValue().getFluidAmount(), entry2.getValue().getFluidAmount());
-    }
-
-    public static class WrappedFinishedRecipe implements FinishedRecipe {
-
-        private final FinishedRecipe internal;
-
-        public WrappedFinishedRecipe(FinishedRecipe internal) {
-            this.internal = internal;
-        }
-
-        public FinishedRecipe getInternal() {
-            return this.internal;
-        }
-
-        @Override
-        public ResourceLocation getAdvancementId() {
-            return this.getInternal().getAdvancementId();
-        }
-
-        @Override
-        public ResourceLocation getId() {
-            return this.getInternal().getId();
-        }
-
-        @Override
-        public RecipeSerializer<?> getType() {
-            return ModRecipeSerializers.SPACE_SUIT_CRAFTING_SERIALIZER.get();
-        }
-
-        @Override
-        public JsonObject serializeAdvancement() {
-            return this.getInternal().serializeAdvancement();
-        }
-
-        @Override
-        public void serializeRecipeData(JsonObject json) {
-            this.getInternal().serializeRecipeData(json);
-        }
     }
 
     public static class Serializer implements RecipeSerializer<SpaceSuitShapedRecipe> {

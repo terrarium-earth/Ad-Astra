@@ -3,6 +3,7 @@ package earth.terrarium.ad_astra.common.block.machine.entity;
 import earth.terrarium.ad_astra.common.block.machine.AbstractMachineBlock;
 import earth.terrarium.ad_astra.common.util.ModInventory;
 import earth.terrarium.botarium.api.menu.ExtraDataMenuProvider;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -26,6 +27,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+@MethodsReturnNonnullByDefault
 public abstract class AbstractMachineBlockEntity extends BlockEntity implements ExtraDataMenuProvider, ModInventory, WorldlyContainer {
 
     private final NonNullList<ItemStack> inventory;
@@ -56,7 +58,7 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
 
     @Override
     public Component getDisplayName() {
-        return Component.translatable(getBlockState().getBlock().getDescriptionId());
+        return getBlockState().getBlock().getName();
     }
 
     @Override
@@ -66,7 +68,6 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
 
     @Override
     public void load(CompoundTag nbt) {
-        super.load(nbt);
         if (getInventorySize() > 0) {
             ContainerHelper.loadAllItems(nbt, this.inventory);
         }
@@ -74,7 +75,6 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
 
     @Override
     public void saveAdditional(CompoundTag nbt) {
-        super.saveAdditional(nbt);
         if (getInventorySize() > 0) {
             ContainerHelper.saveAllItems(nbt, this.inventory);
         }

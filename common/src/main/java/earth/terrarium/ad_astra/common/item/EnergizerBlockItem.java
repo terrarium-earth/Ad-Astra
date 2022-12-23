@@ -12,8 +12,8 @@ import net.minecraft.world.level.block.Block;
 import java.util.List;
 
 public class EnergizerBlockItem extends MachineBlockItem {
-    public EnergizerBlockItem(Block block, Properties properties) {
-        super(block, properties);
+    public EnergizerBlockItem(Block block, Properties properties, String... tooltips) {
+        super(block, properties, tooltips);
     }
 
     @Override

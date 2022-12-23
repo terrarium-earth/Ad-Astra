@@ -1,18 +1,12 @@
 package earth.terrarium.ad_astra.common.block.machine;
 
 import earth.terrarium.ad_astra.common.block.machine.entity.AbstractMachineBlockEntity;
-import earth.terrarium.ad_astra.common.block.machine.entity.FluidMachineBlockEntity;
-import earth.terrarium.ad_astra.common.block.machine.entity.OxygenDistributorBlockEntity;
 import earth.terrarium.ad_astra.common.registry.ModTags;
-import earth.terrarium.botarium.api.energy.EnergyHooks;
-import earth.terrarium.botarium.api.energy.PlatformEnergyManager;
 import earth.terrarium.botarium.api.menu.MenuHooks;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -20,7 +14,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -34,7 +27,6 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 
-import java.util.Optional;
 import java.util.function.ToIntFunction;
 
 @SuppressWarnings("deprecation")
@@ -196,34 +188,5 @@ public abstract class AbstractMachineBlock extends BaseEntityBlock {
         BlockEntity blockEntity = level.getBlockEntity(pos);
 
         return blockEntity instanceof AbstractMachineBlockEntity ? AbstractContainerMenu.getRedstoneSignalFromBlockEntity(blockEntity) : 0;
-    }
-
-    // Get nbt in stack when picking block
-    @Override
-    public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
-        ItemStack stack = super.getCloneItemStack(level, pos, state);
-        if (level.getBlockEntity(pos) instanceof AbstractMachineBlockEntity machineBlock) {
-            CompoundTag nbt = stack.getOrCreateTag();
-            ContainerHelper.saveAllItems(nbt, machineBlock.getItems());
-            Optional<PlatformEnergyManager> energyBlock = EnergyHooks.safeGetBlockEnergyManager(machineBlock, null);
-            energyBlock.ifPresent(platformEnergyManager -> nbt.putLong("Energy", platformEnergyManager.getStoredEnergy()));
-
-            if (machineBlock instanceof FluidMachineBlockEntity fluidMachine) {
-                if (fluidMachine.getInputTank().getCompound() != null) {
-                    nbt.put("InputFluid", fluidMachine.getInputTank().getCompound());
-                    nbt.putLong("InputAmount", fluidMachine.getInputTank().getFluidAmount());
-                }
-
-                if (fluidMachine.getOutputTank().getCompound() != null) {
-                    nbt.put("OutputFluid", fluidMachine.getOutputTank().getCompound());
-                    nbt.putLong("OutputAmount", fluidMachine.getOutputTank().getFluidAmount());
-                }
-
-                if (machineBlock instanceof OxygenDistributorBlockEntity oxygenDistributorMachine) {
-                    nbt.putBoolean("ShowOxygen", oxygenDistributorMachine.shouldShowOxygen());
-                }
-            }
-        }
-        return stack;
     }
 }

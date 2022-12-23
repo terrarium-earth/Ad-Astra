@@ -59,7 +59,7 @@ public abstract class ProcessingMachineBlockEntity extends AbstractMachineBlockE
     public void stopCooking() {
         this.cookTime = 0;
         this.cookTimeTotal = 0;
-        this.outputStack = null;
+        this.outputStack = ItemStack.EMPTY;
         this.inputItem = null;
         this.setChanged();
     }

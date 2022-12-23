@@ -15,15 +15,7 @@ import java.util.Set;
 /**
  * A 3D flood fill algorithm that will fill an entire structure with oxygen.
  */
-public class OxygenFillerAlgorithm {
-
-    private final Level level;
-    private final int maxBlockChecks;
-
-    public OxygenFillerAlgorithm(Level level, int maxBlockChecks) {
-        this.level = level;
-        this.maxBlockChecks = maxBlockChecks;
-    }
+public record OxygenFillerAlgorithm(Level level, int maxBlockChecks) {
 
     public Set<BlockPos> runAlgorithm(BlockPos start) {
 
@@ -33,7 +25,7 @@ public class OxygenFillerAlgorithm {
         main:
         while (!queue.isEmpty()) {
 
-            // Cancel if the the amount of oxygen exceeds the limit. This is the case if there was an oxygen leak or the room was too
+            // Cancel if the amount of oxygen exceeds the limit. This is the case if there was an oxygen leak or the room was too
             // large to support the oxygen
             if (positions.size() >= this.maxBlockChecks) {
                 break;

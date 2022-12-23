@@ -1,58 +1,34 @@
 package earth.terrarium.ad_astra.common.item;
 
-import earth.terrarium.ad_astra.common.block.machine.entity.AbstractMachineBlockEntity;
-import earth.terrarium.ad_astra.common.block.machine.entity.FluidMachineBlockEntity;
-import earth.terrarium.ad_astra.common.block.machine.entity.OxygenDistributorBlockEntity;
-import earth.terrarium.botarium.api.energy.EnergyHooks;
-import earth.terrarium.botarium.api.energy.PlatformEnergyManager;
-import earth.terrarium.botarium.api.fluid.FluidHooks;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.Optional;
+import java.util.List;
 
 public class MachineBlockItem extends BlockItem {
-    public MachineBlockItem(Block block, Properties properties) {
+    private final String[] tooltips;
+
+    public MachineBlockItem(Block block, Properties properties, String... tooltips) {
         super(block, properties);
+        this.tooltips = tooltips;
     }
 
     @Override
-    protected boolean updateCustomBlockEntityTag(BlockPos pos, Level level, Player player, ItemStack stack, BlockState state) {
-        if (!level.isClientSide) {
-            if (level.getBlockEntity(pos) instanceof AbstractMachineBlockEntity machineBlock) {
-                CompoundTag nbt = stack.getOrCreateTag();
-                ContainerHelper.loadAllItems(nbt, machineBlock.getItems());
-                if (nbt.contains("Energy")) {
-                    Optional<PlatformEnergyManager> energyBlock = EnergyHooks.safeGetBlockEnergyManager(machineBlock, null);
-                    energyBlock.ifPresent(platformEnergyManager -> platformEnergyManager.insert(nbt.getLong("Energy"), false));
-                }
-
-                if (machineBlock instanceof FluidMachineBlockEntity fluidMachine) {
-                    if (nbt.contains("InputFluid")) {
-                        fluidMachine.getInputTank().setFluid(FluidHooks.fluidFromCompound(nbt.getCompound("InputFluid")).getFluid());
-                        fluidMachine.getInputTank().setAmount(nbt.getLong("InputAmount"));
-                    }
-
-                    if (nbt.contains("OutputFluid")) {
-                        fluidMachine.getOutputTank().setFluid(FluidHooks.fluidFromCompound(nbt.getCompound("OutputFluid")).getFluid());
-                        fluidMachine.getOutputTank().setAmount(nbt.getLong("OutputAmount"));
-                    }
-
-                    if (machineBlock instanceof OxygenDistributorBlockEntity oxygenDistributorMachine) {
-                        if (nbt.contains("ShowOxygen")) {
-                            oxygenDistributorMachine.setShowOxygen(nbt.getBoolean("ShowOxygen"));
-                        }
-                    }
-                }
+    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag context) {
+        if (Screen.hasShiftDown()) {
+            for (String text : tooltips) {
+                tooltip.add((Component.translatable(text).setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN))));
             }
+        } else {
+            tooltip.add((Component.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY))));
         }
-        return super.updateCustomBlockEntityTag(pos, level, player, stack, state);
     }
 }

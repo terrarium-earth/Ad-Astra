@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.common.block.machine.entity;
 
-import earth.terrarium.ad_astra.common.registry.ModBlockEntities;
 import earth.terrarium.ad_astra.common.config.CoalGeneratorConfig;
+import earth.terrarium.ad_astra.common.registry.ModBlockEntities;
 import earth.terrarium.ad_astra.common.screen.menu.CoalGeneratorMenu;
 import earth.terrarium.botarium.api.energy.EnergyBlock;
 import earth.terrarium.botarium.api.energy.EnergyHooks;
@@ -58,7 +58,7 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity imple
                 this.getEnergyStorage().internalInsert(this.getEnergyPerTick(), false);
                 this.setActive(true);
                 // Check if the input is a valid fuel
-            } else if (!input.isEmpty() && !(input.getItem() instanceof BucketItem)) {
+            } else if (this.getEnergyStorage().internalInsert(this.getEnergyPerTick(), true) > 0 && !input.isEmpty() && !(input.getItem() instanceof BucketItem)) {
                 int burnTime = Math.min(20000, CommonHooks.getBurnTime(input));
                 if (burnTime > 0) {
                     input.shrink(1);

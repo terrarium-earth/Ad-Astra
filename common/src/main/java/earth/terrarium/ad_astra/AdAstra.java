@@ -1,5 +1,6 @@
 package earth.terrarium.ad_astra;
 
+import com.mojang.logging.LogUtils;
 import com.teamresourceful.resourcefulconfig.common.config.Configurator;
 import earth.terrarium.ad_astra.common.config.AdAstraConfig;
 import earth.terrarium.ad_astra.common.data.PlanetData;
@@ -9,13 +10,12 @@ import earth.terrarium.ad_astra.common.util.PlatformUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.PreparableReloadListener;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.function.BiConsumer;
 
 public class AdAstra {
     public static final String MOD_ID = "ad_astra";
-    public static final Logger LOGGER = LoggerFactory.getLogger("Ad Astra");
+    public static final Logger LOGGER = LogUtils.getLogger();
     public static final Configurator CONFIGURATOR = new Configurator();
 
     public static void init() {
@@ -35,6 +35,7 @@ public class AdAstra {
         ModPaintings.PAINTING_VARIENTS.initialize();
         ModFeatures.FEATURES.initialize();
         ModStructures.STRUCTURE_TYPES.initialize();
+        ModStructures.STRUCTURE_PROCESSORS.initialize();
         ModCriteria.init();
         NetworkHandling.init();
     }

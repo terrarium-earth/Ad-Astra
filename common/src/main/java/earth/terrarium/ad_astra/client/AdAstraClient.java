@@ -62,7 +62,7 @@ public class AdAstraClient {
         ClientModEntities.registerEntityRenderers();
 
         // Sign textures
-        Sheets.SIGN_MATERIALS.put(ModBlocks.GLACIAN, new Material(Sheets.SIGN_SHEET, new ResourceLocation(AdAstra.MOD_ID, "entity/signs/glacian")));
+        Sheets.SIGN_MATERIALS.put(ModBlocks.GLACIAN_SIGN_TYPE, new Material(Sheets.SIGN_SHEET, new ResourceLocation(AdAstra.MOD_ID, "entity/signs/glacian")));
     }
 
     public static void onRegisterHud(Consumer<RenderHud> register) {

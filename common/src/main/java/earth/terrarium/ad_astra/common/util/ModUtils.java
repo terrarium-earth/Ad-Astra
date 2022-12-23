@@ -3,8 +3,6 @@ package earth.terrarium.ad_astra.common.util;
 import com.mojang.serialization.Codec;
 import dev.architectury.injectables.targets.ArchitecturyTarget;
 import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.ad_astra.common.item.vehicle.VehicleItem;
-import earth.terrarium.ad_astra.common.util.algorithm.LandFinder;
 import earth.terrarium.ad_astra.common.config.AdAstraConfig;
 import earth.terrarium.ad_astra.common.config.VehiclesConfig;
 import earth.terrarium.ad_astra.common.data.Planet;
@@ -12,9 +10,11 @@ import earth.terrarium.ad_astra.common.data.PlanetData;
 import earth.terrarium.ad_astra.common.entity.vehicle.Lander;
 import earth.terrarium.ad_astra.common.entity.vehicle.Rocket;
 import earth.terrarium.ad_astra.common.entity.vehicle.Vehicle;
+import earth.terrarium.ad_astra.common.item.vehicle.VehicleItem;
 import earth.terrarium.ad_astra.common.registry.ModCriteria;
 import earth.terrarium.ad_astra.common.registry.ModEntityTypes;
 import earth.terrarium.ad_astra.common.registry.ModTags;
+import earth.terrarium.ad_astra.common.util.algorithm.LandFinder;
 import earth.terrarium.botarium.api.item.ItemStackHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
@@ -174,7 +174,7 @@ public class ModUtils {
      */
     public static void cookFood(ItemEntity itemEntity) {
         ItemStack stack = itemEntity.getItem();
-        ItemStack foodOutput = null;
+        ItemStack foodOutput = ItemStack.EMPTY;
 
         for (SmokingRecipe recipe : itemEntity.getLevel().getRecipeManager().getAllRecipesFor(RecipeType.SMOKING)) {
             for (Ingredient ingredient : recipe.getIngredients()) {
@@ -184,7 +184,7 @@ public class ModUtils {
             }
         }
 
-        if (foodOutput != null) {
+        if (!foodOutput.isEmpty()) {
             itemEntity.setItem(new ItemStack(foodOutput.getItem(), stack.getCount()));
             ServerPlayer playerEntity = (ServerPlayer) itemEntity.level.getPlayerByUUID(itemEntity.getThrower());
             if (playerEntity != null) {

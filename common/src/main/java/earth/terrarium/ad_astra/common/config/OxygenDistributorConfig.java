@@ -24,11 +24,11 @@ public final class OxygenDistributorConfig {
     public static long fluidConversionEnergyPerTick = 5L;
 
     @ConfigEntry(
-        id = "tankSize",
-        type = EntryType.LONG,
-        translation = "text.resourcefulconfig.ad_astra.option.oxygenDistributor.tankSize"
+            id = "tankSize",
+            type = EntryType.LONG,
+            translation = "text.resourcefulconfig.ad_astra.option.oxygenDistributor.tankSize"
     )
-    public static long tankSize = FluidHooks.buckets(6);
+    public static long tankSize = FluidHooks.buckets(6f);
 
     @ConfigEntry(
         id = "maxBlockChecks",
