@@ -11,7 +11,7 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
-public class CompressorMenu extends AbstractMachineMenu<CompressorBlockEntity> {
+public class CompressorMenu extends ProcessingMachineMenu<CompressorBlockEntity> {
 
     public CompressorMenu(int syncId, Inventory inventory, FriendlyByteBuf buf) {
         this(syncId, inventory, (CompressorBlockEntity) inventory.player.level.getBlockEntity(buf.readBlockPos()));
@@ -37,6 +37,7 @@ public class CompressorMenu extends AbstractMachineMenu<CompressorBlockEntity> {
 
     @Override
     public void syncClientScreen() {
+        super.syncClientScreen();
         NetworkHandling.CHANNEL.sendToPlayer(new MachineInfoPacket(machine.getEnergyStorage().getStoredEnergy(), List.of()), this.player);
     }
 }

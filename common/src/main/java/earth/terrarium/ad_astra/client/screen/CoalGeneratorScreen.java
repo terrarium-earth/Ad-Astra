@@ -32,7 +32,7 @@ public class CoalGeneratorScreen extends AbstractMachineScreen<CoalGeneratorBloc
     protected void renderBg(PoseStack poseStack, float delta, int mouseX, int mouseY) {
         super.renderBg(poseStack, delta, mouseX, mouseY);
 
-        GuiUtil.drawFire(poseStack, this.leftPos + FIRE_LEFT, this.topPos + FIRE_TOP, this.machine.getCookTime(), this.machine.getCookTimeTotal());
+        GuiUtil.drawFire(poseStack, this.leftPos + FIRE_LEFT, this.topPos + FIRE_TOP, this.menu.getCookTime(), this.menu.getCookTimeTotal());
         GuiUtil.drawEnergy(poseStack, this.leftPos + ENERGY_LEFT, this.topPos + ENERGY_TOP, this.menu.getEnergyAmount(), this.machine.getMaxCapacity());
     }
 
@@ -46,7 +46,7 @@ public class CoalGeneratorScreen extends AbstractMachineScreen<CoalGeneratorBloc
 
         // Burn time tooltip.
         if (GuiUtil.isHovering(this.getFireBounds(), mouseX, mouseY)) {
-            this.renderTooltip(poseStack, Component.translatable("gauge.ad_astra.burn_time", this.machine.getCookTime(), this.machine.getCookTimeTotal()), mouseX, mouseY);
+            this.renderTooltip(poseStack, Component.translatable("gauge.ad_astra.burn_time", this.menu.getCookTime(), this.menu.getCookTimeTotal()), mouseX, mouseY);
         }
     }
 

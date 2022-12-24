@@ -33,7 +33,7 @@ public class CompressorScreen extends AbstractMachineScreen<CompressorBlockEntit
         super.renderBg(poseStack, delta, mouseX, mouseY);
 
 
-        GuiUtil.drawHammer(poseStack, this.leftPos + HAMMER_LEFT, this.topPos + HAMMER_TOP, this.machine.getCookTime(), this.machine.getCookTimeTotal());
+        GuiUtil.drawHammer(poseStack, this.leftPos + HAMMER_LEFT, this.topPos + HAMMER_TOP, this.menu.getCookTime(), this.menu.getCookTimeTotal());
         GuiUtil.drawEnergy(poseStack, this.leftPos + ENERGY_LEFT, this.topPos + ENERGY_TOP, this.menu.getEnergyAmount(), this.machine.getMaxCapacity());
     }
 
@@ -52,7 +52,7 @@ public class CompressorScreen extends AbstractMachineScreen<CompressorBlockEntit
     }
 
     public Component getHammerTooltip() {
-        return Component.translatable("gauge.ad_astra.cook_time", this.machine.getCookTime(), this.machine.getCookTimeTotal());
+        return Component.translatable("gauge.ad_astra.cook_time", this.menu.getCookTime(), this.menu.getCookTimeTotal());
     }
 
     public Rectangle getEnergyBounds() {
