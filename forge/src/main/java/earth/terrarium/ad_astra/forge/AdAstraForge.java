@@ -3,14 +3,16 @@ package earth.terrarium.ad_astra.forge;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.AdAstraClient;
 import earth.terrarium.ad_astra.client.forge.AdAstraClientForge;
+import earth.terrarium.ad_astra.common.data.PlanetData;
 import earth.terrarium.ad_astra.common.item.AstroduxItem;
-import earth.terrarium.ad_astra.common.networking.NetworkHandling;
 import earth.terrarium.ad_astra.common.registry.ModCommands;
 import earth.terrarium.ad_astra.common.registry.ModEntityTypes;
 import earth.terrarium.ad_astra.common.util.ModKeyBindings;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
+import net.minecraftforge.event.OnDatapackSyncEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -34,6 +36,7 @@ public class AdAstraForge {
         MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onRegisterCommands);
         MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onPlayerLogIn);
         MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onPlayerLogOut);
+        MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onDatapackSynced);
     }
 
     public static void onServerReloadListeners(AddReloadListenerEvent event) {
@@ -59,10 +62,21 @@ public class AdAstraForge {
 
     public static void onPlayerLogIn(PlayerEvent.PlayerLoggedInEvent event) {
         AstroduxItem.onPlayerJoin(event.getEntity());
-        NetworkHandling.onPlayerJoin(event.getEntity());
     }
 
     public static void onPlayerLogOut(PlayerEvent.PlayerLoggedOutEvent event) {
         ModKeyBindings.onPlayerQuit(event.getEntity());
+    }
+
+    public static void onDatapackSynced(OnDatapackSyncEvent event) {
+        if (event.getPlayer() != null) {
+            onSyncedToPlayer(event.getPlayer());
+        } else {
+            event.getPlayerList().getPlayers().forEach(AdAstraForge::onSyncedToPlayer);
+        }
+    }
+
+    private static void onSyncedToPlayer(Player player) {
+        PlanetData.onSyncToPlayer(player);
     }
 }

@@ -29,11 +29,13 @@ public record DatapackPlanetsPacket(Collection<Planet> planets) implements Packe
     private static class Handler implements PacketHandler<DatapackPlanetsPacket> {
         @Override
         public void encode(DatapackPlanetsPacket packet, FriendlyByteBuf buf) {
+            //TODO Replace with yabn codec in 1.19.3
             buf.writeCollection(packet.planets, (buf2, planet) -> buf2.writeWithCodec(Planet.CODEC, planet));
         }
 
         @Override
         public DatapackPlanetsPacket decode(FriendlyByteBuf buf) {
+            //TODO Replace with yabn codec in 1.19.3
             return new DatapackPlanetsPacket(buf.readList(buf2 -> buf2.readWithCodec(Planet.CODEC)));
         }
 

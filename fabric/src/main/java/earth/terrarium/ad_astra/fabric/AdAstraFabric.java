@@ -1,13 +1,14 @@
 package earth.terrarium.ad_astra.fabric;
 
 import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.common.data.PlanetData;
 import earth.terrarium.ad_astra.common.item.AstroduxItem;
-import earth.terrarium.ad_astra.common.networking.NetworkHandling;
 import earth.terrarium.ad_astra.common.registry.ModCommands;
 import earth.terrarium.ad_astra.common.registry.ModEntityTypes;
 import earth.terrarium.ad_astra.common.util.ModKeyBindings;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
@@ -43,7 +44,9 @@ public class AdAstraFabric implements ModInitializer {
     public static void initEvents() {
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
             AstroduxItem.onPlayerJoin(handler.getPlayer());
-            NetworkHandling.onPlayerJoin(handler.getPlayer());
+        });
+        ServerLifecycleEvents.SYNC_DATA_PACK_CONTENTS.register((player, joined) -> {
+            PlanetData.onSyncToPlayer(player);
         });
         ServerPlayConnectionEvents.DISCONNECT.register((handler, server) -> {
             ModKeyBindings.onPlayerQuit(handler.getPlayer());
