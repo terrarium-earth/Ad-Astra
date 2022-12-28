@@ -10,7 +10,7 @@ import net.minecraft.world.inventory.Slot;
 
 import java.util.List;
 
-public class CoalGeneratorMenu extends AbstractMachineMenu<CoalGeneratorBlockEntity> {
+public class CoalGeneratorMenu extends ProcessingMachineMenu<CoalGeneratorBlockEntity> {
 
     public CoalGeneratorMenu(int syncId, Inventory inventory, FriendlyByteBuf buf) {
         this(syncId, inventory, (CoalGeneratorBlockEntity) inventory.player.level.getBlockEntity(buf.readBlockPos()));
@@ -30,6 +30,7 @@ public class CoalGeneratorMenu extends AbstractMachineMenu<CoalGeneratorBlockEnt
 
     @Override
     public void syncClientScreen() {
+        super.syncClientScreen();
         NetworkHandling.CHANNEL.sendToPlayer(new MachineInfoPacket(machine.getEnergyStorage().getStoredEnergy(), List.of()), this.player);
     }
 }
