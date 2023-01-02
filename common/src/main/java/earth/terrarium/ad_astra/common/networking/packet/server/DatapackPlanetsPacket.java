@@ -1,8 +1,13 @@
 package earth.terrarium.ad_astra.common.networking.packet.server;
 
+import com.mojang.serialization.Codec;
+import com.teamresourceful.resourcefullib.common.codecs.yabn.YabnOps;
 import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
+import com.teamresourceful.resourcefullib.common.utils.readers.ByteBufByteReader;
+import com.teamresourceful.resourcefullib.common.yabn.YabnParser;
+import com.teamresourceful.resourcefullib.common.yabn.base.YabnElement;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.data.Planet;
 import earth.terrarium.ad_astra.common.data.PlanetData;
@@ -10,6 +15,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.Collection;
+import java.util.List;
 
 public record DatapackPlanetsPacket(Collection<Planet> planets) implements Packet<DatapackPlanetsPacket> {
 
@@ -27,16 +33,27 @@ public record DatapackPlanetsPacket(Collection<Planet> planets) implements Packe
     }
 
     private static class Handler implements PacketHandler<DatapackPlanetsPacket> {
+
+        private static final Codec<List<Planet>> CODEC = Planet.CODEC.listOf();
+
         @Override
         public void encode(DatapackPlanetsPacket packet, FriendlyByteBuf buf) {
-            //TODO Replace with yabn codec in 1.19.3
-            buf.writeCollection(packet.planets, (buf2, planet) -> buf2.writeWithCodec(Planet.CODEC, planet));
+            CODEC.encodeStart(YabnOps.COMPRESSED, packet.planets().stream().toList())
+                    .resultOrPartial(AdAstra.LOGGER::error)
+                    .map(YabnElement::toData)
+                    .ifPresent(buf::writeByteArray);
         }
 
         @Override
         public DatapackPlanetsPacket decode(FriendlyByteBuf buf) {
-            //TODO Replace with yabn codec in 1.19.3
-            return new DatapackPlanetsPacket(buf.readList(buf2 -> buf2.readWithCodec(Planet.CODEC)));
+            try {
+                return new DatapackPlanetsPacket(CODEC.parse(YabnOps.COMPRESSED, YabnParser.parse(new ByteBufByteReader(buf)))
+                        .result()
+                        .orElse(List.of()));
+            }catch (Exception e) {
+                e.printStackTrace();
+                return new DatapackPlanetsPacket(List.of());
+            }
         }
 
         @Override
