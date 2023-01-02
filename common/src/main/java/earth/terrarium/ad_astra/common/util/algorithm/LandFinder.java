@@ -10,7 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Searches for land (aka. a chunk with blocks in in it).
+ * Searches for land (aka. a chunk with blocks in it).
  */
 
 public class LandFinder {

@@ -55,7 +55,7 @@ public class AdAstraClient {
     public static List<PlanetRing> planetRings = new ArrayList<>();
     public static List<Galaxy> galaxies = new ArrayList<>();
 
-    public static void initializeClient() {
+    public static void init() {
         ClientModScreens.init();
         ClientModKeybindings.init();
         ArmourRenderers.init();

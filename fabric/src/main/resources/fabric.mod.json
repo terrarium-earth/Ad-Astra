@@ -27,8 +27,7 @@
       "earth.terrarium.ad_astra.fabric.AdAstraFabric"
     ],
     "client": [
-      "earth.terrarium.ad_astra.client.fabric.AdAstraClientFabric::initializeClient",
-      "earth.terrarium.ad_astra.client.AdAstraClient::initializeClient",
+      "earth.terrarium.ad_astra.client.fabric.AdAstraClientFabric::init",
       "earth.terrarium.ad_astra.AdAstra::postInit"
     ],
     "server": [

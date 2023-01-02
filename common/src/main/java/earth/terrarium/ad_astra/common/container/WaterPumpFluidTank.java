@@ -138,10 +138,8 @@ public class WaterPumpFluidTank implements UpdatingFluidContainer<BlockEntity> {
         updatable.update();
     }
 
-    private static class WaterPumpSnapshot implements FluidSnapshot {
-        private final FluidHolder tank;
-
-        public WaterPumpSnapshot(FluidHolder tank) {
+    private record WaterPumpSnapshot(FluidHolder tank) implements FluidSnapshot {
+        private WaterPumpSnapshot(FluidHolder tank) {
             this.tank = tank.copyHolder();
         }
 

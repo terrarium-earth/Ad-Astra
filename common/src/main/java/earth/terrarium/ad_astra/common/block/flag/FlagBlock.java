@@ -153,7 +153,7 @@ public class FlagBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        return Block.canSupportRigidBlock(level, pos.below());
+        return Block.canSupportRigidBlock(level, pos.below()) && level.getBlockState(pos.above()).isAir();
     }
 
     @Override

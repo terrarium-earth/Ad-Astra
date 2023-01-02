@@ -48,7 +48,7 @@ public class AdAstraForge {
     }
 
     public static void onClientSetup(FMLClientSetupEvent event) {
-        AdAstraClient.initializeClient();
+        AdAstraClient.init();
         AdAstraClientForge.postInit();
     }
 

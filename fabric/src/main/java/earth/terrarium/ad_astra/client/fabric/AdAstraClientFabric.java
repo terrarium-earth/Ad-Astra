@@ -41,8 +41,8 @@ import java.util.concurrent.Executor;
 import java.util.function.Supplier;
 
 public class AdAstraClientFabric {
-
-    public static void initializeClient() {
+    public static void init() {
+        AdAstraClient.init();
         ClientSpriteRegistryCallback.event(Sheets.CHEST_SHEET).register((spriteAtlasTexture, registry) -> AdAstraClient.onRegisterChestSprites(registry::register));
         ClientSpriteRegistryCallback.event(InventoryMenu.BLOCK_ATLAS).register((spriteAtlasTexture, registry) -> AdAstraClient.onRegisterSprites(registry::register));
         ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> AdAstraClient.onRegisterModels(out));
