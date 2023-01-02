@@ -41,7 +41,7 @@ public record DatapackPlanetsPacket(Collection<Planet> planets) implements Packe
             CODEC.encodeStart(YabnOps.COMPRESSED, packet.planets().stream().toList())
                     .resultOrPartial(AdAstra.LOGGER::error)
                     .map(YabnElement::toData)
-                    .ifPresent(buf::writeByteArray);
+                    .ifPresent(buf::writeBytes);
         }
 
         @Override
