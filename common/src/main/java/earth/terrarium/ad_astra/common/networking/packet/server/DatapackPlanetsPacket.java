@@ -38,10 +38,9 @@ public record DatapackPlanetsPacket(Collection<Planet> planets) implements Packe
 
         @Override
         public void encode(DatapackPlanetsPacket packet, FriendlyByteBuf buf) {
-            CODEC.encodeStart(YabnOps.COMPRESSED, packet.planets().stream().toList())
-                    .resultOrPartial(AdAstra.LOGGER::error)
-                    .map(YabnElement::toData)
-                    .ifPresent(buf::writeBytes);
+            YabnElement element = CODEC.encodeStart(YabnOps.COMPRESSED, packet.planets().stream().toList())
+                    .getOrThrow(false, AdAstra.LOGGER::error);
+            buf.writeBytes(element.toData());
         }
 
         @Override
