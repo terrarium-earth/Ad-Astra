@@ -31,7 +31,7 @@ public abstract class LivingEntityMixin {
             }
         }
 
-        if (fallDistance <= 3 / ModUtils.getPlanetGravity(entity.level)) {
+        if (fallDistance <= 3 / ModUtils.getEntityGravity(entity)) {
             cir.setReturnValue(false);
         }
     }

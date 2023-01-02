@@ -26,7 +26,7 @@ public abstract class LivingEntityGravityMixin {
             Vec3 velocity = entity.getDeltaMovement();
 
             if (!entity.isNoGravity() && !entity.isInWater() && !entity.isInLava() && !entity.isFallFlying() && !entity.hasEffect(MobEffects.SLOW_FALLING)) {
-                double newGravity = CONSTANT * ModUtils.getPlanetGravity(entity.level);
+                double newGravity = CONSTANT * ModUtils.getEntityGravity(entity);
                 entity.setDeltaMovement(velocity.x(), velocity.y() + CONSTANT - newGravity, velocity.z());
             }
         }
@@ -36,6 +36,6 @@ public abstract class LivingEntityGravityMixin {
     @ModifyVariable(method = "causeFallDamage", at = @At("HEAD"), ordinal = 1, argsOnly = true)
     private float adastra_causeFallDamage(float damageMultiplier) {
         LivingEntity entity = ((LivingEntity) (Object) this);
-        return damageMultiplier * ModUtils.getPlanetGravity(entity.level);
+        return damageMultiplier * ModUtils.getEntityGravity(entity);
     }
 }

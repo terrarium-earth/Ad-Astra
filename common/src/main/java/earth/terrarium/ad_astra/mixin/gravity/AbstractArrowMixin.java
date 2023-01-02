@@ -23,7 +23,7 @@ public abstract class AbstractArrowMixin {
             Entity entity = (Entity) (Object) this;
             if (!entity.isNoGravity()) {
                 Vec3 velocity = entity.getDeltaMovement();
-                double newGravity = CONSTANT * ModUtils.getPlanetGravity(entity.level);
+                double newGravity = CONSTANT * ModUtils.getEntityGravity(entity);
                 entity.setDeltaMovement(velocity.x(), velocity.y() + CONSTANT - newGravity, velocity.z());
             }
         }

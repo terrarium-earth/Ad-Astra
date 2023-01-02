@@ -202,6 +202,10 @@ public class ModUtils {
         return PlanetData.getPlanetFromOrbit(level.dimension()).map(Planet::level).orElse(Level.OVERWORLD);
     }
 
+    public static float getEntityGravity(Entity entity) {
+        return getPlanetGravity(entity.getLevel());
+    }
+
     /**
      * Gets the gravity of the level, in ratio to earth gravity. So a gravity of 1.0 is equivalent to earth gravity, while 0.5 would be half of earth's gravity and 2.0 would be twice the earth's gravity.
      *
