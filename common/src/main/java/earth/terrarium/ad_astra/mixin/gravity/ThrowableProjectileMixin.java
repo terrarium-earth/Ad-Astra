@@ -14,7 +14,7 @@ public abstract class ThrowableProjectileMixin {
     @Inject(method = "getGravity", at = @At("HEAD"), cancellable = true)
     public void adastra_getGravity(CallbackInfoReturnable<Float> cir) {
         if (AdAstraConfig.doEntityGravity) {
-            cir.setReturnValue(0.03f * ModUtils.getPlanetGravity(((Entity) (Object) this).getLevel()));
+            cir.setReturnValue(0.03f * ModUtils.getEntityGravity((Entity) (Object) this));
         }
     }
 }

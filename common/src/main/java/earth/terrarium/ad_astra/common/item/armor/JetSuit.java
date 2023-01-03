@@ -167,7 +167,7 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
         }
         isFallFlying = true;
 
-        double speed = SpaceSuitConfig.jetSuitSpeed - (ModUtils.getPlanetGravity(player.level) * 0.25);
+        double speed = SpaceSuitConfig.jetSuitSpeed - (ModUtils.getEntityGravity(player) * 0.25);
         Vec3 rotationVector = player.getLookAngle().scale(speed);
         Vec3 velocity = player.getDeltaMovement();
         player.setDeltaMovement(velocity.add(rotationVector.x() * 0.1 + (rotationVector.x() * 1.5 - velocity.x()) * 0.5, rotationVector.y() * 0.1 + (rotationVector.y() * 1.5 - velocity.y()) * 0.5, rotationVector.z() * 0.1 + (rotationVector.z() * 1.5 - velocity.z()) * 0.5));
