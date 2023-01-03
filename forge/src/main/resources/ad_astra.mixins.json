@@ -10,8 +10,7 @@
   ],
   "mixins": [
     "AxeItemAccessor",
-    "GlacianRamMixin",
-    "JetSuitMixin"
+    "GlacianRamMixin"
   ],
   "injectors": {
     "defaultRequire": 1

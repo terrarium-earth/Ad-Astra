@@ -167,21 +167,20 @@ allprojects {
     group = rootProject.maven_group
 
     repositories {
-        maven { url "https://maven.shedaniel.me/" }
-        maven { url "https://maven.terraformersmc.com" }
-        maven { url 'https://maven.blamejared.com' }
-        maven { url "https://nexus.resourcefulbees.com/repository/maven-public/" }
         maven {
             url "https://cursemaven.com"
             content {
                 includeGroup "curse.maven"
             }
         }
+        maven { url = "https://nexus.resourcefulbees.com/repository/maven-public/" }
     }
 
-    tasks.withType(JavaCompile) {
-        options.encoding = "UTF-8"
-        options.release = 17
+    tasks.withType(JavaCompile).tap {
+        configureEach {
+            options.encoding = "UTF-8"
+            options.release = 17
+        }
     }
 
     java {

@@ -1,9 +1,10 @@
 package earth.terrarium.ad_astra.common.item.armor;
 
+import dev.architectury.injectables.annotations.PlatformOnly;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.screen.PlayerOverlayScreen;
-import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.ad_astra.common.config.SpaceSuitConfig;
+import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.ad_astra.common.util.ModKeyBindings;
 import earth.terrarium.ad_astra.common.util.ModUtils;
 import earth.terrarium.botarium.api.energy.EnergyHooks;
@@ -25,6 +26,7 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -197,5 +199,27 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
             }
         }
         return AdAstra.MOD_ID + ":textures/entity/armour/jet_suit/jet_suit_5.png";
+    }
+
+    @PlatformOnly("forge")
+    public boolean elytraFlightTick(ItemStack stack, LivingEntity entity, int flightTicks) {
+        if (!entity.level.isClientSide) {
+            ItemStack chest = entity.getItemBySlot(EquipmentSlot.CHEST);
+            if (chest.getItem() instanceof JetSuit) {
+                int nextFlightTick = flightTicks + 1;
+                if (nextFlightTick % 10 == 0) {
+                    if (nextFlightTick % 20 == 0) {
+                        stack.hurtAndBreak(1, entity, e -> e.broadcastBreakEvent(EquipmentSlot.CHEST));
+                    }
+                    entity.gameEvent(GameEvent.ELYTRA_GLIDE);
+                }
+            }
+        }
+        return true;
+    }
+
+    @PlatformOnly("forge")
+    public boolean canElytraFly(ItemStack stack, LivingEntity entity) {
+        return this.isFallFlying;
     }
 }

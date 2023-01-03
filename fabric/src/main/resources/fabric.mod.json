@@ -5,10 +5,13 @@
   "name": "Ad Astra!",
   "description": "Live long and prosper, Ad Astra!",
   "authors": [
-    "Alex Nijjar",
+    "Alex Nijjar"
+  ],
+  "contributors": [
     "CodexAdrian",
     "Facu",
     "Fizz",
+    "Giselle",
     "Kekie6",
     "Shrimp",
     "SpaceStar",
@@ -16,28 +19,23 @@
     "ThatGravyBoat"
   ],
   "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/ad-astra",
-    "sources": "https://github.com/terrarium-earth/Ad-Astra"
+    "website": "https://www.curseforge.com/minecraft/mc-mods/ad-astra",
+    "repo": "https://github.com/terrarium-earth/Ad-Astra",
+    "issues": "https://github.com/terrarium-earth/Ad-Astra/issues"
   },
   "license": "Terrarium Licence",
   "icon": "icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "earth.terrarium.ad_astra.fabric.AdAstraFabric"
+      "earth.terrarium.ad_astra.fabric.AdAstraFabric",
+      "earth.terrarium.ad_astra.AdAstra::postInit"
     ],
     "client": [
-      "earth.terrarium.ad_astra.client.fabric.AdAstraClientFabric::init",
-      "earth.terrarium.ad_astra.AdAstra::postInit"
+      "earth.terrarium.ad_astra.client.fabric.AdAstraClientFabric"
     ],
-    "server": [
-      "earth.terrarium.ad_astra.AdAstra::postInit"
-    ],
-    "modmenu": [
-      "earth.terrarium.ad_astra.common.config.fabric.ModMenuConfig"
-    ],
-    "emi": [
-      "earth.terrarium.ad_astra.common.compat.emi.AdAstraEmiPlugin"
+    "jei_mod_plugin": [
+      "earth.terrarium.ad_astra.common.compat.jei.AdAstraJeiPlugin"
     ],
     "rei_client": [
       "earth.terrarium.ad_astra.common.compat.rei.AdAstraReiPlugin"
@@ -45,8 +43,11 @@
     "rei_common": [
       "earth.terrarium.ad_astra.common.compat.rei.AdAstraReiCommonPlugin"
     ],
-    "jei_mod_plugin": [
-      "earth.terrarium.ad_astra.common.compat.jei.AdAstraJeiPlugin"
+    "emi": [
+      "earth.terrarium.ad_astra.common.compat.emi.AdAstraEmiPlugin"
+    ],
+    "modmenu": [
+      "earth.terrarium.ad_astra.common.config.fabric.ModMenuConfig"
     ]
   },
   "mixins": [
@@ -54,10 +55,10 @@
     "ad_astra-common.mixins.json"
   ],
   "depends": {
-    "fabric": "*",
+    "fabricloader": ">=${fabric_loader_version}",
     "minecraft": ">=1.19",
-    "resourcefulconfig": ">=1.0.15",
-    "botarium": ">=1.8.0",
-    "resourcefullib": ">=1.1.18"
+    "resourcefullib": ">=${resourcefullib_version}",
+    "resourcefulconfig": ">=${resourcefulconfig_version}",
+    "botarium": ">=${botarium_version}"
   }
 }

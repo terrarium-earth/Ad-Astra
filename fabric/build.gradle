@@ -18,7 +18,7 @@ sourceSets {
 
 configurations {
     common
-    shadowCommon // Don't use shadow from the shadow plugin because we don't want IDEA to index this.
+    shadowCommon
     compileClasspath.extendsFrom common
     runtimeClasspath.extendsFrom common
     developmentFabric.extendsFrom common
@@ -26,29 +26,29 @@ configurations {
 
 dependencies {
     modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
-    modApi "net.fabricmc.fabric-api:fabric-api:$rootProject.fabric_api_version"
-    common(project(path: ":common", configuration: "namedElements")) { transitive = false }
-    shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive = false }
+    modApi "net.fabricmc.fabric-api:fabric-api:$rootProject.fabric_api_version+$rootProject.minecraft_version"
 
-    modApi ("earth.terrarium:botarium-fabric-$rootProject.minecraft_version:$rootProject.botarium_version")
-    modApi ("com.teamresourceful.resourcefullib:resourcefullib-fabric-$rootProject.resourcefullib_version")
-    modApi "com.teamresourceful.resourcefulconfig:resourcefulconfig-fabric-$resourcefulconfig_version"
+    common(project(path: ":common", configuration: "namedElements")) { transitive false }
+    shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
 
-    modApi("com.terraformersmc:modmenu:$rootProject.modmenu_version")
-    modImplementation "vazkii.patchouli:Patchouli:$rootProject.patchouli_version-FABRIC"
+    modApi "com.terraformersmc:modmenu:$rootProject.modmenu_version"
+    modImplementation "vazkii.patchouli:Patchouli:$rootProject.minecraft_version-$rootProject.patchouli_version-FABRIC"
 
-//    modCompileOnly "mezz.jei:jei-$rootProject.minecraft_version-fabric-api:$rootProject.project.jei_version"
-//    modLocalRuntime ("mezz.jei:jei-$rootProject.minecraft_version-fabric:$rootProject.project.jei_version") { transitive = false }
-    modCompileOnly("me.shedaniel:RoughlyEnoughItems-fabric:$rootProject.rei_version")
-    modImplementation "dev.emi:emi:$rootProject.emi_version"
+    modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:$rootProject.rei_version"
+    modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:$rootProject.rei_version"
+    modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:$rootProject.rei_version"
+    modCompileOnly "dev.emi:emi:$rootProject.emi_version+$rootProject.minecraft_version"
+
+    modApi "com.teamresourceful.resourcefullib:resourcefullib-fabric-$minecraft_version:$rootProject.resourcefullib_version"
+    modApi "com.teamresourceful.resourcefulconfig:resourcefulconfig-fabric-$minecraft_version:$rootProject.resourcefulconfig_version"
+    modApi "earth.terrarium:botarium-fabric-$rootProject.minecraft_version:$rootProject.botarium_version"
 }
 
 processResources {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    inputs.property "version", project.version
-
+    inputs.property "fabric_loader_version", rootProject.fabric_loader_version
     filesMatching("fabric.mod.json") {
-        expand "version": project.version
+        expand "version": rootProject.version, "fabric_loader_version": rootProject.fabric_loader_version, "resourcefullib_version": rootProject.resourcefullib_version, "resourcefulconfig_version": rootProject.resourcefulconfig_version, "botarium_version": rootProject.botarium_version
     }
 }
 
@@ -69,6 +69,7 @@ jar {
 }
 
 sourcesJar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     def commonSources = project(":common").sourcesJar
     dependsOn commonSources
     from commonSources.archiveFile.map { zipTree(it) }
@@ -80,16 +81,17 @@ components.java {
     }
 }
 
+repositories {
+    maven { url "https://maven.terraformersmc.com" }
+}
+
+def ENV = System.getenv()
+
 publishing {
     publications {
         mavenFabric(MavenPublication) {
             artifactId = rootProject.archives_base_name + "-" + project.name
             from components.java
         }
-    }
-
-    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-    repositories {
-        // Add repositories to publish to here.
     }
 }

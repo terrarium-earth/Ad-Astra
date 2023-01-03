@@ -1,25 +1,34 @@
-dependencies {
-    modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
-
-    modApi "com.teamresourceful.resourcefulconfig:resourcefulconfig-common-$rootProject.resourcefulconfig_version"
-    modApi "earth.terrarium:botarium-common-$rootProject.minecraft_version:$rootProject.botarium_version"
-    modApi "com.teamresourceful.resourcefullib:resourcefullib-common-$rootProject.resourcefullib_version"
-
-    modImplementation "vazkii.patchouli:Patchouli-xplat:$rootProject.patchouli_version"
-
-    modCompileOnly("me.shedaniel:RoughlyEnoughItems-api:$rootProject.rei_version")
-    modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin:$rootProject.rei_version")
-    modCompileOnly "mezz.jei:jei-$rootProject.minecraft_version-common-api:$rootProject.jei_version"
-    modRuntimeOnly "mezz.jei:jei-$rootProject.minecraft_version-common:$rootProject.jei_version"
-}
-
 architectury {
-    common()
+    common(rootProject.enabled_platforms.split(","))
 }
 
 loom {
     accessWidenerPath = file("src/main/resources/ad_astra.accesswidener")
 }
+
+dependencies {
+    modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
+
+    modImplementation "vazkii.patchouli:Patchouli-xplat:$rootProject.minecraft_version-$rootProject.patchouli_version"
+
+    modCompileOnly "mezz.jei:jei-$rootProject.minecraft_version-common-api:$rootProject.jei_version"
+    modRuntimeOnly "mezz.jei:jei-$rootProject.minecraft_version-common:$rootProject.jei_version"
+    modCompileOnly "me.shedaniel:RoughlyEnoughItems-api:$rootProject.rei_version"
+    modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin:$rootProject.rei_version"
+
+    modApi "com.teamresourceful.resourcefullib:resourcefullib-common-$minecraft_version:$rootProject.resourcefullib_version"
+    modApi "com.teamresourceful.resourcefulconfig:resourcefulconfig-common-$minecraft_version:$rootProject.resourcefulconfig_version"
+    modApi "earth.terrarium:botarium-common-$rootProject.minecraft_version:$rootProject.botarium_version"
+}
+
+processResources {
+    inputs.property "version", rootProject.version
+    inputs.property "resourcefullib_version", rootProject.resourcefullib_version
+    inputs.property "resourcefulconfig_version", rootProject.resourcefulconfig_version
+    inputs.property "botarium_version", rootProject.botarium_version
+}
+
+def ENV = System.getenv()
 
 publishing {
     publications {
@@ -27,10 +36,5 @@ publishing {
             artifactId = rootProject.archives_base_name
             from components.java
         }
-    }
-
-    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-    repositories {
-        // Add repositories to publish to here.
     }
 }

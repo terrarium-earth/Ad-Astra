@@ -5,6 +5,7 @@ import earth.terrarium.ad_astra.client.registry.ClientModBlockRenderers;
 import earth.terrarium.ad_astra.client.registry.ClientModEntities;
 import earth.terrarium.ad_astra.client.registry.ClientModKeybindings;
 import earth.terrarium.ad_astra.client.registry.ClientModParticles;
+import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry;
@@ -40,8 +41,9 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.function.Supplier;
 
-public class AdAstraClientFabric {
-    public static void init() {
+public class AdAstraClientFabric implements ClientModInitializer {
+    @Override
+    public void onInitializeClient() {
         AdAstraClient.init();
         ClientSpriteRegistryCallback.event(Sheets.CHEST_SHEET).register((spriteAtlasTexture, registry) -> AdAstraClient.onRegisterChestSprites(registry::register));
         ClientSpriteRegistryCallback.event(InventoryMenu.BLOCK_ATLAS).register((spriteAtlasTexture, registry) -> AdAstraClient.onRegisterSprites(registry::register));
