@@ -1,10 +1,10 @@
 package earth.terrarium.ad_astra.common.block.machine.entity;
 
-import earth.terrarium.ad_astra.common.registry.ModBlockEntities;
-import earth.terrarium.ad_astra.common.util.FluidUtils;
 import earth.terrarium.ad_astra.common.config.OxygenLoaderConfig;
 import earth.terrarium.ad_astra.common.recipe.OxygenConversionRecipe;
+import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.ad_astra.common.screen.menu.ConversionMenu;
+import earth.terrarium.ad_astra.common.util.FluidUtils;
 import earth.terrarium.botarium.api.energy.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
@@ -24,7 +24,7 @@ import java.util.function.Predicate;
 public class OxygenLoaderBlockEntity extends FluidMachineBlockEntity {
 
     public OxygenLoaderBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntities.OXYGEN_LOADER.get(), blockPos, blockState);
+        super(ModBlockEntityTypes.OXYGEN_LOADER.get(), blockPos, blockState);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package earth.terrarium.ad_astra.client.sound;
 
+import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import earth.terrarium.ad_astra.common.registry.ModSoundEvents;
 import earth.terrarium.ad_astra.common.util.ModUtils;
 import net.fabricmc.api.EnvType;
@@ -11,6 +12,9 @@ import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+
+import java.util.List;
+import java.util.stream.Stream;
 
 @Environment(EnvType.CLIENT)
 public class PlanetSoundPlayer implements AmbientSoundHandler {
@@ -36,12 +40,14 @@ public class PlanetSoundPlayer implements AmbientSoundHandler {
                 this.ticksUntilPlay = 5000;
 
                 if (ModUtils.isOrbitlevel(this.player.level)) {
-                    randomSpaceSound = ModSoundEvents.SPACE_SOUNDS.get(this.player.level.random.nextInt(ModSoundEvents.SPACE_SOUNDS.size())).get();
+                    List<RegistryEntry<SoundEvent>> sounds = Stream.concat(ModSoundEvents.SPACE_SOUNDS.stream(), ModSoundEvents.PLANET_SOUNDS.stream()).toList();
+                    randomSpaceSound = sounds.get(this.player.level.random.nextInt(sounds.size())).get();
                 } else if (ModUtils.isPlanet(this.player.level)) {
                     if (this.player.getY() > 80) {
                         return;
                     }
-                    randomSpaceSound = ModSoundEvents.PLANET_SOUNDS.get(this.player.level.random.nextInt(ModSoundEvents.PLANET_SOUNDS.size())).get();
+                    List<RegistryEntry<SoundEvent>> sounds = ModSoundEvents.PLANET_SOUNDS.stream().toList();
+                    randomSpaceSound = sounds.get(this.player.level.random.nextInt(sounds.size())).get();
                 } else {
                     return;
                 }

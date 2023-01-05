@@ -1,15 +1,15 @@
 package earth.terrarium.ad_astra.common.block.machine.entity;
 
 import earth.terrarium.ad_astra.common.block.machine.AbstractMachineBlock;
-import earth.terrarium.ad_astra.common.registry.ModBlockEntities;
+import earth.terrarium.ad_astra.common.config.OxygenDistributorConfig;
+import earth.terrarium.ad_astra.common.recipe.OxygenConversionRecipe;
+import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.ad_astra.common.registry.ModParticleTypes;
+import earth.terrarium.ad_astra.common.screen.menu.OxygenDistributorMenu;
 import earth.terrarium.ad_astra.common.util.FluidUtils;
 import earth.terrarium.ad_astra.common.util.ModUtils;
 import earth.terrarium.ad_astra.common.util.OxygenUtils;
 import earth.terrarium.ad_astra.common.util.algorithm.OxygenFillerAlgorithm;
-import earth.terrarium.ad_astra.common.config.OxygenDistributorConfig;
-import earth.terrarium.ad_astra.common.recipe.OxygenConversionRecipe;
-import earth.terrarium.ad_astra.common.screen.menu.OxygenDistributorMenu;
 import earth.terrarium.botarium.api.energy.EnergyBlock;
 import earth.terrarium.botarium.api.energy.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
@@ -39,7 +39,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
     private boolean showOxygen = false;
 
     public OxygenDistributorBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntities.OXYGEN_DISTRIBUTOR.get(), blockPos, blockState);
+        super(ModBlockEntityTypes.OXYGEN_DISTRIBUTOR.get(), blockPos, blockState);
     }
 
     @Override

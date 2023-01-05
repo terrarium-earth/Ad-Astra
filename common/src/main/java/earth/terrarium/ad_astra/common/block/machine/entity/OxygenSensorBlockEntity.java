@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.common.block.machine.entity;
 
 import earth.terrarium.ad_astra.common.block.machine.OxygenSensorBlock;
-import earth.terrarium.ad_astra.common.registry.ModBlockEntities;
+import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.ad_astra.common.util.OxygenUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -13,7 +13,7 @@ public class OxygenSensorBlockEntity extends AbstractMachineBlockEntity {
     public static final Direction[] CHECK_DIRECTIONS = new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST, Direction.UP};
 
     public OxygenSensorBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntities.OXYGEN_SENSOR.get(), blockPos, blockState);
+        super(ModBlockEntityTypes.OXYGEN_SENSOR.get(), blockPos, blockState);
     }
 
     @Override

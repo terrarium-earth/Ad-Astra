@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.common.block.pipe;
 
-import earth.terrarium.ad_astra.common.registry.ModBlockEntities;
+import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import earth.terrarium.botarium.api.fluid.PlatformFluidHandler;
@@ -18,7 +18,7 @@ public class FluidPipeBlockEntity extends BlockEntity implements InteractablePip
     private Node<PlatformFluidHandler> source;
 
     public FluidPipeBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.FLUID_PIPE.get(), pos, state);
+        super(ModBlockEntityTypes.FLUID_PIPE.get(), pos, state);
     }
 
     @Override

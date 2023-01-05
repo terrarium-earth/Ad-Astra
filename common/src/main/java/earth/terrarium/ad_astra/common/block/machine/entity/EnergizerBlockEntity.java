@@ -2,9 +2,9 @@ package earth.terrarium.ad_astra.common.block.machine.entity;
 
 import earth.terrarium.ad_astra.common.block.machine.AbstractMachineBlock;
 import earth.terrarium.ad_astra.common.block.machine.EnergizerBlock;
-import earth.terrarium.ad_astra.common.registry.ModBlockEntities;
-import earth.terrarium.ad_astra.common.util.ModUtils;
 import earth.terrarium.ad_astra.common.config.EnergizerConfig;
+import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
+import earth.terrarium.ad_astra.common.util.ModUtils;
 import earth.terrarium.botarium.api.energy.EnergyBlock;
 import earth.terrarium.botarium.api.energy.EnergyHooks;
 import earth.terrarium.botarium.api.energy.SimpleUpdatingEnergyContainer;
@@ -21,7 +21,7 @@ public class EnergizerBlockEntity extends AbstractMachineBlockEntity implements 
     private SimpleUpdatingEnergyContainer energyContainer;
 
     public EnergizerBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntities.ENERGIZER.get(), blockPos, blockState);
+        super(ModBlockEntityTypes.ENERGIZER.get(), blockPos, blockState);
     }
 
     @Override

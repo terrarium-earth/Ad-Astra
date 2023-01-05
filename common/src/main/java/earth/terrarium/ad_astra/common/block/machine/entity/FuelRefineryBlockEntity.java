@@ -1,10 +1,10 @@
 package earth.terrarium.ad_astra.common.block.machine.entity;
 
-import earth.terrarium.ad_astra.common.registry.ModBlockEntities;
-import earth.terrarium.ad_astra.common.util.FluidUtils;
 import earth.terrarium.ad_astra.common.config.FuelRefineryConfig;
 import earth.terrarium.ad_astra.common.recipe.FuelConversionRecipe;
+import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.ad_astra.common.screen.menu.ConversionMenu;
+import earth.terrarium.ad_astra.common.util.FluidUtils;
 import earth.terrarium.botarium.api.energy.EnergyBlock;
 import earth.terrarium.botarium.api.energy.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
@@ -25,7 +25,7 @@ import java.util.function.Predicate;
 public class FuelRefineryBlockEntity extends FluidMachineBlockEntity implements EnergyBlock {
 
     public FuelRefineryBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntities.FUEL_REFINERY.get(), blockPos, blockState);
+        super(ModBlockEntityTypes.FUEL_REFINERY.get(), blockPos, blockState);
     }
 
     @Override

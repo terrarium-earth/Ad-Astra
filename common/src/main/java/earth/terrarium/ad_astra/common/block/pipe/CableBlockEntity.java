@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.common.block.pipe;
 
-import earth.terrarium.ad_astra.common.registry.ModBlockEntities;
+import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.botarium.api.energy.EnergyHooks;
 import earth.terrarium.botarium.api.energy.PlatformEnergyManager;
 import net.minecraft.core.BlockPos;
@@ -17,7 +17,7 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<Pl
     private Node<PlatformEnergyManager> source;
 
     public CableBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.CABLE.get(), pos, state);
+        super(ModBlockEntityTypes.CABLE.get(), pos, state);
     }
 
     @Override

@@ -1,9 +1,9 @@
 package earth.terrarium.ad_astra.common.block.machine.entity;
 
-import earth.terrarium.ad_astra.common.registry.ModBlockEntities;
-import earth.terrarium.ad_astra.common.util.ModUtils;
 import earth.terrarium.ad_astra.common.recipe.NasaWorkbenchRecipe;
+import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.ad_astra.common.screen.menu.NasaWorkbenchMenu;
+import earth.terrarium.ad_astra.common.util.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -27,7 +27,7 @@ public class NasaWorkbenchBlockEntity extends AbstractMachineBlockEntity {
     private final List<NasaWorkbenchRecipe> acceptedInputs = new ArrayList<>();
 
     public NasaWorkbenchBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntities.NASA_WORKBENCH.get(), blockPos, blockState);
+        super(ModBlockEntityTypes.NASA_WORKBENCH.get(), blockPos, blockState);
     }
 
     @Nullable

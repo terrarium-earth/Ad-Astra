@@ -15,7 +15,7 @@ import net.minecraft.world.inventory.MenuType;
 import org.apache.commons.lang3.NotImplementedException;
 
 @Environment(EnvType.CLIENT)
-public class ClientUtils {
+public class ClientPlatformUtils {
 
     @ExpectPlatform
     public static BakedModel getModel(ModelManager dispatcher, ResourceLocation id) {

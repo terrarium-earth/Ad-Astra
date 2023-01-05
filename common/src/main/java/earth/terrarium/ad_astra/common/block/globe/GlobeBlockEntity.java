@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.common.block.globe;
 
-import earth.terrarium.ad_astra.common.registry.ModBlockEntities;
+import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
@@ -21,7 +21,7 @@ public class GlobeBlockEntity extends BlockEntity {
     private float cachedYaw = 0.0f;
 
     public GlobeBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.GLOBE_BLOCK_ENTITY.get(), pos, state);
+        super(ModBlockEntityTypes.GLOBE.get(), pos, state);
     }
 
     public void tick() {

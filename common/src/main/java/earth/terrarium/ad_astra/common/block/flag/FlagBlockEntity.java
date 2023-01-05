@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.common.block.flag;
 
 import com.mojang.authlib.GameProfile;
-import earth.terrarium.ad_astra.common.registry.ModBlockEntities;
+import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
@@ -23,7 +23,7 @@ public class FlagBlockEntity extends BlockEntity {
     private String id;
 
     public FlagBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.FLAG_BLOCK_ENTITY.get(), pos, state);
+        super(ModBlockEntityTypes.FLAG.get(), pos, state);
     }
 
     @Override

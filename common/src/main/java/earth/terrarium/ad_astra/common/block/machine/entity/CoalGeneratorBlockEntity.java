@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.common.block.machine.entity;
 
 import earth.terrarium.ad_astra.common.config.CoalGeneratorConfig;
-import earth.terrarium.ad_astra.common.registry.ModBlockEntities;
+import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.ad_astra.common.screen.menu.CoalGeneratorMenu;
 import earth.terrarium.botarium.api.energy.EnergyBlock;
 import earth.terrarium.botarium.api.energy.EnergyHooks;
@@ -23,7 +23,7 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity imple
     private ExtractOnlyEnergyContainer energyContainer;
 
     public CoalGeneratorBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntities.COAL_GENERATOR.get(), blockPos, blockState);
+        super(ModBlockEntityTypes.COAL_GENERATOR.get(), blockPos, blockState);
     }
 
     @Nullable

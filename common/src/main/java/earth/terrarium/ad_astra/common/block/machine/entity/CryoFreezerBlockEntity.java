@@ -1,10 +1,10 @@
 package earth.terrarium.ad_astra.common.block.machine.entity;
 
-import earth.terrarium.ad_astra.common.registry.ModBlockEntities;
-import earth.terrarium.ad_astra.common.util.FluidUtils;
 import earth.terrarium.ad_astra.common.config.CryoFreezerConfig;
 import earth.terrarium.ad_astra.common.recipe.CryoFuelConversionRecipe;
+import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.ad_astra.common.screen.menu.CryoFreezerMenu;
+import earth.terrarium.ad_astra.common.util.FluidUtils;
 import earth.terrarium.botarium.api.energy.EnergyBlock;
 import earth.terrarium.botarium.api.energy.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.api.fluid.ExtractOnlyUpdatingFluidContainer;
@@ -37,7 +37,7 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
     private ExtractOnlyUpdatingFluidContainer tank;
 
     public CryoFreezerBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntities.CRYO_FREEZER.get(), blockPos, blockState);
+        super(ModBlockEntityTypes.CRYO_FREEZER.get(), blockPos, blockState);
     }
 
     @Override

@@ -4,7 +4,7 @@ import earth.terrarium.ad_astra.common.block.machine.entity.NasaWorkbenchBlockEn
 import earth.terrarium.ad_astra.common.networking.NetworkHandling;
 import earth.terrarium.ad_astra.common.networking.packet.server.MachineInfoPacket;
 import earth.terrarium.ad_astra.common.recipe.NasaWorkbenchRecipe;
-import earth.terrarium.ad_astra.common.registry.ModMenuTypes;
+import earth.terrarium.ad_astra.common.registry.ModMenus;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
@@ -13,7 +13,6 @@ import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -26,7 +25,7 @@ public class NasaWorkbenchMenu extends AbstractMachineMenu<NasaWorkbenchBlockEnt
     }
 
     public NasaWorkbenchMenu(int syncId, Inventory inventory, NasaWorkbenchBlockEntity entity) {
-        super(ModMenuTypes.NASA_WORKBENCH_MENU.get(), syncId, inventory, entity, new Slot[]{
+        super(ModMenus.NASA_WORKBENCH_MENU.get(), syncId, inventory, entity, new Slot[]{
 
                 // Nose
                 new Slot(entity, 0, 56, 20),

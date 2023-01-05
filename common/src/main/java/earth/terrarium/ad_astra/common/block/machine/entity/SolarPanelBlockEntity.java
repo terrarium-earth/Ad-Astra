@@ -1,9 +1,9 @@
 package earth.terrarium.ad_astra.common.block.machine.entity;
 
-import earth.terrarium.ad_astra.common.registry.ModBlockEntities;
-import earth.terrarium.ad_astra.common.util.ModUtils;
 import earth.terrarium.ad_astra.common.config.SolarPanelConfig;
+import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.ad_astra.common.screen.menu.SolarPanelMenu;
+import earth.terrarium.ad_astra.common.util.ModUtils;
 import earth.terrarium.botarium.api.energy.EnergyBlock;
 import earth.terrarium.botarium.api.energy.EnergyHooks;
 import earth.terrarium.botarium.api.energy.ExtractOnlyEnergyContainer;
@@ -21,7 +21,7 @@ public class SolarPanelBlockEntity extends AbstractMachineBlockEntity implements
     private ExtractOnlyEnergyContainer energyContainer;
 
     public SolarPanelBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntities.SOLAR_PANEL.get(), blockPos, blockState);
+        super(ModBlockEntityTypes.SOLAR_PANEL.get(), blockPos, blockState);
     }
 
     public static long getEnergyForDimension(Level level) {

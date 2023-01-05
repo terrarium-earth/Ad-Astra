@@ -22,20 +22,20 @@ public class AdAstra {
         CONFIGURATOR.registerConfig(AdAstraConfig.class);
 
         ModFluidProperties.FLUID_TYPES.initialize();
-        ModFluids.FLUIDS.initialize();
-        ModEntityTypes.ENTITY_TYPES.initialize();
-        ModBlocks.BLOCKS.initialize();
-        ModItems.ITEMS.initialize();
-        ModBlockEntities.BLOCK_ENTITIES.initialize();
-        ModRecipeTypes.RECIPE_TYPES.initialize();
-        ModRecipeSerializers.RECIPE_SERIALIZERS.initialize();
-        ModMenuTypes.MENU_TYPES.initialize();
-        ModSoundEvents.SOUND_EVENTS.initialize();
-        ModParticleTypes.PARTICLE_TYPES.initialize();
-        ModPaintings.PAINTING_VARIENTS.initialize();
-        ModFeatures.FEATURES.initialize();
-        ModStructures.STRUCTURE_TYPES.initialize();
-        ModStructures.STRUCTURE_PROCESSORS.initialize();
+        ModFluids.FLUIDS.init();
+        ModEntityTypes.ENTITY_TYPES.init();
+        ModBlocks.BLOCKS.init();
+        ModItems.ITEMS.init();
+        ModBlockEntityTypes.BLOCK_ENTITY_TYPES.init();
+        ModRecipeTypes.RECIPE_TYPES.init();
+        ModRecipeSerializers.RECIPE_SERIALIZERS.init();
+        ModMenus.MENUS.init();
+        ModSoundEvents.SOUND_EVENTS.init();
+        ModParticleTypes.PARTICLE_TYPES.init();
+        ModPaintings.PAINTING_VARIANTS.init();
+        ModFeatures.FEATURES.init();
+        ModStructures.STRUCTURE_TYPES.init();
+        ModStructures.STRUCTURE_PROCESSORS.init();
         ModCriteria.init();
         NetworkHandling.init();
     }
@@ -46,6 +46,6 @@ public class AdAstra {
 
     public static void postInit() {
         PlatformUtils.registerStrippedLog(ModBlocks.GLACIAN_LOG.get(), ModBlocks.STRIPPED_GLACIAN_LOG.get());
-        ModBlockEntities.postInit();
+        ModBlockEntityTypes.postInit();
     }
 }

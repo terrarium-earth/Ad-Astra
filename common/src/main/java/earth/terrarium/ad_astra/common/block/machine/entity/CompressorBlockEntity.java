@@ -1,9 +1,9 @@
 package earth.terrarium.ad_astra.common.block.machine.entity;
 
-import earth.terrarium.ad_astra.common.registry.ModBlockEntities;
 import earth.terrarium.ad_astra.common.config.CompressorConfig;
 import earth.terrarium.ad_astra.common.recipe.CompressingRecipe;
 import earth.terrarium.ad_astra.common.recipe.CookingRecipe;
+import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.ad_astra.common.screen.menu.CompressorMenu;
 import earth.terrarium.botarium.api.energy.EnergyBlock;
 import earth.terrarium.botarium.api.energy.InsertOnlyEnergyContainer;
@@ -22,7 +22,7 @@ public class CompressorBlockEntity extends ProcessingMachineBlockEntity implemen
     private InsertOnlyEnergyContainer energyContainer;
 
     public CompressorBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntities.COMPRESSOR.get(), blockPos, blockState);
+        super(ModBlockEntityTypes.COMPRESSOR.get(), blockPos, blockState);
     }
 
     @Nullable

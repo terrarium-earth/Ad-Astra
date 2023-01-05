@@ -1,12 +1,12 @@
 package earth.terrarium.ad_astra.common.block.machine.entity;
 
 import earth.terrarium.ad_astra.common.block.machine.AbstractMachineBlock;
-import earth.terrarium.ad_astra.common.container.WaterPumpFluidTank;
-import earth.terrarium.ad_astra.common.registry.ModBlockEntities;
-import earth.terrarium.ad_astra.common.registry.ModParticleTypes;
-import earth.terrarium.ad_astra.common.util.ModUtils;
 import earth.terrarium.ad_astra.common.config.WaterPumpConfig;
+import earth.terrarium.ad_astra.common.container.WaterPumpFluidTank;
+import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
+import earth.terrarium.ad_astra.common.registry.ModParticleTypes;
 import earth.terrarium.ad_astra.common.screen.menu.WaterPumpMenu;
+import earth.terrarium.ad_astra.common.util.ModUtils;
 import earth.terrarium.botarium.api.energy.EnergyBlock;
 import earth.terrarium.botarium.api.energy.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
@@ -34,7 +34,7 @@ public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements 
     private WaterPumpFluidTank tank;
 
     public WaterPumpBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntities.WATER_PUMP.get(), blockPos, blockState);
+        super(ModBlockEntityTypes.WATER_PUMP.get(), blockPos, blockState);
     }
 
     @Nullable
