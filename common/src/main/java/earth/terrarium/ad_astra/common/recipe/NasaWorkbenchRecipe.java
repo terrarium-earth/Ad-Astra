@@ -28,6 +28,14 @@ public class NasaWorkbenchRecipe extends CookingRecipe {
         ).apply(instance, NasaWorkbenchRecipe::new));
     }
 
+    public static Codec<NasaWorkbenchRecipe> networkCodec(ResourceLocation id) {
+        return RecordCodecBuilder.create(instance -> instance.group(
+                RecordCodecBuilder.point(id),
+                IngredientHolder.NETWORK_CODEC.listOf().fieldOf("ingredients").forGetter(NasaWorkbenchRecipe::getHolders),
+                ItemStackCodec.NETWORK_CODEC.fieldOf("output").forGetter(NasaWorkbenchRecipe::getResultItem)
+        ).apply(instance, NasaWorkbenchRecipe::new));
+    }
+
     @Override
     public RecipeSerializer<?> getSerializer() {
         return ModRecipeSerializers.NASA_WORKBENCH_SERIALIZER.get();

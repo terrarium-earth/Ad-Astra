@@ -31,6 +31,15 @@ public class CompressingRecipe extends CookingRecipe {
         ).apply(instance, CompressingRecipe::new));
     }
 
+    public static Codec<CompressingRecipe> networkCodec(ResourceLocation id) {
+        return RecordCodecBuilder.create(instance -> instance.group(
+                RecordCodecBuilder.point(id),
+                IngredientCodec.NETWORK_CODEC.fieldOf("input").forGetter(CompressingRecipe::getInputIngredient),
+                ItemStackCodec.NETWORK_CODEC.fieldOf("output").forGetter(CompressingRecipe::getResultItem),
+                Codec.INT.fieldOf("time").orElse(200).forGetter(CompressingRecipe::getCookTime)
+        ).apply(instance, CompressingRecipe::new));
+    }
+
     @Override
     public RecipeSerializer<?> getSerializer() {
         return ModRecipeSerializers.COMPRESSING_SERIALIZER.get();

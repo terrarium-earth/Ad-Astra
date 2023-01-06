@@ -1,11 +1,11 @@
 package earth.terrarium.ad_astra.common.entity.system;
 
+import earth.terrarium.ad_astra.common.config.AdAstraConfig;
 import earth.terrarium.ad_astra.common.item.armor.NetheriteSpaceSuit;
 import earth.terrarium.ad_astra.common.item.armor.SpaceSuit;
 import earth.terrarium.ad_astra.common.registry.ModTags;
 import earth.terrarium.ad_astra.common.util.ModUtils;
 import earth.terrarium.ad_astra.common.util.OxygenUtils;
-import earth.terrarium.ad_astra.common.config.AdAstraConfig;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
@@ -18,6 +18,8 @@ import net.minecraft.world.entity.monster.Skeleton;
 import org.apache.commons.lang3.Range;
 
 public class EntityTemperatureSystem {
+    public static final Range<Integer> TEMP_RANGE = Range.between(-60, 70);
+
     public static void temperatureTick(LivingEntity entity, ServerLevel level) {
         if (!AdAstraConfig.doOxygen) {
             return;
@@ -39,7 +41,7 @@ public class EntityTemperatureSystem {
             temperature = 20.0f;
         }
 
-        Range<Integer> temperatureResistance = Range.between(-60, 70);
+        Range<Integer> temperatureResistance = TEMP_RANGE;
         if (SpaceSuit.hasFullSet(entity)) {
             temperatureResistance = ((SpaceSuit) entity.getArmorSlots().iterator().next().getItem()).getTemperatureThreshold();
         }

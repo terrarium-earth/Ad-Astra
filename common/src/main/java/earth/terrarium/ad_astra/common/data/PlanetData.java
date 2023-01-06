@@ -6,15 +6,12 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.serialization.JsonOps;
 import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.ad_astra.common.networking.NetworkHandling;
-import earth.terrarium.ad_astra.common.networking.packet.server.DatapackPlanetsPacket;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.profiling.ProfilerFiller;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 import java.util.*;
@@ -100,9 +97,5 @@ public class PlanetData extends SimpleJsonResourceReloadListener {
 
     public static boolean isOxygenated(ResourceKey<Level> level) {
         return OXIGNATED_LEVELS.contains(level);
-    }
-
-    public static void onSyncToPlayer(Player player) {
-        NetworkHandling.CHANNEL.sendToPlayer(new DatapackPlanetsPacket(PlanetData.planets()), player);
     }
 }

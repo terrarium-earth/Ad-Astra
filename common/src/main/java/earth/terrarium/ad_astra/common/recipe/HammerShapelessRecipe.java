@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import earth.terrarium.ad_astra.common.item.HammerItem;
 import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.ad_astra.common.registry.ModRecipeSerializers;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -15,6 +16,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
 
+@MethodsReturnNonnullByDefault
 public class HammerShapelessRecipe extends ShapelessRecipe {
 
     public HammerShapelessRecipe(ResourceLocation id, String group, ItemStack output, NonNullList<Ingredient> input) {

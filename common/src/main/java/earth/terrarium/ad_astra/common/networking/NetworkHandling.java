@@ -4,7 +4,6 @@ import com.teamresourceful.resourcefullib.common.networking.NetworkChannel;
 import com.teamresourceful.resourcefullib.common.networking.base.NetworkDirection;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.networking.packet.client.*;
-import earth.terrarium.ad_astra.common.networking.packet.server.DatapackPlanetsPacket;
 import earth.terrarium.ad_astra.common.networking.packet.server.MachineInfoPacket;
 import earth.terrarium.ad_astra.common.networking.packet.server.StartRocketPacket;
 
@@ -21,7 +20,6 @@ public class NetworkHandling {
         CHANNEL.registerPacket(NetworkDirection.CLIENT_TO_SERVER, NotifyRecipeTransferPacket.ID, NotifyRecipeTransferPacket.HANDLER, NotifyRecipeTransferPacket.class);
 
         CHANNEL.registerPacket(NetworkDirection.SERVER_TO_CLIENT, StartRocketPacket.ID, StartRocketPacket.HANDLER, StartRocketPacket.class);
-        CHANNEL.registerPacket(NetworkDirection.SERVER_TO_CLIENT, DatapackPlanetsPacket.ID, DatapackPlanetsPacket.HANDLER, DatapackPlanetsPacket.class);
         CHANNEL.registerPacket(NetworkDirection.SERVER_TO_CLIENT, MachineInfoPacket.ID, MachineInfoPacket.HANDLER, MachineInfoPacket.class);
     }
 }

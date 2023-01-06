@@ -2,6 +2,7 @@ package earth.terrarium.ad_astra.common.recipe;
 
 import com.google.gson.JsonObject;
 import earth.terrarium.ad_astra.common.item.FluidContainingItem;
+import earth.terrarium.ad_astra.common.registry.ModRecipeSerializers;
 import earth.terrarium.ad_astra.common.registry.ModTags;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
@@ -62,6 +63,11 @@ public class SpaceSuitShapedRecipe extends ShapedRecipe {
         }
 
         return assemble.copy();
+    }
+
+    @Override
+    public RecipeSerializer<?> getSerializer() {
+        return ModRecipeSerializers.SPACE_SUIT_CRAFTING_SERIALIZER.get();
     }
 
     @SuppressWarnings("deprecation")

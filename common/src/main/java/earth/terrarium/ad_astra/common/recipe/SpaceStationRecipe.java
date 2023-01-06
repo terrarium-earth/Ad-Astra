@@ -25,6 +25,13 @@ public class SpaceStationRecipe extends ModRecipe {
         ).apply(instance, SpaceStationRecipe::new));
     }
 
+    public static Codec<SpaceStationRecipe> networkCodec(ResourceLocation id) {
+        return RecordCodecBuilder.create(instance -> instance.group(
+                RecordCodecBuilder.point(id),
+                IngredientHolder.NETWORK_CODEC.listOf().fieldOf("ingredients").forGetter(SpaceStationRecipe::getHolders)
+        ).apply(instance, SpaceStationRecipe::new));
+    }
+
     @Override
     public RecipeSerializer<?> getSerializer() {
         return ModRecipeSerializers.SPACE_STATION_SERIALIZER.get();

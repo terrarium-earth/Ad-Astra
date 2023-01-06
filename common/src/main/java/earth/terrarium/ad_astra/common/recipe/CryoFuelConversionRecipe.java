@@ -31,6 +31,15 @@ public class CryoFuelConversionRecipe extends ConversionRecipe {
         ).apply(instance, CryoFuelConversionRecipe::new));
     }
 
+    public static Codec<CryoFuelConversionRecipe> networkCodec(ResourceLocation id) {
+        return RecordCodecBuilder.create(instance -> instance.group(
+                RecordCodecBuilder.point(id),
+                IngredientCodec.NETWORK_CODEC.fieldOf("input").forGetter(CryoFuelConversionRecipe::getInput),
+                Registry.FLUID.byNameCodec().fieldOf("output").forGetter(ConversionRecipe::getFluidOutput),
+                Codec.DOUBLE.fieldOf("conversion_ratio").orElse(1.0).forGetter(ConversionRecipe::getConversionRatio)
+        ).apply(instance, CryoFuelConversionRecipe::new));
+    }
+
     private Ingredient getInput() {
         return getIngredients().get(0);
     }

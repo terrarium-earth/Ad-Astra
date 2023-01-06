@@ -22,7 +22,7 @@ public class OxygenConversionRecipe extends ConversionRecipe {
         super(id, input, output, conversionRatio);
     }
 
-    public static Codec<OxygenConversionRecipe> oxygenCodec(ResourceLocation id) {
+    public static Codec<OxygenConversionRecipe> codec(ResourceLocation id) {
         return RecordCodecBuilder.create(instance -> instance.group(
                 RecordCodecBuilder.point(id),
                 HolderSetCodec.of(Registry.FLUID).fieldOf("input").forGetter(ConversionRecipe::getFluidInput),
