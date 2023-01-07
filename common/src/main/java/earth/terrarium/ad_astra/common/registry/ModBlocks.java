@@ -5,14 +5,17 @@ import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import dev.architectury.injectables.targets.ArchitecturyTarget;
 import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.common.block.chest.CustomChestBlock;
 import earth.terrarium.ad_astra.common.block.door.SlidingDoorBlock;
 import earth.terrarium.ad_astra.common.block.flag.FlagBlock;
-import earth.terrarium.ad_astra.common.block.fluid.CryoFuelBlock;
+import earth.terrarium.ad_astra.common.block.fluid.CryoFuelLiquidBlock;
 import earth.terrarium.ad_astra.common.block.globe.GlobeBlock;
 import earth.terrarium.ad_astra.common.block.launchpad.LaunchPad;
 import earth.terrarium.ad_astra.common.block.machine.*;
 import earth.terrarium.ad_astra.common.block.pipe.CableBlock;
 import earth.terrarium.ad_astra.common.block.pipe.FluidPipeBlock;
+import earth.terrarium.ad_astra.common.block.sign.CustomStandingSignBlock;
+import earth.terrarium.ad_astra.common.block.sign.CustomWallSignBlock;
 import earth.terrarium.ad_astra.common.block.torch.ExtinguishedLanternBlock;
 import earth.terrarium.ad_astra.common.block.torch.ExtinguishedTorchBlock;
 import earth.terrarium.ad_astra.common.block.torch.WallExtinguishedTorchBlock;
@@ -23,7 +26,6 @@ import net.minecraft.core.Registry;
 import net.minecraft.data.worldgen.features.TreeFeatures;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MaterialColor;
@@ -34,6 +36,10 @@ public class ModBlocks {
     public static final ResourcefulRegistry<Block> FLAGS = ResourcefulRegistries.create(BLOCKS);
     public static final ResourcefulRegistry<Block> GLOBES = ResourcefulRegistries.create(BLOCKS);
     public static final ResourcefulRegistry<Block> SLIDING_DOORS = ResourcefulRegistries.create(BLOCKS);
+    public static final ResourcefulRegistry<Block> SIGNS = ResourcefulRegistries.create(BLOCKS);
+    public static final ResourcefulRegistry<Block> STANDING_SIGNS = ResourcefulRegistries.create(SIGNS);
+    public static final ResourcefulRegistry<Block> WALL_SIGNS = ResourcefulRegistries.create(SIGNS);
+    public static final ResourcefulRegistry<Block> CHESTS = ResourcefulRegistries.create(BLOCKS);
 
     public static final WoodType GLACIAN_SIGN_TYPE = WoodTypeInvoker.adastra_invokeRegister(WoodTypeInvoker.adastra_init(ArchitecturyTarget.getCurrentTarget().equals("forge") ? "ad_astra:glacian" : "glacian"));
 
@@ -182,7 +188,7 @@ public class ModBlocks {
     public static final RegistryEntry<Block> AERONOS_FENCE_GATE = BLOCKS.register("aeronos_fence_gate", () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_FENCE_GATE).sound(SoundType.STEM).lightLevel(state -> 6)));
     public static final RegistryEntry<Block> AERONOS_SLAB = BLOCKS.register("aeronos_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_SLAB).sound(SoundType.STEM).lightLevel(state -> 6)));
     public static final RegistryEntry<Block> AERONOS_LADDER = BLOCKS.register("aeronos_ladder", () -> new LadderBlock(BlockBehaviour.Properties.copy(Blocks.LADDER).sound(SoundType.STEM).lightLevel(state -> 6)));
-    public static final RegistryEntry<Block> AERONOS_CHEST = BLOCKS.register("aeronos_chest", () -> new ChestBlock(BlockBehaviour.Properties.copy(Blocks.CHEST).sound(SoundType.STEM).lightLevel(state -> 6), () -> BlockEntityType.CHEST));
+    public static final RegistryEntry<Block> AERONOS_CHEST = CHESTS.register("aeronos_chest", () -> new CustomChestBlock(BlockBehaviour.Properties.copy(Blocks.CHEST).sound(SoundType.STEM).lightLevel(state -> 6)));
     public static final RegistryEntry<Block> AERONOS_DOOR = BLOCKS.register("aeronos_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_DOOR).sound(SoundType.STEM).lightLevel(state -> 6)));
     public static final RegistryEntry<Block> AERONOS_TRAPDOOR = BLOCKS.register("aeronos_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_TRAPDOOR).sound(SoundType.STEM).lightLevel(state -> 6)));
 
@@ -194,7 +200,7 @@ public class ModBlocks {
     public static final RegistryEntry<Block> STROPHAR_FENCE_GATE = BLOCKS.register("strophar_fence_gate", () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_FENCE_GATE).sound(SoundType.STEM).lightLevel(state -> 6)));
     public static final RegistryEntry<Block> STROPHAR_SLAB = BLOCKS.register("strophar_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_SLAB).sound(SoundType.STEM).lightLevel(state -> 6)));
     public static final RegistryEntry<Block> STROPHAR_LADDER = BLOCKS.register("strophar_ladder", () -> new LadderBlock(BlockBehaviour.Properties.copy(Blocks.LADDER).sound(SoundType.STEM).lightLevel(state -> 6)));
-    public static final RegistryEntry<Block> STROPHAR_CHEST = BLOCKS.register("strophar_chest", () -> new ChestBlock(BlockBehaviour.Properties.copy(Blocks.CHEST).sound(SoundType.STEM).lightLevel(state -> 6), () -> BlockEntityType.CHEST));
+    public static final RegistryEntry<Block> STROPHAR_CHEST = CHESTS.register("strophar_chest", () -> new CustomChestBlock(BlockBehaviour.Properties.copy(Blocks.CHEST).sound(SoundType.STEM).lightLevel(state -> 6)));
     public static final RegistryEntry<Block> STROPHAR_DOOR = BLOCKS.register("strophar_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_DOOR).sound(SoundType.STEM).lightLevel(state -> 6)));
     public static final RegistryEntry<Block> STROPHAR_TRAPDOOR = BLOCKS.register("strophar_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_TRAPDOOR).sound(SoundType.STEM).lightLevel(state -> 6)));
 
@@ -334,12 +340,12 @@ public class ModBlocks {
     public static final RegistryEntry<Block> GLACIAN_FENCE_GATE = BLOCKS.register("glacian_fence_gate", () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE).friction(0.5f).color(MaterialColor.COLOR_PINK)));
     public static final RegistryEntry<Block> GLACIAN_BUTTON = BLOCKS.register("glacian_button", () -> new WoodButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON).color(MaterialColor.COLOR_PINK)));
     public static final RegistryEntry<Block> GLACIAN_PRESSURE_PLATE = BLOCKS.register("glacian_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE).friction(0.5f).color(MaterialColor.COLOR_PINK)));
-    public static final RegistryEntry<Block> GLACIAN_SIGN = BLOCKS.register("glacian_sign", () -> new StandingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SIGN).color(MaterialColor.COLOR_PINK), GLACIAN_SIGN_TYPE));
-    public static final RegistryEntry<Block> GLACIAN_WALL_SIGN = BLOCKS.register("glacian_wall_sign", () -> new WallSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WALL_SIGN).dropsLike(GLACIAN_SIGN.get()).color(MaterialColor.COLOR_PINK), GLACIAN_SIGN_TYPE));
+    public static final RegistryEntry<Block> GLACIAN_SIGN = STANDING_SIGNS.register("glacian_sign", () -> new CustomStandingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SIGN).color(MaterialColor.COLOR_PINK), GLACIAN_SIGN_TYPE));
+    public static final RegistryEntry<Block> GLACIAN_WALL_SIGN = WALL_SIGNS.register("glacian_wall_sign", () -> new CustomWallSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WALL_SIGN).dropsLike(GLACIAN_SIGN.get()).color(MaterialColor.COLOR_PINK), GLACIAN_SIGN_TYPE));
     public static final RegistryEntry<Block> GLACIAN_FUR = BLOCKS.register("glacian_fur", () -> new Block(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).color(MaterialColor.COLOR_PINK)));
 
     public static final RegistryEntry<Block> OIL_BLOCK = ModBlocks.BLOCKS.register("oil", () -> new BotariumLiquidBlock(ModFluidProperties.OIL_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
     public static final RegistryEntry<Block> FUEL_BLOCK = ModBlocks.BLOCKS.register("fuel", () -> new BotariumLiquidBlock(ModFluidProperties.FUEL_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
-    public static final RegistryEntry<Block> CRYO_FUEL_BLOCK = ModBlocks.BLOCKS.register("cryo_fuel", () -> new CryoFuelBlock(ModFluidProperties.CRYO_FUEL_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
+    public static final RegistryEntry<Block> CRYO_FUEL_BLOCK = ModBlocks.BLOCKS.register("cryo_fuel", () -> new CryoFuelLiquidBlock(ModFluidProperties.CRYO_FUEL_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
     public static final RegistryEntry<Block> OXYGEN_BLOCK = ModBlocks.BLOCKS.register("oxygen", () -> new BotariumLiquidBlock(ModFluidProperties.OXYGEN_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
 }

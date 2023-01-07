@@ -46,6 +46,5 @@ public class AdAstra {
 
     public static void postInit() {
         PlatformUtils.registerStrippedLog(ModBlocks.GLACIAN_LOG.get(), ModBlocks.STRIPPED_GLACIAN_LOG.get());
-        ModBlockEntityTypes.postInit();
     }
 }

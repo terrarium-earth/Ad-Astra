@@ -250,7 +250,7 @@ public class ModUtils {
      * Check if the level is labeled as a planet dimension.
      */
     public static boolean isPlanet(Level level) {
-        if (Level.OVERWORLD.equals(level.dimension())) {
+        if (AdAstraConfig.avoidOverworldChecks && Level.OVERWORLD.equals(level.dimension())) {
             return false;
         }
         return PlanetData.isPlanetLevel(level.dimension());

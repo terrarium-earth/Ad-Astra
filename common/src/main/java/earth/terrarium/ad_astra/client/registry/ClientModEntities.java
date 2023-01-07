@@ -24,11 +24,8 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.PaintingRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 
 import java.util.function.Supplier;
 
@@ -85,10 +82,6 @@ public class ClientModEntities {
         registry.register(SpaceSuitModel.LAYER_LOCATION, SpaceSuitModel::createBodyLayer);
         registry.register(NetheriteSpaceSuitModel.LAYER_LOCATION, NetheriteSpaceSuitModel::createBodyLayer);
         registry.register(JetSuitModel.LAYER_LOCATION, JetSuitModel::createBodyLayer);
-    }
-
-    public static abstract class EntityRendererRegistry {
-        protected abstract <T extends Entity> void register(Supplier<? extends EntityType<? extends T>> type, EntityRendererProvider<T> factory);
     }
 
     public static abstract class LayerDefinitionRegistry {

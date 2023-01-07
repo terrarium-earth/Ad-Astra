@@ -39,8 +39,8 @@ dependencies {
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:$rootProject.rei_version"
     modCompileOnly "dev.emi:emi:$rootProject.emi_version+$rootProject.minecraft_version"
 
-    modApi "com.teamresourceful.resourcefullib:resourcefullib-fabric-$minecraft_version:$rootProject.resourcefullib_version"
-    modApi "com.teamresourceful.resourcefulconfig:resourcefulconfig-fabric-$minecraft_version:$rootProject.resourcefulconfig_version"
+    modApi "com.teamresourceful.resourcefullib:resourcefullib-fabric-$rootProject.minecraft_version:$rootProject.resourcefullib_version"
+    modApi "com.teamresourceful.resourcefulconfig:resourcefulconfig-fabric-$rootProject.minecraft_version:$rootProject.resourcefulconfig_version"
     modApi "earth.terrarium:botarium-fabric-$rootProject.minecraft_version:$rootProject.botarium_version"
 }
 
@@ -99,7 +99,7 @@ publishing {
 
             pom {
                 name = 'Ad Astra'
-                description = '"Live long and prosper, Ad Astra!'
+                description = 'Live long and prosper, Ad Astra!'
                 url = 'https://github.com/terrarium-earth/Ad-Astra'
 
                 scm {
@@ -118,7 +118,7 @@ publishing {
     }
     repositories {
         maven {
-            url = "https://maven.resourcefulbees.com/repository/maven-releases/"
+            url = "https://maven.resourcefulbees.com/repository/terrarium/"
             credentials {
                 username ENV.MAVEN_USER
                 password ENV.MAVEN_PASS

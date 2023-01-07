@@ -113,27 +113,24 @@ public class SoundManagerMixin {
 
     @Unique
     private void adastra_modifySound(SoundInstance sound, int delay, CallbackInfo ci) {
-        if (sound.getSource().equals(SoundSource.MASTER)) {
+        Minecraft minecraft = Minecraft.getInstance();
+        if (minecraft.level == null) {
             return;
         }
 
         if (!AdAstraConfig.doSpaceMuffler) {
             return;
         }
+
+        if (sound.getSource().equals(SoundSource.MASTER)) {
+            return;
+        }
+
         if (sound.getLocation().equals(new ResourceLocation(AdAstra.MOD_ID, "rocket_fly"))) {
             return;
         }
 
         if (sound.getLocation().equals(SoundEvents.ELYTRA_FLYING.getLocation())) {
-            return;
-        }
-
-        if (!AdAstraConfig.doSpaceMuffler) {
-            return;
-        }
-
-        Minecraft minecraft = Minecraft.getInstance();
-        if (minecraft.level == null) {
             return;
         }
 

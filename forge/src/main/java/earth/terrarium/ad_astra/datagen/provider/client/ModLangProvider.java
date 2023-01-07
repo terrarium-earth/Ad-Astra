@@ -21,8 +21,8 @@ public class ModLangProvider extends LanguageProvider {
     protected void addTranslations() {
         add("itemGroup.ad_astra.main", "Ad Astra");
 
-        ModBlocks.BLOCKS.stream().filter(e -> !(e instanceof WallSignBlock)).forEach(entry -> addBlock(entry, StringUtils.capitaliseAllWords(entry.getId().getPath().replace("_", " "))));
-        ModItems.ITEMS.stream().filter(e -> !(e instanceof BlockItem)).forEach(entry -> addItem(entry, StringUtils.capitaliseAllWords(Objects.requireNonNull(entry.getId()).getPath().replace("_", " "))));
+        ModBlocks.BLOCKS.stream().filter(e -> !(e.get() instanceof WallSignBlock)).forEach(entry -> addBlock(entry, StringUtils.capitaliseAllWords(entry.getId().getPath().replace("_", " "))));
+        ModItems.ITEMS.stream().filter(e -> !(e.get() instanceof BlockItem)).forEach(entry -> addItem(entry, StringUtils.capitaliseAllWords(Objects.requireNonNull(entry.getId()).getPath().replace("_", " "))));
         ModEntityTypes.ENTITY_TYPES.stream().forEach(entry -> addEntityType(entry, StringUtils.capitaliseAllWords(Objects.requireNonNull(entry.getId()).getPath().replace("_", " "))));
 
         add("advancements.ad_astra.ad_astra.description", "§bConstruct a NASA Workbench, allowing you to craft rockets");
@@ -252,6 +252,8 @@ public class ModLangProvider extends LanguageProvider {
         add("text.resourcefulconfig.ad_astra.option.general.spawnMoglers", "Spawn Moglers");
         add("text.resourcefulconfig.ad_astra.option.general.spawnStarCrawlers", "Spawn Star Crawlers");
         add("text.resourcefulconfig.ad_astra.option.general.spawnSulfurCreepers", "Spawn Sulfur Creepers");
+        add("text.resourcefulconfig.ad_astra.option.general.avoidOverworldChecks", "Avoid Overworld Checks");
+        add("text.resourcefulconfig.ad_astra.option.general.avoidOverworldChecks.tooltip", "Prevents stuff like gravity and oxygen checks in the overworld as that's normally not used in Ad Astra. enable if you're making an addon or something that transforms the overworld into some sort of planet.");
         add("text.resourcefulconfig.ad_astra.option.lander", "Lander");
         add("text.resourcefulconfig.ad_astra.option.lander.boosterSpeed", "Booster Speed");
         add("text.resourcefulconfig.ad_astra.option.lander.boosterThreshold", "Booster Threshold");
@@ -264,7 +266,7 @@ public class ModLangProvider extends LanguageProvider {
         add("text.resourcefulconfig.ad_astra.option.oxygenDistributor.maxBlockChecks.tooltip", "How many blocks the distributor can distribute oxygen in. Be careful increasing this number, as it can reduce server performance significantly. If you are adamant about increasing this value, consider increasing the Oxygen Loader refresh ticks so the server is not constantly checking thousands of blocks.");
         add("text.resourcefulconfig.ad_astra.option.oxygenDistributor.maxEnergy", "Max Energy");
         add("text.resourcefulconfig.ad_astra.option.oxygenDistributor.oxygenMultiplier", "Oxygen Multiplier");
-        add("text.resourcefulconfig.ad_astra.option.oxygenDistributor.oxygenMultiplier.@Tooltip", "Increases the oxygen requirements as the distributor covers more blocks.");
+        add("text.resourcefulconfig.ad_astra.option.oxygenDistributor.oxygenMultiplier.tooltip", "Increases the oxygen requirements as the distributor covers more blocks.");
         add("text.resourcefulconfig.ad_astra.option.oxygenDistributor.refreshTicks", "Refresh Ticks");
         add("text.resourcefulconfig.ad_astra.option.oxygenDistributor.refreshTicks.tooltip", "How often the oxygen loader checks if the structure is sealed. Performing this operation too often can kill server TPS, so be wary.");
         add("text.resourcefulconfig.ad_astra.option.oxygenDistributor.tankSize", "Tank Size");
@@ -275,9 +277,9 @@ public class ModLangProvider extends LanguageProvider {
         add("text.resourcefulconfig.ad_astra.option.rocket", "Rocket");
         add("text.resourcefulconfig.ad_astra.option.rocket.acceleration", "Acceleration");
         add("text.resourcefulconfig.ad_astra.option.rocket.atmosphereLeave", "Atmosphere Leave");
-        add("text.resourcefulconfig.ad_astra.option.rocket.atmosphereLeave.@Tooltip", "When the rocket should open the Planet Selection GUI.");
+        add("text.resourcefulconfig.ad_astra.option.rocket.atmosphereLeave.tooltip", "When the rocket should open the Planet Selection GUI.");
         add("text.resourcefulconfig.ad_astra.option.rocket.countDownTicks", "Count Down Ticks");
-        add("text.resourcefulconfig.ad_astra.option.rocket.countDownTicks.@Tooltip", "200 ticks = 10 seconds.");
+        add("text.resourcefulconfig.ad_astra.option.rocket.countDownTicks.tooltip", "200 ticks = 10 seconds.");
         add("text.resourcefulconfig.ad_astra.option.rocket.efficientFuelLaunchCost", "Efficient Fuel Launch Cost");
         add("text.resourcefulconfig.ad_astra.option.rocket.entitiesBurnUnderRocket", "Entities Burn Under Rocket");
         add("text.resourcefulconfig.ad_astra.option.rocket.entitiesBurnUnderRocket.tooltip", "Should entities that are under the flames of the rocket burn?");

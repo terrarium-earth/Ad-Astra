@@ -1,7 +1,6 @@
 package earth.terrarium.ad_astra.client.forge;
 
 import earth.terrarium.ad_astra.client.AdAstraClient;
-import earth.terrarium.ad_astra.client.registry.ClientModBlockRenderers;
 import earth.terrarium.ad_astra.client.registry.ClientModEntities;
 import earth.terrarium.ad_astra.client.registry.ClientModKeybindings;
 import earth.terrarium.ad_astra.client.registry.ClientModParticles;
@@ -13,13 +12,10 @@ import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
-import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.common.MinecraftForge;
@@ -68,7 +64,6 @@ public class AdAstraClientForge {
         bus.addListener(AdAstraClientForge::spriteLoading);
         bus.addListener(AdAstraClientForge::onRegisterParticles);
         bus.addListener(AdAstraClientForge::chestSpriteLoading);
-        bus.addListener(AdAstraClientForge::onRegisterRenderers);
         bus.addListener(AdAstraClientForge::onRegisterLayerDefinitions);
         bus.addListener(AdAstraClientForge::onClientReloadListeners);
         MinecraftForge.EVENT_BUS.addListener(AdAstraClientForge::onRegisterClientHud);
@@ -109,16 +104,6 @@ public class AdAstraClientForge {
 
     public static void onClientReloadListeners(RegisterClientReloadListenersEvent event) {
         AdAstraClient.onRegisterReloadListeners((id, listener) -> event.registerReloadListener(listener));
-    }
-
-
-    public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        ClientModBlockRenderers.registerBlockRenderers(new ClientModBlockRenderers.BlockRendererRegistry() {
-            @Override
-            public <T extends BlockEntity> void register(Supplier<? extends BlockEntityType<? extends T>> type, BlockEntityRendererProvider<T> factory) {
-                event.registerBlockEntityRenderer(type.get(), factory);
-            }
-        });
     }
 
     public static void onRegisterLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {

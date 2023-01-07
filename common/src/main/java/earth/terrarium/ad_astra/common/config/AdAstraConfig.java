@@ -147,6 +147,14 @@ public final class AdAstraConfig {
     @Comment("A list of planets that should be disabled. This is a comma-separated list of planet ids.")
     public static String disabledPlanets = "";
 
+    @ConfigEntry(
+            id = "avoidOverworldChecks",
+            type = EntryType.BOOLEAN,
+            translation = "text.resourcefulconfig.ad_astra.option.general.avoidOverworldChecks"
+    )
+    @Comment("Prevents stuff like gravity and oxygen checks in the overworld as that's normally not used in Ad Astra. enable if you're making an addon or something that transforms the overworld into some sort of planet.")
+    public static boolean avoidOverworldChecks = true;
+
     @InlineCategory
     public static SpawnConfig spawnConfig;
 

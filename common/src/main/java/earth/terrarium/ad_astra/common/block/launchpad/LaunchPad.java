@@ -104,7 +104,7 @@ public class LaunchPad extends Block implements SimpleWaterloggedBlock {
     public void breakPad(Level level, BlockState state, BlockPos pos, boolean drop) {
         if (!level.isClientSide && state.getBlock().equals(this)) {
             BlockPos mainPos = this.getMainPos(state, pos);
-            getBlockPosAround(mainPos).forEach(blockPos -> level.destroyBlock(blockPos, false));
+            getBlockPosAround(mainPos).forEach(blockPos -> level.destroyBlock(blockPos, drop));
             level.destroyBlock(mainPos, drop);
         }
     }

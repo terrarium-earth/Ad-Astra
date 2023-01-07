@@ -5,13 +5,11 @@
   "minVersion": "0.8.5",
   "mixins": [
     "ArmorDyeRecipeMixin",
-    "BlockEntityTypeAccessor",
     "BlockMixin",
     "EntityInvoker",
     "EntityMixin",
     "FireworkRocketItemMixin",
     "IceBlockMixin",
-    "LiquidBlockMixin",
     "LivingEntityMixin",
     "PaintingInvoker",
     "PiglinSpecificSensorMixin",

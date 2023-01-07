@@ -52,8 +52,8 @@ dependencies {
     modCompileOnly "mezz.jei:jei-$rootProject.minecraft_version-forge-api:$rootProject.jei_version"
     modLocalRuntime("mezz.jei:jei-$rootProject.minecraft_version-forge:$rootProject.jei_version") { transitive = false }
 
-    modApi "com.teamresourceful.resourcefullib:resourcefullib-forge-$minecraft_version:$rootProject.resourcefullib_version"
-    modApi "com.teamresourceful.resourcefulconfig:resourcefulconfig-forge-$minecraft_version:$rootProject.resourcefulconfig_version"
+    modApi "com.teamresourceful.resourcefullib:resourcefullib-forge-$rootProject.minecraft_version:$rootProject.resourcefullib_version"
+    modApi "com.teamresourceful.resourcefulconfig:resourcefulconfig-forge-$rootProject.minecraft_version:$rootProject.resourcefulconfig_version"
     modApi "earth.terrarium:botarium-forge-$rootProject.minecraft_version:$rootProject.botarium_version"
 }
 
@@ -109,7 +109,7 @@ publishing {
 
             pom {
                 name = 'Ad Astra'
-                description = '"Live long and prosper, Ad Astra!'
+                description = 'Live long and prosper, Ad Astra!'
                 url = 'https://github.com/terrarium-earth/Ad-Astra'
 
                 scm {
@@ -128,7 +128,7 @@ publishing {
     }
     repositories {
         maven {
-            url = "https://maven.resourcefulbees.com/repository/maven-releases/"
+            url = "https://maven.resourcefulbees.com/repository/terrarium/"
             credentials {
                 username ENV.MAVEN_USER
                 password ENV.MAVEN_PASS

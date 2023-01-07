@@ -8,6 +8,10 @@ import earth.terrarium.ad_astra.client.registry.ClientModKeybindings;
 import earth.terrarium.ad_astra.client.registry.ClientModScreens;
 import earth.terrarium.ad_astra.client.renderer.armor.ArmourRenderers;
 import earth.terrarium.ad_astra.client.renderer.block.ChestItemRenderer;
+import earth.terrarium.ad_astra.client.renderer.block.EnergizerBlockEntityRenderer;
+import earth.terrarium.ad_astra.client.renderer.block.SlidingDoorBlockEntityRenderer;
+import earth.terrarium.ad_astra.client.renderer.block.flag.FlagBlockEntityRenderer;
+import earth.terrarium.ad_astra.client.renderer.block.globe.GlobeBlockEntityRenderer;
 import earth.terrarium.ad_astra.client.renderer.block.globe.GlobeItemRenderer;
 import earth.terrarium.ad_astra.client.renderer.entity.vehicle.rocket.tier_1.RocketItemRendererTier1;
 import earth.terrarium.ad_astra.client.renderer.entity.vehicle.rocket.tier_2.RocketItemRendererTier2;
@@ -16,9 +20,11 @@ import earth.terrarium.ad_astra.client.renderer.entity.vehicle.rocket.tier_4.Roc
 import earth.terrarium.ad_astra.client.renderer.entity.vehicle.rover.RoverItemRenderer;
 import earth.terrarium.ad_astra.client.resourcepack.*;
 import earth.terrarium.ad_astra.client.screen.PlayerOverlayScreen;
+import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.ad_astra.common.registry.ModBlocks;
 import earth.terrarium.ad_astra.common.registry.ModFluids;
 import earth.terrarium.ad_astra.common.registry.ModItems;
+import earth.terrarium.botarium.client.ClientHooks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
@@ -27,6 +33,8 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.blockentity.ChestRenderer;
+import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.client.resources.model.ModelManager;
@@ -56,6 +64,13 @@ public class AdAstraClient {
         ClientModKeybindings.init();
         ArmourRenderers.init();
         ClientModEntities.registerEntityRenderers();
+
+        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.FLAG.get(), FlagBlockEntityRenderer::new);
+        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.GLOBE.get(), GlobeBlockEntityRenderer::new);
+        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.ENERGIZER.get(), EnergizerBlockEntityRenderer::new);
+        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.SLIDING_DOOR.get(), SlidingDoorBlockEntityRenderer::new);
+        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.SIGN.get(), SignRenderer::new);
+        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.CHEST.get(), ChestRenderer::new);
 
         // Sign textures
         Sheets.SIGN_MATERIALS.put(ModBlocks.GLACIAN_SIGN_TYPE, new Material(Sheets.SIGN_SHEET, new ResourceLocation(AdAstra.MOD_ID, "entity/signs/glacian")));
