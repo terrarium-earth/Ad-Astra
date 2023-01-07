@@ -1,0 +1,16 @@
+{
+  "group": "ad_astra",
+  "type": "ad_astra:hammering",
+  "ingredients": [
+    {
+      "item": "ad_astra:hammer"
+    },
+    {
+      "tag": "ad_astra_platform:desh_ingots"
+    }
+  ],
+  "result": {
+    "item": "ad_astra:desh_plate",
+    "count": 1
+  }
+}
