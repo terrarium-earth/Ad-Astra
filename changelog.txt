@@ -1,16 +1,5 @@
-- Fixed an issue where the planet selection screen would be empty on a forge dedicated server
-- Fixed an issue where the game crashed when a rocket reached orbit because Architectury API was not installed ( Blame REI >:( )
-- Fixed cryo fuel not freezing water on forge
-- Planet data now syncs on data reload rather than just on player join
-- Fixed flags deleting the block above when placed under a block
-- Fixed burn time not updating in the coal generator
-- Fixed launch pads not dropping anything
-- Added a view recipes button in the machine screens to show the recipes in JEI and REI
-- Crude oil from other mods can now be converted into fuel
-- Allow wrenches to rotate blocks
-- Added transfer tooltips to cables and pipes
-
-Also, Ad Astra is now hosted on the Resourceful Bees maven. So if you're making an addon or want to include Ad Astra in your dev environment, you can now do so by adding the following to your build.gradle:
-- common: modImplementation "earth.terrarium:ad_astra-common-$rootProject.minecraft_version:$rootProject.ad_astra_version"
-- fabric: modImplementation "earth.terrarium:ad_astra-fabric-$rootProject.minecraft_version:$rootProject.ad_astra_version"
-- forge: modImplementation "earth.terrarium:ad_astra-forge-$rootProject.minecraft_version:$rootProject.ad_astra_version"
+- Fixed sliding doors crashing on fabric and being partly invisible on forge
+- Fixed the compressor voiding items
+- Added lang translations for fluid and fixed the empty tank translation being incorrect
+- Fixed glacian logs in a few incorrect tags
+- Fixed EMI recipe defaults in the wrong location so they weren't being loaded

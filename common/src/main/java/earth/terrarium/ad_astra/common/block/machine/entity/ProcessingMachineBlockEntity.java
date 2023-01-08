@@ -2,21 +2,17 @@ package earth.terrarium.ad_astra.common.block.machine.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
 
 public abstract class ProcessingMachineBlockEntity extends AbstractMachineBlockEntity {
 
     protected int cookTime;
     protected int cookTimeTotal;
 
-    @Nullable
-    protected Item inputItem;
-    @Nullable
-    protected ItemStack outputStack;
+    protected ItemStack inputStack = ItemStack.EMPTY;
+    protected ItemStack outputStack = ItemStack.EMPTY;
 
     public ProcessingMachineBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
         super(blockEntityType, blockPos, blockState);
@@ -49,7 +45,7 @@ public abstract class ProcessingMachineBlockEntity extends AbstractMachineBlockE
     }
 
     public void finishCooking() {
-        if (this.outputStack != null) {
+        if (!this.outputStack.isEmpty()) {
             int size = this.outputStack.getCount() + this.getItem(1).getCount();
             this.setItem(1, new ItemStack(this.outputStack.getItem(), size));
         }
@@ -60,7 +56,7 @@ public abstract class ProcessingMachineBlockEntity extends AbstractMachineBlockE
         this.cookTime = 0;
         this.cookTimeTotal = 0;
         this.outputStack = ItemStack.EMPTY;
-        this.inputItem = null;
+        this.inputStack = ItemStack.EMPTY;
         this.setChanged();
     }
 }

@@ -6,8 +6,7 @@
   "client": [],
   "mixins": [
     "EntityTypeMixin",
-    "JetSuitMixin",
-    "StairBlockAccessor"
+    "JetSuitMixin"
   ],
   "injectors": {
     "defaultRequire": 1

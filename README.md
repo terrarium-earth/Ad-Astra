@@ -10,10 +10,19 @@
     </p>
 </a>
 
+<div align="center">
+
 Also uses [Botarium](https://modrinth.com/mod/botarium)
+</div>
+
+<a href="https://discord.terrarium.earth/">
+    <p align="center">
+        <img src="https://cdn.discordapp.com/attachments/1005798262273495041/1018731591314448495/discord.png" alt="Discord" width="400"/> 
+    </p>
+</a>
 
 <a>
-    <p align="left">
+    <p align="center">
         <img src="https://cdn.discordapp.com/attachments/1005798262273495041/1018343461642055690/Ad_Astra.png" alt="Ad Astra!" width="400"/> 
     </p>
 </a>
@@ -24,10 +33,8 @@ everything you need to become an astronaut: rockets, space suits, space stations
 the Moon? Build a self-sustaining bunker on Mars? Go mining on Venus? The entire Solar System, better yet, Milky Way, is
 at your disposal!
 
-Consider downloading REI, JEI, or EMI for recipe viewing. Ad Astra! also has an in-game Patchouli guidebook called the "Astrodux," which will guide you through progression.
-
 <a>
-    <p align="left">
+    <p align="center">
         <img src="https://cdn.discordapp.com/attachments/1005798262273495041/1018343462006964234/Features.png" alt="Features" width="400"/> 
     </p>
 </a>
@@ -41,8 +48,49 @@ Consider downloading REI, JEI, or EMI for recipe viewing. Ad Astra! also has an 
   station deco and metal plating.
 - An in-game guidebook, explaining everything you need to progress and prosper in Ad Astra!
 
-<a href="https://discord.terrarium.earth/">
-    <p align="left">
-        <img src="https://cdn.discordapp.com/attachments/1005798262273495041/1018731591314448495/discord.png" alt="Discord" width="400"/> 
-    </p>
-</a>
+## Developers
+
+To add this library to your project, do the following:
+
+```groovy
+repositories {
+  maven {
+    // Location of the maven that hosts Terrarium and Team Resourceful's files.
+    name = "Resourceful Bees Maven"
+    url = "https://nexus.resourcefulbees.com/repository/maven-public/"
+  }
+}
+```
+
+In an Architectury project, you would implement it like so:
+
+Common
+
+```groovy
+dependencies {
+    modImplementation "earth.terrarium:ad_astra-common-$rootProject.minecraft_version:$rootProject.ad_astra_version"
+}
+```
+
+Fabric
+
+```groovy
+dependencies {
+    modImplementation "earth.terrarium:ad_astra-fabric-$rootProject.minecraft_version:$rootProject.ad_astra_version"
+}
+```
+
+Forge
+
+```groovy
+dependencies {
+    modImplementation "earth.terrarium:ad_astra-forge-$rootProject.minecraft_version:$rootProject.ad_astra_version"
+}
+```
+
+---
+
+<div align="center">
+
+![Version](https://img.shields.io/maven-metadata/v?label=Ad%20Astra%20Version&metadataUrl=https%3A%2F%2Fnexus.resourcefulbees.com%2Frepository%2Fmaven-public%2Fearth%2Fterrarium%2Fad_astra-common-1.19.2%2Fmaven-metadata.xml)
+</div>

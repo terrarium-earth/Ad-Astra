@@ -52,13 +52,13 @@ public class CompressorBlockEntity extends ProcessingMachineBlockEntity implemen
         if (!this.level.isClientSide()) {
             if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0) {
                 ItemStack input = this.getItem(0);
-                if (!input.isEmpty() && (input.getItem().equals(this.inputItem) || this.inputItem == null)) {
+                if (!input.isEmpty() && (input.is(this.inputStack.getItem()) || this.inputStack.isEmpty())) {
                     this.setActive(true);
                     if (this.cookTime < this.cookTimeTotal) {
                         this.cookTime++;
                         this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
 
-                    } else if (this.outputStack != null) {
+                    } else if (!this.outputStack.isEmpty()) {
                         input.shrink(1);
                         this.finishCooking();
 
@@ -69,7 +69,7 @@ public class CompressorBlockEntity extends ProcessingMachineBlockEntity implemen
                             this.cookTime = 0;
                         }
                     }
-                } else if (this.outputStack != null) {
+                } else if (!this.outputStack.isEmpty()) {
                     this.stopCooking();
                 } else {
                     this.setActive(false);
@@ -95,7 +95,7 @@ public class CompressorBlockEntity extends ProcessingMachineBlockEntity implemen
             }
 
             this.outputStack = recipe.getResultItem();
-            this.inputItem = testStack.getItem();
+            this.inputStack = testStack;
         }
 
         return recipe;

@@ -137,8 +137,9 @@ public class AdAstraClient {
     }
 
     public static void onRegisterModels(Consumer<ResourceLocation> register) {
-        ModItems.FLAGS.stream().forEach(item -> register.accept(new ResourceLocation(AdAstra.MOD_ID, "block/flag/" + item.getId().getPath())));
-        ModItems.SLIDING_DOORS.stream().forEach(item -> register.accept(new ResourceLocation(AdAstra.MOD_ID, "block/door/" + item.getId().getPath())));
+        ModBlocks.FLAGS.stream().forEach(block -> register.accept(new ResourceLocation(AdAstra.MOD_ID, "block/flag/" + block.getId().getPath())));
+        ModBlocks.SLIDING_DOORS.stream().forEach(block -> register.accept(new ResourceLocation(AdAstra.MOD_ID, "block/door/" + block.getId().getPath())));
+        ModBlocks.SLIDING_DOORS.stream().forEach(block -> register.accept(new ResourceLocation(AdAstra.MOD_ID, "block/door/" + block.getId().getPath() + "_flipped")));
     }
 
     public static void renderBlock(ResourceLocation model, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {

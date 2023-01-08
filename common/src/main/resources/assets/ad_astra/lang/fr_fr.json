@@ -521,7 +521,7 @@
   "item.ad_astra.wrench": "Clé",
   "item.ad_astra.zombified_mogler_spawn_egg": "Oeuf d'apparition de Mogler Zombifié",
   "item.ad_astra.zombified_pygro_spawn_egg": "Oeuf d'apparition de Pygro Zombifié",
-  "item.ad_astra_empty_tank": "Empty",
+  "item.ad_astra.empty_tank": "Empty",
   "itemGroup.ad_astra.main": "Ad Astra",
   "message.ad_astra.flag.not_owner": "§cVous ne possédez pas ce drapeau!",
   "message.ad_astra.hold_space": "§7Maintenir la touche §cEspace!",

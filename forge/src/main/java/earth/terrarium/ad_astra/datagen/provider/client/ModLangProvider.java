@@ -368,6 +368,16 @@ public class ModLangProvider extends LanguageProvider {
         add("entity.ad_astra.lunarian.toolsmith", "Lunarian Toolsmith");
         add("entity.ad_astra.lunarian.weaponsmith", "Lunarian Weaponsmith");
 
-        add("item.ad_astra_empty_tank", "Empty");
+        add("fluid_type.ad_astra.fuel", "Fuel");
+        add("fluid_type.ad_astra.oil", "Oil");
+        add("fluid_type.ad_astra.cryo_fuel", "Cryo Fuel");
+        add("fluid_type.ad_astra.oxygen", "Oxygen");
+
+        add("fluid.ad_astra.fuel", "Fuel");
+        add("fluid.ad_astra.oil", "Oil");
+        add("fluid.ad_astra.cryo_fuel", "Cryo Fuel");
+        add("fluid.ad_astra.oxygen", "Oxygen");
+
+        add("item.ad_astra.empty_tank", "Empty");
     }
 }
