@@ -1,8 +1,8 @@
 package earth.terrarium.ad_astra.common.block.pipe;
 
 import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
-import earth.terrarium.botarium.api.energy.EnergyHooks;
-import earth.terrarium.botarium.api.energy.PlatformEnergyManager;
+import earth.terrarium.botarium.common.energy.base.PlatformEnergyManager;
+import earth.terrarium.botarium.common.energy.util.EnergyHooks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;

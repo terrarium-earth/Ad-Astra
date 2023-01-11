@@ -33,7 +33,7 @@ public class WaterPumpScreen extends AbstractMachineScreen<WaterPumpBlockEntity,
         super.renderBg(poseStack, delta, mouseX, mouseY);
 
         GuiUtil.drawEnergy(poseStack, this.leftPos + ENERGY_LEFT, this.topPos + ENERGY_TOP, this.menu.getEnergyAmount(), this.machine.getMaxCapacity());
-        GuiUtil.drawFluidTank(poseStack, this.leftPos + INPUT_TANK_LEFT, this.topPos + INPUT_TANK_TOP, this.machine.getFluidContainer().getTankCapacity(0), this.menu.getFluids().get(0));
+        GuiUtil.drawFluidTank(poseStack, this.leftPos + INPUT_TANK_LEFT, this.topPos + INPUT_TANK_TOP, this.machine.getFluidContainer(machine).getTankCapacity(0), this.menu.getFluids().get(0));
     }
 
     @Override
@@ -45,7 +45,7 @@ public class WaterPumpScreen extends AbstractMachineScreen<WaterPumpBlockEntity,
         }
 
         if (GuiUtil.isHovering(this.getInputTankBounds(), mouseX, mouseY)) {
-            GuiUtil.drawTankTooltip(this, poseStack, this.menu.getFluids().get(0), this.machine.getFluidContainer().getTankCapacity(0), mouseX, mouseY);
+            GuiUtil.drawTankTooltip(this, poseStack, this.menu.getFluids().get(0), this.machine.getFluidContainer(machine).getTankCapacity(0), mouseX, mouseY);
         }
     }
 

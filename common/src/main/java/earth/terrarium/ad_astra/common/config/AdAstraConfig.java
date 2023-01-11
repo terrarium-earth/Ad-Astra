@@ -5,7 +5,7 @@ import com.teamresourceful.resourcefulconfig.common.annotations.Config;
 import com.teamresourceful.resourcefulconfig.common.annotations.ConfigEntry;
 import com.teamresourceful.resourcefulconfig.common.annotations.InlineCategory;
 import com.teamresourceful.resourcefulconfig.common.config.EntryType;
-import earth.terrarium.botarium.api.fluid.FluidHooks;
+import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 
 @Config("ad_astra")
 public final class AdAstraConfig {
@@ -53,7 +53,7 @@ public final class AdAstraConfig {
             type = EntryType.LONG,
             translation = "text.resourcefulconfig.ad_astra.option.general.oxygenTankSize"
     )
-    public static long oxygenTankSize = FluidHooks.buckets(1) / 2;
+    public static long oxygenTankSize = FluidHooks.buckets(1f) / 2;
 
     @ConfigEntry(
             id = "hammerDurability",

@@ -3,7 +3,7 @@ package earth.terrarium.ad_astra.common.config;
 import com.teamresourceful.resourcefulconfig.common.annotations.Category;
 import com.teamresourceful.resourcefulconfig.common.annotations.ConfigEntry;
 import com.teamresourceful.resourcefulconfig.common.config.EntryType;
-import earth.terrarium.botarium.api.fluid.FluidHooks;
+import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 
 @Category(id = "fuelRefinery", translation = "text.resourcefulconfig.ad_astra.option.fuelRefinery")
 public final class FuelRefineryConfig {
@@ -27,5 +27,5 @@ public final class FuelRefineryConfig {
         type = EntryType.LONG,
         translation = "text.resourcefulconfig.ad_astra.option.fuelRefinery.tankSize"
     )
-    public static long tankSize = FluidHooks.buckets(3);
+    public static long tankSize = FluidHooks.buckets(3f);
 }

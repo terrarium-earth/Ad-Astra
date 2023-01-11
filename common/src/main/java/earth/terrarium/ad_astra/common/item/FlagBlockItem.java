@@ -25,7 +25,7 @@ public class FlagBlockItem extends ModRenderedBlockItem {
         Level level = context.getLevel();
         BlockPos blockPos = context.getClickedPos().above();
         BlockState blockState = level.isWaterAt(blockPos) ? Blocks.WATER.defaultBlockState() : Blocks.AIR.defaultBlockState();
-        level.setBlock(blockPos, blockState, 27);
+        level.setBlock(blockPos, blockState, Block.UPDATE_ALL);
         return super.placeBlock(context, state);
     }
 

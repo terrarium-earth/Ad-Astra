@@ -2,7 +2,7 @@ package earth.terrarium.ad_astra.client.renderer.entity.vehicle;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import earth.terrarium.ad_astra.client.renderer.entity.vehicle.rover.RoverModel;
 import earth.terrarium.ad_astra.common.entity.vehicle.Vehicle;
 import net.fabricmc.api.EnvType;
@@ -33,7 +33,7 @@ public abstract class VehicleRenderer<T extends Vehicle, M extends EntityModel<T
 
         poseStack.pushPose();
 
-        poseStack.mulPose(Vector3f.ZP.rotationDegrees(180));
+        poseStack.mulPose(Axis.ZP.rotationDegrees(180));
         poseStack.translate(0.0, -1.501, 0.0);
 
         VertexConsumer vertexConsumer = buffer.getBuffer(RenderType.entityCutoutNoCullZOffset(texture));
@@ -61,8 +61,8 @@ public abstract class VehicleRenderer<T extends Vehicle, M extends EntityModel<T
     public void render(T entity, float yaw, float tickDelta, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
         poseStack.pushPose();
 
-        poseStack.mulPose(Vector3f.ZP.rotationDegrees(180));
-        poseStack.mulPose(Vector3f.YP.rotationDegrees(this.getYawOffset()));
+        poseStack.mulPose(Axis.ZP.rotationDegrees(180));
+        poseStack.mulPose(Axis.YP.rotationDegrees(this.getYawOffset()));
         poseStack.translate(0.0, -1.501, 0.0);
 
         if (entity.isFullyFrozen()) {

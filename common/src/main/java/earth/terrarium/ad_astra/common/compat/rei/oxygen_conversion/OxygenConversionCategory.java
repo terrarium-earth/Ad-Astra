@@ -6,7 +6,7 @@ import earth.terrarium.ad_astra.common.compat.rei.widget.EnergyBarWidget;
 import earth.terrarium.ad_astra.common.compat.rei.widget.FluidBarWidget;
 import earth.terrarium.ad_astra.common.config.OxygenLoaderConfig;
 import earth.terrarium.ad_astra.common.registry.ModBlocks;
-import earth.terrarium.botarium.api.fluid.FluidHooks;
+import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.Renderer;
@@ -61,13 +61,13 @@ public class OxygenConversionCategory implements DisplayCategory<OxygenConversio
 
         widgets.add(Widgets.createRecipeBase(bounds));
 
-        Widget fluidWidget1 = new FluidBarWidget(startPoint, false, FluidHooks.newFluidHolder((((FluidStack) inputs.get(0).get(0).getValue()).getFluid()), FluidHooks.buckets(1), null)).animationDurationTicks(150);
+        Widget fluidWidget1 = new FluidBarWidget(startPoint, false, FluidHooks.newFluidHolder((((FluidStack) inputs.get(0).get(0).getValue()).getFluid()), FluidHooks.buckets(1f), null)).animationDurationTicks(150);
         widgets.add(fluidWidget1);
         widgets.add(Widgets.withTooltip(Widgets.withBounds(fluidWidget1, bounds), Component.translatable(((FluidStack) inputs.get(0).get(0).getValue()).getTranslationKey())));
 
         widgets.add(Widgets.createArrow(new Point(startPoint.x + 30, startPoint.y + 15)).animationDurationTicks(20));
 
-        Widget fluidWidget2 = new FluidBarWidget(new Point(startPoint.x + 70, startPoint.y), true, FluidHooks.newFluidHolder(((FluidStack) outputs.get(0).get(0).getValue()).getFluid(), FluidHooks.buckets(1), null)).animationDurationTicks(150 / display.recipe().getConversionRatio());
+        Widget fluidWidget2 = new FluidBarWidget(new Point(startPoint.x + 70, startPoint.y), true, FluidHooks.newFluidHolder(((FluidStack) outputs.get(0).get(0).getValue()).getFluid(), FluidHooks.buckets(1f), null)).animationDurationTicks(150 / display.recipe().getConversionRatio());
         widgets.add(fluidWidget2);
         widgets.add(Widgets.withTooltip(Widgets.withBounds(fluidWidget2, bounds), Component.translatable(((FluidStack) outputs.get(0).get(0).getValue()).getTranslationKey())));
 

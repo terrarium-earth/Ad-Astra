@@ -2,7 +2,7 @@ package earth.terrarium.ad_astra.common.screen;
 
 import earth.terrarium.ad_astra.common.entity.vehicle.Vehicle;
 import earth.terrarium.ad_astra.common.screen.menu.VehicleMenu;
-import earth.terrarium.botarium.api.menu.ExtraDataMenuProvider;
+import earth.terrarium.botarium.common.menu.ExtraDataMenuProvider;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;

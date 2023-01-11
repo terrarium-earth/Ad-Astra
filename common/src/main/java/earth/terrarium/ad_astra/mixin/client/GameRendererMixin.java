@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.mixin.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import earth.terrarium.ad_astra.common.entity.vehicle.Rocket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -31,8 +31,8 @@ public abstract class GameRendererMixin {
                         float g = -(player.walkDist + f * tickDelta);
                         float h = Mth.lerp(tickDelta, 0.075f, -0.075f);
                         poseStack.translate(Mth.sin(g * (float) Math.PI) * h * 0.5f, -Math.abs(Mth.cos(g * (float) Math.PI) * h), 0.0);
-                        poseStack.mulPose(Vector3f.ZP.rotationDegrees(Mth.sin(g * (float) Math.PI) * h * 3.0f));
-                        poseStack.mulPose(Vector3f.XP.rotationDegrees(Math.abs(Mth.cos(g * (float) Math.PI - 0.2f) * h) * 5.0f));
+                        poseStack.mulPose(Axis.ZP.rotationDegrees(Mth.sin(g * (float) Math.PI) * h * 3.0f));
+                        poseStack.mulPose(Axis.XP.rotationDegrees(Math.abs(Mth.cos(g * (float) Math.PI - 0.2f) * h) * 5.0f));
                     }
                 }
             }

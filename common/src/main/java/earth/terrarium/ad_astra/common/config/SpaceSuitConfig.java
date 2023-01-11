@@ -4,7 +4,7 @@ import com.teamresourceful.resourcefulconfig.common.annotations.Category;
 import com.teamresourceful.resourcefulconfig.common.annotations.Comment;
 import com.teamresourceful.resourcefulconfig.common.annotations.ConfigEntry;
 import com.teamresourceful.resourcefulconfig.common.config.EntryType;
-import earth.terrarium.botarium.api.fluid.FluidHooks;
+import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 
 @Category(id = "spaceSuit", translation = "text.resourcefulconfig.ad_astra.option.spaceSuit")
 public final class SpaceSuitConfig {
@@ -14,14 +14,14 @@ public final class SpaceSuitConfig {
         type = EntryType.LONG,
         translation = "text.resourcefulconfig.ad_astra.option.spaceSuit.spaceSuitTankSize"
     )
-    public static long spaceSuitTankSize = FluidHooks.buckets(1);
+    public static long spaceSuitTankSize = FluidHooks.buckets(1f);
 
     @ConfigEntry(
         id = "netheriteSpaceSuitTankSize",
         type = EntryType.LONG,
         translation = "text.resourcefulconfig.ad_astra.option.spaceSuit.netheriteSpaceSuitTankSize"
     )
-    public static long netheriteSpaceSuitTankSize = FluidHooks.buckets(2);
+    public static long netheriteSpaceSuitTankSize = FluidHooks.buckets(2f);
 
     @ConfigEntry(
         id = "netheriteSpaceSuitHasFireResistance",
@@ -58,7 +58,7 @@ public final class SpaceSuitConfig {
         type = EntryType.LONG,
         translation = "text.resourcefulconfig.ad_astra.option.spaceSuit.jetSuitTankSize"
     )
-    public static long jetSuitTankSize = FluidHooks.buckets(4);
+    public static long jetSuitTankSize = FluidHooks.buckets(4f);
 
     @ConfigEntry(
         id = "jetSuitMaxEnergy",

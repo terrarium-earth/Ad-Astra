@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 
@@ -32,6 +32,6 @@ public class GlobeItemRenderer extends BlockEntityWithoutLevelRenderer {
         model.setYaw(Mth.lerp(tickDelta, prevWorldTime, minecraft.level.getGameTime()) / -20.0f);
         prevWorldTime = minecraft.level.getGameTime();
 
-        GlobeRenderer.render(Registry.ITEM.getKey(stack.getItem()), model, Direction.NORTH, poseStack, buffer, packedLight, packedOverlay);
+        GlobeRenderer.render(BuiltInRegistries.ITEM.getKey(stack.getItem()), model, Direction.NORTH, poseStack, buffer, packedLight, packedOverlay);
     }
 }

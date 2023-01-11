@@ -10,10 +10,10 @@ import earth.terrarium.ad_astra.common.util.FluidUtils;
 import earth.terrarium.ad_astra.common.util.ModUtils;
 import earth.terrarium.ad_astra.common.util.OxygenUtils;
 import earth.terrarium.ad_astra.common.util.algorithm.OxygenFillerAlgorithm;
-import earth.terrarium.botarium.api.energy.EnergyBlock;
-import earth.terrarium.botarium.api.energy.InsertOnlyEnergyContainer;
-import earth.terrarium.botarium.api.fluid.FluidHolder;
-import earth.terrarium.botarium.api.fluid.FluidHooks;
+import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
+import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
+import earth.terrarium.botarium.common.fluid.base.FluidHolder;
+import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -22,7 +22,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.NotNull;
@@ -32,8 +32,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
-public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implements EnergyBlock {
-    private InsertOnlyEnergyContainer energyContainer;
+public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
+    private WrappedBlockEnergyContainer energyContainer;
 
     private int oxygenFillCheckTicks = OxygenDistributorConfig.refreshTicks;
     private boolean showOxygen = false;
@@ -103,7 +103,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
     }
 
     public long getFluidToExtract(long oxygenBlocks, boolean client) {
-        long value = (long) (((FluidHooks.buckets(1) / 1000) * oxygenBlocks / 44) * OxygenDistributorConfig.oxygenMultiplier);
+        long value = (long) (((FluidHooks.buckets(1f) / 1000) * oxygenBlocks / 44) * OxygenDistributorConfig.oxygenMultiplier);
         if (client) {
             return value;
         }
@@ -124,10 +124,10 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
         long amountOfEnergyToConsume = this.getEnergyToConsume(oxygenBlocks, false);
 
         if (level.getGameTime() % 20 == 0) {
-            this.getFluidContainer().extractFluid(FluidHooks.newFluidHolder(this.getOutputTank().getFluid(), amountOfFluidToExtract, null), false);
+            this.getFluidContainer(this).extractFluid(FluidHooks.newFluidHolder(this.getOutputTank().getFluid(), amountOfFluidToExtract, null), false);
         }
 
-        if (this.getEnergyStorage().internalExtract(amountOfEnergyToConsume, false) > 0) {
+        if (this.getEnergyStorage(this).internalExtract(amountOfEnergyToConsume, false) > 0) {
             ModUtils.spawnForcedParticles((ServerLevel) this.getLevel(), ModParticleTypes.OXYGEN_BUBBLE.get(), this.getBlockPos().getX() + 0.5, this.getBlockPos().getY() + 0.5, this.getBlockPos().getZ() + 0.5, 1, 0.0, 0.0, 0.0, 0.03);
         }
     }
@@ -139,7 +139,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
             return false;
         } else if (this.getBlockState().getValue(AbstractMachineBlock.POWERED)) {
             return false;
-        } else if (this.getEnergyStorage().internalExtract(amountOfEnergyToConsume, true) == 0) {
+        } else if (this.getEnergyStorage(this).internalExtract(amountOfEnergyToConsume, true) == 0) {
             return false;
         } else if (getOutputTank().getFluid().equals(Fluids.EMPTY)) {
             return false;
@@ -156,14 +156,14 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
         // Convert the input fluid into oxygen
         if (!this.level.isClientSide) {
             if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxStackSize() && FluidHooks.isFluidContainingItem(insertSlot)) {
-                FluidUtils.insertItemFluidToTank(this.getFluidContainer(), this, 0, 1, 0, f -> OxygenConversionRecipe.getRecipes(this.level).stream().anyMatch(r -> r.matches(f)));
-                FluidUtils.extractTankFluidToItem(this.getFluidContainer().getInput(), this, 0, 1, 0, f -> true);
+                FluidUtils.insertItemFluidToTank(this.getFluidContainer(this), this, 0, 1, 0, f -> OxygenConversionRecipe.getRecipes(this.level).stream().anyMatch(r -> r.matches(f)));
+                FluidUtils.extractTankFluidToItem(getDoubleFluidTank().getInput(), this, 0, 1, 0, f -> true);
             }
 
-            if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0) {
+            if (this.getEnergyStorage(this).internalExtract(this.getEnergyPerTick(), true) > 0) {
                 List<OxygenConversionRecipe> recipes = OxygenConversionRecipe.getRecipes(this.level);
-                if (FluidUtils.convertFluid(this.getFluidContainer(), recipes, FluidHooks.buckets(1) / 20)) {
-                    this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
+                if (FluidUtils.convertFluid(getDoubleFluidTank(), recipes, FluidHooks.buckets(1f) / 20)) {
+                    this.getEnergyStorage(this).internalExtract(this.getEnergyPerTick(), false);
                 }
             }
         }
@@ -193,7 +193,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
                 return;
             }
         } else {
-            if (getOutputTank().getFluidAmount() <= 0 && this.getEnergyStorage().getStoredEnergy() <= 0) {
+            if (getOutputTank().getFluidAmount() <= 0 && this.getEnergyStorage(this).getStoredEnergy() <= 0) {
                 return;
             }
         }
@@ -226,17 +226,11 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
     }
 
     public long getMaxCapacity() {
-        return this.getEnergyStorage().getMaxCapacity();
+        return this.getEnergyStorage(this).getMaxCapacity();
     }
 
     @Override
-    public InsertOnlyEnergyContainer getEnergyStorage() {
-        return energyContainer == null ? energyContainer = new InsertOnlyEnergyContainer(this, (int) OxygenDistributorConfig.maxEnergy) : this.energyContainer;
-    }
-
-    @Override
-    public void update() {
-        this.setChanged();
-        this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
+    public WrappedBlockEnergyContainer getEnergyStorage(BlockEntity holder) {
+        return energyContainer == null ? energyContainer = new WrappedBlockEnergyContainer(this, new InsertOnlyEnergyContainer(OxygenDistributorConfig.maxEnergy)) : this.energyContainer;
     }
 }

@@ -4,6 +4,7 @@ import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.util.OxygenUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -22,7 +23,7 @@ public abstract class BlockMixin {
     public void adastra_setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack, CallbackInfo ci) {
         Block block = (Block) (Object) this;
         if (block instanceof BushBlock || block instanceof CactusBlock) {
-            if (!Registry.BLOCK.getKey(block).getNamespace().equals(AdAstra.MOD_ID)) {
+            if (!BuiltInRegistries.BLOCK.getKey(block).getNamespace().equals(AdAstra.MOD_ID)) {
                 if (!OxygenUtils.posHasOxygen(level, pos)) {
                     level.destroyBlock(pos, true);
                 }

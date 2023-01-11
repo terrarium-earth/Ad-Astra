@@ -15,10 +15,10 @@ import earth.terrarium.ad_astra.common.registry.ModCriteria;
 import earth.terrarium.ad_astra.common.registry.ModEntityTypes;
 import earth.terrarium.ad_astra.common.registry.ModTags;
 import earth.terrarium.ad_astra.common.util.algorithm.LandFinder;
-import earth.terrarium.botarium.api.item.ItemStackHolder;
+import earth.terrarium.botarium.common.item.ItemStackHolder;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -48,17 +48,11 @@ import java.util.stream.StreamSupport;
 
 public class ModUtils {
 
-    public static final ResourceKey<Level> EARTH_ORBIT_KEY = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(AdAstra.MOD_ID, "earth_orbit"));
-    public static final ResourceKey<Level> MOON_KEY = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(AdAstra.MOD_ID, "moon"));
-    public static final ResourceKey<Level> MOON_ORBIT_KEY = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(AdAstra.MOD_ID, "moon_orbit"));
-    public static final ResourceKey<Level> MARS_KEY = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(AdAstra.MOD_ID, "mars"));
-    public static final ResourceKey<Level> MARS_ORBIT_KEY = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(AdAstra.MOD_ID, "mars_orbit"));
-    public static final ResourceKey<Level> VENUS_KEY = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(AdAstra.MOD_ID, "venus"));
-    public static final ResourceKey<Level> VENUS_ORBIT_KEY = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(AdAstra.MOD_ID, "venus_orbit"));
-    public static final ResourceKey<Level> MERCURY_KEY = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(AdAstra.MOD_ID, "mercury"));
-    public static final ResourceKey<Level> MERCURY_ORBIT_KEY = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(AdAstra.MOD_ID, "mercury_orbit"));
-    public static final ResourceKey<Level> GLACIO_KEY = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(AdAstra.MOD_ID, "glacio"));
-    public static final ResourceKey<Level> GLACIO_ORBIT_KEY = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(AdAstra.MOD_ID, "glacio_orbit"));
+    public static final ResourceKey<Level> MOON_KEY = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(AdAstra.MOD_ID, "moon"));
+    public static final ResourceKey<Level> MARS_KEY = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(AdAstra.MOD_ID, "mars"));
+    public static final ResourceKey<Level> VENUS_KEY = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(AdAstra.MOD_ID, "venus"));
+    public static final ResourceKey<Level> MERCURY_KEY = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(AdAstra.MOD_ID, "mercury"));
+    public static final ResourceKey<Level> GLACIO_KEY = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(AdAstra.MOD_ID, "glacio"));
 
     public static final float VANILLA_GRAVITY = 9.806f;
     public static final float ORBIT_TEMPERATURE = -270.0f;

@@ -5,7 +5,7 @@ import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import earth.terrarium.ad_astra.common.screen.PlanetSelectionMenuProvider;
-import earth.terrarium.botarium.api.menu.MenuHooks;
+import earth.terrarium.botarium.common.menu.MenuHooks;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;

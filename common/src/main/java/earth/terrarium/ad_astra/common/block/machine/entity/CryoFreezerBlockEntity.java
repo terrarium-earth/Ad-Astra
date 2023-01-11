@@ -5,36 +5,37 @@ import earth.terrarium.ad_astra.common.recipe.CryoFuelConversionRecipe;
 import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.ad_astra.common.screen.menu.CryoFreezerMenu;
 import earth.terrarium.ad_astra.common.util.FluidUtils;
-import earth.terrarium.botarium.api.energy.EnergyBlock;
-import earth.terrarium.botarium.api.energy.InsertOnlyEnergyContainer;
-import earth.terrarium.botarium.api.fluid.ExtractOnlyUpdatingFluidContainer;
-import earth.terrarium.botarium.api.fluid.FluidHolder;
-import earth.terrarium.botarium.api.fluid.FluidHoldingBlock;
-import earth.terrarium.botarium.api.fluid.FluidHooks;
+import earth.terrarium.botarium.common.energy.base.EnergyAttachment;
+import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
+import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
+import earth.terrarium.botarium.common.fluid.base.FluidAttachment;
+import earth.terrarium.botarium.common.fluid.base.FluidHolder;
+import earth.terrarium.botarium.common.fluid.impl.ExtractOnlyFluidContainer;
+import earth.terrarium.botarium.common.fluid.impl.WrappedBlockFluidContainer;
+import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implements FluidHoldingBlock, EnergyBlock {
-    private InsertOnlyEnergyContainer energyContainer;
+public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implements FluidAttachment.Block, EnergyAttachment.Block {
+    private WrappedBlockEnergyContainer energyContainer;
 
     protected int cookTime;
     protected int cookTimeTotal;
     @Nullable
-    protected Item inputItem;
+    protected ItemStack inputItem;
     @Nullable
     protected Fluid outputFluid;
-    private ExtractOnlyUpdatingFluidContainer tank;
+    private WrappedBlockFluidContainer tank;
 
     public CryoFreezerBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntityTypes.CRYO_FREEZER.get(), blockPos, blockState);
@@ -66,8 +67,8 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
         if (this.outputFluid != null) {
             CryoFuelConversionRecipe recipe = this.createRecipe(this.getItem(0), false);
             if (recipe != null) {
-                FluidHolder outputFluid = FluidHooks.newFluidHolder(recipe.getFluidOutput(), (long) (FluidHooks.buckets(1) * recipe.getConversionRatio()), null);
-                getFluidContainer().internalInsert(outputFluid, false);
+                FluidHolder outputFluid = FluidHooks.newFluidHolder(recipe.getFluidOutput(), (long) (FluidHooks.buckets(1f) * recipe.getConversionRatio()), null);
+                getFluidContainer(this).internalInsert(outputFluid, false);
             }
         }
         this.stopCooking();
@@ -119,7 +120,7 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
             }
 
             this.outputFluid = recipe.getFluidOutput();
-            this.inputItem = testStack.getItem();
+            this.inputItem = testStack;
         }
 
         return recipe;
@@ -133,14 +134,14 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
             ItemStack outputExtractSlot = this.getItem(2);
 
             if (!outputInsertSlot.isEmpty() && outputExtractSlot.getCount() < outputExtractSlot.getMaxStackSize()) {
-                FluidUtils.extractTankFluidToItem(this.getFluidContainer(), this, 1, 2, 0, f -> true);
+                FluidUtils.extractTankFluidToItem(this.getFluidContainer(this), this, 1, 2, 0, f -> true);
             }
 
-            if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0) {
-                if ((!input.isEmpty() && (input.getItem().equals(this.inputItem) || this.inputItem == null)) && getFluidContainer().getFluids().get(0).getFluidAmount() < getFluidContainer().getTankCapacity(0)) {
+            if (this.getEnergyStorage(this).internalExtract(this.getEnergyPerTick(), true) > 0) {
+                if ((!input.isEmpty() && (input.equals(this.inputItem) || this.inputItem == null)) && getFluidContainer(this).getFluids().get(0).getFluidAmount() < getFluidContainer(this).getTankCapacity(0)) {
                     if (this.cookTime < this.cookTimeTotal) {
                         this.cookTime++;
-                        this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
+                        this.getEnergyStorage(this).internalExtract(this.getEnergyPerTick(), false);
                         this.setActive(true);
 
                     } else if (this.outputFluid != null) {
@@ -163,27 +164,21 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
         }
     }
 
-    @Override
-    public ExtractOnlyUpdatingFluidContainer getFluidContainer() {
-        return tank == null ? tank = new ExtractOnlyUpdatingFluidContainer(this, i -> CryoFreezerConfig.tankSize, 1, (amount, fluid) -> true) : this.tank;
-    }
-
     public long getEnergyPerTick() {
         return CryoFreezerConfig.energyPerTick;
     }
 
     public long getMaxCapacity() {
-        return this.getEnergyStorage().getMaxCapacity();
+        return this.getEnergyStorage(this).getMaxCapacity();
     }
 
     @Override
-    public InsertOnlyEnergyContainer getEnergyStorage() {
-        return energyContainer == null ? energyContainer = new InsertOnlyEnergyContainer(this, (int) CryoFreezerConfig.maxEnergy) : this.energyContainer;
+    public WrappedBlockEnergyContainer getEnergyStorage(BlockEntity holder) {
+        return energyContainer == null ? energyContainer = new WrappedBlockEnergyContainer(this, new InsertOnlyEnergyContainer(CryoFreezerConfig.maxEnergy)) : this.energyContainer;
     }
 
     @Override
-    public void update() {
-        this.setChanged();
-        this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
+    public WrappedBlockFluidContainer getFluidContainer(BlockEntity holder) {
+        return tank == null ? tank = new WrappedBlockFluidContainer(this, new ExtractOnlyFluidContainer(i -> CryoFreezerConfig.tankSize, 1, (amount, fluid) -> true)) : this.tank;
     }
 }

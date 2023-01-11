@@ -17,8 +17,8 @@ import java.util.Optional;
 
 public class SpacePaintingItem extends HangingEntityItem {
 
-    public SpacePaintingItem(EntityType<? extends SpacePainting> type, Properties properties) {
-        super(type, properties);
+    public SpacePaintingItem(Properties properties) {
+        super(EntityType.PAINTING, properties);
     }
 
     @Override

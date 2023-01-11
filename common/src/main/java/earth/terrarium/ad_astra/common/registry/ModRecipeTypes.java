@@ -6,11 +6,11 @@ import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.recipe.*;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.crafting.RecipeType;
 
 public class ModRecipeTypes {
-    public static final ResourcefulRegistry<RecipeType<?>> RECIPE_TYPES = ResourcefulRegistries.create(Registry.RECIPE_TYPE, AdAstra.MOD_ID);
+    public static final ResourcefulRegistry<RecipeType<?>> RECIPE_TYPES = ResourcefulRegistries.create(BuiltInRegistries.RECIPE_TYPE, AdAstra.MOD_ID);
 
     public static final RegistryEntry<RecipeType<CompressingRecipe>> COMPRESSING_RECIPE = RECIPE_TYPES.register("compressing", () -> CodecRecipeType.of("compressing"));
     public static final RegistryEntry<RecipeType<SpaceStationRecipe>> SPACE_STATION_RECIPE = RECIPE_TYPES.register("space_station", () -> CodecRecipeType.of("space_station"));

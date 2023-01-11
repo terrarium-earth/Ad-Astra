@@ -2,13 +2,12 @@ package earth.terrarium.ad_astra.client.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
-import com.mojang.math.Matrix4f;
 import com.teamresourceful.resourcefullib.client.scissor.ClosingScissorBox;
 import com.teamresourceful.resourcefullib.client.utils.RenderUtils;
 import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.botarium.api.fluid.ClientFluidHooks;
-import earth.terrarium.botarium.api.fluid.FluidHolder;
-import earth.terrarium.botarium.api.fluid.FluidHooks;
+import earth.terrarium.botarium.common.fluid.base.FluidHolder;
+import earth.terrarium.botarium.common.fluid.utils.ClientFluidHooks;
+import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
@@ -24,6 +23,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
+import org.joml.Matrix4f;
 
 import java.awt.*;
 
@@ -104,7 +104,7 @@ public class GuiUtil {
 
         TextureAtlasSprite sprite = ClientFluidHooks.getFluidSprite(fluid);
         int colour = ClientFluidHooks.getFluidColor(fluid);
-        int spriteHeight = sprite.getHeight();
+        int spriteHeight = sprite.contents().height();
 
         RenderSystem.setShaderColor((colour >> 16 & 255) / 255.0f, (float) (colour >> 8 & 255) / 255.0f, (float) (colour & 255) / 255.0f, 1.0f);
         RenderSystem.setShaderTexture(0, InventoryMenu.BLOCK_ATLAS);

@@ -1,13 +1,18 @@
 package earth.terrarium.ad_astra.common.item;
 
-import earth.terrarium.botarium.api.fluid.*;
-import earth.terrarium.botarium.api.item.ItemStackHolder;
+
+import earth.terrarium.botarium.common.fluid.base.FluidAttachment;
+import earth.terrarium.botarium.common.fluid.base.FluidHolder;
+import earth.terrarium.botarium.common.fluid.impl.SimpleFluidContainer;
+import earth.terrarium.botarium.common.fluid.impl.WrappedItemFluidContainer;
+import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
+import earth.terrarium.botarium.common.item.ItemStackHolder;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
 
 import java.util.function.BiPredicate;
 
-public interface FluidContainingItem extends FluidHoldingItem {
+public interface FluidContainingItem extends FluidAttachment.Item {
 
     long getTankSize();
 
@@ -34,7 +39,7 @@ public interface FluidContainingItem extends FluidHoldingItem {
     BiPredicate<Integer, FluidHolder> getFilter();
 
     @Override
-    default ItemFluidContainer getFluidContainer(ItemStack stack) {
-        return new ItemFilteredFluidContainer(this.getTankSize(), 1, stack, getFilter());
+    default WrappedItemFluidContainer getFluidContainer(ItemStack stack) {
+        return new WrappedItemFluidContainer(stack, new SimpleFluidContainer(this.getTankSize(), 1, getFilter()));
     }
 }

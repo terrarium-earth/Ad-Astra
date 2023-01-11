@@ -2,7 +2,7 @@ package earth.terrarium.ad_astra.common.data;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
@@ -19,9 +19,9 @@ public record Planet(String translation, ResourceLocation galaxy, ResourceLocati
             Codec.STRING.fieldOf("translation").forGetter(Planet::translation),
             ResourceLocation.CODEC.fieldOf("galaxy").forGetter(Planet::galaxy),
             ResourceLocation.CODEC.fieldOf("solar_system").forGetter(Planet::solarSystem),
-            ResourceKey.codec(Registry.DIMENSION_REGISTRY).fieldOf("world").forGetter(Planet::level),
-            ResourceKey.codec(Registry.DIMENSION_REGISTRY).fieldOf("orbit_world").forGetter(Planet::orbitWorld),
-            ResourceKey.codec(Registry.DIMENSION_REGISTRY).optionalFieldOf("parent_world").forGetter(Planet::getParentlevel),
+            ResourceKey.codec(Registries.DIMENSION).fieldOf("world").forGetter(Planet::level),
+            ResourceKey.codec(Registries.DIMENSION).fieldOf("orbit_world").forGetter(Planet::orbitWorld),
+            ResourceKey.codec(Registries.DIMENSION).optionalFieldOf("parent_world").forGetter(Planet::getParentlevel),
             Codec.INT.fieldOf("rocket_tier").forGetter(Planet::rocketTier),
             Codec.FLOAT.fieldOf("gravity").forGetter(Planet::gravity),
             Codec.BOOL.fieldOf("has_atmosphere").forGetter(Planet::hasAtmosphere),

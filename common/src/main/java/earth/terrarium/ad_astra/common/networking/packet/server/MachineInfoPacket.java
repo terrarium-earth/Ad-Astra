@@ -6,9 +6,9 @@ import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.screen.menu.AbstractMachineMenu;
 import earth.terrarium.ad_astra.common.screen.menu.AbstractVehicleMenu;
-import earth.terrarium.botarium.api.fluid.FluidHolder;
-import earth.terrarium.botarium.api.fluid.FluidHooks;
-import net.minecraft.core.Registry;
+import earth.terrarium.botarium.common.fluid.base.FluidHolder;
+import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 
@@ -34,14 +34,14 @@ public record MachineInfoPacket(long energy, List<FluidHolder> fluidHolders) imp
         public void encode(MachineInfoPacket packet, FriendlyByteBuf buf) {
             buf.writeLong(packet.energy());
             buf.writeCollection(packet.fluidHolders, (buf2, fluid) -> {
-                buf2.writeResourceLocation(Registry.FLUID.getKey(fluid.getFluid()));
+                buf2.writeResourceLocation(BuiltInRegistries.FLUID.getKey(fluid.getFluid()));
                 buf2.writeLong(fluid.getFluidAmount());
             });
         }
 
         @Override
         public MachineInfoPacket decode(FriendlyByteBuf buf) {
-            return new MachineInfoPacket(buf.readLong(), buf.readList(buf2 -> FluidHooks.newFluidHolder(Registry.FLUID.get(buf2.readResourceLocation()), buf2.readLong(), null)));
+            return new MachineInfoPacket(buf.readLong(), buf.readList(buf2 -> FluidHooks.newFluidHolder(BuiltInRegistries.FLUID.get(buf2.readResourceLocation()), buf2.readLong(), null)));
         }
 
         @Override

@@ -3,22 +3,22 @@ package earth.terrarium.ad_astra.common.item.vehicle;
 import earth.terrarium.ad_astra.common.block.door.LocationState;
 import earth.terrarium.ad_astra.common.block.launchpad.LaunchPad;
 import earth.terrarium.ad_astra.common.entity.vehicle.*;
-import earth.terrarium.botarium.api.fluid.FluidHooks;
-import earth.terrarium.botarium.api.fluid.PlatformFluidItemHandler;
-import earth.terrarium.botarium.api.item.ItemStackHolder;
+import earth.terrarium.botarium.common.fluid.base.PlatformFluidItemHandler;
+import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
+import earth.terrarium.botarium.common.item.ItemStackHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -26,13 +26,13 @@ public class RocketItem<T extends Rocket> extends VehicleItem {
 
     private final int tier;
 
-    public RocketItem(EntityType<T> rocketEntity, int tier, Properties properties) {
+    public RocketItem(int tier, Properties properties) {
         super(properties);
         this.tier = tier;
     }
 
     @Override
-    public InteractionResult useOn(UseOnContext context) {
+    public @NotNull InteractionResult useOn(UseOnContext context) {
         Level level = context.getLevel();
         if (!level.isClientSide) {
             BlockPos pos = context.getClickedPos();
@@ -112,6 +112,6 @@ public class RocketItem<T extends Rocket> extends VehicleItem {
 
     @Override
     public long getTankSize() {
-        return FluidHooks.buckets(3);
+        return FluidHooks.buckets(3f);
     }
 }

@@ -2,16 +2,18 @@ package earth.terrarium.ad_astra.common.block.machine.entity;
 
 import earth.terrarium.ad_astra.common.block.machine.AbstractMachineBlock;
 import earth.terrarium.ad_astra.common.config.WaterPumpConfig;
-import earth.terrarium.ad_astra.common.container.WaterPumpFluidTank;
 import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.ad_astra.common.registry.ModParticleTypes;
 import earth.terrarium.ad_astra.common.screen.menu.WaterPumpMenu;
 import earth.terrarium.ad_astra.common.util.ModUtils;
-import earth.terrarium.botarium.api.energy.EnergyBlock;
-import earth.terrarium.botarium.api.energy.InsertOnlyEnergyContainer;
-import earth.terrarium.botarium.api.fluid.FluidHolder;
-import earth.terrarium.botarium.api.fluid.FluidHoldingBlock;
-import earth.terrarium.botarium.api.fluid.FluidHooks;
+import earth.terrarium.botarium.common.energy.base.EnergyAttachment;
+import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
+import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
+import earth.terrarium.botarium.common.fluid.base.FluidAttachment;
+import earth.terrarium.botarium.common.fluid.base.FluidHolder;
+import earth.terrarium.botarium.common.fluid.impl.SimpleFluidContainer;
+import earth.terrarium.botarium.common.fluid.impl.WrappedBlockFluidContainer;
+import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -19,8 +21,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
@@ -28,10 +30,10 @@ import net.minecraft.world.level.material.WaterFluid;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements FluidHoldingBlock, EnergyBlock {
-    private InsertOnlyEnergyContainer energyContainer;
+public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements FluidAttachment.Block, EnergyAttachment.Block {
+    private WrappedBlockEnergyContainer energyContainer;
     private long waterExtracted;
-    private WaterPumpFluidTank tank;
+    private WrappedBlockFluidContainer tank;
 
     public WaterPumpBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntityTypes.WATER_PUMP.get(), blockPos, blockState);
@@ -59,24 +61,24 @@ public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements 
     public void tick() {
         if (!this.getLevel().isClientSide()) {
             FluidState water = this.level.getFluidState(this.getBlockPos().below());
-            if (getFluidContainer().getFluids().get(0).getFluidAmount() < getFluidContainer().getTankCapacity(0)) {
+            if (getFluidContainer(this).getFluids().get(0).getFluidAmount() < getFluidContainer(this).getTankCapacity(0)) {
                 if (water.getType() instanceof WaterFluid.Source) {
 
                     // Drain the water block and add it to the tank.
-                    if (!this.getBlockState().getValue(AbstractMachineBlock.POWERED) && this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0) {
+                    if (!this.getBlockState().getValue(AbstractMachineBlock.POWERED) && this.getEnergyStorage(this).internalExtract(this.getEnergyPerTick(), true) > 0) {
                         this.setActive(true);
                         ModUtils.spawnForcedParticles((ServerLevel) this.level, ModParticleTypes.OXYGEN_BUBBLE.get(), this.getBlockPos().getX() + 0.5, this.getBlockPos().getY() - 0.5, this.getBlockPos().getZ() + 0.5, 1, 0.0, 0.0, 0.0, 0.01);
-                        this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
+                        this.getEnergyStorage(this).internalExtract(this.getEnergyPerTick(), false);
                         waterExtracted += WaterPumpConfig.transferPerTick;
                         FluidHolder waterFluid = FluidHooks.newFluidHolder(Fluids.WATER, WaterPumpConfig.transferPerTick, null);
-                        getFluidContainer().insertInternal(waterFluid, false);
+                        getFluidContainer(this).insertFluid(waterFluid, false);
                     } else {
                         this.setActive(false);
                     }
 
                     if (WaterPumpConfig.deleteWaterBelowWaterPump) {
                         // Delete the water block after it has been fully extracted.
-                        if (waterExtracted >= FluidHooks.buckets(1)) {
+                        if (waterExtracted >= FluidHooks.buckets(1f)) {
                             waterExtracted = 0;
                             level.setBlockAndUpdate(this.getBlockPos().below(), Blocks.AIR.defaultBlockState());
                         }
@@ -87,10 +89,10 @@ public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements 
             }
 
             // Insert the fluid into nearby tanks.
-            if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0 && !getFluidContainer().isEmpty()) {
+            if (this.getEnergyStorage(this).internalExtract(this.getEnergyPerTick(), true) > 0 && !getFluidContainer(this).isEmpty()) {
                 for (Direction direction : new Direction[]{Direction.UP, this.getBlockState().getValue(AbstractMachineBlock.FACING)}) {
-                    FluidHolder fluid = FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(0).getFluid(), WaterPumpConfig.transferPerTick * 2, getFluidContainer().getFluids().get(0).getCompound());
-                    this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
+                    FluidHolder fluid = FluidHooks.newFluidHolder(getFluidContainer(this).getFluids().get(0).getFluid(), WaterPumpConfig.transferPerTick * 2, getFluidContainer(this).getFluids().get(0).getCompound());
+                    this.getEnergyStorage(this).internalExtract(this.getEnergyPerTick(), false);
                     if (FluidHooks.moveBlockToBlockFluid(this, direction.getOpposite(), level.getBlockEntity(worldPosition.relative(direction)), direction, fluid) > 0) {
                         break;
                     }
@@ -99,27 +101,21 @@ public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements 
         }
     }
 
-    @Override
-    public WaterPumpFluidTank getFluidContainer() {
-        return tank == null ? tank = new WaterPumpFluidTank(this) : this.tank;
-    }
-
     public long getEnergyPerTick() {
         return WaterPumpConfig.energyPerTick;
     }
 
     public long getMaxCapacity() {
-        return this.getEnergyStorage().getMaxCapacity();
+        return this.getEnergyStorage(this).getMaxCapacity();
     }
 
     @Override
-    public InsertOnlyEnergyContainer getEnergyStorage() {
-        return energyContainer == null ? energyContainer = new InsertOnlyEnergyContainer(this, (int) WaterPumpConfig.maxEnergy) : this.energyContainer;
+    public WrappedBlockEnergyContainer getEnergyStorage(BlockEntity holder) {
+        return energyContainer == null ? energyContainer = new WrappedBlockEnergyContainer(this, new InsertOnlyEnergyContainer(WaterPumpConfig.maxEnergy)) : this.energyContainer;
     }
 
     @Override
-    public void update() {
-        this.setChanged();
-        this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
+    public WrappedBlockFluidContainer getFluidContainer(BlockEntity holder) {
+        return tank == null ? tank = new WrappedBlockFluidContainer(this, new SimpleFluidContainer(i -> WaterPumpConfig.tankSize, 1, (amount, fluid) -> true)) : this.tank;
     }
 }

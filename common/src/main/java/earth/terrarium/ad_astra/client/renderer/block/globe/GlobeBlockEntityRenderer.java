@@ -8,7 +8,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -26,6 +26,6 @@ public class GlobeBlockEntityRenderer implements BlockEntityRenderer<GlobeBlockE
         model.setYaw(Mth.lerp(tickDelta, entity.getCachedYaw(), entity.getYaw()));
 
         BlockState state = entity.getBlockState();
-        GlobeRenderer.render(Registry.BLOCK.getKey(state.getBlock()), model, state.getValue(GlobeBlock.FACING), poseStack, buffer, packedLight, packedOverlay);
+        GlobeRenderer.render(BuiltInRegistries.BLOCK.getKey(state.getBlock()), model, state.getValue(GlobeBlock.FACING), poseStack, buffer, packedLight, packedOverlay);
     }
 }

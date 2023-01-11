@@ -31,6 +31,6 @@ public class CoalGeneratorMenu extends ProcessingMachineMenu<CoalGeneratorBlockE
     @Override
     public void syncClientScreen() {
         super.syncClientScreen();
-        NetworkHandling.CHANNEL.sendToPlayer(new MachineInfoPacket(machine.getEnergyStorage().getStoredEnergy(), List.of()), this.player);
+        NetworkHandling.CHANNEL.sendToPlayer(new MachineInfoPacket(machine.getEnergyStorage(machine).getStoredEnergy(), List.of()), this.player);
     }
 }

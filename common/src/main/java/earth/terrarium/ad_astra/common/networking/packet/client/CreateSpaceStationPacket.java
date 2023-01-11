@@ -6,7 +6,7 @@ import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.recipe.SpaceStationRecipe;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -76,7 +76,7 @@ public record CreateSpaceStationPacket(ResourceLocation targetWorld) implements 
                 }
 
                 if (level instanceof ServerLevel serverWorld) {
-                    ServerLevel targetWorld = serverWorld.getServer().getLevel(ResourceKey.create(Registry.DIMENSION_REGISTRY, packet.targetWorld));
+                    ServerLevel targetWorld = serverWorld.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, packet.targetWorld));
 
                     if (targetWorld == null) return;
 

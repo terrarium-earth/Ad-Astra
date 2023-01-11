@@ -6,7 +6,6 @@ import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexBuffer;
-import com.mojang.math.Matrix4f;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.mixin.client.LevelRendererAccessor;
 import net.fabricmc.api.EnvType;
@@ -20,6 +19,7 @@ import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
+import org.joml.Matrix4f;
 
 @Environment(EnvType.CLIENT)
 public class VenusCloudRenderer {

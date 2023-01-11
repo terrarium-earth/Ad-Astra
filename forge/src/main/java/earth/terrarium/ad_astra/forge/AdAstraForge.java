@@ -6,10 +6,13 @@ import earth.terrarium.ad_astra.client.forge.AdAstraClientForge;
 import earth.terrarium.ad_astra.common.item.AstroduxItem;
 import earth.terrarium.ad_astra.common.registry.ModCommands;
 import earth.terrarium.ad_astra.common.registry.ModEntityTypes;
+import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.ad_astra.common.util.ModKeyBindings;
+import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
+import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -28,6 +31,7 @@ public class AdAstraForge {
         bus.addListener(AdAstraForge::onClientSetup);
         bus.addListener(AdAstraForge::commonSetup);
         bus.addListener(AdAstraForge::onAttributes);
+        bus.addListener(AdAstraForge::onRegisterCreativeTabs);
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> AdAstraClientForge::init);
         MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onServerReloadListeners);
         MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onRegisterCommands);
@@ -62,5 +66,13 @@ public class AdAstraForge {
 
     public static void onPlayerLogOut(PlayerEvent.PlayerLoggedOutEvent event) {
         ModKeyBindings.onPlayerQuit(event.getEntity());
+    }
+
+    public static void onRegisterCreativeTabs(CreativeModeTabEvent.Register event) {
+        ModItems.onRegisterCreativeTabs((loc, item, items) -> event.registerCreativeModeTab(loc, b -> b
+                .title(Component.translatable("itemGroup." + loc.getNamespace() + "." + loc.getPath()))
+                .icon(() -> item.get().getDefaultInstance())
+                .displayItems((featureFlagSet, output, bl) -> items.forEach(output::accept))
+                .build()));
     }
 }

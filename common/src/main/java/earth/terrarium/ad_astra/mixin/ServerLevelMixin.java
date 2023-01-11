@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.mixin;
 
-import earth.terrarium.ad_astra.common.level.LunarianWanderingTraderManager;
+import earth.terrarium.ad_astra.common.level.LunarianWanderingTraderSpawner;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -36,7 +36,7 @@ public abstract class ServerLevelMixin {
 
         List<CustomSpawner> serverSpawners = new ArrayList<>(this.customSpawners);
         if (!shouldTickTime) {
-            serverSpawners.add(new LunarianWanderingTraderManager(serverWorldProperties));
+            serverSpawners.add(new LunarianWanderingTraderSpawner(serverWorldProperties));
             this.customSpawners = serverSpawners;
         }
     }

@@ -71,6 +71,7 @@ subprojects {
 
     loom {
         silentMojangMappingsLicense()
+        setEnableTransitiveAccessWideners(true)
     }
 
     dependencies {

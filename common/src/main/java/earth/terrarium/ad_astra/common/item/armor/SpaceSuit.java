@@ -1,20 +1,23 @@
 package earth.terrarium.ad_astra.common.item.armor;
 
 import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.ad_astra.common.config.SpaceSuitConfig;
 import earth.terrarium.ad_astra.common.item.FluidContainingItem;
+import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.ad_astra.common.registry.ModTags;
-import earth.terrarium.botarium.api.fluid.FluidHolder;
-import earth.terrarium.botarium.api.fluid.FluidHooks;
-import earth.terrarium.botarium.api.item.ItemStackHolder;
+import earth.terrarium.botarium.common.fluid.base.FluidHolder;
+import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
+import earth.terrarium.botarium.common.item.ItemStackHolder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.DyeableArmorItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.apache.commons.lang3.Range;
 import org.jetbrains.annotations.NotNull;
@@ -26,8 +29,8 @@ import java.util.stream.StreamSupport;
 
 public class SpaceSuit extends DyeableArmorItem implements FluidContainingItem, ModArmourItem {
 
-    public SpaceSuit(ArmorMaterial material, EquipmentSlot slot, Item.Properties properties) {
-        super(material, slot, properties);
+    public SpaceSuit(ArmorMaterial armorMaterial, EquipmentSlot equipmentSlot, Properties properties) {
+        super(armorMaterial, equipmentSlot, properties);
     }
 
     public static boolean hasFullSet(LivingEntity entity) {

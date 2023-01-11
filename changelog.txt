@@ -1,5 +1,3 @@
-- Fixed sliding doors crashing on fabric and being partly invisible on forge
-- Fixed the compressor voiding items
-- Added lang translations for fluid and fixed the empty tank translation being incorrect
-- Fixed glacian logs in a few incorrect tags
-- Fixed EMI recipe defaults in the wrong location so they weren't being loaded
+Updated to 1.19.3 :)
+
+Disclaimer: Ad Astra will be releasing a large 1.19.3 update in the future that will break with the this current 1.19.3 version. Use at your own risk!

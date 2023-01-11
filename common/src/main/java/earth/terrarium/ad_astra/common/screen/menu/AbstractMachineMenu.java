@@ -1,8 +1,8 @@
 package earth.terrarium.ad_astra.common.screen.menu;
 
 import earth.terrarium.ad_astra.common.block.machine.entity.AbstractMachineBlockEntity;
-import earth.terrarium.botarium.api.fluid.FluidHolder;
-import earth.terrarium.botarium.api.fluid.FluidHooks;
+import earth.terrarium.botarium.common.fluid.base.FluidHolder;
+import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;

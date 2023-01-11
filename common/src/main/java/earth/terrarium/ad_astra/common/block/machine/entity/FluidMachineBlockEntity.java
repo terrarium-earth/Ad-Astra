@@ -1,21 +1,21 @@
 package earth.terrarium.ad_astra.common.block.machine.entity;
 
 import earth.terrarium.ad_astra.common.container.DoubleFluidTank;
-import earth.terrarium.botarium.api.energy.EnergyBlock;
-import earth.terrarium.botarium.api.energy.InsertOnlyEnergyContainer;
-import earth.terrarium.botarium.api.fluid.FluidHolder;
-import earth.terrarium.botarium.api.fluid.FluidHoldingBlock;
+import earth.terrarium.botarium.common.energy.base.EnergyAttachment;
+import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
+import earth.terrarium.botarium.common.fluid.base.FluidAttachment;
+import earth.terrarium.botarium.common.fluid.base.FluidHolder;
+import earth.terrarium.botarium.common.fluid.impl.WrappedBlockFluidContainer;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.function.Predicate;
 
-public abstract class FluidMachineBlockEntity extends AbstractMachineBlockEntity implements FluidHoldingBlock, EnergyBlock {
-    protected InsertOnlyEnergyContainer energyContainer;
-
-    private DoubleFluidTank tanks;
+public abstract class FluidMachineBlockEntity extends AbstractMachineBlockEntity implements FluidAttachment.Block, EnergyAttachment.Block {
+    protected WrappedBlockEnergyContainer energyContainer;
+    private WrappedBlockFluidContainer tanks;
 
     public FluidMachineBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
         super(blockEntityType, blockPos, blockState);
@@ -27,32 +27,30 @@ public abstract class FluidMachineBlockEntity extends AbstractMachineBlockEntity
 
 
     public FluidHolder getInputTank() {
-        return getFluidContainer().getFluids().get(0);
+        return getFluidContainer(this).getFluids().get(0);
     }
 
     public FluidHolder getOutputTank() {
-        return getFluidContainer().getFluids().get(1);
+        return getFluidContainer(this).getFluids().get(1);
     }
 
     public abstract Predicate<FluidHolder> getInputFilter();
 
     @Override
-    public DoubleFluidTank getFluidContainer() {
-        return tanks == null ? tanks = new DoubleFluidTank(this, getInputTankCapacity(), getOutputTankCapacity(), getInputFilter(), f -> true) : this.tanks;
+    public WrappedBlockFluidContainer getFluidContainer(BlockEntity holder) {
+        return tanks == null ? tanks = new WrappedBlockFluidContainer(this, new DoubleFluidTank(getInputTankCapacity(), getOutputTankCapacity(), getInputFilter(), f -> true)) : this.tanks;
+    }
+
+    public DoubleFluidTank getDoubleFluidTank() {
+        return (DoubleFluidTank) getFluidContainer(this).container();
     }
 
     public abstract long getEnergyPerTick();
 
     public long getMaxCapacity() {
-        return this.getEnergyStorage().getMaxCapacity();
+        return this.getEnergyStorage(this).getMaxCapacity();
     }
 
     @Override
-    public abstract InsertOnlyEnergyContainer getEnergyStorage();
-
-    @Override
-    public void update() {
-        this.setChanged();
-        this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
-    }
+    public abstract WrappedBlockEnergyContainer getEnergyStorage(BlockEntity holder);
 }

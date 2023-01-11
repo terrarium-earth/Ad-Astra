@@ -5,16 +5,18 @@ import earth.terrarium.ad_astra.common.recipe.FuelConversionRecipe;
 import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.ad_astra.common.screen.menu.ConversionMenu;
 import earth.terrarium.ad_astra.common.util.FluidUtils;
-import earth.terrarium.botarium.api.energy.EnergyBlock;
-import earth.terrarium.botarium.api.energy.InsertOnlyEnergyContainer;
-import earth.terrarium.botarium.api.fluid.FluidHolder;
-import earth.terrarium.botarium.api.fluid.FluidHooks;
+import earth.terrarium.botarium.common.energy.base.EnergyAttachment;
+import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
+import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
+import earth.terrarium.botarium.common.fluid.base.FluidHolder;
+import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -22,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class FuelRefineryBlockEntity extends FluidMachineBlockEntity implements EnergyBlock {
+public class FuelRefineryBlockEntity extends FluidMachineBlockEntity implements EnergyAttachment.Block {
 
     public FuelRefineryBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntityTypes.FUEL_REFINERY.get(), blockPos, blockState);
@@ -73,18 +75,18 @@ public class FuelRefineryBlockEntity extends FluidMachineBlockEntity implements 
             ItemStack outputExtractSlot = this.getItems().get(3);
 
             if (!insertSlot.isEmpty() && extractSlot.getCount() < extractSlot.getMaxStackSize() && FluidHooks.isFluidContainingItem(insertSlot)) {
-                FluidUtils.insertItemFluidToTank(this.getFluidContainer().getInput(), this, 0, 1, 0, f -> FuelConversionRecipe.getRecipes(this.level).stream().anyMatch(r -> r.matches(f)));
-                FluidUtils.extractTankFluidToItem(this.getFluidContainer().getInput(), this, 0, 1, 0, f -> true);
+                FluidUtils.insertItemFluidToTank(getDoubleFluidTank().getInput(), this, 0, 1, 0, f -> FuelConversionRecipe.getRecipes(this.level).stream().anyMatch(r -> r.matches(f)));
+                FluidUtils.extractTankFluidToItem(getDoubleFluidTank().getInput(), this, 0, 1, 0, f -> true);
             }
 
             if (!outputInsertSlot.isEmpty() && outputExtractSlot.getCount() < outputExtractSlot.getMaxStackSize()) {
-                FluidUtils.extractTankFluidToItem(this.getFluidContainer().getOutput(), this, 2, 3, 0, f -> true);
+                FluidUtils.extractTankFluidToItem(getDoubleFluidTank().getOutput(), this, 2, 3, 0, f -> true);
             }
 
-            if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0) {
+            if (this.getEnergyStorage(this).internalExtract(this.getEnergyPerTick(), true) > 0) {
                 List<FuelConversionRecipe> recipes = FuelConversionRecipe.getRecipes(this.level);
-                if (FluidUtils.convertFluid(this.getFluidContainer(), recipes, FluidHooks.buckets(1) / 50)) {
-                    this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
+                if (FluidUtils.convertFluid(getDoubleFluidTank(), recipes, FluidHooks.buckets(1f) / 50)) {
+                    this.getEnergyStorage(this).internalExtract(this.getEnergyPerTick(), false);
                     this.setActive(true);
                 } else {
                     this.setActive(false);
@@ -101,7 +103,7 @@ public class FuelRefineryBlockEntity extends FluidMachineBlockEntity implements 
     }
 
     @Override
-    public InsertOnlyEnergyContainer getEnergyStorage() {
-        return this.energyContainer == null ? this.energyContainer = new InsertOnlyEnergyContainer(this, (int) FuelRefineryConfig.maxEnergy) : this.energyContainer;
+    public WrappedBlockEnergyContainer getEnergyStorage(BlockEntity holder) {
+        return energyContainer == null ? energyContainer = new WrappedBlockEnergyContainer(this, new InsertOnlyEnergyContainer(FuelRefineryConfig.maxEnergy)) : this.energyContainer;
     }
 }

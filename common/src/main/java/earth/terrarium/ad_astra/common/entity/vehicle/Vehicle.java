@@ -1,23 +1,24 @@
 package earth.terrarium.ad_astra.common.entity.vehicle;
 
+import earth.terrarium.ad_astra.common.config.VehiclesConfig;
 import earth.terrarium.ad_astra.common.item.vehicle.VehicleItem;
 import earth.terrarium.ad_astra.common.registry.ModTags;
+import earth.terrarium.ad_astra.common.screen.VehicleScreenMenuProvider;
 import earth.terrarium.ad_astra.common.util.CustomInventory;
 import earth.terrarium.ad_astra.common.util.FluidUtils;
 import earth.terrarium.ad_astra.common.util.OxygenUtils;
-import earth.terrarium.ad_astra.common.config.VehiclesConfig;
-import earth.terrarium.ad_astra.common.screen.VehicleScreenMenuProvider;
-import earth.terrarium.botarium.api.Updatable;
-import earth.terrarium.botarium.api.fluid.FluidHolder;
-import earth.terrarium.botarium.api.fluid.FluidHooks;
-import earth.terrarium.botarium.api.fluid.SimpleUpdatingFluidContainer;
-import earth.terrarium.botarium.api.item.ItemStackHolder;
-import earth.terrarium.botarium.api.menu.ExtraDataMenuProvider;
-import earth.terrarium.botarium.api.menu.MenuHooks;
+import earth.terrarium.botarium.common.fluid.base.FluidHolder;
+import earth.terrarium.botarium.common.fluid.impl.SimpleFluidContainer;
+import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
+import earth.terrarium.botarium.common.item.ItemStackHolder;
+import earth.terrarium.botarium.common.menu.ExtraDataMenuProvider;
+import earth.terrarium.botarium.common.menu.MenuHooks;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -35,17 +36,17 @@ import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class Vehicle extends Entity implements Updatable {
+@MethodsReturnNonnullByDefault
+public abstract class Vehicle extends Entity {
 
     protected static final EntityDataAccessor<Float> SPEED = SynchedEntityData.defineId(Vehicle.class, EntityDataSerializers.FLOAT);
-    private final SimpleUpdatingFluidContainer tank = new SimpleUpdatingFluidContainer(this, getTankSize(), 1, (amount, fluid) -> true);
+    private final SimpleFluidContainer tank = new SimpleFluidContainer(getTankSize(), 1, (amount, fluid) -> true);
     private final CustomInventory inventory = new CustomInventory(this.getInventorySize());
     public double clientYaw;
     public double clientPitch;
@@ -234,7 +235,8 @@ public abstract class Vehicle extends Entity implements Updatable {
     }
 
     public void drop() {
-        if (getDropStack() != null && this.level.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS)) {
+        getDropStack();
+        if (this.level.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS)) {
             BlockPos pos = this.blockPosition();
             ItemStackHolder dropStack = new ItemStackHolder(this.getDropStack());
 
@@ -256,7 +258,7 @@ public abstract class Vehicle extends Entity implements Updatable {
 
     public void explode(float powerMultiplier) {
         if (!this.level.isClientSide) {
-            level.explode(this, this.getX(), this.getY() + 0.5, this.getZ(), 7.0f * powerMultiplier, OxygenUtils.levelHasOxygen(this.level), Explosion.BlockInteraction.DESTROY);
+            level.explode(this, this.getX(), this.getY() + 0.5, this.getZ(), 7.0f * powerMultiplier, OxygenUtils.levelHasOxygen(this.level), Level.ExplosionInteraction.TNT);
         }
         this.discard();
     }
@@ -273,7 +275,7 @@ public abstract class Vehicle extends Entity implements Updatable {
     }
 
     public ItemStack getDropStack() {
-        return null;
+        return ItemStack.EMPTY;
     }
 
     @Override
@@ -346,7 +348,7 @@ public abstract class Vehicle extends Entity implements Updatable {
     public abstract int getInventorySize();
 
     @Override
-    public Packet<?> getAddEntityPacket() {
+    public Packet<ClientGamePacketListener> getAddEntityPacket() {
         return new ClientboundAddEntityPacket(this);
     }
 
@@ -360,7 +362,7 @@ public abstract class Vehicle extends Entity implements Updatable {
         }
     }
 
-    public SimpleUpdatingFluidContainer getTank() {
+    public SimpleFluidContainer getTank() {
         return this.tank;
     }
 
@@ -380,9 +382,5 @@ public abstract class Vehicle extends Entity implements Updatable {
         if (this.level.getGameTime() % 20 == 0) {
             getTank().extractFluid(FluidHooks.newFluidHolder(getTankFluid(), this.getFuelPerTick(), null), false);
         }
-    }
-
-    @Override
-    public void update() {
     }
 }

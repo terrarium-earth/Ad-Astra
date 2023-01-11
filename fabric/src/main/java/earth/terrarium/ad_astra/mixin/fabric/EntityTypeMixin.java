@@ -6,6 +6,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.level.block.Block;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -38,12 +39,14 @@ public abstract class EntityTypeMixin {
     private int updateInterval;
     @Shadow
     private EntityDimensions dimensions;
+    @Shadow
+    private FeatureFlagSet requiredFeatures;
 
     // Removes the datafixer warning
     @Inject(method = "build", at = @At("HEAD"), cancellable = true)
     public void build(String key, CallbackInfoReturnable<EntityType<? extends Entity>> cir) {
         if (AdAstra.MOD_ID.equals(key)) {
-            cir.setReturnValue(new EntityType<>(this.factory, this.category, this.serialize, this.summon, this.fireImmune, this.canSpawnFarFromPlayer, this.immuneTo, this.dimensions, this.clientTrackingRange, this.updateInterval));
+            cir.setReturnValue(new EntityType<>(this.factory, this.category, this.serialize, this.summon, this.fireImmune, this.canSpawnFarFromPlayer, this.immuneTo, this.dimensions, this.clientTrackingRange, this.updateInterval, this.requiredFeatures));
         }
     }
 }

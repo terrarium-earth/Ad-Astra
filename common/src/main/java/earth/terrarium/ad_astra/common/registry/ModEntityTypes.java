@@ -9,7 +9,7 @@ import earth.terrarium.ad_astra.common.entity.mob.*;
 import earth.terrarium.ad_astra.common.entity.projectile.IceSpit;
 import earth.terrarium.ad_astra.common.entity.vehicle.*;
 import earth.terrarium.ad_astra.common.util.PlatformUtils;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobCategory;
@@ -21,7 +21,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
 public class ModEntityTypes {
-    public static final ResourcefulRegistry<EntityType<?>> ENTITY_TYPES = ResourcefulRegistries.create(Registry.ENTITY_TYPE, AdAstra.MOD_ID);
+    public static final ResourcefulRegistry<EntityType<?>> ENTITY_TYPES = ResourcefulRegistries.create(BuiltInRegistries.ENTITY_TYPE, AdAstra.MOD_ID);
 
     // Mobs
     public static final RegistryEntry<EntityType<Lunarian>> LUNARIAN = ENTITY_TYPES.register("lunarian", () -> EntityType.Builder.of(Lunarian::new, MobCategory.CREATURE).sized(0.75f, 2.5f).build(AdAstra.MOD_ID));

@@ -1,12 +1,12 @@
 package earth.terrarium.ad_astra.common.screen;
 
 import com.teamresourceful.resourcefullib.common.codecs.yabn.YabnOps;
-import com.teamresourceful.resourcefullib.common.yabn.base.YabnElement;
+import com.teamresourceful.yabn.elements.YabnElement;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.data.Planet;
 import earth.terrarium.ad_astra.common.data.PlanetData;
 import earth.terrarium.ad_astra.common.screen.menu.PlanetSelectionMenu;
-import earth.terrarium.botarium.api.menu.ExtraDataMenuProvider;
+import earth.terrarium.botarium.common.menu.ExtraDataMenuProvider;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -31,7 +31,7 @@ public record PlanetSelectionMenuProvider(int tier) implements ExtraDataMenuProv
     }
 
     @Override
-    public Component getDisplayName() {
+    public @NotNull Component getDisplayName() {
         return Component.translatable("gui.ad_astra.planet_selection.name");
     }
 }

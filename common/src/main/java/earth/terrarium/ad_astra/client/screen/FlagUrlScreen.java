@@ -10,6 +10,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 
+import java.util.function.Supplier;
 import java.util.regex.Pattern;
 
 public class FlagUrlScreen extends Screen {
@@ -39,7 +40,8 @@ public class FlagUrlScreen extends Screen {
                 NetworkHandling.CHANNEL.sendToServer(new FlagUrlPacket(this.pos, matcher.group(1)));
                 this.onClose();
             }
-        }));
+        }, Supplier::get) {
+        });
         this.button.active = false;
         this.urlField = addRenderableWidget(new EditBox(font, x, y, 200, 20, Component.literal("https://imgur.com/urURL")));
         this.urlField.setResponder(url -> {

@@ -17,7 +17,7 @@ import earth.terrarium.ad_astra.common.networking.packet.client.CreateSpaceStati
 import earth.terrarium.ad_astra.common.networking.packet.client.TeleportToPlanetPacket;
 import earth.terrarium.ad_astra.common.recipe.SpaceStationRecipe;
 import earth.terrarium.ad_astra.common.screen.menu.PlanetSelectionMenu;
-import earth.terrarium.ad_astra.common.util.MathUtil;
+import earth.terrarium.ad_astra.common.util.MathUtils;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -37,6 +37,7 @@ import net.minecraft.world.level.Level;
 
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 @Environment(EnvType.CLIENT)
 @MethodsReturnNonnullByDefault
@@ -192,10 +193,10 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
         // Display either the small or large menu when a planet category is opened.
         if (currentPage == 3) {
             ScreenUtils.addTexture(poseStack, 0, (this.height / 2) - 177 / 2, 215, 177, LARGE_MENU_TEXTURE);
-            this.scrollBar.x = 210;
+            this.scrollBar.setX(210);
         } else {
             ScreenUtils.addTexture(poseStack, 0, (this.height / 2) - 177 / 2, 105, 177, SMALL_MENU_LIST);
-            this.scrollBar.x = SCROLL_BAR_X;
+            this.scrollBar.setX(SCROLL_BAR_X);
         }
 
         this.categoryButtons.forEach((category, buttons) -> buttons.forEach(button -> button.visible = this.currentCategory.equals(category)));
@@ -264,7 +265,7 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
 
         // Scroll bar
         this.scrollBar = new Button(SCROLL_BAR_X, minScrollY, 4, 8, Component.nullToEmpty(""), pressed -> {
-        }) {
+        }, Supplier::get) {
             @Override
             public void render(PoseStack poseStack, int mouseX, int mouseY, float delta) {
                 if (this.visible) {
@@ -274,7 +275,7 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
                     RenderSystem.enableBlend();
                     RenderSystem.defaultBlendFunc();
                     RenderSystem.enableDepthTest();
-                    GuiComponent.blit(poseStack, this.x, this.y, 0, 0, this.width, this.height, this.width, this.height);
+                    GuiComponent.blit(poseStack, this.getX(), this.getY(), 0, 0, this.width, this.height, this.width, this.height);
                 }
             }
         };
@@ -288,7 +289,7 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
 
     public void onNavigationButtonClick(Category target) {
         this.resetButtonScroll();
-        this.scrollBar.y = minScrollY;
+        this.scrollBar.setY(minScrollY);
         this.currentCategory = target;
     }
 
@@ -394,7 +395,7 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
 
                 // Don't scroll if there are not enough buttons.
                 if (overflowButtons > 0) {
-                    final int referencePoint = backButton.y;
+                    final int referencePoint = backButton.getY();
                     int minThreshold = this.height / 2 - 35;
                     int maxThreshold = (this.height / 2 - 38) - (overflowButtons * (isLargePage ? 7 : 21));
                     int sensitivity = (int) (SCROLL_SENSITIVITY * amount);
@@ -412,22 +413,22 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
 
                     // Move all buttons based on the scroll.
                     for (CustomButton button2 : buttons) {
-                        button2.y += sensitivity;
+                        button2.setY(button2.getY() + sensitivity);
 
                         if (referencePoint >= minThreshold) {
-                            button2.y -= referencePoint - minThreshold;
+                            button2.setY(button2.getY() - referencePoint - minThreshold);
                         } else if (referencePoint <= maxThreshold) {
-                            button2.y -= referencePoint - maxThreshold;
+                            button2.setY(button2.getY() - referencePoint - maxThreshold);
                         }
                     }
 
                     float min = maxThreshold / (float) minThreshold;
-                    float ratio = backButton.y / (float) minThreshold;
-                    ratio = MathUtil.invLerp(ratio, 1, min);
+                    float ratio = backButton.getY() / (float) minThreshold;
+                    ratio = MathUtils.invLerp(ratio, 1, min);
 
                     // Flip min and max for inverse operation.
-                    this.scrollBar.y = (int) Mth.lerp(ratio, maxScrollY, minScrollY);
-                    this.scrollBar.y = Mth.clamp(this.scrollBar.y, minScrollY, maxScrollY);
+                    this.scrollBar.setY((int) Mth.lerp(ratio, maxScrollY, minScrollY));
+                    this.scrollBar.setY(Mth.clamp(this.scrollBar.getY(), minScrollY, maxScrollY));
                 }
 
                 break;
@@ -439,7 +440,7 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
 
     public void resetButtonScroll() {
         categoryButtons.values().forEach(list -> list.forEach(button -> {
-            button.y = button.getStartY();
+            button.setY(button.getStartY());
         }));
     }
 

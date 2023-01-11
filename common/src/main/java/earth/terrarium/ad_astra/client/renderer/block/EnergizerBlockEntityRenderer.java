@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.client.renderer.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import earth.terrarium.ad_astra.common.block.machine.AbstractMachineBlock;
 import earth.terrarium.ad_astra.common.block.machine.entity.EnergizerBlockEntity;
 import net.fabricmc.api.EnvType;
@@ -40,7 +40,7 @@ public class EnergizerBlockEntityRenderer implements BlockEntityRenderer<Energiz
         poseStack.translate(0.5, 1.6 + offset, 0.5);
 
         // Rotate the item
-        poseStack.mulPose(Vector3f.YP.rotationDegrees((blockEntity.getLevel().getGameTime() + tickDelta) * 4));
+        poseStack.mulPose(Axis.YP.rotationDegrees((blockEntity.getLevel().getGameTime() + tickDelta) * 4));
 
         int lightAbove = LevelRenderer.getLightColor(blockEntity.getLevel(), blockEntity.getBlockPos().above());
         Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemTransforms.TransformType.GROUND, lightAbove, packedOverlay, poseStack, buffer, 0);

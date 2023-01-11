@@ -1,23 +1,25 @@
 package earth.terrarium.ad_astra.common.container;
 
-import earth.terrarium.botarium.api.Updatable;
-import earth.terrarium.botarium.api.fluid.*;
+import earth.terrarium.botarium.common.fluid.base.FluidContainer;
+import earth.terrarium.botarium.common.fluid.base.FluidHolder;
+import earth.terrarium.botarium.common.fluid.base.FluidSnapshot;
+import earth.terrarium.botarium.common.fluid.impl.SimpleFluidContainer;
+import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.block.entity.BlockEntity;
 
 import java.util.List;
 import java.util.function.Predicate;
 
-public class DoubleFluidTank implements UpdatingFluidContainer<BlockEntity> {
-    private final SimpleUpdatingFluidContainer input;
-    private final SimpleUpdatingFluidContainer output;
+public class DoubleFluidTank implements FluidContainer {
+    private final SimpleFluidContainer input;
+    private final SimpleFluidContainer output;
 
-    public DoubleFluidTank(Updatable updatable, long inputCapacity, long outputCapacity, Predicate<FluidHolder> inputFilter, Predicate<FluidHolder> outputFilter) {
-        this.input = new SimpleUpdatingFluidContainer(updatable, i -> inputCapacity, 1, (i, f) -> inputFilter.test(f));
-        this.output = new SimpleUpdatingFluidContainer(updatable, i -> outputCapacity, 1, (i, f) -> outputFilter.test(f));
+    public DoubleFluidTank(long inputCapacity, long outputCapacity, Predicate<FluidHolder> inputFilter, Predicate<FluidHolder> outputFilter) {
+        this.input = new SimpleFluidContainer(i -> inputCapacity, 1, (i, f) -> inputFilter.test(f));
+        this.output = new SimpleFluidContainer(i -> outputCapacity, 1, (i, f) -> outputFilter.test(f));
     }
 
-    protected DoubleFluidTank(SimpleUpdatingFluidContainer input, SimpleUpdatingFluidContainer output) {
+    public DoubleFluidTank(SimpleFluidContainer input, SimpleFluidContainer output) {
         this.input = input;
         this.output = output;
     }
@@ -113,7 +115,9 @@ public class DoubleFluidTank implements UpdatingFluidContainer<BlockEntity> {
     }
 
     @Override
-    public void update(BlockEntity updatable) {
+    public void clearContent() {
+        input.clearContent();
+        output.clearContent();
     }
 
     private record DoubleTankSnapshot(FluidSnapshot input, FluidSnapshot output) implements FluidSnapshot {

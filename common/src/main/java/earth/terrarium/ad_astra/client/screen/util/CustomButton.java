@@ -43,7 +43,7 @@ public class CustomButton extends Button {
 
     public CustomButton(int x, int y, Component label, ButtonType size, ButtonColor buttonColor, PlanetSelectionScreen.TooltipType tooltip, Planet planetInfo, OnPress onPress) {
 
-        super(x, y, size.getWidth(), size.getHeight(), adjustText(label), onPress);
+        super(x, y, size.getWidth(), size.getHeight(), adjustText(label), onPress, Button.DEFAULT_NARRATION);
 
         this.startY = y;
         this.label = label;
@@ -70,7 +70,7 @@ public class CustomButton extends Button {
     @Override
     public void onClick(double mouseX, double mouseY) {
         super.onClick(mouseX, mouseY);
-        this.y = startY;
+        this.setY(startY);
     }
 
     @Override
@@ -102,7 +102,7 @@ public class CustomButton extends Button {
                 case STEEL -> STEEL_BUTTON_TEXTURE;
             });
 
-            blit(poseStack, (this.buttonSize.equals(ButtonType.LARGE) ? this.x - 2 : this.x), this.y, 0, 0, this.width, this.height, buttonSize.getWidth(), buttonSize.getHeight());
+            blit(poseStack, (this.buttonSize.equals(ButtonType.LARGE) ? this.getX() - 2 : this.getX()), this.getY(), 0, 0, this.width, this.height, buttonSize.getWidth(), buttonSize.getHeight());
             drawText(poseStack, minecraft);
 
             if (this.doScissor) {
@@ -124,9 +124,9 @@ public class CustomButton extends Button {
         poseStack.pushPose();
         float scale = 0.9f;
         poseStack.scale(scale, scale, scale);
-        int x = (this.buttonSize.equals(ButtonType.LARGE) ? this.x - 2 : this.x);
-        poseStack.translate(4 + (x / 9.5f), this.y / 8.5f, 0);
-        drawCenteredString(poseStack, textRenderer, this.getMessage(), x + this.width / 2, this.y + (this.height - 8) / 2, colour | Mth.ceil(this.alpha * 255.0f) << 24);
+        int x = (this.buttonSize.equals(ButtonType.LARGE) ? this.getX() - 2 : this.getX());
+        poseStack.translate(4 + (x / 9.5f), this.getY() / 8.5f, 0);
+        drawCenteredString(poseStack, textRenderer, this.getMessage(), x + this.width / 2, this.getY() + (this.height - 8) / 2, colour | Mth.ceil(this.alpha * 255.0f) << 24);
         poseStack.popPose();
     }
 

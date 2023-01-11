@@ -1,9 +1,9 @@
 package earth.terrarium.ad_astra.client.dimension.renderer;
 
-import com.mojang.math.Vector3f;
 import com.teamresourceful.resourcefullib.common.caches.CacheableBiFunction;
 import com.teamresourceful.resourcefullib.common.color.Color;
 import net.minecraft.util.Mth;
+import org.joml.Vector3f;
 
 import java.util.Random;
 

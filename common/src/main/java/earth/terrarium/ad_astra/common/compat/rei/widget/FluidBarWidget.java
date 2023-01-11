@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.client.screen.GuiUtil;
 import earth.terrarium.ad_astra.client.screen.util.ScreenUtils;
 import earth.terrarium.ad_astra.common.compat.rei.util.REIUtils;
-import earth.terrarium.botarium.api.fluid.FluidHolder;
+import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import net.minecraft.util.Mth;

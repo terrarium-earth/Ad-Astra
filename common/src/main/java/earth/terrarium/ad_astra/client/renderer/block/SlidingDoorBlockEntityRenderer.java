@@ -1,11 +1,11 @@
 package earth.terrarium.ad_astra.client.renderer.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.client.AdAstraClient;
 import earth.terrarium.ad_astra.common.block.door.SlidingDoorBlock;
 import earth.terrarium.ad_astra.common.block.door.SlidingDoorBlockEntity;
-import earth.terrarium.ad_astra.client.AdAstraClient;
 import earth.terrarium.ad_astra.common.registry.ModBlocks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -98,7 +98,7 @@ public class SlidingDoorBlockEntityRenderer implements BlockEntityRenderer<Slidi
             poseStack.translate(0.0f, 0.0f, slide);
             poseStack.translate(0.0f, 0.0f, offset);
         }
-        poseStack.mulPose(Vector3f.YP.rotationDegrees(degrees.getOpposite().toYRot()));
+        poseStack.mulPose(Axis.YP.rotationDegrees(degrees.getOpposite().toYRot()));
         boolean shouldNotFlip = degrees.equals(Direction.WEST) || degrees.equals(Direction.EAST);
         AdAstraClient.renderBlock((shouldNotFlip ? doorModel : doorModelFlipped), poseStack, buffer, packedLight, packedOverlay);
         poseStack.popPose();
@@ -121,7 +121,7 @@ public class SlidingDoorBlockEntityRenderer implements BlockEntityRenderer<Slidi
             poseStack.translate(0.0f, 0.0f, -slide);
             poseStack.translate(0.0f, 0.0f, offset);
         }
-        poseStack.mulPose(Vector3f.YP.rotationDegrees(degrees.getOpposite().toYRot()));
+        poseStack.mulPose(Axis.YP.rotationDegrees(degrees.getOpposite().toYRot()));
         AdAstraClient.renderBlock(shouldNotFlip ? doorModelFlipped : doorModel, poseStack, buffer, packedLight, packedOverlay);
         poseStack.popPose();
     }

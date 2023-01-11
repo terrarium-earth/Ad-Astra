@@ -4,14 +4,14 @@ import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.botarium.api.registry.fluid.BotariumFlowingFluid;
-import earth.terrarium.botarium.api.registry.fluid.BotariumSourceFluid;
-import net.minecraft.core.Registry;
+import earth.terrarium.botarium.common.registry.fluid.BotariumFlowingFluid;
+import earth.terrarium.botarium.common.registry.fluid.BotariumSourceFluid;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 
 public class ModFluids {
-    public static final ResourcefulRegistry<Fluid> FLUIDS = ResourcefulRegistries.create(Registry.FLUID, AdAstra.MOD_ID);
+    public static final ResourcefulRegistry<Fluid> FLUIDS = ResourcefulRegistries.create(BuiltInRegistries.FLUID, AdAstra.MOD_ID);
 
     public static final RegistryEntry<FlowingFluid> OIL = FLUIDS.register("oil", () -> new BotariumSourceFluid(ModFluidProperties.OIL_FLUID));
     public static final RegistryEntry<FlowingFluid> FLOWING_OIL = FLUIDS.register("flowing_oil", () -> new BotariumFlowingFluid(ModFluidProperties.OIL_FLUID));

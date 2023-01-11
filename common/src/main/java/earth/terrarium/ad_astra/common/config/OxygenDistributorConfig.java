@@ -5,7 +5,7 @@ import com.teamresourceful.resourcefulconfig.common.annotations.Comment;
 import com.teamresourceful.resourcefulconfig.common.annotations.ConfigEntry;
 import com.teamresourceful.resourcefulconfig.common.annotations.IntRange;
 import com.teamresourceful.resourcefulconfig.common.config.EntryType;
-import earth.terrarium.botarium.api.fluid.FluidHooks;
+import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 
 @Category(id = "oxygenDistributor", translation = "text.resourcefulconfig.ad_astra.option.oxygenDistributor")
 public final class OxygenDistributorConfig {

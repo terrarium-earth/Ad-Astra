@@ -4,7 +4,7 @@ import com.teamresourceful.resourcefulconfig.common.annotations.Category;
 import com.teamresourceful.resourcefulconfig.common.annotations.Comment;
 import com.teamresourceful.resourcefulconfig.common.annotations.ConfigEntry;
 import com.teamresourceful.resourcefulconfig.common.config.EntryType;
-import earth.terrarium.botarium.api.fluid.FluidHooks;
+import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 
 @Category(id = "vehicles", translation = "text.resourcefulconfig.ad_astra.option.vehicles")
 public final class VehiclesConfig {
@@ -83,21 +83,21 @@ public final class VehiclesConfig {
                 type = EntryType.LONG,
                 translation = "text.resourcefulconfig.ad_astra.option.rocket.tankSize"
         )
-        public static long tankSize = FluidHooks.buckets(3);
+        public static long tankSize = FluidHooks.buckets(3f);
 
         @ConfigEntry(
                 id = "fuelLaunchCost",
                 type = EntryType.LONG,
                 translation = "text.resourcefulconfig.ad_astra.option.rocket.fuelLaunchCost"
         )
-        public static long fuelLaunchCost = FluidHooks.buckets(3);
+        public static long fuelLaunchCost = FluidHooks.buckets(3f);
 
         @ConfigEntry(
                 id = "efficientFuelLaunchCost",
                 type = EntryType.LONG,
                 translation = "text.resourcefulconfig.ad_astra.option.rocket.efficientFuelLaunchCost"
         )
-        public static long efficientFuelLaunchCost = FluidHooks.buckets(1);
+        public static long efficientFuelLaunchCost = FluidHooks.buckets(1f);
     }
 
     @Category(id = "rover", translation = "text.resourcefulconfig.ad_astra.option.rover")
@@ -115,7 +115,7 @@ public final class VehiclesConfig {
                 type = EntryType.LONG,
                 translation = "text.resourcefulconfig.ad_astra.option.rover.fuelPerSecond"
         )
-        public static long fuelPerSecond = FluidHooks.buckets(1) / 100;
+        public static long fuelPerSecond = FluidHooks.buckets(1f) / 100;
 
         @ConfigEntry(
                 id = "turnSpeed",

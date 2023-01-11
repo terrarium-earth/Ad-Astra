@@ -1,6 +1,5 @@
 package earth.terrarium.ad_astra.client.resourcepack;
 
-import com.mojang.math.Vector3f;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamresourceful.resourcefullib.common.color.Color;
@@ -8,10 +7,12 @@ import earth.terrarium.ad_astra.client.dimension.renderer.StarInformation;
 import earth.terrarium.ad_astra.common.util.ModUtils;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.level.Level;
+import org.joml.Vector3f;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public record PlanetSkyRenderer(ResourceKey<Level> dimension, PlanetSkyRenderer.
                                 List<PlanetSkyRenderer.SkyObject> skyObjects) {
 
     public static final Codec<PlanetSkyRenderer> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            ResourceKey.codec(Registry.DIMENSION_REGISTRY).fieldOf("world").forGetter(PlanetSkyRenderer::dimension),
+            ResourceKey.codec(Registries.DIMENSION).fieldOf("world").forGetter(PlanetSkyRenderer::dimension),
             StarsRenderer.CODEC.fieldOf("stars").forGetter(PlanetSkyRenderer::starsRenderer),
             SunsetColour.CODEC.fieldOf("sunset_color").forGetter(PlanetSkyRenderer::sunsetColour),
             DimensionEffects.CODEC.fieldOf("dimension_effects").forGetter(PlanetSkyRenderer::effects),
@@ -94,7 +95,7 @@ public record PlanetSkyRenderer(ResourceKey<Level> dimension, PlanetSkyRenderer.
                 RenderType.CODEC.fieldOf("render_type").forGetter(SkyObject::renderType),
                 Codec.FLOAT.fieldOf("scale").forGetter(SkyObject::scale),
                 Color.CODEC.fieldOf("color").orElse(StarInformation.BASE_COLOUR).forGetter(SkyObject::colour),
-                Vector3f.CODEC.fieldOf("rotation").forGetter(SkyObject::rotation)
+                ExtraCodecs.VECTOR3F.fieldOf("rotation").forGetter(SkyObject::rotation)
         ).apply(instance, SkyObject::new));
     }
 

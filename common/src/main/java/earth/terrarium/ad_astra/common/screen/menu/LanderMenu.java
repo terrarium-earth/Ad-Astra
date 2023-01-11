@@ -3,7 +3,7 @@ package earth.terrarium.ad_astra.common.screen.menu;
 import earth.terrarium.ad_astra.common.entity.vehicle.Vehicle;
 import earth.terrarium.ad_astra.common.registry.ModMenus;
 import earth.terrarium.ad_astra.common.screen.NoInventorySlot;
-import earth.terrarium.botarium.api.fluid.FluidHooks;
+import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.Slot;

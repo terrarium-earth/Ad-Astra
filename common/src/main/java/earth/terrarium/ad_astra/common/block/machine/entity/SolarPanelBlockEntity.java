@@ -4,21 +4,22 @@ import earth.terrarium.ad_astra.common.config.SolarPanelConfig;
 import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.ad_astra.common.screen.menu.SolarPanelMenu;
 import earth.terrarium.ad_astra.common.util.ModUtils;
-import earth.terrarium.botarium.api.energy.EnergyBlock;
-import earth.terrarium.botarium.api.energy.EnergyHooks;
-import earth.terrarium.botarium.api.energy.ExtractOnlyEnergyContainer;
+import earth.terrarium.botarium.common.energy.base.EnergyAttachment;
+import earth.terrarium.botarium.common.energy.impl.ExtractOnlyEnergyContainer;
+import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
+import earth.terrarium.botarium.common.energy.util.EnergyHooks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class SolarPanelBlockEntity extends AbstractMachineBlockEntity implements EnergyBlock {
-    private ExtractOnlyEnergyContainer energyContainer;
+public class SolarPanelBlockEntity extends AbstractMachineBlockEntity implements EnergyAttachment.Block {
+    private WrappedBlockEnergyContainer energyContainer;
 
     public SolarPanelBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntityTypes.SOLAR_PANEL.get(), blockPos, blockState);
@@ -43,7 +44,7 @@ public class SolarPanelBlockEntity extends AbstractMachineBlockEntity implements
         if (!this.level.isClientSide()) {
             // Check solar panel conditions.
             if (level.isDay() && (!this.level.dimension().equals(Level.OVERWORLD) || !this.level.isRaining() && !this.level.isThundering()) && level.canSeeSky(this.getBlockPos().above())) {
-                this.getEnergyStorage().internalInsert(this.getEnergyPerTick(), false);
+                this.getEnergyStorage(this).internalInsert(this.getEnergyPerTick(), false);
                 this.setActive(true);
             } else {
                 this.setActive(false);
@@ -58,17 +59,11 @@ public class SolarPanelBlockEntity extends AbstractMachineBlockEntity implements
     }
 
     public long getMaxCapacity() {
-        return this.getEnergyStorage().getMaxCapacity();
+        return this.getEnergyStorage(this).getMaxCapacity();
     }
 
     @Override
-    public ExtractOnlyEnergyContainer getEnergyStorage() {
-        return energyContainer == null ? energyContainer = new ExtractOnlyEnergyContainer(this, (int) SolarPanelConfig.maxEnergy) : this.energyContainer;
-    }
-
-    @Override
-    public void update() {
-        this.setChanged();
-        this.getLevel().sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), Block.UPDATE_ALL);
+    public WrappedBlockEnergyContainer getEnergyStorage(BlockEntity holder) {
+        return energyContainer == null ? energyContainer = new WrappedBlockEnergyContainer(this, new ExtractOnlyEnergyContainer(SolarPanelConfig.maxEnergy)) : this.energyContainer;
     }
 }

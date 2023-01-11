@@ -6,6 +6,7 @@ import com.teamresourceful.resourcefullib.common.codecs.recipes.IngredientCodec;
 import com.teamresourceful.resourcefullib.common.codecs.recipes.ItemStackCodec;
 import earth.terrarium.ad_astra.common.registry.ModRecipeSerializers;
 import earth.terrarium.ad_astra.common.registry.ModRecipeTypes;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -16,6 +17,7 @@ import net.minecraft.world.level.Level;
 import java.util.List;
 import java.util.function.Predicate;
 
+@MethodsReturnNonnullByDefault
 public class CompressingRecipe extends CookingRecipe {
 
     public CompressingRecipe(ResourceLocation id, Ingredient input, ItemStack output, int cookTime) {
@@ -31,7 +33,7 @@ public class CompressingRecipe extends CookingRecipe {
         ).apply(instance, CompressingRecipe::new));
     }
 
-    public static Codec<CompressingRecipe> networkCodec(ResourceLocation id) {
+    public static Codec<CompressingRecipe> networkingCodec(ResourceLocation id) {
         return RecordCodecBuilder.create(instance -> instance.group(
                 RecordCodecBuilder.point(id),
                 IngredientCodec.NETWORK_CODEC.fieldOf("input").forGetter(CompressingRecipe::getInputIngredient),

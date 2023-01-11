@@ -4,10 +4,10 @@ import com.teamresourceful.resourcefullib.common.networking.base.Packet;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketContext;
 import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
 import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.ad_astra.common.util.ModUtils;
 import earth.terrarium.ad_astra.common.config.AdAstraConfig;
 import earth.terrarium.ad_astra.common.entity.vehicle.Rocket;
-import net.minecraft.core.Registry;
+import earth.terrarium.ad_astra.common.util.ModUtils;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -22,7 +22,7 @@ public record TeleportToPlanetPacket(ResourceLocation id) implements Packet<Tele
     public static final Handler HANDLER = new Handler();
 
     private static ResourceKey<Level> getlevel(ResourceLocation id) {
-        ResourceKey<Level> targetDimension = ResourceKey.create(Registry.DIMENSION_REGISTRY, id);
+        ResourceKey<Level> targetDimension = ResourceKey.create(Registries.DIMENSION, id);
         // Change the "earth" registry key to the "overworld" registry key.
         if (targetDimension.location().equals(new ResourceLocation(AdAstra.MOD_ID, "earth"))) {
             targetDimension = Level.OVERWORLD;

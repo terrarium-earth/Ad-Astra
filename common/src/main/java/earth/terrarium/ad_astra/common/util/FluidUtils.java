@@ -2,11 +2,11 @@ package earth.terrarium.ad_astra.common.util;
 
 import earth.terrarium.ad_astra.common.container.DoubleFluidTank;
 import earth.terrarium.ad_astra.common.recipe.ConversionRecipe;
-import earth.terrarium.botarium.api.fluid.FluidContainer;
-import earth.terrarium.botarium.api.fluid.FluidHolder;
-import earth.terrarium.botarium.api.fluid.FluidHooks;
-import earth.terrarium.botarium.api.fluid.PlatformFluidItemHandler;
-import earth.terrarium.botarium.api.item.ItemStackHolder;
+import earth.terrarium.botarium.common.fluid.base.FluidContainer;
+import earth.terrarium.botarium.common.fluid.base.FluidHolder;
+import earth.terrarium.botarium.common.fluid.base.PlatformFluidItemHandler;
+import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
+import earth.terrarium.botarium.common.item.ItemStackHolder;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
@@ -72,7 +72,7 @@ public class FluidUtils {
                     if (item.isDirty()) {
                         ItemStack copy = item.getStack().copy();
                         ItemStack stack1 = inventory.getItem(outputSlot);
-                        if ((stack1.isEmpty() && (!copy.hasTag() || !ItemStack.tagMatches(copy, inventory.getItem(inputSlot)))) || ItemStack.tagMatches(copy, stack1) && ItemStack.isSameIgnoreDurability(copy, stack1) && copy.getCount() + stack1.getCount() <= copy.getMaxStackSize()) {
+                        if ((stack1.isEmpty() && (!copy.hasTag() || !ItemStack.tagMatches(copy, inventory.getItem(inputSlot)))) || ItemStack.tagMatches(copy, stack1) && ItemStack.isSame(copy, stack1) && copy.getCount() + stack1.getCount() <= copy.getMaxStackSize()) {
                             copy.setCount(copy.getCount() + stack1.getCount());
                             inventory.setItem(outputSlot, copy);
                             inventory.getItem(inputSlot).setCount(originalCount - 1);
@@ -115,7 +115,7 @@ public class FluidUtils {
                     if (item.isDirty()) {
                         ItemStack copy = item.getStack().copy();
                         ItemStack stack1 = inventory.getItem(outputSlot);
-                        if ((stack1.isEmpty() && (!copy.hasTag() || !ItemStack.tagMatches(copy, inventory.getItem(inputSlot)))) || ItemStack.tagMatches(copy, stack1) && ItemStack.isSameIgnoreDurability(copy, stack1) && copy.getCount() + stack1.getCount() <= copy.getMaxStackSize()) {
+                        if ((stack1.isEmpty() && (!copy.hasTag() || !ItemStack.tagMatches(copy, inventory.getItem(inputSlot)))) || ItemStack.tagMatches(copy, stack1) && ItemStack.isSame(copy, stack1) && copy.getCount() + stack1.getCount() <= copy.getMaxStackSize()) {
                             copy.setCount(copy.getCount() + stack1.getCount());
                             inventory.setItem(outputSlot, copy);
                             inventory.getItem(inputSlot).setCount(originalCount - 1);

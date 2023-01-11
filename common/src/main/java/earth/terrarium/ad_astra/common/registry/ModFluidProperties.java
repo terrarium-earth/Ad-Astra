@@ -2,9 +2,9 @@ package earth.terrarium.ad_astra.common.registry;
 
 
 import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.botarium.api.registry.fluid.FluidData;
-import earth.terrarium.botarium.api.registry.fluid.FluidProperties;
-import earth.terrarium.botarium.api.registry.fluid.FluidRegistry;
+import earth.terrarium.botarium.common.registry.fluid.FluidData;
+import earth.terrarium.botarium.common.registry.fluid.FluidProperties;
+import earth.terrarium.botarium.common.registry.fluid.FluidRegistry;
 import net.minecraft.resources.ResourceLocation;
 
 public class ModFluidProperties {

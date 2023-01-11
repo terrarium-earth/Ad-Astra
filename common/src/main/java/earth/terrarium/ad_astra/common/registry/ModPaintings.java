@@ -4,12 +4,12 @@ import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.ad_astra.AdAstra;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.decoration.PaintingVariant;
 
 @SuppressWarnings("unused")
 public class ModPaintings {
-    public static final ResourcefulRegistry<PaintingVariant> PAINTING_VARIANTS = ResourcefulRegistries.create(Registry.PAINTING_VARIANT, AdAstra.MOD_ID);
+    public static final ResourcefulRegistry<PaintingVariant> PAINTING_VARIANTS = ResourcefulRegistries.create(BuiltInRegistries.PAINTING_VARIANT, AdAstra.MOD_ID);
 
     public static final RegistryEntry<PaintingVariant> MERCURY = PAINTING_VARIANTS.register("mercury", () -> new PaintingVariant(16, 16));
     public static final RegistryEntry<PaintingVariant> MOON = PAINTING_VARIANTS.register("moon", () -> new PaintingVariant(16, 16));

@@ -3,7 +3,7 @@ package earth.terrarium.ad_astra.common.config;
 import com.teamresourceful.resourcefulconfig.common.annotations.Category;
 import com.teamresourceful.resourcefulconfig.common.annotations.ConfigEntry;
 import com.teamresourceful.resourcefulconfig.common.config.EntryType;
-import earth.terrarium.botarium.api.fluid.FluidHooks;
+import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 
 @Category(id = "waterPump", translation = "text.resourcefulconfig.ad_astra.option.waterPump")
 public final class WaterPumpConfig {
@@ -27,14 +27,14 @@ public final class WaterPumpConfig {
         type = EntryType.LONG,
         translation = "text.resourcefulconfig.ad_astra.option.waterPump.tankSize"
     )
-    public static long tankSize = FluidHooks.buckets(6);
+    public static long tankSize = FluidHooks.buckets(6f);
 
     @ConfigEntry(
         id = "transferPerTick",
         type = EntryType.LONG,
         translation = "text.resourcefulconfig.ad_astra.option.waterPump.transferPerTick"
     )
-    public static long transferPerTick = FluidHooks.buckets(1) / 10;
+    public static long transferPerTick = FluidHooks.buckets(1f) / 10;
 
     @ConfigEntry(
         id = "deleteWaterBelowWaterPump",

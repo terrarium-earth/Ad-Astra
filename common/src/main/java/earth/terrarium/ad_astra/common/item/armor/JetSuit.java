@@ -7,10 +7,11 @@ import earth.terrarium.ad_astra.common.config.SpaceSuitConfig;
 import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.ad_astra.common.util.ModKeyBindings;
 import earth.terrarium.ad_astra.common.util.ModUtils;
-import earth.terrarium.botarium.api.energy.EnergyHooks;
-import earth.terrarium.botarium.api.energy.EnergyItem;
-import earth.terrarium.botarium.api.energy.ItemEnergyContainer;
-import earth.terrarium.botarium.api.item.ItemStackHolder;
+import earth.terrarium.botarium.common.energy.base.EnergyAttachment;
+import earth.terrarium.botarium.common.energy.impl.SimpleEnergyContainer;
+import earth.terrarium.botarium.common.energy.impl.WrappedItemEnergyContainer;
+import earth.terrarium.botarium.common.energy.util.EnergyHooks;
+import earth.terrarium.botarium.common.item.ItemStackHolder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.core.particles.ParticleTypes;
@@ -33,7 +34,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
+public class JetSuit extends NetheriteSpaceSuit implements EnergyAttachment.Item {
 
     public boolean isFallFlying;
 
@@ -180,8 +181,8 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
     }
 
     @Override
-    public ItemEnergyContainer getEnergyStorage(ItemStack itemStack) {
-        return new ItemEnergyContainer(itemStack, SpaceSuitConfig.jetSuitMaxEnergy) {
+    public WrappedItemEnergyContainer getEnergyStorage(ItemStack holder) {
+        return new WrappedItemEnergyContainer(holder, new SimpleEnergyContainer(SpaceSuitConfig.jetSuitMaxEnergy) {
             @Override
             public long maxInsert() {
                 return 512;
@@ -191,7 +192,7 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
             public long maxExtract() {
                 return 256;
             }
-        };
+        });
     }
 
     @Override

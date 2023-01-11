@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.client.screen.GuiUtil;
 import earth.terrarium.ad_astra.client.screen.util.ScreenUtils;
 import earth.terrarium.ad_astra.common.compat.rei.util.REIUtils;
-import earth.terrarium.botarium.api.fluid.FluidHolder;
+import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import net.minecraft.util.Mth;
 

@@ -4,8 +4,7 @@ import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
-import com.mojang.math.Vector4f;
+import com.mojang.math.Axis;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.block.flag.FlagBlock;
 import earth.terrarium.ad_astra.common.block.flag.FlagBlockEntity;
@@ -23,9 +22,11 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.core.Registry;
 import net.minecraft.core.UUIDUtil;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector4f;
 
 import java.util.Map;
 
@@ -37,11 +38,11 @@ public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEnt
     @Override
     public void render(FlagBlockEntity entity, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
         if (entity.getBlockState().getValue(FlagBlock.HALF).equals(DoubleBlockHalf.LOWER)) {
-            ResourceLocation texture = new ResourceLocation(AdAstra.MOD_ID, "block/flag/" + Registry.BLOCK.getKey(entity.getBlockState().getBlock()).getPath());
+            ResourceLocation texture = new ResourceLocation(AdAstra.MOD_ID, "block/flag/" + BuiltInRegistries.BLOCK.getKey(entity.getBlockState().getBlock()).getPath());
             poseStack.pushPose();
 
             poseStack.translate(0.5D, 0.5D, 0.5D);
-            poseStack.mulPose(Vector3f.YP.rotationDegrees(entity.getBlockState().getValue(FlagBlock.FACING).asRotation()));
+            poseStack.mulPose(Axis.YP.rotationDegrees(entity.getBlockState().getValue(FlagBlock.FACING).asRotation()));
             poseStack.translate(-0.5D, 0, -0.5D);
 
             AdAstraClient.renderBlock(texture, poseStack, buffer, packedLight, packedOverlay);
@@ -62,8 +63,8 @@ public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEnt
     private static void renderFullTexture(FlagBlockEntity entity, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay, boolean flip) {
         poseStack.pushPose();
         poseStack.translate(0.5, 1, 0.5);
-        poseStack.mulPose(Vector3f.YP.rotationDegrees(entity.getBlockState().getValue(FlagBlock.FACING).asRotation()));
-        poseStack.mulPose(Vector3f.XP.rotationDegrees(180));
+        poseStack.mulPose(Axis.YP.rotationDegrees(entity.getBlockState().getValue(FlagBlock.FACING).asRotation()));
+        poseStack.mulPose(Axis.XP.rotationDegrees(180));
         poseStack.translate(-1.375, -0.375, flip ? -0.01 : 0.01);
 
         if (!flip) flipY(poseStack, 1.25f);
@@ -76,8 +77,8 @@ public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEnt
     private static void renderFace(FlagBlockEntity entity, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int overlay, boolean flip) {
         poseStack.pushPose();
         poseStack.translate(0.5, 1, 0.5);
-        poseStack.mulPose(Vector3f.YP.rotationDegrees(entity.getBlockState().getValue(FlagBlock.FACING).asRotation()));
-        poseStack.mulPose(Vector3f.XP.rotationDegrees(180));
+        poseStack.mulPose(Axis.YP.rotationDegrees(entity.getBlockState().getValue(FlagBlock.FACING).asRotation()));
+        poseStack.mulPose(Axis.XP.rotationDegrees(180));
         poseStack.translate(-1, -0.25, flip ? -0.01 : 0.01);
 
         if (flip) flipY(poseStack, 0.5f);
@@ -96,9 +97,9 @@ public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEnt
 
     private static void flipY(PoseStack poseStack, float width) {
         Vector4f vec3f = new Vector4f(0, 0, 0, 0);
-        vec3f.transform(poseStack.last().pose());
+        poseStack.last().pose().transform(vec3f);
         poseStack.translate(-vec3f.x(), -vec3f.y(), -vec3f.z());
-        poseStack.mulPose(Vector3f.YP.rotationDegrees(180));
+        poseStack.mulPose(Axis.YP.rotationDegrees(180));
         poseStack.translate(vec3f.x(), vec3f.y(), vec3f.z());
         poseStack.translate(-width, 0, 0);
     }

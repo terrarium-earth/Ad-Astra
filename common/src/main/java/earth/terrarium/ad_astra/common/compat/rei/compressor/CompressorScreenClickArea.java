@@ -1,10 +1,10 @@
 package earth.terrarium.ad_astra.common.compat.rei.compressor;
 
-import java.awt.Rectangle;
-
 import earth.terrarium.ad_astra.client.screen.CompressorScreen;
 import earth.terrarium.ad_astra.common.compat.rei.BaseClickArea;
 import earth.terrarium.ad_astra.common.compat.rei.REICategories;
+
+import java.awt.*;
 
 public class CompressorScreenClickArea extends BaseClickArea<CompressorScreen> {
 

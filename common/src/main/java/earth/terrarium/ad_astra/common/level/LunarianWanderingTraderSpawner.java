@@ -1,8 +1,8 @@
 package earth.terrarium.ad_astra.common.level;
 
+import earth.terrarium.ad_astra.common.config.SpawnConfig;
 import earth.terrarium.ad_astra.common.registry.ModEntityTypes;
 import earth.terrarium.ad_astra.common.util.ModUtils;
-import earth.terrarium.ad_astra.common.config.SpawnConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -21,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 import java.util.Random;
 
-public class LunarianWanderingTraderManager implements CustomSpawner {
+public class LunarianWanderingTraderSpawner implements CustomSpawner {
 
     public static final int DEFAULT_SPAWN_DELAY = 24000;
     private static final int DEFAULT_SPAWN_TIMER = 1200;
@@ -31,7 +31,7 @@ public class LunarianWanderingTraderManager implements CustomSpawner {
     private int spawnDelay;
     private int spawnChance;
 
-    public LunarianWanderingTraderManager(ServerLevelData properties) {
+    public LunarianWanderingTraderSpawner(ServerLevelData properties) {
         this.properties = properties;
         this.spawnTimer = DEFAULT_SPAWN_TIMER;
         this.spawnDelay = properties.getWanderingTraderSpawnDelay();
@@ -107,7 +107,7 @@ public class LunarianWanderingTraderManager implements CustomSpawner {
                 return false;
             }
 
-            WanderingTrader wanderingTraderEntity = ModEntityTypes.LUNARIAN_WANDERING_TRADER.get().spawn(level, null, null, null, blockPos3, MobSpawnType.EVENT, false, false);
+            WanderingTrader wanderingTraderEntity = ModEntityTypes.LUNARIAN_WANDERING_TRADER.get().spawn(level, blockPos3, MobSpawnType.EVENT);
             if (wanderingTraderEntity != null) {
 
                 this.properties.setWanderingTraderId(wanderingTraderEntity.getUUID());

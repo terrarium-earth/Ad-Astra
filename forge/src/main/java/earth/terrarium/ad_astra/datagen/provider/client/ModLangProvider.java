@@ -4,7 +4,7 @@ import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.registry.ModBlocks;
 import earth.terrarium.ad_astra.common.registry.ModEntityTypes;
 import earth.terrarium.ad_astra.common.registry.ModItems;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.WallSignBlock;
 import net.minecraftforge.common.data.LanguageProvider;
@@ -13,8 +13,8 @@ import org.codehaus.plexus.util.StringUtils;
 import java.util.Objects;
 
 public class ModLangProvider extends LanguageProvider {
-    public ModLangProvider(DataGenerator pGenerator) {
-        super(pGenerator, AdAstra.MOD_ID, "en_us");
+    public ModLangProvider(PackOutput output) {
+        super(output, AdAstra.MOD_ID, "en_us");
     }
 
     @Override

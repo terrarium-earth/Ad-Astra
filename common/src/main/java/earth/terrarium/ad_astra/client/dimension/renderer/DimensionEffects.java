@@ -1,7 +1,6 @@
 package earth.terrarium.ad_astra.client.dimension.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Matrix4f;
 import earth.terrarium.ad_astra.client.dimension.renderer.base.DimensionRenderer;
 import earth.terrarium.ad_astra.client.resourcepack.PlanetSkyRenderer;
 import earth.terrarium.ad_astra.common.util.ColourUtils;
@@ -10,6 +9,7 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.DimensionSpecialEffects;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.world.phys.Vec3;
+import org.joml.Matrix4f;
 
 public class DimensionEffects extends DimensionSpecialEffects implements DimensionRenderer {
     private final PlanetSkyRenderer renderer;

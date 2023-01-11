@@ -11,8 +11,6 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.Sheets;
-import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -45,25 +43,10 @@ public class AdAstraClientForge {
         AdAstraClient.onRegisterModels(event::register);
     }
 
-
-    public static void chestSpriteLoading(TextureStitchEvent.Pre event) {
-        if (event.getAtlas().location().equals(Sheets.CHEST_SHEET)) {
-            AdAstraClient.onRegisterChestSprites(event::addSprite);
-        }
-    }
-
-    public static void spriteLoading(TextureStitchEvent.Pre event) {
-        if (event.getAtlas().location().equals(InventoryMenu.BLOCK_ATLAS)) {
-            AdAstraClient.onRegisterSprites(event::addSprite);
-        }
-    }
-
     public static void init() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         bus.addListener(AdAstraClientForge::modelLoading);
-        bus.addListener(AdAstraClientForge::spriteLoading);
         bus.addListener(AdAstraClientForge::onRegisterParticles);
-        bus.addListener(AdAstraClientForge::chestSpriteLoading);
         bus.addListener(AdAstraClientForge::onRegisterLayerDefinitions);
         bus.addListener(AdAstraClientForge::onClientReloadListeners);
         MinecraftForge.EVENT_BUS.addListener(AdAstraClientForge::onRegisterClientHud);

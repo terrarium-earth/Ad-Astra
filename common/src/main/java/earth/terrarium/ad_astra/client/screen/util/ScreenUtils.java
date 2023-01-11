@@ -2,7 +2,7 @@ package earth.terrarium.ad_astra.client.screen.util;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import com.teamresourceful.resourcefullib.common.color.Color;
 import earth.terrarium.ad_astra.AdAstra;
 import net.fabricmc.api.EnvType;
@@ -44,7 +44,7 @@ public class ScreenUtils {
         poseStack.pushPose();
 
         poseStack.translate(screen.width / 2.0f, screen.height / 2.0f, 0);
-        poseStack.mulPose(Vector3f.ZP.rotationDegrees(screen.getGuiTime() * (speed / 3.0f)));
+        poseStack.mulPose(Axis.ZP.rotationDegrees(screen.getGuiTime() * (speed / 3.0f)));
 
         addTexture(poseStack, x, y, width, height, texture);
 

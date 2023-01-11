@@ -4,13 +4,16 @@ import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.item.AstroduxItem;
 import earth.terrarium.ad_astra.common.registry.ModCommands;
 import earth.terrarium.ad_astra.common.registry.ModEntityTypes;
+import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.ad_astra.common.util.ModKeyBindings;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -37,6 +40,11 @@ public class AdAstraFabric implements ModInitializer {
                 return listener.reload(synchronizer, manager, prepareProfiler, applyProfiler, prepareExecutor, applyExecutor);
             }
         }));
+        ModItems.onRegisterCreativeTabs((loc, item, items) -> FabricItemGroup.builder(loc)
+                .title(Component.translatable("itemGroup." + loc.getNamespace() + "." + loc.getPath()))
+                .icon(() -> item.get().getDefaultInstance())
+                .displayItems((featureFlagSet, output, bl) -> items.forEach(output::accept))
+                .build());
     }
 
     public static void initEvents() {

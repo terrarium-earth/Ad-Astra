@@ -28,7 +28,7 @@ public class NasaWorkbenchRecipe extends CookingRecipe {
         ).apply(instance, NasaWorkbenchRecipe::new));
     }
 
-    public static Codec<NasaWorkbenchRecipe> networkCodec(ResourceLocation id) {
+    public static Codec<NasaWorkbenchRecipe> networkingCodec(ResourceLocation id) {
         return RecordCodecBuilder.create(instance -> instance.group(
                 RecordCodecBuilder.point(id),
                 IngredientHolder.NETWORK_CODEC.listOf().fieldOf("ingredients").forGetter(NasaWorkbenchRecipe::getHolders),

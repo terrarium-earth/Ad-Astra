@@ -3,12 +3,11 @@ package earth.terrarium.ad_astra.client.dimension.renderer;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
-import com.mojang.math.Matrix4f;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import com.teamresourceful.resourcefullib.common.color.Color;
 import earth.terrarium.ad_astra.client.resourcepack.PlanetSkyRenderer;
-import earth.terrarium.ad_astra.mixin.client.LevelRendererAccessor;
 import earth.terrarium.ad_astra.common.level.LevelSeed;
+import earth.terrarium.ad_astra.mixin.client.LevelRendererAccessor;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Camera;
@@ -23,6 +22,8 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.material.FogType;
 import net.minecraft.world.phys.Vec3;
+import org.joml.Matrix4f;
+import org.joml.Vector3f;
 
 @Environment(EnvType.CLIENT)
 public class SkyUtil {
@@ -95,9 +96,9 @@ public class SkyUtil {
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
 
         // Rotation
-        poseStack.mulPose(Vector3f.YP.rotationDegrees(rotation.y()));
-        poseStack.mulPose(Vector3f.ZP.rotationDegrees(rotation.z()));
-        poseStack.mulPose(Vector3f.XP.rotationDegrees(rotation.x()));
+        poseStack.mulPose(Axis.YP.rotationDegrees(rotation.y()));
+        poseStack.mulPose(Axis.ZP.rotationDegrees(rotation.z()));
+        poseStack.mulPose(Axis.XP.rotationDegrees(rotation.x()));
     }
 
     private static void endRendering(PoseStack poseStack) {
@@ -205,10 +206,10 @@ public class SkyUtil {
             RenderSystem.disableTexture();
             RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
             poseStack.pushPose();
-            poseStack.mulPose(Vector3f.XP.rotationDegrees(90.0f));
+            poseStack.mulPose(Axis.XP.rotationDegrees(90.0f));
             float sine = Mth.sin(level.getSunAngle(tickDelta)) < 0f ? 180f : 0f;
-            poseStack.mulPose(Vector3f.ZP.rotationDegrees(sine));
-            poseStack.mulPose(Vector3f.ZP.rotationDegrees(90.0f));
+            poseStack.mulPose(Axis.ZP.rotationDegrees(sine));
+            poseStack.mulPose(Axis.ZP.rotationDegrees(90.0f));
 
             Matrix4f matrix4f = poseStack.last().pose();
             bufferBuilder.begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);

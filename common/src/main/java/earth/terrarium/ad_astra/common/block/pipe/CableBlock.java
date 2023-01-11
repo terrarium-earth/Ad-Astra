@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.common.block.pipe;
 
 import earth.terrarium.ad_astra.common.registry.ModSoundEvents;
-import earth.terrarium.botarium.api.energy.EnergyHooks;
+import earth.terrarium.botarium.common.energy.util.EnergyHooks;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;

@@ -2,18 +2,18 @@ package earth.terrarium.ad_astra.client.screen;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.ad_astra.common.block.machine.entity.OxygenDistributorBlockEntity;
 import earth.terrarium.ad_astra.client.screen.util.ButtonType;
 import earth.terrarium.ad_astra.client.screen.util.CustomButton;
 import earth.terrarium.ad_astra.client.screen.util.PlanetSelectionScreen.TooltipType;
 import earth.terrarium.ad_astra.client.screen.util.ScreenUtils;
+import earth.terrarium.ad_astra.common.block.machine.entity.OxygenDistributorBlockEntity;
 import earth.terrarium.ad_astra.common.config.OxygenDistributorConfig;
 import earth.terrarium.ad_astra.common.data.ButtonColor;
 import earth.terrarium.ad_astra.common.networking.NetworkHandling;
 import earth.terrarium.ad_astra.common.networking.packet.client.ToggleDistributorPacket;
 import earth.terrarium.ad_astra.common.screen.menu.OxygenDistributorMenu;
 import earth.terrarium.ad_astra.common.util.OxygenUtils;
-import earth.terrarium.botarium.api.fluid.FluidHooks;
+import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.GuiComponent;
@@ -23,6 +23,8 @@ import net.minecraft.world.entity.player.Inventory;
 
 import java.awt.*;
 import java.util.Arrays;
+
+;
 
 @Environment(EnvType.CLIENT)
 public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistributorBlockEntity, OxygenDistributorMenu> {
@@ -64,7 +66,7 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
         if (oxygenLeak) {
             GuiComponent.drawCenteredString(poseStack, this.font, "⚠", this.width / 2 - 85 + 7, this.height / 2 - 137, Color.YELLOW.getRGB());
         }
-        if (OxygenUtils.getOxygenBlocksCount(this.machine.getLevel(), this.machine.getBlockPos()) <= 0 && this.machine.getEnergyStorage().getStoredEnergy() > 0 && this.menu.getFluids().get(1).getFluidAmount() > 0) {
+        if (OxygenUtils.getOxygenBlocksCount(this.machine.getLevel(), this.machine.getBlockPos()) <= 0 && this.machine.getEnergyStorage(machine).getStoredEnergy() > 0 && this.menu.getFluids().get(1).getFluidAmount() > 0) {
             GuiComponent.drawCenteredString(poseStack, this.font, "⚠", this.width / 2 - 67 + 7, this.height / 2 - 137, Color.YELLOW.getRGB());
         }
     }
@@ -93,7 +95,7 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
             }
         }
 
-        if (oxygenBlocksCount <= 0 && this.machine.getEnergyStorage().getStoredEnergy() > 0 && this.menu.getFluids().get(1).getFluidAmount() > 0) {
+        if (oxygenBlocksCount <= 0 && this.machine.getEnergyStorage(machine).getStoredEnergy() > 0 && this.menu.getFluids().get(1).getFluidAmount() > 0) {
             if (GuiUtil.isHovering(getBlockedWarningSignBounds(), mouseX, mouseY)) {
                 this.renderComponentTooltip(poseStack, Arrays.asList(Component.translatable("gauge_text.ad_astra.blocked_warning[0]"), Component.translatable("gauge_text.ad_astra.blocked_warning[1]"), Component.translatable("gauge_text.ad_astra.blocked_warning[2]")), mouseX, mouseY);
             }

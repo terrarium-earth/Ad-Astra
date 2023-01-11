@@ -2,7 +2,7 @@ package earth.terrarium.ad_astra.mixin.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import earth.terrarium.ad_astra.client.renderer.armor.JetSuitModel;
 import earth.terrarium.ad_astra.client.renderer.armor.NetheriteSpaceSuitModel;
 import earth.terrarium.ad_astra.client.renderer.armor.SpaceSuitModel;
@@ -76,7 +76,7 @@ public class PlayerRendererMixin {
                 }
 
                 poseStack.pushPose();
-                poseStack.mulPose(Vector3f.ZP.rotationDegrees(4));
+                poseStack.mulPose(Axis.ZP.rotationDegrees(4));
 
                 int decimal = ((SpaceSuit) stack.getItem()).getColor(stack);
                 float r = (float) (decimal >> 16 & 0xFF) / 255.0f;

@@ -20,7 +20,7 @@ public final class AdAstraDataGenerator {
         // Client
 //        generator.addProvider(event.includeClient(), new ModBlockStateProvider(generator, existingFileHelper));
 //        generator.addProvider(event.includeClient(), new ModItemModelProvider(generator, existingFileHelper));
-        generator.addProvider(event.includeClient(), new ModLangProvider(generator));
+        generator.addProvider(event.includeClient(), new ModLangProvider(generator.getPackOutput()));
 
         // Server
 //        generator.addProvider(event.includeServer(), new ModLootTableProvider(generator));

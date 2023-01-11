@@ -1,5 +1,6 @@
 package earth.terrarium.ad_astra.client.sound;
 
+import earth.terrarium.ad_astra.client.screen.util.PlanetSelectionScreen;
 import earth.terrarium.ad_astra.common.registry.ModSoundEvents;
 import earth.terrarium.ad_astra.common.util.ModUtils;
 import net.fabricmc.api.EnvType;
@@ -77,6 +78,11 @@ public class PlanetWeatherSoundPlayer implements AmbientSoundHandler {
             float volume = (float) Mth.clamp((this.player.getY() - 80) / height, 0.0f, max);
 
             if (minecraft.screen != null && minecraft.screen.isPauseScreen()) {
+                volume = 0.0f;
+                return;
+            }
+
+            if (minecraft.screen instanceof PlanetSelectionScreen) {
                 volume = 0.0f;
                 return;
             }

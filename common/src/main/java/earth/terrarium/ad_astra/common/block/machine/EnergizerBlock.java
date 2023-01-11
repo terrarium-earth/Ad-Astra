@@ -80,7 +80,7 @@ public class EnergizerBlock extends AbstractMachineBlock {
     public List<ItemStack> getDrops(BlockState state, net.minecraft.world.level.storage.loot.LootContext.Builder builder) {
         BlockEntity blockEntity = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
         ItemStack stack = ModItems.ENERGIZER.get().getDefaultInstance();
-        stack.getOrCreateTag().putLong("Energy", ((EnergizerBlockEntity) blockEntity).getEnergyStorage().getStoredEnergy());
+        stack.getOrCreateTag().putLong("Energy", ((EnergizerBlockEntity) blockEntity).getEnergyStorage(blockEntity).getStoredEnergy());
         return List.of(stack);
     }
 }

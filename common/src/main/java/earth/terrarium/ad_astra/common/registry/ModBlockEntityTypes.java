@@ -12,14 +12,14 @@ import earth.terrarium.ad_astra.common.block.machine.entity.*;
 import earth.terrarium.ad_astra.common.block.pipe.CableBlockEntity;
 import earth.terrarium.ad_astra.common.block.pipe.FluidPipeBlockEntity;
 import earth.terrarium.ad_astra.common.block.sign.CustomSignBlockEntity;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
 
 public class ModBlockEntityTypes {
-    public static final ResourcefulRegistry<BlockEntityType<?>> BLOCK_ENTITY_TYPES = ResourcefulRegistries.create(Registry.BLOCK_ENTITY_TYPE, AdAstra.MOD_ID);
+    public static final ResourcefulRegistry<BlockEntityType<?>> BLOCK_ENTITY_TYPES = ResourcefulRegistries.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, AdAstra.MOD_ID);
 
     public static final RegistryEntry<BlockEntityType<FlagBlockEntity>> FLAG = BLOCK_ENTITY_TYPES.register("flag", () -> createBlockEntityType(FlagBlockEntity::new, ModBlocks.FLAGS));
     public static final RegistryEntry<BlockEntityType<GlobeBlockEntity>> GLOBE = BLOCK_ENTITY_TYPES.register("globe", () -> createBlockEntityType(GlobeBlockEntity::new, ModBlocks.GLOBES));
@@ -37,7 +37,7 @@ public class ModBlockEntityTypes {
     public static final RegistryEntry<BlockEntityType<OxygenSensorBlockEntity>> OXYGEN_SENSOR = BLOCK_ENTITY_TYPES.register("oxygen_sensor", () -> createBlockEntityType(OxygenSensorBlockEntity::new, ModBlocks.OXYGEN_SENSOR.get()));
     public static final RegistryEntry<BlockEntityType<CableBlockEntity>> CABLE = BLOCK_ENTITY_TYPES.register("cable", () -> createBlockEntityType(CableBlockEntity::new, ModBlocks.STEEL_CABLE.get(), ModBlocks.DESH_CABLE.get()));
     public static final RegistryEntry<BlockEntityType<FluidPipeBlockEntity>> FLUID_PIPE = BLOCK_ENTITY_TYPES.register("fluid_pipe", () -> createBlockEntityType(FluidPipeBlockEntity::new, ModBlocks.DESH_FLUID_PIPE.get(), ModBlocks.OSTRUM_FLUID_PIPE.get()));
-    public static final RegistryEntry<BlockEntityType<SignBlockEntity>> SIGN = BLOCK_ENTITY_TYPES.register("sign", () -> createBlockEntityType(CustomSignBlockEntity::new, ModBlocks.SIGNS));
+    public static final RegistryEntry<BlockEntityType<CustomSignBlockEntity>> SIGN = BLOCK_ENTITY_TYPES.register("sign", () -> createBlockEntityType(CustomSignBlockEntity::new, ModBlocks.SIGNS));
     public static final RegistryEntry<BlockEntityType<CustomChestBlockEntity>> CHEST = BLOCK_ENTITY_TYPES.register("chest", () -> createBlockEntityType(CustomChestBlockEntity::new, ModBlocks.CHESTS));
 
     public static <E extends BlockEntity> BlockEntityType<E> createBlockEntityType(BlockEntityType.BlockEntitySupplier<E> factory, Block... blocks) {

@@ -63,7 +63,7 @@ public class EmiFluidBarWidget extends Widget {
 
         TextureAtlasSprite sprite = FluidVariantRendering.getSprite(fluid);
         int colour = FluidVariantRendering.getColor(fluid);
-        int spriteHeight = sprite.getHeight();
+        int spriteHeight = sprite.contents().height();
 
         RenderSystem.setShaderColor((colour >> 16 & 255) / 255.0f, (float) (colour >> 8 & 255) / 255.0f, (float) (colour & 255) / 255.0f, 1.0f);
         RenderSystem.setShaderTexture(0, InventoryMenu.BLOCK_ATLAS);

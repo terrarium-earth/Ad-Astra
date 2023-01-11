@@ -8,7 +8,8 @@ import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -73,8 +74,8 @@ public class SpacePainting extends Painting {
 
     public static List<Holder<PaintingVariant>> getSpacePaintings() {
         List<Holder<PaintingVariant>> paintings = new ArrayList<>();
-        Registry.PAINTING_VARIANT.forEach(painting -> {
-            if (Registry.PAINTING_VARIANT.getKey(painting).getNamespace().equals(AdAstra.MOD_ID)) {
+        BuiltInRegistries.PAINTING_VARIANT.forEach(painting -> {
+            if (BuiltInRegistries.PAINTING_VARIANT.getKey(painting).getNamespace().equals(AdAstra.MOD_ID)) {
                 paintings.add(Holder.direct(painting));
             }
         });
@@ -85,8 +86,8 @@ public class SpacePainting extends Painting {
     @Override
     public void readAdditionalSaveData(CompoundTag nbt) {
         super.readAdditionalSaveData(nbt);
-        ResourceKey<PaintingVariant> registryKey = ResourceKey.create(Registry.PAINTING_VARIANT_REGISTRY, new ResourceLocation(nbt.getString("Variant")));
-        ((PaintingInvoker) this).adastra_invokeSetVariant(Registry.PAINTING_VARIANT.getHolder(registryKey).get());
+        ResourceKey<PaintingVariant> registryKey = ResourceKey.create(Registries.PAINTING_VARIANT, new ResourceLocation(nbt.getString("Variant")));
+        ((PaintingInvoker) this).adastra_invokeSetVariant(BuiltInRegistries.PAINTING_VARIANT.getHolder(registryKey).get());
         this.direction = Direction.from2DDataValue(nbt.getByte("Facing"));
         this.setDirection(this.direction);
     }
@@ -94,7 +95,7 @@ public class SpacePainting extends Painting {
     @Override
     public void addAdditionalSaveData(CompoundTag nbt) {
         super.addAdditionalSaveData(nbt);
-        nbt.putString("Variant", Registry.PAINTING_VARIANT.getKey(this.getVariant().value()).toString());
+        nbt.putString("Variant", BuiltInRegistries.PAINTING_VARIANT.getKey(this.getVariant().value()).toString());
         nbt.putByte("Facing", (byte) this.direction.get2DDataValue());
     }
 

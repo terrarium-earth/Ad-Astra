@@ -2,7 +2,7 @@ package earth.terrarium.ad_astra.common.block.machine;
 
 import earth.terrarium.ad_astra.common.block.machine.entity.AbstractMachineBlockEntity;
 import earth.terrarium.ad_astra.common.registry.ModTags;
-import earth.terrarium.botarium.api.menu.MenuHooks;
+import earth.terrarium.botarium.common.menu.MenuHooks;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

@@ -5,12 +5,12 @@ import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.screen.menu.*;
-import earth.terrarium.botarium.api.registry.RegistryHelpers;
-import net.minecraft.core.Registry;
+import earth.terrarium.botarium.common.registry.RegistryHelpers;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.inventory.MenuType;
 
 public class ModMenus {
-    public static final ResourcefulRegistry<MenuType<?>> MENUS = ResourcefulRegistries.create(Registry.MENU, AdAstra.MOD_ID);
+    public static final ResourcefulRegistry<MenuType<?>> MENUS = ResourcefulRegistries.create(BuiltInRegistries.MENU, AdAstra.MOD_ID);
 
     public static final RegistryEntry<MenuType<PlanetSelectionMenu>> PLANET_SELECTION_SCREEN_HANDLER = MENUS.register("planet_selection_menu", () -> RegistryHelpers.createMenuType((syncId, playerInventory, buf) -> new PlanetSelectionMenu(syncId, playerInventory.player, buf)));
     public static final RegistryEntry<MenuType<SolarPanelMenu>> SOLAR_PANEL_SCREEN_HANDLER = MENUS.register("solar_panel_menu", () -> RegistryHelpers.createMenuType(SolarPanelMenu::new));

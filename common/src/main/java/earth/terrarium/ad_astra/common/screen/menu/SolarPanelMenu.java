@@ -26,6 +26,6 @@ public class SolarPanelMenu extends AbstractMachineMenu<SolarPanelBlockEntity> {
 
     @Override
     public void syncClientScreen() {
-        NetworkHandling.CHANNEL.sendToPlayer(new MachineInfoPacket(machine.getEnergyStorage().getStoredEnergy(), List.of()), this.player);
+        NetworkHandling.CHANNEL.sendToPlayer(new MachineInfoPacket(machine.getEnergyStorage(machine).getStoredEnergy(), List.of()), this.player);
     }
 }

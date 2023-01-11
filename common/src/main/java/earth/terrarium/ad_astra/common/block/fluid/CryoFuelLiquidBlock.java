@@ -2,8 +2,8 @@ package earth.terrarium.ad_astra.common.block.fluid;
 
 import earth.terrarium.ad_astra.common.registry.ModDamageSource;
 import earth.terrarium.ad_astra.common.registry.ModFluids;
-import earth.terrarium.botarium.api.registry.fluid.BotariumLiquidBlock;
-import earth.terrarium.botarium.api.registry.fluid.FluidData;
+import earth.terrarium.botarium.common.registry.fluid.BotariumLiquidBlock;
+import earth.terrarium.botarium.common.registry.fluid.FluidData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -12,7 +12,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LevelEvent;
@@ -75,63 +74,4 @@ public class CryoFuelLiquidBlock extends BotariumLiquidBlock {
         }
         return true;
     }
-
-    private void fizz(LevelAccessor level, BlockPos pos) {
-        level.levelEvent(LevelEvent.LAVA_FIZZ, pos, 0);
-    }
-
-
 }
-
-
-/*
-
-package earth.terrarium.ad_astra.mixin;
-
-import earth.terrarium.ad_astra.common.registry.ModBlocks;
-import earth.terrarium.ad_astra.common.util.OxygenUtils;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.tags.FluidTags;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LiquidBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-@Mixin(LiquidBlock.class)
-public abstract class LiquidBlockMixin {
-
-    @Inject(method = "onPlace", at = @At("HEAD"))
-    public void adastra_onBlockAdded(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean notify, CallbackInfo ci) {
-        if (!level.isClientSide) {
-            LiquidBlock block = (LiquidBlock) (Object) this;
-            if (block.getFluidState(state).is(FluidTags.WATER) && !block.equals(ModBlocks.CRYO_FUEL_BLOCK.get())) {
-                if (!OxygenUtils.posHasOxygen(level, pos)) {
-                    level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
-                }
-            }
-        }
-    }
-
-    // Turn water fluids into ice upon contact with cryo fuel
-    @Inject(method = "shouldSpreadLiquid", at = @At("HEAD"), cancellable = true)
-    public void adastra_receiveNeighborFluids(Level level, BlockPos pos, BlockState state, CallbackInfoReturnable<Boolean> cir) {
-        LiquidBlock block = (LiquidBlock) (Object) this;
-        if (block.equals(Blocks.WATER)) {
-            for (Direction direction : new Direction[]{Direction.DOWN, Direction.SOUTH, Direction.NORTH, Direction.EAST, Direction.WEST}) {
-                BlockPos blockPos = pos.relative(direction.getOpposite());
-                if (level.getFluidState(blockPos).createLegacyBlock().getBlock().equals(ModBlocks.CRYO_FUEL_BLOCK.get())) {
-                    level.setBlockAndUpdate(pos, Blocks.ICE.defaultBlockState());
-                    cir.setReturnValue(false);
-                }
-            }
-        }
-    }
-}
-
- */

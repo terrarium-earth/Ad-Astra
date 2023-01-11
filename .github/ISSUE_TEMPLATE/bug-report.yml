@@ -46,7 +46,7 @@ body:
     attributes:
       label: Mod Loader Version
       description: What version of the mod loader are you on?
-      placeholder: 1.19.2 - 43.2.3
+      placeholder: 1.19.3 - 43.2.3
     validations:
       required: true
 
