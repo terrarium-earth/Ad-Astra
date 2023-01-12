@@ -3,11 +3,9 @@ package earth.terrarium.ad_astra.forge;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.AdAstraClient;
 import earth.terrarium.ad_astra.client.forge.AdAstraClientForge;
-import earth.terrarium.ad_astra.common.item.AstroduxItem;
 import earth.terrarium.ad_astra.common.registry.ModCommands;
 import earth.terrarium.ad_astra.common.registry.ModEntityTypes;
 import earth.terrarium.ad_astra.common.registry.ModItems;
-import earth.terrarium.ad_astra.common.util.ModKeyBindings;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -15,7 +13,6 @@ import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
@@ -35,8 +32,6 @@ public class AdAstraForge {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> AdAstraClientForge::init);
         MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onServerReloadListeners);
         MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onRegisterCommands);
-        MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onPlayerLogIn);
-        MinecraftForge.EVENT_BUS.addListener(AdAstraForge::onPlayerLogOut);
     }
 
     public static void onServerReloadListeners(AddReloadListenerEvent event) {
@@ -58,14 +53,6 @@ public class AdAstraForge {
 
     public static void onAttributes(EntityAttributeCreationEvent event) {
         ModEntityTypes.registerAttributes((entityType, attribute) -> event.put(entityType.get(), attribute.get().build()));
-    }
-
-    public static void onPlayerLogIn(PlayerEvent.PlayerLoggedInEvent event) {
-        AstroduxItem.onPlayerJoin(event.getEntity());
-    }
-
-    public static void onPlayerLogOut(PlayerEvent.PlayerLoggedOutEvent event) {
-        ModKeyBindings.onPlayerQuit(event.getEntity());
     }
 
     public static void onRegisterCreativeTabs(CreativeModeTabEvent.Register event) {

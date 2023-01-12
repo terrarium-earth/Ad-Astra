@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/block",
-  "textures": {
-    "particle": "ad_astra:block/launch_pad"
-  },
-  "elements": []
-}

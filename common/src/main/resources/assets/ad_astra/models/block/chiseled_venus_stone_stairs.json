@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom": "ad_astra:block/chiseled_venus_stone_bricks",
-    "side": "ad_astra:block/chiseled_venus_stone_bricks",
-    "top": "ad_astra:block/chiseled_venus_stone_bricks"
-  }
-}

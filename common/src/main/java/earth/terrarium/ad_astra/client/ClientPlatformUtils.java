@@ -1,5 +1,6 @@
 package earth.terrarium.ad_astra.client;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -29,5 +30,10 @@ public class ClientPlatformUtils {
 
     public interface ScreenConstructor<T extends AbstractContainerMenu, U extends Screen & MenuAccess<T>> {
         U create(T abstractContainerMenu, Inventory inventory, Component component);
+    }
+
+    @FunctionalInterface
+    public interface RenderHud {
+        void renderHud(PoseStack poseStack, float partialTick);
     }
 }

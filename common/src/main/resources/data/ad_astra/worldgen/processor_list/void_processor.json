@@ -1,7 +1,0 @@
-{
-  "processors": [
-    {
-      "processor_type": "ad_astra:structure_void_processor"
-    }
-  ]
-}

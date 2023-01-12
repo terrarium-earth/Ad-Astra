@@ -4,13 +4,10 @@
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8.5",
   "client": [
-    "DimensionSpecialEffectsMixin",
-    "ModRenderedItemMixin",
-    "SpaceSuitMixin"
+    "ModRenderedItemMixin"
   ],
   "mixins": [
-    "AxeItemAccessor",
-    "GlacianRamMixin"
+    "AxeItemAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

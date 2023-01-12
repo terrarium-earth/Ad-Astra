@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "cookingtime": 100,
-  "experience": 1.0,
-  "ingredient": {
-    "item": "ad_astra:venus_gold_ore"
-  },
-  "result": "minecraft:gold_ingot"
-}

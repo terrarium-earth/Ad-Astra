@@ -1,8 +1,0 @@
-{
-  "type": "ad_astra:modified_block_blob",
-  "config": {
-    "state": {
-      "Name": "ad_astra:conglomerate"
-    }
-  }
-}

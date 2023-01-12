@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/door_top_rh",
-  "textures": {
-    "top": "ad_astra:block/glacian_door_top",
-    "bottom": "ad_astra:block/glacian_door_bottom"
-  }
-}

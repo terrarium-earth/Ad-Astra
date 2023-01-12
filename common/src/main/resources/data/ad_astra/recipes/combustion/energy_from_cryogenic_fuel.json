@@ -1,0 +1,9 @@
+{
+  "type": "ad_astra:combustion",
+  "ingredient": {
+    "buckets": 0.001,
+    "fluid": "ad_astra:cryogenic_fuel"
+  },
+  "cookingtime": 0,
+  "energy": 200
+}

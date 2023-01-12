@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "ad_astra:block/chiseled_permafrost_bricks",
-    "side": "ad_astra:block/chiseled_permafrost_bricks",
-    "top": "ad_astra:block/chiseled_permafrost_bricks"
-  }
-}

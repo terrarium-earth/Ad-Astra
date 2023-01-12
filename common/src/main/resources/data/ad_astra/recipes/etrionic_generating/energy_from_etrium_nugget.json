@@ -1,0 +1,8 @@
+{
+  "type": "ad_astra:etrionic_generating",
+  "ingredient": {
+    "item": "ad_astra:etrium_nugget"
+  },
+  "cookingtime": 1000,
+  "energy": 5
+}

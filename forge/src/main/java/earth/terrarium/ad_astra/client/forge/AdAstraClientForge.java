@@ -1,13 +1,7 @@
 package earth.terrarium.ad_astra.client.forge;
 
 import earth.terrarium.ad_astra.client.AdAstraClient;
-import earth.terrarium.ad_astra.client.registry.ClientModEntities;
-import earth.terrarium.ad_astra.client.registry.ClientModKeybindings;
-import earth.terrarium.ad_astra.client.registry.ClientModParticles;
 import earth.terrarium.ad_astra.common.config.forge.ForgeMenuConfig;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
@@ -15,16 +9,16 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.client.event.*;
+import net.minecraftforge.client.event.ModelEvent;
+import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
+import net.minecraftforge.client.event.RenderGuiEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Supplier;
 
 public class AdAstraClientForge {
 
@@ -46,11 +40,8 @@ public class AdAstraClientForge {
     public static void init() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         bus.addListener(AdAstraClientForge::modelLoading);
-        bus.addListener(AdAstraClientForge::onRegisterParticles);
-        bus.addListener(AdAstraClientForge::onRegisterLayerDefinitions);
         bus.addListener(AdAstraClientForge::onClientReloadListeners);
         MinecraftForge.EVENT_BUS.addListener(AdAstraClientForge::onRegisterClientHud);
-        MinecraftForge.EVENT_BUS.addListener(AdAstraClientForge::onClientTick);
         ForgeMenuConfig.register();
     }
 
@@ -61,24 +52,13 @@ public class AdAstraClientForge {
         hasInitializedRenderers = true;
     }
 
-    public static void onClientTick(TickEvent.ClientTickEvent event) {
-        if (event.phase.equals(TickEvent.Phase.START)) {
-            ClientModKeybindings.onStartTick(Minecraft.getInstance());
-        }
-    }
-
     private static void onRegisterClientHud(RenderGuiEvent.Post event) {
         AdAstraClient.onRegisterHud(hud -> hud.renderHud(event.getPoseStack(), event.getPartialTick()));
 
     }
 
-    private static void onRegisterParticles(RegisterParticleProvidersEvent event) {
-        ClientModParticles.onRegisterParticles((type, provider) -> event.register(type, provider::create));
-    }
-
-    private static void onRegisterFluidRenderTypes(RenderType type, Fluid fluid1, Fluid fluid2) {
-        ItemBlockRenderTypes.setRenderLayer(fluid1, type);
-        ItemBlockRenderTypes.setRenderLayer(fluid2, type);
+    private static void onRegisterFluidRenderTypes(RenderType type, Fluid fluid) {
+        ItemBlockRenderTypes.setRenderLayer(fluid, type);
     }
 
     private static void onRegisterBlockRenderTypes(RenderType type, List<Block> blocks) {
@@ -87,15 +67,6 @@ public class AdAstraClientForge {
 
     public static void onClientReloadListeners(RegisterClientReloadListenersEvent event) {
         AdAstraClient.onRegisterReloadListeners((id, listener) -> event.registerReloadListener(listener));
-    }
-
-    public static void onRegisterLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        ClientModEntities.registerEntityLayers(new ClientModEntities.LayerDefinitionRegistry() {
-            @Override
-            public void register(ModelLayerLocation location, Supplier<LayerDefinition> definition) {
-                event.registerLayerDefinition(location, definition);
-            }
-        });
     }
 
     public static boolean hasInitializedRenderers() {

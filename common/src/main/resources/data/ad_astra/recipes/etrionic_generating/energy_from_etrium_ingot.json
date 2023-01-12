@@ -1,0 +1,8 @@
+{
+  "type": "ad_astra:etrionic_generating",
+  "ingredient": {
+    "item": "ad_astra:etrium_ingot"
+  },
+  "cookingtime": 2000,
+  "energy": 25
+}

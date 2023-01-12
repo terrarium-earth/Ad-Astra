@@ -1,6 +1,0 @@
-{
-  "parent": "item/chest",
-  "textures": {
-    "particle": "ad_astra:block/strophar_planks"
-  }
-}

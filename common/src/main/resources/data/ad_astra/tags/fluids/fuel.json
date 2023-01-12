@@ -1,8 +1,11 @@
 {
   "replace": false,
   "values": [
-    "ad_astra:fuel",
-    "ad_astra:flowing_fuel",
-    "#ad_astra:efficient_fuel"
+    "ad_astra:kerosene",
+    "ad_astra:flowing_kerosene",
+    "ad_astra:etrionic_fuel",
+    "ad_astra:flowing_etrionic_fuel",
+    "ad_astra:cryogenic_fuel",
+    "ad_astra:flowing_cryogenic_fuel"
   ]
 }

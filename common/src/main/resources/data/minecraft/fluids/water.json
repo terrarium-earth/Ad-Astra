@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "ad_astra:oxygen",
+    "ad_astra:flowing_oxygen",
+    "ad_astra:hydrogen",
+    "ad_astra:flowing_hydrogen",
+    "ad_astra:crude_oil",
+    "ad_astra:flowing_crude_oil",
+    "#ad_astra:fuel"
+  ]
+}

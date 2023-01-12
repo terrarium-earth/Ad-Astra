@@ -5,8 +5,7 @@
   "minVersion": "0.8.5",
   "client": [],
   "mixins": [
-    "EntityTypeMixin",
-    "JetSuitMixin"
+    "EntityTypeMixin"
   ],
   "injectors": {
     "defaultRequire": 1

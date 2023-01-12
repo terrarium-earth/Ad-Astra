@@ -1,6 +1,0 @@
-{
-  "parent": "ad_astra:template/door/sliding_door",
-  "textures": {
-    "door": "ad_astra:block/door/desh_sliding_door"
-  }
-}

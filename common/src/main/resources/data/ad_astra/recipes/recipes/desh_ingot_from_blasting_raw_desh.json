@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "cookingtime": 100,
-  "experience": 1.0,
-  "ingredient": {
-    "item": "ad_astra:raw_desh"
-  },
-  "result": "ad_astra:desh_ingot"
-}

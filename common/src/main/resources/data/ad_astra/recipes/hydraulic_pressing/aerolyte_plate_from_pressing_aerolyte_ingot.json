@@ -1,0 +1,8 @@
+{
+  "type": "ad_astra:hydraulic_pressing",
+  "experience": 1.0,
+  "ingredient": {
+    "item": "ad_astra:aerolyte_ingot"
+  },
+  "result": "ad_astra:aerolyte_plate"
+}

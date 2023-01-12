@@ -1,0 +1,7 @@
+{
+  "parent": "ad_astra:block/solar_panel",
+  "textures": {
+    "particle": "ad_astra:block/xebrium_solar_panel",
+    "texture": "ad_astra:block/xebrium_solar_panel"
+  }
+}
