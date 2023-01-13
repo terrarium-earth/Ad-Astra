@@ -33,6 +33,7 @@ public class ModItems {
     public static final RegistryEntry<Item> ELECTROLYZER = MACHINES.register("electrolyzer", () -> new BlockItem(ModBlocks.ELECTROLYZER.get(), new Item.Properties()));
     public static final RegistryEntry<Item> OXYGEN_SENSOR = MACHINES.register("oxygen_sensor", () -> new BlockItem(ModBlocks.OXYGEN_SENSOR.get(), new Item.Properties()));
     public static final RegistryEntry<Item> OIL_REFINERY = MACHINES.register("oil_refinery", () -> new BlockItem(ModBlocks.OIL_REFINERY.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> CRYOGENIC_FREEZING = MACHINES.register("cryogenic_freezing", () -> new BlockItem(ModBlocks.CRYOGENIC_FREEZER.get(), new Item.Properties()));
 
     public static final RegistryEntry<Item> IRON_PLATE = ITEMS.register("iron_plate", () -> new Item(new Item.Properties()));
 

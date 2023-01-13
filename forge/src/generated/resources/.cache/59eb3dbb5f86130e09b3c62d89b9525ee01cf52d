@@ -1,5 +1,6 @@
-// 1.19.3	2023-01-13T03:56:35.486101	Loot Tables
+// 1.19.3	2023-01-13T04:58:10.772886	Loot Tables
 55d8ce8fa2b53a9b7b8f2f028f0144a80569a427 data/ad_astra/loot_tables/blocks/combustion_generator.json
+0c49c305a54df9097a6473a96e44c77eda86964c data/ad_astra/loot_tables/blocks/cryogenic_freezer.json
 0dac4356bfca16580ab77b02d0cbdaa8ca6c1843 data/ad_astra/loot_tables/blocks/electrolyzer.json
 ac26ccd58f447fd251b442e38eb1fa91d1fe8543 data/ad_astra/loot_tables/blocks/etrionic_blast_furnace.json
 2c6b78e62318a2878c3efd9016a3586ca389f6e5 data/ad_astra/loot_tables/blocks/etrionic_generator.json

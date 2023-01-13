@@ -25,4 +25,6 @@ public class ModRecipeTypes {
     });
     public static final RegistryEntry<RecipeType<OilRefiningRecipe>> OIL_REFINING = RECIPE_TYPES.register("oil_refining", () -> new RecipeType<>() {
     });
+    public static final RegistryEntry<RecipeType<CryogenicFreezingRecipe>> CRYOGENIC_FREEZING = RECIPE_TYPES.register("cryogenic_freezing", () -> new RecipeType<>() {
+    });
 }

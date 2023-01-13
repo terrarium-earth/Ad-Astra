@@ -20,4 +20,5 @@ public class ModRecipeSerializers {
     public static final RegistryEntry<CodecRecipeSerializer<ElectrolysisRecipe>> ELECTROLYSIS = RECIPE_SERIALIZERS.register("electrolysis", () -> new CodecRecipeSerializer<>(ModRecipeTypes.ELECTROLYSIS.get(), ElectrolysisRecipe::codec));
     public static final RegistryEntry<CodecRecipeSerializer<GeothermalRecipe>> GEOTHERMAL_GENERATING = RECIPE_SERIALIZERS.register("geothermal_generating", () -> new CodecRecipeSerializer<>(ModRecipeTypes.GEOTHERMAL_GENERATING.get(), GeothermalRecipe::codec));
     public static final RegistryEntry<CodecRecipeSerializer<OilRefiningRecipe>> OIL_REFINING = RECIPE_SERIALIZERS.register("oil_refining", () -> new CodecRecipeSerializer<>(ModRecipeTypes.OIL_REFINING.get(), OilRefiningRecipe::codec));
+    public static final RegistryEntry<CodecRecipeSerializer<CryogenicFreezingRecipe>> CRYOGENIC_FREEZING = RECIPE_SERIALIZERS.register("cryogenic_freezing", () -> new CodecRecipeSerializer<>(ModRecipeTypes.CRYOGENIC_FREEZING.get(), CryogenicFreezingRecipe::codec));
 }

@@ -1,10 +1,10 @@
 package earth.terrarium.ad_astra.common.block.machine.entity;
 
 import earth.terrarium.ad_astra.common.block.machine.CookingMachineBlockEntity;
-import earth.terrarium.ad_astra.common.recipe.machine.OilRefiningRecipe;
+import earth.terrarium.ad_astra.common.recipe.machine.CryogenicFreezingRecipe;
 import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.ad_astra.common.registry.ModRecipeTypes;
-import earth.terrarium.ad_astra.common.screen.machine.OilRefineryMenu;
+import earth.terrarium.ad_astra.common.screen.machine.CryogenicFreezerMenu;
 import earth.terrarium.ad_astra.common.util.FluidUtils;
 import earth.terrarium.botarium.common.energy.base.EnergyAttachment;
 import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
@@ -24,13 +24,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.Objects;
 
 @MethodsReturnNonnullByDefault
-public class OilRefineryBlockEntity extends CookingMachineBlockEntity implements EnergyAttachment.Block, FluidAttachment.Block {
-    protected WrappedBlockEnergyContainer energyContainer;
-    protected WrappedBlockFluidContainer fluidContainer;
-    protected OilRefiningRecipe recipe;
+public class CryogenicFreezerBlockEntity extends CookingMachineBlockEntity implements EnergyAttachment.Block, FluidAttachment.Block {
+    private WrappedBlockEnergyContainer energyContainer;
+    private WrappedBlockFluidContainer fluidContainer;
+    private CryogenicFreezingRecipe recipe;
 
-    public OilRefineryBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntityTypes.OIL_REFINERY.get(), blockPos, blockState, 6);
+    public CryogenicFreezerBlockEntity(BlockPos blockPos, BlockState blockState) {
+        super(ModBlockEntityTypes.CRYOGENIC_FREEZER.get(), blockPos, blockState, 6);
     }
 
     @Override
@@ -66,12 +66,12 @@ public class OilRefineryBlockEntity extends CookingMachineBlockEntity implements
 
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new OilRefineryMenu(i, inventory, this);
+        return new CryogenicFreezerMenu(i, inventory, this);
     }
 
     @Override
     public WrappedBlockEnergyContainer getEnergyStorage(BlockEntity holder) {
-        return energyContainer == null ? energyContainer = new WrappedBlockEnergyContainer(this, new InsertOnlyEnergyContainer(20000)) : this.energyContainer;
+        return energyContainer == null ? energyContainer = new WrappedBlockEnergyContainer(this, new InsertOnlyEnergyContainer(200000)) : this.energyContainer;
     }
 
     public WrappedBlockEnergyContainer getEnergyStorage() {
@@ -80,7 +80,7 @@ public class OilRefineryBlockEntity extends CookingMachineBlockEntity implements
 
     @Override
     public WrappedBlockFluidContainer getFluidContainer(BlockEntity holder) {
-        return fluidContainer == null ? fluidContainer = new WrappedBlockFluidContainer(this, new SimpleFluidContainer(i -> FluidHooks.buckets(5f), 3, (tank, fluid) -> (tank != 0 && tank != 1) || Objects.requireNonNull(level).getRecipeManager().getAllRecipesFor(ModRecipeTypes.OIL_REFINING.get()).stream().anyMatch(r -> r.ingredient1().matches(fluid) || r.ingredient2().matches(fluid)))) : this.fluidContainer;
+        return fluidContainer == null ? fluidContainer = new WrappedBlockFluidContainer(this, new SimpleFluidContainer(i -> FluidHooks.buckets(10f), 3, (tank, fluid) -> (tank != 0 && tank != 1) || Objects.requireNonNull(level).getRecipeManager().getAllRecipesFor(ModRecipeTypes.CRYOGENIC_FREEZING.get()).stream().anyMatch(r -> r.ingredient1().matches(fluid) || r.ingredient2().matches(fluid)))) : this.fluidContainer;
     }
 
     public WrappedBlockFluidContainer getFluidContainer() {
@@ -90,7 +90,7 @@ public class OilRefineryBlockEntity extends CookingMachineBlockEntity implements
     @Override
     public void update() {
         if (level == null) return;
-        this.recipe = level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.OIL_REFINING.get()).stream().filter(r -> r.matches(this)).findFirst().orElse(null);
+        this.recipe = level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.CRYOGENIC_FREEZING.get()).stream().filter(r -> r.matches(this)).findFirst().orElse(null);
         if (this.recipe == null) {
             this.cookTime = 0;
         } else {

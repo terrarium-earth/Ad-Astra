@@ -1,0 +1,17 @@
+{
+  "type": "ad_astra:cryogenic_freezing",
+  "ingredient_1": {
+    "buckets": 0.012,
+    "fluid": "ad_astra:hydrogen"
+  },
+  "ingredient_2": {
+    "buckets": 0.002,
+    "fluid": "ad_astra:oxygen"
+  },
+  "cookingtime": 2,
+  "energy": 40,
+  "result_fluid": {
+    "buckets": 0.001,
+    "fluid": "ad_astra:cryogenic_fuel"
+  }
+}

@@ -20,4 +20,5 @@ public class ModMenus {
     public static final RegistryEntry<MenuType<ElecrolyzerMenu>> ELECTROLYZER = MENUS.register("electrolyzer", () -> RegistryHelpers.createMenuType(ElecrolyzerMenu::new));
     public static final RegistryEntry<MenuType<GeothermalGeneratorMenu>> GEOTHERMAL_GENERATING = MENUS.register("geothermal_generating", () -> RegistryHelpers.createMenuType(GeothermalGeneratorMenu::new));
     public static final RegistryEntry<MenuType<OilRefineryMenu>> OIL_REFINERY = MENUS.register("oil_refinery", () -> RegistryHelpers.createMenuType(OilRefineryMenu::new));
+    public static final RegistryEntry<MenuType<CryogenicFreezerMenu>> CRYOGENIC_FREEZER = MENUS.register("cryogenic_frezer", () -> RegistryHelpers.createMenuType(CryogenicFreezerMenu::new));
 }
