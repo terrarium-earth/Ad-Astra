@@ -22,6 +22,17 @@ public class ModItems {
     public static final ResourcefulRegistry<Item> SOLAR_PANELS = ResourcefulRegistries.create(MACHINES);
     public static final ResourcefulRegistry<Item> BUCKETS = ResourcefulRegistries.create(ITEMS);
 
+    public static final RegistryEntry<Item> ETRIONIC_GENERATOR = MACHINES.register("etrionic_generator", () -> new BlockItem(ModBlocks.ETRIONIC_GENERATOR.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> COMBUSTION_GENERATOR = MACHINES.register("combustion_generator", () -> new BlockItem(ModBlocks.COMBUSTION_GENERATOR.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> ETRIONIC_SOLAR_PANEL = SOLAR_PANELS.register("etrionic_solar_panel", () -> new BlockItem(ModBlocks.ETRIONIC_SOLAR_PANEL.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> VESNIUM_SOLAR_PANEL = SOLAR_PANELS.register("vesnium_solar_panel", () -> new BlockItem(ModBlocks.VESNIUM_SOLAR_PANEL.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> GEOTHERMAL_GENERATOR = SOLAR_PANELS.register("geothermal_generator", () -> new BlockItem(ModBlocks.GEOTHERMAL_GENERATOR.get(), new Item.Properties()));
+
+    public static final RegistryEntry<Item> ETRIONIC_BLAST_FURNACE = MACHINES.register("etrionic_blast_furnace", () -> new BlockItem(ModBlocks.ETRIONIC_BLAST_FURNACE.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> HYDRAULIC_PRESS = MACHINES.register("hydraulic_press", () -> new BlockItem(ModBlocks.HYDRAULIC_PRESS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> ELECTROLYZER = MACHINES.register("electrolyzer", () -> new BlockItem(ModBlocks.ELECTROLYZER.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> OXYGEN_SENSOR = MACHINES.register("oxygen_sensor", () -> new BlockItem(ModBlocks.OXYGEN_SENSOR.get(), new Item.Properties()));
+
     public static final RegistryEntry<Item> IRON_PLATE = ITEMS.register("iron_plate", () -> new Item(new Item.Properties()));
 
     public static final RegistryEntry<Item> ETRIUM_INGOT = ITEMS.register("etrium_ingot", () -> new Item(new Item.Properties()));
@@ -45,24 +56,12 @@ public class ModItems {
     public static final RegistryEntry<Item> XEBRIUM_PLATE = ITEMS.register("xebrium_plate", () -> new Item(new Item.Properties()));
     public static final RegistryEntry<Item> RAW_XEBRIUM = ITEMS.register("raw_xebrium", () -> new Item(new Item.Properties()));
 
-    public static final RegistryEntry<Item> VESNIUM_INGOT = ITEMS.register("vesnium_ingot", () -> new Item(new Item.Properties()));
-    public static final RegistryEntry<Item> VESNIUM_NUGGET = ITEMS.register("vesnium_nugget", () -> new Item(new Item.Properties()));
-    public static final RegistryEntry<Item> VESNIUM_PLATE = ITEMS.register("vesnium_plate", () -> new Item(new Item.Properties()));
-    public static final RegistryEntry<Item> RAW_VESNIUM = ITEMS.register("raw_vesnium", () -> new Item(new Item.Properties()));
+    public static final RegistryEntry<Item> VESNIUM = ITEMS.register("vesnium", () -> new Item(new Item.Properties()));
 
     public static final RegistryEntry<Item> AEROLYTE_INGOT = ITEMS.register("aerolyte_ingot", () -> new Item(new Item.Properties()));
     public static final RegistryEntry<Item> AEROLYTE_NUGGET = ITEMS.register("aerolyte_nugget", () -> new Item(new Item.Properties()));
     public static final RegistryEntry<Item> AEROLYTE_PLATE = ITEMS.register("aerolyte_plate", () -> new Item(new Item.Properties()));
     public static final RegistryEntry<Item> RAW_AEROLYTE = ITEMS.register("raw_aerolyte", () -> new Item(new Item.Properties()));
-
-    public static final RegistryEntry<Item> ETRIONIC_GENERATOR = MACHINES.register("etrionic_generator", () -> new BlockItem(ModBlocks.ETRIONIC_GENERATOR.get(), new Item.Properties()));
-    public static final RegistryEntry<Item> COMBUSTION_GENERATOR = MACHINES.register("combustion_generator", () -> new BlockItem(ModBlocks.COMBUSTION_GENERATOR.get(), new Item.Properties()));
-    public static final RegistryEntry<Item> ETRIONIC_SOLAR_PANEL = SOLAR_PANELS.register("etrionic_solar_panel", () -> new BlockItem(ModBlocks.ETRIONIC_SOLAR_PANEL.get(), new Item.Properties()));
-    public static final RegistryEntry<Item> XEBRIUM_SOLAR_PANEL = SOLAR_PANELS.register("xebrium_solar_panel", () -> new BlockItem(ModBlocks.XEBRIUM_SOLAR_PANEL.get(), new Item.Properties()));
-    public static final RegistryEntry<Item> VESNIUM_SOLAR_PANEL = SOLAR_PANELS.register("vesnium_solar_panel", () -> new BlockItem(ModBlocks.VESNIUM_SOLAR_PANEL.get(), new Item.Properties()));
-
-    public static final RegistryEntry<Item> ETRIONIC_BLAST_FURNACE = MACHINES.register("etrionic_blast_furnace", () -> new BlockItem(ModBlocks.ETRIONIC_BLAST_FURNACE.get(), new Item.Properties()));
-    public static final RegistryEntry<Item> HYDRAULIC_PRESS = MACHINES.register("hydraulic_press", () -> new BlockItem(ModBlocks.HYDRAULIC_PRESS.get(), new Item.Properties()));
 
     public static final RegistryEntry<Item> SKY_STONE = ITEMS.register("sky_stone", () -> new BlockItem(ModBlocks.SKY_STONE.get(), new Item.Properties()));
     public static final RegistryEntry<Item> ETRIUM_ORE = ITEMS.register("etrium_ore", () -> new BlockItem(ModBlocks.ETRIUM_ORE.get(), new Item.Properties()));

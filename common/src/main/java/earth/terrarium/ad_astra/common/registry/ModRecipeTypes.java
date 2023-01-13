@@ -4,10 +4,7 @@ import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.ad_astra.common.recipe.machine.CombustionRecipe;
-import earth.terrarium.ad_astra.common.recipe.machine.EtrionicBlastingRecipe;
-import earth.terrarium.ad_astra.common.recipe.machine.EtrionicGeneratingRecipe;
-import earth.terrarium.ad_astra.common.recipe.machine.HydraulicPressingRecipe;
+import earth.terrarium.ad_astra.common.recipe.machine.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.crafting.RecipeType;
 
@@ -21,5 +18,9 @@ public class ModRecipeTypes {
     public static final RegistryEntry<RecipeType<EtrionicBlastingRecipe>> ETRIONIC_BLASTING = RECIPE_TYPES.register("etrionic_blasting", () -> new RecipeType<>() {
     });
     public static final RegistryEntry<RecipeType<HydraulicPressingRecipe>> HYDRAULIC_PRESSING = RECIPE_TYPES.register("hydraulic_pressing", () -> new RecipeType<>() {
+    });
+    public static final RegistryEntry<RecipeType<ElectrolysisRecipe>> ELECTROLYSIS = RECIPE_TYPES.register("electrolysis", () -> new RecipeType<>() {
+    });
+    public static final RegistryEntry<RecipeType<GeothermalRecipe>> GEOTHERMAL_GENERATING = RECIPE_TYPES.register("geothermal_generating", () -> new RecipeType<>() {
     });
 }

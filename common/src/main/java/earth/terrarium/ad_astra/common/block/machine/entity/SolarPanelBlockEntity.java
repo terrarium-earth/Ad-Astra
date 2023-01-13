@@ -20,7 +20,6 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
 
 @MethodsReturnNonnullByDefault
 public class SolarPanelBlockEntity extends MachineBlockEntity implements EnergyAttachment.Block, ExtraDataMenuProvider {
@@ -55,7 +54,6 @@ public class SolarPanelBlockEntity extends MachineBlockEntity implements EnergyA
         return this.getBlockState().getBlock().getName();
     }
 
-    @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
         return new SolarPanelMenu(i, inventory, this);

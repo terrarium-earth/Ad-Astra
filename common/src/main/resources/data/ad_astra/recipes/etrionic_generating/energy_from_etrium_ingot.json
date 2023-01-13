@@ -3,6 +3,6 @@
   "ingredient": {
     "item": "ad_astra:etrium_ingot"
   },
-  "cookingtime": 2000,
+  "cookingtime": 1000,
   "energy": 25
 }

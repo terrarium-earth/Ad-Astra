@@ -20,7 +20,7 @@ public class HydraulicPressingRecipe extends AbstractCookingRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return ModRecipeSerializers.HYDRAULIC_PRESSING_SERIALIZER.get();
+        return ModRecipeSerializers.HYDRAULIC_PRESSING.get();
     }
 
     @Override

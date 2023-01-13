@@ -1,0 +1,17 @@
+{
+  "type": "ad_astra:electrolysis",
+  "ingredient": {
+    "buckets": 0.003,
+    "fluid": "minecraft:water"
+  },
+  "cookingtime": 2,
+  "energy": 20,
+  "result_fluid_1": {
+    "buckets": 0.001,
+    "fluid": "ad_astra:oxygen"
+  },
+  "result_fluid_2": {
+    "buckets": 0.002,
+    "fluid": "ad_astra:hydrogen"
+  }
+}

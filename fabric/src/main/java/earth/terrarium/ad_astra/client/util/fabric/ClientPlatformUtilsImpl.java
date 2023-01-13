@@ -1,6 +1,6 @@
-package earth.terrarium.ad_astra.client.fabric;
+package earth.terrarium.ad_astra.client.util.fabric;
 
-import earth.terrarium.ad_astra.client.ClientPlatformUtils;
+import earth.terrarium.ad_astra.client.util.ClientPlatformUtils;
 import net.fabricmc.fabric.api.client.model.BakedModelManagerHelper;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.gui.screens.Screen;

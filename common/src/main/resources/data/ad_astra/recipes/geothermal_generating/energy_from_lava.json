@@ -1,0 +1,9 @@
+{
+  "type": "ad_astra:geothermal_generating",
+  "ingredient": {
+    "buckets": 0.001,
+    "fluid": "minecraft:lava"
+  },
+  "cookingtime": 0,
+  "energy": 10
+}

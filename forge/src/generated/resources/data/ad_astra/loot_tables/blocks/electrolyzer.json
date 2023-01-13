@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "ad_astra:xebrium_solar_panel"
+          "name": "ad_astra:electrolyzer"
         }
       ],
       "rolls": 1.0

@@ -12,7 +12,7 @@ import net.minecraft.world.inventory.Slot;
 public class HydraulicPressMenu extends AbstractModContainerMenu<HydraulicPressBlockEntity> {
 
     public HydraulicPressMenu(int id, Inventory inv, HydraulicPressBlockEntity entity) {
-        super(ModMenus.HYDRAULIC_PRESS_MENU.get(), id, inv, entity);
+        super(ModMenus.HYDRAULIC_PRESS.get(), id, inv, entity);
     }
 
     public HydraulicPressMenu(int id, Inventory inv, FriendlyByteBuf buf) {

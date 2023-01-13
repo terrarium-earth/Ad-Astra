@@ -12,7 +12,7 @@ import net.minecraft.world.inventory.Slot;
 public class CombustionGeneratorMenu extends AbstractModContainerMenu<CombustionGeneratorBlockEntity> {
 
     public CombustionGeneratorMenu(int id, Inventory inv, CombustionGeneratorBlockEntity entity) {
-        super(ModMenus.COMBUSTION_GENERATOR_MENU.get(), id, inv, entity);
+        super(ModMenus.COMBUSTION_GENERATOR.get(), id, inv, entity);
     }
 
     public CombustionGeneratorMenu(int id, Inventory inv, FriendlyByteBuf buf) {

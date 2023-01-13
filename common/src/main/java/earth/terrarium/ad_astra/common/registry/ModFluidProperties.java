@@ -18,7 +18,7 @@ public class ModFluidProperties {
             .viscosity(0)
             .density(-1)
             .disablePlacing()
-            .tintColor(0x8CA6B9)
+            .tintColor(0xdae6f0)
             .canConvertToSource(false));
 
     public static final FluidData HYDROGEN = FLUID_PROPERTIES.register("hydrogen", FluidProperties.create()

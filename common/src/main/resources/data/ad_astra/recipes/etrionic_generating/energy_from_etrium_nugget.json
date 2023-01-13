@@ -3,6 +3,6 @@
   "ingredient": {
     "item": "ad_astra:etrium_nugget"
   },
-  "cookingtime": 1000,
-  "energy": 5
+  "cookingtime": 100,
+  "energy": 25
 }

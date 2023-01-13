@@ -11,7 +11,7 @@ import net.minecraft.world.inventory.Slot;
 public class EtrionicGeneratorMenu extends AbstractModContainerMenu<EtrionicGeneratorBlockEntity> {
 
     public EtrionicGeneratorMenu(int id, Inventory inv, EtrionicGeneratorBlockEntity entity) {
-        super(ModMenus.ETRIONIC_GENERATOR_MENU.get(), id, inv, entity);
+        super(ModMenus.ETRIONIC_GENERATOR.get(), id, inv, entity);
     }
 
     public EtrionicGeneratorMenu(int id, Inventory inv, FriendlyByteBuf buf) {

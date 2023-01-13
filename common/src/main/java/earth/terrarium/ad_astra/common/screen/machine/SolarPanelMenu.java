@@ -10,7 +10,7 @@ import net.minecraft.world.entity.player.Player;
 public class SolarPanelMenu extends AbstractModContainerMenu<SolarPanelBlockEntity> {
 
     public SolarPanelMenu(int id, Inventory inv, SolarPanelBlockEntity entity) {
-        super(ModMenus.SOLAR_PANEL_MENU.get(), id, inv, entity);
+        super(ModMenus.SOLAR_PANEL.get(), id, inv, entity);
     }
 
     public SolarPanelMenu(int id, Inventory inv, FriendlyByteBuf buf) {

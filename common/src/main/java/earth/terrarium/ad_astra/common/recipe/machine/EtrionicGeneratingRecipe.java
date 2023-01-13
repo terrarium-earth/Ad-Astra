@@ -43,7 +43,7 @@ public record EtrionicGeneratingRecipe(ResourceLocation id, Ingredient ingredien
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return ModRecipeSerializers.ETRIONIC_GENERATING_SERIALIZER.get();
+        return ModRecipeSerializers.ETRIONIC_GENERATING.get();
     }
 
     @Override

@@ -1,6 +1,6 @@
-package earth.terrarium.ad_astra.client.forge;
+package earth.terrarium.ad_astra.client.util.forge;
 
-import earth.terrarium.ad_astra.client.ClientPlatformUtils;
+import earth.terrarium.ad_astra.client.util.ClientPlatformUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.MenuAccess;

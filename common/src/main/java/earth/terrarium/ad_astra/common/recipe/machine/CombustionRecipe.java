@@ -43,7 +43,7 @@ public record CombustionRecipe(ResourceLocation id, FluidHolder ingredient, int 
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return ModRecipeSerializers.COMBUSTION_SERIALIZER.get();
+        return ModRecipeSerializers.COMBUSTION.get();
     }
 
     @Override

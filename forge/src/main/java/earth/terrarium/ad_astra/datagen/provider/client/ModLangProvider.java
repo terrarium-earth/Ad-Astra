@@ -24,5 +24,9 @@ public class ModLangProvider extends LanguageProvider {
         ModBlocks.BLOCKS.stream().filter(e -> !(e.get() instanceof WallSignBlock)).forEach(entry -> addBlock(entry, StringUtils.capitaliseAllWords(entry.getId().getPath().replace("_", " "))));
         ModItems.ITEMS.stream().filter(e -> !(e.get() instanceof BlockItem)).forEach(entry -> addItem(entry, StringUtils.capitaliseAllWords(Objects.requireNonNull(entry.getId()).getPath().replace("_", " "))));
         ModEntityTypes.ENTITY_TYPES.stream().forEach(entry -> addEntityType(entry, StringUtils.capitaliseAllWords(Objects.requireNonNull(entry.getId()).getPath().replace("_", " "))));
+
+        add("tooltip.ad_astra.empty_tank", "Empty Tank");
+        add("tooltip.ad_astra.energy_bar", "%s ⚡ /§a %s ⚡");
+        add("tooltip.ad_astra.fluid_tank", "%s 🪣 / %s 🪣 %s");
     }
 }

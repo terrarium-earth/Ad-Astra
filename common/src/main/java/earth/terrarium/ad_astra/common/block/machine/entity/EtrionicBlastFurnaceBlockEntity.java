@@ -1,22 +1,14 @@
 package earth.terrarium.ad_astra.common.block.machine.entity;
 
-import earth.terrarium.ad_astra.common.block.machine.BasicContainer;
-import earth.terrarium.ad_astra.common.block.machine.MachineBlockEntity;
+import earth.terrarium.ad_astra.common.block.machine.CookingMachineBlockEntity;
 import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.ad_astra.common.registry.ModRecipeTypes;
 import earth.terrarium.ad_astra.common.screen.machine.EtrionicBlastFurnaceMenu;
 import earth.terrarium.botarium.common.energy.base.EnergyAttachment;
 import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
-import earth.terrarium.botarium.common.menu.ExtraDataMenuProvider;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.NonNullList;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -25,25 +17,20 @@ import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
 
 @MethodsReturnNonnullByDefault
-public class EtrionicBlastFurnaceBlockEntity extends MachineBlockEntity implements EnergyAttachment.Block, BasicContainer, ExtraDataMenuProvider {
+public class EtrionicBlastFurnaceBlockEntity extends CookingMachineBlockEntity implements EnergyAttachment.Block {
     private WrappedBlockEnergyContainer energyContainer;
-    protected NonNullList<ItemStack> items = NonNullList.withSize(2, ItemStack.EMPTY);
-
     private AbstractCookingRecipe recipe;
-    private int cookTime;
-    private int cookTimeTotal;
 
     public EtrionicBlastFurnaceBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntityTypes.ETRIONIC_BLAST_FURNACE.get(), blockPos, blockState);
+        super(ModBlockEntityTypes.ETRIONIC_BLAST_FURNACE.get(), blockPos, blockState, 2);
     }
 
     @Override
     public void serverTick() {
         if (this.recipe != null && this.canCraft()) {
-            if (this.getEnergyStorage().internalExtract(10, true) > 0) { // Check energy // TODO
+            if (this.getEnergyStorage().internalExtract(10, true) >= 10) {
                 this.getEnergyStorage().internalExtract(10, false);
                 this.cookTime++;
                 if (this.cookTime >= cookTimeTotal) {
@@ -59,49 +46,17 @@ public class EtrionicBlastFurnaceBlockEntity extends MachineBlockEntity implemen
     }
 
     @Override
-    public void load(CompoundTag tag) {
-        super.load(tag);
-        ContainerHelper.loadAllItems(tag, this.items);
-        this.cookTime = tag.getInt("CookTime");
-        this.cookTimeTotal = tag.getInt("CookTimeTotal");
-    }
-
-    @Override
-    protected void saveAdditional(CompoundTag tag) {
-        super.saveAdditional(tag);
-        ContainerHelper.saveAllItems(tag, this.items);
-        tag.putInt("CookTime", this.cookTime);
-        tag.putInt("CookTimeTotal", this.cookTimeTotal);
-    }
-
-    @Override
-    public void writeExtraData(ServerPlayer player, FriendlyByteBuf buffer) {
-        buffer.writeBlockPos(this.getBlockPos());
-    }
-
-    @Override
-    public Component getDisplayName() {
-        return this.getBlockState().getBlock().getName();
-    }
-
-    @Nullable
-    @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
         return new EtrionicBlastFurnaceMenu(i, inventory, this);
     }
 
     @Override
     public WrappedBlockEnergyContainer getEnergyStorage(BlockEntity holder) {
-        return energyContainer == null ? energyContainer = new WrappedBlockEnergyContainer(this, new InsertOnlyEnergyContainer(100000)) : this.energyContainer; // TODO: Configurable capacity
+        return energyContainer == null ? energyContainer = new WrappedBlockEnergyContainer(this, new InsertOnlyEnergyContainer(20000)) : this.energyContainer;
     }
 
     public WrappedBlockEnergyContainer getEnergyStorage() {
         return getEnergyStorage(this);
-    }
-
-    @Override
-    public NonNullList<ItemStack> getItems() {
-        return this.items;
     }
 
     @Override
@@ -139,10 +94,5 @@ public class EtrionicBlastFurnaceBlockEntity extends MachineBlockEntity implemen
             return output.isEmpty() || (ItemStack.isSameItemSameTags(output, recipe.getResultItem()) && recipe.getResultItem().getCount() + output.getCount() <= output.getMaxStackSize());
         }
         return false;
-    }
-
-    @Override
-    public boolean stillValid(Player player) {
-        return true;
     }
 }

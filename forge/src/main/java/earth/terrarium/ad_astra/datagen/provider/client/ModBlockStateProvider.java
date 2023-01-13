@@ -42,6 +42,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 } else if (block instanceof SaplingBlock) {
                 } else if (block instanceof SignBlock) {
                 } else if (block instanceof ChainBlock) {
+                } else if (block.equals(ModBlocks.OXYGEN_SENSOR.get())) {
+                    simpleBlockItem(block, new ModelFile.UncheckedModelFile(extend(blockTexture(block), "_on")));
                 } else if (block instanceof LanternBlock) {
                 } else {
                     simpleBlockItem(block, new ModelFile.UncheckedModelFile(blockTexture(block)));

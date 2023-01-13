@@ -12,7 +12,7 @@ import net.minecraft.world.inventory.Slot;
 public class EtrionicBlastFurnaceMenu extends AbstractModContainerMenu<EtrionicBlastFurnaceBlockEntity> {
 
     public EtrionicBlastFurnaceMenu(int id, Inventory inv, EtrionicBlastFurnaceBlockEntity entity) {
-        super(ModMenus.ETRIONIC_BLAST_FURNACE_MENU.get(), id, inv, entity);
+        super(ModMenus.ETRIONIC_BLAST_FURNACE.get(), id, inv, entity);
     }
 
     public EtrionicBlastFurnaceMenu(int id, Inventory inv, FriendlyByteBuf buf) {

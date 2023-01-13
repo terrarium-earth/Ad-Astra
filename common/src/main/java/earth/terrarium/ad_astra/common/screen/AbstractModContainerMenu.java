@@ -5,6 +5,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
@@ -92,6 +93,12 @@ public abstract class AbstractModContainerMenu<T extends BlockEntity> extends Ab
         for (int k = 0; k < 9; ++k) {
             this.addSlot(new Slot(inv, k, getPlayerInvXOffset() + k * 18, getPlayerInvYOffset() + 58));
         }
+    }
+
+    @Override
+    public void clicked(int slotIndex, int button, @NotNull ClickType actionType, @NotNull Player player) {
+        super.clicked(slotIndex, button, actionType, player);
+        this.broadcastFullState();
     }
 
     protected static <T extends BlockEntity> T getTileFromBuf(Level level, FriendlyByteBuf buf, Class<T> type) {

@@ -20,7 +20,7 @@ public class EtrionicBlastingRecipe extends AbstractCookingRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return ModRecipeSerializers.ETRIONIC_BLASTING_SERIALIZER.get();
+        return ModRecipeSerializers.ETRIONIC_BLASTING.get();
     }
 
     @Override
