@@ -21,6 +21,7 @@ public class ModBlockEntityTypes {
     public static final RegistryEntry<BlockEntityType<HydraulicPressBlockEntity>> HYDRAULIC_PRESS = BLOCK_ENTITY_TYPES.register("hydraulic_press", () -> createBlockEntityType(HydraulicPressBlockEntity::new, ModBlocks.HYDRAULIC_PRESS.get()));
     public static final RegistryEntry<BlockEntityType<ElectrolyzerBlockEntity>> ELECTROLYZER = BLOCK_ENTITY_TYPES.register("electrolyzer", () -> createBlockEntityType(ElectrolyzerBlockEntity::new, ModBlocks.ELECTROLYZER.get()));
     public static final RegistryEntry<BlockEntityType<OxygenSensorBlockEntity>> OXYGEN_SENSOR = BLOCK_ENTITY_TYPES.register("oxygen_sensor", () -> createBlockEntityType(OxygenSensorBlockEntity::new, ModBlocks.OXYGEN_SENSOR.get()));
+    public static final RegistryEntry<BlockEntityType<OilRefineryBlockEntity>> OIL_REFINERY = BLOCK_ENTITY_TYPES.register("oil_refinery", () -> createBlockEntityType(OilRefineryBlockEntity::new, ModBlocks.OIL_REFINERY.get()));
 
 
     public static <E extends BlockEntity> BlockEntityType<E> createBlockEntityType(BlockEntityType.BlockEntitySupplier<E> factory, Block... blocks) {

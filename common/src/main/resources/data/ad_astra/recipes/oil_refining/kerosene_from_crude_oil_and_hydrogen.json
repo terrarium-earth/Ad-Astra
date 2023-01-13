@@ -1,0 +1,17 @@
+{
+  "type": "ad_astra:oil_refining",
+  "ingredient_1": {
+    "buckets": 0.002,
+    "fluid": "ad_astra:crude_oil"
+  },
+  "ingredient_2": {
+    "buckets": 0.001,
+    "fluid": "ad_astra:hydrogen"
+  },
+  "cookingtime": 2,
+  "energy": 10,
+  "result_fluid": {
+    "buckets": 0.001,
+    "fluid": "ad_astra:kerosene"
+  }
+}

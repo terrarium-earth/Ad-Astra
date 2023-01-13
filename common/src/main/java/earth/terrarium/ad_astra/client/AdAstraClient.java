@@ -30,6 +30,7 @@ public class AdAstraClient {
         ClientPlatformUtils.registerScreen(ModMenus.ETRIONIC_BLAST_FURNACE.get(), TestScreen::new);
         ClientPlatformUtils.registerScreen(ModMenus.HYDRAULIC_PRESS.get(), TestScreen::new);
         ClientPlatformUtils.registerScreen(ModMenus.ELECTROLYZER.get(), TestScreen::new);
+        ClientPlatformUtils.registerScreen(ModMenus.OIL_REFINERY.get(), TestScreen::new);
     }
 
     public static void onRegisterHud(Consumer<ClientPlatformUtils.RenderHud> register) {

@@ -20,7 +20,7 @@ public class OxygenSensorBlockEntity extends MachineBlockEntity {
         if (level.getGameTime() % 20 == 0) {
             boolean hasOxygen = false;
             for (Direction dir : Direction.values()) {
-//                if (OxygenUtils.posHasOxygen(level, this.worldPosition.relative(dir))) {
+//                if (OxygenUtils.posHasOxygen(level, this.worldPosition.relative(dir))) { // TODO
                 hasOxygen = true;
                 break;
 //                }

@@ -1,4 +1,4 @@
-// 1.19.3	2023-01-12T14:30:34.56687	Block States: ad_astra
+// 1.19.3	2023-01-13T03:56:35.474707	Block States: ad_astra
 f17a3649d35ad50d029d53da2890cba56a0cb0be assets/ad_astra/blockstates/crude_oil.json
 3cf9d4b0c6b24600e4b890969810cdc6944ea21a assets/ad_astra/blockstates/cryogenic_fuel.json
 0d2b6827806bcb2c57c478c36d634114ed0018c5 assets/ad_astra/blockstates/etrionic_fuel.json
@@ -27,6 +27,7 @@ e41a117eec34f78035b83531f01d6f3d9b277965 assets/ad_astra/models/item/combustion_
 b4cf917ea54410c43f638a333b029476f2788ac9 assets/ad_astra/models/item/etrium_ore.json
 e5147fce3a29e36e5aa6b61f9dfe8814487b1d47 assets/ad_astra/models/item/geothermal_generator.json
 a953e21b63e1039d27f76777dbbc4425aa28e206 assets/ad_astra/models/item/hydraulic_press.json
+ee8c48db99b6471d8a2c3590af8f1b788503547c assets/ad_astra/models/item/oil_refinery.json
 fdb0e27e500fe1403a584e8c3cb849df22616ed5 assets/ad_astra/models/item/oxygen_sensor.json
 b5dd0d8d7cbda8c5b5f42eb7b23f93a5395fb63c assets/ad_astra/models/item/sky_stone.json
 ccf5b6a0ceabed8ca4aa7f9b4c3b5e81645a8263 assets/ad_astra/models/item/vesnium_solar_panel.json
