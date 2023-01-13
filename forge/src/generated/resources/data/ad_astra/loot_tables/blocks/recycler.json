@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "ad_astra:cryogenic_freezer"
+          "name": "ad_astra:recycler"
         }
       ],
       "rolls": 1.0

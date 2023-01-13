@@ -7,8 +7,6 @@ import earth.terrarium.ad_astra.common.block.machine.entity.GeothermalGeneratorB
 import earth.terrarium.ad_astra.common.registry.ModRecipeSerializers;
 import earth.terrarium.ad_astra.common.registry.ModRecipeTypes;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
-import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
-import earth.terrarium.botarium.common.item.ItemStackHolder;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
@@ -31,9 +29,7 @@ public record GeothermalRecipe(ResourceLocation id, FluidHolder ingredient, int 
 
     @Override
     public boolean matches(Container container, Level level) {
-        ItemStackHolder holder = new ItemStackHolder(container.getItem(0));
-        FluidHolder fluid = FluidHooks.safeGetItemFluidManager(holder.getStack()).map(h -> h.getFluidInTank(0)).orElse(null);
-        return fluid != null && !fluid.isEmpty() && fluid.matches(ingredient);
+        return false;
     }
 
     public boolean matches(GeothermalGeneratorBlockEntity block) {

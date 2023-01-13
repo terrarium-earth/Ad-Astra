@@ -1,6 +1,6 @@
-// 1.19.3	2023-01-13T04:58:10.772886	Loot Tables
+// 1.19.3	2023-01-13T11:09:06.409691	Loot Tables
 55d8ce8fa2b53a9b7b8f2f028f0144a80569a427 data/ad_astra/loot_tables/blocks/combustion_generator.json
-0c49c305a54df9097a6473a96e44c77eda86964c data/ad_astra/loot_tables/blocks/cryogenic_freezer.json
+80a39447b464dd32538b1c0f630a36f58288edc3 data/ad_astra/loot_tables/blocks/cryogenic_freezer.json
 0dac4356bfca16580ab77b02d0cbdaa8ca6c1843 data/ad_astra/loot_tables/blocks/electrolyzer.json
 ac26ccd58f447fd251b442e38eb1fa91d1fe8543 data/ad_astra/loot_tables/blocks/etrionic_blast_furnace.json
 2c6b78e62318a2878c3efd9016a3586ca389f6e5 data/ad_astra/loot_tables/blocks/etrionic_generator.json
@@ -9,6 +9,8 @@ f20e733b3e9fca135b239d5c821de3f688fdd56b data/ad_astra/loot_tables/blocks/etrium
 586fe83bc06f19c27cc31d982887d827ae255cd8 data/ad_astra/loot_tables/blocks/geothermal_generator.json
 00cc9860f708b0e6ebbf18be4d30fe044223d895 data/ad_astra/loot_tables/blocks/hydraulic_press.json
 1ec4a91d4880467c749ff770a0bdb87dcf2fa50a data/ad_astra/loot_tables/blocks/oil_refinery.json
+76112487209ffacb7eb0559e31b7cce0b39cd588 data/ad_astra/loot_tables/blocks/oxygen_distributor.json
 b0c7361c89f65b5d8a9bd236cf108718a5e5f3a7 data/ad_astra/loot_tables/blocks/oxygen_sensor.json
+078aade2b58b5d724c69039ba4cb57a456242e86 data/ad_astra/loot_tables/blocks/recycler.json
 acb0c4ffd0c0d1585560e76241721ee9d9dd469f data/ad_astra/loot_tables/blocks/sky_stone.json
 512272cf4226818bde0e7904978d52192ea6d200 data/ad_astra/loot_tables/blocks/vesnium_solar_panel.json

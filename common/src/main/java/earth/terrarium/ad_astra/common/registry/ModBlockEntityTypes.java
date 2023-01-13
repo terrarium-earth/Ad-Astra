@@ -23,7 +23,8 @@ public class ModBlockEntityTypes {
     public static final RegistryEntry<BlockEntityType<OxygenSensorBlockEntity>> OXYGEN_SENSOR = BLOCK_ENTITY_TYPES.register("oxygen_sensor", () -> createBlockEntityType(OxygenSensorBlockEntity::new, ModBlocks.OXYGEN_SENSOR.get()));
     public static final RegistryEntry<BlockEntityType<OilRefineryBlockEntity>> OIL_REFINERY = BLOCK_ENTITY_TYPES.register("oil_refinery", () -> createBlockEntityType(OilRefineryBlockEntity::new, ModBlocks.OIL_REFINERY.get()));
     public static final RegistryEntry<BlockEntityType<CryogenicFreezerBlockEntity>> CRYOGENIC_FREEZER = BLOCK_ENTITY_TYPES.register("cryogenic_freezer", () -> createBlockEntityType(CryogenicFreezerBlockEntity::new, ModBlocks.CRYOGENIC_FREEZER.get()));
-
+    public static final RegistryEntry<BlockEntityType<RecyclerBlockEntity>> RECYCLER = BLOCK_ENTITY_TYPES.register("recycler", () -> createBlockEntityType(RecyclerBlockEntity::new, ModBlocks.RECYCLER.get()));
+    public static final RegistryEntry<BlockEntityType<OxygenDistributorBlockEntity>> OXYGEN_DISTRIBUTOR = BLOCK_ENTITY_TYPES.register("oxygen_distributor", () -> createBlockEntityType(OxygenDistributorBlockEntity::new, ModBlocks.OXYGEN_DISTRIBUTOR.get()));
 
     public static <E extends BlockEntity> BlockEntityType<E> createBlockEntityType(BlockEntityType.BlockEntitySupplier<E> factory, Block... blocks) {
         return BlockEntityType.Builder.of(factory, blocks).build(null);
