@@ -96,6 +96,5 @@ public interface InteractablePipe<T> {
     }
 
     record Node<T>(T storage, Direction direction, BlockPos pos) {
-
     }
 }

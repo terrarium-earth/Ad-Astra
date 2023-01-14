@@ -1,7 +1,6 @@
 package earth.terrarium.ad_astra.common.item;
 
 import dev.architectury.injectables.annotations.PlatformOnly;
-import dev.architectury.platform.Platform;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.util.LangUtils;
 import earth.terrarium.botarium.common.energy.base.EnergyAttachment;

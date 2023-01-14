@@ -1,5 +1,6 @@
 package earth.terrarium.ad_astra.common.block.pipe;
 
+import earth.terrarium.ad_astra.common.block.machine.BasicContainer;
 import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.base.PlatformFluidHandler;
@@ -33,43 +34,79 @@ public class FluidPipeBlockEntity extends BlockEntity implements InteractablePip
 
     @Override
     public void insertInto(PlatformFluidHandler consumer, Direction direction, BlockPos pos) {
+        if (level == null) return;
         BlockState state = this.getBlockState();
         BlockState state2 = level.getBlockState(pos);
-
-        if (!(state.getBlock() instanceof PipeBlock) || !(state2.getBlock() instanceof PipeBlock)) {
-            return;
-        }
-
+        if (state.isAir() || state2.isAir()) return;
         PipeState pipeState = state.getValue(PipeBlock.DIRECTIONS.get(this.getSource().direction()));
         PipeState pipeState2 = state2.getValue(PipeBlock.DIRECTIONS.get(direction));
 
-        PlatformFluidHandler input;
-        PlatformFluidHandler output;
+        if (getSource().storage() == null || getConsumers().size() == 0) return;
+        if (pipeState == PipeState.INSERT && pipeState2 == PipeState.INSERT) return;
+        if (pipeState == PipeState.EXTRACT && pipeState2 == PipeState.EXTRACT) return;
+        if (pipeState == PipeState.NONE || pipeState2 == PipeState.NONE) return;
 
-        if (pipeState == PipeState.INSERT && pipeState2 == PipeState.INSERT) {
-            return;
-        } else if (pipeState == PipeState.EXTRACT && pipeState2 == PipeState.EXTRACT) {
-            return;
-        } else if (pipeState == PipeState.NONE || pipeState2 == PipeState.NONE) {
-            return;
-        } else if (pipeState2 == PipeState.INSERT || pipeState == PipeState.EXTRACT) {
-            input = source.storage();
-            output = consumer;
-        } else if (pipeState2 == PipeState.EXTRACT || pipeState == PipeState.INSERT) {
+        PlatformFluidHandler input = getSource().storage();
+        PlatformFluidHandler output = consumer;
+
+        if (pipeState2 == PipeState.EXTRACT || pipeState == PipeState.INSERT) {
             input = consumer;
-            output = source.storage();
-        } else {
-            return;
+            output = getSource().storage();
         }
 
-        if (getSource() != null && getConsumers().size() > 0) {
-            for (FluidHolder fluid : input.getFluidTanks()) {
-                if (!fluid.isEmpty()) {
-                    FluidHolder transfer = FluidHooks.newFluidHolder(fluid.getFluid(), ((PipeBlock) this.getBlockState().getBlock()).getTransferRate(), fluid.getCompound());
-                    FluidHooks.moveFluid(input, output, transfer);
-                }
+        for (FluidHolder fluid : input.getFluidTanks()) {
+            if (!fluid.isEmpty()) {
+                FluidHolder transfer = FluidHooks.newFluidHolder(fluid.getFluid(), ((PipeBlock) this.getBlockState().getBlock()).getTransferRate(), fluid.getCompound());
+                FluidHooks.moveFluid(input, output, transfer);
             }
         }
+        if (level.getBlockEntity(pos.relative(direction)) instanceof BasicContainer container) {
+            container.update();
+        }
+
+//        if (level == null) return;
+//        BlockState state1 = this.getBlockState();
+//        BlockState state2 = level.getBlockState(pos);
+//        if (state1.isAir()) return;
+//        if (state2.isAir()) return;
+//
+//
+//        PipeState pipeState = state1.getValue(PipeBlock.DIRECTIONS.get(this.getSource().direction()));
+//        PipeState pipeState2 = state2.getValue(PipeBlock.DIRECTIONS.get(direction));
+//        if (!(state1.getBlock() instanceof PipeBlock) || !(state2.getBlock() instanceof PipeBlock)) {
+//            return;
+//        }
+//
+//        PlatformFluidHandler input;
+//        PlatformFluidHandler output;
+//
+//        if (pipeState == PipeState.INSERT && pipeState2 == PipeState.INSERT) {
+//            return;
+//        } else if (pipeState == PipeState.EXTRACT && pipeState2 == PipeState.EXTRACT) {
+//            return;
+//        } else if (pipeState == PipeState.NONE || pipeState2 == PipeState.NONE) {
+//            return;
+//        } else if (pipeState2 == PipeState.INSERT || pipeState == PipeState.EXTRACT) {
+//            input = source.storage();
+//            output = consumer;
+//        } else if (pipeState2 == PipeState.EXTRACT || pipeState == PipeState.INSERT) {
+//            input = consumer;
+//            output = source.storage();
+//        } else {
+//            return;
+//        }
+//
+//        if (getSource() != null && getConsumers().size() > 0) {
+//            for (FluidHolder fluid : input.getFluidTanks()) {
+//                if (!fluid.isEmpty()) {
+//                    FluidHolder transfer = FluidHooks.newFluidHolder(fluid.getFluid(), ((PipeBlock) this.getBlockState().getBlock()).getTransferRate(), fluid.getCompound());
+//                    FluidHooks.moveFluid(input, output, transfer);
+//                }
+//            }
+//            if (level.getBlockEntity(pos.relative(direction)) instanceof BasicContainer container) {
+//                container.update();
+//            }
+//        }
     }
 
     @Override

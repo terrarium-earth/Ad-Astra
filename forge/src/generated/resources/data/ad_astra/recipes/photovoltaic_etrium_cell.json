@@ -4,15 +4,15 @@
   "group": "photovoltaic_etrium_cell",
   "key": {
     "I": {
-      "item": "ad_astra:etrium_nugget"
+      "item": "ad_astra:etrium_plate"
     },
     "P": {
       "tag": "ad_astra:steel_plate"
     }
   },
   "pattern": [
-    "III",
-    "PPP"
+    "II",
+    "PP"
   ],
   "result": {
     "item": "ad_astra:photovoltaic_etrium_cell"

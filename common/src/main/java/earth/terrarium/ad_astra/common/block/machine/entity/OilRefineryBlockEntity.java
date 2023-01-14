@@ -103,6 +103,7 @@ public class OilRefineryBlockEntity extends CookingMachineBlockEntity implements
         return getFluidContainer().getFluids().get(0).getFluid().equals(recipe.ingredient1().getFluid()) && getFluidContainer().getFluids().get(1).getFluid().equals(recipe.ingredient2().getFluid()) || getFluidContainer().getFluids().get(0).getFluid().equals(recipe.ingredient2().getFluid()) && getFluidContainer().getFluids().get(1).getFluid().equals(recipe.ingredient1().getFluid());
     }
 
+    @Override
     public void updateFluidSlots() {
         FluidUtils.insertItemFluidToTank(this, this, 0, 1, f -> recipe == null || f.equals(recipe.ingredient1().getFluid()));
         FluidUtils.insertItemFluidToTank(this, this, 2, 3, f -> recipe == null || f.equals(recipe.ingredient2().getFluid()));

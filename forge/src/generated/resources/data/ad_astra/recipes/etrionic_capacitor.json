@@ -6,17 +6,20 @@
     "C": {
       "item": "ad_astra:etrionic_core"
     },
-    "I": {
+    "E": {
       "item": "ad_astra:etrium_ingot"
     },
-    "P": {
-      "tag": "ad_astra:steel_plate"
+    "I": {
+      "tag": "ad_astra:steel_ingot"
+    },
+    "N": {
+      "tag": "ad_astra:steel_nugget"
     }
   },
   "pattern": [
-    "PPP",
-    "ICI",
-    "PPP"
+    "NIN",
+    "ECE",
+    "NIN"
   ],
   "result": {
     "item": "ad_astra:etrionic_capacitor"

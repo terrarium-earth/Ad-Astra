@@ -1,4 +1,4 @@
-// 1.19.3	2023-01-13T22:58:07.379522	Item Models: ad_astra
+// 1.19.3	2023-01-14T02:23:40.281314	Item Models: ad_astra
 30391f182366c0f22529481911aca797186a29d5 assets/ad_astra/models/item/aerolyte_ingot.json
 a6960cb247dd1a557f6d31391bf64859593eea40 assets/ad_astra/models/item/aerolyte_nugget.json
 09e33dd3debc1b99011c1b30d69f0d78341fb9a8 assets/ad_astra/models/item/aerolyte_plate.json
@@ -16,6 +16,7 @@ f177de1667391e8fbcbe7495869ec17fe8533bd9 assets/ad_astra/models/item/desmium_pla
 610b56d23a1cbf784bb3888c12aab9202b6065a5 assets/ad_astra/models/item/etrium_plate.json
 94880a02ec8d259ab370c1a6fe5f083998f148ac assets/ad_astra/models/item/hydrogen_bucket.json
 7d828e314b4ba4d5fa172b04c76b02fb45e69097 assets/ad_astra/models/item/iron_plate.json
+4715b78d10f24a12edfd8acdeb2f7d10ef1c0745 assets/ad_astra/models/item/iron_rod.json
 968be322a84295e51c9152ffde74c9027aba7cef assets/ad_astra/models/item/kerosene_bucket.json
 e7109879102051dadd8fba71f2568154a2282248 assets/ad_astra/models/item/oxygen_bucket.json
 6323e89e35c52c06f7c77fc8c1447d5535381ddf assets/ad_astra/models/item/photovoltaic_etrium_cell.json

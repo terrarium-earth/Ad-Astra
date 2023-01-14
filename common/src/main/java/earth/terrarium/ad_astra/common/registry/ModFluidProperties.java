@@ -71,6 +71,6 @@ public class ModFluidProperties {
             .viscosity(71)
             .density(71)
             .temperature(-10000000)
-            .tintColor(0x2cbcc9)
+            .tintColor(0x6cfffa)
             .canConvertToSource(false));
 }

@@ -91,11 +91,23 @@ public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
         return super.use(state, level, pos, player, hand, hit);
     }
 
+    private boolean checkCompat(Level level, BlockPos offset) {
+        if (level.getBlockState(offset).getBlock() instanceof PipeBlock pipe) {
+            if (this.getType() == PipeType.FLUID_PIPE) {
+                return pipe.getType() == PipeType.FLUID_PIPE;
+
+            } else if (this.getType() == PipeType.CABLE) {
+                return pipe.getType() == PipeType.CABLE;
+            }
+        }
+        return false;
+    }
+
     protected void updatePipeState(Level level, BlockPos pos, Direction direction) {
         if (!level.isClientSide) {
             BlockPos offset = pos.relative(direction);
             BlockEntity entity = level.getBlockEntity(offset);
-            if (entity != null && (level.getBlockState(offset).getBlock() instanceof PipeBlock || (type == PipeType.FLUID_PIPE ? FluidHooks.safeGetBlockFluidManager(entity, direction).orElse(null) : EnergyHooks.getBlockEnergyManager(entity, direction)) != null)) {
+            if (entity != null && (checkCompat(level, offset) || (type == PipeType.FLUID_PIPE ? FluidHooks.safeGetBlockFluidManager(entity, direction).orElse(null) : EnergyHooks.safeGetBlockEnergyManager(entity, direction).orElse(null)) != null)) {
                 if (level.getBlockState(pos).getValue(DIRECTIONS.get(direction)).equals(PipeState.NONE)) {
                     level.setBlock(pos, level.getBlockState(pos).setValue(DIRECTIONS.get(direction), PipeState.NORMAL), Block.UPDATE_ALL);
                 }
@@ -120,6 +132,10 @@ public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
 
     public long getTransferRate() {
         return this.transferRate;
+    }
+
+    public PipeType getType() {
+        return this.type;
     }
 
     @Override

@@ -93,6 +93,7 @@ public class CombustionGeneratorBlockEntity extends CookingMachineBlockEntity im
         this.updateFluidSlots();
     }
 
+    @Override
     public void updateFluidSlots() {
         FluidUtils.insertItemFluidToTank(this, this, 0, 1, f -> recipe == null || f.equals(recipe.ingredient().getFluid()));
         FluidUtils.extractTankFluidToItem(this, this, 0, 1, 0, f -> true);

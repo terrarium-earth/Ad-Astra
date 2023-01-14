@@ -6,7 +6,7 @@ import earth.terrarium.ad_astra.common.registry.ModTags;
 import earth.terrarium.ad_astra.common.screen.machine.OxygenDistributorMenu;
 import earth.terrarium.ad_astra.common.util.FluidUtils;
 import earth.terrarium.botarium.common.energy.base.EnergyAttachment;
-import earth.terrarium.botarium.common.energy.impl.ExtractOnlyEnergyContainer;
+import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
 import earth.terrarium.botarium.common.fluid.base.FluidAttachment;
 import earth.terrarium.botarium.common.fluid.impl.SimpleFluidContainer;
@@ -49,7 +49,7 @@ public class OxygenDistributorBlockEntity extends ContainerMachineBlockEntity im
         if (!getFluidContainer().isEmpty()) {
             if (level.getGameTime() % 40 == 0) {
                 int energyCost = 100; // TODO: Calculate energy and fluid costs
-                int oxygenCost = 50;
+                long oxygenCost = FluidHooks.buckets(0.05);
 
                 if (this.getEnergyStorage().internalExtract(energyCost, true) >= energyCost) {
                     if (getFluidContainer().extractFluid(FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(0).getFluid(), oxygenCost, null), true).getFluidAmount() > 0) {
@@ -74,7 +74,7 @@ public class OxygenDistributorBlockEntity extends ContainerMachineBlockEntity im
 
     @Override
     public WrappedBlockEnergyContainer getEnergyStorage(BlockEntity holder) {
-        return energyContainer == null ? energyContainer = new WrappedBlockEnergyContainer(this, new ExtractOnlyEnergyContainer(200000)) : this.energyContainer;
+        return energyContainer == null ? energyContainer = new WrappedBlockEnergyContainer(this, new InsertOnlyEnergyContainer(200000)) : this.energyContainer;
     }
 
     public WrappedBlockEnergyContainer getEnergyStorage() {
@@ -83,7 +83,7 @@ public class OxygenDistributorBlockEntity extends ContainerMachineBlockEntity im
 
     @Override
     public WrappedBlockFluidContainer getFluidContainer(BlockEntity holder) {
-        return fluidContainer == null ? fluidContainer = new WrappedBlockFluidContainer(this, new SimpleFluidContainer(i -> FluidHooks.buckets(10f), 1, (tank, fluid) -> true)) : this.fluidContainer;
+        return fluidContainer == null ? fluidContainer = new WrappedBlockFluidContainer(this, new SimpleFluidContainer(i -> FluidHooks.buckets(10f), 1, (tank, fluid) -> fluid.getFluid().is(ModTags.Fluids.OXYGEN))) : this.fluidContainer;
     }
 
     public WrappedBlockFluidContainer getFluidContainer() {
@@ -100,6 +100,7 @@ public class OxygenDistributorBlockEntity extends ContainerMachineBlockEntity im
         update();
     }
 
+    @Override
     public void updateFluidSlots() {
         FluidUtils.insertItemFluidToTank(this, this, 0, 1, f -> f.is(ModTags.Fluids.OXYGEN)); // TODO: Use common tag
         FluidUtils.extractTankFluidToItem(this, this, 0, 1, 0, f -> true);
