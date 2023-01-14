@@ -32,7 +32,7 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
     protected int cookTime;
     protected int cookTimeTotal;
     @Nullable
-    protected ItemStack inputItem;
+    protected ItemStack inputStack = ItemStack.EMPTY;
     @Nullable
     protected Fluid outputFluid;
     private WrappedBlockFluidContainer tank;
@@ -78,7 +78,7 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
         this.cookTime = 0;
         this.cookTimeTotal = 0;
         this.outputFluid = null;
-        this.inputItem = null;
+        this.inputStack = ItemStack.EMPTY;
         this.setChanged();
     }
 
@@ -120,7 +120,7 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
             }
 
             this.outputFluid = recipe.getFluidOutput();
-            this.inputItem = testStack;
+            this.inputStack = testStack;
         }
 
         return recipe;
@@ -138,7 +138,7 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
             }
 
             if (this.getEnergyStorage(this).internalExtract(this.getEnergyPerTick(), true) > 0) {
-                if ((!input.isEmpty() && (input.equals(this.inputItem) || this.inputItem == null)) && getFluidContainer(this).getFluids().get(0).getFluidAmount() < getFluidContainer(this).getTankCapacity(0)) {
+                if ((!input.isEmpty() && (ItemStack.isSame(input, this.inputStack) || this.inputStack.isEmpty())) && getFluidContainer(this).getFluids().get(0).getFluidAmount() < getFluidContainer(this).getTankCapacity(0)) {
                     if (this.cookTime < this.cookTimeTotal) {
                         this.cookTime++;
                         this.getEnergyStorage(this).internalExtract(this.getEnergyPerTick(), false);

@@ -68,6 +68,7 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
 
     @Override
     public void load(CompoundTag nbt) {
+        super.load(nbt);
         if (getInventorySize() > 0) {
             ContainerHelper.loadAllItems(nbt, this.inventory);
         }
@@ -75,6 +76,7 @@ public abstract class AbstractMachineBlockEntity extends BlockEntity implements 
 
     @Override
     public void saveAdditional(CompoundTag nbt) {
+        super.saveAdditional(nbt);
         if (getInventorySize() > 0) {
             ContainerHelper.saveAllItems(nbt, this.inventory);
         }
