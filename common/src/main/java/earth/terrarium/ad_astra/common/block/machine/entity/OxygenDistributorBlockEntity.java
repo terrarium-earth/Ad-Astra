@@ -49,7 +49,7 @@ public class OxygenDistributorBlockEntity extends ContainerMachineBlockEntity im
         if (!getFluidContainer().isEmpty()) {
             if (level.getGameTime() % 40 == 0) {
                 int energyCost = 100; // TODO: Calculate energy and fluid costs
-                int oxygenCost = 50;
+                long oxygenCost = FluidHooks.buckets(0.05);
 
                 if (this.getEnergyStorage().internalExtract(energyCost, true) >= energyCost) {
                     if (getFluidContainer().extractFluid(FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(0).getFluid(), oxygenCost, null), true).getFluidAmount() > 0) {
