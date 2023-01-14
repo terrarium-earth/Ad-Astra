@@ -1,8 +1,11 @@
 package earth.terrarium.ad_astra.client;
 
+import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.screen.machine.TestScreen;
 import earth.terrarium.ad_astra.client.util.ClientPlatformUtils;
+import earth.terrarium.ad_astra.common.item.EtrionicCapacitorItem;
 import earth.terrarium.ad_astra.common.registry.ModFluids;
+import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.ad_astra.common.registry.ModMenus;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.RenderType;
@@ -34,6 +37,8 @@ public class AdAstraClient {
         ClientPlatformUtils.registerScreen(ModMenus.CRYOGENIC_FREEZER.get(), TestScreen::new);
         ClientPlatformUtils.registerScreen(ModMenus.RECYCLER.get(), TestScreen::new);
         ClientPlatformUtils.registerScreen(ModMenus.OXYGEN_DISTRIBUTOR.get(), TestScreen::new);
+
+        ClientPlatformUtils.registerItemProperty(ModItems.ETRIONIC_CAPACITOR.get(), new ResourceLocation(AdAstra.MOD_ID, "toggled"), EtrionicCapacitorItem::itemProperty);
     }
 
     public static void onRegisterHud(Consumer<ClientPlatformUtils.RenderHud> register) {

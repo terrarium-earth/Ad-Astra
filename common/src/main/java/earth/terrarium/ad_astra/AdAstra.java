@@ -15,6 +15,7 @@ public class AdAstra {
     public static final String MOD_ID = "ad_astra";
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final Configurator CONFIGURATOR = new Configurator();
+    public static final int ETRIUM_COLOR = 0x63dcc2; //TODO make configurable
 
     public static void init() {
         CONFIGURATOR.registerConfig(AdAstraConfig.class);
