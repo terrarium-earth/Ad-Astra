@@ -11,6 +11,7 @@ import earth.terrarium.ad_astra.client.renderer.block.ChestItemRenderer;
 import earth.terrarium.ad_astra.client.renderer.block.EnergizerBlockEntityRenderer;
 import earth.terrarium.ad_astra.client.renderer.block.SlidingDoorBlockEntityRenderer;
 import earth.terrarium.ad_astra.client.renderer.block.flag.FlagBlockEntityRenderer;
+import earth.terrarium.ad_astra.client.renderer.block.flag.FlagItemRenderer;
 import earth.terrarium.ad_astra.client.renderer.block.globe.GlobeBlockEntityRenderer;
 import earth.terrarium.ad_astra.client.renderer.block.globe.GlobeItemRenderer;
 import earth.terrarium.ad_astra.client.renderer.entity.vehicle.rocket.tier_1.RocketItemRendererTier1;
@@ -109,7 +110,7 @@ public class AdAstraClient {
         register.accept(ModBlocks.STROPHAR_CHEST.get(), new ChestItemRenderer(ModBlocks.STROPHAR_CHEST.get()));
 
         ModItems.GLOBES.stream().forEach(item -> register.accept(item.get(), new GlobeItemRenderer()));
-        ModItems.FLAGS.stream().forEach(item -> register.accept(item.get(), new GlobeItemRenderer()));
+        ModItems.FLAGS.stream().forEach(item -> register.accept(item.get(), new FlagItemRenderer()));
     }
 
     public static void onRegisterReloadListeners(BiConsumer<ResourceLocation, PreparableReloadListener> registry) {

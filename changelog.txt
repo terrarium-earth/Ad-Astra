@@ -1,5 +1,2 @@
-- Fixed sliding doors crashing on fabric and being partly invisible on forge
-- Fixed the compressor voiding items
-- Added lang translations for fluid and fixed the empty tank translation being incorrect
-- Fixed glacian logs in a few incorrect tags
-- Fixed EMI recipe defaults in the wrong location so they weren't being loaded
+- Fixed flag model broken
+- Fixed nbt saving issue on forge

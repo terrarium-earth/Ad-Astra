@@ -56,7 +56,6 @@ public class FluidPipeBlock extends AbstractPipeBlock {
 
     @Override
     public void appendHoverText(ItemStack stack, BlockGetter level, List<Component> tooltip, TooltipFlag flag) {
-        super.appendHoverText(stack, level, tooltip, flag);
         tooltip.add((Component.translatable("item.ad_astra.fluid_transfer_rate.tooltip", FluidHooks.toMillibuckets(this.getTransferRate())).setStyle(Style.EMPTY.withColor(ChatFormatting.BLUE))));
     }
 

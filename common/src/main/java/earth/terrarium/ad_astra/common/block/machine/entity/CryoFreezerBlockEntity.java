@@ -17,7 +17,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -30,8 +29,7 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
 
     protected int cookTime;
     protected int cookTimeTotal;
-    @Nullable
-    protected Item inputItem;
+    protected ItemStack inputStack = ItemStack.EMPTY;
     @Nullable
     protected Fluid outputFluid;
     private ExtractOnlyUpdatingFluidContainer tank;
@@ -66,7 +64,7 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
         if (this.outputFluid != null) {
             CryoFuelConversionRecipe recipe = this.createRecipe(this.getItem(0), false);
             if (recipe != null) {
-                FluidHolder outputFluid = FluidHooks.newFluidHolder(recipe.getFluidOutput(), (long) (FluidHooks.buckets(1) * recipe.getConversionRatio()), null);
+                FluidHolder outputFluid = FluidHooks.newFluidHolder(recipe.getFluidOutput(), (long) (FluidHooks.buckets(1f) * recipe.getConversionRatio()), null);
                 getFluidContainer().internalInsert(outputFluid, false);
             }
         }
@@ -77,7 +75,7 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
         this.cookTime = 0;
         this.cookTimeTotal = 0;
         this.outputFluid = null;
-        this.inputItem = null;
+        this.inputStack = ItemStack.EMPTY;
         this.setChanged();
     }
 
@@ -119,7 +117,7 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
             }
 
             this.outputFluid = recipe.getFluidOutput();
-            this.inputItem = testStack.getItem();
+            this.inputStack = testStack;
         }
 
         return recipe;
@@ -137,10 +135,11 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
             }
 
             if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0) {
-                if ((!input.isEmpty() && (input.getItem().equals(this.inputItem) || this.inputItem == null)) && getFluidContainer().getFluids().get(0).getFluidAmount() < getFluidContainer().getTankCapacity(0)) {
+                if ((!input.isEmpty() && (ItemStack.isSame(input, this.inputStack) || this.inputStack.isEmpty())) && getFluidContainer().getFluids().get(0).getFluidAmount() < getFluidContainer().getTankCapacity(0)) {
                     if (this.cookTime < this.cookTimeTotal) {
                         this.cookTime++;
                         this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
+                        update();
                         this.setActive(true);
 
                     } else if (this.outputFluid != null) {
