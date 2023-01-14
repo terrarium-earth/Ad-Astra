@@ -24,6 +24,7 @@ import net.minecraft.world.level.material.Material;
 public class ModBlocks {
     public static final ResourcefulRegistry<Block> BLOCKS = ResourcefulRegistries.create(BuiltInRegistries.BLOCK, AdAstra.MOD_ID);
 
+    public static final ResourcefulRegistry<Block> STORAGE_BLOCKS = ResourcefulRegistries.create(BLOCKS);
     public static final ResourcefulRegistry<Block> MACHINES = ResourcefulRegistries.create(BLOCKS);
     public static final ResourcefulRegistry<Block> SOLAR_PANELS = ResourcefulRegistries.create(MACHINES);
     public static final ResourcefulRegistry<Block> FLUIDS = ResourcefulRegistries.create(BLOCKS);
@@ -58,10 +59,10 @@ public class ModBlocks {
     public static final RegistryEntry<Block> ETRIONIC_FUEL = FLUIDS.register("etrionic_fuel", () -> new BotariumLiquidBlock(ModFluidProperties.ETRIONIC_FUEL, BlockBehaviour.Properties.copy(Blocks.WATER)));
     public static final RegistryEntry<Block> CRYOGENIC_FUEL = FLUIDS.register("cryogenic_fuel", () -> new CryogenicFuelLiquidBlock(ModFluidProperties.CRYOGENIC_FUEL, BlockBehaviour.Properties.copy(Blocks.WATER)));
 
-    public static final RegistryEntry<Block> DESMIUM_BLOCK = BLOCKS.register("desmium_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
-    public static final RegistryEntry<Block> STEEL_BLOCK = BLOCKS.register("steel_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
-    public static final RegistryEntry<Block> ETRIUM_BLOCK = BLOCKS.register("etrium_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
-    public static final RegistryEntry<Block> AEROLYTE_BLOCK = BLOCKS.register("aerolyte_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
-    public static final RegistryEntry<Block> XEBRIUM_BLOCK = BLOCKS.register("xebrium_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
-    public static final RegistryEntry<Block> VESNIUM_BLOCK = BLOCKS.register("vesnium_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK)));
+    public static final RegistryEntry<Block> DESMIUM_BLOCK = STORAGE_BLOCKS.register("desmium_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+    public static final RegistryEntry<Block> STEEL_BLOCK = STORAGE_BLOCKS.register("steel_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+    public static final RegistryEntry<Block> ETRIUM_BLOCK = STORAGE_BLOCKS.register("etrium_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+    public static final RegistryEntry<Block> AEROLYTE_BLOCK = STORAGE_BLOCKS.register("aerolyte_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+    public static final RegistryEntry<Block> XEBRIUM_BLOCK = STORAGE_BLOCKS.register("xebrium_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+    public static final RegistryEntry<Block> VESNIUM_BLOCK = STORAGE_BLOCKS.register("vesnium_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK)));
 }

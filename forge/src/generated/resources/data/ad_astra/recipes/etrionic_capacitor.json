@@ -10,10 +10,10 @@
       "item": "ad_astra:etrium_ingot"
     },
     "I": {
-      "tag": "ad_astra:steel_ingot"
+      "tag": "ad_astra:steel_ingots"
     },
     "N": {
-      "tag": "ad_astra:steel_nugget"
+      "tag": "ad_astra:steel_nuggets"
     }
   },
   "pattern": [

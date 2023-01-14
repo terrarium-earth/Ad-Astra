@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "c:aerolyte_ingots",
+      "required": false
+    },
+    {
+      "id": "forge:ingots/aerolyte",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "c:desmium_nuggets",
+      "required": false
+    },
+    {
+      "id": "forge:nuggets/desmium",
+      "required": false
+    }
+  ]
+}

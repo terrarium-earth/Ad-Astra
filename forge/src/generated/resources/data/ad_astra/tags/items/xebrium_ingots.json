@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "c:xebrium_ingots",
+      "required": false
+    },
+    {
+      "id": "forge:ingots/xebrium",
+      "required": false
+    }
+  ]
+}

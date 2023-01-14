@@ -10,10 +10,10 @@
       "item": "ad_astra:etrionic_core"
     },
     "P": {
-      "tag": "ad_astra:steel_plate"
+      "tag": "ad_astra:steel_plates"
     },
     "R": {
-      "tag": "ad_astra:steel_rod"
+      "tag": "ad_astra:steel_rods"
     }
   },
   "pattern": [

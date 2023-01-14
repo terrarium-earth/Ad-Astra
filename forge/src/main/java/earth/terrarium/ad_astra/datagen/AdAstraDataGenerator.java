@@ -4,6 +4,7 @@ import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.datagen.provider.client.ModBlockStateProvider;
 import earth.terrarium.ad_astra.datagen.provider.client.ModItemModelProvider;
 import earth.terrarium.ad_astra.datagen.provider.client.ModLangProvider;
+import earth.terrarium.ad_astra.datagen.provider.server.ForgeItemTagProvider;
 import earth.terrarium.ad_astra.datagen.provider.server.ModItemTagProvider;
 import earth.terrarium.ad_astra.datagen.provider.server.ModLootTableProvider;
 import earth.terrarium.ad_astra.datagen.provider.server.ModRecipeProvider;
@@ -39,5 +40,6 @@ public final class AdAstraDataGenerator {
 //        ModBlockTagProvider blockTagProvider = new ModBlockTagProvider(generator, existingFileHelper);
 //        generator.addProvider(event.includeServer(), blockTagProvider);
         generator.addProvider(event.includeServer(), new ModItemTagProvider(packOutput, ForgeRegistries.ITEMS.getRegistryKey(), lookupProvider, existingFileHelper));
+        generator.addProvider(event.includeServer(), new ForgeItemTagProvider(packOutput, ForgeRegistries.ITEMS.getRegistryKey(), lookupProvider, existingFileHelper));
     }
 }

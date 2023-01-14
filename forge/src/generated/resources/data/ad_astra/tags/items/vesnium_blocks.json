@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "c:vesnium_blocks",
+      "required": false
+    },
+    {
+      "id": "forge:storage_blocks/vesnium",
+      "required": false
+    }
+  ]
+}

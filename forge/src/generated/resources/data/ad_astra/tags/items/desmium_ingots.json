@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "c:desmium_ingots",
+      "required": false
+    },
+    {
+      "id": "forge:ingots/desmium",
+      "required": false
+    }
+  ]
+}

@@ -1,8 +1,25 @@
-// 1.19.3	2023-01-13T23:50:10.675679	Tags for minecraft:item mod id ad_astra
-e059a0a2ac04c0da0b58be3f39e69df31057bc24 data/ad_astra/tags/items/desmium_ingot.json
-aeef719d061a9a92c609fce09c1b043cdbd9e417 data/ad_astra/tags/items/desmium_nugget.json
-442336ed22b813c6e5ccccb08b01cbad34b86359 data/ad_astra/tags/items/desmium_plate.json
-6d476ff22d189abdb46efe38c807e3240d343252 data/ad_astra/tags/items/steel_ingot.json
-618711c8a87802069bcb6e1712bf86d8237d271b data/ad_astra/tags/items/steel_nugget.json
-0967cdcff6339fa83dfce4a70667ad0777bed875 data/ad_astra/tags/items/steel_plate.json
-897b9c645b1a87ad7b34c35f6bceb79c056db3c9 data/ad_astra/tags/items/steel_rod.json
+// 1.19.3	2023-01-14T17:18:40.460681	Tags for minecraft:item mod id ad_astra
+d467d13bc165f06f14e61d95609aa4ff13b052a7 data/ad_astra/tags/items/aerolyte_blocks.json
+7e032874bfec5bab69bf624baa2bb007c3b985b0 data/ad_astra/tags/items/aerolyte_ingots.json
+27265d196af5e9cf25852158636d022747b8ab55 data/ad_astra/tags/items/aerolyte_nuggets.json
+14eb6f6a0613424a34400db72d930c588a9f9b19 data/ad_astra/tags/items/aerolyte_plates.json
+8693d053b7f46806897aee2ef760f2387a711f46 data/ad_astra/tags/items/desmium_blocks.json
+7eab26c4954b95308af3963ad86d5ac2ca5bb9dc data/ad_astra/tags/items/desmium_ingots.json
+4cebcdf6fc8d82f4f4dd40489ab33cd1274b4909 data/ad_astra/tags/items/desmium_nuggets.json
+f07a202f54d387239c07a5a98becac12b2c573b5 data/ad_astra/tags/items/desmium_plates.json
+9a7728e77950c9db06cd4680d9ee78a56cef8a1e data/ad_astra/tags/items/etrium_blocks.json
+5bbe2ff80a0186991a727257e3bd146ffbaf2f42 data/ad_astra/tags/items/etrium_ingots.json
+9daed354fe9b923f701e24692a24f47bac53f3c9 data/ad_astra/tags/items/etrium_nuggets.json
+0c92c876741444ae07012987efbf84ce2e01fbde data/ad_astra/tags/items/etrium_plates.json
+0768d450af554d8f44263f9811568712ab521a56 data/ad_astra/tags/items/iron_plates.json
+c25a07cb47ea95bf6e2f22ee2ada75df1647c0f3 data/ad_astra/tags/items/iron_rods.json
+d80b689e61b0fba028103bcad1bc9730b9e37918 data/ad_astra/tags/items/steel_blocks.json
+ce8e86536555913615324949abcf076007313ca8 data/ad_astra/tags/items/steel_ingots.json
+119bc49b0b91a2a570e2136b431cd1c202d15f77 data/ad_astra/tags/items/steel_nuggets.json
+ff878373e2d85e4a9a06cf1e6f8935804d632cc1 data/ad_astra/tags/items/steel_plates.json
+65ec5329bbdd144bff6bb48f1d811c1bac6b734b data/ad_astra/tags/items/steel_rods.json
+c8e7a511da6629bcdf1a6cbb9ae85981343bc59d data/ad_astra/tags/items/vesnium_blocks.json
+5904b2dcb4a483683c00c37a74c600a4b2fa0362 data/ad_astra/tags/items/xebrium_blocks.json
+39c4921c25a24f0c4a054238cdc32ee443909d32 data/ad_astra/tags/items/xebrium_ingots.json
+1ae807e13e4e67f5fab5a21909729b375beb41e4 data/ad_astra/tags/items/xebrium_nuggets.json
+6b6442a32d85066bcb463698b5cef2ef806a2506 data/ad_astra/tags/items/xebrium_plates.json

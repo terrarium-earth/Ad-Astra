@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "c:aerolyte_plates",
+      "required": false
+    },
+    {
+      "id": "forge:plates/aerolyte",
+      "required": false
+    }
+  ]
+}

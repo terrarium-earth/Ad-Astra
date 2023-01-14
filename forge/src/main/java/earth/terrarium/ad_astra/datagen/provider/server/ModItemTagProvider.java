@@ -8,7 +8,9 @@ import net.minecraft.core.Registry;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagEntry;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
@@ -24,13 +26,69 @@ public class ModItemTagProvider extends TagsProvider<Item> {
 
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
-        tag(ModTags.Items.STEEL_PLATE).add(TagEntry.element(ModItems.STEEL_PLATE.getId()));
-        tag(ModTags.Items.STEEL_ROD).add(TagEntry.element(ModItems.STEEL_ROD.getId()));
-        tag(ModTags.Items.STEEL_INGOT).add(TagEntry.element(ModItems.STEEL_INGOT.getId()));
-        tag(ModTags.Items.STEEL_NUGGET).add(TagEntry.element(ModItems.STEEL_NUGGET.getId()));
+        platform(ModTags.Items.ETRIUM_BLOCKS, ItemType.STORAGE_BLOCKS, "etrium");
+        platform(ModTags.Items.STEEL_BLOCKS, ItemType.STORAGE_BLOCKS, "steel");
+        platform(ModTags.Items.DESMIUM_BLOCKS, ItemType.STORAGE_BLOCKS, "desmium");
+        platform(ModTags.Items.XEBRIUM_BLOCKS, ItemType.STORAGE_BLOCKS, "xebrium");
+        platform(ModTags.Items.VESNIUM_BLOCKS, ItemType.STORAGE_BLOCKS, "vesnium");
+        platform(ModTags.Items.AEROLYTE_BLOCKS, ItemType.STORAGE_BLOCKS, "aerolyte");
 
-        tag(ModTags.Items.DESMIUM_PLATE).add(TagEntry.element(ModItems.DESMIUM_PLATE.getId()));
-        tag(ModTags.Items.DESMIUM_INGOT).add(TagEntry.element(ModItems.DESMIUM_INGOT.getId()));
-        tag(ModTags.Items.DESMIUM_NUGGET).add(TagEntry.element(ModItems.DESMIUM_NUGGET.getId()));
+        platform(ModTags.Items.IRON_RODS, ItemType.RODS, "iron");
+        platform(ModTags.Items.IRON_PLATES, ItemType.PLATES, "iron");
+
+        platform(ModTags.Items.STEEL_RODS, ItemType.RODS, "steel");
+        platform(ModTags.Items.STEEL_PLATES, ItemType.PLATES, "steel");
+        platform(ModTags.Items.STEEL_INGOTS, ItemType.INGOTS, "steel");
+        platform(ModTags.Items.STEEL_NUGGETS, ItemType.NUGGETS, "steel");
+
+        platform(ModTags.Items.DESMIUM_PLATES, ItemType.PLATES, "desmium");
+        platform(ModTags.Items.DESMIUM_INGOTS, ItemType.INGOTS, "desmium");
+        platform(ModTags.Items.DESMIUM_NUGGETS, ItemType.NUGGETS, "desmium");
+
+
+        platform(ModTags.Items.XEBRIUM_PLATES, ItemType.PLATES, "xebrium");
+        platform(ModTags.Items.XEBRIUM_INGOTS, ItemType.INGOTS, "xebrium");
+        platform(ModTags.Items.XEBRIUM_NUGGETS, ItemType.NUGGETS, "xebrium");
+
+        platform(ModTags.Items.AEROLYTE_PLATES, ItemType.PLATES, "aerolyte");
+        platform(ModTags.Items.AEROLYTE_INGOTS, ItemType.INGOTS, "aerolyte");
+        platform(ModTags.Items.AEROLYTE_NUGGETS, ItemType.NUGGETS, "aerolyte");
+
+        platform(ModTags.Items.ETRIUM_PLATES, ItemType.PLATES, "etrium");
+        platform(ModTags.Items.ETRIUM_INGOTS, ItemType.INGOTS, "etrium");
+        platform(ModTags.Items.ETRIUM_NUGGETS, ItemType.NUGGETS, "etrium");
+    }
+
+    private void platform(TagKey<Item> tag, ItemType type, String name) {
+        tag(tag).addOptional(new ResourceLocation("c", type.fabric(name))).addOptional(new ResourceLocation("forge", type.forge(name)));
+    }
+
+    public enum ItemType {
+        STORAGE_BLOCKS("storage_blocks", "blocks"),
+        PLATES,
+        RODS,
+        NUGGETS,
+        INGOTS;
+
+        private final String forge;
+        private final String fabric;
+
+        ItemType(String forge, String fabric) {
+            this.forge = forge;
+            this.fabric = fabric;
+        }
+
+        ItemType() {
+            this.forge = name().toLowerCase();
+            this.fabric = name().toLowerCase();
+        }
+
+        public String forge(String material) {
+            return forge + "/" + material;
+        }
+
+        public String fabric(String material) {
+            return material + "_" + fabric;
+        }
     }
 }

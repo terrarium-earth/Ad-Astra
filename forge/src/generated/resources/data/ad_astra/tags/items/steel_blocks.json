@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "c:steel_blocks",
+      "required": false
+    },
+    {
+      "id": "forge:storage_blocks/steel",
+      "required": false
+    }
+  ]
+}

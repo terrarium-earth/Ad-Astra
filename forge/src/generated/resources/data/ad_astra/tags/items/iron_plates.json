@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "c:iron_plates",
+      "required": false
+    },
+    {
+      "id": "forge:plates/iron",
+      "required": false
+    }
+  ]
+}

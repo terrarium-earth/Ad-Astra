@@ -1,4 +1,4 @@
-// 1.19.3	2023-01-14T02:23:40.272611	Block States: ad_astra
+// 1.19.3	2023-01-14T17:18:40.462116	Block States: ad_astra
 f17a3649d35ad50d029d53da2890cba56a0cb0be assets/ad_astra/blockstates/crude_oil.json
 3cf9d4b0c6b24600e4b890969810cdc6944ea21a assets/ad_astra/blockstates/cryogenic_fuel.json
 0d2b6827806bcb2c57c478c36d634114ed0018c5 assets/ad_astra/blockstates/etrionic_fuel.json
@@ -19,12 +19,15 @@ aff5d7750cf55893a1922491d1f288d3582f005d assets/ad_astra/blockstates/sky_stone.j
 50812bd51e14ec5ea223afe239c89730a63e43b1 assets/ad_astra/models/block/oxygen.json
 23f8e0611ed193f5f0a2a790923a3f1f9add3ccb assets/ad_astra/models/block/sky_stone.json
 4fccd154181ed03f7d52afff46cb419f7a4122c0 assets/ad_astra/models/block/vesnium_solar_panel.json
+0a270a7764f6b4a5d6f07c333be9bdfb0fe3b8fb assets/ad_astra/models/item/aerolyte_block.json
 e41a117eec34f78035b83531f01d6f3d9b277965 assets/ad_astra/models/item/combustion_generator.json
 5e2939b5581ed133dd5682f897e7e66dbfe134c9 assets/ad_astra/models/item/cryogenic_freezer.json
+5cbefe11ac2d699d67ebe006ec0aefcb8c602e66 assets/ad_astra/models/item/desmium_block.json
 0eb2fe2496ab49e479cd5d2d3e56ab0c370d790e assets/ad_astra/models/item/electrolyzer.json
 800a18391e34764373320393f5126fec35f08e64 assets/ad_astra/models/item/etrionic_blast_furnace.json
 531ea5cb7597790b05e9f801e6e8e051025020e1 assets/ad_astra/models/item/etrionic_generator.json
 4d5cca28cfeae86e5c36589443fbd45f9ba0c0b7 assets/ad_astra/models/item/etrionic_solar_panel.json
+938be92ca62ccd16029815b0a5de21a08febf0d1 assets/ad_astra/models/item/etrium_block.json
 b4cf917ea54410c43f638a333b029476f2788ac9 assets/ad_astra/models/item/etrium_ore.json
 e5147fce3a29e36e5aa6b61f9dfe8814487b1d47 assets/ad_astra/models/item/geothermal_generator.json
 a953e21b63e1039d27f76777dbbc4425aa28e206 assets/ad_astra/models/item/hydraulic_press.json
@@ -33,6 +36,9 @@ ee8c48db99b6471d8a2c3590af8f1b788503547c assets/ad_astra/models/item/oil_refiner
 fdb0e27e500fe1403a584e8c3cb849df22616ed5 assets/ad_astra/models/item/oxygen_sensor.json
 5e611a506dbcfb9c8ef058fef539a224544bb099 assets/ad_astra/models/item/recycler.json
 b5dd0d8d7cbda8c5b5f42eb7b23f93a5395fb63c assets/ad_astra/models/item/sky_stone.json
+e792d3fbb1a61f6554e840f18a151404749b4ba0 assets/ad_astra/models/item/steel_block.json
 f0da72f0345bff2ef6694c1786e2d19d9487dcaa assets/ad_astra/models/item/temperature_regulator.json
+e55044b227d54facf71b71fd7ce9cc086e6fa4fd assets/ad_astra/models/item/vesnium_block.json
 ccf5b6a0ceabed8ca4aa7f9b4c3b5e81645a8263 assets/ad_astra/models/item/vesnium_solar_panel.json
 7cd066f399c57faa90e29900e289028bada11843 assets/ad_astra/models/item/water_pump.json
+071ecbe6568821ddb9de25307ba5830b642ee480 assets/ad_astra/models/item/xebrium_block.json

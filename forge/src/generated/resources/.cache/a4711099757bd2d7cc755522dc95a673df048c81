@@ -1,0 +1,22 @@
+// 1.19.3	2023-01-14T17:18:40.46345	Tags for minecraft:item mod id ad_astra_forge
+40fac471897fbb319cc8a113459bc3fdf22e4510 data/forge/tags/items/ingots/aerolyte.json
+e059a0a2ac04c0da0b58be3f39e69df31057bc24 data/forge/tags/items/ingots/desmium.json
+6d476ff22d189abdb46efe38c807e3240d343252 data/forge/tags/items/ingots/steel.json
+ee05c3eb5cbf6d9a40d7b63c1744f22bda2be74b data/forge/tags/items/ingots/xebrium.json
+8e0c877d05cfffc69e930575823b6bd6251955e3 data/forge/tags/items/nuggets/aerolyte.json
+aeef719d061a9a92c609fce09c1b043cdbd9e417 data/forge/tags/items/nuggets/desmium.json
+618711c8a87802069bcb6e1712bf86d8237d271b data/forge/tags/items/nuggets/steel.json
+6e7124a45051221c566b2c0e71b1de0085f0d455 data/forge/tags/items/nuggets/xebrium.json
+5ec4a779cf3ee3ee8bfc3ddcc47269d2433ab457 data/forge/tags/items/plates/aerolyte.json
+442336ed22b813c6e5ccccb08b01cbad34b86359 data/forge/tags/items/plates/desmium.json
+327adb5432dbcfa89abb2a677077611b5ad711af data/forge/tags/items/plates/iron.json
+0967cdcff6339fa83dfce4a70667ad0777bed875 data/forge/tags/items/plates/steel.json
+e493c2118385ae769a7a4bfd29c45a0a89f89d21 data/forge/tags/items/plates/xebrium.json
+2e17b7e39a0e5e234917f8928e639e6d5e8a7263 data/forge/tags/items/rods/iron.json
+897b9c645b1a87ad7b34c35f6bceb79c056db3c9 data/forge/tags/items/rods/steel.json
+81bee15f7a917c559364d4ec6db72674f76aa080 data/forge/tags/items/storage_blocks/aerolyte.json
+09082724489b7e18732628b6abcc4d92df255544 data/forge/tags/items/storage_blocks/desmium.json
+604dba3a1242387bcb9bff2b0d3a7545f38de774 data/forge/tags/items/storage_blocks/etrium.json
+8624111f9360c939093cb5a4a19e2b9ef133f29d data/forge/tags/items/storage_blocks/steel.json
+bdf8223d1b5fb838c32b4b2bd3bf1886653887b7 data/forge/tags/items/storage_blocks/vesnium.json
+0d282c1ef43b84b9cde677e2bf23d89dce63381a data/forge/tags/items/storage_blocks/xebrium.json

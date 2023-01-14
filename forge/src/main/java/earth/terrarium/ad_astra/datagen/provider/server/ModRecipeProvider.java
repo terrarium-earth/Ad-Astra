@@ -37,8 +37,8 @@ public class ModRecipeProvider extends RecipeProvider {
         );
 
         createSimpleShapeless(writer, ModItems.STEEL_NUGGET.get(), 9, shapelessRecipeBuilder -> shapelessRecipeBuilder
-                .requires(ModTags.Items.STEEL_INGOT)
-                .unlockedBy("has_item", has(ModTags.Items.STEEL_INGOT))
+                .requires(ModTags.Items.STEEL_INGOTS)
+                .unlockedBy("has_item", has(ModTags.Items.STEEL_INGOTS))
         );
 
         createSimpleShapeless(writer, ModItems.AEROLYTE_INGOT.get(), 1, shapelessRecipeBuilder -> shapelessRecipeBuilder
@@ -72,7 +72,7 @@ public class ModRecipeProvider extends RecipeProvider {
         );
 
         createSimple(writer, ModItems.ETRIONIC_CORE.get(), 1, shapedRecipeBuilder -> shapedRecipeBuilder
-                .define('I', ModTags.Items.STEEL_PLATE)
+                .define('I', ModTags.Items.STEEL_PLATES)
                 .define('C', ModItems.ETRIUM_PLATE.get())
                 .pattern("II")
                 .pattern("CC")
@@ -83,8 +83,8 @@ public class ModRecipeProvider extends RecipeProvider {
         createSimple(writer, ModItems.ETRIONIC_CAPACITOR.get(), 1, shapedRecipeBuilder -> shapedRecipeBuilder
                 .define('E', ModItems.ETRIUM_INGOT.get())
                 .define('C', ModItems.ETRIONIC_CORE.get())
-                .define('N', ModTags.Items.STEEL_NUGGET)
-                .define('I', ModTags.Items.STEEL_INGOT)
+                .define('N', ModTags.Items.STEEL_NUGGETS)
+                .define('I', ModTags.Items.STEEL_INGOTS)
                 .pattern("NIN")
                 .pattern("ECE")
                 .pattern("NIN")
@@ -93,7 +93,7 @@ public class ModRecipeProvider extends RecipeProvider {
 
         createSimple(writer, ModItems.PHOTOVOLTAIC_ETRIUM_CELL.get(), 1, shapedRecipeBuilder -> shapedRecipeBuilder
                 .define('I', ModItems.ETRIUM_PLATE.get())
-                .define('P', ModTags.Items.STEEL_PLATE)
+                .define('P', ModTags.Items.STEEL_PLATES)
                 .pattern("II")
                 .pattern("PP")
                 .unlockedBy("has_item", has(ModItems.ETRIUM_PLATE.get()))
@@ -101,8 +101,8 @@ public class ModRecipeProvider extends RecipeProvider {
 
         createSimple(writer, ModItems.ETRIONIC_SOLAR_PANEL.get(), 1, shapedRecipeBuilder -> shapedRecipeBuilder
                 .define('I', ModItems.ETRIONIC_CORE.get())
-                .define('P', ModTags.Items.STEEL_PLATE)
-                .define('R', ModTags.Items.STEEL_ROD)
+                .define('P', ModTags.Items.STEEL_PLATES)
+                .define('R', ModTags.Items.STEEL_RODS)
                 .define('C', ModItems.PHOTOVOLTAIC_ETRIUM_CELL.get())
                 .pattern("CCC")
                 .pattern("PRP")
@@ -112,8 +112,8 @@ public class ModRecipeProvider extends RecipeProvider {
 
         createSimple(writer, ModItems.VESNIUM_SOLAR_PANEL.get(), 1, shapedRecipeBuilder -> shapedRecipeBuilder
                 .define('I', ModItems.ETRIONIC_CORE.get())
-                .define('P', ModTags.Items.STEEL_PLATE)
-                .define('R', ModTags.Items.STEEL_ROD)
+                .define('P', ModTags.Items.STEEL_PLATES)
+                .define('R', ModTags.Items.STEEL_RODS)
                 .define('C', ModItems.PHOTOVOLTAIC_VESNIUM_CELL.get())
                 .pattern("CCC")
                 .pattern("PRP")
@@ -122,7 +122,7 @@ public class ModRecipeProvider extends RecipeProvider {
         );
 
         createSimple(writer, ModItems.OXYGEN_SENSOR.get(), 1, shapedRecipeBuilder -> shapedRecipeBuilder
-                .define('P', ModTags.Items.DESMIUM_PLATE)
+                .define('P', ModTags.Items.DESMIUM_PLATES)
                 .define('R', Items.REDSTONE)
                 .define('Q', Items.QUARTZ)
                 .pattern("PPP")

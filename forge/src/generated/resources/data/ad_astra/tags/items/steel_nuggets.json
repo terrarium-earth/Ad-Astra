@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "c:steel_nuggets",
+      "required": false
+    },
+    {
+      "id": "forge:nuggets/steel",
+      "required": false
+    }
+  ]
+}

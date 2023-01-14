@@ -4,7 +4,7 @@
   "group": "oxygen_sensor",
   "key": {
     "P": {
-      "tag": "ad_astra:desmium_plate"
+      "tag": "ad_astra:desmium_plates"
     },
     "Q": {
       "item": "minecraft:quartz"

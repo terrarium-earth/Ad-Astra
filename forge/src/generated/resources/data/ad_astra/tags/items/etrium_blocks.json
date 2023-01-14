@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "c:etrium_blocks",
+      "required": false
+    },
+    {
+      "id": "forge:storage_blocks/etrium",
+      "required": false
+    }
+  ]
+}
