@@ -1,4 +1,4 @@
-// 1.19.3	2023-01-13T23:50:10.677747	Recipes
+// 1.19.3	2023-01-14T02:23:40.28384	Recipes
 b607c023f046311dbf72e263cb027462cea42ae3 data/ad_astra/advancements/recipes/misc/aerolyte_ingot.json
 af274fb8ebbf4e2d7ee0cbcee0133aefe169dfef data/ad_astra/advancements/recipes/misc/aerolyte_nugget.json
 c7f833db6f50d931057e4a29c7699a34c175b6bd data/ad_astra/advancements/recipes/misc/desmium_ingot.json
@@ -12,7 +12,7 @@ d75bffc0ffd115effdb8b87f3de6ea1292430a13 data/ad_astra/advancements/recipes/misc
 991f0da7b4dd9e4caa294b897ce494d99a3b7553 data/ad_astra/advancements/recipes/misc/etrium_nugget.json
 e58eab98e833bf3d59ec6c14599154f538661f5f data/ad_astra/advancements/recipes/misc/hydraulic_press.json
 64ee1402a35f446f0ed7827dd6789118e6ec8b35 data/ad_astra/advancements/recipes/misc/oxygen_sensor.json
-a0adbf20af93e73e4f0e2f39737fcc3a72a347a5 data/ad_astra/advancements/recipes/misc/photovoltaic_etrium_cell.json
+3179cf768ad998f1ad9355592646a6e5b707f746 data/ad_astra/advancements/recipes/misc/photovoltaic_etrium_cell.json
 10c3c9b9b3b374695f2107a69dd3bc2f32759188 data/ad_astra/advancements/recipes/misc/steel_ingot.json
 63eceda41697d7106117091f8671ca9a8e91c6bc data/ad_astra/advancements/recipes/misc/steel_nugget.json
 5097d57f1de3e07e9fee0bd1e5434ffe4ac89d87 data/ad_astra/advancements/recipes/misc/vesnium_solar_panel.json
@@ -23,7 +23,7 @@ a0adbf20af93e73e4f0e2f39737fcc3a72a347a5 data/ad_astra/advancements/recipes/misc
 ca3031c5938f503091cd6c74e3566bb7b4f21e55 data/ad_astra/recipes/desmium_ingot.json
 2866c0d0f3058f4a9d3ff5bf18be365ccd08506f data/ad_astra/recipes/desmium_nugget.json
 a73159427c12a49ed867069f10fe73cb589a0a0f data/ad_astra/recipes/etrionic_blast_furnace.json
-a66a1fb383241ee9811657a95e2dcce32d3096f4 data/ad_astra/recipes/etrionic_capacitor.json
+669fbeefd4bb91a3ce31008b1ecdc757545babe5 data/ad_astra/recipes/etrionic_capacitor.json
 fd26fd8468ce5320c7aa4834534a5e1c6e390d9d data/ad_astra/recipes/etrionic_core.json
 916fa2f081844352e53c97f40fbc6654e4da0890 data/ad_astra/recipes/etrionic_generator.json
 e8640f92b9286d9ab6264117c17e04b9d8bc9595 data/ad_astra/recipes/etrionic_solar_panel.json
@@ -31,7 +31,7 @@ e8640f92b9286d9ab6264117c17e04b9d8bc9595 data/ad_astra/recipes/etrionic_solar_pa
 d020576831e9b464a1bbc5f1475500066ea17ae8 data/ad_astra/recipes/etrium_nugget.json
 3f9d9fa8972a3e381cee694c1648f9d64238f2dd data/ad_astra/recipes/hydraulic_press.json
 3f1934048c5beac715bcad37658f070fdd0918a6 data/ad_astra/recipes/oxygen_sensor.json
-3b70bb31bf867509e1292d6edd938ffcbee08914 data/ad_astra/recipes/photovoltaic_etrium_cell.json
+39cac9463a7ec275242137b994ff94742f24b5bb data/ad_astra/recipes/photovoltaic_etrium_cell.json
 af318c57042eac92f6fe85772369f7c9a900505c data/ad_astra/recipes/steel_ingot.json
 5aa2fe2842fa34a27d1897436171647545c6a5b7 data/ad_astra/recipes/steel_nugget.json
 5701dfdef0437ace7565203584ecaf30df5f2187 data/ad_astra/recipes/vesnium_solar_panel.json

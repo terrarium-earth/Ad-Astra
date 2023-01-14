@@ -115,8 +115,7 @@
         "up": "insert"
       },
       "apply": {
-        "model": "ad_astra:block/pipe/cable/etrium/cable_up_insert",
-        "x": 270
+        "model": "ad_astra:block/pipe/cable/etrium/cable_up_insert"
       }
     },
     {
@@ -124,8 +123,7 @@
         "up": "extract"
       },
       "apply": {
-        "model": "ad_astra:block/pipe/cable/etrium/cable_up_extract",
-        "x": 270
+        "model": "ad_astra:block/pipe/cable/etrium/cable_up_extract"
       }
     },
     {
@@ -133,8 +131,7 @@
         "up": "normal"
       },
       "apply": {
-        "model": "ad_astra:block/pipe/cable/etrium/cable_up",
-        "x": 270
+        "model": "ad_astra:block/pipe/cable/etrium/cable_up"
       }
     },
     {
@@ -142,8 +139,7 @@
         "down": "insert"
       },
       "apply": {
-        "model": "ad_astra:block/pipe/cable/etrium/cable_down_insert",
-        "x": 90
+        "model": "ad_astra:block/pipe/cable/etrium/cable_down_insert"
       }
     },
     {
@@ -151,8 +147,7 @@
         "down": "extract"
       },
       "apply": {
-        "model": "ad_astra:block/pipe/cable/etrium/cable_down_extract",
-        "x": 90
+        "model": "ad_astra:block/pipe/cable/etrium/cable_down_extract"
       }
     },
     {
@@ -160,8 +155,7 @@
         "down": "normal"
       },
       "apply": {
-        "model": "ad_astra:block/pipe/cable/etrium/cable_down",
-        "x": 90
+        "model": "ad_astra:block/pipe/cable/etrium/cable_down"
       }
     }
   ]

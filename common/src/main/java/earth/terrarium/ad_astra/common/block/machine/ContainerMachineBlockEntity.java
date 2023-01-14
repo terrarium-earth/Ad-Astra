@@ -39,4 +39,7 @@ public abstract class ContainerMachineBlockEntity extends MachineBlockEntity imp
     public @NotNull Component getDisplayName() {
         return this.getBlockState().getBlock().getName();
     }
+
+    public void updateFluidSlots() {
+    }
 }

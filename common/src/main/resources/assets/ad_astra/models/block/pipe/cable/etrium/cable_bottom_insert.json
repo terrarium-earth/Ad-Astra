@@ -1,6 +1,0 @@
-{
-  "parent": "ad_astra:block/pipe/cable_bottom",
-  "textures": {
-    "texture": "ad_astra:block/etrium_cable_insert"
-  }
-}

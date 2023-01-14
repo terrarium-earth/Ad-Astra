@@ -6,7 +6,7 @@ import earth.terrarium.ad_astra.common.registry.ModTags;
 import earth.terrarium.ad_astra.common.screen.machine.TemperatureRegulatorMenu;
 import earth.terrarium.ad_astra.common.util.FluidUtils;
 import earth.terrarium.botarium.common.energy.base.EnergyAttachment;
-import earth.terrarium.botarium.common.energy.impl.ExtractOnlyEnergyContainer;
+import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
 import earth.terrarium.botarium.common.fluid.base.FluidAttachment;
 import earth.terrarium.botarium.common.fluid.impl.SimpleFluidContainer;
@@ -74,7 +74,7 @@ public class TemperatureRegulatorBlockEntity extends ContainerMachineBlockEntity
 
     @Override
     public WrappedBlockEnergyContainer getEnergyStorage(BlockEntity holder) {
-        return energyContainer == null ? energyContainer = new WrappedBlockEnergyContainer(this, new ExtractOnlyEnergyContainer(200000)) : this.energyContainer;
+        return energyContainer == null ? energyContainer = new WrappedBlockEnergyContainer(this, new InsertOnlyEnergyContainer(200000)) : this.energyContainer;
     }
 
     public WrappedBlockEnergyContainer getEnergyStorage() {
@@ -83,7 +83,7 @@ public class TemperatureRegulatorBlockEntity extends ContainerMachineBlockEntity
 
     @Override
     public WrappedBlockFluidContainer getFluidContainer(BlockEntity holder) {
-        return fluidContainer == null ? fluidContainer = new WrappedBlockFluidContainer(this, new SimpleFluidContainer(i -> FluidHooks.buckets(10f), 1, (tank, fluid) -> true)) : this.fluidContainer;
+        return fluidContainer == null ? fluidContainer = new WrappedBlockFluidContainer(this, new SimpleFluidContainer(i -> FluidHooks.buckets(10f), 1, (tank, fluid) -> fluid.getFluid().is(ModTags.Fluids.HYDROGEN))) : this.fluidContainer;
     }
 
     public WrappedBlockFluidContainer getFluidContainer() {
@@ -100,6 +100,7 @@ public class TemperatureRegulatorBlockEntity extends ContainerMachineBlockEntity
         update();
     }
 
+    @Override
     public void updateFluidSlots() {
         FluidUtils.insertItemFluidToTank(this, this, 0, 1, f -> f.is(ModTags.Fluids.HYDROGEN)); // TODO: Use common tag
         FluidUtils.extractTankFluidToItem(this, this, 0, 1, 0, f -> true);

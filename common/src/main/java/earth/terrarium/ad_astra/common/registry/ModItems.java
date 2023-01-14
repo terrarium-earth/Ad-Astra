@@ -46,6 +46,7 @@ public class ModItems {
     public static final RegistryEntry<Item> WATER_PUMP = MACHINES.register("water_pump", () -> new BlockItem(ModBlocks.WATER_PUMP.get(), new Item.Properties()));
 
     public static final RegistryEntry<Item> IRON_PLATE = ITEMS.register("iron_plate", () -> new Item(new Item.Properties()));
+    public static final RegistryEntry<Item> IRON_ROD = ITEMS.register("iron_rod", () -> new Item(new Item.Properties()));
 
     public static final RegistryEntry<Item> ETRIUM_INGOT = ITEMS.register("etrium_ingot", () -> new Item(new Item.Properties()));
     public static final RegistryEntry<Item> ETRIUM_NUGGET = ITEMS.register("etrium_nugget", () -> new Item(new Item.Properties()));

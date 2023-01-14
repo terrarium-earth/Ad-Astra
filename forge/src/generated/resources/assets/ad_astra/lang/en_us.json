@@ -23,6 +23,7 @@
   "block.ad_astra.sky_stone": "Sky Stone",
   "block.ad_astra.temperature_regulator": "Temperature Regulator",
   "block.ad_astra.vesnium_solar_panel": "Vesnium Solar Panel",
+  "block.ad_astra.water_pump": "Water Pump",
   "item.ad_astra.aerolyte_ingot": "Aerolyte Ingot",
   "item.ad_astra.aerolyte_nugget": "Aerolyte Nugget",
   "item.ad_astra.aerolyte_plate": "Aerolyte Plate",
@@ -39,6 +40,7 @@
   "item.ad_astra.etrium_plate": "Etrium Plate",
   "item.ad_astra.hydrogen_bucket": "Hydrogen Bucket",
   "item.ad_astra.iron_plate": "Iron Plate",
+  "item.ad_astra.iron_rod": "Iron Rod",
   "item.ad_astra.kerosene_bucket": "Kerosene Bucket",
   "item.ad_astra.oxygen_bucket": "Oxygen Bucket",
   "item.ad_astra.photovoltaic_etrium_cell": "Photovoltaic Etrium Cell",
@@ -76,9 +78,9 @@
   "subtitles.ad_astra.space_laser": "Space Laser",
   "subtitles.ad_astra.wormhole": "Wormhole",
   "subtitles.ad_astra.wrench": "Wrench Twisting",
-  "tooltip.ad_astra.cable_transfer_rate": "Energy Transfer: %s 🪣 / %s 🪣 %s /t",
+  "tooltip.ad_astra.cable_transfer_rate": "Energy Transfer: %s ⚡ / t",
   "tooltip.ad_astra.empty_tank": "Empty Tank",
   "tooltip.ad_astra.energy_bar": "%s ⚡ /§a %s ⚡",
-  "tooltip.ad_astra.fluid_pipe_transfer_rate": "Fluid Transfer: %s 🪣 / %s 🪣 %s /t",
+  "tooltip.ad_astra.fluid_pipe_transfer_rate": "Fluid Transfer: %s 🪣 / t",
   "tooltip.ad_astra.fluid_tank": "%s 🪣 / %s 🪣 %s"
 }

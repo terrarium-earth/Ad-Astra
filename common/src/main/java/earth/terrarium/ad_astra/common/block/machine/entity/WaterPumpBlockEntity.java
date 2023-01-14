@@ -90,6 +90,7 @@ public class WaterPumpBlockEntity extends CookingMachineBlockEntity implements E
         this.updateFluidSlots();
     }
 
+    @Override
     public void updateFluidSlots() {
         FluidUtils.insertItemFluidToTank(this, this, 0, 1, f -> f.equals(Fluids.WATER));
         FluidUtils.extractTankFluidToItem(this, this, 0, 1, 0, f -> true);

@@ -1,5 +1,6 @@
 package earth.terrarium.ad_astra.common.block.pipe;
 
+import earth.terrarium.ad_astra.common.block.machine.BasicContainer;
 import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.botarium.common.energy.base.PlatformEnergyManager;
 import earth.terrarium.botarium.common.energy.util.EnergyHooks;
@@ -32,52 +33,29 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<Pl
 
     @Override
     public void insertInto(PlatformEnergyManager consumer, Direction direction, BlockPos pos) {
-
+        if (level == null) return;
         BlockState state = this.getBlockState();
         BlockState state2 = level.getBlockState(pos);
+        if (state.isAir() || state2.isAir()) return;
         PipeState pipeState = state.getValue(PipeBlock.DIRECTIONS.get(this.getSource().direction()));
         PipeState pipeState2 = state2.getValue(PipeBlock.DIRECTIONS.get(direction));
 
-        if (!(state.getBlock() instanceof PipeBlock) || !(state2.getBlock() instanceof PipeBlock)) {
-            return;
+        if (getSource().storage() == null || getConsumers().size() == 0) return;
+        if (pipeState == PipeState.INSERT && pipeState2 == PipeState.INSERT) return;
+        if (pipeState == PipeState.EXTRACT && pipeState2 == PipeState.EXTRACT) return;
+        if (pipeState == PipeState.NONE || pipeState2 == PipeState.NONE) return;
+
+        PlatformEnergyManager input = getSource().storage();
+        PlatformEnergyManager output = consumer;
+
+        if (pipeState2 == PipeState.EXTRACT || pipeState == PipeState.INSERT) {
+            input = consumer;
+            output = getSource().storage();
         }
 
-
-        if ((pipeState == PipeState.NORMAL && pipeState2 == PipeState.NORMAL) || (pipeState == PipeState.NONE && pipeState2 == PipeState.NONE)) {
-            if (state.getValue(PipeBlock.DIRECTIONS.get(this.getSource().direction())) == PipeState.NONE) {
-                return;
-            }
-
-            if (state2.getValue(PipeBlock.DIRECTIONS.get(direction)) == PipeState.NONE) {
-                return;
-            }
-
-            if (getSource().storage() != null && getConsumers().size() > 0) {
-                EnergyHooks.moveEnergy(getSource().storage(), consumer, Math.max(0, this.getTransferAmount() / getConsumers().size()));
-            }
-        } else {
-            PlatformEnergyManager input;
-            PlatformEnergyManager output;
-
-            if (pipeState == PipeState.INSERT && pipeState2 == PipeState.INSERT) {
-                return;
-            } else if (pipeState == PipeState.EXTRACT && pipeState2 == PipeState.EXTRACT) {
-                return;
-            } else if (pipeState == PipeState.NONE || pipeState2 == PipeState.NONE) {
-                return;
-            } else if (pipeState2 == PipeState.INSERT || pipeState == PipeState.EXTRACT) {
-                input = source.storage();
-                output = consumer;
-            } else if (pipeState2 == PipeState.EXTRACT || pipeState == PipeState.INSERT) {
-                input = consumer;
-                output = source.storage();
-            } else {
-                return;
-            }
-
-            if (getSource() != null && getConsumers().size() > 0) {
-                EnergyHooks.moveEnergy(input, output, Math.max(0, this.getTransferAmount() / getConsumers().size()));
-            }
+        EnergyHooks.moveEnergy(input, output, Math.max(0, this.getTransferAmount() / getConsumers().size()));
+        if (level.getBlockEntity(pos.relative(direction)) instanceof BasicContainer container) {
+            container.update();
         }
     }
 
