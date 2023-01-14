@@ -1,6 +1,7 @@
 package earth.terrarium.ad_astra.datagen.provider.client;
 
 import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.common.item.EtrionicCapacitorItem;
 import earth.terrarium.ad_astra.common.registry.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -33,7 +34,7 @@ public class ModItemModelProvider extends ItemModelProvider {
                 } else if (blockItem.getBlock() instanceof SignBlock) {
                     basicItem(item.get());
                 }
-            } else if (!(item.get() instanceof SignItem)) {
+            } else if (!(item.get() instanceof SignItem) && !(item.get() instanceof EtrionicCapacitorItem)) {
                 basicItem(item.get());
             }
         });

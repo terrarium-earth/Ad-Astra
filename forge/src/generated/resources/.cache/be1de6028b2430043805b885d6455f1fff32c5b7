@@ -1,4 +1,4 @@
-// 1.19.3	2023-01-12T14:30:34.568806	Item Models: ad_astra
+// 1.19.3	2023-01-13T19:37:27.84821	Item Models: ad_astra
 30391f182366c0f22529481911aca797186a29d5 assets/ad_astra/models/item/aerolyte_ingot.json
 a6960cb247dd1a557f6d31391bf64859593eea40 assets/ad_astra/models/item/aerolyte_nugget.json
 09e33dd3debc1b99011c1b30d69f0d78341fb9a8 assets/ad_astra/models/item/aerolyte_plate.json
@@ -7,7 +7,6 @@ b0a2f1182f3ac78ddb7d7f6539e0aa3cfd6339dd assets/ad_astra/models/item/crude_oil_b
 22edf4e2ad46fb24df14c6921f5bbcbd8d09e6fd assets/ad_astra/models/item/desmium_ingot.json
 7349de27780db7c47af61a2e09be6e164613b1a7 assets/ad_astra/models/item/desmium_nugget.json
 f177de1667391e8fbcbe7495869ec17fe8533bd9 assets/ad_astra/models/item/desmium_plate.json
-0f2458b5dff33e05f5d25aa9ecd371f498c7e7f5 assets/ad_astra/models/item/etrionic_capacitor.json
 685ae90c4aba10b2b6978327e16716c03af872e6 assets/ad_astra/models/item/etrionic_core.json
 3dab352c9e2bb40bf9287ed45f697ca1b0f94ab5 assets/ad_astra/models/item/etrionic_fuel_bucket.json
 6135f709b2694a4a027e444695d5c1fdee5a0462 assets/ad_astra/models/item/etrium_ingot.json

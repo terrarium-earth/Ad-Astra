@@ -1,0 +1,14 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "ad_astra:item/etrionic_capacitor"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "ad_astra:toggled": 1
+      },
+      "model": "ad_astra:item/etrionic_capacitor_off"
+    }
+  ]
+}

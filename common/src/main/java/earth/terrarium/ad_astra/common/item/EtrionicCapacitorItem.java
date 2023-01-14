@@ -5,6 +5,7 @@ import dev.architectury.platform.Platform;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.util.LangUtils;
 import earth.terrarium.botarium.common.energy.base.EnergyAttachment;
+import earth.terrarium.botarium.common.energy.base.PlatformItemEnergyManager;
 import earth.terrarium.botarium.common.energy.impl.SimpleEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedItemEnergyContainer;
 import earth.terrarium.botarium.common.energy.util.EnergyHooks;
@@ -25,10 +26,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class EtrionicCapacitorItem extends Item implements EnergyAttachment.Item {
@@ -47,9 +45,9 @@ public class EtrionicCapacitorItem extends Item implements EnergyAttachment.Item
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
-        if(usedHand == InteractionHand.MAIN_HAND) {
+        if (usedHand == InteractionHand.MAIN_HAND) {
             ItemStack stack = player.getItemInHand(usedHand);
-            if(player.isShiftKeyDown()) {
+            if (player.isShiftKeyDown()) {
                 DistributionMode mode = DistributionMode.switchMode(stack);
                 player.displayClientMessage(Component.translatable(LangUtils.CAPACITOR_MODE, mode.getComponent()), true);
                 return InteractionResultHolder.success(stack);
@@ -73,18 +71,18 @@ public class EtrionicCapacitorItem extends Item implements EnergyAttachment.Item
         //TODO config
         long transferRate = 500;
         ItemStackHolder from = new ItemStackHolder(stack);
-        if(getEnergyStorage(stack).getStoredEnergy() > 0 && isToggled(stack) && entity instanceof Player player) {
+        if (getEnergyStorage(stack).getStoredEnergy() > 0 && isToggled(stack) && entity instanceof Player player) {
             DistributionMode mode = DistributionMode.getMode(stack);
-            if(mode == DistributionMode.ROUND_ROBIN) {
+            if (mode == DistributionMode.ROUND_ROBIN) {
                 Map<SlottedItem, Long> containers = new HashMap<>();
                 AtomicLong total = new AtomicLong();
                 for (int i = 0; i < player.getInventory().items.size(); i++) {
                     ItemStack item = player.getInventory().items.get(i);
-                    if(item == stack) continue;
+                    if (item == stack) continue;
                     int finalI = i;
                     EnergyHooks.safeGetItemEnergyManager(item).ifPresent((energy) -> {
                         long movable = energy.insert(new ItemStackHolder(item.copy()), transferRate, true);
-                        if(movable > 0) {
+                        if (movable > 0) {
                             containers.put(new SlottedItem(item, finalI, (itemStack, ind) -> player.getInventory().items.set(ind, itemStack)), movable);
                             total.addAndGet(movable);
                         }
@@ -92,10 +90,10 @@ public class EtrionicCapacitorItem extends Item implements EnergyAttachment.Item
                 }
                 for (EquipmentSlot value : EquipmentSlot.values()) {
                     ItemStack item = player.getItemBySlot(value);
-                    if(item == stack) continue;
+                    if (item == stack) continue;
                     EnergyHooks.safeGetItemEnergyManager(item).ifPresent((energy) -> {
                         long movable = energy.insert(new ItemStackHolder(item.copy()), transferRate, true);
-                        if(movable > 0) {
+                        if (movable > 0) {
                             containers.put(new SlottedItem(item, value.ordinal(), (itemStack, ind) -> player.setItemSlot(EquipmentSlot.values()[ind], itemStack)), movable);
                             total.addAndGet(movable);
                         }
@@ -103,35 +101,49 @@ public class EtrionicCapacitorItem extends Item implements EnergyAttachment.Item
                 }
                 for (var container : containers.entrySet()) {
                     ItemStackHolder to = new ItemStackHolder(container.getKey().stack());
-                    if(total.get() <= transferRate) {
+                    if (total.get() <= transferRate) {
                         EnergyHooks.safeMoveItemToItemEnergy(from, to, transferRate);
                     } else {
-                        EnergyHooks.safeMoveItemToItemEnergy(from, to, (long) Math.ceil(transferRate * ( (double) container.getValue().intValue() / total.get())));
+                        EnergyHooks.safeMoveItemToItemEnergy(from, to, (long) Math.ceil(transferRate * ((double) container.getValue().intValue() / total.get())));
                     }
                     container.getKey().apply(to);
-                    if(from.isDirty()) player.getInventory().setItem(slotId, from.getStack());
+                    if (from.isDirty()) player.getInventory().setItem(slotId, from.getStack());
                 }
-            } else if(mode == DistributionMode.SEQUENTIAL) {
+            } else if (mode == DistributionMode.SEQUENTIAL) {
                 long transfered = 0;
 
                 for (EquipmentSlot value : EquipmentSlot.values()) {
                     ItemStack item = player.getItemBySlot(value);
-                    if(item == stack || item.isEmpty()) continue;
+                    if (item == stack || item.isEmpty()) continue;
                     ItemStackHolder to = new ItemStackHolder(item);
-                    transfered += EnergyHooks.safeMoveItemToItemEnergy(from, to, transferRate - transfered);
-                    if(to.isDirty()) player.setItemSlot(value, to.getStack());
-                    if(from.isDirty()) player.getInventory().setItem(slotId, from.getStack());
-                    if(transfered == transferRate) return;
+                    Optional<PlatformItemEnergyManager> platformItemEnergyManager = EnergyHooks.safeGetItemEnergyManager(item);
+                    if (platformItemEnergyManager.isPresent()) {
+                        long movable = platformItemEnergyManager.get().insert(to, transferRate, true);
+                        if (movable > 0) {
+                            EnergyHooks.safeMoveItemToItemEnergy(from, to, transferRate);
+                            transfered += transferRate;
+                            if (to.isDirty()) player.setItemSlot(value, to.getStack());
+                            if (from.isDirty()) player.getInventory().setItem(slotId, from.getStack());
+                        }
+                    }
+                    if (transfered == transferRate) return;
                 }
 
                 for (int i = 0; i < player.getInventory().items.size(); i++) {
                     ItemStack item = player.getInventory().items.get(i);
-                    if(item == stack || item.isEmpty()) continue;
+                    if (item == stack || item.isEmpty()) continue;
                     ItemStackHolder to = new ItemStackHolder(item);
-                    transfered += EnergyHooks.safeMoveItemToItemEnergy(from, to, transferRate - transfered);
-                    if(to.isDirty()) player.getInventory().items.set(i, to.getStack());
-                    if(from.isDirty()) player.getInventory().setItem(slotId, from.getStack());
-                    if(transfered == transferRate) return;
+                    Optional<PlatformItemEnergyManager> platformItemEnergyManager = EnergyHooks.safeGetItemEnergyManager(item);
+                    if (platformItemEnergyManager.isPresent()) {
+                        long movable = platformItemEnergyManager.get().insert(to, transferRate, true);
+                        if (movable > 0) {
+                            EnergyHooks.safeMoveItemToItemEnergy(from, to, transferRate);
+                            transfered += transferRate;
+                            if (to.isDirty()) player.getInventory().setItem(i, to.getStack());
+                            if (from.isDirty()) player.getInventory().setItem(slotId, from.getStack());
+                        }
+                    }
+                    if (transfered == transferRate) return;
                 }
             }
         }
@@ -167,7 +179,8 @@ public class EtrionicCapacitorItem extends Item implements EnergyAttachment.Item
             if (stack.getOrCreateTag().contains(KEY)) {
                 try {
                     return DistributionMode.valueOf(stack.getOrCreateTag().getString(KEY));
-                } catch (Error ignored) {}
+                } catch (Error ignored) {
+                }
             }
             stack.getOrCreateTag().putString(KEY, DistributionMode.SEQUENTIAL.toString());
             return DistributionMode.SEQUENTIAL;
@@ -216,7 +229,7 @@ public class EtrionicCapacitorItem extends Item implements EnergyAttachment.Item
 
     public record SlottedItem(ItemStack stack, int slot, SlotFunction runnable) {
         public void apply(ItemStackHolder holder) {
-            if(holder.isDirty()) runnable.apply(holder.getStack(), slot);
+            if (holder.isDirty()) runnable.apply(holder.getStack(), slot);
         }
     }
 
