@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "etrium_ingot",
+  "ingredients": [
+    {
+      "item": "ad_astra:etrium_nugget"
+    },
+    {
+      "item": "ad_astra:etrium_nugget"
+    },
+    {
+      "item": "ad_astra:etrium_nugget"
+    },
+    {
+      "item": "ad_astra:etrium_nugget"
+    },
+    {
+      "item": "ad_astra:etrium_nugget"
+    },
+    {
+      "item": "ad_astra:etrium_nugget"
+    },
+    {
+      "item": "ad_astra:etrium_nugget"
+    },
+    {
+      "item": "ad_astra:etrium_nugget"
+    },
+    {
+      "item": "ad_astra:etrium_nugget"
+    }
+  ],
+  "result": {
+    "item": "ad_astra:etrium_ingot"
+  }
+}

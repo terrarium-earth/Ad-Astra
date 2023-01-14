@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "photovoltaic_etrium_cell",
+  "key": {
+    "I": {
+      "item": "ad_astra:etrium_nugget"
+    },
+    "P": {
+      "tag": "ad_astra:steel_plate"
+    }
+  },
+  "pattern": [
+    "III",
+    "PPP"
+  ],
+  "result": {
+    "item": "ad_astra:photovoltaic_etrium_cell"
+  }
+}

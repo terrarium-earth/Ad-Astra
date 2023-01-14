@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "steel_nugget",
+  "ingredients": [
+    {
+      "tag": "ad_astra:steel_ingot"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "ad_astra:steel_nugget"
+  }
+}

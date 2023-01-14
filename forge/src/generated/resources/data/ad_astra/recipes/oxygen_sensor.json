@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "oxygen_sensor",
+  "key": {
+    "P": {
+      "tag": "ad_astra:desmium_plate"
+    },
+    "Q": {
+      "item": "minecraft:quartz"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "QRQ",
+    "PPP"
+  ],
+  "result": {
+    "item": "ad_astra:oxygen_sensor"
+  }
+}

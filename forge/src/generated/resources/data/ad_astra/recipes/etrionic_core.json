@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "etrionic_core",
+  "key": {
+    "C": {
+      "item": "ad_astra:etrium_plate"
+    },
+    "I": {
+      "tag": "ad_astra:steel_plate"
+    }
+  },
+  "pattern": [
+    "II",
+    "CC",
+    "II"
+  ],
+  "result": {
+    "item": "ad_astra:etrionic_core"
+  }
+}

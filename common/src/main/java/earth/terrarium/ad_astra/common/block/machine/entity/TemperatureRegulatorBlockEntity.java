@@ -101,7 +101,7 @@ public class TemperatureRegulatorBlockEntity extends ContainerMachineBlockEntity
     }
 
     public void updateFluidSlots() {
-        FluidUtils.insertItemFluidToTank(this, this, 0, 1, f -> f.is(ModTags.FLUIDS.HYDROGEN)); // TODO: Use common tag
+        FluidUtils.insertItemFluidToTank(this, this, 0, 1, f -> f.is(ModTags.Fluids.HYDROGEN)); // TODO: Use common tag
         FluidUtils.extractTankFluidToItem(this, this, 0, 1, 0, f -> true);
     }
 }

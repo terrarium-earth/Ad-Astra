@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "etrionic_blast_furnace",
+  "key": {
+    "B": {
+      "item": "minecraft:blast_furnace"
+    },
+    "E": {
+      "item": "ad_astra:etrium_ingot"
+    },
+    "I": {
+      "tag": "forge:ingots/iron"
+    },
+    "N": {
+      "item": "ad_astra:etrium_nugget"
+    }
+  },
+  "pattern": [
+    "III",
+    "NBN",
+    "EEE"
+  ],
+  "result": {
+    "item": "ad_astra:etrionic_blast_furnace"
+  }
+}

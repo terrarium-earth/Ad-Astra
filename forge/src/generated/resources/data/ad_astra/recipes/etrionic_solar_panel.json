@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "etrionic_solar_panel",
+  "key": {
+    "C": {
+      "item": "ad_astra:photovoltaic_etrium_cell"
+    },
+    "I": {
+      "item": "ad_astra:etrionic_core"
+    },
+    "P": {
+      "tag": "ad_astra:steel_plate"
+    },
+    "R": {
+      "tag": "ad_astra:steel_rod"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "PRP",
+    "PIP"
+  ],
+  "result": {
+    "item": "ad_astra:etrionic_solar_panel"
+  }
+}

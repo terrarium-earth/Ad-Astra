@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "etrionic_capacitor",
+  "key": {
+    "C": {
+      "item": "ad_astra:etrionic_core"
+    },
+    "I": {
+      "item": "ad_astra:etrium_ingot"
+    },
+    "P": {
+      "tag": "ad_astra:steel_plate"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "ICI",
+    "PPP"
+  ],
+  "result": {
+    "item": "ad_astra:etrionic_capacitor"
+  }
+}

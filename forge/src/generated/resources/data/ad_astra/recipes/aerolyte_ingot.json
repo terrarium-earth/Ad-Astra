@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "aerolyte_ingot",
+  "ingredients": [
+    {
+      "item": "ad_astra:aerolyte_nugget"
+    },
+    {
+      "item": "ad_astra:aerolyte_nugget"
+    },
+    {
+      "item": "ad_astra:aerolyte_nugget"
+    },
+    {
+      "item": "ad_astra:aerolyte_nugget"
+    },
+    {
+      "item": "ad_astra:aerolyte_nugget"
+    },
+    {
+      "item": "ad_astra:aerolyte_nugget"
+    },
+    {
+      "item": "ad_astra:aerolyte_nugget"
+    },
+    {
+      "item": "ad_astra:aerolyte_nugget"
+    },
+    {
+      "item": "ad_astra:aerolyte_nugget"
+    }
+  ],
+  "result": {
+    "item": "ad_astra:aerolyte_ingot"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "etrionic_generator",
+  "key": {
+    "E": {
+      "item": "ad_astra:etrium_ingot"
+    },
+    "I": {
+      "tag": "forge:ingots/iron"
+    },
+    "N": {
+      "item": "ad_astra:etrium_nugget"
+    }
+  },
+  "pattern": [
+    "IIN",
+    "IIN",
+    "EEE"
+  ],
+  "result": {
+    "item": "ad_astra:etrionic_generator"
+  }
+}

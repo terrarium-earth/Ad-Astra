@@ -36,6 +36,9 @@
     ],
     "modmenu": [
       "earth.terrarium.ad_astra.common.config.fabric.ModMenuConfig"
+    ],
+    "fabric-datagen": [
+      "earth.terrarium.ad_astra.datagen.AdAstraDataGenerator"
     ]
   },
   "mixins": [

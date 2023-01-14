@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "vesnium_solar_panel",
+  "key": {
+    "C": {
+      "item": "ad_astra:photovoltaic_vesnium_cell"
+    },
+    "I": {
+      "item": "ad_astra:etrionic_core"
+    },
+    "P": {
+      "tag": "ad_astra:steel_plate"
+    },
+    "R": {
+      "tag": "ad_astra:steel_rod"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "PRP",
+    "PIP"
+  ],
+  "result": {
+    "item": "ad_astra:vesnium_solar_panel"
+  }
+}

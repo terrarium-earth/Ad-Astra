@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "aerolyte_nugget",
+  "ingredients": [
+    {
+      "item": "ad_astra:aerolyte_ingot"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "ad_astra:aerolyte_nugget"
+  }
+}

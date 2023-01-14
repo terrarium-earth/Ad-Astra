@@ -101,7 +101,7 @@ public class OxygenDistributorBlockEntity extends ContainerMachineBlockEntity im
     }
 
     public void updateFluidSlots() {
-        FluidUtils.insertItemFluidToTank(this, this, 0, 1, f -> f.is(ModTags.FLUIDS.OXYGEN)); // TODO: Use common tag
+        FluidUtils.insertItemFluidToTank(this, this, 0, 1, f -> f.is(ModTags.Fluids.OXYGEN)); // TODO: Use common tag
         FluidUtils.extractTankFluidToItem(this, this, 0, 1, 0, f -> true);
     }
 }

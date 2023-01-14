@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "desmium_nugget",
+  "ingredients": [
+    {
+      "item": "ad_astra:desmium_ingot"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "ad_astra:desmium_nugget"
+  }
+}
