@@ -1,0 +1,6 @@
+{
+  "parent": "ad_astra:block/pipe/fluid_pipe_side",
+  "textures": {
+    "texture": "ad_astra:block/pipe/desmium_fluid_pipe_insert"
+  }
+}

@@ -23,6 +23,7 @@ public class AdAstraClient {
 
     public static void init() {
         registerScreens();
+        registerItemProperties();
     }
 
     private static void registerScreens() {
@@ -37,8 +38,12 @@ public class AdAstraClient {
         ClientPlatformUtils.registerScreen(ModMenus.CRYOGENIC_FREEZER.get(), TestScreen::new);
         ClientPlatformUtils.registerScreen(ModMenus.RECYCLER.get(), TestScreen::new);
         ClientPlatformUtils.registerScreen(ModMenus.OXYGEN_DISTRIBUTOR.get(), TestScreen::new);
+        ClientPlatformUtils.registerScreen(ModMenus.TEMPERATURE_REGULATOR.get(), TestScreen::new);
+    }
 
+    private static void registerItemProperties() {
         ClientPlatformUtils.registerItemProperty(ModItems.ETRIONIC_CAPACITOR.get(), new ResourceLocation(AdAstra.MOD_ID, "toggled"), EtrionicCapacitorItem::itemProperty);
+
     }
 
     public static void onRegisterHud(Consumer<ClientPlatformUtils.RenderHud> register) {

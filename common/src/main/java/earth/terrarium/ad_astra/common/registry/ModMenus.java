@@ -23,4 +23,5 @@ public class ModMenus {
     public static final RegistryEntry<MenuType<CryogenicFreezerMenu>> CRYOGENIC_FREEZER = MENUS.register("cryogenic_frezer", () -> RegistryHelpers.createMenuType(CryogenicFreezerMenu::new));
     public static final RegistryEntry<MenuType<RecyclerMenu>> RECYCLER = MENUS.register("recycler", () -> RegistryHelpers.createMenuType(RecyclerMenu::new));
     public static final RegistryEntry<MenuType<OxygenDistributorMenu>> OXYGEN_DISTRIBUTOR = MENUS.register("oxygen_distributor", () -> RegistryHelpers.createMenuType(OxygenDistributorMenu::new));
+    public static final RegistryEntry<MenuType<TemperatureRegulatorMenu>> TEMPERATURE_REGULATOR = MENUS.register("temperature_regulator", () -> RegistryHelpers.createMenuType(TemperatureRegulatorMenu::new));
 }

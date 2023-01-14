@@ -49,6 +49,8 @@ public class ModLootTableProvider extends LootTableProvider {
             ModBlocks.MACHINES.stream().map(RegistryEntry::get).forEach(this::dropSelf);
             dropSelf(ModBlocks.SKY_STONE.get());
             this.add(ModBlocks.ETRIUM_ORE.get(), this::createEtriumOreDrops);
+            dropSelf(ModBlocks.ETRIUM_CABLE.get());
+            dropSelf(ModBlocks.DESMIUM_FLUID_PIPE.get());
         }
 
         @Override

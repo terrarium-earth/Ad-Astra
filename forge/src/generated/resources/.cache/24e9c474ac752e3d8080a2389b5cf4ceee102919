@@ -1,4 +1,4 @@
-// 1.19.3	2023-01-13T11:09:06.4064	Block States: ad_astra
+// 1.19.3	2023-01-13T12:51:20.741064	Block States: ad_astra
 f17a3649d35ad50d029d53da2890cba56a0cb0be assets/ad_astra/blockstates/crude_oil.json
 3cf9d4b0c6b24600e4b890969810cdc6944ea21a assets/ad_astra/blockstates/cryogenic_fuel.json
 0d2b6827806bcb2c57c478c36d634114ed0018c5 assets/ad_astra/blockstates/etrionic_fuel.json
@@ -33,4 +33,5 @@ ee8c48db99b6471d8a2c3590af8f1b788503547c assets/ad_astra/models/item/oil_refiner
 fdb0e27e500fe1403a584e8c3cb849df22616ed5 assets/ad_astra/models/item/oxygen_sensor.json
 5e611a506dbcfb9c8ef058fef539a224544bb099 assets/ad_astra/models/item/recycler.json
 b5dd0d8d7cbda8c5b5f42eb7b23f93a5395fb63c assets/ad_astra/models/item/sky_stone.json
+f0da72f0345bff2ef6694c1786e2d19d9487dcaa assets/ad_astra/models/item/temperature_regulator.json
 ccf5b6a0ceabed8ca4aa7f9b4c3b5e81645a8263 assets/ad_astra/models/item/vesnium_solar_panel.json

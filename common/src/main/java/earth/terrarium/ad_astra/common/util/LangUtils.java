@@ -11,8 +11,10 @@ public class LangUtils {
     public static final String EMPTY_TANK = lang("tooltip.ad_astra.empty_tank", "Empty Tank");
     public static final String ENERGY_BAR = lang("tooltip.ad_astra.energy_bar", "%s ⚡ /§a %s ⚡");
     public static final String FLUID_TANK = lang("tooltip.ad_astra.fluid_tank", "%s 🪣 / %s 🪣 %s");
+    public static final String FLUID_PIPE_TRANSDER_RATE = lang("tooltip.ad_astra.fluid_pipe_transfer_rate", "Fluid Transfer: %s 🪣 / %s 🪣 %s /t");
+    public static final String CABLE_TRANSFER_RATE = lang("tooltip.ad_astra.cable_transfer_rate", "Energy Transfer: %s 🪣 / %s 🪣 %s /t");
 
-    public static final String PIPE_DEFAULT = lang("message.ad_astra.pipe_normal", "Normal");
+    public static final String PIPE_NORMAL = lang("message.ad_astra.pipe_normal", "Normal");
     public static final String PIPE_INSERT = lang("message.ad_astra.pipe_insert", "Insert");
     public static final String PIPE_EXTRACT = lang("message.ad_astra.pipe_extract", "Extract");
     public static final String PIPE_NONE = lang("message.ad_astra.pipe_none", "None");

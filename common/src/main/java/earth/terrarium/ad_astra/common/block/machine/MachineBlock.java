@@ -1,8 +1,6 @@
 package earth.terrarium.ad_astra.common.block.machine;
 
-import com.teamresourceful.resourcefullib.common.caches.CacheableFunction;
-import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
-import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
+import earth.terrarium.ad_astra.common.block.BasicEntityBlock;
 import earth.terrarium.botarium.common.menu.ExtraDataMenuProvider;
 import earth.terrarium.botarium.common.menu.MenuHooks;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -28,22 +26,10 @@ import net.minecraft.world.phys.BlockHitResult;
 
 @SuppressWarnings("deprecation")
 @MethodsReturnNonnullByDefault
-public class MachineBlock extends BaseEntityBlock {
+public class MachineBlock extends BasicEntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
-
-    private static final CacheableFunction<Block, BlockEntityType<?>> BLOCK_TO_ENTITY = new CacheableFunction<>(block ->
-            ModBlockEntityTypes.BLOCK_ENTITY_TYPES
-                    .getEntries()
-                    .stream()
-                    .map(RegistryEntry::get)
-                    .filter(type -> type.isValid(block.defaultBlockState()))
-                    .findFirst()
-                    .orElse(null)
-    );
-
-    private BlockEntityType<?> entity;
 
     public MachineBlock(Properties properties) {
         super(properties);
@@ -71,14 +57,6 @@ public class MachineBlock extends BaseEntityBlock {
                 }
             }
         };
-    }
-
-    @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        if (this.entity == null) {
-            this.entity = BLOCK_TO_ENTITY.apply(state.getBlock());
-        }
-        return this.entity.create(pos, state);
     }
 
     @Override
@@ -113,10 +91,5 @@ public class MachineBlock extends BaseEntityBlock {
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         BlockState state = this.defaultBlockState().setValue(POWERED, false);
         return state.setValue(FACING, ctx.getHorizontalDirection().getOpposite());
-    }
-
-    @Override
-    public RenderShape getRenderShape(BlockState state) {
-        return RenderShape.MODEL;
     }
 }

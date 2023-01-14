@@ -11,8 +11,6 @@ import net.minecraft.world.level.block.WallSignBlock;
 import net.minecraftforge.common.data.LanguageProvider;
 import org.codehaus.plexus.util.StringUtils;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 public class ModLangProvider extends LanguageProvider {

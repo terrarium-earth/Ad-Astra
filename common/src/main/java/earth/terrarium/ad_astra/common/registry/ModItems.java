@@ -23,6 +23,11 @@ public class ModItems {
     public static final ResourcefulRegistry<Item> SOLAR_PANELS = ResourcefulRegistries.create(MACHINES);
     public static final ResourcefulRegistry<Item> BUCKETS = ResourcefulRegistries.create(ITEMS);
 
+    public static final RegistryEntry<Item> WRENCH = ITEMS.register("wrench", () -> new Item(new Item.Properties()));
+
+    public static final RegistryEntry<Item> ETRIUM_CABLE = MACHINES.register("etrium_cable", () -> new BlockItem(ModBlocks.ETRIUM_CABLE.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> DESMIUM_FLUID_PIPE = MACHINES.register("desmium_fluid_pipe", () -> new BlockItem(ModBlocks.DESMIUM_FLUID_PIPE.get(), new Item.Properties()));
+
     public static final RegistryEntry<Item> ETRIONIC_GENERATOR = MACHINES.register("etrionic_generator", () -> new BlockItem(ModBlocks.ETRIONIC_GENERATOR.get(), new Item.Properties()));
     public static final RegistryEntry<Item> COMBUSTION_GENERATOR = MACHINES.register("combustion_generator", () -> new BlockItem(ModBlocks.COMBUSTION_GENERATOR.get(), new Item.Properties()));
     public static final RegistryEntry<Item> ETRIONIC_SOLAR_PANEL = SOLAR_PANELS.register("etrionic_solar_panel", () -> new BlockItem(ModBlocks.ETRIONIC_SOLAR_PANEL.get(), new Item.Properties()));
@@ -37,6 +42,7 @@ public class ModItems {
     public static final RegistryEntry<Item> CRYOGENIC_FREEZER = MACHINES.register("cryogenic_freezer", () -> new BlockItem(ModBlocks.CRYOGENIC_FREEZER.get(), new Item.Properties()));
     public static final RegistryEntry<Item> RECYCLER = MACHINES.register("recycler", () -> new BlockItem(ModBlocks.RECYCLER.get(), new Item.Properties()));
     public static final RegistryEntry<Item> OXYGEN_DISTRIBUTOR = MACHINES.register("oxygen_distributor", () -> new BlockItem(ModBlocks.OXYGEN_DISTRIBUTOR.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> TEMPERATURE_REGULATOR = MACHINES.register("temperature_regulator", () -> new BlockItem(ModBlocks.TEMPERATURE_REGULATOR.get(), new Item.Properties()));
 
     public static final RegistryEntry<Item> IRON_PLATE = ITEMS.register("iron_plate", () -> new Item(new Item.Properties()));
 
