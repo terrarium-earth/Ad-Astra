@@ -20,16 +20,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 public class ForgeItemTagProvider extends TagsProvider<Item> {
-    public static final TagKey<Item> STEEL_PLATES = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("forge", "plates/steel"));
-    public static final TagKey<Item> STEEL_RODS = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("forge", "rods/steel"));
-    public static final TagKey<Item> STEEL_INGOTS = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("forge", "ingots/steel"));
-    public static final TagKey<Item> STEEL_NUGGETS = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("forge", "nuggets/steel"));
-
-    public static final TagKey<Item> DESMIUM_NUGGETS = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("forge", "nuggets/desmium"));
-    public static final TagKey<Item> DESMIUM_INGOTS = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("forge", "nuggets/desmium"));
-    public static final TagKey<Item> DESMIUM_PLATES = TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("forge", "nuggets/desmium"));
-
-
     public ForgeItemTagProvider(PackOutput arg, ResourceKey<? extends Registry<Item>> arg2, CompletableFuture<HolderLookup.Provider> completableFuture, @Nullable ExistingFileHelper existingFileHelper) {
         super(arg, arg2, completableFuture, AdAstra.MOD_ID, existingFileHelper);
     }
@@ -37,13 +27,48 @@ public class ForgeItemTagProvider extends TagsProvider<Item> {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        tag(STEEL_PLATES).add(TagEntry.element(ModItems.STEEL_PLATE.getId()));
-        tag(STEEL_RODS).add(TagEntry.element(ModItems.STEEL_ROD.getId()));
-        tag(STEEL_INGOTS).add(TagEntry.element(ModItems.STEEL_INGOT.getId()));
-        tag(STEEL_NUGGETS).add(TagEntry.element(ModItems.STEEL_NUGGET.getId()));
+        tag(forge("storage_blocks/etrium")).add(TagEntry.element(ModItems.ETRIUM_BLOCK.getId()));
+        tag(forge("storage_blocks/steel")).add(TagEntry.element(ModItems.STEEL_BLOCK.getId()));
+        tag(forge("storage_blocks/desmium")).add(TagEntry.element(ModItems.DESMIUM_BLOCK.getId()));
+        tag(forge("storage_blocks/xebrium")).add(TagEntry.element(ModItems.XEBRIUM_BLOCK.getId()));
+        tag(forge("storage_blocks/vesnium")).add(TagEntry.element(ModItems.VESNIUM_BLOCK.getId()));
+        tag(forge("storage_blocks/aerolyte")).add(TagEntry.element(ModItems.AEROLYTE_BLOCK.getId()));
 
-        tag(DESMIUM_PLATES).add(TagEntry.element(ModItems.DESMIUM_PLATE.getId()));
-        tag(DESMIUM_INGOTS).add(TagEntry.element(ModItems.DESMIUM_INGOT.getId()));
-        tag(DESMIUM_NUGGETS).add(TagEntry.element(ModItems.DESMIUM_NUGGET.getId()));
+        tag(forge("plates/steel")).add(TagEntry.element(ModItems.STEEL_PLATE.getId()));
+        tag(forge("rods/steel")).add(TagEntry.element(ModItems.STEEL_ROD.getId()));
+        tag(forge("ingots/steel")).add(TagEntry.element(ModItems.STEEL_INGOT.getId()));
+        tag(forge("nuggets/steel")).add(TagEntry.element(ModItems.STEEL_NUGGET.getId()));
+
+        tag(forge("plates/desmium")).add(TagEntry.element(ModItems.DESMIUM_PLATE.getId()));
+        tag(forge("ingots/desmium")).add(TagEntry.element(ModItems.DESMIUM_INGOT.getId()));
+        tag(forge("nuggets/desmium")).add(TagEntry.element(ModItems.DESMIUM_NUGGET.getId()));
+
+        tag(forge("plates/iron")).add(TagEntry.element(ModItems.IRON_PLATE.getId()));
+        tag(forge("rods/iron")).add(TagEntry.element(ModItems.IRON_ROD.getId()));
+
+        tag(forge("plates/steel")).add(TagEntry.element(ModItems.STEEL_PLATE.getId()));
+        tag(forge("rods/steel")).add(TagEntry.element(ModItems.STEEL_ROD.getId()));
+        tag(forge("nuggets/steel")).add(TagEntry.element(ModItems.STEEL_NUGGET.getId()));
+        tag(forge("ingots/steel")).add(TagEntry.element(ModItems.STEEL_INGOT.getId()));
+
+        tag(forge("plates/steel")).add(TagEntry.element(ModItems.DESMIUM_PLATE.getId()));
+        tag(forge("desmium_nuggets")).add(TagEntry.element(ModItems.DESMIUM_NUGGET.getId()));
+        tag(forge("desmium_ingots")).add(TagEntry.element(ModItems.DESMIUM_INGOT.getId()));
+
+        tag(forge("xebrium_plates")).add(TagEntry.element(ModItems.XEBRIUM_PLATE.getId()));
+        tag(forge("xebrium_nuggets")).add(TagEntry.element(ModItems.XEBRIUM_NUGGET.getId()));
+        tag(forge("xebrium_ingots")).add(TagEntry.element(ModItems.XEBRIUM_INGOT.getId()));
+
+        tag(forge("aerolyte_plates")).add(TagEntry.element(ModItems.AEROLYTE_PLATE.getId()));
+        tag(forge("aerolyte_nuggets")).add(TagEntry.element(ModItems.AEROLYTE_NUGGET.getId()));
+        tag(forge("aerolyte_ingots")).add(TagEntry.element(ModItems.AEROLYTE_INGOT.getId()));
+
+        tag(forge("etrium_plates")).add(TagEntry.element(ModItems.ETRIUM_PLATE.getId()));
+        tag(forge("etrium_nuggets")).add(TagEntry.element(ModItems.ETRIUM_NUGGET.getId()));
+        tag(forge("etrium_ingots")).add(TagEntry.element(ModItems.ETRIUM_INGOT.getId()));
+    }
+
+    private TagKey<Item> forge(String path) {
+        return TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("forge", path));
     }
 }

@@ -51,6 +51,7 @@ public class ModItems {
     public static final RegistryEntry<Item> ETRIUM_INGOT = ITEMS.register("etrium_ingot", () -> new Item(new Item.Properties()));
     public static final RegistryEntry<Item> ETRIUM_NUGGET = ITEMS.register("etrium_nugget", () -> new Item(new Item.Properties()));
     public static final RegistryEntry<Item> ETRIUM_PLATE = ITEMS.register("etrium_plate", () -> new Item(new Item.Properties()));
+    public static final RegistryEntry<Item> ETRIUM_BLOCK = ITEMS.register("etrium_block", () -> new BlockItem(ModBlocks.ETRIUM_BLOCK.get(), new Item.Properties()));
 
     public static final RegistryEntry<Item> PHOTOVOLTAIC_ETRIUM_CELL = ITEMS.register("photovoltaic_etrium_cell", () -> new Item(new Item.Properties()));
     public static final RegistryEntry<Item> PHOTOVOLTAIC_VESNIUM_CELL = ITEMS.register("photovoltaic_vesnium_cell", () -> new Item(new Item.Properties()));
@@ -62,23 +63,28 @@ public class ModItems {
     public static final RegistryEntry<Item> STEEL_NUGGET = ITEMS.register("steel_nugget", () -> new Item(new Item.Properties()));
     public static final RegistryEntry<Item> STEEL_PLATE = ITEMS.register("steel_plate", () -> new Item(new Item.Properties()));
     public static final RegistryEntry<Item> STEEL_ROD = ITEMS.register("steel_rod", () -> new Item(new Item.Properties()));
+    public static final RegistryEntry<Item> STEEL_BLOCK = ITEMS.register("steel_block", () -> new BlockItem(ModBlocks.STEEL_BLOCK.get(), new Item.Properties()));
 
     public static final RegistryEntry<Item> DESMIUM_INGOT = ITEMS.register("desmium_ingot", () -> new Item(new Item.Properties()));
     public static final RegistryEntry<Item> DESMIUM_NUGGET = ITEMS.register("desmium_nugget", () -> new Item(new Item.Properties()));
     public static final RegistryEntry<Item> DESMIUM_PLATE = ITEMS.register("desmium_plate", () -> new Item(new Item.Properties()));
     public static final RegistryEntry<Item> RAW_DESMIUM = ITEMS.register("raw_desmium", () -> new Item(new Item.Properties()));
+    public static final RegistryEntry<Item> DESMIUM_BLOCK = ITEMS.register("desmium_block", () -> new BlockItem(ModBlocks.DESMIUM_BLOCK.get(), new Item.Properties()));
 
     public static final RegistryEntry<Item> XEBRIUM_INGOT = ITEMS.register("xebrium_ingot", () -> new Item(new Item.Properties()));
     public static final RegistryEntry<Item> XEBRIUM_NUGGET = ITEMS.register("xebrium_nugget", () -> new Item(new Item.Properties()));
     public static final RegistryEntry<Item> XEBRIUM_PLATE = ITEMS.register("xebrium_plate", () -> new Item(new Item.Properties()));
     public static final RegistryEntry<Item> RAW_XEBRIUM = ITEMS.register("raw_xebrium", () -> new Item(new Item.Properties()));
+    public static final RegistryEntry<Item> XEBRIUM_BLOCK = ITEMS.register("xebrium_block", () -> new BlockItem(ModBlocks.XEBRIUM_BLOCK.get(), new Item.Properties()));
 
     public static final RegistryEntry<Item> VESNIUM = ITEMS.register("vesnium", () -> new Item(new Item.Properties()));
+    public static final RegistryEntry<Item> VESNIUM_BLOCK = ITEMS.register("vesnium_block", () -> new BlockItem(ModBlocks.VESNIUM_BLOCK.get(), new Item.Properties()));
 
     public static final RegistryEntry<Item> AEROLYTE_INGOT = ITEMS.register("aerolyte_ingot", () -> new Item(new Item.Properties()));
     public static final RegistryEntry<Item> AEROLYTE_NUGGET = ITEMS.register("aerolyte_nugget", () -> new Item(new Item.Properties()));
     public static final RegistryEntry<Item> AEROLYTE_PLATE = ITEMS.register("aerolyte_plate", () -> new Item(new Item.Properties()));
     public static final RegistryEntry<Item> RAW_AEROLYTE = ITEMS.register("raw_aerolyte", () -> new Item(new Item.Properties()));
+    public static final RegistryEntry<Item> AEROLYTE_BLOCK = ITEMS.register("aerolyte_block", () -> new BlockItem(ModBlocks.AEROLYTE_BLOCK.get(), new Item.Properties()));
 
     public static final RegistryEntry<Item> SKY_STONE = ITEMS.register("sky_stone", () -> new BlockItem(ModBlocks.SKY_STONE.get(), new Item.Properties()));
     public static final RegistryEntry<Item> ETRIUM_ORE = ITEMS.register("etrium_ore", () -> new BlockItem(ModBlocks.ETRIUM_ORE.get(), new Item.Properties()));

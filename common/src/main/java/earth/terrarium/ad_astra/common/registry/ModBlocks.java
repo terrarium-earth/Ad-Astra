@@ -57,4 +57,11 @@ public class ModBlocks {
     public static final RegistryEntry<Block> KEROSENE = FLUIDS.register("kerosene", () -> new BotariumLiquidBlock(ModFluidProperties.KEROSENE, BlockBehaviour.Properties.copy(Blocks.WATER)));
     public static final RegistryEntry<Block> ETRIONIC_FUEL = FLUIDS.register("etrionic_fuel", () -> new BotariumLiquidBlock(ModFluidProperties.ETRIONIC_FUEL, BlockBehaviour.Properties.copy(Blocks.WATER)));
     public static final RegistryEntry<Block> CRYOGENIC_FUEL = FLUIDS.register("cryogenic_fuel", () -> new CryogenicFuelLiquidBlock(ModFluidProperties.CRYOGENIC_FUEL, BlockBehaviour.Properties.copy(Blocks.WATER)));
+
+    public static final RegistryEntry<Block> DESMIUM_BLOCK = BLOCKS.register("desmium_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+    public static final RegistryEntry<Block> STEEL_BLOCK = BLOCKS.register("steel_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+    public static final RegistryEntry<Block> ETRIUM_BLOCK = BLOCKS.register("etrium_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+    public static final RegistryEntry<Block> AEROLYTE_BLOCK = BLOCKS.register("aerolyte_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+    public static final RegistryEntry<Block> XEBRIUM_BLOCK = BLOCKS.register("xebrium_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+    public static final RegistryEntry<Block> VESNIUM_BLOCK = BLOCKS.register("vesnium_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK)));
 }
