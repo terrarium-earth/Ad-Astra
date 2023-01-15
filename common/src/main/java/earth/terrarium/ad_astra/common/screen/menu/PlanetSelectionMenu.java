@@ -1,19 +1,16 @@
 package earth.terrarium.ad_astra.common.screen.menu;
 
-import com.teamresourceful.resourcefullib.common.codecs.yabn.YabnOps;
-import com.teamresourceful.yabn.YabnParser;
-import com.teamresourceful.yabn.reader.ByteReader;
+import com.mojang.serialization.DataResult;
+import com.teamresourceful.resourcefullib.common.networking.PacketHelper;
+import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.data.Planet;
 import earth.terrarium.ad_astra.common.data.PlanetData;
 import earth.terrarium.ad_astra.common.registry.ModMenus;
-import io.netty.buffer.ByteBuf;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 public class PlanetSelectionMenu extends AbstractContainerMenu {
 
@@ -22,14 +19,11 @@ public class PlanetSelectionMenu extends AbstractContainerMenu {
 
     public PlanetSelectionMenu(int syncId, Player player, FriendlyByteBuf buf) {
         this(syncId, player, buf.readInt());
-        try {
-            PlanetData.updatePlanets(Planet.CODEC.listOf().parse(YabnOps.COMPRESSED, YabnParser.parse(new ByteBufByteReader(buf)))
-                    .result()
-                    .orElse(List.of()));
-        } catch (Exception e) {
-            e.printStackTrace();
-            PlanetData.updatePlanets(List.of());
-        }
+        PacketHelper.readWithYabn(buf, Planet.CODEC.listOf(), true)
+                .get()
+                .ifLeft(PlanetData::updatePlanets)
+                .mapRight(DataResult.PartialResult::message)
+                .ifRight(AdAstra.LOGGER::error);
     }
 
     public PlanetSelectionMenu(int syncId, Player player, int tier) {
@@ -54,23 +48,5 @@ public class PlanetSelectionMenu extends AbstractContainerMenu {
     @Override
     public @NotNull ItemStack quickMoveStack(Player player, int index) {
         return null;
-    }
-
-    private record ByteBufByteReader(ByteBuf buf) implements ByteReader {
-
-        @Override
-        public byte peek() {
-            return buf.getByte(buf.readerIndex());
-        }
-
-        @Override
-        public void advance() {
-            buf.skipBytes(1);
-        }
-
-        @Override
-        public byte readByte() {
-            return buf.readByte();
-        }
     }
 }
