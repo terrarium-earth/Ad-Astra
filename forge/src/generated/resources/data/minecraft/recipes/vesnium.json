@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "vesnium",
+  "ingredients": [
+    {
+      "item": "ad_astra:vesnium_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "ad_astra:vesnium"
+  }
+}

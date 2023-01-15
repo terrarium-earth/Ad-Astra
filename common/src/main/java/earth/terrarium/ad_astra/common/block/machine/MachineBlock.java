@@ -13,10 +13,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -26,6 +23,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("deprecation")
 @MethodsReturnNonnullByDefault
@@ -94,5 +92,10 @@ public class MachineBlock extends BasicEntityBlock {
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         BlockState state = this.defaultBlockState().setValue(POWERED, false);
         return state.setValue(FACING, ctx.getHorizontalDirection().getOpposite());
+    }
+
+    @Override
+    public @NotNull RenderShape getRenderShape(BlockState state) {
+        return RenderShape.ENTITYBLOCK_ANIMATED;
     }
 }

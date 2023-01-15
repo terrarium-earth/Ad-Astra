@@ -1,12 +1,15 @@
 package earth.terrarium.ad_astra.client;
 
 import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.client.renderer.block.EtrionicGeneratorBlockRenderer;
 import earth.terrarium.ad_astra.client.screen.machine.TestScreen;
 import earth.terrarium.ad_astra.client.util.ClientPlatformUtils;
 import earth.terrarium.ad_astra.common.item.EtrionicCapacitorItem;
+import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.ad_astra.common.registry.ModFluids;
 import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.ad_astra.common.registry.ModMenus;
+import earth.terrarium.botarium.client.ClientHooks;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
@@ -45,6 +48,10 @@ public class AdAstraClient {
     private static void registerItemProperties() {
         ClientPlatformUtils.registerItemProperty(ModItems.ETRIONIC_CAPACITOR.get(), new ResourceLocation(AdAstra.MOD_ID, "toggled"), EtrionicCapacitorItem::itemProperty);
 
+    }
+
+    private static void registerBlockEntityRenderers() {
+        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.ETRIONIC_GENERATOR.get(), context -> new EtrionicGeneratorBlockRenderer());
     }
 
     public static void onRegisterHud(Consumer<ClientPlatformUtils.RenderHud> register) {

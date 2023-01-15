@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "steel_block",
+  "ingredients": [
+    {
+      "item": "ad_astra:steel_ingot"
+    },
+    {
+      "item": "ad_astra:steel_ingot"
+    },
+    {
+      "item": "ad_astra:steel_ingot"
+    },
+    {
+      "item": "ad_astra:steel_ingot"
+    },
+    {
+      "item": "ad_astra:steel_ingot"
+    },
+    {
+      "item": "ad_astra:steel_ingot"
+    },
+    {
+      "item": "ad_astra:steel_ingot"
+    },
+    {
+      "item": "ad_astra:steel_ingot"
+    },
+    {
+      "item": "ad_astra:steel_ingot"
+    }
+  ],
+  "result": {
+    "item": "ad_astra:steel_block"
+  }
+}

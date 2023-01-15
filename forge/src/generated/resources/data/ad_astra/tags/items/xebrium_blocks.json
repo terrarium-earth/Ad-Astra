@@ -1,11 +1,11 @@
 {
   "values": [
     {
-      "id": "c:xebrium_blocks",
+      "id": "#c:xebrium_blocks",
       "required": false
     },
     {
-      "id": "forge:storage_blocks/xebrium",
+      "id": "#forge:storage_blocks/xebrium",
       "required": false
     }
   ]

@@ -6,7 +6,7 @@
         "items": [
           {
             "items": [
-              "ad_astra:aerolyte_ingot"
+              "ad_astra:etrium_nugget"
             ]
           }
         ]
@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "ad_astra:aerolyte_nugget"
+        "recipe": "minecraft:etrium_ingot"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "ad_astra:aerolyte_nugget"
+      "minecraft:etrium_ingot"
     ]
   }
 }

@@ -31,6 +31,16 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_item", has(ModItems.ETRIUM_NUGGET.get()))
         );
 
+        createSimpleShapeless(writer, "etrium_block_to_ingot", ModItems.ETRIUM_INGOT.get(), 9, shapelessRecipeBuilder -> shapelessRecipeBuilder
+                .requires(ModItems.ETRIUM_BLOCK.get())
+                .unlockedBy("has_item", has(ModItems.ETRIUM_BLOCK.get()))
+        );
+
+        createSimpleShapeless(writer, ModItems.ETRIUM_BLOCK.get(), 1, shapelessRecipeBuilder -> shapelessRecipeBuilder
+                .requires(ModItems.ETRIUM_INGOT.get(), 9)
+                .unlockedBy("has_item", has(ModItems.ETRIUM_INGOT.get()))
+        );
+
         createSimpleShapeless(writer, ModItems.STEEL_INGOT.get(), 1, shapelessRecipeBuilder -> shapelessRecipeBuilder
                 .requires(ModItems.STEEL_NUGGET.get(), 9)
                 .unlockedBy("has_item", has(ModItems.STEEL_NUGGET.get()))
@@ -41,6 +51,16 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_item", has(ModTags.Items.STEEL_INGOTS))
         );
 
+        createSimpleShapeless(writer, "steel_block_to_ingot", ModItems.STEEL_INGOT.get(), 9, shapelessRecipeBuilder -> shapelessRecipeBuilder
+                .requires(ModItems.STEEL_BLOCK.get())
+                .unlockedBy("has_item", has(ModItems.STEEL_BLOCK.get()))
+        );
+
+        createSimpleShapeless(writer, ModItems.STEEL_BLOCK.get(), 1, shapelessRecipeBuilder -> shapelessRecipeBuilder
+                .requires(ModItems.STEEL_INGOT.get(), 9)
+                .unlockedBy("has_item", has(ModItems.STEEL_INGOT.get()))
+        );
+
         createSimpleShapeless(writer, ModItems.AEROLYTE_INGOT.get(), 1, shapelessRecipeBuilder -> shapelessRecipeBuilder
                 .requires(ModItems.AEROLYTE_NUGGET.get(), 9)
                 .unlockedBy("has_item", has(ModItems.AEROLYTE_NUGGET.get()))
@@ -48,6 +68,16 @@ public class ModRecipeProvider extends RecipeProvider {
 
         createSimpleShapeless(writer, ModItems.AEROLYTE_NUGGET.get(), 9, shapelessRecipeBuilder -> shapelessRecipeBuilder
                 .requires(ModItems.AEROLYTE_INGOT.get())
+                .unlockedBy("has_item", has(ModItems.AEROLYTE_INGOT.get()))
+        );
+
+        createSimpleShapeless(writer, "aerolyte_block_to_ingot", ModItems.AEROLYTE_INGOT.get(), 9, shapelessRecipeBuilder -> shapelessRecipeBuilder
+                .requires(ModItems.AEROLYTE_BLOCK.get())
+                .unlockedBy("has_item", has(ModItems.AEROLYTE_BLOCK.get()))
+        );
+
+        createSimpleShapeless(writer, ModItems.AEROLYTE_BLOCK.get(), 1, shapelessRecipeBuilder -> shapelessRecipeBuilder
+                .requires(ModItems.AEROLYTE_INGOT.get(), 9)
                 .unlockedBy("has_item", has(ModItems.AEROLYTE_INGOT.get()))
         );
 
@@ -61,6 +91,16 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_item", has(ModItems.DESMIUM_INGOT.get()))
         );
 
+        createSimpleShapeless(writer, "desmium_block_to_ingot", ModItems.DESMIUM_INGOT.get(), 9, shapelessRecipeBuilder -> shapelessRecipeBuilder
+                .requires(ModItems.DESMIUM_BLOCK.get())
+                .unlockedBy("has_item", has(ModItems.DESMIUM_BLOCK.get()))
+        );
+
+        createSimpleShapeless(writer, ModItems.DESMIUM_BLOCK.get(), 1, shapelessRecipeBuilder -> shapelessRecipeBuilder
+                .requires(ModItems.DESMIUM_INGOT.get(), 9)
+                .unlockedBy("has_item", has(ModItems.DESMIUM_INGOT.get()))
+        );
+
         createSimpleShapeless(writer, ModItems.XEBRIUM_INGOT.get(), 1, shapelessRecipeBuilder -> shapelessRecipeBuilder
                 .requires(ModItems.XEBRIUM_NUGGET.get(), 9)
                 .unlockedBy("has_item", has(ModItems.XEBRIUM_NUGGET.get()))
@@ -69,6 +109,26 @@ public class ModRecipeProvider extends RecipeProvider {
         createSimpleShapeless(writer, ModItems.XEBRIUM_NUGGET.get(), 9, shapelessRecipeBuilder -> shapelessRecipeBuilder
                 .requires(ModItems.XEBRIUM_INGOT.get())
                 .unlockedBy("has_item", has(ModItems.XEBRIUM_INGOT.get()))
+        );
+
+        createSimpleShapeless(writer, "xebrium_block_to_ingot", ModItems.XEBRIUM_INGOT.get(), 9, shapelessRecipeBuilder -> shapelessRecipeBuilder
+                .requires(ModItems.XEBRIUM_BLOCK.get())
+                .unlockedBy("has_item", has(ModItems.XEBRIUM_BLOCK.get()))
+        );
+
+        createSimpleShapeless(writer, ModItems.XEBRIUM_BLOCK.get(), 1, shapelessRecipeBuilder -> shapelessRecipeBuilder
+                .requires(ModItems.XEBRIUM_INGOT.get(), 9)
+                .unlockedBy("has_item", has(ModItems.XEBRIUM_INGOT.get()))
+        );
+
+        createSimpleShapeless(writer, ModItems.VESNIUM.get(), 9, shapelessRecipeBuilder -> shapelessRecipeBuilder
+                .requires(ModItems.VESNIUM_BLOCK.get())
+                .unlockedBy("has_item", has(ModItems.VESNIUM_BLOCK.get()))
+        );
+
+        createSimpleShapeless(writer, ModItems.VESNIUM_BLOCK.get(), 1, shapelessRecipeBuilder -> shapelessRecipeBuilder
+                .requires(ModItems.VESNIUM.get(), 9)
+                .unlockedBy("has_item", has(ModItems.VESNIUM.get()))
         );
 
         createSimple(writer, ModItems.ETRIONIC_CORE.get(), 1, shapedRecipeBuilder -> shapedRecipeBuilder
@@ -134,7 +194,7 @@ public class ModRecipeProvider extends RecipeProvider {
         createSimple(writer, ModItems.ETRIONIC_GENERATOR.get(), 1, shapedRecipeBuilder -> shapedRecipeBuilder
                 .define('E', ModItems.ETRIUM_INGOT.get())
                 .define('N', ModItems.ETRIUM_NUGGET.get())
-                .define('I', Tags.Items.INGOTS_IRON)
+                .define('I', Items.IRON_INGOT)
                 .pattern("IIN")
                 .pattern("IIN")
                 .pattern("EEE")
@@ -145,7 +205,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('E', ModItems.ETRIUM_INGOT.get())
                 .define('N', ModItems.ETRIUM_NUGGET.get())
                 .define('B', Items.BLAST_FURNACE)
-                .define('I', Tags.Items.INGOTS_IRON)
+                .define('I', Items.IRON_INGOT)
                 .pattern("III")
                 .pattern("NBN")
                 .pattern("EEE")
@@ -156,7 +216,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('E', ModItems.ETRIUM_INGOT.get())
                 .define('N', ModItems.ETRIUM_NUGGET.get())
                 .define('B', Items.IRON_BLOCK)
-                .define('I', Tags.Items.INGOTS_IRON)
+                .define('I', Items.IRON_INGOT)
                 .pattern("III")
                 .pattern("NBN")
                 .pattern("EEE")
@@ -173,8 +233,13 @@ public class ModRecipeProvider extends RecipeProvider {
 
     public static void createSimpleShapeless(Consumer<FinishedRecipe> consumer, Item output, int count, Function<ShapelessRecipeBuilder, ShapelessRecipeBuilder> func) {
         String name = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(output)).getPath();
+        createSimpleShapeless(consumer, name, output, count, func);
+    }
+    
+    public static void createSimpleShapeless(Consumer<FinishedRecipe> consumer, String name, Item output, int count, Function<ShapelessRecipeBuilder, ShapelessRecipeBuilder> func) {
+        String group = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(output)).getPath();
         func.apply(ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, output, count))
-                .group(name)
-                .save(consumer);
+                .group(group)
+                .save(consumer, name);
     }
 }

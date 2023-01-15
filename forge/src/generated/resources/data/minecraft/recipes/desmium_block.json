@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "desmium_block",
+  "ingredients": [
+    {
+      "item": "ad_astra:desmium_ingot"
+    },
+    {
+      "item": "ad_astra:desmium_ingot"
+    },
+    {
+      "item": "ad_astra:desmium_ingot"
+    },
+    {
+      "item": "ad_astra:desmium_ingot"
+    },
+    {
+      "item": "ad_astra:desmium_ingot"
+    },
+    {
+      "item": "ad_astra:desmium_ingot"
+    },
+    {
+      "item": "ad_astra:desmium_ingot"
+    },
+    {
+      "item": "ad_astra:desmium_ingot"
+    },
+    {
+      "item": "ad_astra:desmium_ingot"
+    }
+  ],
+  "result": {
+    "item": "ad_astra:desmium_block"
+  }
+}

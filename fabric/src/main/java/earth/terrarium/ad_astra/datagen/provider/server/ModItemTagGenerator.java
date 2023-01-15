@@ -1,5 +1,7 @@
 package earth.terrarium.ad_astra.datagen.provider.server;
 
+import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
+import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import earth.terrarium.ad_astra.common.registry.ModBlocks;
 import earth.terrarium.ad_astra.common.registry.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -27,39 +29,39 @@ public class ModItemTagGenerator extends FabricTagProvider<Item> {
 
     @Override
     protected void addTags(HolderLookup.Provider arg) {
-        getOrCreateTagBuilder(fabric("etrium_blocks")).add(ModItems.ETRIUM_BLOCK.get());
-        getOrCreateTagBuilder(fabric("steel_blocks")).add(ModItems.STEEL_BLOCK.get());
-        getOrCreateTagBuilder(fabric("desmium_blocks")).add(ModItems.DESMIUM_BLOCK.get());
-        getOrCreateTagBuilder(fabric("xebrium_blocks")).add(ModItems.XEBRIUM_BLOCK.get());
-        getOrCreateTagBuilder(fabric("vesnium_blocks")).add(ModItems.VESNIUM_BLOCK.get());
-        getOrCreateTagBuilder(fabric("aerolyte_blocks")).add(ModItems.AEROLYTE_BLOCK.get());
+        fabric(ModItems.ETRIUM_BLOCK);
+        fabric(ModItems.STEEL_BLOCK);
+        fabric(ModItems.DESMIUM_BLOCK);
+        fabric(ModItems.XEBRIUM_BLOCK);
+        fabric(ModItems.VESNIUM_BLOCK);
+        fabric(ModItems.AEROLYTE_BLOCK);
 
-        getOrCreateTagBuilder(fabric("iron_plates")).add(ModItems.IRON_PLATE.get());
-        getOrCreateTagBuilder(fabric("iron_rods")).add(ModItems.IRON_ROD.get());
+        fabric(ModItems.IRON_PLATE);
+        fabric(ModItems.IRON_ROD);
 
-        getOrCreateTagBuilder(fabric("steel_plates")).add(ModItems.STEEL_PLATE.get());
-        getOrCreateTagBuilder(fabric("steel_rods")).add(ModItems.STEEL_ROD.get());
-        getOrCreateTagBuilder(fabric("steel_nuggets")).add(ModItems.STEEL_NUGGET.get());
-        getOrCreateTagBuilder(fabric("steel_ingots")).add(ModItems.STEEL_INGOT.get());
+        fabric(ModItems.STEEL_PLATE);
+        fabric(ModItems.STEEL_ROD);
+        fabric(ModItems.STEEL_NUGGET);
+        fabric(ModItems.STEEL_INGOT);
 
-        getOrCreateTagBuilder(fabric("desmium_plates")).add(ModItems.DESMIUM_PLATE.get());
-        getOrCreateTagBuilder(fabric("desmium_nuggets")).add(ModItems.DESMIUM_NUGGET.get());
-        getOrCreateTagBuilder(fabric("desmium_ingots")).add(ModItems.DESMIUM_INGOT.get());
+        fabric(ModItems.DESMIUM_PLATE);
+        fabric(ModItems.DESMIUM_NUGGET);
+        fabric(ModItems.DESMIUM_INGOT);
 
-        getOrCreateTagBuilder(fabric("xebrium_plates")).add(ModItems.XEBRIUM_PLATE.get());
-        getOrCreateTagBuilder(fabric("xebrium_nuggets")).add(ModItems.XEBRIUM_NUGGET.get());
-        getOrCreateTagBuilder(fabric("xebrium_ingots")).add(ModItems.XEBRIUM_INGOT.get());
+        fabric(ModItems.XEBRIUM_PLATE);
+        fabric(ModItems.XEBRIUM_NUGGET);
+        fabric(ModItems.XEBRIUM_INGOT);
 
-        getOrCreateTagBuilder(fabric("aerolyte_plates")).add(ModItems.AEROLYTE_PLATE.get());
-        getOrCreateTagBuilder(fabric("aerolyte_nuggets")).add(ModItems.AEROLYTE_NUGGET.get());
-        getOrCreateTagBuilder(fabric("aerolyte_ingots")).add(ModItems.AEROLYTE_INGOT.get());
+        fabric(ModItems.AEROLYTE_PLATE);
+        fabric(ModItems.AEROLYTE_NUGGET);
+        fabric(ModItems.AEROLYTE_INGOT);
 
-        getOrCreateTagBuilder(fabric("etrium_plates")).add(ModItems.ETRIUM_PLATE.get());
-        getOrCreateTagBuilder(fabric("etrium_nuggets")).add(ModItems.ETRIUM_NUGGET.get());
-        getOrCreateTagBuilder(fabric("etrium_ingots")).add(ModItems.ETRIUM_INGOT.get());
+        fabric(ModItems.ETRIUM_PLATE);
+        fabric(ModItems.ETRIUM_NUGGET);
+        fabric(ModItems.ETRIUM_INGOT);
     }
 
-    private TagKey<Item> fabric(String name) {
-        return TagKey.create(BuiltInRegistries.ITEM.key(), new ResourceLocation("c", name));
+    private void fabric(RegistryEntry<Item> item) {
+        getOrCreateTagBuilder(TagKey.create(BuiltInRegistries.ITEM.key(), new ResourceLocation("c", item.getId().getPath() + "s"))).add(item.get());
     }
 }

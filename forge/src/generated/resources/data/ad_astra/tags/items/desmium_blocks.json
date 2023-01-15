@@ -1,11 +1,11 @@
 {
   "values": [
     {
-      "id": "c:desmium_blocks",
+      "id": "#c:desmium_blocks",
       "required": false
     },
     {
-      "id": "forge:storage_blocks/desmium",
+      "id": "#forge:storage_blocks/desmium",
       "required": false
     }
   ]

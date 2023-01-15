@@ -55,6 +55,7 @@ dependencies {
     modApi "com.teamresourceful.resourcefullib:resourcefullib-forge-$rootProject.minecraft_version:$rootProject.resourcefullib_version"
     modApi "com.teamresourceful.resourcefulconfig:resourcefulconfig-forge-$rootProject.minecraft_version:$rootProject.resourcefulconfig_version"
     modApi "earth.terrarium:botarium-forge-$rootProject.minecraft_version:$rootProject.botarium_version"
+    modImplementation "software.bernie.geckolib:geckolib-forge-1.19.3:${rootProject.geckolib_fabric_version}"
 }
 
 processResources {

@@ -1,11 +1,11 @@
 {
   "values": [
     {
-      "id": "c:iron_rods",
+      "id": "#c:iron_rods",
       "required": false
     },
     {
-      "id": "forge:rods/iron",
+      "id": "#forge:rods/iron",
       "required": false
     }
   ]

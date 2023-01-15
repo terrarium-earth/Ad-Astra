@@ -1,11 +1,11 @@
 {
   "values": [
     {
-      "id": "c:etrium_nuggets",
+      "id": "#c:etrium_nuggets",
       "required": false
     },
     {
-      "id": "forge:nuggets/etrium",
+      "id": "#forge:nuggets/etrium",
       "required": false
     }
   ]

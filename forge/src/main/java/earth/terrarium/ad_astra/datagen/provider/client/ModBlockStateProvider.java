@@ -32,6 +32,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlock(ModBlocks.SKY_STONE.get());
         simpleBlock(ModBlocks.ETRIUM_ORE.get());
 
+        ModBlocks.STORAGE_BLOCKS.stream().map(RegistryEntry::get).forEach(this::simpleBlock);
+
         ModItems.ITEMS.getEntries().forEach(item -> {
             if (item.get() instanceof BlockItem blockItem) {
                 Block block = ForgeRegistries.BLOCKS.getValue(ForgeRegistries.ITEMS.getKey(blockItem));

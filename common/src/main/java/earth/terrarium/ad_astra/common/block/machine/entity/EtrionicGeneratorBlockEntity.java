@@ -16,9 +16,16 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import software.bernie.geckolib.animatable.GeoBlockEntity;
+import software.bernie.geckolib.constant.DefaultAnimations;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
 @MethodsReturnNonnullByDefault
-public class EtrionicGeneratorBlockEntity extends CookingMachineBlockEntity implements EnergyAttachment.Block {
+public class EtrionicGeneratorBlockEntity extends CookingMachineBlockEntity implements EnergyAttachment.Block, GeoBlockEntity {
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private WrappedBlockEnergyContainer energyContainer;
     private EtrionicGeneratingRecipe recipe;
 
@@ -73,5 +80,15 @@ public class EtrionicGeneratorBlockEntity extends CookingMachineBlockEntity impl
     private void craft() {
         if (recipe == null) return;
         update();
+    }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(new AnimationController<>(this, state -> state.setAndContinue(DefaultAnimations.IDLE)));
+    }
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
     }
 }

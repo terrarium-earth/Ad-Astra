@@ -6,7 +6,7 @@
         "items": [
           {
             "items": [
-              "ad_astra:xebrium_ingot"
+              "ad_astra:etrium_block"
             ]
           }
         ]
@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "ad_astra:xebrium_nugget"
+        "recipe": "minecraft:etrium_block_to_ingot"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "ad_astra:xebrium_nugget"
+      "minecraft:etrium_block_to_ingot"
     ]
   }
 }

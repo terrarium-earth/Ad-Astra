@@ -6,7 +6,7 @@
         "items": [
           {
             "items": [
-              "ad_astra:etrium_ingot"
+              "ad_astra:vesnium_block"
             ]
           }
         ]
@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "ad_astra:etrium_nugget"
+        "recipe": "minecraft:vesnium"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "ad_astra:etrium_nugget"
+      "minecraft:vesnium"
     ]
   }
 }

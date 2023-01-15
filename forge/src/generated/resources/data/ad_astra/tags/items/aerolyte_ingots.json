@@ -1,11 +1,11 @@
 {
   "values": [
     {
-      "id": "c:aerolyte_ingots",
+      "id": "#c:aerolyte_ingots",
       "required": false
     },
     {
-      "id": "forge:ingots/aerolyte",
+      "id": "#forge:ingots/aerolyte",
       "required": false
     }
   ]

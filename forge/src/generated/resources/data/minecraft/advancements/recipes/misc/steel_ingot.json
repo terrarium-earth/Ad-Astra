@@ -6,7 +6,7 @@
         "items": [
           {
             "items": [
-              "ad_astra:etrium_nugget"
+              "ad_astra:steel_nugget"
             ]
           }
         ]
@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "ad_astra:etrium_ingot"
+        "recipe": "minecraft:steel_ingot"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "ad_astra:etrium_ingot"
+      "minecraft:steel_ingot"
     ]
   }
 }

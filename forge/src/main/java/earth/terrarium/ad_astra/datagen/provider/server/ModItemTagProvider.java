@@ -60,7 +60,9 @@ public class ModItemTagProvider extends TagsProvider<Item> {
     }
 
     private void platform(TagKey<Item> tag, ItemType type, String name) {
-        tag(tag).addOptional(new ResourceLocation("c", type.fabric(name))).addOptional(new ResourceLocation("forge", type.forge(name)));
+        //seperate the path of the resource location of the tag by underscores and join every element into a string except the last element.
+
+        tag(tag).addOptionalTag(new ResourceLocation("c", type.fabric(name))).addOptionalTag(new ResourceLocation("forge", type.forge(name)));
     }
 
     public enum ItemType {

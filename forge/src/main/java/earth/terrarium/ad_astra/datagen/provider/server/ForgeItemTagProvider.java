@@ -15,6 +15,7 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -26,7 +27,7 @@ public class ForgeItemTagProvider extends TagsProvider<Item> {
 
 
     @Override
-    protected void addTags(HolderLookup.Provider provider) {
+    protected void addTags(HolderLookup.@NotNull Provider provider) {
         tag(forge("storage_blocks/etrium")).add(TagEntry.element(ModItems.ETRIUM_BLOCK.getId()));
         tag(forge("storage_blocks/steel")).add(TagEntry.element(ModItems.STEEL_BLOCK.getId()));
         tag(forge("storage_blocks/desmium")).add(TagEntry.element(ModItems.DESMIUM_BLOCK.getId()));
@@ -54,9 +55,9 @@ public class ForgeItemTagProvider extends TagsProvider<Item> {
         tag(forge("nuggets/aerolyte")).add(TagEntry.element(ModItems.AEROLYTE_NUGGET.getId()));
         tag(forge("ingots/aerolyte")).add(TagEntry.element(ModItems.AEROLYTE_INGOT.getId()));
 
-        tag(forge("plates/aerolyte")).add(TagEntry.element(ModItems.ETRIUM_PLATE.getId()));
-        tag(forge("nuggets/aerolyte")).add(TagEntry.element(ModItems.ETRIUM_NUGGET.getId()));
-        tag(forge("ingots/aerolyte")).add(TagEntry.element(ModItems.ETRIUM_INGOT.getId()));
+        tag(forge("plates/etrium")).add(TagEntry.element(ModItems.ETRIUM_PLATE.getId()));
+        tag(forge("nuggets/etrium")).add(TagEntry.element(ModItems.ETRIUM_NUGGET.getId()));
+        tag(forge("ingots/etrium")).add(TagEntry.element(ModItems.ETRIUM_INGOT.getId()));
     }
 
     private TagKey<Item> forge(String path) {

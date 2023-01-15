@@ -1,11 +1,11 @@
 {
   "values": [
     {
-      "id": "c:etrium_blocks",
+      "id": "#c:etrium_blocks",
       "required": false
     },
     {
-      "id": "forge:storage_blocks/etrium",
+      "id": "#forge:storage_blocks/etrium",
       "required": false
     }
   ]

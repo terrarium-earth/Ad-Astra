@@ -1,11 +1,11 @@
 {
   "values": [
     {
-      "id": "c:etrium_plates",
+      "id": "#c:etrium_plates",
       "required": false
     },
     {
-      "id": "forge:plates/etrium",
+      "id": "#forge:plates/etrium",
       "required": false
     }
   ]

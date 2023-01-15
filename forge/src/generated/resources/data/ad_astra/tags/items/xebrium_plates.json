@@ -1,11 +1,11 @@
 {
   "values": [
     {
-      "id": "c:xebrium_plates",
+      "id": "#c:xebrium_plates",
       "required": false
     },
     {
-      "id": "forge:plates/xebrium",
+      "id": "#forge:plates/xebrium",
       "required": false
     }
   ]

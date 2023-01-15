@@ -6,7 +6,7 @@
         "items": [
           {
             "items": [
-              "ad_astra:aerolyte_nugget"
+              "ad_astra:desmium_ingot"
             ]
           }
         ]
@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "ad_astra:aerolyte_ingot"
+        "recipe": "minecraft:desmium_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "ad_astra:aerolyte_ingot"
+      "minecraft:desmium_block"
     ]
   }
 }

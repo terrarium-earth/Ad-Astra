@@ -6,7 +6,7 @@
         "items": [
           {
             "items": [
-              "ad_astra:steel_nugget"
+              "ad_astra:aerolyte_ingot"
             ]
           }
         ]
@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "ad_astra:steel_ingot"
+        "recipe": "minecraft:aerolyte_nugget"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "ad_astra:steel_ingot"
+      "minecraft:aerolyte_nugget"
     ]
   }
 }

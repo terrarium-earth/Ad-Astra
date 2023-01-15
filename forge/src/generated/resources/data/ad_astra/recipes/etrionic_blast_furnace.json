@@ -10,7 +10,7 @@
       "item": "ad_astra:etrium_ingot"
     },
     "I": {
-      "tag": "forge:ingots/iron"
+      "item": "minecraft:iron_ingot"
     },
     "N": {
       "item": "ad_astra:etrium_nugget"

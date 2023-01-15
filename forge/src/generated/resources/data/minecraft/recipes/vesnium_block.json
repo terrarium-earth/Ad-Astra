@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "vesnium_block",
+  "ingredients": [
+    {
+      "item": "ad_astra:vesnium"
+    },
+    {
+      "item": "ad_astra:vesnium"
+    },
+    {
+      "item": "ad_astra:vesnium"
+    },
+    {
+      "item": "ad_astra:vesnium"
+    },
+    {
+      "item": "ad_astra:vesnium"
+    },
+    {
+      "item": "ad_astra:vesnium"
+    },
+    {
+      "item": "ad_astra:vesnium"
+    },
+    {
+      "item": "ad_astra:vesnium"
+    },
+    {
+      "item": "ad_astra:vesnium"
+    }
+  ],
+  "result": {
+    "item": "ad_astra:vesnium_block"
+  }
+}

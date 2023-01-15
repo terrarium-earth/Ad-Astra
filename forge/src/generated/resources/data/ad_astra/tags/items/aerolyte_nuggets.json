@@ -1,11 +1,11 @@
 {
   "values": [
     {
-      "id": "c:aerolyte_nuggets",
+      "id": "#c:aerolyte_nuggets",
       "required": false
     },
     {
-      "id": "forge:nuggets/aerolyte",
+      "id": "#forge:nuggets/aerolyte",
       "required": false
     }
   ]

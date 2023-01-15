@@ -1,11 +1,11 @@
 {
   "values": [
     {
-      "id": "c:xebrium_nuggets",
+      "id": "#c:xebrium_nuggets",
       "required": false
     },
     {
-      "id": "forge:nuggets/xebrium",
+      "id": "#forge:nuggets/xebrium",
       "required": false
     }
   ]

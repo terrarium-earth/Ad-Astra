@@ -1,11 +1,11 @@
 {
   "values": [
     {
-      "id": "c:etrium_ingots",
+      "id": "#c:etrium_ingots",
       "required": false
     },
     {
-      "id": "forge:ingots/etrium",
+      "id": "#forge:ingots/etrium",
       "required": false
     }
   ]

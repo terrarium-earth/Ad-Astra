@@ -1,11 +1,11 @@
 {
   "values": [
     {
-      "id": "c:aerolyte_blocks",
+      "id": "#c:aerolyte_blocks",
       "required": false
     },
     {
-      "id": "forge:storage_blocks/aerolyte",
+      "id": "#forge:storage_blocks/aerolyte",
       "required": false
     }
   ]

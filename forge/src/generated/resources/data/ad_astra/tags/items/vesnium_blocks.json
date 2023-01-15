@@ -1,11 +1,11 @@
 {
   "values": [
     {
-      "id": "c:vesnium_blocks",
+      "id": "#c:vesnium_blocks",
       "required": false
     },
     {
-      "id": "forge:storage_blocks/vesnium",
+      "id": "#forge:storage_blocks/vesnium",
       "required": false
     }
   ]

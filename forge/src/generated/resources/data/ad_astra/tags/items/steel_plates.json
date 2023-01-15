@@ -1,11 +1,11 @@
 {
   "values": [
     {
-      "id": "c:steel_plates",
+      "id": "#c:steel_plates",
       "required": false
     },
     {
-      "id": "forge:plates/steel",
+      "id": "#forge:plates/steel",
       "required": false
     }
   ]

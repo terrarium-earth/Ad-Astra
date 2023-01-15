@@ -1,5 +1,6 @@
 package earth.terrarium.ad_astra.datagen.provider.server;
 
+import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import earth.terrarium.ad_astra.common.registry.ModBlocks;
 import earth.terrarium.ad_astra.common.registry.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -28,16 +29,15 @@ public class ModBlockTagGenerator extends FabricTagProvider<Block> {
 
     @Override
     protected void addTags(HolderLookup.Provider arg) {
-        getOrCreateTagBuilder(fabric("etrium_blocks")).add(ModBlocks.ETRIUM_BLOCK.get());
-        getOrCreateTagBuilder(fabric("steel_blocks")).add(ModBlocks.STEEL_BLOCK.get());
-        getOrCreateTagBuilder(fabric("desmium_blocks")).add(ModBlocks.DESMIUM_BLOCK.get());
-        getOrCreateTagBuilder(fabric("xebrium_blocks")).add(ModBlocks.XEBRIUM_BLOCK.get());
-        getOrCreateTagBuilder(fabric("vesnium_blocks")).add(ModBlocks.VESNIUM_BLOCK.get());
-        getOrCreateTagBuilder(fabric("aerolyte_blocks")).add(ModBlocks.AEROLYTE_BLOCK.get());
-
+        fabric(ModBlocks.ETRIUM_BLOCK);
+        fabric(ModBlocks.STEEL_BLOCK);
+        fabric(ModBlocks.DESMIUM_BLOCK);
+        fabric(ModBlocks.XEBRIUM_BLOCK);
+        fabric(ModBlocks.VESNIUM_BLOCK);
+        fabric(ModBlocks.AEROLYTE_BLOCK);
     }
 
-    private TagKey<Block> fabric(String name) {
-        return TagKey.create(BuiltInRegistries.BLOCK.key(), new ResourceLocation("c", name));
+    private void fabric(RegistryEntry<Block> item) {
+        getOrCreateTagBuilder(TagKey.create(BuiltInRegistries.BLOCK.key(), new ResourceLocation("c", item.getId().getPath() + "s"))).add(item.get());
     }
 }
