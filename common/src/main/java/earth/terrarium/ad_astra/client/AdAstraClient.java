@@ -27,6 +27,7 @@ public class AdAstraClient {
     public static void init() {
         registerScreens();
         registerItemProperties();
+        registerBlockEntityRenderers();
     }
 
     private static void registerScreens() {
