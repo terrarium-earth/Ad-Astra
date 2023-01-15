@@ -1,3 +1,4 @@
-- Fix botarium internal version
+- fix server crash (Update Resourcefullib to the latest version)
+- fix planet selection menu having invisible buttons
 
 Disclaimer: Ad Astra will be releasing a large 1.19.3 update in the future that will break with this current 1.19.3 version. Use at your own risk!

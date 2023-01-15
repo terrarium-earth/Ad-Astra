@@ -1,9 +1,7 @@
 package earth.terrarium.ad_astra.common.screen;
 
 import com.mojang.serialization.DataResult;
-import com.teamresourceful.resourcefullib.common.codecs.yabn.YabnOps;
 import com.teamresourceful.resourcefullib.common.networking.PacketHelper;
-import com.teamresourceful.yabn.elements.YabnElement;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.data.Planet;
 import earth.terrarium.ad_astra.common.data.PlanetData;
