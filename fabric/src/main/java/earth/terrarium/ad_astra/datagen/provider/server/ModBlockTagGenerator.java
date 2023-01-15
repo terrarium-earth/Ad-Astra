@@ -2,14 +2,12 @@ package earth.terrarium.ad_astra.datagen.provider.server;
 
 import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import earth.terrarium.ad_astra.common.registry.ModBlocks;
-import earth.terrarium.ad_astra.common.registry.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
 import java.util.concurrent.CompletableFuture;
@@ -32,7 +30,7 @@ public class ModBlockTagGenerator extends FabricTagProvider<Block> {
         fabric(ModBlocks.ETRIUM_BLOCK);
         fabric(ModBlocks.STEEL_BLOCK);
         fabric(ModBlocks.DESMIUM_BLOCK);
-        fabric(ModBlocks.XEBRIUM_BLOCK);
+        fabric(ModBlocks.THERMALYTE_BLOCK);
         fabric(ModBlocks.VESNIUM_BLOCK);
         fabric(ModBlocks.AEROLYTE_BLOCK);
     }

@@ -31,7 +31,7 @@ public abstract class ContainerMachineBlockEntity extends MachineBlockEntity imp
     }
 
     @Override
-    public boolean stillValid(Player player) {
+    public boolean stillValid(@NotNull Player player) {
         return true;
     }
 

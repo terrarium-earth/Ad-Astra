@@ -1,7 +1,6 @@
 package earth.terrarium.ad_astra.datagen.provider.server;
 
 import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.ad_astra.common.registry.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
@@ -9,7 +8,6 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagEntry;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -29,7 +27,7 @@ public class ModItemTagProvider extends TagsProvider<Item> {
         platform(ModTags.Items.ETRIUM_BLOCKS, ItemType.STORAGE_BLOCKS, "etrium");
         platform(ModTags.Items.STEEL_BLOCKS, ItemType.STORAGE_BLOCKS, "steel");
         platform(ModTags.Items.DESMIUM_BLOCKS, ItemType.STORAGE_BLOCKS, "desmium");
-        platform(ModTags.Items.XEBRIUM_BLOCKS, ItemType.STORAGE_BLOCKS, "xebrium");
+        platform(ModTags.Items.THERMALYTE_BLOCKS, ItemType.STORAGE_BLOCKS, "thermalyte");
         platform(ModTags.Items.VESNIUM_BLOCKS, ItemType.STORAGE_BLOCKS, "vesnium");
         platform(ModTags.Items.AEROLYTE_BLOCKS, ItemType.STORAGE_BLOCKS, "aerolyte");
 
@@ -46,9 +44,9 @@ public class ModItemTagProvider extends TagsProvider<Item> {
         platform(ModTags.Items.DESMIUM_NUGGETS, ItemType.NUGGETS, "desmium");
 
 
-        platform(ModTags.Items.XEBRIUM_PLATES, ItemType.PLATES, "xebrium");
-        platform(ModTags.Items.XEBRIUM_INGOTS, ItemType.INGOTS, "xebrium");
-        platform(ModTags.Items.XEBRIUM_NUGGETS, ItemType.NUGGETS, "xebrium");
+        platform(ModTags.Items.THERMALYTE_PLATES, ItemType.PLATES, "thermalyte");
+        platform(ModTags.Items.THERMALYTE_INGOTS, ItemType.INGOTS, "thermalyte");
+        platform(ModTags.Items.THERMALYTE_NUGGETS, ItemType.NUGGETS, "thermalyte");
 
         platform(ModTags.Items.AEROLYTE_PLATES, ItemType.PLATES, "aerolyte");
         platform(ModTags.Items.AEROLYTE_INGOTS, ItemType.INGOTS, "aerolyte");

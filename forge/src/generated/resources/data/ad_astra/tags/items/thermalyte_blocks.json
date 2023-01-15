@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "#c:thermalyte_blocks",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/thermalyte",
+      "required": false
+    }
+  ]
+}

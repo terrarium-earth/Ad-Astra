@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "#c:thermalyte_ingots",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/thermalyte",
+      "required": false
+    }
+  ]
+}

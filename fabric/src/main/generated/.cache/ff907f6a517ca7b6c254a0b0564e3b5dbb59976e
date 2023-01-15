@@ -1,9 +1,9 @@
 // 1.19.3	2023-01-14T17:28:01.459001	Ad Astra!/Tags for minecraft:item
 3da5d037953ca49dd2a401e0d2261d0d5ef405e0 data/c/tags/items/aerolyte_blocks.json
-9d275e4a1e36542ffd45ab3ebd963bbd7301cf7c data/c/tags/items/xebrium_plates.json
+9d275e4a1e36542ffd45ab3ebd963bbd7301cf7c data/c/tags/items/thermalyte_plates.json
 b46342a9a4155f4e9a8caaa6652a93339f6cf8ab data/c/tags/items/desmium_plates.json
 1293812d784eebeada2198d2e6ec5e3b265fccd3 data/c/tags/items/aerolyte_plates.json
-2953cb6285fc151b5fc4d86f3efa2a266fa1cc36 data/c/tags/items/xebrium_blocks.json
+2953cb6285fc151b5fc4d86f3efa2a266fa1cc36 data/c/tags/items/thermalyte_blocks.json
 230210145030c3694f8fa354570a163be78a7863 data/c/tags/items/steel_blocks.json
 fdbb580ad9cb81854f4f425d08e0c5675055fc09 data/c/tags/items/iron_rods.json
 539f0d371f77734559814bc90d4c63166cb37a96 data/c/tags/items/vesnium_blocks.json
@@ -19,7 +19,7 @@ ba02bbfbbf5821fbd893151c57e83356757fa817 data/c/tags/items/steel_nuggets.json
 82aea8e1ac60e0975133bd797789bfc1a9b404e4 data/c/tags/items/etrium_ingots.json
 d49b95fea0e39f10d5852b02a43fd1f3fe206314 data/c/tags/items/steel_rods.json
 c443b4b7182fd61f7ee5651bdbd220fb310ce869 data/c/tags/items/desmium_ingots.json
-21159e4c56d579bd7b461c0db72b9524126f3c41 data/c/tags/items/xebrium_ingots.json
-6eec815a1d27d04d7d213dd0b71b5a679ffccbe0 data/c/tags/items/xebrium_nuggets.json
+21159e4c56d579bd7b461c0db72b9524126f3c41 data/c/tags/items/thermalyte_ingots.json
+6eec815a1d27d04d7d213dd0b71b5a679ffccbe0 data/c/tags/items/thermalyte_nuggets.json
 67e9ed56685fadb8d9afb8df0ad6526e61b43a88 data/c/tags/items/etrium_plates.json
 cd884bf11dbab26b3ebed4e59a879305be7d1ddb data/c/tags/items/iron_plates.json

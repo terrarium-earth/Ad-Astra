@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "thermalyte_ingot",
+  "ingredients": [
+    {
+      "item": "ad_astra:thermalyte_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "ad_astra:thermalyte_ingot"
+  }
+}

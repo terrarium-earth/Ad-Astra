@@ -6,7 +6,6 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
@@ -101,24 +100,24 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_item", has(ModItems.DESMIUM_INGOT.get()))
         );
 
-        createSimpleShapeless(writer, ModItems.XEBRIUM_INGOT.get(), 1, shapelessRecipeBuilder -> shapelessRecipeBuilder
-                .requires(ModItems.XEBRIUM_NUGGET.get(), 9)
-                .unlockedBy("has_item", has(ModItems.XEBRIUM_NUGGET.get()))
+        createSimpleShapeless(writer, ModItems.THERMALYTE_INGOT.get(), 1, shapelessRecipeBuilder -> shapelessRecipeBuilder
+                .requires(ModItems.THERMALYTE_NUGGET.get(), 9)
+                .unlockedBy("has_item", has(ModItems.THERMALYTE_NUGGET.get()))
         );
 
-        createSimpleShapeless(writer, ModItems.XEBRIUM_NUGGET.get(), 9, shapelessRecipeBuilder -> shapelessRecipeBuilder
-                .requires(ModItems.XEBRIUM_INGOT.get())
-                .unlockedBy("has_item", has(ModItems.XEBRIUM_INGOT.get()))
+        createSimpleShapeless(writer, ModItems.THERMALYTE_NUGGET.get(), 9, shapelessRecipeBuilder -> shapelessRecipeBuilder
+                .requires(ModItems.THERMALYTE_INGOT.get())
+                .unlockedBy("has_item", has(ModItems.THERMALYTE_INGOT.get()))
         );
 
-        createSimpleShapeless(writer, "xebrium_block_to_ingot", ModItems.XEBRIUM_INGOT.get(), 9, shapelessRecipeBuilder -> shapelessRecipeBuilder
-                .requires(ModItems.XEBRIUM_BLOCK.get())
-                .unlockedBy("has_item", has(ModItems.XEBRIUM_BLOCK.get()))
+        createSimpleShapeless(writer, "thermalyte_block_to_ingot", ModItems.THERMALYTE_INGOT.get(), 9, shapelessRecipeBuilder -> shapelessRecipeBuilder
+                .requires(ModItems.THERMALYTE_BLOCK.get())
+                .unlockedBy("has_item", has(ModItems.THERMALYTE_BLOCK.get()))
         );
 
-        createSimpleShapeless(writer, ModItems.XEBRIUM_BLOCK.get(), 1, shapelessRecipeBuilder -> shapelessRecipeBuilder
-                .requires(ModItems.XEBRIUM_INGOT.get(), 9)
-                .unlockedBy("has_item", has(ModItems.XEBRIUM_INGOT.get()))
+        createSimpleShapeless(writer, ModItems.THERMALYTE_BLOCK.get(), 1, shapelessRecipeBuilder -> shapelessRecipeBuilder
+                .requires(ModItems.THERMALYTE_INGOT.get(), 9)
+                .unlockedBy("has_item", has(ModItems.THERMALYTE_INGOT.get()))
         );
 
         createSimpleShapeless(writer, ModItems.VESNIUM.get(), 9, shapelessRecipeBuilder -> shapelessRecipeBuilder

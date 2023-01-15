@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "#c:thermalyte_plates",
+      "required": false
+    },
+    {
+      "id": "#forge:plates/thermalyte",
+      "required": false
+    }
+  ]
+}

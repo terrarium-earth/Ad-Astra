@@ -23,9 +23,9 @@ public class ModTags {
         public static final TagKey<Item> DESMIUM_NUGGETS = TagKey.create(Registries.ITEM, new ResourceLocation(AdAstra.MOD_ID, "desmium_nuggets"));
         public static final TagKey<Item> DESMIUM_PLATES = TagKey.create(Registries.ITEM, new ResourceLocation(AdAstra.MOD_ID, "desmium_plates"));
 
-        public static final TagKey<Item> XEBRIUM_INGOTS = TagKey.create(Registries.ITEM, new ResourceLocation(AdAstra.MOD_ID, "xebrium_ingots"));
-        public static final TagKey<Item> XEBRIUM_NUGGETS = TagKey.create(Registries.ITEM, new ResourceLocation(AdAstra.MOD_ID, "xebrium_nuggets"));
-        public static final TagKey<Item> XEBRIUM_PLATES = TagKey.create(Registries.ITEM, new ResourceLocation(AdAstra.MOD_ID, "xebrium_plates"));
+        public static final TagKey<Item> THERMALYTE_INGOTS = TagKey.create(Registries.ITEM, new ResourceLocation(AdAstra.MOD_ID, "thermalyte_ingots"));
+        public static final TagKey<Item> THERMALYTE_NUGGETS = TagKey.create(Registries.ITEM, new ResourceLocation(AdAstra.MOD_ID, "thermalyte_nuggets"));
+        public static final TagKey<Item> THERMALYTE_PLATES = TagKey.create(Registries.ITEM, new ResourceLocation(AdAstra.MOD_ID, "thermalyte_plates"));
 
         public static final TagKey<Item> AEROLYTE_INGOTS = TagKey.create(Registries.ITEM, new ResourceLocation(AdAstra.MOD_ID, "aerolyte_ingots"));
         public static final TagKey<Item> AEROLYTE_NUGGETS = TagKey.create(Registries.ITEM, new ResourceLocation(AdAstra.MOD_ID, "aerolyte_nuggets"));
@@ -37,7 +37,7 @@ public class ModTags {
 
         public static final TagKey<Item> STEEL_BLOCKS = TagKey.create(Registries.ITEM, new ResourceLocation(AdAstra.MOD_ID, "steel_blocks"));
         public static final TagKey<Item> DESMIUM_BLOCKS = TagKey.create(Registries.ITEM, new ResourceLocation(AdAstra.MOD_ID, "desmium_blocks"));
-        public static final TagKey<Item> XEBRIUM_BLOCKS = TagKey.create(Registries.ITEM, new ResourceLocation(AdAstra.MOD_ID, "xebrium_blocks"));
+        public static final TagKey<Item> THERMALYTE_BLOCKS = TagKey.create(Registries.ITEM, new ResourceLocation(AdAstra.MOD_ID, "thermalyte_blocks"));
         public static final TagKey<Item> AEROLYTE_BLOCKS = TagKey.create(Registries.ITEM, new ResourceLocation(AdAstra.MOD_ID, "aerolyte_blocks"));
         public static final TagKey<Item> ETRIUM_BLOCKS = TagKey.create(Registries.ITEM, new ResourceLocation(AdAstra.MOD_ID, "etrium_blocks"));
         public static final TagKey<Item> VESNIUM_BLOCKS = TagKey.create(Registries.ITEM, new ResourceLocation(AdAstra.MOD_ID, "vesnium_blocks"));

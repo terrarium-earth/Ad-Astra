@@ -10,6 +10,7 @@ import earth.terrarium.botarium.common.energy.impl.WrappedItemEnergyContainer;
 import earth.terrarium.botarium.common.energy.util.EnergyHooks;
 import earth.terrarium.botarium.common.item.ItemStackHolder;
 import net.minecraft.ChatFormatting;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -25,9 +26,12 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
 public class EtrionicCapacitorItem extends Item implements EnergyAttachment.Item {
     public static final String TOGGLE_KEY = "ToggledOn";
 
@@ -197,13 +201,13 @@ public class EtrionicCapacitorItem extends Item implements EnergyAttachment.Item
         }
     }
 
-    //Fabric disabling of nbt change animation
+    // Fabric disabling of nbt change animation
     @PlatformOnly(PlatformOnly.FABRIC)
     public boolean allowNbtUpdateAnimation(Player player, InteractionHand hand, ItemStack oldStack, ItemStack newStack) {
         return false;
     }
 
-    //Forge disabling of nbt change animation
+    // Forge disabling of nbt change animation
     @PlatformOnly(PlatformOnly.FORGE)
     public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
         return false;

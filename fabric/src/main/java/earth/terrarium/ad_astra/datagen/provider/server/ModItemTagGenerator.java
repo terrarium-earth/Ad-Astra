@@ -1,8 +1,6 @@
 package earth.terrarium.ad_astra.datagen.provider.server;
 
 import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
-import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
-import earth.terrarium.ad_astra.common.registry.ModBlocks;
 import earth.terrarium.ad_astra.common.registry.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
@@ -32,7 +30,7 @@ public class ModItemTagGenerator extends FabricTagProvider<Item> {
         fabric(ModItems.ETRIUM_BLOCK);
         fabric(ModItems.STEEL_BLOCK);
         fabric(ModItems.DESMIUM_BLOCK);
-        fabric(ModItems.XEBRIUM_BLOCK);
+        fabric(ModItems.THERMALYTE_BLOCK);
         fabric(ModItems.VESNIUM_BLOCK);
         fabric(ModItems.AEROLYTE_BLOCK);
 
@@ -48,9 +46,9 @@ public class ModItemTagGenerator extends FabricTagProvider<Item> {
         fabric(ModItems.DESMIUM_NUGGET);
         fabric(ModItems.DESMIUM_INGOT);
 
-        fabric(ModItems.XEBRIUM_PLATE);
-        fabric(ModItems.XEBRIUM_NUGGET);
-        fabric(ModItems.XEBRIUM_INGOT);
+        fabric(ModItems.THERMALYTE_PLATE);
+        fabric(ModItems.THERMALYTE_NUGGET);
+        fabric(ModItems.THERMALYTE_INGOT);
 
         fabric(ModItems.AEROLYTE_PLATE);
         fabric(ModItems.AEROLYTE_NUGGET);

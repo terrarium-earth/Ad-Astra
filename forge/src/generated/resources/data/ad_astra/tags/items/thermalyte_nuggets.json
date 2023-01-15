@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "#c:thermalyte_nuggets",
+      "required": false
+    },
+    {
+      "id": "#forge:nuggets/thermalyte",
+      "required": false
+    }
+  ]
+}
