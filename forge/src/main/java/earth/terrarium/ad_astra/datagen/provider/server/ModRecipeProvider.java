@@ -14,8 +14,8 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class ModRecipeProvider extends RecipeProvider {
-    public ModRecipeProvider(PackOutput arg) {
-        super(arg);
+    public ModRecipeProvider(PackOutput output) {
+        super(output);
     }
 
     @Override

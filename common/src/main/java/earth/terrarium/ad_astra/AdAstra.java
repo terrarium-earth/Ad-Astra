@@ -4,10 +4,6 @@ import com.teamresourceful.resourcefulconfig.common.config.Configurator;
 import earth.terrarium.ad_astra.common.config.AdAstraConfig;
 import earth.terrarium.ad_astra.common.networking.NetworkHandling;
 import earth.terrarium.ad_astra.common.registry.*;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.PreparableReloadListener;
-
-import java.util.function.BiConsumer;
 
 public class AdAstra {
     public static final String MOD_ID = "ad_astra";
@@ -32,9 +28,6 @@ public class AdAstra {
         ModFeatures.FEATURES.init();
         ModStructures.STRUCTURE_TYPES.init();
         NetworkHandling.init();
-    }
-
-    public static void onRegisterReloadListeners(BiConsumer<ResourceLocation, PreparableReloadListener> registry) {
     }
 
     public static void postInit() {

@@ -3,6 +3,7 @@ package earth.terrarium.ad_astra.forge;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.AdAstraClient;
 import earth.terrarium.ad_astra.client.forge.AdAstraClientForge;
+import earth.terrarium.ad_astra.common.data.PlanetData;
 import earth.terrarium.ad_astra.common.registry.ModCommands;
 import earth.terrarium.ad_astra.common.registry.ModEntityTypes;
 import earth.terrarium.ad_astra.common.registry.ModItems;
@@ -35,7 +36,7 @@ public class AdAstraForge {
     }
 
     public static void onServerReloadListeners(AddReloadListenerEvent event) {
-        AdAstra.onRegisterReloadListeners((id, listener) -> event.addListener(listener));
+        PlanetData.onRegisterReloadListeners((id, listener) -> event.addListener(listener));
     }
 
     public static void commonSetup(FMLCommonSetupEvent event) {

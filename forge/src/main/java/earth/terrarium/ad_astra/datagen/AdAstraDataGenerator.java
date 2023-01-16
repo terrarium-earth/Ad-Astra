@@ -36,5 +36,6 @@ public final class AdAstraDataGenerator {
         generator.addProvider(event.includeServer(), new ModItemTagProvider(packOutput, lookupProvider, existingFileHelper));
         generator.addProvider(event.includeServer(), new ModBlockTagProvider(packOutput, lookupProvider, existingFileHelper));
         generator.addProvider(event.includeServer(), new ForgeItemTagProvider(packOutput, lookupProvider, existingFileHelper));
+        generator.addProvider(event.includeServer(), new ModPlanetProvider(packOutput));
     }
 }
