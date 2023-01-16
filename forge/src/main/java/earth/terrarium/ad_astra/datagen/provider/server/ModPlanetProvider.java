@@ -17,11 +17,11 @@ public class ModPlanetProvider extends PlanetProvider {
     }
 
     protected void buildPlanets(Consumer<Planet> consumer) {
-        consumer.accept(new Planet(Level.OVERWORLD, true, 9.806f));
-        consumer.accept(new Planet(Planet.MOON, false, 1.625f));
-        consumer.accept(new Planet(Planet.MARS, false, 3.72076f));
-        consumer.accept(new Planet(Planet.VENUS, false, 8.87f));
-        consumer.accept(new Planet(Planet.MERCURY, false, 3.7f));
-        consumer.accept(new Planet(Planet.GLACIO, true, 3.721f));
+        consumer.accept(new Planet(Level.OVERWORLD, true, 9.806f, 15));
+        consumer.accept(new Planet(Planet.MOON, false, 1.625f, -160));
+        consumer.accept(new Planet(Planet.MARS, false, 3.72076f, -65));
+        consumer.accept(new Planet(Planet.VENUS, false, 8.87f, 464));
+        consumer.accept(new Planet(Planet.MERCURY, false, 3.7f, 167));
+        consumer.accept(new Planet(Planet.GLACIO, true, 3.721f, -46));
     }
 }

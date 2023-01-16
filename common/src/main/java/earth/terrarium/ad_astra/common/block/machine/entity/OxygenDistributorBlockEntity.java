@@ -4,7 +4,9 @@ import earth.terrarium.ad_astra.common.block.machine.ContainerMachineBlockEntity
 import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.ad_astra.common.registry.ModTags;
 import earth.terrarium.ad_astra.common.screen.machine.OxygenDistributorMenu;
+import earth.terrarium.ad_astra.common.system.OxygenSystem;
 import earth.terrarium.ad_astra.common.util.FluidUtils;
+import earth.terrarium.ad_astra.common.util.algorithm.FloodFiller3D;
 import earth.terrarium.botarium.common.energy.base.EnergyAttachment;
 import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
@@ -21,7 +23,11 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Set;
+
 @MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
 public class OxygenDistributorBlockEntity extends ContainerMachineBlockEntity implements EnergyAttachment.Block, FluidAttachment.Block {
     private WrappedBlockEnergyContainer energyContainer;
     private WrappedBlockFluidContainer fluidContainer;
@@ -64,10 +70,6 @@ public class OxygenDistributorBlockEntity extends ContainerMachineBlockEntity im
     }
 
     @Override
-    public void clientTick() {
-    }
-
-    @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
         return new OxygenDistributorMenu(i, inventory, this);
     }
@@ -96,7 +98,9 @@ public class OxygenDistributorBlockEntity extends ContainerMachineBlockEntity im
     }
 
     private void craft() {
-        // TODO Oxygen distribution implementation
+        if (level == null) return;
+        Set<BlockPos> positions = FloodFiller3D.run(level, getBlockPos().above());
+        OxygenSystem.addOxygenSource(level, positions);
         update();
     }
 

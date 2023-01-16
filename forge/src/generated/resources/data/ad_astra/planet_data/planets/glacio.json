@@ -1,5 +1,6 @@
 {
   "gravity": 3.721,
   "oxygen": true,
-  "planet": "ad_astra:glacio"
+  "planet": "ad_astra:glacio",
+  "temperature": -46
 }

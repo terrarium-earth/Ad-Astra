@@ -1,5 +1,6 @@
 {
   "gravity": 8.87,
   "oxygen": false,
-  "planet": "ad_astra:venus"
+  "planet": "ad_astra:venus",
+  "temperature": 464
 }

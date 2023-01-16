@@ -1,5 +1,6 @@
 {
   "gravity": 3.72076,
   "oxygen": false,
-  "planet": "ad_astra:mars"
+  "planet": "ad_astra:mars",
+  "temperature": -65
 }

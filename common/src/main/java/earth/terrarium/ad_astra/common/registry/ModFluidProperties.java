@@ -70,7 +70,7 @@ public class ModFluidProperties {
             .screenOverlay(new ResourceLocation("textures/misc/underwater.png"))
             .viscosity(71)
             .density(71)
-            .temperature(-10000000)
+            .temperature(-196)
             .tintColor(0x6cfffa)
             .canConvertToSource(false));
 }

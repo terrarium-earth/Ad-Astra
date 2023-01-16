@@ -14,6 +14,9 @@ public class LangUtils {
     public static final String FLUID_PIPE_TRANSDER_RATE = lang("tooltip.ad_astra.fluid_pipe_transfer_rate", "Fluid Transfer: %s 🪣 / t");
     public static final String CABLE_TRANSFER_RATE = lang("tooltip.ad_astra.cable_transfer_rate", "Energy Transfer: %s ⚡ / t");
 
+    public static final String OXYGEN_DETECTED = lang("message.ad_astra.oxygen_detected", "Oxygen: %s");
+    public static final String TEMPERATURE_DETECTED = lang("message.ad_astra.temperature_detected", "Temperature: %s");
+
     public static final String PIPE_NORMAL = lang("message.ad_astra.pipe_normal", "Normal");
     public static final String PIPE_INSERT = lang("message.ad_astra.pipe_insert", "Insert");
     public static final String PIPE_EXTRACT = lang("message.ad_astra.pipe_extract", "Extract");

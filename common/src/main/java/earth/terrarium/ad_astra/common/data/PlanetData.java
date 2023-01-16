@@ -15,16 +15,14 @@ import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.function.BiConsumer;
 
 @ParametersAreNonnullByDefault
 public class PlanetData extends SimpleJsonResourceReloadListener {
     private static final Set<Planet> PLANETS = new HashSet<>();
     private static final Set<ResourceKey<Level>> PLANETS_WITH_OXYGEN = new HashSet<>();
+    private static final Map<ResourceKey<Level>, Integer> PLANET_TEMPERATURES = new HashMap<>();
 
 
     public PlanetData() {
@@ -51,6 +49,7 @@ public class PlanetData extends SimpleJsonResourceReloadListener {
         clear();
         PLANETS.addAll(planets);
         PLANETS_WITH_OXYGEN.addAll(planets.stream().filter(Planet::oxygen).map(Planet::planet).toList());
+        planets.forEach(planet -> PLANET_TEMPERATURES.put(planet.planet(), planet.temperature()));
     }
 
     private static void clear() {
@@ -64,6 +63,10 @@ public class PlanetData extends SimpleJsonResourceReloadListener {
 
     public static Set<ResourceKey<Level>> getPlanetsWithOxygen() {
         return PLANETS_WITH_OXYGEN;
+    }
+
+    public static Map<ResourceKey<Level>, Integer> getPlanetTemperatures() {
+        return PLANET_TEMPERATURES;
     }
 
     public static void onRegisterReloadListeners(BiConsumer<ResourceLocation, PreparableReloadListener> registry) {

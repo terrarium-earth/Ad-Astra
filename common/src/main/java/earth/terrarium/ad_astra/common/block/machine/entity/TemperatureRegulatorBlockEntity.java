@@ -4,7 +4,9 @@ import earth.terrarium.ad_astra.common.block.machine.ContainerMachineBlockEntity
 import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.ad_astra.common.registry.ModTags;
 import earth.terrarium.ad_astra.common.screen.machine.TemperatureRegulatorMenu;
+import earth.terrarium.ad_astra.common.system.TemperatureSystem;
 import earth.terrarium.ad_astra.common.util.FluidUtils;
+import earth.terrarium.ad_astra.common.util.algorithm.FloodFiller3D;
 import earth.terrarium.botarium.common.energy.base.EnergyAttachment;
 import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
@@ -21,11 +23,14 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.util.Set;
+
 @MethodsReturnNonnullByDefault
 public class TemperatureRegulatorBlockEntity extends ContainerMachineBlockEntity implements EnergyAttachment.Block, FluidAttachment.Block {
     private WrappedBlockEnergyContainer energyContainer;
     private WrappedBlockFluidContainer fluidContainer;
     private boolean showTemperature = false;
+    private int temperatureTarget = TemperatureSystem.TARGET_TEMPERATURE;
 
     public TemperatureRegulatorBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntityTypes.TEMPERATURE_REGULATOR.get(), blockPos, blockState, 2);
@@ -35,12 +40,14 @@ public class TemperatureRegulatorBlockEntity extends ContainerMachineBlockEntity
     public void load(CompoundTag tag) {
         super.load(tag);
         this.showTemperature = tag.getBoolean("ShowTemperature");
+        this.temperatureTarget = tag.getInt("TemperatureTarget");
     }
 
     @Override
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
         tag.putBoolean("ShowTemperature", this.showTemperature);
+        tag.putInt("TemperatureTarget", this.temperatureTarget);
     }
 
     @Override
@@ -61,10 +68,6 @@ public class TemperatureRegulatorBlockEntity extends ContainerMachineBlockEntity
                 }
             }
         }
-    }
-
-    @Override
-    public void clientTick() {
     }
 
     @Override
@@ -96,7 +99,9 @@ public class TemperatureRegulatorBlockEntity extends ContainerMachineBlockEntity
     }
 
     private void craft() {
-        // TODO Temperature regulator implementation
+        if (level == null) return;
+        Set<BlockPos> positions = FloodFiller3D.run(level, getBlockPos().above());
+        TemperatureSystem.modifyTemperatureSources(level, positions, 10, this.temperatureTarget);
         update();
     }
 

@@ -40,10 +40,10 @@ public class ElectrolyzerBlockEntity extends CookingMachineBlockEntity implement
                 if (this.getEnergyStorage().internalExtract(this.recipe.energy(), true) >= this.recipe.energy()) {
                     if (getFluidContainer().extractFluid(FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(0).getFluid(), recipe.ingredient().getFluidAmount(), null), true).getFluidAmount() <= 0)
                         return;
-                    if (getFluidContainer().insertFluid(FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(1).getFluid(), recipe.resultFluid1().getFluidAmount(), null), true) <= 0)
+                    if (getFluidContainer().insertFluid(FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(1).getFluid(), recipe.resultFluid1().getFluidAmount(), null), true) <= 0
+                            && getFluidContainer().insertFluid(FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(2).getFluid(), recipe.resultFluid2().getFluidAmount(), null), true) <= 0) {
                         return;
-                    if (getFluidContainer().insertFluid(FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(2).getFluid(), recipe.resultFluid2().getFluidAmount(), null), true) <= 0)
-                        return;
+                    }
 
                     this.getEnergyStorage().internalExtract(this.recipe.energy(), false);
                     this.cookTime++;
