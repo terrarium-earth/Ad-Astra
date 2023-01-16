@@ -27,7 +27,7 @@
 package earth.terrarium.ad_astra.common.util;
 
 import com.teamresourceful.resourcefullib.common.exceptions.UtilityClassException;
-import earth.terrarium.ad_astra.AdAstra;
+import com.teamresourceful.resourcefullib.common.lib.Constants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -55,7 +55,7 @@ public final class WorldUtils {
             return clazz.cast(tile);
         } else {
             if (logWrongType) {
-                AdAstra.LOGGER.warn("Unexpected TileEntity class at {}, expected {}, but found: {}", pos, clazz, tile.getClass());
+                Constants.LOGGER.warn("Unexpected TileEntity class at {}, expected {}, but found: {}", pos, clazz, tile.getClass());
             }
 
             return null;

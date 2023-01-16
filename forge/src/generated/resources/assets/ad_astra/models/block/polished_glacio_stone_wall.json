@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "particle": "ad_astra:block/polished_glacio_stone",
+    "wall": "ad_astra:block/polished_glacio_stone"
+  }
+}

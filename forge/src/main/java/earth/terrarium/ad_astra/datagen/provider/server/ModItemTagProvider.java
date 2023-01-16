@@ -1,29 +1,33 @@
 package earth.terrarium.ad_astra.datagen.provider.server;
 
 import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.ad_astra.common.registry.ModTags;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.Registry;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.TagsProvider;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagEntry;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import net.minecraftforge.registries.ForgeRegistries;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.concurrent.CompletableFuture;
 
+@ParametersAreNonnullByDefault
 public class ModItemTagProvider extends TagsProvider<Item> {
 
-    public ModItemTagProvider(PackOutput arg, ResourceKey<? extends Registry<Item>> arg2, CompletableFuture<HolderLookup.Provider> completableFuture, @Nullable ExistingFileHelper existingFileHelper) {
-        super(arg, arg2, completableFuture, AdAstra.MOD_ID, existingFileHelper);
+    public ModItemTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> completableFuture, ExistingFileHelper existingFileHelper) {
+        super(output, ForgeRegistries.ITEMS.getRegistryKey(), completableFuture, AdAstra.MOD_ID, existingFileHelper);
     }
 
     @Override
-    protected void addTags(HolderLookup.@NotNull Provider provider) {
+    protected void addTags(HolderLookup.Provider provider) {
+        addVanillaTags();
+
         platform(ModTags.Items.ETRIUM_BLOCKS, ItemType.STORAGE_BLOCKS, "etrium");
         platform(ModTags.Items.STEEL_BLOCKS, ItemType.STORAGE_BLOCKS, "steel");
         platform(ModTags.Items.DESMIUM_BLOCKS, ItemType.STORAGE_BLOCKS, "desmium");
@@ -43,7 +47,6 @@ public class ModItemTagProvider extends TagsProvider<Item> {
         platform(ModTags.Items.DESMIUM_INGOTS, ItemType.INGOTS, "desmium");
         platform(ModTags.Items.DESMIUM_NUGGETS, ItemType.NUGGETS, "desmium");
 
-
         platform(ModTags.Items.THERMALYTE_PLATES, ItemType.PLATES, "thermalyte");
         platform(ModTags.Items.THERMALYTE_INGOTS, ItemType.INGOTS, "thermalyte");
         platform(ModTags.Items.THERMALYTE_NUGGETS, ItemType.NUGGETS, "thermalyte");
@@ -57,8 +60,17 @@ public class ModItemTagProvider extends TagsProvider<Item> {
         platform(ModTags.Items.ETRIUM_NUGGETS, ItemType.NUGGETS, "etrium");
     }
 
+    private void addVanillaTags() {
+        ModItems.STAIRS.stream().forEach(b -> tag(ItemTags.STAIRS).add(TagEntry.element(b.getId())));
+        ModItems.SLABS.stream().forEach(b -> tag(ItemTags.SLABS).add(TagEntry.element(b.getId())));
+        ModItems.WALLS.stream().forEach(b -> tag(ItemTags.WALLS).add(TagEntry.element(b.getId())));
+        ModItems.BUTTONS.stream().forEach(b -> tag(ItemTags.BUTTONS).add(TagEntry.element(b.getId())));
+        ModItems.SANDS.stream().forEach(b -> tag(ItemTags.SAND).add(TagEntry.element(b.getId())));
+        ModItems.STONE_BRICKS.stream().forEach(b -> tag(ItemTags.STONE_BRICKS).add(TagEntry.element(b.getId())));
+    }
+
     private void platform(TagKey<Item> tag, ItemType type, String name) {
-        //seperate the path of the resource location of the tag by underscores and join every element into a string except the last element.
+        // separate the path of the resource location of the tag by underscores and join every element into a string except the last element.
 
         tag(tag).addOptionalTag(new ResourceLocation("c", type.fabric(name))).addOptionalTag(new ResourceLocation("forge", type.forge(name)));
     }

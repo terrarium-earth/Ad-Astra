@@ -1,25 +1,25 @@
-// 1.19.3	2023-01-14T17:31:21.599755	Tags for minecraft:item mod id ad_astra_forge
+// 1.19.3	2023-01-15T16:14:08.021918	Tags for minecraft:item mod id ad_astra_forge
 ae23ce49b7a03bdd173a5d0a99870f5da713383f data/forge/tags/items/ingots/aerolyte.json
 e059a0a2ac04c0da0b58be3f39e69df31057bc24 data/forge/tags/items/ingots/desmium.json
 1103930fc14f4ae16de6c412b675389766170cb6 data/forge/tags/items/ingots/etrium.json
 6d476ff22d189abdb46efe38c807e3240d343252 data/forge/tags/items/ingots/steel.json
-ee05c3eb5cbf6d9a40d7b63c1744f22bda2be74b data/forge/tags/items/ingots/thermalyte.json
+6dc1fedf442533ac48f926627d3d8dc1628e17d6 data/forge/tags/items/ingots/thermalyte.json
 9015c5dcd904a79be76b6a5ba43e635f6ea27251 data/forge/tags/items/nuggets/aerolyte.json
 aeef719d061a9a92c609fce09c1b043cdbd9e417 data/forge/tags/items/nuggets/desmium.json
 da6d989221c7563ddb711569d727f90f72a9473d data/forge/tags/items/nuggets/etrium.json
 618711c8a87802069bcb6e1712bf86d8237d271b data/forge/tags/items/nuggets/steel.json
-6e7124a45051221c566b2c0e71b1de0085f0d455 data/forge/tags/items/nuggets/thermalyte.json
+1026dc70fe591eb6e2b6c6b4526bc8000598ac42 data/forge/tags/items/nuggets/thermalyte.json
 48099c7c5146fa60731a75f98abb863ddde03813 data/forge/tags/items/plates/aerolyte.json
 442336ed22b813c6e5ccccb08b01cbad34b86359 data/forge/tags/items/plates/desmium.json
 9bd6b629836afa0aba2219e215ae00e99632b900 data/forge/tags/items/plates/etrium.json
 327adb5432dbcfa89abb2a677077611b5ad711af data/forge/tags/items/plates/iron.json
 0967cdcff6339fa83dfce4a70667ad0777bed875 data/forge/tags/items/plates/steel.json
-e493c2118385ae769a7a4bfd29c45a0a89f89d21 data/forge/tags/items/plates/thermalyte.json
+a65ebe76543fdd877d4777210faab0b23db0d0c8 data/forge/tags/items/plates/thermalyte.json
 2e17b7e39a0e5e234917f8928e639e6d5e8a7263 data/forge/tags/items/rods/iron.json
 897b9c645b1a87ad7b34c35f6bceb79c056db3c9 data/forge/tags/items/rods/steel.json
 81bee15f7a917c559364d4ec6db72674f76aa080 data/forge/tags/items/storage_blocks/aerolyte.json
 09082724489b7e18732628b6abcc4d92df255544 data/forge/tags/items/storage_blocks/desmium.json
 604dba3a1242387bcb9bff2b0d3a7545f38de774 data/forge/tags/items/storage_blocks/etrium.json
 8624111f9360c939093cb5a4a19e2b9ef133f29d data/forge/tags/items/storage_blocks/steel.json
+f430ca10bbc75d7c7d55da0a6f742424e8d212d2 data/forge/tags/items/storage_blocks/thermalyte.json
 bdf8223d1b5fb838c32b4b2bd3bf1886653887b7 data/forge/tags/items/storage_blocks/vesnium.json
-0d282c1ef43b84b9cde677e2bf23d89dce63381a data/forge/tags/items/storage_blocks/thermalyte.json

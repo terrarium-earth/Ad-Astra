@@ -19,6 +19,15 @@ import java.util.List;
 public class ModItems {
     public static final ResourcefulRegistry<Item> ITEMS = ResourcefulRegistries.create(BuiltInRegistries.ITEM, AdAstra.MOD_ID);
 
+    public static final ResourcefulRegistry<Item> CUBES = ResourcefulRegistries.create(ITEMS);
+    public static final ResourcefulRegistry<Item> SANDS = ResourcefulRegistries.create(CUBES);
+    public static final ResourcefulRegistry<Item> STONE_BRICKS = ResourcefulRegistries.create(CUBES);
+    public static final ResourcefulRegistry<Item> PILLARS = ResourcefulRegistries.create(ITEMS);
+    public static final ResourcefulRegistry<Item> STAIRS = ResourcefulRegistries.create(ITEMS);
+    public static final ResourcefulRegistry<Item> SLABS = ResourcefulRegistries.create(ITEMS);
+    public static final ResourcefulRegistry<Item> WALLS = ResourcefulRegistries.create(ITEMS);
+    public static final ResourcefulRegistry<Item> BUTTONS = ResourcefulRegistries.create(ITEMS);
+    public static final ResourcefulRegistry<Item> PRESSURE_PLATES = ResourcefulRegistries.create(ITEMS);
     public static final ResourcefulRegistry<Item> MACHINES = ResourcefulRegistries.create(ITEMS);
     public static final ResourcefulRegistry<Item> BUCKETS = ResourcefulRegistries.create(ITEMS);
 
@@ -86,15 +95,167 @@ public class ModItems {
     public static final RegistryEntry<Item> ETRIONIC_CORE = ITEMS.register("etrionic_core", () -> new Item(new Item.Properties()));
     public static final RegistryEntry<Item> ETRIONIC_CAPACITOR = ITEMS.register("etrionic_capacitor", () -> new EtrionicCapacitorItem(new Item.Properties()));
 
-    public static final RegistryEntry<Item> STEEL_BLOCK = ITEMS.register("steel_block", () -> new BlockItem(ModBlocks.STEEL_BLOCK.get(), new Item.Properties()));
-    public static final RegistryEntry<Item> ETRIUM_BLOCK = ITEMS.register("etrium_block", () -> new BlockItem(ModBlocks.ETRIUM_BLOCK.get(), new Item.Properties()));
-    public static final RegistryEntry<Item> DESMIUM_BLOCK = ITEMS.register("desmium_block", () -> new BlockItem(ModBlocks.DESMIUM_BLOCK.get(), new Item.Properties()));
-    public static final RegistryEntry<Item> THERMALYTE_BLOCK = ITEMS.register("thermalyte_block", () -> new BlockItem(ModBlocks.THERMALYTE_BLOCK.get(), new Item.Properties()));
-    public static final RegistryEntry<Item> VESNIUM_BLOCK = ITEMS.register("vesnium_block", () -> new BlockItem(ModBlocks.VESNIUM_BLOCK.get(), new Item.Properties()));
-    public static final RegistryEntry<Item> AEROLYTE_BLOCK = ITEMS.register("aerolyte_block", () -> new BlockItem(ModBlocks.AEROLYTE_BLOCK.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> IRON_PLATING = CUBES.register("iron_plating", () -> new BlockItem(ModBlocks.IRON_PLATING.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> IRON_PLATING_STAIRS = STAIRS.register("iron_plating_stairs", () -> new BlockItem(ModBlocks.IRON_PLATING_STAIRS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> IRON_PLATING_SLAB = SLABS.register("iron_plating_slab", () -> new BlockItem(ModBlocks.IRON_PLATING_SLAB.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> IRON_PILLAR = PILLARS.register("iron_pillar", () -> new BlockItem(ModBlocks.IRON_PILLAR.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> CROSS_IRON_PILLAR = PILLARS.register("cross_iron_pillar", () -> new BlockItem(ModBlocks.CROSS_IRON_PILLAR.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> GLOWING_IRON_PILLAR = PILLARS.register("glowing_iron_pillar", () -> new BlockItem(ModBlocks.GLOWING_IRON_PILLAR.get(), new Item.Properties()));
 
-    public static final RegistryEntry<Item> SKY_STONE = ITEMS.register("sky_stone", () -> new BlockItem(ModBlocks.SKY_STONE.get(), new Item.Properties()));
-    public static final RegistryEntry<Item> ETRIUM_ORE = ITEMS.register("etrium_ore", () -> new BlockItem(ModBlocks.ETRIUM_ORE.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> STEEL_BLOCK = CUBES.register("steel_block", () -> new BlockItem(ModBlocks.STEEL_BLOCK.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> STEEL_PLATING = CUBES.register("steel_plating", () -> new BlockItem(ModBlocks.STEEL_PLATING.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> STEEL_PLATING_STAIRS = STAIRS.register("steel_plating_stairs", () -> new BlockItem(ModBlocks.STEEL_PLATING_STAIRS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> STEEL_PLATING_SLAB = SLABS.register("steel_plating_slab", () -> new BlockItem(ModBlocks.STEEL_PLATING_SLAB.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> STEEL_PILLAR = PILLARS.register("steel_pillar", () -> new BlockItem(ModBlocks.STEEL_PILLAR.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> GLOWING_STEEL_PILLAR = PILLARS.register("glowing_steel_pillar", () -> new BlockItem(ModBlocks.GLOWING_STEEL_PILLAR.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> STEEL_BUTTON = BUTTONS.register("steel_button", () -> new BlockItem(ModBlocks.STEEL_BUTTON.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> STEEL_PRESSURE_PLATE = PRESSURE_PLATES.register("steel_pressure_plate", () -> new BlockItem(ModBlocks.STEEL_PRESSURE_PLATE.get(), new Item.Properties()));
+
+    public static final RegistryEntry<Item> ETRIUM_BLOCK = CUBES.register("etrium_block", () -> new BlockItem(ModBlocks.ETRIUM_BLOCK.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> ETRIUM_PLATING = CUBES.register("etrium_plating", () -> new BlockItem(ModBlocks.ETRIUM_PLATING.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> ETRIUM_PLATING_STAIRS = STAIRS.register("etrium_plating_stairs", () -> new BlockItem(ModBlocks.ETRIUM_PLATING_STAIRS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> ETRIUM_PLATING_SLAB = SLABS.register("etrium_plating_slab", () -> new BlockItem(ModBlocks.ETRIUM_PLATING_SLAB.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> ETRIUM_PILLAR = PILLARS.register("etrium_pillar", () -> new BlockItem(ModBlocks.ETRIUM_PILLAR.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> GLOWING_ETRIUM_PILLAR = PILLARS.register("glowing_etrium_pillar", () -> new BlockItem(ModBlocks.GLOWING_ETRIUM_PILLAR.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> ETRIUM_BUTTON = BUTTONS.register("etrium_button", () -> new BlockItem(ModBlocks.ETRIUM_BUTTON.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> ETRIUM_PRESSURE_PLATE = PRESSURE_PLATES.register("etrium_pressure_plate", () -> new BlockItem(ModBlocks.ETRIUM_PRESSURE_PLATE.get(), new Item.Properties()));
+
+    public static final RegistryEntry<Item> RAW_DESMIUM_BLOCK = CUBES.register("raw_desmium_block", () -> new BlockItem(ModBlocks.RAW_DESMIUM_BLOCK.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> DESMIUM_BLOCK = CUBES.register("desmium_block", () -> new BlockItem(ModBlocks.DESMIUM_BLOCK.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> DESMIUM_PLATING = CUBES.register("desmium_plating", () -> new BlockItem(ModBlocks.DESMIUM_PLATING.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> DESMIUM_PLATING_STAIRS = STAIRS.register("desmium_plating_stairs", () -> new BlockItem(ModBlocks.DESMIUM_PLATING_STAIRS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> DESMIUM_PLATING_SLAB = SLABS.register("desmium_plating_slab", () -> new BlockItem(ModBlocks.DESMIUM_PLATING_SLAB.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> DESMIUM_PILLAR = PILLARS.register("desmium_pillar", () -> new BlockItem(ModBlocks.DESMIUM_PILLAR.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> GLOWING_DESMIUM_PILLAR = PILLARS.register("glowing_desmium_pillar", () -> new BlockItem(ModBlocks.GLOWING_DESMIUM_PILLAR.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> DESMIUM_BUTTON = BUTTONS.register("desmium_button", () -> new BlockItem(ModBlocks.DESMIUM_BUTTON.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> DESMIUM_PRESSURE_PLATE = PRESSURE_PLATES.register("desmium_pressure_plate", () -> new BlockItem(ModBlocks.DESMIUM_PRESSURE_PLATE.get(), new Item.Properties()));
+
+    public static final RegistryEntry<Item> RAW_THERMALYTE_BLOCK = CUBES.register("raw_thermalyte_block", () -> new BlockItem(ModBlocks.RAW_THERMALYTE_BLOCK.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> THERMALYTE_BLOCK = CUBES.register("thermalyte_block", () -> new BlockItem(ModBlocks.THERMALYTE_BLOCK.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> THERMALYTE_PLATING = CUBES.register("thermalyte_plating", () -> new BlockItem(ModBlocks.THERMALYTE_PLATING.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> THERMALYTE_PLATING_STAIRS = STAIRS.register("thermalyte_plating_stairs", () -> new BlockItem(ModBlocks.THERMALYTE_PLATING_STAIRS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> THERMALYTE_PLATING_SLAB = SLABS.register("thermalyte_plating_slab", () -> new BlockItem(ModBlocks.THERMALYTE_PLATING_SLAB.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> THERMALYTE_PILLAR = PILLARS.register("thermalyte_pillar", () -> new BlockItem(ModBlocks.THERMALYTE_PILLAR.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> GLOWING_THERMALYTE_PILLAR = PILLARS.register("glowing_thermalyte_pillar", () -> new BlockItem(ModBlocks.GLOWING_THERMALYTE_PILLAR.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> THERMALYTE_BUTTON = BUTTONS.register("thermalyte_button", () -> new BlockItem(ModBlocks.THERMALYTE_BUTTON.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> THERMALYTE_PRESSURE_PLATE = PRESSURE_PLATES.register("thermalyte_pressure_plate", () -> new BlockItem(ModBlocks.THERMALYTE_PRESSURE_PLATE.get(), new Item.Properties()));
+
+    public static final RegistryEntry<Item> VESNIUM_BLOCK = CUBES.register("vesnium_block", () -> new BlockItem(ModBlocks.VESNIUM_BLOCK.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> VESNIUM_CRYSTAL_BLOCK = CUBES.register("vesnium_crystal_block", () -> new BlockItem(ModBlocks.VESNIUM_CRYSTAL_BLOCK.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> VESNIUM_STAIRS = STAIRS.register("vesnium_crystal_block_stairs", () -> new BlockItem(ModBlocks.VESNIUM_STAIRS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> VESNIUM_SLAB = SLABS.register("vesnium_crystal_block_slab", () -> new BlockItem(ModBlocks.VESNIUM_SLAB.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> VESNIUM_BRICKS = CUBES.register("vesnium_bricks", () -> new BlockItem(ModBlocks.VESNIUM_BRICKS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> VESNIUM_BRICK_STAIRS = STAIRS.register("vesnium_brick_stairs", () -> new BlockItem(ModBlocks.VESNIUM_BRICK_STAIRS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> VESNIUM_BRICK_SLAB = SLABS.register("vesnium_brick_slab", () -> new BlockItem(ModBlocks.VESNIUM_BRICK_SLAB.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> VESNIUM_PILLAR = PILLARS.register("vesnium_pillar", () -> new BlockItem(ModBlocks.VESNIUM_PILLAR.get(), new Item.Properties()));
+
+    public static final RegistryEntry<Item> RAW_AEROLYTE_BLOCK = CUBES.register("raw_aerolyte_block", () -> new BlockItem(ModBlocks.RAW_AEROLYTE_BLOCK.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> AEROLYTE_BLOCK = CUBES.register("aerolyte_block", () -> new BlockItem(ModBlocks.AEROLYTE_BLOCK.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> AEROLYTE_PLATING = CUBES.register("aerolyte_plating", () -> new BlockItem(ModBlocks.AEROLYTE_PLATING.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> AEROLYTE_PLATING_STAIRS = STAIRS.register("aerolyte_plating_stairs", () -> new BlockItem(ModBlocks.AEROLYTE_PLATING_STAIRS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> AEROLYTE_PLATING_SLAB = SLABS.register("aerolyte_plating_slab", () -> new BlockItem(ModBlocks.AEROLYTE_PLATING_SLAB.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> AEROLYTE_PILLAR = PILLARS.register("aerolyte_pillar", () -> new BlockItem(ModBlocks.AEROLYTE_PILLAR.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> GLOWING_AEROLYTE_PILLAR = PILLARS.register("glowing_aerolyte_pillar", () -> new BlockItem(ModBlocks.GLOWING_AEROLYTE_PILLAR.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> AEROLYTE_BUTTON = BUTTONS.register("aerolyte_button", () -> new BlockItem(ModBlocks.AEROLYTE_BUTTON.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> AEROLYTE_PRESSURE_PLATE = PRESSURE_PLATES.register("aerolyte_pressure_plate", () -> new BlockItem(ModBlocks.AEROLYTE_PRESSURE_PLATE.get(), new Item.Properties()));
+
+    public static final RegistryEntry<Item> SKY_STONE = CUBES.register("sky_stone", () -> new BlockItem(ModBlocks.SKY_STONE.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> SKY_STONE_STAIRS = STAIRS.register("sky_stone_stairs", () -> new BlockItem(ModBlocks.SKY_STONE_STAIRS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> SKY_STONE_SLAB = SLABS.register("sky_stone_slab", () -> new BlockItem(ModBlocks.SKY_STONE_SLAB.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> ETRIUM_ORE = CUBES.register("etrium_ore", () -> new BlockItem(ModBlocks.ETRIUM_ORE.get(), new Item.Properties()));
+
+    public static final RegistryEntry<Item> MOON_SAND = SANDS.register("moon_sand", () -> new BlockItem(ModBlocks.MOON_SAND.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MOON_COBBLESTONE = CUBES.register("moon_cobblestone", () -> new BlockItem(ModBlocks.MOON_COBBLESTONE.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MOON_COBBLESTONE_STAIRS = STAIRS.register("moon_cobblestone_stairs", () -> new BlockItem(ModBlocks.MOON_COBBLESTONE_STAIRS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MOON_COBBLESTONE_SLAB = SLABS.register("moon_cobblestone_slab", () -> new BlockItem(ModBlocks.MOON_COBBLESTONE_SLAB.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MOON_COBBLESTONE_WALL = WALLS.register("moon_cobblestone_wall", () -> new BlockItem(ModBlocks.MOON_COBBLESTONE_WALL.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MOON_STONE = CUBES.register("moon_stone", () -> new BlockItem(ModBlocks.MOON_STONE.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MOON_STONE_STAIRS = STAIRS.register("moon_stone_stairs", () -> new BlockItem(ModBlocks.MOON_STONE_STAIRS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MOON_STONE_SLAB = SLABS.register("moon_stone_slab", () -> new BlockItem(ModBlocks.MOON_STONE_SLAB.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> POLISHED_MOON_STONE = CUBES.register("polished_moon_stone", () -> new BlockItem(ModBlocks.POLISHED_MOON_STONE.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> POLISHED_MOON_STONE_STAIRS = STAIRS.register("polished_moon_stone_stairs", () -> new BlockItem(ModBlocks.POLISHED_MOON_STONE_STAIRS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> POLISHED_MOON_STONE_SLAB = SLABS.register("polished_moon_stone_slab", () -> new BlockItem(ModBlocks.POLISHED_MOON_STONE_SLAB.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> POLISHED_MOON_STONE_WALL = WALLS.register("polished_moon_stone_wall", () -> new BlockItem(ModBlocks.POLISHED_MOON_STONE_WALL.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MOON_STONE_BRICKS = STONE_BRICKS.register("moon_stone_bricks", () -> new BlockItem(ModBlocks.MOON_STONE_BRICKS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MOON_STONE_BRICK_STAIRS = STAIRS.register("moon_stone_brick_stairs", () -> new BlockItem(ModBlocks.MOON_STONE_BRICK_STAIRS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MOON_STONE_BRICK_SLAB = SLABS.register("moon_stone_brick_slab", () -> new BlockItem(ModBlocks.MOON_STONE_BRICK_SLAB.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> CRACKED_MOON_STONE_BRICKS = STONE_BRICKS.register("cracked_moon_stone_bricks", () -> new BlockItem(ModBlocks.CRACKED_MOON_STONE_BRICKS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> CHISELED_MOON_STONE_BRICKS = STONE_BRICKS.register("chiseled_moon_stone_bricks", () -> new BlockItem(ModBlocks.CHISELED_MOON_STONE_BRICKS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MOON_PILLAR = PILLARS.register("moon_pillar", () -> new BlockItem(ModBlocks.MOON_PILLAR.get(), new Item.Properties()));
+
+    public static final RegistryEntry<Item> MARS_SAND = SANDS.register("mars_sand", () -> new BlockItem(ModBlocks.MARS_SAND.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MARS_COBBLESTONE = CUBES.register("mars_cobblestone", () -> new BlockItem(ModBlocks.MARS_COBBLESTONE.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MARS_COBBLESTONE_STAIRS = STAIRS.register("mars_cobblestone_stairs", () -> new BlockItem(ModBlocks.MARS_COBBLESTONE_STAIRS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MARS_COBBLESTONE_SLAB = SLABS.register("mars_cobblestone_slab", () -> new BlockItem(ModBlocks.MARS_COBBLESTONE_SLAB.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MARS_COBBLESTONE_WALL = WALLS.register("mars_cobblestone_wall", () -> new BlockItem(ModBlocks.MARS_COBBLESTONE_WALL.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MARS_STONE = CUBES.register("mars_stone", () -> new BlockItem(ModBlocks.MARS_STONE.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MARS_STONE_STAIRS = STAIRS.register("mars_stone_stairs", () -> new BlockItem(ModBlocks.MARS_STONE_STAIRS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MARS_STONE_SLAB = SLABS.register("mars_stone_slab", () -> new BlockItem(ModBlocks.MARS_STONE_SLAB.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> POLISHED_MARS_STONE = CUBES.register("polished_mars_stone", () -> new BlockItem(ModBlocks.POLISHED_MARS_STONE.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> POLISHED_MARS_STONE_STAIRS = STAIRS.register("polished_mars_stone_stairs", () -> new BlockItem(ModBlocks.POLISHED_MARS_STONE_STAIRS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> POLISHED_MARS_STONE_SLAB = SLABS.register("polished_mars_stone_slab", () -> new BlockItem(ModBlocks.POLISHED_MARS_STONE_SLAB.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> POLISHED_MARS_STONE_WALL = WALLS.register("polished_mars_stone_wall", () -> new BlockItem(ModBlocks.POLISHED_MARS_STONE_WALL.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MARS_STONE_BRICKS = STONE_BRICKS.register("mars_stone_bricks", () -> new BlockItem(ModBlocks.MARS_STONE_BRICKS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MARS_STONE_BRICK_STAIRS = STAIRS.register("mars_stone_brick_stairs", () -> new BlockItem(ModBlocks.MARS_STONE_BRICK_STAIRS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MARS_STONE_BRICK_SLAB = SLABS.register("mars_stone_brick_slab", () -> new BlockItem(ModBlocks.MARS_STONE_BRICK_SLAB.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> CRACKED_MARS_STONE_BRICKS = STONE_BRICKS.register("cracked_mars_stone_bricks", () -> new BlockItem(ModBlocks.CRACKED_MARS_STONE_BRICKS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> CHISELED_MARS_STONE_BRICKS = STONE_BRICKS.register("chiseled_mars_stone_bricks", () -> new BlockItem(ModBlocks.CHISELED_MARS_STONE_BRICKS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MARS_PILLAR = PILLARS.register("mars_pillar", () -> new BlockItem(ModBlocks.MARS_PILLAR.get(), new Item.Properties()));
+
+    public static final RegistryEntry<Item> VENUS_SAND = SANDS.register("venus_sand", () -> new BlockItem(ModBlocks.VENUS_SAND.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> VENUS_COBBLESTONE = CUBES.register("venus_cobblestone", () -> new BlockItem(ModBlocks.VENUS_COBBLESTONE.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> VENUS_COBBLESTONE_STAIRS = STAIRS.register("venus_cobblestone_stairs", () -> new BlockItem(ModBlocks.VENUS_COBBLESTONE_STAIRS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> VENUS_COBBLESTONE_SLAB = SLABS.register("venus_cobblestone_slab", () -> new BlockItem(ModBlocks.VENUS_COBBLESTONE_SLAB.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> VENUS_COBBLESTONE_WALL = WALLS.register("venus_cobblestone_wall", () -> new BlockItem(ModBlocks.VENUS_COBBLESTONE_WALL.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> VENUS_STONE = PILLARS.register("venus_stone", () -> new BlockItem(ModBlocks.VENUS_STONE.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> VENUS_STONE_STAIRS = STAIRS.register("venus_stone_stairs", () -> new BlockItem(ModBlocks.VENUS_STONE_STAIRS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> VENUS_STONE_SLAB = SLABS.register("venus_stone_slab", () -> new BlockItem(ModBlocks.VENUS_STONE_SLAB.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> POLISHED_VENUS_STONE = CUBES.register("polished_venus_stone", () -> new BlockItem(ModBlocks.POLISHED_VENUS_STONE.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> POLISHED_VENUS_STONE_STAIRS = STAIRS.register("polished_venus_stone_stairs", () -> new BlockItem(ModBlocks.POLISHED_VENUS_STONE_STAIRS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> POLISHED_VENUS_STONE_SLAB = SLABS.register("polished_venus_stone_slab", () -> new BlockItem(ModBlocks.POLISHED_VENUS_STONE_SLAB.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> POLISHED_VENUS_STONE_WALL = WALLS.register("polished_venus_stone_wall", () -> new BlockItem(ModBlocks.POLISHED_VENUS_STONE_WALL.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> VENUS_STONE_BRICKS = STONE_BRICKS.register("venus_stone_bricks", () -> new BlockItem(ModBlocks.VENUS_STONE_BRICKS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> VENUS_STONE_BRICK_STAIRS = STAIRS.register("venus_stone_brick_stairs", () -> new BlockItem(ModBlocks.VENUS_STONE_BRICK_STAIRS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> VENUS_STONE_BRICK_SLAB = SLABS.register("venus_stone_brick_slab", () -> new BlockItem(ModBlocks.VENUS_STONE_BRICK_SLAB.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> CRACKED_VENUS_STONE_BRICKS = STONE_BRICKS.register("cracked_venus_stone_bricks", () -> new BlockItem(ModBlocks.CRACKED_VENUS_STONE_BRICKS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> CHISELED_VENUS_STONE_BRICKS = STONE_BRICKS.register("chiseled_venus_stone_bricks", () -> new BlockItem(ModBlocks.CHISELED_VENUS_STONE_BRICKS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> VENUS_PILLAR = PILLARS.register("venus_pillar", () -> new BlockItem(ModBlocks.VENUS_PILLAR.get(), new Item.Properties()));
+
+    public static final RegistryEntry<Item> MERCURY_COBBLESTONE = CUBES.register("mercury_cobblestone", () -> new BlockItem(ModBlocks.MERCURY_COBBLESTONE.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MERCURY_COBBLESTONE_STAIRS = STAIRS.register("mercury_cobblestone_stairs", () -> new BlockItem(ModBlocks.MERCURY_COBBLESTONE_STAIRS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MERCURY_COBBLESTONE_SLAB = SLABS.register("mercury_cobblestone_slab", () -> new BlockItem(ModBlocks.MERCURY_COBBLESTONE_SLAB.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MERCURY_COBBLESTONE_WALL = WALLS.register("mercury_cobblestone_wall", () -> new BlockItem(ModBlocks.MERCURY_COBBLESTONE_WALL.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MERCURY_STONE = CUBES.register("mercury_stone", () -> new BlockItem(ModBlocks.MERCURY_STONE.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MERCURY_STONE_STAIRS = STAIRS.register("mercury_stone_stairs", () -> new BlockItem(ModBlocks.MERCURY_STONE_STAIRS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MERCURY_STONE_SLAB = SLABS.register("mercury_stone_slab", () -> new BlockItem(ModBlocks.MERCURY_STONE_SLAB.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> POLISHED_MERCURY_STONE = CUBES.register("polished_mercury_stone", () -> new BlockItem(ModBlocks.POLISHED_MERCURY_STONE.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> POLISHED_MERCURY_STONE_STAIRS = STAIRS.register("polished_mercury_stone_stairs", () -> new BlockItem(ModBlocks.POLISHED_MERCURY_STONE_STAIRS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> POLISHED_MERCURY_STONE_SLAB = SLABS.register("polished_mercury_stone_slab", () -> new BlockItem(ModBlocks.POLISHED_MERCURY_STONE_SLAB.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> POLISHED_MERCURY_STONE_WALL = WALLS.register("polished_mercury_stone_wall", () -> new BlockItem(ModBlocks.POLISHED_MERCURY_STONE_WALL.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MERCURY_STONE_BRICKS = STONE_BRICKS.register("mercury_stone_bricks", () -> new BlockItem(ModBlocks.MERCURY_STONE_BRICKS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MERCURY_STONE_BRICK_STAIRS = STAIRS.register("mercury_stone_brick_stairs", () -> new BlockItem(ModBlocks.MERCURY_STONE_BRICK_STAIRS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MERCURY_STONE_BRICK_SLAB = SLABS.register("mercury_stone_brick_slab", () -> new BlockItem(ModBlocks.MERCURY_STONE_BRICK_SLAB.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> CRACKED_MERCURY_STONE_BRICKS = STONE_BRICKS.register("cracked_mercury_stone_bricks", () -> new BlockItem(ModBlocks.CRACKED_MERCURY_STONE_BRICKS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> CHISELED_MERCURY_STONE_BRICKS = STONE_BRICKS.register("chiseled_mercury_stone_bricks", () -> new BlockItem(ModBlocks.CHISELED_MERCURY_STONE_BRICKS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MERCURY_PILLAR = PILLARS.register("mercury_pillar", () -> new BlockItem(ModBlocks.MERCURY_PILLAR.get(), new Item.Properties()));
+
+    public static final RegistryEntry<Item> GLACIO_COBBLESTONE = CUBES.register("glacio_cobblestone", () -> new BlockItem(ModBlocks.GLACIO_COBBLESTONE.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> GLACIO_COBBLESTONE_STAIRS = STAIRS.register("glacio_cobblestone_stairs", () -> new BlockItem(ModBlocks.GLACIO_COBBLESTONE_STAIRS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> GLACIO_COBBLESTONE_SLAB = SLABS.register("glacio_cobblestone_slab", () -> new BlockItem(ModBlocks.GLACIO_COBBLESTONE_SLAB.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> GLACIO_COBBLESTONE_WALL = WALLS.register("glacio_cobblestone_wall", () -> new BlockItem(ModBlocks.GLACIO_COBBLESTONE_WALL.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> GLACIO_STONE = CUBES.register("glacio_stone", () -> new BlockItem(ModBlocks.GLACIO_STONE.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> GLACIO_STONE_STAIRS = STAIRS.register("glacio_stone_stairs", () -> new BlockItem(ModBlocks.GLACIO_STONE_STAIRS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> GLACIO_STONE_SLAB = SLABS.register("glacio_stone_slab", () -> new BlockItem(ModBlocks.GLACIO_STONE_SLAB.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> POLISHED_GLACIO_STONE = CUBES.register("polished_glacio_stone", () -> new BlockItem(ModBlocks.POLISHED_GLACIO_STONE.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> POLISHED_GLACIO_STONE_STAIRS = STAIRS.register("polished_glacio_stone_stairs", () -> new BlockItem(ModBlocks.POLISHED_GLACIO_STONE_STAIRS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> POLISHED_GLACIO_STONE_SLAB = SLABS.register("polished_glacio_stone_slab", () -> new BlockItem(ModBlocks.POLISHED_GLACIO_STONE_SLAB.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> POLISHED_GLACIO_STONE_WALL = WALLS.register("polished_glacio_stone_wall", () -> new BlockItem(ModBlocks.POLISHED_GLACIO_STONE_WALL.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> GLACIO_STONE_BRICKS = STONE_BRICKS.register("glacio_stone_bricks", () -> new BlockItem(ModBlocks.GLACIO_STONE_BRICKS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> GLACIO_STONE_BRICK_STAIRS = STAIRS.register("glacio_stone_brick_stairs", () -> new BlockItem(ModBlocks.GLACIO_STONE_BRICK_STAIRS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> GLACIO_STONE_BRICK_SLAB = SLABS.register("glacio_stone_brick_slab", () -> new BlockItem(ModBlocks.GLACIO_STONE_BRICK_SLAB.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> CRACKED_GLACIO_STONE_BRICKS = STONE_BRICKS.register("cracked_glacio_stone_bricks", () -> new BlockItem(ModBlocks.CRACKED_GLACIO_STONE_BRICKS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> CHISELED_GLACIO_STONE_BRICKS = STONE_BRICKS.register("chiseled_glacio_stone_bricks", () -> new BlockItem(ModBlocks.CHISELED_GLACIO_STONE_BRICKS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> GLACIO_PILLAR = PILLARS.register("glacio_pillar", () -> new BlockItem(ModBlocks.GLACIO_PILLAR.get(), new Item.Properties()));
 
     public static void onRegisterCreativeTabs(TriConsumer<ResourceLocation, RegistryEntry<Item>, List<Item>> consumer) {
         consumer.accept(new ResourceLocation(AdAstra.MOD_ID, "main"), ModItems.ETRIUM_NUGGET, BuiltInRegistries.ITEM.stream().filter(i -> BuiltInRegistries.ITEM.getKey(i).getNamespace().equals(AdAstra.MOD_ID)).toList());

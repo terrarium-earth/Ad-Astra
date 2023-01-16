@@ -1,0 +1,10 @@
+// 1.19.3	2023-01-15T18:11:47.149312	Tags for minecraft:block mod id ad_astra
+70ba8e2dc3088855111e3eff8a60f9e845f17246 data/minecraft/tags/blocks/buttons.json
+bd30638d3548dc5edd577f5ecd9edb1a877f0e4c data/minecraft/tags/blocks/mineable/pickaxe.json
+9ae953d2dab7e111cd75eebef57ac922b3d1f07d data/minecraft/tags/blocks/mineable/shovel.json
+6e5df600f52e22400209403609e411c2be6d47a5 data/minecraft/tags/blocks/pressure_plates.json
+9ae953d2dab7e111cd75eebef57ac922b3d1f07d data/minecraft/tags/blocks/sand.json
+3e4f31da31df7e54dd7de19eb47b56d08873aa2e data/minecraft/tags/blocks/slabs.json
+b940c05c1d0455ff3810b643a86acfe19c64a204 data/minecraft/tags/blocks/stairs.json
+6792d97041f3ee3c55e5ac9428fca7e207a55880 data/minecraft/tags/blocks/stone_bricks.json
+b00743946649bdd1dcba65976c17a4de06fa39b1 data/minecraft/tags/blocks/walls.json

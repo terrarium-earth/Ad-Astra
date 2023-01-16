@@ -1,0 +1,33 @@
+{
+  "values": [
+    "ad_astra:iron_plating_slab",
+    "ad_astra:steel_plating_slab",
+    "ad_astra:etrium_plating_slab",
+    "ad_astra:desmium_plating_slab",
+    "ad_astra:thermalyte_plating_slab",
+    "ad_astra:vesnium_crystal_block_slab",
+    "ad_astra:vesnium_brick_slab",
+    "ad_astra:aerolyte_plating_slab",
+    "ad_astra:sky_stone_slab",
+    "ad_astra:moon_cobblestone_slab",
+    "ad_astra:moon_stone_slab",
+    "ad_astra:polished_moon_stone_slab",
+    "ad_astra:moon_stone_brick_slab",
+    "ad_astra:mars_cobblestone_slab",
+    "ad_astra:mars_stone_slab",
+    "ad_astra:polished_mars_stone_slab",
+    "ad_astra:mars_stone_brick_slab",
+    "ad_astra:venus_cobblestone_slab",
+    "ad_astra:venus_stone_slab",
+    "ad_astra:polished_venus_stone_slab",
+    "ad_astra:venus_stone_brick_slab",
+    "ad_astra:mercury_cobblestone_slab",
+    "ad_astra:mercury_stone_slab",
+    "ad_astra:polished_mercury_stone_slab",
+    "ad_astra:mercury_stone_brick_slab",
+    "ad_astra:glacio_cobblestone_slab",
+    "ad_astra:glacio_stone_slab",
+    "ad_astra:polished_glacio_stone_slab",
+    "ad_astra:glacio_stone_brick_slab"
+  ]
+}

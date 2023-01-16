@@ -1,4 +1,4 @@
-// 1.19.3	2023-01-14T02:23:40.281314	Item Models: ad_astra
+// 1.19.3	2023-01-15T16:14:08.015516	Item Models: ad_astra
 30391f182366c0f22529481911aca797186a29d5 assets/ad_astra/models/item/aerolyte_ingot.json
 a6960cb247dd1a557f6d31391bf64859593eea40 assets/ad_astra/models/item/aerolyte_nugget.json
 09e33dd3debc1b99011c1b30d69f0d78341fb9a8 assets/ad_astra/models/item/aerolyte_plate.json
@@ -23,13 +23,13 @@ e7109879102051dadd8fba71f2568154a2282248 assets/ad_astra/models/item/oxygen_buck
 1a6682c40393e66f79705a1b243c6e2e42b54696 assets/ad_astra/models/item/photovoltaic_vesnium_cell.json
 31f8b650a54bd58e892463200844146639c29520 assets/ad_astra/models/item/raw_aerolyte.json
 aa5d8e266c5254eab858e02057681b71dac19791 assets/ad_astra/models/item/raw_desmium.json
-f126f7d955f019a2bdc2c429842928d4107e0cae assets/ad_astra/models/item/raw_thermalyte.json
+6df4c5f674f8b9042e927845959b605be19134d7 assets/ad_astra/models/item/raw_thermalyte.json
 b1d67f93992220e61d9294a53ce93bbf897daa86 assets/ad_astra/models/item/steel_ingot.json
 7edb12a0e58c9467f4c1cfeadb365287703211cb assets/ad_astra/models/item/steel_nugget.json
 b7b6067cc59b36f133c6c9d9b82ec12a04b5e4ef assets/ad_astra/models/item/steel_plate.json
 5119f05e2661a9fb2a5f6d1985438a3d77bde3e3 assets/ad_astra/models/item/steel_rod.json
+cf71b89c2adee107517da294864347cbdcc9d3ec assets/ad_astra/models/item/thermalyte_ingot.json
+66b84ec8a870ff666af6eef60f5c9faaa7695c0d assets/ad_astra/models/item/thermalyte_nugget.json
+4d25a24b81dea134bbfd23f82cec9ab9617bb097 assets/ad_astra/models/item/thermalyte_plate.json
 7015e9e8a3f20a31a305b226cf244cda18674364 assets/ad_astra/models/item/vesnium.json
 9f95296cd28f3863946094b9e4e8b84f9b52779b assets/ad_astra/models/item/wrench.json
-3e35cae508cc437c3bef74f37eeaa060ad897124 assets/ad_astra/models/item/thermalyte_ingot.json
-55bee44f07408f0643efc1cd02c58280d5b071cb assets/ad_astra/models/item/thermalyte_nugget.json
-f625f65721f6c1dd715e515fa7e32372de941de5 assets/ad_astra/models/item/thermalyte_plate.json

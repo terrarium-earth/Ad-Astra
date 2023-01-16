@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.teamresourceful.resourcefullib.client.utils.RenderUtils;
 import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.common.util.LangUtils;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.impl.WrappedBlockFluidContainer;
@@ -68,21 +69,21 @@ public class GuiUtils {
 
     public static void createEnergyTooltip(AbstractContainerScreen<?> screen, int mouseX, int mouseY, PoseStack poseStack, int x, int y, WrappedBlockEnergyContainer energyContainer) {
         if (isHovering(x, y, 19, 64, mouseX, mouseY)) {
-            Component component = Component.translatable("tooltip.ad_astra.energy_bar", energyContainer.getStoredEnergy(), energyContainer.getMaxCapacity());
+            Component component = Component.translatable(LangUtils.ENERGY_BAR, energyContainer.getStoredEnergy(), energyContainer.getMaxCapacity());
             screen.renderTooltip(poseStack, component, mouseX, mouseY);
         }
     }
 
     public static void createFluidTooltip(AbstractContainerScreen<?> screen, int mouseX, int mouseY, PoseStack poseStack, int x, int y, int tank, WrappedBlockFluidContainer fluidContainer) {
         if (isHovering(x, y, 24, 59, mouseX, mouseY)) {
-            Component component = Component.translatable("tooltip.ad_astra.fluid_tank", FluidHooks.toMillibuckets(fluidContainer.getFluids().get(tank).getFluidAmount()), FluidHooks.toMillibuckets(fluidContainer.getTankCapacity(tank)), getFluidTranslation(fluidContainer.getFluids().get(tank).getFluid()).getString());
+            Component component = Component.translatable(LangUtils.FLUID_TANK, FluidHooks.toMillibuckets(fluidContainer.getFluids().get(tank).getFluidAmount()), FluidHooks.toMillibuckets(fluidContainer.getTankCapacity(tank)), getFluidTranslation(fluidContainer.getFluids().get(tank).getFluid()).getString());
             screen.renderTooltip(poseStack, component, mouseX, mouseY);
         }
     }
 
     public static Component getFluidTranslation(Fluid fluid) {
         if (fluid.equals(Fluids.EMPTY)) {
-            return Component.translatable("tooltip.ad_astra.empty_tank").setStyle(Style.EMPTY.withColor(ChatFormatting.AQUA));
+            return Component.translatable(LangUtils.EMPTY_TANK).setStyle(Style.EMPTY.withColor(ChatFormatting.AQUA));
         }
         return Component.translatable(fluid.defaultFluidState().createLegacyBlock().getBlock().getDescriptionId()).setStyle(Style.EMPTY.withColor(ChatFormatting.AQUA));
     }

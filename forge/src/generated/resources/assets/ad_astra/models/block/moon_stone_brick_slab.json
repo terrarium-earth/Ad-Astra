@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "ad_astra:block/moon_stone_bricks",
+    "side": "ad_astra:block/moon_stone_bricks",
+    "top": "ad_astra:block/moon_stone_bricks"
+  }
+}

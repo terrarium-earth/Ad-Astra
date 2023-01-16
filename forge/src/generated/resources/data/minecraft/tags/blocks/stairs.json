@@ -1,0 +1,33 @@
+{
+  "values": [
+    "ad_astra:iron_plating_stairs",
+    "ad_astra:steel_plating_stairs",
+    "ad_astra:etrium_plating_stairs",
+    "ad_astra:desmium_plating_stairs",
+    "ad_astra:thermalyte_plating_stairs",
+    "ad_astra:vesnium_crystal_block_stairs",
+    "ad_astra:vesnium_brick_stairs",
+    "ad_astra:aerolyte_plating_stairs",
+    "ad_astra:sky_stone_stairs",
+    "ad_astra:moon_cobblestone_stairs",
+    "ad_astra:moon_stone_stairs",
+    "ad_astra:polished_moon_stone_stairs",
+    "ad_astra:moon_stone_brick_stairs",
+    "ad_astra:mars_cobblestone_stairs",
+    "ad_astra:mars_stone_stairs",
+    "ad_astra:polished_mars_stone_stairs",
+    "ad_astra:mars_stone_brick_stairs",
+    "ad_astra:venus_cobblestone_stairs",
+    "ad_astra:venus_stone_stairs",
+    "ad_astra:polished_venus_stone_stairs",
+    "ad_astra:venus_stone_brick_stairs",
+    "ad_astra:mercury_cobblestone_stairs",
+    "ad_astra:mercury_stone_stairs",
+    "ad_astra:polished_mercury_stone_stairs",
+    "ad_astra:mercury_stone_brick_stairs",
+    "ad_astra:glacio_cobblestone_stairs",
+    "ad_astra:glacio_stone_stairs",
+    "ad_astra:polished_glacio_stone_stairs",
+    "ad_astra:glacio_stone_brick_stairs"
+  ]
+}

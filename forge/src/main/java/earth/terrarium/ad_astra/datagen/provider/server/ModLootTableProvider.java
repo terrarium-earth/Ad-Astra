@@ -46,11 +46,16 @@ public class ModLootTableProvider extends LootTableProvider {
         @Override
         protected void generate() {
             ModBlocks.MACHINES.stream().map(RegistryEntry::get).forEach(this::dropSelf);
-            dropSelf(ModBlocks.SKY_STONE.get());
-            add(ModBlocks.ETRIUM_ORE.get(), this::createEtriumOreDrops);
+            ModBlocks.CUBES.stream().map(RegistryEntry::get).forEach(this::dropSelf);
+            ModBlocks.PILLARS.stream().map(RegistryEntry::get).forEach(this::dropSelf);
+            ModBlocks.STAIRS.stream().map(RegistryEntry::get).forEach(this::dropSelf);
+            ModBlocks.SLABS.stream().map(RegistryEntry::get).forEach(this::dropSelf);
+            ModBlocks.WALLS.stream().map(RegistryEntry::get).forEach(this::dropSelf);
+            ModBlocks.BUTTONS.stream().map(RegistryEntry::get).forEach(this::dropSelf);
+            ModBlocks.PRESSURE_PLATES.stream().map(RegistryEntry::get).forEach(this::dropSelf);
+
             dropSelf(ModBlocks.ETRIUM_CABLE.get());
             dropSelf(ModBlocks.DESMIUM_FLUID_PIPE.get());
-            ModBlocks.STORAGE_BLOCKS.stream().map(RegistryEntry::get).forEach(this::dropSelf);
         }
 
         @Override

@@ -43,7 +43,7 @@ public class EtrionicCapacitorItem extends Item implements EnergyAttachment.Item
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag isAdvanced) {
         long energy = getEnergyStorage(stack).getStoredEnergy();
         // Make use config
-        tooltip.add(Component.translatable("tooltip.ad_astra.energy_bar", energy, 250000).setStyle(Style.EMPTY.withColor(energy > 0 ? ChatFormatting.GREEN : ChatFormatting.RED)));
+        tooltip.add(Component.translatable(LangUtils.ENERGY_BAR, energy, 250000).setStyle(Style.EMPTY.withColor(energy > 0 ? ChatFormatting.GREEN : ChatFormatting.RED)));
     }
 
     @Override

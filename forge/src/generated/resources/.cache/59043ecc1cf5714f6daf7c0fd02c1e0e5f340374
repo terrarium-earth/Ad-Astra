@@ -1,4 +1,4 @@
-// 1.19.3	2023-01-14T17:31:21.58521	Tags for minecraft:item mod id ad_astra
+// 1.19.3	2023-01-15T18:11:47.144814	Tags for minecraft:item mod id ad_astra
 e72be7c655197e01ef0188d75736c820ad4b5738 data/ad_astra/tags/items/aerolyte_blocks.json
 4718082af51c76e5ad7b042e177e73a198d74be5 data/ad_astra/tags/items/aerolyte_ingots.json
 e833a971932857dc528558cfc7dcd3d3f977162b data/ad_astra/tags/items/aerolyte_nuggets.json
@@ -18,8 +18,14 @@ eefb68f5b21ec8c3faa61d335034ff89f56780c1 data/ad_astra/tags/items/steel_ingots.j
 75652ad91c3d15d289e74e13b8cd445d9830f240 data/ad_astra/tags/items/steel_nuggets.json
 29c8a67406748c2283a13c32696bfa2b01756042 data/ad_astra/tags/items/steel_plates.json
 e9d89434d32ef63195160fdef377a8f91b0180eb data/ad_astra/tags/items/steel_rods.json
+24dc0f7e40766a389e616677916110bd8978b66e data/ad_astra/tags/items/thermalyte_blocks.json
+e4ca0214cefcf32b2dfc45686e64e820783aab8a data/ad_astra/tags/items/thermalyte_ingots.json
+1154d0f09f95bfbc3dba5957831f2c02b305bde8 data/ad_astra/tags/items/thermalyte_nuggets.json
+97be19d293b0d4f3f22fdc1bedcc4692507fe7eb data/ad_astra/tags/items/thermalyte_plates.json
 148a80dc69895b2ec8e65b2b7c5e90c98c7332e1 data/ad_astra/tags/items/vesnium_blocks.json
-914d1d19fb6bfaea00c6c1e88d5fc87c6bb63b53 data/ad_astra/tags/items/thermalyte_blocks.json
-53c55aa73f2681c213af63ddd81725c95908f91f data/ad_astra/tags/items/thermalyte_ingots.json
-51f271f07aa763857547714ee901affb50343156 data/ad_astra/tags/items/thermalyte_nuggets.json
-b62d34cf60f1ac0ec0652cfc3620ead4f908a2c7 data/ad_astra/tags/items/thermalyte_plates.json
+70ba8e2dc3088855111e3eff8a60f9e845f17246 data/minecraft/tags/items/buttons.json
+9ae953d2dab7e111cd75eebef57ac922b3d1f07d data/minecraft/tags/items/sand.json
+3e4f31da31df7e54dd7de19eb47b56d08873aa2e data/minecraft/tags/items/slabs.json
+b940c05c1d0455ff3810b643a86acfe19c64a204 data/minecraft/tags/items/stairs.json
+6792d97041f3ee3c55e5ac9428fca7e207a55880 data/minecraft/tags/items/stone_bricks.json
+b00743946649bdd1dcba65976c17a4de06fa39b1 data/minecraft/tags/items/walls.json

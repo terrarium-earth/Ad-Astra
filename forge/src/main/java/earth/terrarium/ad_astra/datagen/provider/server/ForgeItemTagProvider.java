@@ -3,10 +3,8 @@ package earth.terrarium.ad_astra.datagen.provider.server;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.registry.ModItems;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.Registry;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.TagsProvider;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagEntry;
 import net.minecraft.tags.TagKey;
@@ -14,15 +12,13 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
 public class ForgeItemTagProvider extends TagsProvider<Item> {
-    public ForgeItemTagProvider(PackOutput arg, ResourceKey<? extends Registry<Item>> arg2, CompletableFuture<HolderLookup.Provider> completableFuture, @Nullable ExistingFileHelper existingFileHelper) {
-        super(arg, arg2, completableFuture, AdAstra.MOD_ID + "_forge", existingFileHelper);
+    public ForgeItemTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> completableFuture, ExistingFileHelper existingFileHelper) {
+        super(output, ForgeRegistries.ITEMS.getRegistryKey(), completableFuture, AdAstra.MOD_ID + "_forge", existingFileHelper);
     }
-
 
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {

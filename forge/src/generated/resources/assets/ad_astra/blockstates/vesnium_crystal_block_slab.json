@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "ad_astra:block/vesnium_crystal_block_slab"
+    },
+    "type=double": {
+      "model": "ad_astra:block/vesnium_crystal_block"
+    },
+    "type=top": {
+      "model": "ad_astra:block/vesnium_crystal_block_slab_top"
+    }
+  }
+}

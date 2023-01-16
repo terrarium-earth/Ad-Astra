@@ -4,10 +4,7 @@ import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.datagen.provider.client.ModBlockStateProvider;
 import earth.terrarium.ad_astra.datagen.provider.client.ModItemModelProvider;
 import earth.terrarium.ad_astra.datagen.provider.client.ModLangProvider;
-import earth.terrarium.ad_astra.datagen.provider.server.ForgeItemTagProvider;
-import earth.terrarium.ad_astra.datagen.provider.server.ModItemTagProvider;
-import earth.terrarium.ad_astra.datagen.provider.server.ModLootTableProvider;
-import earth.terrarium.ad_astra.datagen.provider.server.ModRecipeProvider;
+import earth.terrarium.ad_astra.datagen.provider.server.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -15,7 +12,6 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -37,9 +33,8 @@ public final class AdAstraDataGenerator {
         // Server
         generator.addProvider(event.includeServer(), new ModLootTableProvider(generator.getPackOutput()));
         generator.addProvider(event.includeServer(), new ModRecipeProvider(packOutput));
-//        ModBlockTagProvider blockTagProvider = new ModBlockTagProvider(generator, existingFileHelper);
-//        generator.addProvider(event.includeServer(), blockTagProvider);
-        generator.addProvider(event.includeServer(), new ModItemTagProvider(packOutput, ForgeRegistries.ITEMS.getRegistryKey(), lookupProvider, existingFileHelper));
-        generator.addProvider(event.includeServer(), new ForgeItemTagProvider(packOutput, ForgeRegistries.ITEMS.getRegistryKey(), lookupProvider, existingFileHelper));
+        generator.addProvider(event.includeServer(), new ModItemTagProvider(packOutput, lookupProvider, existingFileHelper));
+        generator.addProvider(event.includeServer(), new ModBlockTagProvider(packOutput, lookupProvider, existingFileHelper));
+        generator.addProvider(event.includeServer(), new ForgeItemTagProvider(packOutput, lookupProvider, existingFileHelper));
     }
 }
