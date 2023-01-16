@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/button_inventory",
+  "textures": {
+    "particle": "ad_astra:block/thermalyte_block",
+    "texture": "ad_astra:block/thermalyte_block"
+  }
+}

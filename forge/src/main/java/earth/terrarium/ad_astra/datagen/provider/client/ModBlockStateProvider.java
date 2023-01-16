@@ -17,6 +17,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModBlockStateProvider extends BlockStateProvider {
 
+    private static final ResourceLocation SOLAR_PANEL = new ResourceLocation(AdAstra.MOD_ID, "block/solar_panel");
     private static final ResourceLocation WALL_INVENTORY = new ResourceLocation("minecraft:block/wall_inventory");
     private static final ResourceLocation BUTTON_INVENTORY = new ResourceLocation("minecraft:block/button_inventory");
     private static final ResourceLocation WATER_STILL = new ResourceLocation("minecraft:block/water_still");
@@ -33,6 +34,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
     protected void registerStatesAndModels() {
 
         ModBlocks.FLUIDS.stream().map(RegistryEntry::get).forEach(fluid -> block(fluid, "particle", WATER_STILL.toString()));
+
+        horizontalBlock(ModBlocks.ETRIONIC_SOLAR_PANEL.get(), SOLAR_PANEL, "texture");
+        horizontalBlock(ModBlocks.VESNIUM_SOLAR_PANEL.get(), SOLAR_PANEL, "texture");
 
         ModBlocks.CUBES.stream().map(RegistryEntry::get).forEach(this::simpleBlock);
         ModBlocks.PILLARS.stream().map(RegistryEntry::get).forEach(b -> logBlock((RotatedPillarBlock) b));
@@ -121,6 +125,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     private ResourceLocation key(Block block) {
         return ForgeRegistries.BLOCKS.getKey(block);
+    }
+
+    private void horizontalBlock(Block block, ResourceLocation parent, String texture) {
+        horizontalBlock(block, models().getBuilder(name(block)).texture(texture, blockTexture(block)).texture("particle", blockTexture(block)).parent(models().getExistingFile(parent)));
     }
 
     private String name(Block block) {

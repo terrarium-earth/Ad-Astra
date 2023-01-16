@@ -1,4 +1,4 @@
-// 1.19.3	2023-01-15T18:38:54.478488	Block States: ad_astra
+// 1.19.3	2023-01-15T19:53:24.645092	Block States: ad_astra
 86e095372f182cd8973e5cec1199a3280424f4a6 assets/ad_astra/blockstates/aerolyte_block.json
 f0ad8b62db17399a4d1fd952c655171c31f95ec6 assets/ad_astra/blockstates/aerolyte_button.json
 5bd9c93b7587d8c0024543c60ed25870e7c69bcc assets/ad_astra/blockstates/aerolyte_pillar.json
@@ -27,6 +27,7 @@ d13ad5a93609604e79b967bdf8ad8169feb13df7 assets/ad_astra/blockstates/desmium_pla
 b638ab485bc3087e1a0ad08d96cb3abf34f9e88b assets/ad_astra/blockstates/desmium_plating_stairs.json
 05900d745a8c3e5e5b56aaa39005703ffe8b281d assets/ad_astra/blockstates/desmium_pressure_plate.json
 0d2b6827806bcb2c57c478c36d634114ed0018c5 assets/ad_astra/blockstates/etrionic_fuel.json
+788bb2fb8cb4ebe9cbe449c0d82b6f9f50bfb5bd assets/ad_astra/blockstates/etrionic_solar_panel.json
 4af2937e90fb12d3fd391dc8d2886b77d5bfac8b assets/ad_astra/blockstates/etrium_block.json
 7977d954f4834392ddd1c5e7b135823d477b969f assets/ad_astra/blockstates/etrium_button.json
 6a16d20924bfa80fc241c15f7a21674ce0b69b70 assets/ad_astra/blockstates/etrium_ore.json
@@ -154,6 +155,7 @@ e47242e4b22efd12d2548c3dc5510a1a436c48f5 assets/ad_astra/blockstates/venus_stone
 f19207be00ea663f3f0a9cd102901dbc654ddc96 assets/ad_astra/blockstates/vesnium_crystal_block_slab.json
 7e4119e87634b5a9e167e5178a74dfe322d0af5d assets/ad_astra/blockstates/vesnium_crystal_block_stairs.json
 e8f8eec25caa51f424b02d8c4d1f54c0c9906319 assets/ad_astra/blockstates/vesnium_pillar.json
+1d8ed84b472f8daefb4d92dcde111e98c06de357 assets/ad_astra/blockstates/vesnium_solar_panel.json
 4dba4bd0601929a3220ab688e097651119a6abb4 assets/ad_astra/models/block/aerolyte_block.json
 2678c5605c7424ba9e485414bcecbb5020b1de50 assets/ad_astra/models/block/aerolyte_button.json
 92de0beb2c144effa9410c0b153538cd23eca1c9 assets/ad_astra/models/block/aerolyte_button_inventory.json
@@ -197,6 +199,7 @@ a501715e05f7aa8fb7b51bb137d9906dfcc29b04 assets/ad_astra/models/block/desmium_pl
 4594df66dea966adb9c0641fac9128ab6a4bc78c assets/ad_astra/models/block/desmium_pressure_plate.json
 f892d7c899a7cf93c181290cb63eba2540c8a91b assets/ad_astra/models/block/desmium_pressure_plate_down.json
 50812bd51e14ec5ea223afe239c89730a63e43b1 assets/ad_astra/models/block/etrionic_fuel.json
+6701e65085ad03a3df793f787761c1829feedd61 assets/ad_astra/models/block/etrionic_solar_panel.json
 1ac519b1ff01aa4618c9c2b410a08b67b81702eb assets/ad_astra/models/block/etrium_block.json
 a21635ccb5ddf9a0db124a9520277b4c7a86c407 assets/ad_astra/models/block/etrium_button.json
 7890f317272864738233ea86638c6da759b27ebc assets/ad_astra/models/block/etrium_button_inventory.json
@@ -461,6 +464,7 @@ ab7e80d21aa6df582caca26d8487b8dec4ae922a assets/ad_astra/models/block/vesnium_cr
 543cfd7884bda98a7ddb087dc31011879bc6f6c8 assets/ad_astra/models/block/vesnium_crystal_block_stairs_outer.json
 4347868735bd7034e4c7506eabdff41e8e6fad59 assets/ad_astra/models/block/vesnium_pillar.json
 b30e6ad26cd9d4b20412f28c78755bc155367e89 assets/ad_astra/models/block/vesnium_pillar_horizontal.json
+4fccd154181ed03f7d52afff46cb419f7a4122c0 assets/ad_astra/models/block/vesnium_solar_panel.json
 0a270a7764f6b4a5d6f07c333be9bdfb0fe3b8fb assets/ad_astra/models/item/aerolyte_block.json
 0f4cae9364f5ceb75cfbf2bd9d0dadb801cfb9b0 assets/ad_astra/models/item/aerolyte_button.json
 781a3d4c3306cd69a70c3d6d6120ae2e73ae7090 assets/ad_astra/models/item/aerolyte_pillar.json

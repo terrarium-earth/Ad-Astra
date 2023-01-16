@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "minecraft:dispenser"
+    "ad_astra:etrionic_generator",
+    "ad_astra:etrionic_blast_furnace"
   ]
 }
