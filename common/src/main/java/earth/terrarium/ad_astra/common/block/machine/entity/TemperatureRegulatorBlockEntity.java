@@ -33,7 +33,7 @@ public class TemperatureRegulatorBlockEntity extends ContainerMachineBlockEntity
     private WrappedBlockEnergyContainer energyContainer;
     private WrappedBlockFluidContainer fluidContainer;
     private boolean showTemperature;
-    private int temperatureTarget = 0;
+    private int temperatureTarget;
     private int currentTemperature;
     private final Set<BlockPos> sources = new HashSet<>();
 
@@ -87,6 +87,14 @@ public class TemperatureRegulatorBlockEntity extends ContainerMachineBlockEntity
 
     public int getCurrentTemperature() {
         return this.currentTemperature;
+    }
+
+    public int getTemperatureTarget() {
+        return this.temperatureTarget;
+    }
+
+    public Set<BlockPos> getSources() {
+        return this.sources;
     }
 
     @Override

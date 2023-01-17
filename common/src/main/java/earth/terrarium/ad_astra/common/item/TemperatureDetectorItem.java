@@ -41,8 +41,7 @@ public class TemperatureDetectorItem extends Item {
                 }
                 return (int) (o1.getBlockPos().distSqr(player.blockPosition()) - o2.getBlockPos().distSqr(player.blockPosition()));
             });
-
-            if (blockEntities.size() > 0) {
+            if (blockEntities.size() > 0 && (TemperatureSystem.posSafeTemperature(level, player.blockPosition().above()) || !TemperatureSystem.isSafeTemperature(blockEntities.get(0).getCurrentTemperature()) && player.blockPosition().distSqr(blockEntities.get(0).getBlockPos()) < 100)) {
                 player.displayClientMessage(Component.translatable(LangUtils.TEMPERATURE_DETECTED, blockEntities.get(0).getCurrentTemperature()), true);
             } else {
                 player.displayClientMessage(Component.translatable(LangUtils.TEMPERATURE_DETECTED, TemperatureSystem.getLevelTemperature(level)), true);

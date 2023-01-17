@@ -16,6 +16,7 @@
     "ad_astra:recycler",
     "ad_astra:oxygen_distributor",
     "ad_astra:temperature_regulator",
+    "ad_astra:gravity_normalizer",
     "ad_astra:water_pump",
     "ad_astra:iron_plating",
     "ad_astra:iron_plating_stairs",

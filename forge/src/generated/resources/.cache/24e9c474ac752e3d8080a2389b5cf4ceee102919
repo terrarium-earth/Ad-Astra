@@ -1,4 +1,4 @@
-// 1.19.3	2023-01-15T19:53:24.645092	Block States: ad_astra
+// 1.19.3	2023-01-16T23:44:40.562855	Block States: ad_astra
 86e095372f182cd8973e5cec1199a3280424f4a6 assets/ad_astra/blockstates/aerolyte_block.json
 f0ad8b62db17399a4d1fd952c655171c31f95ec6 assets/ad_astra/blockstates/aerolyte_button.json
 5bd9c93b7587d8c0024543c60ed25870e7c69bcc assets/ad_astra/blockstates/aerolyte_pillar.json
@@ -522,6 +522,7 @@ d26a8a458d905a12de16db0065f72cf6242ee0b1 assets/ad_astra/models/item/glowing_des
 8bf791242021c18c2ea2ca9a446eb243dc366c48 assets/ad_astra/models/item/glowing_iron_pillar.json
 f8e51f0d2b3109c9e2ac459ef8cbad79f6d032ab assets/ad_astra/models/item/glowing_steel_pillar.json
 1f22caff69bcac60c7f130139e69178ac1b013f0 assets/ad_astra/models/item/glowing_thermalyte_pillar.json
+b543f3dafc2308d5398a002c33a45ac6cdeac0cb assets/ad_astra/models/item/gravity_normalizer.json
 a953e21b63e1039d27f76777dbbc4425aa28e206 assets/ad_astra/models/item/hydraulic_press.json
 c1616deba3854912e3e81525928e92869fb7c213 assets/ad_astra/models/item/iron_pillar.json
 4ffcff0639e856cc9d83bf0c14aeffa82d4b0861 assets/ad_astra/models/item/iron_plating.json

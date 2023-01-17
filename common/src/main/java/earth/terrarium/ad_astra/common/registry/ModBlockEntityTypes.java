@@ -28,6 +28,7 @@ public class ModBlockEntityTypes {
     public static final RegistryEntry<BlockEntityType<RecyclerBlockEntity>> RECYCLER = BLOCK_ENTITY_TYPES.register("recycler", () -> createBlockEntityType(RecyclerBlockEntity::new, ModBlocks.RECYCLER.get()));
     public static final RegistryEntry<BlockEntityType<OxygenDistributorBlockEntity>> OXYGEN_DISTRIBUTOR = BLOCK_ENTITY_TYPES.register("oxygen_distributor", () -> createBlockEntityType(OxygenDistributorBlockEntity::new, ModBlocks.OXYGEN_DISTRIBUTOR.get()));
     public static final RegistryEntry<BlockEntityType<TemperatureRegulatorBlockEntity>> TEMPERATURE_REGULATOR = BLOCK_ENTITY_TYPES.register("temperature_regulator", () -> createBlockEntityType(TemperatureRegulatorBlockEntity::new, ModBlocks.TEMPERATURE_REGULATOR.get()));
+    public static final RegistryEntry<BlockEntityType<GravityNormalizerBlockEntity>> GRAVITY_NORMALIZER = BLOCK_ENTITY_TYPES.register("gravity_normalizer", () -> createBlockEntityType(GravityNormalizerBlockEntity::new, ModBlocks.GRAVITY_NORMALIZER.get()));
     public static final RegistryEntry<BlockEntityType<WaterPumpBlockEntity>> WATER_PUMP = BLOCK_ENTITY_TYPES.register("water_pump", () -> createBlockEntityType(WaterPumpBlockEntity::new, ModBlocks.WATER_PUMP.get()));
 
     public static final RegistryEntry<BlockEntityType<CableBlockEntity>> CABLE = BLOCK_ENTITY_TYPES.register("cable", () -> createBlockEntityType(CableBlockEntity::new, ModBlocks.ETRIUM_CABLE.get()));

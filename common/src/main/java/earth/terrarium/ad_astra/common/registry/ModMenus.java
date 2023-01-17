@@ -24,5 +24,6 @@ public class ModMenus {
     public static final RegistryEntry<MenuType<RecyclerMenu>> RECYCLER = MENUS.register("recycler", () -> RegistryHelpers.createMenuType(RecyclerMenu::new));
     public static final RegistryEntry<MenuType<OxygenDistributorMenu>> OXYGEN_DISTRIBUTOR = MENUS.register("oxygen_distributor", () -> RegistryHelpers.createMenuType(OxygenDistributorMenu::new));
     public static final RegistryEntry<MenuType<TemperatureRegulatorMenu>> TEMPERATURE_REGULATOR = MENUS.register("temperature_regulator", () -> RegistryHelpers.createMenuType(TemperatureRegulatorMenu::new));
+    public static final RegistryEntry<MenuType<GravityNormalizerMenu>> GRAVITY_NORMALIZER = MENUS.register("gravity_normalizer", () -> RegistryHelpers.createMenuType(GravityNormalizerMenu::new));
     public static final RegistryEntry<MenuType<WaterPumpMenu>> WATER_PUMP = MENUS.register("water_pump", () -> RegistryHelpers.createMenuType(WaterPumpMenu::new));
 }

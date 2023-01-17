@@ -1,4 +1,4 @@
-// 1.19.3	2023-01-16T04:06:31.368418	Item Models: ad_astra
+// 1.19.3	2023-01-16T23:44:40.578674	Item Models: ad_astra
 30391f182366c0f22529481911aca797186a29d5 assets/ad_astra/models/item/aerolyte_ingot.json
 a6960cb247dd1a557f6d31391bf64859593eea40 assets/ad_astra/models/item/aerolyte_nugget.json
 09e33dd3debc1b99011c1b30d69f0d78341fb9a8 assets/ad_astra/models/item/aerolyte_plate.json
@@ -14,6 +14,7 @@ f177de1667391e8fbcbe7495869ec17fe8533bd9 assets/ad_astra/models/item/desmium_pla
 6135f709b2694a4a027e444695d5c1fdee5a0462 assets/ad_astra/models/item/etrium_ingot.json
 591c62e3155b2c598a34b2397ae41fa7cb342a76 assets/ad_astra/models/item/etrium_nugget.json
 610b56d23a1cbf784bb3888c12aab9202b6065a5 assets/ad_astra/models/item/etrium_plate.json
+5791c44a098c33b10a2c4cdf243a7557d56bb01e assets/ad_astra/models/item/gravity_detector.json
 94880a02ec8d259ab370c1a6fe5f083998f148ac assets/ad_astra/models/item/hydrogen_bucket.json
 7d828e314b4ba4d5fa172b04c76b02fb45e69097 assets/ad_astra/models/item/iron_plate.json
 4715b78d10f24a12edfd8acdeb2f7d10ef1c0745 assets/ad_astra/models/item/iron_rod.json

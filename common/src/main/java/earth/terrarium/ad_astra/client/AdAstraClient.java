@@ -43,6 +43,7 @@ public class AdAstraClient {
         ClientPlatformUtils.registerScreen(ModMenus.RECYCLER.get(), TestScreen::new);
         ClientPlatformUtils.registerScreen(ModMenus.OXYGEN_DISTRIBUTOR.get(), TestScreen::new);
         ClientPlatformUtils.registerScreen(ModMenus.TEMPERATURE_REGULATOR.get(), TestScreen::new);
+        ClientPlatformUtils.registerScreen(ModMenus.GRAVITY_NORMALIZER.get(), TestScreen::new);
         ClientPlatformUtils.registerScreen(ModMenus.WATER_PUMP.get(), TestScreen::new);
     }
 

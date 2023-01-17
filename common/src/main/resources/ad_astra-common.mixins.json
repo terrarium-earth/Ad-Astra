@@ -4,7 +4,14 @@
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8.5",
   "mixins": [
-    "LivingEntityMixin"
+    "LivingEntityMixin",
+    "gravity.AbstractArrowMixin",
+    "gravity.BoatMixin",
+    "gravity.CommonGravityEntityMixin",
+    "gravity.FishingHookMixin",
+    "gravity.ThrowableProjectileMixin",
+    "gravity.ThrownExperienceBottleMixin",
+    "gravity.ThrownPotionMixin"
   ],
   "client": [
   ],
