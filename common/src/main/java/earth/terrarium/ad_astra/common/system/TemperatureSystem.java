@@ -15,11 +15,13 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 public class TemperatureSystem {
-    private static final Map<ResourceKey<Level>, Map<BlockPos, Integer>> TEMPERATURE_CACHE = new HashMap<>();
+    private static final Map<ResourceKey<Level>, Set<BlockPos>> TEMPERATURE_CACHE = new HashMap<>();
+    public static final Set<BlockPos> TEMPERATURE_REGULATOR_BLOCKS = new HashSet<>();
     public static final InclusiveRange<Integer> SAFE_TEMPERATURE = new InclusiveRange<>(-50, 50);
     public static final int TARGET_TEMPERATURE = 20;
 
@@ -28,44 +30,34 @@ public class TemperatureSystem {
     }
 
     public static int getLevelTemperature(Level level) {
-        return PlanetData.getPlanetTemperatures().get(level.dimension());
+        return getLevelTemperature(level.dimension());
     }
 
-    public static int getEntityTemperature(Entity entity) {
-        return getPosTemperature(entity.level, entity.blockPosition());
+    public static int getLevelTemperature(ResourceKey<Level> level) {
+        return PlanetData.getPlanetTemperatures().get(level);
     }
 
-    public static int getPosTemperature(Level level, BlockPos pos) {
-        return TEMPERATURE_CACHE.containsKey(level.dimension()) ? TEMPERATURE_CACHE.get(level.dimension()).getOrDefault(pos, getLevelTemperature(level)) : getLevelTemperature(level);
+    public static boolean entitySafeTemperature(Entity entity) {
+        return posSafeTemperature(entity.level, entity.blockPosition().above());
     }
 
-    public static void addTemperatureSource(Level level, Map<BlockPos, Integer> positions) {
-        positions.putAll(TEMPERATURE_CACHE.getOrDefault(level.dimension(), new HashMap<>()));
+    public static boolean posSafeTemperature(Level level, BlockPos pos) {
+        return isSafeTemperature(getLevelTemperature(level)) || TEMPERATURE_CACHE.containsKey(level.dimension()) && TEMPERATURE_CACHE.get(level.dimension()).contains(pos);
+    }
+
+    public static void addTemperatureSource(Level level, Set<BlockPos> positions) {
+        positions.addAll(TEMPERATURE_CACHE.getOrDefault(level.dimension(), new HashSet<>()));
         TEMPERATURE_CACHE.put(level.dimension(), positions);
     }
 
-    public static void modifyTemperatureSources(Level level, Set<BlockPos> positions, int modifier, int target) {
-        Map<BlockPos, Integer> temperatureMap = TEMPERATURE_CACHE.getOrDefault(level.dimension(), new HashMap<>());
-        int levelTemperature = getLevelTemperature(level);
-
-        positions.forEach(pos -> {
-            if (temperatureMap.containsKey(pos)) {
-                if (temperatureMap.get(pos) > target) {
-                    temperatureMap.put(pos, Math.max(temperatureMap.get(pos) - modifier, target));
-                } else if (temperatureMap.get(pos) < target) {
-                    temperatureMap.put(pos, Math.min(temperatureMap.get(pos) + modifier, target));
-                }
-            } else {
-                temperatureMap.put(pos, levelTemperature);
-            }
-        });
-
-        TEMPERATURE_CACHE.put(level.dimension(), temperatureMap);
+    public static void removeTemperatureSource(Level level, Set<BlockPos> positions) {
+        TEMPERATURE_CACHE.getOrDefault(level.dimension(), new HashSet<>()).removeAll(positions);
     }
 
     public static void livingEntityTick(LivingEntity entity, ServerLevel level) {
         if (level.getGameTime() % 20 != 0) return;
-        int temperature = getEntityTemperature(entity);
+        if (entitySafeTemperature(entity)) return;
+        int temperature = getLevelTemperature(level);
         if (temperature > SAFE_TEMPERATURE.maxInclusive()) {
             entity.hurt(DamageSource.ON_FIRE, 6);
             entity.setSecondsOnFire(10);

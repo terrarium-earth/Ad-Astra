@@ -16,13 +16,18 @@ import java.util.Set;
 
 public class OxygenSystem {
     private static final Map<ResourceKey<Level>, Set<BlockPos>> OXYGEN_CACHE = new HashMap<>();
+    public static final Set<BlockPos> OXYGEN_DISTRIBUTOR_BLOCKS = new HashSet<>();
 
     public static boolean levelHasOxygen(Level level) {
-        return PlanetData.getPlanetsWithOxygen().contains(level.dimension());
+        return levelHasOxygen(level.dimension());
+    }
+
+    public static boolean levelHasOxygen(ResourceKey<Level> level) {
+        return PlanetData.getPlanetsWithOxygen().contains(level);
     }
 
     public static boolean entityHasOxygen(Entity entity) {
-        return posHasOxygen(entity.level, entity.blockPosition());
+        return posHasOxygen(entity.level, entity.blockPosition().above());
     }
 
     public static boolean posHasOxygen(Level level, BlockPos pos) {
@@ -32,6 +37,10 @@ public class OxygenSystem {
     public static void addOxygenSource(Level level, Set<BlockPos> positions) {
         positions.addAll(OXYGEN_CACHE.getOrDefault(level.dimension(), new HashSet<>()));
         OXYGEN_CACHE.put(level.dimension(), positions);
+    }
+
+    public static void removeOxygenSource(Level level, Set<BlockPos> positions) {
+        OXYGEN_CACHE.getOrDefault(level.dimension(), new HashSet<>()).removeAll(positions);
     }
 
     public static void livingEntityTick(LivingEntity entity, ServerLevel level) {

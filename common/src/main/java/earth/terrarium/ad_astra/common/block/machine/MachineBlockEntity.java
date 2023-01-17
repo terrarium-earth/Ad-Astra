@@ -21,6 +21,10 @@ public abstract class MachineBlockEntity extends BlockEntity {
     public void serverTick() {
     }
 
+    public void onDestroy() {
+
+    }
+
     @Override
     public @NotNull CompoundTag getUpdateTag() {
         return this.saveWithoutMetadata();

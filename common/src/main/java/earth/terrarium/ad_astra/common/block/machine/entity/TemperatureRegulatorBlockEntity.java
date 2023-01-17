@@ -23,14 +23,19 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashSet;
 import java.util.Set;
 
 @MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
 public class TemperatureRegulatorBlockEntity extends ContainerMachineBlockEntity implements EnergyAttachment.Block, FluidAttachment.Block {
     private WrappedBlockEnergyContainer energyContainer;
     private WrappedBlockFluidContainer fluidContainer;
-    private boolean showTemperature = false;
-    private int temperatureTarget = TemperatureSystem.TARGET_TEMPERATURE;
+    private boolean showTemperature;
+    private int temperatureTarget = 0;
+    private int currentTemperature;
+    private final Set<BlockPos> sources = new HashSet<>();
 
     public TemperatureRegulatorBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntityTypes.TEMPERATURE_REGULATOR.get(), blockPos, blockState, 2);
@@ -41,6 +46,7 @@ public class TemperatureRegulatorBlockEntity extends ContainerMachineBlockEntity
         super.load(tag);
         this.showTemperature = tag.getBoolean("ShowTemperature");
         this.temperatureTarget = tag.getInt("TemperatureTarget");
+        this.currentTemperature = tag.getInt("CurrentTemperature");
     }
 
     @Override
@@ -48,26 +54,39 @@ public class TemperatureRegulatorBlockEntity extends ContainerMachineBlockEntity
         super.saveAdditional(tag);
         tag.putBoolean("ShowTemperature", this.showTemperature);
         tag.putInt("TemperatureTarget", this.temperatureTarget);
+        tag.putInt("CurrentTemperature", this.currentTemperature);
     }
 
     @Override
     public void serverTick() {
         if (level == null) return;
-        if (!getFluidContainer().isEmpty()) {
-            if (level.getGameTime() % 40 == 0) {
-                int energyCost = 1000; // TODO: Calculate energy and fluid costs
-                int oxygenCost = 50;
+        if (temperatureTarget == 0) {
+            temperatureTarget = TemperatureSystem.TARGET_TEMPERATURE;
+            currentTemperature = TemperatureSystem.getLevelTemperature(this.level);
+        }
+        if (level.getGameTime() % 40 == 0) {
+            int energyCost = 1000; // TODO: Calculate energy and fluid costs
+            long hydrogenCost = FluidHooks.buckets(0.01f);
 
-                if (this.getEnergyStorage().internalExtract(energyCost, true) >= energyCost) {
-                    if (getFluidContainer().extractFluid(FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(0).getFluid(), oxygenCost, null), true).getFluidAmount() > 0) {
-                        this.getEnergyStorage().internalExtract(energyCost, false);
+            if (this.getEnergyStorage().internalExtract(energyCost, true) >= energyCost) {
+                if (getFluidContainer().extractFluid(FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(0).getFluid(), hydrogenCost, null), true).getFluidAmount() > 0) {
+                    this.getEnergyStorage().internalExtract(energyCost, false);
 
-                        getFluidContainer().extractFluid(FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(0).getFluid(), oxygenCost, null), false);
-                        this.craft();
-                    }
+                    getFluidContainer().extractFluid(FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(0).getFluid(), hydrogenCost, null), false);
+                    this.craft();
+                } else {
+                    this.clearSources();
+                    this.currentTemperature = TemperatureSystem.getLevelTemperature(this.level);
                 }
+            } else {
+                this.clearSources();
+                this.currentTemperature = TemperatureSystem.getLevelTemperature(this.level);
             }
         }
+    }
+
+    public int getCurrentTemperature() {
+        return this.currentTemperature;
     }
 
     @Override
@@ -98,11 +117,35 @@ public class TemperatureRegulatorBlockEntity extends ContainerMachineBlockEntity
         this.updateFluidSlots();
     }
 
+    @Override
+    public void onDestroy() {
+        this.clearSources();
+    }
+
+    public void clearSources() {
+        if (level == null) return;
+        if (level.isClientSide) return;
+        TemperatureSystem.removeTemperatureSource(level, sources);
+        TemperatureSystem.TEMPERATURE_REGULATOR_BLOCKS.remove(this.getBlockPos());
+        sources.clear();
+    }
+
     private void craft() {
         if (level == null) return;
-        Set<BlockPos> positions = FloodFiller3D.run(level, getBlockPos().above());
-        TemperatureSystem.modifyTemperatureSources(level, positions, 10, this.temperatureTarget);
         update();
+
+        if (this.currentTemperature > this.temperatureTarget) {
+            this.currentTemperature = Math.max(this.currentTemperature - 10, this.temperatureTarget);
+        } else if (this.currentTemperature < this.temperatureTarget) {
+            this.currentTemperature = Math.min(this.currentTemperature + 10, this.temperatureTarget);
+        }
+        this.clearSources();
+        TemperatureSystem.TEMPERATURE_REGULATOR_BLOCKS.add(this.getBlockPos());
+        if (!TemperatureSystem.isSafeTemperature(this.currentTemperature)) return;
+
+        Set<BlockPos> positions = FloodFiller3D.run(level, getBlockPos().above());
+        TemperatureSystem.addTemperatureSource(level, positions);
+        sources.addAll(positions);
     }
 
     @Override

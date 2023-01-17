@@ -24,6 +24,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.HashSet;
 import java.util.Set;
 
 @MethodsReturnNonnullByDefault
@@ -32,6 +33,7 @@ public class OxygenDistributorBlockEntity extends ContainerMachineBlockEntity im
     private WrappedBlockEnergyContainer energyContainer;
     private WrappedBlockFluidContainer fluidContainer;
     private boolean showOxygen = false;
+    private final Set<BlockPos> sources = new HashSet<>();
 
     public OxygenDistributorBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntityTypes.OXYGEN_DISTRIBUTOR.get(), blockPos, blockState, 2);
@@ -52,19 +54,21 @@ public class OxygenDistributorBlockEntity extends ContainerMachineBlockEntity im
     @Override
     public void serverTick() {
         if (level == null) return;
-        if (!getFluidContainer().isEmpty()) {
-            if (level.getGameTime() % 40 == 0) {
-                int energyCost = 100; // TODO: Calculate energy and fluid costs
-                long oxygenCost = FluidHooks.buckets(0.05);
+        if (level.getGameTime() % 40 == 0) {
+            int energyCost = 100; // TODO: Calculate energy and fluid costs
+            long oxygenCost = FluidHooks.buckets(0.01);
 
-                if (this.getEnergyStorage().internalExtract(energyCost, true) >= energyCost) {
-                    if (getFluidContainer().extractFluid(FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(0).getFluid(), oxygenCost, null), true).getFluidAmount() > 0) {
-                        this.getEnergyStorage().internalExtract(energyCost, false);
+            if (this.getEnergyStorage().internalExtract(energyCost, true) >= energyCost) {
+                if (getFluidContainer().extractFluid(FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(0).getFluid(), oxygenCost, null), true).getFluidAmount() > 0) {
+                    this.getEnergyStorage().internalExtract(energyCost, false);
 
-                        getFluidContainer().extractFluid(FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(0).getFluid(), oxygenCost, null), false);
-                        this.craft();
-                    }
+                    getFluidContainer().extractFluid(FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(0).getFluid(), oxygenCost, null), false);
+                    this.craft();
+                } else {
+                    this.clearSources();
                 }
+            } else {
+                this.clearSources();
             }
         }
     }
@@ -97,11 +101,28 @@ public class OxygenDistributorBlockEntity extends ContainerMachineBlockEntity im
         this.updateFluidSlots();
     }
 
+    @Override
+    public void onDestroy() {
+        this.clearSources();
+    }
+
+    public void clearSources() {
+        if (level == null) return;
+        if (level.isClientSide) return;
+        OxygenSystem.removeOxygenSource(level, sources);
+        OxygenSystem.OXYGEN_DISTRIBUTOR_BLOCKS.remove(this.getBlockPos());
+        sources.clear();
+    }
+
     private void craft() {
         if (level == null) return;
+        update();
+
+        clearSources();
+        OxygenSystem.OXYGEN_DISTRIBUTOR_BLOCKS.add(this.getBlockPos());
         Set<BlockPos> positions = FloodFiller3D.run(level, getBlockPos().above());
         OxygenSystem.addOxygenSource(level, positions);
-        update();
+        sources.addAll(positions);
     }
 
     @Override

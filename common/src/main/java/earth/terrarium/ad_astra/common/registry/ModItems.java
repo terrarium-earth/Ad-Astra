@@ -5,6 +5,7 @@ import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.item.EtrionicCapacitorItem;
+import earth.terrarium.ad_astra.common.item.GravityDetectorItem;
 import earth.terrarium.ad_astra.common.item.OxygenDetectorItem;
 import earth.terrarium.ad_astra.common.item.TemperatureDetectorItem;
 import earth.terrarium.botarium.common.registry.fluid.FluidBucketItem;
@@ -34,8 +35,9 @@ public class ModItems {
     public static final ResourcefulRegistry<Item> BUCKETS = ResourcefulRegistries.create(ITEMS);
 
     public static final RegistryEntry<Item> WRENCH = ITEMS.register("wrench", () -> new Item(new Item.Properties()));
-    public static final RegistryEntry<Item> OXYGEN_DETECTOR = ITEMS.register("oxygen_detector", () -> new OxygenDetectorItem(new Item.Properties()));
-    public static final RegistryEntry<Item> TEMPERATURE_DETECTOR = ITEMS.register("temperature_detector", () -> new TemperatureDetectorItem(new Item.Properties()));
+    public static final RegistryEntry<Item> OXYGEN_DETECTOR = ITEMS.register("oxygen_detector", () -> new OxygenDetectorItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryEntry<Item> TEMPERATURE_DETECTOR = ITEMS.register("temperature_detector", () -> new TemperatureDetectorItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryEntry<Item> GRAVITY_DETECTOR = ITEMS.register("gravity_detector", () -> new GravityDetectorItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryEntry<Item> ETRIUM_CABLE = MACHINES.register("etrium_cable", () -> new BlockItem(ModBlocks.ETRIUM_CABLE.get(), new Item.Properties()));
     public static final RegistryEntry<Item> DESMIUM_FLUID_PIPE = MACHINES.register("desmium_fluid_pipe", () -> new BlockItem(ModBlocks.DESMIUM_FLUID_PIPE.get(), new Item.Properties()));

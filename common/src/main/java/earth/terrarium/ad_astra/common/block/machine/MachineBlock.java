@@ -12,6 +12,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -25,8 +26,11 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 @SuppressWarnings("deprecation")
 @MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
 public class MachineBlock extends BasicEntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
@@ -75,6 +79,22 @@ public class MachineBlock extends BasicEntityBlock {
                 }
             }
             super.onRemove(state, level, pos, newState, moved);
+        }
+    }
+
+    @Override
+    public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        super.playerWillDestroy(level, pos, state, player);
+        if (level.getBlockEntity(pos) instanceof MachineBlockEntity machine) {
+            machine.onDestroy();
+        }
+    }
+
+    @Override
+    public void wasExploded(Level level, BlockPos pos, Explosion explosion) {
+        super.wasExploded(level, pos, explosion);
+        if (level.getBlockEntity(pos) instanceof MachineBlockEntity machine) {
+            machine.onDestroy();
         }
     }
 

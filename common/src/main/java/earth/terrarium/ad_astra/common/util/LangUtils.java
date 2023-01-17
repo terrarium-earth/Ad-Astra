@@ -16,6 +16,7 @@ public class LangUtils {
 
     public static final String OXYGEN_DETECTED = lang("message.ad_astra.oxygen_detected", "Oxygen: %s");
     public static final String TEMPERATURE_DETECTED = lang("message.ad_astra.temperature_detected", "Temperature: %s");
+    public static final String GRAVITY_DETECTED = lang("message.ad_astra.gravity_detected", "Gravity: %s m/s");
 
     public static final String PIPE_NORMAL = lang("message.ad_astra.pipe_normal", "Normal");
     public static final String PIPE_INSERT = lang("message.ad_astra.pipe_insert", "Insert");
