@@ -62,7 +62,7 @@ public class TemperatureRegulatorBlockEntity extends ContainerMachineBlockEntity
         if (level == null) return;
         if (temperatureTarget == 0) {
             temperatureTarget = TemperatureSystem.TARGET_TEMPERATURE;
-            currentTemperature = TemperatureSystem.getLevelTemperature(this.level);
+            currentTemperature = TemperatureSystem.getLevelTemperature(this.level, this.getBlockPos());
         }
         if (level.getGameTime() % 40 == 0) {
             int energyCost = 1000; // TODO: Calculate energy and fluid costs
@@ -76,11 +76,11 @@ public class TemperatureRegulatorBlockEntity extends ContainerMachineBlockEntity
                     this.craft();
                 } else {
                     this.clearSources();
-                    this.currentTemperature = TemperatureSystem.getLevelTemperature(this.level);
+                    this.currentTemperature = TemperatureSystem.getLevelTemperature(this.level, this.getBlockPos());
                 }
             } else {
                 this.clearSources();
-                this.currentTemperature = TemperatureSystem.getLevelTemperature(this.level);
+                this.currentTemperature = TemperatureSystem.getLevelTemperature(this.level, this.getBlockPos());
             }
         }
     }

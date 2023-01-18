@@ -4,6 +4,7 @@ import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.common.block.flag.FlagBlock;
 import earth.terrarium.ad_astra.common.block.fluid.CryogenicFuelLiquidBlock;
 import earth.terrarium.ad_astra.common.block.machine.AnimatedMachineBlock;
 import earth.terrarium.ad_astra.common.block.machine.MachineBlock;
@@ -34,6 +35,7 @@ public class ModBlocks {
     public static final ResourcefulRegistry<Block> BUTTONS = ResourcefulRegistries.create(BLOCKS);
     public static final ResourcefulRegistry<Block> PRESSURE_PLATES = ResourcefulRegistries.create(BLOCKS);
     public static final ResourcefulRegistry<Block> MACHINES = ResourcefulRegistries.create(BLOCKS);
+    public static final ResourcefulRegistry<Block> FLAGS = ResourcefulRegistries.create(BLOCKS);
     public static final ResourcefulRegistry<Block> FLUIDS = ResourcefulRegistries.create(BLOCKS);
 
     public static final RegistryEntry<Block> ETRIUM_CABLE = BLOCKS.register("etrium_cable", () -> new PipeBlock(4096, 0.344, PipeBlock.PipeType.CABLE, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(1.0f, 1.0f)));
@@ -56,6 +58,23 @@ public class ModBlocks {
     public static final RegistryEntry<Block> TEMPERATURE_REGULATOR = MACHINES.register("temperature_regulator", () -> new MachineBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
     public static final RegistryEntry<Block> GRAVITY_NORMALIZER = MACHINES.register("gravity_normalizer", () -> new MachineBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
     public static final RegistryEntry<Block> WATER_PUMP = MACHINES.register("water_pump", () -> new MachineBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+
+    public static final RegistryEntry<Block> WHITE_FLAG = FLAGS.register("white_flag", () -> new FlagBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_BANNER)));
+    public static final RegistryEntry<Block> BLACK_FLAG = FLAGS.register("black_flag", () -> new FlagBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_BANNER)));
+    public static final RegistryEntry<Block> BLUE_FLAG = FLAGS.register("blue_flag", () -> new FlagBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_BANNER)));
+    public static final RegistryEntry<Block> BROWN_FLAG = FLAGS.register("brown_flag", () -> new FlagBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_BANNER)));
+    public static final RegistryEntry<Block> CYAN_FLAG = FLAGS.register("cyan_flag", () -> new FlagBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_BANNER)));
+    public static final RegistryEntry<Block> GRAY_FLAG = FLAGS.register("gray_flag", () -> new FlagBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_BANNER)));
+    public static final RegistryEntry<Block> GREEN_FLAG = FLAGS.register("green_flag", () -> new FlagBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_BANNER)));
+    public static final RegistryEntry<Block> LIGHT_BLUE_FLAG = FLAGS.register("light_blue_flag", () -> new FlagBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_BANNER)));
+    public static final RegistryEntry<Block> LIGHT_GRAY_FLAG = FLAGS.register("light_gray_flag", () -> new FlagBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_BANNER)));
+    public static final RegistryEntry<Block> LIME_FLAG = FLAGS.register("lime_flag", () -> new FlagBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_BANNER)));
+    public static final RegistryEntry<Block> MAGENTA_FLAG = FLAGS.register("magenta_flag", () -> new FlagBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_BANNER)));
+    public static final RegistryEntry<Block> ORANGE_FLAG = FLAGS.register("orange_flag", () -> new FlagBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_BANNER)));
+    public static final RegistryEntry<Block> PINK_FLAG = FLAGS.register("pink_flag", () -> new FlagBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_BANNER)));
+    public static final RegistryEntry<Block> PURPLE_FLAG = FLAGS.register("purple_flag", () -> new FlagBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_BANNER)));
+    public static final RegistryEntry<Block> RED_FLAG = FLAGS.register("red_flag", () -> new FlagBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_BANNER)));
+    public static final RegistryEntry<Block> YELLOW_FLAG = FLAGS.register("yellow_flag", () -> new FlagBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_BANNER)));
 
     public static final RegistryEntry<Block> IRON_PLATING = CUBES.register("iron_plating", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER)));
     public static final RegistryEntry<Block> IRON_PLATING_STAIRS = STAIRS.register("iron_plating_stairs", () -> new StairBlock(ModBlocks.IRON_PLATING.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.CUT_COPPER)));

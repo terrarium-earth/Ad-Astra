@@ -4,6 +4,7 @@ import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.common.block.flag.FlagBlockEntity;
 import earth.terrarium.ad_astra.common.block.machine.entity.*;
 import earth.terrarium.ad_astra.common.block.pipe.CableBlockEntity;
 import earth.terrarium.ad_astra.common.block.pipe.FluidPipeBlockEntity;
@@ -30,6 +31,7 @@ public class ModBlockEntityTypes {
     public static final RegistryEntry<BlockEntityType<TemperatureRegulatorBlockEntity>> TEMPERATURE_REGULATOR = BLOCK_ENTITY_TYPES.register("temperature_regulator", () -> createBlockEntityType(TemperatureRegulatorBlockEntity::new, ModBlocks.TEMPERATURE_REGULATOR.get()));
     public static final RegistryEntry<BlockEntityType<GravityNormalizerBlockEntity>> GRAVITY_NORMALIZER = BLOCK_ENTITY_TYPES.register("gravity_normalizer", () -> createBlockEntityType(GravityNormalizerBlockEntity::new, ModBlocks.GRAVITY_NORMALIZER.get()));
     public static final RegistryEntry<BlockEntityType<WaterPumpBlockEntity>> WATER_PUMP = BLOCK_ENTITY_TYPES.register("water_pump", () -> createBlockEntityType(WaterPumpBlockEntity::new, ModBlocks.WATER_PUMP.get()));
+    public static final RegistryEntry<BlockEntityType<FlagBlockEntity>> FLAG = BLOCK_ENTITY_TYPES.register("flag", () -> createBlockEntityType(FlagBlockEntity::new, ModBlocks.FLAGS));
 
     public static final RegistryEntry<BlockEntityType<CableBlockEntity>> CABLE = BLOCK_ENTITY_TYPES.register("cable", () -> createBlockEntityType(CableBlockEntity::new, ModBlocks.ETRIUM_CABLE.get()));
     public static final RegistryEntry<BlockEntityType<FluidPipeBlockEntity>> FLUID_PIPE = BLOCK_ENTITY_TYPES.register("fluid_pipe", () -> createBlockEntityType(FluidPipeBlockEntity::new, ModBlocks.DESMIUM_FLUID_PIPE.get()));

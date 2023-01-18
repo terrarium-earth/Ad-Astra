@@ -1,6 +1,7 @@
 package earth.terrarium.ad_astra.datagen.provider.server;
 
 import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
+import earth.terrarium.ad_astra.common.block.flag.FlagBlock;
 import earth.terrarium.ad_astra.common.registry.ModBlocks;
 import earth.terrarium.ad_astra.common.registry.ModItems;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -12,6 +13,7 @@ import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.ValidationContext;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
@@ -53,7 +55,9 @@ public class ModLootTableProvider extends LootTableProvider {
             ModBlocks.WALLS.stream().map(RegistryEntry::get).forEach(this::dropSelf);
             ModBlocks.BUTTONS.stream().map(RegistryEntry::get).forEach(this::dropSelf);
             ModBlocks.PRESSURE_PLATES.stream().map(RegistryEntry::get).forEach(this::dropSelf);
+            ModBlocks.FLAGS.stream().map(RegistryEntry::get).forEach(b -> this.add(b, (arg) -> createSinglePropConditionTable(arg, FlagBlock.HALF, DoubleBlockHalf.LOWER)));
 
+            add(ModBlocks.ETRIUM_ORE.get(), createEtriumOreDrops(ModBlocks.ETRIUM_ORE.get()));
             dropSelf(ModBlocks.ETRIUM_CABLE.get());
             dropSelf(ModBlocks.DESMIUM_FLUID_PIPE.get());
         }

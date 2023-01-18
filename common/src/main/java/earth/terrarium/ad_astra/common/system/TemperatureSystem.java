@@ -29,6 +29,17 @@ public class TemperatureSystem {
         return SAFE_TEMPERATURE.isValueInRange(temperature);
     }
 
+    public static int getLevelTemperature(Level level, BlockPos pos) {
+        int height = Math.min(256, pos.getY());
+        float timeOfDay = ModUtils.getStarBrightness(level.getTimeOfDay(1.0f));
+        int temperature = getLevelTemperature(level);
+        temperature *= (timeOfDay / 3 + 1);
+        // base height 100
+        temperature -= (height - 100) / 3;
+
+        return temperature;
+    }
+
     public static int getLevelTemperature(Level level) {
         return getLevelTemperature(level.dimension());
     }
@@ -42,7 +53,7 @@ public class TemperatureSystem {
     }
 
     public static boolean posSafeTemperature(Level level, BlockPos pos) {
-        return isSafeTemperature(getLevelTemperature(level)) || TEMPERATURE_CACHE.containsKey(level.dimension()) && TEMPERATURE_CACHE.get(level.dimension()).contains(pos);
+        return isSafeTemperature(getLevelTemperature(level, pos)) || TEMPERATURE_CACHE.containsKey(level.dimension()) && TEMPERATURE_CACHE.get(level.dimension()).contains(pos);
     }
 
     public static void addTemperatureSource(Level level, Set<BlockPos> positions) {
@@ -57,7 +68,7 @@ public class TemperatureSystem {
     public static void livingEntityTick(LivingEntity entity, ServerLevel level) {
         if (level.getGameTime() % 20 != 0) return;
         if (entitySafeTemperature(entity)) return;
-        int temperature = getLevelTemperature(level);
+        int temperature = getLevelTemperature(level, entity.blockPosition());
         if (temperature > SAFE_TEMPERATURE.maxInclusive()) {
             entity.hurt(DamageSource.ON_FIRE, 6);
             entity.setSecondsOnFire(10);

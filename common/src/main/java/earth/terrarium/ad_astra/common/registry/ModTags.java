@@ -5,6 +5,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 
 public class ModTags {
@@ -41,9 +42,12 @@ public class ModTags {
         public static final TagKey<Item> AEROLYTE_BLOCKS = TagKey.create(Registries.ITEM, new ResourceLocation(AdAstra.MOD_ID, "aerolyte_blocks"));
         public static final TagKey<Item> ETRIUM_BLOCKS = TagKey.create(Registries.ITEM, new ResourceLocation(AdAstra.MOD_ID, "etrium_blocks"));
         public static final TagKey<Item> VESNIUM_BLOCKS = TagKey.create(Registries.ITEM, new ResourceLocation(AdAstra.MOD_ID, "vesnium_blocks"));
+
+        public static final TagKey<Item> FLAGS = TagKey.create(Registries.ITEM, new ResourceLocation(AdAstra.MOD_ID, "flags"));
     }
 
     public static class Blocks {
+        public static final TagKey<Block> FLAGS = TagKey.create(Registries.BLOCK, new ResourceLocation(AdAstra.MOD_ID, "flags"));
     }
 
     public static class Fluids {

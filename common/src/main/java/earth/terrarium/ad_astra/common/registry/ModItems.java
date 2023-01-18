@@ -31,6 +31,7 @@ public class ModItems {
     public static final ResourcefulRegistry<Item> WALLS = ResourcefulRegistries.create(ITEMS);
     public static final ResourcefulRegistry<Item> BUTTONS = ResourcefulRegistries.create(ITEMS);
     public static final ResourcefulRegistry<Item> PRESSURE_PLATES = ResourcefulRegistries.create(ITEMS);
+    public static final ResourcefulRegistry<Item> FLAGS = ResourcefulRegistries.create(ITEMS);
     public static final ResourcefulRegistry<Item> MACHINES = ResourcefulRegistries.create(ITEMS);
     public static final ResourcefulRegistry<Item> BUCKETS = ResourcefulRegistries.create(ITEMS);
 
@@ -101,6 +102,23 @@ public class ModItems {
 
     public static final RegistryEntry<Item> ETRIONIC_CORE = ITEMS.register("etrionic_core", () -> new Item(new Item.Properties()));
     public static final RegistryEntry<Item> ETRIONIC_CAPACITOR = ITEMS.register("etrionic_capacitor", () -> new EtrionicCapacitorItem(new Item.Properties()));
+
+    public static final RegistryEntry<Item> WHITE_FLAG = FLAGS.register("white_flag", () -> new BlockItem(ModBlocks.WHITE_FLAG.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> ORANGE_FLAG = FLAGS.register("orange_flag", () -> new BlockItem(ModBlocks.ORANGE_FLAG.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> MAGENTA_FLAG = FLAGS.register("magenta_flag", () -> new BlockItem(ModBlocks.MAGENTA_FLAG.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> LIGHT_BLUE_FLAG = FLAGS.register("light_blue_flag", () -> new BlockItem(ModBlocks.LIGHT_BLUE_FLAG.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> YELLOW_FLAG = FLAGS.register("yellow_flag", () -> new BlockItem(ModBlocks.YELLOW_FLAG.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> LIME_FLAG = FLAGS.register("lime_flag", () -> new BlockItem(ModBlocks.LIME_FLAG.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> PINK_FLAG = FLAGS.register("pink_flag", () -> new BlockItem(ModBlocks.PINK_FLAG.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> GRAY_FLAG = FLAGS.register("gray_flag", () -> new BlockItem(ModBlocks.GRAY_FLAG.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> LIGHT_GRAY_FLAG = FLAGS.register("light_gray_flag", () -> new BlockItem(ModBlocks.LIGHT_GRAY_FLAG.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> CYAN_FLAG = FLAGS.register("cyan_flag", () -> new BlockItem(ModBlocks.CYAN_FLAG.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> PURPLE_FLAG = FLAGS.register("purple_flag", () -> new BlockItem(ModBlocks.PURPLE_FLAG.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> BLUE_FLAG = FLAGS.register("blue_flag", () -> new BlockItem(ModBlocks.BLUE_FLAG.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> BROWN_FLAG = FLAGS.register("brown_flag", () -> new BlockItem(ModBlocks.BROWN_FLAG.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> GREEN_FLAG = FLAGS.register("green_flag", () -> new BlockItem(ModBlocks.GREEN_FLAG.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> RED_FLAG = FLAGS.register("red_flag", () -> new BlockItem(ModBlocks.RED_FLAG.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> BLACK_FLAG = FLAGS.register("black_flag", () -> new BlockItem(ModBlocks.BLACK_FLAG.get(), new Item.Properties()));
 
     public static final RegistryEntry<Item> IRON_PLATING = CUBES.register("iron_plating", () -> new BlockItem(ModBlocks.IRON_PLATING.get(), new Item.Properties()));
     public static final RegistryEntry<Item> IRON_PLATING_STAIRS = STAIRS.register("iron_plating_stairs", () -> new BlockItem(ModBlocks.IRON_PLATING_STAIRS.get(), new Item.Properties()));

@@ -2,6 +2,7 @@ package earth.terrarium.ad_astra.datagen.provider.server;
 
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.registry.ModBlocks;
+import earth.terrarium.ad_astra.common.registry.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.TagsProvider;
@@ -28,6 +29,8 @@ public class ModBlockTagProvider extends TagsProvider<Block> {
     }
 
     private void addVanillaTags() {
+        ModBlocks.FLAGS.stream().forEach(b -> tag(ModTags.Blocks.FLAGS).add(TagEntry.element(b.getId())));
+
         ModBlocks.STAIRS.stream().forEach(b -> tag(BlockTags.STAIRS).add(TagEntry.element(b.getId())));
         ModBlocks.SLABS.stream().forEach(b -> tag(BlockTags.SLABS).add(TagEntry.element(b.getId())));
         ModBlocks.WALLS.stream().forEach(b -> tag(BlockTags.WALLS).add(TagEntry.element(b.getId())));

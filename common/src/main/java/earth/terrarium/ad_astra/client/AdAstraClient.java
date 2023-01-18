@@ -2,6 +2,7 @@ package earth.terrarium.ad_astra.client;
 
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.renderer.block.EtrionicGeneratorBlockRenderer;
+import earth.terrarium.ad_astra.client.renderer.block.flag.FlagBlockEntityRenderer;
 import earth.terrarium.ad_astra.client.screen.machine.TestScreen;
 import earth.terrarium.ad_astra.client.util.ClientPlatformUtils;
 import earth.terrarium.ad_astra.common.item.EtrionicCapacitorItem;
@@ -53,6 +54,7 @@ public class AdAstraClient {
     }
 
     private static void registerBlockEntityRenderers() {
+        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.FLAG.get(), FlagBlockEntityRenderer::new);
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.ETRIONIC_GENERATOR.get(), context -> new EtrionicGeneratorBlockRenderer());
     }
 

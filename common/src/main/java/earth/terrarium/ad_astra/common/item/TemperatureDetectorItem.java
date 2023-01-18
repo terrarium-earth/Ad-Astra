@@ -6,6 +6,7 @@ import earth.terrarium.ad_astra.common.util.LangUtils;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -44,7 +45,11 @@ public class TemperatureDetectorItem extends Item {
             if (blockEntities.size() > 0 && (TemperatureSystem.posSafeTemperature(level, player.blockPosition().above()) || !TemperatureSystem.isSafeTemperature(blockEntities.get(0).getCurrentTemperature()) && player.blockPosition().distSqr(blockEntities.get(0).getBlockPos()) < 100)) {
                 player.displayClientMessage(Component.translatable(LangUtils.TEMPERATURE_DETECTED, blockEntities.get(0).getCurrentTemperature()), true);
             } else {
-                player.displayClientMessage(Component.translatable(LangUtils.TEMPERATURE_DETECTED, TemperatureSystem.getLevelTemperature(level)), true);
+                int temperature = TemperatureSystem.getLevelTemperature(level, player.blockPosition());
+                if (level.getFluidState(player.blockPosition()).is(FluidTags.LAVA)) {
+                    temperature = level.random.nextIntBetweenInclusive(1200, 1500);
+                }
+                player.displayClientMessage(Component.translatable(LangUtils.TEMPERATURE_DETECTED, temperature), true);
             }
         }
 

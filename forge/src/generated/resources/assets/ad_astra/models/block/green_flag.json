@@ -1,0 +1,7 @@
+{
+  "parent": "ad_astra:block/flag",
+  "textures": {
+    "particle": "ad_astra:block/flag/green_flag",
+    "texture": "ad_astra:block/flag/green_flag"
+  }
+}

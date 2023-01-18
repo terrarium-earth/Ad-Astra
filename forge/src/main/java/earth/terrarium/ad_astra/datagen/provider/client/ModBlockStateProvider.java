@@ -18,6 +18,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ModBlockStateProvider extends BlockStateProvider {
 
     private static final ResourceLocation SOLAR_PANEL = new ResourceLocation(AdAstra.MOD_ID, "block/solar_panel");
+    private static final ResourceLocation FLAG = new ResourceLocation(AdAstra.MOD_ID, "block/flag");
+    private static final ResourceLocation FLAG_ITEM = new ResourceLocation(AdAstra.MOD_ID, "item/flag");
     private static final ResourceLocation WALL_INVENTORY = new ResourceLocation("minecraft:block/wall_inventory");
     private static final ResourceLocation BUTTON_INVENTORY = new ResourceLocation("minecraft:block/button_inventory");
     private static final ResourceLocation WATER_STILL = new ResourceLocation("minecraft:block/water_still");
@@ -38,6 +40,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         horizontalBlock(ModBlocks.ETRIONIC_SOLAR_PANEL.get(), SOLAR_PANEL, "texture");
         horizontalBlock(ModBlocks.VESNIUM_SOLAR_PANEL.get(), SOLAR_PANEL, "texture");
 
+        ModBlocks.FLAGS.stream().map(RegistryEntry::get).forEach(b -> block(b, FLAG, new ResourceLocation(AdAstra.MOD_ID, "block/flag/" + ForgeRegistries.BLOCKS.getKey(b).getPath()), "texture"));
         ModBlocks.CUBES.stream().map(RegistryEntry::get).forEach(this::simpleBlock);
         ModBlocks.PILLARS.stream().map(RegistryEntry::get).forEach(b -> logBlock((RotatedPillarBlock) b));
         ModBlocks.STAIRS.stream().map(RegistryEntry::get).forEach(b -> stairsBlock((StairBlock) b, replaceAndCheckPlural(b, "_stairs")));
@@ -127,8 +130,16 @@ public class ModBlockStateProvider extends BlockStateProvider {
         return ForgeRegistries.BLOCKS.getKey(block);
     }
 
-    private void horizontalBlock(Block block, ResourceLocation parent, String texture) {
-        horizontalBlock(block, models().getBuilder(name(block)).texture(texture, blockTexture(block)).texture("particle", blockTexture(block)).parent(models().getExistingFile(parent)));
+    private void horizontalBlock(Block block, ResourceLocation parent, String textureName) {
+        horizontalBlock(block, parent, blockTexture(block), textureName);
+    }
+
+    private void horizontalBlock(Block block, ResourceLocation parent, ResourceLocation texture, String textureName) {
+        horizontalBlock(block, models().getBuilder(name(block)).texture(textureName, texture).texture("particle", texture).parent(models().getExistingFile(parent)));
+    }
+
+    private void block(Block block, ResourceLocation parent, ResourceLocation texture, String textureName) {
+        simpleBlock(block, models().getBuilder(name(block)).texture(textureName, texture).texture("particle", texture).parent(models().getExistingFile(parent)));
     }
 
     private String name(Block block) {

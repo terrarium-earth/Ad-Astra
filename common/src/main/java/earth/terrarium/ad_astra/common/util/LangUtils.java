@@ -18,6 +18,8 @@ public class LangUtils {
     public static final String TEMPERATURE_DETECTED = lang("message.ad_astra.temperature_detected", "Temperature: %s °C");
     public static final String GRAVITY_DETECTED = lang("message.ad_astra.gravity_detected", "Gravity: %s m/s");
 
+    public static final String NOT_FLAG_OWNER = lang("message.ad_astra.not_flag_owner", "§cYou do not own this flag!");
+
     public static final String PIPE_NORMAL = lang("message.ad_astra.pipe_normal", "Normal");
     public static final String PIPE_INSERT = lang("message.ad_astra.pipe_insert", "Insert");
     public static final String PIPE_EXTRACT = lang("message.ad_astra.pipe_extract", "Extract");
@@ -26,6 +28,9 @@ public class LangUtils {
     public static final String CAPACITOR_MODE = lang("message.ad_astra.capacitor_mode", "Mode: %s");
     public static final String CAPACITOR_ON = lang("message.ad_astra.capacitor_on", "Capacitor On");
     public static final String CAPACITOR_OFF = lang("message.ad_astra.capacitor_off", "Capacitor Off");
+
+    public static final String FLAG_URL = lang("text.ad_astra.flag_url", "Flag Url (https://i.imgur.com/urURL.png)");
+    public static final String CONFIRM = lang("text.ad_astra.confirm", "Confirm");
 
     private static String lang(String key, String value) {
         LANG_MAP.put(key, value);
