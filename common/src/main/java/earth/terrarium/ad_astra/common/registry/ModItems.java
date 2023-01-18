@@ -4,16 +4,14 @@ import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.ad_astra.common.item.EtrionicCapacitorItem;
-import earth.terrarium.ad_astra.common.item.GravityDetectorItem;
-import earth.terrarium.ad_astra.common.item.OxygenDetectorItem;
-import earth.terrarium.ad_astra.common.item.TemperatureDetectorItem;
+import earth.terrarium.ad_astra.common.item.*;
 import earth.terrarium.botarium.common.registry.fluid.FluidBucketItem;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.Rarity;
 import org.apache.logging.log4j.util.TriConsumer;
 
 import java.util.List;
@@ -32,6 +30,7 @@ public class ModItems {
     public static final ResourcefulRegistry<Item> BUTTONS = ResourcefulRegistries.create(ITEMS);
     public static final ResourcefulRegistry<Item> PRESSURE_PLATES = ResourcefulRegistries.create(ITEMS);
     public static final ResourcefulRegistry<Item> FLAGS = ResourcefulRegistries.create(ITEMS);
+    public static final ResourcefulRegistry<Item> GLOBES = ResourcefulRegistries.create(ITEMS);
     public static final ResourcefulRegistry<Item> MACHINES = ResourcefulRegistries.create(ITEMS);
     public static final ResourcefulRegistry<Item> BUCKETS = ResourcefulRegistries.create(ITEMS);
 
@@ -119,6 +118,13 @@ public class ModItems {
     public static final RegistryEntry<Item> GREEN_FLAG = FLAGS.register("green_flag", () -> new BlockItem(ModBlocks.GREEN_FLAG.get(), new Item.Properties()));
     public static final RegistryEntry<Item> RED_FLAG = FLAGS.register("red_flag", () -> new BlockItem(ModBlocks.RED_FLAG.get(), new Item.Properties()));
     public static final RegistryEntry<Item> BLACK_FLAG = FLAGS.register("black_flag", () -> new BlockItem(ModBlocks.BLACK_FLAG.get(), new Item.Properties()));
+
+    public static final RegistryEntry<Item> EARTH_GLOBE = GLOBES.register("earth_globe", () -> new RenderedBlockItem(ModBlocks.EARTH_GLOBE.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
+    public static final RegistryEntry<Item> MOON_GLOBE = GLOBES.register("moon_globe", () -> new RenderedBlockItem(ModBlocks.MOON_GLOBE.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
+    public static final RegistryEntry<Item> MARS_GLOBE = GLOBES.register("mars_globe", () -> new RenderedBlockItem(ModBlocks.MARS_GLOBE.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
+    public static final RegistryEntry<Item> VENUS_GLOBE = GLOBES.register("venus_globe", () -> new RenderedBlockItem(ModBlocks.VENUS_GLOBE.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
+    public static final RegistryEntry<Item> MERCURY_GLOBE = GLOBES.register("mercury_globe", () -> new RenderedBlockItem(ModBlocks.MERCURY_GLOBE.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
+    public static final RegistryEntry<Item> GLACIO_GLOBE = GLOBES.register("glacio_globe", () -> new RenderedBlockItem(ModBlocks.GLACIO_GLOBE.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
 
     public static final RegistryEntry<Item> IRON_PLATING = CUBES.register("iron_plating", () -> new BlockItem(ModBlocks.IRON_PLATING.get(), new Item.Properties()));
     public static final RegistryEntry<Item> IRON_PLATING_STAIRS = STAIRS.register("iron_plating_stairs", () -> new BlockItem(ModBlocks.IRON_PLATING_STAIRS.get(), new Item.Properties()));

@@ -7,7 +7,6 @@ import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
@@ -17,7 +16,6 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class AdAstraClientForge {
@@ -48,7 +46,6 @@ public class AdAstraClientForge {
     public static void postInit() {
         AdAstraClient.onRegisterItemRenderers(AdAstraClientForge::registerItemRenderer);
         AdAstraClient.onRegisterFluidRenderTypes(AdAstraClientForge::onRegisterFluidRenderTypes);
-        AdAstraClient.onRegisterBlockRenderTypes(AdAstraClientForge::onRegisterBlockRenderTypes);
         hasInitializedRenderers = true;
     }
 
@@ -59,10 +56,6 @@ public class AdAstraClientForge {
 
     private static void onRegisterFluidRenderTypes(RenderType type, Fluid fluid) {
         ItemBlockRenderTypes.setRenderLayer(fluid, type);
-    }
-
-    private static void onRegisterBlockRenderTypes(RenderType type, List<Block> blocks) {
-        blocks.forEach(block -> ItemBlockRenderTypes.setRenderLayer(block, type));
     }
 
     public static void onClientReloadListeners(RegisterClientReloadListenersEvent event) {

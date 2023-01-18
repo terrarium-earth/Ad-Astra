@@ -8,10 +8,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
-
-import java.util.List;
 
 public class AdAstraClientFabric implements ClientModInitializer {
     @Override
@@ -19,7 +16,6 @@ public class AdAstraClientFabric implements ClientModInitializer {
         AdAstraClient.init();
         ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> AdAstraClient.onRegisterModels(out));
         AdAstraClient.onRegisterFluidRenderTypes(AdAstraClientFabric::registerFluidRenderTypes);
-        AdAstraClient.onRegisterBlockRenderTypes(AdAstraClientFabric::registerBlockRenderTypes);
         AdAstraClient.onRegisterItemRenderers(AdAstraClientFabric::registerItemRenderer);
     }
 
@@ -29,9 +25,5 @@ public class AdAstraClientFabric implements ClientModInitializer {
 
     private static void registerFluidRenderTypes(RenderType type, Fluid fluid) {
         BlockRenderLayerMap.INSTANCE.putFluids(type, fluid);
-    }
-
-    private static void registerBlockRenderTypes(RenderType type, List<Block> blocks) {
-        BlockRenderLayerMap.INSTANCE.putBlocks(type, blocks.toArray(new Block[0]));
     }
 }

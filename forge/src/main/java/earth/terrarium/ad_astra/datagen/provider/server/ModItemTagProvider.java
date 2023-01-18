@@ -28,6 +28,7 @@ public class ModItemTagProvider extends TagsProvider<Item> {
     protected void addTags(HolderLookup.Provider provider) {
         addVanillaTags();
         ModItems.FLAGS.stream().forEach(i -> tag(ModTags.Items.FLAGS).add(TagEntry.element(i.getId())));
+        ModItems.GLOBES.stream().forEach(i -> tag(ModTags.Items.GLOBES).add(TagEntry.element(i.getId())));
 
         platform(ModTags.Items.ETRIUM_BLOCKS, ItemType.STORAGE_BLOCKS, "etrium");
         platform(ModTags.Items.STEEL_BLOCKS, ItemType.STORAGE_BLOCKS, "steel");

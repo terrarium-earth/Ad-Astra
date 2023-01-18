@@ -133,10 +133,7 @@ public class FlagBlock extends BasicEntityBlock {
 
     @Override
     public FluidState getFluidState(BlockState state) {
-        if (state.getValue(WATERLOGGED)) {
-            return Fluids.WATER.getSource(false);
-        }
-        return super.getFluidState(state);
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     @Override

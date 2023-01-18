@@ -30,6 +30,7 @@ public class ModBlockTagProvider extends TagsProvider<Block> {
 
     private void addVanillaTags() {
         ModBlocks.FLAGS.stream().forEach(b -> tag(ModTags.Blocks.FLAGS).add(TagEntry.element(b.getId())));
+        ModBlocks.GLOBES.stream().forEach(b -> tag(ModTags.Blocks.GLOBES).add(TagEntry.element(b.getId())));
 
         ModBlocks.STAIRS.stream().forEach(b -> tag(BlockTags.STAIRS).add(TagEntry.element(b.getId())));
         ModBlocks.SLABS.stream().forEach(b -> tag(BlockTags.SLABS).add(TagEntry.element(b.getId())));

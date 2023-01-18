@@ -30,7 +30,6 @@ import java.util.Set;
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class ModLootTableProvider extends LootTableProvider {
-    private static final float[] NORMAL_LEAVES_SAPLING_CHANCES = new float[]{0.05F, 0.0625F, 0.083333336F, 0.1F};
 
     public ModLootTableProvider(PackOutput output) {
         super(output, Set.of(), List.of(new LootTableProvider.SubProviderEntry(BlockLootTables::new, LootContextParamSets.BLOCK)));
@@ -56,6 +55,7 @@ public class ModLootTableProvider extends LootTableProvider {
             ModBlocks.BUTTONS.stream().map(RegistryEntry::get).forEach(this::dropSelf);
             ModBlocks.PRESSURE_PLATES.stream().map(RegistryEntry::get).forEach(this::dropSelf);
             ModBlocks.FLAGS.stream().map(RegistryEntry::get).forEach(b -> this.add(b, (arg) -> createSinglePropConditionTable(arg, FlagBlock.HALF, DoubleBlockHalf.LOWER)));
+            ModBlocks.GLOBES.stream().map(RegistryEntry::get).forEach(this::dropSelf);
 
             add(ModBlocks.ETRIUM_ORE.get(), createEtriumOreDrops(ModBlocks.ETRIUM_ORE.get()));
             dropSelf(ModBlocks.ETRIUM_CABLE.get());

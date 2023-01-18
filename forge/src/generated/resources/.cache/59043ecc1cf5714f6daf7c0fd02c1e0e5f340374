@@ -1,4 +1,4 @@
-// 1.19.3	2023-01-18T01:18:47.101313	Tags for minecraft:item mod id ad_astra
+// 1.19.3	2023-01-18T12:04:31.018292	Tags for minecraft:item mod id ad_astra
 e72be7c655197e01ef0188d75736c820ad4b5738 data/ad_astra/tags/items/aerolyte_blocks.json
 4718082af51c76e5ad7b042e177e73a198d74be5 data/ad_astra/tags/items/aerolyte_ingots.json
 e833a971932857dc528558cfc7dcd3d3f977162b data/ad_astra/tags/items/aerolyte_nuggets.json
@@ -12,6 +12,7 @@ dc57f344e0512f66efa821d5547c52a43ca9dfc9 data/ad_astra/tags/items/desmium_plates
 2f94e2ede1c4f64515468db869d51db7e632648a data/ad_astra/tags/items/etrium_nuggets.json
 9695908f4445dd99f65af974d2e151668f861937 data/ad_astra/tags/items/etrium_plates.json
 322406e5b1fcfe1533ab85e2d773eff44fe88039 data/ad_astra/tags/items/flags.json
+f6ed4b69248c2a36521f1cb04e47b8a898b4712b data/ad_astra/tags/items/globes.json
 a6da9386d6abd31f37ebc4ed982f6a7134fbdccf data/ad_astra/tags/items/iron_plates.json
 a83ea2ad3f9610e61b102832bcf607e32a640c07 data/ad_astra/tags/items/iron_rods.json
 dd0f40997694ca3fb304d8a30c12c666e48673c3 data/ad_astra/tags/items/steel_blocks.json

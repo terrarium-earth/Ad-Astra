@@ -166,7 +166,7 @@ public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return (entityWorld, pos, entityState, blockEntity) -> {
+        return (entityLevel, blockPos, blockState, blockEntity) -> {
             if (blockEntity instanceof InteractablePipe<?> pipe) {
                 pipe.pipeTick();
             }

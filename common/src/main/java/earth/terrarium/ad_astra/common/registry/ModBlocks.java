@@ -6,6 +6,7 @@ import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.block.flag.FlagBlock;
 import earth.terrarium.ad_astra.common.block.fluid.CryogenicFuelLiquidBlock;
+import earth.terrarium.ad_astra.common.block.globe.GlobeBlock;
 import earth.terrarium.ad_astra.common.block.machine.AnimatedMachineBlock;
 import earth.terrarium.ad_astra.common.block.machine.MachineBlock;
 import earth.terrarium.ad_astra.common.block.machine.SolarPanelBlock;
@@ -36,6 +37,7 @@ public class ModBlocks {
     public static final ResourcefulRegistry<Block> PRESSURE_PLATES = ResourcefulRegistries.create(BLOCKS);
     public static final ResourcefulRegistry<Block> MACHINES = ResourcefulRegistries.create(BLOCKS);
     public static final ResourcefulRegistry<Block> FLAGS = ResourcefulRegistries.create(BLOCKS);
+    public static final ResourcefulRegistry<Block> GLOBES = ResourcefulRegistries.create(BLOCKS);
     public static final ResourcefulRegistry<Block> FLUIDS = ResourcefulRegistries.create(BLOCKS);
 
     public static final RegistryEntry<Block> ETRIUM_CABLE = BLOCKS.register("etrium_cable", () -> new PipeBlock(4096, 0.344, PipeBlock.PipeType.CABLE, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(1.0f, 1.0f)));
@@ -75,6 +77,13 @@ public class ModBlocks {
     public static final RegistryEntry<Block> PURPLE_FLAG = FLAGS.register("purple_flag", () -> new FlagBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_BANNER)));
     public static final RegistryEntry<Block> RED_FLAG = FLAGS.register("red_flag", () -> new FlagBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_BANNER)));
     public static final RegistryEntry<Block> YELLOW_FLAG = FLAGS.register("yellow_flag", () -> new FlagBlock(BlockBehaviour.Properties.copy(Blocks.WHITE_BANNER)));
+
+    public static final RegistryEntry<Block> EARTH_GLOBE = GLOBES.register("earth_globe", () -> new GlobeBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion()));
+    public static final RegistryEntry<Block> MOON_GLOBE = GLOBES.register("moon_globe", () -> new GlobeBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion()));
+    public static final RegistryEntry<Block> MARS_GLOBE = GLOBES.register("mars_globe", () -> new GlobeBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion()));
+    public static final RegistryEntry<Block> VENUS_GLOBE = GLOBES.register("venus_globe", () -> new GlobeBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion()));
+    public static final RegistryEntry<Block> MERCURY_GLOBE = GLOBES.register("mercury_globe", () -> new GlobeBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion()));
+    public static final RegistryEntry<Block> GLACIO_GLOBE = GLOBES.register("glacio_globe", () -> new GlobeBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion()));
 
     public static final RegistryEntry<Block> IRON_PLATING = CUBES.register("iron_plating", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER)));
     public static final RegistryEntry<Block> IRON_PLATING_STAIRS = STAIRS.register("iron_plating_stairs", () -> new StairBlock(ModBlocks.IRON_PLATING.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.CUT_COPPER)));

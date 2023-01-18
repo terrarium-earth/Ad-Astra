@@ -68,10 +68,11 @@ public class EtrionicGeneratorBlockEntity extends CookingMachineBlockEntity impl
     @Override
     public void update() {
         if (level == null) return;
+        if (level.isClientSide) return;
         this.recipe = level.getRecipeManager().getRecipeFor(ModRecipeTypes.ETRIONIC_GENERATING.get(), this, level).orElse(null);
         if (this.recipe == null) {
             this.cookTime = 0;
-        } else {
+        } else if (cookTime == 0) {
             this.cookTimeTotal = this.recipe.cookingTime();
             getItem(0).shrink(1);
         }

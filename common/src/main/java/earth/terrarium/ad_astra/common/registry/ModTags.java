@@ -44,10 +44,12 @@ public class ModTags {
         public static final TagKey<Item> VESNIUM_BLOCKS = TagKey.create(Registries.ITEM, new ResourceLocation(AdAstra.MOD_ID, "vesnium_blocks"));
 
         public static final TagKey<Item> FLAGS = TagKey.create(Registries.ITEM, new ResourceLocation(AdAstra.MOD_ID, "flags"));
+        public static final TagKey<Item> GLOBES = TagKey.create(Registries.ITEM, new ResourceLocation(AdAstra.MOD_ID, "globes"));
     }
 
     public static class Blocks {
         public static final TagKey<Block> FLAGS = TagKey.create(Registries.BLOCK, new ResourceLocation(AdAstra.MOD_ID, "flags"));
+        public static final TagKey<Block> GLOBES = TagKey.create(Registries.BLOCK, new ResourceLocation(AdAstra.MOD_ID, "globes"));
     }
 
     public static class Fluids {

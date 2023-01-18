@@ -53,7 +53,7 @@ public class MachineBlock extends BasicEntityBlock {
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return (entityWorld, pos, entityState, blockEntity) -> {
+        return (entityLevel, blockPos, blockState, blockEntity) -> {
             if (blockEntity instanceof MachineBlockEntity machine) {
                 if (level.isClientSide()) {
                     machine.clientTick();
