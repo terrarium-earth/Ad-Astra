@@ -11,7 +11,6 @@ import earth.terrarium.botarium.common.fluid.base.FluidAttachment;
 import earth.terrarium.botarium.common.fluid.impl.ExtractOnlyFluidContainer;
 import earth.terrarium.botarium.common.fluid.impl.WrappedBlockFluidContainer;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
-import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Inventory;
@@ -22,7 +21,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
 
-@MethodsReturnNonnullByDefault
 public class WaterPumpBlockEntity extends CookingMachineBlockEntity implements EnergyAttachment.Block, FluidAttachment.Block {
     private WrappedBlockEnergyContainer energyContainer;
     private WrappedBlockFluidContainer fluidContainer;
@@ -35,26 +33,26 @@ public class WaterPumpBlockEntity extends CookingMachineBlockEntity implements E
     @Override
     public void load(CompoundTag nbt) {
         super.load(nbt);
-        this.waterExtracted = nbt.getLong("WaterExtracted");
+        waterExtracted = nbt.getLong("WaterExtracted");
     }
 
     @Override
     public void saveAdditional(CompoundTag nbt) {
         super.saveAdditional(nbt);
-        nbt.putLong("WaterExtracted", this.waterExtracted);
+        nbt.putLong("WaterExtracted", waterExtracted);
     }
 
     @Override
     public void serverTick() {
         if (level == null) return;
-        if (this.getEnergyStorage().internalExtract(10, true) >= 10) {
+        if (getEnergyStorage().internalExtract(10, true) >= 10) {
             if (getFluidContainer().internalInsert(FluidHooks.newFluidHolder(Fluids.WATER, FluidHooks.buckets(0.01f), null), true) > 0) {
-                if (level.getBlockState(this.getBlockPos().below()).is(Blocks.WATER)) {
-                    this.getEnergyStorage().internalExtract(10, false);
+                if (level.getBlockState(getBlockPos().below()).is(Blocks.WATER)) {
+                    getEnergyStorage().internalExtract(10, false);
                     waterExtracted += getFluidContainer().internalInsert(FluidHooks.newFluidHolder(Fluids.WATER, FluidHooks.buckets(0.01f), null), false);
 
                     if (waterExtracted >= FluidHooks.buckets(1)) {
-                        level.setBlockAndUpdate(this.getBlockPos().below(), Blocks.AIR.defaultBlockState());
+                        level.setBlockAndUpdate(getBlockPos().below(), Blocks.AIR.defaultBlockState());
                         waterExtracted = 0;
                     }
                 }
@@ -69,7 +67,7 @@ public class WaterPumpBlockEntity extends CookingMachineBlockEntity implements E
 
     @Override
     public WrappedBlockEnergyContainer getEnergyStorage(BlockEntity holder) {
-        return energyContainer == null ? energyContainer = new WrappedBlockEnergyContainer(this, new InsertOnlyEnergyContainer(20000)) : this.energyContainer;
+        return energyContainer == null ? energyContainer = new WrappedBlockEnergyContainer(this, new InsertOnlyEnergyContainer(20000)) : energyContainer;
     }
 
     public WrappedBlockEnergyContainer getEnergyStorage() {
@@ -78,7 +76,7 @@ public class WaterPumpBlockEntity extends CookingMachineBlockEntity implements E
 
     @Override
     public WrappedBlockFluidContainer getFluidContainer(BlockEntity holder) {
-        return fluidContainer == null ? fluidContainer = new WrappedBlockFluidContainer(this, new ExtractOnlyFluidContainer(i -> FluidHooks.buckets(5f), 1, (tank, fluid) -> true)) : this.fluidContainer;
+        return fluidContainer == null ? fluidContainer = new WrappedBlockFluidContainer(this, new ExtractOnlyFluidContainer(i -> FluidHooks.buckets(5f), 1, (tank, fluid) -> true)) : fluidContainer;
     }
 
     public WrappedBlockFluidContainer getFluidContainer() {
@@ -87,7 +85,7 @@ public class WaterPumpBlockEntity extends CookingMachineBlockEntity implements E
 
     @Override
     public void update() {
-        this.updateFluidSlots();
+        updateFluidSlots();
     }
 
     @Override

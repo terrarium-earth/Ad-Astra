@@ -22,9 +22,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
-@ParametersAreNonnullByDefault
 public class GlobeRenderer implements BlockEntityRenderer<GlobeBlockEntity> {
     public GlobeRenderer(BlockEntityRendererProvider.Context ctx) {
     }

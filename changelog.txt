@@ -1,3 +1,0 @@
-Updated to 1.19.3 :)
-
-Disclaimer: Ad Astra will be releasing a large 1.19.3 update in the future that will break with the this current 1.19.3 version. Use at your own risk!

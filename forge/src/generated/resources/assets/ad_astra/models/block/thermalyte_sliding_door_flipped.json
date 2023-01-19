@@ -1,0 +1,7 @@
+{
+  "parent": "ad_astra:block/sliding_door_flipped",
+  "textures": {
+    "particle": "ad_astra:block/sliding_door/thermalyte_sliding_door",
+    "texture": "ad_astra:block/sliding_door/thermalyte_sliding_door"
+  }
+}

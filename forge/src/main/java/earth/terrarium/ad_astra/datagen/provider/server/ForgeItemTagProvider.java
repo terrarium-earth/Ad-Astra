@@ -11,7 +11,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -21,7 +20,7 @@ public class ForgeItemTagProvider extends TagsProvider<Item> {
     }
 
     @Override
-    protected void addTags(HolderLookup.@NotNull Provider provider) {
+    protected void addTags(HolderLookup.Provider provider) {
         tag(forge("storage_blocks/etrium")).add(TagEntry.element(ModItems.ETRIUM_BLOCK.getId()));
         tag(forge("storage_blocks/steel")).add(TagEntry.element(ModItems.STEEL_BLOCK.getId()));
         tag(forge("storage_blocks/desmium")).add(TagEntry.element(ModItems.DESMIUM_BLOCK.getId()));

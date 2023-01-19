@@ -13,7 +13,6 @@ import earth.terrarium.botarium.common.fluid.base.FluidAttachment;
 import earth.terrarium.botarium.common.fluid.impl.SimpleFluidContainer;
 import earth.terrarium.botarium.common.fluid.impl.WrappedBlockFluidContainer;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
-import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -23,7 +22,6 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Objects;
 
-@MethodsReturnNonnullByDefault
 public class CryogenicFreezerBlockEntity extends CookingMachineBlockEntity implements EnergyAttachment.Block, FluidAttachment.Block {
     private WrappedBlockEnergyContainer energyContainer;
     private WrappedBlockFluidContainer fluidContainer;
@@ -35,9 +33,9 @@ public class CryogenicFreezerBlockEntity extends CookingMachineBlockEntity imple
 
     @Override
     public void serverTick() {
-        if (this.recipe != null) {
-            if (!getFluidContainer().isEmpty() && this.canCraft()) {
-                if (this.getEnergyStorage().internalExtract(this.recipe.energy(), true) >= this.recipe.energy()) {
+        if (recipe != null) {
+            if (!getFluidContainer().isEmpty() && canCraft()) {
+                if (getEnergyStorage().internalExtract(recipe.energy(), true) >= recipe.energy()) {
                     if (getFluidContainer().extractFluid(FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(0).getFluid(), recipe.ingredient1().getFluidAmount(), null), true).getFluidAmount() <= 0)
                         return;
                     if (getFluidContainer().extractFluid(FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(1).getFluid(), recipe.ingredient2().getFluidAmount(), null), true).getFluidAmount() <= 0)
@@ -45,22 +43,22 @@ public class CryogenicFreezerBlockEntity extends CookingMachineBlockEntity imple
                     if (getFluidContainer().insertFluid(recipe.resultFluid(), true) <= 0)
                         return;
 
-                    this.getEnergyStorage().internalExtract(this.recipe.energy(), false);
-                    this.cookTime++;
-                    if (this.cookTime >= cookTimeTotal) {
-                        this.cookTime = 0;
+                    getEnergyStorage().internalExtract(recipe.energy(), false);
+                    cookTime++;
+                    if (cookTime >= cookTimeTotal) {
+                        cookTime = 0;
                         getFluidContainer().extractFluid(FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(0).getFluid(), recipe.ingredient1().getFluidAmount(), null), false);
                         getFluidContainer().extractFluid(FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(1).getFluid(), recipe.ingredient2().getFluidAmount(), null), false);
                         getFluidContainer().insertFluid(recipe.resultFluid(), false);
-                        this.updateFluidSlots();
+                        updateFluidSlots();
                     }
                     if (fluidContainer.getFluids().get(0).isEmpty()) {
-                        this.recipe = null;
+                        recipe = null;
                     }
                 }
             }
         } else {
-            this.cookTime = 0;
+            cookTime = 0;
         }
     }
 
@@ -71,7 +69,7 @@ public class CryogenicFreezerBlockEntity extends CookingMachineBlockEntity imple
 
     @Override
     public WrappedBlockEnergyContainer getEnergyStorage(BlockEntity holder) {
-        return energyContainer == null ? energyContainer = new WrappedBlockEnergyContainer(this, new InsertOnlyEnergyContainer(200000)) : this.energyContainer;
+        return energyContainer == null ? energyContainer = new WrappedBlockEnergyContainer(this, new InsertOnlyEnergyContainer(200000)) : energyContainer;
     }
 
     public WrappedBlockEnergyContainer getEnergyStorage() {
@@ -80,7 +78,7 @@ public class CryogenicFreezerBlockEntity extends CookingMachineBlockEntity imple
 
     @Override
     public WrappedBlockFluidContainer getFluidContainer(BlockEntity holder) {
-        return fluidContainer == null ? fluidContainer = new WrappedBlockFluidContainer(this, new SimpleFluidContainer(i -> FluidHooks.buckets(10f), 3, (tank, fluid) -> (tank != 0 && tank != 1) || Objects.requireNonNull(level).getRecipeManager().getAllRecipesFor(ModRecipeTypes.CRYOGENIC_FREEZING.get()).stream().anyMatch(r -> r.ingredient1().matches(fluid) || r.ingredient2().matches(fluid)))) : this.fluidContainer;
+        return fluidContainer == null ? fluidContainer = new WrappedBlockFluidContainer(this, new SimpleFluidContainer(i -> FluidHooks.buckets(10f), 3, (tank, fluid) -> (tank != 0 && tank != 1) || Objects.requireNonNull(level).getRecipeManager().getAllRecipesFor(ModRecipeTypes.CRYOGENIC_FREEZING.get()).stream().anyMatch(r -> r.ingredient1().matches(fluid) || r.ingredient2().matches(fluid)))) : fluidContainer;
     }
 
     public WrappedBlockFluidContainer getFluidContainer() {
@@ -90,13 +88,13 @@ public class CryogenicFreezerBlockEntity extends CookingMachineBlockEntity imple
     @Override
     public void update() {
         if (level == null) return;
-        this.recipe = level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.CRYOGENIC_FREEZING.get()).stream().filter(r -> r.matches(this)).findFirst().orElse(null);
-        if (this.recipe == null) {
-            this.cookTime = 0;
+        recipe = level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.CRYOGENIC_FREEZING.get()).stream().filter(r -> r.matches(this)).findFirst().orElse(null);
+        if (recipe == null) {
+            cookTime = 0;
         } else {
-            this.cookTimeTotal = this.recipe.cookingTime();
+            cookTimeTotal = recipe.cookingTime();
         }
-        this.updateFluidSlots();
+        updateFluidSlots();
     }
 
     private boolean canCraft() {

@@ -1,7 +1,6 @@
 package earth.terrarium.ad_astra.common.block.pipe;
 
 import net.minecraft.util.StringRepresentable;
-import org.jetbrains.annotations.NotNull;
 
 public enum PipeState implements StringRepresentable {
     NONE("none"),
@@ -16,11 +15,11 @@ public enum PipeState implements StringRepresentable {
     }
 
     public String toString() {
-        return this.name;
+        return name;
     }
 
     @Override
-    public @NotNull String getSerializedName() {
-        return this.name;
+    public String getSerializedName() {
+        return name;
     }
 }

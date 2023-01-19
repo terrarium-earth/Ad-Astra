@@ -41,12 +41,12 @@ public class OilRefineryMenu extends AbstractModContainerMenu<OilRefineryBlockEn
 
     @Override
     protected void addMenuSlots() {
-        this.addSlot(new Slot(this.entity, 0, 30, 18));
-        this.addSlot(new Slot(this.entity, 2, 48, 18));
-        this.addSlot(new Slot(this.entity, 4, 66, 18));
-        this.addSlot(new FurnaceResultSlot(this.player, this.entity, 1, 30, 36));
-        this.addSlot(new FurnaceResultSlot(this.player, this.entity, 3, 48, 36));
-        this.addSlot(new FurnaceResultSlot(this.player, this.entity, 5, 66, 36));
+        addSlot(new Slot(entity, 0, 30, 18));
+        addSlot(new Slot(entity, 2, 48, 18));
+        addSlot(new Slot(entity, 4, 66, 18));
+        addSlot(new FurnaceResultSlot(player, entity, 1, 30, 36));
+        addSlot(new FurnaceResultSlot(player, entity, 3, 48, 36));
+        addSlot(new FurnaceResultSlot(player, entity, 5, 66, 36));
     }
 
     @Override

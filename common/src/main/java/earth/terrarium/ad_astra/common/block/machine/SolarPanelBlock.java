@@ -11,10 +11,10 @@ public class SolarPanelBlock extends MachineBlock {
     }
 
     public int getEnergyPerTick() {
-        return this.energyPerTick;
+        return energyPerTick;
     }
 
     public int getCapacity() {
-        return this.capacity;
+        return capacity;
     }
 }

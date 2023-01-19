@@ -40,7 +40,7 @@ public class EtrionicGeneratorMenu extends AbstractModContainerMenu<EtrionicGene
 
     @Override
     protected void addMenuSlots() {
-        this.addSlot(new Slot(this.entity, 0, 30, 18));
+        addSlot(new Slot(entity, 0, 30, 18));
     }
 
     @Override

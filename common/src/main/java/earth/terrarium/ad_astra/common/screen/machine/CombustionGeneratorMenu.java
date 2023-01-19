@@ -41,8 +41,8 @@ public class CombustionGeneratorMenu extends AbstractModContainerMenu<Combustion
 
     @Override
     protected void addMenuSlots() {
-        this.addSlot(new Slot(this.entity, 0, 30, 18));
-        this.addSlot(new FurnaceResultSlot(this.player, this.entity, 1, 30, 36));
+        addSlot(new Slot(entity, 0, 30, 18));
+        addSlot(new FurnaceResultSlot(player, entity, 1, 30, 36));
     }
 
     @Override

@@ -8,7 +8,6 @@ import earth.terrarium.ad_astra.common.util.algorithm.FloodFiller3D;
 import earth.terrarium.botarium.common.energy.base.EnergyAttachment;
 import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
-import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Inventory;
@@ -17,15 +16,12 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashSet;
 import java.util.Set;
 
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
 public class GravityNormalizerBlockEntity extends ContainerMachineBlockEntity implements EnergyAttachment.Block {
     private WrappedBlockEnergyContainer energyContainer;
-    private boolean showGravity = false;
+    private boolean showGravity;
     private float gravityTarget;
     private float currentGravity;
     private final Set<BlockPos> sources = new HashSet<>();
@@ -37,17 +33,17 @@ public class GravityNormalizerBlockEntity extends ContainerMachineBlockEntity im
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
-        this.showGravity = tag.getBoolean("ShowGravity");
-        this.gravityTarget = tag.getFloat("GravityTarget");
-        this.currentGravity = tag.getFloat("CurrentGravity");
+        showGravity = tag.getBoolean("ShowGravity");
+        gravityTarget = tag.getFloat("GravityTarget");
+        currentGravity = tag.getFloat("CurrentGravity");
     }
 
     @Override
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
-        tag.putBoolean("ShowGravity", this.showGravity);
-        tag.putFloat("GravityTarget", this.gravityTarget);
-        tag.putFloat("CurrentGravity", this.currentGravity);
+        tag.putBoolean("ShowGravity", showGravity);
+        tag.putFloat("GravityTarget", gravityTarget);
+        tag.putFloat("CurrentGravity", currentGravity);
     }
 
     @Override
@@ -55,31 +51,31 @@ public class GravityNormalizerBlockEntity extends ContainerMachineBlockEntity im
         if (level == null) return;
         if (gravityTarget == 0) {
             gravityTarget = GravitySystem.DEFAULT_GRAVITY;
-            currentGravity = GravitySystem.getLevelGravity(this.level);
+            currentGravity = GravitySystem.getLevelGravity(level);
         }
         if (level.getGameTime() % 40 == 0) {
             int energyCost = 100; // TODO: Calculate energy costs
 
-            if (this.getEnergyStorage().internalExtract(energyCost, true) >= energyCost) {
-                this.getEnergyStorage().internalExtract(energyCost, false);
-                this.craft();
+            if (getEnergyStorage().internalExtract(energyCost, true) >= energyCost) {
+                getEnergyStorage().internalExtract(energyCost, false);
+                craft();
             } else {
-                this.clearSources();
-                this.currentGravity = GravitySystem.getLevelGravity(level);
+                clearSources();
+                currentGravity = GravitySystem.getLevelGravity(level);
             }
         }
     }
 
     public float getCurrentGravity() {
-        return this.currentGravity;
+        return currentGravity;
     }
 
     public float getGravityTarget() {
-        return this.gravityTarget;
+        return gravityTarget;
     }
 
     public Set<BlockPos> getSources() {
-        return this.sources;
+        return sources;
     }
 
     @Override
@@ -89,7 +85,7 @@ public class GravityNormalizerBlockEntity extends ContainerMachineBlockEntity im
 
     @Override
     public WrappedBlockEnergyContainer getEnergyStorage(BlockEntity holder) {
-        return energyContainer == null ? energyContainer = new WrappedBlockEnergyContainer(this, new InsertOnlyEnergyContainer(200000)) : this.energyContainer;
+        return energyContainer == null ? energyContainer = new WrappedBlockEnergyContainer(this, new InsertOnlyEnergyContainer(200000)) : energyContainer;
     }
 
     public WrappedBlockEnergyContainer getEnergyStorage() {
@@ -98,19 +94,19 @@ public class GravityNormalizerBlockEntity extends ContainerMachineBlockEntity im
 
     @Override
     public void update() {
-        this.updateFluidSlots();
+        updateFluidSlots();
     }
 
     @Override
     public void onDestroy() {
-        this.clearSources();
+        clearSources();
     }
 
     public void clearSources() {
         if (level == null) return;
         if (level.isClientSide) return;
         GravitySystem.removeGravitySource(level, sources);
-        GravitySystem.GRAVITY_NORMALIZER_BLOCKS.remove(this.getBlockPos());
+        GravitySystem.GRAVITY_NORMALIZER_BLOCKS.remove(getBlockPos());
         sources.clear();
     }
 
@@ -118,15 +114,15 @@ public class GravityNormalizerBlockEntity extends ContainerMachineBlockEntity im
         if (level == null) return;
         update();
 
-        if (this.currentGravity > this.gravityTarget) {
-            this.currentGravity = Math.max(this.currentGravity - 0.5f, this.gravityTarget);
-        } else if (this.currentGravity < this.gravityTarget) {
-            this.currentGravity = Math.min(this.currentGravity + 0.5f, this.gravityTarget);
+        if (currentGravity > gravityTarget) {
+            currentGravity = Math.max(currentGravity - 0.5f, gravityTarget);
+        } else if (currentGravity < gravityTarget) {
+            currentGravity = Math.min(currentGravity + 0.5f, gravityTarget);
         }
         clearSources();
-        GravitySystem.GRAVITY_NORMALIZER_BLOCKS.add(this.getBlockPos());
+        GravitySystem.GRAVITY_NORMALIZER_BLOCKS.add(getBlockPos());
         Set<BlockPos> positions = FloodFiller3D.run(level, getBlockPos().above());
-        GravitySystem.addGravitySource(level, positions, this.currentGravity);
+        GravitySystem.addGravitySource(level, positions, currentGravity);
         sources.addAll(positions);
     }
 }

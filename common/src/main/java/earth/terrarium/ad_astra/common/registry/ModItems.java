@@ -29,9 +29,12 @@ public class ModItems {
     public static final ResourcefulRegistry<Item> WALLS = ResourcefulRegistries.create(ITEMS);
     public static final ResourcefulRegistry<Item> BUTTONS = ResourcefulRegistries.create(ITEMS);
     public static final ResourcefulRegistry<Item> PRESSURE_PLATES = ResourcefulRegistries.create(ITEMS);
+    public static final ResourcefulRegistry<Item> MACHINES = ResourcefulRegistries.create(ITEMS);
     public static final ResourcefulRegistry<Item> FLAGS = ResourcefulRegistries.create(ITEMS);
     public static final ResourcefulRegistry<Item> GLOBES = ResourcefulRegistries.create(ITEMS);
-    public static final ResourcefulRegistry<Item> MACHINES = ResourcefulRegistries.create(ITEMS);
+    public static final ResourcefulRegistry<Item> SLIDING_DOORS = ResourcefulRegistries.create(ITEMS);
+    public static final ResourcefulRegistry<Item> BASIC_SLIDING_DOORS = ResourcefulRegistries.create(SLIDING_DOORS);
+    public static final ResourcefulRegistry<Item> SPECIAL_SLIDING_DOORS = ResourcefulRegistries.create(SLIDING_DOORS);
     public static final ResourcefulRegistry<Item> BUCKETS = ResourcefulRegistries.create(ITEMS);
 
     public static final RegistryEntry<Item> WRENCH = ITEMS.register("wrench", () -> new Item(new Item.Properties()));
@@ -125,6 +128,15 @@ public class ModItems {
     public static final RegistryEntry<Item> VENUS_GLOBE = GLOBES.register("venus_globe", () -> new RenderedBlockItem(ModBlocks.VENUS_GLOBE.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
     public static final RegistryEntry<Item> MERCURY_GLOBE = GLOBES.register("mercury_globe", () -> new RenderedBlockItem(ModBlocks.MERCURY_GLOBE.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
     public static final RegistryEntry<Item> GLACIO_GLOBE = GLOBES.register("glacio_globe", () -> new RenderedBlockItem(ModBlocks.GLACIO_GLOBE.get(), new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
+
+    public static final RegistryEntry<Item> IRON_SLIDING_DOOR = BASIC_SLIDING_DOORS.register("iron_sliding_door", () -> new BlockItem(ModBlocks.IRON_SLIDING_DOOR.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> STEEL_SLIDING_DOOR = BASIC_SLIDING_DOORS.register("steel_sliding_door", () -> new BlockItem(ModBlocks.STEEL_SLIDING_DOOR.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> AIRLOCK = SPECIAL_SLIDING_DOORS.register("airlock", () -> new BlockItem(ModBlocks.AIRLOCK.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> REINFORCED_DOOR = SPECIAL_SLIDING_DOORS.register("reinforced_door", () -> new BlockItem(ModBlocks.REINFORCED_DOOR.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> ETRIUM_SLIDING_DOOR = BASIC_SLIDING_DOORS.register("etrium_sliding_door", () -> new BlockItem(ModBlocks.ETRIUM_SLIDING_DOOR.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> DESMIUM_SLIDING_DOOR = BASIC_SLIDING_DOORS.register("desmium_sliding_door", () -> new BlockItem(ModBlocks.DESMIUM_SLIDING_DOOR.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> THERMALYTE_SLIDING_DOOR = BASIC_SLIDING_DOORS.register("thermalyte_sliding_door", () -> new BlockItem(ModBlocks.THERMALYTE_SLIDING_DOOR.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> AEROLYTE_SLIDING_DOOR = BASIC_SLIDING_DOORS.register("aerolyte_sliding_door", () -> new BlockItem(ModBlocks.AEROLYTE_SLIDING_DOOR.get(), new Item.Properties()));
 
     public static final RegistryEntry<Item> IRON_PLATING = CUBES.register("iron_plating", () -> new BlockItem(ModBlocks.IRON_PLATING.get(), new Item.Properties()));
     public static final RegistryEntry<Item> IRON_PLATING_STAIRS = STAIRS.register("iron_plating_stairs", () -> new BlockItem(ModBlocks.IRON_PLATING_STAIRS.get(), new Item.Properties()));
@@ -289,6 +301,6 @@ public class ModItems {
     public static final RegistryEntry<Item> GLACIO_PILLAR = PILLARS.register("glacio_pillar", () -> new BlockItem(ModBlocks.GLACIO_PILLAR.get(), new Item.Properties()));
 
     public static void onRegisterCreativeTabs(TriConsumer<ResourceLocation, RegistryEntry<Item>, List<Item>> consumer) {
-        consumer.accept(new ResourceLocation(AdAstra.MOD_ID, "main"), ModItems.ETRIUM_NUGGET, BuiltInRegistries.ITEM.stream().filter(i -> BuiltInRegistries.ITEM.getKey(i).getNamespace().equals(AdAstra.MOD_ID)).toList());
+        consumer.accept(new ResourceLocation(AdAstra.MOD_ID, "main"), ETRIUM_NUGGET, BuiltInRegistries.ITEM.stream().filter(i -> BuiltInRegistries.ITEM.getKey(i).getNamespace().equals(AdAstra.MOD_ID)).toList());
     }
 }

@@ -9,7 +9,6 @@ import earth.terrarium.botarium.common.energy.base.EnergyAttachment;
 import earth.terrarium.botarium.common.energy.impl.ExtractOnlyEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
 import earth.terrarium.botarium.common.energy.util.EnergyHooks;
-import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -23,7 +22,6 @@ import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-@MethodsReturnNonnullByDefault
 public class EtrionicGeneratorBlockEntity extends CookingMachineBlockEntity implements EnergyAttachment.Block, GeoBlockEntity {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private WrappedBlockEnergyContainer energyContainer;
@@ -35,17 +33,17 @@ public class EtrionicGeneratorBlockEntity extends CookingMachineBlockEntity impl
 
     @Override
     public void serverTick() {
-        if (this.recipe != null) {
-            if (this.getEnergyStorage().internalInsert(this.recipe.energy(), true) >= this.recipe.energy()) {
-                this.getEnergyStorage().internalInsert(this.recipe.energy(), false);
-                this.cookTime++;
-                if (this.cookTime >= cookTimeTotal) {
-                    this.cookTime = 0;
-                    this.craft();
+        if (recipe != null) {
+            if (getEnergyStorage().internalInsert(recipe.energy(), true) >= recipe.energy()) {
+                getEnergyStorage().internalInsert(recipe.energy(), false);
+                cookTime++;
+                if (cookTime >= cookTimeTotal) {
+                    cookTime = 0;
+                    craft();
                 }
             }
         } else {
-            this.cookTime = 0;
+            cookTime = 0;
         }
 
         EnergyHooks.distributeEnergyNearby(this, 128);
@@ -58,7 +56,7 @@ public class EtrionicGeneratorBlockEntity extends CookingMachineBlockEntity impl
 
     @Override
     public WrappedBlockEnergyContainer getEnergyStorage(BlockEntity holder) {
-        return energyContainer == null ? energyContainer = new WrappedBlockEnergyContainer(this, new ExtractOnlyEnergyContainer(100000)) : this.energyContainer;
+        return energyContainer == null ? energyContainer = new WrappedBlockEnergyContainer(this, new ExtractOnlyEnergyContainer(100000)) : energyContainer;
     }
 
     public WrappedBlockEnergyContainer getEnergyStorage() {
@@ -69,11 +67,11 @@ public class EtrionicGeneratorBlockEntity extends CookingMachineBlockEntity impl
     public void update() {
         if (level == null) return;
         if (level.isClientSide) return;
-        this.recipe = level.getRecipeManager().getRecipeFor(ModRecipeTypes.ETRIONIC_GENERATING.get(), this, level).orElse(null);
-        if (this.recipe == null) {
-            this.cookTime = 0;
+        recipe = level.getRecipeManager().getRecipeFor(ModRecipeTypes.ETRIONIC_GENERATING.get(), this, level).orElse(null);
+        if (recipe == null) {
+            cookTime = 0;
         } else if (cookTime == 0) {
-            this.cookTimeTotal = this.recipe.cookingTime();
+            cookTimeTotal = recipe.cookingTime();
             getItem(0).shrink(1);
         }
     }

@@ -14,11 +14,9 @@ import net.minecraft.util.GsonHelper;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.level.Level;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
 import java.util.function.BiConsumer;
 
-@ParametersAreNonnullByDefault
 public class PlanetData extends SimpleJsonResourceReloadListener {
     private static final Set<Planet> PLANETS = new HashSet<>();
     private static final Set<ResourceKey<Level>> PLANETS_WITH_OXYGEN = new HashSet<>();
@@ -42,7 +40,7 @@ public class PlanetData extends SimpleJsonResourceReloadListener {
             planets.add(newPlanet);
         }
 
-        PlanetData.updatePlanets(planets);
+        updatePlanets(planets);
         profiler.pop();
     }
 

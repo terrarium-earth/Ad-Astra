@@ -22,8 +22,8 @@ public abstract class ModRenderedItemMixin extends Item {
         Item item = this;
 
         consumer.accept(new IClientItemExtensions() {
-            private BlockEntityWithoutLevelRenderer renderer = null;
-            private boolean hasCheckedSinceInit = false;
+            private BlockEntityWithoutLevelRenderer renderer;
+            private boolean hasCheckedSinceInit;
 
             @Override
             public BlockEntityWithoutLevelRenderer getCustomRenderer() {

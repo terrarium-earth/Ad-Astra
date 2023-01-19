@@ -13,7 +13,6 @@ public class EtrionicGeneratorBlockModel extends DefaultedBlockGeoModel<Etrionic
      * <pre>{@code
      * 	new ResourceLocation("myMod", "workbench/sawmill")
      * }</pre>
-     *
      */
     public EtrionicGeneratorBlockModel() {
         super(new ResourceLocation(AdAstra.MOD_ID, "generators/etrionic_generator"));

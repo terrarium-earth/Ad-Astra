@@ -10,7 +10,6 @@ import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
@@ -34,35 +33,35 @@ public class FlagUrlScreen extends Screen {
 
     @Override
     protected void init() {
-        int x = this.width / 2 - 100;
-        int y = this.height / 2 - 20;
-        this.button = addRenderableWidget(new Button(x + 50, y + 30, 100, 20, Component.translatable(LangUtils.CONFIRM), (button) -> {
-            var matcher = URL_REGEX.matcher(this.urlField.getValue());
+        int x = width / 2 - 100;
+        int y = height / 2 - 20;
+        button = addRenderableWidget(new Button(x + 50, y + 30, 100, 20, Component.translatable(LangUtils.CONFIRM), (button) -> {
+            var matcher = URL_REGEX.matcher(urlField.getValue());
             if (matcher.matches()) {
-                ModNetworkHandling.CHANNEL.sendToServer(new FlagUrlPacket(this.pos, matcher.group(1)));
-                this.onClose();
+                ModNetworkHandling.CHANNEL.sendToServer(new FlagUrlPacket(pos, matcher.group(1)));
+                onClose();
             }
         }, Supplier::get) {
         });
-        this.button.active = false;
-        this.urlField = addRenderableWidget(new EditBox(font, x, y, 200, 20, Component.literal("https://imgur.com/urURL")));
-        this.urlField.setResponder(url -> {
+        button.active = false;
+        urlField = addRenderableWidget(new EditBox(font, x, y, 200, 20, Component.literal("https://imgur.com/urURL")));
+        urlField.setResponder(url -> {
             if (URL_REGEX.matcher(url).matches()) {
-                this.button.active = true;
-                this.urlField.setTextColor(0x00FF00);
+                button.active = true;
+                urlField.setTextColor(0x00FF00);
             } else {
-                this.button.active = false;
-                this.urlField.setTextColor(0xFF0000);
+                button.active = false;
+                urlField.setTextColor(0xFF0000);
             }
         });
     }
 
     @Override
-    public void render(@NotNull PoseStack poseStack, int mouseX, int mouseY, float delta) {
-        this.renderBackground(poseStack);
+    public void render(PoseStack poseStack, int mouseX, int mouseY, float delta) {
+        renderBackground(poseStack);
         super.render(poseStack, mouseX, mouseY, delta);
-        int x = this.width / 2 - 100;
-        int y = this.height / 2 - 20;
+        int x = width / 2 - 100;
+        int y = height / 2 - 20;
         drawString(poseStack, font, Component.translatable(LangUtils.FLAG_URL), x, y - 10, 0xFFFFFF);
     }
 

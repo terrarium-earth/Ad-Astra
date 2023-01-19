@@ -34,13 +34,13 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<Pl
     @Override
     public void insertInto(PlatformEnergyManager consumer, Direction direction, BlockPos pos) {
         if (level == null) return;
-        BlockState state = this.getBlockState();
+        BlockState state = getBlockState();
         BlockState state2 = level.getBlockState(pos);
         if (state.isAir() || state2.isAir()) return;
-        PipeState pipeState = state.getValue(PipeBlock.DIRECTIONS.get(this.getSource().direction()));
+        PipeState pipeState = state.getValue(PipeBlock.DIRECTIONS.get(getSource().direction()));
         PipeState pipeState2 = state2.getValue(PipeBlock.DIRECTIONS.get(direction));
 
-        if (getSource().storage() == null || getConsumers().size() == 0) return;
+        if (getSource().storage() == null || getConsumers().isEmpty()) return;
         if (pipeState == PipeState.INSERT && pipeState2 == PipeState.INSERT) return;
         if (pipeState == PipeState.EXTRACT && pipeState2 == PipeState.EXTRACT) return;
         if (pipeState == PipeState.NONE || pipeState2 == PipeState.NONE) return;
@@ -53,7 +53,7 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<Pl
             output = getSource().storage();
         }
 
-        EnergyHooks.moveEnergy(input, output, Math.max(0, this.getTransferAmount() / getConsumers().size()));
+        EnergyHooks.moveEnergy(input, output, Math.max(0, getTransferAmount() / getConsumers().size()));
         if (level.getBlockEntity(pos.relative(direction)) instanceof BasicContainer container) {
             container.update();
         }
@@ -80,12 +80,12 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<Pl
 
     @Override
     public void clearSource() {
-        this.source = null;
+        source = null;
     }
 
     @Override
     public List<Node<PlatformEnergyManager>> getConsumers() {
-        return this.consumers;
+        return consumers;
     }
 
     @Override
@@ -95,12 +95,12 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<Pl
 
     @Override
     public Level getPipelevel() {
-        return this.level;
+        return level;
     }
 
     @Override
     public long getTransferAmount() {
-        if (this.getBlockState().getBlock() instanceof PipeBlock cableBlock) {
+        if (getBlockState().getBlock() instanceof PipeBlock cableBlock) {
             return cableBlock.getTransferRate();
         }
         return 0;
@@ -108,6 +108,6 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<Pl
 
     @Override
     public BlockPos getPipePos() {
-        return this.getBlockPos();
+        return getBlockPos();
     }
 }

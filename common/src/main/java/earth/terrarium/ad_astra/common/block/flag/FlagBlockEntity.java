@@ -12,12 +12,8 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
-@ParametersAreNonnullByDefault
 public class FlagBlockEntity extends BlockEntity {
 
     @Nullable
@@ -32,50 +28,50 @@ public class FlagBlockEntity extends BlockEntity {
     @Override
     public void saveAdditional(CompoundTag tag) {
         CompoundTag compound = new CompoundTag();
-        if (this.owner != null) {
-            NbtUtils.writeGameProfile(compound, this.owner);
+        if (owner != null) {
+            NbtUtils.writeGameProfile(compound, owner);
             tag.put("FlagOwner", compound);
         }
-        if (this.id != null) {
-            tag.putString("FlagUrl", this.id);
+        if (id != null) {
+            tag.putString("FlagUrl", id);
         }
     }
 
     @Override
     public void load(CompoundTag tag) {
         if (tag.contains("FlagOwner", Tag.TAG_COMPOUND)) {
-            this.setOwner(NbtUtils.readGameProfile(tag.getCompound("FlagOwner")));
+            setOwner(NbtUtils.readGameProfile(tag.getCompound("FlagOwner")));
         }
         if (tag.contains("FlagUrl", Tag.TAG_STRING)) {
-            this.setId(tag.getString("FlagUrl"));
+            setId(tag.getString("FlagUrl"));
         }
     }
 
     @Nullable
     public GameProfile getOwner() {
-        return this.owner;
+        return owner;
     }
 
     public void setOwner(GameProfile profile) {
         synchronized (this) {
-            this.owner = profile;
+            owner = profile;
         }
-        this.loadOwnerProperties();
+        loadOwnerProperties();
     }
 
     private void loadOwnerProperties() {
-        SkullBlockEntity.updateGameprofile(this.owner, (owner) -> {
+        SkullBlockEntity.updateGameprofile(owner, (owner) -> {
             this.owner = owner;
-            this.setChanged();
+            setChanged();
         });
     }
 
     @Nullable
     public String getUrl() {
-        if (this.id == null) {
+        if (id == null) {
             return null;
         }
-        return "https://i.imgur.com/" + this.id + ".png";
+        return "https://i.imgur.com/" + id + ".png";
     }
 
     public void setId(@Nullable String id) {
@@ -88,7 +84,7 @@ public class FlagBlockEntity extends BlockEntity {
     }
 
     @Override
-    public @NotNull CompoundTag getUpdateTag() {
-        return this.saveWithoutMetadata();
+    public CompoundTag getUpdateTag() {
+        return saveWithoutMetadata();
     }
 }

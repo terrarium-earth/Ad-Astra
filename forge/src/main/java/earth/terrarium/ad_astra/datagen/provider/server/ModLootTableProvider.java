@@ -2,9 +2,10 @@ package earth.terrarium.ad_astra.datagen.provider.server;
 
 import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import earth.terrarium.ad_astra.common.block.flag.FlagBlock;
+import earth.terrarium.ad_astra.common.block.slidingdoor.LocationState;
+import earth.terrarium.ad_astra.common.block.slidingdoor.SlidingDoorBlock;
 import earth.terrarium.ad_astra.common.registry.ModBlocks;
 import earth.terrarium.ad_astra.common.registry.ModItems;
-import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.LootTableProvider;
@@ -22,13 +23,11 @@ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+
 public class ModLootTableProvider extends LootTableProvider {
 
     public ModLootTableProvider(PackOutput output) {
@@ -54,8 +53,9 @@ public class ModLootTableProvider extends LootTableProvider {
             ModBlocks.WALLS.stream().map(RegistryEntry::get).forEach(this::dropSelf);
             ModBlocks.BUTTONS.stream().map(RegistryEntry::get).forEach(this::dropSelf);
             ModBlocks.PRESSURE_PLATES.stream().map(RegistryEntry::get).forEach(this::dropSelf);
-            ModBlocks.FLAGS.stream().map(RegistryEntry::get).forEach(b -> this.add(b, (arg) -> createSinglePropConditionTable(arg, FlagBlock.HALF, DoubleBlockHalf.LOWER)));
+            ModBlocks.FLAGS.stream().map(RegistryEntry::get).forEach(b -> add(b, (arg) -> createSinglePropConditionTable(arg, FlagBlock.HALF, DoubleBlockHalf.LOWER)));
             ModBlocks.GLOBES.stream().map(RegistryEntry::get).forEach(this::dropSelf);
+            ModBlocks.SLIDING_DOORS.stream().map(RegistryEntry::get).forEach(b -> add(b, (arg) -> createSinglePropConditionTable(arg, SlidingDoorBlock.LOCATION, LocationState.BOTTOM)));
 
             add(ModBlocks.ETRIUM_ORE.get(), createEtriumOreDrops(ModBlocks.ETRIUM_ORE.get()));
             dropSelf(ModBlocks.ETRIUM_CABLE.get());
@@ -68,7 +68,7 @@ public class ModLootTableProvider extends LootTableProvider {
         }
 
         protected LootTable.Builder createEtriumOreDrops(Block block) {
-            return createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(ModItems.ETRIUM_NUGGET.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))));
+            return createSilkTouchDispatchTable(block, applyExplosionDecay(block, LootItem.lootTableItem(ModItems.ETRIUM_NUGGET.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))));
         }
     }
 }

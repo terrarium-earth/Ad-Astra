@@ -7,7 +7,6 @@ import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -19,7 +18,7 @@ public class ModRecipeProvider extends RecipeProvider {
     }
 
     @Override
-    protected void buildRecipes(@NotNull Consumer<FinishedRecipe> writer) {
+    protected void buildRecipes(Consumer<FinishedRecipe> writer) {
         createSimpleShapeless(writer, ModItems.ETRIUM_NUGGET.get(), 9, shapelessRecipeBuilder -> shapelessRecipeBuilder
                 .requires(ModItems.ETRIUM_INGOT.get())
                 .unlockedBy("has_item", has(ModItems.ETRIUM_INGOT.get()))
@@ -234,7 +233,7 @@ public class ModRecipeProvider extends RecipeProvider {
         String name = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(output)).getPath();
         createSimpleShapeless(consumer, name, output, count, func);
     }
-    
+
     public static void createSimpleShapeless(Consumer<FinishedRecipe> consumer, String name, Item output, int count, Function<ShapelessRecipeBuilder, ShapelessRecipeBuilder> func) {
         String group = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(output)).getPath();
         func.apply(ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, output, count))

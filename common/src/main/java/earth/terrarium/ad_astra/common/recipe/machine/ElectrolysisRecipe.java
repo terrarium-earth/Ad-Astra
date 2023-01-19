@@ -7,14 +7,12 @@ import earth.terrarium.ad_astra.common.block.machine.entity.ElectrolyzerBlockEnt
 import earth.terrarium.ad_astra.common.registry.ModRecipeSerializers;
 import earth.terrarium.ad_astra.common.registry.ModRecipeTypes;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
-import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
-@MethodsReturnNonnullByDefault
 public record ElectrolysisRecipe(ResourceLocation id, FluidHolder ingredient, int cookingTime,
                                  int energy, FluidHolder resultFluid1,
                                  FluidHolder resultFluid2) implements CodecRecipe<Container> {

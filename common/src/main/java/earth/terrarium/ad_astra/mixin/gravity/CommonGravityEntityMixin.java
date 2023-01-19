@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value = {AbstractMinecart.class, ItemEntity.class, PrimedTnt.class})
+@Mixin({AbstractMinecart.class, ItemEntity.class, PrimedTnt.class})
 public abstract class CommonGravityEntityMixin {
 
     @Unique
@@ -26,9 +26,5 @@ public abstract class CommonGravityEntityMixin {
             double newGravity = CONSTANT * GravitySystem.getEntityGravity(entity);
             entity.setDeltaMovement(velocity.x(), velocity.y() - CONSTANT + newGravity, velocity.z());
         }
-
-//        if (entity instanceof AbstractMinecart && entity.getY() < entity.level.getMinBuildHeight() && ModUtils.isOrbitlevel(entity.level)) {
-//            ModUtils.teleportTolevel(ModUtils.getPlanetOrbit(entity.level), entity);
-//        }
     }
 }

@@ -17,16 +17,16 @@ public abstract class CookingMachineBlockEntity extends ContainerMachineBlockEnt
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
-        ContainerHelper.loadAllItems(tag, this.getItems());
-        this.cookTime = tag.getInt("CookTime");
-        this.cookTimeTotal = tag.getInt("CookTimeTotal");
+        ContainerHelper.loadAllItems(tag, getItems());
+        cookTime = tag.getInt("CookTime");
+        cookTimeTotal = tag.getInt("CookTimeTotal");
     }
 
     @Override
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
-        ContainerHelper.saveAllItems(tag, this.getItems());
-        tag.putInt("CookTime", this.cookTime);
-        tag.putInt("CookTimeTotal", this.cookTimeTotal);
+        ContainerHelper.saveAllItems(tag, getItems());
+        tag.putInt("CookTime", cookTime);
+        tag.putInt("CookTimeTotal", cookTimeTotal);
     }
 }

@@ -33,7 +33,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Predicate;
@@ -47,7 +46,7 @@ public final class WorldUtils {
 
     @Nullable
     @Contract("_, null, _, _ -> null")
-    public static <A extends BlockEntity> A getTileEntity(@NotNull Class<A> clazz, @Nullable Level reader, @NotNull BlockPos pos, boolean logWrongType) {
+    public static <A extends BlockEntity> A getTileEntity(Class<A> clazz, @Nullable Level reader, BlockPos pos, boolean logWrongType) {
         BlockEntity tile = getTileEntity(reader, pos);
         if (tile == null) {
             return null;
@@ -64,30 +63,30 @@ public final class WorldUtils {
 
     @Nullable
     @Contract("null, _ -> null")
-    public static BlockEntity getTileEntity(@Nullable Level world, @NotNull BlockPos pos) {
+    public static BlockEntity getTileEntity(@Nullable Level world, BlockPos pos) {
         return !isBlockLoaded(world, pos) ? null : world.getBlockEntity(pos);
     }
 
     @Contract("null, _ -> false")
-    public static boolean isBlockLoaded(@Nullable Level world, @NotNull BlockPos pos) {
+    public static boolean isBlockLoaded(@Nullable Level world, BlockPos pos) {
         return world != null && world.isInWorldBounds(pos) && world.isLoaded(pos);
     }
 
     @Nullable
     @Contract("_, null, _ -> null")
-    public static <T extends BlockEntity> T getTileEntity(@NotNull Class<T> clazz, @Nullable Level world, @NotNull BlockPos pos) {
+    public static <T extends BlockEntity> T getTileEntity(Class<T> clazz, @Nullable Level world, BlockPos pos) {
         return getTileEntity(clazz, world, pos, false);
     }
 
     @Nullable
     @Contract("_, _, _ -> null")
-    public static <T extends BlockEntity> T getTileEntity(@NotNull Class<T> clazz, Supplier<@Nullable Level> input, @NotNull BlockPos pos) {
+    public static <T extends BlockEntity> T getTileEntity(Class<T> clazz, Supplier<@Nullable Level> input, BlockPos pos) {
         return getTileEntity(clazz, input.get(), pos, false);
     }
 
     //This method was added by Team Resourceful and is under the MIT license
     @Contract("null, _, _ -> false")
-    public static boolean checkBlock(@Nullable Level level, @NotNull BlockPos pos, Predicate<BlockState> statePredicate) {
+    public static boolean checkBlock(@Nullable Level level, BlockPos pos, Predicate<BlockState> statePredicate) {
         return isBlockLoaded(level, pos) && statePredicate.test(level.getBlockState(pos));
     }
 }

@@ -46,7 +46,7 @@ public abstract class EntityTypeMixin {
     @Inject(method = "build", at = @At("HEAD"), cancellable = true)
     public void build(String key, CallbackInfoReturnable<EntityType<? extends Entity>> cir) {
         if (AdAstra.MOD_ID.equals(key)) {
-            cir.setReturnValue(new EntityType<>(this.factory, this.category, this.serialize, this.summon, this.fireImmune, this.canSpawnFarFromPlayer, this.immuneTo, this.dimensions, this.clientTrackingRange, this.updateInterval, this.requiredFeatures));
+            cir.setReturnValue(new EntityType<>(factory, category, serialize, summon, fireImmune, canSpawnFarFromPlayer, immuneTo, dimensions, clientTrackingRange, updateInterval, requiredFeatures));
         }
     }
 }

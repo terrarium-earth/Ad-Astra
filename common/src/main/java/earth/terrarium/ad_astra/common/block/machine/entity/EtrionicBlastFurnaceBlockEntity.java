@@ -7,7 +7,6 @@ import earth.terrarium.ad_astra.common.screen.machine.EtrionicBlastFurnaceMenu;
 import earth.terrarium.botarium.common.energy.base.EnergyAttachment;
 import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
-import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -18,7 +17,6 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-@MethodsReturnNonnullByDefault
 public class EtrionicBlastFurnaceBlockEntity extends CookingMachineBlockEntity implements EnergyAttachment.Block {
     private WrappedBlockEnergyContainer energyContainer;
     private AbstractCookingRecipe recipe;
@@ -29,19 +27,19 @@ public class EtrionicBlastFurnaceBlockEntity extends CookingMachineBlockEntity i
 
     @Override
     public void serverTick() {
-        if (this.recipe != null && this.canCraft()) {
-            if (this.getEnergyStorage().internalExtract(10, true) >= 10) {
-                this.getEnergyStorage().internalExtract(10, false);
-                this.cookTime++;
-                if (this.cookTime >= cookTimeTotal) {
-                    this.cookTime = 0;
-                    this.craft();
+        if (recipe != null && canCraft()) {
+            if (getEnergyStorage().internalExtract(10, true) >= 10) {
+                getEnergyStorage().internalExtract(10, false);
+                cookTime++;
+                if (cookTime >= cookTimeTotal) {
+                    cookTime = 0;
+                    craft();
                 }
             } else {
-                this.cookTime = 0;
+                cookTime = 0;
             }
         } else {
-            this.cookTime = 0;
+            cookTime = 0;
         }
     }
 
@@ -52,7 +50,7 @@ public class EtrionicBlastFurnaceBlockEntity extends CookingMachineBlockEntity i
 
     @Override
     public WrappedBlockEnergyContainer getEnergyStorage(BlockEntity holder) {
-        return energyContainer == null ? energyContainer = new WrappedBlockEnergyContainer(this, new InsertOnlyEnergyContainer(20000)) : this.energyContainer;
+        return energyContainer == null ? energyContainer = new WrappedBlockEnergyContainer(this, new InsertOnlyEnergyContainer(20000)) : energyContainer;
     }
 
     public WrappedBlockEnergyContainer getEnergyStorage() {
@@ -62,16 +60,16 @@ public class EtrionicBlastFurnaceBlockEntity extends CookingMachineBlockEntity i
     @Override
     public void update() {
         if (level == null) return;
-        this.recipe = level.getRecipeManager().getRecipeFor(ModRecipeTypes.ETRIONIC_BLASTING.get(), this, level).orElse(null);
-        if (this.recipe == null) {
-            this.recipe = level.getRecipeManager().getRecipeFor(RecipeType.BLASTING, this, level).orElse(null);
+        recipe = level.getRecipeManager().getRecipeFor(ModRecipeTypes.ETRIONIC_BLASTING.get(), this, level).orElse(null);
+        if (recipe == null) {
+            recipe = level.getRecipeManager().getRecipeFor(RecipeType.BLASTING, this, level).orElse(null);
         }
-        if (this.recipe == null) {
-            this.cookTime = 0;
+        if (recipe == null) {
+            cookTime = 0;
         } else if (!canCraft()) {
-            this.recipe = null;
+            recipe = null;
         } else {
-            this.cookTimeTotal = Math.max(20, this.recipe.getCookingTime() - 40);
+            cookTimeTotal = Math.max(20, recipe.getCookingTime() - 40);
         }
     }
 
@@ -80,9 +78,9 @@ public class EtrionicBlastFurnaceBlockEntity extends CookingMachineBlockEntity i
         getItem(0).shrink(1);
         ItemStack item = getItem(1);
         if (item.isEmpty()) {
-            setItem(1, this.recipe.getResultItem().copy());
+            setItem(1, recipe.getResultItem().copy());
         } else {
-            item.grow(this.recipe.getResultItem().getCount());
+            item.grow(recipe.getResultItem().getCount());
         }
         recipe = null;
         update();

@@ -21,7 +21,7 @@ import java.util.Map;
 public class AdAstraClientForge {
 
     private static final Map<Item, BlockEntityWithoutLevelRenderer> ITEM_RENDERERS = new HashMap<>();
-    private static boolean hasInitializedRenderers = false;
+    private static boolean hasInitializedRenderers;
 
     public static BlockEntityWithoutLevelRenderer getItemRenderer(ItemLike item) {
         return ITEM_RENDERERS.get(item.asItem());

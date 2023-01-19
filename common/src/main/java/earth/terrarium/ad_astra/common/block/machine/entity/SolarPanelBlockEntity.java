@@ -9,7 +9,6 @@ import earth.terrarium.botarium.common.energy.impl.ExtractOnlyEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
 import earth.terrarium.botarium.common.energy.util.EnergyHooks;
 import earth.terrarium.botarium.common.menu.ExtraDataMenuProvider;
-import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -21,7 +20,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-@MethodsReturnNonnullByDefault
 public class SolarPanelBlockEntity extends MachineBlockEntity implements EnergyAttachment.Block, ExtraDataMenuProvider {
     private WrappedBlockEnergyContainer energyContainer;
 
@@ -30,15 +28,15 @@ public class SolarPanelBlockEntity extends MachineBlockEntity implements EnergyA
 
     public SolarPanelBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntityTypes.SOLAR_PANEL.get(), blockPos, blockState);
-        this.energyPerTick = ((SolarPanelBlock) blockState.getBlock()).getEnergyPerTick();
-        this.capacity = ((SolarPanelBlock) blockState.getBlock()).getCapacity();
+        energyPerTick = ((SolarPanelBlock) blockState.getBlock()).getEnergyPerTick();
+        capacity = ((SolarPanelBlock) blockState.getBlock()).getCapacity();
     }
 
     @Override
     public void serverTick() {
         if (level == null) return;
-        if (level.isDay() && (!Level.OVERWORLD.equals(this.level.dimension()) || !this.level.isRaining() && !this.level.isThundering()) && level.canSeeSky(this.getBlockPos().above())) {
-            this.getEnergyStorage().internalInsert(getEnergyPerTick(), false);
+        if (level.isDay() && (!Level.OVERWORLD.equals(level.dimension()) || !level.isRaining() && !level.isThundering()) && level.canSeeSky(getBlockPos().above())) {
+            getEnergyStorage().internalInsert(getEnergyPerTick(), false);
         }
 
         EnergyHooks.distributeEnergyNearby(this, 128);
@@ -46,12 +44,12 @@ public class SolarPanelBlockEntity extends MachineBlockEntity implements EnergyA
 
     @Override
     public void writeExtraData(ServerPlayer player, FriendlyByteBuf buffer) {
-        buffer.writeBlockPos(this.getBlockPos());
+        buffer.writeBlockPos(getBlockPos());
     }
 
     @Override
     public Component getDisplayName() {
-        return this.getBlockState().getBlock().getName();
+        return getBlockState().getBlock().getName();
     }
 
     @Override
@@ -61,7 +59,7 @@ public class SolarPanelBlockEntity extends MachineBlockEntity implements EnergyA
 
     @Override
     public WrappedBlockEnergyContainer getEnergyStorage(BlockEntity holder) {
-        return energyContainer == null ? energyContainer = new WrappedBlockEnergyContainer(this, new ExtractOnlyEnergyContainer(20000)) : this.energyContainer;
+        return energyContainer == null ? energyContainer = new WrappedBlockEnergyContainer(this, new ExtractOnlyEnergyContainer(20000)) : energyContainer;
     }
 
     public WrappedBlockEnergyContainer getEnergyStorage() {
@@ -69,10 +67,10 @@ public class SolarPanelBlockEntity extends MachineBlockEntity implements EnergyA
     }
 
     public int getEnergyPerTick() {
-        return this.energyPerTick;
+        return energyPerTick;
     }
 
     public int getCapacity() {
-        return this.capacity;
+        return capacity;
     }
 }

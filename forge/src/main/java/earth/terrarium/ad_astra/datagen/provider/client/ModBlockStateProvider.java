@@ -4,6 +4,7 @@ import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.block.globe.GlobeBlock;
 import earth.terrarium.ad_astra.common.block.pipe.PipeBlock;
+import earth.terrarium.ad_astra.common.block.slidingdoor.SlidingDoorBlock;
 import earth.terrarium.ad_astra.common.registry.ModBlocks;
 import earth.terrarium.ad_astra.common.registry.ModItems;
 import net.minecraft.data.PackOutput;
@@ -23,6 +24,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
     private static final ResourceLocation GLOBE = new ResourceLocation(AdAstra.MOD_ID, "block/globe");
     private static final ResourceLocation GLOBE_CUBE = new ResourceLocation(AdAstra.MOD_ID, "block/globe_cube");
     private static final ResourceLocation GLOBE_ITEM = new ResourceLocation(AdAstra.MOD_ID, "item/globe");
+    private static final ResourceLocation SLIDING_DOOR = new ResourceLocation(AdAstra.MOD_ID, "block/sliding_door");
+    private static final ResourceLocation SLIDING_DOOR_FLIPPED = new ResourceLocation(AdAstra.MOD_ID, "block/sliding_door_flipped");
     private static final ResourceLocation WALL_INVENTORY = new ResourceLocation("minecraft:block/wall_inventory");
     private static final ResourceLocation BUTTON_INVENTORY = new ResourceLocation("minecraft:block/button_inventory");
     private static final ResourceLocation WATER_STILL = new ResourceLocation("minecraft:block/water_still");
@@ -47,7 +50,12 @@ public class ModBlockStateProvider extends BlockStateProvider {
         ModBlocks.GLOBES.stream().forEach(b -> {
             ResourceLocation texture = new ResourceLocation(AdAstra.MOD_ID, "block/globe/" + b.getId().getPath());
             block(b.get(), GLOBE, texture, "texture");
-            blockNoState(b.get(), GLOBE_CUBE, "block/" + b.getId().getPath() + "_cube", texture, "texture");
+            blockNoState(GLOBE_CUBE, "block/" + b.getId().getPath() + "_cube", texture, "texture");
+        });
+        ModBlocks.BASIC_SLIDING_DOORS.stream().forEach(b -> {
+            ResourceLocation texture = new ResourceLocation(AdAstra.MOD_ID, "block/sliding_door/" + b.getId().getPath());
+            block(b.get(), SLIDING_DOOR, texture, "texture");
+            blockNoState(SLIDING_DOOR_FLIPPED, "block/" + b.getId().getPath() + "_flipped", texture, "texture");
         });
 
         ModBlocks.CUBES.stream().map(RegistryEntry::get).forEach(this::simpleBlock);
@@ -89,6 +97,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 } else if (block instanceof GlobeBlock) {
                     ResourceLocation texture = new ResourceLocation(AdAstra.MOD_ID, "block/globe/" + ForgeRegistries.BLOCKS.getKey(block).getPath());
                     itemModels().getBuilder(name(block)).texture("texture", texture).texture("particle", texture).parent(models().getExistingFile(GLOBE_ITEM));
+                } else if (block instanceof SlidingDoorBlock) {
                 } else if (block instanceof DoorBlock) {
                 } else if (block instanceof SaplingBlock) {
                 } else if (block instanceof SignBlock) {
@@ -117,7 +126,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
     private ResourceLocation prefix(Block block, String prefix) {
-        final ResourceLocation id = key(block);
+        ResourceLocation id = key(block);
         return new ResourceLocation(id.getNamespace(), prefix + id.getPath());
     }
 
@@ -129,7 +138,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
         models().getBuilder(name(block)).texture(texture, loc).texture("particle", loc).parent(models().getExistingFile(parent));
     }
 
-    private void blockNoState(Block block, ResourceLocation parent, String fileName, ResourceLocation loc, String texture) {
+    private void blockNoState(Block block, String fileName, ResourceLocation loc, ResourceLocation parent, String texture) {
+        models().getBuilder(fileName).texture(texture, loc).texture("particle", loc).parent(models().getExistingFile(parent));
+    }
+
+    private void blockNoState(ResourceLocation parent, String fileName, ResourceLocation loc, String texture) {
         models().getBuilder(fileName).texture(texture, loc).texture("particle", loc).parent(models().getExistingFile(parent));
     }
 

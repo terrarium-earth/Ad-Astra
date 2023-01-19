@@ -11,7 +11,6 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -33,14 +32,14 @@ public abstract class AbstractModContainerMenu<T extends BlockEntity> extends Ab
         super(type, id);
         this.entity = entity;
         this.inv = inv;
-        this.player = inv.player;
-        this.level = player.level;
+        player = inv.player;
+        level = player.level;
         if (entity == null) return;
         addMenuSlots();
         addPlayerInvSlots();
     }
 
-    public @NotNull T getEntity() {
+    public T getEntity() {
         return entity;
     }
 
@@ -59,18 +58,18 @@ public abstract class AbstractModContainerMenu<T extends BlockEntity> extends Ab
     protected abstract void addMenuSlots();
 
     @Override
-    public @NotNull ItemStack quickMoveStack(@NotNull Player player, int index) {
+    public ItemStack quickMoveStack(Player player, int index) {
         ItemStack itemStack = ItemStack.EMPTY;
-        Slot slot = this.slots.get(index);
+        Slot slot = slots.get(index);
         if (slot.hasItem()) {
             ItemStack slotItem = slot.getItem();
             itemStack = slotItem.copy();
 
             if (index < getInventoryStart()) {
-                if (!this.moveItemStackTo(slotItem, getInventoryStart(), this.slots.size(), true)) {
+                if (!moveItemStackTo(slotItem, getInventoryStart(), slots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.moveItemStackTo(slotItem, startIndex(), getContainerInputEnd(), false)) {
+            } else if (!moveItemStackTo(slotItem, startIndex(), getContainerInputEnd(), false)) {
                 return ItemStack.EMPTY;
             }
 
@@ -86,19 +85,19 @@ public abstract class AbstractModContainerMenu<T extends BlockEntity> extends Ab
     protected void addPlayerInvSlots() {
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 9; ++j) {
-                this.addSlot(new Slot(inv, j + i * 9 + 9, getPlayerInvXOffset() + j * 18, getPlayerInvYOffset() + i * 18));
+                addSlot(new Slot(inv, j + i * 9 + 9, getPlayerInvXOffset() + j * 18, getPlayerInvYOffset() + i * 18));
             }
         }
 
         for (int k = 0; k < 9; ++k) {
-            this.addSlot(new Slot(inv, k, getPlayerInvXOffset() + k * 18, getPlayerInvYOffset() + 58));
+            addSlot(new Slot(inv, k, getPlayerInvXOffset() + k * 18, getPlayerInvYOffset() + 58));
         }
     }
 
     @Override
-    public void clicked(int slotIndex, int button, @NotNull ClickType actionType, @NotNull Player player) {
+    public void clicked(int slotIndex, int button, ClickType actionType, Player player) {
         super.clicked(slotIndex, button, actionType, player);
-        this.broadcastFullState();
+        broadcastFullState();
     }
 
     protected static <T extends BlockEntity> T getTileFromBuf(Level level, FriendlyByteBuf buf, Class<T> type) {

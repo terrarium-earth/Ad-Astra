@@ -35,49 +35,49 @@ public class FlagTexture extends SimpleTexture {
 
     public FlagTexture(String url) {
         super(DEFAULT_FLAG);
-        this.request = HttpRequest.newBuilder()
+        request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .header("User-Agent", "Ad Astra (Minecraft Mod)")
                 .build();
     }
 
-    @SuppressWarnings({"UnstableApiUsage", "deprecation"})
+    @SuppressWarnings("deprecation")
     public static ResourceLocation getTextureId(String url) {
         return new ResourceLocation(AdAstra.MOD_ID, "flagtextures/" + Hashing.sha1().hashUnencodedChars(url));
     }
 
     private void upload(NativeImage image) {
-        TextureUtil.prepareImage(this.getId(), image.getWidth(), image.getHeight());
+        TextureUtil.prepareImage(getId(), image.getWidth(), image.getHeight());
         image.upload(0, 0, 0, true);
     }
 
     @Override
     public void load(ResourceManager manager) {
         Minecraft.getInstance().execute(() -> {
-            if (!this.loaded) {
+            if (!loaded) {
                 try {
                     super.load(manager);
                 } catch (IOException var3x) {
-                    LOGGER.warn("Failed to load texture: {}", this.location, var3x);
+                    LOGGER.warn("Failed to load texture: {}", location, var3x);
                 }
-                this.loaded = true;
+                loaded = true;
             }
         });
 
-        if (this.loader == null) {
-            this.loader = CompletableFuture.runAsync(() -> {
+        if (loader == null) {
+            loader = CompletableFuture.runAsync(() -> {
                 try {
                     HttpResponse<InputStream> data = CLIENT.send(request, HttpResponse.BodyHandlers.ofInputStream());
                     if (data.statusCode() / 100 == 2) {
-                        NativeImage image = this.loadTexture(data.body());
+                        NativeImage image = loadTexture(data.body());
                         Minecraft.getInstance().execute(() -> {
                             if (image != null) {
                                 Minecraft.getInstance().execute(() -> {
-                                    this.loaded = true;
+                                    loaded = true;
                                     if (!RenderSystem.isOnRenderThread()) {
-                                        RenderSystem.recordRenderCall(() -> this.upload(image));
+                                        RenderSystem.recordRenderCall(() -> upload(image));
                                     } else {
-                                        this.upload(image);
+                                        upload(image);
                                     }
                                 });
                             }

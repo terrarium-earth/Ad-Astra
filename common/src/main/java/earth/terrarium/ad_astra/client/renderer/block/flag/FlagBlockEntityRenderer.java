@@ -22,17 +22,15 @@ import net.minecraft.world.level.block.SkullBlock;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import org.joml.Vector4f;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Objects;
 
-@ParametersAreNonnullByDefault
 public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEntity> {
     public FlagBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {
     }
 
     @Override
     public void render(FlagBlockEntity entity, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
-        if (entity.getBlockState().getValue(FlagBlock.HALF).equals(DoubleBlockHalf.LOWER)) {
+        if (entity.getBlockState().getValue(FlagBlock.HALF) == DoubleBlockHalf.LOWER) {
             BakedModel blockModel = Minecraft.getInstance().getBlockRenderer().getBlockModel(entity.getBlockState());
             try (var ignored = new CloseablePoseStack(poseStack)) {
                 poseStack.translate(0.5, 0.5, 0.5);

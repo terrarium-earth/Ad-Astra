@@ -2,6 +2,7 @@ package earth.terrarium.ad_astra.client;
 
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.renderer.block.EtrionicGeneratorBlockRenderer;
+import earth.terrarium.ad_astra.client.renderer.block.SlidingDoorBlockEntityRenderer;
 import earth.terrarium.ad_astra.client.renderer.block.flag.FlagBlockEntityRenderer;
 import earth.terrarium.ad_astra.client.renderer.block.globe.GlobeRenderer;
 import earth.terrarium.ad_astra.client.screen.machine.TestScreen;
@@ -56,11 +57,14 @@ public class AdAstraClient {
     private static void registerBlockEntityRenderers() {
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.FLAG.get(), FlagBlockEntityRenderer::new);
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.GLOBE.get(), GlobeRenderer::new);
+        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.SLIDING_DOOR.get(), SlidingDoorBlockEntityRenderer::new);
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.ETRIONIC_GENERATOR.get(), context -> new EtrionicGeneratorBlockRenderer());
     }
 
     public static void onRegisterModels(Consumer<ResourceLocation> register) {
         ModBlocks.GLOBES.stream().forEach(b -> register.accept(new ResourceLocation(AdAstra.MOD_ID, "block/" + b.getId().getPath() + "_cube")));
+        ModBlocks.SLIDING_DOORS.stream().forEach(block -> register.accept(new ResourceLocation(AdAstra.MOD_ID, "block/" + block.getId().getPath())));
+        ModBlocks.SLIDING_DOORS.stream().forEach(block -> register.accept(new ResourceLocation(AdAstra.MOD_ID, "block/" + block.getId().getPath() + "_flipped")));
     }
 
     public static void onRegisterItemRenderers(BiConsumer<ItemLike, BlockEntityWithoutLevelRenderer> register) {
@@ -73,7 +77,6 @@ public class AdAstraClient {
 
     public static void onRegisterHud(Consumer<ClientPlatformUtils.RenderHud> register) {
     }
-
 
     public static void onRegisterReloadListeners(BiConsumer<ResourceLocation, PreparableReloadListener> registry) {
     }

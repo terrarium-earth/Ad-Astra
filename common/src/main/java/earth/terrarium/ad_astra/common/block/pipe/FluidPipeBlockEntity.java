@@ -35,13 +35,13 @@ public class FluidPipeBlockEntity extends BlockEntity implements InteractablePip
     @Override
     public void insertInto(PlatformFluidHandler consumer, Direction direction, BlockPos pos) {
         if (level == null) return;
-        BlockState state = this.getBlockState();
+        BlockState state = getBlockState();
         BlockState state2 = level.getBlockState(pos);
         if (state.isAir() || state2.isAir()) return;
-        PipeState pipeState = state.getValue(PipeBlock.DIRECTIONS.get(this.getSource().direction()));
+        PipeState pipeState = state.getValue(PipeBlock.DIRECTIONS.get(getSource().direction()));
         PipeState pipeState2 = state2.getValue(PipeBlock.DIRECTIONS.get(direction));
 
-        if (getSource().storage() == null || getConsumers().size() == 0) return;
+        if (getSource().storage() == null || getConsumers().isEmpty()) return;
         if (pipeState == PipeState.INSERT && pipeState2 == PipeState.INSERT) return;
         if (pipeState == PipeState.EXTRACT && pipeState2 == PipeState.EXTRACT) return;
         if (pipeState == PipeState.NONE || pipeState2 == PipeState.NONE) return;
@@ -56,7 +56,7 @@ public class FluidPipeBlockEntity extends BlockEntity implements InteractablePip
 
         for (FluidHolder fluid : input.getFluidTanks()) {
             if (!fluid.isEmpty()) {
-                FluidHolder transfer = FluidHooks.newFluidHolder(fluid.getFluid(), ((PipeBlock) this.getBlockState().getBlock()).getTransferRate(), fluid.getCompound());
+                FluidHolder transfer = FluidHooks.newFluidHolder(fluid.getFluid(), ((PipeBlock) getBlockState().getBlock()).getTransferRate(), fluid.getCompound());
                 FluidHooks.moveFluid(input, output, transfer);
             }
         }
@@ -86,12 +86,12 @@ public class FluidPipeBlockEntity extends BlockEntity implements InteractablePip
 
     @Override
     public void clearSource() {
-        this.source = null;
+        source = null;
     }
 
     @Override
     public List<Node<PlatformFluidHandler>> getConsumers() {
-        return this.consumers;
+        return consumers;
     }
 
     @Override
@@ -101,12 +101,12 @@ public class FluidPipeBlockEntity extends BlockEntity implements InteractablePip
 
     @Override
     public Level getPipelevel() {
-        return this.level;
+        return level;
     }
 
     @Override
     public long getTransferAmount() {
-        if (this.getBlockState().getBlock() instanceof PipeBlock fluidPipe) {
+        if (getBlockState().getBlock() instanceof PipeBlock fluidPipe) {
             return fluidPipe.getTransferRate();
         }
         return 0;
@@ -114,6 +114,6 @@ public class FluidPipeBlockEntity extends BlockEntity implements InteractablePip
 
     @Override
     public BlockPos getPipePos() {
-        return this.getBlockPos();
+        return getBlockPos();
     }
 }

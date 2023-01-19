@@ -14,7 +14,6 @@ import earth.terrarium.botarium.common.fluid.base.FluidAttachment;
 import earth.terrarium.botarium.common.fluid.impl.SimpleFluidContainer;
 import earth.terrarium.botarium.common.fluid.impl.WrappedBlockFluidContainer;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
-import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -22,7 +21,6 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-@MethodsReturnNonnullByDefault
 public class CombustionGeneratorBlockEntity extends CookingMachineBlockEntity implements EnergyAttachment.Block, FluidAttachment.Block {
     private WrappedBlockEnergyContainer energyContainer;
     private WrappedBlockFluidContainer fluidContainer;
@@ -34,25 +32,25 @@ public class CombustionGeneratorBlockEntity extends CookingMachineBlockEntity im
 
     @Override
     public void serverTick() {
-        if (this.recipe != null) {
+        if (recipe != null) {
             if (!getFluidContainer().isEmpty() && getFluidContainer().getFluids().get(0).getFluid().equals(recipe.ingredient().getFluid())) {
-                if (this.getEnergyStorage().internalInsert(this.recipe.energy(), true) >= this.recipe.energy()) {
+                if (getEnergyStorage().internalInsert(recipe.energy(), true) >= recipe.energy()) {
                     if (getFluidContainer().extractFluid(FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(0).getFluid(), recipe.ingredient().getFluidAmount(), null), true).getFluidAmount() > 0) {
-                        this.getEnergyStorage().internalInsert(this.recipe.energy(), false);
-                        this.cookTime++;
-                        if (this.cookTime >= cookTimeTotal) {
-                            this.cookTime = 0;
+                        getEnergyStorage().internalInsert(recipe.energy(), false);
+                        cookTime++;
+                        if (cookTime >= cookTimeTotal) {
+                            cookTime = 0;
                             getFluidContainer().extractFluid(FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(0).getFluid(), recipe.ingredient().getFluidAmount(), null), false);
-                            this.updateFluidSlots();
+                            updateFluidSlots();
                         }
                         if (fluidContainer.getFluids().get(0).isEmpty()) {
-                            this.recipe = null;
+                            recipe = null;
                         }
                     }
                 }
             }
         } else {
-            this.cookTime = 0;
+            cookTime = 0;
         }
 
         EnergyHooks.distributeEnergyNearby(this, 128);
@@ -65,7 +63,7 @@ public class CombustionGeneratorBlockEntity extends CookingMachineBlockEntity im
 
     @Override
     public WrappedBlockEnergyContainer getEnergyStorage(BlockEntity holder) {
-        return energyContainer == null ? energyContainer = new WrappedBlockEnergyContainer(this, new ExtractOnlyEnergyContainer(200000)) : this.energyContainer;
+        return energyContainer == null ? energyContainer = new WrappedBlockEnergyContainer(this, new ExtractOnlyEnergyContainer(200000)) : energyContainer;
     }
 
     public WrappedBlockEnergyContainer getEnergyStorage() {
@@ -74,7 +72,7 @@ public class CombustionGeneratorBlockEntity extends CookingMachineBlockEntity im
 
     @Override
     public WrappedBlockFluidContainer getFluidContainer(BlockEntity holder) {
-        return fluidContainer == null ? fluidContainer = new WrappedBlockFluidContainer(this, new SimpleFluidContainer(i -> FluidHooks.buckets(5f), 1, (tank, fluid) -> true)) : this.fluidContainer;
+        return fluidContainer == null ? fluidContainer = new WrappedBlockFluidContainer(this, new SimpleFluidContainer(i -> FluidHooks.buckets(5f), 1, (tank, fluid) -> true)) : fluidContainer;
     }
 
     public WrappedBlockFluidContainer getFluidContainer() {
@@ -84,13 +82,13 @@ public class CombustionGeneratorBlockEntity extends CookingMachineBlockEntity im
     @Override
     public void update() {
         if (level == null) return;
-        this.recipe = level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.COMBUSTION.get()).stream().filter(r -> r.matches(this)).findFirst().orElse(null);
-        if (this.recipe == null) {
-            this.cookTime = 0;
+        recipe = level.getRecipeManager().getAllRecipesFor(ModRecipeTypes.COMBUSTION.get()).stream().filter(r -> r.matches(this)).findFirst().orElse(null);
+        if (recipe == null) {
+            cookTime = 0;
         } else {
-            this.cookTimeTotal = this.recipe.cookingTime();
+            cookTimeTotal = recipe.cookingTime();
         }
-        this.updateFluidSlots();
+        updateFluidSlots();
     }
 
     @Override

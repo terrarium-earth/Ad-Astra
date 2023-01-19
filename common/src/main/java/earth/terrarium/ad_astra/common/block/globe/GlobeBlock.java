@@ -1,7 +1,6 @@
 package earth.terrarium.ad_astra.common.block.globe;
 
 import earth.terrarium.ad_astra.common.block.BasicEntityBlock;
-import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -28,11 +27,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 @SuppressWarnings("deprecation")
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
 public class GlobeBlock extends BasicEntityBlock implements SimpleWaterloggedBlock {
     public static final VoxelShape SHAPE = Shapes.box(0.2, 0, 0.2, 0.8, 1, 0.8);
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
@@ -41,7 +36,7 @@ public class GlobeBlock extends BasicEntityBlock implements SimpleWaterloggedBlo
 
     public GlobeBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false).setValue(POWERED, false));
+        registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, false).setValue(POWERED, false));
     }
 
     @Override
@@ -105,7 +100,7 @@ public class GlobeBlock extends BasicEntityBlock implements SimpleWaterloggedBlo
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
-        return this.defaultBlockState().setValue(POWERED, context.getLevel().hasNeighborSignal(context.getClickedPos())).setValue(FACING, context.getHorizontalDirection().getOpposite()).setValue(WATERLOGGED, fluidState.getType().equals(Fluids.WATER));
+        return defaultBlockState().setValue(POWERED, context.getLevel().hasNeighborSignal(context.getClickedPos())).setValue(FACING, context.getHorizontalDirection().getOpposite()).setValue(WATERLOGGED, fluidState.getType().equals(Fluids.WATER));
     }
 
     @Override

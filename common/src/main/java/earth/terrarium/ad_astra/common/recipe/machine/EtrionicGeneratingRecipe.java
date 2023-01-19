@@ -6,7 +6,6 @@ import com.teamresourceful.resourcefullib.common.codecs.recipes.IngredientCodec;
 import com.teamresourceful.resourcefullib.common.recipe.CodecRecipe;
 import earth.terrarium.ad_astra.common.registry.ModRecipeSerializers;
 import earth.terrarium.ad_astra.common.registry.ModRecipeTypes;
-import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -14,7 +13,6 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
-@MethodsReturnNonnullByDefault
 public record EtrionicGeneratingRecipe(ResourceLocation id, Ingredient ingredient, int cookingTime,
                                        int energy) implements CodecRecipe<Container> {
 
@@ -38,7 +36,7 @@ public record EtrionicGeneratingRecipe(ResourceLocation id, Ingredient ingredien
 
     @Override
     public boolean matches(Container container, Level level) {
-        return this.ingredient.test(container.getItem(0));
+        return ingredient.test(container.getItem(0));
     }
 
     @Override

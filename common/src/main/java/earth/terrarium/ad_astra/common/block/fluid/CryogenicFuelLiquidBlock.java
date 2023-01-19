@@ -42,27 +42,27 @@ public class CryogenicFuelLiquidBlock extends BotariumLiquidBlock {
             entity.setTicksFrozen(Math.min(entity.getTicksRequiredToFreeze(), entity.getTicksFrozen() + 5));
             if (!level.isClientSide) {
                 entity.setSharedFlagOnFire(false);
-                entity.hurt(ModDamageSource.CRYO_FUEL, 4 * (entity.fireImmune() ? 2 : 1));
+                entity.hurt(ModDamageSource.CRYOGENIC_FUEL, 4 * (entity.fireImmune() ? 2 : 1));
             }
         }
     }
 
     @Override
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
-        if (this.shouldSpreadLiquid(level, pos, state)) {
+        if (shouldSpreadLiquid(level, pos)) {
             level.scheduleTick(pos, state.getFluidState().getType(), ModFluids.CRYOGENIC_FUEL.get().getTickDelay(level));
         }
     }
 
     @Override
     public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos fromPos, boolean isMoving) {
-        if (this.shouldSpreadLiquid(level, pos, state)) {
+        if (shouldSpreadLiquid(level, pos)) {
             level.scheduleTick(pos, state.getFluidState().getType(), ModFluids.CRYOGENIC_FUEL.get().getTickDelay(level));
         }
     }
 
     // Turn water fluids into ice upon contact with cryogenic fuel
-    private boolean shouldSpreadLiquid(Level level, BlockPos pos, BlockState state) {
+    private boolean shouldSpreadLiquid(Level level, BlockPos pos) {
         for (Direction direction : new Direction[]{Direction.DOWN, Direction.SOUTH, Direction.NORTH, Direction.EAST, Direction.WEST}) {
             BlockPos blockPos = pos.relative(direction.getOpposite());
             FluidState fluidState = level.getFluidState(blockPos);

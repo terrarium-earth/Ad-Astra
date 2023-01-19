@@ -3,7 +3,6 @@ package earth.terrarium.ad_astra.common.block.flag;
 import earth.terrarium.ad_astra.client.screen.FlagUrlScreen;
 import earth.terrarium.ad_astra.common.block.BasicEntityBlock;
 import earth.terrarium.ad_astra.common.util.LangUtils;
-import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
@@ -34,11 +33,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 @SuppressWarnings("deprecation")
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
 public class FlagBlock extends BasicEntityBlock {
     public static final VoxelShape POLE = Shapes.box(0.4375, 0, 0.4375, 0.5625, 1.5, 0.5625);
     public static final VoxelShape BASE = Shapes.or(Shapes.box(0.375, 0, 0.375, 0.625, 0.5, 0.625), POLE);
@@ -48,7 +43,7 @@ public class FlagBlock extends BasicEntityBlock {
 
     public FlagBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false).setValue(HALF, DoubleBlockHalf.LOWER));
+        registerDefaultState(stateDefinition.any().setValue(WATERLOGGED, false).setValue(HALF, DoubleBlockHalf.LOWER));
     }
 
     @Override
@@ -90,9 +85,9 @@ public class FlagBlock extends BasicEntityBlock {
     public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos fromPos, boolean isMoving) {
         super.neighborChanged(state, level, pos, block, fromPos, isMoving);
         if (!level.isClientSide) {
-            if (level.getBlockState(pos).getValue(HALF).equals(DoubleBlockHalf.LOWER) && level.getBlockState(pos.above()).isAir()) {
+            if (level.getBlockState(pos).getValue(HALF) == DoubleBlockHalf.LOWER && level.getBlockState(pos.above()).isAir()) {
                 level.destroyBlock(pos, true);
-            } else if (level.getBlockState(pos).getValue(HALF).equals(DoubleBlockHalf.UPPER) && level.getBlockState(pos.below()).isAir()) {
+            } else if (level.getBlockState(pos).getValue(HALF) == DoubleBlockHalf.UPPER && level.getBlockState(pos.below()).isAir()) {
                 level.destroyBlock(pos, true);
             }
         }
@@ -140,7 +135,7 @@ public class FlagBlock extends BasicEntityBlock {
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
         var value = EightDirectionProperty.Direction.VALUES[Mth.floor((double) (context.getRotation() * 8.0F / 360.0F) + 0.5D) & 7];
-        return this.defaultBlockState().setValue(FACING, value).setValue(WATERLOGGED, fluidState.getType().equals(Fluids.WATER));
+        return defaultBlockState().setValue(FACING, value).setValue(WATERLOGGED, fluidState.getType().equals(Fluids.WATER));
     }
 
     @Override

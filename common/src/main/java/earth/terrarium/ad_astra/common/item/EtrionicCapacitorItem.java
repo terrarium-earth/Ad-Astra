@@ -10,7 +10,6 @@ import earth.terrarium.botarium.common.energy.impl.WrappedItemEnergyContainer;
 import earth.terrarium.botarium.common.energy.util.EnergyHooks;
 import earth.terrarium.botarium.common.item.ItemStackHolder;
 import net.minecraft.ChatFormatting;
-import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -26,12 +25,9 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
 public class EtrionicCapacitorItem extends Item implements EnergyAttachment.Item {
     public static final String TOGGLE_KEY = "ToggledOn";
 
@@ -181,12 +177,12 @@ public class EtrionicCapacitorItem extends Item implements EnergyAttachment.Item
         public static DistributionMode getMode(ItemStack stack) {
             if (stack.getOrCreateTag().contains(KEY)) {
                 try {
-                    return DistributionMode.valueOf(stack.getOrCreateTag().getString(KEY));
+                    return valueOf(stack.getOrCreateTag().getString(KEY));
                 } catch (Error ignored) {
                 }
             }
-            stack.getOrCreateTag().putString(KEY, DistributionMode.SEQUENTIAL.toString());
-            return DistributionMode.SEQUENTIAL;
+            stack.getOrCreateTag().putString(KEY, SEQUENTIAL.toString());
+            return SEQUENTIAL;
         }
 
         public static DistributionMode switchMode(ItemStack stack) {
@@ -208,6 +204,7 @@ public class EtrionicCapacitorItem extends Item implements EnergyAttachment.Item
     }
 
     // Forge disabling of nbt change animation
+    @SuppressWarnings("unused")
     @PlatformOnly(PlatformOnly.FORGE)
     public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
         return false;
@@ -238,6 +235,6 @@ public class EtrionicCapacitorItem extends Item implements EnergyAttachment.Item
 
     @FunctionalInterface
     public interface SlotFunction {
-        public abstract void apply(ItemStack stack, int slot);
+        void apply(ItemStack stack, int slot);
     }
 }

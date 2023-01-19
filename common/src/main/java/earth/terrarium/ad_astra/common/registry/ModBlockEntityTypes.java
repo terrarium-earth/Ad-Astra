@@ -9,6 +9,7 @@ import earth.terrarium.ad_astra.common.block.globe.GlobeBlockEntity;
 import earth.terrarium.ad_astra.common.block.machine.entity.*;
 import earth.terrarium.ad_astra.common.block.pipe.CableBlockEntity;
 import earth.terrarium.ad_astra.common.block.pipe.FluidPipeBlockEntity;
+import earth.terrarium.ad_astra.common.block.slidingdoor.SlidingDoorBlockEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -34,6 +35,8 @@ public class ModBlockEntityTypes {
     public static final RegistryEntry<BlockEntityType<WaterPumpBlockEntity>> WATER_PUMP = BLOCK_ENTITY_TYPES.register("water_pump", () -> createBlockEntityType(WaterPumpBlockEntity::new, ModBlocks.WATER_PUMP.get()));
     public static final RegistryEntry<BlockEntityType<FlagBlockEntity>> FLAG = BLOCK_ENTITY_TYPES.register("flag", () -> createBlockEntityType(FlagBlockEntity::new, ModBlocks.FLAGS));
     public static final RegistryEntry<BlockEntityType<GlobeBlockEntity>> GLOBE = BLOCK_ENTITY_TYPES.register("globe", () -> createBlockEntityType(GlobeBlockEntity::new, ModBlocks.GLOBES));
+    public static final RegistryEntry<BlockEntityType<SlidingDoorBlockEntity>> SLIDING_DOOR = BLOCK_ENTITY_TYPES.register("sliding_door", () -> createBlockEntityType(SlidingDoorBlockEntity::new, ModBlocks.SLIDING_DOORS));
+
 
     public static final RegistryEntry<BlockEntityType<CableBlockEntity>> CABLE = BLOCK_ENTITY_TYPES.register("cable", () -> createBlockEntityType(CableBlockEntity::new, ModBlocks.ETRIUM_CABLE.get()));
     public static final RegistryEntry<BlockEntityType<FluidPipeBlockEntity>> FLUID_PIPE = BLOCK_ENTITY_TYPES.register("fluid_pipe", () -> createBlockEntityType(FluidPipeBlockEntity::new, ModBlocks.DESMIUM_FLUID_PIPE.get()));

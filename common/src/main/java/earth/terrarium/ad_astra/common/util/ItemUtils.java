@@ -8,11 +8,11 @@ import java.util.function.IntPredicate;
 public class ItemUtils {
     public static ItemStack addItem(Container container, ItemStack stack, IntPredicate slotFilter) {
         ItemStack itemStack = stack.copy();
-        ItemUtils.moveItemToOccupiedSlotsWithSameType(container, itemStack, slotFilter);
+        moveItemToOccupiedSlotsWithSameType(container, itemStack, slotFilter);
         if (itemStack.isEmpty()) {
             return ItemStack.EMPTY;
         } else {
-            ItemUtils.moveItemToEmptySlots(container, itemStack, slotFilter);
+            moveItemToEmptySlots(container, itemStack, slotFilter);
             return itemStack.isEmpty() ? ItemStack.EMPTY : itemStack;
         }
     }
@@ -22,7 +22,7 @@ public class ItemUtils {
             if (slotFilter.test(i)) {
                 ItemStack itemStack = container.getItem(i);
                 if (ItemStack.isSameItemSameTags(itemStack, stack)) {
-                    ItemUtils.moveItemsBetweenStacks(container, stack, itemStack);
+                    moveItemsBetweenStacks(container, stack, itemStack);
                     if (stack.isEmpty()) {
                         return;
                     }

@@ -6,7 +6,6 @@ import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import org.jetbrains.annotations.NotNull;
 
 public class EightDirectionProperty extends EnumProperty<EightDirectionProperty.Direction> {
 
@@ -33,8 +32,8 @@ public class EightDirectionProperty extends EnumProperty<EightDirectionProperty.
         }
 
         @Override
-        public @NotNull String getSerializedName() {
-            return this.name;
+        public String getSerializedName() {
+            return name;
         }
 
         public Direction mirror(Mirror mirror) {

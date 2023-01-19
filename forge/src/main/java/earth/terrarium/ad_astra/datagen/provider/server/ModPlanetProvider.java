@@ -3,15 +3,12 @@ package earth.terrarium.ad_astra.datagen.provider.server;
 import earth.terrarium.ad_astra.common.data.Planet;
 import earth.terrarium.ad_astra.common.system.GravitySystem;
 import earth.terrarium.ad_astra.datagen.provider.base.PlanetProvider;
-import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.Level;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Consumer;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
+
 public class ModPlanetProvider extends PlanetProvider {
     public ModPlanetProvider(PackOutput output) {
         super(output);

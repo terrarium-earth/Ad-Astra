@@ -14,10 +14,9 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.concurrent.CompletableFuture;
 
-@ParametersAreNonnullByDefault
+
 public class ModItemTagProvider extends TagsProvider<Item> {
 
     public ModItemTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> completableFuture, ExistingFileHelper existingFileHelper) {
@@ -93,8 +92,8 @@ public class ModItemTagProvider extends TagsProvider<Item> {
         }
 
         ItemType() {
-            this.forge = name().toLowerCase();
-            this.fabric = name().toLowerCase();
+            forge = name().toLowerCase();
+            fabric = name().toLowerCase();
         }
 
         public String forge(String material) {

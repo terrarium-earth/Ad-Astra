@@ -7,14 +7,12 @@ import earth.terrarium.ad_astra.common.block.machine.entity.CryogenicFreezerBloc
 import earth.terrarium.ad_astra.common.registry.ModRecipeSerializers;
 import earth.terrarium.ad_astra.common.registry.ModRecipeTypes;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
-import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
-@MethodsReturnNonnullByDefault
 public record CryogenicFreezingRecipe(ResourceLocation id, FluidHolder ingredient1, FluidHolder ingredient2,
                                       int cookingTime,
                                       int energy, FluidHolder resultFluid) implements CodecRecipe<Container> {

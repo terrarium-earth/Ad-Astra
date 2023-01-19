@@ -8,7 +8,6 @@ import earth.terrarium.ad_astra.common.util.ItemUtils;
 import earth.terrarium.botarium.common.energy.base.EnergyAttachment;
 import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
-import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.entity.player.Inventory;
@@ -21,7 +20,6 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-@MethodsReturnNonnullByDefault
 public class RecyclerBlockEntity extends CookingMachineBlockEntity implements EnergyAttachment.Block {
     private WrappedBlockEnergyContainer energyContainer;
 
@@ -31,19 +29,19 @@ public class RecyclerBlockEntity extends CookingMachineBlockEntity implements En
 
     @Override
     public void serverTick() {
-        if (this.canCraft()) {
-            if (this.getEnergyStorage().internalExtract(50, true) >= 50) {
-                this.getEnergyStorage().internalExtract(50, false);
-                this.cookTime++;
-                if (this.cookTime >= cookTimeTotal) {
-                    this.cookTime = 0;
-                    this.craft();
+        if (canCraft()) {
+            if (getEnergyStorage().internalExtract(50, true) >= 50) {
+                getEnergyStorage().internalExtract(50, false);
+                cookTime++;
+                if (cookTime >= cookTimeTotal) {
+                    cookTime = 0;
+                    craft();
                 }
             } else {
-                this.cookTime = 0;
+                cookTime = 0;
             }
         } else {
-            this.cookTime = 0;
+            cookTime = 0;
         }
     }
 
@@ -54,7 +52,7 @@ public class RecyclerBlockEntity extends CookingMachineBlockEntity implements En
 
     @Override
     public WrappedBlockEnergyContainer getEnergyStorage(BlockEntity holder) {
-        return energyContainer == null ? energyContainer = new WrappedBlockEnergyContainer(this, new InsertOnlyEnergyContainer(20000)) : this.energyContainer;
+        return energyContainer == null ? energyContainer = new WrappedBlockEnergyContainer(this, new InsertOnlyEnergyContainer(20000)) : energyContainer;
     }
 
     public WrappedBlockEnergyContainer getEnergyStorage() {
@@ -63,8 +61,8 @@ public class RecyclerBlockEntity extends CookingMachineBlockEntity implements En
 
     @Override
     public void update() {
-        if (this.canCraft()) {
-            this.cookTimeTotal = 40;
+        if (canCraft()) {
+            cookTimeTotal = 40;
         }
     }
 
@@ -90,6 +88,6 @@ public class RecyclerBlockEntity extends CookingMachineBlockEntity implements En
     }
 
     private boolean canCraft() {
-        return getItem(0).is(ModTags.Items.RECYCLABLE) && this.getItems().stream().anyMatch(ItemStack::isEmpty);
+        return getItem(0).is(ModTags.Items.RECYCLABLE) && getItems().stream().anyMatch(ItemStack::isEmpty);
     }
 }

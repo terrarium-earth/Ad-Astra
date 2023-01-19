@@ -41,15 +41,15 @@ public class RecyclerMenu extends AbstractModContainerMenu<RecyclerBlockEntity> 
 
     @Override
     protected void addMenuSlots() {
-        this.addSlot(new Slot(this.entity, 0, 30, 18));
-        this.addSlot(new FurnaceResultSlot(this.player, this.entity, 1, 0, 36));
-        this.addSlot(new FurnaceResultSlot(this.player, this.entity, 2, 18, 36));
-        this.addSlot(new FurnaceResultSlot(this.player, this.entity, 3, 36, 36));
-        this.addSlot(new FurnaceResultSlot(this.player, this.entity, 4, 54, 36));
-        this.addSlot(new FurnaceResultSlot(this.player, this.entity, 5, 72, 36));
-        this.addSlot(new FurnaceResultSlot(this.player, this.entity, 6, 90, 36));
-        this.addSlot(new FurnaceResultSlot(this.player, this.entity, 7, 108, 36));
-        this.addSlot(new FurnaceResultSlot(this.player, this.entity, 8, 126, 36));
+        addSlot(new Slot(entity, 0, 30, 18));
+        addSlot(new FurnaceResultSlot(player, entity, 1, 0, 36));
+        addSlot(new FurnaceResultSlot(player, entity, 2, 18, 36));
+        addSlot(new FurnaceResultSlot(player, entity, 3, 36, 36));
+        addSlot(new FurnaceResultSlot(player, entity, 4, 54, 36));
+        addSlot(new FurnaceResultSlot(player, entity, 5, 72, 36));
+        addSlot(new FurnaceResultSlot(player, entity, 6, 90, 36));
+        addSlot(new FurnaceResultSlot(player, entity, 7, 108, 36));
+        addSlot(new FurnaceResultSlot(player, entity, 8, 126, 36));
     }
 
     @Override

@@ -3,6 +3,7 @@ package earth.terrarium.ad_astra.datagen.provider.client;
 
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.block.pipe.PipeBlock;
+import earth.terrarium.ad_astra.common.block.slidingdoor.SlidingDoorBlock;
 import earth.terrarium.ad_astra.common.item.EtrionicCapacitorItem;
 import earth.terrarium.ad_astra.common.registry.ModItems;
 import net.minecraft.data.PackOutput;
@@ -36,6 +37,8 @@ public class ModItemModelProvider extends ItemModelProvider {
                 } else if (blockItem.getBlock() instanceof SignBlock) {
                     basicItem(item.get());
                 } else if (blockItem.getBlock() instanceof PipeBlock) {
+                    basicItem(item.get());
+                } else if (blockItem.getBlock() instanceof SlidingDoorBlock) {
                     basicItem(item.get());
                 }
             } else if (!(item.get() instanceof SignItem) && !(item.get() instanceof EtrionicCapacitorItem)) {

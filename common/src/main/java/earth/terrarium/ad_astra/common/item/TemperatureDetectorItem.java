@@ -3,7 +3,6 @@ package earth.terrarium.ad_astra.common.item;
 import earth.terrarium.ad_astra.common.block.machine.entity.TemperatureRegulatorBlockEntity;
 import earth.terrarium.ad_astra.common.system.TemperatureSystem;
 import earth.terrarium.ad_astra.common.util.LangUtils;
-import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.FluidTags;
@@ -15,12 +14,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
 
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+@SuppressWarnings("deprecation")
 public class TemperatureDetectorItem extends Item {
     public TemperatureDetectorItem(Properties properties) {
         super(properties);
@@ -42,7 +39,7 @@ public class TemperatureDetectorItem extends Item {
                 }
                 return (int) (o1.getBlockPos().distSqr(player.blockPosition()) - o2.getBlockPos().distSqr(player.blockPosition()));
             });
-            if (blockEntities.size() > 0 && (TemperatureSystem.posSafeTemperature(level, player.blockPosition().above()) || !TemperatureSystem.isSafeTemperature(blockEntities.get(0).getCurrentTemperature()) && player.blockPosition().distSqr(blockEntities.get(0).getBlockPos()) < 100)) {
+            if (!blockEntities.isEmpty() && (TemperatureSystem.posSafeTemperature(level, player.blockPosition().above()) || !TemperatureSystem.isSafeTemperature(blockEntities.get(0).getCurrentTemperature()) && player.blockPosition().distSqr(blockEntities.get(0).getBlockPos()) < 100)) {
                 player.displayClientMessage(Component.translatable(LangUtils.TEMPERATURE_DETECTED, blockEntities.get(0).getCurrentTemperature()), true);
             } else {
                 int temperature = TemperatureSystem.getLevelTemperature(level, player.blockPosition());

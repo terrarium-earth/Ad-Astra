@@ -7,7 +7,6 @@ import earth.terrarium.ad_astra.common.registry.ModSoundEvents;
 import earth.terrarium.ad_astra.common.util.LangUtils;
 import earth.terrarium.botarium.common.energy.util.EnergyHooks;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
-import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -47,7 +46,6 @@ import java.util.Map;
 import java.util.Optional;
 
 @SuppressWarnings("deprecation")
-@MethodsReturnNonnullByDefault
 public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBlock, Wrenchable {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
@@ -73,8 +71,8 @@ public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
 
     public PipeBlock(long transferRate, double size, PipeType type, Properties properties) {
         super(properties);
-        this.registerDefaultState(defaultBlockState().setValue(UP, PipeState.NONE).setValue(DOWN, PipeState.NONE).setValue(NORTH, PipeState.NONE).setValue(EAST, PipeState.NONE).setValue(SOUTH, PipeState.NONE).setValue(WEST, PipeState.NONE).setValue(WATERLOGGED, false));
-        this.stateDefinition.getPossibleStates().forEach(state -> shapes.put(state, createVoxelShape(state, size)));
+        registerDefaultState(defaultBlockState().setValue(UP, PipeState.NONE).setValue(DOWN, PipeState.NONE).setValue(NORTH, PipeState.NONE).setValue(EAST, PipeState.NONE).setValue(SOUTH, PipeState.NONE).setValue(WEST, PipeState.NONE).setValue(WATERLOGGED, false));
+        stateDefinition.getPossibleStates().forEach(state -> shapes.put(state, createVoxelShape(state, size)));
         this.transferRate = transferRate;
         this.type = type;
     }
@@ -84,7 +82,7 @@ public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
         ItemStack item = player.getItemInHand(hand);
 
         if (item.is(ModItems.WRENCH.get())) { // TODO: Use wrench tag
-            this.handleWrench(level, pos, state, hit.getDirection(), player, hit.getLocation());
+            handleWrench(level, pos, state, hit.getDirection(), player, hit.getLocation());
             return InteractionResult.SUCCESS;
         }
 
@@ -93,10 +91,10 @@ public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
 
     private boolean checkCompat(Level level, BlockPos offset) {
         if (level.getBlockState(offset).getBlock() instanceof PipeBlock pipe) {
-            if (this.getType() == PipeType.FLUID_PIPE) {
+            if (getType() == PipeType.FLUID_PIPE) {
                 return pipe.getType() == PipeType.FLUID_PIPE;
 
-            } else if (this.getType() == PipeType.CABLE) {
+            } else if (getType() == PipeType.CABLE) {
                 return pipe.getType() == PipeType.CABLE;
             }
         }
@@ -108,14 +106,14 @@ public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
             BlockPos offset = pos.relative(direction);
             BlockEntity entity = level.getBlockEntity(offset);
             if (entity != null && (checkCompat(level, offset) || (type == PipeType.FLUID_PIPE ? FluidHooks.safeGetBlockFluidManager(entity, direction).orElse(null) : EnergyHooks.safeGetBlockEnergyManager(entity, direction).orElse(null)) != null)) {
-                if (level.getBlockState(pos).getValue(DIRECTIONS.get(direction)).equals(PipeState.NONE)) {
+                if (level.getBlockState(pos).getValue(DIRECTIONS.get(direction)) == PipeState.NONE) {
                     level.setBlock(pos, level.getBlockState(pos).setValue(DIRECTIONS.get(direction), PipeState.NORMAL), Block.UPDATE_ALL);
                 }
                 if (level.getBlockState(offset).getBlock().equals(this)) {
                     level.setBlock(offset, level.getBlockState(offset).setValue(DIRECTIONS.get(direction.getOpposite()), PipeState.NORMAL), Block.UPDATE_ALL);
                 }
             } else {
-                if (level.getBlockState(pos).getValue(DIRECTIONS.get(direction)).equals(PipeState.NORMAL)) {
+                if (level.getBlockState(pos).getValue(DIRECTIONS.get(direction)) == PipeState.NORMAL) {
                     level.setBlock(pos, level.getBlockState(pos).setValue(DIRECTIONS.get(direction), PipeState.NONE), Block.UPDATE_ALL);
                 }
             }
@@ -125,17 +123,17 @@ public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
     public void updatePipeState(Level level, BlockPos pos) {
         if (!level.isClientSide) {
             for (Direction direction : Direction.values()) {
-                this.updatePipeState(level, pos, direction);
+                updatePipeState(level, pos, direction);
             }
         }
     }
 
     public long getTransferRate() {
-        return this.transferRate;
+        return transferRate;
     }
 
     public PipeType getType() {
-        return this.type;
+        return type;
     }
 
     @Override
@@ -145,7 +143,7 @@ public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return this.defaultBlockState().setValue(WATERLOGGED, context.getLevel().getFluidState(context.getClickedPos()).getType().equals(Fluids.WATER));
+        return defaultBlockState().setValue(WATERLOGGED, context.getLevel().getFluidState(context.getClickedPos()).getType().equals(Fluids.WATER));
     }
 
     @Override
@@ -159,7 +157,7 @@ public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
         if (state.getValue(WATERLOGGED)) {
             level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
-        this.updatePipeState((Level) level, pos, direction);
+        updatePipeState((Level) level, pos, direction);
 
         return super.updateShape(state, direction, neighborState, level, pos, neighborPos);
     }
@@ -177,7 +175,7 @@ public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
     @Override
     public void setPlacedBy(Level level, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
         super.setPlacedBy(level, pos, state, placer, itemStack);
-        this.updatePipeState(level, pos);
+        updatePipeState(level, pos);
     }
 
     @Override
@@ -187,7 +185,7 @@ public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
 
     @Override
     public void appendHoverText(ItemStack stack, BlockGetter level, List<Component> tooltip, TooltipFlag flag) {
-        tooltip.add(type == PipeType.FLUID_PIPE ? Component.translatable(LangUtils.FLUID_PIPE_TRANSDER_RATE, FluidHooks.toMillibuckets(this.getTransferRate())) : Component.translatable(LangUtils.CABLE_TRANSFER_RATE, (this.getTransferRate())));
+        tooltip.add(type == PipeType.FLUID_PIPE ? Component.translatable(LangUtils.FLUID_PIPE_TRANSFER_RATE, FluidHooks.toMillibuckets(getTransferRate())) : Component.translatable(LangUtils.CABLE_TRANSFER_RATE, (getTransferRate())));
     }
 
     public BlockState togglePipeState(BlockState state, EnumProperty<PipeState> property, Player user) {
