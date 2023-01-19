@@ -1,4 +1,4 @@
-// 1.19.3	2023-01-18T22:31:20.61884	Loot Tables
+// 1.19.3	2023-01-19T16:59:43.117842	Loot Tables
 efe946b0208594ac520ee72b3aec5247fe309bc2 data/ad_astra/loot_tables/blocks/aerolyte_block.json
 2c1ed3e87f579f4c9e9f29ddd98760285c73775d data/ad_astra/loot_tables/blocks/aerolyte_button.json
 e73517391f48b96f9fb259f478c9bfb5fc60ee42 data/ad_astra/loot_tables/blocks/aerolyte_pillar.json
@@ -11,6 +11,7 @@ a5f390fbe12bd7d370c5aa0877e76128748af9eb data/ad_astra/loot_tables/blocks/aeroly
 3ae7533a761249752db35d69c17faa15b6d484ec data/ad_astra/loot_tables/blocks/black_flag.json
 200877f767af9a9abe54cbec118bc1dfcaad699e data/ad_astra/loot_tables/blocks/blue_flag.json
 98448c1b909f5494f78e4d595cefb79babbd4b66 data/ad_astra/loot_tables/blocks/brown_flag.json
+2043ca7595fa2986d13b59552c2928d524b69eaa data/ad_astra/loot_tables/blocks/cable_duct.json
 9922803819618ead1cc74cbbfac4194226e6f540 data/ad_astra/loot_tables/blocks/chiseled_glacio_stone_bricks.json
 3e119a594b3d25f01089ccaef96fda1f8aa7f9fb data/ad_astra/loot_tables/blocks/chiseled_mars_stone_bricks.json
 b3ea6406224ff85dbd5ef1856bcf3dcf7661a6a7 data/ad_astra/loot_tables/blocks/chiseled_mercury_stone_bricks.json
@@ -49,6 +50,7 @@ f20e733b3e9fca135b239d5c821de3f688fdd56b data/ad_astra/loot_tables/blocks/etrium
 b1c13878821ab83a49d2502543653113f276a3e1 data/ad_astra/loot_tables/blocks/etrium_plating_stairs.json
 f144afa282c2e5bf8868aa070338ab37421889b6 data/ad_astra/loot_tables/blocks/etrium_pressure_plate.json
 1badf90e06dcf89719118f5e26e967bdbbd2aa8c data/ad_astra/loot_tables/blocks/etrium_sliding_door.json
+7ef78cc31478fbc4c3c4cbefa2d21e712a67e144 data/ad_astra/loot_tables/blocks/fluid_pipe_duct.json
 586fe83bc06f19c27cc31d982887d827ae255cd8 data/ad_astra/loot_tables/blocks/geothermal_generator.json
 65726fb1c01517e1aba5fce96870deed594246de data/ad_astra/loot_tables/blocks/glacio_cobblestone.json
 3e85ecdd12ee4cc3bccc1d53a14308cb69afd4e4 data/ad_astra/loot_tables/blocks/glacio_cobblestone_slab.json

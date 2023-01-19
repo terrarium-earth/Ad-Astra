@@ -43,8 +43,11 @@ public class ModItems {
     public static final RegistryEntry<Item> GRAVITY_DETECTOR = ITEMS.register("gravity_detector", () -> new GravityDetectorItem(new Item.Properties().stacksTo(1)));
     public static final RegistryEntry<Item> SPACE_PAINTING = ITEMS.register("space_painting", () -> new SpacePaintingItem(new Item.Properties()));
 
-    public static final RegistryEntry<Item> ETRIUM_CABLE = MACHINES.register("etrium_cable", () -> new BlockItem(ModBlocks.ETRIUM_CABLE.get(), new Item.Properties()));
-    public static final RegistryEntry<Item> DESMIUM_FLUID_PIPE = MACHINES.register("desmium_fluid_pipe", () -> new BlockItem(ModBlocks.DESMIUM_FLUID_PIPE.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> ETRIUM_CABLE = ITEMS.register("etrium_cable", () -> new BlockItem(ModBlocks.ETRIUM_CABLE.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> DESMIUM_FLUID_PIPE = ITEMS.register("desmium_fluid_pipe", () -> new BlockItem(ModBlocks.DESMIUM_FLUID_PIPE.get(), new Item.Properties()));
+
+    public static final RegistryEntry<Item> CABLE_DUCT = ITEMS.register("cable_duct", () -> new BlockItem(ModBlocks.CABLE_DUCT.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> FLUID_PIPE_DUCT = ITEMS.register("fluid_pipe_duct", () -> new BlockItem(ModBlocks.FLUID_PIPE_DUCT.get(), new Item.Properties()));
 
     public static final RegistryEntry<Item> ETRIONIC_GENERATOR = MACHINES.register("etrionic_generator", () -> new BlockItem(ModBlocks.ETRIONIC_GENERATOR.get(), new Item.Properties()));
     public static final RegistryEntry<Item> COMBUSTION_GENERATOR = MACHINES.register("combustion_generator", () -> new BlockItem(ModBlocks.COMBUSTION_GENERATOR.get(), new Item.Properties()));

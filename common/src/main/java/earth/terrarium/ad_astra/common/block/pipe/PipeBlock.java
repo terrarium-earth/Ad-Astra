@@ -2,6 +2,7 @@ package earth.terrarium.ad_astra.common.block.pipe;
 
 import earth.terrarium.ad_astra.common.Wrenchable;
 import earth.terrarium.ad_astra.common.block.BasicEntityBlock;
+import earth.terrarium.ad_astra.common.registry.ModBlocks;
 import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.ad_astra.common.registry.ModSoundEvents;
 import earth.terrarium.ad_astra.common.util.LangUtils;
@@ -46,7 +47,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @SuppressWarnings("deprecation")
-public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBlock, Wrenchable {
+public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBlock, Pipe, Wrenchable {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     public static final EnumProperty<PipeState> UP = EnumProperty.create("up", PipeState.class);
@@ -97,6 +98,13 @@ public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
             } else if (getType() == PipeType.CABLE) {
                 return pipe.getType() == PipeType.CABLE;
             }
+        } else if (level.getBlockState(offset).getBlock() instanceof PipeDuctBlock pipe) {
+            if (getType() == PipeType.FLUID_PIPE) {
+                return pipe.equals(ModBlocks.FLUID_PIPE_DUCT.get());
+
+            } else if (getType() == PipeType.CABLE) {
+                return pipe.equals(ModBlocks.CABLE_DUCT.get());
+            }
         }
         return false;
     }
@@ -128,6 +136,7 @@ public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
         }
     }
 
+    @Override
     public long getTransferRate() {
         return transferRate;
     }

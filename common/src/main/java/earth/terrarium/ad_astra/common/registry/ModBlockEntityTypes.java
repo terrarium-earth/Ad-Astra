@@ -38,8 +38,8 @@ public class ModBlockEntityTypes {
     public static final RegistryEntry<BlockEntityType<SlidingDoorBlockEntity>> SLIDING_DOOR = BLOCK_ENTITY_TYPES.register("sliding_door", () -> createBlockEntityType(SlidingDoorBlockEntity::new, ModBlocks.SLIDING_DOORS));
 
 
-    public static final RegistryEntry<BlockEntityType<CableBlockEntity>> CABLE = BLOCK_ENTITY_TYPES.register("cable", () -> createBlockEntityType(CableBlockEntity::new, ModBlocks.ETRIUM_CABLE.get()));
-    public static final RegistryEntry<BlockEntityType<FluidPipeBlockEntity>> FLUID_PIPE = BLOCK_ENTITY_TYPES.register("fluid_pipe", () -> createBlockEntityType(FluidPipeBlockEntity::new, ModBlocks.DESMIUM_FLUID_PIPE.get()));
+    public static final RegistryEntry<BlockEntityType<CableBlockEntity>> CABLE = BLOCK_ENTITY_TYPES.register("cable", () -> createBlockEntityType(CableBlockEntity::new, ModBlocks.CABLE_DUCT.get(), ModBlocks.ETRIUM_CABLE.get()));
+    public static final RegistryEntry<BlockEntityType<FluidPipeBlockEntity>> FLUID_PIPE = BLOCK_ENTITY_TYPES.register("fluid_pipe", () -> createBlockEntityType(FluidPipeBlockEntity::new, ModBlocks.FLUID_PIPE_DUCT.get(), ModBlocks.DESMIUM_FLUID_PIPE.get()));
 
     public static <E extends BlockEntity> BlockEntityType<E> createBlockEntityType(BlockEntityType.BlockEntitySupplier<E> factory, Block... blocks) {
         return BlockEntityType.Builder.of(factory, blocks).build(null);

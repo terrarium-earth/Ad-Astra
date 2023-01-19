@@ -2,6 +2,8 @@
   "values": [
     "ad_astra:etrium_cable",
     "ad_astra:desmium_fluid_pipe",
+    "ad_astra:cable_duct",
+    "ad_astra:fluid_pipe_duct",
     "ad_astra:etrionic_generator",
     "ad_astra:combustion_generator",
     "ad_astra:etrionic_solar_panel",

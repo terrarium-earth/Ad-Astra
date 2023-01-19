@@ -60,6 +60,8 @@ public class ModLootTableProvider extends LootTableProvider {
             add(ModBlocks.ETRIUM_ORE.get(), createEtriumOreDrops(ModBlocks.ETRIUM_ORE.get()));
             dropSelf(ModBlocks.ETRIUM_CABLE.get());
             dropSelf(ModBlocks.DESMIUM_FLUID_PIPE.get());
+            dropSelf(ModBlocks.CABLE_DUCT.get());
+            dropSelf(ModBlocks.FLUID_PIPE_DUCT.get());
         }
 
         @Override

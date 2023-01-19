@@ -37,6 +37,7 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<Pl
         BlockState state = getBlockState();
         BlockState state2 = level.getBlockState(pos);
         if (state.isAir() || state2.isAir()) return;
+
         PipeState pipeState = state.getValue(PipeBlock.DIRECTIONS.get(getSource().direction()));
         PipeState pipeState2 = state2.getValue(PipeBlock.DIRECTIONS.get(direction));
 
@@ -100,8 +101,8 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<Pl
 
     @Override
     public long getTransferAmount() {
-        if (getBlockState().getBlock() instanceof PipeBlock cableBlock) {
-            return cableBlock.getTransferRate();
+        if (getBlockState().getBlock() instanceof Pipe pipe) {
+            return pipe.getTransferRate();
         }
         return 0;
     }

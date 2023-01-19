@@ -11,6 +11,7 @@ import earth.terrarium.ad_astra.common.block.machine.AnimatedMachineBlock;
 import earth.terrarium.ad_astra.common.block.machine.MachineBlock;
 import earth.terrarium.ad_astra.common.block.machine.SolarPanelBlock;
 import earth.terrarium.ad_astra.common.block.pipe.PipeBlock;
+import earth.terrarium.ad_astra.common.block.pipe.PipeDuctBlock;
 import earth.terrarium.ad_astra.common.block.slidingdoor.SlidingDoorBlock;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import earth.terrarium.botarium.common.registry.fluid.BotariumLiquidBlock;
@@ -45,6 +46,9 @@ public class ModBlocks {
 
     public static final RegistryEntry<Block> ETRIUM_CABLE = BLOCKS.register("etrium_cable", () -> new PipeBlock(4096, 0.344, PipeBlock.PipeType.CABLE, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(1.0f, 1.0f)));
     public static final RegistryEntry<Block> DESMIUM_FLUID_PIPE = BLOCKS.register("desmium_fluid_pipe", () -> new PipeBlock(FluidHooks.buckets(0.256f), 0.185, PipeBlock.PipeType.FLUID_PIPE, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(1.0f, 1.0f)));
+
+    public static final RegistryEntry<Block> CABLE_DUCT = CUBES.register("cable_duct", () -> new PipeDuctBlock(4096, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(1.0f, 1.0f)));
+    public static final RegistryEntry<Block> FLUID_PIPE_DUCT = CUBES.register("fluid_pipe_duct", () -> new PipeDuctBlock(FluidHooks.buckets(0.256f), BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(1.0f, 1.0f)));
 
     public static final RegistryEntry<Block> ETRIONIC_GENERATOR = MACHINES.register("etrionic_generator", () -> new AnimatedMachineBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()));
     public static final RegistryEntry<Block> COMBUSTION_GENERATOR = MACHINES.register("combustion_generator", () -> new MachineBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));

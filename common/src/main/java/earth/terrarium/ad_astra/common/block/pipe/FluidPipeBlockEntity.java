@@ -106,8 +106,8 @@ public class FluidPipeBlockEntity extends BlockEntity implements InteractablePip
 
     @Override
     public long getTransferAmount() {
-        if (getBlockState().getBlock() instanceof PipeBlock fluidPipe) {
-            return fluidPipe.getTransferRate();
+        if (getBlockState().getBlock() instanceof Pipe pipe) {
+            return pipe.getTransferRate();
         }
         return 0;
     }
