@@ -36,10 +36,10 @@ public class ElectrolyzerBlockEntity extends CookingMachineBlockEntity implement
         if (recipe != null) {
             if (!getFluidContainer().isEmpty() && canCraft()) {
                 if (getEnergyStorage().internalExtract(recipe.energy(), true) >= recipe.energy()) {
-                    if (getFluidContainer().extractFluid(FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(0).getFluid(), recipe.ingredient().getFluidAmount(), null), true).getFluidAmount() <= 0)
+                    if (getFluidContainer().extractFluid(recipe.ingredient(), true).getFluidAmount() <= 0) {
                         return;
-                    if (getFluidContainer().insertFluid(FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(1).getFluid(), recipe.resultFluid1().getFluidAmount(), null), true) <= 0
-                            && getFluidContainer().insertFluid(FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(2).getFluid(), recipe.resultFluid2().getFluidAmount(), null), true) <= 0) {
+                    }
+                    if (getFluidContainer().insertFluid(recipe.resultFluid1(), true) <= 0 && getFluidContainer().insertFluid(recipe.resultFluid2(), true) <= 0) {
                         return;
                     }
 
@@ -47,7 +47,7 @@ public class ElectrolyzerBlockEntity extends CookingMachineBlockEntity implement
                     cookTime++;
                     if (cookTime >= cookTimeTotal) {
                         cookTime = 0;
-                        getFluidContainer().extractFluid(FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(0).getFluid(), recipe.ingredient().getFluidAmount(), null), false);
+                        getFluidContainer().extractFluid(recipe.ingredient(), false);
                         getFluidContainer().insertFluid(recipe.resultFluid1(), false);
                         getFluidContainer().insertFluid(recipe.resultFluid2(), false);
                         updateFluidSlots();

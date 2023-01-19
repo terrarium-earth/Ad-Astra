@@ -1,4 +1,4 @@
-package earth.terrarium.ad_astra.common.block.flag;
+package earth.terrarium.ad_astra.common.block;
 
 
 import com.google.common.collect.Lists;
@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 
 public class EightDirectionProperty extends EnumProperty<EightDirectionProperty.Direction> {
 
-    protected EightDirectionProperty() {
+    public EightDirectionProperty() {
         super("facing", Direction.class, Lists.newArrayList(Direction.VALUES));
     }
 

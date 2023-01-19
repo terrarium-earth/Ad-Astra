@@ -2,6 +2,7 @@ package earth.terrarium.ad_astra.common.block.flag;
 
 import earth.terrarium.ad_astra.client.screen.FlagUrlScreen;
 import earth.terrarium.ad_astra.common.block.BasicEntityBlock;
+import earth.terrarium.ad_astra.common.block.EightDirectionProperty;
 import earth.terrarium.ad_astra.common.util.LangUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;

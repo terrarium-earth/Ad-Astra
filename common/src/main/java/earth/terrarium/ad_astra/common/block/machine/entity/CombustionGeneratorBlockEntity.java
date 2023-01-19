@@ -35,12 +35,12 @@ public class CombustionGeneratorBlockEntity extends CookingMachineBlockEntity im
         if (recipe != null) {
             if (!getFluidContainer().isEmpty() && getFluidContainer().getFluids().get(0).getFluid().equals(recipe.ingredient().getFluid())) {
                 if (getEnergyStorage().internalInsert(recipe.energy(), true) >= recipe.energy()) {
-                    if (getFluidContainer().extractFluid(FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(0).getFluid(), recipe.ingredient().getFluidAmount(), null), true).getFluidAmount() > 0) {
+                    if (getFluidContainer().extractFluid(recipe.ingredient(), true).getFluidAmount() > 0) {
                         getEnergyStorage().internalInsert(recipe.energy(), false);
                         cookTime++;
                         if (cookTime >= cookTimeTotal) {
                             cookTime = 0;
-                            getFluidContainer().extractFluid(FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(0).getFluid(), recipe.ingredient().getFluidAmount(), null), false);
+                            getFluidContainer().extractFluid(recipe.ingredient(), false);
                             updateFluidSlots();
                         }
                         if (fluidContainer.getFluids().get(0).isEmpty()) {

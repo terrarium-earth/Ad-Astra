@@ -5,7 +5,6 @@ import com.mojang.math.Axis;
 import com.teamresourceful.resourcefullib.client.CloseablePoseStack;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.util.ClientPlatformUtils;
-import earth.terrarium.ad_astra.common.block.globe.GlobeBlock;
 import earth.terrarium.ad_astra.common.block.globe.GlobeBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -15,7 +14,6 @@ import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -29,7 +27,7 @@ public class GlobeRenderer implements BlockEntityRenderer<GlobeBlockEntity> {
     @Override
     public void render(GlobeBlockEntity entity, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
         float yaw = Mth.lerp(partialTicks, entity.prevYaw, entity.getYaw());
-        render(entity.getBlockState().getValue(GlobeBlock.FACING), entity.getBlockState(), yaw, poseStack, buffer, packedLight, packedOverlay);
+        render(entity.getBlockState(), yaw, poseStack, buffer, packedLight, packedOverlay);
     }
 
     public static class ItemRenderer extends BlockEntityWithoutLevelRenderer {
@@ -52,12 +50,12 @@ public class GlobeRenderer implements BlockEntityRenderer<GlobeBlockEntity> {
             try (var ignored = new CloseablePoseStack(poseStack)) {
                 BakedModel blockModel = Minecraft.getInstance().getBlockRenderer().getBlockModel(state);
                 Minecraft.getInstance().getBlockRenderer().getModelRenderer().renderModel(poseStack.last(), buffer.getBuffer(Sheets.cutoutBlockSheet()), state, blockModel, 1f, 1f, 1f, packedLight, packedOverlay);
-                render(Direction.NORTH, state, yaw, poseStack, buffer, packedLight, packedOverlay);
+                render(state, yaw, poseStack, buffer, packedLight, packedOverlay);
             }
         }
     }
 
-    private static void render(Direction dir, BlockState state, float yaw, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
+    private static void render(BlockState state, float yaw, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
         BakedModel blockModel = ClientPlatformUtils.getModel(Minecraft.getInstance().getModelManager(), new ResourceLocation(AdAstra.MOD_ID, "block/" + BuiltInRegistries.BLOCK.getKey(state.getBlock()).getPath() + "_cube"));
         try (var ignored = new CloseablePoseStack(poseStack)) {
             poseStack.translate(0.5, 0, 0.5);

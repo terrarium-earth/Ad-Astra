@@ -5,6 +5,7 @@
   "minVersion": "0.8.5",
   "mixins": [
     "LivingEntityMixin",
+    "PaintingInvoker",
     "gravity.AbstractArrowMixin",
     "gravity.BoatMixin",
     "gravity.CommonGravityEntityMixin",

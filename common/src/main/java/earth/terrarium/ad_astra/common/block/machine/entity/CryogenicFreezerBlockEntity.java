@@ -36,9 +36,9 @@ public class CryogenicFreezerBlockEntity extends CookingMachineBlockEntity imple
         if (recipe != null) {
             if (!getFluidContainer().isEmpty() && canCraft()) {
                 if (getEnergyStorage().internalExtract(recipe.energy(), true) >= recipe.energy()) {
-                    if (getFluidContainer().extractFluid(FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(0).getFluid(), recipe.ingredient1().getFluidAmount(), null), true).getFluidAmount() <= 0)
+                    if (getFluidContainer().extractFluid(recipe.ingredient1(), true).getFluidAmount() <= 0)
                         return;
-                    if (getFluidContainer().extractFluid(FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(1).getFluid(), recipe.ingredient2().getFluidAmount(), null), true).getFluidAmount() <= 0)
+                    if (getFluidContainer().extractFluid(recipe.ingredient2(), true).getFluidAmount() <= 0)
                         return;
                     if (getFluidContainer().insertFluid(recipe.resultFluid(), true) <= 0)
                         return;
@@ -47,8 +47,8 @@ public class CryogenicFreezerBlockEntity extends CookingMachineBlockEntity imple
                     cookTime++;
                     if (cookTime >= cookTimeTotal) {
                         cookTime = 0;
-                        getFluidContainer().extractFluid(FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(0).getFluid(), recipe.ingredient1().getFluidAmount(), null), false);
-                        getFluidContainer().extractFluid(FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(1).getFluid(), recipe.ingredient2().getFluidAmount(), null), false);
+                        getFluidContainer().extractFluid(recipe.ingredient1(), false);
+                        getFluidContainer().extractFluid(recipe.ingredient2(), false);
                         getFluidContainer().insertFluid(recipe.resultFluid(), false);
                         updateFluidSlots();
                     }

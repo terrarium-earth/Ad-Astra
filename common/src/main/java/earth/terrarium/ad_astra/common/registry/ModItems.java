@@ -41,6 +41,7 @@ public class ModItems {
     public static final RegistryEntry<Item> OXYGEN_DETECTOR = ITEMS.register("oxygen_detector", () -> new OxygenDetectorItem(new Item.Properties().stacksTo(1)));
     public static final RegistryEntry<Item> TEMPERATURE_DETECTOR = ITEMS.register("temperature_detector", () -> new TemperatureDetectorItem(new Item.Properties().stacksTo(1)));
     public static final RegistryEntry<Item> GRAVITY_DETECTOR = ITEMS.register("gravity_detector", () -> new GravityDetectorItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryEntry<Item> SPACE_PAINTING = ITEMS.register("space_painting", () -> new SpacePaintingItem(new Item.Properties()));
 
     public static final RegistryEntry<Item> ETRIUM_CABLE = MACHINES.register("etrium_cable", () -> new BlockItem(ModBlocks.ETRIUM_CABLE.get(), new Item.Properties()));
     public static final RegistryEntry<Item> DESMIUM_FLUID_PIPE = MACHINES.register("desmium_fluid_pipe", () -> new BlockItem(ModBlocks.DESMIUM_FLUID_PIPE.get(), new Item.Properties()));
