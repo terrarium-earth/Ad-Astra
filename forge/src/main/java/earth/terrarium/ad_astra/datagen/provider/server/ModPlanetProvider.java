@@ -21,5 +21,6 @@ public class ModPlanetProvider extends PlanetProvider {
         consumer.accept(new Planet(Planet.VENUS, false, 8.87f, 464));
         consumer.accept(new Planet(Planet.MERCURY, false, 3.7f, 167));
         consumer.accept(new Planet(Planet.GLACIO, true, 3.721f, -46));
+        consumer.accept(new Planet(Planet.ORBIT, false, 0.01f, -270));
     }
 }

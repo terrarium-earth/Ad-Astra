@@ -1,7 +1,9 @@
 package earth.terrarium.ad_astra.mixin;
 
+import earth.terrarium.ad_astra.common.data.Planet;
 import earth.terrarium.ad_astra.common.system.GravitySystem;
 import earth.terrarium.ad_astra.common.system.OxygenSystem;
+import earth.terrarium.ad_astra.common.system.SpaceMovementSystem;
 import earth.terrarium.ad_astra.common.system.TemperatureSystem;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
@@ -30,17 +32,23 @@ public class LivingEntityMixin {
     }
 
     // Gravity
-    @Inject(method = "travel", at = @At("TAIL"))
-    public void adastra_travel(CallbackInfo ci) {
+    @Inject(method = "travel", at = @At("HEAD"), cancellable = true)
+    public void adastra_travel(Vec3 travelVector, CallbackInfo ci) {
         LivingEntity entity = (LivingEntity) (Object) this;
-
         Vec3 velocity = entity.getDeltaMovement();
 
-        if (!entity.isNoGravity() && !entity.isInWater() && !entity.isInLava() && !entity.isFallFlying() && !entity.hasEffect(MobEffects.SLOW_FALLING)) {
-            double newGravity = 0.08 * GravitySystem.getEntityGravity(entity);
-            entity.setDeltaMovement(velocity.x(), velocity.y() + 0.08 - newGravity, velocity.z());
+        if (Planet.ORBIT.equals(entity.level.dimension()) && entity instanceof Player p && p.getAbilities().flying) return;
+        if (Planet.ORBIT.equals(entity.level.dimension())) {
+            SpaceMovementSystem.travel(entity, travelVector);
+            ci.cancel();
+        } else {
+            if (!entity.isNoGravity() && !entity.isInWater() && !entity.isInLava() && !entity.isFallFlying() && !entity.hasEffect(MobEffects.SLOW_FALLING)) {
+                double newGravity = 0.08 * GravitySystem.getEntityGravity(entity);
+                entity.setDeltaMovement(velocity.x(), velocity.y() + 0.08 - newGravity, velocity.z());
+            }
         }
     }
+
 
     // Make fall damage gravity-dependant
     @Inject(method = "causeFallDamage", at = @At("HEAD"), cancellable = true)

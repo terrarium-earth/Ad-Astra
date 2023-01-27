@@ -1,6 +1,7 @@
 package earth.terrarium.ad_astra.common.block.slidingdoor;
 
 import earth.terrarium.ad_astra.common.block.BasicEntityBlock;
+import earth.terrarium.ad_astra.common.item.ZipGunItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -145,6 +146,9 @@ public class SlidingDoorBlock extends BasicEntityBlock {
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (player.getItemInHand(hand).getItem() instanceof ZipGunItem) {
+            return InteractionResult.FAIL;
+        }
         if (!level.isClientSide) {
             BlockPos main = getMainPos(state, pos);
             if (level.getBlockEntity(getMainPos(state, pos)) instanceof SlidingDoorBlockEntity entity) {

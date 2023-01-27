@@ -5,6 +5,7 @@ import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.item.*;
+import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import earth.terrarium.botarium.common.registry.fluid.FluidBucketItem;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -42,6 +43,8 @@ public class ModItems {
     public static final RegistryEntry<Item> TEMPERATURE_DETECTOR = ITEMS.register("temperature_detector", () -> new TemperatureDetectorItem(new Item.Properties().stacksTo(1)));
     public static final RegistryEntry<Item> GRAVITY_DETECTOR = ITEMS.register("gravity_detector", () -> new GravityDetectorItem(new Item.Properties().stacksTo(1)));
     public static final RegistryEntry<Item> SPACE_PAINTING = ITEMS.register("space_painting", () -> new SpacePaintingItem(new Item.Properties()));
+
+    public static final RegistryEntry<Item> ZIP_GUN = ITEMS.register("zip_gun", () -> new ZipGunItem(2, FluidHooks.buckets(3), new Item.Properties().stacksTo(1)));
 
     public static final RegistryEntry<Item> ETRIUM_CABLE = ITEMS.register("etrium_cable", () -> new BlockItem(ModBlocks.ETRIUM_CABLE.get(), new Item.Properties()));
     public static final RegistryEntry<Item> DESMIUM_FLUID_PIPE = ITEMS.register("desmium_fluid_pipe", () -> new BlockItem(ModBlocks.DESMIUM_FLUID_PIPE.get(), new Item.Properties()));

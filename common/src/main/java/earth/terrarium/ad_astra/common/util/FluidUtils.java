@@ -71,4 +71,24 @@ public class FluidUtils {
             }
         }
     }
+
+    public static FluidHolder getTank(ItemStack stack) {
+        return FluidHooks.getItemFluidManager(stack).getFluidInTank(0);
+    }
+
+    public static long getFluidAmount(ItemStack stack) {
+        return getTank(stack).getFluidAmount();
+    }
+
+    public static Fluid getFluid(ItemStack stack) {
+        return getTank(stack).getFluid();
+    }
+
+    public static long insert(ItemStackHolder stack, FluidHolder fluid) {
+        return FluidHooks.getItemFluidManager(stack.getStack()).insertFluid(stack, fluid, false);
+    }
+
+    public static FluidHolder extract(ItemStackHolder stack, FluidHolder fluid) {
+        return FluidHooks.getItemFluidManager(stack.getStack()).extractFluid(stack, fluid, false);
+    }
 }

@@ -1,4 +1,4 @@
-// 1.19.3	2023-01-19T00:25:29.622909	Item Models: ad_astra
+// 1.19.3	2023-01-26T15:36:14.610493	Item Models: ad_astra
 30391f182366c0f22529481911aca797186a29d5 assets/ad_astra/models/item/aerolyte_ingot.json
 a6960cb247dd1a557f6d31391bf64859593eea40 assets/ad_astra/models/item/aerolyte_nugget.json
 09e33dd3debc1b99011c1b30d69f0d78341fb9a8 assets/ad_astra/models/item/aerolyte_plate.json
@@ -45,3 +45,4 @@ cf71b89c2adee107517da294864347cbdcc9d3ec assets/ad_astra/models/item/thermalyte_
 3974a5036f7443b820de6c9e85acb3ea2a9b1fa8 assets/ad_astra/models/item/thermalyte_sliding_door.json
 7015e9e8a3f20a31a305b226cf244cda18674364 assets/ad_astra/models/item/vesnium.json
 9f95296cd28f3863946094b9e4e8b84f9b52779b assets/ad_astra/models/item/wrench.json
+b411183420e3d863bb97d69a2263fa315ed24255 assets/ad_astra/models/item/zip_gun.json
