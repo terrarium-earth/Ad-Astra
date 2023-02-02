@@ -61,7 +61,7 @@ public class TemperatureRegulatorBlockEntity extends ContainerMachineBlockEntity
             temperatureTarget = TemperatureSystem.TARGET_TEMPERATURE;
             currentTemperature = TemperatureSystem.getLevelTemperature(level, getBlockPos());
         }
-        if (level.getGameTime() % 40 == 0) {
+        if (level.getGameTime() % 60 == 0) {
             int energyCost = 1000; // TODO: Calculate energy and fluid costs
             long hydrogenCost = FluidHooks.buckets(0.01f);
 
@@ -148,7 +148,7 @@ public class TemperatureRegulatorBlockEntity extends ContainerMachineBlockEntity
         TemperatureSystem.TEMPERATURE_REGULATOR_BLOCKS.add(getBlockPos());
         if (!TemperatureSystem.isSafeTemperature(currentTemperature)) return;
 
-        Set<BlockPos> positions = FloodFiller3D.run(level, getBlockPos().above());
+        Set<BlockPos> positions = FloodFiller3D.run(level, getBlockPos());
         TemperatureSystem.addTemperatureSource(level, positions);
         sources.addAll(positions);
     }

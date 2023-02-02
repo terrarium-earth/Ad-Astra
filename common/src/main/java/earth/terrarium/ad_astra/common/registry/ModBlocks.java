@@ -107,6 +107,7 @@ public class ModBlocks {
     public static final RegistryEntry<Block> IRON_PILLAR = PILLARS.register("iron_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER)));
     public static final RegistryEntry<Block> CROSS_IRON_PILLAR = PILLARS.register("cross_iron_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER)));
     public static final RegistryEntry<Block> GLOWING_IRON_PILLAR = PILLARS.register("glowing_iron_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel((state) -> 15)));
+    public static final RegistryEntry<Block> VENT = CUBES.register("vent", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).noOcclusion()));
 
     public static final RegistryEntry<Block> STEEL_BLOCK = CUBES.register("steel_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER)));
     public static final RegistryEntry<Block> STEEL_PLATING = CUBES.register("steel_plating", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER)));

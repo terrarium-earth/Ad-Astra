@@ -1,4 +1,4 @@
-// 1.19.3	2023-01-19T16:59:43.117842	Loot Tables
+// 1.19.3	2023-02-01T20:04:36.713667	Loot Tables
 efe946b0208594ac520ee72b3aec5247fe309bc2 data/ad_astra/loot_tables/blocks/aerolyte_block.json
 2c1ed3e87f579f4c9e9f29ddd98760285c73775d data/ad_astra/loot_tables/blocks/aerolyte_button.json
 e73517391f48b96f9fb259f478c9bfb5fc60ee42 data/ad_astra/loot_tables/blocks/aerolyte_pillar.json
@@ -173,6 +173,7 @@ ee1081558f507bd2a039cfa4a3e65500e07f0365 data/ad_astra/loot_tables/blocks/therma
 8d38e82770539669f0fe90ec97d8df89eac022d8 data/ad_astra/loot_tables/blocks/thermalyte_plating_stairs.json
 1bf7eebcf705a9327ac785013db2a16772c64d90 data/ad_astra/loot_tables/blocks/thermalyte_pressure_plate.json
 3c53ed4c86dae1431f1927e4a7fec380015e2570 data/ad_astra/loot_tables/blocks/thermalyte_sliding_door.json
+3ecd8218ae57ccd03a73f299f860056779b9c02d data/ad_astra/loot_tables/blocks/vent.json
 14247ba5ff371fd7a3416dcf2e5eb4af6ce4310b data/ad_astra/loot_tables/blocks/venus_cobblestone.json
 de3deb7308137f590ecdc16eee5b75b46eb1d64f data/ad_astra/loot_tables/blocks/venus_cobblestone_slab.json
 9f90b53d5d26aee4df5d4bc90f4bb3bc6bd94a44 data/ad_astra/loot_tables/blocks/venus_cobblestone_stairs.json

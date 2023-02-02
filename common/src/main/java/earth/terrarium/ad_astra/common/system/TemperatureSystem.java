@@ -1,5 +1,6 @@
 package earth.terrarium.ad_astra.common.system;
 
+import earth.terrarium.ad_astra.common.data.Planet;
 import earth.terrarium.ad_astra.common.data.PlanetData;
 import earth.terrarium.ad_astra.common.util.ModUtils;
 import net.minecraft.core.BlockPos;
@@ -30,6 +31,7 @@ public class TemperatureSystem {
     }
 
     public static int getLevelTemperature(Level level, BlockPos pos) {
+        if (Planet.ORBIT.equals(level.dimension())) return getLevelTemperature(level);
         int height = Math.min(256, pos.getY());
         float timeOfDay = ModUtils.getStarBrightness(level.getTimeOfDay(1.0f));
         int temperature = getLevelTemperature(level);

@@ -5,6 +5,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 
@@ -50,10 +51,17 @@ public class ModTags {
     public static class Blocks {
         public static final TagKey<Block> FLAGS = TagKey.create(Registries.BLOCK, new ResourceLocation(AdAstra.MOD_ID, "flags"));
         public static final TagKey<Block> GLOBES = TagKey.create(Registries.BLOCK, new ResourceLocation(AdAstra.MOD_ID, "globes"));
+
+        public static final TagKey<Block> PASSES_FLOOD_FILL = TagKey.create(Registries.BLOCK, new ResourceLocation(AdAstra.MOD_ID, "passes_flood_fill"));
+        public static final TagKey<Block> BLOCKS_FLOOD_FILL = TagKey.create(Registries.BLOCK, new ResourceLocation(AdAstra.MOD_ID, "blocks_flood_fill"));
     }
 
     public static class Fluids {
         public static final TagKey<Fluid> OXYGEN = TagKey.create(Registries.FLUID, new ResourceLocation(AdAstra.MOD_ID, "oxygen"));
         public static final TagKey<Fluid> HYDROGEN = TagKey.create(Registries.FLUID, new ResourceLocation(AdAstra.MOD_ID, "hydrogen"));
+    }
+
+    public static class Recipes {
+        public static final TagKey<RecipeType<?>> RECYCLABLES = TagKey.create(Registries.RECIPE_TYPE, new ResourceLocation(AdAstra.MOD_ID, "recyclables"));
     }
 }

@@ -151,6 +151,7 @@ public class ModItems {
     public static final RegistryEntry<Item> IRON_PILLAR = PILLARS.register("iron_pillar", () -> new BlockItem(ModBlocks.IRON_PILLAR.get(), new Item.Properties()));
     public static final RegistryEntry<Item> CROSS_IRON_PILLAR = PILLARS.register("cross_iron_pillar", () -> new BlockItem(ModBlocks.CROSS_IRON_PILLAR.get(), new Item.Properties()));
     public static final RegistryEntry<Item> GLOWING_IRON_PILLAR = PILLARS.register("glowing_iron_pillar", () -> new BlockItem(ModBlocks.GLOWING_IRON_PILLAR.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> VENT = CUBES.register("vent", () -> new BlockItem(ModBlocks.VENT.get(), new Item.Properties()));
 
     public static final RegistryEntry<Item> STEEL_BLOCK = CUBES.register("steel_block", () -> new BlockItem(ModBlocks.STEEL_BLOCK.get(), new Item.Properties()));
     public static final RegistryEntry<Item> STEEL_PLATING = CUBES.register("steel_plating", () -> new BlockItem(ModBlocks.STEEL_PLATING.get(), new Item.Properties()));

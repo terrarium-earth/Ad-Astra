@@ -51,7 +51,7 @@ public class OxygenDistributorBlockEntity extends ContainerMachineBlockEntity im
     @Override
     public void serverTick() {
         if (level == null) return;
-        if (level.getGameTime() % 40 == 0) {
+        if (level.getGameTime() % 60 == 0) {
             int energyCost = 100; // TODO: Calculate energy and fluid costs
             long oxygenCost = FluidHooks.buckets(0.01);
 
@@ -117,7 +117,7 @@ public class OxygenDistributorBlockEntity extends ContainerMachineBlockEntity im
 
         clearSources();
         OxygenSystem.OXYGEN_DISTRIBUTOR_BLOCKS.add(getBlockPos());
-        Set<BlockPos> positions = FloodFiller3D.run(level, getBlockPos().above());
+        Set<BlockPos> positions = FloodFiller3D.run(level, getBlockPos());
         OxygenSystem.addOxygenSource(level, positions);
         sources.addAll(positions);
     }

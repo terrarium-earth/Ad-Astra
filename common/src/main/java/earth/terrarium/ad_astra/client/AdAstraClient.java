@@ -54,6 +54,7 @@ public class AdAstraClient {
 
     public static void registerBlockRenderTypes() {
         ModBlocks.GLOBES.stream().forEach(b -> ClientHooks.setRenderLayer(b.get(), RenderType.cutout()));
+        ClientHooks.setRenderLayer(ModBlocks.VENT.get(), RenderType.cutout());
     }
 
     public static void onRegisterFluidRenderTypes(BiConsumer<RenderType, Fluid> register) {

@@ -4,12 +4,15 @@ import earth.terrarium.ad_astra.common.block.machine.ContainerMachineBlockEntity
 import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.ad_astra.common.screen.machine.GravityNormalizerMenu;
 import earth.terrarium.ad_astra.common.system.GravitySystem;
+import earth.terrarium.ad_astra.common.util.ModUtils;
 import earth.terrarium.ad_astra.common.util.algorithm.FloodFiller3D;
 import earth.terrarium.botarium.common.energy.base.EnergyAttachment;
 import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -53,7 +56,7 @@ public class GravityNormalizerBlockEntity extends ContainerMachineBlockEntity im
             gravityTarget = GravitySystem.DEFAULT_GRAVITY;
             currentGravity = GravitySystem.getLevelGravity(level);
         }
-        if (level.getGameTime() % 40 == 0) {
+        if (level.getGameTime() % 60 == 0) {
             int energyCost = 100; // TODO: Calculate energy costs
 
             if (getEnergyStorage().internalExtract(energyCost, true) >= energyCost) {
@@ -121,7 +124,7 @@ public class GravityNormalizerBlockEntity extends ContainerMachineBlockEntity im
         }
         clearSources();
         GravitySystem.GRAVITY_NORMALIZER_BLOCKS.add(getBlockPos());
-        Set<BlockPos> positions = FloodFiller3D.run(level, getBlockPos().above());
+        Set<BlockPos> positions = FloodFiller3D.run(level, getBlockPos());
         GravitySystem.addGravitySource(level, positions, currentGravity);
         sources.addAll(positions);
     }
