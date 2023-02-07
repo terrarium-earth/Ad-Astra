@@ -15,7 +15,7 @@ import earth.terrarium.ad_astra.common.recipe.*;
 import earth.terrarium.ad_astra.common.registry.ModFluids;
 import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.ad_astra.common.registry.ModRecipeTypes;
-import earth.terrarium.botarium.api.energy.EnergyHooks;
+import earth.terrarium.botarium.common.energy.util.EnergyHooks;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import earth.terrarium.botarium.common.item.ItemStackHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -91,7 +91,7 @@ public class AdAstraEmiPlugin implements EmiPlugin {
         ((NetheriteSpaceSuit) netheriteSpaceSuit.getStack().getItem()).insert(netheriteSpaceSuit, FluidHooks.newFluidHolder(ModFluids.OXYGEN.get(), Long.MAX_VALUE, null));
 
         ItemStackHolder jetSuit = new ItemStackHolder(ModItems.JET_SUIT.get().getDefaultInstance());
-        earth.terrarium.botarium.api.item.ItemStackHolder jetSuit2 = new earth.terrarium.botarium.api.item.ItemStackHolder(ModItems.JET_SUIT.get().getDefaultInstance());
+        ItemStackHolder jetSuit2 = new ItemStackHolder(ModItems.JET_SUIT.get().getDefaultInstance());
         ((JetSuit) jetSuit.getStack().getItem()).insert(jetSuit, FluidHooks.newFluidHolder(ModFluids.OXYGEN.get(), Long.MAX_VALUE, null));
         EnergyHooks.getItemEnergyManager(jetSuit.getStack()).insert(jetSuit2, EnergizerConfig.maxEnergy, false);
 

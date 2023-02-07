@@ -32,7 +32,7 @@ public class ModFluidProperties {
             .overlay(new ResourceLocation(AdAstra.MOD_ID, "block/cryo_fuel_overlay"))
             .viscosity(71)
             .density(71)
-            .temperature(-10000000)
+            .temperature(-196)
             .canConvertToSource(false));
 
     public static final FluidData OXYGEN_FLUID = FLUID_TYPES.register("oxygen", FluidProperties.create()

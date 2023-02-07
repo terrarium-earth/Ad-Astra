@@ -84,6 +84,13 @@ public final class AdAstraConfig {
     public static int oxygenBarYOffset = 0;
 
     @ConfigEntry(
+            id = "oxygenBarScale",
+            type = EntryType.FLOAT,
+            translation = "text.resourcefulconfig.ad_astra.option.general.oxygenBarScale"
+    )
+    public static float oxygenBarScale = 1;
+
+    @ConfigEntry(
             id = "energyBarXOffset",
             type = EntryType.INTEGER,
             translation = "text.resourcefulconfig.ad_astra.option.general.energyBarXOffset"
@@ -96,6 +103,13 @@ public final class AdAstraConfig {
             translation = "text.resourcefulconfig.ad_astra.option.general.energyBarYOffset"
     )
     public static int energyBarYOffset = 0;
+
+    @ConfigEntry(
+            id = "energyBarScale",
+            type = EntryType.FLOAT,
+            translation = "text.resourcefulconfig.ad_astra.option.general.energyBarScale"
+    )
+    public static float energyBarScale = 1;
 
     @ConfigEntry(
             id = "orbitGravity",

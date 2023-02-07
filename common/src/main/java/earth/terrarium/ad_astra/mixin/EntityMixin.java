@@ -16,7 +16,7 @@ public abstract class EntityMixin {
 
         // Teleport the entity to the planet when they fall in the void while in an orbit dimension
         if (entity.getY() < entity.level.getMinBuildHeight() && ModUtils.isOrbitlevel(entity.level)) {
-            ModUtils.teleportTolevel(ModUtils.getPlanetOrbit(entity.level), entity);
+            ModUtils.teleportToLevel(ModUtils.getPlanetOrbit(entity.level), entity);
         }
     }
 }

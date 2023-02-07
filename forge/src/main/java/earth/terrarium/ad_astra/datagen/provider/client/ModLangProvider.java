@@ -379,5 +379,8 @@ public class ModLangProvider extends LanguageProvider {
         add("fluid.ad_astra.oxygen", "Oxygen");
 
         add("item.ad_astra.empty_tank", "Empty");
+
+        add("text.resourcefulconfig.ad_astra.option.general.oxygenBarScale", "Oxygen Bar Scale");
+        add("text.resourcefulconfig.ad_astra.option.general.energyBarScale", "Energy Bar Scale");
     }
 }

@@ -64,7 +64,7 @@ public class ModUtils {
      * @param entity      The entity to teleport
      * @see #teleportPlayer(ResourceKey, ServerPlayer)
      */
-    public static void teleportTolevel(ResourceKey<Level> targetWorld, Entity entity) {
+    public static void teleportToLevel(ResourceKey<Level> targetWorld, Entity entity) {
         if (entity.getLevel() instanceof ServerLevel oldWorld) {
             ServerLevel level = oldWorld.getServer().getLevel(targetWorld);
             if (level == null) return;
@@ -121,7 +121,9 @@ public class ModUtils {
                     Vec3 nearestLand = LandFinder.findNearestLand(teleportedEntity.getLevel(), new Vec3(teleportedEntity.getX(), VehiclesConfig.RocketConfig.atmosphereLeave, teleportedEntity.getZ()), 70);
                     teleportedEntity.moveTo(nearestLand.x(), nearestLand.y(), nearestLand.z(), teleportedEntity.getYRot(), teleportedEntity.getXRot());
                 }
-                teleportedEntity.startRiding(first, true);
+                if (teleportedEntity != null) {
+                    teleportedEntity.startRiding(first, true);
+                }
             }
         }
     }
