@@ -64,6 +64,7 @@ public class PlayerOverlayScreen {
         int screenHeight = minecraft.getWindow().getGuiScaledHeight();
         LocalPlayer player = minecraft.player;
 
+        if (player == null) return;
         if (player.isSpectator()) {
             return;
         }
@@ -71,6 +72,8 @@ public class PlayerOverlayScreen {
         // Oxygen
         if (shouldRenderOxygen && !minecraft.options.renderDebug) {
 
+            poseStack.pushPose();
+            poseStack.scale(AdAstraConfig.oxygenBarScale, AdAstraConfig.oxygenBarScale, AdAstraConfig.oxygenBarScale);
             int x = 5 + AdAstraConfig.oxygenBarXOffset;
             int y = 25 + AdAstraConfig.oxygenBarYOffset;
 
@@ -89,11 +92,14 @@ public class PlayerOverlayScreen {
             } else {
                 minecraft.font.drawShadow(poseStack, text, (x + (textureWidth - textWidth) / 2.0f), y + textureHeight + 3, oxygen <= 0.0f ? 0xDC143C : 0xFFFFFF);
             }
+            poseStack.popPose();
         }
 
         // Battery
         if (shouldRenderBattery && !minecraft.options.renderDebug) {
 
+            poseStack.pushPose();
+            poseStack.scale(AdAstraConfig.energyBarScale, AdAstraConfig.energyBarScale, AdAstraConfig.energyBarScale);
             int x = screenWidth - 75 - AdAstraConfig.energyBarXOffset;
             int y = 25 + AdAstraConfig.energyBarYOffset;
 
@@ -106,6 +112,7 @@ public class PlayerOverlayScreen {
             Component text = Component.nullToEmpty((energy) + "%");
             int textWidth = minecraft.font.width(text);
             minecraft.font.drawShadow(poseStack, text, (x + (textureWidth - textWidth) / 2.0f), y + textureHeight + 3, 0x6082B6);
+            poseStack.popPose();
         }
 
         // Timer

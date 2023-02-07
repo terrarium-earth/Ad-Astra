@@ -48,17 +48,11 @@ import java.util.stream.StreamSupport;
 
 public class ModUtils {
 
-    public static final ResourceKey<Level> EARTH_ORBIT_KEY = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(AdAstra.MOD_ID, "earth_orbit"));
     public static final ResourceKey<Level> MOON_KEY = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(AdAstra.MOD_ID, "moon"));
-    public static final ResourceKey<Level> MOON_ORBIT_KEY = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(AdAstra.MOD_ID, "moon_orbit"));
     public static final ResourceKey<Level> MARS_KEY = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(AdAstra.MOD_ID, "mars"));
-    public static final ResourceKey<Level> MARS_ORBIT_KEY = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(AdAstra.MOD_ID, "mars_orbit"));
     public static final ResourceKey<Level> VENUS_KEY = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(AdAstra.MOD_ID, "venus"));
-    public static final ResourceKey<Level> VENUS_ORBIT_KEY = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(AdAstra.MOD_ID, "venus_orbit"));
     public static final ResourceKey<Level> MERCURY_KEY = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(AdAstra.MOD_ID, "mercury"));
-    public static final ResourceKey<Level> MERCURY_ORBIT_KEY = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(AdAstra.MOD_ID, "mercury_orbit"));
     public static final ResourceKey<Level> GLACIO_KEY = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(AdAstra.MOD_ID, "glacio"));
-    public static final ResourceKey<Level> GLACIO_ORBIT_KEY = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(AdAstra.MOD_ID, "glacio_orbit"));
 
     public static final float VANILLA_GRAVITY = 9.806f;
     public static final float ORBIT_TEMPERATURE = -270.0f;
@@ -70,7 +64,7 @@ public class ModUtils {
      * @param entity      The entity to teleport
      * @see #teleportPlayer(ResourceKey, ServerPlayer)
      */
-    public static void teleportTolevel(ResourceKey<Level> targetWorld, Entity entity) {
+    public static void teleportToLevel(ResourceKey<Level> targetWorld, Entity entity) {
         if (entity.getLevel() instanceof ServerLevel oldWorld) {
             ServerLevel level = oldWorld.getServer().getLevel(targetWorld);
             if (level == null) return;
@@ -127,7 +121,9 @@ public class ModUtils {
                     Vec3 nearestLand = LandFinder.findNearestLand(teleportedEntity.getLevel(), new Vec3(teleportedEntity.getX(), VehiclesConfig.RocketConfig.atmosphereLeave, teleportedEntity.getZ()), 70);
                     teleportedEntity.moveTo(nearestLand.x(), nearestLand.y(), nearestLand.z(), teleportedEntity.getYRot(), teleportedEntity.getXRot());
                 }
-                teleportedEntity.startRiding(first, true);
+                if (teleportedEntity != null) {
+                    teleportedEntity.startRiding(first, true);
+                }
             }
         }
     }

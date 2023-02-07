@@ -234,19 +234,19 @@ public abstract class Vehicle extends Entity implements Updatable {
     }
 
     public void drop() {
-        if (getDropStack() != null && this.level.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS)) {
+        if (this.level.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS)) {
             BlockPos pos = this.blockPosition();
             ItemStackHolder dropStack = new ItemStackHolder(this.getDropStack());
+            if (!dropStack.getStack().isEmpty()) {
+                // Set the fluid and fluid type in the dropped item.
+                ((VehicleItem) dropStack.getStack().getItem()).insert(dropStack, this.getTankHolder());
+                CompoundTag nbt = dropStack.getStack().getOrCreateTag();
+                // Set the inventory in the dropped item.
+                nbt.put("Inventory", this.inventory.createTag());
 
-            // Set the fluid and fluid type in the dropped item.
-
-            ((VehicleItem) dropStack.getStack().getItem()).insert(dropStack, this.getTankHolder());
-            CompoundTag nbt = dropStack.getStack().getOrCreateTag();
-            // Set the inventory in the dropped item.
-            nbt.put("Inventory", this.inventory.createTag());
-
-            level.playSound(null, pos, SoundEvents.NETHERITE_BLOCK_BREAK, SoundSource.BLOCKS, 1, 1);
-            this.level.addFreshEntity(new ItemEntity(this.level, pos.getX(), pos.getY() + 0.5f, pos.getZ(), dropStack.getStack()));
+                level.playSound(null, pos, SoundEvents.NETHERITE_BLOCK_BREAK, SoundSource.BLOCKS, 1, 1);
+                this.level.addFreshEntity(new ItemEntity(this.level, pos.getX(), pos.getY() + 0.5f, pos.getZ(), dropStack.getStack()));
+            }
         }
 
         if (!this.level.isClientSide) {

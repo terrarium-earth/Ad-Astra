@@ -28,7 +28,7 @@ public abstract class CommonGravityEntityMixin {
         }
 
         if (entity instanceof AbstractMinecart && entity.getY() < entity.level.getMinBuildHeight() && ModUtils.isOrbitlevel(entity.level)) {
-            ModUtils.teleportTolevel(ModUtils.getPlanetOrbit(entity.level), entity);
+            ModUtils.teleportToLevel(ModUtils.getPlanetOrbit(entity.level), entity);
         }
     }
 }

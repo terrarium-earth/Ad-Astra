@@ -58,7 +58,7 @@ public record TeleportToPlanetPacket(ResourceLocation id) implements Packet<Tele
 
                 if (!disabledPlanets.contains(packet.id().toString())) {
                     if (player.getVehicle() instanceof Rocket) {
-                        ModUtils.teleportTolevel(getlevel(packet.id()), player);
+                        ModUtils.teleportToLevel(getlevel(packet.id()), player);
                     } else if (player.canUseGameMasterBlocks()) {
                         ModUtils.teleportPlayer(getlevel(packet.id()), (ServerPlayer) player);
                     }
