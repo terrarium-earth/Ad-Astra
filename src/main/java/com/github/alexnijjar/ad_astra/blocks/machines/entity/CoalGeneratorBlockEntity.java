@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.item.BucketItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.util.math.BlockPos;
@@ -75,7 +76,7 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity {
 						this.setActive(true);
 						ticksToTurnOff = 7;
 						// Check if the input is a valid fuel
-					} else if (!input.isEmpty()) {
+					} else if (!input.isEmpty() && !(input.getItem() instanceof BucketItem)) {
 						Integer burnTime = FuelRegistry.INSTANCE.get(input.getItem());
 						if (burnTime != null) {
 							input.decrement(1);

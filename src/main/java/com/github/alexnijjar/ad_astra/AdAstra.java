@@ -78,7 +78,5 @@ public class AdAstra implements ModInitializer {
 		ModC2SPackets.register();
 
 		ModCriteria.register();
-
-		AdAstra.LOGGER.info("Ad Astra Initialized! 🚀");
 	}
 }

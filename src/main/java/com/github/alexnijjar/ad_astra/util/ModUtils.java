@@ -130,12 +130,6 @@ public class ModUtils {
 		}
 	}
 
-	/**
-	 * A simplified version of {@link #teleportToWorld(RegistryKey, World)} for teleporting players.
-	 *
-	 * @param targetWorld The world to teleport the player at
-	 * @param player      The player to teleport
-	 */
 	public static void teleportPlayer(RegistryKey<World> targetWorld, ServerPlayerEntity player) {
 		ServerWorld world = player.getServer().getWorld(targetWorld);
 		Vec3d targetPos = new Vec3d(player.getBlockPos().getX(), AdAstra.CONFIG.rocket.atmosphereLeave, player.getBlockPos().getZ());
@@ -144,15 +138,7 @@ public class ModUtils {
 		TeleportTarget target = new TeleportTarget(targetPos, player.getVelocity(), player.getYaw(), player.getPitch());
 		player = FabricDimensions.teleport(player, world, target);
 	}
-
-	/**
-	 * Spawns a lander in a target world and position.
-	 *
-	 * @param rocket         The rocket to create a lander from
-	 * @param targetWorld    The world to spawn the lander in
-	 * @param targetPosition The position to spawn the lander at
-	 * @return A spawned lander entity at the same position as the rocket and with the same inventory
-	 */
+	
 	public static LanderEntity createLander(RocketEntity rocket, ServerWorld targetWorld, Vec3d target) {
 		LanderEntity lander = new LanderEntity(ModEntityTypes.LANDER, targetWorld);
 		lander.setPosition(target);
@@ -230,7 +216,7 @@ public class ModUtils {
 	 *
 	 * @return The temperature of the world, or 20° for dimensions without a defined temperature
 	 */
-	public static final float getWorldTemperature(World world) {
+	public static float getWorldTemperature(World world) {
 		if (isOrbitWorld(world)) {
 			return ORBIT_TEMPERATURE;
 		}
