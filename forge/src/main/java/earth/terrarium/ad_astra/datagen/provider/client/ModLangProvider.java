@@ -382,5 +382,8 @@ public class ModLangProvider extends LanguageProvider {
 
         add("text.resourcefulconfig.ad_astra.option.general.oxygenBarScale", "Oxygen Bar Scale");
         add("text.resourcefulconfig.ad_astra.option.general.energyBarScale", "Energy Bar Scale");
+
+        add("item.ad_astra.cable_duct.tooltip", "Transfers Energy while being air-tight");
+        add("item.ad_astra.fluid_pipe_duct.tooltip", "Transfers Fluid while being air-tight");
     }
 }

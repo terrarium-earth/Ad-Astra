@@ -61,10 +61,13 @@ public class ModItems {
 
     public static final RegistryEntry<Item> WRENCH = ITEMS.register("wrench", () -> new Item(new Item.Properties().tab(ITEM_GROUP).stacksTo(1)));
     public static final RegistryEntry<Item> HAMMER = ITEMS.register("hammer", () -> new HammerItem(new Item.Properties().tab(ITEM_GROUP).stacksTo(1).durability(AdAstraConfig.hammerDurability)));
-    public static final RegistryEntry<Item> STEEL_CABLE = ITEMS.register("steel_cable", () -> new BlockItem(ModBlocks.STEEL_CABLE.get(), new Item.Properties().tab(ITEM_GROUP)));
-    public static final RegistryEntry<Item> DESH_CABLE = ITEMS.register("desh_cable", () -> new BlockItem(ModBlocks.DESH_CABLE.get(), new Item.Properties().tab(ITEM_GROUP)));
-    public static final RegistryEntry<Item> DESH_FLUID_PIPE = ITEMS.register("desh_fluid_pipe", () -> new BlockItem(ModBlocks.DESH_FLUID_PIPE.get(), new Item.Properties().tab(ITEM_GROUP)));
-    public static final RegistryEntry<Item> OSTRUM_FLUID_PIPE = ITEMS.register("ostrum_fluid_pipe", () -> new BlockItem(ModBlocks.OSTRUM_FLUID_PIPE.get(), new Item.Properties().tab(ITEM_GROUP)));
+    public static final RegistryEntry<Item> STEEL_CABLE = ITEMS.register("steel_cable", () -> new BlockItem(ModBlocks.STEEL_CABLE.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> DESH_CABLE = ITEMS.register("desh_cable", () -> new BlockItem(ModBlocks.DESH_CABLE.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> DESH_FLUID_PIPE = ITEMS.register("desh_fluid_pipe", () -> new BlockItem(ModBlocks.DESH_FLUID_PIPE.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> OSTRUM_FLUID_PIPE = ITEMS.register("ostrum_fluid_pipe", () -> new BlockItem(ModBlocks.OSTRUM_FLUID_PIPE.get(), new Item.Properties()));
+
+    public static final RegistryEntry<Item> CABLE_DUCT = ITEMS.register("cable_duct", () -> new BlockItem(ModBlocks.CABLE_DUCT.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> FLUID_PIPE_DUCT = ITEMS.register("fluid_pipe_duct", () -> new BlockItem(ModBlocks.FLUID_PIPE_DUCT.get(), new Item.Properties()));
 
     public static final RegistryEntry<Item> COAL_GENERATOR = ITEMS.register("coal_generator", () -> new MachineBlockItem(ModBlocks.COAL_GENERATOR.get(), new Item.Properties().tab(ITEM_GROUP), "item.ad_astra.coal_generator.tooltip"));
     public static final RegistryEntry<Item> COMPRESSOR = ITEMS.register("compressor", () -> new MachineBlockItem(ModBlocks.COMPRESSOR.get(), new Item.Properties().tab(ITEM_GROUP), "item.ad_astra.compressor.tooltip"));

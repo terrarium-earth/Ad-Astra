@@ -1,6 +1,8 @@
 package earth.terrarium.ad_astra.common.util;
 
 import com.mojang.serialization.Codec;
+import com.teamresourceful.resourcefullib.common.codecs.yabn.YabnOps;
+import com.teamresourceful.resourcefullib.common.yabn.base.YabnElement;
 import dev.architectury.injectables.targets.ArchitecturyTarget;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.config.AdAstraConfig;
@@ -19,6 +21,7 @@ import earth.terrarium.botarium.api.item.ItemStackHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -249,7 +252,7 @@ public class ModUtils {
         if (AdAstraConfig.avoidOverworldChecks && Level.OVERWORLD.equals(level.dimension())) {
             return false;
         }
-        return PlanetData.isPlanetLevel(level.dimension());
+        return PlanetData.isPlanetLevel(level);
     }
 
     /**

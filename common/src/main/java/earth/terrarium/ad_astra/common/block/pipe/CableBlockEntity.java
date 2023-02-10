@@ -32,25 +32,31 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<Pl
 
     @Override
     public void insertInto(PlatformEnergyManager consumer, Direction direction, BlockPos pos) {
-        BlockState state = this.getBlockState();
+        if (level == null) return;
+        BlockState state = getBlockState();
         BlockState state2 = level.getBlockState(pos);
+        if (state.isAir() || state2.isAir()) return;
 
-        if (!(state.getBlock() instanceof CableBlock) || !(state2.getBlock() instanceof CableBlock)) {
-            return;
+
+        PlatformEnergyManager input = getSource().storage();
+        PlatformEnergyManager output = consumer;
+
+        if (!(state.getBlock() instanceof PipeDuctBlock) && !(state2.getBlock() instanceof PipeDuctBlock)) {
+            PipeState pipeState = state.getValue(PipeBlock.DIRECTIONS.get(getSource().direction()));
+            PipeState pipeState2 = state2.getValue(PipeBlock.DIRECTIONS.get(direction));
+
+            if (getSource().storage() == null || getConsumers().isEmpty()) return;
+            if (pipeState == PipeState.INSERT && pipeState2 == PipeState.INSERT) return;
+            if (pipeState == PipeState.EXTRACT && pipeState2 == PipeState.EXTRACT) return;
+            if (pipeState == PipeState.NONE || pipeState2 == PipeState.NONE) return;
+
+            if (pipeState2 == PipeState.EXTRACT || pipeState == PipeState.INSERT) {
+                input = consumer;
+                output = getSource().storage();
+            }
         }
 
-        if (!state.getValue(CableBlock.DIRECTIONS.get(this.getSource().direction()))) {
-            return;
-        }
-
-        if (!state2.getValue(CableBlock.DIRECTIONS.get(direction))) {
-            return;
-        }
-
-        if (getSource().storage() != null && getConsumers().size() > 0) {
-            EnergyHooks.moveEnergy(getSource().storage(), consumer, Math.max(0, this.getTransferAmount() / getConsumers().size()));
-        }
-
+        EnergyHooks.moveEnergy(input, output, Math.max(0, getTransferAmount() / getConsumers().size()));
     }
 
     @Override
@@ -74,12 +80,12 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<Pl
 
     @Override
     public void clearSource() {
-        this.source = null;
+        source = null;
     }
 
     @Override
     public List<Node<PlatformEnergyManager>> getConsumers() {
-        return this.consumers;
+        return consumers;
     }
 
     @Override
@@ -89,19 +95,19 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<Pl
 
     @Override
     public Level getPipelevel() {
-        return this.level;
+        return level;
     }
 
     @Override
     public long getTransferAmount() {
-        if (this.getBlockState().getBlock() instanceof CableBlock cableBlock) {
-            return cableBlock.getTransferRate();
+        if (getBlockState().getBlock() instanceof Pipe pipe) {
+            return pipe.getTransferRate();
         }
         return 0;
     }
 
     @Override
     public BlockPos getPipePos() {
-        return this.getBlockPos();
+        return getBlockPos();
     }
 }

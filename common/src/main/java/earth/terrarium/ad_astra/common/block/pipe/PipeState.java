@@ -15,11 +15,11 @@ public enum PipeState implements StringRepresentable {
     }
 
     public String toString() {
-        return this.name;
+        return name;
     }
 
     @Override
     public String getSerializedName() {
-        return this.name;
+        return name;
     }
 }
