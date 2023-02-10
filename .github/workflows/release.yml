@@ -21,7 +21,7 @@ jobs:
       - run: chmod +x ./gradlew
 
       - name: Release
-        run: ./gradlew :fabric:modrinth :forge:modrinth :fabric:curseforge :forge:curseforge
+        run: ./gradlew :modrinth :curseforge
         env:
           CURSE_TOKEN: ${{ secrets.CURSE_TOKEN }}
           CURSE_PROJECT: ${{ secrets.CURSE_PROJECT }}
