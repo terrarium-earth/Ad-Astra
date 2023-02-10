@@ -4,8 +4,15 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.mojang.serialization.DataResult;
 import com.mojang.serialization.JsonOps;
+import com.teamresourceful.resourcefullib.common.codecs.yabn.YabnOps;
+import com.teamresourceful.resourcefullib.common.networking.PacketHelper;
 import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.client.AdAstraClient;
+import earth.terrarium.ad_astra.common.networking.NetworkHandling;
+import earth.terrarium.ad_astra.common.networking.packet.client.RequestPlanetDataPacket;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -23,8 +30,7 @@ public class PlanetData extends SimpleJsonResourceReloadListener {
     private static final Map<ResourceKey<Level>, Planet> ORBIT_TO_PLANET = new HashMap<>();
     private static final Set<ResourceKey<Level>> PLANET_LEVELS = new HashSet<>();
     private static final Set<ResourceKey<Level>> ORBITS_LEVELS = new HashSet<>();
-    private static final Set<ResourceKey<Level>> WORLD_LEVELS = new HashSet<>();
-    private static final Set<ResourceKey<Level>> OXIGNATED_LEVELS = new HashSet<>();
+    private static final Set<ResourceKey<Level>> OXYGEN_LEVELS = new HashSet<>();
 
 
     public static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
@@ -57,10 +63,8 @@ public class PlanetData extends SimpleJsonResourceReloadListener {
             ORBIT_TO_PLANET.put(planet.orbitWorld(), planet);
             PLANET_LEVELS.add(planet.level());
             ORBITS_LEVELS.add(planet.orbitWorld());
-            WORLD_LEVELS.addAll(PLANET_LEVELS);
-            WORLD_LEVELS.addAll(ORBITS_LEVELS);
             if (planet.hasOxygen()) {
-                OXIGNATED_LEVELS.add(planet.level());
+                OXYGEN_LEVELS.add(planet.level());
             }
         }
     }
@@ -71,8 +75,22 @@ public class PlanetData extends SimpleJsonResourceReloadListener {
         ORBIT_TO_PLANET.clear();
         PLANET_LEVELS.clear();
         ORBITS_LEVELS.clear();
-        WORLD_LEVELS.clear();
-        OXIGNATED_LEVELS.clear();
+        OXYGEN_LEVELS.clear();
+    }
+
+    public static void writePlanetData(FriendlyByteBuf buf) {
+        PacketHelper.writeWithYabn(buf, Planet.CODEC.listOf(), PlanetData.planets().stream().toList(), true)
+                .get()
+                .mapRight(DataResult.PartialResult::message)
+                .ifRight(AdAstra.LOGGER::error);
+    }
+
+    public static void readPlanetData(FriendlyByteBuf buf) {
+        PacketHelper.readWithYabn(buf, Planet.CODEC.listOf(), true)
+                .get()
+                .ifLeft(PlanetData::updatePlanets)
+                .mapRight(DataResult.PartialResult::message)
+                .ifRight(AdAstra.LOGGER::error);
     }
 
     public static Set<Planet> planets() {
@@ -91,11 +109,15 @@ public class PlanetData extends SimpleJsonResourceReloadListener {
         return ORBITS_LEVELS.contains(level);
     }
 
-    public static boolean isPlanetLevel(ResourceKey<Level> level) {
-        return PLANET_LEVELS.contains(level);
+    public static boolean isPlanetLevel(Level level) {
+        if (level.isClientSide && !AdAstraClient.hasUpdatedPlanets) {
+            NetworkHandling.CHANNEL.sendToServer(new RequestPlanetDataPacket());
+            AdAstraClient.hasUpdatedPlanets = true;
+        }
+        return PLANET_LEVELS.contains(level.dimension());
     }
 
     public static boolean isOxygenated(ResourceKey<Level> level) {
-        return OXIGNATED_LEVELS.contains(level);
+        return OXYGEN_LEVELS.contains(level);
     }
 }

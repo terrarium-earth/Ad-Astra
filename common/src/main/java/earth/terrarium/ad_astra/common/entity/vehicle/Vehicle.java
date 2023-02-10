@@ -237,8 +237,8 @@ public abstract class Vehicle extends Entity {
     public void drop() {
         if (this.level.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS)) {
             BlockPos pos = this.blockPosition();
-            ItemStackHolder dropStack = new ItemStackHolder(this.getDropStack());
-            if (!dropStack.getStack().isEmpty()) {
+            if (!this.getDropStack().isEmpty()) {
+                ItemStackHolder dropStack = new ItemStackHolder(this.getDropStack());
                 // Set the fluid and fluid type in the dropped item.
                 ((VehicleItem) dropStack.getStack().getItem()).insert(dropStack, this.getTankHolder());
                 CompoundTag nbt = dropStack.getStack().getOrCreateTag();

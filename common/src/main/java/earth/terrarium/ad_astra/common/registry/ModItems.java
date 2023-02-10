@@ -69,6 +69,9 @@ public class ModItems {
     public static final RegistryEntry<Item> DESH_FLUID_PIPE = ITEMS.register("desh_fluid_pipe", () -> new BlockItem(ModBlocks.DESH_FLUID_PIPE.get(), new Item.Properties()));
     public static final RegistryEntry<Item> OSTRUM_FLUID_PIPE = ITEMS.register("ostrum_fluid_pipe", () -> new BlockItem(ModBlocks.OSTRUM_FLUID_PIPE.get(), new Item.Properties()));
 
+    public static final RegistryEntry<Item> CABLE_DUCT = ITEMS.register("cable_duct", () -> new BlockItem(ModBlocks.CABLE_DUCT.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> FLUID_PIPE_DUCT = ITEMS.register("fluid_pipe_duct", () -> new BlockItem(ModBlocks.FLUID_PIPE_DUCT.get(), new Item.Properties()));
+
     public static final RegistryEntry<Item> COAL_GENERATOR = ITEMS.register("coal_generator", () -> new MachineBlockItem(ModBlocks.COAL_GENERATOR.get(), new Item.Properties(), "item.ad_astra.coal_generator.tooltip"));
     public static final RegistryEntry<Item> COMPRESSOR = ITEMS.register("compressor", () -> new MachineBlockItem(ModBlocks.COMPRESSOR.get(), new Item.Properties(), "item.ad_astra.compressor.tooltip"));
     public static final RegistryEntry<Item> NASA_WORKBENCH = ITEMS.register("nasa_workbench", () -> new MachineBlockItem(ModBlocks.NASA_WORKBENCH.get(), new Item.Properties(), "item.ad_astra.nasa_workbench.tooltip"));

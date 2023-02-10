@@ -3,7 +3,10 @@ package earth.terrarium.ad_astra.common.block.pipe;
 import net.minecraft.util.StringRepresentable;
 
 public enum PipeState implements StringRepresentable {
-    NONE("none"), NORMAL("normal"), INSERT("insert"), EXTRACT("extract");
+    NONE("none"),
+    NORMAL("normal"),
+    INSERT("insert"),
+    EXTRACT("extract");
 
     private final String name;
 
@@ -12,11 +15,11 @@ public enum PipeState implements StringRepresentable {
     }
 
     public String toString() {
-        return this.name;
+        return name;
     }
 
     @Override
     public String getSerializedName() {
-        return this.name;
+        return name;
     }
 }

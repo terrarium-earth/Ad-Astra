@@ -44,16 +44,16 @@ public interface InteractablePipe<T> {
         if (!getPipelevel().isClientSide()) {
             if (getPipelevel().getGameTime() % getWorkTime() == 0) {
                 clearSource();
-                this.getConsumers().clear();
+                getConsumers().clear();
                 Set<BlockPos> visitedNodes = new HashSet<>();
                 Set<BlockPos> availableNodes = new HashSet<>();
                 if (supportsAutoExtract()) {
-                    availableNodes.add(this.getPipePos());
+                    availableNodes.add(getPipePos());
                     for (Direction direction : Direction.values()) {
-                        BlockPos offset = this.getPipePos().relative(direction);
+                        BlockPos offset = getPipePos().relative(direction);
                         T potentialSource = getInteraction(getPipelevel(), offset, direction);
                         if (potentialSource != null) {
-                            this.setSource(new Node<>(potentialSource, direction, offset));
+                            setSource(new Node<>(potentialSource, direction, offset));
                             break;
                         }
                     }
@@ -77,7 +77,7 @@ public interface InteractablePipe<T> {
                                 } else {
                                     T potentialConsumer = getInteraction(getPipelevel(), offset, direction);
                                     if (potentialConsumer != null) {
-                                        this.getConsumers().add(new Node<>(potentialConsumer, direction, node));
+                                        getConsumers().add(new Node<>(potentialConsumer, direction, node));
                                     }
                                 }
                             }
@@ -96,6 +96,5 @@ public interface InteractablePipe<T> {
     }
 
     record Node<T>(T storage, Direction direction, BlockPos pos) {
-
     }
 }

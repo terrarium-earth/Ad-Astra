@@ -12,8 +12,8 @@ import earth.terrarium.ad_astra.common.block.fluid.CryoFuelLiquidBlock;
 import earth.terrarium.ad_astra.common.block.globe.GlobeBlock;
 import earth.terrarium.ad_astra.common.block.launchpad.LaunchPad;
 import earth.terrarium.ad_astra.common.block.machine.*;
-import earth.terrarium.ad_astra.common.block.pipe.CableBlock;
-import earth.terrarium.ad_astra.common.block.pipe.FluidPipeBlock;
+import earth.terrarium.ad_astra.common.block.pipe.PipeBlock;
+import earth.terrarium.ad_astra.common.block.pipe.PipeDuctBlock;
 import earth.terrarium.ad_astra.common.block.sign.CustomStandingSignBlock;
 import earth.terrarium.ad_astra.common.block.sign.CustomWallSignBlock;
 import earth.terrarium.ad_astra.common.block.torch.ExtinguishedLanternBlock;
@@ -29,6 +29,7 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.WoodType;
+import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 
 public class ModBlocks {
@@ -46,10 +47,13 @@ public class ModBlocks {
 
     public static final RegistryEntry<Block> LAUNCH_PAD = BLOCKS.register("launch_pad", () -> new LaunchPad(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER)));
 
-    public static final RegistryEntry<Block> STEEL_CABLE = BLOCKS.register("steel_cable", () -> new CableBlock(256, 2, 0.344, BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).strength(0.5f, 0.5f)));
-    public static final RegistryEntry<Block> DESH_CABLE = BLOCKS.register("desh_cable", () -> new CableBlock(1024, 1, 0.312, BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).strength(0.5f, 0.5f)));
-    public static final RegistryEntry<Block> DESH_FLUID_PIPE = BLOCKS.register("desh_fluid_pipe", () -> new FluidPipeBlock(FluidHooks.buckets(1f) / 10, 1, 0.185, BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).strength(0.5f, 0.5f)));
-    public static final RegistryEntry<Block> OSTRUM_FLUID_PIPE = BLOCKS.register("ostrum_fluid_pipe", () -> new FluidPipeBlock(FluidHooks.buckets(1f) / 5, 1, 0.185, BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).strength(0.5f, 0.5f)));
+    public static final RegistryEntry<Block> STEEL_CABLE = BLOCKS.register("steel_cable", () -> new PipeBlock(1012, 0.344, PipeBlock.PipeType.CABLE, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 0.5f)));
+    public static final RegistryEntry<Block> DESH_CABLE = BLOCKS.register("desh_cable", () -> new PipeBlock(4096, 0.344, PipeBlock.PipeType.CABLE, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 0.5f)));
+    public static final RegistryEntry<Block> DESH_FLUID_PIPE = BLOCKS.register("desh_fluid_pipe", () -> new PipeBlock(FluidHooks.buckets(0.128f), 0.185, PipeBlock.PipeType.FLUID_PIPE, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 0.5f)));
+    public static final RegistryEntry<Block> OSTRUM_FLUID_PIPE = BLOCKS.register("ostrum_fluid_pipe", () -> new PipeBlock(FluidHooks.buckets(0.256f), 0.185, PipeBlock.PipeType.FLUID_PIPE, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 0.5f)));
+
+    public static final RegistryEntry<Block> CABLE_DUCT = BLOCKS.register("cable_duct", () -> new PipeDuctBlock(1012, PipeBlock.PipeType.CABLE, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 0.5f)));
+    public static final RegistryEntry<Block> FLUID_PIPE_DUCT = BLOCKS.register("fluid_pipe_duct", () -> new PipeDuctBlock(FluidHooks.buckets(0.256f), PipeBlock.PipeType.FLUID_PIPE, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 0.5f)));
 
     public static final RegistryEntry<Block> FUEL_REFINERY = BLOCKS.register("fuel_refinery", () -> new FuelRefineryBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
     public static final RegistryEntry<Block> COMPRESSOR = BLOCKS.register("compressor", () -> new CompressorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));

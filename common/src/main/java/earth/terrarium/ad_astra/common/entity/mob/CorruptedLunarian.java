@@ -34,7 +34,7 @@ public class CorruptedLunarian extends Monster implements RangedAttackMob {
     }
 
     public static AttributeSupplier.Builder createMobAttributes() {
-        return Monster.createMonsterAttributes().add(Attributes.MOVEMENT_SPEED, 0.3).add(Attributes.MAX_HEALTH, 20).add(Attributes.ATTACK_DAMAGE, 3);
+        return Monster.createMonsterAttributes().add(Attributes.MOVEMENT_SPEED, 0.3).add(Attributes.MAX_HEALTH, 20).add(Attributes.ATTACK_DAMAGE, 2);
     }
 
     @Override

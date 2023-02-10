@@ -33,42 +33,34 @@ public class FluidPipeBlockEntity extends BlockEntity implements InteractablePip
 
     @Override
     public void insertInto(PlatformFluidHandler consumer, Direction direction, BlockPos pos) {
-
-        BlockState state = this.getBlockState();
+        if (level == null) return;
+        BlockState state = getBlockState();
         BlockState state2 = level.getBlockState(pos);
+        if (state.isAir() || state2.isAir()) return;
 
-        if (!(state.getBlock() instanceof FluidPipeBlock) || !(state2.getBlock() instanceof FluidPipeBlock)) {
-            return;
+        PlatformFluidHandler input = getSource().storage();
+        PlatformFluidHandler output = consumer;
+
+        if (!(state.getBlock() instanceof PipeDuctBlock) && !(state2.getBlock() instanceof PipeDuctBlock)) {
+            PipeState pipeState = state.getValue(PipeBlock.DIRECTIONS.get(getSource().direction()));
+            PipeState pipeState2 = state2.getValue(PipeBlock.DIRECTIONS.get(direction));
+
+            if (getSource().storage() == null || getConsumers().isEmpty()) return;
+            if (pipeState == PipeState.INSERT && pipeState2 == PipeState.INSERT) return;
+            if (pipeState == PipeState.EXTRACT && pipeState2 == PipeState.EXTRACT) return;
+            if (pipeState == PipeState.NONE || pipeState2 == PipeState.NONE) return;
+
+
+            if (pipeState2 == PipeState.EXTRACT || pipeState == PipeState.INSERT) {
+                input = consumer;
+                output = getSource().storage();
+            }
         }
 
-        PipeState pipeState = state.getValue(FluidPipeBlock.DIRECTIONS.get(this.getSource().direction()));
-        PipeState pipeState2 = state2.getValue(FluidPipeBlock.DIRECTIONS.get(direction));
-
-        PlatformFluidHandler input;
-        PlatformFluidHandler output;
-
-        if (pipeState == PipeState.INSERT && pipeState2 == PipeState.INSERT) {
-            return;
-        } else if (pipeState == PipeState.EXTRACT && pipeState2 == PipeState.EXTRACT) {
-            return;
-        } else if (pipeState == PipeState.NONE || pipeState2 == PipeState.NONE) {
-            return;
-        } else if (pipeState2 == PipeState.INSERT || pipeState == PipeState.EXTRACT) {
-            input = source.storage();
-            output = consumer;
-        } else if (pipeState2 == PipeState.EXTRACT || pipeState == PipeState.INSERT) {
-            input = consumer;
-            output = source.storage();
-        } else {
-            return;
-        }
-
-        if (getSource() != null && getConsumers().size() > 0) {
-            for (FluidHolder fluid : input.getFluidTanks()) {
-                if (!fluid.isEmpty()) {
-                    FluidHolder transfer = FluidHooks.newFluidHolder(fluid.getFluid(), ((FluidPipeBlock) this.getBlockState().getBlock()).getTransferRate(), fluid.getCompound());
-                    FluidHooks.moveFluid(input, output, transfer);
-                }
+        for (FluidHolder fluid : input.getFluidTanks()) {
+            if (!fluid.isEmpty()) {
+                FluidHolder transfer = FluidHooks.newFluidHolder(fluid.getFluid(), ((PipeBlock) getBlockState().getBlock()).getTransferRate(), fluid.getCompound());
+                FluidHooks.moveFluid(input, output, transfer);
             }
         }
     }
@@ -94,12 +86,12 @@ public class FluidPipeBlockEntity extends BlockEntity implements InteractablePip
 
     @Override
     public void clearSource() {
-        this.source = null;
+        source = null;
     }
 
     @Override
     public List<Node<PlatformFluidHandler>> getConsumers() {
-        return this.consumers;
+        return consumers;
     }
 
     @Override
@@ -109,19 +101,19 @@ public class FluidPipeBlockEntity extends BlockEntity implements InteractablePip
 
     @Override
     public Level getPipelevel() {
-        return this.level;
+        return level;
     }
 
     @Override
     public long getTransferAmount() {
-        if (this.getBlockState().getBlock() instanceof FluidPipeBlock fluidPipe) {
-            return fluidPipe.getTransferRate();
+        if (getBlockState().getBlock() instanceof Pipe pipe) {
+            return pipe.getTransferRate();
         }
         return 0;
     }
 
     @Override
     public BlockPos getPipePos() {
-        return this.getBlockPos();
+        return getBlockPos();
     }
 }

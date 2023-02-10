@@ -1,4 +1,14 @@
-- fix server crash (Update Resourcefullib to the latest version)
-- fix planet selection menu having invisible buttons
+- Added cable and fluid pipe ducts. They're airtight versions of the cable and pipe, allowing you to use them without breaking the seal of the oxygen distributor
+
+- fixed lander crashing when broken
+- fixed emi breaking
+- fixed create minecart contraption crashing when falling in orbit
+- fixed gravity and other planet data not being sent to the client when teleporting to a planet without opening the planet selection screen. Was causing issues with waystones and Mekanism teleporters
+- Slightly reduced Corrupted Lunarian damage
+- fixed energizer losing its energy when broken and placed
+- pick-blocking machines now retains its nbt
+- change max default block checks for oxygen distributor from 2000 to 3000 and slightly reduced the oxygen cost
+- fixed vine and grass are still being destroyed when doOxygen is set to false in the config
+- increased cable transfer rate
 
 Disclaimer: Ad Astra will be releasing a large 1.19.3 update in the future that will break with this current 1.19.3 version. Use at your own risk!

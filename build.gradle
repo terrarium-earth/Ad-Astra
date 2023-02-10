@@ -106,6 +106,7 @@ subprojects {
                     optional.project "patchouli"
                     optional.project "roughly-enough-items"
                     optional.project "emi"
+                    optional.project "jei"
                 }
             } else {
                 dependencies {
@@ -114,6 +115,7 @@ subprojects {
                     required.project "botarium"
                     optional.project "patchouli"
                     optional.project "roughly-enough-items"
+                    optional.project "jei"
                 }
             }
         }

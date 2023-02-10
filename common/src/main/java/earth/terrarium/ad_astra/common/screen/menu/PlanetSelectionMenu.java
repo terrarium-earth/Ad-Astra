@@ -3,6 +3,7 @@ package earth.terrarium.ad_astra.common.screen.menu;
 import com.mojang.serialization.DataResult;
 import com.teamresourceful.resourcefullib.common.networking.PacketHelper;
 import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.client.AdAstraClient;
 import earth.terrarium.ad_astra.common.data.Planet;
 import earth.terrarium.ad_astra.common.data.PlanetData;
 import earth.terrarium.ad_astra.common.registry.ModMenus;
@@ -19,12 +20,12 @@ public class PlanetSelectionMenu extends AbstractContainerMenu {
 
     public PlanetSelectionMenu(int syncId, Player player, FriendlyByteBuf buf) {
         this(syncId, player, buf.readInt());
-        PacketHelper.readWithYabn(buf, Planet.CODEC.listOf(), true)
-                .get()
-                .ifLeft(PlanetData::updatePlanets)
-                .mapRight(DataResult.PartialResult::message)
-                .ifRight(AdAstra.LOGGER::error);
+        PlanetData.readPlanetData(buf);
+        if (player.level.isClientSide) {
+            AdAstraClient.hasUpdatedPlanets = true;
+        }
     }
+
 
     public PlanetSelectionMenu(int syncId, Player player, int tier) {
         super(ModMenus.PLANET_SELECTION_SCREEN_HANDLER.get(), syncId);

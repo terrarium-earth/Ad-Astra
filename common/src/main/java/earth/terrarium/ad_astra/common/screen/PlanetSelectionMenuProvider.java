@@ -1,9 +1,5 @@
 package earth.terrarium.ad_astra.common.screen;
 
-import com.mojang.serialization.DataResult;
-import com.teamresourceful.resourcefullib.common.networking.PacketHelper;
-import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.ad_astra.common.data.Planet;
 import earth.terrarium.ad_astra.common.data.PlanetData;
 import earth.terrarium.ad_astra.common.screen.menu.PlanetSelectionMenu;
 import earth.terrarium.botarium.common.menu.ExtraDataMenuProvider;
@@ -20,10 +16,7 @@ public record PlanetSelectionMenuProvider(int tier) implements ExtraDataMenuProv
     @Override
     public void writeExtraData(ServerPlayer player, FriendlyByteBuf buf) {
         buf.writeInt(tier);
-        PacketHelper.writeWithYabn(buf, Planet.CODEC.listOf(), PlanetData.planets().stream().toList(), true)
-                .get()
-                .mapRight(DataResult.PartialResult::message)
-                .ifRight(AdAstra.LOGGER::error);
+        PlanetData.writePlanetData(buf);
     }
 
     @Override

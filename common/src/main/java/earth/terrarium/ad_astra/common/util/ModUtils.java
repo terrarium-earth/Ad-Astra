@@ -249,7 +249,7 @@ public class ModUtils {
         if (AdAstraConfig.avoidOverworldChecks && Level.OVERWORLD.equals(level.dimension())) {
             return false;
         }
-        return PlanetData.isPlanetLevel(level.dimension());
+        return PlanetData.isPlanetLevel(level);
     }
 
     /**

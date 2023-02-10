@@ -38,7 +38,7 @@ public final class OxygenDistributorConfig {
     )
     @IntRange(min = 1, max = 50000)
     @Comment("How many blocks the distributor can distribute oxygen in. Be careful increasing this number, as it can reduce server performance significantly. If you are adamant about increasing this value, consider increasing the Oxygen Loader refresh ticks so the server is not constantly checking thousands of blocks.")
-    public static int maxBlockChecks = 2000;
+    public static int maxBlockChecks = 3000;
 
     @ConfigEntry(
         id = "refreshTicks",

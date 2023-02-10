@@ -1,6 +1,7 @@
 package earth.terrarium.ad_astra.common.block.flag;
 
 import com.mojang.authlib.GameProfile;
+import dev.architectury.injectables.annotations.PlatformOnly;
 import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -12,6 +13,7 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -90,5 +92,10 @@ public class FlagBlockEntity extends BlockEntity {
     @Override
     public @NotNull CompoundTag getUpdateTag() {
         return this.saveWithoutMetadata();
+    }
+
+    @PlatformOnly("forge")
+    public AABB getRenderBoundingBox() {
+        return new AABB(this.getBlockPos()).inflate(2);
     }
 }
