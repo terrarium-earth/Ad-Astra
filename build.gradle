@@ -39,7 +39,7 @@ tasks.register("generateDiscordEmbed") {
                 ],
                 [
                         name  : "Mod Version",
-                        value : mod_version,
+                        value : project.version,
                         inline: true
                 ],
                 [
