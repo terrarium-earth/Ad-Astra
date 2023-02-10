@@ -29,7 +29,8 @@ import team.reborn.energy.api.EnergyStorage;
 import team.reborn.energy.api.EnergyStorageUtil;
 import team.reborn.energy.api.base.SimpleSidedEnergyContainer;
 
-public abstract class AbstractMachineBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, ModInventory, SidedInventory {
+public abstract class
+AbstractMachineBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, ModInventory, SidedInventory {
 
 	private final DefaultedList<ItemStack> inventory;
 

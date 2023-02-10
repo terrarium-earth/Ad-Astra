@@ -25,7 +25,7 @@ import net.minecraft.world.WorldAccess;
 public class CorruptedLunarianEntity extends HostileEntity implements RangedAttackMob {
 
 	public static DefaultAttributeContainer.Builder createMobAttributes() {
-		return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3).add(EntityAttributes.GENERIC_MAX_HEALTH, 20).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3);
+		return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3).add(EntityAttributes.GENERIC_MAX_HEALTH, 20).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2);
 	}
 
 	public CorruptedLunarianEntity(EntityType<? extends HostileEntity> entityType, World world) {

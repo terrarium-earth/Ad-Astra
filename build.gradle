@@ -1,16 +1,140 @@
+import groovy.json.JsonOutput
+
 plugins {
 	id 'fabric-loom' version '1.0-SNAPSHOT'
 	id 'org.quiltmc.quilt-mappings-on-loom' version '4.2.0'
 	id 'io.github.juuxel.loom-quiltflower' version '1.7.+'
 	id 'maven-publish'
+
+	id "com.modrinth.minotaur" version "2.+"
+    id "com.matthewprenger.cursegradle" version "1.4.0" // literally never gonna update
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
 
-archivesBaseName = project.archives_base_name
+archivesBaseName =" $mod_id-fabric-$minecraft_version"
 version = project.version
 group = project.maven_group
+
+tasks.register("generateDiscordEmbed") {
+    doFirst {
+        var env = System.getenv()
+        var changelogFile = rootProject.file("changelog.txt")
+
+        var fields = []
+
+        if (changelogFile.exists()) {
+            fields.add([
+                    name : "Changelog",
+                    value: changelogFile.text
+            ])
+        }
+
+        fields.addAll([
+                [
+                        name  : "Minecraft Version",
+                        value : minecraft_version,
+                        inline: true
+                ],
+                [
+                        name  : "Mod Version",
+                        value : mod_version,
+                        inline: true
+                ],
+                [
+                        name  : "Download",
+                        value : "<:modrinth:978684543034871878> [Modrinth](" +
+                                env.MODRINTH_PROJECT_URL +
+                                ")\n<:curseforge:978684543026462790> [Curseforge](" +
+                                env.CURSE_PROJECT_URL + ")",
+                        inline: true
+                ]
+        ])
+
+        var json = JsonOutput.toJson([
+                content     : null,
+                embeds      : [[
+                                       title    : archives_base_name,
+                                       color    : Integer.parseInt(env.EMBED_COLOR, 16),
+                                       fields   : fields,
+                                       thumbnail: [url: env.WEBHOOK_THUMBNAIL]
+                               ]],
+                username    : env.WEBHOOK_USERNAME,
+                avatar_url  : env.WEBHOOK_AVATAR,
+                attatchments: []
+        ])
+
+        new File(projectDir, "embed.json").write(json)
+    }
+}
+
+apply plugin: "com.modrinth.minotaur"
+apply plugin: "com.matthewprenger.cursegradle"
+
+var env = System.getenv()
+    var modLoader = name
+
+    var changelogFile = rootProject.file("changelog.txt")
+    var changelogText = changelogFile.exists() ? changelogFile.text : ""
+
+    if (env.MODRINTH_TOKEN) {
+        modrinth {
+            projectId = env.MODRINTH_PROJECT
+            uploadFile = tasks.remapJar
+            gameVersions = [minecraft_version]
+            loaders = [modLoader]
+            changelog = changelogText
+
+            if (modLoader == "fabric") {
+                dependencies {
+                    required.project "fabric-api"
+                    optional.project "modmenu"
+                    optional.project "patchouli"
+                    optional.project "roughly-enough-items"
+                    optional.project "emi"
+                }
+            } else {
+                dependencies {
+                    optional.project "patchouli"
+                    optional.project "roughly-enough-items"
+                }
+            }
+        }
+    }
+
+    if (env.CURSE_TOKEN) {
+        curseforge {
+            apiKey = env.CURSE_TOKEN
+            project {
+                id = env.CURSE_PROJECT
+                changelog = changelogText
+                releaseType = 'release'
+                addGameVersion minecraft_version
+                addGameVersion modLoader.capitalize()
+
+                mainArtifact(tasks.remapJar)
+
+                if (modLoader == "fabric") {
+                    relations {
+                        requiredDependency "fabric-api"
+                        optionalDependency "modmenu"
+                        optionalDependency "patchouli-fabric"
+                        optionalDependency "jei"
+                        optionalDependency "roughly-enough-items"
+                        optionalDependency "emi"
+                    }
+                } else {
+                    relations {
+                        requiredDependency "botarium"
+                        optionalDependency "patchouli"
+                        optionalDependency "jei"
+                        optionalDependency "roughly-enough-items"
+                    }
+                }
+            }
+        }
+    }
 
 repositories { 
 	maven { url "https://maven.shedaniel.me/" }

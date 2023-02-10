@@ -1,0 +1,71 @@
+name: Bug Report
+description: File a bug report
+title: "[Bug]: "
+labels: [ bug ]
+body:
+  - type: textarea
+    id: bug
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+
+  - type: textarea
+    id: how-to-reproduce
+    attributes:
+      label: How to Reproduce?
+      description: Steps to reproduce the behavior.
+      placeholder: |
+        1. Go to '...'
+        2. Click on '....'
+        3. Scroll down to '....'
+        4. See error
+    validations:
+      required: false
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected Behavior
+      description: A clear and concise description of what you expected to happen.
+    validations:
+      required: false
+
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: What version of the mod are you on?
+      placeholder: 1.0.0
+    validations:
+      required: true
+
+  - type: input
+    id: loader-version
+    attributes:
+      label: Mod Loader Version
+      description: What version of the mod loader are you on?
+      placeholder: 1.19.3 - 43.2.3
+    validations:
+      required: true
+
+  - type: dropdown
+    id: loader
+    attributes:
+      label: Mod Loader
+      description: What mod loader are you using?
+      multiple: true
+      options:
+        - N/A
+        - Forge
+        - Fabric
+        - Quilt
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs-extra-context
+    attributes:
+      label: Logs or additional context
+      description: Please copy and paste any relevant log output into a paste website such as [Pastebin](https://pastebin.com) and then link them here. You may also give any additional information here too.

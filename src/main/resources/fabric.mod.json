@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "ad_astra",
   "version": "${version}",
-  "name": "Ad Astra!",
+  "name": "Ad Astra",
   "description": "Live long and prosper, Ad Astra!",
   "authors": [
     "Alex Nijjar"
