@@ -73,7 +73,7 @@ apply plugin: "com.modrinth.minotaur"
 apply plugin: "com.matthewprenger.cursegradle"
 
 var env = System.getenv()
-    var modLoader = name
+    var modLoader = "fabric"
 
     var changelogFile = rootProject.file("changelog.txt")
     var changelogText = changelogFile.exists() ? changelogFile.text : ""
