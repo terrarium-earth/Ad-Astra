@@ -42,7 +42,7 @@ public class ModItems {
     public static final RegistryEntry<Item> OXYGEN_DETECTOR = ITEMS.register("oxygen_detector", () -> new OxygenDetectorItem(new Item.Properties().stacksTo(1)));
     public static final RegistryEntry<Item> TEMPERATURE_DETECTOR = ITEMS.register("temperature_detector", () -> new TemperatureDetectorItem(new Item.Properties().stacksTo(1)));
     public static final RegistryEntry<Item> GRAVITY_DETECTOR = ITEMS.register("gravity_detector", () -> new GravityDetectorItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryEntry<Item> SPACE_PAINTING = ITEMS.register("space_painting", () -> new SpacePaintingItem(new Item.Properties()));
+    public static final RegistryEntry<Item> SPACE_PAINTING = ITEMS.register("space_painting", () -> new CustomPaintingItem(new Item.Properties(), ModPaintings.EARTH, ModTags.Paintings.PAINTINGS));
 
     public static final RegistryEntry<Item> ZIP_GUN = ITEMS.register("zip_gun", () -> new ZipGunItem(2, FluidHooks.buckets(3), new Item.Properties().stacksTo(1)));
 

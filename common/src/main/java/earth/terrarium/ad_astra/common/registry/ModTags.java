@@ -4,6 +4,7 @@ import earth.terrarium.ad_astra.AdAstra;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.decoration.PaintingVariant;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
@@ -63,5 +64,9 @@ public class ModTags {
 
     public static class Recipes {
         public static final TagKey<RecipeType<?>> RECYCLABLES = TagKey.create(Registries.RECIPE_TYPE, new ResourceLocation(AdAstra.MOD_ID, "recyclables"));
+    }
+
+    public static class Paintings {
+        public static final TagKey<PaintingVariant> PAINTINGS = TagKey.create(Registries.PAINTING_VARIANT, new ResourceLocation(AdAstra.MOD_ID, "paintings"));
     }
 }
