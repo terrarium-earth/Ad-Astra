@@ -10,7 +10,7 @@ public class SpaceMovementSystem {
 
     public static void travel(LivingEntity entity, Vec3 travelVector) {
         if (entity.isEffectiveAi() || entity.isControlledByLocalInstance()) {
-            double entityGravity = GravitySystem.getPosGravity(entity.level, entity.blockPosition());
+            double entityGravity = GravitySystem.getEntityGravity(entity);
             double gravity = 0.08 * entityGravity;
             float speed;
 

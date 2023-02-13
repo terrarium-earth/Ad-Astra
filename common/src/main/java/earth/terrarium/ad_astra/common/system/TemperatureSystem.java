@@ -4,6 +4,7 @@ import earth.terrarium.ad_astra.common.data.Planet;
 import earth.terrarium.ad_astra.common.data.PlanetData;
 import earth.terrarium.ad_astra.common.util.ModUtils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
@@ -51,7 +52,12 @@ public class TemperatureSystem {
     }
 
     public static boolean entitySafeTemperature(Entity entity) {
-        return posSafeTemperature(entity.level, entity.blockPosition().above());
+        for (Direction direction : Direction.values()) {
+            if (posSafeTemperature(entity.level, entity.blockPosition().relative(direction))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static boolean posSafeTemperature(Level level, BlockPos pos) {

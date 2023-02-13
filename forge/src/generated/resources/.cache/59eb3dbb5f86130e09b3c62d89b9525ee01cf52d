@@ -1,4 +1,4 @@
-// 1.19.3	2023-02-01T20:04:36.713667	Loot Tables
+// 1.19.3	2023-02-07T14:54:45.159178	Loot Tables
 efe946b0208594ac520ee72b3aec5247fe309bc2 data/ad_astra/loot_tables/blocks/aerolyte_block.json
 2c1ed3e87f579f4c9e9f29ddd98760285c73775d data/ad_astra/loot_tables/blocks/aerolyte_button.json
 e73517391f48b96f9fb259f478c9bfb5fc60ee42 data/ad_astra/loot_tables/blocks/aerolyte_pillar.json
@@ -74,6 +74,7 @@ b17fd130f3769b997c1a53e6f40028a7fdc26415 data/ad_astra/loot_tables/blocks/gravit
 c5b30fd52b79f85f59c5cef7f6c6abbeee666a48 data/ad_astra/loot_tables/blocks/gray_flag.json
 8186a898e79f20f02fe80ac06d769a548c6cad60 data/ad_astra/loot_tables/blocks/green_flag.json
 00cc9860f708b0e6ebbf18be4d30fe044223d895 data/ad_astra/loot_tables/blocks/hydraulic_press.json
+0fd6a02316c72e68c93f11c76e25a354c7960805 data/ad_astra/loot_tables/blocks/i_vent.json
 af1c2ca5c3ae11ccd941029dd4d5bb12150ab3a2 data/ad_astra/loot_tables/blocks/iron_pillar.json
 b3b812b4c6c3f2bb7da2ef1aed5a69ec23c6109d data/ad_astra/loot_tables/blocks/iron_plating.json
 66d682ef37985cb56e61e99bd7ee3e02c1b87afe data/ad_astra/loot_tables/blocks/iron_plating_slab.json

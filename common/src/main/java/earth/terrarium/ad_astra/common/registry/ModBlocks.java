@@ -4,6 +4,7 @@ import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.common.block.IVentBlock;
 import earth.terrarium.ad_astra.common.block.flag.FlagBlock;
 import earth.terrarium.ad_astra.common.block.fluid.CryogenicFuelLiquidBlock;
 import earth.terrarium.ad_astra.common.block.globe.GlobeBlock;
@@ -44,11 +45,11 @@ public class ModBlocks {
     public static final ResourcefulRegistry<Block> SPECIAL_SLIDING_DOORS = ResourcefulRegistries.create(SLIDING_DOORS);
     public static final ResourcefulRegistry<Block> FLUIDS = ResourcefulRegistries.create(BLOCKS);
 
-    public static final RegistryEntry<Block> ETRIUM_CABLE = BLOCKS.register("etrium_cable", () -> new PipeBlock(4096, 0.344, PipeBlock.PipeType.CABLE, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(1.0f, 1.0f)));
-    public static final RegistryEntry<Block> DESMIUM_FLUID_PIPE = BLOCKS.register("desmium_fluid_pipe", () -> new PipeBlock(FluidHooks.buckets(0.256f), 0.185, PipeBlock.PipeType.FLUID_PIPE, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(1.0f, 1.0f)));
+    public static final RegistryEntry<Block> ETRIUM_CABLE = BLOCKS.register("etrium_cable", () -> new PipeBlock(4096, 0.344, PipeBlock.PipeType.CABLE, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 0.5f)));
+    public static final RegistryEntry<Block> DESMIUM_FLUID_PIPE = BLOCKS.register("desmium_fluid_pipe", () -> new PipeBlock(FluidHooks.buckets(0.256f), 0.185, PipeBlock.PipeType.FLUID_PIPE, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 0.5f)));
 
-    public static final RegistryEntry<Block> CABLE_DUCT = CUBES.register("cable_duct", () -> new PipeDuctBlock(4096, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(1.0f, 1.0f)));
-    public static final RegistryEntry<Block> FLUID_PIPE_DUCT = CUBES.register("fluid_pipe_duct", () -> new PipeDuctBlock(FluidHooks.buckets(0.256f), BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(1.0f, 1.0f)));
+    public static final RegistryEntry<Block> CABLE_DUCT = CUBES.register("cable_duct", () -> new PipeDuctBlock(4096, PipeBlock.PipeType.CABLE, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 0.5f)));
+    public static final RegistryEntry<Block> FLUID_PIPE_DUCT = CUBES.register("fluid_pipe_duct", () -> new PipeDuctBlock(FluidHooks.buckets(0.256f), PipeBlock.PipeType.FLUID_PIPE, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 0.5f)));
 
     public static final RegistryEntry<Block> ETRIONIC_GENERATOR = MACHINES.register("etrionic_generator", () -> new AnimatedMachineBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()));
     public static final RegistryEntry<Block> COMBUSTION_GENERATOR = MACHINES.register("combustion_generator", () -> new MachineBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
@@ -108,6 +109,7 @@ public class ModBlocks {
     public static final RegistryEntry<Block> CROSS_IRON_PILLAR = PILLARS.register("cross_iron_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER)));
     public static final RegistryEntry<Block> GLOWING_IRON_PILLAR = PILLARS.register("glowing_iron_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel((state) -> 15)));
     public static final RegistryEntry<Block> VENT = CUBES.register("vent", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).noOcclusion()));
+    public static final RegistryEntry<Block> I_VENT = CUBES.register("i_vent", () -> new IVentBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).noOcclusion()));
 
     public static final RegistryEntry<Block> STEEL_BLOCK = CUBES.register("steel_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER)));
     public static final RegistryEntry<Block> STEEL_PLATING = CUBES.register("steel_plating", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER)));

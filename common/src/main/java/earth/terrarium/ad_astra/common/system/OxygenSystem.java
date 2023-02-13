@@ -3,6 +3,7 @@ package earth.terrarium.ad_astra.common.system;
 import earth.terrarium.ad_astra.common.data.PlanetData;
 import earth.terrarium.ad_astra.common.registry.ModDamageSource;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
@@ -27,7 +28,12 @@ public class OxygenSystem {
     }
 
     public static boolean entityHasOxygen(Entity entity) {
-        return posHasOxygen(entity.level, entity.blockPosition().above());
+        for (Direction direction : Direction.values()) {
+            if (posHasOxygen(entity.level, entity.blockPosition().relative(direction))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static boolean posHasOxygen(Level level, BlockPos pos) {
@@ -37,6 +43,10 @@ public class OxygenSystem {
     public static void addOxygenSource(Level level, Set<BlockPos> positions) {
         positions.addAll(OXYGEN_CACHE.getOrDefault(level.dimension(), new HashSet<>()));
         OXYGEN_CACHE.put(level.dimension(), positions);
+    }
+
+    public static Set<BlockPos> getOxygenSources(Level level) {
+        return OXYGEN_CACHE.getOrDefault(level.dimension(), new HashSet<>());
     }
 
     public static void removeOxygenSource(Level level, Set<BlockPos> positions) {

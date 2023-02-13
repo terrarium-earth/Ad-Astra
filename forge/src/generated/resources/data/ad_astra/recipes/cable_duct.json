@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "cable_duct",
+  "key": {
+    "I": {
+      "item": "ad_astra:etrium_ingot"
+    },
+    "N": {
+      "item": "ad_astra:etrium_nugget"
+    },
+    "P": {
+      "item": "ad_astra:steel_plate"
+    }
+  },
+  "pattern": [
+    "PNP",
+    "NIN",
+    "PNP"
+  ],
+  "result": {
+    "item": "ad_astra:cable_duct"
+  }
+}

@@ -38,20 +38,23 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<Pl
         BlockState state2 = level.getBlockState(pos);
         if (state.isAir() || state2.isAir()) return;
 
-        PipeState pipeState = state.getValue(PipeBlock.DIRECTIONS.get(getSource().direction()));
-        PipeState pipeState2 = state2.getValue(PipeBlock.DIRECTIONS.get(direction));
-
-        if (getSource().storage() == null || getConsumers().isEmpty()) return;
-        if (pipeState == PipeState.INSERT && pipeState2 == PipeState.INSERT) return;
-        if (pipeState == PipeState.EXTRACT && pipeState2 == PipeState.EXTRACT) return;
-        if (pipeState == PipeState.NONE || pipeState2 == PipeState.NONE) return;
 
         PlatformEnergyManager input = getSource().storage();
         PlatformEnergyManager output = consumer;
 
-        if (pipeState2 == PipeState.EXTRACT || pipeState == PipeState.INSERT) {
-            input = consumer;
-            output = getSource().storage();
+        if (!(state.getBlock() instanceof PipeDuctBlock) && !(state2.getBlock() instanceof PipeDuctBlock)) {
+            PipeState pipeState = state.getValue(PipeBlock.DIRECTIONS.get(getSource().direction()));
+            PipeState pipeState2 = state2.getValue(PipeBlock.DIRECTIONS.get(direction));
+
+            if (getSource().storage() == null || getConsumers().isEmpty()) return;
+            if (pipeState == PipeState.INSERT && pipeState2 == PipeState.INSERT) return;
+            if (pipeState == PipeState.EXTRACT && pipeState2 == PipeState.EXTRACT) return;
+            if (pipeState == PipeState.NONE || pipeState2 == PipeState.NONE) return;
+
+            if (pipeState2 == PipeState.EXTRACT || pipeState == PipeState.INSERT) {
+                input = consumer;
+                output = getSource().storage();
+            }
         }
 
         EnergyHooks.moveEnergy(input, output, Math.max(0, getTransferAmount() / getConsumers().size()));

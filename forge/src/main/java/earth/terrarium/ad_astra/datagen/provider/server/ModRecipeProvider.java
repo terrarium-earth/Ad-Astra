@@ -220,6 +220,26 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("EEE")
                 .unlockedBy("has_item", has(ModItems.ETRIUM_NUGGET.get()))
         );
+
+        createSimple(writer, ModItems.CABLE_DUCT.get(), 1, shapedRecipeBuilder -> shapedRecipeBuilder
+                .define('I', ModItems.ETRIUM_INGOT.get())
+                .define('N', ModItems.ETRIUM_NUGGET.get())
+                .define('P', ModItems.STEEL_PLATE.get())
+                .pattern("PNP")
+                .pattern("NIN")
+                .pattern("PNP")
+                .unlockedBy("has_item", has(ModItems.ETRIUM_NUGGET.get()))
+        );
+
+        createSimple(writer, ModItems.FLUID_PIPE_DUCT.get(), 1, shapedRecipeBuilder -> shapedRecipeBuilder
+                .define('I', ModItems.DESMIUM_INGOT.get())
+                .define('G', Items.GLASS)
+                .define('P', ModItems.DESMIUM_PLATE.get())
+                .pattern("PGP")
+                .pattern("GIG")
+                .pattern("PGP")
+                .unlockedBy("has_item", has(ModItems.DESMIUM_INGOT.get()))
+        );
     }
 
     public static void createSimple(Consumer<FinishedRecipe> consumer, Item output, int count, Function<ShapedRecipeBuilder, ShapedRecipeBuilder> func) {

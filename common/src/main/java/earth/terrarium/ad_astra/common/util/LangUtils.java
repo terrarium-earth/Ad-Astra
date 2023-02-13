@@ -24,6 +24,8 @@ public class LangUtils {
     public static final String PIPE_INSERT = lang("message.ad_astra.pipe_insert", "Insert");
     public static final String PIPE_EXTRACT = lang("message.ad_astra.pipe_extract", "Extract");
     public static final String PIPE_NONE = lang("message.ad_astra.pipe_none", "None");
+    public static final String CABLE_DUCT = lang("tooltip.ad_astra.cable_duct", "Transfers Energy while being airtight");
+    public static final String FLUID_PIPE_DUCT = lang("tooltip.ad_astra.fluid_pipe_duct", "Transfers Fluids while being airtight");
 
     public static final String CAPACITOR_MODE = lang("message.ad_astra.capacitor_mode", "Mode: %s");
     public static final String CAPACITOR_ON = lang("message.ad_astra.capacitor_on", "Capacitor On");

@@ -1,6 +1,7 @@
 package earth.terrarium.ad_astra.common.block.machine.entity;
 
 import earth.terrarium.ad_astra.common.block.machine.ContainerMachineBlockEntity;
+import earth.terrarium.ad_astra.common.entity.AirVortex;
 import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.ad_astra.common.registry.ModTags;
 import earth.terrarium.ad_astra.common.screen.machine.OxygenDistributorMenu;
@@ -21,8 +22,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @SuppressWarnings("deprecation")
@@ -70,6 +74,10 @@ public class OxygenDistributorBlockEntity extends ContainerMachineBlockEntity im
         }
     }
 
+    public Set<BlockPos> getSources() {
+        return sources;
+    }
+
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
         return new OxygenDistributorMenu(i, inventory, this);
@@ -115,11 +123,23 @@ public class OxygenDistributorBlockEntity extends ContainerMachineBlockEntity im
         if (level == null) return;
         update();
 
+        Set<BlockPos> copy = new HashSet<>(sources);
+
         clearSources();
         OxygenSystem.OXYGEN_DISTRIBUTOR_BLOCKS.add(getBlockPos());
         Set<BlockPos> positions = FloodFiller3D.run(level, getBlockPos());
         OxygenSystem.addOxygenSource(level, positions);
         sources.addAll(positions);
+
+        List<BlockPos> copy2 = new ArrayList<>(positions);
+        copy2.removeAll(copy);
+
+        if (positions.size() >= 2000 && copy.size() < 2000 && !copy2.isEmpty()) {
+            BlockPos target = copy2.get(0);
+            AirVortex airVortex = new AirVortex(level, getBlockPos(), copy);
+            airVortex.setPos(Vec3.atCenterOf(target));
+            level.addFreshEntity(airVortex);
+        }
     }
 
     @Override

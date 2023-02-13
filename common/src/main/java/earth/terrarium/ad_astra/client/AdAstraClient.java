@@ -12,6 +12,7 @@ import earth.terrarium.ad_astra.common.registry.*;
 import earth.terrarium.botarium.client.ClientHooks;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.PreparableReloadListener;
 import net.minecraft.world.level.ItemLike;
@@ -48,7 +49,7 @@ public class AdAstraClient {
     }
 
     public static void registerEntityRenderers() {
-        // No Op
+        ClientHooks.registerEntityRenderer(ModEntityTypes.AIR_VORTEX, NoopRenderer::new);
     }
 
     public static void registerBlockRenderTypes() {

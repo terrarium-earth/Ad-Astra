@@ -1,7 +1,7 @@
 package earth.terrarium.ad_astra.common.block.pipe;
 
-import earth.terrarium.ad_astra.common.Wrenchable;
 import earth.terrarium.ad_astra.common.block.BasicEntityBlock;
+import earth.terrarium.ad_astra.common.block.Wrenchable;
 import earth.terrarium.ad_astra.common.registry.ModBlocks;
 import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.ad_astra.common.registry.ModSoundEvents;

@@ -3,7 +3,6 @@ package earth.terrarium.ad_astra.common.block.slidingdoor;
 import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.ad_astra.common.registry.ModSoundEvents;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -15,16 +14,8 @@ public class SlidingDoorBlockEntity extends BlockEntity {
 
     public SlidingDoorBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntityTypes.SLIDING_DOOR.get(), blockPos, blockState);
-    }
-
-    @Override
-    public void load(CompoundTag tag) {
-        slideTicks = tag.getInt("SlideTicks");
-    }
-
-    @Override
-    protected void saveAdditional(CompoundTag tag) {
-        tag.putInt("SlideTicks", slideTicks);
+        slideTicks = blockState.getValue(SlidingDoorBlock.OPEN) ? 100 : 0;
+        previousSlideTicks = slideTicks;
     }
 
     public int getSlideTicks() {

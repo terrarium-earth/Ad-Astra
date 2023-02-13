@@ -1,4 +1,4 @@
-package earth.terrarium.ad_astra.common;
+package earth.terrarium.ad_astra.common.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

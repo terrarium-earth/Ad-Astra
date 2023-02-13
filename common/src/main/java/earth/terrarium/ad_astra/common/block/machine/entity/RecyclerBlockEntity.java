@@ -114,7 +114,7 @@ public class RecyclerBlockEntity extends CookingMachineBlockEntity implements En
         return null;
     }
 
-    private <C extends Container, T extends Recipe<C>> void addRecipes(RecipeType<T> recyclableRecipe, ItemStack stack, List<? super Recipe<?>> recipes) {
+    private <C extends Container, T extends Recipe<C>> void addRecipes(RecipeType<T> recyclableRecipe, ItemStack stack, List<Recipe<?>> recipes) {
         for (var recipe : level.getRecipeManager().getAllRecipesFor(recyclableRecipe)) {
             if (!recipe.getResultItem().is(stack.getItem())) {
                 continue;

@@ -12,11 +12,8 @@ dependencies {
 //    modImplementation "vazkii.patchouli:Patchouli-xplat:$rootProject.minecraft_version-$rootProject.patchouli_version"
     modImplementation "vazkii.patchouli:Patchouli-xplat:1.19.2-$rootProject.patchouli_version"
 
-
-//    modCompileOnly "mezz.jei:jei-$rootProject.minecraft_version-common-api:$rootProject.jei_version"
-//    modRuntimeOnly "mezz.jei:jei-$rootProject.minecraft_version-common:$rootProject.jei_version"
-    modCompileOnly "mezz.jei:jei-1.19.2-common-api:$rootProject.jei_version" // TODO
-    modRuntimeOnly "mezz.jei:jei-1.19.2-common:$rootProject.jei_version" // TODO
+    modCompileOnly "mezz.jei:jei-$rootProject.minecraft_version-common-api:$rootProject.jei_version"
+    modRuntimeOnly "mezz.jei:jei-$rootProject.minecraft_version-common:$rootProject.jei_version"
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-api:$rootProject.rei_version"
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin:$rootProject.rei_version"
 

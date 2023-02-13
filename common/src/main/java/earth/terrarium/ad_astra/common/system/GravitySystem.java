@@ -3,6 +3,7 @@ package earth.terrarium.ad_astra.common.system;
 import com.mojang.datafixers.util.Pair;
 import earth.terrarium.ad_astra.common.data.PlanetData;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
@@ -22,11 +23,15 @@ public class GravitySystem {
     }
 
     public static float getLevelGravity(ResourceKey<Level> level) {
-        return PlanetData.getPlanetGravityValues().get(level);
+        return PlanetData.getPlanetGravityValues().getOrDefault(level, DEFAULT_GRAVITY);
     }
 
     public static float getEntityGravity(Entity entity) {
-        return getPosGravity(entity.level, entity.blockPosition().above());
+        float gravity = 0;
+        for (Direction direction : Direction.values()) {
+            gravity = Math.max(gravity, getPosGravity(entity.level, entity.blockPosition().relative(direction)));
+        }
+        return gravity;
     }
 
     public static float getPosGravity(Level level, BlockPos pos) {

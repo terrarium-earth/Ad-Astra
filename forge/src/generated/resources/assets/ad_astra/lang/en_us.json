@@ -78,6 +78,7 @@
   "block.ad_astra.green_flag": "Green Flag",
   "block.ad_astra.hydraulic_press": "Hydraulic Press",
   "block.ad_astra.hydrogen": "Hydrogen",
+  "block.ad_astra.i_vent": "I Vent",
   "block.ad_astra.iron_pillar": "Iron Pillar",
   "block.ad_astra.iron_plating": "Iron Plating",
   "block.ad_astra.iron_plating_slab": "Iron Plating Slab",
@@ -205,6 +206,7 @@
   "block.ad_astra.water_pump": "Water Pump",
   "block.ad_astra.white_flag": "White Flag",
   "block.ad_astra.yellow_flag": "Yellow Flag",
+  "entity.ad_astra.air_vortex": "Air Vortex",
   "entity.ad_astra.space_painting": "Space Painting",
   "item.ad_astra.aerolyte_ingot": "Aerolyte Ingot",
   "item.ad_astra.aerolyte_nugget": "Aerolyte Nugget",
@@ -271,9 +273,11 @@
   "subtitles.ad_astra.wrench": "Wrench Twisting",
   "text.ad_astra.confirm": "Confirm",
   "text.ad_astra.flag_url": "Flag Url (https://i.imgur.com/urURL.png)",
+  "tooltip.ad_astra.cable_duct": "Transfers Energy while being airtight",
   "tooltip.ad_astra.cable_transfer_rate": "Energy Transfer: %s ⚡ / t",
   "tooltip.ad_astra.empty_tank": "Empty Tank",
   "tooltip.ad_astra.energy_bar": "%s ⚡ /§a %s ⚡",
+  "tooltip.ad_astra.fluid_pipe_duct": "Transfers Fluids while being airtight",
   "tooltip.ad_astra.fluid_pipe_transfer_rate": "Fluid Transfer: %s 🪣 / t",
   "tooltip.ad_astra.fluid_tank": "%s 🪣 / %s 🪣 %s"
 }

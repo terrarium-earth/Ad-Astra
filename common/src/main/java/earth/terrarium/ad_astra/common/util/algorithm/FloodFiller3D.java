@@ -1,22 +1,23 @@
 package earth.terrarium.ad_astra.common.util.algorithm;
 
 import com.mojang.datafixers.util.Pair;
+import earth.terrarium.ad_astra.common.block.IVentBlock;
 import earth.terrarium.ad_astra.common.block.slidingdoor.SlidingDoorBlock;
 import earth.terrarium.ad_astra.common.registry.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class FloodFiller3D {
     public static Set<BlockPos> run(Level level, BlockPos start) {
-        Set<BlockPos> positions = new HashSet<>();
+        Set<BlockPos> positions = new LinkedHashSet<>();
         Set<Pair<BlockPos, Direction>> queue = new LinkedHashSet<>();
         queue.add(Pair.of(start, Direction.UP));
 
@@ -53,8 +54,11 @@ public class FloodFiller3D {
     }
 
     private static boolean runAdditionalChecks(Level level, BlockState state, BlockPos pos) {
-        if (state.getBlock() instanceof SlidingDoorBlock door) {
-            return !level.getBlockState(door.getMainPos(state, pos)).getValue(SlidingDoorBlock.OPEN);
+        Block block = state.getBlock();
+        if (block instanceof SlidingDoorBlock door) {
+            return !level.getBlockState(door.getMainPos(state, pos)).getValue(SlidingDoorBlock.OPEN) && !level.getBlockState(door.getMainPos(state, pos)).getValue(SlidingDoorBlock.POWERED);
+        } else if (block instanceof IVentBlock) {
+            return !level.getBlockState(pos).getValue(IVentBlock.OPEN);
         }
         return false;
     }

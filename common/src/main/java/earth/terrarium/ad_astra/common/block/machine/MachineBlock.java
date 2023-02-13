@@ -11,7 +11,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -65,6 +64,10 @@ public class MachineBlock extends BasicEntityBlock {
 
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean moved) {
+        if (level.getBlockEntity(pos) instanceof MachineBlockEntity machine) {
+            machine.onDestroy();
+        }
+
         if (state.getBlock() != newState.getBlock()) {
             if (level.getBlockEntity(pos) instanceof BasicContainer container) {
                 if (container.getContainerSize() > 0) {
@@ -73,22 +76,6 @@ public class MachineBlock extends BasicEntityBlock {
                 }
             }
             super.onRemove(state, level, pos, newState, moved);
-        }
-    }
-
-    @Override
-    public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
-        super.playerWillDestroy(level, pos, state, player);
-        if (level.getBlockEntity(pos) instanceof MachineBlockEntity machine) {
-            machine.onDestroy();
-        }
-    }
-
-    @Override
-    public void wasExploded(Level level, BlockPos pos, Explosion explosion) {
-        super.wasExploded(level, pos, explosion);
-        if (level.getBlockEntity(pos) instanceof MachineBlockEntity machine) {
-            machine.onDestroy();
         }
     }
 
