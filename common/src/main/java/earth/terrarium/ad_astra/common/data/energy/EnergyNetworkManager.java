@@ -4,6 +4,7 @@ import dev.architectury.injectables.annotations.ExpectPlatform;
 import earth.terrarium.ad_astra.AdAstra;
 import net.minecraft.core.DefaultedRegistry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import org.apache.commons.lang3.NotImplementedException;
@@ -17,12 +18,8 @@ public class EnergyNetworkManager {
     public static final EnergyNetworkVisibility PRIVATE_NETWORK = (network, player) -> network.getOwnerId().equals(player.getUUID());
     public static final EnergyNetworkVisibility PUBLIC_NETWORK = (network, player) -> true;
 
-    public static EnergyNetworkData getNetworkData(ServerLevel level) {
-        if (level.dimension().equals(Level.OVERWORLD)) {
-            return level.getDataStorage().computeIfAbsent(EnergyNetworkData::new, EnergyNetworkData::new, AdAstra.MOD_ID + "_energy_networks");
-        }
-
-        return getNetworkData(Objects.requireNonNull(level.getServer().getLevel(Level.OVERWORLD)));
+    public static EnergyNetworkData getNetworkData(MinecraftServer server) {
+        return server.overworld().getDataStorage().computeIfAbsent(EnergyNetworkData::new, EnergyNetworkData::new, AdAstra.MOD_ID + "_energy_networks");
     }
 
     @ExpectPlatform
