@@ -210,7 +210,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_item", has(ModItems.ETRIUM_NUGGET.get()))
         );
 
-        createSimple(writer, ModItems.HYDRAULIC_PRESS.get(), 1, shapedRecipeBuilder -> shapedRecipeBuilder
+        createSimple(writer, ModItems.ETRIONIC_PRESS.get(), 1, shapedRecipeBuilder -> shapedRecipeBuilder
                 .define('E', ModItems.ETRIUM_INGOT.get())
                 .define('N', ModItems.ETRIUM_NUGGET.get())
                 .define('B', Items.IRON_BLOCK)

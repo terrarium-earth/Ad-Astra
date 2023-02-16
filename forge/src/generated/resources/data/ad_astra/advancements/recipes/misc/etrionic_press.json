@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "ad_astra:hydraulic_press"
+        "recipe": "ad_astra:etrionic_press"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "ad_astra:hydraulic_press"
+      "ad_astra:etrionic_press"
     ]
   }
 }

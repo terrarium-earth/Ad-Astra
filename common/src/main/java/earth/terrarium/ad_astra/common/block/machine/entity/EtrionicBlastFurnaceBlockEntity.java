@@ -17,6 +17,8 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
+import static earth.terrarium.ad_astra.common.block.machine.MachineBlock.LIT;
+
 public class EtrionicBlastFurnaceBlockEntity extends CookingMachineBlockEntity implements EnergyAttachment.Block {
     private WrappedBlockEnergyContainer energyContainer;
     private AbstractCookingRecipe recipe;
@@ -31,15 +33,27 @@ public class EtrionicBlastFurnaceBlockEntity extends CookingMachineBlockEntity i
             if (getEnergyStorage().internalExtract(10, true) >= 10) {
                 getEnergyStorage().internalExtract(10, false);
                 cookTime++;
+                if (!isLit()) {
+                    isLit = true;
+                    level.setBlockAndUpdate(worldPosition, getBlockState().setValue(LIT, true));
+                }
                 if (cookTime >= cookTimeTotal) {
                     cookTime = 0;
                     craft();
                 }
             } else {
                 cookTime = 0;
+                if (isLit()) {
+                    isLit = false;
+                    level.setBlockAndUpdate(worldPosition, getBlockState().setValue(LIT, false));
+                }
             }
         } else {
             cookTime = 0;
+            if (isLit()) {
+                isLit = false;
+                level.setBlockAndUpdate(worldPosition, getBlockState().setValue(LIT, false));
+            }
         }
     }
 

@@ -28,13 +28,17 @@ public class EtrionicPressBlockEntity extends CookingMachineBlockEntity implemen
     private AbstractCookingRecipe recipe;
 
     public EtrionicPressBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntityTypes.HYDRAULIC_PRESS.get(), blockPos, blockState, 2);
+        super(ModBlockEntityTypes.ETRIONIC_PRESS.get(), blockPos, blockState, 2);
     }
 
     @Override
     public void serverTick() {
         if (recipe != null && canCraft()) {
             if (getEnergyStorage().internalExtract(10, true) >= 10) {
+                if(!isLit()) {
+                    isLit = true;
+                    level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
+                }
                 getEnergyStorage().internalExtract(10, false);
                 cookTime++;
                 if (cookTime >= cookTimeTotal) {
@@ -42,9 +46,17 @@ public class EtrionicPressBlockEntity extends CookingMachineBlockEntity implemen
                     craft();
                 }
             } else {
+                if(isLit()) {
+                    isLit = false;
+                    level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
+                }
                 cookTime = 0;
             }
         } else {
+            if(isLit()) {
+                isLit = false;
+                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
+            }
             cookTime = 0;
         }
     }
@@ -100,7 +112,7 @@ public class EtrionicPressBlockEntity extends CookingMachineBlockEntity implemen
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController<>(this, state -> {
-            if (canCraft()) {
+            if (isLit()) {
                 return state.setAndContinue(DefaultAnimations.IDLE);
             } else {
                 return state.setAndContinue(DefaultAnimations.REST);

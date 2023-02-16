@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "misc",
-  "group": "hydraulic_press",
+  "group": "etrionic_press",
   "key": {
     "B": {
       "item": "minecraft:iron_block"
@@ -22,6 +22,6 @@
     "EEE"
   ],
   "result": {
-    "item": "ad_astra:hydraulic_press"
+    "item": "ad_astra:etrionic_press"
   }
 }

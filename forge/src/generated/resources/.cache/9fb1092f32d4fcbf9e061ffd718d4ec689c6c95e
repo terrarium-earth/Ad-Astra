@@ -1,12 +1,12 @@
-// 1.19.3	2023-02-10T04:06:27.00762	Recipes
+// 1.19.3	2023-02-15T21:15:45.895552	Recipes
 a2d1898c6fd84170d7aabf526aba91651207f117 data/ad_astra/advancements/recipes/misc/cable_duct.json
 adf309585cdd1a6dce9cbf8e15580a9cb1350673 data/ad_astra/advancements/recipes/misc/etrionic_blast_furnace.json
 22d0a2635c442509adfa18e546efc520729bf36f data/ad_astra/advancements/recipes/misc/etrionic_capacitor.json
 4f606e4a2a5a8ae871185059df40b397b6b2485c data/ad_astra/advancements/recipes/misc/etrionic_core.json
 10327fa26e6cbbba7202cfb6850018ad3afd1c7c data/ad_astra/advancements/recipes/misc/etrionic_generator.json
+7dc14474a99f8a69cd5d2406a0a13cef7683aca5 data/ad_astra/advancements/recipes/misc/etrionic_press.json
 52802df968f318bcb462419b401e8dcf57784a9d data/ad_astra/advancements/recipes/misc/etrionic_solar_panel.json
 1209f1bd470450e0fe127057ea68c42f11de5076 data/ad_astra/advancements/recipes/misc/fluid_pipe_duct.json
-e58eab98e833bf3d59ec6c14599154f538661f5f data/ad_astra/advancements/recipes/misc/hydraulic_press.json
 64ee1402a35f446f0ed7827dd6789118e6ec8b35 data/ad_astra/advancements/recipes/misc/oxygen_sensor.json
 3179cf768ad998f1ad9355592646a6e5b707f746 data/ad_astra/advancements/recipes/misc/photovoltaic_etrium_cell.json
 5097d57f1de3e07e9fee0bd1e5434ffe4ac89d87 data/ad_astra/advancements/recipes/misc/vesnium_solar_panel.json
@@ -15,9 +15,9 @@ e58eab98e833bf3d59ec6c14599154f538661f5f data/ad_astra/advancements/recipes/misc
 864c806ec695565bbfe41beb75b6ae5362b18103 data/ad_astra/recipes/etrionic_capacitor.json
 03469c68a6227956889ad1f93e6670a18d58570a data/ad_astra/recipes/etrionic_core.json
 ded6691f44d40e0b943fd3289c60351c50e4b537 data/ad_astra/recipes/etrionic_generator.json
+a50bf78271f847464f264cb9ce71fe3db9a52c4f data/ad_astra/recipes/etrionic_press.json
 7a2d79a7fcb2d2041531d743595ee78b0be51d19 data/ad_astra/recipes/etrionic_solar_panel.json
 980e51ddad1dbb52a32c510e46872a9cce3c2147 data/ad_astra/recipes/fluid_pipe_duct.json
-a62acd03b2688c2cb87a44fe5f0714b7f75bdb92 data/ad_astra/recipes/hydraulic_press.json
 a8ce64897ca2bdcb8637dc6d95d5651b44ab67aa data/ad_astra/recipes/oxygen_sensor.json
 9e76fb6699a4e6b541a768502fbcb077a0e491f8 data/ad_astra/recipes/photovoltaic_etrium_cell.json
 9200bdc720d722eb771737e3932ff50454205f22 data/ad_astra/recipes/vesnium_solar_panel.json

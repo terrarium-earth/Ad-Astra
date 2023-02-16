@@ -1,9 +1,9 @@
-// 1.19.3	2023-02-07T14:54:45.154502	Tags for minecraft:block mod id ad_astra
+// 1.19.3	2023-02-15T21:15:45.888543	Tags for minecraft:block mod id ad_astra
 49278667ca98b5260c0d1482db7a8783f77eaef4 data/ad_astra/tags/blocks/flags.json
 f6ed4b69248c2a36521f1cb04e47b8a898b4712b data/ad_astra/tags/blocks/globes.json
 70ba8e2dc3088855111e3eff8a60f9e845f17246 data/minecraft/tags/blocks/buttons.json
 49278667ca98b5260c0d1482db7a8783f77eaef4 data/minecraft/tags/blocks/mineable/axe.json
-2bb1987a9e1aa4e479f9fd590576a2690c9769f9 data/minecraft/tags/blocks/mineable/pickaxe.json
+c9f8a6da8f2340d01145824db0e270b6d29389bc data/minecraft/tags/blocks/mineable/pickaxe.json
 9ae953d2dab7e111cd75eebef57ac922b3d1f07d data/minecraft/tags/blocks/mineable/shovel.json
 6e5df600f52e22400209403609e411c2be6d47a5 data/minecraft/tags/blocks/pressure_plates.json
 9ae953d2dab7e111cd75eebef57ac922b3d1f07d data/minecraft/tags/blocks/sand.json

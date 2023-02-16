@@ -59,7 +59,7 @@ public class ModItems {
     public static final RegistryEntry<Item> GEOTHERMAL_GENERATOR = MACHINES.register("geothermal_generator", () -> new BlockItem(ModBlocks.GEOTHERMAL_GENERATOR.get(), new Item.Properties()));
 
     public static final RegistryEntry<Item> ETRIONIC_BLAST_FURNACE = MACHINES.register("etrionic_blast_furnace", () -> new BlockItem(ModBlocks.ETRIONIC_BLAST_FURNACE.get(), new Item.Properties()));
-    public static final RegistryEntry<Item> HYDRAULIC_PRESS = MACHINES.register("hydraulic_press", () -> new BlockItem(ModBlocks.HYDRAULIC_PRESS.get(), new Item.Properties()));
+    public static final RegistryEntry<Item> ETRIONIC_PRESS = MACHINES.register("etrionic_press", () -> new BlockItem(ModBlocks.ETRIONIC_PRESS.get(), new Item.Properties()));
     public static final RegistryEntry<Item> ELECTROLYZER = MACHINES.register("electrolyzer", () -> new BlockItem(ModBlocks.ELECTROLYZER.get(), new Item.Properties()));
     public static final RegistryEntry<Item> OXYGEN_SENSOR = MACHINES.register("oxygen_sensor", () -> new BlockItem(ModBlocks.OXYGEN_SENSOR.get(), new Item.Properties()));
     public static final RegistryEntry<Item> OIL_REFINERY = MACHINES.register("oil_refinery", () -> new BlockItem(ModBlocks.OIL_REFINERY.get(), new Item.Properties()));

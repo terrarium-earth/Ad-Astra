@@ -23,6 +23,6 @@ public class HydraulicPressingRecipe extends AbstractCookingRecipe {
 
     @Override
     public ItemStack getToastSymbol() {
-        return ModItems.HYDRAULIC_PRESS.get().getDefaultInstance();
+        return ModItems.ETRIONIC_PRESS.get().getDefaultInstance();
     }
 }

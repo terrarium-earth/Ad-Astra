@@ -57,6 +57,7 @@ public class AdAstraClient {
     public static void registerBlockRenderTypes() {
         ModBlocks.GLOBES.stream().forEach(b -> ClientHooks.setRenderLayer(b.get(), RenderType.cutout()));
         ClientHooks.setRenderLayer(ModBlocks.VENT.get(), RenderType.cutout());
+        ClientHooks.setRenderLayer(ModBlocks.ETRIONIC_BLAST_FURNACE.get(), RenderType.cutout());
     }
 
     public static void onRegisterFluidRenderTypes(BiConsumer<RenderType, Fluid> register) {
@@ -69,7 +70,7 @@ public class AdAstraClient {
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.SLIDING_DOOR.get(), SlidingDoorBlockEntityRenderer::new);
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.ETRIONIC_GENERATOR.get(), context -> new SteamGeneratorBlockRenderer());
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.SOLAR_PANEL.get(), context -> new SolarPanelBlockRenderer());
-        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.HYDRAULIC_PRESS.get(), context -> new EtrionicPressBlockRenderer());
+        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.ETRIONIC_PRESS.get(), EtrionicPressBlockRenderer::new);
     }
 
     public static void onRegisterModels(Consumer<ResourceLocation> register) {
