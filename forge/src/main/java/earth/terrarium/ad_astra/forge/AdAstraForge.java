@@ -4,6 +4,9 @@ import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.AdAstraClient;
 import earth.terrarium.ad_astra.client.forge.AdAstraClientForge;
 import earth.terrarium.ad_astra.common.data.PlanetData;
+import earth.terrarium.ad_astra.common.data.energy.EnergyNetworkManager;
+import earth.terrarium.ad_astra.common.data.energy.EnergyNetworkVisibility;
+import earth.terrarium.ad_astra.common.data.energy.forge.EnergyNetworkManagerImpl;
 import earth.terrarium.ad_astra.common.registry.ModCommands;
 import earth.terrarium.ad_astra.common.registry.ModEntityTypes;
 import earth.terrarium.ad_astra.common.registry.ModItems;
@@ -20,12 +23,22 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryBuilder;
 
 @Mod(AdAstra.MOD_ID)
 public class AdAstraForge {
     public AdAstraForge() {
         AdAstra.init();
+
+        DeferredRegister<EnergyNetworkVisibility> visibilities = DeferredRegister.create(EnergyNetworkManager.VISIBILITY_REGISTRY_ID, AdAstra.MOD_ID);
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        visibilities.makeRegistry(() -> new RegistryBuilder<EnergyNetworkVisibility>().setDefaultKey(EnergyNetworkManager.PRIVATE_NETWORK_ID));
+        visibilities.register(EnergyNetworkManager.PRIVATE_NETWORK_ID.getPath(), () -> EnergyNetworkManager.PRIVATE_NETWORK);
+        visibilities.register(EnergyNetworkManager.PUBLIC_NETWORK_ID.getPath(), () -> EnergyNetworkManager.PUBLIC_NETWORK);
+        visibilities.register(bus);
+
         bus.addListener(AdAstraForge::onClientSetup);
         bus.addListener(AdAstraForge::commonSetup);
         bus.addListener(AdAstraForge::onAttributes);
