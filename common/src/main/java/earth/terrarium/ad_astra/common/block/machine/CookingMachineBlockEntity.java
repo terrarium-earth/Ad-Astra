@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public abstract class CookingMachineBlockEntity extends ContainerMachineBlockEntity {
     protected int cookTime;
     protected int cookTimeTotal;
+    protected boolean isLit;
 
     public CookingMachineBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState, int containerSize) {
         super(blockEntityType, blockPos, blockState, containerSize);
@@ -20,6 +21,7 @@ public abstract class CookingMachineBlockEntity extends ContainerMachineBlockEnt
         ContainerHelper.loadAllItems(tag, getItems());
         cookTime = tag.getInt("CookTime");
         cookTimeTotal = tag.getInt("CookTimeTotal");
+        isLit = tag.getBoolean("isLit");
     }
 
     @Override
@@ -28,5 +30,10 @@ public abstract class CookingMachineBlockEntity extends ContainerMachineBlockEnt
         ContainerHelper.saveAllItems(tag, getItems());
         tag.putInt("CookTime", cookTime);
         tag.putInt("CookTimeTotal", cookTimeTotal);
+        tag.putBoolean("isLit", isLit);
+    }
+
+    public boolean isLit() {
+        return isLit;
     }
 }

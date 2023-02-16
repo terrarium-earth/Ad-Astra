@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.common.block.machine;
 
-public class SolarPanelBlock extends MachineBlock {
+public class SolarPanelBlock extends AnimatedMachineBlock {
     private final int energyPerTick;
     private final int capacity;
 

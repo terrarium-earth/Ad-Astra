@@ -19,23 +19,31 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import software.bernie.geckolib.animatable.GeoBlockEntity;
+import software.bernie.geckolib.constant.DefaultAnimations;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class SolarPanelBlockEntity extends MachineBlockEntity implements EnergyAttachment.Block, ExtraDataMenuProvider {
+public class SolarPanelBlockEntity extends MachineBlockEntity implements EnergyAttachment.Block, ExtraDataMenuProvider, GeoBlockEntity {
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private WrappedBlockEnergyContainer energyContainer;
 
     private final int energyPerTick;
-    private final int capacity;
+    private static final RawAnimation IDLE = RawAnimation.begin().thenPlayAndHold("solar_panel.open");
+    private static final RawAnimation NIGHT_IDLE = RawAnimation.begin().thenPlayAndHold("solar_panel.close");
 
     public SolarPanelBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntityTypes.SOLAR_PANEL.get(), blockPos, blockState);
         energyPerTick = ((SolarPanelBlock) blockState.getBlock()).getEnergyPerTick();
-        capacity = ((SolarPanelBlock) blockState.getBlock()).getCapacity();
     }
 
     @Override
     public void serverTick() {
         if (level == null) return;
-        if (level.isDay() && (!Level.OVERWORLD.equals(level.dimension()) || !level.isRaining() && !level.isThundering()) && level.canSeeSky(getBlockPos().above())) {
+        if (canGenerate()) {
             getEnergyStorage().internalInsert(getEnergyPerTick(), false);
         }
 
@@ -70,7 +78,23 @@ public class SolarPanelBlockEntity extends MachineBlockEntity implements EnergyA
         return energyPerTick;
     }
 
-    public int getCapacity() {
-        return capacity;
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(new AnimationController<>(this, state -> {
+            if (canGenerate()) {
+                return state.setAndContinue(IDLE);
+            } else {
+                return state.setAndContinue(NIGHT_IDLE);
+            }
+        }));
+    }
+
+    public boolean canGenerate() {
+        return level.getDayTime() % 24000 < 12000 && (!Level.OVERWORLD.equals(level.dimension()) || !level.isRaining() && !level.isThundering()) && level.canSeeSky(getBlockPos().above());
+    }
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
     }
 }

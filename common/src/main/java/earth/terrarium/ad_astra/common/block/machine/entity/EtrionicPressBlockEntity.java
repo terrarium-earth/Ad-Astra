@@ -15,12 +15,19 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import software.bernie.geckolib.animatable.GeoBlockEntity;
+import software.bernie.geckolib.constant.DefaultAnimations;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class HydraulicPressBlockEntity extends CookingMachineBlockEntity implements EnergyAttachment.Block {
+public class EtrionicPressBlockEntity extends CookingMachineBlockEntity implements EnergyAttachment.Block, GeoBlockEntity {
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private WrappedBlockEnergyContainer energyContainer;
     private AbstractCookingRecipe recipe;
 
-    public HydraulicPressBlockEntity(BlockPos blockPos, BlockState blockState) {
+    public EtrionicPressBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntityTypes.HYDRAULIC_PRESS.get(), blockPos, blockState, 2);
     }
 
@@ -88,5 +95,21 @@ public class HydraulicPressBlockEntity extends CookingMachineBlockEntity impleme
             return output.isEmpty() || (ItemStack.isSameItemSameTags(output, recipe.getResultItem()) && recipe.getResultItem().getCount() + output.getCount() <= output.getMaxStackSize());
         }
         return false;
+    }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(new AnimationController<>(this, state -> {
+            if (canCraft()) {
+                return state.setAndContinue(DefaultAnimations.IDLE);
+            } else {
+                return state.setAndContinue(DefaultAnimations.REST);
+            }
+        }));
+    }
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
     }
 }

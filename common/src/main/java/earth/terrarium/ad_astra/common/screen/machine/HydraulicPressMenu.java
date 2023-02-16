@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.common.screen.machine;
 
-import earth.terrarium.ad_astra.common.block.machine.entity.HydraulicPressBlockEntity;
+import earth.terrarium.ad_astra.common.block.machine.entity.EtrionicPressBlockEntity;
 import earth.terrarium.ad_astra.common.registry.ModMenus;
 import earth.terrarium.ad_astra.common.screen.AbstractModContainerMenu;
 import net.minecraft.network.FriendlyByteBuf;
@@ -9,14 +9,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.FurnaceResultSlot;
 import net.minecraft.world.inventory.Slot;
 
-public class HydraulicPressMenu extends AbstractModContainerMenu<HydraulicPressBlockEntity> {
+public class HydraulicPressMenu extends AbstractModContainerMenu<EtrionicPressBlockEntity> {
 
-    public HydraulicPressMenu(int id, Inventory inv, HydraulicPressBlockEntity entity) {
+    public HydraulicPressMenu(int id, Inventory inv, EtrionicPressBlockEntity entity) {
         super(ModMenus.HYDRAULIC_PRESS.get(), id, inv, entity);
     }
 
     public HydraulicPressMenu(int id, Inventory inv, FriendlyByteBuf buf) {
-        this(id, inv, getTileFromBuf(inv.player.level, buf, HydraulicPressBlockEntity.class));
+        this(id, inv, getTileFromBuf(inv.player.level, buf, EtrionicPressBlockEntity.class));
     }
 
     @Override

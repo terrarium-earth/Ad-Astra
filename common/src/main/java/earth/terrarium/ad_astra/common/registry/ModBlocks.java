@@ -51,10 +51,10 @@ public class ModBlocks {
     public static final RegistryEntry<Block> CABLE_DUCT = CUBES.register("cable_duct", () -> new PipeDuctBlock(4096, PipeBlock.PipeType.CABLE, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 0.5f)));
     public static final RegistryEntry<Block> FLUID_PIPE_DUCT = CUBES.register("fluid_pipe_duct", () -> new PipeDuctBlock(FluidHooks.buckets(0.256f), PipeBlock.PipeType.FLUID_PIPE, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 0.5f)));
 
-    public static final RegistryEntry<Block> ETRIONIC_GENERATOR = MACHINES.register("etrionic_generator", () -> new AnimatedMachineBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()));
+    public static final RegistryEntry<Block> ETRIONIC_GENERATOR = MACHINES.register("steam_generator", () -> new AnimatedMachineBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()));
     public static final RegistryEntry<Block> COMBUSTION_GENERATOR = MACHINES.register("combustion_generator", () -> new MachineBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
-    public static final RegistryEntry<Block> ETRIONIC_SOLAR_PANEL = MACHINES.register("etrionic_solar_panel", () -> new SolarPanelBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK), 16, 10000));
-    public static final RegistryEntry<Block> VESNIUM_SOLAR_PANEL = MACHINES.register("vesnium_solar_panel", () -> new SolarPanelBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK), 64, 1000000));
+    public static final RegistryEntry<Block> ETRIONIC_SOLAR_PANEL = MACHINES.register("etrionic_solar_panel", () -> new SolarPanelBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion(), 16, 10000));
+    public static final RegistryEntry<Block> VESNIUM_SOLAR_PANEL = MACHINES.register("vesnium_solar_panel", () -> new SolarPanelBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion(), 64, 1000000));
     public static final RegistryEntry<Block> GEOTHERMAL_GENERATOR = MACHINES.register("geothermal_generator", () -> new MachineBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
 
     public static final RegistryEntry<Block> ETRIONIC_BLAST_FURNACE = MACHINES.register("etrionic_blast_furnace", () -> new MachineBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));

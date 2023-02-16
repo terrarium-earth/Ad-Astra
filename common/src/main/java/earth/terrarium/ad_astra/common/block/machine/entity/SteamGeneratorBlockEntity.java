@@ -10,24 +10,30 @@ import earth.terrarium.botarium.common.energy.impl.ExtractOnlyEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
 import earth.terrarium.botarium.common.energy.util.EnergyHooks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoBlockEntity;
 import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class EtrionicGeneratorBlockEntity extends CookingMachineBlockEntity implements EnergyAttachment.Block, GeoBlockEntity {
+import static earth.terrarium.ad_astra.common.block.machine.MachineBlock.LIT;
+
+public class SteamGeneratorBlockEntity extends CookingMachineBlockEntity implements EnergyAttachment.Block, GeoBlockEntity {
+
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private WrappedBlockEnergyContainer energyContainer;
     private EtrionicGeneratingRecipe recipe;
 
-    public EtrionicGeneratorBlockEntity(BlockPos blockPos, BlockState blockState) {
+    public SteamGeneratorBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntityTypes.ETRIONIC_GENERATOR.get(), blockPos, blockState, 1);
     }
 
@@ -35,6 +41,10 @@ public class EtrionicGeneratorBlockEntity extends CookingMachineBlockEntity impl
     public void serverTick() {
         if (recipe != null) {
             if (getEnergyStorage().internalInsert(recipe.energy(), true) >= recipe.energy()) {
+                if(!isLit) {
+                    isLit = true;
+                    level.setBlockAndUpdate(worldPosition, level.getBlockState(worldPosition).setValue(LIT, true));
+                }
                 getEnergyStorage().internalInsert(recipe.energy(), false);
                 cookTime++;
                 if (cookTime >= cookTimeTotal) {
@@ -43,6 +53,10 @@ public class EtrionicGeneratorBlockEntity extends CookingMachineBlockEntity impl
                 }
             }
         } else {
+            if(isLit) {
+                isLit = false;
+                level.setBlockAndUpdate(worldPosition, level.getBlockState(worldPosition).setValue(LIT, false));
+            }
             cookTime = 0;
         }
 
@@ -50,7 +64,7 @@ public class EtrionicGeneratorBlockEntity extends CookingMachineBlockEntity impl
     }
 
     @Override
-    public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
+    public AbstractContainerMenu createMenu(int i, @NotNull Inventory inventory, @NotNull Player player) {
         return new EtrionicGeneratorMenu(i, inventory, this);
     }
 
@@ -83,7 +97,13 @@ public class EtrionicGeneratorBlockEntity extends CookingMachineBlockEntity impl
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, state -> state.setAndContinue(DefaultAnimations.IDLE)));
+        controllerRegistrar.add(new AnimationController<>(this, state -> {
+            if (isLit()) {
+                return state.setAndContinue(DefaultAnimations.IDLE);
+            } else {
+                return state.setAndContinue(DefaultAnimations.REST);
+            }
+        }));
     }
 
     @Override

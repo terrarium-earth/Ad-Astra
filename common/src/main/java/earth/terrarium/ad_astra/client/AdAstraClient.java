@@ -1,10 +1,12 @@
 package earth.terrarium.ad_astra.client;
 
 import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.ad_astra.client.renderer.block.EtrionicGeneratorBlockRenderer;
+import earth.terrarium.ad_astra.client.renderer.block.generators.SolarPanelBlockRenderer;
+import earth.terrarium.ad_astra.client.renderer.block.generators.SteamGeneratorBlockRenderer;
 import earth.terrarium.ad_astra.client.renderer.block.SlidingDoorBlockEntityRenderer;
 import earth.terrarium.ad_astra.client.renderer.block.flag.FlagBlockEntityRenderer;
 import earth.terrarium.ad_astra.client.renderer.block.globe.GlobeRenderer;
+import earth.terrarium.ad_astra.client.renderer.block.machines.EtrionicPressBlockRenderer;
 import earth.terrarium.ad_astra.client.screen.machine.TestScreen;
 import earth.terrarium.ad_astra.client.util.ClientPlatformUtils;
 import earth.terrarium.ad_astra.common.item.EtrionicCapacitorItem;
@@ -65,7 +67,9 @@ public class AdAstraClient {
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.FLAG.get(), FlagBlockEntityRenderer::new);
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.GLOBE.get(), GlobeRenderer::new);
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.SLIDING_DOOR.get(), SlidingDoorBlockEntityRenderer::new);
-        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.ETRIONIC_GENERATOR.get(), context -> new EtrionicGeneratorBlockRenderer());
+        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.ETRIONIC_GENERATOR.get(), context -> new SteamGeneratorBlockRenderer());
+        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.SOLAR_PANEL.get(), context -> new SolarPanelBlockRenderer());
+        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.HYDRAULIC_PRESS.get(), context -> new EtrionicPressBlockRenderer());
     }
 
     public static void onRegisterModels(Consumer<ResourceLocation> register) {
