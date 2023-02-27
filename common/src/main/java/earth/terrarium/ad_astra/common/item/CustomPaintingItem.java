@@ -1,5 +1,6 @@
 package earth.terrarium.ad_astra.common.item;
 
+import earth.terrarium.ad_astra.common.registry.ModItems;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -11,10 +12,12 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.decoration.Painting;
 import net.minecraft.world.entity.decoration.PaintingVariant;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.HangingEntityItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.NotNull;
@@ -70,7 +73,17 @@ public class CustomPaintingItem extends HangingEntityItem {
     }
 
     public Optional<Painting> create(Level level, BlockPos pos, Direction direction) {
-        Painting painting = new Painting(level, pos, direction, BuiltInRegistries.PAINTING_VARIANT.wrapAsHolder(defaultVariant.get()));
+        Painting painting = new Painting(level, pos, direction, BuiltInRegistries.PAINTING_VARIANT.wrapAsHolder(defaultVariant.get())) {
+            @Override
+            public ItemEntity spawnAtLocation(ItemLike item) {
+                return super.spawnAtLocation(ModItems.SPACE_PAINTING.get());
+            }
+
+            @Override
+            public ItemStack getPickResult() {
+                return new ItemStack(ModItems.SPACE_PAINTING.get());
+            }
+        };
         List<Holder<PaintingVariant>> list = new ArrayList<>();
         BuiltInRegistries.PAINTING_VARIANT.getTagOrEmpty(variants).forEach(list::add);
         if (!list.isEmpty()) {

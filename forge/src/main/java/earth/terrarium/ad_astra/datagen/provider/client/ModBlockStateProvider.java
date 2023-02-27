@@ -120,7 +120,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     private ResourceLocation replaceAndCheckPlural(Block block, String replace, String replacement) {
         ResourceLocation path = new ResourceLocation(AdAstra.MOD_ID, blockTexture(block).getPath().replace(replace, replacement));
         if (!exFileHelper.exists(path, TEXTURE)) {
-            path = new ResourceLocation(AdAstra.MOD_ID, blockTexture(block).getPath().replace(replace, replacement + "s"));
+            return new ResourceLocation(AdAstra.MOD_ID, blockTexture(block).getPath().replace(replace, replacement + "s"));
         }
         return path;
     }
