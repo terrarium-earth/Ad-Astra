@@ -1,9 +1,9 @@
 package earth.terrarium.ad_astra.common.item.armor;
 
 import earth.terrarium.ad_astra.AdAstra;
-import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.ad_astra.common.config.SpaceSuitConfig;
 import earth.terrarium.ad_astra.common.item.FluidContainingItem;
+import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.ad_astra.common.registry.ModTags;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
@@ -22,7 +22,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.BiPredicate;
-import java.util.stream.StreamSupport;
 
 public class SpaceSuit extends DyeableArmorItem implements FluidContainingItem, ModArmourItem {
 
@@ -31,7 +30,15 @@ public class SpaceSuit extends DyeableArmorItem implements FluidContainingItem, 
     }
 
     public static boolean hasFullSet(LivingEntity entity) {
-        return StreamSupport.stream(entity.getArmorSlots().spliterator(), false).allMatch(s -> s.getItem() instanceof SpaceSuit);
+        int slotCount = 0;
+        int armorCount = 0;
+        for (ItemStack stack : entity.getArmorSlots()) {
+            slotCount++;
+            if (stack.getItem() instanceof SpaceSuit) {
+                armorCount++;
+            }
+        }
+        return slotCount > 0 && armorCount == slotCount;
     }
 
     /**
