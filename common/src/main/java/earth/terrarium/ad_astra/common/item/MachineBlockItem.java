@@ -3,18 +3,14 @@ package earth.terrarium.ad_astra.common.item;
 import earth.terrarium.ad_astra.common.block.machine.entity.AbstractMachineBlockEntity;
 import earth.terrarium.ad_astra.common.block.machine.entity.FluidMachineBlockEntity;
 import earth.terrarium.ad_astra.common.block.machine.entity.OxygenDistributorBlockEntity;
-import earth.terrarium.botarium.api.energy.EnergyHooks;
-import earth.terrarium.botarium.api.energy.PlatformEnergyManager;
-import earth.terrarium.botarium.api.fluid.FluidHolder;
-import earth.terrarium.botarium.api.fluid.FluidHooks;
+import earth.terrarium.botarium.api.energy.EnergyBlock;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
@@ -26,7 +22,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Optional;
 
 public class MachineBlockItem extends BlockItem {
     private final String[] tooltips;
@@ -42,16 +37,9 @@ public class MachineBlockItem extends BlockItem {
             if (level.getBlockEntity(pos) instanceof AbstractMachineBlockEntity machineBlock) {
                 CompoundTag tag = stack.getOrCreateTag();
                 ContainerHelper.loadAllItems(tag, machineBlock.getItems());
-                if (tag.contains("Energy")) {
-                    Optional<PlatformEnergyManager> platformEnergyManager = EnergyHooks.safeGetBlockEnergyManager(machineBlock, null);
-                    platformEnergyManager.ifPresent(energyManager -> {
-                        long energy = tag.getLong("Energy");
-                        while (energyManager.getStoredEnergy() < energy) {
-                            energyManager.insert(energy, false);
-                        }
-                    });
+                if (tag.contains("Energy") && machineBlock instanceof EnergyBlock energyBlock) {
+                    energyBlock.getEnergyStorage().setEnergy(Mth.clamp(tag.getLong("Energy"), 0, energyBlock.getEnergyStorage().getMaxCapacity()));
                 }
-
 
                 if (machineBlock instanceof FluidMachineBlockEntity fluidMachine) {
                     if (tag.contains("InputFluid")) {
