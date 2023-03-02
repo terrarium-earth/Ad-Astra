@@ -112,16 +112,19 @@ public class PipeBlock extends BasicEntityBlock implements SimpleWaterloggedBloc
         if (!level.isClientSide) {
             BlockPos offset = pos.relative(direction);
             BlockEntity entity = level.getBlockEntity(offset);
+            BlockState blockState = level.getBlockState(pos);
+            Optional<PipeState> value = blockState.getOptionalValue(DIRECTIONS.get(direction));
+            if (value.isEmpty()) return;
             if (entity != null && (checkCompat(level, offset) || (type == PipeType.FLUID_PIPE ? FluidHooks.safeGetBlockFluidManager(entity, direction).orElse(null) : EnergyHooks.safeGetBlockEnergyManager(entity, direction).orElse(null)) != null)) {
-                if (level.getBlockState(pos).getValue(DIRECTIONS.get(direction)) == PipeState.NONE) {
-                    level.setBlock(pos, level.getBlockState(pos).setValue(DIRECTIONS.get(direction), PipeState.NORMAL), Block.UPDATE_ALL);
+                if (value.get() == PipeState.NONE) {
+                    level.setBlock(pos, blockState.setValue(DIRECTIONS.get(direction), PipeState.NORMAL), Block.UPDATE_ALL);
                 }
                 if (level.getBlockState(offset).getBlock().equals(this)) {
                     level.setBlock(offset, level.getBlockState(offset).setValue(DIRECTIONS.get(direction.getOpposite()), PipeState.NORMAL), Block.UPDATE_ALL);
                 }
             } else {
-                if (level.getBlockState(pos).getValue(DIRECTIONS.get(direction)) == PipeState.NORMAL) {
-                    level.setBlock(pos, level.getBlockState(pos).setValue(DIRECTIONS.get(direction), PipeState.NONE), Block.UPDATE_ALL);
+                if (value.get() == PipeState.NORMAL) {
+                    level.setBlock(pos, blockState.setValue(DIRECTIONS.get(direction), PipeState.NONE), Block.UPDATE_ALL);
                 }
             }
         }
