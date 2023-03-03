@@ -8,6 +8,8 @@ import earth.terrarium.ad_astra.common.util.OxygenUtils;
 import earth.terrarium.ad_astra.common.config.AdAstraConfig;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 
 public class EntityOxygenSystem {
@@ -30,7 +32,7 @@ public class EntityOxygenSystem {
         boolean entityHasOxygen = OxygenUtils.entityHasOxygen(level, entity);
         boolean hasOxygenatedSpaceSuit = SpaceSuit.hasOxygenatedSpaceSuit(entity) && SpaceSuit.hasFullSet(entity);
 
-        if (entityHasOxygen && hasOxygenatedSpaceSuit && entity.isUnderWater() && !entity.canBreatheUnderwater()) {
+        if (entityHasOxygen && hasOxygenatedSpaceSuit && entity.isUnderWater() && !entity.canBreatheUnderwater() && !entity.hasEffect(MobEffects.WATER_BREATHING)) {
             consumeOxygen(entity);
             return;
         }

@@ -4,4 +4,6 @@
 - fixed config being loaded too late causing issues like the hammer durability not being applied on Forge (#207)
 - fixed crash after using blink+decoy spell in space (Ars Nouveau) (#208)
 - fixed solar panels crashing server (#210)
+- fixed oxygen still being consumed underwater with water breathing (#217)
 - removed fabric loader requirement which should fix some quilt versions
+- increased space suit durability
