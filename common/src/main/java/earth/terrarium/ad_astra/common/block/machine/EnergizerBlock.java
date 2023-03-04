@@ -47,11 +47,6 @@ public class EnergizerBlock extends AbstractMachineBlock {
     }
 
     @Override
-    public EnergizerBlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new EnergizerBlockEntity(pos, state);
-    }
-
-    @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (!level.isClientSide) {
             if (level.getBlockEntity(pos) instanceof EnergizerBlockEntity entity) {

@@ -12,8 +12,7 @@ import earth.terrarium.ad_astra.client.renderer.block.EnergizerBlockEntityRender
 import earth.terrarium.ad_astra.client.renderer.block.SlidingDoorBlockEntityRenderer;
 import earth.terrarium.ad_astra.client.renderer.block.flag.FlagBlockEntityRenderer;
 import earth.terrarium.ad_astra.client.renderer.block.flag.FlagItemRenderer;
-import earth.terrarium.ad_astra.client.renderer.block.globe.GlobeBlockEntityRenderer;
-import earth.terrarium.ad_astra.client.renderer.block.globe.GlobeItemRenderer;
+import earth.terrarium.ad_astra.client.renderer.block.globe.GlobeRenderer;
 import earth.terrarium.ad_astra.client.renderer.entity.vehicle.rocket.tier_1.RocketItemRendererTier1;
 import earth.terrarium.ad_astra.client.renderer.entity.vehicle.rocket.tier_2.RocketItemRendererTier2;
 import earth.terrarium.ad_astra.client.renderer.entity.vehicle.rocket.tier_3.RocketItemRendererTier3;
@@ -68,7 +67,7 @@ public class AdAstraClient {
         ClientModEntities.registerEntityRenderers();
 
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.FLAG.get(), FlagBlockEntityRenderer::new);
-        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.GLOBE.get(), GlobeBlockEntityRenderer::new);
+        ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.GLOBE.get(), GlobeRenderer::new);
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.ENERGIZER.get(), EnergizerBlockEntityRenderer::new);
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.SLIDING_DOOR.get(), SlidingDoorBlockEntityRenderer::new);
         ClientHooks.registerBlockEntityRenderers(ModBlockEntityTypes.SIGN.get(), SignRenderer::new);
@@ -90,6 +89,7 @@ public class AdAstraClient {
     }
 
     public static void onRegisterBlockRenderTypes(BiConsumer<RenderType, List<Block>> register) {
+        ClientHooks.setRenderLayer(ModBlocks.VENT.get(), RenderType.cutout());
         ModBlocks.GLOBES.stream().forEach(block -> register.accept(RenderType.cutout(), List.of(block.get())));
         register.accept(RenderType.cutout(), List.of(
                 ModBlocks.WATER_PUMP.get(), ModBlocks.ENERGIZER.get(), ModBlocks.STEEL_DOOR.get(), ModBlocks.STEEL_TRAPDOOR.get(), ModBlocks.GLACIAN_DOOR.get(),
@@ -110,7 +110,7 @@ public class AdAstraClient {
         register.accept(ModBlocks.AERONOS_CHEST.get(), new ChestItemRenderer(ModBlocks.AERONOS_CHEST.get()));
         register.accept(ModBlocks.STROPHAR_CHEST.get(), new ChestItemRenderer(ModBlocks.STROPHAR_CHEST.get()));
 
-        ModItems.GLOBES.stream().forEach(item -> register.accept(item.get(), new GlobeItemRenderer()));
+        ModItems.GLOBES.stream().forEach(item -> register.accept(item.get(), new GlobeRenderer.ItemRenderer()));
         ModItems.FLAGS.stream().forEach(item -> register.accept(item.get(), new FlagItemRenderer()));
     }
 
@@ -139,6 +139,7 @@ public class AdAstraClient {
     }
 
     public static void onRegisterModels(Consumer<ResourceLocation> register) {
+        ModBlocks.GLOBES.stream().forEach(b -> register.accept(new ResourceLocation(AdAstra.MOD_ID, "block/" + b.getId().getPath() + "_cube")));
         ModBlocks.FLAGS.stream().forEach(block -> register.accept(new ResourceLocation(AdAstra.MOD_ID, "block/flag/" + block.getId().getPath())));
         ModBlocks.SLIDING_DOORS.stream().forEach(block -> register.accept(new ResourceLocation(AdAstra.MOD_ID, "block/door/" + block.getId().getPath())));
         ModBlocks.SLIDING_DOORS.stream().forEach(block -> register.accept(new ResourceLocation(AdAstra.MOD_ID, "block/door/" + block.getId().getPath() + "_flipped")));

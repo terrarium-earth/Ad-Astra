@@ -5,7 +5,7 @@
       "tag": "ad_astra_platform:steel_ingots"
     },
     "G": {
-      "item": "minecraft:orange_stained_glass_pane"
+      "item": "minecraft:glass_pane"
     }
   },
   "pattern": [

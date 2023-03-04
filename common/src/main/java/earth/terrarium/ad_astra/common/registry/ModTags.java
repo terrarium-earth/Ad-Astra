@@ -52,6 +52,9 @@ public class ModTags {
 
     public static final TagKey<Item> WRENCHES = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(getCommonNamespace() + ":wrenches"));
 
+    public static final TagKey<Block> PASSES_FLOOD_FILL = TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(AdAstra.MOD_ID, "passes_flood_fill"));
+    public static final TagKey<Block> BLOCKS_FLOOD_FILL = TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(AdAstra.MOD_ID, "blocks_flood_fill"));
+
     private static String getCommonNamespace() {
         return ArchitecturyTarget.getCurrentTarget().equals("fabric") ? "c" : "forge";
     }

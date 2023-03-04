@@ -3,6 +3,7 @@ package earth.terrarium.ad_astra.common.block.pipe;
 import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.botarium.api.energy.EnergyHooks;
 import earth.terrarium.botarium.api.energy.PlatformEnergyManager;
+import earth.terrarium.botarium.api.fluid.PlatformFluidHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
@@ -38,8 +39,8 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<Pl
         if (state.isAir() || state2.isAir()) return;
 
 
-        PlatformEnergyManager input = getSource().storage();
-        PlatformEnergyManager output = consumer;
+        PlatformEnergyManager input = null;
+        PlatformEnergyManager output = null;
 
         if (!(state.getBlock() instanceof PipeDuctBlock) && !(state2.getBlock() instanceof PipeDuctBlock)) {
             PipeState pipeState = state.getValue(PipeBlock.DIRECTIONS.get(getSource().direction()));
@@ -52,10 +53,14 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<Pl
 
             if (pipeState2 == PipeState.EXTRACT || pipeState == PipeState.INSERT) {
                 input = consumer;
-                output = getSource().storage();
+                output = source.storage();
+            } else {
+                input = source.storage();
+                output = consumer;
             }
         }
 
+        if (input == null || output == null) return;
         EnergyHooks.moveEnergy(input, output, Math.max(0, getTransferAmount() / getConsumers().size()));
     }
 

@@ -9,7 +9,7 @@ import earth.terrarium.ad_astra.common.screen.menu.OxygenDistributorMenu;
 import earth.terrarium.ad_astra.common.util.FluidUtils;
 import earth.terrarium.ad_astra.common.util.ModUtils;
 import earth.terrarium.ad_astra.common.util.OxygenUtils;
-import earth.terrarium.ad_astra.common.util.algorithm.OxygenFillerAlgorithm;
+import earth.terrarium.ad_astra.common.util.algorithm.FloodFiller3D;
 import earth.terrarium.botarium.api.energy.EnergyBlock;
 import earth.terrarium.botarium.api.energy.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
@@ -198,8 +198,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
             }
         }
 
-        OxygenFillerAlgorithm floodFiller = new OxygenFillerAlgorithm(this.level, this.getMaxBlockChecks());
-        Set<BlockPos> positions = floodFiller.runAlgorithm(worldPosition.above());
+        Set<BlockPos> positions = FloodFiller3D.run(level, worldPosition.above());
 
         if (this.canDistribute(positions.size())) {
             OxygenUtils.setEntry(this.level, worldPosition, positions);

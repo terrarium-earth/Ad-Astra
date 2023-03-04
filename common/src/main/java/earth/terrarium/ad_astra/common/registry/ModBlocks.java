@@ -46,13 +46,13 @@ public class ModBlocks {
 
     public static final RegistryEntry<Block> LAUNCH_PAD = BLOCKS.register("launch_pad", () -> new LaunchPad(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER)));
 
-    public static final RegistryEntry<Block> STEEL_CABLE = BLOCKS.register("steel_cable", () -> new PipeBlock(1012, 0.344, PipeBlock.PipeType.CABLE, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 0.5f)));
+    public static final RegistryEntry<Block> STEEL_CABLE = BLOCKS.register("steel_cable", () -> new PipeBlock(1024, 0.344, PipeBlock.PipeType.CABLE, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 0.5f)));
     public static final RegistryEntry<Block> DESH_CABLE = BLOCKS.register("desh_cable", () -> new PipeBlock(4096, 0.344, PipeBlock.PipeType.CABLE, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 0.5f)));
     public static final RegistryEntry<Block> DESH_FLUID_PIPE = BLOCKS.register("desh_fluid_pipe", () -> new PipeBlock(FluidHooks.buckets(0.128f), 0.185, PipeBlock.PipeType.FLUID_PIPE, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 0.5f)));
     public static final RegistryEntry<Block> OSTRUM_FLUID_PIPE = BLOCKS.register("ostrum_fluid_pipe", () -> new PipeBlock(FluidHooks.buckets(0.256f), 0.185, PipeBlock.PipeType.FLUID_PIPE, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 0.5f)));
 
-    public static final RegistryEntry<Block> CABLE_DUCT = BLOCKS.register("cable_duct", () -> new PipeDuctBlock(1012, PipeBlock.PipeType.CABLE, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 0.5f)));
-    public static final RegistryEntry<Block> FLUID_PIPE_DUCT = BLOCKS.register("fluid_pipe_duct", () -> new PipeDuctBlock(FluidHooks.buckets(0.256f), PipeBlock.PipeType.FLUID_PIPE, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 0.5f)));
+    public static final RegistryEntry<Block> CABLE_DUCT = BLOCKS.register("cable_duct", () -> new PipeDuctBlock(1024, PipeBlock.PipeType.CABLE, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 0.5f)));
+    public static final RegistryEntry<Block> FLUID_PIPE_DUCT = BLOCKS.register("fluid_pipe_duct", () -> new PipeDuctBlock(FluidHooks.buckets(0.128f), PipeBlock.PipeType.FLUID_PIPE, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(0.5f, 0.5f)));
 
     public static final RegistryEntry<Block> FUEL_REFINERY = BLOCKS.register("fuel_refinery", () -> new FuelRefineryBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
     public static final RegistryEntry<Block> COMPRESSOR = BLOCKS.register("compressor", () -> new CompressorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
@@ -100,6 +100,7 @@ public class ModBlocks {
     public static final RegistryEntry<Block> CHEESE_BLOCK = BLOCKS.register("cheese_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.SPONGE).sound(SoundType.SLIME_BLOCK)));
     public static final RegistryEntry<Block> SKY_STONE = BLOCKS.register("sky_stone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
+    public static final RegistryEntry<Block> VENT = BLOCKS.register("vent", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).noOcclusion()));
     public static final RegistryEntry<Block> IRON_PLATING = BLOCKS.register("iron_plating", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).color(MaterialColor.METAL)));
     public static final RegistryEntry<Block> IRON_PLATING_STAIRS = BLOCKS.register("iron_plating_stairs", () -> new StairBlock(IRON_PLATING.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).color(MaterialColor.METAL)));
     public static final RegistryEntry<Block> IRON_PLATING_SLAB = BLOCKS.register("iron_plating_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).color(MaterialColor.METAL)));

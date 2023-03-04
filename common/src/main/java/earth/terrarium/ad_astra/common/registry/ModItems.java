@@ -150,6 +150,7 @@ public class ModItems {
     public static final RegistryEntry<Item> CHEESE_BLOCK = ITEMS.register("cheese_block", () -> new BlockItem(ModBlocks.CHEESE_BLOCK.get(), new Item.Properties().tab(ITEM_GROUP)));
     public static final RegistryEntry<Item> SKY_STONE = ITEMS.register("sky_stone", () -> new BlockItem(ModBlocks.SKY_STONE.get(), new Item.Properties().tab(ITEM_GROUP)));
 
+    public static final RegistryEntry<Item> VENT = ITEMS.register("vent", () -> new BlockItem(ModBlocks.VENT.get(), new Item.Properties().tab(ITEM_GROUP)));
     public static final RegistryEntry<Item> IRON_PLATING = ITEMS.register("iron_plating", () -> new BlockItem(ModBlocks.IRON_PLATING.get(), new Item.Properties().tab(ITEM_GROUP)));
     public static final RegistryEntry<Item> IRON_PLATING_STAIRS = ITEMS.register("iron_plating_stairs", () -> new BlockItem(ModBlocks.IRON_PLATING_STAIRS.get(), new Item.Properties().tab(ITEM_GROUP)));
     public static final RegistryEntry<Item> IRON_PLATING_SLAB = ITEMS.register("iron_plating_slab", () -> new BlockItem(ModBlocks.IRON_PLATING_SLAB.get(), new Item.Properties().tab(ITEM_GROUP)));

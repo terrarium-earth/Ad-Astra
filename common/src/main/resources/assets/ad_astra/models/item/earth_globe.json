@@ -1,3 +1,7 @@
 {
-  "parent": "ad_astra:template/template_globe"
+  "parent": "ad_astra:item/globe",
+  "textures": {
+    "particle": "ad_astra:block/globe/earth_globe",
+    "texture": "ad_astra:block/globe/earth_globe"
+  }
 }

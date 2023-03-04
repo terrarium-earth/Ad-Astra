@@ -34,7 +34,7 @@
     {
       "type": "patchouli:text",
       "title": "Ventilation",
-      "text": "Inside your oxygenated structure, you should provide proper ventilation to ensure that oxygen does not get blocked when a door is closed. To do this, you can create a one-block gap in between walls or create a space that leads to a distributor."
+      "text": "Inside your oxygenated structure, you should provide proper ventilation to ensure that oxygen does not get blocked when a door is closed. To do this, you can create a one-block gap in between walls or use a vent block to allow oxygen flow."
     }
   ]
 }

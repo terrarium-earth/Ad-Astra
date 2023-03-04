@@ -22,7 +22,7 @@
       "type": "patchouli:spotlight",
       "title": "Cryo Fuel",
       "item": "ad_astra:cryo_fuel_bucket",
-      "text": "In addition to being an excellent fuel, cryo fuel has some other features. When placed, it will damage anything inside, similar to lava. It can be placed in space and the nether without evaporating. Lastly, it freezes water, allowing for an infinite ice source."
+      "text": "In addition to being an excellent fuel, cryo fuel has some other features. When placed, it will damage anything inside, similar to lava. It also freezes water, allowing for an infinite ice source."
     }
   ]
 }

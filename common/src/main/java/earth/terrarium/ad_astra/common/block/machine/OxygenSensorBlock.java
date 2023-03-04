@@ -1,6 +1,5 @@
 package earth.terrarium.ad_astra.common.block.machine;
 
-import earth.terrarium.ad_astra.common.block.machine.entity.OxygenSensorBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -45,10 +44,5 @@ public class OxygenSensorBlock extends AbstractMachineBlock {
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         return InteractionResult.PASS;
-    }
-
-    @Override
-    public OxygenSensorBlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new OxygenSensorBlockEntity(pos, state);
     }
 }

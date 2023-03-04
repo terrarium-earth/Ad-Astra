@@ -25,7 +25,7 @@ public class EntityAcidRainSystem {
         }
 
         // Let the entity survive in a fully sealed vehicle
-        if (entity.getVehicle() instanceof Vehicle vehicle && !vehicle.fullyConcealsRider()) {
+        if (entity.getVehicle() instanceof Vehicle vehicle && vehicle.fullyConcealsRider()) {
             return;
         }
 
