@@ -1,6 +1,6 @@
 {
-  "name": "Astrodux",
-  "landing_text": "Welcome to your guide to the depths of Space.$(br2)Ad Astra is in development. Some features in the guide may be missing or incomplete.",
+  "name": "text.patchouli.ad_astra.astrodux.name",
+  "landing_text": "text.patchouli.ad_astra.astrodux.text",
   "version": 1,
   "book_texture": "patchouli:textures/gui/book_blue.png",
   "model": "ad_astra:astrodux",

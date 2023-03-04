@@ -1,0 +1,24 @@
+{
+  "name": "Рідинні труби",
+  "icon": "ad_astra:ostrum_fluid_pipe",
+  "sortnum": 1,
+  "category": "ad_astra:surviving_mars",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Рідинні труби",
+      "item": "ad_astra:ostrum_fluid_pipe",
+      "text": "Це труби схожі на кабелі, але слугують для транпортування рідини замість транпортування енергії. Щоб використовувати їх, створіть труби та гайковий ключ. Потім гайковим ключем клацніть ПКМ на одній із труб, щоб перейти до режимів труби: «пусто», «типова», «впускати» та «висмоктувати»."
+    },
+    {
+      "type": "patchouli:crafting",
+      "text": "Труби в режимі «впускати» будуть отримувати рідину з мережі, а труби з набором «висмоктувати» будуть закачувати рідину в мережу.",
+      "recipe": "ad_astra:recipes/desh_fluid_pipe"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "ad_astra:recipes/ostrum_fluid_pipe",
+      "recipe2": "ad_astra:recipes/wrench"
+    }
+  ]
+}
