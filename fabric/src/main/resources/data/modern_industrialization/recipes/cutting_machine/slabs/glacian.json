@@ -1,0 +1,31 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "modern_industrialization"
+      ]
+    }
+  ],
+  "type": "modern_industrialization:cutting_machine",
+  "duration": 100,
+  "eu": 2,
+  "fluid_inputs": [
+    {
+      "amount": 1,
+      "fluid": "modern_industrialization:lubricant"
+    }
+  ],
+  "item_inputs": [
+    {
+      "amount": 1,
+      "item": "ad_astra:glacian_planks"
+    }
+  ],
+  "item_outputs": [
+    {
+      "amount": 2,
+      "item": "ad_astra:glacian_slab"
+    }
+  ]
+}
