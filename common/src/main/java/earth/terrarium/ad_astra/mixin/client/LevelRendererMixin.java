@@ -48,7 +48,7 @@ public abstract class LevelRendererMixin {
 
     // Cancel the portal sound when the player falls out of orbit.
     @Inject(method = "levelEvent", at = @At("HEAD"), cancellable = true)
-    public void adastra_processWorldEvent(int eventId, BlockPos pos, int data, CallbackInfo ci) {
+    public void ad_astra$processWorldEvent(int eventId, BlockPos pos, int data, CallbackInfo ci) {
         if (eventId == LevelEvent.SOUND_PORTAL_TRAVEL) {
             Minecraft minecraft = Minecraft.getInstance();
             LocalPlayer player = minecraft.player;
@@ -61,7 +61,7 @@ public abstract class LevelRendererMixin {
 
     // Venus rain.
     @Inject(method = "tickRain", at = @At("HEAD"))
-    public void adastra_tickRainSplashing(Camera camera, CallbackInfo info) {
+    public void ad_astra$tickRainSplashing(Camera camera, CallbackInfo info) {
         if (this.minecraft.level != null && ModUtils.isPlanet(this.minecraft.level)) {
             float f = this.minecraft.level.getRainLevel(1.0F) / (Minecraft.useFancyGraphics() ? 1.0F : 2.0F);
             if (!(f <= 0.0F)) {

@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class FireBlockMixin {
 
     @Inject(method = "onPlace", at = @At(value = "HEAD"))
-    public void adastra_onBlockAdded(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean notify, CallbackInfo ci) {
+    public void ad_astra$onBlockAdded(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean notify, CallbackInfo ci) {
         if (!AdAstraConfig.doOxygen) {
             return;
         }

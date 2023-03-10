@@ -24,12 +24,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class BlockItemMixin {
 
     @Unique
-    private static void adastra_playFireExtinguish(BlockPos pos, Level level) {
+    private static void ad_astra$playFireExtinguish(BlockPos pos, Level level) {
         level.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 1, 1);
     }
 
     @Inject(method = "place*", at = @At(value = "TAIL"))
-    public void adastra_place(BlockPlaceContext context, CallbackInfoReturnable<InteractionResult> cir) {
+    public void ad_astra$place(BlockPlaceContext context, CallbackInfoReturnable<InteractionResult> cir) {
         if (!AdAstraConfig.doOxygen) {
             return;
         }
@@ -76,7 +76,7 @@ public abstract class BlockItemMixin {
                 }
 
                 if (playSound) {
-                    adastra_playFireExtinguish(pos, level);
+                    ad_astra$playFireExtinguish(pos, level);
                 }
             }
         }

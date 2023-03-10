@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class PlayerMixin {
 
     @Inject(method = "hurt", at = @At("HEAD"), cancellable = true)
-    public void adastra_damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+    public void ad_astra$damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         if (SpaceSuitConfig.netheriteSpaceSuitHasFireResistance) {
             Player player = ((Player) (Object) this);
             if (source.isFire() || source.equals(DamageSource.HOT_FLOOR)) {
@@ -31,7 +31,7 @@ public abstract class PlayerMixin {
     }
 
     @Inject(method = "tick", at = @At("TAIL"))
-    public void adastra_tick(CallbackInfo ci) {
+    public void ad_astra$tick(CallbackInfo ci) {
         if (SpaceSuitConfig.enableJetSuitFlight) {
             Player player = ((Player) (Object) this);
             if (!player.isPassenger()) {

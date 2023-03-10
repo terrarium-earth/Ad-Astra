@@ -19,7 +19,7 @@ public abstract class CommonGravityEntityMixin {
     private static final double CONSTANT = -0.04;
 
     @Inject(method = "tick", at = @At("TAIL"))
-    public void adastra_tick(CallbackInfo ci) {
+    public void ad_astra$tick(CallbackInfo ci) {
         Entity entity = (Entity) (Object) this;
         if (!entity.isNoGravity()) {
             Vec3 velocity = entity.getDeltaMovement();
