@@ -12,11 +12,13 @@ import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
+import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
@@ -110,11 +112,11 @@ public class GuiUtil {
         RenderSystem.setShaderTexture(0, InventoryMenu.BLOCK_ATLAS);
 
         int calcHeight =  (int)((FLUID_TANK_HEIGHT + 1) * ratio);
-        ClosingScissorBox scissor = RenderUtils.createScissorBox(Minecraft.getInstance(), poseStack, x, y + FLUID_TANK_HEIGHT - calcHeight, FLUID_TANK_WIDTH, calcHeight);
-        for (int i = 1; i < 4; i++) {
-            GuiComponent.blit(poseStack, x + 1, FLUID_TANK_HEIGHT + y - (spriteHeight * i), 0, FLUID_TANK_WIDTH - 2, spriteHeight, sprite);
+        try (var ignored = RenderUtils.createScissorBox(Minecraft.getInstance(), poseStack, x, y + FLUID_TANK_HEIGHT - calcHeight, FLUID_TANK_WIDTH, calcHeight)) {
+            for (int i = 1; i < 4; i++) {
+                GuiComponent.blit(poseStack, x + 1, FLUID_TANK_HEIGHT + y - (spriteHeight * i), 0, FLUID_TANK_WIDTH - 2, spriteHeight, sprite);
+            }
         }
-        scissor.close();
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
     }
 
@@ -163,7 +165,7 @@ public class GuiUtil {
         if (fluid.equals(Fluids.EMPTY)) {
             return Component.translatable("item.ad_astra.empty_tank").setStyle(Style.EMPTY.withColor(ChatFormatting.AQUA));
         }
-        return Component.translatable(fluid.defaultFluidState().createLegacyBlock().getBlock().getDescriptionId()).setStyle(Style.EMPTY.withColor(ChatFormatting.AQUA));
+        return Component.translatable(Util.makeDescriptionId("fluid_type", Registry.FLUID.getKey(fluid))).setStyle(Style.EMPTY.withColor(ChatFormatting.AQUA));
     }
 
     public static void drawEnergyTooltip(Screen screen, PoseStack poseStack, long energy, long energyCapacity, int mouseX, int mouseY) {
