@@ -55,8 +55,6 @@ dependencies {
     modApi "com.teamresourceful.resourcefullib:resourcefullib-forge-$rootProject.minecraft_version:$rootProject.resourcefullib_version"
     modApi "com.teamresourceful.resourcefulconfig:resourcefulconfig-forge-$rootProject.minecraft_version:$rootProject.resourcefulconfig_version"
     modApi "earth.terrarium:botarium-forge-$rootProject.minecraft_version:$rootProject.botarium_version"
-
-    modRuntimeOnly(files("/Users/alexnijjar/Desktop/ImmersiveEngineering-1.19.2-9.2.0-162.jar"))
 }
 
 processResources {
