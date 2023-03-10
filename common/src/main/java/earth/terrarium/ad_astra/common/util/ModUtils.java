@@ -316,4 +316,9 @@ public class ModUtils {
     public static <T extends Enum<T>> Codec<T> createEnumCodec(Class<T> enumClass) {
         return Codec.STRING.xmap(s -> Enum.valueOf(enumClass, s.toUpperCase(Locale.ROOT)), Enum::name);
     }
+
+    // syncs movement between server and client
+    public static void sendUpdatePacket(ServerPlayer player) {
+        player.hurtMarked = true;
+    }
 }

@@ -84,10 +84,10 @@ public class PlayerRendererMixin {
                 float b = (float) (decimal & 0xFF) / 255.0f;
 
                 if (JetSuit.hasFullSet(player)) {
-                    JetSuit.spawnParticles(player.level, player, model);
+                    ((JetSuit) stack.getItem()).spawnParticles(player.level, player, model);
                 }
 
-                VertexConsumer vertex = SpaceSuitModel.getVertex(RenderType.entityTranslucent(model.getTextureLocation()), player.getItemBySlot(EquipmentSlot.CHEST).isEnchanted());
+                VertexConsumer vertex = SpaceSuitModel.getVertex(RenderType.entityTranslucentEmissive(model.getTextureLocation()), stack.isEnchanted());
                 if (right) {
                     model.rightArm.render(poseStack, vertex, packedLight, OverlayTexture.NO_OVERLAY, r, g, b, 1.0f);
                 } else {
