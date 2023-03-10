@@ -3,8 +3,8 @@ package earth.terrarium.ad_astra.client.screen;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Matrix4f;
-import com.teamresourceful.resourcefullib.client.scissor.ClosingScissorBox;
 import com.teamresourceful.resourcefullib.client.utils.RenderUtils;
+import dev.architectury.injectables.annotations.ExpectPlatform;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.botarium.api.fluid.ClientFluidHooks;
 import earth.terrarium.botarium.api.fluid.FluidHolder;
@@ -12,20 +12,18 @@ import earth.terrarium.botarium.api.fluid.FluidHooks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
-import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.Fluids;
+import org.apache.commons.lang3.NotImplementedException;
 
 import java.awt.*;
 
@@ -160,14 +158,6 @@ public class GuiUtil {
         GuiComponent.blit(poseStack, x, y, 0, 0, ratioWidth, height, width, height);
     }
 
-
-    public static Component getFluidTranslation(Fluid fluid) {
-        if (fluid.equals(Fluids.EMPTY)) {
-            return Component.translatable("item.ad_astra.empty_tank").setStyle(Style.EMPTY.withColor(ChatFormatting.AQUA));
-        }
-        return Component.translatable(Util.makeDescriptionId("fluid_type", Registry.FLUID.getKey(fluid))).setStyle(Style.EMPTY.withColor(ChatFormatting.AQUA));
-    }
-
     public static void drawEnergyTooltip(Screen screen, PoseStack poseStack, long energy, long energyCapacity, int mouseX, int mouseY) {
         screen.renderTooltip(poseStack, Component.translatable("gauge_text.ad_astra.storage", Mth.clamp(energy, 0, energyCapacity), energyCapacity).setStyle(Style.EMPTY.withColor(ChatFormatting.GOLD)), mouseX, mouseY);
     }
@@ -200,5 +190,10 @@ public class GuiUtil {
             bufferBuilder.vertex(matrix, x0, y0, z).uv(u0, v0).endVertex();
             BufferUploader.drawWithShader(bufferBuilder.end());
         }
+    }
+
+    @ExpectPlatform
+    public static Component getFluidTranslation(Fluid fluid) {
+        throw new NotImplementedException();
     }
 }
