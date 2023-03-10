@@ -1,6 +1,8 @@
 package earth.terrarium.ad_astra.mixin;
 
 import earth.terrarium.ad_astra.common.config.SpaceSuitConfig;
+import earth.terrarium.ad_astra.common.config.VehiclesConfig;
+import earth.terrarium.ad_astra.common.entity.vehicle.Rocket;
 import earth.terrarium.ad_astra.common.item.armor.JetSuit;
 import earth.terrarium.ad_astra.common.item.armor.NetheriteSpaceSuit;
 import earth.terrarium.ad_astra.common.util.ModKeyBindings;
@@ -19,14 +21,17 @@ public abstract class PlayerMixin {
 
     @Inject(method = "hurt", at = @At("HEAD"), cancellable = true)
     public void ad_astra$damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+        Player player = ((Player) (Object) this);
         if (SpaceSuitConfig.netheriteSpaceSuitHasFireResistance) {
-            Player player = ((Player) (Object) this);
             if (source.isFire() || source.equals(DamageSource.HOT_FLOOR)) {
                 if (NetheriteSpaceSuit.hasFullSet(player)) {
                     player.setRemainingFireTicks(0);
                     cir.setReturnValue(false);
                 }
             }
+        }
+        if (!VehiclesConfig.RocketConfig.takeDamageInRocket && player.getVehicle() instanceof Rocket) {
+            cir.setReturnValue(false);
         }
     }
 

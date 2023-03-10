@@ -675,6 +675,7 @@
   "text.resourcefulconfig.ad_astra.option.rocket.entitiesBurnUnderRocket.tooltip": "Should entities that are under the flames of the rocket burn?",
   "text.resourcefulconfig.ad_astra.option.rocket.fuelLaunchCost": "Fuel Launch Cost",
   "text.resourcefulconfig.ad_astra.option.rocket.maxSpeed": "Max Speed",
+  "text.resourcefulconfig.ad_astra.option.rocket.takeDamageInRocket": "Take Damage In Rocket",
   "text.resourcefulconfig.ad_astra.option.rocket.tankSize": "Tank Size",
   "text.resourcefulconfig.ad_astra.option.rover": "Rover",
   "text.resourcefulconfig.ad_astra.option.rover.deceleration": "Deceleration",

@@ -98,6 +98,13 @@ public final class VehiclesConfig {
                 translation = "text.resourcefulconfig.ad_astra.option.rocket.efficientFuelLaunchCost"
         )
         public static long efficientFuelLaunchCost = FluidHooks.buckets(1);
+
+        @ConfigEntry(
+                id = "takeDamageInRocket",
+                type = EntryType.BOOLEAN,
+                translation = "text.resourcefulconfig.ad_astra.option.rocket.takeDamageInRocket"
+        )
+        public static boolean takeDamageInRocket = true;
     }
 
     @Category(id = "rover", translation = "text.resourcefulconfig.ad_astra.option.rover")

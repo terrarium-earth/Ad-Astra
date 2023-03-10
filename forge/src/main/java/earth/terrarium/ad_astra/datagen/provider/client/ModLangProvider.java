@@ -281,6 +281,7 @@ public class ModLangProvider extends LanguageProvider {
         add("text.resourcefulconfig.ad_astra.option.rocket.countDownTicks", "Count Down Ticks");
         add("text.resourcefulconfig.ad_astra.option.rocket.countDownTicks.tooltip", "200 ticks = 10 seconds.");
         add("text.resourcefulconfig.ad_astra.option.rocket.efficientFuelLaunchCost", "Efficient Fuel Launch Cost");
+        add("text.resourcefulconfig.ad_astra.option.rocket.takeDamageInRocket", "Take Damage In Rocket");
         add("text.resourcefulconfig.ad_astra.option.rocket.entitiesBurnUnderRocket", "Entities Burn Under Rocket");
         add("text.resourcefulconfig.ad_astra.option.rocket.entitiesBurnUnderRocket.tooltip", "Should entities that are under the flames of the rocket burn?");
         add("text.resourcefulconfig.ad_astra.option.rocket.fuelLaunchCost", "Fuel Launch Cost");
