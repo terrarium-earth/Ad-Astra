@@ -1,0 +1,18 @@
+{
+	"conditions": [
+		{
+			"type": "forge:mod_loaded",
+			"modid": "mekanism"
+		}
+	],
+	"type": "mekanism:sawing",
+	"input": {
+		"ingredient": {
+			"item": "ad_astra:strophar_trapdoor"
+		}
+	},
+	"mainOutput": {
+		"count": 3,
+		"item": "ad_astra:strophar_planks"
+	}
+}
