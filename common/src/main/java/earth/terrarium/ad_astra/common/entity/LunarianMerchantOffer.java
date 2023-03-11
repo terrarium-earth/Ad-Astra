@@ -3,9 +3,13 @@ package earth.terrarium.ad_astra.common.entity;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import earth.terrarium.ad_astra.common.config.AdAstraConfig;
 import earth.terrarium.ad_astra.common.item.OxygenTankItem;
+import earth.terrarium.ad_astra.common.recipe.lunarian.LunarianTradeRecipe;
 import earth.terrarium.ad_astra.common.registry.ModItems;
+import earth.terrarium.ad_astra.common.registry.ModRecipeTypes;
+import earth.terrarium.ad_astra.common.util.ItemStackUtils;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.Util;
@@ -24,6 +28,7 @@ import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
@@ -106,6 +111,21 @@ public class LunarianMerchantOffer {
 
             for (var entry : DEFAULT_WANDERING_TRADER_TRADES.int2ObjectEntrySet()) {
                 computeWanderingItemListings(entry.getIntKey()).addAll(Arrays.asList(entry.getValue()));
+            }
+        }
+
+        for (RegistryEntry<RecipeType<LunarianTradeRecipe>> entry : ModRecipeTypes.getLunarianTradeRecipeTypes()) {
+            List<LunarianTradeRecipe> recipes = recipeManager.getAllRecipesFor(entry.get());
+
+            for (LunarianTradeRecipe recipe : recipes) {
+                int level = recipe.getLevel();
+                ItemListing itemListing = recipe.toItemListing();
+
+                if (recipe.isWandering()) {
+                    computeWanderingItemListings(level).add(itemListing);
+                } else {
+                    computeProfessionItemListings(recipe.getProfession(), level).add(itemListing);
+                }
             }
         }
     }
