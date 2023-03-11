@@ -360,34 +360,38 @@ public class LunarianMerchantOffer {
         }
     }
 
-    static class SellPotionHoldingItemFactory implements ItemListing {
+    public static class SellPotionHoldingItemFactory implements ItemListing {
+        public static final ItemStack DEFAULT_BUY_A = new ItemStack(Items.EMERALD);
+        public static final ItemStack DEFAULT_BUY_B = new ItemStack(Items.ARROW);
+        public static final ItemStack DEFAULT_SELL = new ItemStack(Items.TIPPED_ARROW);
+        public static final float DEFAULT_MULTIPLIER = 0.05F;
+
+        private final ItemStack buyA;
+        private final ItemStack buyB;
         private final ItemStack sell;
-        private final int sellCount;
-        private final int price;
         private final int maxUses;
         private final int experience;
-        private final Item secondBuy;
-        private final int secondCount;
         private final float priceMultiplier;
 
         public SellPotionHoldingItemFactory(Item arrow, int secondCount, Item tippedArrow, int sellCount, int price, int maxUses, int experience) {
-            this.sell = new ItemStack(tippedArrow);
-            this.price = price;
+            this(ItemStackUtils.deriveCount(DEFAULT_BUY_A, price), new ItemStack(arrow, secondCount), new ItemStack(tippedArrow, sellCount), maxUses, experience, DEFAULT_MULTIPLIER);
+        }
+
+        public SellPotionHoldingItemFactory(ItemStack buyA, ItemStack buyB, ItemStack sell, int maxUses, int experience, float multiplier) {
+            this.buyA = buyA;
+            this.buyB = buyB;
+            this.sell = sell;
             this.maxUses = maxUses;
             this.experience = experience;
-            this.secondBuy = arrow;
-            this.secondCount = secondCount;
-            this.sellCount = sellCount;
-            this.priceMultiplier = 0.05f;
+            this.priceMultiplier = multiplier;
         }
 
         @Override
         public MerchantOffer getOffer(Entity entity, RandomSource random) {
-            ItemStack itemStack = new ItemStack(Items.EMERALD, this.price);
             List<Potion> list = Registry.POTION.stream().filter(potion -> !potion.getEffects().isEmpty() && PotionBrewing.isBrewablePotion(potion)).toList();
             Potion potion2 = list.get(random.nextInt(list.size()));
-            ItemStack itemStack2 = PotionUtils.setPotion(new ItemStack(this.sell.getItem(), this.sellCount), potion2);
-            return new MerchantOffer(itemStack, new ItemStack(this.secondBuy, this.secondCount), itemStack2, this.maxUses, this.experience, this.priceMultiplier);
+            ItemStack sell = PotionUtils.setPotion(this.sell.copy(), potion2);
+            return new MerchantOffer(this.buyA, this.buyB, sell, this.maxUses, this.experience, this.priceMultiplier);
         }
     }
 
