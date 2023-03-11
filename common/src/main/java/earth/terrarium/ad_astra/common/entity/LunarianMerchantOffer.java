@@ -22,6 +22,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
@@ -32,11 +33,12 @@ import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 public class LunarianMerchantOffer {
-    public static final Map<VillagerProfession, Int2ObjectMap<ItemListing[]>> PROFESSION_TO_LEVELED_TRADE = Util.make(Maps.newHashMap(), map -> {
+    private static final Map<VillagerProfession, Int2ObjectMap<ItemListing[]>> DEFAULT_PROFESSION_TO_LEVELED_TRADE = Util.make(Maps.newHashMap(), map -> {
         map.put(VillagerProfession.FARMER, copyToFastUtilMap(ImmutableMap.of(1, new ItemListing[]{new BuyForOneEmeraldFactory(ModItems.CHEESE.get(), 20, 20, 5), new BuyForOneEmeraldFactory(Items.GLOW_BERRIES, 22, 16, 3), new SellItemFactory(Items.BREAD, 1, 6, 16, 1)}, 2, new ItemListing[]{new SellItemFactory(Items.PUMPKIN_PIE, 1, 4, 5), new SellItemFactory(Items.GOLDEN_APPLE, 8, 1, 8, 20)}, 3, new ItemListing[]{new SellItemFactory(Items.COOKIE, 3, 18, 10), new BuyForOneEmeraldFactory(Blocks.MELON, 4, 12, 20)}, 4, new ItemListing[]{new SellItemFactory(Blocks.CAKE, 1, 1, 12, 15), new BuyForOneEmeraldFactory(Items.DIRT, 63, 16, 2), new SellSuspiciousStewFactory(MobEffects.NIGHT_VISION, 100, 15), new SellSuspiciousStewFactory(MobEffects.JUMP, 160, 15), new SellSuspiciousStewFactory(MobEffects.WEAKNESS, 140, 15), new SellSuspiciousStewFactory(MobEffects.BLINDNESS, 120, 15), new SellSuspiciousStewFactory(MobEffects.POISON, 280, 15), new SellSuspiciousStewFactory(MobEffects.SATURATION, 7, 15)},
                 5, new ItemListing[]{new SellItemFactory(Items.GOLDEN_CARROT, 3, 3, 30), new SellItemFactory(Items.GLISTERING_MELON_SLICE, 4, 3, 30)})));
         map.put(VillagerProfession.FISHERMAN, copyToFastUtilMap(ImmutableMap.of(1, new ItemListing[]{new BuyForOneEmeraldFactory(ModItems.CHEESE.get(), 20, 20, 5), new BuyForOneEmeraldFactory(Items.STRING, 20, 16, 2), new BuyForOneEmeraldFactory(Items.COAL, 10, 16, 2), new ProcessItemFactory(Items.COD, 6, Items.COOKED_COD, 6, 16, 1),}, 2, new ItemListing[]{new BuyForOneEmeraldFactory(Items.COD, 15, 16, 10), new ProcessItemFactory(Items.SALMON, 6, Items.COOKED_SALMON, 6, 16, 5), new SellItemFactory(Items.SOUL_CAMPFIRE, 2, 1, 5)}, 3, new ItemListing[]{new BuyForOneEmeraldFactory(Items.SALMON, 13, 16, 20), new SellEnchantedToolFactory(Items.FISHING_ROD, 3, 3, 10, 0.2f)}, 4, new ItemListing[]{new BuyForOneEmeraldFactory(Items.TROPICAL_FISH, 6, 12, 30)}, 5, new ItemListing[]{new BuyForOneEmeraldFactory(Items.PUFFERFISH, 4, 12, 30), new SellItemFactory(new ItemStack(Items.WATER_BUCKET), 8, 1, 2, 9, 0.2f), new SellItemFactory(new ItemStack(Items.ICE), 4, 1, 8, 9, 0.2f)})));
@@ -74,8 +76,53 @@ public class LunarianMerchantOffer {
                         5, new ItemListing[]{new SellItemFactory(ModItems.STEEL_PLATING.get(), 1, 8, 12, 15), new SellItemFactory(ModItems.DESH_PLATING.get(), 1, 8, 12, 15), new SellItemFactory(ModItems.OSTRUM_PLATING.get(), 1, 4, 12, 15), new SellItemFactory(ModItems.STEEL_DOOR.get(), 1, 3, 12, 15), new SellItemFactory(Blocks.QUARTZ_PILLAR, 1, 1, 12, 30), new SellItemFactory(Blocks.QUARTZ_BLOCK, 1, 1, 12, 30)})));
     });
 
-    public static final Int2ObjectMap<ItemListing[]> WANDERING_TRADER_TRADES = copyToFastUtilMap(ImmutableMap.of(1, new ItemListing[]{new SellItemFactory(ModItems.CHEESE.get(), 1, 3, 6, 1), new SellItemFactory(ModItems.SPACE_PAINTING.get(), 48, 1, 2, 2), new SellItemFactory(ModItems.OXYGEN_TANK.get(), 10, 1, 3, 1), new SellItemFactory(Items.SOUL_TORCH, 1, 12, 12, 1), new SellItemFactory(Items.SOUL_CAMPFIRE, 3, 1, 4, 1), new SellItemFactory(ModItems.WRENCH.get(), 12, 1, 2, 2), new SellItemFactory(ModItems.HAMMER.get(), 3, 1, 4, 1), new SellItemFactory(ModItems.WHITE_FLAG.get(), 10, 1, 3, 2), new SellItemFactory(ModItems.SPACE_HELMET.get(), 10, 1, 2, 1), new SellItemFactory(ModItems.SPACE_SUIT.get(), 16, 1, 2, 1), new SellItemFactory(ModItems.SPACE_PANTS.get(), 14, 1, 2, 1), new SellItemFactory(ModItems.SPACE_BOOTS.get(), 8, 1, 2, 1), new SellItemFactory(Items.COAL, 1, 5, 4, 1), new SellItemFactory(ModItems.OXYGEN_BUCKET.get(), 10, 1, 2, 2), new SellItemFactory(Items.COPPER_INGOT, 1, 4, 12, 1),
+    public static final Int2ObjectMap<ItemListing[]> DEFAULT_WANDERING_TRADER_TRADES = copyToFastUtilMap(ImmutableMap.of(1, new ItemListing[]{new SellItemFactory(ModItems.CHEESE.get(), 1, 3, 6, 1), new SellItemFactory(ModItems.SPACE_PAINTING.get(), 48, 1, 2, 2), new SellItemFactory(ModItems.OXYGEN_TANK.get(), 10, 1, 3, 1), new SellItemFactory(Items.SOUL_TORCH, 1, 12, 12, 1), new SellItemFactory(Items.SOUL_CAMPFIRE, 3, 1, 4, 1), new SellItemFactory(ModItems.WRENCH.get(), 12, 1, 2, 2), new SellItemFactory(ModItems.HAMMER.get(), 3, 1, 4, 1), new SellItemFactory(ModItems.WHITE_FLAG.get(), 10, 1, 3, 2), new SellItemFactory(ModItems.SPACE_HELMET.get(), 10, 1, 2, 1), new SellItemFactory(ModItems.SPACE_SUIT.get(), 16, 1, 2, 1), new SellItemFactory(ModItems.SPACE_PANTS.get(), 14, 1, 2, 1), new SellItemFactory(ModItems.SPACE_BOOTS.get(), 8, 1, 2, 1), new SellItemFactory(Items.COAL, 1, 5, 4, 1), new SellItemFactory(ModItems.OXYGEN_BUCKET.get(), 10, 1, 2, 2), new SellItemFactory(Items.COPPER_INGOT, 1, 4, 12, 1),
             new SellItemFactory(Items.WATER_BUCKET, 5, 1, 4, 1), new SellItemFactory(Items.LAVA_BUCKET, 3, 1, 4, 1), new BuyForOneEmeraldFactory(ModItems.DESH_INGOT.get(), 4, 20, 1), new BuyForOneEmeraldFactory(ModItems.OSTRUM_INGOT.get(), 4, 20, 1), new BuyForOneEmeraldFactory(ModItems.CALORITE_INGOT.get(), 4, 20, 1)}, 2, new ItemListing[]{new SellItemFactory(OxygenTankItem.createOxygenatedTank(), 16, 1, 3, 2), new SellItemFactory(ModItems.LAUNCH_PAD.get(), 3, 1, 3, 1), new SellItemFactory(ModItems.LAUNCH_PAD.get(), 3, 1, 3, 1), new SellItemFactory(ModItems.GLACIAN_LOG.get(), 5, 16, 20, 1), new SellItemFactory(ModItems.GLACIAN_LEAVES.get(), 5, 16, 20, 1), new SellItemFactory(ModItems.AERONOS_STEM.get(), 5, 16, 20, 1), new SellItemFactory(ModItems.STROPHAR_STEM.get(), 5, 16, 20, 1), new SellItemFactory(ModItems.FUEL_BUCKET.get(), 4, 1, 6, 1)}));
+
+    private static final Map<VillagerProfession, Int2ObjectMap<List<ItemListing>>> PROFESSION_TO_LEVELED_TRADE = Maps.newHashMap();
+    private static final Int2ObjectMap<List<ItemListing>> WANDERING_TRADER_TRADES = new Int2ObjectOpenHashMap<>();
+    private static boolean NEED_RELOAD = false;
+
+    public static void markNeedReload() {
+        NEED_RELOAD = true;
+    }
+
+    private static void reload(RecipeManager recipeManager) {
+        if (!NEED_RELOAD)
+            return;
+
+        NEED_RELOAD = false;
+        PROFESSION_TO_LEVELED_TRADE.clear();
+        WANDERING_TRADER_TRADES.clear();
+
+        for (var entry1 : DEFAULT_PROFESSION_TO_LEVELED_TRADE.entrySet()) {
+            for (var entry2 : entry1.getValue().int2ObjectEntrySet()) {
+                computeProfessionItemListings(entry1.getKey(), entry2.getIntKey()).addAll(Arrays.asList(entry2.getValue()));
+            }
+        }
+
+        for (var entry : DEFAULT_WANDERING_TRADER_TRADES.int2ObjectEntrySet()) {
+            computeWanderingItemListings(entry.getIntKey()).addAll(Arrays.asList(entry.getValue()));
+        }
+    }
+
+    public static ItemListing[] getProfessionItemListings(RecipeManager recipeManager, VillagerProfession profession, int level) {
+        reload(recipeManager);
+        return computeProfessionItemListings(profession, level).toArray(ItemListing[]::new);
+    }
+
+    private static List<ItemListing> computeProfessionItemListings(VillagerProfession profession, int level) {
+        return PROFESSION_TO_LEVELED_TRADE.computeIfAbsent(profession, p -> new Int2ObjectOpenHashMap<>()).computeIfAbsent(level, l -> new ArrayList<>());
+    }
+
+    public static ItemListing[] getWanderingItemListings(RecipeManager recipeManager, int key) {
+        reload(recipeManager);
+        return computeWanderingItemListings(key).toArray(ItemListing[]::new);
+    }
+
+    private static List<ItemListing> computeWanderingItemListings(int key) {
+        return WANDERING_TRADER_TRADES.computeIfAbsent(key, l -> new ArrayList<>());
+    }
 
     private static Int2ObjectMap<ItemListing[]> copyToFastUtilMap(ImmutableMap<Integer, ItemListing[]> map) {
         return new Int2ObjectOpenHashMap<>(map);

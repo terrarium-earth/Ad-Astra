@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import com.teamresourceful.resourcefulconfig.common.config.Configurator;
 import earth.terrarium.ad_astra.common.config.AdAstraConfig;
 import earth.terrarium.ad_astra.common.data.PlanetData;
+import earth.terrarium.ad_astra.common.entity.LunarianMerchantListener;
 import earth.terrarium.ad_astra.common.networking.NetworkHandling;
 import earth.terrarium.ad_astra.common.registry.*;
 import earth.terrarium.ad_astra.common.util.PlatformUtils;
@@ -42,6 +43,7 @@ public class AdAstra {
 
     public static void onRegisterReloadListeners(BiConsumer<ResourceLocation, PreparableReloadListener> registry) {
         registry.accept(new ResourceLocation(AdAstra.MOD_ID, "planet_data"), new PlanetData());
+        registry.accept(new ResourceLocation(AdAstra.MOD_ID, "lunarian_merchant_listener"), new LunarianMerchantListener());
     }
 
     public static void postInit() {
