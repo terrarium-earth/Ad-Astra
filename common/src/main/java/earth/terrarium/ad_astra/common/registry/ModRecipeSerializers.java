@@ -25,4 +25,5 @@ public class ModRecipeSerializers {
 
     public static final RegistryEntry<RecipeSerializer<LunarianTradeSimpleRecipe>> LUNARIAN_TRADE_SIMPLE_SERIALIZER = RECIPE_SERIALIZERS.register("lunarian_trade_simple", () -> new LunarianTradeRecipe.Serializer<>(LunarianTradeSimpleRecipe::new));
     public static final RegistryEntry<RecipeSerializer<LunarianTradeEnchantedBookRecipe>> LUNARIAN_TRADE_ENCHANTED_BOOK_SERIALIZER = RECIPE_SERIALIZERS.register("lunarian_trade_enchanted_book", () -> new LunarianTradeRecipe.Serializer<>(LunarianTradeEnchantedBookRecipe::new));
+    public static final RegistryEntry<RecipeSerializer<LunarianTradeEnchantedItemRecipe>> LUNARIAN_TRADE_ENCHANTED_ITEM_SERIALIZER = RECIPE_SERIALIZERS.register("lunarian_trade_enchanted_item", () -> new LunarianTradeRecipe.Serializer<>(LunarianTradeEnchantedItemRecipe::new));
 }

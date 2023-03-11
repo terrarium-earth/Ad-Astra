@@ -292,19 +292,31 @@ public class LunarianMerchantOffer {
         }
     }
 
-    static class SellEnchantedToolFactory implements ItemListing {
-        private final ItemStack tool;
+    public static class SellEnchantedToolFactory implements ItemListing {
+        public static final ItemStack DEFAULT_BUY_A = new ItemStack(Items.EMERALD);
+        public static final ItemStack DEFAULT_BUY_B = ItemStack.EMPTY;
+        public static final float DEFAULT_MULTIPLIER = 0.05F;
+
+        private final ItemStack buyA;
+        private final ItemStack buyB;
+        private final ItemStack sell;
         private final int basePrice;
         private final int maxUses;
         private final int experience;
         private final float multiplier;
 
-        public SellEnchantedToolFactory(Item item, int basePrice, int maxUses, int experience) {
-            this(item, basePrice, maxUses, experience, 0.05f);
+        public SellEnchantedToolFactory(Item sell, int basePrice, int maxUses, int experience) {
+            this(sell, basePrice, maxUses, experience, DEFAULT_MULTIPLIER);
         }
 
-        public SellEnchantedToolFactory(Item item, int basePrice, int maxUses, int experience, float multiplier) {
-            this.tool = new ItemStack(item);
+        public SellEnchantedToolFactory(Item sell, int basePrice, int maxUses, int experience, float multiplier) {
+            this(DEFAULT_BUY_A, DEFAULT_BUY_B, new ItemStack(sell), basePrice, maxUses, experience, multiplier);
+        }
+
+        public SellEnchantedToolFactory(ItemStack buyA, ItemStack buyB, ItemStack sell, int basePrice, int maxUses, int experience, float multiplier) {
+            this.buyA = buyA;
+            this.buyB = buyB;
+            this.sell = sell;
             this.basePrice = basePrice;
             this.maxUses = maxUses;
             this.experience = experience;
@@ -314,10 +326,10 @@ public class LunarianMerchantOffer {
         @Override
         public MerchantOffer getOffer(Entity entity, RandomSource random) {
             int i = 5 + random.nextInt(15);
-            ItemStack itemStack = EnchantmentHelper.enchantItem(random, new ItemStack(this.tool.getItem()), i, false);
+            ItemStack itemStack = EnchantmentHelper.enchantItem(random, this.sell.copy(), i, false);
             int j = Math.min(this.basePrice + i, 64);
-            ItemStack itemStack2 = new ItemStack(Items.EMERALD, j);
-            return new MerchantOffer(itemStack2, itemStack, this.maxUses, this.experience, this.multiplier);
+            ItemStack buyA = ItemStackUtils.deriveCount(this.buyA, j);
+            return new MerchantOffer(buyA, this.buyB, itemStack, this.maxUses, this.experience, this.multiplier);
         }
     }
 
