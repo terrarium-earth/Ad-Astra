@@ -254,6 +254,8 @@ public class ModLangProvider extends LanguageProvider {
         add("text.resourcefulconfig.ad_astra.option.general.spawnSulfurCreepers", "Spawn Sulfur Creepers");
         add("text.resourcefulconfig.ad_astra.option.general.avoidOverworldChecks", "Avoid Overworld Checks");
         add("text.resourcefulconfig.ad_astra.option.general.avoidOverworldChecks.tooltip", "Prevents stuff like gravity and oxygen checks in the overworld as that's normally not used in Ad Astra. enable if you're making an addon or something that transforms the overworld into some sort of planet.");
+        add("text.resourcefulconfig.ad_astra.option.general.enabledLunarianDefaultTrades", "Lunarian Default Trades");
+        add("text.resourcefulconfig.ad_astra.option.general.enabledLunarianDefaultTrades.tooltip", "Enable/Disable lunarian and lunarian wandering trader's default trades. Apply to lunarian spawned after this value changed.");
         add("text.resourcefulconfig.ad_astra.option.lander", "Lander");
         add("text.resourcefulconfig.ad_astra.option.lander.boosterSpeed", "Booster Speed");
         add("text.resourcefulconfig.ad_astra.option.lander.boosterThreshold", "Booster Threshold");

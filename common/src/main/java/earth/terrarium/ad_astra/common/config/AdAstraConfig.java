@@ -169,6 +169,14 @@ public final class AdAstraConfig {
     @Comment("Prevents stuff like gravity and oxygen checks in the overworld as that's normally not used in Ad Astra. enable if you're making an addon or something that transforms the overworld into some sort of planet.")
     public static boolean avoidOverworldChecks = true;
 
+    @ConfigEntry(
+            id = "enabledLunarianDefaultTrades",
+            type = EntryType.BOOLEAN,
+            translation = "text.resourcefulconfig.ad_astra.option.general.enabledLunarianDefaultTrades"
+    )
+    @Comment("Enable/Disable lunarian and lunarian wandering trader's default trades. Apply to lunarian spawned after this value changed.")
+    public static boolean enabledLunarianDefaultTrades = true;
+
     @InlineCategory
     public static SpawnConfig spawnConfig;
 

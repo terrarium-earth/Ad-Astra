@@ -3,6 +3,7 @@ package earth.terrarium.ad_astra.common.entity;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import earth.terrarium.ad_astra.common.config.AdAstraConfig;
 import earth.terrarium.ad_astra.common.item.OxygenTankItem;
 import earth.terrarium.ad_astra.common.registry.ModItems;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
@@ -95,14 +96,17 @@ public class LunarianMerchantOffer {
         PROFESSION_TO_LEVELED_TRADE.clear();
         WANDERING_TRADER_TRADES.clear();
 
-        for (var entry1 : DEFAULT_PROFESSION_TO_LEVELED_TRADE.entrySet()) {
-            for (var entry2 : entry1.getValue().int2ObjectEntrySet()) {
-                computeProfessionItemListings(entry1.getKey(), entry2.getIntKey()).addAll(Arrays.asList(entry2.getValue()));
-            }
-        }
+        if (AdAstraConfig.enabledLunarianDefaultTrades) {
 
-        for (var entry : DEFAULT_WANDERING_TRADER_TRADES.int2ObjectEntrySet()) {
-            computeWanderingItemListings(entry.getIntKey()).addAll(Arrays.asList(entry.getValue()));
+            for (var entry1 : DEFAULT_PROFESSION_TO_LEVELED_TRADE.entrySet()) {
+                for (var entry2 : entry1.getValue().int2ObjectEntrySet()) {
+                    computeProfessionItemListings(entry1.getKey(), entry2.getIntKey()).addAll(Arrays.asList(entry2.getValue()));
+                }
+            }
+
+            for (var entry : DEFAULT_WANDERING_TRADER_TRADES.int2ObjectEntrySet()) {
+                computeWanderingItemListings(entry.getIntKey()).addAll(Arrays.asList(entry.getValue()));
+            }
         }
     }
 
