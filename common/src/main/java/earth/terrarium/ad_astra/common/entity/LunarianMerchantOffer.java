@@ -379,11 +379,28 @@ public class LunarianMerchantOffer {
         }
     }
 
-    static class EnchantBookFactory implements ItemListing {
+    public static class EnchantBookFactory implements ItemListing {
+        public static final ItemStack DEFAULT_BUY_A = new ItemStack(Items.EMERALD);
+        public static final ItemStack DEFAULT_BUY_B = new ItemStack(Items.BOOK);
+        public static final int DEFAULT_MAX_USES = 12;
+        public static final float DEFAULT_MULTIPLIER = 0.2F;
+
+        private final ItemStack buyA;
+        private final ItemStack buyB;
+        private final int maxUses;
         private final int experience;
+        private final float multiplier;
 
         public EnchantBookFactory(int experience) {
+            this(DEFAULT_BUY_A, DEFAULT_BUY_B, DEFAULT_MAX_USES, experience, DEFAULT_MULTIPLIER);
+        }
+
+        public EnchantBookFactory(ItemStack buyA, ItemStack buyB, int maxUses, int experience, float multiplier) {
+            this.buyA = buyA;
+            this.buyB = buyB;
+            this.maxUses = maxUses;
             this.experience = experience;
+            this.multiplier = multiplier;
         }
 
         @Override
@@ -399,7 +416,8 @@ public class LunarianMerchantOffer {
             if (j > 64) {
                 j = 64;
             }
-            return new MerchantOffer(new ItemStack(Items.EMERALD, j), new ItemStack(Items.BOOK), itemStack, 12, this.experience, 0.2f);
+            ItemStack buyA = ItemStackUtils.deriveCount(this.buyA, j);
+            return new MerchantOffer(buyA, this.buyB, itemStack, this.maxUses, this.experience, this.multiplier);
         }
     }
 

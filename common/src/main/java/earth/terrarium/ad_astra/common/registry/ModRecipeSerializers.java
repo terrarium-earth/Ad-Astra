@@ -24,4 +24,5 @@ public class ModRecipeSerializers {
     public static final RegistryEntry<RecipeSerializer<CryoFuelConversionRecipe>> CRYO_FUEL_CONVERSION_SERIALIZER = RECIPE_SERIALIZERS.register("cryo_fuel_conversion", () -> new CodecRecipeSerializer<>(ModRecipeTypes.CRYO_FUEL_CONVERSION_RECIPE.get(), CryoFuelConversionRecipe::codec, CryoFuelConversionRecipe::networkCodec));
 
     public static final RegistryEntry<RecipeSerializer<LunarianTradeSimpleRecipe>> LUNARIAN_TRADE_SIMPLE_SERIALIZER = RECIPE_SERIALIZERS.register("lunarian_trade_simple", () -> new LunarianTradeRecipe.Serializer<>(LunarianTradeSimpleRecipe::new));
+    public static final RegistryEntry<RecipeSerializer<LunarianTradeEnchantedBookRecipe>> LUNARIAN_TRADE_ENCHANTED_BOOK_SERIALIZER = RECIPE_SERIALIZERS.register("lunarian_trade_enchanted_book", () -> new LunarianTradeRecipe.Serializer<>(LunarianTradeEnchantedBookRecipe::new));
 }
