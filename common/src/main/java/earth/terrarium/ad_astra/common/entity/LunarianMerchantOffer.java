@@ -433,21 +433,35 @@ public class LunarianMerchantOffer {
         }
     }
 
-    static class SellDyedArmorFactory implements ItemListing {
-        private final Item sell;
-        private final int price;
+    public static class SellDyedArmorFactory implements ItemListing {
+        public static final ItemStack DEFAULT_BUY_A = new ItemStack(Items.EMERALD);
+        public static final ItemStack DEFAULT_BUY_B = ItemStack.EMPTY;
+        public static final int DEFAULT_MAX_USES = 12;
+        public static final int DEFAULT_EXPERIENCE = 1;
+        public static final float DEFAULT_MULTIPLIER = 0.2F;
+
+        private final ItemStack buyA;
+        private final ItemStack buyB;
+        private final ItemStack sell;
         private final int maxUses;
         private final int experience;
+        private final float multiplier;
 
         public SellDyedArmorFactory(Item item, int price) {
-            this(item, price, 12, 1);
+            this(item, price, DEFAULT_MAX_USES, DEFAULT_EXPERIENCE);
         }
 
         public SellDyedArmorFactory(Item item, int price, int maxUses, int experience) {
-            this.sell = item;
-            this.price = price;
+            this(ItemStackUtils.deriveCount(DEFAULT_BUY_A, price), DEFAULT_BUY_B, new ItemStack(item), maxUses, experience, DEFAULT_MULTIPLIER);
+        }
+
+        public SellDyedArmorFactory(ItemStack buyA, ItemStack buyB, ItemStack sell, int maxUses, int experience, float multiplier) {
+            this.buyA = buyA;
+            this.buyB = buyB;
+            this.sell = sell;
             this.maxUses = maxUses;
             this.experience = experience;
+            this.multiplier = multiplier;
         }
 
         private static DyeItem getDye(RandomSource random) {
@@ -456,9 +470,8 @@ public class LunarianMerchantOffer {
 
         @Override
         public MerchantOffer getOffer(Entity entity, RandomSource random) {
-            ItemStack itemStack = new ItemStack(Items.EMERALD, this.price);
-            ItemStack itemStack2 = new ItemStack(this.sell);
-            if (this.sell instanceof DyeableArmorItem) {
+            ItemStack sell = this.sell.copy();
+            if (sell.getItem() instanceof DyeableArmorItem) {
                 ArrayList<DyeItem> list = Lists.newArrayList();
                 list.add(SellDyedArmorFactory.getDye(random));
                 if (random.nextFloat() > 0.7f) {
@@ -467,9 +480,9 @@ public class LunarianMerchantOffer {
                 if (random.nextFloat() > 0.8f) {
                     list.add(SellDyedArmorFactory.getDye(random));
                 }
-                itemStack2 = DyeableLeatherItem.dyeArmor(itemStack2, list);
+                sell = DyeableLeatherItem.dyeArmor(sell, list);
             }
-            return new MerchantOffer(itemStack, itemStack2, this.maxUses, this.experience, 0.2f);
+            return new MerchantOffer(this.buyA, this.buyB, sell, this.maxUses, this.experience, this.multiplier);
         }
     }
 }
