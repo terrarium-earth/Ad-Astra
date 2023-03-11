@@ -29,6 +29,7 @@ public class ModRecipeTypes {
     public static final RegistryEntry<RecipeType<LunarianTradeEnchantedItemRecipe>> LUNARIAN_TRADE_ENCHANTED_ITEM_RECIPE = registerLunarianTradeRecipe(RECIPE_TYPES.register("lunarian_trade_enchanted_item", () -> CodecRecipeType.of("lunarian_trade_enchanted_item")));
     public static final RegistryEntry<RecipeType<LunarianTradeDyedItemRecipe>> LUNARIAN_TRADE_DYED_ITEM_RECIPE = registerLunarianTradeRecipe(RECIPE_TYPES.register("lunarian_trade_dyed_item", () -> CodecRecipeType.of("lunarian_trade_dyed_item")));
     public static final RegistryEntry<RecipeType<LunarianTradePotionedItemRecipe>> LUNARIAN_TRADE_POTIONED_ITEM_RECIPE = registerLunarianTradeRecipe(RECIPE_TYPES.register("lunarian_trade_potioned_item", () -> CodecRecipeType.of("lunarian_trade_potioned_item")));
+    public static final RegistryEntry<RecipeType<LunarianTradeSuspiciousStewRecipe>> LUNARIAN_TRADE_SUSPICIOUS_STEW_RECIPE = registerLunarianTradeRecipe(RECIPE_TYPES.register("lunarian_trade_suspicious_stew", () -> CodecRecipeType.of("lunarian_trade_suspicious_stew")));
 
     @SuppressWarnings("unchecked")
     public static RegistryEntry<RecipeType<LunarianTradeRecipe>>[] getLunarianTradeRecipeTypes() {

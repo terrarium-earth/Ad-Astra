@@ -238,25 +238,43 @@ public class LunarianMerchantOffer {
         }
     }
 
-    static class SellSuspiciousStewFactory implements ItemListing {
-        final MobEffect effect;
-        final int duration;
-        final int experience;
+    public static class SellSuspiciousStewFactory implements ItemListing {
+        public static final ItemStack DEFAULT_BUY_A = new ItemStack(Items.EMERALD);
+        public static final ItemStack DEFAULT_BUY_B = ItemStack.EMPTY;
+        public static final ItemStack DEFAULT_SELL = new ItemStack(Items.SUSPICIOUS_STEW);
+        public static final int DEFAULT_MAX_USES = 12;
+        public static final float DEFAULT_MULTIPLIER = 0.05F;
+
+        private final ItemStack buyA;
+        private final ItemStack buyB;
+        private final ItemStack sell;
+        private final MobEffect effect;
+        private final int duration;
+        private final int maxUses;
+        private final int experience;
         private final float multiplier;
 
         public SellSuspiciousStewFactory(MobEffect effect, int duration, int experience) {
+            this(DEFAULT_BUY_A, DEFAULT_BUY_B, DEFAULT_SELL, effect, duration, DEFAULT_MAX_USES, experience, DEFAULT_MULTIPLIER);
+        }
+
+        public SellSuspiciousStewFactory(ItemStack buyA, ItemStack buyB, ItemStack sell, MobEffect effect, int duration, int maxUses, int experience, float multiplier) {
+            this.buyA = buyA;
+            this.buyB = buyB;
+            this.sell = sell;
             this.effect = effect;
             this.duration = duration;
+            this.maxUses = maxUses;
             this.experience = experience;
-            this.multiplier = 0.05f;
+            this.multiplier = multiplier;
         }
 
         @Override
         @Nullable
         public MerchantOffer getOffer(Entity entity, RandomSource random) {
-            ItemStack itemStack = new ItemStack(Items.SUSPICIOUS_STEW, 1);
+            ItemStack itemStack = this.sell.copy();
             SuspiciousStewItem.saveMobEffect(itemStack, this.effect, this.duration);
-            return new MerchantOffer(new ItemStack(Items.EMERALD, 1), itemStack, 12, this.experience, this.multiplier);
+            return new MerchantOffer(this.buyA, this.buyB, itemStack, this.maxUses, this.experience, this.multiplier);
         }
     }
 
