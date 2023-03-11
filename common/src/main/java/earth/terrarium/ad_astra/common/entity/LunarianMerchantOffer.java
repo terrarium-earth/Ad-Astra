@@ -152,6 +152,29 @@ public class LunarianMerchantOffer {
         return new Int2ObjectOpenHashMap<>(map);
     }
 
+    public static class ItemStackForItemStackFactory implements ItemListing {
+        private final ItemStack buyA;
+        private final ItemStack buyB;
+        private final ItemStack sell;
+        private final int maxUses;
+        private final int experience;
+        private final float multiplier;
+
+        public ItemStackForItemStackFactory(ItemStack buyA, ItemStack buyB, ItemStack sell, int maxUses, int experience, float multiplier) {
+            this.buyA = buyA;
+            this.buyB = buyB;
+            this.sell = sell;
+            this.maxUses = maxUses;
+            this.experience = experience;
+            this.multiplier = multiplier;
+        }
+
+        @Override
+        public MerchantOffer getOffer(Entity var1, RandomSource var2) {
+            return new MerchantOffer(this.buyA, this.buyB, this.sell, this.maxUses, this.experience, this.multiplier);
+        }
+    }
+
     static class BuyForOneEmeraldFactory implements ItemListing {
         private final Item buy;
         private final int price;

@@ -24,6 +24,8 @@ public class ModRecipeTypes {
     public static final RegistryEntry<RecipeType<OxygenConversionRecipe>> OXYGEN_CONVERSION_RECIPE = RECIPE_TYPES.register("oxygen_conversion", () -> CodecRecipeType.of("oxygen_conversion"));
     public static final RegistryEntry<RecipeType<CryoFuelConversionRecipe>> CRYO_FUEL_CONVERSION_RECIPE = RECIPE_TYPES.register("cryo_fuel_conversion", () -> CodecRecipeType.of("cryo_fuel_conversion"));
 
+    public static final RegistryEntry<RecipeType<LunarianTradeSimpleRecipe>> LUNARIAN_TRADE_SIMPLE_RECIPE = registerLunarianTradeRecipe(RECIPE_TYPES.register("lunarian_trade_simple", () -> CodecRecipeType.of("lunarian_trade_simple")));
+
     @SuppressWarnings("unchecked")
     public static RegistryEntry<RecipeType<LunarianTradeRecipe>>[] getLunarianTradeRecipeTypes() {
         return LUNARIAN_TRADE_RECIPE_TYPES.toArray(RegistryEntry[]::new);
