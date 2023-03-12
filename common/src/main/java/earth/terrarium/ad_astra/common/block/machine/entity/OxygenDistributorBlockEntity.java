@@ -162,7 +162,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implem
 
             if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0) {
                 List<OxygenConversionRecipe> recipes = OxygenConversionRecipe.getRecipes(this.level);
-                if (FluidUtils.convertFluid(this.getFluidContainer(), recipes, FluidHooks.buckets(1) / 20)) {
+                if (FluidUtils.convertFluid(this.getFluidContainer(), recipes, FluidHooks.buckets(1f) / 10)) {
                     this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
                 }
             }

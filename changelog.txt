@@ -1,6 +1,14 @@
+- diesel and biodiesel from other mods can now be used as fuel.
+- Water Pump now distributes water to nearby machines in all directions instead of just up and the facing direction.
+- doubled oxygen distributor conversion rate
+
+- fixed spawn placements not being registered causing mobs to spawn anywhere regardless of light level and ground present
+- fixed oxygen distributor being capped at 2000 blocks despite max being 3000.
+- fix crash with pipes trying to get a direction value that doesn't exist
+
 - fixed fluid translation issue (#89)
 - added config to disable taking damage in rockets (#199)
+- fixed rare crash with oxygen distributors and sliding doors (maybe fixes #227)?
 - fixed water not freezing despite being cold enough (#228)
 - fixed issues with vents (#231)
-
-- diesel and biodiesel from other mods can now be used as fuel.
+- fixed waterlogged blocks getting deleted by the water pump (#236)

@@ -2,6 +2,7 @@ package earth.terrarium.ad_astra.common.util.algorithm;
 
 import com.mojang.datafixers.util.Pair;
 import earth.terrarium.ad_astra.common.block.door.SlidingDoorBlock;
+import earth.terrarium.ad_astra.common.config.OxygenDistributorConfig;
 import earth.terrarium.ad_astra.common.registry.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -21,7 +22,7 @@ public class FloodFiller3D {
         queue.add(Pair.of(start, Direction.UP));
 
         while (!queue.isEmpty()) {
-            if (positions.size() >= 2000) break;
+            if (positions.size() >= OxygenDistributorConfig.maxBlockChecks) break;
 
             var iterator = queue.iterator();
             var pair = iterator.next();

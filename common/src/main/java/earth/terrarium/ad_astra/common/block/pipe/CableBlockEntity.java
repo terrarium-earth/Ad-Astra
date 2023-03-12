@@ -43,10 +43,15 @@ public class CableBlockEntity extends BlockEntity implements InteractablePipe<Pl
         PlatformEnergyManager output = null;
 
         if (!(state.getBlock() instanceof PipeDuctBlock) && !(state2.getBlock() instanceof PipeDuctBlock)) {
-            PipeState pipeState = state.getValue(PipeBlock.DIRECTIONS.get(getSource().direction()));
-            PipeState pipeState2 = state2.getValue(PipeBlock.DIRECTIONS.get(direction));
-
             if (getSource().storage() == null || getConsumers().isEmpty()) return;
+
+            var optionalPipeState = state.getOptionalValue(PipeBlock.DIRECTIONS.get(getSource().direction()));
+            var optionalPipeState2 = state2.getOptionalValue(PipeBlock.DIRECTIONS.get(direction));
+            if (optionalPipeState.isEmpty() || optionalPipeState2.isEmpty()) return;
+
+            var pipeState = optionalPipeState.get();
+            var pipeState2 = optionalPipeState2.get();
+
             if (pipeState == PipeState.INSERT && pipeState2 == PipeState.INSERT) return;
             if (pipeState == PipeState.EXTRACT && pipeState2 == PipeState.EXTRACT) return;
             if (pipeState == PipeState.NONE || pipeState2 == PipeState.NONE) return;

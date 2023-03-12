@@ -19,5 +19,5 @@ public final class EnergizerConfig {
             type = EntryType.LONG,
             translation = "text.resourcefulconfig.ad_astra.option.energizer.energyPerTick"
     )
-    public static long energyPerTick = 170L;
+    public static long energyPerTick = 600L;
 }
