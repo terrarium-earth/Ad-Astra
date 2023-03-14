@@ -5,6 +5,8 @@
 - fixed spawn placements not being registered causing mobs to spawn anywhere regardless of light level and ground present
 - fixed oxygen distributor being capped at 2000 blocks despite max being 3000.
 - fix crash with pipes trying to get a direction value that doesn't exist
+- space suits can now be undyed in a cauldron
+- space suit items are now colored based on their dyed color
 
 - fixed fluid translation issue (#89)
 - added config to disable taking damage in rockets (#199)
