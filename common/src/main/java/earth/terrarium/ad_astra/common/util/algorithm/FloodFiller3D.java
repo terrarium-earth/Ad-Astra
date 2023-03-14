@@ -13,6 +13,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.LinkedHashSet;
+import java.util.Optional;
 import java.util.Set;
 
 public class FloodFiller3D {
@@ -56,7 +57,10 @@ public class FloodFiller3D {
     private static boolean runAdditionalChecks(Level level, BlockState state, BlockPos pos) {
         Block block = state.getBlock();
         if (block instanceof SlidingDoorBlock door) {
-            return !level.getBlockState(door.getMainPos(state, pos)).getValue(SlidingDoorBlock.OPEN) && !level.getBlockState(door.getMainPos(state, pos)).getValue(SlidingDoorBlock.POWERED);
+            BlockState blockState = level.getBlockState(door.getMainPos(state, pos));
+            Optional<Boolean> open = blockState.getOptionalValue(SlidingDoorBlock.OPEN);
+            Optional<Boolean> powered = blockState.getOptionalValue(SlidingDoorBlock.POWERED);
+            return (open.isPresent() && !open.get()) && (powered.isPresent() && !powered.get());
         }
         return false;
     }
