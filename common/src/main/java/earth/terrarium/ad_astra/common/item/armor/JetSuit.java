@@ -184,7 +184,7 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
         if (slot.equals(EquipmentSlot.CHEST)) {
             if (stack.getItem() instanceof JetSuit) {
                 var energy = EnergyHooks.getItemEnergyManager(stack);
-                return new ResourceLocation(AdAstra.MOD_ID, "textures/entity/armour/jet_suit/jet_suit_" + (energy.getStoredEnergy() == 0 ? 0 : ((int) Math.min((energy.getStoredEnergy() * 5 / energy.getCapacity()) + 1, 5))) + ".png").toString();
+                return new ResourceLocation(AdAstra.MOD_ID, "textures/entity/armour/jet_suit/jet_suit_" + (energy.getStoredEnergy() <= 0 ? 0 : ((int) Math.min((energy.getStoredEnergy() * 5 / Math.max(1, energy.getCapacity())) + 1, 5))) + ".png").toString();
             }
         }
         return new ResourceLocation(AdAstra.MOD_ID, "textures/entity/armour/jet_suit/jet_suit_5.png").toString();
