@@ -74,6 +74,7 @@ public class SkyUtil {
             RenderSystem.setShaderColor(f, g, h, 1.0f);
         }
         RenderSystem.depthMask(true);
+        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
     }
 
     public static boolean isSubmerged(Camera camera) {

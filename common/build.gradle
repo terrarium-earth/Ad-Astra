@@ -18,7 +18,7 @@ dependencies {
 
     modApi "com.teamresourceful.resourcefullib:resourcefullib-common-$rootProject.minecraft_version:$rootProject.resourcefullib_version"
     modApi "com.teamresourceful.resourcefulconfig:resourcefulconfig-common-$rootProject.minecraft_version:$rootProject.resourcefulconfig_version"
-    modApi "earth.terrarium:botarium-common-1.19.3:$rootProject.botarium_version"
+    modApi "earth.terrarium:botarium-common-$rootProject.minecraft_version:$rootProject.botarium_version"
 }
 
 processResources {

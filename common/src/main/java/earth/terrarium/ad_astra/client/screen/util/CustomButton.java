@@ -126,6 +126,7 @@ public class CustomButton extends Button {
         poseStack.scale(scale, scale, scale);
         int x = (this.buttonSize.equals(ButtonType.LARGE) ? this.getX() - 2 : this.getX());
         poseStack.translate(4 + (x / 9.5f), this.getY() / 8.5f, 0);
+        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
         drawCenteredString(poseStack, textRenderer, this.getMessage(), x + this.width / 2, this.getY() + (this.height - 8) / 2, colour | Mth.ceil(this.alpha * 255.0f) << 24);
         poseStack.popPose();
     }
