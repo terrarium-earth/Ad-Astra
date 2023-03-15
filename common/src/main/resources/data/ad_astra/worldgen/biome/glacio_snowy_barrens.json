@@ -1,7 +1,7 @@
 {
   "temperature": -0.7,
   "downfall": 1,
-  "precipitation": "snow",
+  "has_precipitation": true,
   "effects": {
     "sky_color": 10729169,
     "fog_color": 14542062,
