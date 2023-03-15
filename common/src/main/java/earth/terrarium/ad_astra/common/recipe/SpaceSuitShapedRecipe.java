@@ -33,7 +33,7 @@ public class SpaceSuitShapedRecipe extends ShapedRecipe {
     public ItemStack assemble(CraftingContainer inv) {
         ItemStack assemble = super.assemble(inv).copy();
         CompoundTag assemblingTag = null;
-        Map<Fluid, FluidHolder> assemblingOxygen = new HashMap<>();
+        Map<Fluid, FluidHolder> assemblingOxygens = new HashMap<>();
 
         for (int i = 0; i < inv.getContainerSize(); i++) {
             ItemStack item = inv.getItem(i);
@@ -42,7 +42,7 @@ public class SpaceSuitShapedRecipe extends ShapedRecipe {
                 assemblingTag = item.getTag();
             } else {
                 FluidHooks.safeGetItemFluidManager(item).ifPresent(fluidManager -> {
-                    this.mergeOxygen(assemblingOxygen, fluidManager.getFluidInTank(0));
+                    this.mergeOxygen(assemblingOxygens, fluidManager.getFluidInTank(0));
                 });
             }
         }
@@ -51,11 +51,11 @@ public class SpaceSuitShapedRecipe extends ShapedRecipe {
             assemble.setTag(assemblingTag.copy());
         }
 
-        if (assemblingOxygen.size() > 0 && assemble.getItem() instanceof FluidContainingItem fluidContaining) {
+        if (assemblingOxygens.size() > 0 && assemble.getItem() instanceof FluidContainingItem fluidContaining) {
             ItemStackHolder itemHolder = new ItemStackHolder(assemble);
 
-            Fluid primaryFluid = assemblingOxygen.entrySet().stream().max(this::compareAmount).map(Entry::getKey).orElse(null);
-            long totalOxygen = assemblingOxygen.values().stream().mapToLong(FluidHolder::getFluidAmount).sum();
+            Fluid primaryFluid = assemblingOxygens.entrySet().stream().max(this::compareAmount).map(Entry::getKey).orElse(null);
+            long totalOxygen = assemblingOxygens.values().stream().mapToLong(FluidHolder::getFluidAmount).sum();
             fluidContaining.insert(itemHolder, FluidHooks.newFluidHolder(primaryFluid, totalOxygen, null));
 
             if (itemHolder.isDirty()) assemble = itemHolder.getStack();

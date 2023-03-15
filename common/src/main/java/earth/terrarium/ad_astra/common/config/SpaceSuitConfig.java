@@ -14,14 +14,14 @@ public final class SpaceSuitConfig {
         type = EntryType.LONG,
         translation = "text.resourcefulconfig.ad_astra.option.spaceSuit.spaceSuitTankSize"
     )
-    public static long spaceSuitTankSize = FluidHooks.buckets(1f);
+    public static long spaceSuitTankSize = FluidHooks.buckets(1);
 
     @ConfigEntry(
         id = "netheriteSpaceSuitTankSize",
         type = EntryType.LONG,
         translation = "text.resourcefulconfig.ad_astra.option.spaceSuit.netheriteSpaceSuitTankSize"
     )
-    public static long netheriteSpaceSuitTankSize = FluidHooks.buckets(2f);
+    public static long netheriteSpaceSuitTankSize = FluidHooks.buckets(2);
 
     @ConfigEntry(
         id = "netheriteSpaceSuitHasFireResistance",
@@ -58,7 +58,7 @@ public final class SpaceSuitConfig {
         type = EntryType.LONG,
         translation = "text.resourcefulconfig.ad_astra.option.spaceSuit.jetSuitTankSize"
     )
-    public static long jetSuitTankSize = FluidHooks.buckets(4f);
+    public static long jetSuitTankSize = FluidHooks.buckets(4);
 
     @ConfigEntry(
         id = "jetSuitMaxEnergy",

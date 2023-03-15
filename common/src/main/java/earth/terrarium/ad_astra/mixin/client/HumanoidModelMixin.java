@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class HumanoidModelMixin {
 
     @Inject(method = "setupAnim*", at = @At("HEAD"))
-    public void adastra_setupAnimHead(LivingEntity livingEntity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo ci) {
+    public void ad_astra$setupAnimHead(LivingEntity livingEntity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo ci) {
         HumanoidModel<Player> model = ((HumanoidModel<Player>) (Object) this);
         if (livingEntity.getVehicle() instanceof Vehicle vehicle) {
             // Disable the sitting pose while standing in a rocket.
@@ -27,7 +27,7 @@ public abstract class HumanoidModelMixin {
 
     // Make it look like the player is holding the vehicle above their head
     @Inject(method = "setupAnim*", at = @At("TAIL"))
-    public void adastra_setupAnimTail(LivingEntity livingEntity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo ci) {
+    public void ad_astra$setupAnimTail(LivingEntity livingEntity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo ci) {
         if (livingEntity.getPose().equals(Pose.SWIMMING)) {
             return;
         }

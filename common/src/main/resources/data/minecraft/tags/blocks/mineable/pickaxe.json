@@ -226,6 +226,7 @@
     "ad_astra:glowing_ostrum_pillar",
     "ad_astra:glowing_calorite_pillar",
     "ad_astra:cable_duct",
-    "ad_astra:fluid_pipe_duct"
+    "ad_astra:fluid_pipe_duct",
+    "ad_astra:vent"
   ]
 }

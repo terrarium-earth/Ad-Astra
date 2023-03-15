@@ -4,7 +4,6 @@ import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.config.AdAstraConfig;
 import earth.terrarium.ad_astra.common.util.OxygenUtils;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -21,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class BlockMixin {
 
     @Inject(method = "setPlacedBy", at = @At("HEAD"))
-    public void adastra_setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack, CallbackInfo ci) {
+    public void ad_astra$setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack, CallbackInfo ci) {
         if (!AdAstraConfig.doOxygen) {
             return;
         }

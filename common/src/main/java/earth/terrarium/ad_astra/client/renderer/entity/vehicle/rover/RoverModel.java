@@ -93,7 +93,7 @@ public class RoverModel extends VehicleModel<Rover> {
     }
 
     @Override
-   public void setupAnim(Rover entity, float tickDelta, float limbDistance, float animationProgress, float headYaw, float headPitch) {
+    public void setupAnim(Rover entity, float tickDelta, float limbDistance, float animationProgress, float headYaw, float headPitch) {
         super.setupAnim(entity, tickDelta, limbDistance, animationProgress, headYaw, headPitch);
         this.frame.x = 0.0f;
         this.frame.y = 24.0f;

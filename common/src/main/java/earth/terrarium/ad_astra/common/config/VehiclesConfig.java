@@ -83,21 +83,28 @@ public final class VehiclesConfig {
                 type = EntryType.LONG,
                 translation = "text.resourcefulconfig.ad_astra.option.rocket.tankSize"
         )
-        public static long tankSize = FluidHooks.buckets(3f);
+        public static long tankSize = FluidHooks.buckets(3);
 
         @ConfigEntry(
                 id = "fuelLaunchCost",
                 type = EntryType.LONG,
                 translation = "text.resourcefulconfig.ad_astra.option.rocket.fuelLaunchCost"
         )
-        public static long fuelLaunchCost = FluidHooks.buckets(3f);
+        public static long fuelLaunchCost = FluidHooks.buckets(3);
 
         @ConfigEntry(
                 id = "efficientFuelLaunchCost",
                 type = EntryType.LONG,
                 translation = "text.resourcefulconfig.ad_astra.option.rocket.efficientFuelLaunchCost"
         )
-        public static long efficientFuelLaunchCost = FluidHooks.buckets(1f);
+        public static long efficientFuelLaunchCost = FluidHooks.buckets(1);
+
+        @ConfigEntry(
+                id = "takeDamageInRocket",
+                type = EntryType.BOOLEAN,
+                translation = "text.resourcefulconfig.ad_astra.option.rocket.takeDamageInRocket"
+        )
+        public static boolean takeDamageInRocket = true;
     }
 
     @Category(id = "rover", translation = "text.resourcefulconfig.ad_astra.option.rover")
@@ -115,7 +122,7 @@ public final class VehiclesConfig {
                 type = EntryType.LONG,
                 translation = "text.resourcefulconfig.ad_astra.option.rover.fuelPerSecond"
         )
-        public static long fuelPerSecond = FluidHooks.buckets(1f) / 100;
+        public static long fuelPerSecond = FluidHooks.buckets(1) / 100;
 
         @ConfigEntry(
                 id = "turnSpeed",

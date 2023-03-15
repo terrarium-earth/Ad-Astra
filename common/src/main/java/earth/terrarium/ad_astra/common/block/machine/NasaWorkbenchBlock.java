@@ -1,6 +1,5 @@
 package earth.terrarium.ad_astra.common.block.machine;
 
-import earth.terrarium.ad_astra.common.block.machine.entity.NasaWorkbenchBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
@@ -36,10 +35,5 @@ public class NasaWorkbenchBlock extends AbstractMachineBlock {
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         Vec3 offset = state.getOffset(level, pos);
         return Shapes.or(Block.box(0, 0, 0, 16, 19.2, 16)).move(offset.x(), offset.y(), offset.z());
-    }
-
-    @Override
-    public NasaWorkbenchBlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new NasaWorkbenchBlockEntity(pos, state);
     }
 }

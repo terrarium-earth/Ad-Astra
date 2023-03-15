@@ -38,28 +38,38 @@ public class FluidPipeBlockEntity extends BlockEntity implements InteractablePip
         BlockState state2 = level.getBlockState(pos);
         if (state.isAir() || state2.isAir()) return;
 
-        PlatformFluidHandler input = getSource().storage();
-        PlatformFluidHandler output = consumer;
+        PlatformFluidHandler input = null;
+        PlatformFluidHandler output = null;
 
         if (!(state.getBlock() instanceof PipeDuctBlock) && !(state2.getBlock() instanceof PipeDuctBlock)) {
-            PipeState pipeState = state.getValue(PipeBlock.DIRECTIONS.get(getSource().direction()));
-            PipeState pipeState2 = state2.getValue(PipeBlock.DIRECTIONS.get(direction));
-
             if (getSource().storage() == null || getConsumers().isEmpty()) return;
+
+            var optionalPipeState = state.getOptionalValue(PipeBlock.DIRECTIONS.get(getSource().direction()));
+            var optionalPipeState2 = state2.getOptionalValue(PipeBlock.DIRECTIONS.get(direction));
+            if (optionalPipeState.isEmpty() || optionalPipeState2.isEmpty()) return;
+
+            var pipeState = optionalPipeState.get();
+            var pipeState2 = optionalPipeState2.get();
+
             if (pipeState == PipeState.INSERT && pipeState2 == PipeState.INSERT) return;
             if (pipeState == PipeState.EXTRACT && pipeState2 == PipeState.EXTRACT) return;
             if (pipeState == PipeState.NONE || pipeState2 == PipeState.NONE) return;
 
-
-            if (pipeState2 == PipeState.EXTRACT || pipeState == PipeState.INSERT) {
+            if (pipeState2 == PipeState.INSERT || pipeState == PipeState.EXTRACT) {
+                input = source.storage();
+                output = consumer;
+            } else if (pipeState2 == PipeState.EXTRACT || pipeState == PipeState.INSERT) {
                 input = consumer;
-                output = getSource().storage();
+                output = source.storage();
+            } else {
+                return;
             }
         }
 
+        if (input == null || output == null) return;
         for (FluidHolder fluid : input.getFluidTanks()) {
             if (!fluid.isEmpty()) {
-                FluidHolder transfer = FluidHooks.newFluidHolder(fluid.getFluid(), ((PipeBlock) getBlockState().getBlock()).getTransferRate(), fluid.getCompound());
+                FluidHolder transfer = FluidHooks.newFluidHolder(fluid.getFluid(), Math.min(((PipeBlock) getBlockState().getBlock()).getTransferRate(), fluid.getFluidAmount()), fluid.getCompound());
                 FluidHooks.moveFluid(input, output, transfer);
             }
         }

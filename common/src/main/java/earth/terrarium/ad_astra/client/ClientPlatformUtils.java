@@ -12,6 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.level.material.Fluid;
 import org.apache.commons.lang3.NotImplementedException;
 
 @Environment(EnvType.CLIENT)
@@ -24,6 +25,11 @@ public class ClientPlatformUtils {
 
     @ExpectPlatform
     public static <M extends AbstractContainerMenu, U extends Screen & MenuAccess<M>> void registerScreen(MenuType<? extends M> type, ScreenConstructor<M, U> factory) {
+        throw new NotImplementedException();
+    }
+
+    @ExpectPlatform
+    public static Component getFluidTranslation(Fluid fluid) {
         throw new NotImplementedException();
     }
 

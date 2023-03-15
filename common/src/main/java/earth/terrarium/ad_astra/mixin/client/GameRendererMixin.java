@@ -17,24 +17,20 @@ public abstract class GameRendererMixin {
 
     // Shake the player camera when inside of a vehicle.
     @Inject(at = @At(value = "HEAD"), method = "bobView", cancellable = true)
-    public void adastra_bobView(PoseStack poseStack, float tickDelta, CallbackInfo ci) {
+    public void ad_astra$bobView(PoseStack poseStack, float tickDelta, CallbackInfo ci) {
 
         Minecraft minecraft = Minecraft.getInstance();
 
         if (minecraft.getCameraEntity() instanceof LocalPlayer player) {
-            if (player.getVehicle() instanceof Rocket entity) {
-                if (entity.getPhase() != 3) {
-                    if (entity.isFlying()) {
-                        ci.cancel();
+            if (player.getVehicle() instanceof Rocket entity && entity.getPhase() != 3 && entity.isFlying()) {
+                ci.cancel();
 
-                        float f = player.walkDist - player.walkDistO;
-                        float g = -(player.walkDist + f * tickDelta);
-                        float h = Mth.lerp(tickDelta, 0.075f, -0.075f);
-                        poseStack.translate(Mth.sin(g * (float) Math.PI) * h * 0.5f, -Math.abs(Mth.cos(g * (float) Math.PI) * h), 0.0);
-                        poseStack.mulPose(Axis.ZP.rotationDegrees(Mth.sin(g * (float) Math.PI) * h * 3.0f));
-                        poseStack.mulPose(Axis.XP.rotationDegrees(Math.abs(Mth.cos(g * (float) Math.PI - 0.2f) * h) * 5.0f));
-                    }
-                }
+                float f = player.walkDist - player.walkDistO;
+                float g = -(player.walkDist + f * tickDelta);
+                float h = Mth.lerp(tickDelta, 0.075f, -0.075f);
+                poseStack.translate(Mth.sin(g * (float) Math.PI) * h * 0.5f, -Math.abs(Mth.cos(g * (float) Math.PI) * h), 0.0);
+                poseStack.mulPose(Axis.ZP.rotationDegrees(Mth.sin(g * (float) Math.PI) * h * 3.0f));
+                poseStack.mulPose(Axis.XP.rotationDegrees(Math.abs(Mth.cos(g * (float) Math.PI - 0.2f) * h) * 5.0f));
             }
         }
     }

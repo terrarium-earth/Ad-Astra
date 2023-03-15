@@ -6,6 +6,7 @@ import com.teamresourceful.resourcefullib.common.networking.base.PacketHandler;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.recipe.SpaceStationRecipe;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceKey;

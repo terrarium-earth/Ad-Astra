@@ -28,6 +28,7 @@ public class AdAstraFabric implements ModInitializer {
         AdAstra.init();
         ModEntityTypes.registerAttributes((type, builder) -> FabricDefaultAttributeRegistry.register(type.get(), builder.get()));
         CommandRegistrationCallback.EVENT.register((dispatcher, registry, selection) -> ModCommands.registerCommands(command -> command.accept(dispatcher)));
+        registerCreativeTabs();
         initEvents();
         AdAstra.onRegisterReloadListeners((id, listener) -> ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new IdentifiableResourceReloadListener() {
             @Override
@@ -40,13 +41,15 @@ public class AdAstraFabric implements ModInitializer {
                 return listener.reload(synchronizer, manager, prepareProfiler, applyProfiler, prepareExecutor, applyExecutor);
             }
         }));
+    }
+
+    public static void registerCreativeTabs() {
         ModItems.onRegisterCreativeTabs((loc, item, items) -> FabricItemGroup.builder(loc)
                 .title(Component.translatable("itemGroup." + loc.getNamespace() + "." + loc.getPath()))
                 .icon(() -> item.get().getDefaultInstance())
                 .displayItems((featureFlagSet, output, bl) -> items.forEach(output::accept))
                 .build());
     }
-
     public static void initEvents() {
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
             AstroduxItem.onPlayerJoin(handler.getPlayer());

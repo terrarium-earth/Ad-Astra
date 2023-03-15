@@ -27,14 +27,14 @@ public final class WaterPumpConfig {
         type = EntryType.LONG,
         translation = "text.resourcefulconfig.ad_astra.option.waterPump.tankSize"
     )
-    public static long tankSize = FluidHooks.buckets(6f);
+    public static long tankSize = FluidHooks.buckets(6);
 
     @ConfigEntry(
         id = "transferPerTick",
         type = EntryType.LONG,
         translation = "text.resourcefulconfig.ad_astra.option.waterPump.transferPerTick"
     )
-    public static long transferPerTick = FluidHooks.buckets(1f) / 10;
+    public static long transferPerTick = FluidHooks.buckets(1) / 10;
 
     @ConfigEntry(
         id = "deleteWaterBelowWaterPump",

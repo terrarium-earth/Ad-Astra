@@ -1,8 +1,11 @@
 package earth.terrarium.ad_astra.common.block.machine;
 
+import com.teamresourceful.resourcefullib.common.caches.CacheableFunction;
+import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import earth.terrarium.ad_astra.common.block.machine.entity.AbstractMachineBlockEntity;
 import earth.terrarium.ad_astra.common.block.machine.entity.FluidMachineBlockEntity;
 import earth.terrarium.ad_astra.common.block.machine.entity.OxygenDistributorBlockEntity;
+import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.ad_astra.common.registry.ModTags;
 import earth.terrarium.botarium.common.energy.base.PlatformEnergyManager;
 import earth.terrarium.botarium.common.energy.util.EnergyHooks;
@@ -40,6 +43,16 @@ import java.util.function.ToIntFunction;
 @SuppressWarnings("deprecation")
 @MethodsReturnNonnullByDefault
 public abstract class AbstractMachineBlock extends BaseEntityBlock {
+    private static final CacheableFunction<Block, BlockEntityType<?>> BLOCK_TO_ENTITY = new CacheableFunction<>(block ->
+            ModBlockEntityTypes.BLOCK_ENTITY_TYPES
+                    .getEntries()
+                    .stream()
+                    .map(RegistryEntry::get)
+                    .filter(type -> type.isValid(block.defaultBlockState()))
+                    .findFirst()
+                    .orElse(null)
+    );
+    private BlockEntityType<?> entity;
 
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
@@ -48,6 +61,14 @@ public abstract class AbstractMachineBlock extends BaseEntityBlock {
     public AbstractMachineBlock(Properties properties) {
         super(properties.lightLevel(getLuminance()));
         this.registerDefaultState(this.buildDefaultState());
+    }
+
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        if (entity == null) {
+            entity = BLOCK_TO_ENTITY.apply(state.getBlock());
+        }
+        return entity.create(pos, state);
     }
 
     private static ToIntFunction<BlockState> getLuminance() {

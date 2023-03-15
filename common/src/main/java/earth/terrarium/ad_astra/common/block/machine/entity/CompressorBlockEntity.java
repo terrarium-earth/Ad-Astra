@@ -1,13 +1,11 @@
 package earth.terrarium.ad_astra.common.block.machine.entity;
 
-import earth.terrarium.ad_astra.common.config.CoalGeneratorConfig;
 import earth.terrarium.ad_astra.common.config.CompressorConfig;
 import earth.terrarium.ad_astra.common.recipe.CompressingRecipe;
 import earth.terrarium.ad_astra.common.recipe.CookingRecipe;
 import earth.terrarium.ad_astra.common.registry.ModBlockEntityTypes;
 import earth.terrarium.ad_astra.common.screen.menu.CompressorMenu;
 import earth.terrarium.botarium.common.energy.base.EnergyAttachment;
-import earth.terrarium.botarium.common.energy.impl.ExtractOnlyEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
 import net.minecraft.core.BlockPos;
@@ -16,7 +14,6 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;

@@ -1,13 +1,15 @@
 package earth.terrarium.ad_astra.common.entity.system;
 
-import earth.terrarium.ad_astra.common.config.AdAstraConfig;
 import earth.terrarium.ad_astra.common.item.armor.SpaceSuit;
 import earth.terrarium.ad_astra.common.registry.ModDamageSource;
 import earth.terrarium.ad_astra.common.registry.ModTags;
 import earth.terrarium.ad_astra.common.util.ModUtils;
 import earth.terrarium.ad_astra.common.util.OxygenUtils;
+import earth.terrarium.ad_astra.common.config.AdAstraConfig;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 
 public class EntityOxygenSystem {
@@ -30,7 +32,7 @@ public class EntityOxygenSystem {
         boolean entityHasOxygen = OxygenUtils.entityHasOxygen(level, entity);
         boolean hasOxygenatedSpaceSuit = SpaceSuit.hasOxygenatedSpaceSuit(entity) && SpaceSuit.hasFullSet(entity);
 
-        if (entityHasOxygen && hasOxygenatedSpaceSuit && entity.isUnderWater() && !entity.canBreatheUnderwater()) {
+        if (entityHasOxygen && hasOxygenatedSpaceSuit && entity.isUnderWater() && !entity.canBreatheUnderwater() && !entity.hasEffect(MobEffects.WATER_BREATHING)) {
             consumeOxygen(entity);
             return;
         }
@@ -48,7 +50,7 @@ public class EntityOxygenSystem {
     private static void consumeOxygen(LivingEntity entity) {
         if (entity.getLevel().getGameTime() % 3 == 0) {
             entity.setAirSupply(Math.min(entity.getMaxAirSupply(), entity.getAirSupply() + 4 * 10));
-            SpaceSuit.consumeSpaceSuitOxygen(entity, FluidHooks.buckets(1f) / 1000);
+            SpaceSuit.consumeSpaceSuitOxygen(entity, FluidHooks.buckets(1) / 1000);
         }
     }
 }

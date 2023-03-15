@@ -1,17 +1,12 @@
 package earth.terrarium.ad_astra.common.screen.menu;
 
-import com.mojang.serialization.DataResult;
-import com.teamresourceful.resourcefullib.common.networking.PacketHelper;
-import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.AdAstraClient;
-import earth.terrarium.ad_astra.common.data.Planet;
 import earth.terrarium.ad_astra.common.data.PlanetData;
 import earth.terrarium.ad_astra.common.registry.ModMenus;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.NotNull;
 
 public class PlanetSelectionMenu extends AbstractContainerMenu {
 
@@ -25,7 +20,6 @@ public class PlanetSelectionMenu extends AbstractContainerMenu {
             AdAstraClient.hasUpdatedPlanets = true;
         }
     }
-
 
     public PlanetSelectionMenu(int syncId, Player player, int tier) {
         super(ModMenus.PLANET_SELECTION_SCREEN_HANDLER.get(), syncId);
@@ -47,7 +41,7 @@ public class PlanetSelectionMenu extends AbstractContainerMenu {
     }
 
     @Override
-    public @NotNull ItemStack quickMoveStack(Player player, int index) {
+    public ItemStack quickMoveStack(Player player, int index) {
         return null;
     }
 }

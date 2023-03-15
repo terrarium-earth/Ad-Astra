@@ -1,8 +1,8 @@
 package earth.terrarium.ad_astra.common.item;
 
+import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.ad_astra.common.config.AdAstraConfig;
 import earth.terrarium.ad_astra.common.registry.ModFluids;
-import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.ad_astra.common.registry.ModTags;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;

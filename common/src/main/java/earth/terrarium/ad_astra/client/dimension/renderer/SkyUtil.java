@@ -6,7 +6,7 @@ import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Axis;
 import com.teamresourceful.resourcefullib.common.color.Color;
 import earth.terrarium.ad_astra.client.resourcepack.PlanetSkyRenderer;
-import earth.terrarium.ad_astra.common.level.LevelSeed;
+import earth.terrarium.ad_astra.common.world.LevelSeed;
 import earth.terrarium.ad_astra.mixin.client.LevelRendererAccessor;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

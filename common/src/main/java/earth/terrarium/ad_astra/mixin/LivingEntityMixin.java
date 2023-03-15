@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class LivingEntityMixin {
 
     @Inject(method = "causeFallDamage", at = @At("HEAD"), cancellable = true)
-    public void adastra_handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
+    public void ad_astra$handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
 
         LivingEntity entity = ((LivingEntity) (Object) this);
 
@@ -37,7 +37,7 @@ public abstract class LivingEntityMixin {
     }
 
     @Inject(method = "hurt", at = @At("HEAD"), cancellable = true)
-    public void adastra_damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+    public void ad_astra$damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         LivingEntity entity = ((LivingEntity) (Object) this);
 
         if (source.isFire() || source.equals(DamageSource.HOT_FLOOR)) {
@@ -50,7 +50,7 @@ public abstract class LivingEntityMixin {
     }
 
     @Inject(method = "tick", at = @At("TAIL"))
-    public void adastra_tick(CallbackInfo ci) {
+    public void ad_astra$tick(CallbackInfo ci) {
 
         LivingEntity entity = ((LivingEntity) (Object) this);
         Level level = entity.level;

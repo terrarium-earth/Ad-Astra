@@ -30,7 +30,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class PlayerRendererMixin {
 
     @Inject(method = "renderRightHand", at = @At("HEAD"), cancellable = true)
-    public void adastra_renderRightHand(PoseStack poseStack, MultiBufferSource buffer, int packedLight, AbstractClientPlayer player, CallbackInfo ci) {
+    public void ad_astra$renderRightHand(PoseStack poseStack, MultiBufferSource buffer, int packedLight, AbstractClientPlayer player, CallbackInfo ci) {
         ItemStack offhandStack = player.getOffhandItem();
         if (offhandStack.getItem() instanceof VehicleItem) {
             ci.cancel();
@@ -38,17 +38,17 @@ public class PlayerRendererMixin {
         }
         if (player.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof SpaceSuit) {
             ci.cancel();
-            this.adastra_renderArm(poseStack, packedLight, player, true);
+            this.ad_astra$renderArm(poseStack, packedLight, player, true);
         }
     }
 
     @Inject(method = "renderLeftHand", at = @At("HEAD"), cancellable = true)
-    public void adastra_renderLeftHand(PoseStack poseStack, MultiBufferSource buffer, int packedLight, AbstractClientPlayer player, CallbackInfo ci) {
+    public void ad_astra$renderLeftHand(PoseStack poseStack, MultiBufferSource buffer, int packedLight, AbstractClientPlayer player, CallbackInfo ci) {
         ItemStack chest = player.getItemBySlot(EquipmentSlot.CHEST);
         if (!chest.isEmpty()) {
             if (player.getItemBySlot(EquipmentSlot.CHEST).getItem() instanceof SpaceSuit) {
                 ci.cancel();
-                this.adastra_renderArm(poseStack, packedLight, player, false);
+                this.ad_astra$renderArm(poseStack, packedLight, player, false);
             }
         }
     }
@@ -57,7 +57,7 @@ public class PlayerRendererMixin {
     @SuppressWarnings({"unchecked", "rawtypes"})
 
     @Unique
-    private void adastra_renderArm(PoseStack poseStack, int packedLight, AbstractClientPlayer player, boolean right) {
+    private void ad_astra$renderArm(PoseStack poseStack, int packedLight, AbstractClientPlayer player, boolean right) {
         ItemStack stack = player.getItemBySlot(EquipmentSlot.CHEST);
         if (!stack.isEmpty()) {
             if (stack.getItem() instanceof SpaceSuit) {
@@ -84,10 +84,10 @@ public class PlayerRendererMixin {
                 float b = (float) (decimal & 0xFF) / 255.0f;
 
                 if (JetSuit.hasFullSet(player)) {
-                    JetSuit.spawnParticles(player.level, player, model);
+                    ((JetSuit) stack.getItem()).spawnParticles(player.level, player, model);
                 }
 
-                VertexConsumer vertex = SpaceSuitModel.getVertex(RenderType.entityTranslucent(model.getTextureLocation()), player.getItemBySlot(EquipmentSlot.CHEST).isEnchanted());
+                VertexConsumer vertex = SpaceSuitModel.getVertex(RenderType.entityTranslucentEmissive(model.getTextureLocation()), stack.isEnchanted());
                 if (right) {
                     model.rightArm.render(poseStack, vertex, packedLight, OverlayTexture.NO_OVERLAY, r, g, b, 1.0f);
                 } else {

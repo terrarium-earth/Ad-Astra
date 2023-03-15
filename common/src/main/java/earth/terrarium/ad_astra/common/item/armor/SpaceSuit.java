@@ -11,6 +11,7 @@ import earth.terrarium.botarium.common.item.ItemStackHolder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -21,20 +22,26 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.apache.commons.lang3.Range;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.BiPredicate;
-import java.util.stream.StreamSupport;
 
 public class SpaceSuit extends DyeableArmorItem implements FluidContainingItem, ModArmourItem {
 
-    public SpaceSuit(ArmorMaterial armorMaterial, EquipmentSlot equipmentSlot, Properties properties) {
-        super(armorMaterial, equipmentSlot, properties);
+    public SpaceSuit(ArmorMaterial material, EquipmentSlot slot, Properties properties) {
+        super(material, slot, properties);
     }
 
     public static boolean hasFullSet(LivingEntity entity) {
-        return StreamSupport.stream(entity.getArmorSlots().spliterator(), false).allMatch(s -> s.getItem() instanceof SpaceSuit);
+        int slotCount = 0;
+        int armorCount = 0;
+        for (ItemStack stack : entity.getArmorSlots()) {
+            slotCount++;
+            if (stack.getItem() instanceof SpaceSuit) {
+                armorCount++;
+            }
+        }
+        return slotCount > 0 && armorCount == slotCount;
     }
 
     /**
@@ -89,7 +96,7 @@ public class SpaceSuit extends DyeableArmorItem implements FluidContainingItem, 
     }
 
     @Override
-    public @Nullable String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
-        return AdAstra.MOD_ID + ("overlay".equals(type) ? ":textures/entity/armour/space_suit_overlay.png" : ":textures/entity/armour/space_suit.png");
+    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
+        return new ResourceLocation(AdAstra.MOD_ID, "textures/entity/armour/space_suit.png").toString();
     }
 }

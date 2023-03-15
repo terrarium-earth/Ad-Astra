@@ -1,6 +1,7 @@
 {
-  "parent": "block/cube_all",
+  "parent": "ad_astra:block/globe",
   "textures": {
-    "all": "ad_astra:block/globes/venus_globe"
+    "particle": "ad_astra:block/globe/venus_globe",
+    "texture": "ad_astra:block/globe/venus_globe"
   }
 }

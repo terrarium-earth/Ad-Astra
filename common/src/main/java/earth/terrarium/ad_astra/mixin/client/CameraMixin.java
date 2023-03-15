@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class CameraMixin {
 
     @Inject(method = "setup", at = @At("TAIL"))
-    public void adastra_update(BlockGetter area, Entity focusedEntity, boolean thirdPerson, boolean inverseView, float tickDelta, CallbackInfo ci) {
+    public void ad_astra$update(BlockGetter area, Entity focusedEntity, boolean thirdPerson, boolean inverseView, float tickDelta, CallbackInfo ci) {
         if (VehiclesConfig.moveCameraInVehicle) {
             if (thirdPerson && focusedEntity.getVehicle() instanceof Vehicle vehicle) {
                 if (vehicle.doHighFov()) {

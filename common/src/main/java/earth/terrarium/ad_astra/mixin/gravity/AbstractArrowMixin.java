@@ -18,7 +18,7 @@ public abstract class AbstractArrowMixin {
     private static final double CONSTANT = 0.05;
 
     @Inject(method = "tick", at = @At("TAIL"))
-    public void adastra_tick(CallbackInfo ci) {
+    public void ad_astra$tick(CallbackInfo ci) {
         if (AdAstraConfig.doEntityGravity) {
             Entity entity = (Entity) (Object) this;
             if (!entity.isNoGravity()) {

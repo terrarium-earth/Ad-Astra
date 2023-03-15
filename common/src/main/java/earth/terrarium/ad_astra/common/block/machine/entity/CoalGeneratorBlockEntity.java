@@ -54,7 +54,7 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity imple
         if (!this.level.isClientSide()) {
             ItemStack input = this.getItems().get(0);
             // Consume the fuel
-            if (this.cookTime > 0 && this.getEnergyStorage(this).internalInsert(this.getEnergyPerTick(), true) > 0) {
+            if (this.cookTime > 0) {
                 this.cookTime--;
                 this.getEnergyStorage(this).internalInsert(this.getEnergyPerTick(), false);
                 this.setActive(true);
@@ -80,6 +80,7 @@ public class CoalGeneratorBlockEntity extends ProcessingMachineBlockEntity imple
     public long getMaxCapacity() {
         return this.getEnergyStorage(this).getMaxCapacity();
     }
+
 
     @Override
     public WrappedBlockEnergyContainer getEnergyStorage(BlockEntity holder) {

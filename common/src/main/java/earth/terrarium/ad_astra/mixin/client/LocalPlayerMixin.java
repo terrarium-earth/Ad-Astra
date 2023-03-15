@@ -38,14 +38,14 @@ public class LocalPlayerMixin {
     private List<AmbientSoundHandler> ambientSoundHandlers;
 
     @Inject(at = @At(value = "TAIL"), method = "<init>")
-    public void adastra_LocalPlayer(Minecraft minecraft, ClientLevel level, ClientPacketListener networkHandler, StatsCounter stats, ClientRecipeBook recipeBook, boolean lastSneaking, boolean lastSprinting, CallbackInfo ci) {
+    public void ad_astra$LocalPlayer(Minecraft minecraft, ClientLevel level, ClientPacketListener networkHandler, StatsCounter stats, ClientRecipeBook recipeBook, boolean lastSneaking, boolean lastSprinting, CallbackInfo ci) {
         this.ambientSoundHandlers.add(new PlanetWeatherSoundPlayer((LocalPlayer) (Object) (this), minecraft.getSoundManager()));
         this.ambientSoundHandlers.add(new PlanetSoundPlayer((LocalPlayer) (Object) (this), minecraft.getSoundManager()));
 
     }
 
     @Inject(method = "tick", at = @At("TAIL"))
-    public void adastra_tick(CallbackInfo ci) {
+    public void ad_astra$tick(CallbackInfo ci) {
 
         LocalPlayer player = ((LocalPlayer) (Object) this);
         ItemStack chest = player.getItemBySlot(EquipmentSlot.CHEST);

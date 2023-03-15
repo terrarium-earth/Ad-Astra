@@ -2,12 +2,13 @@ package earth.terrarium.ad_astra.common.compat.jei.category;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.client.ClientPlatformUtils;
 import earth.terrarium.ad_astra.client.screen.GuiUtil;
+import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.ad_astra.common.compat.jei.EnergyBarDrawable;
 import earth.terrarium.ad_astra.common.compat.jei.FluidBarDrawable;
 import earth.terrarium.ad_astra.common.config.FuelRefineryConfig;
 import earth.terrarium.ad_astra.common.recipe.FuelConversionRecipe;
-import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import mezz.jei.api.gui.builder.IIngredientAcceptor;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -43,14 +44,14 @@ public class FuelConversionCategory extends BaseCategory<FuelConversionRecipe> {
     public void setRecipe(IRecipeLayoutBuilder builder, FuelConversionRecipe recipe, IFocusGroup focuses) {
         builder.addInvisibleIngredients(RecipeIngredientRole.CATALYST).addIngredients(Ingredient.of(ModItems.FUEL_REFINERY.get()));
         IIngredientAcceptor<?> input = builder.addInvisibleIngredients(RecipeIngredientRole.INPUT);
-        recipe.getFluidInput().stream().forEach(fluid -> input.addFluidStack(fluid.value(), FluidHooks.buckets(1f)));
-        builder.addInvisibleIngredients(RecipeIngredientRole.OUTPUT).addFluidStack(recipe.getFluidOutput(), FluidHooks.buckets(1f));
+        recipe.getFluidInput().stream().forEach(fluid -> input.addFluidStack(fluid.value(), FluidHooks.buckets(1)));
+        builder.addInvisibleIngredients(RecipeIngredientRole.OUTPUT).addFluidStack(recipe.getFluidOutput(), FluidHooks.buckets(1));
     }
 
     @Override
     public void draw(FuelConversionRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack poseStack, double mouseX, double mouseY) {
-        new FluidBarDrawable(FluidHooks.newFluidHolder(recipe.getFluidInput().get(0).value(), FluidHooks.buckets(1f), null), false, 5000).draw(poseStack, 15, 15);
-        new FluidBarDrawable(FluidHooks.newFluidHolder(recipe.getFluidOutput(), FluidHooks.buckets(1f), null), true, 5000).draw(poseStack, 80, 15);
+        new FluidBarDrawable(FluidHooks.newFluidHolder(recipe.getFluidInput().get(0).value(), FluidHooks.buckets(1), null), false, 5000).draw(poseStack, 15, 15);
+        new FluidBarDrawable(FluidHooks.newFluidHolder(recipe.getFluidOutput(), FluidHooks.buckets(1), null), true, 5000).draw(poseStack, 80, 15);
         new EnergyBarDrawable(false, 10000).draw(poseStack, 120, 15);
         arrow.draw(poseStack, 40, 30);
     }
@@ -62,10 +63,10 @@ public class FuelConversionCategory extends BaseCategory<FuelConversionRecipe> {
             tooltips.add(Component.translatable("rei.tooltip.ad_astra.energy_using", FuelRefineryConfig.energyPerTick));
         }
         if (mouseX > 15 && mouseY > 13 && mouseX < 15 + GuiUtil.FLUID_TANK_WIDTH && mouseY < 13 + GuiUtil.FLUID_TANK_HEIGHT) {
-            tooltips.add(GuiUtil.getFluidTranslation(recipe.getFluidInput().get(0).value()));
+            tooltips.add(ClientPlatformUtils.getFluidTranslation(recipe.getFluidInput().get(0).value()));
         }
         if (mouseX > 80 && mouseY > 13 && mouseX < 80 + GuiUtil.FLUID_TANK_WIDTH && mouseY < 13 + GuiUtil.FLUID_TANK_HEIGHT) {
-            tooltips.add(GuiUtil.getFluidTranslation(recipe.getFluidOutput()));
+            tooltips.add(ClientPlatformUtils.getFluidTranslation(recipe.getFluidOutput()));
         }
         return tooltips;
     }

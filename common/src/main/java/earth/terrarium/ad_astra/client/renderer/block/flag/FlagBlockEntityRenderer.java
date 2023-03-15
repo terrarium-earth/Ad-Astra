@@ -6,9 +6,9 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.client.AdAstraClient;
 import earth.terrarium.ad_astra.common.block.flag.FlagBlock;
 import earth.terrarium.ad_astra.common.block.flag.FlagBlockEntity;
-import earth.terrarium.ad_astra.client.AdAstraClient;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
@@ -20,7 +20,6 @@ import net.minecraft.client.renderer.texture.AbstractTexture;
 import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.DefaultPlayerSkin;
-import net.minecraft.core.Registry;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -33,7 +32,8 @@ import java.util.Map;
 @Environment(EnvType.CLIENT)
 public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEntity> {
 
-    public FlagBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {}
+    public FlagBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {
+    }
 
     @Override
     public void render(FlagBlockEntity entity, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
@@ -83,8 +83,8 @@ public class FlagBlockEntityRenderer implements BlockEntityRenderer<FlagBlockEnt
 
         if (flip) flipY(poseStack, 0.5f);
         VertexConsumer vertexConsumer = buffer.getBuffer(getRenderLayer(entity.getOwner()));
-        renderQuad(poseStack, vertexConsumer, 0.5f, 0.5f, 8f/64f, 8f/64f, 8f/64f, 8f/64f, packedLight, overlay);
-        renderQuad(poseStack, vertexConsumer, 0.5f, 0.5f, 32f/64f, 8f/64f, 8f/64f, 8f/64f, packedLight, overlay);
+        renderQuad(poseStack, vertexConsumer, 0.5f, 0.5f, 8f / 64f, 8f / 64f, 8f / 64f, 8f / 64f, packedLight, overlay);
+        renderQuad(poseStack, vertexConsumer, 0.5f, 0.5f, 32f / 64f, 8f / 64f, 8f / 64f, 8f / 64f, packedLight, overlay);
         poseStack.popPose();
     }
 

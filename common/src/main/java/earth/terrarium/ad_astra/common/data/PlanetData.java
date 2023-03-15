@@ -6,7 +6,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.JsonOps;
-import com.teamresourceful.resourcefullib.common.codecs.yabn.YabnOps;
 import com.teamresourceful.resourcefullib.common.networking.PacketHelper;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.AdAstraClient;
@@ -31,7 +30,6 @@ public class PlanetData extends SimpleJsonResourceReloadListener {
     private static final Set<ResourceKey<Level>> PLANET_LEVELS = new HashSet<>();
     private static final Set<ResourceKey<Level>> ORBITS_LEVELS = new HashSet<>();
     private static final Set<ResourceKey<Level>> OXYGEN_LEVELS = new HashSet<>();
-
 
     public static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
@@ -73,7 +71,6 @@ public class PlanetData extends SimpleJsonResourceReloadListener {
         PLANETS.clear();
         LEVEL_TO_PLANET.clear();
         ORBIT_TO_PLANET.clear();
-        PLANET_LEVELS.clear();
         ORBITS_LEVELS.clear();
         OXYGEN_LEVELS.clear();
     }

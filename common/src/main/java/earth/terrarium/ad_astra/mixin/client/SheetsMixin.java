@@ -24,16 +24,16 @@ public abstract class SheetsMixin {
     private static final Material STROPHAR_CHEST_LEFT = new Material(Sheets.CHEST_SHEET, new ResourceLocation(AdAstra.MOD_ID, "entity/chest/strophar_chest_left"));
 
     @Inject(method = "chooseMaterial(Lnet/minecraft/world/level/block/entity/BlockEntity;Lnet/minecraft/world/level/block/state/properties/ChestType;Z)Lnet/minecraft/client/resources/model/Material;", at = @At("HEAD"), cancellable = true)
-    private static void adastra_getChestTexture(BlockEntity blockEntity, ChestType type, boolean christmas, CallbackInfoReturnable<Material> cir) {
+    private static void ad_astra$getChestTexture(BlockEntity blockEntity, ChestType type, boolean christmas, CallbackInfoReturnable<Material> cir) {
         if (blockEntity.getBlockState().getBlock().equals(ModBlocks.AERONOS_CHEST.get())) {
-            cir.setReturnValue(adastra_getCustomChestTexture(type, AERONOS_CHEST, AERONOS_CHEST_LEFT, AERONOS_CHEST_RIGHT));
+            cir.setReturnValue(ad_astra$getCustomChestTexture(type, AERONOS_CHEST, AERONOS_CHEST_LEFT, AERONOS_CHEST_RIGHT));
         } else if (blockEntity.getBlockState().getBlock().equals(ModBlocks.STROPHAR_CHEST.get())) {
-            cir.setReturnValue(adastra_getCustomChestTexture(type, STROPHAR_CHEST, STROPHAR_CHEST_LEFT, STROPHAR_CHEST_RIGHT));
+            cir.setReturnValue(ad_astra$getCustomChestTexture(type, STROPHAR_CHEST, STROPHAR_CHEST_LEFT, STROPHAR_CHEST_RIGHT));
         }
     }
 
     @Unique
-    private static Material adastra_getCustomChestTexture(ChestType type, Material single, Material left, Material right) {
+    private static Material ad_astra$getCustomChestTexture(ChestType type, Material single, Material left, Material right) {
         return switch (type) {
             case LEFT -> left;
             case RIGHT -> right;

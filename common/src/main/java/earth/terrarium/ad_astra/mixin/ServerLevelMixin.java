@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.mixin;
 
-import earth.terrarium.ad_astra.common.level.LunarianWanderingTraderSpawner;
+import earth.terrarium.ad_astra.common.world.LunarianWanderingTraderSpawner;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -32,7 +32,7 @@ public abstract class ServerLevelMixin {
     private List<CustomSpawner> customSpawners;
 
     @Inject(at = @At(value = "TAIL"), method = "<init>")
-    public void adastra_Serverlevel(MinecraftServer minecraftServer, Executor executor, LevelStorageSource.LevelStorageAccess session, ServerLevelData serverWorldProperties, ResourceKey<Level> registryKey, LevelStem dimensionOptions, ChunkProgressListener levelGenerationProgressListener, boolean debugWorld, long seed, List<CustomSpawner> spawners, boolean shouldTickTime, CallbackInfo ci) {
+    public void ad_astra$Serverlevel(MinecraftServer minecraftServer, Executor executor, LevelStorageSource.LevelStorageAccess session, ServerLevelData serverWorldProperties, ResourceKey<Level> registryKey, LevelStem dimensionOptions, ChunkProgressListener levelGenerationProgressListener, boolean debugWorld, long seed, List<CustomSpawner> spawners, boolean shouldTickTime, CallbackInfo ci) {
 
         List<CustomSpawner> serverSpawners = new ArrayList<>(this.customSpawners);
         if (!shouldTickTime) {

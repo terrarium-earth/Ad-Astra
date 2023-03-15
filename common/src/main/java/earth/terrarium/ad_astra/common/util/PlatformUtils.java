@@ -15,7 +15,6 @@ import org.apache.commons.lang3.NotImplementedException;
 import java.util.function.Supplier;
 
 public class PlatformUtils {
-
     @ExpectPlatform
     public static <T extends Entity> T teleportToDimension(T entity, ServerLevel level, PortalInfo target) {
         throw new NotImplementedException();

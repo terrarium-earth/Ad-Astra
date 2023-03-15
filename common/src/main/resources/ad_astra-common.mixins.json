@@ -10,6 +10,7 @@
     "EntityMixin",
     "FireworkRocketItemMixin",
     "IceBlockMixin",
+    "LiquidBlockMixin",
     "LivingEntityMixin",
     "PaintingInvoker",
     "PiglinSpecificSensorMixin",
@@ -27,7 +28,6 @@
     "gravity.ThrownExperienceBottleMixin",
     "gravity.ThrownPotionMixin",
     "oxygen.BlockItemMixin",
-    "oxygen.BucketItemMixin",
     "oxygen.FireBlockMixin",
     "oxygen.FlintAndSteelItemMixin"
   ],

@@ -9,7 +9,8 @@ import earth.terrarium.ad_astra.common.screen.menu.OxygenDistributorMenu;
 import earth.terrarium.ad_astra.common.util.FluidUtils;
 import earth.terrarium.ad_astra.common.util.ModUtils;
 import earth.terrarium.ad_astra.common.util.OxygenUtils;
-import earth.terrarium.ad_astra.common.util.algorithm.OxygenFillerAlgorithm;
+import earth.terrarium.ad_astra.common.util.algorithm.FloodFiller3D;
+import earth.terrarium.botarium.common.energy.base.EnergyAttachment;
 import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
 import earth.terrarium.botarium.common.fluid.base.FluidHolder;
@@ -32,7 +33,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
-public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
+public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity implements EnergyAttachment.Block {
     private WrappedBlockEnergyContainer energyContainer;
 
     private int oxygenFillCheckTicks = OxygenDistributorConfig.refreshTicks;
@@ -103,7 +104,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
     }
 
     public long getFluidToExtract(long oxygenBlocks, boolean client) {
-        long value = (long) (((FluidHooks.buckets(1f) / 1000) * oxygenBlocks / 60) * OxygenDistributorConfig.oxygenMultiplier);
+        long value = (long) (((FluidHooks.buckets(1) / 1000) * oxygenBlocks / 60) * OxygenDistributorConfig.oxygenMultiplier);
         if (client) {
             return value;
         }
@@ -162,7 +163,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
 
             if (this.getEnergyStorage(this).internalExtract(this.getEnergyPerTick(), true) > 0) {
                 List<OxygenConversionRecipe> recipes = OxygenConversionRecipe.getRecipes(this.level);
-                if (FluidUtils.convertFluid(getDoubleFluidTank(), recipes, FluidHooks.buckets(1f) / 20)) {
+                if (FluidUtils.convertFluid(getDoubleFluidTank(), recipes, FluidHooks.buckets(1f) / 10)) {
                     this.getEnergyStorage(this).internalExtract(this.getEnergyPerTick(), false);
                 }
             }
@@ -198,8 +199,7 @@ public class OxygenDistributorBlockEntity extends FluidMachineBlockEntity {
             }
         }
 
-        OxygenFillerAlgorithm floodFiller = new OxygenFillerAlgorithm(this.level, this.getMaxBlockChecks());
-        Set<BlockPos> positions = floodFiller.runAlgorithm(worldPosition.above());
+        Set<BlockPos> positions = FloodFiller3D.run(level, worldPosition.above());
 
         if (this.canDistribute(positions.size())) {
             OxygenUtils.setEntry(this.level, worldPosition, positions);

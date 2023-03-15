@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.ad_astra.common.registry.ModRecipeSerializers;
 import earth.terrarium.ad_astra.common.registry.ModRecipeTypes;
-import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -13,7 +12,6 @@ import net.minecraft.world.level.Level;
 import java.util.List;
 import java.util.function.Predicate;
 
-@MethodsReturnNonnullByDefault
 public class SpaceStationRecipe extends ModRecipe {
 
     public SpaceStationRecipe(ResourceLocation id, List<IngredientHolder> input) {

@@ -17,7 +17,7 @@ import earth.terrarium.ad_astra.common.networking.packet.client.CreateSpaceStati
 import earth.terrarium.ad_astra.common.networking.packet.client.TeleportToPlanetPacket;
 import earth.terrarium.ad_astra.common.recipe.SpaceStationRecipe;
 import earth.terrarium.ad_astra.common.screen.menu.PlanetSelectionMenu;
-import earth.terrarium.ad_astra.common.util.MathUtils;
+import earth.terrarium.ad_astra.common.util.MathUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -424,7 +424,7 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
 
                     float min = maxThreshold / (float) minThreshold;
                     float ratio = backButton.getY() / (float) minThreshold;
-                    ratio = MathUtils.invLerp(ratio, 1, min);
+                    ratio = MathUtil.invLerp(ratio, 1, min);
 
                     // Flip min and max for inverse operation.
                     this.scrollBar.setY((int) Mth.lerp(ratio, maxScrollY, minScrollY));
@@ -506,6 +506,12 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
     }
 
     public enum TooltipType {
-        NONE, GALAXY, SOLAR_SYSTEM, CATEGORY, PLANET, ORBIT, SPACE_STATION
+        NONE,
+        GALAXY,
+        SOLAR_SYSTEM,
+        CATEGORY,
+        PLANET,
+        ORBIT,
+        SPACE_STATION
     }
 }

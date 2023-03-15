@@ -5,8 +5,8 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.teamresourceful.resourcefullib.common.codecs.tags.HolderSetCodec;
 import earth.terrarium.ad_astra.common.registry.ModRecipeSerializers;
 import earth.terrarium.ad_astra.common.registry.ModRecipeTypes;
-import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.HolderSet;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -17,7 +17,6 @@ import net.minecraft.world.level.material.Fluid;
 import java.util.List;
 import java.util.function.Predicate;
 
-@MethodsReturnNonnullByDefault
 public class OxygenConversionRecipe extends ConversionRecipe {
 
     public OxygenConversionRecipe(ResourceLocation id, HolderSet<Fluid> input, Fluid output, double conversionRatio) {

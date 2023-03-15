@@ -17,7 +17,7 @@ public abstract class FireworkRocketItemMixin {
 
     // Cancel firework boost with jet suit
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
-    public void adastra_use(Level level, Player user, InteractionHand hand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir) {
+    public void ad_astra$use(Level level, Player user, InteractionHand hand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir) {
         if (JetSuit.hasFullSet(user)) {
             cir.setReturnValue(InteractionResultHolder.pass(user.getItemInHand(hand)));
         }

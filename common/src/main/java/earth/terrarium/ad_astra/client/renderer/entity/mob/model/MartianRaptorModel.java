@@ -79,7 +79,7 @@ public class MartianRaptorModel extends EntityModel<MartianRaptor> {
     }
 
     @Override
-   public void setupAnim(MartianRaptor entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
+    public void setupAnim(MartianRaptor entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
 
         this.left_leg.xRot = Mth.cos(limbAngle) * -1.0f * limbDistance;
         this.right_leg.xRot = Mth.cos(limbAngle) * 1.0f * limbDistance;

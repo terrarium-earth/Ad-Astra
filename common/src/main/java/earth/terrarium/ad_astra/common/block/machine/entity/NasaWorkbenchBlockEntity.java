@@ -24,8 +24,6 @@ import java.util.List;
 
 public class NasaWorkbenchBlockEntity extends AbstractMachineBlockEntity {
 
-    private final List<NasaWorkbenchRecipe> acceptedInputs = new ArrayList<>();
-
     public NasaWorkbenchBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntityTypes.NASA_WORKBENCH.get(), blockPos, blockState);
     }

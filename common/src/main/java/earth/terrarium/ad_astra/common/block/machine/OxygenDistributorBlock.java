@@ -1,6 +1,5 @@
 package earth.terrarium.ad_astra.common.block.machine;
 
-import earth.terrarium.ad_astra.common.block.machine.entity.OxygenDistributorBlockEntity;
 import earth.terrarium.ad_astra.common.util.OxygenUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -30,11 +29,6 @@ public class OxygenDistributorBlock extends AbstractMachineBlock {
     @Override
     protected boolean useLit() {
         return true;
-    }
-
-    @Override
-    public OxygenDistributorBlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new OxygenDistributorBlockEntity(pos, state);
     }
 
     @Override

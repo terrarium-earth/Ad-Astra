@@ -27,5 +27,5 @@ public final class OxygenLoaderConfig {
         type = EntryType.LONG,
         translation = "text.resourcefulconfig.ad_astra.option.oxygenLoader.tankSize"
     )
-    public static long tankSize = FluidHooks.buckets(3f);
+    public static long tankSize = FluidHooks.buckets(3);
 }

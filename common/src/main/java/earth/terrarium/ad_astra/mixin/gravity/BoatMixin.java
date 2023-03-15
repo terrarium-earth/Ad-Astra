@@ -18,7 +18,7 @@ public abstract class BoatMixin {
     private static final double CONSTANT = -0.04;
 
     @Inject(method = "floatBoat", at = @At("TAIL"))
-    public void adastra_updateVelocity(CallbackInfo ci) {
+    public void ad_astra$updateVelocity(CallbackInfo ci) {
         if (AdAstraConfig.doEntityGravity) {
             Entity entity = (Entity) (Object) this;
             if (!entity.isNoGravity()) {

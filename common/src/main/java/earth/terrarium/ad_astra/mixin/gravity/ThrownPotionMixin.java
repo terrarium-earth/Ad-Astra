@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ThrownPotion.class)
 public abstract class ThrownPotionMixin {
     @Inject(method = "getGravity", at = @At("HEAD"), cancellable = true)
-    public void adastra_getGravity(CallbackInfoReturnable<Float> cir) {
+    public void ad_astra$getGravity(CallbackInfoReturnable<Float> cir) {
         if (AdAstraConfig.doEntityGravity) {
             cir.setReturnValue(0.05f * ModUtils.getEntityGravity((Entity) (Object) this));
         }

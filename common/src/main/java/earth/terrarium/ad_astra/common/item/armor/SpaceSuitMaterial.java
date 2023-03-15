@@ -14,7 +14,7 @@ public class SpaceSuitMaterial implements ArmorMaterial {
 
     @Override
     public int getDurabilityForSlot(EquipmentSlot slot) {
-        return BASE_DURABILITY[slot.getIndex()] * 15;
+        return BASE_DURABILITY[slot.getIndex()] * 25;
     }
 
     @Override

@@ -2,8 +2,6 @@ package earth.terrarium.ad_astra.common.block.machine.entity;
 
 import earth.terrarium.ad_astra.common.block.machine.AbstractMachineBlock;
 import earth.terrarium.ad_astra.common.util.ModInventory;
-import earth.terrarium.botarium.common.energy.base.PlatformEnergyManager;
-import earth.terrarium.botarium.common.energy.util.EnergyHooks;
 import earth.terrarium.botarium.common.menu.ExtraDataMenuProvider;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
@@ -23,14 +21,11 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Optional;
 
 @MethodsReturnNonnullByDefault
 public abstract class AbstractMachineBlockEntity extends BlockEntity implements ExtraDataMenuProvider, ModInventory, WorldlyContainer {

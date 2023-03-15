@@ -7,7 +7,7 @@
         {
           "type": "minecraft:item",
           "name": "ad_astra:launch_pad",
-          "weight": 3
+          "weight": 2
         },
         {
           "type": "minecraft:item",

@@ -17,7 +17,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -28,7 +27,7 @@ public class RoverItem extends VehicleItem {
     }
 
     @Override
-    public @NotNull InteractionResult useOn(UseOnContext context) {
+    public InteractionResult useOn(UseOnContext context) {
         Level level = context.getLevel();
         if (!level.isClientSide) {
             BlockPos pos = context.getClickedPos();
@@ -80,6 +79,6 @@ public class RoverItem extends VehicleItem {
 
     @Override
     public long getTankSize() {
-        return FluidHooks.buckets(3f);
+        return FluidHooks.buckets(3);
     }
 }

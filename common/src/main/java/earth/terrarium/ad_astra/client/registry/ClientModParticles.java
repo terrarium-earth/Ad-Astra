@@ -18,7 +18,7 @@ import java.util.function.BiConsumer;
 @Environment(EnvType.CLIENT)
 public class ClientModParticles {
 
-    public static void onRegisterParticles(BiConsumer<ParticleType<SimpleParticleType>, ClientModParticles.SpriteParticleRegistration<SimpleParticleType> > register) {
+    public static void onRegisterParticles(BiConsumer<ParticleType<SimpleParticleType>, ClientModParticles.SpriteParticleRegistration<SimpleParticleType>> register) {
         register.accept(ModParticleTypes.VENUS_RAIN.get(), SplashParticle.Provider::new);
         register.accept(ModParticleTypes.LARGE_FLAME.get(), LargeFlameParticle.Provider::new);
         register.accept(ModParticleTypes.LARGE_SMOKE.get(), LargeFlameParticle.Provider::new);

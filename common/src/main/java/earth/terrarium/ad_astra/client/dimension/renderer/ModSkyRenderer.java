@@ -69,8 +69,10 @@ public class ModSkyRenderer {
             float scale = skyObject.scale();
             Vector3f rotation = skyObject.rotation();
             switch (skyObject.renderType()) {
-                case STATIC -> {} // Do not modify the scale or rotation
-                case DYNAMIC -> rotation = new Vector3f(level.getTimeOfDay(tickDelta) * 360.0f + rotation.x(), rotation.y(), rotation.z());
+                case STATIC -> {
+                } // Do not modify the scale or rotation
+                case DYNAMIC ->
+                        rotation = new Vector3f(level.getTimeOfDay(tickDelta) * 360.0f + rotation.x(), rotation.y(), rotation.z());
                 case SCALING -> scale *= SkyUtil.getScale();
                 case DEBUG -> rotation = new Vector3f(60, 0, 0); // Test things without restarting Minecraft
             }

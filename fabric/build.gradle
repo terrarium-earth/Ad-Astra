@@ -32,7 +32,7 @@ dependencies {
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
 
     modApi "com.terraformersmc:modmenu:$rootProject.modmenu_version"
-//    modImplementation "vazkii.patchouli:Patchouli:$rootProject.minecraft_version-$rootProject.patchouli_version-FABRIC"
+    modImplementation "vazkii.patchouli:Patchouli:$rootProject.minecraft_version-$rootProject.patchouli_version-FABRIC"
 
     modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:$rootProject.rei_version"
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:$rootProject.rei_version"

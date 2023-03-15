@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class DimensionSpecialEffectsMixin {
 
     @Inject(method = "forType", at = @At("HEAD"), cancellable = true)
-    private static void adastra_forType(DimensionType type, CallbackInfoReturnable<DimensionSpecialEffects> cir) {
+    private static void ad_astra$forType(DimensionType type, CallbackInfoReturnable<DimensionSpecialEffects> cir) {
         if (ClientModSkiesImpl.DIMENSION_SPECIAL_EFFECTS.containsKey(type.effectsLocation())) {
             cir.setReturnValue(ClientModSkiesImpl.DIMENSION_SPECIAL_EFFECTS.get(type.effectsLocation()));
         }

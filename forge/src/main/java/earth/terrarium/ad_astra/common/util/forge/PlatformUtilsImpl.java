@@ -24,9 +24,9 @@ public class PlatformUtilsImpl {
     }
 
     public static void registerStrippedLog(Block log, Block strippedLog) {
-        Map<Block, Block> strippedBlocks = new HashMap<>(AxeItemAccessor.adastra_getStrippables());
+        Map<Block, Block> strippedBlocks = new HashMap<>(AxeItemAccessor.ad_astra$getStrippables());
         strippedBlocks.put(log, strippedLog);
-        AxeItemAccessor.adastra_setStrippables(strippedBlocks);
+        AxeItemAccessor.ad_astra$setStrippables(strippedBlocks);
     }
 
     public static Supplier<Item> createSpawnEggItem(Supplier<? extends EntityType<? extends Mob>> type, int primaryColor, int secondaryColor, Item.Properties properties) {

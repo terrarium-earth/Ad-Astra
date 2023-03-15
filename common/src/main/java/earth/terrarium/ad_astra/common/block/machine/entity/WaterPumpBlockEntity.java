@@ -24,6 +24,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.WaterFluid;
@@ -59,8 +60,10 @@ public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements 
 
     @Override
     public void tick() {
-        if (!this.getLevel().isClientSide()) {
-            FluidState water = this.level.getFluidState(this.getBlockPos().below());
+        if (level == null) return;
+        if (!level.isClientSide()) {
+            BlockPos below = this.getBlockPos().below();
+            FluidState water = this.level.getFluidState(below);
             if (getFluidContainer(this).getFluids().get(0).getFluidAmount() < getFluidContainer(this).getTankCapacity(0)) {
                 if (water.getType() instanceof WaterFluid.Source) {
 
@@ -80,7 +83,12 @@ public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements 
                         // Delete the water block after it has been fully extracted.
                         if (waterExtracted >= FluidHooks.buckets(1f)) {
                             waterExtracted = 0;
-                            level.setBlockAndUpdate(this.getBlockPos().below(), Blocks.AIR.defaultBlockState());
+                            BlockState blockState = level.getBlockState(below);
+                            if (blockState.hasProperty(BlockStateProperties.WATERLOGGED)) {
+                                level.setBlockAndUpdate(below, blockState.setValue(BlockStateProperties.WATERLOGGED, false));
+                            } else {
+                                level.setBlockAndUpdate(below, Blocks.AIR.defaultBlockState());
+                            }
                         }
                     }
                 }
@@ -90,7 +98,7 @@ public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements 
 
             // Insert the fluid into nearby tanks.
             if (this.getEnergyStorage(this).internalExtract(this.getEnergyPerTick(), true) > 0 && !getFluidContainer(this).isEmpty()) {
-                for (Direction direction : new Direction[]{Direction.UP, this.getBlockState().getValue(AbstractMachineBlock.FACING)}) {
+                for (Direction direction : Direction.values()) {
                     FluidHolder fluid = FluidHooks.newFluidHolder(getFluidContainer(this).getFluids().get(0).getFluid(), WaterPumpConfig.transferPerTick * 2, getFluidContainer(this).getFluids().get(0).getCompound());
                     this.getEnergyStorage(this).internalExtract(this.getEnergyPerTick(), false);
                     if (FluidHooks.moveBlockToBlockFluid(this, direction.getOpposite(), level.getBlockEntity(worldPosition.relative(direction)), direction, fluid) > 0) {

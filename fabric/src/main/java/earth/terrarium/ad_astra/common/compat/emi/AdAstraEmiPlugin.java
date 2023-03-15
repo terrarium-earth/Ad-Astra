@@ -91,9 +91,8 @@ public class AdAstraEmiPlugin implements EmiPlugin {
         ((NetheriteSpaceSuit) netheriteSpaceSuit.getStack().getItem()).insert(netheriteSpaceSuit, FluidHooks.newFluidHolder(ModFluids.OXYGEN.get(), Long.MAX_VALUE, null));
 
         ItemStackHolder jetSuit = new ItemStackHolder(ModItems.JET_SUIT.get().getDefaultInstance());
-        ItemStackHolder jetSuit2 = new ItemStackHolder(ModItems.JET_SUIT.get().getDefaultInstance());
         ((JetSuit) jetSuit.getStack().getItem()).insert(jetSuit, FluidHooks.newFluidHolder(ModFluids.OXYGEN.get(), Long.MAX_VALUE, null));
-        EnergyHooks.getItemEnergyManager(jetSuit.getStack()).insert(jetSuit2, EnergizerConfig.maxEnergy, false);
+        EnergyHooks.getItemEnergyManager(jetSuit.getStack()).insert(jetSuit, EnergizerConfig.maxEnergy, false);
 
         ItemStackHolder energizer = new ItemStackHolder(ModItems.ENERGIZER.get().getDefaultInstance());
         energizer.getStack().getOrCreateTag().putLong("Energy", EnergizerConfig.maxEnergy);

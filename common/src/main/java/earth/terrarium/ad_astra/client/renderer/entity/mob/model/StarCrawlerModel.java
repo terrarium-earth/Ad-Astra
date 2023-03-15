@@ -107,7 +107,7 @@ public class StarCrawlerModel extends EntityModel<StarCrawler> {
     }
 
     @Override
-   public void setupAnim(StarCrawler entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
+    public void setupAnim(StarCrawler entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
         this.leg1.yRot = Mth.cos(limbAngle * 0.6662f) * limbDistance;
         this.leg2.yRot = Mth.cos(limbAngle * 0.6662f) * limbDistance;
         this.leg3.yRot = Mth.cos(limbAngle * 0.6662f) * limbDistance;

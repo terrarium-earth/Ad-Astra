@@ -31,7 +31,6 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
 
     protected int cookTime;
     protected int cookTimeTotal;
-    @Nullable
     protected ItemStack inputStack = ItemStack.EMPTY;
     @Nullable
     protected Fluid outputFluid;

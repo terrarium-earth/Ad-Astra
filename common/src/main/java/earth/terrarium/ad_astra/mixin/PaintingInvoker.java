@@ -9,5 +9,5 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(Painting.class)
 public interface PaintingInvoker {
     @Invoker("setVariant")
-    void adastra_invokeSetVariant(Holder<PaintingVariant> variant);
+    void ad_astra$invokeSetVariant(Holder<PaintingVariant> variant);
 }

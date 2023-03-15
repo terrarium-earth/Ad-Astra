@@ -24,8 +24,6 @@ import net.minecraft.world.entity.player.Inventory;
 import java.awt.*;
 import java.util.Arrays;
 
-;
-
 @Environment(EnvType.CLIENT)
 public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistributorBlockEntity, OxygenDistributorMenu> {
 
@@ -61,7 +59,7 @@ public class OxygenDistributorScreen extends AbstractMachineScreen<OxygenDistrib
 
         visibleButton.setMessage(this.machine.shouldShowOxygen() ? HIDE_TEXT : SHOW_TEXT);
 
-        // Render a warning sign if there is an oxygen leak detected.
+        // Render a warning sign i∏f there is an oxygen leak detected.
         boolean oxygenLeak = OxygenUtils.getOxygenBlocksCount(this.machine.getLevel(), this.machine.getBlockPos()) >= OxygenDistributorConfig.maxBlockChecks;
         if (oxygenLeak) {
             GuiComponent.drawCenteredString(poseStack, this.font, "⚠", this.width / 2 - 85 + 7, this.height / 2 - 137, Color.YELLOW.getRGB());

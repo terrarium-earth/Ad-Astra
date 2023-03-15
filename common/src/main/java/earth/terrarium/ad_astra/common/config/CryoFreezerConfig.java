@@ -20,12 +20,12 @@ public final class CryoFreezerConfig {
         type = EntryType.LONG,
         translation = "text.resourcefulconfig.ad_astra.option.cryoFreezer.energyPerTick"
     )
-    public static long energyPerTick = 24L;
+    public static long energyPerTick = 18L;
 
     @ConfigEntry(
         id = "tankSize",
         type = EntryType.LONG,
         translation = "text.resourcefulconfig.ad_astra.option.cryoFreezer.tankSize"
     )
-    public static long tankSize = FluidHooks.buckets(3f);
+    public static long tankSize = FluidHooks.buckets(3);
 }

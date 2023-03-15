@@ -111,7 +111,7 @@ public class LanderModel extends EntityModel<Lander> {
     }
 
     @Override
-   public void setupAnim(Lander entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
+    public void setupAnim(Lander entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
     }
 
     @Override

@@ -2,7 +2,6 @@ package earth.terrarium.ad_astra.common.compat.jei.transfer;
 
 import java.util.Optional;
 
-import net.minecraft.MethodsReturnNonnullByDefault;
 import org.jetbrains.annotations.Nullable;
 
 import earth.terrarium.ad_astra.common.networking.NetworkHandling;
@@ -16,7 +15,6 @@ import mezz.jei.api.recipe.transfer.IRecipeTransferHandler;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MenuType;
 
-@MethodsReturnNonnullByDefault
 public class NotifyableTransferHandler<MENU extends AbstractMachineMenu<?>, RECIPE extends ModRecipe> implements IRecipeTransferHandler<MENU, RECIPE> {
 
     private final IRecipeTransferHandler<MENU, RECIPE> internal;

@@ -14,7 +14,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -96,24 +95,24 @@ public class SoundManagerMixin {
             }
 
             @Override
-            public @NotNull Attenuation getAttenuation() {
+            public Attenuation getAttenuation() {
                 return sound.getAttenuation();
             }
         };
     }
 
     @Inject(method = "play(Lnet/minecraft/client/resources/sounds/SoundInstance;)V", at = @At("HEAD"), cancellable = true)
-    public void adastra_play(SoundInstance sound, CallbackInfo ci) {
-        this.adastra_modifySound(sound, 0, ci);
+    public void ad_astra$play(SoundInstance sound, CallbackInfo ci) {
+        this.ad_astra$modifySound(sound, 0, ci);
     }
 
     @Inject(method = "playDelayed(Lnet/minecraft/client/resources/sounds/SoundInstance;I)V", at = @At("HEAD"), cancellable = true)
-    public void adastra_play(SoundInstance sound, int delay, CallbackInfo ci) {
-        this.adastra_modifySound(sound, delay, ci);
+    public void ad_astra$play(SoundInstance sound, int delay, CallbackInfo ci) {
+        this.ad_astra$modifySound(sound, delay, ci);
     }
 
     @Unique
-    private void adastra_modifySound(SoundInstance sound, int delay, CallbackInfo ci) {
+    private void ad_astra$modifySound(SoundInstance sound, int delay, CallbackInfo ci) {
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.level == null) {
             return;

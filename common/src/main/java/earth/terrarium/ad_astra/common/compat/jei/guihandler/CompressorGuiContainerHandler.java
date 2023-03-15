@@ -1,16 +1,14 @@
 package earth.terrarium.ad_astra.common.compat.jei.guihandler;
 
-import earth.terrarium.ad_astra.client.screen.CompressorScreen;
-import earth.terrarium.ad_astra.common.compat.jei.category.CompressorCategory;
-import mezz.jei.api.recipe.RecipeType;
-import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.network.chat.Component;
-
-import java.awt.*;
+import java.awt.Rectangle;
 import java.util.Collections;
 import java.util.List;
 
-@MethodsReturnNonnullByDefault
+import earth.terrarium.ad_astra.client.screen.CompressorScreen;
+import earth.terrarium.ad_astra.common.compat.jei.category.CompressorCategory;
+import mezz.jei.api.recipe.RecipeType;
+import net.minecraft.network.chat.Component;
+
 public class CompressorGuiContainerHandler extends BaseGuiContainerHandler<CompressorScreen> {
 
     @Override
