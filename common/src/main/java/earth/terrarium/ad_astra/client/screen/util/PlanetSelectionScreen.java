@@ -391,11 +391,11 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
                 boolean isLargePage = this.getPage() == 3;
                 // The amount of buttons that are offscreen.
                 // The large page had 3 buttons per row so each row needs to be treated as one.
-                final int overflowButtons = buttons.size() - (isLargePage ? 13 : 5);
+                int overflowButtons = buttons.size() - (isLargePage ? 13 : 5);
 
                 // Don't scroll if there are not enough buttons.
                 if (overflowButtons > 0) {
-                    final int referencePoint = backButton.getY();
+                    int referencePoint = backButton.getY();
                     int minThreshold = this.height / 2 - 35;
                     int maxThreshold = (this.height / 2 - 38) - (overflowButtons * (isLargePage ? 7 : 21));
                     int sensitivity = (int) (SCROLL_SENSITIVITY * amount);
@@ -416,9 +416,9 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
                         button2.setY(button2.getY() + sensitivity);
 
                         if (referencePoint >= minThreshold) {
-                            button2.setY(button2.getY() - referencePoint - minThreshold);
+                            button2.setY(button2.getY() - Mth.clamp(referencePoint - minThreshold, -1, 1));
                         } else if (referencePoint <= maxThreshold) {
-                            button2.setY(button2.getY() - referencePoint - maxThreshold);
+                            button2.setY(button2.getY() - Mth.clamp(referencePoint - maxThreshold, -1, 1));
                         }
                     }
 

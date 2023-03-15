@@ -3,5 +3,6 @@
 - ported the 1.12.5 update stuff
 
 - re-added patchouli support as it's now on 1.19.3
+- fixed the planet selection buttons disappearing when scrolling with additional buttons from an addon (#223)
 
 Disclaimer: Ad Astra will be releasing a large 1.20 update in the future that will break with this current 1.19.3 version. Use at your own risk!

@@ -91,7 +91,7 @@ public class CustomButton extends Button {
             RenderSystem.enableDepthTest();
 
             if (this.doScissor) {
-//                RenderSystem.enableScissor(0, scissorY, (int) (215 * scale), (int) (127 * scale));
+                RenderSystem.enableScissor(0, scissorY, (int) (215 * scale), (int) (127 * scale));
             }
 
             RenderSystem.setShaderColor(color.getFloatRed(), color.getFloatGreen(), color.getFloatBlue(), this.buttonColour.getFloatAlpha());
