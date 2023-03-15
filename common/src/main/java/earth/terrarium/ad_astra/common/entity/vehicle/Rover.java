@@ -1,10 +1,10 @@
 package earth.terrarium.ad_astra.common.entity.vehicle;
 
+import earth.terrarium.ad_astra.common.config.VehiclesConfig;
 import earth.terrarium.ad_astra.common.registry.ModItems;
+import earth.terrarium.ad_astra.common.screen.LargeVehicleMenuProvider;
 import earth.terrarium.ad_astra.common.util.ModKeyBindings;
 import earth.terrarium.ad_astra.common.util.ModUtils;
-import earth.terrarium.ad_astra.common.config.VehiclesConfig;
-import earth.terrarium.ad_astra.common.screen.LargeVehicleMenuProvider;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -29,7 +29,7 @@ public class Rover extends Vehicle {
 
     public Rover(EntityType<?> type, Level level) {
         super(type, level);
-        this.maxUpStep = 1.0f;
+        this.setMaxUpStep(1.0F);
     }
 
     @Override

@@ -72,7 +72,7 @@ public class AdAstraForge {
         ModItems.onRegisterCreativeTabs((loc, item, items) -> event.registerCreativeModeTab(loc, b -> b
                 .title(Component.translatable("itemGroup." + loc.getNamespace() + "." + loc.getPath()))
                 .icon(() -> item.get().getDefaultInstance())
-                .displayItems((featureFlagSet, output, bl) -> items.forEach(output::accept))
+                .displayItems((itemDisplayParameters, output) -> items.forEach(output::accept))
                 .build()));
     }
 }

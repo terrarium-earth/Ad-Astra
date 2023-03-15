@@ -10,7 +10,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -54,12 +53,12 @@ public class EntityTemperatureSystem {
     }
 
     private static void burnEntity(LivingEntity entity) {
-        entity.hurt(DamageSource.ON_FIRE, AdAstraConfig.heatDamage);
+        entity.hurt(entity.damageSources().onFire(), AdAstraConfig.heatDamage);
         entity.setSecondsOnFire(10);
     }
 
     private static void freezeEntity(LivingEntity entity, ServerLevel level) {
-        entity.hurt(DamageSource.FREEZE, AdAstraConfig.freezeDamage);
+        entity.hurt(entity.damageSources().freeze(), AdAstraConfig.freezeDamage);
         entity.setTicksFrozen(Math.min(entity.getTicksRequiredToFreeze() + 20, entity.getTicksFrozen() + 5 * 10));
         RandomSource random = entity.level.getRandom();
         ModUtils.spawnForcedParticles((level), ParticleTypes.SNOWFLAKE, entity.getX(), entity.getY() + 1, entity.getZ(), 1, Mth.randomBetween(random, -1.0f, 1.0f) * 0.083333336f, 0.05, (double) Mth.randomBetween(random, -1.0f, 1.0f) * 0.083333336, 0);

@@ -3,8 +3,8 @@ package earth.terrarium.ad_astra.common.compat.jei.category;
 import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.screen.GuiUtil;
-import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.ad_astra.common.recipe.NasaWorkbenchRecipe;
+import earth.terrarium.ad_astra.common.registry.ModItems;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
@@ -50,7 +50,7 @@ public class NasaWorkbenchCategory extends BaseCategory<NasaWorkbenchRecipe> {
         builder.addSlot(RecipeIngredientRole.INPUT, 31 + 1 - 18, 18 * 5 + 1).addIngredients(recipe.getIngredients().get(11));
         builder.addSlot(RecipeIngredientRole.INPUT, 40 + 1, 18 * 5 + 1).addIngredients(recipe.getIngredients().get(12));
         builder.addSlot(RecipeIngredientRole.INPUT, 49 + 1 + 18, 18 * 5 + 1).addIngredients(recipe.getIngredients().get(13));
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 123 + 1, 90 + 1).addIngredients(Ingredient.of(recipe.getResultItem()));
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 123 + 1, 90 + 1).addIngredients(Ingredient.of(recipe.getOutput()));
     }
 
     @Override

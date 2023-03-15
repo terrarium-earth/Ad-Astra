@@ -18,7 +18,7 @@ public record CompressorDisplay(CompressingRecipe recipe) implements Display {
 
 	@Override
 	public List<EntryIngredient> getOutputEntries() {
-		return List.of(EntryIngredients.of(recipe.getResultItem()));
+		return List.of(EntryIngredients.of(recipe.getOutput()));
 	}
 
 	@Override

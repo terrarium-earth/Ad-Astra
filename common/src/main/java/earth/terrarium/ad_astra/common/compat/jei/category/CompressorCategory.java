@@ -3,10 +3,10 @@ package earth.terrarium.ad_astra.common.compat.jei.category;
 import com.mojang.blaze3d.vertex.PoseStack;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.screen.GuiUtil;
-import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.ad_astra.common.compat.jei.EnergyBarDrawable;
 import earth.terrarium.ad_astra.common.config.CompressorConfig;
 import earth.terrarium.ad_astra.common.recipe.CompressingRecipe;
+import earth.terrarium.ad_astra.common.registry.ModItems;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableAnimated;
@@ -43,7 +43,7 @@ public class CompressorCategory extends BaseCategory<CompressingRecipe> {
     public void setRecipe(IRecipeLayoutBuilder builder, CompressingRecipe recipe, IFocusGroup focuses) {
         builder.addInvisibleIngredients(RecipeIngredientRole.CATALYST).addIngredients(Ingredient.of(ModItems.COMPRESSOR.get()));
         builder.addSlot(RecipeIngredientRole.INPUT, 10 + 1, 35 + 1).addIngredients(recipe.getInputIngredient());
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 70 + 1, 35 + 1).addIngredients(Ingredient.of(recipe.getResultItem()));
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 70 + 1, 35 + 1).addIngredients(Ingredient.of(recipe.getOutput()));
     }
 
     @Override

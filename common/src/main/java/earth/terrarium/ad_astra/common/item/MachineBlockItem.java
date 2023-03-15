@@ -38,7 +38,7 @@ public class MachineBlockItem extends BlockItem {
                 CompoundTag tag = stack.getOrCreateTag();
                 ContainerHelper.loadAllItems(tag, machineBlock.getItems());
                 if (tag.contains("Energy") && machineBlock instanceof EnergyAttachment.Block energyBlock) {
-                    energyBlock.getEnergyStorage(machineBlock).setEnergy(Mth.clamp(tag.getLong("Energy"), 0, energyBlock.getEnergyStorage(machineBlock).getMaxCapacity()));
+                    energyBlock.getEnergyStorage(machineBlock).setEnergy((long) Mth.clamp(tag.getLong("Energy"), 0, energyBlock.getEnergyStorage(machineBlock).getMaxCapacity()));
                 }
 
                 if (machineBlock instanceof FluidMachineBlockEntity fluidMachine) {

@@ -6,6 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import org.apache.commons.lang3.Range;
@@ -14,8 +15,8 @@ import java.util.stream.StreamSupport;
 
 public class NetheriteSpaceSuit extends SpaceSuit {
 
-    public NetheriteSpaceSuit(ArmorMaterial material, EquipmentSlot slot, Properties properties) {
-        super(material, slot, properties);
+    public NetheriteSpaceSuit(ArmorMaterial material, ArmorItem.Type type, net.minecraft.world.item.Item.Properties properties) {
+        super(material, type, properties);
     }
 
     public static boolean hasFullSet(LivingEntity entity) {

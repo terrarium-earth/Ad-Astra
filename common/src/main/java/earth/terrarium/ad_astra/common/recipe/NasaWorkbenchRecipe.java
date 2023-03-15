@@ -24,7 +24,7 @@ public class NasaWorkbenchRecipe extends CookingRecipe {
         return RecordCodecBuilder.create(instance -> instance.group(
                 RecordCodecBuilder.point(id),
                 IngredientHolder.CODEC.listOf().fieldOf("ingredients").forGetter(NasaWorkbenchRecipe::getHolders),
-                ItemStackCodec.CODEC.fieldOf("output").forGetter(NasaWorkbenchRecipe::getResultItem)
+                ItemStackCodec.CODEC.fieldOf("output").forGetter(NasaWorkbenchRecipe::getOutput)
         ).apply(instance, NasaWorkbenchRecipe::new));
     }
 
@@ -32,7 +32,7 @@ public class NasaWorkbenchRecipe extends CookingRecipe {
         return RecordCodecBuilder.create(instance -> instance.group(
                 RecordCodecBuilder.point(id),
                 IngredientHolder.NETWORK_CODEC.listOf().fieldOf("ingredients").forGetter(NasaWorkbenchRecipe::getHolders),
-                ItemStackCodec.NETWORK_CODEC.fieldOf("output").forGetter(NasaWorkbenchRecipe::getResultItem)
+                ItemStackCodec.NETWORK_CODEC.fieldOf("output").forGetter(NasaWorkbenchRecipe::getOutput)
         ).apply(instance, NasaWorkbenchRecipe::new));
     }
 

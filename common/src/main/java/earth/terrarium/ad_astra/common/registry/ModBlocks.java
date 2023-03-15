@@ -24,10 +24,10 @@ import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import earth.terrarium.botarium.common.registry.fluid.BotariumLiquidBlock;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.worldgen.features.TreeFeatures;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
@@ -43,7 +43,7 @@ public class ModBlocks {
     public static final ResourcefulRegistry<Block> WALL_SIGNS = ResourcefulRegistries.create(SIGNS);
     public static final ResourcefulRegistry<Block> CHESTS = ResourcefulRegistries.create(BLOCKS);
 
-    public static final WoodType GLACIAN_SIGN_TYPE = WoodTypeInvoker.ad_astra$invokeRegister(WoodTypeInvoker.ad_astra$init(ArchitecturyTarget.getCurrentTarget().equals("forge") ? "ad_astra:glacian" : "glacian"));
+    public static final WoodType GLACIAN_SIGN_TYPE = WoodTypeInvoker.ad_astra$invokeRegister(WoodTypeInvoker.ad_astra$init(ArchitecturyTarget.getCurrentTarget().equals("forge") ? "ad_astra:glacian" : "glacian", BlockSetType.OAK));
 
     public static final RegistryEntry<Block> LAUNCH_PAD = BLOCKS.register("launch_pad", () -> new LaunchPad(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER)));
 
@@ -108,8 +108,10 @@ public class ModBlocks {
     public static final RegistryEntry<Block> IRON_PILLAR = BLOCKS.register("iron_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).color(MaterialColor.METAL)));
     public static final RegistryEntry<Block> GLOWING_IRON_PILLAR = BLOCKS.register("glowing_iron_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15).color(MaterialColor.METAL)));
     public static final RegistryEntry<Block> MARKED_IRON_PILLAR = BLOCKS.register("marked_iron_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).color(MaterialColor.METAL)));
-    public static final RegistryEntry<Block> IRON_PLATING_BUTTON = BLOCKS.register("iron_plating_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BUTTON).color(MaterialColor.METAL), 20, false, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON));
-    public static final RegistryEntry<Block> IRON_PLATING_PRESSURE_PLATE = BLOCKS.register("iron_plating_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.copy(Blocks.STONE_PRESSURE_PLATE).color(MaterialColor.METAL), SoundEvents.STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.STONE_PRESSURE_PLATE_CLICK_ON));
+    public static final RegistryEntry<Block> IRON_PLATING_BUTTON = BLOCKS.register("iron_plating_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BUTTON).color(MaterialColor.METAL), BlockSetType.IRON, 20, false) {
+    });
+    public static final RegistryEntry<Block> IRON_PLATING_PRESSURE_PLATE = BLOCKS.register("iron_plating_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.copy(Blocks.STONE_PRESSURE_PLATE).color(MaterialColor.METAL), BlockSetType.IRON) {
+    });
     public static final RegistryEntry<Block> IRON_SLIDING_DOOR = SLIDING_DOORS.register("iron_sliding_door", () -> new SlidingDoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR).color(MaterialColor.METAL)));
 
     public static final RegistryEntry<Block> STEEL_BLOCK = BLOCKS.register("steel_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).color(MaterialColor.COLOR_GRAY)));
@@ -118,13 +120,17 @@ public class ModBlocks {
     public static final RegistryEntry<Block> STEEL_PLATING_SLAB = BLOCKS.register("steel_plating_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).color(MaterialColor.COLOR_GRAY)));
     public static final RegistryEntry<Block> STEEL_PILLAR = BLOCKS.register("steel_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).color(MaterialColor.COLOR_GRAY)));
     public static final RegistryEntry<Block> GLOWING_STEEL_PILLAR = BLOCKS.register("glowing_steel_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15).color(MaterialColor.COLOR_GRAY)));
-    public static final RegistryEntry<Block> STEEL_PLATING_BUTTON = BLOCKS.register("steel_plating_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BUTTON).color(MaterialColor.COLOR_GRAY), 20, false, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON));
-    public static final RegistryEntry<Block> STEEL_PLATING_PRESSURE_PLATE = BLOCKS.register("steel_plating_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.copy(Blocks.STONE_PRESSURE_PLATE).color(MaterialColor.COLOR_GRAY), SoundEvents.STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.STONE_PRESSURE_PLATE_CLICK_ON));
+    public static final RegistryEntry<Block> STEEL_PLATING_BUTTON = BLOCKS.register("steel_plating_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BUTTON).color(MaterialColor.COLOR_GRAY), BlockSetType.IRON, 20, false) {
+    });
+    public static final RegistryEntry<Block> STEEL_PLATING_PRESSURE_PLATE = BLOCKS.register("steel_plating_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.copy(Blocks.STONE_PRESSURE_PLATE).color(MaterialColor.COLOR_GRAY), BlockSetType.IRON) {
+    });
     public static final RegistryEntry<Block> STEEL_SLIDING_DOOR = SLIDING_DOORS.register("steel_sliding_door", () -> new SlidingDoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR).color(MaterialColor.COLOR_GRAY)));
     public static final RegistryEntry<Block> AIRLOCK = SLIDING_DOORS.register("airlock", () -> new SlidingDoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR).color(MaterialColor.COLOR_GRAY)));
     public static final RegistryEntry<Block> REINFORCED_DOOR = SLIDING_DOORS.register("reinforced_door", () -> new SlidingDoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR).strength(25.0f, 40.0f).color(MaterialColor.COLOR_GRAY)));
-    public static final RegistryEntry<Block> STEEL_DOOR = BLOCKS.register("steel_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR).color(MaterialColor.COLOR_GRAY), SoundEvents.IRON_DOOR_CLOSE, SoundEvents.IRON_DOOR_OPEN));
-    public static final RegistryEntry<Block> STEEL_TRAPDOOR = BLOCKS.register("steel_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_TRAPDOOR).color(MaterialColor.COLOR_GRAY), SoundEvents.IRON_TRAPDOOR_CLOSE, SoundEvents.IRON_TRAPDOOR_OPEN));
+    public static final RegistryEntry<Block> STEEL_DOOR = BLOCKS.register("steel_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR).color(MaterialColor.COLOR_GRAY), BlockSetType.IRON) {
+    });
+    public static final RegistryEntry<Block> STEEL_TRAPDOOR = BLOCKS.register("steel_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_TRAPDOOR).color(MaterialColor.COLOR_GRAY), BlockSetType.IRON) {
+    });
 
     public static final RegistryEntry<Block> DESH_BLOCK = BLOCKS.register("desh_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).color(MaterialColor.COLOR_ORANGE)));
     public static final RegistryEntry<Block> RAW_DESH_BLOCK = BLOCKS.register("raw_desh_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK).color(MaterialColor.COLOR_ORANGE)));
@@ -133,8 +139,10 @@ public class ModBlocks {
     public static final RegistryEntry<Block> DESH_PLATING_SLAB = BLOCKS.register("desh_plating_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).color(MaterialColor.COLOR_ORANGE)));
     public static final RegistryEntry<Block> DESH_PILLAR = BLOCKS.register("desh_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).color(MaterialColor.COLOR_ORANGE)));
     public static final RegistryEntry<Block> GLOWING_DESH_PILLAR = BLOCKS.register("glowing_desh_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15).color(MaterialColor.COLOR_ORANGE)));
-    public static final RegistryEntry<Block> DESH_PLATING_BUTTON = BLOCKS.register("desh_plating_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BUTTON).color(MaterialColor.COLOR_ORANGE), 20, false, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON));
-    public static final RegistryEntry<Block> DESH_PLATING_PRESSURE_PLATE = BLOCKS.register("desh_plating_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.copy(Blocks.STONE_PRESSURE_PLATE).color(MaterialColor.COLOR_ORANGE), SoundEvents.STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.STONE_PRESSURE_PLATE_CLICK_ON));
+    public static final RegistryEntry<Block> DESH_PLATING_BUTTON = BLOCKS.register("desh_plating_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BUTTON).color(MaterialColor.COLOR_ORANGE), BlockSetType.IRON, 20, false) {
+    });
+    public static final RegistryEntry<Block> DESH_PLATING_PRESSURE_PLATE = BLOCKS.register("desh_plating_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.copy(Blocks.STONE_PRESSURE_PLATE).color(MaterialColor.COLOR_ORANGE), BlockSetType.IRON) {
+    });
     public static final RegistryEntry<Block> DESH_SLIDING_DOOR = SLIDING_DOORS.register("desh_sliding_door", () -> new SlidingDoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR).color(MaterialColor.COLOR_ORANGE)));
 
     public static final RegistryEntry<Block> OSTRUM_BLOCK = BLOCKS.register("ostrum_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).color(MaterialColor.COLOR_PURPLE)));
@@ -144,8 +152,10 @@ public class ModBlocks {
     public static final RegistryEntry<Block> OSTRUM_PLATING_SLAB = BLOCKS.register("ostrum_plating_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).color(MaterialColor.COLOR_PURPLE)));
     public static final RegistryEntry<Block> OSTRUM_PILLAR = BLOCKS.register("ostrum_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).color(MaterialColor.COLOR_PURPLE)));
     public static final RegistryEntry<Block> GLOWING_OSTRUM_PILLAR = BLOCKS.register("glowing_ostrum_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15).color(MaterialColor.COLOR_PURPLE)));
-    public static final RegistryEntry<Block> OSTRUM_PLATING_BUTTON = BLOCKS.register("ostrum_plating_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BUTTON).color(MaterialColor.COLOR_PURPLE), 20, false, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON));
-    public static final RegistryEntry<Block> OSTRUM_PLATING_PRESSURE_PLATE = BLOCKS.register("ostrum_plating_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.copy(Blocks.STONE_PRESSURE_PLATE).color(MaterialColor.COLOR_PURPLE), SoundEvents.STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.STONE_PRESSURE_PLATE_CLICK_ON));
+    public static final RegistryEntry<Block> OSTRUM_PLATING_BUTTON = BLOCKS.register("ostrum_plating_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BUTTON).color(MaterialColor.COLOR_PURPLE), BlockSetType.IRON, 20, false) {
+    });
+    public static final RegistryEntry<Block> OSTRUM_PLATING_PRESSURE_PLATE = BLOCKS.register("ostrum_plating_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.copy(Blocks.STONE_PRESSURE_PLATE).color(MaterialColor.COLOR_PURPLE), BlockSetType.IRON) {
+    });
     public static final RegistryEntry<Block> OSTRUM_SLIDING_DOOR = SLIDING_DOORS.register("ostrum_sliding_door", () -> new SlidingDoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR).color(MaterialColor.COLOR_PURPLE)));
 
     public static final RegistryEntry<Block> CALORITE_BLOCK = BLOCKS.register("calorite_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).color(MaterialColor.COLOR_RED)));
@@ -155,8 +165,10 @@ public class ModBlocks {
     public static final RegistryEntry<Block> CALORITE_PLATING_SLAB = BLOCKS.register("calorite_plating_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).color(MaterialColor.COLOR_RED)));
     public static final RegistryEntry<Block> CALORITE_PILLAR = BLOCKS.register("calorite_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).color(MaterialColor.COLOR_RED)));
     public static final RegistryEntry<Block> GLOWING_CALORITE_PILLAR = BLOCKS.register("glowing_calorite_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CUT_COPPER).lightLevel(state -> 15).color(MaterialColor.COLOR_RED)));
-    public static final RegistryEntry<Block> CALORITE_PLATING_BUTTON = BLOCKS.register("calorite_plating_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BUTTON).color(MaterialColor.COLOR_RED), 20, false, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON));
-    public static final RegistryEntry<Block> CALORITE_PLATING_PRESSURE_PLATE = BLOCKS.register("calorite_plating_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.copy(Blocks.STONE_PRESSURE_PLATE).color(MaterialColor.COLOR_RED), SoundEvents.STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.STONE_PRESSURE_PLATE_CLICK_ON));
+    public static final RegistryEntry<Block> CALORITE_PLATING_BUTTON = BLOCKS.register("calorite_plating_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BUTTON).color(MaterialColor.COLOR_RED), BlockSetType.IRON, 20, false) {
+    });
+    public static final RegistryEntry<Block> CALORITE_PLATING_PRESSURE_PLATE = BLOCKS.register("calorite_plating_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, BlockBehaviour.Properties.copy(Blocks.STONE_PRESSURE_PLATE).color(MaterialColor.COLOR_RED), BlockSetType.IRON) {
+    });
     public static final RegistryEntry<Block> CALORITE_SLIDING_DOOR = SLIDING_DOORS.register("calorite_sliding_door", () -> new SlidingDoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR).color(MaterialColor.COLOR_RED)));
 
     public static final RegistryEntry<Block> MOON_SAND = BLOCKS.register("moon_sand", () -> new FallingBlock(BlockBehaviour.Properties.copy(Blocks.SAND).color(MaterialColor.TERRACOTTA_LIGHT_GRAY)));
@@ -191,24 +203,28 @@ public class ModBlocks {
     public static final RegistryEntry<Block> AERONOS_PLANKS = BLOCKS.register("aeronos_planks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CRIMSON_PLANKS).sound(SoundType.STEM).lightLevel(state -> 6)));
     public static final RegistryEntry<Block> AERONOS_STAIRS = BLOCKS.register("aeronos_stairs", () -> new StairBlock(AERONOS_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.CRIMSON_STAIRS).sound(SoundType.STEM).lightLevel(state -> 6)));
     public static final RegistryEntry<Block> AERONOS_FENCE = BLOCKS.register("aeronos_fence", () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_FENCE).sound(SoundType.STEM).lightLevel(state -> 6)));
-    public static final RegistryEntry<Block> AERONOS_FENCE_GATE = BLOCKS.register("aeronos_fence_gate", () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_FENCE_GATE).sound(SoundType.STEM).lightLevel(state -> 6), SoundEvents.FENCE_GATE_CLOSE, SoundEvents.FENCE_GATE_OPEN));
+    public static final RegistryEntry<Block> AERONOS_FENCE_GATE = BLOCKS.register("aeronos_fence_gate", () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_FENCE_GATE).sound(SoundType.STEM).lightLevel(state -> 6), WoodType.OAK));
     public static final RegistryEntry<Block> AERONOS_SLAB = BLOCKS.register("aeronos_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_SLAB).sound(SoundType.STEM).lightLevel(state -> 6)));
     public static final RegistryEntry<Block> AERONOS_LADDER = BLOCKS.register("aeronos_ladder", () -> new LadderBlock(BlockBehaviour.Properties.copy(Blocks.LADDER).sound(SoundType.STEM).lightLevel(state -> 6)));
     public static final RegistryEntry<Block> AERONOS_CHEST = CHESTS.register("aeronos_chest", () -> new CustomChestBlock(BlockBehaviour.Properties.copy(Blocks.CHEST).sound(SoundType.STEM).lightLevel(state -> 6)));
-    public static final RegistryEntry<Block> AERONOS_DOOR = BLOCKS.register("aeronos_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_DOOR).sound(SoundType.STEM).lightLevel(state -> 6), SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_DOOR_OPEN));
-    public static final RegistryEntry<Block> AERONOS_TRAPDOOR = BLOCKS.register("aeronos_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_TRAPDOOR).sound(SoundType.STEM).lightLevel(state -> 6), SoundEvents.WOODEN_TRAPDOOR_CLOSE, SoundEvents.WOODEN_TRAPDOOR_OPEN));
+    public static final RegistryEntry<Block> AERONOS_DOOR = BLOCKS.register("aeronos_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_DOOR).sound(SoundType.STEM).lightLevel(state -> 6), BlockSetType.OAK) {
+    });
+    public static final RegistryEntry<Block> AERONOS_TRAPDOOR = BLOCKS.register("aeronos_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_TRAPDOOR).sound(SoundType.STEM).lightLevel(state -> 6), BlockSetType.OAK) {
+    });
 
     public static final RegistryEntry<Block> STROPHAR_CAP = BLOCKS.register("strophar_cap", () -> new HugeMushroomBlock(BlockBehaviour.Properties.copy(Blocks.RED_MUSHROOM_BLOCK).sound(SoundType.STEM).lightLevel(state -> 6)));
     public static final RegistryEntry<Block> STROPHAR_STEM = BLOCKS.register("strophar_stem", () -> new HugeMushroomBlock(BlockBehaviour.Properties.copy(Blocks.MUSHROOM_STEM).sound(SoundType.STEM).lightLevel(state -> 6)));
     public static final RegistryEntry<Block> STROPHAR_PLANKS = BLOCKS.register("strophar_planks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CRIMSON_PLANKS).sound(SoundType.STEM).lightLevel(state -> 6)));
     public static final RegistryEntry<Block> STROPHAR_STAIRS = BLOCKS.register("strophar_stairs", () -> new StairBlock(STROPHAR_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.CRIMSON_STAIRS).sound(SoundType.STEM).lightLevel(state -> 6)));
     public static final RegistryEntry<Block> STROPHAR_FENCE = BLOCKS.register("strophar_fence", () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_FENCE).sound(SoundType.STEM).lightLevel(state -> 6)));
-    public static final RegistryEntry<Block> STROPHAR_FENCE_GATE = BLOCKS.register("strophar_fence_gate", () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_FENCE_GATE).sound(SoundType.STEM).lightLevel(state -> 6), SoundEvents.FENCE_GATE_CLOSE, SoundEvents.FENCE_GATE_OPEN));
+    public static final RegistryEntry<Block> STROPHAR_FENCE_GATE = BLOCKS.register("strophar_fence_gate", () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_FENCE_GATE).sound(SoundType.STEM).lightLevel(state -> 6), WoodType.OAK));
     public static final RegistryEntry<Block> STROPHAR_SLAB = BLOCKS.register("strophar_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_SLAB).sound(SoundType.STEM).lightLevel(state -> 6)));
     public static final RegistryEntry<Block> STROPHAR_LADDER = BLOCKS.register("strophar_ladder", () -> new LadderBlock(BlockBehaviour.Properties.copy(Blocks.LADDER).sound(SoundType.STEM).lightLevel(state -> 6)));
     public static final RegistryEntry<Block> STROPHAR_CHEST = CHESTS.register("strophar_chest", () -> new CustomChestBlock(BlockBehaviour.Properties.copy(Blocks.CHEST).sound(SoundType.STEM).lightLevel(state -> 6)));
-    public static final RegistryEntry<Block> STROPHAR_DOOR = BLOCKS.register("strophar_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_DOOR).sound(SoundType.STEM).lightLevel(state -> 6), SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_DOOR_OPEN));
-    public static final RegistryEntry<Block> STROPHAR_TRAPDOOR = BLOCKS.register("strophar_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_TRAPDOOR).sound(SoundType.STEM).lightLevel(state -> 6), SoundEvents.WOODEN_TRAPDOOR_CLOSE, SoundEvents.WOODEN_TRAPDOOR_OPEN));
+    public static final RegistryEntry<Block> STROPHAR_DOOR = BLOCKS.register("strophar_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_DOOR).sound(SoundType.STEM).lightLevel(state -> 6), BlockSetType.OAK) {
+    });
+    public static final RegistryEntry<Block> STROPHAR_TRAPDOOR = BLOCKS.register("strophar_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_TRAPDOOR).sound(SoundType.STEM).lightLevel(state -> 6), BlockSetType.OAK) {
+    });
 
     public static final RegistryEntry<Block> MARS_SAND = BLOCKS.register("mars_sand", () -> new FallingBlock(BlockBehaviour.Properties.copy(Blocks.SAND).color(MaterialColor.TERRACOTTA_RED)));
     public static final RegistryEntry<Block> MARS_STONE = BLOCKS.register("mars_stone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).color(MaterialColor.TERRACOTTA_RED)));
@@ -340,12 +356,17 @@ public class ModBlocks {
     public static final RegistryEntry<Block> GLACIAN_PLANKS = BLOCKS.register("glacian_planks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).friction(0.5f).friction(0.5f).color(MaterialColor.COLOR_PINK)));
     public static final RegistryEntry<Block> GLACIAN_STAIRS = BLOCKS.register("glacian_stairs", () -> new StairBlock(GLACIAN_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).friction(0.5f).color(MaterialColor.COLOR_PINK)));
     public static final RegistryEntry<Block> GLACIAN_SLAB = BLOCKS.register("glacian_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).friction(0.5f).color(MaterialColor.COLOR_PINK)));
-    public static final RegistryEntry<Block> GLACIAN_DOOR = BLOCKS.register("glacian_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR).friction(0.5f).color(MaterialColor.COLOR_PINK), SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_DOOR_OPEN));
-    public static final RegistryEntry<Block> GLACIAN_TRAPDOOR = BLOCKS.register("glacian_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR).friction(0.5f).color(MaterialColor.COLOR_PINK), SoundEvents.WOODEN_TRAPDOOR_CLOSE, SoundEvents.WOODEN_TRAPDOOR_OPEN));
+    public static final RegistryEntry<Block> GLACIAN_DOOR = BLOCKS.register("glacian_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR).friction(0.5f).color(MaterialColor.COLOR_PINK), BlockSetType.OAK) {
+    });
+    public static final RegistryEntry<Block> GLACIAN_TRAPDOOR = BLOCKS.register("glacian_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_TRAPDOOR).friction(0.5f).color(MaterialColor.COLOR_PINK), BlockSetType.OAK) {
+    });
     public static final RegistryEntry<Block> GLACIAN_FENCE = BLOCKS.register("glacian_fence", () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE).friction(0.5f).friction(0.5f).color(MaterialColor.COLOR_PINK)));
-    public static final RegistryEntry<Block> GLACIAN_FENCE_GATE = BLOCKS.register("glacian_fence_gate", () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE).friction(0.5f).color(MaterialColor.COLOR_PINK), SoundEvents.FENCE_GATE_CLOSE, SoundEvents.FENCE_GATE_OPEN));
-    public static final RegistryEntry<Block> GLACIAN_BUTTON = BLOCKS.register("glacian_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON).color(MaterialColor.COLOR_PINK), 30, true, SoundEvents.WOODEN_BUTTON_CLICK_OFF, SoundEvents.WOODEN_BUTTON_CLICK_ON));
-    public static final RegistryEntry<Block> GLACIAN_PRESSURE_PLATE = BLOCKS.register("glacian_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE).friction(0.5f).color(MaterialColor.COLOR_PINK), SoundEvents.STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.STONE_PRESSURE_PLATE_CLICK_ON));
+    public static final RegistryEntry<Block> GLACIAN_FENCE_GATE = BLOCKS.register("glacian_fence_gate", () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE).friction(0.5f).color(MaterialColor.COLOR_PINK), WoodType.OAK) {
+    });
+    public static final RegistryEntry<Block> GLACIAN_BUTTON = BLOCKS.register("glacian_button", () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON).color(MaterialColor.COLOR_PINK), BlockSetType.OAK, 30, true) {
+    });
+    public static final RegistryEntry<Block> GLACIAN_PRESSURE_PLATE = BLOCKS.register("glacian_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE).friction(0.5f).color(MaterialColor.COLOR_PINK), BlockSetType.IRON) {
+    });
     public static final RegistryEntry<Block> GLACIAN_SIGN = STANDING_SIGNS.register("glacian_sign", () -> new CustomStandingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SIGN).color(MaterialColor.COLOR_PINK), GLACIAN_SIGN_TYPE));
     public static final RegistryEntry<Block> GLACIAN_WALL_SIGN = WALL_SIGNS.register("glacian_wall_sign", () -> new CustomWallSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WALL_SIGN).dropsLike(GLACIAN_SIGN.get()).color(MaterialColor.COLOR_PINK), GLACIAN_SIGN_TYPE));
     public static final RegistryEntry<Block> GLACIAN_FUR = BLOCKS.register("glacian_fur", () -> new Block(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL).color(MaterialColor.COLOR_PINK)));

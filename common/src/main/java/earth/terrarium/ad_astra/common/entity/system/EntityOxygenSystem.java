@@ -1,14 +1,13 @@
 package earth.terrarium.ad_astra.common.entity.system;
 
+import earth.terrarium.ad_astra.common.config.AdAstraConfig;
 import earth.terrarium.ad_astra.common.item.armor.SpaceSuit;
-import earth.terrarium.ad_astra.common.registry.ModDamageSource;
+import earth.terrarium.ad_astra.common.registry.ModDamageSources;
 import earth.terrarium.ad_astra.common.registry.ModTags;
 import earth.terrarium.ad_astra.common.util.ModUtils;
 import earth.terrarium.ad_astra.common.util.OxygenUtils;
-import earth.terrarium.ad_astra.common.config.AdAstraConfig;
 import earth.terrarium.botarium.common.fluid.utils.FluidHooks;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 
@@ -41,7 +40,7 @@ public class EntityOxygenSystem {
             if (hasOxygenatedSpaceSuit) {
                 consumeOxygen(entity);
             } else if (!ModUtils.armourIsOxygenated(entity)) {
-                entity.hurt(ModDamageSource.OXYGEN, AdAstraConfig.oxygenDamage);
+                entity.hurt(ModDamageSources.of(level, ModDamageSources.OXYGEN), AdAstraConfig.oxygenDamage);
                 entity.setAirSupply(-40);
             }
         }

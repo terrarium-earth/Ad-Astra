@@ -47,7 +47,7 @@ public class AdAstraFabric implements ModInitializer {
         ModItems.onRegisterCreativeTabs((loc, item, items) -> FabricItemGroup.builder(loc)
                 .title(Component.translatable("itemGroup." + loc.getNamespace() + "." + loc.getPath()))
                 .icon(() -> item.get().getDefaultInstance())
-                .displayItems((featureFlagSet, output, bl) -> items.forEach(output::accept))
+                .displayItems((itemDisplayParameters, output) -> items.forEach(output::accept))
                 .build());
     }
     public static void initEvents() {

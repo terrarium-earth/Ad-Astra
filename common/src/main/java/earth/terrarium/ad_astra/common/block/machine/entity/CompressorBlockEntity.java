@@ -10,6 +10,7 @@ import earth.terrarium.botarium.common.energy.impl.InsertOnlyEnergyContainer;
 import earth.terrarium.botarium.common.energy.impl.WrappedBlockEnergyContainer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -84,18 +85,19 @@ public class CompressorBlockEntity extends ProcessingMachineBlockEntity implemen
 
         CompressingRecipe recipe = CompressingRecipe.findFirst(this.level, f -> f.test(testStack));
 
-        if (recipe != null) {
+        if (level != null && recipe != null) {
+            RegistryAccess access = level.registryAccess();
 
             // Stop if something is already in the output.
             if (checkOutput) {
                 ItemStack outputSlot = this.getItem(1);
-                ItemStack output = recipe.getResultItem();
-                if (!outputSlot.isEmpty() && !outputSlot.getItem().equals(recipe.getResultItem().getItem()) || outputSlot.getCount() + output.getCount() > outputSlot.getMaxStackSize()) {
+                ItemStack output = recipe.getResultItem(access);
+                if (!outputSlot.isEmpty() && !outputSlot.getItem().equals(recipe.getResultItem(access).getItem()) || outputSlot.getCount() + output.getCount() > outputSlot.getMaxStackSize()) {
                     return null;
                 }
             }
 
-            this.outputStack = recipe.getResultItem();
+            this.outputStack = recipe.getResultItem(access);
             this.inputStack = testStack;
         }
 

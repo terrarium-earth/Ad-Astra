@@ -23,7 +23,7 @@ public class EmiNasaWorkbenchRecipe implements EmiRecipe {
 		this.id = recipe.getId();
 		this.recipe = recipe;
 		this.input = recipe.getIngredients().stream().map(EmiIngredient::of).collect(Collectors.toList());
-		this.output = EmiStack.of(recipe.getResultItem());
+		this.output = EmiStack.of(recipe.getOutput());
 	}
 
 	@Override

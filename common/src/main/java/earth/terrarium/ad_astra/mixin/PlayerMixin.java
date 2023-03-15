@@ -6,7 +6,9 @@ import earth.terrarium.ad_astra.common.entity.vehicle.Rocket;
 import earth.terrarium.ad_astra.common.item.armor.JetSuit;
 import earth.terrarium.ad_astra.common.item.armor.NetheriteSpaceSuit;
 import earth.terrarium.ad_astra.common.util.ModKeyBindings;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -23,7 +25,7 @@ public abstract class PlayerMixin {
     public void ad_astra$damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         Player player = ((Player) (Object) this);
         if (SpaceSuitConfig.netheriteSpaceSuitHasFireResistance) {
-            if (source.isFire() || source.equals(DamageSource.HOT_FLOOR)) {
+            if (source.is(DamageTypeTags.IS_FIRE) || source.is(DamageTypes.HOT_FLOOR)) {
                 if (NetheriteSpaceSuit.hasFullSet(player)) {
                     player.setRemainingFireTicks(0);
                     cir.setReturnValue(false);

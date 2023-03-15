@@ -62,7 +62,7 @@ public class ModWeatherRenderer {
                     double s = (double) renderer.getRainSizeZ()[q] * 0.5;
                     mutable.set(p, cameraY, o);
                     Biome biome = level.getBiome(mutable).value();
-                    if (biome.getPrecipitation() != Biome.Precipitation.NONE) {
+                    if (biome.hasPrecipitation()) {
                         int t = level.getHeight(Heightmap.Types.MOTION_BLOCKING, p, o);
                         int u = j - l;
                         int v = j + l;

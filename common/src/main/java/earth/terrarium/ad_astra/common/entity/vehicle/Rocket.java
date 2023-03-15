@@ -112,7 +112,7 @@ public class Rocket extends Vehicle {
 
         // Place the rider up to 3 blocks below the rocket
         int checks = 3;
-        BlockPos exitBlockPos = new BlockPos(exitPos);
+        BlockPos exitBlockPos = new BlockPos((int) exitPos.x(), (int) exitPos.y(), (int) exitPos.z());
         while (!this.level.getBlockState(exitBlockPos).isRedstoneConductor(this.level, exitBlockPos) && checks > 0) {
             exitBlockPos = exitBlockPos.below();
             checks--;
@@ -244,7 +244,7 @@ public class Rocket extends Vehicle {
             }
             if (VehiclesConfig.RocketConfig.entitiesBurnUnderRocket && !entity.fireImmune()) {
                 entity.setSecondsOnFire(10);
-                entity.hurt(ModDamageSource.ROCKET_FLAMES, 10);
+                entity.hurt(ModDamageSources.of(level, ModDamageSources.ROCKET_FLAMES), 10);
                 BlockState belowBlock = this.level.getBlockState(entity.blockPosition().below());
                 if (belowBlock.isCollisionShapeFullBlock(level, entity.blockPosition().below()) && belowBlock.isAir()) {
                     this.level.setBlockAndUpdate(entity.blockPosition(), Blocks.FIRE.defaultBlockState());

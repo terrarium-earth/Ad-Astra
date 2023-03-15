@@ -67,7 +67,7 @@ public abstract class LevelRendererMixin {
             if (!(f <= 0.0F)) {
                 RandomSource randomGenerator = RandomSource.create((long) this.ticks * 312987231L);
                 LevelReader levelView = this.minecraft.level;
-                BlockPos blockPos = new BlockPos(camera.getPosition());
+                BlockPos blockPos = camera.getBlockPosition();
                 BlockPos blockPos2 = null;
                 int i = (int) (100.0F * f * f) / (this.minecraft.options.particles().get() == ParticleStatus.DECREASED ? 2 : 1);
 
@@ -76,7 +76,7 @@ public abstract class LevelRendererMixin {
                     int l = randomGenerator.nextInt(21) - 10;
                     BlockPos blockPos3 = levelView.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, blockPos.offset(k, 0, l));
                     Biome biome = levelView.getBiome(blockPos3).value();
-                    if (blockPos3.getY() > levelView.getMinBuildHeight() && blockPos3.getY() <= blockPos.getY() + 10 && blockPos3.getY() >= blockPos.getY() - 10 && biome.getPrecipitation() == Biome.Precipitation.RAIN && biome.warmEnoughToRain(blockPos3)) {
+                    if (blockPos3.getY() > levelView.getMinBuildHeight() && blockPos3.getY() <= blockPos.getY() + 10 && blockPos3.getY() >= blockPos.getY() - 10 && biome.hasPrecipitation() && biome.warmEnoughToRain(blockPos3)) {
                         blockPos2 = blockPos3.below();
                         if (this.minecraft.options.particles().get() == ParticleStatus.MINIMAL) {
                             break;

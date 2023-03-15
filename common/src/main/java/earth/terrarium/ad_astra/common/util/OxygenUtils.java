@@ -12,6 +12,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.phys.Vec3;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.HashMap;
@@ -39,7 +40,8 @@ public class OxygenUtils {
      * Checks if an entity has oxygen.
      */
     public static boolean entityHasOxygen(Level level, LivingEntity entity) {
-        return posHasOxygen(level, new BlockPos(entity.getEyePosition()));
+        Vec3 eyePosition = entity.getEyePosition();
+        return posHasOxygen(level, new BlockPos((int) eyePosition.x, (int) eyePosition.y, (int) eyePosition.z));
     }
 
     /**

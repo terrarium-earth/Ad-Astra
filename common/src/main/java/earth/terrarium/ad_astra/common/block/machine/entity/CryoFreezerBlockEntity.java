@@ -112,8 +112,8 @@ public class CryoFreezerBlockEntity extends AbstractMachineBlockEntity implement
             // Stop if something is already in the output.
             if (checkOutput) {
                 ItemStack outputSlot = this.getItem(1);
-                ItemStack output = recipe.getResultItem();
-                if (!outputSlot.isEmpty() && !outputSlot.getItem().equals(recipe.getResultItem().getItem()) || outputSlot.getCount() + output.getCount() > outputSlot.getMaxStackSize()) {
+                ItemStack output = recipe.getResultItem(level.registryAccess());
+                if (!outputSlot.isEmpty() && !outputSlot.getItem().equals(recipe.getResultItem(level.registryAccess()).getItem()) || outputSlot.getCount() + output.getCount() > outputSlot.getMaxStackSize()) {
                     return null;
                 }
             }

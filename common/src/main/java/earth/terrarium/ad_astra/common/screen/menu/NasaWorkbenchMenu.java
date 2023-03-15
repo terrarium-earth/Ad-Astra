@@ -111,7 +111,7 @@ public class NasaWorkbenchMenu extends AbstractMachineMenu<NasaWorkbenchBlockEnt
 
     public void updateContent(NasaWorkbenchRecipe recipe) {
         this.recipe = recipe;
-        this.machine.setItem(14, recipe == null ? ItemStack.EMPTY : recipe.getResultItem());
+        this.machine.setItem(14, recipe == null ? ItemStack.EMPTY : recipe.getResultItem(level.registryAccess()));
         this.broadcastFullState();
     }
 

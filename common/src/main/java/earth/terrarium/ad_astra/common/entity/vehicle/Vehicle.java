@@ -32,6 +32,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -40,7 +41,6 @@ import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.Nullable;
 
 @MethodsReturnNonnullByDefault
 public abstract class Vehicle extends Entity {
@@ -278,9 +278,11 @@ public abstract class Vehicle extends Entity {
     }
 
     @Override
-    @Nullable
-    public Entity getControllingPassenger() {
-        return this.getFirstPassenger();
+    public LivingEntity getControllingPassenger() {
+        if (this.getFirstPassenger() instanceof LivingEntity entity) {
+            return entity;
+        }
+        return super.getControllingPassenger();
     }
 
     @Override

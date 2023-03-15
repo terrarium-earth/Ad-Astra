@@ -46,18 +46,18 @@ public class ModItems {
     public static final RegistryEntry<Item> OXYGEN_BUCKET = ITEMS.register("oxygen_bucket", () -> new FluidBucketItem(ModFluidProperties.OXYGEN_FLUID, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
 
     public static final RegistryEntry<Item> OXYGEN_TANK = ITEMS.register("oxygen_tank", () -> new OxygenTankItem(new Item.Properties().stacksTo(1)));
-    public static final RegistryEntry<Item> SPACE_HELMET = ITEMS.register("space_helmet", () -> new SpaceSuit(ModArmour.SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.HEAD, new Item.Properties()));
-    public static final RegistryEntry<Item> SPACE_SUIT = ITEMS.register("space_suit", () -> new SpaceSuit(ModArmour.SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.CHEST, new Item.Properties()));
-    public static final RegistryEntry<Item> SPACE_PANTS = ITEMS.register("space_pants", () -> new SpaceSuit(ModArmour.SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.LEGS, new Item.Properties()));
-    public static final RegistryEntry<Item> SPACE_BOOTS = ITEMS.register("space_boots", () -> new SpaceSuit(ModArmour.SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.FEET, new Item.Properties()));
-    public static final RegistryEntry<Item> NETHERITE_SPACE_HELMET = ITEMS.register("netherite_space_helmet", () -> new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.HEAD, new Item.Properties().fireResistant()));
-    public static final RegistryEntry<Item> NETHERITE_SPACE_SUIT = ITEMS.register("netherite_space_suit", () -> new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.CHEST, new Item.Properties().fireResistant()));
-    public static final RegistryEntry<Item> NETHERITE_SPACE_PANTS = ITEMS.register("netherite_space_pants", () -> new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.LEGS, new Item.Properties().fireResistant()));
-    public static final RegistryEntry<Item> NETHERITE_SPACE_BOOTS = ITEMS.register("netherite_space_boots", () -> new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, EquipmentSlot.FEET, new Item.Properties().fireResistant()));
-    public static final RegistryEntry<Item> JET_SUIT_HELMET = ITEMS.register("jet_suit_helmet", () -> new JetSuit(ModArmour.JET_SUIT_ARMOUR_MATERIAL, EquipmentSlot.HEAD, new Item.Properties().fireResistant()));
-    public static final RegistryEntry<Item> JET_SUIT = ITEMS.register("jet_suit", () -> new JetSuit(ModArmour.JET_SUIT_ARMOUR_MATERIAL, EquipmentSlot.CHEST, new Item.Properties().fireResistant()));
-    public static final RegistryEntry<Item> JET_SUIT_PANTS = ITEMS.register("jet_suit_pants", () -> new JetSuit(ModArmour.JET_SUIT_ARMOUR_MATERIAL, EquipmentSlot.LEGS, new Item.Properties().fireResistant()));
-    public static final RegistryEntry<Item> JET_SUIT_BOOTS = ITEMS.register("jet_suit_boots", () -> new JetSuit(ModArmour.JET_SUIT_ARMOUR_MATERIAL, EquipmentSlot.FEET, new Item.Properties().fireResistant()));
+    public static final RegistryEntry<Item> SPACE_HELMET = ITEMS.register("space_helmet", () -> new SpaceSuit(ModArmour.SPACE_SUIT_ARMOUR_MATERIAL, ArmorItem.Type.HELMET, new Item.Properties()));
+    public static final RegistryEntry<Item> SPACE_SUIT = ITEMS.register("space_suit", () -> new SpaceSuit(ModArmour.SPACE_SUIT_ARMOUR_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+    public static final RegistryEntry<Item> SPACE_PANTS = ITEMS.register("space_pants", () -> new SpaceSuit(ModArmour.SPACE_SUIT_ARMOUR_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+    public static final RegistryEntry<Item> SPACE_BOOTS = ITEMS.register("space_boots", () -> new SpaceSuit(ModArmour.SPACE_SUIT_ARMOUR_MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties()));
+    public static final RegistryEntry<Item> NETHERITE_SPACE_HELMET = ITEMS.register("netherite_space_helmet", () -> new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, ArmorItem.Type.HELMET, new Item.Properties().fireResistant()));
+    public static final RegistryEntry<Item> NETHERITE_SPACE_SUIT = ITEMS.register("netherite_space_suit", () -> new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Properties().fireResistant()));
+    public static final RegistryEntry<Item> NETHERITE_SPACE_PANTS = ITEMS.register("netherite_space_pants", () -> new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Properties().fireResistant()));
+    public static final RegistryEntry<Item> NETHERITE_SPACE_BOOTS = ITEMS.register("netherite_space_boots", () -> new NetheriteSpaceSuit(ModArmour.NETHERITE_SPACE_SUIT_ARMOUR_MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties().fireResistant()));
+    public static final RegistryEntry<Item> JET_SUIT_HELMET = ITEMS.register("jet_suit_helmet", () -> new JetSuit(ModArmour.JET_SUIT_ARMOUR_MATERIAL, ArmorItem.Type.HELMET, new Item.Properties().fireResistant()));
+    public static final RegistryEntry<Item> JET_SUIT = ITEMS.register("jet_suit", () -> new JetSuit(ModArmour.JET_SUIT_ARMOUR_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Properties().fireResistant()));
+    public static final RegistryEntry<Item> JET_SUIT_PANTS = ITEMS.register("jet_suit_pants", () -> new JetSuit(ModArmour.JET_SUIT_ARMOUR_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Properties().fireResistant()));
+    public static final RegistryEntry<Item> JET_SUIT_BOOTS = ITEMS.register("jet_suit_boots", () -> new JetSuit(ModArmour.JET_SUIT_ARMOUR_MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties().fireResistant()));
 
     public static final RegistryEntry<Item> SPACE_PAINTING = ITEMS.register("space_painting", () -> new SpacePaintingItem(new Item.Properties().rarity(Rarity.UNCOMMON)));
     public static final RegistryEntry<Item> CHEESE = ITEMS.register("cheese", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationMod(1.0f).build())));

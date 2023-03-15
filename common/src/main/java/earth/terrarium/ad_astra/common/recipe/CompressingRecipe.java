@@ -26,7 +26,7 @@ public class CompressingRecipe extends CookingRecipe {
         return RecordCodecBuilder.create(instance -> instance.group(
                 RecordCodecBuilder.point(id),
                 IngredientCodec.CODEC.fieldOf("input").forGetter(CompressingRecipe::getInputIngredient),
-                ItemStackCodec.CODEC.fieldOf("output").forGetter(CompressingRecipe::getResultItem),
+                ItemStackCodec.CODEC.fieldOf("output").forGetter(CompressingRecipe::getOutput),
                 Codec.INT.fieldOf("time").orElse(200).forGetter(CompressingRecipe::getCookTime)
         ).apply(instance, CompressingRecipe::new));
     }
@@ -35,7 +35,7 @@ public class CompressingRecipe extends CookingRecipe {
         return RecordCodecBuilder.create(instance -> instance.group(
                 RecordCodecBuilder.point(id),
                 IngredientCodec.NETWORK_CODEC.fieldOf("input").forGetter(CompressingRecipe::getInputIngredient),
-                ItemStackCodec.NETWORK_CODEC.fieldOf("output").forGetter(CompressingRecipe::getResultItem),
+                ItemStackCodec.NETWORK_CODEC.fieldOf("output").forGetter(CompressingRecipe::getOutput),
                 Codec.INT.fieldOf("time").orElse(200).forGetter(CompressingRecipe::getCookTime)
         ).apply(instance, CompressingRecipe::new));
     }

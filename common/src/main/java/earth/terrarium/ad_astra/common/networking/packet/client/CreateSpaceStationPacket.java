@@ -83,7 +83,7 @@ public record CreateSpaceStationPacket(ResourceLocation targetWorld) implements 
 
                     // Create the Space Station from the nbt file
                     StructureTemplate structure = targetWorld.getStructureManager().getOrCreate(new ResourceLocation(AdAstra.MOD_ID, "space_station"));
-                    BlockPos pos = new BlockPos(player.getX() - (structure.getSize().getX() / 2.0f), 100, player.getZ() - (structure.getSize().getZ() / 2.0f));
+                    BlockPos pos = new BlockPos((int) (player.getX() - (structure.getSize().getX() / 2.0f)), 100, (int) (player.getZ() - (structure.getSize().getZ() / 2.0f)));
                     targetWorld.getChunkSource().addRegionTicket(TicketType.PORTAL, new ChunkPos(pos), 1, pos);
                     structure.placeInWorld(targetWorld, pos, pos, new StructurePlaceSettings(), targetWorld.random, 2);
                 }

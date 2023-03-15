@@ -1,6 +1,6 @@
 package earth.terrarium.ad_astra.common.block.fluid;
 
-import earth.terrarium.ad_astra.common.registry.ModDamageSource;
+import earth.terrarium.ad_astra.common.registry.ModDamageSources;
 import earth.terrarium.ad_astra.common.registry.ModFluids;
 import earth.terrarium.botarium.common.registry.fluid.BotariumLiquidBlock;
 import earth.terrarium.botarium.common.registry.fluid.FluidData;
@@ -43,7 +43,7 @@ public class CryoFuelLiquidBlock extends BotariumLiquidBlock {
             entity.setTicksFrozen(Math.min(entity.getTicksRequiredToFreeze(), entity.getTicksFrozen() + 5));
             if (!level.isClientSide) {
                 entity.setSharedFlagOnFire(false);
-                entity.hurt(ModDamageSource.CRYO_FUEL, 4 * (entity.fireImmune() ? 2 : 1));
+                entity.hurt(ModDamageSources.of(level, ModDamageSources.CRYO_FUEL), 4 * (entity.fireImmune() ? 2 : 1));
             }
         }
     }

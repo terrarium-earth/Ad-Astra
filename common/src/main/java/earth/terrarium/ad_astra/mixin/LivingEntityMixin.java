@@ -7,7 +7,9 @@ import earth.terrarium.ad_astra.common.entity.vehicle.Vehicle;
 import earth.terrarium.ad_astra.common.registry.ModTags;
 import earth.terrarium.ad_astra.common.util.ModUtils;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -40,8 +42,8 @@ public abstract class LivingEntityMixin {
     public void ad_astra$damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         LivingEntity entity = ((LivingEntity) (Object) this);
 
-        if (source.isFire() || source.equals(DamageSource.HOT_FLOOR)) {
-            if ((entity.isOnFire() || source.equals(DamageSource.HOT_FLOOR))) {
+        if (source.is(DamageTypeTags.IS_FIRE) || source.is(DamageTypes.HOT_FLOOR)) {
+            if ((entity.isOnFire() || source.is(DamageTypes.HOT_FLOOR))) {
                 if (ModUtils.checkTag(entity, ModTags.FIRE_IMMUNE)) {
                     cir.setReturnValue(false);
                 }

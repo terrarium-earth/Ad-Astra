@@ -217,7 +217,6 @@ public class PlanetSelectionScreen extends Screen implements MenuAccess<PlanetSe
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
         RenderSystem.disableBlend();
         RenderSystem.disableDepthTest();
-        RenderSystem.disableTexture();
         RenderSystem.disableScissor();
     }
 

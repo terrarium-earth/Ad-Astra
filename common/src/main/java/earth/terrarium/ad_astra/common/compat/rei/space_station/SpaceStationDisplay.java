@@ -8,6 +8,7 @@ import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public record SpaceStationDisplay(SpaceStationRecipe recipe) implements Display 
 
 	@Override
 	public List<EntryIngredient> getOutputEntries() {
-		return List.of(EntryIngredients.of(recipe.getResultItem()));
+		return List.of(EntryIngredients.of(ItemStack.EMPTY));
 	}
 
 	@Override

@@ -32,16 +32,16 @@ dependencies {
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
 
     modApi "com.terraformersmc:modmenu:$rootProject.modmenu_version"
-    modImplementation "vazkii.patchouli:Patchouli:$rootProject.minecraft_version-$rootProject.patchouli_version-FABRIC"
+//    modImplementation "vazkii.patchouli:Patchouli:$rootProject.minecraft_version-$rootProject.patchouli_version-FABRIC"
 
-    modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:$rootProject.rei_version"
-    modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:$rootProject.rei_version"
-    modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:$rootProject.rei_version"
-    modCompileOnly "dev.emi:emi:$rootProject.emi_version+$rootProject.minecraft_version"
+//    modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:$rootProject.rei_version"
+//    modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:$rootProject.rei_version"
+//    modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:$rootProject.rei_version"
+    modCompileOnly "dev.emi:emi:$rootProject.emi_version+1.19.3"
 
     modApi "com.teamresourceful.resourcefullib:resourcefullib-fabric-$rootProject.minecraft_version:$rootProject.resourcefullib_version"
     modApi "com.teamresourceful.resourcefulconfig:resourcefulconfig-fabric-$rootProject.minecraft_version:$rootProject.resourcefulconfig_version"
-    modApi "earth.terrarium:botarium-fabric-$rootProject.minecraft_version:$rootProject.botarium_version"
+    modApi "earth.terrarium:botarium-fabric-1.19.3:$rootProject.botarium_version"
 }
 
 processResources {

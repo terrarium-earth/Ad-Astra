@@ -23,6 +23,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -38,8 +39,8 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyAttachment.Item
     private boolean isFallFlying;
     private boolean emitParticles;
 
-    public JetSuit(ArmorMaterial material, EquipmentSlot slot, Properties properties) {
-        super(material, slot, properties);
+    public JetSuit(ArmorMaterial material, ArmorItem.Type type, net.minecraft.world.item.Item.Properties properties) {
+        super(material, type, properties);
     }
 
     public void spawnParticles(Level level, LivingEntity entity, HumanoidModel<LivingEntity> model) {
@@ -185,7 +186,7 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyAttachment.Item
         if (slot.equals(EquipmentSlot.CHEST)) {
             if (stack.getItem() instanceof JetSuit) {
                 var energy = EnergyHooks.getItemEnergyManager(stack);
-                return new ResourceLocation(AdAstra.MOD_ID, "textures/entity/armour/jet_suit/jet_suit_" + (energy.getStoredEnergy() == 0 ? 0 : ((int) Math.min((energy.getStoredEnergy() * 5 / energy.getCapacity()) + 1, 5))) + ".png").toString();
+                return new ResourceLocation(AdAstra.MOD_ID, "textures/entity/armour/jet_suit/jet_suit_" + (energy.getStoredEnergy() <= 0 ? 0 : ((int) Math.min((energy.getStoredEnergy() * 5 / Math.max(1, energy.getCapacity())) + 1, 5))) + ".png").toString();
             }
         }
         return new ResourceLocation(AdAstra.MOD_ID, "textures/entity/armour/jet_suit/jet_suit_5.png").toString();
