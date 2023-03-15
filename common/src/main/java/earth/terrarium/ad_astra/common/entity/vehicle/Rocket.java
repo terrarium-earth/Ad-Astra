@@ -112,7 +112,7 @@ public class Rocket extends Vehicle {
 
         // Place the rider up to 3 blocks below the rocket
         int checks = 3;
-        BlockPos exitBlockPos = new BlockPos((int) exitPos.x(), (int) exitPos.y(), (int) exitPos.z());
+        BlockPos exitBlockPos = BlockPos.containing(exitPos);
         while (!this.level.getBlockState(exitBlockPos).isRedstoneConductor(this.level, exitBlockPos) && checks > 0) {
             exitBlockPos = exitBlockPos.below();
             checks--;

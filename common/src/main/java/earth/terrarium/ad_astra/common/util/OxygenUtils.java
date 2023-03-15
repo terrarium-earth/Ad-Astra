@@ -41,7 +41,7 @@ public class OxygenUtils {
      */
     public static boolean entityHasOxygen(Level level, LivingEntity entity) {
         Vec3 eyePosition = entity.getEyePosition();
-        return posHasOxygen(level, new BlockPos((int) eyePosition.x, (int) eyePosition.y, (int) eyePosition.z));
+        return posHasOxygen(level, BlockPos.containing(eyePosition));
     }
 
     /**

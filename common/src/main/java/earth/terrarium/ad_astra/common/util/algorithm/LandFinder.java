@@ -24,7 +24,7 @@ public class LandFinder {
 
         // Don't search for land if the center is already land
         for (int y = level.getMinBuildHeight(); y < level.getMaxBuildHeight(); y++) {
-            if (!level.getBlockState(new BlockPos((int) center.x(), y, (int) center.z())).isAir()) {
+            if (!level.getBlockState(BlockPos.containing(center.x(), y, center.z())).isAir()) {
                 return center;
             }
         }
@@ -42,7 +42,7 @@ public class LandFinder {
 
         for (Vec3 pos : positions) {
             for (int y = level.getMinBuildHeight(); y < level.getMaxBuildHeight(); y++) {
-                if (!level.getBlockState(new BlockPos((int) pos.x(), y, (int) pos.z())).isAir()) {
+                if (!level.getBlockState(BlockPos.containing(pos.x(), y, pos.z())).isAir()) {
                     if (!level.isClientSide) {
                         AdAstra.LOGGER.info("Moved the lander from: " + center + " To: " + pos);
                     }

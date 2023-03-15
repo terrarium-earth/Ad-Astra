@@ -126,7 +126,7 @@ public class LunarianWanderingTraderSpawner implements CustomSpawner {
         for (int i = 0; i < 10; ++i) {
             int k;
             int j = pos.getX() + this.random.nextInt(range * 2) - range;
-            BlockPos blockPos2 = new BlockPos(j, level.getHeight(Heightmap.Types.WORLD_SURFACE, j, k = pos.getZ() + this.random.nextInt(range * 2) - range), k);
+            BlockPos blockPos2 = BlockPos.containing(j, level.getHeight(Heightmap.Types.WORLD_SURFACE, j, k = pos.getZ() + this.random.nextInt(range * 2) - range), k);
             if (!NaturalSpawner.isSpawnPositionOk(SpawnPlacements.Type.ON_GROUND, level, blockPos2, ModEntityTypes.LUNARIAN_WANDERING_TRADER.get()))
                 continue;
             blockPos = blockPos2;

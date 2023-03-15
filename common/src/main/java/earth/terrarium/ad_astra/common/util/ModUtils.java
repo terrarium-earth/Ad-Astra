@@ -96,7 +96,7 @@ public class ModUtils {
 
             for (Entity entityToTeleport : entitiesToTeleport) {
                 if (entityToTeleport instanceof ServerPlayer) {
-                    ChunkPos chunkPos = new ChunkPos(new BlockPos((int) targetPos.x(), (int) targetPos.y(), (int) targetPos.z()));
+                    ChunkPos chunkPos = new ChunkPos(BlockPos.containing(targetPos));
                     level.getChunkSource().addRegionTicket(TicketType.POST_TELEPORT, chunkPos, 1, entityToTeleport.getId());
                     break;
                 }
@@ -131,7 +131,7 @@ public class ModUtils {
     public static void teleportPlayer(ResourceKey<Level> targetWorld, ServerPlayer player) {
         ServerLevel level = player.getServer().getLevel(targetWorld);
         Vec3 targetPos = new Vec3(player.blockPosition().getX(), VehiclesConfig.RocketConfig.atmosphereLeave, player.blockPosition().getZ());
-        ChunkPos chunkPos = new ChunkPos(new BlockPos((int) targetPos.x(), (int) targetPos.y(), (int) targetPos.z()));
+        ChunkPos chunkPos = new ChunkPos(BlockPos.containing(targetPos));
         level.getChunkSource().addRegionTicket(TicketType.POST_TELEPORT, chunkPos, 1, player.getId());
         PortalInfo target = new PortalInfo(targetPos, player.getDeltaMovement(), player.getYRot(), player.getXRot());
         PlatformUtils.teleportToDimension(player, level, target);
