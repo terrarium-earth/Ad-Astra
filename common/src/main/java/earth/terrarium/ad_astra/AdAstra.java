@@ -6,6 +6,7 @@ import earth.terrarium.ad_astra.common.config.AdAstraConfig;
 import earth.terrarium.ad_astra.common.data.PlanetData;
 import earth.terrarium.ad_astra.common.entity.LunarianMerchantListener;
 import earth.terrarium.ad_astra.common.networking.NetworkHandling;
+import earth.terrarium.ad_astra.common.recipe.condition.IRecipeConditionSerializer;
 import earth.terrarium.ad_astra.common.registry.*;
 import earth.terrarium.ad_astra.common.util.PlatformUtils;
 import net.minecraft.resources.ResourceLocation;
@@ -30,6 +31,7 @@ public class AdAstra {
         ModBlockEntityTypes.BLOCK_ENTITY_TYPES.init();
         ModRecipeTypes.RECIPE_TYPES.init();
         ModRecipeSerializers.RECIPE_SERIALIZERS.init();
+        ModRecipeConditionSerializers.init();
         ModMenus.MENUS.init();
         ModSoundEvents.SOUND_EVENTS.init();
         ModParticleTypes.PARTICLE_TYPES.init();
@@ -48,5 +50,9 @@ public class AdAstra {
 
     public static void postInit() {
         PlatformUtils.registerStrippedLog(ModBlocks.GLACIAN_LOG.get(), ModBlocks.STRIPPED_GLACIAN_LOG.get());
+        
+        for (IRecipeConditionSerializer<?> recipeConditionSerializer : ModRecipeConditionSerializers.getSerializers()) {
+            PlatformUtils.registerRecipeConditionSerializer(recipeConditionSerializer);
+        }
     }
 }
