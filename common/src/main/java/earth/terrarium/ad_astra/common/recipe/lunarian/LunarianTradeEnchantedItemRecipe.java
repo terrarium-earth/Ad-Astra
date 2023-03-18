@@ -1,5 +1,7 @@
 package earth.terrarium.ad_astra.common.recipe.lunarian;
 
+import java.util.function.BiFunction;
+
 import com.google.gson.JsonObject;
 
 import earth.terrarium.ad_astra.common.entity.LunarianMerchantOffer;
@@ -21,11 +23,24 @@ public class LunarianTradeEnchantedItemRecipe extends LunarianTradeRecipe {
         super(id);
     }
 
+    public LunarianTradeEnchantedItemRecipe(ResourceLocation id, Builder<LunarianTradeEnchantedItemRecipe> builder) {
+        super(id, builder);
+
+        this.basePrice = builder.basePrice;
+    }
+
     @Override
     protected void fromJson(JsonObject json) {
         super.fromJson(json);
 
         this.basePrice = GsonHelper.getAsInt(json, "basePrice");
+    }
+
+    @Override
+    protected void toJson(JsonObject json) {
+        super.toJson(json);
+
+        json.addProperty("basePrice", this.basePrice);
     }
 
     @Override
@@ -74,5 +89,23 @@ public class LunarianTradeEnchantedItemRecipe extends LunarianTradeRecipe {
 
     public int getBasePrice() {
         return this.basePrice;
+    }
+
+    public static class Builder<RECIPE extends LunarianTradeEnchantedItemRecipe> extends LunarianTradeRecipe.Builder<RECIPE> {
+
+        private int basePrice;
+
+        public Builder(BiFunction<ResourceLocation, ? extends Builder<RECIPE>, RECIPE> function) {
+            super(function);
+        }
+
+        public Builder<RECIPE> basePrice(int basePrice) {
+            this.basePrice = basePrice;
+            return this;
+        }
+
+        public int getBasePrice() {
+            return this.basePrice;
+        }
     }
 }

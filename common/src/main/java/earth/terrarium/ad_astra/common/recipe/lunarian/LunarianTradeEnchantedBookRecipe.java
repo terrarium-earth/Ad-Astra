@@ -15,6 +15,10 @@ public class LunarianTradeEnchantedBookRecipe extends LunarianTradeRecipe {
         super(id);
     }
 
+    public LunarianTradeEnchantedBookRecipe(ResourceLocation id, Builder<LunarianTradeEnchantedBookRecipe> builder) {
+        super(id, builder);
+    }
+
     @Override
     public ItemListing toItemListing() {
         return new LunarianMerchantOffer.EnchantBookFactory(this.getBuyA(), this.getBuyB(), this.getMaxUses(), this.getExperience(), this.getMultiplier());

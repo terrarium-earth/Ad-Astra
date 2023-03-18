@@ -1,5 +1,7 @@
 package earth.terrarium.ad_astra.common.recipe.lunarian;
 
+import java.util.function.BiFunction;
+
 import com.google.gson.JsonObject;
 
 import earth.terrarium.ad_astra.common.entity.LunarianMerchantOffer;
@@ -24,12 +26,27 @@ public class LunarianTradeSuspiciousStewRecipe extends LunarianTradeRecipe {
         super(id);
     }
 
+    public LunarianTradeSuspiciousStewRecipe(ResourceLocation id, Builder<LunarianTradeSuspiciousStewRecipe> builder) {
+        super(id, builder);
+
+        this.mobEffect = builder.mobEffect;
+        this.duration = builder.duration;
+    }
+
     @Override
     protected void fromJson(JsonObject json) {
         super.fromJson(json);
 
         this.mobEffect = Registry.MOB_EFFECT.get(ResourceLocation.tryParse(GsonHelper.getAsString(json, "mobEffect", "")));
         this.duration = GsonHelper.getAsInt(json, "duration");
+    }
+
+    @Override
+    protected void toJson(JsonObject json) {
+        super.toJson(json);
+
+        json.addProperty("mobEffect", Registry.MOB_EFFECT.getKey(this.mobEffect).toString());
+        json.addProperty("duration", this.duration);
     }
 
     @Override
@@ -50,7 +67,7 @@ public class LunarianTradeSuspiciousStewRecipe extends LunarianTradeRecipe {
 
     @Override
     public ItemListing toItemListing() {
-        return new LunarianMerchantOffer.SellSuspiciousStewFactory(this.getBuyA(), this.getBuyB(), this.getSell(), this.getMobEffect(), this.getDuration(), this.getMaxUses(), this.getExperience(), this.getMultiplier());
+        return new LunarianMerchantOffer.SellSuspiciousStewFactory(this.getBuyA(), this.getBuyB(), this.getMobEffect(), this.getDuration(), this.getMaxUses(), this.getExperience(), this.getMultiplier());
     }
 
     @Override
@@ -74,7 +91,7 @@ public class LunarianTradeSuspiciousStewRecipe extends LunarianTradeRecipe {
     }
 
     @Override
-    protected ItemStack getDefaultSell() {
+    public ItemStack getSell() {
         return LunarianMerchantOffer.SellSuspiciousStewFactory.DEFAULT_SELL;
     }
 
@@ -94,5 +111,33 @@ public class LunarianTradeSuspiciousStewRecipe extends LunarianTradeRecipe {
 
     public int getDuration() {
         return this.duration;
+    }
+
+    public static class Builder<RECIPE extends LunarianTradeSuspiciousStewRecipe> extends LunarianTradeRecipe.Builder<RECIPE> {
+
+        private MobEffect mobEffect;
+        private int duration;
+
+        public Builder(BiFunction<ResourceLocation, ? extends Builder<RECIPE>, RECIPE> function) {
+            super(function);
+        }
+
+        public Builder<RECIPE> mobEffect(MobEffect mobEffect) {
+            this.mobEffect = mobEffect;
+            return this;
+        }
+
+        public Builder<RECIPE> duration(int duration) {
+            this.duration = duration;
+            return this;
+        }
+
+        public MobEffect getMobEffect() {
+            return this.mobEffect;
+        }
+
+        public int getDuration() {
+            return this.duration;
+        }
     }
 }

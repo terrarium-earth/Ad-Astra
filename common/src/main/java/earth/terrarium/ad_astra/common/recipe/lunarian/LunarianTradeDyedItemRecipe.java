@@ -1,5 +1,7 @@
 package earth.terrarium.ad_astra.common.recipe.lunarian;
 
+import java.util.function.BiFunction;
+
 import earth.terrarium.ad_astra.common.entity.LunarianMerchantOffer;
 import earth.terrarium.ad_astra.common.registry.ModRecipeSerializers;
 import earth.terrarium.ad_astra.common.registry.ModRecipeTypes;
@@ -13,6 +15,10 @@ public class LunarianTradeDyedItemRecipe extends LunarianTradeRecipe {
 
     public LunarianTradeDyedItemRecipe(ResourceLocation id) {
         super(id);
+    }
+
+    public LunarianTradeDyedItemRecipe(ResourceLocation id, Builder<LunarianTradeDyedItemRecipe> builder) {
+        super(id, builder);
     }
 
     @Override
@@ -53,5 +59,12 @@ public class LunarianTradeDyedItemRecipe extends LunarianTradeRecipe {
     @Override
     protected float getDefaultMultiplier() {
         return LunarianMerchantOffer.SellDyedArmorFactory.DEFAULT_MULTIPLIER;
+    }
+
+    public static class Builder<RECIPE extends LunarianTradeDyedItemRecipe> extends LunarianTradeRecipe.Builder<RECIPE> {
+
+        public Builder(BiFunction<ResourceLocation, ? extends Builder<RECIPE>, RECIPE> function) {
+            super(function);
+        }
     }
 }

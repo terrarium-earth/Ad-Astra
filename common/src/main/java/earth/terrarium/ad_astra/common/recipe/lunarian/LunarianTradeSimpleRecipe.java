@@ -14,6 +14,10 @@ public class LunarianTradeSimpleRecipe extends LunarianTradeRecipe {
         super(id);
     }
 
+    public LunarianTradeSimpleRecipe(ResourceLocation id, Builder<LunarianTradeSimpleRecipe> builder) {
+        super(id, builder);
+    }
+
     @Override
     public RecipeSerializer<?> getSerializer() {
         return ModRecipeSerializers.LUNARIAN_TRADE_SIMPLE_SERIALIZER.get();

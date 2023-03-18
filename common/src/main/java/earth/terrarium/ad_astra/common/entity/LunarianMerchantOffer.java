@@ -190,10 +190,13 @@ public class LunarianMerchantOffer {
             this.multiplier = 0.05f;
         }
 
+        private ItemStack getBuyA() {
+            return new ItemStack(this.buy, this.price);
+        }
+
         @Override
         public MerchantOffer getOffer(Entity entity, RandomSource random) {
-            ItemStack itemStack = new ItemStack(this.buy, this.price);
-            return new MerchantOffer(itemStack, new ItemStack(Items.EMERALD), this.maxUses, this.experience, this.multiplier);
+            return new MerchantOffer(this.getBuyA(), new ItemStack(Items.EMERALD), this.maxUses, this.experience, this.multiplier);
         }
     }
 
@@ -229,12 +232,14 @@ public class LunarianMerchantOffer {
             this.experience = experience;
             this.multiplier = multiplier;
         }
+        
+        private ItemStack getSell() {
+            return ItemStackUtils.deriveCount(this.sell, this.count);
+        }
 
         @Override
         public MerchantOffer getOffer(Entity entity, RandomSource random) {
-            ItemStack stack = new ItemStack(this.sell.getItem(), this.count);
-            stack.setTag((this.sell.getTag()));
-            return new MerchantOffer(new ItemStack(Items.EMERALD, this.price), stack, this.maxUses, this.experience, this.multiplier);
+            return new MerchantOffer(new ItemStack(Items.EMERALD, this.price), this.getSell(), this.maxUses, this.experience, this.multiplier);
         }
     }
 
@@ -247,7 +252,6 @@ public class LunarianMerchantOffer {
 
         private final ItemStack buyA;
         private final ItemStack buyB;
-        private final ItemStack sell;
         private final MobEffect effect;
         private final int duration;
         private final int maxUses;
@@ -255,13 +259,12 @@ public class LunarianMerchantOffer {
         private final float multiplier;
 
         public SellSuspiciousStewFactory(MobEffect effect, int duration, int experience) {
-            this(DEFAULT_BUY_A, DEFAULT_BUY_B, DEFAULT_SELL, effect, duration, DEFAULT_MAX_USES, experience, DEFAULT_MULTIPLIER);
+            this(DEFAULT_BUY_A, DEFAULT_BUY_B, effect, duration, DEFAULT_MAX_USES, experience, DEFAULT_MULTIPLIER);
         }
 
-        public SellSuspiciousStewFactory(ItemStack buyA, ItemStack buyB, ItemStack sell, MobEffect effect, int duration, int maxUses, int experience, float multiplier) {
+        public SellSuspiciousStewFactory(ItemStack buyA, ItemStack buyB, MobEffect effect, int duration, int maxUses, int experience, float multiplier) {
             this.buyA = buyA;
             this.buyB = buyB;
-            this.sell = sell;
             this.effect = effect;
             this.duration = duration;
             this.maxUses = maxUses;
@@ -269,11 +272,16 @@ public class LunarianMerchantOffer {
             this.multiplier = multiplier;
         }
 
+        private ItemStack getSell() {
+            ItemStack itemStack = DEFAULT_SELL.copy();
+            SuspiciousStewItem.saveMobEffect(itemStack, this.effect, this.duration);
+            return itemStack;
+        }
+
         @Override
         @Nullable
         public MerchantOffer getOffer(Entity entity, RandomSource random) {
-            ItemStack itemStack = this.sell.copy();
-            SuspiciousStewItem.saveMobEffect(itemStack, this.effect, this.duration);
+            ItemStack itemStack = this.getSell();
             return new MerchantOffer(this.buyA, this.buyB, itemStack, this.maxUses, this.experience, this.multiplier);
         }
     }
@@ -416,6 +424,7 @@ public class LunarianMerchantOffer {
     public static class EnchantBookFactory implements ItemListing {
         public static final ItemStack DEFAULT_BUY_A = new ItemStack(Items.EMERALD);
         public static final ItemStack DEFAULT_BUY_B = new ItemStack(Items.BOOK);
+        public static final ItemStack DEFAULT_SELL = new ItemStack(Items.ENCHANTED_BOOK);
         public static final int DEFAULT_MAX_USES = 12;
         public static final float DEFAULT_MULTIPLIER = 0.2F;
 
