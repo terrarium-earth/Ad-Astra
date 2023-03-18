@@ -6,6 +6,7 @@ import java.util.function.Consumer;
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.common.entity.ILunarianTradeRecipeBuilderProvider;
 import earth.terrarium.ad_astra.common.entity.LunarianMerchantOffer;
+import earth.terrarium.ad_astra.common.recipe.condition.LunarianDefaultTradesCondition;
 import earth.terrarium.ad_astra.common.recipe.lunarian.LunarianTradeRecipe.Builder;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.data.DataGenerator;
@@ -39,6 +40,7 @@ public class ModRecipeProvider extends RecipeProvider {
                     if (listing instanceof ILunarianTradeRecipeBuilderProvider provider) {
                         Builder<?> builder = provider.provideRecipeBuilder();
                         builder.profession(profession).level(level);
+                        builder.addCondition(LunarianDefaultTradesCondition.INSTANCE);
 
                         ResourceLocation id = new ResourceLocation(AdAstra.MOD_ID, lunarianTradePath + profession.name() + "_" + level + "_" + (i + 1) + "_" + provider.getRecipeNameSuffix());
                         consumer.accept(builder.build(id));
@@ -57,6 +59,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 if (listing instanceof ILunarianTradeRecipeBuilderProvider provider) {
                     Builder<?> builder = provider.provideRecipeBuilder();
                     builder.wandring().level(level);
+                    builder.addCondition(LunarianDefaultTradesCondition.INSTANCE);
 
                     ResourceLocation id = new ResourceLocation(AdAstra.MOD_ID, lunarianTradePath + "wandering_" + level + "_" + (i + 1) + "_" + provider.getRecipeNameSuffix());
                     consumer.accept(builder.build(id));

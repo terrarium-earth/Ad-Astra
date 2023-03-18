@@ -10,6 +10,8 @@ import earth.terrarium.ad_astra.common.recipe.condition.LunarianDefaultTradesCon
 public class ModRecipeConditionSerializers {
     private static final List<IRecipeConditionSerializer<?>> SERIALIZERS = new ArrayList<>();
 
+    public static final IRecipeConditionSerializer<LunarianDefaultTradesCondition> LUNARIAN_DEFAULT_TRADES = register(new LunarianDefaultTradesCondition.Serializer());
+
     public static <T extends IRecipeConditionSerializer<?>> T register(T condition) {
         SERIALIZERS.add(condition);
         return condition;
