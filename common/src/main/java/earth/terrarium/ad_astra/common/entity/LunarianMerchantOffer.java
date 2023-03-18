@@ -4,9 +4,14 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
-import earth.terrarium.ad_astra.common.config.AdAstraConfig;
 import earth.terrarium.ad_astra.common.item.OxygenTankItem;
+import earth.terrarium.ad_astra.common.recipe.lunarian.LunarianTradeDyedItemRecipe;
+import earth.terrarium.ad_astra.common.recipe.lunarian.LunarianTradeEnchantedBookRecipe;
+import earth.terrarium.ad_astra.common.recipe.lunarian.LunarianTradeEnchantedItemRecipe;
+import earth.terrarium.ad_astra.common.recipe.lunarian.LunarianTradePotionedItemRecipe;
 import earth.terrarium.ad_astra.common.recipe.lunarian.LunarianTradeRecipe;
+import earth.terrarium.ad_astra.common.recipe.lunarian.LunarianTradeSimpleRecipe;
+import earth.terrarium.ad_astra.common.recipe.lunarian.LunarianTradeSuspiciousStewRecipe;
 import earth.terrarium.ad_astra.common.registry.ModItems;
 import earth.terrarium.ad_astra.common.registry.ModRecipeTypes;
 import earth.terrarium.ad_astra.common.util.ItemStackUtils;
@@ -39,12 +44,12 @@ import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 public class LunarianMerchantOffer {
-    private static final Map<VillagerProfession, Int2ObjectMap<ItemListing[]>> DEFAULT_PROFESSION_TO_LEVELED_TRADE = Util.make(Maps.newHashMap(), map -> {
+    // Use only for data generation
+    public static final Map<VillagerProfession, Int2ObjectMap<ItemListing[]>> DEFAULT_PROFESSION_TO_LEVELED_TRADE = Util.make(Maps.newHashMap(), map -> {
         map.put(VillagerProfession.FARMER, copyToFastUtilMap(ImmutableMap.of(1, new ItemListing[]{new BuyForOneEmeraldFactory(ModItems.CHEESE.get(), 20, 20, 5), new BuyForOneEmeraldFactory(Items.GLOW_BERRIES, 22, 16, 3), new SellItemFactory(Items.BREAD, 1, 6, 16, 1)}, 2, new ItemListing[]{new SellItemFactory(Items.PUMPKIN_PIE, 1, 4, 5), new SellItemFactory(Items.GOLDEN_APPLE, 8, 1, 8, 20)}, 3, new ItemListing[]{new SellItemFactory(Items.COOKIE, 3, 18, 10), new BuyForOneEmeraldFactory(Blocks.MELON, 4, 12, 20)}, 4, new ItemListing[]{new SellItemFactory(Blocks.CAKE, 1, 1, 12, 15), new BuyForOneEmeraldFactory(Items.DIRT, 63, 16, 2), new SellSuspiciousStewFactory(MobEffects.NIGHT_VISION, 100, 15), new SellSuspiciousStewFactory(MobEffects.JUMP, 160, 15), new SellSuspiciousStewFactory(MobEffects.WEAKNESS, 140, 15), new SellSuspiciousStewFactory(MobEffects.BLINDNESS, 120, 15), new SellSuspiciousStewFactory(MobEffects.POISON, 280, 15), new SellSuspiciousStewFactory(MobEffects.SATURATION, 7, 15)},
                 5, new ItemListing[]{new SellItemFactory(Items.GOLDEN_CARROT, 3, 3, 30), new SellItemFactory(Items.GLISTERING_MELON_SLICE, 4, 3, 30)})));
         map.put(VillagerProfession.FISHERMAN, copyToFastUtilMap(ImmutableMap.of(1, new ItemListing[]{new BuyForOneEmeraldFactory(ModItems.CHEESE.get(), 20, 20, 5), new BuyForOneEmeraldFactory(Items.STRING, 20, 16, 2), new BuyForOneEmeraldFactory(Items.COAL, 10, 16, 2), new ProcessItemFactory(Items.COD, 6, Items.COOKED_COD, 6, 16, 1),}, 2, new ItemListing[]{new BuyForOneEmeraldFactory(Items.COD, 15, 16, 10), new ProcessItemFactory(Items.SALMON, 6, Items.COOKED_SALMON, 6, 16, 5), new SellItemFactory(Items.SOUL_CAMPFIRE, 2, 1, 5)}, 3, new ItemListing[]{new BuyForOneEmeraldFactory(Items.SALMON, 13, 16, 20), new SellEnchantedToolFactory(Items.FISHING_ROD, 3, 3, 10, 0.2f)}, 4, new ItemListing[]{new BuyForOneEmeraldFactory(Items.TROPICAL_FISH, 6, 12, 30)}, 5, new ItemListing[]{new BuyForOneEmeraldFactory(Items.PUFFERFISH, 4, 12, 30), new SellItemFactory(new ItemStack(Items.WATER_BUCKET), 8, 1, 2, 9, 0.2f), new SellItemFactory(new ItemStack(Items.ICE), 4, 1, 8, 9, 0.2f)})));
@@ -82,10 +87,11 @@ public class LunarianMerchantOffer {
                         5, new ItemListing[]{new SellItemFactory(ModItems.STEEL_PLATING.get(), 1, 8, 12, 15), new SellItemFactory(ModItems.DESH_PLATING.get(), 1, 8, 12, 15), new SellItemFactory(ModItems.OSTRUM_PLATING.get(), 1, 4, 12, 15), new SellItemFactory(ModItems.STEEL_DOOR.get(), 1, 3, 12, 15), new SellItemFactory(Blocks.QUARTZ_PILLAR, 1, 1, 12, 30), new SellItemFactory(Blocks.QUARTZ_BLOCK, 1, 1, 12, 30)})));
     });
 
+    // Use only for data generation
     public static final Int2ObjectMap<ItemListing[]> DEFAULT_WANDERING_TRADER_TRADES = copyToFastUtilMap(ImmutableMap.of(1, new ItemListing[]{new SellItemFactory(ModItems.CHEESE.get(), 1, 3, 6, 1), new SellItemFactory(ModItems.SPACE_PAINTING.get(), 48, 1, 2, 2), new SellItemFactory(ModItems.OXYGEN_TANK.get(), 10, 1, 3, 1), new SellItemFactory(Items.SOUL_TORCH, 1, 12, 12, 1), new SellItemFactory(Items.SOUL_CAMPFIRE, 3, 1, 4, 1), new SellItemFactory(ModItems.WRENCH.get(), 12, 1, 2, 2), new SellItemFactory(ModItems.HAMMER.get(), 3, 1, 4, 1), new SellItemFactory(ModItems.WHITE_FLAG.get(), 10, 1, 3, 2), new SellItemFactory(ModItems.SPACE_HELMET.get(), 10, 1, 2, 1), new SellItemFactory(ModItems.SPACE_SUIT.get(), 16, 1, 2, 1), new SellItemFactory(ModItems.SPACE_PANTS.get(), 14, 1, 2, 1), new SellItemFactory(ModItems.SPACE_BOOTS.get(), 8, 1, 2, 1), new SellItemFactory(Items.COAL, 1, 5, 4, 1), new SellItemFactory(ModItems.OXYGEN_BUCKET.get(), 10, 1, 2, 2), new SellItemFactory(Items.COPPER_INGOT, 1, 4, 12, 1),
             new SellItemFactory(Items.WATER_BUCKET, 5, 1, 4, 1), new SellItemFactory(Items.LAVA_BUCKET, 3, 1, 4, 1), new BuyForOneEmeraldFactory(ModItems.DESH_INGOT.get(), 4, 20, 1), new BuyForOneEmeraldFactory(ModItems.OSTRUM_INGOT.get(), 4, 20, 1), new BuyForOneEmeraldFactory(ModItems.CALORITE_INGOT.get(), 4, 20, 1)}, 2, new ItemListing[]{new SellItemFactory(OxygenTankItem.createOxygenatedTank(), 16, 1, 3, 2), new SellItemFactory(ModItems.LAUNCH_PAD.get(), 3, 1, 3, 1), new SellItemFactory(ModItems.LAUNCH_PAD.get(), 3, 1, 3, 1), new SellItemFactory(ModItems.GLACIAN_LOG.get(), 5, 16, 20, 1), new SellItemFactory(ModItems.GLACIAN_LEAVES.get(), 5, 16, 20, 1), new SellItemFactory(ModItems.AERONOS_STEM.get(), 5, 16, 20, 1), new SellItemFactory(ModItems.STROPHAR_STEM.get(), 5, 16, 20, 1), new SellItemFactory(ModItems.FUEL_BUCKET.get(), 4, 1, 6, 1)}));
 
-    private static final Map<VillagerProfession, Int2ObjectMap<List<ItemListing>>> PROFESSION_TO_LEVELED_TRADE = Maps.newHashMap();
+    public static final Map<VillagerProfession, Int2ObjectMap<List<ItemListing>>> PROFESSION_TO_LEVELED_TRADE = Maps.newHashMap();
     private static final Int2ObjectMap<List<ItemListing>> WANDERING_TRADER_TRADES = new Int2ObjectOpenHashMap<>();
     private static boolean NEED_RELOAD = false;
 
@@ -100,19 +106,6 @@ public class LunarianMerchantOffer {
         NEED_RELOAD = false;
         PROFESSION_TO_LEVELED_TRADE.clear();
         WANDERING_TRADER_TRADES.clear();
-
-        if (AdAstraConfig.enabledLunarianDefaultTrades) {
-
-            for (var entry1 : DEFAULT_PROFESSION_TO_LEVELED_TRADE.entrySet()) {
-                for (var entry2 : entry1.getValue().int2ObjectEntrySet()) {
-                    computeProfessionItemListings(entry1.getKey(), entry2.getIntKey()).addAll(Arrays.asList(entry2.getValue()));
-                }
-            }
-
-            for (var entry : DEFAULT_WANDERING_TRADER_TRADES.int2ObjectEntrySet()) {
-                computeWanderingItemListings(entry.getIntKey()).addAll(Arrays.asList(entry.getValue()));
-            }
-        }
 
         for (RegistryEntry<RecipeType<LunarianTradeRecipe>> entry : ModRecipeTypes.getLunarianTradeRecipeTypes()) {
             List<LunarianTradeRecipe> recipes = recipeManager.getAllRecipesFor(entry.get());
@@ -152,7 +145,7 @@ public class LunarianMerchantOffer {
         return new Int2ObjectOpenHashMap<>(map);
     }
 
-    public static class ItemStackForItemStackFactory implements ItemListing {
+    public static class ItemStackForItemStackFactory implements ItemListing, ILunarianTradeRecipeBuilderProvider {
         private final ItemStack buyA;
         private final ItemStack buyB;
         private final ItemStack sell;
@@ -173,9 +166,21 @@ public class LunarianMerchantOffer {
         public MerchantOffer getOffer(Entity var1, RandomSource var2) {
             return new MerchantOffer(this.buyA, this.buyB, this.sell, this.maxUses, this.experience, this.multiplier);
         }
+
+        @Override
+        public String getRecipeNameSuffix() {
+            return "simple_" + ItemStackUtils.getRegistryPath(this.sell);
+        }
+
+        @Override
+        public LunarianTradeRecipe.Builder<?> provideRecipeBuilder() {
+            return new LunarianTradeSimpleRecipe.Builder<LunarianTradeSimpleRecipe>(LunarianTradeSimpleRecipe::new)
+                    .buy(this.buyA, this.buyB).sell(this.sell)
+                    .maxUses(this.maxUses).experience(this.experience).multiplier(this.multiplier);
+        }
     }
 
-    static class BuyForOneEmeraldFactory implements ItemListing {
+    static class BuyForOneEmeraldFactory implements ItemListing, ILunarianTradeRecipeBuilderProvider {
         private final Item buy;
         private final int price;
         private final int maxUses;
@@ -198,9 +203,21 @@ public class LunarianMerchantOffer {
         public MerchantOffer getOffer(Entity entity, RandomSource random) {
             return new MerchantOffer(this.getBuyA(), new ItemStack(Items.EMERALD), this.maxUses, this.experience, this.multiplier);
         }
+
+        @Override
+        public String getRecipeNameSuffix() {
+            return "buy_" + ItemStackUtils.getRegistryPath(this.buy);
+        }
+
+        @Override
+        public LunarianTradeRecipe.Builder<?> provideRecipeBuilder() {
+            return new LunarianTradeSimpleRecipe.Builder<LunarianTradeSimpleRecipe>(LunarianTradeSimpleRecipe::new)
+                    .buy(this.getBuyA()).sell(new ItemStack(Items.EMERALD))
+                    .maxUses(this.maxUses).experience(this.experience).multiplier(this.multiplier);
+        }
     }
 
-    static class SellItemFactory implements ItemListing {
+    static class SellItemFactory implements ItemListing, ILunarianTradeRecipeBuilderProvider {
         private final ItemStack sell;
         private final int price;
         private final int count;
@@ -241,9 +258,21 @@ public class LunarianMerchantOffer {
         public MerchantOffer getOffer(Entity entity, RandomSource random) {
             return new MerchantOffer(new ItemStack(Items.EMERALD, this.price), this.getSell(), this.maxUses, this.experience, this.multiplier);
         }
+
+        @Override
+        public String getRecipeNameSuffix() {
+            return "sell_" + ItemStackUtils.getRegistryPath(this.sell);
+        }
+
+        @Override
+        public LunarianTradeRecipe.Builder<?> provideRecipeBuilder() {
+            return new LunarianTradeSimpleRecipe.Builder<LunarianTradeSimpleRecipe>(LunarianTradeSimpleRecipe::new)
+                    .buy(new ItemStack(Items.EMERALD, this.price)).sell(this.getSell())
+                    .maxUses(this.maxUses).experience(this.experience).multiplier(this.multiplier);
+        }
     }
 
-    public static class SellSuspiciousStewFactory implements ItemListing {
+    public static class SellSuspiciousStewFactory implements ItemListing, ILunarianTradeRecipeBuilderProvider {
         public static final ItemStack DEFAULT_BUY_A = new ItemStack(Items.EMERALD);
         public static final ItemStack DEFAULT_BUY_B = ItemStack.EMPTY;
         public static final ItemStack DEFAULT_SELL = new ItemStack(Items.SUSPICIOUS_STEW);
@@ -277,16 +306,28 @@ public class LunarianMerchantOffer {
             SuspiciousStewItem.saveMobEffect(itemStack, this.effect, this.duration);
             return itemStack;
         }
-
+        
         @Override
         @Nullable
         public MerchantOffer getOffer(Entity entity, RandomSource random) {
             ItemStack itemStack = this.getSell();
             return new MerchantOffer(this.buyA, this.buyB, itemStack, this.maxUses, this.experience, this.multiplier);
         }
+
+        @Override
+        public String getRecipeNameSuffix() {
+            return "sell_" + ItemStackUtils.getRegistryPath(this.getSell()) + "_with_" + Registry.MOB_EFFECT.getKey(this.effect).getPath();
+        }
+
+        @Override
+        public LunarianTradeRecipe.Builder<?> provideRecipeBuilder() {
+            return new LunarianTradeSuspiciousStewRecipe.Builder<LunarianTradeSuspiciousStewRecipe>(LunarianTradeSuspiciousStewRecipe::new)
+                    .mobEffect(this.effect).duration(this.duration).buy(this.buyA, this.buyB).sell(this.getSell())
+                    .maxUses(this.maxUses).experience(this.experience).multiplier(this.multiplier);
+        }
     }
 
-    static class ProcessItemFactory implements ItemListing {
+    static class ProcessItemFactory implements ItemListing, ILunarianTradeRecipeBuilderProvider {
         private final ItemStack secondBuy;
         private final int secondCount;
         private final int price;
@@ -316,9 +357,22 @@ public class LunarianMerchantOffer {
         public MerchantOffer getOffer(Entity entity, RandomSource random) {
             return new MerchantOffer(new ItemStack(Items.EMERALD, this.price), new ItemStack(this.secondBuy.getItem(), this.secondCount), new ItemStack(this.sell.getItem(), this.sellCount), this.maxUses, this.experience, this.multiplier);
         }
+
+        @Override
+        public String getRecipeNameSuffix() {
+            return "process_" + ItemStackUtils.getRegistryPath(this.secondBuy) + "_to_" + ItemStackUtils.getRegistryPath(this.sell);
+        }
+
+        @Override
+        public LunarianTradeRecipe.Builder<?> provideRecipeBuilder() {
+            return new LunarianTradeSimpleRecipe.Builder<LunarianTradeSimpleRecipe>(LunarianTradeSimpleRecipe::new)
+                    .buy(new ItemStack(Items.EMERALD, this.price), new ItemStack(this.secondBuy.getItem(), this.secondCount))
+                    .sell(new ItemStack(this.sell.getItem(), this.sellCount))
+                    .maxUses(this.maxUses).experience(this.experience).multiplier(this.multiplier);
+        }
     }
 
-    public static class SellEnchantedToolFactory implements ItemListing {
+    public static class SellEnchantedToolFactory implements ItemListing, ILunarianTradeRecipeBuilderProvider {
         public static final ItemStack DEFAULT_BUY_A = new ItemStack(Items.EMERALD);
         public static final ItemStack DEFAULT_BUY_B = ItemStack.EMPTY;
         public static final float DEFAULT_MULTIPLIER = 0.05F;
@@ -357,6 +411,18 @@ public class LunarianMerchantOffer {
             ItemStack buyA = ItemStackUtils.deriveCount(this.buyA, j);
             return new MerchantOffer(buyA, this.buyB, itemStack, this.maxUses, this.experience, this.multiplier);
         }
+
+        @Override
+        public String getRecipeNameSuffix() {
+            return "enchanted_" + ItemStackUtils.getRegistryPath(this.sell);
+        }
+
+        @Override
+        public LunarianTradeRecipe.Builder<?> provideRecipeBuilder() {
+            return new LunarianTradeEnchantedItemRecipe.Builder<LunarianTradeEnchantedItemRecipe>(LunarianTradeEnchantedItemRecipe::new)
+                    .basePrice(this.basePrice).buy(this.buyA, this.buyB).sell(this.sell)
+                    .maxUses(this.maxUses).experience(this.experience).multiplier(this.multiplier);
+        }
     }
 
     static class TypeAwareBuyForOneEmeraldFactory implements ItemListing {
@@ -386,7 +452,7 @@ public class LunarianMerchantOffer {
         }
     }
 
-    public static class SellPotionHoldingItemFactory implements ItemListing {
+    public static class SellPotionHoldingItemFactory implements ItemListing, ILunarianTradeRecipeBuilderProvider {
         public static final ItemStack DEFAULT_BUY_A = new ItemStack(Items.EMERALD);
         public static final ItemStack DEFAULT_BUY_B = new ItemStack(Items.ARROW);
         public static final ItemStack DEFAULT_SELL = new ItemStack(Items.TIPPED_ARROW);
@@ -419,9 +485,21 @@ public class LunarianMerchantOffer {
             ItemStack sell = PotionUtils.setPotion(this.sell.copy(), potion2);
             return new MerchantOffer(this.buyA, this.buyB, sell, this.maxUses, this.experience, this.priceMultiplier);
         }
+
+        @Override
+        public String getRecipeNameSuffix() {
+            return "potioned_" + ItemStackUtils.getRegistryPath(this.sell);
+        }
+
+        @Override
+        public LunarianTradeRecipe.Builder<?> provideRecipeBuilder() {
+            return new LunarianTradePotionedItemRecipe.Builder<LunarianTradePotionedItemRecipe>(LunarianTradePotionedItemRecipe::new)
+                    .buy(this.buyA, this.buyB).sell(this.sell)
+                    .maxUses(this.maxUses).experience(this.experience).multiplier(this.priceMultiplier);
+        }
     }
 
-    public static class EnchantBookFactory implements ItemListing {
+    public static class EnchantBookFactory implements ItemListing, ILunarianTradeRecipeBuilderProvider {
         public static final ItemStack DEFAULT_BUY_A = new ItemStack(Items.EMERALD);
         public static final ItemStack DEFAULT_BUY_B = new ItemStack(Items.BOOK);
         public static final ItemStack DEFAULT_SELL = new ItemStack(Items.ENCHANTED_BOOK);
@@ -462,9 +540,21 @@ public class LunarianMerchantOffer {
             ItemStack buyA = ItemStackUtils.deriveCount(this.buyA, j);
             return new MerchantOffer(buyA, this.buyB, itemStack, this.maxUses, this.experience, this.multiplier);
         }
+
+        @Override
+        public String getRecipeNameSuffix() {
+            return "enchanted_book";
+        }
+
+        @Override
+        public LunarianTradeRecipe.Builder<?> provideRecipeBuilder() {
+            return new LunarianTradeEnchantedBookRecipe.Builder<LunarianTradeEnchantedBookRecipe>(LunarianTradeEnchantedBookRecipe::new)
+                    .buy(this.buyA, this.buyB)
+                    .maxUses(this.maxUses).experience(this.experience).multiplier(this.multiplier);
+        }
     }
 
-    public static class SellDyedArmorFactory implements ItemListing {
+    public static class SellDyedArmorFactory implements ItemListing, ILunarianTradeRecipeBuilderProvider {
         public static final ItemStack DEFAULT_BUY_A = new ItemStack(Items.EMERALD);
         public static final ItemStack DEFAULT_BUY_B = ItemStack.EMPTY;
         public static final int DEFAULT_MAX_USES = 12;
@@ -514,6 +604,18 @@ public class LunarianMerchantOffer {
                 sell = DyeableLeatherItem.dyeArmor(sell, list);
             }
             return new MerchantOffer(this.buyA, this.buyB, sell, this.maxUses, this.experience, this.multiplier);
+        }
+
+        @Override
+        public String getRecipeNameSuffix() {
+            return "dyed_" + ItemStackUtils.getRegistryPath(this.sell);
+        }
+
+        @Override
+        public LunarianTradeRecipe.Builder<?> provideRecipeBuilder() {
+            return new LunarianTradeDyedItemRecipe.Builder<LunarianTradeDyedItemRecipe>(LunarianTradeDyedItemRecipe::new)
+                    .buy(this.buyA, this.buyB).sell(this.sell)
+                    .maxUses(this.maxUses).experience(this.experience).multiplier(this.multiplier);
         }
     }
 }

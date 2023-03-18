@@ -45,6 +45,11 @@ public class LunarianTradeEnchantedBookRecipe extends LunarianTradeRecipe {
     }
 
     @Override
+    public ItemStack getSell() {
+        return LunarianMerchantOffer.EnchantBookFactory.DEFAULT_SELL;
+    }
+
+    @Override
     protected int getDefaultMaxUses() {
         return LunarianMerchantOffer.EnchantBookFactory.DEFAULT_MAX_USES;
     }

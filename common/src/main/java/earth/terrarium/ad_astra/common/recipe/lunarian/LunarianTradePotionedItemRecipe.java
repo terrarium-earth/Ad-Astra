@@ -55,7 +55,7 @@ public class LunarianTradePotionedItemRecipe extends LunarianTradeRecipe {
     protected float getDefaultMultiplier() {
         return LunarianMerchantOffer.SellPotionHoldingItemFactory.DEFAULT_MULTIPLIER;
     }
-    
+
     public static class Builder<RECIPE extends LunarianTradePotionedItemRecipe> extends LunarianTradeRecipe.Builder<RECIPE> {
 
         public Builder(BiFunction<ResourceLocation, ? extends Builder<RECIPE>, RECIPE> function) {
