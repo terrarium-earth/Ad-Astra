@@ -23,7 +23,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.WaterFluid;
@@ -67,12 +66,12 @@ public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements 
                 if (water.getType() instanceof WaterFluid.Source) {
 
                     // Drain the water block and add it to the tank.
-                    if (!this.getBlockState().getValue(AbstractMachineBlock.POWERED) && this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0) {
+                    FluidHolder waterFluid = FluidHooks.newFluidHolder(Fluids.WATER, WaterPumpConfig.transferPerTick, null);
+                    if (!this.getBlockState().getValue(AbstractMachineBlock.POWERED) && this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0 && getFluidContainer().insertInternal(waterFluid, true) > 0) {
                         this.setActive(true);
                         ModUtils.spawnForcedParticles((ServerLevel) this.level, ModParticleTypes.OXYGEN_BUBBLE.get(), this.getBlockPos().getX() + 0.5, this.getBlockPos().getY() - 0.5, this.getBlockPos().getZ() + 0.5, 1, 0.0, 0.0, 0.0, 0.01);
                         this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
                         waterExtracted += WaterPumpConfig.transferPerTick;
-                        FluidHolder waterFluid = FluidHooks.newFluidHolder(Fluids.WATER, WaterPumpConfig.transferPerTick, null);
                         getFluidContainer().insertInternal(waterFluid, false);
                     } else {
                         this.setActive(false);
@@ -97,10 +96,10 @@ public class WaterPumpBlockEntity extends AbstractMachineBlockEntity implements 
 
             // Insert the fluid into nearby tanks.
             if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0 && !getFluidContainer().isEmpty()) {
+                FluidHolder fluid = FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(0).getFluid(), WaterPumpConfig.transferPerTick * 2, getFluidContainer().getFluids().get(0).getCompound());
                 for (Direction direction : Direction.values()) {
-                    FluidHolder fluid = FluidHooks.newFluidHolder(getFluidContainer().getFluids().get(0).getFluid(), WaterPumpConfig.transferPerTick * 2, getFluidContainer().getFluids().get(0).getCompound());
-                    this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
                     if (FluidHooks.moveBlockToBlockFluid(this, direction.getOpposite(), level.getBlockEntity(worldPosition.relative(direction)), direction, fluid) > 0) {
+                        this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
                         break;
                     }
                 }
