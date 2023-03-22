@@ -51,6 +51,5 @@ public class ModBlockTagProvider extends TagsProvider<Block> {
                 tag(BlockTags.MINEABLE_WITH_SHOVEL).add(TagEntry.element(b.getId()));
             }
         });
-
     }
 }

@@ -27,6 +27,9 @@ public class AdAstra {
         ModRecipeSerializers.RECIPE_SERIALIZERS.init();
         ModFeatures.FEATURES.init();
         ModStructures.STRUCTURE_TYPES.init();
+        ModWorldCarvers.WORLD_CARVERS.init();
+        ModBiomeSources.BIOME_SOURCES.init();
+        ModDensityFunctionTypes.DENSITY_FUNCTION_TYPES.init();
     }
 
     public static void postInit() {

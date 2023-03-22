@@ -7,6 +7,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.decoration.PaintingVariant;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 
@@ -55,6 +56,8 @@ public class ModTags {
 
         public static final TagKey<Block> PASSES_FLOOD_FILL = TagKey.create(Registries.BLOCK, new ResourceLocation(AdAstra.MOD_ID, "passes_flood_fill"));
         public static final TagKey<Block> BLOCKS_FLOOD_FILL = TagKey.create(Registries.BLOCK, new ResourceLocation(AdAstra.MOD_ID, "blocks_flood_fill"));
+
+        public static final TagKey<Block> MOON_CARVER_REPLACEABLES = TagKey.create(Registries.BLOCK, new ResourceLocation(AdAstra.MOD_ID, "moon_carver_replaceables"));
     }
 
     public static class Fluids {

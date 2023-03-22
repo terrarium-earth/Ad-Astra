@@ -61,7 +61,7 @@
     },
     "continents": "minecraft:overworld/continents",
     "ridges": "minecraft:overworld/ridges",
-    "erosion": "minecraft:overworld/erosion",
+    "erosion": "ad_astra:craters",
     "depth": "ad_astra:depth",
     "initial_density_without_jaggedness": {
       "type": "minecraft:mul",

@@ -4,8 +4,9 @@
     "type": "minecraft:noise",
     "settings": "ad_astra:moon",
     "biome_source": {
-      "type": "minecraft:fixed",
-      "biome": "ad_astra:lunar_wastelands"
+      "type": "ad_astra:craters",
+      "default_biome": "ad_astra:lunar_wastelands",
+      "biomes": []
     }
   }
 }
